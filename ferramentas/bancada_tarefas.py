@@ -15,6 +15,8 @@ INTERVALOS = [(0x47cfd0, 0x47d03a), (0x47d03a, 0x47d059),
 
 
 class BancadaTarefas(BancadaX86):
+    intervalos = INTERVALOS
+
     def __init__(self):
         super().__init__()
         sbl = Path(__file__).resolve().parents[2] / 'source/cd/INSTALHD/RISING.SBL'
@@ -30,16 +32,16 @@ class BancadaTarefas(BancadaX86):
             operacao = self.simbolos[op.operacao] if isinstance(op.operacao, str) and op.operacao != 'NULL' else (0 if op.operacao == 'NULL' else op.operacao)
             self.cpu.mem_write(0x514910 + i * 20, struct.pack('<5I', operacao, op.formato, op.sucesso, op.falha, op.constante))
         self.cpu.mem_write(0x51a720, struct.pack('<' + 'H' * len(programa.entradas), *programa.entradas))
-        self.executar(0x47d220, INTERVALOS)
+        self.executar(0x47d220, self.intervalos)
 
     def postar(self, jogador, tipo, argumentos=()):
         args = tuple(argumentos) + (0,) * (6 - len(argumentos))
-        r = self.executar(0x47d920, INTERVALOS, dict(EAX=jogador, EDX=tipo, EBX=args[0], ECX=args[1]),
+        r = self.executar(0x47d920, self.intervalos, dict(EAX=jogador, EDX=tipo, EBX=args[0], ECX=args[1]),
                           pilha={4: struct.pack('<4I', *(a & 0xffffffff for a in args[2:]))})
         return r['EAX'] if r['EAX'] != 0xffffffff else -1
 
     def atualizar(self, jogador):
-        return self.executar(0x47d314, INTERVALOS, dict(EAX=CONTEXTO + jogador * 16))['EAX']
+        return self.executar(0x47d314, self.intervalos, dict(EAX=CONTEXTO + jogador * 16))['EAX']
 
     def memoria_tarefas(self):
         return bytes(self.cpu.mem_read(TAREFAS, 9600))

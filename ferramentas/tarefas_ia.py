@@ -5,6 +5,7 @@ implementadas falham explicitamente; não se simulam sucesso ou recursos fictíc
 """
 import struct
 from simbolos_ia import ProgramaRegras
+from ordens_unidades import OPERACOES as OPERACOES_UNIDADES
 
 
 def u32(v):
@@ -24,10 +25,11 @@ def dividir(a, b):
 
 
 class MaquinaTarefas:
-    def __init__(self, programa: ProgramaRegras, operacoes=None, missao=0):
+    def __init__(self, programa: ProgramaRegras, operacoes=None, missao=0, mundo=None):
         self.programa = programa
         self.operacoes = operacoes or {}
         self.missao = missao
+        self.mundo = mundo
         self.memoria = bytearray(100 * 96)
         for i in range(100):
             self.gravar(i, 0, i + 1 if i < 99 else -1)
@@ -117,6 +119,10 @@ class MaquinaTarefas:
 
     def executar_operacao(self, nome, argumentos, jogador, indice):
         a = argumentos
+        if nome in OPERACOES_UNIDADES:
+            if self.mundo is None:
+                raise NotImplementedError('Estado das unidades não fornecido para ' + nome)
+            return self.mundo.executar_operacao(nome, a)
         if nome == 'V_Attendre':
             self.byte(indice, 0x5e, 1)
             self.gravar(indice, 0x14, a[0])

@@ -1,0 +1,12 @@
+entrada	nome	resultado
+00481146	V_DeplacerUnite	OK
+00481f4c	V_DeplaceGroupe	OK
+00443dad	EnginEstVivant	OK
+0044357c	ResetOrdre	OK
+004457d3	SetDeplaceEngin	OK
+0047610f	TerrainEstCaisse	OK
+004837f0	iagUnitGetFirstUnitInGroup	OK
+00483825	iagUnitGetNextUnitInGroup	OK
+004237ff	BatimentDelocke	OK
+00420c7c	TuyauEstSortie	OK
+0041a65c	BatimentTuyauCave	OK

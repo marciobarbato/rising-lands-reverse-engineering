@@ -25,7 +25,10 @@
 - RULE decodificado: 1.157 instruções, 64 entradas (42 ativas), 140 nomes resolvidos.
 - Máquina de tarefas parcial: criação, espera, subtarefas, retomada e liberação.
 - Consumo da rota localizado após a chegada da unidade à célula.
-- 77 testes aprovados, incluindo 21.267 execuções na bancada, sem iniciar o jogo.
+- Ordens individuais e de grupo reconstruídas, incluindo ResetOrdre e efeitos auxiliares.
+- Consultas de tipo e estado ocioso ligadas à máquina de tarefas.
+- Cinco demonstrações de tarefas com efeitos, também executadas no x86 original.
+- 92 testes aprovados, incluindo 22.851 execuções na bancada, sem iniciar o jogo.
   O teste do despachante superior substitui etapas; os testes da máquina de tarefas
   e das operações suportadas executam suas chamadas originais.
 
@@ -34,7 +37,7 @@
 | Tema | Evidência disponível | Trabalho necessário |
 |---|---|---|
 | Caminhos e colisão | Primitivas reconstruídas e oráculo x86 em nove cenários | Traduzir busca/pós-processamento, gerar regiões e integrar movimento direto e consumo |
-| IA | Símbolos, programa RULE e máquina parcial de tarefas recuperados | Implementar operações de mundo e uma tarefa de economia/guerra completa |
+| IA | Máquina de tarefas e ordens de movimento individuais/de grupo com efeitos confirmados | Completar seleção espacial da tarefa 16, mensagens e operações de economia/guerra |
 | Movimento e tempo | Direções, giro, prefixo, parâmetros e ciclo antes do desenho confirmados | Medir taxa efetiva, descontos, chegada completa, ocupação e visão |
 | Combate | Aritmética parcial de dano, consulta de proximidade e cura confirmadas | Alvos, alcance, cadência, tecnologias e efeitos de morte |
 | Economia | Custos e blocos de recursos | Associar IDs internos, produção, consumo e filas |
@@ -54,8 +57,10 @@ A preparação é `0x43b30b`; o solucionador principal é `0x42f214`, seguido de
 continua parcial. Integrar a escolha direta, o desvio e o consumo da rota.
 Para a IA, seguir [SIMBOLOS.md](SIMBOLOS.md) e [TAREFAS.md](TAREFAS.md).
 A tabela `0x514910` vem de `RISING.RUL`; seus 140 nomes foram resolvidos pelo SBL.
-Implementar agora uma operação de mundo, como `V_DeplacerUnite` (`0x481146`),
-e completar o tipo de tarefa 16 ou uma tarefa de recursos, incluindo mensagens. Ainda é necessário medir a taxa efetiva do ciclo identificado
+As operações `V_DeplacerUnite` e `V_DeplaceGroupe` já estão integradas conforme
+[ORDENS_MOVIMENTO.md](ORDENS_MOVIMENTO.md). Completar o prefixo espacial 422..426
+da tarefa 16 e o avanço da unidade após a ordem, incluindo mensagens. Ainda é
+necessário medir a taxa efetiva do ciclo identificado
 em [CADENCIA.md](CADENCIA.md).
 Uma execução controlada do jogo poderá confrontar movimento, visibilidade e
 combate numa partida. Ainda não há runtime Windows preparado nem validação

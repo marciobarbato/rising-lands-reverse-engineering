@@ -89,10 +89,10 @@ Há ainda uma rotina por unidade em `0x483ed7`, cujo nome original é
 
 ## Próximo passo
 
-Implementar os efeitos de uma operação de mundo e suas mensagens, partindo do
-programa já extraído e da máquina parcial em [TAREFAS.md](TAREFAS.md). O tipo 16
-liga consultas de posição à operação `V_DeplacerUnite`; uma tarefa de recursos
-permitirá confrontar produção, estoque e disponibilidade de unidades. Os nomes
+As ordens individuais e de grupo já produzem efeitos conforme
+[ORDENS_MOVIMENTO.md](ORDENS_MOVIMENTO.md). Completar agora as consultas espaciais
+do tipo 16, o avanço da unidade e suas mensagens. Uma tarefa de recursos permitirá
+confrontar produção, estoque e disponibilidade de unidades. Os nomes
 originais das etapas são `iagUnitNoyau`, `iagVilleNoyau`, `iagRessNoyau`,
 `iagWarNoyau` e `iaSolver`. As assinaturas Watcom inferidas pelo Ghidra ainda
 exigem conferência no assembly.

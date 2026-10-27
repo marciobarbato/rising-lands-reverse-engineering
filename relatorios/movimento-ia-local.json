@@ -1,0 +1,380 @@
+{
+  "contexto": "RAM sintética; emissão de ordens sem avanço físico das unidades.",
+  "programa_sintetico": true,
+  "verificado_no_x86": false,
+  "execucoes_x86_delimitadas": 0,
+  "cenarios": [
+    {
+      "nome": "movimento_comum",
+      "operacao": "V_DeplacerUnite",
+      "argumentos": [
+        1544,
+        2
+      ],
+      "antes": [
+        {
+          "indice": 2,
+          "dono": 3,
+          "tipo": 0,
+          "estado": 7,
+          "celula_atual": 514,
+          "destino": 771,
+          "estado_caminho": 5,
+          "campo_89": 0,
+          "campo_b2": 0,
+          "campo_b8": 12,
+          "campo_c0": 65535
+        }
+      ],
+      "depois": [
+        {
+          "indice": 2,
+          "dono": 3,
+          "tipo": 0,
+          "estado": 2,
+          "celula_atual": 514,
+          "destino": 1544,
+          "estado_caminho": 0,
+          "campo_89": 0,
+          "campo_b2": 65535,
+          "campo_b8": 65535,
+          "campo_c0": 65535
+        }
+      ],
+      "busca_antes": {
+        "unidade": 2,
+        "ocupada": 1,
+        "sucesso": 1,
+        "ponteiro_rota": 123,
+        "concluida": 1
+      },
+      "busca_depois": {
+        "unidade": 65535,
+        "ocupada": 0,
+        "sucesso": 0,
+        "ponteiro_rota": 0,
+        "concluida": 1
+      },
+      "estrutura_7_campos_74_75_76_antes": [
+        9,
+        1,
+        15
+      ],
+      "estrutura_7_campos_74_75_76_depois": [
+        9,
+        1,
+        15
+      ],
+      "tarefas_ativas_depois": 0,
+      "retorno": "0x1a1a000e"
+    },
+    {
+      "nome": "unidade_inativa",
+      "operacao": "V_DeplacerUnite",
+      "argumentos": [
+        1544,
+        2
+      ],
+      "antes": [
+        {
+          "indice": 2,
+          "dono": 3,
+          "tipo": 0,
+          "estado": 4,
+          "celula_atual": 514,
+          "destino": 771,
+          "estado_caminho": 5,
+          "campo_89": 0,
+          "campo_b2": 0,
+          "campo_b8": 12,
+          "campo_c0": 65535
+        }
+      ],
+      "depois": [
+        {
+          "indice": 2,
+          "dono": 3,
+          "tipo": 0,
+          "estado": 4,
+          "celula_atual": 514,
+          "destino": 771,
+          "estado_caminho": 5,
+          "campo_89": 0,
+          "campo_b2": 0,
+          "campo_b8": 12,
+          "campo_c0": 65535
+        }
+      ],
+      "busca_antes": {
+        "unidade": 2,
+        "ocupada": 1,
+        "sucesso": 1,
+        "ponteiro_rota": 123,
+        "concluida": 1
+      },
+      "busca_depois": {
+        "unidade": 2,
+        "ocupada": 1,
+        "sucesso": 1,
+        "ponteiro_rota": 123,
+        "concluida": 1
+      },
+      "estrutura_7_campos_74_75_76_antes": [
+        9,
+        1,
+        15
+      ],
+      "estrutura_7_campos_74_75_76_depois": [
+        9,
+        1,
+        15
+      ],
+      "tarefas_ativas_depois": 0,
+      "retorno": "0x1a1a000e"
+    },
+    {
+      "nome": "tipo_6_caixa",
+      "operacao": "V_DeplacerUnite",
+      "argumentos": [
+        1544,
+        2
+      ],
+      "antes": [
+        {
+          "indice": 2,
+          "dono": 3,
+          "tipo": 6,
+          "estado": 7,
+          "celula_atual": 514,
+          "destino": 771,
+          "estado_caminho": 5,
+          "campo_89": 0,
+          "campo_b2": 0,
+          "campo_b8": 12,
+          "campo_c0": 65535
+        }
+      ],
+      "depois": [
+        {
+          "indice": 2,
+          "dono": 3,
+          "tipo": 6,
+          "estado": 5,
+          "celula_atual": 514,
+          "destino": 1544,
+          "estado_caminho": 0,
+          "campo_89": 1,
+          "campo_b2": 1544,
+          "campo_b8": 12,
+          "campo_c0": 65535
+        }
+      ],
+      "busca_antes": {
+        "unidade": 2,
+        "ocupada": 1,
+        "sucesso": 1,
+        "ponteiro_rota": 123,
+        "concluida": 1
+      },
+      "busca_depois": {
+        "unidade": 65535,
+        "ocupada": 0,
+        "sucesso": 0,
+        "ponteiro_rota": 0,
+        "concluida": 1
+      },
+      "estrutura_7_campos_74_75_76_antes": [
+        9,
+        1,
+        15
+      ],
+      "estrutura_7_campos_74_75_76_depois": [
+        9,
+        1,
+        15
+      ],
+      "tarefas_ativas_depois": 0,
+      "retorno": "0x1a1a000e"
+    },
+    {
+      "nome": "construtor",
+      "operacao": "V_DeplacerUnite",
+      "argumentos": [
+        1544,
+        2
+      ],
+      "antes": [
+        {
+          "indice": 2,
+          "dono": 3,
+          "tipo": 13,
+          "estado": 7,
+          "celula_atual": 514,
+          "destino": 771,
+          "estado_caminho": 5,
+          "campo_89": 0,
+          "campo_b2": 0,
+          "campo_b8": 12,
+          "campo_c0": 7
+        }
+      ],
+      "depois": [
+        {
+          "indice": 2,
+          "dono": 3,
+          "tipo": 13,
+          "estado": 2,
+          "celula_atual": 514,
+          "destino": 1544,
+          "estado_caminho": 0,
+          "campo_89": 0,
+          "campo_b2": 65535,
+          "campo_b8": 65535,
+          "campo_c0": 65535
+        }
+      ],
+      "busca_antes": {
+        "unidade": 2,
+        "ocupada": 1,
+        "sucesso": 1,
+        "ponteiro_rota": 123,
+        "concluida": 1
+      },
+      "busca_depois": {
+        "unidade": 65535,
+        "ocupada": 0,
+        "sucesso": 0,
+        "ponteiro_rota": 0,
+        "concluida": 1
+      },
+      "estrutura_7_campos_74_75_76_antes": [
+        9,
+        1,
+        15
+      ],
+      "estrutura_7_campos_74_75_76_depois": [
+        0,
+        0,
+        15
+      ],
+      "tarefas_ativas_depois": 0,
+      "retorno": "0x1a1a000e"
+    },
+    {
+      "nome": "grupo_misto",
+      "operacao": "V_DeplaceGroupe",
+      "argumentos": [
+        3,
+        1544
+      ],
+      "antes": [
+        {
+          "indice": 0,
+          "dono": 0,
+          "tipo": 0,
+          "estado": 7,
+          "celula_atual": 514,
+          "destino": 0,
+          "estado_caminho": 0,
+          "campo_89": 0,
+          "campo_b2": 0,
+          "campo_b8": 12,
+          "campo_c0": 0
+        },
+        {
+          "indice": 1,
+          "dono": 0,
+          "tipo": 0,
+          "estado": 1,
+          "celula_atual": 515,
+          "destino": 0,
+          "estado_caminho": 0,
+          "campo_89": 0,
+          "campo_b2": 0,
+          "campo_b8": 12,
+          "campo_c0": 0
+        },
+        {
+          "indice": 2,
+          "dono": 0,
+          "tipo": 0,
+          "estado": 4,
+          "celula_atual": 516,
+          "destino": 0,
+          "estado_caminho": 0,
+          "campo_89": 0,
+          "campo_b2": 0,
+          "campo_b8": 12,
+          "campo_c0": 0
+        }
+      ],
+      "depois": [
+        {
+          "indice": 0,
+          "dono": 0,
+          "tipo": 0,
+          "estado": 2,
+          "celula_atual": 514,
+          "destino": 1544,
+          "estado_caminho": 0,
+          "campo_89": 0,
+          "campo_b2": 65535,
+          "campo_b8": 65535,
+          "campo_c0": 65535
+        },
+        {
+          "indice": 1,
+          "dono": 0,
+          "tipo": 0,
+          "estado": 1,
+          "celula_atual": 515,
+          "destino": 0,
+          "estado_caminho": 0,
+          "campo_89": 0,
+          "campo_b2": 0,
+          "campo_b8": 12,
+          "campo_c0": 0
+        },
+        {
+          "indice": 2,
+          "dono": 0,
+          "tipo": 0,
+          "estado": 4,
+          "celula_atual": 516,
+          "destino": 0,
+          "estado_caminho": 0,
+          "campo_89": 0,
+          "campo_b2": 0,
+          "campo_b8": 12,
+          "campo_c0": 0
+        }
+      ],
+      "busca_antes": {
+        "unidade": 65535,
+        "ocupada": 0,
+        "sucesso": 0,
+        "ponteiro_rota": 0,
+        "concluida": 0
+      },
+      "busca_depois": {
+        "unidade": 65535,
+        "ocupada": 0,
+        "sucesso": 0,
+        "ponteiro_rota": 0,
+        "concluida": 0
+      },
+      "estrutura_7_campos_74_75_76_antes": [
+        0,
+        0,
+        0
+      ],
+      "estrutura_7_campos_74_75_76_depois": [
+        0,
+        0,
+        0
+      ],
+      "tarefas_ativas_depois": 0,
+      "retorno": "0x1a1a000e"
+    }
+  ]
+}

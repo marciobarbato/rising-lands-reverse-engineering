@@ -30,7 +30,9 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 - 1.995 símbolos originais franceses recuperados e importados no Ghidra.
 - Programa de IA extraído: 1.157 instruções, 42 tipos registrados e 140 nomes de operações.
 - Máquina parcial de tarefas com criação, espera, subtarefas, retomada e liberação verificadas sem substituir chamadas.
-- 77 testes passando, com 21.267 execuções x86 delimitadas; o teste do despachante superior substitui suas etapas internas.
+- Ordens individuais e de grupo ligadas às tarefas, com efeitos sobre unidades, busca e referências de estruturas.
+- Demonstração reproduzível de cinco cenários, comparada com as chamadas originais.
+- 92 testes passando, com 22.851 execuções x86 delimitadas; o teste do despachante superior substitui suas etapas internas.
 
 ## Leitura recomendada
 
@@ -45,6 +47,7 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 9. [Ciclo do jogo e frequência de desenho](documentacao/CADENCIA.md).
 10. [Busca de caminhos e ocupação](documentacao/CAMINHOS.md) e [despacho da IA](documentacao/IA.md).
 11. [Símbolos franceses e formato RULE](documentacao/SIMBOLOS.md) e [máquina de tarefas](documentacao/TAREFAS.md).
+12. [Efeitos das ordens de movimento](documentacao/ORDENS_MOVIMENTO.md).
 
 ## Reproduzir
 

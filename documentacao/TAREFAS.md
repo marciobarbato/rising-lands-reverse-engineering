@@ -4,7 +4,8 @@ A reconstrução em [`tarefas_ia.py`](../ferramentas/tarefas_ia.py) executa o
 controle de fluxo de `iaSolver`, com criação, subtarefas, suspensão, retomada
 e liberação. A espera `V_Attendre` tem seu ciclo completo implementado e
 comparado com o x86 original. As operações de mundo ainda não traduzidas
-lançam `NotImplementedError`; não recebem sucesso fictício.
+lançam `NotImplementedError`; não recebem sucesso fictício. As ordens individuais
+e de grupo já produzem efeitos no `MundoUnidades`, conforme [ORDENS_MOVIMENTO.md](ORDENS_MOVIMENTO.md).
 
 As regras são carregadas por `simbolos_ia.ler_rul`. Os identificadores franceses
 são os originais recuperados do [SBL e RULE](SIMBOLOS.md).
@@ -143,11 +144,12 @@ flowchart TD
     E -->|Falha| G[Concluir pelo destino 1]
 ```
 
-Esse fluxo foi extraído das instruções e nomes originais. A busca espacial e
-a operação de mundo `V_DeplacerUnite` ainda não foram implementadas na máquina
-independente; o diagrama não representa um cenário de movimento já validado.
-O tipo 14, cuja entrada 420 chama `B_Bidon`, foi executado integralmente usando
-o programa real e comparado com a reconstrução.
+Esse fluxo foi extraído das instruções e nomes originais. `I_DonneTypeUnite`
+e os efeitos de `V_DeplacerUnite` já foram reconstruídos. A instrução 427 foi
+comparada com o x86, iniciando a tarefa diretamente nela com as variáveis
+preenchidas; o prefixo espacial 422..426 continua pendente. O tipo 14, cuja
+entrada 420 chama `B_Bidon`, foi executado integralmente usando o programa real.
+Detalhes e demonstrações em [ORDENS_MOVIMENTO.md](ORDENS_MOVIMENTO.md).
 
 ## Validação
 
@@ -163,5 +165,6 @@ subtarefas com três tipos de conclusão, aliases constantes, missão em oito bi
 reutilização e uma regra do arquivo real. A resolução dos 140 nomes também foi
 conferida contra o runtime original.
 
-Ainda faltam os efeitos de mundo, as mensagens assíncronas de grupos/construções,
-a execução de uma tarefa de economia ou guerra completa e a validação em partida.
+Os primeiros efeitos de mundo implementados são as ordens de movimento individuais
+e de grupo. Ainda faltam o avanço físico integrado, as mensagens assíncronas de
+grupos/construções, tarefas de economia/guerra completas e a validação em partida.

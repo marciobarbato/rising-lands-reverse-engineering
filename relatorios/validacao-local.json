@@ -1,7 +1,7 @@
 {
   "python": "3.9.6",
   "emulacao_habilitada": false,
-  "testes": 77,
+  "testes": 92,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -107,6 +107,46 @@
     },
     {
       "teste": "test_emulacao_caminhos_ia.ExperimentosSolucionador.test_nove_cenarios_documentados",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_ordens.DiferencialOrdens.test_construtor_condicoes_do_tuyau_e_limites_da_tabela",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_ordens.DiferencialOrdens.test_consultas_de_tipo_e_estado_sem_efeitos",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_ordens.DiferencialOrdens.test_grupo_vazio_misto_e_26_tipos",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_ordens.DiferencialOrdens.test_instrucao_427_do_rule_original_com_estado_preparado",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_ordens.DiferencialOrdens.test_movimento_todos_tipos_estados_caixas_e_busca",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_ordens.DiferencialOrdens.test_ordens_aleatorias_preservam_restante_dos_registros",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_ordens.DiferencialOrdens.test_reset_ordem_todos_tipos_animacao_e_vinculo_estrutura",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_ordens.DiferencialOrdens.test_tarefa_consulta_move_espera_e_conclui_sem_callbacks",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_ordens.DiferencialOrdens.test_tarefa_de_grupo_sem_callbacks",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_ordens.DiferencialOrdens.test_todos_os_estados_e_truncamento_u16",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {

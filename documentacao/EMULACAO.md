@@ -70,7 +70,7 @@ será necessário confrontar uma partida real para validar a simulação integra
 
 ## Escopo das novas bancadas
 
-A suíte possui 77 testes; a execução emulada registra 21.267 chamadas delimitadas.
+A suíte possui 92 testes; a execução emulada registra 22.851 chamadas delimitadas.
 O teste de IA em `test_emulacao_caminhos_ia.py` intercepta apenas sete endereços
 explícitos de etapas e injeta retornos. Valida o despachante e seus argumentos,
 mas não o conteúdo dessas etapas. Essa diferença é deliberada e registrada em
@@ -94,3 +94,17 @@ contador global. Suas chamadas de listas e operações nativas não são substit
 Também foram conferidos os 140 nomes do RULE com o resolvedor x86 e a âncora
 `_debugGetPC`, usando uma entrada do SBL por chamada para respeitar o limite
 de 20.000 instruções. Detalhes em [TAREFAS.md](TAREFAS.md).
+
+## Ordens de movimento com efeitos
+
+A bancada `bancada_ordens.py` estende a máquina de tarefas com os intervalos
+originais de `V_DeplacerUnite`, `V_DeplaceGroupe`, consultas, `ResetOrdre`,
+`SetDeplaceEngin`, teste de caixa, liberação de estrutura e percurso de grupo.
+Os dez testes diferenciais novos executam todas essas chamadas sem interceptá-las.
+
+São comparados os registros completos de unidades, estruturas e grupos, a grade
+de objetos, os globais de busca/iteração e, na integração, tarefas e listas.
+A extensão acrescentou 1.584 chamadas à suíte. A demonstração opcional gera um
+relatório separado com outras 15 chamadas; elas não entram na contagem da suíte.
+Veja [ORDENS_MOVIMENTO.md](ORDENS_MOVIMENTO.md) para casos e limites. A emissão
+da ordem não executa a física, visão ou chegada da unidade.
