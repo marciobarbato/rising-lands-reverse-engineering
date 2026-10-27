@@ -1,0 +1,5 @@
+Ghidra: 12.2
+Linguagem: x86:LE:32:default
+CompilerSpec: windows
+SHA-256: 26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0
+Funções exportadas: 250

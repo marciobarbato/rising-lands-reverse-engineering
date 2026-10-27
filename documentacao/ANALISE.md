@@ -84,8 +84,14 @@ em memória. A alocação observada comporta 800 registros; isso não basta para
 afirmar um limite global de unidades em todas as modalidades do jogo.
 
 A missão 1 contém **16 registros de unidades**: oito colonos, três soldados,
-dois fazendeiros, um incendiário, um construtor e um arqueiro. Não se concluiu
-que todos pertençam ao jogador nem que todos estejam imediatamente visíveis.
+dois fazendeiros, um incendiário, um construtor e um arqueiro. Todas pertencem
+ao proprietário 0. Posições e vida foram recuperadas; os oito colonos compartilham
+a célula (14, 12), em estado 14. A visibilidade de cada estado ainda exige pesquisa.
+Veja [INSTANCIAS.md](INSTANCIAS.md) para as 2.604 entradas da campanha.
+
+O Ghidra está instalado localmente e exportou 250 rotinas relacionadas às unidades.
+A [receita de instalação e análise](GHIDRA.md) explica a cópia PE normalizada,
+as assinaturas por registradores e as limitações do pseudocódigo automático.
 
 ### Gráficos e correções à interpretação anterior
 

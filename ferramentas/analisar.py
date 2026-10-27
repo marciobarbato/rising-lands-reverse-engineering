@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Gera relatórios reproduzíveis em português a partir do CD local, sem executá-lo."""
 import argparse
+import csv
 from collections import Counter
 import hashlib
 import json
@@ -12,6 +13,7 @@ import zlib
 
 from formatos import ler_cmp, ler_eta, ler_paleta
 from regras import extrair_regras
+from unidades import atributos_apos_carga
 
 RAIZ = Path(__file__).resolve().parents[1]
 HASH_ESTUDADO = '6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb'
@@ -191,8 +193,25 @@ def main():
         for unidade in resumo['unidades']:
             tipo = unidade['tipo']
             unidade['nome_tipo'] = regras['unidades'][tipo]['nome'] if tipo < 26 else 'TIPO NÃO IDENTIFICADO'
+            if tipo < 26:
+                unidade['apos_carga_parcial'] = atributos_apos_carga(unidade, regras['unidades'][tipo])
         mapas.append(resumo)
     gravar_json(saida / 'mapas.json', mapas)
+    colunas = ['mapa', 'indice', 'tipo', 'nome', 'proprietario_arquivo', 'proprietario_carga',
+               'x', 'y', 'estado', 'vida_arquivo', 'vida_carga', 'destino_x', 'destino_y']
+    with (saida / 'unidades-campanha.csv').open('w', newline='', encoding='utf-8') as arquivo_csv:
+        tabela = csv.writer(arquivo_csv, lineterminator='\n')
+        tabela.writerow(colunas)
+        for mapa in mapas:
+            for unidade in mapa['unidades']:
+                tabela.writerow([Path(mapa['arquivo']).stem, unidade['indice'], unidade['tipo'],
+                                 unidade['nome_tipo'], unidade['proprietario_id'],
+                                 unidade['apos_carga_parcial']['proprietario_id'],
+                                 unidade['posicao']['x'], unidade['posicao']['y'], unidade['byte_estado'],
+                                 unidade['vida_no_arquivo'], unidade['apos_carga_parcial']['vida'],
+                                 unidade['destino']['x'], unidade['destino']['y']])
+    missao01 = next(m for m in mapas if Path(m['arquivo']).stem == 'MONDE01')
+    gravar_json(saida / 'missao01-unidades.json', missao01['unidades'])
     graficos = []
     blocos = None
     for arquivo in arquivos_cmp:

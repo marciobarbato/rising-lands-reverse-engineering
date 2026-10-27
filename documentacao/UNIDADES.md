@@ -16,7 +16,7 @@ instâncias usa registros separados com passo `0x114` (276) bytes.
 | `0x02` | `u16` | Custo de comida, `COUTPATATE` | 1 |
 | `0x04` | `u16` | Custo de peças, `COUTPIECE` | 1 |
 | `0x06` | `u16` | Custo de pedra, `COUTROCHE` | 1 |
-| `0x08` | 2 bytes | Campo anterior preservado; sem semântica atribuída | — |
+| `0x08` | `u16` | Vida máxima, preservada; 100 nos 26 tipos originais | — |
 | `0x0a` | 1 byte | Campo anterior preservado; sem semântica atribuída | — |
 | `0x0b` | `u8` | Blindagem, `BLINDAGE` | 5 |
 | `0x0c` | `char[30]` | Seção francesa antes da carga; nome localizado depois | Nome anterior |
@@ -97,3 +97,6 @@ matriz de dano e bytes reconstruídos dos registros de tipos. O campo
 `registro_memoria_hex` é o resultado da reconstrução estática, não uma captura
 de memória de uma execução do jogo. O [catálogo](../relatorios/UNIDADES.md)
 oferece uma leitura compacta em português.
+
+O estado individual de dono, posição, vida e carga está descrito em
+[INSTANCIAS.md](INSTANCIAS.md), incluindo a distinção entre disco e memória.

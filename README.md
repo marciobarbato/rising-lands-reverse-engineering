@@ -18,6 +18,9 @@ reimplementação completa do jogo.** Os nomes de funções foram atribuídos pe
 - Oito arquivos CMP decodificados: 12.268 quadros gráficos.
 - Terreno da missão 1 reconstruído com IDs começando em 1, como no renderizador original.
 - Testes de regressão com entradas sintéticas, arquivos reais e falhas de formato.
+- Ghidra portátil instalado e 250 rotinas exportadas, com assinaturas corrigidas de sete acessores.
+- Dono, posição e vida das 2.604 entradas de unidades, distinguindo arquivo e efeitos da carga.
+- Cura com limite de vida reconstruída, incluindo aritmética de 16 bits.
 
 ## Leitura recomendada
 
@@ -27,6 +30,7 @@ reimplementação completa do jogo.** Os nomes de funções foram atribuídos pe
 4. [Catálogo das unidades](relatorios/UNIDADES.md): nomes portugueses, custos e atributos.
 5. [Mapa das rotinas](documentacao/ROTINAS.md): onde conferir cada conclusão.
 6. [Lacunas e próximos passos](documentacao/CONTINUIDADE.md).
+7. [Instâncias das unidades](documentacao/INSTANCIAS.md) e [Ghidra local](documentacao/GHIDRA.md).
 
 ## Reproduzir
 
@@ -68,6 +72,7 @@ inclui unidades, construções dinâmicas, névoa de guerra ou simulação.
 | `evidencias/` | Trechos x86 selecionados do executável identificado |
 | `relatorios/` | Manifesto de hashes, dados recuperados e terreno da missão 1 |
 | `testes/` | Casos sintéticos e validação contra o corpus local |
+| `ghidra/` | Instalador, launcher, scripts de anotação e análise |
 
 Os relatórios são versionados para permitir comparação entre descobertas. Os
 testes que dependem do CD são explicitamente marcados como ignorados se ele

@@ -1,0 +1,14 @@
+{
+  "ghidra": {
+    "versao": "Ghidra_12.2_build",
+    "url": "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_12.2_build/ghidra_12.2_PUBLIC_20261016.zip",
+    "sha256": "2c2cd776db3c1f6a097ba418922378ac3649cadd5e844a6f5f088ae628a7be67"
+  },
+  "jdk": {
+    "versao": "25.0.5+8.0.LTS",
+    "url": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5%2B8/OpenJDK25U-jdk_aarch64_mac_hotspot_25.0.5_8.tar.gz",
+    "sha256": "36dc14d797aaff6d89aab302cd053fdba6207dfdcf772052fa7b023a94b0e857"
+  },
+  "arquitetura_host": "macOS aarch64",
+  "escopo": "Instalação portátil em .local/, sem instalação global."
+}

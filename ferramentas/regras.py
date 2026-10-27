@@ -38,7 +38,8 @@ def reconstruir_tipo(secao, ini, registro_original):
     if len(registro_original) != PASSO_TIPO:
         raise ValueError('Registro de tipo deve ter 50 bytes')
     memoria = bytearray(registro_original)
-    valores = {}
+    # Comparado com a vida da instância em 0x4420a6 e usado pela cura em 0x457122.
+    valores = {'vida_maxima': struct.unpack_from('<H', memoria, 8)[0]}
     for chave, (nome, padrao, offset, formato) in CAMPOS.items():
         valor = int(ini.get(secao, chave, fallback=str(padrao)))
         valores[nome] = valor

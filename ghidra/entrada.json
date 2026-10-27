@@ -1,0 +1,50 @@
+{
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_copia": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "alteracoes": [
+    {
+      "secao": "BEGTEXT",
+      "offset": 368,
+      "campo": "VirtualSize",
+      "anterior": 0,
+      "novo": 601088
+    },
+    {
+      "secao": "DGROUP",
+      "offset": 408,
+      "campo": "VirtualSize",
+      "anterior": 0,
+      "novo": 22528
+    },
+    {
+      "secao": ".bss",
+      "offset": 448,
+      "campo": "VirtualSize",
+      "anterior": 0,
+      "novo": 558080
+    },
+    {
+      "secao": ".idata",
+      "offset": 488,
+      "campo": "VirtualSize",
+      "anterior": 0,
+      "novo": 3584
+    },
+    {
+      "secao": ".reloc",
+      "offset": 528,
+      "campo": "VirtualSize",
+      "anterior": 0,
+      "novo": 35840
+    },
+    {
+      "secao": ".rsrc",
+      "offset": 568,
+      "campo": "VirtualSize",
+      "anterior": 0,
+      "novo": 1536
+    }
+  ],
+  "bytes_diferentes": 8,
+  "finalidade": "Somente importação estática; não executar a cópia normalizada."
+}

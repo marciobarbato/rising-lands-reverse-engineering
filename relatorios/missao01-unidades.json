@@ -1,0 +1,578 @@
+[
+  {
+    "indice": 0,
+    "tipo": 0,
+    "proprietario_id": 0,
+    "byte_estado": 7,
+    "ativa_no_predicado_441fff": true,
+    "celula_atual": 3847,
+    "posicao": {
+      "x": 7,
+      "y": 15
+    },
+    "celula_passo": 3847,
+    "celula_destino": 3847,
+    "destino": {
+      "x": 7,
+      "y": 15
+    },
+    "estado_caminho": 0,
+    "vida_no_arquivo": 100,
+    "raio_visao_no_arquivo": 7,
+    "alcance_quadrado_u8_no_arquivo": 1,
+    "recarga_no_arquivo": 20,
+    "grupo_no_arquivo": 255,
+    "tamanho_memoria_serializada": 272,
+    "sha256_registro": "6c3dc404e464d6615d9070358844dd65b9e2bd6dca3d4bb2d1c5c694e1365b59",
+    "offset_registro": 327944,
+    "nome_tipo": "SOLDADO",
+    "apos_carga_parcial": {
+      "proprietario_id": 0,
+      "vida": 100,
+      "raio_visao": 7,
+      "alcance_quadrado_u8": 1,
+      "recarga": 20,
+      "grupo": 255
+    }
+  },
+  {
+    "indice": 1,
+    "tipo": 0,
+    "proprietario_id": 0,
+    "byte_estado": 7,
+    "ativa_no_predicado_441fff": true,
+    "celula_atual": 4105,
+    "posicao": {
+      "x": 9,
+      "y": 16
+    },
+    "celula_passo": 4105,
+    "celula_destino": 4105,
+    "destino": {
+      "x": 9,
+      "y": 16
+    },
+    "estado_caminho": 0,
+    "vida_no_arquivo": 100,
+    "raio_visao_no_arquivo": 7,
+    "alcance_quadrado_u8_no_arquivo": 1,
+    "recarga_no_arquivo": 20,
+    "grupo_no_arquivo": 255,
+    "tamanho_memoria_serializada": 272,
+    "sha256_registro": "e3e32d9133fbb117dd48d95d2089a89de5f06d4d0814ec2616f191df6240da56",
+    "offset_registro": 328730,
+    "nome_tipo": "SOLDADO",
+    "apos_carga_parcial": {
+      "proprietario_id": 0,
+      "vida": 100,
+      "raio_visao": 7,
+      "alcance_quadrado_u8": 1,
+      "recarga": 20,
+      "grupo": 255
+    }
+  },
+  {
+    "indice": 2,
+    "tipo": 0,
+    "proprietario_id": 0,
+    "byte_estado": 7,
+    "ativa_no_predicado_441fff": true,
+    "celula_atual": 4616,
+    "posicao": {
+      "x": 8,
+      "y": 18
+    },
+    "celula_passo": 4616,
+    "celula_destino": 4616,
+    "destino": {
+      "x": 8,
+      "y": 18
+    },
+    "estado_caminho": 0,
+    "vida_no_arquivo": 100,
+    "raio_visao_no_arquivo": 7,
+    "alcance_quadrado_u8_no_arquivo": 1,
+    "recarga_no_arquivo": 20,
+    "grupo_no_arquivo": 255,
+    "tamanho_memoria_serializada": 272,
+    "sha256_registro": "9d721f31d1138bbb03d1abe551469182f691b541feccbb24710f9c0101b3cec8",
+    "offset_registro": 329516,
+    "nome_tipo": "SOLDADO",
+    "apos_carga_parcial": {
+      "proprietario_id": 0,
+      "vida": 100,
+      "raio_visao": 7,
+      "alcance_quadrado_u8": 1,
+      "recarga": 20,
+      "grupo": 255
+    }
+  },
+  {
+    "indice": 3,
+    "tipo": 9,
+    "proprietario_id": 0,
+    "byte_estado": 14,
+    "ativa_no_predicado_441fff": true,
+    "celula_atual": 3086,
+    "posicao": {
+      "x": 14,
+      "y": 12
+    },
+    "celula_passo": 3086,
+    "celula_destino": 3087,
+    "destino": {
+      "x": 15,
+      "y": 12
+    },
+    "estado_caminho": 0,
+    "vida_no_arquivo": 100,
+    "raio_visao_no_arquivo": 5,
+    "alcance_quadrado_u8_no_arquivo": 1,
+    "recarga_no_arquivo": 1,
+    "grupo_no_arquivo": 255,
+    "tamanho_memoria_serializada": 272,
+    "sha256_registro": "36398e1fb22d2f38e27cbf66b7c6056ef252be17c3bc7b7040c170168b139297",
+    "offset_registro": 330302,
+    "nome_tipo": "COLONO",
+    "apos_carga_parcial": {
+      "proprietario_id": 0,
+      "vida": 100,
+      "raio_visao": 5,
+      "alcance_quadrado_u8": 1,
+      "recarga": 1,
+      "grupo": 255
+    }
+  },
+  {
+    "indice": 4,
+    "tipo": 9,
+    "proprietario_id": 0,
+    "byte_estado": 14,
+    "ativa_no_predicado_441fff": true,
+    "celula_atual": 3086,
+    "posicao": {
+      "x": 14,
+      "y": 12
+    },
+    "celula_passo": 3086,
+    "celula_destino": 3087,
+    "destino": {
+      "x": 15,
+      "y": 12
+    },
+    "estado_caminho": 0,
+    "vida_no_arquivo": 100,
+    "raio_visao_no_arquivo": 5,
+    "alcance_quadrado_u8_no_arquivo": 1,
+    "recarga_no_arquivo": 1,
+    "grupo_no_arquivo": 255,
+    "tamanho_memoria_serializada": 272,
+    "sha256_registro": "c4fdbcd15743b829593541ed6342b0656c33014341524823e4281d376d9f2bc1",
+    "offset_registro": 331088,
+    "nome_tipo": "COLONO",
+    "apos_carga_parcial": {
+      "proprietario_id": 0,
+      "vida": 100,
+      "raio_visao": 5,
+      "alcance_quadrado_u8": 1,
+      "recarga": 1,
+      "grupo": 255
+    }
+  },
+  {
+    "indice": 5,
+    "tipo": 9,
+    "proprietario_id": 0,
+    "byte_estado": 14,
+    "ativa_no_predicado_441fff": true,
+    "celula_atual": 3086,
+    "posicao": {
+      "x": 14,
+      "y": 12
+    },
+    "celula_passo": 3086,
+    "celula_destino": 3087,
+    "destino": {
+      "x": 15,
+      "y": 12
+    },
+    "estado_caminho": 0,
+    "vida_no_arquivo": 100,
+    "raio_visao_no_arquivo": 5,
+    "alcance_quadrado_u8_no_arquivo": 1,
+    "recarga_no_arquivo": 1,
+    "grupo_no_arquivo": 255,
+    "tamanho_memoria_serializada": 272,
+    "sha256_registro": "0d77ff7a6f25d09d471f1627e8dc302f99553f7b3aa1743e7d34260010f29b9e",
+    "offset_registro": 331874,
+    "nome_tipo": "COLONO",
+    "apos_carga_parcial": {
+      "proprietario_id": 0,
+      "vida": 100,
+      "raio_visao": 5,
+      "alcance_quadrado_u8": 1,
+      "recarga": 1,
+      "grupo": 255
+    }
+  },
+  {
+    "indice": 6,
+    "tipo": 9,
+    "proprietario_id": 0,
+    "byte_estado": 14,
+    "ativa_no_predicado_441fff": true,
+    "celula_atual": 3086,
+    "posicao": {
+      "x": 14,
+      "y": 12
+    },
+    "celula_passo": 3086,
+    "celula_destino": 3087,
+    "destino": {
+      "x": 15,
+      "y": 12
+    },
+    "estado_caminho": 0,
+    "vida_no_arquivo": 100,
+    "raio_visao_no_arquivo": 5,
+    "alcance_quadrado_u8_no_arquivo": 1,
+    "recarga_no_arquivo": 1,
+    "grupo_no_arquivo": 255,
+    "tamanho_memoria_serializada": 272,
+    "sha256_registro": "0d77ff7a6f25d09d471f1627e8dc302f99553f7b3aa1743e7d34260010f29b9e",
+    "offset_registro": 332660,
+    "nome_tipo": "COLONO",
+    "apos_carga_parcial": {
+      "proprietario_id": 0,
+      "vida": 100,
+      "raio_visao": 5,
+      "alcance_quadrado_u8": 1,
+      "recarga": 1,
+      "grupo": 255
+    }
+  },
+  {
+    "indice": 7,
+    "tipo": 9,
+    "proprietario_id": 0,
+    "byte_estado": 14,
+    "ativa_no_predicado_441fff": true,
+    "celula_atual": 3086,
+    "posicao": {
+      "x": 14,
+      "y": 12
+    },
+    "celula_passo": 3086,
+    "celula_destino": 3087,
+    "destino": {
+      "x": 15,
+      "y": 12
+    },
+    "estado_caminho": 0,
+    "vida_no_arquivo": 100,
+    "raio_visao_no_arquivo": 5,
+    "alcance_quadrado_u8_no_arquivo": 1,
+    "recarga_no_arquivo": 1,
+    "grupo_no_arquivo": 255,
+    "tamanho_memoria_serializada": 272,
+    "sha256_registro": "0d77ff7a6f25d09d471f1627e8dc302f99553f7b3aa1743e7d34260010f29b9e",
+    "offset_registro": 333446,
+    "nome_tipo": "COLONO",
+    "apos_carga_parcial": {
+      "proprietario_id": 0,
+      "vida": 100,
+      "raio_visao": 5,
+      "alcance_quadrado_u8": 1,
+      "recarga": 1,
+      "grupo": 255
+    }
+  },
+  {
+    "indice": 8,
+    "tipo": 9,
+    "proprietario_id": 0,
+    "byte_estado": 14,
+    "ativa_no_predicado_441fff": true,
+    "celula_atual": 3086,
+    "posicao": {
+      "x": 14,
+      "y": 12
+    },
+    "celula_passo": 3086,
+    "celula_destino": 3087,
+    "destino": {
+      "x": 15,
+      "y": 12
+    },
+    "estado_caminho": 0,
+    "vida_no_arquivo": 100,
+    "raio_visao_no_arquivo": 5,
+    "alcance_quadrado_u8_no_arquivo": 1,
+    "recarga_no_arquivo": 1,
+    "grupo_no_arquivo": 255,
+    "tamanho_memoria_serializada": 272,
+    "sha256_registro": "0d77ff7a6f25d09d471f1627e8dc302f99553f7b3aa1743e7d34260010f29b9e",
+    "offset_registro": 334232,
+    "nome_tipo": "COLONO",
+    "apos_carga_parcial": {
+      "proprietario_id": 0,
+      "vida": 100,
+      "raio_visao": 5,
+      "alcance_quadrado_u8": 1,
+      "recarga": 1,
+      "grupo": 255
+    }
+  },
+  {
+    "indice": 9,
+    "tipo": 9,
+    "proprietario_id": 0,
+    "byte_estado": 14,
+    "ativa_no_predicado_441fff": true,
+    "celula_atual": 3086,
+    "posicao": {
+      "x": 14,
+      "y": 12
+    },
+    "celula_passo": 3086,
+    "celula_destino": 3087,
+    "destino": {
+      "x": 15,
+      "y": 12
+    },
+    "estado_caminho": 0,
+    "vida_no_arquivo": 100,
+    "raio_visao_no_arquivo": 5,
+    "alcance_quadrado_u8_no_arquivo": 1,
+    "recarga_no_arquivo": 1,
+    "grupo_no_arquivo": 255,
+    "tamanho_memoria_serializada": 272,
+    "sha256_registro": "0d77ff7a6f25d09d471f1627e8dc302f99553f7b3aa1743e7d34260010f29b9e",
+    "offset_registro": 335018,
+    "nome_tipo": "COLONO",
+    "apos_carga_parcial": {
+      "proprietario_id": 0,
+      "vida": 100,
+      "raio_visao": 5,
+      "alcance_quadrado_u8": 1,
+      "recarga": 1,
+      "grupo": 255
+    }
+  },
+  {
+    "indice": 10,
+    "tipo": 9,
+    "proprietario_id": 0,
+    "byte_estado": 14,
+    "ativa_no_predicado_441fff": true,
+    "celula_atual": 3086,
+    "posicao": {
+      "x": 14,
+      "y": 12
+    },
+    "celula_passo": 3086,
+    "celula_destino": 3087,
+    "destino": {
+      "x": 15,
+      "y": 12
+    },
+    "estado_caminho": 0,
+    "vida_no_arquivo": 100,
+    "raio_visao_no_arquivo": 5,
+    "alcance_quadrado_u8_no_arquivo": 1,
+    "recarga_no_arquivo": 1,
+    "grupo_no_arquivo": 255,
+    "tamanho_memoria_serializada": 272,
+    "sha256_registro": "0d77ff7a6f25d09d471f1627e8dc302f99553f7b3aa1743e7d34260010f29b9e",
+    "offset_registro": 335804,
+    "nome_tipo": "COLONO",
+    "apos_carga_parcial": {
+      "proprietario_id": 0,
+      "vida": 100,
+      "raio_visao": 5,
+      "alcance_quadrado_u8": 1,
+      "recarga": 1,
+      "grupo": 255
+    }
+  },
+  {
+    "indice": 11,
+    "tipo": 1,
+    "proprietario_id": 0,
+    "byte_estado": 7,
+    "ativa_no_predicado_441fff": true,
+    "celula_atual": 5387,
+    "posicao": {
+      "x": 11,
+      "y": 21
+    },
+    "celula_passo": 5387,
+    "celula_destino": 5387,
+    "destino": {
+      "x": 11,
+      "y": 21
+    },
+    "estado_caminho": 0,
+    "vida_no_arquivo": 100,
+    "raio_visao_no_arquivo": 7,
+    "alcance_quadrado_u8_no_arquivo": 1,
+    "recarga_no_arquivo": 50,
+    "grupo_no_arquivo": 255,
+    "tamanho_memoria_serializada": 272,
+    "sha256_registro": "7239ed0e15ef1fbced77a74e8366f3f075b52e297e22dee1b4c9515ad2cd5ae0",
+    "offset_registro": 336590,
+    "nome_tipo": "INCENDIÁRIO",
+    "apos_carga_parcial": {
+      "proprietario_id": 0,
+      "vida": 100,
+      "raio_visao": 7,
+      "alcance_quadrado_u8": 1,
+      "recarga": 50,
+      "grupo": 255
+    }
+  },
+  {
+    "indice": 12,
+    "tipo": 7,
+    "proprietario_id": 0,
+    "byte_estado": 7,
+    "ativa_no_predicado_441fff": true,
+    "celula_atual": 4113,
+    "posicao": {
+      "x": 17,
+      "y": 16
+    },
+    "celula_passo": 4113,
+    "celula_destino": 4113,
+    "destino": {
+      "x": 17,
+      "y": 16
+    },
+    "estado_caminho": 0,
+    "vida_no_arquivo": 100,
+    "raio_visao_no_arquivo": 5,
+    "alcance_quadrado_u8_no_arquivo": 1,
+    "recarga_no_arquivo": 100,
+    "grupo_no_arquivo": 255,
+    "tamanho_memoria_serializada": 272,
+    "sha256_registro": "e50016be69c973088bc63eeeeecd49bbcb375ecca6304837a209e1c97afb611c",
+    "offset_registro": 337376,
+    "nome_tipo": "CONSTRUTOR",
+    "apos_carga_parcial": {
+      "proprietario_id": 0,
+      "vida": 100,
+      "raio_visao": 5,
+      "alcance_quadrado_u8": 1,
+      "recarga": 100,
+      "grupo": 255
+    }
+  },
+  {
+    "indice": 13,
+    "tipo": 5,
+    "proprietario_id": 0,
+    "byte_estado": 7,
+    "ativa_no_predicado_441fff": true,
+    "celula_atual": 4110,
+    "posicao": {
+      "x": 14,
+      "y": 16
+    },
+    "celula_passo": 4110,
+    "celula_destino": 4110,
+    "destino": {
+      "x": 14,
+      "y": 16
+    },
+    "estado_caminho": 0,
+    "vida_no_arquivo": 100,
+    "raio_visao_no_arquivo": 5,
+    "alcance_quadrado_u8_no_arquivo": 1,
+    "recarga_no_arquivo": 250,
+    "grupo_no_arquivo": 255,
+    "tamanho_memoria_serializada": 272,
+    "sha256_registro": "0be33a2028f186c414dd785918f289e00bfdad4be9bfe3498f8d0b91abdb763e",
+    "offset_registro": 338162,
+    "nome_tipo": "FAZENDEIRO",
+    "apos_carga_parcial": {
+      "proprietario_id": 0,
+      "vida": 100,
+      "raio_visao": 5,
+      "alcance_quadrado_u8": 1,
+      "recarga": 250,
+      "grupo": 255
+    }
+  },
+  {
+    "indice": 14,
+    "tipo": 5,
+    "proprietario_id": 0,
+    "byte_estado": 7,
+    "ativa_no_predicado_441fff": true,
+    "celula_atual": 4108,
+    "posicao": {
+      "x": 12,
+      "y": 16
+    },
+    "celula_passo": 4108,
+    "celula_destino": 4108,
+    "destino": {
+      "x": 12,
+      "y": 16
+    },
+    "estado_caminho": 0,
+    "vida_no_arquivo": 100,
+    "raio_visao_no_arquivo": 5,
+    "alcance_quadrado_u8_no_arquivo": 1,
+    "recarga_no_arquivo": 250,
+    "grupo_no_arquivo": 255,
+    "tamanho_memoria_serializada": 272,
+    "sha256_registro": "44d2902a3f9986dedc5f1ef7dcfb2a17ce95bf69486c1a468c9b4d706e019f1a",
+    "offset_registro": 338948,
+    "nome_tipo": "FAZENDEIRO",
+    "apos_carga_parcial": {
+      "proprietario_id": 0,
+      "vida": 100,
+      "raio_visao": 5,
+      "alcance_quadrado_u8": 1,
+      "recarga": 250,
+      "grupo": 255
+    }
+  },
+  {
+    "indice": 15,
+    "tipo": 8,
+    "proprietario_id": 0,
+    "byte_estado": 7,
+    "ativa_no_predicado_441fff": true,
+    "celula_atual": 4877,
+    "posicao": {
+      "x": 13,
+      "y": 19
+    },
+    "celula_passo": 4877,
+    "celula_destino": 4877,
+    "destino": {
+      "x": 13,
+      "y": 19
+    },
+    "estado_caminho": 0,
+    "vida_no_arquivo": 100,
+    "raio_visao_no_arquivo": 10,
+    "alcance_quadrado_u8_no_arquivo": 100,
+    "recarga_no_arquivo": 30,
+    "grupo_no_arquivo": 255,
+    "tamanho_memoria_serializada": 272,
+    "sha256_registro": "8c9d3d97e785f3ff10f99d626e8dd1c44e529c86619c1478e9f1f724919404a9",
+    "offset_registro": 339734,
+    "nome_tipo": "ARQUEIRO",
+    "apos_carga_parcial": {
+      "proprietario_id": 0,
+      "vida": 100,
+      "raio_visao": 10,
+      "alcance_quadrado_u8": 100,
+      "recarga": 30,
+      "grupo": 255
+    }
+  }
+]

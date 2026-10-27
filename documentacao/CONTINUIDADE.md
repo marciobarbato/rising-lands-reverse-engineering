@@ -10,6 +10,10 @@
 - Carregador dos atributos dos tipos reconstruído e matrizes de dano extraídas.
 - Renderização estática do terreno da missão 1 com IDs corrigidos.
 - Testes sintéticos e contra o corpus real.
+- Ghidra e JDK portáteis instalados, com descompilador nativo ARM64 compilado.
+- 250 rotinas exportadas e sete assinaturas de acessores corrigidas.
+- Propriedade, coordenadas, vida e campos de carga das 2.604 entradas de unidades.
+- Rotina de cura reconstruída e máximo de vida localizado na tabela de tipos.
 
 ## Questões em aberto
 
@@ -20,7 +24,7 @@
 | Combate | Matriz, blindagem, alcance quadrático | Seguir cálculo de dano, seleção de alvo, bônus e morte |
 | Economia | Custos e blocos de recursos | Associar IDs internos, produção, consumo e filas |
 | Construções | Primeiro bloco indexado do ETA | Identificar tipos, campos, posição e estados |
-| Instâncias de unidades | Tipo no byte 1 e cópia disco→RAM | Identificar dono, coordenadas, vida, ordens e campos derivados |
+| Instâncias de unidades | Dono, coordenadas, vida e cópia disco→RAM confirmados | Completar ordens, significado dos estados e campos derivados |
 | Campanha | Blocos variáveis e textos de missões | Decifrar condições, eventos e vitória/derrota |
 | Sufixo ETA | Tamanho constante e hashes por mapa | Mapear as camadas restantes e seus consumidores |
 | Névoa e sprites | Referências no renderizador | Reproduzir composição, visibilidade e animação |
@@ -29,14 +33,11 @@
 
 ## Próxima investigação recomendada
 
-O passo de maior utilidade é identificar posição e propriedade dos registros
-de unidades. A missão 1 já oferece 16 entradas para comparar com uma execução
-controlada do jogo. Isso permitirá substituir a posição de soldado inventada
-no protótipo por entidades efetivamente recuperadas.
-
-Depois, rastrear o movimento e o relógio da simulação, medindo a mesma ordem de
-movimento no original. Só então calibrar velocidade, animações e busca de caminho.
-O Ghidra pode ajudar a navegar essas chamadas e produzir pseudocódigo inicial.
+Rastrear o movimento a partir de `0x448f50`, a integração do passo em `0x448704`
+e a orientação em `0x448599`. As posições reais da primeira missão já permitem
+substituir coordenadas inventadas em uma futura reimplementação independente.
+Também seguir o dano em `0x4502f0`, distinguindo os modos e modificadores.
+A conversão dos contadores para segundos depende do relógio da simulação.
 
 ## Como registrar uma nova descoberta
 

@@ -6,6 +6,7 @@ Os limites e offsets estão explicados em documentacao/FORMATOS.md.
 from dataclasses import dataclass
 import hashlib
 import struct
+from unidades import interpretar_unidade
 
 
 class ErroFormato(ValueError):
@@ -140,11 +141,10 @@ def ler_eta(dados):
         return [valores[y * 256 + x] for y in range(altura) for x in range(largura)]
 
     unidades = []
-    for indice, bruto in registros['unidades']:
-        # 0x46ad19..0x46ad6d: 140 bytes, pula 512, lê o restante.
-        memoria = bruto[:0x8c] + bruto[0x28c:]
-        unidades.append(dict(indice=indice, tipo=memoria[1],
-                             byte_estado=memoria[2], tamanho_memoria_serializada=len(memoria)))
+    for ordinal, (indice, bruto) in enumerate(registros['unidades']):
+        unidade = interpretar_unidade(indice, bruto)
+        unidade['offset_registro'] = blocos[1]['offset'] + 4 + ordinal * 786 + 2
+        unidades.append(unidade)
     return dict(largura=largura, altura=altura, recursos_por_tipo=recursos,
                 origens_visualizacao=origens, blocos=blocos, unidades=unidades,
                 fim_carregamento=fim_carregamento,
