@@ -1,0 +1,294 @@
+{
+  "commit": "1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e",
+  "exe_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "trechos": [
+    {
+      "nome": "AffCorpsEnginDecalage",
+      "inicio": "0x410fcc",
+      "fim": "0x4110bf",
+      "sha256_bytes": "ed710448f11d2c11f72d8e7b2191431f2fb984f518dfb6a94b8927e90a018ed7",
+      "arquivo": "00410fcc.asm"
+    },
+    {
+      "nome": "AffOmbreEngin",
+      "inicio": "0x4110bf",
+      "fim": "0x411147",
+      "sha256_bytes": "8536283f9327321f0a3fd2b6734d53a51344a3cfddec939f9a9ab4e3ffd49a66",
+      "arquivo": "004110bf.asm"
+    },
+    {
+      "nome": "AffCorpsEngin",
+      "inicio": "0x411147",
+      "fim": "0x41209d",
+      "sha256_bytes": "5915424b7ee38d0a728b92a67ea1a3f8a8d93b4918a3258ad721cdf15d0af4a7",
+      "arquivo": "00411147.asm"
+    },
+    {
+      "nome": "AffBallon",
+      "inicio": "0x41209d",
+      "fim": "0x4122d5",
+      "sha256_bytes": "1f1451afd14d1f0bb71be2e24743a2e6e2f7d317decaa5257553eb00c6b5649d",
+      "arquivo": "0041209d.asm"
+    },
+    {
+      "nome": "AffBoxSelection",
+      "inicio": "0x4122d5",
+      "fim": "0x412390",
+      "sha256_bytes": "92aedc19397e56f0dbb6d4a3d44681cb80a8d9cdd089644509ecab82241b2a98",
+      "arquivo": "004122d5.asm"
+    },
+    {
+      "nome": "AffDeplaceEngin",
+      "inicio": "0x412390",
+      "fim": "0x41374c",
+      "sha256_bytes": "35a0ce04a35c61a51278218624a68fa3bf77ede3b50ee79347403a94fa9b668f",
+      "arquivo": "00412390.asm"
+    },
+    {
+      "nome": "AffAttaqueEngin",
+      "inicio": "0x41374c",
+      "fim": "0x414495",
+      "sha256_bytes": "d54d05c51bb31421dd7ae53616018b04f709d8c65a55d3629c481f6f8a239a6e",
+      "arquivo": "0041374c.asm"
+    },
+    {
+      "nome": "AffConstruireBatiment",
+      "inicio": "0x414495",
+      "fim": "0x414a8a",
+      "sha256_bytes": "22d386a7b6ac4af35f190e4293d06a64dd489c4746f0db31c2cd618e8d8d3c9a",
+      "arquivo": "00414495.asm"
+    },
+    {
+      "nome": "AffWorkEngin",
+      "inicio": "0x414a8a",
+      "fim": "0x415496",
+      "sha256_bytes": "4aae4288bd307f9de5b93ce32772b04ab3d7ef6803f42de3ecd412c22704694f",
+      "arquivo": "00414a8a.asm"
+    },
+    {
+      "nome": "EnginGetSpriteMort",
+      "inicio": "0x415496",
+      "fim": "0x41559a",
+      "sha256_bytes": "11d597526321a257beb04660b948a08b889fb2c8e5721fcdc33ed7269e6eac96",
+      "arquivo": "00415496.asm"
+    },
+    {
+      "nome": "AffDyingEngin",
+      "inicio": "0x41559a",
+      "fim": "0x41591f",
+      "sha256_bytes": "e0862d1dd4d638bfe1e834e28e0f6cfa1e608202da6ebf9fa7d3afc1f62208fe",
+      "arquivo": "0041559a.asm"
+    },
+    {
+      "nome": "AffEngin",
+      "inicio": "0x41591f",
+      "fim": "0x415a56",
+      "sha256_bytes": "58fe953b604f0b1c29a392431a2618ecb2e5dc594e5a760c8ff5d6a42f9c24df",
+      "arquivo": "0041591f.asm"
+    },
+    {
+      "nome": "AffHangar",
+      "inicio": "0x415a56",
+      "fim": "0x415acf",
+      "sha256_bytes": "98ba4c1a60ef2d46604184851991a9018e81d8d1b8b45b73475aba16313fbd06",
+      "arquivo": "00415a56.asm"
+    },
+    {
+      "nome": "AffSprite",
+      "inicio": "0x416864",
+      "fim": "0x416e41",
+      "sha256_bytes": "e3a5445a1ef8b30dbdcb1b41612ff2ebfb612070d49f8673b252af7f1fd8bd51",
+      "arquivo": "00416864.asm"
+    },
+    {
+      "nome": "SetBank",
+      "inicio": "0x418590",
+      "fim": "0x418599",
+      "sha256_bytes": "f8ded8c4d259971d5caeac5416f4d07cddd943d94b62fa95625dad75146a6ecb",
+      "arquivo": "00418590.asm"
+    },
+    {
+      "nome": "LoadSTRATBank",
+      "inicio": "0x41877a",
+      "fim": "0x4189c2",
+      "sha256_bytes": "2682bf21e849d9d06d1a3a335bafb5912207c75ab2770ff3ec5a508a2e83e9da",
+      "arquivo": "0041877a.asm"
+    },
+    {
+      "nome": "EnginGetType",
+      "inicio": "0x442025",
+      "fim": "0x442045",
+      "sha256_bytes": "c9b68df49797eb19c9c9e3fa5cc823a9e5f142a7d05ee7ddbee4044eeeb35036",
+      "arquivo": "00442025.asm"
+    },
+    {
+      "nome": "EnginGetPlayer",
+      "inicio": "0x442045",
+      "fim": "0x442064",
+      "sha256_bytes": "51a88e03cba6292ad8cbbe0ddf8859022a4d1c53308d94c8346f5532c59b4a98",
+      "arquivo": "00442045.asm"
+    },
+    {
+      "nome": "AnimArretEngin",
+      "inicio": "0x4478ee",
+      "fim": "0x44792f",
+      "sha256_bytes": "bb2a51aa6d363e0854938d4896e568ad9aafca289aba9c46fc1368d333ed8fa1",
+      "arquivo": "004478ee.asm"
+    },
+    {
+      "nome": "AnimDyingEngin",
+      "inicio": "0x44792f",
+      "fim": "0x447977",
+      "sha256_bytes": "42593b2c699dad42116c2a2844202eaa974805a270191b923d7c2b8e7f6db5ea",
+      "arquivo": "0044792f.asm"
+    },
+    {
+      "nome": "AnimAttaqueTermineEngin",
+      "inicio": "0x447977",
+      "fim": "0x4479c4",
+      "sha256_bytes": "6a8ffd5dd16863c43d69f4e787166d76048f781035cb7791055f5f858f8bc759",
+      "arquivo": "00447977.asm"
+    },
+    {
+      "nome": "AnimAttaqueEngin",
+      "inicio": "0x4479c4",
+      "fim": "0x447acf",
+      "sha256_bytes": "30de6ee3be9958345e2b5a66a442e65f2af8874d84df311cb7677dff741bd5e3",
+      "arquivo": "004479c4.asm"
+    },
+    {
+      "nome": "AnimHelipede",
+      "inicio": "0x447acf",
+      "fim": "0x447b2f",
+      "sha256_bytes": "5602417a657a9b9b02ac49a2bbdd5776a49ff42b1f8c36f865c4bd8e7a6d67bd",
+      "arquivo": "00447acf.asm"
+    },
+    {
+      "nome": "AnimBallonStatic",
+      "inicio": "0x447b2f",
+      "fim": "0x447d95",
+      "sha256_bytes": "3b143f47622b6cab289cc4521c0fa58050a6a3f7a767aa7abc0ef4ae0447c558",
+      "arquivo": "00447b2f.asm"
+    },
+    {
+      "nome": "AnimRechargeEngin",
+      "inicio": "0x447d95",
+      "fim": "0x447e12",
+      "sha256_bytes": "d4d2fe6c1110b2f81dc57885f8880ca0351e90361edbcfa8df983616617b75ad",
+      "arquivo": "00447d95.asm"
+    },
+    {
+      "nome": "AnimConstruireBatiment",
+      "inicio": "0x447e12",
+      "fim": "0x447f58",
+      "sha256_bytes": "5b8a9c0bb1da369baebdb1a8e5a16e956dcb3ab4c83c363786703fbae52a3cc9",
+      "arquivo": "00447e12.asm"
+    },
+    {
+      "nome": "AnimWorkEngin",
+      "inicio": "0x447f58",
+      "fim": "0x448088",
+      "sha256_bytes": "ce6f3225a0f93e611fa7103921e0af22f21d27b77532a2382e340e2413d0aaaf",
+      "arquivo": "00447f58.asm"
+    },
+    {
+      "nome": "AnimDeplaceEngin",
+      "inicio": "0x448088",
+      "fim": "0x44812b",
+      "sha256_bytes": "9a3a0a15019d2b5b31fe9321c1b949336862c4886a56c6e32367afbe0986055a",
+      "arquivo": "00448088.asm"
+    },
+    {
+      "nome": "EnginEnArret",
+      "inicio": "0x448194",
+      "fim": "0x448228",
+      "sha256_bytes": "155d5a25e5a62970cabf8491b4166719bd465f30520ca0cdfc2d4ca816370a91",
+      "arquivo": "00448194.asm"
+    },
+    {
+      "nome": "RotateEngin",
+      "inicio": "0x448599",
+      "fim": "0x448704",
+      "sha256_bytes": "7acad9d2414ddaa8721b6e1356cabc7ca8319386a3f28f760a493e7ed3afdf66",
+      "arquivo": "00448599.asm"
+    },
+    {
+      "nome": "CalculNextCase",
+      "inicio": "0x448f50",
+      "fim": "0x449176",
+      "sha256_bytes": "da39e03d33665c468b54494e7ca93c7d5da29805fada97e25de63fb12d68e34a",
+      "arquivo": "00448f50.asm"
+    },
+    {
+      "nome": "EnginEstMiroir",
+      "inicio": "0x44fffe",
+      "fim": "0x45002e",
+      "sha256_bytes": "0b7b019a4caddb86c56305bbfad19bfe91012301eeb68c46f3e0bbead8e87228",
+      "arquivo": "0044fffe.asm"
+    },
+    {
+      "nome": "EnginEstTerreur",
+      "inicio": "0x45002e",
+      "fim": "0x450054",
+      "sha256_bytes": "ff4dffb79fd362cf1bfaf894df69fe5e78a609ed2d9a68fa136a8711ee943d2a",
+      "arquivo": "0045002e.asm"
+    },
+    {
+      "nome": "EnginSetTypeCaract",
+      "inicio": "0x457350",
+      "fim": "0x457b87",
+      "sha256_bytes": "71e87a233999cb6abe4f7223288a8f2077e382f545f352faa896d05949047d09",
+      "arquivo": "00457350.asm"
+    },
+    {
+      "nome": "PasteBobCmp",
+      "inicio": "0x45b247",
+      "fim": "0x45b4fd",
+      "sha256_bytes": "d001d3347214a07979c288ac5aefe2fca8fb612bec59678a6b35de897752115e",
+      "arquivo": "0045b247.asm"
+    },
+    {
+      "nome": "PasteOmbreCmp",
+      "inicio": "0x45b796",
+      "fim": "0x45ba23",
+      "sha256_bytes": "5c9420bd73d82eef51323dd3388899967cd42315035ca001dc8acd5c4afd0528",
+      "arquivo": "0045b796.asm"
+    },
+    {
+      "nome": "PastePlayerCmp",
+      "inicio": "0x45c455",
+      "fim": "0x45c72a",
+      "sha256_bytes": "23a96aa537e58f203e8acfe4112c1cdb871493f22d8d6ea1d4ff4cbd951e8e7d",
+      "arquivo": "0045c455.asm"
+    },
+    {
+      "nome": "GetBit",
+      "inicio": "0x467d97",
+      "fim": "0x467da6",
+      "sha256_bytes": "5ad94644e5a4950ec556cde4a48ab0e2a827235472d9c33dd7112adb595e098e",
+      "arquivo": "00467d97.asm"
+    },
+    {
+      "nome": "ProgInit",
+      "inicio": "0x474beb",
+      "fim": "0x474f8c",
+      "sha256_bytes": "e142444a26bd46c493891d094cebcde3deb4452963828c439638d690aa1eb361",
+      "arquivo": "00474beb.asm"
+    },
+    {
+      "nome": "CalculDirection",
+      "inicio": "0x477042",
+      "fim": "0x4770ee",
+      "sha256_bytes": "96571c2bae91ee0774f6e10c8efc82968f1d8759a13b7a703ece4c16c8e582a8",
+      "arquivo": "00477042.asm"
+    },
+    {
+      "nome": "CalculDirCase",
+      "inicio": "0x4770ee",
+      "fim": "0x4772ec",
+      "sha256_bytes": "f3dbe32cdf2479c8ba98946732615c1186f687eb902e05de944798d5daa7a226",
+      "arquivo": "004770ee.asm"
+    }
+  ]
+}

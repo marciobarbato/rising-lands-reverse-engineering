@@ -1,0 +1,26 @@
+# Insumos locais. Preservar manifestos para recuperação pelo SHA-256.
+/fontes/**
+!/fontes/manifesto.json
+/snapshot/**
+!/snapshot/manifesto.json
+/dependencias/**
+!/dependencias/manifesto.json
+
+# A entrega completa permanece local e imutável; Git conserva a parte pública.
+/entregas/*/fontes/**
+!/entregas/*/fontes/manifesto.json
+/entregas/*/snapshot/**
+!/entregas/*/snapshot/manifesto.json
+/entregas/*/dependencias/**
+!/entregas/*/dependencias/manifesto.json
+
+# Apenas material transitório/operacional desta frente.
+**/__pycache__/
+*.pyc
+/tmp/
+/cache/
+/build/
+/previa.png
+/INVENTARIO_PUBLICACAO.json
+/publicacao-pathspec.txt
+/ESTADO.md
