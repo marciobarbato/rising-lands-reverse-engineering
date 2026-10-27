@@ -4,7 +4,9 @@ Foram traduzidas `TestLigneOptimise` (`0x42d674`) e `OptimiseChemin`
 (`0x42e890`), em [`otimizacao_caminhos.py`](../ferramentas/otimizacao_caminhos.py).
 O backend [`solucionador_misto.py`](../ferramentas/solucionador_misto.py) já usa
 essas traduções durante a busca e entrega a rota ao movimento das unidades.
-A geração dos candidatos e o ajuste do destino continuam no código original.
+A preparação e o ajuste do destino agora também têm tradução, assim como a
+inspeção inicial e a escolha dos candidatos. O corpo de construção/contorno dos
+percursos continua original; veja [PREPARACAO_CANDIDATOS.md](PREPARACAO_CANDIDATOS.md).
 
 O nome das duas funções vem de `RISING.SBL`. As evidências anteriores já
 continham os corpos necessários: [`0042d674.asm`](../evidencias/caminhos-auxiliares/0042d674.asm)
@@ -18,7 +20,7 @@ O executável usado na comparação permanece identificado pelo SHA-256
 # Propriedades do código independente, sem Unicorn.
 python3 -m unittest discover -s testes -p 'test_otimizacao.py' -v
 
-# Integração: busca original, otimização Python, movimento e mensagens Python.
+# Integração parcial: preparação, seleção, otimização e movimento Python.
 python3 ferramentas/demonstrar_desvios.py --misto
 
 # Referência: todas as funções da busca originais.
@@ -107,15 +109,17 @@ consumidor. A comparação inclui o buffer inteiro e o flag global afetado.
 
 ## Integração e referência independente
 
-`SolucionadorComOtimizacaoPython` é uma opção explícita. A preparação e a geração
-dos dois candidatos continuam sendo executadas no EXE original emulado. A bancada
-para na entrada de `OptimiseChemin`, lê o candidato selecionado, executa a
-tradução Python e retoma o chamador em `0x43b2be`, que serializa a rota invertida.
+`SolucionadorParcialPython` é a opção explícita atual; o nome anterior
+`SolucionadorComOtimizacaoPython` continua como alias. A primeira integração
+parava em `OptimiseChemin` e retomava o chamador em `0x43b2be`. Agora também foram
+traduzidas a preparação, a inspeção inicial e a seleção, e a bancada para antes
+da escolha em `0x43b073`. A seleção entrega o candidato à mesma otimização Python;
+a serialização já reconstruída grava a rota invertida e o epílogo original
+é retomado em `0x43b300`. Veja os checkpoints atuais em
+[PREPARACAO_CANDIDATOS.md](PREPARACAO_CANDIDATOS.md).
 
-Esse checkpoint exige o endereço de retorno e um dos dois buffers observados
-(`0x4e116a`/`0x4e136a`). A rotina substituída preservava os registradores usados
-pelo chamador; ele zera EAX antes de reutilizá-lo. A retomada retira o endereço
-de retorno da pilha, conserva os demais registradores e usa os limites de
+O corpo que constrói os dois percursos ainda é executado no EXE original emulado.
+As retomadas conservam a pilha preparada pelo prólogo e usam os limites de
 endereço, tempo e instruções da bancada. Cada trecho retomado entra na contagem
 de execuções delimitadas.
 
@@ -126,9 +130,10 @@ minimapa e tarefas a cada atualização.
 
 ## Cobertura e resultados
 
-A suíte completa passou com **129 testes e 31.118 execuções x86 delimitadas**,
-sem testes ignorados. Sem emulação, passam 62 testes comuns e os 67 opcionais
-ficam explicitamente ignorados no relatório local.
+Na etapa de otimização, a suíte passou com **129 testes e 31.118 execuções x86**.
+Com a preparação e as etapas dos candidatos, são **144 testes e 32.623 execuções
+x86 delimitadas**, sem testes ignorados. Sem emulação, passam 70 testes comuns
+e os 74 opcionais ficam explicitamente ignorados no relatório local.
 
 As comparações isoladas executam **833 testes de linha e 124 otimizações** no
 original, cobrindo os 26 tipos, oito direções, células iguais, máscaras, objeto
@@ -155,8 +160,8 @@ Os cancelamentos continuam gerando a mensagem de término descrita em
 
 ## Continuação
 
-A otimização agora tem implementação independente. Ainda falta traduzir a
-preparação/ajuste de destino e a construção/seleção dos candidatos em
-`CheminCalcul`. O backend misto continua exigindo o EXE e Unicorn para essas
-partes. Também permanecem as limitações sobre construções, tráfego, combate,
+A otimização, a preparação/ajuste, a inspeção inicial e a seleção já têm tradução.
+Ainda falta o corpo de construção/contorno dos candidatos em `CheminCalcul`.
+O backend misto continua exigindo o EXE e Unicorn para essa parte.
+Também permanecem as limitações sobre construções, tráfego, combate,
 animação e partida completa registradas em [CONTINUIDADE.md](CONTINUIDADE.md).

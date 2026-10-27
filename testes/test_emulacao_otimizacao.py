@@ -132,3 +132,7 @@ class DiferencialOtimizacao(unittest.TestCase):
             if dinamico:
                 self.assertTrue(inserido)
                 self.assertGreaterEqual(len(otimizacoes), 2)
+            b = m.solucionador.bancada
+            self.assertEqual(bool(b.preparacoes_python), nome in ('parede_com_passagem', 'sem_passagem'))
+            self.assertEqual(bool(b.inicios_candidatos_python), nome == 'parede_com_passagem')
+            self.assertEqual(bool(b.escolhas_python), nome == 'parede_com_passagem')

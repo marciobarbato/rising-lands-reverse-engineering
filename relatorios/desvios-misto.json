@@ -1,6 +1,6 @@
 {
   "contexto": "Mapas, unidades e tarefas sintéticos; geração de regiões e movimento em Python.",
-  "busca_geral": "Chemin_Verouille/CheminCalcul originais emulados; otimização em Python",
+  "busca_geral": "Preparação, início/seleção dos candidatos, otimização e serialização em Python; contorno/construção dos candidatos originais emulados",
   "algoritmo_geral_traduzido": false,
   "cenarios": [
     {
@@ -86,7 +86,10 @@
         }
       ],
       "tarefas_ativas_ao_final": 0,
-      "otimizacoes_python": []
+      "otimizacoes_python": [],
+      "preparacoes_python": [],
+      "inicios_candidatos_python": [],
+      "escolhas_python": []
     },
     {
       "nome": "parede_com_passagem",
@@ -279,6 +282,37 @@
           "celulas_antes": 8,
           "celulas_depois": 8
         }
+      ],
+      "preparacoes_python": [
+        {
+          "unidade": 0,
+          "inicio": 1029,
+          "solicitado": 1034,
+          "destino": 1034,
+          "status": 1,
+          "concluida": 0
+        }
+      ],
+      "inicios_candidatos_python": [
+        {
+          "unidade": 0,
+          "obstaculo_proximo": 1030,
+          "todos_bloqueados": false,
+          "regioes": [
+            2
+          ]
+        }
+      ],
+      "escolhas_python": [
+        {
+          "custos": [
+            65535,
+            7
+          ],
+          "escolhido": 1,
+          "status": 1,
+          "motivo": "menor_custo"
+        }
       ]
     },
     {
@@ -426,7 +460,19 @@
         }
       ],
       "tarefas_ativas_ao_final": 0,
-      "otimizacoes_python": []
+      "otimizacoes_python": [],
+      "preparacoes_python": [
+        {
+          "unidade": 0,
+          "inicio": 1029,
+          "solicitado": 1034,
+          "destino": 1034,
+          "status": 7,
+          "concluida": 1
+        }
+      ],
+      "inicios_candidatos_python": [],
+      "escolhas_python": []
     },
     {
       "nome": "destino_bloqueado",
@@ -507,10 +553,15 @@
         }
       ],
       "tarefas_ativas_ao_final": 0,
-      "otimizacoes_python": []
+      "otimizacoes_python": [],
+      "preparacoes_python": [],
+      "inicios_candidatos_python": [],
+      "escolhas_python": []
     }
   ],
   "rotinas_traduzidas": [
+    "Chemin_Verouille",
+    "CheminCalcul: início/seleção/serialização",
     "OptimiseChemin",
     "TestLigneOptimise"
   ]

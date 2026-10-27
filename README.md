@@ -37,7 +37,8 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 - Desvios locais, regiões naturais e controle de navegação em Python, ligados à busca geral original emulada.
 - Quatro trajetos com obstáculos e nova colisão durante a rota conferidos com as rotinas originais.
 - Teste de linha e otimização de rotas traduzidos para Python e integrados à busca em um backend opcional.
-- 129 testes passando, com 31.118 execuções x86 delimitadas; o teste do despachante superior substitui suas etapas internas.
+- Preparação/ajuste do destino, inspeção inicial e seleção dos candidatos traduzidos; construção dos contornos ainda parcial.
+- 144 testes passando, com 32.623 execuções x86 delimitadas; o teste do despachante superior substitui suas etapas internas.
 
 ## Leitura recomendada
 
@@ -56,6 +57,7 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 13. [Avanço físico e mensagens de chegada](documentacao/AVANCO_CHEGADA.md).
 14. [Navegação integrada e desvios de obstáculos](documentacao/NAVEGACAO.md).
 15. [Otimização de caminhos reconstruída](documentacao/OTIMIZACAO_CAMINHOS.md).
+16. [Preparação do destino e etapas dos candidatos](documentacao/PREPARACAO_CANDIDATOS.md).
 
 ## Reproduzir
 
@@ -99,9 +101,9 @@ Para percorrer um trajeto com obstáculo, execute
 original emulada, use `python3 ferramentas/demonstrar_desvios.py --original`.
 Os relatórios distinguem destino solicitado, destino efetivo e posição final;
 o término da ordem também pode resultar de cancelamento por falta de passagem.
-Use `--misto` para executar a busca com `OptimiseChemin` e `TestLigneOptimise`
-traduzidos para Python. A preparação e a geração dos candidatos ainda dependem
-do original emulado.
+Use `--misto` para executar preparação, início/seleção dos candidatos, otimização
+e serialização em Python. O corpo que constrói os percursos pelos contornos ainda
+depende do original emulado.
 
 ## Organização
 

@@ -56,6 +56,9 @@ def executar_cenario(nome,solucionador=None,limite=1200):
                 buscas=m.historico_navegacao,eventos=eventos,tarefas_ativas_ao_final=maquina.ativas)
     if solucionador is not None and hasattr(solucionador.bancada, 'otimizacoes_python'):
         resultado['otimizacoes_python'] = solucionador.bancada.otimizacoes_python
+        resultado['preparacoes_python'] = solucionador.bancada.preparacoes_python
+        resultado['inicios_candidatos_python'] = solucionador.bancada.inicios_candidatos_python
+        resultado['escolhas_python'] = solucionador.bancada.escolhas_python
     return resultado
 
 
@@ -63,11 +66,11 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     modo = parser.add_mutually_exclusive_group()
     modo.add_argument('--original',action='store_true',help='Habilita a busca geral original em Unicorn/JIT')
-    modo.add_argument('--misto',action='store_true',help='Busca original com otimização reconstruída em Python')
+    modo.add_argument('--misto',action='store_true',help='Preparação, início/seleção dos candidatos e otimização em Python')
     args=parser.parse_args()
     if args.original or args.misto:
         if args.misto:
-            from solucionador_misto import SolucionadorComOtimizacaoPython as Solucionador
+            from solucionador_misto import SolucionadorParcialPython as Solucionador
         else:
             from solucionador_original import SolucionadorOriginal as Solucionador
         resultados=[executar_cenario(n,Solucionador()) for n in ('obstaculo','parede_com_passagem','sem_passagem','destino_bloqueado')]
@@ -77,8 +80,8 @@ def main():
            busca_geral='Chemin_Verouille/CheminCalcul originais emulados' if args.original else 'não necessária neste cenário local',
            algoritmo_geral_traduzido=False,cenarios=resultados)
     if args.misto:
-        r['busca_geral'] = 'Chemin_Verouille/CheminCalcul originais emulados; otimização em Python'
-        r['rotinas_traduzidas'] = ['OptimiseChemin', 'TestLigneOptimise']
+        r['busca_geral'] = 'Preparação, início/seleção dos candidatos, otimização e serialização em Python; contorno/construção dos candidatos originais emulados'
+        r['rotinas_traduzidas'] = ['Chemin_Verouille', 'CheminCalcul: início/seleção/serialização', 'OptimiseChemin', 'TestLigneOptimise']
     nome = 'desvios-misto.json' if args.misto else ('desvios-original.json' if args.original else 'desvios-local.json')
     destino=Path(__file__).resolve().parents[1]/'relatorios'/nome
     destino.write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

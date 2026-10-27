@@ -13,8 +13,10 @@ uma tradução completa de `CheminCalcul` ou evidência suficiente para chamá-l
 A*. O executável Windows não é iniciado; a bancada usa memória sintética,
 intervalos de código declarados e limites de execução.
 
-O backend opcional `SolucionadorComOtimizacaoPython` já substitui o teste de
-linha e a otimização pelas traduções Python. Veja
+O backend opcional `SolucionadorParcialPython` já traduz preparação, ajuste,
+inspeção inicial, seleção, teste de linha, otimização e serialização. O nome
+anterior `SolucionadorComOtimizacaoPython` continua disponível como alias. Veja
+[PREPARACAO_CANDIDATOS.md](PREPARACAO_CANDIDATOS.md) e
 [OTIMIZACAO_CAMINHOS.md](OTIMIZACAO_CAMINHOS.md) para o contrato, a comparação
 com a referência e as partes da busca que ainda continuam originais.
 
@@ -29,7 +31,7 @@ python3 ferramentas/demonstrar_desvios.py
 # Inclui parede com passagem, parede fechada e destino bloqueado.
 python3 ferramentas/demonstrar_desvios.py --original
 
-# Busca original com teste de linha e otimização em Python.
+# Preparação, início/seleção dos candidatos e otimização em Python.
 python3 ferramentas/demonstrar_desvios.py --misto
 
 # Suíte comum e suíte diferencial opcional.
@@ -169,8 +171,9 @@ resultado 1 entregue após esses cancelamentos.
 ## Validação e lacunas
 
 A etapa inicial de navegação passou com **119 testes e 27.230 execuções x86**.
-Com a otimização traduzida, a suíte possui **129 testes e 31.118 execuções
-x86 delimitadas**, incluindo 26 chamadas dos backends de navegação, sem testes ignorados. A execução
+Com a preparação e as etapas dos candidatos, a suíte possui **144 testes e
+32.623 execuções x86 delimitadas**, incluindo 205 chamadas dos backends de
+navegação, sem testes ignorados. A execução
 sem emulação registra explicitamente os testes opcionais ignorados.
 
 Os testes diferenciais cobrem os 26 tipos, oito direções de deslocamento,
@@ -193,7 +196,8 @@ usa paradas declaradas nos pontos que excluem animação contínua e som, como
 o coordenador Python; não é uma execução do laço inteiro do jogo.
 
 O teste de linha e a otimização posterior já têm tradução independente.
-Continuam pendentes a preparação/ajuste de destino e a geração/seleção de candidatos,
+Preparação/ajuste e início/seleção dos candidatos também foram traduzidos.
+Continuam pendentes a construção/contorno dos dois candidatos,
 a grade auxiliar de estruturas codificadas com `0x8000`, os efeitos de
 atropelamento, tráfego com várias unidades, mapas reais inicializados por inteiro,
 animação contínua, som e validação numa partida. O backend recusa estruturas

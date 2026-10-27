@@ -1,7 +1,7 @@
 {
   "python": "3.9.6",
   "emulacao_habilitada": false,
-  "testes": 129,
+  "testes": 144,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -239,6 +239,34 @@
     },
     {
       "teste": "test_emulacao_otimizacao.DiferencialOtimizacao.test_otimizacao_lacos_cauda_e_rotas_deterministicas",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_preparacao.DiferencialPreparacao.test_aneis_mapas_retangulares_e_mascaras",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_preparacao.DiferencialPreparacao.test_busca_parcial_python_26_tipos_nos_tres_mapas",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_preparacao.DiferencialPreparacao.test_inicio_candidatos_tipos_direcoes_obstaculos_naturais",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_preparacao.DiferencialPreparacao.test_inicio_ocupantes_aliancas_e_pegadas",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_preparacao.DiferencialPreparacao.test_preparacao_26_tipos_destinos_bloqueados_e_bordas",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_preparacao.DiferencialPreparacao.test_regioes_preservadas_e_flags",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_preparacao.DiferencialPreparacao.test_selecao_custos_desempates_flags_e_contadores_inconsistentes",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {

@@ -14,6 +14,9 @@ com a busca geral original fornecida por um backend explícito. O movimento
 já percorre uma passagem ao redor de uma parede e entrega a mensagem à tarefa.
 O teste de linha e a otimização posterior agora estão traduzidos e podem ser
 usados pelo backend misto de [OTIMIZACAO_CAMINHOS.md](OTIMIZACAO_CAMINHOS.md).
+Preparação/ajuste e início/seleção dos candidatos estão descritos em
+[PREPARACAO_CANDIDATOS.md](PREPARACAO_CANDIDATOS.md). O contorno que constrói
+os dois percursos ainda depende do original emulado.
 
 ## Fluxo confirmado
 
@@ -162,7 +165,8 @@ limites do mapa, adjacência e ausência das células bloqueadas nessas saídas.
 
 A implementação Python cobre as primitivas descritas, componentes naturais,
 movimento direto, consumo, nova busca, `TestLigneOptimise` e `OptimiseChemin`,
-mas não o corpo completo de `0x42f214` ou o ajuste de destino. O backend original permite
+assim como a preparação/ajuste e o início/seleção dos candidatos, mas não o corpo
+de construção/contorno em `0x42f214`. O backend original permite
 testar essa integração enquanto a tradução independente continua. Os próximos
 passos são traduzir o solucionador, preparar construções e suas grades
 auxiliares, ampliar os testes de tráfego e inicializar mapas reais.

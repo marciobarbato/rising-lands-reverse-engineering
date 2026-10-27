@@ -160,7 +160,26 @@ executando as funções originais. O novo método `retomar` conserva pilha e
 registradores de um checkpoint, aplica os mesmos limites da execução normal
 e conta o trecho retomado como uma execução delimitada. Não fornece APIs Windows.
 
-A suíte completa possui 129 testes aprovados e 31.118 execuções delimitadas,
-incluindo 26 dos backends de navegação. A parcela do backend é separada no JSON.
+Na etapa de otimização, a suíte passou com 129 testes e 31.118 execuções delimitadas.
+A contagem atual está em `relatorios/validacao-emulada.json`, com a parcela
+dos backends separada no JSON.
 Os cinco trajetos do teste misto comparam o estado após cada atualização, até a
 entrega da mensagem e retomada da tarefa. Veja [OTIMIZACAO_CAMINHOS.md](OTIMIZACAO_CAMINHOS.md).
+
+## Preparação e candidatos
+
+`bancada_preparacao.py` compara `Chemin_Verouille`, a inspeção inicial e a escolha
+dos candidatos com as instruções originais. Os testes partem da mesma memória
+anterior, conservam dados fora das escritas definidas e comparam contextos,
+regiões, registros de ocupantes, buffers e contadores, incluindo os casos
+inconsistentes do original.
+
+O backend parcial agora substitui preparação, inspeção inicial, seleção,
+otimização e serialização por Python. O intervalo central de construção e
+contorno continua original emulado. A referência continua executando todas
+essas etapas originais; a comparação integrada cobre os 26 tipos em três mapas
+e os trajetos até as mensagens. Detalhes em
+[PREPARACAO_CANDIDATOS.md](PREPARACAO_CANDIDATOS.md).
+
+A suíte completa possui **144 testes aprovados e 32.623 execuções x86 delimitadas**,
+incluindo 205 chamadas dos backends de navegação, sem testes ignorados.
