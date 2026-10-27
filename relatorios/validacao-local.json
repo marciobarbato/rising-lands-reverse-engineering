@@ -1,7 +1,7 @@
 {
   "python": "3.9.6",
   "emulacao_habilitada": false,
-  "testes": 92,
+  "testes": 104,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -63,6 +63,38 @@
     },
     {
       "teste": "test_emulacao.DiferencialX86.test_vizinhos_interior_bordas_e_direcoes_pares",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_avanco.DiferencialAvanco.test_chegada_visao_ocupacao_tipos_e_donos",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_avanco.DiferencialAvanco.test_fadiga_acumula_consume_provisao_e_preserva_overflow",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_avanco.DiferencialAvanco.test_giro_completo_e_campo_auxiliar_dos_tipos_12_15",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_avanco.DiferencialAvanco.test_notificacao_acorda_tarefa_sucesso_e_falha",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_avanco.DiferencialAvanco.test_payload_cache_e_filtros_de_notificacao",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_avanco.DiferencialAvanco.test_prefixo_e_conclusao_da_ordem",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_avanco.DiferencialAvanco.test_rota_duas_celulas_tarefa_e_mensagem_com_chamadas_originais",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_avanco.DiferencialAvanco.test_visao_bordas_sobreposicao_cores_e_desconto",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {

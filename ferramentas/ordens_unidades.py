@@ -9,7 +9,7 @@ from dataclasses import dataclass
 PASSO = 276
 BASE_GRUPOS = 0x51a9e0
 OPERACOES = frozenset(('V_DeplacerUnite', 'V_DeplaceGroupe',
-                       'I_DonneTypeUnite', 'B_TestUniteFaitRien'))
+                       'I_DonneTypeUnite', 'B_TestUniteFaitRien', 'I_AttenteMessageGroupe'))
 
 
 @dataclass
@@ -147,6 +147,15 @@ class MundoUnidades:
                 self.definir_movimento(indice, destino)
             indice = self.palavra(indice, 0x108)
             self.unidade_em_iteracao = indice
+        return 1
+
+    def aguardar_mensagem_grupo(self, maquina, tarefa, grupo, mascara):
+        """iagMessSetWait, 0x4841f4; contador zero aguarda evento externo."""
+        if not 0 <= grupo < 100:
+            raise ValueError('Grupo fora da tabela reconstruída')
+        struct.pack_into('<I', self.grupos, grupo * 32 + 0x1c, mascara & 0xffffffff)
+        struct.pack_into('<I', self.grupos, grupo * 32 + 8, tarefa)
+        maquina.suspender(tarefa)
         return 1
 
     def executar_operacao(self, nome, argumentos):

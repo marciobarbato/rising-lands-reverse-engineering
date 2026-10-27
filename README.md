@@ -32,7 +32,9 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 - Máquina parcial de tarefas com criação, espera, subtarefas, retomada e liberação verificadas sem substituir chamadas.
 - Ordens individuais e de grupo ligadas às tarefas, com efeitos sobre unidades, busca e referências de estruturas.
 - Demonstração reproduzível de cinco cenários, comparada com as chamadas originais.
-- 92 testes passando, com 22.851 execuções x86 delimitadas; o teste do despachante superior substitui suas etapas internas.
+- Avanço físico em rota fornecida, ocupação, visão/minimapa e conclusão da ordem reconstruídos.
+- Mensagens por estado ligadas à espera/retomada de tarefas, com um trajeto de duas células conferido no x86.
+- 104 testes passando, com 23.501 execuções x86 delimitadas; o teste do despachante superior substitui suas etapas internas.
 
 ## Leitura recomendada
 
@@ -48,6 +50,7 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 10. [Busca de caminhos e ocupação](documentacao/CAMINHOS.md) e [despacho da IA](documentacao/IA.md).
 11. [Símbolos franceses e formato RULE](documentacao/SIMBOLOS.md) e [máquina de tarefas](documentacao/TAREFAS.md).
 12. [Efeitos das ordens de movimento](documentacao/ORDENS_MOVIMENTO.md).
+13. [Avanço físico e mensagens de chegada](documentacao/AVANCO_CHEGADA.md).
 
 ## Reproduzir
 

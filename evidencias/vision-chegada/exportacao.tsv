@@ -1,0 +1,12 @@
+entrada	nome	resultado
+004766f0	TerrainEstDecouvert	OK
+0047670a	DecouvreCase	OK
+00476951	TerrainEstIllumine	OK
+00476968	IllumineCase	OK
+00476adc	EteintCase	OK
+004765f4	TerrainGetColor	OK
+0046003b	PlayerGetColor	OK
+0047954c	Distance	OK
+0047da39	iaProbSleep	OK
+00483ec8	iagMessDispatchWith	OK
+00448194	EnginEnArret	OK

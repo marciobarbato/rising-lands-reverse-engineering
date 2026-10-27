@@ -117,11 +117,25 @@ class MaquinaTarefas:
         self.livres[1] += 1
         self.ativas -= 1
 
+    def suspender(self, indice, contador=0):
+        """iaProbSleep, 0x47da39."""
+        self.byte(indice, 0x5e, 1)
+        self.gravar(indice, 0x14, contador)
+
+    def receber_resultado(self, indice, resultado):
+        """iaProbReturnTo, 0x47da54: habilita retomada por mensagem."""
+        self.byte(indice, 0x5e, 0)
+        self.byte(indice, 0x5f, 1)
+        self.gravar(indice, 0x14, 0)
+        self.gravar(indice, 0x54, resultado)
+
     def executar_operacao(self, nome, argumentos, jogador, indice):
         a = argumentos
         if nome in OPERACOES_UNIDADES:
             if self.mundo is None:
                 raise NotImplementedError('Estado das unidades não fornecido para ' + nome)
+            if nome == 'I_AttenteMessageGroupe':
+                return self.mundo.aguardar_mensagem_grupo(self, indice, a[0], a[1])
             return self.mundo.executar_operacao(nome, a)
         if nome == 'V_Attendre':
             self.byte(indice, 0x5e, 1)

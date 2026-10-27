@@ -28,7 +28,10 @@
 - Ordens individuais e de grupo reconstruídas, incluindo ResetOrdre e efeitos auxiliares.
 - Consultas de tipo e estado ocioso ligadas à máquina de tarefas.
 - Cinco demonstrações de tarefas com efeitos, também executadas no x86 original.
-- 92 testes aprovados, incluindo 22.851 execuções na bancada, sem iniciar o jogo.
+- Avanço físico em terreno comum: ocupação, visão, minimapa, rota e fadiga com reservas.
+- Conclusão de movimento no estado 7 e mensagens por mudança de estado.
+- Espera/retomada da tarefa de grupo conectada a um trajeto de duas células.
+- 104 testes aprovados, incluindo 23.501 execuções na bancada, sem iniciar o jogo.
   O teste do despachante superior substitui etapas; os testes da máquina de tarefas
   e das operações suportadas executam suas chamadas originais.
 
@@ -38,7 +41,7 @@
 |---|---|---|
 | Caminhos e colisão | Primitivas reconstruídas e oráculo x86 em nove cenários | Traduzir busca/pós-processamento, gerar regiões e integrar movimento direto e consumo |
 | IA | Máquina de tarefas e ordens de movimento individuais/de grupo com efeitos confirmados | Completar seleção espacial da tarefa 16, mensagens e operações de economia/guerra |
-| Movimento e tempo | Direções, giro, prefixo, parâmetros e ciclo antes do desenho confirmados | Medir taxa efetiva, descontos, chegada completa, ocupação e visão |
+| Movimento e tempo | Avanço, ocupação, visão/minimapa, conclusão e mensagem de grupo comparados ao x86 | Integrar desvios, despacho completo, fome/armadilhas e medir a taxa efetiva |
 | Combate | Aritmética parcial de dano, consulta de proximidade e cura confirmadas | Alvos, alcance, cadência, tecnologias e efeitos de morte |
 | Economia | Custos e blocos de recursos | Associar IDs internos, produção, consumo e filas |
 | Construções | Primeiro bloco indexado do ETA | Identificar tipos, campos, posição e estados |
@@ -59,8 +62,10 @@ Para a IA, seguir [SIMBOLOS.md](SIMBOLOS.md) e [TAREFAS.md](TAREFAS.md).
 A tabela `0x514910` vem de `RISING.RUL`; seus 140 nomes foram resolvidos pelo SBL.
 As operações `V_DeplacerUnite` e `V_DeplaceGroupe` já estão integradas conforme
 [ORDENS_MOVIMENTO.md](ORDENS_MOVIMENTO.md). Completar o prefixo espacial 422..426
-da tarefa 16 e o avanço da unidade após a ordem, incluindo mensagens. Ainda é
-necessário medir a taxa efetiva do ciclo identificado
+da tarefa 16 e a busca de desvios. O avanço, a conclusão e a retomada por mensagem
+já estão conectados conforme [AVANCO_CHEGADA.md](AVANCO_CHEGADA.md), para uma rota
+fornecida em terreno comum. Integrar fome/armadilhas e despachos adicionais de
+mensagem. Ainda é necessário medir a taxa efetiva do ciclo identificado
 em [CADENCIA.md](CADENCIA.md).
 Uma execução controlada do jogo poderá confrontar movimento, visibilidade e
 combate numa partida. Ainda não há runtime Windows preparado nem validação

@@ -1,0 +1,14 @@
+; SHA-256 da cópia normalizada: 26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0
+0047da54  PUSH EBX
+0047da55  MOV EBX,EDX
+0047da57  MOV EDX,EAX
+0047da59  SHL EAX,0x2
+0047da5c  SUB EAX,EDX
+0047da5e  SHL EAX,0x5
+0047da61  ADD EAX,0x512320
+0047da66  MOV byte ptr [EAX + 0x5e],0x0
+0047da6a  MOV byte ptr [EAX + 0x5f],0x1
+0047da6e  MOV dword ptr [EAX + 0x14],0x0
+0047da75  MOV dword ptr [EAX + 0x54],EBX
+0047da78  POP EBX
+0047da79  RET

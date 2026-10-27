@@ -187,6 +187,7 @@ não foi executado nesse experimento. A tarefa 16 completa ainda requer as consu
 de construções/cidade e a seleção de célula livre descritas em [TAREFAS.md](TAREFAS.md).
 
 A suíte inteira passou com **92 testes e 22.851 execuções x86 delimitadas**.
-A próxima integração é avançar a simulação da unidade após a emissão, incluindo
-colisão, ocupação, visão e mensagens de conclusão. Os nomes de campos ainda
-sem significado confirmado permanecem como offsets.
+A integração seguinte já conecta avanço, ocupação, visão/minimapa, conclusão e
+retomada por mensagem em [AVANCO_CHEGADA.md](AVANCO_CHEGADA.md), com rota fornecida.
+A contagem de 92 testes acima registra esta etapa de emissão; a suíte atual tem
+104 testes. Os nomes de campos sem significado confirmado permanecem como offsets.

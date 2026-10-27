@@ -85,13 +85,17 @@ controle de fluxo; o corpo real de `0x482936` sempre retorna zero.
 As regras de aliança e de interação local entre unidades foram executadas
 sem substituição das chamadas e estão descritas em [CAMINHOS.md](CAMINHOS.md).
 Há ainda uma rotina por unidade em `0x483ed7`, cujo nome original é
-`iagMessTestSendMessageEngin`; seu mecanismo de mensagens ainda precisa ser traduzido.
+`iagMessTestSendMessageEngin`. Seu caminho de mensagens de grupo já foi traduzido
+em [AVANCO_CHEGADA.md](AVANCO_CHEGADA.md); os despachos administrativos adicionais
+permanecem pendentes.
 
 ## Próximo passo
 
 As ordens individuais e de grupo já produzem efeitos conforme
 [ORDENS_MOVIMENTO.md](ORDENS_MOVIMENTO.md). Completar agora as consultas espaciais
-do tipo 16, o avanço da unidade e suas mensagens. Uma tarefa de recursos permitirá
+do tipo 16 e os despachos adicionais de mensagem. O avanço em rota fornecida e a
+retomada de uma tarefa por chegada já estão descritos em [AVANCO_CHEGADA.md](AVANCO_CHEGADA.md).
+Uma tarefa de recursos permitirá
 confrontar produção, estoque e disponibilidade de unidades. Os nomes
 originais das etapas são `iagUnitNoyau`, `iagVilleNoyau`, `iagRessNoyau`,
 `iagWarNoyau` e `iaSolver`. As assinaturas Watcom inferidas pelo Ghidra ainda

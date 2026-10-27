@@ -2,8 +2,9 @@
 
 Implementação independente: [`movimento.py`](../ferramentas/movimento.py).
 Os testes diferenciais comparam cada primitiva com instruções do EXE original
-em memória emulada. Ainda não é um sistema completo de movimento: colisões,
-rota, ocupação, visão e o relógio que chama essas rotinas permanecem parciais.
+em memória emulada. A etapa posterior em [AVANCO_CHEGADA.md](AVANCO_CHEGADA.md)
+implementa avanço, ocupação, visão/minimapa e conclusão para uma rota fornecida.
+Busca de desvios, despacho completo e taxa efetiva continuam parciais.
 
 ## Direção e vizinhança
 

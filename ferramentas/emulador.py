@@ -74,7 +74,9 @@ class BancadaX86:
     def ler_unidade(self, indice=0):
         return bytes(self.cpu.mem_read(UNIDADES + indice * 276, 276))
 
-    def executar(self, entrada, intervalos, registradores=None, parada=RETORNO, pilha=None):
+    def executar(self, entrada, intervalos, registradores=None, parada=RETORNO, pilha=None, limite_instrucoes=20000):
+        if not 1 <= limite_instrucoes <= 1000000:
+            raise ValueError('Limite de instruções deve estar entre 1 e 1000000')
         self.execucoes += 1
         self.permitidos = intervalos
         self.paradas = {parada} if isinstance(parada, int) else set(parada)
@@ -90,7 +92,7 @@ class BancadaX86:
             self.cpu.mem_write(PILHA + 0x8000 + offset, dados)
         for nome, valor in (registradores or {}).items():
             self.cpu.reg_write(getattr(x86, 'UC_X86_REG_' + nome.upper()), valor & 0xffffffff)
-        self.cpu.emu_start(entrada, RETORNO, timeout=1_000_000, count=20000)
+        self.cpu.emu_start(entrada, RETORNO, timeout=1_000_000, count=limite_instrucoes)
         if self.cpu.reg_read(x86.UC_X86_REG_EIP) not in self.paradas:
             raise RuntimeError('Trecho não alcançou a parada dentro do limite da bancada')
         return {nome: self.cpu.reg_read(getattr(x86, 'UC_X86_REG_' + nome))

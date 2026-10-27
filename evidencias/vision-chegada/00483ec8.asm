@@ -1,0 +1,6 @@
+; SHA-256 da cópia normalizada: 26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0
+00483ec8  SHL EAX,0x5
+00483ecb  ADD EAX,0x51a9e0
+00483ed0  JZ 0x00483ed6
+00483ed2  MOV word ptr [EAX + 0x16],DX
+00483ed6  RET

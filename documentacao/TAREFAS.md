@@ -165,6 +165,7 @@ subtarefas com três tipos de conclusão, aliases constantes, missão em oito bi
 reutilização e uma regra do arquivo real. A resolução dos 140 nomes também foi
 conferida contra o runtime original.
 
-Os primeiros efeitos de mundo implementados são as ordens de movimento individuais
-e de grupo. Ainda faltam o avanço físico integrado, as mensagens assíncronas de
-grupos/construções, tarefas de economia/guerra completas e a validação em partida.
+As ordens de movimento já se ligam ao avanço em rota fornecida e à mensagem de
+grupos que retoma a tarefa suspensa; veja [AVANCO_CHEGADA.md](AVANCO_CHEGADA.md).
+Continuam pendentes seleção espacial completa, despachos administrativos adicionais,
+mensagens de construções, tarefas de economia/guerra completas e validação em partida.

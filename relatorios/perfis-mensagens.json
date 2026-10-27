@@ -1,0 +1,144 @@
+{
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "origem": "RISING.EXE, tabela em 0x498b38; registros de 12 bytes; índices 0 e 9 nulos.",
+  "perfis": [
+    [],
+    [
+      {
+        "tipo": 7,
+        "estado": 11,
+        "subestado": 1,
+        "despacho_unidade": 255,
+        "bit": 2,
+        "tamanho_resultado": 2,
+        "offset_resultado": 192,
+        "despacho_estrutura": 255,
+        "tamanho_estrutura": 0,
+        "offset_estrutura": 0
+      },
+      {
+        "tipo": 7,
+        "estado": 7,
+        "subestado": 255,
+        "despacho_unidade": 255,
+        "bit": 3,
+        "tamanho_resultado": 0,
+        "offset_resultado": 0,
+        "despacho_estrutura": 255,
+        "tamanho_estrutura": 0,
+        "offset_estrutura": 0
+      }
+    ],
+    [
+      {
+        "tipo": 9,
+        "estado": 14,
+        "subestado": 255,
+        "despacho_unidade": 65,
+        "bit": 3,
+        "tamanho_resultado": 0,
+        "offset_resultado": 0,
+        "despacho_estrutura": 255,
+        "tamanho_estrutura": 0,
+        "offset_estrutura": 0
+      }
+    ],
+    [
+      {
+        "tipo": 7,
+        "estado": 7,
+        "subestado": 255,
+        "despacho_unidade": 255,
+        "bit": 3,
+        "tamanho_resultado": 0,
+        "offset_resultado": 0,
+        "despacho_estrutura": 255,
+        "tamanho_estrutura": 0,
+        "offset_estrutura": 0
+      }
+    ],
+    [
+      {
+        "tipo": 9,
+        "estado": 14,
+        "subestado": 255,
+        "despacho_unidade": 65,
+        "bit": 3,
+        "tamanho_resultado": 0,
+        "offset_resultado": 0,
+        "despacho_estrutura": 1,
+        "tamanho_estrutura": 2,
+        "offset_estrutura": 192
+      }
+    ],
+    [
+      {
+        "tipo": 6,
+        "estado": 7,
+        "subestado": 255,
+        "despacho_unidade": 255,
+        "bit": 3,
+        "tamanho_resultado": 0,
+        "offset_resultado": 0,
+        "despacho_estrutura": 255,
+        "tamanho_estrutura": 0,
+        "offset_estrutura": 0
+      }
+    ],
+    [
+      {
+        "tipo": 6,
+        "estado": 7,
+        "subestado": 255,
+        "despacho_unidade": 255,
+        "bit": 3,
+        "tamanho_resultado": 0,
+        "offset_resultado": 0,
+        "despacho_estrutura": 255,
+        "tamanho_estrutura": 0,
+        "offset_estrutura": 0
+      }
+    ],
+    [
+      {
+        "tipo": 6,
+        "estado": 7,
+        "subestado": 255,
+        "despacho_unidade": 255,
+        "bit": 3,
+        "tamanho_resultado": 0,
+        "offset_resultado": 0,
+        "despacho_estrutura": 255,
+        "tamanho_estrutura": 0,
+        "offset_estrutura": 0
+      }
+    ],
+    [
+      {
+        "tipo": 9,
+        "estado": 14,
+        "subestado": 255,
+        "despacho_unidade": 255,
+        "bit": 3,
+        "tamanho_resultado": 0,
+        "offset_resultado": 0,
+        "despacho_estrutura": 255,
+        "tamanho_estrutura": 0,
+        "offset_estrutura": 0
+      },
+      {
+        "tipo": 7,
+        "estado": 14,
+        "subestado": 255,
+        "despacho_unidade": 255,
+        "bit": 3,
+        "tamanho_resultado": 0,
+        "offset_resultado": 0,
+        "despacho_estrutura": 255,
+        "tamanho_estrutura": 0,
+        "offset_estrutura": 0
+      }
+    ],
+    []
+  ]
+}

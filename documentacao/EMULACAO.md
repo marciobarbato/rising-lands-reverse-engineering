@@ -58,7 +58,7 @@ falhas, erros, motivos de testes ignorados e número de execuções x86 delimita
 | `0x47f927` | 450 cenários de orquestração, com as etapas internas substituídas |
 | `0x43b30b`, `0x42f214`, `0x42e890` | Nove cenários sintéticos, chamadas originais sem substituição |
 
-Cada chamada tem limite de um segundo e 20.000 instruções; um gancho recusa
+Cada chamada tem limite de um segundo e, por padrão, 20.000 instruções; um gancho recusa
 saltos para fora dos trechos autorizados. O verificador exige alcançar uma
 parada declarada, de modo que timeout ou limite de instruções não contam como sucesso.
 As comparações usam bytes do original, não assembly recompilado a partir da
@@ -70,7 +70,7 @@ será necessário confrontar uma partida real para validar a simulação integra
 
 ## Escopo das novas bancadas
 
-A suíte possui 92 testes; a execução emulada registra 22.851 chamadas delimitadas.
+A suíte possui 104 testes; a execução emulada registra 23.501 chamadas delimitadas.
 O teste de IA em `test_emulacao_caminhos_ia.py` intercepta apenas sete endereços
 explícitos de etapas e injeta retornos. Valida o despachante e seus argumentos,
 mas não o conteúdo dessas etapas. Essa diferença é deliberada e registrada em
@@ -108,3 +108,20 @@ A extensão acrescentou 1.584 chamadas à suíte. A demonstração opcional gera
 relatório separado com outras 15 chamadas; elas não entram na contagem da suíte.
 Veja [ORDENS_MOVIMENTO.md](ORDENS_MOVIMENTO.md) para casos e limites. A emissão
 da ordem não executa a física, visão ou chegada da unidade.
+
+## Avanço físico, visão e mensagens
+
+`bancada_avanco.py` acrescenta os intervalos de avanço, ocupação, visão, minimapa,
+fadiga, conclusão do estado 2, percurso da rota e entrega de mensagens. Para
+as chamadas mais longas de visão/percurso, declara explicitamente um máximo de
+1.000.000 de instruções, mantendo o limite de um segundo e a lista de intervalos.
+As demais chamadas conservam o padrão de 20.000 instruções.
+
+Os oito testes diferenciais novos e quatro testes do coordenador acrescentaram
+650 chamadas à suíte. A comparação do trajeto completo usa as funções originais
+em sequência, com paradas declaradas nos ramos do despacho ainda não traduzidos;
+não executa o ciclo de partida inteiro. Não substitui chamadas internas.
+
+`demonstrar_chegada.py --emular` gera um relatório separado com 104 execuções,
+que não entram na contagem da suíte. Veja [AVANCO_CHEGADA.md](AVANCO_CHEGADA.md)
+para a distinção entre célula atravessada, destino final e mensagem recebida.
