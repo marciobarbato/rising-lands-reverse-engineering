@@ -63,11 +63,31 @@ TRECHOS = {
     'InfligeDegat': (0x450874, 0x4510dd),
     'EpilogueCible': (0x4462aa, 0x4462b0),
     'EpilogueProjectile': (0x46fc09, 0x46fc0f),
+    'EnginSetTypeCaract': (0x457350, 0x457b87),
+    'EnginSetType': (0x457b87, 0x457e0c),
+    'EpilogueCaracteristicas': (0x4570f0, 0x4570f4),
+    'EnginTypeGetCapacite': (0x4475ac, 0x4475ef),
+    'EpilogueCapacidade': (0x4474c5, 0x4474c7),
+    'LoadEngin': (0x479d10, 0x479d7f),
+    'SauveEngin': (0x479d7f, 0x479e12),
+    'CreerEngin': (0x457e6c, 0x458088),
+    'ResetOrdre': (0x44357c, 0x443688),
+    'SetEnginLanceSortilege': (0x4459c4, 0x445a36),
+    'EnginRestaureEtat_magia': (0x45315f, 0x453232),
+    'EnginAlloc': (0x441a1b, 0x441ade),
+    'MemAlloc': (0x467ea6, 0x467ecb),
+    'LoadEngin_missao': (0x46acbf, 0x46b01e),
+    'LoadEnginGame': (0x46b01e, 0x46b119),
+    'SauveEngin_game': (0x46b119, 0x46b1fb),
+    'ExisteEngin_EnginGetType': (0x441fff, 0x442045),
+    'TypeEnginEstMonstre': (0x4422dd, 0x4422eb),
+    'EpiloguePredicadoMonstre': (0x4422da, 0x4422dd),
 }
 DADOS = ((0x446aa4, 0x446b0c),)
 
 
-def main():
+def ler_imagem():
+    """Imagem somente leitura; valida o hash antes de qualquer extração."""
     dados = (REPO.parent / 'source/cd/INSTALHD/RISING.EXE').read_bytes()
     if hashlib.sha256(dados).hexdigest() != HASH:
         raise ValueError('EXE incompatível')
@@ -80,6 +100,11 @@ def main():
         rva, tam, off = struct.unpack_from('<III', dados, cab + 12)
         if off and tam:
             imagem[rva:rva + tam] = dados[off:off + tam]
+    return imagem
+
+
+def main():
+    imagem = ler_imagem()
     cs = Cs(CS_ARCH_X86, CS_MODE_32)
     saida = PASTA / 'evidencias'
     saida.mkdir(exist_ok=True)
@@ -87,6 +112,8 @@ def main():
     for endereco, n in ((0x4479b4, 4), (0x451904, 4), (0x45189c, 26)):
         valores = struct.unpack_from('<' + 'I' * n, imagem, endereco - 0x400000)
         manifesto['despachos_ataque'][f'0x{endereco:08x}'] = [f'0x{v:08x}' for v in valores]
+    manifesto['despacho_caracteristicas'] = [f'0x{v:08x}' for v in
+        struct.unpack_from('<26I', imagem, 0x4572e8 - 0x400000)]
     fontes_saidas = {2: (0x496af0, 8), 8: (0x496b10, 8), 18: (0x496b30, 8),
         23: (0x496b50, 8), 24: (0x496b70, 8), 21: (0x496b90, 8),
         22: (0x496bb0, 8), 15: (0x496bd0, 32), 12: (0x496c50, 32)}

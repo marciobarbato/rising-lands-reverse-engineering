@@ -1,6 +1,6 @@
 {
   "sucesso": true,
-  "testes": 52,
+  "testes": 67,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -142,6 +142,46 @@
     },
     {
       "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestados_construcoes_com_consultas_originais",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_caracteristicas_todos_tipos_preservacao_e_escritas",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_caracterizar_sequencias_de_trocas_preservam_valores",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_definir_tipo_registro_inteiro_busca_e_callbacks",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_inicializacao_seguida_de_disparo_original",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_mago_todos_modificadores_e_donos",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_ordem_de_ataque_original_preserva_espera",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_pedido_de_load_por_id_sem_filtro_de_subestado",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_pedido_leitura_game_tamanho_do_cabecalho",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_pos_carga_game_preserva_campos_e_nao_recaracteriza",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_pos_carga_missao_fases_2_3_preservadas",
       "motivo": "Opcional: RISING_EMULAR=1"
     }
   ],
@@ -355,6 +395,66 @@
     {
       "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestados_construcoes_com_consultas_originais",
       "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_inicializacao_ataque.ContratosInicializacao.test_carga_missao_sobrescreve_mago_e_recarga_game_preserva",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_inicializacao_ataque.ContratosInicializacao.test_mago_modificador_e_wrap",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_inicializacao_ataque.ContratosInicializacao.test_ordem_de_tipo_reseta_espera_preserva_fase",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_inicializacao_ataque.ContratosInicializacao.test_pedido_salvo_inclui_campos_sem_normalizar",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_inicializacao_ataque.ContratosInicializacao.test_preserva_campos_ausentes_e_subestado",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_caracteristicas_todos_tipos_preservacao_e_escritas",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_caracterizar_sequencias_de_trocas_preservam_valores",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_definir_tipo_registro_inteiro_busca_e_callbacks",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_inicializacao_seguida_de_disparo_original",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_mago_todos_modificadores_e_donos",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_ordem_de_ataque_original_preserva_espera",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_pedido_de_load_por_id_sem_filtro_de_subestado",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_pedido_leitura_game_tamanho_do_cabecalho",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_pos_carga_game_preserva_campos_e_nao_recaracteriza",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_pos_carga_missao_fases_2_3_preservadas",
+      "execucoes_x86_delimitadas": 0
     }
   ],
   "limites": {
@@ -374,6 +474,18 @@
     "efeitos": "Callbacks explícitos; não integra física ou dano em Python.",
     "referencia": "Emissão x86 com pool cheio e um slot livre; corpo a corpo sem ocupantes; magia ID255; movimento/balão/áudio param na entrada.",
     "comparacao": "Registro inteiro, contexto de busca e argumentos na pilha/registradores de cada efeito."
+  },
+  "inicializacao": {
+    "rotinas": [
+      "0x457350",
+      "0x457b87"
+    ],
+    "trechos_pos_carga": [
+      "0x46ad8b..0x46b019",
+      "0x46b08f..0x46b0e3"
+    ],
+    "comparacao": "276 bytes, quatro globais de busca e observação das escritas em +79/+7a/+8a/+8b.",
+    "limites": "FileRead não executado; seus pedidos são comparados em checkpoints. Tipos 26..255 só testam o comportamento fora do domínio de tipos válidos."
   },
   "diagnosticos": []
 }

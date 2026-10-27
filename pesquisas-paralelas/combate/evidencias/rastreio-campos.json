@@ -1,0 +1,1760 @@
+{
+  "codigo": {
+    "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+    "sha256_simbolos": "93a69ef9475241b0376818370417e3b1264a687a313b23220570ffd4bec5cb3a",
+    "intervalo": [
+      "0x00401000",
+      "0x00493c00"
+    ],
+    "simbolos": 1995,
+    "instrucoes_decodificadas": 184246,
+    "bytes_skipdata": 214,
+    "metodo": "Varredura linear reiniciada por símbolo, mais candidatos por byte; sem prova geral de fluxo/alias.",
+    "candidatos_escrita": [
+      {
+        "endereco": "0x0041b9f0",
+        "simbolo": "ResetBatiment",
+        "bytes": "66c74078ffff",
+        "instrucao": "mov word ptr [eax + 0x78], 0xffff",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x0041c000",
+        "simbolo": "ResetNova",
+        "bytes": "c6407a00",
+        "instrucao": "mov byte ptr [eax + 0x7a], 0",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x0041c163",
+        "simbolo": "InitBatimentNeutre",
+        "bytes": "c6467a00",
+        "instrucao": "mov byte ptr [esi + 0x7a], 0",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x0041ccce",
+        "simbolo": "BatimentHabitable",
+        "bytes": "66c746780000",
+        "instrucao": "mov word ptr [esi + 0x78], 0",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x0041d11b",
+        "simbolo": "ArreterBatiment",
+        "bytes": "66c74078ffff",
+        "instrucao": "mov word ptr [eax + 0x78], 0xffff",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x0041e1a5",
+        "simbolo": "BatimentRetireColon",
+        "bytes": "66c74078ffff",
+        "instrucao": "mov word ptr [eax + 0x78], 0xffff",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x0041f28d",
+        "simbolo": "DemonteBatiment",
+        "bytes": "66c74678ffff",
+        "instrucao": "mov word ptr [esi + 0x78], 0xffff",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x00421097",
+        "simbolo": "SortieTroupe",
+        "bytes": "66c74278ffff",
+        "instrucao": "mov word ptr [edx + 0x78], 0xffff",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x0042116e",
+        "simbolo": "SortieTroupe",
+        "bytes": "66c74278ffff",
+        "instrucao": "mov word ptr [edx + 0x78], 0xffff",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x00421299",
+        "simbolo": "ApprentissageSortTerminer",
+        "bytes": "66c74378ffff",
+        "instrucao": "mov word ptr [ebx + 0x78], 0xffff",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x0042130e",
+        "simbolo": "ResetHangar",
+        "bytes": "66c74078ffff",
+        "instrucao": "mov word ptr [eax + 0x78], 0xffff",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x004220e5",
+        "simbolo": "CalculReparation",
+        "bytes": "66c74378ffff",
+        "instrucao": "mov word ptr [ebx + 0x78], 0xffff",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x0042283d",
+        "simbolo": "CalculReparation",
+        "bytes": "66c74678ffff",
+        "instrucao": "mov word ptr [esi + 0x78], 0xffff",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x00422c14",
+        "simbolo": "CalculTrajectoire",
+        "bytes": "66c74078ffff",
+        "instrucao": "mov word ptr [eax + 0x78], 0xffff",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x00422ce1",
+        "simbolo": "CalculTrajectoire",
+        "bytes": "66c74078ffff",
+        "instrucao": "mov word ptr [eax + 0x78], 0xffff",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x00423530",
+        "simbolo": "BatimentAjouteMatiere",
+        "bytes": "66895e78",
+        "instrucao": "mov word ptr [esi + 0x78], bx",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x0042553d",
+        "simbolo": "BatimentRepareEngin",
+        "bytes": "c6467a01",
+        "instrucao": "mov byte ptr [esi + 0x7a], 1",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x00425907",
+        "simbolo": "HelipedeTerminer",
+        "bytes": "66c74078ffff",
+        "instrucao": "mov word ptr [eax + 0x78], 0xffff",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x00426048",
+        "simbolo": "CalculTroupe",
+        "bytes": "66c74378ffff",
+        "instrucao": "mov word ptr [ebx + 0x78], 0xffff",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x00426236",
+        "simbolo": "CalculTroupe",
+        "bytes": "66c74078ffff",
+        "instrucao": "mov word ptr [eax + 0x78], 0xffff",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x004265e4",
+        "simbolo": "InitNova",
+        "bytes": "c6467a01",
+        "instrucao": "mov byte ptr [esi + 0x7a], 1",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x0042677f",
+        "simbolo": "BatimentLanceNova",
+        "bytes": "c6407a00",
+        "instrucao": "mov byte ptr [eax + 0x7a], 0",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x00426d1b",
+        "simbolo": "BatimentNextEtape",
+        "bytes": "66c746780000",
+        "instrucao": "mov word ptr [esi + 0x78], 0",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x00426f14",
+        "simbolo": "BatimentNextEtape",
+        "bytes": "66c746780000",
+        "instrucao": "mov word ptr [esi + 0x78], 0",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x0042719f",
+        "simbolo": "BatimentNextEtape",
+        "bytes": "88868b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], al",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x004271d6",
+        "simbolo": "BatimentNextEtape",
+        "bytes": "66c746786400",
+        "instrucao": "mov word ptr [esi + 0x78], 0x64",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x004273b0",
+        "simbolo": "BatimentNextEtape",
+        "bytes": "66894e78",
+        "instrucao": "mov word ptr [esi + 0x78], cx",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x004274a1",
+        "simbolo": "BatimentNextEtape",
+        "bytes": "88868b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], al",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x0042752c",
+        "simbolo": "BatimentNextEtape",
+        "bytes": "88968a000000",
+        "instrucao": "mov byte ptr [esi + 0x8a], dl",
+        "campos": [
+          "0x8a"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x0042761c",
+        "simbolo": "BatimentNextEtape",
+        "bytes": "66c746780000",
+        "instrucao": "mov word ptr [esi + 0x78], 0",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x00427898",
+        "simbolo": "BatimentNextEtape",
+        "bytes": "88868b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], al",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x004278cf",
+        "simbolo": "BatimentNextEtape",
+        "bytes": "66c746786400",
+        "instrucao": "mov word ptr [esi + 0x78], 0x64",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x00427a85",
+        "simbolo": "BatimentNextEtape",
+        "bytes": "66894e78",
+        "instrucao": "mov word ptr [esi + 0x78], cx",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x00427b16",
+        "simbolo": "BatimentNextEtape",
+        "bytes": "88868b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], al",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x00427b8c",
+        "simbolo": "BatimentNextEtape",
+        "bytes": "88968a000000",
+        "instrucao": "mov byte ptr [esi + 0x8a], dl",
+        "campos": [
+          "0x8a"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x00427bac",
+        "simbolo": "BatimentNextEtape",
+        "bytes": "88868a000000",
+        "instrucao": "mov byte ptr [esi + 0x8a], al",
+        "campos": [
+          "0x8a"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x004285ed",
+        "simbolo": "InitRecruteTroupe",
+        "bytes": "c6467a00",
+        "instrucao": "mov byte ptr [esi + 0x7a], 0",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "estrutura de construção, não unidade"
+      },
+      {
+        "endereco": "0x0043f99d",
+        "simbolo": "ScrollDebug",
+        "bytes": "00440079",
+        "instrucao": "add byte ptr [eax + eax + 0x79], al",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "outro objeto ou decodificação não confirmada"
+      },
+      {
+        "endereco": "0x00445a05",
+        "simbolo": "SetEnginLanceSortilege",
+        "bytes": "c6828a00000000",
+        "instrucao": "mov byte ptr [edx + 0x8a], 0",
+        "campos": [
+          "0x8a"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00445ab3",
+        "simbolo": "SetAttaqueEngin",
+        "bytes": "c6828a00000000",
+        "instrucao": "mov byte ptr [edx + 0x8a], 0",
+        "campos": [
+          "0x8a"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00445ad1",
+        "simbolo": "SetAttaqueEngin",
+        "bytes": "c6828a00000000",
+        "instrucao": "mov byte ptr [edx + 0x8a], 0",
+        "campos": [
+          "0x8a"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x004479b7",
+        "simbolo": "AnimAttaqueTermineEngin",
+        "bytes": "00607a",
+        "instrucao": "add byte ptr [eax + 0x7a], ah",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "tabela de saltos interpretada como instrução"
+      },
+      {
+        "endereco": "0x00448cea",
+        "simbolo": "EnginNextCaseChemin",
+        "bytes": "88868b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], al",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00448cf9",
+        "simbolo": "EnginNextCaseChemin",
+        "bytes": "c6868b00000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00448e32",
+        "simbolo": "EnginNextCase",
+        "bytes": "c6868b00000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00448f28",
+        "simbolo": "EnginNextCase",
+        "bytes": "c6868b00000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x004492d9",
+        "simbolo": "EnginDebloqueNextCase",
+        "bytes": "c6858b00000000",
+        "instrucao": "mov byte ptr [ebp + 0x8b], 0",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00449460",
+        "simbolo": "DeplaceEngin",
+        "bytes": "88be8b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], bh",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x004494fc",
+        "simbolo": "DeplaceEngin",
+        "bytes": "fe868b000000",
+        "instrucao": "inc byte ptr [esi + 0x8b]",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00449513",
+        "simbolo": "DeplaceEngin",
+        "bytes": "c6868b00000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044a785",
+        "simbolo": "CalculPiege",
+        "bytes": "c6868b00000014",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0x14",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044a99f",
+        "simbolo": "CalculPiege",
+        "bytes": "88b68b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], dh",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044adac",
+        "simbolo": "CalculConstruireBatiment",
+        "bytes": "c6868b00000014",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0x14",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044b1a0",
+        "simbolo": "CalculConstruireBatiment",
+        "bytes": "c6868b00000032",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0x32",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044b21b",
+        "simbolo": "CalculConstruireBatiment",
+        "bytes": "88ae8b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], ch",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044b2c3",
+        "simbolo": "CalculConstruireBatiment",
+        "bytes": "c6868b00000014",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0x14",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044b75b",
+        "simbolo": "CalculReparer",
+        "bytes": "c6868b00000032",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0x32",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044b8f9",
+        "simbolo": "CalculReparer",
+        "bytes": "88be8b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], bh",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044ba33",
+        "simbolo": "CalculReparer",
+        "bytes": "c6868b00000014",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0x14",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044c0f9",
+        "simbolo": "CalculWorkEngin",
+        "bytes": "888e8b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], cl",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044c175",
+        "simbolo": "CalculWorkEngin",
+        "bytes": "c6868b00000032",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0x32",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044c7d5",
+        "simbolo": "CalculWorkEngin",
+        "bytes": "c6868b0000000a",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0xa",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044c8dd",
+        "simbolo": "CalculWorkEngin",
+        "bytes": "888e8b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], cl",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044c97c",
+        "simbolo": "CalculWorkEngin",
+        "bytes": "88be8b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], bh",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044c9af",
+        "simbolo": "CalculWorkEngin",
+        "bytes": "c6868b0000000a",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0xa",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044d064",
+        "simbolo": "CalculWorkEngin",
+        "bytes": "88ae8b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], ch",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044d549",
+        "simbolo": "CalculWorkEngin",
+        "bytes": "88868b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], al",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044d808",
+        "simbolo": "CalculWorkEngin",
+        "bytes": "88968b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], dl",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044daa6",
+        "simbolo": "CalculWorkEngin",
+        "bytes": "88b68b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], dh",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044e192",
+        "simbolo": "CalculWorkEngin",
+        "bytes": "88be8b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], bh",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044e427",
+        "simbolo": "CalculDechargeCaveEngin",
+        "bytes": "c6868b0000000a",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0xa",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044e4e7",
+        "simbolo": "CalculDechargeCaveEngin",
+        "bytes": "888e8b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], cl",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044e595",
+        "simbolo": "CalculDechargeCaveEngin",
+        "bytes": "c6868b0000000a",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0xa",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044e77a",
+        "simbolo": "CalculDechargeCaveEngin",
+        "bytes": "c6868b0000000a",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0xa",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044e8f7",
+        "simbolo": "CalculDechargeCaveEngin",
+        "bytes": "88968b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], dl",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044e90a",
+        "simbolo": "CalculDechargeCaveEngin",
+        "bytes": "c6868b0000000a",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0xa",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044eb20",
+        "simbolo": "EnginCalculTransporte",
+        "bytes": "c6868b0000000a",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0xa",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044ebd0",
+        "simbolo": "EnginCalculTransporte",
+        "bytes": "c6868b0000000a",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0xa",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044ec01",
+        "simbolo": "EnginCalculTransporte",
+        "bytes": "fe8e8b000000",
+        "instrucao": "dec byte ptr [esi + 0x8b]",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044eeca",
+        "simbolo": "EnginCalculTransporte",
+        "bytes": "c6868b0000000a",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0xa",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044f06c",
+        "simbolo": "EnginCalculTransporte",
+        "bytes": "88968b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], dl",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044f08d",
+        "simbolo": "EnginCalculTransporte",
+        "bytes": "c6868b0000000a",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0xa",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044f380",
+        "simbolo": "CalculTransporteEngin",
+        "bytes": "c6868b0000000a",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0xa",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044f439",
+        "simbolo": "CalculTransporteEngin",
+        "bytes": "fe8e8b000000",
+        "instrucao": "dec byte ptr [esi + 0x8b]",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044f6e6",
+        "simbolo": "CalculTransporteEngin",
+        "bytes": "c6868b0000000a",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0xa",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044f744",
+        "simbolo": "CalculTransporteEngin",
+        "bytes": "c6868b00000032",
+        "instrucao": "mov byte ptr [esi + 0x8b], 0x32",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0044f81b",
+        "simbolo": "CalculTransporteEngin",
+        "bytes": "88968b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], dl",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00451e08",
+        "simbolo": "CalculAttaqueEngin",
+        "bytes": "c6868a00000001",
+        "instrucao": "mov byte ptr [esi + 0x8a], 1",
+        "campos": [
+          "0x8a"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00452478",
+        "simbolo": "CalculAttaqueEngin",
+        "bytes": "88968b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], dl",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00452a3a",
+        "simbolo": "CalculAttaqueEngin",
+        "bytes": "88a68a000000",
+        "instrucao": "mov byte ptr [esi + 0x8a], ah",
+        "campos": [
+          "0x8a"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00452ae5",
+        "simbolo": "CalculAttaqueEngin",
+        "bytes": "88be8b000000",
+        "instrucao": "mov byte ptr [esi + 0x8b], bh",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00452af6",
+        "simbolo": "CalculAttaqueEngin",
+        "bytes": "c6868a00000001",
+        "instrucao": "mov byte ptr [esi + 0x8a], 1",
+        "campos": [
+          "0x8a"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00452b6c",
+        "simbolo": "CalculAttaqueEngin",
+        "bytes": "c6868a00000000",
+        "instrucao": "mov byte ptr [esi + 0x8a], 0",
+        "campos": [
+          "0x8a"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x004531fe",
+        "simbolo": "EnginRestaureEtat",
+        "bytes": "c6818a00000000",
+        "instrucao": "mov byte ptr [ecx + 0x8a], 0",
+        "campos": [
+          "0x8a"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00457337",
+        "simbolo": "EnginGetSpeed",
+        "bytes": "005a7a",
+        "instrucao": "add byte ptr [edx + 0x7a], bl",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "tabela de saltos interpretada como instrução"
+      },
+      {
+        "endereco": "0x00457414",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417916",
+        "instrucao": "mov byte ptr [ecx + 0x79], 0x16",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00457418",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417a00",
+        "instrucao": "mov byte ptr [ecx + 0x7a], 0",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0045746a",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c641791b",
+        "instrucao": "mov byte ptr [ecx + 0x79], 0x1b",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0045746e",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417a01",
+        "instrucao": "mov byte ptr [ecx + 0x7a], 1",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x004575a5",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417901",
+        "instrucao": "mov byte ptr [ecx + 0x79], 1",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00457668",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417a06",
+        "instrucao": "mov byte ptr [ecx + 0x7a], 6",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x004576c1",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417919",
+        "instrucao": "mov byte ptr [ecx + 0x79], 0x19",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0045771b",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417901",
+        "instrucao": "mov byte ptr [ecx + 0x79], 1",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0045771f",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417a07",
+        "instrucao": "mov byte ptr [ecx + 0x7a], 7",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00457778",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c641791a",
+        "instrucao": "mov byte ptr [ecx + 0x79], 0x1a",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x004577d2",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c641791a",
+        "instrucao": "mov byte ptr [ecx + 0x79], 0x1a",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x004577d6",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417a04",
+        "instrucao": "mov byte ptr [ecx + 0x7a], 4",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0045784c",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417a05",
+        "instrucao": "mov byte ptr [ecx + 0x7a], 5",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00457964",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417909",
+        "instrucao": "mov byte ptr [ecx + 0x79], 9",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x004579be",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417911",
+        "instrucao": "mov byte ptr [ecx + 0x79], 0x11",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x004579c2",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417a02",
+        "instrucao": "mov byte ptr [ecx + 0x7a], 2",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00457a51",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417918",
+        "instrucao": "mov byte ptr [ecx + 0x79], 0x18",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00457b00",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417917",
+        "instrucao": "mov byte ptr [ecx + 0x79], 0x17",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00457b5a",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417917",
+        "instrucao": "mov byte ptr [ecx + 0x79], 0x17",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00457b5e",
+        "simbolo": "EnginSetTypeCaract",
+        "bytes": "c6417a05",
+        "instrucao": "mov byte ptr [ecx + 0x7a], 5",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x00457ca1",
+        "simbolo": "EnginSetType",
+        "bytes": "c6828b00000000",
+        "instrucao": "mov byte ptr [edx + 0x8b], 0",
+        "campos": [
+          "0x8b"
+        ],
+        "classificacao": "registro de unidade"
+      },
+      {
+        "endereco": "0x0045a692",
+        "simbolo": "OpenFli",
+        "bytes": "c78688000000ffffffff",
+        "instrucao": "mov dword ptr [esi + 0x88], 0xffffffff",
+        "campos": [
+          "0x8a",
+          "0x8b"
+        ],
+        "classificacao": "outro objeto ou decodificação não confirmada"
+      },
+      {
+        "endereco": "0x0045aac9",
+        "simbolo": "ReadFli",
+        "bytes": "ff8088000000",
+        "instrucao": "inc dword ptr [eax + 0x88]",
+        "campos": [
+          "0x8a",
+          "0x8b"
+        ],
+        "classificacao": "outro objeto ou decodificação não confirmada"
+      },
+      {
+        "endereco": "0x00485128",
+        "simbolo": "iagRessReset",
+        "bytes": "c7858800000000000000",
+        "instrucao": "mov dword ptr [ebp + 0x88], 0",
+        "campos": [
+          "0x8a",
+          "0x8b"
+        ],
+        "classificacao": "outro objeto ou decodificação não confirmada"
+      },
+      {
+        "endereco": "0x0048514b",
+        "simbolo": "iagRessReset",
+        "bytes": "66c7808a000000ffff",
+        "instrucao": "mov word ptr [eax + 0x8a], 0xffff",
+        "campos": [
+          "0x8a",
+          "0x8b"
+        ],
+        "classificacao": "outro objeto ou decodificação não confirmada"
+      },
+      {
+        "endereco": "0x0048d3f2",
+        "simbolo": "_wstart2",
+        "bytes": "207379",
+        "instrucao": "and byte ptr [ebx + 0x79], dh",
+        "campos": [
+          "0x79"
+        ],
+        "classificacao": "outro objeto ou decodificação não confirmada"
+      },
+      {
+        "endereco": "0x00490c74",
+        "simbolo": "__DoneExceptionHandler",
+        "bytes": "c7407802000000",
+        "instrucao": "mov dword ptr [eax + 0x78], 2",
+        "campos": [
+          "0x79",
+          "0x7a"
+        ],
+        "classificacao": "outro objeto ou decodificação não confirmada"
+      },
+      {
+        "endereco": "0x004934a4",
+        "simbolo": "__Bin2String",
+        "bytes": "00407a",
+        "instrucao": "add byte ptr [eax + 0x7a], al",
+        "campos": [
+          "0x7a"
+        ],
+        "classificacao": "outro objeto ou decodificação não confirmada"
+      },
+      {
+        "endereco": "0x004934b6",
+        "simbolo": "__Bin2String",
+        "bytes": "c16f7845",
+        "instrucao": "shr dword ptr [edi + 0x78], 0x45",
+        "campos": [
+          "0x79",
+          "0x7a"
+        ],
+        "classificacao": "outro objeto ou decodificação não confirmada"
+      }
+    ],
+    "candidatos_8a_por_byte": [
+      {
+        "endereco": "0x0041dd6b",
+        "simbolo": "SortUneTroupeHangar",
+        "instrucao": "mov dword ptr [esi + 0x88], edi",
+        "fronteira_na_primeira_passagem": false
+      },
+      {
+        "endereco": "0x00421332",
+        "simbolo": "ResetHangar",
+        "instrucao": "mov dword ptr [eax + 0x88], 0xc766ffff",
+        "fronteira_na_primeira_passagem": false
+      },
+      {
+        "endereco": "0x00424899",
+        "simbolo": "TourelleChercheCible",
+        "instrucao": "mov dword ptr [edx + 0x88], 0x42c60000",
+        "fronteira_na_primeira_passagem": false
+      },
+      {
+        "endereco": "0x004248bd",
+        "simbolo": "TourelleChercheCible",
+        "instrucao": "mov dword ptr [edx + 0x88], 0x42c60000",
+        "fronteira_na_primeira_passagem": false
+      },
+      {
+        "endereco": "0x00424dc2",
+        "simbolo": "HangarSortEngin",
+        "instrucao": "mov dword ptr [ebx + 0x88], ecx",
+        "fronteira_na_primeira_passagem": false
+      },
+      {
+        "endereco": "0x00424f3c",
+        "simbolo": "ControleArrivageHangar",
+        "instrucao": "mov dword ptr [esi + 0x88], ebx",
+        "fronteira_na_primeira_passagem": false
+      },
+      {
+        "endereco": "0x00424fe5",
+        "simbolo": "BatimentStockEngin",
+        "instrucao": "mov dword ptr [ebx + 0x88], ecx",
+        "fronteira_na_primeira_passagem": false
+      },
+      {
+        "endereco": "0x0042556d",
+        "simbolo": "BatimentRepareEngin",
+        "instrucao": "mov dword ptr [esi + 0x88], ebx",
+        "fronteira_na_primeira_passagem": false
+      },
+      {
+        "endereco": "0x00426f57",
+        "simbolo": "BatimentNextEtape",
+        "instrucao": "mov dword ptr [ebx + 0x88], 0x43c60000",
+        "fronteira_na_primeira_passagem": false
+      },
+      {
+        "endereco": "0x00426f7c",
+        "simbolo": "BatimentNextEtape",
+        "instrucao": "mov dword ptr [ebx + 0x88], 0x43c60000",
+        "fronteira_na_primeira_passagem": false
+      },
+      {
+        "endereco": "0x0042752c",
+        "simbolo": "BatimentNextEtape",
+        "instrucao": "mov byte ptr [esi + 0x8a], dl",
+        "fronteira_na_primeira_passagem": true
+      },
+      {
+        "endereco": "0x0042765f",
+        "simbolo": "BatimentNextEtape",
+        "instrucao": "mov dword ptr [ebx + 0x88], 0x43c60000",
+        "fronteira_na_primeira_passagem": false
+      },
+      {
+        "endereco": "0x00427684",
+        "simbolo": "BatimentNextEtape",
+        "instrucao": "mov dword ptr [ebx + 0x88], 0x43c60000",
+        "fronteira_na_primeira_passagem": false
+      },
+      {
+        "endereco": "0x00427b8c",
+        "simbolo": "BatimentNextEtape",
+        "instrucao": "mov byte ptr [esi + 0x8a], dl",
+        "fronteira_na_primeira_passagem": true
+      },
+      {
+        "endereco": "0x00427bac",
+        "simbolo": "BatimentNextEtape",
+        "instrucao": "mov byte ptr [esi + 0x8a], al",
+        "fronteira_na_primeira_passagem": true
+      },
+      {
+        "endereco": "0x00445a05",
+        "simbolo": "SetEnginLanceSortilege",
+        "instrucao": "mov byte ptr [edx + 0x8a], 0",
+        "fronteira_na_primeira_passagem": true
+      },
+      {
+        "endereco": "0x00445ab3",
+        "simbolo": "SetAttaqueEngin",
+        "instrucao": "mov byte ptr [edx + 0x8a], 0",
+        "fronteira_na_primeira_passagem": true
+      },
+      {
+        "endereco": "0x00445ad1",
+        "simbolo": "SetAttaqueEngin",
+        "instrucao": "mov byte ptr [edx + 0x8a], 0",
+        "fronteira_na_primeira_passagem": true
+      },
+      {
+        "endereco": "0x00451e08",
+        "simbolo": "CalculAttaqueEngin",
+        "instrucao": "mov byte ptr [esi + 0x8a], 1",
+        "fronteira_na_primeira_passagem": true
+      },
+      {
+        "endereco": "0x00452a3a",
+        "simbolo": "CalculAttaqueEngin",
+        "instrucao": "mov byte ptr [esi + 0x8a], ah",
+        "fronteira_na_primeira_passagem": true
+      },
+      {
+        "endereco": "0x00452af6",
+        "simbolo": "CalculAttaqueEngin",
+        "instrucao": "mov byte ptr [esi + 0x8a], 1",
+        "fronteira_na_primeira_passagem": true
+      },
+      {
+        "endereco": "0x00452b6c",
+        "simbolo": "CalculAttaqueEngin",
+        "instrucao": "mov byte ptr [esi + 0x8a], 0",
+        "fronteira_na_primeira_passagem": true
+      },
+      {
+        "endereco": "0x004531fe",
+        "simbolo": "EnginRestaureEtat",
+        "instrucao": "mov byte ptr [ecx + 0x8a], 0",
+        "fronteira_na_primeira_passagem": true
+      },
+      {
+        "endereco": "0x0045a692",
+        "simbolo": "OpenFli",
+        "instrucao": "mov dword ptr [esi + 0x88], 0xffffffff",
+        "fronteira_na_primeira_passagem": true
+      },
+      {
+        "endereco": "0x0045aac9",
+        "simbolo": "ReadFli",
+        "instrucao": "inc dword ptr [eax + 0x88]",
+        "fronteira_na_primeira_passagem": true
+      },
+      {
+        "endereco": "0x00485128",
+        "simbolo": "iagRessReset",
+        "instrucao": "mov dword ptr [ebp + 0x88], 0",
+        "fronteira_na_primeira_passagem": true
+      },
+      {
+        "endereco": "0x0048514c",
+        "simbolo": "iagRessReset",
+        "instrucao": "mov dword ptr [eax + 0x8a], 0xd039ffff",
+        "fronteira_na_primeira_passagem": false
+      }
+    ],
+    "ajustes_ponteiro_candidatos": [
+      {
+        "endereco": "0x0040385a",
+        "simbolo": "AffFlamme",
+        "instrucao": "add eax, 0x79"
+      },
+      {
+        "endereco": "0x0040387b",
+        "simbolo": "AffFlamme",
+        "instrucao": "add eax, 0x79"
+      },
+      {
+        "endereco": "0x00403fff",
+        "simbolo": "AffFlamme",
+        "instrucao": "add eax, 0x7a"
+      },
+      {
+        "endereco": "0x004040f6",
+        "simbolo": "AffFlamme",
+        "instrucao": "add eax, 0x7a"
+      },
+      {
+        "endereco": "0x00404da3",
+        "simbolo": "AffFlamme",
+        "instrucao": "add eax, 0x7a"
+      },
+      {
+        "endereco": "0x00404f66",
+        "simbolo": "AffFlamme",
+        "instrucao": "add eax, 0x7a"
+      },
+      {
+        "endereco": "0x00404f87",
+        "simbolo": "AffFlamme",
+        "instrucao": "add eax, 0x7a"
+      },
+      {
+        "endereco": "0x0040a3f1",
+        "simbolo": "AffBatiments",
+        "instrucao": "sub esi, 0x7a"
+      }
+    ],
+    "chamadas_inicializadores": [
+      {
+        "endereco": "0x00420f69",
+        "simbolo": "SortieTroupe",
+        "destino": "0x457b87"
+      },
+      {
+        "endereco": "0x00422ae8",
+        "simbolo": "CalculTrajectoire",
+        "destino": "0x457b87"
+      },
+      {
+        "endereco": "0x00457d86",
+        "simbolo": "EnginSetType",
+        "destino": "0x457350"
+      },
+      {
+        "endereco": "0x00457f1f",
+        "simbolo": "CreerEngin",
+        "destino": "0x457b87"
+      },
+      {
+        "endereco": "0x0046ada6",
+        "simbolo": "LoadEngin",
+        "destino": "0x457350"
+      },
+      {
+        "endereco": "0x0047af35",
+        "simbolo": "LezardRun",
+        "destino": "0x457b87"
+      }
+    ],
+    "escritas_8a_unidade_confirmadas": [
+      {
+        "endereco": "0x00445a05",
+        "valor": 0
+      },
+      {
+        "endereco": "0x00445ab3",
+        "valor": 0
+      },
+      {
+        "endereco": "0x00445ad1",
+        "valor": 0
+      },
+      {
+        "endereco": "0x00451e08",
+        "valor": 1
+      },
+      {
+        "endereco": "0x00452a3a",
+        "valor": 0
+      },
+      {
+        "endereco": "0x00452af6",
+        "valor": 1
+      },
+      {
+        "endereco": "0x00452b6c",
+        "valor": 0
+      },
+      {
+        "endereco": "0x004531fe",
+        "valor": 0
+      }
+    ],
+    "conclusao": "Nenhum atribuidor direto de 2/3 à fase da unidade identificado; carregadores podem preservar valores externos."
+  },
+  "corpus": {
+    "arquivos": [
+      {
+        "arquivo": "MONDE01.ETA",
+        "sha256": "19237b8c3f3c0c76022276da229bec727b17603440823c43561aba159dd47015",
+        "unidades": 16
+      },
+      {
+        "arquivo": "MONDE02.ETA",
+        "sha256": "291566a7486cb15616c4778d36d6b0ad4f717c65de745b941e640f7f835ad2ba",
+        "unidades": 16
+      },
+      {
+        "arquivo": "MONDE03.ETA",
+        "sha256": "11e4fc67e687736267699b075ce1a0c6b289fb8180707e37de27649e15810ea6",
+        "unidades": 13
+      },
+      {
+        "arquivo": "MONDE04.ETA",
+        "sha256": "c4940953c4ce8d256039347cc9d0b4516c98ff3a82a439a0babbdd4c6965ddc4",
+        "unidades": 40
+      },
+      {
+        "arquivo": "MONDE05.ETA",
+        "sha256": "817f5db77b907dfa69ab8ceb71981e2055dede3fd0e4cd208c8efce33a0c6fc6",
+        "unidades": 55
+      },
+      {
+        "arquivo": "MONDE06.ETA",
+        "sha256": "c80feed76c2db702a4ed2ff6b3c6e1fe84eabe68138f6660367c14e98a3c10c9",
+        "unidades": 11
+      },
+      {
+        "arquivo": "MONDE07.ETA",
+        "sha256": "6d574c7428127c966b04f22353dc8a711d4b5897853a61dd579b921e36e0afb1",
+        "unidades": 16
+      },
+      {
+        "arquivo": "MONDE08.ETA",
+        "sha256": "a8a5156251a2937c49f7331a9f8890ec3d857ae420fd6dbe6eb465cae2965e9c",
+        "unidades": 14
+      },
+      {
+        "arquivo": "MONDE09.ETA",
+        "sha256": "3b626f3fe831844f4e6f0b7d343c5c8e316dc56ee03447fd028ad8b0beb88eb9",
+        "unidades": 48
+      },
+      {
+        "arquivo": "MONDE09A.ETA",
+        "sha256": "4a49802ea11b7c1029cee2c84002c80d80ea7033ccb282e065c9a9f701b7eec4",
+        "unidades": 55
+      },
+      {
+        "arquivo": "MONDE09B.ETA",
+        "sha256": "7e47f32f08a1467f2b7a7fe0916b61c4421a60672b79d93d0d02354f349e18fd",
+        "unidades": 61
+      },
+      {
+        "arquivo": "MONDE09C.ETA",
+        "sha256": "dc40f8b68a59fb91cd2b33b9624ffe49294df9419042e4847402be135535ce7a",
+        "unidades": 61
+      },
+      {
+        "arquivo": "MONDE09D.ETA",
+        "sha256": "f69e52f7a56e837945ec0beb9787be93c611c33b09fe1c0f6b9b1dfc12e1ec69",
+        "unidades": 62
+      },
+      {
+        "arquivo": "MONDE10.ETA",
+        "sha256": "827f832bbc33635e2111bab0f58a218b9efbe319705ac66032ad13b8ffbc3a37",
+        "unidades": 55
+      },
+      {
+        "arquivo": "MONDE10A.ETA",
+        "sha256": "5d809594106280f178ceaaa5c5fa49fa33a506a6ae420c31f7f16323bfd33452",
+        "unidades": 57
+      },
+      {
+        "arquivo": "MONDE10B.ETA",
+        "sha256": "3840989e98f0ea8183eb5fe4ae9f68a37f24952f58a8a34fa5caf734f20ddbf0",
+        "unidades": 58
+      },
+      {
+        "arquivo": "MONDE10C.ETA",
+        "sha256": "86b85d1e7c6ada741d3644a442f364d97c8493ba092086d10541e9664a812bbe",
+        "unidades": 57
+      },
+      {
+        "arquivo": "MONDE11.ETA",
+        "sha256": "5c66041c076747afbf29b0a8e1c6a2ff3222e9b1a60a0cde18abb666a9ea2840",
+        "unidades": 58
+      },
+      {
+        "arquivo": "MONDE12.ETA",
+        "sha256": "6abdcec07fb8afd82fe3697dde2ac6fed8911f613ea840541d23b6451cf7998d",
+        "unidades": 114
+      },
+      {
+        "arquivo": "MONDE12A.ETA",
+        "sha256": "90860a9e7d5ec934f8d345ac15f849f8637db4ca574dac1e6f609a630aaa33c4",
+        "unidades": 133
+      },
+      {
+        "arquivo": "MONDE12B.ETA",
+        "sha256": "69fb5140fd0636ac9e0f5f63323e8f3c2013aaf3e117603785079b007363c50a",
+        "unidades": 143
+      },
+      {
+        "arquivo": "MONDE12C.ETA",
+        "sha256": "f09c5165f88ca7f1575e87cbf7a420a7588d5d3b150e41a5623ebf1e4225ed48",
+        "unidades": 133
+      },
+      {
+        "arquivo": "MONDE13.ETA",
+        "sha256": "b1dd08943dee2afc32ca3d35ffd30d0229c87078c6b99362fc0a437639044bc2",
+        "unidades": 20
+      },
+      {
+        "arquivo": "MONDE14.ETA",
+        "sha256": "75370d077e6c0e0fe4f3b5d16c4bb5e2d564d19989394966d81910b8dec57fe1",
+        "unidades": 16
+      },
+      {
+        "arquivo": "MONDE15.ETA",
+        "sha256": "89ff2906dfddf1a4665b07e14251f60eba899d3e61123b2d9ba483762add9df7",
+        "unidades": 58
+      },
+      {
+        "arquivo": "MONDE16.ETA",
+        "sha256": "3be9f1479506b112edc266315b6e3bfee74f786bf7fc0edea9973b46ca327f77",
+        "unidades": 58
+      },
+      {
+        "arquivo": "MONDE17.ETA",
+        "sha256": "f176fb3d72437709de034b1b5c60359ae41518a70ff678715c6bc2500160cbe7",
+        "unidades": 169
+      },
+      {
+        "arquivo": "MONDE17A.ETA",
+        "sha256": "f176fb3d72437709de034b1b5c60359ae41518a70ff678715c6bc2500160cbe7",
+        "unidades": 169
+      },
+      {
+        "arquivo": "MONDE17B.ETA",
+        "sha256": "c27ee407371f9a0d9d2b032123d03a5a57228ace8b3c99e2c4979873d5476771",
+        "unidades": 169
+      },
+      {
+        "arquivo": "MONDE17C.ETA",
+        "sha256": "3cff0609b10bbe3c439c068d42850b8cac9e6895fefae282b457224f66eb3836",
+        "unidades": 173
+      },
+      {
+        "arquivo": "MONDE18.ETA",
+        "sha256": "e5d4ead32b9422160a3334a0735400cd702179dbc29f471c373657883b65dadc",
+        "unidades": 58
+      },
+      {
+        "arquivo": "MONDE19.ETA",
+        "sha256": "95a1bd20475db7f39f7ff2c10a9ba904f1246145ba73006d40a8a0521501d213",
+        "unidades": 57
+      },
+      {
+        "arquivo": "MONDE20.ETA",
+        "sha256": "585b2b087368b56aae56cd08833078a7d257d717c49873d5effb51bf78457c68",
+        "unidades": 33
+      },
+      {
+        "arquivo": "MONDE21.ETA",
+        "sha256": "b7de440f4761476b86ebe33924471fecf99c051b4db07dac7edb88699a4e5875",
+        "unidades": 59
+      },
+      {
+        "arquivo": "MONDE22.ETA",
+        "sha256": "b6bce6b3df38e3f497224598175e653859f26554ed0982bcd799139acc23d018",
+        "unidades": 55
+      },
+      {
+        "arquivo": "MONDE23.ETA",
+        "sha256": "c83bfdfa6236b9c1000b3715340296479cfcc02e867275ef9f03437cf1b61630",
+        "unidades": 116
+      },
+      {
+        "arquivo": "MONDE24.ETA",
+        "sha256": "7f09a9d659978e2b095baa986fc3435336222acd6fc92818a9833c5ddb6420bd",
+        "unidades": 61
+      },
+      {
+        "arquivo": "MONDE25.ETA",
+        "sha256": "d134d11c1227a6441b3dce7b452f06a649f953ce69fe74de367973b4620df70e",
+        "unidades": 57
+      }
+    ],
+    "quantidade_arquivos": 38,
+    "quantidade_registros": 2604,
+    "histogramas": {
+      "0x79": {
+        "0": 1902,
+        "1": 105,
+        "9": 247,
+        "22": 1,
+        "23": 47,
+        "24": 97,
+        "25": 203,
+        "27": 2
+      },
+      "0x7a": {
+        "0": 1270,
+        "1": 172,
+        "2": 10,
+        "5": 33,
+        "6": 1049,
+        "7": 63,
+        "9": 7
+      },
+      "0x8a": {
+        "0": 2604
+      },
+      "0x8b": {
+        "0": 2604
+      }
+    },
+    "fases_2_3": [],
+    "escopo": "Bytes serializados no CD, antes de LoadEngin; não é captura de uma partida em execução."
+  }
+}

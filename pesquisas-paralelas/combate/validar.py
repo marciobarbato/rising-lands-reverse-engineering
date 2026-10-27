@@ -32,8 +32,10 @@ def main():
     from test_alvos_alcance import Contratos, Diferencial
     from test_mira_angular import ContratosMira, DiferencialMira
     from test_animacao_disparo import ContratosAnimacao, DiferencialAnimacao
+    from test_inicializacao_ataque import ContratosInicializacao, DiferencialInicializacao
     suite = unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromTestCase(c)
-        for c in (Contratos, Diferencial, ContratosMira, DiferencialMira, ContratosAnimacao, DiferencialAnimacao))
+        for c in (Contratos, Diferencial, ContratosMira, DiferencialMira, ContratosAnimacao, DiferencialAnimacao,
+                  ContratosInicializacao, DiferencialInicializacao))
     r = unittest.TextTestRunner(verbosity=2, resultclass=Resultado).run(suite)
     saida = Path(__file__).resolve().parent / ('validacao-emulada.json' if args.emular else 'validacao-local.json')
     relatorio = dict(sucesso=r.wasSuccessful(), testes=r.testsRun, falhas=len(r.failures),
@@ -50,6 +52,10 @@ def main():
         animacao_disparo=dict(efeitos='Callbacks explícitos; não integra física ou dano em Python.',
             referencia='Emissão x86 com pool cheio e um slot livre; corpo a corpo sem ocupantes; magia ID255; movimento/balão/áudio param na entrada.',
             comparacao='Registro inteiro, contexto de busca e argumentos na pilha/registradores de cada efeito.'),
+        inicializacao=dict(rotinas=['0x457350', '0x457b87'],
+            trechos_pos_carga=['0x46ad8b..0x46b019', '0x46b08f..0x46b0e3'],
+            comparacao='276 bytes, quatro globais de busca e observação das escritas em +79/+7a/+8a/+8b.',
+            limites='FileRead não executado; seus pedidos são comparados em checkpoints. Tipos 26..255 só testam o comportamento fora do domínio de tipos válidos.'),
         diagnosticos=[dict(teste=t.id(), detalhe=e) for t, e in [*r.failures, *r.errors]])
     saida.write_text(json.dumps(relatorio, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(f'Relatório: {saida}\nExecuções x86 delimitadas: {relatorio["execucoes_x86_delimitadas"]}')

@@ -350,6 +350,139 @@
       "fim_exclusivo": "0x0046fc0f",
       "sha256_bytes": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
       "arquivo": "0046fc09.asm"
+    },
+    {
+      "nome": "EnginSetTypeCaract",
+      "inicio": "0x00457350",
+      "fim_exclusivo": "0x00457b87",
+      "sha256_bytes": "71e87a233999cb6abe4f7223288a8f2077e382f545f352faa896d05949047d09",
+      "arquivo": "00457350.asm"
+    },
+    {
+      "nome": "EnginSetType",
+      "inicio": "0x00457b87",
+      "fim_exclusivo": "0x00457e0c",
+      "sha256_bytes": "63068b2b25a53641b6aba73bb618c6d91bc620a4eba255bb77c5422911983fd4",
+      "arquivo": "00457b87.asm"
+    },
+    {
+      "nome": "EpilogueCaracteristicas",
+      "inicio": "0x004570f0",
+      "fim_exclusivo": "0x004570f4",
+      "sha256_bytes": "4c99dc188090e18f2ee3ef2858a148c43520ac9c81069f7156b6fb1bbb7a6ad6",
+      "arquivo": "004570f0.asm"
+    },
+    {
+      "nome": "EnginTypeGetCapacite",
+      "inicio": "0x004475ac",
+      "fim_exclusivo": "0x004475ef",
+      "sha256_bytes": "d369a3f5de0a7300cbf1812be79a28b6b649c02a23ac6e3ca82d927132cc1dde",
+      "arquivo": "004475ac.asm"
+    },
+    {
+      "nome": "EpilogueCapacidade",
+      "inicio": "0x004474c5",
+      "fim_exclusivo": "0x004474c7",
+      "sha256_bytes": "b631b8bfe6e6e14e61c8aa2d81a5d6cd5ffa1bc8f32138363ff91787b4079c28",
+      "arquivo": "004474c5.asm"
+    },
+    {
+      "nome": "LoadEngin",
+      "inicio": "0x00479d10",
+      "fim_exclusivo": "0x00479d7f",
+      "sha256_bytes": "8d382921a714dc1486475e47b34e86c930cd601ee9a125be63ea9db1cfc30fc3",
+      "arquivo": "00479d10.asm"
+    },
+    {
+      "nome": "SauveEngin",
+      "inicio": "0x00479d7f",
+      "fim_exclusivo": "0x00479e12",
+      "sha256_bytes": "d3850660acfc919dc4cf1ba61fefd9bfa3a1f02f3269b9be1e2ac33e14a61ba6",
+      "arquivo": "00479d7f.asm"
+    },
+    {
+      "nome": "CreerEngin",
+      "inicio": "0x00457e6c",
+      "fim_exclusivo": "0x00458088",
+      "sha256_bytes": "ce383b52f6e9d2af847d22ea89b4213fa170e8c9145d6daa746966b2a19816ba",
+      "arquivo": "00457e6c.asm"
+    },
+    {
+      "nome": "ResetOrdre",
+      "inicio": "0x0044357c",
+      "fim_exclusivo": "0x00443688",
+      "sha256_bytes": "1c8bd82c6e6a46eb42d3074dfce9ee27ada5f19d77b17d45543e02cc96a4bff1",
+      "arquivo": "0044357c.asm"
+    },
+    {
+      "nome": "SetEnginLanceSortilege",
+      "inicio": "0x004459c4",
+      "fim_exclusivo": "0x00445a36",
+      "sha256_bytes": "a01f0d109bc5aac6d0f11d169099be2d9656a38148bd8d4fde4207ffedc6225f",
+      "arquivo": "004459c4.asm"
+    },
+    {
+      "nome": "EnginRestaureEtat_magia",
+      "inicio": "0x0045315f",
+      "fim_exclusivo": "0x00453232",
+      "sha256_bytes": "525130a4c8589161ee80616ee8e78a7e362cb97d1f5e16eebc0060730e742ca3",
+      "arquivo": "0045315f.asm"
+    },
+    {
+      "nome": "EnginAlloc",
+      "inicio": "0x00441a1b",
+      "fim_exclusivo": "0x00441ade",
+      "sha256_bytes": "5ddb2f18ce11f4976f64999d0f197d7266c1c00910888b2deb4c6429f3b1be73",
+      "arquivo": "00441a1b.asm"
+    },
+    {
+      "nome": "MemAlloc",
+      "inicio": "0x00467ea6",
+      "fim_exclusivo": "0x00467ecb",
+      "sha256_bytes": "5e819e622249275ac821557551481f87878236822961e413c491f57ceddec5a3",
+      "arquivo": "00467ea6.asm"
+    },
+    {
+      "nome": "LoadEngin_missao",
+      "inicio": "0x0046acbf",
+      "fim_exclusivo": "0x0046b01e",
+      "sha256_bytes": "f8c2d6c2a13571990691c2d02c674a585637e52fc19771afb9e9d0bba1853142",
+      "arquivo": "0046acbf.asm"
+    },
+    {
+      "nome": "LoadEnginGame",
+      "inicio": "0x0046b01e",
+      "fim_exclusivo": "0x0046b119",
+      "sha256_bytes": "433a5ddcaeaab3ba313e7bac5846bb43d56432d1e974399dc96534ba3933cec6",
+      "arquivo": "0046b01e.asm"
+    },
+    {
+      "nome": "SauveEngin_game",
+      "inicio": "0x0046b119",
+      "fim_exclusivo": "0x0046b1fb",
+      "sha256_bytes": "e2952092b9c5ee4c4d36a6f7beefb926fc1e3e30deeb586b99efcaa336fc514a",
+      "arquivo": "0046b119.asm"
+    },
+    {
+      "nome": "ExisteEngin_EnginGetType",
+      "inicio": "0x00441fff",
+      "fim_exclusivo": "0x00442045",
+      "sha256_bytes": "c44912d23a5cf3825d26e86a8d54252199834dea5328c61f22ca2b3a5424f43f",
+      "arquivo": "00441fff.asm"
+    },
+    {
+      "nome": "TypeEnginEstMonstre",
+      "inicio": "0x004422dd",
+      "fim_exclusivo": "0x004422eb",
+      "sha256_bytes": "4ea52529be495e82914474e575fdea72e9b3d39d49250555504421a8bfa22cb9",
+      "arquivo": "004422dd.asm"
+    },
+    {
+      "nome": "EpiloguePredicadoMonstre",
+      "inicio": "0x004422da",
+      "fim_exclusivo": "0x004422dd",
+      "sha256_bytes": "e18aacce29affcdddaa5f641ac1ec12552e0fe9d066e6408941b1792818b8619",
+      "arquivo": "004422da.asm"
     }
   ],
   "constantes_mira": {
@@ -423,5 +556,33 @@
       "0x00452846",
       "0x004528d6"
     ]
-  }
+  },
+  "despacho_caracteristicas": [
+    "0x0045761b",
+    "0x00457670",
+    "0x004576ca",
+    "0x00457781",
+    "0x004577de",
+    "0x0045785a",
+    "0x004578bb",
+    "0x0045785a",
+    "0x00457913",
+    "0x0045785a",
+    "0x004578ab",
+    "0x00457420",
+    "0x004573ca",
+    "0x00457476",
+    "0x00457511",
+    "0x0045755b",
+    "0x004574c0",
+    "0x004575ae",
+    "0x0045796d",
+    "0x004579ca",
+    "0x00457a5a",
+    "0x00457a00",
+    "0x00457aaf",
+    "0x00457b09",
+    "0x00457b66",
+    "0x00457727"
+  ]
 }

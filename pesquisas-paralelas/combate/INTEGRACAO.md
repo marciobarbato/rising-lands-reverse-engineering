@@ -3,13 +3,13 @@
 A entrega está isolada nesta pasta. O escopo autorizado do commit é somente
 esta pasta, no branch `main`, preservando as alterações dos chats paralelos.
 Arquivos originais foram somente lidos.
-A versão validada tem **52 testes aprovados e 158.117 execuções x86 delimitadas**;
+A versão validada tem **67 testes aprovados e 170.295 execuções x86 delimitadas**;
 ver [relatório](validacao-emulada.json) e [pesquisa técnica](README.md).
 
 ## Contrato de dados
 
-Importar `alvos_alcance.py`, `mira_angular.py` e `animacao_disparo.py` como módulos
-separados. Nenhum depende de `movimento`,
+Importar `alvos_alcance.py`, `mira_angular.py`, `animacao_disparo.py` e
+`inicializacao_ataque.py` como módulos separados. Nenhum depende de `movimento`,
 `combate`, economia ou tarefas; usam biblioteca padrão, dados extraídos e consultas locais.
 
 - `unidades`: sequência de 800 registros `bytes`/`bytearray`, cada um com 276 bytes.
@@ -17,8 +17,9 @@ separados. Nenhum depende de `movimento`,
 - `grade`: mapeamento célula -> palavra u16; entradas ausentes equivalem a `ffff`.
 - `mascaras`: cinco bytes de aliança, preservando o sentido da relação.
 - Célula é `x + 256*y`, mesmo em mapas com largura inferior a 256.
-- Funções de leitura não alteram os registros. Funções de efeitos locais
-  retornam uma **cópia** do registro; cabe ao integrador aplicá-la no momento correto.
+- Funções de leitura não alteram os registros. Os efeitos locais de
+  `alvos_alcance.py` retornam uma **cópia**; animação e inicialização alteram
+  os registros mutáveis fornecidos. Respeitar a docstring de cada entrada.
 
 Para um mundo com `unidades` contíguas, a adaptação mínima é:
 
@@ -107,20 +108,55 @@ O subestado 3 também não limpa o próprio +8a. O quadro +7a, o decremento u8 d
 O pool e o dano não foram reimplementados; os testes nativos exercitam seus
 ramos declarados e conferem os argumentos. Movimento/áudio/balão param na entrada.
 
+## Inicialização e persistência dos campos
+
+`caracterizar_tipo(u, recarga, modificador12)` traduz `EnginSetTypeCaract`
+(`0x457350`). Preserva +8A/+8B; os campos +79/+7A só mudam nos tipos com
+escrita explícita. O modificador é uma consulta `(dono, tipo) -> u8`, necessária
+para tipo 4 com dono diferente de 4/200. A recarga inicial usa apenas o byte baixo.
+
+`definir_tipo(u, indice, celula, direcao, tipo, caracteristicas,
+capacidade_tipo, modificador, busca)` traduz `EnginSetType` (`0x457B87`).
+Fornecer `CaracteristicasTipo(visao, alcance_quadrado, recarga)` já carregadas,
+`capacidade_tipo(tipo)` e `modificador(dono, tipo, id)` para IDs 1/12 (valores u8
+resolvidos). `busca` segue o contrato local de `BuscaAtaque`. A função zera +8B
+e preserva +8A; não cria uma unidade na grade nem atualiza a economia.
+
+Escolher o caminho correto ao carregar:
+
+- ETA: reutilizar o leitor e a recomposição de memória existentes; aplicar
+  `preparar_apos_carga_missao` somente no ponto correspondente a 0x46AD8B.
+  A escrita anterior de +BD no slot ordinal e o laço/I/O não estão incluídos.
+  A pós-carga repõe a recarga u16 inteira e sobrescreve +DA de alguns tipos.
+- Save: `preparar_apos_carga_game` corresponde somente a 0x46B08F..0x46B0E3;
+  não recaracteriza +79/+7A e preserva +8A/+8B.
+
+Não acrescentar a limpeza de +8B em `SetAttaqueEngin`: o corpo original e seu
+reset preservam esse contador compartilhado. Não inventar atribuições a
++8A=2/3: foram encontradas oito escritas diretas de unidade, todas com valor
+0/1. Os carregadores preservam valores externos, mas nenhum dos 2.604 registros
+dos 38 mapas do CD contém essas fases. A origem permanece não identificada;
+isso não é prova de que sejam impossíveis durante uma partida.
+
+As tabelas por tipo, limites da auditoria estática, 15 testes novos e exemplos
+de escritas de outros subsistemas estão em
+[INICIALIZACAO_ATAQUE.md](INICIALIZACAO_ATAQUE.md). Os novos módulos permanecem
+independentes; nenhuma adaptação ao mundo compartilhado foi aplicada.
+
 ## Reproduzir a conferência sem afetar o trabalho dos outros chats
 
 Nesta pasta, executar `python3 -B validar.py --emular` com Unicorn e JIT
-permitido. Sem JIT, `python3 -B validar.py` executa 17 testes de contrato
-e marca 35 diferenciais como ignorados. Os relatórios ficam aqui.
+permitido. Sem JIT, `python3 -B validar.py` executa 22 testes de contrato
+e marca 45 diferenciais como ignorados. Os relatórios ficam aqui.
 
 O teste antigo de fragmentos de manutenção fornece consultas como entradas;
-o novo teste executa alcance/mira originais em 676 cenários. O teste de ordem
-começa **após** `ResetOrdre`. Portanto, não contar esses testes como validação
-do ciclo completo nem do reset. A seleção, a mira, as
+o novo teste executa alcance/mira originais em 676 cenários. O teste antigo de
+ordem começa **após** `ResetOrdre`; o novo ensaio de preservação de +8B executa
+ambos os corpos em 130 casos. Nenhum deles valida o ciclo completo. A seleção, a mira, as
 adjacências, os alcances suportados e a linha executam suas chamadas originais,
 sem substituir funções internas. Construções usam memória sintética 1x1/3x3.
 
-Próximos passos: localizar as atribuições externas a +8a=2/3 e a inicialização
-de +8b/+7a/+79; completar a geometria de construções e um backend separado de
-pool/voo/impacto. A aritmética de dano já existente permanece
+Próximos passos: investigar a origem histórica/externa de +8A=2/3, completar
+a geometria de construções e um backend separado de pool/voo/impacto.
+A aritmética de dano já existente permanece
 sob o contrato documentado em `documentacao/COMBATE.md`.

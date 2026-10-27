@@ -3,7 +3,7 @@
 Pesquisa independente, concluída em 27/10/2026. Todos os arquivos novos estão
 nesta pasta. Documentos gerais, ferramentas compartilhadas, originais e
 configurações são somente lidos. O usuário autorizou o commit desta pesquisa
-no branch `main`, incluindo as etapas anteriores ainda não versionadas.
+no branch `main`; cada nova etapa permanece restrita a esta pasta.
 Não foi necessário abrir Ghidra.
 
 Foram lidos `documentacao/COMBATE.md`, `INSTANCIAS.md`, `EMULACAO.md`,
@@ -18,6 +18,10 @@ não foram duplicados. O novo predicado de arma carregada complementa o avanço.
 | [alvos_alcance.py](alvos_alcance.py) | Traduções independentes; registros brutos de 276 bytes |
 | [mira_angular.py](mira_angular.py) | EnginViseCible e quantização de AngleCalcul em 8/32 setores |
 | [animacao_disparo.py](animacao_disparo.py) | Subestados 0/1/2/3, animação e solicitações de disparo |
+| [inicializacao_ataque.py](inicializacao_ataque.py) | Características por tipo, inicialização e trechos de pós-carga |
+| [INICIALIZACAO_ATAQUE.md](INICIALIZACAO_ATAQUE.md) | Rastreio de +79/+7A/+8A/+8B e limites da conclusão sobre fases 2/3 |
+| [rastrear_campos.py](rastrear_campos.py) | Auditoria estática e 2.604 registros dos 38 mapas originais |
+| [test_inicializacao_ataque.py](test_inicializacao_ataque.py) | 15 testes adicionais, 12.178 chamadas originais |
 | [ANIMACAO_DISPARO.md](ANIMACAO_DISPARO.md) | Máquina recuperada, efeitos delegados e cobertura x86 |
 | [bancada_animacao.py](bancada_animacao.py) | Referência de animação/emissão com checkpoints nomeados |
 | [test_animacao_disparo.py](test_animacao_disparo.py) | 19 testes adicionais, 7.066 chamadas originais |
@@ -27,16 +31,17 @@ não foram duplicados. O novo predicado de arma carregada complementa o avanço.
 | [test_alvos_alcance.py](test_alvos_alcance.py) | Casos de contrato e comparações contra instruções originais |
 | [validar.py](validar.py) | Executa só esta pesquisa e grava JSON nesta pasta |
 | [extrair_evidencias.py](extrair_evidencias.py) | Extração direta de bytes/assembly do EXE original |
-| [evidencias/manifesto.json](evidencias/manifesto.json) | 50 intervalos com limites/hashes, constantes e despachos |
+| [evidencias/manifesto.json](evidencias/manifesto.json) | 69 intervalos com limites/hashes, constantes e despachos |
 | [evidencias/dados-disparo.json](evidencias/dados-disparo.json) | Tabelas extraídas de saída de projétil e deslocamento por tipo |
-| [validacao-local.json](validacao-local.json) | 17 contratos aprovados, 35 diferenciais ignorados explicitamente |
-| [validacao-emulada.json](validacao-emulada.json) | 52 testes aprovados, zero falhas/erros/ignorados, 158.117 chamadas x86 delimitadas |
+| [validacao-local.json](validacao-local.json) | 22 contratos aprovados, 45 diferenciais ignorados explicitamente |
+| [validacao-emulada.json](validacao-emulada.json) | 67 testes aprovados, zero falhas/erros/ignorados, 170.295 chamadas x86 delimitadas |
 | [INTEGRACAO.md](INTEGRACAO.md) | Contratos e sequência de integração para o chat principal |
 
 Executar nesta pasta:
 
 ```sh
 python3 -B extrair_evidencias.py
+python3 -B rastrear_campos.py
 python3 -B validar.py
 python3 -B validar.py --emular
 ```
@@ -228,9 +233,18 @@ de registradores**. A continuação em [MIRA_ANGULAR.md](MIRA_ANGULAR.md) també
 testa 676 cenários desse portão executando alcance e mira originais, com toda
 a trigonometria, sem substituir consultas.
 
+## Inicialização e origem dos campos
+
+`EnginSetTypeCaract` (0x457350) inicializa +79/+7A somente nos ramos que
+os escrevem; `EnginSetType` (0x457B87) zera +8B e preserva +8A. A auditoria
+não identificou atribuidor direto de +8A=2/3; carregadores preservam valores
+externos. Os 38 mapas do CD têm +8A/+8B zerados nos 2.604 registros.
+As traduções e os limites dessa conclusão estão em
+[INICIALIZACAO_ATAQUE.md](INICIALIZACAO_ATAQUE.md).
+
 ## Testes e limitações
 
-As 158.117 execuções do relatório contam chamadas delimitadas de entrada/trecho,
+As 170.295 execuções do relatório contam chamadas delimitadas de entrada/trecho,
 não cada `CALL` interna. Toda chamada recusa execução fora dos intervalos
 declarados e exige alcançar uma parada. Limites: um segundo por chamada,
 20.000 instruções normalmente, 100.000 na linha e 1.000.000 na seleção.
@@ -246,6 +260,8 @@ e fragmentos de manutenção. A mira acrescenta 145.092 chamadas, detalhadas em
 com os **276 bytes** do registro, preservando os demais campos.
 A máquina acrescenta outras 7.066 execuções, incluindo emissão e um ciclo
 contínuo de 60 passos, descritos em [ANIMACAO_DISPARO.md](ANIMACAO_DISPARO.md).
+A inicialização e a pós-carga acrescentam 12.178 execuções, descritas em
+[INICIALIZACAO_ATAQUE.md](INICIALIZACAO_ATAQUE.md).
 
 Limites deliberados:
 

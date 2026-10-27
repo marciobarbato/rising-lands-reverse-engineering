@@ -24,7 +24,7 @@ simula voos de projéteis; comunica efeitos externos por chamadas explícitas.
 | `0x46e208` / `0x46e049` | `ProjectileSet` / `ProjectileLineaire` | Preparação original de um slot livre no ensaio adicional |
 | `0x450874` | `InfligeDegat` | Fronteira de dano; sem nova tradução aritmética |
 
-O [manifesto](evidencias/manifesto.json) tem 50 intervalos, SHA-256 original,
+O [manifesto](evidencias/manifesto.json) tem 69 intervalos, SHA-256 original,
 constantes e tabelas de despacho. Os offsets de saída e deslocamento do corpo
 estão em [dados-disparo.json](evidencias/dados-disparo.json), extraídos do EXE
 original por [extrair_evidencias.py](extrair_evidencias.py). Os testes conferem
@@ -113,7 +113,9 @@ tipo 16 também sai das comparações posteriores. A bancada verifica 26 tipos
 e recusa executar RNG fora dos intervalos declarados.
 
 Não há atribuição a **+8a=2 ou 3** no corpo de `CalculAttaqueEngin`. A origem
-dessas fases continua uma questão externa; a tradução não inventa a transição
+dessas fases foi investigada em [INICIALIZACAO_ATAQUE.md](INICIALIZACAO_ATAQUE.md):
+não foi identificado um atribuidor direto de 2/3; carregadores preservam
+valores externos. A tradução não inventa a transição
 `0 -> 1 -> 2 -> 3` como ciclo universal.
 
 ## Contrato das emissões
@@ -157,8 +159,8 @@ fica com o backend de som. Não há chamada Win32/DirectSound pela implementaç�
 ## Validação e limites
 
 Esta etapa acrescenta **19 testes** (cinco de contrato e 14 diferenciais) e
-**7.066 execuções x86 delimitadas**. A suíte completa tem **52 testes aprovados,
-158.117 execuções, zero falhas/erros/ignorados**, registrados em
+**7.066 execuções x86 delimitadas**. A suíte completa tem **67 testes aprovados,
+170.295 execuções, zero falhas/erros/ignorados**, registrados em
 [validacao-emulada.json](validacao-emulada.json).
 
 | Conferência nova | Execuções |
@@ -220,9 +222,10 @@ qualquer adaptação ao contexto geral fica para o chat principal. A lista de
 chamadas é cumulativa: pode ser limpa entre passos para inspecionar cada tick.
 
 Reprodução: `python3 -B validar.py --emular`, com JIT do Unicorn permitido.
-Sem JIT, `python3 -B validar.py` executa 17 contratos e ignora explicitamente
-35 diferenciais. Nenhuma etapa inicia o jogo.
+Sem JIT, `python3 -B validar.py` executa 22 contratos e ignora explicitamente
+45 diferenciais. Nenhuma etapa inicia o jogo.
 
-Próximos passos: encontrar quem atribui +8a=2/3 e inicializa +8b/+7a/+79,
-reconstruir o pool/voo/impacto de projéteis como backend separado e validar
+A inicialização de +8b/+7a/+79 e o rastreio de fases 2/3 estão em
+[INICIALIZACAO_ATAQUE.md](INICIALIZACAO_ATAQUE.md). Próximos passos: reconstruir
+o pool/voo/impacto de projéteis como backend separado e validar
 magias válidas. Som e `AnimBallonStatic` permanecem efeitos delegados.

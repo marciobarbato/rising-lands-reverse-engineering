@@ -161,7 +161,7 @@ mascaradas e arredondamento ao mais próximo. O flag de workaround em `0x49946c`
 
 Os **11 testes novos** (quatro de contrato e sete diferenciais) acrescentam
 **145.092 execuções x86 delimitadas**. Com a etapa posterior de animação,
-a suíte atual tem **52 testes, 158.117 execuções e zero falhas/erros/ignorados** no
+a suíte atual tem **67 testes, 170.295 execuções e zero falhas/erros/ignorados** no
 [relatório emulado](validacao-emulada.json).
 
 | Grupo novo | Execuções |
@@ -189,5 +189,5 @@ ESP após o retorno e o control word. O executável original é somente lido e
 verificado pelo SHA-256 já registrado; não há execução de Windows ou partida.
 
 Para reproduzir tudo nesta pasta: `python3 -B validar.py --emular`, com JIT do
-Unicorn permitido. Sem emulação, a suíte atual executa 17 contratos e
-marca 35 diferenciais explicitamente como ignorados.
+Unicorn permitido. Sem emulação, a suíte atual executa 22 contratos e
+marca 45 diferenciais explicitamente como ignorados.
