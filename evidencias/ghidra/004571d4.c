@@ -14,11 +14,11 @@ void FUN_004571d4(void)
 
   pUVar1 = tabela_unidades;
   tabela_unidades[in_AX].tipo_id = 9;
-  pUVar1[in_AX].field_0x93 = 1;
-  pUVar1[in_AX].field_0x98 = 2;
-  pUVar1[in_AX].field_0xa7 = 2;
+  pUVar1[in_AX].periodo_giro = 1;
+  pUVar1[in_AX].incremento_passo = 2;
+  pUVar1[in_AX].periodo_animacao = 2;
   pUVar1[in_AX].field_0xa8 = 4;
-  pUVar1[in_AX].field_0xa5 = 8;
+  pUVar1[in_AX].quantidade_quadros_movimento = 8;
   pUVar1[in_AX].field_0x9d = 0xff;
   pUVar1[in_AX].field_0xac = 3;
   pUVar1[in_AX].field_0xad = 3;

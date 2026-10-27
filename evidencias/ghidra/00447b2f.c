@@ -79,13 +79,13 @@ void FUN_00447b2f(void)
     if ((int)(uVar5 % 5) == 0) {
       pUVar1[uVar2].field_0xab = pUVar1[uVar2].field_0xab + '\x01';
     }
-    pUVar1[uVar2].field_0xa4 = pUVar1[uVar2].field_0xa4 + '\x01';
+    pUVar1[uVar2].quadro_movimento = pUVar1[uVar2].quadro_movimento + 1;
     uVar4 = extraout_ECX_02;
   }
   if ((((pUVar1[uVar2].field_0xae == '\0') && ((byte)pUVar1[uVar2].field_0xab < 0x28)) &&
       (pUVar1[uVar2].field_0x96 == '\0')) && (pUVar1[uVar2].field_0x94 == '\0')) {
     pUVar1[uVar2].field_0xae = 1;
-    pUVar1[uVar2].field_0xa4 = 0;
+    pUVar1[uVar2].quadro_movimento = 0;
     pUVar1 = tabela_unidades;
     uVar4 = uVar4 & 0xffff;
     uVar3 = FUN_004766f0(uVar4,(uint)DAT_00508041);

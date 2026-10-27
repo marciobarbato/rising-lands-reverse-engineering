@@ -48,7 +48,7 @@ undefined8 __fastcall FUN_0044ab60(int param_1,undefined4 param_2)
   pUVar7 = (UnidadeParcial *)(uint)bVar1;
   if (bVar1 != 0) {
     if (bVar1 == 1) {
-      if (pUVar11->field_0x90 == pUVar11->field_0x91) {
+      if (pUVar11->direcao_desejada == pUVar11->orientacao_atual) {
         uVar12 = FUN_00447e12(param_1,uVar5);
         uVar12 = FUN_0041c652(extraout_ECX_04,(int)((ulonglong)uVar12 >> 0x20));
         uVar8 = extraout_ECX_05;
@@ -62,9 +62,9 @@ undefined8 __fastcall FUN_0044ab60(int param_1,undefined4 param_2)
           }
           pUVar7 = (UnidadeParcial *)(uint)(byte)pUVar11->field_0x8b;
           if ((pUVar7 == (UnidadeParcial *)0x0) &&
-             (pUVar7 = (UnidadeParcial *)(uint)(byte)pUVar11->field_0xa4,
+             (pUVar7 = (UnidadeParcial *)(uint)pUVar11->quadro_movimento,
              pUVar7 == (UnidadeParcial *)0x2)) {
-            uVar5 = FUN_004770ee(uVar8,pUVar11->field_0x91);
+            uVar5 = FUN_004770ee(uVar8,pUVar11->orientacao_atual);
             FUN_004704dc(extraout_ECX_07,uVar5);
             FUN_0046e44c(0,0,0,0,0);
             uVar12 = FUN_0041a976(extraout_ECX_08,extraout_EDX);
@@ -228,15 +228,15 @@ undefined8 __fastcall FUN_0044ab60(int param_1,undefined4 param_2)
           }
           pUVar11->field_0x89 = 1;
           pUVar11->field_0x8b = 0x14;
-          pUVar11->field_0xa9 = 0;
+          pUVar11->contador_animacao = 0;
           pUVar7 = (UnidadeParcial *)(uint)(byte)pUVar11->field_0xbe;
-          pUVar11->field_0xa4 = 0;
+          pUVar11->quadro_movimento = 0;
           if (pUVar7 == (UnidadeParcial *)0x11) {
-            pUVar11->field_0x90 = 7;
+            pUVar11->direcao_desejada = 7;
             goto switchD_0044d86e_default;
           }
           if ((pUVar7 != (UnidadeParcial *)0x9) && (pUVar7 != (UnidadeParcial *)0xc)) {
-            pUVar11->field_0x90 = 3;
+            pUVar11->direcao_desejada = 3;
             goto switchD_0044d86e_default;
           }
           uVar8 = extraout_ECX_02;
@@ -347,7 +347,7 @@ undefined8 __fastcall FUN_0044ab60(int param_1,undefined4 param_2)
       uVar8 = extraout_ECX_03;
 LAB_0044adec:
       pUVar7 = (UnidadeParcial *)FUN_00477042(uVar8,(ushort)uStack_1c);
-      pUVar11->field_0x90 = (char)pUVar7;
+      pUVar11->direcao_desejada = (byte)pUVar7;
       goto switchD_0044d86e_default;
     }
   }

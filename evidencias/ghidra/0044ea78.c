@@ -39,7 +39,7 @@ void __fastcall FUN_0044ea78(undefined4 param_1)
     if (!bVar2) {
       tabela_unidades[uVar10].field_0x89 = 1;
       pUVar3[uVar10].field_0x8b = 10;
-      pUVar3[uVar10].field_0xa4 = bVar2;
+      pUVar3[uVar10].quadro_movimento = bVar2;
       FUN_0044f29a();
       return;
     }
@@ -53,7 +53,7 @@ LAB_0044eaf3:
     if (((uint)uVar12 & 0xff) == (uint)((ulonglong)uVar12 >> 0x20)) {
       pUVar3[uVar10].field_0x89 = 1;
       pUVar3[uVar10].field_0x8b = 10;
-      pUVar3[uVar10].field_0xa4 = 0;
+      pUVar3[uVar10].quadro_movimento = 0;
       FUN_0044f29a();
       return;
     }
@@ -92,7 +92,7 @@ LAB_0044ed45:
         if ((uVar4 == 0xffff) ||
            ((uint)pUVar3[uVar10].campo_0c < *(ushort *)&pUVar3[uVar10].field_0x70 + 1))
         goto LAB_0044ed45;
-        pUVar3[uVar10].field_0xa4 = 0;
+        pUVar3[uVar10].quadro_movimento = 0;
         pUVar9 = tabela_unidades;
         tabela_unidades[in_EAX & 0xffff].celula_destino = uVar4;
         if (sVar11 == DAT_00496304) {

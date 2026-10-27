@@ -168,7 +168,7 @@ LAB_0044d8f7:
       uVar16 = FUN_00428cc0((uint)bVar19 * 0x19,3);
       cVar7 = (&DAT_004965de)[extraout_ECX_33 * 2];
       uVar15 = (undefined3)(uVar16 >> 8);
-      pUVar5[uVar21].field_0xa4 = 0;
+      pUVar5[uVar21].quadro_movimento = 0;
 LAB_0044d90c:
       pUVar11 = (UnidadeParcial *)CONCAT31(uVar15,cVar7 - (char)uVar16);
       goto LAB_0044d549;
@@ -210,7 +210,7 @@ LAB_0044d90c:
              pUVar11 = (UnidadeParcial *)CONCAT31((int3)(uVar12 >> 8),bVar4), !bVar4))
           goto LAB_0044dc0c;
           uVar12 = in_EAX & 0xffff;
-          pUVar5[uVar21].field_0xa4 = 0;
+          pUVar5[uVar21].quadro_movimento = 0;
           pUVar10 = tabela_unidades;
           uVar16 = uVar12 * 0x114;
           tabela_unidades[uVar12].celula_destino = uVar9;
@@ -1021,7 +1021,7 @@ LAB_0044d224:
                      (uint)CONCAT11((char)(*(ushort *)(extraout_ECX_27 + 2) >> 8),bVar4), !bVar4))
         goto LAB_0044d182;
         uVar20 = in_EAX & 0xffff;
-        pUVar5[uVar21].field_0xa4 = 0;
+        pUVar5[uVar21].quadro_movimento = 0;
         pUVar10 = tabela_unidades;
         uVar16 = uVar20 * 0x114;
         tabela_unidades[uVar20].celula_destino = (ushort)uVar12;
@@ -1168,12 +1168,12 @@ joined_r0x0044dc80:
       }
       pUVar5[uVar21].field_0x89 = 3;
       iVar14 = (uint)pUVar5[uVar21].tipo_id * 0x19;
-      pUVar5[uVar21].field_0x90 = 9;
+      pUVar5[uVar21].direcao_desejada = 9;
       goto LAB_0044c93b;
     }
     break;
   case 3:
-    if (tabela_unidades[uVar21].field_0x90 != tabela_unidades[uVar21].field_0x91) {
+    if (tabela_unidades[uVar21].direcao_desejada != tabela_unidades[uVar21].orientacao_atual) {
       uVar24 = FUN_00448599(uVar16,param_2);
       pUVar11 = (UnidadeParcial *)uVar24;
       goto switchD_0044d86e_default;

@@ -123,9 +123,9 @@ uint __fastcall FUN_0041374c(undefined4 param_1,int param_2)
     FUN_0045b796('\x01',sVar11);
     break;
   case 0xc:
-    uVar9 = (uint)(byte)pUVar10->field_0x91;
-    local_30 = (uint)(byte)pUVar10->field_0xa4 * (uVar9 % 2) +
-               (uVar9 / 2) * (uint)(byte)pUVar10->field_0xa5 + (int)(uVar9 - 1) / 2;
+    uVar9 = (uint)pUVar10->orientacao_atual;
+    local_30 = (uint)pUVar10->quadro_movimento * (uVar9 % 2) +
+               (uVar9 / 2) * (uint)pUVar10->quantidade_quadros_movimento + (int)(uVar9 - 1) / 2;
     FUN_0045b796('\x01',sVar11);
     break;
   case 0xe:
@@ -135,14 +135,14 @@ uint __fastcall FUN_0041374c(undefined4 param_1,int param_2)
     FUN_0045b796('\x01',sVar11);
     break;
   case 0x10:
-    uVar9 = (uint)(byte)pUVar10->field_0x91;
-    local_30 = (uint)(byte)pUVar10->field_0xa4 * (uVar9 % 2) +
-               (uint)(byte)pUVar10->field_0xa5 * (uVar9 / 2) + (int)(uVar9 - 1) / 2;
+    uVar9 = (uint)pUVar10->orientacao_atual;
+    local_30 = (uint)pUVar10->quadro_movimento * (uVar9 % 2) +
+               (uint)pUVar10->quantidade_quadros_movimento * (uVar9 / 2) + (int)(uVar9 - 1) / 2;
     FUN_0045b796('\x01',sVar11);
     FUN_00411147((uint)unaff_BX,(int)(short)((sVar11 + -0x14) - (ushort)(byte)pUVar10->field_0xab));
-    uVar9 = (uint)(byte)pUVar10->field_0x91;
-    local_30 = (uVar9 % 2) * (uint)(byte)pUVar10->field_0xa4 +
-               (uVar9 / 2) * (uint)(byte)pUVar10->field_0xa5 + (int)(uVar9 - 1) / 2;
+    uVar9 = (uint)pUVar10->orientacao_atual;
+    local_30 = (uVar9 % 2) * (uint)pUVar10->quadro_movimento +
+               (uVar9 / 2) * (uint)pUVar10->quantidade_quadros_movimento + (int)(uVar9 - 1) / 2;
     FUN_0045b796('\x01',sVar11);
     FUN_00411147((uint)unaff_BX,(int)(short)(sVar11 - (ushort)(byte)pUVar10->field_0xab));
     uVar12 = sVar11 - 0x29;
@@ -160,8 +160,8 @@ LAB_00413f6b:
     FUN_0045b796('\x01',sVar11);
     break;
   case 0x16:
-    local_30 = (uint)(byte)pUVar10->field_0xa4 +
-               (uint)(byte)pUVar10->field_0xa6 * (((byte)pUVar10->field_0x91 + 1) / 2 - 1);
+    local_30 = (uint)pUVar10->quadro_movimento +
+               (uint)(byte)pUVar10->field_0xa6 * ((pUVar10->orientacao_atual + 1) / 2 - 1);
     FUN_0045b796('\x01',sVar11);
     break;
   case 0x17:

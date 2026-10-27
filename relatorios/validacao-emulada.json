@@ -1,0 +1,13 @@
+{
+  "python": "3.9.6",
+  "emulacao_habilitada": true,
+  "testes": 37,
+  "falhas": 0,
+  "erros": 0,
+  "ignorados": [],
+  "execucoes_x86_delimitadas": 8932,
+  "sucesso": true,
+  "unicorn": "2.1.4",
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "limite": "Trechos isolados com memória sintética; não é validação do jogo completo."
+}

@@ -67,7 +67,7 @@ LAB_0044f351:
     if (pUVar7 == (UnidadeParcial *)((ulonglong)uVar12 >> 0x20)) {
       pUVar5[uVar11].field_0x89 = 1;
       pUVar5[uVar11].field_0x8b = 10;
-      pUVar5[uVar11].field_0xa4 = 0;
+      pUVar5[uVar11].quadro_movimento = 0;
       goto switchD_0044d86e_default;
     }
     uVar6 = FUN_00477b74(pUVar5[uVar11].field_0x84 + 0x42,10);
@@ -104,7 +104,7 @@ LAB_0044f406:
         uVar6 = FUN_00477b74(cVar2 + 0x42,10);
         pUVar7 = (UnidadeParcial *)(uint)uVar6;
         if (pUVar7 == (UnidadeParcial *)0xffff) goto LAB_0044f54d;
-        pUVar5[uVar11].field_0xa4 = 0;
+        pUVar5[uVar11].quadro_movimento = 0;
         pUVar7 = tabela_unidades + in_AX;
         pUVar7->celula_destino = uVar6;
         if (in_AX == DAT_00496304) {
@@ -163,12 +163,12 @@ LAB_0044f54d:
     pUVar7 = (UnidadeParcial *)(uint)(byte)tabela_unidades[uVar11].field_0x82;
     tabela_unidades[uVar11].field_0x89 = 3;
     if (pUVar7 == (UnidadeParcial *)0x2) {
-      pUVar5[uVar11].field_0x90 = 9;
+      pUVar5[uVar11].direcao_desejada = 9;
     }
     goto LAB_0044f6e6;
   case 3:
-    pUVar7 = (UnidadeParcial *)(uint)(byte)tabela_unidades[uVar11].field_0x90;
-    if (tabela_unidades[uVar11].field_0x90 != tabela_unidades[uVar11].field_0x91) {
+    pUVar7 = (UnidadeParcial *)(uint)tabela_unidades[uVar11].direcao_desejada;
+    if (tabela_unidades[uVar11].direcao_desejada != tabela_unidades[uVar11].orientacao_atual) {
       uVar12 = FUN_00448599(param_1,param_2);
       pUVar7 = (UnidadeParcial *)uVar12;
       goto switchD_0044d86e_default;

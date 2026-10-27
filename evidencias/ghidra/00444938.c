@@ -92,7 +92,7 @@ void FUN_00444938(void)
         DAT_004e0f3c = 0;
         DAT_00496304 = -1;
       }
-      pUVar9->field_0xa4 = 0;
+      pUVar9->quadro_movimento = 0;
       *(undefined2 *)&pUVar9->field_0xc2 = 0;
       FUN_00472648(iVar6);
       FUN_00442eac();

@@ -33,8 +33,8 @@ void __fastcall FUN_0044a706(undefined4 param_1)
         if (tabela_unidades[uVar7].celula_atual == *(ushort *)&tabela_unidades[uVar7].field_0xb2) {
           tabela_unidades[uVar7].field_0x89 = 1;
           pUVar2[uVar7].field_0x8b = 0x14;
-          pUVar2[uVar7].field_0xa9 = 0;
-          pUVar2[uVar7].field_0xa4 = 0;
+          pUVar2[uVar7].contador_animacao = 0;
+          pUVar2[uVar7].quadro_movimento = 0;
         }
         else if ((*(short *)&tabela_unidades[uVar7].field_0xd8 == 0) ||
                 (tabela_unidades[uVar7].field_0xda == '\0')) {

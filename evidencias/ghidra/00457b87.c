@@ -18,7 +18,7 @@ void __fastcall FUN_00457b87(byte param_1,ushort param_2)
   uint extraout_ECX_00;
   int extraout_ECX_01;
   uint extraout_EDX;
-  undefined1 unaff_BL;
+  byte unaff_BL;
   longlong lVar7;
 
   pUVar3 = tabela_unidades;
@@ -35,23 +35,23 @@ void __fastcall FUN_00457b87(byte param_1,ushort param_2)
   pUVar4[in_AX].estado_caminho = 0;
   *(undefined2 *)&pUVar3[in_AX].field_0xb2 = 0xffff;
   pUVar3[in_AX].field_0xab = 0;
-  pUVar3[in_AX].field_0x97 = 0;
+  pUVar3[in_AX].progresso_passo = 0;
   pUVar3[in_AX].field_0x95 = 0;
   pUVar3[in_AX].field_0x96 = 0;
-  pUVar3[in_AX].field_0x92 = 0;
+  pUVar3[in_AX].contador_giro = 0;
   pUVar3[in_AX].deslocamento_x = 0;
   pUVar3[in_AX].deslocamento_y = 0;
   pUVar3[in_AX].field_0xb6 = 0;
   pUVar3[in_AX].field_0xaa = 0;
   pUVar3[in_AX].field_0x9c = 99;
-  pUVar3[in_AX].field_0xa4 = 0;
-  pUVar3[in_AX].field_0xa9 = 0;
+  pUVar3[in_AX].quadro_movimento = 0;
+  pUVar3[in_AX].contador_animacao = 0;
   pUVar3[in_AX].field_0x9e = 0;
   *(undefined2 *)&pUVar3[in_AX].field_0xb8 = 0xffff;
   *(undefined2 *)&pUVar3[in_AX].field_0x8c = 0;
   pUVar3[in_AX].field_0x8e = 0;
-  pUVar3[in_AX].field_0x90 = unaff_BL;
-  pUVar3[in_AX].field_0x91 = unaff_BL;
+  pUVar3[in_AX].direcao_desejada = unaff_BL;
+  pUVar3[in_AX].orientacao_atual = unaff_BL;
   pUVar3[in_AX].field_0x94 = unaff_BL;
   pUVar3[in_AX].tipo_id = param_1;
   pUVar3[in_AX].estado_caminho = 0;

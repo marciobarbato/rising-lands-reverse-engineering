@@ -62,7 +62,7 @@ undefined8 __fastcall FUN_00451464(undefined4 param_1,undefined4 param_2)
     if (pUVar1->tipo_id == 3) {
       iVar6 = (bVar3 + 0xb) % 0x10 + 1;
     }
-    bVar7 = (char)iVar6 == pUVar1->field_0x91;
+    bVar7 = (byte)iVar6 == pUVar1->orientacao_atual;
   }
   return CONCAT44(param_2,CONCAT31((int3)((uint)iVar6 >> 8),bVar7));
 }

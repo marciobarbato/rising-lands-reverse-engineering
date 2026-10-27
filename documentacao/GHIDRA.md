@@ -42,7 +42,7 @@ a pesquisa utiliza `RISING-analise.exe`.
 
 ## Resultados e limites
 
-- 250 rotinas relacionadas à tabela de unidades exportadas em C e assembly.
+- 255 rotinas relacionadas à tabela de unidades e suas auxiliares exportadas em C e assembly.
 - Índice de todas as funções reconhecidas e referências à tabela em TSV.
 - Estrutura parcial de instância com 276 bytes aplicada no projeto.
 - Sete acessores recebem assinaturas explícitas com argumento em `AX` e retorno

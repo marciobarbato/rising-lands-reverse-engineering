@@ -84,11 +84,11 @@ descompilada nesta etapa.
 | Soldado contra construção | 2 na matriz de entrada |
 | Capitão: alcance do INI | 8 |
 | Capitão: alcance armazenado | 64 |
-| Bônus do capitão | 2; aplicação ainda não reconstruída |
+| Bônus do capitão | 2; aplicação parcial e filtro de proximidade descritos em COMBATE.md |
 
 Não se deve deduzir que dano seja simplesmente `matriz - blindagem`, nem que
 recrutamento 800 corresponda a 800 ms ou a uma quantidade conhecida de segundos.
-Essas conversões exigem seguir as rotinas consumidoras.
+O caminho parcialmente reconstruído está em [COMBATE.md](COMBATE.md).
 
 ## Resultado utilizável
 

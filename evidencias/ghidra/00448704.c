@@ -24,56 +24,56 @@ void __fastcall FUN_00448704(undefined4 param_1,char param_2)
   UnidadeParcial *pUVar7;
 
   pUVar7 = tabela_unidades + (in_EAX & 0xffff);
-  bVar1 = pUVar7->field_0x90;
+  bVar1 = pUVar7->direcao_desejada;
   if (bVar1 < 7) {
     if (bVar1 < 3) {
       if (bVar1 != 1) goto LAB_00448889;
-      sVar6 = pUVar7->deslocamento_x - (pUVar7->field_0x98 - param_2);
+      sVar6 = pUVar7->deslocamento_x - (pUVar7->incremento_passo - param_2);
 LAB_0044877b:
       pUVar7->deslocamento_x = sVar6;
       goto LAB_00448889;
     }
     if (bVar1 < 4) {
-      pUVar7->deslocamento_x = pUVar7->deslocamento_x - (pUVar7->field_0x98 - param_2);
-      sVar6 = pUVar7->deslocamento_y - (pUVar7->field_0x98 - param_2);
+      pUVar7->deslocamento_x = pUVar7->deslocamento_x - (pUVar7->incremento_passo - param_2);
+      sVar6 = pUVar7->deslocamento_y - (pUVar7->incremento_passo - param_2);
 LAB_004487ac:
       pUVar7->deslocamento_y = sVar6;
       goto LAB_00448889;
     }
     if (bVar1 != 5) goto LAB_00448889;
-    sVar6 = pUVar7->deslocamento_y - (pUVar7->field_0x98 - param_2);
+    sVar6 = pUVar7->deslocamento_y - (pUVar7->incremento_passo - param_2);
   }
   else {
     if (bVar1 < 8) {
-      pUVar7->deslocamento_x = pUVar7->deslocamento_x + (pUVar7->field_0x98 - param_2);
-      pUVar7->deslocamento_y = pUVar7->deslocamento_y - (pUVar7->field_0x98 - param_2);
+      pUVar7->deslocamento_x = pUVar7->deslocamento_x + (pUVar7->incremento_passo - param_2);
+      pUVar7->deslocamento_y = pUVar7->deslocamento_y - (pUVar7->incremento_passo - param_2);
       goto LAB_00448889;
     }
     if (bVar1 < 0xb) {
       if (bVar1 != 9) goto LAB_00448889;
-      sVar6 = pUVar7->deslocamento_x + (pUVar7->field_0x98 - param_2);
+      sVar6 = pUVar7->deslocamento_x + (pUVar7->incremento_passo - param_2);
       goto LAB_0044877b;
     }
     if (bVar1 < 0xc) {
-      pUVar7->deslocamento_x = pUVar7->deslocamento_x + (pUVar7->field_0x98 - param_2);
-      sVar6 = pUVar7->deslocamento_y + (pUVar7->field_0x98 - param_2);
+      pUVar7->deslocamento_x = pUVar7->deslocamento_x + (pUVar7->incremento_passo - param_2);
+      sVar6 = pUVar7->deslocamento_y + (pUVar7->incremento_passo - param_2);
       goto LAB_004487ac;
     }
     if (bVar1 < 0xd) goto LAB_00448889;
     if (0xd < bVar1) {
       if (bVar1 == 0xf) {
-        pUVar7->deslocamento_x = pUVar7->deslocamento_x - (pUVar7->field_0x98 - param_2);
-        pUVar7->deslocamento_y = pUVar7->deslocamento_y + (pUVar7->field_0x98 - param_2);
+        pUVar7->deslocamento_x = pUVar7->deslocamento_x - (pUVar7->incremento_passo - param_2);
+        pUVar7->deslocamento_y = pUVar7->deslocamento_y + (pUVar7->incremento_passo - param_2);
       }
       goto LAB_00448889;
     }
-    sVar6 = pUVar7->deslocamento_y + (pUVar7->field_0x98 - param_2);
+    sVar6 = pUVar7->deslocamento_y + (pUVar7->incremento_passo - param_2);
   }
   pUVar7->deslocamento_y = sVar6;
 LAB_00448889:
-  pUVar7->field_0x97 = pUVar7->field_0x97 + (pUVar7->field_0x98 - param_2);
-  if (0x1f < (byte)pUVar7->field_0x97) {
-    pUVar7->field_0x97 = 0;
+  pUVar7->progresso_passo = pUVar7->progresso_passo + (pUVar7->incremento_passo - param_2);
+  if (0x1f < pUVar7->progresso_passo) {
+    pUVar7->progresso_passo = 0;
     pUVar7->deslocamento_x = 0;
     pUVar7->deslocamento_y = 0;
     FUN_00442eac();

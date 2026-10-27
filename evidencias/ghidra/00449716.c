@@ -7,23 +7,23 @@
 undefined8 __fastcall FUN_00449716(undefined4 param_1,undefined4 param_2)
 
 {
-  byte bVar1;
-  bool bVar2;
-  char cVar3;
+  bool bVar1;
+  char cVar2;
   ushort in_AX;
-  ushort uVar4;
-  int iVar5;
+  ushort uVar3;
+  int iVar4;
+  UnidadeParcial *pUVar5;
   UnidadeParcial *pUVar6;
   UnidadeParcial *pUVar7;
-  UnidadeParcial *pUVar8;
-  char cVar10;
-  undefined4 uVar9;
+  byte bVar9;
+  undefined4 uVar8;
+  byte bVar12;
   int extraout_ECX;
   int extraout_ECX_00;
   undefined4 extraout_ECX_01;
   undefined4 extraout_ECX_02;
   undefined4 extraout_ECX_03;
-  uint uVar11;
+  uint uVar10;
   uint extraout_ECX_04;
   uint extraout_ECX_05;
   undefined4 extraout_ECX_06;
@@ -36,7 +36,7 @@ undefined8 __fastcall FUN_00449716(undefined4 param_1,undefined4 param_2)
   undefined4 extraout_ECX_12;
   undefined4 extraout_ECX_13;
   uint extraout_ECX_14;
-  uint uVar12;
+  uint uVar11;
   undefined4 extraout_ECX_15;
   undefined4 extraout_ECX_16;
   undefined4 extraout_ECX_17;
@@ -61,24 +61,24 @@ undefined8 __fastcall FUN_00449716(undefined4 param_1,undefined4 param_2)
   ushort uStack_2c;
 
   pUVar16 = tabela_unidades + in_AX;
-  bVar1 = pUVar16->tipo_id;
-  if ((((bVar1 < 6) || (bVar1 < 7)) || (bVar1 < 9)) || (bVar1 < 0xb)) {
+  bVar12 = pUVar16->tipo_id;
+  if ((((bVar12 < 6) || (bVar12 < 7)) || (bVar12 < 9)) || (bVar12 < 0xb)) {
 LAB_00449769:
-    pUVar6 = (UnidadeParcial *)(uint)*(ushort *)&pUVar16->field_0xc0;
+    pUVar5 = (UnidadeParcial *)(uint)*(ushort *)&pUVar16->field_0xc0;
     if ((UnidadeParcial *)(uint)*(ushort *)&pUVar16->field_0xc0 == (UnidadeParcial *)0xffff)
     goto switchD_0044d86e_default;
     uVar17 = FUN_0041a4f4(param_1,param_2);
-    iVar5 = extraout_ECX;
+    iVar4 = extraout_ECX;
     if (((uint)uVar17 & 0xff) == 8) {
       uVar17 = FUN_0041a08c((uint)in_AX,(int)((ulonglong)uVar17 >> 0x20));
       iVar14 = (uint)in_AX * 0x44 + extraout_ECX_00;
       iVar15 = iVar14 * 4;
-      iVar5 = extraout_ECX_00;
+      iVar4 = extraout_ECX_00;
       if ((byte)uVar17 == (&tabela_unidades->proprietario_id)[iVar15]) {
-        iVar5 = FUN_0041d057(extraout_ECX_00);
-        *(ushort *)&pUVar16->field_0xb2 = (ushort)iVar5;
+        iVar4 = FUN_0041d057(extraout_ECX_00);
+        *(ushort *)&pUVar16->field_0xb2 = (ushort)iVar4;
         pUVar16 = tabela_unidades;
-        (&tabela_unidades->celula_destino)[iVar14 * 2] = (ushort)iVar5;
+        (&tabela_unidades->celula_destino)[iVar14 * 2] = (ushort)iVar4;
         if (in_AX == DAT_00496304) {
           DAT_004e0f36 = 0;
           DAT_004e0f37 = 0;
@@ -88,36 +88,36 @@ LAB_00449769:
         (&pUVar16->estado_caminho)[iVar15] = 0;
         pUVar16 = tabela_unidades;
         if ((tabela_unidades[in_AX].estado == 0) || (tabela_unidades[in_AX].estado == 4)) {
-          pUVar6 = (UnidadeParcial *)0x0;
+          pUVar5 = (UnidadeParcial *)0x0;
         }
         else {
-          pUVar6 = (UnidadeParcial *)0x1;
+          pUVar5 = (UnidadeParcial *)0x1;
         }
-        if (((char)pUVar6 != '\0') &&
-           (tabela_unidades[in_AX].estado = 0x15, pUVar6 = pUVar16, in_AX == DAT_00496304)) {
+        if (((char)pUVar5 != '\0') &&
+           (tabela_unidades[in_AX].estado = 0x15, pUVar5 = pUVar16, in_AX == DAT_00496304)) {
           DAT_004e0f36 = 0;
           DAT_004e0f37 = 0;
           DAT_00496304 = 0xffff;
           DAT_004e0f3c = 0;
-          pUVar6 = (UnidadeParcial *)0x0;
+          pUVar5 = (UnidadeParcial *)0x0;
         }
         goto switchD_0044d86e_default;
       }
     }
     if (((*(int *)&pUVar16->field_0x83 >> 0x18 == 0) && (*(int *)&pUVar16->field_0x84 >> 0x18 == 0))
-       && (iVar5 = FUN_0042381f(iVar5,(uint)pUVar16->celula_atual), (char)iVar5 != '\0')) {
+       && (iVar4 = FUN_0042381f(iVar4,(uint)pUVar16->celula_atual), (char)iVar4 != '\0')) {
       uVar13 = (uint)in_AX;
-      cVar3 = FUN_0041f76e(uVar13,uVar13);
-      pUVar8 = tabela_unidades;
-      if (cVar3 == '\0') {
+      cVar2 = FUN_0041f76e(uVar13,uVar13);
+      pUVar7 = tabela_unidades;
+      if (cVar2 == '\0') {
         if ((tabela_unidades[uVar13].estado == 0) || (tabela_unidades[uVar13].estado == 4)) {
-          pUVar6 = (UnidadeParcial *)0x0;
+          pUVar5 = (UnidadeParcial *)0x0;
         }
         else {
-          pUVar6 = (UnidadeParcial *)0x1;
+          pUVar5 = (UnidadeParcial *)0x1;
         }
-        if (((char)pUVar6 != '\0') &&
-           (tabela_unidades[in_AX].estado = 7, pUVar6 = pUVar8, in_AX == DAT_00496304)) {
+        if (((char)pUVar5 != '\0') &&
+           (tabela_unidades[in_AX].estado = 7, pUVar5 = pUVar7, in_AX == DAT_00496304)) {
           DAT_004e0f36 = 0;
           DAT_004e0f37 = 0;
           DAT_00496304 = 0xffff;
@@ -125,41 +125,41 @@ LAB_00449769:
         }
       }
       else {
-        uVar4 = FUN_0041aee2();
+        uVar3 = FUN_0041aee2();
         FUN_00457058();
-        uVar9 = extraout_EDX_00;
+        uVar8 = extraout_EDX_00;
         if (tabela_unidades[uVar13].tipo_id == 10) {
           uVar17 = FUN_0041a4f4(extraout_ECX_01,extraout_EDX_00);
-          uVar9 = (undefined4)((ulonglong)uVar17 >> 0x20);
+          uVar8 = (undefined4)((ulonglong)uVar17 >> 0x20);
           if (((uint)uVar17 & 0xff) == 0x10) {
-            uVar4 = (ushort)((ulonglong)uVar17 >> 0x20);
-            pUVar16->celula_passo = uVar4;
-            pUVar16->celula_atual = uVar4;
+            uVar3 = (ushort)((ulonglong)uVar17 >> 0x20);
+            pUVar16->celula_passo = uVar3;
+            pUVar16->celula_atual = uVar3;
             FUN_00472648(extraout_ECX_02);
             FUN_004829c8(extraout_ECX_03,extraout_DL);
             pUVar16 = tabela_unidades;
             if ((tabela_unidades[uVar13].estado == 0) || (tabela_unidades[uVar13].estado == 4)) {
-              pUVar6 = (UnidadeParcial *)0x0;
+              pUVar5 = (UnidadeParcial *)0x0;
             }
             else {
-              pUVar6 = (UnidadeParcial *)0x1;
+              pUVar5 = (UnidadeParcial *)0x1;
             }
-            if (((char)pUVar6 != '\0') &&
-               (tabela_unidades[in_AX].estado = 0, pUVar6 = pUVar16, in_AX == DAT_00496304)) {
+            if (((char)pUVar5 != '\0') &&
+               (tabela_unidades[in_AX].estado = 0, pUVar5 = pUVar16, in_AX == DAT_00496304)) {
               DAT_004e0f36 = 0;
               DAT_004e0f37 = 0;
               DAT_004e0f3c = 0;
               DAT_00496304 = 0xffff;
-              pUVar6 = (UnidadeParcial *)((uint)pUVar16 & 0xffffff00);
+              pUVar5 = (UnidadeParcial *)((uint)pUVar16 & 0xffffff00);
             }
             goto switchD_0044d86e_default;
           }
         }
-        uVar11 = (uint)in_AX;
-        uVar19 = CONCAT44(uVar9,(uint)tabela_unidades[uVar11].tipo_id);
-        uVar13 = uVar11;
-        if (tabela_unidades[uVar11].tipo_id == 10) {
-          uVar18 = FUN_0041a4f4(uVar11,uVar9);
+        uVar10 = (uint)in_AX;
+        uVar19 = CONCAT44(uVar8,(uint)tabela_unidades[uVar10].tipo_id);
+        uVar13 = uVar10;
+        if (tabela_unidades[uVar10].tipo_id == 10) {
+          uVar18 = FUN_0041a4f4(uVar10,uVar8);
           uVar19 = uVar18 & 0xffffffff000000ff;
           uVar13 = extraout_ECX_04;
           if ((((uint)uVar18 & 0xff) == 2) &&
@@ -167,19 +167,19 @@ LAB_00449769:
              , (byte)uVar19 != pUVar16->proprietario_id)) {
             uVar17 = FUN_0041a08c(extraout_ECX_05,0);
             FUN_0046dadb(extraout_ECX_06,(byte)uVar17);
-            pUVar16->celula_passo = uVar4;
-            pUVar16->celula_atual = uVar4;
+            pUVar16->celula_passo = uVar3;
+            pUVar16->celula_atual = uVar3;
             FUN_00472648(extraout_ECX_07);
             FUN_004829c8(extraout_ECX_08,extraout_DL_00);
             pUVar16 = tabela_unidades;
-            if ((tabela_unidades[uVar11].estado == 0) || (tabela_unidades[uVar11].estado == 4)) {
-              pUVar6 = (UnidadeParcial *)0x0;
+            if ((tabela_unidades[uVar10].estado == 0) || (tabela_unidades[uVar10].estado == 4)) {
+              pUVar5 = (UnidadeParcial *)0x0;
             }
             else {
-              pUVar6 = (UnidadeParcial *)0x1;
+              pUVar5 = (UnidadeParcial *)0x1;
             }
-            if (((char)pUVar6 != '\0') &&
-               (tabela_unidades[in_AX].estado = 0, pUVar6 = pUVar16, in_AX == DAT_00496304)) {
+            if (((char)pUVar5 != '\0') &&
+               (tabela_unidades[in_AX].estado = 0, pUVar5 = pUVar16, in_AX == DAT_00496304)) {
               DAT_004e0f36 = 0;
               DAT_004e0f37 = 0;
               DAT_004e0f3c = 0;
@@ -199,57 +199,58 @@ LAB_00449769:
             uVar13 = extraout_ECX_11;
           }
         }
-        pUVar16->celula_passo = uVar4;
-        pUVar16->celula_atual = uVar4;
-        pUVar6 = (UnidadeParcial *)FUN_00472648(uVar13);
+        pUVar16->celula_passo = uVar3;
+        pUVar16->celula_atual = uVar3;
+        pUVar5 = (UnidadeParcial *)FUN_00472648(uVar13);
         pUVar16->estado = 0xe;
       }
       goto switchD_0044d86e_default;
     }
     if (pUVar16->celula_destino == pUVar16->celula_atual) {
-      uVar4 = FUN_0041aee2();
+      uVar3 = FUN_0041aee2();
       pUVar16 = tabela_unidades;
-      iVar5 = (uint)in_AX * 0x44 + extraout_EDX;
-      (&tabela_unidades->celula_destino)[iVar5 * 2] = uVar4;
+      iVar4 = (uint)in_AX * 0x44 + extraout_EDX;
+      (&tabela_unidades->celula_destino)[iVar4 * 2] = uVar3;
       if (in_AX == DAT_00496304) {
         DAT_004e0f36 = 0;
         DAT_004e0f3c = 0;
         DAT_004e0f37 = 0;
         DAT_00496304 = 0xffff;
       }
-      (&pUVar16->estado_caminho)[iVar5 * 4] = 0;
+      (&pUVar16->estado_caminho)[iVar4 * 4] = 0;
     }
 LAB_00449950:
-    pUVar6 = (UnidadeParcial *)FUN_0044930c();
+    pUVar5 = (UnidadeParcial *)FUN_0044930c();
   }
   else {
-    if (bVar1 < 0x10) {
+    if (bVar12 < 0x10) {
 LAB_0044a12f:
-      pUVar6 = (UnidadeParcial *)(uint)*(ushort *)&pUVar16->field_0xc0;
+      pUVar5 = (UnidadeParcial *)(uint)*(ushort *)&pUVar16->field_0xc0;
       if ((UnidadeParcial *)(uint)*(ushort *)&pUVar16->field_0xc0 == (UnidadeParcial *)0xffff)
       goto switchD_0044d86e_default;
-      uVar4 = pUVar16->celula_destino;
-      if (pUVar16->celula_atual != uVar4) goto LAB_00449950;
-      if (uVar4 == *(ushort *)&pUVar16->field_0xb2) {
-        pUVar16->field_0x90 = 5;
-        uVar17 = FUN_00448599(param_1,CONCAT22((short)((uint)param_2 >> 0x10),uVar4));
-        pUVar6 = (UnidadeParcial *)CONCAT31((int3)((ulonglong)uVar17 >> 8),pUVar16->field_0x90);
-        if (pUVar16->field_0x90 == pUVar16->field_0x91) {
+      uVar3 = pUVar16->celula_destino;
+      if (pUVar16->celula_atual != uVar3) goto LAB_00449950;
+      if (uVar3 == *(ushort *)&pUVar16->field_0xb2) {
+        pUVar16->direcao_desejada = 5;
+        uVar17 = FUN_00448599(param_1,CONCAT22((short)((uint)param_2 >> 0x10),uVar3));
+        pUVar5 = (UnidadeParcial *)
+                 CONCAT31((int3)((ulonglong)uVar17 >> 8),pUVar16->direcao_desejada);
+        if (pUVar16->direcao_desejada == pUVar16->orientacao_atual) {
           FUN_0041a65c(extraout_ECX_16,1);
           lVar20 = FUN_00420c19(extraout_ECX_17,extraout_EDX_04);
-          pUVar6 = (UnidadeParcial *)lVar20;
+          pUVar5 = (UnidadeParcial *)lVar20;
           if ((char)lVar20 != '\0') {
-            uVar9 = FUN_00425516(extraout_ECX_18,in_AX);
-            pUVar8 = tabela_unidades;
-            if ((char)uVar9 == '\0') {
+            uVar8 = FUN_00425516(extraout_ECX_18,in_AX);
+            pUVar7 = tabela_unidades;
+            if ((char)uVar8 == '\0') {
               if ((tabela_unidades[in_AX].estado == 0) || (tabela_unidades[in_AX].estado == 4)) {
-                pUVar6 = (UnidadeParcial *)0x0;
+                pUVar5 = (UnidadeParcial *)0x0;
               }
               else {
-                pUVar6 = (UnidadeParcial *)0x1;
+                pUVar5 = (UnidadeParcial *)0x1;
               }
-              if (((char)pUVar6 != '\0') &&
-                 (tabela_unidades[in_AX].estado = 7, pUVar6 = pUVar8, in_AX == DAT_00496304)) {
+              if (((char)pUVar5 != '\0') &&
+                 (tabela_unidades[in_AX].estado = 7, pUVar5 = pUVar7, in_AX == DAT_00496304)) {
                 DAT_004e0f36 = 0;
                 DAT_004e0f37 = 0;
                 DAT_00496304 = 0xffff;
@@ -258,22 +259,22 @@ LAB_0044a12f:
             }
             else {
               FUN_00457058();
-              uVar4 = FUN_0041aee2();
-              pUVar16->celula_passo = uVar4;
-              pUVar16->celula_atual = uVar4;
+              uVar3 = FUN_0041aee2();
+              pUVar16->celula_passo = uVar3;
+              pUVar16->celula_atual = uVar3;
               pUVar16->estado = 0xe;
-              pUVar6 = (UnidadeParcial *)FUN_00472648(extraout_ECX_19);
+              pUVar5 = (UnidadeParcial *)FUN_00472648(extraout_ECX_19);
             }
           }
         }
         goto switchD_0044d86e_default;
       }
-      pUVar6 = (UnidadeParcial *)FUN_00442668(0,*(ushort *)&pUVar16->field_0xb2);
-      if ((char)pUVar6 == '\0') goto switchD_0044d86e_default;
-      pUVar8 = tabela_unidades + in_AX;
-      pUVar6 = (UnidadeParcial *)
-               CONCAT22((short)((uint)pUVar6 >> 0x10),*(ushort *)&pUVar16->field_0xb2);
-      pUVar8->celula_destino = *(ushort *)&pUVar16->field_0xb2;
+      pUVar5 = (UnidadeParcial *)FUN_00442668(0,*(ushort *)&pUVar16->field_0xb2);
+      if ((char)pUVar5 == '\0') goto switchD_0044d86e_default;
+      pUVar7 = tabela_unidades + in_AX;
+      pUVar5 = (UnidadeParcial *)
+               CONCAT22((short)((uint)pUVar5 >> 0x10),*(ushort *)&pUVar16->field_0xb2);
+      pUVar7->celula_destino = *(ushort *)&pUVar16->field_0xb2;
       if (in_AX == DAT_00496304) {
         DAT_004e0f36 = 0;
         DAT_004e0f37 = 0;
@@ -282,20 +283,20 @@ LAB_0044a12f:
       }
     }
     else {
-      if (0x10 < bVar1) {
-        if (bVar1 == 0x19) goto LAB_00449769;
+      if (0x10 < bVar12) {
+        if (bVar12 == 0x19) goto LAB_00449769;
         goto LAB_0044a12f;
       }
       if (*(short *)&pUVar16->field_0xc0 == -1) {
         FUN_00472648(param_1);
         if (pUVar16->field_0xab == '2') {
           if ((tabela_unidades[in_AX].estado == 0) || (tabela_unidades[in_AX].estado == 4)) {
-            bVar2 = false;
+            bVar1 = false;
           }
           else {
-            bVar2 = true;
+            bVar1 = true;
           }
-          if ((bVar2) && (tabela_unidades[in_AX].estado = 7, in_AX == DAT_00496304)) {
+          if ((bVar1) && (tabela_unidades[in_AX].estado = 7, in_AX == DAT_00496304)) {
             DAT_004e0f36 = 0;
             DAT_004e0f37 = 0;
             DAT_004e0f3c = 0;
@@ -306,159 +307,161 @@ LAB_0044a12f:
           pUVar16->field_0xab = pUVar16->field_0xab + '\x01';
         }
         pUVar16 = tabela_unidades;
-        bVar1 = tabela_unidades[in_AX].tipo_id;
-        pUVar6 = (UnidadeParcial *)CONCAT31((int3)((uint)tabela_unidades >> 8),bVar1);
-        if ((10 < bVar1) && (0xb < bVar1)) {
-          if (bVar1 < 0x12) {
-            if ((0xd < bVar1) && (0xf < bVar1)) {
+        bVar12 = tabela_unidades[in_AX].tipo_id;
+        pUVar5 = (UnidadeParcial *)CONCAT31((int3)((uint)tabela_unidades >> 8),bVar12);
+        if ((10 < bVar12) && (0xb < bVar12)) {
+          if (bVar12 < 0x12) {
+            if ((0xd < bVar12) && (0xf < bVar12)) {
 joined_r0x0044a124:
-              if (bVar1 == 0x11) {
-                pUVar6 = (UnidadeParcial *)FUN_00447b2f();
+              if (bVar12 == 0x11) {
+                pUVar5 = (UnidadeParcial *)FUN_00447b2f();
               }
               goto switchD_0044d86e_default;
             }
           }
-          else if ((0x12 < bVar1) && (((0x16 < bVar1 && (0x18 < bVar1)) && (bVar1 != 0x19))))
+          else if ((0x12 < bVar12) && (((0x16 < bVar12 && (0x18 < bVar12)) && (bVar12 != 0x19))))
           goto switchD_0044d86e_default;
         }
-        cVar3 = tabela_unidades[in_AX].field_0xa9 + '\x01';
-        tabela_unidades[in_AX].field_0xa9 = cVar3;
-        if (cVar3 == pUVar16[in_AX].field_0xa7) {
-          uVar13 = (byte)pUVar16[in_AX].field_0xa4 + 1;
-          bVar1 = pUVar16[in_AX].field_0xa5;
-          pUVar6 = (UnidadeParcial *)(uVar13 / bVar1);
-          pUVar16[in_AX].field_0xa9 = 0;
-          pUVar16[in_AX].field_0xa4 = (char)(uVar13 % (uint)bVar1);
+        bVar12 = tabela_unidades[in_AX].contador_animacao + 1;
+        tabela_unidades[in_AX].contador_animacao = bVar12;
+        if (bVar12 == pUVar16[in_AX].periodo_animacao) {
+          uVar13 = pUVar16[in_AX].quadro_movimento + 1;
+          bVar12 = pUVar16[in_AX].quantidade_quadros_movimento;
+          pUVar5 = (UnidadeParcial *)(uVar13 / bVar12);
+          pUVar16[in_AX].contador_animacao = 0;
+          pUVar16[in_AX].quadro_movimento = (byte)(uVar13 % (uint)bVar12);
         }
         goto switchD_0044d86e_default;
       }
       uVar17 = FUN_0041aee2();
       uVar13 = (uint)((ulonglong)uVar17 >> 0x20);
-      pUVar7 = (UnidadeParcial *)((int)uVar17 + 1);
-      uVar4 = pUVar16->celula_destino;
-      uVar9 = CONCAT22(extraout_var,uVar4);
-      if (uVar4 != pUVar16->celula_atual) goto LAB_00449950;
-      uStack_2c = (ushort)pUVar7;
-      if (uVar4 == uStack_2c) {
+      pUVar6 = (UnidadeParcial *)((int)uVar17 + 1);
+      uVar3 = pUVar16->celula_destino;
+      uVar8 = CONCAT22(extraout_var,uVar3);
+      if (uVar3 != pUVar16->celula_atual) goto LAB_00449950;
+      uStack_2c = (ushort)pUVar6;
+      if (uVar3 == uStack_2c) {
         if (((tabela_unidades[in_AX].field_0xda == '\x05') &&
             (uVar13 = (uint)*(ushort *)(&DAT_004965b6 + (uint)tabela_unidades[in_AX].tipo_id * 0x32)
             , tabela_unidades[in_AX].vida ==
               *(ushort *)(&DAT_004965b6 + (uint)tabela_unidades[in_AX].tipo_id * 0x32))) ||
-           (uVar17 = FUN_0041a08c(uVar9,uVar13), uVar9 = extraout_ECX_12,
+           (uVar17 = FUN_0041a08c(uVar8,uVar13), uVar8 = extraout_ECX_12,
            (byte)uVar17 != pUVar16->proprietario_id)) {
-          FUN_00472648(uVar9);
-          pUVar6 = tabela_unidades;
-          bVar1 = pUVar16->field_0xab;
-          if ((UnidadeParcial *)(uint)bVar1 == (UnidadeParcial *)0x32) {
+          FUN_00472648(uVar8);
+          pUVar5 = tabela_unidades;
+          bVar12 = pUVar16->field_0xab;
+          if ((UnidadeParcial *)(uint)bVar12 == (UnidadeParcial *)0x32) {
             if ((tabela_unidades[extraout_EDX_03].estado == 0) ||
                (tabela_unidades[extraout_EDX_03].estado == 4)) {
-              pUVar8 = (UnidadeParcial *)0x0;
+              pUVar7 = (UnidadeParcial *)0x0;
             }
             else {
-              pUVar8 = (UnidadeParcial *)0x1;
+              pUVar7 = (UnidadeParcial *)0x1;
             }
-            if (((char)pUVar8 != '\0') &&
-               (tabela_unidades[in_AX].estado = 7, pUVar8 = pUVar6, in_AX == DAT_00496304)) {
+            if (((char)pUVar7 != '\0') &&
+               (tabela_unidades[in_AX].estado = 7, pUVar7 = pUVar5, in_AX == DAT_00496304)) {
               DAT_004e0f36 = 0;
               DAT_004e0f3c = 0;
-              pUVar8 = (UnidadeParcial *)0xffff;
+              pUVar7 = (UnidadeParcial *)0xffff;
               DAT_004e0f37 = 0;
               DAT_00496304 = 0xffff;
             }
           }
           else {
-            pUVar8 = (UnidadeParcial *)(uint)bVar1;
+            pUVar7 = (UnidadeParcial *)(uint)bVar12;
             if (((byte)DAT_00508f7c & 1) == 0) {
-              pUVar16->field_0xab = bVar1 + 1;
-              pUVar8 = (UnidadeParcial *)0x0;
+              pUVar16->field_0xab = bVar12 + 1;
+              pUVar7 = (UnidadeParcial *)0x0;
             }
           }
           pUVar16 = tabela_unidades;
-          bVar1 = tabela_unidades[in_AX].tipo_id;
-          pUVar6 = (UnidadeParcial *)CONCAT31((int3)((uint)pUVar8 >> 8),bVar1);
-          if ((10 < bVar1) && (0xb < bVar1)) {
-            if (bVar1 < 0x12) {
-              if ((0xd < bVar1) && (0xf < bVar1)) goto joined_r0x0044a124;
+          bVar12 = tabela_unidades[in_AX].tipo_id;
+          pUVar5 = (UnidadeParcial *)CONCAT31((int3)((uint)pUVar7 >> 8),bVar12);
+          if ((10 < bVar12) && (0xb < bVar12)) {
+            if (bVar12 < 0x12) {
+              if ((0xd < bVar12) && (0xf < bVar12)) goto joined_r0x0044a124;
             }
-            else if ((((0x12 < bVar1) && (0x16 < bVar1)) && (0x18 < bVar1)) && (bVar1 != 0x19))
+            else if ((((0x12 < bVar12) && (0x16 < bVar12)) && (0x18 < bVar12)) && (bVar12 != 0x19))
             goto switchD_0044d86e_default;
           }
-          cVar10 = tabela_unidades[in_AX].field_0xa9 + '\x01';
-          pUVar6 = (UnidadeParcial *)CONCAT22((short)((uint)pUVar8 >> 0x10),CONCAT11(cVar10,bVar1));
-          cVar3 = tabela_unidades[in_AX].field_0xa7;
-          tabela_unidades[in_AX].field_0xa9 = cVar10;
-          if (cVar10 == cVar3) {
-            uVar13 = (byte)pUVar16[in_AX].field_0xa4 + 1;
-            bVar1 = pUVar16[in_AX].field_0xa5;
-            pUVar6 = (UnidadeParcial *)(uVar13 / bVar1);
-            pUVar16[in_AX].field_0xa9 = 0;
-            pUVar16[in_AX].field_0xa4 = (char)(uVar13 % (uint)bVar1);
+          bVar9 = tabela_unidades[in_AX].contador_animacao + 1;
+          pUVar5 = (UnidadeParcial *)CONCAT22((short)((uint)pUVar7 >> 0x10),CONCAT11(bVar9,bVar12));
+          bVar12 = tabela_unidades[in_AX].periodo_animacao;
+          tabela_unidades[in_AX].contador_animacao = bVar9;
+          if (bVar9 == bVar12) {
+            uVar13 = pUVar16[in_AX].quadro_movimento + 1;
+            bVar12 = pUVar16[in_AX].quantidade_quadros_movimento;
+            pUVar5 = (UnidadeParcial *)(uVar13 / bVar12);
+            pUVar16[in_AX].contador_animacao = 0;
+            pUVar16[in_AX].quadro_movimento = (byte)(uVar13 % (uint)bVar12);
           }
           goto switchD_0044d86e_default;
         }
-        pUVar16->field_0x90 = 5;
+        pUVar16->direcao_desejada = 5;
         uVar17 = FUN_00448599(extraout_ECX_12,(uint)in_AX);
-        pUVar6 = (UnidadeParcial *)CONCAT31((int3)((ulonglong)uVar17 >> 8),pUVar16->field_0x90);
-        if (pUVar16->field_0x90 != pUVar16->field_0x91) goto switchD_0044d86e_default;
+        pUVar5 = (UnidadeParcial *)
+                 CONCAT31((int3)((ulonglong)uVar17 >> 8),pUVar16->direcao_desejada);
+        if (pUVar16->direcao_desejada != pUVar16->orientacao_atual) goto switchD_0044d86e_default;
         FUN_00472648(extraout_ECX_13);
         if ((((byte)DAT_00508f7c & 1) == 0) && (pUVar16->field_0xab != '\x01')) {
           pUVar16->field_0xab = pUVar16->field_0xab + -1;
         }
-        pUVar6 = tabela_unidades;
-        uVar11 = (uint)in_AX;
-        bVar1 = tabela_unidades[uVar11].tipo_id;
+        pUVar5 = tabela_unidades;
+        uVar10 = (uint)in_AX;
+        bVar12 = tabela_unidades[uVar10].tipo_id;
         uVar13 = extraout_EDX_01;
-        if ((bVar1 < 0xb) || (bVar1 < 0xc)) {
+        if ((bVar12 < 0xb) || (bVar12 < 0xc)) {
 LAB_00449d94:
-          cVar3 = tabela_unidades[uVar11].field_0xa9 + '\x01';
-          pUVar8 = tabela_unidades + uVar11;
-          tabela_unidades[uVar11].field_0xa9 = cVar3;
-          uVar12 = (uint)CONCAT11(cVar3,(char)in_AX);
-          if (cVar3 == pUVar8->field_0xa7) {
-            uVar13 = ((byte)pUVar6[uVar11].field_0xa4 + 1) % (uint)(byte)pUVar6[uVar11].field_0xa5;
-            pUVar6[uVar11].field_0xa9 = 0;
-            pUVar6[uVar11].field_0xa4 = (char)uVar13;
-            uVar12 = (uint)(byte)pUVar6[uVar11].field_0xa5;
+          bVar12 = tabela_unidades[uVar10].contador_animacao + 1;
+          pUVar7 = tabela_unidades + uVar10;
+          tabela_unidades[uVar10].contador_animacao = bVar12;
+          uVar11 = (uint)CONCAT11(bVar12,(char)in_AX);
+          if (bVar12 == pUVar7->periodo_animacao) {
+            uVar13 = (pUVar5[uVar10].quadro_movimento + 1) %
+                     (uint)pUVar5[uVar10].quantidade_quadros_movimento;
+            pUVar5[uVar10].contador_animacao = 0;
+            pUVar5[uVar10].quadro_movimento = (byte)uVar13;
+            uVar11 = (uint)pUVar5[uVar10].quantidade_quadros_movimento;
           }
         }
         else {
-          uVar12 = uVar11;
-          if (bVar1 < 0x12) {
-            if ((bVar1 < 0xe) || (bVar1 < 0x10)) goto LAB_00449d94;
-            if (bVar1 == 0x11) {
+          uVar11 = uVar10;
+          if (bVar12 < 0x12) {
+            if ((bVar12 < 0xe) || (bVar12 < 0x10)) goto LAB_00449d94;
+            if (bVar12 == 0x11) {
               FUN_00447b2f();
-              uVar12 = extraout_ECX_14;
+              uVar11 = extraout_ECX_14;
               uVar13 = extraout_EDX_02;
             }
           }
-          else if ((((bVar1 < 0x13) || (bVar1 < 0x17)) || (bVar1 < 0x19)) || (bVar1 == 0x19))
+          else if ((((bVar12 < 0x13) || (bVar12 < 0x17)) || (bVar12 < 0x19)) || (bVar12 == 0x19))
           goto LAB_00449d94;
         }
-        pUVar6 = (UnidadeParcial *)(uint)(byte)pUVar16->field_0xab;
-        if (pUVar6 == (UnidadeParcial *)0x1) {
-          uVar17 = FUN_004237c0(uVar12,uVar13);
-          pUVar6 = (UnidadeParcial *)uVar17;
+        pUVar5 = (UnidadeParcial *)(uint)(byte)pUVar16->field_0xab;
+        if (pUVar5 == (UnidadeParcial *)0x1) {
+          uVar17 = FUN_004237c0(uVar11,uVar13);
+          pUVar5 = (UnidadeParcial *)uVar17;
           if ((char)uVar17 == '\0') {
-            pUVar6 = (UnidadeParcial *)FUN_00425516(extraout_ECX_15,in_AX);
+            pUVar5 = (UnidadeParcial *)FUN_00425516(extraout_ECX_15,in_AX);
           }
         }
         goto switchD_0044d86e_default;
       }
-      pUVar6 = (UnidadeParcial *)FUN_00442668(0,uStack_2c);
-      if ((char)pUVar6 == '\0') goto switchD_0044d86e_default;
-      pUVar8 = tabela_unidades + in_AX;
-      pUVar8->celula_destino = uStack_2c;
-      pUVar6 = pUVar7;
+      pUVar5 = (UnidadeParcial *)FUN_00442668(0,uStack_2c);
+      if ((char)pUVar5 == '\0') goto switchD_0044d86e_default;
+      pUVar7 = tabela_unidades + in_AX;
+      pUVar7->celula_destino = uStack_2c;
+      pUVar5 = pUVar6;
       if (in_AX == DAT_00496304) {
-        pUVar6 = (UnidadeParcial *)((uint)pUVar7 & 0xffffff00);
+        pUVar5 = (UnidadeParcial *)((uint)pUVar6 & 0xffffff00);
         DAT_004e0f36 = 0;
         DAT_004e0f37 = 0;
         DAT_004e0f3c = 0;
         DAT_00496304 = 0xffff;
       }
     }
-    pUVar8->estado_caminho = 0;
+    pUVar7->estado_caminho = 0;
   }
 switchD_0044d86e_default:
-  return CONCAT44(param_2,pUVar6);
+  return CONCAT44(param_2,pUVar5);
 }

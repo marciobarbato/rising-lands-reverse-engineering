@@ -22,8 +22,8 @@ void FUN_0044357c(void)
   if (((*(int *)&tabela_unidades[uVar3].field_0x83 >> 0x18 == 0) &&
       (*(int *)&tabela_unidades[uVar3].field_0x84 >> 0x18 == 0)) &&
      (tabela_unidades[uVar3].tipo_id != 0x10)) {
-    tabela_unidades[uVar3].field_0xa9 = 0;
-    pUVar1[uVar3].field_0xa4 = 0;
+    tabela_unidades[uVar3].contador_animacao = 0;
+    pUVar1[uVar3].quadro_movimento = 0;
   }
   if ((pUVar1[uVar3].tipo_id == 0xd) && (*(short *)&pUVar1[uVar3].field_0xc0 != -1)) {
     FUN_004237ff();

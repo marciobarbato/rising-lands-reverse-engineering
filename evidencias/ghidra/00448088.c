@@ -11,7 +11,7 @@ undefined8 __fastcall FUN_00448088(undefined4 param_1,undefined4 param_2)
   UnidadeParcial *pUVar2;
   UnidadeParcial *pUVar3;
   ushort in_AX;
-  char cVar5;
+  byte bVar5;
   undefined4 uVar4;
   uint uVar6;
   uint uVar7;
@@ -34,14 +34,15 @@ undefined8 __fastcall FUN_00448088(undefined4 param_1,undefined4 param_2)
       return CONCAT44(param_2,uVar4);
     }
   }
-  cVar5 = tabela_unidades[uVar6].field_0xa9 + '\x01';
+  bVar5 = tabela_unidades[uVar6].contador_animacao + 1;
   pUVar2 = tabela_unidades + uVar6;
-  tabela_unidades[uVar6].field_0xa9 = cVar5;
-  if (cVar5 == pUVar2->field_0xa7) {
-    uVar7 = (byte)pUVar3[uVar6].field_0xa4 + 1;
-    pUVar3[uVar6].field_0xa9 = 0;
-    pUVar3[uVar6].field_0xa4 = (char)(uVar7 % (uint)(byte)pUVar3[uVar6].field_0xa5);
-    return CONCAT44(param_2,uVar7 / (byte)pUVar3[uVar6].field_0xa5);
+  tabela_unidades[uVar6].contador_animacao = bVar5;
+  if (bVar5 == pUVar2->periodo_animacao) {
+    uVar7 = pUVar3[uVar6].quadro_movimento + 1;
+    pUVar3[uVar6].contador_animacao = 0;
+    pUVar3[uVar6].quadro_movimento =
+         (byte)(uVar7 % (uint)pUVar3[uVar6].quantidade_quadros_movimento);
+    return CONCAT44(param_2,uVar7 / pUVar3[uVar6].quantidade_quadros_movimento);
   }
-  return CONCAT44(param_2,CONCAT22((short)(uVar6 * 0x114 >> 0x10),CONCAT11(cVar5,bVar1)));
+  return CONCAT44(param_2,CONCAT22((short)(uVar6 * 0x114 >> 0x10),CONCAT11(bVar5,bVar1)));
 }

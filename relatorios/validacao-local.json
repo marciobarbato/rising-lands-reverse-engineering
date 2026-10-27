@@ -1,0 +1,51 @@
+{
+  "python": "3.9.6",
+  "emulacao_habilitada": false,
+  "testes": 37,
+  "falhas": 0,
+  "erros": 0,
+  "ignorados": [
+    {
+      "teste": "test_emulacao.DiferencialX86.test_adicoes_de_dano_512_casos",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao.DiferencialX86.test_aplicacao_dano_512_casos_e_zero_protegido",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao.DiferencialX86.test_consulta_de_proximidade_nao_filtra_capitao",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao.DiferencialX86.test_cura_2000_entradas_mais_limites",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao.DiferencialX86.test_direcao_e_distancia_1024_pares",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao.DiferencialX86.test_inicializadores_dos_26_tipos",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao.DiferencialX86.test_integracao_prefixo_1024_casos_com_overflow",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao.DiferencialX86.test_orientacao_todas_as_combinacoes_e_contadores",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao.DiferencialX86.test_reducao_dano_512_casos",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao.DiferencialX86.test_vizinhos_interior_bordas_e_direcoes_pares",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    }
+  ],
+  "execucoes_x86_delimitadas": 0,
+  "sucesso": true
+}

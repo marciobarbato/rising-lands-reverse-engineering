@@ -10,5 +10,5 @@ undefined8 __fastcall FUN_00443688(undefined4 param_1,undefined4 param_2)
   ushort in_AX;
 
   return CONCAT44(param_2,CONCAT31((int3)((uint)tabela_unidades >> 8),
-                                   tabela_unidades[in_AX].field_0x98));
+                                   tabela_unidades[in_AX].incremento_passo));
 }

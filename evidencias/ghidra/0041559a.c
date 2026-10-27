@@ -99,10 +99,10 @@ LAB_00415637:
         (int)(local_3c & 0xffff) < 3 - (int)(*(ushort *)&pUVar2[uVar6].field_0xc2 - 0x13b) / 5;
         local_3c = local_3c + 1) {
       sVar5 = (short)local_30 + local_48[2];
-      local_34 = (uint)(byte)pUVar2[uVar6].field_0xa4 +
+      local_34 = (uint)pUVar2[uVar6].quadro_movimento +
                  (uint)local_24 +
                  (uint)(byte)pUVar2[uVar6].field_0xdb *
-                 (((byte)pUVar2[uVar6].field_0x91 + 1) / 2 - 1);
+                 ((pUVar2[uVar6].orientacao_atual + 1) / 2 - 1);
       local_28 = (short)local_1c + local_48[0];
       local_18 = unidade_obter_proprietario(local_2c);
       iVar4 = CONCAT31((int3)((uint)extraout_EDX_01 >> 8),local_18);

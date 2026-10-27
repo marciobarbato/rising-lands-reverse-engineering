@@ -83,7 +83,7 @@ undefined8 __fastcall FUN_0044b5f5(undefined4 param_1,undefined4 param_2)
         }
       }
       pUVar8 = (UnidadeParcial *)FUN_00477042(pUVar11,uStack_1c);
-      pUVar10->field_0x90 = (char)pUVar8;
+      pUVar10->direcao_desejada = (byte)pUVar8;
     }
     else {
 LAB_0044b70b:
@@ -92,7 +92,7 @@ LAB_0044b70b:
     goto switchD_0044d86e_default;
   }
   if (cVar2 != '\x01') goto switchD_0044d86e_default;
-  if (pUVar10->field_0x90 != pUVar10->field_0x91) {
+  if (pUVar10->direcao_desejada != pUVar10->orientacao_atual) {
     uVar12 = FUN_00448599(tabela_unidades,uVar7);
     pUVar8 = (UnidadeParcial *)uVar12;
     goto switchD_0044d86e_default;
@@ -114,7 +114,7 @@ LAB_0044b70b:
       goto switchD_0044d86e_default;
     }
   }
-  if (pUVar10->field_0xa4 == '\x02') {
+  if (pUVar10->quadro_movimento == 2) {
     uVar13 = FUN_004704dc(5,0);
     lVar14 = uVar13 % ZEXT48(extraout_ECX_02) << 0x20;
     uVar7 = 0;
@@ -190,9 +190,9 @@ LAB_0044b87b:
   }
   pUVar8 = (UnidadeParcial *)(uint)(byte)pUVar10->field_0x8b;
   if ((pUVar8 == (UnidadeParcial *)0x0) &&
-     (pUVar8 = (UnidadeParcial *)(uint)(byte)pUVar10->field_0xa4, pUVar8 == (UnidadeParcial *)0x2))
+     (pUVar8 = (UnidadeParcial *)(uint)pUVar10->quadro_movimento, pUVar8 == (UnidadeParcial *)0x2))
   {
-    uVar7 = FUN_004770ee(pUVar11,pUVar10->field_0x91);
+    uVar7 = FUN_004770ee(pUVar11,pUVar10->orientacao_atual);
     FUN_004704dc(extraout_ECX_06,uVar7);
     FUN_0046e44c(0,0,0,0,0);
     pUVar11 = tabela_unidades;

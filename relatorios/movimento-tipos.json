@@ -1,0 +1,210 @@
+[
+  {
+    "id": 0,
+    "nome": "SOLDADO",
+    "incremento_passo": 2,
+    "periodo_giro": 1,
+    "quadros_movimento": 8,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 1,
+    "nome": "INCENDIÁRIO",
+    "incremento_passo": 2,
+    "periodo_giro": 1,
+    "quadros_movimento": 8,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 2,
+    "nome": "CAPITÃO",
+    "incremento_passo": 3,
+    "periodo_giro": 1,
+    "quadros_movimento": 8,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 3,
+    "nome": "DELL'ORSO",
+    "incremento_passo": 4,
+    "periodo_giro": 1,
+    "quadros_movimento": 8,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 4,
+    "nome": "DRUÍDA",
+    "incremento_passo": 1,
+    "periodo_giro": 1,
+    "quadros_movimento": 8,
+    "periodo_animacao": 3
+  },
+  {
+    "id": 5,
+    "nome": "FAZENDEIRO",
+    "incremento_passo": 2,
+    "periodo_giro": 1,
+    "quadros_movimento": 8,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 6,
+    "nome": "MECÂNICO",
+    "incremento_passo": 3,
+    "periodo_giro": 1,
+    "quadros_movimento": 8,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 7,
+    "nome": "CONSTRUTOR",
+    "incremento_passo": 2,
+    "periodo_giro": 1,
+    "quadros_movimento": 8,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 8,
+    "nome": "ARQUEIRO",
+    "incremento_passo": 2,
+    "periodo_giro": 1,
+    "quadros_movimento": 10,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 9,
+    "nome": "COLONO",
+    "incremento_passo": 2,
+    "periodo_giro": 1,
+    "quadros_movimento": 8,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 10,
+    "nome": "MENSAGEIRO",
+    "incremento_passo": 3,
+    "periodo_giro": 1,
+    "quadros_movimento": 8,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 11,
+    "nome": "SPEEDER",
+    "incremento_passo": 8,
+    "periodo_giro": 1,
+    "quadros_movimento": 3,
+    "periodo_animacao": 1
+  },
+  {
+    "id": 12,
+    "nome": "BUNKER",
+    "incremento_passo": 3,
+    "periodo_giro": 2,
+    "quadros_movimento": 3,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 13,
+    "nome": "CEIFEIRO",
+    "incremento_passo": 3,
+    "periodo_giro": 3,
+    "quadros_movimento": 3,
+    "periodo_animacao": 3
+  },
+  {
+    "id": 14,
+    "nome": "BOMBARDEIRO",
+    "incremento_passo": 3,
+    "periodo_giro": 4,
+    "quadros_movimento": 3,
+    "periodo_animacao": 3
+  },
+  {
+    "id": 15,
+    "nome": "SUN",
+    "incremento_passo": 4,
+    "periodo_giro": 3,
+    "quadros_movimento": 3,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 16,
+    "nome": "HELICÓPTERO",
+    "incremento_passo": 8,
+    "periodo_giro": 2,
+    "quadros_movimento": 8,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 17,
+    "nome": "BALÃO",
+    "incremento_passo": 1,
+    "periodo_giro": 2,
+    "quadros_movimento": 3,
+    "periodo_animacao": 4
+  },
+  {
+    "id": 18,
+    "nome": "ARAIGNEE",
+    "incremento_passo": 2,
+    "periodo_giro": 1,
+    "quadros_movimento": 10,
+    "periodo_animacao": 1
+  },
+  {
+    "id": 19,
+    "nome": "FOURMI",
+    "incremento_passo": 2,
+    "periodo_giro": 1,
+    "quadros_movimento": 15,
+    "periodo_animacao": 1
+  },
+  {
+    "id": 20,
+    "nome": "ESMAGADOR",
+    "incremento_passo": 4,
+    "periodo_giro": 1,
+    "quadros_movimento": 8,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 21,
+    "nome": "RAPTOR",
+    "incremento_passo": 8,
+    "periodo_giro": 1,
+    "quadros_movimento": 8,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 22,
+    "nome": "LANÇADOR",
+    "incremento_passo": 4,
+    "periodo_giro": 1,
+    "quadros_movimento": 8,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 23,
+    "nome": "BUKKA",
+    "incremento_passo": 2,
+    "periodo_giro": 1,
+    "quadros_movimento": 8,
+    "periodo_animacao": 2
+  },
+  {
+    "id": 24,
+    "nome": "ESTALADOR",
+    "incremento_passo": 1,
+    "periodo_giro": 3,
+    "quadros_movimento": 8,
+    "periodo_animacao": 3
+  },
+  {
+    "id": 25,
+    "nome": "RHINO",
+    "incremento_passo": 4,
+    "periodo_giro": 1,
+    "quadros_movimento": 8,
+    "periodo_animacao": 2
+  }
+]

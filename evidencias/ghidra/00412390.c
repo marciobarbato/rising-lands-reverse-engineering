@@ -61,7 +61,7 @@ uint __fastcall FUN_00412390(undefined4 param_1,int param_2)
   local_20 = CONCAT22(local_20._2_2_,(short)extraout_ECX);
   if ((((pUVar13->celula_atual != pUVar13->celula_destino) && (pUVar13->field_0x99 != '\0')) &&
       (*(int *)&pUVar13->field_0x83 >> 0x18 != 0)) && (*(int *)&pUVar13->field_0x84 >> 0x18 != 0)) {
-    if ((pUVar13->field_0x91 == '\x05') || (pUVar13->field_0x91 == '\r')) {
+    if ((pUVar13->orientacao_atual == 5) || (pUVar13->orientacao_atual == 0xd)) {
       uVar12 = (uint)DAT_004e1d18;
       DAT_004e1d18 = DAT_004e1d18 + 1;
       local_20 = CONCAT22(local_20._2_2_,

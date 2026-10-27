@@ -18,7 +18,7 @@ undefined8 __fastcall FUN_00448194(undefined4 param_1,undefined4 param_2)
   switch(pUVar1->tipo_id) {
   case 0:
   case 6:
-    pUVar1->field_0xa4 = 2;
+    pUVar1->quadro_movimento = 2;
     return CONCAT44(param_2,CONCAT31(uVar2,1));
   case 1:
   case 4:
@@ -27,21 +27,21 @@ undefined8 __fastcall FUN_00448194(undefined4 param_1,undefined4 param_2)
   case 0x13:
   case 0x17:
   case 0x18:
-    pUVar1->field_0xa4 = 3;
+    pUVar1->quadro_movimento = 3;
     return CONCAT44(param_2,CONCAT31(uVar2,1));
   case 2:
   case 3:
   case 0x19:
-    pUVar1->field_0xa4 = 7;
+    pUVar1->quadro_movimento = 7;
     return CONCAT44(param_2,CONCAT31(uVar2,1));
   case 5:
   case 9:
-    pUVar1->field_0xa4 = 5;
+    pUVar1->quadro_movimento = 5;
     return CONCAT44(param_2,CONCAT31(uVar2,1));
   case 8:
   case 0x15:
   case 0x16:
-    pUVar1->field_0xa4 = 0;
+    pUVar1->quadro_movimento = 0;
   case 0xb:
   case 0xc:
   case 0xd:
@@ -51,11 +51,11 @@ undefined8 __fastcall FUN_00448194(undefined4 param_1,undefined4 param_2)
     return CONCAT44(param_2,CONCAT31(uVar2,1));
   case 10:
   case 0x10:
-    pUVar1->field_0xa4 = 6;
+    pUVar1->quadro_movimento = 6;
     return CONCAT44(param_2,CONCAT31(uVar2,1));
   case 0x14:
     uVar3 = 1;
-    pUVar1->field_0xa4 = 1;
+    pUVar1->quadro_movimento = 1;
   default:
     return CONCAT44(param_2,CONCAT31(uVar2,uVar3));
   }

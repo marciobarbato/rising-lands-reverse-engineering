@@ -28,7 +28,7 @@ undefined8 __fastcall FUN_0042eba4(undefined4 param_1,int param_2)
   bool bVar14;
 
   pUVar12 = tabela_unidades + in_EAX;
-  iVar6 = (int)((uint)(byte)pUVar12->field_0x90 - param_2) / 2;
+  iVar6 = (int)((uint)pUVar12->direcao_desejada - param_2) / 2;
   if (iVar6 < -4) {
     iVar6 = iVar6 + 8;
   }

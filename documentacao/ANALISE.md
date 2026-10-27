@@ -9,10 +9,11 @@ bytes e SHA-256:
 6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb
 ```
 
-A pesquisa foi estática: leitura PE, strings, referências, desmontagem x86,
-reconstrução de leitores e confronto com o corpus completo de 38 mapas e oito
-arquivos gráficos. O executável Windows não foi executado. Não se recuperaram
-símbolos originais, projetos de compilação ou uma decompilação integral.
+A pesquisa combina leitura PE, strings, referências, desmontagem x86,
+Ghidra, reconstrução de leitores e confronto com 38 mapas e oito arquivos gráficos.
+Uma bancada Unicorn também executa trechos delimitados de instruções com memória
+sintética para comparar resultados. O jogo Windows não foi iniciado. Não se
+recuperaram símbolos originais, projetos de compilação ou uma decompilação integral.
 
 **Confirmado** significa sustentado por instruções específicas ou bytes de
 arquivos; **inferido** significa interpretação compatível ainda sem validação
@@ -89,7 +90,7 @@ ao proprietário 0. Posições e vida foram recuperadas; os oito colonos compart
 a célula (14, 12), em estado 14. A visibilidade de cada estado ainda exige pesquisa.
 Veja [INSTANCIAS.md](INSTANCIAS.md) para as 2.604 entradas da campanha.
 
-O Ghidra está instalado localmente e exportou 250 rotinas relacionadas às unidades.
+O Ghidra está instalado localmente e exportou 255 rotinas relacionadas às unidades.
 A [receita de instalação e análise](GHIDRA.md) explica a cópia PE normalizada,
 as assinaturas por registradores e as limitações do pseudocódigo automático.
 
@@ -118,6 +119,11 @@ O protótipo Swift foi preservado. Seu A*, velocidade de 72 pixels/s, passo de
 classifica como algoritmos recuperados do original.
 
 ## Validação e limites
+
+Foram reconstruídas primitivas de [movimento](MOVIMENTO.md), a rotina de cura
+e partes da [aritmética de combate](COMBATE.md). A [bancada diferencial](EMULACAO.md)
+validou 37 testes, incluindo 8.932 execuções x86 delimitadas. O resultado inclui
+overflow, empate no giro e o caso de dano zero com proteção que aumenta a vida.
 
 `sh testar.sh` cobre comandos CMP, arquivos truncados, expansão gráfica integral,
 paleta comparada com LZS, todos os mapas, composição de unidades da primeira

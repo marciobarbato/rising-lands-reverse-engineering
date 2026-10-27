@@ -21,7 +21,7 @@ void FUN_00448b9f(void)
   uint uVar8;
   short asStack_28 [4];
   undefined4 local_20;
-  undefined1 local_1c;
+  byte local_1c;
 
   pUVar4 = tabela_unidades;
   uVar8 = (uint)in_AX;
@@ -38,7 +38,7 @@ void FUN_00448b9f(void)
     uVar2 = *(ushort *)(iVar6 + (uint)uVar2 * 2);
     local_20 = CONCAT22((short)((uint)iVar6 >> 0x10),uVar2);
     iVar6 = FUN_00477042(0xffff,uVar2);
-    local_1c = (undefined1)iVar6;
+    local_1c = (byte)iVar6;
     uVar7 = FUN_00442668((int)asStack_28,(ushort)local_20);
     if ((char)uVar7 == '\0') {
       pUVar4[uVar8].estado_caminho = 0;
@@ -63,7 +63,7 @@ void FUN_00448b9f(void)
       FUN_00442cb4(extraout_ECX);
       FUN_00442cb4(extraout_ECX_00);
       pUVar4[uVar8].celula_passo = (ushort)local_20;
-      pUVar4[uVar8].field_0x90 = local_1c;
+      pUVar4[uVar8].direcao_desejada = local_1c;
     }
   }
   return;

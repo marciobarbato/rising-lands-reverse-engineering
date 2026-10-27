@@ -66,7 +66,7 @@ void __fastcall FUN_00448d08(undefined4 param_1)
         FUN_00442cb4(extraout_ECX_03);
         pUVar3[in_AX].field_0x8b = 0;
         pUVar3[in_AX].celula_passo = (ushort)local_20;
-        pUVar3[in_AX].field_0x90 = local_18;
+        pUVar3[in_AX].direcao_desejada = local_18;
         return;
       }
       uVar8 = extraout_ECX_01;

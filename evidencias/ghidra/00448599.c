@@ -7,52 +7,52 @@
 undefined8 __fastcall FUN_00448599(undefined4 param_1,undefined4 param_2)
 
 {
-  byte bVar1;
-  bool bVar2;
-  UnidadeParcial *pUVar3;
+  bool bVar1;
+  UnidadeParcial *pUVar2;
   uint in_EAX;
-  undefined3 uVar5;
-  uint uVar4;
-  char cVar6;
-  uint uVar7;
+  undefined3 uVar4;
+  uint uVar3;
+  byte bVar5;
+  uint uVar6;
 
-  pUVar3 = tabela_unidades;
-  uVar7 = in_EAX & 0xffff;
-  bVar1 = tabela_unidades[uVar7].tipo_id;
-  uVar5 = (undefined3)(in_EAX >> 8);
-  if ((bVar1 < 0xc) || ((0xc < bVar1 && (bVar1 != 0xf)))) {
-    bVar2 = false;
+  pUVar2 = tabela_unidades;
+  uVar6 = in_EAX & 0xffff;
+  bVar5 = tabela_unidades[uVar6].tipo_id;
+  uVar4 = (undefined3)(in_EAX >> 8);
+  if ((bVar5 < 0xc) || ((0xc < bVar5 && (bVar5 != 0xf)))) {
+    bVar1 = false;
   }
   else {
-    bVar2 = true;
+    bVar1 = true;
   }
-  if (bVar2) {
-    tabela_unidades[uVar7].field_0xda = (tabela_unidades[uVar7].field_0x90 + -1) * '\x02' + '\x01';
+  if (bVar1) {
+    tabela_unidades[uVar6].field_0xda =
+         (tabela_unidades[uVar6].direcao_desejada - 1) * '\x02' + '\x01';
   }
-  uVar4 = CONCAT31(uVar5,pUVar3[uVar7].field_0x90);
-  if ((pUVar3[uVar7].field_0x90 == pUVar3[uVar7].field_0x91) ||
-     (cVar6 = pUVar3[uVar7].field_0x92 + '\x01', pUVar3[uVar7].field_0x92 = cVar6,
-     cVar6 != pUVar3[uVar7].field_0x93)) goto LAB_00448695;
-  if (((byte)pUVar3[uVar7].field_0x91 < (byte)pUVar3[uVar7].field_0x90) &&
-     ((int)((uint)(byte)pUVar3[uVar7].field_0x90 - (uint)(byte)pUVar3[uVar7].field_0x91) < 8)) {
+  uVar3 = CONCAT31(uVar4,pUVar2[uVar6].direcao_desejada);
+  if ((pUVar2[uVar6].direcao_desejada == pUVar2[uVar6].orientacao_atual) ||
+     (bVar5 = pUVar2[uVar6].contador_giro + 1, pUVar2[uVar6].contador_giro = bVar5,
+     bVar5 != pUVar2[uVar6].periodo_giro)) goto LAB_00448695;
+  if ((pUVar2[uVar6].orientacao_atual < pUVar2[uVar6].direcao_desejada) &&
+     ((int)((uint)pUVar2[uVar6].direcao_desejada - (uint)pUVar2[uVar6].orientacao_atual) < 8)) {
 LAB_00448655:
-    uVar4 = (byte)pUVar3[uVar7].field_0x91 / 0x10;
-    cVar6 = (byte)pUVar3[uVar7].field_0x91 % 0x10 + 1;
+    uVar3 = pUVar2[uVar6].orientacao_atual / 0x10;
+    bVar5 = pUVar2[uVar6].orientacao_atual % 0x10 + 1;
   }
   else {
-    bVar1 = pUVar3[uVar7].field_0x91;
-    uVar4 = CONCAT31(uVar5,bVar1);
-    if (((byte)pUVar3[uVar7].field_0x90 < bVar1) &&
-       (8 < (int)((uint)bVar1 - (uint)(byte)pUVar3[uVar7].field_0x90))) goto LAB_00448655;
-    if (pUVar3[uVar7].field_0x91 == '\x01') {
-      cVar6 = '\x10';
+    bVar5 = pUVar2[uVar6].orientacao_atual;
+    uVar3 = CONCAT31(uVar4,bVar5);
+    if ((pUVar2[uVar6].direcao_desejada < bVar5) &&
+       (8 < (int)((uint)bVar5 - (uint)pUVar2[uVar6].direcao_desejada))) goto LAB_00448655;
+    if (pUVar2[uVar6].orientacao_atual == 1) {
+      bVar5 = 0x10;
     }
     else {
-      cVar6 = pUVar3[uVar7].field_0x91 + -1;
+      bVar5 = pUVar2[uVar6].orientacao_atual - 1;
     }
   }
-  pUVar3[uVar7].field_0x91 = cVar6;
-  pUVar3[uVar7].field_0x92 = 0;
+  pUVar2[uVar6].orientacao_atual = bVar5;
+  pUVar2[uVar6].contador_giro = 0;
 LAB_00448695:
-  return CONCAT44(param_2,uVar4);
+  return CONCAT44(param_2,uVar3);
 }

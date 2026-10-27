@@ -1,6 +1,7 @@
 """Importa/atualiza a análise local e exporta as evidências, sem executar o jogo."""
 import subprocess
 import sys
+import uuid
 from pathlib import Path
 from executar import RAIZ
 from preparar_entrada import preparar
@@ -12,6 +13,8 @@ def main():
     logs = RAIZ / 'ghidra/logs'
     projetos.mkdir(exist_ok=True)
     logs.mkdir(exist_ok=True)
+    confirmacao = logs / 'exportacao-concluida.txt'
+    identificador = str(uuid.uuid4())
     # A existência do projeto não garante a presença do programa normalizado;
     # -process falha explicitamente nesse caso, sem substituir dados existentes.
     if (projetos / 'RisingLands.gpr').exists():
@@ -25,12 +28,14 @@ def main():
                '-scriptPath', str(RAIZ / 'ghidra/scripts'),
                '-postScript', 'AnotarUnidades.java',
                '-postScript', 'ExportarUnidades.java', str(RAIZ / 'evidencias/ghidra'),
+               str(confirmacao), identificador,
                '-max-cpu', '4', '-log', str(logs / 'analise.log'),
                '-scriptlog', str(logs / 'scripts.log')]
     subprocess.run(comando, cwd=RAIZ, check=True)
     # Alguns erros de script do Ghidra podem não alterar o código de saída.
     indice = RAIZ / 'evidencias/ghidra/exportacao.tsv'
-    if not indice.exists() or any(not linha.endswith('\tOK') for linha in indice.read_text().splitlines()[1:]):
+    if (not confirmacao.exists() or confirmacao.read_text() != identificador or not indice.exists() or
+            any(not linha.endswith('\tOK') for linha in indice.read_text().splitlines()[1:])):
         raise SystemExit('Exportação incompleta; consultar ghidra/logs.')
 
 

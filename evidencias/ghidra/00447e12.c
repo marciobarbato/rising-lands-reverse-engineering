@@ -7,70 +7,69 @@
 undefined8 __fastcall FUN_00447e12(undefined4 param_1,undefined4 param_2)
 
 {
-  byte bVar1;
+  UnidadeParcial *pUVar1;
   UnidadeParcial *pUVar2;
-  UnidadeParcial *pUVar3;
-  char cVar4;
+  byte bVar3;
   uint in_EAX;
-  undefined2 uVar5;
+  undefined2 uVar4;
+  uint uVar5;
   uint uVar6;
   uint uVar7;
-  uint uVar8;
 
-  pUVar3 = tabela_unidades;
-  uVar7 = in_EAX & 0xffff;
-  bVar1 = tabela_unidades[uVar7].tipo_id;
-  uVar5 = (undefined2)(in_EAX >> 0x10);
-  if (bVar1 < 7) {
-    if ((bVar1 == 6) && (tabela_unidades[uVar7].field_0x89 != '\0')) {
-      if (tabela_unidades[uVar7].field_0x89 != '\x01') {
+  pUVar2 = tabela_unidades;
+  uVar6 = in_EAX & 0xffff;
+  bVar3 = tabela_unidades[uVar6].tipo_id;
+  uVar4 = (undefined2)(in_EAX >> 0x10);
+  if (bVar3 < 7) {
+    if ((bVar3 == 6) && (tabela_unidades[uVar6].field_0x89 != '\0')) {
+      if (tabela_unidades[uVar6].field_0x89 != '\x01') {
         return CONCAT44(param_2,in_EAX);
       }
-      cVar4 = tabela_unidades[uVar7].field_0xa9 + '\x01';
-      pUVar2 = tabela_unidades + uVar7;
-      in_EAX = CONCAT22(uVar5,CONCAT11(pUVar2->field_0xa7,(char)in_EAX));
-      tabela_unidades[uVar7].field_0xa9 = cVar4;
-      if (cVar4 == pUVar2->field_0xa7) {
-        uVar8 = (byte)pUVar3[uVar7].field_0xa4 + 1;
-        uVar6 = 4;
+      bVar3 = tabela_unidades[uVar6].contador_animacao + 1;
+      pUVar1 = tabela_unidades + uVar6;
+      in_EAX = CONCAT22(uVar4,CONCAT11(pUVar1->periodo_animacao,(char)in_EAX));
+      tabela_unidades[uVar6].contador_animacao = bVar3;
+      if (bVar3 == pUVar1->periodo_animacao) {
+        uVar7 = pUVar2[uVar6].quadro_movimento + 1;
+        uVar5 = 4;
         goto LAB_00447e79;
       }
     }
   }
-  else if (bVar1 < 8) {
-    if (tabela_unidades[uVar7].field_0x89 != '\0') {
-      if (tabela_unidades[uVar7].field_0x89 != '\x01') {
+  else if (bVar3 < 8) {
+    if (tabela_unidades[uVar6].field_0x89 != '\0') {
+      if (tabela_unidades[uVar6].field_0x89 != '\x01') {
         return CONCAT44(param_2,in_EAX);
       }
-      cVar4 = tabela_unidades[uVar7].field_0xa9 + '\x01';
-      pUVar2 = tabela_unidades + uVar7;
-      tabela_unidades[uVar7].field_0xa9 = cVar4;
-      if (cVar4 == pUVar2->field_0xa7) {
-        uVar8 = (byte)pUVar3[uVar7].field_0xa4 + 1;
-        uVar6 = (uint)(byte)pUVar3[uVar7].field_0xa5;
+      bVar3 = tabela_unidades[uVar6].contador_animacao + 1;
+      pUVar1 = tabela_unidades + uVar6;
+      tabela_unidades[uVar6].contador_animacao = bVar3;
+      if (bVar3 == pUVar1->periodo_animacao) {
+        uVar7 = pUVar2[uVar6].quadro_movimento + 1;
+        uVar5 = (uint)pUVar2[uVar6].quantidade_quadros_movimento;
         goto LAB_00447e79;
       }
     }
   }
   else {
-    if (bVar1 != 0xe) {
+    if (bVar3 != 0xe) {
       return CONCAT44(param_2,in_EAX);
     }
-    if (tabela_unidades[uVar7].field_0x89 != '\0') {
-      if (tabela_unidades[uVar7].field_0x89 != '\x01') {
+    if (tabela_unidades[uVar6].field_0x89 != '\0') {
+      if (tabela_unidades[uVar6].field_0x89 != '\x01') {
         return CONCAT44(param_2,in_EAX);
       }
-      cVar4 = tabela_unidades[uVar7].field_0xa9 + '\x01';
-      in_EAX = CONCAT22(uVar5,CONCAT11(cVar4,(char)in_EAX));
-      pUVar2 = tabela_unidades + uVar7;
-      tabela_unidades[uVar7].field_0xa9 = cVar4;
-      if (cVar4 == pUVar2->field_0xa8) {
-        uVar8 = (byte)pUVar3[uVar7].field_0xa4 + 1;
-        uVar6 = (uint)(byte)pUVar3[uVar7].field_0xa6;
+      bVar3 = tabela_unidades[uVar6].contador_animacao + 1;
+      in_EAX = CONCAT22(uVar4,CONCAT11(bVar3,(char)in_EAX));
+      pUVar1 = tabela_unidades + uVar6;
+      tabela_unidades[uVar6].contador_animacao = bVar3;
+      if (bVar3 == pUVar1->field_0xa8) {
+        uVar7 = pUVar2[uVar6].quadro_movimento + 1;
+        uVar5 = (uint)(byte)pUVar2[uVar6].field_0xa6;
 LAB_00447e79:
-        pUVar3[uVar7].field_0xa9 = 0;
-        pUVar3[uVar7].field_0xa4 = (char)(uVar8 % uVar6);
-        return CONCAT44(param_2,uVar8 / uVar6);
+        pUVar2[uVar6].contador_animacao = 0;
+        pUVar2[uVar6].quadro_movimento = (byte)(uVar7 % uVar5);
+        return CONCAT44(param_2,uVar7 / uVar5);
       }
     }
   }

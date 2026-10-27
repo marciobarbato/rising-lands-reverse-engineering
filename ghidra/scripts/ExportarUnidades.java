@@ -44,6 +44,10 @@ public class ExportarUnidades extends GhidraScript {
             }
         }
         ReferenceIterator refs = currentProgram.getReferenceManager().getReferencesTo(toAddr(0x4e19a0L));
+        for (long endereco : new long[]{0x477042L, 0x4770eeL, 0x479555L, 0x428cc0L, 0x418b8aL}) {
+            Function auxiliar = fm.getFunctionAt(toAddr(endereco));
+            if (auxiliar != null) selecionadas.add(auxiliar);
+        }
         List<String> referencias = new ArrayList<>();
         referencias.add("instrucao\tfuncao\ttipo_referencia");
         while (refs.hasNext()) {
@@ -89,5 +93,8 @@ public class ExportarUnidades extends GhidraScript {
             "\nCompilerSpec: "+currentProgram.getCompilerSpec().getCompilerSpecID()+
             "\nSHA-256: "+currentProgram.getExecutableSHA256()+"\nFunções exportadas: "+numero+"\n", StandardCharsets.UTF_8);
         println("Exportação concluída: "+numero+" rotinas.");
+        if (getScriptArgs().length >= 3) {
+            Files.writeString(Paths.get(getScriptArgs()[1]), getScriptArgs()[2], StandardCharsets.UTF_8);
+        }
     }
 }

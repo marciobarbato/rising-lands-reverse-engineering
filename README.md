@@ -11,16 +11,19 @@ reimplementação completa do jogo.** Os nomes de funções foram atribuídos pe
 ## Resultados
 
 - Executável PE x86 de 32 bits identificado por SHA-256, com imports e evidências de runtime Watcom.
-- 20 trechos x86 com endereços, bytes e anotações para acompanhar a análise.
+- 27 trechos x86 com endereços, bytes e anotações para acompanhar a análise.
 - Carregamento dos atributos de 26 tipos de unidade reconstruído em Python.
 - Matriz de dano com 27 entradas por atacante, incluindo o tratamento da mina.
 - Estrutura de leitura dos 38 mapas ETA recuperada até o fechamento do arquivo nesse caminho.
 - Oito arquivos CMP decodificados: 12.268 quadros gráficos.
 - Terreno da missão 1 reconstruído com IDs começando em 1, como no renderizador original.
 - Testes de regressão com entradas sintéticas, arquivos reais e falhas de formato.
-- Ghidra portátil instalado e 250 rotinas exportadas, com assinaturas corrigidas de sete acessores.
+- Ghidra portátil instalado e 255 rotinas exportadas, com assinaturas corrigidas de sete acessores.
 - Dono, posição e vida das 2.604 entradas de unidades, distinguindo arquivo e efeitos da carga.
 - Cura com limite de vida reconstruída, incluindo aritmética de 16 bits.
+- Direção, giro, vizinhança, prefixo do passo e parâmetros de movimento dos 26 tipos.
+- Aritmética parcial de dano, incluindo comportamentos de borda do original.
+- 37 testes passando, com 8.932 execuções x86 delimitadas na bancada diferencial.
 
 ## Leitura recomendada
 
@@ -31,6 +34,7 @@ reimplementação completa do jogo.** Os nomes de funções foram atribuídos pe
 5. [Mapa das rotinas](documentacao/ROTINAS.md): onde conferir cada conclusão.
 6. [Lacunas e próximos passos](documentacao/CONTINUIDADE.md).
 7. [Instâncias das unidades](documentacao/INSTANCIAS.md) e [Ghidra local](documentacao/GHIDRA.md).
+8. [Movimento](documentacao/MOVIMENTO.md), [combate](documentacao/COMBATE.md) e [validação emulada](documentacao/EMULACAO.md).
 
 ## Reproduzir
 
@@ -62,6 +66,11 @@ O comando escreve somente `relatorios/` e `evidencias/`, dentro deste repositór
 Não baixa arquivos nem executa o EXE. Recusa outros hashes do executável porque
 os endereços estudados são específicos desta versão. A imagem do terreno não
 inclui unidades, construções dinâmicas, névoa de guerra ou simulação.
+
+Para registrar a validação comum, execute `python3 ferramentas/validar.py`.
+A [validação opcional com Unicorn](documentacao/EMULACAO.md) executa somente
+trechos x86 isolados, sem iniciar o jogo. O relatório completo está em
+[validacao-emulada.json](relatorios/validacao-emulada.json).
 
 ## Organização
 

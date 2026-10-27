@@ -7,38 +7,38 @@
 void FUN_004484a7(void)
 
 {
-  byte bVar1;
-  bool bVar2;
-  UnidadeParcial *pUVar3;
+  bool bVar1;
+  UnidadeParcial *pUVar2;
   ushort in_AX;
+  byte bVar3;
   char cVar4;
 
-  pUVar3 = tabela_unidades;
-  bVar1 = tabela_unidades[in_AX].tipo_id;
-  if ((bVar1 < 0xc) || ((0xc < bVar1 && (bVar1 != 0xf)))) {
-    bVar2 = false;
+  pUVar2 = tabela_unidades;
+  bVar3 = tabela_unidades[in_AX].tipo_id;
+  if ((bVar3 < 0xc) || ((0xc < bVar3 && (bVar3 != 0xf)))) {
+    bVar1 = false;
   }
   else {
-    bVar2 = true;
+    bVar1 = true;
   }
-  if (((bVar2) && (tabela_unidades[in_AX].field_0xda != tabela_unidades[in_AX].field_0x94)) &&
-     (cVar4 = tabela_unidades[in_AX].field_0x96 + '\x01', tabela_unidades[in_AX].field_0x96 = cVar4,
-     cVar4 == pUVar3[in_AX].field_0x93)) {
-    if ((((byte)pUVar3[in_AX].field_0x94 < (byte)pUVar3[in_AX].field_0xda) &&
-        ((int)((uint)(byte)pUVar3[in_AX].field_0xda - (uint)(byte)pUVar3[in_AX].field_0x94) < 0x10))
-       || (((byte)pUVar3[in_AX].field_0xda < (byte)pUVar3[in_AX].field_0x94 &&
-           (0x10 < (int)((uint)(byte)pUVar3[in_AX].field_0x94 - (uint)(byte)pUVar3[in_AX].field_0xda
+  if (((bVar1) && (tabela_unidades[in_AX].field_0xda != tabela_unidades[in_AX].field_0x94)) &&
+     (bVar3 = tabela_unidades[in_AX].field_0x96 + 1, tabela_unidades[in_AX].field_0x96 = bVar3,
+     bVar3 == pUVar2[in_AX].periodo_giro)) {
+    if ((((byte)pUVar2[in_AX].field_0x94 < (byte)pUVar2[in_AX].field_0xda) &&
+        ((int)((uint)(byte)pUVar2[in_AX].field_0xda - (uint)(byte)pUVar2[in_AX].field_0x94) < 0x10))
+       || (((byte)pUVar2[in_AX].field_0xda < (byte)pUVar2[in_AX].field_0x94 &&
+           (0x10 < (int)((uint)(byte)pUVar2[in_AX].field_0x94 - (uint)(byte)pUVar2[in_AX].field_0xda
                         ))))) {
-      cVar4 = (byte)pUVar3[in_AX].field_0x94 % 0x20 + 1;
+      cVar4 = (byte)pUVar2[in_AX].field_0x94 % 0x20 + 1;
     }
-    else if (pUVar3[in_AX].field_0x94 == '\x01') {
+    else if (pUVar2[in_AX].field_0x94 == '\x01') {
       cVar4 = ' ';
     }
     else {
-      cVar4 = pUVar3[in_AX].field_0x94 + -1;
+      cVar4 = pUVar2[in_AX].field_0x94 + -1;
     }
-    pUVar3[in_AX].field_0x94 = cVar4;
-    pUVar3[in_AX].field_0x96 = 0;
+    pUVar2[in_AX].field_0x94 = cVar4;
+    pUVar2[in_AX].field_0x96 = 0;
   }
   return;
 }

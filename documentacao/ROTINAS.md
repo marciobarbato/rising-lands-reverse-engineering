@@ -2,7 +2,8 @@
 
 Endereços virtuais para a base preferencial `0x00400000` do executável cujo hash
 está no relatório de análise e no manifesto. Nomes atribuídos pela pesquisa; não são símbolos
-originais. Os arquivos ASM incluem bytes, o que permite conferir alinhamento.
+originais. Os trechos da raiz de `evidencias` incluem bytes, permitindo conferir
+alinhamento. As exportações em `evidencias/ghidra` contêm endereços e instruções.
 
 | Endereço | Nome atribuído / observação | Evidência |
 |---|---|---|
@@ -29,6 +30,16 @@ originais. Os arquivos ASM incluem bytes, o que permite conferir alinhamento.
 | `0x47c30f` | Ler e descartar 16 bytes | [ASM](../evidencias/descartar_bytes_eta.asm) |
 | `0x47c404` | Ler quatro listas com cem entradas de três bytes | [ASM](../evidencias/listas_jogadores_eta.asm) |
 | `0x47ac30` | Ler e ajustar tabela final antes do fechamento | [ASM](../evidencias/tabela_47ac30.asm) |
+| `0x477042` | Direção entre duas células | [ASM](../evidencias/direcao_entre_celulas.asm) |
+| `0x4770ee` | Vizinho com verificação de bordas | [ASM](../evidencias/celula_vizinha.asm) |
+| `0x479555` | Distância quadrática de coordenadas u16 | [ASM](../evidencias/distancia_quadratica.asm) |
+| `0x448599` | Giro entre 16 orientações | [ASM](../evidencias/orientacao_unidade.asm) |
+| `0x448704` | Integrar deslocamento, progresso e chegada | [ASM do prefixo](../evidencias/inicio_passo_unidade.asm) |
+| `0x457122` | Acrescentar vida e limitar ao máximo do tipo | [ASM](../evidencias/cura_unidade.asm) |
+| `0x428cc0` | Consultar modificador por dono, tipo e código | [ASM](../evidencias/consulta_modificador.asm) |
+| `0x457350` | Inicializar parâmetros da instância conforme tipo | [Ghidra](../evidencias/ghidra/00457350.asm) |
+| `0x4502f0` | Aplicar modalidades de dano; reconstrução parcial | [Ghidra](../evidencias/ghidra/004502f0.asm) |
+| `0x4500e4` | Procurar unidade do mesmo dono dentro de raio | [Ghidra](../evidencias/ghidra/004500e4.asm) |
 
 ## Convenções e limites da desmontagem
 
@@ -46,15 +57,14 @@ campos resulta das instruções presentes, não de uma assinatura C presumida.
 
 O Ghidra oferece descompilação, grafos, referências e automação, conforme seu
 [repositório oficial](https://github.com/NationalSecurityAgency/ghidra).
-Ele ainda **não foi executado nesta pesquisa**. Na inspeção local, não foi
-encontrado no PATH, em Applications ou nos diretórios usuais do Homebrew.
+Ele foi instalado em `.local/` e utilizado para analisar a cópia normalizada
+do PE, com projeto, configurações e logs dentro do repositório.
 
 Para usar os resultados desta etapa:
 
-1. Importar o `RISING.EXE` identificado pelo hash, em um projeto dentro deste
-   repositório ou em outra localização escolhida explicitamente.
-2. Conferir formato PE e arquitetura x86 de 32 bits, com base `0x00400000`.
-3. Executar a análise automática e navegar até os endereços desta tabela.
+1. Consultar [GHIDRA.md](GHIDRA.md) e executar `python3 ghidra/analisar.py`.
+2. Abrir com `python3 ghidra/executar.py gui ghidra/projetos/RisingLands.gpr`.
+3. Selecionar `RISING-analise.exe` e navegar até os endereços desta tabela.
 4. Conferir limites de funções, saltos para epílogos comuns e tabelas embutidas.
 5. Atribuir os nomes portugueses, comentários e estruturas recuperadas.
 6. Conferir convenções de chamada por registradores antes de confiar nas

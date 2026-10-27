@@ -1,0 +1,2 @@
+# Opcional: somente validação de rotinas isoladas, instalado em .local/python.
+unicorn==2.1.4

@@ -14,6 +14,7 @@ import zlib
 from formatos import ler_cmp, ler_eta, ler_paleta
 from regras import extrair_regras
 from unidades import atributos_apos_carga
+from movimento import parametros_tipo
 
 RAIZ = Path(__file__).resolve().parents[1]
 HASH_ESTUDADO = '6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb'
@@ -39,6 +40,13 @@ TRECHOS = {
     'descartar_bytes_eta': (0x47c30f, 0x47c359),
     'listas_jogadores_eta': (0x47c404, 0x47c4b7),
     'tabela_47ac30': (0x47ac30, 0x47ad6a),
+    'direcao_entre_celulas': (0x477042, 0x4770ee),
+    'celula_vizinha': (0x4770ee, 0x4772ec),
+    'distancia_quadratica': (0x479555, 0x4795af),
+    'consulta_modificador': (0x428cc0, 0x428e71),
+    'orientacao_unidade': (0x448599, 0x448699),
+    'inicio_passo_unidade': (0x448704, 0x4488a8),
+    'cura_unidade': (0x457122, 0x45718a),
 }
 
 
@@ -178,6 +186,8 @@ def main():
     gravar_json(saida / 'executavel.json', executavel)
     regras = extrair_regras(imagem, base, (jogo / 'RISING.INI').read_bytes())
     gravar_json(saida / 'unidades.json', regras)
+    gravar_json(saida / 'movimento-tipos.json', [dict(id=t['id'], nome=t['nome'],
+                 **parametros_tipo(t['id'])) for t in regras['unidades']])
     mapas = []
     arquivos_mapa = sorted((cd / 'WORLD').glob('*.ETA'))
     arquivos_cmp = sorted((jogo / 'GRAPHICS').glob('*.CMP'))

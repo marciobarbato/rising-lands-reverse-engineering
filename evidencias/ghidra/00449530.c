@@ -27,9 +27,9 @@ void __fastcall FUN_00449530(undefined4 param_1,undefined4 param_2)
     uVar5 = tabela_unidades[in_AX].celula_destino;
     if (tabela_unidades[in_AX].celula_atual == uVar5) {
       if (uVar5 == *(ushort *)&tabela_unidades[in_AX].field_0xb2) {
-        tabela_unidades[in_AX].field_0x90 = 5;
+        tabela_unidades[in_AX].direcao_desejada = 5;
         uVar7 = FUN_00448599(param_1,CONCAT22((short)((uint)param_2 >> 0x10),uVar5));
-        if (pUVar2[in_AX].field_0x90 == pUVar2[in_AX].field_0x91) {
+        if (pUVar2[in_AX].direcao_desejada == pUVar2[in_AX].orientacao_atual) {
           uVar7 = FUN_004237c0(extraout_ECX,(int)((ulonglong)uVar7 >> 0x20));
           if ((char)uVar7 == '\0') {
             FUN_0041a65c(extraout_ECX_00,1);

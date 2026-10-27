@@ -38,6 +38,16 @@ public class AnotarUnidades extends GhidraScript {
         campo(unidade,0x86,SignedByteDataType.dataType,"deslocamento_x","Hipótese: deslocamento interpolado; confirmar no desenho.");
         campo(unidade,0x87,SignedByteDataType.dataType,"deslocamento_y","Hipótese: deslocamento interpolado; confirmar no desenho.");
         campo(unidade,0x88,u8,"estado_caminho","Switch de 0x44930c: 0,1,3,4,5,6.");
+        campo(unidade,0x90,u8,"direcao_desejada","0x477042 fornece direções ímpares 1..15.");
+        campo(unidade,0x91,u8,"orientacao_atual","0x448599 gira num círculo de 16 orientações.");
+        campo(unidade,0x92,u8,"contador_giro","Incremento uint8 e comparação por igualdade em 0x448599.");
+        campo(unidade,0x93,u8,"periodo_giro","Definido por tipo em 0x457350; não converter para segundos.");
+        campo(unidade,0x97,u8,"progresso_passo","0x44889f: chegou quando maior que 31.");
+        campo(unidade,0x98,u8,"incremento_passo","0x448704 soma a cada chamada, descontando DL.");
+        campo(unidade,0xa4,u8,"quadro_movimento","0x449023 incrementa módulo quantidade.");
+        campo(unidade,0xa5,u8,"quantidade_quadros_movimento","Inicializador 0x457350, consumidor 0x44902e.");
+        campo(unidade,0xa7,u8,"periodo_animacao","0x449013 compara com contador 0xa9.");
+        campo(unidade,0xa9,u8,"contador_animacao","0x448f50 incrementa e zera no período.");
         campo(unidade,0x9a,u16,"vida","0x457122 soma e limita; 0x452e8b subtrai 20 e chama morte no esgotamento.");
         campo(unidade,0xb0,u8,"alcance_quadrado_u8","0x46ae0e copia AL da tabela de tipos; truncamento adicional.");
         campo(unidade,0xbb,u8,"raio_visao","0x46ade5 copia da tabela de tipos.");
