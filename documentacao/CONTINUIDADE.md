@@ -1,6 +1,34 @@
 # Estado da pesquisa e continuidade
 
-## Concluído nesta etapa
+## Consolidação documental de 27/10/2026
+
+A rodada de pesquisa foi encerrada. Esta reconciliação registra os
+achados existentes, sem implementar código, integrar o runtime ou executar
+novas suítes. **A engenharia reversa e a reimplementação completa do jogo não
+estão finalizadas.** As pendências abaixo orientam uma eventual retomada;
+não representam trabalho em execução nesta consolidação.
+
+| Entrega | Commit de referência | Fontes e resultado registrado |
+|---|---|---|
+| Núcleo de caminhos, movimento, estruturas e tarefas | `1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e` | [Documentação da etapa](ESTRUTURAS_DESBLOQUEIO.md); [177 testes / 41.031 execuções x86](../relatorios/validacao-emulada.json) |
+| Combate | `88876ba9526f2caa1ba3c84b2c2662ce118fd4f0` | [Contrato](../pesquisas-paralelas/combate/INTEGRACAO.md); [67 testes / 170.295 execuções x86](../pesquisas-paralelas/combate/validacao-emulada.json) |
+| Economia | `50b2b2ebe09d0c50542e09d0f145f6e7fb2af982` | [Contrato](../pesquisas-paralelas/economia/INTEGRACAO.md); [108 testes / 19.499 execuções x86](../pesquisas-paralelas/economia/validacao-emulada.json) |
+| Gráficos e animação, primeiro marco Soldado | Revisão local congelada `2026-10-27-soldado-v1`, ainda não versionada; commit bloqueado | [20 testes Python / 4.814 execuções x86; 12.156 descritores e 144 associações](../pesquisas-paralelas/graficos-animacao/entregas/2026-10-27-soldado-v1/VALIDACAO.md) |
+
+As três validações commitadas são independentes. Não há soma de testes ou de
+execuções x86 apresentada como suíte integrada. O relatório de economia inclui
+48 exceções e três limites esperados, além das paradas declaradas nas fronteiras
+de dependências. Os resultados não comprovam uma partida completa. Nenhuma
+suíte foi executada novamente para preparar este documento.
+Os resultados gráficos pertencem à revisão local congelada, também independente;
+não constituem uma quarta validação integrada nem uma entrega versionada.
+
+Todas essas pesquisas usam a edição brasileira de `RISING.EXE`, SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+Os nomes franceses recuperados do SBL são conservados como evidência do código
+original; as interpretações e os contratos estão documentados em português.
+
+## Marcos do núcleo até `1c8ebdd`
 
 - Repositório Git independente em `Rising Lands/engenharia-reversa`.
 - Inventário e identificação do executável local.
@@ -49,6 +77,75 @@
   O teste do despachante superior substitui etapas; os testes da máquina de tarefas
   e das operações suportadas executam suas chamadas originais.
 
+## Achados das pesquisas paralelas
+
+### Combate — entregue, sem integração ao mundo compartilhado
+
+Os módulos autônomos cobrem seleção e manutenção de alvos, alcance e linha de
+tiro, mira angular, animação/emissão e inicialização/persistência dos campos de
+ataque. O [contrato](../pesquisas-paralelas/combate/INTEGRACAO.md) distingue
+consultas, cópias de registros e mutações, além de declarar callbacks necessários
+para construções, mensagens e efeitos externos.
+
+A tradução não fornece um ciclo de combate integrado. Pool, voo e impacto de
+projéteis, dano aplicado pelo backend, áudio, mensagens e conexão com a navegação
+continuam dependências explícitas. A comparação de geometria de construções usa
+memória sintética 1×1/3×3. Testes que começam após `ResetOrdre` ou recebem consultas
+resolvidas não comprovam todo o encadeamento anterior.
+
+A origem de **`+0x8A=2/3` permanece não identificada**. A auditoria encontrou
+escritas diretas com 0/1, e nenhum dos 2.604 registros dos 38 mapas contém 2/3.
+Os carregadores preservam valores externos; isso não prova que as fases sejam
+impossíveis numa partida e não autoriza inventar transições automáticas.
+Ver [INICIALIZACAO_ATAQUE.md](../pesquisas-paralelas/combate/INICIALIZACAO_ATAQUE.md).
+
+### Economia — entregue, sem promoção para `ferramentas/`
+
+Foram traduzidos consultas e créditos/débitos de recursos, custos, depósitos
+com capacidade/excedentes, retirada e recálculo do indicador, contagem de
+armazéns, efeitos econômicos de ganho/neutralização de construções e **15
+rotinas de minas, coleta e regeneração de campos**. As fontes, buffers, wraps,
+ordem dos sorteios e dependências estão no
+[contrato](../pesquisas-paralelas/economia/INTEGRACAO.md) e em
+[EXTRACAO_CAMPOS.md](../pesquisas-paralelas/economia/EXTRACAO_CAMPOS.md).
+
+As operações de terreno não representam o transporte nem o crédito final ao
+jogador. Dependências de retirada de colono e criação/movimento de balões podem
+interromper o domínio suportado; as bancadas correspondentes param na entrada
+dessas dependências. Permanecem pendentes transporte completo, consumo/fome,
+mercado, filas/recrutamento, tecnologias e ligação dos chamadores à agenda do
+jogo. O significado completo de RMI e de alguns campos neutros não foi provado.
+
+### Gráficos e animação — revisão local congelada; commit bloqueado
+
+O primeiro marco cobre somente o **Soldado, tipo 0**, com parada/movimento,
+associações de orientação/fase, ancoragem, transparência e cópia gráfica básica.
+A revisão local está em
+`pesquisas-paralelas/graficos-animacao/entregas/2026-10-27-soldado-v1/`, com
+**1.120 arquivos de conteúdo**. O SHA-256 de `MANIFESTO.json`, conferido nesta
+reconciliação, é
+`56d17ebe830036ac9e115549b640f994587590f61b7bcd650fecbf0f3eca5671`.
+O snapshot-base é `1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e`.
+
+A [validação local da revisão](../pesquisas-paralelas/graficos-animacao/entregas/2026-10-27-soldado-v1/VALIDACAO.md)
+registra 20 testes Python e 4.814 execuções x86 aprovados, 12.156 descritores
+do banco concatenado e 144 associações de orientação/fase. O carregamento dos
+bancos substitui I/O e alocação; a chamada de sombra é interceptada para registrar
+argumentos. Isso não equivale a executar DirectDraw nem o renderizador completo.
+
+Segundo a coordenação, o commit está **bloqueado**: o chat de gráficos solicitou
+confirmação humana para substituir sua instrução original de proibição de Git
+e não aceitou a autorização repassada. Sua janela Git foi suspensa, sem staging.
+Não há hash de commit gráfico a aguardar ou registrar neste encerramento.
+A revisão congelada, as fontes, dependências e snapshots integrais permanecerão
+locais e não serão incluídos no commit documental. Essas referências locais
+não estarão disponíveis apenas clonando os commits de combate/economia/núcleo.
+
+Permanecem sem validação completa os outros 25 tipos, construções e objetos,
+ordenação da cena, transformação de sombra, efeitos, paletas por jogador, HUD,
+minimapa e ligação ao simulador/aplicativo macOS. A demonstração independente
+não comprova uma missão nem temporização em segundos do jogo original.
+
 ## Questões em aberto
 
 | Tema | Evidência disponível | Trabalho necessário |
@@ -56,17 +153,27 @@
 | Caminhos e colisão | Núcleo das classes 1..3 em Python, ligado à física e conferido com o x86 | Ampliar tráfego e inicializar mapas reais com o ciclo completo de estruturas |
 | IA | Máquina de tarefas e ordens de movimento individuais/de grupo com efeitos confirmados | Completar seleção espacial da tarefa 16, mensagens e operações de economia/guerra |
 | Movimento e tempo | Desvios locais e gerais ligados ao avanço, ocupação, visão/minimapa, conclusão e mensagens | Completar despacho, fome/armadilhas, atropelamento e medir a taxa efetiva |
-| Combate | Aritmética parcial de dano, consulta de proximidade e cura confirmadas | Alvos, alcance, cadência, tecnologias e efeitos de morte |
-| Economia | Custos e blocos de recursos | Associar IDs internos, produção, consumo e filas |
-| Construções | Geometria inicial dos 22 tipos, regiões sob ocupação e componentes de cores traduzidos | Completar carga, construção/demolição, produção e estados |
+| Combate | Seleção, alcance, linha de tiro, mira, animação/emissão e inicialização traduzidos em pesquisa autônoma; aritmética de dano no núcleo | Resolver origem de `+0x8A=2/3`, pool/voo/impacto, efeitos externos e integração do ciclo |
+| Economia | Recursos, depósitos, armazéns, efeitos de propriedade e extração/regeneração traduzidos em pesquisa autônoma | Transporte completo, consumo/fome, mercado, filas, tecnologias e ligação aos chamadores |
+| Construções | Geometria inicial dos 22 tipos, regiões/cores e efeitos econômicos de propriedade documentados | Completar carga, construção/demolição, dependências de colono/balão, produção e estados |
 | Instâncias de unidades | Dono, coordenadas, vida e cópia disco→RAM confirmados | Completar ordens, significado dos estados e campos derivados |
 | Campanha | Blocos variáveis e textos de missões | Decifrar condições, eventos e vitória/derrota |
 | Sufixo ETA | Tamanho constante e hashes por mapa | Mapear as camadas restantes e seus consumidores |
-| Névoa e sprites | Referências no renderizador | Reproduzir composição, visibilidade e animação |
+| Névoa e sprites | Visão parcial no núcleo; revisão Soldado congelada localmente, ainda não versionada | Resolver confirmação Git na frente gráfica em eventual retomada; ampliar tipos/camadas e integrar composição/visibilidade |
 | Som, vídeo e rede | Imports DirectSound, MCI e DirectPlay | Identificar formatos, fluxos e protocolos |
 | Salvamento | Caminhos adjacentes de leitura | Comparar formato de campanha com snapshots de partida |
 
-## Próxima investigação recomendada
+## Continuidade para uma eventual retomada
+
+Combate e economia permanecem em suas pastas autônomas. Antes de uma integração
+futura, consultar os respectivos `INTEGRACAO.md`, preservar suas dependências e
+definir ensaios do encadeamento completo. A última validação do núcleo continua
+separada dos relatórios dessas frentes. A entrega gráfica local deverá ser consumida
+pela revisão congelada e pelo manifesto acima, respeitando sua condição de não
+versionada. Uma eventual decisão de versioná-la depende da confirmação pendente
+no chat responsável; este encerramento não resolve essa confirmação.
+
+Nenhuma dessas etapas está sendo iniciada neste encerramento documental.
 
 Prosseguir a partir de [NAVEGACAO.md](NAVEGACAO.md), [CAMINHOS.md](CAMINHOS.md)
 e [IA.md](IA.md).

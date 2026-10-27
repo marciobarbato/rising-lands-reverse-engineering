@@ -9,6 +9,36 @@ Esta entrega reconstrói partes verificáveis do carregamento do jogo a partir d
 reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesquisa;
 1.995 registros de símbolos originais foram depois recuperados de `RISING.SBL`.
 
+## Consolidação das entregas — 27/10/2026
+
+Esta rodada de pesquisa foi encerrada para consolidação documental. As pesquisas de combate e economia
+foram commitadas em pastas próprias no `main`; seus módulos continuam separados
+do simulador central. A engenharia reversa e o jogo completo permanecem incompletos.
+
+| Frente | Referência | Validação registrada, por frente |
+|---|---|---|
+| Núcleo: caminhos, unidades e tarefas | `1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e` | [177 testes; 41.031 execuções x86 delimitadas](relatorios/validacao-emulada.json) |
+| Combate | `88876ba9526f2caa1ba3c84b2c2662ce118fd4f0` | [67 testes; 170.295 execuções x86 delimitadas](pesquisas-paralelas/combate/validacao-emulada.json) |
+| Economia | `50b2b2ebe09d0c50542e09d0f145f6e7fb2af982` | [108 testes; 19.499 execuções x86 delimitadas](pesquisas-paralelas/economia/validacao-emulada.json) |
+| Gráficos e animação: Soldado | Revisão local `2026-10-27-soldado-v1`, ainda não versionada; commit bloqueado | [20 testes Python; 4.814 execuções x86; 12.156 descritores e 144 associações](pesquisas-paralelas/graficos-animacao/entregas/2026-10-27-soldado-v1/VALIDACAO.md) |
+
+Esses resultados pertencem a suítes independentes; **não devem ser somados como
+validação integrada**. Na economia, a contagem inclui 48 exceções e três limites
+esperados, discriminados no relatório. A consolidação documental não executa
+novamente essas suítes nem integra os módulos ao runtime.
+
+A entrega gráfica local contém 1.120 arquivos de conteúdo, com manifesto SHA-256
+`56d17ebe830036ac9e115549b640f994587590f61b7bcd650fecbf0f3eca5671` e snapshot-base
+`1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e`. Segundo a coordenação, seu commit
+permanece bloqueado pela confirmação humana solicitada no chat de gráficos para
+substituir a proibição original de Git. A revisão, suas fontes, dependências e
+snapshots integrais permanecerão locais; não estão incluídos no commit documental.
+
+Os contratos de [combate](pesquisas-paralelas/combate/INTEGRACAO.md) e
+[economia](pesquisas-paralelas/economia/INTEGRACAO.md) descrevem entradas, efeitos
+delegados e dependências pendentes. O estado, as fontes e a continuidade estão em
+[CONTINUIDADE.md](documentacao/CONTINUIDADE.md).
+
 ## Resultados
 
 - Executável PE x86 de 32 bits identificado por SHA-256, com imports e evidências de runtime Watcom.
@@ -40,7 +70,9 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 - Preparação, construção dos dois contornos, seleção e otimização em Python nas classes 1..3, cobrindo os 26 tipos.
 - Backend independente de caminhos e demonstração de movimento sem carregar o EXE ou Unicorn.
 - Estruturas nos contornos, grade de cores com união/separação, geometria dos 22 tipos e ordens para afastar aliados bloqueadores.
-- 177 testes passando, com 41.031 execuções x86 delimitadas; o teste do despachante superior substitui suas etapas internas.
+- Marco do núcleo `1c8ebdd`: 177 testes passando, com 41.031 execuções x86 delimitadas; o teste do despachante superior substitui suas etapas internas.
+- Pesquisa autônoma de combate: seleção de alvos, alcance, linha de tiro, mira, animação/emissão e inicialização dos campos de ataque. A origem de `+0x8A=2/3` continua sem prova.
+- Pesquisa autônoma de economia: consultas e mutações de recursos, depósitos, contagem de armazéns, efeitos econômicos de propriedade e 15 rotinas de minas, coleta e regeneração de campos. Transporte completo, consumo, mercado e filas continuam pendentes.
 
 ## Leitura recomendada
 
@@ -63,6 +95,8 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 17. [Contornos dos obstáculos e busca independente](documentacao/CONTORNOS.md).
 18. [Prompts para pesquisas paralelas e aplicativo Mac](documentacao/PROMPTS_PARALELOS.md).
 19. [Estruturas e afastamento de bloqueadores](documentacao/ESTRUTURAS_DESBLOQUEIO.md).
+20. [Contrato da pesquisa de combate](pesquisas-paralelas/combate/INTEGRACAO.md).
+21. [Contrato da pesquisa de economia](pesquisas-paralelas/economia/INTEGRACAO.md).
 
 ## Reproduzir
 
@@ -122,6 +156,7 @@ para comparar as traduções e os efeitos administrativos ainda não portados.
 | `relatorios/` | Manifesto de hashes, dados recuperados e terreno da missão 1 |
 | `testes/` | Casos sintéticos e validação contra o corpus local |
 | `ghidra/` | Instalador, launcher, scripts de anotação e análise |
+| `pesquisas-paralelas/` | Entregas autônomas, com contratos e validações próprios; não integradas automaticamente ao núcleo |
 
 Os relatórios são versionados para permitir comparação entre descobertas. Os
 testes que dependem do CD são explicitamente marcados como ignorados se ele
