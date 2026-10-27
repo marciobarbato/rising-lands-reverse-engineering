@@ -1,0 +1,140 @@
+{
+  "modo": "Python sem emulação",
+  "testes": 65,
+  "falhas": 0,
+  "erros": 0,
+  "ignorados": [
+    {
+      "teste": "test_capacidade_1024_estados_inclusive_pilha_suja (test_construcoes.DiferencialConstrucoes)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_criar_e_depositar_192_casos (test_construcoes.DiferencialConstrucoes)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_destinos_excedentes_384_casos_com_sacolas_originais (test_construcoes.DiferencialConstrucoes)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_divisao_zero_8_excecoes_apos_credito (test_construcoes.DiferencialConstrucoes)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_pilhas_cheias_e_ocupacao_incompativel_96_casos (test_construcoes.DiferencialConstrucoes)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_pilhas_corrompidas_3_limites_de_execucao (test_construcoes.DiferencialConstrucoes)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_procura_512_casos_bordas_ordem_e_semente (test_construcoes.DiferencialConstrucoes)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_sem_lugar_nos_cinco_aneis_usa_ffff_2_casos (test_construcoes.DiferencialConstrucoes)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_tipo_4_aceita_256_casos_e_limite_5 (test_construcoes.DiferencialConstrucoes)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_tipo_4_recusa_64_paradas_na_dependencia (test_construcoes.DiferencialConstrucoes)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_consultas_1536_casos_e_bytes_nao_escritos (test_economia.Diferencial)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_custos_sinteticos_acessores_e_ia_208_chamadas (test_economia.Diferencial)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_helper_necessidade_512_casos (test_economia.Diferencial)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_inicializacao_38_mapas_e_custos_reais_482_chamadas (test_economia.Diferencial)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_mutacoes_1536_casos_mais_limites (test_economia.Diferencial)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_operacoes_ia_1024_casos_e_limiares_signed (test_economia.Diferencial)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_riqueza_256_casos (test_economia.Diferencial)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_sequencia_credito_debito_e_consultas_400_chamadas (test_economia.Diferencial)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_suficiencia_512_casos_e_igualdade (test_economia.Diferencial)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_16_limites_de_contagem_de_armazens_e_heliportos (test_init_cave.DiferencialInitCave)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_32_tabelas_inteiras_com_estados_e_proprietarios_variados (test_init_cave.DiferencialInitCave)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_integracao_contagem_recalculo_e_debito_24_chamadas (test_init_cave.DiferencialInitCave)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_prefixos_de_estruturas_dos_38_mapas_eta (test_init_cave.DiferencialInitCave)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_troca_de_dono_inativacao_e_reativacao_4_chamadas (test_init_cave.DiferencialInitCave)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_divisao_zero_16_excecoes_e_ordem_dos_efeitos (test_retirada_recalculo.DiferencialRetiradaRecalculo)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_limites_numericos_168_chamadas (test_retirada_recalculo.DiferencialRetiradaRecalculo)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_recalculo_1024_estados_e_pilha_suja (test_retirada_recalculo.DiferencialRetiradaRecalculo)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_recalculo_252_jogadores_invalidos_nao_le_tabelas (test_retirada_recalculo.DiferencialRetiradaRecalculo)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_retirada_1024_estados_e_argumentos_truncados (test_retirada_recalculo.DiferencialRetiradaRecalculo)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_sequencia_deposito_retirada_recalculo_384_chamadas (test_retirada_recalculo.DiferencialRetiradaRecalculo)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    }
+  ],
+  "execucoes_x86_delimitadas": 0,
+  "execucoes_x86_por_bancada": {
+    "Diferencial": 0,
+    "DiferencialConstrucoes": 0,
+    "DiferencialRetiradaRecalculo": 0,
+    "DiferencialInitCave": 0
+  },
+  "excecoes_x86_esperadas": 0,
+  "limites_x86_esperados": 0,
+  "execucoes_x86_ate_parada": 0,
+  "sucesso": true,
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}

@@ -1,0 +1,19 @@
+{
+  "modo": "x86 original e Python",
+  "testes": 65,
+  "falhas": 0,
+  "erros": 0,
+  "ignorados": [],
+  "execucoes_x86_delimitadas": 11994,
+  "execucoes_x86_por_bancada": {
+    "Diferencial": 6471,
+    "DiferencialConstrucoes": 2541,
+    "DiferencialRetiradaRecalculo": 2868,
+    "DiferencialInitCave": 114
+  },
+  "excecoes_x86_esperadas": 24,
+  "limites_x86_esperados": 3,
+  "execucoes_x86_ate_parada": 11967,
+  "sucesso": true,
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}

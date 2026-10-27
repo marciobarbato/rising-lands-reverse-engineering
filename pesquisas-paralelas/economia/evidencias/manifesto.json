@@ -1,0 +1,2449 @@
+{
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_sbl": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "capstone": "5.0.7",
+  "rotinas": {
+    "0x00418e95": "BatimentAlloc",
+    "0x00419112": "BatimentInitCave",
+    "0x00419fc8": "BatimentRecalculRessource",
+    "0x0041aace": "BatimentGetRessource",
+    "0x0041b1c6": "GarageCalculCoutReparation",
+    "0x0041be88": "InitBatimentPlayer",
+    "0x0041cde0": "BatimentInitTechnologie",
+    "0x0041dde0": "BatimentRetireColon",
+    "0x00422fde": "StockPossible",
+    "0x00423355": "BatimentCalculResource",
+    "0x0042340f": "BatimentAjouteMatiere",
+    "0x004235bd": "BatimentEnleveMatiere",
+    "0x004283e2": "InitRecruteTroupe",
+    "0x004410d2": "EnginGetRessource",
+    "0x004470d2": "BagAccepte",
+    "0x0045d753": "BatimentRessourceNecessaire",
+    "0x0045d7cf": "TroupeRessourceNecessaire",
+    "0x00467640": "GetRessourceRMI",
+    "0x00467670": "GetRessource",
+    "0x0046769d": "GetRessourceStock",
+    "0x004676e5": "TestRessource",
+    "0x00467718": "CalculMatiere",
+    "0x004678f2": "AjouteMatiere",
+    "0x0046792c": "EnleveMatiere",
+    "0x0046799c": "SetMatiere",
+    "0x0046aa96": "LoadRessource",
+    "0x0046ab21": "LoadGameRessource",
+    "0x0046ab33": "SauveRessource",
+    "0x004704dc": "Random",
+    "0x00475736": "SacGetCapacite",
+    "0x00475763": "TerrainAccepteSac",
+    "0x004757af": "SacCherchePlace",
+    "0x0047605d": "CreerSac",
+    "0x004761a9": "TerrainDeposeSac",
+    "0x00481372": "I_CombienCouteUnite",
+    "0x00481399": "I_CombienCouteBatiment",
+    "0x004813b8": "B_TestStock",
+    "0x00481400": "B_TestRessource",
+    "0x00485f20": "B_TestMaxRocheDansStock",
+    "0x00485fb9": "iagRessGetPlayerWealth"
+  },
+  "trechos_auxiliares": {
+    "0x00423025": {
+      "nome": "epilogo_compartilhado_de_BatimentCalculResource",
+      "fim_exclusivo": "0x0042302d"
+    },
+    "0x0041db1e": {
+      "nome": "epilogo_compartilhado_de_BatimentInitCave",
+      "fim_exclusivo": "0x0041db24"
+    }
+  },
+  "tipos_construcao_confirmados": [
+    {
+      "id": 2,
+      "endereco": "0x00495df4",
+      "nome_original": "SANCTUAIRE",
+      "registro_hex": "0600050058020000305c490032001e0000000853414e435455414952450000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": 3,
+      "endereco": "0x00495e28",
+      "nome_original": "CAVE",
+      "registro_hex": "0500050064000000505c49000a000600000002434156450000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": 4,
+      "endereco": "0x00495e5c",
+      "nome_original": "CULTURE",
+      "registro_hex": "0300040064000000ec5c49000c00060000000543554c545552450000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": 18,
+      "endereco": "0x00496134",
+      "nome_original": "HELIOPORT",
+      "registro_hex": "040005002c010000485d49001400080000000448454c494f504f5254000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": 21,
+      "endereco": "0x004961d0",
+      "nome_original": "TENTE",
+      "registro_hex": "030004002c010000c85c49000a00040000000654454e544500000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "referencias_diretas_candidatas": [
+    {
+      "endereco": "0x00419fe7",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "BatimentRecalculRessource"
+      ]
+    },
+    {
+      "endereco": "0x0041b188",
+      "instrucao": "call",
+      "alvo": "0x004410d2",
+      "nome": "EnginGetRessource",
+      "simbolo_anterior": [
+        "BatimentEvalueCoutReparation"
+      ]
+    },
+    {
+      "endereco": "0x0041b211",
+      "instrucao": "call",
+      "alvo": "0x004410d2",
+      "nome": "EnginGetRessource",
+      "simbolo_anterior": [
+        "GarageCalculCoutReparation"
+      ]
+    },
+    {
+      "endereco": "0x0041b255",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "GarageCalculCoutReparation"
+      ]
+    },
+    {
+      "endereco": "0x0041b283",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "GarageCalculCoutReparation"
+      ]
+    },
+    {
+      "endereco": "0x0041b2ac",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "GarageCalculCoutReparation"
+      ]
+    },
+    {
+      "endereco": "0x0041b372",
+      "instrucao": "call",
+      "alvo": "0x004410d2",
+      "nome": "EnginGetRessource",
+      "simbolo_anterior": [
+        "HospiCalculCoutReparation"
+      ]
+    },
+    {
+      "endereco": "0x0041b3ea",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "HospiCalculCoutReparation"
+      ]
+    },
+    {
+      "endereco": "0x0041b40b",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "HospiCalculCoutReparation"
+      ]
+    },
+    {
+      "endereco": "0x0041b436",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "HospiCalculCoutReparation"
+      ]
+    },
+    {
+      "endereco": "0x0041bbd7",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "TerrainDeposeMatiere"
+      ]
+    },
+    {
+      "endereco": "0x0041bc2c",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "TerrainDeposeMatiere"
+      ]
+    },
+    {
+      "endereco": "0x0041bc53",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "TerrainDeposeMatiere"
+      ]
+    },
+    {
+      "endereco": "0x0041bc77",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "TerrainDeposeMatiere"
+      ]
+    },
+    {
+      "endereco": "0x0041bc9a",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "TerrainDeposeMatiere"
+      ]
+    },
+    {
+      "endereco": "0x0041bd21",
+      "instrucao": "call",
+      "alvo": "0x004761a9",
+      "nome": "TerrainDeposeSac",
+      "simbolo_anterior": [
+        "TerrainDeposeMatiere"
+      ]
+    },
+    {
+      "endereco": "0x0041bd3f",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "TerrainDeposeMatiere"
+      ]
+    },
+    {
+      "endereco": "0x0041bd92",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "TerrainDeposeMatiere"
+      ]
+    },
+    {
+      "endereco": "0x0041bdb9",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "TerrainDeposeMatiere"
+      ]
+    },
+    {
+      "endereco": "0x0041bdcf",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "TerrainDeposeMatiere"
+      ]
+    },
+    {
+      "endereco": "0x0041bdf2",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "TerrainDeposeMatiere"
+      ]
+    },
+    {
+      "endereco": "0x0041bf89",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "InitBatimentPlayer"
+      ]
+    },
+    {
+      "endereco": "0x0041cd20",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "BatimentHabitable"
+      ]
+    },
+    {
+      "endereco": "0x0041ce61",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "BatimentInitTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041f129",
+      "instrucao": "call",
+      "alvo": "0x0041dde0",
+      "nome": "BatimentRetireColon",
+      "simbolo_anterior": [
+        "DemonteBatiment"
+      ]
+    },
+    {
+      "endereco": "0x0041f184",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "DemonteBatiment"
+      ]
+    },
+    {
+      "endereco": "0x0041f19f",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "DemonteBatiment"
+      ]
+    },
+    {
+      "endereco": "0x0041f35e",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "DemonteBatiment"
+      ]
+    },
+    {
+      "endereco": "0x0041f396",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "DemonteBatiment"
+      ]
+    },
+    {
+      "endereco": "0x0041f3d7",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "DemonteBatiment"
+      ]
+    },
+    {
+      "endereco": "0x0041f4b7",
+      "instrucao": "call",
+      "alvo": "0x0042340f",
+      "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "DeposeContenu"
+      ]
+    },
+    {
+      "endereco": "0x0041f4f9",
+      "instrucao": "call",
+      "alvo": "0x0042340f",
+      "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "DeposeContenu"
+      ]
+    },
+    {
+      "endereco": "0x0041f5fa",
+      "instrucao": "call",
+      "alvo": "0x004470d2",
+      "nome": "BagAccepte",
+      "simbolo_anterior": [
+        "PlaceLibre"
+      ]
+    },
+    {
+      "endereco": "0x0041f75c",
+      "instrucao": "call",
+      "alvo": "0x004470d2",
+      "nome": "BagAccepte",
+      "simbolo_anterior": [
+        "PlaceLibre"
+      ]
+    },
+    {
+      "endereco": "0x0041f9f4",
+      "instrucao": "call",
+      "alvo": "0x0042340f",
+      "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "BatimentLogeEngin"
+      ]
+    },
+    {
+      "endereco": "0x0041fa3b",
+      "instrucao": "call",
+      "alvo": "0x0042340f",
+      "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "BatimentLogeEngin"
+      ]
+    },
+    {
+      "endereco": "0x0041fa9a",
+      "instrucao": "call",
+      "alvo": "0x0041be88",
+      "nome": "InitBatimentPlayer",
+      "simbolo_anterior": [
+        "BatimentLogeEngin"
+      ]
+    },
+    {
+      "endereco": "0x0041ff52",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "CreerBatiment"
+      ]
+    },
+    {
+      "endereco": "0x0041ff72",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "CreerBatiment"
+      ]
+    },
+    {
+      "endereco": "0x0041ff9b",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "CreerBatiment"
+      ]
+    },
+    {
+      "endereco": "0x0041fff0",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "CreerBatiment"
+      ]
+    },
+    {
+      "endereco": "0x00420019",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "CreerBatiment"
+      ]
+    },
+    {
+      "endereco": "0x00420efa",
+      "instrucao": "call",
+      "alvo": "0x0042340f",
+      "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "SortieTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00420f3e",
+      "instrucao": "call",
+      "alvo": "0x0042340f",
+      "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "SortieTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00421bf8",
+      "instrucao": "call",
+      "alvo": "0x0041b1c6",
+      "nome": "GarageCalculCoutReparation",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x00422400",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x00422446",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x00422479",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x004227aa",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x004227f0",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x00422820",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x00422e06",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "InitApprentissage"
+      ]
+    },
+    {
+      "endereco": "0x00422e2d",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "InitApprentissage"
+      ]
+    },
+    {
+      "endereco": "0x00422e81",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "InitApprentissage"
+      ]
+    },
+    {
+      "endereco": "0x00422eaa",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "InitApprentissage"
+      ]
+    },
+    {
+      "endereco": "0x00422ff9",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "StockPossible"
+      ]
+    },
+    {
+      "endereco": "0x00423397",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "BatimentCalculResource"
+      ]
+    },
+    {
+      "endereco": "0x0042347b",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "BatimentAjouteMatiere"
+      ]
+    },
+    {
+      "endereco": "0x004234ce",
+      "instrucao": "call",
+      "alvo": "0x004678f2",
+      "nome": "AjouteMatiere",
+      "simbolo_anterior": [
+        "BatimentAjouteMatiere"
+      ]
+    },
+    {
+      "endereco": "0x00423519",
+      "instrucao": "call",
+      "alvo": "0x004470d2",
+      "nome": "BagAccepte",
+      "simbolo_anterior": [
+        "BatimentAjouteMatiere"
+      ]
+    },
+    {
+      "endereco": "0x00423538",
+      "instrucao": "call",
+      "alvo": "0x0041dde0",
+      "nome": "BatimentRetireColon",
+      "simbolo_anterior": [
+        "BatimentAjouteMatiere"
+      ]
+    },
+    {
+      "endereco": "0x00423550",
+      "instrucao": "call",
+      "alvo": "0x004761a9",
+      "nome": "TerrainDeposeSac",
+      "simbolo_anterior": [
+        "BatimentAjouteMatiere"
+      ]
+    },
+    {
+      "endereco": "0x004235b1",
+      "instrucao": "call",
+      "alvo": "0x004761a9",
+      "nome": "TerrainDeposeSac",
+      "simbolo_anterior": [
+        "BatimentAjouteMatiere"
+      ]
+    },
+    {
+      "endereco": "0x004235d8",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "BatimentEnleveMatiere"
+      ]
+    },
+    {
+      "endereco": "0x00423601",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "BatimentEnleveMatiere"
+      ]
+    },
+    {
+      "endereco": "0x0042377f",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "FindNearestBatiment"
+      ]
+    },
+    {
+      "endereco": "0x004255b1",
+      "instrucao": "call",
+      "alvo": "0x004410d2",
+      "nome": "EnginGetRessource",
+      "simbolo_anterior": [
+        "BatimentRepareEngin"
+      ]
+    },
+    {
+      "endereco": "0x004258a9",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "HelipedeTerminer"
+      ]
+    },
+    {
+      "endereco": "0x004261d1",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x004264a0",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "InitNova"
+      ]
+    },
+    {
+      "endereco": "0x004264cb",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "InitNova"
+      ]
+    },
+    {
+      "endereco": "0x004264f2",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "InitNova"
+      ]
+    },
+    {
+      "endereco": "0x0042654e",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "InitNova"
+      ]
+    },
+    {
+      "endereco": "0x00426577",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "InitNova"
+      ]
+    },
+    {
+      "endereco": "0x00426d04",
+      "instrucao": "call",
+      "alvo": "0x004470d2",
+      "nome": "BagAccepte",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x0042747a",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00427498",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00427aef",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00427b0d",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00428430",
+      "instrucao": "call",
+      "alvo": "0x004410d2",
+      "nome": "EnginGetRessource",
+      "simbolo_anterior": [
+        "InitRecruteTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00428453",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "InitRecruteTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00428488",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "InitRecruteTroupe"
+      ]
+    },
+    {
+      "endereco": "0x004284b1",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "InitRecruteTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00428507",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "InitRecruteTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00428530",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "InitRecruteTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00428583",
+      "instrucao": "call",
+      "alvo": "0x0046792c",
+      "nome": "EnleveMatiere",
+      "simbolo_anterior": [
+        "InitRecruteTroupe"
+      ]
+    },
+    {
+      "endereco": "0x004285ac",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "InitRecruteTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00429120",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "GetMeteo"
+      ]
+    },
+    {
+      "endereco": "0x004299da",
+      "instrucao": "call",
+      "alvo": "0x00475736",
+      "nome": "SacGetCapacite",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042bf6b",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042c09a",
+      "instrucao": "call",
+      "alvo": "0x004410d2",
+      "nome": "EnginGetRessource",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042c0fa",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042c14b",
+      "instrucao": "call",
+      "alvo": "0x0041aace",
+      "nome": "BatimentGetRessource",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042c1a9",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042d413",
+      "instrucao": "call",
+      "alvo": "0x00467718",
+      "nome": "CalculMatiere",
+      "simbolo_anterior": [
+        "CalculGame"
+      ]
+    },
+    {
+      "endereco": "0x0043b277",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00441be7",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "BallonPrepareArrivee"
+      ]
+    },
+    {
+      "endereco": "0x00443d96",
+      "instrucao": "call",
+      "alvo": "0x0047605d",
+      "nome": "CreerSac",
+      "simbolo_anterior": [
+        "EnginRetireType"
+      ]
+    },
+    {
+      "endereco": "0x004444ff",
+      "instrucao": "call",
+      "alvo": "0x004757af",
+      "nome": "SacCherchePlace",
+      "simbolo_anterior": [
+        "EnginRetire"
+      ]
+    },
+    {
+      "endereco": "0x00444529",
+      "instrucao": "call",
+      "alvo": "0x0047605d",
+      "nome": "CreerSac",
+      "simbolo_anterior": [
+        "EnginRetire"
+      ]
+    },
+    {
+      "endereco": "0x00444643",
+      "instrucao": "call",
+      "alvo": "0x004757af",
+      "nome": "SacCherchePlace",
+      "simbolo_anterior": [
+        "SetEnginDepose"
+      ]
+    },
+    {
+      "endereco": "0x00444be7",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "SetDyingEngin"
+      ]
+    },
+    {
+      "endereco": "0x00447b6c",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "AnimBallonStatic"
+      ]
+    },
+    {
+      "endereco": "0x00447bb0",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "AnimBallonStatic"
+      ]
+    },
+    {
+      "endereco": "0x00447bf2",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "AnimBallonStatic"
+      ]
+    },
+    {
+      "endereco": "0x00447c8a",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "AnimBallonStatic"
+      ]
+    },
+    {
+      "endereco": "0x00447caf",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "AnimBallonStatic"
+      ]
+    },
+    {
+      "endereco": "0x00448a44",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "AvanceEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044b25a",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "CalculConstruireBatiment"
+      ]
+    },
+    {
+      "endereco": "0x0044b834",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "CalculReparer"
+      ]
+    },
+    {
+      "endereco": "0x0044b938",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "CalculReparer"
+      ]
+    },
+    {
+      "endereco": "0x0044bf8d",
+      "instrucao": "call",
+      "alvo": "0x00475763",
+      "nome": "TerrainAccepteSac",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044c4c1",
+      "instrucao": "call",
+      "alvo": "0x00475763",
+      "nome": "TerrainAccepteSac",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044c7c1",
+      "instrucao": "call",
+      "alvo": "0x00475763",
+      "nome": "TerrainAccepteSac",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044c7fd",
+      "instrucao": "call",
+      "alvo": "0x004757af",
+      "nome": "SacCherchePlace",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044c925",
+      "instrucao": "call",
+      "alvo": "0x0042340f",
+      "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044d0b3",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044d0cb",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044d247",
+      "instrucao": "call",
+      "alvo": "0x00475763",
+      "nome": "TerrainAccepteSac",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044db44",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044db54",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044dd4c",
+      "instrucao": "call",
+      "alvo": "0x00475763",
+      "nome": "TerrainAccepteSac",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044e085",
+      "instrucao": "call",
+      "alvo": "0x00475763",
+      "nome": "TerrainAccepteSac",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044e0cb",
+      "instrucao": "call",
+      "alvo": "0x004757af",
+      "nome": "SacCherchePlace",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044e1da",
+      "instrucao": "call",
+      "alvo": "0x0042340f",
+      "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044e54b",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "CalculDechargeCaveEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044e565",
+      "instrucao": "call",
+      "alvo": "0x004235bd",
+      "nome": "BatimentEnleveMatiere",
+      "simbolo_anterior": [
+        "CalculDechargeCaveEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044e831",
+      "instrucao": "call",
+      "alvo": "0x00475763",
+      "nome": "TerrainAccepteSac",
+      "simbolo_anterior": [
+        "CalculDechargeCaveEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044e953",
+      "instrucao": "call",
+      "alvo": "0x0042340f",
+      "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "CalculDechargeCaveEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044ec76",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "EnginCalculTransporte"
+      ]
+    },
+    {
+      "endereco": "0x0044ec91",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "EnginCalculTransporte"
+      ]
+    },
+    {
+      "endereco": "0x0044ef89",
+      "instrucao": "call",
+      "alvo": "0x00475763",
+      "nome": "TerrainAccepteSac",
+      "simbolo_anterior": [
+        "EnginCalculTransporte"
+      ]
+    },
+    {
+      "endereco": "0x0044f0c7",
+      "instrucao": "call",
+      "alvo": "0x0042340f",
+      "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "EnginCalculTransporte"
+      ]
+    },
+    {
+      "endereco": "0x0044f4a0",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "CalculTransporteEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044f4b8",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "CalculTransporteEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044f865",
+      "instrucao": "call",
+      "alvo": "0x0042340f",
+      "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "CalculTransporteEngin"
+      ]
+    },
+    {
+      "endereco": "0x004509cc",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "InfligeDegat"
+      ]
+    },
+    {
+      "endereco": "0x00450e49",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "InfligeDegat"
+      ]
+    },
+    {
+      "endereco": "0x00452bcb",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "CalculAttaqueEngin"
+      ]
+    },
+    {
+      "endereco": "0x00453047",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "EnginCherchePlaceLibre"
+      ]
+    },
+    {
+      "endereco": "0x004530bb",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "CalculEnginStatic"
+      ]
+    },
+    {
+      "endereco": "0x00453c5f",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "EnginSetFatigue"
+      ]
+    },
+    {
+      "endereco": "0x004556c1",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x004556d7",
+      "instrucao": "call",
+      "alvo": "0x004235bd",
+      "nome": "BatimentEnleveMatiere",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x004560ff",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x0045621c",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00456268",
+      "instrucao": "call",
+      "alvo": "0x004235bd",
+      "nome": "BatimentEnleveMatiere",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x0045628e",
+      "instrucao": "call",
+      "alvo": "0x0042340f",
+      "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x004569bd",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00456bab",
+      "instrucao": "call",
+      "alvo": "0x0047605d",
+      "nome": "CreerSac",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x0045865d",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "TestFinDeMission"
+      ]
+    },
+    {
+      "endereco": "0x004586bd",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "TestFinDeMission"
+      ]
+    },
+    {
+      "endereco": "0x004589a0",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "TestFinDeMission"
+      ]
+    },
+    {
+      "endereco": "0x0045abe4",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "InitGouttes"
+      ]
+    },
+    {
+      "endereco": "0x0045ac01",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "InitGouttes"
+      ]
+    },
+    {
+      "endereco": "0x0045ac14",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "InitGouttes"
+      ]
+    },
+    {
+      "endereco": "0x0045d78a",
+      "instrucao": "call",
+      "alvo": "0x0041aace",
+      "nome": "BatimentGetRessource",
+      "simbolo_anterior": [
+        "BatimentRessourceNecessaire"
+      ]
+    },
+    {
+      "endereco": "0x0045d7a4",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "BatimentRessourceNecessaire"
+      ]
+    },
+    {
+      "endereco": "0x0045d806",
+      "instrucao": "call",
+      "alvo": "0x004410d2",
+      "nome": "EnginGetRessource",
+      "simbolo_anterior": [
+        "TroupeRessourceNecessaire"
+      ]
+    },
+    {
+      "endereco": "0x0045df74",
+      "instrucao": "call",
+      "alvo": "0x0041aace",
+      "nome": "BatimentGetRessource",
+      "simbolo_anterior": [
+        "IconeFillContenu"
+      ]
+    },
+    {
+      "endereco": "0x0045df93",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "IconeFillContenu"
+      ]
+    },
+    {
+      "endereco": "0x0045e203",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "IconeFillContenu"
+      ]
+    },
+    {
+      "endereco": "0x0045e59d",
+      "instrucao": "call",
+      "alvo": "0x004410d2",
+      "nome": "EnginGetRessource",
+      "simbolo_anterior": [
+        "IconeFillContenu"
+      ]
+    },
+    {
+      "endereco": "0x0045e5c1",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "IconeFillContenu"
+      ]
+    },
+    {
+      "endereco": "0x0045f1a9",
+      "instrucao": "call",
+      "alvo": "0x004283e2",
+      "nome": "InitRecruteTroupe",
+      "simbolo_anterior": [
+        "ProcessInputGame"
+      ]
+    },
+    {
+      "endereco": "0x0045f22a",
+      "instrucao": "call",
+      "alvo": "0x0041dde0",
+      "nome": "BatimentRetireColon",
+      "simbolo_anterior": [
+        "ProcessInputGame"
+      ]
+    },
+    {
+      "endereco": "0x00460357",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "ComposeCommande"
+      ]
+    },
+    {
+      "endereco": "0x00460545",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "ComposeCommande"
+      ]
+    },
+    {
+      "endereco": "0x0046061f",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "ComposeCommande"
+      ]
+    },
+    {
+      "endereco": "0x0046070d",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "ComposeCommande"
+      ]
+    },
+    {
+      "endereco": "0x004607c0",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "ComposeCommande"
+      ]
+    },
+    {
+      "endereco": "0x0046087c",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "ComposeCommande"
+      ]
+    },
+    {
+      "endereco": "0x00460911",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "ComposeCommande"
+      ]
+    },
+    {
+      "endereco": "0x00460965",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "ComposeCommande"
+      ]
+    },
+    {
+      "endereco": "0x004609b9",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "ComposeCommande"
+      ]
+    },
+    {
+      "endereco": "0x00460a0b",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "ComposeCommande"
+      ]
+    },
+    {
+      "endereco": "0x00460a5c",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "ComposeCommande"
+      ]
+    },
+    {
+      "endereco": "0x00460ab0",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "ComposeCommande"
+      ]
+    },
+    {
+      "endereco": "0x0046183e",
+      "instrucao": "call",
+      "alvo": "0x004235bd",
+      "nome": "BatimentEnleveMatiere",
+      "simbolo_anterior": [
+        "MarcheEchangePrend"
+      ]
+    },
+    {
+      "endereco": "0x00461b8a",
+      "instrucao": "call",
+      "alvo": "0x004235bd",
+      "nome": "BatimentEnleveMatiere",
+      "simbolo_anterior": [
+        "MarcheEchangeDonne"
+      ]
+    },
+    {
+      "endereco": "0x004626a8",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "MarcheDebarasse"
+      ]
+    },
+    {
+      "endereco": "0x0046277e",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "MarcheDebarasse"
+      ]
+    },
+    {
+      "endereco": "0x00462a85",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "GetNbRessource"
+      ]
+    },
+    {
+      "endereco": "0x004630db",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "MarcheRemplitTableauHautBas"
+      ]
+    },
+    {
+      "endereco": "0x00463177",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "MarcheRemplitTableauHautBas"
+      ]
+    },
+    {
+      "endereco": "0x0046322b",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "MarcheRemplitTableauHautBas"
+      ]
+    },
+    {
+      "endereco": "0x00464c15",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "MatiereEstDemander"
+      ]
+    },
+    {
+      "endereco": "0x00464c61",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "MatiereEstDemander"
+      ]
+    },
+    {
+      "endereco": "0x00464c9a",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "MatiereEstDemander"
+      ]
+    },
+    {
+      "endereco": "0x00464ce6",
+      "instrucao": "call",
+      "alvo": "0x004676e5",
+      "nome": "TestRessource",
+      "simbolo_anterior": [
+        "MatiereEstDemander"
+      ]
+    },
+    {
+      "endereco": "0x0046648a",
+      "instrucao": "call",
+      "alvo": "0x004235bd",
+      "nome": "BatimentEnleveMatiere",
+      "simbolo_anterior": [
+        "VideMatiere"
+      ]
+    },
+    {
+      "endereco": "0x00466521",
+      "instrucao": "call",
+      "alvo": "0x004235bd",
+      "nome": "BatimentEnleveMatiere",
+      "simbolo_anterior": [
+        "VideMatiere"
+      ]
+    },
+    {
+      "endereco": "0x0046aab9",
+      "instrucao": "call",
+      "alvo": "0x0046799c",
+      "nome": "SetMatiere",
+      "simbolo_anterior": [
+        "LoadRessource"
+      ]
+    },
+    {
+      "endereco": "0x0046aae4",
+      "instrucao": "call",
+      "alvo": "0x0046799c",
+      "nome": "SetMatiere",
+      "simbolo_anterior": [
+        "LoadRessource"
+      ]
+    },
+    {
+      "endereco": "0x0046ab0c",
+      "instrucao": "call",
+      "alvo": "0x0046799c",
+      "nome": "SetMatiere",
+      "simbolo_anterior": [
+        "LoadRessource"
+      ]
+    },
+    {
+      "endereco": "0x0046b335",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "TerrainReset"
+      ]
+    },
+    {
+      "endereco": "0x0046bb0b",
+      "instrucao": "call",
+      "alvo": "0x0041cde0",
+      "nome": "BatimentInitTechnologie",
+      "simbolo_anterior": [
+        "GameLoad"
+      ]
+    },
+    {
+      "endereco": "0x0046bb1a",
+      "instrucao": "call",
+      "alvo": "0x00419112",
+      "nome": "BatimentInitCave",
+      "simbolo_anterior": [
+        "GameLoad"
+      ]
+    },
+    {
+      "endereco": "0x0046c430",
+      "instrucao": "call",
+      "alvo": "0x0046799c",
+      "nome": "SetMatiere",
+      "simbolo_anterior": [
+        "MissionLoad"
+      ]
+    },
+    {
+      "endereco": "0x0046c464",
+      "instrucao": "call",
+      "alvo": "0x0046799c",
+      "nome": "SetMatiere",
+      "simbolo_anterior": [
+        "MissionLoad"
+      ]
+    },
+    {
+      "endereco": "0x0046c495",
+      "instrucao": "call",
+      "alvo": "0x0046799c",
+      "nome": "SetMatiere",
+      "simbolo_anterior": [
+        "MissionLoad"
+      ]
+    },
+    {
+      "endereco": "0x0046c5b4",
+      "instrucao": "call",
+      "alvo": "0x00419112",
+      "nome": "BatimentInitCave",
+      "simbolo_anterior": [
+        "MissionLoad"
+      ]
+    },
+    {
+      "endereco": "0x0046c7f9",
+      "instrucao": "call",
+      "alvo": "0x0046799c",
+      "nome": "SetMatiere",
+      "simbolo_anterior": [
+        "MissionLoadName"
+      ]
+    },
+    {
+      "endereco": "0x0046c82d",
+      "instrucao": "call",
+      "alvo": "0x0046799c",
+      "nome": "SetMatiere",
+      "simbolo_anterior": [
+        "MissionLoadName"
+      ]
+    },
+    {
+      "endereco": "0x0046c85e",
+      "instrucao": "call",
+      "alvo": "0x0046799c",
+      "nome": "SetMatiere",
+      "simbolo_anterior": [
+        "MissionLoadName"
+      ]
+    },
+    {
+      "endereco": "0x0046c97d",
+      "instrucao": "call",
+      "alvo": "0x00419112",
+      "nome": "BatimentInitCave",
+      "simbolo_anterior": [
+        "MissionLoadName"
+      ]
+    },
+    {
+      "endereco": "0x0046eb5e",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "ProjectileAvance"
+      ]
+    },
+    {
+      "endereco": "0x0046ebec",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "ProjectileAvance"
+      ]
+    },
+    {
+      "endereco": "0x0046ebfa",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "ProjectileAvance"
+      ]
+    },
+    {
+      "endereco": "0x0046ec28",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "ProjectileAvance"
+      ]
+    },
+    {
+      "endereco": "0x0046ef1a",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "ProjectileAvance"
+      ]
+    },
+    {
+      "endereco": "0x0046f4b1",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "ProjectileAvance"
+      ]
+    },
+    {
+      "endereco": "0x0046f6b1",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "ProjectileAvance"
+      ]
+    },
+    {
+      "endereco": "0x0046faeb",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "ProjectileAvance"
+      ]
+    },
+    {
+      "endereco": "0x0046fbd0",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "ProjectileAvance"
+      ]
+    },
+    {
+      "endereco": "0x0047110a",
+      "instrucao": "call",
+      "alvo": "0x0041cde0",
+      "nome": "BatimentInitTechnologie",
+      "simbolo_anterior": [
+        "InventionSetEffet"
+      ]
+    },
+    {
+      "endereco": "0x004711c3",
+      "instrucao": "call",
+      "alvo": "0x0041cde0",
+      "nome": "BatimentInitTechnologie",
+      "simbolo_anterior": [
+        "InventionSetEffet"
+      ]
+    },
+    {
+      "endereco": "0x00474eb9",
+      "instrucao": "call",
+      "alvo": "0x00418e95",
+      "nome": "BatimentAlloc",
+      "simbolo_anterior": [
+        "ProgInit"
+      ]
+    },
+    {
+      "endereco": "0x0047587c",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "SacCherchePlace"
+      ]
+    },
+    {
+      "endereco": "0x00475ce4",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "SacCherchePlaceLibre"
+      ]
+    },
+    {
+      "endereco": "0x004760dc",
+      "instrucao": "call",
+      "alvo": "0x004757af",
+      "nome": "SacCherchePlace",
+      "simbolo_anterior": [
+        "CreerSac"
+      ]
+    },
+    {
+      "endereco": "0x004761c4",
+      "instrucao": "call",
+      "alvo": "0x0047605d",
+      "nome": "CreerSac",
+      "simbolo_anterior": [
+        "TerrainDeposeSac"
+      ]
+    },
+    {
+      "endereco": "0x004782e7",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "NouvellePatate"
+      ]
+    },
+    {
+      "endereco": "0x004783e3",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "ScanNouvellePatate"
+      ]
+    },
+    {
+      "endereco": "0x00478536",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "ScanNouvellePatate"
+      ]
+    },
+    {
+      "endereco": "0x00478699",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "ScanNouvellePatate"
+      ]
+    },
+    {
+      "endereco": "0x004787d5",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "ScanNouvellePatate"
+      ]
+    },
+    {
+      "endereco": "0x00478844",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "UpdateChamp"
+      ]
+    },
+    {
+      "endereco": "0x004788f1",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "UpdateChamp"
+      ]
+    },
+    {
+      "endereco": "0x00478954",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "UpdateChamp"
+      ]
+    },
+    {
+      "endereco": "0x0047a638",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "InitEntrerMonstre"
+      ]
+    },
+    {
+      "endereco": "0x0047a954",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "ConstruitGroupeMonstre"
+      ]
+    },
+    {
+      "endereco": "0x0047ae04",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "LezardRun"
+      ]
+    },
+    {
+      "endereco": "0x0047b44e",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "AvanceMonstre"
+      ]
+    },
+    {
+      "endereco": "0x0047b4cc",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "AvanceMonstre"
+      ]
+    },
+    {
+      "endereco": "0x0048071a",
+      "instrucao": "call",
+      "alvo": "0x0041dde0",
+      "nome": "BatimentRetireColon",
+      "simbolo_anterior": [
+        "V_BatimentSortColon"
+      ]
+    },
+    {
+      "endereco": "0x00480749",
+      "instrucao": "call",
+      "alvo": "0x004283e2",
+      "nome": "InitRecruteTroupe",
+      "simbolo_anterior": [
+        "V_BatimentRecruteUnite"
+      ]
+    },
+    {
+      "endereco": "0x00480c04",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "I_DonneBatimentAAttaquer"
+      ]
+    },
+    {
+      "endereco": "0x0048138a",
+      "instrucao": "call",
+      "alvo": "0x004410d2",
+      "nome": "EnginGetRessource",
+      "simbolo_anterior": [
+        "I_CombienCouteUnite"
+      ]
+    },
+    {
+      "endereco": "0x004813b1",
+      "instrucao": "call",
+      "alvo": "0x0041aace",
+      "nome": "BatimentGetRessource",
+      "simbolo_anterior": [
+        "I_CombienCouteBatiment"
+      ]
+    },
+    {
+      "endereco": "0x004813d7",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "B_TestStock"
+      ]
+    },
+    {
+      "endereco": "0x0048141f",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "B_TestRessource"
+      ]
+    },
+    {
+      "endereco": "0x00481ba6",
+      "instrucao": "call",
+      "alvo": "0x00475736",
+      "nome": "SacGetCapacite",
+      "simbolo_anterior": [
+        "I_DonneValeurPiece"
+      ]
+    },
+    {
+      "endereco": "0x00481bb9",
+      "instrucao": "call",
+      "alvo": "0x00475736",
+      "nome": "SacGetCapacite",
+      "simbolo_anterior": [
+        "B_EncorePiece"
+      ]
+    },
+    {
+      "endereco": "0x004825a8",
+      "instrucao": "call",
+      "alvo": "0x004470d2",
+      "nome": "BagAccepte",
+      "simbolo_anterior": [
+        "V_TricheColon"
+      ]
+    },
+    {
+      "endereco": "0x004850b3",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "iagRessReset"
+      ]
+    },
+    {
+      "endereco": "0x004851e3",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "iagRessNoyau"
+      ]
+    },
+    {
+      "endereco": "0x00485590",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "iagRessNoyau"
+      ]
+    },
+    {
+      "endereco": "0x00485935",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "iagRessSetMode"
+      ]
+    },
+    {
+      "endereco": "0x00485d0e",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "iagRessGetMineExploiteeParGroupe"
+      ]
+    },
+    {
+      "endereco": "0x00485f3f",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "B_TestMaxRocheDansStock"
+      ]
+    },
+    {
+      "endereco": "0x00485fd5",
+      "instrucao": "call",
+      "alvo": "0x0046769d",
+      "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "iagRessGetPlayerWealth"
+      ]
+    },
+    {
+      "endereco": "0x004867f2",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "iagWarNoyau"
+      ]
+    },
+    {
+      "endereco": "0x00486a59",
+      "instrucao": "call",
+      "alvo": "0x00485fb9",
+      "nome": "iagRessGetPlayerWealth",
+      "simbolo_anterior": [
+        "iagWarNoyau"
+      ]
+    },
+    {
+      "endereco": "0x00486c6b",
+      "instrucao": "call",
+      "alvo": "0x00485fb9",
+      "nome": "iagRessGetPlayerWealth",
+      "simbolo_anterior": [
+        "iagWarGetLastTypeAttack"
+      ]
+    },
+    {
+      "endereco": "0x00486cf6",
+      "instrucao": "call",
+      "alvo": "0x00467670",
+      "nome": "GetRessource",
+      "simbolo_anterior": [
+        "iagWarSetMode"
+      ]
+    },
+    {
+      "endereco": "0x00486f62",
+      "instrucao": "call",
+      "alvo": "0x004410d2",
+      "nome": "EnginGetRessource",
+      "simbolo_anterior": [
+        "iagWarSetMode"
+      ]
+    },
+    {
+      "endereco": "0x0048739f",
+      "instrucao": "call",
+      "alvo": "0x004470d2",
+      "nome": "BagAccepte",
+      "simbolo_anterior": [
+        "iagWarStartBuildUnits"
+      ]
+    },
+    {
+      "endereco": "0x004874b0",
+      "instrucao": "call",
+      "alvo": "0x004470d2",
+      "nome": "BagAccepte",
+      "simbolo_anterior": [
+        "iagWarStartBuildUnits"
+      ]
+    },
+    {
+      "endereco": "0x004891d0",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "GetRandCaseChamps"
+      ]
+    },
+    {
+      "endereco": "0x0048929d",
+      "instrucao": "call",
+      "alvo": "0x004470d2",
+      "nome": "BagAccepte",
+      "simbolo_anterior": [
+        "DetectPlaceLibreIndBatiment"
+      ]
+    },
+    {
+      "endereco": "0x00489352",
+      "instrucao": "call",
+      "alvo": "0x004704dc",
+      "nome": "Random",
+      "simbolo_anterior": [
+        "GetRandCaseTypeBatPlayer"
+      ]
+    }
+  ]
+}

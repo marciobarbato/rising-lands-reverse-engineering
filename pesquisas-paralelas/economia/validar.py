@@ -1,0 +1,49 @@
+"""Executa só os testes desta pesquisa e registra resultados aqui."""
+import argparse
+import json
+import os
+from pathlib import Path
+import sys
+import unittest
+
+PASTA = Path(__file__).resolve().parent
+sys.dont_write_bytecode = True
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--emular', action='store_true')
+    args = parser.parse_args()
+    if args.emular:
+        os.environ['RISING_EMULAR'] = '1'
+    else:
+        os.environ.pop('RISING_EMULAR', None)
+    suite = unittest.defaultTestLoader.discover(str(PASTA / 'testes'))
+    resultado = unittest.TextTestRunner(verbosity=2).run(suite)
+    from test_economia import Diferencial
+    from test_construcoes import DiferencialConstrucoes
+    from test_retirada_recalculo import DiferencialRetiradaRecalculo
+    from test_init_cave import DiferencialInitCave
+    bancadas = {classe.__name__: getattr(classe, 'b', None)
+                for classe in (Diferencial, DiferencialConstrucoes, DiferencialRetiradaRecalculo,
+                               DiferencialInitCave)}
+    contagens = {nome: getattr(b, 'execucoes', 0) for nome, b in bancadas.items()}
+    excecoes = sum(getattr(b, 'excecoes_esperadas', 0) for b in bancadas.values())
+    limites = sum(getattr(b, 'limites_esperados', 0) for b in bancadas.values())
+    relatorio = dict(modo='x86 original e Python' if args.emular else 'Python sem emulação',
+                     testes=resultado.testsRun, falhas=len(resultado.failures), erros=len(resultado.errors),
+                     ignorados=[dict(teste=str(t), motivo=m) for t, m in resultado.skipped],
+                     execucoes_x86_delimitadas=sum(contagens.values()),
+                     execucoes_x86_por_bancada=contagens,
+                     excecoes_x86_esperadas=excecoes,
+                     limites_x86_esperados=limites,
+                     execucoes_x86_ate_parada=sum(contagens.values()) - excecoes - limites,
+                     sucesso=resultado.wasSuccessful(),
+                     sha256_original='6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb')
+    arquivo = PASTA / ('validacao-emulada.json' if args.emular else 'validacao-local.json')
+    arquivo.write_text(json.dumps(relatorio, ensure_ascii=False, indent=2) + '\n')
+    return 0 if resultado.wasSuccessful() else 1
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
