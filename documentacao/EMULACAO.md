@@ -143,9 +143,9 @@ Os relatórios de demonstração são separados da contagem da suíte.
 
 Os quatro trajetos com obstáculos e um caso com nova colisão durante o percurso
 comparam física, visão, minimapa e tarefas após cada atualização. Os desvios
-locais e o controle dos estados são Python; o cálculo geral é original emulado.
-Assim, esses testes validam a integração e a tradução parcial, sem alegar uma
-busca geral independente. Detalhes e limitações em [NAVEGACAO.md](NAVEGACAO.md).
+locais e o controle dos estados eram Python; o cálculo geral ainda era original
+emulado nessa etapa. O núcleo das três classes agora tem backend independente,
+descrito em [CONTORNOS.md](CONTORNOS.md).
 
 ## Otimização traduzida e retomada da bancada
 
@@ -174,12 +174,26 @@ anterior, conservam dados fora das escritas definidas e comparam contextos,
 regiões, registros de ocupantes, buffers e contadores, incluindo os casos
 inconsistentes do original.
 
-O backend parcial agora substitui preparação, inspeção inicial, seleção,
-otimização e serialização por Python. O intervalo central de construção e
-contorno continua original emulado. A referência continua executando todas
+Na etapa inicial, o backend parcial substituía preparação, inspeção inicial,
+seleção, otimização e serialização por Python. O intervalo central dos contornos
+também foi traduzido depois, nas três classes. A referência continua executando todas
 essas etapas originais; a comparação integrada cobre os 26 tipos em três mapas
 e os trajetos até as mensagens. Detalhes em
 [PREPARACAO_CANDIDATOS.md](PREPARACAO_CANDIDATOS.md).
 
-A suíte completa possui **144 testes aprovados e 32.623 execuções x86 delimitadas**,
-incluindo 205 chamadas dos backends de navegação, sem testes ignorados.
+## Contornos e backend independente
+
+`bancada_contornos.py` executa o corpo original até antes da seleção, sem
+substituir chamadas. Os testes comparam custos, os dois buffers completos,
+registros, lista inteira de regiões, contagem e fase em 254 casos. Outras 78
+buscas completas conferem o backend independente nos três mapas para todos
+os tipos. A comparação por atualização inclui os quatro trajetos e uma colisão
+nova, até a mensagem e a retomada da tarefa.
+
+O teste sem emulação bloqueia os imports de `emulador`, `unicorn` e dos backends
+x86 e reproduz a demonstração com `SolucionadorCaminhosPython`. O backend misto
+conserva apenas prólogo/guardas e epílogo da chamada para compatibilidade da
+bancada. Detalhes e limites em [CONTORNOS.md](CONTORNOS.md).
+
+A suíte completa possui **155 testes aprovados e 36.157 execuções x86 delimitadas**,
+incluindo 152 chamadas dos backends de navegação, sem testes ignorados.

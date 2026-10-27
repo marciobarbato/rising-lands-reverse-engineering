@@ -1,4 +1,4 @@
-"""Trajetos com obstáculos, busca original isolada e movimento reconstruído."""
+"""Trajetos com obstáculos, busca Python ou referência x86 e movimento reconstruído."""
 import argparse
 import json
 import struct
@@ -54,11 +54,13 @@ def executar_cenario(nome,solucionador=None,limite=1200):
                 atualizacoes=ciclo,bloqueios=bloqueios,numero_regioes=numero_regioes,
                 trajeto=[[c&255,c>>8] for c in trajeto],estados_caminho=estados,
                 buscas=m.historico_navegacao,eventos=eventos,tarefas_ativas_ao_final=maquina.ativas)
-    if solucionador is not None and hasattr(solucionador.bancada, 'otimizacoes_python'):
-        resultado['otimizacoes_python'] = solucionador.bancada.otimizacoes_python
-        resultado['preparacoes_python'] = solucionador.bancada.preparacoes_python
-        resultado['inicios_candidatos_python'] = solucionador.bancada.inicios_candidatos_python
-        resultado['escolhas_python'] = solucionador.bancada.escolhas_python
+    bancada = getattr(solucionador, 'bancada', solucionador)
+    if bancada is not None and hasattr(bancada, 'otimizacoes_python'):
+        resultado['otimizacoes_python'] = bancada.otimizacoes_python
+        resultado['preparacoes_python'] = bancada.preparacoes_python
+        resultado['inicios_candidatos_python'] = bancada.inicios_candidatos_python
+        resultado['escolhas_python'] = bancada.escolhas_python
+        resultado['contornos_python'] = bancada.contornos_python
     return resultado
 
 
@@ -67,9 +69,12 @@ def main():
     modo = parser.add_mutually_exclusive_group()
     modo.add_argument('--original',action='store_true',help='Habilita a busca geral original em Unicorn/JIT')
     modo.add_argument('--misto',action='store_true',help='Preparação, início/seleção dos candidatos e otimização em Python')
+    modo.add_argument('--python',action='store_true',help='Busca independente das classes 1..3, sem EXE ou Unicorn')
     args=parser.parse_args()
-    if args.original or args.misto:
-        if args.misto:
+    if args.original or args.misto or args.python:
+        if args.python:
+            from solucionador_python import SolucionadorCaminhosPython as Solucionador
+        elif args.misto:
             from solucionador_misto import SolucionadorParcialPython as Solucionador
         else:
             from solucionador_original import SolucionadorOriginal as Solucionador
@@ -80,9 +85,14 @@ def main():
            busca_geral='Chemin_Verouille/CheminCalcul originais emulados' if args.original else 'não necessária neste cenário local',
            algoritmo_geral_traduzido=False,cenarios=resultados)
     if args.misto:
-        r['busca_geral'] = 'Preparação, início/seleção dos candidatos, otimização e serialização em Python; contorno/construção dos candidatos originais emulados'
-        r['rotinas_traduzidas'] = ['Chemin_Verouille', 'CheminCalcul: início/seleção/serialização', 'OptimiseChemin', 'TestLigneOptimise']
-    nome = 'desvios-misto.json' if args.misto else ('desvios-original.json' if args.original else 'desvios-local.json')
+        r['busca_geral'] = 'Preparação, candidatos das classes 1..3, seleção, otimização e serialização em Python; bancada usa prólogo e epílogo x86'
+        r['rotinas_traduzidas'] = ['Chemin_Verouille', 'CheminCalcul: classes 1..3', 'OptimiseChemin', 'TestLigneOptimise']
+    if args.python:
+        r['busca_geral'] = 'Preparação, construção dos candidatos, seleção, otimização e serialização das classes 1..3 em Python'
+        r['classes_traduzidas'] = [1,2,3]
+        r['executa_x86'] = False
+        r['limite'] = 'Sem estruturas codificadas ou ordens a aliados bloqueadores'
+    nome = 'desvios-python.json' if args.python else ('desvios-misto.json' if args.misto else ('desvios-original.json' if args.original else 'desvios-local.json'))
     destino=Path(__file__).resolve().parents[1]/'relatorios'/nome
     destino.write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(str(destino))

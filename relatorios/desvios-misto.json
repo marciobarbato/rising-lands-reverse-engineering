@@ -1,6 +1,6 @@
 {
   "contexto": "Mapas, unidades e tarefas sintéticos; geração de regiões e movimento em Python.",
-  "busca_geral": "Preparação, início/seleção dos candidatos, otimização e serialização em Python; contorno/construção dos candidatos originais emulados",
+  "busca_geral": "Preparação, candidatos das classes 1..3, seleção, otimização e serialização em Python; bancada usa prólogo e epílogo x86",
   "algoritmo_geral_traduzido": false,
   "cenarios": [
     {
@@ -89,7 +89,8 @@
       "otimizacoes_python": [],
       "preparacoes_python": [],
       "inicios_candidatos_python": [],
-      "escolhas_python": []
+      "escolhas_python": [],
+      "contornos_python": []
     },
     {
       "nome": "parede_com_passagem",
@@ -313,6 +314,19 @@
           "status": 1,
           "motivo": "menor_custo"
         }
+      ],
+      "contornos_python": [
+        {
+          "unidade": 0,
+          "custos": [
+            65535,
+            7
+          ],
+          "contagens": [
+            4,
+            8
+          ]
+        }
       ]
     },
     {
@@ -472,7 +486,8 @@
         }
       ],
       "inicios_candidatos_python": [],
-      "escolhas_python": []
+      "escolhas_python": [],
+      "contornos_python": []
     },
     {
       "nome": "destino_bloqueado",
@@ -556,12 +571,13 @@
       "otimizacoes_python": [],
       "preparacoes_python": [],
       "inicios_candidatos_python": [],
-      "escolhas_python": []
+      "escolhas_python": [],
+      "contornos_python": []
     }
   ],
   "rotinas_traduzidas": [
     "Chemin_Verouille",
-    "CheminCalcul: início/seleção/serialização",
+    "CheminCalcul: classes 1..3",
     "OptimiseChemin",
     "TestLigneOptimise"
   ]

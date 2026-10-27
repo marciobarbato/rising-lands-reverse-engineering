@@ -39,7 +39,10 @@
 - Backend opcional com otimização Python integrado à busca e aos trajetos/mensagens.
 - Preparação do destino e ajuste por anéis traduzidos, com particularidades das bordas preservadas.
 - Inspeção de obstáculos, regiões e ocupantes, escolha dos candidatos e serialização em Python.
-- 144 testes aprovados e 32.623 execuções x86 delimitadas, incluindo 205 dos backends
+- Corpo dos dois contornos traduzido nas classes 1..3, incluindo pegadas de quatro células.
+- Backend independente para os 26 tipos, com preparação, contorno, escolha e otimização sem EXE/Unicorn.
+- Trajetos e mensagens comparados por atualização com a referência x86 e reproduzidos com imports de emulação bloqueados.
+- 155 testes aprovados e 36.157 execuções x86 delimitadas, incluindo 152 dos backends
   de navegação. Validação registrada em `relatorios/validacao-emulada.json`, sem iniciar o jogo.
   O teste do despachante superior substitui etapas; os testes da máquina de tarefas
   e das operações suportadas executam suas chamadas originais.
@@ -48,7 +51,7 @@
 
 | Tema | Evidência disponível | Trabalho necessário |
 |---|---|---|
-| Caminhos e colisão | Preparação, regiões, desvios, início/seleção dos candidatos e otimização Python ligados à física | Traduzir construção/contorno dos candidatos, completar estruturas e ampliar tráfego/mapas reais |
+| Caminhos e colisão | Núcleo das classes 1..3 em Python, ligado à física e conferido com o x86 | Completar cores/contornos de estruturas, ordens a aliados bloqueadores e tráfego/mapas reais |
 | IA | Máquina de tarefas e ordens de movimento individuais/de grupo com efeitos confirmados | Completar seleção espacial da tarefa 16, mensagens e operações de economia/guerra |
 | Movimento e tempo | Desvios locais e gerais ligados ao avanço, ocupação, visão/minimapa, conclusão e mensagens | Completar despacho, fome/armadilhas, atropelamento e medir a taxa efetiva |
 | Combate | Aritmética parcial de dano, consulta de proximidade e cura confirmadas | Alvos, alcance, cadência, tecnologias e efeitos de morte |
@@ -68,13 +71,13 @@ e [IA.md](IA.md).
 A preparação é `0x43b30b`; o solucionador principal é `0x42f214`, seguido de
 `0x42e890`. A bancada já executa esses trechos, mas a tradução independente
 continua parcial. A escolha direta, o desvio, o consumo e a nova busca estão
-ligados ao movimento por `MundoNavegacao`; a busca geral ainda exige o backend
-`SolucionadorOriginal` ou `SolucionadorParcialPython`. O segundo já traduz
-preparação/ajuste, início e seleção dos candidatos, otimização e serialização.
-Veja [PREPARACAO_CANDIDATOS.md](PREPARACAO_CANDIDATOS.md) e
-[OTIMIZACAO_CAMINHOS.md](OTIMIZACAO_CAMINHOS.md). Resta o corpo de construção e
-contorno dos candidatos, atualmente retomado em `0x430b7e` e encerrado antes de
-`0x43b073`. Preparar a grade auxiliar de estruturas antes de
+ligados ao movimento por `MundoNavegacao`. `SolucionadorCaminhosPython` executa
+o núcleo das três classes sem emulação; `SolucionadorOriginal` permanece como
+referência e `SolucionadorParcialPython` conserva a ponte com os trechos
+administrativos originais. Veja [CONTORNOS.md](CONTORNOS.md),
+[PREPARACAO_CANDIDATOS.md](PREPARACAO_CANDIDATOS.md) e
+[OTIMIZACAO_CAMINHOS.md](OTIMIZACAO_CAMINHOS.md). Prosseguir com as ordens de
+desbloqueio a aliados e a grade auxiliar de cores/contornos de estruturas antes de
 testar obstáculos de construções e ampliar cenários com várias unidades.
 Para a IA, seguir [SIMBOLOS.md](SIMBOLOS.md) e [TAREFAS.md](TAREFAS.md).
 A tabela `0x514910` vem de `RISING.RUL`; seus 140 nomes foram resolvidos pelo SBL.

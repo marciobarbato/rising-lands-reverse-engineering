@@ -6,15 +6,16 @@ O passo escolhido usa o avanço físico, ocupação, visão, minimapa e mensagen
 reconstruídos em [AVANCO_CHEGADA.md](AVANCO_CHEGADA.md). As tarefas de grupo podem
 emitir a ordem, aguardar a mudança de estado e retomar depois do movimento.
 
-As consultas, a geração de regiões e o controle de navegação foram traduzidos
-para Python. **A busca geral ainda executa as rotinas originais em Unicorn**,
-por meio de `SolucionadorOriginal`, explicitamente fornecido ao mundo. Não há
-uma tradução completa de `CheminCalcul` ou evidência suficiente para chamá-lo de
-A*. O executável Windows não é iniciado; a bancada usa memória sintética,
-intervalos de código declarados e limites de execução.
+As consultas, a geração de regiões, o controle e o núcleo das três classes de
+busca foram traduzidos para Python. `SolucionadorCaminhosPython` executa esse
+domínio sem EXE ou Unicorn, conforme [CONTORNOS.md](CONTORNOS.md).
+`SolucionadorOriginal` continua sendo a referência x86, com memória sintética,
+intervalos declarados e limites de execução. Estruturas codificadas e ordens
+de desbloqueio a aliados ainda têm limitações. Não há evidência suficiente
+para classificar o algoritmo original como A*.
 
 O backend opcional `SolucionadorParcialPython` já traduz preparação, ajuste,
-inspeção inicial, seleção, teste de linha, otimização e serialização. O nome
+inspeção inicial, contorno, seleção, teste de linha, otimização e serialização. O nome
 anterior `SolucionadorComOtimizacaoPython` continua disponível como alias. Veja
 [PREPARACAO_CANDIDATOS.md](PREPARACAO_CANDIDATOS.md) e
 [OTIMIZACAO_CAMINHOS.md](OTIMIZACAO_CAMINHOS.md) para o contrato, a comparação
@@ -34,6 +35,9 @@ python3 ferramentas/demonstrar_desvios.py --original
 # Preparação, início/seleção dos candidatos e otimização em Python.
 python3 ferramentas/demonstrar_desvios.py --misto
 
+# Busca independente, sem x86, nas três classes de ocupação.
+python3 ferramentas/demonstrar_desvios.py --python
+
 # Suíte comum e suíte diferencial opcional.
 python3 ferramentas/validar.py
 python3 ferramentas/validar.py --emular
@@ -46,7 +50,8 @@ descritas em [EMULACAO.md](EMULACAO.md). Os resultados ficam em
 O relatório identifica expressamente o uso do algoritmo original.
 
 Na API, o desvio local usa `MundoNavegacao(largura, altura)`. Para habilitar
-a busca geral, forneça `solucionador=SolucionadorOriginal()`. Cada mundo deve
+a busca independente, forneça `solucionador=SolucionadorCaminhosPython()`.
+`SolucionadorOriginal()` continua disponível para comparação. Cada mundo deve
 ter sua própria instância do solucionador: os buffers internos pertencem a um
 único contexto global de busca. Sem solucionador, a necessidade de busca geral
 gera `NotImplementedError`.
@@ -171,8 +176,8 @@ resultado 1 entregue após esses cancelamentos.
 ## Validação e lacunas
 
 A etapa inicial de navegação passou com **119 testes e 27.230 execuções x86**.
-Com a preparação e as etapas dos candidatos, a suíte possui **144 testes e
-32.623 execuções x86 delimitadas**, incluindo 205 chamadas dos backends de
+Com os contornos traduzidos, a suíte possui **155 testes e
+36.157 execuções x86 delimitadas**, incluindo 152 chamadas dos backends de
 navegação, sem testes ignorados. A execução
 sem emulação registra explicitamente os testes opcionais ignorados.
 
@@ -197,8 +202,9 @@ o coordenador Python; não é uma execução do laço inteiro do jogo.
 
 O teste de linha e a otimização posterior já têm tradução independente.
 Preparação/ajuste e início/seleção dos candidatos também foram traduzidos.
-Continuam pendentes a construção/contorno dos dois candidatos,
-a grade auxiliar de estruturas codificadas com `0x8000`, os efeitos de
+Os dois contornos das classes 1..3 também foram traduzidos, conforme [CONTORNOS.md](CONTORNOS.md).
+Continuam pendentes a grade auxiliar e o contorno de estruturas codificadas com `0x8000`,
+as ordens de desbloqueio a aliados, os efeitos de
 atropelamento, tráfego com várias unidades, mapas reais inicializados por inteiro,
 animação contínua, som e validação numa partida. O backend recusa estruturas
 codificadas sem a grade auxiliar, em vez de calcular com dados ausentes.

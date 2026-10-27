@@ -5,9 +5,10 @@ a inspeção inicial de obstáculos e a escolha final entre os dois candidatos.
 Também liga a serialização já reconstruída ao backend parcial. O movimento,
 a visão e as mensagens continuam usando as implementações anteriores.
 
-**A construção dos percursos pelos contornos ainda executa o código original.**
-A geração completa dos dois candidatos continua parcial. A fronteira atual é
-`0x430b7e..0x43b073`, com saídas antecipadas para falhas.
+Nesta etapa inicial, o intervalo de construção `0x430b7e..0x43b073` ainda era
+original emulado. Ele foi depois traduzido nas classes 1..3, conforme
+[CONTORNOS.md](CONTORNOS.md). Estruturas codificadas e ordens de desbloqueio
+a aliados ainda exigem trabalho.
 
 | Implementação | Responsabilidade |
 |---|---|
@@ -140,11 +141,11 @@ saída. Sucesso/conclusão são gravados como no original.
 
 ## Integração e cobertura
 
-O backend parcial executa o prólogo/guardas de `CheminCalcul`, para em
-`0x42f247`, prepara a vizinhança em Python e retoma em `0x430b7e` somente quando
-há passagem. O original constrói os percursos até `0x43b073`. Nesse checkpoint,
-seleção, otimização e serialização são feitas em Python; só o epílogo original
-é retomado em `0x43b300`.
+Na integração inicial, o backend parava em `0x42f247`, preparava a vizinhança
+em Python e retomava o original até `0x43b073`. Esse corpo agora também é Python
+nas três classes. A bancada mista conserva o prólogo/guardas e o epílogo original
+em `0x43b300`; o backend independente de [CONTORNOS.md](CONTORNOS.md) dispensa
+essas chamadas x86.
 
 Os testes diferenciais incluem 288 preparações isoladas, 240 inspeções iniciais,
 400 escolhas e 78 buscas completas nos três mapas para os 26 tipos, além de
@@ -153,7 +154,7 @@ dos extremos anteriores, buffers completos, regiões, registros e locais usados
 no checkpoint. A referência e a tradução partem do mesmo estado anterior;
 os resultados nativos não são reaproveitados para preencher uma escrita ausente.
 
-A suíte completa passou com **144 testes e 32.623 execuções x86 delimitadas**,
+Na etapa de preparação, a suíte passou com **144 testes e 32.623 execuções x86 delimitadas**,
 sem falhas, erros ou testes ignorados. Sem emulação, passam 70 testes e os
 74 opcionais ficam explicitamente ignorados no relatório local.
 
@@ -162,6 +163,7 @@ a retomada da tarefa, incluindo um obstáculo surgindo durante o percurso.
 Na parede com passagem, os custos observados foram `[65535, 7]`, com seleção do
 segundo candidato. O trajeto continuou terminando em `(10,4)` na atualização 279.
 
-Falta traduzir o corpo de construção/contorno dos dois candidatos, ampliar
-tráfego e preparar as grades auxiliares das estruturas. As limitações de
+O corpo de construção/contorno já foi traduzido nas três classes. Falta ampliar
+tráfego, traduzir ordens a aliados bloqueadores e preparar as grades auxiliares
+das estruturas. As limitações de
 combate, animação e partida completa permanecem em [CONTINUIDADE.md](CONTINUIDADE.md).

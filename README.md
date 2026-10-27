@@ -37,8 +37,9 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 - Desvios locais, regiões naturais e controle de navegação em Python, ligados à busca geral original emulada.
 - Quatro trajetos com obstáculos e nova colisão durante a rota conferidos com as rotinas originais.
 - Teste de linha e otimização de rotas traduzidos para Python e integrados à busca em um backend opcional.
-- Preparação/ajuste do destino, inspeção inicial e seleção dos candidatos traduzidos; construção dos contornos ainda parcial.
-- 144 testes passando, com 32.623 execuções x86 delimitadas; o teste do despachante superior substitui suas etapas internas.
+- Preparação, construção dos dois contornos, seleção e otimização em Python nas classes 1..3, cobrindo os 26 tipos.
+- Backend independente de caminhos e demonstração de movimento sem carregar o EXE ou Unicorn, com limites para estruturas e desbloqueio de aliados.
+- 155 testes passando, com 36.157 execuções x86 delimitadas; o teste do despachante superior substitui suas etapas internas.
 
 ## Leitura recomendada
 
@@ -58,6 +59,8 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 14. [Navegação integrada e desvios de obstáculos](documentacao/NAVEGACAO.md).
 15. [Otimização de caminhos reconstruída](documentacao/OTIMIZACAO_CAMINHOS.md).
 16. [Preparação do destino e etapas dos candidatos](documentacao/PREPARACAO_CANDIDATOS.md).
+17. [Contornos dos obstáculos e busca independente](documentacao/CONTORNOS.md).
+18. [Prompts para pesquisas paralelas e aplicativo Mac](documentacao/PROMPTS_PARALELOS.md).
 
 ## Reproduzir
 
@@ -101,9 +104,10 @@ Para percorrer um trajeto com obstáculo, execute
 original emulada, use `python3 ferramentas/demonstrar_desvios.py --original`.
 Os relatórios distinguem destino solicitado, destino efetivo e posição final;
 o término da ordem também pode resultar de cancelamento por falta de passagem.
-Use `--misto` para executar preparação, início/seleção dos candidatos, otimização
-e serialização em Python. O corpo que constrói os percursos pelos contornos ainda
-depende do original emulado.
+Use `--python` para executar a busca, o avanço e as mensagens sem EXE ou Unicorn.
+O cálculo suporta as três classes de ocupação, com limites para estruturas
+codificadas e ordens a aliados bloqueadores. `--misto` conserva a bancada x86
+para comparar as traduções e os efeitos administrativos ainda não portados.
 
 ## Organização
 

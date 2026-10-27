@@ -1,0 +1,585 @@
+{
+  "contexto": "Mapas, unidades e tarefas sintéticos; geração de regiões e movimento em Python.",
+  "busca_geral": "Preparação, construção dos candidatos, seleção, otimização e serialização das classes 1..3 em Python",
+  "algoritmo_geral_traduzido": false,
+  "cenarios": [
+    {
+      "nome": "obstaculo",
+      "inicio": [
+        2,
+        4
+      ],
+      "destino_solicitado": [
+        10,
+        4
+      ],
+      "destino_efetivo": [
+        10,
+        4
+      ],
+      "posicao_final": [
+        10,
+        4
+      ],
+      "alcancou_destino_solicitado": true,
+      "atualizacoes": 130,
+      "bloqueios": [
+        [
+          6,
+          4
+        ]
+      ],
+      "numero_regioes": 3,
+      "trajeto": [
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          10,
+          4
+        ]
+      ],
+      "estados_caminho": [
+        {
+          "atualizacao": 1,
+          "estado": 0
+        }
+      ],
+      "buscas": [],
+      "eventos": [
+        {
+          "atualizacao": 130,
+          "unidade": 0,
+          "grupo": 0,
+          "tarefa": 0,
+          "bits": 8,
+          "resultado": 1
+        }
+      ],
+      "tarefas_ativas_ao_final": 0,
+      "otimizacoes_python": [],
+      "preparacoes_python": [],
+      "inicios_candidatos_python": [],
+      "escolhas_python": [],
+      "contornos_python": []
+    },
+    {
+      "nome": "parede_com_passagem",
+      "inicio": [
+        2,
+        4
+      ],
+      "destino_solicitado": [
+        10,
+        4
+      ],
+      "destino_efetivo": [
+        10,
+        4
+      ],
+      "posicao_final": [
+        10,
+        4
+      ],
+      "alcancou_destino_solicitado": true,
+      "atualizacoes": 279,
+      "bloqueios": [
+        [
+          6,
+          0
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          6,
+          10
+        ]
+      ],
+      "numero_regioes": 3,
+      "trajeto": [
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          8
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          10,
+          6
+        ],
+        [
+          10,
+          5
+        ],
+        [
+          10,
+          4
+        ]
+      ],
+      "estados_caminho": [
+        {
+          "atualizacao": 1,
+          "estado": 0
+        },
+        {
+          "atualizacao": 49,
+          "estado": 3
+        },
+        {
+          "atualizacao": 50,
+          "estado": 4
+        },
+        {
+          "atualizacao": 51,
+          "estado": 5
+        },
+        {
+          "atualizacao": 182,
+          "estado": 0
+        }
+      ],
+      "buscas": [
+        {
+          "unidade": 0,
+          "origem": 1029,
+          "destino": 1034,
+          "status": 1,
+          "concluida": 1,
+          "sucesso": 1,
+          "quantidade": 8
+        }
+      ],
+      "eventos": [
+        {
+          "atualizacao": 279,
+          "unidade": 0,
+          "grupo": 0,
+          "tarefa": 0,
+          "bits": 8,
+          "resultado": 1
+        }
+      ],
+      "tarefas_ativas_ao_final": 0,
+      "otimizacoes_python": [
+        {
+          "unidade": 0,
+          "celulas_antes": 8,
+          "celulas_depois": 8
+        }
+      ],
+      "preparacoes_python": [
+        {
+          "unidade": 0,
+          "inicio": 1029,
+          "solicitado": 1034,
+          "destino": 1034,
+          "status": 1,
+          "concluida": 0
+        }
+      ],
+      "inicios_candidatos_python": [
+        {
+          "unidade": 0,
+          "obstaculo_proximo": 1030,
+          "todos_bloqueados": false,
+          "regioes": [
+            2
+          ]
+        }
+      ],
+      "escolhas_python": [
+        {
+          "custos": [
+            65535,
+            7
+          ],
+          "escolhido": 1,
+          "status": 1,
+          "motivo": "menor_custo"
+        }
+      ],
+      "contornos_python": [
+        {
+          "unidade": 0,
+          "custos": [
+            65535,
+            7
+          ],
+          "contagens": [
+            4,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "sem_passagem",
+      "inicio": [
+        2,
+        4
+      ],
+      "destino_solicitado": [
+        10,
+        4
+      ],
+      "destino_efetivo": [
+        5,
+        4
+      ],
+      "posicao_final": [
+        5,
+        4
+      ],
+      "alcancou_destino_solicitado": false,
+      "atualizacoes": 52,
+      "bloqueios": [
+        [
+          6,
+          0
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          6,
+          14
+        ],
+        [
+          6,
+          15
+        ]
+      ],
+      "numero_regioes": 3,
+      "trajeto": [
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ]
+      ],
+      "estados_caminho": [
+        {
+          "atualizacao": 1,
+          "estado": 0
+        },
+        {
+          "atualizacao": 49,
+          "estado": 3
+        },
+        {
+          "atualizacao": 50,
+          "estado": 4
+        },
+        {
+          "atualizacao": 51,
+          "estado": 0
+        }
+      ],
+      "buscas": [
+        {
+          "unidade": 0,
+          "origem": 1029,
+          "destino": 1034,
+          "status": 7,
+          "concluida": 1,
+          "sucesso": 0,
+          "quantidade": 0
+        }
+      ],
+      "eventos": [
+        {
+          "atualizacao": 52,
+          "unidade": 0,
+          "grupo": 0,
+          "tarefa": 0,
+          "bits": 8,
+          "resultado": 1
+        }
+      ],
+      "tarefas_ativas_ao_final": 0,
+      "otimizacoes_python": [],
+      "preparacoes_python": [
+        {
+          "unidade": 0,
+          "inicio": 1029,
+          "solicitado": 1034,
+          "destino": 1034,
+          "status": 7,
+          "concluida": 1
+        }
+      ],
+      "inicios_candidatos_python": [],
+      "escolhas_python": [],
+      "contornos_python": []
+    },
+    {
+      "nome": "destino_bloqueado",
+      "inicio": [
+        2,
+        4
+      ],
+      "destino_solicitado": [
+        10,
+        4
+      ],
+      "destino_efetivo": [
+        9,
+        4
+      ],
+      "posicao_final": [
+        9,
+        4
+      ],
+      "alcancou_destino_solicitado": false,
+      "atualizacoes": 114,
+      "bloqueios": [
+        [
+          10,
+          4
+        ]
+      ],
+      "numero_regioes": 3,
+      "trajeto": [
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          9,
+          4
+        ]
+      ],
+      "estados_caminho": [
+        {
+          "atualizacao": 1,
+          "estado": 0
+        }
+      ],
+      "buscas": [],
+      "eventos": [
+        {
+          "atualizacao": 114,
+          "unidade": 0,
+          "grupo": 0,
+          "tarefa": 0,
+          "bits": 8,
+          "resultado": 1
+        }
+      ],
+      "tarefas_ativas_ao_final": 0,
+      "otimizacoes_python": [],
+      "preparacoes_python": [],
+      "inicios_candidatos_python": [],
+      "escolhas_python": [],
+      "contornos_python": []
+    }
+  ],
+  "classes_traduzidas": [
+    1,
+    2,
+    3
+  ],
+  "executa_x86": false,
+  "limite": "Sem estruturas codificadas ou ordens a aliados bloqueadores"
+}

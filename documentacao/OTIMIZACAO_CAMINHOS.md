@@ -5,8 +5,9 @@ Foram traduzidas `TestLigneOptimise` (`0x42d674`) e `OptimiseChemin`
 O backend [`solucionador_misto.py`](../ferramentas/solucionador_misto.py) já usa
 essas traduções durante a busca e entrega a rota ao movimento das unidades.
 A preparação e o ajuste do destino agora também têm tradução, assim como a
-inspeção inicial e a escolha dos candidatos. O corpo de construção/contorno dos
-percursos continua original; veja [PREPARACAO_CANDIDATOS.md](PREPARACAO_CANDIDATOS.md).
+inspeção inicial e a escolha dos candidatos. O corpo dos dois contornos foi
+traduzido nas classes 1..3; veja [CONTORNOS.md](CONTORNOS.md) e
+[PREPARACAO_CANDIDATOS.md](PREPARACAO_CANDIDATOS.md).
 
 O nome das duas funções vem de `RISING.SBL`. As evidências anteriores já
 continham os corpos necessários: [`0042d674.asm`](../evidencias/caminhos-auxiliares/0042d674.asm)
@@ -118,7 +119,9 @@ a serialização já reconstruída grava a rota invertida e o epílogo original
 é retomado em `0x43b300`. Veja os checkpoints atuais em
 [PREPARACAO_CANDIDATOS.md](PREPARACAO_CANDIDATOS.md).
 
-O corpo que constrói os dois percursos ainda é executado no EXE original emulado.
+O corpo dos dois percursos agora também é Python nas três classes. A bancada
+mista conserva o prólogo/guardas e o epílogo; `SolucionadorCaminhosPython`
+dispensa essas chamadas, conforme [CONTORNOS.md](CONTORNOS.md).
 As retomadas conservam a pilha preparada pelo prólogo e usam os limites de
 endereço, tempo e instruções da bancada. Cada trecho retomado entra na contagem
 de execuções delimitadas.
@@ -131,9 +134,9 @@ minimapa e tarefas a cada atualização.
 ## Cobertura e resultados
 
 Na etapa de otimização, a suíte passou com **129 testes e 31.118 execuções x86**.
-Com a preparação e as etapas dos candidatos, são **144 testes e 32.623 execuções
-x86 delimitadas**, sem testes ignorados. Sem emulação, passam 70 testes comuns
-e os 74 opcionais ficam explicitamente ignorados no relatório local.
+Com os contornos traduzidos, são **155 testes e 36.157 execuções
+x86 delimitadas**, sem testes ignorados. Sem emulação, passam 74 testes comuns
+e os 81 opcionais ficam explicitamente ignorados no relatório local.
 
 As comparações isoladas executam **833 testes de linha e 124 otimizações** no
 original, cobrindo os 26 tipos, oito direções, células iguais, máscaras, objeto
@@ -161,7 +164,8 @@ Os cancelamentos continuam gerando a mensagem de término descrita em
 ## Continuação
 
 A otimização, a preparação/ajuste, a inspeção inicial e a seleção já têm tradução.
-Ainda falta o corpo de construção/contorno dos candidatos em `CheminCalcul`.
-O backend misto continua exigindo o EXE e Unicorn para essa parte.
+Os dois contornos já foram traduzidos nas classes 1..3. O backend independente
+dispensa o EXE e Unicorn nesse domínio; faltam estruturas codificadas e ordens
+de desbloqueio de aliados.
 Também permanecem as limitações sobre construções, tráfego, combate,
 animação e partida completa registradas em [CONTINUIDADE.md](CONTINUIDADE.md).

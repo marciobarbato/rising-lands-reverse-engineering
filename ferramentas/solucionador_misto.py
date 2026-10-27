@@ -8,6 +8,7 @@ from emulador import RETORNO
 from bancada_preparacao import gravar_preparacao, gravar_inicio_candidatos
 from candidatos_rota import iniciar_candidatos, selecionar_candidato
 from caminhos import serializar_rota
+from contornos_caminhos import construir_contornos
 from otimizacao_caminhos import ContextoLinha, otimizar_rota
 from preparacao_destino import preparar_destino
 from solucionador_original import BancadaNavegacao, SolucionadorOriginal
@@ -20,6 +21,7 @@ class BancadaMista(BancadaNavegacao):
         self.preparacoes_python = []
         self.inicios_candidatos_python = []
         self.escolhas_python = []
+        self.contornos_python = []
 
     def preparar_busca(self, mundo, indice):
         self.carregar_navegacao(mundo)
@@ -45,7 +47,29 @@ class BancadaMista(BancadaNavegacao):
                                                         obstaculo_proximo=dados.obstaculo_proximo,
                                                         todos_bloqueados=dados.todos_bloqueados,
                                                         regioes=list(dados.regioes)))
-            if dados.todos_bloqueados:
+            if contexto.classe in (1, 2, 3) and not dados.todos_bloqueados:
+                buffers = tuple(bytes(self.cpu.mem_read(a, 512)) for a in (0x4e116a, 0x4e136a))
+                contorno = construir_contornos(contexto, dados, buffers, bytes(self.cpu.mem_read(0x4e0f6a, 510)))
+                for endereco, buffer in zip((0x4e116a, 0x4e136a), contorno.buffers): self.cpu.mem_write(endereco, buffer)
+                self.cpu.mem_write(0x4e0f54, b''.join(contorno.registros))
+                self.cpu.mem_write(0x4e0f50, struct.pack('<I', 0x4e0f5e))
+                self.cpu.mem_write(0x4e0f68, bytes([contorno.quantidade_regioes]))
+                self.cpu.mem_write(0x4e0f6a, contorno.regioes)
+                self.cpu.mem_write(0x4e0f40, bytes([contorno.fase]))
+                for off, custo in zip((0xec, 0x108), contorno.custos):
+                    self.cpu.mem_write(r['ESP'] + off, struct.pack('<I', custo))
+                self.contornos_python.append(dict(unidade=unidade, custos=list(contorno.custos),
+                                                  contagens=[struct.unpack_from('<H', b)[0] for b in contorno.buffers]))
+                if contorno.status_falha is None:
+                    r['EIP'] = 0x43b073
+                else:
+                    rota = struct.unpack('<I', self.cpu.mem_read(0x4e0f3c, 4))[0]
+                    self.cpu.mem_write(rota, b'\0\0')
+                    self.cpu.mem_write(0x496302, b'\1')
+                    self.cpu.mem_write(0x4e0f37, b'\0')
+                    self.cpu.mem_write(0x4e0f4c, bytes([contorno.status_falha]))
+                    r = self.retomar(0x43b300, self.intervalos, limite_instrucoes=1000000)
+            elif dados.todos_bloqueados:
                 rota = struct.unpack('<I', self.cpu.mem_read(0x4e0f3c, 4))[0]
                 self.cpu.mem_write(rota, b'\0\0')
                 self.cpu.mem_write(0x496302, b'\1')

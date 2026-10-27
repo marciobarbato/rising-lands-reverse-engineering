@@ -3,7 +3,9 @@
 Implementação parcial em [`caminhos.py`](../ferramentas/caminhos.py); experimentos
 com as rotinas originais em [`bancada_caminhos.py`](../ferramentas/bancada_caminhos.py).
 A pesquisa usa o mesmo RISING.EXE identificado em [EMULACAO.md](EMULACAO.md).
-Não foi recuperado um algoritmo completo independente. Não há evidência suficiente
+O backend de [CONTORNOS.md](CONTORNOS.md) já executa o núcleo das três classes
+de ocupação sem EXE ou Unicorn, com limites para estruturas e desbloqueio de aliados.
+Não há evidência suficiente
 para classificar o original como A*. O SBL revelou os nomes originais
 `CheminCalcul`, `Chemin_Verouille`, `OptimiseChemin` e `EnginNextCaseChemin`;
 veja [SIMBOLOS.md](SIMBOLOS.md).
@@ -15,8 +17,8 @@ já percorre uma passagem ao redor de uma parede e entrega a mensagem à tarefa.
 O teste de linha e a otimização posterior agora estão traduzidos e podem ser
 usados pelo backend misto de [OTIMIZACAO_CAMINHOS.md](OTIMIZACAO_CAMINHOS.md).
 Preparação/ajuste e início/seleção dos candidatos estão descritos em
-[PREPARACAO_CANDIDATOS.md](PREPARACAO_CANDIDATOS.md). O contorno que constrói
-os dois percursos ainda depende do original emulado.
+[PREPARACAO_CANDIDATOS.md](PREPARACAO_CANDIDATOS.md). A construção dos dois
+contornos foi depois traduzida nas classes 1..3, conforme [CONTORNOS.md](CONTORNOS.md).
 
 ## Fluxo confirmado
 
@@ -165,11 +167,10 @@ limites do mapa, adjacência e ausência das células bloqueadas nessas saídas.
 
 A implementação Python cobre as primitivas descritas, componentes naturais,
 movimento direto, consumo, nova busca, `TestLigneOptimise` e `OptimiseChemin`,
-assim como a preparação/ajuste e o início/seleção dos candidatos, mas não o corpo
-de construção/contorno em `0x42f214`. O backend original permite
-testar essa integração enquanto a tradução independente continua. Os próximos
-passos são traduzir o solucionador, preparar construções e suas grades
-auxiliares, ampliar os testes de tráfego e inicializar mapas reais.
+assim como preparação/ajuste, início/seleção e construção dos dois contornos
+nas classes 1..3. O backend original permite conferir essa implementação
+independente. Os próximos passos são preparar construções e suas grades
+auxiliares, traduzir o desbloqueio de aliados, ampliar tráfego e inicializar mapas reais.
 
 Evidências novas: `evidencias/caminhos-ia/`, `caminhos-auxiliares/` e
 `caminhos-runtime/`; funções maiores já estavam em `evidencias/ghidra/`.

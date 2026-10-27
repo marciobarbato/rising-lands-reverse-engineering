@@ -1,8 +1,7 @@
 """Backend compatível: executa Chemin_Verouille/CheminCalcul no EXE original.
 
-É explícito porque requer Unicorn/JIT. Nenhum algoritmo auxiliar é apresentado
-como tradução do solucionador; a parte Python cobre consultas, desvios locais
-e o controle dos estados de caminho.
+É explícito porque requer Unicorn/JIT. Esta é a referência integral x86;
+o backend independente das classes 1..3 está em solucionador_python.py.
 """
 import struct
 from bancada_avanco import BancadaAvanco

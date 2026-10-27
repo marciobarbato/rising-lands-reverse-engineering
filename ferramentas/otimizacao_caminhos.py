@@ -1,7 +1,7 @@
 """TestLigneOptimise e OptimiseChemin traduzidos das instruções originais.
 
-Recebem o contexto já preparado pela busca. Não geram candidatos nem ajustam
-o destino; essas partes de CheminCalcul/Chemin_Verouille continuam pendentes.
+Recebem o contexto já preparado pela busca. A preparação do destino e a
+construção dos candidatos estão em preparacao_destino.py/contornos_caminhos.py.
 """
 import struct
 from dataclasses import dataclass

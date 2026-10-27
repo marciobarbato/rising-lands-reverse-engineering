@@ -1,8 +1,8 @@
 """Etapas de CheminCalcul: vizinhança, obstáculos e escolha dos candidatos.
 
-O contorno que estende os dois buffers continua no backend original. Esta
-etapa traduz 0x42f247..0x430b7e e 0x43b073..0x43b2a9. O corpo que constrói
-os dois percursos ainda é original emulado.
+Este módulo traduz 0x42f247..0x430b7e e 0x43b073..0x43b2a9. O corpo que
+constrói os dois percursos está em contornos_caminhos.py; a referência x86
+continua disponível para comparação.
 """
 import struct
 from dataclasses import dataclass

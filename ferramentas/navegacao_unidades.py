@@ -1,7 +1,8 @@
 """Desvios locais e estados de caminho ligados ao avanço físico.
 
 O cálculo geral é fornecido por um backend explícito. SolucionadorOriginal usa
-os bytes originais em Unicorn; o algoritmo geral ainda não foi todo traduzido.
+os bytes originais em Unicorn; SolucionadorCaminhosPython executa as traduções
+das classes 1..3 sem emulação, com limites para estruturas e desbloqueios.
 """
 import struct
 from avanco_unidades import MundoFisico

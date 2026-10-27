@@ -95,13 +95,22 @@ class DiferencialOtimizacao(unittest.TestCase):
             self._otimizar(m, celulas)
 
     def test_backend_misto_trajetos_mensagens_e_novo_obstaculo(self):
-        from demonstrar_desvios import preparar_cenario
         from solucionador_misto import SolucionadorComOtimizacaoPython
+        self._comparar_trajetos(SolucionadorComOtimizacaoPython)
+
+    def test_backend_python_trajetos_mensagens_e_novo_obstaculo(self):
+        from solucionador_python import SolucionadorCaminhosPython
+        ids = [self.bancada.grades['rotas'] + i * 512 for i in range(800)]
+        self._comparar_trajetos(lambda: SolucionadorCaminhosPython(ids))
+
+    def _comparar_trajetos(self, criar_solucionador):
+        from demonstrar_desvios import preparar_cenario
         for nome, dinamico in (('obstaculo', False), ('parede_com_passagem', False),
                                ('sem_passagem', False), ('destino_bloqueado', False),
                                ('parede_com_passagem', True)):
-            m, maquina, bloqueios, _ = preparar_cenario(nome, SolucionadorComOtimizacaoPython())
-            self.bancadas_auxiliares.append(m.solucionador.bancada)
+            m, maquina, bloqueios, _ = preparar_cenario(nome, criar_solucionador())
+            b = getattr(m.solucionador, 'bancada', m.solucionador)
+            if hasattr(b, 'execucoes'): self.bancadas_auxiliares.append(b)
             self.bancada.carregar(maquina.programa)
             self.bancada.carregar_navegacao(m)
             self.assertEqual(maquina.postar(0, 1, (0, 0x40a)), self.bancada.postar(0, 1, (0, 0x40a)))
@@ -121,18 +130,17 @@ class DiferencialOtimizacao(unittest.TestCase):
                 pos = m.palavra(0, 8)
                 self.assertNotIn((pos & 255, pos >> 8), bloqueios)
                 if m.unidades[2] == 7: break
-            else: self.fail('Trajeto misto não terminou')
+            else: self.fail('Trajeto não terminou')
             self.assertEqual(m.palavra(0, 8) == 0x40a, nome not in ('sem_passagem', 'destino_bloqueado'))
             self.assertEqual(len(eventos), 1)
             self.assertEqual(maquina.atualizar(0), self.bancada.atualizar(0))
             self.assertEqual(self.bancada.memoria_tarefas(), bytes(maquina.memoria))
             self.assertEqual(maquina.ativas, 0)
-            otimizacoes = m.solucionador.bancada.otimizacoes_python
+            otimizacoes = b.otimizacoes_python
             self.assertEqual(len(otimizacoes) > 0, nome == 'parede_com_passagem')
             if dinamico:
                 self.assertTrue(inserido)
                 self.assertGreaterEqual(len(otimizacoes), 2)
-            b = m.solucionador.bancada
             self.assertEqual(bool(b.preparacoes_python), nome in ('parede_com_passagem', 'sem_passagem'))
             self.assertEqual(bool(b.inicios_candidatos_python), nome == 'parede_com_passagem')
             self.assertEqual(bool(b.escolhas_python), nome == 'parede_com_passagem')

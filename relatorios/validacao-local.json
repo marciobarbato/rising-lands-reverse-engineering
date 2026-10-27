@@ -1,7 +1,7 @@
 {
   "python": "3.9.6",
   "emulacao_habilitada": false,
-  "testes": 144,
+  "testes": 155,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -142,6 +142,30 @@
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {
+      "teste": "test_emulacao_contornos.DiferencialContornos.test_classe_1_parede_e_obstaculo_simples",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_contornos.DiferencialContornos.test_obstaculos_naturais_deterministicos",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_contornos.DiferencialContornos.test_outros_ocupantes_e_flags_de_passagem",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_contornos.DiferencialContornos.test_pegadas_de_quatro_celulas_parede_e_obstaculo",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_contornos.DiferencialContornos.test_sem_vizinhos_e_dois_contornos_sem_saida",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_contornos.DiferencialContornos.test_solucionador_independente_todos_tipos_tres_mapas",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
       "teste": "test_emulacao_navegacao.DiferencialNavegacao.test_cancelamento_destino_adjacente_e_entrada_em_busca",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
@@ -223,6 +247,10 @@
     },
     {
       "teste": "test_emulacao_otimizacao.DiferencialOtimizacao.test_backend_misto_trajetos_mensagens_e_novo_obstaculo",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_otimizacao.DiferencialOtimizacao.test_backend_python_trajetos_mensagens_e_novo_obstaculo",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {
