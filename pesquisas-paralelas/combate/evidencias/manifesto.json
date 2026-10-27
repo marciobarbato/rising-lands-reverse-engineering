@@ -1,0 +1,427 @@
+{
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "trechos": [
+    {
+      "nome": "EnginAPortee",
+      "inicio": "0x00446cb5",
+      "fim_exclusivo": "0x00446eed",
+      "sha256_bytes": "9bf81bd8011d1ee9328540312dc6729e65e918f2d223d4c0acc71dd3870cd144",
+      "arquivo": "00446cb5.asm"
+    },
+    {
+      "nome": "EnginAPorteeMinimale",
+      "inicio": "0x00446eed",
+      "fim_exclusivo": "0x00446fbf",
+      "sha256_bytes": "89a3a90c4d529b4af64a5cf88d072f2d2ae368cb5903d87b94c6dc82efd5bd06",
+      "arquivo": "00446eed.asm"
+    },
+    {
+      "nome": "EnginEstEnnemi",
+      "inicio": "0x00446fbf",
+      "fim_exclusivo": "0x00447021",
+      "sha256_bytes": "b039cc2c07484c99f8cf548613366519c59f63c75dc1c5cc8009d9c5543feb98",
+      "arquivo": "00446fbf.asm"
+    },
+    {
+      "nome": "TypeEnginPeutAttaquer",
+      "inicio": "0x00453d7d",
+      "fim_exclusivo": "0x00453da2",
+      "sha256_bytes": "6ecb3f5476629460c618400d32752d0abefc194679e9a7bae50979034e9baf82",
+      "arquivo": "00453d7d.asm"
+    },
+    {
+      "nome": "EnginTrouveCibleScan",
+      "inicio": "0x00453da2",
+      "fim_exclusivo": "0x00453f74",
+      "sha256_bytes": "abd62bdb2104a11447dec02623e2480ee9006f63bd63387d5ca1dabf3b230c82",
+      "arquivo": "00453da2.asm"
+    },
+    {
+      "nome": "EnginTrouveCible",
+      "inicio": "0x00453f74",
+      "fim_exclusivo": "0x00454235",
+      "sha256_bytes": "8b55a566aee95e29177b2f7c9e6c474724fe9c3dcf50a0d4117c0bee1e3d4a9c",
+      "arquivo": "00453f74.asm"
+    },
+    {
+      "nome": "EnginEstCharge",
+      "inicio": "0x0045173f",
+      "fim_exclusivo": "0x004517a2",
+      "sha256_bytes": "3b58ee464f123d3248b457b95d36e849c0791b6a97c23cff462daa6edf2a4c37",
+      "arquivo": "0045173f.asm"
+    },
+    {
+      "nome": "EnginRechargeArme",
+      "inicio": "0x004516d3",
+      "fim_exclusivo": "0x0045173f",
+      "sha256_bytes": "afb310775cb39e3081412cc59e8b8b1ad14952093860bb5230b0b43f36612c21",
+      "arquivo": "004516d3.asm"
+    },
+    {
+      "nome": "EnginLigneDeTir",
+      "inicio": "0x004517a2",
+      "fim_exclusivo": "0x0045189c",
+      "sha256_bytes": "1bce3183814749085d0b6699ba39f0e5ce6bda93dacb01157eb9793c24775035",
+      "arquivo": "004517a2.asm"
+    },
+    {
+      "nome": "CalculAttaqueEngin",
+      "inicio": "0x00451914",
+      "fim_exclusivo": "0x00452c94",
+      "sha256_bytes": "5063a40da1b98b9aa921978118a8d4a7634cc691b7d61cae3498d7b41b697550",
+      "arquivo": "00451914.asm"
+    },
+    {
+      "nome": "SetAttaqueEngin",
+      "inicio": "0x00445a36",
+      "fim_exclusivo": "0x00445af1",
+      "sha256_bytes": "5d8560f9eb4af67d37fb80e9014330469522f0ad1b87e0426de9d3402283d92c",
+      "arquivo": "00445a36.asm"
+    },
+    {
+      "nome": "ContactUnite",
+      "inicio": "0x004468e4",
+      "fim_exclusivo": "0x00446b0c",
+      "sha256_bytes": "eb998175d64dadedf6f261b0ce2999b149daf2e46af3ef5cc5b14f06d52387c9",
+      "arquivo": "004468e4.asm"
+    },
+    {
+      "nome": "ContactCellule",
+      "inicio": "0x00446b0c",
+      "fim_exclusivo": "0x00446c94",
+      "sha256_bytes": "d69a22948dd271856c0060e21399e2f6fb7adaee045d4292a394980aaf81500b",
+      "arquivo": "00446b0c.asm"
+    },
+    {
+      "nome": "ContientCellule",
+      "inicio": "0x0044246e",
+      "fim_exclusivo": "0x00442586",
+      "sha256_bytes": "706a11b792b0bc8cb765fa482b781fba45c23cf1acb3bdf0fd1b794a3ce1b4e4",
+      "arquivo": "0044246e.asm"
+    },
+    {
+      "nome": "PlayerEstAllie",
+      "inicio": "0x0046d838",
+      "fim_exclusivo": "0x0046d877",
+      "sha256_bytes": "9eb1a3a1733a40d2b48c996ea96ea13d11072a1c588fb19df67364851f2ddd74",
+      "arquivo": "0046d838.asm"
+    },
+    {
+      "nome": "Distance2d",
+      "inicio": "0x00479555",
+      "fim_exclusivo": "0x004795af",
+      "sha256_bytes": "a07caad8cc2dc4cc7d8f19d86805ac79f1be2fcc4f3e2b1d5a4b13f01169f0da",
+      "arquivo": "00479555.asm"
+    },
+    {
+      "nome": "TypeCaseBloqueTir",
+      "inicio": "0x0047653c",
+      "fim_exclusivo": "0x0047656b",
+      "sha256_bytes": "e3a066ad7bbbbd370a0e471740240c4e07dc6c9c5c7a867abb43d09b8c5cbad6",
+      "arquivo": "0047653c.asm"
+    },
+    {
+      "nome": "EpiloguePortee",
+      "inicio": "0x00440f94",
+      "fim_exclusivo": "0x00440f9c",
+      "sha256_bytes": "a7efa8e448e3e8bd7a43e76561ceb54fd7d602ed4131c6ec19244a954f0bdde0",
+      "arquivo": "00440f94.asm"
+    },
+    {
+      "nome": "EpilogueScan",
+      "inicio": "0x0044f29a",
+      "fim_exclusivo": "0x0044f2a3",
+      "sha256_bytes": "d9ea2dab7fbd03f13d115c1e877318a326186ee8ab9a8a75ae163f6ba2aaaad1",
+      "arquivo": "0044f29a.asm"
+    },
+    {
+      "nome": "EpilogueRegistres",
+      "inicio": "0x00440d58",
+      "fim_exclusivo": "0x00440d5e",
+      "sha256_bytes": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "arquivo": "00440d58.asm"
+    },
+    {
+      "nome": "EpilogueContact",
+      "inicio": "0x00443468",
+      "fim_exclusivo": "0x00443470",
+      "sha256_bytes": "bbcc62e33cf0212462299f18676ae80d3a241e5a259638564930800646a86a55",
+      "arquivo": "00443468.asm"
+    },
+    {
+      "nome": "Modificateur",
+      "inicio": "0x00428cc0",
+      "fim_exclusivo": "0x00428e71",
+      "sha256_bytes": "2809a1654c287424102c5b232995439863c112835aefa435151b0f06e1de5b86",
+      "arquivo": "00428cc0.asm"
+    },
+    {
+      "nome": "SortilegeGetPortee",
+      "inicio": "0x004746c9",
+      "fim_exclusivo": "0x004746e4",
+      "sha256_bytes": "6471f9a2bc20de631adcefd6f2ade380dbaba66b8c769ed60e7289cefe568040",
+      "arquivo": "004746c9.asm"
+    },
+    {
+      "nome": "BatimentGetCase",
+      "inicio": "0x0041aee2",
+      "fim_exclusivo": "0x0041aff8",
+      "sha256_bytes": "00757b16af936eb460e2a4195e9ac487cf76c972b908ae3270f5221e76e20f2e",
+      "arquivo": "0041aee2.asm"
+    },
+    {
+      "nome": "BatimentAdjacent",
+      "inicio": "0x0042381f",
+      "fim_exclusivo": "0x004239a0",
+      "sha256_bytes": "5a4ed19ece3dc69f0523ca4fccce8519b93edc5cad691761359029cd950ee9b0",
+      "arquivo": "0042381f.asm"
+    },
+    {
+      "nome": "BatimentCollision",
+      "inicio": "0x0041ab5c",
+      "fim_exclusivo": "0x0041ac8b",
+      "sha256_bytes": "5b3d3484d48fe0e3bde39cb69224113789d583f301074ec252dfbd3be2c2bdf0",
+      "arquivo": "0041ab5c.asm"
+    },
+    {
+      "nome": "EpilogueBatiment",
+      "inicio": "0x0041db1e",
+      "fim_exclusivo": "0x0041db24",
+      "sha256_bytes": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "arquivo": "0041db1e.asm"
+    },
+    {
+      "nome": "EnginNextEtape_selection",
+      "inicio": "0x004546bc",
+      "fim_exclusivo": "0x004547e0",
+      "sha256_bytes": "d5e3a398096ddc9f710e188d7e7786596fb1575eb425a97fe759a00ce85e05cf",
+      "arquivo": "004546bc.asm"
+    },
+    {
+      "nome": "EnginNextEtape_validite",
+      "inicio": "0x0045673b",
+      "fim_exclusivo": "0x004568a8",
+      "sha256_bytes": "afb2293096a4f2411a3c353473ddc4b3a412ab3ff94c7a20c845b4e63f4c8ed7",
+      "arquivo": "0045673b.asm"
+    },
+    {
+      "nome": "EnginViseCible",
+      "inicio": "0x00451464",
+      "fim_exclusivo": "0x004516d3",
+      "sha256_bytes": "a9d2a0b73dca2ed393609f6448d94ea4d5ce147f9b49311cd49764777135388b",
+      "arquivo": "00451464.asm"
+    },
+    {
+      "nome": "AngleQuart",
+      "inicio": "0x00479610",
+      "fim_exclusivo": "0x004796cb",
+      "sha256_bytes": "07bbe5fe7d0afbc5d1de0168bed3cbf0f6f577f5f525b00215f355d89c8355ee",
+      "arquivo": "00479610.asm"
+    },
+    {
+      "nome": "AngleCalcul",
+      "inicio": "0x004796cb",
+      "fim_exclusivo": "0x004798b0",
+      "sha256_bytes": "481d03ddeac4e8eadab6fe16754fc9711104963a5f2dea2ea2c3fb6c8aec9069",
+      "arquivo": "004796cb.asm"
+    },
+    {
+      "nome": "EpilogueMira",
+      "inicio": "0x0044f33c",
+      "fim_exclusivo": "0x0044f344",
+      "sha256_bytes": "c29811c3da2f39f7249ff24ea25685eff64227fcc316f491d29bf6529834d5a1",
+      "arquivo": "0044f33c.asm"
+    },
+    {
+      "nome": "BatimentGetCaseAdjacent",
+      "inicio": "0x004239a0",
+      "fim_exclusivo": "0x00423b27",
+      "sha256_bytes": "3cc4f948aaf298e6632f907b03d6bf9ddcc2144f3e6d14cfe7fd378d19f3a4e1",
+      "arquivo": "004239a0.asm"
+    },
+    {
+      "nome": "RuntimeAcos",
+      "inicio": "0x0048d5ce",
+      "fim_exclusivo": "0x0048d5f1",
+      "sha256_bytes": "a1c3fca1f7de01a4cc52727c56ddf197c621a1f4a8ff6ad45083727c0b0fe5da",
+      "arquivo": "0048d5ce.asm"
+    },
+    {
+      "nome": "RuntimeTruncar",
+      "inicio": "0x0048c43e",
+      "fim_exclusivo": "0x0048c45b",
+      "sha256_bytes": "e8e5057d4262fa80aa524f7f130d273e0dd9b35f25cbc72950dd0c7c37277a21",
+      "arquivo": "0048c43e.asm"
+    },
+    {
+      "nome": "RuntimeAtan",
+      "inicio": "0x0048fee7",
+      "fim_exclusivo": "0x0048fefc",
+      "sha256_bytes": "ced22fa25d4c7d919d7e11d344ec6a1c528a9a1c53888dd3f87d10bfb4dbfaa0",
+      "arquivo": "0048fee7.asm"
+    },
+    {
+      "nome": "RuntimeRaiz",
+      "inicio": "0x0048ff4a",
+      "fim_exclusivo": "0x0048ff7f",
+      "sha256_bytes": "e8c51dcd0677f30b2627fe7847fe088de219ecfaf61d2b1306b2c0d46d669562",
+      "arquivo": "0048ff4a.asm"
+    },
+    {
+      "nome": "AnimAttaqueEngin",
+      "inicio": "0x004479c4",
+      "fim_exclusivo": "0x00447acf",
+      "sha256_bytes": "30de6ee3be9958345e2b5a66a442e65f2af8874d84df311cb7677dff741bd5e3",
+      "arquivo": "004479c4.asm"
+    },
+    {
+      "nome": "AnimAttaqueTermineEngin",
+      "inicio": "0x00447977",
+      "fim_exclusivo": "0x004479b4",
+      "sha256_bytes": "8b31617700bcf23788b4af5dc74999b8f3451cd88ac38ff250c9610b7afe8dd1",
+      "arquivo": "00447977.asm"
+    },
+    {
+      "nome": "ProjectileInit",
+      "inicio": "0x0046e44c",
+      "fim_exclusivo": "0x0046e4ca",
+      "sha256_bytes": "b9644acbee6ac691b78230d8041b2152e9464992acbb59f882b810d97c10e583",
+      "arquivo": "0046e44c.asm"
+    },
+    {
+      "nome": "ProjectileSet",
+      "inicio": "0x0046e208",
+      "fim_exclusivo": "0x0046e422",
+      "sha256_bytes": "72db9d512f9003e33fdd4fe4637c7de29de99749640e014026b7be0d312b763f",
+      "arquivo": "0046e208.asm"
+    },
+    {
+      "nome": "ProjectileLineaire",
+      "inicio": "0x0046e049",
+      "fim_exclusivo": "0x0046e17f",
+      "sha256_bytes": "0ac39b6bcaa8997d6daecbfcac43695d978e603f88f45836649c04ed5991fa19",
+      "arquivo": "0046e049.asm"
+    },
+    {
+      "nome": "TypeEnginGetSortieProjectile",
+      "inicio": "0x004511a5",
+      "fim_exclusivo": "0x004513c7",
+      "sha256_bytes": "11bd8e7f7c91dd381acee29bb9cd0713e9fd2a2e14187809170ee01a4949d71d",
+      "arquivo": "004511a5.asm"
+    },
+    {
+      "nome": "AffCorpsEnginDecalage",
+      "inicio": "0x00410fcc",
+      "fim_exclusivo": "0x004110bf",
+      "sha256_bytes": "ed710448f11d2c11f72d8e7b2191431f2fb984f518dfb6a94b8927e90a018ed7",
+      "arquivo": "00410fcc.asm"
+    },
+    {
+      "nome": "GiroTorre",
+      "inicio": "0x004484a7",
+      "fim_exclusivo": "0x00448599",
+      "sha256_bytes": "6cb91625e6b1eb1cab1f94b9ca85d3e19e6c64355bb46de263b3280e2c4c992a",
+      "arquivo": "004484a7.asm"
+    },
+    {
+      "nome": "ChercheIndiceBatiment",
+      "inicio": "0x0041b54a",
+      "fim_exclusivo": "0x0041b579",
+      "sha256_bytes": "9d9a454a4a9684e367f7904d815e18ce500499edbcd43bf850fbcd3fc8f4b9cb",
+      "arquivo": "0041b54a.asm"
+    },
+    {
+      "nome": "InfligeDegat",
+      "inicio": "0x00450874",
+      "fim_exclusivo": "0x004510dd",
+      "sha256_bytes": "2409dae0ab60fcb3e9f267532469d670d3476835843b5c6c2e1074d8eaaecf3f",
+      "arquivo": "00450874.asm"
+    },
+    {
+      "nome": "EpilogueCible",
+      "inicio": "0x004462aa",
+      "fim_exclusivo": "0x004462b0",
+      "sha256_bytes": "8bb367d0bae7c569ba84855d60a79544af1961b699f5a66fb90e1cd7750001b4",
+      "arquivo": "004462aa.asm"
+    },
+    {
+      "nome": "EpilogueProjectile",
+      "inicio": "0x0046fc09",
+      "fim_exclusivo": "0x0046fc0f",
+      "sha256_bytes": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "arquivo": "0046fc09.asm"
+    }
+  ],
+  "constantes_mira": {
+    "0x00494e04": {
+      "bytes": "0000000000806640",
+      "double": 180.0
+    },
+    "0x00494e0c": {
+      "bytes": "0000000000807640",
+      "double": 360.0
+    },
+    "0x00494e14": {
+      "bytes": "0000000000806640",
+      "double": 180.0
+    },
+    "0x00494e1c": {
+      "bytes": "000000000000e03f",
+      "double": 0.5
+    },
+    "0x00494e24": {
+      "bytes": "00000000008076c0",
+      "double": -360.0
+    },
+    "pi_imediato": {
+      "bytes": "44174154fb210940",
+      "double": 3.1415926535,
+      "enderecos_imediatos": [
+        "0x00479717",
+        "0x0047971c"
+      ]
+    }
+  },
+  "despachos_ataque": {
+    "0x004479b4": [
+      "0x00447a1b",
+      "0x00447a60",
+      "0x00447acb",
+      "0x00447acb"
+    ],
+    "0x00451904": [
+      "0x00451957",
+      "0x004523dc",
+      "0x00452aa7",
+      "0x00452b7c"
+    ],
+    "0x0045189c": [
+      "0x00452846",
+      "0x00452846",
+      "0x00452846",
+      "0x004528d6",
+      "0x00452846",
+      "0x00452846",
+      "0x00452846",
+      "0x00452846",
+      "0x00452846",
+      "0x00452846",
+      "0x00452846",
+      "0x004528d6",
+      "0x004528d6",
+      "0x004528d6",
+      "0x004528d6",
+      "0x004528d6",
+      "0x004528d6",
+      "0x00452846",
+      "0x00452846",
+      "0x00452846",
+      "0x00452846",
+      "0x00452846",
+      "0x00452846",
+      "0x00452846",
+      "0x00452846",
+      "0x004528d6"
+    ]
+  }
+}

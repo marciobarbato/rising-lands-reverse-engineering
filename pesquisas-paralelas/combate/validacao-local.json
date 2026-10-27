@@ -1,0 +1,379 @@
+{
+  "sucesso": true,
+  "testes": 52,
+  "falhas": 0,
+  "erros": 0,
+  "ignorados": [
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_alcance_construcao_com_geometria_sintetica",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_alcance_modos1_5_e_excecoes",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_filtro_26_por_26_e_inimizade_direcional",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_linha_original_montanhas_e_todos_os_tipos",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_manutencao_fragmentos_com_consultas_resolvidas",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_ocupacao_e_adjacencia_tipos_bordas_e_camadas",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_ordem_efeitos_locais_apos_reset",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_portoes_de_busca_automatica_e_reacao",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_preparacao_inicio_alcance_e_linha_originais",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_recarga_e_inicio_ciclo",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_scan_e_grade_diferencas_e_desempate",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_selecao_scan_grade_entradas_sinteticas",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_truncamento_distancia_grade_trecho",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_validade_alvo_antes_de_calcular_ataque",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_mira_angular.DiferencialMira.test_angulo_todas_65536_inclinacoes_u8_duas_resolucoes",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_mira_angular.DiferencialMira.test_manutencao_executa_alcance_e_mira_sem_substituicoes",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_mira_angular.DiferencialMira.test_mira_completa_todos_tipos_modos1_5_e_orientacoes",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_mira_angular.DiferencialMira.test_mira_construcao_adjacencia_fallback_e_segunda_resolucao_torre",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_mira_angular.DiferencialMira.test_modos_outros_corpo_sentinela_e_torre_depende_edi",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_mira_angular.DiferencialMira.test_quadrantes_bordas_e_translacoes_aleatorias",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_mira_angular.DiferencialMira.test_registradores_memoria_e_controle_x87_preservados",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_animacao_26_tipos_subestados_overflow_e_quadro255",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_ciclo_continuo_60_atualizacoes",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_disparo_indice7",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_emissao_com_slot_livre_executa_projectile_set_original",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_fronteiras_balao_e_som_nao_sao_mocks",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_giro_corpo_e_torre",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_magia_invalida_seguida_reset_original",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_saidas_e_deslocamentos_do_corpo_tipos_orientacoes",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestado0_preparacao_giro_recarga_e_navegacao_delegada",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestado1_disparo_e_retorno_de_quadros_todos_tipos",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestado1_melee_sem_duplicar_dano",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestado2_contador_animacao16_e_limpeza",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestado3_e_invalido_todos_tipos_sem_rng",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestados_construcoes_com_consultas_originais",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    }
+  ],
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "execucoes_x86_delimitadas": 0,
+  "por_teste": [
+    {
+      "teste": "test_alvos_alcance.Contratos.test_arma_e_inicio_nao_equivalem_a_dano",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Contratos.test_filtro_e_donos_especiais",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Contratos.test_grade_nao_repete_estado_e_inverte_alianca",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Contratos.test_limites_de_alcance_e_contato",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Contratos.test_linha_montanha_no_alvo_e_isencoes",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Contratos.test_ordem_e_manutencao",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Contratos.test_scan_primeiro_grade_mais_proximo_e_empate",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Contratos.test_validade_ordem_nao_repete_filtro_de_selecao",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_alcance_construcao_com_geometria_sintetica",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_alcance_modos1_5_e_excecoes",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_filtro_26_por_26_e_inimizade_direcional",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_linha_original_montanhas_e_todos_os_tipos",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_manutencao_fragmentos_com_consultas_resolvidas",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_ocupacao_e_adjacencia_tipos_bordas_e_camadas",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_ordem_efeitos_locais_apos_reset",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_portoes_de_busca_automatica_e_reacao",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_preparacao_inicio_alcance_e_linha_originais",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_recarga_e_inicio_ciclo",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_scan_e_grade_diferencas_e_desempate",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_selecao_scan_grade_entradas_sinteticas",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_truncamento_distancia_grade_trecho",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_alvos_alcance.Diferencial.test_validade_alvo_antes_de_calcular_ataque",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_mira_angular.ContratosMira.test_corpo_torre_rotacao_tipo3_e_celulas_distintas",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_mira_angular.ContratosMira.test_dominios_e_callbacks_necessarios",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_mira_angular.ContratosMira.test_eixos_coincidencia_e_limites_angulares",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_mira_angular.ContratosMira.test_ordem_das_consultas_de_construcao",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_mira_angular.DiferencialMira.test_angulo_todas_65536_inclinacoes_u8_duas_resolucoes",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_mira_angular.DiferencialMira.test_manutencao_executa_alcance_e_mira_sem_substituicoes",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_mira_angular.DiferencialMira.test_mira_completa_todos_tipos_modos1_5_e_orientacoes",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_mira_angular.DiferencialMira.test_mira_construcao_adjacencia_fallback_e_segunda_resolucao_torre",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_mira_angular.DiferencialMira.test_modos_outros_corpo_sentinela_e_torre_depende_edi",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_mira_angular.DiferencialMira.test_quadrantes_bordas_e_translacoes_aleatorias",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_mira_angular.DiferencialMira.test_registradores_memoria_e_controle_x87_preservados",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.ContratosAnimacao.test_disparo_especial_duplo_e_flag_do_alvo",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.ContratosAnimacao.test_incremento_overflow_igualdade_e_divisor",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.ContratosAnimacao.test_quadros_estaticos_e_attaque_termine",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.ContratosAnimacao.test_som_e_efeito_externo_obrigatorio",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.ContratosAnimacao.test_subestado2_underflow_e_subestado3_sem_reiniciar_fase",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_animacao_26_tipos_subestados_overflow_e_quadro255",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_ciclo_continuo_60_atualizacoes",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_disparo_indice7",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_emissao_com_slot_livre_executa_projectile_set_original",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_fronteiras_balao_e_som_nao_sao_mocks",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_giro_corpo_e_torre",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_magia_invalida_seguida_reset_original",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_saidas_e_deslocamentos_do_corpo_tipos_orientacoes",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestado0_preparacao_giro_recarga_e_navegacao_delegada",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestado1_disparo_e_retorno_de_quadros_todos_tipos",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestado1_melee_sem_duplicar_dano",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestado2_contador_animacao16_e_limpeza",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestado3_e_invalido_todos_tipos_sem_rng",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestados_construcoes_com_consultas_originais",
+      "execucoes_x86_delimitadas": 0
+    }
+  ],
+  "limites": {
+    "tempo_por_chamada_segundos": 1,
+    "instrucoes_padrao": 20000,
+    "instrucoes_selecao": 1000000,
+    "instrucoes_linha": 100000
+  },
+  "escopo": "Trechos isolados do EXE original com memória sintética. Não inicia Windows/jogo.",
+  "consultas_resolvidas": "O teste antigo de fragmentos fornece AL como entrada. Os novos testes de mira/manutenção executam EnginViseCible, AngleCalcul e chamadas x87 originais, sem substituições.",
+  "configuracao_x87": {
+    "control_word": "0x037f",
+    "workaround_fpatan_0x49946c": 0,
+    "escopo_python": "Coordenadas u8, 8/32 setores; resultados discretos, não equivalência bit a bit de intermediários x87"
+  },
+  "animacao_disparo": {
+    "efeitos": "Callbacks explícitos; não integra física ou dano em Python.",
+    "referencia": "Emissão x86 com pool cheio e um slot livre; corpo a corpo sem ocupantes; magia ID255; movimento/balão/áudio param na entrada.",
+    "comparacao": "Registro inteiro, contexto de busca e argumentos na pilha/registradores de cada efeito."
+  },
+  "diagnosticos": []
+}
