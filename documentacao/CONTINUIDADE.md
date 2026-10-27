@@ -11,7 +11,7 @@
 - Renderização estática do terreno da missão 1 com IDs corrigidos.
 - Testes sintéticos e contra o corpus real.
 - Ghidra e JDK portáteis instalados, com descompilador nativo ARM64 compilado.
-- 255 rotinas exportadas e sete assinaturas de acessores corrigidas.
+- Exportações em 333 endereços distintos e sete assinaturas de acessores corrigidas.
 - Propriedade, coordenadas, vida e campos de carga das 2.604 entradas de unidades.
 - Rotina de cura reconstruída e máximo de vida localizado na tabela de tipos.
 - Primitivas de movimento e quatro parâmetros dos 26 inicializadores reconstruídos.
@@ -31,7 +31,12 @@
 - Avanço físico em terreno comum: ocupação, visão, minimapa, rota e fadiga com reservas.
 - Conclusão de movimento no estado 7 e mensagens por mudança de estado.
 - Espera/retomada da tarefa de grupo conectada a um trajeto de duas células.
-- 104 testes aprovados, incluindo 23.501 execuções na bancada, sem iniciar o jogo.
+- Consultas de passagem, desvio direto e estados de navegação traduzidos.
+- Componentes naturais com quatro/oito vizinhos e limites do mapa reconstruídos.
+- Busca geral original emulada ligada à física, visão, mensagens e tarefas.
+- Quatro trajetos com obstáculos e uma colisão surgindo durante a rota comparados ao x86.
+- 119 testes aprovados e 27.230 execuções x86 delimitadas, incluindo 14 do backend
+  de navegação. Validação registrada em `relatorios/validacao-emulada.json`, sem iniciar o jogo.
   O teste do despachante superior substitui etapas; os testes da máquina de tarefas
   e das operações suportadas executam suas chamadas originais.
 
@@ -39,9 +44,9 @@
 
 | Tema | Evidência disponível | Trabalho necessário |
 |---|---|---|
-| Caminhos e colisão | Primitivas reconstruídas e oráculo x86 em nove cenários | Traduzir busca/pós-processamento, gerar regiões e integrar movimento direto e consumo |
+| Caminhos e colisão | Regiões naturais, consultas, desvios e controle Python integrados à busca original e à física | Traduzir busca/pós-processamento, completar grades de estruturas e ampliar tráfego/mapas reais |
 | IA | Máquina de tarefas e ordens de movimento individuais/de grupo com efeitos confirmados | Completar seleção espacial da tarefa 16, mensagens e operações de economia/guerra |
-| Movimento e tempo | Avanço, ocupação, visão/minimapa, conclusão e mensagem de grupo comparados ao x86 | Integrar desvios, despacho completo, fome/armadilhas e medir a taxa efetiva |
+| Movimento e tempo | Desvios locais e gerais ligados ao avanço, ocupação, visão/minimapa, conclusão e mensagens | Completar despacho, fome/armadilhas, atropelamento e medir a taxa efetiva |
 | Combate | Aritmética parcial de dano, consulta de proximidade e cura confirmadas | Alvos, alcance, cadência, tecnologias e efeitos de morte |
 | Economia | Custos e blocos de recursos | Associar IDs internos, produção, consumo e filas |
 | Construções | Primeiro bloco indexado do ETA | Identificar tipos, campos, posição e estados |
@@ -54,17 +59,23 @@
 
 ## Próxima investigação recomendada
 
-Prosseguir a partir de [CAMINHOS.md](CAMINHOS.md) e [IA.md](IA.md).
+Prosseguir a partir de [NAVEGACAO.md](NAVEGACAO.md), [CAMINHOS.md](CAMINHOS.md)
+e [IA.md](IA.md).
 A preparação é `0x43b30b`; o solucionador principal é `0x42f214`, seguido de
 `0x42e890`. A bancada já executa esses trechos, mas a tradução independente
-continua parcial. Integrar a escolha direta, o desvio e o consumo da rota.
+continua parcial. A escolha direta, o desvio, o consumo e a nova busca estão
+ligados ao movimento por `MundoNavegacao`; a busca geral ainda exige o backend
+`SolucionadorOriginal`. Traduzir esse núcleo sem trocar o comportamento por
+um algoritmo presumido. Preparar a grade auxiliar de estruturas antes de
+testar obstáculos de construções e ampliar cenários com várias unidades.
 Para a IA, seguir [SIMBOLOS.md](SIMBOLOS.md) e [TAREFAS.md](TAREFAS.md).
 A tabela `0x514910` vem de `RISING.RUL`; seus 140 nomes foram resolvidos pelo SBL.
 As operações `V_DeplacerUnite` e `V_DeplaceGroupe` já estão integradas conforme
 [ORDENS_MOVIMENTO.md](ORDENS_MOVIMENTO.md). Completar o prefixo espacial 422..426
-da tarefa 16 e a busca de desvios. O avanço, a conclusão e a retomada por mensagem
+da tarefa 16. O avanço, a conclusão e a retomada por mensagem
 já estão conectados conforme [AVANCO_CHEGADA.md](AVANCO_CHEGADA.md), para uma rota
-fornecida em terreno comum. Integrar fome/armadilhas e despachos adicionais de
+fornecida em terreno comum, e agora também com os desvios de [NAVEGACAO.md](NAVEGACAO.md).
+Integrar fome/armadilhas e despachos adicionais de
 mensagem. Ainda é necessário medir a taxa efetiva do ciclo identificado
 em [CADENCIA.md](CADENCIA.md).
 Uma execução controlada do jogo poderá confrontar movimento, visibilidade e

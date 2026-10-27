@@ -6,8 +6,10 @@ grupo. A implementação está em `avanco_unidades.py`, `visao_movimento.py` e
 `mensagens_chegada.py`. Os identificadores franceses das evidências são os
 originais recuperados do SBL.
 
-O coordenador recebe uma **rota já escolhida**. A busca de desvios e o despacho
-completo de todas as ações por unidade continuam fora desse coordenador. Os
+O coordenador básico `MundoFisico` recebe uma **rota já escolhida**.
+`MundoNavegacao` agora o estende com escolha direta, desvios locais e busca
+geral pelo backend original, conforme [NAVEGACAO.md](NAVEGACAO.md). O despacho
+completo de todas as ações por unidade continua pendente. Os
 corpos de avanço e mensagem foram comparados com suas funções x86 originais;
 o exemplo integrado percorre a mesma sequência delimitada de funções.
 
@@ -97,7 +99,8 @@ quando o identificador gravado corresponde exatamente à unidade/subcélula.
 O método `iniciar_passo` reserva uma célula adjacente já escolhida. Para o exemplo
 emulado, a escolha e a reserva são executadas por `EnginNextCaseChemin`
 (`0x448b9f`), com suas consultas originais de passagem. A reconstrução recusa um
-passo bloqueado que precise de desvio; não ignora a colisão nem inventa uma rota.
+passo bloqueado que precise de desvio. A extensão `MundoNavegacao` acrescenta a
+escolha direta e a invalidação da rota, preservando essa API básica.
 
 ## Visão, iluminação e minimapa
 
@@ -224,7 +227,9 @@ recursivamente dentro do avanço físico.
 
 ## Cobertura e limites
 
-A suíte inteira passou com **104 testes e 23.501 execuções x86 delimitadas**.
+Na etapa de avanço e mensagens, a suíte passou com **104 testes e 23.501
+execuções x86 delimitadas**. A cobertura atual, incluindo navegação, está no
+relatório [validacao-emulada.json](../relatorios/validacao-emulada.json).
 As novas comparações verificam registros completos de unidades, estruturas,
 grupos e tarefas, grades de colisão/regiões/terreno, descoberta, bordas,
 contagens de luz, três camadas do minimapa, rotas e globais de busca/iteração.
@@ -234,6 +239,8 @@ sobreposição de luz, desconto, fadiga com reservas e overflow, payload de mens
 cache, controle humano/IA, resultado positivo/negativo e retomada da tarefa.
 As chamadas internas são originais e não são interceptadas nesses testes.
 
-Continuam pendentes busca de desvios integrada, seleção espacial completa da
+Os desvios locais e a busca geral original já foram integrados ao movimento,
+incluindo mensagem e retomada da tarefa; veja [NAVEGACAO.md](NAVEGACAO.md).
+Continuam pendentes a tradução independente da busca, seleção espacial completa da
 tarefa 16, fome sem provisões, armadilhas hostis, despachos administrativos
 adicionais, outras ordens/estados e validação numa partida completa.

@@ -8,6 +8,11 @@ para classificar o original como A*. O SBL revelou os nomes originais
 `CheminCalcul`, `Chemin_Verouille`, `OptimiseChemin` e `EnginNextCaseChemin`;
 veja [SIMBOLOS.md](SIMBOLOS.md).
 
+A integração atual está em [NAVEGACAO.md](NAVEGACAO.md): desvios locais,
+geração de regiões, invalidação de rota e controle dos estados em Python,
+com a busca geral original fornecida por um backend explícito. O movimento
+já percorre uma passagem ao redor de uma parede e entrega a mensagem à tarefa.
+
 ## Fluxo confirmado
 
 ```mermaid
@@ -52,8 +57,9 @@ Isso explica os quatro u16 em `0xfa..0x100` das unidades. O bit 2 da palavra
 codificada da unidade **não** participa da subcélula. A resolução acontece
 uma vez, sem interpretar novamente os bits do valor recuperado.
 
-A expressão “mesma região” descreve essa comparação de rótulos. A geração
-completa dos rótulos ainda não foi reconstruída. Igualdade não garante uma
+A expressão “mesma região” descreve essa comparação de rótulos. A geração de
+componentes naturais foi reconstruída em `regioes_mapa.py`; construções e suas
+grades auxiliares ainda exigem trabalho. Igualdade não garante uma
 rota livre diante de obstáculos e ocupantes dinâmicos. Na preparação, rótulos
 diferentes encerram a solicitação com status 7.
 
@@ -88,7 +94,8 @@ A tabela de classes dos 26 tipos, em `0x4962c8`, foi preservada no módulo Pytho
   15/campo `0x89=1`.
 - Flag global `0x4e1771`, que permite o caso de aliado parado.
 - Exceção entre adversários: tipo solicitante 12 ou 15 e ocupante de tipo
-  0, 1, 2, 4–10, 18, 19 ou 22. Ainda não se atribui a ela o nome “atropelamento”.
+  0, 1, 2, 4–10, 18, 19 ou 22. Os efeitos de atropelamento associados ao movimento
+  ainda não foram traduzidos; a consulta de passagem sozinha não os executa.
 
 A variante `0x42eba4` retorna 1 para a exceção entre tipos, 2 para a permissão
 por direção/flag e 0 para recusa. `0x42ece0` retorna 1 nos dois casos positivos.
@@ -138,6 +145,12 @@ Um destino bloqueado foi ajustado para `(7,1)`, com status 2. Dois rótulos
 diferentes foram rejeitados com status 7 e nenhuma célula. Início igual ao
 destino retornou sucesso com buffer vazio.
 
+Os experimentos antigos mantêm rótulos sintéticos simplificados, sem reconstruir
+os componentes naturais. As novas demonstrações de [NAVEGACAO.md](NAVEGACAO.md)
+geram os rótulos e acompanham o trajeto físico, produzindo uma rota ao redor
+da parede até a passagem. Os relatórios são preservados separadamente para
+explicitar a diferença de inicialização.
+
 Esses resultados demonstram por que o flag de sucesso não equivale a “chegou
 ao destino”. São observações do contexto sintético, não uma garantia de como
 uma partida completa resolve cada obstáculo. Os testes conferem reprodução,
@@ -145,11 +158,12 @@ limites do mapa, adjacência e ausência das células bloqueadas nessas saídas.
 
 ## Limites e continuação
 
-A implementação Python cobre as primitivas descritas, não os corpos completos
-de `0x42f214`, `0x42e890` ou o ajuste de destino. A bancada oferece um oráculo
-reproduzível para avançar na tradução. O próximo passo é reconstruir a geração
-dos rótulos e integrar o movimento direto, consumo e nova busca, antes de
-avaliar obstáculos longos, unidades móveis e mapas reais.
+A implementação Python cobre as primitivas descritas, componentes naturais,
+movimento direto, consumo e nova busca, mas não os corpos completos de
+`0x42f214`, `0x42e890` ou o ajuste de destino. O backend original permite
+testar essa integração enquanto a tradução independente continua. Os próximos
+passos são traduzir o solucionador, preparar construções e suas grades
+auxiliares, ampliar os testes de tráfego e inicializar mapas reais.
 
 Evidências novas: `evidencias/caminhos-ia/`, `caminhos-auxiliares/` e
 `caminhos-runtime/`; funções maiores já estavam em `evidencias/ghidra/`.

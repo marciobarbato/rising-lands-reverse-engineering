@@ -70,7 +70,8 @@ será necessário confrontar uma partida real para validar a simulação integra
 
 ## Escopo das novas bancadas
 
-A suíte possui 104 testes; a execução emulada registra 23.501 chamadas delimitadas.
+A contagem atual de testes e chamadas delimitadas está em
+[`validacao-emulada.json`](../relatorios/validacao-emulada.json).
 O teste de IA em `test_emulacao_caminhos_ia.py` intercepta apenas sete endereços
 explícitos de etapas e injeta retornos. Valida o despachante e seus argumentos,
 mas não o conteúdo dessas etapas. Essa diferença é deliberada e registrada em
@@ -125,3 +126,23 @@ não executa o ciclo de partida inteiro. Não substitui chamadas internas.
 `demonstrar_chegada.py --emular` gera um relatório separado com 104 execuções,
 que não entram na contagem da suíte. Veja [AVANCO_CHEGADA.md](AVANCO_CHEGADA.md)
 para a distinção entre célula atravessada, destino final e mensagem recebida.
+
+## Navegação e obstáculos
+
+`solucionador_original.py` acrescenta consultas de ocupação, escolha direta,
+estados de navegação, desbloqueio e classificação natural. Os testes de
+componentes executam o trecho de preenchimento de `Chemin_Remap`, parando antes
+das chamadas Win32 de liberação. Não simulam essas APIs nem a carga inteira
+do mapa.
+
+O mundo Python chama uma instância separada do backend para a busca geral;
+a bancada de referência usa as funções originais de controle e movimento.
+O relatório inclui as chamadas de ambos em `execucoes_x86_delimitadas` e
+identifica a parcela do backend em `execucoes_x86_backend_navegacao`.
+Os relatórios de demonstração são separados da contagem da suíte.
+
+Os quatro trajetos com obstáculos e um caso com nova colisão durante o percurso
+comparam física, visão, minimapa e tarefas após cada atualização. Os desvios
+locais e o controle dos estados são Python; o cálculo geral é original emulado.
+Assim, esses testes validam a integração e a tradução parcial, sem alegar uma
+busca geral independente. Detalhes e limitações em [NAVEGACAO.md](NAVEGACAO.md).

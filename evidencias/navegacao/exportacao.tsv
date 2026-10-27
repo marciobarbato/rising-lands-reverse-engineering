@@ -1,0 +1,10 @@
+entrada	nome	resultado
+00448d08	EnginNextCase	OK
+0044930c	DeplaceEngin	OK
+00449176	EnginDebloqueNextCase	OK
+0044330c	EnginChercheCaseLibre	OK
+00446693	ChercheIndiceEngin	OK
+0042ee1c	Chemin_Remap	OK
+0043e464	Remplit	OK
+0043e5a0	AlloueCouleur	OK
+0043e5d5	LibereCouleur	OK

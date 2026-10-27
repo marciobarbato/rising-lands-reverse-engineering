@@ -19,11 +19,15 @@ class Resultado(unittest.TextTestResult):
     def stopTest(self, teste):
         bancada = getattr(teste, 'bancada', None)
         self.execucoes_x86 += (bancada.execucoes - self.inicio_execucoes) if bancada else 0
+        auxiliares = sum(b.execucoes for b in getattr(teste, 'bancadas_auxiliares', ()))
+        self.execucoes_x86 += auxiliares
+        self.execucoes_x86_auxiliares += auxiliares
         super().stopTest(teste)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.execucoes_x86 = 0
+        self.execucoes_x86_auxiliares = 0
 
 
 def main():
@@ -38,6 +42,7 @@ def main():
                      testes=resultado.testsRun, falhas=len(resultado.failures), erros=len(resultado.errors),
                      ignorados=[dict(teste=t.id(), motivo=m) for t, m in resultado.skipped],
                      execucoes_x86_delimitadas=resultado.execucoes_x86,
+                     execucoes_x86_backend_navegacao=resultado.execucoes_x86_auxiliares,
                      sucesso=resultado.wasSuccessful())
     if args.emular:
         from emulador import unicorn, HASH_ORIGINAL

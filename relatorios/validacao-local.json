@@ -1,7 +1,7 @@
 {
   "python": "3.9.6",
   "emulacao_habilitada": false,
-  "testes": 104,
+  "testes": 119,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -142,6 +142,46 @@
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {
+      "teste": "test_emulacao_navegacao.DiferencialNavegacao.test_cancelamento_destino_adjacente_e_entrada_em_busca",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_navegacao.DiferencialNavegacao.test_desvio_local_todas_direcoes_e_tipos",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_navegacao.DiferencialNavegacao.test_estados_pedido_resultado_e_sem_passagem",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_navegacao.DiferencialNavegacao.test_obstaculo_natural_tiles_e_objetos",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_navegacao.DiferencialNavegacao.test_obstaculo_novo_invalida_rota_durante_o_trajeto",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_navegacao.DiferencialNavegacao.test_ocupantes_dono_modo_e_flag_72",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_navegacao.DiferencialNavegacao.test_passagem_tipos_mascaras_pegadas_e_bordas",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_navegacao.DiferencialNavegacao.test_preenchimento_quatro_ou_oito_vizinhos_no_trecho_original",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_navegacao.DiferencialNavegacao.test_rota_invalida_pelo_obstaculo_e_fim_da_rota",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_navegacao.DiferencialNavegacao.test_trajetos_integrados_com_despacho_original_e_mensagem",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
       "teste": "test_emulacao_ordens.DiferencialOrdens.test_construtor_condicoes_do_tuyau_e_limites_da_tabela",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
@@ -215,5 +255,6 @@
     }
   ],
   "execucoes_x86_delimitadas": 0,
+  "execucoes_x86_backend_navegacao": 0,
   "sucesso": true
 }

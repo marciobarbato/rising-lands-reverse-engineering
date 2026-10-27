@@ -1,0 +1,91 @@
+{
+  "contexto": "Mapas, unidades e tarefas sintéticos; geração de regiões e movimento em Python.",
+  "busca_geral": "não necessária neste cenário local",
+  "algoritmo_geral_traduzido": false,
+  "cenarios": [
+    {
+      "nome": "obstaculo",
+      "inicio": [
+        2,
+        4
+      ],
+      "destino_solicitado": [
+        10,
+        4
+      ],
+      "destino_efetivo": [
+        10,
+        4
+      ],
+      "posicao_final": [
+        10,
+        4
+      ],
+      "alcancou_destino_solicitado": true,
+      "atualizacoes": 130,
+      "bloqueios": [
+        [
+          6,
+          4
+        ]
+      ],
+      "numero_regioes": 3,
+      "trajeto": [
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          10,
+          4
+        ]
+      ],
+      "estados_caminho": [
+        {
+          "atualizacao": 1,
+          "estado": 0
+        }
+      ],
+      "buscas": [],
+      "eventos": [
+        {
+          "atualizacao": 130,
+          "unidade": 0,
+          "grupo": 0,
+          "tarefa": 0,
+          "bits": 8,
+          "resultado": 1
+        }
+      ],
+      "tarefas_ativas_ao_final": 0
+    }
+  ]
+}

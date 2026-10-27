@@ -19,7 +19,7 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 - Oito arquivos CMP decodificados: 12.268 quadros gráficos.
 - Terreno da missão 1 reconstruído com IDs começando em 1, como no renderizador original.
 - Testes de regressão com entradas sintéticas, arquivos reais e falhas de formato.
-- Ghidra portátil instalado e 255 rotinas exportadas, com assinaturas corrigidas de sete acessores.
+- Ghidra portátil instalado e exportações em 333 endereços distintos, com assinaturas corrigidas de sete acessores.
 - Dono, posição e vida das 2.604 entradas de unidades, distinguindo arquivo e efeitos da carga.
 - Cura com limite de vida reconstruída, incluindo aritmética de 16 bits.
 - Direção, giro, vizinhança, prefixo do passo e parâmetros de movimento dos 26 tipos.
@@ -34,7 +34,9 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 - Demonstração reproduzível de cinco cenários, comparada com as chamadas originais.
 - Avanço físico em rota fornecida, ocupação, visão/minimapa e conclusão da ordem reconstruídos.
 - Mensagens por estado ligadas à espera/retomada de tarefas, com um trajeto de duas células conferido no x86.
-- 104 testes passando, com 23.501 execuções x86 delimitadas; o teste do despachante superior substitui suas etapas internas.
+- Desvios locais, regiões naturais e controle de navegação em Python, ligados à busca geral original emulada.
+- Quatro trajetos com obstáculos e nova colisão durante a rota conferidos com as rotinas originais.
+- 119 testes passando, com 27.230 execuções x86 delimitadas; o teste do despachante superior substitui suas etapas internas.
 
 ## Leitura recomendada
 
@@ -51,6 +53,7 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 11. [Símbolos franceses e formato RULE](documentacao/SIMBOLOS.md) e [máquina de tarefas](documentacao/TAREFAS.md).
 12. [Efeitos das ordens de movimento](documentacao/ORDENS_MOVIMENTO.md).
 13. [Avanço físico e mensagens de chegada](documentacao/AVANCO_CHEGADA.md).
+14. [Navegação integrada e desvios de obstáculos](documentacao/NAVEGACAO.md).
 
 ## Reproduzir
 
@@ -88,6 +91,12 @@ Para registrar a validação comum, execute `python3 ferramentas/validar.py`.
 A [validação opcional com Unicorn](documentacao/EMULACAO.md) executa somente
 trechos x86 isolados, sem iniciar o jogo. O relatório completo está em
 [validacao-emulada.json](relatorios/validacao-emulada.json).
+
+Para percorrer um trajeto com obstáculo, execute
+`python3 ferramentas/demonstrar_desvios.py`. Para incluir paredes e a busca geral
+original emulada, use `python3 ferramentas/demonstrar_desvios.py --original`.
+Os relatórios distinguem destino solicitado, destino efetivo e posição final;
+o término da ordem também pode resultar de cancelamento por falta de passagem.
 
 ## Organização
 
