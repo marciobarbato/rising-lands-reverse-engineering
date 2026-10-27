@@ -1,0 +1,96 @@
+; SHA-256 da cópia normalizada: 26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0
+0041ab5c  PUSH EBX
+0041ab5d  MOV BL,AL
+0041ab5f  MOV EAX,EDX
+0041ab61  CMP BL,0x15
+0041ab64  JA 0x0041ac87
+0041ab6a  XOR EDX,EDX
+0041ab6c  MOV DL,BL
+0041ab6e  JMP dword ptr CS:[EDX*0x4 + 0x41ab04]
+0041ab76  AND EAX,0xffff
+0041ab7b  MOV AL,byte ptr [EAX + 0x495c04]
+0041ab81  POP EBX
+0041ab82  RET
+0041ab83  AND EAX,0xffff
+0041ab88  MOV AL,byte ptr [EAX + 0x495c10]
+0041ab8e  POP EBX
+0041ab8f  RET
+0041ab90  AND EAX,0xffff
+0041ab95  MOV AL,byte ptr [EAX + 0x495c30]
+0041ab9b  POP EBX
+0041ab9c  RET
+0041ab9d  AND EAX,0xffff
+0041aba2  MOV AL,byte ptr [EAX + 0x495c50]
+0041aba8  POP EBX
+0041aba9  RET
+0041abaa  AND EAX,0xffff
+0041abaf  MOV AL,byte ptr [EAX + 0x495cec]
+0041abb5  POP EBX
+0041abb6  RET
+0041abb7  AND EAX,0xffff
+0041abbc  MOV AL,byte ptr [EAX + 0x495c80]
+0041abc2  POP EBX
+0041abc3  RET
+0041abc4  AND EAX,0xffff
+0041abc9  MOV AL,byte ptr [EAX + 0x495d6c]
+0041abcf  POP EBX
+0041abd0  RET
+0041abd1  AND EAX,0xffff
+0041abd6  MOV AL,byte ptr [EAX + 0x495d30]
+0041abdc  POP EBX
+0041abdd  RET
+0041abde  AND EAX,0xffff
+0041abe3  MOV AL,byte ptr [EAX + 0x495cf8]
+0041abe9  POP EBX
+0041abea  RET
+0041abeb  AND EAX,0xffff
+0041abf0  MOV AL,byte ptr [EAX + 0x495d8a]
+0041abf6  POP EBX
+0041abf7  RET
+0041abf8  AND EAX,0xffff
+0041abfd  MOV AL,byte ptr [EAX + 0x495d64]
+0041ac03  POP EBX
+0041ac04  RET
+0041ac05  AND EAX,0xffff
+0041ac0a  MOV AL,byte ptr [EAX + 0x495d5c]
+0041ac10  POP EBX
+0041ac11  RET
+0041ac12  AND EAX,0xffff
+0041ac17  MOV AL,byte ptr [EAX + 0x495d8b]
+0041ac1d  POP EBX
+0041ac1e  RET
+0041ac1f  AND EAX,0xffff
+0041ac24  MOV AL,byte ptr [EAX + 0x495c6c]
+0041ac2a  POP EBX
+0041ac2b  RET
+0041ac2c  AND EAX,0xffff
+0041ac31  MOV AL,byte ptr [EAX + 0x495ca4]
+0041ac37  POP EBX
+0041ac38  RET
+0041ac39  AND EAX,0xffff
+0041ac3e  MOV AL,byte ptr [EAX + 0x495d1c]
+0041ac44  POP EBX
+0041ac45  RET
+0041ac46  AND EAX,0xffff
+0041ac4b  MOV AL,byte ptr [EAX + 0x495cd4]
+0041ac51  POP EBX
+0041ac52  RET
+0041ac53  AND EAX,0xffff
+0041ac58  MOV AL,byte ptr [EAX + 0x495ce8]
+0041ac5e  POP EBX
+0041ac5f  RET
+0041ac60  AND EAX,0xffff
+0041ac65  MOV AL,byte ptr [EAX + 0x495d48]
+0041ac6b  POP EBX
+0041ac6c  RET
+0041ac6d  AND EAX,0xffff
+0041ac72  MOV AL,byte ptr [EAX + 0x495cbc]
+0041ac78  POP EBX
+0041ac79  RET
+0041ac7a  AND EAX,0xffff
+0041ac7f  MOV AL,byte ptr [EAX + 0x495cc8]
+0041ac85  POP EBX
+0041ac86  RET
+0041ac87  XOR AL,AL
+0041ac89  POP EBX
+0041ac8a  RET

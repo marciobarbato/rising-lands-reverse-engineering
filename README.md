@@ -19,7 +19,7 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 - Oito arquivos CMP decodificados: 12.268 quadros gráficos.
 - Terreno da missão 1 reconstruído com IDs começando em 1, como no renderizador original.
 - Testes de regressão com entradas sintéticas, arquivos reais e falhas de formato.
-- Ghidra portátil instalado e exportações em 333 endereços distintos, com assinaturas corrigidas de sete acessores.
+- Ghidra portátil instalado e exportações em 345 endereços distintos, com assinaturas corrigidas de sete acessores.
 - Dono, posição e vida das 2.604 entradas de unidades, distinguindo arquivo e efeitos da carga.
 - Cura com limite de vida reconstruída, incluindo aritmética de 16 bits.
 - Direção, giro, vizinhança, prefixo do passo e parâmetros de movimento dos 26 tipos.
@@ -38,8 +38,9 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 - Quatro trajetos com obstáculos e nova colisão durante a rota conferidos com as rotinas originais.
 - Teste de linha e otimização de rotas traduzidos para Python e integrados à busca em um backend opcional.
 - Preparação, construção dos dois contornos, seleção e otimização em Python nas classes 1..3, cobrindo os 26 tipos.
-- Backend independente de caminhos e demonstração de movimento sem carregar o EXE ou Unicorn, com limites para estruturas e desbloqueio de aliados.
-- 155 testes passando, com 36.157 execuções x86 delimitadas; o teste do despachante superior substitui suas etapas internas.
+- Backend independente de caminhos e demonstração de movimento sem carregar o EXE ou Unicorn.
+- Estruturas nos contornos, grade de cores com união/separação, geometria dos 22 tipos e ordens para afastar aliados bloqueadores.
+- 177 testes passando, com 41.031 execuções x86 delimitadas; o teste do despachante superior substitui suas etapas internas.
 
 ## Leitura recomendada
 
@@ -61,6 +62,7 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 16. [Preparação do destino e etapas dos candidatos](documentacao/PREPARACAO_CANDIDATOS.md).
 17. [Contornos dos obstáculos e busca independente](documentacao/CONTORNOS.md).
 18. [Prompts para pesquisas paralelas e aplicativo Mac](documentacao/PROMPTS_PARALELOS.md).
+19. [Estruturas e afastamento de bloqueadores](documentacao/ESTRUTURAS_DESBLOQUEIO.md).
 
 ## Reproduzir
 
@@ -105,8 +107,9 @@ original emulada, use `python3 ferramentas/demonstrar_desvios.py --original`.
 Os relatórios distinguem destino solicitado, destino efetivo e posição final;
 o término da ordem também pode resultar de cancelamento por falta de passagem.
 Use `--python` para executar a busca, o avanço e as mensagens sem EXE ou Unicorn.
-O cálculo suporta as três classes de ocupação, com limites para estruturas
-codificadas e ordens a aliados bloqueadores. `--misto` conserva a bancada x86
+O cálculo suporta as três classes de ocupação, incluindo estruturas com suas
+cores auxiliares e ordens a aliados bloqueadores. A demonstração
+`python3 ferramentas/demonstrar_estruturas.py` exercita esses casos. `--misto` conserva a bancada x86
 para comparar as traduções e os efeitos administrativos ainda não portados.
 
 ## Organização

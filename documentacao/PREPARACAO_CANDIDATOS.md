@@ -8,7 +8,8 @@ a visão e as mensagens continuam usando as implementações anteriores.
 Nesta etapa inicial, o intervalo de construção `0x430b7e..0x43b073` ainda era
 original emulado. Ele foi depois traduzido nas classes 1..3, conforme
 [CONTORNOS.md](CONTORNOS.md). Estruturas codificadas e ordens de desbloqueio
-a aliados ainda exigem trabalho.
+a aliados foram traduzidas depois, em
+[ESTRUTURAS_DESBLOQUEIO.md](ESTRUTURAS_DESBLOQUEIO.md).
 
 | Implementação | Responsabilidade |
 |---|---|
@@ -110,9 +111,9 @@ Cada recusa pode contribuir para:
    para o solicitante, preservando a assimetria da tabela.
 
 Ocupantes com bit de classe 4 podem acrescentar as quatro subcélulas à lista.
-As partes inativas dos buffers e da lista não são limpas. O modelo recusa
-estruturas codificadas nessa etapa, pois a grade auxiliar de cores ainda não foi
-reconstruída para o solucionador.
+As partes inativas dos buffers e da lista não são limpas. A grade auxiliar de
+cores e os registros de estruturas foram acrescentados em
+[ESTRUTURAS_DESBLOQUEIO.md](ESTRUTURAS_DESBLOQUEIO.md), removendo a recusa inicial.
 
 Se nenhuma posição consultada estiver livre, a integração Python limpa a rota,
 conclui sem sucesso e devolve status 8. O controle do movimento entra na espera
@@ -163,7 +164,7 @@ a retomada da tarefa, incluindo um obstáculo surgindo durante o percurso.
 Na parede com passagem, os custos observados foram `[65535, 7]`, com seleção do
 segundo candidato. O trajeto continuou terminando em `(10,4)` na atualização 279.
 
-O corpo de construção/contorno já foi traduzido nas três classes. Falta ampliar
-tráfego, traduzir ordens a aliados bloqueadores e preparar as grades auxiliares
-das estruturas. As limitações de
+O corpo de construção/contorno já foi traduzido nas três classes, incluindo
+as grades auxiliares das estruturas e ordens a aliados bloqueadores. Falta ampliar
+tráfego e inicializar os mapas reais por inteiro. As limitações de
 combate, animação e partida completa permanecem em [CONTINUIDADE.md](CONTINUIDADE.md).

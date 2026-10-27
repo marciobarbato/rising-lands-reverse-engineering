@@ -8,6 +8,7 @@ import struct
 from dataclasses import dataclass
 from caminhos import aliados
 from movimento import VETORES
+from estruturas_caminhos import observar_estrutura
 from otimizacao_caminhos import ContextoLinha, direcao_busca, passagem_da_busca
 
 VIZINHOS_GRANDES = ((-2, 1), (-2, 0), (-2, -1), (-2, -2), (-1, -2), (0, -2),
@@ -117,9 +118,14 @@ def iniciar_candidatos(contexto, inicio, destino):
         if proximo == 0xffff or distancia < melhor:
             proximo, melhor = celula, distancia
         valor = m.regioes[celula]
+        if valor in (0, origem_regiao):
+            continue
         if valor & 0x8000:
-            raise NotImplementedError('Candidatos com estruturas exigem a grade auxiliar de cores')
-        if valor in (0, origem_regiao) or valor in regioes:
+            normalizado = observar_estrutura(contexto, valor, celula, registro, 0)
+            if normalizado not in regioes and len(regioes) < 255:
+                regioes.append(normalizado)
+            continue
+        if valor in regioes:
             continue
         if valor & 0x4000:
             outro = (valor & 0x3ff8) >> 3

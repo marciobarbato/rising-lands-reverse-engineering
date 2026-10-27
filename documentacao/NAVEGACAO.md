@@ -11,7 +11,8 @@ busca foram traduzidos para Python. `SolucionadorCaminhosPython` executa esse
 domínio sem EXE ou Unicorn, conforme [CONTORNOS.md](CONTORNOS.md).
 `SolucionadorOriginal` continua sendo a referência x86, com memória sintética,
 intervalos declarados e limites de execução. Estruturas codificadas e ordens
-de desbloqueio a aliados ainda têm limitações. Não há evidência suficiente
+de desbloqueio a aliados foram acrescentadas em
+[ESTRUTURAS_DESBLOQUEIO.md](ESTRUTURAS_DESBLOQUEIO.md). Não há evidência suficiente
 para classificar o algoritmo original como A*.
 
 O backend opcional `SolucionadorParcialPython` já traduz preparação, ajuste,
@@ -176,8 +177,8 @@ resultado 1 entregue após esses cancelamentos.
 ## Validação e lacunas
 
 A etapa inicial de navegação passou com **119 testes e 27.230 execuções x86**.
-Com os contornos traduzidos, a suíte possui **155 testes e
-36.157 execuções x86 delimitadas**, incluindo 152 chamadas dos backends de
+Com os contornos traduzidos, a suíte possui **177 testes e
+41.031 execuções x86 delimitadas**, incluindo 152 chamadas dos backends de
 navegação, sem testes ignorados. A execução
 sem emulação registra explicitamente os testes opcionais ignorados.
 
@@ -203,8 +204,8 @@ o coordenador Python; não é uma execução do laço inteiro do jogo.
 O teste de linha e a otimização posterior já têm tradução independente.
 Preparação/ajuste e início/seleção dos candidatos também foram traduzidos.
 Os dois contornos das classes 1..3 também foram traduzidos, conforme [CONTORNOS.md](CONTORNOS.md).
-Continuam pendentes a grade auxiliar e o contorno de estruturas codificadas com `0x8000`,
-as ordens de desbloqueio a aliados, os efeitos de
-atropelamento, tráfego com várias unidades, mapas reais inicializados por inteiro,
-animação contínua, som e validação numa partida. O backend recusa estruturas
-codificadas sem a grade auxiliar, em vez de calcular com dados ausentes.
+A grade auxiliar, os contornos de estruturas com `0x8000` e as ordens para afastar
+aliados foram traduzidos e comparados ao x86; veja
+[ESTRUTURAS_DESBLOQUEIO.md](ESTRUTURAS_DESBLOQUEIO.md). Continuam pendentes os
+efeitos de atropelamento, tráfego mais amplo, mapas reais inicializados por inteiro,
+animação contínua, som e validação numa partida.

@@ -1,7 +1,7 @@
 {
   "python": "3.9.6",
   "emulacao_habilitada": false,
-  "testes": 155,
+  "testes": 177,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -163,6 +163,50 @@
     },
     {
       "teste": "test_emulacao_contornos.DiferencialContornos.test_solucionador_independente_todos_tipos_tres_mapas",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_estruturas_desbloqueio.DiferencialEstruturasDesbloqueio.test_adicao_remocao_muros_componentes_e_allocator",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_estruturas_desbloqueio.DiferencialEstruturasDesbloqueio.test_alocacao_liberacao_cores_e_memoria_completa",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_estruturas_desbloqueio.DiferencialEstruturasDesbloqueio.test_busca_completa_com_estruturas_e_obstaculos_naturais",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_estruturas_desbloqueio.DiferencialEstruturasDesbloqueio.test_celula_livre_tipos_modos_bordas_e_bloqueios",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_estruturas_desbloqueio.DiferencialEstruturasDesbloqueio.test_contornos_estruturas_todas_classes_donos_tipos_e_cores",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_estruturas_desbloqueio.DiferencialEstruturasDesbloqueio.test_dimensoes_mascaras_listas_e_consulta_22_tipos",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_estruturas_desbloqueio.DiferencialEstruturasDesbloqueio.test_modificar_regiao_estrutura_insercao_remocao_e_sobreposicao",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_estruturas_desbloqueio.DiferencialEstruturasDesbloqueio.test_movimento_integrado_muros_e_ordens_a_dois_bloqueadores",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_estruturas_desbloqueio.DiferencialEstruturasDesbloqueio.test_ordens_tipos_donos_aliancas_e_sem_espaco",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_estruturas_desbloqueio.DiferencialEstruturasDesbloqueio.test_ordens_varios_ocupantes_reservas_inativos_e_referencias",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_estruturas_desbloqueio.DiferencialEstruturasDesbloqueio.test_preenchimento_grade_pilha_bordas_e_limite",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {

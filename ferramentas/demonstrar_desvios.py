@@ -91,7 +91,7 @@ def main():
         r['busca_geral'] = 'Preparação, construção dos candidatos, seleção, otimização e serialização das classes 1..3 em Python'
         r['classes_traduzidas'] = [1,2,3]
         r['executa_x86'] = False
-        r['limite'] = 'Sem estruturas codificadas ou ordens a aliados bloqueadores'
+        r['limite'] = 'Mapas sintéticos; estruturas exigem regiões preservadas e cores auxiliares coerentes'
     nome = 'desvios-python.json' if args.python else ('desvios-misto.json' if args.misto else ('desvios-original.json' if args.original else 'desvios-local.json'))
     destino=Path(__file__).resolve().parents[1]/'relatorios'/nome
     destino.write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

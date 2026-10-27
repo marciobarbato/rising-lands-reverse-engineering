@@ -1,11 +1,11 @@
 {
   "python": "3.9.6",
   "emulacao_habilitada": true,
-  "testes": 155,
+  "testes": 177,
   "falhas": 0,
   "erros": 0,
   "ignorados": [],
-  "execucoes_x86_delimitadas": 36157,
+  "execucoes_x86_delimitadas": 41031,
   "execucoes_x86_backend_navegacao": 152,
   "sucesso": true,
   "unicorn": "2.1.4",

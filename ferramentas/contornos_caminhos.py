@@ -1,12 +1,13 @@
 """Contornos de CheminCalcul: dois sentidos, regiões e saída por linha direta.
 
-Tradução do corpo para as classes de ocupação 1, 2 e 3. A grade auxiliar de
-estruturas continua pendente; os casos que a exigem são recusados.
+Tradução do corpo para as classes de ocupação 1, 2 e 3, incluindo
+normalização das estruturas pela grade auxiliar de cores.
 """
 import struct
 from dataclasses import dataclass
 from caminhos import aliados, testar_mascara_celula
 from movimento import VETORES
+from estruturas_caminhos import observar_estrutura
 from otimizacao_caminhos import direcao_busca, passagem_da_busca
 
 
@@ -73,10 +74,15 @@ class _RegioesContorno:
     def contem(self, valor):
         return valor in struct.unpack_from('<' + 'H' * self.quantidade, self.dados)
 
-    def registrar(self, valor, registro, fase, deduplicar=True):
+    def registrar(self, valor, registro, fase, deduplicar=True, celula=0):
+        if valor in (0, self.origem):
+            return
         if valor & 0x8000:
-            raise NotImplementedError('Contorno de estruturas exige a grade auxiliar de cores')
-        if valor in (0, self.origem) or (deduplicar and self.contem(valor)):
+            normalizado = observar_estrutura(self.contexto, valor, celula, registro, fase)
+            if not deduplicar or not self.contem(normalizado):
+                self._adicionar(normalizado)
+            return
+        if deduplicar and self.contem(valor):
             return
         if not valor & 0x4000:
             self._adicionar(valor)
@@ -115,10 +121,11 @@ def _linha_sai_do_contorno(contexto, atual, destino, regioes, registro, fase):
         if not passagem_da_busca(contexto, atual, d):
             for delta in _subcelulas(contexto, atual):
                 valor = contexto.mundo.regioes[(atual - delta) & 65535]
-                if valor & 0x8000:
-                    raise NotImplementedError('Teste de saída com estrutura exige cores auxiliares')
-                if valor != regioes.origem and regioes.contem(valor):
-                    return False
+                if valor != regioes.origem:
+                    if valor & 0x8000:
+                        valor = observar_estrutura(contexto, valor, (atual - delta) & 65535, registro, fase)
+                    if regioes.contem(valor):
+                        return False
         d = direcao_busca(atual, destino)
         atual = vizinha_contorno(contexto.mundo, atual, d)
         if atual == 0xffff:
@@ -135,13 +142,13 @@ def _subcelulas(contexto, celula):
 def _regiao_deixada(contexto, anterior, escolhida):
     m = contexto.mundo
     if contexto.classe == 1:
-        return m.regioes[anterior]
+        return m.regioes[anterior], anterior
     for direcao in (None, 1, 3, 5):
         c = anterior if direcao is None else vizinha_contorno(m, anterior, direcao)
         if (testar_mascara_celula(m.objetos[c], m.atributos[c], contexto.mascara) and
                 escolhida - c not in (0, 1, 257, 256)):
-            return m.regioes[c]
-    return 0
+            return m.regioes[c], c
+    return 0, anterior
 
 
 def construir_contornos(contexto, inicio, buffers=None, residuos_regioes=None, registros_anteriores=None):
@@ -175,7 +182,8 @@ def construir_contornos(contexto, inicio, buffers=None, residuos_regioes=None, r
             if passo.celula == 0xffff or passo.anterior == 0xffff:
                 custos[lado] = 0xffff
             else:
-                regioes.registrar(_regiao_deixada(contexto, passo.anterior, passo.celula), registros[lado], fase)
+                valor, celula_obstaculo = _regiao_deixada(contexto, passo.anterior, passo.celula)
+                regioes.registrar(valor, registros[lado], fase, celula=celula_obstaculo)
                 obstaculo, atual = passo.anterior, passo.celula
                 fase = (fase + 1) & 255
                 custos[lado] = (custos[lado] + 1) & 65535

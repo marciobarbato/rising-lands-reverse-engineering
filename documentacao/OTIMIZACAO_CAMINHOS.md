@@ -134,9 +134,9 @@ minimapa e tarefas a cada atualização.
 ## Cobertura e resultados
 
 Na etapa de otimização, a suíte passou com **129 testes e 31.118 execuções x86**.
-Com os contornos traduzidos, são **155 testes e 36.157 execuções
-x86 delimitadas**, sem testes ignorados. Sem emulação, passam 74 testes comuns
-e os 81 opcionais ficam explicitamente ignorados no relatório local.
+Com os contornos traduzidos, são **177 testes e 41.031 execuções
+x86 delimitadas**, sem testes ignorados. Sem emulação, passam 85 testes comuns
+e os 92 opcionais ficam explicitamente ignorados no relatório local.
 
 As comparações isoladas executam **833 testes de linha e 124 otimizações** no
 original, cobrindo os 26 tipos, oito direções, células iguais, máscaras, objeto
@@ -165,7 +165,8 @@ Os cancelamentos continuam gerando a mensagem de término descrita em
 
 A otimização, a preparação/ajuste, a inspeção inicial e a seleção já têm tradução.
 Os dois contornos já foram traduzidos nas classes 1..3. O backend independente
-dispensa o EXE e Unicorn nesse domínio; faltam estruturas codificadas e ordens
-de desbloqueio de aliados.
+dispensa o EXE e Unicorn nesse domínio. Estruturas codificadas e ordens
+de desbloqueio de aliados foram acrescentadas em
+[ESTRUTURAS_DESBLOQUEIO.md](ESTRUTURAS_DESBLOQUEIO.md).
 Também permanecem as limitações sobre construções, tráfego, combate,
 animação e partida completa registradas em [CONTINUIDADE.md](CONTINUIDADE.md).

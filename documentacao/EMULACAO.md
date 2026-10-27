@@ -195,5 +195,18 @@ x86 e reproduz a demonstração com `SolucionadorCaminhosPython`. O backend mist
 conserva apenas prólogo/guardas e epílogo da chamada para compatibilidade da
 bancada. Detalhes e limites em [CONTORNOS.md](CONTORNOS.md).
 
-A suíte completa possui **155 testes aprovados e 36.157 execuções x86 delimitadas**,
+A suíte completa possui **177 testes aprovados e 41.031 execuções x86 delimitadas**,
 incluindo 152 chamadas dos backends de navegação, sem testes ignorados.
+
+
+## Estruturas e bloqueadores
+
+A etapa de [estruturas e desbloqueio](ESTRUTURAS_DESBLOQUEIO.md) acrescenta
+geometria dos 22 tipos, cores auxiliares, união/separação de componentes,
+inserção/remoção de rótulos e ordens de afastamento. As comparações de busca
+conferem os dois buffers, custos, regiões e registros de ocupantes. Dois
+trajetos adicionais confrontam movimento, visão, tarefas e mensagens por
+atualização. O backend Python é o código sob teste; o oráculo executa as
+chamadas internas originais. Nos casos extensos de procura de célula livre,
+checkpoints preservam pilha e registradores entre consultas, mantendo os
+limites por trecho.

@@ -1,15 +1,14 @@
 """Busca independente para as classes 1..3: sem EXE, Unicorn ou JIT.
 
-Usa as traduções de preparação, contorno, seleção e otimização. Recusa estruturas
-codificadas e ordens de desbloqueio a aliados.
+Usa as traduções de preparação, contorno, seleção e otimização, incluindo
+estruturas com cores auxiliares fornecidas pelo mundo e ordens a bloqueadores.
 """
 import struct
 from candidatos_rota import iniciar_candidatos, selecionar_candidato
 from caminhos import serializar_rota
-from contornos_caminhos import construir_contornos, vizinha_contorno
-from movimento import direcao_entre_celulas
+from contornos_caminhos import construir_contornos
 from otimizacao_caminhos import ContextoLinha, otimizar_rota
-from passagem_unidades import procurar_ocupante
+from desbloqueio_unidades import afastar_bloqueadores
 from preparacao_destino import preparar_destino
 
 
@@ -35,8 +34,6 @@ class SolucionadorCaminhosPython:
         contexto = ContextoLinha.da_unidade(mundo, indice)
         if contexto.classe not in (1, 2, 3):
             raise NotImplementedError('Busca independente disponível para classes 1..3')
-        if any(v & 0x8000 for v in mundo.regioes):
-            raise NotImplementedError('Busca com estruturas exige a grade auxiliar de cores')
         if len(mundo.rotas[indice]) != 512:
             raise ValueError('A rota da unidade deve ter 512 bytes')
         p = preparar_destino(mundo, indice, mundo.palavra(indice, 8), mundo.palavra(indice, 0x7e))
@@ -87,14 +84,4 @@ class SolucionadorCaminhosPython:
         return self._resultado
 
     def desbloquear(self, mundo, indice):
-        d = direcao_entre_celulas(mundo.palavra(indice, 8), mundo.palavra(indice, 0x7e))
-        for tentativa in range(3):
-            c = vizinha_contorno(mundo, mundo.palavra(indice, 8), d)
-            if c != 0xffff:
-                outro = procurar_ocupante(mundo, c)
-                if (outro != 0xffff and mundo.unidades[outro * 276] == mundo.unidades[indice * 276] and
-                        mundo.palavra(outro, 8) == mundo.palavra(outro, 0x7e)):
-                    raise NotImplementedError('Ordenar deslocamento a um aliado bloqueador ainda exige o original')
-            d = ((d - 3) % 16) + 1 if tentativa == 0 else ((d + 1) % 16) + 1
-        mundo.unidades[indice * 276 + 0x88], mundo.unidades[indice * 276 + 0x8b] = 1, 0
-        return dict(desbloqueou=False)
+        return afastar_bloqueadores(mundo, indice)

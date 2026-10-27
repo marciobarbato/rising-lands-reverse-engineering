@@ -45,11 +45,3 @@ print(json.dumps([executar_cenario(n, SolucionadorCaminhosPython()) for n in
         for novo, original in zip(novos, originais):
             for campo, esperado in original.items():
                 self.assertEqual(novo[campo], esperado, (novo['nome'],campo))
-
-    def test_backend_independente_recusa_estruturas_sem_alterar_unidade(self):
-        from solucionador_python import SolucionadorCaminhosPython
-        m = preparar(3)
-        m.regioes[0] = 0x8000
-        antes = bytes(m.unidades)
-        with self.assertRaises(NotImplementedError): SolucionadorCaminhosPython().iniciar(m, 0)
-        self.assertEqual(bytes(m.unidades), antes)

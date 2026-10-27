@@ -7,9 +7,9 @@ ocupação **1, 2 e 3**, que cobrem os 26 tipos da tabela estudada.
 à preparação, seleção, otimização e serialização já reconstruídas. Esse backend
 não carrega o EXE nem importa Unicorn.
 
-O domínio atual recusa estruturas codificadas na grade de regiões e ordens de
-desbloqueio que exigiriam mover um aliado. Consultas de passagem por ocupantes
-são suportadas no cálculo; efeitos de atropelamento e outras ações físicas
+Estruturas codificadas, cores auxiliares e ordens para afastar aliados bloqueadores
+foram acrescentadas em [ESTRUTURAS_DESBLOQUEIO.md](ESTRUTURAS_DESBLOQUEIO.md).
+Consultas de passagem por ocupantes são suportadas no cálculo; efeitos de atropelamento e outras ações físicas
 continuam sujeitos aos limites do modelo de movimento.
 
 ## Reproduzir
@@ -111,15 +111,14 @@ x86 executa somente o prólogo/guardas e o epílogo dessa chamada; a referência
 `SolucionadorOriginal` continua executando o algoritmo original inteiro.
 O desbloqueio administrativo ainda pode usar funções originais no backend misto.
 
-No backend independente, o ramo de desbloqueio que não encontra um aliado
-parado pode terminar em Python. Caso seja necessário ordenar que um aliado
-se afaste, há recusa explícita: essa operação ainda precisa ser traduzida.
+O backend independente também traduz o desbloqueio e emite as ordens de
+movimento, conforme [ESTRUTURAS_DESBLOQUEIO.md](ESTRUTURAS_DESBLOQUEIO.md).
 
 ## Comparações e resultados
 
-A suíte completa passou com **155 testes e 36.157 execuções x86 delimitadas**,
-sem falhas, erros ou testes ignorados. Sem emulação, passam 74 testes comuns;
-os 81 opcionais ficam explicitamente ignorados no relatório local.
+Com estruturas e desbloqueio integrados, a suíte passou com **177 testes e 41.031 execuções x86 delimitadas**,
+sem falhas, erros ou testes ignorados. Sem emulação, passam 85 testes comuns;
+os 92 opcionais ficam explicitamente ignorados no relatório local.
 
 A matriz de contornos cobre os 26 tipos nos cenários de parede/obstáculo,
 104 mapas determinísticos, 96 combinações de ocupantes e dois casos de falha.
@@ -143,7 +142,7 @@ Na parede com passagem, os custos continuam `[65535, 7]`; o segundo percurso
 vence. A mensagem de término continua distinta da comprovação de chegada ao
 destino solicitado, conforme [NAVEGACAO.md](NAVEGACAO.md).
 
-Continuam pendentes a grade auxiliar e o contorno de estruturas codificadas,
-as ordens de desbloqueio a aliados, a inicialização integral dos mapas reais
+A grade auxiliar, os contornos de estruturas e as ordens a aliados bloqueadores
+já foram traduzidos. Continuam pendentes a inicialização integral dos mapas reais
 e a validação numa partida. O modo Python demonstrado não significa que
 economia, combate, interface ou renderização completos já estejam reconstruídos.

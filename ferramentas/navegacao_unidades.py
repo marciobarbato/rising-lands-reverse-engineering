@@ -2,7 +2,7 @@
 
 O cálculo geral é fornecido por um backend explícito. SolucionadorOriginal usa
 os bytes originais em Unicorn; SolucionadorCaminhosPython executa as traduções
-das classes 1..3 sem emulação, com limites para estruturas e desbloqueios.
+das classes 1..3 sem emulação, incluindo estruturas e desbloqueios.
 """
 import struct
 from avanco_unidades import MundoFisico
@@ -11,6 +11,7 @@ from caminhos import proxima_celula, atualizar_espera
 from passagem_unidades import consultar_passagem
 from mensagens_chegada import notificar_estado
 from regioes_mapa import reconstruir_regioes
+from estruturas_caminhos import CoresEstruturas, modificar_regiao_estrutura
 
 
 class MundoNavegacao(MundoFisico):
@@ -24,9 +25,16 @@ class MundoNavegacao(MundoFisico):
         self.semente_caminhos = 1
         self.mascaras_alianca = bytearray(5)
         self.permitir_aliados_parados = 0
+        self.cores_estruturas = CoresEstruturas(largura, altura)
+        self.ultimo_bloqueador = self.ultima_celula_livre = 0
+
+    def modificar_regiao_estrutura(self, indice, subcelula, celula, inserir):
+        return modificar_regiao_estrutura(self, indice, subcelula, celula, inserir)
 
     def refazer_regioes(self):
         """Reconstrói rótulos e reaplica ocupação; usar antes de executar a busca."""
+        if any(v & 0x8000 for v in self.regioes):
+            raise NotImplementedError('Refaça as regiões naturais antes de inserir estruturas; remapeamento integral ainda pendente')
         regioes, atributos, quantidade = reconstruir_regioes(self.atributos, self.tiles, self.objetos,
                                                              self.marcadores_obstaculos_tiles, self.largura, self.altura)
         self.regioes, self.atributos = regioes, atributos
@@ -129,7 +137,7 @@ class MundoNavegacao(MundoFisico):
                 u[p + 0x88], u[p + 0x8b] = 6, 0
             else:
                 # EnginDebloqueNextCase pode ordenar que um aliado saia da frente.
-                # O backend original conserva esse ramo e devolve as unidades alteradas.
+                # Ambos os backends aplicam as ordens e devolvem o resultado.
                 mudancas = self.solucionador.desbloquear(self, indice)
                 u = self.unidades
                 if mudancas['desbloqueou']:

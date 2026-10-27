@@ -4,7 +4,8 @@ Implementação parcial em [`caminhos.py`](../ferramentas/caminhos.py); experime
 com as rotinas originais em [`bancada_caminhos.py`](../ferramentas/bancada_caminhos.py).
 A pesquisa usa o mesmo RISING.EXE identificado em [EMULACAO.md](EMULACAO.md).
 O backend de [CONTORNOS.md](CONTORNOS.md) já executa o núcleo das três classes
-de ocupação sem EXE ou Unicorn, com limites para estruturas e desbloqueio de aliados.
+de ocupação sem EXE ou Unicorn, incluindo estruturas e desbloqueio de aliados
+conforme [ESTRUTURAS_DESBLOQUEIO.md](ESTRUTURAS_DESBLOQUEIO.md).
 Não há evidência suficiente
 para classificar o original como A*. O SBL revelou os nomes originais
 `CheminCalcul`, `Chemin_Verouille`, `OptimiseChemin` e `EnginNextCaseChemin`;
@@ -169,8 +170,9 @@ A implementação Python cobre as primitivas descritas, componentes naturais,
 movimento direto, consumo, nova busca, `TestLigneOptimise` e `OptimiseChemin`,
 assim como preparação/ajuste, início/seleção e construção dos dois contornos
 nas classes 1..3. O backend original permite conferir essa implementação
-independente. Os próximos passos são preparar construções e suas grades
-auxiliares, traduzir o desbloqueio de aliados, ampliar tráfego e inicializar mapas reais.
+independente. As grades auxiliares e o desbloqueio de aliados já foram traduzidos
+em [ESTRUTURAS_DESBLOQUEIO.md](ESTRUTURAS_DESBLOQUEIO.md). Os próximos passos
+são ampliar tráfego e inicializar mapas reais.
 
 Evidências novas: `evidencias/caminhos-ia/`, `caminhos-auxiliares/` e
 `caminhos-runtime/`; funções maiores já estavam em `evidencias/ghidra/`.

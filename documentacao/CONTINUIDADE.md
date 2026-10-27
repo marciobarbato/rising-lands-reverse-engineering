@@ -11,7 +11,7 @@
 - Renderização estática do terreno da missão 1 com IDs corrigidos.
 - Testes sintéticos e contra o corpus real.
 - Ghidra e JDK portáteis instalados, com descompilador nativo ARM64 compilado.
-- Exportações em 333 endereços distintos e sete assinaturas de acessores corrigidas.
+- Exportações em 345 endereços distintos e sete assinaturas de acessores corrigidas.
 - Propriedade, coordenadas, vida e campos de carga das 2.604 entradas de unidades.
 - Rotina de cura reconstruída e máximo de vida localizado na tabela de tipos.
 - Primitivas de movimento e quatro parâmetros dos 26 inicializadores reconstruídos.
@@ -42,7 +42,9 @@
 - Corpo dos dois contornos traduzido nas classes 1..3, incluindo pegadas de quatro células.
 - Backend independente para os 26 tipos, com preparação, contorno, escolha e otimização sem EXE/Unicorn.
 - Trajetos e mensagens comparados por atualização com a referência x86 e reproduzidos com imports de emulação bloqueados.
-- 155 testes aprovados e 36.157 execuções x86 delimitadas, incluindo 152 dos backends
+- Cores/contornos de estruturas, geometria dos 22 tipos e ordens a aliados bloqueadores traduzidos.
+- Duas demonstrações adicionais com estruturas, ordens, avanço físico e mensagens conferidos no x86.
+- 177 testes aprovados e 41.031 execuções x86 delimitadas, incluindo 152 dos backends
   de navegação. Validação registrada em `relatorios/validacao-emulada.json`, sem iniciar o jogo.
   O teste do despachante superior substitui etapas; os testes da máquina de tarefas
   e das operações suportadas executam suas chamadas originais.
@@ -51,12 +53,12 @@
 
 | Tema | Evidência disponível | Trabalho necessário |
 |---|---|---|
-| Caminhos e colisão | Núcleo das classes 1..3 em Python, ligado à física e conferido com o x86 | Completar cores/contornos de estruturas, ordens a aliados bloqueadores e tráfego/mapas reais |
+| Caminhos e colisão | Núcleo das classes 1..3 em Python, ligado à física e conferido com o x86 | Ampliar tráfego e inicializar mapas reais com o ciclo completo de estruturas |
 | IA | Máquina de tarefas e ordens de movimento individuais/de grupo com efeitos confirmados | Completar seleção espacial da tarefa 16, mensagens e operações de economia/guerra |
 | Movimento e tempo | Desvios locais e gerais ligados ao avanço, ocupação, visão/minimapa, conclusão e mensagens | Completar despacho, fome/armadilhas, atropelamento e medir a taxa efetiva |
 | Combate | Aritmética parcial de dano, consulta de proximidade e cura confirmadas | Alvos, alcance, cadência, tecnologias e efeitos de morte |
 | Economia | Custos e blocos de recursos | Associar IDs internos, produção, consumo e filas |
-| Construções | Primeiro bloco indexado do ETA | Identificar tipos, campos, posição e estados |
+| Construções | Geometria inicial dos 22 tipos, regiões sob ocupação e componentes de cores traduzidos | Completar carga, construção/demolição, produção e estados |
 | Instâncias de unidades | Dono, coordenadas, vida e cópia disco→RAM confirmados | Completar ordens, significado dos estados e campos derivados |
 | Campanha | Blocos variáveis e textos de missões | Decifrar condições, eventos e vitória/derrota |
 | Sufixo ETA | Tamanho constante e hashes por mapa | Mapear as camadas restantes e seus consumidores |
@@ -76,9 +78,10 @@ o núcleo das três classes sem emulação; `SolucionadorOriginal` permanece com
 referência e `SolucionadorParcialPython` conserva a ponte com os trechos
 administrativos originais. Veja [CONTORNOS.md](CONTORNOS.md),
 [PREPARACAO_CANDIDATOS.md](PREPARACAO_CANDIDATOS.md) e
-[OTIMIZACAO_CAMINHOS.md](OTIMIZACAO_CAMINHOS.md). Prosseguir com as ordens de
-desbloqueio a aliados e a grade auxiliar de cores/contornos de estruturas antes de
-testar obstáculos de construções e ampliar cenários com várias unidades.
+[OTIMIZACAO_CAMINHOS.md](OTIMIZACAO_CAMINHOS.md). As ordens de desbloqueio a
+aliados e a grade auxiliar de cores/contornos foram traduzidas em
+[ESTRUTURAS_DESBLOQUEIO.md](ESTRUTURAS_DESBLOQUEIO.md). Prosseguir com o ciclo
+completo de remapeamento/inserção de estruturas em mapas reais e ampliar tráfego.
 Para a IA, seguir [SIMBOLOS.md](SIMBOLOS.md) e [TAREFAS.md](TAREFAS.md).
 A tabela `0x514910` vem de `RISING.RUL`; seus 140 nomes foram resolvidos pelo SBL.
 As operações `V_DeplacerUnite` e `V_DeplaceGroupe` já estão integradas conforme
