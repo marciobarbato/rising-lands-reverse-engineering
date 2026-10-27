@@ -1,7 +1,7 @@
 {
   "python": "3.9.6",
   "emulacao_habilitada": false,
-  "testes": 119,
+  "testes": 129,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -219,6 +219,26 @@
     },
     {
       "teste": "test_emulacao_ordens.DiferencialOrdens.test_todos_os_estados_e_truncamento_u16",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_otimizacao.DiferencialOtimizacao.test_backend_misto_trajetos_mensagens_e_novo_obstaculo",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_otimizacao.DiferencialOtimizacao.test_linha_26_tipos_direcoes_blocos_e_mesma_celula",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_otimizacao.DiferencialOtimizacao.test_objeto_fd_mascaras_bordas_e_limite_255",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_otimizacao.DiferencialOtimizacao.test_ocupantes_aliancas_direcoes_e_excecoes",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_otimizacao.DiferencialOtimizacao.test_otimizacao_lacos_cauda_e_rotas_deterministicas",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {

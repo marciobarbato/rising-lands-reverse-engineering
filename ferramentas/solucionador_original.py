@@ -55,6 +55,9 @@ class BancadaNavegacao(BancadaAvanco):
         self.executar(0x43b30b, self.intervalos,
                       dict(EAX=mundo.palavra(indice, 8), EDX=mundo.palavra(indice, 0x7e), EBX=indice, ECX=mascara),
                       pilha={4: struct.pack('<III', rota, 0, 0)}, limite_instrucoes=1000000)
+        return self.calcular(mundo, indice)
+
+    def calcular(self, mundo, indice):
         self.executar(0x42f214, self.intervalos, limite_instrucoes=1000000)
         return self.resultado(indice)
 
@@ -121,8 +124,7 @@ class SolucionadorOriginal:
     def continuar(self, mundo, indice):
         self._validar(mundo)
         self.bancada.carregar_navegacao(mundo)
-        self.bancada.executar(0x42f214, self.bancada.intervalos, limite_instrucoes=1000000)
-        return self.bancada.resultado(indice)
+        return self.bancada.calcular(mundo, indice)
 
     def desbloquear(self, mundo, indice):
         b = self.bancada

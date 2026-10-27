@@ -146,3 +146,21 @@ comparam física, visão, minimapa e tarefas após cada atualização. Os desvio
 locais e o controle dos estados são Python; o cálculo geral é original emulado.
 Assim, esses testes validam a integração e a tradução parcial, sem alegar uma
 busca geral independente. Detalhes e limitações em [NAVEGACAO.md](NAVEGACAO.md).
+
+## Otimização traduzida e retomada da bancada
+
+`bancada_otimizacao.py` executa as funções originais `TestLigneOptimise` e
+`OptimiseChemin` sem substituí-las. As comparações isoladas conferem retorno,
+contador, prefixos parciais, o buffer inteiro de 512 bytes e o flag de passagem
+de aliados parados. Há 833 chamadas de linha e 124 de otimização nessa matriz.
+
+O backend misto para na entrada de `OptimiseChemin` e usa a implementação Python.
+Nesse modo há uma substituição explícita; a bancada de referência continua
+executando as funções originais. O novo método `retomar` conserva pilha e
+registradores de um checkpoint, aplica os mesmos limites da execução normal
+e conta o trecho retomado como uma execução delimitada. Não fornece APIs Windows.
+
+A suíte completa possui 129 testes aprovados e 31.118 execuções delimitadas,
+incluindo 26 dos backends de navegação. A parcela do backend é separada no JSON.
+Os cinco trajetos do teste misto comparam o estado após cada atualização, até a
+entrega da mensagem e retomada da tarefa. Veja [OTIMIZACAO_CAMINHOS.md](OTIMIZACAO_CAMINHOS.md).

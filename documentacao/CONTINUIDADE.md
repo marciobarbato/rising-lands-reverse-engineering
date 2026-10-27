@@ -35,7 +35,9 @@
 - Componentes naturais com quatro/oito vizinhos e limites do mapa reconstruídos.
 - Busca geral original emulada ligada à física, visão, mensagens e tarefas.
 - Quatro trajetos com obstáculos e uma colisão surgindo durante a rota comparados ao x86.
-- 119 testes aprovados e 27.230 execuções x86 delimitadas, incluindo 14 do backend
+- TestLigneOptimise e OptimiseChemin traduzidos, com buffers completos conferidos.
+- Backend opcional com otimização Python integrado à busca e aos trajetos/mensagens.
+- 129 testes aprovados e 31.118 execuções x86 delimitadas, incluindo 26 do backend
   de navegação. Validação registrada em `relatorios/validacao-emulada.json`, sem iniciar o jogo.
   O teste do despachante superior substitui etapas; os testes da máquina de tarefas
   e das operações suportadas executam suas chamadas originais.
@@ -44,7 +46,7 @@
 
 | Tema | Evidência disponível | Trabalho necessário |
 |---|---|---|
-| Caminhos e colisão | Regiões naturais, consultas, desvios e controle Python integrados à busca original e à física | Traduzir busca/pós-processamento, completar grades de estruturas e ampliar tráfego/mapas reais |
+| Caminhos e colisão | Regiões, consultas, desvios, controle e otimização Python integrados à busca original e à física | Traduzir preparação/ajuste e geração/seleção de candidatos, completar estruturas e ampliar tráfego/mapas reais |
 | IA | Máquina de tarefas e ordens de movimento individuais/de grupo com efeitos confirmados | Completar seleção espacial da tarefa 16, mensagens e operações de economia/guerra |
 | Movimento e tempo | Desvios locais e gerais ligados ao avanço, ocupação, visão/minimapa, conclusão e mensagens | Completar despacho, fome/armadilhas, atropelamento e medir a taxa efetiva |
 | Combate | Aritmética parcial de dano, consulta de proximidade e cura confirmadas | Alvos, alcance, cadência, tecnologias e efeitos de morte |
@@ -66,7 +68,10 @@ A preparação é `0x43b30b`; o solucionador principal é `0x42f214`, seguido de
 continua parcial. A escolha direta, o desvio, o consumo e a nova busca estão
 ligados ao movimento por `MundoNavegacao`; a busca geral ainda exige o backend
 `SolucionadorOriginal`. Traduzir esse núcleo sem trocar o comportamento por
-um algoritmo presumido. Preparar a grade auxiliar de estruturas antes de
+um algoritmo presumido. O backend `SolucionadorComOtimizacaoPython` já executa
+o teste de linha e a otimização reconstruídos, conforme
+[OTIMIZACAO_CAMINHOS.md](OTIMIZACAO_CAMINHOS.md). Restam a preparação/ajuste do
+destino e a geração/seleção dos candidatos. Preparar a grade auxiliar de estruturas antes de
 testar obstáculos de construções e ampliar cenários com várias unidades.
 Para a IA, seguir [SIMBOLOS.md](SIMBOLOS.md) e [TAREFAS.md](TAREFAS.md).
 A tabela `0x514910` vem de `RISING.RUL`; seus 140 nomes foram resolvidos pelo SBL.

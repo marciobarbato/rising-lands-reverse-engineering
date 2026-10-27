@@ -48,27 +48,39 @@ def executar_cenario(nome,solucionador=None,limite=1200):
     else:raise RuntimeError('Limite de atualizações do cenário: '+nome)
     maquina.atualizar(0)
     if any((c&255,c>>8) in bloqueios for c in trajeto):raise RuntimeError('Trajeto atravessou obstáculo')
-    return dict(nome=nome,inicio=[2,4],destino_solicitado=[10,4],
+    resultado = dict(nome=nome,inicio=[2,4],destino_solicitado=[10,4],
                 destino_efetivo=[m.palavra(0,0x7e)&255,m.palavra(0,0x7e)>>8],
                 posicao_final=[atual&255,atual>>8],alcancou_destino_solicitado=atual==0x40a,
                 atualizacoes=ciclo,bloqueios=bloqueios,numero_regioes=numero_regioes,
                 trajeto=[[c&255,c>>8] for c in trajeto],estados_caminho=estados,
                 buscas=m.historico_navegacao,eventos=eventos,tarefas_ativas_ao_final=maquina.ativas)
+    if solucionador is not None and hasattr(solucionador.bancada, 'otimizacoes_python'):
+        resultado['otimizacoes_python'] = solucionador.bancada.otimizacoes_python
+    return resultado
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--original',action='store_true',help='Habilita a busca geral original em Unicorn/JIT')
+    modo = parser.add_mutually_exclusive_group()
+    modo.add_argument('--original',action='store_true',help='Habilita a busca geral original em Unicorn/JIT')
+    modo.add_argument('--misto',action='store_true',help='Busca original com otimização reconstruída em Python')
     args=parser.parse_args()
-    if args.original:
-        from solucionador_original import SolucionadorOriginal
-        resultados=[executar_cenario(n,SolucionadorOriginal()) for n in ('obstaculo','parede_com_passagem','sem_passagem','destino_bloqueado')]
+    if args.original or args.misto:
+        if args.misto:
+            from solucionador_misto import SolucionadorComOtimizacaoPython as Solucionador
+        else:
+            from solucionador_original import SolucionadorOriginal as Solucionador
+        resultados=[executar_cenario(n,Solucionador()) for n in ('obstaculo','parede_com_passagem','sem_passagem','destino_bloqueado')]
     else:
         resultados=[executar_cenario('obstaculo')]
     r=dict(contexto='Mapas, unidades e tarefas sintéticos; geração de regiões e movimento em Python.',
            busca_geral='Chemin_Verouille/CheminCalcul originais emulados' if args.original else 'não necessária neste cenário local',
            algoritmo_geral_traduzido=False,cenarios=resultados)
-    destino=Path(__file__).resolve().parents[1]/'relatorios'/('desvios-original.json' if args.original else 'desvios-local.json')
+    if args.misto:
+        r['busca_geral'] = 'Chemin_Verouille/CheminCalcul originais emulados; otimização em Python'
+        r['rotinas_traduzidas'] = ['OptimiseChemin', 'TestLigneOptimise']
+    nome = 'desvios-misto.json' if args.misto else ('desvios-original.json' if args.original else 'desvios-local.json')
+    destino=Path(__file__).resolve().parents[1]/'relatorios'/nome
     destino.write_text(json.dumps(r,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(str(destino))
 

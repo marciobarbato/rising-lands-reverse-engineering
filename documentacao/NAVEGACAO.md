@@ -13,6 +13,11 @@ uma tradução completa de `CheminCalcul` ou evidência suficiente para chamá-l
 A*. O executável Windows não é iniciado; a bancada usa memória sintética,
 intervalos de código declarados e limites de execução.
 
+O backend opcional `SolucionadorComOtimizacaoPython` já substitui o teste de
+linha e a otimização pelas traduções Python. Veja
+[OTIMIZACAO_CAMINHOS.md](OTIMIZACAO_CAMINHOS.md) para o contrato, a comparação
+com a referência e as partes da busca que ainda continuam originais.
+
 ## Reproduzir
 
 Execute dentro de `engenharia-reversa`:
@@ -23,6 +28,9 @@ python3 ferramentas/demonstrar_desvios.py
 
 # Inclui parede com passagem, parede fechada e destino bloqueado.
 python3 ferramentas/demonstrar_desvios.py --original
+
+# Busca original com teste de linha e otimização em Python.
+python3 ferramentas/demonstrar_desvios.py --misto
 
 # Suíte comum e suíte diferencial opcional.
 python3 ferramentas/validar.py
@@ -160,8 +168,9 @@ resultado 1 entregue após esses cancelamentos.
 
 ## Validação e lacunas
 
-A suíte completa passou com **119 testes e 27.230 execuções x86 delimitadas**,
-incluindo 14 chamadas do backend de navegação, sem testes ignorados. A execução
+A etapa inicial de navegação passou com **119 testes e 27.230 execuções x86**.
+Com a otimização traduzida, a suíte possui **129 testes e 31.118 execuções
+x86 delimitadas**, incluindo 26 chamadas dos backends de navegação, sem testes ignorados. A execução
 sem emulação registra explicitamente os testes opcionais ignorados.
 
 Os testes diferenciais cobrem os 26 tipos, oito direções de deslocamento,
@@ -183,7 +192,8 @@ minimapa e tarefas. Não substituem chamadas internas dessas rotinas. A referên
 usa paradas declaradas nos pontos que excluem animação contínua e som, como
 o coordenador Python; não é uma execução do laço inteiro do jogo.
 
-Continuam pendentes a tradução independente da busca geral e do pós-processamento,
+O teste de linha e a otimização posterior já têm tradução independente.
+Continuam pendentes a preparação/ajuste de destino e a geração/seleção de candidatos,
 a grade auxiliar de estruturas codificadas com `0x8000`, os efeitos de
 atropelamento, tráfego com várias unidades, mapas reais inicializados por inteiro,
 animação contínua, som e validação numa partida. O backend recusa estruturas

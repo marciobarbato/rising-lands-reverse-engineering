@@ -92,6 +92,22 @@ class BancadaX86:
             self.cpu.mem_write(PILHA + 0x8000 + offset, dados)
         for nome, valor in (registradores or {}).items():
             self.cpu.reg_write(getattr(x86, 'UC_X86_REG_' + nome.upper()), valor & 0xffffffff)
+        return self._executar_ate_parada(entrada, limite_instrucoes)
+
+    def retomar(self, entrada, intervalos, parada=RETORNO, limite_instrucoes=20000):
+        """Retoma um checkpoint explícito, preservando registradores e pilha.
+
+        Cada trecho retomado conta como uma execução delimitada e usa os mesmos
+        limites de endereço/tempo da entrada normal. Não inicializa uma chamada.
+        """
+        if not 1 <= limite_instrucoes <= 1000000:
+            raise ValueError('Limite de instruções deve estar entre 1 e 1000000')
+        self.execucoes += 1
+        self.permitidos = intervalos
+        self.paradas = {parada} if isinstance(parada, int) else set(parada)
+        return self._executar_ate_parada(entrada, limite_instrucoes)
+
+    def _executar_ate_parada(self, entrada, limite_instrucoes):
         self.cpu.emu_start(entrada, RETORNO, timeout=1_000_000, count=limite_instrucoes)
         if self.cpu.reg_read(x86.UC_X86_REG_EIP) not in self.paradas:
             raise RuntimeError('Trecho não alcançou a parada dentro do limite da bancada')
