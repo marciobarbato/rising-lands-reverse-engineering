@@ -4,7 +4,7 @@
 
 - Repositório Git independente em `Rising Lands/engenharia-reversa`.
 - Inventário e identificação do executável local.
-- 27 trechos x86 exportados com bytes e anotações.
+- 36 trechos x86 exportados com bytes e anotações.
 - Leitores CMP e ETA independentes, em português, com validação de limites.
 - Sequência de carregamento dos 38 mapas reconciliada com o código original.
 - Carregador dos atributos dos tipos reconstruído e matrizes de dano extraídas.
@@ -16,14 +16,16 @@
 - Rotina de cura reconstruída e máximo de vida localizado na tabela de tipos.
 - Primitivas de movimento e quatro parâmetros dos 26 inicializadores reconstruídos.
 - Adições, reduções e aplicação de dano comparadas com o x86 original.
-- 37 testes aprovados, incluindo 8.932 execuções na bancada, sem iniciar o jogo.
+- Laço Windows, atualização antes do desenho e divisor F1–F4 rastreados.
+- Contadores de ciclo, recarga e gerador aleatório reconstruídos e emulados.
+- 46 testes aprovados, incluindo 10.736 execuções na bancada, sem iniciar o jogo.
 
 ## Questões em aberto
 
 | Tema | Evidência disponível | Trabalho necessário |
 |---|---|---|
 | Caminhos e colisão | Grade de atributos, protótipo com A* | Localizar o algoritmo original e decifrar bits de terreno |
-| Movimento e tempo | Direções, giro, prefixo de integração e parâmetros por tipo confirmados | Relógio, descontos, chegada completa, ocupação e visão |
+| Movimento e tempo | Direções, giro, prefixo, parâmetros e ciclo antes do desenho confirmados | Medir taxa efetiva, descontos, chegada completa, ocupação e visão |
 | Combate | Aritmética parcial de dano, consulta de proximidade e cura confirmadas | Alvos, alcance, cadência, tecnologias e efeitos de morte |
 | Economia | Custos e blocos de recursos | Associar IDs internos, produção, consumo e filas |
 | Construções | Primeiro bloco indexado do ETA | Identificar tipos, campos, posição e estados |
@@ -36,8 +38,8 @@
 
 ## Próxima investigação recomendada
 
-Seguir as chamadas que chegam a `0x448f50` para recuperar o relógio e a frequência
-de atualização. Completar os efeitos de chegada em `0x448704` e a busca de caminho
+Medir a taxa efetiva do ciclo identificado em [CADENCIA.md](CADENCIA.md).
+Completar os efeitos de chegada em `0x448704` e a busca de caminho
 em `0x43b30b`. No combate, seguir o preenchimento da tabela de modificadores
 `0x4dfba0` e a grade `0x4e0f38`, que afeta o bônus de proximidade.
 

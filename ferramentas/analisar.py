@@ -47,6 +47,15 @@ TRECHOS = {
     'orientacao_unidade': (0x448599, 0x448699),
     'inicio_passo_unidade': (0x448704, 0x4488a8),
     'cura_unidade': (0x457122, 0x45718a),
+    'laco_principal_windows': (0x460170, 0x460277),
+    'ciclo_atualizacao_desenho': (0x47500e, 0x47509d),
+    'despacho_simulacao': (0x42d2de, 0x42d4f5),
+    'iterar_unidades': (0x456db5, 0x456f0a),
+    'mensagens_teclas_cadencia': (0x4181a1, 0x41858d),
+    'filtro_cadencia_desenho': (0x417909, 0x41792b),
+    'gerador_aleatorio': (0x489728, 0x4897a4),
+    'contador_frequencia': (0x43f710, 0x43f7af),
+    'apresentar_superficie': (0x43f14f, 0x43f31c),
 }
 
 

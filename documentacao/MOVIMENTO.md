@@ -79,7 +79,9 @@ Tabela completa: [`movimento-tipos.json`](../relatorios/movimento-tipos.json).
 
 Um soldado com incremento 2 e desconto zero precisa de 16 chamadas efetivas à
 integração para completar o contador de uma célula. **Isso não estabelece 16
-frames, 16 ms ou uma duração em segundos.** O ritmo da simulação não foi recuperado.
+frames, 16 ms ou uma duração em segundos.** O [ciclo principal](CADENCIA.md)
+atualiza o mundo antes do desenho e pode pular desenhos; a taxa efetiva depende
+da execução e ainda não foi medida.
 
 ## Caminhos ainda parciais
 

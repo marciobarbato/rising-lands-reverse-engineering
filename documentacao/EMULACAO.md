@@ -47,6 +47,10 @@ falhas, erros, motivos de testes ignorados e número de execuções x86 delimita
 | `0x457350` | Quatro parâmetros de movimento em todos os 26 ramos de tipo |
 | Trechos de `0x4502f0` | Adições, redução e aplicação de dano, incluindo zero com proteção |
 | `0x4500e4` | Consulta de proximidade com tipos, donos e distâncias diferentes |
+| `0x454530` | Acúmulo de recarga e limiares negativos |
+| `0x475014`, `0x417909` | Contadores de ciclo, overflow e seleção de desenho |
+| `0x4181a1` | Tratamento de F1–F4 para alterar divisor de desenho |
+| `0x489728` | Gerador aleatório no caminho positivo, incluindo semente zero |
 
 Cada chamada tem limite de um segundo e 20.000 instruções; um gancho recusa
 saltos para fora dos trechos autorizados. O verificador exige alcançar uma

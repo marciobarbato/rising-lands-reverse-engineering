@@ -4,7 +4,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'ferramentas'))
 from movimento import (direcao_entre_celulas, celula_vizinha, atualizar_orientacao,
                        integrar_prefixo_passo, pode_avancar, parametros_tipo)
-from combate import dano_bruto_unidade, reduzir_dano, aplicar_dano_parcial
+from combate import dano_bruto_unidade, reduzir_dano, aplicar_dano_parcial, avancar_recarga
 
 
 class Movimento(unittest.TestCase):
@@ -34,6 +34,11 @@ class Movimento(unittest.TestCase):
 
 
 class CombateParcial(unittest.TestCase):
+    def test_recarga_acumula_e_para_no_limiar(self):
+        self.assertEqual(avancar_recarga(98, 100, 1), 99)
+        self.assertEqual(avancar_recarga(99, 100, 1), 99)
+        self.assertEqual(avancar_recarga(0, 100, 101), 0)
+
     def test_adicao_truncada_e_reducao_com_sinal(self):
         self.assertEqual(dano_bruto_unidade(250, 10), 4)
         self.assertEqual(reduzir_dano(20, 1, 4), 15)

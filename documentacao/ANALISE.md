@@ -122,7 +122,7 @@ classifica como algoritmos recuperados do original.
 
 Foram reconstruídas primitivas de [movimento](MOVIMENTO.md), a rotina de cura
 e partes da [aritmética de combate](COMBATE.md). A [bancada diferencial](EMULACAO.md)
-validou 37 testes, incluindo 8.932 execuções x86 delimitadas. O resultado inclui
+validou 46 testes, incluindo 10.736 execuções x86 delimitadas. O resultado inclui
 overflow, empate no giro e o caso de dano zero com proteção que aumenta a vida.
 
 `sh testar.sh` cobre comandos CMP, arquivos truncados, expansão gráfica integral,

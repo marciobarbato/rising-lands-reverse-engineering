@@ -67,6 +67,13 @@ afetar quando o bônus é aplicado.
 
 ## Outras modalidades e questões em aberto
 
+O avanço da recarga em `0x454530..0x454591` também foi recuperado. O campo
+`0x102` acumula um por atualização enquanto for menor que
+`tipo.RECHARGE - modificador3(dono, tipo)`. Não é um contador decrescente.
+A diferença é calculada em 32 bits e pode ser negativa; nesse caso, o contador
+não avança. `avancar_recarga` foi conferido com 515 entradas emuladas. A frequência
+das atualizações está discutida em [CADENCIA.md](CADENCIA.md).
+
 O modo 8 consulta a linha 26 da matriz, carregada de `MINE`, em `0x450475`.
 O modo 9 começa com metade da vida em `0x450494`. Os modos 3 e 4 acessam outras
 fontes e tabelas. Não foram combinados numa fórmula universal.

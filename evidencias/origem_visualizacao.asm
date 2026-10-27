@@ -53,7 +53,7 @@
 00474b85  a1708f5000            mov      eax, dword ptr [0x508f70]
 00474b8a  e8b6a8fcff            call     0x43f445
 00474b8f  b801000000            mov      eax, 1
-00474b94  e8b6a5fcff            call     0x43f14f
+00474b94  e8b6a5fcff            call     0x43f14f ; apresentar_superficie
 00474b99  a1b0244e00            mov      eax, dword ptr [0x4e24b0]
 00474b9e  e88ea2fcff            call     0x43ee31
 00474ba3  e80ca8fcff            call     0x43f3b4
@@ -69,7 +69,7 @@
 00474bcc  a1708f5000            mov      eax, dword ptr [0x508f70]
 00474bd1  e86fa8fcff            call     0x43f445
 00474bd6  b801000000            mov      eax, 1
-00474bdb  e86fa5fcff            call     0x43f14f
+00474bdb  e86fa5fcff            call     0x43f14f ; apresentar_superficie
 00474be0  81c400010000          add      esp, 0x100
 00474be6  5f                    pop      edi
 00474be7  5e                    pop      esi

@@ -15,7 +15,8 @@ sys.path.insert(0, str(RAIZ / 'ferramentas'))
 from movimento import (direcao_entre_celulas, celula_vizinha, distancia_quadratica,
                        atualizar_orientacao, integrar_prefixo_passo, pode_avancar, PARAMETROS_TIPOS)
 from unidades import curar_com_limite
-from combate import dano_bruto_unidade, reduzir_dano, aplicar_dano_parcial
+from combate import dano_bruto_unidade, reduzir_dano, aplicar_dano_parcial, avancar_recarga
+from cadencia import avancar_contadores, deve_desenhar, proximo_aleatorio
 
 
 @unittest.skipUnless(os.environ.get('RISING_EMULAR') == '1', 'Emulação opcional: RISING_EMULAR=1')
@@ -174,6 +175,58 @@ class DiferencialX86(unittest.TestCase):
                          (0x442bbe, 0x442bc5), (0x44271b, 0x442722)],
                         dict(EAX=2, EDX=0, EBX=0x0a0a, ECX=1))
                     self.assertEqual(bool(r['EAX'] & 255), mesmo_dono and dentro)
+
+    def test_contadores_ciclo_512_casos_e_overflow(self):
+        aleatorio = random.Random(47500)
+        casos = [(0xffffffff, 0xffffffff, 0xffffffff), (0, 0, 0)]
+        casos += [tuple(aleatorio.randrange(0x100000000) for _ in range(3)) for _ in range(512)]
+        for contadores in casos:
+            self.bancada.cpu.mem_write(0x508f7c, struct.pack('<III', *contadores))
+            self.bancada.executar(0x475014, [(0x475014, 0x475041)], parada=0x475041)
+            resultado = struct.unpack('<III', self.bancada.cpu.mem_read(0x508f7c, 12))
+            self.assertEqual(resultado, avancar_contadores(*contadores))
+
+    def test_filtro_de_desenho_256_casos(self):
+        for ciclo in range(32):
+            for divisor in range(1, 5):
+                for forcar in (False, True):
+                    self.bancada.cpu.mem_write(0x508f7c, struct.pack('<I', ciclo))
+                    self.bancada.cpu.mem_write(0x497284, bytes([divisor]))
+                    self.bancada.cpu.mem_write(0x4e05a2, bytes([forcar]))
+                    r = self.bancada.executar(0x417909, [(0x417909, 0x41792b)], parada={0x41792b, 0x417f2f})
+                    self.assertEqual(r['EIP'] == 0x41792b, deve_desenhar(ciclo, divisor, forcar))
+
+    def test_teclas_f1_a_f4_alteram_divisor(self):
+        self.bancada.cpu.mem_write(0x4e2f78, b'\x12')
+        for codigo in range(0x70, 0x74):
+            self.bancada.executar(0x4181a1, [(0x4181a1, 0x41858d)], parada=0x41824e,
+                                  pilha={4: struct.pack('<IIII', 0, 0x100, codigo, 0)})
+            self.assertEqual(self.bancada.cpu.mem_read(0x497284, 1)[0], codigo - 0x6f)
+
+    def test_aleatorio_512_casos_e_semente_zero(self):
+        aleatorio = random.Random(489728)
+        casos = [(0, 100), (1, 100), (0x7fffffff, 100)]
+        casos += [(aleatorio.randrange(0x80000000), aleatorio.randrange(1, 0x80000000)) for _ in range(512)]
+        for estado, limite in casos:
+            self.bancada.cpu.mem_write(0x498db4, struct.pack('<I', estado))
+            r = self.bancada.executar(0x489728, [(0x489728, 0x489775)], dict(EAX=limite))
+            novo = struct.unpack('<I', self.bancada.cpu.mem_read(0x498db4, 4))[0]
+            self.assertEqual((novo, r['EAX']), proximo_aleatorio(estado, limite))
+
+    def test_recarga_512_casos_e_limite_negativo(self):
+        aleatorio = random.Random(454530)
+        casos = [(99, 100, 0), (100, 100, 0), (0, 100, 101)]
+        casos += [tuple(aleatorio.randrange(65536) for _ in range(3)) for _ in range(512)]
+        for atual, base, modificador in casos:
+            u = bytearray(276)
+            u[0], u[1] = 1, 7
+            struct.pack_into('<H', u, 0x102, atual)
+            self.bancada.escrever_unidade(u)
+            self.bancada.cpu.mem_write(0x4965de + 7 * 50, struct.pack('<H', base))
+            self.bancada.cpu.mem_write(0x4dfba0 + 468 + 7 * 18 + 4, struct.pack('<H', modificador))
+            self.bancada.executar(0x454530, [(0x454530, 0x454591), (0x428cc0, 0x428e71)], parada=0x454591)
+            resultado = struct.unpack_from('<H', self.bancada.ler_unidade(), 0x102)[0]
+            self.assertEqual(resultado, avancar_recarga(atual, base, modificador))
 
 
 if __name__ == '__main__':

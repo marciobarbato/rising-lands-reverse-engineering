@@ -11,7 +11,7 @@ reimplementação completa do jogo.** Os nomes de funções foram atribuídos pe
 ## Resultados
 
 - Executável PE x86 de 32 bits identificado por SHA-256, com imports e evidências de runtime Watcom.
-- 27 trechos x86 com endereços, bytes e anotações para acompanhar a análise.
+- 36 trechos x86 com endereços, bytes e anotações para acompanhar a análise.
 - Carregamento dos atributos de 26 tipos de unidade reconstruído em Python.
 - Matriz de dano com 27 entradas por atacante, incluindo o tratamento da mina.
 - Estrutura de leitura dos 38 mapas ETA recuperada até o fechamento do arquivo nesse caminho.
@@ -23,7 +23,8 @@ reimplementação completa do jogo.** Os nomes de funções foram atribuídos pe
 - Cura com limite de vida reconstruída, incluindo aritmética de 16 bits.
 - Direção, giro, vizinhança, prefixo do passo e parâmetros de movimento dos 26 tipos.
 - Aritmética parcial de dano, incluindo comportamentos de borda do original.
-- 37 testes passando, com 8.932 execuções x86 delimitadas na bancada diferencial.
+- Ciclo de simulação/desenho rastreado; recarga, contadores e gerador aleatório reconstruídos.
+- 46 testes passando, com 10.736 execuções x86 delimitadas na bancada diferencial.
 
 ## Leitura recomendada
 
@@ -35,6 +36,7 @@ reimplementação completa do jogo.** Os nomes de funções foram atribuídos pe
 6. [Lacunas e próximos passos](documentacao/CONTINUIDADE.md).
 7. [Instâncias das unidades](documentacao/INSTANCIAS.md) e [Ghidra local](documentacao/GHIDRA.md).
 8. [Movimento](documentacao/MOVIMENTO.md), [combate](documentacao/COMBATE.md) e [validação emulada](documentacao/EMULACAO.md).
+9. [Ciclo do jogo e frequência de desenho](documentacao/CADENCIA.md).
 
 ## Reproduzir
 

@@ -10,6 +10,17 @@ def inteiro_com_sinal8(valor):
     return valor - 256 if valor >= 128 else valor
 
 
+def avancar_recarga(atual, recarga_tipo, modificador3=0):
+    """0x454530..0x454591: acumula até tipo.RECHARGE menos modificador 3.
+
+    A diferença é calculada em 32 bits e pode ser negativa. Nesse caso o
+    contador não avança; não se aplica clamp ou conversão da diferença para u16.
+    """
+    atual &= 65535
+    limite = (recarga_tipo & 65535) - (modificador3 & 65535)
+    return ((atual + 1) & 65535) if atual < limite else atual
+
+
 def dano_bruto_unidade(matriz, bonus_f7=0, modificador5=0, bonus_proximidade=0):
     """Modo 1 em 0x4503b8..0x45043f, condicionando o bônus à consulta externa.
 
