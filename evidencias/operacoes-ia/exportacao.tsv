@@ -1,0 +1,15 @@
+entrada	nome	resultado
+0047da7a	V_Attendre	OK
+00481280	B_Egalite	OK
+00481296	B_Superieur	OK
+004812ac	I_Addition	OK
+004812b9	I_Soustraction	OK
+004812d0	I_PourcentageAB	OK
+004812f4	I_Affecte	OK
+004812f7	I_NumMission	OK
+00481302	I_Divise	OK
+0047f31c	B_AccessibiliteChemin	OK
+0047f322	B_GicleUniteAmieDeZone	OK
+0048d6fe	debugSymAdr	OK
+0048d74b	FUN_0048d74b	OK
+0048d78d	FUN_0048d78d	OK

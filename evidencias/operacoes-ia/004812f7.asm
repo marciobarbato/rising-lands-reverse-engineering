@@ -1,0 +1,4 @@
+; SHA-256 da cópia normalizada: 26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0
+004812f7  CALL 0x0046c11a
+004812fc  AND EAX,0xffff
+00481301  RET

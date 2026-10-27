@@ -5,6 +5,10 @@ de `0x47f927`. As decisões internas de economia, combate e campanha ainda não
 formam uma IA independente. O callback obrigatório representa essas etapas
 não traduzidas, sem inventar comportamentos para substituí-las.
 
+A etapa seguinte recuperou os nomes franceses do SBL e o programa RULE,
+descritos em [SIMBOLOS.md](SIMBOLOS.md). A máquina parcial em
+[TAREFAS.md](TAREFAS.md) já executa criação, subtarefas, espera e conclusão.
+
 ## Entrada e ordem de execução
 
 O fluxo do ciclo do jogo passa por `0x47fbea`, que reduz os argumentos a oito
@@ -55,9 +59,9 @@ com decisões específicas de construção precisa seguir os opcodes dessas tare
 `0x47d314` começa pelo índice armazenado no contexto de 16 bytes do jogador.
 Índices `-1` encerram a lista. Os registros de tarefas usam passo 96 na base
 `0x512320`; metadados de operação usam passo 20 na base `0x514910`.
-O código trata ligações, estado, resultados e chamadas de operações. Essa
-estrutura sustenta o nome “interpretador de tarefas”, mas o catálogo completo
-de opcodes, parâmetros e efeitos ainda não foi recuperado.
+O nome original dessa função é `iaSolver`. O código trata ligações, estado,
+resultados e chamadas de operações. O programa e seus 140 nomes de operações
+foram recuperados do RULE/SBL; os efeitos de mundo continuam parcialmente desconhecidos.
 
 Se a lista começa em `-1`, o retorno depende de `0x514904`: zero quando esse
 global é não zero, `0x1a1a000e` quando ele é zero. Esses códigos são preservados
@@ -80,14 +84,15 @@ controle de fluxo; o corpo real de `0x482936` sempre retorna zero.
 
 As regras de aliança e de interação local entre unidades foram executadas
 sem substituição das chamadas e estão descritas em [CAMINHOS.md](CAMINHOS.md).
-Há ainda uma rotina por unidade em `0x483ed7`, exportada para análise futura;
-a exportação não significa que seu comportamento já tenha sido reconstruído.
+Há ainda uma rotina por unidade em `0x483ed7`, cujo nome original é
+`iagMessTestSendMessageEngin`; seu mecanismo de mensagens ainda precisa ser traduzido.
 
 ## Próximo passo
 
-Seguir a inicialização da tabela `0x514910`, nomear os opcodes com evidências,
-e reconstruir primeiro uma tarefa completa: criação, atualização, conclusão
-e efeito numa unidade ou estrutura. Depois, confrontar essa tarefa com os
-ramos de `0x48453c`, `0x485183` e `0x4866d7`. Evidências em
-`evidencias/ia-etapas/` e `evidencias/caminhos-ia/` incluem assembly e C automático;
-as assinaturas Watcom inferidas pelo Ghidra continuam exigindo conferência.
+Implementar os efeitos de uma operação de mundo e suas mensagens, partindo do
+programa já extraído e da máquina parcial em [TAREFAS.md](TAREFAS.md). O tipo 16
+liga consultas de posição à operação `V_DeplacerUnite`; uma tarefa de recursos
+permitirá confrontar produção, estoque e disponibilidade de unidades. Os nomes
+originais das etapas são `iagUnitNoyau`, `iagVilleNoyau`, `iagRessNoyau`,
+`iagWarNoyau` e `iaSolver`. As assinaturas Watcom inferidas pelo Ghidra ainda
+exigem conferência no assembly.

@@ -108,3 +108,12 @@ def pertence_a_propria_ocupacao(atual, consultada, classe, estado, campo_ab, mas
         return False
     celulas = (atual,) if classe == 1 else (atual, atual - 1, atual - 257, atual - 256)
     return consultada in celulas
+
+
+def consumir_passo_concluido(buffer):
+    """0x448aaa..0x448ac6: reduz a contagem após chegada; mantém células antigas."""
+    quantidade = struct.unpack_from('<H', buffer)[0]
+    novo = bytearray(buffer)
+    if quantidade:
+        struct.pack_into('<H', novo, 0, quantidade - 1)
+    return bytes(novo)

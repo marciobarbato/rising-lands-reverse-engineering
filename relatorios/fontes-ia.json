@@ -1,0 +1,17 @@
+[
+  {
+    "arquivo": "RISING.EXE",
+    "tamanho": 665600,
+    "sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+  },
+  {
+    "arquivo": "RISING.SBL",
+    "tamanho": 51451,
+    "sha256": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627"
+  },
+  {
+    "arquivo": "RISING.RUL",
+    "tamanho": 26199,
+    "sha256": "5409ec12eb7c1c663ac6e2b175070957dc3747f25b571524c941a600b3665d57"
+  }
+]

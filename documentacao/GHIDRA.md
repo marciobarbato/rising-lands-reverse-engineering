@@ -59,3 +59,21 @@ há perfil Watcom entre os perfis disponíveis nessa instalação. **Isso não �
 evidência de compilação com Visual C++.** A identificação é a string do runtime
 `WATCOM C/C++32` no próprio EXE. Ela aponta para C e/ou C++; a distinção exata
 e os nomes originais do código-fonte não foram recuperados.
+
+## Símbolos franceses originais
+
+`python3 ferramentas/extrair_ia.py` gera `relatorios/simbolos-originais.tsv`.
+O script `ImportarSimbolosOriginais.java` importa os 1.995 registros no namespace
+`OriginaisSBL`, conferindo o hash da cópia normalizada. Execução:
+
+```sh
+python3 ghidra/executar.py headless ghidra/projetos RisingLands \
+  -process RISING-analise.exe -noanalysis -scriptPath ghidra/scripts \
+  -postScript ImportarSimbolosOriginais.java relatorios/simbolos-originais.tsv evidencias/simbolos-importados.tsv
+```
+
+Endereços adicionais depois do relatório solicitam criação de funções ainda
+não reconhecidas. As 14 rotinas selecionadas da etapa de tarefas foram exportadas
+em `evidencias/operacoes-ia/`, incluindo `V_Attendre` e operações aritméticas.
+O nome original não elimina a necessidade de corrigir assinaturas por registradores.
+Ver [SIMBOLOS.md](SIMBOLOS.md) para o formato e as duplicidades da tabela.

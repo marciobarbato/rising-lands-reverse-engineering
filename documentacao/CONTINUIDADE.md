@@ -21,15 +21,20 @@
 - Comparação de regiões sob ocupantes, máscaras, alianças, passagem e espera reconstruídas.
 - Preparação, busca e pós-processamento originais executados em nove mapas sintéticos.
 - Despachante de IA reconstruído; etapas de estruturas, recursos e tarefas localizadas.
-- 61 testes aprovados, incluindo 19.194 execuções na bancada, sem iniciar o jogo.
-  O teste da orquestração da IA substitui os corpos das etapas internas.
+- 1.995 símbolos originais extraídos do SBL e importados no Ghidra.
+- RULE decodificado: 1.157 instruções, 64 entradas (42 ativas), 140 nomes resolvidos.
+- Máquina de tarefas parcial: criação, espera, subtarefas, retomada e liberação.
+- Consumo da rota localizado após a chegada da unidade à célula.
+- 77 testes aprovados, incluindo 21.267 execuções na bancada, sem iniciar o jogo.
+  O teste do despachante superior substitui etapas; os testes da máquina de tarefas
+  e das operações suportadas executam suas chamadas originais.
 
 ## Questões em aberto
 
 | Tema | Evidência disponível | Trabalho necessário |
 |---|---|---|
 | Caminhos e colisão | Primitivas reconstruídas e oráculo x86 em nove cenários | Traduzir busca/pós-processamento, gerar regiões e integrar movimento direto e consumo |
-| IA | Ordem das etapas e inativação confirmadas; interpretador localizado | Recuperar tabela de opcodes e implementar uma tarefa completa |
+| IA | Símbolos, programa RULE e máquina parcial de tarefas recuperados | Implementar operações de mundo e uma tarefa de economia/guerra completa |
 | Movimento e tempo | Direções, giro, prefixo, parâmetros e ciclo antes do desenho confirmados | Medir taxa efetiva, descontos, chegada completa, ocupação e visão |
 | Combate | Aritmética parcial de dano, consulta de proximidade e cura confirmadas | Alvos, alcance, cadência, tecnologias e efeitos de morte |
 | Economia | Custos e blocos de recursos | Associar IDs internos, produção, consumo e filas |
@@ -47,8 +52,10 @@ Prosseguir a partir de [CAMINHOS.md](CAMINHOS.md) e [IA.md](IA.md).
 A preparação é `0x43b30b`; o solucionador principal é `0x42f214`, seguido de
 `0x42e890`. A bancada já executa esses trechos, mas a tradução independente
 continua parcial. Integrar a escolha direta, o desvio e o consumo da rota.
-Para a IA, seguir a inicialização da tabela de operações `0x514910` e recuperar
-uma tarefa completa. Ainda é necessário medir a taxa efetiva do ciclo identificado
+Para a IA, seguir [SIMBOLOS.md](SIMBOLOS.md) e [TAREFAS.md](TAREFAS.md).
+A tabela `0x514910` vem de `RISING.RUL`; seus 140 nomes foram resolvidos pelo SBL.
+Implementar agora uma operação de mundo, como `V_DeplacerUnite` (`0x481146`),
+e completar o tipo de tarefa 16 ou uma tarefa de recursos, incluindo mensagens. Ainda é necessário medir a taxa efetiva do ciclo identificado
 em [CADENCIA.md](CADENCIA.md).
 Uma execução controlada do jogo poderá confrontar movimento, visibilidade e
 combate numa partida. Ainda não há runtime Windows preparado nem validação

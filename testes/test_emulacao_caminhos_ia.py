@@ -221,3 +221,15 @@ class ExperimentosSolucionador(unittest.TestCase):
                 self.assertLessEqual(max(abs(posicao[i] - anterior[i]) for i in range(2)), 1)
                 self.assertTrue(all(0 <= c < 16 for c in posicao))
                 anterior = posicao
+
+    def test_consumo_da_rota_acontece_na_chegada(self):
+        from caminhos import serializar_rota, consumir_passo_concluido
+        from bancada_caminhos import ROTA, JOGADORES
+        # A tabela de ponteiros cabe na região já reservada pela bancada.
+        self.bancada.cpu.mem_write(0x4e1924, struct.pack('<I', JOGADORES))
+        self.bancada.cpu.mem_write(JOGADORES, struct.pack('<I', ROTA))
+        for quantidade in range(256):
+            buffer = serializar_rota([0x100 + i for i in range(quantidade)])
+            self.bancada.cpu.mem_write(ROTA, buffer)
+            self.bancada.executar(0x448aaa, [(0x448aaa, 0x448ac6)], dict(EDI=0), parada=0x448ac6)
+            self.assertEqual(bytes(self.bancada.cpu.mem_read(ROTA, len(buffer))), consumir_passo_concluido(buffer))

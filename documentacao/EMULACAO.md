@@ -70,7 +70,7 @@ será necessário confrontar uma partida real para validar a simulação integra
 
 ## Escopo das novas bancadas
 
-A suíte possui 61 testes; a execução emulada registra 19.194 chamadas delimitadas.
+A suíte possui 77 testes; a execução emulada registra 21.267 chamadas delimitadas.
 O teste de IA em `test_emulacao_caminhos_ia.py` intercepta apenas sete endereços
 explícitos de etapas e injeta retornos. Valida o despachante e seus argumentos,
 mas não o conteúdo dessas etapas. Essa diferença é deliberada e registrada em
@@ -82,3 +82,15 @@ originais de preparação, busca e pós-processamento, mas fornece grades sinté
 Rotas curtas ou sucesso do buscador não equivalem à chegada da unidade; veja
 [CAMINHOS.md](CAMINHOS.md). A suíte também reproduz o relatório e confere
 adjacência, limites e células bloqueadas nas rotas emitidas.
+
+A bancada agora configura descritores de segmentos x86 planos de 32 bits.
+Isso permite executar as rotinas de strings do Watcom que copiam DS para ES,
+sem depender de seletores nulos implícitos do Unicorn. Não adiciona APIs Windows
+nem permite memória além das regiões mapeadas e intervalos de código declarados.
+
+A bancada `bancada_tarefas.py` compara criação, espera, subtarefas, conclusão e
+reutilização com a tabela inteira de 100 tarefas (9.600 bytes), contextos e
+contador global. Suas chamadas de listas e operações nativas não são substituídas.
+Também foram conferidos os 140 nomes do RULE com o resolvedor x86 e a âncora
+`_debugGetPC`, usando uma entrada do SBL por chamada para respeitar o limite
+de 20.000 instruções. Detalhes em [TAREFAS.md](TAREFAS.md).

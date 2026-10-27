@@ -1,7 +1,7 @@
 {
   "python": "3.9.6",
   "emulacao_habilitada": false,
-  "testes": 61,
+  "testes": 77,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -102,7 +102,43 @@
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {
+      "teste": "test_emulacao_caminhos_ia.ExperimentosSolucionador.test_consumo_da_rota_acontece_na_chegada",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
       "teste": "test_emulacao_caminhos_ia.ExperimentosSolucionador.test_nove_cenarios_documentados",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_tarefas.DiferencialTarefas.test_espera_criacao_conclusao_e_reutilizacao",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_tarefas.DiferencialTarefas.test_missao_aliases_constantes_e_valor_zero",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_tarefas.DiferencialTarefas.test_operacoes_aritmeticas_com_sinal_e_truncamento",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_tarefas.DiferencialTarefas.test_regra_14_do_arquivo_original",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_tarefas.DiferencialTarefas.test_reservatorio_100_e_jogadores",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_tarefas.DiferencialTarefas.test_resolucao_nativa_dos_140_nomes",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_tarefas.DiferencialTarefas.test_subtarefa_suspende_pai_e_propaga_resultado",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_tarefas.DiferencialTarefas.test_tipo_invalido_e_subtarefa_sem_entrada",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     }
   ],

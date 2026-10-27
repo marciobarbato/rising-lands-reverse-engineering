@@ -4,7 +4,9 @@ Implementação parcial em [`caminhos.py`](../ferramentas/caminhos.py); experime
 com as rotinas originais em [`bancada_caminhos.py`](../ferramentas/bancada_caminhos.py).
 A pesquisa usa o mesmo RISING.EXE identificado em [EMULACAO.md](EMULACAO.md).
 Não foi recuperado um algoritmo completo independente. Não há evidência suficiente
-para classificar o original como A*.
+para classificar o original como A*. O SBL revelou os nomes originais
+`CheminCalcul`, `Chemin_Verouille`, `OptimiseChemin` e `EnginNextCaseChemin`;
+veja [SIMBOLOS.md](SIMBOLOS.md).
 
 ## Fluxo confirmado
 
@@ -105,6 +107,13 @@ com **estado separado em `0x497164`**, e retorna o estado inteiro.
 Depois da seleção, `0x42e890` pós-processa o buffer e consulta `0x42d674`.
 A serialização `0x43b2be..0x43b300` inverte a sequência. O consumidor
 `0x448b9f` lê `buffer[contador]`: a próxima célula fica no final ativo do buffer.
+A contagem só diminui em `0x448aaa..0x448ac6`, no trecho de chegada de
+`0x448704`, depois dos efeitos de ocupação e visão. `consumir_passo_concluido`
+reproduz esse decremento; não executa os efeitos anteriores. O buffer conserva
+as células antigas fora da contagem ativa. Quando a contagem fica zero,
+`0x448b9f` coloca o estado de caminho em zero e o fluxo de movimento pode
+voltar à tentativa direta. Foram comparadas 256 contagens na bancada.
+
 Uma contagem de 255 possui tratamento específico (status 3) e não deve ser
 interpretada automaticamente como uma rota completa.
 

@@ -1,0 +1,28 @@
+; SHA-256 da cópia normalizada: 26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0
+0047cfd0  PUSH ESI
+0047cfd1  PUSH EDI
+0047cfd2  MOV ESI,EAX
+0047cfd4  MOV EDI,EBX
+0047cfd6  MOV dword ptr [EAX + 0x4],EBX
+0047cfd9  MOV dword ptr [EAX + 0x8],ECX
+0047cfdc  MOV EBX,dword ptr [ESP + 0xc]
+0047cfe0  MOV dword ptr [EAX + 0xc],EDX
+0047cfe3  TEST EBX,EBX
+0047cfe5  JZ 0x0047d005
+0047cfe7  DEC EDI
+0047cfe8  MOV dword ptr [EAX],0x0
+0047cfee  XOR EBX,EBX
+0047cff0  JMP 0x0047cff9
+0047cff2  MOV EAX,EDX
+0047cff4  INC EBX
+0047cff5  ADD EDX,ECX
+0047cff7  MOV dword ptr [EAX],EBX
+0047cff9  CMP EBX,EDI
+0047cffb  JL 0x0047cff2
+0047cffd  MOV dword ptr [EDX],0xffffffff
+0047d003  JMP 0x0047d00b
+0047d005  MOV dword ptr [EAX],0xffffffff
+0047d00b  MOV EAX,ESI
+0047d00d  POP EDI
+0047d00e  POP ESI
+0047d00f  RET 0x4

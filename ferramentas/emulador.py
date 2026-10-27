@@ -22,6 +22,7 @@ BASE = 0x400000
 UNIDADES = 0x1000000
 PILHA = 0x2000000
 RETORNO = 0x3000000
+DESCRITORES = 0x3100000
 
 
 class BancadaX86:
@@ -43,6 +44,15 @@ class BancadaX86:
         self.cpu.mem_map(UNIDADES, 0x40000)
         self.cpu.mem_map(PILHA, 0x10000)
         self.cpu.mem_map(RETORNO, 0x1000)
+        # O runtime Watcom troca ES por DS nas rotinas de strings. Seletores
+        # nulos implícitos do Unicorn não bastam depois de MOV/POP ES.
+        # Segmentos planos de 32 bits: base zero, limite 4 GiB; não são APIs Windows.
+        self.cpu.mem_map(DESCRITORES, 0x1000)
+        self.cpu.mem_write(DESCRITORES, struct.pack('<3Q', 0, 0x00cf9a000000ffff, 0x00cf92000000ffff))
+        self.cpu.reg_write(x86.UC_X86_REG_GDTR, (0, DESCRITORES, 23, 0))
+        self.cpu.reg_write(x86.UC_X86_REG_CS, 8)
+        for nome in ('DS', 'ES', 'SS'):
+            self.cpu.reg_write(getattr(x86, 'UC_X86_REG_' + nome), 16)
         self.cpu.mem_write(0x4e19a0, struct.pack('<I', UNIDADES))
         self.permitidos = []
         self.paradas = set()

@@ -1,0 +1,15 @@
+; SHA-256 da cópia analisada: 26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0
+; FUN_0048d699; corpo reconhecido pelo Ghidra, pode ter limites incompletos.
+0048d699  PUSH EBX
+0048d69a  PUSH EDX
+0048d69b  MOV EDX,dword ptr [0x00522234]
+0048d6a1  TEST EDX,EDX
+0048d6a3  JZ 0x0048d6ba
+0048d6a5  MOV EAX,EDX
+0048d6a7  XOR EBX,EBX
+0048d6a9  CALL 0x0048d7f4
+0048d6ae  MOV dword ptr [0x00522238],EBX
+0048d6b4  MOV dword ptr [0x00522234],EBX
+0048d6ba  POP EDX
+0048d6bb  POP EBX
+0048d6bc  RET

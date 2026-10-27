@@ -6,7 +6,8 @@ o CD, os assets e o protótipo preexistentes continuam fora deste repositório.
 
 Esta entrega reconstrói partes verificáveis do carregamento do jogo a partir de
 `RISING.EXE` e dos dados do CD. **Não é o código-fonte original recuperado, nem uma
-reimplementação completa do jogo.** Os nomes de funções foram atribuídos pela pesquisa.
+reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesquisa;
+1.995 registros de símbolos originais foram depois recuperados de `RISING.SBL`.
 
 ## Resultados
 
@@ -26,7 +27,10 @@ reimplementação completa do jogo.** Os nomes de funções foram atribuídos pe
 - Ciclo de simulação/desenho rastreado; recarga, contadores e gerador aleatório reconstruídos.
 - Regiões sob ocupantes, máscaras de terreno, alianças, passagem entre unidades e espera por nova busca reconstruídas.
 - Despacho da IA por jogador reconstruído e nove cenários de busca executados no código original.
-- 61 testes passando, com 19.194 execuções x86 delimitadas; o teste do despachante substitui suas etapas internas.
+- 1.995 símbolos originais franceses recuperados e importados no Ghidra.
+- Programa de IA extraído: 1.157 instruções, 42 tipos registrados e 140 nomes de operações.
+- Máquina parcial de tarefas com criação, espera, subtarefas, retomada e liberação verificadas sem substituir chamadas.
+- 77 testes passando, com 21.267 execuções x86 delimitadas; o teste do despachante superior substitui suas etapas internas.
 
 ## Leitura recomendada
 
@@ -39,7 +43,8 @@ reimplementação completa do jogo.** Os nomes de funções foram atribuídos pe
 7. [Instâncias das unidades](documentacao/INSTANCIAS.md) e [Ghidra local](documentacao/GHIDRA.md).
 8. [Movimento](documentacao/MOVIMENTO.md), [combate](documentacao/COMBATE.md) e [validação emulada](documentacao/EMULACAO.md).
 9. [Ciclo do jogo e frequência de desenho](documentacao/CADENCIA.md).
-10. [Busca de caminhos e ocupação](documentacao/CAMINHOS.md) e [IA e tarefas](documentacao/IA.md).
+10. [Busca de caminhos e ocupação](documentacao/CAMINHOS.md) e [despacho da IA](documentacao/IA.md).
+11. [Símbolos franceses e formato RULE](documentacao/SIMBOLOS.md) e [máquina de tarefas](documentacao/TAREFAS.md).
 
 ## Reproduzir
 
@@ -58,6 +63,7 @@ Com as dependências existentes nesta máquina:
 
 ```sh
 python3 ferramentas/analisar.py
+python3 ferramentas/extrair_ia.py
 sh testar.sh
 ```
 
