@@ -44,11 +44,28 @@
     "0x004704dc": "Random",
     "0x004749ca": "SortilegeResetRealisable",
     "0x00474a38": "SortilegeSetTechnologie",
+    "0x00475328": "SetUpdateChamp",
+    "0x0047534a": "LoadMine",
+    "0x0047539c": "LoadMissionMine",
+    "0x0047544c": "MineGetIndice",
+    "0x004754a7": "MineSetWork",
+    "0x004754de": "MineEndWork",
+    "0x00475515": "MineDetruire",
+    "0x00475541": "MineGetCapacite",
+    "0x0047554f": "MineRetire",
+    "0x004755a7": "MineRecolte",
     "0x00475736": "SacGetCapacite",
     "0x00475763": "TerrainAccepteSac",
     "0x004757af": "SacCherchePlace",
     "0x0047605d": "CreerSac",
     "0x004761a9": "TerrainDeposeSac",
+    "0x00476662": "TerrainRetireMatiere",
+    "0x004781e8": "TerrainRecolte",
+    "0x00478247": "TerrainEstChampi",
+    "0x0047826c": "PatateAugmentable",
+    "0x004782b4": "NouvellePatate",
+    "0x00478319": "ScanNouvellePatate",
+    "0x00478806": "UpdateChamp",
     "0x00481372": "I_CombienCouteUnite",
     "0x00481399": "I_CombienCouteBatiment",
     "0x004813b8": "B_TestStock",
@@ -1970,6 +1987,24 @@
       ]
     },
     {
+      "endereco": "0x00429a18",
+      "instrucao": "call",
+      "alvo": "0x0047544c",
+      "nome": "MineGetIndice",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x00429a22",
+      "instrucao": "call",
+      "alvo": "0x00475541",
+      "nome": "MineGetCapacite",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
       "endereco": "0x0042ab36",
       "instrucao": "call",
       "alvo": "0x004471b8",
@@ -2021,6 +2056,24 @@
       "nome": "TestRessource",
       "simbolo_anterior": [
         "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042d409",
+      "instrucao": "call",
+      "alvo": "0x00475328",
+      "nome": "SetUpdateChamp",
+      "simbolo_anterior": [
+        "CalculGame"
+      ]
+    },
+    {
+      "endereco": "0x0042d40e",
+      "instrucao": "call",
+      "alvo": "0x00478806",
+      "nome": "UpdateChamp",
+      "simbolo_anterior": [
+        "CalculGame"
       ]
     },
     {
@@ -2204,10 +2257,46 @@
       ]
     },
     {
+      "endereco": "0x0044bd45",
+      "instrucao": "call",
+      "alvo": "0x004754a7",
+      "nome": "MineSetWork",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
       "endereco": "0x0044bf8d",
       "instrucao": "call",
       "alvo": "0x00475763",
       "nome": "TerrainAccepteSac",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044c14b",
+      "instrucao": "call",
+      "alvo": "0x004755a7",
+      "nome": "MineRecolte",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044c187",
+      "instrucao": "call",
+      "alvo": "0x004754de",
+      "nome": "MineEndWork",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044c360",
+      "instrucao": "call",
+      "alvo": "0x004754de",
+      "nome": "MineEndWork",
       "simbolo_anterior": [
         "CalculWorkEngin"
       ]
@@ -2276,6 +2365,42 @@
       ]
     },
     {
+      "endereco": "0x0044ca0d",
+      "instrucao": "call",
+      "alvo": "0x0047544c",
+      "nome": "MineGetIndice",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044ca17",
+      "instrucao": "call",
+      "alvo": "0x00475541",
+      "nome": "MineGetCapacite",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044cc65",
+      "instrucao": "call",
+      "alvo": "0x00476662",
+      "nome": "TerrainRetireMatiere",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044d079",
+      "instrucao": "call",
+      "alvo": "0x004781e8",
+      "nome": "TerrainRecolte",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
       "endereco": "0x0044d0b3",
       "instrucao": "call",
       "alvo": "0x004704dc",
@@ -2316,6 +2441,15 @@
       "instrucao": "call",
       "alvo": "0x004472ea",
       "nome": "BagRetire",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044dabb",
+      "instrucao": "call",
+      "alvo": "0x004781e8",
+      "nome": "TerrainRecolte",
       "simbolo_anterior": [
         "CalculWorkEngin"
       ]
@@ -2447,6 +2581,15 @@
       ]
     },
     {
+      "endereco": "0x0044ec1b",
+      "instrucao": "call",
+      "alvo": "0x00476662",
+      "nome": "TerrainRetireMatiere",
+      "simbolo_anterior": [
+        "EnginCalculTransporte"
+      ]
+    },
+    {
       "endereco": "0x0044ec76",
       "instrucao": "call",
       "alvo": "0x004704dc",
@@ -2498,6 +2641,15 @@
       "nome": "BagRetire",
       "simbolo_anterior": [
         "EnginCalculTransporte"
+      ]
+    },
+    {
+      "endereco": "0x0044f455",
+      "instrucao": "call",
+      "alvo": "0x00476662",
+      "nome": "TerrainRetireMatiere",
+      "simbolo_anterior": [
+        "CalculTransporteEngin"
       ]
     },
     {
@@ -2618,6 +2770,24 @@
       ]
     },
     {
+      "endereco": "0x00455139",
+      "instrucao": "call",
+      "alvo": "0x004754de",
+      "nome": "MineEndWork",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x004555e9",
+      "instrucao": "call",
+      "alvo": "0x00476662",
+      "nome": "TerrainRetireMatiere",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
       "endereco": "0x004556c1",
       "instrucao": "call",
       "alvo": "0x004676e5",
@@ -2631,6 +2801,15 @@
       "instrucao": "call",
       "alvo": "0x004235bd",
       "nome": "BatimentEnleveMatiere",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00455ed2",
+      "instrucao": "call",
+      "alvo": "0x00476662",
+      "nome": "TerrainRetireMatiere",
       "simbolo_anterior": [
         "EnginNextEtape"
       ]
@@ -2667,6 +2846,15 @@
       "instrucao": "call",
       "alvo": "0x0042340f",
       "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x0045666f",
+      "instrucao": "call",
+      "alvo": "0x004754de",
+      "nome": "MineEndWork",
       "simbolo_anterior": [
         "EnginNextEtape"
       ]
@@ -2741,6 +2929,15 @@
       "nome": "Random",
       "simbolo_anterior": [
         "InitGouttes"
+      ]
+    },
+    {
+      "endereco": "0x0045d27c",
+      "instrucao": "call",
+      "alvo": "0x00475541",
+      "nome": "MineGetCapacite",
+      "simbolo_anterior": [
+        "ChercheMineProche"
       ]
     },
     {
@@ -3230,6 +3427,15 @@
       ]
     },
     {
+      "endereco": "0x0046c57d",
+      "instrucao": "call",
+      "alvo": "0x0047534a",
+      "nome": "LoadMine",
+      "simbolo_anterior": [
+        "MissionLoad"
+      ]
+    },
+    {
       "endereco": "0x0046c5b4",
       "instrucao": "call",
       "alvo": "0x00419112",
@@ -3261,6 +3467,15 @@
       "instrucao": "call",
       "alvo": "0x0046799c",
       "nome": "SetMatiere",
+      "simbolo_anterior": [
+        "MissionLoadName"
+      ]
+    },
+    {
+      "endereco": "0x0046c946",
+      "instrucao": "call",
+      "alvo": "0x0047534a",
+      "nome": "LoadMine",
       "simbolo_anterior": [
         "MissionLoadName"
       ]
@@ -3437,6 +3652,33 @@
       ]
     },
     {
+      "endereco": "0x004754ad",
+      "instrucao": "call",
+      "alvo": "0x0047544c",
+      "nome": "MineGetIndice",
+      "simbolo_anterior": [
+        "MineSetWork"
+      ]
+    },
+    {
+      "endereco": "0x004754e4",
+      "instrucao": "call",
+      "alvo": "0x0047544c",
+      "nome": "MineGetIndice",
+      "simbolo_anterior": [
+        "MineEndWork"
+      ]
+    },
+    {
+      "endereco": "0x004755b0",
+      "instrucao": "call",
+      "alvo": "0x0047544c",
+      "nome": "MineGetIndice",
+      "simbolo_anterior": [
+        "MineRecolte"
+      ]
+    },
+    {
       "endereco": "0x0047587c",
       "instrucao": "call",
       "alvo": "0x004704dc",
@@ -3536,10 +3778,28 @@
       ]
     },
     {
+      "endereco": "0x00478911",
+      "instrucao": "call",
+      "alvo": "0x00478319",
+      "nome": "ScanNouvellePatate",
+      "simbolo_anterior": [
+        "UpdateChamp"
+      ]
+    },
+    {
       "endereco": "0x00478954",
       "instrucao": "call",
       "alvo": "0x004704dc",
       "nome": "Random",
+      "simbolo_anterior": [
+        "UpdateChamp"
+      ]
+    },
+    {
+      "endereco": "0x0047896f",
+      "instrucao": "call",
+      "alvo": "0x00478319",
+      "nome": "ScanNouvellePatate",
       "simbolo_anterior": [
         "UpdateChamp"
       ]
@@ -3653,6 +3913,24 @@
       ]
     },
     {
+      "endereco": "0x0048195a",
+      "instrucao": "call",
+      "alvo": "0x0047544c",
+      "nome": "MineGetIndice",
+      "simbolo_anterior": [
+        "I_ChercheMine"
+      ]
+    },
+    {
+      "endereco": "0x00481981",
+      "instrucao": "call",
+      "alvo": "0x00475541",
+      "nome": "MineGetCapacite",
+      "simbolo_anterior": [
+        "I_ChercheMine"
+      ]
+    },
+    {
       "endereco": "0x00481ba6",
       "instrucao": "call",
       "alvo": "0x00475736",
@@ -3668,6 +3946,60 @@
       "nome": "SacGetCapacite",
       "simbolo_anterior": [
         "B_EncorePiece"
+      ]
+    },
+    {
+      "endereco": "0x00481bd7",
+      "instrucao": "call",
+      "alvo": "0x0047544c",
+      "nome": "MineGetIndice",
+      "simbolo_anterior": [
+        "I_DonneValeurMine"
+      ]
+    },
+    {
+      "endereco": "0x00481be1",
+      "instrucao": "call",
+      "alvo": "0x00475541",
+      "nome": "MineGetCapacite",
+      "simbolo_anterior": [
+        "I_DonneValeurMine"
+      ]
+    },
+    {
+      "endereco": "0x00481bf0",
+      "instrucao": "call",
+      "alvo": "0x0047544c",
+      "nome": "MineGetIndice",
+      "simbolo_anterior": [
+        "V_InterditCaseMine"
+      ]
+    },
+    {
+      "endereco": "0x00481c0c",
+      "instrucao": "call",
+      "alvo": "0x0047544c",
+      "nome": "MineGetIndice",
+      "simbolo_anterior": [
+        "V_RestoreCaseMine"
+      ]
+    },
+    {
+      "endereco": "0x00481d3d",
+      "instrucao": "call",
+      "alvo": "0x004754de",
+      "nome": "MineEndWork",
+      "simbolo_anterior": [
+        "V_ConstruireBatiment"
+      ]
+    },
+    {
+      "endereco": "0x00481dd8",
+      "instrucao": "call",
+      "alvo": "0x004754de",
+      "nome": "MineEndWork",
+      "simbolo_anterior": [
+        "V_ReparerBatiment"
       ]
     },
     {

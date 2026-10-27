@@ -8,8 +8,8 @@ não criar caches nos módulos compartilhados lidos pela pesquisa.
 
 ## Como incorporar
 
-1. Revisar [README.md](README.md), os ASM e o relatório com 84 testes aprovados
-   e 13.858 execuções x86 (incluindo 40 exceções e três limites esperados).
+1. Revisar [README.md](README.md), os ASM e o relatório com 108 testes aprovados
+   e 19.499 execuções x86 (incluindo 48 exceções e três limites esperados).
    Executar `validar.py --emular` se houver Unicorn/JIT.
 2. Incorporar `economia.py` em `ferramentas/` ou manter a pesquisa como módulo
    independente. O código de produção depende só da biblioteca padrão.
@@ -152,16 +152,57 @@ os 32 testes correspondentes só validam até a entrada original da dependência
 Domínio, endereços, layout e sincronização estão em
 [PROPRIEDADE_CONSTRUCOES.md](PROPRIEDADE_CONSTRUCOES.md).
 
+## Extração de recursos e regeneração de campos
+
+`RecursosTerreno`, em `extracao.py`, compartilha `m.terreno` e copia os buffers
+de minas, mosaicos e atributos. Não criar outra instância de TerrenoSacolas
+para este componente: tipos, quantidades e RNG devem ser os mesmos do depósito.
+
+```python
+from extracao import RecursosTerreno
+
+r = RecursosTerreno(m.terreno, minas=tabela_de_80_bytes,
+                    mosaicos=grade_de_131072_bytes,
+                    atributos=grade_de_65536_bytes,
+                    linha=linha_salva, atualizar=flag_salva,
+                    periodo=periodo_atual, tempo=tempo_atual)
+
+quantidade = r.recolher_mina(celula)  # Só reduz a reserva da mina.
+# A Bag da unidade e a entrega ao depósito pertencem aos chamadores.
+r.tempo = novo_tempo & 0xffffffff
+r.agendar_campos()
+r.atualizar_campos()  # Uma linha; manter a ordem original de chamadas.
+```
+
+Sincronizar `r.minas`, `r.mosaicos`, `r.linha` e `r.atualizar`, além dos buffers
+e da semente de `m.terreno`. Atributos são apenas lidos por estas rotinas;
+atualizá-los a partir do subsistema responsável quando necessário. Os padrões
+do construtor são sintéticos, não substituem a carga/inicialização original.
+
+`retirar_mina(indice, quantidade)` recebe índice; `recolher_mina(celula)` e
+os métodos de trabalho recebem célula. `indice_mina` devolve 0xffff quando
+ausente. `destruir_mina` altera somente os mosaicos e mantém a reserva.
+`retirar_sacola` devolve zero tanto para peças quanto para ausência: não usar
+o retorno como teste de sucesso. `recolher_campo` não devolve quantidade.
+
+Não ligar essas operações diretamente ao crédito do jogador sem passar pelos
+chamadores de armazenamento/transporte apropriados. Não mudar a ordem das
+células, usar RNG independente ou atualizar a grade em uma cópia: plantas
+criadas à direita podem ser processadas na mesma linha. Os limites da API,
+os wraps originais e os 15 endereços estão em
+[EXTRACAO_CAMPOS.md](EXTRACAO_CAMPOS.md).
+
 ## Atualizações de documentação sugeridas, não realizadas
 
 - FORMATOS.md: substituir a lacuna dos IDs iniciais por comida=1, pedra=2,
   peças=0, citando os débitos de InitRecruteTroupe.
 - ROTINAS.md: adicionar os acessores e mutações `0x467640..0x4679d0`.
 - CONTINUIDADE.md: marcar consultas, crédito/débito, recálculo do indicador,
-  depósito e contagem global dos armazéns como traduzidos; conservar geração
-  da produção, alterações incrementais/tecnológicas, consumo completo e filas.
+  depósito, contagens, efeitos econômicos de propriedade, extração no terreno
+  e regeneração de campos como traduzidos; conservar chamadores completos,
+  tecnologias, transporte, consumo e filas como pendências.
 - SIMBOLOS.md/IA.md: registrar os diferentes índices da IA e o retorno 1/-1.
-- EMULACAO.md/validação geral: integrar os 38 testes diferenciais sem somar
+- EMULACAO.md/validação geral: integrar os 50 testes diferenciais sem somar
   automaticamente as contagens desta pesquisa à suíte compartilhada.
 
 ## Próximas investigações de economia
@@ -177,6 +218,9 @@ Domínio, endereços, layout e sincronização estão em
 4. Mercado e trocas em `0x466533..0x467640`: preços, propostas e transferências.
 5. Confirmar o significado de RMI, o quarto registro e o byte +7 em gameplay
    ou por outros consumidores, preservando nomes neutros enquanto não confirmado.
+6. Integrar as primitivas de extração aos chamadores de unidades e à agenda
+   de CalculGame, preservando a ordem dos sorteios. A duração de trabalho,
+   consumo/fome e o transporte completo continuam pendentes.
 
 Esses itens não dependem de alterar busca de caminhos, contornos ou movimento.
 O chat principal continua responsável pela promoção para pastas compartilhadas,

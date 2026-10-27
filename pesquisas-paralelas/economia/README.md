@@ -16,8 +16,10 @@ número de armazéns, sem redefinir capacidade unitária ou indicador:
 Os efeitos incrementais de ganho e neutralização estão traduzidos em
 [PROPRIEDADE_CONSTRUCOES.md](PROPRIEDADE_CONSTRUCOES.md), com dependências
 explícitas para os caminhos de criação/movimento de balões.
-**84 testes passaram**, com 13.858 execuções x86: 13.815 paradas declaradas,
-40 exceções de divisão por zero e três limites de execução esperados.
+Extração de minas, coleta de sacolas/campos e regeneração estão traduzidas em
+[EXTRACAO_CAMPOS.md](EXTRACAO_CAMPOS.md), sem incorporar o transporte das unidades.
+**108 testes passaram**, com 19.499 execuções x86: 19.448 paradas declaradas,
+48 exceções de divisão por zero e três limites de execução esperados.
 Não houve testes ignorados na execução emulada. O ramo de retirada de colono
 tem dependência explícita; veja [capacidade e excedentes](CAPACIDADE_EXCEDENTES.md).
 
@@ -42,9 +44,9 @@ python3 -B pesquisas-paralelas/economia/validar.py --emular
 ```
 
 O primeiro usa `pefile` e `capstone` já presentes em `../source/python`, verifica
-o hash do EXE e grava os trechos nesta pasta. O segundo passa 46 testes Python
-e ignora explicitamente 38 testes diferenciais. O terceiro exige Unicorn,
-reutilizado de `.local/python`, e executa todos os 84 testes. Nenhum comando
+o hash do EXE e grava os trechos nesta pasta. O segundo passa 58 testes Python
+e ignora explicitamente 50 testes diferenciais. O terceiro exige Unicorn,
+reutilizado de `.local/python`, e executa todos os 108 testes. Nenhum comando
 invoca o gerador de relatórios geral ou altera arquivos fora desta pesquisa.
 O uso de `-B` evita caches de bytecode nos módulos compartilhados importados.
 
@@ -232,21 +234,24 @@ A etapa de [capacidade e excedentes](CAPACIDADE_EXCEDENTES.md) acrescenta
 2.541 execuções; a de [débito e recálculo](RETIRADA_RECALCULO.md), outras 2.868;
 e a de [contagem de armazéns](CONTAGEM_ARMAZENS.md), mais 114. Os
 [efeitos de propriedade](PROPRIEDADE_CONSTRUCOES.md) acrescentam 1.864.
-A suíte atual soma 13.858. Destas, 13.815 alcançam parada declarada (64 na entrada
-de BatimentRetireColon e 32 nas dependências de balão), 40 conferem divisão por zero e três conferem o limite
+A etapa de [extração e campos](EXTRACAO_CAMPOS.md) acrescenta 5.641.
+A suíte atual soma 19.499. Destas, 19.448 alcançam parada declarada (64 na entrada
+de BatimentRetireColon e 32 nas dependências de balão), 48 conferem divisão por zero e três conferem o limite
 no ciclo de pilhas corrompidas.
 
 A bancada existente verifica hash, endereços permitidos, parada explícita e
 timeout de um segundo por chamada. O limite padrão é de 20.000 instruções;
 BatimentAjouteMatiere, TerrainDeposeSac e BatimentInitCave permitem explicitamente 1.000.000.
+A bancada de extração e regeneração também permite 1.000.000 por chamada.
 A extensão
 local não substitui funções chamadas e não oferece APIs Windows. Nas mutações
 compara os 128 bytes e guardas antes/depois; nas consultas também compara os
 bytes que não deveriam ser escritos entre os ponteiros de saída. Os testes
 incluem estados inconsistentes e bits altos nos argumentos de registradores.
 
-Não foi iniciada uma partida. O depósito com capacidade está traduzido;
-geração da produção, coleta, transporte, fome, mercado, fluxo completo dos
+Não foi iniciada uma partida. Depósito com capacidade, extração no terreno e
+regeneração de campos estão traduzidos. Os chamadores completos de produção
+e coleta, transporte, fome, mercado, fluxo completo dos
 chamadores de propriedade, tecnologia, persistência integral e filas continuam parciais.
 A recontagem global e os efeitos incrementais econômicos estão traduzidos;
 os caminhos de criação/movimento de balões permanecem dependências explícitas.
@@ -273,6 +278,9 @@ identificar IDs foi conferida nos trechos dos chamadores.
 - [bancada_init_cave.py](bancada_init_cave.py): contagem dos 1000 registros no x86 original.
 - [proprietarios.py](proprietarios.py): ganho/neutralização, listas, permissões e depósito da matéria.
 - [bancada_proprietarios.py](bancada_proprietarios.py): referência original e paradas de dependência.
+- [extracao.py](extracao.py): quinze rotinas de minas, coleta e regeneração.
+- [bancada_extracao.py](bancada_extracao.py): referência x86 com comparação das grades e da agenda.
+- [testes/test_extracao.py](testes/test_extracao.py): 12 testes locais e 12 diferenciais.
 - [testes/test_construcoes.py](testes/test_construcoes.py): dez testes locais e dez diferenciais novos.
 - [testes/test_economia.py](testes/test_economia.py): dez testes locais e nove diferenciais.
 - [testes/test_retirada_recalculo.py](testes/test_retirada_recalculo.py): oito testes locais e seis diferenciais.
@@ -288,3 +296,4 @@ identificar IDs foi conferida nos trechos dos chamadores.
 - [RETIRADA_RECALCULO.md](RETIRADA_RECALCULO.md): débito e recálculo do indicador.
 - [CONTAGEM_ARMAZENS.md](CONTAGEM_ARMAZENS.md): contagem global, capacidade derivada e integração.
 - [PROPRIEDADE_CONSTRUCOES.md](PROPRIEDADE_CONSTRUCOES.md): efeitos de ganho e neutralização.
+- [EXTRACAO_CAMPOS.md](EXTRACAO_CAMPOS.md): endereços, fatos, limites e validação de extração/regeneração.

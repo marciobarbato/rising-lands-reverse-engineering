@@ -1,6 +1,6 @@
 {
   "modo": "Python sem emulação",
-  "testes": 84,
+  "testes": 108,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -78,6 +78,54 @@
     },
     {
       "teste": "test_suficiencia_512_casos_e_igualdade (test_economia.Diferencial)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_agendamento_128_ticks_e_oito_excecoes (test_extracao.DiferencialExtracao)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_atualizacao_64_linhas_aleatorias_e_bytes_de_pilha (test_extracao.DiferencialExtracao)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_busca_capacidade_limites_e_duplicatas_128_tabelas (test_extracao.DiferencialExtracao)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_campo_consultas_e_coleta_todos_os_256_tipos (test_extracao.DiferencialExtracao)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_corpus_dos_38_mapas_minas_e_campos (test_extracao.DiferencialExtracao)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_integracao_extracao_sacola_e_credito_sem_transporte_simulado (test_extracao.DiferencialExtracao)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_nascimento_256_flags_e_sementes (test_extracao.DiferencialExtracao)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_passagem_completa_de_255_linhas_em_memoria_persistente (test_extracao.DiferencialExtracao)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_propagacao_256_estados_incluindo_bordas_e_prioridades (test_extracao.DiferencialExtracao)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_retirada_coleta_destruicao_128_estados (test_extracao.DiferencialExtracao)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_sacolas_todos_os_tipos_com_quantidades_zero_um_e_255 (test_extracao.DiferencialExtracao)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_trabalho_128_estados_incluindo_mina_ausente (test_extracao.DiferencialExtracao)",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {
@@ -163,7 +211,8 @@
     "DiferencialConstrucoes": 0,
     "DiferencialRetiradaRecalculo": 0,
     "DiferencialInitCave": 0,
-    "DiferencialProprietarios": 0
+    "DiferencialProprietarios": 0,
+    "DiferencialExtracao": 0
   },
   "excecoes_x86_esperadas": 0,
   "limites_x86_esperados": 0,

@@ -32,9 +32,14 @@ NOMES = (
     'BagInit', 'BagContient', 'BagPrend', 'BagRetire',
     'TypeEnginGetBagOrdre',
     'TerrainDeposeMatiere', 'SortilegeResetRealisable', 'SortilegeSetTechnologie',
+    'LoadMine', 'LoadMissionMine', 'MineGetIndice', 'MineSetWork', 'MineEndWork',
+    'MineDetruire', 'MineGetCapacite', 'MineRetire', 'MineRecolte',
+    'TerrainRetireMatiere', 'TerrainRecolte', 'TerrainEstChampi',
+    'PatateAugmentable', 'NouvellePatate', 'ScanNouvellePatate',
+    'SetUpdateChamp', 'UpdateChamp',
 )
 # O RET precede dados; não apresentá-los como instruções da função.
-FINS_CONFIRMES = {0x41aace: 0x41ab04, 0x4283e2: 0x428691}
+FINS_CONFIRMES = {0x41aace: 0x41ab04, 0x4283e2: 0x428691, 0x478806: 0x478a01}
 TRECHOS_AUXILIARES = {
     0x423025: ('epilogo_compartilhado_de_BatimentCalculResource', 0x42302d),
     0x41db1e: ('epilogo_compartilhado_de_BatimentInitCave', 0x41db24),
