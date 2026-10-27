@@ -1,0 +1,50 @@
+[
+  {
+    "arquivo": "INSTALHD/GRAPHICS/BLOCS.CMP",
+    "quadros": 1345,
+    "pixels_decodificados": 1377280,
+    "sha256": "318069f1728621d98a4409b5a8809ea410d7b4adc94d6ba421d69b14c98a99db"
+  },
+  {
+    "arquivo": "INSTALHD/GRAPHICS/BUILDING.CMP",
+    "quadros": 611,
+    "pixels_decodificados": 2186025,
+    "sha256": "af4f94ea996a65d36592bb6cefc407dc628b3d488c9c335b8f6015bbfcb6a3ae"
+  },
+  {
+    "arquivo": "INSTALHD/GRAPHICS/CREATURE.CMP",
+    "quadros": 1920,
+    "pixels_decodificados": 14305397,
+    "sha256": "4a1db7d2a92f421970d35f8a6402eb6489969257c54d07b5590186f011327e1d"
+  },
+  {
+    "arquivo": "INSTALHD/GRAPHICS/INVENTE.CMP",
+    "quadros": 72,
+    "pixels_decodificados": 776253,
+    "sha256": "a1c2e7155bec34c52d249d4c3aec7e3ce45759d806f880168dd8d8b4b05101aa"
+  },
+  {
+    "arquivo": "INSTALHD/GRAPHICS/MENU.CMP",
+    "quadros": 40,
+    "pixels_decodificados": 1356704,
+    "sha256": "9a0a407e8eb2be4fc24f1f7ca57f1b0aad67e7e49e0ca09b667e2d0ea4d7e866"
+  },
+  {
+    "arquivo": "INSTALHD/GRAPHICS/OTHERS.CMP",
+    "quadros": 4517,
+    "pixels_decodificados": 11070065,
+    "sha256": "0282fa4bc5241fb6905a0daa0c00f43e63fe63c0f00ff6beda01d3602141fd1d"
+  },
+  {
+    "arquivo": "INSTALHD/GRAPHICS/TROOPS.CMP",
+    "quadros": 2848,
+    "pixels_decodificados": 14908099,
+    "sha256": "b9012e0bc6119e1f4745ff6e25bf8ba912423e9c364513118a31b5355c87beac"
+  },
+  {
+    "arquivo": "INSTALHD/GRAPHICS/VEHICULE.CMP",
+    "quadros": 915,
+    "pixels_decodificados": 7709779,
+    "sha256": "f7ee4ce0ec957af609f0ae9ab845ac1bc08c2b598c749b9c3b78ec37f45324d8"
+  }
+]

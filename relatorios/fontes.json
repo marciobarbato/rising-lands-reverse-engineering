@@ -1,0 +1,252 @@
+[
+  {
+    "arquivo": "INSTALHD/CHARGE.LZS",
+    "tamanho": 376866,
+    "sha256": "65ab44abf472e94bbc65737d8115f40ce96b3df44e10e30f0801ebbe60526546"
+  },
+  {
+    "arquivo": "INSTALHD/GRAPHICS/BLOCS.CMP",
+    "tamanho": 1426660,
+    "sha256": "318069f1728621d98a4409b5a8809ea410d7b4adc94d6ba421d69b14c98a99db"
+  },
+  {
+    "arquivo": "INSTALHD/GRAPHICS/BUILDING.CMP",
+    "tamanho": 1272760,
+    "sha256": "af4f94ea996a65d36592bb6cefc407dc628b3d488c9c335b8f6015bbfcb6a3ae"
+  },
+  {
+    "arquivo": "INSTALHD/GRAPHICS/CREATURE.CMP",
+    "tamanho": 2585477,
+    "sha256": "4a1db7d2a92f421970d35f8a6402eb6489969257c54d07b5590186f011327e1d"
+  },
+  {
+    "arquivo": "INSTALHD/GRAPHICS/INVENTE.CMP",
+    "tamanho": 637625,
+    "sha256": "a1c2e7155bec34c52d249d4c3aec7e3ce45759d806f880168dd8d8b4b05101aa"
+  },
+  {
+    "arquivo": "INSTALHD/GRAPHICS/MENU.CMP",
+    "tamanho": 1086250,
+    "sha256": "9a0a407e8eb2be4fc24f1f7ca57f1b0aad67e7e49e0ca09b667e2d0ea4d7e866"
+  },
+  {
+    "arquivo": "INSTALHD/GRAPHICS/OTHERS.CMP",
+    "tamanho": 2927906,
+    "sha256": "0282fa4bc5241fb6905a0daa0c00f43e63fe63c0f00ff6beda01d3602141fd1d"
+  },
+  {
+    "arquivo": "INSTALHD/GRAPHICS/TROOPS.CMP",
+    "tamanho": 3171280,
+    "sha256": "b9012e0bc6119e1f4745ff6e25bf8ba912423e9c364513118a31b5355c87beac"
+  },
+  {
+    "arquivo": "INSTALHD/GRAPHICS/VEHICULE.CMP",
+    "tamanho": 2027609,
+    "sha256": "f7ee4ce0ec957af609f0ae9ab845ac1bc08c2b598c749b9c3b78ec37f45324d8"
+  },
+  {
+    "arquivo": "INSTALHD/PLATGAME.PIE",
+    "tamanho": 50177,
+    "sha256": "da6a07c93a6a027cd81ce50e4dfc756848223bd951f4a60e70bab1e9bc3c20a7"
+  },
+  {
+    "arquivo": "INSTALHD/RISING.EXE",
+    "tamanho": 665600,
+    "sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+  },
+  {
+    "arquivo": "INSTALHD/RISING.INI",
+    "tamanho": 21759,
+    "sha256": "e4762aae51d8aa7bd56280af43a7408a19571ab6dbfcd170fb59cffbcdc8338b"
+  },
+  {
+    "arquivo": "WORLD/MONDE01.ETA",
+    "tamanho": 1259976,
+    "sha256": "19237b8c3f3c0c76022276da229bec727b17603440823c43561aba159dd47015"
+  },
+  {
+    "arquivo": "WORLD/MONDE02.ETA",
+    "tamanho": 1259762,
+    "sha256": "291566a7486cb15616c4778d36d6b0ad4f717c65de745b941e640f7f835ad2ba"
+  },
+  {
+    "arquivo": "WORLD/MONDE03.ETA",
+    "tamanho": 1257620,
+    "sha256": "11e4fc67e687736267699b075ce1a0c6b289fb8180707e37de27649e15810ea6"
+  },
+  {
+    "arquivo": "WORLD/MONDE04.ETA",
+    "tamanho": 1282104,
+    "sha256": "c4940953c4ce8d256039347cc9d0b4516c98ff3a82a439a0babbdd4c6965ddc4"
+  },
+  {
+    "arquivo": "WORLD/MONDE05.ETA",
+    "tamanho": 1295828,
+    "sha256": "817f5db77b907dfa69ab8ceb71981e2055dede3fd0e4cd208c8efce33a0c6fc6"
+  },
+  {
+    "arquivo": "WORLD/MONDE06.ETA",
+    "tamanho": 1256118,
+    "sha256": "c80feed76c2db702a4ed2ff6b3c6e1fe84eabe68138f6660367c14e98a3c10c9"
+  },
+  {
+    "arquivo": "WORLD/MONDE07.ETA",
+    "tamanho": 1260608,
+    "sha256": "6d574c7428127c966b04f22353dc8a711d4b5897853a61dd579b921e36e0afb1"
+  },
+  {
+    "arquivo": "WORLD/MONDE08.ETA",
+    "tamanho": 1259500,
+    "sha256": "a8a5156251a2937c49f7331a9f8890ec3d857ae420fd6dbe6eb465cae2965e9c"
+  },
+  {
+    "arquivo": "WORLD/MONDE09.ETA",
+    "tamanho": 1289828,
+    "sha256": "3b626f3fe831844f4e6f0b7d343c5c8e316dc56ee03447fd028ad8b0beb88eb9"
+  },
+  {
+    "arquivo": "WORLD/MONDE09A.ETA",
+    "tamanho": 1295330,
+    "sha256": "4a49802ea11b7c1029cee2c84002c80d80ea7033ccb282e065c9a9f701b7eec4"
+  },
+  {
+    "arquivo": "WORLD/MONDE09B.ETA",
+    "tamanho": 1299880,
+    "sha256": "7e47f32f08a1467f2b7a7fe0916b61c4421a60672b79d93d0d02354f349e18fd"
+  },
+  {
+    "arquivo": "WORLD/MONDE09C.ETA",
+    "tamanho": 1300006,
+    "sha256": "dc40f8b68a59fb91cd2b33b9624ffe49294df9419042e4847402be135535ce7a"
+  },
+  {
+    "arquivo": "WORLD/MONDE09D.ETA",
+    "tamanho": 1301302,
+    "sha256": "f69e52f7a56e837945ec0beb9787be93c611c33b09fe1c0f6b9b1dfc12e1ec69"
+  },
+  {
+    "arquivo": "WORLD/MONDE10.ETA",
+    "tamanho": 1297018,
+    "sha256": "827f832bbc33635e2111bab0f58a218b9efbe319705ac66032ad13b8ffbc3a37"
+  },
+  {
+    "arquivo": "WORLD/MONDE10A.ETA",
+    "tamanho": 1298590,
+    "sha256": "5d809594106280f178ceaaa5c5fa49fa33a506a6ae420c31f7f16323bfd33452"
+  },
+  {
+    "arquivo": "WORLD/MONDE10B.ETA",
+    "tamanho": 1299666,
+    "sha256": "3840989e98f0ea8183eb5fe4ae9f68a37f24952f58a8a34fa5caf734f20ddbf0"
+  },
+  {
+    "arquivo": "WORLD/MONDE10C.ETA",
+    "tamanho": 1298510,
+    "sha256": "86b85d1e7c6ada741d3644a442f364d97c8493ba092086d10541e9664a812bbe"
+  },
+  {
+    "arquivo": "WORLD/MONDE11.ETA",
+    "tamanho": 1295612,
+    "sha256": "5c66041c076747afbf29b0a8e1c6a2ff3222e9b1a60a0cde18abb666a9ea2840"
+  },
+  {
+    "arquivo": "WORLD/MONDE12.ETA",
+    "tamanho": 1346978,
+    "sha256": "6abdcec07fb8afd82fe3697dde2ac6fed8911f613ea840541d23b6451cf7998d"
+  },
+  {
+    "arquivo": "WORLD/MONDE12A.ETA",
+    "tamanho": 1362530,
+    "sha256": "90860a9e7d5ec934f8d345ac15f849f8637db4ca574dac1e6f609a630aaa33c4"
+  },
+  {
+    "arquivo": "WORLD/MONDE12B.ETA",
+    "tamanho": 1370480,
+    "sha256": "69fb5140fd0636ac9e0f5f63323e8f3c2013aaf3e117603785079b007363c50a"
+  },
+  {
+    "arquivo": "WORLD/MONDE12C.ETA",
+    "tamanho": 1362610,
+    "sha256": "f09c5165f88ca7f1575e87cbf7a420a7588d5d3b150e41a5623ebf1e4225ed48"
+  },
+  {
+    "arquivo": "WORLD/MONDE13.ETA",
+    "tamanho": 1262988,
+    "sha256": "b1dd08943dee2afc32ca3d35ffd30d0229c87078c6b99362fc0a437639044bc2"
+  },
+  {
+    "arquivo": "WORLD/MONDE14.ETA",
+    "tamanho": 1260982,
+    "sha256": "75370d077e6c0e0fe4f3b5d16c4bb5e2d564d19989394966d81910b8dec57fe1"
+  },
+  {
+    "arquivo": "WORLD/MONDE15.ETA",
+    "tamanho": 1302136,
+    "sha256": "89ff2906dfddf1a4665b07e14251f60eba899d3e61123b2d9ba483762add9df7"
+  },
+  {
+    "arquivo": "WORLD/MONDE16.ETA",
+    "tamanho": 1299996,
+    "sha256": "3be9f1479506b112edc266315b6e3bfee74f786bf7fc0edea9973b46ca327f77"
+  },
+  {
+    "arquivo": "WORLD/MONDE17.ETA",
+    "tamanho": 1413350,
+    "sha256": "f176fb3d72437709de034b1b5c60359ae41518a70ff678715c6bc2500160cbe7"
+  },
+  {
+    "arquivo": "WORLD/MONDE17A.ETA",
+    "tamanho": 1413350,
+    "sha256": "f176fb3d72437709de034b1b5c60359ae41518a70ff678715c6bc2500160cbe7"
+  },
+  {
+    "arquivo": "WORLD/MONDE17B.ETA",
+    "tamanho": 1413762,
+    "sha256": "c27ee407371f9a0d9d2b032123d03a5a57228ace8b3c99e2c4979873d5476771"
+  },
+  {
+    "arquivo": "WORLD/MONDE17C.ETA",
+    "tamanho": 1416494,
+    "sha256": "3cff0609b10bbe3c439c068d42850b8cac9e6895fefae282b457224f66eb3836"
+  },
+  {
+    "arquivo": "WORLD/MONDE18.ETA",
+    "tamanho": 1299928,
+    "sha256": "e5d4ead32b9422160a3334a0735400cd702179dbc29f471c373657883b65dadc"
+  },
+  {
+    "arquivo": "WORLD/MONDE19.ETA",
+    "tamanho": 1296792,
+    "sha256": "95a1bd20475db7f39f7ff2c10a9ba904f1246145ba73006d40a8a0521501d213"
+  },
+  {
+    "arquivo": "WORLD/MONDE20.ETA",
+    "tamanho": 1278064,
+    "sha256": "585b2b087368b56aae56cd08833078a7d257d717c49873d5effb51bf78457c68"
+  },
+  {
+    "arquivo": "WORLD/MONDE21.ETA",
+    "tamanho": 1298498,
+    "sha256": "b7de440f4761476b86ebe33924471fecf99c051b4db07dac7edb88699a4e5875"
+  },
+  {
+    "arquivo": "WORLD/MONDE22.ETA",
+    "tamanho": 1295668,
+    "sha256": "b6bce6b3df38e3f497224598175e653859f26554ed0982bcd799139acc23d018"
+  },
+  {
+    "arquivo": "WORLD/MONDE23.ETA",
+    "tamanho": 1418088,
+    "sha256": "c83bfdfa6236b9c1000b3715340296479cfcc02e867275ef9f03437cf1b61630"
+  },
+  {
+    "arquivo": "WORLD/MONDE24.ETA",
+    "tamanho": 1300522,
+    "sha256": "7f09a9d659978e2b095baa986fc3435336222acd6fc92818a9833c5ddb6420bd"
+  },
+  {
+    "arquivo": "WORLD/MONDE25.ETA",
+    "tamanho": 1298052,
+    "sha256": "d134d11c1227a6441b3dce7b452f06a649f953ce69fe74de367973b4620df70e"
+  }
+]

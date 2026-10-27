@@ -1,0 +1,689 @@
+{
+  "sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "tamanho": 665600,
+  "arquitetura": "x86 de 32 bits",
+  "base": "0x00400000",
+  "entrada": "0x0048d3c8",
+  "ferramentas": {
+    "pefile": "2024.8.26",
+    "capstone": "5.0.7"
+  },
+  "secoes": [
+    {
+      "nome": "BEGTEXT",
+      "rva": "0x1000",
+      "tamanho_virtual": 0,
+      "tamanho_no_arquivo": 601088,
+      "offset_arquivo": 1024,
+      "caracteristicas": "0x60000020"
+    },
+    {
+      "nome": "DGROUP",
+      "rva": "0x94000",
+      "tamanho_virtual": 0,
+      "tamanho_no_arquivo": 22528,
+      "offset_arquivo": 602112,
+      "caracteristicas": "0xc0000040"
+    },
+    {
+      "nome": ".bss",
+      "rva": "0x9a000",
+      "tamanho_virtual": 0,
+      "tamanho_no_arquivo": 558080,
+      "offset_arquivo": 0,
+      "caracteristicas": "0xc0000080"
+    },
+    {
+      "nome": ".idata",
+      "rva": "0x123000",
+      "tamanho_virtual": 0,
+      "tamanho_no_arquivo": 3584,
+      "offset_arquivo": 624640,
+      "caracteristicas": "0xc0000040"
+    },
+    {
+      "nome": ".reloc",
+      "rva": "0x124000",
+      "tamanho_virtual": 0,
+      "tamanho_no_arquivo": 35840,
+      "offset_arquivo": 628224,
+      "caracteristicas": "0x42000040"
+    },
+    {
+      "nome": ".rsrc",
+      "rva": "0x12d000",
+      "tamanho_virtual": 0,
+      "tamanho_no_arquivo": 1536,
+      "offset_arquivo": 664064,
+      "caracteristicas": "0xc0000040"
+    }
+  ],
+  "importacoes": {
+    "ADVAPI32.dll": [
+      {
+        "nome": "GetUserNameA",
+        "endereco_iat": "0x0052310c"
+      }
+    ],
+    "GDI32.dll": [
+      {
+        "nome": "GetStockObject",
+        "endereco_iat": "0x0052311c"
+      }
+    ],
+    "KERNEL32.dll": [
+      {
+        "nome": "FindClose",
+        "endereco_iat": "0x00523194"
+      },
+      {
+        "nome": "FindFirstFileA",
+        "endereco_iat": "0x00523198"
+      },
+      {
+        "nome": "FindNextFileA",
+        "endereco_iat": "0x0052319c"
+      },
+      {
+        "nome": "FreeLibrary",
+        "endereco_iat": "0x005231a0"
+      },
+      {
+        "nome": "GetComputerNameA",
+        "endereco_iat": "0x005231a4"
+      },
+      {
+        "nome": "GetDriveTypeA",
+        "endereco_iat": "0x005231a8"
+      },
+      {
+        "nome": "GetPrivateProfileIntA",
+        "endereco_iat": "0x005231ac"
+      },
+      {
+        "nome": "GetPrivateProfileStringA",
+        "endereco_iat": "0x005231b0"
+      },
+      {
+        "nome": "GetProcAddress",
+        "endereco_iat": "0x005231b4"
+      },
+      {
+        "nome": "GetTickCount",
+        "endereco_iat": "0x005231b8"
+      },
+      {
+        "nome": "GetVolumeInformationA",
+        "endereco_iat": "0x005231bc"
+      },
+      {
+        "nome": "GlobalAlloc",
+        "endereco_iat": "0x005231c0"
+      },
+      {
+        "nome": "GlobalCompact",
+        "endereco_iat": "0x005231c4"
+      },
+      {
+        "nome": "GlobalFree",
+        "endereco_iat": "0x005231c8"
+      },
+      {
+        "nome": "GlobalHandle",
+        "endereco_iat": "0x005231cc"
+      },
+      {
+        "nome": "GlobalLock",
+        "endereco_iat": "0x005231d0"
+      },
+      {
+        "nome": "GlobalMemoryStatus",
+        "endereco_iat": "0x005231d4"
+      },
+      {
+        "nome": "GlobalUnlock",
+        "endereco_iat": "0x005231d8"
+      },
+      {
+        "nome": "LoadLibraryA",
+        "endereco_iat": "0x005231dc"
+      },
+      {
+        "nome": "OpenFile",
+        "endereco_iat": "0x005231e0"
+      },
+      {
+        "nome": "SetErrorMode",
+        "endereco_iat": "0x005231e4"
+      },
+      {
+        "nome": "_hread",
+        "endereco_iat": "0x005231e8"
+      },
+      {
+        "nome": "_hwrite",
+        "endereco_iat": "0x005231ec"
+      },
+      {
+        "nome": "_lclose",
+        "endereco_iat": "0x005231f0"
+      },
+      {
+        "nome": "_lcreat",
+        "endereco_iat": "0x005231f4"
+      },
+      {
+        "nome": "_llseek",
+        "endereco_iat": "0x005231f8"
+      },
+      {
+        "nome": "_lopen",
+        "endereco_iat": "0x005231fc"
+      }
+    ],
+    "USER32.dll": [
+      {
+        "nome": "BeginPaint",
+        "endereco_iat": "0x00523278"
+      },
+      {
+        "nome": "CreateWindowExA",
+        "endereco_iat": "0x0052327c"
+      },
+      {
+        "nome": "DefWindowProcA",
+        "endereco_iat": "0x00523280"
+      },
+      {
+        "nome": "DispatchMessageA",
+        "endereco_iat": "0x00523284"
+      },
+      {
+        "nome": "EndPaint",
+        "endereco_iat": "0x00523288"
+      },
+      {
+        "nome": "FindWindowA",
+        "endereco_iat": "0x0052328c"
+      },
+      {
+        "nome": "GetAsyncKeyState",
+        "endereco_iat": "0x00523290"
+      },
+      {
+        "nome": "GetCursorPos",
+        "endereco_iat": "0x00523294"
+      },
+      {
+        "nome": "GetMessageA",
+        "endereco_iat": "0x00523298"
+      },
+      {
+        "nome": "GetSystemMetrics",
+        "endereco_iat": "0x0052329c"
+      },
+      {
+        "nome": "GetWindowRect",
+        "endereco_iat": "0x005232a0"
+      },
+      {
+        "nome": "LoadCursorA",
+        "endereco_iat": "0x005232a4"
+      },
+      {
+        "nome": "LoadIconA",
+        "endereco_iat": "0x005232a8"
+      },
+      {
+        "nome": "MessageBeep",
+        "endereco_iat": "0x005232ac"
+      },
+      {
+        "nome": "MessageBoxA",
+        "endereco_iat": "0x005232b0"
+      },
+      {
+        "nome": "MoveWindow",
+        "endereco_iat": "0x005232b4"
+      },
+      {
+        "nome": "PeekMessageA",
+        "endereco_iat": "0x005232b8"
+      },
+      {
+        "nome": "PostQuitMessage",
+        "endereco_iat": "0x005232bc"
+      },
+      {
+        "nome": "RegisterClassA",
+        "endereco_iat": "0x005232c0"
+      },
+      {
+        "nome": "SendMessageA",
+        "endereco_iat": "0x005232c4"
+      },
+      {
+        "nome": "SetCursorPos",
+        "endereco_iat": "0x005232c8"
+      },
+      {
+        "nome": "SetFocus",
+        "endereco_iat": "0x005232cc"
+      },
+      {
+        "nome": "ShowCursor",
+        "endereco_iat": "0x005232d0"
+      },
+      {
+        "nome": "ShowWindow",
+        "endereco_iat": "0x005232d4"
+      },
+      {
+        "nome": "TranslateMessage",
+        "endereco_iat": "0x005232d8"
+      },
+      {
+        "nome": "UnregisterClassA",
+        "endereco_iat": "0x005232dc"
+      },
+      {
+        "nome": "UpdateWindow",
+        "endereco_iat": "0x005232e0"
+      },
+      {
+        "nome": "WaitMessage",
+        "endereco_iat": "0x005232e4"
+      }
+    ],
+    "USER32.DLL": [
+      {
+        "nome": "GetActiveWindow",
+        "endereco_iat": "0x005232f8"
+      },
+      {
+        "nome": "wsprintfA",
+        "endereco_iat": "0x005232fc"
+      }
+    ],
+    "KERNEL32.DLL": [
+      {
+        "nome": "CloseHandle",
+        "endereco_iat": "0x005233ac"
+      },
+      {
+        "nome": "CreateEventA",
+        "endereco_iat": "0x005233b0"
+      },
+      {
+        "nome": "CreateFileA",
+        "endereco_iat": "0x005233b4"
+      },
+      {
+        "nome": "CreateMutexA",
+        "endereco_iat": "0x005233b8"
+      },
+      {
+        "nome": "CreateThread",
+        "endereco_iat": "0x005233bc"
+      },
+      {
+        "nome": "DeleteFileA",
+        "endereco_iat": "0x005233c0"
+      },
+      {
+        "nome": "ExitProcess",
+        "endereco_iat": "0x005233c4"
+      },
+      {
+        "nome": "ExitThread",
+        "endereco_iat": "0x005233c8"
+      },
+      {
+        "nome": "GetCommandLineA",
+        "endereco_iat": "0x005233cc"
+      },
+      {
+        "nome": "GetConsoleMode",
+        "endereco_iat": "0x005233d0"
+      },
+      {
+        "nome": "GetCurrentDirectoryA",
+        "endereco_iat": "0x005233d4"
+      },
+      {
+        "nome": "GetCurrentProcessId",
+        "endereco_iat": "0x005233d8"
+      },
+      {
+        "nome": "GetCurrentThreadId",
+        "endereco_iat": "0x005233dc"
+      },
+      {
+        "nome": "GetCurrentThread",
+        "endereco_iat": "0x005233e0"
+      },
+      {
+        "nome": "GetEnvironmentStrings",
+        "endereco_iat": "0x005233e4"
+      },
+      {
+        "nome": "GetFileType",
+        "endereco_iat": "0x005233e8"
+      },
+      {
+        "nome": "GetLastError",
+        "endereco_iat": "0x005233ec"
+      },
+      {
+        "nome": "GetModuleFileNameA",
+        "endereco_iat": "0x005233f0"
+      },
+      {
+        "nome": "GetModuleHandleA",
+        "endereco_iat": "0x005233f4"
+      },
+      {
+        "nome": "GetProcAddress",
+        "endereco_iat": "0x005233f8"
+      },
+      {
+        "nome": "GetStdHandle",
+        "endereco_iat": "0x005233fc"
+      },
+      {
+        "nome": "GetVersion",
+        "endereco_iat": "0x00523400"
+      },
+      {
+        "nome": "LoadLibraryA",
+        "endereco_iat": "0x00523404"
+      },
+      {
+        "nome": "ReadConsoleInputA",
+        "endereco_iat": "0x00523408"
+      },
+      {
+        "nome": "ReadFile",
+        "endereco_iat": "0x0052340c"
+      },
+      {
+        "nome": "ReleaseMutex",
+        "endereco_iat": "0x00523410"
+      },
+      {
+        "nome": "SetConsoleCtrlHandler",
+        "endereco_iat": "0x00523414"
+      },
+      {
+        "nome": "SetConsoleMode",
+        "endereco_iat": "0x00523418"
+      },
+      {
+        "nome": "SetCurrentDirectoryA",
+        "endereco_iat": "0x0052341c"
+      },
+      {
+        "nome": "SetEvent",
+        "endereco_iat": "0x00523420"
+      },
+      {
+        "nome": "SetFilePointer",
+        "endereco_iat": "0x00523424"
+      },
+      {
+        "nome": "SetStdHandle",
+        "endereco_iat": "0x00523428"
+      },
+      {
+        "nome": "TlsAlloc",
+        "endereco_iat": "0x0052342c"
+      },
+      {
+        "nome": "TlsFree",
+        "endereco_iat": "0x00523430"
+      },
+      {
+        "nome": "TlsGetValue",
+        "endereco_iat": "0x00523434"
+      },
+      {
+        "nome": "TlsSetValue",
+        "endereco_iat": "0x00523438"
+      },
+      {
+        "nome": "VirtualAlloc",
+        "endereco_iat": "0x0052343c"
+      },
+      {
+        "nome": "VirtualFree",
+        "endereco_iat": "0x00523440"
+      },
+      {
+        "nome": "WaitForSingleObject",
+        "endereco_iat": "0x00523444"
+      },
+      {
+        "nome": "WriteConsoleA",
+        "endereco_iat": "0x00523448"
+      },
+      {
+        "nome": "WriteFile",
+        "endereco_iat": "0x0052344c"
+      }
+    ],
+    "DSOUND.dll": [
+      {
+        "nome": "DirectSoundCreate",
+        "endereco_iat": "0x0052345c"
+      }
+    ],
+    "MSVFW32.dll": [
+      {
+        "nome": "MCIWndCreateA",
+        "endereco_iat": "0x0052346c"
+      }
+    ],
+    "DPLAYX.dll": [
+      {
+        "nome": "ordinal_1",
+        "endereco_iat": "0x00523480"
+      },
+      {
+        "nome": "ordinal_2",
+        "endereco_iat": "0x00523484"
+      }
+    ],
+    "WINMM.dll": [
+      {
+        "nome": "mciSendCommandA",
+        "endereco_iat": "0x0052349c"
+      },
+      {
+        "nome": "mciSendStringA",
+        "endereco_iat": "0x005234a0"
+      },
+      {
+        "nome": "timeGetTime",
+        "endereco_iat": "0x005234a4"
+      }
+    ],
+    "comdlg32.dll": [
+      {
+        "nome": "GetOpenFileNameA",
+        "endereco_iat": "0x005234b4"
+      }
+    ],
+    "DDRAW.dll": [
+      {
+        "nome": "DirectDrawCreate",
+        "endereco_iat": "0x005234c4"
+      }
+    ]
+  },
+  "strings_selecionadas": {
+    "0x0048d3db": "WATCOM C/C++32 Run-Time system. (c) Copyright by WATCOM International Corp. 1988-1995. All rights reserved.SQR",
+    "0x004941b4": "platgame.pie",
+    "0x004941dc": "\\Graphics\\Blocs.cmp",
+    "0x004941f0": "\\Graphics\\Troops.cmp",
+    "0x00494205": "\\Graphics\\Vehicule.cmp",
+    "0x0049421c": "\\Graphics\\Creature.cmp",
+    "0x00494233": "\\Graphics\\Building.cmp",
+    "0x0049424a": "\\Graphics\\Others.cmp",
+    "0x00494a4d": "\\platgame.pie",
+    "0x00494a5b": "\\pagemis2.pie",
+    "0x00494a69": "\\pagemis.pie",
+    "0x00494a76": "\\Graphics\\Invente.cmp",
+    "0x00494a8e": "\\credits.pie",
+    "0x00494a9b": "\\pageres.pie",
+    "0x00494ac5": "\\Graphics\\menu.cmp",
+    "0x00494ad8": "\\titre.pie",
+    "0x00494d44": "\\platgame.pie",
+    "0x00494d52": "\\RISING.INI",
+    "0x00494d67": "\\Ia.INI",
+    "0x00494d7c": "\\EVENTS.INI",
+    "0x00494d88": "\\platgame.pie",
+    "0x00494e4c": "./monstre.ini",
+    "0x00494e6c": "./monstre.ini",
+    "0x00494e92": "./monstre.ini",
+    "0x00494eb4": "./monstre.ini",
+    "0x00494ee4": "./monstre.ini"
+  },
+  "referencias_candidatas": [
+    {
+      "instrucao": "0x0040f6e7",
+      "destino": "0x004941b4",
+      "texto": "platgame.pie"
+    },
+    {
+      "instrucao": "0x00468443",
+      "destino": "0x00494a4d",
+      "texto": "\\platgame.pie"
+    },
+    {
+      "instrucao": "0x00468520",
+      "destino": "0x00494a5b",
+      "texto": "\\pagemis2.pie"
+    },
+    {
+      "instrucao": "0x00468548",
+      "destino": "0x00494a69",
+      "texto": "\\pagemis.pie"
+    },
+    {
+      "instrucao": "0x004685d0",
+      "destino": "0x00494a76",
+      "texto": "\\Graphics\\Invente.cmp"
+    },
+    {
+      "instrucao": "0x00468869",
+      "destino": "0x00494a8e",
+      "texto": "\\credits.pie"
+    },
+    {
+      "instrucao": "0x004688fa",
+      "destino": "0x00494a9b",
+      "texto": "\\pageres.pie"
+    },
+    {
+      "instrucao": "0x00468ba9",
+      "destino": "0x00494ac5",
+      "texto": "\\Graphics\\menu.cmp"
+    },
+    {
+      "instrucao": "0x00468c25",
+      "destino": "0x00494ad8",
+      "texto": "\\titre.pie"
+    },
+    {
+      "instrucao": "0x00474b33",
+      "destino": "0x00494d44",
+      "texto": "\\platgame.pie"
+    },
+    {
+      "instrucao": "0x00474c48",
+      "destino": "0x00494d52",
+      "texto": "\\RISING.INI"
+    },
+    {
+      "instrucao": "0x00474ce1",
+      "destino": "0x00494d67",
+      "texto": "\\Ia.INI"
+    },
+    {
+      "instrucao": "0x00474d77",
+      "destino": "0x00494d7c",
+      "texto": "\\EVENTS.INI"
+    },
+    {
+      "instrucao": "0x00474dc9",
+      "destino": "0x00494d88",
+      "texto": "\\platgame.pie"
+    },
+    {
+      "instrucao": "0x0047a64d",
+      "destino": "0x00494e4c",
+      "texto": "./monstre.ini"
+    },
+    {
+      "instrucao": "0x0047a677",
+      "destino": "0x00494e6c",
+      "texto": "./monstre.ini"
+    },
+    {
+      "instrucao": "0x0047a68f",
+      "destino": "0x00494e92",
+      "texto": "./monstre.ini"
+    },
+    {
+      "instrucao": "0x0047a6ac",
+      "destino": "0x00494eb4",
+      "texto": "./monstre.ini"
+    },
+    {
+      "instrucao": "0x0047a72c",
+      "destino": "0x00494ee4",
+      "texto": "./monstre.ini"
+    },
+    {
+      "instrucao": "0x0047abab",
+      "destino": "0x00494e4c",
+      "texto": "./monstre.ini"
+    },
+    {
+      "instrucao": "0x0047abd6",
+      "destino": "0x00494e6c",
+      "texto": "./monstre.ini"
+    },
+    {
+      "instrucao": "0x0047abee",
+      "destino": "0x00494e92",
+      "texto": "./monstre.ini"
+    },
+    {
+      "instrucao": "0x0047ac0b",
+      "destino": "0x00494eb4",
+      "texto": "./monstre.ini"
+    },
+    {
+      "instrucao": "0x0047b79c",
+      "destino": "0x00494e4c",
+      "texto": "./monstre.ini"
+    },
+    {
+      "instrucao": "0x0047b7c7",
+      "destino": "0x00494e6c",
+      "texto": "./monstre.ini"
+    },
+    {
+      "instrucao": "0x0047b7df",
+      "destino": "0x00494e92",
+      "texto": "./monstre.ini"
+    },
+    {
+      "instrucao": "0x0047b7fc",
+      "destino": "0x00494eb4",
+      "texto": "./monstre.ini"
+    }
+  ],
+  "limite": "Varredura linear pode interpretar dados como instruções; conferir os trechos contextualizados."
+}
