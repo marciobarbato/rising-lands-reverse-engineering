@@ -13,8 +13,11 @@ Também estão traduzidos o débito de `BatimentEnleveMatiere` e o recálculo de
 `BatimentInitCave` também foi traduzido, reconstruindo contagens por tipo e
 número de armazéns, sem redefinir capacidade unitária ou indicador:
 [CONTAGEM_ARMAZENS.md](CONTAGEM_ARMAZENS.md).
-**65 testes passaram**, com 11.994 execuções x86: 11.967 paradas declaradas,
-24 exceções de divisão por zero e três limites de execução esperados.
+Os efeitos incrementais de ganho e neutralização estão traduzidos em
+[PROPRIEDADE_CONSTRUCOES.md](PROPRIEDADE_CONSTRUCOES.md), com dependências
+explícitas para os caminhos de criação/movimento de balões.
+**84 testes passaram**, com 13.858 execuções x86: 13.815 paradas declaradas,
+40 exceções de divisão por zero e três limites de execução esperados.
 Não houve testes ignorados na execução emulada. O ramo de retirada de colono
 tem dependência explícita; veja [capacidade e excedentes](CAPACIDADE_EXCEDENTES.md).
 
@@ -39,9 +42,9 @@ python3 -B pesquisas-paralelas/economia/validar.py --emular
 ```
 
 O primeiro usa `pefile` e `capstone` já presentes em `../source/python`, verifica
-o hash do EXE e grava os trechos nesta pasta. O segundo passa 35 testes Python
-e ignora explicitamente 30 testes diferenciais. O terceiro exige Unicorn,
-reutilizado de `.local/python`, e executa todos os 65 testes. Nenhum comando
+o hash do EXE e grava os trechos nesta pasta. O segundo passa 46 testes Python
+e ignora explicitamente 38 testes diferenciais. O terceiro exige Unicorn,
+reutilizado de `.local/python`, e executa todos os 84 testes. Nenhum comando
 invoca o gerador de relatórios geral ou altera arquivos fora desta pesquisa.
 O uso de `-B` evita caches de bytecode nos módulos compartilhados importados.
 
@@ -227,9 +230,10 @@ o nome original RMI, sem renomeá-lo para reserva de compras ou dívida.
 
 A etapa de [capacidade e excedentes](CAPACIDADE_EXCEDENTES.md) acrescenta
 2.541 execuções; a de [débito e recálculo](RETIRADA_RECALCULO.md), outras 2.868;
-e a de [contagem de armazéns](CONTAGEM_ARMAZENS.md), mais 114.
-A suíte atual soma 11.994. Destas, 11.967 alcançam parada declarada (64 na entrada
-de BatimentRetireColon), 24 conferem divisão por zero e três conferem o limite
+e a de [contagem de armazéns](CONTAGEM_ARMAZENS.md), mais 114. Os
+[efeitos de propriedade](PROPRIEDADE_CONSTRUCOES.md) acrescentam 1.864.
+A suíte atual soma 13.858. Destas, 13.815 alcançam parada declarada (64 na entrada
+de BatimentRetireColon e 32 nas dependências de balão), 40 conferem divisão por zero e três conferem o limite
 no ciclo de pilhas corrompidas.
 
 A bancada existente verifica hash, endereços permitidos, parada explícita e
@@ -242,9 +246,10 @@ bytes que não deveriam ser escritos entre os ponteiros de saída. Os testes
 incluem estados inconsistentes e bits altos nos argumentos de registradores.
 
 Não foi iniciada uma partida. O depósito com capacidade está traduzido;
-geração da produção, coleta, transporte, fome, mercado, atualização incremental
-e por tecnologia da capacidade, persistência integral e filas continuam parciais.
-A recontagem global de armazéns está traduzida.
+geração da produção, coleta, transporte, fome, mercado, fluxo completo dos
+chamadores de propriedade, tecnologia, persistência integral e filas continuam parciais.
+A recontagem global e os efeitos incrementais econômicos estão traduzidos;
+os caminhos de criação/movimento de balões permanecem dependências explícitas.
 Os testes não alegam invariantes de gameplay para todos os estados possíveis.
 As mutações Python protegem índices de jogador/recurso após truncamento;
 as mutações originais não fazem essas verificações e podem acessar fora da tabela.
@@ -266,10 +271,13 @@ identificar IDs foi conferida nos trechos dos chamadores.
 - [construcoes.py](construcoes.py): crédito/débito de construções, recálculo, excedentes e sacolas.
 - [bancada_construcoes.py](bancada_construcoes.py): referência x86 sem substituir chamadas internas.
 - [bancada_init_cave.py](bancada_init_cave.py): contagem dos 1000 registros no x86 original.
+- [proprietarios.py](proprietarios.py): ganho/neutralização, listas, permissões e depósito da matéria.
+- [bancada_proprietarios.py](bancada_proprietarios.py): referência original e paradas de dependência.
 - [testes/test_construcoes.py](testes/test_construcoes.py): dez testes locais e dez diferenciais novos.
 - [testes/test_economia.py](testes/test_economia.py): dez testes locais e nove diferenciais.
 - [testes/test_retirada_recalculo.py](testes/test_retirada_recalculo.py): oito testes locais e seis diferenciais.
 - [testes/test_init_cave.py](testes/test_init_cave.py): sete testes locais e cinco diferenciais.
+- [testes/test_proprietarios.py](testes/test_proprietarios.py): 11 testes locais e oito diferenciais.
 - [validar.py](validar.py): execução e relatórios restritos a esta pasta.
 - [extrair_evidencias.py](extrair_evidencias.py): exportador reproduzível do EXE.
 - [evidencias/manifesto.json](evidencias/manifesto.json): endereços, hash e referências candidatas.
@@ -279,3 +287,4 @@ identificar IDs foi conferida nos trechos dos chamadores.
 - [CAPACIDADE_EXCEDENTES.md](CAPACIDADE_EXCEDENTES.md): análise desta continuação.
 - [RETIRADA_RECALCULO.md](RETIRADA_RECALCULO.md): débito e recálculo do indicador.
 - [CONTAGEM_ARMAZENS.md](CONTAGEM_ARMAZENS.md): contagem global, capacidade derivada e integração.
+- [PROPRIEDADE_CONSTRUCOES.md](PROPRIEDADE_CONSTRUCOES.md): efeitos de ganho e neutralização.

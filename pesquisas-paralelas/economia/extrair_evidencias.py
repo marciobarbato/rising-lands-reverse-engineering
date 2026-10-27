@@ -27,12 +27,18 @@ NOMES = (
     'BatimentAlloc', 'BatimentInitTechnologie', 'SacCherchePlace',
     'TerrainAccepteSac', 'SacGetCapacite',
     'Random',
+    'InitBatimentNeutre',
+    'BallonPrepareArrivee', 'BallonPrepareSortie', 'TypeEnginGetNb',
+    'BagInit', 'BagContient', 'BagPrend', 'BagRetire',
+    'TypeEnginGetBagOrdre',
+    'TerrainDeposeMatiere', 'SortilegeResetRealisable', 'SortilegeSetTechnologie',
 )
 # O RET precede dados; não apresentá-los como instruções da função.
 FINS_CONFIRMES = {0x41aace: 0x41ab04, 0x4283e2: 0x428691}
 TRECHOS_AUXILIARES = {
     0x423025: ('epilogo_compartilhado_de_BatimentCalculResource', 0x42302d),
     0x41db1e: ('epilogo_compartilhado_de_BatimentInitCave', 0x41db24),
+    0x440d58: ('epilogo_compartilhado_de_BallonPrepareArrivee', 0x440d5e),
 }
 
 
@@ -85,7 +91,7 @@ def extrair():
                                         alvo=f'0x{alvo:08x}', nome=alvos[alvo],
                                         simbolo_anterior=nomes))
     tipos = []
-    for tipo in (2, 3, 4, 18, 21):
+    for tipo in (2, 3, 4, 6, 18, 20, 21):
         endereco = 0x495d8c + tipo * 52
         registro = imagem[endereco-base:endereco-base + 52]
         tipos.append(dict(id=tipo, endereco=f'0x{endereco:08x}',

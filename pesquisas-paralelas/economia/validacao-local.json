@@ -1,6 +1,6 @@
 {
   "modo": "Python sem emulação",
-  "testes": 65,
+  "testes": 84,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -101,6 +101,38 @@
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {
+      "teste": "test_bibliotecas_flags_e_bags_256_chamadas (test_proprietarios.DiferencialProprietarios)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_dependencias_de_balao_32_paradas_explicitas (test_proprietarios.DiferencialProprietarios)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_divisao_zero_16_excecoes_apos_incremento_ou_debito (test_proprietarios.DiferencialProprietarios)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_ganho_armazem_512_estados_e_pilha_suja (test_proprietarios.DiferencialProprietarios)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_heliportos_baloes_existentes_e_listas_256_chamadas (test_proprietarios.DiferencialProprietarios)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_neutralizacao_armazem_256_estados_e_jogadores_distintos (test_proprietarios.DiferencialProprietarios)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_todos_os_256_tipos_512_chamadas (test_proprietarios.DiferencialProprietarios)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_transferencia_com_recontagem_24_chamadas (test_proprietarios.DiferencialProprietarios)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
       "teste": "test_divisao_zero_16_excecoes_e_ordem_dos_efeitos (test_retirada_recalculo.DiferencialRetiradaRecalculo)",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
@@ -130,11 +162,13 @@
     "Diferencial": 0,
     "DiferencialConstrucoes": 0,
     "DiferencialRetiradaRecalculo": 0,
-    "DiferencialInitCave": 0
+    "DiferencialInitCave": 0,
+    "DiferencialProprietarios": 0
   },
   "excecoes_x86_esperadas": 0,
   "limites_x86_esperados": 0,
   "execucoes_x86_ate_parada": 0,
+  "paradas_dependencia_proprietarios": 0,
   "sucesso": true,
   "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
 }

@@ -1,15 +1,15 @@
 # Entrega ao chat principal
 
 Esta pasta é autônoma. Nenhum arquivo compartilhado foi alterado e nenhum
-projeto Ghidra foi aberto/criado. O usuário autorizou o commit no `main` desta
-entrega, incluindo a base econômica antes não versionada, limitado a esta pasta.
+projeto Ghidra foi aberto/criado. Os commits autorizados no `main` se limitam
+a esta pasta e preservam os arquivos e o índice dos demais chats.
 Os comandos de teste usam `-B` e o código de validação desabilita bytecode para
 não criar caches nos módulos compartilhados lidos pela pesquisa.
 
 ## Como incorporar
 
-1. Revisar [README.md](README.md), os ASM e o relatório com 65 testes aprovados
-   e 11.994 execuções x86 (incluindo 24 exceções e três limites esperados).
+1. Revisar [README.md](README.md), os ASM e o relatório com 84 testes aprovados
+   e 13.858 execuções x86 (incluindo 40 exceções e três limites esperados).
    Executar `validar.py --emular` se houver Unicorn/JIT.
 2. Incorporar `economia.py` em `ferramentas/` ou manter a pesquisa como módulo
    independente. O código de produção depende só da biblioteca padrão.
@@ -131,6 +131,27 @@ preservar o wrap, inclusive 256 armazéns virando zero. Chamadas separadas a
 `recalcular_recursos` só devem ser ligadas onde o fluxo original exigir.
 O domínio e a validação estão em [CONTAGEM_ARMAZENS.md](CONTAGEM_ARMAZENS.md).
 
+## Ganho e neutralização
+
+`PropriedadeConstrucoes`, em `proprietarios.py`, recebe um `EconomiaConstrucoes`
+compartilhado e cópias dos buffers de bibliotecas, balões, números de unidades,
+pendências, ordens e permissões. Seus métodos são
+`inicializar_jogador(indice, jogador)` e `inicializar_neutro(indice, jogador)`.
+
+Eles não mudam dono/estado nem atualizam as 88 contagens por tipo. Atribuir o
+dono pertence ao chamador original; não transformar os dois métodos numa troca
+automática de proprietário. A contagem incremental de armazéns é u16, diferente
+da recontagem global u8. A neutralização pode debitar o jogador do byte global
+`0x4dfab8`, representado por `jogador_deposito`.
+
+Os caminhos de balão que exigem criar/mover unidades levantam
+`DependenciaBalaoPendente`, antes da chamada correspondente. Um integrador com
+essas rotinas prontas pode fornecer `preparar_chegada`/`preparar_saida`, cada um
+implementando sua dependência inteira. Não substituir por retorno fictício:
+os 32 testes correspondentes só validam até a entrada original da dependência.
+Domínio, endereços, layout e sincronização estão em
+[PROPRIEDADE_CONSTRUCOES.md](PROPRIEDADE_CONSTRUCOES.md).
+
 ## Atualizações de documentação sugeridas, não realizadas
 
 - FORMATOS.md: substituir a lacuna dos IDs iniciais por comida=1, pedra=2,
@@ -140,7 +161,7 @@ O domínio e a validação estão em [CONTAGEM_ARMAZENS.md](CONTAGEM_ARMAZENS.md
   depósito e contagem global dos armazéns como traduzidos; conservar geração
   da produção, alterações incrementais/tecnológicas, consumo completo e filas.
 - SIMBOLOS.md/IA.md: registrar os diferentes índices da IA e o retorno 1/-1.
-- EMULACAO.md/validação geral: integrar os 30 testes diferenciais sem somar
+- EMULACAO.md/validação geral: integrar os 38 testes diferenciais sem somar
   automaticamente as contagens desta pesquisa à suíte compartilhada.
 
 ## Próximas investigações de economia
@@ -148,9 +169,9 @@ O domínio e a validação estão em [CONTAGEM_ARMAZENS.md](CONTAGEM_ARMAZENS.md
 1. Completar a dependência `0x41dde0` BatimentRetireColon, se/quando o chat
    responsável por unidades disponibilizar seus efeitos. A entrada e o retorno
    necessário para o ramo tipo 4 estão documentados nesta pesquisa.
-2. Ganhos/perdas de proprietário e caminhos de tecnologia. A recontagem global
-   de `0x419112` e o indicador de `0x4235bd`/`0x423355` já foram traduzidos;
-   o incremento u16 de InitBatimentPlayer ainda difere da recontagem u8.
+2. Ligar os efeitos incrementais traduzidos aos chamadores de colonização e
+   neutralização, mantendo criação/movimento de balões no subsistema responsável.
+   Completar tecnologia e o restante de TerrainDeposeMatiere fora da flag zero.
 3. `0x4283e2` InitRecruteTroupe: completar fila/estados sem alterar a semântica
    das três primitivas de débito. O recorte estático já está nesta pasta.
 4. Mercado e trocas em `0x466533..0x467640`: preços, propostas e transferências.

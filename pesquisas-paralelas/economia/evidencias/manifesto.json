@@ -8,7 +8,9 @@
     "0x00419fc8": "BatimentRecalculRessource",
     "0x0041aace": "BatimentGetRessource",
     "0x0041b1c6": "GarageCalculCoutReparation",
+    "0x0041bb8a": "TerrainDeposeMatiere",
     "0x0041be88": "InitBatimentPlayer",
+    "0x0041c017": "InitBatimentNeutre",
     "0x0041cde0": "BatimentInitTechnologie",
     "0x0041dde0": "BatimentRetireColon",
     "0x00422fde": "StockPossible",
@@ -17,7 +19,15 @@
     "0x004235bd": "BatimentEnleveMatiere",
     "0x004283e2": "InitRecruteTroupe",
     "0x004410d2": "EnginGetRessource",
+    "0x00441baa": "BallonPrepareArrivee",
+    "0x00441d4f": "BallonPrepareSortie",
     "0x004470d2": "BagAccepte",
+    "0x00447148": "BagInit",
+    "0x004471b8": "BagContient",
+    "0x004472ea": "BagRetire",
+    "0x00447483": "BagPrend",
+    "0x004474c7": "TypeEnginGetBagOrdre",
+    "0x00456d92": "TypeEnginGetNb",
     "0x0045d753": "BatimentRessourceNecessaire",
     "0x0045d7cf": "TroupeRessourceNecessaire",
     "0x00467640": "GetRessourceRMI",
@@ -32,6 +42,8 @@
     "0x0046ab21": "LoadGameRessource",
     "0x0046ab33": "SauveRessource",
     "0x004704dc": "Random",
+    "0x004749ca": "SortilegeResetRealisable",
+    "0x00474a38": "SortilegeSetTechnologie",
     "0x00475736": "SacGetCapacite",
     "0x00475763": "TerrainAccepteSac",
     "0x004757af": "SacCherchePlace",
@@ -52,6 +64,10 @@
     "0x0041db1e": {
       "nome": "epilogo_compartilhado_de_BatimentInitCave",
       "fim_exclusivo": "0x0041db24"
+    },
+    "0x00440d58": {
+      "nome": "epilogo_compartilhado_de_BallonPrepareArrivee",
+      "fim_exclusivo": "0x00440d5e"
     }
   },
   "tipos_construcao_confirmados": [
@@ -74,10 +90,22 @@
       "registro_hex": "0300040064000000ec5c49000c00060000000543554c545552450000000000000000000000000000000000000000000000000000"
     },
     {
+      "id": 6,
+      "endereco": "0x00495ec4",
+      "nome_original": "BIBLIOTHEQUE",
+      "registro_hex": "06000500f40100006c5d490014000a000000034249424c494f544845515545000000000000000000000000000000000000000000"
+    },
+    {
       "id": 18,
       "endereco": "0x00496134",
       "nome_original": "HELIOPORT",
       "registro_hex": "040005002c010000485d49001400080000000448454c494f504f5254000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": 20,
+      "endereco": "0x0049619c",
+      "nome_original": "MONASTEREFUSION",
+      "registro_hex": "04000500900100009cfb4d00140004000000064d4f4e415354455245465553494f4e000000000000000000000000000000000000"
     },
     {
       "id": 21,
@@ -88,12 +116,66 @@
   ],
   "referencias_diretas_candidatas": [
     {
+      "endereco": "0x00410a71",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "AffContenanceEngin"
+      ]
+    },
+    {
+      "endereco": "0x00410a81",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "AffContenanceEngin"
+      ]
+    },
+    {
       "endereco": "0x00419fe7",
       "instrucao": "call",
       "alvo": "0x0046769d",
       "nome": "GetRessourceStock",
       "simbolo_anterior": [
         "BatimentRecalculRessource"
+      ]
+    },
+    {
+      "endereco": "0x0041a084",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
+      "simbolo_anterior": [
+        "TransformeColonsEnTroupe"
+      ]
+    },
+    {
+      "endereco": "0x0041a4ec",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentGetColons"
+      ]
+    },
+    {
+      "endereco": "0x0041a60d",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentEstHabiter"
+      ]
+    },
+    {
+      "endereco": "0x0041a8ca",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
+      "simbolo_anterior": [
+        "UpdateBatiment"
       ]
     },
     {
@@ -175,6 +257,15 @@
       "nome": "GetRessourceStock",
       "simbolo_anterior": [
         "HospiCalculCoutReparation"
+      ]
+    },
+    {
+      "endereco": "0x0041b717",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentSelection"
       ]
     },
     {
@@ -277,12 +368,345 @@
       ]
     },
     {
+      "endereco": "0x0041becb",
+      "instrucao": "call",
+      "alvo": "0x00441baa",
+      "nome": "BallonPrepareArrivee",
+      "simbolo_anterior": [
+        "InitBatimentPlayer"
+      ]
+    },
+    {
+      "endereco": "0x0041bee8",
+      "instrucao": "call",
+      "alvo": "0x00456d92",
+      "nome": "TypeEnginGetNb",
+      "simbolo_anterior": [
+        "InitBatimentPlayer"
+      ]
+    },
+    {
+      "endereco": "0x0041bf21",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "InitBatimentPlayer"
+      ]
+    },
+    {
+      "endereco": "0x0041bf3b",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "InitBatimentPlayer"
+      ]
+    },
+    {
+      "endereco": "0x0041bf47",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "InitBatimentPlayer"
+      ]
+    },
+    {
       "endereco": "0x0041bf89",
       "instrucao": "call",
       "alvo": "0x0046769d",
       "nome": "GetRessourceStock",
       "simbolo_anterior": [
         "InitBatimentPlayer"
+      ]
+    },
+    {
+      "endereco": "0x0041c063",
+      "instrucao": "call",
+      "alvo": "0x00441d4f",
+      "nome": "BallonPrepareSortie",
+      "simbolo_anterior": [
+        "InitBatimentNeutre"
+      ]
+    },
+    {
+      "endereco": "0x0041c07f",
+      "instrucao": "call",
+      "alvo": "0x00456d92",
+      "nome": "TypeEnginGetNb",
+      "simbolo_anterior": [
+        "InitBatimentNeutre"
+      ]
+    },
+    {
+      "endereco": "0x0041c0b8",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "InitBatimentNeutre"
+      ]
+    },
+    {
+      "endereco": "0x0041c0c4",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
+      "simbolo_anterior": [
+        "InitBatimentNeutre"
+      ]
+    },
+    {
+      "endereco": "0x0041c10a",
+      "instrucao": "call",
+      "alvo": "0x0041bb8a",
+      "nome": "TerrainDeposeMatiere",
+      "simbolo_anterior": [
+        "InitBatimentNeutre"
+      ]
+    },
+    {
+      "endereco": "0x0041c12d",
+      "instrucao": "call",
+      "alvo": "0x0041bb8a",
+      "nome": "TerrainDeposeMatiere",
+      "simbolo_anterior": [
+        "InitBatimentNeutre"
+      ]
+    },
+    {
+      "endereco": "0x0041c152",
+      "instrucao": "call",
+      "alvo": "0x004749ca",
+      "nome": "SortilegeResetRealisable",
+      "simbolo_anterior": [
+        "InitBatimentNeutre"
+      ]
+    },
+    {
+      "endereco": "0x0041c159",
+      "instrucao": "call",
+      "alvo": "0x00474a38",
+      "nome": "SortilegeSetTechnologie",
+      "simbolo_anterior": [
+        "InitBatimentNeutre"
+      ]
+    },
+    {
+      "endereco": "0x0041c7f1",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041c80e",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041c832",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041c856",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041c87a",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041c88e",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041c8af",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041c8d0",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041c8f6",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041c904",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041c925",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041c952",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041c983",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041c9a4",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041c9c8",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041c9ec",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041ca10",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041ca3d",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041ca67",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041ca88",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041cacc",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041caed",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041cb08",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041cb46",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
       ]
     },
     {
@@ -301,6 +725,78 @@
       "nome": "GetRessourceStock",
       "simbolo_anterior": [
         "BatimentInitTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041da18",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
+      "simbolo_anterior": [
+        "BatimentEnleveUnColon"
+      ]
+    },
+    {
+      "endereco": "0x0041dbda",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentEnleveUneTroupeTente"
+      ]
+    },
+    {
+      "endereco": "0x0041dcb4",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "SortUneTroupeHangar"
+      ]
+    },
+    {
+      "endereco": "0x0041de27",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentRetireColon"
+      ]
+    },
+    {
+      "endereco": "0x0041dfa6",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentRetireColon"
+      ]
+    },
+    {
+      "endereco": "0x0041e010",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentRetireColon"
+      ]
+    },
+    {
+      "endereco": "0x0041e0d7",
+      "instrucao": "call",
+      "alvo": "0x0041c017",
+      "nome": "InitBatimentNeutre",
+      "simbolo_anterior": [
+        "BatimentRetireColon"
+      ]
+    },
+    {
+      "endereco": "0x0041f111",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "DemonteBatiment"
       ]
     },
     {
@@ -358,6 +854,15 @@
       ]
     },
     {
+      "endereco": "0x0041f492",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "DeposeContenu"
+      ]
+    },
+    {
       "endereco": "0x0041f4b7",
       "instrucao": "call",
       "alvo": "0x0042340f",
@@ -367,10 +872,37 @@
       ]
     },
     {
+      "endereco": "0x0041f4c2",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
+      "simbolo_anterior": [
+        "DeposeContenu"
+      ]
+    },
+    {
+      "endereco": "0x0041f4d7",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "DeposeContenu"
+      ]
+    },
+    {
       "endereco": "0x0041f4f9",
       "instrucao": "call",
       "alvo": "0x0042340f",
       "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "DeposeContenu"
+      ]
+    },
+    {
+      "endereco": "0x0041f507",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
       "simbolo_anterior": [
         "DeposeContenu"
       ]
@@ -394,10 +926,46 @@
       ]
     },
     {
+      "endereco": "0x0041f95c",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentLogeEngin"
+      ]
+    },
+    {
+      "endereco": "0x0041f9cb",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentLogeEngin"
+      ]
+    },
+    {
       "endereco": "0x0041f9f4",
       "instrucao": "call",
       "alvo": "0x0042340f",
       "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "BatimentLogeEngin"
+      ]
+    },
+    {
+      "endereco": "0x0041fa02",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
+      "simbolo_anterior": [
+        "BatimentLogeEngin"
+      ]
+    },
+    {
+      "endereco": "0x0041fa15",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
       "simbolo_anterior": [
         "BatimentLogeEngin"
       ]
@@ -412,10 +980,28 @@
       ]
     },
     {
+      "endereco": "0x0041fa4c",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
+      "simbolo_anterior": [
+        "BatimentLogeEngin"
+      ]
+    },
+    {
       "endereco": "0x0041fa9a",
       "instrucao": "call",
       "alvo": "0x0041be88",
       "nome": "InitBatimentPlayer",
+      "simbolo_anterior": [
+        "BatimentLogeEngin"
+      ]
+    },
+    {
+      "endereco": "0x0041fafe",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
       "simbolo_anterior": [
         "BatimentLogeEngin"
       ]
@@ -466,10 +1052,64 @@
       ]
     },
     {
+      "endereco": "0x004202b6",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "CreerBatiment"
+      ]
+    },
+    {
+      "endereco": "0x00420eae",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
+      "simbolo_anterior": [
+        "SortieTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00420ecc",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "SortieTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00420ee9",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
+      "simbolo_anterior": [
+        "SortieTroupe"
+      ]
+    },
+    {
       "endereco": "0x00420efa",
       "instrucao": "call",
       "alvo": "0x0042340f",
       "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "SortieTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00420f0d",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "SortieTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00420f29",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
       "simbolo_anterior": [
         "SortieTroupe"
       ]
@@ -484,10 +1124,64 @@
       ]
     },
     {
+      "endereco": "0x00421009",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "SortieTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00421282",
+      "instrucao": "call",
+      "alvo": "0x00474a38",
+      "nome": "SortilegeSetTechnologie",
+      "simbolo_anterior": [
+        "ApprentissageSortTerminer"
+      ]
+    },
+    {
+      "endereco": "0x004218a9",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "GetPourcentageOccupation"
+      ]
+    },
+    {
+      "endereco": "0x00421af5",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
       "endereco": "0x00421bf8",
       "instrucao": "call",
       "alvo": "0x0041b1c6",
       "nome": "GarageCalculCoutReparation",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x00421eab",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x004222a8",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
       "simbolo_anterior": [
         "CalculReparation"
       ]
@@ -520,6 +1214,15 @@
       ]
     },
     {
+      "endereco": "0x00422687",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
       "endereco": "0x004227aa",
       "instrucao": "call",
       "alvo": "0x004676e5",
@@ -544,6 +1247,24 @@
       "nome": "GetRessourceStock",
       "simbolo_anterior": [
         "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x00422ac7",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
+      "simbolo_anterior": [
+        "CalculTrajectoire"
+      ]
+    },
+    {
+      "endereco": "0x00422b85",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "CalculTrajectoire"
       ]
     },
     {
@@ -682,12 +1403,93 @@
       ]
     },
     {
+      "endereco": "0x00423c56",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "ConstruitPerso"
+      ]
+    },
+    {
+      "endereco": "0x00423dce",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "ConstruitSort"
+      ]
+    },
+    {
+      "endereco": "0x004241d2",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "TourelleTrouveBatiment"
+      ]
+    },
+    {
+      "endereco": "0x00424b93",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentAjusteSac"
+      ]
+    },
+    {
+      "endereco": "0x00424bf2",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "BatimentAjusteSac"
+      ]
+    },
+    {
+      "endereco": "0x00424c1e",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentAjusteSac"
+      ]
+    },
+    {
+      "endereco": "0x00424e40",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "ControleArrivageHangar"
+      ]
+    },
+    {
       "endereco": "0x004255b1",
       "instrucao": "call",
       "alvo": "0x004410d2",
       "nome": "EnginGetRessource",
       "simbolo_anterior": [
         "BatimentRepareEngin"
+      ]
+    },
+    {
+      "endereco": "0x004256a9",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "ContructionEstEnCours"
+      ]
+    },
+    {
+      "endereco": "0x00425805",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "ContructionSortEstEnCours"
       ]
     },
     {
@@ -700,10 +1502,73 @@
       ]
     },
     {
+      "endereco": "0x0042598e",
+      "instrucao": "call",
+      "alvo": "0x00456d92",
+      "nome": "TypeEnginGetNb",
+      "simbolo_anterior": [
+        "HelipedeTerminer"
+      ]
+    },
+    {
+      "endereco": "0x004259d0",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "HelipedeTerminer"
+      ]
+    },
+    {
+      "endereco": "0x004259dc",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
+      "simbolo_anterior": [
+        "HelipedeTerminer"
+      ]
+    },
+    {
+      "endereco": "0x00426031",
+      "instrucao": "call",
+      "alvo": "0x00474a38",
+      "nome": "SortilegeSetTechnologie",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
       "endereco": "0x004261d1",
       "instrucao": "call",
       "alvo": "0x004704dc",
       "nome": "Random",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x004262c2",
+      "instrucao": "call",
+      "alvo": "0x00456d92",
+      "nome": "TypeEnginGetNb",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00426302",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x0042630e",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
       "simbolo_anterior": [
         "CalculTroupe"
       ]
@@ -754,10 +1619,82 @@
       ]
     },
     {
+      "endereco": "0x0042696a",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x004269df",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00426a9e",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00426b8d",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00426cab",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
       "endereco": "0x00426d04",
       "instrucao": "call",
       "alvo": "0x004470d2",
       "nome": "BagAccepte",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00426deb",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00426e27",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00426ed5",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
       "simbolo_anterior": [
         "BatimentNextEtape"
       ]
@@ -781,6 +1718,15 @@
       ]
     },
     {
+      "endereco": "0x004275dd",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
       "endereco": "0x00427aef",
       "instrucao": "call",
       "alvo": "0x004704dc",
@@ -794,6 +1740,141 @@
       "instrucao": "call",
       "alvo": "0x004704dc",
       "nome": "Random",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00427d9a",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00427dda",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00427eb1",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00427ebd",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00427ecb",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00427f22",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00427f6a",
+      "instrucao": "call",
+      "alvo": "0x00456d92",
+      "nome": "TypeEnginGetNb",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00427fa5",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00427fbf",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00427fcb",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00427fe7",
+      "instrucao": "call",
+      "alvo": "0x00456d92",
+      "nome": "TypeEnginGetNb",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00428026",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00428032",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00428072",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x0042812c",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
       "simbolo_anterior": [
         "BatimentNextEtape"
       ]
@@ -889,6 +1970,15 @@
       ]
     },
     {
+      "endereco": "0x0042ab36",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
       "endereco": "0x0042bf6b",
       "instrucao": "call",
       "alvo": "0x004676e5",
@@ -958,6 +2048,33 @@
       "nome": "Random",
       "simbolo_anterior": [
         "BallonPrepareArrivee"
+      ]
+    },
+    {
+      "endereco": "0x0044395e",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
+      "simbolo_anterior": [
+        "EnginRetireType"
+      ]
+    },
+    {
+      "endereco": "0x00443d71",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "EnginRetireType"
+      ]
+    },
+    {
+      "endereco": "0x00443d85",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
+      "simbolo_anterior": [
+        "EnginRetireType"
       ]
     },
     {
@@ -1123,10 +2240,37 @@
       ]
     },
     {
+      "endereco": "0x0044c8f5",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044c90b",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
       "endereco": "0x0044c925",
       "instrucao": "call",
       "alvo": "0x0042340f",
       "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044c994",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
       "simbolo_anterior": [
         "CalculWorkEngin"
       ]
@@ -1154,6 +2298,24 @@
       "instrucao": "call",
       "alvo": "0x00475763",
       "nome": "TerrainAccepteSac",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044d6bb",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044d82a",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
       "simbolo_anterior": [
         "CalculWorkEngin"
       ]
@@ -1204,10 +2366,28 @@
       ]
     },
     {
+      "endereco": "0x0044e1ad",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
       "endereco": "0x0044e1da",
       "instrucao": "call",
       "alvo": "0x0042340f",
       "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "CalculWorkEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044e1ec",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
       "simbolo_anterior": [
         "CalculWorkEngin"
       ]
@@ -1240,10 +2420,28 @@
       ]
     },
     {
+      "endereco": "0x0044e920",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "CalculDechargeCaveEngin"
+      ]
+    },
+    {
       "endereco": "0x0044e953",
       "instrucao": "call",
       "alvo": "0x0042340f",
       "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "CalculDechargeCaveEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044e969",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
       "simbolo_anterior": [
         "CalculDechargeCaveEngin"
       ]
@@ -1276,10 +2474,28 @@
       ]
     },
     {
+      "endereco": "0x0044f094",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "EnginCalculTransporte"
+      ]
+    },
+    {
       "endereco": "0x0044f0c7",
       "instrucao": "call",
       "alvo": "0x0042340f",
       "nome": "BatimentAjouteMatiere",
+      "simbolo_anterior": [
+        "EnginCalculTransporte"
+      ]
+    },
+    {
+      "endereco": "0x0044f0dc",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
       "simbolo_anterior": [
         "EnginCalculTransporte"
       ]
@@ -1298,6 +2514,24 @@
       "instrucao": "call",
       "alvo": "0x004704dc",
       "nome": "Random",
+      "simbolo_anterior": [
+        "CalculTransporteEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044f76c",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "CalculTransporteEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044f839",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
       "simbolo_anterior": [
         "CalculTransporteEngin"
       ]
@@ -1336,6 +2570,24 @@
       "nome": "Random",
       "simbolo_anterior": [
         "CalculAttaqueEngin"
+      ]
+    },
+    {
+      "endereco": "0x00452e5b",
+      "instrucao": "call",
+      "alvo": "0x004471b8",
+      "nome": "BagContient",
+      "simbolo_anterior": [
+        "CalculFatigue"
+      ]
+    },
+    {
+      "endereco": "0x00452e71",
+      "instrucao": "call",
+      "alvo": "0x004472ea",
+      "nome": "BagRetire",
+      "simbolo_anterior": [
+        "CalculFatigue"
       ]
     },
     {
@@ -1690,12 +2942,39 @@
       ]
     },
     {
+      "endereco": "0x004617ad",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "MarcheEchangePrend"
+      ]
+    },
+    {
       "endereco": "0x0046183e",
       "instrucao": "call",
       "alvo": "0x004235bd",
       "nome": "BatimentEnleveMatiere",
       "simbolo_anterior": [
         "MarcheEchangePrend"
+      ]
+    },
+    {
+      "endereco": "0x00461a1e",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "MarcheEchangeDonne"
+      ]
+    },
+    {
+      "endereco": "0x00461b15",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "MarcheEchangeDonne"
       ]
     },
     {
@@ -1762,6 +3041,15 @@
       ]
     },
     {
+      "endereco": "0x00464b95",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "MarcheCreerEngin"
+      ]
+    },
+    {
       "endereco": "0x00464c15",
       "instrucao": "call",
       "alvo": "0x004676e5",
@@ -1798,6 +3086,42 @@
       ]
     },
     {
+      "endereco": "0x00464d92",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "EnginEstDemander"
+      ]
+    },
+    {
+      "endereco": "0x00464e8a",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "EnginEstDemander"
+      ]
+    },
+    {
+      "endereco": "0x0046628b",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "RemplitHangar1"
+      ]
+    },
+    {
+      "endereco": "0x00466347",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "RemplitHangar2"
+      ]
+    },
+    {
       "endereco": "0x0046648a",
       "instrucao": "call",
       "alvo": "0x004235bd",
@@ -1813,6 +3137,15 @@
       "nome": "BatimentEnleveMatiere",
       "simbolo_anterior": [
         "VideMatiere"
+      ]
+    },
+    {
+      "endereco": "0x00466555",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "CalculValeur"
       ]
     },
     {
@@ -2038,6 +3371,60 @@
       "nome": "BatimentInitTechnologie",
       "simbolo_anterior": [
         "InventionSetEffet"
+      ]
+    },
+    {
+      "endereco": "0x00474a4e",
+      "instrucao": "call",
+      "alvo": "0x004474c7",
+      "nome": "TypeEnginGetBagOrdre",
+      "simbolo_anterior": [
+        "SortilegeSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x00474a5a",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "SortilegeSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x00474a86",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "SortilegeSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x00474ac2",
+      "instrucao": "call",
+      "alvo": "0x004474c7",
+      "nome": "TypeEnginGetBagOrdre",
+      "simbolo_anterior": [
+        "SortilegeInitTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x00474acd",
+      "instrucao": "call",
+      "alvo": "0x00447148",
+      "nome": "BagInit",
+      "simbolo_anterior": [
+        "SortilegeInitTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x00474af7",
+      "instrucao": "call",
+      "alvo": "0x00447483",
+      "nome": "BagPrend",
+      "simbolo_anterior": [
+        "SortilegeInitTechnologie"
       ]
     },
     {

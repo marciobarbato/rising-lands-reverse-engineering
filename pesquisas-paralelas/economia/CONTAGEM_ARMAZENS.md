@@ -123,13 +123,17 @@ com intervalos explícitos, até 1.000.000 de instruções e timeout de um segun
 | **Total novo** | **114** |
 
 Os sete testes locais e cinco diferenciais acrescentam 12 testes à suíte.
-**65 testes passaram**, com **11.994 execuções x86** ao todo: 11.967 paradas
+Ao concluir esta etapa, **65 testes passaram**, com **11.994 execuções x86** ao todo: 11.967 paradas
 declaradas, 24 exceções e três limites esperados das etapas anteriores.
 Todas as 114 execuções novas alcançam o retorno normal. São comparados:
 as 88 contagens, os quatro bytes derivados do tipo 18, capacidades, os 276.000
 bytes de estruturas, saldos, grades de sacolas, sementes e guardas adjacentes.
 As entradas com registradores variados também conferem os registradores
 preservados e a ausência de chamadas econômicas durante a recontagem.
+
+Os efeitos incrementais foram depois traduzidos em
+[PROPRIEDADE_CONSTRUCOES.md](PROPRIEDADE_CONSTRUCOES.md). Os totais atuais estão
+no README e no relatório de validação; os números acima registram esta etapa.
 
 ## API, proteção e integração
 
