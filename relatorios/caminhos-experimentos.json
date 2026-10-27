@@ -1,0 +1,333 @@
+{
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "limite_instrucoes_por_chamada": 20000,
+  "observacao": "Grades sintéticas; rotas podem ser parciais. Não valida o movimento integrado.",
+  "casos": [
+    {
+      "nome": "aberto_diagonal",
+      "entrada": {
+        "inicio": [
+          2,
+          2
+        ],
+        "destino": [
+          8,
+          8
+        ]
+      },
+      "resultado": {
+        "preparacao": true,
+        "concluido": 1,
+        "sucesso": 1,
+        "status": 1,
+        "destino_ajustado": 2056,
+        "rota": [
+          [
+            3,
+            3
+          ],
+          [
+            4,
+            4
+          ]
+        ],
+        "semente_final": 16807
+      }
+    },
+    {
+      "nome": "aberto_horizontal",
+      "entrada": {
+        "inicio": [
+          2,
+          2
+        ],
+        "destino": [
+          8,
+          2
+        ]
+      },
+      "resultado": {
+        "preparacao": true,
+        "concluido": 1,
+        "sucesso": 1,
+        "status": 1,
+        "destino_ajustado": 520,
+        "rota": [
+          [
+            3,
+            3
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "semente_final": 16807
+      }
+    },
+    {
+      "nome": "mesma_celula",
+      "entrada": {
+        "inicio": [
+          2,
+          2
+        ],
+        "destino": [
+          2,
+          2
+        ]
+      },
+      "resultado": {
+        "preparacao": true,
+        "concluido": 1,
+        "sucesso": 1,
+        "status": 1,
+        "destino_ajustado": null,
+        "rota": [],
+        "semente_final": 1
+      }
+    },
+    {
+      "nome": "parede_proxima",
+      "entrada": {
+        "inicio": [
+          2,
+          2
+        ],
+        "destino": [
+          8,
+          2
+        ],
+        "bloqueios": [
+          [
+            3,
+            0
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            3,
+            2
+          ],
+          [
+            3,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ]
+      },
+      "resultado": {
+        "preparacao": true,
+        "concluido": 1,
+        "sucesso": 1,
+        "status": 1,
+        "destino_ajustado": 520,
+        "rota": [
+          [
+            2,
+            3
+          ]
+        ],
+        "semente_final": 16807
+      }
+    },
+    {
+      "nome": "parede_distante",
+      "entrada": {
+        "inicio": [
+          2,
+          2
+        ],
+        "destino": [
+          8,
+          2
+        ],
+        "bloqueios": [
+          [
+            5,
+            0
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            4
+          ],
+          [
+            5,
+            5
+          ]
+        ]
+      },
+      "resultado": {
+        "preparacao": true,
+        "concluido": 1,
+        "sucesso": 1,
+        "status": 1,
+        "destino_ajustado": 520,
+        "rota": [
+          [
+            3,
+            3
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "semente_final": 16807
+      }
+    },
+    {
+      "nome": "destino_bloqueado",
+      "entrada": {
+        "inicio": [
+          2,
+          2
+        ],
+        "destino": [
+          8,
+          2
+        ],
+        "bloqueios": [
+          [
+            8,
+            2
+          ]
+        ]
+      },
+      "resultado": {
+        "preparacao": true,
+        "concluido": 1,
+        "sucesso": 1,
+        "status": 2,
+        "destino_ajustado": 263,
+        "rota": [
+          [
+            3,
+            3
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "semente_final": 16807
+      }
+    },
+    {
+      "nome": "regioes_distintas",
+      "entrada": {
+        "inicio": [
+          2,
+          2
+        ],
+        "destino": [
+          8,
+          2
+        ],
+        "regioes": [
+          {
+            "posicao": [
+              8,
+              2
+            ],
+            "rotulo": 23
+          }
+        ]
+      },
+      "resultado": {
+        "preparacao": false,
+        "concluido": 1,
+        "sucesso": 0,
+        "status": 7,
+        "destino_ajustado": null,
+        "rota": [],
+        "semente_final": 1
+      }
+    },
+    {
+      "nome": "classe_2",
+      "entrada": {
+        "inicio": [
+          2,
+          2
+        ],
+        "destino": [
+          8,
+          8
+        ],
+        "tipo": 11
+      },
+      "resultado": {
+        "preparacao": true,
+        "concluido": 1,
+        "sucesso": 1,
+        "status": 1,
+        "destino_ajustado": 2056,
+        "rota": [
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ],
+        "semente_final": 16807
+      }
+    },
+    {
+      "nome": "classe_3",
+      "entrada": {
+        "inicio": [
+          2,
+          2
+        ],
+        "destino": [
+          8,
+          8
+        ],
+        "tipo": 3
+      },
+      "resultado": {
+        "preparacao": true,
+        "concluido": 1,
+        "sucesso": 1,
+        "status": 1,
+        "destino_ajustado": 2056,
+        "rota": [
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ],
+        "semente_final": 16807
+      }
+    }
+  ]
+}

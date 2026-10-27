@@ -88,8 +88,11 @@ da execução e ainda não foi medida.
 - `0x448d08` tenta direção direta e desvios; falha pode mudar o estado para 3.
 - `0x448b9f` lê a rota da tabela em `0x4e1924` quando o estado é 5.
 - `0x44930c` despacha estados 0, 1, 3, 4, 5 e 6 e pode chamar `0x43b30b`.
-- `0x43b30b` é candidato principal à busca de caminho; não foi reconstruído
-  integralmente nem identificado como A* apenas pela semelhança com o protótipo.
+- `0x43b30b` prepara a solicitação e ajusta o destino; `0x42f214` constrói
+  candidatos e `0x42e890` pós-processa a rota. O algoritmo não foi identificado como A*.
+- As primitivas de ocupação e passagem foram reconstruídas; a bancada executa
+  nove cenários sintéticos no solucionador original. Detalhes e limites em
+  [CAMINHOS.md](CAMINHOS.md).
 
 Evidências com bytes: `direcao_entre_celulas.asm`, `celula_vizinha.asm`,
 `orientacao_unidade.asm` e `inicio_passo_unidade.asm`, na pasta `evidencias`.

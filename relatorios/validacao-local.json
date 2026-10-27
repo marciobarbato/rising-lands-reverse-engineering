@@ -1,7 +1,7 @@
 {
   "python": "3.9.6",
   "emulacao_habilitada": false,
-  "testes": 46,
+  "testes": 61,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -63,6 +63,46 @@
     },
     {
       "teste": "test_emulacao.DiferencialX86.test_vizinhos_interior_bordas_e_direcoes_pares",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_caminhos_ia.DiferencialCaminhosIA.test_aliancas_800_mascaras_e_ids_especiais",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_caminhos_ia.DiferencialCaminhosIA.test_espera_todos_os_256_contadores",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_caminhos_ia.DiferencialCaminhosIA.test_gerador_caminhos_tem_estado_separado",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_caminhos_ia.DiferencialCaminhosIA.test_mascara_e_excecao_objeto_fd",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_caminhos_ia.DiferencialCaminhosIA.test_orquestrador_ia_com_etapas_substituidas",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_caminhos_ia.DiferencialCaminhosIA.test_passagem_tipos_direcoes_e_estados",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_caminhos_ia.DiferencialCaminhosIA.test_propria_ocupacao_classes_e_bordas",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_caminhos_ia.DiferencialCaminhosIA.test_regioes_512_ocupacoes_e_bordas",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_caminhos_ia.DiferencialCaminhosIA.test_serializacao_original_256_comprimentos",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_caminhos_ia.ExperimentosSolucionador.test_nove_cenarios_documentados",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     }
   ],

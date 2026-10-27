@@ -51,6 +51,12 @@ falhas, erros, motivos de testes ignorados e número de execuções x86 delimita
 | `0x475014`, `0x417909` | Contadores de ciclo, overflow e seleção de desenho |
 | `0x4181a1` | Tratamento de F1–F4 para alterar divisor de desenho |
 | `0x489728` | Gerador aleatório no caminho positivo, incluindo semente zero |
+| `0x46d838`, `0x42d4f8` | Alianças direcionais, regiões sob unidades/estruturas e bordas |
+| `0x42eba4`, `0x42ece0` | 1.501 cenários em duas variantes de passagem, com chamadas originais |
+| `0x43ec0c`, `0x43eb64` | Máscaras, objeto 0xfd, ocupação própria e bordas |
+| `0x43b2be`, `0x4704dc`, `0x4494fc` | Serialização de rotas, RNG separado e 256 contadores de espera |
+| `0x47f927` | 450 cenários de orquestração, com as etapas internas substituídas |
+| `0x43b30b`, `0x42f214`, `0x42e890` | Nove cenários sintéticos, chamadas originais sem substituição |
 
 Cada chamada tem limite de um segundo e 20.000 instruções; um gancho recusa
 saltos para fora dos trechos autorizados. O verificador exige alcançar uma
@@ -61,3 +67,18 @@ mesma fórmula Python — isso reduz o risco de um teste repetir o erro da imple
 As restrições não substituem o sandbox do sistema: são limites funcionais da
 bancada. A equivalência é local às entradas e aos trechos examinados. Ainda
 será necessário confrontar uma partida real para validar a simulação integrada.
+
+## Escopo das novas bancadas
+
+A suíte possui 61 testes; a execução emulada registra 19.194 chamadas delimitadas.
+O teste de IA em `test_emulacao_caminhos_ia.py` intercepta apenas sete endereços
+explícitos de etapas e injeta retornos. Valida o despachante e seus argumentos,
+mas não o conteúdo dessas etapas. Essa diferença é deliberada e registrada em
+[IA.md](IA.md); não constitui validação da IA completa.
+
+`python3 ferramentas/bancada_caminhos.py` reproduz nove cenários e grava
+`relatorios/caminhos-experimentos.json`. Esse experimento executa as chamadas
+originais de preparação, busca e pós-processamento, mas fornece grades sintéticas.
+Rotas curtas ou sucesso do buscador não equivalem à chegada da unidade; veja
+[CAMINHOS.md](CAMINHOS.md). A suíte também reproduz o relatório e confere
+adjacência, limites e células bloqueadas nas rotas emitidas.

@@ -1,0 +1,3 @@
+; SHA-256 da cópia normalizada: 26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0
+00482936  XOR EAX,EAX
+00482938  RET

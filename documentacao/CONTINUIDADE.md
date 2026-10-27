@@ -18,13 +18,18 @@
 - Adições, reduções e aplicação de dano comparadas com o x86 original.
 - Laço Windows, atualização antes do desenho e divisor F1–F4 rastreados.
 - Contadores de ciclo, recarga e gerador aleatório reconstruídos e emulados.
-- 46 testes aprovados, incluindo 10.736 execuções na bancada, sem iniciar o jogo.
+- Comparação de regiões sob ocupantes, máscaras, alianças, passagem e espera reconstruídas.
+- Preparação, busca e pós-processamento originais executados em nove mapas sintéticos.
+- Despachante de IA reconstruído; etapas de estruturas, recursos e tarefas localizadas.
+- 61 testes aprovados, incluindo 19.194 execuções na bancada, sem iniciar o jogo.
+  O teste da orquestração da IA substitui os corpos das etapas internas.
 
 ## Questões em aberto
 
 | Tema | Evidência disponível | Trabalho necessário |
 |---|---|---|
-| Caminhos e colisão | Grade de atributos, protótipo com A* | Localizar o algoritmo original e decifrar bits de terreno |
+| Caminhos e colisão | Primitivas reconstruídas e oráculo x86 em nove cenários | Traduzir busca/pós-processamento, gerar regiões e integrar movimento direto e consumo |
+| IA | Ordem das etapas e inativação confirmadas; interpretador localizado | Recuperar tabela de opcodes e implementar uma tarefa completa |
 | Movimento e tempo | Direções, giro, prefixo, parâmetros e ciclo antes do desenho confirmados | Medir taxa efetiva, descontos, chegada completa, ocupação e visão |
 | Combate | Aritmética parcial de dano, consulta de proximidade e cura confirmadas | Alvos, alcance, cadência, tecnologias e efeitos de morte |
 | Economia | Custos e blocos de recursos | Associar IDs internos, produção, consumo e filas |
@@ -38,11 +43,13 @@
 
 ## Próxima investigação recomendada
 
-Medir a taxa efetiva do ciclo identificado em [CADENCIA.md](CADENCIA.md).
-Completar os efeitos de chegada em `0x448704` e a busca de caminho
-em `0x43b30b`. No combate, seguir o preenchimento da tabela de modificadores
-`0x4dfba0` e a grade `0x4e0f38`, que afeta o bônus de proximidade.
-
+Prosseguir a partir de [CAMINHOS.md](CAMINHOS.md) e [IA.md](IA.md).
+A preparação é `0x43b30b`; o solucionador principal é `0x42f214`, seguido de
+`0x42e890`. A bancada já executa esses trechos, mas a tradução independente
+continua parcial. Integrar a escolha direta, o desvio e o consumo da rota.
+Para a IA, seguir a inicialização da tabela de operações `0x514910` e recuperar
+uma tarefa completa. Ainda é necessário medir a taxa efetiva do ciclo identificado
+em [CADENCIA.md](CADENCIA.md).
 Uma execução controlada do jogo poderá confrontar movimento, visibilidade e
 combate numa partida. Ainda não há runtime Windows preparado nem validação
 de gameplay integrado. Os testes atuais emulam instruções isoladas.
