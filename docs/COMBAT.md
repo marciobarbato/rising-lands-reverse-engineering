@@ -11,6 +11,7 @@ Owner: combat. Source and tests live in `pesquisas-paralelas/combate/`. Shared d
 | `animacao_disparo.py` | Attack substates 0/1/2/3, animation advance, orientation, firing requests |
 | `inicializacao_ataque.py` | Type characteristics, mission/game post-load attack fields, persistence audit |
 | `projeteis.py` | 100-record pool, initialization, integer line preparation/calculation |
+| `reinicio_projeteis.py` | `ProjectileReset` entry for the mission reset prefixes and the other three original callers |
 | `avanco_projeteis.py` | Linear advance, logical animation, arrival, RNG, damage requests and secondary effects |
 | `maquina_projeteis.py` | Supported full advancement/expiration dispatcher, types 30/33, and live-pool `Calcul` passes |
 | `cadencia_projeteis.py` | Original caller gates, accumulated-counter input, and impact presentation preparation |
@@ -46,7 +47,23 @@ The projectile pool and dispatcher preserve fixed-width arithmetic, allocation b
 
 Damage distribution produces requests and invokes declared callbacks. Building, unit, magic, sound, message, and navigation effects must remain explicit. Original effect-edge conditions are not automatically interchangeable with linear-motion bounds. Tests using synthetic 1×1/3×3 building geometry do not establish all real building footprints.
 
-## Occupied-unit damage consumer
+## Mission reset prefix: projectile pool
+
+`reinicio_projeteis.resetar_projeteis(pool)` reconstructs complete `ProjectileReset` `[0x46E00A,0x46E02C)` (34 bytes, SHA-256 `9941723e…1e71`, no CALL). Pass the live 5,600-byte allocation that the original reaches through dword `0x5080F0`: a `bytearray`, or a writable C-contiguous one-dimensional `B`/`b` memoryview (for example a slice of a larger arena); `PoolProjeteis.resetar()` delegates to it with `.memoria`. Shape is validated before the first store, so a rejected buffer keeps every byte. The original would fault on an unmapped pointer; it never allocates, frees or reinitializes the pool (`ProjectileAlloc 0x46DFA0` allocates `0x15E0` bytes once from `ProgInit 0x474ED7`).
+
+| Order | Effect | Width |
+|---|---|---|
+| 1..100 | Reread pointer `[0x5080F0]`, then store zero at `pool + 56*i + 2` for `i = 0..99` | u8 |
+| return | `EAX = 0x64`; EBX/EDX pushed and restored; ECX/ESI/EDI/EBP untouched; flags from `cmp 0x64,0x64` (ZF/PF set, CF/AF/SF/OF clear, DF kept) | — |
+
+No register or stack argument is read. The other 55 bytes of each record, every global and every unit field stay inherited. The function returns `0x64` (`EAX_RETORNO`). Stack scratch (`[esp-4]=EBX`, `[esp-8]=EDX`, below the CALL return address) is native-only and not modeled.
+
+The four direct callers (`CHAMADAS`) are `MissionReStart 0x46B5AC`, `GameLoad 0x46B8C1`, `MissionLoad 0x46C373` and `MissionLoadName 0x46C623`; no absolute pointer to the routine exists. In every one, the call follows `EnginResetAll 0x441659` and precedes `MessageBoxInit 0x469908`, after the u16 `0xFFFF` stores to `0x4E1A38/0x4E1A3A` and `IconeReset`, `TerrainReset`, `MiniMapReset`, `BatimentResetAll`. Only `MissionLoad` adds `BallonInit 0x441B6C` before `FileOpen`. EAX=0x64 is dead at all four sites: `MessageBoxInit` zeroes AL/AH and indexes by AX. Missions owns that composition order; this entry supplies only the combat step.
+
+**No other combat state is reset in the prefix.** `EnginResetAll` writes Bag words, `+2`, `+0x9A` and `+0xAF` of nonzero-state units; attack fields `+0x79`, `+0x7A`, `+0x8A`, `+0x8B`, `+0xDA` and the target fields stay inherited until `LoadEngin` and the committed postload. An executable-wide displacement scan finds the alert counter `0x4E19C0` and alert cell `0x496ACC` written only by `InfligeDegat` and `TryLanceAttaqueSound`, the presentation byte `0x4DFB44` only by building/projectile/flip routines, and the pool pointer only by `ProjectileAlloc`. These values persist across mission loads. The [inventory](../pesquisas-paralelas/combate/evidencias/reinicio-projeteis.json) records bytes, hashes, caller contexts and those references. The other prefix routines also store through runtime pointers (terrain layers at `0x507D74..0x507DAC`, minimap buffers from `0x507D5C`); their reach is established only by missions' whole-prefix native equality, which this stage does not run.
+
+[Original-only captures](../pesquisas-paralelas/combate/evidencias/captura-reinicio-projeteis-original.json), taken before the Python entry, run 16 seeded dirty states: random pools at region start/end/unaligned/high addresses, `+2` values covering 0..255, all-`0xFF`, already clear, all-zero, and one entry through each original CALL. The [reference report](../pesquisas-paralelas/combate/validacao-reinicio-projeteis-emulada.json) adds 60 fresh dirty states. All 76 compare the complete 2 MiB image with poisoned DGROUP/.bss (`0x494000..0x523000`), the unit area, stack, both pool regions, registers and EFLAGS against the Python prediction; 52 enter through original CALL instructions.
+
 
 `ConsumidorDanoUnidade.infligir(victim, mode, attacker, direction=0)` reconstructs the mode-1 path of `EnginInfligeDegat` at `0x4502F0`, returning through `0x45084F..0x450855` for nonlethal results. It reuses core's committed `dano_bruto_unidade`, `reduzir_dano`, and `aplicar_dano_parcial` arithmetic. Provide 800 live mutable 276-byte records and 26 damage rows with at least 26 u8 entries each. IDs truncate to u16 and must then be 0..799; mode truncates to u8 and must be 1; source and victim types must be 0..25. Direction is unused by this mode. Unsupported modes, IDs or types fail before callbacks or local writes.
 
@@ -212,6 +229,8 @@ python3 -B pesquisas-paralelas/combate/validar_morte_sem_experiencia.py --emular
 python3 -B pesquisas-paralelas/combate/validar_impacto_modo4.py --emular
 python3 -B pesquisas-paralelas/combate/rastrear_impacto_modo3.py
 python3 -B pesquisas-paralelas/combate/validar_impacto_modo3.py --emular
+python3 -B pesquisas-paralelas/combate/rastrear_reinicio_projeteis.py
+python3 -B pesquisas-paralelas/combate/validar_reinicio_projeteis.py --emular
 python3 -B scripts/check.py --domain combat
 ```
 

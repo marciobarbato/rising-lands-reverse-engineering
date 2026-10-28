@@ -13,12 +13,15 @@ sys.path.insert(0,str(PASTA.parents[1]/'testes'))
 sys.path.insert(0,str(PASTA.parents[1]/'ferramentas'))
 import test_colocacao_saida as core_fixtures
 from colocacao_saida import DependenciaColocacaoSaida
+import insercao_unidades
 import producao_colocada as produtor
 from test_producao_compartilhada import preparar as preparar_recrutamento
 from test_producao_experiente import fila
 from test_saida_tropa import estado,w,d
 from test_ciclo_producao import progresso
 
+# Core publishes its supported normal-owner vision sum; 8 predates that symbol.
+LIMITE_VISAO=getattr(insercao_unidades,'SOMA_VISAO_MAXIMA_INSERCAO',8)
 
 def preparar(tipo=16,indice=0,unidade=799,destino=7,dono=0,raio=1,nivel=4):
     p,anterior,b=preparar_recrutamento(tipo,indice,unidade,destino,dono)
@@ -78,7 +81,7 @@ class ExemplosProducaoColocada(unittest.TestCase):
         self.assertFalse(any(e[0]=='discovery' for e in m.efeitos))
 
     def test_large_vision_preserves_prior_economic_and_partial_physical_effects(self):
-        p,m,b=preparar(raio=9)
+        p,m,b=preparar(raio=LIMITE_VISAO+1)
         with self.assertRaises(DependenciaColocacaoSaida):produtor.calcular_tropa_com_colocacao_no_mundo(p,m,b,0)
         self.assertEqual(m.unidades[799*276+0x72],1)
         self.assertEqual(m.efeitos[-1][0],'collision')
@@ -159,7 +162,7 @@ class DiferencialProducaoColocada(unittest.TestCase):
 
     def test_8_large_vision_stops_after_economy_experience_and_collision(self):
         for tipo in (1,2,13,16):
-            for raio,nivel in ((9,0),(8,3)):
+            for raio,nivel in ((LIMITE_VISAO+1,0),(LIMITE_VISAO,3)):
                 self.comparar(*preparar(tipo,raio=raio,nivel=nivel),erro='visao')
 
     def test_36_inactive_or_incomplete_native_returns(self):

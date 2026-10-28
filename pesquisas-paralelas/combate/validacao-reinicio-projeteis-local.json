@@ -1,0 +1,137 @@
+{
+  "success": true,
+  "tests": 20,
+  "failures": 0,
+  "errors": 0,
+  "skipped": [
+    {
+      "test": "test_reinicio_projeteis.DiferencialReinicioProjeteis.test_captured_cases_whole_state",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_reinicio_projeteis.DiferencialReinicioProjeteis.test_fresh_dirty_states_and_callers",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_projeteis.DiferencialProjeteis.test_cadeia_ataque_emissao_pool_e_ultimo_slot",
+      "reason": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_projeteis.DiferencialProjeteis.test_incremento_bruto_wrap_e_sinal_erro",
+      "reason": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_projeteis.DiferencialProjeteis.test_init_todos_tipos_posicoes_e_pool_cheio",
+      "reason": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_projeteis.DiferencialProjeteis.test_linha_limites_assinados_e_aleatorios",
+      "reason": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_projeteis.DiferencialProjeteis.test_reset_existe_livre_todas_posicoes",
+      "reason": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_projeteis.DiferencialProjeteis.test_set_todos_tipos_flags_offsets_registro_inteiro",
+      "reason": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_projeteis.DiferencialProjeteis.test_trajetos_completos_quadrantes_diagonal_e_empate",
+      "reason": "Opcional: RISING_EMULAR=1"
+    }
+  ],
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_normalized_analysis_only": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "original_ranges": "ProjectileReset 0x46e00a..0x46e02c; CALL sites 0x46b5ac, 0x46b8c1, 0x46c373, 0x46c623",
+  "bounded_x86_executions": 0,
+  "per_test": [
+    {
+      "teste": "test_reinicio_projeteis.ContratosReinicioProjeteis.test_call_sites_and_entry",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_reinicio_projeteis.ContratosReinicioProjeteis.test_clears_only_active_bytes_in_index_order",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_reinicio_projeteis.ContratosReinicioProjeteis.test_idempotent_and_zero_pool",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_reinicio_projeteis.ContratosReinicioProjeteis.test_live_views_inside_a_larger_arena",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_reinicio_projeteis.ContratosReinicioProjeteis.test_original_only_captures_reproduced",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_reinicio_projeteis.ContratosReinicioProjeteis.test_pool_object_delegates_to_entry",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_reinicio_projeteis.ContratosReinicioProjeteis.test_rejects_before_any_store",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_reinicio_projeteis.DiferencialReinicioProjeteis.test_captured_cases_whole_state",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_reinicio_projeteis.DiferencialReinicioProjeteis.test_fresh_dirty_states_and_callers",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.ContratosProjeteis.test_efeitos_exigem_backend_e_preservam_ordem",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.ContratosProjeteis.test_passo_independe_de_atividade_e_campo04",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.ContratosProjeteis.test_pool_cheio_reset_e_reuso",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.ContratosProjeteis.test_zero_distancia_e_limites_da_api",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_cadeia_ataque_emissao_pool_e_ultimo_slot",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_incremento_bruto_wrap_e_sinal_erro",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_init_todos_tipos_posicoes_e_pool_cheio",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_linha_limites_assinados_e_aleatorios",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_reset_existe_livre_todas_posicoes",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_set_todos_tipos_flags_offsets_registro_inteiro",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_trajetos_completos_quadrantes_diagonal_e_empate",
+      "execucoes_x86_delimitadas": 0
+    }
+  ],
+  "whole_state_comparisons": 0,
+  "original_call_site_entries": 0,
+  "compared_regions": "Complete 2 MiB image (code, DGROUP, .bss, .idata) with poisoned DGROUP/.bss, 256 KiB unit area, 64 KiB stack, two 64 KiB pool regions, harness return page; registers and EFLAGS",
+  "regression_x86": 0,
+  "scope": "ProjectileReset from inherited dirty pool/global/stack/register state, direct and through the four original CALL instructions",
+  "excluded": "Other MissionLoad reset-prefix routines and their order (missions composition), pool allocation/free, LoadProjectile/SaveProjectile, attack state machine",
+  "diagnostics": []
+}
