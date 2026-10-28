@@ -18,7 +18,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import ambiente_missoes
 from mapa_memoria_m1 import MapaMemoriaM1, ErroMapaMemoria, carregar_blocos, carregar_json
 from arena_composicao_m1 import ArenaComposicaoM1, ErroArenaM1
-from ligacao_provedores_m1 import AtributoNaoMapeadoM1, EXCESSO, montar_provedores, verificar_excessos
+from ligacao_provedores_m1 import (AtributoNaoMapeadoM1, EXCESSO, ORDENS_POR_DONO, montar_provedores,
+                                   verificar_excessos)
 from composicao_carga_missao import ComposicaoCargaMissaoM1, PONTES
 from comparacao_carga_missao import comparar_estado, comparar_vinculos
 
@@ -66,11 +67,16 @@ class ComposicaoVsCaptura(_Base):
         estado = comparar_estado(self.estrita, self.captura, self.blocos, al=r.al)
         self.assertEqual(estado['allocation_records']['differing'], 0)
         self.assertEqual(r.detalhes['excess_changed'], [])
-        if r.retornou:
+        if ORDENS_POR_DONO:
+            # Economy per-owner [0x4e19b8] contract: no bridge, the strict run must be whole-state equal.
+            self.assertTrue(r.retornou, r.parada)
             self.assertEqual(r.al, 1)
+            self.assertEqual(r.detalhes['diagnostic_bridges'], [])
+            self.assertEqual(estado['blocks_compared'], 881)
             self.assertTrue(estado['equal'], estado['blocks'])
             return
-        # Known blocking provider contract: Economy's single Bag buffer (see validacao report).
+        # Legacy Economy single Bag buffer: known blocking contract (see Stage13 report).
+        self.assertFalse(r.retornou)
         p = r.parada
         self.assertEqual((p['step'], p['routine'], p['call_site'], p['owner']),
                          ('EnginInitTechnologie', '0x441459', '0x46c5af', 'economy'))
@@ -85,7 +91,12 @@ class ComposicaoVsCaptura(_Base):
         self.assertTrue(r.retornou, r.parada)
         self.assertEqual(r.al, 1)
         self.assertEqual([p['step'] for p in r.passos[-6:]], TAILS_AFTER_STOP)
-        self.assertEqual([b['bridge'] for b in r.detalhes['diagnostic_bridges']], ['ordens'])
+        if ORDENS_POR_DONO:
+            # The bridge is unnecessary: the diagnostic run is the strict run.
+            self.assertEqual(r.detalhes['diagnostic_bridges'], [])
+            self.assertEqual(r.detalhes['bridges_not_needed'], ['ordens'])
+        else:
+            self.assertEqual([b['bridge'] for b in r.detalhes['diagnostic_bridges']], ['ordens'])
         estado = comparar_estado(self.ponte, self.captura, self.blocos, al=r.al)
         self.assertTrue(estado['equal'], estado['blocks'])
         self.assertEqual(estado['blocks_compared'], 881)
@@ -144,8 +155,15 @@ class FechamentoESemPadroes(_Base):
     def test_denied_and_rebinding_guards(self):
         _, provedores = self.novo_mapa()
         w, prop = provedores.mundo, provedores.habitacao.propriedade
-        with self.assertRaises(AtributoNaoMapeadoM1):
-            prop.ordens
+        if ORDENS_POR_DONO:
+            self.assertEqual(len(prop.ordens), 4)
+            for a, b in zip(prop.ordens, w.bolsas_tipos_unidades):
+                self.assertIs(a, b)
+            with self.assertRaises(AtributoNaoMapeadoM1):
+                prop.ordens = tuple(w.bolsas_tipos_unidades)
+        else:
+            with self.assertRaises(AtributoNaoMapeadoM1):
+                prop.ordens
         with self.assertRaises(AtributoNaoMapeadoM1):
             w.solucionador
         with self.assertRaises(AtributoNaoMapeadoM1):
