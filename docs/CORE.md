@@ -22,6 +22,8 @@ Natural regions, alliances, unit blockers, structure labels, auxiliary colors, a
 
 ## Structure terrain and placement
 
+`ciclo_estruturas.py` now implements selective structure-pool initialization and reset, with a first-free query from `CreerBatiment`. The original pool is 1,000 records of 276 bytes. `inicializar_registros_estruturas` stops at `0x419004`, before `BatimentAlloc`'s economic and characteristic-loading effects. `resetar_todas_estruturas` and `resetar_estrutura` translate complete original routines. Their retained fields differ: none clears a whole record, and single reset preserves gate counter `+0x76`. `buscar_estrutura_livre` checks state `+5 == 0` only, returns the first index or `0xffff`, and does not reserve it. `MundoUnidades` exposes explicit adapters; its synthetic constructor remains zero-filled. See the [exact lifecycle contract](core/STRUCTURE_LIFECYCLE.md) for byte widths, ordered stores, stops, failures, and 648 newly executed original-x86 comparisons.
+
 `terreno_estruturas.py` implements `BatimentModifyTerrain`, `ResetBatimentTerrainModify`, and `ResetCheminTerrainModify`: rectangles, collision masks, compact slots, tiles, objects, regions, and colors. Type 20 requires its **20-byte runtime mask** as an explicit input; the static geometry must not silently replace it. Natural remapping still refuses already inserted structures.
 
 `colocacao_estruturas.py` adds:
@@ -61,4 +63,4 @@ python3 -B ferramentas/demonstrar_portoes.py
 sh testar.sh
 ```
 
-Demos may regenerate their own versioned report. Use an isolated core worktree. Differential validation is described in [validation](VALIDATION.md). Structure allocation/initialization, construction costs/progress, complete demolition, building vision/minimap, full global dispatch, real-mission loading/remapping, and cursor/mouse gate selection remain open integration work. Coordinate economic and graphical callbacks through written contracts rather than editing another domain.
+Demos may regenerate their own versioned report. Use an isolated core worktree. Differential validation is described in [validation](VALIDATION.md). Full structure allocation/creation and the remaining startup effects, construction costs/progress, complete demolition, building vision/minimap, full global dispatch, real-mission loading/remapping, and cursor/mouse gate selection remain open integration work. Positioning and conversion after economy's existing-colonist recruitment handoff also remain open. Coordinate economic and graphical callbacks through written contracts rather than editing another domain.
