@@ -5,11 +5,33 @@ mapeados e comparados com o x86 original.** São 1.152 associações e 512 quadr
 distintos, incluindo variantes de bolsa vazia/não vazia nos tipos 5/6/7.
 O adaptador e a demonstração funcionam sem Unicorn e sem executar o EXE.
 
-Revisão atual: `entregas/2026-10-28-objetos-v5/`. As revisões anteriores
+Revisão atual: `entregas/2026-10-28-sequenciais-v6/`. As revisões anteriores
 permanecem intactas. Cada pasta de revisão contém
 seu próprio `MANIFESTO.json` e `SHA256SUMS`. Não editar uma revisão publicada.
 
-## Avanços da v5
+## Avanços da v6
+
+**Os 486 objetos serializados da missão 1 agora têm seus códigos cobertos.**
+Os 16 registros restantes (66/67) foram ligados aos CMPs; o mesmo ramo validou
+68 e o caminho fixo 54. São 48 quadros novos e 147 associações. A API unificada
+aceita 51 códigos, preservando os contratos anteriores.
+
+- [Demonstração dos objetos sequenciais](artefatos/demo-sequenciais.html):
+  auxiliar, pares de valores, iluminação, normalização e registros ETA.
+- [Atlas de 48 CMPs](artefatos/atlas-sequenciais.png),
+  [sequências claras/escuras](artefatos/sequenciais-contato.png),
+  [tabela JSON](artefatos/associacoes-sequenciais.json) e
+  [CSV](artefatos/associacoes-sequenciais.csv).
+- [486 registros ETA](artefatos/exemplos-eta-v6.json), com cobertura v5/v6.
+- **73 testes Python**; **10.387 execuções x86**; **142 superfícies idênticas**.
+
+Auxiliar dividido por dois escolhe um dos 16 quadros. Sem iluminação, o mesmo
+CMP é copiado e usado como máscara de sombra. `NextAnimVeget` preserva esses
+auxiliares: a alteração do campo é um contrato externo, sem período inventado.
+A cobertura refere-se ao disco; carregador completo e ordem global seguem em
+aberto. Leia [Continuidade v6](CONTINUIDADE_V6.md) e [API](INTEGRACAO.md).
+
+## Histórico — avanços da v5
 
 **47 códigos de objetos ligados a 156 quadros originais**, em 344 associações:
 árvores/grupos (1..11), vegetação baixa (12..22) e detalhes do solo (28..52).
@@ -104,7 +126,7 @@ Consulte [Continuidade v3](CONTINUIDADE_V3.md) para evidências e contratos pend
 ```sh
 python3 -B graficos.py --tipo 0 --estado parado --direcao 1
 python3 -B graficos.py --tipo 7 --estado parado --direcao 9 --bolsa-u16 256
-python3 -B -m unittest -v test_graficos test_trabalhadores test_composicao test_construcoes test_objetos
+python3 -B -m unittest -v test_graficos test_trabalhadores test_composicao test_construcoes test_objetos test_sequenciais
 ```
 
 Os comandos acima são somente leitura, inclusive dentro da entrega congelada.
@@ -118,7 +140,8 @@ Snapshot: **`1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e`**. Foram copiados 942 arq
 commitados de leitores, testes, relatórios, documentação e evidências, excluindo
 as pesquisas paralelas. `snapshot/manifesto.json` registra cada caminho e SHA-256.
 Nenhuma importação usa os módulos do checkout em edição por outros chats.
-A v5 parte do commit próprio `46e826c7c112a2ddda4376d8587500cc7e742f68`,
+A v6 parte do commit próprio `d96034af2a264e77dc49269c6e0fe563cfddabf4`,
+registrado em `evidencias/proveniencia-v6.json`. A v5 parte do commit próprio `46e826c7c112a2ddda4376d8587500cc7e742f68`,
 registrado em `evidencias/proveniencia-v5.json`. A v4 parte do commit próprio `b67215a3870d17a51b063cb9d82ea391c1852f56`,
 registrado em `evidencias/proveniencia-v4.json`. A v3 parte do commit próprio `0c76b34a017c185ab24344137a1cb52266b599d2`,
 registrado em `evidencias/proveniencia-v3.json`. O desenvolvimento v2 partiu do commit próprio
@@ -318,7 +341,9 @@ deslocamentos, transparência e blitter básico com recorte; na v3, paleta inici
 despacho, tabela de sombra com parâmetros explícitos e composição sombra/corpo.
 Na v4: fachada do Santuário no contrato delimitado, terreno/ocupação, relógios e tabelas por jogador.
 Na v5: 47 códigos de objetos nos dois passes, visibilidade, âncoras, quatro fases
-das árvores e avanço condicionado com cursor compartilhado.
+das árvores e avanço condicionado com cursor compartilhado. Na v6: códigos
+54/66/67/68, sequência por auxiliar, escurecimento por máscara e laço inicial
+de normalização; cobertura dos 486 objetos serializados da missão 1.
 
 **Confirmado apenas por leitura estática ou por arquivo:** encadeamento superior
 da parada, contexto global de inicialização da sombra, origem lógica da grade, identidade
@@ -331,7 +356,7 @@ transpor fórmulas para outros tipos, chamar fase 0 de parada, converter o perí
 em FPS, reaplicar a imagem de sombra como um PNG preto sem sua tabela.
 
 Ainda faltam: outros 21 tipos de unidade, outros 21 tipos de construção,
-modos adicionais do Santuário, objetos 23..27 e 53..255, pós-processamento
+modos adicionais do Santuário, objetos 23..27, 53, 55..65 e 69..255, pós-processamento
 ETA, ordenação completa de desenho, efeitos, estado global da sombra, aplicação
 das tabelas de jogador às unidades, HUD, minimapa e seleção. Ataques permanecem com a frente de
 combate; esta pasta poderá apenas catalogar suas imagens futuramente.
@@ -355,6 +380,8 @@ python3 -B validar_construcoes.py  # comparação original do Santuário, precis
 python3 -B gerar_construcoes.py    # atlas e HTML, somente Python
 python3 -B validar_objetos.py       # dois passes/animação, precisa de Unicorn
 python3 -B gerar_objetos.py         # atlas e HTML, somente Python
+python3 -B validar_sequenciais.py   # originais 54/66/67/68, precisa de Unicorn
+python3 -B gerar_sequenciais.py     # atlas e HTML, somente Python
 python3 -B validar_python.py
 python3 -B congelar.py NOVO_IDENTIFICADOR
 ```

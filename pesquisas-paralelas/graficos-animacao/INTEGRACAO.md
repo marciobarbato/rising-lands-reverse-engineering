@@ -1,6 +1,6 @@
 # Contrato para o aplicativo macOS
 
-Consumir uma cópia integral de `entregas/2026-10-28-objetos-v5/`, verificando
+Consumir uma cópia integral de `entregas/2026-10-28-sequenciais-v6/`, verificando
 `MANIFESTO.json`. Não importar a área de trabalho desta frente nem os leitores
 de outras frentes. Esta entrega não modifica `visualizador-mac`.
 
@@ -306,6 +306,62 @@ No exemplo MONDE01, 470 de 486 registros têm códigos mapeados; 66/67 ficam sem
 associação. O arquivo `artefatos/associacoes-objetos.json` pode ser consumido
 diretamente no bridge Swift. Nomes de classes visuais não são regras econômicas.
 
+## Objetos sequenciais — API v6 independente
+
+`sequenciais.py` amplia a consulta sem alterar a API v5. Para consumir todos os
+51 códigos confirmados, usar `consultar_objeto_v6`. Para 54/66/67/68 isoladamente,
+usar `consultar_sequencial`; ambos retornam listas `terreno` e `sprites`
+compatíveis com `compor_passe` da v5.
+
+```python
+from graficos import Catalogo
+from composicao import tabela_sombra
+from objetos import compor_passe
+from sequenciais import consultar_objeto_v6, ler_objetos_eta_v6, normalizar_inicio
+
+c = Catalogo()
+p = consultar_objeto_v6(67, auxiliar_u8=14, descoberta_u8=0, iluminacao_u8=16)
+assert p['fase'] == 7
+assert [(q['id_motor'], q['operacao']) for q in p['terreno']] == [
+    (10846, 'copiar'), (10846, 'sombra')]
+tab = tabela_sombra(c.paleta(), percentual=60, ciclos=())  # parâmetros do ensaio
+indices = compor_passe(c, bytes([82])*(160*160), 160, 160,
+    p, 'terreno', 64, 108, tabela_sombra=tab)
+# Converter a superfície indexada para RGBA/PNG como nos exemplos anteriores.
+
+# Entrada de disco fornecida pelo consumidor, sem inicializar o jogo.
+dados = c._ler('cd/WORLD/MONDE01.ETA')  # somente no exemplo do corpus local
+registros = ler_objetos_eta_v6(dados)
+assert len(registros['registros']) == 486
+assert all(r['mapeado'] for r in registros['registros'])
+normalizado = normalizar_inicio(dados[0x30004:0x40004], dados[0x40004:0x50004])
+assert normalizado['alteradas'] == []  # MONDE01 já não contém código 54
+```
+
+`codigo`, `auxiliar_u8` e flags têm as mesmas origens da API v5. Códigos 66..68
+exigem auxiliar 0..31: `fase=floor(auxiliar/2)`, ID base 10823/10839/10855.
+Os pares 0/1 até 30/31 são equivalentes. A consulta recusa valores 32..255,
+pois o cálculo bruto atravessa outras sequências. O original não testa essa
+faixa; o limite é deliberado do contrato público. Código 54 ignora qualquer
+auxiliar u8 e usa sempre 10823. O offset é (−4,0) para 54/66 e (0,0) para 67/68.
+Nenhum desses códigos produz camada em `sprites`.
+
+Sem descoberta, nenhuma camada. Sem iluminação, **copiar → sombra**, com o mesmo
+CMP, posição e máscara. Não escolher outro banco/variante escura. A tabela de
+sombra é externa e deve ter 256 bytes. Transparência usa a máscara CMP e o
+recorte é inclusivo; coordenadas sem overflow no domínio original de 16 bits.
+
+Não aplicar `avancar_arvore` a esses quatro códigos. `NextAnimVeget` preserva
+seus campos em 4.096 comparações; o consumidor fornece o auxiliar atualizado
+por sua simulação. Não há temporização, quantidade de recurso ou regra de coleta
+nesta API. Os nomes `classe_visual` são inferências de aparência.
+
+`normalizar_inicio(objetos, auxiliares)` exige duas camadas de 65536 bytes e
+retorna cópias em `objetos`/`auxiliares`, mais os índices `alteradas`. Faz somente
+54 → 66/auxiliar 1, como o laço original em MissionLoad. Não altera entradas nem
+executa todo o carregador. `ler_objetos_eta_v6` mantém leitura de disco e acrescenta
+`catalogo` v5/v6; `mapeado` cobre o código, não garante estado final da missão.
+
 ## Ponte mínima por JSON
 
 ```sh
@@ -353,7 +409,7 @@ os PNGs produzidos pelo adaptador. Não depender da página HTML para obter dado
 - ETA serializado exige recomposição e pós-processamento; exemplos desta entrega
   descrevem o disco. O adaptador não substitui o carregador/simulador completo.
 - Nenhuma rotina de consulta, decodificação ou demonstração depende de x86.
-  Somente `bancada_x86.py`/`validar_x86.py`/`validar_trabalhadores.py`/`validar_composicao.py`/`validar_construcoes.py`/`validar_objetos.py` dependem de Unicorn para comparação.
+  Somente `bancada_x86.py`/`validar_x86.py`/`validar_trabalhadores.py`/`validar_composicao.py`/`validar_construcoes.py`/`validar_objetos.py`/`validar_sequenciais.py` dependem de Unicorn para comparação.
   `extrair_evidencias.py` depende de Capstone apenas na extração de assembly.
 
 Verificação de consumo: `python3 -B verificar_manifesto.py CAMINHO_DA_REVISAO`.

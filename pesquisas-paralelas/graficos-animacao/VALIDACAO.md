@@ -1,9 +1,65 @@
 # Validação de gráficos e animação
 
-## Revisão atual v5 — objetos e árvores
+## Revisão atual v6 — objetos 54/66/67/68
+
+**73 testes Python passaram**, sem executar x86, em 4,466 s de suíte. As dez
+novas regressões conferem capturas, 142 buffers, pares de auxiliar, limites,
+normalização, ausência de avanço em NextAnimVeget, ETA e artefatos. As 63
+regressões anteriores foram preservadas. `validacao/python.json` registra a execução.
+
+`validacao/x86-sequenciais.json`: **10.387 execuções delimitadas**, **3.605.938
+instruções**, **PASSOU** em 4,718 s. Tempo da bancada, sem relação com o jogo.
+
+| Comparação | Cobertura | Limite |
+|---|---|---|
+| Capturas | 6.144: 4 códigos × 256 auxiliares × 3 visibilidades × 2 passes | Blitters interceptados; 32..255 de 66..68 registrados, mas fora da API |
+| NextAnimVeget | 4.096 casos | Código/auxiliar/cursor preservados; não comprova ausência de alterações por outras rotinas |
+| Normalização | Duas varreduras de 65536 células | MissionLoad 0x46c3de..0x46c40a integral, sem stubs; antes do restante do carregador |
+| Pixels | **142 buffers completos 160×160** | 98 sequências/iluminação + 12 recortes + 32 dos registros ETA; blitters originais sem stubs |
+| ETA | 486 registros com códigos cobertos | Flags por jogador e estado final carregado permanecem externos |
+
+O EXE é conferido por SHA-256 antes de qualquer emulação; cada chamada tem
+intervalos permitidos, limite de 1 milhão de instruções e timeout de 2 s. Processo
+próprio com Unicorn fora do sandbox, conforme incompatibilidade nativa conhecida.
+Somente IO/alocação no banco, FileRead no ETA e blitters nas capturas são
+substituídos. Nenhum processo ou ambiente de outra frente foi manipulado.
+
+O domínio público 66..68 é auxiliar 0..31, com 16 quadros. O original calcula
+índices maiores para outros auxiliares; isso foi registrado, sem validar as
+imagens resultantes como associação do tipo. O código 54 é fixo e ignora o byte.
+Sem iluminação, cópia e sombra usam o mesmo ID. Percentual 60/ciclos vazios são
+entradas declaradas. Nomes visuais não comprovam semântica econômica.
+
+`validacao/visual-sequenciais.json`: 291 planos gráficos (fase, operações, IDs,
+índices e offsets) e 98 buffers JS/Python passaram. A interface foi exercitada
+para pareamento, volta 31→0, iluminação, ocultação, forma 54 e transformação,
+reprodução/pausa, registro ETA, sombra e âncora. Atlas e folha de contato foram
+inspecionados; captura em `validacao/demo-sequenciais-verificada.png`.
+Sem erros de console; favicon ausente fora do artefato. Aba/servidor próprios
+encerrados. Nenhuma nova emulação é atribuída à comparação JS/Python.
+
+Relatórios v1..v5 são históricos reutilizados. Os 82 trechos do manifesto de
+assembly e seu helper histórico continuam conferidos contra o EXE. A v6 usa
+esses intervalos já commitados, com proveniência própria e sem nova extração.
+`validar_sequenciais.py` depende de Unicorn; API, atlas, HTML e testes Python
+são independentes de x86. [Continuidade v6](CONTINUIDADE_V6.md) detalha os limites.
+
+Reproduzir na área editável:
+
+```sh
+python3 -B validar_sequenciais.py  # Unicorn, EXE e limites conferidos
+python3 -B gerar_sequenciais.py    # biblioteca padrão
+python3 -B validar_python.py       # somente Python
+```
+
+Em entrega congelada, somente leitura: `python3 -B -m unittest -q test_graficos
+ test_trabalhadores test_composicao test_construcoes test_objetos test_sequenciais`
+e `python3 -B verificar_manifesto.py CAMINHO`.
+
+## Histórico v5 — objetos e árvores
 
 **63 testes Python passaram** em 4,136 s de suíte (4,145 s no invólucro), sem
-executar x86. `validacao/python.json` registra esta execução. As dez novas
+executar x86. O relatório congelado v5 registra essa execução. As dez novas
 regressões usam o resultado original registrado como oráculo; não executam
 Unicorn. As demais 53 preservam unidades, paleta, sombras e Santuário.
 Após a transferência para a branch própria, os mesmos 63 testes passaram em
@@ -69,7 +125,7 @@ python3 -B verificar_manifesto.py CAMINHO
 ## Histórico v4 — Santuário
 
 **53 testes Python passaram**, sem x86. Resultado preservado em `validacao/python.json`
-da entrega v4; a área atual registra a v5.
+da entrega v4; a área atual registra a v6.
 As dez novas regressões confrontam identidade/ETA, terreno e máscara, 512 planos,
 160 variações de célula/jogador, relógios/overflow, tabelas de jogador, 244 hashes
 de superfícies, recusa de casos fora do contrato e integridade dos artefatos.
@@ -239,7 +295,7 @@ dos outros 21 tipos.
 ## Histórico preservado — primeiro marco do Soldado
 
 O restante descreve a validação original v1, conservada na pasta da entrega
-anterior. Na área atual, `python.json` registra os 63 testes da v5; `x86.json`
+anterior. Na área atual, `python.json` registra os 73 testes da v6; `x86.json`
 e `visual.json` continuam sendo os resultados históricos v1.
 
 Snapshot `1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e`. Executável brasileiro
