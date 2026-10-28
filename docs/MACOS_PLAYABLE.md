@@ -106,8 +106,8 @@ ad hoc signature, bundled isolated Python imports and a real navigation loop.
 It then opens the actual AppKit/WKWebView app and exercises DOM selection,
 destination submission, play/pause/speed, movement around the wall, collection,
 deposit and two live-clock hits. `native-smoke.json` records the interaction,
-positions, health, revision and changed pixel signatures; `native-smoke.png`
-captures the rendered window. `--skip-ui-smoke` is explicitly an incomplete
+positions, health, revision and changed native PNG hashes; `native-smoke.png`
+captures the rendered window; paired `.before.png`/`.after.png` files preserve the visual interaction evidence without reading a tainted file-URL canvas. `--skip-ui-smoke` is explicitly an incomplete
 headless check and records that fact.
 
 Initial implementation baseline: `5e2bf0831d3aaa776481a6ab023be262ef0df1bd`.

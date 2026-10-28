@@ -7,7 +7,7 @@ const view={scale:1,x:0,y:0,hover:null};
 const canvas=$('map'),ctx=canvas.getContext('2d');
 let canvasW=0,canvasH=0,lastScenario=null,toastTimer;
 function request(action,extra={}){return new Promise((resolve,reject)=>{const id=++seq;const timer=setTimeout(()=>{pending.delete(id);reject(Error('O motor Python não respondeu em 15 segundos.'));},15000);pending.set(id,{resolve,reject,timer});window.webkit.messageHandlers.engine.postMessage({id,action,...extra});});}
-window.receive=response=>{if(response.state)apply(response.state);const p=pending.get(response.id);if(p){clearTimeout(p.timer);pending.delete(response.id);response.ok?p.resolve(response.state):p.reject(Error(response.error));}};
+window.receive=response=>{if(response.state)apply(response.state);const p=pending.get(response.id);if(p){clearTimeout(p.timer);pending.delete(response.id);response.ok?p.resolve(response.state||response.capture):p.reject(Error(response.error));}};
 function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,6000);}
 function run(action,extra={}){return request(action,extra).catch(e=>toast(e.message));}
 function fmt(p){return p?p.join(', '):'—';}
@@ -84,8 +84,7 @@ window.runSmokeTests=async()=>{
  const move=async(x,y)=>{const i=state.selected;$('dest-x').value=x;$('dest-y').value=y;$('order-form').requestSubmit();await until(()=>state.units[i].state===2&&fmt(state.units[i].requested)===`${x}, ${y}`,'ordem pelo formulário');if(state.paused)$('play').click();await until(()=>state.units[i].state===7&&fmt(state.units[i].pos)===`${x}, ${y}`,'movimento vivo');if(!state.paused)$('play').click();await until(()=>state.paused,'pausa pelo botão');};
  await request('reset',{scenario:'jogavel'});
  window.smokeMode=false;
- const pixelSignature=()=>{draw();const bytes=ctx.getImageData(0,0,canvas.width,canvas.height).data;let hash=2166136261;for(let i=0;i<bytes.length;i+=4)hash=Math.imul(hash^bytes[i],16777619);return hash>>>0;};
- const before=pixelSignature();
+ const before=await request('capture',{label:'before'});
  $('speed').value='8';$('speed').dispatchEvent(new Event('change'));await until(()=>state.speed===8,'velocidade');
  await select(1);await move(4,9);$('collect').click();await until(()=>Object.keys(state.session.cargo).length===1,'coleta');
  check('coleta após deslocamento no relógio vivo',state.session.remaining===7);
@@ -97,11 +96,11 @@ window.runSmokeTests=async()=>{
  await until(()=>state.session.hits>=2,'golpes e recarga no relógio vivo');if(!state.paused)$('play').click();await until(()=>state.paused,'pausa após golpes');
  check('combate contínuo reduz vida por dois golpes',state.units[2].health<=60&&state.units[2].health>0);
  const t=state.tick;await new Promise(r=>setTimeout(r,220));check('pausa mantém o estado do treino',state.tick===t);
- const after=pixelSignature();check('renderização acompanha interações',before!==after&&unitBodies.naturalWidth>0);
+ const after=await request('capture',{label:'after'});check('renderização acompanha interações',before.sha256!==after.sha256&&unitBodies.naturalWidth>0);
  check('fontes de economia e combate vinculadas à mesma revisão',state.research.sources.every(s=>s.commit===state.commit));
  window.smokeMode=true;fit();await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
  return {passed:true,tests,commit:state.commit,scenario:state.scenario,tick:state.tick,session:state.session,
-         renderSignatures:[before,after],units:state.units.map(u=>({id:u.id,pos:u.pos,state:u.state,health:u.health})),
+         renderCaptures:[before,after],units:state.units.map(u=>({id:u.id,pos:u.pos,state:u.state,health:u.health})),
          canvas:[canvas.width,canvas.height],architecture:state.architecture,python:state.python,
          interaction:'DOM selection/form/buttons with live setInterval pump'};
 };

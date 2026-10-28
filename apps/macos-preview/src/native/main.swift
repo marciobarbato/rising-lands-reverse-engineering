@@ -1,5 +1,6 @@
 import AppKit
 import WebKit
+import CryptoKit
 
 final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler, WKNavigationDelegate, NSWindowDelegate {
     var window: NSWindow!
@@ -113,6 +114,27 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         }
     }
     func userContentController(_ userContentController:WKUserContentController,didReceive message:WKScriptMessage) {
+        if message.frameInfo.isMainFrame, let body = message.body as? [String:Any],
+           body["action"] as? String == "capture", smokeOutput != nil,
+           let shot = screenshotOutput, let label = body["label"] as? String,
+           ["before", "after"].contains(label), let requestID = body["id"] {
+            web.takeSnapshot(with:nil) { [weak self] image,error in
+                var response:[String:Any] = ["id":requestID,"ok":false,"error":"Falha na captura nativa"]
+                if let image = image, let tiff = image.tiffRepresentation,
+                   let bitmap = NSBitmapImageRep(data:tiff), let png = bitmap.representation(using:.png,properties:[:]) {
+                    let url = shot.deletingPathExtension().appendingPathExtension(label + ".png")
+                    do {
+                        try png.write(to:url)
+                        let hash = SHA256.hash(data:png).map { String(format:"%02x",$0) }.joined()
+                        response = ["id":requestID,"ok":true,"capture":["sha256":hash,"path":url.path]]
+                    } catch { response["error"] = error.localizedDescription }
+                }
+                if let data = try? JSONSerialization.data(withJSONObject:response), let json = String(data:data,encoding:.utf8) {
+                    self?.web.evaluateJavaScript("window.receive(\(json));",completionHandler:nil)
+                }
+            }
+            return
+        }
         guard message.frameInfo.isMainFrame, let body = message.body as? [String:Any], let action = body["action"] as? String,
               ["init","reset","select","order","pause","play","speed","step","pump","state","economy","combat","interact"].contains(action),
               let data = try? JSONSerialization.data(withJSONObject:body) else { return }
