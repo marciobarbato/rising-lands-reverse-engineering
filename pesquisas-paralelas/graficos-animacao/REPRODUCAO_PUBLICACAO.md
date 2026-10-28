@@ -1,6 +1,6 @@
 # Publicação parcial no Git e recuperação local
 
-A revisão local atual é `entregas/2026-10-28-composicao-v3r2/`; o manifesto e
+A revisão local atual é `entregas/2026-10-28-santuario-v4/`; o manifesto e
 `SHA256SUMS` descrevem o pacote completo, incluindo os insumos locais.
 A revisão anterior `entregas/2026-10-27-soldado-v1/` permanece intacta; o hash
 de seu manifesto é `56d17ebe830036ac9e115549b640f994587590f61b7bcd650fecbf0f3eca5671`.
@@ -49,7 +49,7 @@ import hashlib, json, subprocess
 from verificar_manifesto import verificar
 
 raiz = Path.cwd().resolve()
-identificador = '2026-10-28-composicao-v3r2'
+identificador = '2026-10-28-santuario-v4'
 revisao = raiz / 'entregas' / identificador
 destino = raiz / ('recuperacao-' + identificador)
 destino.mkdir(exist_ok=False)
@@ -93,7 +93,7 @@ de dependências externas.
 ## Publicação Git autorizada
 
 O usuário autorizou commitar as continuações desta frente sem alterar o trabalho
-dos outros chats. A v3 usa uma lista explícita revisada, depois do congelamento,
+dos outros chats. A v4 usa uma lista explícita revisada, depois do congelamento,
 com as exclusões acima. Sem push. Staging/commit e hashes finais são registrados
 em `ESTADO.md`, fora das revisões congeladas.
 

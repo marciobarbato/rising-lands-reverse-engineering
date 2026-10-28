@@ -1,9 +1,53 @@
 # Validação de gráficos e animação
 
-## Revisão v3r2 — paleta e composição
+## Revisão atual v4 — Santuário
+
+**53 testes Python passaram**, sem x86. Resultado atual em `validacao/python.json`.
+As dez novas regressões confrontam identidade/ETA, terreno e máscara, 512 planos,
+160 variações de célula/jogador, relógios/overflow, tabelas de jogador, 244 hashes
+de superfícies, recusa de casos fora do contrato e integridade dos artefatos.
+
+`validacao/x86-construcoes.json`: **1.183 execuções delimitadas**, 41.514.049
+instruções, **PASSOU** em 50,063 s. São 512 capturas de combinações dos relógios,
+160 variações, três condições negativas, 258 transições de contadores e cinco
+tabelas completas. Os 244 buffers incluem 5×48 composições e quatro recortes.
+
+Somente leitura de arquivo e alocação são substituídas no carregamento dos bancos;
+na leitura parcial do ETA, somente FileRead. Na colocação, somente MurAjoute
+(cache não consultado pelo desenho). Nos ensaios de captura os blitters são
+interceptados; nos 244 ensaios de pixels, são executados integralmente. A consulta
+de habitação, tabelas e prefixo dos relógios não usam substituições.
+SHA-256 do EXE conferido, intervalos permitidos, timeout de 2 segundos e teto
+de 1 milhão de instruções por execução. Processo próprio, sem jogo ou Ghidra.
+
+**Limite do resultado:** fachada habitada, modo 5, +0x06 zero, parada antes de
+0x40f342. O fundo das comparações é sintético. Leitura parcial do ETA e colocação
+não comprovam carregamento completo; a demonstração de terreno/fachada não
+comprova a ordem global da cena. Outros modos, incêndio, seleção e barras estão
+pendentes. Consulte [Continuidade v4](CONTINUIDADE_V4.md).
+
+`validacao/visual-construcoes.json` registra inspeção em IAB, 48 planos e 15
+buffers JS/Python, controles e hashes dos atlas/HTML/captura. Nenhum erro de
+console. Servidor e aba próprios foram encerrados. Os 73 trechos de assembly
+atuais são conferidos contra os bytes do EXE, além do helper histórico.
+
+Reprodução na área editável:
+
+```sh
+python3 -B extrair_evidencias.py
+python3 -B validar_construcoes.py  # Unicorn, hash e limites aplicados
+python3 -B gerar_construcoes.py    # biblioteca padrão
+python3 -B validar_python.py       # somente Python
+```
+
+Em entrega congelada, somente leitura: `python3 -B -m unittest -v test_graficos
+ test_trabalhadores test_composicao test_construcoes` e
+`python3 -B verificar_manifesto.py CAMINHO`.
+
+## Histórico v3r2 — paleta e composição
 
 **43 testes Python passaram**, sem executar x86, em 2.95 s.
-`validacao/python.json` é o resultado atual. Os testes conferem integridade das
+O `validacao/python.json` dentro da revisão v3r2 preserva esse resultado. Os testes conferem integridade das
 fontes e snapshot, evidências extraídas, associações anteriores e regressões
 contra as capturas x86 v3. Os relatórios v1/v2 são históricos e permanecem
 inalterados; suas afirmações de lacunas refletem o momento de cada revisão.
@@ -72,7 +116,7 @@ máquina. Para verificar uma revisão congelada sem escrever nela, usar
 ## Histórico v2 — unidades e variantes de bolsa
 
 **32 testes Python passaram** em 2,211 s: os 20 de regressão do Soldado mais
-12 para as novas unidades. `validacao/python.json` registra essa execução;
+12 para as novas unidades. O `validacao/python.json` congelado na v2 registra essa execução;
 não importa Unicorn nem executa x86. Foram conferidos os hashes das fontes,
 snapshot, bytes do assembly, tabela de identidade e resultados registrados.
 

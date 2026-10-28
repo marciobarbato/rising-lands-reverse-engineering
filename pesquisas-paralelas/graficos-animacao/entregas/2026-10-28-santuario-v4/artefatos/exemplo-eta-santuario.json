@@ -1,0 +1,172 @@
+{
+  "fonte": "MONDE01.ETA",
+  "registro": {
+    "indice": 0,
+    "offset_registro": 327734,
+    "sha256": "64565669d78725ac6f7dd5ee2187d96a3a38096385dfcf6f071d55b97445d658",
+    "tipo": 2,
+    "modo": 5,
+    "jogador": 0,
+    "origem_celula": [
+      12,
+      11
+    ],
+    "auxiliar_06": 0
+  },
+  "celula_gatilho": [
+    17,
+    13
+  ],
+  "condicoes": "Habitação conferida por BatimentEstHabiter com unidades recompostas; não emula LoadMission inteiro.",
+  "plano_relogios_zero": {
+    "tipo": 2,
+    "chave_ini": "SANCTUAIRE",
+    "nome": "SANTUÁRIO",
+    "modo": 5,
+    "habitado": true,
+    "jogador": 0,
+    "relogios": [
+      0,
+      0,
+      0
+    ],
+    "celula_mapa": [
+      17,
+      13
+    ],
+    "celula_gatilho": [
+      5,
+      2
+    ],
+    "terreno_base": 732,
+    "dimensoes_celulas": [
+      6,
+      5
+    ],
+    "ancoragem_gatilho": [
+      150,
+      93
+    ],
+    "camadas": [
+      {
+        "ordem": 0,
+        "papel": "corpo",
+        "arquivo_cmp": "BUILDING.CMP",
+        "indice_local": 3,
+        "indice_global": 7031,
+        "id_motor": 7032,
+        "base_global": 7028,
+        "x": -150,
+        "y": -93,
+        "operacao": "jogador",
+        "jogador": 0,
+        "relogio": null,
+        "quantidade_quadros": 1,
+        "confianca": "confirmada_codigo_e_comparacao_x86",
+        "evidencia": "0x4087bf..0x408923"
+      },
+      {
+        "ordem": 1,
+        "papel": "detalhe_alto",
+        "arquivo_cmp": "BUILDING.CMP",
+        "indice_local": 21,
+        "indice_global": 7049,
+        "id_motor": 7050,
+        "base_global": 7028,
+        "x": -76,
+        "y": -88,
+        "operacao": "jogador",
+        "jogador": 0,
+        "relogio": 2,
+        "quantidade_quadros": 8,
+        "confianca": "confirmada_codigo_e_comparacao_x86",
+        "evidencia": "0x4087bf..0x408923"
+      },
+      {
+        "ordem": 2,
+        "papel": "detalhe_central",
+        "arquivo_cmp": "BUILDING.CMP",
+        "indice_local": 5,
+        "indice_global": 7033,
+        "id_motor": 7034,
+        "base_global": 7028,
+        "x": -61,
+        "y": 2,
+        "operacao": "copiar",
+        "jogador": null,
+        "relogio": 0,
+        "quantidade_quadros": 8,
+        "confianca": "confirmada_codigo_e_comparacao_x86",
+        "evidencia": "0x4087bf..0x408923"
+      },
+      {
+        "ordem": 3,
+        "papel": "detalhe_direito",
+        "arquivo_cmp": "BUILDING.CMP",
+        "indice_local": 13,
+        "indice_global": 7041,
+        "id_motor": 7042,
+        "base_global": 7028,
+        "x": 1,
+        "y": 38,
+        "operacao": "copiar",
+        "jogador": null,
+        "relogio": 1,
+        "quantidade_quadros": 8,
+        "confianca": "confirmada_codigo_e_comparacao_x86",
+        "evidencia": "0x4087bf..0x408923"
+      },
+      {
+        "ordem": 4,
+        "papel": "bandeira_esquerda",
+        "arquivo_cmp": "BUILDING.CMP",
+        "indice_local": 30,
+        "indice_global": 7058,
+        "id_motor": 7059,
+        "base_global": 7028,
+        "x": -102,
+        "y": -29,
+        "operacao": "jogador",
+        "jogador": 0,
+        "relogio": 0,
+        "quantidade_quadros": 8,
+        "confianca": "confirmada_codigo_e_comparacao_x86",
+        "evidencia": "0x4087bf..0x408923"
+      },
+      {
+        "ordem": 5,
+        "papel": "bandeira_direita",
+        "arquivo_cmp": "BUILDING.CMP",
+        "indice_local": 38,
+        "indice_global": 7066,
+        "id_motor": 7067,
+        "base_global": 7028,
+        "x": -6,
+        "y": -19,
+        "operacao": "jogador",
+        "jogador": 0,
+        "relogio": 0,
+        "quantidade_quadros": 8,
+        "confianca": "confirmada_codigo_e_comparacao_x86",
+        "evidencia": "0x4087bf..0x408923"
+      },
+      {
+        "ordem": 6,
+        "papel": "detalhe_esquerdo",
+        "arquivo_cmp": "BUILDING.CMP",
+        "indice_local": 29,
+        "indice_global": 7057,
+        "id_motor": 7058,
+        "base_global": 7028,
+        "x": -132,
+        "y": -30,
+        "operacao": "copiar",
+        "jogador": null,
+        "relogio": 0,
+        "quantidade_quadros": 2,
+        "confianca": "confirmada_codigo_e_comparacao_x86",
+        "evidencia": "0x4087bf..0x408923"
+      }
+    ]
+  }
+}

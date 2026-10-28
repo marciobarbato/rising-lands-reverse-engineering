@@ -60,10 +60,15 @@ def extrair():
                          0x477042, 0x4770ee, 0x448599, 0x448194, 0x448f50, 0x416864,
                          0x467d97, 0x442025, 0x442045, 0x44fffe, 0x45002e, 0x474beb,
                          0x4470b9, 0x4798e9, 0x43ee31, 0x45f940, 0x4795af,
-                         0x45f7ba, 0x45f618, 0x45f5ac, 0x45f6e1)]
+                         0x45f7ba, 0x45f618, 0x45f5ac, 0x45f6e1,
+                         0x407dd3, 0x40f4b7, 0x40f4e8, 0x40f519, 0x41a08c,
+                         0x41a4f4, 0x41a5b8, 0x41a6ec, 0x41a8e5, 0x41b54a,
+                         0x41c4ac, 0x41ba49, 0x43e138, 0x4766d6, 0x476251,
+                         0x47622e, 0x44724a, 0x45ff61, 0x45f850, 0x41068e,
+                         0x47500e, 0x46c2cf, 0x418af7)]
     registros = []
     for a in selecionados:
-        fim = {0x448088:0x44812b,0x41591f:0x415a57}.get(a, ordenados[ordenados.index(a)+1])
+        fim = {0x448088:0x44812b,0x41591f:0x415a57,0x407dd3:0x40f49c}.get(a, ordenados[ordenados.index(a)+1])
         bruto = imagem[a-base:fim-base]
         linhas = [f'; {nomes[a]} [{a:#x}, {fim:#x})', f'; SHA-256 EXE: {HASH_EXE}',
                   '; Desmontagem linear. Algumas regiões entre símbolos contêm tabelas; não são prova de fluxo.']
@@ -98,6 +103,19 @@ def extrair():
     (pasta/'identidade-tipos.json').write_text(json.dumps(dict(
         exe_sha256=HASH_EXE,commit_snapshot=COMMIT,registros=tipos,
         ressalva='Somente identidade; presença nesta tabela não valida seus gráficos.'),
+        ensure_ascii=False,indent=2)+'\n')
+    construcoes=[]
+    for tipo in range(22):
+        a=0x495d8c+tipo*52;raw=imagem[a-base:a-base+52]
+        w,h=struct.unpack_from('<HH',raw);ptr=struct.unpack_from('<I',raw,8)[0]
+        construcoes.append(dict(tipo=tipo,endereco=hex(a),tamanho=52,
+            chave_ini=raw[19:].split(b'\0')[0].decode('ascii'),dimensoes_celulas=[w,h],
+            ponteiro_mascara=hex(ptr),bytes_hex=raw.hex(),sha256=hashlib.sha256(raw).hexdigest()))
+    (pasta/'identidade-construcoes.json').write_text(json.dumps(dict(
+        exe_sha256=HASH_EXE,commit_snapshot=COMMIT,registros=construcoes,
+        mascara_santuario=list(imagem[0x495c30-base:0x495c30-base+30]),
+        faixas_jogador=[list(imagem[0x496d4c-base+i*8:0x496d4c-base+(i+1)*8]) for i in range(3)],
+        ressalva='Identidade dos 22 tipos; associação gráfica validada somente para o Santuário no contrato v4.'),
         ensure_ascii=False,indent=2)+'\n')
     print('Trechos extraídos:', len(registros))
 

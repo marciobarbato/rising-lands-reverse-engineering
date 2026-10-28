@@ -13,7 +13,7 @@ def congelar(identificador):
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,100}',identificador):
         raise ValueError('Identificador inválido')
     for nome in ('python','x86','visual','x86-trabalhadores','visual-trabalhadores',
-                 'x86-composicao','visual-composicao'):
+                 'x86-composicao','visual-composicao','x86-construcoes','visual-construcoes'):
         report=json.loads((RAIZ/'validacao'/f'{nome}.json').read_text())
         if report['resultado']!='PASSOU':raise RuntimeError(f'Validação {nome} não passou')
     destino=RAIZ/'entregas'/identificador
@@ -24,7 +24,9 @@ def congelar(identificador):
               'validar_trabalhadores.py','gerar_trabalhadores.py','unidades.template.html',
               'test_trabalhadores.py','CONTINUIDADE_V2.md','REPRODUCAO_PUBLICACAO.md',
               'composicao.py','validar_composicao.py','gerar_composicao.py',
-              'composicao.template.html','test_composicao.py','CONTINUIDADE_V3.md']
+              'composicao.template.html','test_composicao.py','CONTINUIDADE_V3.md',
+              'construcoes.py','validar_construcoes.py','gerar_construcoes.py',
+              'construcoes.template.html','test_construcoes.py','CONTINUIDADE_V4.md']
     for nome in arquivos:shutil.copyfile(RAIZ/nome,destino/nome)
     for pasta in ('fontes','snapshot','dependencias','evidencias','artefatos','validacao'):
         shutil.copytree(RAIZ/pasta,destino/pasta,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
@@ -33,7 +35,7 @@ def congelar(identificador):
         if p.is_file():items.append(dict(caminho=p.relative_to(destino).as_posix(),bytes=p.stat().st_size,
                                          sha256=hashlib.sha256(p.read_bytes()).hexdigest()))
     manifesto=dict(identificador=identificador,commit_base=COMMIT,exe_sha256=HASH_EXE,
-                   commit_entrega_anterior='0c76b34a017c185ab24344137a1cb52266b599d2',
+                   commit_entrega_anterior='b67215a3870d17a51b063cb9d82ea391c1852f56',
                    regra='Imutável após publicação; alterações exigem nova revisão.',
                    arquivos=items,quantidade_arquivos=len(items))
     if identificador == '2026-10-28-composicao-v3r2':

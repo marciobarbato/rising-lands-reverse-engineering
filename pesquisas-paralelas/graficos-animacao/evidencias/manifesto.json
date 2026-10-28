@@ -4,6 +4,41 @@
   "capstone": "5.0.7",
   "trechos": [
     {
+      "nome": "AffBatiments",
+      "inicio": "0x407dd3",
+      "fim": "0x40f49c",
+      "sha256_bytes": "fe9a4031beee7936e4fd138e06c42eab6ce41ef289e10b1690ecfd9f61efc4d7",
+      "arquivo": "00407dd3.asm"
+    },
+    {
+      "nome": "SaveCurrentClipping",
+      "inicio": "0x40f4b7",
+      "fim": "0x40f4e8",
+      "sha256_bytes": "b221d21ce5576ae5725164b736a4ac6746276d9f258a7ae7cbd2443591cb723f",
+      "arquivo": "0040f4b7.asm"
+    },
+    {
+      "nome": "RestaureClipping",
+      "inicio": "0x40f4e8",
+      "fim": "0x40f519",
+      "sha256_bytes": "5d11ba456e828f126bf8ea734179ee87432643d0a422b7a135530cdc1493fef0",
+      "arquivo": "0040f4e8.asm"
+    },
+    {
+      "nome": "SetClipping",
+      "inicio": "0x40f519",
+      "fim": "0x40f535",
+      "sha256_bytes": "73755c55474b2b2de9eba104f42911b01436a2a78dd37025904bb4aabd9bf870",
+      "arquivo": "0040f519.asm"
+    },
+    {
+      "nome": "AffTerrain",
+      "inicio": "0x41068e",
+      "fim": "0x41087e",
+      "sha256_bytes": "4e0b75233c42cb4e1d60daaa14b7473f19b5546507421e3520deb68e935abd0b",
+      "arquivo": "0041068e.asm"
+    },
+    {
       "nome": "AffCorpsEnginDecalage",
       "inicio": "0x410fcc",
       "fim": "0x4110bf",
@@ -116,6 +151,76 @@
       "arquivo": "0041877a.asm"
     },
     {
+      "nome": "BatimentGetTypeName",
+      "inicio": "0x418af7",
+      "fim": "0x418b15",
+      "sha256_bytes": "318ac5bed49b5af270137d614956a92647e5dfe2f84dfb96ce60686709b791c0",
+      "arquivo": "00418af7.asm"
+    },
+    {
+      "nome": "BatimentGetPlayer",
+      "inicio": "0x41a08c",
+      "fim": "0x41a0ab",
+      "sha256_bytes": "73c7960bdd0b83a8016cc9f7097a635079ae215bfcd10f91c37badd7e6c90932",
+      "arquivo": "0041a08c.asm"
+    },
+    {
+      "nome": "BatimentGetType",
+      "inicio": "0x41a4f4",
+      "fim": "0x41a513",
+      "sha256_bytes": "b3f55e7d1ddbe9eb0c88c8042cc80aa415dd5b8f280b6c018978cbe182cf7584",
+      "arquivo": "0041a4f4.asm"
+    },
+    {
+      "nome": "BatimentEstHabiter",
+      "inicio": "0x41a5b8",
+      "fim": "0x41a61c",
+      "sha256_bytes": "8db6619013ef9a6ed8f6b8bb53cac82fb4752b1ff95e62d2b61531dfe28a67b1",
+      "arquivo": "0041a5b8.asm"
+    },
+    {
+      "nome": "BatimentGetModeEtat",
+      "inicio": "0x41a6ec",
+      "fim": "0x41a70b",
+      "sha256_bytes": "da82a8d7ffb2264176d7e72f841e2029a493b8940bfbbdd3e1103103563966ae",
+      "arquivo": "0041a6ec.asm"
+    },
+    {
+      "nome": "BatimentGetEtat",
+      "inicio": "0x41a8e5",
+      "fim": "0x41a940",
+      "sha256_bytes": "3adb65e8bedb386247012b8f14d02553aff01a2be629841aaf65a83856047968",
+      "arquivo": "0041a8e5.asm"
+    },
+    {
+      "nome": "ChercheIndiceBatiment",
+      "inicio": "0x41b54a",
+      "fim": "0x41b579",
+      "sha256_bytes": "9d9a454a4a9684e367f7904d815e18ce500499edbcd43bf850fbcd3fc8f4b9cb",
+      "arquivo": "0041b54a.asm"
+    },
+    {
+      "nome": "BatimentModifyTerrain",
+      "inicio": "0x41ba49",
+      "fim": "0x41bb8a",
+      "sha256_bytes": "7bde63f640b8cb7b3d0a2912912aec4b023806fcc484159415d30ad278d56dcc",
+      "arquivo": "0041ba49.asm"
+    },
+    {
+      "nome": "PlaceBatiment",
+      "inicio": "0x41c4ac",
+      "fim": "0x41c652",
+      "sha256_bytes": "b2476d0792e3276a0479549d83786f4042c794ccb566202817c1c7ef89e8ac5a",
+      "arquivo": "0041c4ac.asm"
+    },
+    {
+      "nome": "Chemin_ModifieZone",
+      "inicio": "0x43e138",
+      "fim": "0x43e2a3",
+      "sha256_bytes": "c72f4e20e1f5c2be3c0ccc92d1aeae22ef2c913ced95f12f14e192ae882142d1",
+      "arquivo": "0043e138.asm"
+    },
+    {
       "nome": "DDSetPalette",
       "inicio": "0x43ee31",
       "fim": "0x43ef40",
@@ -142,6 +247,13 @@
       "fim": "0x4470c5",
       "sha256_bytes": "a4b23a2dfd610b631864b3ffd40674fc62f9bc18fec11a6d3b824a770aa937af",
       "arquivo": "004470b9.asm"
+    },
+    {
+      "nome": "BagContientTroupe",
+      "inicio": "0x44724a",
+      "fim": "0x4472d3",
+      "sha256_bytes": "1da9b4cab9146553320717a2aeebc8198415eeadde61b0f14046297dbdd6e362",
+      "arquivo": "0044724a.asm"
     },
     {
       "nome": "AnimArretEngin",
@@ -305,11 +417,25 @@
       "arquivo": "0045f7ba.asm"
     },
     {
+      "nome": "MemPlayerCopy",
+      "inicio": "0x45f850",
+      "fim": "0x45f871",
+      "sha256_bytes": "3fcda9109606397e4e2964579073c9563e059f5aa9db989915657b36f2636590",
+      "arquivo": "0045f850.asm"
+    },
+    {
       "nome": "CalculOmbrage",
       "inicio": "0x45f940",
       "fim": "0x45fafc",
       "sha256_bytes": "9f60efd0b1367385bf70be77a67018aa0f73fb316c1aab4dae95242627506d3a",
       "arquivo": "0045f940.asm"
+    },
+    {
+      "nome": "CalculTabPlayer",
+      "inicio": "0x45ff61",
+      "fim": "0x46003b",
+      "sha256_bytes": "724fc7f8653a996b80cba5f8c3934ac080d8ec479748e652626a201f12455a04",
+      "arquivo": "0045ff61.asm"
     },
     {
       "nome": "GetBit",
@@ -319,11 +445,46 @@
       "arquivo": "00467d97.asm"
     },
     {
+      "nome": "MissionLoad",
+      "inicio": "0x46c2cf",
+      "fim": "0x46c5e3",
+      "sha256_bytes": "8c7508554525257a4ece37e63e68d13ccddb4bc7cc60a8c4d02cd53fca13e35f",
+      "arquivo": "0046c2cf.asm"
+    },
+    {
       "nome": "ProgInit",
       "inicio": "0x474beb",
       "fim": "0x474f8c",
       "sha256_bytes": "e142444a26bd46c493891d094cebcde3deb4452963828c439638d690aa1eb361",
       "arquivo": "00474beb.asm"
+    },
+    {
+      "nome": "ProgIteration",
+      "inicio": "0x47500e",
+      "fim": "0x475118",
+      "sha256_bytes": "d04c5ef8b2e1c48b12726e6907fe6a38e632e7ae451b3b325d78225060049897",
+      "arquivo": "0047500e.asm"
+    },
+    {
+      "nome": "SetCollision",
+      "inicio": "0x47622e",
+      "fim": "0x47623e",
+      "sha256_bytes": "6782e75a6bd70bcc5f78f5647334c0acc7d8f358492018b6e8d31649457d9a13",
+      "arquivo": "0047622e.asm"
+    },
+    {
+      "nome": "SetTerrain",
+      "inicio": "0x476251",
+      "fim": "0x476263",
+      "sha256_bytes": "1df0706024b369148a0566fddc1e0c3194ba7c623a77a124c033b4751932c257",
+      "arquivo": "00476251.asm"
+    },
+    {
+      "nome": "CaseEstDecouverte",
+      "inicio": "0x4766d6",
+      "fim": "0x4766f0",
+      "sha256_bytes": "2e3c150188cd700809900fd0e8561f2dc67c915400e3deb4e739a86cca1e613a",
+      "arquivo": "004766d6.asm"
     },
     {
       "nome": "CalculDirection",

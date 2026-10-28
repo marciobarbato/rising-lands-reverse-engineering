@@ -1,6 +1,6 @@
 # Contrato para o aplicativo macOS
 
-Consumir uma cópia integral de `entregas/2026-10-28-composicao-v3r2/`, verificando
+Consumir uma cópia integral de `entregas/2026-10-28-santuario-v4/`, verificando
 `MANIFESTO.json`. Não importar a área de trabalho desta frente nem os leitores
 de outras frentes. Esta entrega não modifica `visualizador-mac`.
 
@@ -171,6 +171,67 @@ mais cauda de quatro bytes zero não lida pelo caminho. O consumidor precisa
 fornecer estado **após** seu carregador; não transformar o estado de disco numa
 regra permanente de visibilidade.
 
+## Santuário — API v4 independente
+
+`construcoes.py` não importa Unicorn. `consultar_santuario` retorna um plano
+com as sete camadas, já com índices local/global, ordem, offsets, operação e
+evidência. Só aceita tipo 2, modo 5, `habitado=True` e `auxiliar_06=0`.
+Outros casos levantam `NotImplementedError`; não recebem uma imagem aproximada.
+
+```python
+from graficos import Catalogo, png
+from construcoes import consultar_santuario, compor_fachada, tabelas_jogador
+
+c = Catalogo()
+plano = consultar_santuario(
+    tipo=2, modo=5, habitado=True, auxiliar_06=0,
+    jogador=1, relogios=(0, 0, 0), celula_mapa=(17, 13))
+assert [q['id_motor'] for q in plano['camadas']] == [
+    7032, 7050, 7034, 7042, 7059, 7067, 7058]
+# Fundo/terreno já composto pelo consumidor; exemplo com índice uniforme.
+indices = compor_fachada(c, bytes([82]) * (320*320), 320, 320,
+    plano, 224, 160, tabelas=tabelas_jogador())
+paleta = c.paleta()
+rgba = b''.join(paleta[v*3:v*3+3] + b'\xff' for v in indices)
+imagem = png(320, 320, rgba)  # NSData → NSImage(data:)
+```
+
+`celula_mapa` é a posição **absoluta do gatilho**, não a origem da construção:
+na missão 1, origem (12,11), gatilho (17,13). O gatilho fica no deslocamento
+(5,2) do terreno 6×5, ID 749. A coordenada de tela `(224,160)` acima é a
+origem dessa célula projetada no viewport. O corpo usa o offset (−150,−93).
+Não recentralizar quadros nem posicionar a fachada no centro do terreno.
+
+O integrador verifica visibilidade/ocupação antes de chamar a API. A fachada
+não substitui `AffBatiments` inteiro: fica antes de 0x40f342, sem indicadores
+posteriores. O terreno utiliza IDs 732..761 em ordem de linhas. A demo o monta
+antes da fachada para inspeção; a ordem global com unidades/vegetação ainda
+precisa ser investigada. `compor_fachada` não pinta terreno implicitamente.
+
+Entradas externas: tipo +8, modo +5, jogador +4, auxiliar u16 +6 do registro
+de construção; resultado de `BatimentEstHabiter`; célula do gatilho; superfície,
+recorte inclusivo e relógios. `ler_estruturas_eta(bytes)` lê estritamente o bloco
+204 bytes de ETA V0.3, sem pós-processamento ou simulação de regras.
+
+`relogios=(A,B,C)` são u32 em 0x508f7c/80/84. `avancar_relogios` reproduz
+somente o prefixo de `ProgIteration`: incrementa A, incrementa B quando o novo
+A é par, incrementa C quando divisível por três. Preserva overflow; não converte
+para segundos nem presume que B/C sejam divisões de A em um estado arbitrário.
+
+`tabelas_jogador()` fornece cinco tabelas originais de 256 índices; o argumento
+opcional `faixas` aceita as três faixas de oito índices de
+`evidencias/identidade-construcoes.json`. `compor_fachada` exige as tabelas
+explicitamente. Quatro camadas remapeiam a cor da fonte em 160..167; três
+usam cópia simples. A máscara CMP é preservada. O exemplo retorna PNG composto;
+para desenhar camadas diretamente em Swift, usar ordem/offsets/operação do plano.
+Não estender a composição de unidades da v3 a outros jogadores só pela existência
+dessas tabelas: o contrato dessa API permanece separado.
+
+Coordenadas e recortes devem ficar no domínio de 16 bits do original, sem
+provocar overflow nas somas. O comparador cobre cinco jogadores e quatro
+recortes, além das fases; não valida efeitos de clipping específicos de outros
+modos de construção. [Continuidade v4](CONTINUIDADE_V4.md) detalha as evidências.
+
 ## Ponte mínima por JSON
 
 ```sh
@@ -205,8 +266,9 @@ os PNGs produzidos pelo adaptador. Não depender da página HTML para obter dado
 
 - Tipo fora de 0/5/6/7/9: `NotImplementedError`. Estado textual fora de
   `parado/andando`, direção fora de 1..16 e fase fora de 0..7: `ValueError`.
-- A demo usa jogador 0, que alcança a cópia básica. Recoloração de outros
-  jogadores, estados especiais e efeitos ainda não fazem parte da API.
+- A composição de unidades usa jogador 0. A API v4 de Santuário aceita as
+  cinco tabelas originais no contrato acima; estados especiais e efeitos
+  permanecem fora das duas APIs.
 - Sombra separada: ID 10784, local OTHERS 3144, posição célula+(2,26)+deslocamento.
   A matriz é produzida por `tabela_sombra` com percentual/ciclos explícitos.
   Não substituir remapeamento de destino por um PNG preto com alpha.
@@ -217,7 +279,7 @@ os PNGs produzidos pelo adaptador. Não depender da página HTML para obter dado
 - ETA serializado exige recomposição e pós-processamento; exemplos desta entrega
   descrevem o disco. O adaptador não substitui o carregador/simulador completo.
 - Nenhuma rotina de consulta, decodificação ou demonstração depende de x86.
-  Somente `bancada_x86.py`/`validar_x86.py`/`validar_trabalhadores.py`/`validar_composicao.py` dependem de Unicorn para comparação.
+  Somente `bancada_x86.py`/`validar_x86.py`/`validar_trabalhadores.py`/`validar_composicao.py`/`validar_construcoes.py` dependem de Unicorn para comparação.
   `extrair_evidencias.py` depende de Capstone apenas na extração de assembly.
 
 Verificação de consumo: `python3 -B verificar_manifesto.py CAMINHO_DA_REVISAO`.

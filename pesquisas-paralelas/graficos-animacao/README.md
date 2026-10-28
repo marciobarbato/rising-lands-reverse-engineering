@@ -1,13 +1,37 @@
-# Gráficos e animação — unidades, paleta e composição
+# Gráficos e animação — unidades e Santuário
 
 **Soldado, Fazendeiro, Mecânico, Construtor e Colono: parada e movimento
 mapeados e comparados com o x86 original.** São 1.152 associações e 512 quadros
 distintos, incluindo variantes de bolsa vazia/não vazia nos tipos 5/6/7.
 O adaptador e a demonstração funcionam sem Unicorn e sem executar o EXE.
 
-Revisão atual: `entregas/2026-10-28-composicao-v3r2/`. As revisões v1 e v2
+Revisão atual: `entregas/2026-10-28-santuario-v4/`. As revisões anteriores
 permanecem intactas. Cada pasta de revisão contém
 seu próprio `MANIFESTO.json` e `SHA256SUMS`. Não editar uma revisão publicada.
+
+## Avanços da v4
+
+**Santuário tipo 2: terreno 6×5 e fachada de sete camadas validados.**
+A missão 1 foi ligada ao tipo, à célula que dispara o desenho e aos quadros
+BUILDING/CMP, incluindo três relógios e cinco tabelas de jogador.
+
+- [Demonstração independente](artefatos/demo-santuario.html): fases, jogador,
+  camadas, terreno, grade e âncora. Funciona offline.
+- [Atlas de 43 quadros da fachada](artefatos/atlas-santuario.png),
+  [30 células do terreno](artefatos/terreno-santuario.png) e
+  [cinco jogadores](artefatos/santuario-composicao.png).
+- [73 associações JSON](artefatos/associacoes-santuario.json) e
+  [CSV](artefatos/associacoes-santuario.csv), com índices, sequência, âncora,
+  confiança e evidência; [registro ETA](artefatos/exemplo-eta-santuario.json).
+- 53 testes Python; 1.183 execuções x86 delimitadas; **244 superfícies idênticas**
+  ao original. O navegador confere 48 planos e 15 buffers contra Python.
+
+O contrato cobre fachada habitada, modo 5, auxiliar +0x06 zero. A API exige
+célula do mapa e os três contadores: quatro detalhes somam a célula à fase.
+Os efeitos posteriores de incêndio, seleção e barras ficam fora desta revisão.
+A montagem do terreno para inspeção não valida a ordenação global da cena.
+Leia [Continuidade v4](CONTINUIDADE_V4.md), [API](INTEGRACAO.md) e
+[validação](VALIDACAO.md). O aplicativo macOS e as outras frentes não foram alterados.
 
 ## Avanços da v3
 
@@ -55,7 +79,7 @@ Consulte [Continuidade v3](CONTINUIDADE_V3.md) para evidências e contratos pend
 ```sh
 python3 -B graficos.py --tipo 0 --estado parado --direcao 1
 python3 -B graficos.py --tipo 7 --estado parado --direcao 9 --bolsa-u16 256
-python3 -B -m unittest -v test_graficos test_trabalhadores test_composicao
+python3 -B -m unittest -v test_graficos test_trabalhadores test_composicao test_construcoes
 ```
 
 Os comandos acima são somente leitura, inclusive dentro da entrega congelada.
@@ -69,7 +93,8 @@ Snapshot: **`1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e`**. Foram copiados 942 arq
 commitados de leitores, testes, relatórios, documentação e evidências, excluindo
 as pesquisas paralelas. `snapshot/manifesto.json` registra cada caminho e SHA-256.
 Nenhuma importação usa os módulos do checkout em edição por outros chats.
-A v3 parte do commit próprio `0c76b34a017c185ab24344137a1cb52266b599d2`,
+A v4 parte do commit próprio `b67215a3870d17a51b063cb9d82ea391c1852f56`,
+registrado em `evidencias/proveniencia-v4.json`. A v3 parte do commit próprio `0c76b34a017c185ab24344137a1cb52266b599d2`,
 registrado em `evidencias/proveniencia-v3.json`. O desenvolvimento v2 partiu do commit próprio
 `e531dbbdbe650ae2cbdeab03567981d2d8cd15bd`; os arquivos predecessores e hashes
 estão em `evidencias/proveniencia-v2.json`. Fontes/snapshot/dependências anteriores
@@ -246,8 +271,8 @@ entradas explícitas, sem presumir configuração de uma partida.
 (8,18); estado 7, orientação 1, fase 2 nos bytes serializados. Conferem com ID
 2084 pela fórmula. Os offsets de arquivo e hashes dos registros constam no JSON.
 A recomposição é `raw[:0x8c] + raw[0x28c:]`; não se apresenta isso como RAM
-completamente pós-processada. Construções e objetos ETA não foram associados
-a sprites nesta revisão.
+completamente pós-processada. O Santuário foi associado na v4 conforme o relatório específico; os demais
+objetos ETA permanecem sem associação nesta API.
 
 Na v2, `exemplos-eta-unidades.json` acrescenta os dois Fazendeiros (índices 13/14,
 fase 5, bolsa zero → ID 1607) e o Construtor (índice 12, fase 3, bolsa zero →
@@ -265,6 +290,7 @@ fora do material ETA. Esses bytes não são lidos pelo caminho do estado 14.
 deltas de direção, âncoras,
 deslocamentos, transparência e blitter básico com recorte; na v3, paleta inicial,
 despacho, tabela de sombra com parâmetros explícitos e composição sombra/corpo.
+Na v4: fachada do Santuário no contrato delimitado, terreno/ocupação, relógios e tabelas por jogador.
 
 **Confirmado apenas por leitura estática ou por arquivo:** encadeamento superior
 da parada, contexto global de inicialização da sombra, origem lógica da grade, identidade
@@ -276,9 +302,10 @@ associação usa essa inferência como validação. **Hipóteses não expostas n
 transpor fórmulas para outros tipos, chamar fase 0 de parada, converter o período
 em FPS, reaplicar a imagem de sombra como um PNG preto sem sua tabela.
 
-Ainda faltam: outros 21 tipos, construções, árvores/pedras, camadas de objetos e
-variantes ETA, ordenação completa de desenho, efeitos, estado global da sombra,
-paletas por jogador, HUD, minimapa e seleção. Ataques permanecem com a frente de
+Ainda faltam: outros 21 tipos de unidade, outros 21 tipos de construção,
+modos adicionais do Santuário, árvores/pedras, camadas de objetos e variantes
+ETA, ordenação completa de desenho, efeitos, estado global da sombra, aplicação
+das tabelas de jogador às unidades, HUD, minimapa e seleção. Ataques permanecem com a frente de
 combate; esta pasta poderá apenas catalogar suas imagens futuramente.
 
 Contrato necessário ao consumidor: fornecer **tipo, orientação atual 1..16,
@@ -296,6 +323,8 @@ python3 -B gerar_artefatos.py
 python3 -B gerar_trabalhadores.py
 python3 -B validar_x86.py       # opcional: precisa de Unicorn
 python3 -B validar_trabalhadores.py  # comparações adicionais, precisa de Unicorn
+python3 -B validar_construcoes.py  # comparação original do Santuário, precisa de Unicorn
+python3 -B gerar_construcoes.py    # atlas e HTML, somente Python
 python3 -B validar_python.py
 python3 -B congelar.py NOVO_IDENTIFICADOR
 ```
