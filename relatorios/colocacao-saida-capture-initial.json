@@ -1,0 +1,11 @@
+{
+  "stage": "Original-only capture attempt before translation",
+  "success": false,
+  "bounded_x86_executions_started": 1,
+  "completed_captures": 0,
+  "error": "Declared stop not reached within harness instruction/time cap",
+  "observer": "Initial read-only hook sampled three registers at every instruction",
+  "correction": "Filter hook to relevant call entries before reading registers",
+  "rerun": "Four original-only captures completed after observer correction; intact code and time/instruction limits unchanged",
+  "scope": "Harness observer overhead; not a recorded semantics comparison"
+}

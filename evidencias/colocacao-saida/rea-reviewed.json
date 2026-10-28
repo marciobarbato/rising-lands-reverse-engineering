@@ -1,0 +1,577 @@
+{
+  "kind": "Reviewed REA excerpts; not a complete Evidence bundle",
+  "rea_source_revision": "b9a8f8e9f25feb9cc97bf4960748f2bdf8c898bc",
+  "provider": "Ghidra 12.2 private read-only copy",
+  "original_oracle_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "normalized_analysis_sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "review": "Original bytes/registers define the API. Shared epilogue inspected separately. Existing collision/vision/minimap algorithms reused; inferred function signatures are fallible.",
+  "records": [
+    {
+      "source_evidence_id": "ev_d42b26bfc0ba700ac14ff15391cf7361f2db8fc1e718f0200c3abd1fc7fbca3e",
+      "source_record_sha256": "76e153cbd939d306899b6524712c24db41d0b61a1e6224c066406e81613efb3d",
+      "operation": "analyze_function",
+      "parameters": {
+        "procedure": "0x445fbc"
+      },
+      "analysis_profile_digest": "33da723a26733dd8b59046612d0c42bf95bb1b59c46a63f17b127521af169a3d",
+      "reviewed_result": {
+        "procedure": {
+          "address": "0x445fbc",
+          "name": "OriginaisSBL::SetSortEngin",
+          "symbol": {
+            "primary": true,
+            "dynamic": false,
+            "external": false,
+            "type": "function",
+            "source": "user_defined"
+          },
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x445fbc",
+                "end": "0x446188"
+              }
+            ],
+            "total_bytes": 461,
+            "span_bytes": 461,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "undefined __fastcall SetSortEngin(undefined4 param_1, undefined2 param_2)",
+          "locals": [
+            {
+              "description": "undefined1 local_14 @ Stack[-0x14]:1",
+              "provenance": "ghidra-function-database"
+            }
+          ]
+        },
+        "pseudocode": "\nvoid __fastcall OriginaisSBL::SetSortEngin(undefined4 param_1,ushort param_2)\n\n{\n  bool bVar1;\n  UnidadeParcial *pUVar2;\n  ushort in_AX;\n  int extraout_ECX;\n  int extraout_ECX_00;\n  UnidadeParcial *extraout_ECX_01;\n  UnidadeParcial *pUVar3;\n  \n  pUVar3 = tabela_unidades;\n  tabela_unidades[in_AX].celula_destino = param_2;\n  pUVar3[in_AX].celula_passo = param_2;\n  pUVar3[in_AX].celula_atual = param_2;\n  pUVar2 = tabela_unidades;\n  tabela_unidades[in_AX].celula_destino = param_2;\n  if (in_AX == DAT_00496304) {\n    DAT_004e0f36 = 0;\n    DAT_004e0f37 = 0;\n    DAT_00496304 = 0xffff;\n    DAT_004e0f3c = 0;\n  }\n  pUVar2[in_AX].estado_caminho = 0;\n  if ((tabela_unidades[in_AX].estado == 0) || (tabela_unidades[in_AX].estado == 4)) {\n    bVar1 = false;\n  }\n  else {\n    bVar1 = true;\n  }\n  if ((bVar1) && (tabela_unidades[in_AX].estado = 7, in_AX == DAT_00496304)) {\n    DAT_004e0f36 = 0;\n    DAT_004e0f37 = 0;\n    DAT_004e0f3c = 0;\n    DAT_00496304 = 0xffff;\n  }\n  *(undefined2 *)&pUVar3[in_AX].field_0xc0 = 0xffff;\n  *(undefined2 *)&pUVar3[in_AX].field_0xb8 = 0xffff;\n  pUVar3[in_AX].deslocamento_y = 0;\n  pUVar3[in_AX].deslocamento_x = pUVar3[in_AX].deslocamento_y;\n  SetEnginCollision(tabela_unidades);\n  *(undefined1 *)(extraout_ECX + 0x72 + (uint)in_AX * 0x114) = 1;\n  pUVar3 = tabela_unidades + in_AX;\n  if ((pUVar3->proprietario_id != 200) && (pUVar3->proprietario_id != 4)) {\n    DecouvreTerrain(pUVar3,(uint)(ushort)((ushort)(byte)pUVar3->field_0xf5 + pUVar3->raio_visao + 2)\n                   );\n    IllumineTerrain(extraout_ECX_00,\n                    (uint)(ushort)((ushort)*(byte *)(extraout_ECX_00 + 0xf5) +\n                                  (ushort)*(byte *)(extraout_ECX_00 + 0xbb)));\n    pUVar3 = extraout_ECX_01;\n  }\n  SetMiniMap(pUVar3,4);\n  return;\n}\n\n",
+        "assembly": [
+          "0x445fbc: PUSH EBX",
+          "0x445fbd: PUSH ECX",
+          "0x445fbe: PUSH ESI",
+          "0x445fbf: PUSH EDI",
+          "0x445fc0: SUB ESP, 0x8",
+          "0x445fc3: MOV EBX, EAX",
+          "0x445fc5: XOR ECX, ECX",
+          "0x445fc7: MOV CX, AX",
+          "0x445fca: MOV EAX, ECX",
+          "0x445fcc: SHL EAX, 0x4",
+          "0x445fcf: ADD EAX, ECX",
+          "0x445fd1: SHL EAX, 0x2",
+          "0x445fd4: ADD ECX, EAX",
+          "0x445fd6: MOV EAX, [0x004e19a0]",
+          "0x445fdb: SHL ECX, 0x2",
+          "0x445fde: ADD EAX, ECX",
+          "0x445fe0: MOV word ptr [EAX + 0x7e], DX",
+          "0x445fe4: MOV word ptr [EAX + 0x7c], DX",
+          "0x445fe8: MOV word ptr [EAX + 0x8], DX",
+          "0x445fec: MOV ESI, dword ptr [0x004e19a0]",
+          "0x445ff2: ADD ECX, ESI",
+          "0x445ff4: MOV word ptr [ECX + 0x7e], DX",
+          "0x445ff8: CMP BX, word ptr [0x00496304]",
+          "0x445fff: JNZ 0x00446023",
+          "0x446001: XOR DL, DL",
+          "0x446003: MOV ESI, 0xffff",
+          "0x446008: MOV byte ptr [0x004e0f36], DL",
+          "0x44600e: MOV byte ptr [0x004e0f37], DL",
+          "0x446014: XOR EDX, EDX",
+          "0x446016: MOV word ptr [0x00496304], SI",
+          "0x44601d: MOV dword ptr [0x004e0f3c], EDX",
+          "0x446023: XOR ESI, ESI",
+          "0x446025: MOV SI, BX",
+          "0x446028: MOV EDX, ESI",
+          "0x44602a: SHL EDX, 0x4",
+          "0x44602d: MOV byte ptr [ECX + 0x88], 0x0",
+          "0x446034: ADD EDX, ESI",
+          "0x446036: MOV CL, 0x7",
+          "0x446038: SHL EDX, 0x2",
+          "0x44603b: MOV byte ptr [ESP + 0x4], CL",
+          "0x44603f: ADD EDX, ESI",
+          "0x446041: MOV ECX, dword ptr [0x004e19a0]",
+          "0x446047: SHL EDX, 0x2",
+          "0x44604a: MOV EDI, EBX",
+          "0x44604c: MOV CL, byte ptr [ECX + EDX*0x1 + 0x2]",
+          "0x446050: AND ECX, 0xff",
+          "0x446056: JZ 0x00446061",
+          "0x446058: CMP ECX, 0x4",
+          "0x44605b: JZ 0x00446061",
+          "0x44605d: MOV DL, 0x1",
+          "0x44605f: JMP 0x00446063",
+          "0x446061: XOR DL, DL",
+          "0x446063: TEST DL, DL",
+          "0x446065: JZ 0x004460b2",
+          "0x446067: XOR ESI, ESI",
+          "0x446069: MOV SI, DI",
+          "0x44606c: MOV ECX, ESI",
+          "0x44606e: SHL ECX, 0x4",
+          "0x446071: ADD ECX, ESI",
+          "0x446073: SHL ECX, 0x2",
+          "0x446076: ADD ECX, ESI",
+          "0x446078: MOV EDX, dword ptr [0x004e19a0]",
+          "0x44607e: SHL ECX, 0x2",
+          "0x446081: ADD EDX, ECX",
+          "0x446083: MOV CL, byte ptr [ESP + 0x4]",
+          "0x446087: MOV byte ptr [EDX + 0x2], CL",
+          "0x44608a: CMP DI, word ptr [0x00496304]",
+          "0x446091: JNZ 0x004460b2",
+          "0x446093: XOR CH, CH",
+          "0x446095: MOV byte ptr [0x004e0f36], CH",
+          "0x44609b: MOV byte ptr [0x004e0f37], CH",
+          "0x4460a1: XOR ECX, ECX",
+          "0x4460a3: MOV dword ptr [0x004e0f3c], ECX",
+          "0x4460a9: MOV word ptr [0x00496304], 0xffff",
+          "0x4460b2: MOV word ptr [EAX + 0xc0], 0xffff",
+          "0x4460bb: MOV word ptr [EAX + 0xb8], 0xffff",
+          "0x4460c4: MOV byte ptr [EAX + 0x87], 0x0",
+          "0x4460cb: XOR ESI, ESI",
+          "0x4460cd: MOV DL, byte ptr [EAX + 0x87]",
+          "0x4460d3: MOV SI, BX",
+          "0x4460d6: MOV byte ptr [EAX + 0x86], DL",
+          "0x4460dc: MOV EAX, ESI",
+          "0x4460de: SHL EAX, 0x4",
+          "0x4460e1: ADD EAX, ESI",
+          "0x4460e3: SHL EAX, 0x2",
+          "0x4460e6: LEA EBX, [ESI + EAX*0x1]",
+          "0x4460e9: MOV ECX, dword ptr [0x004e19a0]",
+          "0x4460ef: SHL EBX, 0x2",
+          "0x4460f2: XOR EDX, EDX",
+          "0x4460f4: MOV AX, word ptr [ECX + EBX*0x1 + 0x8]",
+          "0x4460f9: MOV DX, AX",
+          "0x4460fc: MOV EAX, ESI",
+          "0x4460fe: CALL 0x00442cb4",
+          "0x446103: MOV byte ptr [ECX + EBX*0x1 + 0x72], 0x1",
+          "0x446108: MOV ECX, dword ptr [0x004e19a0]",
+          "0x44610e: ADD ECX, EBX",
+          "0x446110: XOR EBX, EBX",
+          "0x446112: MOV BL, byte ptr [ECX]",
+          "0x446114: MOV DI, word ptr [ECX + 0x8]",
+          "0x446118: CMP EBX, 0xc8",
+          "0x44611e: JZ 0x00446171",
+          "0x446120: CMP EBX, 0x4",
+          "0x446123: JZ 0x00446171",
+          "0x446125: XOR AH, AH",
+          "0x446127: MOV AL, byte ptr [ECX + 0xbb]",
+          "0x44612d: MOV EDX, EAX",
+          "0x44612f: ADD EDX, 0x2",
+          "0x446132: MOV AL, byte ptr [ECX + 0xf5]",
+          "0x446138: XOR ESI, ESI",
+          "0x44613a: ADD EAX, EDX",
+          "0x44613c: XOR EDX, EDX",
+          "0x44613e: MOV SI, DI",
+          "0x446141: MOV DX, AX",
+          "0x446144: MOV EAX, ESI",
+          "0x446146: CALL 0x00476851",
+          "0x44614b: XOR AH, AH",
+          "0x44614d: MOV AL, byte ptr [ECX + 0xbb]",
+          "0x446153: MOV dword ptr [ESP], EAX",
+          "0x446156: MOV EDX, dword ptr [ESP]",
+          "0x446159: MOV AL, byte ptr [ECX + 0xf5]",
+          "0x44615f: XOR EBX, EBX",
+          "0x446161: ADD EAX, EDX",
+          "0x446163: XOR EDX, EDX",
+          "0x446165: MOV BL, byte ptr [ECX]",
+          "0x446167: MOV DX, AX",
+          "0x44616a: MOV EAX, ESI",
+          "0x44616c: CALL 0x00476cb3",
+          "0x446171: MOV EDX, 0x4",
+          "0x446176: XOR EBX, EBX",
+          "0x446178: XOR EAX, EAX",
+          "0x44617a: MOV BX, DI",
+          "0x44617d: MOV AL, byte ptr [ECX]",
+          "0x44617f: CALL 0x0046a388",
+          "0x446184: JMP 0x004431fb"
+        ],
+        "callees": [
+          {
+            "address": "0x442cb4",
+            "name": "OriginaisSBL::SetEnginCollision",
+            "symbol": {
+              "primary": true,
+              "dynamic": false,
+              "external": false,
+              "type": "function",
+              "source": "user_defined"
+            },
+            "classification": {
+              "external": false,
+              "thunk": false,
+              "thunk_target": null,
+              "provenance": "ghidra-function-manager"
+            },
+            "body": {
+              "available": true,
+              "provenance": "ghidra-function-body-address-set",
+              "ranges": [
+                {
+                  "start": "0x442cb4",
+                  "end": "0x442e40"
+                }
+              ],
+              "total_bytes": 397,
+              "span_bytes": 397,
+              "non_contiguous": false,
+              "contains_entry": true
+            }
+          },
+          {
+            "address": "0x46a388",
+            "name": "OriginaisSBL::SetMiniMap",
+            "symbol": {
+              "primary": true,
+              "dynamic": false,
+              "external": false,
+              "type": "function",
+              "source": "user_defined"
+            },
+            "classification": {
+              "external": false,
+              "thunk": false,
+              "thunk_target": null,
+              "provenance": "ghidra-function-manager"
+            },
+            "body": {
+              "available": true,
+              "provenance": "ghidra-function-body-address-set",
+              "ranges": [
+                {
+                  "start": "0x46a388",
+                  "end": "0x46a70b"
+                }
+              ],
+              "total_bytes": 900,
+              "span_bytes": 900,
+              "non_contiguous": false,
+              "contains_entry": true
+            }
+          },
+          {
+            "address": "0x476851",
+            "name": "OriginaisSBL::DecouvreTerrain",
+            "symbol": {
+              "primary": true,
+              "dynamic": false,
+              "external": false,
+              "type": "function",
+              "source": "user_defined"
+            },
+            "classification": {
+              "external": false,
+              "thunk": false,
+              "thunk_target": null,
+              "provenance": "ghidra-function-manager"
+            },
+            "body": {
+              "available": true,
+              "provenance": "ghidra-function-body-address-set",
+              "ranges": [
+                {
+                  "start": "0x476851",
+                  "end": "0x476939"
+                }
+              ],
+              "total_bytes": 233,
+              "span_bytes": 233,
+              "non_contiguous": false,
+              "contains_entry": true
+            }
+          },
+          {
+            "address": "0x476cb3",
+            "name": "OriginaisSBL::IllumineTerrain",
+            "symbol": {
+              "primary": true,
+              "dynamic": false,
+              "external": false,
+              "type": "function",
+              "source": "user_defined"
+            },
+            "classification": {
+              "external": false,
+              "thunk": false,
+              "thunk_target": null,
+              "provenance": "ghidra-function-manager"
+            },
+            "body": {
+              "available": true,
+              "provenance": "ghidra-function-body-address-set",
+              "ranges": [
+                {
+                  "start": "0x476cb3",
+                  "end": "0x476e81"
+                }
+              ],
+              "total_bytes": 463,
+              "span_bytes": 463,
+              "non_contiguous": false,
+              "contains_entry": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "source_evidence_id": "ev_26fb6781b2055a7d4b8f963df4fdbf13b9d5c01d9b676697bbf00fa91fc3f0c3",
+      "source_record_sha256": "053850ac385e3e6dfe9b2801522f21d2b1e3636e34ef052fa4206043685cdce8",
+      "operation": "analyze_function",
+      "parameters": {
+        "procedure": "0x442cb4"
+      },
+      "analysis_profile_digest": "33da723a26733dd8b59046612d0c42bf95bb1b59c46a63f17b127521af169a3d",
+      "reviewed_result": {
+        "procedure": {
+          "address": "0x442cb4",
+          "name": "OriginaisSBL::SetEnginCollision",
+          "symbol": {
+            "primary": true,
+            "dynamic": false,
+            "external": false,
+            "type": "function",
+            "source": "user_defined"
+          },
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x442cb4",
+                "end": "0x442e40"
+              }
+            ],
+            "total_bytes": 397,
+            "span_bytes": 397,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "undefined __fastcall SetEnginCollision(undefined4 param_1)",
+          "locals": [
+            {
+              "description": "undefined4 local_18 @ Stack[-0x18]:4",
+              "provenance": "ghidra-function-database"
+            }
+          ]
+        },
+        "pseudocode": "\nvoid __fastcall OriginaisSBL::SetEnginCollision(undefined4 param_1)\n\n{\n  UnidadeParcial *pUVar1;\n  ushort in_AX;\n  ushort *extraout_ECX;\n  ushort *puVar2;\n  ushort *extraout_ECX_00;\n  ushort *extraout_ECX_01;\n  ushort *extraout_ECX_02;\n  ushort *extraout_ECX_03;\n  undefined4 extraout_ECX_04;\n  undefined4 extraout_ECX_05;\n  undefined4 extraout_ECX_06;\n  uint uVar3;\n  byte bVar4;\n  \n  pUVar1 = tabela_unidades;\n  switch(tabela_unidades[in_AX].tipo_id) {\n  case 0:\n  case 1:\n  case 2:\n  case 4:\n  case 5:\n  case 6:\n  case 7:\n  case 8:\n  case 9:\n  case 10:\n  case 0x12:\n  case 0x13:\n  case 0x14:\n  case 0x15:\n  case 0x16:\n  case 0x17:\n  case 0x18:\n    SetCollision(&tabela_unidades[in_AX].field_0xfa,1);\n    bVar4 = 0;\n    puVar2 = extraout_ECX;\n    break;\n  case 3:\n  case 0xb:\n  case 0xc:\n  case 0xd:\n  case 0xe:\n  case 0xf:\n  case 0x19:\n    uVar3 = (uint)in_AX;\n    SetCollision(&tabela_unidades[in_AX].field_0xfa,1);\n    Chemin_ModifieZone(extraout_ECX_00,uVar3,0);\n    SetCollision(&pUVar1[in_AX].field_0xfc,1);\n    Chemin_ModifieZone(extraout_ECX_01,uVar3,1);\n    SetCollision(&pUVar1[in_AX].field_0xfe,1);\n    Chemin_ModifieZone(extraout_ECX_02,uVar3,2);\n    SetCollision(&pUVar1[in_AX].field_0x100,1);\n    bVar4 = 3;\n    puVar2 = extraout_ECX_03;\n    break;\n  case 0x10:\n    SetCollision(param_1,2);\n    SetCollision(extraout_ECX_04,2);\n    SetCollision(extraout_ECX_05,2);\n    param_1 = extraout_ECX_06;\n    goto LAB_00442d31;\n  case 0x11:\nLAB_00442d31:\n    SetCollision(param_1,2);\n  default:\n    goto switchD_00442ee4_default;\n  }\n  Chemin_ModifieZone(puVar2,(uint)in_AX,bVar4);\nswitchD_00442ee4_default:\n  FUN_00445f27();\n  return;\n}\n\n",
+        "assembly": [
+          "0x442cb4: PUSH EBX",
+          "0x442cb5: PUSH ECX",
+          "0x442cb6: PUSH ESI",
+          "0x442cb7: PUSH EDI",
+          "0x442cb8: PUSH EBP",
+          "0x442cb9: SUB ESP, 0x4",
+          "0x442cbc: MOV EBX, EAX",
+          "0x442cbe: MOV ESI, EDX",
+          "0x442cc0: XOR EDI, EDI",
+          "0x442cc2: MOV DI, AX",
+          "0x442cc5: MOV EAX, EDI",
+          "0x442cc7: SHL EAX, 0x4",
+          "0x442cca: ADD EAX, EDI",
+          "0x442ccc: SHL EAX, 0x2",
+          "0x442ccf: ADD EAX, EDI",
+          "0x442cd1: MOV EBP, dword ptr [0x004e19a0]",
+          "0x442cd7: SHL EAX, 0x2",
+          "0x442cda: ADD EBP, EAX",
+          "0x442cdc: MOV AL, byte ptr [EBP + 0x1]",
+          "0x442cdf: CMP AL, 0x19",
+          "0x442ce1: JA 0x00442d1f",
+          "0x442ce7: AND EAX, 0xff",
+          "0x442cec: JMP dword ptr CS:[EAX*0x4 + 0x442c4c]",
+          "0x442cf4: AND ESI, 0xffff",
+          "0x442cfa: MOV EDX, 0x1",
+          "0x442cff: MOV EAX, ESI",
+          "0x442d01: LEA ECX, [EBP + 0xfa]",
+          "0x442d07: CALL 0x0047622e",
+          "0x442d0c: PUSH 0x0",
+          "0x442d0e: XOR EDX, EDX",
+          "0x442d10: MOV EAX, ESI",
+          "0x442d12: MOV DX, BX",
+          "0x442d15: MOV EBX, 0x2",
+          "0x442d1a: CALL 0x0043e138",
+          "0x442d1f: ADD ESP, 0x4",
+          "0x442d22: JMP 0x00445f27",
+          "0x442d27: XOR EAX, EAX",
+          "0x442d29: MOV AX, DX",
+          "0x442d2c: MOV EDX, 0x2",
+          "0x442d31: CALL 0x0047622e",
+          "0x442d36: JMP 0x00442d1f",
+          "0x442d38: MOV EDX, 0x1",
+          "0x442d3d: LEA ECX, [EBP + 0xfa]",
+          "0x442d43: XOR EAX, EAX",
+          "0x442d45: XOR EDI, EDI",
+          "0x442d47: MOV AX, SI",
+          "0x442d4a: MOV DI, BX",
+          "0x442d4d: MOV EBX, 0x2",
+          "0x442d52: MOV dword ptr [ESP], EAX",
+          "0x442d55: CALL 0x0047622e",
+          "0x442d5a: PUSH 0x0",
+          "0x442d5c: MOV EAX, dword ptr [ESP + 0x4]",
+          "0x442d60: MOV EDX, EDI",
+          "0x442d62: CALL 0x0043e138",
+          "0x442d67: MOV EAX, ESI",
+          "0x442d69: DEC EAX",
+          "0x442d6a: MOV EDX, 0x1",
+          "0x442d6f: MOV EBX, 0x2",
+          "0x442d74: AND EAX, 0xffff",
+          "0x442d79: LEA ECX, [EBP + 0xfc]",
+          "0x442d7f: MOV dword ptr [ESP], EAX",
+          "0x442d82: CALL 0x0047622e",
+          "0x442d87: PUSH 0x1",
+          "0x442d89: MOV EAX, dword ptr [ESP + 0x4]",
+          "0x442d8d: MOV EDX, EDI",
+          "0x442d8f: CALL 0x0043e138",
+          "0x442d94: MOV EAX, ESI",
+          "0x442d96: SUB EAX, 0x101",
+          "0x442d9c: MOV EDX, 0x1",
+          "0x442da1: MOV EBX, 0x2",
+          "0x442da6: AND EAX, 0xffff",
+          "0x442dab: LEA ECX, [EBP + 0xfe]",
+          "0x442db1: MOV dword ptr [ESP], EAX",
+          "0x442db4: CALL 0x0047622e",
+          "0x442db9: PUSH 0x2",
+          "0x442dbb: MOV EAX, dword ptr [ESP + 0x4]",
+          "0x442dbf: MOV EDX, EDI",
+          "0x442dc1: SUB ESI, 0x100",
+          "0x442dc7: CALL 0x0043e138",
+          "0x442dcc: MOV EDX, 0x1",
+          "0x442dd1: AND ESI, 0xffff",
+          "0x442dd7: MOV EBX, 0x2",
+          "0x442ddc: MOV EAX, ESI",
+          "0x442dde: LEA ECX, [EBP + 0x100]",
+          "0x442de4: CALL 0x0047622e",
+          "0x442de9: PUSH 0x3",
+          "0x442deb: MOV EDX, EDI",
+          "0x442ded: MOV EAX, ESI",
+          "0x442def: JMP 0x00442d1a",
+          "0x442df4: XOR EAX, EAX",
+          "0x442df6: MOV AX, DX",
+          "0x442df9: MOV EDX, 0x2",
+          "0x442dfe: CALL 0x0047622e",
+          "0x442e03: MOV EAX, ESI",
+          "0x442e05: DEC EAX",
+          "0x442e06: MOV EDX, 0x2",
+          "0x442e0b: AND EAX, 0xffff",
+          "0x442e10: CALL 0x0047622e",
+          "0x442e15: MOV EAX, ESI",
+          "0x442e17: SUB EAX, 0x101",
+          "0x442e1d: MOV EDX, 0x2",
+          "0x442e22: AND EAX, 0xffff",
+          "0x442e27: CALL 0x0047622e",
+          "0x442e2c: SUB ESI, 0x100",
+          "0x442e32: XOR EAX, EAX",
+          "0x442e34: MOV EDX, 0x2",
+          "0x442e39: MOV AX, SI",
+          "0x442e3c: JMP 0x00442d31"
+        ],
+        "callees": [
+          {
+            "address": "0x43e138",
+            "name": "OriginaisSBL::Chemin_ModifieZone",
+            "symbol": {
+              "primary": true,
+              "dynamic": false,
+              "external": false,
+              "type": "function",
+              "source": "user_defined"
+            },
+            "classification": {
+              "external": false,
+              "thunk": false,
+              "thunk_target": null,
+              "provenance": "ghidra-function-manager"
+            },
+            "body": {
+              "available": true,
+              "provenance": "ghidra-function-body-address-set",
+              "ranges": [
+                {
+                  "start": "0x43e138",
+                  "end": "0x43e2a2"
+                }
+              ],
+              "total_bytes": 363,
+              "span_bytes": 363,
+              "non_contiguous": false,
+              "contains_entry": true
+            }
+          },
+          {
+            "address": "0x445f27",
+            "name": "FUN_00445f27",
+            "symbol": {
+              "primary": true,
+              "dynamic": false,
+              "external": false,
+              "type": "function",
+              "source": "default"
+            },
+            "classification": {
+              "external": false,
+              "thunk": false,
+              "thunk_target": null,
+              "provenance": "ghidra-function-manager"
+            },
+            "body": {
+              "available": true,
+              "provenance": "ghidra-function-body-address-set",
+              "ranges": [
+                {
+                  "start": "0x445f27",
+                  "end": "0x445f2c"
+                }
+              ],
+              "total_bytes": 6,
+              "span_bytes": 6,
+              "non_contiguous": false,
+              "contains_entry": true
+            }
+          },
+          {
+            "address": "0x47622e",
+            "name": "OriginaisSBL::SetCollision",
+            "symbol": {
+              "primary": true,
+              "dynamic": false,
+              "external": false,
+              "type": "function",
+              "source": "user_defined"
+            },
+            "classification": {
+              "external": false,
+              "thunk": false,
+              "thunk_target": null,
+              "provenance": "ghidra-function-manager"
+            },
+            "body": {
+              "available": true,
+              "provenance": "ghidra-function-body-address-set",
+              "ranges": [
+                {
+                  "start": "0x47622e",
+                  "end": "0x47623d"
+                }
+              ],
+              "total_bytes": 16,
+              "span_bytes": 16,
+              "non_contiguous": false,
+              "contains_entry": true
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

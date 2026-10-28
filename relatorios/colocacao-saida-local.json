@@ -1,0 +1,36 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 12,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_colocacao_saida.DiferencialColocacaoSaida.test_all_types_owners_edge_indices_and_every_activity_byte",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_saida.DiferencialColocacaoSaida.test_geometry_edges_wrapped_quad_footprints_and_vision_limits",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_saida.DiferencialColocacaoSaida.test_joined_position_conversion_recovery_experience_placement_and_order",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_saida.DiferencialColocacaoSaida.test_large_vision_original_pre_discovery_checkpoint",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_saida.DiferencialColocacaoSaida.test_placement_and_original_movement_caller_all_types",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_saida.DiferencialColocacaoSaida.test_unsaturated_vision_radius_edges_with_preserved_native_resumptions",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "scope": "Physical exit and joined movement-order caller; stops before conditional request."
+}
