@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "kind": "read-only static recovery audit; not an x86 execution report",
+  "audited_at_utc": "2026-10-28T19:12:37.560110+00:00",
+  "inventory_commit": "3868ce5d6f3cfd82c577595e528d8e803fe81e19",
+  "inventory": {
+    "path": "producao-natural.json",
+    "sha256": "2908cbb31d6585c4e19fa3bdf8f80888f0eae7a70ec9a117f6830b0d601670ea"
+  },
+  "checkout_head": "3868ce5d6f3cfd82c577595e528d8e803fe81e19",
+  "observed_origin_main": "8810b3730a0fb788af3eac2b447dea65372f597f",
+  "inventory_reachable_from_observed_main": false,
+  "original_exe_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "original_sbl_sha256": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "original_ini_sha256": "e4762aae51d8aa7bd56280af43a7408a19571ab6dbfcd170fb59cffbcdc8338b",
+  "analysis_pe_executed": false,
+  "capstone_version": "5.0.7",
+  "code": [
+    {
+      "start": "0x4268d4",
+      "end_exclusive": "0x426918",
+      "symbol": "BatimentNextEtape",
+      "bytes": 68,
+      "instructions": 27,
+      "sha256": "6a724d30775ad7366d6d8c1e4e1a29d9a289d586238da9af5391cdd5b2aff72b",
+      "status": "exact original bytes and complete listing"
+    },
+    {
+      "start": "0x426918",
+      "end_exclusive": "0x42698d",
+      "symbol": "BatimentNextEtape",
+      "bytes": 117,
+      "instructions": 39,
+      "sha256": "52b41c560652e7a2b11a5dd7494a09b5930bac5caa6fce33ea42b9e66708ddb0",
+      "status": "exact original bytes and complete listing"
+    },
+    {
+      "start": "0x4281c0",
+      "end_exclusive": "0x4281c7",
+      "symbol": "BatimentNextEtape",
+      "bytes": 7,
+      "instructions": 2,
+      "sha256": "bdf58c0ddb45652182825bb0b5175c4a6c313845097300472b566887ee516e08",
+      "status": "exact original bytes and complete listing"
+    },
+    {
+      "start": "0x4283e2",
+      "end_exclusive": "0x428691",
+      "symbol": "InitRecruteTroupe",
+      "bytes": 687,
+      "instructions": 207,
+      "sha256": "bb73355fba6bf21141ebe4ec996f9e4c184cfe5976c990a081d4ebd27962e47f",
+      "status": "exact original bytes and complete listing"
+    },
+    {
+      "start": "0x41d1d0",
+      "end_exclusive": "0x41d2fc",
+      "symbol": "RechercheDecalageSortie",
+      "bytes": 300,
+      "instructions": 108,
+      "sha256": "292228ca7a6f076ed78ffcd8d14370de728ad8da8b45f4bdad67f23a2d1d43d5",
+      "status": "exact original bytes and complete listing"
+    },
+    {
+      "start": "0x4761d4",
+      "end_exclusive": "0x4761f1",
+      "symbol": "TerrainEnCollision",
+      "bytes": 29,
+      "instructions": 12,
+      "sha256": "5a4df51651db84b2b01819a672e0ad7c0253524d5ee65192abfde4bffdf41b3a",
+      "status": "exact original bytes and complete listing"
+    },
+    {
+      "start": "0x4210f7",
+      "end_exclusive": "0x4211f2",
+      "symbol": "SortieTroupe",
+      "bytes": 251,
+      "instructions": 60,
+      "sha256": "556bdc05eacd58af10c700e20f5b6816ba5be54dde05a3b815f39548125a9b8f",
+      "status": "exact original bytes and complete listing"
+    },
+    {
+      "start": "0x45f19a",
+      "end_exclusive": "0x45f1ae",
+      "symbol": "ProcessInputGame",
+      "bytes": 20,
+      "instructions": 5,
+      "sha256": "15852e8b1fea7fe0264acf8533bd0cd6d19da172b56f3683f5d5e7b7a77e2f4f",
+      "status": "exact original bytes and complete listing"
+    },
+    {
+      "start": "0x48073a",
+      "end_exclusive": "0x48074e",
+      "symbol": "V_BatimentRecruteUnite",
+      "bytes": 20,
+      "instructions": 6,
+      "sha256": "0292b05eb7e867b8dc2ad263d21f2297246fef8854642a91a3bf6bc89c388eb7",
+      "status": "exact original bytes and complete listing"
+    },
+    {
+      "start": "0x418c70",
+      "end_exclusive": "0x418e95",
+      "symbol": "BatimentLoadCaract",
+      "bytes": 549,
+      "instructions": 122,
+      "sha256": "5756570ce5f4f33e46958336a1f37b087b3b6f6fd0a64d7072f4651a9917c909",
+      "status": "exact original bytes and complete listing"
+    }
+  ],
+  "jump_tables": [
+    {
+      "start": "0x426880",
+      "entry_count": 21,
+      "sha256": "8179b83c32f16aa958c12c873735c80d58a5765528068c5dfb5bfe882d47720d",
+      "status": "exact original values"
+    },
+    {
+      "start": "0x41d178",
+      "entry_count": 22,
+      "sha256": "c50a91b3ab537271fe046ff32443a2dc48296e3410ccaec35b9113d081a38661",
+      "status": "exact original values"
+    },
+    {
+      "start": "0x420df4",
+      "entry_count": 22,
+      "sha256": "ca374cf651a3700a3e7d75f245fdb7e538f2f207dcacdd529312c3ad28703e45",
+      "status": "exact original values"
+    }
+  ],
+  "total_code_bytes": 2048,
+  "total_decoded_instructions": 588,
+  "total_jump_table_entries": 65,
+  "predecessors": [
+    {
+      "path": "evidencias/limpeza-saida.json",
+      "sha256": "f22cc044c58fd2dbfa63777e9037b9a8f6265fcba81a447db67740b011e7f1ce",
+      "status": "unchanged"
+    },
+    {
+      "path": "evidencias/producao-limpa.json",
+      "sha256": "90a41c528ebc9466340e9a4631b73c5813d6434e77b6d6770602d30b84d57024",
+      "status": "unchanged"
+    },
+    {
+      "path": "evidencias/habitaveis.json",
+      "sha256": "a55129ba4e5e75f35c0887429ac3e478f6522973f8c1e2ad89cbf7706342611a",
+      "status": "unchanged"
+    },
+    {
+      "path": "evidencias/cauda-carga.json",
+      "sha256": "36063649da951d140d026698f0d29d87c8a77784ffc45738ade5f6c6afdac9ff",
+      "status": "unchanged"
+    },
+    {
+      "path": "../../relatorios/simbolos-originais.json",
+      "sha256": "7e1e63b5340bc771e4dd743008058e1e47cea79ec74e76c72a70904884f4595e",
+      "status": "unchanged"
+    }
+  ],
+  "structure_type_table_static_hash_matches": true,
+  "static_byte_audit_passed": true,
+  "native_entries_executed_in_this_audit": 0,
+  "domain_or_integration_checks_run": false,
+  "prior_evidence_modified": false,
+  "findings": [
+    "InitRecruteTroupe accepts building types1/2/5/13/15/16/18/20; the selected BatimentNextEtape production branch covers only1/2/13/16.",
+    "RechercheDecalageSortie searches dy then dx, skips the centre, checks global0..255 coordinates, and reads raw0x507da8 mask0x01 (bit0). Map-dimension clipping would change behavior.",
+    "Native search writes only a word to local+8 and later reads a dword; dirty upper stack bits can reach full EAX. The original InitRecruteTroupe caller consumes AX only. No full-EAX normalization is claimed.",
+    "The input and AI caller fragments prove the two recorded direct calls, not absence of every possible indirect caller.",
+    "The existing celula_central_estrutura/estrutura_habitada providers can be reused; no duplicate bounding-centre or Bag predicate is needed.",
+    "Original-derived MONDE01 header/record fixtures retain explicitly synthetic inherited grids/tables and do not prove complete MissionLoad initialization.",
+    "BatimentModifyMap provider is pending Core recovery integration; message0x46/town3 and PostSound remain separate owner dependencies."
+  ]
+}
