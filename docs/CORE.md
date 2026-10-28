@@ -55,6 +55,8 @@ Neighbor reads use the linear 65,536-cell object grid. Column 255 can read the n
 
 `experiencia_unidades.py` supplies complete local `EnginSetNewExperience` (`0x44f9e0`) and owner queue `EnginSetExperimente` (`0x44fe42`). `retomar_experiencia_saida` advances the recovery handoff to `0x420f8a` before placement, retaining AF and the queue on a nested data failure. The [exact queue contract](core/EXPERIENCE_QUEUE.md) records four-owner raw input, F5–F8 arithmetic, first-pair guards, the corrected original symbol and 3,785 new native calls. Combat's `EnginSetLevelExperience` is a distinct remaining provider. World queue zeros are a synthetic constructor value, with actual mission loading owned by the missions chat.
 
+`colocacao_saida.py` connects original `SetSortEngin` to existing collision, discovery/light and minimap effects on the live physical world. `retomar_colocacao_saida` consumes the experience stop at `0x420f8a`, places the existing unit, reloads live building `+7c` and uses the existing movement-order provider, returning at `0x420f9e` before conditional request/audio. The [physical exit contract](core/UNIT_EXIT.md) preserves old occupancy, activity rules, search completion and partial effects. Four independent original captures, whole-world comparisons and native call traces validate the declared type/owner/vision domain; actual mission placement `PlaceEngin` is a separate remaining provider.
+
 ## Physical gate simulation
 
 `portoes.py` reconstructs `HerseEnAnimation` (`0x4191FD`), phase/orientation queries (`0x41934F`, `0x419379`, `0x4193AC`), release/block commands (`0x4193D4`, `0x4195CA`), toggle (`0x419917`), and the type-12 `BatimentNextEtape` branch (`0x427BB7..0x427D5D`).
