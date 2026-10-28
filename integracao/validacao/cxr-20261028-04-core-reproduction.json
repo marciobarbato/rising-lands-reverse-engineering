@@ -1,0 +1,40 @@
+{
+  "implementation": "93620d34a7a1cf722764a690fb3b945920d9531e",
+  "feature": "e5f0b69573688418430524171058e3df124a4904",
+  "main": "09d3953c6dda02ba6e4f6ca9ac61e51ca48782e6",
+  "all_shas_ancestors_of_fetched_main": true,
+  "tested_provider_identity_equal": true,
+  "provider_identities": {
+    "ferramentas": {
+      "implementation": "d99a9f68d92952e13495be858e22697ec9160f5d",
+      "main": "d99a9f68d92952e13495be858e22697ec9160f5d"
+    },
+    "testes": {
+      "implementation": "74488a4fd3f1fb59982dd8c5020b2ed69bd7eacb",
+      "main": "74488a4fd3f1fb59982dd8c5020b2ed69bd7eacb"
+    },
+    "pesquisas-paralelas/missoes/capturar_terreno_unidades.py": {
+      "implementation": "453aecf275fde68682fd4ed668702ce20a9f03e3",
+      "main": "453aecf275fde68682fd4ed668702ce20a9f03e3"
+    }
+  },
+  "original_captures_unchanged": true,
+  "unittest_tests": 2,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "success": true,
+  "frozen_cases_replayed": 7,
+  "fresh_whole_mon_de01_entries": 1,
+  "original_mon_de01_consumed_al": 1,
+  "component_allocations": 56,
+  "whole_mapped_bytes": 5246976,
+  "original_whole_segments": 731,
+  "final_tail_entries": 4,
+  "bounded_segments": 735,
+  "binding_resumptions": 342,
+  "preserved_loop_resumptions": 388,
+  "maximum_segment_instructions": 88074,
+  "unexpected_native_fault_or_limit": false,
+  "full_mission_load": "NOT RUN"
+}
