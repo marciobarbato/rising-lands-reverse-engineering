@@ -1,0 +1,94 @@
+{
+  "success": true,
+  "tests": 11,
+  "failures": 0,
+  "errors": 0,
+  "skipped": [
+    {
+      "test": "test_impacto_unidades.DiferencialImpactoUnidades.test_ai_and_neutral_prefix_consumer_boundary",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_unidades.DiferencialImpactoUnidades.test_all_unit_types_flags_hit_pool_and_rng",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_unidades.DiferencialImpactoUnidades.test_ally_effect_order_and_alert_counter_edges",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_unidades.DiferencialImpactoUnidades.test_lookup_empty_filters_and_building_priority",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_unidades.DiferencialImpactoUnidades.test_pool_saturation_still_consumes_hit_rng",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_unidades.DiferencialImpactoUnidades.test_projectile_finishes_occupied_impact_and_parent_retirement",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_unidades.DiferencialImpactoUnidades.test_refuge_evasion_and_special_attacker_stops",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_unidades.DiferencialImpactoUnidades.test_retaliation_tick_boundaries_and_provider_stops",
+      "reason": "Optional: RISING_EMULAR=1"
+    }
+  ],
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "bounded_x86_executions": 0,
+  "per_test": [
+    {
+      "teste": "test_impacto_unidades.ContratosImpactoUnidades.test_building_and_unsupported_mode_boundaries",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.ContratosImpactoUnidades.test_empty_lookup_and_flag_width",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.ContratosImpactoUnidades.test_missing_query_does_not_retire_parent",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_ai_and_neutral_prefix_consumer_boundary",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_all_unit_types_flags_hit_pool_and_rng",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_ally_effect_order_and_alert_counter_edges",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_lookup_empty_filters_and_building_priority",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_pool_saturation_still_consumes_hit_rng",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_projectile_finishes_occupied_impact_and_parent_retirement",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_refuge_evasion_and_special_attacker_stops",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_retaliation_tick_boundaries_and_provider_stops",
+      "execucoes_x86_delimitadas": 0
+    }
+  ],
+  "expected_dependency_stops": {},
+  "completed_projectiles": 0,
+  "scope": "Mode-1 unit InfligeDegat wrapper; complete unit/projectile buffers, query/effect order, alert fields, five original occupied projectile completions",
+  "dependencies": "World lookup, direction, RNG, non-AI unit message, damage and hit allocation execute natively. MAJSympathie uses native inactive return. Navigation/refuge/audio are explicit stops. Diplomacy/statistic effect bodies remain providers in Python.",
+  "excluded": "Building damage, other damage modes, lethal effects, AI message body, navigation implementation, audio backend, real mission/game runtime",
+  "diagnostics": []
+}
