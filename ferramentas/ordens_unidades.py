@@ -51,6 +51,10 @@ class MundoUnidades:
         from ciclo_estruturas import buscar_estrutura_livre
         return buscar_estrutura_livre(self.estruturas)
 
+    def calcular_posicao_saida(self, indice, direcao=0, dimensoes=None):
+        from posicao_saida import calcular_posicao_saida
+        return calcular_posicao_saida(self, indice, direcao, dimensoes)
+
     @staticmethod
     def _indice(indice):
         indice &= 65535
