@@ -1,0 +1,3961 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "asset_counts": {
+    "NET": 5,
+    "ETA": 38,
+    "TXT": 25
+  },
+  "assets": [
+    {
+      "path": "INSTALHD/WORLD/NET/ALIBABA.NET",
+      "size": 1276246,
+      "sha256": "77ba207d1c723314ea048892f9b39d11f866b0f9dbc7c6fb4a90caa7e56ac882"
+    },
+    {
+      "path": "INSTALHD/WORLD/NET/CHAMPS.NET",
+      "size": 1270072,
+      "sha256": "adfe9cde029427f324705644876f7b5729cea8e3df84d0d5b5b66d6f1de265e0"
+    },
+    {
+      "path": "INSTALHD/WORLD/NET/CIRQUE.NET",
+      "size": 1270184,
+      "sha256": "b298e9cfb232e5a761e49dbec8ee593632e5f3940d45b289994320978770bbe7"
+    },
+    {
+      "path": "INSTALHD/WORLD/NET/CRANE.NET",
+      "size": 1266944,
+      "sha256": "0d2e30b059b7c58936669f147fc8ce07e22388d8733baddc4ad0a3d730e3d1a5"
+    },
+    {
+      "path": "INSTALHD/WORLD/NET/MASSIF.NET",
+      "size": 1281390,
+      "sha256": "72c94dce9f80899ed5a034160acd1d8e0d8e156f15f1c26270a42a47629e810d"
+    },
+    {
+      "path": "WORLD/MONDE01.ETA",
+      "size": 1259976,
+      "sha256": "19237b8c3f3c0c76022276da229bec727b17603440823c43561aba159dd47015",
+      "width": 64,
+      "height": 64,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 327938,
+          "quantidade": 1,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 327938,
+          "fim": 340518,
+          "quantidade": 16,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 340518,
+          "fim": 340528,
+          "quantidade": 2,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 340528,
+          "fim": 340532,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 340532,
+          "fim": 340534,
+          "quantidade": 0,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 340534,
+          "fim": 340548,
+          "quantidade": 1,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 340548,
+          "fim": 340652,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 340652,
+          "fim": 340668,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 340668,
+          "fim": 341868,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 341868,
+          "fim": 342472,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 342472,
+        "tamanho": 917504,
+        "sha256": "e776576ef4bf70b784c34e3afde1690947c79202e6c7f0c5ceb459cc1895650e"
+      }
+    },
+    {
+      "path": "WORLD/MONDE01.TXT",
+      "size": 1220,
+      "sha256": "8df9ece7af27efd64357d52ef783a8ed40b6d36f428895a35358b1a3efdef712"
+    },
+    {
+      "path": "WORLD/MONDE02.ETA",
+      "size": 1259762,
+      "sha256": "291566a7486cb15616c4778d36d6b0ad4f717c65de745b941e640f7f835ad2ba",
+      "width": 64,
+      "height": 64,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 327732,
+          "quantidade": 0,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 327732,
+          "fim": 340312,
+          "quantidade": 16,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 340312,
+          "fim": 340314,
+          "quantidade": 0,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 340314,
+          "fim": 340318,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 340318,
+          "fim": 340320,
+          "quantidade": 0,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 340320,
+          "fim": 340334,
+          "quantidade": 1,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 340334,
+          "fim": 340438,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 340438,
+          "fim": 340454,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 340454,
+          "fim": 341654,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 341654,
+          "fim": 342258,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 342258,
+        "tamanho": 917504,
+        "sha256": "06c0b4fae597e55db666b145bf687ede505350ca0a8e6c89a84519ff973e2b5d"
+      }
+    },
+    {
+      "path": "WORLD/MONDE02.TXT",
+      "size": 660,
+      "sha256": "049f9d7bdca15df7f075ad2232612ac40a695468949b7b1a10412b20b8bba397"
+    },
+    {
+      "path": "WORLD/MONDE03.ETA",
+      "size": 1257620,
+      "sha256": "11e4fc67e687736267699b075ce1a0c6b289fb8180707e37de27649e15810ea6",
+      "width": 128,
+      "height": 128,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 327938,
+          "quantidade": 1,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 327938,
+          "fim": 338160,
+          "quantidade": 13,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 338160,
+          "fim": 338182,
+          "quantidade": 5,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 338182,
+          "fim": 338186,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 338186,
+          "fim": 338188,
+          "quantidade": 0,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 338188,
+          "fim": 338192,
+          "quantidade": 0,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 338192,
+          "fim": 338296,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 338296,
+          "fim": 338312,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 338312,
+          "fim": 339512,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 339512,
+          "fim": 340116,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 340116,
+        "tamanho": 917504,
+        "sha256": "549762ba5eb3661afcb7e2fbe31ee46208eb99097f8e88b3cba53fc346784a33"
+      }
+    },
+    {
+      "path": "WORLD/MONDE03.TXT",
+      "size": 654,
+      "sha256": "769c02b53cb215420b6fa23bcb246a7445bbacfe62a70a4693a2be7a1ab0c544"
+    },
+    {
+      "path": "WORLD/MONDE04.ETA",
+      "size": 1282104,
+      "sha256": "c4940953c4ce8d256039347cc9d0b4516c98ff3a82a439a0babbdd4c6965ddc4",
+      "width": 128,
+      "height": 128,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328762,
+          "quantidade": 5,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328762,
+          "fim": 360206,
+          "quantidade": 40,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 360206,
+          "fim": 360240,
+          "quantidade": 8,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 360240,
+          "fim": 360252,
+          "quantidade": 1,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 360252,
+          "fim": 362012,
+          "quantidade": 293,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 362012,
+          "fim": 362676,
+          "quantidade": 66,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 362676,
+          "fim": 362780,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 362780,
+          "fim": 362796,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 362796,
+          "fim": 363996,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 363996,
+          "fim": 364600,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 364600,
+        "tamanho": 917504,
+        "sha256": "e0e79e15f986a154ba48a3800f2bac6fc54c62f19e269154b19009af5469fd88"
+      }
+    },
+    {
+      "path": "WORLD/MONDE04.TXT",
+      "size": 745,
+      "sha256": "2ba70231b51a2749431892ecb1123c200bdc4d052bb4b6db247c6d0e91318eb3"
+    },
+    {
+      "path": "WORLD/MONDE05.ETA",
+      "size": 1295828,
+      "sha256": "817f5db77b907dfa69ab8ceb71981e2055dede3fd0e4cd208c8efce33a0c6fc6",
+      "width": 192,
+      "height": 192,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 371790,
+          "quantidade": 55,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 371790,
+          "fim": 371824,
+          "quantidade": 8,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 371824,
+          "fim": 371828,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 371828,
+          "fim": 374926,
+          "quantidade": 516,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 374926,
+          "fim": 376400,
+          "quantidade": 147,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 376400,
+          "fim": 376504,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 376504,
+          "fim": 376520,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 376520,
+          "fim": 377720,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 377720,
+          "fim": 378324,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 378324,
+        "tamanho": 917504,
+        "sha256": "9535d0d77c5fbe6ad4ee424ac7faaf054666d3be2816fc2954aebadd7b91663f"
+      }
+    },
+    {
+      "path": "WORLD/MONDE05.TXT",
+      "size": 429,
+      "sha256": "73c5d03fc6b5e7e7c2a8851647d93923a7a89f742d2b18c2184df8193e820705"
+    },
+    {
+      "path": "WORLD/MONDE06.ETA",
+      "size": 1256118,
+      "sha256": "c80feed76c2db702a4ed2ff6b3c6e1fe84eabe68138f6660367c14e98a3c10c9",
+      "width": 256,
+      "height": 128,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 327938,
+          "quantidade": 1,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 327938,
+          "fim": 336588,
+          "quantidade": 11,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 336588,
+          "fim": 336670,
+          "quantidade": 20,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 336670,
+          "fim": 336674,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 336674,
+          "fim": 336676,
+          "quantidade": 0,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 336676,
+          "fim": 336690,
+          "quantidade": 1,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 336690,
+          "fim": 336794,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 336794,
+          "fim": 336810,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 336810,
+          "fim": 338010,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 338010,
+          "fim": 338614,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 338614,
+        "tamanho": 917504,
+        "sha256": "dc199ad274a0ca97542628579c0041296c002a6f966ab5a332903a8cd745d6b3"
+      }
+    },
+    {
+      "path": "WORLD/MONDE06.TXT",
+      "size": 747,
+      "sha256": "27ac23692a0ec2bd1093b26bd4fe7775119d2ae487a0a7ee4dc2e6b24230b98a"
+    },
+    {
+      "path": "WORLD/MONDE07.ETA",
+      "size": 1260608,
+      "sha256": "6d574c7428127c966b04f22353dc8a711d4b5897853a61dd579b921e36e0afb1",
+      "width": 192,
+      "height": 192,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 341136,
+          "quantidade": 16,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 341136,
+          "fim": 341170,
+          "quantidade": 8,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 341170,
+          "fim": 341174,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 341174,
+          "fim": 341176,
+          "quantidade": 0,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 341176,
+          "fim": 341180,
+          "quantidade": 0,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 341180,
+          "fim": 341284,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 341284,
+          "fim": 341300,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 341300,
+          "fim": 342500,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 342500,
+          "fim": 343104,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 343104,
+        "tamanho": 917504,
+        "sha256": "2ba447cd5120cfb342a34d47b29922c2c6d890e583d54a527e0738a8072d89cd"
+      }
+    },
+    {
+      "path": "WORLD/MONDE07.TXT",
+      "size": 495,
+      "sha256": "d161b91384380008bed46ff82e5a5a70eeb7541f982b73077fdf2c81e88cedb8"
+    },
+    {
+      "path": "WORLD/MONDE08.ETA",
+      "size": 1259500,
+      "sha256": "a8a5156251a2937c49f7331a9f8890ec3d857ae420fd6dbe6eb465cae2965e9c",
+      "width": 128,
+      "height": 128,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328968,
+          "quantidade": 6,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328968,
+          "fim": 339976,
+          "quantidade": 14,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 339976,
+          "fim": 340018,
+          "quantidade": 10,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 340018,
+          "fim": 340022,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 340022,
+          "fim": 340048,
+          "quantidade": 4,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 340048,
+          "fim": 340072,
+          "quantidade": 2,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 340072,
+          "fim": 340176,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 340176,
+          "fim": 340192,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 340192,
+          "fim": 341392,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 341392,
+          "fim": 341996,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 341996,
+        "tamanho": 917504,
+        "sha256": "015d995a7b1905249ff430c99004d7045fc3b8c7b4954b03c9ee3a6b0bcf2569"
+      }
+    },
+    {
+      "path": "WORLD/MONDE08.TXT",
+      "size": 565,
+      "sha256": "2c0d9ac4f08f92005a4a3e867b5ba0aec2e51bb89f67dfe3942b77d138418997"
+    },
+    {
+      "path": "WORLD/MONDE09.ETA",
+      "size": 1289828,
+      "sha256": "3b626f3fe831844f4e6f0b7d343c5c8e316dc56ee03447fd028ad8b0beb88eb9",
+      "width": 128,
+      "height": 128,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 366288,
+          "quantidade": 48,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 366288,
+          "fim": 366326,
+          "quantidade": 9,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 366326,
+          "fim": 366330,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 366330,
+          "fim": 369116,
+          "quantidade": 464,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 369116,
+          "fim": 370400,
+          "quantidade": 128,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 370400,
+          "fim": 370504,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 370504,
+          "fim": 370520,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 370520,
+          "fim": 371720,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 371720,
+          "fim": 372324,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 372324,
+        "tamanho": 917504,
+        "sha256": "1b1810860ae8d625866120edaf4a43f4dc209b4186adb54b5775131f5bb886cb"
+      }
+    },
+    {
+      "path": "WORLD/MONDE09.TXT",
+      "size": 789,
+      "sha256": "e4090c5abf8bab8325cd74fbcc076402f6a7be8951ad901a917ba6c608a8d608"
+    },
+    {
+      "path": "WORLD/MONDE09A.ETA",
+      "size": 1295330,
+      "sha256": "4a49802ea11b7c1029cee2c84002c80d80ea7033ccb282e065c9a9f701b7eec4",
+      "width": 128,
+      "height": 128,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 371790,
+          "quantidade": 55,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 371790,
+          "fim": 371828,
+          "quantidade": 9,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 371828,
+          "fim": 371832,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 371832,
+          "fim": 374618,
+          "quantidade": 464,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 374618,
+          "fim": 375902,
+          "quantidade": 128,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 375902,
+          "fim": 376006,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 376006,
+          "fim": 376022,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 376022,
+          "fim": 377222,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 377222,
+          "fim": 377826,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 377826,
+        "tamanho": 917504,
+        "sha256": "2fae905bd7fa682ad189e58f5353eca1f5a795a2ade5019b2e6a6ddf5fbc805a"
+      }
+    },
+    {
+      "path": "WORLD/MONDE09B.ETA",
+      "size": 1299880,
+      "sha256": "7e47f32f08a1467f2b7a7fe0916b61c4421a60672b79d93d0d02354f349e18fd",
+      "width": 128,
+      "height": 128,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 376506,
+          "quantidade": 61,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 376506,
+          "fim": 376544,
+          "quantidade": 9,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 376544,
+          "fim": 376548,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 376548,
+          "fim": 379028,
+          "quantidade": 413,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 379028,
+          "fim": 380452,
+          "quantidade": 142,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 380452,
+          "fim": 380556,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 380556,
+          "fim": 380572,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 380572,
+          "fim": 381772,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 381772,
+          "fim": 382376,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 382376,
+        "tamanho": 917504,
+        "sha256": "baa73693d8f3527cea73f42f8727af04361712edc2a260213d8bf1119a7757d6"
+      }
+    },
+    {
+      "path": "WORLD/MONDE09C.ETA",
+      "size": 1300006,
+      "sha256": "dc40f8b68a59fb91cd2b33b9624ffe49294df9419042e4847402be135535ce7a",
+      "width": 128,
+      "height": 128,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 376506,
+          "quantidade": 61,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 376506,
+          "fim": 376544,
+          "quantidade": 9,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 376544,
+          "fim": 376548,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 376548,
+          "fim": 379124,
+          "quantidade": 429,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 379124,
+          "fim": 380578,
+          "quantidade": 145,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 380578,
+          "fim": 380682,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 380682,
+          "fim": 380698,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 380698,
+          "fim": 381898,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 381898,
+          "fim": 382502,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 382502,
+        "tamanho": 917504,
+        "sha256": "dd4f8e105f38f211bd5ac2ddb9c64d5fe4e150a9e4c43ccefdf7b6cac12d55ff"
+      }
+    },
+    {
+      "path": "WORLD/MONDE09D.ETA",
+      "size": 1301302,
+      "sha256": "f69e52f7a56e837945ec0beb9787be93c611c33b09fe1c0f6b9b1dfc12e1ec69",
+      "width": 128,
+      "height": 128,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 377292,
+          "quantidade": 62,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 377292,
+          "fim": 377330,
+          "quantidade": 9,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 377330,
+          "fim": 377334,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 377334,
+          "fim": 380330,
+          "quantidade": 499,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 380330,
+          "fim": 381874,
+          "quantidade": 154,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 381874,
+          "fim": 381978,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 381978,
+          "fim": 381994,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 381994,
+          "fim": 383194,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 383194,
+          "fim": 383798,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 383798,
+        "tamanho": 917504,
+        "sha256": "2dacf5421ae33ebaedd37dd9b2876083144c6b97b410f2c300956b67163e8c5a"
+      }
+    },
+    {
+      "path": "WORLD/MONDE10.ETA",
+      "size": 1297018,
+      "sha256": "827f832bbc33635e2111bab0f58a218b9efbe319705ac66032ad13b8ffbc3a37",
+      "width": 192,
+      "height": 192,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 371790,
+          "quantidade": 55,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 371790,
+          "fim": 371856,
+          "quantidade": 16,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 371856,
+          "fim": 371860,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 371860,
+          "fim": 376116,
+          "quantidade": 709,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 376116,
+          "fim": 377590,
+          "quantidade": 147,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 377590,
+          "fim": 377694,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 377694,
+          "fim": 377710,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 377710,
+          "fim": 378910,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 378910,
+          "fim": 379514,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 379514,
+        "tamanho": 917504,
+        "sha256": "7cad9989bf00038271727ea1d509a04e7ddf78a8d76aeda07876ebd068c55d0b"
+      }
+    },
+    {
+      "path": "WORLD/MONDE10.TXT",
+      "size": 436,
+      "sha256": "7446ee85ea83d91ca6446bf1626fa87bdb93b1ae866ba72ac23c4fb515e4aedb"
+    },
+    {
+      "path": "WORLD/MONDE10A.ETA",
+      "size": 1298590,
+      "sha256": "5d809594106280f178ceaaa5c5fa49fa33a506a6ae420c31f7f16323bfd33452",
+      "width": 192,
+      "height": 192,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 373362,
+          "quantidade": 57,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 373362,
+          "fim": 373428,
+          "quantidade": 16,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 373428,
+          "fim": 373432,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 373432,
+          "fim": 377688,
+          "quantidade": 709,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 377688,
+          "fim": 379162,
+          "quantidade": 147,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 379162,
+          "fim": 379266,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 379266,
+          "fim": 379282,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 379282,
+          "fim": 380482,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 380482,
+          "fim": 381086,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 381086,
+        "tamanho": 917504,
+        "sha256": "a62d748199ada99c5be9f7ec169de0a89b3c718ec47dd4dabe6cbc4793f403ae"
+      }
+    },
+    {
+      "path": "WORLD/MONDE10B.ETA",
+      "size": 1299666,
+      "sha256": "3840989e98f0ea8183eb5fe4ae9f68a37f24952f58a8a34fa5caf734f20ddbf0",
+      "width": 192,
+      "height": 192,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 374148,
+          "quantidade": 58,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 374148,
+          "fim": 374214,
+          "quantidade": 16,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 374214,
+          "fim": 374218,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 374218,
+          "fim": 378474,
+          "quantidade": 709,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 378474,
+          "fim": 380238,
+          "quantidade": 176,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 380238,
+          "fim": 380342,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 380342,
+          "fim": 380358,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 380358,
+          "fim": 381558,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 381558,
+          "fim": 382162,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 382162,
+        "tamanho": 917504,
+        "sha256": "767b3ec26f10a2d2be190d9cff26830091160d78ac6cd3215bead513a44b6916"
+      }
+    },
+    {
+      "path": "WORLD/MONDE10C.ETA",
+      "size": 1298510,
+      "sha256": "86b85d1e7c6ada741d3644a442f364d97c8493ba092086d10541e9664a812bbe",
+      "width": 192,
+      "height": 192,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 373362,
+          "quantidade": 57,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 373362,
+          "fim": 373428,
+          "quantidade": 16,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 373428,
+          "fim": 373432,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 373432,
+          "fim": 377688,
+          "quantidade": 709,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 377688,
+          "fim": 379082,
+          "quantidade": 139,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 379082,
+          "fim": 379186,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 379186,
+          "fim": 379202,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 379202,
+          "fim": 380402,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 380402,
+          "fim": 381006,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 381006,
+        "tamanho": 917504,
+        "sha256": "f96b95010ff9f8b95a1142fe236af486242d165b9b18b76ee7a803fbf5b0df8e"
+      }
+    },
+    {
+      "path": "WORLD/MONDE11.ETA",
+      "size": 1295612,
+      "sha256": "5c66041c076747afbf29b0a8e1c6a2ff3222e9b1a60a0cde18abb666a9ea2840",
+      "width": 256,
+      "height": 256,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 374148,
+          "quantidade": 58,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 374148,
+          "fim": 374190,
+          "quantidade": 10,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 374190,
+          "fim": 374194,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 374194,
+          "fim": 374760,
+          "quantidade": 94,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 374760,
+          "fim": 376184,
+          "quantidade": 142,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 376184,
+          "fim": 376288,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 376288,
+          "fim": 376304,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 376304,
+          "fim": 377504,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 377504,
+          "fim": 378108,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 378108,
+        "tamanho": 917504,
+        "sha256": "a9253358a678a0ab35e254d0e52f76c5acac4953b78180a240ac3fe255f7870b"
+      }
+    },
+    {
+      "path": "WORLD/MONDE11.TXT",
+      "size": 887,
+      "sha256": "97bb6c3e147723404c3f488be5ccb79af154c546cb68dc6bb0bb2cd6197675f0"
+    },
+    {
+      "path": "WORLD/MONDE12.ETA",
+      "size": 1346978,
+      "sha256": "6abdcec07fb8afd82fe3697dde2ac6fed8911f613ea840541d23b6451cf7998d",
+      "width": 192,
+      "height": 192,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 331646,
+          "quantidade": 19,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 331646,
+          "fim": 421254,
+          "quantidade": 114,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 421254,
+          "fim": 421332,
+          "quantidade": 19,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 421332,
+          "fim": 422136,
+          "quantidade": 100,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 422136,
+          "fim": 425906,
+          "quantidade": 628,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 425906,
+          "fim": 427550,
+          "quantidade": 164,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 427550,
+          "fim": 427654,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 427654,
+          "fim": 427670,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 427670,
+          "fim": 428870,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 428870,
+          "fim": 429474,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 429474,
+        "tamanho": 917504,
+        "sha256": "9b85c65c4340c24b738ebba31506d9020609a828cd7183ecaae4ebe792718f4d"
+      }
+    },
+    {
+      "path": "WORLD/MONDE12.TXT",
+      "size": 344,
+      "sha256": "3155819fae7ff403566d14f967daef40b3ba8ee8c47f00bfea5ae72e7a2aa521"
+    },
+    {
+      "path": "WORLD/MONDE12A.ETA",
+      "size": 1362530,
+      "sha256": "90860a9e7d5ec934f8d345ac15f849f8637db4ca574dac1e6f609a630aaa33c4",
+      "width": 192,
+      "height": 192,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 332264,
+          "quantidade": 22,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 332264,
+          "fim": 436806,
+          "quantidade": 133,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 436806,
+          "fim": 436884,
+          "quantidade": 19,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 436884,
+          "fim": 437688,
+          "quantidade": 100,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 437688,
+          "fim": 441458,
+          "quantidade": 628,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 441458,
+          "fim": 443102,
+          "quantidade": 164,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 443102,
+          "fim": 443206,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 443206,
+          "fim": 443222,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 443222,
+          "fim": 444422,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 444422,
+          "fim": 445026,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 445026,
+        "tamanho": 917504,
+        "sha256": "4f3b0b337eca4f6289df8d915d8331d0fb6840e47c1019f0d58e63aa1fe04fb3"
+      }
+    },
+    {
+      "path": "WORLD/MONDE12B.ETA",
+      "size": 1370480,
+      "sha256": "69fb5140fd0636ac9e0f5f63323e8f3c2013aaf3e117603785079b007363c50a",
+      "width": 192,
+      "height": 192,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 332264,
+          "quantidade": 22,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 332264,
+          "fim": 444666,
+          "quantidade": 143,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 444666,
+          "fim": 444744,
+          "quantidade": 19,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 444744,
+          "fim": 445548,
+          "quantidade": 100,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 445548,
+          "fim": 449318,
+          "quantidade": 628,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 449318,
+          "fim": 451052,
+          "quantidade": 173,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 451052,
+          "fim": 451156,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 451156,
+          "fim": 451172,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 451172,
+          "fim": 452372,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 452372,
+          "fim": 452976,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 452976,
+        "tamanho": 917504,
+        "sha256": "4fc4a765f8d5feb864e79c9ec24c36db088b1bd2be66edf2b4dcbabd6e858f8c"
+      }
+    },
+    {
+      "path": "WORLD/MONDE12C.ETA",
+      "size": 1362610,
+      "sha256": "f09c5165f88ca7f1575e87cbf7a420a7588d5d3b150e41a5623ebf1e4225ed48",
+      "width": 192,
+      "height": 192,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 332264,
+          "quantidade": 22,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 332264,
+          "fim": 436806,
+          "quantidade": 133,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 436806,
+          "fim": 436884,
+          "quantidade": 19,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 436884,
+          "fim": 437688,
+          "quantidade": 100,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 437688,
+          "fim": 441458,
+          "quantidade": 628,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 441458,
+          "fim": 443182,
+          "quantidade": 172,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 443182,
+          "fim": 443286,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 443286,
+          "fim": 443302,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 443302,
+          "fim": 444502,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 444502,
+          "fim": 445106,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 445106,
+        "tamanho": 917504,
+        "sha256": "76a5fe95e193d0a244ff167a57f2eb3c0947de369e5b0a225a33188095e7e862"
+      }
+    },
+    {
+      "path": "WORLD/MONDE13.ETA",
+      "size": 1262988,
+      "sha256": "b1dd08943dee2afc32ca3d35ffd30d0229c87078c6b99362fc0a437639044bc2",
+      "width": 256,
+      "height": 256,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 327732,
+          "quantidade": 0,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 327732,
+          "fim": 343456,
+          "quantidade": 20,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 343456,
+          "fim": 343502,
+          "quantidade": 11,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 343502,
+          "fim": 343506,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 343506,
+          "fim": 343526,
+          "quantidade": 3,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 343526,
+          "fim": 343560,
+          "quantidade": 3,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 343560,
+          "fim": 343664,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 343664,
+          "fim": 343680,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 343680,
+          "fim": 344880,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 344880,
+          "fim": 345484,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 345484,
+        "tamanho": 917504,
+        "sha256": "308bc7637e16fe0c150367f6b1a60c8afe06f0854db17d0d87759b16cbf891ff"
+      }
+    },
+    {
+      "path": "WORLD/MONDE13.TXT",
+      "size": 520,
+      "sha256": "a61235ed9e7175eff92e60fe8623f3d9ed03d2d9f1ab4378a728dec73bcf8524"
+    },
+    {
+      "path": "WORLD/MONDE14.ETA",
+      "size": 1260982,
+      "sha256": "75370d077e6c0e0fe4f3b5d16c4bb5e2d564d19989394966d81910b8dec57fe1",
+      "width": 64,
+      "height": 64,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328144,
+          "quantidade": 2,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328144,
+          "fim": 340724,
+          "quantidade": 16,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 340724,
+          "fim": 340734,
+          "quantidade": 2,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 340734,
+          "fim": 341538,
+          "quantidade": 100,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 341538,
+          "fim": 341540,
+          "quantidade": 0,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 341540,
+          "fim": 341554,
+          "quantidade": 1,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 341554,
+          "fim": 341658,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 341658,
+          "fim": 341674,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 341674,
+          "fim": 342874,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 342874,
+          "fim": 343478,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 343478,
+        "tamanho": 917504,
+        "sha256": "0b7e62cd6cc35e50e1a2a5a029c902c923a876b783788d2ff0bf43922226a3dc"
+      }
+    },
+    {
+      "path": "WORLD/MONDE14.TXT",
+      "size": 617,
+      "sha256": "5c4ae9e243f37335d11cb8543eb9ee47d874fe0e7bd5ff967abb2f2bed26544e"
+    },
+    {
+      "path": "WORLD/MONDE15.ETA",
+      "size": 1302136,
+      "sha256": "89ff2906dfddf1a4665b07e14251f60eba899d3e61123b2d9ba483762add9df7",
+      "width": 256,
+      "height": 256,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 374148,
+          "quantidade": 58,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 374148,
+          "fim": 374226,
+          "quantidade": 19,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 374226,
+          "fim": 374230,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 374230,
+          "fim": 378714,
+          "quantidade": 747,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 378714,
+          "fim": 382708,
+          "quantidade": 399,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 382708,
+          "fim": 382812,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 382812,
+          "fim": 382828,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 382828,
+          "fim": 384028,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 384028,
+          "fim": 384632,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 384632,
+        "tamanho": 917504,
+        "sha256": "5145da36a8fb48474af7dde693a9e4afdb1f1f37ef89029698fb011847eed9d5"
+      }
+    },
+    {
+      "path": "WORLD/MONDE15.TXT",
+      "size": 448,
+      "sha256": "6b21988636b8eeef5a45a31c6a6204b2cf2750304d31a39517f2a1d304d7883c"
+    },
+    {
+      "path": "WORLD/MONDE16.ETA",
+      "size": 1299996,
+      "sha256": "3be9f1479506b112edc266315b6e3bfee74f786bf7fc0edea9973b46ca327f77",
+      "width": 256,
+      "height": 256,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 374148,
+          "quantidade": 58,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 374148,
+          "fim": 374230,
+          "quantidade": 20,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 374230,
+          "fim": 374234,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 374234,
+          "fim": 378484,
+          "quantidade": 708,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 378484,
+          "fim": 380568,
+          "quantidade": 208,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 380568,
+          "fim": 380672,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 380672,
+          "fim": 380688,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 380688,
+          "fim": 381888,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 381888,
+          "fim": 382492,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 382492,
+        "tamanho": 917504,
+        "sha256": "9db2c3a368d134402b10b764c00d5c991c9ca6f9c98a4a382fe94369139d8e86"
+      }
+    },
+    {
+      "path": "WORLD/MONDE16.TXT",
+      "size": 481,
+      "sha256": "b7457228eee60abf32762fe957aa579879a1ce43f75816eb2cb1ba73adfa60dd"
+    },
+    {
+      "path": "WORLD/MONDE17.ETA",
+      "size": 1413350,
+      "sha256": "f176fb3d72437709de034b1b5c60359ae41518a70ff678715c6bc2500160cbe7",
+      "width": 256,
+      "height": 256,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 355336,
+          "quantidade": 134,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 355336,
+          "fim": 488174,
+          "quantidade": 169,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 488174,
+          "fim": 488256,
+          "quantidade": 20,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 488256,
+          "fim": 488260,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 488260,
+          "fim": 492108,
+          "quantidade": 641,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 492108,
+          "fim": 493922,
+          "quantidade": 181,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 493922,
+          "fim": 494026,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 494026,
+          "fim": 494042,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 494042,
+          "fim": 495242,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 495242,
+          "fim": 495846,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 495846,
+        "tamanho": 917504,
+        "sha256": "1d119d14d0fbda6a519a72eafed4863aa4bb94327cdd00ece3a4abe6b229c18f"
+      }
+    },
+    {
+      "path": "WORLD/MONDE17.TXT",
+      "size": 634,
+      "sha256": "7b511457e0af0f36270c4ab6ab278538ddf5e5a16f4f86a5006b9f014e218f75"
+    },
+    {
+      "path": "WORLD/MONDE17A.ETA",
+      "size": 1413350,
+      "sha256": "f176fb3d72437709de034b1b5c60359ae41518a70ff678715c6bc2500160cbe7",
+      "width": 256,
+      "height": 256,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 355336,
+          "quantidade": 134,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 355336,
+          "fim": 488174,
+          "quantidade": 169,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 488174,
+          "fim": 488256,
+          "quantidade": 20,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 488256,
+          "fim": 488260,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 488260,
+          "fim": 492108,
+          "quantidade": 641,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 492108,
+          "fim": 493922,
+          "quantidade": 181,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 493922,
+          "fim": 494026,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 494026,
+          "fim": 494042,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 494042,
+          "fim": 495242,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 495242,
+          "fim": 495846,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 495846,
+        "tamanho": 917504,
+        "sha256": "1d119d14d0fbda6a519a72eafed4863aa4bb94327cdd00ece3a4abe6b229c18f"
+      }
+    },
+    {
+      "path": "WORLD/MONDE17B.ETA",
+      "size": 1413762,
+      "sha256": "c27ee407371f9a0d9d2b032123d03a5a57228ace8b3c99e2c4979873d5476771",
+      "width": 256,
+      "height": 256,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 355748,
+          "quantidade": 136,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 355748,
+          "fim": 488586,
+          "quantidade": 169,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 488586,
+          "fim": 488668,
+          "quantidade": 20,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 488668,
+          "fim": 488672,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 488672,
+          "fim": 492520,
+          "quantidade": 641,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 492520,
+          "fim": 494334,
+          "quantidade": 181,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 494334,
+          "fim": 494438,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 494438,
+          "fim": 494454,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 494454,
+          "fim": 495654,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 495654,
+          "fim": 496258,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 496258,
+        "tamanho": 917504,
+        "sha256": "87e20dc4557792928a170fb9551409ebc49a124f2ef4e674847f71bb8089756d"
+      }
+    },
+    {
+      "path": "WORLD/MONDE17C.ETA",
+      "size": 1416494,
+      "sha256": "3cff0609b10bbe3c439c068d42850b8cac9e6895fefae282b457224f66eb3836",
+      "width": 256,
+      "height": 256,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 355336,
+          "quantidade": 134,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 355336,
+          "fim": 491318,
+          "quantidade": 173,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 491318,
+          "fim": 491400,
+          "quantidade": 20,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 491400,
+          "fim": 491404,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 491404,
+          "fim": 495252,
+          "quantidade": 641,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 495252,
+          "fim": 497066,
+          "quantidade": 181,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 497066,
+          "fim": 497170,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 497170,
+          "fim": 497186,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 497186,
+          "fim": 498386,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 498386,
+          "fim": 498990,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 498990,
+        "tamanho": 917504,
+        "sha256": "91d8d85c714083faf6996473dd261fecc29e09c21c48bcdb1cf944f6766666cc"
+      }
+    },
+    {
+      "path": "WORLD/MONDE18.ETA",
+      "size": 1299928,
+      "sha256": "e5d4ead32b9422160a3334a0735400cd702179dbc29f471c373657883b65dadc",
+      "width": 256,
+      "height": 256,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328762,
+          "quantidade": 5,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328762,
+          "fim": 374354,
+          "quantidade": 58,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 374354,
+          "fim": 374432,
+          "quantidade": 19,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 374432,
+          "fim": 374436,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 374436,
+          "fim": 378236,
+          "quantidade": 633,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 378236,
+          "fim": 380500,
+          "quantidade": 226,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 380500,
+          "fim": 380604,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 380604,
+          "fim": 380620,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 380620,
+          "fim": 381820,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 381820,
+          "fim": 382424,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 382424,
+        "tamanho": 917504,
+        "sha256": "d351389cb003c174d360271e59ddb67122a2da53d705332d15bb5292976f2846"
+      }
+    },
+    {
+      "path": "WORLD/MONDE18.TXT",
+      "size": 501,
+      "sha256": "a4d3a3cfe7139abd9025f6f36582d97604bbf6cffbeba8c0e34c9fb2487523da"
+    },
+    {
+      "path": "WORLD/MONDE19.ETA",
+      "size": 1296792,
+      "sha256": "95a1bd20475db7f39f7ff2c10a9ba904f1246145ba73006d40a8a0521501d213",
+      "width": 256,
+      "height": 256,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 373362,
+          "quantidade": 57,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 373362,
+          "fim": 373432,
+          "quantidade": 17,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 373432,
+          "fim": 373436,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 373436,
+          "fim": 374560,
+          "quantidade": 187,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 374560,
+          "fim": 377364,
+          "quantidade": 280,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 377364,
+          "fim": 377468,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 377468,
+          "fim": 377484,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 377484,
+          "fim": 378684,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 378684,
+          "fim": 379288,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 379288,
+        "tamanho": 917504,
+        "sha256": "a196e1d17326d19bac897ad36398b27344b82085d90cfa9f930944768c1bd2ca"
+      }
+    },
+    {
+      "path": "WORLD/MONDE19.TXT",
+      "size": 664,
+      "sha256": "2cd52018a606266128e95949437521241c890408019bb78a6d308ca5cc214458"
+    },
+    {
+      "path": "WORLD/MONDE20.ETA",
+      "size": 1278064,
+      "sha256": "585b2b087368b56aae56cd08833078a7d257d717c49873d5effb51bf78457c68",
+      "width": 256,
+      "height": 256,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 354498,
+          "quantidade": 33,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 354498,
+          "fim": 354580,
+          "quantidade": 20,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 354580,
+          "fim": 354584,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 354584,
+          "fim": 355792,
+          "quantidade": 201,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 355792,
+          "fim": 358636,
+          "quantidade": 284,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 358636,
+          "fim": 358740,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 358740,
+          "fim": 358756,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 358756,
+          "fim": 359956,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 359956,
+          "fim": 360560,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 360560,
+        "tamanho": 917504,
+        "sha256": "2ac5cb5ab6986be53d4013a7af64cf9fba9a4e7986b0be57c2f3b4468bef92d9"
+      }
+    },
+    {
+      "path": "WORLD/MONDE20.TXT",
+      "size": 375,
+      "sha256": "987e21f5b3629b730a2ae6f4a9a8727a20f5f6f171851301dd0c8da11ec3b01c"
+    },
+    {
+      "path": "WORLD/MONDE21.ETA",
+      "size": 1298498,
+      "sha256": "b7de440f4761476b86ebe33924471fecf99c051b4db07dac7edb88699a4e5875",
+      "width": 256,
+      "height": 256,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 374934,
+          "quantidade": 59,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 374934,
+          "fim": 375016,
+          "quantidade": 20,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 375016,
+          "fim": 375020,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 375020,
+          "fim": 376516,
+          "quantidade": 249,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 376516,
+          "fim": 379070,
+          "quantidade": 255,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 379070,
+          "fim": 379174,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 379174,
+          "fim": 379190,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 379190,
+          "fim": 380390,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 380390,
+          "fim": 380994,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 380994,
+        "tamanho": 917504,
+        "sha256": "751bdc6411999c93d36f5868c638570c0b90c4a3b7793b15f0070af9633bd540"
+      }
+    },
+    {
+      "path": "WORLD/MONDE21.TXT",
+      "size": 399,
+      "sha256": "f3731ce0e40fae8b15399d016567a3c92a229aace40c8af16aa211a218f1e4ab"
+    },
+    {
+      "path": "WORLD/MONDE22.ETA",
+      "size": 1295668,
+      "sha256": "b6bce6b3df38e3f497224598175e653859f26554ed0982bcd799139acc23d018",
+      "width": 256,
+      "height": 256,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 371790,
+          "quantidade": 55,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 371790,
+          "fim": 371872,
+          "quantidade": 20,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 371872,
+          "fim": 371876,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 371876,
+          "fim": 373156,
+          "quantidade": 213,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 373156,
+          "fim": 376240,
+          "quantidade": 308,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 376240,
+          "fim": 376344,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 376344,
+          "fim": 376360,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 376360,
+          "fim": 377560,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 377560,
+          "fim": 378164,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 378164,
+        "tamanho": 917504,
+        "sha256": "ad6147d38ec78b71d41f1bfc38cd3811e11dc6561971753e9f8dc421305fc33f"
+      }
+    },
+    {
+      "path": "WORLD/MONDE22.TXT",
+      "size": 499,
+      "sha256": "d66b4bb205c9cc2cba6b2f3b9aff2705ba4546f4985a86f1570c48dea2799ab0"
+    },
+    {
+      "path": "WORLD/MONDE23.ETA",
+      "size": 1418088,
+      "sha256": "c83bfdfa6236b9c1000b3715340296479cfcc02e867275ef9f03437cf1b61630",
+      "width": 256,
+      "height": 256,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 407454,
+          "quantidade": 387,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 407454,
+          "fim": 498634,
+          "quantidade": 116,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 498634,
+          "fim": 498640,
+          "quantidade": 1,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 498640,
+          "fim": 498644,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 498644,
+          "fim": 498646,
+          "quantidade": 0,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 498646,
+          "fim": 498660,
+          "quantidade": 1,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 498660,
+          "fim": 498764,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 498764,
+          "fim": 498780,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 498780,
+          "fim": 499980,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 499980,
+          "fim": 500584,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 500584,
+        "tamanho": 917504,
+        "sha256": "e18d2c2625226f52987490411b9b747316032a1da2a182fb1bd8d608372a7f0f"
+      }
+    },
+    {
+      "path": "WORLD/MONDE23.TXT",
+      "size": 457,
+      "sha256": "7364f164b0df34eeb67b50adac58646e9cbb14ebd95f2ac47605b99a8890fc3c"
+    },
+    {
+      "path": "WORLD/MONDE24.ETA",
+      "size": 1300522,
+      "sha256": "7f09a9d659978e2b095baa986fc3435336222acd6fc92818a9833c5ddb6420bd",
+      "width": 256,
+      "height": 256,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 376506,
+          "quantidade": 61,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 376506,
+          "fim": 376588,
+          "quantidade": 20,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 376588,
+          "fim": 376592,
+          "quantidade": 0,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 376592,
+          "fim": 377920,
+          "quantidade": 221,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 377920,
+          "fim": 381094,
+          "quantidade": 317,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 381094,
+          "fim": 381198,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 381198,
+          "fim": 381214,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 381214,
+          "fim": 382414,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 382414,
+          "fim": 383018,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 383018,
+        "tamanho": 917504,
+        "sha256": "adf827f56a29572441697163920a38bd49f2896c7a115ca37c3117226f8f38ce"
+      }
+    },
+    {
+      "path": "WORLD/MONDE24.TXT",
+      "size": 413,
+      "sha256": "a6868025a4683781357377f91bcd4c6aa88d322994c67f099e882974a32ea83c"
+    },
+    {
+      "path": "WORLD/MONDE25.ETA",
+      "size": 1298052,
+      "sha256": "d134d11c1227a6441b3dce7b452f06a649f953ce69fe74de367973b4620df70e",
+      "width": 192,
+      "height": 192,
+      "blocks": [
+        {
+          "nome": "estruturas",
+          "rotina": "0x46c517",
+          "offset": 327728,
+          "fim": 328556,
+          "quantidade": 4,
+          "tamanho_registro": 204,
+          "indexado": true
+        },
+        {
+          "nome": "unidades",
+          "rotina": "0x46acbf",
+          "offset": 328556,
+          "fim": 373362,
+          "quantidade": 57,
+          "tamanho_registro": 784,
+          "indexado": true
+        },
+        {
+          "nome": "tabela_47534a",
+          "rotina": "0x47534a",
+          "offset": 373362,
+          "fim": 373424,
+          "quantidade": 15,
+          "tamanho_registro": 4,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c24d",
+          "rotina": "0x47c24d",
+          "offset": 373424,
+          "fim": 373524,
+          "quantidade": 12,
+          "tamanho_registro": 8,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47bcc7",
+          "rotina": "0x47bcc7",
+          "offset": 373524,
+          "fim": 376670,
+          "quantidade": 524,
+          "tamanho_registro": 6,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_47c04a",
+          "rotina": "0x47c04a",
+          "offset": 376670,
+          "fim": 378624,
+          "quantidade": 195,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "tabela_458b05",
+          "rotina": "0x458b05",
+          "offset": 378624,
+          "fim": 378728,
+          "quantidade": 10,
+          "tamanho_registro": 10,
+          "indexado": false
+        },
+        {
+          "nome": "bytes_descartados",
+          "rotina": "0x47c30f",
+          "offset": 378728,
+          "fim": 378744,
+          "tamanho_total": 16
+        },
+        {
+          "nome": "listas_por_jogador",
+          "rotina": "0x47c404",
+          "offset": 378744,
+          "fim": 379944,
+          "tamanho_total": 1200
+        },
+        {
+          "nome": "tabela_47ac30",
+          "rotina": "0x47ac30",
+          "offset": 379944,
+          "fim": 380548,
+          "quantidade": 100,
+          "tamanho_registro": 6,
+          "indexado": false
+        }
+      ],
+      "suffix": {
+        "offset": 380548,
+        "tamanho": 917504,
+        "sha256": "3cde900d25d57d2db2aa7df167261d9e87e5b972fcc8660288b10a828265b15c"
+      }
+    },
+    {
+      "path": "WORLD/MONDE25.TXT",
+      "size": 338,
+      "sha256": "93468d378f67bb1faa6f11dac68cd290c9093daf220cc1fa7432582f0fb43d6b"
+    }
+  ],
+  "scope": "Disk inventory only; no commercial files copied or runtime initialization inferred."
+}
