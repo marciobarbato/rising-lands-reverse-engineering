@@ -65,6 +65,8 @@ class Preview:
         self.backend='python' if PYTHON_SOLVER_AVAILABLE else 'local'
         self.scenario='obstaculo'; self.selected=0; self.reset('obstaculo')
     def reset(self,scenario,backend=None):
+        if scenario=='jogavel' and 'features' not in MANIFEST:
+            raise ValueError('A sessão jogável exige o build de uma revisão única. Execute compilar-jogável.')
         if backend is not None:
             if backend not in ("python","local"):raise ValueError("Backend desconhecido")
             if backend=="python" and not PYTHON_SOLVER_AVAILABLE:raise ValueError("Solucionador Python não consta deste snapshot")
@@ -122,7 +124,7 @@ class Preview:
         self.routes[i],self.plans[i]=self.forecast(i)
         self.log(f'U{i}: ordem para ({x}, {y}); {self.plans[i]}.')
     def forecast(self,i):
-        # Prévia isolada, do MESMO motor. Não substitui o planejador geral ausente.
+        # Forecast only on a copied world; it does not replace live navigation.
         w=copy.deepcopy(self.world);route=[xy(w.palavra(i,8))]
         for _ in range(1800):
             try:w.atualizar_movimento(i)

@@ -10,6 +10,7 @@ sys.path.insert(0, str(APP / 'src'))
 from engine import Preview, MANIFEST, SNAP
 
 
+@unittest.skipUnless('features' in MANIFEST, 'Playable consumer requires the single-revision build; historical preview remains separate')
 class PlayableTests(unittest.TestCase):
     def setUp(self):
         self.preview = Preview()
