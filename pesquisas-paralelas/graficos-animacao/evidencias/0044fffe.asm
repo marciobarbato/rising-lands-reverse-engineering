@@ -15,4 +15,4 @@
 00450022  25ff000000             and      eax, 0xff
 00450027  e86b7d0100             call     0x467d97 ; GetBit
 0045002c  5a                     pop      edx
-0045002d  c3                     ret      
+0045002d  c3                     ret

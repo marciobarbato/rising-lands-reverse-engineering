@@ -30,7 +30,7 @@
 004120df  0fbfd0                 movsx    edx, ax
 004120e2  0fbfc3                 movsx    eax, bx
 004120e5  bb61130000             mov      ebx, 0x1361
-004120ea  e974000000             jmp      0x412163 ; 
+004120ea  e974000000             jmp      0x412163 ;
 004120ef  7c17                   jl       0x412108
 004120f1  83fa28                 cmp      edx, 0x28
 004120f4  7d12                   jge      0x412108
@@ -38,7 +38,7 @@
 004120fb  0fbfd0                 movsx    edx, ax
 004120fe  0fbfc3                 movsx    eax, bx
 00412101  bb62130000             mov      ebx, 0x1362
-00412106  eb5b                   jmp      0x412163 ; 
+00412106  eb5b                   jmp      0x412163 ;
 00412108  31c0                   xor      eax, eax
 0041210a  8a86ab000000           mov      al, byte ptr [esi + 0xab]
 00412110  83f828                 cmp      eax, 0x28
@@ -52,8 +52,8 @@
 00412127  b901000000             mov      ecx, 1
 0041212c  051e000000             add      eax, 0x1e
 00412131  bb63130000             mov      ebx, 0x1363
-00412136  98                     cwde     
-00412137  eb2a                   jmp      0x412163 ; 
+00412136  98                     cwde
+00412137  eb2a                   jmp      0x412163 ;
 00412139  31c0                   xor      eax, eax
 0041213b  8a86ab000000           mov      al, byte ptr [esi + 0xab]
 00412141  83f82d                 cmp      eax, 0x2d
@@ -65,7 +65,7 @@
 00412153  b901000000             mov      ecx, 1
 00412158  051e000000             add      eax, 0x1e
 0041215d  bb64130000             mov      ebx, 0x1364
-00412162  98                     cwde     
+00412162  98                     cwde
 00412163  e82e960400             call     0x45b796 ; PasteOmbreCmp
 00412168  8b0c24                 mov      ecx, dword ptr [esp]
 0041216b  89fb                   mov      ebx, edi
@@ -113,7 +113,7 @@
 004121fd  6689d3                 mov      bx, dx
 00412200  8a86ab000000           mov      al, byte ptr [esi + 0xab]
 00412206  89fa                   mov      edx, edi
-00412208  eb5e                   jmp      0x412268 ; 
+00412208  eb5e                   jmp      0x412268 ;
 0041220a  31c0                   xor      eax, eax
 0041220c  668b442404             mov      ax, word ptr [esp + 4]
 00412211  e82ffe0200             call     0x442045 ; EnginGetPlayer
@@ -166,11 +166,11 @@
 004122ba  b901000000             mov      ecx, 1
 004122bf  0560000000             add      eax, 0x60
 004122c4  0fbfd7                 movsx    edx, di
-004122c7  98                     cwde     
+004122c7  98                     cwde
 004122c8  e888a10400             call     0x45c455 ; PastePlayerCmp
 004122cd  83c408                 add      esp, 8
 004122d0  5d                     pop      ebp
 004122d1  5f                     pop      edi
 004122d2  5e                     pop      esi
 004122d3  59                     pop      ecx
-004122d4  c3                     ret      
+004122d4  c3                     ret

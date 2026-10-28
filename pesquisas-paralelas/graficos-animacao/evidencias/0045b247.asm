@@ -21,7 +21,7 @@
 0045b279  66a11ea04900           mov      ax, word ptr [0x49a01e]
 0045b27f  668b3d1ca04900         mov      di, word ptr [0x49a01c]
 0045b286  89442410               mov      dword ptr [esp + 0x10], eax
-0045b28a  eb1a                   jmp      0x45b2a6 ; 
+0045b28a  eb1a                   jmp      0x45b2a6 ;
 0045b28c  ba1f030000             mov      edx, 0x31f
 0045b291  b957020000             mov      ecx, 0x257
 0045b296  31db                   xor      ebx, ebx
@@ -109,7 +109,7 @@
 0045b398  0fbec0                 movsx    eax, al
 0045b39b  01f1                   add      ecx, esi
 0045b39d  01c3                   add      ebx, eax
-0045b39f  ebd9                   jmp      0x45b37a ; 
+0045b39f  ebd9                   jmp      0x45b37a ;
 0045b3a1  8b4c2408               mov      ecx, dword ptr [esp + 8]
 0045b3a5  31c0                   xor      eax, eax
 0045b3a7  668b01                 mov      ax, word ptr [ecx]
@@ -117,7 +117,7 @@
 0045b3ae  8b0da0174e00           mov      ecx, dword ptr [0x4e17a0]
 0045b3b4  29c1                   sub      ecx, eax
 0045b3b6  01cb                   add      ebx, ecx
-0045b3b8  eb88                   jmp      0x45b342 ; 
+0045b3b8  eb88                   jmp      0x45b342 ;
 0045b3ba  8b7c2418               mov      edi, dword ptr [esp + 0x18]
 0045b3be  31c0                   xor      eax, eax
 0045b3c0  8b0da0174e00           mov      ecx, dword ptr [0x4e17a0]
@@ -189,9 +189,9 @@
 0045b48b  01ea                   add      edx, ebp
 0045b48d  01c7                   add      edi, eax
 0045b48f  01eb                   add      ebx, ebp
-0045b491  e96dffffff             jmp      0x45b403 ; 
+0045b491  e96dffffff             jmp      0x45b403 ;
 0045b496  30c0                   xor      al, al
-0045b498  eb0d                   jmp      0x45b4a7 ; 
+0045b498  eb0d                   jmp      0x45b4a7 ;
 0045b49a  8b4c2414               mov      ecx, dword ptr [esp + 0x14]
 0045b49e  43                     inc      ebx
 0045b49f  42                     inc      edx
@@ -215,15 +215,15 @@
 0045b4d7  7fc1                   jg       0x45b49a
 0045b4d9  8a22                   mov      ah, byte ptr [edx]
 0045b4db  8823                   mov      byte ptr [ebx], ah
-0045b4dd  ebbb                   jmp      0x45b49a ; 
+0045b4dd  ebbb                   jmp      0x45b49a ;
 0045b4df  660fbe4c2420           movsx    cx, byte ptr [esp + 0x20]
 0045b4e5  8b742414               mov      esi, dword ptr [esp + 0x14]
 0045b4e9  01ce                   add      esi, ecx
 0045b4eb  01c3                   add      ebx, eax
 0045b4ed  89742414               mov      dword ptr [esp + 0x14], esi
-0045b4f1  e911ffffff             jmp      0x45b407 ; 
+0045b4f1  e911ffffff             jmp      0x45b407 ;
 0045b4f6  83c424                 add      esp, 0x24
 0045b4f9  5d                     pop      ebp
 0045b4fa  5f                     pop      edi
 0045b4fb  5e                     pop      esi
-0045b4fc  c3                     ret      
+0045b4fc  c3                     ret

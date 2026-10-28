@@ -1,13 +1,15 @@
 # Publicação parcial no Git e recuperação local
 
-A entrega local **completa** está em `entregas/2026-10-27-soldado-v1/`:
-1.120 arquivos de conteúdo, mais `MANIFESTO.json` e `SHA256SUMS`.
-SHA-256 do manifesto:
-`56d17ebe830036ac9e115549b640f994587590f61b7bcd650fecbf0f3eca5671`.
-A verificação local passou. Essa pasta não foi modificada após congelada.
+A revisão local atual é `entregas/2026-10-28-unidades-v2/`; o manifesto e
+`SHA256SUMS` descrevem o pacote completo, incluindo os insumos locais.
+A revisão anterior `entregas/2026-10-27-soldado-v1/` permanece intacta; o hash
+de seu manifesto é `56d17ebe830036ac9e115549b640f994587590f61b7bcd650fecbf0f3eca5671`.
 
-`INVENTARIO_PUBLICACAO.json` e `publicacao-pathspec.txt` delimitam os arquivos
-pertinentes à publicação. Esses dois arquivos operacionais, `ESTADO.md` e a
+`INVENTARIO_PUBLICACAO.json` e `publicacao-pathspec.txt` registram a seleção
+explícita da publicação mais recente. A seleção v1 de 146 arquivos foi commitada
+em `e531dbbdbe650ae2cbdeab03567981d2d8cd15bd`; a v2 usa uma nova seleção restrita
+a esta frente, revisada após autorização direta do usuário.
+Esses dois arquivos operacionais, `ESTADO.md` e a
 prévia intermediária ficam fora da seleção; o documento presente está incluído.
 O estado das etapas de staging e commit fica registrado separadamente em
 `ESTADO.md`, sem alterar a entrega congelada.
@@ -25,7 +27,7 @@ originais por engano. Os artefatos visuais são recortes/decodificações necess
 - Conteúdo de `fontes/`, exceto seu manifesto: EXE, CMP, PIE, INI, ETA e referência.
 - Conteúdo de `snapshot/COMMIT/`: recuperável com `git show COMMIT:caminho`.
 - Conteúdo de `dependencias/`, exceto seu manifesto: bibliotecas locais copiadas.
-- A mesma exclusão vale dentro de `entregas/2026-10-27-soldado-v1/`.
+- A mesma exclusão vale dentro de todas as revisões em `entregas/`.
 - Caches, builds, temporários e a imagem intermediária `previa.png`.
 
 O manifesto congelado continua descrevendo a entrega **completa**. Um clone
@@ -47,8 +49,9 @@ import hashlib, json, subprocess
 from verificar_manifesto import verificar
 
 raiz = Path.cwd().resolve()
-revisao = raiz / 'entregas/2026-10-27-soldado-v1'
-destino = raiz / 'recuperacao-soldado-v1'
+identificador = '2026-10-28-unidades-v2'
+revisao = raiz / 'entregas' / identificador
+destino = raiz / ('recuperacao-' + identificador)
 destino.mkdir(exist_ok=False)
 manifesto = json.loads((revisao / 'MANIFESTO.json').read_text())
 fontes = json.loads((revisao / 'fontes/manifesto.json').read_text())
@@ -87,24 +90,12 @@ As dependências nativas registradas são macOS arm64; substituí-las por outra
 compilação exige uma nova revisão e novo manifesto. A API normal não necessita
 de dependências externas.
 
-## Procedimento de publicação em janela Git coordenada
+## Publicação Git posterior
 
-Somente após autorização e concessão de janela pela coordenação, revisar a lista,
-a branch, o HEAD esperado e a situação do índice. Executar staging e commit em
-etapas separadas; autorização para staging não autoriza o commit. Os comandos
-abaixo descrevem o procedimento, sem representar seu estado de execução:
-
-```sh
-git -C '/Users/marcio/git/Rising Lands/engenharia-reversa' add --pathspec-from-file='pesquisas-paralelas/graficos-animacao/publicacao-pathspec.txt'
-git -C '/Users/marcio/git/Rising Lands/engenharia-reversa' diff --cached --check -- pesquisas-paralelas/graficos-animacao
-git -C '/Users/marcio/git/Rising Lands/engenharia-reversa' diff --cached --stat -- pesquisas-paralelas/graficos-animacao
-```
-
-Após a revisão do índice, somente em uma etapa de commit autorizada:
-
-```sh
-git -C '/Users/marcio/git/Rising Lands/engenharia-reversa' commit --only --pathspec-from-file='pesquisas-paralelas/graficos-animacao/publicacao-pathspec.txt' -m 'Valida sprites de parada e movimento do Soldado'
-```
+Após concluir e congelar a pesquisa v2, o usuário autorizou commitar esta
+continuação. Staging e commit usam a lista explícita revisada da v2, mantendo
+as exclusões acima. Não há push. Os documentos dentro da entrega congelada
+registram o momento anterior à autorização e permanecem intactos.
 
 A exclusão de originais é intencional; não usar `git add` na pasta inteira.
 Não há necessidade de repetir emulação, abrir servidor ou ampliar pesquisa para

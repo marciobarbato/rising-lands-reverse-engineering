@@ -82,7 +82,7 @@
 00415692  31c9                   xor      ecx, ecx
 00415694  01f8                   add      eax, edi
 00415696  668b4c242c             mov      cx, word ptr [esp + 0x2c]
-0041569b  98                     cwde     
+0041569b  98                     cwde
 0041569c  e8a6baffff             call     0x411147 ; AffCorpsEngin
 004156a1  31c0                   xor      eax, eax
 004156a3  668b86c2000000         mov      ax, word ptr [esi + 0xc2]
@@ -92,7 +92,7 @@
 004156ba  0f8d15010000           jge      0x4157d5
 004156c0  31c0                   xor      eax, eax
 004156c2  89442420               mov      dword ptr [esp + 0x20], eax
-004156c6  eb1a                   jmp      0x4156e2 ; 
+004156c6  eb1a                   jmp      0x4156e2 ;
 004156c8  81e3ffff0000           and      ebx, 0xffff
 004156ce  0fbfd1                 movsx    edx, cx
 004156d1  0fbfc7                 movsx    eax, di
@@ -168,14 +168,14 @@
 004157c7  89fb                   mov      ebx, edi
 004157c9  89ea                   mov      edx, ebp
 004157cb  e8e0640400             call     0x45bcb0 ; PasteGrisCmp
-004157d0  e909ffffff             jmp      0x4156de ; 
+004157d0  e909ffffff             jmp      0x4156de ;
 004157d5  31c0                   xor      eax, eax
 004157d7  668b86c2000000         mov      ax, word ptr [esi + 0xc2]
 004157de  3d3b010000             cmp      eax, 0x13b
 004157e3  0f8c2e010000           jl       0x415917
 004157e9  31db                   xor      ebx, ebx
 004157eb  895c241c               mov      dword ptr [esp + 0x1c], ebx
-004157ef  eb1a                   jmp      0x41580b ; 
+004157ef  eb1a                   jmp      0x41580b ;
 004157f1  81e3ffff0000           and      ebx, 0xffff
 004157f7  0fbfd7                 movsx    edx, di
 004157fa  0fbfc1                 movsx    eax, cx
@@ -254,14 +254,14 @@
 004158fb  89fb                   mov      ebx, edi
 004158fd  89ea                   mov      edx, ebp
 004158ff  e8ac630400             call     0x45bcb0 ; PasteGrisCmp
-00415904  e9fefeffff             jmp      0x415807 ; 
+00415904  e9fefeffff             jmp      0x415807 ;
 00415909  3c12                   cmp      al, 0x12
-0041590b  e921fdffff             jmp      0x415631 ; 
+0041590b  e921fdffff             jmp      0x415631 ;
 00415910  3c02                   cmp      al, 2
-00415912  e920fdffff             jmp      0x415637 ; 
+00415912  e920fdffff             jmp      0x415637 ;
 00415917  83c448                 add      esp, 0x48
 0041591a  5d                     pop      ebp
 0041591b  5f                     pop      edi
 0041591c  5e                     pop      esi
 0041591d  59                     pop      ecx
-0041591e  c3                     ret      
+0041591e  c3                     ret

@@ -13,4 +13,4 @@
 0044205c  c1e202                 shl      edx, 2
 0044205f  8a0402                 mov      al, byte ptr [edx + eax]
 00442062  5a                     pop      edx
-00442063  c3                     ret      
+00442063  c3                     ret

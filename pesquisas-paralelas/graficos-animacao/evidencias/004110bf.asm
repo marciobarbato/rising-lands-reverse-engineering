@@ -36,7 +36,7 @@
 0041111b  89f2                   mov      edx, esi
 0041111d  89e8                   mov      eax, ebp
 0041111f  e88cab0400             call     0x45bcb0 ; PasteGrisCmp
-00411124  eb1a                   jmp      0x411140 ; 
+00411124  eb1a                   jmp      0x411140 ;
 00411126  8b4424fe               mov      eax, dword ptr [esp - 2]
 0041112a  b901000000             mov      ecx, 1
 0041112f  81e3ffff0000           and      ebx, 0xffff
@@ -47,4 +47,4 @@
 00411143  5d                     pop      ebp
 00411144  5f                     pop      edi
 00411145  5e                     pop      esi
-00411146  c3                     ret      
+00411146  c3                     ret

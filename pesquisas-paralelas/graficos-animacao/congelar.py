@@ -12,14 +12,16 @@ def congelar(identificador):
     exigir_area_editavel()
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,100}',identificador):
         raise ValueError('Identificador inválido')
-    for nome in ('python','x86','visual'):
+    for nome in ('python','x86','visual','x86-trabalhadores','visual-trabalhadores'):
         report=json.loads((RAIZ/'validacao'/f'{nome}.json').read_text())
         if report['resultado']!='PASSOU':raise RuntimeError(f'Validação {nome} não passou')
     destino=RAIZ/'entregas'/identificador
     destino.mkdir(parents=True,exist_ok=False)
     arquivos=['README.md','INTEGRACAO.md','VALIDACAO.md','graficos.py','extrair_evidencias.py',
               'bancada_x86.py','validar_x86.py','validar_python.py','test_graficos.py',
-              'gerar_artefatos.py','demo.template.html','congelar.py','verificar_manifesto.py']
+              'gerar_artefatos.py','demo.template.html','congelar.py','verificar_manifesto.py',
+              'validar_trabalhadores.py','gerar_trabalhadores.py','unidades.template.html',
+              'test_trabalhadores.py','CONTINUIDADE_V2.md','REPRODUCAO_PUBLICACAO.md']
     for nome in arquivos:shutil.copyfile(RAIZ/nome,destino/nome)
     for pasta in ('fontes','snapshot','dependencias','evidencias','artefatos','validacao'):
         shutil.copytree(RAIZ/pasta,destino/pasta,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
@@ -28,6 +30,7 @@ def congelar(identificador):
         if p.is_file():items.append(dict(caminho=p.relative_to(destino).as_posix(),bytes=p.stat().st_size,
                                          sha256=hashlib.sha256(p.read_bytes()).hexdigest()))
     manifesto=dict(identificador=identificador,commit_base=COMMIT,exe_sha256=HASH_EXE,
+                   commit_entrega_anterior='e531dbbdbe650ae2cbdeab03567981d2d8cd15bd',
                    regra='Imutável após publicação; alterações exigem nova revisão.',
                    arquivos=items,quantidade_arquivos=len(items))
     mp=destino/'MANIFESTO.json';mp.write_text(json.dumps(manifesto,ensure_ascii=False,indent=2)+'\n')

@@ -1,0 +1,472 @@
+[
+  {
+    "caminho": "dependencias/capstone/__init__.py",
+    "sha256": "6f8a27fe069aa89a46974e189b5365d56eb5e02c2fd581d2fbfad7fbba51549f",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/__init__.py"
+  },
+  {
+    "caminho": "dependencias/capstone/arm.py",
+    "sha256": "bd8e7a96074481a55c77192f6202f92a52e8c9022aa68c2de5736edf0e04fff0",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/arm.py"
+  },
+  {
+    "caminho": "dependencias/capstone/arm64.py",
+    "sha256": "5078573d8c76dcb05b738bf4d4a004413e66e54eea68dd2e61708006e43d27fe",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/arm64.py"
+  },
+  {
+    "caminho": "dependencias/capstone/arm64_const.py",
+    "sha256": "d12dcb9f315570670f8d5881d021e1455b71eddd8fbafa59bf8178246f120824",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/arm64_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/arm_const.py",
+    "sha256": "ca87ac6edbf031e1eff66531743dc6f2e4ba8ea63d532da401a5d1fa28653192",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/arm_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/bpf.py",
+    "sha256": "a5fea739d724bd3321d53372e3d248786a37e03e5b5f20bcaf126c84f5a48d1d",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/bpf.py"
+  },
+  {
+    "caminho": "dependencias/capstone/bpf_const.py",
+    "sha256": "2cd16a302ecdc7055a13b83e9775f0b75ae7fd0ab0f264960a4407c68b599d95",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/bpf_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/evm.py",
+    "sha256": "dd23482c185b6b61c2d131439962172e50ed1ef1280fa9b99b30d29eeab6cae9",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/evm.py"
+  },
+  {
+    "caminho": "dependencias/capstone/evm_const.py",
+    "sha256": "d998e60703a2590bdfbf5f16f181bdec79ab3d14b7446d5f71138694fbdc2fe5",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/evm_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/arm.h",
+    "sha256": "ded85bdc58afcb91e6eafeec2ab05c115a70166244b451b7c9068055c2d98bbb",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/arm.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/arm64.h",
+    "sha256": "f9423fb58504951a1ff5108f833f868421e9feb7543e433d30cdda051da470e5",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/arm64.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/bpf.h",
+    "sha256": "f42a5ead1ef7d30f03b3caf3658991fb01a8b28b85fc448d38c8bad908a2110f",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/bpf.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/capstone.h",
+    "sha256": "b98e0fbd0f460fe4641ec2c7424bf6b6ad7120178c7d52cb6f8dd175c469bc6d",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/capstone.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/evm.h",
+    "sha256": "a1c3c7b60cc16aa86e2c65c6d8828732c8411f281b7f5d201d3aa7c66992e6ae",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/evm.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/m680x.h",
+    "sha256": "9519114f0d8e135cfbaf002241003379ab10f0032038e4b3037f2322bf98d36c",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/m680x.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/m68k.h",
+    "sha256": "32607173d111275db709a6767afd12174e6f0226987f8c68417d71a4bcf14da3",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/m68k.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/mips.h",
+    "sha256": "4bcc849f09b2c7de2b12432f000ba0a54bfb86b1578da1c0f6ede103053dae80",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/mips.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/mos65xx.h",
+    "sha256": "288d105e5bfff65480637da1284cb83091cfc6eafc19152ee210680909053cdf",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/mos65xx.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/platform.h",
+    "sha256": "17ff832b57b85647368860c16ec31ae789e73aaac182fc5a9d3c2ebe8fbea568",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/platform.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/ppc.h",
+    "sha256": "5dfedbfe4d91ffc5198f102dde90216adc9289440292e3044ec26d1bb00b542d",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/ppc.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/riscv.h",
+    "sha256": "7c684c977f82d4ec2bea4a10c30ae327a037a284978c014d720e47e58d02523a",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/riscv.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/sh.h",
+    "sha256": "b2c6085c476d9f9865fb5e3757ce236bc69c686e1748f3ab46fe0c1957d9b031",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/sh.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/sparc.h",
+    "sha256": "b29a038902ee34715afb8357e1a2231e3f4b1a3dab81ad5bd2f336a18f7bfe4b",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/sparc.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/systemz.h",
+    "sha256": "837b5e06c8ee366227ac43f4b5eb8ff7d79f7abad5e679fb821c6ed1eb00ee43",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/systemz.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/tms320c64x.h",
+    "sha256": "77823afade264ff04c7dc8d0f266448a1112e51035c93cb6abd6fa444d7beced",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/tms320c64x.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/tricore.h",
+    "sha256": "90af749447bc336a271e57093b71c536e69d06a75a0b9f08cb91259e3019a10a",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/tricore.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/wasm.h",
+    "sha256": "7b326adff2dd5e4bcb11f6fbd64835ae50a850cc4068a649225c7517d22c8c9b",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/wasm.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/x86.h",
+    "sha256": "39a5327a5fee29e8a16ea391d0a6813b0446aeb06c64796ebd4e16fe426e619f",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/x86.h"
+  },
+  {
+    "caminho": "dependencias/capstone/include/capstone/xcore.h",
+    "sha256": "c9fe593f51d4645321114b94cfa75307760a40769858334c8db5037efbb3ce44",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/include/capstone/xcore.h"
+  },
+  {
+    "caminho": "dependencias/capstone/lib/libcapstone.dylib",
+    "sha256": "016084c6e70d929249a2abb22f1afda95095294e6cd70f509964ffc54006bf94",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/lib/libcapstone.dylib"
+  },
+  {
+    "caminho": "dependencias/capstone/m680x.py",
+    "sha256": "77aca05b1000466c061d07eb03dce5521e18e573668fb7dd83632ee6f7132de3",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/m680x.py"
+  },
+  {
+    "caminho": "dependencias/capstone/m680x_const.py",
+    "sha256": "8cb28e7303d7e2f875c1212e2931f4372033a4da954750605d160a0612181427",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/m680x_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/m68k.py",
+    "sha256": "92ea89537b96bdecbdbd15ede2a2e08e85be40abfe6f1b722b8ae0c5d80e056c",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/m68k.py"
+  },
+  {
+    "caminho": "dependencias/capstone/m68k_const.py",
+    "sha256": "71f82746c167a083eea4e149adfd3bb5c2eeedf0ac2d20c3a11e5a11ce2d4164",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/m68k_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/mips.py",
+    "sha256": "eddc0b5ec3655cf8531254493fe97b8d1e49f0614df52a36c62e1cf6a39c4b27",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/mips.py"
+  },
+  {
+    "caminho": "dependencias/capstone/mips_const.py",
+    "sha256": "296e731a2509ef32a90e00d38cdec2c8749d1e760a65c9d5488e640024be6275",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/mips_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/mos65xx.py",
+    "sha256": "281ea3b82c93d65897add3246e6c0740813aa6c8d292d007e4d73c61555e2d1c",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/mos65xx.py"
+  },
+  {
+    "caminho": "dependencias/capstone/mos65xx_const.py",
+    "sha256": "b1aa7c27bdcf0365635e26f5260a138a7edb64fd0f64bb7fb62d097474c38699",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/mos65xx_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/ppc.py",
+    "sha256": "ac17126dd565129194743cd7c635746c0443dfd8b7cfeb4ed7ff3094e4036039",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/ppc.py"
+  },
+  {
+    "caminho": "dependencias/capstone/ppc_const.py",
+    "sha256": "d42812aa9ec495588b5498203ec2f85216a06819b091759be340021b6e74357b",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/ppc_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/riscv.py",
+    "sha256": "3e7a76a038479eba99fab0f57b1460efc3cdcd21b97889cc8ba84cb619dc1bc6",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/riscv.py"
+  },
+  {
+    "caminho": "dependencias/capstone/riscv_const.py",
+    "sha256": "1d30a1ff64f10d42485aff13b89ba560d70005a8ea791ca1e10aca8ccfd1259b",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/riscv_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/sh.py",
+    "sha256": "a6b0cb7d965a32f0691810570b6bdda9ee16ed8adcfe33c526aec494f98e80aa",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/sh.py"
+  },
+  {
+    "caminho": "dependencias/capstone/sh_const.py",
+    "sha256": "f892d3aa615a8efa69c0bc9b95cfd1238f68a4d547013530a9005cd4cd0a4a76",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/sh_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/sparc.py",
+    "sha256": "41bc1b0aab480f3c8ceef66a94857c217d096a0a43bed7d5f5de4e135974a6ab",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/sparc.py"
+  },
+  {
+    "caminho": "dependencias/capstone/sparc_const.py",
+    "sha256": "1bea49a96791e7273288a7c316e58fba91ef13672032ae350e1086be1712fcfb",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/sparc_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/systemz.py",
+    "sha256": "1d8cd94be958fb2d45e27893a5157ed5f5db99efddd1abc3371f3c6fef3df0f5",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/systemz.py"
+  },
+  {
+    "caminho": "dependencias/capstone/sysz_const.py",
+    "sha256": "b824830eeb309ff227c3fd16638ebf4a5d4f797a2b84489b8d975c69e830f0f2",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/sysz_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/tms320c64x.py",
+    "sha256": "ab6ff75b5d8d5a135b913b0598580834e058a2e1399974c6a56aff8dd06b81c3",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/tms320c64x.py"
+  },
+  {
+    "caminho": "dependencias/capstone/tms320c64x_const.py",
+    "sha256": "47a6d21bd795bbdb0d7d8dd97cca8cd2c1f486b30ed908f4967cb3be69a35f6f",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/tms320c64x_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/tricore.py",
+    "sha256": "d51c354aed52f9fa551660902dc26e83b4f99aa1022c7aa721f78b983fba477e",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/tricore.py"
+  },
+  {
+    "caminho": "dependencias/capstone/tricore_const.py",
+    "sha256": "2dec869a7c24e4573601b0457d03d8d599ec9ef8d298afeb1510e8f697709260",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/tricore_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/wasm.py",
+    "sha256": "b3fb5fd0fbcda3625c5a30b2d51f3edb0123283d420415d57b93c40794bdb090",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/wasm.py"
+  },
+  {
+    "caminho": "dependencias/capstone/wasm_const.py",
+    "sha256": "4816da07ed540812e481d8b845e97af9bc40f6c28dd18cdf3a0adbdecf39e51c",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/wasm_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/x86.py",
+    "sha256": "7c3a2f434e20df6f69ced3bed07217c996379d647aeb62de9bf5d6e8b195f525",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/x86.py"
+  },
+  {
+    "caminho": "dependencias/capstone/x86_const.py",
+    "sha256": "00dcf65aad410f95a61dacd1dadacfe11b0f19b2afbeb07d19a484d35c692c38",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/x86_const.py"
+  },
+  {
+    "caminho": "dependencias/capstone/xcore.py",
+    "sha256": "27f28ca2c2bae2753a6ebb97d01a17d38405209dae0fe00f2450fc4a87d58719",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/xcore.py"
+  },
+  {
+    "caminho": "dependencias/capstone/xcore_const.py",
+    "sha256": "c84283e286db265f87a8c8d133815e5990a250a8e0e310a4f6afa899fa9c6e2f",
+    "origem": "/Users/marcio/git/Rising Lands/source/python/capstone/xcore_const.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/__init__.py",
+    "sha256": "9ad32123bca674cf205c308fd4d0d2a4db877c9dc2afac4feab7c84c8cf7043b",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/__init__.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/arm64_const.py",
+    "sha256": "92f91a2b0a36cd34deee16db4f8da4ac0c9ae35c3ea1089296e5ef9d170a5be9",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/arm64_const.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/arm_const.py",
+    "sha256": "44fdb7a9f7a9d8c62be07fefaf21e20060813b2a503b6228e378e6bbff7f7b41",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/arm_const.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/include/unicorn/arm.h",
+    "sha256": "de68a0b8f91035baa32cf76fdbd677a16dac433e93c75b084ecd0eeef67be7de",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/include/unicorn/arm.h"
+  },
+  {
+    "caminho": "dependencias/unicorn/include/unicorn/arm64.h",
+    "sha256": "7fc1a00cfe6234ea8859026e4e27cb625e4cecedbc95a06bec9c694137831981",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/include/unicorn/arm64.h"
+  },
+  {
+    "caminho": "dependencias/unicorn/include/unicorn/m68k.h",
+    "sha256": "1511ee296557a3de03f71e25b1378761dc7213bfb2f5b2df7aa2d3ef8722b449",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/include/unicorn/m68k.h"
+  },
+  {
+    "caminho": "dependencias/unicorn/include/unicorn/mips.h",
+    "sha256": "f6a8d3a5056330a7431954cfe19ec1b4927fa0e8f0a9d83ceac8aeeb98a2a030",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/include/unicorn/mips.h"
+  },
+  {
+    "caminho": "dependencias/unicorn/include/unicorn/platform.h",
+    "sha256": "10ec4c482940d039fcbbf2f7e5791d3dc3f991f0a3c5b16e22f378ae1829fdde",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/include/unicorn/platform.h"
+  },
+  {
+    "caminho": "dependencias/unicorn/include/unicorn/ppc.h",
+    "sha256": "2645d9f4448ab0c1ff28d2096262335d53a9479f210567d546cd76de85dbd530",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/include/unicorn/ppc.h"
+  },
+  {
+    "caminho": "dependencias/unicorn/include/unicorn/riscv.h",
+    "sha256": "c2efc0644c236feca3f17e2957a28149498b9f6e06772ced7e11204797fd0327",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/include/unicorn/riscv.h"
+  },
+  {
+    "caminho": "dependencias/unicorn/include/unicorn/s390x.h",
+    "sha256": "43ba5d9eed2495ae129da50a8e3f59902d05dc4601bfad12d2b3f4454953d0b4",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/include/unicorn/s390x.h"
+  },
+  {
+    "caminho": "dependencias/unicorn/include/unicorn/sparc.h",
+    "sha256": "f30427a1738b7bc9c46dd00cee2097ae375f95ad8db9c386f3d61a14574b3624",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/include/unicorn/sparc.h"
+  },
+  {
+    "caminho": "dependencias/unicorn/include/unicorn/tricore.h",
+    "sha256": "053f337160ab3b0cb29bc564e301950fed4c2f93bde50918a3d428b85d0a3f45",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/include/unicorn/tricore.h"
+  },
+  {
+    "caminho": "dependencias/unicorn/include/unicorn/unicorn.h",
+    "sha256": "66fdf8f39df34e507a163eb550549669cec3399c2103b8dc84bc4131f600e55a",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/include/unicorn/unicorn.h"
+  },
+  {
+    "caminho": "dependencias/unicorn/include/unicorn/x86.h",
+    "sha256": "6b01b368f4d1bd0e0ac93a6107cd2edb3b5abfef578f94bf82a00e0ae34ed76f",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/include/unicorn/x86.h"
+  },
+  {
+    "caminho": "dependencias/unicorn/lib/libunicorn.2.dylib",
+    "sha256": "7207c8e3d7a63118fb0bca73e01816797fd51b1d8a39a4cbc7abfd562ee59c85",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/lib/libunicorn.2.dylib"
+  },
+  {
+    "caminho": "dependencias/unicorn/lib/libunicorn.a",
+    "sha256": "37de931fc7acaee2bed4d1cf27a3f1660351cf04ee362a9f3b8eff50ac9c6faf",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/lib/libunicorn.a"
+  },
+  {
+    "caminho": "dependencias/unicorn/m68k_const.py",
+    "sha256": "7503e32454751bf66bdf1fcb19dd847537bcf6a5538e18125d8f53d8d448fed9",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/m68k_const.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/mips_const.py",
+    "sha256": "3a04993d82610ea5f492af2d74fa79d849224a044ac0448281033ee331b58dac",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/mips_const.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/ppc_const.py",
+    "sha256": "154aaa45f947dab3e488e58e74ad99a09c8d772766c561ff92ecb85cdedd61af",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/ppc_const.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/py.typed",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/py.typed"
+  },
+  {
+    "caminho": "dependencias/unicorn/riscv_const.py",
+    "sha256": "278e10baf05cfb7c8675475081ae7f2d2037616c79cb907d51963aa2c5b490e4",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/riscv_const.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/s390x_const.py",
+    "sha256": "54d7026dd70b5bfca1d02e00e7a58d652eaa974b9ea980ba49ed4b80911b9fde",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/s390x_const.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/sparc_const.py",
+    "sha256": "bcdb0491b6e42c647b104ee53d61610504a97831302dd5280fd2123e05572e95",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/sparc_const.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/tricore_const.py",
+    "sha256": "1b6005a147d77a3fc1ab5c81fc878eeac3b9bb0b68d518e4a4226830d1356c4c",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/tricore_const.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/unicorn.py",
+    "sha256": "e823b17649d0610c6f52b665902ac9dc46962785feebcac8465a0d7c477f25b7",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/unicorn.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/unicorn_const.py",
+    "sha256": "556c6a27336dc6dd3e0d49348951bde17e1b0f69166f2217773e6b3a7199f45d",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/unicorn_const.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/unicorn_py2.py",
+    "sha256": "66e2555d679e4f56a0117c2b8de0895a0a138fa3827e3a8a3621255e348d145a",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/unicorn_py2.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/unicorn_py3/__init__.py",
+    "sha256": "ee70d3a7de9ea545406d727436ee835f9d644aeb7428f0e4f1510f9190b28726",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/unicorn_py3/__init__.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/unicorn_py3/arch/__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/unicorn_py3/arch/__init__.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/unicorn_py3/arch/arm.py",
+    "sha256": "c28693f90d8681c091f0ff92caed0a290350a969ea0a38343bb843a26b726711",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/unicorn_py3/arch/arm.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/unicorn_py3/arch/arm64.py",
+    "sha256": "62963378864bae452f7cd2a784ddcd64ab6bdc8a6a69e033d48e8faaab0b2515",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/unicorn_py3/arch/arm64.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/unicorn_py3/arch/intel.py",
+    "sha256": "8a04281923b5f4dd65ce5f122e222bd86df3e8efc7eae99086e0d372fd7a1a75",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/unicorn_py3/arch/intel.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/unicorn_py3/arch/types.py",
+    "sha256": "2e103854e371ef576680073f44ead45b8177a73c450a6125e609b7c54e0bc844",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/unicorn_py3/arch/types.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/unicorn_py3/unicorn.py",
+    "sha256": "62ffe84341f4288e309040e06555b81798031817d32fd19a945e250813f872f0",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/unicorn_py3/unicorn.py"
+  },
+  {
+    "caminho": "dependencias/unicorn/x86_const.py",
+    "sha256": "3b33c55b97503ab25e8ed8bbe576c1cee693f495df6785b04adc1c8ab47a79c4",
+    "origem": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/python/unicorn/x86_const.py"
+  }
+]

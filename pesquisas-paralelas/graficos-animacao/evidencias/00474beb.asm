@@ -314,4 +314,4 @@
 00474f88  5a                     pop      edx
 00474f89  59                     pop      ecx
 00474f8a  5b                     pop      ebx
-00474f8b  c3                     ret      
+00474f8b  c3                     ret

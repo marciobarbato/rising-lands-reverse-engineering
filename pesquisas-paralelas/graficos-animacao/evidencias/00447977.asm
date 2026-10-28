@@ -17,15 +17,15 @@
 00447999  7404                   je       0x44799f
 0044799b  30c0                   xor      al, al
 0044799d  5a                     pop      edx
-0044799e  c3                     ret      
+0044799e  c3                     ret
 0044799f  8a80a4000000           mov      al, byte ptr [eax + 0xa4]
 004479a5  25ff000000             and      eax, 0xff
 004479aa  83f801                 cmp      eax, 1
 004479ad  75ec                   jne      0x44799b
 004479af  b001                   mov      al, 1
 004479b1  5a                     pop      edx
-004479b2  c3                     ret      
-004479b3  90                     nop      
+004479b2  c3                     ret
+004479b3  90                     nop
 004479b4  1b7a44                 sbb      edi, dword ptr [edx + 0x44]
 004479b7  00607a                 add      byte ptr [eax + 0x7a], ah
 004479ba  44                     inc      esp

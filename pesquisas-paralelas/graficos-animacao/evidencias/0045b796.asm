@@ -21,7 +21,7 @@
 0045b7cb  89442414               mov      dword ptr [esp + 0x14], eax
 0045b7cf  66a11ca04900           mov      ax, word ptr [0x49a01c]
 0045b7d5  89442418               mov      dword ptr [esp + 0x18], eax
-0045b7d9  eb20                   jmp      0x45b7fb ; 
+0045b7d9  eb20                   jmp      0x45b7fb ;
 0045b7db  66a118a04900           mov      ax, word ptr [0x49a018]
 0045b7e1  48                     dec      eax
 0045b7e2  31d2                   xor      edx, edx
@@ -106,7 +106,7 @@
 0045b8df  0fbec0                 movsx    eax, al
 0045b8e2  01ca                   add      edx, ecx
 0045b8e4  01c3                   add      ebx, eax
-0045b8e6  ebdc                   jmp      0x45b8c4 ; 
+0045b8e6  ebdc                   jmp      0x45b8c4 ;
 0045b8e8  8b542410               mov      edx, dword ptr [esp + 0x10]
 0045b8ec  31c0                   xor      eax, eax
 0045b8ee  42                     inc      edx
@@ -115,7 +115,7 @@
 0045b8f7  8b15a0174e00           mov      edx, dword ptr [0x4e17a0]
 0045b8fd  29c2                   sub      edx, eax
 0045b8ff  01d3                   add      ebx, edx
-0045b901  eb8b                   jmp      0x45b88e ; 
+0045b901  eb8b                   jmp      0x45b88e ;
 0045b903  31c0                   xor      eax, eax
 0045b905  8b15a0174e00           mov      edx, dword ptr [0x4e17a0]
 0045b90b  6689f8                 mov      ax, di
@@ -176,9 +176,9 @@
 0045b9b6  660fbe442420           movsx    ax, byte ptr [esp + 0x20]
 0045b9bc  01fb                   add      ebx, edi
 0045b9be  01c1                   add      ecx, eax
-0045b9c0  eb86                   jmp      0x45b948 ; 
+0045b9c0  eb86                   jmp      0x45b948 ;
 0045b9c2  30c0                   xor      al, al
-0045b9c4  eb05                   jmp      0x45b9cb ; 
+0045b9c4  eb05                   jmp      0x45b9cb ;
 0045b9c6  41                     inc      ecx
 0045b9c7  43                     inc      ebx
 0045b9c8  46                     inc      esi
@@ -208,8 +208,8 @@
 0045ba0c  01d7                   add      edi, edx
 0045ba0e  8a27                   mov      ah, byte ptr [edi]
 0045ba10  8823                   mov      byte ptr [ebx], ah
-0045ba12  ebb2                   jmp      0x45b9c6 ; 
+0045ba12  ebb2                   jmp      0x45b9c6 ;
 0045ba14  660fbe542420           movsx    dx, byte ptr [esp + 0x20]
 0045ba1a  01c3                   add      ebx, eax
 0045ba1c  01d1                   add      ecx, edx
-0045ba1e  e925ffffff             jmp      0x45b948 ; 
+0045ba1e  e925ffffff             jmp      0x45b948 ;

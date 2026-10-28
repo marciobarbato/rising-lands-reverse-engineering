@@ -124,7 +124,7 @@
 00411317  0fbfd0                 movsx    edx, ax
 0041131a  89f8                   mov      eax, edi
 0041131c  83e82a                 sub      eax, 0x2a
-0041131f  e9330c0000             jmp      0x411f57 ; 
+0041131f  e9330c0000             jmp      0x411f57 ;
 00411324  89e8                   mov      eax, ebp
 00411326  e8d3ec0300             call     0x44fffe ; EnginEstMiroir
 0041132b  84c0                   test     al, al
@@ -179,7 +179,7 @@
 004113d5  6689c3                 mov      bx, ax
 004113d8  8b442460               mov      eax, dword ptr [esp + 0x60]
 004113dc  e8669e0400             call     0x45b247 ; PasteBobCmp
-004113e1  e97ffeffff             jmp      0x411265 ; 
+004113e1  e97ffeffff             jmp      0x411265 ;
 004113e6  89d0                   mov      eax, edx
 004113e8  e8380c0300             call     0x442025 ; EnginGetType
 004113ed  25ff000000             and      eax, 0xff
@@ -193,7 +193,7 @@
 0041140a  01c0                   add      eax, eax
 0041140c  31db                   xor      ebx, ebx
 0041140e  0532120000             add      eax, 0x1232
-00411413  ebbe                   jmp      0x4113d3 ; 
+00411413  ebbe                   jmp      0x4113d3 ;
 00411415  0fb7ee                 movzx    ebp, si
 00411418  89e8                   mov      eax, ebp
 0041141a  e80fec0300             call     0x45002e ; EnginEstTerreur
@@ -222,7 +222,7 @@
 00411474  01c0                   add      eax, eax
 00411476  31db                   xor      ebx, ebx
 00411478  0572110000             add      eax, 0x1172
-0041147d  eb29                   jmp      0x4114a8 ; 
+0041147d  eb29                   jmp      0x4114a8 ;
 0041147f  89e8                   mov      eax, ebp
 00411481  e89f0b0300             call     0x442025 ; EnginGetType
 00411486  25ff000000             and      eax, 0xff
@@ -267,7 +267,7 @@
 0041150d  89ea                   mov      edx, ebp
 0041150f  6689c3                 mov      bx, ax
 00411512  8b442410               mov      eax, dword ptr [esp + 0x10]
-00411516  e927090000             jmp      0x411e42 ; 
+00411516  e927090000             jmp      0x411e42 ;
 0041151b  89d0                   mov      eax, edx
 0041151d  e8030b0300             call     0x442025 ; EnginGetType
 00411522  25ff000000             and      eax, 0xff
@@ -281,7 +281,7 @@
 0041153f  01c0                   add      eax, eax
 00411541  31db                   xor      ebx, ebx
 00411543  0532120000             add      eax, 0x1232
-00411548  ebc3                   jmp      0x41150d ; 
+00411548  ebc3                   jmp      0x41150d ;
 0041154a  89e8                   mov      eax, ebp
 0041154c  e8adea0300             call     0x44fffe ; EnginEstMiroir
 00411551  84c0                   test     al, al
@@ -312,7 +312,7 @@
 004115af  8b542418               mov      edx, dword ptr [esp + 0x18]
 004115b3  6689c3                 mov      bx, ax
 004115b6  8b442420               mov      eax, dword ptr [esp + 0x20]
-004115ba  e92c090000             jmp      0x411eeb ; 
+004115ba  e92c090000             jmp      0x411eeb ;
 004115bf  89e8                   mov      eax, ebp
 004115c1  e85f0a0300             call     0x442025 ; EnginGetType
 004115c6  25ff000000             and      eax, 0xff
@@ -326,7 +326,7 @@
 004115e3  01c0                   add      eax, eax
 004115e5  31db                   xor      ebx, ebx
 004115e7  0532120000             add      eax, 0x1232
-004115ec  ebc1                   jmp      0x4115af ; 
+004115ec  ebc1                   jmp      0x4115af ;
 004115ee  31c0                   xor      eax, eax
 004115f0  6689d8                 mov      ax, bx
 004115f3  89442434               mov      dword ptr [esp + 0x34], eax
@@ -372,7 +372,7 @@
 00411685  8b542438               mov      edx, dword ptr [esp + 0x38]
 00411689  6689c3                 mov      bx, ax
 0041168c  8b44246c               mov      eax, dword ptr [esp + 0x6c]
-00411690  e9ad070000             jmp      0x411e42 ; 
+00411690  e9ad070000             jmp      0x411e42 ;
 00411695  89e8                   mov      eax, ebp
 00411697  e889090300             call     0x442025 ; EnginGetType
 0041169c  25ff000000             and      eax, 0xff
@@ -398,7 +398,7 @@
 004116e1  01c0                   add      eax, eax
 004116e3  31db                   xor      ebx, ebx
 004116e5  0532120000             add      eax, 0x1232
-004116ea  eb99                   jmp      0x411685 ; 
+004116ea  eb99                   jmp      0x411685 ;
 004116ec  31d2                   xor      edx, edx
 004116ee  6689f2                 mov      dx, si
 004116f1  89d0                   mov      eax, edx
@@ -455,7 +455,7 @@
 004117a2  6689c3                 mov      bx, ax
 004117a5  8b44243c               mov      eax, dword ptr [esp + 0x3c]
 004117a9  e8999a0400             call     0x45b247 ; PasteBobCmp
-004117ae  e9d7f9ffff             jmp      0x41118a ; 
+004117ae  e9d7f9ffff             jmp      0x41118a ;
 004117b3  89d0                   mov      eax, edx
 004117b5  e86b080300             call     0x442025 ; EnginGetType
 004117ba  25ff000000             and      eax, 0xff
@@ -469,7 +469,7 @@
 004117d7  01c0                   add      eax, eax
 004117d9  31db                   xor      ebx, ebx
 004117db  0532120000             add      eax, 0x1232
-004117e0  ebbe                   jmp      0x4117a0 ; 
+004117e0  ebbe                   jmp      0x4117a0 ;
 004117e2  0fb7ee                 movzx    ebp, si
 004117e5  89e8                   mov      eax, ebp
 004117e7  e842e80300             call     0x45002e ; EnginEstTerreur
@@ -498,7 +498,7 @@
 00411841  01c0                   add      eax, eax
 00411843  31db                   xor      ebx, ebx
 00411845  0572110000             add      eax, 0x1172
-0041184a  eb29                   jmp      0x411875 ; 
+0041184a  eb29                   jmp      0x411875 ;
 0041184c  89e8                   mov      eax, ebp
 0041184e  e8d2070300             call     0x442025 ; EnginGetType
 00411853  25ff000000             and      eax, 0xff
@@ -543,7 +543,7 @@
 004118da  89ea                   mov      edx, ebp
 004118dc  6689c3                 mov      bx, ax
 004118df  8b442414               mov      eax, dword ptr [esp + 0x14]
-004118e3  e929020000             jmp      0x411b11 ; 
+004118e3  e929020000             jmp      0x411b11 ;
 004118e8  89d0                   mov      eax, edx
 004118ea  e836070300             call     0x442025 ; EnginGetType
 004118ef  25ff000000             and      eax, 0xff
@@ -557,7 +557,7 @@
 0041190c  01c0                   add      eax, eax
 0041190e  31db                   xor      ebx, ebx
 00411910  0532120000             add      eax, 0x1232
-00411915  ebc3                   jmp      0x4118da ; 
+00411915  ebc3                   jmp      0x4118da ;
 00411917  89e8                   mov      eax, ebp
 00411919  e8e0e60300             call     0x44fffe ; EnginEstMiroir
 0041191e  84c0                   test     al, al
@@ -588,7 +588,7 @@
 0041197c  8b542440               mov      edx, dword ptr [esp + 0x40]
 00411980  6689c3                 mov      bx, ax
 00411983  8b442408               mov      eax, dword ptr [esp + 8]
-00411987  e92e020000             jmp      0x411bba ; 
+00411987  e92e020000             jmp      0x411bba ;
 0041198c  89e8                   mov      eax, ebp
 0041198e  e892060300             call     0x442025 ; EnginGetType
 00411993  25ff000000             and      eax, 0xff
@@ -602,7 +602,7 @@
 004119b0  01c0                   add      eax, eax
 004119b2  31db                   xor      ebx, ebx
 004119b4  0532120000             add      eax, 0x1232
-004119b9  ebc1                   jmp      0x41197c ; 
+004119b9  ebc1                   jmp      0x41197c ;
 004119bb  89d0                   mov      eax, edx
 004119bd  e863060300             call     0x442025 ; EnginGetType
 004119c2  25ff000000             and      eax, 0xff
@@ -618,7 +618,7 @@
 004119e4  01c0                   add      eax, eax
 004119e6  31db                   xor      ebx, ebx
 004119e8  0532120000             add      eax, 0x1232
-004119ed  e9e9020000             jmp      0x411cdb ; 
+004119ed  e9e9020000             jmp      0x411cdb ;
 004119f2  0fb7ee                 movzx    ebp, si
 004119f5  89e8                   mov      eax, ebp
 004119f7  e832e60300             call     0x45002e ; EnginEstTerreur
@@ -654,7 +654,7 @@
 00411a65  31db                   xor      ebx, ebx
 00411a67  0572110000             add      eax, 0x1172
 00411a6c  b901000000             mov      ecx, 1
-00411a71  eb32                   jmp      0x411aa5 ; 
+00411a71  eb32                   jmp      0x411aa5 ;
 00411a73  89e8                   mov      eax, ebp
 00411a75  e8ab050300             call     0x442025 ; EnginGetType
 00411a7a  25ff000000             and      eax, 0xff
@@ -703,7 +703,7 @@
 00411b0c  6689c3                 mov      bx, ax
 00411b0f  89e8                   mov      eax, ebp
 00411b11  e89aa10400             call     0x45bcb0 ; PasteGrisCmp
-00411b16  e96ff6ffff             jmp      0x41118a ; 
+00411b16  e96ff6ffff             jmp      0x41118a ;
 00411b1b  89d0                   mov      eax, edx
 00411b1d  e803050300             call     0x442025 ; EnginGetType
 00411b22  25ff000000             and      eax, 0xff
@@ -717,7 +717,7 @@
 00411b3f  01c0                   add      eax, eax
 00411b41  31db                   xor      ebx, ebx
 00411b43  0532120000             add      eax, 0x1232
-00411b48  ebbe                   jmp      0x411b08 ; 
+00411b48  ebbe                   jmp      0x411b08 ;
 00411b4a  89e8                   mov      eax, ebp
 00411b4c  e8ade40300             call     0x44fffe ; EnginEstMiroir
 00411b51  84c0                   test     al, al
@@ -749,7 +749,7 @@
 00411bb3  6689c3                 mov      bx, ax
 00411bb6  8b442470               mov      eax, dword ptr [esp + 0x70]
 00411bba  e8649e0400             call     0x45ba23 ; PasteEclairCmp
-00411bbf  e9c6f5ffff             jmp      0x41118a ; 
+00411bbf  e9c6f5ffff             jmp      0x41118a ;
 00411bc4  89e8                   mov      eax, ebp
 00411bc6  e85a040300             call     0x442025 ; EnginGetType
 00411bcb  25ff000000             and      eax, 0xff
@@ -763,7 +763,7 @@
 00411be8  01c0                   add      eax, eax
 00411bea  31db                   xor      ebx, ebx
 00411bec  0532120000             add      eax, 0x1232
-00411bf1  ebbc                   jmp      0x411baf ; 
+00411bf1  ebbc                   jmp      0x411baf ;
 00411bf3  89e8                   mov      eax, ebp
 00411bf5  e82b040300             call     0x442025 ; EnginGetType
 00411bfa  3c14                   cmp      al, 0x14
@@ -835,7 +835,7 @@
 00411cdf  6689c3                 mov      bx, ax
 00411ce2  89e8                   mov      eax, ebp
 00411ce4  e86ca70400             call     0x45c455 ; PastePlayerCmp
-00411ce9  e99cf4ffff             jmp      0x41118a ; 
+00411ce9  e99cf4ffff             jmp      0x41118a ;
 00411cee  89d0                   mov      eax, edx
 00411cf0  e830030300             call     0x442025 ; EnginGetType
 00411cf5  25ff000000             and      eax, 0xff
@@ -852,7 +852,7 @@
 00411d16  89ea                   mov      edx, ebp
 00411d18  0532120000             add      eax, 0x1232
 00411d1d  b901000000             mov      ecx, 1
-00411d22  e932f5ffff             jmp      0x411259 ; 
+00411d22  e932f5ffff             jmp      0x411259 ;
 00411d27  0fb7ee                 movzx    ebp, si
 00411d2a  89e8                   mov      eax, ebp
 00411d2c  e8fde20300             call     0x45002e ; EnginEstTerreur
@@ -887,7 +887,7 @@
 00411d99  01c0                   add      eax, eax
 00411d9b  31db                   xor      ebx, ebx
 00411d9d  0572110000             add      eax, 0x1172
-00411da2  eb2e                   jmp      0x411dd2 ; 
+00411da2  eb2e                   jmp      0x411dd2 ;
 00411da4  89e8                   mov      eax, ebp
 00411da6  e87a020300             call     0x442025 ; EnginGetType
 00411dab  25ff000000             and      eax, 0xff
@@ -936,7 +936,7 @@
 00411e3d  6689c3                 mov      bx, ax
 00411e40  89e8                   mov      eax, ebp
 00411e42  e8699e0400             call     0x45bcb0 ; PasteGrisCmp
-00411e47  e919f4ffff             jmp      0x411265 ; 
+00411e47  e919f4ffff             jmp      0x411265 ;
 00411e4c  89d0                   mov      eax, edx
 00411e4e  e8d2010300             call     0x442025 ; EnginGetType
 00411e53  25ff000000             and      eax, 0xff
@@ -950,7 +950,7 @@
 00411e70  01c0                   add      eax, eax
 00411e72  31db                   xor      ebx, ebx
 00411e74  0532120000             add      eax, 0x1232
-00411e79  ebbe                   jmp      0x411e39 ; 
+00411e79  ebbe                   jmp      0x411e39 ;
 00411e7b  89e8                   mov      eax, ebp
 00411e7d  e87ce10300             call     0x44fffe ; EnginEstMiroir
 00411e82  84c0                   test     al, al
@@ -982,7 +982,7 @@
 00411ee4  6689c3                 mov      bx, ax
 00411ee7  8b442474               mov      eax, dword ptr [esp + 0x74]
 00411eeb  e8339b0400             call     0x45ba23 ; PasteEclairCmp
-00411ef0  e970f3ffff             jmp      0x411265 ; 
+00411ef0  e970f3ffff             jmp      0x411265 ;
 00411ef5  89e8                   mov      eax, ebp
 00411ef7  e829010300             call     0x442025 ; EnginGetType
 00411efc  25ff000000             and      eax, 0xff
@@ -996,10 +996,10 @@
 00411f19  01c0                   add      eax, eax
 00411f1b  31db                   xor      ebx, ebx
 00411f1d  0532120000             add      eax, 0x1232
-00411f22  ebbc                   jmp      0x411ee0 ; 
+00411f22  ebbc                   jmp      0x411ee0 ;
 00411f24  84c0                   test     al, al
 00411f26  0f84f8f3ffff           je       0x411324
-00411f2c  e959f2ffff             jmp      0x41118a ; 
+00411f2c  e959f2ffff             jmp      0x41118a ;
 00411f31  66a17c8f5000           mov      ax, word ptr [0x508f7c]
 00411f37  30e4                   xor      ah, ah
 00411f39  243f                   and      al, 0x3f
@@ -1012,7 +1012,7 @@
 00411f52  89f8                   mov      eax, edi
 00411f54  83e80e                 sub      eax, 0xe
 00411f57  b901000000             mov      ecx, 1
-00411f5c  98                     cwde     
+00411f5c  98                     cwde
 00411f5d  e8c19a0400             call     0x45ba23 ; PasteEclairCmp
 00411f62  31d2                   xor      edx, edx
 00411f64  6689f2                 mov      dx, si
@@ -1108,4 +1108,4 @@
 00412099  5d                     pop      ebp
 0041209a  5f                     pop      edi
 0041209b  5e                     pop      esi
-0041209c  c3                     ret      
+0041209c  c3                     ret

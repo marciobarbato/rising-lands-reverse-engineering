@@ -95,7 +95,12 @@ class Bancada:
         return {nome:self.reg(nome) for nome in ('EAX','EBX','ECX','EDX','ESI','EDI','EBP','ESP','EIP')}
 
     def inicializar_soldado(self):
-        self.escrever(UNIDADE,bytes(276))
+        return self.inicializar_tipo(0)
+
+    def inicializar_tipo(self, tipo):
+        unidade = bytearray(276)
+        unidade[1] = tipo
+        self.escrever(UNIDADE, unidade)
         self.executar(0x457350,[(0x457350,0x457b87)],{'EAX':0})
         return self.ler(UNIDADE,276)
 
@@ -126,9 +131,13 @@ class Bancada:
         self.executar(0x418590,[(0x418590,0x418599)],{'EAX':banco})
         return dict(banco=banco,tabela=tabela,quantidade=quantidade,aberturas=aberturas)
 
-    def capturar_desenho(self,direcao,fase,estado=2,dx=0,dy=0,x=128,y=128,ate_blitter=False):
-        unidade=bytearray(self.inicializar_soldado())
+    def capturar_desenho(self,direcao,fase,estado=2,dx=0,dy=0,x=128,y=128,ate_blitter=False,
+                        *,tipo=0,bolsa_u16=0,resto_bolsa=b'\0'*6):
+        unidade=bytearray(self.inicializar_tipo(tipo))
         unidade[2]=estado;unidade[0x91]=direcao;unidade[0xa4]=fase
+        struct.pack_into('<H',unidade,0xa,bolsa_u16)
+        if len(resto_bolsa)!=6: raise ValueError('Seis bytes auxiliares da bolsa esperados')
+        unidade[0xc:0x12]=resto_bolsa
         unidade[0x86]=dx&255;unidade[0x87]=dy&255
         self.escrever(UNIDADE,unidade)
         sombras=[]
@@ -136,6 +145,7 @@ class Bancada:
             sombras.append(dict(id_motor=b.reg('EBX')&65535,x=b.reg('EAX'),y=b.reg('EDX')))
             b.retornar_stub()
         intervalos=[(0x41591f,0x415a56),(0x412390,0x41374c),(0x410fcc,0x4110bf)]
+        intervalos.append((0x4470b9,0x4470c5))  # BagVide original, sem stub
         parada=0x411147
         if ate_blitter:
             intervalos += [(0x411147,0x41209d),(0x442025,0x442065),(0x44fffe,0x450054),

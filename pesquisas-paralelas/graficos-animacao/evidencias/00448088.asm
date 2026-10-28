@@ -30,7 +30,7 @@
 004480c7  5a                     pop      edx
 004480c8  59                     pop      ecx
 004480c9  5b                     pop      ebx
-004480ca  c3                     ret      
+004480ca  c3                     ret
 004480cb  8aa3a9000000           mov      ah, byte ptr [ebx + 0xa9]
 004480d1  fec4                   inc      ah
 004480d3  8a93a7000000           mov      dl, byte ptr [ebx + 0xa7]
@@ -50,13 +50,13 @@
 00448108  5a                     pop      edx
 00448109  59                     pop      ecx
 0044810a  5b                     pop      ebx
-0044810b  c3                     ret      
+0044810b  c3                     ret
 0044810c  89d0                   mov      eax, edx
 0044810e  e81cfaffff             call     0x447b2f ; AnimBallonStatic
 00448113  5a                     pop      edx
 00448114  59                     pop      ecx
 00448115  5b                     pop      ebx
-00448116  c3                     ret      
+00448116  c3                     ret
 00448117  3c0e                   cmp      al, 0xe
 00448119  72b0                   jb       0x4480cb
 0044811b  3c0f                   cmp      al, 0xf
@@ -66,6 +66,6 @@
 00448123  5a                     pop      edx
 00448124  59                     pop      ecx
 00448125  5b                     pop      ebx
-00448126  c3                     ret      
+00448126  c3                     ret
 00448127  3c03                   cmp      al, 3
-00448129  eba0                   jmp      0x4480cb ; 
+00448129  eba0                   jmp      0x4480cb ;

@@ -1,14 +1,23 @@
-# Gráficos e animação — primeiro marco
+# Gráficos e animação — unidades e variantes de bolsa
 
-**Soldado, tipo 0: parada e movimento mapeados e comparados com o x86 original.**
+**Soldado, Fazendeiro, Mecânico, Construtor e Colono: parada e movimento
+mapeados e comparados com o x86 original.** São 1.152 associações e 512 quadros
+distintos, incluindo variantes de bolsa vazia/não vazia nos tipos 5/6/7.
 O adaptador e a demonstração funcionam sem Unicorn e sem executar o EXE.
 
-Revisão congelada: `entregas/2026-10-27-soldado-v1/`. A pasta da revisão contém
+Revisão atual: `entregas/2026-10-28-unidades-v2/`. A revisão anterior,
+`entregas/2026-10-27-soldado-v1/`, permanece intacta. Cada pasta de revisão contém
 seu próprio `MANIFESTO.json` e `SHA256SUMS`. Não editar uma revisão publicada.
 
 ## Abrir e consultar
 
-- [Demonstração independente](artefatos/demo.html): HTML autônomo, sprites incorporados,
+- [Demonstração das cinco unidades](artefatos/demo-unidades.html): HTML autônomo,
+  seletor de tipo, campo de bolsa u16, direção, fase e ancoragem.
+- [Todas as paradas e variantes](artefatos/paradas-unidades.png) e atlas individuais
+  ligados pela demonstração, com índices visíveis.
+- [Tabela integral CSV](artefatos/associacoes-unidades.csv) e
+  [JSON](artefatos/associacoes-unidades.json): 1.152 linhas.
+- [Demonstração original do Soldado](artefatos/demo.html): HTML autônomo, sprites incorporados,
   controles de direção, fase, passo a passo, ampliação e ancoragem. Abrir no navegador.
 - [Atlas dos 64 quadros](artefatos/atlas-soldado.png) e [oito paradas](artefatos/parada-soldado.png).
 - [Associações CSV](artefatos/associacoes.csv) e [JSON](artefatos/associacoes.json): 144 linhas,
@@ -18,7 +27,8 @@ seu próprio `MANIFESTO.json` e `SHA256SUMS`. Não editar uma revisão publicada
 
 ```sh
 python3 -B graficos.py --tipo 0 --estado parado --direcao 1
-python3 -B -m unittest -v test_graficos
+python3 -B graficos.py --tipo 7 --estado parado --direcao 9 --bolsa-u16 256
+python3 -B -m unittest -v test_graficos test_trabalhadores
 ```
 
 Os comandos acima são somente leitura, inclusive dentro da entrega congelada.
@@ -32,6 +42,10 @@ Snapshot: **`1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e`**. Foram copiados 942 arq
 commitados de leitores, testes, relatórios, documentação e evidências, excluindo
 as pesquisas paralelas. `snapshot/manifesto.json` registra cada caminho e SHA-256.
 Nenhuma importação usa os módulos do checkout em edição por outros chats.
+O desenvolvimento v2 parte do commit próprio
+`e531dbbdbe650ae2cbdeab03567981d2d8cd15bd`; os arquivos predecessores e hashes
+estão em `evidencias/proveniencia-v2.json`. Fontes/snapshot/dependências anteriores
+foram reutilizados sem mudança. Consulte [Continuidade v2](CONTINUIDADE_V2.md).
 
 Fontes do jogo: `/Users/marcio/git/Rising Lands/source/cd/`. Cópias conferidas
 estão em `fontes/cd/`; caminhos originais, cópias e hashes estão em
@@ -140,6 +154,45 @@ A posição na tela ainda recebe a origem da superfície/viewport do integrador.
 Todos os quadros usam essa âncora, mesmo tendo dimensões diferentes (máximo
 84 × 67 no conjunto). Não recortar margens e recentralizar cada PNG.
 
+## Fazendeiro, Mecânico, Construtor e Colono — revisão v2
+
+A tabela de identidade do EXE tem registros de 50 bytes a partir de `0x4965ae`;
+a chave INI começa em +12. Os cinco tipos desta entrega foram ligados aos nomes
+brasileiros no INI, sem identificar unidades somente pela aparência.
+
+Todos usam `ID = base + 8 × floor((direção−1)/2) + fase`. Cada conjunto abaixo
+tem 64 quadros: oito fases em oito direções visuais. Os índices locais são
+base 0, em **TROOPS.CMP**; índice global = local + 1345; ID = global + 1.
+
+| Tipo e nome | Variante | Base ID | Intervalo local | Fase parada | Âncora x,y |
+|---|---|---:|---|---:|---|
+| 0 Soldado | base | 2082 | 736–799 | 2 | 40,22 |
+| 5 Fazendeiro | bolsa vazia | 1602 | 256–319 | 5 | 11,11 |
+| 5 Fazendeiro | bolsa não vazia | 1698 | 352–415 | 5 | 11,11 |
+| 6 Mecânico | bolsa vazia | 2978 | 1632–1695 | 2 | 16,20 |
+| 6 Mecânico | bolsa não vazia | 3042 | 1696–1759 | 2 | 16,20 |
+| 7 Construtor | bolsa vazia | 1346 | 0–63 | 3 | 26,26 |
+| 7 Construtor | bolsa não vazia | 1474 | 128–191 | 3 | 26,26 |
+| 9 Colono | base | 1826 | 480–543 | 5 | 19,14 |
+
+Os ramos `0x412b7b`, `0x412ae5` e `0x4129b6` chamam `BagVide` em `0x4470b9`.
+Essa rotina lê somente o **u16 em +0x0a** da instância e retorna se ele é zero.
+O valor 256 escolhe a variante não vazia, mesmo tendo o primeiro byte zero.
+Os seis bytes seguintes não participam desse teste. A API exige `bolsa_u16`
+nos três tipos; ausência gera erro, sem presumir bolsa vazia. Esta pesquisa
+não atribui recursos, quantidades ou regras de coleta ao campo.
+
+O ramo `0x412c1c` do Colono não consulta a bolsa. As quatro inicializações
+fixam oito fases, período 2 e oscilação `+0x99=0`. As paradas diferem conforme
+a tabela acima e **preservam o contador**. Essa conclusão foi comparada contra
+o código original, assim como as 1.008 associações novas, os deslocamentos
+assinados e as 448 imagens básicas resultantes. O Soldado conserva suas 144
+associações do marco anterior.
+
+Visualmente, os conjuntos não vazios mostram volumes carregados pelos três
+trabalhadores. Essa descrição visual não foi usada para deduzir os IDs ou
+identificar o conteúdo econômico desses volumes.
+
 ## Composição e relação ETA
 
 O leitor conserva uma máscara de opacidade: comandos positivos pulam destino;
@@ -163,10 +216,17 @@ A recomposição é `raw[:0x8c] + raw[0x28c:]`; não se apresenta isso como RAM
 completamente pós-processada. Construções e objetos ETA não foram associados
 a sprites nesta revisão.
 
+Na v2, `exemplos-eta-unidades.json` acrescenta os dois Fazendeiros (índices 13/14,
+fase 5, bolsa zero → ID 1607) e o Construtor (índice 12, fase 3, bolsa zero →
+ID 1349), todos em estado 7 e direção 1 no disco. Junto aos três Soldados,
+são seis registros compatíveis com o ramo validado. Oito Colonos têm estado 14:
+aparecem com `associacao: null`, sem transpor o resultado dos estados 2/7.
+
 ## Confiança, lacunas e próximo contrato
 
 **Confirmado por código e comparação x86:** concatenação, convenções de índices,
-144 associações, parâmetros 8/2, fase de parada, deltas de direção, âncora,
+1.152 associações, parâmetros 8/2, fases de parada, predicado da bolsa,
+deltas de direção, âncoras,
 deslocamentos, transparência e blitter básico com recorte.
 
 **Confirmado apenas por leitura estática ou por arquivo:** encadeamento superior
@@ -179,13 +239,14 @@ associação usa essa inferência como validação. **Hipóteses não expostas n
 transpor fórmulas para outros tipos, chamar fase 0 de parada, converter o período
 em FPS, reaplicar a imagem de sombra como um PNG preto sem sua tabela.
 
-Ainda faltam: outros 25 tipos, construções, árvores/pedras, camadas de objetos e
+Ainda faltam: outros 21 tipos, construções, árvores/pedras, camadas de objetos e
 variantes ETA, ordenação completa de desenho, efeitos, transformação de sombra,
 paletas por jogador, HUD, minimapa e seleção. Ataques permanecem com a frente de
 combate; esta pasta poderá apenas catalogar suas imagens futuramente.
 
 Contrato necessário ao consumidor: fornecer **tipo, orientação atual 1..16,
-fase, contador, célula e deslocamentos i8**; definir quando já está na parada
+fase, contador, célula e deslocamentos i8**; acrescentar **bolsa_u16** nos tipos
+5/6/7; definir quando já está na parada
 estabelecida; fornecer origem da superfície. Tipos/estados sem associação dão
 erro explícito. O relógio global continua sendo responsabilidade do simulador.
 Não existe bloqueio externo para consumir o primeiro marco.
@@ -195,7 +256,9 @@ Não existe bloqueio externo para consumir o primeiro marco.
 ```sh
 python3 -B extrair_evidencias.py
 python3 -B gerar_artefatos.py
+python3 -B gerar_trabalhadores.py
 python3 -B validar_x86.py       # opcional: precisa de Unicorn
+python3 -B validar_trabalhadores.py  # comparações adicionais, precisa de Unicorn
 python3 -B validar_python.py
 python3 -B congelar.py NOVO_IDENTIFICADOR
 ```

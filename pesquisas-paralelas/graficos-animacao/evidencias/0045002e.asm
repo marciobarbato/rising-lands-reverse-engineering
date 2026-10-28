@@ -12,4 +12,4 @@
 00450040  8b15a0194e00           mov      edx, dword ptr [0x4e19a0]
 00450046  8a8482dc000000         mov      al, byte ptr [edx + eax*4 + 0xdc]
 0045004d  ba01000000             mov      edx, 1
-00450052  ebce                   jmp      0x450022 ; 
+00450052  ebce                   jmp      0x450022 ;

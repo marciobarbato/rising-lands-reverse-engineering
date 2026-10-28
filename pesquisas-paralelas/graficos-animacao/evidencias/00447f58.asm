@@ -25,7 +25,7 @@
 00447f94  5a                     pop      edx
 00447f95  59                     pop      ecx
 00447f96  5b                     pop      ebx
-00447f97  c3                     ret      
+00447f97  c3                     ret
 00447f98  8ab3a9000000           mov      dh, byte ptr [ebx + 0xa9]
 00447f9e  fec6                   inc      dh
 00447fa0  8a8ba7000000           mov      cl, byte ptr [ebx + 0xa7]
@@ -44,13 +44,13 @@
 00447fd6  5a                     pop      edx
 00447fd7  59                     pop      ecx
 00447fd8  5b                     pop      ebx
-00447fd9  c3                     ret      
+00447fd9  c3                     ret
 00447fda  8aa3a9000000           mov      ah, byte ptr [ebx + 0xa9]
 00447fe0  fec4                   inc      ah
 00447fe2  8a93a7000000           mov      dl, byte ptr [ebx + 0xa7]
 00447fe8  88a3a9000000           mov      byte ptr [ebx + 0xa9], ah
 00447fee  38d4                   cmp      ah, dl
-00447ff0  ebbc                   jmp      0x447fae ; 
+00447ff0  ebbc                   jmp      0x447fae ;
 00447ff2  8a8389000000           mov      al, byte ptr [ebx + 0x89]
 00447ff8  3c04                   cmp      al, 4
 00447ffa  0f8784000000           ja       0x448084
@@ -61,7 +61,7 @@
 00448012  fec2                   inc      dl
 00448014  8893a9000000           mov      byte ptr [ebx + 0xa9], dl
 0044801a  3a93a7000000           cmp      dl, byte ptr [ebx + 0xa7]
-00448020  eb8c                   jmp      0x447fae ; 
+00448020  eb8c                   jmp      0x447fae ;
 00448022  8a8389000000           mov      al, byte ptr [ebx + 0x89]
 00448028  3c03                   cmp      al, 3
 0044802a  7758                   ja       0x448084
@@ -79,7 +79,7 @@
 00448058  31c9                   xor      ecx, ecx
 0044805a  42                     inc      edx
 0044805b  8a8ba5000000           mov      cl, byte ptr [ebx + 0xa5]
-00448061  e95cffffff             jmp      0x447fc2 ; 
+00448061  e95cffffff             jmp      0x447fc2 ;
 00448066  8a8389000000           mov      al, byte ptr [ebx + 0x89]
 0044806c  3c02                   cmp      al, 2
 0044806e  7214                   jb       0x448084
@@ -92,10 +92,10 @@
 0044807c  5a                     pop      edx
 0044807d  59                     pop      ecx
 0044807e  5b                     pop      ebx
-0044807f  c3                     ret      
+0044807f  c3                     ret
 00448080  3c05                   cmp      al, 5
 00448082  749e                   je       0x448022
 00448084  5a                     pop      edx
 00448085  59                     pop      ecx
 00448086  5b                     pop      ebx
-00448087  c3                     ret      
+00448087  c3                     ret

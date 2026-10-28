@@ -1,4 +1,66 @@
-# Validação do primeiro marco
+# Validação de gráficos e animação
+
+## Revisão v2 — unidades e variantes de bolsa
+
+**32 testes Python passaram** em 2,211 s: os 20 de regressão do Soldado mais
+12 para as novas unidades. `validacao/python.json` registra essa execução;
+não importa Unicorn nem executa x86. Foram conferidos os hashes das fontes,
+snapshot, bytes do assembly, tabela de identidade e resultados registrados.
+
+`validacao/x86-trabalhadores.json` registra **19.246 execuções delimitadas**,
+**4.561.793 instruções**, resultado **PASSOU**, tempo observado 4,479 s.
+O tempo é da bancada, sem relação com a frequência original de animação.
+
+| Comparação nova | Cobertura | Limite |
+|---|---|---|
+| Inicialização | Tipos 5/6/7/9: quantidade 8, período 2, oscilação +0x99 zero | Registros sintéticos; original sem stub |
+| Parada | 32 entradas; fases resultantes 5/2/3/5, contador 77 preservado | `EnginEnArret` original |
+| Desenho | 1.008 capturas: tipos, variantes, 16 direções, oito fases e parada | Até `PasteBobCmp`; sombra interceptada |
+| Predicado da bolsa | 152 casos, zero, bits isolados, 255/256/65535 e seis bytes seguintes zero/255 | `BagVide` original; nenhuma regra econômica modelada |
+| Ancoragem | 28 pares por tipo, incluindo −128/+127 | Deslocamentos i8, jogador 0 |
+| Contador | 16.384 comparações: 4 tipos × 8 fases × 256 contadores × 2 caminhos | Prefixo do avanço antes do giro; período inicial 2 |
+| Composição | 448 sprites originais comparados byte a byte com Python | Cópia básica, fundo indexado sintético; sem sombra |
+
+Comando: `python3 -B -u validar_trabalhadores.py`. A bancada confere o SHA-256
+do EXE antes da emulação, autoriza intervalos explícitos e exige parada; mantém
+o limite de 1.000.000 de instruções e 2.000.000 µs por chamada. Foi executada em
+processo próprio após aprovação do fluxo da ferramenta, fora do sandbox devido
+à incompatibilidade Unicorn já observada no marco anterior. Não se repetiu a
+tentativa SIGILL nem se abriu o jogo/Ghidra. `BagVide` não foi substituída.
+Somente IO/alocação do agregador e a captura de sombra usam os stubs declarados.
+
+O novo teste Python recompõe os buffers dos 448 sprites e os compara aos hashes
+da execução original. A tabela integral tem 1.152 associações e 512 imagens:
+as 144/64 do Soldado mais as 1.008/448 novas. Os resultados x86 do Soldado em
+`x86.json` foram preservados e usados para regressão, sem nova emulação v1.
+
+No ETA, seis registros têm estado 7 compatível com os caminhos estudados;
+oito Colonos em estado 14 permanecem **sem associação**. O teste exige `null`
+nesses casos, em vez de aceitar um quadro visualmente plausível.
+
+A demonstração `demo-unidades.html` foi inspecionada no navegador: Fazendeiro
+vazio parado ID 1607; bolsa 256, direção 9 e duas chamadas → fase 6/ID 1736;
+Construtor parado direção 16 → fase 3/ID 1533; volta 7→0 → ID 1530; Colono →
+fase 5/ID 1887 com bolsa desabilitada; Mecânico → fase 2/ID 3100; rejeição de
+65536. Captura final: Construtor, bolsa 256, direção 9, parado, **ID 1509**.
+O relatório `visual-trabalhadores.json` e a captura acompanham a revisão.
+
+O servidor temporário serviu somente `artefatos/` em 127.0.0.1:8887, após
+aprovação da ferramenta, e foi encerrado por Ctrl-C na própria sessão 75359.
+A aba foi fechada. Nenhum processo alheio foi manipulado. A página é autônoma,
+sem rede ou servidor necessários para o uso normal.
+
+As novas saídas ASM removem espaços finais de formatação; o novo CSV usa LF.
+Isso não alterou bytes extraídos do EXE ou arquivos da entrega v1, que continua
+com os CRLF/espaços originais registrados. A evidência contém agora 42 trechos,
+incluindo `BagVide`; o registro da tabela de identidade não valida os gráficos
+dos outros 21 tipos.
+
+## Histórico preservado — primeiro marco do Soldado
+
+O restante descreve a validação original v1, conservada na pasta da entrega
+anterior. Na área atual, `python.json` registra os 32 testes da v2; `x86.json`
+e `visual.json` continuam sendo os resultados históricos v1.
 
 Snapshot `1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e`. Executável brasileiro
 SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.

@@ -63,24 +63,24 @@
 00448664  c1fa1f                 sar      edx, 0x1f
 00448667  f7f9                   idiv     ecx
 00448669  42                     inc      edx
-0044866a  eb1c                   jmp      0x448688 ; 
+0044866a  eb1c                   jmp      0x448688 ;
 0044866c  b001                   mov      al, 1
-0044866e  e95effffff             jmp      0x4485d1 ; 
+0044866e  e95effffff             jmp      0x4485d1 ;
 00448673  31d2                   xor      edx, edx
 00448675  8a9391000000           mov      dl, byte ptr [ebx + 0x91]
 0044867b  83fa01                 cmp      edx, 1
 0044867e  7403                   je       0x448683
 00448680  4a                     dec      edx
-00448681  eb05                   jmp      0x448688 ; 
+00448681  eb05                   jmp      0x448688 ;
 00448683  ba10000000             mov      edx, 0x10
 00448688  889391000000           mov      byte ptr [ebx + 0x91], dl
 0044868e  c6839200000000         mov      byte ptr [ebx + 0x92], 0
 00448695  5a                     pop      edx
 00448696  59                     pop      ecx
 00448697  5b                     pop      ebx
-00448698  c3                     ret      
+00448698  c3                     ret
 00448699  8d4000                 lea      eax, [eax]
-0044869c  f8                     clc      
+0044869c  f8                     clc
 0044869d  8a4400f8               mov      al, byte ptr [eax + eax - 8]
 004486a1  8a4400f8               mov      al, byte ptr [eax + eax - 8]
 004486a5  8a4400f8               mov      al, byte ptr [eax + eax - 8]

@@ -62,7 +62,7 @@
 00414b53  bb1e2a0000             mov      ebx, 0x2a1e
 00414b58  0fbfc7                 movsx    eax, di
 00414b5b  c1fa10                 sar      edx, 0x10
-00414b5e  eb1c                   jmp      0x414b7c ; 
+00414b5e  eb1c                   jmp      0x414b7c ;
 00414b60  8b442418               mov      eax, dword ptr [esp + 0x18]
 00414b64  83e820                 sub      eax, 0x20
 00414b67  0fbfd0                 movsx    edx, ax
@@ -70,7 +70,7 @@
 00414b6e  b901000000             mov      ecx, 1
 00414b73  83e820                 sub      eax, 0x20
 00414b76  bb1f2a0000             mov      ebx, 0x2a1f
-00414b7b  98                     cwde     
+00414b7b  98                     cwde
 00414b7c  e8c6660400             call     0x45b247 ; PasteBobCmp
 00414b81  31c0                   xor      eax, eax
 00414b83  8a8682000000           mov      al, byte ptr [esi + 0x82]
@@ -131,7 +131,7 @@
 00414c4d  29c8                   sub      eax, ecx
 00414c4f  c1e005                 shl      eax, 5
 00414c52  b901000000             mov      ecx, 1
-00414c57  98                     cwde     
+00414c57  98                     cwde
 00414c58  e8ea650400             call     0x45b247 ; PasteBobCmp
 00414c5d  8a8682000000           mov      al, byte ptr [esi + 0x82]
 00414c63  3c01                   cmp      al, 1
@@ -182,7 +182,7 @@
 00414d14  29c8                   sub      eax, ecx
 00414d16  c1e005                 shl      eax, 5
 00414d19  b901000000             mov      ecx, 1
-00414d1e  98                     cwde     
+00414d1e  98                     cwde
 00414d1f  e823650400             call     0x45b247 ; PasteBobCmp
 00414d24  8b5c2434               mov      ebx, dword ptr [esp + 0x34]
 00414d28  89fa                   mov      edx, edi
@@ -196,7 +196,7 @@
 00414d43  0f8657040000           jbe      0x4151a0
 00414d49  3c0d                   cmp      al, 0xd
 00414d4b  0f8409020000           je       0x414f5a
-00414d51  e973050000             jmp      0x4152c9 ; 
+00414d51  e973050000             jmp      0x4152c9 ;
 00414d56  31c0                   xor      eax, eax
 00414d58  668b8680000000         mov      ax, word ptr [esi + 0x80]
 00414d5f  31db                   xor      ebx, ebx
@@ -213,10 +213,10 @@
 00414d7f  c1fa1f                 sar      edx, 0x1f
 00414d82  f7f9                   idiv     ecx
 00414d84  8944242c               mov      dword ptr [esp + 0x2c], eax
-00414d88  e9e8feffff             jmp      0x414c75 ; 
+00414d88  e9e8feffff             jmp      0x414c75 ;
 00414d8d  31db                   xor      ebx, ebx
 00414d8f  668b9e80000000         mov      bx, word ptr [esi + 0x80]
-00414d96  ebd1                   jmp      0x414d69 ; 
+00414d96  ebd1                   jmp      0x414d69 ;
 00414d98  31db                   xor      ebx, ebx
 00414d9a  8a9e91000000           mov      bl, byte ptr [esi + 0x91]
 00414da0  89da                   mov      edx, ebx
@@ -252,7 +252,7 @@
 00414df6  8b442410               mov      eax, dword ptr [esp + 0x10]
 00414dfa  01f8                   add      eax, edi
 00414dfc  b901000000             mov      ecx, 1
-00414e01  98                     cwde     
+00414e01  98                     cwde
 00414e02  e88f690400             call     0x45b796 ; PasteOmbreCmp
 00414e07  31db                   xor      ebx, ebx
 00414e09  8a9e91000000           mov      bl, byte ptr [esi + 0x91]
@@ -295,7 +295,7 @@
 00414e7c  668b4c2430             mov      cx, word ptr [esp + 0x30]
 00414e81  c1f810                 sar      eax, 0x10
 00414e84  e8bec2ffff             call     0x411147 ; AffCorpsEngin
-00414e89  e9ee000000             jmp      0x414f7c ; 
+00414e89  e9ee000000             jmp      0x414f7c ;
 00414e8e  31db                   xor      ebx, ebx
 00414e90  8a9e91000000           mov      bl, byte ptr [esi + 0x91]
 00414e96  89da                   mov      edx, ebx
@@ -331,7 +331,7 @@
 00414eee  6689cb                 mov      bx, cx
 00414ef1  01f8                   add      eax, edi
 00414ef3  b901000000             mov      ecx, 1
-00414ef8  98                     cwde     
+00414ef8  98                     cwde
 00414ef9  e898680400             call     0x45b796 ; PasteOmbreCmp
 00414efe  31db                   xor      ebx, ebx
 00414f00  8a9e91000000           mov      bl, byte ptr [esi + 0x91]
@@ -362,21 +362,21 @@
 00414f4b  8d042a                 lea      eax, [edx + ebp]
 00414f4e  31db                   xor      ebx, ebx
 00414f50  05f2100000             add      eax, 0x10f2
-00414f55  e901ffffff             jmp      0x414e5b ; 
+00414f55  e901ffffff             jmp      0x414e5b ;
 00414f5a  8a8689000000           mov      al, byte ptr [esi + 0x89]
 00414f60  3c01                   cmp      al, 1
 00414f62  7210                   jb       0x414f74
 00414f64  0f8624ffffff           jbe      0x414e8e
 00414f6a  3c04                   cmp      al, 4
 00414f6c  0f8626feffff           jbe      0x414d98
-00414f72  eb08                   jmp      0x414f7c ; 
+00414f72  eb08                   jmp      0x414f7c ;
 00414f74  84c0                   test     al, al
 00414f76  0f841cfeffff           je       0x414d98
 00414f7c  8b442434               mov      eax, dword ptr [esp + 0x34]
 00414f80  83e809                 sub      eax, 9
 00414f83  66897c2424             mov      word ptr [esp + 0x24], di
 00414f88  6689442420             mov      word ptr [esp + 0x20], ax
-00414f8d  e937030000             jmp      0x4152c9 ; 
+00414f8d  e937030000             jmp      0x4152c9 ;
 00414f92  8d460a                 lea      eax, [esi + 0xa]
 00414f95  8b5c2434               mov      ebx, dword ptr [esp + 0x34]
 00414f99  e81b210300             call     0x4470b9 ; BagVide
@@ -388,7 +388,7 @@
 00414fac  743a                   je       0x414fe8
 00414fae  b901000000             mov      ecx, 1
 00414fb3  0fbfd3                 movsx    edx, bx
-00414fb6  98                     cwde     
+00414fb6  98                     cwde
 00414fb7  bb202a0000             mov      ebx, 0x2a20
 00414fbc  e8d5670400             call     0x45b796 ; PasteOmbreCmp
 00414fc1  31d2                   xor      edx, edx
@@ -403,10 +403,10 @@
 00414fd8  31c0                   xor      eax, eax
 00414fda  81c23a060000           add      edx, 0x63a
 00414fe0  8a86a4000000           mov      al, byte ptr [esi + 0xa4]
-00414fe6  eb35                   jmp      0x41501d ; 
+00414fe6  eb35                   jmp      0x41501d ;
 00414fe8  b901000000             mov      ecx, 1
 00414fed  0fbfd3                 movsx    edx, bx
-00414ff0  98                     cwde     
+00414ff0  98                     cwde
 00414ff1  bb202a0000             mov      ebx, 0x2a20
 00414ff6  e89b670400             call     0x45b796 ; PasteOmbreCmp
 00414ffb  31d2                   xor      edx, edx
@@ -435,7 +435,7 @@
 00415042  668b4c2430             mov      cx, word ptr [esp + 0x30]
 00415047  c1f810                 sar      eax, 0x10
 0041504a  e8f8c0ffff             call     0x411147 ; AffCorpsEngin
-0041504f  e928ffffff             jmp      0x414f7c ; 
+0041504f  e928ffffff             jmp      0x414f7c ;
 00415054  b901000000             mov      ecx, 1
 00415059  0fbfeb                 movsx    ebp, bx
 0041505c  0fbfc2                 movsx    eax, dx
@@ -452,17 +452,17 @@
 0041507d  c1e002                 shl      eax, 2
 00415080  31d2                   xor      edx, edx
 00415082  057e060000             add      eax, 0x67e
-00415087  eb8e                   jmp      0x415017 ; 
+00415087  eb8e                   jmp      0x415017 ;
 00415089  8a8689000000           mov      al, byte ptr [esi + 0x89]
 0041508f  3c01                   cmp      al, 1
 00415091  720f                   jb       0x4150a2
 00415093  76bf                   jbe      0x415054
 00415095  3c03                   cmp      al, 3
 00415097  0f86f5feffff           jbe      0x414f92
-0041509d  e9dafeffff             jmp      0x414f7c ; 
+0041509d  e9dafeffff             jmp      0x414f7c ;
 004150a2  84c0                   test     al, al
 004150a4  0f84e8feffff           je       0x414f92
-004150aa  e9cdfeffff             jmp      0x414f7c ; 
+004150aa  e9cdfeffff             jmp      0x414f7c ;
 004150af  8b542434               mov      edx, dword ptr [esp + 0x34]
 004150b3  8d460a                 lea      eax, [esi + 0xa]
 004150b6  89fb                   mov      ebx, edi
@@ -502,7 +502,7 @@
 00415123  668b4c2430             mov      cx, word ptr [esp + 0x30]
 00415128  c1f810                 sar      eax, 0x10
 0041512b  e817c0ffff             call     0x411147 ; AffCorpsEngin
-00415130  e947feffff             jmp      0x414f7c ; 
+00415130  e947feffff             jmp      0x414f7c ;
 00415135  b901000000             mov      ecx, 1
 0041513a  0fbfd2                 movsx    edx, dx
 0041513d  0fbfc3                 movsx    eax, bx
@@ -518,7 +518,7 @@
 0041515c  c1e003                 shl      eax, 3
 0041515f  31d2                   xor      edx, edx
 00415161  05ba050000             add      eax, 0x5ba
-00415166  eb90                   jmp      0x4150f8 ; 
+00415166  eb90                   jmp      0x4150f8 ;
 00415168  b901000000             mov      ecx, 1
 0041516d  0fbfeb                 movsx    ebp, bx
 00415170  0fbfc2                 movsx    eax, dx
@@ -535,7 +535,7 @@
 00415191  c1e003                 shl      eax, 3
 00415194  31d2                   xor      edx, edx
 00415196  057a050000             add      eax, 0x57a
-0041519b  e958ffffff             jmp      0x4150f8 ; 
+0041519b  e958ffffff             jmp      0x4150f8 ;
 004151a0  8a8689000000           mov      al, byte ptr [esi + 0x89]
 004151a6  3c03                   cmp      al, 3
 004151a8  7217                   jb       0x4151c1
@@ -544,12 +544,12 @@
 004151b2  0f86f7feffff           jbe      0x4150af
 004151b8  3c0c                   cmp      al, 0xc
 004151ba  74ac                   je       0x415168
-004151bc  e9bbfdffff             jmp      0x414f7c ; 
+004151bc  e9bbfdffff             jmp      0x414f7c ;
 004151c1  84c0                   test     al, al
 004151c3  0f86e6feffff           jbe      0x4150af
 004151c9  30db                   xor      bl, bl
 004151cb  885c243c               mov      byte ptr [esp + 0x3c], bl
-004151cf  e9a8fdffff             jmp      0x414f7c ; 
+004151cf  e9a8fdffff             jmp      0x414f7c ;
 004151d4  8d460a                 lea      eax, [esi + 0xa]
 004151d7  e8dd1e0300             call     0x4470b9 ; BagVide
 004151dc  84c0                   test     al, al
@@ -571,7 +571,7 @@
 0041520b  c1e003                 shl      eax, 3
 0041520e  31d2                   xor      edx, edx
 00415210  059a0b0000             add      eax, 0xb9a
-00415215  eb35                   jmp      0x41524c ; 
+00415215  eb35                   jmp      0x41524c ;
 00415217  b901000000             mov      ecx, 1
 0041521c  0fbfc3                 movsx    eax, bx
 0041521f  0fbfea                 movsx    ebp, dx
@@ -605,23 +605,23 @@
 00415277  668b4c2430             mov      cx, word ptr [esp + 0x30]
 0041527c  c1f810                 sar      eax, 0x10
 0041527f  e8c3beffff             call     0x411147 ; AffCorpsEngin
-00415284  e9f3fcffff             jmp      0x414f7c ; 
+00415284  e9f3fcffff             jmp      0x414f7c ;
 00415289  b901000000             mov      ecx, 1
 0041528e  0fbfeb                 movsx    ebp, bx
 00415291  0fbfc2                 movsx    eax, dx
 00415294  bb202a0000             mov      ebx, 0x2a20
 00415299  89ea                   mov      edx, ebp
-0041529b  eb8e                   jmp      0x41522b ; 
+0041529b  eb8e                   jmp      0x41522b ;
 0041529d  30ff                   xor      bh, bh
 0041529f  887c243c               mov      byte ptr [esp + 0x3c], bh
-004152a3  e9d4fcffff             jmp      0x414f7c ; 
+004152a3  e9d4fcffff             jmp      0x414f7c ;
 004152a8  8a8689000000           mov      al, byte ptr [esi + 0x89]
 004152ae  3c02                   cmp      al, 2
 004152b0  0f821effffff           jb       0x4151d4
 004152b6  76d1                   jbe      0x415289
 004152b8  3c03                   cmp      al, 3
 004152ba  74e1                   je       0x41529d
-004152bc  e9bbfcffff             jmp      0x414f7c ; 
+004152bc  e9bbfcffff             jmp      0x414f7c ;
 004152c1  3c05                   cmp      al, 5
 004152c3  0f84c0fdffff           je       0x415089
 004152c9  807c243c00             cmp      byte ptr [esp + 0x3c], 0
@@ -643,7 +643,7 @@
 0041530c  c1fa10                 sar      edx, 0x10
 0041530f  c1f810                 sar      eax, 0x10
 00415312  e8cdb8ffff             call     0x410be4 ; AffInfoSelection
-00415317  e972010000             jmp      0x41548e ; 
+00415317  e972010000             jmp      0x41548e ;
 0041531c  31d2                   xor      edx, edx
 0041531e  6689da                 mov      dx, bx
 00415321  89d0                   mov      eax, edx
@@ -662,7 +662,7 @@
 0041534b  83f864                 cmp      eax, 0x64
 0041534e  7d04                   jge      0x415354
 00415350  b001                   mov      al, 1
-00415352  eb02                   jmp      0x415356 ; 
+00415352  eb02                   jmp      0x415356 ;
 00415354  30c0                   xor      al, al
 00415356  84c0                   test     al, al
 00415358  0f84a8000000           je       0x415406
@@ -708,7 +708,7 @@
 004153d8  0fbfc1                 movsx    eax, cx
 004153db  b901000000             mov      ecx, 1
 004153e0  e8625e0400             call     0x45b247 ; PasteBobCmp
-004153e5  eb1f                   jmp      0x415406 ; 
+004153e5  eb1f                   jmp      0x415406 ;
 004153e7  50                     push     eax
 004153e8  668b4304               mov      ax, word ptr [ebx + 4]
 004153ec  052b1e0000             add      eax, 0x1e2b
@@ -759,11 +759,11 @@
 0041547c  8b442424               mov      eax, dword ptr [esp + 0x24]
 00415480  83e808                 sub      eax, 8
 00415483  b901000000             mov      ecx, 1
-00415488  98                     cwde     
+00415488  98                     cwde
 00415489  e8b95d0400             call     0x45b247 ; PasteBobCmp
 0041548e  83c440                 add      esp, 0x40
 00415491  5d                     pop      ebp
 00415492  5f                     pop      edi
 00415493  5e                     pop      esi
 00415494  59                     pop      ecx
-00415495  c3                     ret      
+00415495  c3                     ret

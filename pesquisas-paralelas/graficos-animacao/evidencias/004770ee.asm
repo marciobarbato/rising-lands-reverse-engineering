@@ -16,7 +16,7 @@
 00477116  0f867c010000           jbe      0x477298
 0047711c  80fa0f                 cmp      dl, 0xf
 0047711f  0f840c010000           je       0x477231
-00477125  e994010000             jmp      0x4772be ; 
+00477125  e994010000             jmp      0x4772be ;
 0047712a  31c9                   xor      ecx, ecx
 0047712c  6689c1                 mov      cx, ax
 0047712f  89ca                   mov      edx, ecx
@@ -41,13 +41,13 @@
 00477162  5e                     pop      esi
 00477163  59                     pop      ecx
 00477164  5b                     pop      ebx
-00477165  c3                     ret      
+00477165  c3                     ret
 00477166  89d8                   mov      eax, ebx
 00477168  81e8ff000000           sub      eax, 0xff
 0047716e  5e                     pop      esi
 0047716f  59                     pop      ecx
 00477170  5b                     pop      ebx
-00477171  c3                     ret      
+00477171  c3                     ret
 00477172  31d2                   xor      edx, edx
 00477174  6689c2                 mov      dx, ax
 00477177  b900010000             mov      ecx, 0x100
@@ -64,7 +64,7 @@
 00477193  5e                     pop      esi
 00477194  59                     pop      ecx
 00477195  5b                     pop      ebx
-00477196  c3                     ret      
+00477196  c3                     ret
 00477197  31c9                   xor      ecx, ecx
 00477199  6689c1                 mov      cx, ax
 0047719c  be00010000             mov      esi, 0x100
@@ -91,7 +91,7 @@
 004771d5  5e                     pop      esi
 004771d6  59                     pop      ecx
 004771d7  5b                     pop      ebx
-004771d8  c3                     ret      
+004771d8  c3                     ret
 004771d9  31c9                   xor      ecx, ecx
 004771db  6689c1                 mov      cx, ax
 004771de  be00010000             mov      esi, 0x100
@@ -112,7 +112,7 @@
 0047720d  5e                     pop      esi
 0047720e  59                     pop      ecx
 0047720f  5b                     pop      ebx
-00477210  c3                     ret      
+00477210  c3                     ret
 00477211  31d2                   xor      edx, edx
 00477213  6689c2                 mov      dx, ax
 00477216  b900010000             mov      ecx, 0x100
@@ -126,7 +126,7 @@
 0047722d  5e                     pop      esi
 0047722e  59                     pop      ecx
 0047722f  5b                     pop      ebx
-00477230  c3                     ret      
+00477230  c3                     ret
 00477231  31c9                   xor      ecx, ecx
 00477233  6689c1                 mov      cx, ax
 00477236  be00010000             mov      esi, 0x100
@@ -150,7 +150,7 @@
 0047726e  5e                     pop      esi
 0047726f  59                     pop      ecx
 00477270  5b                     pop      ebx
-00477271  c3                     ret      
+00477271  c3                     ret
 00477272  31d2                   xor      edx, edx
 00477274  6689c2                 mov      dx, ax
 00477277  89d0                   mov      eax, edx
@@ -165,7 +165,7 @@
 00477294  5e                     pop      esi
 00477295  59                     pop      ecx
 00477296  5b                     pop      ebx
-00477297  c3                     ret      
+00477297  c3                     ret
 00477298  31d2                   xor      edx, edx
 0047729a  6689c2                 mov      dx, ax
 0047729d  89d0                   mov      eax, edx
@@ -183,16 +183,16 @@
 004772c0  5e                     pop      esi
 004772c1  59                     pop      ecx
 004772c2  5b                     pop      ebx
-004772c3  c3                     ret      
+004772c3  c3                     ret
 004772c4  80fa09                 cmp      dl, 9
 004772c7  0f84a5feffff           je       0x477172
-004772cd  ebef                   jmp      0x4772be ; 
+004772cd  ebef                   jmp      0x4772be ;
 004772cf  80fa03                 cmp      dl, 3
 004772d2  720d                   jb       0x4772e1
 004772d4  0f86fffeffff           jbe      0x4771d9
 004772da  80fa05                 cmp      dl, 5
 004772dd  7493                   je       0x477272
-004772df  ebdd                   jmp      0x4772be ; 
+004772df  ebdd                   jmp      0x4772be ;
 004772e1  80fa01                 cmp      dl, 1
 004772e4  0f8427ffffff           je       0x477211
-004772ea  ebd2                   jmp      0x4772be ; 
+004772ea  ebd2                   jmp      0x4772be ;

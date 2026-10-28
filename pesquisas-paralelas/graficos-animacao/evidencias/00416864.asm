@@ -12,7 +12,7 @@
 00416871  bd00010000             mov      ebp, 0x100
 00416876  31f6                   xor      esi, esi
 00416878  31c9                   xor      ecx, ecx
-0041687a  eb01                   jmp      0x41687d ; 
+0041687a  eb01                   jmp      0x41687d ;
 0041687c  41                     inc      ecx
 0041687d  0fbfd1                 movsx    edx, cx
 00416880  81fa20030000           cmp      edx, 0x320
@@ -75,10 +75,10 @@
 00416938  6689f0                 mov      ax, si
 0041693b  46                     inc      esi
 0041693c  66894c4408             mov      word ptr [esp + eax*2 + 8], cx
-00416941  e936ffffff             jmp      0x41687c ; 
+00416941  e936ffffff             jmp      0x41687c ;
 00416946  31d2                   xor      edx, edx
 00416948  6689942430070000       mov      word ptr [esp + 0x730], dx
-00416950  eb2b                   jmp      0x41697d ; 
+00416950  eb2b                   jmp      0x41697d ;
 00416952  31d2                   xor      edx, edx
 00416954  8b84242e070000         mov      eax, dword ptr [esp + 0x72e]
 0041695b  6689fa                 mov      dx, di
@@ -126,7 +126,7 @@
 004169fd  8b15a0194e00           mov      edx, dword ptr [0x4e19a0]
 00416a03  89c7                   mov      edi, eax
 00416a05  668b5c1a08             mov      bx, word ptr [edx + ebx + 8]
-00416a0a  eba8                   jmp      0x4169b4 ; 
+00416a0a  eba8                   jmp      0x4169b4 ;
 00416a0c  31d2                   xor      edx, edx
 00416a0e  6689c2                 mov      dx, ax
 00416a11  668b545408             mov      dx, word ptr [esp + edx*2 + 8]
@@ -146,7 +146,7 @@
 00416a59  3a95ab000000           cmp      dl, byte ptr [ebp + 0xab]
 00416a5f  0f834fffffff           jae      0x4169b4
 00416a65  89c7                   mov      edi, eax
-00416a67  e948ffffff             jmp      0x4169b4 ; 
+00416a67  e948ffffff             jmp      0x4169b4 ;
 00416a6c  8d842448060000         lea      eax, [esp + 0x648]
 00416a73  8b3c24                 mov      edi, dword ptr [esp]
 00416a76  8b5c2404               mov      ebx, dword ptr [esp + 4]
@@ -157,7 +157,7 @@
 00416a8b  66898c243c070000       mov      word ptr [esp + 0x73c], cx
 00416a93  8b0424                 mov      eax, dword ptr [esp]
 00416a96  01df                   add      edi, ebx
-00416a98  eb2e                   jmp      0x416ac8 ; 
+00416a98  eb2e                   jmp      0x416ac8 ;
 00416a9a  8b9c243c070000         mov      ebx, dword ptr [esp + 0x73c]
 00416aa1  66a124875000           mov      ax, word ptr [0x508724]
 00416aa7  ba00010000             mov      edx, 0x100
@@ -183,7 +183,7 @@
 00416af6  8b442404               mov      eax, dword ptr [esp + 4]
 00416afa  6689942428070000       mov      word ptr [esp + 0x728], dx
 00416b02  89842420070000         mov      dword ptr [esp + 0x720], eax
-00416b09  eb22                   jmp      0x416b2d ; 
+00416b09  eb22                   jmp      0x416b2d ;
 00416b0b  8b942428070000         mov      edx, dword ptr [esp + 0x728]
 00416b12  8b9c2420070000         mov      ebx, dword ptr [esp + 0x720]
 00416b19  47                     inc      edi
@@ -244,7 +244,7 @@
 00416c00  25ff000000             and      eax, 0xff
 00416c05  7403                   je       0x416c0a
 00416c07  41                     inc      ecx
-00416c08  ebcd                   jmp      0x416bd7 ; 
+00416c08  ebcd                   jmp      0x416bd7 ;
 00416c0a  31c0                   xor      eax, eax
 00416c0c  0fbfd1                 movsx    edx, cx
 00416c0f  6689f0                 mov      ax, si
@@ -267,7 +267,7 @@
 00416c59  c1f810                 sar      eax, 0x10
 00416c5c  41                     inc      ecx
 00416c5d  e8bdecffff             call     0x41591f ; AffEngin
-00416c62  eba6                   jmp      0x416c0a ; 
+00416c62  eba6                   jmp      0x416c0a ;
 00416c64  8b0424                 mov      eax, dword ptr [esp]
 00416c67  8b542404               mov      edx, dword ptr [esp + 4]
 00416c6b  31c9                   xor      ecx, ecx
@@ -277,7 +277,7 @@
 00416c7a  01c2                   add      edx, eax
 00416c7c  8b0424                 mov      eax, dword ptr [esp]
 00416c7f  89942444070000         mov      dword ptr [esp + 0x744], edx
-00416c86  eb3c                   jmp      0x416cc4 ; 
+00416c86  eb3c                   jmp      0x416cc4 ;
 00416c88  8b942424070000         mov      edx, dword ptr [esp + 0x724]
 00416c8f  66a124875000           mov      ax, word ptr [0x508724]
 00416c95  83c220                 add      edx, 0x20
@@ -305,7 +305,7 @@
 00416cf3  6689842438070000       mov      word ptr [esp + 0x738], ax
 00416cfb  8b442404               mov      eax, dword ptr [esp + 4]
 00416cff  89842440070000         mov      dword ptr [esp + 0x740], eax
-00416d06  eb32                   jmp      0x416d3a ; 
+00416d06  eb32                   jmp      0x416d3a ;
 00416d08  8b842438070000         mov      eax, dword ptr [esp + 0x738]
 00416d0f  8b942444070000         mov      edx, dword ptr [esp + 0x744]
 00416d16  8b9c2440070000         mov      ebx, dword ptr [esp + 0x740]
@@ -341,7 +341,7 @@
 00416d91  668b841448060000       mov      ax, word ptr [esp + edx + 0x648]
 00416d99  47                     inc      edi
 00416d9a  e8d1910500             call     0x46ff70 ; AffProjectile
-00416d9f  ebc7                   jmp      0x416d68 ; 
+00416d9f  ebc7                   jmp      0x416d68 ;
 00416da1  31c0                   xor      eax, eax
 00416da3  0fbfd1                 movsx    edx, cx
 00416da6  6689f0                 mov      ax, si
@@ -355,7 +355,7 @@
 00416dc6  25ff000000             and      eax, 0xff
 00416dcb  7503                   jne      0x416dd0
 00416dcd  41                     inc      ecx
-00416dce  ebd1                   jmp      0x416da1 ; 
+00416dce  ebd1                   jmp      0x416da1 ;
 00416dd0  31c0                   xor      eax, eax
 00416dd2  0fbfd9                 movsx    ebx, cx
 00416dd5  6689f0                 mov      ax, si
@@ -379,6 +379,6 @@
 00416e2b  c1f810                 sar      eax, 0x10
 00416e2e  41                     inc      ecx
 00416e2f  e8ebeaffff             call     0x41591f ; AffEngin
-00416e34  eb9a                   jmp      0x416dd0 ; 
+00416e34  eb9a                   jmp      0x416dd0 ;
 00416e36  81c448070000           add      esp, 0x748
-00416e3c  e9379affff             jmp      0x410878 ; 
+00416e3c  e9379affff             jmp      0x410878 ;

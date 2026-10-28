@@ -26,4 +26,4 @@
 0044792b  5a                     pop      edx
 0044792c  59                     pop      ecx
 0044792d  5b                     pop      ebx
-0044792e  c3                     ret      
+0044792e  c3                     ret

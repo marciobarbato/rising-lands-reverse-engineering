@@ -19,7 +19,7 @@
 004187ac  89942424010000         mov      dword ptr [esp + 0x124], edx
 004187b3  89c5                   mov      ebp, eax
 004187b5  668910                 mov      word ptr [eax], dx
-004187b8  eb3b                   jmp      0x4187f5 ; 
+004187b8  eb3b                   jmp      0x4187f5 ;
 004187ba  8d842418010000         lea      eax, [esp + 0x118]
 004187c1  01db                   add      ebx, ebx
 004187c3  ba02000000             mov      edx, 2
@@ -75,7 +75,7 @@
 00418857  e8c4fb0300             call     0x458420 ; FileOpen
 0041885c  25ff000000             and      eax, 0xff
 00418861  0f8553ffffff           jne      0x4187ba
-00418867  e949010000             jmp      0x4189b5 ; 
+00418867  e949010000             jmp      0x4189b5 ;
 0041886c  31c0                   xor      eax, eax
 0041886e  668b4500               mov      ax, word ptr [ebp]
 00418872  31c9                   xor      ecx, ecx
@@ -83,7 +83,7 @@
 00418877  898c242c010000         mov      dword ptr [esp + 0x12c], ecx
 0041887e  e823f60400             call     0x467ea6 ; MemAlloc
 00418883  894504                 mov      dword ptr [ebp + 4], eax
-00418886  e9a4000000             jmp      0x41892f ; 
+00418886  e9a4000000             jmp      0x41892f ;
 0041888b  89c3                   mov      ebx, eax
 0041888d  43                     inc      ebx
 0041888e  41                     inc      ecx
@@ -111,7 +111,7 @@
 004188e9  85c0                   test     eax, eax
 004188eb  7504                   jne      0x4188f1
 004188ed  31db                   xor      ebx, ebx
-004188ef  eb08                   jmp      0x4188f9 ; 
+004188ef  eb08                   jmp      0x4188f9 ;
 004188f1  8b5304                 mov      edx, dword ptr [ebx + 4]
 004188f4  e868fb0300             call     0x458461 ; FileRead
 004188f9  31c0                   xor      eax, eax
@@ -172,7 +172,7 @@
 004189a2  ba02000000             mov      edx, 2
 004189a7  31c9                   xor      ecx, ecx
 004189a9  e8b3fa0300             call     0x458461 ; FileRead
-004189ae  e9e3feffff             jmp      0x418896 ; 
+004189ae  e9e3feffff             jmp      0x418896 ;
 004189b3  89e8                   mov      eax, ebp
 004189b5  81c430010000           add      esp, 0x130
 004189bb  5d                     pop      ebp
@@ -181,4 +181,4 @@
 004189be  5a                     pop      edx
 004189bf  59                     pop      ecx
 004189c0  5b                     pop      ebx
-004189c1  c3                     ret      
+004189c1  c3                     ret

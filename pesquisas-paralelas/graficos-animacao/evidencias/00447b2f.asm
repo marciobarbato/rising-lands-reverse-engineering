@@ -36,19 +36,19 @@
 00447b8b  85c0                   test     eax, eax
 00447b8d  7508                   jne      0x447b97
 00447b8f  fe8394000000           inc      byte ptr [ebx + 0x94]
-00447b95  eb3f                   jmp      0x447bd6 ; 
+00447b95  eb3f                   jmp      0x447bd6 ;
 00447b97  83f802                 cmp      eax, 2
 00447b9a  750a                   jne      0x447ba6
 00447b9c  fec8                   dec      al
 00447b9e  888394000000           mov      byte ptr [ebx + 0x94], al
-00447ba4  eb30                   jmp      0x447bd6 ; 
+00447ba4  eb30                   jmp      0x447bd6 ;
 00447ba6  b812000000             mov      eax, 0x12
 00447bab  be03000000             mov      esi, 3
 00447bb0  e827890200             call     0x4704dc ; Random
 00447bb5  f7f6                   div      esi
 00447bb7  4a                     dec      edx
 00447bb8  009394000000           add      byte ptr [ebx + 0x94], dl
-00447bbe  eb16                   jmp      0x447bd6 ; 
+00447bbe  eb16                   jmp      0x447bd6 ;
 00447bc0  31c0                   xor      eax, eax
 00447bc2  8a8394000000           mov      al, byte ptr [ebx + 0x94]
 00447bc8  85c0                   test     eax, eax
@@ -82,7 +82,7 @@
 00447c2b  88c6                   mov      dh, al
 00447c2d  fece                   dec      dh
 00447c2f  88b396000000           mov      byte ptr [ebx + 0x96], dh
-00447c35  eb17                   jmp      0x447c4e ; 
+00447c35  eb17                   jmp      0x447c4e ;
 00447c37  31c0                   xor      eax, eax
 00447c39  8a8396000000           mov      al, byte ptr [ebx + 0x96]
 00447c3f  83f810                 cmp      eax, 0x10
@@ -111,7 +111,7 @@
 00447c93  7506                   jne      0x447c9b
 00447c95  fe83ab000000           inc      byte ptr [ebx + 0xab]
 00447c9b  fe83a4000000           inc      byte ptr [ebx + 0xa4]
-00447ca1  eb1d                   jmp      0x447cc0 ; 
+00447ca1  eb1d                   jmp      0x447cc0 ;
 00447ca3  b815000000             mov      eax, 0x15
 00447ca8  be0a000000             mov      esi, 0xa
 00447cad  31d2                   xor      edx, edx
@@ -172,7 +172,7 @@
 00447d78  5a                     pop      edx
 00447d79  59                     pop      ecx
 00447d7a  5b                     pop      ebx
-00447d7b  c3                     ret      
+00447d7b  c3                     ret
 00447d7c  31c0                   xor      eax, eax
 00447d7e  8a83ab000000           mov      al, byte ptr [ebx + 0xab]
 00447d84  83f832                 cmp      eax, 0x32
@@ -182,4 +182,4 @@
 00447d91  5a                     pop      edx
 00447d92  59                     pop      ecx
 00447d93  5b                     pop      ebx
-00447d94  c3                     ret      
+00447d94  c3                     ret

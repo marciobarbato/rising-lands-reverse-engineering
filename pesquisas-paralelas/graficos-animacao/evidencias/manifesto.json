@@ -130,6 +130,13 @@
       "arquivo": "00442045.asm"
     },
     {
+      "nome": "BagVide",
+      "inicio": "0x4470b9",
+      "fim": "0x4470c5",
+      "sha256_bytes": "a4b23a2dfd610b631864b3ffd40674fc62f9bc18fec11a6d3b824a770aa937af",
+      "arquivo": "004470b9.asm"
+    },
+    {
       "nome": "AnimArretEngin",
       "inicio": "0x4478ee",
       "fim": "0x44792f",

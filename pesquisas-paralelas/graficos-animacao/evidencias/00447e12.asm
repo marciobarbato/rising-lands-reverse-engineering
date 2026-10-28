@@ -23,7 +23,7 @@
 00447e48  5a                     pop      edx
 00447e49  59                     pop      ecx
 00447e4a  5b                     pop      ebx
-00447e4b  c3                     ret      
+00447e4b  c3                     ret
 00447e4c  8ab3a9000000           mov      dh, byte ptr [ebx + 0xa9]
 00447e52  00d6                   add      dh, dl
 00447e54  8a8ba7000000           mov      cl, byte ptr [ebx + 0xa7]
@@ -43,7 +43,7 @@
 00447e8d  5a                     pop      edx
 00447e8e  59                     pop      ecx
 00447e8f  5b                     pop      ebx
-00447e90  c3                     ret      
+00447e90  c3                     ret
 00447e91  8a9389000000           mov      dl, byte ptr [ebx + 0x89]
 00447e97  84d2                   test     dl, dl
 00447e99  0f868e000000           jbe      0x447f2d
@@ -52,7 +52,7 @@
 00447ea4  5a                     pop      edx
 00447ea5  59                     pop      ecx
 00447ea6  5b                     pop      ebx
-00447ea7  c3                     ret      
+00447ea7  c3                     ret
 00447ea8  8aaba9000000           mov      ch, byte ptr [ebx + 0xa9]
 00447eae  00d5                   add      ch, dl
 00447eb0  8aa3a7000000           mov      ah, byte ptr [ebx + 0xa7]
@@ -63,7 +63,7 @@
 00447ec6  8a93a4000000           mov      dl, byte ptr [ebx + 0xa4]
 00447ecc  42                     inc      edx
 00447ecd  b904000000             mov      ecx, 4
-00447ed2  eba5                   jmp      0x447e79 ; 
+00447ed2  eba5                   jmp      0x447e79 ;
 00447ed4  8a9389000000           mov      dl, byte ptr [ebx + 0x89]
 00447eda  84d2                   test     dl, dl
 00447edc  764f                   jbe      0x447f2d
@@ -72,7 +72,7 @@
 00447ee3  5a                     pop      edx
 00447ee4  59                     pop      ecx
 00447ee5  5b                     pop      ebx
-00447ee6  c3                     ret      
+00447ee6  c3                     ret
 00447ee7  8aa3a9000000           mov      ah, byte ptr [ebx + 0xa9]
 00447eed  00d4                   add      ah, dl
 00447eef  8a93a8000000           mov      dl, byte ptr [ebx + 0xa8]
@@ -84,7 +84,7 @@
 00447f07  31c9                   xor      ecx, ecx
 00447f09  42                     inc      edx
 00447f0a  8a8ba6000000           mov      cl, byte ptr [ebx + 0xa6]
-00447f10  e964ffffff             jmp      0x447e79 ; 
+00447f10  e964ffffff             jmp      0x447e79 ;
 00447f15  8a9389000000           mov      dl, byte ptr [ebx + 0x89]
 00447f1b  84d2                   test     dl, dl
 00447f1d  760e                   jbe      0x447f2d
@@ -93,13 +93,13 @@
 00447f24  5a                     pop      edx
 00447f25  59                     pop      ecx
 00447f26  5b                     pop      ebx
-00447f27  c3                     ret      
+00447f27  c3                     ret
 00447f28  80fa06                 cmp      dl, 6
 00447f2b  74a7                   je       0x447ed4
 00447f2d  5a                     pop      edx
 00447f2e  59                     pop      ecx
 00447f2f  5b                     pop      ebx
-00447f30  c3                     ret      
+00447f30  c3                     ret
 00447f31  8d4000                 lea      eax, [eax]
 00447f34  84804400987f           test     byte ptr [eax + 0x7f980044], al
 00447f3a  44                     inc      esp

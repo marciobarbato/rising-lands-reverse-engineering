@@ -29,17 +29,17 @@
 00448f93  85d2                   test     edx, edx
 00448f95  7507                   jne      0x448f9e
 00448f97  e86cfdffff             call     0x448d08 ; EnginNextCase
-00448f9c  eb0a                   jmp      0x448fa8 ; 
+00448f9c  eb0a                   jmp      0x448fa8 ;
 00448f9e  83fa05                 cmp      edx, 5
 00448fa1  7505                   jne      0x448fa8
 00448fa3  e8f7fbffff             call     0x448b9f ; EnginNextCaseChemin
 00448fa8  668b467c               mov      ax, word ptr [esi + 0x7c]
 00448fac  663b4608               cmp      ax, word ptr [esi + 8]
 00448fb0  7511                   jne      0x448fc3
-00448fb2  e9a17dffff             jmp      0x440d58 ; 
+00448fb2  e9a17dffff             jmp      0x440d58 ;
 00448fb7  89d0                   mov      eax, edx
 00448fb9  e871ebffff             call     0x447b2f ; AnimBallonStatic
-00448fbe  e985000000             jmp      0x449048 ; 
+00448fbe  e985000000             jmp      0x449048 ;
 00448fc3  31d2                   xor      edx, edx
 00448fc5  6689fa                 mov      dx, di
 00448fc8  89d3                   mov      ebx, edx
@@ -63,14 +63,14 @@
 00448ff3  7616                   jbe      0x44900b
 00448ff5  3c19                   cmp      al, 0x19
 00448ff7  7412                   je       0x44900b
-00448ff9  eb4d                   jmp      0x449048 ; 
+00448ff9  eb4d                   jmp      0x449048 ;
 00448ffb  3c0e                   cmp      al, 0xe
 00448ffd  720c                   jb       0x44900b
 00448fff  3c0f                   cmp      al, 0xf
 00449001  7608                   jbe      0x44900b
 00449003  3c11                   cmp      al, 0x11
 00449005  74b0                   je       0x448fb7
-00449007  eb3f                   jmp      0x449048 ; 
+00449007  eb3f                   jmp      0x449048 ;
 00449009  3c03                   cmp      al, 3
 0044900b  8aa3a9000000           mov      ah, byte ptr [ebx + 0xa9]
 00449011  fec4                   inc      ah
@@ -97,9 +97,9 @@
 00449060  8a1d41805000           mov      bl, byte ptr [0x508041]
 00449066  3a1e                   cmp      bl, byte ptr [esi]
 00449068  7409                   je       0x449073
-0044906a  e98e000000             jmp      0x4490fd ; 
+0044906a  e98e000000             jmp      0x4490fd ;
 0044906f  b001                   mov      al, 1
-00449071  eb18                   jmp      0x44908b ; 
+00449071  eb18                   jmp      0x44908b ;
 00449073  8a4601                 mov      al, byte ptr [esi + 1]
 00449076  2c0b                   sub      al, 0xb
 00449078  3c05                   cmp      al, 5
@@ -149,7 +149,7 @@
 0044910d  38d8                   cmp      al, bl
 0044910f  7504                   jne      0x449115
 00449111  b001                   mov      al, 1
-00449113  eb48                   jmp      0x44915d ; 
+00449113  eb48                   jmp      0x44915d ;
 00449115  0fb6f0                 movzx    esi, al
 00449118  8d5601                 lea      edx, [esi + 1]
 0044911b  b910000000             mov      ecx, 0x10
@@ -184,4 +184,4 @@
 00449167  31d2                   xor      edx, edx
 00449169  6689f8                 mov      ax, di
 0044916c  e893f5ffff             call     0x448704 ; AvanceEngin
-00449171  e9e27bffff             jmp      0x440d58 ; 
+00449171  e9e27bffff             jmp      0x440d58 ;

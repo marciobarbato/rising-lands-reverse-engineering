@@ -39,14 +39,14 @@
 0041597d  5f                     pop      edi
 0041597e  5e                     pop      esi
 0041597f  59                     pop      ecx
-00415980  c3                     ret      
+00415980  c3                     ret
 00415981  0fbfd2                 movsx    edx, dx
 00415984  0fbfc1                 movsx    eax, cx
 00415987  e8c0ddffff             call     0x41374c ; AffAttaqueEngin
 0041598c  5f                     pop      edi
 0041598d  5e                     pop      esi
 0041598e  59                     pop      ecx
-0041598f  c3                     ret      
+0041598f  c3                     ret
 00415990  8a868a000000           mov      al, byte ptr [esi + 0x8a]
 00415996  84c0                   test     al, al
 00415998  0f865d000000           jbe      0x4159fb
@@ -55,7 +55,7 @@
 004159a2  5f                     pop      edi
 004159a3  5e                     pop      esi
 004159a4  59                     pop      ecx
-004159a5  c3                     ret      
+004159a5  c3                     ret
 004159a6  31db                   xor      ebx, ebx
 004159a8  6689fb                 mov      bx, di
 004159ab  89d8                   mov      eax, ebx
@@ -71,7 +71,7 @@
 004159ca  5f                     pop      edi
 004159cb  5e                     pop      esi
 004159cc  59                     pop      ecx
-004159cd  c3                     ret      
+004159cd  c3                     ret
 004159ce  0fbfd2                 movsx    edx, dx
 004159d1  31db                   xor      ebx, ebx
 004159d3  0fbfc1                 movsx    eax, cx
@@ -80,20 +80,20 @@
 004159de  5f                     pop      edi
 004159df  5e                     pop      esi
 004159e0  59                     pop      ecx
-004159e1  c3                     ret      
+004159e1  c3                     ret
 004159e2  0fbfd2                 movsx    edx, dx
 004159e5  0fbfc1                 movsx    eax, cx
 004159e8  e89df0ffff             call     0x414a8a ; AffWorkEngin
 004159ed  5f                     pop      edi
 004159ee  5e                     pop      esi
 004159ef  59                     pop      ecx
-004159f0  c3                     ret      
+004159f0  c3                     ret
 004159f1  3c13                   cmp      al, 0x13
 004159f3  7206                   jb       0x4159fb
 004159f5  0f8672ffffff           jbe      0x41596d
 004159fb  0fbfd2                 movsx    edx, dx
 004159fe  0fbfc1                 movsx    eax, cx
-00415a01  e972ffffff             jmp      0x415978 ; 
+00415a01  e972ffffff             jmp      0x415978 ;
 00415a06  3c05                   cmp      al, 5
 00415a08  7226                   jb       0x415a30
 00415a0a  76d6                   jbe      0x4159e2
@@ -108,13 +108,13 @@
 00415a20  5f                     pop      edi
 00415a21  5e                     pop      esi
 00415a22  59                     pop      ecx
-00415a23  c3                     ret      
+00415a23  c3                     ret
 00415a24  3c09                   cmp      al, 9
 00415a26  0f8641ffffff           jbe      0x41596d
 00415a2c  5f                     pop      edi
 00415a2d  5e                     pop      esi
 00415a2e  59                     pop      ecx
-00415a2f  c3                     ret      
+00415a2f  c3                     ret
 00415a30  3c02                   cmp      al, 2
 00415a32  7217                   jb       0x415a4b
 00415a34  3c03                   cmp      al, 3
@@ -125,7 +125,7 @@
 00415a47  5f                     pop      edi
 00415a48  5e                     pop      esi
 00415a49  59                     pop      ecx
-00415a4a  c3                     ret      
+00415a4a  c3                     ret
 00415a4b  3c01                   cmp      al, 1
 00415a4d  0f8453ffffff           je       0x4159a6
 00415a53  5f                     pop      edi

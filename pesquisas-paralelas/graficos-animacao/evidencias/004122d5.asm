@@ -17,7 +17,7 @@
 004122f9  39c0                   cmp      eax, eax
 004122fb  7507                   jne      0x412304
 004122fd  bb1e2a0000             mov      ebx, 0x2a1e
-00412302  eb0b                   jmp      0x41230f ; 
+00412302  eb0b                   jmp      0x41230f ;
 00412304  bb1f2a0000             mov      ebx, 0x2a1f
 00412309  83ee20                 sub      esi, 0x20
 0041230c  83e920                 sub      ecx, 0x20
@@ -28,5 +28,5 @@
 0041231f  83c408                 add      esp, 8
 00412322  5e                     pop      esi
 00412323  59                     pop      ecx
-00412324  c3                     ret      
+00412324  c3                     ret
 00412325  8d4000                 lea      eax, [eax]

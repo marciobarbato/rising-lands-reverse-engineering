@@ -1,11 +1,11 @@
 ; AffHangar [0x415a56, 0x415acf)
 ; SHA-256 EXE: 6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb
 ; Desmontagem linear. Algumas regiões entre símbolos contêm tabelas; não são prova de fluxo.
-00415a56  c3                     ret      
-00415a57  90                     nop      
+00415a56  c3                     ret
+00415a57  90                     nop
 00415a58  41                     inc      ecx
 00415a59  40                     inc      eax
-00415a5a  3f                     aas      
+00415a5a  3f                     aas
 00415a5b  3e3d3c3b3a39           cmp      eax, 0x393a3b3c
 00415a61  3837                   cmp      byte ptr [edi], dh
 00415a63  1b0b                   sbb      ecx, dword ptr [ebx]
@@ -23,7 +23,7 @@
 00415a7a  007360                 add      byte ptr [ebx + 0x60], dh
 00415a7d  41                     inc      ecx
 00415a7e  0001                   add      byte ptr [ecx], al
-00415a80  61                     popal    
+00415a80  61                     popal
 00415a81  41                     inc      ecx
 00415a82  0010                   add      byte ptr [eax], dl
 00415a84  624100                 bound    eax, qword ptr [ecx]

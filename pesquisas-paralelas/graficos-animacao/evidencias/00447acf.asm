@@ -33,4 +33,4 @@
 00447b2b  5a                     pop      edx
 00447b2c  59                     pop      ecx
 00447b2d  5b                     pop      ebx
-00447b2e  c3                     ret      
+00447b2e  c3                     ret

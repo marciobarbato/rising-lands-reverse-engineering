@@ -58,7 +58,8 @@ def extrair():
                    0x410fcc <= a < 0x415acf or 0x4478ee <= a < 0x448194 or
                    a in (0x41877a, 0x418590, 0x457350, 0x45b247, 0x45b796, 0x45c455,
                          0x477042, 0x4770ee, 0x448599, 0x448194, 0x448f50, 0x416864,
-                         0x467d97, 0x442025, 0x442045, 0x44fffe, 0x45002e, 0x474beb)]
+                         0x467d97, 0x442025, 0x442045, 0x44fffe, 0x45002e, 0x474beb,
+                         0x4470b9)]
     registros = []
     for a in selecionados:
         fim = {0x448088:0x44812b}.get(a, ordenados[ordenados.index(a)+1])
@@ -69,7 +70,7 @@ def extrair():
             extra = ''
             if ins.mnemonic in ('call', 'jmp') and ins.operands[0].type == capstone.x86.X86_OP_IMM:
                 extra = ' ; ' + nomes.get(ins.operands[0].imm, '')
-            linhas.append(f'{ins.address:08x}  {ins.bytes.hex():22} {ins.mnemonic:8} {ins.op_str}{extra}')
+            linhas.append(f'{ins.address:08x}  {ins.bytes.hex():22} {ins.mnemonic:8} {ins.op_str}{extra}'.rstrip())
         arquivo = pasta / f'{a:08x}.asm'
         arquivo.write_text('\n'.join(linhas)+'\n')
         registros.append(dict(nome=nomes[a],inicio=hex(a),fim=hex(fim),sha256_bytes=hashlib.sha256(bruto).hexdigest(),arquivo=arquivo.name))
@@ -86,6 +87,17 @@ def extrair():
             registro['nomes']=[imagem[v-base:].split(b'\0')[0].decode('ascii') for v in vals]
         tabelas.append(registro)
     (pasta/'tabelas.json').write_text(json.dumps(tabelas,indent=2)+'\n')
+    tipos=[]
+    for tipo in range(26):
+        endereco=0x4965ae+tipo*50
+        bruto=imagem[endereco-base:endereco-base+50]
+        tipos.append(dict(tipo=tipo,endereco=hex(endereco),tamanho=50,
+                          chave_ini=bruto[12:42].split(b'\0')[0].decode('ascii'),
+                          bytes_hex=bruto.hex(),sha256=hashlib.sha256(bruto).hexdigest()))
+    (pasta/'identidade-tipos.json').write_text(json.dumps(dict(
+        exe_sha256=HASH_EXE,commit_snapshot=COMMIT,registros=tipos,
+        ressalva='Somente identidade; presença nesta tabela não valida seus gráficos.'),
+        ensure_ascii=False,indent=2)+'\n')
     print('Trechos extraídos:', len(registros))
 
 
