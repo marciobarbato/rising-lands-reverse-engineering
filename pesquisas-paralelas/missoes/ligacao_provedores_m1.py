@@ -32,14 +32,13 @@ from mercado import Mercado, BUFFERS as BUFFERS_MERCADO  # noqa: E402
 from ciclo_mercado import CicloMercado, BUFFERS_CICLO  # noqa: E402
 from recrutamento import Recrutamento                # noqa: E402
 from producao import Producao                        # noqa: E402
-import proprietarios                                 # noqa: E402
 from proprietarios import PropriedadeConstrucoes     # noqa: E402
-
-# Economy's per-owner [0x4e19b8] Bag contract (PropriedadeConstrucoes(ordens=<four live pools>),
-# validar_ordens). Older Economy copies the Bags into one 10,816-byte buffer, which cannot be
-# mapped: the strict composition then stops at EnginInitTechnologie (see composicao_carga_missao).
-# Compatibility branch for the integration order only; to be removed once it is on main.
-ORDENS_POR_DONO = hasattr(proprietarios, 'validar_ordens')
+try:
+    # Mandatory Economy per-owner [0x4e19b8] Bag contract: PropriedadeConstrucoes(ordens=<four live pools>).
+    from proprietarios import validar_ordens         # noqa: E402,F401
+except ImportError as erro:   # an Economy that copies the Bags into one buffer cannot be mapped
+    raise ImportError('The M1 composition requires Economy proprietarios.validar_ordens: the per-owner '
+                      '[0x4e19b8] Bag contract (four live 2,704-byte pools by identity)') from erro
 from aprendizagem import Aprendizagem                # noqa: E402
 from construcoes_habitaveis import HabitacaoConstrucoes  # noqa: E402
 from cauda_carga import CaudaCargaEconomia           # noqa: E402
@@ -125,7 +124,6 @@ class ProvedoresM1:
     excessos: list = field(default_factory=list)   # (owner, buffer, start) of provider-private tails
     compartilhados: list = field(default_factory=list)  # identity sharing performed (consumer, owner)
     negados: dict = field(default_factory=dict)
-    ordens_por_dono: bool = False                   # Economy per-owner Bag contract in use
 
 
 def _ponteiro(mapa, slot):
@@ -227,14 +225,11 @@ def montar_provedores(mapa):
     mapa.vincular(0x497174, recrutamento.tipos_sortilegios, 'economy:Recrutamento.tipos_sortilegios 0x497174')
     producao = Producao(recrutamento)
     mapa.vincular(0x495d8c, producao.tipos_construcoes, 'economy:Producao.tipos_construcoes 0x495d8c')
-    if ORDENS_POR_DONO:
-        # The four live Core Bag pools of [[0x4e19b8]+4j], by identity (validated, never copied).
-        propriedade = PropriedadeConstrucoes(construcoes, ordens=w.bolsas_tipos_unidades)
-        if any(a is not b for a, b in zip(propriedade.ordens, w.bolsas_tipos_unidades)):
-            raise ValueError('Economy PropriedadeConstrucoes.ordens must be the Core Bag pools by identity')
-        compartilhados.append('PropriedadeConstrucoes.ordens')
-    else:
-        propriedade = PropriedadeConstrucoes(construcoes)
+    # The four live Core Bag pools of [[0x4e19b8]+4j], by identity (validated by Economy, never copied).
+    propriedade = PropriedadeConstrucoes(construcoes, ordens=w.bolsas_tipos_unidades)
+    if len(propriedade.ordens) != 4 or any(a is not b for a, b in zip(propriedade.ordens, w.bolsas_tipos_unidades)):
+        raise ValueError('Economy PropriedadeConstrucoes.ordens must be the four Core Bag pools by identity')
+    compartilhados.append('PropriedadeConstrucoes.ordens')
     mapa.vincular(0x4e1a14, propriedade.baloes, 'economy:PropriedadeConstrucoes.baloes 0x4e1a14')
     mapa.vincular(0x4dd6e8, propriedade.pendencias, 'economy:PropriedadeConstrucoes.pendencias 0x4dd6e8')
     mapa.vincular(0x508f30, propriedade.sortilegios, 'economy:PropriedadeConstrucoes.sortilegios 0x508f30')
@@ -315,10 +310,7 @@ def montar_provedores(mapa):
                                               ('largura', 'altura'))
     negados['economy:PropriedadeConstrucoes'] = proteger(
         propriedade, 'economy:PropriedadeConstrucoes',
-        ('mundo', 'baloes', 'pendencias', 'sortilegios') + (('ordens',) if ORDENS_POR_DONO else ()), (),
-        dict(ordens=('single 10,816-byte buffer (4 x 2,704 owner stride); the original and Core keep four '
-                     'distinct 2,704-byte allocations through the pointer table [0x4e19b8], so it cannot '
-                     'alias them')))
+        ('mundo', 'baloes', 'pendencias', 'sortilegios', 'ordens'))
     negados['economy:TerrenoSacolas'] = proteger(construcoes.terreno, 'economy:TerrenoSacolas',
                                                 ('tipos', 'quantidades'), ('semente',))
     negados['economy:Recrutamento'] = proteger(recrutamento, 'economy:Recrutamento', (
@@ -340,7 +332,7 @@ def montar_provedores(mapa):
                                                    'jogadores_guardados'))):
         negados[dono] = proteger(objeto, dono, permitidos)
     return ProvedoresM1(mapa, w, economia, bonus, mercado, ciclo, habitacao, cauda, vistas,
-                        excessos, compartilhados, negados, ORDENS_POR_DONO)
+                        excessos, compartilhados, negados)
 
 
 def verificar_excessos(provedores):

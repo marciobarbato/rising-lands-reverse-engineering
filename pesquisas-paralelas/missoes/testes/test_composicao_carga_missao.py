@@ -1,11 +1,10 @@
 """M1 composition of the whole MissionLoad vs the frozen original capture (CPU-free).
 
-The main test runs the strict Python composition from the frozen entry
-snapshot and compares it with the original capture: ordered binding requests,
-allocation records and, when it returns, the whole state and AL. While a
-provider contract blocks the strict run, the test pins that exact named stop
-and checks the explicitly labelled diagnostic bridge run instead. Guards cover
-snapshot closure, the absence of constructor defaults and alias identity.
+The main test runs the strict Python composition (no bridge exists) from the
+frozen entry snapshot and compares it with the original capture: whole state,
+AL, allocation records and ordered binding requests. A second run checks
+determinism. Guards cover snapshot closure, the absence of constructor
+defaults, the mandatory Economy per-owner Bag contract and alias identity.
 """
 import ctypes
 from pathlib import Path
@@ -18,9 +17,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import ambiente_missoes
 from mapa_memoria_m1 import MapaMemoriaM1, ErroMapaMemoria, carregar_blocos, carregar_json
 from arena_composicao_m1 import ArenaComposicaoM1, ErroArenaM1
-from ligacao_provedores_m1 import (AtributoNaoMapeadoM1, EXCESSO, ORDENS_POR_DONO, montar_provedores,
-                                   verificar_excessos)
-from composicao_carga_missao import ComposicaoCargaMissaoM1, PONTES
+from ligacao_provedores_m1 import AtributoNaoMapeadoM1, EXCESSO, montar_provedores, verificar_excessos
+from composicao_carga_missao import ComposicaoCargaMissaoM1
 from comparacao_carga_missao import comparar_estado, comparar_vinculos
 
 ENTRADA = ambiente_missoes.OWNED / 'evidencias/entrada-carga-missao-original.json'
@@ -56,59 +54,39 @@ class ComposicaoVsCaptura(_Base):
         cls.captura = carregar_json(CAPTURA)
         cls.estrita = ComposicaoCargaMissaoM1(cls.entrada)
         cls.resultado = cls.estrita.executar()
-        cls.ponte = ComposicaoCargaMissaoM1(cls.entrada, pontes=tuple(PONTES))
-        cls.resultado_ponte = cls.ponte.executar()
+        cls.repeticao = ComposicaoCargaMissaoM1(cls.entrada)
+        cls.resultado_repeticao = cls.repeticao.executar()
 
     def test_strict_composition_against_original_capture(self):
         r = self.resultado
+        self.assertTrue(r.retornou, r.parada)
+        self.assertIsNone(r.parada)
+        self.assertEqual(r.al, 1)
+        self.assertEqual([p['step'] for p in r.passos[-6:]], TAILS_AFTER_STOP)
+        self.assertEqual(len(r.passos), 32)
         vinculos = comparar_vinculos(r.registro, self.captura)
         self.assertTrue(vinculos['equal'], vinculos['first_mismatches'])
         self.assertEqual((vinculos['original_events'], vinculos['composed_requests']), (1400, 1400))
+        self.assertEqual(vinculos['original_arguments_not_captured']['count'], 16)
         estado = comparar_estado(self.estrita, self.captura, self.blocos, al=r.al)
-        self.assertEqual(estado['allocation_records']['differing'], 0)
-        self.assertEqual(r.detalhes['excess_changed'], [])
-        if ORDENS_POR_DONO:
-            # Economy per-owner [0x4e19b8] contract: no bridge, the strict run must be whole-state equal.
-            self.assertTrue(r.retornou, r.parada)
-            self.assertEqual(r.al, 1)
-            self.assertEqual(r.detalhes['diagnostic_bridges'], [])
-            self.assertEqual(estado['blocks_compared'], 881)
-            self.assertTrue(estado['equal'], estado['blocks'])
-            return
-        # Legacy Economy single Bag buffer: known blocking contract (see Stage13 report).
-        self.assertFalse(r.retornou)
-        p = r.parada
-        self.assertEqual((p['step'], p['routine'], p['call_site'], p['owner']),
-                         ('EnginInitTechnologie', '0x441459', '0x46c5af', 'economy'))
-        self.assertEqual(p['unmapped_attribute']['owner'], 'economy:PropriedadeConstrucoes')
-        self.assertEqual(p['unmapped_attribute']['attribute'], 'ordens')
-        self.assertEqual(p['completed_steps'][-1], 'MissionPlaceTerrain')
-        self.assertIsNone(r.al)
-        self.assertFalse(estado['equal'])
-
-    def test_bridged_diagnostic_reaches_return_with_whole_state_equal(self):
-        r = self.resultado_ponte
-        self.assertTrue(r.retornou, r.parada)
-        self.assertEqual(r.al, 1)
-        self.assertEqual([p['step'] for p in r.passos[-6:]], TAILS_AFTER_STOP)
-        if ORDENS_POR_DONO:
-            # The bridge is unnecessary: the diagnostic run is the strict run.
-            self.assertEqual(r.detalhes['diagnostic_bridges'], [])
-            self.assertEqual(r.detalhes['bridges_not_needed'], ['ordens'])
-        else:
-            self.assertEqual([b['bridge'] for b in r.detalhes['diagnostic_bridges']], ['ordens'])
-        estado = comparar_estado(self.ponte, self.captura, self.blocos, al=r.al)
         self.assertTrue(estado['equal'], estado['blocks'])
-        self.assertEqual(estado['blocks_compared'], 881)
-        self.assertEqual(estado['allocation_records']['composed'], 938)
-        self.assertTrue(comparar_vinculos(r.registro, self.captura)['equal'])
+        self.assertEqual((estado['blocks_compared'], estado['bytes_compared']), (881, 2659375))
+        self.assertEqual(estado['differing_bytes_or_blocks'], 0)
+        self.assertEqual((estado['allocation_records']['original'], estado['allocation_records']['composed'],
+                          estado['allocation_records']['differing']), (938, 938, 0))
         self.assertEqual(r.detalhes['excess_changed'], [])
+
+    def test_strict_composition_is_deterministic(self):
+        a, b = self.estrita.mapa.serializar(), self.repeticao.mapa.serializar()
+        self.assertEqual(a, b)
+        self.assertEqual(self.resultado.registro, self.resultado_repeticao.registro)
+        self.assertEqual(self.estrita.arena.registros, self.repeticao.arena.registros)
 
     def test_ia_reset_receives_stack_copy_and_controls(self):
-        passo = next(p for p in self.resultado_ponte.passos if p['step'] == 'IaReset')
+        passo = next(p for p in self.resultado.passos if p['step'] == 'IaReset')
         self.assertEqual(passo['al_argument_unused'], 1)
         self.assertEqual(passo['eax'], 0)
-        jogadores = self.ponte.provedores.mercado.jogadores
+        jogadores = self.estrita.provedores.mercado.jogadores
         self.assertEqual([jogadores[20 * j + 1] for j in range(4)], [1, 2, 2, 2])
 
 
@@ -155,15 +133,11 @@ class FechamentoESemPadroes(_Base):
     def test_denied_and_rebinding_guards(self):
         _, provedores = self.novo_mapa()
         w, prop = provedores.mundo, provedores.habitacao.propriedade
-        if ORDENS_POR_DONO:
-            self.assertEqual(len(prop.ordens), 4)
-            for a, b in zip(prop.ordens, w.bolsas_tipos_unidades):
-                self.assertIs(a, b)
-            with self.assertRaises(AtributoNaoMapeadoM1):
-                prop.ordens = tuple(w.bolsas_tipos_unidades)
-        else:
-            with self.assertRaises(AtributoNaoMapeadoM1):
-                prop.ordens
+        self.assertEqual(len(prop.ordens), 4)
+        for a, b in zip(prop.ordens, w.bolsas_tipos_unidades):
+            self.assertIs(a, b)
+        with self.assertRaises(AtributoNaoMapeadoM1):
+            prop.ordens = tuple(w.bolsas_tipos_unidades)
         with self.assertRaises(AtributoNaoMapeadoM1):
             w.solucionador
         with self.assertRaises(AtributoNaoMapeadoM1):
@@ -171,6 +145,21 @@ class FechamentoESemPadroes(_Base):
         with self.assertRaises(AtributoNaoMapeadoM1):
             prop.numeros_unidades = bytearray(208)
         w.largura = w.largura   # declared scalar caches stay assignable
+
+    def test_per_owner_bag_contract_is_mandatory(self):
+        import importlib.util
+        import types
+        caminho = ambiente_missoes.OWNED / 'ligacao_provedores_m1.py'
+        real = sys.modules['proprietarios']
+        legado = types.ModuleType('proprietarios')
+        legado.PropriedadeConstrucoes = real.PropriedadeConstrucoes   # no validar_ordens
+        sys.modules['proprietarios'] = legado
+        try:
+            spec = importlib.util.spec_from_file_location('ligacao_provedores_m1_sem_contrato', caminho)
+            with self.assertRaises(ImportError):
+                spec.loader.exec_module(importlib.util.module_from_spec(spec))
+        finally:
+            sys.modules['proprietarios'] = real
 
     def test_cache_divergence_is_detected(self):
         mapa, provedores = self.novo_mapa()

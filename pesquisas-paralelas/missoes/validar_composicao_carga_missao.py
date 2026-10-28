@@ -1,15 +1,14 @@
-"""M1 comparison: Python whole-MissionLoad composition vs the frozen original capture (CPU-free).
+"""M1 candidate check: strict Python whole-MissionLoad composition vs the frozen original capture.
 
-Runs the strict composition (the only run that can be M1 evidence) from the
-frozen entry snapshot to its return or its first named provider stop, then
-compares the whole state, allocation records, AL and the ordered binding
-requests with ``captura-carga-missao-original-v2.json``. A second, explicitly
-labelled diagnostic run applies the declared bridges of
-``composicao_carga_missao.PONTES`` to show what lies beyond a strict stop; it
-is never M1 evidence.
+CPU-free. Runs the strict composition (there is no bridge or fallback; the
+Economy per-owner [0x4e19b8] Bag contract is mandatory) twice from the frozen
+entry snapshot and compares the whole state, allocation records, AL and the
+ordered binding requests with ``captura-carga-missao-original-v2.json``. The
+result is marked as an M1 *candidate* only when every criterion holds;
+acceptance happens only after integration and committed-main reproduction.
 
     python3 -B pesquisas-paralelas/missoes/validar_composicao_carga_missao.py \
-        --relatorio pesquisas-paralelas/missoes/validacao/stage13-m1-composition.json
+        --relatorio pesquisas-paralelas/missoes/validacao/stage14-m1-composition-strict.json
 """
 import argparse
 import hashlib
@@ -20,34 +19,30 @@ import time
 
 import ambiente_missoes
 from mapa_memoria_m1 import carregar_blocos, carregar_json
-from composicao_carga_missao import ComposicaoCargaMissaoM1, PONTES
-from comparacao_carga_missao import comparar_estado, comparar_vinculos
+from composicao_carga_missao import ComposicaoCargaMissaoM1
+from comparacao_carga_missao import CAMPOS_NATIVOS_NAO_COMPARADOS, comparar_estado, comparar_vinculos
 
 ENTRADA = ambiente_missoes.OWNED / 'evidencias/entrada-carga-missao-original.json'
 CAPTURA = ambiente_missoes.OWNED / 'evidencias/captura-carga-missao-original-v2.json'
 FONTES = ('mapa_memoria_m1.py', 'arena_composicao_m1.py', 'ligacao_provedores_m1.py', 'composicao_carga_missao.py',
           'comparacao_carga_missao.py', 'validar_composicao_carga_missao.py', 'carregador_cabecalho.py',
           'carregador_unidades.py')
+PROVEDOR_ECONOMIA = 'pesquisas-paralelas/economia/proprietarios.py'
 
-CONTRATO_ECONOMIA = dict(
-    owner='economy',
-    file='pesquisas-paralelas/economia/proprietarios.py (PropriedadeConstrucoes.__init__ / .ordens) and its '
-         'consumers cauda_carga.CaudaCargaEconomia.definir_tecnologia_unidades, '
-         'aprendizagem.Aprendizagem.atualizar_ordens and proprietarios.py line ~166',
-    function='PropriedadeConstrucoes(ordens=...) / CaudaCargaEconomia.inicializar_tecnologia_unidades '
-             '(EnginInitTechnologie 0x441459, MissionLoad CALL 0x46c5af)',
-    needed='Accept the four live per-owner Bag pools by identity (the Core world\'s bolsas_tipos_unidades: four '
-           'distinct 2,704-byte bytearrays, 26 x 104-byte Bags each) and address owner j as ordens[j] + '
-           'type*104, instead of copying into one 10,816-byte buffer with a 2,704-byte owner stride.',
-    why='The constructor copies (bytearray(ordens)) into a single contiguous buffer. The original reaches the '
-        'Bags through the pointer table [0x4e19b8], whose four entries point at four separate page-aligned '
-        'allocations; Core already owns them as four bytearrays (ciclo_unidades.resetar_todas_unidades requires '
-        'exactly that). One buffer cannot alias four non-contiguous allocations, so no shared memory map can '
-        'include Economy\'s copy without a shadow.',
-    evidence='entry snapshot: [0x4e19b8]=0x41780000 -> 0x41781000, 0x41782000, 0x41783000, 0x41784000 '
-             '(alloc00845..alloc00848, 2,704 bytes each); strict stop traceback cauda_carga.py:60 '
-             'definir_tecnologia_unidades; the diagnostic copy-in/copy-out bridge then reaches AL=1 with the '
-             'whole state equal, so this is the only blocking contract on the MONDE01 path.')
+EXCLUSOES = [
+    dict(item='16 GetPrivateProfileStringA key arguments (GROUPE00..GROUPE15)',
+         reason='the original builds each key string in its own native stack frame (0x2007d38); the capture '
+                'keeps no final native stack, so the string itself cannot be read. At those 16 positions the '
+                'section, default, buffer size, file, result length and written-bytes SHA-256 are compared.'),
+    dict(item='allocation-record fields ' + ', '.join(CAMPOS_NATIVOS_NAO_COMPARADOS),
+         reason='native observation metadata of the oracle (caller return addresses and eight caller-stack '
+                'dwords at GlobalAlloc), not memory state; the Python resource-callback contract carries no '
+                'call site. Pointer, size, flags, index, initial byte, events, locks, active and freed-bytes '
+                'SHA-256 are compared for all 938 records.'),
+    dict(item='native stack block',
+         reason='the original final capture contains no native stack (881 final blocks); the composition '
+                'models no stack locals. It is not mission state (M1 snapshot contract).'),
+]
 
 RECOMENDADOS = [
     dict(owner='core', file='ferramentas/reset_terreno.py resetar_minimapa; avanco_unidades.MundoFisico mini_*',
@@ -79,18 +74,34 @@ def _estado_sha(composicao):
     return h.hexdigest()
 
 
-def executar(entrada, captura, entrada_blocos, pontes=()):
+def executar(entrada, captura, entrada_blocos):
     t = time.monotonic()
-    composicao = ComposicaoCargaMissaoM1(entrada, pontes=pontes)
+    composicao = ComposicaoCargaMissaoM1(entrada)
     resultado = composicao.executar()
     segundos = round(time.monotonic() - t, 3)
     estado = comparar_estado(composicao, captura, entrada_blocos, al=resultado.al)
     vinculos = comparar_vinculos(resultado.registro, captura)
-    return composicao, resultado, dict(
-        bridges=list(pontes), reached_return=resultado.retornou, al=resultado.al, stop=resultado.parada,
+    return dict(
+        reached_return=resultado.retornou, al=resultado.al, stop=resultado.parada,
         completed_steps=resultado.passos, seconds=segundos, state_sha256=_estado_sha(composicao),
-        details=resultado.detalhes, state_comparison=estado, binding_comparison=vinculos,
-        whole_state_equal=estado['equal'] and vinculos['equal'])
+        binding_requests_sha256=hashlib.sha256(json.dumps(resultado.registro, default=repr).encode()).hexdigest(),
+        details=resultado.detalhes, state_comparison=estado, binding_comparison=vinculos)
+
+
+def criterios(r):
+    e, v = r['state_comparison'], r['binding_comparison']
+    rec = e['allocation_records']
+    return {
+        'reached_return_0x42d22d_semantics': r['reached_return'] and r['stop'] is None,
+        'al_equals_1': r['al'] == 1 and e['al']['equal'],
+        'whole_state_equal_881_blocks_2659375_bytes': (e['equal'] and e['blocks_compared'] == 881
+                                                      and e['bytes_compared'] == 2659375
+                                                      and e['differing_bytes_or_blocks'] == 0),
+        'allocation_records_equal_938': (rec['original'] == rec['composed'] == 938 and rec['differing'] == 0),
+        'binding_requests_equal_1400': (v['equal'] and v['original_events'] == v['composed_requests'] == 1400),
+        'no_bridge': True,
+        'no_excess_change': r['details']['excess_changed'] == [],
+    }
 
 
 def main():
@@ -99,41 +110,40 @@ def main():
     args = ap.parse_args()
     entrada, captura = carregar_json(ENTRADA), carregar_json(CAPTURA)
     entrada_blocos = carregar_blocos(entrada['blocks'])
-    _, _, estrito = executar(entrada, captura, entrada_blocos)
-    _, _, repeticao = executar(entrada, captura, entrada_blocos)
-    _, _, diagnostico = executar(entrada, captura, entrada_blocos, pontes=tuple(PONTES))
-    m1 = bool(estrito['reached_return'] and estrito['whole_state_equal'] and not estrito['bridges'])
+    primeira = executar(entrada, captura, entrada_blocos)
+    segunda = executar(entrada, captura, entrada_blocos)
+    c = criterios(primeira)
+    deterministico = (primeira['state_sha256'] == segunda['state_sha256']
+                      and primeira['binding_requests_sha256'] == segunda['binding_requests_sha256']
+                      and primeira['stop'] == segunda['stop'] and primeira['al'] == segunda['al'])
+    candidato = all(c.values()) and deterministico
     relatorio = dict(
-        schema='rising-lands/missionload-m1-composition/1',
+        schema='rising-lands/missionload-m1-composition-strict/1',
         source_revision=_git('rev-parse', 'HEAD'),
         source_dirty_paths=[l[3:] for l in _git('status', '--porcelain').splitlines()],
         source_sha256={f: _sha_arquivo(ambiente_missoes.OWNED / f) for f in FONTES},
+        economy_provider_sha256={PROVEDOR_ECONOMIA: _sha_arquivo(ambiente_missoes.ROOT / PROVEDOR_ECONOMIA)},
         entry_snapshot=dict(path='evidencias/entrada-carga-missao-original.json', sha256=_sha_arquivo(ENTRADA)),
         original_capture=dict(path='evidencias/captura-carga-missao-original-v2.json', sha256=_sha_arquivo(CAPTURA)),
         original_sha256=entrada['original_sha256'],
-        cpu_free=True, native_executed=False,
-        m1_accepted=m1,
-        verdict=('M1: strict composition reached AL=1 and the whole state equals the original' if m1 else
-                 'NOT M1: strict composition stopped at a named provider contract; see strict.stop'),
-        strict=estrito,
-        strict_determinism=dict(repeated_state_sha256=repeticao['state_sha256'],
-                                identical=repeticao['state_sha256'] == estrito['state_sha256']
-                                and repeticao['stop'] == estrito['stop']),
-        diagnostic_bridged=dict(
-            not_m1_evidence=True,
-            purpose='Show what lies beyond the strict stop; every bridge is a declared copy-in/copy-out',
-            bridge_descriptions=PONTES, **diagnostico),
-        provider_contract_changes_needed=[CONTRATO_ECONOMIA] if not m1 else [],
+        cpu_free=True, native_executed=False, bridges=[],
+        criteria=c, deterministic=deterministico,
+        m1_candidate=candidato,
+        m1_accepted=False,
+        acceptance_note=('M1 candidate only; acceptance happens after integration and committed-main '
+                         'reproduction by the coordinator' if candidato else 'NOT an M1 candidate'),
+        comparison_exclusions=EXCLUSOES,
+        strict=primeira,
+        determinism=dict(second_run_state_sha256=segunda['state_sha256'],
+                         second_run_binding_requests_sha256=segunda['binding_requests_sha256'],
+                         second_run_seconds=segunda['seconds'], identical=deterministico),
+        supersedes_blocker=dict(stage13_report='validacao/stage13-m1-composition.json',
+                                stage13_stop='EnginInitTechnologie 0x441459 at CALL 0x46c5af (Economy ordens)',
+                                resolved_by='Economy per-owner [0x4e19b8] Bag contract on main ff2f5cf'),
         recommended_non_blocking_changes=RECOMENDADOS)
     Path(args.relatorio).write_text(json.dumps(relatorio, indent=1, default=str) + '\n')
-    resumo = dict(m1_accepted=m1, strict_stop=estrito['stop'] and {k: estrito['stop'][k] for k in (
-        'step', 'routine', 'call_site', 'owner', 'exception')},
-        strict_bindings_equal=estrito['binding_comparison']['equal'],
-        strict_differing=estrito['state_comparison']['differing_bytes_or_blocks'],
-        bridged_reached_return=diagnostico['reached_return'], bridged_al=diagnostico['al'],
-        bridged_whole_state_equal=diagnostico['whole_state_equal'],
-        deterministic=relatorio['strict_determinism']['identical'])
-    print(json.dumps(resumo, indent=1))
+    print(json.dumps(dict(m1_candidate=candidato, criteria=c, deterministic=deterministico,
+                          state_sha256=primeira['state_sha256'], stop=primeira['stop']), indent=1))
     return 0
 
 
