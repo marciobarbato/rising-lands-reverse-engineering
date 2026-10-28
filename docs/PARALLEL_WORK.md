@@ -10,6 +10,7 @@ The current round uses seven research owners plus the coordinator's maintenance 
 | Economy and Production | `feat/re-economy` | `worktrees/re-economy` | `pesquisas-paralelas/economia/`, `docs/ECONOMY.md` | Load-tail providers, natural production start, transport/work cycle to store bags in the cave |
 | Combat and Projectiles | `feat/re-combat` | `worktrees/re-combat` | `pesquisas-paralelas/combate/`, `docs/COMBAT.md` | Projectile reset, live attack state machine through the dispatcher into impact/damage/death, building-target branch |
 | Graphics and Animation | `feat/re-graphics` | `worktrees/re-graphics` | `pesquisas-paralelas/graficos-animacao/`, `docs/GRAPHICS.md` | Cache initialization and complete `AffGame` frames over the real loaded state |
+| Audio (second wave; run by the macOS chat until its M1 trigger) | `feat/re-audio` | `worktrees/re-audio` | `pesquisas-paralelas/audio/`, `docs/AUDIO.md` | Sound banks, sample decoding and the request queue reached by `PlaySnd_PostSound`/`PlaySnd_Manage` |
 | macOS Playable Build and Validation | `feat/macos-playable` | `worktrees/macos-playable` | `apps/macos-preview/`, `compilar-jogável`, `docs/MACOS_PLAYABLE.md` | Milestone-triggered consumer builds and divergence records |
 | Coordinator maintenance | `coordinator/maintenance` | `worktrees/maintenance` | Every shared path | Infrastructure, shared manuals, estimate and inventory |
 
@@ -25,6 +26,7 @@ python3 scripts/workstream.py start economy
 python3 scripts/workstream.py start combat
 python3 scripts/workstream.py start graphics
 python3 scripts/workstream.py start macos
+python3 scripts/workstream.py start audio       # macOS chat, second wave
 python3 scripts/workstream.py start maintenance   # coordinator only
 python3 scripts/workstream.py fronts              # print the ownership table
 ```
@@ -48,7 +50,7 @@ If one domain needs another's implementation, finish its independent investigati
 1. Run the owning front's local checks, changed behavior's differential tests, and a reproducible bounded demonstration when relevant. Report unsupported callbacks, skipped tests, expected exceptions, and reference-only behavior accurately.
 2. Update the English domain manual and owned `HANDOFF.md`; keep PT-BR game content unchanged. Inspect the complete diff and commit only owned paths.
 3. From that clean feature worktree, run `python3 scripts/workstream.py integrate <front>`. This requires the task's authorization to push; the restart prompt explicitly includes it.
-4. The helper acquires one advisory lock in the common Git directory, fetches main, enforces ownership, merges main into the feature branch, pushes the feature branch, then creates a detached integration worktree. It performs a `--no-ff` merge, runs the common local suites plus the front's own validation (missions and ai-runtime: their native suites with `RISING_EMULAR=1`; macos: `compilar-jogável --development-ref HEAD`), uses a normal non-force push to `main`, and verifies that the feature and merge commits are ancestors of fetched `origin/main`.
+4. The helper acquires one advisory lock in the common Git directory, fetches main, enforces ownership, merges main into the feature branch, pushes the feature branch, then creates a detached integration worktree. It performs a `--no-ff` merge, runs the common local suites plus the front's own validation (missions, ai-runtime and audio: their native suites with `RISING_EMULAR=1`; macos: `compilar-jogável --development-ref HEAD`), uses a normal non-force push to `main`, and verifies that the feature and merge commits are ancestors of fetched `origin/main`.
 5. If another machine advances remote main, the push is rejected; the helper fetches, merges that advance into the candidate, reruns checks, and retries up to three times. Authentication/policy failures and conflicts stop with the candidate preserved. Review conflicts semantically; never force or blindly choose an entire side.
 6. On success, record the implementation, final feature and remote-main merge commits in the chat's response and handoff. Do not amend the branch afterward merely to record its own merge hash. Update a central overview only in a subsequent agreed maintenance pass.
 

@@ -1,0 +1,156 @@
+{
+ "exe_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "analysis_pe_sha256_not_executed": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+ "unicorn_version": "2.1.4",
+ "result": "PASS",
+ "limits": {
+  "bank": {
+   "instrucoes": 4000000,
+   "timeout_us": 300000000
+  },
+  "routine_instructions": 100000,
+  "getnumbob_instructions": 300000,
+  "timeout_us": 2000000
+ },
+ "bindings": {
+  "iat_resolution": [
+   {
+    "slot": "0x5231c0",
+    "importacao": "KERNEL32.GlobalAlloc",
+    "trampolim": "0xe000000"
+   },
+   {
+    "slot": "0x5231c8",
+    "importacao": "KERNEL32.GlobalFree",
+    "trampolim": "0xe000010"
+   },
+   {
+    "slot": "0x5231cc",
+    "importacao": "KERNEL32.GlobalHandle",
+    "trampolim": "0xe000020"
+   },
+   {
+    "slot": "0x5231d0",
+    "importacao": "KERNEL32.GlobalLock",
+    "trampolim": "0xe000030"
+   },
+   {
+    "slot": "0x5231d8",
+    "importacao": "KERNEL32.GlobalUnlock",
+    "trampolim": "0xe000040"
+   }
+  ],
+  "fixture_files": [
+   {
+    "nome": "\\Graphics\\Blocs.cmp",
+    "copia": "fontes/cd/INSTALHD/GRAPHICS/BLOCS.CMP",
+    "bytes": 1426660
+   },
+   {
+    "nome": "\\Graphics\\Troops.cmp",
+    "copia": "fontes/cd/INSTALHD/GRAPHICS/TROOPS.CMP",
+    "bytes": 3171280
+   },
+   {
+    "nome": "\\Graphics\\Vehicule.cmp",
+    "copia": "fontes/cd/INSTALHD/GRAPHICS/VEHICULE.CMP",
+    "bytes": 2027609
+   },
+   {
+    "nome": "\\Graphics\\Creature.cmp",
+    "copia": "fontes/cd/INSTALHD/GRAPHICS/CREATURE.CMP",
+    "bytes": 2585477
+   },
+   {
+    "nome": "\\Graphics\\Building.cmp",
+    "copia": "fontes/cd/INSTALHD/GRAPHICS/BUILDING.CMP",
+    "bytes": 1272760
+   },
+   {
+    "nome": "\\Graphics\\Others.cmp",
+    "copia": "fontes/cd/INSTALHD/GRAPHICS/OTHERS.CMP",
+    "bytes": 2927906
+   }
+  ],
+  "path_prefix_0x509494": "",
+  "LoadSTRATBank": {
+   "chamadas": 97288,
+   "por_vinculo": {
+    "GlobalAlloc": 24314,
+    "GlobalLock": 24314,
+    "fclose": 12,
+    "fopen": 12,
+    "fread": 48636
+   },
+   "sha256": "cd0b9f9b6e8d11f0a1b8a5fe043c4d26e90004da9fb1ccd214782a75433787b9"
+  },
+  "model_side": "Python MemoriaMotor consumes a derived ArenaGlobalFixa at the same position"
+ },
+ "synthetic_payload_binding": null,
+ "explicit_inputs": ["visibility map pointers 0x507D78/0x507D88 (harness heap)","shadow table pointer 0x4E24B4 (harness heap)","camera byte 0x508041","path prefix 0x509494"],
+ "steps": [
+  {
+   "step": "CacheAlloc",
+   "bound_calls": [
+    ["GlobalAlloc",[0,1024],282074608],
+    ["GlobalLock",[282074608],282074608]
+   ],
+   "pointer_u32": 282074608,
+   "counter_u32": 13509960,
+   "native_keys": "fixture fill 0xA5 (undefined GMEM_FIXED content); model keys undefined"
+  },
+  {
+   "step": "InitCache_1",
+   "eax": 256,
+   "cursor_u16": 0,
+   "payload_sha256": "aef6ff4ed09dde359ef3dd113638167b63b6fbe600128485b2e560b87c5e0e55",
+   "instructions": 2825
+  },
+  {
+   "step": "InitCache_2",
+   "eax": 256,
+   "cursor_u16": 18,
+   "payload_sha256": "1d31be772ed8212b3106652eb5299acb39243b98357e0fd20e615fe527286db1",
+   "instructions": 2825
+  },
+  {
+   "step": "CacheFree",
+   "bound_calls": [
+    ["GlobalHandle",[282074608],282074608],
+    ["GlobalUnlock",[282074608],0],
+    ["GlobalHandle",[282074608],282074608],
+    ["GlobalFree",[282074608],0]
+   ],
+   "eax": 0,
+   "stale_pointer_u32": 282074608,
+   "counter_u32": 13509960
+  }
+ ],
+ "getnumbob": {
+  "phase_1": 539,
+  "phase_2": 8,
+  "branches": {
+   "undiscovered": 3,
+   "direct": 3,
+   "hit": 7,
+   "miss": 534
+  }
+ },
+ "expected_faults": [
+  {
+   "case": "InitCache before CacheAlloc",
+   "native": "Invalid memory write (UC_ERR_WRITE_UNMAPPED)",
+   "eip": "0x40fa49",
+   "model": "0x40fa49"
+  }
+ ],
+ "totals": {
+  "native_entries": 554,
+  "instructions_observed": 9364346,
+  "bound_calls": 97294,
+  "whole_state_comparisons": 552
+ },
+ "expected_limits": 0,
+ "skips": 0,
+ "seconds": 10.552
+}

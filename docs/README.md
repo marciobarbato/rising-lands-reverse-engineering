@@ -20,5 +20,6 @@ The maintained manuals below replace the scattered research handoffs. Historical
 | [Validation](VALIDATION.md) | Local checks, x86 opt-in, report semantics, and source verification |
 | [Ghidra and symbols](GHIDRA.md) | Toolchain, normalized PE, original SBL names, and analysis limits |
 | [macOS preview](MACOS_PREVIEW.md) | Launching, rebuilding, immutable snapshots, and supported UI behavior |
+| [Audio](AUDIO.md) | Sound banks, sample decoding, request queue, and the DirectSound boundary |
 | [macOS playable](MACOS_PLAYABLE.md) | Building the playable consumer from one revision and its supported exercise |
 | [Migration](MIGRATION.md) | Preserved historical records, compatibility, and recovery |
