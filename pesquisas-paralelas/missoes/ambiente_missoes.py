@@ -6,7 +6,8 @@ ROOT = Path(__file__).resolve().parents[2]
 OWNED = Path(__file__).resolve().parent
 CD = ROOT.parent / 'source/cd'
 for path in (ROOT / 'ferramentas', ROOT / 'pesquisas-paralelas/combate',
-             ROOT / 'pesquisas-paralelas/economia', ROOT / '.local/python',
+             ROOT / 'pesquisas-paralelas/economia',
+             ROOT / 'pesquisas-paralelas/graficos-animacao', ROOT / '.local/python',
              ROOT.parent / 'source/python'):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))

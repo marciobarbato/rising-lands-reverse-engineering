@@ -90,7 +90,7 @@ def validate():
         for dx,dy in ((-128,-128),(127,127),(-1,1),(0,0)):add([2,16,255,8,dx,dy,x,y,799])
     for values in fixtures:
         raw=record(template,values);native,_=b.draw(raw,values)
-        try:plan=consultar_corpo_tipo2(raw,x=values[6],y=values[7])
+        try:plan=consultar_corpo_tipo2(raw,x=values[6],y=values[7],indice_u16=values[8],camera_u8=0,indice_selecionado_u16=65535,modo_selecao_u8=0)
         except NotImplementedError:
             assert any(not 1<=l[0]<=sum(QUANTIDADES) for l in native)
             report['captures'].append([values,native,False])
@@ -103,7 +103,7 @@ def validate():
         for bag in (0,1,65535):
             raw=bytearray(record(template,values));struct.pack_into('<H',raw,0x74,fatigue);struct.pack_into('<H',raw,0xa,bag)
             native,_=b.draw(raw,values)
-            assert observed(consultar_corpo_tipo2(raw,x=64,y=48))==native
+            assert observed(consultar_corpo_tipo2(raw,x=64,y=48,indice_u16=799,camera_u8=0,indice_selecionado_u16=65535,modo_selecao_u8=0))==native
             report['guard_captures'].append(dict(fatigue_u16=fatigue,bag_u16=bag,record_hex=raw.hex(),layers=native))
     b.carregar_banco_original({name:catalog._ler('cd/INSTALHD/GRAPHICS/'+name) for name in ORDEM})
     shadow=bytes(json.loads((RAIZ/'validacao/x86-composicao.json').read_text())['tabelas_sombra'][1]['indices'])
@@ -119,7 +119,7 @@ def validate():
     for values,clip in pixel_cases:
         raw=record(template,values);native,pixels=b.draw(raw,values,pixels=True,clip=clip,shadow=shadow)
         background=bytes((i*17+23)%256 for i in range(128*128))
-        out,plan=compor_corpo_tipo2(catalog,background,128,128,raw,x=values[6],y=values[7],tabela_sombra=shadow,recorte=clip)
+        out,plan=compor_corpo_tipo2(catalog,background,128,128,raw,x=values[6],y=values[7],tabela_sombra=shadow,recorte=clip,indice_u16=values[8],camera_u8=0,indice_selecionado_u16=65535,modo_selecao_u8=0)
         assert out==pixels and observed(plan)==native,(values,clip)
         report['pixels'].append(dict(input=values,clip=clip,sha256=sha(pixels)))
         if values[0]==2 and values[1]%2 and values[2] in (0,7) and values[4:8]==[0,0,64,48]:

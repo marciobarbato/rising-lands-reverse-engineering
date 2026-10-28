@@ -225,7 +225,7 @@ python3 -B scripts/check.py --domain graphics
 
 ## Type-2 normal body — eighth continuation stage
 
-The app's type-2 body gap is reconstructed in a separate `unidade_tipo2.py`, preserving the existing five-type modules and their frozen provenance. `consultar_corpo_tipo2(registro276, *, x, y)` requires one 276-byte prepared runtime record and signed-i16 projected cell origins. Supported inputs: owner byte `+0=0`, type `+1=2`, state `+2` in 2/7, oscillation `+0x99=0`, effects byte `+0xDC=0`, auxiliary indicator `+0xBA=0` and unsigned word `+0x74>=100`. These are explicit conditions, not defaults inferred from a loaded mission. The bag word at `+0x0A` does not affect this branch.
+The app's type-2 body gap is reconstructed in a separate `unidade_tipo2.py`, preserving the existing five-type modules and their frozen provenance. Its historical stage-eight signature was `consultar_corpo_tipo2(registro276, *, x, y)`; **the required selection inputs added in stage nine below supersede that signature**. It requires one 276-byte prepared runtime record and signed-i16 projected cell origins. Supported inputs: owner byte `+0=0`, type `+1=2`, state `+2` in 2/7, oscillation `+0x99=0`, effects byte `+0xDC=0`, auxiliary indicator `+0xBA=0` and unsigned word `+0x74>=100`. These are explicit conditions, not defaults inferred from a loaded mission. The bag word at `+0x0A` does not affect this branch.
 
 It reads signed-i8 displacement `+0x86/+0x87`, raw direction u8 `+0x91`, phase u8 `+0xA4` and count u8 `+0xA5`. Body ID is low-u16 `3202 + (floor((direction+1)/2)-1)*count + phase`; direction zero therefore uses group -1, rather than being silently clamped. Native type initialization sets count=8 and oscillation=0, but this renderer consumes every count/phase byte raw. It does not reset state-7 phase to the separate stop-phase value, infer animation cadence or advance simulation.
 
@@ -239,6 +239,23 @@ The [focused REA review](../pesquisas-paralelas/graficos-animacao/evidencias/rea
 
 ```sh
 python3 -B pesquisas-paralelas/graficos-animacao/validar_unidade_tipo2.py
+python3 -B scripts/check.py --domain graphics
+```
+
+## Explicit type-2 selection guards — ninth continuation stage
+
+Caller review found an omitted boundary in the stage-eight raw-record wrapper: `AffDeplaceEngin` can draw a selection marker before the body and invoke `AffInfoSelection` after it, using record `+0xBD` and globals outside that record. The old native fixtures used original image defaults camera0, selected indexFFFF, mode0, and +BD0. Their results remain valid for that narrow environment; the wrapper needed explicit inputs to avoid accepting an unimplemented overlay path.
+
+Both `consultar_corpo_tipo2` and `compor_corpo_tipo2` now require four additional keywords: `indice_u16` in0–799, `camera_u8` in0–255, `indice_selecionado_u16` in0–65535, and `modo_selecao_u8` in0–255. They are the actual pool index, current camera, original selected-index word and selection-mode byte. No mission defaults are supplied. The API rejects `NotImplementedError` before composition if `(record[0xBD]!=0 and camera==owner)` or selected index equals pool index or mode is nonzero. A nonzero +BD can still use the normal-body API under another camera when the other two overlay triggers are absent. The existing body/effect guards, ordered layers, fixed-width arithmetic and input preservation remain as above. Other five-type APIs keep their existing contracts.
+
+Original selection-prefix range `0x4124A9..0x4124C4`, tail `0x412A53..0x412A9F`; globals camera `0x508041`, selected-index word `0x496AC2` and mode byte `0x508F8F`. [New exact-byte evidence](../pesquisas-paralelas/graficos-animacao/evidencias/selecao-tipo2.json) pins unchanged stage-eight report/evidence hashes and original executable identity. The original-byte review is sufficient for these simple guards; REA was not needed for a new semantic inference.
+
+Fresh validator: **5,155 bounded original calls / 2,360,401 instructions**, comprising 5,136 selection captures, 16 exact indexed buffers, one type initialization and two bank calls. Captures contain **3,596 full returns**, **514 declared stops at `0x4124C4` before selection-marker work**, and **1,026 declared stops at `AffInfoSelection 0x410BE4`** after the normal body. The stops are explicit unimplemented dependencies, not full original returns. Every supported capture/pixel call returns normally with ESP`0x2008004`; pools and selection globals are preserved. Zero unexpected exceptions, limits or skips. Capture blitters are intercepted; pixel calls execute original rendering without substitutions. All mode/camera/selection-flag bytes, pool slots0/1/799 and selected-word boundaries are covered. [Saved report](../pesquisas-paralelas/graficos-animacao/validacao/x86-selecao-tipo2.json).
+
+Five new capture regressions and all preceding graphics checks pass (**134 tests**, zero skips). Stage-eight capture files are not regenerated; maintained replay/validator call sites now pass their historical explicit selection values. This fixes the wrapper boundary; selection markers/gauges, broader action rendering and real-mission operation remain unsupported.
+
+```sh
+python3 -B pesquisas-paralelas/graficos-animacao/validar_selecao_tipo2.py
 python3 -B scripts/check.py --domain graphics
 ```
 
