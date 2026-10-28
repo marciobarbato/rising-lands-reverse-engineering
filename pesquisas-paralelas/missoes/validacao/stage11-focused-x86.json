@@ -1,0 +1,51 @@
+{
+  "tests": 9,
+  "skipped": 0,
+  "errors": 0,
+  "failures": 0,
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "independent_capture_sha256": "52232213ef3585a8523a04d24d5bcc9d472c90ff137769fb0cea48f9a41b777e",
+  "scan_native_entries": {
+    "structures": 62,
+    "joined": 1,
+    "predicate": 0
+  },
+  "scan_returns": 56,
+  "scan_expected_dependency_stops": 7,
+  "scan_bounded_segments": 161,
+  "scan_minimap_resumes": 49,
+  "scan_loop_resumes": 49,
+  "max_scan_instructions_per_segment": 156130,
+  "structure_query_entries": 512,
+  "mission_query_entries": 256,
+  "query_bounded_segments": 768,
+  "native_faults": 0,
+  "compared_blocks": {
+    "data": {
+      "base": "0x494000",
+      "bytes": 585728
+    },
+    "arena_01000000": {
+      "base": "0x1000000",
+      "bytes": 262144
+    },
+    "arena_01300000": {
+      "base": "0x1300000",
+      "bytes": 69632
+    },
+    "arena_01400000": {
+      "base": "0x1400000",
+      "bytes": 3145728
+    },
+    "arena_01800000": {
+      "base": "0x1800000",
+      "bytes": 1179648
+    },
+    "arena_01a00000": {
+      "base": "0x1a00000",
+      "bytes": 20480
+    }
+  },
+  "scope": "Exact structure caller and one joined MissionPlaceTerrain, actual committed physical/habitation providers, whole mapped-state byte equality and ordered traces. Explicit synthetic inherited physical/economic/rule input; no complete MissionLoad or real mission runtime.",
+  "real_mission_runtime_tested": false
+}

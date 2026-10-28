@@ -504,3 +504,96 @@ Delivered in `cauda_carga.py`; the full contract is in [ECONOMY.md](../../docs/E
 - `DemonteBatiment` refund query.
 - Natural production start (next sequence item 2) and the transport/work cycle (item 3).
 - Note for core: `0x49a070` holds per-owner, per-type counts of active structures (`BatimentInitCave`), not realizability flags. Only the name is misleading; no change is requested.
+
+## Stage 17 in progress: natural production start (not integrated)
+
+Authorized by the coordinator after Stage 16 was accepted. Only the original-byte inventory is done and committed: `capturar_producao_natural.py` and `evidencias/producao-natural.json`, with 10 intervals and 3 jump tables. Facts established from bytes:
+- **Starting production:** `InitRecruteTroupe 0x4283e2` is reached only from `ProcessInputGame 0x45f1a9` (player input) and `V_BatimentRecruteUnite 0x480749` (AI operation). Its only missing piece is `RechercheDecalageSortie 0x41d1d0`: core `CalculPosition`, then the radius-1 ring (cells 0..255) taking the first cell where `TerrainEnCollision(cell, 1)` is false (`(atributos[cell] & 1) != 0`), else the base cell.
+- **Dispatcher branch:** `0x426918` (structure types 1/2/13/16) is an inline copy of `BatimentEstHabiter`, then `CalculTroupe(AX)`. Entry contract: AI/runtime's (u16 index, return ignored).
+- **Empty-Bag cleanup after `0x42110c`, in order:**
+  1. `BatimentGetCase`.
+  2. Core `EteintTerrain 0x476e82(cell, R, owner)`, with R from table `0x420df4` (same mapping as `RAIOS`).
+  3. Deselection at `0x495be0`.
+  4. Owner byte `+4 = 200`.
+  5. Core `BatimentModifyMap 0x419e97(AX, 1)`.
+  6. Inline reset.
+  7. `iagUnitSendMessage(unit, 0x46)`, then `iagVilleSendMessage(building, 3)`.
+- **Structure-type table:** `BatimentLoadCaract 0x418c70` loads from INI only `+4`, `+0x0c`, `+0x0e` and the `NAME` at `+0x13` (`SANCTUAIRE`→`SANTUÁRIO`, `CAVE`→`ARMAZÉM`) and `[DIVERS]` globals. Production consumes the static `+0/+2/+0x12`.
+- **MONDE01 inputs:** player 0 has food 30 / stone 30. Type 5 costs 4 food with time 500. Every colonist's sound handle `+0x104` is `ffffffff`, so with camera 0 the first completed unit ends at the explicit pending-sound boundary.
+
+**Pending questions to core** (sent, no reply yet): a validated direct-call radius for `EteintTerrain`; a `BatimentModifyMap` provider; and whether economy may read `atributos & 1` for `TerrainEnCollision` inside `RechercheDecalageSortie`.
+
+**Next steps:**
+- Fixtures over MONDE01 post-load state, with declared synthetic selection, bonus, experience queue and viewport.
+- Native bench extending `BancadaProducaoLimpa` (entries `0x4283e2`, `0x41d1d0`, `0x4268d4`).
+- Original-only captures before translation.
+- `producao_natural.py` (`recherche_decalage_sortie`, `iniciar_recrutamento_no_mundo`, `ramo_producao_estrutura`, cleanup continuation gated on core).
+- Native comparisons, documentation, check and integration.
+
+## Stage 17 recovery audit and readiness (light wave)
+
+The new human request supersedes the former STOP. Coordinator is now `01a183e4-456e-77d0-9c6a-81b1c72ae887`; old `local_` Claude session identifiers remain historical. The resumed economy worktree/branch was clean at `3868ce5d6f3cfd82c577595e528d8e803fe81e19`, with two local commits ahead of its remote feature. The inventory commit is absent from observed fetched main `8810b3730a0fb788af3eac2b447dea65372f597f`. The helper resumed this exact checkout after inspection; no pending work/history, worktree or integration candidate was removed. Core currently holds the heavy slot; this wave performed only light static inspection and owned documentation.
+
+New `evidencias/producao-natural-auditoria-retomada.json` independently verifies original EXE/SBL/INI hashes, all 10 intervals (2,048 bytes /588 decoded instructions), 3 jump tables (65 entries), the structure-type table and all 5 predecessor identities. The audit compares fresh disassembly and complete listing coverage with original bytes. Every check passes. Prior manifests/listings/exporters are unchanged. Zero native entries, Ghidra sessions, domain checks or integrations ran in this audit. No Stage 17 independent native captures or new reconstructed game body exists yet.
+
+Corrections/precision to the predecessor's next-step wording:
+
+1. Recruitment initiation accepts eight types 1/2/5/13/15/16/18/20; the selected advancement branch handles four types 1/2/13/16. Do not automatically initiate requests from that advancement branch. The two direct CALL fragments are proved; absence of every possible indirect caller is not.
+2. Search is over global 0..255 coordinates, dy then dx, excluding the centre, with the raw 0x507da8 attribute mask 0x01. Use actual core CalculPosition with the runtime dimensions. Do not clip to playable map width/height or read the different 0x507d74 object pointer.
+3. At 0x41d24a a word local is written; at 0x41d2a6 a dword is read. Upper inherited stack bits can affect full EAX, while InitRecruteTroupe consumes AX at0x428640. Native captures must vary this seed and preserve original registers, with the consumed u16 cell distinguished from full EAX.
+4. Existing Stage 15 `celula_central_estrutura` and `estrutura_habitada` already supply the centre and predicate. No duplicate implementation is needed. Core's existing light removal needs fresh caller validation at radii8/10. `BatimentModifyMap` is in immutable pending Core commit a572e8c, not yet in the observed main; consume only after integration. Message0x46/town3 and sound insertion remain distinct owner dependencies.
+5. The 0x495be0 selection table must be shared by identity between recruitment and the physical world, alongside the earlier unit/structure/raw-terrain aliases. Tables, queues, viewport and inherited memory remain explicit. Existing MONDE01-derived fixtures contain declared synthetic inherited state and must not be described as a full post-load world.
+
+### Small original-only batch proposed before translation
+
+- **14 RechercheDecalageSortie entries:** one first-free case per eight eligible start types; blocked first candidate; all blocked fallback; global corners0/0 and255/255; a free candidate outside the smaller playable extent but inside the global grid; one alternate upper-stack seed paired with an initial case.
+- **4 InitRecruteTroupe scenarios:** accepted MONDE01-derived start; insufficient balances; already-active building; ineligible building type. The accepted case additionally performs one original BatimentNextEtape update using the same inherited buffers.
+- **6 dispatcher entries:** inhabited types1/2/13/16 and empty type1/type2. The complete original prologue/shared epilogue run, without simulating an internal native CALL or RET.
+- **4 empty cleanup fragments:** types1/2/13/16 through GetCase, actual EteintTerrain, deselection and owner200 stores, stopping before BatimentModifyMap at0x42114e. This does not claim later map/reset/messages.
+
+Total budget:28 scenarios /29 original entry calls before minimap resumptions. Original-only fixture construction must not invoke the future translated search/caller. Capture whole physical/economic/selection/queue/tables and guards, exact registers, ordered effects, dependency stop and per-segment counts. Cases are deterministic inherited inputs, not a claim of M1 runtime. No x86 run is scheduled until the coordinator grants it; no fabricated sound handle, no empty callback, no limit increase.
+
+### Current-stage completion after heavy grant
+
+Integrate the reviewed **inventory stage** before any game translation: run `python3 -B scripts/check.py --domain economy`; inspect the complete owned diff, commit the audit/docs; run `python3 scripts/workstream.py integrate economy` from the clean feature with the common lock; fetch/verify delivered, final feature and merge ancestry; replay the same read-only byte audit at committed main. Full integration gate is heavy and must be serialized by the coordinator. The proposed original-only batch is a separately scheduled next step before translation, not something already executed or proof needed to claim an inventory-only byte audit.
+
+Readiness: light audit complete, no heavy work running or slot held by economy. Waiting for coordinator scheduling. Natural production completion, transport/work, AI/audio and full mission behavior remain unsupported at their existing exact boundaries. No competing global estimate is introduced.
+
+## Light M1 IaReset dependency audit (no new implementation)
+
+Coordinator reassigned this light slot to concrete economy delegates for IaReset, with Core holding exclusive heavy work. Natural production/transport and the 28-scenario natural-production capture plan remain deferred. All earlier local Stage 17 inventory/audit work is preserved; no prior evidence was regenerated. The audit uses committed main e9f5dbd33972344e37db3a93be1aec9c115a88bf and AI feature-only inventory428f54cc075cb94ab0ffba5595dfed42f09f7d38, not another owner's live worktree. New `evidencias/contratos-economia-iareset-auditoria.json` records exact intact bytes and source hashes. Full contracts are in [ECONOMY.md](../../docs/ECONOMY.md#light-m1-audit-economy-delegates-required-by-iareset).
+
+Reusable genuine delegates:
+- `Mercado.tipo_jogador(player)`: AL u8; raw player byte +1 for0..3, returns2 for4..255; no stores. Preserve the neutral/context player4 behavior. Native caller consumes AL.
+- `Economia.consultar(player)`: player low u8 protected0..3; unsigned totals `(food,stone,parts,0)` (resource IDs1/2/0, record+2), not RMI/stock; no stores.
+- Existing committed combat bridge `ataque_vivo.batiment_get_player(structures,index)`: low u16 index0..999, raw flat pool byte+4, no state/owner filtering or stores. This already matches the requested consumed-AL owner query; do not duplicate it in AI. Upper EAX is not the bridge contract.
+
+Four minimal missing owner leaves:
+1. `RechercheGetNiveau`: AL player u8, DX branch u16; read unsigned byte `0x5080f4+16*player+branch`, return zero-extended AX. Proposed protected IaReset scope player0..3/branch0..3; no stores, EBX/EDX preserved. It is not a word field. Actual RET ends4717de; padding before4717e0 is not another executed instruction.
+2. `RechercheSetBranche`: AL player u8 protected0..3, DL byte value0..255; one store to `0x5080f8+16*player`, preserving all other64-byte research data and every other subsystem. Native result is player*16 in EAX; AI ignores it. Do not invent technology/bonus/progress effects.
+3. `BatimentExiste`: AX structure u16 protected0..999; state+5 !=0 returns EAX0/1. States3/4/5 are true; not habitation/destruction.
+4. `BatimentGetType`: AX structure u16 protected0..999; raw byte+8 returned in consumed AL, including unknown bytes. Existing transport type comparison is not a standalone getter. No stores/full-EAX normalization. All three structure queries preserve EDX and use the same276000-byte live world pool.
+
+Aliasing is mandatory. Constructors for Mercado/Economia copy their incoming arrays. Reuse mission-owned providers and directly map the actual Mercado.jogadores80-byte pointee and Economia.memoria128-byte inline region into AI memory; sharing bytes by value is insufficient. Mercado must use the same Economia object. MemoriaDeclarada keeps memoryviews over the actual supplied allocations. The new research provider must share an explicitly inherited64-byte0x5080f4..0x508134 range, not Aprendizagem spell flags or synthetic defaults. A branch store becomes visible immediately through that range, with no replay/copy-back. AI's `sitio` keyword is adapter tracing metadata; existing owner methods do not accept it.
+
+IaReset's actual type2 path first reads research at47f43f and writes branch at47f4ca; do not supply all-human controls to evade it. AI must preserve every earlier store when a genuine dependency is unresolved.
+
+Proposed bounded original-first work AFTER pending inventory integration:14 original-only scenarios /26 leaf entries (4 research reads,4 research writes,6 structure cases executing all3 getters). Then direct differentials over the protected research domain,4×256 setter bytes,state0/1/3/4/5/255, raw owner/type values, high register bits, guards and whole buffers, plus local bidirectional alias checks. AI owns a fresh actual-type2 IaReset adapter comparison; all missing callbacks remain exact stops until available. This is not a production binding, native comparison, integration or mission proof.
+
+Readiness: light audit/docs complete; zero x86/Ghidra/domain/common/integration checks and no heavy slot held. Pending gate before any implementation remains: review/commit existing owned inventory/audits, economy check, shared-lock integrate economy, fresh delivered/feature/merge ancestry and relevant main replay, scheduled by coordinator. No source/provider implementation was added or changed.
+
+### Reviewed local checkpoint ready for the inventory gate
+
+The preserved Stage 17 inventory and both additive light audits are ready for a local documentation/evidence checkpoint. No reconstructed Python behavior was changed. Domain/common/native checks and integration are explicitly pending the coordinator's heavy grant; committing this reviewed checkpoint is not a claim they passed.
+
+Ignored scratch is preserved at `.local/economia-iareset-primeiro-original/`: two draft fixture/oracle modules and a README. Only AST parsing and fixture input-shape construction ran (14 scenarios /26 planned calls, exact 64-byte and 276,000-byte input lengths). The emulator module was neither imported nor constructed. No capture output exists. These drafts remain outside tracked research until the inventory is integrated and the next original-first stage is scheduled/reviewed.
+
+Requested scheduling: reserve about 3–5 minutes for the economy domain gate, locked full-common integration, remote ancestry and committed-main byte replay (dependent on actual gate duration and remote races). A later exclusive original-only leaf capture window should need about 1–2 minutes including startup and evidence review; the leaf bodies contain no engine calls. Allow a separate light translation/review period and another roughly 3–5 minute narrow-validation/integration window after evidence is committed. These are planning estimates, not measured run times. No natural-production or transport implementation is included.
+
+### Ownership correction after coordinator review
+
+The preserved original-byte audit remains unchanged. The earlier phrase "four missing owner leaves" was a dependency list, not authority to implement all four in economy. The existing Stage 15 contract in this handoff (structure habitation) explicitly leaves `BatimentExiste` with **Missions**. Coordinator confirmed that Missions will expose its single validated reusable getter in Stage 11, based on original scan captures committed as `ed0172a`; wait for its integrated callable contract. Economy must not implement or duplicate it.
+
+The separate next economy stage therefore contains only **three new leaves**: `RechercheGetNiveau`, `RechercheSetBranche` and `BatimentGetType`. It reuses the committed combat `BatimentGetPlayer`, while AI consumes the Missions existence getter after publication. The ignored scratch was adjusted without running x86: its 14 scenarios now contain **20 original calls** (four research reads, four writes, six structure cases executing only GetPlayer/GetType). Original byte provenance for all five inspected functions stays frozen; there is no new or altered runtime behavior.
+
+This correction and the prior checkpoint remain subject to the pending economy domain/common integration gate. No capture, domain test, integration or new game implementation has run in this light slot. Coordination goes through the coordinator while the active executor slots are full; no idle AI executor is awakened for this correction.
