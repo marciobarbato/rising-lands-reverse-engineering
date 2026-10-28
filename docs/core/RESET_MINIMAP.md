@@ -8,6 +8,8 @@ Stage 15 (coordinator reorder), 2026-10-28, base main `7b7b969`. Intact executab
 
 These are lower providers. Missions owns the `MissionLoad`/`MissionLoadName` reset order, the structure scan and readiness; economy owns `BatimentHabitable`.
 
+For the committed missions `ProvedoresReinicio` protocol, the supplied zero-argument terrain callable can close over `mundo`, the same 80-byte mine allocation later consumed by the mine loader, and the same 4-byte RNG state later consumed by the auxiliary loaders. The minimap callable can be the bound `mundo.resetar_minimapa` method. Neither adapter may substitute a new RNG seed or constructor-zero world for inherited state. `BatimentModifyMap` is a separate structure-scan provider; this stage does not change missions' caller order.
+
 ## APIs
 
 | API | Original | Inputs | Effect |
@@ -17,6 +19,8 @@ These are lower providers. Missions owns the `MissionLoad`/`MissionLoadName` res
 | `minimapa_estruturas.modificar_minimapa_estrutura(mundo, indice, ativo)`; `MundoFisico.modificar_minimapa_estrutura(indice, ativo)` | `BatimentModifyMap` 0x419e97 | AX index → u16, 0..999; DL → u8; structure type 0..21; camera 0..3; 128×128 minimap; for mode 6 an owner of 200 or below the 32-byte color table | For the type's W×H footprint (0x495d8c/+2, stride 52), rows in ascending y from origin +2, row-major: `SetMiniMap(owner +4, cell, 6 if DL else 7)`. A cell is skipped only when x or y reaches 256 (not the map size). No structure byte is written |
 
 `Random` 0x4704dc is the Park–Miller step with Schrage's decomposition (unsigned `div` by 127,773, `imul` by 16,807 and 2,836, signed ≤ 0 → +0x7fffffff). It reuses the committed `candidatos_rota.aleatorio_caminhos`. EAX=0x28 is passed but ignored. Seed 0 maps to the fixed point 0x7fffffff. All protected checks, including allocation aliasing by identity or memoryview owner, precede the first store, and nothing can fail afterwards. With distinct protected allocations, filling each layer whole while drawing the 65,536 values in ascending cell order gives the same final state as the per-cell interleaving. The draw count and final seed are compared natively. Tiles, regions, minimap layers, units and structures stay unchanged by `TerrainReset`; it makes no other call.
+
+Reset allocations accept bytearrays or writable contiguous one-dimensional byte memoryviews of format B/b and the exact declared byte size. Signed views are normalized to unsigned byte access without copying or replacing any caller-owned view; sliced live views retain their guards/tails. Read-only, noncontiguous, multidimensional or aliased allocations fail before stores. The recovery audit of the pending implementation found that admitting multidimensional/signed views without this normalization could fail after earlier stores. The local reproduction is retained separately in `relatorios/recuperacao-stage15-initial-buffer-audit.json`; the correction and tests extend the same stage without altering original captures.
 
 ## SetMiniMap modes 6 and 7
 
@@ -40,7 +44,7 @@ Original-only first: [eight captures](../../relatorios/capturas-reset-terreno-or
 
 `TerrainReset`'s 65,536 iterations with one `Random` call each exceed one bounded segment. The bench therefore resumes at its cell-loop head 0x46b327 with every register, flag and stack byte preserved; no instruction, CALL or RET is replaced. It also keeps Stage 14's `SetMiniMap` entry and pixel-loop resume points.
 
-Final `python3 -B ferramentas/validar_reset_terreno.py --emular` ([report](../../relatorios/reset-terreno-emulada.json)) passes 11 tests with zero failures, errors, skips, native faults or limits:
+The preserved pre-recovery `python3 -B ferramentas/validar_reset_terreno.py --emular` [report](../../relatorios/reset-terreno-emulada.json) passes 11 tests with zero failures, errors, skips, native faults or limits:
 - 755 original entries, every one at its real return: 11 `TerrainReset`, 10 `MiniMapReset`, 734 `BatimentModifyMap`;
 - 1,939 bounded segments, including 1,081 TerrainReset-loop and 103 pixel-loop resumes; maximum 86,186 instructions per segment.
 
@@ -53,7 +57,21 @@ Coverage:
 
 Every comparison covers the whole unit/structure/group/object pools, all physical/vision/minimap layers, the 80-byte mine table, the 4-byte seed and the exact `SetMiniMap` call trace.
 
-Local mode discovers 11 tests and skips 5 optional native tests. Because `minimapa` gained modes 6/7, the Stage 14 suite (modes 1–5, insertion and direct discovery) was rerun; see the handoff.
+That preserved local run discovers 11 tests and skips 5 optional native tests. Its discovery regression had not finished at the earlier interruption; the recovery below supplies separate fresh results.
+
+## Recovery validation, 2026-10-28
+
+Pending implementation `a572e8c0320ff929a6c3dd2e75907bc121f7dea6` was preserved and merged with fetched main `8810b3730a0fb788af3eac2b447dea65372f597f`. No original capture, evidence listing or historical validation report was regenerated. The independent [source audit](../../relatorios/recuperacao-stage15-source-audit.json) rechecked all eight byte ranges, seven jump-table entries and seven caller/DL instructions directly against the intact executable.
+
+Fresh command:
+
+```sh
+python3 -B ferramentas/validar_reset_terreno.py --emular --relatorio relatorios/recuperacao-stage15-reset-emulada.json
+```
+
+The [fresh reset report](../../relatorios/recuperacao-stage15-reset-emulada.json) passes 14 tests with zero failures, errors, skips, native faults or limits: 759 original returns (13 terrain, 12 minimap, 734 structure) over 2,139 segments, including 1,380 preserved loop resumptions. Maximum segment remains 86,186 instructions. This includes all historical matrices plus four original entries with live B/b byte views. Local mode passes eight executed tests with six optional native skips, including sliced-view guards and multidimensional rejection before stores.
+
+Both validators now accept `--relatorio` so recovery results remain separate. The [fresh full discovery regression](../../relatorios/recuperacao-stage15-descoberta-emulada.json) passes all 32 tests / 4,293 original entries / 10,503 segments with zero failures, errors, skips, native faults or limits. Core check passes 382 discovered tests with 181 explicit optional skips. Commands/logs and the integration status are recorded in the current handoff. Native-heavy work is serialized under the coordinator's exclusive lease. Full `MissionLoad` and `MissionPlaceTerrain` flow comparison are **not run** by this stage; the MONDE01 case uses its actual dimensions and sanctuary-shaped record inside a standalone fixture.
 
 ## Remaining limits
 

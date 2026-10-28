@@ -191,7 +191,30 @@ The coordinator then pre-authorized a reorder:
 Stage 15: [reset and structure-minimap contract](RESET_MINIMAP.md).
 - APIs: `reset_terreno.resetar_terreno(mundo, minas, aleatorio)`, `reset_terreno.resetar_minimapa(mundo)` and `minimapa_estruturas.modificar_minimapa_estrutura(mundo, indice, ativo)`, plus `MundoFisico` methods. `SetMiniMap` modes 6/7 were added to `minimapa`.
 - Validation: eight original-only captures (303 segments) preceded translation and match. Native: 11 tests, 755 entries / 1,939 segments, every entry at its real return, zero failures.
-- Status: committed locally, NOT yet integrated. The Stage 14 regression rerun after the `minimapa` change was still running when the session's usage limit was reached. Rerun `validar_descoberta_terreno.py --emular`, then `scripts/check.py --domain core`, then integrate.
+- Historical interruption status: committed locally, NOT yet integrated. The Stage 14 regression rerun after the `minimapa` change was still running when the session's usage limit was reached. The recovery below completes that validation without replacing its earlier reports.
+
+### Stage 15 recovery — 2026-10-28
+
+The new human request superseded the old stop. Preserved implementation `a572e8c0320ff929a6c3dd2e75907bc121f7dea6` was inspected on its clean existing worktree, then current main `8810b3730a0fb788af3eac2b447dea65372f597f` was merged as `cc95c0af6bb785f8e448e59b6d5c3f82073b5e39`. The original eight captures / 303 segments and historical 755 entries / 1,939 segments are unchanged. No REA session, source regeneration or extra worker was used. The coordinator granted this stage the exclusive heavy lease through integration and committed-main reproduction; native runs and checks are serialized.
+
+The audit independently matched eight full exported byte intervals, seven minimap jump targets and seven caller/DL instructions to the intact oracle, in `relatorios/recuperacao-stage15-source-audit.json`. A local input audit found two real protected-buffer defects: signed byte views could fail at bulk assignment after the aux writes; multidimensional views could fail after the first minimap layer had changed. The reproduction is retained in `relatorios/recuperacao-stage15-initial-buffer-audit.json`. The recovery requires one-dimensional contiguous byte views, normalizes admitted B/b access without copying/replacing caller views, and adds local/native view checks. Existing bytearray behavior, original instructions, captures and native limits remain unchanged. `--relatorio` was added to the two validators solely to retain separate fresh reports.
+
+Actual fresh commands, each run to completion before the next heavy command:
+
+```sh
+python3 -B ferramentas/validar_reset_terreno.py --relatorio relatorios/recuperacao-stage15-reset-local.json
+python3 -B ferramentas/validar_reset_terreno.py --emular --relatorio relatorios/recuperacao-stage15-reset-emulada.json
+python3 -B ferramentas/validar_descoberta_terreno.py --emular --relatorio relatorios/recuperacao-stage15-descoberta-emulada.json
+python3 -B scripts/check.py --domain core
+```
+
+Fresh outcomes:
+- **Reset/map PASS:** 14 tests / 759 original returns (13 terrain, 12 minimap, 734 structure), 2,139 bounded segments and 1,380 preserved loop resumptions. Maximum segment 86,186 instructions. Whole mapped world buffers, mine reserves, seed/draw count, minimap fill/call order and B/b views match. Zero failures, errors, skips, native faults or limits. Report above; full log `.local/recuperacao-stage15-reset.log` (187.147 seconds).
+- **Required discovery regression PASS:** 32 tests / 4,293 original entries / 10,503 bounded segments. Direct radii 0..23/0..20, insertion sums 0..11, domain stops, all mission-placement predicates and production-exit regressions pass with unchanged real subcalls and limits. Declared pre-discovery/caller stops remain explicit; zero failures, errors, skips, native faults or limits. Report above; log `.local/recuperacao-stage15-descoberta.log` (530.032 seconds).
+- **Local reset PASS:** eight executed tests / six explicit optional native skips; no x86. **Core check PASS:** 382 discovered / 181 optional skips, documentation links valid; log `.local/recuperacao-stage15-core-check.log`.
+- **Full flow NOT RUN:** this stage does not validate end-to-end `MissionLoad` or `MissionPlaceTerrain`, a whole post-load mission image, frames, AI/events or a playable mission. Its MONDE01 case is a standalone fixture using the actual dimensions and type-2 sanctuary record. Synthetic constructors or zero marker tables are not loaded-state evidence.
+
+The recovered stage is ready for the required owned commit and locked integration. Consumer contracts are in [RESET_MINIMAP.md](RESET_MINIMAP.md); mines/RNG must be the same live allocations used by the later mission loaders. Full remap allocation/classification, labeling, cleanup/final return and `Engin_RetrieveExperimente` remain open. After integration, only lightweight next-stage inventory is authorized until the coordinator schedules another implementation/heavy lease. Final feature/main hashes and committed-main reproduction are reported to the coordinator without amending a commit merely to add its own future merge hash.
 
 ## Agreed ownership with ai-runtime (seven-front round, 2026-10-28)
 

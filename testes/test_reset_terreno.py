@@ -29,7 +29,38 @@ def executar(m, minas, aleatorio, entrada, estrutura, ativo):
     return modificar_minimapa_estrutura(m, estrutura[0], ativo)
 
 
+def aplicar_vistas(m, minas, aleatorio, formato):
+    for nome in ('objetos', 'donos_objetos', 'atributos', 'mini_final', 'mini_unidades', 'mini_estruturas'):
+        setattr(m, nome, memoryview(getattr(m, nome)).cast(formato))
+    for nome in ('contagem_luz', 'luz_bordas', 'descoberto'):
+        setattr(m, nome, [memoryview(c).cast(formato) for c in getattr(m, nome)])
+    return memoryview(minas).cast(formato), memoryview(aleatorio).cast(formato)
+
+
 class ResetTerreno(unittest.TestCase):
+    def test_live_unsigned_signed_and_sliced_byte_views_match_bytearray_outputs(self):
+        for entrada in ('terrain', 'minimap'):
+            original, minas_original, seed_original = preparar(entrada)
+            executar(original, minas_original, seed_original, entrada, None, 1)
+            for formato in ('B', 'b'):
+                m, minas, seed = preparar(entrada)
+                minas, seed = aplicar_vistas(m, minas, seed, formato)
+                if entrada == 'minimap':
+                    original_final = bytes(m.mini_final)
+                    armazenamento = bytearray(b'guard' + original_final + b'tail')
+                    m.mini_final = memoryview(armazenamento)[5:-4].cast(formato)
+                alocacoes = (m.objetos, m.mini_final, m.descoberto[0])
+                executar(m, minas, seed, entrada, None, 1)
+                for antes, depois in zip(alocacoes, (m.objetos, m.mini_final, m.descoberto[0])):
+                    self.assertIs(antes, depois)
+                for nome in ('objetos', 'donos_objetos', 'atributos', 'mini_final', 'mini_unidades', 'mini_estruturas'):
+                    self.assertEqual(bytes(getattr(m, nome)), bytes(getattr(original, nome)))
+                for nome in ('contagem_luz', 'luz_bordas', 'descoberto'):
+                    self.assertEqual([bytes(c) for c in getattr(m, nome)], [bytes(c) for c in getattr(original, nome)])
+                self.assertEqual((bytes(minas), bytes(seed)), (bytes(minas_original), bytes(seed_original)))
+                if entrada == 'minimap':
+                    self.assertEqual((armazenamento[:5], armazenamento[-4:]), (b'guard', b'tail'))
+
     def test_eight_original_captures_whole_buffers_mines_seed_and_minimap_calls(self):
         relatorio = json.loads((RAIZ/'relatorios/capturas-reset-terreno-original.json').read_text())
         self.assertFalse(relatorio['translation_executed'])
@@ -120,6 +151,19 @@ class ResetTerreno(unittest.TestCase):
         # Owner 32 is colorless only for mode 6; mode 7 does not read the color table.
         modificar_minimapa_estrutura(m6, 7, 0)
         self.assertEqual(len(m6.efeitos), 30)
+
+    def test_multidimensional_views_are_rejected_before_earlier_stores(self):
+        for entrada in ('terrain', 'minimap'):
+            m, minas, seed = preparar(entrada)
+            if entrada == 'terrain':
+                m.descoberto[3] = memoryview(m.descoberto[3]).cast('B', shape=(256, 256))
+            else:
+                m.mini_unidades = memoryview(m.mini_unidades).cast('B', shape=(256, 256))
+            nomes = ('objetos', 'donos_objetos', 'atributos', 'mini_final', 'mini_unidades', 'mini_estruturas')
+            antes = [bytes(getattr(m, n)) for n in nomes] + [bytes(minas), bytes(seed)]
+            with self.assertRaises(ValueError):
+                executar(m, minas, seed, entrada, None, 1)
+            self.assertEqual([bytes(getattr(m, n)) for n in nomes] + [bytes(minas), bytes(seed)], antes)
 
 
 if __name__ == '__main__':

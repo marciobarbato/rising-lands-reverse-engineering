@@ -2,7 +2,7 @@
 import os
 import unittest
 
-from test_reset_terreno import preparar, executar
+from test_reset_terreno import preparar, executar, aplicar_vistas
 
 POSICOES = ((16, 16, 0x0000), (16, 16, 0x0e0d), (64, 64, 0x0b0c), (256, 256, 0x00fe), (256, 256, 0xfe00),
             (256, 256, 0xfffd))
@@ -15,9 +15,11 @@ class DiferencialResetTerreno(unittest.TestCase):
         from bancada_reset_terreno import BancadaResetTerreno
         cls.bancada = BancadaResetTerreno()
 
-    def comparar(self, entrada, estrutura=None, ativo=1, **opcoes):
+    def comparar(self, entrada, estrutura=None, ativo=1, formato=None, **opcoes):
         from emulador import RETORNO
         m, minas, aleatorio = preparar(entrada, estrutura=estrutura, ativo=ativo, **opcoes)
+        if formato is not None:
+            minas, aleatorio = aplicar_vistas(m, minas, aleatorio, formato)
         b = self.bancada
         b.carregar_reset(m, minas, aleatorio)
         if entrada == 'terrain':
@@ -41,6 +43,11 @@ class DiferencialResetTerreno(unittest.TestCase):
                                       0xfffffffe, 0xffffffff, 0x12345678)):
             self.comparar('terrain', semente=semente, padrao=20+n, largura=(16, 64, 256)[n % 3],
                           altura=(16, 64, 256)[n % 3])
+
+    def test_live_unsigned_and_signed_byte_views(self):
+        for entrada in ('terrain', 'minimap'):
+            for formato in ('B', 'b'):
+                self.comparar(entrada, formato=formato)
 
     def test_minimap_reset_dimensions_including_empty_and_full_layers(self):
         for n, minimapa in enumerate(((128, 128), (64, 32), (1, 1), (0, 0), (0, 128), (128, 0), (256, 256),

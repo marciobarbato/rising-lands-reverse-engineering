@@ -6,8 +6,13 @@ from candidatos_rota import aleatorio_caminhos
 def _gravavel(buffer, tamanho):
     if isinstance(buffer, bytearray):
         return len(buffer) == tamanho
-    return (isinstance(buffer, memoryview) and not buffer.readonly and buffer.contiguous
+    return (isinstance(buffer, memoryview) and not buffer.readonly and buffer.ndim == 1 and buffer.contiguous
             and buffer.format in ('B', 'b') and buffer.nbytes == tamanho)
+
+
+def _bytes_gravaveis(buffer):
+    """Normalize admitted signed byte views without copying their live allocation."""
+    return buffer.cast('B') if isinstance(buffer, memoryview) else buffer
 
 
 def _distintos(buffers):
@@ -34,16 +39,17 @@ def resetar_terreno(mundo, minas, aleatorio):
             or not _distintos(camadas + [minas, aleatorio])):
         raise ValueError('TerrainReset requires distinct writable 65536-byte layers, four owner grids, '
                          '80-byte mines and a 4-byte Random state')
+    objetos, donos, atributos = map(_bytes_gravaveis, camadas[:3])
+    grades = [[_bytes_gravaveis(c) for c in grade] for grade in grades]
     semente = struct.unpack_from('<I', aleatorio, 0)[0]
-    donos = mundo.donos_objetos
     # Distinct protected allocations make the per-cell interleaving unobservable:
     # each layer gets its final value and the draws stay in ascending cell order.
     for celula in range(65536):
         semente = aleatorio_caminhos(semente)
         donos[celula] = semente & 3
     zeros, bordas = bytes(65536), b'\x1f' * 65536
-    mundo.objetos[:] = zeros
-    mundo.atributos[:] = zeros
+    objetos[:] = zeros
+    atributos[:] = zeros
     for contagem, borda, descoberto in zip(*grades):
         contagem[:] = zeros
         borda[:] = bordas
@@ -67,6 +73,7 @@ def resetar_minimapa(mundo):
     camadas = (mundo.mini_final, mundo.mini_unidades, mundo.mini_estruturas)
     if n > 65536 or not all(_gravavel(c, 65536) for c in camadas) or not _distintos(list(camadas)):
         raise ValueError('MiniMapReset requires three distinct writable 65536-byte layers and w*h <= 65536')
-    mundo.mini_final[:n] = b'\x02' * n
-    mundo.mini_unidades[:n] = bytes(n)
-    mundo.mini_estruturas[:n] = bytes(n)
+    final, unidades, estruturas = map(_bytes_gravaveis, camadas)
+    final[:n] = b'\x02' * n
+    unidades[:n] = bytes(n)
+    estruturas[:n] = bytes(n)
