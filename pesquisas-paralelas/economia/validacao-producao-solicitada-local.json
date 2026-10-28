@@ -1,0 +1,54 @@
+{
+  "scope": "Actual CalculTroupe through supported conditional request; explicit volume and PostSound boundaries",
+  "mode": "Python only",
+  "tests": 15,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_104_output_types_buildings_and_supported_or_pending_requests (test_producao_solicitada.DiferencialProducaoSolicitada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_20_viewport_words_and_exact_volume_or_post_boundaries (test_producao_solicitada.DiferencialProducaoSolicitada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_2_late_import_errors_retain_completed_physical_order (test_producao_solicitada.DiferencialProducaoSolicitada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_36_inactive_or_incomplete_producers_return_without_request (test_producao_solicitada.DiferencialProducaoSolicitada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_64_building_owner_camera_pairs_with_live_inherited_handles (test_producao_solicitada.DiferencialProducaoSolicitada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_four_hidden_local_requests_return_without_viewport (test_producao_solicitada.DiferencialProducaoSolicitada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_four_local_active_producer_returns (test_producao_solicitada.DiferencialProducaoSolicitada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_four_persistent_sequences_stop_at_the_first_cleanup_handoff (test_producao_solicitada.DiferencialProducaoSolicitada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "declared_stops": 0,
+  "completed_returns": 0,
+  "cleanup_dependency_stops": 0,
+  "pending_volume_stops": 0,
+  "pending_post_sound_stops": 0,
+  "post_placement_import_stops": 0,
+  "original_entry_calls": 0,
+  "preserved_minimap_resumptions": 0,
+  "expected_x86_exceptions": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}

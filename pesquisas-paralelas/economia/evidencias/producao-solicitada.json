@@ -1,0 +1,32 @@
+{
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_sbl": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "scope": "Actual CalculTroupe through supported request return; missing viewport/PostSound remain explicit",
+  "request_implementation": "b1585b4bd8a64c92aa28455fc39b13c87993a067",
+  "request_main": "66e83062f1dd821b04a59b820fcc7e2712839f60",
+  "captures": [
+    {
+      "start": "0x420f9e",
+      "end_exclusive": "0x420fb7",
+      "bytes_hex": "8a47043a0541805000750eba0600000089f031dbe8a7fd0100",
+      "sha256": "b1f65ed569dabd218a16c910560dcbea3ef5858adb807d060bd984ed08dcc44a",
+      "listing": "producao-solicitada-00420f9e.asm"
+    }
+  ],
+  "committed_evidence": [
+    {
+      "path": "evidencias/producao-colocada.json",
+      "sha256": "dea227b16473fc580eb859fd5984eccc88e603950baea40319b28eb21fd688ec"
+    },
+    {
+      "path": "../../evidencias/voz-unidades/manifesto.json",
+      "sha256": "3f50963f12a6db8c8714257d20813814ed7eb41f13cee2b64fa3b52e8811843c"
+    }
+  ],
+  "native_entry": "0x4259e6",
+  "pending_cleanup": "0x420fb7",
+  "pending_viewport": "0x440d9f",
+  "pending_post_sound": "0x440de7",
+  "viewport": "four explicit loaded u16 words at0x508720",
+  "native_execution": "Actual core minimap CPU-state resumptions; no native subcall result substituted"
+}
