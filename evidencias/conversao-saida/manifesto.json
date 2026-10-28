@@ -1,0 +1,49 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "SortieTroupe_position_and_conversion",
+      "start": "0x420f5a",
+      "end_exclusive": "0x420f6e",
+      "sha256": "84dde79b83442664c26689f388478f25d3a5a966f3af35afab8ff42d8dbc4da8",
+      "file": "00420f5a.asm"
+    },
+    {
+      "name": "type4_bonus12_then_frame",
+      "start": "0x45782b",
+      "end_exclusive": "0x45785a",
+      "sha256": "0b9cc8d0d1a5e1a1c508a2eea0c9907aae7ba2c51ea7657a73015d9455b17bdb",
+      "file": "0045782b.asm"
+    }
+  ],
+  "existing_provider_evidence": [
+    {
+      "start": "0x457b87",
+      "end_exclusive": "0x457e0c",
+      "sha256": "63068b2b25a53641b6aba73bb618c6d91bc620a4eba255bb77c5422911983fd4",
+      "existing_evidence": "pesquisas-paralelas/combate/evidencias/00457b87.asm"
+    },
+    {
+      "start": "0x457350",
+      "end_exclusive": "0x457b87",
+      "sha256": "71e87a233999cb6abe4f7223288a8f2077e382f545f352faa896d05949047d09",
+      "existing_evidence": "pesquisas-paralelas/combate/evidencias/00457350.asm"
+    },
+    {
+      "start": "0x4475ac",
+      "end_exclusive": "0x4475ef",
+      "sha256": "d369a3f5de0a7300cbf1812be79a28b6b649c02a23ac6e3ca82d927132cc1dde",
+      "existing_evidence": "pesquisas-paralelas/combate/evidencias/004475ac.asm"
+    },
+    {
+      "start": "0x428cc0",
+      "end_exclusive": "0x428e71",
+      "sha256": "2809a1654c287424102c5b232995439863c112835aefa435151b0f06e1de5b86",
+      "existing_evidence": "pesquisas-paralelas/combate/evidencias/00428cc0.asm"
+    }
+  ],
+  "original_symbol_0x428cc0": "BonusGetValEngin",
+  "established_alias": "Modificateur",
+  "scope": "Core adapter reuses combat-owned local conversion; no economic query or world spawn body."
+}
