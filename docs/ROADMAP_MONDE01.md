@@ -2,6 +2,10 @@
 
 Coordinator architecture for the seven-front research round, written 2026-10-28 at main `2da89cd7655998f3b3f240be192b4b2badf94b63`. It replaces the four-chat plan as the authorized organization. Every claim below about reconstructed behavior refers to the committed contracts in the domain manuals; nothing here upgrades a bounded fixture into a running game. Original addresses apply only to executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
 
+## Recovery snapshot — 2026-10-28
+
+Fetched main `8810b3730a0fb788af3eac2b447dea65372f597f` supersedes the round-baseline statuses. [STATUS.md](STATUS.md) records the verified integrated and pending slices. Core Stage 14 has resolved the unit-15 discovery stop. Economy habitation/load tails, Missions' full auxiliary chain/reset-prefix composition, Combat's live attack chain, Graphics' cache/bounded frame and Audio bank/decoder Stage 1 are integrated. Core `a572e8c` recovery `2f9d0df` is integrated at `b610bfa`; AI WIP `ad97e42` recovery `1e56e5c` is integrated at `5d24c91`, both freshly original-validated and reproduced. Economy inventory `3868ce5` is preserved pending. [The consolidated report](PROGRESS.md) records the closed recovery and four stage dimensions. Earlier per-front lists below are the planned sequence, not a claim that completed steps must be repeated. No M1–M4 acceptance has occurred.
+
 ## Goal and milestones
 
 The first major milestone is **loading MONDE01 exactly as the original does, running the complete mission, and comparing its behavior with the original executable**. MONDE01's PT-BR briefing (`WORLD/MONDE01.TXT`, read-only) sets the player goal: protect a cave and store 50 bags of food and 50 bags of stone in it, while the "Grupo dos Assassinos" raids the region. The map holds one structure (disk type byte +8 = 2, origin cell 2828) and 16 owner-0 units (disk type byte +1): three type 0, eight type 9 in state 14 at cell 3086, and single units of types 1, 7, 5, 5, 8. The hostile group is not serialized as units; it comes from the loaded attack table (`IALoadAttaqueIni`, 100×8-byte records) and the AI war/unit kernels. Economy confirmed from original tables during this round that structure type 2 is **not** the cave. The type-name table read by `BatimentGetTypeName 0x418af7` (`0x495d8c + type*52 + 0x13`) names type 2 `SANCTUAIRE` (PT-BR "Santuário") and type 3 `CAVE` (PT-BR "Armazém"). `BatimentInitCave 0x419112` counts only type 3, so MONDE01 starts with no cave and a zero warehouse count. Its structure 0 (owner 0, state 5) holds the eight type-9 colonists. The missions front must establish from the objective/end-condition trace whether the objective requires building a type-3 cave; the story does not settle it.
@@ -24,14 +28,14 @@ Status keys: **done** = integrated on main with original comparison; **partial**
 | Step | Original routines | Status | Owner | Notes |
 |---|---|---|---|---|
 | L1 Filename | `MakeMissionName 0x46c1b8` | done (missions S6) | missions | |
-| L2 Reset prefix `0x46c2cf..0x46c396` | handles/globals, `TerrainReset 0x46b315`, `MiniMapReset 0x469f00`, `BatimentResetAll 0x41a75c`, `EnginResetAll 0x441659`, `ProjectileReset 0x46e00a`, message/balloon state (`BallonInit 0x441b6c`) | partial: unit/structure resets done (core); others open | missions orchestrates; core (terrain/minimap), combat (projectile pool reset), economy (balloon/market), ai-runtime (message tables) provide | Inventory the exact call order first; each missing reset is a named dependency, never a constructor zero |
+| L2 Reset prefix `0x46c2cf..0x46c396` | handles/globals, `TerrainReset 0x46b315`, `MiniMapReset 0x469f00`, `BatimentResetAll 0x41a75c`, `EnginResetAll 0x441659`, `ProjectileReset 0x46e00a`, message/balloon state (`BallonInit 0x441b6c`) | partial: all MissionLoad reset providers integrated including Core15 terrain/minimap; complete caller wiring pending | missions orchestrates and owns IconeReset/MessageBoxInit/BallonInit; core supplies terrain/minimap and unit/structure resets; combat supplies projectile reset | Exact order captured in missions S10; UI MessageBoxInit is distinct from AI message tables. Missing providers remain explicit dependencies |
 | L3 Header prelude | `0x46c396..0x46c512` | done (missions S2) | missions | |
-| L4 `Chemin_Remap 0x42ee1c` | reset prefix to `0x42eebd` done; `GlobalAlloc`/`GlobalLock`, two-pass classification, per-component region labeling and stacks, cleanup, final AL | partial (core S13) | core | Inventory for the allocation/classification continuation exists in core's worktree (`docs/core/REMAP_CLASSIFICATION.md`, uncommitted) |
+| L4 `Chemin_Remap 0x42ee1c` | reset prefix to `0x42eebd` done; `GlobalAlloc`/`GlobalLock`, two-pass classification, per-component region labeling and stacks, cleanup, final AL | partial (core S13) | core | Committed allocation/classification inventory in `docs/core/REMAP_CLASSIFICATION.md`; generic declared bindings and continuation are core Stage 16, labeling/cleanup Stage 17 |
 | L5 Structure copy | inline `0x46c517..0x46c578` | done (missions S5) | missions | |
 | L6 `LoadEngin 0x46acbf` | with `SelectionInit`, postload | done (missions S4, core S9, combat postload) | missions | |
-| L7 Auxiliary loaders, in order | `LoadMine 0x47534a` done, `IALoadAttaqueIni 0x47c24d` done, `LoadBatimentGhost 0x47bcc7`, `LoadCadreInfluence 0x47c04a`, `LoadFinMission 0x458b05` done, `LoadCalculMissionDivers 0x47c30f`, `LoadObjectif 0x47c404` done, `LoadEntrerMonstre 0x47ac30` | partial (missions S3/S7) | missions | Four raw loaders remain; disk layouts are in `FORMATS.md`, runtime meaning is not |
-| L8 `MissionPlaceTerrain 0x46c122` | unit scan done through `PlaceEngin`; capacity refresh done; structure scan: `PlaceBatiment` done (core), `BatimentHabitable`, `BatimentModifyMap(...,1)` | partial (missions S8, core S12) | missions orchestrates; core supplies `DecouvreTerrain 0x476851` for vision radius > 8 and `BatimentModifyMap`; economy supplies `BatimentHabitable` | Actual MONDE01 stops at unit 15 (radius 10) inside core's discovery boundary; this is the first blocker |
-| L9 Initializer tails | `EnginInitTechnologie 0x441459`, `BatimentInitCave 0x419112`, `Engin_RetrieveExperimente 0x441623`, `PlayerRetrieve 0x46df41`, `IaReset 0x47f36e`, `MarcheResetAll 0x46027c` | partial: cave counts and selective market reset exist (economy) | economy (technology, cave, players, market), core (experience retrieval), ai-runtime (`IaReset`/`iaInit` tables) | Each tail is a separate bounded provider with its own original comparison |
+| L7 Auxiliary loaders, in order | `LoadMine 0x47534a` done, `IALoadAttaqueIni 0x47c24d` done, `LoadBatimentGhost 0x47bcc7`, `LoadCadreInfluence 0x47c04a`, `LoadFinMission 0x458b05` done, `LoadCalculMissionDivers 0x47c30f`, `LoadObjectif 0x47c404` done, `LoadEntrerMonstre 0x47ac30` | done (missions S9) | missions | All eight raw loaders run in original order; runtime meaning/events remain separate |
+| L8 `MissionPlaceTerrain 0x46c122` | unit scan done through `PlaceEngin`; capacity refresh done; structure scan: `PlaceBatiment` done (core), `BatimentHabitable`, `BatimentModifyMap(...,1)` | partial: unit scan and habitation integrated | missions orchestrates; core supplies physical placement/discovery and `BatimentModifyMap`; economy supplies `BatimentHabitable` | Actual MONDE01 reaches pre-structure checkpoint `0x46c16d`; unit-15 discovery is resolved. Structure scan awaits missions composition of now-integrated Core15/economy providers |
+| L9 Initializer tails | `EnginInitTechnologie 0x441459`, `BatimentInitCave 0x419112`, `Engin_RetrieveExperimente 0x441623`, `PlayerRetrieve 0x46df41`, `IaReset 0x47f36e`, `MarcheResetAll 0x46027c` | partial: four economy tails and raw-memory AI reset integrated; core retrieval and concrete adapter open | economy (technology, cave, players, market), core (experience retrieval), ai-runtime (`IaReset`/`iaInit` tables) | Each tail is a separate bounded provider with its own original comparison |
 
 ### Phase R — frame loop `0x47500e` → `CalculGame 0x42c868`
 
@@ -45,15 +49,15 @@ Status keys: **done** = integrated on main with original comparison; **partial**
 | R6 Structures | `CalculBatimentNextEtape 0x4281c7` → gates (core, done), `CalculTroupe 0x4259e6` production (economy, to cleanup boundary), construction/repair/market/nova (economy) | partial | ai-runtime skeleton; economy/core branches |
 | R7 Projectiles | `ProjectileCalcul 0x46fc0f`, impacts, damage, death | done for supported modes (combat) | combat |
 | R8 End condition | `TestFinDeMission 0x458606` and its 11 resolved queries | open | missions |
-| R9 Audio | `PlaySnd_PostSound 0x48aa79`, `PlaySnd_Manage 0x48aaca`, HED/SND backend | open; explicit pending descriptors exist | audio (second wave, anticipated in the macOS chat; [contract](AUDIO.md)) |
-| R10 Rendering | `AffGame 0x417698` frame orchestration, `InitCache 0x40fa38` | partial (graphics passes) | graphics |
+| R9 Audio | `PlaySnd_PostSound 0x48aa79`, `PlaySnd_Manage 0x48aaca`, HED/SND backend | partial: HED/SND readers and IMA decoder integrated; queue/Manage/playback open | audio (second wave, anticipated in the macOS chat; [contract](AUDIO.md)) |
+| R10 Rendering | `AffGame 0x417698` frame orchestration, `InitCache 0x40fa38` | partial: cache lifecycle and bounded AffGame frame integrated; facade/overlays/unit types/HUD open | graphics |
 | R11 Save/load | `GameSave 0x46bd45`, `GameLoad 0x46b88d`, `Sauve*`/`Load*` family | open | second wave |
 
 ## Validation strategy: from bounded fixtures to a mission oracle
 
 Everything integrated so far is validated by bounded original-x86 intervals with synthetic memory (`ferramentas/emulador.py`), by original-only captures made before translation, and by whole-buffer comparisons. Those rules stay. M1 and M2 additionally need an **oracle for whole routines**:
 
-1. **Declared bindings instead of Windows.** The harness stops at the game's own wrappers and at import thunks, never inside Windows: file read `0x458461`/seek `0x45848b` (already used by missions), file open/close wrappers (to be inventoried), `GlobalAlloc`/`GlobalLock`/`GlobalUnlock`/`GlobalFree` through `0x5231c0` and neighbors (core S14 plan), timers and sound posts (recorded, returning declared handles). Each binding records exact arguments and the fixture value returned. A report lists original entries, resumed segments, bound calls and stops separately.
+1. **Declared bindings instead of Windows.** The harness stops at the game's own wrappers and at import thunks, never inside Windows: file read `0x458461`/seek `0x45848b` (already used by missions), file open/close wrappers (to be inventoried), `GlobalAlloc`/`GlobalLock`/`GlobalUnlock`/`GlobalFree` through `0x5231c0` and neighbors (core S16 plan), timers and sound posts (recorded, returning declared handles). Each binding records exact arguments and the fixture value returned. A report lists original entries, resumed segments, bound calls and stops separately.
 2. **Whole-`MissionLoad` oracle (missions, on core's harness).** Run the intact `MissionLoad 0x46c2cf` for MONDE01 with the real ETA bytes supplied through the file bindings and a deterministic allocation arena. Snapshot every mapped buffer at the original return. Python `carregar_missao(1, ...)` must reproduce the same state. Partial runs stop at declared dependencies and compare the state at that checkpoint.
 3. **Frame oracle (ai-runtime, on the same harness).** From the M1 snapshot, run `CalculGame 0x42c868` natively for N frames with no input, binding clock/sound/import calls. Compare whole state after every frame with the Python frame driver. Rendering is excluded from the oracle; graphics compares its frames separately against native `AffGame` runs over the same state.
 4. **Harness extension ownership.** The generic binding facility belongs to core (`ferramentas/emulador.py`); mission/frame oracle scripts belong to their fronts. Nobody substitutes an engine routine with Python inside an oracle run; only declared external bindings are replaced.
@@ -126,7 +130,7 @@ Each stage is one bounded slice: inventory from original bytes → original-only
 | economy → ai-runtime | Production/transport/work entry points per structure/unit state |
 | combat → missions | `ProjectileReset`; postload already committed |
 | combat → ai-runtime | `CalculAttaqueEngin` entry contract and the projectile pass entry |
-| ai-runtime → missions | `IaReset`/`iaInit` and AI table layouts for L9; message tables for L2 |
+| ai-runtime → missions | `IaReset`/`iaInit` and AI table layouts for L9; L2 MessageBoxInit is a missions-owned UI reset |
 | ai-runtime → everyone | Frame/unit/structure dispatcher call order and the per-branch contract each owner must satisfy |
 | graphics → macos | Frame composition API over live state |
 | missions → graphics/macos | `carregar_missao` result layout (M1 snapshot) |
@@ -151,16 +155,16 @@ The estimate stays approximately **50% (40–60%)** at the start of this round. 
 |---|---|---|---|---|
 | File formats, readers, symbols | complete | complete | yes | n/a |
 | World/navigation/tasks (core) | large subset | large subset | yes | no |
-| Mission loading | prefixes and loaders (L1, L3, L5–L7 partial, L8 units) | yes | yes | no |
+| Mission loading | L1/L3/L5–L7 complete; L2 composition and L8 units/habitation partial | yes | yes | no |
 | Remapping | prefix | yes | yes | no |
 | AI kernels, VM operations, messages | VM control flow, five operations, orchestration skeleton | partial | yes | no |
 | Economy rules, production, market | large subset to cleanup boundary | yes | yes | no |
 | Transport/work cycles | read-only status queries | partial | yes | no |
 | Combat targeting, projectiles, damage, death | supported modes | yes | yes | no |
-| Rendering passes and composition | terrain/sprite/projectile passes, caches | yes | yes | no |
+| Rendering passes and composition | terrain/sprite/projectile passes, cache lifecycle, bounded AffGame | yes | yes | no |
 | Frame loop, input, events | counters only | partial | yes | no |
 | End conditions/objectives | table loaders | yes | yes | no |
-| Audio (`PlaySnd_*`, `HandleSnd_*`, HED/SND) | pending descriptors only | no | n/a | no |
+| Audio (`PlaySnd_*`, `HandleSnd_*`, HED/SND) | bank readers and IMA decoding; requests remain descriptors | bank/decoder whole-buffer fixtures | yes (banks/decoder only) | no |
 | Save/load (`GameSave`/`GameLoad`) | none | no | n/a | no |
 | Menus, campaign progression, briefings | filename only | partial | yes | no |
 

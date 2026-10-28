@@ -1,0 +1,51 @@
+{
+  "tested_commit": "2f9d0df8a9f894673a1ce5737bb2f3bbbe4644ac",
+  "committed_main": "b610bfad77ffadaa0ee5f6af02160d786ccfdc7b",
+  "source_provider_trees": {
+    "ferramentas": {
+      "tested": "faf52012c48f5dc24774589609c433be38938ea0",
+      "main": "faf52012c48f5dc24774589609c433be38938ea0"
+    },
+    "testes": {
+      "tested": "0137d09c3ec88c50dbf318ae343a600b7fbc4019",
+      "main": "0137d09c3ec88c50dbf318ae343a600b7fbc4019"
+    },
+    "integracao": {
+      "tested": "0f471e0d25500ac6c232419389d057da1dd1c2bb",
+      "main": "0f471e0d25500ac6c232419389d057da1dd1c2bb"
+    },
+    "scripts": {
+      "tested": "1639aed9f12a72a4f4b95fdde666aa785410118c",
+      "main": "1639aed9f12a72a4f4b95fdde666aa785410118c"
+    },
+    "pesquisas-paralelas/combate": {
+      "tested": "02442d15f4561b5f2097f96da31b1c38af3cd170",
+      "main": "02442d15f4561b5f2097f96da31b1c38af3cd170"
+    },
+    "pesquisas-paralelas/economia": {
+      "tested": "c9abb87706e08ecada4a0eaaa7e79c36f55f3666",
+      "main": "c9abb87706e08ecada4a0eaaa7e79c36f55f3666"
+    }
+  },
+  "source_provider_identity_equal": true,
+  "historical_evidence_unchanged": true,
+  "tests": 4,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "success": true,
+  "original_entries": {
+    "0x46b315": 2,
+    "0x469f00": 12,
+    "0x419e97": 2
+  },
+  "bounded_segments": 212,
+  "reached_stops": {
+    "0x46b327": 196,
+    "0x3000000": 16
+  },
+  "maximum_instructions_per_segment": 86186,
+  "failed_native_segment": null,
+  "historical_captures_replayed": 8,
+  "full_flow_validation": "NOT RUN: focused standalone reset/map providers, no MissionLoad or MissionPlaceTerrain composition"
+}
