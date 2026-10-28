@@ -1,0 +1,31 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_posicao_saida.DiferencialPosicaoSaida.test_all_direction_bytes_and_types",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_posicao_saida.DiferencialPosicaoSaida.test_modified_dimensions_with_32bit_underflow_and_overflow",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_posicao_saida.DiferencialPosicaoSaida.test_origins_at_wrap_and_index_truncation",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_posicao_saida.DiferencialPosicaoSaida.test_poison_record_bytes_do_not_add_eligibility_conditions",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "expected_exceptions": 0,
+  "expected_execution_limits": 0,
+  "dependency_stops": 0,
+  "scope": "Complete CalculPosition using synthetic records and dimensions; no conversion or game run."
+}

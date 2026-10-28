@@ -57,7 +57,7 @@ All supported calls leave terrain, objects, regions, auxiliary colors, units, ta
 
 Graphics may continue reading raw u8 `+76` and full u16 `+7c` for gates. Startup and global reset clear the counter; single-record reset preserves it while clearing orientation. None of these effects chooses a sprite. A reset record alone must not be interpreted as a complete world-lifecycle transition.
 
-Economy does not need to import this code for its independently bounded `SortieTroupe` completion: that path reuses an existing colonist and hands off to `CalculPosition`/`EnginSetType`. Positioning and unit conversion remain unimplemented core dependencies in this round. No fresh-allocation callback is claimed for that path. `CreerBatiment` cost validation, charging, the subsequent state write/reservation, placement, and Bag initialization still require their own contract.
+Economy does not need to import this code for its independently bounded `SortieTroupe` completion: that path reuses an existing colonist and hands off to `CalculPosition`/`EnginSetType`. The subsequent [position-query stage](EXIT_POSITION.md) recovers `CalculPosition`; unit conversion remains an unimplemented core dependency. No fresh-allocation callback is claimed for that path. `CreerBatiment` cost validation, charging, the subsequent state write/reservation, placement, and Bag initialization still require their own contract.
 
 Combat's occupied-unit impact adapter remains independent. Lethal unit transitions and world impact resolution still require explicit future callbacks; this structure-record slice supplies neither.
 
