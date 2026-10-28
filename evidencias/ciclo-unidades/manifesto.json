@@ -1,0 +1,54 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "EnginResetAll",
+      "start": "0x441659",
+      "end_exclusive": "0x441775",
+      "sha256": "5be7031d6a0a682d9c1fdfe11bfe96eed535cabeef1a5c22dc1239fec31d603b",
+      "file": "00441659.asm"
+    },
+    {
+      "name": "table_bag_headers",
+      "start": "0x4416b1",
+      "end_exclusive": "0x4416ce",
+      "sha256": "7e2c9b3efdf5ee80a8e0ef91a19c88e4eb72efe270f65e2646b5bb93c8ceb662",
+      "file": "004416b1.asm"
+    },
+    {
+      "name": "table_bag_entries",
+      "start": "0x441679",
+      "end_exclusive": "0x441692",
+      "sha256": "4b2e7b78773fadbb7c609a922f4a8eefadd6d0d0e0887fd26865e199ce61ddae",
+      "file": "00441679.asm"
+    },
+    {
+      "name": "unit_bag_headers",
+      "start": "0x44174d",
+      "end_exclusive": "0x44176d",
+      "sha256": "43db6d65886190dd31dd38f37d0c1c917af469b472f084aff695db7fcb3df261",
+      "file": "0044174d.asm"
+    },
+    {
+      "name": "unit_bag_entries",
+      "start": "0x4416d2",
+      "end_exclusive": "0x4416eb",
+      "sha256": "4b2e7b78773fadbb7c609a922f4a8eefadd6d0d0e0887fd26865e199ce61ddae",
+      "file": "004416d2.asm"
+    }
+  ],
+  "unit_pool_pointer": "0x4e19a0",
+  "unit_count": 800,
+  "stride": 276,
+  "owner_type_bags": "0x4e19b8 pointer table; four pools of 26 records, stride104",
+  "bag_preserved_offsets": [
+    "0x60",
+    "0x61",
+    "0x62",
+    "0x63",
+    "0x64",
+    "0x65"
+  ],
+  "scope": "Complete raw pool reset; no allocation, mission loading or physical teardown."
+}
