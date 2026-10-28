@@ -63,7 +63,11 @@ def continuar_carga_unidades(leitor, unidades, valores_jogador, tipos_unidades, 
             raise ValueError('Índice de unidade fora da tabela')
         unit = pool[index*276:(index+1)*276]
         unit[:140] = leitor.ler(140)
-        leitor.ler(512)  # Successful in-memory equivalent of FileSeek(+512,1).
+        buscar = getattr(leitor, 'buscar', None)
+        if callable(buscar):
+            buscar(512, 1)  # FileSeek 0x45848b(0x200, SEEK_CUR) request, for a recording reader.
+        else:
+            leitor.ler(512)  # Successful in-memory equivalent of FileSeek(+512,1).
         unit[140:272] = leitor.ler(size-652)
         pool[ordinal*276+0xbd] = 0  # Original uses BX ordinal, NOT the disk ID.
         if unit[2]:

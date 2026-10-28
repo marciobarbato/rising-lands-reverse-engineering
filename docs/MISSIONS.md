@@ -481,3 +481,15 @@ Stage11 is now integrated/pushed at main `7f617fab29ce382f96b690ea70da25a33fab8b
 ### Stage12 result: original-only whole MissionLoad from the program start
 
 The Stage12 oracle is now runnable ([result section](../pesquisas-paralelas/missoes/STAGE12_ORACLE_PLAN.md#stage12-result-runnable-program-start-oracle-and-original-only-missionload-capture-2026-10-28-claude)). The original new-campaign path (CRT thread data, `AppInit`/`ProgInit`, five native `CalculGame` frames driven by a declared Enter-key script) produces the inherited state; display/text/bitmap-bank startup calls are skipped and shown not to be read. The intact `MissionLoad 0x46c2cf` then ran for MONDE01 to its **real return 0x42d22d with AL=1** through declared CRT/KERNEL32 boundaries only. Live player controls at entry are (1,2,2,2) from original `InitPlayer`/`SetPlayerType`. Captures, the frozen entry state and the validation report (replay, code integrity, segmentation invariance, fill independence, classified read-before-write footprint) are committed before any translation. No Python composition or M1 acceptance exists yet.
+
+## Stage13: whole MissionLoad composed in Python vs the original capture
+
+The composition starts from the frozen entry snapshot and runs `MissionLoad 0x46c2cf` for MONDE01 over the integrated providers. It uses one non-overlapping memory map in which provider buffers are filled in place, plus a deterministic arena and the original call order. It then compares the result with the frozen original capture: the whole state, the allocation records, AL and the ordered binding requests. Details are in [STAGE12_ORACLE_PLAN.md — Stage13](../pesquisas-paralelas/missoes/STAGE12_ORACLE_PLAN.md#stage13-m1-composition-and-comparison-2026-10-28-claude) and the report is [stage13-m1-composition.json](../pesquisas-paralelas/missoes/validacao/stage13-m1-composition.json).
+
+- **NOT M1.** The strict run stops at `EnginInitTechnologie 0x441459`, CALL `0x46c5af`. The cause is Economy: `PropriedadeConstrucoes.ordens` is one 10,816-byte copy, but the original keeps four separate Bag allocations behind `[0x4e19b8]`.
+- **Up to the stop:**
+  - all 1,400 binding requests match the original;
+  - all 938 allocation records match, including the native remap pointers and the SHA-256 of freed bytes;
+  - the only state differences are the 3,966 bytes that the six tails write.
+- **Diagnostic bridge (not M1 evidence).** A declared copy-in/copy-out of `ordens` gets past the stop. With it, the run reaches AL=1 and the whole 2,659,375-byte final state matches byte for byte.
+- **Needed:** Economy must accept the four live Bag pools by identity. After that, rerun `validar_composicao_carga_missao.py`.

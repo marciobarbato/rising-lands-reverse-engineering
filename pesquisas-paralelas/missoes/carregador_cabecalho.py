@@ -42,7 +42,11 @@ def continuar_cabecalho(leitor, atributos, terreno, objetos, auxiliares, economi
         raise ValueError('Tabela de recursos incompatível')
     attributes, tiles, objects, auxiliary, dimensions, camera_view = views
     camera = jogador_visualizacao & 255
-    leitor.ler(4)  # Original seeks absolute4; it does not validate the version.
+    buscar = getattr(leitor, 'buscar', None)
+    if callable(buscar):
+        buscar(4, 0)  # FileSeek 0x45848b(4, SEEK_SET) request, for a recording reader.
+    else:
+        leitor.ler(4)  # Original seeks absolute4; it does not validate the version.
     for layer in (attributes, tiles, objects, auxiliary):
         layer[:] = leitor.ler(len(layer))
     normalized = normalizar_inicio(objects, auxiliary)
