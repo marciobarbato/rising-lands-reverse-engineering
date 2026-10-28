@@ -10,6 +10,7 @@ from bonus_combate import ConsultaBonusCombate
 from proximidade_ataque import ConsultaProximidadeAtaque
 from alvos_impacto import ConsultaAlvosImpacto
 from impacto_unidades import ImpactoUnidades
+from fonte_batiment import ConsultaFonteBatiment
 from avanco_projeteis import avancar_linear
 from projeteis import PoolProjeteis, por16, u16
 from navegacao_unidades import MundoNavegacao
@@ -133,17 +134,25 @@ class DiferencialConsumoFisico(unittest.TestCase):
         cls.physical_stops = {}
 
     def compare(self, kind=2, victim=1, attacker=0, step=0x506, state=6,
-                full=False, sympathy_stop=False, prepare=None, checkpoint=None, projectile=False):
+                full=False, sympathy_stop=False, prepare=None, checkpoint=None, projectile=False,
+                mode=1, direction=255, source_kind=10):
         from emulador import RETORNO
         w, rows, pool = fixture(kind, victim, attacker, step, state, full)
+        mode4 = bytes([127, 124]) if mode == 4 else None
+        row10, row11 = (bytes([127]*26), bytes([124]*26)) if mode == 3 else (None, None)
+        if mode in (3, 4):
+            w.unidades[attacker*276+1] = 0  # a mode-1 source would request experience
+        if mode == 3:
+            w.estruturas[attacker*276+4], w.estruturas[attacker*276+8] = 3, source_kind
         if prepare:
             prepare(w)
         if projectile:
             pool.definir(37, 9, 0x505, 0x505, 1, attacker, 17, 16, 16, 0)
             pool.registro(37)[0x19] = 0
-        self.b.preparar(w, rows, pool)
+        self.b.preparar(w, rows, pool, modo4=mode4, fonte10=row10, fonte11=row11)
         native = self.b.consumir(victim, attacker,
-            checkpoint=checkpoint or (0x475118 if sympathy_stop else RETORNO), projectile=projectile)
+            checkpoint=checkpoint or (0x475118 if sympathy_stop else RETORNO), projectile=projectile,
+            mode=mode, direction=direction)
         expected_events = iter(self.b.eventos_consumo)
         external_death = []
         def effect(name, args):
@@ -156,9 +165,13 @@ class DiferencialConsumoFisico(unittest.TestCase):
             if sympathy_stop:
                 raise SympathyStop(name)
             # All native fixture owners have original inactivity byte 1.
-            self.assertEqual(tuple(args[:2]), (1, 0))
-        c = criar_consumidor_fisico(w, pool, rows, efeito=effect)
+            self.assertEqual(tuple(args[:2]), (1, 3 if mode == 3 else 0))
+        c = criar_consumidor_fisico(w, pool, rows, efeito=effect,
+                                    mortes_sem_experiencia=mode in (3, 4))
+        c.danos_modo4 = mode4
         actual_queries = queries(w, c.unidades)
+        if mode == 3:
+            actual_queries = ConsultaFonteBatiment(w.estruturas, row10, row11, actual_queries)
         def query(name, args):
             event = next(expected_events)
             result = actual_queries(name, args)
@@ -190,7 +203,7 @@ class DiferencialConsumoFisico(unittest.TestCase):
             impact = ImpactoUnidades(c.unidades, pool, consume, wrapper_query, wrapper_effect,
                 jogador_local=w.jogador_local, celula_alerta=0x1234)
             pool.efeito_externo = impact.receber
-        run = (lambda: avancar_linear(pool, 37)) if projectile else (lambda: c.infligir(victim, 1, attacker, 255))
+        run = (lambda: avancar_linear(pool, 37)) if projectile else (lambda: c.infligir(victim, mode, attacker, direction))
         if checkpoint:
             with self.assertRaises(DependenciaMorteUnidade) as caught:
                 run()
@@ -214,6 +227,8 @@ class DiferencialConsumoFisico(unittest.TestCase):
         self.assertEqual(self.b.ler_pool(), pool.memoria)
         self.assertEqual(self.b.eventos_morte[0], ('SetDyingEngin', (victim,)))
         self.assertEqual(self.b.eventos_morte[1:], external_death)
+        if mode in (3, 4):
+            self.assertEqual(c.unidades[attacker][0xaf], 0xa5)
         if not checkpoint:
             self.assertTrue(self.b.after_dying)
             self.assertEqual(u16(c.unidades[victim], 0x9a), 0)

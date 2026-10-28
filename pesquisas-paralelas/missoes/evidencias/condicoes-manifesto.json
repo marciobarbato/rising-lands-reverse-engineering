@@ -1,0 +1,38 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "inspected_main": "6a9168e42f917096af88fc6c510b3f25b7230516",
+  "intervals": [
+    {
+      "name": "LoadFinMission",
+      "start": "0x458b05",
+      "end_exclusive": "0x458b72",
+      "sha256": "3a11856049a42c135a72c7191d33c73c01f8371949c073bfda4eabf50c823155",
+      "file": "condicoes-00458b05.asm"
+    },
+    {
+      "name": "LoadObjectif",
+      "start": "0x47c404",
+      "end_exclusive": "0x47c4b7",
+      "sha256": "abd0cd3f0157a98b84ed8f07f2e592b4bb40daeb86cd7ddcdfe5654c32f45797",
+      "file": "condicoes-0047c404.asm"
+    },
+    {
+      "name": "TestFinDeMission_NOT_IMPLEMENTED",
+      "start": "0x458606",
+      "end_exclusive": "0x458ae6",
+      "sha256": "ccf3d2595343ffff9853884dfec8d44672e1c97dabd9d689b4e6d7acc658610b",
+      "file": "condicoes-00458606.asm"
+    },
+    {
+      "name": "ObjectiveCursorQueries_NOT_IMPLEMENTED",
+      "start": "0x47c39a",
+      "end_exclusive": "0x47c404",
+      "sha256": "a684945b71d2db20f0145184aade5ce7bfafe0fac3cbf4273212cbddae4f74c7",
+      "file": "condicoes-0047c39a.asm"
+    }
+  ],
+  "fin_layout": "114 bytes at4e1d20:10x10 records,4 retained globals,10 statuses",
+  "objective_layout": "804 bytes at511ffc:4x100u16 IDs,4 retained cursor bytes",
+  "native_consumer": "TestFinDeMission458606 called by CalculGame42c868; 11 resolved native queries; unsupported",
+  "scope": "Load/reset/copy/retention only; no condition evaluation, cursor query, objective text, victory or event execution."
+}

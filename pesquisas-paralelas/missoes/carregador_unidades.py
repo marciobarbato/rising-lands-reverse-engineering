@@ -1,7 +1,8 @@
-"""Indexed ETA unit-load continuation, after the original SelectionInit call.
+"""Indexed ETA unit loading, with an explicit committed selection initializer.
 
-This is 0x46acca through LoadEngin's return, not MissionLoad or a prepared
-world. The caller supplies inherited live memory and already-loaded types.
+The continuation covers 0x46acca through LoadEngin's return. The full entry
+composes core SelectionInit before it. Neither is MissionLoad or a prepared
+world. The caller supplies inherited memory and already-loaded types.
 Combat owns the per-record postload body; this module only orders reads and
 effects. Modifier callbacks must be read-only with respect to loader inputs.
 """
@@ -10,6 +11,7 @@ import struct
 import ambiente_missoes
 from formatos import Leitor
 from inicializacao_ataque import CaracteristicasTipo, preparar_apos_carga_missao
+from selecao_unidades import inicializar_selecoes_unidades
 
 
 class DependenciaCargaUnidades(NotImplementedError):
@@ -79,3 +81,19 @@ def continuar_carga_unidades(leitor, unidades, valores_jogador, tipos_unidades, 
             preparar_apos_carga_missao(unit, params, modifier)
         indices.append(index)
     return CargaUnidades(count, tuple(indices), leitor.posicao)
+
+
+def carregar_unidades_missao(leitor, unidades, valores_jogador, tipos_unidades,
+                             selecoes_unidades, *, modificador12=None):
+    """Complete LoadEngin entry: original SelectionInit before the continuation.
+
+    Selection memory must be the explicit inherited bytearray2048 accepted by
+    the committed core provider. Its four word stores precede continuation
+    input checks and all reads/copies. Therefore a later validation, read or
+    modifier failure retains those selection stores. No unit flag is scanned
+    or cleared by SelectionInit; only the subsequent original ordinal writes
+    affect +bd. This is one loader body, not an initialized live world.
+    """
+    inicializar_selecoes_unidades(selecoes_unidades)
+    return continuar_carga_unidades(leitor,unidades,valores_jogador,tipos_unidades,
+                                     modificador12=modificador12)
