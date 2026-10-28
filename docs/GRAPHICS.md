@@ -185,7 +185,7 @@ This inventory distinguishes reconstructed behavior, captured original behavior,
 | Projectile display inputs/rendering | The 100-record selection/sort, cell queries and public `AffProjectile` mapper/compositor are reconstructed; eight bounded complete sprite scenes use the public renderer | Integrate the consumer and physical producers; preserve explicit catalog limits and raw phase semantics |
 | Projectile/effect lighting | `CalculEclairage`, clipping-enabled mask remap and public projectile consumers are independently validated | Recover remaining palette effects and their lifecycle separately |
 | Scene traversal/projection | Complete interior `AffSprite` planning/execution and relative projection are reconstructed; native complete-pass traces and bounded indexed scenes match | Recover margin wraparound/negative origins, `AffGame` projection/cadence and a real-mission consumer |
-| Terrain block cache | Complete bounded `GetNumBob` resolution/cache replacement and raw-block masks are reconstructed with explicit snapshots/table | Recover complete `AffTerrain` traversal/block drawing and verified cache initialization/lifecycle |
+| Terrain pass/cache | Bounded nonwrapping `AffTerrain` traversal, opaque blocks, terrain objects and `GetNumBob` cache match full native buffers | Recover negative/wrapped viewports, frame orchestration and verified cache initialization/lifecycle |
 | Visibility, palette and clocks | Indexed composition/shadow helpers and clock prefix are reconstructed; visibility bytes are explicit runtime inputs | Connect validated world providers and original frame cadence |
 | Real-mission consumer | V6 reads all serialized mission-1 object codes; the preview uses older pinned snapshots | Coordinate complete world loading/remapping, dynamic render state, input, effects and original-reference runtime scenes |
 
@@ -388,6 +388,27 @@ The [focused REA review](../pesquisas-paralelas/graficos-animacao/evidencias/rea
 
 ```sh
 python3 -B pesquisas-paralelas/graficos-animacao/validar_cache_terreno.py
+python3 -B scripts/check.py --domain graphics
+```
+
+## Complete bounded terrain pass — fifteenth continuation stage
+
+`passe_terreno.py:planejar_passe_terreno(terreno, iluminacao, *, origem, janela_celulas, margem_i8)` takes 131,072 terrain-word bytes, a selected-camera 65,536-byte lighting map, origin coordinates 0–255 and window dimensions 1–32 cells. The full viewport must remain within the256×256 map. Inset is an explicit signed-i8 field, supported only from0 through half the smaller window dimension. Negative/excessive insets and wrapped views raise `NotImplementedError`; bad widths/lengths raise `ValueError`. Maps are snapshotted, and the relevant world/visibility state must stay fixed while callbacks draw. Native initial-width word `0x49A018` and pitch dword `0x4E17A0` are both required to equal window width×32 in this domain.
+
+Cells are row-major, rows`inset..height-inset-1`, columns`inset..width-inset-1`, with relative pixel origins32×column/row. Native `EstConstructionTerrain` classifies the raw word **702–1081 inclusive**. When that predicate is true and lighting has mask`0x10` set, the source passed to GetNumBob becomes `349+(absolute_x%8)+8*(absolute_y%8)`; otherwise it remains the raw terrain word. This is visual source selection, without changing the world word or inferring construction progress. `terreno_de_construcao(word_u16)` publishes the exact read-only predicate.
+
+`executar_passe_terreno(plan, *, bloco, vegetacao)` calls `bloco(x,y,cell,source_word)` then `vegetacao(x,y,cell)` for **every** visited cell, including empty/hidden objects. The block callback owns GetNumBob/cache resolution and painting; vegetation owns the existing terrain-object provider. Both callbacks are required and preflighted as callable before any call; missing inputs raise `TypeError`, non-callables `ValueError`. Returns are ignored, completed calls counted, and exceptions propagate with earlier callback effects retained. No rollback or world mutation is supplied by the planner/executor.
+
+`pixels_bloco_terreno(catalog,cache,id)` reads full-literal static blocks1–1081 or cache IDs1090–1345. Cached raw row headers are skipped without interpreting their value, matching AffBloc. Other IDs raise `NotImplementedError`; a raw query's direct ID is not automatically a drawable block. `compor_bloco_terreno(dest,w,h,pixels1024,x,y)` returns new bytes, copying32 opaque pixels per row with native pitch and **no clip rectangle**. A block must fit entirely inside the surface; otherwise it rejects before effects. Object blitters still use their explicit incoming inclusive clip, so a narrow object clip does not limit ground blocks.
+
+Original evidence: `AffTerrain 0x41068E..0x41087E` hash `4e0b75233c42cb4e1d60daaa14b7473f19b5546507421e3520deb68e935abd0b`; `EstConstructionTerrain 0x42302D..0x423355` hash `b1992759ba7638da4f2e19ff1ecd6af250697dfd6a1e2ccd7bcf615087a790c5`; `AffBloc 0x45C72A..0x45C779` hash `99fbfda70e2038110ef2f75b657f7880296e512fc6a547bb8f0a690c8ed73c2e`. Same intact executable identity; terrain origin in EAX/EDX, map pointer`0x507D70`, window`0x508724/+2`, inset byte`0x508F90`, surface pointer`0x508F70`. [New exact bytes and unchanged providers](../pesquisas-paralelas/graficos-animacao/evidencias/passe-terreno.json).
+
+Fresh validator: **65,536 complete predicate calls**, **80 complete terrain calls** (72 traces plus8 indexed scenes), **20 standalone block calls**, two bank calls, **72,258 bounded segments / 15,599,587 observed instruction hooks**. Terrain executes original retained-stack segments alternating before/after each cell, then reaches its actual return`0x3000000` with ESP`0x2008004`; segment count is distinct from routine-call count. No expected/unexpected faults, limits or skips. Trace-only cases intercept GetNumBob with valid returnID1 and intercept block/vegetation callbacks; predicate and lighting tests are original. Pixel cases execute terrain, GetNumBob, AffBloc and supported terrain-object renderers unchanged, comparing the complete surface, resolved IDs and final cache keys/raw blocks/cursor. Bank IO/allocation and explicit synthetic cache-payload binding remain declared fixture substitutions. World maps, attributes, clip and bank pointer inputs stay intact. [Native report](../pesquisas-paralelas/graficos-animacao/validacao/x86-passe-terreno.json).
+
+Coverage includes every u16 predicate value, every window width/height1–32 in focused traces, map corners, inset/no-cell paths, source substitution, hidden invalid words, narrow object clipping, unaligned standalone blocks and a full1024×1024 buffer. The [128×128 native terrain fixture](../pesquisas-paralelas/graficos-animacao/artefatos/cena-passe-terreno.png) uses synthetic world/cache inputs and original assets. The chosen ground assets produced the same pixels when deferred; **ordering is established by exact callback traces**, not a claimed pixel counterexample. Seven new regressions pass; graphics domain **176 tests**, no skips and valid links. Complete frame/AffSprite orchestration, negative/wrapped views, cache initialization, mission/runtime loading and consumer activation remain open.
+
+```sh
+python3 -B pesquisas-paralelas/graficos-animacao/validar_passe_terreno.py
 python3 -B scripts/check.py --domain graphics
 ```
 
