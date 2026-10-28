@@ -1,0 +1,204 @@
+{
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_simbolos": "93a69ef9475241b0376818370417e3b1264a687a313b23220570ffd4bec5cb3a",
+  "intervalo": [
+    "0x00401000",
+    "0x00493c00"
+  ],
+  "metodo": "Decodificação linear reiniciada por símbolo e busca de CALL rel32 por byte; sem prova geral de alcançabilidade ou aliases.",
+  "chamadas": [
+    {
+      "endereco": "0x0040f706",
+      "simbolo": "ResetMode",
+      "bytes": "e844fa0200",
+      "instrucao": "call 0x43f14f",
+      "destino": "0x0043f14f",
+      "nome": "DDFlipPage"
+    },
+    {
+      "endereco": "0x004177a4",
+      "simbolo": "AffGame",
+      "bytes": "e8a6790200",
+      "instrucao": "call 0x43f14f",
+      "destino": "0x0043f14f",
+      "nome": "DDFlipPage"
+    },
+    {
+      "endereco": "0x004178ce",
+      "simbolo": "AffGame",
+      "bytes": "e87c780200",
+      "instrucao": "call 0x43f14f",
+      "destino": "0x0043f14f",
+      "nome": "DDFlipPage"
+    },
+    {
+      "endereco": "0x00417d4d",
+      "simbolo": "AffGame",
+      "bytes": "e8fd730200",
+      "instrucao": "call 0x43f14f",
+      "destino": "0x0043f14f",
+      "nome": "DDFlipPage"
+    },
+    {
+      "endereco": "0x0042d3f0",
+      "simbolo": "CalculGame",
+      "bytes": "e81a280400",
+      "instrucao": "call 0x46fc0f",
+      "destino": "0x0046fc0f",
+      "nome": "ProjectileCalcul"
+    },
+    {
+      "endereco": "0x0043eddb",
+      "simbolo": "AffCredits",
+      "bytes": "e86f030000",
+      "instrucao": "call 0x43f14f",
+      "destino": "0x0043f14f",
+      "nome": "DDFlipPage"
+    },
+    {
+      "endereco": "0x0046020d",
+      "simbolo": "_WinMain@16",
+      "bytes": "e8fc4d0100",
+      "instrucao": "call 0x47500e",
+      "destino": "0x0047500e",
+      "nome": "ProgIteration"
+    },
+    {
+      "endereco": "0x00468ca2",
+      "simbolo": "MenuInit",
+      "bytes": "e8a864fdff",
+      "instrucao": "call 0x43f14f",
+      "destino": "0x0043f14f",
+      "nome": "DDFlipPage"
+    },
+    {
+      "endereco": "0x004698f9",
+      "simbolo": "AffMenuMultiSession",
+      "bytes": "e85158fdff",
+      "instrucao": "call 0x43f14f",
+      "destino": "0x0043f14f",
+      "nome": "DDFlipPage"
+    },
+    {
+      "endereco": "0x00474b94",
+      "simbolo": "RestoreAll",
+      "bytes": "e8b6a5fcff",
+      "instrucao": "call 0x43f14f",
+      "destino": "0x0043f14f",
+      "nome": "DDFlipPage"
+    },
+    {
+      "endereco": "0x00474bdb",
+      "simbolo": "RestoreAll",
+      "bytes": "e86fa5fcff",
+      "instrucao": "call 0x43f14f",
+      "destino": "0x0043f14f",
+      "nome": "DDFlipPage"
+    },
+    {
+      "endereco": "0x00474e96",
+      "simbolo": "ProgInit",
+      "bytes": "e8b4a2fcff",
+      "instrucao": "call 0x43f14f",
+      "destino": "0x0043f14f",
+      "nome": "DDFlipPage"
+    },
+    {
+      "endereco": "0x0047505e",
+      "simbolo": "ProgIteration",
+      "bytes": "e80578fbff",
+      "instrucao": "call 0x42c868",
+      "destino": "0x0042c868",
+      "nome": "CalculGame"
+    }
+  ],
+  "candidatos_call_projectilecalcul_por_byte": [
+    {
+      "endereco": "0x0042d3f0",
+      "simbolo": "CalculGame",
+      "bytes": "e81a280400",
+      "fronteira_por_simbolo": true
+    }
+  ],
+  "referencias_4dfb44": [
+    {
+      "endereco": "0x0041a430",
+      "simbolo": "BatimentInfligeDegat",
+      "bytes": "c60544fb4d0014",
+      "instrucao": "mov byte ptr [0x4dfb44], 0x14"
+    },
+    {
+      "endereco": "0x0041ee34",
+      "simbolo": "VendreBatiment",
+      "bytes": "c60544fb4d0014",
+      "instrucao": "mov byte ptr [0x4dfb44], 0x14"
+    },
+    {
+      "endereco": "0x0041ef87",
+      "simbolo": "DetruireBatiment",
+      "bytes": "c60544fb4d0014",
+      "instrucao": "mov byte ptr [0x4dfb44], 0x14"
+    },
+    {
+      "endereco": "0x0043f15e",
+      "simbolo": "DDFlipPage",
+      "bytes": "8a1d44fb4d00",
+      "instrucao": "mov bl, byte ptr [0x4dfb44]"
+    },
+    {
+      "endereco": "0x0043f1a0",
+      "simbolo": "DDFlipPage",
+      "bytes": "881544fb4d00",
+      "instrucao": "mov byte ptr [0x4dfb44], dl"
+    },
+    {
+      "endereco": "0x0046f08c",
+      "simbolo": "ProjectileAvance",
+      "bytes": "882d44fb4d00",
+      "instrucao": "mov byte ptr [0x4dfb44], ch"
+    }
+  ],
+  "escritas_ciclo_e_leituras_anim": [
+    {
+      "endereco": "0x0042c6f9",
+      "simbolo": "MenuNewSelect",
+      "bytes": "89157c8f5000",
+      "instrucao": "mov dword ptr [0x508f7c], edx",
+      "tamanho": 4,
+      "escrita": true
+    },
+    {
+      "endereco": "0x0042d2be",
+      "simbolo": "CalculGame",
+      "bytes": "891d7c8f5000",
+      "instrucao": "mov dword ptr [0x508f7c], ebx",
+      "tamanho": 4,
+      "escrita": true
+    },
+    {
+      "endereco": "0x0046e5b6",
+      "simbolo": "ProjectileAnim",
+      "bytes": "8a157c8f5000",
+      "instrucao": "mov dl, byte ptr [0x508f7c]",
+      "tamanho": 1,
+      "escrita": false
+    },
+    {
+      "endereco": "0x0046e5ca",
+      "simbolo": "ProjectileAnim",
+      "bytes": "8a0d7c8f5000",
+      "instrucao": "mov cl, byte ptr [0x508f7c]",
+      "tamanho": 1,
+      "escrita": false
+    },
+    {
+      "endereco": "0x00475014",
+      "simbolo": "ProgIteration",
+      "bytes": "ff057c8f5000",
+      "instrucao": "inc dword ptr [0x508f7c]",
+      "tamanho": 4,
+      "escrita": true
+    }
+  ],
+  "limites": "Chamadas indiretas e acessos por ponteiros calculados não são resolvidos; nomes vêm da tabela SBL já extraída."
+}

@@ -30,6 +30,12 @@ não foram duplicados. O novo predicado de arma carregada complementa o avanço.
 | [MAQUINA_PROJETEIS.md](MAQUINA_PROJETEIS.md) | Tipos 30/33, expiração, consultas de magia e ordem de processamento |
 | [bancada_maquina_projeteis.py](bancada_maquina_projeteis.py) | X86 original com pausas/retomadas sem alterações de estado |
 | [test_maquina_projeteis.py](test_maquina_projeteis.py) | 12 testes adicionais e 9.235 execuções x86 delimitadas |
+| [cadencia_projeteis.py](cadencia_projeteis.py) | Portões locais de CalculGame e preparação visual do impacto |
+| [CADENCIA_PROJETEIS.md](CADENCIA_PROJETEIS.md) | Chamador, contador acumulado, apresentação e limites de certeza |
+| [bancada_cadencia_projeteis.py](bancada_cadencia_projeteis.py) | X86 até fronteiras de simulação e apresentação, sem APIs gráficas |
+| [test_cadencia_projeteis.py](test_cadencia_projeteis.py) | 11 testes adicionais e 20.739 execuções x86 delimitadas |
+| [rastrear_cadencia_projeteis.py](rastrear_cadencia_projeteis.py) | Auditoria de referências diretas, reproduzível e somente leitura do original |
+| [evidencias/rastreio-cadencia-projeteis.json](evidencias/rastreio-cadencia-projeteis.json) | CALL de Calcul, acessos ao impacto e escritas/leituras do contador |
 | [inicializacao_ataque.py](inicializacao_ataque.py) | Características por tipo, inicialização e trechos de pós-carga |
 | [INICIALIZACAO_ATAQUE.md](INICIALIZACAO_ATAQUE.md) | Rastreio de +79/+7A/+8A/+8B e limites da conclusão sobre fases 2/3 |
 | [rastrear_campos.py](rastrear_campos.py) | Auditoria estática e 2.604 registros dos 38 mapas originais |
@@ -43,10 +49,10 @@ não foram duplicados. O novo predicado de arma carregada complementa o avanço.
 | [test_alvos_alcance.py](test_alvos_alcance.py) | Casos de contrato e comparações contra instruções originais |
 | [validar.py](validar.py) | Executa só esta pesquisa e grava JSON nesta pasta |
 | [extrair_evidencias.py](extrair_evidencias.py) | Extração direta de bytes/assembly do EXE original |
-| [evidencias/manifesto.json](evidencias/manifesto.json) | 88 intervalos com limites/hashes, constantes e despachos |
+| [evidencias/manifesto.json](evidencias/manifesto.json) | 97 intervalos com limites/hashes, constantes e despachos |
 | [evidencias/dados-disparo.json](evidencias/dados-disparo.json) | Tabelas extraídas de saída de projétil e deslocamento por tipo |
-| [validacao-local.json](validacao-local.json) | 38 contratos aprovados, 64 diferenciais ignorados explicitamente |
-| [validacao-emulada.json](validacao-emulada.json) | 102 testes aprovados, zero falhas/erros/ignorados, 213.506 chamadas x86 delimitadas |
+| [validacao-local.json](validacao-local.json) | 43 contratos aprovados, 70 diferenciais ignorados explicitamente |
+| [validacao-emulada.json](validacao-emulada.json) | 113 testes aprovados, zero falhas/erros/ignorados, 234.245 chamadas x86 delimitadas |
 | [INTEGRACAO.md](INTEGRACAO.md) | Contratos e sequência de integração para o chat principal |
 
 Executar nesta pasta:
@@ -54,6 +60,7 @@ Executar nesta pasta:
 ```sh
 python3 -B extrair_evidencias.py
 python3 -B rastrear_campos.py
+python3 -B rastrear_cadencia_projeteis.py
 python3 -B validar.py
 python3 -B validar.py --emular
 ```
@@ -104,6 +111,9 @@ aparece como dados, não como instruções.
 | `0x46e44c` | `ProjectileInit` | Pool/inicialização traduzidos e emissão validada com pool cheio e slots livres |
 | `0x46eaf8` | `ProjectileAvance` | Todos os tipos; linha, chegada, círculo 30, sorteio 33 e expiração |
 | `0x46fc0f` | `ProjectileCalcul` | Animação geral e 30 passagens com atividade/+01 consultados ao vivo |
+| `0x42d14c` / `0x42d2e3` / `0x42d3c0` | Portões de `CalculGame` | Estado salvo, evento e estado relido antes do bloco de projéteis |
+| `0x42d3f0` | CALL de `ProjectileCalcul` | Execução original até a fronteira da atualização de unidades |
+| `0x43f14f..0x43f220` | Preparação de `DDFlipPage` | Deslocamento vertical do impacto, decaimento e retângulo de origem |
 
 Esses resultados são **confirmados no código e nos cenários sintéticos
 descritos**, não por observação de uma partida. Os limites de cada tradução
@@ -258,7 +268,7 @@ As traduções e os limites dessa conclusão estão em
 
 ## Testes e limitações
 
-As 213.506 execuções do relatório contam chamadas delimitadas de entrada/trecho,
+As 234.245 execuções do relatório contam chamadas delimitadas de entrada/trecho,
 não cada `CALL` interna. Toda chamada recusa execução fora dos intervalos
 declarados e exige alcançar uma parada. No despacho completo, cada pausa e
 retomada conta como uma execução, mantendo o estado da CPU. Limites: um
@@ -288,6 +298,10 @@ o contrato de dano e consulta Random externamente, sem duplicar essas fórmulas.
 A [máquina completa de projéteis](MAQUINA_PROJETEIS.md) acrescenta 9.235
 execuções: todos os ramos restantes e as 30 passagens de Calcul, comparando
 também o byte global do tipo 30, dois buffers de efeitos e a ordem dos IDs.
+A [cadência e apresentação](CADENCIA_PROJETEIS.md) acrescenta 20.739 execuções,
+com portões locais, o CALL original do despachante e o consumidor do byte
+0x4DFB44. Confirma que a animação recebe o byte baixo do contador acumulado;
+não determina uma duração fixa de tick.
 
 Limites deliberados:
 

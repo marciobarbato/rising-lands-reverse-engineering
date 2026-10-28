@@ -36,10 +36,12 @@ def main():
     from test_projeteis import ContratosProjeteis, DiferencialProjeteis
     from test_avanco_projeteis import ContratosAvanco, DiferencialAvanco
     from test_maquina_projeteis import ContratosMaquina, DiferencialMaquina
+    from test_cadencia_projeteis import ContratosCadenciaProjeteis, DiferencialCadenciaProjeteis
     suite = unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromTestCase(c)
         for c in (Contratos, Diferencial, ContratosMira, DiferencialMira, ContratosAnimacao, DiferencialAnimacao,
                   ContratosInicializacao, DiferencialInicializacao, ContratosProjeteis, DiferencialProjeteis,
-                  ContratosAvanco, DiferencialAvanco, ContratosMaquina, DiferencialMaquina))
+                  ContratosAvanco, DiferencialAvanco, ContratosMaquina, DiferencialMaquina,
+                  ContratosCadenciaProjeteis, DiferencialCadenciaProjeteis))
     r = unittest.TextTestRunner(verbosity=2, resultclass=Resultado).run(suite)
     saida = Path(__file__).resolve().parent / ('validacao-emulada.json' if args.emular else 'validacao-local.json')
     relatorio = dict(sucesso=r.wasSuccessful(), testes=r.testsRun, falhas=len(r.failures),
@@ -76,6 +78,11 @@ def main():
             referencia='Random, CreerExplosion, consultas de magia e EteintTerrain originais executados sem substituir CALLs; resultados Random são entradas externas do Python.',
             fatiamento='Paradas antes de Avance e de cada célula do tipo 30; retomada sem alterar registradores, pilha ou memória. Cada fatia conta como execução delimitada.',
             limites='Dano com unidades inativas e grade vazia; EteintTerrain com dimensões zero e raio 0..7, sem células visitadas. Não valida iluminação real, vítimas, desenho ou duração em segundos.'),
+        cadencia_projeteis=dict(trechos=['0x42d14c..0x42d184', '0x42d2e3..0x42d2f0',
+                '0x42d3c0..0x42d3e1', '0x42d3f0..0x42d3f5', '0x43f14f..0x43f220'],
+            comparacao='Portões locais, pool completo, dois bytes de apresentação, retângulo e preservação da tabela de 256 bytes.',
+            referencia='EvenementEnCours original executado; CALL de ProjectileCalcul em CalculGame executado até antes da atualização das unidades. Contadores reutilizam a tradução existente e executam o trecho x86 de ProgIteration.',
+            limites='Não executa menus, comandos/jogadores, laço Windows, DirectDraw ou jogo completo. Cadência em segundos não medida; tabela visual sintética, sem reconstruir seu preenchimento.'),
         diagnosticos=[dict(teste=t.id(), detalhe=e) for t, e in [*r.failures, *r.errors]])
     saida.write_text(json.dumps(relatorio, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(f'Relatório: {saida}\nExecuções x86 delimitadas: {relatorio["execucoes_x86_delimitadas"]}')

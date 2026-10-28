@@ -169,7 +169,7 @@ alegar uma execução nativa desses laços para raios extremos.
 
 Esta etapa acrescenta **11 testes**, quatro de contrato e sete diferenciais,
 com **12.196 execuções x86 delimitadas**. A regressão de combate totaliza
-**102 testes, 213.506 execuções x86, zero falhas/erros/ignorados**.
+**113 testes, 234.245 execuções x86, zero falhas/erros/ignorados**.
 Relatórios: [emulado](validacao-emulada.json) e [local](validacao-local.json).
 
 | Comparação | Execuções x86 |
@@ -189,8 +189,8 @@ emissão. A ligação Python entre ataque e pool existe **somente no teste**;
 não foi feita integração ao mundo do projeto.
 
 Reprodução nesta pasta: `python3 -B validar.py --emular`, com o JIT local do
-Unicorn permitido. Sem emulação: `python3 -B validar.py` aprova 38 contratos
-e ignora explicitamente 64 diferenciais. Sementes fixas nos testes.
+Unicorn permitido. Sem emulação: `python3 -B validar.py` aprova 43 contratos
+e ignora explicitamente 70 diferenciais. Sementes fixas nos testes.
 
 A continuação em [AVANCO_PROJETEIS.md](AVANCO_PROJETEIS.md) traduz
 `ProjectileAnim`, `ProjectileInfligeDegat` e o avanço/chegada de 16 tipos

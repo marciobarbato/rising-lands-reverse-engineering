@@ -24,9 +24,10 @@ ao movimento, à economia ou ao desenho.
 | `0x476E82` | `EteintTerrain` | Argumentos/retorno observados, sem células iluminadas no ensaio |
 
 O corpo de [Avance](evidencias/0046eaf8.asm) e o de
-[Calcul](evidencias/0046fc0f.asm) já estavam exportados. Esta etapa acrescenta
+[Calcul](evidencias/0046fc0f.asm) já estavam exportados. Esta etapa acrescentou
 as três evidências de duração/explosão/extinção ao
-[manifesto](evidencias/manifesto.json), agora com 88 intervalos.
+[manifesto](evidencias/manifesto.json); a continuação de cadência ampliou a
+coleção para 97 intervalos.
 `EteintTerrain` retorna pelo epílogo compartilhado em `0x476E7B`, já contido
 na evidência de `IllumineTerrain`; a bancada permite esse caminho original.
 
@@ -70,8 +71,10 @@ do terceiro argumento continua bruto: a pesquisa não o converte em um jogador.
 ## Tipo 30: círculo e ordem dos efeitos
 
 Na chegada, escreve **15** no byte global `0x4DFB44`, representado pelo campo
-local `MaquinaProjeteis.campo_4dfb44`. Seu uso visual ou temporal não foi
-identificado nesta etapa; não se atribui um nome como tremor de câmera.
+local `MaquinaProjeteis.campo_4dfb44`. A continuação em
+[CADENCIA_PROJETEIS.md](CADENCIA_PROJETEIS.md) identifica seu consumidor em
+`DDFlipPage`: limita um deslocamento vertical e decai na apresentação de
+ciclos pares. O nome bruto permanece na API; o aspecto no jogo não foi observado.
 
 Captura a célula alvo +16 e percorre linhas crescentes de y, com x crescente
 dentro de cada linha. Inclui somente coordenadas 0..255 e distância quadrada
@@ -126,8 +129,10 @@ primeira passagem, se nenhum efeito voltar a escrevê-lo. A animação inicial
 acontece antes das criações; um filho novo não a recebe retroativamente.
 
 O número 30 é confirmado pelo laço. Não determina 30 quadros por segundo,
-30 ticks reais ou duração em segundos. O chamador global e o desenho continuam
-fora desta entrega.
+30 ticks reais ou duração em segundos. O chamador foi localizado em
+`CalculGame`, antes da atualização das unidades, e o parâmetro da animação
+é o byte baixo do contador global acumulado. Os portões e limites estão em
+[CADENCIA_PROJETEIS.md](CADENCIA_PROJETEIS.md); o desenho permanece externo.
 
 ## Validação diferencial
 
@@ -137,8 +142,8 @@ e seis testes diferenciais. A comparação cobre os 5.600 bytes do pool, o byte
 do pai durante efeitos e todos os argumentos e resultados de consultas.
 
 Esta etapa soma **9.235 execuções x86 delimitadas**. A regressão completa
-passou com **102 testes e 213.506 execuções**, zero falhas, erros ou ignorados.
-Sem emulação, passam 38 contratos e os 64 diferenciais ficam explicitamente
+passou com **113 testes e 234.245 execuções**, zero falhas, erros ou ignorados.
+Sem emulação, passam 43 contratos e os 70 diferenciais ficam explicitamente
 ignorados. A contagem inclui fatias de uma mesma chamada, conforme descrito abaixo.
 
 | Comparação | Execuções delimitadas |

@@ -101,6 +101,7 @@ se faltarem. A máquina principal filtra atividade antes de chamar esta rotina.
     def calcular(self, incremento_animacao):
         """ProjectileCalcul 0x46fc0f: uma animação geral e 30 passagens.
 
+O argumento é o byte baixo do contador acumulado 0x508f7c, não um delta.
 O pool é consultado ao vivo: filhos em IDs posteriores podem ser processados
 na mesma passagem se Set deixar +01=0. +01 é limpo após cada varredura,
 inclusive em slots inativos. Isso não fixa uma duração de frame/tick.

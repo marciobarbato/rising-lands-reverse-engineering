@@ -67,18 +67,18 @@ class BancadaMaquinaProjeteis(BancadaAvanco):
         self.cpu.mem_write(EXPLOSOES, bytes(65536))
         self.cpu.mem_write(QUADROS_EXPLOSAO, b'\xad' * 65536)
 
-    def _fatiado(self, entrada, registradores=None):
+    def _fatiado(self, entrada, registradores=None, intervalos=MAQUINA, saida=RETORNO):
         self.limpar_trilha()
         self.atividades_efeitos = []
         self.indices_avanco = []
-        paradas = {RETORNO, 0x46eaf8, 0x46f48a}
+        paradas = {saida, 0x46eaf8, 0x46f48a}
         self._ignorar_inicio = entrada
-        r = self.executar(entrada, MAQUINA, registradores, parada=paradas, limite_instrucoes=500000)
+        r = self.executar(entrada, intervalos, registradores, parada=paradas, limite_instrucoes=500000)
         for _ in range(20000):
-            if r['EIP'] == RETORNO:
+            if r['EIP'] == saida:
                 return r
             self._ignorar_inicio = r['EIP']
-            r = self.retomar(r['EIP'], MAQUINA, parada=paradas, limite_instrucoes=500000)
+            r = self.retomar(r['EIP'], intervalos, parada=paradas, limite_instrucoes=500000)
         raise RuntimeError('Máquina excedeu 20000 retomadas')
 
     def avancar_completo(self, indice):

@@ -75,6 +75,15 @@ TRECHOS = {
     'SortilegeGetTempsFin': (0x47474f, 0x47476a),
     'CreerExplosion': (0x475710, 0x475736),
     'EteintTerrain': (0x476e82, 0x477042),
+    'CalculGameDespachoEstado': (0x42c8a5, 0x42c8bf),
+    'CalculGamePortaoMenu': (0x42d14c, 0x42d184),
+    'CalculGameReinicioContadores': (0x42d2ab, 0x42d2de),
+    'CalculGameEventoEComandos': (0x42d2de, 0x42d3c0),
+    'CalculGamePortaoEOrdem': (0x42d3c0, 0x42d418),
+    'EvenementEnCours': (0x4581b6, 0x4581bc),
+    'DDFlipPagePreparaImpacto': (0x43f14f, 0x43f247),
+    'ProgIteration': (0x47500e, 0x47509d),
+    'AffGameFiltroDesenho': (0x417909, 0x41792b),
     'TypeEnginGetSortieProjectile': (0x4511a5, 0x4513c7),
     'AffCorpsEnginDecalage': (0x410fcc, 0x4110bf),
     'GiroTorre': (0x4484a7, 0x448599),
@@ -135,6 +144,8 @@ def main():
         struct.unpack_from('<26I', imagem, 0x4572e8 - 0x400000)]
     manifesto['despacho_projeteis'] = dict(endereco='0x0046e184', primeiro_tipo=1,
         destinos=[f'0x{v:08x}' for v in struct.unpack_from('<33I', imagem, 0x46e184 - 0x400000)])
+    manifesto['despacho_calcul_game'] = dict(endereco='0x0042c804', primeiro_estado=0,
+        destinos=[f'0x{v:08x}' for v in struct.unpack_from('<25I', imagem, 0x42c804 - 0x400000)])
     fontes_saidas = {2: (0x496af0, 8), 8: (0x496b10, 8), 18: (0x496b30, 8),
         23: (0x496b50, 8), 24: (0x496b70, 8), 21: (0x496b90, 8),
         22: (0x496bb0, 8), 15: (0x496bd0, 32), 12: (0x496c50, 32)}

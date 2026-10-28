@@ -13,7 +13,7 @@ TIPOS_LINEARES = frozenset((*range(1, 6), *range(9, 14), 17, 20, 21, 22, 23, 29)
 
 
 def animar_projetil(p, incremento):
-    """ProjectileAnim 0x46e52c; incremento é o byte global em 0x508f7c.
+    """ProjectileAnim 0x46e52c; incremento é o byte baixo do ciclo 0x508f7c.
 
 Não testa atividade. A passagem inicial de tipos 29/30 até quadro 12 e o
 incremento simples dos efeitos não usam a velocidade global de animação.

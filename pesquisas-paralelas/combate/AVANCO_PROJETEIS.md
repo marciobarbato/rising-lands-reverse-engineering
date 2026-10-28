@@ -25,10 +25,12 @@ o despacho em uma API separada. Os tipos fora do domínio de `avancar_linear`
 causam `NotImplementedError`
 antes de qualquer escrita, mesmo se o ramo nativo desse tipo seria um no-op.
 
-## Animação lógica: +18 e o byte global de incremento
+## Animação lógica: +18 e o byte baixo do contador global
 
 `animar_projetil(registro, incremento)` recebe uma view mutável de 56 bytes;
-`incremento` representa o byte em `0x508F7C`. Não altera o estado global e não
+`incremento` representa o byte baixo do contador acumulado em `0x508F7C`,
+conforme rastreado em [CADENCIA_PROJETEIS.md](CADENCIA_PROJETEIS.md). Não é
+um delta de tempo. Não altera o estado global e não
 consulta +02. O próprio `ProjectileCalcul` chama Anim para todos os 100 slots,
 incluindo os inativos.
 
@@ -173,8 +175,8 @@ para uma grade ideal ao integrar a reconstrução.
 
 Esta etapa acrescenta **12 testes**, seis de contrato e seis diferenciais,
 com **21.780 execuções x86 delimitadas**. A suíte completa passou com
-**102 testes, 213.506 execuções, zero falhas/erros/ignorados**. Sem emulação,
-passam 38 contratos e os 64 diferenciais são ignorados explicitamente.
+**113 testes, 234.245 execuções, zero falhas/erros/ignorados**. Sem emulação,
+passam 43 contratos e os 70 diferenciais são ignorados explicitamente.
 
 | Comparação | Execuções x86 |
 |---|---:|

@@ -1,11 +1,11 @@
 {
   "sucesso": true,
-  "testes": 102,
+  "testes": 113,
   "falhas": 0,
   "erros": 0,
   "ignorados": [],
   "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
-  "execucoes_x86_delimitadas": 213506,
+  "execucoes_x86_delimitadas": 234245,
   "por_teste": [
     {
       "teste": "test_alvos_alcance.Contratos.test_arma_e_inicio_nao_equivalem_a_dano",
@@ -414,6 +414,50 @@
     {
       "teste": "test_maquina_projeteis.DiferencialMaquina.test_tipo33_sorteio_destino_e_saturacao",
       "execucoes_x86_delimitadas": 60
+    },
+    {
+      "teste": "test_cadencia_projeteis.ContratosCadenciaProjeteis.test_decremento_por_apresentacao_e_paridade",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_cadencia_projeteis.ContratosCadenciaProjeteis.test_geometria_preserva_byte_alto_assinado",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_cadencia_projeteis.ContratosCadenciaProjeteis.test_impacto_zero_nao_consulta_tabela",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_cadencia_projeteis.ContratosCadenciaProjeteis.test_modulo_usa_valor_anterior_ao_decremento",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_cadencia_projeteis.ContratosCadenciaProjeteis.test_portoes_sao_locais_e_releem_estado",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_cadencia_projeteis.DiferencialCadenciaProjeteis.test_apresentacao_modulo_e_indice_todos_bytes",
+      "execucoes_x86_delimitadas": 12288
+    },
+    {
+      "teste": "test_cadencia_projeteis.DiferencialCadenciaProjeteis.test_apresentacoes_encadeadas_paridade_e_divisor",
+      "execucoes_x86_delimitadas": 730
+    },
+    {
+      "teste": "test_cadencia_projeteis.DiferencialCadenciaProjeteis.test_contador_global_alimenta_calcul_antes_unidades",
+      "execucoes_x86_delimitadas": 762
+    },
+    {
+      "teste": "test_cadencia_projeteis.DiferencialCadenciaProjeteis.test_impacto30_ate_preparacao_apresentacao",
+      "execucoes_x86_delimitadas": 47
+    },
+    {
+      "teste": "test_cadencia_projeteis.DiferencialCadenciaProjeteis.test_portoes_bytes_e_estado_salvo",
+      "execucoes_x86_delimitadas": 5376
+    },
+    {
+      "teste": "test_cadencia_projeteis.DiferencialCadenciaProjeteis.test_retangulo_leitura_desalinhada_e_extremos",
+      "execucoes_x86_delimitadas": 1536
     }
   ],
   "limites": {
@@ -482,6 +526,18 @@
     "referencia": "Random, CreerExplosion, consultas de magia e EteintTerrain originais executados sem substituir CALLs; resultados Random são entradas externas do Python.",
     "fatiamento": "Paradas antes de Avance e de cada célula do tipo 30; retomada sem alterar registradores, pilha ou memória. Cada fatia conta como execução delimitada.",
     "limites": "Dano com unidades inativas e grade vazia; EteintTerrain com dimensões zero e raio 0..7, sem células visitadas. Não valida iluminação real, vítimas, desenho ou duração em segundos."
+  },
+  "cadencia_projeteis": {
+    "trechos": [
+      "0x42d14c..0x42d184",
+      "0x42d2e3..0x42d2f0",
+      "0x42d3c0..0x42d3e1",
+      "0x42d3f0..0x42d3f5",
+      "0x43f14f..0x43f220"
+    ],
+    "comparacao": "Portões locais, pool completo, dois bytes de apresentação, retângulo e preservação da tabela de 256 bytes.",
+    "referencia": "EvenementEnCours original executado; CALL de ProjectileCalcul em CalculGame executado até antes da atualização das unidades. Contadores reutilizam a tradução existente e executam o trecho x86 de ProgIteration.",
+    "limites": "Não executa menus, comandos/jogadores, laço Windows, DirectDraw ou jogo completo. Cadência em segundos não medida; tabela visual sintética, sem reconstruir seu preenchimento."
   },
   "diagnosticos": []
 }

@@ -3,14 +3,14 @@
 A entrega está isolada nesta pasta. O escopo autorizado do commit é somente
 esta pasta, no branch `main`, preservando as alterações dos chats paralelos.
 Arquivos originais foram somente lidos.
-A versão validada tem **102 testes aprovados e 213.506 execuções x86 delimitadas**;
+A versão validada tem **113 testes aprovados e 234.245 execuções x86 delimitadas**;
 ver [relatório](validacao-emulada.json) e [pesquisa técnica](README.md).
 
 ## Contrato de dados
 
 Importar `alvos_alcance.py`, `mira_angular.py`, `animacao_disparo.py` e
 `inicializacao_ataque.py`, `projeteis.py`, `avanco_projeteis.py` e
-`maquina_projeteis.py` como módulos
+`maquina_projeteis.py` e `cadencia_projeteis.py` como módulos
 separados. Nenhum depende de `movimento`,
 `combate`, economia ou tarefas; usam biblioteca padrão, dados extraídos e consultas locais.
 
@@ -160,7 +160,8 @@ A disposição dos efeitos criados nas bordas difere da área de dano; ver
 [AVANCO_PROJETEIS.md](AVANCO_PROJETEIS.md).
 
 `animar_projetil(registro, incremento_global)` traduz o avanço do quadro +18
-para todos os tipos e não filtra inativos. Seu incremento é o byte 0x508F7C.
+para todos os tipos e não filtra inativos. O argumento é o byte baixo do
+contador acumulado 0x508F7C; não fornecer um delta nem um incremento fixo.
 A ordem de `ProjectileCalcul` está na máquina descrita abaixo; nenhuma etapa
 determina um tick por frame nem conecta os projéteis à simulação principal.
 
@@ -184,7 +185,7 @@ A duração é comparada como palavra, sem truncá-la para o byte do quadro.
 
 O tipo 30 escreve 15 em `campo_4dfb44`, depois solicita dano e filho por célula
 de um círculo de raio 7. Esse campo local representa o byte original bruto;
-conectar seu consumidor só depois de identificá-lo. O tipo 33 tenta criar o
+seu consumidor de apresentação está descrito abaixo. O tipo 33 tenta criar o
 filho com o destino antigo antes de atualizar +16 do pai e solicitar dano.
 Preservar também a desativação anterior ao efeito em 6..8/18/19/34 e posterior
 em 25. Sequências e argumentos estão em
@@ -195,6 +196,28 @@ manipula dois buffers sintéticos; não foi incorporado ao renderizador. O dano
 real, a extinção de iluminação em células e a cadência em segundos continuam
 fora desta validação. A API parcial `avancar_linear` conserva seu domínio
 anterior para evitar alteração silenciosa dos callers existentes.
+
+## Cadência e apresentação do impacto
+
+O CALL de `ProjectileCalcul` está em `CalculGame`, em **0x42D3F0**, antes do
+CALL de `CalculEnginNextEtape` em **0x42D3F5**. Conservar essa ordem e o byte
+baixo do contador atual ao adaptar a máquina. Há resets no caminho de
+inicialização; não assumir sempre 1 na primeira atualização.
+
+`continuar_apos_menu`, `continuar_apos_evento` e `permitir_bloco_projeteis`
+traduzem três decisões locais distintas. Usá-las nos endereços documentados,
+preservando estado salvo/estado relido e chamadas intermediárias; não compor
+um predicado global com todos os argumentos capturados no início do tick.
+Detalhes e endereços estão em [CADENCIA_PROJETEIS.md](CADENCIA_PROJETEIS.md).
+
+`preparar_apresentacao_impacto` traduz o início de `DDFlipPage` sem executar
+uma API gráfica. Recebe o byte 0x4DFB44, o índice/tabela compartilhados,
+contador e dimensões; retorna os bytes atualizados, deslocamento vertical e
+retângulo de origem. A apresentação futura deve aplicar esse retorno no seu
+ponto original, compartilhando tabela/índice com os demais consumidores.
+O campo decai por apresentação executada em ciclo par, após calcular o
+deslocamento. Não decrementá-lo dentro de Calcul nem avançar um RNG separado.
+O helper está isolado; não houve edição do renderizador ou módulos de gráficos.
 
 ## Inicialização e persistência dos campos
 
@@ -234,8 +257,8 @@ independentes; nenhuma adaptação ao mundo compartilhado foi aplicada.
 ## Reproduzir a conferência sem afetar o trabalho dos outros chats
 
 Nesta pasta, executar `python3 -B validar.py --emular` com Unicorn e JIT
-permitido. Sem JIT, `python3 -B validar.py` executa 38 testes de contrato
-e marca 64 diferenciais como ignorados. Os relatórios ficam aqui.
+permitido. Sem JIT, `python3 -B validar.py` executa 43 testes de contrato
+e marca 70 diferenciais como ignorados. Os relatórios ficam aqui.
 
 O teste antigo de fragmentos de manutenção fornece consultas como entradas;
 o novo teste executa alcance/mira originais em 676 cenários. O teste antigo de
@@ -246,7 +269,8 @@ sem substituir funções internas. Construções usam memória sintética 1x1/3x
 
 Próximos passos: investigar a origem histórica/externa de +8A=2/3, completar
 a geometria de construções e validar os backends de impacto e visibilidade
-com vítimas/células reais. Localizar o chamador global de `ProjectileCalcul`
-para determinar a cadência, sem inferi-la das 30 passagens internas.
+com vítimas/células reais. A ordem do chamador de `ProjectileCalcul` foi
+localizada; a duração em segundos ainda precisa ser medida. Para a apresentação,
+resta identificar o preenchimento da tabela 0x4E1C18 e validar a chamada gráfica.
 A aritmética de dano já existente permanece
 sob o contrato documentado em `documentacao/COMBATE.md`.

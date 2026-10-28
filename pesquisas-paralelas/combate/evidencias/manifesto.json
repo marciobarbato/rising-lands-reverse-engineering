@@ -436,6 +436,69 @@
       "arquivo": "00476e82.asm"
     },
     {
+      "nome": "CalculGameDespachoEstado",
+      "inicio": "0x0042c8a5",
+      "fim_exclusivo": "0x0042c8bf",
+      "sha256_bytes": "008120f121d2a8cb4fe78fa855b9a97e8a40ef13ba3629e3d68a5d0b3472ed3c",
+      "arquivo": "0042c8a5.asm"
+    },
+    {
+      "nome": "CalculGamePortaoMenu",
+      "inicio": "0x0042d14c",
+      "fim_exclusivo": "0x0042d184",
+      "sha256_bytes": "7025ad751600a777ab09820aadb706420cea46df4ccfde6fb3afd658c4d44452",
+      "arquivo": "0042d14c.asm"
+    },
+    {
+      "nome": "CalculGameReinicioContadores",
+      "inicio": "0x0042d2ab",
+      "fim_exclusivo": "0x0042d2de",
+      "sha256_bytes": "35519ed5c78a444e2e547930bbf6a49e757d0e91f359c71a6a7e631850b79f63",
+      "arquivo": "0042d2ab.asm"
+    },
+    {
+      "nome": "CalculGameEventoEComandos",
+      "inicio": "0x0042d2de",
+      "fim_exclusivo": "0x0042d3c0",
+      "sha256_bytes": "1052e244cfafec5572366b8f0fa2b35fae7b30f03195351d7ba53975a909b2bf",
+      "arquivo": "0042d2de.asm"
+    },
+    {
+      "nome": "CalculGamePortaoEOrdem",
+      "inicio": "0x0042d3c0",
+      "fim_exclusivo": "0x0042d418",
+      "sha256_bytes": "f32ab602f4ba811786acbcddc6e8952716c43eaf2b1e94c34a0132c9e18c963b",
+      "arquivo": "0042d3c0.asm"
+    },
+    {
+      "nome": "EvenementEnCours",
+      "inicio": "0x004581b6",
+      "fim_exclusivo": "0x004581bc",
+      "sha256_bytes": "e9ffd11138a7f620e9466c62b46cfbbfc13136895d80b8596b60780b43659a62",
+      "arquivo": "004581b6.asm"
+    },
+    {
+      "nome": "DDFlipPagePreparaImpacto",
+      "inicio": "0x0043f14f",
+      "fim_exclusivo": "0x0043f247",
+      "sha256_bytes": "dc3b1ac315092f9d86b72a9cfec8b5db7f76da7dc5adc01d718547ca45571ead",
+      "arquivo": "0043f14f.asm"
+    },
+    {
+      "nome": "ProgIteration",
+      "inicio": "0x0047500e",
+      "fim_exclusivo": "0x0047509d",
+      "sha256_bytes": "4e0b8e1449e16cf7d855ab9bf92cd6b8ec32443e92cf6e17134ef64329c09789",
+      "arquivo": "0047500e.asm"
+    },
+    {
+      "nome": "AffGameFiltroDesenho",
+      "inicio": "0x00417909",
+      "fim_exclusivo": "0x0041792b",
+      "sha256_bytes": "ae925fd523e44683b0db4b32dc0474f2a7cc7819522243352bba441e0f08af26",
+      "arquivo": "00417909.asm"
+    },
+    {
       "nome": "TypeEnginGetSortieProjectile",
       "inicio": "0x004511a5",
       "fim_exclusivo": "0x004513c7",
@@ -755,6 +818,37 @@
       "0x0046e41a",
       "0x0046e41a",
       "0x0046e41a"
+    ]
+  },
+  "despacho_calcul_game": {
+    "endereco": "0x0042c804",
+    "primeiro_estado": 0,
+    "destinos": [
+      "0x0042d1da",
+      "0x0042c8bf",
+      "0x0042cfe3",
+      "0x0042cfe3",
+      "0x0042cfe3",
+      "0x0042cfe3",
+      "0x0042cda4",
+      "0x0042cd7d",
+      "0x0042d4e2",
+      "0x0042d4e2",
+      "0x0042c979",
+      "0x0042d4e2",
+      "0x0042cfe3",
+      "0x0042cfe3",
+      "0x0042cfe3",
+      "0x0042d1da",
+      "0x0042cfe3",
+      "0x0042caa9",
+      "0x0042d2de",
+      "0x0042c9c5",
+      "0x0042cd5f",
+      "0x0042d4d9",
+      "0x0042d197",
+      "0x0042cbfd",
+      "0x0042c947"
     ]
   }
 }
