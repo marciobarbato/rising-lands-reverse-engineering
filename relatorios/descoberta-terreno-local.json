@@ -1,0 +1,80 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 32,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_descoberta_terreno.DiferencialDescobertaTerreno.test_direct_discovery_and_light_radii_through_published_maxima",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_descoberta_terreno.DiferencialDescobertaTerreno.test_new_sums_at_map_edges_corners_and_extreme_dimensions",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_descoberta_terreno.DiferencialDescobertaTerreno.test_new_sums_both_callers_every_normal_owner_and_camera",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_descoberta_terreno.DiferencialDescobertaTerreno.test_owners_4_and_200_complete_without_discovery_at_any_sum",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_descoberta_terreno.DiferencialDescobertaTerreno.test_regression_sums_0_to_8_every_owner_both_callers",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_descoberta_terreno.DiferencialDescobertaTerreno.test_sums_above_domain_stop_at_each_original_caller",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_missao.DiferencialColocacaoMissao.test_factored_production_entry_all_types_owners_and_edge_indices",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_missao.DiferencialColocacaoMissao.test_geometry_quad_footprints_and_unsaturated_vision_with_native_resumes",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_missao.DiferencialColocacaoMissao.test_large_vision_keeps_partial_effects_at_each_original_caller",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_missao.DiferencialColocacaoMissao.test_mission_all_types_owners_edge_indices_and_every_state",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_missao.DiferencialColocacaoMissao.test_predicates_all_bytes_edge_indices_full_pool_and_preserved_edx",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_saida.DiferencialColocacaoSaida.test_all_types_owners_edge_indices_and_every_activity_byte",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_saida.DiferencialColocacaoSaida.test_geometry_edges_wrapped_quad_footprints_and_vision_limits",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_saida.DiferencialColocacaoSaida.test_joined_position_conversion_recovery_experience_placement_and_order",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_saida.DiferencialColocacaoSaida.test_large_vision_original_pre_discovery_checkpoint",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_saida.DiferencialColocacaoSaida.test_placement_and_original_movement_caller_all_types",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_saida.DiferencialColocacaoSaida.test_unsaturated_vision_radius_edges_with_preserved_native_resumptions",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "scope": "DecouvreTerrain/IllumineTerrain/SetMiniMap for insertion sums 9..11 and direct radii 0..23/0..20, stops above the domain, and the existing 0..8 PlaceEngin/SetSortEngin regression; no mission scan, structure caller or Windows runtime."
+}

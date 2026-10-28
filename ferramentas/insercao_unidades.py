@@ -1,12 +1,18 @@
 """Shared physical insertion tail used by original mission/production entries."""
 import struct
+from visao_movimento import RAIO_DESCOBERTA_MAXIMO_VALIDADO,RAIO_LUZ_MAXIMO_VALIDADO
+
+# Inclusive maximum normal-owner vision sum u8 +0xbb + u8 +0xf5 executed through
+# DecouvreTerrain/IllumineTerrain/SetMiniMap. Reachable maximum: type RAYON low
+# byte 10 plus experience F5=1 (evidencias/descoberta-terreno/manifesto.json).
+SOMA_VISAO_MAXIMA_INSERCAO=11
 
 
 class DependenciaInsercaoUnidade(NotImplementedError):
     def __init__(self,unidade,checkpoint):
         self.unidade,self.endereco,self.checkpoint=unidade,0x476851,checkpoint
-        super().__init__('Vision radius above the validated 0..8 sum requires DecouvreTerrain; '
-                         'prior record/collision effects retained')
+        super().__init__(f'Vision sum above the validated 0..{SOMA_VISAO_MAXIMA_INSERCAO} domain requires '
+                         'DecouvreTerrain; prior record/collision effects retained')
 
 
 def _preparar_insercao(mundo,indice,celula=None):
@@ -35,7 +41,7 @@ def _aplicar_insercao(mundo,indice,celula,dependencia):
     dono=u[p]
     if dono not in (4,200):
         raio=u[p+0xbb]+u[p+0xf5]
-        if raio > 8:
+        if raio > SOMA_VISAO_MAXIMA_INSERCAO:
             raise dependencia(indice)
         mundo.descobrir_area(atual,raio+2,dono)
         raio=u[p+0xbb]+u[p+0xf5]

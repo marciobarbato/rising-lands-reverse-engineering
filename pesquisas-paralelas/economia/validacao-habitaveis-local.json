@@ -1,0 +1,62 @@
+{
+  "scope": "BatimentEstHabiter 0x41a5b8, BatimentHabitable 0x41cc70 (MissionPlaceTerrain caller 0x46c195..0x46c1a7), BatimentSetTechnologie 0x41c76c and BatimentGetCase 0x41aee2 against Python on core physical state",
+  "mode": "Python only",
+  "tests": 20,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_actual_monde01_caller_scan_tables_grids_and_cameras (test_construcoes_habitaveis.DiferencialHabitaveis)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_all_22_types_for_each_owner_with_edges (test_construcoes_habitaveis.DiferencialHabitaveis)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_caller_fragment_with_false_and_true_predicates (test_construcoes_habitaveis.DiferencialHabitaveis)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_get_case_all_types_and_origins_preserve_edx_ebx (test_construcoes_habitaveis.DiferencialHabitaveis)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_light_gate_stop_with_lowered_limits (test_construcoes_habitaveis.DiferencialHabitaveis)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_owner_bytes_above_three (test_construcoes_habitaveis.DiferencialHabitaveis)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_predicate_unit_types_tags_and_capacity (test_construcoes_habitaveis.DiferencialHabitaveis)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_small_maps_and_cameras (test_construcoes_habitaveis.DiferencialHabitaveis)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_technology_every_dl_for_four_al_values (test_construcoes_habitaveis.DiferencialHabitaveis)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_type3_level_edges_and_division_fault (test_construcoes_habitaveis.DiferencialHabitaveis)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "core_vision_gates": {
+    "discovery": 23,
+    "light": 20,
+    "overridden_for_diagnostic": false
+  },
+  "original_entries": {},
+  "outcomes": {},
+  "bounded_x86_executions": 0,
+  "preserved_minimap_resumptions": 0,
+  "expected_original_division_faults": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}

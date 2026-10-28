@@ -2,7 +2,7 @@
 import unittest
 
 from test_colocacao_saida import preparar
-from colocacao_missao import colocar_unidade_missao, DependenciaColocacaoMissao
+from colocacao_missao import colocar_unidade_missao, DependenciaColocacaoMissao, SOMA_VISAO_MAXIMA_INSERCAO
 from consultas_unidades import existe_unidade, visibilidade_unidade
 
 
@@ -31,7 +31,7 @@ class ColocacaoMissao(unittest.TestCase):
         self.assertEqual((m.atributos[0x505],m.atributos[0x506]), (1,1))
 
     def test_large_vision_stops_after_collision_and_flag_with_orders_intact(self):
-        m = preparar(raio=9)
+        m = preparar(raio=SOMA_VISAO_MAXIMA_INSERCAO+1)
         antes, busca = m.ler_unidade(7), vars(m.busca).copy()
         with self.assertRaises(DependenciaColocacaoMissao) as captura:
             colocar_unidade_missao(m,7)

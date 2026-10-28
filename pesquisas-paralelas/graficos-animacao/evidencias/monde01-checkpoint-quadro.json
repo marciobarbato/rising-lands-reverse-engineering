@@ -1,0 +1,26 @@
+{
+ "checkout_revision": "7e18ad00cdc39788726880b16422b13405ff3e6e",
+ "mission_stop": null,
+ "eta_sha256": "19237b8c3f3c0c76022276da229bec727b17603440823c43561aba159dd47015",
+ "file_sha256": "540470d253b74ecc9131c64045ebe21e4df79fc1bf39f88d68f4979fce2a0f2f",
+ "buffers": {
+  "terreno": "8251b2d21bdce6eebee8980c1bcd0c8b74b2af107af6ae86be2e3e70ac2e66ab",
+  "objetos": "cf2bbd9c5efea36bb3f6ea074ce7cfb12cb9ac293ce25177c2fcf3fc174c92ad",
+  "auxiliares": "d95bd7b0170042e6cabe8eac184e995b4b91eab71532e8f833ac3604af7a2d8d",
+  "atributos": "f4e996263e169953befcbdc36273661c60c9cdf89bd2a13917410a8d22fc44ba",
+  "regioes": "c2ba9226dc98fcfe0e99a14612857454ad7238b730a92624ea92448c9df91a53",
+  "unidades": "eaf46ccc7f7051480b382282e86d594495e4198c11ca5b4f381f2c945868c740",
+  "descoberta0": "2ba0f2abe4d17130dcf241ddd6d6abfc327d4acdcac203a5be52ccbe3779f1a1",
+  "descoberta1": "584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118",
+  "descoberta2": "584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118",
+  "descoberta3": "584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118",
+  "iluminacao0": "433dfbfb1c137f48ae4e98aa0b0b37943ea727229aab8a9c9dbdda46002e5e9a",
+  "iluminacao1": "584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118",
+  "iluminacao2": "584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118",
+  "iluminacao3": "584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118",
+  "contagem_luz0": "979d01d175280bb754b98b2f4d83d11dda99012d86f893ce35624000e354781b",
+  "contagem_luz1": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+  "contagem_luz2": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+  "contagem_luz3": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"
+ }
+}

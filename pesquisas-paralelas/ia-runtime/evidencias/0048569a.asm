@@ -1,0 +1,84 @@
+; iagRessSetMode (ai-tables); intact original SHA-256 6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb
+; interval 0x0048569a..0x00485a54 (end exclusive); labels are original SBL names
+0048569a  53                       push ebx
+0048569b  56                       push esi
+0048569c  57                       push edi
+0048569d  89c3                     mov ebx, eax
+0048569f  c1e002                   shl eax, 2
+004856a2  01d8                     add eax, ebx
+004856a4  0fbef2                   movsx esi, dl
+004856a7  c1e002                   shl eax, 2
+004856aa  89f2                     mov edx, esi
+004856ac  01d8                     add eax, ebx
+004856ae  8b1cb5388c4900           mov ebx, dword ptr [esi*4 + 0x498c38]
+004856b5  c1e604                   shl esi, 4
+004856b8  8d3cc56cba5100           lea edi, [eax*8 + 0x51ba6c]
+004856bf  8db6608c4900             lea esi, [esi + 0x498c60]
+004856c5  891cc57cba5100           mov dword ptr [eax*8 + 0x51ba7c], ebx
+004856cc  a5                       movsd dword ptr es:[edi], dword ptr [esi]
+004856cd  a5                       movsd dword ptr es:[edi], dword ptr [esi]
+004856ce  a5                       movsd dword ptr es:[edi], dword ptr [esi]
+004856cf  a5                       movsd dword ptr es:[edi], dword ptr [esi]
+004856d0  8b14954c8c4900           mov edx, dword ptr [edx*4 + 0x498c4c]
+004856d7  8914c584ba5100           mov dword ptr [eax*8 + 0x51ba84], edx
+004856de  5f                       pop edi
+004856df  5e                       pop esi
+004856e0  5b                       pop ebx
+004856e1  c3                       ret
+; 0x004856e2..0x00485a54 not reached by any static path (padding or data):
+004856e2  .byte 53515256575589e583ec0850bb8ca951
+004856f2  .byte 00c1e0048b75f401c389f0c1e00201f0
+00485702  .byte c1e00201f0bf3cba5100c1e00301c789
+00485712  .byte 75fc895df88b878800000089fe85c074
+00485722  .byte 6b8b8684000000c1e00301f0837858ff
+00485732  .byte 75218b8684000000408986840000003b
+00485742  .byte 05f0bc51007cdac78684000000000000
+00485752  .byte 00ebce6a006a006a00ba0d0000008b58
+00485762  .byte 546a0031c98b45fce8b181ffff8b9e84
+00485772  .byte 00000043899e840000003b1df0bc5100
+00485782  .byte 7c0ac78684000000000000008b078b57
+00485792  .byte 108b5f4829d039d87e638b073b47307e
+004857a2  .byte 506a006a006a006a00ba150000008b45
+004857b2  .byte f46a0031c931dbe8cd81ffff83f8ff75
+004857c2  .byte 196a006a006a00ba150000008b45f46a
+004857d2  .byte 0031c931dbe84481ffff8b45f8c64002
+004857e2  .byte 01c6400301c7474c00000000e99efeff
+004857f2  .byte ffc7474c01000000e992feffff8b073b
+00485802  .byte 47307e456a006a006a006a00ba0b0000
+00485812  .byte 008b45f46a0031c931dbe86a81ffff83
+00485822  .byte f8ff75196a006a006a00ba0b0000008b
+00485832  .byte 45f46a0031c931dbe8e180ffffc7474c
+00485842  .byte 02000000e946feffff8b5df831c08a43
+00485852  .byte 0183f8010f85880000006a006a006a00
+00485862  .byte 6a00ba0a0000008b45f46a0031c931db
+00485872  .byte e81481ffff83f8ff75686a006a006a00
+00485882  .byte 6a00b905000000bb010000006a00ba03
+00485892  .byte 0000008b45f4e8ee80ffff83f8ff7542
+004858a2  .byte 6a006a006a006a00ba080000008b45f4
+004858b2  .byte 6a0031c931dbe8ce80ffff83f8ff0f85
+004858c2  .byte cbfdffff6a006a006a00ba080000008b
+004858d2  .byte 45f46a0031c931dbe84180ffffe9adfd
+004858e2  .byte ffff8b5df831c08a430283f8017509c6
+004858f2  .byte 430200e997fdffff31c08a430383f801
+00485902  .byte 7509c6430300e984fdffffc7474c0300
+00485912  .byte 0000e978fdffff5351525589e583ec10
+00485922  .byte 5031c08d4df48a45ec8d5df8508d55fc
+00485932  .byte 8d45f0e8631dfeff8b55ec89d0c1e002
+00485942  .byte 29d031d2668b14452efb4d00668b0445
+00485952  .byte 2cfb4d0025ffff00000fafd031db31c0
+00485962  .byte 668b5dfc668b45f083ea0f01d839c27d
+00485972  .byte 3f6a006a006a006a00b903000000bb01
+00485982  .byte 0000006a008b45ec89dae8fa7fffff83
+00485992  .byte f8ff751c6a006a006a00bb03000000ba
+004859a2  .byte 010000006a008b45ec31c9e86e7fffff
+004859b2  .byte 89ec5d5a595bc3535152565789c7c1e0
+004859c2  .byte 0201f8c1e00201f8be3cba5100c1e003
+004859d2  .byte 01c683be88000000000f84b3fcffff8b
+004859e2  .byte 8684000000c1e00301f0837858ff7521
+004859f2  .byte 8b8684000000408986840000003b05f0
+00485a02  .byte bc51007cdac7868400000000000000eb
+00485a12  .byte ce6a006a006a00ba0d0000008b58546a
+00485a22  .byte 0031c989f8e8f47effff8b8e84000000
+00485a32  .byte 41898e840000003b0df0bc51000f8c4f
+00485a42  .byte fcffffc7868400000000000000e940fc
+00485a52  .byte ffff

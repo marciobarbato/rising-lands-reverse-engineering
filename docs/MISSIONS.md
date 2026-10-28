@@ -278,3 +278,147 @@ No reconstructed behavior changes. The placement tests read core's agreed symbol
 - **Static caller-aligned vision9.** While 9 is outside the domain, it compares the retained stop capture. Inside the domain, it compares a new [original-only vision9 continuation capture](../pesquisas-paralelas/missoes/evidencias/captura-terreno-unidades-visao9-continuacao.json): the same fixture with the native discovery, light and minimap bodies unpatched, run to `0x46c16d` (one unit-load entry, one prefix, 39 segments, 30 preserved minimap resumptions). Predecessor captures are unchanged.
 
 At the current committed limit 8, the six placement tests pass in native mode. A scratch-only simulation of core limits 9, 10, 300 and 510, which raised the core check inside the test process without editing core files, also passed all six natively; that run is branch coverage for these tests, not provider validation.
+
+## Stage 9: complete L7 auxiliary chain in both callers
+
+[carregador_cadeia_auxiliar.py](../pesquisas-paralelas/missoes/carregador_cadeia_auxiliar.py) adds the four remaining raw readers and `carregar_cadeia_auxiliar(leitor, buffers, *, tipos_grupo8, perfil)`. That function reproduces `MissionLoad 0x46c57d..0x46c5a5` and `MissionLoadName 0x46c946..0x46c96e` and stops before `FileClose 0x45844c`. The original bytes of both callers, in the [exported caller intervals](../pesquisas-paralelas/missoes/evidencias/cadeia-auxiliar-manifesto.json), give the same order:
+
+`LoadMine 0x47534a` → `IALoadAttaqueIni 0x47c24d` → `LoadBatimentGhost 0x47bcc7` → `LoadCadreInfluence 0x47c04a` → `LoadFinMission 0x458b05` → `LoadCalculMissionDivers 0x47c30f` → `LoadObjectif 0x47c404` → `LoadEntrerMonstre 0x47ac30`
+
+The Stage 3 and Stage 7 readers are composed unchanged. `BuffersCadeiaAuxiliar` holds writable contiguous views in original widths: mines `0x509954`/80, attacks `0x50d5b4`/1,004, ghosts `0x50b18c`/5,254, influence `0x50c614`/4,000, end conditions `0x4e1d20`/114, objectives `0x511ffc`/804, monsters `0x50a9bc`/1,220, groups `0x50af84`/432, and the live `Random` state `0x497164`/4. Every shape guard, plus the explicit 8-byte group type table `0x498400`, is checked before the first effect. After that point a failure keeps every earlier effect, including the advanced `Random` state; nothing rolls back.
+
+| Reader | Original effect order | Supported domain (named `ForaDoDominioAuxiliar` beyond it) |
+|---|---|---|
+| `LoadBatimentGhost 0x47bcc7..0x47bd40` | The u16 count is read into +0. Flags +4504+i become `0xff` for i < count. Count pairs are then read: u16 → +2+2i, u32 → +1504+4i. Bytes +1502/+1503 are kept. AL = 0 for an empty table, else 1; callers ignore it | count ≤ 750 (stop before flag 750 at `0x47bce1`); corpus max 747 |
+| `LoadCadreInfluence 0x47c04a..0x47c0c3` | Words +0/+2/+4/+6 of all 400 ten-byte slots become `0xffff`, with +8/+9 kept. The u16 count and u16 size are read into stack locals; the size is read even when count = 0. Count records of `size` bytes are then read at slot×10. A size above 10 overlaps the next slot, as in the original | last write ≤ 4,000 bytes (stop before the record read at `0x47c0b1`); the original would reach the attack table. Corpus: size 10, count ≤ 399 |
+| `LoadCalculMissionDivers 0x47c30f..0x47c359` | 16 one-byte reads into a stack scratch byte; no global store. The bytes are returned for diagnosis only | any; five distinct corpus patterns |
+| `LoadEntrerMonstre 0x47ac30..0x47ad6a` | Detailed below | count ≤ 100 and last write ≤ 1,200 bytes (stop before the read at `0x47ac9b`). Corpus: count 100, size 6 |
+
+**LoadEntrerMonstre.** The routine first calls `InitEntrerMonstre 0x47a601`. That call:
+1. Initializes the 100 twelve-byte records at monsters+20, in order: u16+0 = `ffff`, u16+2 = `ffff`, u16+4 = 0, u32+8 = 0. Each record then calls `Random 0x4704dc`, through core's committed `candidatos_rota.aleatorio_caminhos` with the state written back after every call, and stores the low four bits of the result at +6.
+2. Stores 0 at the HumanOnly byte +0.
+3. Makes four `GetPrivateProfileIntA` calls on `./monstre.ini [GENERAL]`: `HumanOnly` with default 0 (nonzero stores 1), then `ProbaCaveJoueur` 5, `ProbaCaveIA` 2 and `ProbaEmbuscade` 2, as dwords at +4/+8/+12.
+4. Clears the 432 group bytes with the engine `memset`.
+5. For `GROUPE00..GROUPE15`, calls `GetPrivateProfileStringA` (default "", size 256). A nonzero result is split on commas. Each token parsed by `sscanf("%i")` maps through `0x498400[value]` to a unit type, and the routine increments the group count byte at +416+g and the type count at g×26+type.
+
+The loader then:
+1. Reads the u16 count into +18 and the u16 size into a local.
+2. Reads each record into its slot, then sets u16+4 ×= 30 (low 16 bits) and u32+8 = 0. Starting after the old +6 value, it searches cyclically for the next set bit of the u16+2 mask and stores that bit index (or `0xff` if no bit is set) at +6. With the corpus size 6, the +6 starting point is the Random-initialized value.
+3. Walks backward from the last record. An empty word0 (`ffff`) decrements the count. A used record copies **only its word0** into the highest lower empty slot and decrements the count. If no empty slot lies below a used record, the pass ends.
+
+No monster spawning, AI, cave-probability or ambush semantics is interpreted. `InitMissionMonstre 0x47af90` (an IaReset tail, owned by AI/runtime) consumes these tables later.
+
+**Declared binding.** [perfil_privado_missao.py](../pesquisas-paralelas/missoes/perfil_privado_missao.py) `PerfilPrivado({b'./monstre.ini': bytes_or_None})` answers both KERNEL32 profile functions from files the caller declares.
+- An undeclared file raises `DependenciaPerfil`. A file declared as `None` is absent, and every query then returns the documented Windows default.
+- Only a strict INI subset is accepted: case-insensitive section and key names, no padding, no quotes, no duplicates, decimal integers. Values are truncated to nSize−1.
+- `perfil=None` raises `DependenciaEntradaMonstros` at CALL `0x47a665`, after the record initialization and the HumanOnly zero store.
+- The shipped `INSTALHD/MONSTRE.INI` (233 bytes) has only `GROUPE00..14`, so the four integers take their defaults.
+
+The `sscanf("%i")` translation supports blanks, a sign and decimal digits. Octal or hex forms and overflow raise at `0x48c41c`, and group indices outside 0..7 raise at `0x47a7c9`. This is a Python translation of engine CRT behavior, validated against the native Watcom bodies.
+
+**Native harness.** [bancada_cadeia_auxiliar.py](../pesquisas-paralelas/missoes/bancada_cadeia_auxiliar.py) runs every engine body unpatched: the loaders, `InitEntrerMonstre`, `Random`, and the complete Watcom `memset`/`sprintf`/`sscanf`/`__prtf`/`__scnf` bodies with their SBL bounds. It replaces only two things:
+- the game read wrapper `0x458461`, with fixture bytes;
+- the five profile CALL sites `0x47a665/0x47a688/0x47a6a5/0x47a6c7` (IAT `0x5231ac`) and `0x47a74d` (IAT `0x5231b0`). The bench reads the stdcall arguments, writes the declared result, pops the arguments and resumes after the CALL. This is a mission-local binding until core publishes the generic binding facility.
+
+Comparisons cover the complete DGROUP+.bss image `0x494000..0x523000`, not only the tables. They also cover the read sequence, which shows the 16 single-byte Divers reads, and the exact profile-call log. A predicate stop compares the native state just before the first unsupported write or call with the Python state after its named exception.
+
+The [original-only captures](../pesquisas-paralelas/missoes/evidencias/captura-cadeia-auxiliar-original.json) were made before translation. They cover all 38 maps in both callers with the shipped profile, plus 10 synthetic streams × 2 callers: an absent profile, synthetic tokens with seed 0, 750 ghosts / 400 influence records, influence sizes 0/6/12 and overlap, and monster compaction plus counts and sizes. All 96 entries return, in 167,950 bounded segments with 165,934 read bindings and 1,920 profile bindings. Inherited tables, gaps and `Random` state are explicit synthetic patterns.
+
+```sh
+python3 -B pesquisas-paralelas/missoes/extrair_cadeia_auxiliar.py
+python3 -B pesquisas-paralelas/missoes/capturar_cadeia_auxiliar.py
+RISING_EMULAR=1 python3 -B -m unittest discover -s pesquisas-paralelas/missoes/testes -p test_cadeia_auxiliar.py -v
+python3 -B pesquisas-paralelas/missoes/validar.py --emular
+```
+
+Fresh Stage 9 checks: all 65 mission tests pass in native mode, with zero skips, errors, failures or native faults.
+
+The new chain coverage is 270 caller entries (124 MissionLoad, 146 MissionLoadName). They resolve to 227 returns, 18 declared boundary stops and 25 strict-input failure stops, over 324,811 bounded segments with 318,287 read and 4,744 profile bindings:
+- **Map comparisons.** All 38 maps in both callers, with fresh inherited images and seeds.
+- **Domain sweeps.** Ghost counts 0/1/2/374/749/750. Every influence size 0..12 × counts 0/1/2/399/400 inside the table. Monster counts 0..100 × sizes 0..24 inside the table, including overlap. 12 random compaction patterns, 7 Random edge states, and the absent and synthetic-token profiles.
+- **Boundary and failure stops.**
+  - A missing binding, an undeclared file, and each unsupported-domain site in both callers.
+  - Truncations at 13 sampled MONDE04 reads, each cut at the read start and at its last byte.
+
+Earlier slice counts are repeated separately in the [Stage 9 report](../pesquisas-paralelas/missoes/validacao/stage9-suite-x86.json); the Stage 1–8 reports are unchanged. Local mode runs 65 tests with 24 optional native skips. Common local checks at base `f18b5a0` pass: core 357/169 optional skips, combat 227/143, economy 393/180, graphics 176/0, missions 65/24, ai-runtime 3/0, workflow 8/0.
+
+Remaining boundaries:
+- FileClose and the rest of MissionLoad (Stage 10 reset prefix, remap, structure placement scan, tails) are not composed here.
+- Ghost, influence and monster-entry runtime meaning is not established.
+- MONSTRE.INI integer keys other than the defaults, and profile syntax outside the strict subset, are unsupported.
+- No mission was run.
+
+## Stage 10: reset prefixes of both callers to FileOpen
+
+[reinicio_missao.py](../pesquisas-paralelas/missoes/reinicio_missao.py) composes the reset prefix of each caller from the [original call lists](../pesquisas-paralelas/missoes/evidencias/reinicio-manifesto.json), whose bytes, interval hashes and callee hashes are exported. The coordinator assigned three UI leaf resets and the two ffff words to missions. No other front models them, except that the balloon table is economy's `PropriedadeConstrucoes.baloes`; BallonInit is a store-only reset over that buffer, applied by identity, and economy's balloon semantics stay economy's.
+
+**MissionLoad 0x46c2cf..0x46c389.**
+1. Read the inherited mission byte `0x496fe4`. Call Stage 6 `MakeMissionName` into the stack local at +0x100.
+2. strcpy the inherited C string `0x509594` into the 0x100-byte local, then strcat the name. A path ≥ 0x100 bytes is outside the domain and raises at `0x46c333`.
+3. Store u16 `0x4e1a38` = `0x4e1a3a` = `0xffff`.
+4. Call, in order: IconeReset, **TerrainReset `0x46b315` (CALL `0x46c35f`)**, **MiniMapReset `0x469f00` (`0x46c364`)**, core `resetar_todas_estruturas` (`0x46c369`), core `resetar_todas_unidades` (`0x46c36e`), combat `resetar_projeteis` (`0x46c373`), MessageBoxInit (`0x46c378`), BallonInit (`0x46c37d`).
+5. Stop at `FileOpen 0x458420(path, "rb")` with `PedidoAbertura(caminho, modo, nome)`. The open is the caller's file binding.
+
+**MissionLoadName 0x46c5e3..0x46c75f.**
+1. The same words and calls through MessageBoxInit, with the CALLs at `0x46c60a..0x46c628`.
+2. Inline zeroing of 4×26 bytes at `0x4e1934` and 4×22 at `0x4dfad4`. These are economy's habitation realizability tables, applied by identity.
+3. SortilegeResetTechnologie `0x4749f2` (economy `Aprendizagem.zerar_tecnologia`, `0x46c687`).
+4. **RechercheReset `0x470b46` (`0x46c68c`)**.
+5. **Engin_ResetExperience `0x441470` (`0x46c691`)**.
+6. u8 `0x496fe4` = `0x32`.
+7. ReseauActif `0x42c3b0`, which is only `AL=[0x4e0730]`. The byte is an explicit inherited input. If it is nonzero: **RechercheCheat `0x4716fe` (`0x46c6a6`)**, then **RechercheStore `0x4714f0` (`0x46c6ab`)**.
+8. BallonInit (`0x46c6b0`).
+9. Path: `0x509494` if `stricmp(name+len-4,".NET")==0`, else `0x509594`; then `\WORLD\`, then the name. A name shorter than 4 bytes reads before the buffer and raises at `0x46c6c5`; a path ≥ 0x114 bytes raises at `0x46c742`.
+10. Stop at FileOpen `0x46c75f`.
+
+Bold callees have no committed provider. They are `ProvedoresReinicio` callables; when one is `None`, `DependenciaReinicio(rotina, endereco, chamada, chamador, caminho)` is raised at its CALL and every earlier store is kept. Today the full compositions therefore stop at TerrainReset, after the words and IconeReset. The continuations `continuar_reinicio_missao` and `continuar_reinicio_missao_nome` enter at the original instruction after MiniMapReset (`0x46c369` / `0x46c619`), in the established Stage 1/2 continuation pattern. Every buffer, directory and name guard precedes the first effect.
+
+| Leaf (missions) | Original effect order |
+|---|---|
+| `IconeReset 0x45e88f..0x45e90b` | For each of the 10 six-byte records at `0x4e2410`, in order: if the record ≠ (u16 `0x29b1`, u16 1, u16 0), store u8 1 at `0x4e05a2`, which is never cleared. Then rewrite the record |
+| `MessageBoxInit 0x469908..0x46994b` | u16 `0x507d54` = `0x507d56` = 0, u8 `0x507d58` = `0x507d59` = 0, then byte +0 of each of the 256 records of 518 bytes at `0x4e7754`. The table ends exactly at `0x507d54` |
+| `BallonInit 0x441b6c..0x441baa` | For each of the 4 eight-byte records at `0x4e1a14`: u16 +4 = u16 +6 = `ffff`, u16 +0 = 0, u8 +2 = 0. +3 is kept |
+
+`MemoriaReinicio` holds these widths: words `0x4e1a38`/4, icons/60, flag/1, message boxes `0x4e7754`/132,614, balloons/32, structures `0x49a0c8`/276,000, structure flags `0x49a070`/88, structure selections `0x495be0`/8, a core world exposing `.unidades` and `.bolsas_tipos_unidades`, the projectile pool reached through `0x5080f0`/5,600, and the mission byte. The core-consumed pools must be `bytearray`s, as core requires.
+
+**Validation.** [bancada_reinicio_missao.py](../pesquisas-paralelas/missoes/bancada_reinicio_missao.py) runs all engine bodies unpatched, including MakeMissionName with PlayerGetSympathie and the committed provider routines. Entries cover the three leaves, both caller prologues stopping before the TerrainReset CALL, and both continuations with the caller frame. The MissionLoad continuation stops at FileOpen; the MissionLoadName continuation stops before the RechercheReset CALL. Each comparison covers the whole DGROUP+.bss image, the unit pool, the four type Bags, the projectile pool, the player table and the strings in the frame.
+
+The [original-only captures](../pesquisas-paralelas/missoes/evidencias/captura-reinicio-original.json) were taken before translation: 170 entries, each reaching its declared stop (105 leaf returns, 50 + 4 TerrainReset stops, 3 FileOpen stops, 8 RechercheReset stops).
+
+```sh
+python3 -B pesquisas-paralelas/missoes/extrair_reinicio_missao.py
+python3 -B pesquisas-paralelas/missoes/capturar_reinicio_missao.py
+RISING_EMULAR=1 python3 -B -m unittest discover -s pesquisas-paralelas/missoes/testes -p test_reinicio_missao.py -v
+```
+
+Fresh Stage 10 checks: all 71 mission tests pass in native mode, with zero skips, errors, failures or native faults. The new reset coverage is 459 native entries in 459 bounded segments, and each reaches its declared stop:
+- 176 leaf returns: every IconeReset field/record mismatch, plus random records with flags 0/1/2/255, and the MessageBoxInit and BallonInit patterns.
+- 259 MissionLoad prologues stopping before the TerrainReset CALL: all 256 mission bytes, number 9 with variants 0..3, and the 10/12/17 sympathy branches, with empty, ordinary and long directories.
+- 4 MissionLoad continuations stopping at FileOpen.
+- 5 MissionLoadName prologues stopping before TerrainReset.
+- 15 MissionLoadName continuations stopping before RechercheReset: `.NET` case variants, short names, and network bytes 0/1/7.
+
+The first full native run failed one Stage 2 header case, MONDE17 with camera 4. Under a machine load average of 11, the core harness's 1-second wall-clock segment timeout expired. That failure is logged in ignored `.local/` and not counted as a pass. The test passed in isolation, and the complete rerun passed. The [Stage 10 report](../pesquisas-paralelas/missoes/validacao/stage10-suite-x86.json) records the clean run; predecessor reports are unchanged.
+
+Local mode runs 71 tests with 27 optional skips. Common local checks at `7b7b969` pass: core 368/175, combat 236/145, economy 413/190, graphics 184/0, missions 71/27, ai-runtime 25/1, audio 2/0, workflow 8/0.
+
+Remaining boundaries:
+- TerrainReset and MiniMapReset (core's next stage) stop both full prefixes today. The tails are validated as continuations from their original post-MiniMapReset instructions.
+- RechercheReset, RechercheCheat, RechercheStore and Engin_ResetExperience stop the MissionLoadName tail.
+- FileOpen and everything after it belong to Stage 12. No mission was run.
+
+### Planned contract: `carregar_missao` M1 result (requested by macOS)
+
+Recorded as planned; not implemented. The result of `carregar_missao(numero, ...)` will carry:
+- **Identity and status.** The mission number, the generated MakeMissionName bytes and the opened path, and the ETA SHA-256 and size. The ordered list of completed original calls (address, SBL name). Either the complete `0x46c2cf` return or the named dependency (callee, CALL site, detail) with the partial state attached. The whole-MissionLoad oracle status with its report path and SHA-256, or explicitly absent.
+- **Raw buffers**, each with exact length and original address. Read-only copies are fine, and the set stays stable into M2:
+  - terrain layers, dimensions, camera view, viewer byte `0x508041`, per-player discovery/light maps and minimap state;
+  - remap outputs, as core publishes them;
+  - the unit pool, loader bytes `0x4e19bc` and placed indices;
+  - the structure pool `0x49a0c8`, ghosts `0x50b18c` and influence `0x50c614`;
+  - selections;
+  - Economia, players, technology, cave, market and experience;
+  - mines, attacks, conditions, objectives and EntrerMonstre/groups. Divers is not a table: its 16 discarded bytes are exposed as diagnostics.
+  - the projectile pool, AI tables after IaReset (no iaInit, which has no caller), message-box/balloon/icon state, and the unit-type and bonus rule inputs with provenance.
+- **A field-layout table, or a read-only `descrever_missao(resultado)`**, for every displayed field. Conditions and objectives are shown raw only, and TestFinDeMission is not evaluated.
+- **Briefing.** MissionLoad does not read `WORLD/MONDE01.TXT`, and the routine that selects or displays it has not been traced. Until it is, the app shows the raw CP1252→UTF-8 CD text with its SHA-256, labeled as source text.

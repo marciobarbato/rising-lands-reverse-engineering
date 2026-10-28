@@ -1,0 +1,586 @@
+{
+ "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "sha256_pe_normalizado_somente_analise": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+ "tabela_estados": {
+  "endereco": "0x4543c8",
+  "entradas": [
+   "0x454ccd",
+   "0x456886",
+   "0x4563da",
+   "0x455a61",
+   "0x456ae5",
+   "0x456600",
+   "0x4568ad",
+   "0x456966",
+   "0x454ccd",
+   "0x454ccd",
+   "0x454ccd",
+   "0x4564ef",
+   "0x454ccd",
+   "0x4558e4",
+   "0x454ccd",
+   "0x45652f",
+   "0x455e32",
+   "0x455e32",
+   "0x455d26",
+   "0x4554db",
+   "0x455b28",
+   "0x4558b4",
+   "0x456520",
+   "0x455fe2",
+   "0x456886"
+  ],
+  "sha256_bytes": "fa74f5490646854dd96d128f53b148e62f1380a144f9cf62e39bc20a6836256f",
+  "estados_ramo_ataque": [
+   1,
+   24
+  ]
+ },
+ "trechos": {
+  "EnginNextEtape_ramo_ataque": {
+   "inicio": "0x45673b",
+   "fim_exclusivo": "0x4568ad",
+   "sha256_bytes": "3f88fa67615f0f269c477a3e9ab13da0f201aa011b994269aec66d358cc4653c",
+   "chamadas": [
+    "0x41a70b",
+    "0x41a08c",
+    "0x46d817",
+    "0x4829c8",
+    "0x4457d3",
+    "0x46d817",
+    "0x451914"
+   ]
+  },
+  "EnginNextEtape_saida": {
+   "inicio": "0x454ccd",
+   "fim_exclusivo": "0x454cd5",
+   "sha256_bytes": "e391d16ca06b41408721b5ff2e4ba8c57635ceb1168b40abc9b2c1fa1de84cf6",
+   "chamadas": []
+  },
+  "EnginNextEtape_prelude_recarga": {
+   "inicio": "0x45442c",
+   "fim_exclusivo": "0x454591",
+   "sha256_bytes": "dbee8d9adafa4cb0401f3834957c9d9fcf71c8dafede6d796eb6ed1231323a5f",
+   "chamadas": [
+    "0x440c5d",
+    "0x48aacf",
+    "0x428cc0"
+   ]
+  },
+  "SetAttaqueEngin": {
+   "inicio": "0x445a36",
+   "fim_exclusivo": "0x445af1",
+   "sha256_bytes": "5d8560f9eb4af67d37fb80e9014330469522f0ad1b87e0426de9d3402283d92c",
+   "chamadas": [
+    "0x44357c"
+   ]
+  },
+  "PlayerGetType": {
+   "inicio": "0x46d817",
+   "fim_exclusivo": "0x46d838",
+   "sha256_bytes": "e7dccad3502b5e1780fe4892ed485fb45325ceba840e4973e3e319d156358495",
+   "chamadas": []
+  },
+  "PlayerEstAllie": {
+   "inicio": "0x46d838",
+   "fim_exclusivo": "0x46d877",
+   "sha256_bytes": "9eb1a3a1733a40d2b48c996ea96ea13d11072a1c588fb19df67364851f2ddd74",
+   "chamadas": []
+  },
+  "PlayerAAttaqueSet": {
+   "inicio": "0x46d600",
+   "fim_exclusivo": "0x46d629",
+   "sha256_bytes": "a4a85ea1bfa0264820ce566f7cbf6172480422488f33eee6bce8822afc3f6091",
+   "chamadas": []
+  },
+  "BatimentEnDestruction": {
+   "inicio": "0x41a70b",
+   "fim_exclusivo": "0x41a735",
+   "sha256_bytes": "099d2e023090c04cf678abe5cea2efdd6e8653c53a3a52ce14844fa7619d000c",
+   "chamadas": []
+  },
+  "BatimentGetPlayer": {
+   "inicio": "0x41a08c",
+   "fim_exclusivo": "0x41a0ab",
+   "sha256_bytes": "73c7960bdd0b83a8016cc9f7097a635079ae215bfcd10f91c37badd7e6c90932",
+   "chamadas": []
+  }
+ },
+ "ramo": {
+  "entrada": "0x456886",
+  "registradores": "ESI = unit record, DI = u16 unit index; no esp/ebp access in [0x45673b,0x4568ad)",
+  "modo_alvo": "+0xB7: 1 -> 0x4567ce, 3 -> 0x45673b, other -> CalculAttaqueEngin 0x451914(eax=u16 unit)",
+  "invalido": "PlayerGetType(owner)==2 -> iagUnitSendMessage(unit, dl=0x4a, ebx=0); else SetDeplaceEngin(unit, u16 +0x7e) then u16 +0xb8=0xffff",
+  "saida": "0x454ccd: add esp,0x64; jmp epilogue 0x44f29d",
+  "chamadores_CalculAttaqueEngin": [
+   "0x4568a3"
+  ]
+ },
+ "rastreio_8a": {
+  "escritores_diretos_unidade": [
+   {
+    "endereco": "0x445a05",
+    "simbolo": "SetEnginLanceSortilege+0x41",
+    "valor": 0
+   },
+   {
+    "endereco": "0x445ab3",
+    "simbolo": "SetAttaqueEngin+0x7d",
+    "valor": 0
+   },
+   {
+    "endereco": "0x445ad1",
+    "simbolo": "SetAttaqueEngin+0x9b",
+    "valor": 0
+   },
+   {
+    "endereco": "0x451e08",
+    "simbolo": "CalculAttaqueEngin+0x4f4",
+    "valor": 1
+   },
+   {
+    "endereco": "0x452a3a",
+    "simbolo": "CalculAttaqueEngin+0x1126",
+    "valor": 0
+   },
+   {
+    "endereco": "0x452af6",
+    "simbolo": "CalculAttaqueEngin+0x11e2",
+    "valor": 1
+   },
+   {
+    "endereco": "0x452b6c",
+    "simbolo": "CalculAttaqueEngin+0x1258",
+    "valor": 0
+   },
+   {
+    "endereco": "0x4531fe",
+    "simbolo": "EnginRestaureEtat+0x9f",
+    "valor": 0
+   }
+  ],
+  "prova_ah_0x452a3a": {
+   "unico_desvio": "0x452469 je",
+   "instrucao_anterior": "0x452a35 jmp 0x452c89",
+   "origem": [
+    "0x452461 mov ah, byte ptr [esi + 0x8b]",
+    "0x452467 test ah, ah",
+    "0x452469 je 0x452a3a"
+   ],
+   "valor": 0
+  },
+  "falsos_positivos_hangar": [
+   {
+    "endereco_auditoria": "0x41dd6b",
+    "simbolo": "SortUneTroupeHangar",
+    "decodificacao_real": "mov word ptr [esi + 0x88], di",
+    "objeto": "structure/hangar record word +0x88"
+   },
+   {
+    "endereco_auditoria": "0x421332",
+    "simbolo": "ResetHangar",
+    "decodificacao_real": "mov word ptr [eax + 0x88], 0xffff",
+    "objeto": "structure/hangar record word +0x88"
+   },
+   {
+    "endereco_auditoria": "0x424899",
+    "simbolo": "TourelleChercheCible",
+    "decodificacao_real": "mov word ptr [edx + 0x88], 0",
+    "objeto": "structure/hangar record word +0x88"
+   },
+   {
+    "endereco_auditoria": "0x4248bd",
+    "simbolo": "TourelleChercheCible",
+    "decodificacao_real": "mov word ptr [edx + 0x88], 0",
+    "objeto": "structure/hangar record word +0x88"
+   },
+   {
+    "endereco_auditoria": "0x424dc2",
+    "simbolo": "HangarSortEngin",
+    "decodificacao_real": "mov word ptr [ebx + 0x88], cx",
+    "objeto": "structure/hangar record word +0x88"
+   },
+   {
+    "endereco_auditoria": "0x424f3c",
+    "simbolo": "ControleArrivageHangar",
+    "decodificacao_real": "mov word ptr [esi + 0x88], bx",
+    "objeto": "structure/hangar record word +0x88"
+   },
+   {
+    "endereco_auditoria": "0x424fe5",
+    "simbolo": "BatimentStockEngin",
+    "decodificacao_real": "mov word ptr [ebx + 0x88], cx",
+    "objeto": "structure/hangar record word +0x88"
+   },
+   {
+    "endereco_auditoria": "0x42556d",
+    "simbolo": "BatimentRepareEngin",
+    "decodificacao_real": "mov word ptr [esi + 0x88], bx",
+    "objeto": "structure/hangar record word +0x88"
+   },
+   {
+    "endereco_auditoria": "0x426f57",
+    "simbolo": "BatimentNextEtape",
+    "decodificacao_real": "mov word ptr [ebx + 0x88], 0",
+    "objeto": "structure/hangar record word +0x88"
+   },
+   {
+    "endereco_auditoria": "0x426f7c",
+    "simbolo": "BatimentNextEtape",
+    "decodificacao_real": "mov word ptr [ebx + 0x88], 0",
+    "objeto": "structure/hangar record word +0x88"
+   },
+   {
+    "endereco_auditoria": "0x42765f",
+    "simbolo": "BatimentNextEtape",
+    "decodificacao_real": "mov word ptr [ebx + 0x88], 0",
+    "objeto": "structure/hangar record word +0x88"
+   },
+   {
+    "endereco_auditoria": "0x427684",
+    "simbolo": "BatimentNextEtape",
+    "decodificacao_real": "mov word ptr [ebx + 0x88], 0",
+    "objeto": "structure/hangar record word +0x88"
+   },
+   {
+    "endereco_auditoria": "0x48514c",
+    "simbolo": "iagRessReset",
+    "decodificacao_real": "mov word ptr [eax + 0x8a], 0xffff",
+    "objeto": "AI resource record loop (ebp+2k+0x8a)"
+   }
+  ],
+  "operacoes_bloco_rep": [
+   {
+    "endereco": "0x40f903",
+    "simbolo": "AffInfoAide+0x59",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x40f958",
+    "simbolo": "AffInfoAide+0xae",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x417557",
+    "simbolo": "ScreenCopy+0x66",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x4187a5",
+    "simbolo": "LoadSTRATBank+0x2b",
+    "instrucao": "rep movsd dword ptr es:[edi], dword ptr [esi]"
+   },
+   {
+    "endereco": "0x43eda5",
+    "simbolo": "AffCredits+0x97",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x4582ce",
+    "simbolo": "EvenementAffiche+0x112",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x45a901",
+    "simbolo": "ReadFli+0x1c6",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x45b47e",
+    "simbolo": "PasteBobCmp+0x237",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x45c751",
+    "simbolo": "AffBloc+0x27",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x45c87c",
+    "simbolo": "PasteBitmap32x32+0x7d",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x45c8d8",
+    "simbolo": "CopyBitmap32x32+0x36",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x45eb24",
+    "simbolo": "InputReceive+0xa8",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x45eba7",
+    "simbolo": "InputReceive+0x12b",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x45f39b",
+    "simbolo": "ModifyInputPlayer+0x31",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x45ff75",
+    "simbolo": "CalculTabPlayer+0x14",
+    "instrucao": "rep movsd dword ptr es:[edi], dword ptr [esi]"
+   },
+   {
+    "endereco": "0x467012",
+    "simbolo": "PreparationEchange+0x23",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x467031",
+    "simbolo": "PreparationEchange+0x42",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x4674e2",
+    "simbolo": "CalculMarcheProposition+0x43a",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x467501",
+    "simbolo": "CalculMarcheProposition+0x459",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x468010",
+    "simbolo": "UpdateListPlayer+0xfa",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x46a7b9",
+    "simbolo": "AffMiniMap+0xad",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x46cdcc",
+    "simbolo": "mpGetSessionDesc+0x23",
+    "instrucao": "rep movsd dword ptr es:[edi], dword ptr [esi]"
+   },
+   {
+    "endereco": "0x46cfd5",
+    "simbolo": "mpReceive+0x149",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x46cff8",
+    "simbolo": "mpReceive+0x16c",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x46d018",
+    "simbolo": "mpReceive+0x18c",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x46d252",
+    "simbolo": "mpSend+0x16d",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x46d275",
+    "simbolo": "mpSend+0x190",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x46d295",
+    "simbolo": "mpSend+0x1b0",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x46d3df",
+    "simbolo": "GetDPIDFromMPID+0xd4",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x46d402",
+    "simbolo": "GetDPIDFromMPID+0xf7",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x46d422",
+    "simbolo": "GetDPIDFromMPID+0x117",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x479ba5",
+    "simbolo": "LoadPie+0x1e1",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x48af94",
+    "simbolo": "WaitSnd_Compact+0x79",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x48b088",
+    "simbolo": "WaitSnd_TransferPlayingSoundToWaitingSound+0x6d",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x48b1b4",
+    "simbolo": "WaitSnd_DestroyWaitingSound+0x97",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x48b265",
+    "simbolo": "WaitSnd_TransferWaitingSoundToPlayingSound+0x7c",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x48b2dc",
+    "simbolo": "WaitSnd_TransferWaitingSoundToPlayingSound+0xf3",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x48b336",
+    "simbolo": "WaitSnd_Permute+0x1f",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x48b34f",
+    "simbolo": "WaitSnd_Permute+0x38",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x48b368",
+    "simbolo": "WaitSnd_Permute+0x51",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x48c1e2",
+    "simbolo": "LoadSoundBuffer_LoadDataFromMemoryInSoundBuffer+0x3a",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x48c4e9",
+    "simbolo": "getcwd+0x68",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x48ca21",
+    "simbolo": "fread+0xa6",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x48cc72",
+    "simbolo": "fwrite+0xf8",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x4910f5",
+    "simbolo": "strdup+0x3a",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   },
+   {
+    "endereco": "0x4913e9",
+    "simbolo": "realloc+0x5c",
+    "instrucao": "repne movsb byte ptr es:[edi], byte ptr [esi]"
+   }
+  ],
+  "chamadores_memset": [
+   "BatimentPosable",
+   "Box",
+   "CheminCalcul",
+   "Chemin_Remap",
+   "Cls",
+   "DDInit",
+   "DDLockSurface",
+   "DDLockSurfaceTemp",
+   "DDLockSurfaceVideo",
+   "DSB_CreateEmptySoundBuffer",
+   "FilledBox",
+   "GetDPIDFromMPID",
+   "I_DonneBatimentOccupe",
+   "I_DonneBatimentPasPlein",
+   "InitEntrerMonstre",
+   "InitRand",
+   "Load",
+   "LoadPie",
+   "MiniMapAlloc",
+   "MiniMapReset",
+   "ObjectifLoadText",
+   "OldPlayVideo",
+   "PasteMaskCmp",
+   "PlayVideo",
+   "SetPrimaryFormatDirectSound",
+   "_FtoS",
+   "_SetMaxPrec",
+   "__WinMain",
+   "__allocfp",
+   "__scnf",
+   "calloc",
+   "frexp",
+   "mpCloseSession",
+   "mpCreatePlayer",
+   "mpCreateSession",
+   "mpGetSessions",
+   "mpJoinSession",
+   "mpReceive",
+   "mpSend"
+  ],
+  "chamadores_fileread": [
+   "BallonLoad",
+   "BonusLoad",
+   "CarteCharger",
+   "ChargeFonteExterieur",
+   "ChargeMarche",
+   "ChargeMonstre",
+   "Chemin_Charge",
+   "Engin_LoadExperimente",
+   "FinMissionLoad",
+   "GameLoad",
+   "GameSave",
+   "IALoadAttaqueIni",
+   "IaLoad",
+   "Load",
+   "LoadBank",
+   "LoadBatiment",
+   "LoadBatimentGhost",
+   "LoadBatimentTechnologie",
+   "LoadCadreInfluence",
+   "LoadCalculMissionDivers",
+   "LoadCol",
+   "LoadEngin",
+   "LoadEnginGame",
+   "LoadEnginTechnologie",
+   "LoadEntrerMonstre",
+   "LoadFinMission",
+   "LoadFonteExterieur",
+   "LoadGameBatimentGhost",
+   "LoadGameRessource",
+   "LoadGameVersion",
+   "LoadMine",
+   "LoadMissionMine",
+   "LoadObjectif",
+   "LoadPalette",
+   "LoadPie",
+   "LoadPlayer",
+   "LoadProjectile",
+   "LoadRessource",
+   "LoadSTRATBank",
+   "LoadSortilegeTechnologie",
+   "LoadTailleMap",
+   "LoadVar",
+   "MessageBoxLoad",
+   "MissionLoad",
+   "MissionLoadName",
+   "ObjectifLoadText",
+   "ReadBobCmp",
+   "ReadSaveNames",
+   "RechercheLoad",
+   "TerrainLoadColor",
+   "TerrainLoadObstacle",
+   "iaProbLoad",
+   "iafRessourceLoad",
+   "iagRessLoad",
+   "iagUnitLoad",
+   "iagVilleLoad",
+   "iagWarLoad"
+  ],
+  "conclusao": "Every executable writer of a unit +0x8A stores 0 or 1. 2/3 can enter only through FileRead loaders (mission ETA, saved games, other loaders) of external bytes. No rep movs/stos occurs in a unit routine; the generic memset callers that allocate or reset tables (Load on open failure, calloc) fill with zero. Network/multiplayer receive buffers and arbitrary pointer aliasing are not proven by this static trace."
+ }
+}
