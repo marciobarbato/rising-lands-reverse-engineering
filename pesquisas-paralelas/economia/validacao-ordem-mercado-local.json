@@ -1,0 +1,49 @@
+{
+  "scope": "Resource-only MarcheOrdreEchange/Prend/Donne; nonzero units pending",
+  "mode": "Python only",
+  "tests": 18,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_1024_noncanonical_approval_and_type_gates (test_ordem_mercado.DiferencialOrdemMercado)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_104_pending_unit_paths_preserve_prior_effects (test_ordem_mercado.DiferencialOrdemMercado)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_12_divide_exceptions_and_prior_consumed_entries (test_ordem_mercado.DiferencialOrdemMercado)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_256_direct_callers (test_ordem_mercado.DiferencialOrdemMercado)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_384_seeded_buffers_and_all_player_pairs (test_ordem_mercado.DiferencialOrdemMercado)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_512_alias_gates (test_ordem_mercado.DiferencialOrdemMercado)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_64_repeat_calls_consume_once (test_ordem_mercado.DiferencialOrdemMercado)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_exact_total_row_clear_rmi_write_order_and_debit_calls (test_ordem_mercado.DiferencialOrdemMercado)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "declared_stops": 0,
+  "completed_returns": 0,
+  "unit_dependency_stops": 0,
+  "expected_x86_exceptions": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}

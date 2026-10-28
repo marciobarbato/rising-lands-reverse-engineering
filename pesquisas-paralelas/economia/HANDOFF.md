@@ -66,3 +66,39 @@ python3 -B scripts/check.py --domain economy
 ## Remaining gaps
 
 World position, unit type conversion, life/fatigue/experience/task effects, the remainder of `SortieTroupe` cleanup/messages, full spawn/exit/balloon flows, other production paths, general transport credit, and higher-level market callers remain open. This slice does not add navigation, structure allocation, rendering, a live mission dispatcher, or a complete playable game. Existing progress, resource IDs, signed/fixed-width behavior, x87 rounding, and previous explicit dependencies remain unchanged.
+
+## Sequential continuation inventory and selection
+
+Slice 1 is integrated at main merge `1394669620a2d256b1abb9a9f0741f29728ee7eb`; pushed feature merge `d990121881db46eeddd348d44fc19b9bf77f19e5`. The common candidate gate passed 656 tests with 289 optional methods skipped. The worktree was clean before resuming it through `workstream.py start economy` and merging updated `origin/main`.
+
+The maintained manual now inventories remaining component evidence and dependencies. Highest-value next independent closure: resource-only `MarcheOrdreEchange` (`0x461BEA`) through original `MarcheEchangePrend` (`0x461621`) and `MarcheEchangeDonne` (`0x46189A`). Zero unit rows permit original loop execution without inventing world effects. Unlike `VideMatiere`, these callers skip zero resources and consume the proposal row after each successful nonzero credit. Nonzero unit paths and original partial failures must remain explicit. Implementation and original comparisons of this slice are complete as recorded below; serialized integration remains the final step.
+
+## Stage 2: consuming resource-only market exchange
+
+`OrdemMercado(mercado, mundo, aceites=...)` adds the complete resource-only `MarcheOrdreEchange` body `[0x461BEA,0x461C4F)` and its original `MarcheEchangePrend`/`MarcheEchangeDonne` caller paths. Inputs are low-u8 players 0–3; four approval bytes at `0x4E2968`; quantity rows are u16, stride 6 for three resources or 52 for 26 unit types. Economic memory/provider identity is enforced. See the maintained manual for the full contract.
+
+The first player's approval toggles `0 -> 1`, any nonzero `-> 0`. A nonzero second-player approval OR first-player type 2 triggers Prend, then Donne, then clears both approvals. No indicator, contact, alliance, price, sufficiency or new-own-approval check occurs. Aliased indices observe the newly toggled byte. The new bool return is a Python diagnostic, not a recovered original success flag.
+
+Both calls consume the SECOND argument's proposal row. Prend checks offered units, then transfers nonzero offered resources from second player to first. Donne checks requested units, then transfers nonzero requested resources from first to second. IDs iterate 0/1/2. Zero entries skip type/debit/recalculation. Type-1 donors debit through the existing building routine; other types skip debit. Each direct destination credit writes total u16, clears the consumed row entry, then writes RMI u16; credits wrap with no capacity/clamp. Same-player aliasing reads balances after debit. Direct Prend/Donne APIs leave approvals untouched.
+
+Nonzero units raise `TrocaUnidadesMercadoPendente` at the first positive type: `0x46166B` for Prend, `0x4618DF` for Donne. That records both players/type/u16 quantity/phase/address while preserving prior mutations. These world-unit paths are explicitly unsupported. A requested-unit stop retains the completed offered-resource leg. Division exceptions retain debit and prior consumed rows/legs while leaving the failed row entry unconsumed and approvals uncleared. No caller rollback or fake unit callback is added.
+
+Additive `evidencias/ordem-mercado.json` and five instruction listings contain original bytes, exclusive intervals, SHA-256 values, and provenance; original EXE/SBL hashes remain those recorded above. Capture includes unit bodies for evidence, not an implementation claim. Original zero-unit branches and real debit/recalculation instructions run unpatched to shared returns/checkpoints.
+
+Actual new commands and outcomes:
+
+```sh
+python3 -B pesquisas-paralelas/economia/capturar_ordem_mercado.py
+python3 -B pesquisas-paralelas/economia/validar_ordem_mercado.py
+python3 -B pesquisas-paralelas/economia/validar_ordem_mercado.py --emular
+python3 -B scripts/check.py --domain economy
+```
+
+- Capture: five original intervals; no predecessor evidence changed.
+- Stage local suite: 18 discovered, 10 passed, 8 optional differential methods skipped; no x86 executions.
+- Stage original suite: 18 passed, no skips/errors/failures; **2,357 bounded executions** = **2,241 returns** (including non-executing approval gates), **104 unit dependency stops**, **12 expected division exceptions at `0x423635`** after mutation. There are 2,345 declared stops and zero expected limits. See `validacao-ordem-mercado-emulada.json`.
+- Differential buffers: complete economic/capacity/building/terrain/market/player memory plus guards and a continuous `0x4E2900..0x4E3000` neighbor window. Captured original write order proves total, row clear, RMI; debit call arguments/order are checked. Fixtures cover all approval-byte values, player pairs/aliasing, types, resource zeros, wrapping, direct/repeated calls, offered/requested unit stops, and both-leg divide failures. Synthetic memory fixtures are not live-mission validation.
+- Domain local check: 247 tests, 109 optional methods skipped, zero failures/errors; documentation links passed. Stage-1 and historical x86 reports were not regenerated.
+- The current stage will use the authorized serialized `workstream.py integrate economy` from a clean committed tree; resulting feature/main hashes and actual common-gate counts will be sent to the coordinator before further implementation.
+
+Remaining next dependencies: core's committed `CalculPosition` provider, then existing-unit type conversion and the rest of the production caller; market nonzero-unit bodies; general arrival/transport credit; market reset/input/persistence and real-mission dispatch. No live-world unit provider has been invented.
