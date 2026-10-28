@@ -4,7 +4,7 @@ Owner: the AI and Runtime front (`feat/re-ai-runtime`, `worktrees/re-ai-runtime`
 
 Every address applies to the intact executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`, the only execution oracle. The normalized analysis PE `26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0` is a different identity and was not read for any interval below. Routine names are the original SBL names decoded by core's `simbolos_ia`.
 
-**Stage 1 (contract) status:** the inventory below comes from original bytes and is backed by exported intervals and original-only captures. No dispatcher, kernel or operation is implemented yet.
+**Current scope:** Stage 1 established the original-byte contract. Stage 2 recovers the `IaReset`, `IaAlloc` and uncalled `IAResetAttaque` table providers, with the bounded evidence described below. No frame/unit/structure dispatcher, AI kernel or world operation is implemented yet.
 
 ## Evidence
 
@@ -359,14 +359,60 @@ Call sites with their codes (static):
 
 `MissionLoad`'s reset prefix (`IconeReset`, `TerrainReset`, `MiniMapReset`, `BatimentResetAll`, `EnginResetAll`, `ProjectileReset`, `MessageBoxInit`, `BallonInit`) contains no AI message table. `MessageBoxInit` is the UI message box.
 
+## Stage 2 — AI table reset and program initialization
+
+Recovered from WIP `ad97e4228c67dac24ed8024c46183e8628cf7ef8`; its original capture is preserved unchanged as `evidencias/captura-reinicio-original.json`. Recovery validation for round `CXR-20261028-01` passes all 36 native tests (zero skips/failures/errors) and the local domain gate (36 discovered, four explicit native skips); results are separate from historical evidence in `validacao/recuperacao-stage2-native.json` and `recuperacao-stage2-local.json`. The recovered implementation is `reinicio_ia.py`; `memoria_ia_runtime.py` supplies explicit inherited memory views. All addresses retain the intact-executable identity stated above.
+
+### Public providers and inherited memory
+
+| Entry | Original | Inputs and return |
+|---|---|---|
+| `reiniciar_ia(memoria, mundo)` | `IaReset 0x47f36e` | `MemoriaDeclarada` and explicit world providers; returns original EAX (zero or the first nonzero reset-tail result). Missions ignores this value at `0x46c5cc` / `0x46c98e` |
+| `iniciar_ia_programa(memoria, ligacoes)` | `IaAlloc 0x47fb15` | Explicit clock, SBL and rule-loader bindings; returns original EAX. A rule-loader error returns before constant-table initialization; successful completion returns `debugSymUnload`'s EAX |
+| `resetar_ataques_ia(memoria)` | `IAResetAttaque 0x47c162` | Count and 100 ten-byte attack records; no promised register return. No caller or pointer exists in the intact image, so this is not inserted into MissionLoad |
+
+`MemoriaDeclarada(segmentos, regioes)` takes `(absolute_base, writable_byte_buffer)` segments and `(start, end_exclusive, name)` regions. Reads/writes use the original little-endian widths and u32 address arithmetic; writes mask to their width. Every translated access must lie in both a mapped segment and a declared region, otherwise `AcessoNaoDeclarado` names the address and width. World-provider effects use `escrever_mundo`, which requires a mapped inherited buffer and retains the caller's region policy for translated accesses.
+
+For `reiniciar_ia`, declare `REGIOES_REINICIO` and the actual 800×276-byte unit pool at `[0x4e19a0]` plus four 20-byte player records at `[0x5080a8]`. Declare `REGIOES_ALOCACAO` for program initialization and `REGIOES_ATAQUES` for the attack reset. These constants describe AI access regions; callers must map every inherited buffer used by their world providers as well. The validation addresses `0x1000000` / `0x1100000` are explicit fixture allocations, not production defaults. No whole-image constructor or zero-filled game state is installed by the public providers.
+
+### Calls and mutation order
+
+The `mundo` object supplies the following original-name methods. Each call receives `sitio=original_CALL_address`; narrow inputs are already masked to the width below. No adapter to a sibling world's object model is silently installed.
+
+| Method | Inputs | Consumed result |
+|---|---|---|
+| `PlayerGetType` | u8 player | AL |
+| `RechercheGetNiveau` | u8 player, u16 branch | AX |
+| `RechercheSetBranche` | u8 player, u8 branch | effect only |
+| `MissionGetNum` | none | AX |
+| `EnginEstVivant`, `EnginGetType`, `EnginGetEtat` | u16 unit | AL |
+| `TypeEnginEstMonstre` | u8 type | AL |
+| `EnginSetPlayer` | u16 unit, u8 player | effect only |
+| `BatimentExiste`, `BatimentGetPlayer`, `BatimentGetType` | u16 structure | AL |
+| `GetRessource` | u8 player | four u16 output values; the reset stores outputs 0–2 and preserves the original fourth-field behavior |
+
+IaReset first visits players 0–3. For AI players it retains nonzero inherited research thresholds, otherwise generates them using core's `cadencia.proximo_aleatorio`; it selects research and scans living units, then initializes modes only for a player with a living unit. It then runs `iaProbReset` → `iagUnitReset` → `iagVilleReset` → `iafRessourceReset` → `iagRessReset` → `iagWarReset` → `InitMissionMonstre`, in original order. Unit/group links, group hints, city/resource/war fields, monster ownership and list order mutate in place. Partial effects are retained on dependency failure. The task-pool free/context-list reset is the agreed AI-table initialization; VM execution, waiting, lists and task operations remain core-owned and are not forked. The core positive RNG path is imported rather than copied.
+
+IaAlloc supplies `timeGetTime(sitio=0x489789)`, `debugSymLoad(0x494f84, sitio=0x47fb21)`, `iaProbLoadBinaryRules(0x494f28, 1, sitio=0x47d1af)` and `debugSymUnload(sitio=0x47fb67)`. A real binding must supply its actual mapped memory effects; validation's declared return-only bindings do not demonstrate those loaders. The original `iaConfigGetValue` body returns its EBX default. The original war initializer's `sprintf` builds only a stack-local key passed to that getter; Python emits the resulting ordered constant stores and retains all unit-weight defaults. The native oracle executes that formatting code unchanged.
+
+A missing reached provider raises `DependenciaIA(rotina, sitio)` at its first original call. Providers' own errors propagate. Unsupported RNG states or nonpositive arguments raise a named dependency; no replacement RNG value is chosen. Research/context and group-list inputs must be well formed for the original path: arbitrary corrupt links, cyclic unit lists and arbitrary modes are not claimed as a safe public domain. An empty monster spec with a nonzero group count and its creation flag retained causes the original to create/delete the same empty group forever; Python raises `NaoTerminaNoOriginal` at `0x47b1f4` after the same stores. No timeout is accepted as evidence for that assertion.
+
+### Original coverage and validation boundary
+
+`auditar_reinicio_ia.py` writes the additive `evidencias/reinicio-byte-audit.json`: 32 game/RNG routines in the static transitive closure, exact reached-instruction intervals and SHA-256 values, and 18 explicit boundaries (13 world providers, three file/SBL bindings, the clock import thunk and stack-local `sprintf`). It includes helper intervals not exported by Stage 1. Static closure is not branch coverage. Stage 1's manifest, listings and captures are unchanged.
+
+`oraculo_reinicio_ia.py` executes the intact routine and all reached game bodies on core's `BancadaX86`. World providers execute natively; entry arguments, return EAX and non-stack writes are observed, not substituted. Only IaAlloc's declared file/SBL bindings and clock are substituted. `MundoRepetido` checks original-name call order, call sites and arguments while applying the observed effects to Python's inherited images. The whole compared image is DGROUP+.bss `0x494000..0x523000` (585,728 bytes), units (220,800 bytes) and players (80 bytes); ordinary routine comparison excludes CPU scratch registers and stack locals. The separate intentional-cycle proof compares registers/flags/segments, the complete 65,536-byte stack and all three images at three consecutive visits to the same original checkpoint after one transient visit; all resumed segments must return to their declared stops, and any external call during the repeated cycle fails the proof.
+
+The preserved WIP capture has 19 cases: 11 complete IaReset entries, three IaAlloc entries under declared bindings, one uncalled attack reset and four group helpers; 66,977 observed calls/bindings and 133,960 bench segments, plus nine separately captured partial-state checkpoints. These are historical captures; fresh results are recorded in the handoff and `validacao/`. MONDE01 supplies actual serialized structures/units/auxiliary tables through committed missions loaders, with explicit fixture player types and surrounding inherited state. This is not the complete MissionLoad sequence, terrain placement, frame progression or a mission-runtime test. All original media and predecessor captures remain unchanged.
+
 ## Public API shape
 
 APIs are published only after original comparison. They follow the repository conventions: explicit inherited buffers with exact widths, read-only query callbacks, effect callbacks named after original routines, named dependency exceptions carrying the original call address, partial effects retained.
 
-| Planned entry | Original | Inputs | Result |
+| Entry (Stage 2 delivered; others planned) | Original | Inputs | Result |
 |---|---|---|---|
-| `iniciar_ia_programa(memoria, provedores)` | `IaAlloc 0x47fb15` | RNG clock binding, rule-file provider | Store trace of the constants and the RNG seed |
-| `reiniciar_ia(memoria, provedores)` | `IaReset 0x47f36e` | Player table, Recherche, unit, structure and resource queries, mission number | Ordered stores into the regions above |
+| `iniciar_ia_programa(memoria, provedores)` | `IaAlloc 0x47fb15` | RNG clock binding, rule-file provider | Original EAX; ordered constant stores and RNG seed |
+| `reiniciar_ia(memoria, provedores)` | `IaReset 0x47f36e` | Player table, Recherche, unit, structure and resource queries, mission number | Original EAX; ordered stores into inherited regions |
 | `quadro_jogo(mundo, provedores, *, entrada=None)` | `CalculGame 0x42c868` | Live world, provider bundle per branch | Per-frame checkpoint metadata and the reached named dependencies |
 | `proxima_etapa_unidade(mundo, indice, provedores)` | `EnginNextEtape 0x45442c` | u16 unit index | Branch taken and provider result |
 | `proxima_etapa_estrutura(mundo, indice, provedores)` | `BatimentNextEtape 0x4268d4` | u16 structure index | Branch taken and provider result |
@@ -386,9 +432,11 @@ RISING_EMULAR=1 python3 -B -m unittest discover -s pesquisas-paralelas/ia-runtim
 ## Stages
 
 1. **Contract stage (this manual).** Inventory, captures and ownership; no implementation.
-2. **AI table initializers:** `IaAlloc` and `IaReset` with their callees as exact providers for `MissionLoad`'s `IaReset` tail (M1).
+2. **AI table initializers (recovered Stage 2):** `IaAlloc` and `IaReset` with their callees as exact providers for `MissionLoad`'s `IaReset` tail (M1).
 3. **Frame skeleton:** `CalculGame` with committed providers and named stops; frame oracle on core's declared-binding facility (core Stage 15).
 4. **Unit dispatcher** for the MONDE01 states (prelude, states 7 and 14, then the states that arise), then the structure dispatcher skeleton.
 5. **AI kernels and operations** for the first MONDE01 raid (`iagWarNoyau`, group movement, `V_AttaquerBatiment`, `B_TestUniteDanger`, `I_DonneForce*`), then the remaining operations by frequency.
+
+The bounded raw-memory IaReset provider is implemented and compared against the original. L9 still needs production provider adapters, load-tail composition and complete MissionLoad state equality; this stage does not close that consumer/integration gap. Actual rule/SBL file effects, caller-owned frame/kernel bodies and all live mission behavior remain separate.
 
 Status, counts and requested contracts live in `pesquisas-paralelas/ia-runtime/HANDOFF.md`.
