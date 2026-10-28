@@ -1,0 +1,45 @@
+{
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_sbl": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "consumed_main": "62b9d76941dbcf90a2dc5d45b71317136c8b5d28",
+  "provider_implementations": {
+    "core_recovery": "3b7f71697095ab12e960bf4cbdf0952d20d554d8",
+    "core_conversion": "90fdfa51ab2bb2243d1e81fbd6bc7ab9548c89fa",
+    "core_position": "61e2a2e1201b7e0e020906bb67963a17e5364a8c",
+    "economy_caller": "a9f055ca4fbf30327f5e83b4211ef1e4ad8a7802"
+  },
+  "scope": "Actual CalculTroupe entry through preparation and shared core position/conversion/healing/fatigue; stop before experience at 0x420f81",
+  "captures": [
+    {
+      "start": "0x420f5a",
+      "end_exclusive": "0x420f81",
+      "bytes_hex": "e839f7ffff0fb7e88a4f7b89ea89f0e8196c0300bae803000089f0e8a861030089f0e87c210300",
+      "sha256": "8f7f55b8ca8d146e9121dcd230703c0534dfe4e994cb2725dcd485b640be94a5",
+      "listing": "producao-compartilhada-00420f5a.asm"
+    }
+  ],
+  "committed_evidence": [
+    {
+      "path": "evidencias/ciclo-producao.json",
+      "sha256": "4ed71ba98a3894b95849032e258c9bfa119e13d46f6574f1f3d5205000513716"
+    },
+    {
+      "path": "evidencias/saida-tropa.json",
+      "sha256": "28491b689c83168e08b9c0f07240e629e2937939611f98e9083ef137feb66312"
+    },
+    {
+      "path": "../../evidencias/posicao-saida/manifesto.json",
+      "sha256": "11c61b1d31ed82b2f907dc942a5630bf035ae1b3225be863c23585d9ba9254c7"
+    },
+    {
+      "path": "../../evidencias/conversao-saida/manifesto.json",
+      "sha256": "899764f239c3895821a296f81225af8ba58a291d880ace08b5006ee7e9c6a648"
+    },
+    {
+      "path": "../../evidencias/recuperacao-unidades/manifesto.json",
+      "sha256": "f60dfee5c7b1cc9be3f5753e7b8c3ea3130d946dd13a71ddba6dd690b93b22e7"
+    }
+  ],
+  "shared_state": "Identical live unit and structure objects; loaded type/bonus bytes; no copy/writeback",
+  "pending_address": "0x420f81"
+}
