@@ -1,0 +1,33 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "inspected_main": "37629edc282367702811f9b7060d2026b6ba9b47",
+  "intervals": [
+    {
+      "name": "MissionLoad_inline_structures",
+      "start": "0x46c517",
+      "end_exclusive": "0x46c578",
+      "sha256": "a6f0ee202ffab5f920aa05f8bfb9689f1bc090d9e79d32738c33e963223081b4",
+      "file": "estruturas-0046c517.asm"
+    },
+    {
+      "name": "MissionLoadName_inline_structures",
+      "start": "0x46c8e0",
+      "end_exclusive": "0x46c941",
+      "sha256": "416a86bea7c21a1b2cbc59daf61518b6592200195180fe666b71b7020dd898f8",
+      "file": "estruturas-0046c8e0.asm"
+    }
+  ],
+  "pool": {
+    "base": "0x49a0c8",
+    "count": 1000,
+    "stride": 276,
+    "copied": 204,
+    "retained": 72
+  },
+  "header": "u16 count,size; size204; count need not be<=1000 because disk IDs may repeat",
+  "providers": {
+    "ferramentas/formatos.py": "c60506832e3e5ab6863a8e62d94fdd75843fb87d396423d3fd8cb050bd70b968",
+    "pesquisas-paralelas/graficos-animacao/construcoes.py": "ea83ea31c55a91ca6e04bc3adf5f43a74c72c3056ce801f3e5381e99025a9dcc"
+  },
+  "scope": "Inline copies only, after explicit preceding remap/reset and before unit load; no physical state/type/owner initialization or insertion."
+}

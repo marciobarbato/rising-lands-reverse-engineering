@@ -1,0 +1,54 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "EnginEstSelectionne",
+      "start": "0x472174",
+      "end_exclusive": "0x4721a8",
+      "sha256": "b49e702a37459620b36232c74c9fbb525b9cffa1a786eee1d744435c5e00b78c",
+      "file": "00472174.asm"
+    },
+    {
+      "name": "EnginGetVolume",
+      "start": "0x440c5d",
+      "end_exclusive": "0x440d5e",
+      "sha256": "bf4f0c8b29c1572aef82aef8b66e41b16f0ebebea79f0d588fcf882fb3fd1eac",
+      "file": "00440c5d.asm"
+    },
+    {
+      "name": "EnginAsk",
+      "start": "0x440d5e",
+      "end_exclusive": "0x440df0",
+      "sha256": "e1309ab26428e3888d69cdc19375ef6c206fd3dc7effb062f4ed05a3af05f673",
+      "file": "00440d5e.asm"
+    },
+    {
+      "name": "SortieTroupe_conditional_request",
+      "start": "0x420f9e",
+      "end_exclusive": "0x420fb7",
+      "sha256": "b1f65ed569dabd218a16c910560dcbea3ef5858adb807d060bd984ed08dcc44a",
+      "file": "00420f9e.asm"
+    },
+    {
+      "name": "PlaySnd_PostSound_dependency",
+      "start": "0x48aa79",
+      "end_exclusive": "0x48aac0",
+      "sha256": "700c9124db2ee5f88eb3a97aa75c0a56a2e6410b4b2f0c80e0518e8a2e74338a",
+      "file": "0048aa79.asm"
+    },
+    {
+      "name": "HandlSnd_Insert_dependency",
+      "start": "0x48a218",
+      "end_exclusive": "0x48a438",
+      "sha256": "8fa52b07aad2ee7e454e7e0e17866aad32642d95735e26a90c0c00971eb2dda3",
+      "file": "0048a218.asm"
+    }
+  ],
+  "unit_pool_pointer": "0x4e19a0",
+  "unit_count": 800,
+  "stride": 276,
+  "viewport": "four u16 at 0x508720",
+  "pending_sound": "0x440de7 call 0x48aa79; full handle subsystem not implemented",
+  "scope": "Read-only volume/selection and bounded request/caller; actual sound insertion remains pending."
+}

@@ -1,0 +1,62 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "inspected_main": "82a0468f5482ef00357bc077a75947c01b44aec4",
+  "intervals": [
+    {
+      "name": "MakeMissionName",
+      "start": "0x46c1b8",
+      "end_exclusive": "0x46c2cf",
+      "sha256": "7d168702cd43567d99f94b650b4397b917d7b904ab98b41508b56e604d985961",
+      "file": "nome-0046c1b8.asm"
+    },
+    {
+      "name": "PlayerGetSympathie",
+      "start": "0x46dc6c",
+      "end_exclusive": "0x46dc90",
+      "sha256": "bb6f6ce8c8a820b40c6513101e75d1f75413f79e18c5a67bd947047e8d16e7f7",
+      "file": "nome-0046dc6c.asm"
+    }
+  ],
+  "strings": [
+    {
+      "address": "0x494b27",
+      "bytes_hex": "5c576f726c645c4d6f6e6465303000"
+    },
+    {
+      "address": "0x494b36",
+      "bytes_hex": "2e45544100"
+    },
+    {
+      "address": "0x494bb2",
+      "bytes_hex": "6100"
+    },
+    {
+      "address": "0x494bb4",
+      "bytes_hex": "6200"
+    },
+    {
+      "address": "0x494bb6",
+      "bytes_hex": "6300"
+    },
+    {
+      "address": "0x494bb8",
+      "bytes_hex": "6400"
+    }
+  ],
+  "suffix_pointer_table": {
+    "address": "0x497154",
+    "pointers": [
+      "0x494bb2",
+      "0x494bb4",
+      "0x494bb6",
+      "0x494bb8"
+    ]
+  },
+  "economy_provider": {
+    "path": "pesquisas-paralelas/economia/mercado.py",
+    "sha256": "69178c8480d40b93d9605986ec667307812514e56674f1e6520c7d6ed406614e"
+  },
+  "inputs": "number lowAL; explicit writable destination; number9 raw4e1d85 index0..3; numbers10/12/17 use real read-only sympathy(owner1..3,other0)",
+  "comparison": "CMP CL,AL / signed JLE; initial CL90, CH1; consume signed low8 only; retain initial choice on ties",
+  "scope": "Filename bytes and query order/partial effects only; no default player/result state, file opening, formal mission title or campaign advancement."
+}
