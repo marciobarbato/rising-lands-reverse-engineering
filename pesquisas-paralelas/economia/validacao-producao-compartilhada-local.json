@@ -1,0 +1,43 @@
+{
+  "scope": "CalculTroupe actual entry through preparation, conversion and recovery; stops before experience",
+  "mode": "Python only",
+  "tests": 13,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_12_persistent_update_sequences_end_at_one_shot_handoff (test_producao_compartilhada.DiferencialProducaoCompartilhada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_2_post_preparation_import_boundaries (test_producao_compartilhada.DiferencialProducaoCompartilhada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_36_inactive_or_below_threshold_returns (test_producao_compartilhada.DiferencialProducaoCompartilhada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_4_bonus_query_failures_retain_progress_credit_and_partial_conversion (test_producao_compartilhada.DiferencialProducaoCompartilhada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_4_deposit_division_exceptions_before_core_calls (test_producao_compartilhada.DiferencialProducaoCompartilhada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_624_all_building_unit_owner_combinations (test_producao_compartilhada.DiferencialProducaoCompartilhada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "declared_stops": 0,
+  "completed_returns": 0,
+  "experience_dependency_stops": 0,
+  "bonus_query_stops": 0,
+  "core_import_stops": 0,
+  "expected_x86_exceptions": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}

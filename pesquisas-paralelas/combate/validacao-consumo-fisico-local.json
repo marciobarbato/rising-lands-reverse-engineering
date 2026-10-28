@@ -1,0 +1,76 @@
+{
+  "success": true,
+  "tests": 9,
+  "failures": 0,
+  "errors": 0,
+  "skipped": [
+    {
+      "test": "test_consumo_fisico.DiferencialConsumoFisico.test_original_child_pool_saturation_and_id_edges",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_fisico.DiferencialConsumoFisico.test_original_inactive_guard_preserves_physical_state",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_fisico.DiferencialConsumoFisico.test_original_ordinary_targets_and_current_reserved_cells",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_fisico.DiferencialConsumoFisico.test_original_physical_partial_failures_retain_prior_combat_effects",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_fisico.DiferencialConsumoFisico.test_original_projectile_consumer_and_physical_death_return",
+      "reason": "Optional: RISING_EMULAR=1"
+    }
+  ],
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "core_provider_commit": "913a4ada5bb931e276d57f606b12c5858efc36da",
+  "bounded_x86_executions": 0,
+  "per_test": [
+    {
+      "teste": "test_consumo_fisico.ContratosConsumoFisico.test_invalid_backing_pool_fails_before_callbacks",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.ContratosConsumoFisico.test_missing_level_still_precedes_life_and_physical_death",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.ContratosConsumoFisico.test_physical_exception_identity_and_prior_child_are_retained",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.ContratosConsumoFisico.test_shared_records_see_both_world_and_combat_writes",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.DiferencialConsumoFisico.test_original_child_pool_saturation_and_id_edges",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.DiferencialConsumoFisico.test_original_inactive_guard_preserves_physical_state",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.DiferencialConsumoFisico.test_original_ordinary_targets_and_current_reserved_cells",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.DiferencialConsumoFisico.test_original_physical_partial_failures_retain_prior_combat_effects",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.DiferencialConsumoFisico.test_original_projectile_consumer_and_physical_death_return",
+      "execucoes_x86_delimitadas": 0
+    }
+  ],
+  "complete_consumers": 0,
+  "complete_projectiles": 0,
+  "expected_sympathy_stops": 0,
+  "expected_physical_stops": {},
+  "scope": "Mode1 damage and original physical dying in one shared world; all physical buffers and projectile bytes; complete fixture sympathy uses original inactive guard",
+  "excluded": "General message/diplomacy/level/audio providers, vehicle death completion, live mission/runtime, other damage modes",
+  "diagnostics": []
+}

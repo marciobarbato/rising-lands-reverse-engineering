@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "tests": 6,
+  "failures": 0,
+  "errors": 0,
+  "skipped": [
+    {
+      "test": "test_grade_impacto.DiferencialGradeImpacto.test_computed_both_lookups_in_complete_projectile_returns",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_grade_impacto.DiferencialGradeImpacto.test_original_building_priority_stops_before_unit_consumer",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_grade_impacto.DiferencialGradeImpacto.test_original_every_ten_bit_id_and_low_subcell_bits",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_grade_impacto.DiferencialGradeImpacto.test_original_nonbuilding_tags_and_cell_width_edges",
+      "reason": "Optional: RISING_EMULAR=1"
+    }
+  ],
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "original_range": "0x41b54a..0x41b579; unchanged evidencias/0041b54a.asm and manifesto.json",
+  "bounded_x86_executions": 0,
+  "per_test": [
+    {
+      "teste": "test_grade_impacto.ContratosGradeImpacto.test_adapter_forwards_exact_other_queries_and_errors",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_grade_impacto.ContratosGradeImpacto.test_tag_widths_no_allocation_clamp_and_live_readonly_view",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_grade_impacto.DiferencialGradeImpacto.test_computed_both_lookups_in_complete_projectile_returns",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_grade_impacto.DiferencialGradeImpacto.test_original_building_priority_stops_before_unit_consumer",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_grade_impacto.DiferencialGradeImpacto.test_original_every_ten_bit_id_and_low_subcell_bits",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_grade_impacto.DiferencialGradeImpacto.test_original_nonbuilding_tags_and_cell_width_edges",
+      "execucoes_x86_delimitadas": 0
+    }
+  ],
+  "complete_queries": 0,
+  "expected_building_stops": 0,
+  "complete_projectiles": 0,
+  "scope": "Read-only tagged-grid building lookup; computed building/unit priority in mode1 impact; complete nonlethal projectile fixtures",
+  "excluded": "Building damage/geometry/world initialization; general external callback bodies; other modes; mission/runtime",
+  "diagnostics": []
+}
