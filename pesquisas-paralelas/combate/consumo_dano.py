@@ -1,9 +1,10 @@
 """Bounded EnginInfligeDegat mode 1 consumer, with live world callbacks.
 
 This is the unit consumer at 0x4502f0, not InfligeDegat's cell selection,
-reaction, diplomacy or presentation wrapper. Other modes and the death branch
-are explicit boundaries. The core arithmetic is imported from a committed
-baseline; no second implementation of its fixed-width rules is introduced.
+reaction, diplomacy or presentation wrapper. Other modes are explicit
+boundaries; death stops by default or delegates to an opt-in handler. The core
+arithmetic is imported from a committed baseline; no second implementation of
+its fixed-width rules is introduced.
 """
 from dataclasses import dataclass
 from pathlib import Path
@@ -41,6 +42,7 @@ class ConsumidorDanoUnidade:
     efeito: object = None
     jogador_local: int = 0
     bonus_4965ac: int = 0
+    morte: object = None
 
     def __post_init__(self):
         if len(self.unidades) != 800 or any(len(u) != 276 for u in self.unidades):
@@ -62,7 +64,7 @@ class ConsumidorDanoUnidade:
         """Consume AX/DL/BX/CL inputs; direction is unused in mode 1.
 
         Returns None on the original nonlethal return. LimiteMorte is raised
-        before the death branch's first instruction, with life still unchanged.
+        before the death branch's first instruction when no handler is supplied.
         Unsupported modes/types/IDs fail before queries, effects or writes.
         """
         vitima, atacante, modo = vitima & 65535, atacante & 65535, modo & 255
@@ -73,6 +75,7 @@ class ConsumidorDanoUnidade:
         alvo, fonte = self.unidades[vitima], self.unidades[atacante]
         if alvo[1] >= 26 or fonte[1] >= 26:
             raise ValueError('Unit types must be in 0..25')
+        celula_entrada = u16(alvo, 0x7c)  # saved at 0x45033f before any callback
 
         # 0x4503b8..0x45043f: save matrix+bonus before the query; later fields
         # are reread at the same call sites as the original instruction stream.
@@ -83,6 +86,7 @@ class ConsumidorDanoUnidade:
         if proximo & 255:
             bruto = dano_bruto_unidade(bruto, bonus_proximidade=self.bonus_4965ac & 255)
         self._emitir('iagUnitSendMessage', vitima, 0x48, atacante)
+        dono_morte = fonte[0]  # saved by 0x45046c, before reduction/visibility
 
         # 0x45059c: reduction +f6 is the victim's; modifier 6 uses the attacker.
         reducao = alvo[0xf6]
@@ -98,5 +102,8 @@ class ConsumidorDanoUnidade:
                              0, volume, vitima)
         resultado = aplicar_dano_parcial(u16(alvo, 0x9a), dano, bool(alvo[0xdc] & 8))
         if resultado['entra_no_ramo_morte']:
+            if self.morte is not None:
+                return self.morte(vitima, atacante, resultado['dano_com_sinal'],
+                                  celula_entrada, dono_morte)
             raise LimiteMorte(vitima, atacante, resultado['dano_com_sinal'])
         por16(alvo, 0x9a, resultado['vida'])
