@@ -145,7 +145,7 @@ Stage 13 evidence/checks: four audited intact-original intervals cover complete 
 
 Stage 13 closes the precise pre-allocation reset prerequisite and is ready for required integration. Continue next with the original first allocation/lock return and terrain classification, using explicit resource effects and raw obstacle-marker input. Normal components and their allocation/cleanup/failure behavior remain open until independently compared. No mission/runtime or global completion claim follows from these counts.
 
-Completed Stage 13: implementation `dac71c04900fcac6f7a67bb07e24c52a30dbd69e`, final feature `6754df4052637a3c2de2a73ff9506c520b3a803a`, remote-main merge `8fcf1d35e9945d98eac07da8975ff933e4b9fe0b`. The seven-front round then resumed this worktree at main `8a499a9`, committed the untracked Stage 15 inventory [REMAP_CLASSIFICATION.md](REMAP_CLASSIFICATION.md) (inventory only, `a4a67efd52faefdddd173719faf732df35a62c22`) and merged main `f18b5a0` before Stage 14 implementation.
+Completed Stage 13: implementation `dac71c04900fcac6f7a67bb07e24c52a30dbd69e`, final feature `6754df4052637a3c2de2a73ff9506c520b3a803a`, remote-main merge `8fcf1d35e9945d98eac07da8975ff933e4b9fe0b`. The seven-front round then resumed this worktree at main `8a499a9`, committed the untracked remap inventory [REMAP_CLASSIFICATION.md](REMAP_CLASSIFICATION.md) (then labeled Stage 15, Stage 16 after the reorder) (inventory only, `a4a67efd52faefdddd173719faf732df35a62c22`) and merged main `f18b5a0` before Stage 14 implementation.
 
 Stage 14: [discovery domain contract](DISCOVERY_DOMAIN.md).
 
@@ -177,7 +177,44 @@ Remaining:
 - radius domains of the other 46 call sites (including AvanceEngin and the BatimentDecouvre/BatimentIllumine loops);
 - loaded-mission readiness.
 
-Next stage after coordinator confirmation: Stage 15 (remap allocation/classification with the declared-binding facility).
+Completed Stage 14: implementation `f8d93718625eb8eaae954d4426651cac4506324d`, final feature `5ba1190ad547594458996126a6aa11b3742ed1a9`, remote-main merge `7b7b96960cee0ec7868914e811f51b851fc27dba`.
+- The helper's candidate passed core 368/175 optional skips, combat 236/145, economy 413/190, graphics 184/0, missions 65/24, ai-runtime 25/1, audio 2/0 and workflow 8/0.
+- Reproduced on that main: the full 32-test native suite (10,503 segments, reports byte-identical) and the MONDE01 check.
+- Missions independently reproduced 6/6 natively.
+
+The coordinator then pre-authorized a reorder:
+- Stage 15: BatimentModifyMap, TerrainReset and MiniMapReset.
+- Stage 16: remap allocation/classification plus the declared-binding facility, per [REMAP_CLASSIFICATION.md](REMAP_CLASSIFICATION.md).
+- Stage 17: region labeling, cleanup and the final Chemin_Remap return.
+- Stage 18: Engin_RetrieveExperimente, then unit state 13 and DemonteBatiment.
+
+Stage 15: [reset and structure-minimap contract](RESET_MINIMAP.md).
+- APIs: `reset_terreno.resetar_terreno(mundo, minas, aleatorio)`, `reset_terreno.resetar_minimapa(mundo)` and `minimapa_estruturas.modificar_minimapa_estrutura(mundo, indice, ativo)`, plus `MundoFisico` methods. `SetMiniMap` modes 6/7 were added to `minimapa`.
+- Validation: eight original-only captures (303 segments) preceded translation and match. Native: 11 tests, 755 entries / 1,939 segments, every entry at its real return, zero failures.
+- Historical interruption status: committed locally, NOT yet integrated. The Stage 14 regression rerun after the `minimapa` change was still running when the session's usage limit was reached. The recovery below completes that validation without replacing its earlier reports.
+
+### Stage 15 recovery — 2026-10-28
+
+The new human request superseded the old stop. Preserved implementation `a572e8c0320ff929a6c3dd2e75907bc121f7dea6` was inspected on its clean existing worktree, then current main `8810b3730a0fb788af3eac2b447dea65372f597f` was merged as `cc95c0af6bb785f8e448e59b6d5c3f82073b5e39`. The original eight captures / 303 segments and historical 755 entries / 1,939 segments are unchanged. No REA session, source regeneration or extra worker was used. The coordinator granted this stage the exclusive heavy lease through integration and committed-main reproduction; native runs and checks are serialized.
+
+The audit independently matched eight full exported byte intervals, seven minimap jump targets and seven caller/DL instructions to the intact oracle, in `relatorios/recuperacao-stage15-source-audit.json`. A local input audit found two real protected-buffer defects: signed byte views could fail at bulk assignment after the aux writes; multidimensional views could fail after the first minimap layer had changed. The reproduction is retained in `relatorios/recuperacao-stage15-initial-buffer-audit.json`. The recovery requires one-dimensional contiguous byte views, normalizes admitted B/b access without copying/replacing caller views, and adds local/native view checks. Existing bytearray behavior, original instructions, captures and native limits remain unchanged. `--relatorio` was added to the two validators solely to retain separate fresh reports.
+
+Actual fresh commands, each run to completion before the next heavy command:
+
+```sh
+python3 -B ferramentas/validar_reset_terreno.py --relatorio relatorios/recuperacao-stage15-reset-local.json
+python3 -B ferramentas/validar_reset_terreno.py --emular --relatorio relatorios/recuperacao-stage15-reset-emulada.json
+python3 -B ferramentas/validar_descoberta_terreno.py --emular --relatorio relatorios/recuperacao-stage15-descoberta-emulada.json
+python3 -B scripts/check.py --domain core
+```
+
+Fresh outcomes:
+- **Reset/map PASS:** 14 tests / 759 original returns (13 terrain, 12 minimap, 734 structure), 2,139 bounded segments and 1,380 preserved loop resumptions. Maximum segment 86,186 instructions. Whole mapped world buffers, mine reserves, seed/draw count, minimap fill/call order and B/b views match. Zero failures, errors, skips, native faults or limits. Report above; full log `.local/recuperacao-stage15-reset.log` (187.147 seconds).
+- **Required discovery regression PASS:** 32 tests / 4,293 original entries / 10,503 bounded segments. Direct radii 0..23/0..20, insertion sums 0..11, domain stops, all mission-placement predicates and production-exit regressions pass with unchanged real subcalls and limits. Declared pre-discovery/caller stops remain explicit; zero failures, errors, skips, native faults or limits. Report above; log `.local/recuperacao-stage15-descoberta.log` (530.032 seconds).
+- **Local reset PASS:** eight executed tests / six explicit optional native skips; no x86. **Core check PASS:** 382 discovered / 181 optional skips, documentation links valid; log `.local/recuperacao-stage15-core-check.log`.
+- **Full flow NOT RUN:** this stage does not validate end-to-end `MissionLoad` or `MissionPlaceTerrain`, a whole post-load mission image, frames, AI/events or a playable mission. Its MONDE01 case is a standalone fixture using the actual dimensions and type-2 sanctuary record. Synthetic constructors or zero marker tables are not loaded-state evidence.
+
+The recovered stage is ready for the required owned commit and locked integration. Consumer contracts are in [RESET_MINIMAP.md](RESET_MINIMAP.md); mines/RNG must be the same live allocations used by the later mission loaders. Full remap allocation/classification, labeling, cleanup/final return and `Engin_RetrieveExperimente` remain open. After integration, only lightweight next-stage inventory is authorized until the coordinator schedules another implementation/heavy lease. Final feature/main hashes and committed-main reproduction are reported to the coordinator without amending a commit merely to add its own future merge hash.
 
 ## Agreed ownership with ai-runtime (seven-front round, 2026-10-28)
 
@@ -187,9 +224,9 @@ Proposed by ai-runtime from intact bytes and confirmed by core by message:
 - **Owned elsewhere:** the prelude's sound, HP regeneration through `BonusGetValEngin` (economy query), `EnginTrouveCible`/`SetAttaqueEngin` (combat) and state-4 `CreerSac` (economy). Core bodies raise named dependencies at those call sites. ai-runtime sequences the 32-frame target scan, spell timer and fatigue branches; core supplies primitives only. The fatigue bonus read at 0x4dfba0 and the provisions/Bag consumption are economy dependencies.
 - **Requested core API (not yet scheduled):** the committed `MundoNavegacao.atualizar_movimento(indice, maquina=None)` is a coordination over `girar` (RotateEngin 0x448599), `avancar_passo` (AvanceEngin prefix 0x448704) and `concluir_movimento` (state-2 tail 0x4563da), not the exact branch bodies. Proposed exact entries, each `(mundo, indice)` with a u16 index, returning None (the dispatcher ignores the value) and raising named dependencies at original call sites: `executar_estado_movimento` (state 2), `executar_estado_rotacao` (state 3), `executar_estado_retirada` (state 4) and `executar_estado_saco` (states 16/17). The coordinator schedules them; they are outside Stages 15–17.
 - **Also accepted by core, not yet scheduled:** `DemonteBatiment` 0x41effd, called by `CalculBatimentNextEtape` with a u16 structure index when state byte +5 is 3. It is the physical structure removal; economy supplies refund arithmetic as a callable query. Unit state 13 (0x4558e4, entering a structure or vehicle) is the physical entry body. `BatimentGetPlayer`/`BatimentGetType`/`BatimentEnDestruction` (economy queries) and `CalculEntreBatiment`'s `iagUnitSendMessage` 0x47 (ai-runtime) remain named dependencies at their call sites.
-- The declared-binding facility in `ferramentas/emulador.py` is Stage 15. A binding declared at an import thunk or game wrapper stops before entry, records the exact stack/register arguments, obtains the fixture result, applies the stdcall return and resumes at the caller. A fixture that cannot honor Windows semantics raises, and the run is reported as a stop.
+- The declared-binding facility in `ferramentas/emulador.py` is Stage 16 after the coordinator's reorder. A binding declared at an import thunk or game wrapper stops before entry, records the exact stack/register arguments, obtains the fixture result, applies the stdcall return and resumes at the caller. A fixture that cannot honor Windows semantics raises, and the run is reported as a stop.
 
-## Stage 15 binding requests received (inputs, not implemented)
+## Stage 16 binding requests received (inputs, not implemented)
 
 - **ai-runtime:** a frame oracle on the declared-binding facility (shape agreed above).
 - **missions:** a whole-`MissionLoad` oracle; real ETA bytes through the file wrappers and a deterministic allocation arena.

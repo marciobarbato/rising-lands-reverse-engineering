@@ -50,6 +50,18 @@ class MundoFisico(MundoUnidades, VisaoMovimento):
         from colocacao_missao import colocar_unidade_missao
         return colocar_unidade_missao(self,indice)
 
+    def resetar_terreno(self, minas, aleatorio):
+        from reset_terreno import resetar_terreno
+        return resetar_terreno(self, minas, aleatorio)
+
+    def resetar_minimapa(self):
+        from reset_terreno import resetar_minimapa
+        return resetar_minimapa(self)
+
+    def modificar_minimapa_estrutura(self, indice, ativo):
+        from minimapa_estruturas import modificar_minimapa_estrutura
+        return modificar_minimapa_estrutura(self, indice, ativo)
+
     def consultar_volume_unidade(self, indice, janela):
         from voz_unidades import consultar_volume_unidade
         return consultar_volume_unidade(self, indice, janela)

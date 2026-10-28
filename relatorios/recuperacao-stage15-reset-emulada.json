@@ -1,0 +1,33 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": true,
+  "tests": 14,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 2139,
+  "success": true,
+  "scope": "TerrainReset 0x46b315, MiniMapReset 0x469f00 and BatimentModifyMap 0x419e97 (both DL variants, SetMiniMap modes 6/7) over synthetic inherited layers; no MissionLoad caller.",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "unicorn": "2.1.4",
+  "original_entries": {
+    "0x46b315": 13,
+    "0x469f00": 12,
+    "0x419e97": 734
+  },
+  "reached_stops": {
+    "0x46b327": 1277,
+    "0x3000000": 759,
+    "0x46a623": 103
+  },
+  "bounded_segments": 2139,
+  "preserved_minimap_resumptions": 0,
+  "preserved_loop_head_resumptions": 1380,
+  "maximum_native_instructions_per_segment": 86186,
+  "failed_native_segment": null,
+  "expected_native_exceptions": 0,
+  "expected_execution_limits": 0,
+  "native_instruction_cap": 1000000,
+  "native_segment_timeout_us": 1000000,
+  "native_subcalls": "Unpatched Random/memset/fill/SetMiniMap and leaf queries; same instruction/CPU/stack at each SetMiniMap-entry, pixel-loop or TerrainReset-loop resume"
+}

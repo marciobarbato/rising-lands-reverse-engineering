@@ -1,0 +1,32 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 11,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_reset_terreno.DiferencialResetTerreno.test_minimap_reset_dimensions_including_empty_and_full_layers",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_reset_terreno.DiferencialResetTerreno.test_monde01_dimensions_sanctuary_record",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_reset_terreno.DiferencialResetTerreno.test_structure_every_type_both_variants_at_corners_and_edges",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_reset_terreno.DiferencialResetTerreno.test_structure_owner_camera_visibility_matrix",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_reset_terreno.DiferencialResetTerreno.test_terrain_reset_random_state_edges_and_patterns",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "scope": "TerrainReset 0x46b315, MiniMapReset 0x469f00 and BatimentModifyMap 0x419e97 (both DL variants, SetMiniMap modes 6/7) over synthetic inherited layers; no MissionLoad caller."
+}
