@@ -1,0 +1,315 @@
+{
+  "rea_source_revision": "b9a8f8e9f25feb9cc97bf4960748f2bdf8c898bc",
+  "original_executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "normalized_analysis_sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "scope": "Focused existing-project GetNumBob summary and replacement-cursor division instruction; assembly/native cache state are authoritative.",
+  "function_summary_observation": {
+    "evidence_id": "ev_37acd4433dda2a8b699f7ac4962bdc80dfaa7359f552eb572048e6dc8342b6d0",
+    "subject": {
+      "name": "RISING-analise.exe",
+      "digest": {
+        "sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0"
+      },
+      "local_path": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/entrada/RISING-analise.exe",
+      "format": "pe",
+      "architecture": "x86"
+    },
+    "provider": {
+      "id": "rea-analysis-view",
+      "name": "REA analysis view projection",
+      "version": "1"
+    },
+    "analysis_profile": null,
+    "predicate_type": "rea.analysis-view",
+    "operation": "inspect_analysis_view",
+    "parameters": {
+      "parent_evidence_id": "ev_fd9c7c1f465533d4f6eae3e45c770caa9a3c9e2e0cb7f6ed5c5a08823a83f35f",
+      "view": {
+        "kind": "summary"
+      }
+    },
+    "raw_result": null,
+    "normalized_result": {
+      "kind": "summary",
+      "view": {
+        "kind": "summary"
+      },
+      "parent_evidence_id": "ev_fd9c7c1f465533d4f6eae3e45c770caa9a3c9e2e0cb7f6ed5c5a08823a83f35f",
+      "parent_operation": "analyze_function",
+      "parent_digest": "fd9c7c1f465533d4f6eae3e45c770caa9a3c9e2e0cb7f6ed5c5a08823a83f35f",
+      "view_digest": "7a8d6b7cc36fa6371b5365fee2b6b2d4bbe0a605db269ff7b217e6d40ecd08e8",
+      "artifact": {
+        "path": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/entrada/RISING-analise.exe",
+        "sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0"
+      },
+      "coverage": {
+        "status": "complete-within-view",
+        "examined": 1,
+        "total": 1,
+        "next_offset": null,
+        "exhausted": true
+      },
+      "limitations": [
+        "Def-use links do not cross function boundaries and may omit memory aliasing, call side effects, or unresolved indirect flow.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "High p-code is decompiler-derived, not original source or runtime behavior. is_dead preserves the Java AST flag; decoded block members can retain that flag, so block_membership separately reports actual syntax-tree membership.",
+        "Known omitted-edge counts cover links omitted from retained operations; omitted operations may contain additional uncounted links.",
+        "Memory read/write effects include stack and temporary memory operations; they do not identify persistent state or business meaning.",
+        "Operation, input, and def-use limits can truncate large functions; inspect truncation, omitted lower bounds, and known omitted counts before drawing conclusions.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Pseudocode is neither original source nor guaranteed to compile.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "Register variables, compiler-generated blocks, and pointer arithmetic remain decompiler artifacts.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program. Decompilation runs until completion or caller cancellation unless REA_GHIDRA_DECOMPILE_TIMEOUT_SECONDS sets a per-function limit. That limit stops the requested decompile without requesting session closure; caller cancellation requests session closure.",
+        "The analysis profile records the selected project content fingerprint and program name. The imported program SHA-256 must match the admitted target; the project may contain caller annotations or earlier edits, which are not fresh REA discoveries.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "The original project is never opened by Ghidra or modified. The private copy is read-only to bridge operations and deleted on close; original executable bytes are never written.",
+        "This session opens a caller-selected existing Ghidra project through a private copy, without import, auto-analysis or repair scripts. Original analysis completeness and settings are unknown.",
+        "This session uses Ghidra 12.2. The bridge is verified against 12.1.4; other 12.x (>=12.1) builds are accepted and the observed version is reported.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Types and calling conventions are Ghidra decompiler observations, not source declarations.",
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+      ],
+      "unknowns": [
+        "swift_string_literal_omissions not recorded",
+        "swift_string_literals not recorded"
+      ],
+      "procedure_address": "0x40fd95",
+      "summary": {
+        "procedure": {
+          "name": "OriginaisSBL::GetNumBob",
+          "address": "0x40fd95"
+        },
+        "pseudocode": {
+          "available": true,
+          "code_units": 3669
+        },
+        "value_flow": {
+          "available": true,
+          "truncated": false
+        },
+        "facet_availability": {
+          "pseudocode": {
+            "available": true
+          },
+          "assembly": {
+            "available": true
+          },
+          "comments": {
+            "available": true
+          },
+          "callers": {
+            "available": true
+          },
+          "callees": {
+            "available": true
+          },
+          "references": {
+            "available": true
+          },
+          "strings_names": {
+            "available": true
+          },
+          "cfg": {
+            "available": true
+          }
+        },
+        "counts": {
+          "assembly": 225,
+          "basic_blocks": 78,
+          "comments": 0,
+          "callers": 1,
+          "callees": 6,
+          "incoming_references": 1,
+          "outgoing_references": 99,
+          "unresolved_calls": 0,
+          "referenced_strings": 0,
+          "referenced_names": 90,
+          "swift_string_literals": null,
+          "swift_string_literal_omissions": null,
+          "value_flow_operations": 285,
+          "value_flow_def_use": 284,
+          "value_flow_effects": 51,
+          "value_flow_parameters": 2,
+          "value_flow_parameter_uses": 2
+        },
+        "limitation_count": 4
+      }
+    },
+    "confidence": "derived",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "Def-use links do not cross function boundaries and may omit memory aliasing, call side effects, or unresolved indirect flow.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "High p-code is decompiler-derived, not original source or runtime behavior. is_dead preserves the Java AST flag; decoded block members can retain that flag, so block_membership separately reports actual syntax-tree membership.",
+      "Known omitted-edge counts cover links omitted from retained operations; omitted operations may contain additional uncounted links.",
+      "Memory read/write effects include stack and temporary memory operations; they do not identify persistent state or business meaning.",
+      "Operation, input, and def-use limits can truncate large functions; inspect truncation, omitted lower bounds, and known omitted counts before drawing conclusions.",
+      "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+      "Pseudocode is neither original source nor guaranteed to compile.",
+      "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+      "Register variables, compiler-generated blocks, and pointer arithmetic remain decompiler artifacts.",
+      "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+      "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+      "The Java bridge serializes one function request per Program. Decompilation runs until completion or caller cancellation unless REA_GHIDRA_DECOMPILE_TIMEOUT_SECONDS sets a per-function limit. That limit stops the requested decompile without requesting session closure; caller cancellation requests session closure.",
+      "The analysis profile records the selected project content fingerprint and program name. The imported program SHA-256 must match the admitted target; the project may contain caller annotations or earlier edits, which are not fresh REA discoveries.",
+      "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+      "The original project is never opened by Ghidra or modified. The private copy is read-only to bridge operations and deleted on close; original executable bytes are never written.",
+      "This session opens a caller-selected existing Ghidra project through a private copy, without import, auto-analysis or repair scripts. Original analysis completeness and settings are unknown.",
+      "This session uses Ghidra 12.2. The bridge is verified against 12.1.4; other 12.x (>=12.1) builds are accepted and the observed version is reported.",
+      "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+      "Types and calling conventions are Ghidra decompiler observations, not source declarations.",
+      "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state."
+    ],
+    "relationship_coverage": {
+      "status": "complete",
+      "diagnostics": [
+        "Only resolved Ghidra call references are returned; unresolved computed or indirect calls remain unknown, while function classifications distinguish thunks and externals."
+      ]
+    },
+    "locations": [
+      {
+        "kind": "artifact-path",
+        "path": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/entrada/RISING-analise.exe"
+      },
+      {
+        "kind": "address",
+        "address": "0x40fd95"
+      }
+    ],
+    "evidence_links": [
+      "ev_fd9c7c1f465533d4f6eae3e45c770caa9a3c9e2e0cb7f6ed5c5a08823a83f35f"
+    ]
+  },
+  "instruction_observation": {
+    "evidence_id": "ev_427e80b6c1c4d95fb6c0b459f80d93e94ebb390f9387b0747e3fa37318eb1e33",
+    "subject": {
+      "name": "RISING-analise.exe",
+      "digest": {
+        "sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0"
+      },
+      "local_path": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/entrada/RISING-analise.exe",
+      "format": "pe",
+      "architecture": "x86"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.2"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.2"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "pe",
+        "architecture": "x86",
+        "import_mode": "existing-project-private-copy-v1",
+        "annotation_policy": "read-only-existing-project-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-without-synthetic-entry-v2",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v4",
+        "existing_project": {
+          "configured_path": "/Users/marcio/git/Rising Lands/engenharia-reversa/ghidra/projetos/RisingLands.gpr",
+          "project_path": "/Users/marcio/git/Rising Lands/engenharia-reversa/ghidra/projetos",
+          "project_name": "RisingLands",
+          "program_name": "RISING-analise.exe",
+          "sha256": "3ad8f23827b3532617346b189d3ea83a25fcecb9fc682ad7e30fa671b61791ec"
+        },
+        "original_analysis": {
+          "completeness": "unknown",
+          "settings": "unknown"
+        },
+        "no_return_repair": "disabled-existing-project",
+        "process_launch": "inspected-jvm-launch-support-v1"
+      },
+      "digest": "33da723a26733dd8b59046612d0c42bf95bb1b59c46a63f17b127521af169a3d"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "inspect_native_instruction",
+    "parameters": {
+      "address": "0x40ff39"
+    },
+    "raw_result": null,
+    "normalized_result": {
+      "address": "0x40ff39",
+      "status": "decoded",
+      "procedure": "0x40fd95",
+      "architecture": "x86:LE:32:default",
+      "mode": "default",
+      "bytes": "f7ff",
+      "length": 2,
+      "mnemonic": "IDIV",
+      "raw_disassembly": "IDIV EDI",
+      "operands": [
+        {
+          "index": 0,
+          "raw": "EDI",
+          "provider_type": 512,
+          "components": [
+            {
+              "kind": "register",
+              "text": "EDI",
+              "value": "EDI",
+              "bit_width": 32
+            }
+          ],
+          "memory_addressing": "unavailable"
+        }
+      ],
+      "flow": {
+        "kind": "fallthrough",
+        "conditional": false,
+        "computed": false,
+        "direct_destinations": [],
+        "classification_evidence": [
+          {
+            "source": "ghidra-listing-flow-type",
+            "value": "FALL_THROUGH"
+          }
+        ]
+      },
+      "references": [],
+      "incoming_references": [],
+      "limitations": [
+        "Operand components are Ghidra Listing decoder tokens; effective memory base/index/displacement roles and per-instruction context mode are unavailable. The mode field is the program language variant."
+      ]
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "This session opens a caller-selected existing Ghidra project through a private copy, without import, auto-analysis or repair scripts. Original analysis completeness and settings are unknown.",
+      "The original project is never opened by Ghidra or modified. The private copy is read-only to bridge operations and deleted on close; original executable bytes are never written.",
+      "The analysis profile records the selected project content fingerprint and program name. The imported program SHA-256 must match the admitted target; the project may contain caller annotations or earlier edits, which are not fresh REA discoveries.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state.",
+      "This session uses Ghidra 12.2. The bridge is verified against 12.1.4; other 12.x (>=12.1) builds are accepted and the observed version is reported."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "review_notes": [
+    "REA retains the existing French symbol OriginaisSBL::GetNumBob and a two-parameter value-flow summary; EAX source word/EDX cell and all cache side effects were independently recovered from original instructions.",
+    "The native capacity word at0x495BC4 is256; IDIV EDI at0x40FF39 advances the u16 replacement cursor modulo that capacity after key writes.",
+    "Watcom signatures/operand tokens and existing-project annotations are fallible; the normalized static analysis subject remains separate from the intact execution original.",
+    "No cache startup defaults, palette invalidation or mission state are inferred; cache snapshots and shadow tables are explicit inputs."
+  ]
+}

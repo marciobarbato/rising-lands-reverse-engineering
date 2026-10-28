@@ -1,0 +1,33 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": true,
+  "tests": 15,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 3938,
+  "success": true,
+  "scope": "Physical mission PlaceEngin, raw predicates and shared-tail SetSortEngin regression; no mission wrapper.",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "unicorn": "2.1.4",
+  "original_entries": {
+    "0x445fbc": 318,
+    "0x456fa6": 672,
+    "0x441fff": 512,
+    "0x4465bf": 512
+  },
+  "reached_stops": {
+    "0x46a388": 1924,
+    "0x3000000": 2002,
+    "0x457019": 6,
+    "0x446146": 6
+  },
+  "preserved_minimap_resumptions": 1924,
+  "expected_native_exceptions": 0,
+  "expected_execution_limits": 0,
+  "expected_python_dependency_exceptions": 12,
+  "native_instruction_cap": 1000000,
+  "maximum_native_instructions_per_segment": 54778,
+  "failed_native_segment": null,
+  "native_subcalls": "Unpatched collision/discovery/light/minimap; same instruction/CPU/stack at each resume"
+}

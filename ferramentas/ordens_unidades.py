@@ -29,6 +29,7 @@ class MundoUnidades:
         self.selecoes_estruturas = bytearray(8)     # four u16 at 0x495be0
         self.experiencias_unidades = bytearray(40) # raw four-owner queue at 0x4e19c4
         self.selecoes_unidades = bytearray(2048)   # raw four selection lists at 0x508728
+        self.bolsas_tipos_unidades = [bytearray(26*104) for _ in range(4)] # pointees at 0x4e19b8
         self.grupos = bytearray(100 * 32)
         for grupo in range(100):
             struct.pack_into('<H', self.grupos, grupo * 32 + 0x10, 0xffff)
@@ -91,6 +92,18 @@ class MundoUnidades:
     def unidade_selecionada(self, jogador, indice):
         from selecao_unidades import unidade_selecionada
         return unidade_selecionada(self, jogador, indice)
+
+    def resetar_todas_unidades(self):
+        from ciclo_unidades import resetar_todas_unidades
+        return resetar_todas_unidades(self)
+
+    def existe_unidade(self,indice):
+        from consultas_unidades import existe_unidade
+        return existe_unidade(self,indice)
+
+    def visibilidade_unidade(self,indice):
+        from consultas_unidades import visibilidade_unidade
+        return visibilidade_unidade(self,indice)
 
     @staticmethod
     def _indice(indice):
