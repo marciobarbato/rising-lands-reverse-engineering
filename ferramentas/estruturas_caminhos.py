@@ -5,7 +5,6 @@ A ocupação física e a inserção/remoção de edifícios são etapas distinta
 """
 import struct
 from caminhos import aliados
-from movimento import celula_vizinha
 
 
 def modificar_regiao_estrutura(mundo, indice, subcelula, celula, inserir):
@@ -62,7 +61,11 @@ class CoresEstruturas:
         self.liberadas[cor] = 1
 
     def _vizinhos(self, celula):
-        return tuple(celula_vizinha(celula, d, self.largura, self.altura) for d in (1, 5, 9, 13))
+        # As rotinas de cores testam os limites de cada vizinho. Não exigem
+        # que a célula recebida já esteja dentro do retângulo jogável.
+        x, y = celula & 255, celula >> 8
+        return tuple(cx + cy * 256 if 0 <= cx < self.largura and 0 <= cy < self.altura else 0xffff
+                     for cx, cy in ((x-1,y),(x,y-1),(x+1,y),(x,y+1)))
 
     def adicionar_muro(self, celula):
         """MurAjoute, 0x43e616: reúne componentes vizinhos com uma nova cor."""
@@ -110,8 +113,7 @@ class CoresEstruturas:
             topo -= 1
             if self.grade[celula] == antiga:
                 self.grade[celula] = cor
-            for direcao in (1, 5, 9, 13):
-                vizinha = celula_vizinha(celula, direcao, self.largura, self.altura)
+            for vizinha in self._vizinhos(celula):
                 if vizinha != 0xffff and self.grade[vizinha] == antiga and topo < 1023:
                     topo += 1
                     self.pilha[topo] = vizinha

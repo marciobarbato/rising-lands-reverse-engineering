@@ -9,6 +9,16 @@ Esta entrega reconstrói partes verificáveis do carregamento do jogo a partir d
 reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesquisa;
 1.995 registros de símbolos originais foram depois recuperados de `RISING.SBL`.
 
+## Retomada do núcleo — 28/10/2026
+
+Foram traduzidas a aplicação do terreno de edifícios completos e suas rotinas
+de limpeza, com máscara de colisão, slots compactos, tiles, objetos, regiões e
+cores. Há três trajetos demonstráveis em Python, incluindo a remoção de uma
+construção durante o movimento. Veja [TERRENO_ESTRUTURAS.md](documentacao/TERRENO_ESTRUTURAS.md).
+A API mantém explícita a máscara em RAM exigida pelo tipo 20. A suíte do núcleo
+passou com 193 testes e 43.170 execuções x86 delimitadas, sem testes
+ignorados. Os relatórios de validação refletem esta retomada; a consolidação abaixo é histórica.
+
 ## Consolidação das entregas — 27/10/2026
 
 Esta rodada de pesquisa foi encerrada para consolidação documental. As pesquisas de combate e economia
@@ -97,6 +107,7 @@ delegados e dependências pendentes. O estado, as fontes e a continuidade estão
 19. [Estruturas e afastamento de bloqueadores](documentacao/ESTRUTURAS_DESBLOQUEIO.md).
 20. [Contrato da pesquisa de combate](pesquisas-paralelas/combate/INTEGRACAO.md).
 21. [Contrato da pesquisa de economia](pesquisas-paralelas/economia/INTEGRACAO.md).
+22. [Aplicação e limpeza do terreno de construções](documentacao/TERRENO_ESTRUTURAS.md).
 
 ## Reproduzir
 

@@ -31,6 +31,18 @@ class MundoNavegacao(MundoFisico):
     def modificar_regiao_estrutura(self, indice, subcelula, celula, inserir):
         return modificar_regiao_estrutura(self, indice, subcelula, celula, inserir)
 
+    def aplicar_terreno_estrutura(self, indice, origem, primeiro_tile, mascara_tipo20=None):
+        from terreno_estruturas import aplicar_terreno_estrutura
+        return aplicar_terreno_estrutura(self, indice, origem, primeiro_tile, mascara_tipo20)
+
+    def resetar_terreno_estrutura(self, indice, modo):
+        from terreno_estruturas import resetar_terreno_estrutura
+        return resetar_terreno_estrutura(self, indice, modo)
+
+    def remover_regioes_estrutura(self, indice):
+        from terreno_estruturas import remover_regioes_estrutura
+        return remover_regioes_estrutura(self, indice)
+
     def refazer_regioes(self):
         """Reconstrói rótulos e reaplica ocupação; usar antes de executar a busca."""
         if any(v & 0x8000 for v in self.regioes):

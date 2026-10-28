@@ -1,5 +1,20 @@
 # Estado da pesquisa e continuidade
 
+## Retomada de 28/10/2026 — terreno de construções
+
+Foram traduzidas `BatimentModifyTerrain`, `ResetBatimentTerrainModify` e
+`ResetCheminTerrainModify`, com integração em `MundoNavegacao` e demonstrações
+de percurso após aplicação/remoção de edifícios. O contrato e as evidências
+estão em [TERRENO_ESTRUTURAS.md](TERRENO_ESTRUTURAS.md). A numeração compacta das
+células bloqueadoras e a diferença da máscara em RAM do tipo 20 foram
+preservadas. Os relatórios atuais do núcleo incluem esta etapa e continuam
+separados das validações das pesquisas paralelas.
+
+O carregamento/remapeamento integral de construções em mapas reais e o ciclo
+completo de colocação/demolição continuam pendentes. A consolidação abaixo
+registra a situação histórica de 27/10, não o andamento posterior das outras
+frentes; elas não foram alteradas nesta retomada.
+
 ## Consolidação documental de 27/10/2026
 
 A rodada de pesquisa foi encerrada. Esta reconciliação registra os
