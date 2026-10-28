@@ -1,0 +1,40 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": true,
+  "tests": 19,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 1073,
+  "success": true,
+  "scope": "Declared boundaries, remap allocation/classification and readonly initialization queries; no labeling/full remap or full MissionLoad",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "unicorn": "2.1.4",
+  "original_remap_calls": {
+    "0x42ee1c": 9
+  },
+  "binding_resumptions": 16,
+  "preserved_loop_resumptions": 276,
+  "remap_bounded_segments": 301,
+  "remap_reached_stops": {
+    "0x3200000": 9,
+    "0x3200010": 9,
+    "0x3000000": 2,
+    "0x42eee1": 70,
+    "0x42ef22": 206,
+    "0x42ef8b": 5
+  },
+  "maximum_remap_segment_instructions": 88074,
+  "failed_native_segment": null,
+  "intentional_lock_fixture_stops": 1,
+  "intentional_binding_budget_failures": 1,
+  "readonly_query_entries": 768,
+  "io_wrapper_entries": [
+    "0x458420",
+    "0x458461"
+  ],
+  "io_bounded_segments": 4,
+  "expected_native_instruction_or_wall_limits": 0,
+  "expected_native_faults": 0,
+  "full_flow_status": "NOT RUN: no final Chemin_Remap return or MissionLoad composition"
+}
