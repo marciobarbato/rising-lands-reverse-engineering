@@ -84,7 +84,8 @@ class BancadaConsumoDano(BancadaAvanco):
         for dono in range(4):
             for tipo in range(26):
                 base = 0x4dfba0 + dono * 468 + tipo * 18
-                self.cpu.mem_write(base + 10, bytes([mod5 & 255, mod6 & 255]))
+                self.cpu.mem_write(base + 8, struct.pack('<H', mod5 & 65535))
+                self.cpu.mem_write(base + 10, bytes([mod6 & 255]))
         for i, row in enumerate(danos):
             self.cpu.mem_write(MATRIZES + 32 * i, bytes(row))
         self.cpu.mem_write(0x4965ac, bytes([bonus & 255]))

@@ -55,6 +55,12 @@ class MundoUnidades:
         from posicao_saida import calcular_posicao_saida
         return calcular_posicao_saida(self, indice, direcao, dimensoes)
 
+    def converter_unidade(self, indice, celula, direcao, tipo, tipos_unidades,
+                         *, capacidade_tipo=None, modificador=None):
+        from conversao_unidades import converter_unidade
+        return converter_unidade(self, indice, celula, direcao, tipo, tipos_unidades,
+                                 capacidade_tipo=capacidade_tipo, modificador=modificador)
+
     @staticmethod
     def _indice(indice):
         indice &= 65535

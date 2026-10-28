@@ -16,6 +16,7 @@ Owner: combat. Source and tests live in `pesquisas-paralelas/combate/`. Shared d
 | `cadencia_projeteis.py` | Original caller gates, accumulated-counter input, and impact presentation preparation |
 | `consumo_dano.py` | Mode-1 occupied-unit damage consumer, live callbacks and explicit death boundary |
 | `impacto_unidades.py` | Mode-1 unit impact wrapper: lookup, reaction requests, consumer, hit allocation, diplomacy and alert requests |
+| `bonus_combate.py` | Argument-order adapter from damage's modifier queries to economy's committed loaded-table provider |
 
 Input units use raw 276-byte records. Callbacks must describe external world effects explicitly; receiving a resolved query or stopping at a dependency is a narrower claim than executing the complete caller. Whole-record/grid comparisons distinguish local copies from mutations of the live world.
 
@@ -64,6 +65,10 @@ The connected scenario uses original `ProjectileAvance` → `ProjectileInfligeDe
 
 Original input remains `RISING.EXE` SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`. New immutable-byte extracts and individual range hashes are in [the consumer evidence manifest](../pesquisas-paralelas/combate/evidencias/consumo-dano.json). Predecessor extracts and saved historical reports were not regenerated.
 
+`ConsultaBonusCombate(bonus, outras=None)` now connects this consumer to economy's committed `BonusUnidades` provider (implementation `b1eb0c06e3b016f9abc2d27f3a836f6c20abf2f9`). Pass it as the consumer's query callable. It maps `Modificateur(owner, selector, type)` to `bonus.consultar(owner, type, selector)`, preserves the provider's full return width, and forwards other queries unchanged to `outras(name,args)`. Only damage selectors 5/6 are supported; absent providers, other selectors and absent forwarded queries raise at the call site. No zero table, bonus, or inherited-ECX default is manufactured. Selector 5 reads u16 at loaded record `+0x08`; selector 6 reads u8 at `+0x0A`; the damage caller consumes their low bytes. Economy owns the loaded 1,872-byte table and its initialization remains separate.
+
+The corrected native fixture now writes those exact fields, with explicit requested-value assertions. A separate [provider-composition report](../pesquisas-paralelas/combate/validacao-bonus-combate-emulada.json) records 450 complete original consumers against the **actual committed economy query results**, including word/high-byte boundaries and all 4×26 loaded owner/type combinations. Other native query results remain explicit inputs. The same run also reruns consumer/wrapper tests under corrected bonus inputs; predecessor reports remain unchanged as historical records of their earlier fixture values.
+
 ## Unit impact wrapper
 
 `ImpactoUnidades.infligir(cell, mode, attacker, direction, flag)` now reconstructs the **mode-1 unit branch** of `InfligeDegat` (`0x450874..0x4510DD`). Cell/attacker truncate to u16; mode/direction/flag to u8. Mode must be 1, attacker 0..799, the live table must have 800 records, and resolved unit types must be 0..25. `receber(name, args)` connects directly to `PoolProjeteis.efeito_externo` for `InfligeDegat`; other effect names stop explicitly. Supply the same live unit table, projectile pool and callable unit consumer, normally `ConsumidorDanoUnidade.infligir`.
@@ -105,6 +110,7 @@ python3 -B pesquisas-paralelas/combate/validar_consumo_dano.py
 python3 -B pesquisas-paralelas/combate/validar_consumo_dano.py --emular
 python3 -B pesquisas-paralelas/combate/validar_impacto_unidades.py --emular
 python3 -B pesquisas-paralelas/combate/validar_ordem_tipo4.py --emular
+python3 -B pesquisas-paralelas/combate/validar_bonus_combate.py --emular
 python3 -B scripts/check.py --domain combat
 ```
 
