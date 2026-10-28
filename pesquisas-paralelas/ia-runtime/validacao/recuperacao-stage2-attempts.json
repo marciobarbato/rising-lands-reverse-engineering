@@ -1,0 +1,91 @@
+{
+ "round": "CXR-20261028-01",
+ "attempts": [
+  {
+   "attempt": "cycle_first",
+   "log": ".local/recuperacao-stage2-cycle-first.log",
+   "exit_code": 1,
+   "sha256": "f1fab8139068a8f9462b3640befb867f024952b80cdce677f47308694ed7019f",
+   "result_tail": [
+    "AssertionError: Native checkpoint states differ; no cycle demonstrated",
+    "",
+    "----------------------------------------------------------------------",
+    "Ran 1 test in 0.877s",
+    "",
+    "FAILED (failures=1)"
+   ]
+  },
+  {
+   "attempt": "cycle_diagnostic",
+   "log": ".local/recuperacao-stage2-cycle-diagnostic.log",
+   "exit_code": 1,
+   "sha256": "c13e0c6daa9ef7171ebd7d626f462376f5b3e46c06d7b384878efbb4b6b9ca6d",
+   "result_tail": [
+    "AssertionError: Native checkpoint states differ; no cycle demonstrated: [{'registers': {}, 'buffers': {'stack': [32616, 32620, 32621]}}, {'registers': {}, 'buffers': {}}]",
+    "",
+    "----------------------------------------------------------------------",
+    "Ran 1 test in 0.874s",
+    "",
+    "FAILED (failures=1)"
+   ]
+  },
+  {
+   "attempt": "cycle_final",
+   "log": ".local/recuperacao-stage2-cycle-final.log",
+   "exit_code": 0,
+   "sha256": "a34c426068c53ffe0e064eff2be31c533aed798c9e10b715e1f047977697abf1",
+   "result_tail": [
+    "test_original_loops_forever_on_a_spec_without_types (test_reinicio_ia.FreshNativeWholeImages) ... ok",
+    "",
+    "----------------------------------------------------------------------",
+    "Ran 1 test in 0.907s",
+    "",
+    "OK"
+   ]
+  },
+  {
+   "attempt": "native_suite",
+   "log": ".local/recuperacao-stage2-native.log",
+   "exit_code": 0,
+   "sha256": "ac5825376ca996c359f4c46fa93f487f30b09c5a4602525e22d91cbb91d8be97",
+   "result_tail": [
+    "test_original_loops_forever_on_a_spec_without_types (test_reinicio_ia.FreshNativeWholeImages) ... ok",
+    "",
+    "----------------------------------------------------------------------",
+    "Ran 36 tests in 24.480s",
+    "",
+    "OK"
+   ]
+  },
+  {
+   "attempt": "domain_gate",
+   "log": ".local/recuperacao-stage2-domain.log",
+   "exit_code": 0,
+   "sha256": "b1cc291c95edff2aa18ccc6290332de83ad7e176c1ec35fe6503e76690771c0c",
+   "result_tail": [
+    "",
+    "----------------------------------------------------------------------",
+    "Ran 36 tests in 2.735s",
+    "",
+    "OK (skipped=4)",
+    "Documentation links and requested research suites passed."
+   ]
+  },
+  {
+   "attempt": "local_suite",
+   "log": ".local/recuperacao-stage2-local.log",
+   "exit_code": 0,
+   "sha256": "f0e17d45e41b88bdeffa8d6aac6181aa3c1ad3b8299ed67d65b306b79e9ab9fe",
+   "result_tail": [
+    "test_original_loops_forever_on_a_spec_without_types (test_reinicio_ia.FreshNativeWholeImages) ... skipped 'native comparison runs only with RISING_EMULAR=1'",
+    "",
+    "----------------------------------------------------------------------",
+    "Ran 36 tests in 2.727s",
+    "",
+    "OK (skipped=4)"
+   ]
+  }
+ ],
+ "failed_proof_diagnosis": "First native checkpoint differed from the next by three stack bytes at offsets 32616,32620,32621 only. Registers and images matched; subsequent states matched completely. The final proof executes one explicit transient visit then requires three consecutive equal complete states. Neither failed run is counted as a pass.",
+ "generic_timeouts_or_instruction_limits_accepted": false
+}

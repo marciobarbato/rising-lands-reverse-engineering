@@ -16,3 +16,13 @@ def existe_unidade(mundo,indice):
 def visibilidade_unidade(mundo,indice):
     """0x4465bf consumed AL only: raw +72, independent of terrain discovery."""
     return mundo.unidades[_base(mundo,indice)+0x72]
+
+
+def tipo_unidade(mundo, indice):
+    """EnginGetType 0x442025: consumed AL is raw +1, with no activity/type guard."""
+    return mundo.unidades[_base(mundo, indice)+1]
+
+
+def tipo_unidade_monstro(tipo):
+    """TypeEnginEstMonstre 0x4422dd, AL input/result, shared true tail 0x4422da."""
+    return 20 <= (tipo & 255) <= 24
