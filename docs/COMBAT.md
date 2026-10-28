@@ -14,7 +14,7 @@ Owner: combat. Source and tests live in `pesquisas-paralelas/combate/`. Shared d
 | `avanco_projeteis.py` | Linear advance, logical animation, arrival, RNG, damage requests and secondary effects |
 | `maquina_projeteis.py` | Supported full advancement/expiration dispatcher, types 30/33, and live-pool `Calcul` passes |
 | `cadencia_projeteis.py` | Original caller gates, accumulated-counter input, and impact presentation preparation |
-| `consumo_dano.py` | Mode-1 and special-row mode-8 unit damage, live callbacks and explicit death boundaries |
+| `consumo_dano.py` | Mode-1, special-row mode-8 and life-derived mode-9 unit damage, with explicit death boundaries |
 | `impacto_unidades.py` | Mode-1 unit impact wrapper: lookup, reaction requests, consumer, hit allocation, diplomacy and alert requests |
 | `bonus_combate.py` | Argument-order adapter from damage's modifier queries to economy's committed loaded-table provider |
 | `morte_dano.py` | Optional mode-1 lethal tail: local experience/life writes, child allocation and explicit level/lifecycle/sympathy requests |
@@ -84,9 +84,15 @@ The [proximity report](../pesquisas-paralelas/combate/validacao-proximidade-ataq
 
 The same `infligir(victim,8,source,direction=0)` API supports the initialized mode-8 nonlethal path. Supply **27** explicit rows, each with at least 26 u8 entries. The original prefix `[0x450475,0x450494)` reads damage-pointer table entry 26 (`+0x68`) indexed by victim type. This path adds no source `+0xF7`, requests no modifier 5/proximity, and sends no mode-1 AI message. It then performs the shared victim-F6/source-modifier-6 reduction, visibility/volume/optional sound, protection-bit decrement and signed-damage/u16-life rules. Source ID/type are still required because the original computes its record pointer and common modifier 6 reads it. Input widths and live callback restrictions are unchanged.
 
-Missing row 26 fails before callbacks/writes. Every mode-8 lethal result raises `LimiteMorte` at `0x4506A1`, preserving life and prior audio effects; `exception.modo` is 8. A configured mode-1 `morte` handler is never called for this mode, including through `criar_consumidor_fisico`. Its original prefix does not initialize the saved owner byte at stack `+0x28` later read for sympathy, so the mode-1 death tail cannot be substituted. General mode-8 lethal/caller semantics and the loaded row's game meaning remain open. Other modes still fail explicitly, and `ImpactoUnidades` still accepts only mode 1.
+Missing row 26 fails before callbacks/writes. Every mode-8 lethal result raises `LimiteMorte` at `0x4506A1`, preserving life and prior audio effects; `exception.modo` is 8. A configured mode-1 `morte` handler is never called for this mode, including through `criar_consumidor_fisico`. Its original prefix does not initialize the saved owner byte at stack `+0x28` later read for sympathy, so the mode-1 death tail cannot be substituted. General mode-8 lethal/caller semantics and the loaded row's game meaning remain open. The additional supported mode 9 is described below; other modes fail explicitly, and `ImpactoUnidades` still accepts only mode 1.
 
 The [mode-8 reference report](../pesquisas-paralelas/combate/validacao-dano-modo8-emulada.json) records **27 tests / 2,110 original-x86 executions** with no failures/errors/skips: 1,101 complete mode-8 returns, 139 expected mode-8 death stops, four expected mode-8 audio stops, and 866 rerun mode-1 consumer/physical-composition calls. Tests cover all 26×26 source/victim types, real loaded economy modifier-6 results, signed-byte boundaries, life/protection wrap, ID edges/aliasing and visible handles. Whole unit buffers match; the loaded bonus table is unchanged. Original mode-1 reports and evidence were preserved.
+
+## Life-derived damage mode 9
+
+`infligir(victim,9,source,direction=0)` implements original `[0x450494,0x4504C6)`: raw damage is `((entry_life_u16//2)&255) or 1`, followed by the same reduction/visibility/life tail as mode 8. Byte truncation precedes the zero test and common signed clamp. For example, life 255 loses 127 with zero reductions, but life 256 loses 1 because raw byte 128 is negative at the common clamp; life 512 also loses 1 because its raw byte is zero before replacement. The constructor still requires the ordinary 26-row input domain (or 27 rows), although mode 9 does not read a damage row. IDs/types and common query widths remain unchanged. There is no mode-1 F7/modifier-5/proximity/message prefix, and direction is unused.
+
+The original mode-9 prefix does not initialize the saved sympathy owner either. Every lethal result raises `LimiteMorte` with `modo=9` before life zero, preserving prior effects and ignoring any mode-1 lethal handler. No mode-9 cell-wrapper/projectile caller, death completion or game meaning is claimed. The [dedicated reference report](../pesquisas-paralelas/combate/validacao-dano-modo9-emulada.json) records **33 tests / 4,506 original-x86 calls**: 2,359 complete mode-9 returns, 33 expected mode-9 death stops, four expected mode-9 audio stops, and 2,110 mode-8/mode-1 regressions. Every raw byte value and its even/odd life input is checked in four life bands; reduction/protection edges, source types, ID aliases and visible handles also match whole unit/loaded-bonus buffers. Historical reports remain unchanged.
 
 ## Optional lethal sequencing
 
@@ -168,6 +174,7 @@ python3 -B pesquisas-paralelas/combate/validar_proximidade_ataque.py --emular
 python3 -B pesquisas-paralelas/combate/validar_consumo_fisico.py --emular
 python3 -B pesquisas-paralelas/combate/validar_grade_impacto.py --emular
 python3 -B pesquisas-paralelas/combate/validar_dano_modo8.py --emular
+python3 -B pesquisas-paralelas/combate/validar_dano_modo9.py --emular
 python3 -B scripts/check.py --domain combat
 ```
 

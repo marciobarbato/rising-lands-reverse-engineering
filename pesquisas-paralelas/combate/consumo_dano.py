@@ -1,4 +1,4 @@
-"""Bounded EnginInfligeDegat modes 1/8, with live world callbacks.
+"""Bounded EnginInfligeDegat modes 1/8/9, with live world callbacks.
 
 This is the unit consumer at 0x4502f0, not InfligeDegat's cell selection,
 reaction, diplomacy or presentation wrapper. Other modes are explicit
@@ -62,15 +62,15 @@ class ConsumidorDanoUnidade:
         self.efeito(nome, args)
 
     def infligir(self, vitima, modo, atacante, direcao=0):
-        """Consume AX/DL/BX/CL inputs; direction is unused in modes 1/8.
+        """Consume AX/DL/BX/CL inputs; direction is unused in modes 1/8/9.
 
         Returns None on the original nonlethal return. LimiteMorte is raised
-        before death when no mode-1 handler is supplied, and always in mode 8.
+        before death when no mode-1 handler is supplied, and always in 8/9.
         Unsupported modes/types/IDs fail before queries, effects or writes.
         """
         vitima, atacante, modo = vitima & 65535, atacante & 65535, modo & 255
-        if modo not in (1, 8):
-            raise NotImplementedError('Only EnginInfligeDegat mode 1 or 8 is supported')
+        if modo not in (1, 8, 9):
+            raise NotImplementedError('Only EnginInfligeDegat mode 1, 8 or 9 is supported')
         if modo == 8 and len(self.danos) != 27:
             raise ValueError('Mode 8 requires the explicitly loaded damage row 26')
         if vitima >= 800 or atacante >= 800:
@@ -90,9 +90,12 @@ class ConsumidorDanoUnidade:
                 bruto = dano_bruto_unidade(bruto, bonus_proximidade=self.bonus_4965ac & 255)
             self._emitir('iagUnitSendMessage', vitima, 0x48, atacante)
             dono_morte = fonte[0]  # saved before reduction/visibility
-        else:
+        elif modo == 8:
             # 0x450475: mode 8 uses only the separately loaded special row.
             bruto = self.danos[26][alvo[1]]
+        else:
+            # 0x450494: truncate half of entry life to u8 before zero->one.
+            bruto = ((u16(alvo, 0x9a) // 2) & 255) or 1
 
         # 0x45059c: reduction +f6 is the victim's; modifier 6 uses the attacker.
         reducao = alvo[0xf6]
