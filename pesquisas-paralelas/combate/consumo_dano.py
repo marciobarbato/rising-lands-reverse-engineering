@@ -47,6 +47,7 @@ class ConsumidorDanoUnidade:
     bonus_4965ac: int = 0
     morte: object = None
     danos_modo4: object = None
+    morte_sem_experiencia: object = None
 
     def __post_init__(self):
         if len(self.unidades) != 800 or any(len(u) != 276 for u in self.unidades):
@@ -71,7 +72,7 @@ class ConsumidorDanoUnidade:
         """Consume AX/DL/BX/CL; mode 4 supports direction bytes 29/30.
 
         Returns None on the original nonlethal return. LimiteMorte is raised
-        before death when no mode-1 handler is supplied, and always in 3/4/8/9.
+        before death without an applicable opt-in handler; always in 8/9.
         Unsupported modes/types/IDs fail before queries, effects or writes.
         """
         vitima, atacante, modo = vitima & 65535, atacante & 65535, modo & 255
@@ -115,6 +116,7 @@ class ConsumidorDanoUnidade:
             if alvo[1] in TIPOS_MODO4_QUARTO:
                 signed = inteiro_com_sinal8(bruto)
                 bruto = ((abs(signed)//4) * (-1 if signed < 0 else 1)) & 255
+            dono_morte = fonte[0]  # 0x45056a..0x45046c, before modifier 6
         else:
             # 0x450494: truncate half of entry life to u8 before zero->one.
             bruto = ((u16(alvo, 0x9a) // 2) & 255) or 1
@@ -136,5 +138,8 @@ class ConsumidorDanoUnidade:
             if modo == 1 and self.morte is not None:
                 return self.morte(vitima, atacante, resultado['dano_com_sinal'],
                                   celula_entrada, dono_morte)
+            if modo in (3, 4) and self.morte_sem_experiencia is not None:
+                return self.morte_sem_experiencia(vitima, atacante, resultado['dano_com_sinal'],
+                                                celula_entrada, dono_morte)
             raise LimiteMorte(vitima, atacante, resultado['dano_com_sinal'], modo)
         por16(alvo, 0x9a, resultado['vida'])
