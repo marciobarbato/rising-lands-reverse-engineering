@@ -1,6 +1,6 @@
 # Stage12: whole-MissionLoad original oracle preparation
 
-Status (updated): **runnable; the intact MissionLoad reached its real return for MONDE01 — see [Stage12 result](#stage12-result-runnable-program-start-oracle-and-original-only-missionload-capture-2026-10-28-claude) at the end. No Python composition; M1 not accepted.** Original preparation status: light scaffold only. Stage11 is integrated at main `7f617fab29ce382f96b690ea70da25a33fab8bae` (pushed feature `c0f0a873c3657e72a3e478cf6fd7ea73c84dd58a`, implementation `2f6d96b89039590c598f312752d4fe0e3c5b3607`, original captures `ed0172a364310b28584824b3e49dc63db371ed93`). All four commits are ancestors of fetched main. Its locked candidate passed80native tests, common local gates, then9focused native tests reproduced on main with unchanged counts/state/trace. The heavy lease was released; no prior work or evidence is replaced here.
+Status (updated): **runnable; the intact MissionLoad reached its real return for MONDE01 — see [Stage12 result](#stage12-result-runnable-program-start-oracle-and-original-only-missionload-capture-2026-10-28-claude). The Python whole-load composition exists ([Stage13](#stage13-m1-composition-and-comparison-2026-10-28-claude)): the strict run stops at an Economy provider contract at CALL 0x46c5af; M1 not accepted.** Original preparation status: light scaffold only. Stage11 is integrated at main `7f617fab29ce382f96b690ea70da25a33fab8bae` (pushed feature `c0f0a873c3657e72a3e478cf6fd7ea73c84dd58a`, implementation `2f6d96b89039590c598f312752d4fe0e3c5b3607`, original captures `ed0172a364310b28584824b3e49dc63db371ed93`). All four commits are ancestors of fetched main. Its locked candidate passed80native tests, common local gates, then9focused native tests reproduced on main with unchanged counts/state/trace. The heavy lease was released; no prior work or evidence is replaced here.
 
 ## Scaffold and inherited-state closure
 
@@ -129,6 +129,54 @@ Trial stops while closing inputs (all superseded by the committed captures): CRT
 
 Startup frames between CalculGame calls are not executed (ProgIteration frame counters stay 0; no AffGame/WndProc). The research screen gets no click. Menu text pointers are NULL. The profile parser and Win32 file fixtures are declared subsets. Host-side fixture reads (path strings, 0x4e1d1c in FileSeek) are not in the footprint. The static watch over-approximates direct stores only.
 
-### Next: Python composition (not started)
+### Next: Python composition (superseded by Stage13 below)
 
 Start from `entrada-carga-missao-original.json` bytes exactly and compare against the v2 final image, AL and ordered binding log. Needed providers: Core resets/remap/placement (on main), Core `Engin_RetrieveExperimente` (main 3d782ca), the AI adapter `reinicio_ia_compartilhado` for IaReset over live types (1,2,2,2) and the clock-seeded RNG (main 977c890), Economy MarcheResetAll/initializers, and the Missions loaders. The declared file/profile/allocation answers in the oracle log are the composition's external inputs.
+
+## Stage13: M1 composition and comparison (2026-10-28, Claude)
+
+**Result: NOT M1.** The strict composition stops at `EnginInitTechnologie 0x441459` (MissionLoad CALL `0x46c5af`, owner Economy). Up to that point every binding request and every allocation record equals the original. A declared diagnostic bridge past the stop gives AL=1 and a byte-identical whole state; that run is not M1 evidence. Report: [validacao/stage13-m1-composition.json](validacao/stage13-m1-composition.json) (source `b114fa7`, clean tree, CPU-free).
+
+### Design as implemented
+
+1. **One memory map** (`mapa_memoria_m1.MapaMemoriaM1`). The 882 entry blocks are decompressed with their SHA-256 verified. Each provider's own buffer is bound at its original address and filled in place by slice assignment. Most of these are Core world pools, Economy tables, market/cycle buffers, `BonusUnidades`, `Economia`, the 800 route buffers, the four Bag pools and the vision grids. DGROUP and the allocations are split around them, and the remaining bytes become Missions gap segments. That gives 950 non-overlapping segments. Three Core representations are not raw bytes, so each has one declared codec:
+   - u16 Python lists (tiles, regions, color stack): the list is canonical.
+   - 161 scalar caches (search context, dimensions, iterators, RNG, fatigue limits/bonus, controls, alliance masks, …): the bytes are canonical. The composer pulls them before and pushes them after every provider call or callback. A divergence raises.
+   - Core minimap layers: these are 65,536 bytes, but the native allocations are 16,384 bytes. The map exposes the first 16,384 bytes. The provider-private excess is poisoned with 0x5c and verified unchanged at the end, together with `mascaras_alianca[4]`, which has no original address.
+
+   When two providers model the same bytes, the Core buffer keeps ownership and Economy points to it by identity, following the committed `montar_habitacao` pattern. Seven such links are listed in the report. Every other constructor attribute is denied by a class-swap guard: reading or writing it raises `AtributoNaoMapeadoM1`. Rebinding a mapped buffer raises too.
+2. **Arena** (`arena_composicao_m1`). It continues from the entry next-free `0x418e9000` with a page-aligned bump allocator: handle==pointer, fill 0xA7 (ZEROINIT gives zero), no reuse. Each allocation is a new map block, and a freed one leaves the map with its bytes SHA-256 recorded. The class buffer and the 56 component buffers land on the native pointers, and their freed SHA-256 values equal the original.
+3. **External inputs.** `WORLD/MONDE01.ETA` and `INSTALHD/MONSTRE.INI` are read from the read-only media through `fronteiras_carga_missao.MidiaOriginal`/`PerfilWindows`, the oracle's own resolution and INI parsing. A recording `Leitor` logs fread and FileSeek with their cursors. FileOpen/FileClose are Missions caller code (`[0x4e1d1c]` store/clear, AL), and stream identity follows the entry `crt_next_stream_index`. Nothing is replayed from the capture.
+4. **Order.** The composition follows `0046c2cf.asm` in this sequence:
+   - `reinicio_missao.resetar_para_missao`, which covers MakeMissionName, the path build, the 0xffff stores, IconeReset, Core TerrainReset/MiniMapReset/BatimentResetAll/EnginResetAll, combat ProjectileReset, MessageBoxInit and BallonInit;
+   - FileOpen;
+   - the header prelude (FileSeek, the four layers, 54→66, resources, dimensions, view);
+   - Core `remapear_mundo` (AL 1);
+   - the structure copy;
+   - LoadEngin;
+   - the eight auxiliary loaders, each at its own CALL;
+   - FileClose;
+   - MissionPlaceTerrain (units 0,1,2,11..15 placed; structure 0 placed and inhabited);
+   - the six tails;
+   - AL=1.
+
+   A provider exception stops the run at its CALL and keeps every earlier effect.
+5. **Comparison** (`comparacao_carga_missao`). It covers all 881 final blocks byte for byte, all 938 allocation records (`active/events/flags/index/initial_byte/locks/pointer/size/freed_sha256/kind`), AL and the 1,400 normalized binding requests. Nothing is masked. The only fields not compared are the oracle's native call-site and stack metadata of allocation records, and the 16 profile key strings that the original builds in an uncaptured stack frame. Both are reported.
+
+### Counts
+
+| Run | Steps | AL | Bindings | Allocation records | State |
+|---|---|---|---|---|---|
+| strict (M1 candidate) | 26 completed, stop at EnginInitTechnologie 0x46c5af | — | 1,400/1,400 equal | 938 equal | 3,966 bytes differ: 4×26 Bag bytes, 4 player +6 bytes, 3,858 DGROUP bytes (all six tails' writes) |
+| strict repeated | identical stop and state SHA-256 | — | — | — | deterministic |
+| diagnostic, bridge `ordens` (NOT M1) | 32, return reached | 1 | 1,400/1,400 equal | 938 equal | 881 blocks / 2,659,375 bytes equal |
+
+The strict run takes about 2.9 s.
+
+**Blocking contract (Economy, not edited).** In `proprietarios.PropriedadeConstrucoes`, `ordens` is a copied single 10,816-byte buffer with a 2,704-byte owner stride. It must accept the four live Bag pools of `[0x4e19b8]` by identity: Core's `bolsas_tipos_unidades`, the allocations `0x41781000..0x41784000`. `cauda_carga.definir_tecnologia_unidades` and `aprendizagem.atualizar_ordens` must then address owner j as `ordens[j] + type*104`.
+
+**Non-blocking recommendations (Core).** Accept the exact 16,384-byte minimap allocations. Optionally use u16 views for tiles, regions and the color stack.
+
+**Tests.** `test_composicao_carga_missao.py` ran 10 tests, all passed with none skipped. `scripts/check.py --domain missions` ran 103 tests with 32 optional native skips and passed.
+
+**Not run:** native suites, common gates, integration and committed-main reproduction. Logs are in `.local/stage13-m1-composition-attempt1.log` (pre-commit run, same result), `.local/stage13-m1-composition-final.log` and `.local/stage13-domain.log`.
