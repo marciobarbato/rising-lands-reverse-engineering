@@ -1,0 +1,86 @@
+{
+  "tests": 71,
+  "skipped": 0,
+  "errors": 0,
+  "failures": 0,
+  "unit_bounded_segments": 14056,
+  "unit_native_fixtures": 469,
+  "unit_native_returns": 457,
+  "expected_modifier_checkpoints": 12,
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "scope": "Separate filename, prelude, indexed structure/unit, complete L7 auxiliary chain, condition/objective and unit placement-prefix paths; successful file I/O and the declared KERNEL32 profile binding supplied. Native bodies unpatched; inherited physical/player/bonus tables, data images and Random state are explicit synthetic inputs. MONDE01 placement follows the published discovery domain. No extraction, AI, monster spawning, condition or mission execution.",
+  "native_faults": 0,
+  "real_mission_runtime_tested": false,
+  "prelude_native_calls": 237,
+  "prelude_bounded_segments": 9480,
+  "prelude_checkpoint": "0x42ee1c, before Chemin_Remap executes",
+  "condition_table_native_calls": {
+    "0x458b05": 71,
+    "0x47c404": 41
+  },
+  "condition_table_bounded_segments": 33599,
+  "condition_evaluation_supported": false,
+  "full_entry_native_fixtures": 41,
+  "full_entry_bounded_segments": 10600,
+  "full_entry_native_returns": 40,
+  "full_entry_expected_modifier_stops": 1,
+  "structure_native_caller_fixtures": {
+    "MissionLoad": 41,
+    "MissionLoadName": 41
+  },
+  "structure_bounded_segments": 8706,
+  "structure_stop_before_unit_loader": true,
+  "filename_native_calls": 3268,
+  "filename_bounded_segments": 3268,
+  "filename_native_returns": 3265,
+  "filename_expected_query_stops": 3,
+  "auxiliary_native_caller_fixtures": {
+    "MissionLoad": 160,
+    "MissionLoadName": 160
+  },
+  "auxiliary_bounded_segments": 14270,
+  "auxiliary_stop_before_ghost_loader": true,
+  "placement_prefix_native_fixtures": 102,
+  "placement_prefix_completed_to_structure_boundary": 100,
+  "placement_prefix_expected_dependency_stops": 2,
+  "placement_prefix_bounded_segments": 142,
+  "placement_fixture_unit_load_entries": 102,
+  "placement_fixture_unit_load_segments": 876,
+  "placement_preserved_minimap_resumes": 40,
+  "placement_stop_before_structures": "0x46c16d",
+  "placement_supported_vision_sum_max": 11,
+  "chain_native_caller_entries": {
+    "MissionLoad": 124,
+    "MissionLoadName": 146
+  },
+  "chain_native_returns": 227,
+  "chain_bounded_segments": 324811,
+  "chain_read_bindings": 318287,
+  "chain_profile_bindings": 4744,
+  "chain_declared_boundary_stops": 18,
+  "chain_failure_stops": 25,
+  "chain_stop_before": "FileClose 0x45844c",
+  "chain_compared_image": "0x494000..0x523000 DGROUP+.bss",
+  "reset_native_entries": {
+    "MissionLoad": 259,
+    "MissionLoad_tail": 4,
+    "MissionLoadName": 5,
+    "MissionLoadName_tail": 15,
+    "IconeReset": 164,
+    "MessageBoxInit": 6,
+    "BallonInit": 6
+  },
+  "reset_declared_stops": {
+    "0x3000000": 176,
+    "0x46c35f": 259,
+    "0x458420": 4,
+    "0x46c60f": 5,
+    "0x46c68c": 15
+  },
+  "reset_bounded_segments": 459,
+  "reset_compared_state": "0x494000..0x523000 plus unit pool, four type Bags, projectile pool and players",
+  "reset_provider_dependencies": {
+    "TerrainReset": "0x46c35f / 0x46c60f",
+    "RechercheReset": "0x46c68c"
+  }
+}
