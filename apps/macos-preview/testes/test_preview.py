@@ -1,7 +1,8 @@
-import hashlib,json,subprocess,sys,unittest
+import hashlib,json,os,subprocess,sys,unittest
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT/'src'))
+APP=Path(__file__).resolve().parents[1]
+ROOT=Path(os.environ.get('RISING_APP_ROOT',APP))
+sys.path.insert(0,str(APP/'src'))
 from engine import Preview,MANIFEST
 
 class PreviewTests(unittest.TestCase):
@@ -58,9 +59,17 @@ class PreviewTests(unittest.TestCase):
         self.assertEqual(u['pos'],[10,4]);self.assertEqual(u['state'],7);self.assertFalse(u['blocked'])
         self.assertTrue(p.world.historico_navegacao);self.assertIn([6,11],u['trail'])
         for x,y in u['trail']:self.assertFalse(x==6 and y<11)
-    def test_python_solver_refuses_missing_structures_grid(self):
+    def test_python_solver_consumes_current_structure_grid_contract(self):
         p=Preview();p.reset('parede','python');p.world.regioes[0x808]=0x8000
-        p.order(0,10,4);p.step(200);u=p.state()['units'][0]
+        p.order(0,10,4)
+        for _ in range(4):p.step(200)
+        u=p.state()['units'][0]
+        if 'features' in MANIFEST:
+            # Main now supplies CoresEstruturas; the former missing-grid
+            # expectation belonged to the obsolete preview snapshot.
+            self.assertIsNone(u['blocked']);self.assertEqual(u['pos'],[10,4])
+            self.assertTrue(p.world.historico_navegacao)
+            return
         self.assertIsNotNone(u['blocked']);self.assertIn('estruturas',u['blocked'])
         self.assertNotEqual(u['pos'],u['requested']);self.assertTrue(p.paused)
     def test_invalid_input_has_no_side_effect(self):
@@ -70,7 +79,7 @@ class PreviewTests(unittest.TestCase):
         self.assertEqual(bytes(p.world.unidades),before)
     def test_json_protocol_recovers_after_error(self):
         msgs=[{'id':1,'action':'init'},{'id':2,'action':'select','unit':500},{'id':3,'action':'select','unit':2}]
-        proc=subprocess.run([sys.executable,'-I','-B','src/engine.py'],cwd=ROOT,input='\n'.join(json.dumps(x) for x in msgs)+'\n',text=True,capture_output=True,timeout=15)
+        proc=subprocess.run([sys.executable,'-I','-B',str(APP/'src/engine.py')],cwd=ROOT,input='\n'.join(json.dumps(x) for x in msgs)+'\n',text=True,capture_output=True,timeout=15)
         self.assertEqual(proc.returncode,0);responses=[json.loads(x) for x in proc.stdout.splitlines()]
         self.assertEqual([r['ok'] for r in responses],[True,False,True]);self.assertEqual(responses[2]['state']['selected'],2)
     def test_no_x86_dependency_loaded(self):

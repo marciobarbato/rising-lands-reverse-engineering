@@ -1,0 +1,53 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "inspected_main": "8fd9c41ce6e3b8709cc0d7235e8c31d9b6a68b8d",
+  "intervals": [
+    {
+      "name": "MissionLoad_successful_open_prelude",
+      "start": "0x46c396",
+      "end_exclusive": "0x46c517",
+      "sha256": "41f79acf16a268f253836c9d5cc63626bd7c4778f1982fbb11065982a5d438ac",
+      "file": "cabecalho-0046c396.asm"
+    },
+    {
+      "name": "SetMatiere",
+      "start": "0x46799c",
+      "end_exclusive": "0x4679d0",
+      "sha256": "3e5948508cbfe3b8f414bae2eda9ef73b5daff0f9df8d2a7e642ca491cf0e985",
+      "file": "cabecalho-0046799c.asm"
+    }
+  ],
+  "prerequisite": "MissionLoad successful open and prior global resets are caller-owned",
+  "stop": "0x42ee1c, before every Chemin_Remap effect",
+  "providers": {
+    "pesquisas-paralelas/economia/economia.py": "1f89ab9252fab13b25bc35b8e52aada6c9ea19b1dce51fc1036ee5d515ce5849",
+    "pesquisas-paralelas/graficos-animacao/sequenciais.py": "dbbd6f38d9aea06305e8c3c20501d57ec38e84cc1ac2aeb4fdf1490fd53beb3c"
+  },
+  "original_dependencies": [
+    {
+      "path": "INSTALHD/RISING.INI",
+      "size": 21759,
+      "sha256": "e4762aae51d8aa7bd56280af43a7408a19571ab6dbfcd170fb59cffbcdc8338b"
+    },
+    {
+      "path": "INSTALHD/RISING.SBL",
+      "size": 51451,
+      "sha256": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627"
+    },
+    {
+      "path": "INSTALHD/RISING.RUL",
+      "size": 26199,
+      "sha256": "5409ec12eb7c1c663ac6e2b175070957dc3747f25b571524c941a600b3665d57"
+    }
+  ],
+  "buffers": {
+    "attributes": 65536,
+    "terrain_le_u16": 131072,
+    "objects": 65536,
+    "auxiliary": 65536,
+    "economy": 128,
+    "dimensions_le_u16": 4,
+    "selected_view_le_u16": 4
+  },
+  "scope": "Raw layer/resource/view preparation; no natural regions, collision, selection, units or mission execution."
+}
