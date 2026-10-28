@@ -129,6 +129,30 @@ python3 -B pesquisas-paralelas/graficos-animacao/validar_ordem_projeteis.py
 python3 -B scripts/check.py --domain graphics
 ```
 
+## Complete interior sprite-pass order — fifth continuation stage
+
+`passe_sprites.py` adds `planejar_passe_sprites` and `executar_passe_sprites`. Planning consumes the complete 800×276 unit pool, 100×56 projectile pool, object-code map and the two selected-camera maps (65,536 bytes each). Origin is a pair 0–255 used for both native `AffSprite` arguments and projectile viewport globals. Window dimensions are restricted to **1–32 cells**, with `origin_x+width+8 <= 256` and `origin_y+height+10 <= 256`. Negative origins, margin wraparound and larger viewports are excluded from this stage.
+
+Inputs form a stable frame snapshot: renderers must not change its activity, selection, cell, priority, object or visibility inputs during traversal. Planning runs the independently verified selectors first, then emits exact French renderer identifiers and argument values:
+
+1. Traverse `(width+8) × (height+5)` cells row by row. If the object byte is nonzero and discovery mask 31 is clear, emit `AffVeget(x,y,cell)`. Always emit `AffBatiments(x,y,cell)` and `AffBatimentOmbre(x,y,cell)`, then zero-`+0xAB` units via `AffEngin(x,y,index)` at that cell.
+2. Reset the unit cursor and traverse `(width+8) × (height+10)` cells. Emit `AffProjectile(index)` for every matching low-word projectile cell, then nonzero-`+0xAB` units via `AffEngin(x,y,index)`.
+
+Relative projected cell origins are `x=32*column`, `y=32*row`. The first pass's smaller row extent is preserved: a selected zero-priority unit in the additional lower five rows is not forcibly flushed into a draw call. These relative coordinates do not establish `AffGame`'s full window/scrolling projection.
+
+`executar_passe_sprites` requires four keyword callbacks: `vegetacao(x,y,cell)`, `construcao(x,y,cell)`, `unidade(x,y,index)`, and `projetil(index)`. Return values are ignored; the Python executor returns the number of callbacks invoked. `AffBatimentOmbre` is a literal original RET at `0x40F49B` and is retained in the plan for exact traces without invoking a callback. Missing required callbacks raise `TypeError`; non-callable callbacks raise `ValueError` before any effect. A callback exception propagates immediately, preserving earlier callback effects; there is no rollback. Actual renderer effects, including cosmetic RNG where applicable, remain those callbacks' responsibility.
+
+Planning does not mutate input buffers or run renderer callbacks. Invalid lengths/origin/window values raise `ValueError`; a viewport whose margins cross the map boundary raises `NotImplementedError`. The event plan supports raw byte states and object codes as caller inputs; it does not claim that every emitted renderer handler is reconstructed.
+
+Original evidence: complete `AffSprite 0x416864..0x416E41`, SHA-256 `e3a5445a1ef8b30dbdcb1b41612ff2ebfb612070d49f8673b252af7f1fd8bd51`, with shared return epilogue `0x410878..0x41087E`. [Exact caller bytes and committed-provider hashes](../pesquisas-paralelas/graficos-animacao/evidencias/passe-sprites.json).
+
+Fresh validation: **105 bounded native calls / 3,578,331 instructions**, comprising 55 complete-caller trace fixtures, eight complete native sprite-pass pixel scenes, 40 original unit-type initializations and two bank setup calls. Every scene/trace reaches the actual return with a balanced stack; zero skipped cases, expected exceptions, limit failures or dependency checkpoints. Trace fixtures capture renderer callbacks; the eight indexed comparisons run the original tree, gate, unit and type-1 projectile handlers **without renderer stubs**. Reconstructed composition matches all eight exact indexed buffers. The supplied patterned background is synthetic and the terrain pass is not executed. Projectile layers in the demonstration are independently captured native commands, so public projectile sprite mapping remains a separate gap. Seven new saved-capture regressions pass. [Saved complete-pass report](../pesquisas-paralelas/graficos-animacao/validacao/x86-passe-sprites.json), [indexed scene preview](../pesquisas-paralelas/graficos-animacao/artefatos/cena-passe-sprites.png).
+
+```sh
+python3 -B pesquisas-paralelas/graficos-animacao/validar_passe_sprites.py
+python3 -B scripts/check.py --domain graphics
+```
+
 ## Remaining component inventory — continuation after the gate facade
 
 This inventory distinguishes reconstructed behavior, captured original behavior, and runtime integration. The integrated gate facade at `ff4bc269c6d8534f4683bd0429072286ea8eaaf1` has exact indexed comparisons; it is not yet exercised by the macOS consumer or a complete loaded mission.
@@ -139,7 +163,7 @@ This inventory distinguishes reconstructed behavior, captured original behavior,
 | Other building facades and overlays | `AffBatiments 0x407DD3..0x40F49C`; only the Sanctuary subset and gate facade are reconstructed | Recover per-type/mode layers, clipping and anchors against original buffers |
 | Unit action handlers | `AffEngin` dispatches to attack `0x41374C`, construction `0x414495`, work `0x414A8A`, death `0x41559A` | Map each supported type/action input and coordinate simulation phase producers |
 | Projectile display inputs | The 100-record display selection/sort and full/low-word cell queries are reconstructed and independently validated | Connect the committed pool view to the two scene passes; recover public `AffProjectile` sprite mappings |
-| Scene traversal/projection | `AffSprite 0x416864..0x416E41` is the vegetation/building/unit caller; its selection/sort prefix is now reconstructed and independently validated through `0x416A6C` | Recover both scene passes, projection, projectile interleaving and viewport edge behavior |
+| Scene traversal/projection | Complete interior `AffSprite` planning/execution and relative projection are reconstructed; native complete-pass traces and bounded indexed scenes match | Recover margin wraparound/negative origins, `AffGame` projection/cadence and a real-mission consumer |
 | Visibility, palette and clocks | Indexed composition/shadow helpers and clock prefix are reconstructed; visibility bytes are explicit runtime inputs | Connect validated world providers and original frame cadence |
 | Real-mission consumer | V6 reads all serialized mission-1 object codes; the preview uses older pinned snapshots | Coordinate complete world loading/remapping, dynamic render state, input, effects and original-reference runtime scenes |
 
@@ -148,6 +172,8 @@ The gate-tail stage proves the explicit type-12 returns in `BatimentPoseCadre 0x
 Original direct-call sites are `0x416B8A -> AffVeget`, `0x416BBD -> AffBatiments`, and `0x416C5D/0x416E2F -> AffEngin`. Recovering the prefix does not by itself reconstruct those passes or projectile integration.
 
 The projectile-display slice is read-only with respect to combat state. Both visibility predicates use mask 31; the query uses pixel-coordinate-derived keys and the swap sort chooses the last equal candidate. These independently validated differences must remain distinct from the unit selector and physical projectile targeting.
+
+The complete interior scene stage closes the two caller passes and projectile/unit interleaving. It preserves the asymmetric margins and relative projection while keeping callbacks and their supported sprite domains explicit. The terrain pass, global frame caller, boundary viewports and full mission/runtime operation remain independent missing components.
 
 ## Terrain objects and sequential codes
 
