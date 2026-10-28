@@ -1,0 +1,519 @@
+{
+  "kind": "Reviewed REA excerpts; not a complete Evidence bundle",
+  "rea_source_revision": "b9a8f8e9f25feb9cc97bf4960748f2bdf8c898bc",
+  "provider": "Ghidra 12.2 private read-only copy",
+  "original_oracle_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "normalized_analysis_sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "review": "Watcom signatures are fallible: volume is full EAX with preserved EDX; Ask consumes AX,DX,BL. Sound insertion remains an explicit unimplemented dependency, not a completed queue event.",
+  "records": [
+    {
+      "source_evidence_id": "ev_cc938aecafb6f4ef54f1592e986086782df1cef987b0b81edec5bf6e4e8171af",
+      "source_record_sha256": "9459a6d26a921c524a9ec2739228d4db893c9a720bf97288a17f5df07f8ea9a9",
+      "operation": "analyze_function",
+      "parameters": {
+        "procedure": "0x440c5d"
+      },
+      "analysis_profile_digest": "33da723a26733dd8b59046612d0c42bf95bb1b59c46a63f17b127521af169a3d",
+      "reviewed_result": {
+        "procedure": {
+          "address": "0x440c5d",
+          "name": "OriginaisSBL::EnginGetVolume",
+          "symbol": {
+            "primary": true,
+            "dynamic": false,
+            "external": false,
+            "type": "function",
+            "source": "user_defined"
+          },
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x440c5d",
+                "end": "0x440d5d"
+              }
+            ],
+            "total_bytes": 257,
+            "span_bytes": 257,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "undefined8 __fastcall EnginGetVolume(undefined4 param_1, undefined4 param_2)",
+          "locals": [
+            {
+              "description": "undefined4 local_18 @ Stack[-0x18]:4",
+              "provenance": "ghidra-function-database"
+            }
+          ]
+        },
+        "pseudocode": "\nundefined8 __fastcall OriginaisSBL::EnginGetVolume(undefined4 param_1,undefined4 param_2)\n\n{\n  uint in_EAX;\n  int iVar1;\n  undefined4 extraout_ECX;\n  uint uVar2;\n  \n  iVar1 = Distance2d(tabela_unidades[in_EAX & 0xffff].celula_atual / 0x100,\n                     DAT_00508726 / 2 + DAT_00508722);\n  uVar2 = 0;\n  if (iVar1 < 0x92) {\n    uVar2 = 0x100;\n  }\n  else if ((iVar1 < 0x92) || (300 < iVar1)) {\n    if ((300 < iVar1) && (iVar1 < 600)) {\n      uVar2 = 100;\n    }\n  }\n  else {\n    uVar2 = 0xb4;\n  }\n  iVar1 = EnginEstSelectionne(extraout_ECX,in_EAX & 0xffff);\n  if ((char)iVar1 == '\\0') {\n    uVar2 = uVar2 / 2;\n  }\n  return CONCAT44(param_2,uVar2);\n}\n\n",
+        "assembly": [
+          "0x440c5d: PUSH EBX",
+          "0x440c5e: PUSH ECX",
+          "0x440c5f: PUSH EDX",
+          "0x440c60: PUSH ESI",
+          "0x440c61: PUSH EDI",
+          "0x440c62: SUB ESP, 0x4",
+          "0x440c65: MOV ESI, EAX",
+          "0x440c67: XOR EAX, EAX",
+          "0x440c69: MOV AX, SI",
+          "0x440c6c: MOV EBX, EAX",
+          "0x440c6e: SHL EBX, 0x4",
+          "0x440c71: ADD EBX, EAX",
+          "0x440c73: SHL EBX, 0x2",
+          "0x440c76: ADD EBX, EAX",
+          "0x440c78: MOV EAX, [0x004e19a0]",
+          "0x440c7d: MOV BX, word ptr [EAX + EBX*0x4 + 0x8]",
+          "0x440c82: AND EBX, 0xffff",
+          "0x440c88: MOV ECX, 0x100",
+          "0x440c8d: MOV EDX, EBX",
+          "0x440c8f: MOV EAX, EBX",
+          "0x440c91: SAR EDX, 0x1f",
+          "0x440c94: IDIV ECX",
+          "0x440c96: MOV EDI, EDX",
+          "0x440c98: MOV EDX, EBX",
+          "0x440c9a: MOV EAX, EBX",
+          "0x440c9c: SAR EDX, 0x1f",
+          "0x440c9f: IDIV ECX",
+          "0x440ca1: XOR EDX, EDX",
+          "0x440ca3: MOV DX, word ptr [0x00508724]",
+          "0x440caa: MOV EBX, EAX",
+          "0x440cac: MOV EAX, EDX",
+          "0x440cae: SAR EDX, 0x1f",
+          "0x440cb1: SUB EAX, EDX",
+          "0x440cb3: SAR EAX, 0x1",
+          "0x440cb5: XOR EDX, EDX",
+          "0x440cb7: MOV DX, word ptr [0x00508720]",
+          "0x440cbe: ADD EAX, EDX",
+          "0x440cc0: XOR EDX, EDX",
+          "0x440cc2: MOV DX, word ptr [0x00508726]",
+          "0x440cc9: MOV dword ptr [ESP], EAX",
+          "0x440ccc: MOV EAX, EDX",
+          "0x440cce: SAR EDX, 0x1f",
+          "0x440cd1: SUB EAX, EDX",
+          "0x440cd3: SAR EAX, 0x1",
+          "0x440cd5: XOR EDX, EDX",
+          "0x440cd7: XOR ECX, ECX",
+          "0x440cd9: MOV DX, word ptr [0x00508722]",
+          "0x440ce0: MOV CX, BX",
+          "0x440ce3: ADD EAX, EDX",
+          "0x440ce5: XOR EDX, EDX",
+          "0x440ce7: XOR EBX, EBX",
+          "0x440ce9: MOV DX, AX",
+          "0x440cec: XOR EAX, EAX",
+          "0x440cee: MOV BX, DI",
+          "0x440cf1: MOV AX, word ptr [ESP]",
+          "0x440cf5: CALL 0x00479555",
+          "0x440cfa: MOV EDX, EAX",
+          "0x440cfc: XOR EBX, EBX",
+          "0x440cfe: CMP EAX, 0x91",
+          "0x440d03: JG 0x00440d0c",
+          "0x440d05: MOV EBX, 0x100",
+          "0x440d0a: JMP 0x00440d31",
+          "0x440d0c: JLE 0x00440d1c",
+          "0x440d0e: CMP EAX, 0x12c",
+          "0x440d13: JG 0x00440d1c",
+          "0x440d15: MOV EBX, 0xb4",
+          "0x440d1a: JMP 0x00440d31",
+          "0x440d1c: CMP EDX, 0x12c",
+          "0x440d22: JLE 0x00440d31",
+          "0x440d24: CMP EDX, 0x258",
+          "0x440d2a: JGE 0x00440d31",
+          "0x440d2c: MOV EBX, 0x64",
+          "0x440d31: XOR EAX, EAX",
+          "0x440d33: XOR EDX, EDX",
+          "0x440d35: MOV AL, [0x00508041]",
+          "0x440d3a: MOV DX, SI",
+          "0x440d3d: CALL 0x00472174",
+          "0x440d42: TEST AL, AL",
+          "0x440d44: JNZ 0x00440d53",
+          "0x440d46: MOV EDX, EBX",
+          "0x440d48: MOV EAX, EBX",
+          "0x440d4a: SAR EDX, 0x1f",
+          "0x440d4d: SUB EAX, EDX",
+          "0x440d4f: SAR EAX, 0x1",
+          "0x440d51: MOV EBX, EAX",
+          "0x440d53: MOV EAX, EBX",
+          "0x440d55: ADD ESP, 0x4",
+          "0x440d58: POP EDI",
+          "0x440d59: POP ESI",
+          "0x440d5a: POP EDX",
+          "0x440d5b: POP ECX",
+          "0x440d5c: POP EBX",
+          "0x440d5d: RET"
+        ],
+        "callees": [
+          {
+            "address": "0x472174",
+            "name": "OriginaisSBL::EnginEstSelectionne",
+            "symbol": {
+              "primary": true,
+              "dynamic": false,
+              "external": false,
+              "type": "function",
+              "source": "user_defined"
+            },
+            "classification": {
+              "external": false,
+              "thunk": false,
+              "thunk_target": null,
+              "provenance": "ghidra-function-manager"
+            },
+            "body": {
+              "available": true,
+              "provenance": "ghidra-function-body-address-set",
+              "ranges": [
+                {
+                  "start": "0x472174",
+                  "end": "0x4721a7"
+                }
+              ],
+              "total_bytes": 52,
+              "span_bytes": 52,
+              "non_contiguous": false,
+              "contains_entry": true
+            }
+          },
+          {
+            "address": "0x479555",
+            "name": "OriginaisSBL::Distance2d",
+            "symbol": {
+              "primary": true,
+              "dynamic": false,
+              "external": false,
+              "type": "function",
+              "source": "user_defined"
+            },
+            "classification": {
+              "external": false,
+              "thunk": false,
+              "thunk_target": null,
+              "provenance": "ghidra-function-manager"
+            },
+            "body": {
+              "available": true,
+              "provenance": "ghidra-function-body-address-set",
+              "ranges": [
+                {
+                  "start": "0x479555",
+                  "end": "0x4795ae"
+                }
+              ],
+              "total_bytes": 90,
+              "span_bytes": 90,
+              "non_contiguous": false,
+              "contains_entry": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "source_evidence_id": "ev_c2afe2ebc29e11867f591a748eb9b8268241a76a54bededfd9f37b13af181fc6",
+      "source_record_sha256": "edd3d9931be2f24400086932bd4ea675cf7d1b2f3f59fd3c7dcbe28a678707be",
+      "operation": "analyze_function",
+      "parameters": {
+        "procedure": "0x440d5e"
+      },
+      "analysis_profile_digest": "33da723a26733dd8b59046612d0c42bf95bb1b59c46a63f17b127521af169a3d",
+      "reviewed_result": {
+        "procedure": {
+          "address": "0x440d5e",
+          "name": "OriginaisSBL::EnginAsk",
+          "symbol": {
+            "primary": true,
+            "dynamic": false,
+            "external": false,
+            "type": "function",
+            "source": "user_defined"
+          },
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x440d5e",
+                "end": "0x440def"
+              }
+            ],
+            "total_bytes": 146,
+            "span_bytes": 146,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "undefined __fastcall EnginAsk(undefined4 param_1, uint param_2)",
+          "locals": []
+        },
+        "pseudocode": "\nvoid __fastcall OriginaisSBL::EnginAsk(undefined4 param_1,uint param_2)\n\n{\n  int iVar1;\n  UnidadeParcial *pUVar2;\n  ushort in_AX;\n  undefined4 uVar3;\n  uint uVar4;\n  undefined4 extraout_ECX;\n  uint extraout_ECX_00;\n  undefined1 unaff_BL;\n  undefined8 uVar5;\n  \n  pUVar2 = tabela_unidades;\n  uVar3 = TerrainEstDecouvert(CONCAT31((int3)((uint)param_1 >> 8),unaff_BL),(uint)DAT_00508041);\n  if ((char)uVar3 != '\\0') {\n    uVar5 = EnginGetVolume(extraout_ECX,param_2 & 0xffff);\n    uVar4 = (uint)uVar5;\n    if ((int)((ulonglong)uVar5 >> 0x20) == 0x10) {\n      uVar4 = 0x100;\n    }\n    iVar1 = *(int *)&pUVar2[in_AX].field_0x104;\n    pUVar2[in_AX].field_0xf9 = (char)extraout_ECX_00;\n    if (iVar1 == -1) {\n      PlaySnd_PostSound(extraout_ECX_00 & 0xff,\n                        (param_2 & 0xffff) << 8 | (uint)pUVar2[in_AX].tipo_id << 0x10,uVar4);\n    }\n  }\n  return;\n}\n\n",
+        "assembly": [
+          "0x440d5e: PUSH ECX",
+          "0x440d5f: PUSH ESI",
+          "0x440d60: PUSH EDI",
+          "0x440d61: MOV EDI, EDX",
+          "0x440d63: MOV CL, BL",
+          "0x440d65: XOR ESI, ESI",
+          "0x440d67: MOV SI, AX",
+          "0x440d6a: MOV EAX, ESI",
+          "0x440d6c: SHL EAX, 0x4",
+          "0x440d6f: ADD EAX, ESI",
+          "0x440d71: SHL EAX, 0x2",
+          "0x440d74: ADD EAX, ESI",
+          "0x440d76: MOV EBX, dword ptr [0x004e19a0]",
+          "0x440d7c: SHL EAX, 0x2",
+          "0x440d7f: XOR EDX, EDX",
+          "0x440d81: ADD EBX, EAX",
+          "0x440d83: XOR EAX, EAX",
+          "0x440d85: MOV DL, byte ptr [0x00508041]",
+          "0x440d8b: MOV AX, word ptr [EBX + 0x8]",
+          "0x440d8f: CALL 0x004766f0",
+          "0x440d94: TEST AL, AL",
+          "0x440d96: JZ 0x00440dec",
+          "0x440d98: XOR EDX, EDX",
+          "0x440d9a: MOV EAX, ESI",
+          "0x440d9c: MOV DX, DI",
+          "0x440d9f: CALL 0x00440c5d",
+          "0x440da4: CMP EDX, 0x10",
+          "0x440da7: JNZ 0x00440dae",
+          "0x440da9: MOV EAX, 0x100",
+          "0x440dae: MOV EDX, dword ptr [EBX + 0x104]",
+          "0x440db4: MOV byte ptr [EBX + 0xf9], CL",
+          "0x440dba: CMP EDX, -0x1",
+          "0x440dbd: JNZ 0x00440dec",
+          "0x440dbf: PUSH EAX",
+          "0x440dc0: XOR EDX, EDX",
+          "0x440dc2: LEA EAX, [EBX + 0x104]",
+          "0x440dc8: MOV DL, byte ptr [EBX + 0x1]",
+          "0x440dcb: MOV EBX, EDX",
+          "0x440dcd: XOR EDX, EDX",
+          "0x440dcf: MOV DX, DI",
+          "0x440dd2: SHL EBX, 0x10",
+          "0x440dd5: SHL EDX, 0x8",
+          "0x440dd8: AND ECX, 0xff",
+          "0x440dde: OR EDX, EBX",
+          "0x440de0: MOV EBX, EAX",
+          "0x440de2: MOV EAX, 0x50",
+          "0x440de7: CALL 0x0048aa79",
+          "0x440dec: POP EDI",
+          "0x440ded: POP ESI",
+          "0x440dee: POP ECX",
+          "0x440def: RET"
+        ],
+        "callees": [
+          {
+            "address": "0x440c5d",
+            "name": "OriginaisSBL::EnginGetVolume",
+            "symbol": {
+              "primary": true,
+              "dynamic": false,
+              "external": false,
+              "type": "function",
+              "source": "user_defined"
+            },
+            "classification": {
+              "external": false,
+              "thunk": false,
+              "thunk_target": null,
+              "provenance": "ghidra-function-manager"
+            },
+            "body": {
+              "available": true,
+              "provenance": "ghidra-function-body-address-set",
+              "ranges": [
+                {
+                  "start": "0x440c5d",
+                  "end": "0x440d5d"
+                }
+              ],
+              "total_bytes": 257,
+              "span_bytes": 257,
+              "non_contiguous": false,
+              "contains_entry": true
+            }
+          },
+          {
+            "address": "0x4766f0",
+            "name": "OriginaisSBL::TerrainEstDecouvert",
+            "symbol": {
+              "primary": true,
+              "dynamic": false,
+              "external": false,
+              "type": "function",
+              "source": "user_defined"
+            },
+            "classification": {
+              "external": false,
+              "thunk": false,
+              "thunk_target": null,
+              "provenance": "ghidra-function-manager"
+            },
+            "body": {
+              "available": true,
+              "provenance": "ghidra-function-body-address-set",
+              "ranges": [
+                {
+                  "start": "0x4766f0",
+                  "end": "0x476709"
+                }
+              ],
+              "total_bytes": 26,
+              "span_bytes": 26,
+              "non_contiguous": false,
+              "contains_entry": true
+            }
+          },
+          {
+            "address": "0x48aa79",
+            "name": "OriginaisSBL::PlaySnd_PostSound",
+            "symbol": {
+              "primary": true,
+              "dynamic": false,
+              "external": false,
+              "type": "function",
+              "source": "user_defined"
+            },
+            "classification": {
+              "external": false,
+              "thunk": false,
+              "thunk_target": null,
+              "provenance": "ghidra-function-manager"
+            },
+            "body": {
+              "available": true,
+              "provenance": "ghidra-function-body-address-set",
+              "ranges": [
+                {
+                  "start": "0x48aa79",
+                  "end": "0x48aabf"
+                }
+              ],
+              "total_bytes": 71,
+              "span_bytes": 71,
+              "non_contiguous": false,
+              "contains_entry": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "source_evidence_id": "ev_2dad04c839fa60ee123bc7c07d009cd65fa6cefa9844d502397c61025ddb1003",
+      "source_record_sha256": "5d3167c7fab7c48979a4c72bcc19543dc7e8e160ace5a3c862724a71630c9eea",
+      "operation": "analyze_function",
+      "parameters": {
+        "procedure": "0x48aa79"
+      },
+      "analysis_profile_digest": "33da723a26733dd8b59046612d0c42bf95bb1b59c46a63f17b127521af169a3d",
+      "reviewed_result": {
+        "procedure": {
+          "address": "0x48aa79",
+          "name": "OriginaisSBL::PlaySnd_PostSound",
+          "symbol": {
+            "primary": true,
+            "dynamic": false,
+            "external": false,
+            "type": "function",
+            "source": "user_defined"
+          },
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x48aa79",
+                "end": "0x48aabf"
+              }
+            ],
+            "total_bytes": 71,
+            "span_bytes": 71,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "uint __fastcall PlaySnd_PostSound(uint param_1, uint param_2, uint param_3)",
+          "locals": []
+        },
+        "pseudocode": "\nuint __fastcall OriginaisSBL::PlaySnd_PostSound(uint param_1,uint param_2,uint param_3)\n\n{\n  uint in_EAX;\n  uint uVar1;\n  undefined *puVar2;\n  \n  if (in_EAX < 0x42) {\n    if (in_EAX != 0x41) {\n      return param_2;\n    }\n    puVar2 = &DAT_00521fc8;\n  }\n  else if (in_EAX < 0x43) {\n    puVar2 = &DAT_00521fe4;\n  }\n  else {\n    if (in_EAX != 0x50) {\n      return param_2;\n    }\n    puVar2 = &DAT_00522000;\n  }\n  uVar1 = HandlSnd_Insert(param_1 & 0xff,(int)puVar2,param_3);\n  return uVar1;\n}\n\n",
+        "assembly": [
+          "0x48aa79: PUSH ESI",
+          "0x48aa7a: MOV ESI, EAX",
+          "0x48aa7c: MOV EAX, EDX",
+          "0x48aa7e: MOV EDX, dword ptr [ESP + 0x8]",
+          "0x48aa82: CMP ESI, 0x42",
+          "0x48aa85: JC 0x0048aab7",
+          "0x48aa87: JBE 0x0048aaa7",
+          "0x48aa89: CMP ESI, 0x50",
+          "0x48aa8c: JZ 0x0048aaaf",
+          "0x48aa8e: POP ESI",
+          "0x48aa8f: RET 0x4",
+          "0x48aa92: PUSH EDX",
+          "0x48aa93: MOV EDX, 0x521fc8",
+          "0x48aa98: AND ECX, 0xff",
+          "0x48aa9e: CALL 0x0048a218",
+          "0x48aaa3: POP ESI",
+          "0x48aaa4: RET 0x4",
+          "0x48aaa7: PUSH EDX",
+          "0x48aaa8: MOV EDX, 0x521fe4",
+          "0x48aaad: JMP 0x0048aa98",
+          "0x48aaaf: PUSH EDX",
+          "0x48aab0: MOV EDX, 0x522000",
+          "0x48aab5: JMP 0x0048aa98",
+          "0x48aab7: CMP ESI, 0x41",
+          "0x48aaba: JZ 0x0048aa92",
+          "0x48aabc: POP ESI",
+          "0x48aabd: RET 0x4"
+        ],
+        "callees": [
+          {
+            "address": "0x48a218",
+            "name": "OriginaisSBL::HandlSnd_Insert",
+            "symbol": {
+              "primary": true,
+              "dynamic": false,
+              "external": false,
+              "type": "function",
+              "source": "user_defined"
+            },
+            "classification": {
+              "external": false,
+              "thunk": false,
+              "thunk_target": null,
+              "provenance": "ghidra-function-manager"
+            },
+            "body": {
+              "available": true,
+              "provenance": "ghidra-function-body-address-set",
+              "ranges": [
+                {
+                  "start": "0x48a218",
+                  "end": "0x48a437"
+                }
+              ],
+              "total_bytes": 544,
+              "span_bytes": 544,
+              "non_contiguous": false,
+              "contains_entry": true
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

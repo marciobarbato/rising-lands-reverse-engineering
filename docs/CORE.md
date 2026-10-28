@@ -59,6 +59,8 @@ Neighbor reads use the linear 65,536-cell object grid. Column 255 can read the n
 
 `colocacao_saida.py` connects original `SetSortEngin` to existing collision, discovery/light and minimap effects on the live physical world. `retomar_colocacao_saida` consumes the experience stop at `0x420f8a`, places the existing unit, reloads live building `+7c` and uses the existing movement-order provider, returning at `0x420f9e` before conditional request/audio. The [physical exit contract](core/UNIT_EXIT.md) preserves old occupancy, activity rules, search completion and partial effects. Four independent original captures, whole-world comparisons and native call traces validate the declared type/owner/vision domain; actual mission placement `PlaceEngin` is a separate remaining provider.
 
+`voz_unidades.py` supplies original read-only volume and bounded unit request behavior, with owner/flag selection query in `selecao_unidades.py`. `retomar_solicitacao_saida` advances supported physical-output handoffs to economy's `0x420fb7` cleanup boundary. Active/hidden sound returns are complete; an inactive visible handle exposes the exact pending original sound insertion with earlier +f9 stored. The [request contract](core/UNIT_REQUEST.md) records explicit viewport data, signed distance thresholds, full EAX volume, native payloads, inherited handle retention and 5,196 original entries in 5,532 bounded segments. Actual audio insertion/playback remains a dependency.
+
 ## Physical gate simulation
 
 `portoes.py` reconstructs `HerseEnAnimation` (`0x4191FD`), phase/orientation queries (`0x41934F`, `0x419379`, `0x4193AC`), release/block commands (`0x4193D4`, `0x4195CA`), toggle (`0x419917`), and the type-12 `BatimentNextEtape` branch (`0x427BB7..0x427D5D`).

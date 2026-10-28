@@ -1,0 +1,36 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 13,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_voz_unidades.DiferencialVozUnidades.test_complete_joined_prefix_foreign_cleanup_or_original_post_sound_stop",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_voz_unidades.DiferencialVozUnidades.test_every_discovery_byte_hidden_guard_and_visible_active_handle_returns",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_voz_unidades.DiferencialVozUnidades.test_missing_viewport_and_post_sound_exact_payload_partial_state",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_voz_unidades.DiferencialVozUnidades.test_production_live_building_owner_camera_and_request_boundaries",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_voz_unidades.DiferencialVozUnidades.test_selection_all_flag_bytes_owners_activity_and_indices",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_voz_unidades.DiferencialVozUnidades.test_volume_distance_threshold_grid_selection_camera_words_and_overflow",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "scope": "Read-only selection/volume; bounded voice and production request; sound insertion remains explicit."
+}

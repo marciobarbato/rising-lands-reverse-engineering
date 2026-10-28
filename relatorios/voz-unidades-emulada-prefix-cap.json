@@ -1,0 +1,23 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": true,
+  "tests": 13,
+  "failures": 0,
+  "errors": 1,
+  "skips": [],
+  "bounded_x86_executions": 5137,
+  "success": false,
+  "scope": "Read-only selection/volume; bounded voice and production request; sound insertion remains explicit.",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "unicorn": "2.1.4",
+  "reached_stops": {
+    "0x420fb7": 515,
+    "0x440de7": 161,
+    "0x3000000": 4452,
+    "0x440d9f": 8
+  },
+  "expected_native_exceptions": 0,
+  "expected_execution_limits": 0,
+  "expected_python_dependency_exceptions_in_differential": 184,
+  "native_subcalls": "Unpatched query/voice/caller subcalls; sound insertion stops before CALL"
+}
