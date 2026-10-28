@@ -14,7 +14,7 @@ from extrair_evidencias import RAIZ, HASH_EXE, imagem_pe, simbolos, exigir_area_
 from graficos import Catalogo
 from bancada_x86 import unicorn
 from bancada_quadro import BancadaQuadro, LIMITE_QUADRO, CHECKPOINT_HUD, RENDERIZADORES, CODIGO
-from cenas_quadro import (GLOBAIS, cena_monde01, cenas_sinteticas, mundo_monde01, fundo, resumo_mundo, sha,
+from cenas_quadro import (GLOBAIS, cena_monde01, cenas_sinteticas, mundo_monde01, fundo, resumo_mundo, sha, fixar_monde01, monde01_fixado,
     GATILHOS_FACHADA, CODIGOS_AFFVEGET)
 from capturar_ciclo_cache import json_compacto, HASH_NORMALIZADO
 
@@ -94,7 +94,10 @@ def capturar():
     sombra, eclairage = tabelas()
     b = BancadaQuadro(catalogo); _, alocacao = b.cache_alloc(); jogadores = b.calcular_tabelas_jogador()
     registros = {t: b.inicializar_tipo(t) for t in (0, 2, 5, 6, 7, 9)}
-    base = mundo_monde01(); cenas = [cena_monde01(base)]+cenas_sinteticas(base, registros)
+    import subprocess
+    revisao = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=RAIZ, capture_output=True, text=True, check=True).stdout.strip()
+    manifesto = fixar_monde01(mundo_monde01(), revisao=revisao); base = monde01_fixado()
+    cenas = [cena_monde01(base)]+cenas_sinteticas(base, registros)
     quadros = []
     for cena in cenas:
         if cena['antes'] == 'InitCache': b.init_cache()
@@ -116,7 +119,7 @@ def capturar():
             eclairage_source='validacao/x86-eclairage.json PLATGAME 60%'),
         palette_alloc=dict(pointers={hex(0x4e24b0+4*i): hex(b.u32(0x4e24b0+4*i)) for i in range(11)}),
         player_tables_sha256=[sha(t) for t in jogadores], cache_alloc=alocacao, unit_initializer_records={str(t): r.hex() for t, r in registros.items()},
-        monde01_checkpoint=dict(mission_stop=base['parada_missao'], eta_sha256=base['eta_sha256']),
+        monde01_checkpoint=dict(manifesto, pinned_file='evidencias/monde01-checkpoint-quadro.zlib'),
         frames=quadros, totals=dict(native_entries=b.execucoes, instructions_observed=b.instrucoes, bound_calls=b.registro.marca()),
         seconds=round(time.monotonic()-inicio, 3))
     (RAIZ/'evidencias/captura-quadro-original.json').write_text(json_compacto(captura)+'\n')

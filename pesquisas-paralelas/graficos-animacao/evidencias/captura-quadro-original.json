@@ -136,26 +136,49 @@
   "9": "00090000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000200000000ff000000000000000808020400000003030000000000000000000000000000ff000000000000000000000000000000000000000000000000000000000001080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
  },
  "monde01_checkpoint": {
-  "mission_stop": "DependenciaColocacaoMissao: Vision radius above the validated 0..8 sum requires DecouvreTerrain; prior record/collision effects retained",
-  "eta_sha256": "19237b8c3f3c0c76022276da229bec727b17603440823c43561aba159dd47015"
+  "checkout_revision": "7e18ad00cdc39788726880b16422b13405ff3e6e",
+  "mission_stop": null,
+  "eta_sha256": "19237b8c3f3c0c76022276da229bec727b17603440823c43561aba159dd47015",
+  "file_sha256": "540470d253b74ecc9131c64045ebe21e4df79fc1bf39f88d68f4979fce2a0f2f",
+  "buffers": {
+   "terreno": "8251b2d21bdce6eebee8980c1bcd0c8b74b2af107af6ae86be2e3e70ac2e66ab",
+   "objetos": "cf2bbd9c5efea36bb3f6ea074ce7cfb12cb9ac293ce25177c2fcf3fc174c92ad",
+   "auxiliares": "d95bd7b0170042e6cabe8eac184e995b4b91eab71532e8f833ac3604af7a2d8d",
+   "atributos": "f4e996263e169953befcbdc36273661c60c9cdf89bd2a13917410a8d22fc44ba",
+   "regioes": "c2ba9226dc98fcfe0e99a14612857454ad7238b730a92624ea92448c9df91a53",
+   "unidades": "eaf46ccc7f7051480b382282e86d594495e4198c11ca5b4f381f2c945868c740",
+   "descoberta0": "2ba0f2abe4d17130dcf241ddd6d6abfc327d4acdcac203a5be52ccbe3779f1a1",
+   "descoberta1": "584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118",
+   "descoberta2": "584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118",
+   "descoberta3": "584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118",
+   "iluminacao0": "433dfbfb1c137f48ae4e98aa0b0b37943ea727229aab8a9c9dbdda46002e5e9a",
+   "iluminacao1": "584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118",
+   "iluminacao2": "584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118",
+   "iluminacao3": "584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118",
+   "contagem_luz0": "979d01d175280bb754b98b2f4d83d11dda99012d86f893ce35624000e354781b",
+   "contagem_luz1": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+   "contagem_luz2": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+   "contagem_luz3": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"
+  },
+  "pinned_file": "evidencias/monde01-checkpoint-quadro.zlib"
  },
  "frames": [
   {
    "nome": "monde01_checkpoint",
    "antes": "InitCache",
-   "sinteticos": ["viewport origin (0,0), camera 0, frame counter 0, divisor 1 and the 800x600 mode are declared","missions declare a 0xA5 unit-pool pre-fill, regions [1]*65536, a selection pattern, a search context and a 0x31 bonus table","projectile pool and structure pool are zero: ProjectileReset/structure copy are not composed by the checkpoint","surface starts from a declared background pattern; DirectDraw locks one fixture buffer"],
+   "sinteticos": ["committed MONDE01 load: MissionPlaceTerrain unit scan completed to the pre-structure checkpoint 0x46C16D","viewport origin (0,0), camera 0, frame counter 0, divisor 1 and the 800x600 mode are declared","missions declare a 0xA5 unit-pool pre-fill, regions [1]*65536, a selection pattern, a search context and a 0x31 bonus table","projectile pool and structure pool are zero: ProjectileReset/structure copy are not composed by the checkpoint","surface starts from a declared background pattern; DirectDraw locks one fixture buffer"],
    "entradas": {
+    "parada_missao": null,
+    "eta_sha256": "19237b8c3f3c0c76022276da229bec727b17603440823c43561aba159dd47015",
     "terreno": "8251b2d21bdce6eebee8980c1bcd0c8b74b2af107af6ae86be2e3e70ac2e66ab",
     "objetos": "cf2bbd9c5efea36bb3f6ea074ce7cfb12cb9ac293ce25177c2fcf3fc174c92ad",
     "auxiliares": "d95bd7b0170042e6cabe8eac184e995b4b91eab71532e8f833ac3604af7a2d8d",
     "atributos": "f4e996263e169953befcbdc36273661c60c9cdf89bd2a13917410a8d22fc44ba",
     "regioes": "c2ba9226dc98fcfe0e99a14612857454ad7238b730a92624ea92448c9df91a53",
-    "unidades": "4bd9168b0a8ea6b244130b767830d7c09b7da5d3d3d5950fe3390c2ccd8661a4",
-    "descoberta": ["278603eebcc7d19557b02c50e9262eceb452f484e0c4a61ad6e72c21d4ed0a2d","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118"],
-    "iluminacao": ["3eee056eefdfd90dcc2ccfc1c1951e1691534a4374f7b830f572a6e02eb80fa1","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118"],
-    "contagem_luz": ["b7a78f05d98593a0bae35e60d758fc62e578e77cb9fccbb30d1d5f9a9f3df77c","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"],
-    "parada_missao": "DependenciaColocacaoMissao: Vision radius above the validated 0..8 sum requires DecouvreTerrain; prior record/collision effects retained",
-    "eta_sha256": "19237b8c3f3c0c76022276da229bec727b17603440823c43561aba159dd47015",
+    "unidades": "eaf46ccc7f7051480b382282e86d594495e4198c11ca5b4f381f2c945868c740",
+    "descoberta": ["2ba0f2abe4d17130dcf241ddd6d6abfc327d4acdcac203a5be52ccbe3779f1a1","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118"],
+    "iluminacao": ["433dfbfb1c137f48ae4e98aa0b0b37943ea727229aab8a9c9dbdda46002e5e9a","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118"],
+    "contagem_luz": ["979d01d175280bb754b98b2f4d83d11dda99012d86f893ce35624000e354781b","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"],
     "projeteis": "1677f96c3d965a44953cb644796fd1137be5df37e38513fd5587e55751f23880",
     "estruturas": "97207af1c54bddac19ff877aa5117c728e9360eaf8d6b977d495024bb2f14698"
    },
@@ -194,14 +217,14 @@
    "ticks": [1500],
    "parada": "0x417b1c",
    "esp": "0x2007fe4",
-   "instrucoes": 2324969,
+   "instrucoes": 2201940,
    "vinculos": [
     ["GetTickCount",[],1500],
     ["IDirectDrawSurface::IsLost",[234882048],0],
     ["IDirectDrawSurface::Lock",[234882048,0,108,1,0],0]
    ],
    "rastro": {
-    "eventos": 2782,
+    "eventos": 2783,
     "por_funcao": {
      "AffBatimentOmbre": 726,
      "AffBatiments": 726,
@@ -209,21 +232,21 @@
      "AffEngin": 16,
      "AffSprite": 1,
      "AffTerrain": 1,
-     "AffVeget": 35,
+     "AffVeget": 36,
      "AffVegetTerrain": 425,
      "CalculFrame": 1,
      "DDLockSurface": 1,
      "GetNumBob": 425
     },
-    "sha256": "741a57d5fe94306c3f79e7a3ea7b313ac6c1adedb8161a3a8dace1e395a8b6e2"
+    "sha256": "aa88096ee1d2279a1df90af283d2be6b57532dcdcb7b750fa486de22b63cbbfb"
    },
-   "superficie_sha256": "8f8f41ff987f904b5fdf87b54ff5f91c9db20cf888a377c89bb87794c4ddc65a",
+   "superficie_sha256": "bb3480ebc9c0425e1bf2ca4d419f0c80a9c02b07b1cbb0eb35f4766455a45406",
    "superficie_mudou": true,
    "escritas": {
     "dados": [
      [24622,"0000","1f03"],
      [24626,"0000","1f02"],
-     [24654,"00","6a"],
+     [24654,"00","61"],
      [317351,"0000","0801"],
      [317358,"07","08"],
      [317364,"e803","dc05"],
@@ -231,9 +254,9 @@
     ]
    },
    "cache": {
-    "chaves_sha256": "d9ade332f2872260f10d6761164ca2984dd4369de2fdea493a81d70dbeeaf5be",
-    "blocos_sha256": "97fc8f2d2bcb46ff05a40f397593581ca89d022bb75a2d72b41c4c33576ab781",
-    "cursor": 106
+    "chaves_sha256": "c9e2ee774cdb35fd11c93670d2eb0ca469cf7fcde7302351212494b8e1c60d47",
+    "blocos_sha256": "aeff83ba5b02bce17b34ae0c39b1ddb066ed085fe392079bb0fb77a4635a6a55",
+    "cursor": 97
    }
   },
   {
@@ -288,7 +311,7 @@
    "ticks": [2100],
    "parada": "0x417b1c",
    "esp": "0x2007fe4",
-   "instrucoes": 4674362,
+   "instrucoes": 4679551,
    "vinculos": [
     ["GetTickCount",[],2100],
     ["IDirectDrawSurface::IsLost",[234882048],0],
@@ -308,7 +331,7 @@
      "DDLockSurface": 1,
      "GetNumBob": 425
     },
-    "sha256": "07a6633d57b7fbce27e41b40649f34e1ddc9b4c9936c1fd068c662009ffa7507"
+    "sha256": "1f7a1759e33eed5054d103b7e1481dc7fa49a527da7d329f6c2e10d66f75e6b5"
    },
    "superficie_sha256": "694fc1033643612a43cbd1d1055d980c8af3754c07cd934c9491c66f6e3ac1a8",
    "superficie_mudou": true,
@@ -317,7 +340,7 @@
      [9109,"30","38"],
      [24622,"0000","1f03"],
      [24626,"0000","1f02"],
-     [24654,"6a","94"],
+     [24654,"61","8b"],
      [317351,"0000","0801"],
      [317358,"07","00"],
      [317360,"e803","3408"],
@@ -326,9 +349,9 @@
     ]
    },
    "cache": {
-    "chaves_sha256": "f4a81dc9015f632b1b6dda8410769941802011557032bea1c325230014a92df3",
-    "blocos_sha256": "e64eaa9ab00594ed33dcc6821d14fcdb78062bf1c98f2105ace30ab5a7a8e7a9",
-    "cursor": 148
+    "chaves_sha256": "8b9061aad735420908bb7aca7f937b457e11307af8949da2af83295bed1a96a0",
+    "blocos_sha256": "d4d2d55b22efce1cf561d8b26baedb24ce4d14f873bf110cd7b7697f89c143c8",
+    "cursor": 139
    }
   },
   {
@@ -383,7 +406,7 @@
    "ticks": [2140],
    "parada": "0x417b1c",
    "esp": "0x2007fe4",
-   "instrucoes": 4746862,
+   "instrucoes": 4752052,
    "vinculos": [
     ["GetTickCount",[],2140],
     ["IDirectDrawSurface::IsLost",[234882048],0],
@@ -405,7 +428,7 @@
      "DDLockSurface": 1,
      "GetNumBob": 425
     },
-    "sha256": "6e085a29a16ddcff1509d9f69b813d8e68fd5cad13e272280fa0dc21f6b0673d"
+    "sha256": "67fc550ac91d7b069efa0d78d652529a21aeff4d159b63ee298dadef6957a31b"
    },
    "superficie_sha256": "731d081a76563196e55fbaa01c75771f504ddb87094161898555bf0d1cca1c71",
    "superficie_mudou": true,
@@ -414,7 +437,7 @@
      [9109,"30","38"],
      [24622,"0000","1f03"],
      [24626,"0000","1f02"],
-     [24654,"94","be"],
+     [24654,"8b","b5"],
      [317351,"0000","0801"],
      [317358,"07","00"],
      [317360,"e803","5c08"],
@@ -423,9 +446,9 @@
     ]
    },
    "cache": {
-    "chaves_sha256": "36201ba89b10be479020aa3b6d6296a85b7c0e1af514724f6e5dedae2a37b3a1",
-    "blocos_sha256": "acf45c1ce06857f56c51053fbf46aedb9e7117fc6934bc1e5c211db93d18a646",
-    "cursor": 190
+    "chaves_sha256": "d49f9b288c73159ddb87a6539c0fefbf34ed704a409511f38f57fac9f171a6f2",
+    "blocos_sha256": "7cedbb082d49e3945b8fc9c21488d02e84e50564d4efc836cec31f9a8b984ea7",
+    "cursor": 181
    }
   },
   {
@@ -480,7 +503,7 @@
    "ticks": [2300],
    "parada": "0x417b1c",
    "esp": "0x2007fe4",
-   "instrucoes": 1477567,
+   "instrucoes": 1482858,
    "vinculos": [
     ["GetTickCount",[],2300],
     ["IDirectDrawSurface::IsLost",[234882048],0],
@@ -502,7 +525,7 @@
      "DDLockSurface": 1,
      "GetNumBob": 345
     },
-    "sha256": "212da852746b765dd0626c1eadc5fa8613575654114cb4ba6f54f80b82c078c3"
+    "sha256": "1e5955c1650c1e1a522c6541301dcf755ad05c9e381f2a6ebd4936f0d8a3eb17"
    },
    "superficie_sha256": "4192c216c33bd9ccd3432c22be1724c942cc6cc5e76d6c65daf48a88692788f7",
    "superficie_mudou": true,
@@ -512,7 +535,7 @@
      [24620,"00","20"],
      [24622,"000000","ff0220"],
      [24626,"0000","ff01"],
-     [24654,"be","e3"],
+     [24654,"b5","da"],
      [317351,"0000","0801"],
      [317358,"07","00"],
      [317360,"b004","fc08"],
@@ -521,9 +544,9 @@
     ]
    },
    "cache": {
-    "chaves_sha256": "0f7bda2da062f1e4b0df014813f14922817d1db4a9ed06691ac495871f88ed61",
-    "blocos_sha256": "97359defce9279e6fc65a69897029d68aeddea02205ecd8caa739b55416c9ef0",
-    "cursor": 227
+    "chaves_sha256": "fcb545eee94334598ea773e432e321b5b5418805a9e11187c3ed1fe93d1ec399",
+    "blocos_sha256": "55dcc485f66ada2299f050cbab72a8c090fcaaaead83dc592a900660361e0698",
+    "cursor": 218
    }
   },
   {
@@ -600,9 +623,9 @@
     ]
    },
    "cache": {
-    "chaves_sha256": "0f7bda2da062f1e4b0df014813f14922817d1db4a9ed06691ac495871f88ed61",
-    "blocos_sha256": "97359defce9279e6fc65a69897029d68aeddea02205ecd8caa739b55416c9ef0",
-    "cursor": 227
+    "chaves_sha256": "fcb545eee94334598ea773e432e321b5b5418805a9e11187c3ed1fe93d1ec399",
+    "blocos_sha256": "55dcc485f66ada2299f050cbab72a8c090fcaaaead83dc592a900660361e0698",
+    "cursor": 218
    }
   },
   {
@@ -657,7 +680,7 @@
    "ticks": [2400],
    "parada": "0x417b1c",
    "esp": "0x2007fe4",
-   "instrucoes": 4731050,
+   "instrucoes": 4733324,
    "vinculos": [
     ["GetTickCount",[],2400],
     ["IDirectDrawSurface::IsLost",[234882048],0],
@@ -678,7 +701,7 @@
      "DDLockSurface": 1,
      "GetNumBob": 425
     },
-    "sha256": "de6bdedf19d3aee2d1706b2bddb3bce6f8e94d9d61e26c9821d8a93efd1624a0"
+    "sha256": "3b2534cad8642f5c029df41e5ace4ec6f84fa442f38cc9c15e76d633645694e9"
    },
    "superficie_sha256": "326b4cf4dd7402af8bf734830d893400caed734d6335e3455a4821c7de976ec4",
    "superficie_mudou": true,
@@ -687,7 +710,7 @@
      [9108,"3030","3939"],
      [24622,"0000","1f03"],
      [24626,"0000","1f02"],
-     [24654,"e3","0c"],
+     [24654,"da","03"],
      [317351,"0000","0801"],
      [317358,"8c","00"],
      [317360,"e803","6009"],
@@ -696,9 +719,9 @@
     ]
    },
    "cache": {
-    "chaves_sha256": "92684c972125fc99f8f568aff8062c0cdaf64d66d87aec974362af4113fbbff7",
-    "blocos_sha256": "c2414e495f238ca6da80bd7ef02a9f0825666611bdbc080c3aa07efd6404f6bd",
-    "cursor": 12
+    "chaves_sha256": "c6594d74e884e5ad4e681aa2077188f1a84dd1ab015af35ab42ccc768f27678d",
+    "blocos_sha256": "2048232b38e421cbc450879b4cdac956c62af35a20b6fe55b480bfeac58babbf",
+    "cursor": 3
    }
   },
   {
@@ -753,7 +776,7 @@
    "ticks": [2500],
    "parada": "0x417b1c",
    "esp": "0x2007fe4",
-   "instrucoes": 4810885,
+   "instrucoes": 4808905,
    "vinculos": [
     ["GetTickCount",[],2500],
     ["IDirectDrawSurface::IsLost",[234882048],0],
@@ -773,7 +796,7 @@
      "DDLockSurface": 1,
      "GetNumBob": 425
     },
-    "sha256": "2c1ac097d81417e1c8d8dd8472727f33173871c06caf4ae5f4988edc99126883"
+    "sha256": "93884aae156c32812df70b80aa2176dcc7cedbb4de913115e9336435772c7e65"
    },
    "superficie_sha256": "a649da5dae4250c40e7c1a183e7d68617cfdf87b5ec8bc469523e9c404f5be58",
    "superficie_mudou": true,
@@ -782,7 +805,7 @@
      [9109,"30","38"],
      [24622,"0000","1f03"],
      [24626,"0000","1f02"],
-     [24654,"0c","3f"],
+     [24654,"03","36"],
      [317351,"0000","0801"],
      [317358,"07","00"],
      [317360,"e803","c409"],
@@ -791,16 +814,16 @@
     ]
    },
    "cache": {
-    "chaves_sha256": "27585906bd19c6ff15ad733170c4e8a4ad5e1d7e8fb9953f17de755202ab49cf",
-    "blocos_sha256": "948c4de07095df0083435f6f42843ef2d635d9be3b2c672ac1bf891166564d47",
-    "cursor": 63
+    "chaves_sha256": "de0aeca0cb4d32bfa4bf72bb80bfec0723eeef7ec100796b73d5827332ec2793",
+    "blocos_sha256": "c83d61e53b05249f7a8036426ce605ac20808a771f8b5c78f9946dc0d201d115",
+    "cursor": 54
    }
   }
  ],
  "totals": {
   "native_entries": 21,
-  "instructions_observed": 24015999,
+  "instructions_observed": 23908934,
   "bound_calls": 97331
  },
- "seconds": 25.586
+ "seconds": 25.447
 }

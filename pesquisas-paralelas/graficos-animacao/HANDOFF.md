@@ -468,8 +468,8 @@ The native bench runs PaletteAlloc, LoadSTRATBank/SetBank, CacheAlloc and Calcul
 - [Inventory](evidencias/quadro-jogo.json), including the DDInit, WndProc and ResetMode configuration and a static absolute-write scan.
 
 **Actual validation.**
-- `capturar_quadro.py`, original-only: 21 native entries / 24,015,999 instructions / 97,331 bound calls over seven frames.
-- `validar_quadro.py`, fresh: 26 native entries / 44,818,311 instructions / 97,346 bound calls.
+- `capturar_quadro.py`, original-only: 21 native entries / 23,908,934 instructions / 97,331 bound calls over seven frames. It was regenerated on the advanced checkpoint; the first capture is `077a05b`.
+- `validar_quadro.py`, fresh: 26 native entries / 44,585,739 instructions / 97,346 bound calls.
   - **Six complete frames** with whole-frame equality: the 800×600 surface, the canonical trace, all 30 globals, the cache state, and a memory diff restricted to those globals.
   - **Three named stops**, compared at the same original address after the same trace event, with native memory restored first:
     - MONDE01 at facade trigger `0x2ED` (`0x40F23B`);
@@ -478,7 +478,12 @@ The native bench runs PaletteAlloc, LoadSTRATBank/SetBank, CacheAlloc and Calcul
   - Every fresh frame reproduces its original-only capture. There are no limits and no skips.
 - Graphics domain: **192 tests**, 0 skips.
 
-**MONDE01 checkpoint (real mission state).** The input is missions' committed load plus unit placement up to the named `DecouvreTerrain` stop at unit 15. The native frame reaches `0x417B1C` (2,324,969 instructions). The model draws the whole terrain pass and sprite rows 0–13, then stops at the type-2 structure facade trigger, cell 3345 = (17,13). Next blockers, in drawing order:
+**MONDE01 checkpoint (real mission state).** The input is missions' committed load plus the `MissionPlaceTerrain` unit scan.
+- With core's integrated discovery domain, all 16 units are placed, up to the pre-structure checkpoint `0x46C16D`.
+- The first integration attempt failed its common gate because main had advanced this checkpoint under the tests' live pipeline. The candidate is preserved at `worktrees/integration-graphics-a0f20f22`.
+- The buffers are now pinned in `evidencias/monde01-checkpoint-quadro.{zlib,json}` with their checkout revision, and the capture was regenerated natively.
+
+The native frame reaches `0x417B1C` (2,201,940 instructions). The model draws the whole terrain pass and sprite rows 0–13, then stops at the type-2 structure facade trigger, cell 3345 = (17,13). Next blockers, in drawing order:
 1. that facade, with structure lookup;
 2. the unit overlays: MONDE01 units have `+0x74 = 0`;
 3. unit types 1 and 8.

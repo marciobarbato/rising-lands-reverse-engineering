@@ -84,11 +84,52 @@ def mundo_monde01():
         contagem_luz=[bytes(g) for g in mundo.contagem_luz], parada_missao=parada, eta_sha256=sha(dados))
 
 
+ORDEM_MONDE01 = (('terreno', 131072), ('objetos', 65536), ('auxiliares', 65536), ('atributos', 65536), ('regioes', 131072),
+    ('unidades', 220800))+tuple((f'{nome}{camera}', 65536) for nome in ('descoberta', 'iluminacao', 'contagem_luz') for camera in range(4))
+ARQUIVO_MONDE01 = RAIZ/'evidencias/monde01-checkpoint-quadro.zlib'
+MANIFESTO_MONDE01 = RAIZ/'evidencias/monde01-checkpoint-quadro.json'
+
+
+def _buffers_monde01(base):
+    return [base[n] if n in base else base[n.rstrip('0123')][int(n[-1])] for n, tamanho in ORDEM_MONDE01]
+
+
+def fixar_monde01(base, *, revisao):
+    """Pin the checkpoint the frames consumed: zlib bytes plus a hash manifest."""
+    import zlib
+    partes = _buffers_monde01(base)
+    if [len(p) for p in partes] != [t for n, t in ORDEM_MONDE01]: raise ValueError('Unexpected checkpoint buffer sizes')
+    ARQUIVO_MONDE01.write_bytes(zlib.compress(b''.join(partes), 9))
+    manifesto = dict(checkout_revision=revisao, mission_stop=base['parada_missao'], eta_sha256=base['eta_sha256'],
+        file_sha256=sha(ARQUIVO_MONDE01.read_bytes()), buffers={n: sha(p) for (n, t), p in zip(ORDEM_MONDE01, partes)})
+    MANIFESTO_MONDE01.write_text(json.dumps(manifesto, indent=1)+'\n')
+    return manifesto
+
+
+def monde01_fixado():
+    """Load the pinned checkpoint; every buffer hash is verified."""
+    import zlib
+    manifesto = json.loads(MANIFESTO_MONDE01.read_text()); bruto = ARQUIVO_MONDE01.read_bytes()
+    if sha(bruto) != manifesto['file_sha256']: raise ValueError('Pinned MONDE01 checkpoint file hash mismatch')
+    dados = zlib.decompress(bruto); base = dict(parada_missao=manifesto['mission_stop'], eta_sha256=manifesto['eta_sha256'])
+    posicao = 0
+    for nome, tamanho in ORDEM_MONDE01:
+        parte = dados[posicao:posicao+tamanho]; posicao += tamanho
+        if sha(parte) != manifesto['buffers'][nome]: raise ValueError('Pinned MONDE01 buffer hash mismatch: '+nome)
+        if nome[-1].isdigit(): base.setdefault(nome[:-1], []).append(parte)
+        else: base[nome] = parte
+    if posicao != len(dados): raise ValueError('Trailing bytes in pinned MONDE01 checkpoint')
+    return base
+
+
 def cena_monde01(base):
     """Real checkpoint buffers; camera/viewport and runtime globals declared."""
+    estado = ('missions stop at ' + base['parada_missao']) if base['parada_missao'] else \
+        'MissionPlaceTerrain unit scan completed to the pre-structure checkpoint 0x46C16D'
     return dict(nome='monde01_checkpoint', mundo=dict(base, projeteis=bytes(5600), estruturas=bytes(276000)),
         globais=globais_base(), ticks=[1500], antes='InitCache',
-        sinteticos=['viewport origin (0,0), camera 0, frame counter 0, divisor 1 and the 800x600 mode are declared',
+        sinteticos=['committed MONDE01 load: '+estado,
+            'viewport origin (0,0), camera 0, frame counter 0, divisor 1 and the 800x600 mode are declared',
             'missions declare a 0xA5 unit-pool pre-fill, regions [1]*65536, a selection pattern, a search context and a 0x31 bonus table',
             'projectile pool and structure pool are zero: ProjectileReset/structure copy are not composed by the checkpoint',
             'surface starts from a declared background pattern; DirectDraw locks one fixture buffer'])

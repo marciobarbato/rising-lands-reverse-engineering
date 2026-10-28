@@ -15,7 +15,7 @@ from extrair_evidencias import RAIZ, HASH_EXE, exigir_area_editavel
 from graficos import Catalogo, png
 from bancada_x86 import unicorn, SUPERFICIE, RETORNO
 from bancada_quadro import BancadaQuadro, LIMITE_QUADRO, CHECKPOINT_HUD
-from cenas_quadro import GLOBAIS, cenas_validacao, mundo_monde01, fundo, sha
+from cenas_quadro import GLOBAIS, cenas_validacao, monde01_fixado, fundo, sha
 from capturar_quadro import tabelas
 from capturar_ciclo_cache import json_compacto, HASH_NORMALIZADO
 from vinculos_graficos import RegistroVinculos
@@ -88,7 +88,7 @@ def validar():
     jogadores = b.calcular_tabelas_jogador()
     registros = {t: b.inicializar_tipo(t) for t in (0, 2, 5, 6, 7, 9)}
     assert {str(t): r.hex() for t, r in registros.items()} == captura['unit_initializer_records']
-    base = mundo_monde01(); cenas = cenas_validacao(base, registros)
+    base = monde01_fixado(); cenas = cenas_validacao(base, registros)
     relatorio = []
     for cena in cenas:
         if cena['antes'] == 'InitCache':

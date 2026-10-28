@@ -6,7 +6,7 @@ import unittest
 from graficos import RAIZ, Catalogo
 from extrair_evidencias import imagem_pe
 from cenas_quadro import (GLOBAIS, GATILHOS_FACHADA as GATILHOS_CENA, CODIGOS_AFFVEGET as CODIGOS_CENA,
-    cenas_validacao, mundo_monde01, fundo, globais_base)
+    cenas_validacao, monde01_fixado, fundo, globais_base)
 from ciclo_cache_terreno import CicloCacheTerreno, MemoriaMotor
 from vinculos_graficos import ArenaGlobalFixa, RegistroVinculos
 from quadro_jogo import (compor_quadro, calcular_frame, travar_superficie, EstadoTela, MundoQuadro, DependenciaQuadro,
@@ -43,7 +43,7 @@ class FrameTest(unittest.TestCase):
         cls.report = json.loads((RAIZ/'validacao/x86-quadro-jogo.json').read_text())
         cls.captura = json.loads((RAIZ/'evidencias/captura-quadro-original.json').read_text())
         cls.inventario = json.loads((RAIZ/'evidencias/quadro-jogo.json').read_text())
-        cls.catalogo = Catalogo(); cls.sombra, cls.eclairage = tabelas(); cls.base = mundo_monde01()
+        cls.catalogo = Catalogo(); cls.sombra, cls.eclairage = tabelas(); cls.base = monde01_fixado()
         registros = {int(t): bytes.fromhex(h) for t, h in cls.captura['unit_initializer_records'].items()}
         cls.cenas = cenas_validacao(cls.base, registros)
         f = cls.report['cache_alloc_fixture']; registro = RegistroVinculos()
@@ -98,7 +98,8 @@ class FrameTest(unittest.TestCase):
         cena, tela, q, erro = self.resultados[0][:4]
         self.assertIsNone(q); self.assertEqual(erro.endereco, 0x40F23B); self.assertEqual(erro.chamadas[-1], ['AffBatiments', 544, 416, 3345])
         self.assertEqual(struct.unpack_from('<H', self.base['terreno'], 3345*2)[0], 0x2ed)
-        self.assertIn('DecouvreTerrain', self.base['parada_missao'])
+        pinned = self.captura['monde01_checkpoint']
+        self.assertEqual((pinned['mission_stop'], pinned['eta_sha256']), (self.base['parada_missao'], self.base['eta_sha256']))
         self.assertEqual(sum(1 for c in erro.chamadas if c[0] == 'GetNumBob'), 425)
         captura = next(f for f in self.captura['frames'] if f['nome'] == 'monde01_checkpoint')
         self.assertEqual((captura['parada'], captura['rastro']['por_funcao']['AffEngin']), ('0x417b1c', 16))
