@@ -1,9 +1,20 @@
 """Adaptadores das entregas concluídas. Importações só dos snapshots locais."""
 from pathlib import Path
-import dataclasses,json,struct,sys
-ROOT=Path(__file__).resolve().parent
-if not (ROOT/'research.json').exists():ROOT=ROOT.parent
-RESEARCH=json.loads((ROOT/'research.json').read_text())['research']
+import dataclasses,hashlib,json,os,struct,sys
+ROOT=Path(os.environ.get('RISING_APP_ROOT',Path(__file__).resolve().parent))
+if not (ROOT/'snapshot.json').exists():ROOT=ROOT.parent
+SOURCE=json.loads((ROOT/'snapshot.json').read_text())
+UNIFIED='features' in SOURCE
+if UNIFIED:
+    RESEARCH={}
+    for domain,title in (('economia','Economia'),('combate','Combate')):
+        prefix='pesquisas-paralelas/'+domain+'/'
+        files=[{**f,'path':f['path'][len(prefix):]} for f in SOURCE['files'] if f['path'].startswith(prefix)]
+        RESEARCH[domain]={'path':SOURCE['snapshot']+'/'+prefix.rstrip('/'),'title':title,
+                          'sha256':hashlib.sha256(json.dumps(files,sort_keys=True).encode()).hexdigest(),
+                          'files':files,'commit':SOURCE['commit']}
+else:
+    RESEARCH=json.loads((ROOT/'research.json').read_text())['research']
 for m in RESEARCH.values():sys.path.insert(0,str(ROOT/m['path']))
 from economia import Economia, Recurso, custos_unidade
 from construcoes import EconomiaConstrucoes,RetiradaColonoPendente
@@ -36,7 +47,7 @@ class BancadaPesquisa:
         return self.last
     def state(self):
         bags=[{'pos':[c&255,c>>8],'resource':self.buildings.terreno.tipos[c]-0x42,'quantity':v} for c,v in enumerate(self.buildings.terreno.quantidades) if v]
-        return {'balances':[self.economy.consultar(p)._asdict() for p in range(4)],'rmi':[self.economy.consultar_rmi(p)._asdict() for p in range(4)],'stock':[self.economy.consultar_estoque(p)._asdict() for p in range(4)],'capacity':list(self.buildings.capacidades.parametros(0)),'level':self.buildings.capacidades.nivel(0),'bags':bags,'last':self.last,'combat':self.last_combat,'sources':[{'name':n,'title':m['title'],'sha256':m['sha256'],'files':len(m['files']),'historicalTests':m['historicalValidation']['testes'],'historicalX86':m['historicalValidation']['execucoes_x86_delimitadas']} for n,m in RESEARCH.items()]}
+        return {'balances':[self.economy.consultar(p)._asdict() for p in range(4)],'rmi':[self.economy.consultar_rmi(p)._asdict() for p in range(4)],'stock':[self.economy.consultar_estoque(p)._asdict() for p in range(4)],'capacity':list(self.buildings.capacidades.parametros(0)),'level':self.buildings.capacidades.nivel(0),'bags':bags,'last':self.last,'combat':self.last_combat,'sources':[{'name':n,'title':m['title'],'sha256':m['sha256'],'files':len(m['files']),'commit':m.get('commit')} for n,m in RESEARCH.items()]}
     def combat(self,world,indice,target):
         if world is None:raise ValueError('Use o laboratório para consultas de combate; a RAM da missão não está carregada por completo.')
         self.integer(indice,0,2);self.integer(target,0,2)
