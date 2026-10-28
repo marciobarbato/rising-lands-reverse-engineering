@@ -357,7 +357,7 @@ class ComposicaoCargaMissaoM1:
                                    structures_placed=list(terreno.estruturas.colocadas),
                                    structures_inhabited=list(terreno.estruturas.habitadas))
             cauda = p.cauda
-            if 'ordens' in self.pontes:
+            if 'ordens' in self.pontes and not p.ordens_por_dono:
                 self._passo('EnginInitTechnologie', lambda: self._ponte_ordens(cauda.inicializar_tecnologia_unidades))
             else:
                 self._passo('EnginInitTechnologie', cauda.inicializar_tecnologia_unidades)
@@ -411,7 +411,11 @@ class ComposicaoCargaMissaoM1:
 
     def _fechar(self, resultado):
         resultado.detalhes = dict(
+            ordens_contract='per-owner [0x4e19b8] pools' if self.provedores.ordens_por_dono
+            else 'legacy single 10,816-byte buffer',
             diagnostic_bridges=list(self.pontes_usadas),
+            bridges_not_needed=[b for b in self.pontes
+                                if b == 'ordens' and self.provedores.ordens_por_dono],
             excess_changed=verificar_excessos(self.provedores),
             live_arena_allocations=len(self.arena.vivos), next_free=hex(self.arena.proximo),
             identity_sharing=self.provedores.compartilhados,
