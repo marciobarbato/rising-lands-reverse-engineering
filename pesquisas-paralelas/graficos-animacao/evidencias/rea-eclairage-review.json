@@ -1,0 +1,104 @@
+{
+  "rea_source_revision": "b9a8f8e9f25feb9cc97bf4960748f2bdf8c898bc",
+  "original_executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "normalized_analysis_sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "scope": "Complementary read-only review of the preserved CalculEclairage implementation; original bytes and x86 remain authoritative.",
+  "procedure": "0x45fafc",
+  "rea_observation": {
+    "evidence_id": "ev_2459b067919fc844881ccc148e56872c8fa14c4544b65f7f3a44de2409ad8b2d",
+    "subject": {
+      "name": "RISING-analise.exe",
+      "digest": {
+        "sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0"
+      },
+      "local_path": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/entrada/RISING-analise.exe",
+      "format": "pe",
+      "architecture": "x86"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.2"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.2"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "pe",
+        "architecture": "x86",
+        "import_mode": "existing-project-private-copy-v1",
+        "annotation_policy": "read-only-existing-project-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-without-synthetic-entry-v2",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v4",
+        "existing_project": {
+          "configured_path": "/Users/marcio/git/Rising Lands/engenharia-reversa/ghidra/projetos/RisingLands.gpr",
+          "project_path": "/Users/marcio/git/Rising Lands/engenharia-reversa/ghidra/projetos",
+          "project_name": "RisingLands",
+          "program_name": "RISING-analise.exe",
+          "sha256": "3ad8f23827b3532617346b189d3ea83a25fcecb9fc682ad7e30fa671b61791ec"
+        },
+        "original_analysis": {
+          "completeness": "unknown",
+          "settings": "unknown"
+        },
+        "no_return_repair": "disabled-existing-project",
+        "process_launch": "inspected-jvm-launch-support-v1"
+      },
+      "digest": "33da723a26733dd8b59046612d0c42bf95bb1b59c46a63f17b127521af169a3d"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "procedure_pseudo_code",
+    "parameters": {
+      "procedure": "0x45fafc"
+    },
+    "raw_result": null,
+    "normalized_result": "\nvoid __fastcall OriginaisSBL::CalculEclairage(undefined4 param_1,byte param_2)\n\n{\n  byte bVar1;\n  byte bVar2;\n  int in_EAX;\n  int iVar3;\n  uint uVar4;\n  uint uVar5;\n  int extraout_ECX;\n  short sVar6;\n  uint auStack_420 [256];\n  byte local_20;\n  undefined1 local_1f;\n  undefined1 local_1e;\n  ushort local_1c;\n  byte local_18;\n  \n  local_18 = param_2;\n  sVar6 = 0;\n  do {\n    if (0xff < sVar6) {\n      return;\n    }\n    uVar4 = ((uint)*(byte *)(sVar6 * 3 + in_EAX) * 100) / (uint)local_18;\n    if (uVar4 == 0) {\n      uVar4 = 0x1e;\n    }\n    else if (0xff < uVar4) {\n      uVar4 = 0xff;\n    }\n    local_20 = (byte)uVar4;\n    uVar4 = ((uint)*(byte *)(sVar6 * 3 + 1 + in_EAX) * 100) / (uint)local_18;\n    if (uVar4 == 0) {\n      uVar4 = 0x1e;\n    }\n    else if (0xff < uVar4) {\n      uVar4 = 0xff;\n    }\n    local_1f = (char)uVar4;\n    uVar4 = ((uint)*(byte *)(sVar6 * 3 + 2 + in_EAX) * 100) / (uint)local_18;\n    if (uVar4 == 0) {\n      uVar4 = 0x1e;\n    }\n    else if (0xff < uVar4) {\n      uVar4 = 0xff;\n    }\n    local_1e = (char)uVar4;\n    local_1c = 0;\n    while (local_1c < 0x100) {\n      uVar4 = Distance3d((uint)local_1c,&local_20);\n      auStack_420[extraout_ECX] = uVar4;\n      local_1c = (short)extraout_ECX + 1;\n    }\n    bVar1 = 0;\n    local_1c = 1;\n    while( true ) {\n      if (0xff < local_1c) break;\n      if (auStack_420[local_1c] < auStack_420[bVar1]) {\n        for (uVar4 = 0; uVar5 = uVar4 & 0xffff, uVar5 < DAT_004e24e1; uVar4 = uVar4 + 1) {\n          if (((byte)(&DAT_004e24e4)[uVar5 * 3] <= (byte)local_1c) &&\n             ((byte)local_1c <= (byte)(&DAT_004e24e5)[uVar5 * 3])) {\n            bVar2 = 1;\n            goto LAB_0045fc61;\n          }\n        }\n        bVar2 = (byte)uVar5 ^ (byte)uVar4;\nLAB_0045fc61:\n        if (bVar2 == 0) {\n          bVar1 = (byte)local_1c;\n        }\n      }\n      local_1c = local_1c + 1;\n    }\n    iVar3 = (int)sVar6;\n    sVar6 = sVar6 + 1;\n    *(byte *)(DAT_004e24b8 + iVar3) = bVar1;\n  } while( true );\n}\n\n",
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "This session opens a caller-selected existing Ghidra project through a private copy, without import, auto-analysis or repair scripts. Original analysis completeness and settings are unknown.",
+      "The original project is never opened by Ghidra or modified. The private copy is read-only to bridge operations and deleted on close; original executable bytes are never written.",
+      "The analysis profile records the selected project content fingerprint and program name. The imported program SHA-256 must match the admitted target; the project may contain caller annotations or earlier edits, which are not fresh REA discoveries.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "Pseudocode is Ghidra decompiler output, not original source and not text-equivalent to Hopper output.",
+      "External functions and functions without an analyzable body return null; other decompiler failures remain explicit.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state.",
+      "This session uses Ghidra 12.2. The bridge is verified against 12.1.4; other 12.x (>=12.1) builds are accepted and the observed version is reported."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "review_notes": [
+    "The decompiled per-component inverse scaling, zero-quotient target30 and cap255 agree with original assembly and the independent x86 tables.",
+    "The strict nearest-distance comparison and cycle exclusion agree with captured complete lookup tables.",
+    "The displayed fastcall signature, in_EAX and extraout_ECX are decompiler artifacts: the reviewed original inputs remain EAX=palette pointer and DL=percentage.",
+    "This existing-project analysis includes earlier caller annotations; French symbols are retained and are not claimed as new REA discoveries."
+  ],
+  "resumed_validation": {
+    "pre_resume_report_sha256": "a9dab152bbe8f48f136486e230754fb9d12bae0e8add271ea3c2de66cdc5f640",
+    "fresh_report_sha256": "1f2c671d49da3f5c305d6421eda4f9de57cebf99255cd7e168c64a742e47a8f0",
+    "changed_fields": [
+      "seconds"
+    ],
+    "native_observations_unchanged": true,
+    "bounded_segments": 4412,
+    "expected_exceptions": 1,
+    "unexpected_exceptions": 0,
+    "skips": 0
+  }
+}
