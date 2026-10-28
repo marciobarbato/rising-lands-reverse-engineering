@@ -18,4 +18,6 @@ The live consolidated report is [docs/PROGRESS.md](../PROGRESS.md). It separates
 
 - [Closed Claude resumption round CXR-20261028-07](2026-10-28-CXR-07-closed.md): AI adapter `977c890`, Core XP `3d782ca` and the whole original MissionLoad oracle `14c0122` integrated/reproduced; Python composition pending, M1 not accepted.
 
+- [Closed M1 acceptance round CXR-20261028-08](2026-10-28-CXR-08-closed.md): strict Python MissionLoad composition equals the original at `927c7e5`; **M1 accepted**; M2 next.
+
 At each actual execution-round closure, append a new `YYYY-MM-DD-CXR-NN-closed.md` snapshot copied from the verified live report and add it here. Keep a failed/pending round too, with its unchanged main SHA and reason. Never edit a prior snapshot to reflect later success. A repeated heartbeat without a changed round disposition does not require a duplicate snapshot.
