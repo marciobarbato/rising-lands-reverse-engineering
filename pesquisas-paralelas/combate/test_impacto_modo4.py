@@ -21,7 +21,7 @@ class ContratosImpactoModo4(unittest.TestCase):
         for direction in (0, 28, 31, 255):
             with self.assertRaisesRegex(NotImplementedError, '29/30'):
                 w.infligir(0, 4, 0, direction, 0)
-        for mode in (0, 2, 3, 5, 6, 7, 8, 9, 255):
+        for mode in (0, 2, 5, 6, 7, 8, 9, 255):
             with self.assertRaises(NotImplementedError):
                 w.infligir(0, mode, 0, 29, 0)
 
@@ -102,7 +102,8 @@ class DiferencialPipelineModo4(unittest.TestCase):
         cls.complete_impacts = cls.complete_projectiles = cls.building_stops = cls.navigation_stops = 0
         cls.projectile_requests = cls.projectile_rng = 0
 
-    def compare(self, kind=2, life=1, projectile=False, full=False, building=False, human_state=None):
+    def compare(self, kind=2, life=1, projectile=False, full=False, building=False, human_state=None,
+                mode=4, source_kind=10, mutate_owner=False):
         from bancada_combate import RETORNO
         from bancada_impacto_unidades import QUERIES, EFFECTS
         w, rows, pool = world_tests.fixture(kind=kind, full=full)
@@ -113,12 +114,17 @@ class DiferencialPipelineModo4(unittest.TestCase):
             w.unidades[276+2] = human_state
         if building:
             w.regioes[0x504] = 0x8000 | 7 << 5
+        row10, row11 = (bytes([127]*26), bytes([124]*26)) if mode == 3 else (None, None)
+        if mode == 3:
+            w.estruturas[4], w.estruturas[8] = 3, source_kind
         if projectile:
-            pool.definir(37, 29, 0x505, 0x505, 4, 0, 29, 16, 16, 0)
-            pool.registro(37)[0x18], pool.registro(37)[0x19] = 12, 0
-        mode4 = bytes([127, 124])
-        self.b.preparar(w, rows, pool, modo4=mode4)
-        native = self.b.impacto_modo4(0x505, projectile=projectile)
+            pool.definir(37, 1 if mode == 3 else 29, 0x505, 0x505, mode, 0, 29, 16, 16, 0)
+            pool.registro(37)[0x18], pool.registro(37)[0x19] = (0 if mode == 3 else 12), 0
+        mode4 = bytes([127, 124]) if mode == 4 else None
+        self.b.preparar(w, rows, pool, modo4=mode4, fonte10=row10, fonte11=row11)
+        if mutate_owner:
+            self.b.on_message = lambda: self.b.cpu.mem_write(0x49a0c8+4, b'\2')
+        native = self.b.impacto_unidade(0x505, mode=mode, projectile=projectile)
         stop = QUERIES.get(native['EIP']) or EFFECTS.get(native['EIP'])
         consumer_events, wrapper_events = iter(self.b.eventos_consumo), iter(self.b.eventos_wrapper)
         death_events, random_events = iter(self.b.eventos_morte[1:]), iter(self.b.random_projectile)
@@ -127,12 +133,22 @@ class DiferencialPipelineModo4(unittest.TestCase):
             self.assertEqual((name, args), tuple(event[:2]))
             return event
         def consumer_effect(name, args):
+            if name == 'iagUnitSendMessage':
+                next_event(consumer_events, name, args)
+                world_tests.fixture_message(w, name, args)
+                if mutate_owner:
+                    w.estruturas[4] = 2  # explicitly synthetic provider-boundary mutation
+                return
             self.assertEqual((name, args), next(death_events))
             self.assertEqual(name, 'MAJSympathie')
             self.assertEqual(args[0], 200)  # original owner>=4 early return, no generic provider
         c = criar_consumidor_fisico(w, pool, rows, efeito=consumer_effect, mortes_sem_experiencia=True)
         c.danos_modo4 = mode4
         actual = world_tests.queries(w, c.unidades)
+        if mode == 3:
+            from fonte_batiment import ConsultaFonteBatiment
+            source_provider = ConsultaFonteBatiment(w.estruturas, row10, row11, actual)
+            actual = source_provider
         def consumer_query(name, args):
             event = next_event(consumer_events, name, args)
             result = actual(name, args)
@@ -150,9 +166,11 @@ class DiferencialPipelineModo4(unittest.TestCase):
                 result = encontrar_estrutura_impacto(struct.pack('<65536H', *w.regioes), *args)
             elif name == 'ChercheIndiceEnginCible':
                 result = encontrar_vitima_impacto(c.unidades, *args)
+            elif name == 'BatimentGetPlayer':
+                result = source_provider(name, args)
             else:
                 result = event[2]  # Declared external world query result; body not implemented here.
-            self.assertEqual(result, event[2])
+            self.assertEqual(result, event[2] & 255 if name == 'BatimentGetPlayer' else event[2])
             return result
         def consume(*args):
             wrapper_event('EnginInfligeDegat', args)
@@ -167,7 +185,7 @@ class DiferencialPipelineModo4(unittest.TestCase):
                 pool.efeito_externo = impact.receber
                 avancar_linear(pool, 37, random)
             else:
-                impact.infligir(0x505, 4, 0, 29, 0)
+                impact.infligir(0x505, mode, 0, 29, 0)
         if native['EIP'] == 0x4508af:
             with self.assertRaises(LimiteImpactoBatiment):
                 run()

@@ -4,14 +4,15 @@ import struct
 from bancada_consumo_dano import BancadaConsumoDano, CONSUMO
 from bancada_combate import RETORNO, x86
 from bancada_avanco_projeteis import BancadaAvanco
+from bancada_dano_modo3 import observar_fonte, INTERVALOS as SOURCE_INTERVALS
 
-WRAPPER = CONSUMO + [(0x46d838, 0x46d877), (0x477042, 0x4772ec),
+WRAPPER = CONSUMO + SOURCE_INTERVALS + [(0x46d838, 0x46d877), (0x477042, 0x4772ec),
                      (0x46d600, 0x46d629), (0x46e422, 0x46e4ca),
                      (0x475118, 0x475267), (0x46d8cb, 0x46d927)]
 QUERIES = {0x41b54a: 'ChercheIndiceBatiment', 0x4465df: 'ChercheIndiceEnginCible',
     0x46d817: 'PlayerGetType', 0x4539f3: 'ChercheBatimentProximiteCaveOuSanctuaire',
     0x41aee2: 'BatimentGetCase', 0x477042: 'CalculDirection', 0x4770ee: 'CalculDirCase',
-    0x4704dc: 'Random', 0x46d838: 'PlayerEstAllie'}
+    0x4704dc: 'Random', 0x46d838: 'PlayerEstAllie', 0x41a08c: 'BatimentGetPlayer'}
 EFFECTS = {0x4457d3: 'SetDeplaceEngin', 0x445a36: 'SetAttaqueEngin',
     0x475118: 'MAJSympathie', 0x46d8cb: 'PlayerResetAllie',
     0x46d600: 'PlayerAAttaqueSet', 0x48aa79: 'PlaySnd_PostSound',
@@ -26,6 +27,10 @@ class BancadaImpactoUnidades(BancadaConsumoDano):
         import unicorn
         self.cpu.hook_add(unicorn.UC_HOOK_CODE, self._observar_wrapper)
         self.eventos_wrapper, self.retornos_wrapper = [], []
+
+    def _observar_consumo(self, cpu, at, size, data):
+        BancadaConsumoDano._observar_consumo(self, cpu, at, size, data)
+        observar_fonte(self, cpu, at)
 
     def _observar_avanco(self, cpu, endereco, tamanho, _):
         # The predecessor observer restricts RNG to ProjectileAvance callers.
@@ -54,7 +59,7 @@ class BancadaImpactoUnidades(BancadaConsumoDano):
         a, d, b, c = (cpu.reg_read(getattr(x86, 'UC_X86_REG_' + n))
                       for n in ('EAX', 'EDX', 'EBX', 'ECX'))
         name = QUERIES.get(endereco) or EFFECTS[endereco]
-        if name in ('ChercheIndiceBatiment', 'BatimentGetCase'):
+        if name in ('ChercheIndiceBatiment', 'BatimentGetCase', 'BatimentGetPlayer'):
             args = (a & 65535,)
         elif name == 'ChercheIndiceEnginCible':
             args = (a & 65535, d & 65535, b & 255)
