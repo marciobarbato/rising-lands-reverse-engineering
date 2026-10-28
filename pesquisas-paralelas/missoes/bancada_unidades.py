@@ -21,12 +21,14 @@ class BancadaCargaUnidades(BancadaX86):
         self.returned = 0
         self.dependency_stops = 0
 
-    def carregar(self, data, offset, pool, flags, types, bonuses, *, parar_bonus=False):
+    def carregar(self, data, offset, pool, flags, types, bonuses, *, parar_bonus=False, selecoes=None):
         self.loads += 1
         self.cpu.mem_write(UNIDADES, bytes(pool))
         self.cpu.mem_write(0x4e19bc, bytes(flags))
         self.cpu.mem_write(0x4965ae, bytes(types))
         self.cpu.mem_write(0x4dfba0, bytes(bonuses))
+        if selecoes is not None:
+            self.cpu.mem_write(0x508728,bytes(selecoes))
         # Execute the real prologue and SelectionInit before the public boundary.
         self.executar(0x46acbf, INTERVALS, parada=0x46acca)
         self.cursor, self.io = offset, []
@@ -67,3 +69,6 @@ class BancadaCargaUnidades(BancadaX86):
 
     def estado(self):
         return bytes(self.cpu.mem_read(UNIDADES, 800*276)), bytes(self.cpu.mem_read(0x4e19bc, 4))
+
+    def estado_selecoes(self):
+        return bytes(self.cpu.mem_read(0x508728,2048))

@@ -19,9 +19,11 @@ def main():
         from test_carga_unidades import DiferencialCarga
         from test_cabecalho import DiferencialCabecalho
         from test_condicoes import DiferencialCondicoes
+        from test_selecao_carga import DiferencialSelecaoCarga
         native = DiferencialCarga.native
         prelude = DiferencialCabecalho.native
         tables = DiferencialCondicoes.native
+        full_entry = DiferencialSelecaoCarga.native
         report = dict(tests=result.testsRun, skipped=len(result.skipped), errors=len(result.errors),
                       failures=len(result.failures), unit_bounded_segments=native.execucoes,
                       unit_native_fixtures=native.loads, unit_native_returns=native.returned,
@@ -34,9 +36,13 @@ def main():
                       prelude_checkpoint='0x42ee1c, before Chemin_Remap executes',
                       condition_table_native_calls={hex(a):v for a,v in tables.calls.items()},
                       condition_table_bounded_segments=tables.execucoes,
-                      condition_evaluation_supported=False)
+                      condition_evaluation_supported=False,
+                      full_entry_native_fixtures=full_entry.loads,
+                      full_entry_bounded_segments=full_entry.execucoes,
+                      full_entry_native_returns=full_entry.returned,
+                      full_entry_expected_modifier_stops=full_entry.dependency_stops)
         (OWNED/'validacao').mkdir(exist_ok=True)
-        (OWNED/'validacao/stage3-suite-x86.json').write_text(json.dumps(report, indent=2)+'\n')
+        (OWNED/'validacao/stage4-suite-x86.json').write_text(json.dumps(report, indent=2)+'\n')
         print(json.dumps(report, indent=2))
     return 0 if result.wasSuccessful() else 1
 

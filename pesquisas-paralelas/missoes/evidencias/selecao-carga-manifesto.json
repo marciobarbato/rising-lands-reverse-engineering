@@ -1,0 +1,17 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "inspected_main": "d079aa902a3e094385db2fe69c60f91e3f86f673",
+  "original_entry": "0x46acbf",
+  "selection_call": "0x46acc5 ->0x472555",
+  "continuation": "0x46acca",
+  "shared_return": "0x46b112..0x46b119",
+  "prior_original_instruction_manifest": "manifesto.json",
+  "core_selection_integrated_main": "140cc1a2ff38811fcbc02a1bda583e45f5f72462",
+  "providers": {
+    "ferramentas/selecao_unidades.py": "45e9e51b7e1e10b0490012f68f61d29f3018ead88bce216824a5ca71a4ae6cd1",
+    "pesquisas-paralelas/missoes/carregador_unidades.py": "07e20e8e2e3244d28cae2edd18c3b4eeaad15a2ccda48d6c29441583f0935c3e",
+    "pesquisas-paralelas/combate/inicializacao_ataque.py": "4d1dc28c4b8dbcca1a0ea203d95c89cb3db3e5738eaad3f6b21be9abd7be55fc"
+  },
+  "selection_layout": "Explicit bytearray2048 at508728; four count words at offsets0,512,1024,1536",
+  "scope": "Complete unit loader entry through native return or explicit modifier boundary; successful file input adapter. No MissionLoad, natural regions, physical world insertion or runtime."
+}
