@@ -56,6 +56,46 @@ window. The next check exposed file-URL canvas readback taint. Native WK
 snapshots replaced that readback without changing WebKit security settings.
 The corrected build then completed all UI interactions and checks above.
 
+## Merged-main timer regression and correction
+
+The coordinator preserved failed merge candidate
+`67f97a6408498929ede841bd07f2a6f511e91d79` without pushing app main. Common
+checks, 29 consumer checks and package verification passed, but the native
+soldier movement wait expired. Its screenshot proves running 8× at tick 384,
+soldier `(9,5)` with progress 20/32 toward `(9,4)`, no blocked state, worker
+delivery complete and empty Python stderr. The fixed update quantum depended
+on timely WebView interval callbacks; the failure was not a pathfinding result
+or a completed movement falsely reported as success.
+
+Corrective implementation `12e0223e973acc92f65841d72a7dc619a20a204f`, based on
+the coordinator-updated feature `6194c849a693f7799b816ce5be40c73c3f52b401`,
+uses monotonic elapsed time only for the live exercise. It retains the old lab
+quantum, bounds one-response catch-up to one second and resets the time anchor
+on pause/play/speed changes. Native failures now include live clock, unit,
+pause, focus and visibility diagnostics. No timeout or security setting was
+relaxed and no research provider changed.
+
+**30 consumer tests pass**, including a new independent scheduling regression
+for 100 ms and 1 s callback spacing, pause/sleep and the catch-up bound. **27 native
+checks pass** after a real 900 ms interval without engine pump requests, then
+the original DOM movement/delivery/combat flow. The initial corrected run
+records tick 577, two hits, enemy life 60, one delivery and a measured maximum
+pump interval 0.992624333 s, with empty Python stderr. Source, assets, signature,
+architecture and relocated runtime paths pass again. Evidence directory:
+`/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/12e0223e973acc92f65841d72a7dc619a20a204f/build/logs/`.
+The failed candidate's logs remain under its separate 67f97a6 directory.
+Two additional actual native launches also passed all27 checks:
+`native-repeat-2.json` records tick579 and maximum interval1.007242709s;
+`native-repeat-3.json` records tick575 and interval1.016723542s. Both retain
+paired native captures and process logs, complete the same delivery/two-hit
+flow and have empty Python stderr. These are repeat checks of the corrective
+timing concern, not extra native reverse-engineering executions.
+
+The new native test includes the delay to reproduce the scheduling condition;
+it still uses actual wall time, DOM controls and the running interval, rather
+than replaying an expected fixed number of pump commands. Its native before/
+after PNG captures continue to verify real rendering without canvas readback.
+
 No new recovered native algorithm or domain x86 execution is claimed. Original
 executable identity/interval evidence remains in each committed provider's
 handoff. Research totals are not aggregated into a game-fidelity percentage.
