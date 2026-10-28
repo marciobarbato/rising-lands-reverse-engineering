@@ -17,7 +17,9 @@ def estender(caso, *, semente=0, rede=None, pool_aleatorio=False, padrao_realiza
     """Add order Bags, counts, player tables and market buffers to a case."""
     rng = random.Random(f'cauda:{caso.nome}:{semente}')
     m = caso.mundo
-    caso.ordens = bytearray(rng.randbytes(10816))          # [0x4e19b8] owner arrays
+    # [0x4e19b8] owner pools, laid out contiguously as in the native bench
+    # (legacy fixture form; the original uses four separate allocations).
+    caso.ordens = bytearray(rng.randbytes(10816))
     m.realizaveis_estruturas[:] = rng.randbytes(88)         # 0x49a070, core's raw name
     caso.contagens_tipo18 = bytearray(rng.randbytes(4))     # 0x4dfb4c
     caso.jogadores = bytearray(rng.randbytes(80))           # live [0x5080a8]
@@ -53,16 +55,20 @@ def caso_pool(nome, *, semente, rede, padrao='aleatorio'):
     return estender(caso, semente=semente, rede=rede, pool_aleatorio=True)
 
 
-def montar_cauda(caso):
-    """Compose existing economy classes over the case buffers, by identity."""
+def montar_cauda(caso, *, bolsas=None):
+    """Compose existing economy classes over the case buffers, by identity.
+
+    ``bolsas``: four separate per-owner unit-order pools (the original's
+    [0x4e19b8] shape), used by identity. None uses the legacy contiguous
+    fixture ``caso.ordens`` through ``ordens_contiguas``."""
     from mercado import Mercado
     from ciclo_mercado import CicloMercado
     from cauda_carga import CaudaCargaEconomia
-    h = base.montar_habitacao(caso)
+    from proprietarios import ordens_contiguas
+    h = base.montar_habitacao(caso, ordens=ordens_contiguas(caso.ordens) if bolsas is None else bolsas)
     c = h.construcoes
     c.contagens_por_tipo = caso.mundo.realizaveis_estruturas
     c.contagens_tipo18 = caso.contagens_tipo18
-    h.propriedade.ordens = caso.ordens
     mercado = Mercado(c.economia)
     mercado.jogadores, mercado.contatos, mercado.indicadores = (caso.jogadores, caso.mercado['contatos'],
                                                                 caso.mercado['indicadores'])
