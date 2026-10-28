@@ -1,6 +1,6 @@
 {
   "modo": "Python sem emulação",
-  "testes": 177,
+  "testes": 214,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -205,6 +205,34 @@
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {
+      "teste": "test_1024_estados_arbitrarios_com_overflow_e_contato_proprio (test_mercado.DiferencialMercado)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_16_divisoes_zero_preservam_toda_memoria (test_mercado.DiferencialMercado)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_232_componentes_com_precos_originais (test_mercado.DiferencialMercado)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_acessores_256_tipos_1024_aliancas_112_simpatias (test_mercado.DiferencialMercado)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_consulta_1024_ids_e_jogadores (test_mercado.DiferencialMercado)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_fronteiras_de_tipo_simpatia_alianca_e_lados_vazios (test_mercado.DiferencialMercado)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_wrap_explicito_maximos_e_sinais (test_mercado.DiferencialMercado)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
       "teste": "test_15872_combinacoes_float_no_corpo_original_completo (test_producao.DiferencialProducao)",
       "motivo": "Emulação opcional: usar --emular"
     },
@@ -323,6 +351,38 @@
     {
       "teste": "test_sequencia_deposito_retirada_recalculo_384_chamadas (test_retirada_recalculo.DiferencialRetiradaRecalculo)",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_1024_estados_arbitrarios_e_pilha_suja (test_transferencias_mercado.DiferencialTransferenciasMercado)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_128_limites_de_saldo_quantidade_e_tipo (test_transferencias_mercado.DiferencialTransferenciasMercado)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_255_tipos_sem_debito_ignoram_capacidade_zero (test_transferencias_mercado.DiferencialTransferenciasMercado)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_32_ciclos_avaliacao_transferencia_consultas (test_transferencias_mercado.DiferencialTransferenciasMercado)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_32_sequencias_repetidas_sem_limpar (test_transferencias_mercado.DiferencialTransferenciasMercado)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_512_tipos_em_cada_lado (test_transferencias_mercado.DiferencialTransferenciasMercado)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_56_falhas_primeiro_ou_segundo_sentido_inclusive_zero (test_transferencias_mercado.DiferencialTransferenciasMercado)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_64_casos_mesmo_jogador (test_transferencias_mercado.DiferencialTransferenciasMercado)",
+      "motivo": "Emulação opcional: usar --emular"
     }
   ],
   "execucoes_x86_delimitadas": 0,
@@ -336,7 +396,9 @@
     "DiferencialRecrutamento": 0,
     "DiferencialProducao": 0,
     "DiferencialAprendizagem": 0,
-    "DiferencialInicioAprendizagem": 0
+    "DiferencialInicioAprendizagem": 0,
+    "DiferencialMercado": 0,
+    "DiferencialTransferenciasMercado": 0
   },
   "excecoes_x86_esperadas": 0,
   "limites_x86_esperados": 0,

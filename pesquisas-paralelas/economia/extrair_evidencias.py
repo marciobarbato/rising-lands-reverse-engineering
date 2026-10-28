@@ -47,6 +47,9 @@ NOMES = (
     'SortilegeEstInvente', 'SortilegeSetInvention', 'SortilegeResetTechnologie',
     'SortilegeInitTechnologie',
     'InitApprentissage', 'ApprentissageSortTerminer', 'SortilegeGetCoutApprentissage',
+    'EvalueCoutProposition', 'GetNbRessource', 'PlayerGetType',
+    'PlayerEstAllie', 'PlayerGetSympathie',
+    'VideMatiere',
 )
 # O RET precede dados; não apresentá-los como instruções da função.
 FINS_CONFIRMES = {0x41aace: 0x41ab04, 0x4283e2: 0x428691, 0x478806: 0x478a01,
@@ -58,11 +61,14 @@ TRECHOS_AUXILIARES = {
     0x423eb2: ('corpo_compartilhado_de_CalculStatusRecrute', 0x423f83),
     0x41db1d: ('epilogo_compartilhado_de_CalculTroupe', 0x41db24),
     0x42399a: ('epilogo_compartilhado_de_InitApprentissage', 0x4239a0),
+    0x4661d3: ('epilogo_compartilhado_de_EvalueCoutProposition', 0x4661da),
 }
 TRECHOS_CONTEXTO = {
     0x42bec6: ('InputGame_custos_e_comando_de_aprendizagem', 0x42bf92),
     0x45f246: ('ProcessInputGame_despacho_de_InitApprentissage', 0x45f257),
     0x45e1d6: ('IconeFillContenu_teste_de_custos_de_aprendizagem', 0x45e210),
+    0x464bee: ('MatiereEstDemander_ordem_pecas_comida_pedra', 0x464c1a),
+    0x4674b1: ('CalculMarcheProposition_comparacao_do_indicador', 0x4674c6),
 }
 
 
@@ -151,6 +157,13 @@ def extrair():
                                 registro_hex=imagem[0x497174+t*46-base:0x497174+(t+1)*46-base].hex())
                            for t in range(5)])
     (pasta / 'parametros-producao.json').write_text(json.dumps(parametros, ensure_ascii=False, indent=2) + '\n')
+    mercado = dict(sha256_exe=HASH,
+                   origem='Valores estáticos da imagem PE; não são custos de recrutamento nem carga INI',
+                   precos_unidades=dict(endereco='0x496fb0',
+                                         bytes_hex=imagem[0x496fb0-base:0x496fca-base].hex()),
+                   precos_recursos=dict(endereco='0x496fcc', ordem=['pecas', 'comida', 'pedra'],
+                                        bytes_hex=imagem[0x496fcc-base:0x496fcf-base].hex()))
+    (pasta / 'parametros-mercado.json').write_text(json.dumps(mercado, ensure_ascii=False, indent=2) + '\n')
     print(f'{len(alvos)} rotinas, {len(TRECHOS_AUXILIARES)} trechos auxiliares, '
           f'{len(TRECHOS_CONTEXTO)} contextos e {len(referencias)} referências candidatas: {pasta}')
 
