@@ -1,0 +1,408 @@
+{
+ "exe_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "analysis_pe_sha256_not_executed": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+ "regions": [
+  {
+   "name": "CacheAlloc_CacheFree_InitCache",
+   "start": "0x40fa18",
+   "end": "0x40fa72",
+   "bytes_hex": "31c066a1c45b4900c1e002e87e840500a350a04900c3a150a04900e993840500535231c0eb2831d28b1d50a049006689c266c7049300008b1d50a04900c6449302008b1d50a0490040c644930300663b05c45b490072cf5a5bc3",
+   "sha256": "29e4373d6d4dcb98bf4b5dd7feedffb24418155871a83a0e86a96b8ba601c3dc"
+  },
+  {
+   "name": "uncalled_SetCacheBloc_SearchCacheBloc",
+   "start": "0x40fa72",
+   "end": "0x40fb27",
+   "bytes_hex": "515688d131d2668b154ea0490089d68b1550a04900c1e6026689043231d2a150a04900668b154ea04900884c900231c08b1550a0490066a14ea04900885c8203668b1d4ea0490031d26689da31c942668b0dc45b490089d0c1fa1ff7f989d86689154ea0490005420400005e59c3515688d189c688dd31d2eb0142663b15c45b4900732931c06689d08b1d50a04900c1e00201d8663b3075e13a480275dc3a680375d789d005420400005e59c3b8ffff00005e59c3",
+   "sha256": "05bea3773e39b0fdc2964981e63e65590e870bd1fc5b8eb8b7050919ab6ea31a"
+  },
+  {
+   "name": "uncalled_ConstruitCache",
+   "start": "0x40fbc7",
+   "end": "0x40fd95",
+   "bytes_hex": "5156575583ec0489c788d131c08b1550a0490066a14ea0490066893c8231c08b1550a0490066a14ea04900884c820231c08b1550a0490066a14ea04900885c8203668b354ea0490031d26689f2420fb72dc45b490089d0c1fa1ff7fd81c6420400006689154ea0490080fb040f8265000000762e80fb097250763c80fb0c7245763ceb41b8ffff0000e967000000b804000000e958000000b803000000e94e000000b802000000eb47b806000000eb40b801000000eb39b808000000eb32b805000000eb2b31c0eb2780fb0672f776d980fb0874dbebee80fb01720e76b080fb0276b5b807000000eb0684db7496ebd5053904000089042480f9040f8265000000762e80f9097250763c80f90c7245763ceb41b9ffff0000e96a000000b804000000e958000000b803000000e94e000000b802000000eb47b806000000eb40b801000000eb39b808000000eb32b805000000eb2b31c0eb2780f90672f776d980f90874dbebee80f901720e76b080f90276b5b807000000eb0684c97496ebd589c181c13904000031db31d26689f36689fa89d8e843cb040031d26689ca81faffff0000740789d8e806ca040031d2668b142481faffff0000740a31c06689f0e874ca040089f083c4045d5f5e59c3",
+   "sha256": "38fe9695ed5c7044ae2af0731985c16004188a8a81a432638e4b1172d6415bbe"
+  },
+  {
+   "name": "GetNumBob",
+   "start": "0x40fd95",
+   "end": "0x410085",
+   "bytes_hex": "5351565783ec0c89c789d031db31d26689c38a154180500089d8e82269060084c0750ab839040000e9bb020000a04180500031d288c28b0495787d50008a2c0389d880e50fe85b6b060088e984c0744431d289d88a1541805000e85d6b060084c0741531c030d288e88854240885c0752889f8e970020000a04180500025ff0000008b0485887d50008a0403240f88442408eb05c64424080f8a44240889fe88cd31d288442404eb0142663b15c45b4900732d31c06689d089c3a150a04900c1e30201d8663b3075e08a58023a5c240475d73a680375d289d00542040000eb05b8ffff000089c225ffff00003dffff00007455e9ee010000b8ffff0000e914010000b804000000e905010000b803000000e9fb000000b802000000e9f1000000b806000000e9e7000000b801000000e9dd000000b808000000e9d3000000b805000000e9c900000031c08b1550a0490066a14ea0490066893c8231c066a14ea049008b1550a04900c1e00201d08a5c240888580231c08b1550a0490066a14ea04900884c8203668b354ea0490031d2893c246689f231ff42668b3dc45b490089d0c1fa1ff7ff81c6420400006689154ea0490080f90472340f8658ffffff80f90972130f866bffffff80f90c72410f866affffffeb3980f90672340f863fffffff80f9080f8440ffffffeb2380f90172160f860bffffff80f9020f860cffffffb807000000eb0a84c90f84e9feffff31c0053904000089c780fb040f8265000000762e80fb097250763c80fb0c7245763ceb41b9ffff0000e96a000000b804000000e958000000b803000000e94e000000b802000000eb47b806000000eb40b801000000eb39b808000000eb32b805000000eb2b31c0eb2780fb0672f776d980fb0874dbebee80fb01720e76b080fb0276b5b807000000eb0684db7496ebd589c181c13904000031db31d26689f3668b142489d8e854c8040031d26689ca81faffff0000740789d8e817c7040031d26689fa81faffff0000740a31c06689f0e886c7040089f289d083c40c5f5e595bc3",
+   "sha256": "e23998884a96474e07358cacba6c6aeb2afc618b39620068504deb32c4e4a76b"
+  },
+  {
+   "name": "MemInit_MemAlloc_MemFree_into_MemClose_ret",
+   "start": "0x467e34",
+   "end": "0x467ef4",
+   "bytes_hex": "53515283ec2089e0502eff15d43152008b542408522eff15c431520068000040016a002eff15c0315200502eff15d031520050a3342f4e002eff15cc315200502eff15d83152008b1d342f4e00532eff15cc315200502eff15c831520031c9890d382f4e00890d3c2f4e0083c4205a595bc351528b153c2f4e005001c26a0089153c2f4e002eff15c0315200502eff15d03152005a59c353515289c3502eff15cc315200502eff15d8315200532eff15cc315200502eff15c83152005a595bc3",
+   "sha256": "b1c0ba63078aa94826d0121eb402eae066c3a916110166fc9036e86046d9c0dd"
+  },
+  {
+   "name": "SetBank",
+   "start": "0x418590",
+   "end": "0x418599",
+   "bytes_hex": "8b4004a36c8f5000c3",
+   "sha256": "f8ded8c4d259971d5caeac5416f4d07cddd943d94b62fa95625dad75146a6ecb"
+  },
+  {
+   "name": "LoadSTRATBank",
+   "start": "0x41877a",
+   "end": "0x4189c2",
+   "bytes_hex": "53515256575581ec30010000b9060000008dbc2400010000bec85b490031d2b80800000089942428010000f3a5e8faf604008994242401000089c5668910eb3b8d84241801000001dbba0200000001d88bbc2424010000e88bfc0300668b841c18010000668b75004701c689bc242401000066897500e857fc030031db668b9c242401000083fb067d68be9494500089e7578a0688073c0074108a460183c60288470183c7023c0075e85f89e78bb49c00010000bad6414900572bc949b000f2ae4f8a0688073c0074108a460183c60288470183c7023c0075e85f89e0e8c4fb030025ff0000000f8553ffffffe94901000031c0668b450031c9c1e002898c242c010000e823f60400894504e9a400000089c34341899c242801000031c0668b84242c010000663b8c44180100007371b80c000000e8f2f5040089c385c0743fba02000000e89dfb0300ba020000008d4302e890fb0300ba040000008d4304e883fb03008b4304e8c0f5040089430885c0750431dbeb088b5304e868fb030031c08b5504668b842428010000891c828b5504833c82000f8575ffffffe831fb03008b8c242c01000041e824fb0300898c242c01000031db668b9c242c01000083fb067d75be9494500089e7578a0688073c0074108a460183c60288470183c7023c0075e85f89e78bb49c00010000bad9414900572bc949b000f2ae4f8a0688073c0074108a460183c60288470183c7023c0075e85f89e0e88afa03008d9424180100008d041b01d0ba0200000031c9e8b3fa0300e9e3feffff89e881c4300100005d5f5e5a595bc3",
+   "sha256": "2682bf21e849d9d06d1a3a335bafb5912207c75ab2770ff3ec5a508a2e83e9da"
+  },
+  {
+   "name": "FileOpen_FileExists_FileClose_FileRead",
+   "start": "0x458420",
+   "end": "0x458476",
+   "bytes_hex": "e8fa420300a31c1d4e0085c00f95c0c352ba88484900e8e442030085c0750430c05ac3e8c3430300b0015ac352a11c1d4e0031d2e8b243030089151c1d4e005ac35351bb010000008b0d1c1d4e00e808450300595bc3",
+   "sha256": "ad54bf31c0b1fce6772da8d532fd3a0f91024b80ae83be1af57bdeade1d267b7"
+  },
+  {
+   "name": "ProgInit_MemInit_call",
+   "start": "0x474bf8",
+   "end": "0x474bfd",
+   "bytes_hex": "e83732ffff",
+   "sha256": "8aa1c04447623d0771db60bea92572016646da65d38c5868eeffaca1000fd12b"
+  },
+  {
+   "name": "ProgInit_bank_then_CacheAlloc",
+   "start": "0x474e9b",
+   "end": "0x474ecd",
+   "bytes_hex": "e8da38faffba3c000000a35c8f5000e8e136faffe864abf9ffe862cbfcffe8d73ffaffe8cc64ffffe8db87ffffe89b50ffff",
+   "sha256": "144952e50ac0ac4434678ef9027ade67c6a517b9bfda85410707deff30322889"
+  },
+  {
+   "name": "ProgExit_CacheFree_then_DeleteBank",
+   "start": "0x474faa",
+   "end": "0x474fc8",
+   "bytes_hex": "e8ad64ffffe87aaaf9ffe825cbfcffe862440000a1648f5000e84a3afaff",
+   "sha256": "2e62a696e2c0a82c0cedfb82e0136b0e02082edd3c031c2236a850d87aeceac6"
+  },
+  {
+   "name": "CalculGame_start_InitCache_before_MissionLoad",
+   "start": "0x42d1da",
+   "end": "0x42d239",
+   "bytes_hex": "e805460400b20130c030dba2ae995000a2af995000e84428feffe8d7d9020088152c6d4900881585724900881dd86f490031d28a3d782f4e0089151c064e0084ff751ea030074e0084c0750931c0e8a2f00300eb50b8cc3a4e00e8aaf30300",
+   "sha256": "4c0bf171cb34b320c5c14948d32d8c398dfd7a96be319f8c738e5a6dfd76c636"
+  },
+  {
+   "name": "MenuNewSelect_InitCache_before_GameLoad",
+   "start": "0x42c693",
+   "end": "0x42c710",
+   "bytes_hex": "e84c51040030f6b7018835ae9950008835af995000e88b33feffe81ee50200883d2c6d4900883d857249008835d86f4900e83f84040066a126875000c1e00531c9486689c166a124875000c1e00531db4831d26689c331c0e8292efeffb90100000031d289f089157c8f50008915808f50008915848f5000e87df10300",
+   "sha256": "d3f806190ea5edfa0ab94adb5c3fbf2484c3f52bded68d81a937aff5a3bc4503"
+  },
+  {
+   "name": "capacity_word",
+   "start": "0x495bc4",
+   "end": "0x495bc6",
+   "bytes_hex": "0001",
+   "sha256": "b413f47d13ee2fe6c845b2ee141af81de858df4ec549a58b7970bb96645bc8d2"
+  },
+  {
+   "name": "bank_name_pointer_table",
+   "start": "0x495bc8",
+   "end": "0x495be0",
+   "bytes_hex": "dc414900f0414900054249001c424900334249004a424900",
+   "sha256": "767f89f70b789785b54b40392c7dea72176c3fc0d1c755a0656c43c792ae79b0"
+  },
+  {
+   "name": "bank_mode_and_name_strings",
+   "start": "0x4941d6",
+   "end": "0x494260",
+   "bytes_hex": "7262007262005c47726170686963735c426c6f63732e636d70005c47726170686963735c54726f6f70732e636d70005c47726170686963735c5665686963756c652e636d70005c47726170686963735c43726561747572652e636d70005c47726170686963735c4275696c64696e672e636d70005c47726170686963735c4f74686572732e636d700000",
+   "sha256": "68db218d609bc17538964ba8cb08ac5bfca3381cbba43d5d59991979eed27ea5"
+  },
+  {
+   "name": "kernel32_global_iat_slots",
+   "start": "0x5231c0",
+   "end": "0x5231dc",
+   "bytes_hex": "463612005436120064361200723612008236120090361200a6361200",
+   "sha256": "3e85871d9ae3f41db5f685ef37d1dcc53bc126163fe94de0771bc5c842ca71bf"
+  }
+ ],
+ "sections": [
+  {
+   "nome": "BEGTEXT",
+   "cabecalho_hex": "42454754455854000000000000100000002c09000004000000000000000000000000000020000060",
+   "virtual_size": 0,
+   "rva": "0x1000",
+   "size_of_raw_data": 601088,
+   "pointer_to_raw_data": 1024,
+   "characteristics": "0x60000020"
+  },
+  {
+   "nome": "DGROUP",
+   "cabecalho_hex": "4447524f5550000000000000004009000058000000300900000000000000000000000000400000c0",
+   "virtual_size": 0,
+   "rva": "0x94000",
+   "size_of_raw_data": 22528,
+   "pointer_to_raw_data": 602112,
+   "characteristics": "0xc0000040"
+  },
+  {
+   "nome": ".bss",
+   "cabecalho_hex": "2e627373000000000000000000a009000084080000000000000000000000000000000000800000c0",
+   "virtual_size": 0,
+   "rva": "0x9a000",
+   "size_of_raw_data": 558080,
+   "pointer_to_raw_data": 0,
+   "characteristics": "0xc0000080"
+  },
+  {
+   "nome": ".idata",
+   "cabecalho_hex": "2e696461746100000000000000301200000e000000880900000000000000000000000000400000c0",
+   "virtual_size": 0,
+   "rva": "0x123000",
+   "size_of_raw_data": 3584,
+   "pointer_to_raw_data": 624640,
+   "characteristics": "0xc0000040"
+  },
+  {
+   "nome": ".reloc",
+   "cabecalho_hex": "2e72656c6f6300000000000000401200008c00000096090000000000000000000000000040000042",
+   "virtual_size": 0,
+   "rva": "0x124000",
+   "size_of_raw_data": 35840,
+   "pointer_to_raw_data": 628224,
+   "characteristics": "0x42000040"
+  },
+  {
+   "nome": ".rsrc",
+   "cabecalho_hex": "2e727372630000000000000000d012000006000000220a00000000000000000000000000400000c0",
+   "virtual_size": 0,
+   "rva": "0x12d000",
+   "size_of_raw_data": 1536,
+   "pointer_to_raw_data": 664064,
+   "characteristics": "0xc0000040"
+  }
+ ],
+ "static_scan": {
+  "nomes": {
+   "0x40fa18": "CacheAlloc",
+   "0x40fa2e": "CacheFree",
+   "0x40fa38": "InitCache",
+   "0x40fa72": "SetCacheBloc",
+   "0x40fae0": "SearchCacheBloc",
+   "0x40fbc7": "ConstruitCache",
+   "0x40fd95": "GetNumBob",
+   "0x45c8a2": "CopyBitmap32x32",
+   "0x45c779": "OmbreBitmap32x32",
+   "0x45c7ff": "PasteBitmap32x32",
+   "0x467ea6": "MemAlloc",
+   "0x467ecb": "MemFree",
+   "0x467e34": "MemInit"
+  },
+  "chamadas_rel32": {
+   "0x40fa18": [
+    ["call","0x474eaf","ProgInit+0x2c4"]
+   ],
+   "0x40fa2e": [
+    ["call","0x474faf","ProgExit+0x23"]
+   ],
+   "0x40fa38": [
+    ["call","0x42c6a8","MenuNewSelect+0x2c4"],
+    ["call","0x42d1ef","CalculGame+0x987"]
+   ],
+   "0x40fa72": [],
+   "0x40fae0": [],
+   "0x40fbc7": [],
+   "0x40fd95": [
+    ["call","0x41085f","AffTerrain+0x1d1"]
+   ],
+   "0x45c8a2": [
+    ["call","0x40fd5a","ConstruitCache+0x193"],
+    ["call","0x410049","GetNumBob+0x2b4"]
+   ],
+   "0x45c779": [
+    ["call","0x40fd6e","ConstruitCache+0x1a7"],
+    ["call","0x41005d","GetNumBob+0x2c8"]
+   ],
+   "0x45c7ff": [
+    ["call","0x40fd86","ConstruitCache+0x1bf"],
+    ["call","0x410074","GetNumBob+0x2df"]
+   ],
+   "0x467ea6": [
+    ["call","0x40f561","AffInit+0x9"],
+    ["call","0x40f575","AffInit+0x1d"],
+    ["call","0x40fa23","CacheAlloc+0xb"],
+    ["call","0x4185a0","ReadBobCmp+0x7"],
+    ["call","0x4185d2","ReadBobCmp+0x39"],
+    ["call","0x4185fd","CreateBob+0xb"],
+    ["call","0x418624","CreateBank+0x9"],
+    ["call","0x418638","CreateBank+0x1d"],
+    ["call","0x4186ca","LoadBank+0x10"],
+    ["call","0x4186fb","LoadBank+0x41"],
+    ["call","0x418710","LoadBank+0x56"],
+    ["call","0x418742","LoadBank+0x88"],
+    ["call","0x4187a7","LoadSTRATBank+0x2d"],
+    ["call","0x41887e","LoadSTRATBank+0x104"],
+    ["call","0x4188af","LoadSTRATBank+0x135"],
+    ["call","0x4188e1","LoadSTRATBank+0x167"],
+    ["call","0x42f1e6","Chemin_Open+0x5"],
+    ["call","0x42f1f5","Chemin_Open+0x14"],
+    ["call","0x441a23","EnginAlloc+0x8"],
+    ["call","0x441a32","EnginAlloc+0x17"],
+    ["call","0x441a43","EnginAlloc+0x28"],
+    ["call","0x441a54","EnginAlloc+0x39"],
+    ["call","0x441a7d","EnginAlloc+0x62"],
+    ["call","0x441aa0","EnginAlloc+0x85"],
+    ["call","0x441ab3","EnginAlloc+0x98"],
+    ["call","0x45a519","LoadFonteExterieur+0x58"],
+    ["call","0x45a573","LoadFonteExterieur+0xb2"],
+    ["call","0x45a5dc","ChargeFonteExterieur+0x33"],
+    ["call","0x45eb85","InputReceive+0x109"],
+    ["call","0x45f33f","InitInputPlayer+0x14"],
+    ["call","0x45f377","ModifyInputPlayer+0xd"],
+    ["call","0x45f4bb","ReadLZSImage+0xa7"],
+    ["call","0x45f6e8","PaletteAlloc+0x7"],
+    ["call","0x45f6f7","PaletteAlloc+0x16"],
+    ["call","0x45f706","PaletteAlloc+0x25"],
+    ["call","0x45f715","PaletteAlloc+0x34"],
+    ["call","0x45f724","PaletteAlloc+0x43"],
+    ["call","0x45f735","PaletteAlloc+0x54"],
+    ["call","0x45f746","PaletteAlloc+0x65"],
+    ["call","0x468945","MenuInit+0x68a"],
+    ["call","0x468959","MenuInit+0x69e"],
+    ["call","0x46896d","MenuInit+0x6b2"],
+    ["call","0x469f7e","MiniMapAlloc+0x16"],
+    ["call","0x469f9c","MiniMapAlloc+0x34"],
+    ["call","0x469fba","MiniMapAlloc+0x52"],
+    ["call","0x46b396","MissionAlloc+0x7"],
+    ["call","0x46b3a5","MissionAlloc+0x16"],
+    ["call","0x46b3b4","MissionAlloc+0x25"],
+    ["call","0x46b3c3","MissionAlloc+0x34"],
+    ["call","0x46b3d4","MissionAlloc+0x45"],
+    ["call","0x46b3e3","MissionAlloc+0x54"],
+    ["call","0x46b3f3","MissionAlloc+0x64"],
+    ["call","0x46b406","MissionAlloc+0x77"],
+    ["call","0x46d6a8","PlayerAlloc+0x5"],
+    ["call","0x46d6b7","PlayerAlloc+0x14"],
+    ["call","0x46dfa5","ProjectileAlloc+0x5"],
+    ["call","0x4792f9","AllocMessageText+0x10"],
+    ["call","0x47930a","AllocMessageText+0x21"],
+    ["call","0x47939e","InitTextLangue+0x1b"],
+    ["call","0x4793b4","InitTextLangue+0x31"]
+   ],
+   "0x467ecb": [
+    ["call","0x40f59b","AffExit+0x12"],
+    ["call","0x40f5b4","AffExit+0x2b"],
+    ["jmp","0x40fa33","CacheFree+0x5"],
+    ["call","0x4189d3","DeleteBob+0x11"],
+    ["call","0x4189de","DeleteBob+0x1c"],
+    ["call","0x418a00","RemoveBob+0x1a"],
+    ["call","0x418a0b","RemoveBob+0x25"],
+    ["call","0x418a42","DeleteBank+0x30"],
+    ["call","0x418a4d","DeleteBank+0x3b"],
+    ["call","0x418a62","DeleteBank+0x50"],
+    ["call","0x418a69","DeleteBank+0x57"],
+    ["call","0x42cdf3","CalculGame+0x58b"],
+    ["call","0x42ce0c","CalculGame+0x5a4"],
+    ["call","0x42ce23","CalculGame+0x5bb"],
+    ["call","0x42f205","Chemin_Close+0x5"],
+    ["jmp","0x42f20f","Chemin_Close+0xf"],
+    ["call","0x441af2","EnginFree+0x14"],
+    ["call","0x441b06","EnginFree+0x28"],
+    ["call","0x441b1d","EnginFree+0x3f"],
+    ["call","0x441b3a","EnginFree+0x5c"],
+    ["call","0x441b50","EnginFree+0x72"],
+    ["call","0x441b5a","EnginFree+0x7c"],
+    ["call","0x441b64","EnginFree+0x86"],
+    ["call","0x45a605","UnloadFonteExterieur+0xd"],
+    ["call","0x45ebaf","InputReceive+0x133"],
+    ["call","0x45f35e","CloseInputPlayer+0xc"],
+    ["call","0x45f3a5","ModifyInputPlayer+0x3b"],
+    ["call","0x45f4e7","ReadLZSImage+0xd3"],
+    ["call","0x45f76c","PaletteFree+0xc"],
+    ["call","0x45f781","PaletteFree+0x21"],
+    ["call","0x45f78b","PaletteFree+0x2b"],
+    ["call","0x45f795","PaletteFree+0x35"],
+    ["call","0x45f79f","PaletteFree+0x3f"],
+    ["call","0x45f7a9","PaletteFree+0x49"],
+    ["call","0x45f7b3","PaletteFree+0x53"],
+    ["call","0x468303","MenuInit+0x48"],
+    ["call","0x46831c","MenuInit+0x61"],
+    ["call","0x468335","MenuInit+0x7a"],
+    ["call","0x46a002","MiniMapFree+0x5"],
+    ["call","0x46a00c","MiniMapFree+0xf"],
+    ["jmp","0x46a016","MiniMapFree+0x19"],
+    ["call","0x46b480","MissionFree+0x24"],
+    ["call","0x46b499","MissionFree+0x3d"],
+    ["call","0x46b4b2","MissionFree+0x56"],
+    ["call","0x46b4c5","MissionFree+0x69"],
+    ["call","0x46b4d6","MissionFree+0x7a"],
+    ["call","0x46b4e7","MissionFree+0x8b"],
+    ["call","0x46b4f8","MissionFree+0x9c"],
+    ["call","0x46b50d","MissionFree+0xb1"],
+    ["call","0x46d6c7","PlayerFree+0x5"],
+    ["jmp","0x46d6d1","PlayerFree+0xf"],
+    ["jmp","0x46dfb5","ProjectileFree+0x5"],
+    ["call","0x47935a","MessageTextFree+0x31"],
+    ["call","0x479374","MessageTextFree+0x4b"],
+    ["call","0x479451","CloseTextLangue+0x31"],
+    ["call","0x47946b","CloseTextLangue+0x4b"]
+   ],
+   "0x467e34": [
+    ["call","0x474bf8","ProgInit+0xd"]
+   ]
+  },
+  "referencias_absolutas": {
+   "0x49a050": [
+    ["0x40fa29","CacheAlloc+0x11"],
+    ["0x40fa2f","CacheFree+0x1"],
+    ["0x40fa42","InitCache+0xa"],
+    ["0x40fa51","InitCache+0x19"],
+    ["0x40fa5c","InitCache+0x24"],
+    ["0x40fa83","SetCacheBloc+0x11"],
+    ["0x40fa91","SetCacheBloc+0x1f"],
+    ["0x40faa4","SetCacheBloc+0x32"],
+    ["0x40fafd","SearchCacheBloc+0x1d"],
+    ["0x40fbd6","ConstruitCache+0xf"],
+    ["0x40fbe8","ConstruitCache+0x21"],
+    ["0x40fbfa","ConstruitCache+0x33"],
+    ["0x40fe50","GetNumBob+0xbb"],
+    ["0x40fee1","GetNumBob+0x14c"],
+    ["0x40fef9","GetNumBob+0x164"],
+    ["0x40ff0d","GetNumBob+0x178"]
+   ],
+   "0x49a04e": [
+    ["0x40fa7b","SetCacheBloc+0x9"],
+    ["0x40fa98","SetCacheBloc+0x26"],
+    ["0x40faaa","SetCacheBloc+0x38"],
+    ["0x40fab5","SetCacheBloc+0x43"],
+    ["0x40fad4","SetCacheBloc+0x62"],
+    ["0x40fbdc","ConstruitCache+0x15"],
+    ["0x40fbee","ConstruitCache+0x27"],
+    ["0x40fc00","ConstruitCache+0x39"],
+    ["0x40fc0b","ConstruitCache+0x44"],
+    ["0x40fc2c","ConstruitCache+0x65"],
+    ["0x40fee7","GetNumBob+0x152"],
+    ["0x40fef3","GetNumBob+0x15e"],
+    ["0x40ff13","GetNumBob+0x17e"],
+    ["0x40ff1e","GetNumBob+0x189"],
+    ["0x40ff44","GetNumBob+0x1af"]
+   ],
+   "0x495bc4": [
+    ["0x40fa1c","CacheAlloc+0x4"],
+    ["0x40fa69","InitCache+0x31"],
+    ["0x40fac4","SetCacheBloc+0x52"],
+    ["0x40faf0","SearchCacheBloc+0x10"],
+    ["0x40fc18","ConstruitCache+0x51"],
+    ["0x40fe42","GetNumBob+0xad"],
+    ["0x40ff30","GetNumBob+0x19b"]
+   ],
+   "0x4e2f3c": [
+    ["0x467e9b","MemInit+0x67"],
+    ["0x467eaa","MemAlloc+0x4"],
+    ["0x467eb5","MemAlloc+0xf"]
+   ]
+  },
+  "limite": "A computed address (base register plus index) or a pointer stored elsewhere is not excluded by this scan."
+ },
+ "predecessor_sources": {
+  "cache_terreno.py": "efc36783776cf4007dbd9fef822afcfff5e697700f5b4788dd1e468e5390bdc7",
+  "passe_terreno.py": "d8e6621878ce255a408237c0ac271bb72b447706f4e1387c68710a921e83ec1c",
+  "graficos.py": "80066cbc6093cb69f158828226304b8493bab3744753f32b8601df683ca0d3ae"
+ }
+}
