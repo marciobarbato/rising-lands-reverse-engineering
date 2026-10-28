@@ -66,6 +66,14 @@ class MundoUnidades:
         return atualizar_capacidades_unidades(self, jogador, capacidade_tipo=capacidade_tipo,
                                               modificador=modificador)
 
+    def adicionar_vida_unidade(self, indice, acrescimo, tipos_unidades):
+        from recuperacao_unidades import adicionar_vida_unidade
+        return adicionar_vida_unidade(self, indice, acrescimo, tipos_unidades)
+
+    def resetar_fadiga_unidade(self, indice):
+        from recuperacao_unidades import resetar_fadiga_unidade
+        return resetar_fadiga_unidade(self, indice)
+
     @staticmethod
     def _indice(indice):
         indice &= 65535

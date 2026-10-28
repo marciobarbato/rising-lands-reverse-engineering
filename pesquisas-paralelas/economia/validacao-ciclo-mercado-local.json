@@ -1,0 +1,45 @@
+{
+  "scope": "MarcheResetAll/ResetMarche/MarcheQuitte selective fields; protected second index checkpoint",
+  "mode": "Python only",
+  "tests": 14,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_1008_invalid_second_bytes_stop_after_complete_first_row (test_ciclo_mercado.DiferencialCicloMercado)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_32_all_resets_with_seeded_gaps_and_unrelated_buffers (test_ciclo_mercado.DiferencialCicloMercado)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_32_quit_contacts_and_aliases (test_ciclo_mercado.DiferencialCicloMercado)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_3_exact_original_write_orders_including_alias_duplicate_writes (test_ciclo_mercado.DiferencialCicloMercado)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_8_invalid_quit_contacts_preserve_first_row (test_ciclo_mercado.DiferencialCicloMercado)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_96_pairs_all_indices_aliases_and_high_register_bits (test_ciclo_mercado.DiferencialCicloMercado)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_96_persistent_reset_quit_all_sequences (test_ciclo_mercado.DiferencialCicloMercado)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "declared_stops": 0,
+  "completed_returns": 0,
+  "protected_index_stops": 0,
+  "expected_x86_exceptions": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}
