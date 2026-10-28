@@ -35,6 +35,10 @@ class WorkflowTests(unittest.TestCase):
         self.assertTrue(workflow.owned('maintenance', 'AGENTS.md'))
         self.assertFalse(workflow.owned('maintenance', 'docs/MISSIONS.md'))
         self.assertFalse(workflow.owned('maintenance', 'pesquisas-paralelas/ia-runtime/README.md'))
+        self.assertFalse(workflow.owned('maintenance', 'pesquisas-paralelas/ia-runtime/README.md', 'D'))
+        # Seeding a new front adds files under its paths without touching existing research files.
+        self.assertTrue(workflow.owned('maintenance', 'pesquisas-paralelas/ia-runtime/README.md', 'A'))
+        self.assertFalse(workflow.owned('core', 'pesquisas-paralelas/ia-runtime/README.md', 'A'))
 
     def test_every_front_has_distinct_branch_and_worktree(self):
         branches = [front.branch for front in workflow.FRONTS.values()]

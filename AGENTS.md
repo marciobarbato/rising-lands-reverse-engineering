@@ -21,7 +21,7 @@ Each research chat works on one branch in a separate worktree created by `python
 | `macos` | `feat/macos-playable` / `worktrees/macos-playable` | `apps/macos-preview/`, `compilar-jogável`, `docs/MACOS_PLAYABLE.md` |
 | `maintenance` (coordinator) | `coordinator/maintenance` / `worktrees/maintenance` | every shared path: scripts, `AGENTS.md`, root README, common manuals, requirements, Ghidra tooling, `integracao/` |
 
-A worker records a cross-domain dependency in its own handoff and communicates the requested contract; it does not silently edit the other owner's files. Research modules share a flat import namespace: new module basenames must be unique across `ferramentas/`, the five research folders and the app, and consumers bootstrap through the owned `ambiente_*` modules or `integracao.providers`. Do not spawn additional agents unless the user explicitly requests them for the current work.
+A worker records a cross-domain dependency in its own handoff and communicates the requested contract; it does not silently edit the other owner's files. The coordinator may seed a new front by adding its initial files, but never modifies or deletes research-owned files. Research modules share a flat import namespace: new module basenames must be unique across `ferramentas/`, the five research folders and the app, and consumers bootstrap through the owned `ambiente_*` modules or `integracao.providers`. Do not spawn additional agents unless the user explicitly requests them for the current work.
 
 ## Inputs and evidence
 

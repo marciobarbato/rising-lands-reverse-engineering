@@ -114,19 +114,26 @@ def changed_paths(repo, base, head):
     return git(repo, 'diff', '--name-only', '--no-renames', base + '...' + head).splitlines()
 
 
+def changed_statuses(repo, base, head):
+    lines = git(repo, 'diff', '--name-status', '--no-renames', base + '...' + head).splitlines()
+    return [(line.split('\t')[0][:1], line.split('\t', 1)[1]) for line in lines if line]
+
+
 def research_owned(path):
     return any(path.startswith(FRONTS[name].prefixes) or path in FRONTS[name].exact for name in RESEARCH)
 
 
-def owned(domain, path):
+def owned(domain, path, status='M'):
+    """Ownership of one changed path. The coordinator may seed a new front by
+    adding files under its paths, but never modifies or deletes research files."""
     front = FRONTS[domain]
     if domain == 'maintenance':
-        return not research_owned(path)
+        return not research_owned(path) or status == 'A'
     return path.startswith(front.prefixes) or path in front.exact
 
 
 def check_ownership(repo, domain, branch):
-    foreign = [p for p in changed_paths(repo, 'origin/main', branch) if not owned(domain, p)]
+    foreign = [p for s, p in changed_statuses(repo, 'origin/main', branch) if not owned(domain, p, s)]
     if foreign:
         raise RuntimeError('Changes outside ' + domain + ' ownership:\n' + '\n'.join(foreign))
 
