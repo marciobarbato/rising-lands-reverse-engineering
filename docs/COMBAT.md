@@ -14,7 +14,7 @@ Owner: combat. Source and tests live in `pesquisas-paralelas/combate/`. Shared d
 | `avanco_projeteis.py` | Linear advance, logical animation, arrival, RNG, damage requests and secondary effects |
 | `maquina_projeteis.py` | Supported full advancement/expiration dispatcher, types 30/33, and live-pool `Calcul` passes |
 | `cadencia_projeteis.py` | Original caller gates, accumulated-counter input, and impact presentation preparation |
-| `consumo_dano.py` | Mode-1 occupied-unit damage consumer, live callbacks and explicit death boundary |
+| `consumo_dano.py` | Mode-1 and special-row mode-8 unit damage, live callbacks and explicit death boundaries |
 | `impacto_unidades.py` | Mode-1 unit impact wrapper: lookup, reaction requests, consumer, hit allocation, diplomacy and alert requests |
 | `bonus_combate.py` | Argument-order adapter from damage's modifier queries to economy's committed loaded-table provider |
 | `morte_dano.py` | Optional mode-1 lethal tail: local experience/life writes, child allocation and explicit level/lifecycle/sympathy requests |
@@ -49,6 +49,8 @@ Damage distribution produces requests and invokes declared callbacks. Building, 
 
 `ConsumidorDanoUnidade.infligir(victim, mode, attacker, direction=0)` reconstructs the mode-1 path of `EnginInfligeDegat` at `0x4502F0`, returning through `0x45084F..0x450855` for nonlethal results. It reuses core's committed `dano_bruto_unidade`, `reduzir_dano`, and `aplicar_dano_parcial` arithmetic. Provide 800 live mutable 276-byte records and 26 damage rows with at least 26 u8 entries each. IDs truncate to u16 and must then be 0..799; mode truncates to u8 and must be 1; source and victim types must be 0..25. Direction is unused by this mode. Unsupported modes, IDs or types fail before callbacks or local writes.
 
+The constructor also accepts 27 explicit damage rows for mode 8 below. Mode 1 still uses only the first 26 rows; supplying the optional row does not change its callbacks or arithmetic.
+
 Callbacks take `(name, arguments_tuple)`. Queries return native integer results; modifiers and predicates are consumed at their original widths. Effects return no value. Callbacks may mutate records **in place** and context fields; replacing record objects, the world base pointer or the damage-row pointer table during a call is outside this adapter's contract. Missing providers raise `NotImplementedError` at their call site; earlier effects are retained.
 
 | Order | Callback or mutation | Width and original site |
@@ -77,6 +79,14 @@ The corrected native fixture now writes those exact fields, with explicit reques
 The fixed consumer proximity query can now use `ConsultaProximidadeAtaque(units, grid, outras=None)`, supporting exactly `(2, owner, cell, 10)` and forwarding other query names. `proximidade_dono_ataque(units, grid, owner, cell)` takes 800 readable 276-byte records and exactly 131,072 loaded little-endian grid bytes; owner/cell truncate to u8/u16. It scans the clipped ±10 square in original row-major order, recognizes only grid words with `(word & C000)==4000`, decodes `(word & 3FF8)>>3`, checks owner equality, then accepts squared distance ≤100. It reads no type, activity, enabled or alliance field. The original EAX desired-type argument is unused; radius ECX is consumed as u32 and only the caller's constant 10 is reconstructed here. Unit IDs outside 0..799 in an inspected unit-tagged cell are explicitly unsupported and raise before access. All other radii/caller domains remain unsupported; no default grid is created.
 
 The [proximity report](../pesquisas-paralelas/combate/validacao-proximidade-ataque-emulada.json) contains 636 complete original AL-return comparisons and five complete damage consumers using computed proximity and the real economy provider. Grid/unit buffers remain unchanged by the query. The type/state independence, boundary circle and owner equality are directly exercised against original instructions; this does not reconstruct grid placement or mission loading.
+
+## Special-row damage mode 8
+
+The same `infligir(victim,8,source,direction=0)` API supports the initialized mode-8 nonlethal path. Supply **27** explicit rows, each with at least 26 u8 entries. The original prefix `[0x450475,0x450494)` reads damage-pointer table entry 26 (`+0x68`) indexed by victim type. This path adds no source `+0xF7`, requests no modifier 5/proximity, and sends no mode-1 AI message. It then performs the shared victim-F6/source-modifier-6 reduction, visibility/volume/optional sound, protection-bit decrement and signed-damage/u16-life rules. Source ID/type are still required because the original computes its record pointer and common modifier 6 reads it. Input widths and live callback restrictions are unchanged.
+
+Missing row 26 fails before callbacks/writes. Every mode-8 lethal result raises `LimiteMorte` at `0x4506A1`, preserving life and prior audio effects; `exception.modo` is 8. A configured mode-1 `morte` handler is never called for this mode, including through `criar_consumidor_fisico`. Its original prefix does not initialize the saved owner byte at stack `+0x28` later read for sympathy, so the mode-1 death tail cannot be substituted. General mode-8 lethal/caller semantics and the loaded row's game meaning remain open. Other modes still fail explicitly, and `ImpactoUnidades` still accepts only mode 1.
+
+The [mode-8 reference report](../pesquisas-paralelas/combate/validacao-dano-modo8-emulada.json) records **27 tests / 2,110 original-x86 executions** with no failures/errors/skips: 1,101 complete mode-8 returns, 139 expected mode-8 death stops, four expected mode-8 audio stops, and 866 rerun mode-1 consumer/physical-composition calls. Tests cover all 26×26 source/victim types, real loaded economy modifier-6 results, signed-byte boundaries, life/protection wrap, ID edges/aliasing and visible handles. Whole unit buffers match; the loaded bonus table is unchanged. Original mode-1 reports and evidence were preserved.
 
 ## Optional lethal sequencing
 
@@ -157,6 +167,7 @@ python3 -B pesquisas-paralelas/combate/validar_alvos_impacto.py --emular
 python3 -B pesquisas-paralelas/combate/validar_proximidade_ataque.py --emular
 python3 -B pesquisas-paralelas/combate/validar_consumo_fisico.py --emular
 python3 -B pesquisas-paralelas/combate/validar_grade_impacto.py --emular
+python3 -B pesquisas-paralelas/combate/validar_dano_modo8.py --emular
 python3 -B scripts/check.py --domain combat
 ```
 

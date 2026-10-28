@@ -1,4 +1,4 @@
-"""Bounded EnginInfligeDegat mode 1 consumer, with live world callbacks.
+"""Bounded EnginInfligeDegat modes 1/8, with live world callbacks.
 
 This is the unit consumer at 0x4502f0, not InfligeDegat's cell selection,
 reaction, diplomacy or presentation wrapper. Other modes are explicit
@@ -20,14 +20,15 @@ class LimiteMorte(NotImplementedError):
     """Original execution would enter 0x4506a1; prior effects remain visible."""
     endereco = 0x4506a1
 
-    def __init__(self, vitima, atacante, dano):
+    def __init__(self, vitima, atacante, dano, modo=1):
         self.vitima, self.atacante, self.dano = vitima, atacante, dano
+        self.modo = modo
         super().__init__('EnginInfligeDegat death branch at 0x4506a1 is external')
 
 
 @dataclass
 class ConsumidorDanoUnidade:
-    """Mode 1 inputs: 800 mutable 276-byte records and 26 damage rows.
+    """800 mutable 276-byte records; 26 rows, or 27 for special mode 8.
 
     consulta(name, args) supplies the original query result, efeito(name, args)
     performs an external effect. Both may mutate live records/context. Rows
@@ -47,8 +48,8 @@ class ConsumidorDanoUnidade:
     def __post_init__(self):
         if len(self.unidades) != 800 or any(len(u) != 276 for u in self.unidades):
             raise ValueError('Expected 800 live 276-byte unit records')
-        if len(self.danos) != 26 or any(len(row) < 26 for row in self.danos):
-            raise ValueError('Expected 26 damage rows with at least 26 u8 entries')
+        if len(self.danos) not in (26, 27) or any(len(row) < 26 for row in self.danos):
+            raise ValueError('Expected 26 or 27 damage rows with at least 26 u8 entries')
 
     def _consultar(self, nome, *args):
         if self.consulta is None:
@@ -61,15 +62,17 @@ class ConsumidorDanoUnidade:
         self.efeito(nome, args)
 
     def infligir(self, vitima, modo, atacante, direcao=0):
-        """Consume AX/DL/BX/CL inputs; direction is unused in mode 1.
+        """Consume AX/DL/BX/CL inputs; direction is unused in modes 1/8.
 
         Returns None on the original nonlethal return. LimiteMorte is raised
-        before the death branch's first instruction when no handler is supplied.
+        before death when no mode-1 handler is supplied, and always in mode 8.
         Unsupported modes/types/IDs fail before queries, effects or writes.
         """
         vitima, atacante, modo = vitima & 65535, atacante & 65535, modo & 255
-        if modo != 1:
-            raise NotImplementedError('Only EnginInfligeDegat mode 1 is supported')
+        if modo not in (1, 8):
+            raise NotImplementedError('Only EnginInfligeDegat mode 1 or 8 is supported')
+        if modo == 8 and len(self.danos) != 27:
+            raise ValueError('Mode 8 requires the explicitly loaded damage row 26')
         if vitima >= 800 or atacante >= 800:
             raise ValueError('Unit IDs must be in 0..799 after u16 truncation')
         alvo, fonte = self.unidades[vitima], self.unidades[atacante]
@@ -77,16 +80,19 @@ class ConsumidorDanoUnidade:
             raise ValueError('Unit types must be in 0..25')
         celula_entrada = u16(alvo, 0x7c)  # saved at 0x45033f before any callback
 
-        # 0x4503b8..0x45043f: save matrix+bonus before the query; later fields
-        # are reread at the same call sites as the original instruction stream.
-        bruto = dano_bruto_unidade(self.danos[fonte[1]][alvo[1]], fonte[0xf7])
-        mod5 = self._consultar('Modificateur', fonte[0], 5, fonte[1])
-        bruto = dano_bruto_unidade(bruto, modificador5=mod5)
-        proximo = self._consultar('ChercheTypeEnginProximite', 2, fonte[0], u16(fonte, 0x7c), 10)
-        if proximo & 255:
-            bruto = dano_bruto_unidade(bruto, bonus_proximidade=self.bonus_4965ac & 255)
-        self._emitir('iagUnitSendMessage', vitima, 0x48, atacante)
-        dono_morte = fonte[0]  # saved by 0x45046c, before reduction/visibility
+        if modo == 1:
+            # Save matrix+bonus before queries; reread live fields at call sites.
+            bruto = dano_bruto_unidade(self.danos[fonte[1]][alvo[1]], fonte[0xf7])
+            mod5 = self._consultar('Modificateur', fonte[0], 5, fonte[1])
+            bruto = dano_bruto_unidade(bruto, modificador5=mod5)
+            proximo = self._consultar('ChercheTypeEnginProximite', 2, fonte[0], u16(fonte, 0x7c), 10)
+            if proximo & 255:
+                bruto = dano_bruto_unidade(bruto, bonus_proximidade=self.bonus_4965ac & 255)
+            self._emitir('iagUnitSendMessage', vitima, 0x48, atacante)
+            dono_morte = fonte[0]  # saved before reduction/visibility
+        else:
+            # 0x450475: mode 8 uses only the separately loaded special row.
+            bruto = self.danos[26][alvo[1]]
 
         # 0x45059c: reduction +f6 is the victim's; modifier 6 uses the attacker.
         reducao = alvo[0xf6]
@@ -102,8 +108,8 @@ class ConsumidorDanoUnidade:
                              0, volume, vitima)
         resultado = aplicar_dano_parcial(u16(alvo, 0x9a), dano, bool(alvo[0xdc] & 8))
         if resultado['entra_no_ramo_morte']:
-            if self.morte is not None:
+            if modo == 1 and self.morte is not None:
                 return self.morte(vitima, atacante, resultado['dano_com_sinal'],
                                   celula_entrada, dono_morte)
-            raise LimiteMorte(vitima, atacante, resultado['dano_com_sinal'])
+            raise LimiteMorte(vitima, atacante, resultado['dano_com_sinal'], modo)
         por16(alvo, 0x9a, resultado['vida'])
