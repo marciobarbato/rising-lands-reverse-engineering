@@ -93,3 +93,29 @@ class Producao:
     def avancar_sortilegio(self, indice):
         """ConstruitSort 0x423d14. True não implica aprendizagem concluída."""
         return self._avancar(indice, True)
+
+
+    def calcular_tropa(self, indice, *, saida_tropa=None):
+        """CalculTroupe 0x4259e6, only building types 1/2/13/16.
+
+        This is the simulation caller boundary, not an extra progress helper
+        to run after avancar_unidade in the same tick. Active progress advances
+        once and then calls SortieTroupe even below completion. Type 13 passes
+        direction 14; types 1/2/16 pass 4. No building state/owner test is added.
+
+        Default output is the existing economic preparation's None or pending
+        PreparacaoSaidaTropa. An optional exact SortieTroupe callback receives
+        (index u16, direction u8) AFTER progress changes; callback failures retain
+        those changes. World conversion/healing/cleanup remain its dependencies.
+        """
+        indice &= 65535
+        r = self.recrutamento
+        tipo = r.mundo.estruturas[r._offset(indice) + 8]
+        if tipo not in (1, 2, 13, 16):
+            raise ValueError('CalculTroupe caller supports building types 1/2/13/16 only')
+        if not self.avancar_unidade(indice):
+            return None
+        if saida_tropa is None:
+            from saida_tropa import SaidaTropa
+            saida_tropa = SaidaTropa(r).preparar
+        return saida_tropa(indice, 14 if tipo == 13 else 4)

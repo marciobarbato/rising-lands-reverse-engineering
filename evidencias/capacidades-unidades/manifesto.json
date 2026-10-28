@@ -1,0 +1,30 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "EnginResetCapacite",
+      "start": "0x4475ef",
+      "end_exclusive": "0x447676",
+      "sha256": "78dff19a672f81b702253ada9f92517fc1310c6bc5ca611d59782035af603631",
+      "file": "004475ef.asm"
+    },
+    {
+      "name": "shared_epilogue",
+      "start": "0x440d55",
+      "end_exclusive": "0x440d5e",
+      "sha256": "3b66c24827ac0817daa5b6638e8a3e6c06427a247d9b72a5cb413da48baeea64",
+      "file": "00440d55.asm"
+    }
+  ],
+  "unit_pool_pointer": "0x4e19a0",
+  "unit_count": 800,
+  "stride": 276,
+  "input": "AL owner byte",
+  "write": "unit +0x0c u16 only",
+  "queries": [
+    "EnginTypeGetCapacite at 0x4475ac",
+    "BonusGetValEngin selector 1 at 0x428cc0"
+  ],
+  "scope": "Existing-unit capacity refresh; no Bag clearing, owner change, or allocation."
+}
