@@ -26,7 +26,7 @@ class ContratosDanoModo8(unittest.TestCase):
         c, calls = damage_tests.local(us, rows)
         with self.assertRaisesRegex(ValueError, 'row 26'):
             c.infligir(1, 8, 0)
-        for mode in (0, 2, 3, 4, 5, 6, 7, 255):
+        for mode in (0, 2, 3, 5, 6, 7, 255):
             with self.assertRaises(NotImplementedError):
                 c.infligir(1, mode, 0)
         self.assertEqual(calls, [])
@@ -50,16 +50,20 @@ class DiferencialDanoModo8(unittest.TestCase):
         cls.b = BancadaConsumoDano()
         cls.complete_returns = cls.death_stops = cls.audio_stops = 0
 
-    def compare(self, us, rows, special, mod6=0, visible=False, victim=1, attacker=0, mode=8):
+    def compare(self, us, rows, special, mod6=0, visible=False, victim=1, attacker=0,
+                mode=8, direction=255, mode4=None):
         from bancada_consumo_dano import TIPOS, MATRIZES, CONSUMO
         from bancada_combate import RETORNO
         self.b.preparar_consumo(us, rows, mod5=255, mod6=mod6, bonus=255, visivel=visible)
         if mode == 8:
             self.b.cpu.mem_write(TIPOS+26*4, struct.pack('<I', MATRIZES+32*26))
             self.b.cpu.mem_write(MATRIZES+32*26, bytes(special))
+        if mode == 4:
+            self.b.cpu.mem_write(0x49716c, bytes([mode4[0]]))
+            self.b.cpu.mem_write(0x49716e, bytes([mode4[1]]))
         native = self.b.executar(0x4502f0, CONSUMO,
             dict(EAX=victim | 0xabcd0000, EDX=0xface0000 | mode,
-                 EBX=attacker | 0xbeef0000, ECX=0xcafe00ff),
+                 EBX=attacker | 0xbeef0000, ECX=0xcafe0000 | direction),
             parada={RETORNO, 0x4506a1, 0x48aa79}, limite_instrucoes=100000)
         if native['EIP'] == 0x48aa79:
             self.b._observar_consumo(self.b.cpu, 0x48aa79, 0, None)
@@ -88,19 +92,20 @@ class DiferencialDanoModo8(unittest.TestCase):
             self.assertEqual(name, 'PlaySnd_PostSound')
             raise NotImplementedError('Expected audio stop')
         c = ConsumidorDanoUnidade(us, rows+([special] if mode == 8 else []), query, effect,
-            bonus_4965ac=255, morte=lambda *args: self.fail('Special-mode death must not call mode-1 handler'))
+            bonus_4965ac=255, morte=lambda *args: self.fail('Special-mode death must not call mode-1 handler'),
+            danos_modo4=mode4)
         if native['EIP'] == 0x4506a1:
             with self.assertRaises(LimiteMorte) as caught:
-                c.infligir(victim, mode, attacker, 255)
+                c.infligir(victim, mode, attacker, direction)
             self.assertEqual(caught.exception.modo, mode)
             type(self).death_stops += 1
         elif native['EIP'] == 0x48aa79:
             with self.assertRaisesRegex(NotImplementedError, 'audio'):
-                c.infligir(victim, mode, attacker, 255)
+                c.infligir(victim, mode, attacker, direction)
             type(self).audio_stops += 1
         else:
             self.assertEqual(native['EIP'], RETORNO)
-            c.infligir(victim, mode, attacker, 255)
+            c.infligir(victim, mode, attacker, direction)
             type(self).complete_returns += 1
         self.assertEqual(list(events), [])
         self.assertEqual(self.b.ler_unidades(), b''.join(us))
