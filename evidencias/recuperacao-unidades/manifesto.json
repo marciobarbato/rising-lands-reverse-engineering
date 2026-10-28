@@ -1,0 +1,32 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "EnginAddVie",
+      "start": "0x457122",
+      "end_exclusive": "0x45718a",
+      "sha256": "5f8d4a3613ec275276bcdfbfee957ce24bded4d52b7f9e5877d0c4e0c97ec62b",
+      "file": "00457122.asm"
+    },
+    {
+      "name": "EnginResetFatigue",
+      "start": "0x4530fd",
+      "end_exclusive": "0x453129",
+      "sha256": "fe60699024cb1ccc371059e770c632b498f7e325f7071a38de1023743c42c823",
+      "file": "004530fd.asm"
+    },
+    {
+      "name": "SortieTroupe_recovery_prefix",
+      "start": "0x420f6e",
+      "end_exclusive": "0x420f81",
+      "sha256": "bd380cd4311371bf2654e1dea5c70c2b4092b431ccf8f98f52743da870044aed",
+      "file": "00420f6e.asm"
+    }
+  ],
+  "unit_pool_pointer": "0x4e19a0",
+  "unit_count": 800,
+  "stride": 276,
+  "type_table": "0x4965ae, 26 records of 50 bytes; maximum at +8",
+  "scope": "Complete live healing/fatigue bodies and caller prefix; stop before experience."
+}
