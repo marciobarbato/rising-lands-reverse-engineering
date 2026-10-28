@@ -13,12 +13,19 @@
     "0x0041c017": "InitBatimentNeutre",
     "0x0041cde0": "BatimentInitTechnologie",
     "0x0041dde0": "BatimentRetireColon",
+    "0x00420ba5": "SortEnRecrutement",
+    "0x00420bdf": "EnginEnRecrutement",
     "0x00422fde": "StockPossible",
     "0x00423355": "BatimentCalculResource",
     "0x0042340f": "BatimentAjouteMatiere",
     "0x004235bd": "BatimentEnleveMatiere",
+    "0x00423e65": "CalculNovaRecrute",
+    "0x00423f83": "GetStatusRecrute",
+    "0x00423f9d": "CalculStatusRecrute",
     "0x004283e2": "InitRecruteTroupe",
+    "0x004410b7": "EnginGetTimeRecrute",
     "0x004410d2": "EnginGetRessource",
+    "0x00441108": "EnginGetVieMax",
     "0x00441baa": "BallonPrepareArrivee",
     "0x00441d4f": "BallonPrepareSortie",
     "0x004470d2": "BagAccepte",
@@ -42,6 +49,7 @@
     "0x0046ab21": "LoadGameRessource",
     "0x0046ab33": "SauveRessource",
     "0x004704dc": "Random",
+    "0x0047476a": "SortilegeGetTimeAprentissage",
     "0x004749ca": "SortilegeResetRealisable",
     "0x00474a38": "SortilegeSetTechnologie",
     "0x00475328": "SetUpdateChamp",
@@ -85,6 +93,10 @@
     "0x00440d58": {
       "nome": "epilogo_compartilhado_de_BallonPrepareArrivee",
       "fim_exclusivo": "0x00440d5e"
+    },
+    "0x00423eb2": {
+      "nome": "corpo_compartilhado_de_CalculStatusRecrute",
+      "fim_exclusivo": "0x00423f83"
     }
   },
   "tipos_construcao_confirmados": [
@@ -133,6 +145,60 @@
   ],
   "referencias_diretas_candidatas": [
     {
+      "endereco": "0x004018ec",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
+      "simbolo_anterior": [
+        "AffContenanceHospi"
+      ]
+    },
+    {
+      "endereco": "0x004019b9",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
+      "simbolo_anterior": [
+        "AffContenanceHospi"
+      ]
+    },
+    {
+      "endereco": "0x00401a05",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
+      "simbolo_anterior": [
+        "AffContenanceHospi"
+      ]
+    },
+    {
+      "endereco": "0x00401eb2",
+      "instrucao": "call",
+      "alvo": "0x00423f9d",
+      "nome": "CalculStatusRecrute",
+      "simbolo_anterior": [
+        "AffChrono"
+      ]
+    },
+    {
+      "endereco": "0x00401f33",
+      "instrucao": "call",
+      "alvo": "0x00423f9d",
+      "nome": "CalculStatusRecrute",
+      "simbolo_anterior": [
+        "AffChrono"
+      ]
+    },
+    {
+      "endereco": "0x00402047",
+      "instrucao": "call",
+      "alvo": "0x00423e65",
+      "nome": "CalculNovaRecrute",
+      "simbolo_anterior": [
+        "AffChrono"
+      ]
+    },
+    {
       "endereco": "0x00410a71",
       "instrucao": "call",
       "alvo": "0x004471b8",
@@ -148,6 +214,15 @@
       "nome": "BagContient",
       "simbolo_anterior": [
         "AffContenanceEngin"
+      ]
+    },
+    {
+      "endereco": "0x00410c47",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
+      "simbolo_anterior": [
+        "AffInfoSelection"
       ]
     },
     {
@@ -925,10 +1000,37 @@
       ]
     },
     {
+      "endereco": "0x0041f5d1",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
+      "simbolo_anterior": [
+        "PlaceLibre"
+      ]
+    },
+    {
       "endereco": "0x0041f5fa",
       "instrucao": "call",
       "alvo": "0x004470d2",
       "nome": "BagAccepte",
+      "simbolo_anterior": [
+        "PlaceLibre"
+      ]
+    },
+    {
+      "endereco": "0x0041f673",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
+      "simbolo_anterior": [
+        "PlaceLibre"
+      ]
+    },
+    {
+      "endereco": "0x0041f6a9",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
       "simbolo_anterior": [
         "PlaceLibre"
       ]
@@ -1078,6 +1180,15 @@
       ]
     },
     {
+      "endereco": "0x00420e7a",
+      "instrucao": "call",
+      "alvo": "0x004410b7",
+      "nome": "EnginGetTimeRecrute",
+      "simbolo_anterior": [
+        "SortieTroupe"
+      ]
+    },
+    {
       "endereco": "0x00420eae",
       "instrucao": "call",
       "alvo": "0x004472ea",
@@ -1168,10 +1279,28 @@
       ]
     },
     {
+      "endereco": "0x00421a4e",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
       "endereco": "0x00421af5",
       "instrucao": "call",
       "alvo": "0x004471b8",
       "nome": "BagContient",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x00421bca",
+      "instrucao": "call",
+      "alvo": "0x00423f9d",
+      "nome": "CalculStatusRecrute",
       "simbolo_anterior": [
         "CalculReparation"
       ]
@@ -1186,6 +1315,24 @@
       ]
     },
     {
+      "endereco": "0x00421c1b",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x00421dfa",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
       "endereco": "0x00421eab",
       "instrucao": "call",
       "alvo": "0x004471b8",
@@ -1195,10 +1342,46 @@
       ]
     },
     {
+      "endereco": "0x00421f81",
+      "instrucao": "call",
+      "alvo": "0x00423f9d",
+      "nome": "CalculStatusRecrute",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x00421fcb",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x004221f7",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
       "endereco": "0x004222a8",
       "instrucao": "call",
       "alvo": "0x004471b8",
       "nome": "BagContient",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x0042237c",
+      "instrucao": "call",
+      "alvo": "0x00423f9d",
+      "nome": "CalculStatusRecrute",
       "simbolo_anterior": [
         "CalculReparation"
       ]
@@ -1231,10 +1414,37 @@
       ]
     },
     {
+      "endereco": "0x004224e5",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x004225f9",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
       "endereco": "0x00422687",
       "instrucao": "call",
       "alvo": "0x004471b8",
       "nome": "BagContient",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x00422754",
+      "instrucao": "call",
+      "alvo": "0x00423f9d",
+      "nome": "CalculStatusRecrute",
       "simbolo_anterior": [
         "CalculReparation"
       ]
@@ -1318,6 +1528,15 @@
       "nome": "GetRessourceStock",
       "simbolo_anterior": [
         "InitApprentissage"
+      ]
+    },
+    {
+      "endereco": "0x00422f2d",
+      "instrucao": "call",
+      "alvo": "0x004410b7",
+      "nome": "EnginGetTimeRecrute",
+      "simbolo_anterior": [
+        "SortieVehicule"
       ]
     },
     {
@@ -1420,6 +1639,15 @@
       ]
     },
     {
+      "endereco": "0x00423bde",
+      "instrucao": "call",
+      "alvo": "0x004410b7",
+      "nome": "EnginGetTimeRecrute",
+      "simbolo_anterior": [
+        "ConstruitPerso"
+      ]
+    },
+    {
       "endereco": "0x00423c56",
       "instrucao": "call",
       "alvo": "0x004471b8",
@@ -1429,12 +1657,57 @@
       ]
     },
     {
+      "endereco": "0x00423d3e",
+      "instrucao": "call",
+      "alvo": "0x0047476a",
+      "nome": "SortilegeGetTimeAprentissage",
+      "simbolo_anterior": [
+        "ConstruitSort"
+      ]
+    },
+    {
+      "endereco": "0x00423d59",
+      "instrucao": "call",
+      "alvo": "0x0047476a",
+      "nome": "SortilegeGetTimeAprentissage",
+      "simbolo_anterior": [
+        "ConstruitSort"
+      ]
+    },
+    {
       "endereco": "0x00423dce",
       "instrucao": "call",
       "alvo": "0x004471b8",
       "nome": "BagContient",
       "simbolo_anterior": [
         "ConstruitSort"
+      ]
+    },
+    {
+      "endereco": "0x00423ebe",
+      "instrucao": "call",
+      "alvo": "0x004410b7",
+      "nome": "EnginGetTimeRecrute",
+      "simbolo_anterior": [
+        "CalculNovaRecrute"
+      ]
+    },
+    {
+      "endereco": "0x00423edf",
+      "instrucao": "call",
+      "alvo": "0x0047476a",
+      "nome": "SortilegeGetTimeAprentissage",
+      "simbolo_anterior": [
+        "CalculNovaRecrute"
+      ]
+    },
+    {
+      "endereco": "0x00423ef8",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
+      "simbolo_anterior": [
+        "CalculNovaRecrute"
       ]
     },
     {
@@ -1474,6 +1747,24 @@
       ]
     },
     {
+      "endereco": "0x00424ccf",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
+      "simbolo_anterior": [
+        "BatimentSoignePerso"
+      ]
+    },
+    {
+      "endereco": "0x00424cf1",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
+      "simbolo_anterior": [
+        "BatimentSoignePerso"
+      ]
+    },
+    {
       "endereco": "0x00424e40",
       "instrucao": "call",
       "alvo": "0x004471b8",
@@ -1492,12 +1783,39 @@
       ]
     },
     {
+      "endereco": "0x00425631",
+      "instrucao": "call",
+      "alvo": "0x004410b7",
+      "nome": "EnginGetTimeRecrute",
+      "simbolo_anterior": [
+        "ContructionEstEnCours"
+      ]
+    },
+    {
       "endereco": "0x004256a9",
       "instrucao": "call",
       "alvo": "0x004471b8",
       "nome": "BagContient",
       "simbolo_anterior": [
         "ContructionEstEnCours"
+      ]
+    },
+    {
+      "endereco": "0x0042576a",
+      "instrucao": "call",
+      "alvo": "0x0047476a",
+      "nome": "SortilegeGetTimeAprentissage",
+      "simbolo_anterior": [
+        "ContructionSortEstEnCours"
+      ]
+    },
+    {
+      "endereco": "0x0042578d",
+      "instrucao": "call",
+      "alvo": "0x0047476a",
+      "nome": "SortilegeGetTimeAprentissage",
+      "simbolo_anterior": [
+        "ContructionSortEstEnCours"
       ]
     },
     {
@@ -1546,10 +1864,91 @@
       ]
     },
     {
+      "endereco": "0x00425a84",
+      "instrucao": "call",
+      "alvo": "0x004410b7",
+      "nome": "EnginGetTimeRecrute",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425b7c",
+      "instrucao": "call",
+      "alvo": "0x004410b7",
+      "nome": "EnginGetTimeRecrute",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425ccc",
+      "instrucao": "call",
+      "alvo": "0x004410b7",
+      "nome": "EnginGetTimeRecrute",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425dd4",
+      "instrucao": "call",
+      "alvo": "0x004410b7",
+      "nome": "EnginGetTimeRecrute",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425ec5",
+      "instrucao": "call",
+      "alvo": "0x0047476a",
+      "nome": "SortilegeGetTimeAprentissage",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425ee8",
+      "instrucao": "call",
+      "alvo": "0x0047476a",
+      "nome": "SortilegeGetTimeAprentissage",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425fdb",
+      "instrucao": "call",
+      "alvo": "0x0047476a",
+      "nome": "SortilegeGetTimeAprentissage",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
       "endereco": "0x00426031",
       "instrucao": "call",
       "alvo": "0x00474a38",
       "nome": "SortilegeSetTechnologie",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x004260d1",
+      "instrucao": "call",
+      "alvo": "0x004410b7",
+      "nome": "EnginGetTimeRecrute",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x004261a7",
+      "instrucao": "call",
+      "alvo": "0x004410b7",
+      "nome": "EnginGetTimeRecrute",
       "simbolo_anterior": [
         "CalculTroupe"
       ]
@@ -1586,6 +1985,15 @@
       "instrucao": "call",
       "alvo": "0x004472ea",
       "nome": "BagRetire",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00426359",
+      "instrucao": "call",
+      "alvo": "0x004410b7",
+      "nome": "EnginGetTimeRecrute",
       "simbolo_anterior": [
         "CalculTroupe"
       ]
@@ -2000,6 +2408,15 @@
       "instrucao": "call",
       "alvo": "0x00475541",
       "nome": "MineGetCapacite",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042a8f6",
+      "instrucao": "call",
+      "alvo": "0x00441108",
+      "nome": "EnginGetVieMax",
       "simbolo_anterior": [
         "InputGame"
       ]
@@ -2986,10 +3403,46 @@
       ]
     },
     {
+      "endereco": "0x0045e093",
+      "instrucao": "call",
+      "alvo": "0x00420ba5",
+      "nome": "SortEnRecrutement",
+      "simbolo_anterior": [
+        "IconeFillContenu"
+      ]
+    },
+    {
+      "endereco": "0x0045e0b1",
+      "instrucao": "call",
+      "alvo": "0x00423f83",
+      "nome": "GetStatusRecrute",
+      "simbolo_anterior": [
+        "IconeFillContenu"
+      ]
+    },
+    {
       "endereco": "0x0045e203",
       "instrucao": "call",
       "alvo": "0x004676e5",
       "nome": "TestRessource",
+      "simbolo_anterior": [
+        "IconeFillContenu"
+      ]
+    },
+    {
+      "endereco": "0x0045e447",
+      "instrucao": "call",
+      "alvo": "0x00420bdf",
+      "nome": "EnginEnRecrutement",
+      "simbolo_anterior": [
+        "IconeFillContenu"
+      ]
+    },
+    {
+      "endereco": "0x0045e480",
+      "instrucao": "call",
+      "alvo": "0x00423f83",
+      "nome": "GetStatusRecrute",
       "simbolo_anterior": [
         "IconeFillContenu"
       ]

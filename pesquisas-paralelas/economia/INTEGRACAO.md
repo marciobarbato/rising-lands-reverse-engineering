@@ -8,8 +8,9 @@ não criar caches nos módulos compartilhados lidos pela pesquisa.
 
 ## Como incorporar
 
-1. Revisar [README.md](README.md), os ASM e o relatório com 108 testes aprovados
-   e 19.499 execuções x86 (incluindo 48 exceções e três limites esperados).
+1. Revisar [README.md](README.md), os ASM e o relatório com 130 testes aprovados
+   e 22.276 execuções x86 (incluindo 88 exceções, três limites esperados e
+   paradas em dependências/sufixos delimitados em cada documento).
    Executar `validar.py --emular` se houver Unicorn/JIT.
 2. Incorporar `economia.py` em `ferramentas/` ou manter a pesquisa como módulo
    independente. O código de produção depende só da biblioteca padrão.
@@ -192,6 +193,36 @@ criadas à direita podem ser processadas na mesma linha. Os limites da API,
 os wraps originais e os 15 endereços estão em
 [EXTRACAO_CAMPOS.md](EXTRACAO_CAMPOS.md).
 
+## Início e consultas de recrutamento
+
+`Recrutamento`, em `recrutamento.py`, recebe o mesmo `EconomiaConstrucoes`.
+Fornecer `selecoes` (8 bytes), `tipos_unidades` (1300 bytes),
+`tipos_sortilegios` (230 bytes), `unidades` (220800 bytes) e `periodo_nova`.
+Os buffers são copiados; manter essas vistas sincronizadas com o mundo.
+
+`iniciar(tipo_unidade, jogador, escolher_saida=callback)` aplica as verificações,
+os débitos e os campos da construção. O callback recebe seu índice, deve executar
+RechercheDecalageSortie (`0x41d1d0`) e devolver a célula. A tradução não escolhe
+uma posição provisória nem implementa essa dependência de geometria/ocupação.
+
+Sem callback, `SaidaRecrutamentoPendente` interrompe **após a cobrança e mudança
+de estado**. Conservar o estado aplicado e concluir com
+`concluir_saida(indice, celula)` depois de resolver a dependência. Não repetir
+`iniciar` nem fazer rollback automático. ZeroDivisionError no recálculo também
+pode deixar débito parcial aplicado, conforme a ordem original.
+
+`status(tipo, jogador)` usa a seleção; `calcular_status(indice, tipo)` recebe a
+construção diretamente. O tipo vem do argumento, e não de +0x7b. Em reparos,
+o divisor é a vida máxima da unidade referenciada em +0x88. Não saturar o
+resultado em 100 nem transformar as consultas `*_em_recrutamento` em testes
+de atividade: elas apenas comparam o tipo guardado. `progresso_nova` conserva
+o wrap u32 do produto por 100.
+
+Os 546 testes até a dependência e os 128 sufixos isolados não comprovam sucesso
+de ponta a ponta. Não promover esta etapa como fila completa ou criação de
+unidades. Endereços, campos, domínio e testes estão em
+[RECRUTAMENTO.md](RECRUTAMENTO.md).
+
 ## Atualizações de documentação sugeridas, não realizadas
 
 - FORMATOS.md: substituir a lacuna dos IDs iniciais por comida=1, pedra=2,
@@ -202,7 +233,7 @@ os wraps originais e os 15 endereços estão em
   e regeneração de campos como traduzidos; conservar chamadores completos,
   tecnologias, transporte, consumo e filas como pendências.
 - SIMBOLOS.md/IA.md: registrar os diferentes índices da IA e o retorno 1/-1.
-- EMULACAO.md/validação geral: integrar os 50 testes diferenciais sem somar
+- EMULACAO.md/validação geral: integrar os 59 testes diferenciais sem somar
   automaticamente as contagens desta pesquisa à suíte compartilhada.
 
 ## Próximas investigações de economia
@@ -213,8 +244,9 @@ os wraps originais e os 15 endereços estão em
 2. Ligar os efeitos incrementais traduzidos aos chamadores de colonização e
    neutralização, mantendo criação/movimento de balões no subsistema responsável.
    Completar tecnologia e o restante de TerrainDeposeMatiere fora da flag zero.
-3. `0x4283e2` InitRecruteTroupe: completar fila/estados sem alterar a semântica
-   das três primitivas de débito. O recorte estático já está nesta pasta.
+3. Recrutamento: ligar a dependência de saída de InitRecruteTroupe, traduzir
+   avanço/conclusão e completar o fluxo das filas. O início econômico e as
+   consultas de progresso já estão em [RECRUTAMENTO.md](RECRUTAMENTO.md).
 4. Mercado e trocas em `0x466533..0x467640`: preços, propostas e transferências.
 5. Confirmar o significado de RMI, o quarto registro e o byte +7 em gameplay
    ou por outros consumidores, preservando nomes neutros enquanto não confirmado.

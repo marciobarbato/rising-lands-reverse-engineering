@@ -37,13 +37,18 @@ NOMES = (
     'TerrainRetireMatiere', 'TerrainRecolte', 'TerrainEstChampi',
     'PatateAugmentable', 'NouvellePatate', 'ScanNouvellePatate',
     'SetUpdateChamp', 'UpdateChamp',
+    'SortEnRecrutement', 'EnginEnRecrutement', 'GetStatusRecrute',
+    'CalculStatusRecrute', 'CalculNovaRecrute', 'EnginGetTimeRecrute',
+    'SortilegeGetTimeAprentissage', 'EnginGetVieMax',
 )
 # O RET precede dados; não apresentá-los como instruções da função.
-FINS_CONFIRMES = {0x41aace: 0x41ab04, 0x4283e2: 0x428691, 0x478806: 0x478a01}
+FINS_CONFIRMES = {0x41aace: 0x41ab04, 0x4283e2: 0x428691, 0x478806: 0x478a01,
+                  0x423e65: 0x423eb2}
 TRECHOS_AUXILIARES = {
     0x423025: ('epilogo_compartilhado_de_BatimentCalculResource', 0x42302d),
     0x41db1e: ('epilogo_compartilhado_de_BatimentInitCave', 0x41db24),
     0x440d58: ('epilogo_compartilhado_de_BallonPrepareArrivee', 0x440d5e),
+    0x423eb2: ('corpo_compartilhado_de_CalculStatusRecrute', 0x423f83),
 }
 
 

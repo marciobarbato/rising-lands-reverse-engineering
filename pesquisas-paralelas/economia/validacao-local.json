@@ -1,6 +1,6 @@
 {
   "modo": "Python sem emulação",
-  "testes": 108,
+  "testes": 130,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -181,6 +181,42 @@
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {
+      "teste": "test_128_sufixos_isolados_com_frame_sintetico (test_recrutamento.DiferencialRecrutamento)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_192_recusas_por_saldo_antes_de_acessar_selecao_ou_estado (test_recrutamento.DiferencialRecrutamento)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_256_novas_wrap_e_sentinela (test_recrutamento.DiferencialRecrutamento)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_26_tipos_reais_custos_tempo_vida_e_consultas (test_recrutamento.DiferencialRecrutamento)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_40_excecoes_divisao_por_zero_com_efeitos_delimitados (test_recrutamento.DiferencialRecrutamento)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_512_consultas_em_recrutamento_incluem_sentinela_e_inatividade (test_recrutamento.DiferencialRecrutamento)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_512_inicios_com_saldos_custos_donos_indices_e_pilha_suja (test_recrutamento.DiferencialRecrutamento)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_512_status_cobrem_256_tipos_de_construcao_e_reparo (test_recrutamento.DiferencialRecrutamento)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_iniciar_256_tipos_com_flag_livre_e_ocupada (test_recrutamento.DiferencialRecrutamento)",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
       "teste": "test_divisao_zero_16_excecoes_e_ordem_dos_efeitos (test_retirada_recalculo.DiferencialRetiradaRecalculo)",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
@@ -212,12 +248,15 @@
     "DiferencialRetiradaRecalculo": 0,
     "DiferencialInitCave": 0,
     "DiferencialProprietarios": 0,
-    "DiferencialExtracao": 0
+    "DiferencialExtracao": 0,
+    "DiferencialRecrutamento": 0
   },
   "excecoes_x86_esperadas": 0,
   "limites_x86_esperados": 0,
   "execucoes_x86_ate_parada": 0,
   "paradas_dependencia_proprietarios": 0,
+  "paradas_dependencia_recrutamento": 0,
+  "sufixos_isolados_recrutamento": 0,
   "sucesso": true,
   "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
 }
