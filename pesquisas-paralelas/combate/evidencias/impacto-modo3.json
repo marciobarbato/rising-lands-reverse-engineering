@@ -1,0 +1,67 @@
+{
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "guard": {
+    "start": "0x482db6",
+    "end_exclusive": "0x482dbe",
+    "sha256_bytes": "94021c376e399da11b37b234916bd57a0015bcb7222fb5547fa01b6d28914b49",
+    "bytes_hex": "85c90f84f7000000",
+    "file": "impacto-modo3-00482db6.asm"
+  },
+  "dispatch_table": {
+    "start": "0x482998",
+    "end_exclusive": "0x4829c8",
+    "sha256_bytes": "69186139c6dc4ea13492ab38f6fbe2a07d25f37cd3661de7ba57541a838f7694",
+    "bytes_hex": "512a4800e52a4800602b4800502c4800bb2c4800312d4800b52e4800772d4800f62d4800362e48007e2e4800b62d4800",
+    "entries": [
+      {
+        "message": "0x41",
+        "target": "0x482a51"
+      },
+      {
+        "message": "0x42",
+        "target": "0x482ae5"
+      },
+      {
+        "message": "0x43",
+        "target": "0x482b60"
+      },
+      {
+        "message": "0x44",
+        "target": "0x482c50"
+      },
+      {
+        "message": "0x45",
+        "target": "0x482cbb"
+      },
+      {
+        "message": "0x46",
+        "target": "0x482d31"
+      },
+      {
+        "message": "0x47",
+        "target": "0x482eb5"
+      },
+      {
+        "message": "0x48",
+        "target": "0x482d77"
+      },
+      {
+        "message": "0x49",
+        "target": "0x482df6"
+      },
+      {
+        "message": "0x4a",
+        "target": "0x482e36"
+      },
+      {
+        "message": "0x4b",
+        "target": "0x482e7e"
+      },
+      {
+        "message": "0x4c",
+        "target": "0x482db6"
+      }
+    ]
+  },
+  "scope": "Only message4c ECX-null return through existing0x482eb5 epilogue; no active group or other handler implementation"
+}
