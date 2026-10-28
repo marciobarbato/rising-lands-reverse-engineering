@@ -1,0 +1,32 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 19,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_classificacao_remapeamento.DiferencialClassificacaoRemapeamento.test_direct_type_and_monster_queries_all_bytes_edge_slots_preserve_consumed_state",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_classificacao_remapeamento.DiferencialClassificacaoRemapeamento.test_finite_binding_budget_stops_before_next_handler_with_frame_retained",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_classificacao_remapeamento.DiferencialClassificacaoRemapeamento.test_fresh_all_original_capture_inputs_and_partial_lock_stop",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_classificacao_remapeamento.DiferencialClassificacaoRemapeamento.test_iat_metadata_and_engine_boundary_guards_precede_mutation",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_classificacao_remapeamento.DiferencialClassificacaoRemapeamento.test_native_io_wrappers_execute_original_bodies_over_declared_crt_boundaries",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "scope": "Declared boundaries, remap allocation/classification and readonly initialization queries; no labeling/full remap or full MissionLoad"
+}

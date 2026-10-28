@@ -105,6 +105,10 @@ class MundoUnidades:
         from consultas_unidades import visibilidade_unidade
         return visibilidade_unidade(self,indice)
 
+    def tipo_unidade(self, indice):
+        from consultas_unidades import tipo_unidade
+        return tipo_unidade(self, indice)
+
     @staticmethod
     def _indice(indice):
         indice &= 65535

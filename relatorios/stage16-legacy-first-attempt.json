@@ -1,0 +1,12 @@
+{
+  "tests": 7,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "test_status": "PASS",
+  "command_exit_code": 1,
+  "report_export_status": "FAILED: temporary reporting snippet directly read optional ultima_falha attribute absent on successful remap bench",
+  "log": ".local/stage16-legacy.log",
+  "test_seconds": 20.366,
+  "native_failure_observed": false
+}

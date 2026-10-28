@@ -1,0 +1,70 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "intervals": [
+    {
+      "name": "Chemin_Remap",
+      "start": "0x42ee1c",
+      "bytes": 965,
+      "sha256": "c33e422865e5265030189389bf72f3ad75d7952546c35f737a53565e811aafd2"
+    },
+    {
+      "name": "TerrainEstObstacleNaturel",
+      "start": "0x4752b8",
+      "bytes": 74,
+      "sha256": "9f7d893c6d2d71d21846af2fb6e2b97748866594e0a54ea7c2fc1ab27cbdff1b"
+    },
+    {
+      "name": "EnginGetType",
+      "start": "0x442025",
+      "bytes": 32,
+      "sha256": "c9b68df49797eb19c9c9e3fa5cc823a9e5f142a7d05ee7ddbee4044eeeb35036"
+    },
+    {
+      "name": "TypeEnginEstMonstre",
+      "start": "0x4422dd",
+      "bytes": 11,
+      "sha256": "165411bfdeaa920a61b2d3006d8c7479b62fa7df29eb905c7d54ccbef6509e1b"
+    },
+    {
+      "name": "monster_true_tail",
+      "start": "0x4422da",
+      "bytes": 3,
+      "sha256": "e18aacce29affcdddaa5f641ac1ec12552e0fe9d066e6408941b1792818b8619"
+    },
+    {
+      "name": "FileOpen",
+      "start": "0x458420",
+      "bytes": 44,
+      "sha256": "a8ce09b7a78323005bec01520f04e3c68d47f963510946d938eddc0d3d3e72dd"
+    },
+    {
+      "name": "FileClose",
+      "start": "0x45844c",
+      "bytes": 21,
+      "sha256": "490a9849ea78498c7d7c32b8d964f50d2580297ca9353ecfab049a9561a4ebae"
+    },
+    {
+      "name": "FileRead",
+      "start": "0x458461",
+      "bytes": 42,
+      "sha256": "3f8ecd047b64d54173f3ba741e0aa8d7f0852c559487e299ab8bec9c84722d42"
+    }
+  ],
+  "actual_iat": {
+    "0x5231c0": {
+      "dll": "KERNEL32.dll",
+      "symbol": "GlobalAlloc"
+    },
+    "0x5231d0": {
+      "dll": "KERNEL32.dll",
+      "symbol": "GlobalLock"
+    }
+  },
+  "original_capture_hashes": {
+    "relatorios/capturas-classificacao-remapeamento-original.json": "b61c72da03dc01faaf98357a38e92c0f8c4d6b203724efe3c71f72b6917276ef",
+    "relatorios/capturas-consultas-inicializacao-original.json": "3857ac57bf5c38108bc3d782bf085bcba35b04cb9349fc7c01b1549a3a047637"
+  },
+  "capture_overwrite_guard": "PASS without native construction",
+  "legacy_original_artifacts_changed": false,
+  "scope": "Static intact-byte/hash/IAT audit; no native execution"
+}
