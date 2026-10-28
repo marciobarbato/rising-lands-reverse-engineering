@@ -13,7 +13,8 @@ ROOT = Path(__file__).resolve().parents[3]
 OWNED = ROOT / 'pesquisas-paralelas/ia-runtime'
 SIBLINGS = (ROOT / 'ferramentas', ROOT / 'pesquisas-paralelas/combate',
             ROOT / 'pesquisas-paralelas/economia', ROOT / 'pesquisas-paralelas/graficos-animacao',
-            ROOT / 'pesquisas-paralelas/missoes', ROOT / 'apps/macos-preview/src')
+            ROOT / 'pesquisas-paralelas/missoes', ROOT / 'pesquisas-paralelas/audio',
+            ROOT / 'apps/macos-preview/src')
 # Core-owned primitives the front composes; their bodies must not be duplicated here.
 CORE_PRIMITIVES = ('ia.py', 'tarefas_ia.py', 'simbolos_ia.py', 'ordens_unidades.py',
                    'mensagens_chegada.py', 'cadencia.py', 'avanco_unidades.py')

@@ -1,0 +1,2156 @@
+{
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "analysis_sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+ "analysis_note": "Normalized analysis PE is a different identity; no interval here was read from it.",
+ "sbl_sha256": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+ "base_main": "8a499a9",
+ "core_inputs": {
+  "ferramentas/ia.py": "6df1848a0c372d239bb1430040f4c42c8bd402dde0a77855222469c1f66decff",
+  "ferramentas/tarefas_ia.py": "b8e0a5c52820a97c233581ce526ef1fa43e95453fff1b85790ec34a6d9474531",
+  "ferramentas/simbolos_ia.py": "4f2525c345a21f3a89c4cfc10e1e82a31b1bc9ef84e5dc5bca3a4be3b2aabf7f",
+  "ferramentas/ordens_unidades.py": "ba960424f6228daf83ffd69a28a71d9cbbec03e0a5b756b379dab290dd8cf2d4",
+  "ferramentas/mensagens_chegada.py": "698e30c6ff860592b43feb4fbf23b94f19519ecfaf12355ca85ea88537136105",
+  "ferramentas/cadencia.py": "7ba882f7691d77e4be0eabea501576b134428f2be865517947aedb6e56b858ac",
+  "ferramentas/emulador.py": "8cacfe447122e3051134a63c9c6797d6573c0fe4816728554b402ae2dff66f37",
+  "ferramentas/analisar.py": "931af6bc055de6f0e79e37e1c006f0448b36e92c66c178e5296872c426c09983",
+  "relatorios/regras-ia.json": "c5202e0ce209ef0f1586f60ddee17e5f62e972a6a540760d3151d26b4241afd2",
+  "relatorios/simbolos-originais.tsv": "6f43d1d03ee1ec83f03d3ab16fa8bc1944ffdfd15d748c7232b43b6488eae2ca"
+ },
+ "intervals": [
+  {
+   "name": "ProgIteration",
+   "kind": "code",
+   "start": "0x0047500e",
+   "end_exclusive": "0x0047509d",
+   "size": 143,
+   "sha256": "4e0b8e1449e16cf7d855ab9bf92cd6b8ec32443e92cf6e17134ef64329c09789",
+   "group": "frame",
+   "file": "0047500e.asm",
+   "code_end": "0x0047509d",
+   "shared_tails": []
+  },
+  {
+   "name": "CalculGame",
+   "kind": "code",
+   "start": "0x0042c868",
+   "end_exclusive": "0x0042d4f8",
+   "size": 3216,
+   "sha256": "d6d2bf1d02d17cd5dc2b2e7b041be3e981855e7e6298cf32969b818d4b435a94",
+   "group": "frame",
+   "file": "0042c868.asm",
+   "code_end": "0x0042d4f5",
+   "shared_tails": [
+    {
+     "name": "CalculGame shared tail",
+     "kind": "code",
+     "start": "0x0042c314",
+     "end_exclusive": "0x0042c31b",
+     "size": 7,
+     "sha256": "7227c48dab9cf58cef6ab93b965ca6429bd0f282cc829c7d338a55a23a93f08d"
+    }
+   ]
+  },
+  {
+   "name": "GameNextFrame",
+   "kind": "code",
+   "start": "0x0045d015",
+   "end_exclusive": "0x0045d01c",
+   "size": 7,
+   "sha256": "a9e9abc6aa5e3a8171c47631c0530c44755094adfe04ce4518a7dd8b633cc869",
+   "group": "frame",
+   "file": "0045d015.asm",
+   "code_end": "0x0045d01c",
+   "shared_tails": []
+  },
+  {
+   "name": "CalculNextReflect",
+   "kind": "code",
+   "start": "0x0047fbea",
+   "end_exclusive": "0x0047fbfd",
+   "size": 19,
+   "sha256": "1c1e95b10fdc6a66fac25202cadc32613d0012a95f8144a997787b8a25d8bb79",
+   "group": "frame",
+   "file": "0047fbea.asm",
+   "code_end": "0x0047fbfd",
+   "shared_tails": []
+  },
+  {
+   "name": "IATestUtilite",
+   "kind": "code",
+   "start": "0x0047fbfd",
+   "end_exclusive": "0x0047fc1b",
+   "size": 30,
+   "sha256": "2601ffcdf8fbf640351b403bb0e33af6e83a788be50562b6e21e226ec569a5b3",
+   "group": "frame",
+   "file": "0047fbfd.asm",
+   "code_end": "0x0047fc1b",
+   "shared_tails": [
+    {
+     "name": "IATestUtilite shared tail",
+     "kind": "code",
+     "start": "0x0047fbfc",
+     "end_exclusive": "0x0047fbfd",
+     "size": 1,
+     "sha256": "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e"
+    }
+   ]
+  },
+  {
+   "name": "PlayerAttaqueReset",
+   "kind": "code",
+   "start": "0x0046d628",
+   "end_exclusive": "0x0046d629",
+   "size": 1,
+   "sha256": "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e",
+   "group": "frame",
+   "file": "0046d628.asm",
+   "code_end": "0x0046d629",
+   "shared_tails": []
+  },
+  {
+   "name": "CalculEnginNextEtape",
+   "kind": "code",
+   "start": "0x00456db5",
+   "end_exclusive": "0x00456f0a",
+   "size": 341,
+   "sha256": "0f723207d66d7f17e359250511a4bc1042d885ea7898e07b3871f017ad9f2b59",
+   "group": "unit-dispatch",
+   "file": "00456db5.asm",
+   "code_end": "0x00456f0a",
+   "shared_tails": [
+    {
+     "name": "CalculEnginNextEtape shared tail",
+     "kind": "code",
+     "start": "0x0045179d",
+     "end_exclusive": "0x004517a2",
+     "size": 5,
+     "sha256": "c70b099133a170ddd772c96ac18c8da37f2e3656fb63fc1ce635782f3483d656"
+    }
+   ]
+  },
+  {
+   "name": "EnginNextEtape",
+   "kind": "code",
+   "start": "0x0045442c",
+   "end_exclusive": "0x00456c34",
+   "size": 10248,
+   "sha256": "2356aec6cf88f980e5a3e6583890f9e55f7cd27cf54c8aab639b1fec4e27d573",
+   "group": "unit-dispatch",
+   "file": "0045442c.asm",
+   "code_end": "0x00456c34",
+   "shared_tails": [
+    {
+     "name": "EnginNextEtape shared tail",
+     "kind": "code",
+     "start": "0x00440d58",
+     "end_exclusive": "0x00440d5e",
+     "size": 6,
+     "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b"
+    },
+    {
+     "name": "EnginNextEtape shared tail",
+     "kind": "code",
+     "start": "0x0044f29d",
+     "end_exclusive": "0x0044f2a3",
+     "size": 6,
+     "sha256": "b080fef966146bceefcbdf9abf2b8f63e9e525b0ea53261f613e71703b86964f"
+    }
+   ]
+  },
+  {
+   "name": "CalculBatimentNextEtape",
+   "kind": "code",
+   "start": "0x004281c7",
+   "end_exclusive": "0x004283e2",
+   "size": 539,
+   "sha256": "b5eb39a4599b78e57d4a10cffc8c9b8d826c96bcc9f057fc845e85f35fbe5787",
+   "group": "structure-dispatch",
+   "file": "004281c7.asm",
+   "code_end": "0x004283e2",
+   "shared_tails": [
+    {
+     "name": "CalculBatimentNextEtape shared tail",
+     "kind": "code",
+     "start": "0x0041db1a",
+     "end_exclusive": "0x0041db24",
+     "size": 10,
+     "sha256": "bbbe91d19a41927cb7a5f9dd922542d4c318dcd58704e85d51617961ece660ba"
+    }
+   ]
+  },
+  {
+   "name": "BatimentNextEtape",
+   "kind": "code",
+   "start": "0x004268d4",
+   "end_exclusive": "0x004281c7",
+   "size": 6387,
+   "sha256": "036fc675f06a28661163382d1aaa42317bc7b2920b5ea1b5e44eb84cc4e6a3b0",
+   "group": "structure-dispatch",
+   "file": "004268d4.asm",
+   "code_end": "0x004281c7",
+   "shared_tails": [
+    {
+     "name": "BatimentNextEtape shared tail",
+     "kind": "code",
+     "start": "0x0041db1d",
+     "end_exclusive": "0x0041db24",
+     "size": 7,
+     "sha256": "7227c48dab9cf58cef6ab93b965ca6429bd0f282cc829c7d338a55a23a93f08d"
+    }
+   ]
+  },
+  {
+   "name": "iaCalculPlayer",
+   "kind": "code",
+   "start": "0x0047f927",
+   "end_exclusive": "0x0047fa88",
+   "size": 353,
+   "sha256": "61c051e428183d2bb12e3101e4ef874b199e4076285907cd4daeab53cf980826",
+   "group": "ai-player",
+   "file": "0047f927.asm",
+   "code_end": "0x0047fa2f",
+   "shared_tails": []
+  },
+  {
+   "name": "IaAlloc",
+   "kind": "code",
+   "start": "0x0047fb15",
+   "end_exclusive": "0x0047fb6c",
+   "size": 87,
+   "sha256": "dbba3de4fe6edbe149ee8af0aa51f1889e1deec80411abed168293460ff8eb27",
+   "group": "ai-tables",
+   "file": "0047fb15.asm",
+   "code_end": "0x0047fb6c",
+   "shared_tails": [
+    {
+     "name": "IaAlloc shared tail",
+     "kind": "code",
+     "start": "0x0047fa87",
+     "end_exclusive": "0x0047fa88",
+     "size": 1,
+     "sha256": "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e"
+    }
+   ]
+  },
+  {
+   "name": "iaInit",
+   "kind": "code",
+   "start": "0x0047f328",
+   "end_exclusive": "0x0047f36e",
+   "size": 70,
+   "sha256": "7ad0092d671ab53d5aaa17a8413102ea5e5cdb69da49c2a66ba3c08721ebdd75",
+   "group": "ai-tables",
+   "file": "0047f328.asm",
+   "code_end": "0x0047f36e",
+   "shared_tails": []
+  },
+  {
+   "name": "IaReset",
+   "kind": "code",
+   "start": "0x0047f36e",
+   "end_exclusive": "0x0047f62b",
+   "size": 701,
+   "sha256": "b85358b9023a199a3351835865a691de73c2afb3c8beed6d8c9f338f0bf5b82c",
+   "group": "ai-tables",
+   "file": "0047f36e.asm",
+   "code_end": "0x0047f62b",
+   "shared_tails": []
+  },
+  {
+   "name": "listInit",
+   "kind": "code",
+   "start": "0x0047cfd0",
+   "end_exclusive": "0x0047d012",
+   "size": 66,
+   "sha256": "4eb2011884be9a8ea132ed6ca7984d061e847fd550b4beb249160639a97213db",
+   "group": "ai-tables",
+   "file": "0047cfd0.asm",
+   "code_end": "0x0047d012",
+   "shared_tails": []
+  },
+  {
+   "name": "iaProbInit",
+   "kind": "code",
+   "start": "0x0047d1a4",
+   "end_exclusive": "0x0047d1b8",
+   "size": 20,
+   "sha256": "52e34b790abdbd28237e687c0365e93af19f6c0b76bde3dbc197db8b6a14ffee",
+   "group": "ai-tables",
+   "file": "0047d1a4.asm",
+   "code_end": "0x0047d1b8",
+   "shared_tails": []
+  },
+  {
+   "name": "iaProbReset",
+   "kind": "code",
+   "start": "0x0047d220",
+   "end_exclusive": "0x0047d26e",
+   "size": 78,
+   "sha256": "09eed842d4acc05c4271efa3e7930790d46dddc5b5405bcaaafe96f1a49ac0c9",
+   "group": "ai-tables",
+   "file": "0047d220.asm",
+   "code_end": "0x0047d26e",
+   "shared_tails": [
+    {
+     "name": "iaProbReset shared tail",
+     "kind": "code",
+     "start": "0x0047d2fe",
+     "end_exclusive": "0x0047d304",
+     "size": 6,
+     "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b"
+    }
+   ]
+  },
+  {
+   "name": "iagUnitInit",
+   "kind": "code",
+   "start": "0x004826a4",
+   "end_exclusive": "0x004826a7",
+   "size": 3,
+   "sha256": "251447ee91a9067dcd6ab96703133f617565974cd6c4819021760c4688c91abf",
+   "group": "ai-tables",
+   "file": "004826a4.asm",
+   "code_end": "0x004826a7",
+   "shared_tails": []
+  },
+  {
+   "name": "iagUnitReset",
+   "kind": "code",
+   "start": "0x0048270b",
+   "end_exclusive": "0x0048292e",
+   "size": 547,
+   "sha256": "3e15d73af61715c008d404a8fa9ee6de782749374cb0e8df87e95d1acbe39ba5",
+   "group": "ai-tables",
+   "file": "0048270b.asm",
+   "code_end": "0x00482898",
+   "shared_tails": []
+  },
+  {
+   "name": "iagVilleInit",
+   "kind": "code",
+   "start": "0x00484214",
+   "end_exclusive": "0x0048427f",
+   "size": 107,
+   "sha256": "1834f7dfb75f921b7851af1d1b04a85731364aba02a217dd7344128ca5993386",
+   "group": "ai-tables",
+   "file": "00484214.asm",
+   "code_end": "0x0048427f",
+   "shared_tails": []
+  },
+  {
+   "name": "iagVilleReset",
+   "kind": "code",
+   "start": "0x00484310",
+   "end_exclusive": "0x00484539",
+   "size": 553,
+   "sha256": "8044feda5df5372f0972ab8de3b88fe2ebe7ed8dd88a7bbbf4ae111e15d86152",
+   "group": "ai-tables",
+   "file": "00484310.asm",
+   "code_end": "0x00484494",
+   "shared_tails": [
+    {
+     "name": "iagVilleReset shared tail",
+     "kind": "code",
+     "start": "0x004846a0",
+     "end_exclusive": "0x004846a7",
+     "size": 7,
+     "sha256": "7227c48dab9cf58cef6ab93b965ca6429bd0f282cc829c7d338a55a23a93f08d"
+    }
+   ]
+  },
+  {
+   "name": "iagRessInit",
+   "kind": "code",
+   "start": "0x00484bc4",
+   "end_exclusive": "0x00484dd0",
+   "size": 524,
+   "sha256": "47fc0563ebbda1b4526af6bb01b131b64c681eef8436ac4db841d0b9e4955407",
+   "group": "ai-tables",
+   "file": "00484bc4.asm",
+   "code_end": "0x00484dd0",
+   "shared_tails": []
+  },
+  {
+   "name": "iagRessReset",
+   "kind": "code",
+   "start": "0x00485002",
+   "end_exclusive": "0x00485180",
+   "size": 382,
+   "sha256": "17c3c61e15524f5e0516703834511d7791656378580b978af03c9837de3af7c7",
+   "group": "ai-tables",
+   "file": "00485002.asm",
+   "code_end": "0x00485180",
+   "shared_tails": [
+    {
+     "name": "iagRessReset shared tail",
+     "kind": "code",
+     "start": "0x00485693",
+     "end_exclusive": "0x0048569a",
+     "size": 7,
+     "sha256": "7227c48dab9cf58cef6ab93b965ca6429bd0f282cc829c7d338a55a23a93f08d"
+    }
+   ]
+  },
+  {
+   "name": "iagWarInit",
+   "kind": "code",
+   "start": "0x0048614c",
+   "end_exclusive": "0x004862f5",
+   "size": 425,
+   "sha256": "c4e32b047932e78f3e93109f0fc1dd195e04c1b4147213a98e16182017baae28",
+   "group": "ai-tables",
+   "file": "0048614c.asm",
+   "code_end": "0x004862f5",
+   "shared_tails": []
+  },
+  {
+   "name": "iagWarReset",
+   "kind": "code",
+   "start": "0x004864c1",
+   "end_exclusive": "0x004866d4",
+   "size": 531,
+   "sha256": "9edd00f8916d20c1766e0f26c18050e98e8b94dc12ed3ffcc70b1eb52a20cbed",
+   "group": "ai-tables",
+   "file": "004864c1.asm",
+   "code_end": "0x00486638",
+   "shared_tails": []
+  },
+  {
+   "name": "iafRessourceReset",
+   "kind": "code",
+   "start": "0x0048134c",
+   "end_exclusive": "0x0048135f",
+   "size": 19,
+   "sha256": "752eef93e8f1c2db1d225dded8f1733712681a7d8b6d14f6582bdd7a9aaaf1d0",
+   "group": "ai-tables",
+   "file": "0048134c.asm",
+   "code_end": "0x0048135f",
+   "shared_tails": []
+  },
+  {
+   "name": "InitMissionMonstre",
+   "kind": "code",
+   "start": "0x0047af90",
+   "end_exclusive": "0x0047b283",
+   "size": 755,
+   "sha256": "3fdd8fe685ba14362043121400b8d7f5251800c1e0603499541a94261fe53d4c",
+   "group": "ai-tables",
+   "file": "0047af90.asm",
+   "code_end": "0x0047b283",
+   "shared_tails": [
+    {
+     "name": "InitMissionMonstre shared tail",
+     "kind": "code",
+     "start": "0x0047a816",
+     "end_exclusive": "0x0047a81d",
+     "size": 7,
+     "sha256": "7227c48dab9cf58cef6ab93b965ca6429bd0f282cc829c7d338a55a23a93f08d"
+    }
+   ]
+  },
+  {
+   "name": "IAResetAttaque",
+   "kind": "code",
+   "start": "0x0047c162",
+   "end_exclusive": "0x0047c1ba",
+   "size": 88,
+   "sha256": "08426f37aeed7073487585513021c72436d6c4608c618b167b86dfe405c24a09",
+   "group": "ai-tables",
+   "file": "0047c162.asm",
+   "code_end": "0x0047c1ba",
+   "shared_tails": []
+  },
+  {
+   "name": "iaConfigGetValue",
+   "kind": "code",
+   "start": "0x0047fc54",
+   "end_exclusive": "0x0047fc58",
+   "size": 4,
+   "sha256": "d8e4a2b45fda75b61f006c056507f7f8389831b593afce63f8d4449d03514bbc",
+   "group": "ai-tables",
+   "file": "0047fc54.asm",
+   "code_end": "0x0047fc57",
+   "shared_tails": []
+  },
+  {
+   "name": "iaGroupNew",
+   "kind": "code",
+   "start": "0x00483bd8",
+   "end_exclusive": "0x00483ce7",
+   "size": 271,
+   "sha256": "c301a35276732f6d071f4782c6713bfbaf34a287ef6b07badc12f12bf93eb69b",
+   "group": "ai-tables",
+   "file": "00483bd8.asm",
+   "code_end": "0x00483ce7",
+   "shared_tails": [
+    {
+     "name": "iaGroupNew shared tail",
+     "kind": "code",
+     "start": "0x00483a31",
+     "end_exclusive": "0x00483a3a",
+     "size": 9,
+     "sha256": "66a03e9d0a7d2f8ab6a25e54bbaaf8ff43cfccd369d019b2be0563e4be7ac191"
+    }
+   ]
+  },
+  {
+   "name": "iagVilleSetMode",
+   "kind": "code",
+   "start": "0x004846a7",
+   "end_exclusive": "0x00484808",
+   "size": 353,
+   "sha256": "def8593ccf91b5be052feb614db81213130447b4be9f708139d64c9b37295411",
+   "group": "ai-tables",
+   "file": "004846a7.asm",
+   "code_end": "0x004846cb",
+   "shared_tails": []
+  },
+  {
+   "name": "iagRessSetMode",
+   "kind": "code",
+   "start": "0x0048569a",
+   "end_exclusive": "0x00485a54",
+   "size": 954,
+   "sha256": "605a3cde3b72e4a90de0c1a26ea7549b106f0611259d496b58a63e9f263abe62",
+   "group": "ai-tables",
+   "file": "0048569a.asm",
+   "code_end": "0x004856e2",
+   "shared_tails": []
+  },
+  {
+   "name": "iagWarSetMode",
+   "kind": "code",
+   "start": "0x00486ca7",
+   "end_exclusive": "0x00487089",
+   "size": 994,
+   "sha256": "7855fdac4f6d0b98abea0d90bca95baf1989e15009bb0a37320b877bbfa8e60a",
+   "group": "ai-tables",
+   "file": "00486ca7.asm",
+   "code_end": "0x00486cd8",
+   "shared_tails": []
+  },
+  {
+   "name": "iagUnitSendMessage",
+   "kind": "code",
+   "start": "0x004829c8",
+   "end_exclusive": "0x00482ebc",
+   "size": 1268,
+   "sha256": "1d13b42037d1c81480c70dfaff8e206ecf064d425eeb4b004d0687fa8333326f",
+   "group": "messages",
+   "file": "004829c8.asm",
+   "code_end": "0x00482ebc",
+   "shared_tails": []
+  },
+  {
+   "name": "iagVilleSendMessage",
+   "kind": "code",
+   "start": "0x00484808",
+   "end_exclusive": "0x0048491f",
+   "size": 279,
+   "sha256": "b6fd27c9d67f8e9ff35562e51778e137c2e32f49b0039d6ed7dce593253b04e0",
+   "group": "messages",
+   "file": "00484808.asm",
+   "code_end": "0x0048491f",
+   "shared_tails": []
+  },
+  {
+   "name": "B_EtatMarche",
+   "kind": "code",
+   "start": "0x0046030a",
+   "end_exclusive": "0x00460341",
+   "size": 55,
+   "sha256": "c1499a13949b897d403e118efe9a269ed716ff4b2d5d34b157be2d1a86a6535f",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_iaMonstreAttendLaReponseVachementCoolMemeQueJeLaVeux",
+   "kind": "code",
+   "start": "0x0047b6db",
+   "end_exclusive": "0x0047b796",
+   "size": 187,
+   "sha256": "303ca3eb862f740658f2ada2dc7b04bb211d95e4a19a0655b2fc1bc2ec014f41",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_Attendre",
+   "kind": "code",
+   "start": "0x0047da7a",
+   "end_exclusive": "0x0047daa4",
+   "size": 42,
+   "sha256": "28da46a2a19620952081e873fce83c469b5724bf0118e462a60ca72745a74869",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_AccessibiliteBatiment/B_AccessibiliteChemin/B_Bidon",
+   "kind": "code",
+   "start": "0x0047f31c",
+   "end_exclusive": "0x0047f322",
+   "size": 6,
+   "sha256": "2db31f4e09597946e56e859813bfdad7046d457c32332c3a882654d1e3ffdf67",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_GicleUniteAmieDeZone/B_TestUniteAmieSurZone/B_TestUniteEnnemieSurZone",
+   "kind": "code",
+   "start": "0x0047f322",
+   "end_exclusive": "0x0047f328",
+   "size": 6,
+   "sha256": "534009b1b3a0d4a912f5ccd5fb57fbfb8be45d709f8cb2068df72297c946e59e",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneForceGroupe",
+   "kind": "code",
+   "start": "0x0047fc58",
+   "end_exclusive": "0x0047fce9",
+   "size": 145,
+   "sha256": "92c3fee482a030b416387f1fc344298d275250d3c3c90c288e4f4c3359f6e72f",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_CompleteMilitairesDansGroupe",
+   "kind": "code",
+   "start": "0x0047fce9",
+   "end_exclusive": "0x0047fe4b",
+   "size": 354,
+   "sha256": "5057d270f6fa6c9d1072bd35510d8d7d43515b0edc20b1ed4f51971d7edbb2ec",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneForceNation",
+   "kind": "code",
+   "start": "0x0047fe4b",
+   "end_exclusive": "0x0047fe9b",
+   "size": 80,
+   "sha256": "b05a67efc21739e446655d8152cac2f905323ce83b7670502206d08d13798228",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneForceEnnemieDansZone",
+   "kind": "code",
+   "start": "0x0047fe9b",
+   "end_exclusive": "0x0047fead",
+   "size": 18,
+   "sha256": "5c445ad42c37c918ae9da358a52ba1444d9f4a52c3a9ce61fee0f975e8e9ef41",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneForceGroupeDansZone",
+   "kind": "code",
+   "start": "0x0047fead",
+   "end_exclusive": "0x0047febf",
+   "size": 18,
+   "sha256": "a6603bf882144b3609f72fecfcdd42aed6d6dc8f5473571ef1914ba00dd2384f",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_InitConflit",
+   "kind": "code",
+   "start": "0x0047febf",
+   "end_exclusive": "0x0047fee0",
+   "size": 33,
+   "sha256": "8711c257f5f8736e0be6b4a0e8f1d1cb2c5b15313bf9731e78dc20a1eb87c66d",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_NewConflit",
+   "kind": "code",
+   "start": "0x0047fee0",
+   "end_exclusive": "0x0047ff22",
+   "size": 66,
+   "sha256": "6c911307be7e98861449202ebeb9b36a655872d58a5b838b42b713c9b70cf811",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_FreeConflit",
+   "kind": "code",
+   "start": "0x0047ff22",
+   "end_exclusive": "0x0047ff34",
+   "size": 18,
+   "sha256": "9bc2659521896a1323a3a8e445e0edce50a15577b0f3d0047bde2d060d5e5d82",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_CommandeForceDefense",
+   "kind": "code",
+   "start": "0x0047ff34",
+   "end_exclusive": "0x0047ff4d",
+   "size": 25,
+   "sha256": "8d0ce8d5c1457312dafd50b989f11e536918b88fa8478b666aca8a75c5d2091f",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_AttenteConflit",
+   "kind": "code",
+   "start": "0x0047ff4d",
+   "end_exclusive": "0x0047ff65",
+   "size": 24,
+   "sha256": "e9e55081b4783557cf53f24de7cee0d65fd22c68fa72f0c5b60060022d067963",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_TestUniteDanger",
+   "kind": "code",
+   "start": "0x0047ff65",
+   "end_exclusive": "0x0047ffa4",
+   "size": 63,
+   "sha256": "74060db57147494109b0145c16df65d5711fd6ebd4e26bcd4dd931d2e0a3207d",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_AttacheConflitGroupe",
+   "kind": "code",
+   "start": "0x0047ffa4",
+   "end_exclusive": "0x0047ffd8",
+   "size": 52,
+   "sha256": "b90dd19247df23674e6619f0026cdb2cc3f762fa10e52987b0c015edf5d786ef",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_AiJeConnaissanceBatiment",
+   "kind": "code",
+   "start": "0x0047ffd8",
+   "end_exclusive": "0x0047fffb",
+   "size": 35,
+   "sha256": "830aa8dc441a61abe2251236f0e3949f11186eb29689baf82324264a35e51698",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_AiJeConnaissanceUnitee",
+   "kind": "code",
+   "start": "0x0047fffb",
+   "end_exclusive": "0x0048001e",
+   "size": 35,
+   "sha256": "4c572237ecccab0e13a25fd521c03556301c59e1dab8eaac892e454423ea5c64",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_AiJeConnaissanceFutureBatiment",
+   "kind": "code",
+   "start": "0x0048001e",
+   "end_exclusive": "0x00480041",
+   "size": 35,
+   "sha256": "77159ecd60aed94628d087d91e020f05f10ffbb6155a07d2114d5bf8804b58e4",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_TrouvePlaceLibreProche",
+   "kind": "code",
+   "start": "0x00480064",
+   "end_exclusive": "0x004800f1",
+   "size": 141,
+   "sha256": "a8a26cfdd953c6eaf09c3b663c79cd3495459c3d2663fb508c661c906f4b4cdc",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_TrouvePlaceOccupeProche",
+   "kind": "code",
+   "start": "0x004800f1",
+   "end_exclusive": "0x004801a2",
+   "size": 177,
+   "sha256": "bd034f3c2d27b6b4a44bb32ba2c7f5d241c62276dfa925405a8beaa55695392c",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneCaseLibreZoneProche",
+   "kind": "code",
+   "start": "0x004801a2",
+   "end_exclusive": "0x004801d2",
+   "size": 48,
+   "sha256": "cc7eae55a9952c442c0c2449406d289537171c68bb973be358eb6f54ec3841a0",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneBatimentDansZone",
+   "kind": "code",
+   "start": "0x004801d2",
+   "end_exclusive": "0x004802fb",
+   "size": 297,
+   "sha256": "2dbe5dfe33eac442d1450e8d5b0a4037552708d656fe78811f283209176df140",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_ChercheWayPoint",
+   "kind": "code",
+   "start": "0x004802fb",
+   "end_exclusive": "0x004804a1",
+   "size": 422,
+   "sha256": "8f90336142b9d3cbf2c594e9a4cb8917f682d1a87cc21f12cf03fe441b7e09d4",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_ChercheCivilProche",
+   "kind": "code",
+   "start": "0x004804a1",
+   "end_exclusive": "0x0048060a",
+   "size": 361,
+   "sha256": "874cfa51b3ffd22efb42a1cb3dd8c6dfb5dd2b79788bec0a119b9e4cb8884cf2",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneCaseLibreProcheGhostBatiment",
+   "kind": "code",
+   "start": "0x00480617",
+   "end_exclusive": "0x00480644",
+   "size": 45,
+   "sha256": "e4b9eb273dac3642955684a471f0130cd943707f9f45e1782dac4c85444530db",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_AiJeBatiment",
+   "kind": "code",
+   "start": "0x00480644",
+   "end_exclusive": "0x0048068f",
+   "size": 75,
+   "sha256": "758cef821e51560bb12ede0a5f9ccf27032a486b31f9254230fb736534587f70",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_EtatBatiment",
+   "kind": "code",
+   "start": "0x0048068f",
+   "end_exclusive": "0x004806db",
+   "size": 76,
+   "sha256": "690635efeedddc775d4f23f5cc9d70231057392242395a66a38d6aa987f87b54",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneTypeBatiment",
+   "kind": "code",
+   "start": "0x004806db",
+   "end_exclusive": "0x004806ed",
+   "size": 18,
+   "sha256": "a8b262521f4faec01ec2770f49e80fe192a92e0ee5847af4720b4459972e1059",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_OccupationColonMinBatiment",
+   "kind": "code",
+   "start": "0x004806ed",
+   "end_exclusive": "0x00480712",
+   "size": 37,
+   "sha256": "29efe069e6dcd67d8981bb3689ebad206b3a84c75fedd832d8ebeb377da050f4",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_BatimentSortColon",
+   "kind": "code",
+   "start": "0x00480712",
+   "end_exclusive": "0x00480731",
+   "size": 31,
+   "sha256": "88f6ec165cd157c4a072483053162af974c706dd6e14ba2b4efdd5c10fbed2db",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_BatimentRecruteUnite",
+   "kind": "code",
+   "start": "0x00480731",
+   "end_exclusive": "0x00480760",
+   "size": 47,
+   "sha256": "88a1670ccf02143522af8a5b1d43a9917daf6d4bf4627dc940f5e844f9de4dbe",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneBatimentOccupe",
+   "kind": "code",
+   "start": "0x00480760",
+   "end_exclusive": "0x00480803",
+   "size": 163,
+   "sha256": "509684b9c712ceb1046ae24de98e8764d6d4a368ceb7bf83a6df0741cc090fce",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonnePositionBatiment",
+   "kind": "code",
+   "start": "0x00480803",
+   "end_exclusive": "0x00480816",
+   "size": 19,
+   "sha256": "52bf15dea2ce27475e592f6a0664a77870faf497cadd321afed12aba6acc0d88",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_ReserveGhostBatiment",
+   "kind": "code",
+   "start": "0x00480816",
+   "end_exclusive": "0x00480842",
+   "size": 44,
+   "sha256": "080c0f787ffd100737cb7c24f3f632b2951ae0110c2ac5976795c2db2f1f2a1f",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_LibereGhostBatiment",
+   "kind": "code",
+   "start": "0x00480842",
+   "end_exclusive": "0x00480859",
+   "size": 23,
+   "sha256": "0828dbacf3a225de65ed22ee59997d572273ad8dc2d8836642d0eb6364bc0f73",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonnePositionMaVille",
+   "kind": "code",
+   "start": "0x00480859",
+   "end_exclusive": "0x004808b4",
+   "size": 91,
+   "sha256": "0a3b15fc9b5e5cebe89dc93737a429b494224f12bb9d834cc65f8a8037973758",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneBatimentProche",
+   "kind": "code",
+   "start": "0x004808b4",
+   "end_exclusive": "0x0048093a",
+   "size": 134,
+   "sha256": "523c1c01e8f450c43aead4f07dd393effb4db98c96557dde75df7f330f53c97d",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneBatimentOuEstUnite",
+   "kind": "code",
+   "start": "0x0048094a",
+   "end_exclusive": "0x00480951",
+   "size": 7,
+   "sha256": "2814653c52360b59db1ec36f3246117168dcfabc64e5b67d77da604b3e5515a4",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneBatimentPasPlein",
+   "kind": "code",
+   "start": "0x00480951",
+   "end_exclusive": "0x00480a2f",
+   "size": 222,
+   "sha256": "62ed7546f2b3d32173f5db9b0d46c7e07719278ffc71349c87fcc6eb566c6fed",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_TestBatimentBesoinColon",
+   "kind": "code",
+   "start": "0x00480abd",
+   "end_exclusive": "0x00480ace",
+   "size": 17,
+   "sha256": "cf71fb909b6c17c406e039ea6d1fb6b47cf984a24b12680ecd7b8254225aa156",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneBatimentSurCase",
+   "kind": "code",
+   "start": "0x00480ace",
+   "end_exclusive": "0x00480aed",
+   "size": 31,
+   "sha256": "b842f186421e38ca9423d4be50e17fda0df8b26afecc99c9ee7e491e84ac4357",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneBatimentAAttaquer",
+   "kind": "code",
+   "start": "0x00480aed",
+   "end_exclusive": "0x00480cee",
+   "size": 513,
+   "sha256": "76acadc6aec218c50b792446a10f9fb0f054d3d5f6391f807298f62a33ce302d",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneBatimentMarchandage",
+   "kind": "code",
+   "start": "0x00480cee",
+   "end_exclusive": "0x00480d56",
+   "size": 104,
+   "sha256": "06e9282e9d7eb181f581b75aad0b81ef20420e7a4b68a1462286cd28614f11e6",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneNationBatiment",
+   "kind": "code",
+   "start": "0x00480d56",
+   "end_exclusive": "0x00480d68",
+   "size": 18,
+   "sha256": "096f80ddf78b1740f2c2fbb87c0f978eb84e4158d3891fca549a79b79ffa723b",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DeterminationEnnemi",
+   "kind": "code",
+   "start": "0x00480d68",
+   "end_exclusive": "0x00480d97",
+   "size": 47,
+   "sha256": "3664d4d4a6a7eba4c1790145f57f60b212d350869d5a1a0f048b3b00087df7e8",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_FixeAlliance",
+   "kind": "code",
+   "start": "0x00480d97",
+   "end_exclusive": "0x00480e1f",
+   "size": 136,
+   "sha256": "6834dd939c864e3c592072510171ba0833cc66ab6115fec1ca85455d71b24256",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_RefuseAlliance",
+   "kind": "code",
+   "start": "0x00480e1f",
+   "end_exclusive": "0x00480e4f",
+   "size": 48,
+   "sha256": "54f04185c171ae240d6b50cace62ea6866ff765e13fd9eab7da7ed810c82249f",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_Allie",
+   "kind": "code",
+   "start": "0x00480e4f",
+   "end_exclusive": "0x00480e72",
+   "size": 35,
+   "sha256": "76b4b7b6ef09d987968cf2b6848e147a4847a12dd123ee95beaa1f70d66ec180",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_DeclareGuerre",
+   "kind": "code",
+   "start": "0x00480e72",
+   "end_exclusive": "0x00480ea6",
+   "size": 52,
+   "sha256": "78f4db0e3b41cb329da7242d000af33fea422e97acdaceac99313ac15057463d",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneNationPlusHaute",
+   "kind": "code",
+   "start": "0x00480ea6",
+   "end_exclusive": "0x00480ee2",
+   "size": 60,
+   "sha256": "35b6093b2dffca04e53f6660663b466878c3594a4aa7ef7cf65cb2c59cc03da7",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneNationPlusBasse",
+   "kind": "code",
+   "start": "0x00480ee2",
+   "end_exclusive": "0x00480f16",
+   "size": 52,
+   "sha256": "eb1016b80648dfbb2f7192c7958fa6bd306b5227389d0fcb68e6b59e55d548d8",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_CombienDAlliances",
+   "kind": "code",
+   "start": "0x00480f16",
+   "end_exclusive": "0x00480f50",
+   "size": 58,
+   "sha256": "2ed7d9fb7778e9bf3698d5bebb12013cc719e90b1584d6c369e1d710aa39f2e5",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_ChoixPlaceLibre",
+   "kind": "code",
+   "start": "0x00480fc7",
+   "end_exclusive": "0x00481034",
+   "size": 109,
+   "sha256": "25fcaaba218c9bdb817ddeb1fd567ae7010e4585d3ec2fe0268b6db8830c5ed0",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_RecupereSympathie",
+   "kind": "code",
+   "start": "0x00481034",
+   "end_exclusive": "0x00481049",
+   "size": 21,
+   "sha256": "f51c7a98b23d52c5089b27384c25989a8dea3ce7437efa5ecb8df0e121000a3a",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_NombreAlliances",
+   "kind": "code",
+   "start": "0x00481075",
+   "end_exclusive": "0x004810aa",
+   "size": 53,
+   "sha256": "e49036fad63e8aeb1c373174f6a9f6ed229c3f32afd20396d2813ed09bcf3e0f",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_ChercheNationPasAllie",
+   "kind": "code",
+   "start": "0x004810aa",
+   "end_exclusive": "0x00481110",
+   "size": 102,
+   "sha256": "8a4a36aba69699c0476ce29d2bd6d1d53606e59cf71d3bdf39b313f143777747",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneTypeUnite",
+   "kind": "code",
+   "start": "0x00481133",
+   "end_exclusive": "0x00481146",
+   "size": 19,
+   "sha256": "299d9490fc371018721f3d15aee324f2bda2c95158c70c1aed5b75ffc9b400ff",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_DeplacerUnite",
+   "kind": "code",
+   "start": "0x00481146",
+   "end_exclusive": "0x00481173",
+   "size": 45,
+   "sha256": "65fd0ac16f29b074249ca225470563c404204142e8e95e6bd2c625aacb9f092f",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_Egalite",
+   "kind": "code",
+   "start": "0x00481280",
+   "end_exclusive": "0x00481296",
+   "size": 22,
+   "sha256": "56cedf10bbe9062cec0b468647de477f8cec0a46c24ddcdb7bd37e630763884a",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_Superieur",
+   "kind": "code",
+   "start": "0x00481296",
+   "end_exclusive": "0x004812ac",
+   "size": 22,
+   "sha256": "f58a5f2f1ff8c0882ceab5cbddcefffae52cf2b33761376912cf8e94382767d8",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_Addition",
+   "kind": "code",
+   "start": "0x004812ac",
+   "end_exclusive": "0x004812b9",
+   "size": 13,
+   "sha256": "a5f89b15f7a34a9cc049163df66d222350573819d2cac7cec2593b436867e0e2",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_Soustraction",
+   "kind": "code",
+   "start": "0x004812b9",
+   "end_exclusive": "0x004812d0",
+   "size": 23,
+   "sha256": "d61e2803702355ddb7f1093c624e73d17f26e6b78a37395d4dacdda3e21e21a3",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_PourcentageAB",
+   "kind": "code",
+   "start": "0x004812d0",
+   "end_exclusive": "0x004812f4",
+   "size": 36,
+   "sha256": "6d0f1b2f25095b4ed6d1d7a052648d43fea147018f5b6e0d9a6d0d4eb1e5559c",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_Affecte",
+   "kind": "code",
+   "start": "0x004812f4",
+   "end_exclusive": "0x004812f7",
+   "size": 3,
+   "sha256": "2f1077715974fe5c7be1e9eb34dd222d3b53fed99b35c99567b9178a4b4e67ff",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_NumMission",
+   "kind": "code",
+   "start": "0x004812f7",
+   "end_exclusive": "0x00481302",
+   "size": 11,
+   "sha256": "44301cc6cfed3f074f77975f8230ca4520cd92d0b5692d335b70698c5d7ed523",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_Divise",
+   "kind": "code",
+   "start": "0x00481302",
+   "end_exclusive": "0x00481328",
+   "size": 38,
+   "sha256": "60774a1e64d421e8563f6a005abb07f58868fd7b7e09434382b20f5e9fe6447e",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_CombienCouteUnite",
+   "kind": "code",
+   "start": "0x00481372",
+   "end_exclusive": "0x00481399",
+   "size": 39,
+   "sha256": "bd5084d73ea3aa6949f66f87567dbd78fc5e146165b5f72180b6989d587dacac",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_CombienCouteBatiment",
+   "kind": "code",
+   "start": "0x00481399",
+   "end_exclusive": "0x004813b8",
+   "size": 31,
+   "sha256": "adaa07b4cb2c96cabdfec53b495535f93f42e132dd5e9b63f09e6447379f31da",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_TestRessource",
+   "kind": "code",
+   "start": "0x00481400",
+   "end_exclusive": "0x00481426",
+   "size": 38,
+   "sha256": "8ed94e8f041b22464e5926f3fa02d492fa50e66376d70179bce938d67ca1cd44",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_ChercheChampNonExploite",
+   "kind": "code",
+   "start": "0x00481426",
+   "end_exclusive": "0x00481738",
+   "size": 786,
+   "sha256": "b9084068a502387a415d0f939a2015924a48f3a2524d9ca474dd6184bad2ea75",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneCaveAssocieeChamp",
+   "kind": "code",
+   "start": "0x00481738",
+   "end_exclusive": "0x0048179e",
+   "size": 102,
+   "sha256": "3aededf01697989ac67819545531c388f5491b409722838a0f6970228991841a",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneCaveAssocieeMine",
+   "kind": "code",
+   "start": "0x0048179e",
+   "end_exclusive": "0x004817f2",
+   "size": 84,
+   "sha256": "c76061e8aa9684addf02cbafc47a298a62c06309dc930923324d697f5f5e8715",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneValeurChamp",
+   "kind": "code",
+   "start": "0x004817f2",
+   "end_exclusive": "0x00481806",
+   "size": 20,
+   "sha256": "18a84c6e02e5fc5edde605f24759ee2c6c8ee4524b1f812a406060eb94c6aca9",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneMaxExploitantsDansChamp",
+   "kind": "code",
+   "start": "0x00481806",
+   "end_exclusive": "0x0048181a",
+   "size": 20,
+   "sha256": "cd9cd8d600acf1fb89e43165d62671223dd259c0a18c0d9fe0024a4150bd1d9d",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneChampAssocieGroupe",
+   "kind": "code",
+   "start": "0x0048181a",
+   "end_exclusive": "0x00481833",
+   "size": 25,
+   "sha256": "0f63eaecf7c772239d81400b7cc53fd6a325ce13c8687a5baeebdc2519f3c68b",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_ChercheMine",
+   "kind": "code",
+   "start": "0x00481833",
+   "end_exclusive": "0x004819d7",
+   "size": 420,
+   "sha256": "0cf6411b8abaff7e98fc5771f1eef6ca17259d413fd1d32e6dcbf7285fb125a1",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_CherchePiece",
+   "kind": "code",
+   "start": "0x004819d7",
+   "end_exclusive": "0x00481b46",
+   "size": 367,
+   "sha256": "ee026a81b00a6664dd9cb07b1c94cc28b0baad44983b7dbc65dda5f73a50ad02",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneCaveProchePiece",
+   "kind": "code",
+   "start": "0x00481b46",
+   "end_exclusive": "0x00481b9e",
+   "size": 88,
+   "sha256": "4a1e442f55d1369cd829360574e90a24069f66754fd69636e67aecb0a221f6c1",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneValeurPiece",
+   "kind": "code",
+   "start": "0x00481b9e",
+   "end_exclusive": "0x00481bb1",
+   "size": 19,
+   "sha256": "940bf19f44ead39a3e81508542919343386e1f79dfc0d69bc84f2df22d36a987",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_EncorePiece",
+   "kind": "code",
+   "start": "0x00481bb1",
+   "end_exclusive": "0x00481bcf",
+   "size": 30,
+   "sha256": "a489b68c2a439f5db0ef9ec338a833bdc0d86f338b504a1af312020135638f8b",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneValeurMine",
+   "kind": "code",
+   "start": "0x00481bcf",
+   "end_exclusive": "0x00481be8",
+   "size": 25,
+   "sha256": "968a33c1a72edbfcf8d4786701600e0c22157ef2026d9fd3458f3e2ae23e2e23",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_InterditCaseMine",
+   "kind": "code",
+   "start": "0x00481be8",
+   "end_exclusive": "0x00481c03",
+   "size": 27,
+   "sha256": "8c24d06e1b8356d3d2db514b7a76145f2dc22fcacc2b7fe2b4a3b3b207b47a34",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_RestoreCaseMine",
+   "kind": "code",
+   "start": "0x00481c03",
+   "end_exclusive": "0x00481c28",
+   "size": 37,
+   "sha256": "0aa67c287f832e5212a47573c8bb86d3187dde5deaeda587f3ea920d3043f7a9",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneNoGroupe",
+   "kind": "code",
+   "start": "0x00481c28",
+   "end_exclusive": "0x00481c38",
+   "size": 16,
+   "sha256": "40eecec6db0882609f0538a2e21cf8d341825c5fb5f3aa895563b26f2a9f07fa",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_LibereGroupeVide",
+   "kind": "code",
+   "start": "0x00481c38",
+   "end_exclusive": "0x00481c4a",
+   "size": 18,
+   "sha256": "c30edcf007914731b810f303015318202e6e78f6038e553c5ff0dc004fecd455",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_TransfertUnite",
+   "kind": "code",
+   "start": "0x00481c4a",
+   "end_exclusive": "0x00481c75",
+   "size": 43,
+   "sha256": "6aaf5871e740ac28ada27e4c780b1cf380f2608ef7bf8764a7fd6e4c550b0e58",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_CompleteGroupe",
+   "kind": "code",
+   "start": "0x00481c75",
+   "end_exclusive": "0x00481c9b",
+   "size": 38,
+   "sha256": "070e1abb525b91ed54231c1700fd2f69ae87fa951ee7f55b1bb80423827f3c45",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_AjusteNbUnitesGroupe",
+   "kind": "code",
+   "start": "0x00481c9b",
+   "end_exclusive": "0x00481cb8",
+   "size": 29,
+   "sha256": "0aa3f5aa802fdf92d48ca9c165f8e855f26a62600d6335b643620cf9cbf35a9e",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_MiseADisposition",
+   "kind": "code",
+   "start": "0x00481cb8",
+   "end_exclusive": "0x00481ce3",
+   "size": 43,
+   "sha256": "0e6a7e97410c06e14b1b6701e5df3b0a1d6d82e415736379f5c31dc9d4a1eb66",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_ConstruireBatiment",
+   "kind": "code",
+   "start": "0x00481ce3",
+   "end_exclusive": "0x00481d7e",
+   "size": 155,
+   "sha256": "30fc2775c47001641e27605f8560fbb07415cd1909310bcfe435d31670ff854c",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_ReparerBatiment",
+   "kind": "code",
+   "start": "0x00481d7e",
+   "end_exclusive": "0x00481e07",
+   "size": 137,
+   "sha256": "33e97167d45a743248f04cde3dab9c946d48ec5e5ad52f461fc162f23f824318",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_EntreBatiment",
+   "kind": "code",
+   "start": "0x00481e07",
+   "end_exclusive": "0x00481e4f",
+   "size": 72,
+   "sha256": "aa0ed3e02663f441d25c07ea9608fb6ae227147bc4239a145eb98db42cccdf67",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_ActiveBatiment",
+   "kind": "code",
+   "start": "0x00481e4f",
+   "end_exclusive": "0x00481e88",
+   "size": 57,
+   "sha256": "162aab7f63d5c09d22d11dd94e127ec6283e9456d03ab8bccab72be8db66a870",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_VideEngin",
+   "kind": "code",
+   "start": "0x00481e88",
+   "end_exclusive": "0x00481ece",
+   "size": 70,
+   "sha256": "df6ca07ad9a41409fb0b4050a83ca2ac96d7077d036f94a1b5732a1d52ada010",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_EntreDansEngin",
+   "kind": "code",
+   "start": "0x00481ece",
+   "end_exclusive": "0x00481f1a",
+   "size": 76,
+   "sha256": "7cbf10aa07a4bbcfc06171106d53e90662e432aae0a344a59e5b5f3553d76f0e",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_AttenteMessageGroupe",
+   "kind": "code",
+   "start": "0x00481f1a",
+   "end_exclusive": "0x00481f2e",
+   "size": 20,
+   "sha256": "da004cf012bfa7d376d219c02f8b2c3e13f89dc4cc6e6cdaddce353ec06ea707",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_AiJeUniteDansGroupe",
+   "kind": "code",
+   "start": "0x00481f2e",
+   "end_exclusive": "0x00481f4c",
+   "size": 30,
+   "sha256": "b383ed3a683563db477e181b5e749349c0d41ce2e4637119661f12a55d736932",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_DeplaceGroupe",
+   "kind": "code",
+   "start": "0x00481f4c",
+   "end_exclusive": "0x00481fb4",
+   "size": 104,
+   "sha256": "048406cade3ef245cb90bc1656cddf7935fede52c0a42b0cc8313d14ef6f3e6c",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_RecupereNoGroupe",
+   "kind": "code",
+   "start": "0x00481fb4",
+   "end_exclusive": "0x00481fc4",
+   "size": 16,
+   "sha256": "b633bf5bcc769c95fcf857c7e7cea26ca2c7f25d500ccf9bad461bd75053794a",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_AttendreDispatcher",
+   "kind": "code",
+   "start": "0x00481fc4",
+   "end_exclusive": "0x00482000",
+   "size": 60,
+   "sha256": "a195d79c9f3900203acdb33b4293f1c55f30dcc8ac1581e0963675d8ffb2ea01",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneGroupeNonComplet",
+   "kind": "code",
+   "start": "0x00482000",
+   "end_exclusive": "0x00482010",
+   "size": 16,
+   "sha256": "7be85f424006d44fe513a4329a309b506bbb2a2fa39c2cafbbcb5681fa8cdac6",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_SetMaxUnites",
+   "kind": "code",
+   "start": "0x00482010",
+   "end_exclusive": "0x00482020",
+   "size": 16,
+   "sha256": "bf30137c4446dda2a98ec61bd562324c56f437539fa5929c7ab5f1c8a6085653",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_Recolter",
+   "kind": "code",
+   "start": "0x00482020",
+   "end_exclusive": "0x00482085",
+   "size": 101,
+   "sha256": "fef21cd04e8b12811808e2d3ea2fafb9d0f13db090410a25e0da14223fc4c0fe",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_CueillirChamp",
+   "kind": "code",
+   "start": "0x00482085",
+   "end_exclusive": "0x004820e7",
+   "size": 98,
+   "sha256": "f56b8ab8004b05bc4120f3613954e5b593d25e170366e54f992341f73e008cac",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_SetNavetteCaveToCulture",
+   "kind": "code",
+   "start": "0x004820e7",
+   "end_exclusive": "0x0048213c",
+   "size": 85,
+   "sha256": "565ebd99b9ca97d23b4691abdf78103d81fe4f65c21b26bb4a5879f0d837d0cb",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_ExploiteMine",
+   "kind": "code",
+   "start": "0x0048213c",
+   "end_exclusive": "0x0048219e",
+   "size": 98,
+   "sha256": "ca7ec96143797f8c522ad38ebcabd746be03902c912b47a2f1f55de088d04dc5",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_RienFaire",
+   "kind": "code",
+   "start": "0x0048219e",
+   "end_exclusive": "0x004821f0",
+   "size": 82,
+   "sha256": "108dcdceedb4cca767a84289fbfbe97cc1d88a0806fb2e26b25396cb5fb31d3f",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_ExploitePiece",
+   "kind": "code",
+   "start": "0x004821f0",
+   "end_exclusive": "0x00482265",
+   "size": 117,
+   "sha256": "1b7b16ca4770260044b95a0bd0ab75bba4348ff5c416fafb610ef21daedfd589",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_DeposerPiece",
+   "kind": "code",
+   "start": "0x00482265",
+   "end_exclusive": "0x004822ab",
+   "size": 70,
+   "sha256": "544c42040ea21f7ade27a96f398abd89343e5c888f6bfd9d3994b8370c0ddc10",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_PrendrePiece",
+   "kind": "code",
+   "start": "0x004822ab",
+   "end_exclusive": "0x004822ed",
+   "size": 66,
+   "sha256": "cc69ac18f8e9f91693e4c602c18cec3ef99513049df21e809d9e325a785d39c5",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_AttaquerBatiment",
+   "kind": "code",
+   "start": "0x004822ed",
+   "end_exclusive": "0x0048232f",
+   "size": 66,
+   "sha256": "6076fbf9c03de21f9120d0e6b41e23773015c6b310966a99c31f7f2833f03b1a",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_TestGroupeVide",
+   "kind": "code",
+   "start": "0x0048232f",
+   "end_exclusive": "0x00482354",
+   "size": 37,
+   "sha256": "7ba5dd76922efbba8414618a65c2a38e4cd4103fbe0877ed33ee4cd10cf54b5c",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DetermineTempsTrajet",
+   "kind": "code",
+   "start": "0x00482354",
+   "end_exclusive": "0x00482433",
+   "size": 223,
+   "sha256": "d3758f8e50028e3b14635d1ed74e36434b28a1f76574c6df84a40ce20f46c356",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_TransfertUniteFastest",
+   "kind": "code",
+   "start": "0x00482433",
+   "end_exclusive": "0x00482501",
+   "size": 206,
+   "sha256": "833b7f473eef8fbc2be88f25048adc1f5f97490c36f449b573a991d36a58ef19",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_TricheToutLeMondeMange",
+   "kind": "code",
+   "start": "0x00482501",
+   "end_exclusive": "0x00482550",
+   "size": 79,
+   "sha256": "e830fb37a5e6a55448b610cd2143bb9a34caf6414882b4d77a55a3e764244235",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonnePositionGroupe",
+   "kind": "code",
+   "start": "0x00482550",
+   "end_exclusive": "0x00482579",
+   "size": 41,
+   "sha256": "9d274abf745d7337b01d651ce8ca09b2c5446cde3b58c6c13aa06f2a3cfeb66a",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_TricheColon",
+   "kind": "code",
+   "start": "0x00482579",
+   "end_exclusive": "0x00482610",
+   "size": 151,
+   "sha256": "fa02f5238fec3cceada5f58469396c98f451f70a8defe243a27c1d763811d8e8",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_BatimentNestPlusEnConstructionWithAbort",
+   "kind": "code",
+   "start": "0x00482610",
+   "end_exclusive": "0x00482630",
+   "size": 32,
+   "sha256": "05e23193effd6e6a09a28cb2fb03f3c834ed7de88d0c46530df56b5032125164",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_MiseAJourBatimentConstruit",
+   "kind": "code",
+   "start": "0x00482630",
+   "end_exclusive": "0x0048264a",
+   "size": 26,
+   "sha256": "d2b159ef583f534e3466b4000001ff3c88aa3ce80606340cf1c21ef62db78ada",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_AiJeBatimentEnCoursConstruction",
+   "kind": "code",
+   "start": "0x0048264a",
+   "end_exclusive": "0x00482667",
+   "size": 29,
+   "sha256": "d7877b835980728de29831d3b898fd6cbff6581aa88b32aa5f39787e0d7ba0e9",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_MiseAJourBatimentEnCoursConstruction",
+   "kind": "code",
+   "start": "0x00482667",
+   "end_exclusive": "0x00482679",
+   "size": 18,
+   "sha256": "d54b784bb701a6bc42cf74c10f55207de5a26bebeb943b8f91f8ffb50afce57c",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_AttenteBatimentConstruit",
+   "kind": "code",
+   "start": "0x00482679",
+   "end_exclusive": "0x00482697",
+   "size": 30,
+   "sha256": "28fda2936f7f0050d9b0f497fcdf82a3b1c31d79bfe4c609e8a08bafca17c48e",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_AttenteMessageBatiment",
+   "kind": "code",
+   "start": "0x00482697",
+   "end_exclusive": "0x004826a4",
+   "size": 13,
+   "sha256": "c5b9dffb686173252dbef936b258f2cbaf26aa41b6dbcc158e905ffe931ed2f9",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_AttendreRessource",
+   "kind": "code",
+   "start": "0x00485d53",
+   "end_exclusive": "0x00485d75",
+   "size": 34,
+   "sha256": "8df8436f29085d797e606ed3829a59884eb5b06f3810d80c31d125b88fc04857",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_SetChampExploite",
+   "kind": "code",
+   "start": "0x00485d7b",
+   "end_exclusive": "0x00485dfc",
+   "size": 129,
+   "sha256": "b4a4e933cd95bbec9fdb7d8b9051011d575c03dcc6fea66317486354111589e7",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_SetChampNonExploite",
+   "kind": "code",
+   "start": "0x00485dfc",
+   "end_exclusive": "0x00485e53",
+   "size": 87,
+   "sha256": "bd67aeffdda67a18b1db9458681915523cc9938048d39f97a06175a3e01ea609",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_SetProductionColonsOn",
+   "kind": "code",
+   "start": "0x00485e53",
+   "end_exclusive": "0x00485e66",
+   "size": 19,
+   "sha256": "6c788d028753c39308a7a5ecf000297a29defdd39ab566f1e496ecf9c89a892d",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_SetProductionColonsOff",
+   "kind": "code",
+   "start": "0x00485e66",
+   "end_exclusive": "0x00485e7c",
+   "size": 22,
+   "sha256": "5c27c66ccefd0b86ccf770747dd09888ec31bc746ff42474e6f3d62396ac3c12",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_TesteProductionColons",
+   "kind": "code",
+   "start": "0x00485e7c",
+   "end_exclusive": "0x00485e98",
+   "size": 28,
+   "sha256": "0c75bad2bfbad85733dbeba1849bf35b6980539cd5f6c66b9b9bd718a0ff22fb",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_SetMineExploitee",
+   "kind": "code",
+   "start": "0x00485e98",
+   "end_exclusive": "0x00485ec2",
+   "size": 42,
+   "sha256": "a40d73ce84a21974e4c3504f5813a8ac4dadadace45d3594dcf7d5e6751a71c9",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "I_DonneMineAssocieeGroupe",
+   "kind": "code",
+   "start": "0x00485ec2",
+   "end_exclusive": "0x00485ef3",
+   "size": 49,
+   "sha256": "187a5be9dbcf6564b0e76d43fbac7d44985ca7fc180e07ec5b12315af3711bf6",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_TestMaxChampsExploites",
+   "kind": "code",
+   "start": "0x00485ef3",
+   "end_exclusive": "0x00485f20",
+   "size": 45,
+   "sha256": "9272df1ef28fb116a16f66806ec096be03d52949b8b6ea1b1e2b6531d4b42f6e",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "B_TestMaxRocheDansStock",
+   "kind": "code",
+   "start": "0x00485f20",
+   "end_exclusive": "0x00485fa3",
+   "size": 131,
+   "sha256": "1d0f23fd9bc45ba305cd0e69ed2f1b0530953988f2f3d189692e7dd55835eb1c",
+   "group": "operations",
+   "file": null
+  },
+  {
+   "name": "V_AffecteComportement",
+   "kind": "code",
+   "start": "0x004897a5",
+   "end_exclusive": "0x004897c8",
+   "size": 35,
+   "sha256": "01ca3e66759c6848ead5f4417af010bff4b0eb1cc7aa397615e741a6c4852db7",
+   "group": "operations",
+   "file": null
+  }
+ ],
+ "data_tables": [
+  {
+   "name": "CalculGame state table",
+   "kind": "data",
+   "start": "0x0042c804",
+   "end_exclusive": "0x0042c868",
+   "size": 100,
+   "sha256": "368fba973268252a62fb8da11cb18fe28e9164078797ef9cd0a5e5764932f5f1",
+   "entries": 25,
+   "values": [
+    "0x0042d1da",
+    "0x0042c8bf",
+    "0x0042cfe3",
+    "0x0042cfe3",
+    "0x0042cfe3",
+    "0x0042cfe3",
+    "0x0042cda4",
+    "0x0042cd7d",
+    "0x0042d4e2",
+    "0x0042d4e2",
+    "0x0042c979",
+    "0x0042d4e2",
+    "0x0042cfe3",
+    "0x0042cfe3",
+    "0x0042cfe3",
+    "0x0042d1da",
+    "0x0042cfe3",
+    "0x0042caa9",
+    "0x0042d2de",
+    "0x0042c9c5",
+    "0x0042cd5f",
+    "0x0042d4d9",
+    "0x0042d197",
+    "0x0042cbfd",
+    "0x0042c947"
+   ]
+  },
+  {
+   "name": "EnginNextEtape type table (types 11..16)",
+   "kind": "data",
+   "start": "0x0045432c",
+   "end_exclusive": "0x00454344",
+   "size": 24,
+   "sha256": "8e228916aa86ab84b91f4bd9730b37ebd61671cbbc43e3cf48954c0b233abffc",
+   "entries": 6,
+   "values": [
+    "0x004545ab",
+    "0x004545ab",
+    "0x004545ab",
+    "0x004545ab",
+    "0x004545ab",
+    "0x004545ab"
+   ]
+  },
+  {
+   "name": "EnginNextEtape type table (types 0..25)",
+   "kind": "data",
+   "start": "0x00454344",
+   "end_exclusive": "0x004543ac",
+   "size": 104,
+   "sha256": "a11e7fce0e0f1df4788265c7a80958557af40078d7929396b5198f3e409923c0",
+   "entries": 26,
+   "values": [
+    "0x00454851",
+    "0x00454851",
+    "0x00454851",
+    "0x00454851",
+    "0x00454851",
+    "0x00454851",
+    "0x00454851",
+    "0x00454851",
+    "0x00454851",
+    "0x00454851",
+    "0x00454851",
+    "0x00454869",
+    "0x00454869",
+    "0x00454869",
+    "0x00454869",
+    "0x00454869",
+    "0x00454869",
+    "0x00454869",
+    "0x00454869",
+    "0x00454869",
+    "0x00454869",
+    "0x00454869",
+    "0x00454869",
+    "0x00454869",
+    "0x00454869",
+    "0x00454851"
+   ]
+  },
+  {
+   "name": "EnginNextEtape type table (types 11..17)",
+   "kind": "data",
+   "start": "0x004543ac",
+   "end_exclusive": "0x004543c8",
+   "size": 28,
+   "sha256": "ad5271f089a6f8deebf8a9320a7565d09c96b677c7c1385a3e83efd248c09e8e",
+   "entries": 7,
+   "values": [
+    "0x004569f0",
+    "0x004569f0",
+    "0x004569f0",
+    "0x004569f0",
+    "0x004569f0",
+    "0x004569f0",
+    "0x004569f0"
+   ]
+  },
+  {
+   "name": "EnginNextEtape state table",
+   "kind": "data",
+   "start": "0x004543c8",
+   "end_exclusive": "0x0045442c",
+   "size": 100,
+   "sha256": "fa74f5490646854dd96d128f53b148e62f1380a144f9cf62e39bc20a6836256f",
+   "entries": 25,
+   "values": [
+    "0x00454ccd",
+    "0x00456886",
+    "0x004563da",
+    "0x00455a61",
+    "0x00456ae5",
+    "0x00456600",
+    "0x004568ad",
+    "0x00456966",
+    "0x00454ccd",
+    "0x00454ccd",
+    "0x00454ccd",
+    "0x004564ef",
+    "0x00454ccd",
+    "0x004558e4",
+    "0x00454ccd",
+    "0x0045652f",
+    "0x00455e32",
+    "0x00455e32",
+    "0x00455d26",
+    "0x004554db",
+    "0x00455b28",
+    "0x004558b4",
+    "0x00456520",
+    "0x00455fe2",
+    "0x00456886"
+   ]
+  },
+  {
+   "name": "BatimentNextEtape type table",
+   "kind": "data",
+   "start": "0x00426880",
+   "end_exclusive": "0x004268d4",
+   "size": 84,
+   "sha256": "8179b83c32f16aa958c12c873735c80d58a5765528068c5dfb5bfe882d47720d",
+   "entries": 21,
+   "values": [
+    "0x00426918",
+    "0x00426918",
+    "0x00426aff",
+    "0x00426c10",
+    "0x0042698d",
+    "0x00428095",
+    "0x00426d61",
+    "0x00426a08",
+    "0x004281c0",
+    "0x00426e43",
+    "0x00427549",
+    "0x00427bb7",
+    "0x00426918",
+    "0x0042698d",
+    "0x00427d5d",
+    "0x00426918",
+    "0x00427ed9",
+    "0x00427eec",
+    "0x0042803c",
+    "0x00427da4",
+    "0x004281c0"
+   ]
+  },
+  {
+   "name": "iagUnitSendMessage message table",
+   "kind": "data",
+   "start": "0x00482998",
+   "end_exclusive": "0x004829c8",
+   "size": 48,
+   "sha256": "69186139c6dc4ea13492ab38f6fbe2a07d25f37cd3661de7ba57541a838f7694",
+   "entries": 12,
+   "values": [
+    "0x00482a51",
+    "0x00482ae5",
+    "0x00482b60",
+    "0x00482c50",
+    "0x00482cbb",
+    "0x00482d31",
+    "0x00482eb5",
+    "0x00482d77",
+    "0x00482df6",
+    "0x00482e36",
+    "0x00482e7e",
+    "0x00482db6"
+   ]
+  },
+  {
+   "name": "iagVilleSendMessage message table",
+   "kind": "data",
+   "start": "0x004847f8",
+   "end_exclusive": "0x00484808",
+   "size": 16,
+   "sha256": "592f69c14a20a20607e43b70ed02166e502de9b64379ccdc669d3f07697d2b33",
+   "entries": 4,
+   "values": [
+    "0x00484879",
+    "0x004848a5",
+    "0x00484894",
+    "0x004848d6"
+   ]
+  },
+  {
+   "name": "unit behavior table (group byte +0x1b)",
+   "kind": "data",
+   "start": "0x00498e94",
+   "end_exclusive": "0x00498ec4",
+   "size": 48,
+   "sha256": "bb8422d7ac39848465cfe42157e681bcb71c0cd9505a1a16f944d27583480852",
+   "entries": 12,
+   "values": [
+    "0x00521368",
+    "0x00498e44",
+    "0x00498dcc",
+    "0x00498de0",
+    "0x00498df4",
+    "0x00498e08",
+    "0x00498e1c",
+    "0x00498e30",
+    "0x00498e44",
+    "0x00498e58",
+    "0x00498e6c",
+    "0x00498e80"
+   ]
+  }
+ ]
+}
