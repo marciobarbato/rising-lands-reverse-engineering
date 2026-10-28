@@ -1,37 +1,35 @@
-# Research status — 2026-10-28
+# Research status — 2026-10-28, seven-front round
 
-The organization baseline is remote revision `1231ebff9463871b124d736c9e0333a6f8b5c87a`. It already contains all three completed feature branches: economy/market, graphics/animation, and core/structures. Combat developments were already on main. Completed worktrees have been preserved in the workspace archive.
+Main `2da89cd7655998f3b3f240be192b4b2badf94b63` closed the previous round: core stage 13, combat stage 16, economy stage 14, graphics stage 15, missions stage 8 and the playable macOS consumer are all integrated, pushed and ancestry-verified. The organization baseline of the earlier four-chat round was `1231ebff9463871b124d736c9e0333a6f8b5c87a`. This round reorganizes the work into seven fronts aimed at [a running original mission](ROADMAP_MONDE01.md); the roadmap holds the dependency map, milestones, per-front stage sequences, the validation oracle strategy and the completion inventory.
 
-## Recorded differential results at that revision
+## Current local check results at the round baseline
 
-| Domain | Tests | Bounded original-x86 executions | Meaning |
-|---|---:|---:|---|
-| Core | 226 | 49,305 | Includes placement and gate simulation; no skipped cases in the saved emulated run |
-| Combat | 113 | 234,245 | Targeting, attack state, projectile pool/advance, cadence, and impact preparation |
-| Economy | 214 | 54,871 | Includes 176 expected x86 exceptions and 3 expected execution limits |
-| Graphics | Per-stage reports | Per-stage reports | Six research stages plus a corrected composition release; keep stage counts separate |
+| Suite | Discovered | Explicit optional skips |
+|---|---:|---:|
+| Core | 357 | 169 |
+| Combat | 227 | 143 |
+| Economy | 393 | 180 |
+| Graphics, including comparison with captured original buffers | 176 | 0 |
+| Missions | 56 | 21 |
+| AI/runtime (namespace guard only; no research stage yet) | 3 | 0 |
+| Workflow and provider-import tests | 8 | 0 |
 
-These are **historical, independent runs**, recorded in the versioned JSON reports. They are not an aggregate integrated-game test and are not claims that organization reran those x86 calls. Current local check results are recorded separately in [the organization check record](ORGANIZATION_CHECKS.md).
+These are local runs of `python3 -B scripts/check.py`; the fresh native counts of each integrated stage are recorded in the owners' manuals and handoffs. They are not an aggregate integrated-game test.
 
 ## Implemented research scope
 
-Core includes 38 ETA maps, eight CMP banks, 26 unit types, damage primitives, movement and occupancy, independent Python pathfinding for occupancy classes 1–3, task operations and messages, structure footprints/terrain, placement, walls, and physical gate transitions. The original SBL supplies 1,995 records; the decoded AI program contains 1,157 instructions, 42 registered types, and 140 resolved operation names.
+Core includes 38 ETA maps, eight CMP banks, 26 unit types, damage primitives, movement and occupancy, independent Python pathfinding for occupancy classes 1–3, task operations and messages, structure footprints/terrain, placement, walls, physical gate transitions, structure pool lifecycle, exit position, conversion, recovery, experience queue, physical exit, unit request/volume, selection initialization, global unit/Bag reset, mission placement predicates and the pre-allocation remap reset. The original SBL supplies 1,995 records; the decoded AI program contains 1,157 instructions, 42 registered types, and 140 resolved operation names; the VM control flow and five unit operations are reconstructed.
 
-Combat includes target selection and persistence, range and line-of-fire tests, angular aiming, attack animation/emission, a 100-record projectile pool, full supported projectile advancement/expiration, caller gating, and visual impact preparation. Damage delivery and other world callbacks remain explicit integration boundaries. The producer of attack field `+0x8A` values 2/3 is still unproven.
+Missions includes the indexed unit loader with selection initialization, the header prelude, end-condition/objective table loaders, the indexed structure copy, the mission filename selection, the mine/attack auxiliary loaders and the `MissionPlaceTerrain` unit scan with capacity refresh through committed core/economy providers. Actual MONDE01 stops at unit 15 (vision radius 10) inside core's discovery boundary.
 
-Economy includes resource queries and mutations, capacity/excess handling, deposits/withdrawals, warehouse counts and ownership effects, terrain resource extraction/regeneration, recruitment initiation/progress, production increments, library learning completion and initiation, market proposal evaluation, and market transfers. Complete unit production/spawn and transport remain open.
+Combat includes targeting, aiming, attack states, the projectile pool and dispatcher, caller gating, damage modes 1/3/4/8/9, the unit impact wrapper, optional lethal sequencing and the shared-world physical death connection. Natural emission/runtime and the building-target branch remain open.
 
-Graphics includes verified bodies for five unit types, indexed composition and shadows, Sanctuary facade layers, terrain objects, trees, and codes 54/66/67/68. The v6 reader maps all 486 nonzero serialized objects in mission 1; this does not establish complete mission loading or a final rendered game scene.
+Economy includes resource queries and mutations, capacity/excess handling, deposits/withdrawals, warehouse counts, extraction/regeneration, recruitment, production increments, learning, market proposals/transfers, bonus producers, read-only transport status queries and the prepared production pipeline through position, conversion, recovery, experience, physical exit, movement order, conditional request and selective cleanup. Natural startup and the transport cycle remain open.
 
-The macOS preview is a separate consumer of older pinned snapshots. New research files do not become preview features automatically. Its movement lab, manual economy operations, and targeting queries have narrower scope than the current research modules.
+Graphics includes verified bodies for several unit types and states, indexed composition and shadows, facades, gate facade/tail, selection sorting, projectile display and lighting, the complete interior sprite pass order, the terrain block cache and the bounded terrain pass. Frame orchestration and cache initialization remain open.
 
-## Next independent slices
+The macOS playable consumer runs a synthetic exercise over committed providers from one pinned revision. Audio and save/load have no reconstruction yet; they are inventoried for the second wave.
 
-| Owner | Next slice | Excluded responsibilities |
-|---|---|---|
-| Core | Structure allocation/initialization and lifecycle callers; trace real-mission load/remapping and gate dispatch | Economy charging, projectile behavior, sprite mapping |
-| Combat | Trace impact/damage and missing attack-phase producers; join supported combat steps through explicit callbacks | Navigation implementation, resource rules, renderer |
-| Economy | Unit production completion/spawn handoff and transport/market callers; preserve partial-failure semantics | World allocator implementation, movement algorithm, rendering |
-| Graphics | Remaining structure/gate sprite mapping and render ordering, with indexed-buffer comparisons | Physical gate state/collision, economic meaning inferred from appearance |
+## Next stages
 
-Each slice must stop at its declared boundary, publish an English contract and tests, and state what remains unsupported. A complete playable mission still needs coordinated world loading, dispatch, dynamic rendering, combat/economy integration, events, save/load, audio integration, and reference-game comparison.
+The per-front wave-1 sequences and the cross-front contracts are in [the roadmap](ROADMAP_MONDE01.md#wave-1-stage-sequence-per-front). Each stage must stop at its declared boundary, publish an English contract and tests, state what remains unsupported, and be integrated before the next begins. A complete playable mission still needs coordinated world loading, dispatch, dynamic rendering, combat/economy integration, events, save/load, audio integration, and reference-game comparison.

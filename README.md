@@ -4,7 +4,7 @@ Evidence-based reconstruction of the Brazilian PC release of Rising Lands. The p
 
 **Documentation is English. All player-facing text, mission stories, objectives, unit names, and audio stay Brazilian Portuguese (PT-BR).** Original French SBL symbols and established Python identifiers remain unchanged so evidence and APIs stay traceable.
 
-Start with [the documentation index](docs/README.md), [current research status](docs/STATUS.md), and [the four-chat workflow](docs/PARALLEL_WORK.md). The [restart prompt](docs/RESTART_PROMPT.md) defines four independent workstreams and their merge procedure.
+Start with [the documentation index](docs/README.md), [current research status](docs/STATUS.md), [the roadmap to a running original mission](docs/ROADMAP_MONDE01.md), and [the seven-front workflow](docs/PARALLEL_WORK.md). The [restart prompt](docs/RESTART_PROMPT.md) defines the seven fronts and their merge procedure.
 
 ## Repository map
 
@@ -18,6 +18,9 @@ Start with [the documentation index](docs/README.md), [current research status](
 | `pesquisas-paralelas/combate/` | Combat research and its own tests/evidence |
 | `pesquisas-paralelas/economia/` | Economy research and its own tests/evidence |
 | `pesquisas-paralelas/graficos-animacao/` | Graphics research, artifacts, and its own tests/evidence |
+| `pesquisas-paralelas/missoes/` | Mission loading/orchestration research and its own tests/evidence |
+| `pesquisas-paralelas/ia-runtime/` | AI kernels, dispatchers and VM operations research and its own tests/evidence |
+| `integracao/` | Coordinator-owned provider loaders for same-process consumers |
 | `apps/macos-preview/` | Versioned macOS preview source; generated payloads stay local |
 | `scripts/` | Worktree preparation, checks, and serialized integration |
 | `ghidra/` | Reproducible analysis scripts and manifests; projects remain local |
@@ -39,7 +42,7 @@ To prepare an isolated worktree:
 
 ```sh
 python3 scripts/workstream.py start core
-# Other domains: combat, economy, graphics
+# Other fronts: missions, ai-runtime, economy, combat, graphics, macos, maintenance
 ```
 
 To open the existing local preview, run `apps/macos-preview/abrir.command`. To rebuild it from committed research, follow [the preview manual](docs/MACOS_PREVIEW.md). Its UI remains PT-BR.

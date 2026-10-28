@@ -33,7 +33,7 @@ Graphics research uses hash-checked input copies in its ignored `fontes/`, `snap
 
 ## Worktrees
 
-The three old worktrees are registered but retired; do not continue editing them. Use `scripts/workstream.py start <domain>` to create fresh `feat/re-<domain>` worktrees from `origin/main`. The helper links missing local inputs without changing tracked manifests. All four workers must treat shared linked inputs and the central Ghidra project as read-only.
+The three old `codex/*` worktrees are registered but retired; do not continue editing them. Use `scripts/workstream.py start <front>` to create or resume the front's worktree (`feat/re-*`, `feat/macos-playable` or `coordinator/maintenance`) from `origin/main` or its existing branch. The helper links missing local inputs without changing tracked manifests. All fronts must treat shared linked inputs and the central Ghidra project as read-only.
 
 Do not put a Git worktree inside another tracked source or release directory. Do not delete a worktree directory manually. Use `git worktree remove` only after its branch is merged and local/ignored data have been preserved.
 
