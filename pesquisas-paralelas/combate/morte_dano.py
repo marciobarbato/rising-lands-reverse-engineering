@@ -1,7 +1,8 @@
-"""Mode-1 lethal tail of EnginInfligeDegat, delegating world lifecycle.
+"""Opt-in lethal tails of EnginInfligeDegat, delegating world lifecycle.
 
-Opt in through ConsumidorDanoUnidade.morte. The default consumer death stop
-is unchanged. Level/lifecycle/sympathy are original named effect requests;
+Opt in through ConsumidorDanoUnidade.morte for mode 1, or the separate
+morte_sem_experiencia callback for modes 3/4. Default death stops are unchanged.
+Level/lifecycle/sympathy are original named effect requests;
 none are treated as successful when their provider is missing.
 """
 from dataclasses import dataclass
@@ -37,7 +38,7 @@ class MorteDanoUnidade:
         vitima, atacante = vitima & 65535, atacante & 65535
         if vitima >= 800 or atacante >= 800:
             raise ValueError('Lethal consumer IDs must be in 0..799')
-        target, source = self.unidades[vitima], self.unidades[atacante]
+        source = self.unidades[atacante]
         if source[1] <= 10 or source[1] == 25:
             old = source[0xaf]
             # In the supported byte domain, (old & 31)+10 is always >=10.
@@ -45,6 +46,18 @@ class MorteDanoUnidade:
             # at encoded level 7; the level provider owns any level clamp.
             source[0xaf] &= 0xe0
             self._effect('EnginSetLevelExperience', atacante, (old >> 5) + 1)
+        return self.sem_experiencia(vitima, atacante, dano, celula_entrada, dono_fonte)
+
+    def sem_experiencia(self, vitima, atacante, dano, celula_entrada, dono_fonte):
+        """Original common tail after the mode-1-only award branch.
+
+        Opt in only for modes with a defined saved owner (3/4). The consumer
+        excludes 8/9. No source AF write or level request occurs in this tail.
+        """
+        vitima, atacante = vitima & 65535, atacante & 65535
+        if vitima >= 800 or atacante >= 800:
+            raise ValueError('Lethal consumer IDs must be in 0..799')
+        target = self.unidades[vitima]
         por16(target, 0x9a, 0)
         if target[1] == 1:
             cell = celula_entrada & 65535
