@@ -43,3 +43,14 @@ Suggested serialized windows: first run only the eight scans plus four getter ob
 ## Remaining M1 contracts
 
 The [planned M1 snapshot contract](M1_SNAPSHOT_CONTRACT.md) is an acceptance/interface proposal, not an exported loaded mission. Whole MissionLoad still needs complete natural `Chemin_Remap`, generic declared bindings and Core `Engin_RetrieveExperimente 0x441623`. Coordinator reports the raw AI reset provider integrated at main `5d24c91104e8b7f66b774e5b46969508708cc01f`; its real-world adapter and the exact remaining query dependencies still require committed adoption, not literal fixture values. Full-load composition follows only after this stage is integrated and the coordinator schedules it. MONDE01's existing type-2 structure is a Santuário; type3 is Armazém/CAVE. Objective evaluation remains separate.
+
+## Original-only observations completed before translation
+
+Under the coordinator's exclusive eight-scan/four-query grant, the first capture attempt succeeded on2026-10-28 at approximately17:05BRT. [Capture](evidencias/captura-terreno-estruturas-missao-original.json) SHA-256 `52232213ef3585a8523a04d24d5bcc9d472c90ff137769fb0cea48f9a41b777e`; capture source commit `24ca5a794ff4c6979a8f5ed7c23621d75adcdf32`, original EXE and ETA identities recorded inside. No current-stage Python scan/getter existed or executed. The capture is preserved unchanged.
+
+- Seven structure-tail entries plus one joined MissionPlaceTerrain entry: six returns to the real sentinel and two stops at the declared CALLs `0x46c1b1` / `0x41cdb9`, all exactly as planned.
+-56 scan segments,18 minimap-entry and30 pixel-loop preserved-state resumes; maximum156,130 native instructions per segment. Four additional MissionGetNum entries are reported separately from scan segments.
+- Six complete state blocks (5,263,360 bytes per snapshot): DGROUP+.bss plus unit, object/argument, physical, navigation/color and explicit Bag arenas. Input/output hashes and complete ordered parent/physical traces are retained for every case.
+- Original query returns AX0/1/127/255, ignores poisoned neighbors, retains input highEAX16 and writes no global byte; the exporter checks whole-image read-only equality.
+
+The native child exited0 and the heavy lease was explicitly released immediately. No domain/full-native/integration gate ran under this short grant. Log: ignored `.local/stage11-capture-attempt1.log`. Independent capture commitment precedes the next translation. This proves original observations only; Python equality and full MissionLoad/M1 acceptance remain unclaimed.
