@@ -5,6 +5,7 @@ import unittest
 
 from test_colocacao_saida import (preparar, colocar_unidade_saida, retomar_colocacao_saida,
                                  DependenciaColocacaoSaida, ExperienciaSaidaTropa)
+from colocacao_saida import SOMA_VISAO_MAXIMA_INSERCAO
 
 
 @unittest.skipUnless(os.environ.get('RISING_EMULAR') == '1','Optional x86: RISING_EMULAR=1')
@@ -52,7 +53,7 @@ class DiferencialColocacaoSaida(unittest.TestCase):
 
     def test_large_vision_original_pre_discovery_checkpoint(self):
         for indice in (0,799):
-            for raio,extra in ((9,0),(8,1),(255,255)):
+            for raio,extra in ((SOMA_VISAO_MAXIMA_INSERCAO+1,0),(SOMA_VISAO_MAXIMA_INSERCAO,1),(255,255)):
                 self.comparar(preparar(indice=indice,raio=raio,extra=extra),indice,0x808,0x446146)
 
     def test_placement_and_original_movement_caller_all_types(self):

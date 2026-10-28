@@ -1,0 +1,29 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "fixture": {
+    "entry": "mission",
+    "width": 1,
+    "height": 1,
+    "cell": 0,
+    "bb": 10,
+    "f5": 1,
+    "owner": 2,
+    "camera": 2,
+    "light": "fresh"
+  },
+  "resume_points": [
+    "0x46a388"
+  ],
+  "result": "RuntimeError: Trecho n\u00e3o alcan\u00e7ou a parada dentro do limite da bancada",
+  "failed_native_segment": {
+    "eip": "0x46a526",
+    "instructions": 838176
+  },
+  "bounded_segments": 2,
+  "minimap_resumptions": 1,
+  "wall_seconds": 1.98,
+  "native_instruction_cap": 1000000,
+  "native_segment_timeout_us": 1000000,
+  "scope": "Diagnostic only, not a pass: one 128x128 SetMiniMap block for a 1x1 map exceeds the one-second segment budget when only SetMiniMap entries may resume. The final bench adds the pixel-loop head 0x46a623 as a preserved-state resume point.",
+  "reproduction": "BancadaDescobertaTerreno subclass with pontos_retomada=(0x46a388,) only; fixture capturar_descoberta_terreno.preparar_caso(\"mission\",1,1,0,10,1,2,2,\"fresh\"); colocar_missao(7). The first observed attempt failed at 0x46a627 after 853,170 instructions; this recorded rerun failed at the eip/instructions above. The exact instruction depends on wall-clock budget, not on reconstructed behavior."
+}

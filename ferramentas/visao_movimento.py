@@ -1,5 +1,13 @@
 """Visão e minimapa usados por AvanceEngin, em grades com passo 256."""
 
+# Natively validated direct-call DX radii of DecouvreTerrain 0x476851 (the body
+# adds one) and IllumineTerrain 0x476cb3, owners 0..3. They cover the callers
+# whose radii evidencias/descoberta-terreno inventories (BatimentHabitable type 0
+# passes 20+3 / 20; PlaceEngin/SetSortEngin pass sum+2 / sum); the other listed
+# call sites carry no radius claim. Callers gate larger radii.
+RAIO_DESCOBERTA_MAXIMO_VALIDADO = 23
+RAIO_LUZ_MAXIMO_VALIDADO = 20
+
 
 class VisaoMovimento:
     def _visivel(self, celula, iluminada=False):

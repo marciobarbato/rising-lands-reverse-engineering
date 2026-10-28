@@ -1,5 +1,6 @@
 """Original physical PlaceEngin; mission scanning/loading remains external."""
-from insercao_unidades import DependenciaInsercaoUnidade,_preparar_insercao,_aplicar_insercao
+from insercao_unidades import (DependenciaInsercaoUnidade,_preparar_insercao,_aplicar_insercao,
+    SOMA_VISAO_MAXIMA_INSERCAO,RAIO_DESCOBERTA_MAXIMO_VALIDADO,RAIO_LUZ_MAXIMO_VALIDADO)
 
 
 class DependenciaColocacaoMissao(DependenciaInsercaoUnidade):

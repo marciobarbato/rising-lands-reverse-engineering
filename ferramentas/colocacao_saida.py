@@ -1,7 +1,8 @@
 """Physical SetSortEngin using established core collision/vision primitives."""
 from dataclasses import dataclass
 import struct
-from insercao_unidades import DependenciaInsercaoUnidade,_preparar_insercao,_aplicar_insercao
+from insercao_unidades import (DependenciaInsercaoUnidade,_preparar_insercao,_aplicar_insercao,
+    SOMA_VISAO_MAXIMA_INSERCAO,RAIO_DESCOBERTA_MAXIMO_VALIDADO,RAIO_LUZ_MAXIMO_VALIDADO)
 
 
 class DependenciaColocacaoSaida(DependenciaInsercaoUnidade):
@@ -13,7 +14,8 @@ def colocar_unidade_saida(mundo, indice, celula):
     """0x445fbc complete supported exit; does not remove previous occupancy.
 
     Uses a live physical world, known type/owner, in-map cell and 128x128
-    minimap. BB+F5 >8 stops before discovery, after collision/+72 stores.
+    minimap. BB+F5 above SOMA_VISAO_MAXIMA_INSERCAO stops before discovery,
+    after collision/+72 stores.
     """
     indice,celula,p=_preparar_insercao(mundo,indice,celula & 65535)
     u = mundo.unidades

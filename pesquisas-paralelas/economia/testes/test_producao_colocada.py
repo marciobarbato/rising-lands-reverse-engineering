@@ -22,6 +22,16 @@ from test_ciclo_producao import progresso
 
 # Core publishes its supported normal-owner vision sum; 8 predates that symbol.
 LIMITE_VISAO=getattr(insercao_unidades,'SOMA_VISAO_MAXIMA_INSERCAO',8)
+# The fixture's type vision word reaches u8 unit+0xBB (at most 255); level 3
+# adds +0xF5=1. With no representable sum above the limit, no stop is
+# reachable and those cases compare the original continuation instead.
+VISAO_FIXTURA_MAXIMA=255
+
+
+def casos_visao_grande():
+    if LIMITE_VISAO+1<=VISAO_FIXTURA_MAXIMA:
+        return ((LIMITE_VISAO+1,0,'visao'),(LIMITE_VISAO,3,'visao'))
+    return ((VISAO_FIXTURA_MAXIMA,0,None),(VISAO_FIXTURA_MAXIMA,3,None))
 
 def preparar(tipo=16,indice=0,unidade=799,destino=7,dono=0,raio=1,nivel=4):
     p,anterior,b=preparar_recrutamento(tipo,indice,unidade,destino,dono)
@@ -81,7 +91,12 @@ class ExemplosProducaoColocada(unittest.TestCase):
         self.assertFalse(any(e[0]=='discovery' for e in m.efeitos))
 
     def test_large_vision_preserves_prior_economic_and_partial_physical_effects(self):
-        p,m,b=preparar(raio=LIMITE_VISAO+1)
+        raio,nivel,erro=casos_visao_grande()[0]
+        p,m,b=preparar(raio=raio,nivel=nivel)
+        if erro is None:
+            pedido=produtor.calcular_tropa_com_colocacao_no_mundo(p,m,b,0)
+            self.assertEqual(pedido.endereco_dependencia,0x420f9e)
+            return
         with self.assertRaises(DependenciaColocacaoSaida):produtor.calcular_tropa_com_colocacao_no_mundo(p,m,b,0)
         self.assertEqual(m.unidades[799*276+0x72],1)
         self.assertEqual(m.efeitos[-1][0],'collision')
@@ -162,8 +177,8 @@ class DiferencialProducaoColocada(unittest.TestCase):
 
     def test_8_large_vision_stops_after_economy_experience_and_collision(self):
         for tipo in (1,2,13,16):
-            for raio,nivel in ((LIMITE_VISAO+1,0),(LIMITE_VISAO,3)):
-                self.comparar(*preparar(tipo,raio=raio,nivel=nivel),erro='visao')
+            for raio,nivel,erro in casos_visao_grande():
+                self.comparar(*preparar(tipo,raio=raio,nivel=nivel),erro=erro)
 
     def test_36_inactive_or_incomplete_native_returns(self):
         for tipo in (1,2,13,16):

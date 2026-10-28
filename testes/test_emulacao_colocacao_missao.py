@@ -3,7 +3,7 @@ import os
 import unittest
 
 from test_colocacao_saida import preparar, colocar_unidade_saida, DependenciaColocacaoSaida
-from colocacao_missao import colocar_unidade_missao, DependenciaColocacaoMissao
+from colocacao_missao import colocar_unidade_missao, DependenciaColocacaoMissao, SOMA_VISAO_MAXIMA_INSERCAO
 from consultas_unidades import existe_unidade, visibilidade_unidade
 
 
@@ -72,7 +72,7 @@ class DiferencialColocacaoMissao(unittest.TestCase):
 
     def test_large_vision_keeps_partial_effects_at_each_original_caller(self):
         for indice in (0,799):
-            for raio,extra in ((9,0),(8,1),(255,255)):
+            for raio,extra in ((SOMA_VISAO_MAXIMA_INSERCAO+1,0),(SOMA_VISAO_MAXIMA_INSERCAO,1),(255,255)):
                 self.comparar(preparar(indice=indice,raio=raio,extra=extra),indice,parada=0x457019)
                 self.comparar(preparar(indice=indice,raio=raio,extra=extra),indice,saida=True,parada=0x446146)
 
