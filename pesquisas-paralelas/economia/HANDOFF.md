@@ -160,3 +160,55 @@ Actual stage results: 11 tests pass/no skips in x86 mode; **2,094 bounded calls 
 Global gap closed: original producers for the bonus table consumed by integrated read-only providers. Status before required integration: implemented and independently original-x86 validated; actual live-unit capacity refresh, mission/event loading and production/runtime composition remain providers/dispatch gaps. Overall coordinator estimate stays approximately 50% (40–60% uncertainty) for now; neither reset fixtures nor native call totals measure full-game completion. Feature/main hashes and common integration gate will be reported before another stage begins.
 
 The updated aggregate-report runner was also exercised locally: 268 tests/119 skips, zero failures/errors/x86 calls, with its JSON write redirected only to a temporary file. All 16 benchmark groups, including the four new stages, appear in the counts; original versioned predecessor reports were left untouched.
+
+## Stage 4 integration and fifth-stage selection
+
+Stage 4 implementation `de6d6361aebcdb95e93ce60ee27e8e19e8fb8f5f`, final feature `e99d2316f715312cc7f97cf6a9b196f42ce08959`, main merge `25f5feabed2ce8828bd514f4a960f8cab9c3669e` are pushed. Required common gate passed 778 tests/336 optional skips. Only then did the next stage resume the clean helper-managed worktree and merge updated main.
+
+Before implementation, selected highest-value economic caller gap: `CalculTroupe` type-1/2/13/16 simulation branches, including exactly one progress advance and the original `SortieTroupe` directions/call order. This composes existing economy routines and may hand off to the already committed core converter without reimplementing it. Original full-entry/dispatch/prefix validation will distinguish complete below-threshold returns from position dependency stops; other dispatch branches and later production world effects remain open.
+
+## Stage 5: original production simulation caller
+
+`Producao.calcular_tropa(indice, saida_tropa=None)` reconstructs `CalculTroupe` (`0x4259E6`) for the shared building-type family 1/2/13/16, including the real low-type dispatch at `0x426401`, inline x87 progress bodies and original `SortieTroupe` call. Index is AX u16 within the provided record pool. Other building types are protected `ValueError` cases before writes, not original return claims. All state/table/Bag domains remain the existing production/preparation contracts.
+
+Active means nonzero u32 progress +8C and byte +74. Inactive calls do not query time or call exit. Active below-threshold calls advance once with the already proven binary64/x87 increment and runtime building capacity, then call `SortieTroupe` even below completion. At/above threshold they skip progress arithmetic. Directions: 4 for types 1/2/16, 14 for type13. Default composes the actual owned economic preparation, returning None below completion or a pending position record after colonist/cargo removal. Optional exact exit callback receives index/direction after the increment; failures preserve progress and earlier callback effects.
+
+Do not add a separate `avancar_unidade` call for the same update. Do not process this building again after a pending or failed exit until the original continuation resolves it: economic removal may be committed while progress/activity remain set. Core's committed converter is reused at its own boundary; it is not duplicated by this caller. Healing/exit/cleanup and unsupported dispatches remain explicit gaps.
+
+Additive `evidencias/ciclo-producao.json` plus three listings record original bytes/hash/entry/dispatch/epilogues and coefficient data under unchanged EXE/SBL hashes. The benchmark starts at the real function entry and executes actual progress and exit-prefix instructions without native callback mocks. Fresh commands:
+
+```sh
+python3 -B pesquisas-paralelas/economia/capturar_ciclo_producao.py
+python3 -B pesquisas-paralelas/economia/validar_ciclo_producao.py
+python3 -B pesquisas-paralelas/economia/validar_ciclo_producao.py --emular
+python3 -B scripts/check.py --domain economy
+```
+
+Actual new report: 10 tests pass/no skips; **1,432 bounded calls = 1,268 returns + 160 position stops + 4 expected division exceptions at `0x423501`** after prior increment/removals. There are 1,428 declared stops, zero limits/failures/errors. Whole protected buffers and guards, observed exit arguments, register preservation on return, x87 control/tags, count/capacity samples, time/activity/unsigned/index boundaries, 16 update sequences, and partial post-increment errors are checked. Local stage: six passed/four optional skipped; domain gate: 278 tests/123 optional skips. Aggregate runner includes the new caller bench for future explicit runs. Predecessor reports were preserved.
+
+Global gap closed: original simulation-update caller sequencing for four production building types, connecting progress to exit preparation exactly once per active tick. Status before mandatory integration: implemented and original-x86 validated; no complete unit production or real-mission runtime claim. Core refresh is now committed at `8126f1aed299e19337e2b1ac4f95cfa85c068214`; per coordinator direction, the next stage after this integration will wire BonusSetEngin to that provider using shared bonus/unit buffers and exact failure order. Overall coarse estimate remains coordinator's approximately 50% (40–60%).
+
+## Stage 5 integration and sixth-stage selection
+
+Stage 5 implementation `a9f055ca4fbf30327f5e83b4211ef1e4ad8a7802`, final feature `9e07845bff79820d7cdd3d39f3b77d136c309ca8`, main merge `342063d0303d6a31587851ecb5af4898f3457601` are pushed. Required gate passed 804 tests/348 optional skips. The next stage resumed the clean worktree with the helper and merged updated main before implementation.
+
+Per the coordinator's priority, selected gap: connect the committed bonus setter to core's actual committed 800-slot capacity refresh, preserving shared bonus/unit identity and post-write failures. Complete native original setter/refresh/query comparisons must distinguish real returns from intentional pre-query stops. The owning wrapper will not duplicate core scan or economic query algorithms. Full world production, mission/event dispatch and other provider gaps remain explicit.
+
+## Stage 6: bonus producer joined to committed live-world refresh
+
+`bonus_compartilhados.definir_bonus_no_mundo(bonus,mundo,owner,type,selector,value)` calls the existing setter once, then for selector1 invokes the actual committed core `atualizar_capacidades_unidades` with this same post-write bonus object, live unit pool, and original capacity/bonus query providers. It imports only this checkout's core module at the callback boundary; a foreign same-named snapshot module raises there. Other selectors never load the core provider. No scan/query implementation is copied and no buffers are copied or written back later. Input domains remain the established setter/core contracts.
+
+Ordering: bonus table writes first; core pool validation next; then ascending eligible owner-matching units, capacity query, selector1 query, low-u16 capacity store. All matching units refresh regardless of which type's table entry changed. Bag counts/contents remain intact. Import/guard/query errors retain the table update and earlier unit stores; this/later units remain unchanged on a later query failure. The wrapper never replays the setter or rolls back. Read-only/reentrancy restrictions remain the core provider's contract.
+
+Additive `evidencias/bonus-compartilhados.json` records six exact original setter/refresh/query intervals and immutable provider revisions under unchanged EXE/SBL hashes. Native tests execute the full original chain; no native callback returns are substituted. Three deliberate Python callback failures plus three protected invalid-type errors are compared to conditional native pre-query stops at `0x44763A`, units0/7/799. They are dependency/domain stops, not native exceptions.
+
+```sh
+python3 -B pesquisas-paralelas/economia/capturar_bonus_compartilhados.py
+python3 -B pesquisas-paralelas/economia/validar_bonus_compartilhados.py
+python3 -B pesquisas-paralelas/economia/validar_bonus_compartilhados.py --emular
+python3 -B scripts/check.py --domain economy
+```
+
+Actual stage results: 11 tests pass/no skips, **454 bounded native executions = 448 complete returns + six pre-query stops**, zero native exceptions/limits/errors/failures. Nested queries are reported separately. Full unit/bonus/runtime-type buffers and guards, actual query/write order, owner/type pairs, all-type sentinel and byte boundaries, untouched Bags/unrelated selectors, and exact partial failures match. Local stage: five passed/six optional skipped. Domain gate: 289 discovered/129 optional skips, zero failures; documentation links passed. Earlier reports were not regenerated.
+
+Global gap closed: actual producer→world-capacity callback composition on identical shared loaded buffers, no longer merely a declared pending callback in this entry point. Status before required integration: implemented and independently native-validated, not real-mission-tested. Mission/event loading, other production dispatches, healing/exit/cleanup and runtime ownership remain gaps. Overall estimate remains coordinator's approximately 50% (40–60%). Required feature/main hashes and actual integration counts will be reported before another stage begins.

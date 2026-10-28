@@ -1,0 +1,60 @@
+{
+  "success": true,
+  "tests": 6,
+  "failures": 0,
+  "errors": 0,
+  "skipped": [
+    {
+      "test": "test_morte_dano.DiferencialMorteDano.test_original_dying_boundary_child_pool_and_saved_entry_cell",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_morte_dano.DiferencialMorteDano.test_original_post_dying_sympathy_fragment",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_morte_dano.DiferencialMorteDano.test_original_projectile_reaches_physical_dying_request",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_morte_dano.DiferencialMorteDano.test_original_source_types_and_all_experience_bytes",
+      "reason": "Optional: RISING_EMULAR=1"
+    }
+  ],
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "bounded_x86_executions": 0,
+  "per_test": [
+    {
+      "teste": "test_morte_dano.ContratosMorteDano.test_default_death_boundary_is_preserved",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_dano.ContratosMorteDano.test_missing_level_provider_preserves_life_after_experience_clear",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_dano.DiferencialMorteDano.test_original_dying_boundary_child_pool_and_saved_entry_cell",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_dano.DiferencialMorteDano.test_original_post_dying_sympathy_fragment",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_dano.DiferencialMorteDano.test_original_projectile_reaches_physical_dying_request",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_dano.DiferencialMorteDano.test_original_source_types_and_all_experience_bytes",
+      "execucoes_x86_delimitadas": 0
+    }
+  ],
+  "expected_level_stops": 0,
+  "expected_dying_stops": 0,
+  "separate_post_dying_fragment_stops": 0,
+  "projectile_dying_stops": 0,
+  "original_range": "0x4506a1..0x45084f, existing consumo-dano.json and consumo-004502f0.asm",
+  "scope": "Optional mode1 lethal sequencing; whole units/projectile pool at level/lifecycle boundaries, separate synthetic post-lifecycle sympathy fragment",
+  "excluded": "Level/lifecycle/sympathy provider bodies, complete lethal return, whole mission/runtime, other damage modes",
+  "diagnostics": []
+}

@@ -1,0 +1,59 @@
+{
+  "success": true,
+  "tests": 6,
+  "failures": 0,
+  "errors": 0,
+  "skipped": [
+    {
+      "test": "test_proximidade_ataque.DiferencialProximidadeAtaque.test_original_edge_clipping_and_circle_boundary",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_proximidade_ataque.DiferencialProximidadeAtaque.test_original_grid_tags_indices_owners_and_unused_type",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_proximidade_ataque.DiferencialProximidadeAtaque.test_original_mixed_square_records",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_proximidade_ataque.DiferencialProximidadeAtaque.test_real_proximity_and_bonus_in_complete_damage_consumers",
+      "reason": "Optional: RISING_EMULAR=1"
+    }
+  ],
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "bounded_x86_executions": 0,
+  "per_test": [
+    {
+      "teste": "test_proximidade_ataque.ContratosProximidadeAtaque.test_domain_and_explicit_delegation_failures",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_proximidade_ataque.ContratosProximidadeAtaque.test_exact_owner_without_type_or_activity_filter",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_proximidade_ataque.DiferencialProximidadeAtaque.test_original_edge_clipping_and_circle_boundary",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_proximidade_ataque.DiferencialProximidadeAtaque.test_original_grid_tags_indices_owners_and_unused_type",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_proximidade_ataque.DiferencialProximidadeAtaque.test_original_mixed_square_records",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_proximidade_ataque.DiferencialProximidadeAtaque.test_real_proximity_and_bonus_in_complete_damage_consumers",
+      "execucoes_x86_delimitadas": 0
+    }
+  ],
+  "completed_original_query_returns": 0,
+  "completed_composed_damage_returns": 0,
+  "original_range": "0x4500e4..0x450286; bytes SHA256 0584acae56bc982e07a85107b3c0948046b4b88edf378cb491d3c1e00eb1a7c9",
+  "scope": "Radius10 owner proximity AL, unchanged complete unit/grid buffers, original unused type argument and 5 damage consumers with actual proximity/economy results",
+  "expected_stops": "None beyond declared native returns",
+  "excluded": "Other radii/caller domains, invalid grid IDs, physical grid construction, world effects and real mission/runtime",
+  "diagnostics": []
+}

@@ -17,6 +17,9 @@ Owner: combat. Source and tests live in `pesquisas-paralelas/combate/`. Shared d
 | `consumo_dano.py` | Mode-1 occupied-unit damage consumer, live callbacks and explicit death boundary |
 | `impacto_unidades.py` | Mode-1 unit impact wrapper: lookup, reaction requests, consumer, hit allocation, diplomacy and alert requests |
 | `bonus_combate.py` | Argument-order adapter from damage's modifier queries to economy's committed loaded-table provider |
+| `morte_dano.py` | Optional mode-1 lethal tail: local experience/life writes, child allocation and explicit level/lifecycle/sympathy requests |
+| `alvos_impacto.py` | Read-only impact-victim selection with original ground/elevated tie rules, reusable as a unit-wrapper query |
+| `proximidade_ataque.py` | Read-only radius-10 owner proximity query for the damage consumer, with explicit loaded grid inputs |
 
 Input units use raw 276-byte records. Callbacks must describe external world effects explicitly; receiving a resolved query or stopping at a dependency is a narrower claim than executing the complete caller. Whole-record/grid comparisons distinguish local copies from mutations of the live world.
 
@@ -50,14 +53,14 @@ Callbacks take `(name, arguments_tuple)`. Queries return native integer results;
 |---|---|---|
 | 1 | Snapshot source damage row indexed by victim type, add source `+0xF7` | u8 arithmetic, `0x4503B8..0x4503EA` |
 | 2 | Query `Modificateur(source_owner, 5, source_type)` | u8 arguments; low result byte added, `0x4503F4` |
-| 3 | Query `ChercheTypeEnginProximite(2, source_owner, source_step_cell, 10)`; if AL is nonzero add `bonus_4965ac` | u8/u8/u16/u16; bonus u8, `0x450427..0x45043B` |
+| 3 | Query `ChercheTypeEnginProximite(2, source_owner, source_step_cell, 10)`; if AL is nonzero add `bonus_4965ac` | ignored type/u8/u16/u32 constant 10; bonus u8, `0x450427..0x45043B` |
 | 4 | Effect `iagUnitSendMessage(victim, 0x48, attacker)` | u16/u8/u16, `0x450452`; life is unchanged here |
 | 5 | Read victim `+0xF6`, then query `Modificateur(source_owner, 6, source_type)` and reduce damage | u8 arithmetic with signed-negative clamp; **source** fields reread after message, `0x45059C..0x4505D8` |
 | 6 | Query `TerrainEstDecouvert(victim_current_cell, local_player)` | u16/u8; AL predicate, `0x450604` |
 | 7 | If visible, query `EnginGetVolume(victim)`, snapshot u32 `+0x104`, then clear victim byte `+0xF9` | u16 ID / u32 volume, `0x45060F..0x450624` |
 | 8 | If saved handle is `0xFFFFFFFF`, effect `PlaySnd_PostSound(0x50, (victim_type<<16)\|0x100, 0, volume, victim)` | u32 values; final ID represents native `&victim[0x104]`, `0x45063F` |
 | 9 | Decrement damage byte when victim `+0xDC` bit 3 is set; compare life u16 with signed damage byte | `0x450644..0x45068B` |
-| 10 | Nonlethal: subtract signed damage and store life u16. Death: raise `LimiteMorte` at `0x4506A1` before its first instruction | `0x45068D..0x45069C`; no invented zero-life/death effects |
+| 10 | Nonlethal: subtract signed damage and store life u16. Death: default `LimiteMorte` at `0x4506A1`, or explicit optional handler below | `0x45068D..0x45069C`; the default does not invent death effects |
 
 The proximity callback retains the original French identifier; its name does not establish a captain/type filter. The native path used by these tests checks owner and geometry. Zero damage protected by bit 3 becomes -1 and raises life by one with u16 wrap. The death exception exposes `endereco`, `vitima`, `atacante`, and signed `dano`; message/audio effects already reached remain visible. `None` indicates only the consumer's nonlethal return, not completion of the world impact wrapper.
 
@@ -68,6 +71,20 @@ Original input remains `RISING.EXE` SHA-256 `6c556520c084b9300d9ac01900d15051260
 `ConsultaBonusCombate(bonus, outras=None)` now connects this consumer to economy's committed `BonusUnidades` provider (implementation `b1eb0c06e3b016f9abc2d27f3a836f6c20abf2f9`). Pass it as the consumer's query callable. It maps `Modificateur(owner, selector, type)` to `bonus.consultar(owner, type, selector)`, preserves the provider's full return width, and forwards other queries unchanged to `outras(name,args)`. Only damage selectors 5/6 are supported; absent providers, other selectors and absent forwarded queries raise at the call site. No zero table, bonus, or inherited-ECX default is manufactured. Selector 5 reads u16 at loaded record `+0x08`; selector 6 reads u8 at `+0x0A`; the damage caller consumes their low bytes. Economy owns the loaded 1,872-byte table and its initialization remains separate.
 
 The corrected native fixture now writes those exact fields, with explicit requested-value assertions. A separate [provider-composition report](../pesquisas-paralelas/combate/validacao-bonus-combate-emulada.json) records 450 complete original consumers against the **actual committed economy query results**, including word/high-byte boundaries and all 4×26 loaded owner/type combinations. Other native query results remain explicit inputs. The same run also reruns consumer/wrapper tests under corrected bonus inputs; predecessor reports remain unchanged as historical records of their earlier fixture values.
+
+The fixed consumer proximity query can now use `ConsultaProximidadeAtaque(units, grid, outras=None)`, supporting exactly `(2, owner, cell, 10)` and forwarding other query names. `proximidade_dono_ataque(units, grid, owner, cell)` takes 800 readable 276-byte records and exactly 131,072 loaded little-endian grid bytes; owner/cell truncate to u8/u16. It scans the clipped ±10 square in original row-major order, recognizes only grid words with `(word & C000)==4000`, decodes `(word & 3FF8)>>3`, checks owner equality, then accepts squared distance ≤100. It reads no type, activity, enabled or alliance field. The original EAX desired-type argument is unused; radius ECX is consumed as u32 and only the caller's constant 10 is reconstructed here. Unit IDs outside 0..799 in an inspected unit-tagged cell are explicitly unsupported and raise before access. All other radii/caller domains remain unsupported; no default grid is created.
+
+The [proximity report](../pesquisas-paralelas/combate/validacao-proximidade-ataque-emulada.json) contains 636 complete original AL-return comparisons and five complete damage consumers using computed proximity and the real economy provider. Grid/unit buffers remain unchanged by the query. The type/state independence, boundary circle and owner equality are directly exercised against original instructions; this does not reconstruct grid placement or mission loading.
+
+## Optional lethal sequencing
+
+The default `LimiteMorte` is unchanged. To opt in, set `consumer.morte = MorteDanoUnidade(units, pool, efeito)`. The internal handoff is `(victim:u16, attacker:u16, signed_damage:s8, saved_entry_step_cell:u16, saved_source_owner:u8)`. The cell is captured at consumer entry (`0x45033F`), and the source owner after the AI message (`0x45046C`), before reduction/visibility callbacks. The handler does not subtract damage again and supports this mode-1 handoff only.
+
+The original tail at `0x4506A1..0x45084F` reads the live source type. For source types 0..10 or 25 it clears the low five bits of `+0xAF`, then requests `EnginSetLevelExperience(attacker:u16, (old_AF>>5)+1:u8)` before zeroing victim life. All 256 AF bytes select that request in this domain; any level clamp belongs to its provider. If it fails, AF is already masked and victim life remains unchanged. After success or for other source types, victim `+0x9A` is set to u16 zero. Live victim type 1 attempts a type-6 child in the live pool at the saved entry cell (origin=destination, all other arguments zero). `SetDyingEngin(victim:u16)` follows. Core owns that physical state/lifecycle body; a missing provider leaves life zero and any child allocated, without retiring the calling projectile.
+
+After the physical provider returns, the handler rereads victim owner/type and requests `MAJSympathie(live_victim_owner:u8, saved_source_owner:u8, flag:u32)`, with flag 1 for type 3 or 11..17, otherwise 0. These effect callbacks use `(name,args_tuple)` and may mutate records in place; no level, physical lifecycle or sympathy body is silently implemented. A successful callback chain returns `None`, but current original validation stops at those external bodies, so it does not establish a complete lethal runtime.
+
+The [lethal reference report](../pesquisas-paralelas/combate/validacao-morte-dano-emulada.json) records 268 level-entry stops, 24 dying-entry stops, 104 separately executed original suffix fragments with synthetic post-provider inputs, and one occupied projectile reaching the physical dying request. The suffix starts at `0x4507AF` as a declared separate fragment; no lifecycle CALL or return is patched/skipped. Whole unit/pool buffers match at the connected boundaries, including full pools and a message callback changing the victim step after the old step was saved. These checks validate local sequencing and requests, not world removal, dying animation, AI effects or audio.
 
 ## Unit impact wrapper
 
@@ -84,6 +101,12 @@ After hit allocation, source owner is captured again. Query `PlayerEstAllie(sour
 For a different-owner victim owned by the local player, alert throttling uses u32 `contador` and `ultimo_alerta`: a counter reset/wrap (`previous>now`) or elapsed **>=200** updates `ultimo_alerta` and u16 `celula_alerta` before emitting `PlaySnd_PostSound(0x50, (live_victim_type<<16)|0x700, 0, 0x100, '0x496ac8')`. The string token represents the original alert-context pointer, distinct from a unit's sound handle. Missing providers preserve all earlier life, pool, alert and callback effects. This wrapper never moves units itself.
 
 The reference suite finishes five type-9 occupied impacts, including consumer life loss, hit allocation/RNG, diplomacy requests and parent retirement; all 220,800 unit bytes and 5,600 pool bytes match. Its world queries execute original code. Navigation/refuge/audio entries are explicit native stops. The full allied-order fixture executes original inactive `MAJSympathie` returns and `PlayerResetAllie` with a nonparticipating local player; Python still delegates those bodies. No real mission, AI message body, lethal effect, building damage, other damage mode or whole battle is established by those fixtures.
+
+The unit lookup is now available as `encontrar_vitima_impacto(units, cell, excluded=FFFF, flag=0)`, reconstructing `ChercheIndiceEnginCible` (`0x4465DF..0x446693`, range hash `f3a9bd57f2fd9dfe18e7db9a992250068e0cd3754c14af65a62a940b262b81b3`). It requires exactly 800 readable 276-byte records; cell/excluded truncate to u16 and flag to u8. IDs scan 0..799, skipping the excluded ID, state 0/4 and `+0x72=0`. Combat's existing `ocupa_celula` handles state 14, current/step cells, type-specific geometry and stratum filtering: flag zero uses filter 1, every nonzero byte uses filter 2. Interpreted live types require the established 0..25 domain; inactive bytes need not describe a valid type.
+
+Each matching ground record (`+0xAB=0`) replaces the candidate, so the **last** matching ID is returned; a matching elevated record (`+0xAB!=0`) returns immediately, so the **first** matching ID is returned. FFFF means no victim. The full EAX result contains that u16 ID with high bits zero. No owner, alliance, life, distance, navigation or grid filter is added. The function writes no state and must receive a stable view for the duration of its callback-free scan. `ConsultaAlvosImpacto(units, outras=None)` answers `ChercheIndiceEnginCible` and delegates every other query; a missing delegate raises explicitly. Building lookup and all world effects remain separate.
+
+The [selection report](../pesquisas-paralelas/combate/validacao-alvos-impacto-emulada.json) contains 376 complete original lookup returns and five complete occupied projectile impacts using **computed** selection, not a replayed native victim ID. Overlapping ground candidates prove unit 799 receives damage while unit 1 remains unchanged. Whole unit/pool buffers match, and standalone lookup leaves all 220,800 unit bytes unchanged. These remain synthetic world fixtures, not mission/runtime tests.
 
 ## Caller cadence and rendering boundary
 
@@ -111,6 +134,9 @@ python3 -B pesquisas-paralelas/combate/validar_consumo_dano.py --emular
 python3 -B pesquisas-paralelas/combate/validar_impacto_unidades.py --emular
 python3 -B pesquisas-paralelas/combate/validar_ordem_tipo4.py --emular
 python3 -B pesquisas-paralelas/combate/validar_bonus_combate.py --emular
+python3 -B pesquisas-paralelas/combate/validar_morte_dano.py --emular
+python3 -B pesquisas-paralelas/combate/validar_alvos_impacto.py --emular
+python3 -B pesquisas-paralelas/combate/validar_proximidade_ataque.py --emular
 python3 -B scripts/check.py --domain combat
 ```
 
