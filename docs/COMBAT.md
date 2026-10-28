@@ -12,6 +12,7 @@ Owner: combat. Source and tests live in `pesquisas-paralelas/combate/`. Shared d
 | `inicializacao_ataque.py` | Type characteristics, mission/game post-load attack fields, persistence audit |
 | `projeteis.py` | 100-record pool, initialization, integer line preparation/calculation |
 | `reinicio_projeteis.py` | `ProjectileReset` entry for the mission reset prefixes and the other three original callers |
+| `ataque_vivo.py` | `SetAttaqueEngin`, the dispatcher's state-1/24 branch and the shared-world chain into pool, `ProjectileCalcul`, impact, damage and physical death |
 | `avanco_projeteis.py` | Linear advance, logical animation, arrival, RNG, damage requests and secondary effects |
 | `maquina_projeteis.py` | Supported full advancement/expiration dispatcher, types 30/33, and live-pool `Calcul` passes |
 | `cadencia_projeteis.py` | Original caller gates, accumulated-counter input, and impact presentation preparation |
@@ -39,13 +40,73 @@ Aiming resolves target cells and quantizes the original angular result. Body, ty
 
 Attack substate 0 prepares, aims, and waits for readiness; 1 animates and emits at its marked frame; 2 waits/revalidates; 3 ends the local order. Retain exact original sequencing, counter widths, and dependency calls. Do not infer transitions from an attractive animation sequence.
 
-The origin of `+0x8A=2/3` remains unproven: direct writes found by the audit use 0/1, and none of the 2,604 records in 38 ETA maps contain 2/3. Loaders can preserve externally supplied values; this neither proves those phases impossible nor licenses inventing their producer. The audit also tracks `+0x79`, `+0x7A`, and `+0x8B`.
+`+0x8A=2/3` has no producer in the executable. Every unit writer stores 0 or 1. The only register-valued one, `0x452A3A mov [esi+0x8a],ah`, is reached solely by `je` at `0x452469` after `mov ah,[esi+0x8b]; test ah,ah`, so it stores 0. The earlier by-byte dword hits in hangar/turret/structure code are `66`-prefixed word stores to structure records at `0x49A0C8`, and the `iagRessReset` hit is an AI resource record. No unit routine contains `rep movs/stos`, and the table `memset` callers fill with zero. 2/3 can therefore enter only through `FileRead` loaders of external bytes (mission ETA, saved games); none of the 2,604 ETA records holds them. Native runs of the Stage 18 chain observed only 0/1 writes, from `0x445AB3`, `0x445AD1`, `0x451E08` and `0x452A3A`. Network receive buffers and arbitrary pointer aliasing are not covered by this static trace ([evidence](../pesquisas-paralelas/combate/evidencias/ataque-vivo.json)). The audit also tracks `+0x79`, `+0x7A`, and `+0x8B`.
 
 Type-4 initialization has an important provider boundary: `caracterizar_tipo` calls modifier 12 before writing `+0x7A=5`, then stores `+0xDA=(modifier+10)&255`. Original call `0x457845`, frame store `0x45784C`, amount store `0x457850` establish that order. A failed modifier leaves the inherited frame intact and the earlier common `+0xDA=1` intact. The corrected order also applies through `definir_tipo` and mission postload, including writable memoryviews of the live table. Owners 4/200 bypass the Python modifier callback as before. The [focused reference report](../pesquisas-paralelas/combate/validacao-ordem-tipo4-emulada.json) records 108 expected modifier-entry stops and 18 successful original returns; no phase transitions or other type behavior were added.
 
 The projectile pool and dispatcher preserve fixed-width arithmetic, allocation behavior, line increments, creation/arrival order, expiration, and RNG consumption. Type 30's circular effects and type 33's old-target child/new-target damage behavior require their own paths. `Calcul` processes the live pool in 30 passes; a snapshot iteration can change newly allocated record behavior.
 
 Damage distribution produces requests and invokes declared callbacks. Building, unit, magic, sound, message, and navigation effects must remain explicit. Original effect-edge conditions are not automatically interchangeable with linear-motion bounds. Tests using synthetic 1×1/3×3 building geometry do not establish all real building footprints.
+
+## Live attack chain from the unit dispatcher
+
+`ataque_vivo.py` holds the three combat entries that ai-runtime's dispatcher skeleton calls (contract recorded in [AI and runtime](AI_RUNTIME.md)):
+
+| Entry | Original | Inputs |
+|---|---|---|
+| `definir_ataque(unidades, indice, modo, referencia, redefinir_ordem)` / `AtaqueVivo.definir_ataque` | `SetAttaqueEngin 0x445A36`: AX unit, DL mode, BX reference | u16/u8/u16; `redefinir_ordem` is Core `ResetOrdre 0x44357C` |
+| `ramo_estado_ataque(ctx, indice, consultar, efetuar)` / `AtaqueVivo.ramo(indice)` | `EnginNextEtape` states 1/24, `0x456886..0x4568AD`, exit `0x454CCD`: ESI record, DI index | u16 unit; return ignored |
+| `AtaqueVivo.calcular_projeteis()` | `ProjectileCalcul 0x46FC0F`, no register input | low byte of `AtaqueVivo.contador` (u32 `0x508F7C`) |
+
+`SetAttaqueEngin` returns before `ResetOrdre` when the same order is active (state 1, same `+0xB7`, same `+0xB8`). Every other call resets the order first. Only then does it refuse types 5/6/7/9/10/13, modes other than 1/3/5 and a mode-1 self target, so refused calls still reset. Accepted orders store `+2=1`, `+0x8A=0`, `+0xB7=mode` and u16 `+0xB8=reference`.
+
+The branch switches on target mode `+0xB7` (1 unit, 3 structure, 5 cell); `+0x8A` is the separate attack substate.
+- **Mode 1:** valid when the reference is not `0xFFFF`, the target state is not 0/4, the target owner is not 200 and target `+0x72` is nonzero.
+- **Mode 3:** asks `BatimentEnDestruction` (structure `+5 == 3`) and then `BatimentGetPlayer` (≠200).
+- **Mode 5:** needs no check.
+- **Valid order:** runs one `CalculAttaqueEngin` step.
+- **Invalid order:** queries `PlayerGetType(owner)`. An AI owner (2; every owner ≥4) gets `iagUnitSendMessage(unit, 0x4A, 0)`. Otherwise it requests `SetDeplaceEngin(unit, u16 +0x7E)` and then stores `+0xB8=0xFFFF`.
+- **Other modes:** they reach `CalculAttaqueEngin` untranslated and raise before any effect.
+- **Mode-1 references ≥800:** they raise `IndexError` (the original would read past the 800-record table).
+
+The branch reads nothing from the prelude's stack frame.
+
+`AtaqueVivo(mundo, pool, danos, tipos, bonus, mascaras, *, bonus_4965ac, ultimo_alerta, celula_alerta, consulta=None, efeito=None)` shares, by reference:
+- Core's world and the live `PoolProjeteis`.
+- 26 loaded DEGAT rows and the loaded 26×50 type table (reload at `+0x30`).
+- Economy's loaded bonus provider (`BonusUnidades.consultar` for `Modificateur` 3/4/5/6).
+- Five alliance mask bytes (players 0..4, byte `+6`).
+- The u8 global `0x4965AC` and the inherited alert globals `0x4E19C0`/`0x496ACC` (Stage 17: these persist across loads).
+
+Internally it routes:
+
+| Request | Destination |
+|---|---|
+| `ProjectileInit` | `pool.iniciar` |
+| `InfligeDegat` (melee and projectile arrival) | `ImpactoUnidades` |
+| Wrapper retaliation `SetAttaqueEngin` | `definir_ataque` |
+| `SetDeplaceEngin` / `ResetOrdre` | Core `definir_movimento` / `redefinir_ordem` |
+| The damage consumer | `criar_consumidor_fisico` with both lethal tails |
+| `SetDyingEngin` | Core physical death |
+
+Read-only bridges cover:
+- `PlayerGetType 0x46D817`: the control byte for owners 0..3, otherwise 2.
+- `BatimentEnDestruction 0x41A70B` and `BatimentGetPlayer 0x41A08C` over the 1000-record structure pool.
+- `PlayerEstAllie`, the computed building/unit lookups, proximity and visibility, all over the live grids.
+
+Every other request goes to `consulta`/`efeito`, or raises `DependenciaAtaqueVivo(nome, argumentos)` with the original entry address: AI messages, `EnginGetVolume`/`PlaySnd_PostSound`, `MAJSympathie`/`PlayerResetAllie`/`PlayerAAttaqueSet`, `EnginSetLevelExperience 0x44FB20`, `DeplaceEngin`, `Random`, building geometry, spells and terrain effects. Earlier effects are retained. The object takes over the pool's `efeito_externo`/`raio_magia`.
+
+The reload advance `0x454530..0x454591` belongs to the dispatcher prelude (ai-runtime places it; Core supplies `avancar_recarga`). The validation chain runs the prelude head `0x45442C..0x454591` natively only as a declared fragment.
+
+[Original-only captures](../pesquisas-paralelas/combate/evidencias/captura-ataque-vivo-original.json) preceded the Python composition: 25 scenarios, 1,208 native segments, every one ending at its declared return or stop with zero writes outside the modeled areas.
+- **Inputs:** real loaded type and DEGAT tables rebuilt by Core's `regras` from the original `RISING.EXE`/`RISING.INI`; units created with the committed `EnginSetType` translation. The map, positions, owners, life, zero bonus table, players and discovery bytes, order fields and the frame counter are declared synthetic. Core's MONDE01 placement is not yet a composed loaded world, and MONDE01's 16 serialized units all belong to owner 0.
+- **Frame driver:** each frame sets the counter, runs `ProjectileCalcul`, then the prelude head and branch for every unit in state 1/24 in live index order.
+- **Complete chains:** neutral monsters (owner 200; types 18–24 skip the mode-1 experience award) fight a human SOLDADO under a non-participating local player.
+  - ESMAGADOR melee: 220 frames.
+  - ARAIGNEE ranged (projectile 17): 114 frames.
+  - Both cover emission, flight, impact, damage, retaliation, the victim's own invalid branch, physical death and the attacker's final invalid-target branch, ending at the named AI-message stop `0x4567A9`.
+- **Named stops in the same chain:** `PlayerAAttaqueSet` (AI attacker owner 1), `EnginGetVolume` (visible attacker) and `EnginSetLevelExperience` (SOLDADO killer).
+- **Single entries:** eleven branch cases (every validity outcome, the mode-3 `CalculAttaqueEngin` checkpoint, a mode-5 `DeplaceEngin` stop) and nine `SetAttaqueEngin` cases.
 
 ## Mission reset prefix: projectile pool
 
@@ -231,6 +292,9 @@ python3 -B pesquisas-paralelas/combate/rastrear_impacto_modo3.py
 python3 -B pesquisas-paralelas/combate/validar_impacto_modo3.py --emular
 python3 -B pesquisas-paralelas/combate/rastrear_reinicio_projeteis.py
 python3 -B pesquisas-paralelas/combate/validar_reinicio_projeteis.py --emular
+python3 -B pesquisas-paralelas/combate/rastrear_ataque_vivo.py
+python3 -B pesquisas-paralelas/combate/capturar_ataque_vivo.py
+python3 -B pesquisas-paralelas/combate/validar_ataque_vivo.py --emular
 python3 -B scripts/check.py --domain combat
 ```
 

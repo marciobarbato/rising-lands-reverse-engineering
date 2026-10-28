@@ -43,6 +43,16 @@ class VisaoMovimento:
                     self.mini_unidades[p] = 0
                     if self._visivel(celula):
                         self.mini_final[p] = (self.mini_estruturas[p] or cor) if self._visivel(celula, True) else self.sombra[cor]
+                elif modo == 6:
+                    # 0x46a647: PlayerGetColor+2 into the structure layer; lit cells only.
+                    self.mini_estruturas[p] = ((30 if dono == 200 else self.cores_jogadores[dono]) + 2) & 255
+                    if self._visivel(celula, True):
+                        self.mini_final[p] = self.mini_unidades[p] or self.mini_estruturas[p]
+                elif modo == 7:
+                    # 0x46a69d: mode 5 with the unit and structure layers swapped.
+                    self.mini_estruturas[p] = 0
+                    if self._visivel(celula):
+                        self.mini_final[p] = (self.mini_unidades[p] or cor) if self._visivel(celula, True) else self.sombra[cor]
 
     def _bordas(self, grade, celula, apagar):
         x, y = celula & 255, celula >> 8

@@ -604,4 +604,52 @@ python3 -B scripts/check.py --domain economy
 - [Labelled diagnostic run with core's announced gates](../pesquisas-paralelas/economia/validacao-habitaveis-emulada-diagnostico-limites-23-20.json) (23/20, over core's current committed primitives): the same 1,509 entries in 1,967 segments (458 resumptions). All 17 caller fragments, including 12 actual-MONDE01 configurations (zero/one/random tables × fresh/seeded grids × cameras 0/1), complete to `0x46c1a7` with discovery 13 and light 10. 126 full returns, 15 owner-byte ≥ 4 stops, 2 lowered-limit light stops, 1 `#DE`. This run shows equality but does not replace the run after core publishes the constants.
 - [Local mode](../pesquisas-paralelas/economia/validacao-habitaveis-local.json) replays every original-only capture: completed cases match all hashes, and gated cases keep the captured physical inputs and match the captured Bag/capacity/resource outputs.
 
-**Remaining limits.** Actual MONDE01 completes only after core's Stage 14 publishes the vision constants; until then it stops at the named core dependency `0x476851` with the technology Bag already reset. Inherited technology/realizability tables at load time are explicit inputs: `TechnologieReset` zeroes them, but it is reached from `RechercheCalculNew`, not `MissionLoad`, so the whole-load oracle must supply the real values. `PlaceBatiment`/`BatimentModifyMap` (core) and the loop itself (missions) are not part of this provider. Other callers of `BatimentHabitable` (`BatimentConstruction 0x41d000`, `BatimentLogeEngin 0x41fa81`) are not composed. `BatimentInitCave` is already reconstructed (`EconomiaConstrucoes.inicializar_armazens`) and validated over all 38 ETA prefixes. Its composition into the mission tail after `EnginInitTechnologie 0x441459` is the proposed Stage 16.
+**After core Stage 14 (main `7b7b96960cee0ec7868914e811f51b851fc27dba`).** Core now publishes `RAIO_DESCOBERTA_MAXIMO_VALIDADO=23`/`RAIO_LUZ_MAXIMO_VALIDADO=20` and `SOMA_VISAO_MAXIMA_INSERCAO=11`. The [fresh native run on these published gates](../pesquisas-paralelas/economia/validacao-habitaveis-emulada.json) passes 20 tests without skips or mismatches: 1,509 original entries in 1,967 segments (458 resumptions). All 17 caller fragments, including the 12 actual-MONDE01 configurations, complete to `0x46c1a7` with discovery 13 / light 10 and whole-buffer equality; there are 126 full returns, 15 owner-byte ≥ 4 stops, 2 lowered-limit light stops and 1 `#DE`. The pre-core run is preserved as `validacao-habitaveis-emulada-antes-core.json`. Local replay now reaches full hash equality for 21 of 22 original-only captures; the remaining one is the deliberate owner-4 boundary. The re-run [producer placement suite](../pesquisas-paralelas/economia/validacao-producao-colocada-emulada.json) has the same counts as Stage 12 (13 tests, 192 entries / 552 segments / 360 resumptions; 64 returns, 118 request stops, 8 pre-discovery stops, now at sum 12, and 2 import stops). Its fresh report is byte-identical to the committed one.
+
+**Remaining limits.** Owner bytes ≥ 4 remain a named dependency at `0x476851`. Inherited technology/realizability tables at load time are explicit inputs: `TechnologieReset` zeroes them, but it is reached from `RechercheCalculNew`, not `MissionLoad`, so the whole-load oracle must supply the real values. `PlaceBatiment`/`BatimentModifyMap` (core) and the loop itself (missions) are not part of this provider. Other callers of `BatimentHabitable` (`BatimentConstruction 0x41d000`, `BatimentLogeEngin 0x41fa81`) are not composed. `BatimentInitCave` is already reconstructed (`EconomiaConstrucoes.inicializar_armazens`) and validated over all 38 ETA prefixes. Its composition into the mission tail after `EnginInitTechnologie 0x441459` is the proposed Stage 16.
+
+## Economy load tails of `MissionLoad` (Stage 16)
+
+[cauda_carga.py](../pesquisas-paralelas/economia/cauda_carga.py) provides the economy-owned initializer calls of the load tails. The [original-byte inventory](../pesquisas-paralelas/economia/evidencias/cauda-carga.json) exports 14 intervals with hashes. The [original-only captures](../pesquisas-paralelas/economia/evidencias/captura-cauda-carga-original.json) were committed (`8d0f2a9`) before translation.
+
+**Tail order from original bytes.**
+
+| Loader | Tail after `FileClose` |
+|---|---|
+| `MissionLoad 0x46c5aa..0x46c5d6` | `MissionPlaceTerrain` (missions), `EnginInitTechnologie 0x441459`, `BatimentInitCave 0x419112`, core `Engin_RetrieveExperimente 0x441623`, `PlayerRetrieve 0x46df41`, ai-runtime `iaReset 0x47f36e` (AL = byte `[esp+0x128]`), `MarcheResetAll 0x46027c`, AL = 1 |
+| `MissionLoadName 0x46c973..0x46c998` | `MissionPlaceTerrain`, `EnginInitTechnologie`, `BatimentInitCave`, `RechercheCalculNew 0x47150f`, `iaReset` (AL = byte `0x496fe4`), `MarcheResetAll`, AL = 1 |
+
+Missions composes the tail; economy supplies the calls below.
+
+**`RechercheCalculNew 0x47150f..0x4716fe` is economy-owned and not reconstructed here.** It calls `TechnologieReset`, `BonusReset`, `InventionSetEffet 0x470f98` and missions' `MissionGetNum`, and copies 16 bytes per owner `0x508134 → 0x5080f4`. It is reached only from `MissionLoadName`, not from MONDE01's `MissionLoad`.
+
+| API (`CaudaCargaEconomia(habitacao, ciclo_mercado, *, rede, jogadores_guardados)`) | Original | Contract |
+|---|---|---|
+| `inicializar_tecnologia_unidades()` | `EnginInitTechnologie 0x441459` | `definir_tecnologia_unidades(owner)` for owners 0..3 ascending |
+| `definir_tecnologia_unidades(jogador)` | `EnginSetTechnologie 0x4411e1` | AL owner u8, protected 0..3 (the original indexes the pointer table without a check). It rebuilds three of that owner's unit-order Bags (`propriedade.ordens`, the `[0x4e19b8]` arrays of 26 × 104 bytes); each inline reset equals `BagInit` and keeps bytes `+0x60..+0x65`: the unit-7 Bag gets capacity 22 and tag 3 for each structure type 0..21 except 20 that is realizable; the unit-14 Bag gets capacity 1 and tag 7 value 6; the unit-8 Bag gets capacity 4 and tag 2 values 0..3 |
+| `estrutura_realizavel(tabela, rede, jogador, tipo)` | `TypeBatimentEstRealisable 0x418a93` | AL owner, DL type (protected 0..3/0..21). A nonzero `ReseauActif` byte (`0x4e0730`) makes types 8/12 return 0; otherwise the result is byte `0x4dfad4 + 22*owner + type`. EBX is preserved |
+| `inicializar_cavernas(mundo)` | `BatimentInitCave 0x419112` in tail position | Delegates to the existing `EconomiaConstrucoes.inicializar_armazens`. Its 88-byte count table must be the same object as core's world table at `0x49a070` (core's raw name `realizaveis_estruturas`; `BatimentResetAll` zeroes it, `BatimentInitCave` fills it with per-owner, per-type counts of structures whose state `+5` is nonzero), and the structure pool must be the same object. The type-3 (CAVE) count goes to the warehouse word `0x4dfb2c+6*owner` and the type-18 count to `0x4dfb4c+owner`; byte counts wrap |
+| `recuperar_jogadores()` | `PlayerRetrieve 0x46df41` | For each of the four 20-byte players, first byte `+6` (alliance mask), then bytes `+0x0c..+0x13` (four signed-16 sympathies), copied from the 80-byte source table `[0x5080ac]` (written by `InitPlayer`/`LoadPlayer`/`PlayerStore`) into the live table `[0x5080a8]` (`Mercado.jogadores`). Nothing else changes |
+| `resetar_mercado()` | `MarcheResetAll 0x46027c` | Exactly the committed `CicloMercado.resetar_todos`: for each player in ascending order, the seven stores `0x4e2e7c=0`, word `0x4e2930=0`, `0x496f8c=255`, `0x4e292c=1`, `0x4e2928=0`, word `0x4e2940=0`, word `0x4e2938=0`. No difference was found; it now also passes in tail position |
+
+The constructor uses its buffers by identity. It requires the market and the structures to share one resource table, and checks lengths: unit-order Bags 10,816, `rede` 1, source and live player tables 80 each, counts 88 and 4. All of these, including the realizability tables, are inherited load state for the whole-load oracle; none is defaulted. A `ValueError` from a protected domain is raised before that call's stores. The calls are independent single entries; missions must not replay them.
+
+```sh
+python3 -B pesquisas-paralelas/economia/capturar_cauda_carga.py
+python3 -B pesquisas-paralelas/economia/capturar_cauda_carga_original.py   # original-only, before translation
+python3 -B pesquisas-paralelas/economia/validar_cauda_carga.py
+python3 -B pesquisas-paralelas/economia/validar_cauda_carga.py --emular
+python3 -B scripts/check.py --domain economy
+```
+
+**Validation.** The [fresh native run](../pesquisas-paralelas/economia/validacao-cauda-carga-emulada.json) passes 11 tests without skips, mismatches, faults or limits. **435 original entries** in 451 bounded segments, 16 of them minimap resumptions:
+- MissionLoad tail fragments: 16 runs of `0x46c5af..0x46c5b9`, 19 of `0x46c5be..0x46c5c3`, 19 of `0x46c5d1..0x46c5d6`.
+- MissionLoadName pair `0x46c978..0x46c982`: 3 runs.
+- 2 Stage 15 caller fragments, chaining habitation into the tail.
+- Direct entries: 24 `EnginSetTechnologie` (owners with garbage high register bits) and 352 `TypeBatimentEstRealisable` (4 owners × 22 types × 4 network bytes).
+
+Fixtures include actual MONDE01: its loaded structure, header and units; zero, one and random realizability tables; network bytes 0/1/0x80; and two runs after its Stage 15 habitation. Also covered: random 1,000-record pools with owners 0..3/4/200/255 and states 0..255, and wraps of 300 caves and 257 heliports. Each run compares whole structures, units, technology and unit-order Bags, realizability, counts, capacities, resources, both player tables, the seven market buffers, core's physical state and guard bytes. The [local mode](../pesquisas-paralelas/economia/validacao-cauda-carga-local.json) replays all seven original-only captures to full hash equality.
+
+On MONDE01 the tail counts one owner-0 type-2 sanctuary and no cave. All four owners' warehouse words become 0 and the type-18 counts become 0.
+
+**Remaining.** `RechercheCalculNew` (MissionLoadName only) is not reconstructed. Core's `Engin_RetrieveExperimente 0x441623` and ai-runtime's `iaReset 0x47f36e` are not part of this provider.
