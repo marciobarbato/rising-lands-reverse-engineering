@@ -63,3 +63,50 @@ Queue state (`HandlSnd_*`, `LSB_*`, `PSB_*` beyond buffer creation, `WaitSnd_*`)
 - **core:** the generic binding facility (Stage 15). The audio bench will migrate its `_lopen`/`_hread`/`_llseek`/`_lclose`/`GlobalAlloc`/`GlobalFree`/`MessageBoxA` slot bindings and its COM stubs onto it.
 - **core:** `relatorios/fontes.json` should list `INSTALHD/SOUND/{A,B,P}.{HED,SND}` (sizes and SHA-256 in `ambiente_audio.py`).
 - **macos (M2/M3):** consume `criar_superficie_som` and `catalogo-amostras.json`. Play the written region (`decoded_bytes`) at the header's rate and channels. The unwritten tail is fixture fill, not audio.
+
+## Codex resumption: light Stage 2 inventory
+
+The new human request of 2026-10-28 supersedes the historical stop. The current
+coordinator is `01a183e4-456e-77d0-9c6a-81b1c72ae887`; historical `local_`
+identities remain historical. This chat owns only the audio worktree while M1
+is unavailable. The macOS worktree has not been rebuilt or modified.
+
+Before helper start, `feat/re-audio` was clean at
+`85d54ac651eb578afa528d167b229619258995e6`, with no local commits outside main.
+The intact capture commit `fa4a759d13107f84e24bd1f2af9d01d0b72403c3`, decoder
+implementation `0fc99df90ebcadb69f8e6fa5f6603ceae89e79fd` and report commit
+`9a0c171` were each verified as ancestors of fetched main
+`8810b3730a0fb788af3eac2b447dea65372f597f`. The prescribed start helper resumed
+the same checkout; a clean fast-forward moved it to that main. No worktree,
+failed candidate, earlier capture, manifest or original media was removed or
+rewritten.
+
+The new static exporter [extrair_filas_som.py](extrair_filas_som.py) and separate
+[53-interval manifest](evidencias/filas-som-manifesto.json) preserve the intact
+request/queue bytes for Stage 2. The [current capture-first plan](../../docs/AUDIO.md#stage-2-requestqueue-original-first-inventory)
+records exact field widths, partial writes, PostSound register inputs,
+Manage's shared/fall-through bodies, PSB/LSB tables, literal-RET waiting sorter,
+and the critical waiting 69→70 alias into queue/dictator globals. These are
+static observations, not a reconstructed queue or fresh execution result.
+
+Validation separation for this light window:
+
+| Item | Status |
+|---|---|
+| Existing bank/sample implementation and original captures | Preserved; already integrated on main |
+| Existing 551-sound three-way report 9a0c171 | Inspected as prior evidence; not rerun |
+| New request/queue original bytes | Static export from the intact verified EXE; 53 intervals |
+| New queue Python behavior | Not implemented; captures must precede translation |
+| New original-x86 comparisons/Ghidra | Not run; no heavy slot granted |
+| Full audio/domain/integration gate | Not run in this light window |
+| Stage 2 main integration | Not performed |
+| Complete audio playback or real-mission flow | Not tested; remains unsupported |
+
+Light checks performed here: two namespace/contract-presence unit tests passed;
+all 53 newly exported interval hashes and 88 initialized-data bytes matched the
+intact image; exporter syntax, maintained documentation links and diff
+whitespace passed. These checks ran no emulator and decoded no sound corpus.
+
+No heavy job has started, so no heavy lease is held. The next required action
+is coordinator scheduling of an original-first capture window. Light notes
+remain within this one current stage; no subsequent implementation is started.
