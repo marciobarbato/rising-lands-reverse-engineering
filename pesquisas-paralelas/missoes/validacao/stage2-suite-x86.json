@@ -1,0 +1,17 @@
+{
+  "tests": 18,
+  "skipped": 0,
+  "errors": 0,
+  "failures": 0,
+  "unit_bounded_segments": 14056,
+  "unit_native_fixtures": 469,
+  "unit_native_returns": 457,
+  "expected_modifier_checkpoints": 12,
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "scope": "Separate successful-open prelude and indexed-unit continuations; file I/O supplied. Original object normalization/resource/type/bonus/selection bodies unpatched. Inherited pools/bonus tables remain explicit synthetic inputs.",
+  "native_faults": 0,
+  "real_mission_runtime_tested": false,
+  "prelude_native_calls": 237,
+  "prelude_bounded_segments": 9480,
+  "prelude_checkpoint": "0x42ee1c, before Chemin_Remap executes"
+}

@@ -67,6 +67,41 @@ This stage closes the indexed-unit stream/postload connection, including an ordi
 
 Missing prerequisites are explicit:shared `SelectionInit`, original terrain/unit global reset state, `Chemin_Remap`, runtime auxiliary tables/reference relations, structure postload/physical insertion, unit `PlaceEngin` and complete discovery/occupancy setup, loaded bonuses/player economy state, technology/experience/cave/player retrieval tails, mission selection/briefing semantics, mission-specific rule/objective/event wiring and a supported dispatcher. Core capacity refresh/structure placement providers exist but are not invoked by Stage1. Mission2+ runtime, unsupported AI operations, victory/loss, global timing, save/load and audio remain unsupported. Rendering, economic effects, combat effects and app/native build retain their owners.
 
-Next bounded investigation, after this stage is integrated:original terrain/header/resource/view preparation and the `Chemin_Remap` boundary, reusing graphics' exact object normalization and economy's resource setter rather than copying their internals. Independent source/capture evidence must precede any larger prepared-world claim.
+Stage 1 was integrated at main `c64d32b859046468e2f9085f90f96eb5002d567c`, from final feature `551e1fb19e8bf529d0074a960d6507a87e2ee248` containing implementation and import correction `9f0d32481560e49a21258a269cd22b44a1827263`. The clean worktree fetched main `8fd9c41ce6e3b8709cc0d7235e8c31d9b6a68b8d`, verified ancestry and reproduced all 12 Stage 1 tests / 469 native fixtures / 14,056 segments before Stage 2 implementation.
 
 Final consumer review renamed the owned bootstrap to `ambiente_missoes.py`, avoiding collision with core `caminhos.py`. A committed-provider navigation import regression now passes; this correction changes no loader bytes or native fixture counts.
+
+## Stage 2: successful-open terrain, resource and view prelude
+
+`continuar_cabecalho` in [carregador_cabecalho.py](../pesquisas-paralelas/missoes/carregador_cabecalho.py) reconstructs `MissionLoad 0x46c396..0x46c512`, **after successful open and before `Chemin_Remap 0x42ee1c` executes**. It consumes the committed `Leitor`, graphics `normalizar_inicio` and economy `Economia.atribuir`; it does not copy those providers' implementations. [Appended original evidence](../pesquisas-paralelas/missoes/evidencias/cabecalho-manifesto.json) preserves the original executable hash, two intervals, consumed provider hashes and original INI/SBL/RUL dependency identities, without regenerating Stage 1 evidence.
+
+Call `continuar_cabecalho(leitor, atributos, terreno, objetos, auxiliares, economia, dimensoes, visualizacao, jogador_visualizacao)` with these explicit inherited inputs:
+
+| Input | Width/layout |
+|---|---|
+| `leitor` | Existing `Leitor` at file position 0, after the caller's successful open |
+| Four raw layers | Separate writable contiguous u8 buffers of 65,536 / 131,072 / 65,536 / 65,536 bytes; the second is raw little-endian u16 terrain, with cell stride 256 |
+| `economia` | Already-supplied `Economia` object with its inherited 128-byte table; no default construction or balance/bonus initialization |
+| `dimensoes` | Writable four bytes: u16 width, u16 height |
+| `visualizacao` | Writable four bytes: u16 X, u16 Y; inherited bytes remain relevant when the selected-player byte is outside 0..3 |
+| `jogador_visualizacao` | Integer truncated to u8, corresponding to original `0x508041` |
+
+All buffers/provider memory must be separate and remain stable. Shape/provider/reader-position checks fail before reads or effects. The prelude skips four bytes without validating `V0.3`, matching original absolute seek 4. The inventory/full ETA reader independently enforces its studied version. It then copies the four entire layers in original order, normalizes every object cell 54→66/auxiliary 1 through the committed graphics provider, reads resources in order 1,2,0 for players 0..3, and invokes the actual setter immediately after each u16 read. The setter updates RMI/total, clears display/flags, preserves byte +7 and the fourth resource slot, and applies no 9,999 cap. A resource provider failure propagates with earlier copies/normalization/setter effects retained.
+
+Width and height are read into their two halves in order. The prelude consumes all four players' X/Y pairs, writing only the pair matching the selected-player u8. Values 4..255 preserve the inherited view, while still consuming all 16 bytes. It returns `CabecalhoCarregado(largura, altura, jogador_visualizacao, fim=0x50030, rotina_seguinte=0x42ee1c)`. These are raw u16 dimensions; even out-of-range raw values can reach this safe checkpoint. This API does not validate a playable rectangle, project a camera, infer walkability/discovery or enter remapping.
+
+Strict Python reads require complete supplied data. Truncation preserves preceding complete buffer/setter stores; this does not model partial Win32 reads. The successful path does not include filename selection, global/terrain/minimap/pool/projectile/message resets, open failure, region/color/search initialization or allocation. Those prerequisites must not be inferred from a constructor. In particular, the original remap clears search/color/region buffers before allocation and can fail with those effects retained; `MundoNavegacao.refazer_regioes` is not declared equivalent to that full routine.
+
+Four [original-only prelude captures](../pesquisas-paralelas/missoes/evidencias/captura-cabecalho-original.json), generated before translation, cover MONDE01 with selected-player values 0/3/4/255. All reach `0x42ee1c` in 160 bounded segments. The inherited resource pattern and initial view are explicitly synthetic. Native object normalization and `SetMatiere` execute unpatched; only successful file I/O is supplied. Regressions compare all seven output-buffer hashes independently of the reconstruction. The Stage 1 capture/report files remain historical records.
+
+Stage 2's [combined report](../pesquisas-paralelas/missoes/validacao/stage2-suite-x86.json) keeps unit and prelude counts separate. The fresh native test covers the 38 original headers for cameras 0/1/2/3/4/255, plus synthetic all-grid normalization, version skipping, dimension/resource width boundaries and u8 camera truncation. The initial boundary-fixture run failed in the harness because Unicorn `mem_write` received a Python bytearray; converting that adapter input to bytes fixed the host error without a reconstruction change. The failed attempt is not counted as successful coverage.
+
+```sh
+python3 -B pesquisas-paralelas/missoes/extrair_cabecalho.py
+python3 -B pesquisas-paralelas/missoes/capturar_cabecalho.py
+python3 -B pesquisas-paralelas/missoes/validar.py --emular
+```
+
+No unit records, structures or auxiliary mission tables are loaded by this prelude. Stage 1 is a later independent continuation separated by `Chemin_Remap` and structure loading. Their passing tests do not join those missing operations. Selection initialization, complete world insertion, mission-specific objective/event execution and runtime comparison remain open. After Stage 2 integrates and is reproduced, the next independently supported slice is the mission auxiliary-table load path, beginning with exact original `LoadFinMission`/`LoadObjectif` input and retention rules; no end-condition semantics will be inferred from names or disk values alone.
+
+Final Stage 2 checks:18 mission tests pass in native mode, zero skips/failures/errors/native faults. New prelude coverage is237 calls/9,480 bounded segments, all stopped before remap. Unit revalidation separately repeats469 fixtures/14,056 segments (457 returns,12 expected query checkpoints); these are not new aggregate mission coverage. Local mode executes12 tests and skips six optional native tests. Common suites at inspected main pass core302/143 optional skips,combat191/119,economy326/146,graphics122/0,workflow3/0.
