@@ -65,6 +65,41 @@ python3 -B pesquisas-paralelas/graficos-animacao/validar_portoes_graficos.py
 python3 -B scripts/check.py --domain graphics
 ```
 
+## Gate return and clip restoration — second continuation stage
+
+`portoes_completos.py` adds `consultar_portao_completo` and `compor_portao_completo` on top of the unchanged facade API. It validates the original call through its **actual return at `0x3000000` in the harness**, rather than stopping at the shared-tail checkpoint. It uses the same prepared type-12/object-253 contract and all facade arguments, with two required additions:
+
+- `terreno_u16`: the original cell's terrain word, 0–65535, excluding **`0x356`**. That tile can invoke `ChercheCaseBatiment` over other world records before the workshop type check; it remains unsupported by this independent renderer.
+- `recorte_entrada`: four u16 values in left/top/right/bottom order. Inverted rectangles are permitted because the original saves and restores their words verbatim.
+
+The pure compositor returns `(indexed_bytes, restored_clip_tuple)`. For an accepted facade the original order is save clip → set temporary clip → one indexed copy → workshop guard → restore clip → habitation query → conditional selection-frame/gauge guards → return. The workshop guard returns immediately for every terrain word in the supported domain. The selection-frame and gauge routines themselves return before drawing when the structure type is 12, including when selection/hover conditions invoke them. Empty and populated valid bags were exercised through the original habitation query; the renderer does not implement bag rules or require their result as an input because they cannot add pixels for this type. An early-hidden gate preserves the incoming clip without calling any of these helpers.
+
+This stage has no delegated callbacks, no world mutation, no extra sprite, and no new player-color/shadow behavior. It returns the clip explicitly instead of writing a global. Invalid terrain/clip widths raise `ValueError`, tile `0x356` raises `NotImplementedError`, and the facade API retains its existing failures. Other structure types, invalid runtime bag records, workshop-trigger lookup, whole-scene order, and runtime mission integration remain outside the contract.
+
+Original evidence: shared tail `0x40F342..0x40F49C`, SHA-256 `ce3dabcebaebfb6d4ba718445b5d854bcfd10b184bdf6c2883354c7b837e3264`; `AffVehiculeAtelier` guard `0x402864..0x40288B` and epilogue `0x402C7A..0x402C82`; type-12 guards in `BatimentPoseCadre` `0x4022C8..0x4022F9` and `AffJaugeBatiment` `0x4020EC..0x402122`. [Exact bytes and prior-stage hashes](../pesquisas-paralelas/graficos-animacao/evidencias/portoes-completos.json) retain the original executable identity above and include the read-only habitation dependency intervals.
+
+Fresh validation: **882 bounded original-x86 executions / 1,077,090 instructions**, consisting of 768 full-return call/guard captures, 112 exact indexed buffers and two bank setup calls. Zero skips, expected exceptions or time/instruction limits; no guard, habitation or pixel routine is substituted in the pixel comparisons. Six new Python regressions pass; the graphics domain now contains **88 tests**. The original facade report and its 2,792-call result are unchanged historical records for the preceding stage. [Saved full-return report](../pesquisas-paralelas/graficos-animacao/validacao/x86-portoes-completos.json).
+
+```sh
+python3 -B pesquisas-paralelas/graficos-animacao/validar_portoes_completos.py
+python3 -B scripts/check.py --domain graphics
+```
+
+## Remaining component inventory — continuation after the gate facade
+
+This inventory distinguishes reconstructed behavior, captured original behavior, and runtime integration. The integrated gate facade at `ff4bc269c6d8534f4683bd0429072286ea8eaaf1` has exact indexed comparisons; it is not yet exercised by the macOS consumer or a complete loaded mission.
+
+| Component | Evidence and current boundary | Next dependency |
+|---|---|---|
+| Gate shared tail | The full-return API now reconstructs `AffBatiments 0x40F342..0x40F49C` for terrain other than `0x356`; 882 fresh x86 calls validate return/clip/guards | Close the workshop-trigger lookup with a committed world-provider contract; integrate the consumer |
+| Other building facades and overlays | `AffBatiments 0x407DD3..0x40F49C`; only the Sanctuary subset and gate facade are reconstructed | Recover per-type/mode layers, clipping and anchors against original buffers |
+| Unit action handlers | `AffEngin` dispatches to attack `0x41374C`, construction `0x414495`, work `0x414A8A`, death `0x41559A` | Map each supported type/action input and coordinate simulation phase producers |
+| Scene traversal/projection | Individual `AffTerrain 0x41068E`, `AffVegetTerrain 0x410085`, `AffVeget 0x415ACF`, and unit/building passes are captured separately | Recover their real caller's projection, visitation and draw order |
+| Visibility, palette and clocks | Indexed composition/shadow helpers and clock prefix are reconstructed; visibility bytes are explicit runtime inputs | Connect validated world providers and original frame cadence |
+| Real-mission consumer | V6 reads all serialized mission-1 object codes; the preview uses older pinned snapshots | Coordinate complete world loading/remapping, dynamic render state, input, effects and original-reference runtime scenes |
+
+The gate-tail stage proves the explicit type-12 returns in `BatimentPoseCadre 0x4022C8` and `AffJaugeBatiment 0x4020EC`, plus the supported terrain guard in `AffVehiculeAtelier 0x402864`. This does not establish that the shared tail is visually inert for other buildings.
+
 ## Terrain objects and sequential codes
 
 `objetos.py` reconstructs visibility predicates, terrain/sprite passes, tree progression, and the v5 catalog. Discovery requires `(flag & 31) == 0`; lighting requires `(flag & 16) == 0`. These per-player flags are external runtime inputs, not automatically the ETA disk attribute byte.
@@ -100,4 +135,4 @@ Individual `validar_x86.py`, `validar_trabalhadores.py`, `validar_composicao.py`
 
 The original private reference snapshot is commit `1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e`. Keep that snapshot and its manifest immutable. Predecessor-source hashes in `evidencias/proveniencia-v6.json` deliberately refer to historical implementations. Current research must append provenance instead of rewriting old claims.
 
-Next: remaining building render mappings, the shared gate/building tail and original scene render-order callers. The gate facade is a bounded indexed composition scenario; it does not implement physical gate effects, establish economic semantics, or integrate the older macOS preview.
+Next: remaining building render mappings, workshop-trigger gate terrain, general building tails and original scene render-order callers. The gate facade and supported full-return path are bounded indexed composition scenarios; they do not implement physical gate effects, establish economic semantics, or integrate the older macOS preview.
