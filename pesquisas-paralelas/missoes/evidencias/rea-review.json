@@ -1,0 +1,237 @@
+{
+  "rea_source_revision": "b9a8f8e9f25feb9cc97bf4960748f2bdf8c898bc",
+  "analysis_sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "original_execution_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "provider": "Ghidra12.2 private read-only project copy",
+  "observations": [
+    {
+      "evidence_id": "ev_4e295a3dbf2e56564089f9669535a201347e44c07b9a128d63421cf2cde6f428",
+      "operation": "inspect_analysis_view",
+      "parameters": {
+        "parent_evidence_id": "ev_672712e39e49ef36ac300bca8d38c4396ff46c69cd2fc238a17d006322f90b15",
+        "view": {
+          "kind": "summary"
+        }
+      },
+      "procedure_address": "0x46acbf",
+      "summary": {
+        "procedure": {
+          "name": "carregar_unidades_eta",
+          "address": "0x46acbf"
+        },
+        "pseudocode": {
+          "available": true,
+          "code_units": 2658
+        },
+        "value_flow": {
+          "available": true,
+          "truncated": false
+        },
+        "facet_availability": {
+          "pseudocode": {
+            "available": true
+          },
+          "assembly": {
+            "available": true
+          },
+          "comments": {
+            "available": true
+          },
+          "callers": {
+            "available": true
+          },
+          "callees": {
+            "available": true
+          },
+          "references": {
+            "available": true
+          },
+          "strings_names": {
+            "available": true
+          },
+          "cfg": {
+            "available": true
+          }
+        },
+        "counts": {
+          "assembly": 199,
+          "basic_blocks": 18,
+          "comments": 0,
+          "callers": 2,
+          "callees": 7,
+          "incoming_references": 2,
+          "outgoing_references": 77,
+          "unresolved_calls": 0,
+          "referenced_strings": 0,
+          "referenced_names": 49,
+          "swift_string_literals": null,
+          "swift_string_literal_omissions": null,
+          "value_flow_operations": 215,
+          "value_flow_def_use": 213,
+          "value_flow_effects": 50,
+          "value_flow_parameters": 0,
+          "value_flow_parameter_uses": 0
+        },
+        "limitation_count": 4
+      }
+    },
+    {
+      "evidence_id": "ev_ff6a64aa49e231a3dcafef36800be2739ae9ac2b42c3fd9c832b2e742b8c7838",
+      "operation": "inspect_analysis_view",
+      "parameters": {
+        "parent_evidence_id": "ev_268b84524caf6784afa258618d5bc65c4682288c95fa3800570614ff06324738",
+        "view": {
+          "kind": "summary"
+        }
+      },
+      "procedure_address": "0x472555",
+      "summary": {
+        "procedure": {
+          "name": "OriginaisSBL::SelectionInit",
+          "address": "0x472555"
+        },
+        "pseudocode": {
+          "available": true,
+          "code_units": 226
+        },
+        "value_flow": {
+          "available": true,
+          "truncated": false
+        },
+        "facet_availability": {
+          "pseudocode": {
+            "available": true
+          },
+          "assembly": {
+            "available": true
+          },
+          "comments": {
+            "available": true
+          },
+          "callers": {
+            "available": true
+          },
+          "callees": {
+            "available": true
+          },
+          "references": {
+            "available": true
+          },
+          "strings_names": {
+            "available": true
+          },
+          "cfg": {
+            "available": true
+          }
+        },
+        "counts": {
+          "assembly": 8,
+          "basic_blocks": 1,
+          "comments": 0,
+          "callers": 2,
+          "callees": 0,
+          "incoming_references": 2,
+          "outgoing_references": 4,
+          "unresolved_calls": 0,
+          "referenced_strings": 0,
+          "referenced_names": 4,
+          "swift_string_literals": null,
+          "swift_string_literal_omissions": null,
+          "value_flow_operations": 9,
+          "value_flow_def_use": 4,
+          "value_flow_effects": 0,
+          "value_flow_parameters": 0,
+          "value_flow_parameter_uses": 0
+        },
+        "limitation_count": 4
+      }
+    },
+    {
+      "evidence_id": "ev_8c6a79b2093c2726b81b24950b40cbec45cfbedee435039802b9ff758dff21ce",
+      "operation": "procedure_callers",
+      "parameters": {
+        "procedure": "0x46acbf"
+      },
+      "callers": [
+        "0x46c2cf",
+        "0x46c5e3"
+      ]
+    },
+    {
+      "evidence_id": "ev_69a3d6d65061ef8f5da0e3d4898f6bd8f4639f5148659bb14ce98d4c1532ac7f",
+      "operation": "inspect_analysis_view",
+      "parameters": {
+        "parent_evidence_id": "ev_e0ff29c0519f6e06b56ada48aa542c091f863d5adb4a387cb01117845fa6a0ed",
+        "view": {
+          "kind": "summary"
+        }
+      },
+      "procedure_address": "0x46c122",
+      "summary": {
+        "procedure": {
+          "name": "OriginaisSBL::MissionPlaceTerrain",
+          "address": "0x46c122"
+        },
+        "pseudocode": {
+          "available": true,
+          "code_units": 1580
+        },
+        "value_flow": {
+          "available": true,
+          "truncated": false
+        },
+        "facet_availability": {
+          "pseudocode": {
+            "available": true
+          },
+          "assembly": {
+            "available": true
+          },
+          "comments": {
+            "available": true
+          },
+          "callers": {
+            "available": true
+          },
+          "callees": {
+            "available": true
+          },
+          "references": {
+            "available": true
+          },
+          "strings_names": {
+            "available": true
+          },
+          "cfg": {
+            "available": true
+          }
+        },
+        "counts": {
+          "assembly": 57,
+          "basic_blocks": 17,
+          "comments": 0,
+          "callers": 2,
+          "callees": 9,
+          "incoming_references": 2,
+          "outgoing_references": 21,
+          "unresolved_calls": 0,
+          "referenced_strings": 0,
+          "referenced_names": 21,
+          "swift_string_literals": null,
+          "swift_string_literal_omissions": null,
+          "value_flow_operations": 73,
+          "value_flow_def_use": 66,
+          "value_flow_effects": 16,
+          "value_flow_parameters": 1,
+          "value_flow_parameter_uses": 13
+        },
+        "limitation_count": 4
+      }
+    }
+  ],
+  "limitations": [
+    "Ghidra names/signatures and summaries are observations, not source semantics.",
+    "Original loader instructions and original-only captures govern the implementation.",
+    "First sandbox attempt failed Java spawn EPERM; ordinary authorized context succeeded. Session exported and closed."
+  ]
+}
