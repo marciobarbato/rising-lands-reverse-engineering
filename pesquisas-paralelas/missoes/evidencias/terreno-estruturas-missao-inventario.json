@@ -1,0 +1,78 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "inspected_main": "8810b3730a0fb788af3eac2b447dea65372f597f",
+  "status": "Static inventory only; no native capture or implementation in this stage yet",
+  "intervals": [
+    {
+      "name": "MissionPlaceTerrain_structure_scan",
+      "start": "0x46c16d",
+      "end_exclusive": "0x46c1b8",
+      "sha256": "46afd064111d0f83632c4d3fa2830340198461ac1d42c4797b9e08fef5310e55",
+      "file": "terreno-estruturas-missao-0046c16d.asm"
+    },
+    {
+      "name": "BatimentExiste",
+      "start": "0x41a735",
+      "end_exclusive": "0x41a75c",
+      "sha256": "eb15902f5896b293e28f8b17690f75d78ef2e5f7ff81facd6d89dc82ef5b1afc",
+      "file": "terreno-estruturas-missao-0041a735.asm"
+    },
+    {
+      "name": "MissionPlaceTerrain_shared_return",
+      "start": "0x46b6f5",
+      "end_exclusive": "0x46b6f8",
+      "sha256": "b39b98e5fec26b89a4d95ff11dcc8e9a60b6efbea74809eded6f2e897705d575",
+      "file": "terreno-estruturas-missao-0046b6f5.asm"
+    }
+  ],
+  "structure_pool": {
+    "base": "0x49a0c8",
+    "bytes": 276000,
+    "records": 1000,
+    "stride": 276,
+    "existence": "u8 +5 !=0; AX index; returns AL 0/1"
+  },
+  "scan_order": [
+    {
+      "call": "0x46c185",
+      "target": "0x41a735",
+      "name": "BatimentExiste",
+      "gate": "lowAL"
+    },
+    {
+      "call": "0x46c190",
+      "target": "0x41c4ac",
+      "name": "PlaceBatiment"
+    },
+    {
+      "call": "0x46c197",
+      "target": "0x41a5b8",
+      "name": "BatimentEstHabiter",
+      "gate": "lowAL"
+    },
+    {
+      "call": "0x46c1a2",
+      "target": "0x41cc70",
+      "name": "BatimentHabitable",
+      "conditional": true
+    },
+    {
+      "call": "0x46c1b1",
+      "target": "0x419e97",
+      "name": "BatimentModifyMap",
+      "EDX": 1
+    }
+  ],
+  "providers": [
+    {
+      "path": "ferramentas/colocacao_estruturas.py",
+      "sha256": "bfc0c6df3cc634e363f5834ca4a76122811b15d092a95948240715ed7124c60f"
+    },
+    {
+      "path": "pesquisas-paralelas/economia/construcoes_habitaveis.py",
+      "sha256": "f993edfa78a8b35207f2867d55a0736487971b7032c1a68884bb1abf1dd8168d"
+    }
+  ],
+  "pending_provider": "Core Stage15 BatimentModifyMap: wait for committed main SHA and its exact public contract; no live-sibling imports",
+  "scope": "L8 structure traversal after the integrated unit/capacity prefix. Native whole-state validation and original-only captures require a coordinator heavy grant. No full MissionLoad, natural remap, frame or mission runtime claim."
+}
