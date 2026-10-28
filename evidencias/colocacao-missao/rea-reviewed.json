@@ -1,0 +1,231 @@
+{
+  "kind": "Reviewed REA excerpt; not complete Evidence bundle",
+  "rea_source_revision": "b9a8f8e9f25feb9cc97bf4960748f2bdf8c898bc",
+  "provider": "Ghidra 12.2 private read-only copy",
+  "original_oracle_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "normalized_analysis_sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "source_evidence_id": "ev_e1057c178a390bb1d4850d5c19fd20860568194665bd8c48896fa5da28b5613a",
+  "source_record_sha256": "4446a5e409a7656f96a2bb842e5b3af36222b7e011fb3159f5b72f718a7cdc67",
+  "analysis_profile_digest": "33da723a26733dd8b59046612d0c42bf95bb1b59c46a63f17b127521af169a3d",
+  "reviewed_result": {
+    "procedure": {
+      "address": "0x456fa6",
+      "name": "OriginaisSBL::PlaceEngin",
+      "symbol": {
+        "primary": true,
+        "dynamic": false,
+        "external": false,
+        "type": "function",
+        "source": "user_defined"
+      },
+      "classification": {
+        "external": false,
+        "thunk": false,
+        "thunk_target": null,
+        "provenance": "ghidra-function-manager"
+      },
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x456fa6",
+            "end": "0x457057"
+          }
+        ],
+        "total_bytes": 178,
+        "span_bytes": 178,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "signature": "undefined __stdcall PlaceEngin(void)",
+      "locals": []
+    },
+    "pseudocode": "\nvoid OriginaisSBL::PlaceEngin(void)\n\n{\n  uint in_EAX;\n  int extraout_ECX;\n  int extraout_ECX_00;\n  UnidadeParcial *extraout_ECX_01;\n  UnidadeParcial *pUVar1;\n  \n  SetEnginCollision(tabela_unidades);\n  *(undefined1 *)(extraout_ECX + 0x72 + (in_EAX & 0xffff) * 0x114) = 1;\n  pUVar1 = tabela_unidades + (in_EAX & 0xffff);\n  if ((pUVar1->proprietario_id != 200) && (pUVar1->proprietario_id != 4)) {\n    DecouvreTerrain(pUVar1,(uint)(ushort)((ushort)(byte)pUVar1->field_0xf5 + pUVar1->raio_visao + 2)\n                   );\n    IllumineTerrain(extraout_ECX_00,\n                    (uint)(ushort)((ushort)*(byte *)(extraout_ECX_00 + 0xbb) +\n                                  (ushort)*(byte *)(extraout_ECX_00 + 0xf5)));\n    pUVar1 = extraout_ECX_01;\n  }\n  SetMiniMap(pUVar1,4);\n  return;\n}\n\n",
+    "assembly": [
+      "0x456fa6: PUSH EBX",
+      "0x456fa7: PUSH ECX",
+      "0x456fa8: PUSH EDX",
+      "0x456fa9: PUSH ESI",
+      "0x456faa: PUSH EDI",
+      "0x456fab: AND EAX, 0xffff",
+      "0x456fb0: MOV ECX, EAX",
+      "0x456fb2: SHL ECX, 0x4",
+      "0x456fb5: ADD ECX, EAX",
+      "0x456fb7: SHL ECX, 0x2",
+      "0x456fba: LEA EBX, [EAX + ECX*0x1]",
+      "0x456fbd: MOV ECX, dword ptr [0x004e19a0]",
+      "0x456fc3: SHL EBX, 0x2",
+      "0x456fc6: MOV DX, word ptr [ECX + EBX*0x1 + 0x8]",
+      "0x456fcb: AND EDX, 0xffff",
+      "0x456fd1: CALL 0x00442cb4",
+      "0x456fd6: MOV byte ptr [ECX + EBX*0x1 + 0x72], 0x1",
+      "0x456fdb: MOV ECX, dword ptr [0x004e19a0]",
+      "0x456fe1: ADD ECX, EBX",
+      "0x456fe3: XOR EBX, EBX",
+      "0x456fe5: MOV BL, byte ptr [ECX]",
+      "0x456fe7: MOV DI, word ptr [ECX + 0x8]",
+      "0x456feb: CMP EBX, 0xc8",
+      "0x456ff1: JZ 0x00457040",
+      "0x456ff3: CMP EBX, 0x4",
+      "0x456ff6: JZ 0x00457040",
+      "0x456ff8: XOR AH, AH",
+      "0x456ffa: MOV AL, byte ptr [ECX + 0xbb]",
+      "0x457000: MOV EDX, EAX",
+      "0x457002: ADD EDX, 0x2",
+      "0x457005: MOV AL, byte ptr [ECX + 0xf5]",
+      "0x45700b: XOR ESI, ESI",
+      "0x45700d: ADD EAX, EDX",
+      "0x45700f: XOR EDX, EDX",
+      "0x457011: MOV SI, DI",
+      "0x457014: MOV DX, AX",
+      "0x457017: MOV EAX, ESI",
+      "0x457019: CALL 0x00476851",
+      "0x45701e: XOR EBX, EBX",
+      "0x457020: XOR DH, DH",
+      "0x457022: XOR AH, AH",
+      "0x457024: MOV DL, byte ptr [ECX + 0xf5]",
+      "0x45702a: MOV AL, byte ptr [ECX + 0xbb]",
+      "0x457030: ADD EAX, EDX",
+      "0x457032: XOR EDX, EDX",
+      "0x457034: MOV BL, byte ptr [ECX]",
+      "0x457036: MOV DX, AX",
+      "0x457039: MOV EAX, ESI",
+      "0x45703b: CALL 0x00476cb3",
+      "0x457040: MOV EDX, 0x4",
+      "0x457045: XOR EBX, EBX",
+      "0x457047: XOR EAX, EAX",
+      "0x457049: MOV BX, DI",
+      "0x45704c: MOV AL, byte ptr [ECX]",
+      "0x45704e: CALL 0x0046a388",
+      "0x457053: JMP 0x00440d58"
+    ],
+    "callees": [
+      {
+        "address": "0x442cb4",
+        "name": "OriginaisSBL::SetEnginCollision",
+        "symbol": {
+          "primary": true,
+          "dynamic": false,
+          "external": false,
+          "type": "function",
+          "source": "user_defined"
+        },
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x442cb4",
+              "end": "0x442e40"
+            }
+          ],
+          "total_bytes": 397,
+          "span_bytes": 397,
+          "non_contiguous": false,
+          "contains_entry": true
+        }
+      },
+      {
+        "address": "0x46a388",
+        "name": "OriginaisSBL::SetMiniMap",
+        "symbol": {
+          "primary": true,
+          "dynamic": false,
+          "external": false,
+          "type": "function",
+          "source": "user_defined"
+        },
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x46a388",
+              "end": "0x46a70b"
+            }
+          ],
+          "total_bytes": 900,
+          "span_bytes": 900,
+          "non_contiguous": false,
+          "contains_entry": true
+        }
+      },
+      {
+        "address": "0x476851",
+        "name": "OriginaisSBL::DecouvreTerrain",
+        "symbol": {
+          "primary": true,
+          "dynamic": false,
+          "external": false,
+          "type": "function",
+          "source": "user_defined"
+        },
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x476851",
+              "end": "0x476939"
+            }
+          ],
+          "total_bytes": 233,
+          "span_bytes": 233,
+          "non_contiguous": false,
+          "contains_entry": true
+        }
+      },
+      {
+        "address": "0x476cb3",
+        "name": "OriginaisSBL::IllumineTerrain",
+        "symbol": {
+          "primary": true,
+          "dynamic": false,
+          "external": false,
+          "type": "function",
+          "source": "user_defined"
+        },
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x476cb3",
+              "end": "0x476e81"
+            }
+          ],
+          "total_bytes": 463,
+          "span_bytes": 463,
+          "non_contiguous": false,
+          "contains_entry": true
+        }
+      }
+    ]
+  },
+  "review": "Ghidra loses AX input and native register preservation. Original bytes fix current-cell reload, collision then +72, neutral-owner bypass and shared epilogue. No state/order/search stores occur in this body."
+}

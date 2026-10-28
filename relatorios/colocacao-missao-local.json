@@ -1,0 +1,32 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 15,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_colocacao_missao.DiferencialColocacaoMissao.test_factored_production_entry_all_types_owners_and_edge_indices",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_missao.DiferencialColocacaoMissao.test_geometry_quad_footprints_and_unsaturated_vision_with_native_resumes",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_missao.DiferencialColocacaoMissao.test_large_vision_keeps_partial_effects_at_each_original_caller",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_missao.DiferencialColocacaoMissao.test_mission_all_types_owners_edge_indices_and_every_state",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_colocacao_missao.DiferencialColocacaoMissao.test_predicates_all_bytes_edge_indices_full_pool_and_preserved_edx",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "scope": "Physical mission PlaceEngin, raw predicates and shared-tail SetSortEngin regression; no mission wrapper."
+}
