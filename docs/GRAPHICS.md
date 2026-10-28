@@ -185,6 +185,7 @@ This inventory distinguishes reconstructed behavior, captured original behavior,
 | Projectile display inputs/rendering | The 100-record selection/sort, cell queries and public `AffProjectile` mapper/compositor are reconstructed; eight bounded complete sprite scenes use the public renderer | Integrate the consumer and physical producers; preserve explicit catalog limits and raw phase semantics |
 | Projectile/effect lighting | `CalculEclairage`, clipping-enabled mask remap and public projectile consumers are independently validated | Recover remaining palette effects and their lifecycle separately |
 | Scene traversal/projection | Complete interior `AffSprite` planning/execution and relative projection are reconstructed; native complete-pass traces and bounded indexed scenes match | Recover margin wraparound/negative origins, `AffGame` projection/cadence and a real-mission consumer |
+| Terrain block cache | Complete bounded `GetNumBob` resolution/cache replacement and raw-block masks are reconstructed with explicit snapshots/table | Recover complete `AffTerrain` traversal/block drawing and verified cache initialization/lifecycle |
 | Visibility, palette and clocks | Indexed composition/shadow helpers and clock prefix are reconstructed; visibility bytes are explicit runtime inputs | Connect validated world providers and original frame cadence |
 | Real-mission consumer | V6 reads all serialized mission-1 object codes; the preview uses older pinned snapshots | Coordinate complete world loading/remapping, dynamic render state, input, effects and original-reference runtime scenes |
 
@@ -364,6 +365,29 @@ Focused matrices cover all task/phase/direction/camera/mode/+BD bytes, Bag bound
 
 ```sh
 python3 -B pesquisas-paralelas/graficos-animacao/validar_trabalho_grafico.py
+python3 -B scripts/check.py --domain graphics
+```
+
+## Terrain block cache — fourteenth continuation stage
+
+`cache_terreno.py:CacheTerreno(registros, blocos_crus, *, proximo_u16)` owns mutable copies of an explicit **1,024-byte key table**, **270,336 raw block bytes** (256×1056) and a replacement cursor in 0–255. There are no startup defaults. Each key is source u16, lighting-mask u8, discovery-mask u8; each block has 32 rows of one header plus 32 indexed pixels. `pixels(slot_u8)` reads the 1,024 pixel bytes, matching the raw block consumer's row layout. Arbitrary initial payload/header bytes remain unchanged until replacement; their contents are supplied snapshots, not original mission initialization.
+
+`resolver_bloco_terreno(catalog, cache, *, id_terreno_u16, descoberta_u8, iluminacao_u8, tabela_sombra)` returns engine ID/branch/slot metadata and mutates only the explicit graphics cache on a miss. The two flag bytes must already be selected for the current camera/cell. Discovery **mask `0x10`** set returns blank ID1081 immediately; this differs from the sprite selector's mask31 predicate. Otherwise discovery mask is the low nibble; lighting mask is15 when `(lighting & 0x10)!=0`, else its low nibble. If both effective masks are0, return the raw source word without lookup/mutation. This direct query path can return0/FFFF; it does not prove a drawable asset exists.
+
+Other paths search all256 keys in increasing slot order. The first exact match returns1090+slot without changing cursor, keys or pixels; duplicate precedence and reuse across cells/camera-flag high bits are preserved. On a miss, the supported copy-source domain is static IDs1–1081, each independently verified as a32×32,1056-byte full-literal block. Preflight rejects unsupported miss sources before effects; it does not emulate arbitrary native overreads/partial failures outside that domain. Hits can reuse an explicit key for other raw words without source lookup, as the original does. Invalid scalar widths/buffer sizes raise `ValueError`, missing required inputs `TypeError`, unsupported miss sources/shapes `NotImplementedError`.
+
+Visible miss order is key source word → lighting byte → discovery byte → cursor advance modulo256 → copy all1056 source bytes → shadow-mask remap of destination indices → literal fog-mask copy. Both masks use original IDs1081–1089: nibble0 means no mask;1/2/3/4/6/8/9/12 map to1085/1084/1088/1083/1087/1082/1089/1086; other nonzero nibbles use1081. Lighting uses opacity only; fog copies literal colors, including the full blank block's palette index2. Row headers are preserved. No cache key includes the shadow table: changing that table does **not** invalidate a hit or recompute its existing pixels. No palette lifecycle rule is invented.
+
+Original evidence: unchanged executable identity; `GetNumBob 0x40FD95..0x410085` hash `e23998884a96474e07358cacba6c6aeb2afc618b39620068504deb32c4e4a76b`; block copy/mask helpers `0x45C779..0x45C8DF` hash `31ba5b7b0943018d64fb2dda515ab99eb9cec233d8d8ffe1070c2aacb4037bca`. Capacity word `0x495BC4` is256; key pointer/cursor at`0x49A050/0x49A04E`; native EAX source word, EDX cell word, camera byte`0x508041`, discovery/lighting pointer arrays`0x507D78/0x507D88`. Cached engine IDs1090–1345. [Exact bytes and unchanged predecessors](../pesquisas-paralelas/graficos-animacao/evidencias/cache-terreno.json).
+
+Fresh validator: **8,524 complete original calls / 104,519,504 observed instructions**, including two bank-loading calls and **8,522 full key-table/raw-block/pixel comparisons**. Native branch counts:770 undiscovered,40 direct,711 hits,7,001 misses. Every query reaches`0x3000000`, ESP`0x2008004`, preserving callee-saved registers, all visibility maps, pointer table, capacity and cache-buffer guards. Zero stops, expected/unexpected faults, limits or skips. No query or rendering primitive is substituted. Bank IO/allocation is substituted; cached payload pointers are bound in emulated RAM to a guarded, explicitly synthetic contiguous snapshot, retaining the original32×32/1056 descriptors. This is a fixture binding, not cache initialization recovered from the game. [Native report](../pesquisas-paralelas/graficos-animacao/validacao/x86-cache-terreno.json).
+
+Coverage includes all low-five-bit flag pairs, every flag byte in additional combinations, all1081 verified sources, all256 mask pairs for seven sources under real60%/identity/synthetic shadow tables, cursor255 wrap, duplicate/raw-word hits, and eviction/recompute after table changes. Cell0/FFFF/8000/1234 and cameras0/3 exercise selected maps. [Native mask grid](../pesquisas-paralelas/graficos-animacao/artefatos/cache-terreno-mascaras.png) shows source300, discovery nibble across columns and lighting nibble down rows, with the explicit real shadow table.
+
+The [focused REA review](../pesquisas-paralelas/graficos-animacao/evidencias/rea-cache-terreno-review.json) retains the existing French symbol/summary and cursor-division instruction at`0x40FF39`, pinned source and separate normalized/intact PE identities. Inferred Watcom signatures and existing annotations remain fallible; original instructions and independent state comparisons are authoritative. Session exported/closed. Seven new regressions pass; graphics domain **169 tests**, zero skips and valid links. Complete terrain traversal, cache startup/invalidation, world remapping, palette lifecycle and real-mission rendering remain open. No callbacks/RNG/clock or world terrain changes occur here.
+
+```sh
+python3 -B pesquisas-paralelas/graficos-animacao/validar_cache_terreno.py
 python3 -B scripts/check.py --domain graphics
 ```
 
