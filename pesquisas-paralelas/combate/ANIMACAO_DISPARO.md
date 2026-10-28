@@ -24,7 +24,7 @@ simula voos de projéteis; comunica efeitos externos por chamadas explícitas.
 | `0x46e208` / `0x46e049` | `ProjectileSet` / `ProjectileLineaire` | Preparação original de um slot livre no ensaio adicional |
 | `0x450874` | `InfligeDegat` | Fronteira de dano; sem nova tradução aritmética |
 
-O [manifesto](evidencias/manifesto.json) tem 69 intervalos, SHA-256 original,
+O [manifesto](evidencias/manifesto.json) tem 81 intervalos, SHA-256 original,
 constantes e tabelas de despacho. Os offsets de saída e deslocamento do corpo
 estão em [dados-disparo.json](evidencias/dados-disparo.json), extraídos do EXE
 original por [extrair_evidencias.py](extrair_evidencias.py). Os testes conferem
@@ -159,8 +159,8 @@ fica com o backend de som. Não há chamada Win32/DirectSound pela implementaç�
 ## Validação e limites
 
 Esta etapa acrescenta **19 testes** (cinco de contrato e 14 diferenciais) e
-**7.066 execuções x86 delimitadas**. A suíte completa tem **67 testes aprovados,
-170.295 execuções, zero falhas/erros/ignorados**, registrados em
+**7.066 execuções x86 delimitadas**. A suíte completa tem **78 testes aprovados,
+182.491 execuções, zero falhas/erros/ignorados**, registrados em
 [validacao-emulada.json](validacao-emulada.json).
 
 | Conferência nova | Execuções |
@@ -186,8 +186,9 @@ atualizações; a recarga avança separadamente, sem inferir duração em segund
 
 Nos testes de emissão, o x86 executa `ProjectileInit` com pool cheio; um teste
 adicional oferece slot livre e executa `ProjectileSet`/`ProjectileLineaire`,
-verificando a criação do registro. A tradução Python valida a **solicitação de
-emissão**, não todo o conteúdo/voo desse registro. Retornos de pool cheio não
+verificando a criação do registro. A tradução Python desta etapa valida a **solicitação de emissão**. A etapa
+seguinte, [PROJETEIS.md](PROJETEIS.md), compara todo o pool e o incremento linear,
+sem alegar o voo completo desse registro. Retornos de pool cheio não
 mudam a decisão de controle posterior nessa rotina.
 
 No corpo a corpo, a referência executa `InfligeDegat` e as consultas originais
@@ -222,10 +223,10 @@ qualquer adaptação ao contexto geral fica para o chat principal. A lista de
 chamadas é cumulativa: pode ser limpa entre passos para inspecionar cada tick.
 
 Reprodução: `python3 -B validar.py --emular`, com JIT do Unicorn permitido.
-Sem JIT, `python3 -B validar.py` executa 22 contratos e ignora explicitamente
-45 diferenciais. Nenhuma etapa inicia o jogo.
+Sem JIT, `python3 -B validar.py` executa 26 contratos e ignora explicitamente
+52 diferenciais. Nenhuma etapa inicia o jogo.
 
 A inicialização de +8b/+7a/+79 e o rastreio de fases 2/3 estão em
-[INICIALIZACAO_ATAQUE.md](INICIALIZACAO_ATAQUE.md). Próximos passos: reconstruir
-o pool/voo/impacto de projéteis como backend separado e validar
-magias válidas. Som e `AnimBallonStatic` permanecem efeitos delegados.
+[INICIALIZACAO_ATAQUE.md](INICIALIZACAO_ATAQUE.md). Pool e preparo linear foram ampliados em [PROJETEIS.md](PROJETEIS.md).
+Próximos passos: reconstruir o voo/impacto completo como backend separado
+e validar magias válidas. Som e `AnimBallonStatic` permanecem efeitos delegados.

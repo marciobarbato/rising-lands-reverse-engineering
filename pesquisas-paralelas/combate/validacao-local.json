@@ -1,6 +1,6 @@
 {
   "sucesso": true,
-  "testes": 67,
+  "testes": 78,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -182,6 +182,34 @@
     },
     {
       "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_pos_carga_missao_fases_2_3_preservadas",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_cadeia_ataque_emissao_pool_e_ultimo_slot",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_incremento_bruto_wrap_e_sinal_erro",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_init_todos_tipos_posicoes_e_pool_cheio",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_linha_limites_assinados_e_aleatorios",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_reset_existe_livre_todas_posicoes",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_set_todos_tipos_flags_offsets_registro_inteiro",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_trajetos_completos_quadrantes_diagonal_e_empate",
       "motivo": "Opcional: RISING_EMULAR=1"
     }
   ],
@@ -455,6 +483,50 @@
     {
       "teste": "test_inicializacao_ataque.DiferencialInicializacao.test_pos_carga_missao_fases_2_3_preservadas",
       "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.ContratosProjeteis.test_efeitos_exigem_backend_e_preservam_ordem",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.ContratosProjeteis.test_passo_independe_de_atividade_e_campo04",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.ContratosProjeteis.test_pool_cheio_reset_e_reuso",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.ContratosProjeteis.test_zero_distancia_e_limites_da_api",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_cadeia_ataque_emissao_pool_e_ultimo_slot",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_incremento_bruto_wrap_e_sinal_erro",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_init_todos_tipos_posicoes_e_pool_cheio",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_linha_limites_assinados_e_aleatorios",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_reset_existe_livre_todas_posicoes",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_set_todos_tipos_flags_offsets_registro_inteiro",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_projeteis.DiferencialProjeteis.test_trajetos_completos_quadrantes_diagonal_e_empate",
+      "execucoes_x86_delimitadas": 0
     }
   ],
   "limites": {
@@ -486,6 +558,19 @@
     ],
     "comparacao": "276 bytes, quatro globais de busca e observação das escritas em +79/+7a/+8a/+8b.",
     "limites": "FileRead não executado; seus pedidos são comparados em checkpoints. Tipos 26..255 só testam o comportamento fora do domínio de tipos válidos."
+  },
+  "projeteis": {
+    "rotinas": [
+      "0x46e00a",
+      "0x46e02c",
+      "0x46e422",
+      "0x46e44c",
+      "0x46e208",
+      "0x46e049",
+      "0x46e4ca"
+    ],
+    "comparacao": "5600 bytes do pool e ordem/argumentos dos efeitos; tipos 0..255; trajetórias e overflow de palavras.",
+    "limites": "Dano com grade vazia; descoberta/iluminação com dimensões zero e raio 0..10, sem células visitadas. Não valida impacto, ProjectileAvance ou renderização."
   },
   "diagnosticos": []
 }

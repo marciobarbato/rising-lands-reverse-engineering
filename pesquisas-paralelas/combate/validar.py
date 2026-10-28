@@ -33,9 +33,10 @@ def main():
     from test_mira_angular import ContratosMira, DiferencialMira
     from test_animacao_disparo import ContratosAnimacao, DiferencialAnimacao
     from test_inicializacao_ataque import ContratosInicializacao, DiferencialInicializacao
+    from test_projeteis import ContratosProjeteis, DiferencialProjeteis
     suite = unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromTestCase(c)
         for c in (Contratos, Diferencial, ContratosMira, DiferencialMira, ContratosAnimacao, DiferencialAnimacao,
-                  ContratosInicializacao, DiferencialInicializacao))
+                  ContratosInicializacao, DiferencialInicializacao, ContratosProjeteis, DiferencialProjeteis))
     r = unittest.TextTestRunner(verbosity=2, resultclass=Resultado).run(suite)
     saida = Path(__file__).resolve().parent / ('validacao-emulada.json' if args.emular else 'validacao-local.json')
     relatorio = dict(sucesso=r.wasSuccessful(), testes=r.testsRun, falhas=len(r.failures),
@@ -56,6 +57,10 @@ def main():
             trechos_pos_carga=['0x46ad8b..0x46b019', '0x46b08f..0x46b0e3'],
             comparacao='276 bytes, quatro globais de busca e observação das escritas em +79/+7a/+8a/+8b.',
             limites='FileRead não executado; seus pedidos são comparados em checkpoints. Tipos 26..255 só testam o comportamento fora do domínio de tipos válidos.'),
+        projeteis=dict(rotinas=['0x46e00a', '0x46e02c', '0x46e422', '0x46e44c',
+                '0x46e208', '0x46e049', '0x46e4ca'],
+            comparacao='5600 bytes do pool e ordem/argumentos dos efeitos; tipos 0..255; trajetórias e overflow de palavras.',
+            limites='Dano com grade vazia; descoberta/iluminação com dimensões zero e raio 0..10, sem células visitadas. Não valida impacto, ProjectileAvance ou renderização.'),
         diagnosticos=[dict(teste=t.id(), detalhe=e) for t, e in [*r.failures, *r.errors]])
     saida.write_text(json.dumps(relatorio, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(f'Relatório: {saida}\nExecuções x86 delimitadas: {relatorio["execucoes_x86_delimitadas"]}')

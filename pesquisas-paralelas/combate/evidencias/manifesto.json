@@ -303,6 +303,90 @@
       "arquivo": "0046e049.asm"
     },
     {
+      "nome": "ProjectileReset",
+      "inicio": "0x0046e00a",
+      "fim_exclusivo": "0x0046e02c",
+      "sha256_bytes": "9941723e3ce90cbe1637fc3ade4844c9e099c2179e128d3d0a67f1aa264e1e71",
+      "arquivo": "0046e00a.asm"
+    },
+    {
+      "nome": "ProjectileExiste",
+      "inicio": "0x0046e02c",
+      "fim_exclusivo": "0x0046e049",
+      "sha256_bytes": "8d2e558f7392da571bccb2ce26df38a47a5d6121c78044cffa86db9a1eff2f4f",
+      "arquivo": "0046e02c.asm"
+    },
+    {
+      "nome": "ProjectileGetLibre",
+      "inicio": "0x0046e422",
+      "fim_exclusivo": "0x0046e44c",
+      "sha256_bytes": "f0048b811721fb2684fc910e5087ba94d0661fd0f7c196f0b41e8e19346d5147",
+      "arquivo": "0046e422.asm"
+    },
+    {
+      "nome": "ProjectileCalculLineaire",
+      "inicio": "0x0046e4ca",
+      "fim_exclusivo": "0x0046e52c",
+      "sha256_bytes": "d6d1de87d0257954796afa26d2dcf825df8fbd8c20c316410cb61cfbc2b987ac",
+      "arquivo": "0046e4ca.asm"
+    },
+    {
+      "nome": "ProjectileAlloc",
+      "inicio": "0x0046dfa0",
+      "fim_exclusivo": "0x0046dfb0",
+      "sha256_bytes": "16e8e3c2a6770008649d38b9c8b5b1384a7aa7199887fdceb472673a03e3a9c8",
+      "arquivo": "0046dfa0.asm"
+    },
+    {
+      "nome": "LoadProjectile",
+      "inicio": "0x0046dfba",
+      "fim_exclusivo": "0x0046dfe2",
+      "sha256_bytes": "5d07e87a24081bfc470302bf8930c8bbf5c566c2620048b04613d7541466c3d7",
+      "arquivo": "0046dfba.asm"
+    },
+    {
+      "nome": "SaveProjectile",
+      "inicio": "0x0046dfe2",
+      "fim_exclusivo": "0x0046e00a",
+      "sha256_bytes": "3e827366dd2fbba926a8939a462e2fd047c5fab5534e81d0a2198374f5b13db0",
+      "arquivo": "0046dfe2.asm"
+    },
+    {
+      "nome": "SortilegeGetRayonEffet",
+      "inicio": "0x00474734",
+      "fim_exclusivo": "0x0047474f",
+      "sha256_bytes": "aaca628ffbcb35fd5e5d326a6f8d31fa4e93214f3eab98ba1d41811e1c4497f1",
+      "arquivo": "00474734.asm"
+    },
+    {
+      "nome": "DecouvreTerrain",
+      "inicio": "0x00476851",
+      "fim_exclusivo": "0x0047693a",
+      "sha256_bytes": "6087dba50a99a69f556c7faaaa8f5ad6ea62f9736913ca4c6a905db001fee3bf",
+      "arquivo": "00476851.asm"
+    },
+    {
+      "nome": "IllumineTerrain",
+      "inicio": "0x00476cb3",
+      "fim_exclusivo": "0x00476e82",
+      "sha256_bytes": "da33ff49f67ac8bc8966b7c15bfed3470f1a6864b0a6aeccb8f56e1c9147c377",
+      "arquivo": "00476cb3.asm"
+    },
+    {
+      "nome": "ProjectileAvance_contador_e_passo",
+      "inicio": "0x0046ef66",
+      "fim_exclusivo": "0x0046f07c",
+      "sha256_bytes": "18e044fcbf3cb78d44a376d6a9f1ae99aeb1595824a00e22dfe5d9f192a1c0af",
+      "arquivo": "0046ef66.asm"
+    },
+    {
+      "nome": "ProjectileCalcul",
+      "inicio": "0x0046fc0f",
+      "fim_exclusivo": "0x0046fc8b",
+      "sha256_bytes": "7d11144f37fb71165d0dc916b1a9a4b1b530649dbc6d0903574a4211e22e29a9",
+      "arquivo": "0046fc0f.asm"
+    },
+    {
       "nome": "TypeEnginGetSortieProjectile",
       "inicio": "0x004511a5",
       "fim_exclusivo": "0x004513c7",
@@ -584,5 +668,44 @@
     "0x00457b09",
     "0x00457b66",
     "0x00457727"
-  ]
+  ],
+  "despacho_projeteis": {
+    "endereco": "0x0046e184",
+    "primeiro_tipo": 1,
+    "destinos": [
+      "0x0046e38d",
+      "0x0046e39d",
+      "0x0046e3a3",
+      "0x0046e3a9",
+      "0x0046e343",
+      "0x0046e41a",
+      "0x0046e41a",
+      "0x0046e41a",
+      "0x0046e2fb",
+      "0x0046e31f",
+      "0x0046e31f",
+      "0x0046e31f",
+      "0x0046e339",
+      "0x0046e41a",
+      "0x0046e2e5",
+      "0x0046e2e5",
+      "0x0046e34b",
+      "0x0046e41a",
+      "0x0046e41a",
+      "0x0046e369",
+      "0x0046e369",
+      "0x0046e369",
+      "0x0046e369",
+      "0x0046e41a",
+      "0x0046e41a",
+      "0x0046e3fb",
+      "0x0046e41a",
+      "0x0046e3bf",
+      "0x0046e3b2",
+      "0x0046e3b2",
+      "0x0046e41a",
+      "0x0046e41a",
+      "0x0046e41a"
+    ]
+  }
 }

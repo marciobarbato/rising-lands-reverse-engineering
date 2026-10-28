@@ -3,13 +3,13 @@
 A entrega está isolada nesta pasta. O escopo autorizado do commit é somente
 esta pasta, no branch `main`, preservando as alterações dos chats paralelos.
 Arquivos originais foram somente lidos.
-A versão validada tem **67 testes aprovados e 170.295 execuções x86 delimitadas**;
+A versão validada tem **78 testes aprovados e 182.491 execuções x86 delimitadas**;
 ver [relatório](validacao-emulada.json) e [pesquisa técnica](README.md).
 
 ## Contrato de dados
 
 Importar `alvos_alcance.py`, `mira_angular.py`, `animacao_disparo.py` e
-`inicializacao_ataque.py` como módulos separados. Nenhum depende de `movimento`,
+`inicializacao_ataque.py` e `projeteis.py` como módulos separados. Nenhum depende de `movimento`,
 `combate`, economia ou tarefas; usam biblioteca padrão, dados extraídos e consultas locais.
 
 - `unidades`: sequência de 800 registros `bytes`/`bytearray`, cada um com 276 bytes.
@@ -105,8 +105,36 @@ cabe ao backend aplicar os efeitos externos, que podem modificar o registro.
 Não acrescentar transições automáticas para +8a=2/3: esse corpo não as escreve.
 O subestado 3 também não limpa o próprio +8a. O quadro +7a, o decremento u8 de
 +8b e os casos de emissão especial estão em [ANIMACAO_DISPARO.md](ANIMACAO_DISPARO.md).
-O pool e o dano não foram reimplementados; os testes nativos exercitam seus
-ramos declarados e conferem os argumentos. Movimento/áudio/balão param na entrada.
+O pool agora tem uma implementação separada, descrita abaixo. Dano continua
+externo; os testes nativos exercitam seus ramos declarados e conferem os
+argumentos. Movimento/áudio/balão param na entrada.
+
+## Pool de projéteis
+
+`PoolProjeteis(memoria, efeito_externo, raio_magia)` recebe os 5.600 bytes
+mutáveis de 100 registros. Não zerar registros automaticamente ao carregar ou
+reusar posições: `resetar` limpa somente +02; `definir` preserva campos sem
+escrita no ramo selecionado. `livre` retorna 100 se não houver espaço.
+
+O pedido existente `ProjectileInit` encaixa diretamente em
+`pool.iniciar(*argumentos)`. A API retorna índice ou 100 por conveniência;
+isso não modela o valor de EAX após o Set nativo. Se o pool estiver cheio,
+não transformar a ausência de projétil em cancelamento do ciclo de ataque.
+A cadeia foi comparada com o x86 apenas no teste, sem registrar um backend
+na aplicação principal.
+
+Fornecer `efeito_externo(nome, argumentos)` para `InfligeDegat`,
+`DecouvreTerrain` e `IllumineTerrain`, e `raio_magia(id)` para
+`SortilegeGetRayonEffet`. Dano do tipo 26 acontece já na inicialização; não
+aplicá-lo de novo por considerar todo efeito um projétil em voo. O tipo 28 usa
+o byte baixo do atacante como terceiro argumento de visibilidade, consulta
+o raio duas vezes e conserva a ordem descrita em [PROJETEIS.md](PROJETEIS.md).
+
+`preparar_linha(registro)` e `calcular_linha(registro)` operam em uma view
+mutável de 56 bytes. A segunda avança no máximo um passo e não desativa o
+registro ao terminar. Não equivale ao tick completo: faltam a animação, o
+despacho `ProjectileCalcul`, `ProjectileAvance`, colisão e impacto. O campo
++04 é um limiar de contador no consumidor examinado, não velocidade confirmada.
 
 ## Inicialização e persistência dos campos
 
@@ -146,8 +174,8 @@ independentes; nenhuma adaptação ao mundo compartilhado foi aplicada.
 ## Reproduzir a conferência sem afetar o trabalho dos outros chats
 
 Nesta pasta, executar `python3 -B validar.py --emular` com Unicorn e JIT
-permitido. Sem JIT, `python3 -B validar.py` executa 22 testes de contrato
-e marca 45 diferenciais como ignorados. Os relatórios ficam aqui.
+permitido. Sem JIT, `python3 -B validar.py` executa 26 testes de contrato
+e marca 52 diferenciais como ignorados. Os relatórios ficam aqui.
 
 O teste antigo de fragmentos de manutenção fornece consultas como entradas;
 o novo teste executa alcance/mira originais em 676 cenários. O teste antigo de
@@ -157,6 +185,6 @@ adjacências, os alcances suportados e a linha executam suas chamadas originais,
 sem substituir funções internas. Construções usam memória sintética 1x1/3x3.
 
 Próximos passos: investigar a origem histórica/externa de +8A=2/3, completar
-a geometria de construções e um backend separado de pool/voo/impacto.
+a geometria de construções e o backend separado de avanço/colisão/impacto.
 A aritmética de dano já existente permanece
 sob o contrato documentado em `documentacao/COMBATE.md`.

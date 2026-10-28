@@ -56,6 +56,18 @@ TRECHOS = {
     'ProjectileInit': (0x46e44c, 0x46e4ca),
     'ProjectileSet': (0x46e208, 0x46e422),
     'ProjectileLineaire': (0x46e049, 0x46e17f),
+    'ProjectileReset': (0x46e00a, 0x46e02c),
+    'ProjectileExiste': (0x46e02c, 0x46e049),
+    'ProjectileGetLibre': (0x46e422, 0x46e44c),
+    'ProjectileCalculLineaire': (0x46e4ca, 0x46e52c),
+    'ProjectileAlloc': (0x46dfa0, 0x46dfb0),
+    'LoadProjectile': (0x46dfba, 0x46dfe2),
+    'SaveProjectile': (0x46dfe2, 0x46e00a),
+    'SortilegeGetRayonEffet': (0x474734, 0x47474f),
+    'DecouvreTerrain': (0x476851, 0x47693a),
+    'IllumineTerrain': (0x476cb3, 0x476e82),
+    'ProjectileAvance_contador_e_passo': (0x46ef66, 0x46f07c),
+    'ProjectileCalcul': (0x46fc0f, 0x46fc8b),
     'TypeEnginGetSortieProjectile': (0x4511a5, 0x4513c7),
     'AffCorpsEnginDecalage': (0x410fcc, 0x4110bf),
     'GiroTorre': (0x4484a7, 0x448599),
@@ -114,6 +126,8 @@ def main():
         manifesto['despachos_ataque'][f'0x{endereco:08x}'] = [f'0x{v:08x}' for v in valores]
     manifesto['despacho_caracteristicas'] = [f'0x{v:08x}' for v in
         struct.unpack_from('<26I', imagem, 0x4572e8 - 0x400000)]
+    manifesto['despacho_projeteis'] = dict(endereco='0x0046e184', primeiro_tipo=1,
+        destinos=[f'0x{v:08x}' for v in struct.unpack_from('<33I', imagem, 0x46e184 - 0x400000)])
     fontes_saidas = {2: (0x496af0, 8), 8: (0x496b10, 8), 18: (0x496b30, 8),
         23: (0x496b50, 8), 24: (0x496b70, 8), 21: (0x496b90, 8),
         22: (0x496bb0, 8), 15: (0x496bd0, 32), 12: (0x496c50, 32)}

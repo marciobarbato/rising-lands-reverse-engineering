@@ -1,6 +1,6 @@
 # Combate: seleção de alvos e condições de ataque
 
-Pesquisa independente, concluída em 27/10/2026. Todos os arquivos novos estão
+Pesquisa independente, ampliada por etapas. Todos os arquivos novos estão
 nesta pasta. Documentos gerais, ferramentas compartilhadas, originais e
 configurações são somente lidos. O usuário autorizou o commit desta pesquisa
 no branch `main`; cada nova etapa permanece restrita a esta pasta.
@@ -18,6 +18,10 @@ não foram duplicados. O novo predicado de arma carregada complementa o avanço.
 | [alvos_alcance.py](alvos_alcance.py) | Traduções independentes; registros brutos de 276 bytes |
 | [mira_angular.py](mira_angular.py) | EnginViseCible e quantização de AngleCalcul em 8/32 setores |
 | [animacao_disparo.py](animacao_disparo.py) | Subestados 0/1/2/3, animação e solicitações de disparo |
+| [projeteis.py](projeteis.py) | Pool de 100 registros, inicialização e incrementos lineares |
+| [PROJETEIS.md](PROJETEIS.md) | Campos, despacho por tipo, efeitos imediatos e limites |
+| [bancada_projeteis.py](bancada_projeteis.py) | Referência x86 com memória e efeitos observados |
+| [test_projeteis.py](test_projeteis.py) | 11 testes novos, 12.196 chamadas originais |
 | [inicializacao_ataque.py](inicializacao_ataque.py) | Características por tipo, inicialização e trechos de pós-carga |
 | [INICIALIZACAO_ATAQUE.md](INICIALIZACAO_ATAQUE.md) | Rastreio de +79/+7A/+8A/+8B e limites da conclusão sobre fases 2/3 |
 | [rastrear_campos.py](rastrear_campos.py) | Auditoria estática e 2.604 registros dos 38 mapas originais |
@@ -31,10 +35,10 @@ não foram duplicados. O novo predicado de arma carregada complementa o avanço.
 | [test_alvos_alcance.py](test_alvos_alcance.py) | Casos de contrato e comparações contra instruções originais |
 | [validar.py](validar.py) | Executa só esta pesquisa e grava JSON nesta pasta |
 | [extrair_evidencias.py](extrair_evidencias.py) | Extração direta de bytes/assembly do EXE original |
-| [evidencias/manifesto.json](evidencias/manifesto.json) | 69 intervalos com limites/hashes, constantes e despachos |
+| [evidencias/manifesto.json](evidencias/manifesto.json) | 81 intervalos com limites/hashes, constantes e despachos |
 | [evidencias/dados-disparo.json](evidencias/dados-disparo.json) | Tabelas extraídas de saída de projétil e deslocamento por tipo |
-| [validacao-local.json](validacao-local.json) | 22 contratos aprovados, 45 diferenciais ignorados explicitamente |
-| [validacao-emulada.json](validacao-emulada.json) | 67 testes aprovados, zero falhas/erros/ignorados, 170.295 chamadas x86 delimitadas |
+| [validacao-local.json](validacao-local.json) | 26 contratos aprovados, 52 diferenciais ignorados explicitamente |
+| [validacao-emulada.json](validacao-emulada.json) | 78 testes aprovados, zero falhas/erros/ignorados, 182.491 chamadas x86 delimitadas |
 | [INTEGRACAO.md](INTEGRACAO.md) | Contratos e sequência de integração para o chat principal |
 
 Executar nesta pasta:
@@ -244,7 +248,7 @@ As traduções e os limites dessa conclusão estão em
 
 ## Testes e limitações
 
-As 170.295 execuções do relatório contam chamadas delimitadas de entrada/trecho,
+As 182.491 execuções do relatório contam chamadas delimitadas de entrada/trecho,
 não cada `CALL` interna. Toda chamada recusa execução fora dos intervalos
 declarados e exige alcançar uma parada. Limites: um segundo por chamada,
 20.000 instruções normalmente, 100.000 na linha e 1.000.000 na seleção.
@@ -262,6 +266,8 @@ A máquina acrescenta outras 7.066 execuções, incluindo emissão e um ciclo
 contínuo de 60 passos, descritos em [ANIMACAO_DISPARO.md](ANIMACAO_DISPARO.md).
 A inicialização e a pós-carga acrescentam 12.178 execuções, descritas em
 [INICIALIZACAO_ATAQUE.md](INICIALIZACAO_ATAQUE.md).
+O pool e a linha acrescentam 12.196 execuções, comparando os 5.600 bytes e
+a cadeia de ataque até a emissão, descritas em [PROJETEIS.md](PROJETEIS.md).
 
 Limites deliberados:
 
@@ -285,6 +291,6 @@ Limites deliberados:
   indefinidos do original. Construções continuam por callbacks explícitos.
 - Os subestados de animação/disparo estão traduzidos, com callbacks obrigatórios
   para efeitos externos e checkpoints antes de movimento, áudio e balão.
-  Pool/voo/impacto de projéteis, som, dano, morte, cadência temporal e tecnologia
-  não foram traduzidos como sistema completo. Não há alegação
+  O pool e o incremento linear estão em `projeteis.py`; voo/impacto completos,
+  som, dano, morte, cadência temporal e tecnologia não foram traduzidos como sistema completo. Não há alegação
   de simulação completa de combate nem confronto com gameplay real.
