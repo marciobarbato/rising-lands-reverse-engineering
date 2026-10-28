@@ -1,0 +1,46 @@
+{
+  "resultado": "PASSOU",
+  "metodo": "IAB real e inspeção dos atlas; comparações de buffers JS/Python na página",
+  "artefatos": [
+    {
+      "caminho": "artefatos/demo-santuario.html",
+      "sha256": "1785d413429ea3d9af18bce8f976a34bed3d902abf0d864bf04d0a5ed075f0c8"
+    },
+    {
+      "caminho": "artefatos/demo-santuario-verificada.png",
+      "sha256": "6ddbc9f7773cabe9acea7f117331017848637b4f6481deac8ea97892ff635df2"
+    },
+    {
+      "caminho": "artefatos/atlas-santuario.png",
+      "sha256": "57b18146c4049d4dd89bd778f1eef046b5f7629f55b2d2813dda72220311fd5d"
+    },
+    {
+      "caminho": "artefatos/terreno-santuario.png",
+      "sha256": "1068bec101f460af7caa68b824d02b7ba5cdf58e750ced0171f2f3002ffe9d67"
+    },
+    {
+      "caminho": "artefatos/santuario-composicao.png",
+      "sha256": "bd42fe195fece709a6539a69b2bb459add4e8876233940d3c515371876fb5cf2"
+    }
+  ],
+  "referencias_python": 15,
+  "planos_python": 48,
+  "quadros_cmp": 73,
+  "casos": [
+    "Jogador 0, iteração 0: IDs 7032,7050,7034,7042,7059,7067,7058",
+    "Jogador 3, iteração 47: IDs 7032,7049,7033,7041,7066,7074,7057",
+    "Passo 47 para 0",
+    "Corpo e terreno desligados; detalhes preservados",
+    "Grade e célula gatilho visíveis",
+    "Jogador 4; reprodução, pausa e reset",
+    "Captura final: jogador 0, iteração 7; relógios 7,3,2"
+  ],
+  "erros_console": [],
+  "servidor": {
+    "endereco": "127.0.0.1:8891",
+    "sessao": 48027,
+    "encerrado": true
+  },
+  "abas_proprias_fechadas": true,
+  "executou_x86": false
+}

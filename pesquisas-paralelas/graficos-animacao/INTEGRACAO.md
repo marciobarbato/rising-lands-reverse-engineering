@@ -1,6 +1,6 @@
 # Contrato para o aplicativo macOS
 
-Consumir uma cópia integral de `entregas/2026-10-28-santuario-v4/`, verificando
+Consumir uma cópia integral de `entregas/2026-10-28-sequenciais-v6/`, verificando
 `MANIFESTO.json`. Não importar a área de trabalho desta frente nem os leitores
 de outras frentes. Esta entrega não modifica `visualizador-mac`.
 
@@ -156,7 +156,8 @@ tratados separadamente; não apresentar esta função como cena completa.
 
 `compor_sombra(destino,w,h,quadro,x,y,tabela,recorte=None)` permite aplicar só
 uma máscara validada. Cores dos literais são ignoradas, inclusive literal zero:
-o índice do fundo seleciona a tabela. Aplicar a sombra **antes** do corpo.
+o índice do fundo seleciona a tabela. Na composição de unidades, aplicar a sombra **antes** do corpo.
+As árvores da v5 têm outra ordem: corpo e depois sombra, repetidos em grupos.
 
 `tabela_sombra(paleta, percentual=..., ciclos=...)` exige o percentual u8 e uma
 sequência de intervalos inclusivos `(início,fim)` excluídos da busca. Índices 5–7
@@ -232,6 +233,135 @@ provocar overflow nas somas. O comparador cobre cinco jogadores e quatro
 recortes, além das fases; não valida efeitos de clipping específicos de outros
 modos de construção. [Continuidade v4](CONTINUIDADE_V4.md) detalha as evidências.
 
+## Objetos do terreno — API v5 independente
+
+`objetos.py` usa somente biblioteca padrão. `consultar_objeto` aceita códigos
+1..22 e 28..52 e devolve `terreno` e `sprites` como listas separadas de camadas.
+Cada camada contém arquivo CMP, ID base 1, índices local/global base 0, sequência,
+fase, operação, ordem, offsets x/y, confiança e evidência. Código sem comparação
+levanta `NotImplementedError`; não recebe uma imagem por semelhança.
+
+```python
+from graficos import Catalogo, png
+from composicao import tabela_sombra
+from objetos import consultar_objeto, compor_passe, avancar_arvore
+
+c = Catalogo()
+plano = consultar_objeto(5, auxiliar_u8=1, descoberta_u8=0, iluminacao_u8=0)
+assert plano['terreno'] == []
+assert [q['id_motor'] for q in plano['sprites']] == [
+    10518, 10546, 10526, 10554, 10522, 10550]
+paleta = c.paleta()
+# Entradas declaradas de inspeção: não representam inicialização global provada.
+sombra = tabela_sombra(paleta, percentual=60, ciclos=())
+indices = compor_passe(c, bytes([82]) * (160*160), 160, 160,
+    plano, 'sprites', 64, 108, tabela_sombra=sombra)
+rgba = b''.join(paleta[v*3:v*3+3] + b'\xff' for v in indices)
+imagem = png(160, 160, rgba)  # bytes para NSData / NSImage(data:)
+
+# Tabela sintética explícita; no consumo real, fornecer os 256 bytes do simulador.
+proximo = avancar_arvore(fase_u8=3, relogio_u32=0,
+    indice_aleatorio_u8=255, tabela_aleatoria=bytes(256))
+assert proximo == {'fase': 0, 'indice': 0, 'consumiu': True}
+```
+
+`x,y` são a origem da célula projetada na superfície. Preservar todos os offsets,
+dimensões e a ordem das camadas. `compor_passe` retorna os bytes indexados;
+`recorte=(l,t,r,b)` é inclusivo. Manter coordenadas no domínio de 16 bits sem
+overflow. Não há alpha preto de sombra: a máscara remapeia o destino pela tabela.
+**Nas árvores, corpo → sombra, repetidos componente a componente.** Não reordenar
+usando a regra sombra → corpo das unidades. A API não determina ordem global
+entre células, objetos, construções e unidades.
+
+| Entrada | Origem / significado |
+|---|---|
+| `codigo` | u8 de objetos em `0x507d74[celula]`; disco ETA em `0x30004+celula` |
+| `auxiliar_u8` | u8 em `0x507dac[celula]`; disco em `0x40004+celula` |
+| `descoberta_u8` | byte na camada apontada por `0x507d78+4*jogador`; descoberto se bits 0..4 são zero |
+| `iluminacao_u8` | byte na camada apontada por `0x507d88+4*jogador`; iluminado se bit 4 é zero |
+| `relogio_u32` | relógio A em `0x508f7c`, na chamada de avanço |
+| `tabela_aleatoria` | 256 bytes em `0x4e1c18`; entrada exigida, sem distribuição presumida |
+| `indice_aleatorio_u8` | cursor compartilhado em `0x4e1d18` |
+
+Árvores 1..11: auxiliar 0..3 seleciona a fase; fora dessa faixa a consulta
+levanta `ValueError`, mesmo se o objeto estiver oculto. Demais códigos aceitos
+ignoram o auxiliar u8 e têm uma camada estática. Sem descoberta, ambos os passes
+ficam vazios. Sem iluminação, o corpo escolhe sequência escura; a sombra mantém
+os IDs. Flags não vêm dos atributos de colisão do ETA e não são opcionais.
+
+`avancar_arvore` não incrementa A nem escolhe valores aleatórios. Se A não é
+múltiplo de quatro, mantém fase/cursor. Se é, consome exatamente um byte e avança
+cursor com overflow; só incrementa fase (módulo quatro) quando o byte lido é
+múltiplo de quatro. Retorna `fase`, `indice`, `consumiu` sem alterar entradas.
+Aceita fase bruta u8 para reproduzir o avanço original; o desenho continua
+restrito a 0..3. Chamá-la somente para 1..11; a ordem por linhas e o cursor entre
+árvores devem ser mantidos pelo consumidor. Inicialização da tabela e taxa de
+chamadas ainda são contratos externos, sem substitutos implícitos.
+
+`ler_objetos_eta(bytes)` aceita ETA V0.3 completo até 0x50004 e retorna hashes
+das camadas e registros não zero com célula, x/y, código, auxiliar, ID de terreno,
+offsets e `mapeado`. Esse último campo identifica somente o código dentro do
+contrato, não garante fase válida nem estado final após pós-processamento.
+No exemplo MONDE01, 470 de 486 registros têm códigos mapeados; 66/67 ficam sem
+associação. O arquivo `artefatos/associacoes-objetos.json` pode ser consumido
+diretamente no bridge Swift. Nomes de classes visuais não são regras econômicas.
+
+## Objetos sequenciais — API v6 independente
+
+`sequenciais.py` amplia a consulta sem alterar a API v5. Para consumir todos os
+51 códigos confirmados, usar `consultar_objeto_v6`. Para 54/66/67/68 isoladamente,
+usar `consultar_sequencial`; ambos retornam listas `terreno` e `sprites`
+compatíveis com `compor_passe` da v5.
+
+```python
+from graficos import Catalogo
+from composicao import tabela_sombra
+from objetos import compor_passe
+from sequenciais import consultar_objeto_v6, ler_objetos_eta_v6, normalizar_inicio
+
+c = Catalogo()
+p = consultar_objeto_v6(67, auxiliar_u8=14, descoberta_u8=0, iluminacao_u8=16)
+assert p['fase'] == 7
+assert [(q['id_motor'], q['operacao']) for q in p['terreno']] == [
+    (10846, 'copiar'), (10846, 'sombra')]
+tab = tabela_sombra(c.paleta(), percentual=60, ciclos=())  # parâmetros do ensaio
+indices = compor_passe(c, bytes([82])*(160*160), 160, 160,
+    p, 'terreno', 64, 108, tabela_sombra=tab)
+# Converter a superfície indexada para RGBA/PNG como nos exemplos anteriores.
+
+# Entrada de disco fornecida pelo consumidor, sem inicializar o jogo.
+dados = c._ler('cd/WORLD/MONDE01.ETA')  # somente no exemplo do corpus local
+registros = ler_objetos_eta_v6(dados)
+assert len(registros['registros']) == 486
+assert all(r['mapeado'] for r in registros['registros'])
+normalizado = normalizar_inicio(dados[0x30004:0x40004], dados[0x40004:0x50004])
+assert normalizado['alteradas'] == []  # MONDE01 já não contém código 54
+```
+
+`codigo`, `auxiliar_u8` e flags têm as mesmas origens da API v5. Códigos 66..68
+exigem auxiliar 0..31: `fase=floor(auxiliar/2)`, ID base 10823/10839/10855.
+Os pares 0/1 até 30/31 são equivalentes. A consulta recusa valores 32..255,
+pois o cálculo bruto atravessa outras sequências. O original não testa essa
+faixa; o limite é deliberado do contrato público. Código 54 ignora qualquer
+auxiliar u8 e usa sempre 10823. O offset é (−4,0) para 54/66 e (0,0) para 67/68.
+Nenhum desses códigos produz camada em `sprites`.
+
+Sem descoberta, nenhuma camada. Sem iluminação, **copiar → sombra**, com o mesmo
+CMP, posição e máscara. Não escolher outro banco/variante escura. A tabela de
+sombra é externa e deve ter 256 bytes. Transparência usa a máscara CMP e o
+recorte é inclusivo; coordenadas sem overflow no domínio original de 16 bits.
+
+Não aplicar `avancar_arvore` a esses quatro códigos. `NextAnimVeget` preserva
+seus campos em 4.096 comparações; o consumidor fornece o auxiliar atualizado
+por sua simulação. Não há temporização, quantidade de recurso ou regra de coleta
+nesta API. Os nomes `classe_visual` são inferências de aparência.
+
+`normalizar_inicio(objetos, auxiliares)` exige duas camadas de 65536 bytes e
+retorna cópias em `objetos`/`auxiliares`, mais os índices `alteradas`. Faz somente
+54 → 66/auxiliar 1, como o laço original em MissionLoad. Não altera entradas nem
+executa todo o carregador. `ler_objetos_eta_v6` mantém leitura de disco e acrescenta
+`catalogo` v5/v6; `mapeado` cobre o código, não garante estado final da missão.
+
 ## Ponte mínima por JSON
 
 ```sh
@@ -268,8 +398,8 @@ os PNGs produzidos pelo adaptador. Não depender da página HTML para obter dado
   `parado/andando`, direção fora de 1..16 e fase fora de 0..7: `ValueError`.
 - A composição de unidades usa jogador 0. A API v4 de Santuário aceita as
   cinco tabelas originais no contrato acima; estados especiais e efeitos
-  permanecem fora das duas APIs.
-- Sombra separada: ID 10784, local OTHERS 3144, posição célula+(2,26)+deslocamento.
+  permanecem fora dessas APIs.
+- Sombra separada das unidades: ID 10784, local OTHERS 3144, posição célula+(2,26)+deslocamento.
   A matriz é produzida por `tabela_sombra` com percentual/ciclos explícitos.
   Não substituir remapeamento de destino por um PNG preto com alpha.
 - Não usar transparência por `pixel == 0`; usar a máscara. Não recentralizar
@@ -279,7 +409,7 @@ os PNGs produzidos pelo adaptador. Não depender da página HTML para obter dado
 - ETA serializado exige recomposição e pós-processamento; exemplos desta entrega
   descrevem o disco. O adaptador não substitui o carregador/simulador completo.
 - Nenhuma rotina de consulta, decodificação ou demonstração depende de x86.
-  Somente `bancada_x86.py`/`validar_x86.py`/`validar_trabalhadores.py`/`validar_composicao.py`/`validar_construcoes.py` dependem de Unicorn para comparação.
+  Somente `bancada_x86.py`/`validar_x86.py`/`validar_trabalhadores.py`/`validar_composicao.py`/`validar_construcoes.py`/`validar_objetos.py`/`validar_sequenciais.py` dependem de Unicorn para comparação.
   `extrair_evidencias.py` depende de Capstone apenas na extração de assembly.
 
 Verificação de consumo: `python3 -B verificar_manifesto.py CAMINHO_DA_REVISAO`.

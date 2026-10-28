@@ -1,0 +1,51 @@
+{
+  "resultado": "PASSOU",
+  "data_utc": "2026-10-28T10:37:36.313087+00:00",
+  "navegador": "IAB, aba própria 6, inspeção por CUA",
+  "verificacoes_automaticas": {
+    "planos_js_python": 160,
+    "buffers_completos_js_python": 102,
+    "quadros_incorporados": 156
+  },
+  "verificacoes_interativas": [
+    "Código 5, fase 3, A=0, byte=0, cursor=255: fase 0 e cursor 0, um byte consumido.",
+    "Mesmas entradas e byte=1: fase 3 e cursor 0; A=1: fase 3 e cursor 255, nenhum consumo.",
+    "Byte aleatório 256 rejeitado com mensagem de inteiro entre 0 e 255.",
+    "Sem iluminação: corpos da fase 3 IDs 10612/10620/10616; sombras 10548/10556/10552 preservadas.",
+    "Código 5 no passe terreno: zero camadas; não descoberto no passe sprites: zero camadas.",
+    "Código 52: controles de fase e cálculo desabilitados; ausência no MONDE01.ETA explícita.",
+    "Código 29 seleciona passe terreno, uma camada ID 10585 local 2945.",
+    "Próxima fase retorna de 3 a 0; Percorrer fases avança e muda para Pausar; pausa confirmada.",
+    "Controles de sombra e âncora exercitados. Captura final: código 5/fase 1, claro, sombras e âncora ativas.",
+    "Atlas dos 156 quadros e folha de contato dos 47 códigos inspecionados; índices e variantes claros/escuros legíveis."
+  ],
+  "erros_console": [],
+  "limites": [
+    "Fundos sintéticos; comparação das 102 referências da página é com Python, não nova execução x86.",
+    "Os 193 buffers contra x86 estão em x86-objetos.json.",
+    "Favicon ausente respondeu 404 no servidor; não faz parte da demonstração."
+  ],
+  "encerramento": "Aba própria fechada; servidor 127.0.0.1:8892 encerrado por Ctrl-C na sessão própria 75212; nenhum processo de outra frente manipulado.",
+  "arquivos": [
+    {
+      "caminho": "artefatos/demo-objetos.html",
+      "sha256": "5b40f0c1c18b649dd8739acc01d0d68a754c14ecd34e1ee928bb21c9cc2128f1",
+      "bytes": 967442
+    },
+    {
+      "caminho": "artefatos/atlas-objetos.png",
+      "sha256": "efec59256e3512c02e078806d89e42cecf2a3f880c23ba99b5c5d9abd2c43992",
+      "bytes": 103251
+    },
+    {
+      "caminho": "artefatos/objetos-contato.png",
+      "sha256": "098b4c801f7b0617608dd07d66424f4dad4003e44f32a70d02955667ff2500e5",
+      "bytes": 136220
+    },
+    {
+      "caminho": "validacao/demo-objetos-verificada.png",
+      "sha256": "d2a0baa50bfd9f3eee13855dd1d46ac1d01491599edd832548fae4bcc47c1173",
+      "bytes": 195979
+    }
+  ]
+}

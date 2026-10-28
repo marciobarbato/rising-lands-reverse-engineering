@@ -1,0 +1,48 @@
+{
+  "resultado": "PASSOU",
+  "data_utc": "2026-10-28T11:14:05.757562+00:00",
+  "navegador": "IAB, aba própria 7, inspeção CUA",
+  "verificacoes_automaticas": {
+    "planos_graficos_js_python": 291,
+    "buffers_completos_js_python": 98,
+    "quadros": 48
+  },
+  "verificacoes_interativas": [
+    "Código 67: auxiliares 14/15 mantêm ID 10846; valor 16 muda para ID 10847.",
+    "Próximo valor retorna de 31 para 0, fase 0, ID 10839.",
+    "Sem iluminação: cópia e sombra usam ID 10839; não descoberto: zero camadas.",
+    "Código 54 desabilita auxiliar/reprodução; trecho de carregamento muda para código 66, auxiliar 1, ID 10823, offset (-4,0).",
+    "Código 68, auxiliar 31: ID 10870; reprodução e pausa respondem, com volta à fase 0.",
+    "Registro ETA célula (54,4), código 66, auxiliar 5: ID 10825, offset (-4,0).",
+    "Controles de sombra e âncora exercitados; atlas e folha de contato inspecionados.",
+    "Captura final: código 67/auxiliar 14, célula ETA (16,48), flags 0/16, duas camadas ID 10846, sombra e âncora ativas."
+  ],
+  "erros_console": [],
+  "encerramento": "Aba própria fechada; servidor localhost:8893 encerrado na sessão própria 84614. Nenhum processo alheio manipulado.",
+  "limites": [
+    "291 comparações conferem fase, auxiliar ignorado e campos gráficos de cada camada; não são nova execução x86.",
+    "98 referências de pixels JS/Python complementam os 142 buffers x86 registrados separadamente."
+  ],
+  "arquivos": [
+    {
+      "caminho": "artefatos/demo-sequenciais.html",
+      "bytes": 788317,
+      "sha256": "c10e76ebfcc1888d85bdb2f9f7f431df60980c308fb9f5bcf1eb4a1c16534ff2"
+    },
+    {
+      "caminho": "artefatos/atlas-sequenciais.png",
+      "bytes": 36648,
+      "sha256": "528df039c1c6bf6cb649ef770f6906e6a19365f461c1ee71e86a65c7fd8ce115"
+    },
+    {
+      "caminho": "artefatos/sequenciais-contato.png",
+      "bytes": 37180,
+      "sha256": "97eb25cc2360aa44ab7dd7930891e7acf8b158a7ff9445b3b805a10538b683a0"
+    },
+    {
+      "caminho": "validacao/demo-sequenciais-verificada.png",
+      "bytes": 198061,
+      "sha256": "f49204f93180c19d6553394306a6045181c9fa97d6ed1e7241d375fe007a4c1e"
+    }
+  ]
+}
