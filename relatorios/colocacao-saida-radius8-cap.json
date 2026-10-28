@@ -1,0 +1,17 @@
+{
+  "success": false,
+  "bounded_x86_executions": 1,
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "input": {
+    "type": 1,
+    "owner": 0,
+    "radius": 8,
+    "initial_light_counts": 0
+  },
+  "stop": {
+    "eip": "0x46a505",
+    "instructions": 1000000
+  },
+  "scope": "Diagnostic original-only call reached fixed instruction cap inside SetMiniMap; no Python comparison or successful return claimed",
+  "next_check": "Preserved-register resumes at actual native SetMiniMap entry; cap unchanged"
+}
