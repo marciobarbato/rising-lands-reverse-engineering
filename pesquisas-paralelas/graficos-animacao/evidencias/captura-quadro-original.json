@@ -1,0 +1,806 @@
+{
+ "exe_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "analysis_pe_sha256_not_executed": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+ "unicorn_version": "2.1.4",
+ "limits": {
+  "instrucoes": 60000000,
+  "timeout_us": 900000000
+ },
+ "code_interval": ["0x401000","0x493c00"],
+ "checkpoint": "0x417b1c",
+ "renderers_traced": {
+  "0x41068e": "AffTerrain",
+  "0x416864": "AffSprite",
+  "0x415acf": "AffVeget",
+  "0x407dd3": "AffBatiments",
+  "0x40f49b": "AffBatimentOmbre",
+  "0x41591f": "AffEngin",
+  "0x46ff70": "AffProjectile",
+  "0x40fd95": "GetNumBob",
+  "0x45c72a": "AffBloc",
+  "0x410085": "AffVegetTerrain",
+  "0x43f710": "CalculFrame",
+  "0x43f3b4": "DDLockSurface",
+  "0x45c912": "Box"
+ },
+ "bindings": {
+  "iat_resolution": [
+   {
+    "slot": "0x5231c0",
+    "importacao": "KERNEL32.GlobalAlloc",
+    "trampolim": "0xe000000"
+   },
+   {
+    "slot": "0x5231c8",
+    "importacao": "KERNEL32.GlobalFree",
+    "trampolim": "0xe000010"
+   },
+   {
+    "slot": "0x5231cc",
+    "importacao": "KERNEL32.GlobalHandle",
+    "trampolim": "0xe000020"
+   },
+   {
+    "slot": "0x5231d0",
+    "importacao": "KERNEL32.GlobalLock",
+    "trampolim": "0xe000030"
+   },
+   {
+    "slot": "0x5231d8",
+    "importacao": "KERNEL32.GlobalUnlock",
+    "trampolim": "0xe000040"
+   },
+   {
+    "slot": "0x5231b8",
+    "importacao": "KERNEL32.GetTickCount",
+    "trampolim": "0xe000300"
+   }
+  ],
+  "directdraw": "IDirectDrawSurface IsLost/Lock/Restore/Unlock via COM object 0x4E1790",
+  "fixture_files": [
+   {
+    "nome": "\\Graphics\\Blocs.cmp",
+    "copia": "fontes/cd/INSTALHD/GRAPHICS/BLOCS.CMP",
+    "bytes": 1426660
+   },
+   {
+    "nome": "\\Graphics\\Troops.cmp",
+    "copia": "fontes/cd/INSTALHD/GRAPHICS/TROOPS.CMP",
+    "bytes": 3171280
+   },
+   {
+    "nome": "\\Graphics\\Vehicule.cmp",
+    "copia": "fontes/cd/INSTALHD/GRAPHICS/VEHICULE.CMP",
+    "bytes": 2027609
+   },
+   {
+    "nome": "\\Graphics\\Creature.cmp",
+    "copia": "fontes/cd/INSTALHD/GRAPHICS/CREATURE.CMP",
+    "bytes": 2585477
+   },
+   {
+    "nome": "\\Graphics\\Building.cmp",
+    "copia": "fontes/cd/INSTALHD/GRAPHICS/BUILDING.CMP",
+    "bytes": 1272760
+   },
+   {
+    "nome": "\\Graphics\\Others.cmp",
+    "copia": "fontes/cd/INSTALHD/GRAPHICS/OTHERS.CMP",
+    "bytes": 2927906
+   }
+  ],
+  "LoadSTRATBank": {
+   "chamadas": 97288,
+   "por_vinculo": {
+    "GlobalAlloc": 24314,
+    "GlobalLock": 24314,
+    "fclose": 12,
+    "fopen": 12,
+    "fread": 48636
+   },
+   "sha256": "58ad0facb2e1a9ca52d7637fff2876e09f3e0035ef33cd210e8d114c7b5eee7e"
+  }
+ },
+ "tables": {
+  "shadow_sha256": "52f6d514b6bed2ff3e62c273abf6ccd79082e5205d657fc7d1787f347ee3b5b6",
+  "eclairage_sha256": "e3ae0b131cd8dd65192fb53b83fcac0b0ce194cc87b5a894e301996d00cc6938",
+  "shadow_source": "validacao/x86-cache-terreno.json tables_hex[0]",
+  "eclairage_source": "validacao/x86-eclairage.json PLATGAME 60%"
+ },
+ "palette_alloc": {
+  "pointers": {
+   "0x4e24b0": "0x10000000",
+   "0x4e24b4": "0x10000300",
+   "0x4e24b8": "0x10000400",
+   "0x4e24bc": "0x10000500",
+   "0x4e24c0": "0x10000600",
+   "0x4e24c4": "0x10000700",
+   "0x4e24c8": "0x10000800",
+   "0x4e24cc": "0x10000900",
+   "0x4e24d0": "0x10000a00",
+   "0x4e24d4": "0x10000b00",
+   "0x4e24d8": "0x10000c00"
+  }
+ },
+ "player_tables_sha256": ["40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880","5f56b226a2be144237ae34abfe389a5e97dc8baa28ae37315a3028b1413d12f2","9967a6066f63fef6c29d57f64b04d0d881abb183746abb38f24531c995371f6a","0828dcd6d30c6cbb6ad9315d7584ae828aff2a94326985e036a2f3c643a9ab3a","b6301379e1e1b18f8159ca7f0321f8e3b4e14d28c543623d58a983eafca90b73"],
+ "cache_alloc": [
+  ["GlobalAlloc",[0,1024],282077936],
+  ["GlobalLock",[282077936],282077936]
+ ],
+ "unit_initializer_records": {
+  "0": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000001000000000200000000ff00000000000000080a020200000003030000000000000000000000000000ff000000000000000000000000000000000000000000000000000000000001080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "2": "00020000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010700000000000000000000000000000000000000000000000001000000000300000000ff00000000000000080a020300000003030000000000000000000000000000ff0000000000000000000000000000000000000000000000000000000000010a0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "5": "00050000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000200000000ff000000000000000808020400000003030000000000000000000000000000ff000000000000000000000000000000000000000000000000000000000001080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "6": "00060000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000300000000ff000000000000000808020400000003030000000000000000000000000005ff000000000000000000000000000000000000000000000000000000000001080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "7": "00070000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000200000000ff000000000000000808020400000003030000000000000000000000000000ff000000000000000000000000000000000000000000000000000000000001080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "9": "00090000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000200000000ff000000000000000808020400000003030000000000000000000000000000ff000000000000000000000000000000000000000000000000000000000001080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+ },
+ "monde01_checkpoint": {
+  "mission_stop": "DependenciaColocacaoMissao: Vision radius above the validated 0..8 sum requires DecouvreTerrain; prior record/collision effects retained",
+  "eta_sha256": "19237b8c3f3c0c76022276da229bec727b17603440823c43561aba159dd47015"
+ },
+ "frames": [
+  {
+   "nome": "monde01_checkpoint",
+   "antes": "InitCache",
+   "sinteticos": ["viewport origin (0,0), camera 0, frame counter 0, divisor 1 and the 800x600 mode are declared","missions declare a 0xA5 unit-pool pre-fill, regions [1]*65536, a selection pattern, a search context and a 0x31 bonus table","projectile pool and structure pool are zero: ProjectileReset/structure copy are not composed by the checkpoint","surface starts from a declared background pattern; DirectDraw locks one fixture buffer"],
+   "entradas": {
+    "terreno": "8251b2d21bdce6eebee8980c1bcd0c8b74b2af107af6ae86be2e3e70ac2e66ab",
+    "objetos": "cf2bbd9c5efea36bb3f6ea074ce7cfb12cb9ac293ce25177c2fcf3fc174c92ad",
+    "auxiliares": "d95bd7b0170042e6cabe8eac184e995b4b91eab71532e8f833ac3604af7a2d8d",
+    "atributos": "f4e996263e169953befcbdc36273661c60c9cdf89bd2a13917410a8d22fc44ba",
+    "regioes": "c2ba9226dc98fcfe0e99a14612857454ad7238b730a92624ea92448c9df91a53",
+    "unidades": "4bd9168b0a8ea6b244130b767830d7c09b7da5d3d3d5950fe3390c2ccd8661a4",
+    "descoberta": ["278603eebcc7d19557b02c50e9262eceb452f484e0c4a61ad6e72c21d4ed0a2d","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118"],
+    "iluminacao": ["3eee056eefdfd90dcc2ccfc1c1951e1691534a4374f7b830f572a6e02eb80fa1","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118","584fbb12be99ec778613361ca89515d62ccd0402b92ffa9d68aed34cbacac118"],
+    "contagem_luz": ["b7a78f05d98593a0bae35e60d758fc62e578e77cb9fccbb30d1d5f9a9f3df77c","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"],
+    "parada_missao": "DependenciaColocacaoMissao: Vision radius above the validated 0..8 sum requires DecouvreTerrain; prior record/collision effects retained",
+    "eta_sha256": "19237b8c3f3c0c76022276da229bec727b17603440823c43561aba159dd47015",
+    "projeteis": "1677f96c3d965a44953cb644796fd1137be5df37e38513fd5587e55751f23880",
+    "estruturas": "97207af1c54bddac19ff877aa5117c728e9360eaf8d6b977d495024bb2f14698"
+   },
+   "globais": {
+    "rng_u8": "00",
+    "evento_u8": "00",
+    "pitch_u32": "20030000",
+    "dd_ponteiro_u32": "00000000",
+    "dd_travas_u32": "00000000",
+    "fps_contador_u16": "0700",
+    "fps_ultimo_tick_u32": "e8030000",
+    "fps_tick_u32": "e8030000",
+    "caixa_selecao_u8": "00",
+    "forcar_desenho_u8": "00",
+    "modo_jogo_u8": "12",
+    "fps_digitos": "303000",
+    "paginas_texto": "31000000",
+    "selecionada_unidade_u16": "ffff",
+    "selecionada_estrutura_u16": "ffff",
+    "divisor_u8": "01",
+    "largura_tela_u16": "2003",
+    "altura_tela_u16": "5802",
+    "recorte": "00001f0200001f03",
+    "recorte_salvo": "0000000000000000",
+    "restaurar_fundo_u8": "00",
+    "paginas_u8": "01",
+    "camera_u8": "00",
+    "origem": "00000000",
+    "janela": "19001100",
+    "superficie_u32": "00000000",
+    "quadro_u32": "00000000",
+    "modo_selecao_u8": "00",
+    "margem_i8": "00",
+    "limpar_u8": "00"
+   },
+   "ticks": [1500],
+   "parada": "0x417b1c",
+   "esp": "0x2007fe4",
+   "instrucoes": 2324969,
+   "vinculos": [
+    ["GetTickCount",[],1500],
+    ["IDirectDrawSurface::IsLost",[234882048],0],
+    ["IDirectDrawSurface::Lock",[234882048,0,108,1,0],0]
+   ],
+   "rastro": {
+    "eventos": 2782,
+    "por_funcao": {
+     "AffBatimentOmbre": 726,
+     "AffBatiments": 726,
+     "AffBloc": 425,
+     "AffEngin": 16,
+     "AffSprite": 1,
+     "AffTerrain": 1,
+     "AffVeget": 35,
+     "AffVegetTerrain": 425,
+     "CalculFrame": 1,
+     "DDLockSurface": 1,
+     "GetNumBob": 425
+    },
+    "sha256": "741a57d5fe94306c3f79e7a3ea7b313ac6c1adedb8161a3a8dace1e395a8b6e2"
+   },
+   "superficie_sha256": "8f8f41ff987f904b5fdf87b54ff5f91c9db20cf888a377c89bb87794c4ddc65a",
+   "superficie_mudou": true,
+   "escritas": {
+    "dados": [
+     [24622,"0000","1f03"],
+     [24626,"0000","1f02"],
+     [24654,"00","6a"],
+     [317351,"0000","0801"],
+     [317358,"07","08"],
+     [317364,"e803","dc05"],
+     [479091,"00","08"]
+    ]
+   },
+   "cache": {
+    "chaves_sha256": "d9ade332f2872260f10d6761164ca2984dd4369de2fdea493a81d70dbeeaf5be",
+    "blocos_sha256": "97fc8f2d2bcb46ff05a40f397593581ca89d022bb75a2d72b41c4c33576ab781",
+    "cursor": 106
+   }
+  },
+  {
+   "nome": "terreno_e_objetos",
+   "antes": "InitCache",
+   "sinteticos": ["viewport/camera/frame/divisor globals and the 800x600 mode are declared","MONDE01 terrain words equal to AffBatiments facade triggers or 0x356 are replaced by 300; object codes 27, 55..65, 253, 254 removed; tree auxiliaries masked to 0..3","visibility maps are a deterministic synthetic pattern; regions [1]*65536; no structures","units are native EnginInit records with state/cell/direction/phase/priority/bag/offsets and +0x74=100 set","projectiles are synthetic 56-byte records of committed renderer types","surface starts from a declared background pattern; DirectDraw locks one fixture buffer"],
+   "entradas": {
+    "terreno": "68c62c99920a35382877d6506fd0f84244af90893e09efc23f041eacd3e6e8e3",
+    "objetos": "cf2bbd9c5efea36bb3f6ea074ce7cfb12cb9ac293ce25177c2fcf3fc174c92ad",
+    "auxiliares": "d95bd7b0170042e6cabe8eac184e995b4b91eab71532e8f833ac3604af7a2d8d",
+    "atributos": "f4e996263e169953befcbdc36273661c60c9cdf89bd2a13917410a8d22fc44ba",
+    "regioes": "96196237ef70f282c1f2fa0e4f99f6a06f7fa7f0e6873bb946ca771167ed36ff",
+    "unidades": "b1edad8728dc6bce781da01d55827492cc206231084860d75dfbb1a04fae1342",
+    "projeteis": "1677f96c3d965a44953cb644796fd1137be5df37e38513fd5587e55751f23880",
+    "estruturas": "97207af1c54bddac19ff877aa5117c728e9360eaf8d6b977d495024bb2f14698",
+    "descoberta": ["9cc55deeec77a6bcb8caca7e5e72c3d5a052dcba5ab01a3de12407fadf708524","fcbfef760af9aa14601fd58a5e18e99c421e71b114c70993b1f2bfec5ade1129","fec0c3100efe2610dfd3bd63b672250d9307f7a0d2d515825c42995a4e9423fe","ee8bb8598464cb669d32c041247d1ff616777d006d82c13aa694b950c3dccbc3"],
+    "iluminacao": ["fb3570243f210b813d6828f81f23c0356d56c1464da1251308037fb3c7d5dbda","70e81306ecf5c8b68b7758a6ed9c7f08701f728944a3e729c70e846ff48847e2","302b18c5ee2d628321daf1e8c1038f1d9d90f63db71ad2de2589dd4445731a81","adcd1533c9bd26882caf0bbc5a0d81137526ae5f5f9ea7d7749c1eb8db0f5c35"],
+    "contagem_luz": ["de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"]
+   },
+   "globais": {
+    "rng_u8": "00",
+    "evento_u8": "00",
+    "pitch_u32": "20030000",
+    "dd_ponteiro_u32": "00000000",
+    "dd_travas_u32": "00000000",
+    "fps_contador_u16": "0700",
+    "fps_ultimo_tick_u32": "e8030000",
+    "fps_tick_u32": "e8030000",
+    "caixa_selecao_u8": "00",
+    "forcar_desenho_u8": "00",
+    "modo_jogo_u8": "12",
+    "fps_digitos": "303000",
+    "paginas_texto": "31000000",
+    "selecionada_unidade_u16": "ffff",
+    "selecionada_estrutura_u16": "ffff",
+    "divisor_u8": "01",
+    "largura_tela_u16": "2003",
+    "altura_tela_u16": "5802",
+    "recorte": "00001f0200001f03",
+    "recorte_salvo": "0000000000000000",
+    "restaurar_fundo_u8": "00",
+    "paginas_u8": "01",
+    "camera_u8": "00",
+    "origem": "00000000",
+    "janela": "19001100",
+    "superficie_u32": "00000000",
+    "quadro_u32": "00000000",
+    "modo_selecao_u8": "00",
+    "margem_i8": "00",
+    "limpar_u8": "00"
+   },
+   "ticks": [2100],
+   "parada": "0x417b1c",
+   "esp": "0x2007fe4",
+   "instrucoes": 4674362,
+   "vinculos": [
+    ["GetTickCount",[],2100],
+    ["IDirectDrawSurface::IsLost",[234882048],0],
+    ["IDirectDrawSurface::Lock",[234882048,0,108,1,0],0]
+   ],
+   "rastro": {
+    "eventos": 2744,
+    "por_funcao": {
+     "AffBatimentOmbre": 726,
+     "AffBatiments": 726,
+     "AffBloc": 425,
+     "AffSprite": 1,
+     "AffTerrain": 1,
+     "AffVeget": 13,
+     "AffVegetTerrain": 425,
+     "CalculFrame": 1,
+     "DDLockSurface": 1,
+     "GetNumBob": 425
+    },
+    "sha256": "07a6633d57b7fbce27e41b40649f34e1ddc9b4c9936c1fd068c662009ffa7507"
+   },
+   "superficie_sha256": "694fc1033643612a43cbd1d1055d980c8af3754c07cd934c9491c66f6e3ac1a8",
+   "superficie_mudou": true,
+   "escritas": {
+    "dados": [
+     [9109,"30","38"],
+     [24622,"0000","1f03"],
+     [24626,"0000","1f02"],
+     [24654,"6a","94"],
+     [317351,"0000","0801"],
+     [317358,"07","00"],
+     [317360,"e803","3408"],
+     [317364,"e803","3408"],
+     [479091,"00","08"]
+    ]
+   },
+   "cache": {
+    "chaves_sha256": "f4a81dc9015f632b1b6dda8410769941802011557032bea1c325230014a92df3",
+    "blocos_sha256": "e64eaa9ab00594ed33dcc6821d14fcdb78062bf1c98f2105ace30ab5a7a8e7a9",
+    "cursor": 148
+   }
+  },
+  {
+   "nome": "unidades_e_projeteis",
+   "antes": null,
+   "sinteticos": ["viewport/camera/frame/divisor globals and the 800x600 mode are declared","MONDE01 terrain words equal to AffBatiments facade triggers or 0x356 are replaced by 300; object codes 27, 55..65, 253, 254 removed; tree auxiliaries masked to 0..3","visibility maps are a deterministic synthetic pattern; regions [1]*65536; no structures","units are native EnginInit records with state/cell/direction/phase/priority/bag/offsets and +0x74=100 set","projectiles are synthetic 56-byte records of committed renderer types","surface starts from a declared background pattern; DirectDraw locks one fixture buffer"],
+   "entradas": {
+    "terreno": "68c62c99920a35382877d6506fd0f84244af90893e09efc23f041eacd3e6e8e3",
+    "objetos": "cf2bbd9c5efea36bb3f6ea074ce7cfb12cb9ac293ce25177c2fcf3fc174c92ad",
+    "auxiliares": "d95bd7b0170042e6cabe8eac184e995b4b91eab71532e8f833ac3604af7a2d8d",
+    "atributos": "f4e996263e169953befcbdc36273661c60c9cdf89bd2a13917410a8d22fc44ba",
+    "regioes": "96196237ef70f282c1f2fa0e4f99f6a06f7fa7f0e6873bb946ca771167ed36ff",
+    "unidades": "2fdbe9d11937b780f787d732f7f77f714f184a998b76eaf592ac1bab274e8a64",
+    "projeteis": "a33ebeaa35d29f42b57187355a991e09351579087339060c0c78c9d925c0d366",
+    "estruturas": "97207af1c54bddac19ff877aa5117c728e9360eaf8d6b977d495024bb2f14698",
+    "descoberta": ["9cc55deeec77a6bcb8caca7e5e72c3d5a052dcba5ab01a3de12407fadf708524","fcbfef760af9aa14601fd58a5e18e99c421e71b114c70993b1f2bfec5ade1129","fec0c3100efe2610dfd3bd63b672250d9307f7a0d2d515825c42995a4e9423fe","ee8bb8598464cb669d32c041247d1ff616777d006d82c13aa694b950c3dccbc3"],
+    "iluminacao": ["fb3570243f210b813d6828f81f23c0356d56c1464da1251308037fb3c7d5dbda","70e81306ecf5c8b68b7758a6ed9c7f08701f728944a3e729c70e846ff48847e2","302b18c5ee2d628321daf1e8c1038f1d9d90f63db71ad2de2589dd4445731a81","adcd1533c9bd26882caf0bbc5a0d81137526ae5f5f9ea7d7749c1eb8db0f5c35"],
+    "contagem_luz": ["de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"]
+   },
+   "globais": {
+    "rng_u8": "4d",
+    "evento_u8": "00",
+    "pitch_u32": "20030000",
+    "dd_ponteiro_u32": "00000000",
+    "dd_travas_u32": "00000000",
+    "fps_contador_u16": "0700",
+    "fps_ultimo_tick_u32": "e8030000",
+    "fps_tick_u32": "e8030000",
+    "caixa_selecao_u8": "00",
+    "forcar_desenho_u8": "00",
+    "modo_jogo_u8": "12",
+    "fps_digitos": "303000",
+    "paginas_texto": "31000000",
+    "selecionada_unidade_u16": "ffff",
+    "selecionada_estrutura_u16": "ffff",
+    "divisor_u8": "01",
+    "largura_tela_u16": "2003",
+    "altura_tela_u16": "5802",
+    "recorte": "00001f0200001f03",
+    "recorte_salvo": "0000000000000000",
+    "restaurar_fundo_u8": "00",
+    "paginas_u8": "01",
+    "camera_u8": "00",
+    "origem": "00000000",
+    "janela": "19001100",
+    "superficie_u32": "00000000",
+    "quadro_u32": "04000000",
+    "modo_selecao_u8": "00",
+    "margem_i8": "00",
+    "limpar_u8": "00"
+   },
+   "ticks": [2140],
+   "parada": "0x417b1c",
+   "esp": "0x2007fe4",
+   "instrucoes": 4746862,
+   "vinculos": [
+    ["GetTickCount",[],2140],
+    ["IDirectDrawSurface::IsLost",[234882048],0],
+    ["IDirectDrawSurface::Lock",[234882048,0,108,1,0],0]
+   ],
+   "rastro": {
+    "eventos": 2749,
+    "por_funcao": {
+     "AffBatimentOmbre": 726,
+     "AffBatiments": 726,
+     "AffBloc": 425,
+     "AffEngin": 4,
+     "AffProjectile": 1,
+     "AffSprite": 1,
+     "AffTerrain": 1,
+     "AffVeget": 13,
+     "AffVegetTerrain": 425,
+     "CalculFrame": 1,
+     "DDLockSurface": 1,
+     "GetNumBob": 425
+    },
+    "sha256": "6e085a29a16ddcff1509d9f69b813d8e68fd5cad13e272280fa0dc21f6b0673d"
+   },
+   "superficie_sha256": "731d081a76563196e55fbaa01c75771f504ddb87094161898555bf0d1cca1c71",
+   "superficie_mudou": true,
+   "escritas": {
+    "dados": [
+     [9109,"30","38"],
+     [24622,"0000","1f03"],
+     [24626,"0000","1f02"],
+     [24654,"94","be"],
+     [317351,"0000","0801"],
+     [317358,"07","00"],
+     [317360,"e803","5c08"],
+     [317364,"e803","5c08"],
+     [479091,"00","08"]
+    ]
+   },
+   "cache": {
+    "chaves_sha256": "36201ba89b10be479020aa3b6d6296a85b7c0e1af514724f6e5dedae2a37b3a1",
+    "blocos_sha256": "acf45c1ce06857f56c51053fbf46aedb9e7117fc6934bc1e5c211db93d18a646",
+    "cursor": 190
+   }
+  },
+  {
+   "nome": "margem_e_origem",
+   "antes": null,
+   "sinteticos": ["viewport/camera/frame/divisor globals and the 800x600 mode are declared","MONDE01 terrain words equal to AffBatiments facade triggers or 0x356 are replaced by 300; object codes 27, 55..65, 253, 254 removed; tree auxiliaries masked to 0..3","visibility maps are a deterministic synthetic pattern; regions [1]*65536; no structures","units are native EnginInit records with state/cell/direction/phase/priority/bag/offsets and +0x74=100 set","projectiles are synthetic 56-byte records of committed renderer types","surface starts from a declared background pattern; DirectDraw locks one fixture buffer"],
+   "entradas": {
+    "terreno": "68c62c99920a35382877d6506fd0f84244af90893e09efc23f041eacd3e6e8e3",
+    "objetos": "cf2bbd9c5efea36bb3f6ea074ce7cfb12cb9ac293ce25177c2fcf3fc174c92ad",
+    "auxiliares": "d95bd7b0170042e6cabe8eac184e995b4b91eab71532e8f833ac3604af7a2d8d",
+    "atributos": "f4e996263e169953befcbdc36273661c60c9cdf89bd2a13917410a8d22fc44ba",
+    "regioes": "96196237ef70f282c1f2fa0e4f99f6a06f7fa7f0e6873bb946ca771167ed36ff",
+    "unidades": "2fdbe9d11937b780f787d732f7f77f714f184a998b76eaf592ac1bab274e8a64",
+    "projeteis": "a33ebeaa35d29f42b57187355a991e09351579087339060c0c78c9d925c0d366",
+    "estruturas": "97207af1c54bddac19ff877aa5117c728e9360eaf8d6b977d495024bb2f14698",
+    "descoberta": ["9cc55deeec77a6bcb8caca7e5e72c3d5a052dcba5ab01a3de12407fadf708524","fcbfef760af9aa14601fd58a5e18e99c421e71b114c70993b1f2bfec5ade1129","fec0c3100efe2610dfd3bd63b672250d9307f7a0d2d515825c42995a4e9423fe","ee8bb8598464cb669d32c041247d1ff616777d006d82c13aa694b950c3dccbc3"],
+    "iluminacao": ["fb3570243f210b813d6828f81f23c0356d56c1464da1251308037fb3c7d5dbda","70e81306ecf5c8b68b7758a6ed9c7f08701f728944a3e729c70e846ff48847e2","302b18c5ee2d628321daf1e8c1038f1d9d90f63db71ad2de2589dd4445731a81","adcd1533c9bd26882caf0bbc5a0d81137526ae5f5f9ea7d7749c1eb8db0f5c35"],
+    "contagem_luz": ["de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"]
+   },
+   "globais": {
+    "rng_u8": "00",
+    "evento_u8": "00",
+    "pitch_u32": "20030000",
+    "dd_ponteiro_u32": "00000000",
+    "dd_travas_u32": "00000000",
+    "fps_contador_u16": "0700",
+    "fps_ultimo_tick_u32": "b0040000",
+    "fps_tick_u32": "e8030000",
+    "caixa_selecao_u8": "00",
+    "forcar_desenho_u8": "00",
+    "modo_jogo_u8": "12",
+    "fps_digitos": "303000",
+    "paginas_texto": "31000000",
+    "selecionada_unidade_u16": "ffff",
+    "selecionada_estrutura_u16": "ffff",
+    "divisor_u8": "01",
+    "largura_tela_u16": "2003",
+    "altura_tela_u16": "5802",
+    "recorte": "2000ff012000ff02",
+    "recorte_salvo": "0000000000000000",
+    "restaurar_fundo_u8": "00",
+    "paginas_u8": "01",
+    "camera_u8": "00",
+    "origem": "02000300",
+    "janela": "19001100",
+    "superficie_u32": "00000000",
+    "quadro_u32": "09000000",
+    "modo_selecao_u8": "00",
+    "margem_i8": "01",
+    "limpar_u8": "00"
+   },
+   "ticks": [2300],
+   "parada": "0x417b1c",
+   "esp": "0x2007fe4",
+   "instrucoes": 1477567,
+   "vinculos": [
+    ["GetTickCount",[],2300],
+    ["IDirectDrawSurface::IsLost",[234882048],0],
+    ["IDirectDrawSurface::Lock",[234882048,0,108,1,0],0]
+   ],
+   "rastro": {
+    "eventos": 2510,
+    "por_funcao": {
+     "AffBatimentOmbre": 726,
+     "AffBatiments": 726,
+     "AffBloc": 345,
+     "AffEngin": 4,
+     "AffProjectile": 1,
+     "AffSprite": 1,
+     "AffTerrain": 1,
+     "AffVeget": 14,
+     "AffVegetTerrain": 345,
+     "CalculFrame": 1,
+     "DDLockSurface": 1,
+     "GetNumBob": 345
+    },
+    "sha256": "212da852746b765dd0626c1eadc5fa8613575654114cb4ba6f54f80b82c078c3"
+   },
+   "superficie_sha256": "4192c216c33bd9ccd3432c22be1724c942cc6cc5e76d6c65daf48a88692788f7",
+   "superficie_mudou": true,
+   "escritas": {
+    "dados": [
+     [9109,"30","38"],
+     [24620,"00","20"],
+     [24622,"000000","ff0220"],
+     [24626,"0000","ff01"],
+     [24654,"be","e3"],
+     [317351,"0000","0801"],
+     [317358,"07","00"],
+     [317360,"b004","fc08"],
+     [317364,"e803","fc08"],
+     [479091,"00","08"]
+    ]
+   },
+   "cache": {
+    "chaves_sha256": "0f7bda2da062f1e4b0df014813f14922817d1db4a9ed06691ac495871f88ed61",
+    "blocos_sha256": "97359defce9279e6fc65a69897029d68aeddea02205ecd8caa739b55416c9ef0",
+    "cursor": 227
+   }
+  },
+  {
+   "nome": "nao_desenhado_divisor",
+   "antes": null,
+   "sinteticos": ["viewport/camera/frame/divisor globals and the 800x600 mode are declared","MONDE01 terrain words equal to AffBatiments facade triggers or 0x356 are replaced by 300; object codes 27, 55..65, 253, 254 removed; tree auxiliaries masked to 0..3","visibility maps are a deterministic synthetic pattern; regions [1]*65536; no structures","units are native EnginInit records with state/cell/direction/phase/priority/bag/offsets and +0x74=100 set","projectiles are synthetic 56-byte records of committed renderer types","surface starts from a declared background pattern; DirectDraw locks one fixture buffer"],
+   "entradas": {
+    "terreno": "68c62c99920a35382877d6506fd0f84244af90893e09efc23f041eacd3e6e8e3",
+    "objetos": "cf2bbd9c5efea36bb3f6ea074ce7cfb12cb9ac293ce25177c2fcf3fc174c92ad",
+    "auxiliares": "d95bd7b0170042e6cabe8eac184e995b4b91eab71532e8f833ac3604af7a2d8d",
+    "atributos": "f4e996263e169953befcbdc36273661c60c9cdf89bd2a13917410a8d22fc44ba",
+    "regioes": "96196237ef70f282c1f2fa0e4f99f6a06f7fa7f0e6873bb946ca771167ed36ff",
+    "unidades": "b1edad8728dc6bce781da01d55827492cc206231084860d75dfbb1a04fae1342",
+    "projeteis": "1677f96c3d965a44953cb644796fd1137be5df37e38513fd5587e55751f23880",
+    "estruturas": "97207af1c54bddac19ff877aa5117c728e9360eaf8d6b977d495024bb2f14698",
+    "descoberta": ["9cc55deeec77a6bcb8caca7e5e72c3d5a052dcba5ab01a3de12407fadf708524","fcbfef760af9aa14601fd58a5e18e99c421e71b114c70993b1f2bfec5ade1129","fec0c3100efe2610dfd3bd63b672250d9307f7a0d2d515825c42995a4e9423fe","ee8bb8598464cb669d32c041247d1ff616777d006d82c13aa694b950c3dccbc3"],
+    "iluminacao": ["fb3570243f210b813d6828f81f23c0356d56c1464da1251308037fb3c7d5dbda","70e81306ecf5c8b68b7758a6ed9c7f08701f728944a3e729c70e846ff48847e2","302b18c5ee2d628321daf1e8c1038f1d9d90f63db71ad2de2589dd4445731a81","adcd1533c9bd26882caf0bbc5a0d81137526ae5f5f9ea7d7749c1eb8db0f5c35"],
+    "contagem_luz": ["de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"]
+   },
+   "globais": {
+    "rng_u8": "00",
+    "evento_u8": "00",
+    "pitch_u32": "20030000",
+    "dd_ponteiro_u32": "00000000",
+    "dd_travas_u32": "00000000",
+    "fps_contador_u16": "0700",
+    "fps_ultimo_tick_u32": "e8030000",
+    "fps_tick_u32": "e8030000",
+    "caixa_selecao_u8": "00",
+    "forcar_desenho_u8": "00",
+    "modo_jogo_u8": "12",
+    "fps_digitos": "303000",
+    "paginas_texto": "31000000",
+    "selecionada_unidade_u16": "ffff",
+    "selecionada_estrutura_u16": "ffff",
+    "divisor_u8": "03",
+    "largura_tela_u16": "2003",
+    "altura_tela_u16": "5802",
+    "recorte": "00001f0200001f03",
+    "recorte_salvo": "0000000000000000",
+    "restaurar_fundo_u8": "00",
+    "paginas_u8": "01",
+    "camera_u8": "00",
+    "origem": "00000000",
+    "janela": "19001100",
+    "superficie_u32": "00000000",
+    "quadro_u32": "07000000",
+    "modo_selecao_u8": "00",
+    "margem_i8": "00",
+    "limpar_u8": "00"
+   },
+   "ticks": [2310],
+   "parada": "0x3000000",
+   "esp": "0x2008004",
+   "instrucoes": 134,
+   "vinculos": [
+    ["GetTickCount",[],2310]
+   ],
+   "rastro": {
+    "eventos": 1,
+    "por_funcao": {
+     "CalculFrame": 1
+    },
+    "sha256": "ef18a5853225cec2d4459e0d286e0247d504a2311ddd9fd2d51ebe4e83a6c355"
+   },
+   "superficie_sha256": "bc9089c8c5960bcf8b85f308c3752948561d343f14dc072d915bd4c0e765b24a",
+   "superficie_mudou": false,
+   "escritas": {
+    "dados": [
+     [9109,"30","38"],
+     [317358,"07","00"],
+     [317360,"e803","0609"],
+     [317364,"e803","0609"]
+    ]
+   },
+   "cache": {
+    "chaves_sha256": "0f7bda2da062f1e4b0df014813f14922817d1db4a9ed06691ac495871f88ed61",
+    "blocos_sha256": "97359defce9279e6fc65a69897029d68aeddea02205ecd8caa739b55416c9ef0",
+    "cursor": 227
+   }
+  },
+  {
+   "nome": "forcado_e_evento",
+   "antes": null,
+   "sinteticos": ["viewport/camera/frame/divisor globals and the 800x600 mode are declared","MONDE01 terrain words equal to AffBatiments facade triggers or 0x356 are replaced by 300; object codes 27, 55..65, 253, 254 removed; tree auxiliaries masked to 0..3","visibility maps are a deterministic synthetic pattern; regions [1]*65536; no structures","units are native EnginInit records with state/cell/direction/phase/priority/bag/offsets and +0x74=100 set","projectiles are synthetic 56-byte records of committed renderer types","surface starts from a declared background pattern; DirectDraw locks one fixture buffer"],
+   "entradas": {
+    "terreno": "68c62c99920a35382877d6506fd0f84244af90893e09efc23f041eacd3e6e8e3",
+    "objetos": "cf2bbd9c5efea36bb3f6ea074ce7cfb12cb9ac293ce25177c2fcf3fc174c92ad",
+    "auxiliares": "d95bd7b0170042e6cabe8eac184e995b4b91eab71532e8f833ac3604af7a2d8d",
+    "atributos": "f4e996263e169953befcbdc36273661c60c9cdf89bd2a13917410a8d22fc44ba",
+    "regioes": "96196237ef70f282c1f2fa0e4f99f6a06f7fa7f0e6873bb946ca771167ed36ff",
+    "unidades": "2fdbe9d11937b780f787d732f7f77f714f184a998b76eaf592ac1bab274e8a64",
+    "projeteis": "1677f96c3d965a44953cb644796fd1137be5df37e38513fd5587e55751f23880",
+    "estruturas": "97207af1c54bddac19ff877aa5117c728e9360eaf8d6b977d495024bb2f14698",
+    "descoberta": ["9cc55deeec77a6bcb8caca7e5e72c3d5a052dcba5ab01a3de12407fadf708524","fcbfef760af9aa14601fd58a5e18e99c421e71b114c70993b1f2bfec5ade1129","fec0c3100efe2610dfd3bd63b672250d9307f7a0d2d515825c42995a4e9423fe","ee8bb8598464cb669d32c041247d1ff616777d006d82c13aa694b950c3dccbc3"],
+    "iluminacao": ["fb3570243f210b813d6828f81f23c0356d56c1464da1251308037fb3c7d5dbda","70e81306ecf5c8b68b7758a6ed9c7f08701f728944a3e729c70e846ff48847e2","302b18c5ee2d628321daf1e8c1038f1d9d90f63db71ad2de2589dd4445731a81","adcd1533c9bd26882caf0bbc5a0d81137526ae5f5f9ea7d7749c1eb8db0f5c35"],
+    "contagem_luz": ["de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"]
+   },
+   "globais": {
+    "rng_u8": "00",
+    "evento_u8": "01",
+    "pitch_u32": "20030000",
+    "dd_ponteiro_u32": "00000000",
+    "dd_travas_u32": "00000000",
+    "fps_contador_u16": "8c00",
+    "fps_ultimo_tick_u32": "e8030000",
+    "fps_tick_u32": "e8030000",
+    "caixa_selecao_u8": "00",
+    "forcar_desenho_u8": "01",
+    "modo_jogo_u8": "12",
+    "fps_digitos": "303000",
+    "paginas_texto": "31000000",
+    "selecionada_unidade_u16": "ffff",
+    "selecionada_estrutura_u16": "ffff",
+    "divisor_u8": "03",
+    "largura_tela_u16": "2003",
+    "altura_tela_u16": "5802",
+    "recorte": "00001f0200001f03",
+    "recorte_salvo": "0000000000000000",
+    "restaurar_fundo_u8": "00",
+    "paginas_u8": "01",
+    "camera_u8": "00",
+    "origem": "00000000",
+    "janela": "19001100",
+    "superficie_u32": "00000000",
+    "quadro_u32": "07000000",
+    "modo_selecao_u8": "00",
+    "margem_i8": "00",
+    "limpar_u8": "00"
+   },
+   "ticks": [2400],
+   "parada": "0x417b1c",
+   "esp": "0x2007fe4",
+   "instrucoes": 4731050,
+   "vinculos": [
+    ["GetTickCount",[],2400],
+    ["IDirectDrawSurface::IsLost",[234882048],0],
+    ["IDirectDrawSurface::Lock",[234882048,0,108,1,0],0]
+   ],
+   "rastro": {
+    "eventos": 2748,
+    "por_funcao": {
+     "AffBatimentOmbre": 726,
+     "AffBatiments": 726,
+     "AffBloc": 425,
+     "AffEngin": 4,
+     "AffSprite": 1,
+     "AffTerrain": 1,
+     "AffVeget": 13,
+     "AffVegetTerrain": 425,
+     "CalculFrame": 1,
+     "DDLockSurface": 1,
+     "GetNumBob": 425
+    },
+    "sha256": "de6bdedf19d3aee2d1706b2bddb3bce6f8e94d9d61e26c9821d8a93efd1624a0"
+   },
+   "superficie_sha256": "326b4cf4dd7402af8bf734830d893400caed734d6335e3455a4821c7de976ec4",
+   "superficie_mudou": true,
+   "escritas": {
+    "dados": [
+     [9108,"3030","3939"],
+     [24622,"0000","1f03"],
+     [24626,"0000","1f02"],
+     [24654,"e3","0c"],
+     [317351,"0000","0801"],
+     [317358,"8c","00"],
+     [317360,"e803","6009"],
+     [317364,"e803","6009"],
+     [479091,"00","08"]
+    ]
+   },
+   "cache": {
+    "chaves_sha256": "92684c972125fc99f8f568aff8062c0cdaf64d66d87aec974362af4113fbbff7",
+    "blocos_sha256": "c2414e495f238ca6da80bd7ef02a9f0825666611bdbc080c3aa07efd6404f6bd",
+    "cursor": 12
+   }
+  },
+  {
+   "nome": "reinicio_cache",
+   "antes": "InitCache",
+   "sinteticos": ["viewport/camera/frame/divisor globals and the 800x600 mode are declared","MONDE01 terrain words equal to AffBatiments facade triggers or 0x356 are replaced by 300; object codes 27, 55..65, 253, 254 removed; tree auxiliaries masked to 0..3","visibility maps are a deterministic synthetic pattern; regions [1]*65536; no structures","units are native EnginInit records with state/cell/direction/phase/priority/bag/offsets and +0x74=100 set","projectiles are synthetic 56-byte records of committed renderer types","surface starts from a declared background pattern; DirectDraw locks one fixture buffer"],
+   "entradas": {
+    "terreno": "68c62c99920a35382877d6506fd0f84244af90893e09efc23f041eacd3e6e8e3",
+    "objetos": "cf2bbd9c5efea36bb3f6ea074ce7cfb12cb9ac293ce25177c2fcf3fc174c92ad",
+    "auxiliares": "d95bd7b0170042e6cabe8eac184e995b4b91eab71532e8f833ac3604af7a2d8d",
+    "atributos": "f4e996263e169953befcbdc36273661c60c9cdf89bd2a13917410a8d22fc44ba",
+    "regioes": "96196237ef70f282c1f2fa0e4f99f6a06f7fa7f0e6873bb946ca771167ed36ff",
+    "unidades": "b1edad8728dc6bce781da01d55827492cc206231084860d75dfbb1a04fae1342",
+    "projeteis": "1677f96c3d965a44953cb644796fd1137be5df37e38513fd5587e55751f23880",
+    "estruturas": "97207af1c54bddac19ff877aa5117c728e9360eaf8d6b977d495024bb2f14698",
+    "descoberta": ["9cc55deeec77a6bcb8caca7e5e72c3d5a052dcba5ab01a3de12407fadf708524","fcbfef760af9aa14601fd58a5e18e99c421e71b114c70993b1f2bfec5ade1129","fec0c3100efe2610dfd3bd63b672250d9307f7a0d2d515825c42995a4e9423fe","ee8bb8598464cb669d32c041247d1ff616777d006d82c13aa694b950c3dccbc3"],
+    "iluminacao": ["fb3570243f210b813d6828f81f23c0356d56c1464da1251308037fb3c7d5dbda","70e81306ecf5c8b68b7758a6ed9c7f08701f728944a3e729c70e846ff48847e2","302b18c5ee2d628321daf1e8c1038f1d9d90f63db71ad2de2589dd4445731a81","adcd1533c9bd26882caf0bbc5a0d81137526ae5f5f9ea7d7749c1eb8db0f5c35"],
+    "contagem_luz": ["de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31","de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31"]
+   },
+   "globais": {
+    "rng_u8": "00",
+    "evento_u8": "00",
+    "pitch_u32": "20030000",
+    "dd_ponteiro_u32": "00000000",
+    "dd_travas_u32": "00000000",
+    "fps_contador_u16": "0700",
+    "fps_ultimo_tick_u32": "e8030000",
+    "fps_tick_u32": "e8030000",
+    "caixa_selecao_u8": "00",
+    "forcar_desenho_u8": "00",
+    "modo_jogo_u8": "12",
+    "fps_digitos": "303000",
+    "paginas_texto": "31000000",
+    "selecionada_unidade_u16": "ffff",
+    "selecionada_estrutura_u16": "ffff",
+    "divisor_u8": "01",
+    "largura_tela_u16": "2003",
+    "altura_tela_u16": "5802",
+    "recorte": "00001f0200001f03",
+    "recorte_salvo": "0000000000000000",
+    "restaurar_fundo_u8": "00",
+    "paginas_u8": "01",
+    "camera_u8": "00",
+    "origem": "28001e00",
+    "janela": "19001100",
+    "superficie_u32": "00000000",
+    "quadro_u32": "0c000000",
+    "modo_selecao_u8": "00",
+    "margem_i8": "00",
+    "limpar_u8": "00"
+   },
+   "ticks": [2500],
+   "parada": "0x417b1c",
+   "esp": "0x2007fe4",
+   "instrucoes": 4810885,
+   "vinculos": [
+    ["GetTickCount",[],2500],
+    ["IDirectDrawSurface::IsLost",[234882048],0],
+    ["IDirectDrawSurface::Lock",[234882048,0,108,1,0],0]
+   ],
+   "rastro": {
+    "eventos": 2744,
+    "por_funcao": {
+     "AffBatimentOmbre": 726,
+     "AffBatiments": 726,
+     "AffBloc": 425,
+     "AffSprite": 1,
+     "AffTerrain": 1,
+     "AffVeget": 13,
+     "AffVegetTerrain": 425,
+     "CalculFrame": 1,
+     "DDLockSurface": 1,
+     "GetNumBob": 425
+    },
+    "sha256": "2c1ac097d81417e1c8d8dd8472727f33173871c06caf4ae5f4988edc99126883"
+   },
+   "superficie_sha256": "a649da5dae4250c40e7c1a183e7d68617cfdf87b5ec8bc469523e9c404f5be58",
+   "superficie_mudou": true,
+   "escritas": {
+    "dados": [
+     [9109,"30","38"],
+     [24622,"0000","1f03"],
+     [24626,"0000","1f02"],
+     [24654,"0c","3f"],
+     [317351,"0000","0801"],
+     [317358,"07","00"],
+     [317360,"e803","c409"],
+     [317364,"e803","c409"],
+     [479091,"00","08"]
+    ]
+   },
+   "cache": {
+    "chaves_sha256": "27585906bd19c6ff15ad733170c4e8a4ad5e1d7e8fb9953f17de755202ab49cf",
+    "blocos_sha256": "948c4de07095df0083435f6f42843ef2d635d9be3b2c672ac1bf891166564d47",
+    "cursor": 63
+   }
+  }
+ ],
+ "totals": {
+  "native_entries": 21,
+  "instructions_observed": 24015999,
+  "bound_calls": 97331
+ },
+ "seconds": 25.586
+}
