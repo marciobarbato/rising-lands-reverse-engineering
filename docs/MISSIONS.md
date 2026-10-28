@@ -422,3 +422,13 @@ Recorded as planned; not implemented. The result of `carregar_missao(numero, ...
   - the projectile pool, AI tables after IaReset (no iaInit, which has no caller), message-box/balloon/icon state, and the unit-type and bonus rule inputs with provenance.
 - **A field-layout table, or a read-only `descrever_missao(resultado)`**, for every displayed field. Conditions and objectives are shown raw only, and TestFinDeMission is not evaluated.
 - **Briefing.** MissionLoad does not read `WORLD/MONDE01.TXT`, and the routine that selects or displays it has not been traced. Until it is, the app shows the raw CP1252→UTF-8 CD text with its SHA-256, labeled as source text.
+
+The resumed Codex round refines this proposal in [M1_SNAPSHOT_CONTRACT.md](../pesquisas-paralelas/missoes/M1_SNAPSHOT_CONTRACT.md): identity/source revision, acceptance gates, exact block layouts/aliasing and per-range inherited-versus-loaded provenance. It includes the whole static image and a closed declared-allocation registry so unnamed AI/runtime bytes are not dropped. It remains a planned interface; no accepted M1 snapshot or running mission is claimed.
+
+## Stage 11 readiness: original structure traversal
+
+The new human authorization of 2026-10-28 supersedes the historical Stage8 STOP. The existing worktree and Stages9/10 were preserved and fast-forwarded to the coordinator's inspected main `8810b3730a0fb788af3eac2b447dea65372f597f`. Core Stage14 already resolves MONDE01 unit15; the earlier Stage8 dependency descriptions remain historical evidence, not a current blocker.
+
+[Readiness and capture plan](../pesquisas-paralelas/missoes/STAGE11_READINESS.md) and [static original inventory](../pesquisas-paralelas/missoes/evidencias/terreno-estruturas-missao-inventario.json) cover `MissionPlaceTerrain 0x46c16d..0x46c1b8`, `BatimentExiste 0x41a735..0x41a75c`, and shared epilogue `0x46b6f5..0x46b6f8`. The loop visits1000 indices in ascending order: existence lowAL → actual placement → habitation lowAL → conditional habitation effects → actual map modification(index,1). The predicate reads state byte+5; the final map call applies to every existing structure.
+
+This is light original-byte/contract work only. No native observations, heavy checks or reconstructed traversal have been added yet. Wait for the coordinator's integrated Core15 SHA and heavy slot before consuming its map/reset providers, capturing original whole state, translating the caller and running the required Missions integration helper. Original-only observations precede the translation; prior captures/manifests remain unchanged. Whole MissionLoad, natural remap completion, Core experience retrieval, integrated AI reset, objectives/events and real runtime remain separate dependencies.
