@@ -1,0 +1,151 @@
+{
+  "rea_source_revision": "b9a8f8e9f25feb9cc97bf4960748f2bdf8c898bc",
+  "original_executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "normalized_analysis_sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "scope": "Prepared type-2 attack stride read; no simulation phase producer inference.",
+  "instruction_observation": {
+    "evidence_id": "ev_0b7c48f5829df9b2cbf05490345823c689ae50dc4763a66b6c22873e55c921a1",
+    "subject": {
+      "name": "RISING-analise.exe",
+      "digest": {
+        "sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0"
+      },
+      "local_path": "/Users/marcio/git/Rising Lands/engenharia-reversa/.local/entrada/RISING-analise.exe",
+      "format": "pe",
+      "architecture": "x86"
+    },
+    "provider": {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "version": "12.2"
+    },
+    "analysis_profile": {
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.2"
+      },
+      "parameters": {
+        "target_kind": "executable",
+        "target_format": "pe",
+        "architecture": "x86",
+        "import_mode": "existing-project-private-copy-v1",
+        "annotation_policy": "read-only-existing-project-v1",
+        "load_image_observations": "source-mappings-entry-context-v2",
+        "function_body_evidence": "complete-inclusive-ranges-v1",
+        "function_references": "complete-body-and-entry-reference-manager-v2",
+        "call_relationship_coverage": "function-body-call-coverage-v5",
+        "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+        "string_inventory_evidence": "defined-data-coverage-v1",
+        "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+        "procedure_file_offset_resolution": "address-first-unique-target-source-mapping-v2",
+        "instruction_flow_evidence": "decoded-return-pcode-v1",
+        "instruction_references": "exact-address-incoming-without-synthetic-entry-v2",
+        "function_boundary_observations": "ghidra-function-boundary-limitations-v4",
+        "existing_project": {
+          "configured_path": "/Users/marcio/git/Rising Lands/engenharia-reversa/ghidra/projetos/RisingLands.gpr",
+          "project_path": "/Users/marcio/git/Rising Lands/engenharia-reversa/ghidra/projetos",
+          "project_name": "RisingLands",
+          "program_name": "RISING-analise.exe",
+          "sha256": "3ad8f23827b3532617346b189d3ea83a25fcecb9fc682ad7e30fa671b61791ec"
+        },
+        "original_analysis": {
+          "completeness": "unknown",
+          "settings": "unknown"
+        },
+        "no_return_repair": "disabled-existing-project",
+        "process_launch": "inspected-jvm-launch-support-v1"
+      },
+      "digest": "33da723a26733dd8b59046612d0c42bf95bb1b59c46a63f17b127521af169a3d"
+    },
+    "predicate_type": "rea.analysis",
+    "operation": "inspect_native_instruction",
+    "parameters": {
+      "address": "0x413bff"
+    },
+    "raw_result": null,
+    "normalized_result": {
+      "address": "0x413bff",
+      "status": "decoded",
+      "procedure": "0x41374c",
+      "architecture": "x86:LE:32:default",
+      "mode": "default",
+      "bytes": "8a96a6000000",
+      "length": 6,
+      "mnemonic": "MOV",
+      "raw_disassembly": "MOV DL,byte ptr [ESI + 0xa6]",
+      "operands": [
+        {
+          "index": 0,
+          "raw": "DL",
+          "provider_type": 512,
+          "components": [
+            {
+              "kind": "register",
+              "text": "DL",
+              "value": "DL",
+              "bit_width": 8
+            }
+          ],
+          "memory_addressing": "unavailable"
+        },
+        {
+          "index": 1,
+          "raw": "byte ptr [ESI + 0xa6]",
+          "provider_type": 4194304,
+          "components": [
+            {
+              "kind": "register",
+              "text": "ESI",
+              "value": "ESI",
+              "bit_width": 32
+            },
+            {
+              "kind": "immediate",
+              "text": "0xa6",
+              "value": "0xa6",
+              "bit_width": 32
+            }
+          ],
+          "memory_addressing": "unavailable"
+        }
+      ],
+      "flow": {
+        "kind": "fallthrough",
+        "conditional": false,
+        "computed": false,
+        "direct_destinations": [],
+        "classification_evidence": [
+          {
+            "source": "ghidra-listing-flow-type",
+            "value": "FALL_THROUGH"
+          }
+        ]
+      },
+      "references": [],
+      "incoming_references": [],
+      "limitations": [
+        "Operand components are Ghidra Listing decoder tokens; effective memory base/index/displacement roles and per-instruction context mode are unavailable. The mode field is the program language variant."
+      ]
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "This session opens a caller-selected existing Ghidra project through a private copy, without import, auto-analysis or repair scripts. Original analysis completeness and settings are unknown.",
+      "The original project is never opened by Ghidra or modified. The private copy is read-only to bridge operations and deleted on close; original executable bytes are never written.",
+      "The analysis profile records the selected project content fingerprint and program name. The imported program SHA-256 must match the admitted target; the project may contain caller annotations or earlier edits, which are not fresh REA discoveries.",
+      "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+      "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state.",
+      "This session uses Ghidra 12.2. The bridge is verified against 12.1.4; other 12.x (>=12.1) builds are accepted and the observed version is reported."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": []
+  },
+  "review_notes": [
+    "Exact original MOV DL,[ESI+0xA6] at0x413BFF corroborates runtime attack stride; normal body reads0xA5 instead.",
+    "The Listing exposes operand tokens without proven effective-address roles or a Watcom signature.",
+    "Original opcode ranges and independent original-x86 calls are authoritative; the normalized PE is a distinct static analysis subject."
+  ]
+}
