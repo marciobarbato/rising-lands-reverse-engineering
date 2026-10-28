@@ -441,7 +441,7 @@ Delivered in `construcoes_habitaveis.py`; the full contract is in [ECONOMY.md](.
 **Validation.** Fresh native run on current main gates (10/8): 20 tests, 1,509 original entries / 1,571 segments / 62 minimap resumptions. Outcomes: 53 full returns, 101 discovery-gate stops (including MONDE01), 2 light stops, 1 expected `#DE`, 0 mismatches/limits/skips. A labelled diagnostic with core's announced 23/20 gives the same entries in 1,967 segments / 458 resumptions, and all 12 actual-MONDE01 caller configurations complete with whole-buffer equality. Local: 10 run / 10 optional skips. Required economy gate: 413 discovered / 190 optional skips; documentation links pass.
 
 **Gaps.**
-- Actual MONDE01 completes once core Stage 14 publishes the constants. I will rerun the native suite on that main and report.
+- Resolved after core Stage 14 (see below): actual MONDE01 now completes on main.
 - `BatimentHabitable` callers `BatimentConstruction 0x41d000` and `BatimentLogeEngin 0x41fa81` are not composed.
 - Stage 16 proposal: the `EnginInitTechnologie 0x441459` → `BatimentInitCave 0x419112` tail pair (InitCave is already reconstructed; its mission-world composition remains), then `PlayerRetrieve 0x46df41`.
 
@@ -456,3 +456,51 @@ Delivered in `construcoes_habitaveis.py`; the full contract is in [ECONOMY.md](.
   - I proposed core for `DemonteBatiment 0x41effd`.
   - Unimplemented bodies must raise at their call sites.
 - For missions' reset prefix: economy owns `MarcheResetAll 0x46027c` (selective reset exists: `ciclo_mercado.CicloMercado.resetar_todos`) and `BallonInit 0x441b6c` (not implemented; a named dependency until then). Pending missions' published call list.
+
+## Stage 15 follow-up after core Stage 14
+
+Stage 15 integrated as implementation `5aed3dfe94a16a94e03c9bceb4dd8437be9c710c` (evidence `7081ac94c5f36e96d7ef4ab29203ab776a072a24`), feature `c5237347d8eae9ce02108dc144fa5debcd0f4a9d`, main `7a60f54937fb1e7351a76dd85c8974627db06be4`. Ancestry was verified and the merge tree reproduced natively. Integration gate: core 357/169, combat 236/145, economy 413/190, graphics 184/0, missions 65/24, ai-runtime 3/0, audio 2/0, workflow 8/0.
+
+Core Stage 14 landed at main `7b7b96960cee0ec7868914e811f51b851fc27dba`, publishing radii 23/20 and insertion sum 11. After merging it, results with no diagnostic override:
+- **Structure habitation:** 20 tests, 1,509 entries / 1,967 segments / 458 resumptions. All 12 actual-MONDE01 caller configurations complete to `0x46c1a7`: `DecouvreTerrain(3086, 13, 0)`, `IllumineTerrain(3086, 10, 0)`, whole-buffer equality. 0 mismatches/limits/skips.
+- **Captures:** local replay matches 21 of 22 original-only captures in full; the owner-4 boundary is the remaining one.
+- **Producer placement:** same counts as Stage 12, with the vision stops now at sum 12.
+
+The pre-core habitation report is preserved as `validacao-habitaveis-emulada-antes-core.json`; the producer report was byte-identical, so no copy was kept.
+
+Further records:
+- From AI/runtime: core owns `DemonteBatiment 0x41effd` (physical removal) and unit state 13. Economy owes the `DemonteBatiment` refund arithmetic as a callable query; until published it is a named dependency. `BatimentGetPlayer`/`BatimentGetType`/`BatimentEnDestruction` stay economy queries.
+- Missions will consume the habitation contract in its Stage 11, after its reset-prefix Stage 10.
+- Next, pending coordinator confirmation: Stage 16, the `EnginInitTechnologie 0x441459` → `BatimentInitCave 0x419112` tail, then `PlayerRetrieve 0x46df41`.
+
+## Stage 16: economy MissionLoad initializer tails
+
+Delivered in `cauda_carga.py`; the full contract is in [ECONOMY.md](../../docs/ECONOMY.md#economy-load-tails-of-missionload-stage-16). Inventory: `evidencias/cauda-carga.json` (14 intervals). Original-only captures: `evidencias/captura-cauda-carga-original.json` (22 fragment entries / 30 segments), committed as `8d0f2a9` before translation.
+
+**API for missions' tail composition.**
+- `CaudaCargaEconomia(habitacao, ciclo_mercado, *, rede, jogadores_guardados)`:
+  - `habitacao` is the Stage 15 `HabitacaoConstrucoes`. Its economy world's `contagens_por_tipo` must be the same object as core's `mundo.realizaveis_estruturas` (`0x49a070`), and its `propriedade.ordens` is the `[0x4e19b8]` unit-order Bags (10,816 bytes).
+  - `ciclo_mercado` is a `CicloMercado` over the loaded market buffers and the live player table `Mercado.jogadores` (`[0x5080a8]`); it must share the `Economia`.
+  - `rede` is the byte at `0x4e0730`.
+  - `jogadores_guardados` is the 80-byte source table `[0x5080ac]`.
+  - `casos_cauda_carga.montar_cauda` shows the identity wiring.
+- Calls in MissionLoad order: `.inicializar_tecnologia_unidades()` (`0x441459`), `.inicializar_cavernas(mundo)` (`0x419112`), [core `0x441623`], `.recuperar_jogadores()` (`0x46df41`), [ai-runtime `iaReset`], `.resetar_mercado()` (`0x46027c`).
+- MissionLoadName replaces core and `PlayerRetrieve` with economy's `RechercheCalculNew 0x47150f`. It is not implemented, so it must raise a named dependency at `0x46c982`.
+- Protected-domain `ValueError`s come before the call's stores. No call is replayed.
+
+**Answers to the coordinator.**
+- `MarcheResetAll 0x46027c` is exactly the committed `CicloMercado.resetar_todos`: same seven stores per player, same order, no difference. It is now also validated in tail position.
+- `0x47150f` is `RechercheCalculNew`, owned by economy (research/technology); it is on the MissionLoadName path only, and was proposed as a separate later stage.
+
+**Validation.**
+- Fresh native: 11 tests, 435 original entries / 451 segments / 16 resumptions, every entry at its declared checkpoint, 0 mismatches/faults/limits/skips.
+- Actual MONDE01 (four table/network configurations plus two chained after Stage 15 habitation) matches whole state. MONDE01 counts one sanctuary and no cave, so all warehouse words are 0.
+- Local: 5 run / 6 optional skips; all 7 captures replay to full equality. Economy gate: 424 discovered / 196 optional skips.
+
+**Stage 15 on core's main.** The actual-MONDE01 result is recorded in the Stage 15 follow-up above: main `04c7bfb`, 12/12 caller configurations complete through discovery 13 / light 10.
+
+**Gaps.**
+- `RechercheCalculNew` and its `InventionSetEffet 0x470f98`.
+- `DemonteBatiment` refund query.
+- Natural production start (next sequence item 2) and the transport/work cycle (item 3).
+- Note for core: `0x49a070` holds per-owner, per-type counts of active structures (`BatimentInitCave`), not realizability flags. Only the name is misleading; no change is requested.

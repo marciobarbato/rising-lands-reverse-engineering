@@ -1,0 +1,41 @@
+{
+  "scope": "MissionLoad 0x46c5af..0x46c5b9 (EnginInitTechnologie, BatimentInitCave), 0x46c5be..0x46c5c3 (PlayerRetrieve), 0x46c5d1..0x46c5d6 (MarcheResetAll), MissionLoadName 0x46c978..0x46c982, direct EnginSetTechnologie and TypeBatimentEstRealisable, against Python on shared world state",
+  "mode": "Python only",
+  "tests": 11,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_actual_monde01_tail_configurations_and_after_habitation (test_cauda_carga.DiferencialCaudaCarga)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_byte_count_wrap_for_caves_and_heliports (test_cauda_carga.DiferencialCaudaCarga)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_direct_engin_set_technologie_with_high_register_bits (test_cauda_carga.DiferencialCaudaCarga)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_direct_type_realizable_every_owner_type_and_network (test_cauda_carga.DiferencialCaudaCarga)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_mission_load_name_call_sites (test_cauda_carga.DiferencialCaudaCarga)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_random_structure_pools_networks_and_table_patterns (test_cauda_carga.DiferencialCaudaCarga)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "original_entries": {},
+  "outcomes": {},
+  "bounded_x86_executions": 0,
+  "preserved_minimap_resumptions": 0,
+  "expected_x86_exceptions": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}
