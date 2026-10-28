@@ -1,0 +1,120 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "SetDyingEngin",
+      "start": "0x444938",
+      "end_exclusive": "0x444dad",
+      "sha256": "f0435606ab316097cae15573e08d0e8a4a7bcb8070501459060f252ed6b4d9b9",
+      "file": "00444938.asm"
+    },
+    {
+      "name": "GetBit",
+      "start": "0x467d97",
+      "end_exclusive": "0x467da6",
+      "sha256": "5ad94644e5a4950ec556cde4a48ab0e2a827235472d9c33dd7112adb595e098e",
+      "file": "00467d97.asm"
+    },
+    {
+      "name": "iagUnitSendMessage_prefix",
+      "start": "0x4829c8",
+      "end_exclusive": "0x482a51",
+      "sha256": "05d68e4f0d532d7e8b543edf29abc901adc7634228a0e3ff569444f1e23f53ff",
+      "file": "004829c8.asm"
+    },
+    {
+      "name": "message44_null_group_guard",
+      "start": "0x482c50",
+      "end_exclusive": "0x482c58",
+      "sha256": "585b2c8e52d25d7da6a471d8fa0f4616e7b44862402114cc1f259a85e76bc381",
+      "file": "00482c50.asm"
+    },
+    {
+      "name": "iagUnitSendMessage_epilogue",
+      "start": "0x482eb5",
+      "end_exclusive": "0x482ebc",
+      "sha256": "3c7089108f657d67184775645e7f3ede50a6a9d602907395e1dbc97bde4a5952",
+      "file": "00482eb5.asm"
+    },
+    {
+      "name": "PlayerGetControle",
+      "start": "0x46d817",
+      "end_exclusive": "0x46d838",
+      "sha256": "e7dccad3502b5e1780fe4892ed485fb45325ceba840e4973e3e319d156358495",
+      "file": "0046d817.asm"
+    },
+    {
+      "name": "PlaySnd_StopSound_jump",
+      "start": "0x48aac0",
+      "end_exclusive": "0x48aac5",
+      "sha256": "c63a505ddbe4f9e1854eb14dc7a40defa273650f066d491a1b283ecde908b378",
+      "file": "0048aac0.asm"
+    },
+    {
+      "name": "HandleSnd_StopHandle_inactive",
+      "start": "0x48a438",
+      "end_exclusive": "0x48a446",
+      "sha256": "48c6464336298f27ef57e01abcb72e3bdf96d3d5689c4c56c6df2585a04fba8f",
+      "file": "0048a438.asm"
+    },
+    {
+      "name": "TerrainEstDecouvert",
+      "start": "0x4766f0",
+      "end_exclusive": "0x47670a",
+      "sha256": "c7d7973f063848a5fbb332c9d87310bfea7ce416069d880fc6c7cfb2f0a58262",
+      "file": "004766f0.asm"
+    },
+    {
+      "name": "DeselectionEngin",
+      "start": "0x472648",
+      "end_exclusive": "0x47268b",
+      "sha256": "0422c13ff6d7f2890337f2c27c62580d3f4fcb3e5b844769ea03e864dc177a37",
+      "file": "00472648.asm"
+    },
+    {
+      "name": "EnginGetPlayer",
+      "start": "0x442045",
+      "end_exclusive": "0x442064",
+      "sha256": "51a88e03cba6292ad8cbbe0ddf8859022a4d1c53308d94c8346f5532c59b4a98",
+      "file": "00442045.asm"
+    },
+    {
+      "name": "SetDyingEngin_epilogue",
+      "start": "0x44f29d",
+      "end_exclusive": "0x44f2a3",
+      "sha256": "b080fef966146bceefcbdf9abf2b8f63e9e525b0ea53261f613e71703b86964f",
+      "file": "0044f29d.asm"
+    },
+    {
+      "name": "shared_register_epilogue",
+      "start": "0x440d58",
+      "end_exclusive": "0x440d5e",
+      "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "file": "00440d58.asm"
+    },
+    {
+      "name": "ResetEnginCollision",
+      "start": "0x442eac",
+      "end_exclusive": "0x44302e",
+      "sha256": "dff460322ba88fea9fdc6689c600e6e938ac93449fe9073ad1bb22b268bd8c57",
+      "file": "00442eac.asm"
+    }
+  ],
+  "effect_dispatch": {
+    "address": "0x44491c",
+    "first_type": 11,
+    "bytes_hex": "ca4b4400ca4b4400ca4b4400ca4b4400ca4b4400ca4b4400ca4b4400",
+    "targets": [
+      "0x444bca",
+      "0x444bca",
+      "0x444bca",
+      "0x444bca",
+      "0x444bca",
+      "0x444bca",
+      "0x444bca"
+    ],
+    "sha256": "17afd5196516b6ba7ab244199f16aeae3bf1ceb502968d13557883050d96ff3c"
+  },
+  "scope": "Complete ordinary hidden-unit physical returns and explicit native dependency stops; no complete AI/sound/inventory/selection/effect/special-flag lifecycle."
+}

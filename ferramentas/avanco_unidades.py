@@ -38,6 +38,10 @@ class MundoFisico(MundoUnidades, VisaoMovimento):
         self.bonus_fadiga = [[0] * 26 for _ in range(4)]
         self.rotas = [bytearray(b'\0\0') for _ in range(800)]
 
+    def iniciar_morte_unidade(self, indice):
+        from morte_unidades import iniciar_morte_unidade
+        return iniciar_morte_unidade(self, indice)
+
     def _pegada(self, tipo, celula):
         return [(celula - d) & 65535 for d in ((0, 1, 257, 256) if tipo in QUADRUPLOS else (0,))]
 
