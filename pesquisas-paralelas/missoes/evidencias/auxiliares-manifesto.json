@@ -1,0 +1,54 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "inspected_main": "189c94eac6700c5d0fb24dc547d5da015734b06d",
+  "intervals": [
+    {
+      "name": "LoadMine",
+      "start": "0x47534a",
+      "end_exclusive": "0x47539c",
+      "sha256": "3f1fdf5e65052dd5d753cebc4e5c3743bf94261702b60d6feac1e5f76801e6df",
+      "file": "auxiliares-0047534a.asm"
+    },
+    {
+      "name": "IALoadAttaqueIni",
+      "start": "0x47c24d",
+      "end_exclusive": "0x47c2ec",
+      "sha256": "02072066b95a760d71c988b724c80e4f00bda8e687f621302eac8da3a3fd3ad7",
+      "file": "auxiliares-0047c24d.asm"
+    },
+    {
+      "name": "MissionLoad_first_auxiliaries",
+      "start": "0x46c57d",
+      "end_exclusive": "0x46c587",
+      "sha256": "8dbd51f7930c40ab9b6929164e46579d6ceaa5d0b4f34f6d595d77a14e94b545",
+      "file": "auxiliares-0046c57d.asm"
+    },
+    {
+      "name": "MissionLoadName_first_auxiliaries",
+      "start": "0x46c946",
+      "end_exclusive": "0x46c950",
+      "sha256": "fe86f5f18ea2b2fbba6ffbd44f855de924821956976a753b99cfda3502327fa0",
+      "file": "auxiliares-0046c946.asm"
+    }
+  ],
+  "mine_buffer": {
+    "base": "0x509954",
+    "bytes": 80,
+    "records": 20,
+    "stride": 4
+  },
+  "attack_buffer": {
+    "base": "0x50d5b4",
+    "bytes": 1004,
+    "records": 100,
+    "stride": 10,
+    "disk_stride": 8,
+    "counter": "0x50d99c"
+  },
+  "economy_consumer": {
+    "path": "pesquisas-paralelas/economia/extracao.py",
+    "sha256": "04e7a3473c5565967c958e7241626b6af29f77f59d2bcbd1d0e0069e25848e62"
+  },
+  "scope": "Two complete raw auxiliary loaders and exact caller order; stop before LoadBatimentGhost. No resource extraction, shared AI interpreter, events or mission execution.",
+  "import_boundary": "Economic and graphics flat construcoes modules collide; actual economy-object regression runs in a separate Python process without modifying providers."
+}
