@@ -138,6 +138,8 @@ com índice válido provoca exceção em `0x423ea8`.
 de tempo em segundos não está estabelecida; não converter os tempos para ms.
 Os nomes sugerem recrutamento e aprendizagem, mas esta etapa não implementa
 o avanço por tick, conclusão da produção, criação de unidades ou fila FIFO.
+O avanço foi traduzido na continuação [PRODUCAO.md](PRODUCAO.md); sua frequência
+de chamada, a conclusão e as demais dependências continuam em aberto.
 
 ## Validação e alcance
 
@@ -168,12 +170,13 @@ usam CPUs novas, evitando o estado residual de exceção do Unicorn. A bancada
 impõe hash do EXE, intervalos permitidos, timeout de um segundo e limite
 de 20.000 instruções por chamada. Não foi iniciada uma partida.
 
-A suíte acumulada registra **130 testes aprovados e 22.276 execuções x86**,
+Ao terminar esta etapa, a suíte registrava **130 testes aprovados e 22.276 execuções x86**,
 incluindo 88 exceções e três limites esperados. Há 22.185 paradas declaradas,
 das quais 64 são na retirada de colono, 32 nas dependências de balão e 546 na
 saída de recrutamento; também incluem os 128 sufixos isolados. Nenhum teste foi
 ignorado na execução emulada. Em modo local, passam 71 e são ignorados 59
-diferenciais. Ver [validacao-emulada.json](validacao-emulada.json).
+diferenciais. O relatório [validacao-emulada.json](validacao-emulada.json)
+agora inclui também as continuações descritas no [README.md](README.md).
 
 O corpus de tipos vem dos registros já reconstruídos em
 `relatorios/unidades.json`; a carga INI original não foi executada. A API
@@ -184,6 +187,7 @@ domínios; essa diferença não é apresentada como equivalência validada.
 O manifesto contém chamadas diretas candidatas de ProcessInputGame e
 V_BatimentRecruteUnite para InitRecruteTroupe, além das consultas por AffChrono
 e IconeFillContenu. A varredura não prova os fluxos completos desses chamadores.
-Permanecem pendentes avanço/conclusão, produção efetiva, filas e integração
+O avanço foi entregue em [PRODUCAO.md](PRODUCAO.md). Permanecem pendentes
+conclusão/escalonamento, produção efetiva, filas e integração
 com as rotinas responsáveis pela saída. Mercado, consumo/fome e transporte
 completo também permanecem pendentes.

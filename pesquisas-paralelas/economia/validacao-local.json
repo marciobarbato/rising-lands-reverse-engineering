@@ -1,6 +1,6 @@
 {
   "modo": "Python sem emulação",
-  "testes": 130,
+  "testes": 145,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -149,6 +149,34 @@
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {
+      "teste": "test_15872_combinacoes_float_no_corpo_original_completo (test_producao.DiferencialProducao)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_2048_ajustes_u8_de_garagem_e_hospital_nas_duas_rotinas (test_producao.DiferencialProducao)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_512_estados_variados_preservam_memoria_e_saldos (test_producao.DiferencialProducao)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_bag_modo1_capacidades_etiquetas_referencias_e_duplicatas (test_producao.DiferencialProducao)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_controle_inicial_e_diferenca_de_precisao (test_producao.DiferencialProducao)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_flags_limites_tempos_e_ordem_das_consultas (test_producao.DiferencialProducao)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_sequencias_tipos_reais_e_consultas_de_status (test_producao.DiferencialProducao)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
       "teste": "test_bibliotecas_flags_e_bags_256_chamadas (test_proprietarios.DiferencialProprietarios)",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
@@ -249,7 +277,8 @@
     "DiferencialInitCave": 0,
     "DiferencialProprietarios": 0,
     "DiferencialExtracao": 0,
-    "DiferencialRecrutamento": 0
+    "DiferencialRecrutamento": 0,
+    "DiferencialProducao": 0
   },
   "excecoes_x86_esperadas": 0,
   "limites_x86_esperados": 0,

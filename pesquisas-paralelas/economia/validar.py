@@ -27,10 +27,11 @@ def main():
     from test_proprietarios import DiferencialProprietarios
     from test_extracao import DiferencialExtracao
     from test_recrutamento import DiferencialRecrutamento
+    from test_producao import DiferencialProducao
     bancadas = {classe.__name__: getattr(classe, 'b', None)
                 for classe in (Diferencial, DiferencialConstrucoes, DiferencialRetiradaRecalculo,
                                DiferencialInitCave, DiferencialProprietarios, DiferencialExtracao,
-                               DiferencialRecrutamento)}
+                               DiferencialRecrutamento, DiferencialProducao)}
     contagens = {nome: getattr(b, 'execucoes', 0) for nome, b in bancadas.items()}
     excecoes = sum(getattr(b, 'excecoes_esperadas', 0) for b in bancadas.values())
     limites = sum(getattr(b, 'limites_esperados', 0) for b in bancadas.values())

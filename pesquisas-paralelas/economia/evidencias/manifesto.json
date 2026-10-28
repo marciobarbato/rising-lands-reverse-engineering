@@ -19,6 +19,8 @@
     "0x00423355": "BatimentCalculResource",
     "0x0042340f": "BatimentAjouteMatiere",
     "0x004235bd": "BatimentEnleveMatiere",
+    "0x00423b9b": "ConstruitPerso",
+    "0x00423d14": "ConstruitSort",
     "0x00423e65": "CalculNovaRecrute",
     "0x00423f83": "GetStatusRecrute",
     "0x00423f9d": "CalculStatusRecrute",
@@ -79,7 +81,10 @@
     "0x004813b8": "B_TestStock",
     "0x00481400": "B_TestRessource",
     "0x00485f20": "B_TestMaxRocheDansStock",
-    "0x00485fb9": "iagRessGetPlayerWealth"
+    "0x00485fb9": "iagRessGetPlayerWealth",
+    "0x0048c43e": "__CHP",
+    "0x0048e588": "__init_8087",
+    "0x004903a6": "__init_80x87"
   },
   "trechos_auxiliares": {
     "0x00423025": {
@@ -1270,6 +1275,15 @@
       ]
     },
     {
+      "endereco": "0x00421830",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
+      "simbolo_anterior": [
+        "GetPourcentageOccupation"
+      ]
+    },
+    {
       "endereco": "0x004218a9",
       "instrucao": "call",
       "alvo": "0x004471b8",
@@ -1292,6 +1306,15 @@
       "instrucao": "call",
       "alvo": "0x004471b8",
       "nome": "BagContient",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x00421b9c",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
       "simbolo_anterior": [
         "CalculReparation"
       ]
@@ -1342,6 +1365,15 @@
       ]
     },
     {
+      "endereco": "0x00421f55",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
       "endereco": "0x00421f81",
       "instrucao": "call",
       "alvo": "0x00423f9d",
@@ -1373,6 +1405,15 @@
       "instrucao": "call",
       "alvo": "0x004471b8",
       "nome": "BagContient",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x00422352",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
       "simbolo_anterior": [
         "CalculReparation"
       ]
@@ -1436,6 +1477,15 @@
       "instrucao": "call",
       "alvo": "0x004471b8",
       "nome": "BagContient",
+      "simbolo_anterior": [
+        "CalculReparation"
+      ]
+    },
+    {
+      "endereco": "0x00422728",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
       "simbolo_anterior": [
         "CalculReparation"
       ]
@@ -1657,6 +1707,15 @@
       ]
     },
     {
+      "endereco": "0x00423ceb",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
+      "simbolo_anterior": [
+        "ConstruitPerso"
+      ]
+    },
+    {
       "endereco": "0x00423d3e",
       "instrucao": "call",
       "alvo": "0x0047476a",
@@ -1873,6 +1932,15 @@
       ]
     },
     {
+      "endereco": "0x00425b1b",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
       "endereco": "0x00425b7c",
       "instrucao": "call",
       "alvo": "0x004410b7",
@@ -1882,10 +1950,37 @@
       ]
     },
     {
+      "endereco": "0x00425c13",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425c6a",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
       "endereco": "0x00425ccc",
       "instrucao": "call",
       "alvo": "0x004410b7",
       "nome": "EnginGetTimeRecrute",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425d87",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
       "simbolo_anterior": [
         "CalculTroupe"
       ]
@@ -1918,6 +2013,15 @@
       ]
     },
     {
+      "endereco": "0x00425fa5",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
       "endereco": "0x00425fdb",
       "instrucao": "call",
       "alvo": "0x0047476a",
@@ -1940,6 +2044,15 @@
       "instrucao": "call",
       "alvo": "0x004410b7",
       "nome": "EnginGetTimeRecrute",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00426171",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
       "simbolo_anterior": [
         "CalculTroupe"
       ]
@@ -3799,6 +3912,15 @@
       ]
     },
     {
+      "endereco": "0x0046875b",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
+      "simbolo_anterior": [
+        "MenuInit"
+      ]
+    },
+    {
       "endereco": "0x0046aab9",
       "instrucao": "call",
       "alvo": "0x0046799c",
@@ -4258,6 +4380,15 @@
       ]
     },
     {
+      "endereco": "0x00479868",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
+      "simbolo_anterior": [
+        "AngleCalcul"
+      ]
+    },
+    {
       "endereco": "0x0047a638",
       "instrucao": "call",
       "alvo": "0x004704dc",
@@ -4327,6 +4458,15 @@
       "nome": "Random",
       "simbolo_anterior": [
         "I_DonneBatimentAAttaquer"
+      ]
+    },
+    {
+      "endereco": "0x00480fb4",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
+      "simbolo_anterior": [
+        "I_AffectePrix"
       ]
     },
     {
@@ -4615,6 +4755,42 @@
       "nome": "Random",
       "simbolo_anterior": [
         "GetRandCaseTypeBatPlayer"
+      ]
+    },
+    {
+      "endereco": "0x0048e5b1",
+      "instrucao": "call",
+      "alvo": "0x004903a6",
+      "nome": "__init_80x87",
+      "simbolo_anterior": [
+        "__init_8087"
+      ]
+    },
+    {
+      "endereco": "0x0048e5eb",
+      "instrucao": "call",
+      "alvo": "0x0048e588",
+      "nome": "__init_8087",
+      "simbolo_anterior": [
+        "__chk8087"
+      ]
+    },
+    {
+      "endereco": "0x00491745",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
+      "simbolo_anterior": [
+        "_FtoS"
+      ]
+    },
+    {
+      "endereco": "0x00493301",
+      "instrucao": "call",
+      "alvo": "0x0048c43e",
+      "nome": "__CHP",
+      "simbolo_anterior": [
+        "modf"
       ]
     }
   ]

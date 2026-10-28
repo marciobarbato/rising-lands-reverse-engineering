@@ -8,8 +8,8 @@ não criar caches nos módulos compartilhados lidos pela pesquisa.
 
 ## Como incorporar
 
-1. Revisar [README.md](README.md), os ASM e o relatório com 130 testes aprovados
-   e 22.276 execuções x86 (incluindo 88 exceções, três limites esperados e
+1. Revisar [README.md](README.md), os ASM e o relatório com 145 testes aprovados
+   e 42.542 execuções x86 (incluindo 88 exceções, três limites esperados e
    paradas em dependências/sufixos delimitados em cada documento).
    Executar `validar.py --emular` se houver Unicorn/JIT.
 2. Incorporar `economia.py` em `ferramentas/` ou manter a pesquisa como módulo
@@ -223,6 +223,37 @@ de ponta a ponta. Não promover esta etapa como fila completa ou criação de
 unidades. Endereços, campos, domínio e testes estão em
 [RECRUTAMENTO.md](RECRUTAMENTO.md).
 
+## Avanço de produção
+
+Promover também `producao.py` e integrar `Producao` à mesma instância de
+`Recrutamento`. A tabela de construções é copiada; os demais buffers são
+compartilhados através de `r`:
+
+```python
+from producao import Producao
+
+p = Producao(r, tipos_construcoes=bloco_1144_bytes_desde_495d8c,
+             ajuste_hospital=byte_495be8)
+p.avancar_unidade(indice_construcao)     # ConstruitPerso 0x423b9b
+# No chamador apropriado para aprendizagem:
+p.avancar_sortilegio(indice_construcao)  # ConstruitSort 0x423d14
+```
+
+O único campo alterado é `r.mundo.estruturas[indice*276+0x8c:...+4]`.
+Preservar a ordem de chamadas e manter a conclusão no chamador responsável.
+Retorno verdadeiro não confirma conclusão; não criar unidade, ensinar
+sortilégio, limpar flags ou cobrar de novo com base nesse booleano.
+O contador pode ultrapassar `tempo*100` e não satura.
+
+O cálculo numérico depende do controle x87 inicial 0x127f: não substituir a
+sequência de divisão/multiplicação em double por uma divisão inteira. Divisor
+zero mascarado gera incremento 100. A contagem usa slots etiquetados como
+unidades e o tipo do registro referenciado; não usar só a ocupação da Bag.
+Sincronizar também a tabela de tipos de construção e o byte de ajuste do
+hospital. Contratos, endereços, guardas adicionais e evidências estão em
+[PRODUCAO.md](PRODUCAO.md). Não se estabeleceu o escalonamento dessas chamadas
+nem se executou a finalização da produção.
+
 ## Atualizações de documentação sugeridas, não realizadas
 
 - FORMATOS.md: substituir a lacuna dos IDs iniciais por comida=1, pedra=2,
@@ -230,10 +261,10 @@ unidades. Endereços, campos, domínio e testes estão em
 - ROTINAS.md: adicionar os acessores e mutações `0x467640..0x4679d0`.
 - CONTINUIDADE.md: marcar consultas, crédito/débito, recálculo do indicador,
   depósito, contagens, efeitos econômicos de propriedade, extração no terreno
-  e regeneração de campos como traduzidos; conservar chamadores completos,
+  regeneração de campos e avanço de produção como traduzidos; conservar chamadores completos,
   tecnologias, transporte, consumo e filas como pendências.
 - SIMBOLOS.md/IA.md: registrar os diferentes índices da IA e o retorno 1/-1.
-- EMULACAO.md/validação geral: integrar os 59 testes diferenciais sem somar
+- EMULACAO.md/validação geral: integrar os 66 testes diferenciais sem somar
   automaticamente as contagens desta pesquisa à suíte compartilhada.
 
 ## Próximas investigações de economia
@@ -245,8 +276,9 @@ unidades. Endereços, campos, domínio e testes estão em
    neutralização, mantendo criação/movimento de balões no subsistema responsável.
    Completar tecnologia e o restante de TerrainDeposeMatiere fora da flag zero.
 3. Recrutamento: ligar a dependência de saída de InitRecruteTroupe, traduzir
-   avanço/conclusão e completar o fluxo das filas. O início econômico e as
-   consultas de progresso já estão em [RECRUTAMENTO.md](RECRUTAMENTO.md).
+   conclusão/escalonamento e completar o fluxo das filas. O início econômico e
+   as consultas estão em [RECRUTAMENTO.md](RECRUTAMENTO.md); o avanço já está em
+   [PRODUCAO.md](PRODUCAO.md). Não interpretar AL=1 como produto concluído.
 4. Mercado e trocas em `0x466533..0x467640`: preços, propostas e transferências.
 5. Confirmar o significado de RMI, o quarto registro e o byte +7 em gameplay
    ou por outros consumidores, preservando nomes neutros enquanto não confirmado.

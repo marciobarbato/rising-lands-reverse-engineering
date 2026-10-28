@@ -1,6 +1,6 @@
 # Economia: consultas, crédito e débito
 
-Pesquisa de 27/10/2026, isolada nesta pasta. Os arquivos originais, o código
+Pesquisa de 27–28/10/2026, isolada nesta pasta. Os arquivos originais, o código
 preexistente, os relatórios gerais e o projeto Ghidra compartilhado foram usados
 somente para leitura. Não houve uso de Ghidra. A autorização de commit no `main`
 vale para esta entrega, limitada aos arquivos desta pasta de economia.
@@ -20,7 +20,9 @@ Extração de minas, coleta de sacolas/campos e regeneração estão traduzidas 
 [EXTRACAO_CAMPOS.md](EXTRACAO_CAMPOS.md), sem incorporar o transporte das unidades.
 O início econômico e as consultas de recrutamento estão traduzidos em
 [RECRUTAMENTO.md](RECRUTAMENTO.md), com escolha da saída como dependência explícita.
-**130 testes passaram**, com 22.276 execuções x86: 22.185 paradas declaradas,
+O avanço de unidades e sortilégios está traduzido em [PRODUCAO.md](PRODUCAO.md),
+incluindo contagem de colonos e arredondamento x87; a conclusão permanece pendente.
+**145 testes passaram**, com 42.542 execuções x86: 42.451 paradas declaradas,
 88 exceções de divisão por zero e três limites de execução esperados.
 Não houve testes ignorados na execução emulada. O ramo de retirada de colono
 tem dependência explícita; veja [capacidade e excedentes](CAPACIDADE_EXCEDENTES.md).
@@ -46,9 +48,9 @@ python3 -B pesquisas-paralelas/economia/validar.py --emular
 ```
 
 O primeiro usa `pefile` e `capstone` já presentes em `../source/python`, verifica
-o hash do EXE e grava os trechos nesta pasta. O segundo passa 71 testes Python
-e ignora explicitamente 59 testes diferenciais. O terceiro exige Unicorn,
-reutilizado de `.local/python`, e executa todos os 130 testes. Nenhum comando
+o hash do EXE e grava os trechos nesta pasta. O segundo passa 79 testes Python
+e ignora explicitamente 66 testes diferenciais. O terceiro exige Unicorn,
+reutilizado de `.local/python`, e executa todos os 145 testes. Nenhum comando
 invoca o gerador de relatórios geral ou altera arquivos fora desta pesquisa.
 O uso de `-B` evita caches de bytecode nos módulos compartilhados importados.
 
@@ -236,7 +238,8 @@ e a de [contagem de armazéns](CONTAGEM_ARMAZENS.md), mais 114. Os
 [efeitos de propriedade](PROPRIEDADE_CONSTRUCOES.md) acrescentam 1.864.
 A etapa de [extração e campos](EXTRACAO_CAMPOS.md) acrescenta 5.641.
 A etapa de [recrutamento](RECRUTAMENTO.md) acrescenta 2.777.
-A suíte atual soma 22.276. Destas, 22.185 alcançam parada declarada (64 na entrada
+A etapa de [avanço de produção](PRODUCAO.md) acrescenta 20.266.
+A suíte atual soma 42.542. Destas, 42.451 alcançam parada declarada (64 na entrada
 de BatimentRetireColon, 32 nas dependências de balão e 546 na escolha da saída de
 recrutamento; incluem também 128 sufixos isolados), 88 conferem divisão por zero e três conferem o limite
 no ciclo de pilhas corrompidas.
@@ -257,8 +260,10 @@ e coleta, transporte, fome, mercado, fluxo completo dos
 chamadores de propriedade, tecnologia, persistência integral e filas continuam parciais.
 A recontagem global e os efeitos incrementais econômicos estão traduzidos;
 os caminhos de criação/movimento de balões permanecem dependências explícitas.
-No recrutamento, cobrança, estado inicial e consultas foram traduzidos; a escolha
-da saída, o avanço, a conclusão e o fluxo completo das filas continuam pendentes.
+No recrutamento, cobrança, estado inicial, consultas e avanço foram traduzidos;
+a escolha da saída, a conclusão e o fluxo completo das filas continuam pendentes.
+O avanço assume o controle x87 inicial 0x127f; não generalizar o cálculo para
+outras precisões ou exceções desmascaradas. Sua frequência de chamada não foi estabelecida.
 Os testes não alegam invariantes de gameplay para todos os estados possíveis.
 As mutações Python protegem índices de jogador/recurso após truncamento;
 as mutações originais não fazem essas verificações e podem acessar fora da tabela.
@@ -288,6 +293,9 @@ identificar IDs foi conferida nos trechos dos chamadores.
 - [recrutamento.py](recrutamento.py): início econômico, consultas e acessores de tempo/vida.
 - [bancada_recrutamento.py](bancada_recrutamento.py): referência com parada na escolha da saída e sufixos isolados.
 - [testes/test_recrutamento.py](testes/test_recrutamento.py): 13 testes locais e nove diferenciais.
+- [producao.py](producao.py): ConstruitPerso, ConstruitSort e contagem de unidades na Bag.
+- [bancada_producao.py](bancada_producao.py): referência integral com controle x87 explícito.
+- [testes/test_producao.py](testes/test_producao.py): oito testes locais e sete diferenciais.
 - [testes/test_construcoes.py](testes/test_construcoes.py): dez testes locais e dez diferenciais novos.
 - [testes/test_economia.py](testes/test_economia.py): dez testes locais e nove diferenciais.
 - [testes/test_retirada_recalculo.py](testes/test_retirada_recalculo.py): oito testes locais e seis diferenciais.
@@ -305,3 +313,4 @@ identificar IDs foi conferida nos trechos dos chamadores.
 - [PROPRIEDADE_CONSTRUCOES.md](PROPRIEDADE_CONSTRUCOES.md): efeitos de ganho e neutralização.
 - [EXTRACAO_CAMPOS.md](EXTRACAO_CAMPOS.md): endereços, fatos, limites e validação de extração/regeneração.
 - [RECRUTAMENTO.md](RECRUTAMENTO.md): cobrança, campos iniciais, consultas de progresso e dependências.
+- [PRODUCAO.md](PRODUCAO.md): avanço, divisor, arredondamento, limites e integração.

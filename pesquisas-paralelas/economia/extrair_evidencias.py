@@ -1,6 +1,7 @@
 """Extrai bytes x86 do original; grava somente nesta pasta de pesquisa."""
 import hashlib
 import json
+import struct
 import sys
 from pathlib import Path
 
@@ -40,10 +41,11 @@ NOMES = (
     'SortEnRecrutement', 'EnginEnRecrutement', 'GetStatusRecrute',
     'CalculStatusRecrute', 'CalculNovaRecrute', 'EnginGetTimeRecrute',
     'SortilegeGetTimeAprentissage', 'EnginGetVieMax',
+    'ConstruitPerso', 'ConstruitSort', '__CHP', '__init_8087', '__init_80x87',
 )
 # O RET precede dados; não apresentá-los como instruções da função.
 FINS_CONFIRMES = {0x41aace: 0x41ab04, 0x4283e2: 0x428691, 0x478806: 0x478a01,
-                  0x423e65: 0x423eb2}
+                  0x423e65: 0x423eb2, 0x48c43e: 0x48c45b}
 TRECHOS_AUXILIARES = {
     0x423025: ('epilogo_compartilhado_de_BatimentCalculResource', 0x42302d),
     0x41db1e: ('epilogo_compartilhado_de_BatimentInitCave', 0x41db24),
@@ -114,6 +116,19 @@ def extrair():
                      tipos_construcao_confirmados=tipos,
                      referencias_diretas_candidatas=referencias)
     (pasta / 'manifesto.json').write_text(json.dumps(manifesto, ensure_ascii=False, indent=2) + '\n')
+    parametros = dict(
+        sha256_exe=HASH,
+        controle_x87=dict(endereco='0x4993dc', valor=struct.unpack_from('<H', imagem, 0x4993dc-base)[0]),
+        ajuste_hospital=dict(endereco='0x495be8', valor=imagem[0x495be8-base]),
+        coeficientes=[dict(endereco=f'0x{a:08x}', valor=struct.unpack_from('<d', imagem, a-base)[0],
+                           bytes_hex=imagem[a-base:a-base+8].hex())
+                      for a in (0x4943e7, 0x4943ef, 0x494402, 0x49440a)],
+        tipos=[dict(id=t, endereco=f'0x{0x495d8c+t*52:08x}',
+                    nome=imagem[0x495d8c+t*52+19-base:0x495d8c+t*52+49-base].split(b'\0')[0].decode('cp1252'),
+                    divisor_bruto=imagem[0x495d8c+t*52+18-base],
+                    registro_hex=imagem[0x495d8c+t*52-base:0x495d8c+(t+1)*52-base].hex())
+               for t in range(22)])
+    (pasta / 'parametros-producao.json').write_text(json.dumps(parametros, ensure_ascii=False, indent=2) + '\n')
     print(f'{len(alvos)} rotinas, {len(TRECHOS_AUXILIARES)} trechos auxiliares e {len(referencias)} referências candidatas: {pasta}')
 
 
