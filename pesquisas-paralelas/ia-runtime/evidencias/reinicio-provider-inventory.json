@@ -16,7 +16,8 @@
     "symbol": "Mercado.tipo_jogador",
     "sha256": "69178c8480d40b93d9605986ec667307812514e56674f1e6520c7d6ed406614e"
    },
-   "memory": "[0x5080a8] -> live 80-byte player table, same actual range as Mercado.jogadores"
+   "memory": "[0x5080a8] -> live 80-byte player table, same actual range as Mercado.jogadores",
+   "owner_contract": "Confirmed by Economy: lowu8 player;0..3 reads raw +1,4..255 returns original2; sitio is adapter trace metadata and is not passed to Mercado.tipo_jogador"
   },
   {
    "callback": "EnginEstVivant",
@@ -61,7 +62,8 @@
     "symbol": "Economia.consultar",
     "sha256": "1f89ab9252fab13b25bc35b8e52aada6c9ea19b1dce51fc1036ee5d515ce5849"
    },
-   "memory": "0x4e2ea8..0x4e2f28 exactly aliases Economia.memoria; constructor copies must not masquerade as aliases"
+   "memory": "0x4e2ea8..0x4e2f28 exactly aliases Economia.memoria; constructor copies must not masquerade as aliases",
+   "owner_contract": "Confirmed by Economy: lowu8 player protected0..3, totalsu16(food,stone,parts,0); Mercado.economia must be the same Economia object; sitio is trace metadata"
   },
   {
    "callback": "MissionGetNum",
@@ -108,7 +110,8 @@
     "0x0047f43f"
    ],
    "status": "missing standalone economy getter",
-   "memory": "0x5080f4 + player*16 + (branch & 0xffff), protected branch to be owner-declared"
+   "memory": "0x5080f4 + player*16 + (branch & 0xffff), protected branch to be owner-declared",
+   "owner_contract": "Missing leaf. Proposed protected player0..3,branch0..3; reads ONE BYTE and zero-extendsAX from explicit inherited64-byte0x5080f4..0x508134; no spell/default table"
   },
   {
    "callback": "RechercheSetBranche",
@@ -117,7 +120,8 @@
     "0x0047f4ca"
    ],
    "status": "missing standalone economy setter",
-   "memory": "byte0x5080f8 + player*16, original DL branch store"
+   "memory": "byte0x5080f8 + player*16, original DL branch store",
+   "owner_contract": "Missing leaf. lowu8 player protected0..3, DLvalue0..255 stores ONLY byte0x5080f8+16*player; no technology or progress effects"
   },
   {
    "callback": "BatimentExiste",
@@ -126,7 +130,8 @@
     "0x00484348"
    ],
    "status": "missing standalone committed owner getter",
-   "memory": "world.estruturas at0x49a0c8; state+5 !=0; active state4/5 not excluded"
+   "memory": "world.estruturas at0x49a0c8; state+5 !=0; active state4/5 not excluded",
+   "owner_contract": "Missing leaf. lowAX0..999 returns0/1 for rawstate+5 !=0 including3/4/5; read only,EDX retained"
   },
   {
    "callback": "BatimentGetPlayer",
@@ -134,13 +139,14 @@
    "sites": [
     "0x00484353"
    ],
-   "status": "combat bridge exists; economy-owned query contract required",
+   "status": "existing genuine combat delegate confirmed by economy owner; reuse without duplicate getter",
    "provider": {
     "path": "pesquisas-paralelas/combate/ataque_vivo.py",
     "symbol": "batiment_get_player",
     "sha256": "21d3f0c9e2a307b82874c6634730a62b301751ec76c51e9ff7d151429fb7c86c"
    },
-   "memory": "same live world.estruturas, raw +4"
+   "memory": "same live world.estruturas, raw +4",
+   "owner_contract": "lowAX0..999, raw+4 including200/255, no state filter/stores; EDX retained, upperEAX outside consumedAL contract"
   },
   {
    "callback": "BatimentGetType",
@@ -150,7 +156,8 @@
     "0x0048437a"
    ],
    "status": "inline within economy transport query; standalone delegate absent",
-   "memory": "same live world.estruturas, raw +8"
+   "memory": "same live world.estruturas, raw +8",
+   "owner_contract": "Missing standalone leaf. lowAX0..999 reads raw+8, no alive/type filter; read only,EDX retained"
   }
  ],
  "aliasing": [
@@ -176,5 +183,16 @@
   "site": "0x0047f43f",
   "entry": "0x004717c2",
   "input": "AI playeru8, branchu16; actual raw research state0x5080f4, not a fabricated level"
+ },
+ "economy_owner_contract_audit": {
+  "base_main": "e9f5dbd33972344e37db3a93be1aec9c115a88bf",
+  "source_sha256_verified": true,
+  "kind": "owner-confirmed LIGHT contract; missing leaves not implemented or original-validated",
+  "missing_leaves": [
+   "RechercheGetNiveau",
+   "RechercheSetBranche",
+   "BatimentExiste",
+   "BatimentGetType"
+  ]
  }
 }
