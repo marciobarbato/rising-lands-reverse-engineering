@@ -8,7 +8,8 @@ import unittest
 from capturar_colocacao_saida import preparar_saida
 from navegacao_unidades import MundoNavegacao
 from experiencia_unidades import ExperienciaSaidaTropa
-from colocacao_saida import colocar_unidade_saida, retomar_colocacao_saida, DependenciaColocacaoSaida
+from colocacao_saida import (colocar_unidade_saida, retomar_colocacao_saida, DependenciaColocacaoSaida,
+                             SOMA_VISAO_MAXIMA_INSERCAO)
 
 
 class MundoRastreado(MundoNavegacao):
@@ -87,7 +88,7 @@ class ColocacaoSaida(unittest.TestCase):
             self.assertEqual(m.efeitos, [('collision',7,0x808),('minimap',200,0x808,4)])
 
     def test_large_vision_stops_after_record_collision_and_enabled_flag(self):
-        m = preparar(raio=9)
+        m = preparar(raio=SOMA_VISAO_MAXIMA_INSERCAO+1)
         descoberto = bytes(m.descoberto[0])
         with self.assertRaises(DependenciaColocacaoSaida) as captura:
             colocar_unidade_saida(m, 7, 0x808)

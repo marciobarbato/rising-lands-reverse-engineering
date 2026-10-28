@@ -6,16 +6,17 @@ import sys
 
 from recrutamento import _word
 
-# Exact negative cases in original BagVide's inlined type classification.
+# Exact negative cases in original BagContientTroupe's inlined type classification.
 # All other u8 types, including unknown 26..255, satisfy this predicate.
 _TIPOS_EXCLUIDOS_BAG_VIDE=frozenset((3,11,12,13,14,15,16,17,25))
 
 
 def bag_vide(recrutamento, indice):
-    """Complete 0x44724a: capacity scan, tag1, first accepted unit type.
+    """Complete 0x44724a (SBL BagContientTroupe): capacity scan, tag1, first accepted unit type.
 
-    Despite its symbol this is not a count==0 test. Only read references are
-    protected (0..799); a successful early return never reads later slots.
+    The historical API name is kept; it is not BagVide 0x4470b9 nor a count==0 test.
+    Only read references are protected (0..799); a successful early return
+    never reads later slots.
     Capacity must be 0..30. No mutation, activity, owner or count check occurs.
     """
     r=recrutamento
@@ -23,16 +24,19 @@ def bag_vide(recrutamento, indice):
     s=r.mundo.estruturas
     capacidade=_word(s,o+0xe)
     if capacidade>30:
-        raise ValueError('BagVide protected capacity is 0..30')
+        raise ValueError('BagContientTroupe protected capacity is 0..30')
     for slot in range(capacidade):
         if s[o+0x4e+slot]!=1:
             continue
         unidade=_word(s,o+0x12+slot*2)
         if unidade>=800:
-            raise ValueError('BagVide protected unit reference is 0..799')
+            raise ValueError('BagContientTroupe protected unit reference is 0..799')
         if r.unidades[unidade*276+1] not in _TIPOS_EXCLUIDOS_BAG_VIDE:
             return True
     return False
+
+
+bag_contient_troupe = bag_vide  # original SBL name at 0x44724a
 
 
 def _resetter_core():

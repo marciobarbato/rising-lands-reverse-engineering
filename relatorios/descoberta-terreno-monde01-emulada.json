@@ -1,0 +1,27 @@
+{
+  "missions_capture": "pesquisas-paralelas/missoes/evidencias/captura-terreno-unidades-original-v2.json",
+  "missions_capture_sha256": "449d2c4e08d371faf8780f1f33a17aac8a7b3d99c99436f468d665b92120208e",
+  "original_checkpoint": "0x46c16d",
+  "published_vision_sum": 11,
+  "unit15_type": 8,
+  "unit15_vision_sum": 10,
+  "placed_units": [
+    0,
+    1,
+    2,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "python_checkpoint": "0x46c16d",
+  "python_matches_original_capture": true,
+  "differing_fields": [],
+  "fresh_native_checkpoint": "0x46c16d",
+  "fresh_native_segments": 85,
+  "fresh_native_minimap_resumptions": 16,
+  "fresh_native_matches_capture": true,
+  "fresh_native_matches_python": true,
+  "fresh_native_buffer_differences": []
+}

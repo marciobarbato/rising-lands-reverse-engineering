@@ -10,11 +10,14 @@ from emulador import RETORNO, unicorn, x86
 class BancadaColocacaoSaida(BancadaAvanco):
     intervalos = BancadaAvanco.intervalos + list(BancadaExperienciaUnidades.intervalos) + [
         (0x445fbc, 0x446189), (0x4431fb, 0x443203), (0x420f8a, 0x420f9e)]
+    # Preserved-state resume points: SetMiniMap entry; subclasses may add loop heads.
+    pontos_retomada = (0x46a388,)
 
     def __init__(self, segmentar=False):
         super().__init__()
         self.segmentar = segmentar
         self.retomadas_minimapa = 0
+        self.retomadas_laco = 0
         self.entradas_originais = Counter()
         self.paradas_atingidas = Counter()
         self.efeitos = []
@@ -60,10 +63,14 @@ class BancadaColocacaoSaida(BancadaAvanco):
             self.paradas_atingidas[hex(regs['EIP'])] += 1
             if not self._pausa_minimapa:
                 return regs
-            # Stop before a real SetMiniMap entry, then execute that same entry
-            # with every register, flag and stack byte preserved. No CALL/RET
-            # or native instruction is replaced. Each resume counts separately.
-            self.retomadas_minimapa += 1
+            # Stop before a real SetMiniMap entry (or declared loop head), then
+            # execute that same instruction with every register, flag and stack
+            # byte preserved. No CALL/RET or native instruction is replaced.
+            # Each resume counts separately.
+            if regs['EIP'] == 0x46a388:
+                self.retomadas_minimapa += 1
+            else:
+                self.retomadas_laco += 1
             self.execucoes += 1
             self.paradas = set(finais)
             entrada = regs['EIP']
@@ -73,7 +80,7 @@ class BancadaColocacaoSaida(BancadaAvanco):
         if endereco in self.paradas:
             cpu.emu_stop()
             return
-        if self.segmentar and endereco == 0x46a388 and self.instrucoes_atuais >= 50000:
+        if self.segmentar and endereco in self.pontos_retomada and self.instrucoes_atuais >= 50000:
             self._pausa_minimapa = True
             self.paradas.add(endereco)
             cpu.emu_stop()

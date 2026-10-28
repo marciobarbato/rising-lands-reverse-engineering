@@ -1,4 +1,9 @@
-"""Complete native interior AffTerrain traces, opaque blocks and object pixels."""
+"""Complete native interior AffTerrain traces, opaque blocks and object pixels.
+
+Pixel scenes consume the real cache lifecycle: native LoadSTRATBank payloads,
+CacheAlloc and InitCache, chained across scenes like consecutive frames.
+"""
+import copy
 import hashlib
 import json
 import struct
@@ -9,9 +14,15 @@ from graficos import Catalogo, png
 from objetos import compor_passe
 from sequenciais import consultar_objeto_v6
 from cache_terreno import resolver_bloco_terreno
-from validar_cache_terreno import BancadaCache, initial_cache, cache_from_initial
+from bancada_ciclo_cache import BancadaCicloCache, ARENA, ARENA_BYTES
+from vinculos_graficos import RegistroVinculos
+from ciclo_cache_terreno import CicloCacheTerreno, MemoriaMotor
 from passe_terreno import (terreno_de_construcao,planejar_passe_terreno,executar_passe_terreno,
     pixels_bloco_terreno,compor_bloco_terreno)
+
+# Scenes preceded by InitCache: game start, then a restart that keeps the
+# cursor and stale payloads (CalculGame 0x42D1EF / MenuNewSelect 0x42C6A8).
+INICIOS_CACHE=('interior','large')
 
 
 def sha(data):return hashlib.sha256(data).hexdigest()
@@ -31,7 +42,7 @@ def make_case(name,origin=(20,20),window=(4,4),inset=0,*,objects=True,uniform=Fa
             if index>=w*h:break
             cell=(oy+index//w)*256+ox+index%w;items.append([cell,code,aux]);flags[index][1:]=[0,16 if index%2 else 0]
     return dict(name=name,origin=list(origin),window=list(window),inset=inset,camera=camera,terrain=terrain,flags=flags,
-        objects=items,clip=clip or [0,0,w*32-1,h*32-1],initial_cache=initial_cache(cursor=255))
+        objects=items,clip=clip or [0,0,w*32-1,h*32-1])
 
 
 def buffers(case):
@@ -50,10 +61,11 @@ def plan_events(plan):
     return out
 
 
-def compose(catalog,case,shadow,*,wrong_order=False):
+def compose(catalog,case,shadow,ciclo,*,wrong_order=False):
+    """Compose over the live lifecycle cache; it advances like the original."""
     terrain,objects,aux,discovery,light=buffers(case)
     plan=planejar_passe_terreno(terrain,light,origem=case['origin'],janela_celulas=case['window'],margem_i8=case['inset'])
-    cache=cache_from_initial(case['initial_cache']);w,h=(v*32 for v in case['window'])
+    cache=ciclo.cache;w,h=(v*32 for v in case['window'])
     out=bytes((index*17+23)%256 for index in range(w*h));ids=[]
     def block(x,y,cell,source):
         nonlocal out
@@ -73,10 +85,11 @@ def compose(catalog,case,shadow,*,wrong_order=False):
     return out,cache,ids
 
 
-class BancadaTerreno(BancadaCache):
+class BancadaTerreno(BancadaCicloCache):
     def __init__(self,catalog):
         self.trace=False;self.events=[];self.resolved_ids=[];self.query_input=None;self.width=0
-        super().__init__(catalog);self.world={}
+        super().__init__(catalog);self.carregar_banco();self.world={}
+        self.table_snapshot=self.ler(self.banco['tabela'],self.banco['quantidade']*4)
         for name,global_pointer,size in [('terrain',0x507d70,131072),('objects',0x507d74,65536),
                 ('aux',0x507dac,65536),('attributes',0x507da8,65536)]:
             pointer=self.alocar(size);self.world[name]=pointer;self.escrever(global_pointer,struct.pack('<I',pointer));self.escrever(pointer,bytes(size))
@@ -112,7 +125,7 @@ class BancadaTerreno(BancadaCache):
         background=bytes((index*17+23)%256 for index in range(w*h))
         self.preparar_superficie(w,h,background,case['clip'],shadow);self.escrever(0x49a018,struct.pack('<H',w))
         if w*h<0x100000:self.escrever(SUPERFICIE+w*h,bytes([204])*16)
-        old_clip=self.ler(0x49a01c,8);self.reset_cache(case['initial_cache'])
+        old_clip=self.ler(0x49a01c,8)
         intervals=[(0x410085,0x41087e),(0x410b38,0x410b40),(0x42302d,0x423355),
             (0x40fd95,0x410085),(0x4766d6,0x47670a),(0x47693a,0x476968),
             (0x45c72a,0x45c8df),(0x45f7ba,0x45f7d8),(0x45f6de,0x45f6e1)]
@@ -130,10 +143,12 @@ class BancadaTerreno(BancadaCache):
         self.trace=False;assert result['ESP']==0x2008004
         for name,payload in [('terrain',terrain),('objects',objects),('aux',aux)]:assert self.ler(self.world[name],len(payload))==payload
         assert self.ler(self.world['attributes'],65536)==bytes(65536) and self.ler(0x49a01c,8)==old_clip
-        self.verify_read_only_inputs()
+        self.verificar_entradas();assert self.ler(self.banco['tabela'],self.banco['quantidade']*4)==self.table_snapshot
         if w*h<0x100000:assert self.ler(SUPERFICIE+w*h,16)==bytes([204])*16
+        state=self.estado()
         return dict(events=list(self.events),resolved_ids=list(self.resolved_ids),stop=hex(result['EIP']),
-            entries=self.ler(self.entries,1024),raw_blocks=self.ler(self.raw,256*1056),next_index=struct.unpack('<H',self.ler(0x49a04e,2))[0]),self.ler(SUPERFICIE,w*h)
+            entries=state['chaves'],raw_blocks=state['blocos'],next_index=state['cursor_u16'],
+            pointer=state['ponteiro_chaves_u32'],counter=state['contador_memoria_u32']),self.ler(SUPERFICIE,w*h)
 
 
 def validate():
@@ -145,7 +160,20 @@ def validate():
     (RAIZ/'evidencias/passe-terreno.json').write_text(json.dumps(evidence,indent=2)+'\n')
     report=dict(exe_sha256=HASH_EXE,unicorn_version=unicorn.__version__,limits=dict(instructions_per_segment=300000,timeout_us=2000000),
         substitutions=dict(traces=['GetNumBob returns fixed validID1; AffBloc and AffVegetTerrain intercepted'],
-            pixels=[],bank_loading=['file IO/allocation'],cache_payloads=['guarded explicit synthetic RAM snapshot']),traces=[],pixels=[],blocks=[])
+            pixels=[],bank_loading=['declared bindings: KERNEL32 GlobalAlloc/GlobalLock IAT slots and C-runtime fopen/fread/fclose; '
+                'LoadSTRATBank, SetBank, MemAlloc and File* wrappers native'],cache_payloads=[],
+            cache_keys_and_cursor=['native CacheAlloc/InitCache lifecycle; GetNumBob misses fill real bank payloads']),
+        bindings=dict(iat_resolution=b.resolucao_iat,fixture_files=b.arquivos_declarados,path_prefix_0x509494=b.prefixo,
+            LoadSTRATBank=b.registro.resumo(*b.banco['marca_vinculos'])),
+        explicit_inputs=['world/visibility maps and shadow table in harness heap','camera, window, inset, clip and surface globals'],
+        cache_lifecycle=[],traces=[],pixels=[],blocks=[])
+    # ProgInit order: LoadSTRATBank, SetBank, then CacheAlloc (0x474E9B..0x474EAF).
+    memoria=MemoriaMotor(contador_u32=b.u32(0x4e2f3c),vinculos=b.arena.derivar(registro=RegistroVinculos()))
+    report['cache_alloc_fixture']=dict(arena_next=b.arena.proximo,arena_end=ARENA+ARENA_BYTES,counter_u32=memoria.contador_u32)
+    ciclo=CicloCacheTerreno.apos_carregar_banco(catalog);_,log=b.cache_alloc();pointer=ciclo.alocar(memoria)
+    assert memoria.vinculos.registro.desde(0)==log and b.estado()['ponteiro_chaves_u32']==pointer
+    assert b.estado()['contador_memoria_u32']==memoria.contador_u32 and b.estado()['blocos']==ciclo.blocos_crus
+    report['cache_lifecycle'].append(dict(step='CacheAlloc',bound_calls=log,pointer_u32=pointer,counter_u32=memoria.contador_u32))
     predicate=bytearray(8192);cell=0x1234
     for word in range(65536):
         b.escrever(b.world['terrain']+cell*2,struct.pack('<H',word))
@@ -171,28 +199,35 @@ def validate():
         report['traces'].append(dict(case=case,events=native['events'],stop=native['stop']))
     print('Original full terrain traces:',len(cases),flush=True)
     for case in cases[-8:]:
-        native,pixels=b.draw(case,shadow,pixels=True);out,cache,ids=compose(catalog,case,shadow)
-        assert pixels==out and native['resolved_ids']==ids
+        if case['name'] in INICIOS_CACHE:
+            r=b.init_cache();assert r['EAX']==ciclo.iniciar()==256;state=b.estado()
+            assert state['chaves']==ciclo.registros==bytes(1024) and state['cursor_u16']==ciclo.proximo_u16 and state['blocos']==ciclo.blocos_crus
+            report['cache_lifecycle'].append(dict(step='InitCache',before_scene=case['name'],cursor_u16=state['cursor_u16'],
+                payload_sha256=sha(state['blocos'])))
+        before=copy.deepcopy(ciclo)
+        native,pixels=b.draw(case,shadow,pixels=True);out,cache,ids=compose(catalog,case,shadow,ciclo)
+        assert pixels==out and native['resolved_ids']==ids and native['pointer']==ciclo.ponteiro_chaves_u32
         assert native['entries']==bytes(cache.registros) and native['raw_blocks']==bytes(cache.blocos_crus) and native['next_index']==cache.proximo_u16
-        wrong,_,_=compose(catalog,case,shadow,wrong_order=True)
+        wrong,_,_=compose(catalog,case,shadow,before,wrong_order=True)
         report['pixels'].append(dict(case=case,sha256=sha(pixels),resolved_ids=ids,cache_entries_sha256=sha(native['entries']),
             cache_raw_sha256=sha(native['raw_blocks']),next_index=native['next_index'],stop=native['stop'],wrong_order_changed_pixels=sum(a!=c for a,c in zip(pixels,wrong))))
         if case['name']=='interior':
             palette=catalog.paleta();rgba=bytes(c for index in pixels for c in (*palette[index*3:index*3+3],255))
             (RAIZ/'artefatos/cena-passe-terreno.png').write_bytes(png(128,128,rgba))
-    # Standalone AffBloc ignores the clip rectangle and raw row-header values.
-    b.reset_cache(initial_cache())
+    # Standalone AffBloc ignores the clip rectangle and raw row-header values;
+    # ID1090 is read from the live cache after the scene chain.
     for ident in (1,300,1081,1090):
         for w,h,x,y in ((32,32,0,0),(64,64,0,0),(64,64,32,32),(96,64,13,17),(128,128,96,96)):
             background=bytes((index*17+23)%256 for index in range(w*h));b.preparar_superficie(w,h,background,(0,0,0,0),shadow)
-            ptr=struct.unpack('<I',b.ler(b.bank['tabela']+(ident-1)*4,4))[0];rawptr=struct.unpack('<I',b.ler(ptr+8,4))[0]
+            rawptr=b.descritor(ident)['dados']
             result=b.executar(0x45c72a,[(0x45c72a,0x45c779)],dict(EAX=SUPERFICIE+y*w+x,EDX=rawptr))
             assert result['EIP']==RETORNO and result['ESP']==0x2008004
-            out=compor_bloco_terreno(background,w,h,pixels_bloco_terreno(catalog,cache_from_initial(initial_cache()),ident),x,y)
+            out=compor_bloco_terreno(background,w,h,pixels_bloco_terreno(catalog,ciclo.cache,ident),x,y)
             assert out==b.ler(SUPERFICIE,w*h)
             report['blocks'].append(dict(id=ident,w=w,h=h,x=x,y=y,sha256=sha(out)))
     report.update(result='PASS',predicate_calls=65536,terrain_full_calls=len(report['traces'])+len(report['pixels']),
-        standalone_block_calls=len(report['blocks']),bank_calls=2,bounded_segments=b.execucoes,instructions_observed=b.instrucoes,
+        standalone_block_calls=len(report['blocks']),bank_calls=2,cache_lifecycle_calls=len(report['cache_lifecycle']),
+        bounded_segments=b.execucoes,instructions_observed=b.instrucoes,
         expected_exceptions=0,expected_limits=0,skips=0,seconds=round(time.monotonic()-start,3))
     (RAIZ/'validacao/x86-passe-terreno.json').write_text(json.dumps(report,indent=2)+'\n')
     print('PASS:',len(report['pixels']),'complete terrain buffers;',len(report['blocks']),'opaque blocks;',b.execucoes,'bounded segments',flush=True)

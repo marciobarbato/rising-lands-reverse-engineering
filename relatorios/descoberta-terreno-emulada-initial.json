@@ -1,0 +1,69 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "success": false,
+  "completed_tests": [
+    {
+      "test": "test_new_sums_complete_both_callers_in_original_call_order (test_descoberta_terreno.DescobertaTerreno)",
+      "result": "ok"
+    },
+    {
+      "test": "test_owners_4_and_200_never_reach_discovery_at_any_sum (test_descoberta_terreno.DescobertaTerreno)",
+      "result": "ok"
+    },
+    {
+      "test": "test_published_domain_equals_original_byte_inventory (test_descoberta_terreno.DescobertaTerreno)",
+      "result": "ok"
+    },
+    {
+      "test": "test_seven_original_captures_whole_buffers_effects_and_cell_order (test_descoberta_terreno.DescobertaTerreno)",
+      "result": "ok"
+    },
+    {
+      "test": "test_sums_above_domain_stop_before_discovery_with_partial_effects (test_descoberta_terreno.DescobertaTerreno)",
+      "result": "ok"
+    },
+    {
+      "test": "test_direct_discovery_and_light_radii_through_published_maxima (test_emulacao_descoberta_terreno.DiferencialDescobertaTerreno)",
+      "result": "ERROR"
+    },
+    {
+      "test": "test_new_sums_at_map_edges_corners_and_extreme_dimensions (test_emulacao_descoberta_terreno.DiferencialDescobertaTerreno)",
+      "result": "ok"
+    },
+    {
+      "test": "test_new_sums_both_callers_every_normal_owner_and_camera (test_emulacao_descoberta_terreno.DiferencialDescobertaTerreno)",
+      "result": "ok"
+    },
+    {
+      "test": "test_owners_4_and_200_complete_without_discovery_at_any_sum (test_emulacao_descoberta_terreno.DiferencialDescobertaTerreno)",
+      "result": "ok"
+    },
+    {
+      "test": "test_regression_sums_0_to_8_every_owner_both_callers (test_emulacao_descoberta_terreno.DiferencialDescobertaTerreno)",
+      "result": "ok"
+    },
+    {
+      "test": "test_sums_above_domain_stop_at_each_original_caller (test_emulacao_descoberta_terreno.DiferencialDescobertaTerreno)",
+      "result": "ok"
+    },
+    {
+      "test": "test_current_cell_insertion_preserves_record_orders_search_and_old_occupancy (test_colocacao_missao.ColocacaoMissao)",
+      "result": "ok"
+    },
+    {
+      "test": "test_large_vision_stops_after_collision_and_flag_with_orders_intact (test_colocacao_missao.ColocacaoMissao)",
+      "result": "ok"
+    },
+    {
+      "test": "test_protected_invalid_inputs_precede_effects (test_colocacao_missao.ColocacaoMissao)",
+      "result": "ok"
+    },
+    {
+      "test": "test_raw_queries_have_no_activity_type_owner_or_visibility_filter (test_colocacao_missao.ColocacaoMissao)",
+      "result": "ok"
+    }
+  ],
+  "stopped": "Manually stopped while the existing 0..8 regression modules were running, after the ERROR, because the run could no longer pass. All other new native tests listed above had passed in this run.",
+  "error": "test_direct_discovery_and_light_radii_through_published_maxima: RuntimeError \"Execution outside declared original intervals: 0x4765f4\". The direct-entry guard declared DecouvreTerrain/IllumineTerrain/Case/Distance/SetMiniMap only; SetMiniMap modes 1/2 reach TerrainGetColor 0x4765f4, PlayerGetColor 0x46003b, TerrainEstDecouvert 0x4766f0 and TerrainEstIllumine 0x476951. Reproduced on one fresh light case; adding those four exported leaf bodies to the declared intervals returns at the real return address. No reconstructed behavior changed.",
+  "scope": "Initial Stage 14 native run, kept as a failure record; not a pass."
+}
