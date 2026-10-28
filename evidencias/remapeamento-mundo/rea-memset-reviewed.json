@@ -1,0 +1,94 @@
+{
+  "kind": "Reviewed REA excerpt; not complete Evidence bundle",
+  "rea_source_revision": "b9a8f8e9f25feb9cc97bf4960748f2bdf8c898bc",
+  "provider": "Ghidra 12.2 private read-only copy",
+  "original_oracle_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "normalized_analysis_sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "source_evidence_id": "ev_5430b80cd574548f68b88a852036895048d44f139b40fbea24b271abb82cbe88",
+  "source_record_sha256": "b226d4133777be3733efffb02dd486fc6922f2f4cea9e32060df375260273b24",
+  "analysis_profile_digest": "33da723a26733dd8b59046612d0c42bf95bb1b59c46a63f17b127521af169a3d",
+  "reviewed_result": {
+    "procedure": {
+      "address": "0x48c3b0",
+      "name": "OriginaisSBL::memset",
+      "symbol": {
+        "primary": true,
+        "dynamic": false,
+        "external": false,
+        "type": "function",
+        "source": "user_defined"
+      },
+      "classification": {
+        "external": false,
+        "thunk": false,
+        "thunk_target": null,
+        "provenance": "ghidra-function-manager"
+      },
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x48c3b0",
+            "end": "0x48c3c7"
+          }
+        ],
+        "total_bytes": 24,
+        "span_bytes": 24,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "signature": "undefined4 __fastcall memset(undefined4 param_1, undefined1 param_2)",
+      "locals": []
+    },
+    "pseudocode": "\nundefined4 __fastcall OriginaisSBL::memset(undefined4 param_1,undefined1 param_2)\n\n{\n  undefined4 in_EAX;\n  uint unaff_EBX;\n  \n  __STOSB(unaff_EBX,CONCAT31(CONCAT21(CONCAT11(param_2,param_2),param_2),param_2));\n  return in_EAX;\n}\n\n",
+    "assembly": [
+      "0x48c3b0: PUSH EAX",
+      "0x48c3b1: PUSH ECX",
+      "0x48c3b2: MOV DH, DL",
+      "0x48c3b4: SHL EDX, 0x8",
+      "0x48c3b7: MOV DL, DH",
+      "0x48c3b9: SHL EDX, 0x8",
+      "0x48c3bc: MOV DL, DH",
+      "0x48c3be: MOV ECX, EBX",
+      "0x48c3c0: CALL 0x0048d890",
+      "0x48c3c5: POP ECX",
+      "0x48c3c6: POP EAX",
+      "0x48c3c7: RET"
+    ],
+    "callees": [
+      {
+        "address": "0x48d890",
+        "name": "OriginaisSBL::__STOSB",
+        "symbol": {
+          "primary": true,
+          "dynamic": false,
+          "external": false,
+          "type": "function",
+          "source": "user_defined"
+        },
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x48d890",
+              "end": "0x48d8c0"
+            }
+          ],
+          "total_bytes": 49,
+          "span_bytes": 49,
+          "non_contiguous": false,
+          "contains_entry": true
+        }
+      }
+    ]
+  },
+  "review": "Reviewed for the ordered pre-allocation prefix only. Native bytes confirm unconditional search reset, three fill arguments and pending first GlobalAlloc. Decompiler Watcom signatures are not used as the public contract; full successful remap and resource lifecycle remain open."
+}

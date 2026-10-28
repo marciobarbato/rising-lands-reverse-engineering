@@ -6,7 +6,8 @@ from bancada_combate import RETORNO, x86
 
 QUERIES = {0x41a4f4: 'BatimentGetType', 0x418b8a: 'TypeBatimentGetDegat',
            0x41a08c: 'BatimentGetPlayer'}
-INTERVALOS = CONSUMO + [(0x418b42, 0x418b97), (0x41a08c, 0x41a0ab), (0x41a4f4, 0x41a513)]
+INTERVALOS = CONSUMO + [(0x418b42, 0x418b97), (0x41a08c, 0x41a0ab), (0x41a4f4, 0x41a513),
+                         (0x482a14, 0x482a51), (0x482db6, 0x482dbe)]
 ESTRUTURAS = 0x49a0c8
 
 

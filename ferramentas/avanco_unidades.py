@@ -46,6 +46,10 @@ class MundoFisico(MundoUnidades, VisaoMovimento):
         from colocacao_saida import colocar_unidade_saida
         return colocar_unidade_saida(self, indice, celula)
 
+    def colocar_unidade_missao(self,indice):
+        from colocacao_missao import colocar_unidade_missao
+        return colocar_unidade_missao(self,indice)
+
     def consultar_volume_unidade(self, indice, janela):
         from voz_unidades import consultar_volume_unidade
         return consultar_volume_unidade(self, indice, janela)

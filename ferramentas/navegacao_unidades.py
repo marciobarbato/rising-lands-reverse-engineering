@@ -60,6 +60,10 @@ class MundoNavegacao(MundoFisico):
         from portoes import avancar_estado_portao
         return avancar_estado_portao(self,indice)
 
+    def iniciar_remapeamento(self):
+        from remapeamento_mundo import iniciar_remapeamento
+        return iniciar_remapeamento(self)
+
     def refazer_regioes(self):
         """Reconstrói rótulos e reaplica ocupação; usar antes de executar a busca."""
         if any(v & 0x8000 for v in self.regioes):

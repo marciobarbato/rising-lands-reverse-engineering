@@ -99,10 +99,13 @@ class BancadaConsumoFisico(BancadaMorteUnidades):
         return bytes(self.cpu.mem_read(PROJETEIS, 5600))
 
     def impacto_modo4(self, cell, direction=29, flag=0, projectile=False):
+        return self.impacto_unidade(cell, mode=4, direction=direction, flag=flag, projectile=projectile)
+
+    def impacto_unidade(self, cell, mode=4, direction=29, flag=0, projectile=False):
         stops = {RETORNO, 0x4508af, *DEPENDENCIES} - {0x475118, 0x46d8cb}
         result = self.executar(0x46eaf8 if projectile else 0x450874, INTERVALOS,
             dict(EAX=PROJETEIS+37*56) if projectile else
-            dict(EAX=cell, EDX=4, EBX=0, ECX=direction),
+            dict(EAX=cell, EDX=mode, EBX=0, ECX=direction),
             pilha=None if projectile else {4: struct.pack('<I', flag | 0xa5a50000)},
             parada=stops, limite_instrucoes=500000)
         if result['EIP'] in DEPENDENCIES:

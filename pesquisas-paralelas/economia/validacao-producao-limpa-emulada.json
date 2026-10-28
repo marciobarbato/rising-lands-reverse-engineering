@@ -1,0 +1,22 @@
+{
+  "scope": "Actual CalculTroupe through economic cleanup before first terrain query or unit AI message",
+  "mode": "original x86 and Python",
+  "tests": 16,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 1504,
+  "declared_stops": 1504,
+  "completed_returns": 66,
+  "pending_unit_message_stops": 125,
+  "pending_terrain_query_stops": 131,
+  "pending_volume_stops": 2,
+  "pending_post_sound_stops": 6,
+  "pre_reset_import_stops": 2,
+  "original_entry_calls": 332,
+  "preserved_minimap_resumptions": 1172,
+  "expected_x86_exceptions": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}
