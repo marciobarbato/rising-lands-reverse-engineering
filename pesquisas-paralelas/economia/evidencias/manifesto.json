@@ -46,6 +46,8 @@
     "0x00456d92": "TypeEnginGetNb",
     "0x0045d753": "BatimentRessourceNecessaire",
     "0x0045d7cf": "TroupeRessourceNecessaire",
+    "0x00462a58": "GetNbRessource",
+    "0x00466bac": "EvalueCoutProposition",
     "0x00467640": "GetRessourceRMI",
     "0x00467670": "GetRessource",
     "0x0046769d": "GetRessourceStock",
@@ -57,6 +59,9 @@
     "0x0046aa96": "LoadRessource",
     "0x0046ab21": "LoadGameRessource",
     "0x0046ab33": "SauveRessource",
+    "0x0046d817": "PlayerGetType",
+    "0x0046d838": "PlayerEstAllie",
+    "0x0046dc6c": "PlayerGetSympathie",
     "0x004704dc": "Random",
     "0x004746fe": "SortilegeGetCoutApprentissage",
     "0x0047476a": "SortilegeGetTimeAprentissage",
@@ -124,6 +129,10 @@
     "0x0042399a": {
       "nome": "epilogo_compartilhado_de_InitApprentissage",
       "fim_exclusivo": "0x004239a0"
+    },
+    "0x004661d3": {
+      "nome": "epilogo_compartilhado_de_EvalueCoutProposition",
+      "fim_exclusivo": "0x004661da"
     }
   },
   "trechos_contexto": {
@@ -138,6 +147,14 @@
     "0x0045e1d6": {
       "nome": "IconeFillContenu_teste_de_custos_de_aprendizagem",
       "fim_exclusivo": "0x0045e210"
+    },
+    "0x00464bee": {
+      "nome": "MatiereEstDemander_ordem_pecas_comida_pedra",
+      "fim_exclusivo": "0x00464c1a"
+    },
+    "0x004674b1": {
+      "nome": "CalculMarcheProposition_comparacao_do_indicador",
+      "fim_exclusivo": "0x004674c6"
     }
   },
   "tipos_construcao_confirmados": [
@@ -411,6 +428,15 @@
       ]
     },
     {
+      "endereco": "0x004175dc",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "AffDrapeauAlliance"
+      ]
+    },
+    {
       "endereco": "0x00419fe7",
       "instrucao": "call",
       "alvo": "0x0046769d",
@@ -444,6 +470,15 @@
       "nome": "BagContient",
       "simbolo_anterior": [
         "BatimentEstHabiter"
+      ]
+    },
+    {
+      "endereco": "0x0041a64b",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "BatimentEstEnnemi"
       ]
     },
     {
@@ -1266,6 +1301,15 @@
       ]
     },
     {
+      "endereco": "0x0041f89f",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "BatimentLogeEngin"
+      ]
+    },
+    {
       "endereco": "0x0041f95c",
       "instrucao": "call",
       "alvo": "0x004471b8",
@@ -2017,6 +2061,15 @@
       "instrucao": "call",
       "alvo": "0x004471b8",
       "nome": "BagContient",
+      "simbolo_anterior": [
+        "TourelleTrouveBatiment"
+      ]
+    },
+    {
+      "endereco": "0x0042422a",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
       "simbolo_anterior": [
         "TourelleTrouveBatiment"
       ]
@@ -3228,6 +3281,15 @@
       ]
     },
     {
+      "endereco": "0x0042d379",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "CalculGame"
+      ]
+    },
+    {
       "endereco": "0x0042d409",
       "instrucao": "call",
       "alvo": "0x00475328",
@@ -3255,12 +3317,417 @@
       ]
     },
     {
+      "endereco": "0x0042ec21",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "IsDirectlyBlocking"
+      ]
+    },
+    {
+      "endereco": "0x0042ed5d",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "IsIndirectlyBlocking"
+      ]
+    },
+    {
+      "endereco": "0x0042f492",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x0042fd0b",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x0042fdf5",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x0043009c",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00430935",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00430a6c",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00432339",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00432449",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00432539",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x004327ca",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00432ca1",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00432e1b",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00432eff",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x004330a5",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00433191",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x0043332a",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00433413",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x004335d6",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00433ac2",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00433bc9",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00433cdb",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00434011",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x004348a2",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00435255",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00437567",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00437673",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x0043775c",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x004379f0",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00437ec6",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00438058",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00438140",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x004382de",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x004383ca",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00438566",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00438648",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x0043880f",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00438cfb",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00438e02",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00438f14",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00439247",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00439ae0",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x00439ca6",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "CheminCalcul"
+      ]
+    },
+    {
       "endereco": "0x0043b277",
       "instrucao": "call",
       "alvo": "0x004704dc",
       "nome": "Random",
       "simbolo_anterior": [
         "CheminCalcul"
+      ]
+    },
+    {
+      "endereco": "0x0043fc68",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "AffInfoEngin"
       ]
     },
     {
@@ -3351,6 +3818,15 @@
       "nome": "BatimentGetType",
       "simbolo_anterior": [
         "SetEnginRentreBatiment"
+      ]
+    },
+    {
+      "endereco": "0x00447014",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "EnginEstEnnemi"
       ]
     },
     {
@@ -3957,10 +4433,64 @@
       ]
     },
     {
+      "endereco": "0x00450a1c",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "InfligeDegat"
+      ]
+    },
+    {
+      "endereco": "0x00450af1",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "InfligeDegat"
+      ]
+    },
+    {
+      "endereco": "0x00450c6c",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "InfligeDegat"
+      ]
+    },
+    {
+      "endereco": "0x00450cb7",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "InfligeDegat"
+      ]
+    },
+    {
       "endereco": "0x00450e49",
       "instrucao": "call",
       "alvo": "0x004704dc",
       "nome": "Random",
+      "simbolo_anterior": [
+        "InfligeDegat"
+      ]
+    },
+    {
+      "endereco": "0x00450ec5",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "InfligeDegat"
+      ]
+    },
+    {
+      "endereco": "0x00450f92",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
       "simbolo_anterior": [
         "InfligeDegat"
       ]
@@ -4038,10 +4568,64 @@
       ]
     },
     {
+      "endereco": "0x00453e8c",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "EnginTrouveCibleScan"
+      ]
+    },
+    {
+      "endereco": "0x0045412b",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "EnginTrouveCible"
+      ]
+    },
+    {
+      "endereco": "0x00454721",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x0045496e",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
       "endereco": "0x00455139",
       "instrucao": "call",
       "alvo": "0x004754de",
       "nome": "MineEndWork",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x0045529b",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x0045537b",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
       "simbolo_anterior": [
         "EnginNextEtape"
       ]
@@ -4146,6 +4730,24 @@
       ]
     },
     {
+      "endereco": "0x00456791",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x0045686e",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
       "endereco": "0x004569bd",
       "instrucao": "call",
       "alvo": "0x004704dc",
@@ -4195,6 +4797,15 @@
       "instrucao": "call",
       "alvo": "0x0041a4f4",
       "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "TestFinDeMission"
+      ]
+    },
+    {
+      "endereco": "0x00458903",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
       "simbolo_anterior": [
         "TestFinDeMission"
       ]
@@ -4551,6 +5162,15 @@
       ]
     },
     {
+      "endereco": "0x004610b3",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "ForgetMarche"
+      ]
+    },
+    {
       "endereco": "0x00461252",
       "instrucao": "call",
       "alvo": "0x0041a4f4",
@@ -4560,10 +5180,28 @@
       ]
     },
     {
+      "endereco": "0x00461769",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "MarcheEchangePrend"
+      ]
+    },
+    {
       "endereco": "0x004617ad",
       "instrucao": "call",
       "alvo": "0x00447483",
       "nome": "BagPrend",
+      "simbolo_anterior": [
+        "MarcheEchangePrend"
+      ]
+    },
+    {
+      "endereco": "0x00461820",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
       "simbolo_anterior": [
         "MarcheEchangePrend"
       ]
@@ -4578,10 +5216,28 @@
       ]
     },
     {
+      "endereco": "0x004619d4",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "MarcheEchangeDonne"
+      ]
+    },
+    {
       "endereco": "0x00461a1e",
       "instrucao": "call",
       "alvo": "0x00447483",
       "nome": "BagPrend",
+      "simbolo_anterior": [
+        "MarcheEchangeDonne"
+      ]
+    },
+    {
+      "endereco": "0x00461a64",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
       "simbolo_anterior": [
         "MarcheEchangeDonne"
       ]
@@ -4596,6 +5252,15 @@
       ]
     },
     {
+      "endereco": "0x00461b6c",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "MarcheEchangeDonne"
+      ]
+    },
+    {
       "endereco": "0x00461b8a",
       "instrucao": "call",
       "alvo": "0x004235bd",
@@ -4605,10 +5270,37 @@
       ]
     },
     {
+      "endereco": "0x00461c13",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "MarcheOrdreEchange"
+      ]
+    },
+    {
+      "endereco": "0x0046263d",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "MarcheDebarasse"
+      ]
+    },
+    {
       "endereco": "0x004626a8",
       "instrucao": "call",
       "alvo": "0x00467670",
       "nome": "GetRessource",
+      "simbolo_anterior": [
+        "MarcheDebarasse"
+      ]
+    },
+    {
+      "endereco": "0x0046270c",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
       "simbolo_anterior": [
         "MarcheDebarasse"
       ]
@@ -4629,6 +5321,15 @@
       "nome": "GetRessource",
       "simbolo_anterior": [
         "GetNbRessource"
+      ]
+    },
+    {
+      "endereco": "0x0046303b",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "MarcheRemplitTableauHautBas"
       ]
     },
     {
@@ -4656,6 +5357,33 @@
       "nome": "GetRessource",
       "simbolo_anterior": [
         "MarcheRemplitTableauHautBas"
+      ]
+    },
+    {
+      "endereco": "0x004633fd",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "InitTableauMarche"
+      ]
+    },
+    {
+      "endereco": "0x004637ee",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "MarcheChangePlayerContact"
+      ]
+    },
+    {
+      "endereco": "0x0046396b",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "AffInfoPlayer"
       ]
     },
     {
@@ -4722,6 +5450,15 @@
       ]
     },
     {
+      "endereco": "0x00465a7a",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "AffAlliance"
+      ]
+    },
+    {
       "endereco": "0x0046628b",
       "instrucao": "call",
       "alvo": "0x00447483",
@@ -4740,10 +5477,28 @@
       ]
     },
     {
+      "endereco": "0x00466468",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "VideMatiere"
+      ]
+    },
+    {
       "endereco": "0x0046648a",
       "instrucao": "call",
       "alvo": "0x004235bd",
       "nome": "BatimentEnleveMatiere",
+      "simbolo_anterior": [
+        "VideMatiere"
+      ]
+    },
+    {
+      "endereco": "0x004664f9",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
       "simbolo_anterior": [
         "VideMatiere"
       ]
@@ -4764,6 +5519,78 @@
       "nome": "BagInit",
       "simbolo_anterior": [
         "CalculValeur"
+      ]
+    },
+    {
+      "endereco": "0x00466ca1",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "EvalueCoutProposition"
+      ]
+    },
+    {
+      "endereco": "0x00466cc1",
+      "instrucao": "call",
+      "alvo": "0x0046dc6c",
+      "nome": "PlayerGetSympathie",
+      "simbolo_anterior": [
+        "EvalueCoutProposition"
+      ]
+    },
+    {
+      "endereco": "0x00466cd3",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "EvalueCoutProposition"
+      ]
+    },
+    {
+      "endereco": "0x00466d53",
+      "instrucao": "call",
+      "alvo": "0x0046dc6c",
+      "nome": "PlayerGetSympathie",
+      "simbolo_anterior": [
+        "EvalueCoutProposition"
+      ]
+    },
+    {
+      "endereco": "0x00466d65",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "EvalueCoutProposition"
+      ]
+    },
+    {
+      "endereco": "0x00466e2c",
+      "instrucao": "call",
+      "alvo": "0x00466bac",
+      "nome": "EvalueCoutProposition",
+      "simbolo_anterior": [
+        "CalculCompteurMarche"
+      ]
+    },
+    {
+      "endereco": "0x00466f87",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "CalculCompteurProposition"
+      ]
+    },
+    {
+      "endereco": "0x00466fb2",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "CalculCompteurProposition"
       ]
     },
     {
@@ -4845,6 +5672,15 @@
       "nome": "BatimentInitCave",
       "simbolo_anterior": [
         "GameLoad"
+      ]
+    },
+    {
+      "endereco": "0x0046c27d",
+      "instrucao": "call",
+      "alvo": "0x0046dc6c",
+      "nome": "PlayerGetSympathie",
+      "simbolo_anterior": [
+        "MakeMissionName"
       ]
     },
     {
@@ -5154,6 +5990,33 @@
       ]
     },
     {
+      "endereco": "0x004751fb",
+      "instrucao": "call",
+      "alvo": "0x0046dc6c",
+      "nome": "PlayerGetSympathie",
+      "simbolo_anterior": [
+        "MAJSympathie"
+      ]
+    },
+    {
+      "endereco": "0x0047522e",
+      "instrucao": "call",
+      "alvo": "0x0046dc6c",
+      "nome": "PlayerGetSympathie",
+      "simbolo_anterior": [
+        "MAJSympathie"
+      ]
+    },
+    {
+      "endereco": "0x00475283",
+      "instrucao": "call",
+      "alvo": "0x0046dc6c",
+      "nome": "PlayerGetSympathie",
+      "simbolo_anterior": [
+        "CalculNewSympathie"
+      ]
+    },
+    {
       "endereco": "0x004754ad",
       "instrucao": "call",
       "alvo": "0x0047544c",
@@ -5352,12 +6215,49 @@
       ]
     },
     {
+      "endereco": "0x0047b472",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "AvanceMonstre"
+      ]
+    },
+    {
       "endereco": "0x0047b4cc",
       "instrucao": "call",
       "alvo": "0x004704dc",
       "nome": "Random",
       "simbolo_anterior": [
         "AvanceMonstre"
+      ]
+    },
+    {
+      "endereco": "0x0047f576",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "IaReset",
+        "iaReset"
+      ]
+    },
+    {
+      "endereco": "0x0047fabe",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "IaRechercheAjuste"
+      ]
+    },
+    {
+      "endereco": "0x0047fc25",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "IaPropositionAlliance"
       ]
     },
     {
@@ -5442,12 +6342,129 @@
       ]
     },
     {
+      "endereco": "0x00480daa",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "V_FixeAlliance"
+      ]
+    },
+    {
+      "endereco": "0x00480e5c",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "B_Allie"
+      ]
+    },
+    {
+      "endereco": "0x00480eca",
+      "instrucao": "call",
+      "alvo": "0x0046dc6c",
+      "nome": "PlayerGetSympathie",
+      "simbolo_anterior": [
+        "I_DonneNationPlusHaute"
+      ]
+    },
+    {
+      "endereco": "0x00480f06",
+      "instrucao": "call",
+      "alvo": "0x0046dc6c",
+      "nome": "PlayerGetSympathie",
+      "simbolo_anterior": [
+        "I_DonneNationPlusBasse"
+      ]
+    },
+    {
+      "endereco": "0x00480f36",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "I_CombienDAlliances"
+      ]
+    },
+    {
+      "endereco": "0x00480f62",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "I_AffectePrix"
+      ]
+    },
+    {
+      "endereco": "0x00480f88",
+      "instrucao": "call",
+      "alvo": "0x0046dc6c",
+      "nome": "PlayerGetSympathie",
+      "simbolo_anterior": [
+        "I_AffectePrix"
+      ]
+    },
+    {
       "endereco": "0x00480fb4",
       "instrucao": "call",
       "alvo": "0x0048c43e",
       "nome": "__CHP",
       "simbolo_anterior": [
         "I_AffectePrix"
+      ]
+    },
+    {
+      "endereco": "0x00481005",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "B_ChoixPlaceLibre"
+      ]
+    },
+    {
+      "endereco": "0x00481041",
+      "instrucao": "call",
+      "alvo": "0x0046dc6c",
+      "nome": "PlayerGetSympathie",
+      "simbolo_anterior": [
+        "I_RecupereSympathie"
+      ]
+    },
+    {
+      "endereco": "0x00481059",
+      "instrucao": "call",
+      "alvo": "0x0046dc6c",
+      "nome": "PlayerGetSympathie",
+      "simbolo_anterior": [
+        "V_ModifieSympathie"
+      ]
+    },
+    {
+      "endereco": "0x00481097",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "I_NombreAlliances"
+      ]
+    },
+    {
+      "endereco": "0x004810d5",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "I_ChercheNationPasAllie"
+      ]
+    },
+    {
+      "endereco": "0x004810e6",
+      "instrucao": "call",
+      "alvo": "0x0046dc6c",
+      "nome": "PlayerGetSympathie",
+      "simbolo_anterior": [
+        "I_ChercheNationPasAllie"
       ]
     },
     {
@@ -5586,6 +6603,33 @@
       ]
     },
     {
+      "endereco": "0x004827e0",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "iagUnitReset"
+      ]
+    },
+    {
+      "endereco": "0x00482a01",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "iagUnitSendMessage"
+      ]
+    },
+    {
+      "endereco": "0x00483f3b",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "iagMessTestSendMessageEngin"
+      ]
+    },
+    {
       "endereco": "0x00484363",
       "instrucao": "call",
       "alvo": "0x0041a4f4",
@@ -5601,6 +6645,15 @@
       "nome": "BatimentGetType",
       "simbolo_anterior": [
         "iagVilleReset"
+      ]
+    },
+    {
+      "endereco": "0x00484839",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "iagVilleSendMessage"
       ]
     },
     {
@@ -5685,10 +6738,37 @@
       ]
     },
     {
+      "endereco": "0x004864fe",
+      "instrucao": "call",
+      "alvo": "0x0046d817",
+      "nome": "PlayerGetType",
+      "simbolo_anterior": [
+        "iagWarReset"
+      ]
+    },
+    {
       "endereco": "0x004867f2",
       "instrucao": "call",
       "alvo": "0x00467670",
       "nome": "GetRessource",
+      "simbolo_anterior": [
+        "iagWarNoyau"
+      ]
+    },
+    {
+      "endereco": "0x0048694f",
+      "instrucao": "call",
+      "alvo": "0x0046dc6c",
+      "nome": "PlayerGetSympathie",
+      "simbolo_anterior": [
+        "iagWarNoyau"
+      ]
+    },
+    {
+      "endereco": "0x0048695b",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
       "simbolo_anterior": [
         "iagWarNoyau"
       ]
@@ -5700,6 +6780,24 @@
       "nome": "iagRessGetPlayerWealth",
       "simbolo_anterior": [
         "iagWarNoyau"
+      ]
+    },
+    {
+      "endereco": "0x00486b61",
+      "instrucao": "call",
+      "alvo": "0x0046dc6c",
+      "nome": "PlayerGetSympathie",
+      "simbolo_anterior": [
+        "iagWarGetLastTypeAttack"
+      ]
+    },
+    {
+      "endereco": "0x00486b6d",
+      "instrucao": "call",
+      "alvo": "0x0046d838",
+      "nome": "PlayerEstAllie",
+      "simbolo_anterior": [
+        "iagWarGetLastTypeAttack"
       ]
     },
     {
