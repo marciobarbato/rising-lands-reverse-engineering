@@ -1,0 +1,28 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_recuperacao_unidades.DiferencialRecuperacaoUnidades.test_fatigue_all_type_bytes_including_inactive_and_unknown",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_recuperacao_unidades.DiferencialRecuperacaoUnidades.test_live_healing_all_types_indices_and_arithmetic_edges",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_recuperacao_unidades.DiferencialRecuperacaoUnidades.test_original_recovery_caller_calls_both_helpers_in_order",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_recuperacao_unidades.DiferencialRecuperacaoUnidades.test_position_conversion_and_recovery_full_original_caller_prefix",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "scope": "Complete live healing/fatigue; production caller prefix stops before experience."
+}

@@ -1,0 +1,12 @@
+{
+  "x86_executed": false,
+  "shares_unit_and_structure_buffers": true,
+  "life_before": 50,
+  "life_after": 100,
+  "fatigue_after": 0,
+  "copied_word": 4,
+  "unit_type": 7,
+  "exit_cell": 2056,
+  "pending_address": "0x420f81",
+  "scope": "Synthetic economy preparation, positioning, conversion, healing and fatigue; stops before experience/placement/movement/audio/cleanup; no real mission."
+}

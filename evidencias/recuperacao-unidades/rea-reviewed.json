@@ -1,0 +1,274 @@
+{
+  "kind": "Reviewed excerpts from retained REA Evidence; not a full Evidence bundle",
+  "rea_source_revision": "b9a8f8e9f25feb9cc97bf4960748f2bdf8c898bc",
+  "provider": "Ghidra 12.2 private read-only copy",
+  "original_oracle_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "normalized_analysis_sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "review": "Register signatures are inferred and rejected where inconsistent with original x86. Complete original helper bytes and caller targets were independently checked; native execution uses only intact original.",
+  "records": [
+    {
+      "source_evidence_id": "ev_b89cb34f18d92d50720f81136d478f336ddc438dc1a96d76a4bc342d97476066",
+      "source_record_sha256": "0609f74b171502b83ce580b3cfc72006d08d966ea5fc80049460d92b11ebeec4",
+      "operation": "analyze_function",
+      "parameters": {
+        "procedure": "0x457122"
+      },
+      "analysis_profile_digest": "33da723a26733dd8b59046612d0c42bf95bb1b59c46a63f17b127521af169a3d",
+      "reviewed_result": {
+        "procedure": {
+          "address": "0x457122",
+          "name": "OriginaisSBL::EnginAddVie",
+          "symbol": {
+            "primary": true,
+            "dynamic": false,
+            "external": false,
+            "type": "function",
+            "source": "user_defined"
+          },
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x457122",
+                "end": "0x457189"
+              }
+            ],
+            "total_bytes": 104,
+            "span_bytes": 104,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "int __fastcall EnginAddVie(undefined4 param_1, short param_2)",
+          "locals": []
+        },
+        "pseudocode": "\nint __fastcall OriginaisSBL::EnginAddVie(undefined4 param_1,short param_2)\n\n{\n  ushort uVar1;\n  UnidadeParcial *pUVar2;\n  ushort in_AX;\n  uint3 uVar3;\n  ushort uVar4;\n  \n  pUVar2 = tabela_unidades;\n  uVar4 = tabela_unidades[in_AX].vida + param_2;\n  tabela_unidades[in_AX].vida = uVar4;\n  uVar1 = *(ushort *)(&DAT_004965b6 + (uint)tabela_unidades[in_AX].tipo_id * 0x32);\n  uVar3 = (uint3)(byte)(uVar1 >> 8);\n  if (uVar1 < uVar4) {\n    pUVar2[in_AX].vida = uVar1;\n    return CONCAT31(uVar3,1);\n  }\n  return (uint)uVar3 << 8;\n}\n\n",
+        "assembly": [
+          "0x457122: PUSH EBX",
+          "0x457123: PUSH ECX",
+          "0x457124: MOV EBX, EDX",
+          "0x457126: XOR EDX, EDX",
+          "0x457128: MOV DX, AX",
+          "0x45712b: MOV EAX, EDX",
+          "0x45712d: SHL EAX, 0x4",
+          "0x457130: ADD EAX, EDX",
+          "0x457132: SHL EAX, 0x2",
+          "0x457135: ADD EAX, EDX",
+          "0x457137: MOV EDX, dword ptr [0x004e19a0]",
+          "0x45713d: SHL EAX, 0x2",
+          "0x457140: ADD EDX, EAX",
+          "0x457142: MOV CX, word ptr [EDX + 0x9a]",
+          "0x457149: ADD ECX, EBX",
+          "0x45714b: MOV word ptr [EDX + 0x9a], CX",
+          "0x457152: MOV EBX, dword ptr [0x004e19a0]",
+          "0x457158: MOV AL, byte ptr [EBX + EAX*0x1 + 0x1]",
+          "0x45715c: XOR EBX, EBX",
+          "0x45715e: MOV BL, AL",
+          "0x457160: MOV EAX, EBX",
+          "0x457162: SHL EAX, 0x2",
+          "0x457165: SUB EAX, EBX",
+          "0x457167: SHL EAX, 0x3",
+          "0x45716a: ADD EAX, EBX",
+          "0x45716c: MOV AX, word ptr [EAX*0x2 + 0x4965b6]",
+          "0x457174: CMP AX, CX",
+          "0x457177: JNC 0x00457185",
+          "0x457179: MOV word ptr [EDX + 0x9a], AX",
+          "0x457180: MOV AL, 0x1",
+          "0x457182: POP ECX",
+          "0x457183: POP EBX",
+          "0x457184: RET",
+          "0x457185: XOR AL, AL",
+          "0x457187: POP ECX",
+          "0x457188: POP EBX",
+          "0x457189: RET"
+        ]
+      }
+    },
+    {
+      "source_evidence_id": "ev_910262f64b93aa0417173ddb96e2698cd18bafc02cd59169b6d961fd54ea52cb",
+      "source_record_sha256": "d1917bfb0fe6c817dee7a5a0811126e61bfd0db14729c028a15b8da8982bf5c7",
+      "operation": "analyze_function",
+      "parameters": {
+        "procedure": "0x4530fd"
+      },
+      "analysis_profile_digest": "33da723a26733dd8b59046612d0c42bf95bb1b59c46a63f17b127521af169a3d",
+      "reviewed_result": {
+        "procedure": {
+          "address": "0x4530fd",
+          "name": "OriginaisSBL::EnginResetFatigue",
+          "symbol": {
+            "primary": true,
+            "dynamic": false,
+            "external": false,
+            "type": "function",
+            "source": "user_defined"
+          },
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          },
+          "body": {
+            "available": true,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "start": "0x4530fd",
+                "end": "0x453128"
+              }
+            ],
+            "total_bytes": 44,
+            "span_bytes": 44,
+            "non_contiguous": false,
+            "contains_entry": true
+          },
+          "signature": "undefined __stdcall EnginResetFatigue(void)",
+          "locals": []
+        },
+        "pseudocode": "\nvoid OriginaisSBL::EnginResetFatigue(void)\n\n{\n  UnidadeParcial *pUVar1;\n  ushort in_AX;\n  \n  pUVar1 = tabela_unidades;\n  *(undefined2 *)&tabela_unidades[in_AX].field_0x74 = 0;\n  *(undefined2 *)&pUVar1[in_AX].field_0x4 = *(undefined2 *)&pUVar1[in_AX].field_0x76;\n  return;\n}\n\n",
+        "assembly": [
+          "0x4530fd: PUSH EDX",
+          "0x4530fe: XOR EDX, EDX",
+          "0x453100: MOV DX, AX",
+          "0x453103: MOV EAX, EDX",
+          "0x453105: SHL EAX, 0x4",
+          "0x453108: ADD EAX, EDX",
+          "0x45310a: SHL EAX, 0x2",
+          "0x45310d: ADD EDX, EAX",
+          "0x45310f: MOV EAX, [0x004e19a0]",
+          "0x453114: SHL EDX, 0x2",
+          "0x453117: ADD EAX, EDX",
+          "0x453119: MOV word ptr [EAX + 0x74], 0x0",
+          "0x45311f: MOV DX, word ptr [EAX + 0x76]",
+          "0x453123: MOV word ptr [EAX + 0x4], DX",
+          "0x453127: POP EDX",
+          "0x453128: RET"
+        ]
+      }
+    },
+    {
+      "source_evidence_id": "ev_b997ab72492604a38421093e89cf855e91bd99a21c13d067fb85534a1a572247",
+      "source_record_sha256": "96886a83c8c80fdcdec8b463e6311b52ef5578df6eda933a23171a0b986f6fe5",
+      "operation": "inspect_native_instruction",
+      "parameters": {
+        "address": "0x420f75"
+      },
+      "analysis_profile_digest": "33da723a26733dd8b59046612d0c42bf95bb1b59c46a63f17b127521af169a3d",
+      "reviewed_result": {
+        "address": "0x420f75",
+        "status": "decoded",
+        "procedure": "0x420e4c",
+        "architecture": "x86:LE:32:default",
+        "mode": "default",
+        "bytes": "e8a8610300",
+        "length": 5,
+        "mnemonic": "CALL",
+        "raw_disassembly": "CALL 0x00457122",
+        "operands": [
+          {
+            "index": 0,
+            "raw": "0x00457122",
+            "provider_type": 8256,
+            "components": [
+              {
+                "kind": "address",
+                "text": "00457122",
+                "value": "0x457122",
+                "bit_width": null
+              }
+            ],
+            "memory_addressing": "unavailable"
+          }
+        ],
+        "flow": {
+          "kind": "call",
+          "conditional": false,
+          "computed": false,
+          "direct_destinations": [
+            "0x457122"
+          ],
+          "classification_evidence": [
+            {
+              "source": "ghidra-listing-flow-type",
+              "value": "UNCONDITIONAL_CALL"
+            }
+          ]
+        },
+        "references": [
+          {
+            "target_address": "0x457122",
+            "type": "UNCONDITIONAL_CALL",
+            "call": true,
+            "jump": false,
+            "indirect": false,
+            "computed": false,
+            "operand_index": 0,
+            "source_address": "0x420f75",
+            "data": false,
+            "read": false,
+            "write": false,
+            "primary": true,
+            "provenance": "ghidra-reference-manager",
+            "source": "default"
+          }
+        ],
+        "incoming_references": [],
+        "limitations": [
+          "Operand components are Ghidra Listing decoder tokens; effective memory base/index/displacement roles and per-instruction context mode are unavailable. The mode field is the program language variant."
+        ]
+      }
+    },
+    {
+      "source_evidence_id": "ev_fa97ef3fc114e1155128a47fb7db6b6e605f5b7a80154e8a55ad54dcda27752b",
+      "source_record_sha256": "98ae1357b60104c73010401916e448c940680dc6a5deac0f6528df26f60b6fe1",
+      "operation": "resolve_native_call_targets",
+      "parameters": {
+        "address": "0x420f7c"
+      },
+      "analysis_profile_digest": "33da723a26733dd8b59046612d0c42bf95bb1b59c46a63f17b127521af169a3d",
+      "reviewed_result": {
+        "call_site": "0x420f7c",
+        "procedure": "0x420e4c",
+        "status": "direct",
+        "mechanism": "direct",
+        "targets": [
+          {
+            "address": "0x4530fd",
+            "procedure": "0x4530fd",
+            "status": "direct",
+            "basis": "provider-reference",
+            "references": [
+              {
+                "target_address": "0x4530fd",
+                "type": "UNCONDITIONAL_CALL",
+                "call": true,
+                "jump": false,
+                "indirect": false,
+                "computed": false,
+                "operand_index": 0,
+                "source_address": "0x420f7c",
+                "data": false,
+                "read": false,
+                "write": false,
+                "primary": true,
+                "provenance": "ghidra-reference-manager",
+                "source": "default"
+              }
+            ]
+          }
+        ],
+        "limitations": [
+          "Targets are static Ghidra ReferenceManager call-reference observations. Computed calls without call references remain unresolved; a resolved reference is not proof of runtime execution.",
+          "Objective-C, Swift, vtable and closure mechanisms are not identified by this reference-only boundary."
+        ]
+      }
+    }
+  ]
+}

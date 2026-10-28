@@ -51,6 +51,8 @@ Gate placement requires wall/gate neighbors on both horizontal sides (orientatio
 
 Neighbor reads use the linear 65,536-cell object grid. Column 255 can read the next row; bytes outside the modeled allocation produce `NotImplementedError`, not artificial wraparound. Do not add activity, ownership, or type filters absent from the original bodies.
 
+`recuperacao_unidades.py` supplies complete live `EnginAddVie` and `EnginResetFatigue`, reusing the established u16 healing arithmetic. `retomar_recuperacao_saida` consumes the conversion stop at `0x420f6e`, heals by 1000, resets fatigue from the live `+0x76` word and returns at `0x420f81` before experience. The [recovery contract](core/RECOVERY.md) records input protection, mutation order, distinct REA analysis/original identities and 2,020 fresh original executions, including the unpatched joined position/conversion/recovery caller. Experience, placement, movement, sound and economic cleanup still delimit complete production.
+
 ## Physical gate simulation
 
 `portoes.py` reconstructs `HerseEnAnimation` (`0x4191FD`), phase/orientation queries (`0x41934F`, `0x419379`, `0x4193AC`), release/block commands (`0x4193D4`, `0x4195CA`), toggle (`0x419917`), and the type-12 `BatimentNextEtape` branch (`0x427BB7..0x427D5D`).
