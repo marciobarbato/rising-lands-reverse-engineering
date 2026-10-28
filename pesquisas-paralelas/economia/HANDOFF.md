@@ -131,3 +131,32 @@ python3 -B scripts/check.py --domain economy
 Actual new results: 10 tests pass with no x86 skips/failures/errors; **4,060 complete original calls**, zero dependency stops/expected exceptions/limits. Coverage is 1,352 valid combinations, 1,524 selector-byte/neutral/default cases, 768 capacity-width/register-preservation cases, and 416 poisoned byte/word cases. Full query-state buffers/guards remain unchanged. Local stage: six passed/four optional skipped. Domain gate: 257 discovered/113 optional skips, zero failures; documentation links passed. No historical or prior-stage x86 totals are presented as rerun.
 
 Global gap closed: exact read-only capacity/bonus providers needed for existing-unit conversion and attacker modifier queries. Status before integration: implemented and independently original-x86 validated; not yet wired into live mission/core/combat consumers. Loaded bonus initialization/setters, production continuation, and runtime dispatch remain. The coordinator's current overall estimate is approximately 50% (uncertainty 40–60%); this bounded provider delivery does not independently justify changing that coarse estimate. Required clean-tree serialized integration and actual feature/main hashes will be reported before another stage begins.
+
+## Stage 3 integration and fourth-stage selection
+
+Stage 3 is integrated: implementation `b1eb0c06e3b016f9abc2d27f3a836f6c20abf2f9`; final feature `d10c4e6af843b1af4e00286f212663fd777fd680`; main merge `7325cd0a3cb54d80d10a0c62c7d61bd25b0f8c49`. Required helper passed 731 tests/319 optional skips. Stable read-only providers were sent to Core/Combat. Only after reporting these results did the clean worktree resume through the helper and merge updated main.
+
+Before implementation, selected next dependency: original `BonusSetEngin` table producer and selective `BonusReset`. Exact inspected addresses/selector widths/sentinels and preserved reset offsets are published in the maintained inventory. Selector 1's post-write `EnginResetCapacite` call is a requested core provider; its absence must preserve writes and remain pending. This closes the source of bonus-state mutations without moving world-unit mutation into economy.
+
+## Stage 4: bonus table mutation and selective reset
+
+`BonusUnidades.reiniciar()` is complete `BonusReset` at `[0x428E71,0x428EEE)` plus shared return `[0x428716,0x42871A)`. It performs ten ordered writes per record over 4 × 26 records and preserves record offsets 3/7/15/16/17. `definir(owner,type,selector,value, recalcular_capacidades=None)` supplies protected `BonusSetEngin` `[0x428878,0x428C8A)`: AL/BL/DL u8 and CX u16. Selector >12 is no-op before guard checks; active owner range is 0–3 with no neutral bypass. Normal types 0–25; BL=30 only for selectors 0/1/3/4/5/6 with branch-specific filtering. Exact offsets/formulas/filter set are published in the maintained manual.
+
+Selector 0 uses runtime type word +46, a signed32-wrapped multiply and signed IDIV 10 before low-u16 storage. Selector 3 uses word +48 minus ten-times-word divided by CX; zero divisor raises before first write. Selector 12 stores CX-10 in u8. Other fields copy CL/CX at their original widths. Setter selector 8 writes opaque +13 although query selector 8 returns incoming ECX. No field meaning is invented. Constructor runtime types are 26 × 50 bytes, synthetic zero if omitted.
+
+Selector 1 mutates capacity byte +11 (BL=30 affects only types 12/13/15), then calls original `EnginResetCapacite` at `0x428C60 -> 0x4475EF`, AL owner. Missing callback raises `CapacidadeUnidadesPendente` after table writes; callback errors preserve them. Core owns live-unit Bag capacity refresh and received this request. The original tests stop at the dependency, never stub it as success. Other setter/reset branches execute completely to return.
+
+Original EXE/SBL hashes are unchanged. New `evidencias/mutacoes-bonus.json` and four listings contain exact original code/table bytes/hashes and supported interfaces. Fresh commands:
+
+```sh
+python3 -B pesquisas-paralelas/economia/capturar_mutacoes_bonus.py
+python3 -B pesquisas-paralelas/economia/validar_mutacoes_bonus.py
+python3 -B pesquisas-paralelas/economia/validar_mutacoes_bonus.py --emular
+python3 -B scripts/check.py --domain economy
+```
+
+Actual stage results: 11 tests pass/no skips in x86 mode; **2,094 bounded calls = 1,946 returns + 124 capacity-refresh stops + 24 expected divide exceptions** at `0x428A67`/`0x428ACE`; 2,070 declared stops, zero limits/failures/errors. Protected table/runtime-type buffers and guards match; all 1,040 reset writes are checked in original order. Local producer suite: five pass/six optional skips. Domain gate: 268 discovered/119 optional skips, no failures; documentation links passed. The owned aggregate validator now counts all new benchmark groups in a future explicit full run; predecessor reports remain unchanged.
+
+Global gap closed: original producers for the bonus table consumed by integrated read-only providers. Status before required integration: implemented and independently original-x86 validated; actual live-unit capacity refresh, mission/event loading and production/runtime composition remain providers/dispatch gaps. Overall coordinator estimate stays approximately 50% (40–60% uncertainty) for now; neither reset fixtures nor native call totals measure full-game completion. Feature/main hashes and common integration gate will be reported before another stage begins.
+
+The updated aggregate-report runner was also exercised locally: 268 tests/119 skips, zero failures/errors/x86 calls, with its JSON write redirected only to a temporary file. All 16 benchmark groups, including the four new stages, appear in the counts; original versioned predecessor reports were left untouched.

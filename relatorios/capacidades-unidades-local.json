@@ -1,0 +1,28 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_capacidades_unidades.DiferencialCapacidadesUnidades.test_all_raw_types_for_neutral_bonus_bypass",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_capacidades_unidades.DiferencialCapacidadesUnidades.test_all_state_bytes_owner_filters_and_poisoned_bags",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_capacidades_unidades.DiferencialCapacidadesUnidades.test_owner_argument_all_low_bytes_and_empty_scans",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_capacidades_unidades.DiferencialCapacidadesUnidades.test_partial_query_failures_match_native_prior_record_stores",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "scope": "Existing-unit Bag-capacity word refresh; no inventory removal or real mission."
+}

@@ -1,0 +1,42 @@
+"""Record only fresh original bonus producer checks and explicit stops."""
+import argparse
+import json
+import os
+from pathlib import Path
+import sys
+import unittest
+
+PASTA=Path(__file__).resolve().parent
+sys.dont_write_bytecode=True
+sys.path.insert(0,str(PASTA.parents[1].parent/'source/python'))
+sys.path.insert(0,str(PASTA.parents[1]/'.local/python'))
+sys.path.insert(0,str(PASTA/'testes'))
+
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--emular',action='store_true')
+    args=p.parse_args()
+    if args.emular:os.environ['RISING_EMULAR']='1'
+    else:os.environ.pop('RISING_EMULAR',None)
+    import test_mutacoes_bonus
+    c=test_mutacoes_bonus.DiferencialMutacoesBonus
+    c.bancadas=[]
+    r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromModule(test_mutacoes_bonus))
+    bs=c.bancadas
+    n=sum(b.execucoes for b in bs)
+    ex=sum(b.excecoes_esperadas for b in bs)
+    report=dict(scope='BonusReset and BonusSetEngin table producer; no world capacity refresh',
+        mode='original x86 and Python' if args.emular else 'Python only',tests=r.testsRun,
+        failures=len(r.failures),errors=len(r.errors),skips=[dict(test=str(t),reason=s) for t,s in r.skipped],
+        bounded_x86_executions=n,declared_stops=n-ex,complete_returns=sum(b.retornos for b in bs),
+        capacity_dependency_stops=sum(b.paradas_capacidade for b in bs),expected_exceptions=ex,
+        expected_limits=0,success=r.wasSuccessful(),
+        sha256_exe='6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb')
+    name='validacao-mutacoes-bonus-emulada.json' if args.emular else 'validacao-mutacoes-bonus-local.json'
+    (PASTA/name).write_text(json.dumps(report,indent=2)+'\n')
+    print(json.dumps(report,indent=2))
+    return 0 if r.wasSuccessful() else 1
+
+
+if __name__=='__main__':raise SystemExit(main())

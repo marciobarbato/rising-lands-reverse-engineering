@@ -1,0 +1,16 @@
+{
+  "scope": "BonusReset and BonusSetEngin table producer; no world capacity refresh",
+  "mode": "original x86 and Python",
+  "tests": 11,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 2094,
+  "declared_stops": 2070,
+  "complete_returns": 1946,
+  "capacity_dependency_stops": 124,
+  "expected_exceptions": 24,
+  "expected_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}
