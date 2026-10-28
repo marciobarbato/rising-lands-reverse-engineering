@@ -20,8 +20,9 @@ ao movimento, não desenha sprites e não duplica a aritmética de dano.
 
 O [manifesto](evidencias/manifesto.json) registra hashes e limites dos bytes
 originais. Foram exportados os corpos de Anim, InfligeDegat e Avance, além de
-Random. **Exportar o corpo inteiro de Avance não significa traduzi-lo inteiro.**
-Os tipos fora do domínio de `avancar_linear` causam `NotImplementedError`
+Random. A continuação em [MAQUINA_PROJETEIS.md](MAQUINA_PROJETEIS.md) completa
+o despacho em uma API separada. Os tipos fora do domínio de `avancar_linear`
+causam `NotImplementedError`
 antes de qualquer escrita, mesmo se o ramo nativo desse tipo seria um no-op.
 
 ## Animação lógica: +18 e o byte global de incremento
@@ -172,8 +173,8 @@ para uma grade ideal ao integrar a reconstrução.
 
 Esta etapa acrescenta **12 testes**, seis de contrato e seis diferenciais,
 com **21.780 execuções x86 delimitadas**. A suíte completa passou com
-**90 testes, 204.271 execuções, zero falhas/erros/ignorados**. Sem emulação,
-passam 32 contratos e os 58 diferenciais são ignorados explicitamente.
+**102 testes, 213.506 execuções, zero falhas/erros/ignorados**. Sem emulação,
+passam 38 contratos e os 64 diferenciais são ignorados explicitamente.
 
 | Comparação | Execuções x86 |
 |---|---:|
@@ -227,11 +228,11 @@ nenhum módulo de caminhos ou economia é importado por esta implementação.
 Não executar automaticamente “uma animação + um avanço” por frame do jogo:
 as sequências do teste apenas comparam as mesmas chamadas nas duas versões.
 O despachante `ProjectileCalcul` (`0x46FC0F`) tem uma ordem própria de 30
-passagens e do portão +01, ainda não integrada nem traduzida nesta etapa.
+passagens e do portão +01, traduzida e validada na continuação em
+[MAQUINA_PROJETEIS.md](MAQUINA_PROJETEIS.md), sem integração à aplicação.
 
-Continuam pendentes os demais ramos de Avance: tipo 30 e sua área maior
-(`0x46F088`), tipo 33 e seu impacto sorteado (`0x46EB47`), tipo 28 e
-`EteintTerrain`, além dos efeitos temporários que chamam `CreerExplosion`.
-As chamadas de desenho permanecem fora desta pesquisa. A leitura estática
-localizou esses ramos; não se atribui equivalência dinâmica aos que não foram
-executados pelos testes desta entrega.
+Essa continuação também cobre o tipo 30 e sua área maior (`0x46F088`), o tipo
+33 e seu impacto sorteado (`0x46EB47`), o tipo 28 e o pedido `EteintTerrain`,
+além dos efeitos temporários que chamam `CreerExplosion`. A API parcial desta
+etapa conserva seus limites; o núcleo linear é compartilhado com a máquina
+completa. Chamadas de desenho e dano em vítimas permanecem fora da validação.

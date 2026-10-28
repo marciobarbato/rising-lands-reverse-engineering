@@ -415,6 +415,27 @@
       "arquivo": "004704dc.asm"
     },
     {
+      "nome": "SortilegeGetTempsFin",
+      "inicio": "0x0047474f",
+      "fim_exclusivo": "0x0047476a",
+      "sha256_bytes": "831b4fd4c621904c8e56269d9fa963d90198c08acdaccc37cbf3eadd9d8a10c2",
+      "arquivo": "0047474f.asm"
+    },
+    {
+      "nome": "CreerExplosion",
+      "inicio": "0x00475710",
+      "fim_exclusivo": "0x00475736",
+      "sha256_bytes": "eb0c7bf790166f2ca1281ad9cc1693a919b733687dc073ad3d75d8abb375b17d",
+      "arquivo": "00475710.asm"
+    },
+    {
+      "nome": "EteintTerrain",
+      "inicio": "0x00476e82",
+      "fim_exclusivo": "0x00477042",
+      "sha256_bytes": "459f5581eb20a03c96e367cdbcb79dfbe036cacaadc33056b20852dd3c80e30c",
+      "arquivo": "00476e82.asm"
+    },
+    {
       "nome": "TypeEnginGetSortieProjectile",
       "inicio": "0x004511a5",
       "fim_exclusivo": "0x004513c7",

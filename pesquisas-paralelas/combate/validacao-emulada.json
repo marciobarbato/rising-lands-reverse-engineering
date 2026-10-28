@@ -1,11 +1,11 @@
 {
   "sucesso": true,
-  "testes": 90,
+  "testes": 102,
   "falhas": 0,
   "erros": 0,
   "ignorados": [],
   "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
-  "execucoes_x86_delimitadas": 204271,
+  "execucoes_x86_delimitadas": 213506,
   "por_teste": [
     {
       "teste": "test_alvos_alcance.Contratos.test_arma_e_inicio_nao_equivalem_a_dano",
@@ -366,6 +366,54 @@
     {
       "teste": "test_avanco_projeteis.DiferencialAvanco.test_sequencias_desde_set_ate_chegada",
       "execucoes_x86_delimitadas": 5336
+    },
+    {
+      "teste": "test_maquina_projeteis.ContratosMaquina.test_calcul_30_passagens_portao_e_inativos",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_maquina_projeteis.ContratosMaquina.test_circulo30_sem_dano_central_duplicado",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_maquina_projeteis.ContratosMaquina.test_falta_rng_preserva_desativacao_anterior",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_maquina_projeteis.ContratosMaquina.test_temporarios_ordem_desativacao_e_igualdade",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_maquina_projeteis.ContratosMaquina.test_tipo28_tempo_word_e_atacante_byte",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_maquina_projeteis.ContratosMaquina.test_tipo33_filho_destino_antigo_dano_destino_novo",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_maquina_projeteis.DiferencialMaquina.test_calcul_misto_com_area_sorteio_luz_e_expiracao",
+      "execucoes_x86_delimitadas": 1837
+    },
+    {
+      "teste": "test_maquina_projeteis.DiferencialMaquina.test_calcul_pool_inativo_e_criacoes_antes_depois_do_pai",
+      "execucoes_x86_delimitadas": 2974
+    },
+    {
+      "teste": "test_maquina_projeteis.DiferencialMaquina.test_despacho_todos_bytes_tipo_e_quadros",
+      "execucoes_x86_delimitadas": 2560
+    },
+    {
+      "teste": "test_maquina_projeteis.DiferencialMaquina.test_tipo28_tempo_16bits_e_extincao_sem_celulas",
+      "execucoes_x86_delimitadas": 70
+    },
+    {
+      "teste": "test_maquina_projeteis.DiferencialMaquina.test_tipo30_circulo_cantos_recorte_e_pool_cheio",
+      "execucoes_x86_delimitadas": 1734
+    },
+    {
+      "teste": "test_maquina_projeteis.DiferencialMaquina.test_tipo33_sorteio_destino_e_saturacao",
+      "execucoes_x86_delimitadas": 60
     }
   ],
   "limites": {
@@ -373,7 +421,9 @@
     "instrucoes_padrao": 20000,
     "instrucoes_selecao": 1000000,
     "instrucoes_linha": 100000,
-    "instrucoes_avanco_impacto": 500000
+    "instrucoes_avanco_impacto": 500000,
+    "maquina_instrucoes_por_fatia": 500000,
+    "maquina_maximo_retomadas": 20000
   },
   "escopo": "Trechos isolados do EXE original com memória sintética. Não inicia Windows/jogo.",
   "consultas_resolvidas": "O teste antigo de fragmentos fornece AL como entrada. Os novos testes de mira/manutenção executam EnginViseCible, AngleCalcul e chamadas x87 originais, sem substituições.",
@@ -410,7 +460,7 @@
       "0x46e4ca"
     ],
     "comparacao": "5600 bytes do pool e ordem/argumentos dos efeitos; tipos 0..255; trajetórias e overflow de palavras.",
-    "limites": "Dano com grade vazia; descoberta/iluminação com dimensões zero e raio 0..10, sem células visitadas. Não valida impacto, ProjectileAvance ou renderização."
+    "limites": "Nesta etapa: dano com grade vazia; descoberta/iluminação com dimensões zero e raio 0..10, sem células visitadas. Avance é validado nas etapas seguintes; renderização permanece externa."
   },
   "avanco_projeteis": {
     "rotinas": [
@@ -420,7 +470,18 @@
     "avanco_parcial": "0x46eaf8: tipos 1..5, 9..13, 17, 20..23 e 29, incluindo chegada.",
     "comparacao": "5600 bytes, sequência de pedidos de dano, marcadores/resultados Random e argumentos de ProjectileSet.",
     "consultas": "Random original executado; seus resultados são entradas externas do Python. Não se revalida nem duplica o gerador.",
-    "limites": "InfligeDegat original com grade vazia, sem dano em vítimas. Não traduz os demais ramos de Avance nem o despacho temporal de ProjectileCalcul."
+    "limites": "Nesta etapa: InfligeDegat original com grade vazia, sem dano em vítimas. Os demais ramos e o despacho são validados em maquina_projeteis."
+  },
+  "maquina_projeteis": {
+    "rotinas": [
+      "0x46eaf8",
+      "0x46fc0f"
+    ],
+    "escopo": "Todos os bytes de tipo em Avance, círculo do tipo 30, sorteio do tipo 33, expiração e 30 passagens sobre o pool vivo.",
+    "comparacao": "5600 bytes, global 0x4dfb44, dois buffers de 65536 bytes, sequência e argumentos das chamadas, atividade durante efeitos e ordem de IDs processados.",
+    "referencia": "Random, CreerExplosion, consultas de magia e EteintTerrain originais executados sem substituir CALLs; resultados Random são entradas externas do Python.",
+    "fatiamento": "Paradas antes de Avance e de cada célula do tipo 30; retomada sem alterar registradores, pilha ou memória. Cada fatia conta como execução delimitada.",
+    "limites": "Dano com unidades inativas e grade vazia; EteintTerrain com dimensões zero e raio 0..7, sem células visitadas. Não valida iluminação real, vítimas, desenho ou duração em segundos."
   },
   "diagnosticos": []
 }

@@ -1,9 +1,9 @@
 """Pool e preparação linear de projéteis, independentes do mundo do jogo.
 
 Registros brutos de 56 bytes, pool de 100 posições. Efeitos imediatos de dano
-e iluminação são callbacks explícitos. O avanço parcial e os pedidos de impacto
-estão no módulo independente avanco_projeteis. Não implementa aritmética de
-dano, desenho nem uma duração de tick.
+e iluminação são callbacks explícitos. O avanço linear e os pedidos de impacto
+estão em avanco_projeteis; maquina_projeteis completa o despacho e a expiração.
+Não implementa aritmética de dano, desenho nem uma duração de tick.
 """
 from dataclasses import dataclass, field
 import struct

@@ -3,13 +3,14 @@
 A entrega está isolada nesta pasta. O escopo autorizado do commit é somente
 esta pasta, no branch `main`, preservando as alterações dos chats paralelos.
 Arquivos originais foram somente lidos.
-A versão validada tem **90 testes aprovados e 204.271 execuções x86 delimitadas**;
+A versão validada tem **102 testes aprovados e 213.506 execuções x86 delimitadas**;
 ver [relatório](validacao-emulada.json) e [pesquisa técnica](README.md).
 
 ## Contrato de dados
 
 Importar `alvos_alcance.py`, `mira_angular.py`, `animacao_disparo.py` e
-`inicializacao_ataque.py`, `projeteis.py` e `avanco_projeteis.py` como módulos
+`inicializacao_ataque.py`, `projeteis.py`, `avanco_projeteis.py` e
+`maquina_projeteis.py` como módulos
 separados. Nenhum depende de `movimento`,
 `combate`, economia ou tarefas; usam biblioteca padrão, dados extraídos e consultas locais.
 
@@ -133,9 +134,9 @@ o raio duas vezes e conserva a ordem descrita em [PROJETEIS.md](PROJETEIS.md).
 
 `preparar_linha(registro)` e `calcular_linha(registro)` operam em uma view
 mutável de 56 bytes. A segunda avança no máximo um passo e não desativa o
-registro ao terminar. Não equivale ao tick completo: o despacho
-`ProjectileCalcul` e parte de `ProjectileAvance` continuam pendentes. O campo
-+04 é um limiar de contador no consumidor examinado, não velocidade confirmada.
+registro ao terminar. Não equivale ao despacho completo, agora disponível em
+`MaquinaProjeteis.calcular`. O campo +04 é um limiar de contador no consumidor
+examinado, não velocidade confirmada.
 
 ## Avanço linear e impacto
 
@@ -160,8 +161,40 @@ A disposição dos efeitos criados nas bordas difere da área de dano; ver
 
 `animar_projetil(registro, incremento_global)` traduz o avanço do quadro +18
 para todos os tipos e não filtra inativos. Seu incremento é o byte 0x508F7C.
-O chamador ainda precisa reproduzir a ordem de `ProjectileCalcul`; esta etapa
-não determina um tick por frame nem conecta os projéteis à simulação principal.
+A ordem de `ProjectileCalcul` está na máquina descrita abaixo; nenhuma etapa
+determina um tick por frame nem conecta os projéteis à simulação principal.
+
+## Despacho completo de projéteis
+
+`MaquinaProjeteis(pool, aleatorio, tempo_magia, campo_4dfb44)` reutiliza o mesmo
+pool da emissão. `avancar(indice)` cobre todos os bytes de tipo, inclusive os
+no-ops 0 e 35..255. `calcular(incremento_animacao)` anima os 100 slots uma vez
+e realiza as 30 varreduras originais; não chamar Anim uma segunda vez.
+
+O pool precisa permanecer vivo durante as varreduras: filhos podem avançar na
+mesma passagem conforme o índice e o valor +01. A cada passagem, +01 é limpo
+em todos os slots, até os inativos. Não capturar uma lista inicial de ativos
+nem substituir isso por um avanço por projétil.
+
+Fornecer `tempo_magia(id) -> u16` para `SortilegeGetTempsFin`, conservar
+`pool.raio_magia` e acrescentar `CreerExplosion(celula, tipo)` e
+`EteintTerrain(celula, raio, atacante_byte_baixo)` ao backend de efeitos.
+`aleatorio(marcador)` continua sendo uma consulta ao gerador existente.
+A duração é comparada como palavra, sem truncá-la para o byte do quadro.
+
+O tipo 30 escreve 15 em `campo_4dfb44`, depois solicita dano e filho por célula
+de um círculo de raio 7. Esse campo local representa o byte original bruto;
+conectar seu consumidor só depois de identificá-lo. O tipo 33 tenta criar o
+filho com o destino antigo antes de atualizar +16 do pai e solicitar dano.
+Preservar também a desativação anterior ao efeito em 6..8/18/19/34 e posterior
+em 25. Sequências e argumentos estão em
+[MAQUINA_PROJETEIS.md](MAQUINA_PROJETEIS.md).
+
+A nova tradução permanece independente. O teste do backend de explosões só
+manipula dois buffers sintéticos; não foi incorporado ao renderizador. O dano
+real, a extinção de iluminação em células e a cadência em segundos continuam
+fora desta validação. A API parcial `avancar_linear` conserva seu domínio
+anterior para evitar alteração silenciosa dos callers existentes.
 
 ## Inicialização e persistência dos campos
 
@@ -201,8 +234,8 @@ independentes; nenhuma adaptação ao mundo compartilhado foi aplicada.
 ## Reproduzir a conferência sem afetar o trabalho dos outros chats
 
 Nesta pasta, executar `python3 -B validar.py --emular` com Unicorn e JIT
-permitido. Sem JIT, `python3 -B validar.py` executa 32 testes de contrato
-e marca 58 diferenciais como ignorados. Os relatórios ficam aqui.
+permitido. Sem JIT, `python3 -B validar.py` executa 38 testes de contrato
+e marca 64 diferenciais como ignorados. Os relatórios ficam aqui.
 
 O teste antigo de fragmentos de manutenção fornece consultas como entradas;
 o novo teste executa alcance/mira originais em 676 cenários. O teste antigo de
@@ -212,6 +245,8 @@ adjacências, os alcances suportados e a linha executam suas chamadas originais,
 sem substituir funções internas. Construções usam memória sintética 1x1/3x3.
 
 Próximos passos: investigar a origem histórica/externa de +8A=2/3, completar
-a geometria de construções e o backend separado de avanço/colisão/impacto.
+a geometria de construções e validar os backends de impacto e visibilidade
+com vítimas/células reais. Localizar o chamador global de `ProjectileCalcul`
+para determinar a cadência, sem inferi-la das 30 passagens internas.
 A aritmética de dano já existente permanece
 sob o contrato documentado em `documentacao/COMBATE.md`.

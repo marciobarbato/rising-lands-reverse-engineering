@@ -106,7 +106,13 @@ nos ramos traduzidos. O backend precisa fornecer Random para certas chegadas.
     p = pool.registro(indice)
     if p[0] not in TIPOS_LINEARES:
         raise NotImplementedError(f'Ramo de ProjectileAvance não traduzido: tipo {p[0]}')
-    if p[0] == 29 and p[0x18] < 12:
+    _passo_linear(pool, indice, aleatorio, _chegada)
+
+
+def _passo_linear(pool, indice, aleatorio, chegada):
+    """Núcleo compartilhado com a máquina completa; mantém a API parcial anterior."""
+    p = pool.registro(indice)
+    if p[0] in (29, 30) and p[0x18] < 12:
         return
     p[3] = (p[3] + 1) & 255
     if p[0x19] and p[3] == p[4]:
@@ -119,4 +125,4 @@ nos ramos traduzidos. O backend precisa fornecer Random para certas chegadas.
             # ADD usa +28 sem sinal, mesmo quando a preparação escreveu IDIV negativo.
             por32(p, 0x24, struct.unpack_from('<I', p, 0x24)[0] + u16(p, 0x28))
     else:
-        _chegada(pool, indice, aleatorio)
+        chegada(pool, indice, aleatorio)

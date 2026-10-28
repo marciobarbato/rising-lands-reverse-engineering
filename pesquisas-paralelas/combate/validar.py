@@ -35,10 +35,11 @@ def main():
     from test_inicializacao_ataque import ContratosInicializacao, DiferencialInicializacao
     from test_projeteis import ContratosProjeteis, DiferencialProjeteis
     from test_avanco_projeteis import ContratosAvanco, DiferencialAvanco
+    from test_maquina_projeteis import ContratosMaquina, DiferencialMaquina
     suite = unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromTestCase(c)
         for c in (Contratos, Diferencial, ContratosMira, DiferencialMira, ContratosAnimacao, DiferencialAnimacao,
                   ContratosInicializacao, DiferencialInicializacao, ContratosProjeteis, DiferencialProjeteis,
-                  ContratosAvanco, DiferencialAvanco))
+                  ContratosAvanco, DiferencialAvanco, ContratosMaquina, DiferencialMaquina))
     r = unittest.TextTestRunner(verbosity=2, resultclass=Resultado).run(suite)
     saida = Path(__file__).resolve().parent / ('validacao-emulada.json' if args.emular else 'validacao-local.json')
     relatorio = dict(sucesso=r.wasSuccessful(), testes=r.testsRun, falhas=len(r.failures),
@@ -47,7 +48,8 @@ def main():
         execucoes_x86_delimitadas=sum(t['execucoes_x86_delimitadas'] for t in r.contagens),
         por_teste=r.contagens,
         limites=dict(tempo_por_chamada_segundos=1, instrucoes_padrao=20000,
-            instrucoes_selecao=1000000, instrucoes_linha=100000, instrucoes_avanco_impacto=500000),
+            instrucoes_selecao=1000000, instrucoes_linha=100000, instrucoes_avanco_impacto=500000,
+            maquina_instrucoes_por_fatia=500000, maquina_maximo_retomadas=20000),
         escopo='Trechos isolados do EXE original com memória sintética. Não inicia Windows/jogo.',
         consultas_resolvidas='O teste antigo de fragmentos fornece AL como entrada. Os novos testes de mira/manutenção executam EnginViseCible, AngleCalcul e chamadas x87 originais, sem substituições.',
         configuracao_x87=dict(control_word='0x037f', workaround_fpatan_0x49946c=0,
@@ -62,12 +64,18 @@ def main():
         projeteis=dict(rotinas=['0x46e00a', '0x46e02c', '0x46e422', '0x46e44c',
                 '0x46e208', '0x46e049', '0x46e4ca'],
             comparacao='5600 bytes do pool e ordem/argumentos dos efeitos; tipos 0..255; trajetórias e overflow de palavras.',
-            limites='Dano com grade vazia; descoberta/iluminação com dimensões zero e raio 0..10, sem células visitadas. Não valida impacto, ProjectileAvance ou renderização.'),
+            limites='Nesta etapa: dano com grade vazia; descoberta/iluminação com dimensões zero e raio 0..10, sem células visitadas. Avance é validado nas etapas seguintes; renderização permanece externa.'),
         avanco_projeteis=dict(rotinas=['0x46e52c', '0x46e5fe'],
             avanco_parcial='0x46eaf8: tipos 1..5, 9..13, 17, 20..23 e 29, incluindo chegada.',
             comparacao='5600 bytes, sequência de pedidos de dano, marcadores/resultados Random e argumentos de ProjectileSet.',
             consultas='Random original executado; seus resultados são entradas externas do Python. Não se revalida nem duplica o gerador.',
-            limites='InfligeDegat original com grade vazia, sem dano em vítimas. Não traduz os demais ramos de Avance nem o despacho temporal de ProjectileCalcul.'),
+            limites='Nesta etapa: InfligeDegat original com grade vazia, sem dano em vítimas. Os demais ramos e o despacho são validados em maquina_projeteis.'),
+        maquina_projeteis=dict(rotinas=['0x46eaf8', '0x46fc0f'],
+            escopo='Todos os bytes de tipo em Avance, círculo do tipo 30, sorteio do tipo 33, expiração e 30 passagens sobre o pool vivo.',
+            comparacao='5600 bytes, global 0x4dfb44, dois buffers de 65536 bytes, sequência e argumentos das chamadas, atividade durante efeitos e ordem de IDs processados.',
+            referencia='Random, CreerExplosion, consultas de magia e EteintTerrain originais executados sem substituir CALLs; resultados Random são entradas externas do Python.',
+            fatiamento='Paradas antes de Avance e de cada célula do tipo 30; retomada sem alterar registradores, pilha ou memória. Cada fatia conta como execução delimitada.',
+            limites='Dano com unidades inativas e grade vazia; EteintTerrain com dimensões zero e raio 0..7, sem células visitadas. Não valida iluminação real, vítimas, desenho ou duração em segundos.'),
         diagnosticos=[dict(teste=t.id(), detalhe=e) for t, e in [*r.failures, *r.errors]])
     saida.write_text(json.dumps(relatorio, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(f'Relatório: {saida}\nExecuções x86 delimitadas: {relatorio["execucoes_x86_delimitadas"]}')

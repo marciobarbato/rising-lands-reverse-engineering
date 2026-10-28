@@ -26,6 +26,10 @@ não foram duplicados. O novo predicado de arma carregada complementa o avanço.
 | [AVANCO_PROJETEIS.md](AVANCO_PROJETEIS.md) | Ordem dos efeitos, chegada, RNG e diferenças nas bordas |
 | [bancada_avanco_projeteis.py](bancada_avanco_projeteis.py) | X86 original de avanço/impacto, com observação do RNG |
 | [test_avanco_projeteis.py](test_avanco_projeteis.py) | 12 testes adicionais e 21.780 execuções x86 delimitadas |
+| [maquina_projeteis.py](maquina_projeteis.py) | Despacho completo de Avance e 30 passagens de Calcul sobre o pool vivo |
+| [MAQUINA_PROJETEIS.md](MAQUINA_PROJETEIS.md) | Tipos 30/33, expiração, consultas de magia e ordem de processamento |
+| [bancada_maquina_projeteis.py](bancada_maquina_projeteis.py) | X86 original com pausas/retomadas sem alterações de estado |
+| [test_maquina_projeteis.py](test_maquina_projeteis.py) | 12 testes adicionais e 9.235 execuções x86 delimitadas |
 | [inicializacao_ataque.py](inicializacao_ataque.py) | Características por tipo, inicialização e trechos de pós-carga |
 | [INICIALIZACAO_ATAQUE.md](INICIALIZACAO_ATAQUE.md) | Rastreio de +79/+7A/+8A/+8B e limites da conclusão sobre fases 2/3 |
 | [rastrear_campos.py](rastrear_campos.py) | Auditoria estática e 2.604 registros dos 38 mapas originais |
@@ -39,10 +43,10 @@ não foram duplicados. O novo predicado de arma carregada complementa o avanço.
 | [test_alvos_alcance.py](test_alvos_alcance.py) | Casos de contrato e comparações contra instruções originais |
 | [validar.py](validar.py) | Executa só esta pesquisa e grava JSON nesta pasta |
 | [extrair_evidencias.py](extrair_evidencias.py) | Extração direta de bytes/assembly do EXE original |
-| [evidencias/manifesto.json](evidencias/manifesto.json) | 85 intervalos com limites/hashes, constantes e despachos |
+| [evidencias/manifesto.json](evidencias/manifesto.json) | 88 intervalos com limites/hashes, constantes e despachos |
 | [evidencias/dados-disparo.json](evidencias/dados-disparo.json) | Tabelas extraídas de saída de projétil e deslocamento por tipo |
-| [validacao-local.json](validacao-local.json) | 32 contratos aprovados, 58 diferenciais ignorados explicitamente |
-| [validacao-emulada.json](validacao-emulada.json) | 90 testes aprovados, zero falhas/erros/ignorados, 204.271 chamadas x86 delimitadas |
+| [validacao-local.json](validacao-local.json) | 38 contratos aprovados, 64 diferenciais ignorados explicitamente |
+| [validacao-emulada.json](validacao-emulada.json) | 102 testes aprovados, zero falhas/erros/ignorados, 213.506 chamadas x86 delimitadas |
 | [INTEGRACAO.md](INTEGRACAO.md) | Contratos e sequência de integração para o chat principal |
 
 Executar nesta pasta:
@@ -97,7 +101,9 @@ aparece como dados, não como instruções.
 | `0x451d4d..0x451e22` | Mesmo cálculo | Torre, recarga e escritas para iniciar ciclo, corpo já alinhado |
 | `0x452b10..0x452b78` | Mesmo cálculo | Revalidação após espera; trechos com consultas como entradas |
 | `0x451914` / `0x4479c4` | `CalculAttaqueEngin` / `AnimAttaqueEngin` | Subestados e avanço de quadros traduzidos; [detalhes](ANIMACAO_DISPARO.md) |
-| `0x46e44c` | `ProjectileInit` | Solicitações emitidas pelo Python; corpo original emulado com pool cheio e um slot livre |
+| `0x46e44c` | `ProjectileInit` | Pool/inicialização traduzidos e emissão validada com pool cheio e slots livres |
+| `0x46eaf8` | `ProjectileAvance` | Todos os tipos; linha, chegada, círculo 30, sorteio 33 e expiração |
+| `0x46fc0f` | `ProjectileCalcul` | Animação geral e 30 passagens com atividade/+01 consultados ao vivo |
 
 Esses resultados são **confirmados no código e nos cenários sintéticos
 descritos**, não por observação de uma partida. Os limites de cada tradução
@@ -252,9 +258,11 @@ As traduções e os limites dessa conclusão estão em
 
 ## Testes e limitações
 
-As 204.271 execuções do relatório contam chamadas delimitadas de entrada/trecho,
+As 213.506 execuções do relatório contam chamadas delimitadas de entrada/trecho,
 não cada `CALL` interna. Toda chamada recusa execução fora dos intervalos
-declarados e exige alcançar uma parada. Limites: um segundo por chamada,
+declarados e exige alcançar uma parada. No despacho completo, cada pausa e
+retomada conta como uma execução, mantendo o estado da CPU. Limites: um
+segundo por chamada,
 20.000 instruções normalmente, 100.000 na linha, 500.000 no avanço/impacto
 de projéteis e 1.000.000 na seleção.
 
@@ -277,6 +285,9 @@ A etapa de [avanço e impacto](AVANCO_PROJETEIS.md) acrescenta 21.780 execuçõe
 e compara a animação lógica,
 o wrapper de dano, os 16 ramos lineares de Avance e suas chegadas. Reutiliza
 o contrato de dano e consulta Random externamente, sem duplicar essas fórmulas.
+A [máquina completa de projéteis](MAQUINA_PROJETEIS.md) acrescenta 9.235
+execuções: todos os ramos restantes e as 30 passagens de Calcul, comparando
+também o byte global do tipo 30, dois buffers de efeitos e a ordem dos IDs.
 
 Limites deliberados:
 
@@ -301,6 +312,8 @@ Limites deliberados:
 - Os subestados de animação/disparo estão traduzidos, com callbacks obrigatórios
   para efeitos externos e checkpoints antes de movimento, áudio e balão.
   O pool e o incremento linear estão em `projeteis.py`; `avanco_projeteis.py`
-  acrescenta 16 ramos lineares e suas chegadas. Voo/impacto dos demais tipos,
-  som, dano, morte, cadência temporal e tecnologia não foram traduzidos como sistema completo. Não há alegação
+  acrescenta 16 ramos lineares e suas chegadas. `maquina_projeteis.py` completa
+  o despacho e a expiração. Som, dano em vítimas, iluminação real, morte,
+  cadência em segundos e tecnologia não foram traduzidos como sistema completo.
+  Não há alegação
   de simulação completa de combate nem confronto com gameplay real.
