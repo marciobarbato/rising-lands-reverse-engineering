@@ -1,0 +1,37 @@
+{
+  "tests": 44,
+  "skipped": 0,
+  "errors": 0,
+  "failures": 0,
+  "unit_bounded_segments": 14056,
+  "unit_native_fixtures": 469,
+  "unit_native_returns": 457,
+  "expected_modifier_checkpoints": 12,
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "scope": "Separate filename, prelude, indexed structure/unit and condition/objective table paths; successful file I/O supplied. Native bodies unpatched; inherited state/player/bonus tables are explicit synthetic inputs. No condition or mission execution.",
+  "native_faults": 0,
+  "real_mission_runtime_tested": false,
+  "prelude_native_calls": 237,
+  "prelude_bounded_segments": 9480,
+  "prelude_checkpoint": "0x42ee1c, before Chemin_Remap executes",
+  "condition_table_native_calls": {
+    "0x458b05": 71,
+    "0x47c404": 41
+  },
+  "condition_table_bounded_segments": 33599,
+  "condition_evaluation_supported": false,
+  "full_entry_native_fixtures": 41,
+  "full_entry_bounded_segments": 10600,
+  "full_entry_native_returns": 40,
+  "full_entry_expected_modifier_stops": 1,
+  "structure_native_caller_fixtures": {
+    "MissionLoad": 41,
+    "MissionLoadName": 41
+  },
+  "structure_bounded_segments": 8706,
+  "structure_stop_before_unit_loader": true,
+  "filename_native_calls": 3268,
+  "filename_bounded_segments": 3268,
+  "filename_native_returns": 3265,
+  "filename_expected_query_stops": 3
+}

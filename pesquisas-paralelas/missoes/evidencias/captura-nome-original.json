@@ -1,0 +1,149 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "native_calls": 8,
+  "bounded_segments": 8,
+  "returns": 7,
+  "expected_query_stops": 1,
+  "cases": [
+    {
+      "number": 1,
+      "variant": 3,
+      "values": [
+        90,
+        90,
+        90
+      ],
+      "stop_query": null,
+      "output_hex": "5c576f726c645c4d6f6e646530312e45544100a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+      "queries": [],
+      "checkpoint": "0x3000000"
+    },
+    {
+      "number": 9,
+      "variant": 0,
+      "values": [
+        90,
+        90,
+        90
+      ],
+      "stop_query": null,
+      "output_hex": "5c576f726c645c4d6f6e64653039612e45544100a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+      "queries": [],
+      "checkpoint": "0x3000000"
+    },
+    {
+      "number": 9,
+      "variant": 3,
+      "values": [
+        90,
+        90,
+        90
+      ],
+      "stop_query": null,
+      "output_hex": "5c576f726c645c4d6f6e64653039642e45544100a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+      "queries": [],
+      "checkpoint": "0x3000000"
+    },
+    {
+      "number": 10,
+      "variant": 2,
+      "values": [
+        90,
+        90,
+        90
+      ],
+      "stop_query": null,
+      "output_hex": "5c576f726c645c4d6f6e64653130612e45544100a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+      "queries": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ]
+      ],
+      "checkpoint": "0x3000000"
+    },
+    {
+      "number": 12,
+      "variant": 1,
+      "values": [
+        127,
+        -128,
+        -1
+      ],
+      "stop_query": null,
+      "output_hex": "5c576f726c645c4d6f6e64653132622e45544100a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+      "queries": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ]
+      ],
+      "checkpoint": "0x3000000"
+    },
+    {
+      "number": 17,
+      "variant": 0,
+      "values": [
+        -1,
+        -2,
+        -3
+      ],
+      "stop_query": 2,
+      "output_hex": "5c576f726c645c4d6f6e6465313700a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+      "queries": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "checkpoint": "0x46dc6c"
+    },
+    {
+      "number": 305398020,
+      "variant": 2,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "stop_query": null,
+      "output_hex": "5c576f726c645c4d6f6e646530342e45544100a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+      "queries": [],
+      "checkpoint": "0x3000000"
+    },
+    {
+      "number": 255,
+      "variant": 0,
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "stop_query": null,
+      "output_hex": "5c576f726c645c4d6f6e646549352e45544100a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+      "queries": [],
+      "checkpoint": "0x3000000"
+    }
+  ],
+  "scope": "Original filename bytes and real read-only sympathy queries; synthetic inherited destination and loaded player table. No file-open or campaign execution."
+}
