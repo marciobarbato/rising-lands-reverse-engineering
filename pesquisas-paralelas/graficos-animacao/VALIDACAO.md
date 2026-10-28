@@ -1,6 +1,75 @@
 # Validação de gráficos e animação
 
-## Revisão v2 — unidades e variantes de bolsa
+## Revisão v3r2 — paleta e composição
+
+**43 testes Python passaram**, sem executar x86, em 2.95 s.
+`validacao/python.json` é o resultado atual. Os testes conferem integridade das
+fontes e snapshot, evidências extraídas, associações anteriores e regressões
+contra as capturas x86 v3. Os relatórios v1/v2 são históricos e permanecem
+inalterados; suas afirmações de lacunas refletem o momento de cada revisão.
+
+`validacao/x86-composicao.json`: **7,964 segmentos limitados**,
+**24,851,293 instruções**, **PASSOU**, 17.627 s.
+Tempo da bancada, sem relação com o ritmo original do jogo.
+
+| Comparação v3 | Resultado e escopo |
+|---|---|
+| LoadPalette | 768 bytes reais e fixture u8; primeira entrada preta; correção de 660 componentes versus v2 |
+| DDSetPalette | Preparo de 256 triplas RGB, sem COM/Windows |
+| AffEngin | 5.105 despachos: todos os estados nos cinco tipos e todo +0x8a nos estados 1/22/24 |
+| CalculOmbrage | Quatro tabelas completas; percentual 0/60/100 sem ciclos e 255 com três exclusões |
+| PasteOmbreCmp | 266 casos com fundos/recorte + um sintético: literal zero opaco e cores literais ignoradas |
+| Composição | 512 buffers finais iguais: sombra → corpo, função até retorno |
+| ETA | Oito Colonos em estado 14: nenhuma escrita na unidade/superfície |
+
+A bancada confere SHA-256 do EXE a cada instância. Cada execução/retomada tem
+intervalos permitidos, limite de até 1.000.000 de instruções e 2.000.000 µs.
+O cálculo de sombra usa 514 segmentos, sem reinicializar CPU/pilha ou saltar
+instruções entre eles. Um processo próprio executou Unicorn fora do sandbox
+após aprovação da ferramenta, por incompatibilidade nativa conhecida. Não foi
+aberto Ghidra, Windows ou processo do jogo. As falhas exploratórias foram limites
+de intervalo e tamanho de fixture; o relatório final só foi gravado após todas
+as comparações passarem. O `RET` compartilhado em 0x415a56 foi incluído.
+
+A v3r2 acrescenta a recusa explícita de composição para estados cujo despacho
+é conhecido mas cujo caminho gráfico não recebeu comparação. A v3 congelada
+não foi editada.
+
+Condições da composição: jogador 0, estado 2, direções ímpares, oito fases,
+variantes dos cinco tipos, +0x74=100, +0xba=0, efeitos inativos. O cálculo da
+tabela tem parâmetros explícitos; o estado global após ProgInit não foi provado.
+Nos ETA, 272 bytes recompostos mais quatro zeros auxiliares não lidos. O ensaio
+de despacho intercepta a entrada dos handlers; não executa regras de ataque.
+
+`visual-composicao.json` registra a nova inspeção real em navegador, os hashes
+atuais e a captura. A página compara oito buffers completos de 128×96 com
+referências da API Python, byte a byte. Foram exercitados bolsa 256, avanço após
+duas chamadas, volta 7→0, estado 14, ativação das camadas, índices 5/7 e entrada
+256 inválida. A folha de contato foi inspecionada. Nenhum erro de console.
+
+As imagens atuais foram regeneradas com a paleta corrigida. Capturas v1/v2 e
+seus relatórios visuais são históricos, não provas da paleta atual. Assembly:
+50 trechos listados no manifesto; continua incluído o helper manual 00448084.asm
+histórico, agora sem espaço final na cópia editável. Os CSVs atuais usam LF,
+sem alterar CSVs ou evidências das entregas congeladas.
+
+Comandos de reprodução, **na área editável**:
+
+```sh
+python3 -B extrair_evidencias.py
+python3 -B validar_composicao.py
+python3 -B gerar_artefatos.py
+python3 -B gerar_trabalhadores.py
+python3 -B gerar_composicao.py
+python3 -B validar_python.py
+```
+
+A execução x86 requer as dependências locais verificadas e compatíveis com a
+máquina. Para verificar uma revisão congelada sem escrever nela, usar
+`python3 -B verificar_manifesto.py CAMINHO` e `python3 -B -m unittest -v
+ test_graficos test_trabalhadores test_composicao` a partir da revisão.
+
+## Histórico v2 — unidades e variantes de bolsa
 
 **32 testes Python passaram** em 2,211 s: os 20 de regressão do Soldado mais
 12 para as novas unidades. `validacao/python.json` registra essa execução;
@@ -59,7 +128,7 @@ dos outros 21 tipos.
 ## Histórico preservado — primeiro marco do Soldado
 
 O restante descreve a validação original v1, conservada na pasta da entrega
-anterior. Na área atual, `python.json` registra os 32 testes da v2; `x86.json`
+anterior. Na área atual, `python.json` registra os 43 testes da v3r2; `x86.json`
 e `visual.json` continuam sendo os resultados históricos v1.
 
 Snapshot `1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e`. Executável brasileiro

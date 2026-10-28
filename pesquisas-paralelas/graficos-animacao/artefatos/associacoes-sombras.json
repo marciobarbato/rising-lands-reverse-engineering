@@ -1,0 +1,137 @@
+[
+  {
+    "tipo": 0,
+    "camada": "sombra",
+    "arquivo_cmp": "OTHERS.CMP",
+    "indice_local": 3144,
+    "indice_global": 10783,
+    "id_motor": 10784,
+    "base_global": 7639,
+    "estado": "ramo AffDeplaceEngin; 2 comparado até o retorno",
+    "direcao": "independente de 1..16",
+    "sequencia": [
+      10784
+    ],
+    "ancoragem": {
+      "x": -2,
+      "y": -26,
+      "referencia": "origem da célula"
+    },
+    "ordem": "antes do corpo",
+    "operacao": "remapeia o índice do destino; cores literais CMP ignoradas",
+    "confianca": "confirmada_codigo_e_comparacao_x86",
+    "evidencia": [
+      "0x412390",
+      "0x45b796",
+      "0x45f7ba"
+    ]
+  },
+  {
+    "tipo": 5,
+    "camada": "sombra",
+    "arquivo_cmp": "OTHERS.CMP",
+    "indice_local": 3144,
+    "indice_global": 10783,
+    "id_motor": 10784,
+    "base_global": 7639,
+    "estado": "ramo AffDeplaceEngin; 2 comparado até o retorno",
+    "direcao": "independente de 1..16",
+    "sequencia": [
+      10784
+    ],
+    "ancoragem": {
+      "x": -2,
+      "y": -26,
+      "referencia": "origem da célula"
+    },
+    "ordem": "antes do corpo",
+    "operacao": "remapeia o índice do destino; cores literais CMP ignoradas",
+    "confianca": "confirmada_codigo_e_comparacao_x86",
+    "evidencia": [
+      "0x412390",
+      "0x45b796",
+      "0x45f7ba"
+    ]
+  },
+  {
+    "tipo": 6,
+    "camada": "sombra",
+    "arquivo_cmp": "OTHERS.CMP",
+    "indice_local": 3144,
+    "indice_global": 10783,
+    "id_motor": 10784,
+    "base_global": 7639,
+    "estado": "ramo AffDeplaceEngin; 2 comparado até o retorno",
+    "direcao": "independente de 1..16",
+    "sequencia": [
+      10784
+    ],
+    "ancoragem": {
+      "x": -2,
+      "y": -26,
+      "referencia": "origem da célula"
+    },
+    "ordem": "antes do corpo",
+    "operacao": "remapeia o índice do destino; cores literais CMP ignoradas",
+    "confianca": "confirmada_codigo_e_comparacao_x86",
+    "evidencia": [
+      "0x412390",
+      "0x45b796",
+      "0x45f7ba"
+    ]
+  },
+  {
+    "tipo": 7,
+    "camada": "sombra",
+    "arquivo_cmp": "OTHERS.CMP",
+    "indice_local": 3144,
+    "indice_global": 10783,
+    "id_motor": 10784,
+    "base_global": 7639,
+    "estado": "ramo AffDeplaceEngin; 2 comparado até o retorno",
+    "direcao": "independente de 1..16",
+    "sequencia": [
+      10784
+    ],
+    "ancoragem": {
+      "x": -2,
+      "y": -26,
+      "referencia": "origem da célula"
+    },
+    "ordem": "antes do corpo",
+    "operacao": "remapeia o índice do destino; cores literais CMP ignoradas",
+    "confianca": "confirmada_codigo_e_comparacao_x86",
+    "evidencia": [
+      "0x412390",
+      "0x45b796",
+      "0x45f7ba"
+    ]
+  },
+  {
+    "tipo": 9,
+    "camada": "sombra",
+    "arquivo_cmp": "OTHERS.CMP",
+    "indice_local": 3144,
+    "indice_global": 10783,
+    "id_motor": 10784,
+    "base_global": 7639,
+    "estado": "ramo AffDeplaceEngin; 2 comparado até o retorno",
+    "direcao": "independente de 1..16",
+    "sequencia": [
+      10784
+    ],
+    "ancoragem": {
+      "x": -2,
+      "y": -26,
+      "referencia": "origem da célula"
+    },
+    "ordem": "antes do corpo",
+    "operacao": "remapeia o índice do destino; cores literais CMP ignoradas",
+    "confianca": "confirmada_codigo_e_comparacao_x86",
+    "evidencia": [
+      "0x412390",
+      "0x45b796",
+      "0x45f7ba"
+    ]
+  }
+]

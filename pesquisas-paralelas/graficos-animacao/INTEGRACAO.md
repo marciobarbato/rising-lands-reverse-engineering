@@ -1,6 +1,6 @@
 # Contrato para o aplicativo macOS
 
-Consumir uma cópia integral de `entregas/2026-10-28-unidades-v2/`, verificando
+Consumir uma cópia integral de `entregas/2026-10-28-composicao-v3r2/`, verificando
 `MANIFESTO.json`. Não importar a área de trabalho desta frente nem os leitores
 de outras frentes. Esta entrega não modifica `visualizador-mac`.
 
@@ -107,6 +107,70 @@ pressupõe que todo movimento comece na fase 0 ou que a parada zere `+0xa9`.
 Uma chamada de `avancar_animacao` corresponde apenas ao trecho efetivamente
 executado, não ao callback do renderizador. O integrador controla a frequência.
 
+## Composição indexada na v3
+
+`composicao.py` usa somente Python padrão. `encaminhamento(tipo, estado_u8,
+auxiliar_8a=None)` traduz o despacho de `AffEngin` para os cinco tipos. Estados
+1, 22 e 24 exigem o byte `+0x8a`, sem valor implícito. A rota `sem_desenho`
+significa retorno sem camada nesta função. Outras rotas identificam o handler;
+a presença de uma rota não valida quadros de ataque, trabalho, construção ou morte.
+
+```python
+from graficos import Catalogo, png
+from composicao import tabela_sombra, compor_unidade, encaminhamento
+
+c = Catalogo()
+paleta = c.paleta()  # RGB inicial corrigido: 768 bytes
+# Parâmetros explícitos do exemplo; não configuração global inferida de uma partida.
+tabela = tabela_sombra(paleta, percentual=60, ciclos=())
+fundo = bytes([82]) * (128 * 128)
+indices, plano = compor_unidade(
+    c, fundo, 128, 128, tipo=7, estado_u8=7, direcao=9, fase=3,
+    bolsa_u16=256, x=64, y=48, tabela=tabela)
+assert [c['id_motor'] for c in plano['camadas']] == [10784, 1509]
+rgba = b''.join(paleta[i*3:i*3+3] + b'\xff' for i in indices)
+imagem_composta = png(128, 128, rgba)  # bytes para NSImage(data:)
+assert encaminhamento(9, 14)['rota'] == 'sem_desenho'
+```
+
+`x,y` são a origem da célula já projetada na superfície; `dx,dy` são i8.
+O recorte opcional `(esquerda,topo,direita,fundo)` é inclusivo. Coordenadas e
+retângulos devem permanecer no domínio de 16 bits usado pelo original; não se
+promete equivalência para overflow de coordenadas. A origem da sombra é
+`(x+dx+2,y+dy+26)`; o corpo usa a âncora específica do tipo.
+
+`compor_unidade` só compõe corpo nos estados 2/7. Outras rotas `corpo_base`
+levantam `NotImplementedError`: saber o handler não valida todos seus caminhos
+internos. As rotas `sem_desenho` permanecem disponíveis.
+
+`compor_unidade` retorna `(bytes_indices, plano)` e mantém a fase bruta mesmo
+no estado 7. A demonstração aplica a fase de parada estabelecida explicitamente.
+Ataque/trabalho/construção/morte levantam `NotImplementedError`, não produzem
+sprites aproximados. `sem_desenho` retorna o fundo intacto e `camadas=[]`.
+
+O contrato de composição usa jogador 0 e efeitos/indicadores auxiliares inativos:
+na bancada, `+0x74 u16 = 100`, `+0xba = 0`, `+0xdc = 0`, demais campos conforme
+inicialização sintética registrada. Não simula regras de fadiga ou experiência.
+Para um renderer que desenha só essas duas camadas, os indicadores devem ser
+tratados separadamente; não apresentar esta função como cena completa.
+
+`compor_sombra(destino,w,h,quadro,x,y,tabela,recorte=None)` permite aplicar só
+uma máscara validada. Cores dos literais são ignoradas, inclusive literal zero:
+o índice do fundo seleciona a tabela. Aplicar a sombra **antes** do corpo.
+
+`tabela_sombra(paleta, percentual=..., ciclos=...)` exige o percentual u8 e uma
+sequência de intervalos inclusivos `(início,fim)` excluídos da busca. Índices 5–7
+viram 223–221; 8–15 viram 167. Os demais usam distância RGB quadrática após
+multiplicação inteira pelo percentual; empate mantém o menor índice, e 0
+permanece candidato inicial mesmo dentro de um intervalo excluído. Ciclagem
+posterior da paleta não é reproduzida. O consumidor pode fornecer diretamente
+os 256 bytes da tabela original se os tiver, sem recalculá-la.
+
+Os oito Colonos em estado 14 foram testados com a recomposição ETA de 272 bytes
+mais cauda de quatro bytes zero não lida pelo caminho. O consumidor precisa
+fornecer estado **após** seu carregador; não transformar o estado de disco numa
+regra permanente de visibilidade.
+
 ## Ponte mínima por JSON
 
 ```sh
@@ -144,7 +208,8 @@ os PNGs produzidos pelo adaptador. Não depender da página HTML para obter dado
 - A demo usa jogador 0, que alcança a cópia básica. Recoloração de outros
   jogadores, estados especiais e efeitos ainda não fazem parte da API.
 - Sombra separada: ID 10784, local OTHERS 3144, posição célula+(2,26)+deslocamento.
-  A matriz de transformação de cores não foi reconstruída. Não mascarar essa lacuna.
+  A matriz é produzida por `tabela_sombra` com percentual/ciclos explícitos.
+  Não substituir remapeamento de destino por um PNG preto com alpha.
 - Não usar transparência por `pixel == 0`; usar a máscara. Não recentralizar
   sprites de dimensões variáveis. Usar nearest-neighbor para ampliar.
 - Origem lógica de célula não é centro dos pés. Se a UI usa células pelo centro,
@@ -152,7 +217,7 @@ os PNGs produzidos pelo adaptador. Não depender da página HTML para obter dado
 - ETA serializado exige recomposição e pós-processamento; exemplos desta entrega
   descrevem o disco. O adaptador não substitui o carregador/simulador completo.
 - Nenhuma rotina de consulta, decodificação ou demonstração depende de x86.
-  Somente `bancada_x86.py`/`validar_x86.py`/`validar_trabalhadores.py` dependem de Unicorn para comparação.
+  Somente `bancada_x86.py`/`validar_x86.py`/`validar_trabalhadores.py`/`validar_composicao.py` dependem de Unicorn para comparação.
   `extrair_evidencias.py` depende de Capstone apenas na extração de assembly.
 
 Verificação de consumo: `python3 -B verificar_manifesto.py CAMINHO_DA_REVISAO`.

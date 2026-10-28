@@ -59,10 +59,11 @@ def extrair():
                    a in (0x41877a, 0x418590, 0x457350, 0x45b247, 0x45b796, 0x45c455,
                          0x477042, 0x4770ee, 0x448599, 0x448194, 0x448f50, 0x416864,
                          0x467d97, 0x442025, 0x442045, 0x44fffe, 0x45002e, 0x474beb,
-                         0x4470b9)]
+                         0x4470b9, 0x4798e9, 0x43ee31, 0x45f940, 0x4795af,
+                         0x45f7ba, 0x45f618, 0x45f5ac, 0x45f6e1)]
     registros = []
     for a in selecionados:
-        fim = {0x448088:0x44812b}.get(a, ordenados[ordenados.index(a)+1])
+        fim = {0x448088:0x44812b,0x41591f:0x415a57}.get(a, ordenados[ordenados.index(a)+1])
         bruto = imagem[a-base:fim-base]
         linhas = [f'; {nomes[a]} [{a:#x}, {fim:#x})', f'; SHA-256 EXE: {HASH_EXE}',
                   '; Desmontagem linear. Algumas regiões entre símbolos contêm tabelas; não são prova de fluxo.']

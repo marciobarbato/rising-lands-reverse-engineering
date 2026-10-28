@@ -69,6 +69,15 @@
           "0x44900b..0x449048"
         ]
       },
+      "despacho": {
+        "tipo": 0,
+        "estado_u8": 7,
+        "auxiliar_8a": 0,
+        "rota": "corpo_base",
+        "funcao": "0x412390",
+        "evidencia": "AffEngin 0x41591f..0x415a57",
+        "confianca": "confirmada_codigo_e_comparacao_x86"
+      },
       "ressalva": "Consulta à fase bruta pelo ramo validado; não simula pós-processamento ETA."
     },
     {
@@ -136,6 +145,15 @@
           "0x4481c7",
           "0x44900b..0x449048"
         ]
+      },
+      "despacho": {
+        "tipo": 0,
+        "estado_u8": 7,
+        "auxiliar_8a": 0,
+        "rota": "corpo_base",
+        "funcao": "0x412390",
+        "evidencia": "AffEngin 0x41591f..0x415a57",
+        "confianca": "confirmada_codigo_e_comparacao_x86"
       },
       "ressalva": "Consulta à fase bruta pelo ramo validado; não simula pós-processamento ETA."
     },
@@ -205,6 +223,15 @@
           "0x44900b..0x449048"
         ]
       },
+      "despacho": {
+        "tipo": 0,
+        "estado_u8": 7,
+        "auxiliar_8a": 0,
+        "rota": "corpo_base",
+        "funcao": "0x412390",
+        "evidencia": "AffEngin 0x41591f..0x415a57",
+        "confianca": "confirmada_codigo_e_comparacao_x86"
+      },
       "ressalva": "Consulta à fase bruta pelo ramo validado; não simula pós-processamento ETA."
     },
     {
@@ -221,7 +248,16 @@
       "celula_x": 14,
       "celula_y": 12,
       "associacao": null,
-      "ressalva": "Estado serializado fora de 2/7: nenhuma associação de desenho afirmada."
+      "despacho": {
+        "tipo": 9,
+        "estado_u8": 14,
+        "auxiliar_8a": 0,
+        "rota": "sem_desenho",
+        "funcao": null,
+        "evidencia": "AffEngin 0x41591f..0x415a57",
+        "confianca": "confirmada_codigo_e_comparacao_x86"
+      },
+      "ressalva": "AffEngin retorna sem desenhar neste estado. Não prova o estado após carregamento ETA."
     },
     {
       "indice": 4,
@@ -237,7 +273,16 @@
       "celula_x": 14,
       "celula_y": 12,
       "associacao": null,
-      "ressalva": "Estado serializado fora de 2/7: nenhuma associação de desenho afirmada."
+      "despacho": {
+        "tipo": 9,
+        "estado_u8": 14,
+        "auxiliar_8a": 0,
+        "rota": "sem_desenho",
+        "funcao": null,
+        "evidencia": "AffEngin 0x41591f..0x415a57",
+        "confianca": "confirmada_codigo_e_comparacao_x86"
+      },
+      "ressalva": "AffEngin retorna sem desenhar neste estado. Não prova o estado após carregamento ETA."
     },
     {
       "indice": 5,
@@ -253,7 +298,16 @@
       "celula_x": 14,
       "celula_y": 12,
       "associacao": null,
-      "ressalva": "Estado serializado fora de 2/7: nenhuma associação de desenho afirmada."
+      "despacho": {
+        "tipo": 9,
+        "estado_u8": 14,
+        "auxiliar_8a": 0,
+        "rota": "sem_desenho",
+        "funcao": null,
+        "evidencia": "AffEngin 0x41591f..0x415a57",
+        "confianca": "confirmada_codigo_e_comparacao_x86"
+      },
+      "ressalva": "AffEngin retorna sem desenhar neste estado. Não prova o estado após carregamento ETA."
     },
     {
       "indice": 6,
@@ -269,7 +323,16 @@
       "celula_x": 14,
       "celula_y": 12,
       "associacao": null,
-      "ressalva": "Estado serializado fora de 2/7: nenhuma associação de desenho afirmada."
+      "despacho": {
+        "tipo": 9,
+        "estado_u8": 14,
+        "auxiliar_8a": 0,
+        "rota": "sem_desenho",
+        "funcao": null,
+        "evidencia": "AffEngin 0x41591f..0x415a57",
+        "confianca": "confirmada_codigo_e_comparacao_x86"
+      },
+      "ressalva": "AffEngin retorna sem desenhar neste estado. Não prova o estado após carregamento ETA."
     },
     {
       "indice": 7,
@@ -285,7 +348,16 @@
       "celula_x": 14,
       "celula_y": 12,
       "associacao": null,
-      "ressalva": "Estado serializado fora de 2/7: nenhuma associação de desenho afirmada."
+      "despacho": {
+        "tipo": 9,
+        "estado_u8": 14,
+        "auxiliar_8a": 0,
+        "rota": "sem_desenho",
+        "funcao": null,
+        "evidencia": "AffEngin 0x41591f..0x415a57",
+        "confianca": "confirmada_codigo_e_comparacao_x86"
+      },
+      "ressalva": "AffEngin retorna sem desenhar neste estado. Não prova o estado após carregamento ETA."
     },
     {
       "indice": 8,
@@ -301,7 +373,16 @@
       "celula_x": 14,
       "celula_y": 12,
       "associacao": null,
-      "ressalva": "Estado serializado fora de 2/7: nenhuma associação de desenho afirmada."
+      "despacho": {
+        "tipo": 9,
+        "estado_u8": 14,
+        "auxiliar_8a": 0,
+        "rota": "sem_desenho",
+        "funcao": null,
+        "evidencia": "AffEngin 0x41591f..0x415a57",
+        "confianca": "confirmada_codigo_e_comparacao_x86"
+      },
+      "ressalva": "AffEngin retorna sem desenhar neste estado. Não prova o estado após carregamento ETA."
     },
     {
       "indice": 9,
@@ -317,7 +398,16 @@
       "celula_x": 14,
       "celula_y": 12,
       "associacao": null,
-      "ressalva": "Estado serializado fora de 2/7: nenhuma associação de desenho afirmada."
+      "despacho": {
+        "tipo": 9,
+        "estado_u8": 14,
+        "auxiliar_8a": 0,
+        "rota": "sem_desenho",
+        "funcao": null,
+        "evidencia": "AffEngin 0x41591f..0x415a57",
+        "confianca": "confirmada_codigo_e_comparacao_x86"
+      },
+      "ressalva": "AffEngin retorna sem desenhar neste estado. Não prova o estado após carregamento ETA."
     },
     {
       "indice": 10,
@@ -333,7 +423,16 @@
       "celula_x": 14,
       "celula_y": 12,
       "associacao": null,
-      "ressalva": "Estado serializado fora de 2/7: nenhuma associação de desenho afirmada."
+      "despacho": {
+        "tipo": 9,
+        "estado_u8": 14,
+        "auxiliar_8a": 0,
+        "rota": "sem_desenho",
+        "funcao": null,
+        "evidencia": "AffEngin 0x41591f..0x415a57",
+        "confianca": "confirmada_codigo_e_comparacao_x86"
+      },
+      "ressalva": "AffEngin retorna sem desenhar neste estado. Não prova o estado após carregamento ETA."
     },
     {
       "indice": 12,
@@ -404,6 +503,15 @@
         "variante": "bolsa_vazia",
         "bolsa_u16": 0,
         "condicao_variante": "u16(+0x0a) != 0"
+      },
+      "despacho": {
+        "tipo": 7,
+        "estado_u8": 7,
+        "auxiliar_8a": 0,
+        "rota": "corpo_base",
+        "funcao": "0x412390",
+        "evidencia": "AffEngin 0x41591f..0x415a57",
+        "confianca": "confirmada_codigo_e_comparacao_x86"
       },
       "ressalva": "Consulta à fase bruta pelo ramo validado; não simula pós-processamento ETA."
     },
@@ -477,6 +585,15 @@
         "bolsa_u16": 0,
         "condicao_variante": "u16(+0x0a) != 0"
       },
+      "despacho": {
+        "tipo": 5,
+        "estado_u8": 7,
+        "auxiliar_8a": 0,
+        "rota": "corpo_base",
+        "funcao": "0x412390",
+        "evidencia": "AffEngin 0x41591f..0x415a57",
+        "confianca": "confirmada_codigo_e_comparacao_x86"
+      },
       "ressalva": "Consulta à fase bruta pelo ramo validado; não simula pós-processamento ETA."
     },
     {
@@ -548,6 +665,15 @@
         "variante": "bolsa_vazia",
         "bolsa_u16": 0,
         "condicao_variante": "u16(+0x0a) != 0"
+      },
+      "despacho": {
+        "tipo": 5,
+        "estado_u8": 7,
+        "auxiliar_8a": 0,
+        "rota": "corpo_base",
+        "funcao": "0x412390",
+        "evidencia": "AffEngin 0x41591f..0x415a57",
+        "confianca": "confirmada_codigo_e_comparacao_x86"
       },
       "ressalva": "Consulta à fase bruta pelo ramo validado; não simula pós-processamento ETA."
     }

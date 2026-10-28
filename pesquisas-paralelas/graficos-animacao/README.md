@@ -1,13 +1,40 @@
-# Gráficos e animação — unidades e variantes de bolsa
+# Gráficos e animação — unidades, paleta e composição
 
 **Soldado, Fazendeiro, Mecânico, Construtor e Colono: parada e movimento
 mapeados e comparados com o x86 original.** São 1.152 associações e 512 quadros
 distintos, incluindo variantes de bolsa vazia/não vazia nos tipos 5/6/7.
 O adaptador e a demonstração funcionam sem Unicorn e sem executar o EXE.
 
-Revisão atual: `entregas/2026-10-28-unidades-v2/`. A revisão anterior,
-`entregas/2026-10-27-soldado-v1/`, permanece intacta. Cada pasta de revisão contém
+Revisão atual: `entregas/2026-10-28-composicao-v3r2/`. As revisões v1 e v2
+permanecem intactas. Cada pasta de revisão contém
 seu próprio `MANIFESTO.json` e `SHA256SUMS`. Não editar uma revisão publicada.
+
+## Avanços da v3
+
+- **Paleta corrigida contra o original:** `LoadPalette` desloca cada byte dois
+  bits à esquerda e força a entrada 0 a preto. A aproximação `4*v+3` das v1/v2
+  foi retirada: 660 componentes RGB mudaram, sem mudar IDs, máscaras ou fases.
+- **Sombra confirmada:** ID 10784, OTHERS local 3144/global 10783. A máscara
+  remapeia os índices do fundo antes de desenhar o corpo. Foram comparadas
+  quatro tabelas completas, 267 blits e 512 composições até o retorno original.
+- **Estado 14 esclarecido:** `AffEngin` retorna sem desenho. Isso foi conferido
+  com os oito registros de Colono do ETA; não é uma afirmação sobre o estado
+  após o carregamento completo do jogo.
+- **Despacho explícito:** 5.105 entradas comparadas. Estados 1/22/24 exigem
+  `+0x8a`; handlers de ataque/trabalho/construção/morte continuam sem mapeamento
+  de quadros nesta API.
+
+[Demonstração de composição](artefatos/demo-composicao.html),
+[folha de contato](artefatos/composicao-contato.png),
+[associações de sombra](artefatos/associacoes-sombras.json) e
+[paleta/tabela](artefatos/paleta-sombra.json).
+O percentual 60 e os ciclos vazios da demonstração são **entradas declaradas
+para inspeção**. O algoritmo foi confirmado; a configuração global final de
+uma partida ainda exige rastrear toda a inicialização. A API exige os parâmetros.
+A revisão v3r2 restringe composição de corpo aos estados 2/7; despacho conhecido
+para outro estado não basta para produzir uma imagem validada. A primeira v3
+congelada permanece como revisão superada, sem alterações.
+Consulte [Continuidade v3](CONTINUIDADE_V3.md) para evidências e contratos pendentes.
 
 ## Abrir e consultar
 
@@ -28,7 +55,7 @@ seu próprio `MANIFESTO.json` e `SHA256SUMS`. Não editar uma revisão publicada
 ```sh
 python3 -B graficos.py --tipo 0 --estado parado --direcao 1
 python3 -B graficos.py --tipo 7 --estado parado --direcao 9 --bolsa-u16 256
-python3 -B -m unittest -v test_graficos test_trabalhadores
+python3 -B -m unittest -v test_graficos test_trabalhadores test_composicao
 ```
 
 Os comandos acima são somente leitura, inclusive dentro da entrega congelada.
@@ -42,7 +69,8 @@ Snapshot: **`1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e`**. Foram copiados 942 arq
 commitados de leitores, testes, relatórios, documentação e evidências, excluindo
 as pesquisas paralelas. `snapshot/manifesto.json` registra cada caminho e SHA-256.
 Nenhuma importação usa os módulos do checkout em edição por outros chats.
-O desenvolvimento v2 parte do commit próprio
+A v3 parte do commit próprio `0c76b34a017c185ab24344137a1cb52266b599d2`,
+registrado em `evidencias/proveniencia-v3.json`. O desenvolvimento v2 partiu do commit próprio
 `e531dbbdbe650ae2cbdeab03567981d2d8cd15bd`; os arquivos predecessores e hashes
 estão em `evidencias/proveniencia-v2.json`. Fontes/snapshot/dependências anteriores
 foram reutilizados sem mudança. Consulte [Continuidade v2](CONTINUIDADE_V2.md).
@@ -200,14 +228,19 @@ literais copiam os valores, inclusive zero. O corpus contém comandos zero e
 terminadores zero; `0x80` continua rejeitado. Todos os 12.268 quadros dos oito
 arquivos coincidem com o leitor commitado quanto às dimensões e aos índices.
 O blitter básico, incluindo bordas e recorte inclusivo, foi comparado pixel a
-pixel. A expansão da paleta PIE segue o snapshot: `v=byte&63`, `0` para zero,
-senão `4*v+3`; não foi feita nova comparação com DirectDraw.
+pixel. A paleta agora coincide com `LoadPalette`: `(byte << 2) & 255`,
+com RGB da entrada 0 zerado. O preparo de `DDSetPalette` copia esses valores
+sem acrescentar 3; foi executado até antes da interface COM. Windows/DirectDraw
+não foram executados. Todos os atlas e HTML atuais usam a paleta corrigida;
+as capturas antigas de v1/v2 são preservadas como histórico.
 
 Para o Soldado, `0x412d16..0x412d1c` pede a sombra ID **10784**,
 `OTHERS.CMP` local **3144**, em célula+(2,26)+deslocamento, antes do corpo.
 `PasteOmbreCmp` usa uma tabela apontada por `0x4e24b4` para transformar a cor do
-destino. Sua carga e cores finais ainda não foram validadas: a demo exibe somente
-o corpo, e a bancada registra a chamada da sombra sem executá-la.
+destino. `CalculOmbrage` e os blitters foram reproduzidos na v3 em
+`composicao.py`. A nova demo inclui a sombra; a demo de unidades mantém o
+corpo isolado para inspeção dos quadros. Tabela, percentual e ciclos são
+entradas explícitas, sem presumir configuração de uma partida.
 
 `MONDE01.ETA`: três registros tipo 0, índices 0,1,2; células (7,15), (9,16),
 (8,18); estado 7, orientação 1, fase 2 nos bytes serializados. Conferem com ID
@@ -220,17 +253,21 @@ Na v2, `exemplos-eta-unidades.json` acrescenta os dois Fazendeiros (índices 13/
 fase 5, bolsa zero → ID 1607) e o Construtor (índice 12, fase 3, bolsa zero →
 ID 1349), todos em estado 7 e direção 1 no disco. Junto aos três Soldados,
 são seis registros compatíveis com o ramo validado. Oito Colonos têm estado 14:
-aparecem com `associacao: null`, sem transpor o resultado dos estados 2/7.
+continuam com `associacao: null` (nenhum CMP atribuído), mas agora com
+`despacho.rota: sem_desenho` confirmado. A recomposição produz 272 bytes; a
+bancada preenche os quatro bytes restantes da instância com zero, explicitamente
+fora do material ETA. Esses bytes não são lidos pelo caminho do estado 14.
 
 ## Confiança, lacunas e próximo contrato
 
 **Confirmado por código e comparação x86:** concatenação, convenções de índices,
 1.152 associações, parâmetros 8/2, fases de parada, predicado da bolsa,
 deltas de direção, âncoras,
-deslocamentos, transparência e blitter básico com recorte.
+deslocamentos, transparência e blitter básico com recorte; na v3, paleta inicial,
+despacho, tabela de sombra com parâmetros explícitos e composição sombra/corpo.
 
 **Confirmado apenas por leitura estática ou por arquivo:** encadeamento superior
-da parada, chamada da sombra e sua tabela, origem lógica da grade, identidade
+da parada, contexto global de inicialização da sombra, origem lógica da grade, identidade
 SOLDAT/SOLDADO e campos serializados da missão 1. A captura de desenho confirma
 a ordem sombra→corpo nesse caminho, não a ordem global de toda a cena.
 
@@ -240,7 +277,7 @@ transpor fórmulas para outros tipos, chamar fase 0 de parada, converter o perí
 em FPS, reaplicar a imagem de sombra como um PNG preto sem sua tabela.
 
 Ainda faltam: outros 21 tipos, construções, árvores/pedras, camadas de objetos e
-variantes ETA, ordenação completa de desenho, efeitos, transformação de sombra,
+variantes ETA, ordenação completa de desenho, efeitos, estado global da sombra,
 paletas por jogador, HUD, minimapa e seleção. Ataques permanecem com a frente de
 combate; esta pasta poderá apenas catalogar suas imagens futuramente.
 

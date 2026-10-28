@@ -1,4 +1,4 @@
-; AffEngin [0x41591f, 0x415a56)
+; AffEngin [0x41591f, 0x415a57)
 ; SHA-256 EXE: 6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb
 ; Desmontagem linear. Algumas regiões entre símbolos contêm tabelas; não são prova de fluxo.
 0041591f  51                     push     ecx
@@ -131,3 +131,4 @@
 00415a53  5f                     pop      edi
 00415a54  5e                     pop      esi
 00415a55  59                     pop      ecx
+00415a56  c3                     ret

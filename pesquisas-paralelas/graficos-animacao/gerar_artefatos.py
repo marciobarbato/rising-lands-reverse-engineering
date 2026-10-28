@@ -69,7 +69,7 @@ def gerar():
                 linhas.append(m)
     (pasta/'associacoes.json').write_text(json.dumps(linhas,ensure_ascii=False,indent=2)+'\n')
     with (pasta/'associacoes.csv').open('w',newline='') as f:
-        writer=csv.DictWriter(f,fieldnames=list(linhas[0]));writer.writeheader()
+        writer=csv.DictWriter(f,fieldnames=list(linhas[0]),lineterminator="\n");writer.writeheader()
         for m in linhas:
             writer.writerow({k:json.dumps(v,ensure_ascii=False) if isinstance(v,(list,dict,tuple)) else v for k,v in m.items()})
     base=0;bancos=[]

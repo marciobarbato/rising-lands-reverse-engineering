@@ -99,7 +99,9 @@ def ler_cmp(dados):
 def ler_paleta(dados):
     if len(dados) < 777 or dados[:3] != b'Pie' or struct.unpack_from('<H', dados, 7)[0] != 256:
         raise ErroFormato('Paleta PIE inválida')
-    return bytes(4*(v & 63)+3 if v & 63 else 0 for v in dados[9:777])
+    # LoadPalette 0x47998d..0x4799ba: SHL byte,2 e primeira cor preta.
+    # Corrige a expansão 4*v+3 herdada do leitor do snapshot (v1/v2).
+    return bytes(3)+bytes((v << 2) & 255 for v in dados[12:777])
 
 
 def localizar(id_motor):

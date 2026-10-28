@@ -8,6 +8,7 @@ import unicodedata
 from graficos import RAIZ, TIPOS, DIRECOES, Catalogo, consultar, png, rgba
 from gerar_artefatos import Raster
 from extrair_evidencias import exigir_area_editavel, COMMIT, HASH_EXE
+from composicao import encaminhamento
 
 
 def ascii_texto(s):
@@ -88,10 +89,13 @@ def gerar():
             r=dict(indice=indice,offset_registro=pos+2,sha256_registro=hashlib.sha256(raw).hexdigest(),
                 tipo=tipo,nome=TIPOS[tipo]['nome'],estado_no_disco=ram[2],direcao_no_disco=ram[0x91],
                 fase_no_disco=ram[0xa4],bolsa_u16_no_disco=bolsa,bytes_bolsa_hex=ram[0xa:0x12].hex(),
-                celula_x=celula&255,celula_y=celula>>8,associacao=None)
+                celula_x=celula&255,celula_y=celula>>8,associacao=None,
+                despacho=encaminhamento(tipo,ram[2],auxiliar_8a=ram[0x8a]))
             if ram[2] in (2,7):
                 r['associacao']=consultar(tipo,'andando',ram[0x91],ram[0xa4],bolsa_u16=bolsa)
                 r['ressalva']='Consulta à fase bruta pelo ramo validado; não simula pós-processamento ETA.'
+            elif ram[2]==14:
+                r['ressalva']='AffEngin retorna sem desenhar neste estado. Não prova o estado após carregamento ETA.'
             else:
                 r['ressalva']='Estado serializado fora de 2/7: nenhuma associação de desenho afirmada.'
             registros.append(r)

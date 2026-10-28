@@ -1,6 +1,6 @@
 # Publicação parcial no Git e recuperação local
 
-A revisão local atual é `entregas/2026-10-28-unidades-v2/`; o manifesto e
+A revisão local atual é `entregas/2026-10-28-composicao-v3r2/`; o manifesto e
 `SHA256SUMS` descrevem o pacote completo, incluindo os insumos locais.
 A revisão anterior `entregas/2026-10-27-soldado-v1/` permanece intacta; o hash
 de seu manifesto é `56d17ebe830036ac9e115549b640f994587590f61b7bcd650fecbf0f3eca5671`.
@@ -49,7 +49,7 @@ import hashlib, json, subprocess
 from verificar_manifesto import verificar
 
 raiz = Path.cwd().resolve()
-identificador = '2026-10-28-unidades-v2'
+identificador = '2026-10-28-composicao-v3r2'
 revisao = raiz / 'entregas' / identificador
 destino = raiz / ('recuperacao-' + identificador)
 destino.mkdir(exist_ok=False)
@@ -90,13 +90,12 @@ As dependências nativas registradas são macOS arm64; substituí-las por outra
 compilação exige uma nova revisão e novo manifesto. A API normal não necessita
 de dependências externas.
 
-## Publicação Git posterior
+## Publicação Git autorizada
 
-Após concluir e congelar a pesquisa v2, o usuário autorizou commitar esta
-continuação. Staging e commit usam a lista explícita revisada da v2, mantendo
-as exclusões acima. Não há push. Os documentos dentro da entrega congelada
-registram o momento anterior à autorização e permanecem intactos.
+O usuário autorizou commitar as continuações desta frente sem alterar o trabalho
+dos outros chats. A v3 usa uma lista explícita revisada, depois do congelamento,
+com as exclusões acima. Sem push. Staging/commit e hashes finais são registrados
+em `ESTADO.md`, fora das revisões congeladas.
 
-A exclusão de originais é intencional; não usar `git add` na pasta inteira.
-Não há necessidade de repetir emulação, abrir servidor ou ampliar pesquisa para
-essa publicação. Preservar o índice e os arquivos das demais frentes.
+Não usar `git add` na pasta inteira. Preservar o índice e os arquivos das demais
+frentes, inclusive se novas alterações surgirem durante a preparação do commit.
