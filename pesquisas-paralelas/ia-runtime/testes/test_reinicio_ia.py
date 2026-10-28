@@ -105,6 +105,12 @@ class CapturedWholeImages(unittest.TestCase):
             reiniciar_ia(memoria, MundoRepetido(_expandir(caso['observacoes']), memoria))
         self.assertEqual(erro.exception.sitio, 0x47b1f4)
 
+    def test_static_original_closure_matches_the_supplemental_audit(self):
+        from auditar_reinicio_ia import ARQUIVO_AUDITORIA, auditar
+        audit = auditar()
+        self.assertEqual(audit, json.loads(ARQUIVO_AUDITORIA.read_text(encoding='utf-8')))
+        self.assertEqual((len(audit['routines']), len(audit['boundaries'])), (32, 18))
+
     def test_monde01_case_facts(self):
         caso = self.caso('ia_reset_monde01')
         self.assertEqual(caso['chamadas_mundo'], {'EnginEstVivant': 800, 'EnginGetType': 16, 'MissionGetNum': 1,
@@ -122,6 +128,8 @@ class FreshNativeWholeImages(unittest.TestCase):
         for novo, antigo in zip(fresco['casos'], comprometido['casos']):
             self.assertEqual(novo, antigo, novo['caso'])
         self.assertEqual(fresco, comprometido)
+        self.__class__.captura_fresca = [{k: c[k] for k in ('caso', 'rotina', 'eax', 'inicial', 'final',
+            'chamadas_mundo', 'segmentos_bancada', 'pontos_parada')} for c in fresco['casos']]
         print(f"\nnative whole-image cases: {len(fresco['casos'])}, world calls "
               f"{sum(sum(c['chamadas_mundo'].values()) for c in fresco['casos'])}, bench segments "
               f"{sum(c['segmentos_bancada'] for c in fresco['casos'])}, checkpoints "
@@ -131,6 +139,7 @@ class FreshNativeWholeImages(unittest.TestCase):
         from capturar_reinicio_ia import casos, executar_nativo, executar_python
         from inventario_ia_runtime import OriginalImage
         image = OriginalImage()
+        self.__class__.comparacoes_frescas = []
         for nome, entrada, construir, extra, _ in casos():
             inicial = construir()
             nativo = executar_nativo(image, entrada, inicial, extra)
@@ -142,15 +151,31 @@ class FreshNativeWholeImages(unittest.TestCase):
             self.assertEqual(final.jogadores, nativo['imagem'].jogadores, nome)
             if eax is not None:
                 self.assertEqual(eax & 0xffffffff, nativo['eax'], nome)
+            self.__class__.comparacoes_frescas.append(dict(case=nome, original_eax=nativo['eax'],
+                python_eax=eax, whole_images_equal=True, provider_sequence_equal=mundo.completo(),
+                original_stop=f'0x{nativo["parada"]:08x}', bench_segments=nativo['segmentos']))
 
     def test_original_loops_forever_on_a_spec_without_types(self):
-        from capturar_reinicio_ia import executar_nativo
+        from capturar_reinicio_ia import REGIOES_SEGMENTOS
         from inventario_ia_runtime import OriginalImage
-        from oraculo_reinicio_ia import DADOS_BASE, fixture_sintetica
+        from memoria_ia_runtime import MemoriaDeclarada
+        from oraculo_reinicio_ia import (DADOS_BASE, MundoRepetido, fixture_sintetica,
+                                         provar_ciclo_grupo_vazio)
+        from reinicio_ia import REGIOES_REINICIO, NaoTerminaNoOriginal, reiniciar_ia
         imagem = fixture_sintetica(9, monstros=6, tipos_monstro=(20,), grupos_monstros={4: (2, {})})
         self.assertEqual(imagem.dados[0x50af84 - DADOS_BASE + 4 * 26 + 20], 0)
-        with self.assertRaisesRegex(RuntimeError, 'parada dentro do limite'):
-            executar_nativo(OriginalImage(), 0x47f36e, imagem, None)
+        nativo, prova = provar_ciclo_grupo_vazio(OriginalImage(), imagem)
+        self.assertEqual((prova['visits'], prova['resumed_segments']), (4, 6))
+        copia = imagem.copia()
+        memoria = MemoriaDeclarada(copia.segmentos(), REGIOES_REINICIO + REGIOES_SEGMENTOS)
+        mundo = MundoRepetido(nativo['observacoes'], memoria)
+        with self.assertRaises(NaoTerminaNoOriginal) as erro:
+            reiniciar_ia(memoria, mundo)
+        self.assertEqual(erro.exception.sitio, 0x47b1f4)
+        self.assertTrue(mundo.completo())
+        self.assertEqual(copia, nativo['imagem'])
+        self.__class__.ciclo_nativo = dict(prova, retained_python_image_equal=True,
+            initial_checkpoint_images=nativo['imagem'].hashes(), prefix_segments=nativo['segmentos'])
 
 
 if __name__ == '__main__':

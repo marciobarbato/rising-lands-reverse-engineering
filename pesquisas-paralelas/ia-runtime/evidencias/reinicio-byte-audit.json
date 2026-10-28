@@ -1,0 +1,851 @@
+{
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "scope": "Static transitive caller closure until the explicit boundaries below; not branch coverage",
+ "roots": [
+  "0x0047f36e",
+  "0x0047fb15",
+  "0x0047c162"
+ ],
+ "routines": [
+  {
+   "entry": "0x0047af90",
+   "name": "InitMissionMonstre",
+   "implementation": "init_mission_monstre",
+   "instructions": 225,
+   "original_bytes": 762,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "InitMissionMonstre",
+     "kind": "code",
+     "start": "0x0047a816",
+     "end_exclusive": "0x0047a81d",
+     "size": 7,
+     "sha256": "7227c48dab9cf58cef6ab93b965ca6429bd0f282cc829c7d338a55a23a93f08d"
+    },
+    {
+     "name": "InitMissionMonstre",
+     "kind": "code",
+     "start": "0x0047af90",
+     "end_exclusive": "0x0047b283",
+     "size": 755,
+     "sha256": "3fdd8fe685ba14362043121400b8d7f5251800c1e0603499541a94261fe53d4c"
+    }
+   ],
+   "callees": [
+    "0x00442025",
+    "0x004422dd",
+    "0x00443108",
+    "0x00443dad",
+    "0x0046c11a",
+    "0x00482939",
+    "0x004832b1",
+    "0x00483747",
+    "0x004837f0",
+    "0x00483bd8",
+    "0x00483ce7"
+   ]
+  },
+  {
+   "entry": "0x0047c162",
+   "name": "IAResetAttaque",
+   "implementation": "resetar_ataques_ia",
+   "instructions": 27,
+   "original_bytes": 88,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "IAResetAttaque",
+     "kind": "code",
+     "start": "0x0047c162",
+     "end_exclusive": "0x0047c1ba",
+     "size": 88,
+     "sha256": "08426f37aeed7073487585513021c72436d6c4608c618b167b86dfe405c24a09"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x0047cfd0",
+   "name": "listInit",
+   "implementation": "list_init",
+   "instructions": 27,
+   "original_bytes": 66,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "listInit",
+     "kind": "code",
+     "start": "0x0047cfd0",
+     "end_exclusive": "0x0047d012",
+     "size": 66,
+     "sha256": "4eb2011884be9a8ea132ed6ca7984d061e847fd550b4beb249160639a97213db"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x0047d1a4",
+   "name": "iaProbInit",
+   "implementation": "ia_alloc: iaProbInit forwards the declared rule binding",
+   "instructions": 7,
+   "original_bytes": 20,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "iaProbInit",
+     "kind": "code",
+     "start": "0x0047d1a4",
+     "end_exclusive": "0x0047d1b8",
+     "size": 20,
+     "sha256": "52e34b790abdbd28237e687c0365e93af19f6c0b76bde3dbc197db8b6a14ffee"
+    }
+   ],
+   "callees": [
+    "0x0047e437"
+   ]
+  },
+  {
+   "entry": "0x0047d220",
+   "name": "iaProbReset",
+   "implementation": "ia_prob_reset",
+   "instructions": 30,
+   "original_bytes": 84,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "iaProbReset",
+     "kind": "code",
+     "start": "0x0047d220",
+     "end_exclusive": "0x0047d26e",
+     "size": 78,
+     "sha256": "09eed842d4acc05c4271efa3e7930790d46dddc5b5405bcaaafe96f1a49ac0c9"
+    },
+    {
+     "name": "iaProbReset",
+     "kind": "code",
+     "start": "0x0047d2fe",
+     "end_exclusive": "0x0047d304",
+     "size": 6,
+     "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b"
+    }
+   ],
+   "callees": [
+    "0x0047cfd0"
+   ]
+  },
+  {
+   "entry": "0x0047f36e",
+   "name": "IaReset",
+   "implementation": "ia_reset",
+   "instructions": 234,
+   "original_bytes": 701,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "IaReset",
+     "kind": "code",
+     "start": "0x0047f36e",
+     "end_exclusive": "0x0047f62b",
+     "size": 701,
+     "sha256": "b85358b9023a199a3351835865a691de73c2afb3c8beed6d8c9f338f0bf5b82c"
+    }
+   ],
+   "callees": [
+    "0x00443dad",
+    "0x0046c11a",
+    "0x0046d817",
+    "0x00470b37",
+    "0x004717c2",
+    "0x0047af90",
+    "0x0047d220",
+    "0x0048134c",
+    "0x0048270b",
+    "0x00484310",
+    "0x004846a7",
+    "0x00485002",
+    "0x0048569a",
+    "0x004864c1",
+    "0x00486ca7",
+    "0x00489728"
+   ]
+  },
+  {
+   "entry": "0x0047fb15",
+   "name": "IaAlloc",
+   "implementation": "ia_alloc",
+   "instructions": 21,
+   "original_bytes": 88,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "IaAlloc",
+     "kind": "code",
+     "start": "0x0047fa87",
+     "end_exclusive": "0x0047fa88",
+     "size": 1,
+     "sha256": "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e"
+    },
+    {
+     "name": "IaAlloc",
+     "kind": "code",
+     "start": "0x0047fb15",
+     "end_exclusive": "0x0047fb6c",
+     "size": 87,
+     "sha256": "dbba3de4fe6edbe149ee8af0aa51f1889e1deec80411abed168293460ff8eb27"
+    }
+   ],
+   "callees": [
+    "0x0047d1a4",
+    "0x004826a4",
+    "0x00484214",
+    "0x00484bc4",
+    "0x0048614c",
+    "0x00489728",
+    "0x0048d5fd",
+    "0x0048d699"
+   ]
+  },
+  {
+   "entry": "0x0047fc54",
+   "name": "iaConfigGetValue",
+   "implementation": "ia_alloc: iaConfigGetValue returns its EBX default",
+   "instructions": 2,
+   "original_bytes": 3,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "iaConfigGetValue",
+     "kind": "code",
+     "start": "0x0047fc54",
+     "end_exclusive": "0x0047fc57",
+     "size": 3,
+     "sha256": "93b5600a402a472f2004a7f9f6e9816519fe2bab72db90614cb375bb822d6324"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x0048134c",
+   "name": "iafRessourceReset",
+   "implementation": "iaf_ressource_reset",
+   "instructions": 9,
+   "original_bytes": 19,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "iafRessourceReset",
+     "kind": "code",
+     "start": "0x0048134c",
+     "end_exclusive": "0x0048135f",
+     "size": 19,
+     "sha256": "752eef93e8f1c2db1d225dded8f1733712681a7d8b6d14f6582bdd7a9aaaf1d0"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x004826a4",
+   "name": "iagUnitInit",
+   "implementation": "ia_alloc: iagUnitInit returns zero without stores",
+   "instructions": 2,
+   "original_bytes": 3,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "iagUnitInit",
+     "kind": "code",
+     "start": "0x004826a4",
+     "end_exclusive": "0x004826a7",
+     "size": 3,
+     "sha256": "251447ee91a9067dcd6ab96703133f617565974cd6c4819021760c4688c91abf"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x0048270b",
+   "name": "iagUnitReset",
+   "implementation": "iag_unit_reset",
+   "instructions": 116,
+   "original_bytes": 397,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "iagUnitReset",
+     "kind": "code",
+     "start": "0x0048270b",
+     "end_exclusive": "0x00482898",
+     "size": 397,
+     "sha256": "739b8c551d89391215db1f956f2da4fb457bd16896ef8dc9737d791f8b2cac92"
+    }
+   ],
+   "callees": [
+    "0x00443dad",
+    "0x0046d817",
+    "0x00483bd8"
+   ]
+  },
+  {
+   "entry": "0x00482939",
+   "name": "iagUnitAddToGroup",
+   "implementation": "unit_add_to_group",
+   "instructions": 34,
+   "original_bytes": 92,
+   "bytes_not_exported_by_stage1": 92,
+   "intervals": [
+    {
+     "name": "iagUnitAddToGroup",
+     "kind": "code",
+     "start": "0x00482939",
+     "end_exclusive": "0x00482995",
+     "size": 92,
+     "sha256": "906d18ab157615f32bd406f88a31cae498a88cf3fb08de7e8fb6390a7451bd8d"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x00483286",
+   "name": "iagUnitRemoveFromPool",
+   "implementation": "unit_remove_from_pool",
+   "instructions": 17,
+   "original_bytes": 43,
+   "bytes_not_exported_by_stage1": 43,
+   "intervals": [
+    {
+     "name": "iagUnitRemoveFromPool",
+     "kind": "code",
+     "start": "0x00483286",
+     "end_exclusive": "0x004832b1",
+     "size": 43,
+     "sha256": "7c31d04f82343b40668d35f2fdab0c5b022655f6636711acd21eba6f77f46d7d"
+    }
+   ],
+   "callees": [
+    "0x004832b1"
+   ]
+  },
+  {
+   "entry": "0x004832b1",
+   "name": "iagUnitRemoveFromGroup",
+   "implementation": "unit_remove_from_group",
+   "instructions": 56,
+   "original_bytes": 167,
+   "bytes_not_exported_by_stage1": 167,
+   "intervals": [
+    {
+     "name": "iagUnitRemoveFromGroup",
+     "kind": "code",
+     "start": "0x004832b1",
+     "end_exclusive": "0x00483358",
+     "size": 167,
+     "sha256": "c95e11de53772d93ac4bde17a0b147b767d59fb126151d57edcb4d09c2eeaae9"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x00483685",
+   "name": "iagUnitFindSuitableForGroupIntoPool",
+   "implementation": "unit_find_suitable_into_pool",
+   "instructions": 37,
+   "original_bytes": 109,
+   "bytes_not_exported_by_stage1": 109,
+   "intervals": [
+    {
+     "name": "iagUnitFindSuitableForGroupIntoPool",
+     "kind": "code",
+     "start": "0x00483685",
+     "end_exclusive": "0x004836f2",
+     "size": 109,
+     "sha256": "c625da246b9ab0619a7fe4a732831678b5a7f019110d9d93427989ba78972fd5"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x00483747",
+   "name": "iagUnitFindTypeIntoGroup",
+   "implementation": "unit_find_type_into_group",
+   "instructions": 25,
+   "original_bytes": 73,
+   "bytes_not_exported_by_stage1": 73,
+   "intervals": [
+    {
+     "name": "iagUnitFindTypeIntoGroup",
+     "kind": "code",
+     "start": "0x00483747",
+     "end_exclusive": "0x00483790",
+     "size": 73,
+     "sha256": "a76629e4a55e47ec779dbf3d952ed41b91a129502ac2f0afae206d132fd8936c"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x00483790",
+   "name": "iagUnitFindTypeIntoPool",
+   "implementation": "unit_find_type_into_pool",
+   "instructions": 34,
+   "original_bytes": 96,
+   "bytes_not_exported_by_stage1": 96,
+   "intervals": [
+    {
+     "name": "iagUnitFindTypeIntoPool",
+     "kind": "code",
+     "start": "0x00483790",
+     "end_exclusive": "0x004837f0",
+     "size": 96,
+     "sha256": "75b695e0afd148c55cd841ff9e6c6d68c7aaf98d0f331b18547ffa1b04eae5c9"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x004837f0",
+   "name": "iagUnitGetFirstUnitInGroup",
+   "implementation": "unit_get_first_in_group",
+   "instructions": 17,
+   "original_bytes": 53,
+   "bytes_not_exported_by_stage1": 53,
+   "intervals": [
+    {
+     "name": "iagUnitGetFirstUnitInGroup",
+     "kind": "code",
+     "start": "0x004837f0",
+     "end_exclusive": "0x00483825",
+     "size": 53,
+     "sha256": "579c8f94f979bc963c298453cb38ad0178ebe16554500f443dac6ba3f417dc0b"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x00483bd8",
+   "name": "iaGroupNew",
+   "implementation": "ia_group_new",
+   "instructions": 76,
+   "original_bytes": 280,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "iaGroupNew",
+     "kind": "code",
+     "start": "0x00483a31",
+     "end_exclusive": "0x00483a3a",
+     "size": 9,
+     "sha256": "66a03e9d0a7d2f8ab6a25e54bbaaf8ff43cfccd369d019b2be0563e4be7ac191"
+    },
+    {
+     "name": "iaGroupNew",
+     "kind": "code",
+     "start": "0x00483bd8",
+     "end_exclusive": "0x00483ce7",
+     "size": 271,
+     "sha256": "c301a35276732f6d071f4782c6713bfbaf34a287ef6b07badc12f12bf93eb69b"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x00483ce7",
+   "name": "iaGroupDelete",
+   "implementation": "ia_group_delete",
+   "instructions": 59,
+   "original_bytes": 178,
+   "bytes_not_exported_by_stage1": 178,
+   "intervals": [
+    {
+     "name": "iaGroupDelete",
+     "kind": "code",
+     "start": "0x00483354",
+     "end_exclusive": "0x00483358",
+     "size": 4,
+     "sha256": "d673503e426f934214297a40aae79ee339612a13103508a4fe90b51b920723fc"
+    },
+    {
+     "name": "iaGroupDelete",
+     "kind": "code",
+     "start": "0x00483ce7",
+     "end_exclusive": "0x00483d95",
+     "size": 174,
+     "sha256": "f70316c397a2bec4d4ada8dfea112abe93f2f5999dc83d5e3d3a77bf9cadf3a3"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x00484214",
+   "name": "iagVilleInit",
+   "implementation": "ia_alloc: INICIO_CIDADES",
+   "instructions": 26,
+   "original_bytes": 107,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "iagVilleInit",
+     "kind": "code",
+     "start": "0x00484214",
+     "end_exclusive": "0x0048427f",
+     "size": 107,
+     "sha256": "1834f7dfb75f921b7851af1d1b04a85731364aba02a217dd7344128ca5993386"
+    }
+   ],
+   "callees": [
+    "0x0047fc54"
+   ]
+  },
+  {
+   "entry": "0x00484310",
+   "name": "iagVilleReset",
+   "implementation": "iag_ville_reset",
+   "instructions": 127,
+   "original_bytes": 395,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "iagVilleReset",
+     "kind": "code",
+     "start": "0x00484310",
+     "end_exclusive": "0x00484494",
+     "size": 388,
+     "sha256": "998d4417f93095916ed2cbca699d612f0b611521546294055af0a0154c94260f"
+    },
+    {
+     "name": "iagVilleReset",
+     "kind": "code",
+     "start": "0x004846a0",
+     "end_exclusive": "0x004846a7",
+     "size": 7,
+     "sha256": "7227c48dab9cf58cef6ab93b965ca6429bd0f282cc829c7d338a55a23a93f08d"
+    }
+   ],
+   "callees": [
+    "0x0041a08c",
+    "0x0041a4f4",
+    "0x0041a735",
+    "0x00440e11",
+    "0x00482939",
+    "0x00483286",
+    "0x00483790",
+    "0x00483bd8",
+    "0x00486025"
+   ]
+  },
+  {
+   "entry": "0x004846a7",
+   "name": "iagVilleSetMode",
+   "implementation": "ville_set_mode",
+   "instructions": 12,
+   "original_bytes": 36,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "iagVilleSetMode",
+     "kind": "code",
+     "start": "0x004846a7",
+     "end_exclusive": "0x004846cb",
+     "size": 36,
+     "sha256": "eddcde02b46f824a6318f7333fee307d166550d720e10c47788c6862b2175e1a"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x00484b96",
+   "name": "iagVilleGetNbBatBuiltTotal",
+   "implementation": "iag_war_reset: inline city total query",
+   "instructions": 7,
+   "original_bytes": 17,
+   "bytes_not_exported_by_stage1": 17,
+   "intervals": [
+    {
+     "name": "iagVilleGetNbBatBuiltTotal",
+     "kind": "code",
+     "start": "0x00484b96",
+     "end_exclusive": "0x00484ba7",
+     "size": 17,
+     "sha256": "73209702ebf38141c8c6560ed1334919957affe030c1bc6998234ee316e115a9"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x00484bc4",
+   "name": "iagRessInit",
+   "implementation": "ia_alloc: INICIO_RECURSOS",
+   "instructions": 111,
+   "original_bytes": 524,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "iagRessInit",
+     "kind": "code",
+     "start": "0x00484bc4",
+     "end_exclusive": "0x00484dd0",
+     "size": 524,
+     "sha256": "47fc0563ebbda1b4526af6bb01b131b64c681eef8436ac4db841d0b9e4955407"
+    }
+   ],
+   "callees": [
+    "0x0047fc54"
+   ]
+  },
+  {
+   "entry": "0x00485002",
+   "name": "iagRessReset",
+   "implementation": "iag_ress_reset",
+   "instructions": 104,
+   "original_bytes": 389,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "iagRessReset",
+     "kind": "code",
+     "start": "0x00485002",
+     "end_exclusive": "0x00485180",
+     "size": 382,
+     "sha256": "17c3c61e15524f5e0516703834511d7791656378580b978af03c9837de3af7c7"
+    },
+    {
+     "name": "iagRessReset",
+     "kind": "code",
+     "start": "0x00485693",
+     "end_exclusive": "0x0048569a",
+     "size": 7,
+     "sha256": "7227c48dab9cf58cef6ab93b965ca6429bd0f282cc829c7d338a55a23a93f08d"
+    }
+   ],
+   "callees": [
+    "0x00467670",
+    "0x00483bd8"
+   ]
+  },
+  {
+   "entry": "0x0048569a",
+   "name": "iagRessSetMode",
+   "implementation": "ress_set_mode",
+   "instructions": 25,
+   "original_bytes": 72,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "iagRessSetMode",
+     "kind": "code",
+     "start": "0x0048569a",
+     "end_exclusive": "0x004856e2",
+     "size": 72,
+     "sha256": "4d7e94e508162149a9db3a9c8cc73b39e506c0d9950e670085d2eee8b70dd6ac"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x00486025",
+   "name": "iagRessAddToCaveList",
+   "implementation": "iag_ress_add_to_cave_list",
+   "instructions": 24,
+   "original_bytes": 64,
+   "bytes_not_exported_by_stage1": 64,
+   "intervals": [
+    {
+     "name": "iagRessAddToCaveList",
+     "kind": "code",
+     "start": "0x00486025",
+     "end_exclusive": "0x00486065",
+     "size": 64,
+     "sha256": "67be2a94432d743831df617db9d9d8681812ffb4ce19e4ea9651ecd66426dc34"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x0048614c",
+   "name": "iagWarInit",
+   "implementation": "ia_alloc: INICIO_GUERRA",
+   "instructions": 99,
+   "original_bytes": 425,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "iagWarInit",
+     "kind": "code",
+     "start": "0x0048614c",
+     "end_exclusive": "0x004862f5",
+     "size": 425,
+     "sha256": "c4e32b047932e78f3e93109f0fc1dd195e04c1b4147213a98e16182017baae28"
+    }
+   ],
+   "callees": [
+    "0x0047fc54",
+    "0x0048cfbb"
+   ]
+  },
+  {
+   "entry": "0x004864c1",
+   "name": "iagWarReset",
+   "implementation": "iag_war_reset",
+   "instructions": 95,
+   "original_bytes": 375,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "iagWarReset",
+     "kind": "code",
+     "start": "0x004864c1",
+     "end_exclusive": "0x00486638",
+     "size": 375,
+     "sha256": "eaea0fbdabda18b038afff8ec68ee2a80a2041bed1d20d7132d8c32a85975983"
+    }
+   ],
+   "callees": [
+    "0x0046d817",
+    "0x00482939",
+    "0x00483286",
+    "0x00483685",
+    "0x00483bd8",
+    "0x00484b96"
+   ]
+  },
+  {
+   "entry": "0x00486ca7",
+   "name": "iagWarSetMode",
+   "implementation": "war_set_mode",
+   "instructions": 15,
+   "original_bytes": 49,
+   "bytes_not_exported_by_stage1": 0,
+   "intervals": [
+    {
+     "name": "iagWarSetMode",
+     "kind": "code",
+     "start": "0x00486ca7",
+     "end_exclusive": "0x00486cd8",
+     "size": 49,
+     "sha256": "6d260298b4afc1b87ac0793dd6c9f723e3e337d0e8dcc6b4c204c42898b46e89"
+    }
+   ],
+   "callees": []
+  },
+  {
+   "entry": "0x00489728",
+   "name": "iaRandom",
+   "implementation": "ia_random: core cadencia.proximo_aleatorio; seed path in ia_alloc",
+   "instructions": 49,
+   "original_bytes": 124,
+   "bytes_not_exported_by_stage1": 124,
+   "intervals": [
+    {
+     "name": "iaRandom",
+     "kind": "code",
+     "start": "0x00489728",
+     "end_exclusive": "0x004897a4",
+     "size": 124,
+     "sha256": "3b27a04438d4b6d09504fcdcb2248071470f42fe27d0e100c949394210fe9228"
+    }
+   ],
+   "callees": [
+    "0x00493a24"
+   ]
+  }
+ ],
+ "boundaries": [
+  {
+   "address": "0x0041a08c",
+   "name": "BatimentGetPlayer",
+   "boundary": "Native observed world provider; Python delegates by original name"
+  },
+  {
+   "address": "0x0041a4f4",
+   "name": "BatimentGetType",
+   "boundary": "Native observed world provider; Python delegates by original name"
+  },
+  {
+   "address": "0x0041a735",
+   "name": "BatimentExiste",
+   "boundary": "Native observed world provider; Python delegates by original name"
+  },
+  {
+   "address": "0x00440e11",
+   "name": "EnginGetEtat",
+   "boundary": "Native observed world provider; Python delegates by original name"
+  },
+  {
+   "address": "0x00442025",
+   "name": "EnginGetType",
+   "boundary": "Native observed world provider; Python delegates by original name"
+  },
+  {
+   "address": "0x004422dd",
+   "name": "TypeEnginEstMonstre",
+   "boundary": "Native observed world provider; Python delegates by original name"
+  },
+  {
+   "address": "0x00443108",
+   "name": "EnginSetPlayer",
+   "boundary": "Native observed world provider; Python delegates by original name"
+  },
+  {
+   "address": "0x00443dad",
+   "name": "EnginEstVivant",
+   "boundary": "Native observed world provider; Python delegates by original name"
+  },
+  {
+   "address": "0x00467670",
+   "name": "GetRessource",
+   "boundary": "Native observed world provider; Python delegates by original name"
+  },
+  {
+   "address": "0x0046c11a",
+   "name": "MissionGetNum",
+   "boundary": "Native observed world provider; Python delegates by original name"
+  },
+  {
+   "address": "0x0046d817",
+   "name": "PlayerGetType",
+   "boundary": "Native observed world provider; Python delegates by original name"
+  },
+  {
+   "address": "0x00470b37",
+   "name": "RechercheSetBranche",
+   "boundary": "Native observed world provider; Python delegates by original name"
+  },
+  {
+   "address": "0x004717c2",
+   "name": "RechercheGetNiveau",
+   "boundary": "Native observed world provider; Python delegates by original name"
+  },
+  {
+   "address": "0x0047e437",
+   "name": "iaProbLoadBinaryRules",
+   "boundary": "IaAlloc rule loader declared binding; original body excluded"
+  },
+  {
+   "address": "0x0048cfbb",
+   "name": "sprintf",
+   "boundary": "Native sprintf executes; formatted stack-local key unused by iaConfigGetValue"
+  },
+  {
+   "address": "0x0048d5fd",
+   "name": "debugSymLoad",
+   "boundary": "IaAlloc SBL loader declared binding; original body excluded"
+  },
+  {
+   "address": "0x0048d699",
+   "name": "debugSymUnload",
+   "boundary": "IaAlloc SBL unload declared binding; original body excluded"
+  },
+  {
+   "address": "0x00493a24",
+   "name": null,
+   "boundary": "WINMM timeGetTime import thunk; declared seed clock"
+  }
+ ],
+ "original_capture_sha256": "f038dd159363940f894489a0c333805d0ff97d7be0458e67640ab2c757f0cd9d",
+ "historical_capture_counts": {
+  "cases": 19,
+  "world_calls": 66977,
+  "bench_segments": 133960,
+  "checkpoints": 9
+ }
+}

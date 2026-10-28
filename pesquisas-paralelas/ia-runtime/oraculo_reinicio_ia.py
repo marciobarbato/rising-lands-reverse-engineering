@@ -231,7 +231,8 @@ class ExecucaoNativa:
     def _ler(self, endereco, tamanho):
         return bytes(self.cpu.mem_read(endereco, tamanho))
 
-    def executar(self, entrada, *, ligacoes=None, registradores=None, limite=1000000, parar_antes=None):
+    def executar(self, entrada, *, ligacoes=None, registradores=None, limite=1000000, parar_antes=None,
+                 parar_em=None):
         """Run to the original return.
 
         ``ligacoes``: declared bindings {address: (name, eax, argument reader, tail-jump site)};
@@ -243,11 +244,15 @@ class ExecucaoNativa:
         self.cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE, self._escrita)
         permitidos = [CODIGO, (self.retorno + 0x100, self.retorno + 0x1000)]
         paradas = set(MUNDO) | set(ligacoes) | set(self.thunks) | {self.retorno}
+        if parar_em is not None:
+            paradas.add(parar_em)
         observacoes, segmentos = [], 1
         resultado = self.bench.executar(entrada, permitidos, registradores or {}, parada=paradas,
                                         limite_instrucoes=limite)
         while resultado['EIP'] != self.retorno:
             alvo, esp = resultado['EIP'], resultado['ESP']
+            if alvo == parar_em:
+                break
             ret = struct.unpack('<I', self._ler(esp, 4))[0]
             pilha = struct.unpack('<4I', self._ler(esp + 4, 16))
             if parar_antes is not None and len(observacoes) == parar_antes:
@@ -340,3 +345,57 @@ class MundoRepetido:
             obs = self._proxima(nome, sitio, argumentos)
             return tuple(obs['saidas']) if nome == 'GetRessource' else obs['eax']
         return consulta
+
+
+def provar_ciclo_grupo_vazio(image, imagem):
+    """One transient native visit, then three identical complete checkpoint states.
+
+    Every resumed segment must reach its declared checkpoint under the unchanged
+    bench limits. Timeouts/instruction-limit errors propagate and never prove a
+    cycle. Each back-edge JMP executes natively before the loop is resumed.
+    """
+    from unicorn import x86_const
+    ponto, destino = 0x47b1f4, 0x47b137
+    salto = image.instruction(ponto)
+    if salto.mnemonic != 'jmp' or image.direct_target(salto) != destino:
+        raise AssertionError('Original empty-group back edge changed')
+    execucao = ExecucaoNativa(image, imagem.copia())
+    inicial = execucao.executar(0x47f36e, parar_em=ponto)
+    if inicial['parada'] != ponto:
+        raise AssertionError('Fixture did not reach the empty-group checkpoint')
+    registros = ('EAX', 'EBX', 'ECX', 'EDX', 'ESI', 'EDI', 'EBP', 'ESP', 'EIP', 'EFLAGS',
+                 'CS', 'DS', 'ES', 'SS', 'FS', 'GS')
+
+    def estado():
+        cpu = {r: execucao.cpu.reg_read(getattr(x86_const, 'UC_X86_REG_' + r)) for r in registros}
+        buffers = {str(base): execucao._ler(base, len(buf)) for base, buf in imagem.segmentos()}
+        buffers['stack'] = execucao._ler(execucao.pilha[0], execucao.pilha[1] - execucao.pilha[0])
+        return cpu, buffers
+
+    estados = [estado()]
+    externos = set(MUNDO) | {0x48d5fd, 0x47e437, 0x48d699, 0x493a24}
+    for _ in range(3):
+        for entrada, esperado in ((ponto, destino), (destino, ponto)):
+            resultado = execucao.bench.retomar(entrada, [CODIGO], parada={esperado} | externos)
+            if resultado['EIP'] != esperado:
+                raise AssertionError(f'External effect reached during the cycle: 0x{resultado["EIP"]:08x}')
+        estados.append(estado())
+    repetidos = estados[1:]
+    if repetidos[0] != repetidos[1] or repetidos[1] != repetidos[2]:
+        diferencas = []
+        for anterior, seguinte in zip(repetidos, repetidos[1:]):
+            cpu_antes, memoria_antes = anterior
+            cpu_depois, memoria_depois = seguinte
+            diferencas.append(dict(registers={r: (cpu_antes[r], cpu_depois[r]) for r in cpu_antes
+                                              if cpu_antes[r] != cpu_depois[r]},
+                buffers={nome: [i for i, (a, b) in enumerate(zip(dados, memoria_depois[nome])) if a != b][:32]
+                         for nome, dados in memoria_antes.items() if dados != memoria_depois[nome]}))
+        raise AssertionError(f'Native checkpoint states differ; no cycle demonstrated: {diferencas}')
+    cpu, buffers = repetidos[0]
+    prova = dict(checkpoint=f'0x{ponto:08x}', target=f'0x{destino:08x}', visits=len(estados),
+                 equal_cpu_stack_and_images=True, registers=cpu,
+                 sha256={nome: hashlib.sha256(dados).hexdigest() for nome, dados in buffers.items()},
+                 resumed_segments=6, identical_visits=[2, 3, 4], initial_visit_is_transient=True,
+                 external_calls_during_cycle=0, bindings_during_cycle=[],
+                 inputs="Inherited image/pools/stack only; no external input call reached")
+    return inicial, prova
