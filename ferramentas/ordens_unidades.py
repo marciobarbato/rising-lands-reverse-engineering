@@ -27,6 +27,7 @@ class MundoUnidades:
         self.estruturas = bytearray(1000 * PASSO)
         self.realizaveis_estruturas = bytearray(88)  # raw table 0x49a070
         self.selecoes_estruturas = bytearray(8)     # four u16 at 0x495be0
+        self.experiencias_unidades = bytearray(40) # raw four-owner queue at 0x4e19c4
         self.grupos = bytearray(100 * 32)
         for grupo in range(100):
             struct.pack_into('<H', self.grupos, grupo * 32 + 0x10, 0xffff)
@@ -65,6 +66,22 @@ class MundoUnidades:
         from capacidades_unidades import atualizar_capacidades_unidades
         return atualizar_capacidades_unidades(self, jogador, capacidade_tipo=capacidade_tipo,
                                               modificador=modificador)
+
+    def adicionar_vida_unidade(self, indice, acrescimo, tipos_unidades):
+        from recuperacao_unidades import adicionar_vida_unidade
+        return adicionar_vida_unidade(self, indice, acrescimo, tipos_unidades)
+
+    def resetar_fadiga_unidade(self, indice):
+        from recuperacao_unidades import resetar_fadiga_unidade
+        return resetar_fadiga_unidade(self, indice)
+
+    def aplicar_nova_experiencia(self, indice, nivel, tipos_unidades=None):
+        from experiencia_unidades import aplicar_nova_experiencia
+        return aplicar_nova_experiencia(self, indice, nivel, tipos_unidades)
+
+    def consumir_experiencia_unidade(self, indice, tipos_unidades=None):
+        from experiencia_unidades import consumir_experiencia_unidade
+        return consumir_experiencia_unidade(self, indice, tipos_unidades)
 
     @staticmethod
     def _indice(indice):

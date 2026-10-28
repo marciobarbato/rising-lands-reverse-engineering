@@ -1,0 +1,59 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "EnginSetNewExperience",
+      "start": "0x44f9e0",
+      "end_exclusive": "0x44fb09",
+      "sha256": "3c8a0189c0aa4b09aaf5c0eee3d1d0a4f1c31261082e2cb66a9c70b234f6ab00",
+      "file": "0044f9e0.asm"
+    },
+    {
+      "name": "level_shared_epilogue",
+      "start": "0x44f987",
+      "end_exclusive": "0x44f98a",
+      "sha256": "767e946b7b97cd51f2f9cdc9a123840cfc6499a0e318a7039a02741d89d06407",
+      "file": "0044f987.asm"
+    },
+    {
+      "name": "EnginSetExperimente",
+      "start": "0x44fe42",
+      "end_exclusive": "0x44ff1d",
+      "sha256": "11525e5872c883f1ce9ed8aa617ccd8e80e183c7aa02ac85c9ecf37c13eddb7a",
+      "file": "0044fe42.asm"
+    },
+    {
+      "name": "queue_shared_epilogue",
+      "start": "0x440d58",
+      "end_exclusive": "0x440d5e",
+      "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "file": "00440d58.asm"
+    },
+    {
+      "name": "SortieTroupe_experience_prefix",
+      "start": "0x420f81",
+      "end_exclusive": "0x420f8a",
+      "sha256": "99af2d9991ea9b551119f6278842fce2771ecbdaca1d6d2bc8e42b1fe7cb5a55",
+      "file": "00420f81.asm"
+    }
+  ],
+  "unit_pool_pointer": "0x4e19a0",
+  "unit_count": 800,
+  "stride": 276,
+  "type_table": "0x4965ae, 26 records of 50 bytes; fatigue word at +0x2e",
+  "queue": "0x4e19c4, supported four owners of ten bytes",
+  "level_jump_table": {
+    "address": "0x44f9cc",
+    "bytes": "87f9440011fa44008efa440098fa4400a2fa4400",
+    "sha256": "bf85f89fd9e473397af391fb5f720c4c65851d69d3941080619989b7a96b9fae",
+    "entries": [
+      "0x44f987",
+      "0x44fa11",
+      "0x44fa8e",
+      "0x44fa98",
+      "0x44faa2"
+    ]
+  },
+  "scope": "Complete local level effects and queue consumption; production stops before placement."
+}
