@@ -4,6 +4,7 @@ from pathlib import Path
 import struct
 import sys
 import unittest
+from unittest.mock import patch
 
 APP = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(APP / 'src'))
@@ -89,6 +90,30 @@ class PlayableTests(unittest.TestCase):
             self.assertTrue(Path(module.__file__).resolve().is_relative_to(SNAP.resolve()))
         self.assertNotIn('unicorn', sys.modules)
         self.assertEqual(self.preview.state()['commit'], MANIFEST['commit'])
+
+    def test_coalesced_timers_preserve_elapsed_clock_and_pause_discards_sleep(self):
+        p=self.preview
+        with patch('engine.time.monotonic') as clock:
+            clock.return_value=100
+            p.handle({'action':'play'})
+            clock.return_value=100.1
+            p.handle({'action':'pump'})
+            self.assertEqual(p.tick,2)
+            clock.return_value=101.1
+            p.handle({'action':'pump'})
+            self.assertEqual(p.tick,22)
+            p.handle({'action':'pause'})
+            clock.return_value=1000
+            p.handle({'action':'pump'})
+            self.assertEqual(p.tick,22)
+            p.handle({'action':'play'})
+            p.handle({'action':'speed','speed':8})
+            clock.return_value=1000.25
+            p.handle({'action':'pump'})
+            self.assertEqual(p.tick,62)
+            clock.return_value=2000
+            p.handle({'action':'pump'})
+            self.assertEqual(p.tick,222)  # bounded one-second sleep/wake catch-up
 
 
 if __name__ == '__main__':

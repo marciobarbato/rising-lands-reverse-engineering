@@ -73,6 +73,7 @@ $('nav-economy').onclick=()=>openBench('economy');$('nav-combat').onclick=()=>op
 start();
 
 // Exercise actual DOM controls and the running wall-clock pump in the native WebView.
+window.smokeDiagnostics=()=>state?{commit:state.commit,tick:state.tick,paused:state.paused,speed:state.speed,clock:state.clock,selected:state.selected,session:state.session,units:state.units.map(u=>({id:u.id,pos:u.pos,state:u.state,progress:u.progress,requested:u.requested,blocked:u.blocked})),pumping,visibility:document.visibilityState,focused:document.hasFocus()}:{};
 const runPreviewSmokeTests=window.runSmokeTests;
 window.runSmokeTests=async()=>{
  const previous=await runPreviewSmokeTests();
@@ -81,7 +82,8 @@ window.runSmokeTests=async()=>{
  const check=(name,ok)=>{tests.push({name,passed:!!ok});if(!ok)throw Error('Teste falhou: '+name);};
  const until=async(predicate,label)=>{const deadline=performance.now()+12000;while(!predicate()){if(performance.now()>deadline)throw Error('Tempo limite: '+label);await new Promise(r=>setTimeout(r,30));}};
  const select=async(index)=>{$('unit-list').children[index].click();await until(()=>state.selected===index,'seleção pelo botão');};
- const move=async(x,y)=>{const i=state.selected;$('dest-x').value=x;$('dest-y').value=y;$('order-form').requestSubmit();await until(()=>state.units[i].state===2&&fmt(state.units[i].requested)===`${x}, ${y}`,'ordem pelo formulário');if(state.paused)$('play').click();await until(()=>state.units[i].state===7&&fmt(state.units[i].pos)===`${x}, ${y}`,'movimento vivo');if(!state.paused)$('play').click();await until(()=>state.paused,'pausa pelo botão');};
+ let coalesceFirstPump=true;
+ const move=async(x,y)=>{const i=state.selected;$('dest-x').value=x;$('dest-y').value=y;$('order-form').requestSubmit();await until(()=>state.units[i].state===2&&fmt(state.units[i].requested)===`${x}, ${y}`,'ordem pelo formulário');if(state.paused)$('play').click();await until(()=>!state.paused,'início pelo botão');if(coalesceFirstPump){window.smokeMode=true;await new Promise(r=>setTimeout(r,900));window.smokeMode=false;coalesceFirstPump=false;}await until(()=>state.units[i].state===7&&fmt(state.units[i].pos)===`${x}, ${y}`,'movimento vivo');if(!state.paused)$('play').click();await until(()=>state.paused,'pausa pelo botão');};
  await request('reset',{scenario:'jogavel'});
  window.smokeMode=false;
  const before=await request('capture',{label:'before'});
@@ -97,10 +99,10 @@ window.runSmokeTests=async()=>{
  check('combate contínuo reduz vida por dois golpes',state.units[2].health<=60&&state.units[2].health>0);
  const t=state.tick;await new Promise(r=>setTimeout(r,220));check('pausa mantém o estado do treino',state.tick===t);
  const after=await request('capture',{label:'after'});check('renderização acompanha interações',before.sha256!==after.sha256&&unitBodies.naturalWidth>0);
- check('fontes de economia e combate vinculadas à mesma revisão',state.research.sources.every(s=>s.commit===state.commit));
+ check('relógio avança após intervalo real sem pedidos',state.clock.maximumObservedInterval>=0.7);check('relógio vivo mede tempo decorrido entre respostas',state.clock.mode==='elapsed'&&state.clock.recentIntervals.some(t=>t>0));check('fontes de economia e combate vinculadas à mesma revisão',state.research.sources.every(s=>s.commit===state.commit));
  window.smokeMode=true;fit();await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
  return {passed:true,tests,commit:state.commit,scenario:state.scenario,tick:state.tick,session:state.session,
          renderCaptures:[before,after],units:state.units.map(u=>({id:u.id,pos:u.pos,state:u.state,health:u.health})),
-         canvas:[canvas.width,canvas.height],architecture:state.architecture,python:state.python,
+         canvas:[canvas.width,canvas.height],architecture:state.architecture,python:state.python,clock:state.clock,
          interaction:'DOM selection/form/buttons with live setInterval pump'};
 };

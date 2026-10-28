@@ -69,8 +69,13 @@ integrated in this consumer.
 The 16×16 exercise, wall, initial units, eight food units, one-item exercise
 cargo, depot location, objective and 20-update/second clock are **synthetic app
 policy**. They are not recovered transport, AI, mission or dispatch rules.
-The outer loop requests 2×speed updates every 100 ms; rendering follows current
-responses. It is not a reconstruction of the original global timing loop.
+The WebView requests an update every 100 ms; the exercise engine uses monotonic
+elapsed time ×20×speed, so coalesced background timers still advance the live
+clock. A single response catches up at most one second (160 updates at8×);
+pause/play and speed changes reset the time anchor, preventing an unbounded
+sleep/wake replay. Rendering follows current responses. Historical movement
+labs retain their explicit 2×speed update quantum. Neither mode reconstructs
+the original global timing loop.
 
 | Area | Actual provider and supported inputs | Deliberate boundary |
 |---|---|---|

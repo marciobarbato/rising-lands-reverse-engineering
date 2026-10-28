@@ -7,6 +7,7 @@ import math
 import os
 import struct
 import sys
+import time
 import traceback
 
 ROOT = Path(os.environ.get('RISING_APP_ROOT', Path(__file__).resolve().parent))
@@ -75,7 +76,7 @@ class Preview:
         self.scenario=scenario;self.tick=0;self.paused=True;self.speed=1;self.events=[];self.selected=0
         self.research=BancadaPesquisa(self.mission,self.catalog)
         self.session=None
-        self.pump_fraction=0;self.blocked={};self.requested={};self.routes={};self.trails={};self.plans={};self.errors=[]
+        self.pump_fraction=0;self.pump_time=None;self.pump_intervals=[];self.pump_max=0;self.blocked={};self.requested={};self.routes={};self.trails={};self.plans={};self.errors=[]
         if scenario=='missao':
             self.world=None
             self.width=self.mission['largura'];self.height=self.mission['altura']
@@ -181,6 +182,9 @@ class Preview:
         result={'scenario':self.scenario,'backend':self.backend,'pythonSolverAvailable':PYTHON_SOLVER_AVAILABLE,'width':self.width,'height':self.height,'tick':self.tick,'paused':self.paused,'speed':self.speed,'selected':self.selected,'units':units,'searches':len(self.world.historico_navegacao) if self.world else 0,'collisions':self.world.colisoes[-40:] if self.world else [],'research':self.research.state(),'fog':[self.world.descoberto[0][cell(x,y)] for y in range(self.height) for x in range(self.width)] if self.world else None,'events':self.events[-12:],'commit':MANIFEST['commit'],'snapshotFiles':len(MANIFEST['files']),'capabilities':self.capabilities(),'python':sys.version.split()[0],'architecture':__import__('platform').machine()}
         if self.session:
             result['session']=self.session.state()
+            result['clock']={'mode':'elapsed','rate':20,'maxCatchupSeconds':1,
+                             'maximumObservedInterval':self.pump_max,
+                             'recentIntervals':self.pump_intervals[-16:]}
             result['capabilities']=[
                 {'name':'Sessão de treino interativa','status':'experimental','detail':'Mapa, relógio, transporte de carga e objetivos são regras declaradas deste exercício. Movimento e desvios usam as APIs recuperadas no mesmo commit.'},
                 {'name':'Golpes diretos em unidades','status':'confirmado','detail':'Soldado adjacente: ordem, mira, animação, recarga e consumidor de dano em modo 1. Câmera sonora oculta; sem reação, diplomacia ou apresentação de InfligeDegat. O golpe letal pausa antes da rotina pendente.'},
@@ -202,19 +206,29 @@ class Preview:
         if action=='reset':self.reset(msg.get('scenario','obstaculo'),msg.get('backend'));return self.state(True)
         if action=='select':self.selected=self._index(msg['unit'])
         elif action=='order':self.order(self._index(msg.get('unit',self.selected)),msg['x'],msg['y'])
-        elif action=='pause':self.paused=True
+        elif action=='pause':self.paused=True;self.pump_time=None
         elif action=='play':
             if self.world is None:raise ValueError('Modo de inspeção sem simulação')
-            self.paused=False
+            self.paused=False;self.pump_time=time.monotonic()
         elif action=='speed':
             speed=msg['speed']
             if isinstance(speed,bool) or speed not in (0.25,0.5,1,2,4,8):raise ValueError('Velocidade inválida')
             self.speed=speed
-        elif action=='step':self.paused=True;self.step()
+            if self.session and not self.paused:self.pump_time=time.monotonic()
+        elif action=='step':self.paused=True;self.pump_time=None;self.step()
         elif action=='pump':
             if not self.paused:
-                self.pump_fraction+=2*self.speed
-                n=int(self.pump_fraction);self.pump_fraction-=n
+                if self.session:
+                    now=time.monotonic()
+                    elapsed=max(0,now-self.pump_time) if self.pump_time is not None else 0
+                    self.pump_time=now
+                    self.pump_max=max(self.pump_max,elapsed)
+                    self.pump_intervals.append(elapsed);self.pump_intervals=self.pump_intervals[-16:]
+                    # The WebView may coalesce background timers. Account for
+                    # elapsed time, bounding sleep/wake catch-up to one second.
+                    self.pump_fraction+=min(elapsed,1)*20*self.speed
+                else:self.pump_fraction+=2*self.speed
+                n=int(self.pump_fraction+1e-8);self.pump_fraction=max(0,self.pump_fraction-n)
                 if n:self.step(n)
         elif action=='economy':self.log(self.research.mutate(msg))
         elif action=='combat':self.research.combat(self.world,self._index(msg.get('unit',self.selected)),self._index(msg['target']))

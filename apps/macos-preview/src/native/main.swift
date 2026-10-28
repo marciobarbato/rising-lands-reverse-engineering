@@ -149,7 +149,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
     }
     func webView(_ webView:WKWebView,didFinish navigation:WKNavigation!) {
         guard smokeOutput != nil else { return }
-        webView.callAsyncJavaScript("return await window.runSmokeTests().catch(e=>({passed:false,error:String(e),stack:e.stack}));",arguments:[:],in:nil,in:.page) { [weak self] result in
+        webView.callAsyncJavaScript("return await window.runSmokeTests().catch(e=>({passed:false,error:String(e),stack:e.stack,diagnostics:window.smokeDiagnostics?window.smokeDiagnostics():{}}));",arguments:[:],in:nil,in:.page) { [weak self] result in
             switch result {
             case .success(let value):self?.finishSmoke(value as? [String:Any] ?? ["passed":false,"error":"Resposta inválida"])
             case .failure(let error):self?.finishSmoke(["passed":false,"error":error.localizedDescription,"pythonStderr":self?.errorText ?? ""])
