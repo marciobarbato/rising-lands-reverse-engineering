@@ -180,7 +180,7 @@ This inventory distinguishes reconstructed behavior, captured original behavior,
 |---|---|---|
 | Gate shared tail | The full-return API now reconstructs `AffBatiments 0x40F342..0x40F49C` for terrain other than `0x356`; 882 fresh x86 calls validate return/clip/guards | Close the workshop-trigger lookup with a committed world-provider contract; integrate the consumer |
 | Other building facades and overlays | `AffBatiments 0x407DD3..0x40F49C`; only the Sanctuary subset and gate facade are reconstructed | Recover per-type/mode layers, clipping and anchors against original buffers |
-| Unit action handlers | Prepared type-0/type-2 attack bodies are reconstructed with explicit selection/effect guards; construction `0x414495`, work `0x414A8A`, death `0x41559A` and other attack types remain open | Extend supported handlers and coordinate simulation phase producers |
+| Unit action handlers | Prepared type-0/type-2 attack bodies and six-type corpse copy/fade rendering are reconstructed; construction `0x414495`, work `0x414A8A` and remaining types/effects remain open | Extend supported handlers and coordinate simulation phase/corpse-counter producers |
 | Type-2 normal body | Separate raw-record mapper/compositor reconstructs branch `0x412ECE`, raw frame stride and exact anchor; full native calls and indexed buffers match | Consume the committed provider in the app; recover other players/effects/actions independently |
 | Projectile display inputs/rendering | The 100-record selection/sort, cell queries and public `AffProjectile` mapper/compositor are reconstructed; eight bounded complete sprite scenes use the public renderer | Integrate the consumer and physical producers; preserve explicit catalog limits and raw phase semantics |
 | Projectile/effect lighting | `CalculEclairage`, clipping-enabled mask remap and public projectile consumers are independently validated | Recover remaining palette effects and their lifecycle separately |
@@ -275,6 +275,36 @@ Matrix coverage includes every phase byte at directions1–16, every attack-coun
 
 ```sh
 python3 -B pesquisas-paralelas/graficos-animacao/validar_ataque_grafico.py
+python3 -B scripts/check.py --domain graphics
+```
+
+## Prepared corpse display — eleventh continuation stage
+
+`morte_grafica.py:consultar_morte_grafica(registro276, *, x, y)` takes one prepared record, projected signed-i16 x/y, owner0, state4, effects byte `+0xDC=0` and type0/2/5/6/7/9. It reads raw direction u8`+0x91`, phase u8`+0xA4`, corpse stride u8`+0xDB`, counter u16`+0xC2` and signed-i8 shifts`+0x86/+0x87`. It does not advance the counter/phase or remove the record. Unlike normal/attack handlers, the original death handler does not read selection globals, +BD/+BA, fatigue word+74, bag word+0A or walking/attack stride+A5/+A6. Twelve additional native cases explicitly exercise those differing conditions; no selection-default inputs are invented for this API.
+
+Death base/anchor pairs are type0:2226/(40,22), type2:3346/(32,16), type5:1762/(11,11), type6:3106/(16,20), type7:1538/(26,26), type9:1890/(19,14). Engine ID is low-u16`base+(floor((direction+1)/2)-1)*corpse_stride+phase`; direction0 keeps group-1. Every layer shares that ID and the signed-i16 wrapped position `(x+dx-anchor_x,y+dy-anchor_y)`. There is **no walking footprint shadow10784**. The source corpse's opacity mask controls each repeated destination shadow remap.
+
+| Counter+0xC2 | Ordered operations |
+|---|---|
+| 0–304 | One body copy |
+| 305–309 | Copy, then one shadow |
+| 310–314 | Copy, then two shadows |
+| 315 | Copy, then three shadows |
+| 316–319 | Three shadows, no copy |
+| 320–324 | Two shadows |
+| 325–329 | One shadow |
+| 330–65535 | No layers or asset lookup |
+
+`compor_morte_grafica(catalog,dest,w,h,record276,*,x,y,tabela_sombra,recorte=None)` requires an explicit256-byte shadow table and returns `(new_indexed_bytes,plan)` with inclusive clipping and unchanged inputs. Repeated shadows operate on the evolving destination in order. Out-of-catalog IDs raise `NotImplementedError` only when layers are required; a finished counter returns no layers even if other raw bytes would select an invalid ID. Unsupported owner/type/state/effects raise `NotImplementedError`; invalid widths/lengths raise `ValueError`, absent keywords `TypeError`. No callbacks/RNG/clock/world changes occur. Visibility selection remains the caller's responsibility.
+
+Evidence: unchanged original executable SHA-256; `EnginGetSpriteMort 0x415496..0x41559A` hash `11d597526321a257beb04660b948a08b889fb2c8e5721fcdc33ed7269e6eac96`; complete `AffDyingEngin 0x41559A..0x41591F` hash `e0862d1dd4d638bfe1e834e28e0f6cfa1e608202da6ebf9fa7d3afc1f62208fe`; full `AffEngin` caller preserved. Native x/y in EAX/EDX, pool index lowEBX, pool pointer`0x4E19A0`. [Exact-byte evidence and unchanged predecessors](../pesquisas-paralelas/graficos-animacao/evidencias/morte-grafica.json). Core's [physical dying contract](core/PHYSICAL_DYING.md) separately sets state4/A4=0/C2=0 in its declared domain and leaves DB unchanged; it does not establish corpse progression or visible-mission execution.
+
+Fresh validator: **18,732 bounded original calls / 29,307,746 instructions**, 17,502 complete command captures, 12 ignored-field captures, **1,210 exact indexed buffers**, six type initializations and two bank calls. Every caller reaches`0x3000000`, ESP`0x2008004`, with the full220,800-byte pool unchanged. Zero dependency checkpoints, expected/unexpected exceptions, limits or skips. There are **1,068 raw out-of-catalog command captures**: blitters are intercepted for those, so native asset dereference is not claimed; public API rejects them. Pixel calls execute original rendering without substitutions, with bank IO/allocation substituted only during setup. [Native report](../pesquisas-paralelas/graficos-animacao/validacao/x86-morte-grafica.json), [six-type counter contact sheet](../pesquisas-paralelas/graficos-animacao/artefatos/morte-contadores.png) (rows0/2/5/6/7/9, columns counters0/304/305/314/315/316/325/330).
+
+Matrix covers counters0–340 and large-u16 boundaries, all phase/direction/stride bytes in focused raw cases, pool0/799 and signed positions/shifts. Indexed comparisons cover every initialized corpse phase at eight directions plus fade/copy/clipping boundaries. Original initialized stride is8 for five types and10 for type2; this is a field observation, not a proven animation lifecycle. [Focused REA review](../pesquisas-paralelas/graficos-animacao/evidencias/rea-morte-grafica-review.json) corroborates the u16 load at`0x415639`, retains pinned source/distinct PE identities and notes the corrected preliminary interior-byte query. Private session exported/closed. Seven new capture regressions pass; graphics domain **148 tests**, zero skips and valid links. Synthetic background/table fixtures do not establish a scene or mission; corpse timing, removal, other types/owners/effects and consumer activation remain open.
+
+```sh
+python3 -B pesquisas-paralelas/graficos-animacao/validar_morte_grafica.py
 python3 -B scripts/check.py --domain graphics
 ```
 
