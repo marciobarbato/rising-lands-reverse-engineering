@@ -1,0 +1,369 @@
+{
+ "exe_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "analysis_pe_sha256_not_executed": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+ "unicorn_version": "2.1.4",
+ "result": "PASS",
+ "limits": {
+  "instrucoes": 60000000,
+  "timeout_us": 900000000
+ },
+ "checkpoint": "0x417b1c",
+ "bindings": {
+  "iat_resolution": [
+   {
+    "slot": "0x5231c0",
+    "importacao": "KERNEL32.GlobalAlloc",
+    "trampolim": "0xe000000"
+   },
+   {
+    "slot": "0x5231c8",
+    "importacao": "KERNEL32.GlobalFree",
+    "trampolim": "0xe000010"
+   },
+   {
+    "slot": "0x5231cc",
+    "importacao": "KERNEL32.GlobalHandle",
+    "trampolim": "0xe000020"
+   },
+   {
+    "slot": "0x5231d0",
+    "importacao": "KERNEL32.GlobalLock",
+    "trampolim": "0xe000030"
+   },
+   {
+    "slot": "0x5231d8",
+    "importacao": "KERNEL32.GlobalUnlock",
+    "trampolim": "0xe000040"
+   },
+   {
+    "slot": "0x5231b8",
+    "importacao": "KERNEL32.GetTickCount",
+    "trampolim": "0xe000300"
+   }
+  ],
+  "directdraw": "IDirectDrawSurface IsLost/Lock (Restore/Unlock stop) via COM object 0x4E1790",
+  "model_side": "DirectDrawModelo returns DD_OK and the same fixture surface address; GetTickCount uses the same declared ticks"
+ },
+ "cache_alloc_fixture": {
+  "arena_next": 282077936,
+  "arena_end": 301989888,
+  "counter_u32": 13512264
+ },
+ "player_tables_sha256": ["40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880","5f56b226a2be144237ae34abfe389a5e97dc8baa28ae37315a3028b1413d12f2","9967a6066f63fef6c29d57f64b04d0d881abb183746abb38f24531c995371f6a","0828dcd6d30c6cbb6ad9315d7584ae828aff2a94326985e036a2f3c643a9ab3a","b6301379e1e1b18f8159ca7f0321f8e3b4e14d28c543623d58a983eafca90b73"],
+ "frames": [
+  {
+   "cena": "monde01_checkpoint",
+   "antes": "InitCache",
+   "native": {
+    "stop": "0x417b1c",
+    "instructions": 2324969,
+    "events": 2782,
+    "surface_sha256": "8f8f41ff987f904b5fdf87b54ff5f91c9db20cf888a377c89bb87794c4ddc65a"
+   },
+   "model": "named_stop",
+   "stop": "0x40f23b",
+   "detail": "building facade for terrain word 0x2ed at cell 3345",
+   "stop_event": ["AffBatiments",544,416,3345],
+   "comparison": "partial state at the same original address after trace event 2187",
+   "partial_native_instructions": 2171691,
+   "surface_sha256": "19773ab3c0ea38f7a27b721d4bf1f61471a2541f7d32396af1960ba1957e6652",
+   "effects": [
+    ["fps_contador_u16",5117870,"0700","0800"],
+    ["fps_tick_u32",5117876,"e8030000","dc050000"],
+    ["dd_ponteiro_u32",5117860,"00000000","00000008"],
+    ["dd_travas_u32",5117864,"00000000","01000000"],
+    ["superficie_u32",5279600,"00000000","00000008"],
+    ["recorte_salvo",4825132,"0000000000000000","00001f0300001f02"]
+   ],
+   "trace": {
+    "events": 2188,
+    "sha256": "c6370107d5773f9d1c240c3fee83f61a15a56aad8d37a6b926ee4079b6c4399d"
+   },
+   "cache": {
+    "cursor": 106,
+    "keys_sha256": "d9ade332f2872260f10d6761164ca2984dd4369de2fdea493a81d70dbeeaf5be",
+    "payload_sha256": "97fc8f2d2bcb46ff05a40f397593581ca89d022bb75a2d72b41c4c33576ab781"
+   }
+  },
+  {
+   "cena": "terreno_e_objetos",
+   "antes": "InitCache",
+   "native": {
+    "stop": "0x417b1c",
+    "instructions": 4674362,
+    "events": 2744,
+    "surface_sha256": "694fc1033643612a43cbd1d1055d980c8af3754c07cd934c9491c66f6e3ac1a8"
+   },
+   "model": "complete",
+   "comparison": "whole frame through 0x417b1c",
+   "surface_sha256": "694fc1033643612a43cbd1d1055d980c8af3754c07cd934c9491c66f6e3ac1a8",
+   "effects": [
+    ["fps_contador_u16",5117870,"0700","0800"],
+    ["fps_tick_u32",5117876,"e8030000","34080000"],
+    ["fps_ultimo_tick_u32",5117872,"e8030000","34080000"],
+    ["fps_digitos",4809620,"303000","303800"],
+    ["fps_contador_u16",5117870,"0800","0000"],
+    ["dd_ponteiro_u32",5117860,"00000000","00000008"],
+    ["dd_travas_u32",5117864,"00000000","01000000"],
+    ["superficie_u32",5279600,"00000000","00000008"],
+    ["recorte_salvo",4825132,"0000000000000000","00001f0300001f02"]
+   ],
+   "trace": {
+    "events": 2744,
+    "sha256": "0cef2fc92bc54054233389bb8970876afd6b8abafec12bad52e3ccb71ba595c8"
+   },
+   "cache": {
+    "cursor": 148,
+    "keys_sha256": "f4a81dc9015f632b1b6dda8410769941802011557032bea1c325230014a92df3",
+    "payload_sha256": "e64eaa9ab00594ed33dcc6821d14fcdb78062bf1c98f2105ace30ab5a7a8e7a9"
+   }
+  },
+  {
+   "cena": "unidades_e_projeteis",
+   "antes": null,
+   "native": {
+    "stop": "0x417b1c",
+    "instructions": 4746862,
+    "events": 2749,
+    "surface_sha256": "731d081a76563196e55fbaa01c75771f504ddb87094161898555bf0d1cca1c71"
+   },
+   "model": "complete",
+   "comparison": "whole frame through 0x417b1c",
+   "surface_sha256": "731d081a76563196e55fbaa01c75771f504ddb87094161898555bf0d1cca1c71",
+   "effects": [
+    ["fps_contador_u16",5117870,"0700","0800"],
+    ["fps_tick_u32",5117876,"e8030000","5c080000"],
+    ["fps_ultimo_tick_u32",5117872,"e8030000","5c080000"],
+    ["fps_digitos",4809620,"303000","303800"],
+    ["fps_contador_u16",5117870,"0800","0000"],
+    ["dd_ponteiro_u32",5117860,"00000000","00000008"],
+    ["dd_travas_u32",5117864,"00000000","01000000"],
+    ["superficie_u32",5279600,"00000000","00000008"],
+    ["recorte_salvo",4825132,"0000000000000000","00001f0300001f02"]
+   ],
+   "trace": {
+    "events": 2749,
+    "sha256": "0dd83b54d72228add0e6aa4048b9b311f4965febdf9afa00b3436d3ad6a6a2db"
+   },
+   "cache": {
+    "cursor": 190,
+    "keys_sha256": "36201ba89b10be479020aa3b6d6296a85b7c0e1af514724f6e5dedae2a37b3a1",
+    "payload_sha256": "acf45c1ce06857f56c51053fbf46aedb9e7117fc6934bc1e5c211db93d18a646"
+   }
+  },
+  {
+   "cena": "margem_e_origem",
+   "antes": null,
+   "native": {
+    "stop": "0x417b1c",
+    "instructions": 1477567,
+    "events": 2510,
+    "surface_sha256": "4192c216c33bd9ccd3432c22be1724c942cc6cc5e76d6c65daf48a88692788f7"
+   },
+   "model": "complete",
+   "comparison": "whole frame through 0x417b1c",
+   "surface_sha256": "4192c216c33bd9ccd3432c22be1724c942cc6cc5e76d6c65daf48a88692788f7",
+   "effects": [
+    ["fps_contador_u16",5117870,"0700","0800"],
+    ["fps_tick_u32",5117876,"e8030000","fc080000"],
+    ["fps_ultimo_tick_u32",5117872,"b0040000","fc080000"],
+    ["fps_digitos",4809620,"303000","303800"],
+    ["fps_contador_u16",5117870,"0800","0000"],
+    ["dd_ponteiro_u32",5117860,"00000000","00000008"],
+    ["dd_travas_u32",5117864,"00000000","01000000"],
+    ["superficie_u32",5279600,"00000000","00000008"],
+    ["recorte_salvo",4825132,"0000000000000000","2000ff022000ff01"]
+   ],
+   "trace": {
+    "events": 2510,
+    "sha256": "881693246df7813607da35180ffffbd87e3dba41187aeb9335592d33b1fbe6f3"
+   },
+   "cache": {
+    "cursor": 227,
+    "keys_sha256": "0f7bda2da062f1e4b0df014813f14922817d1db4a9ed06691ac495871f88ed61",
+    "payload_sha256": "97359defce9279e6fc65a69897029d68aeddea02205ecd8caa739b55416c9ef0"
+   }
+  },
+  {
+   "cena": "nao_desenhado_divisor",
+   "antes": null,
+   "native": {
+    "stop": "0x3000000",
+    "instructions": 134,
+    "events": 1,
+    "surface_sha256": "bc9089c8c5960bcf8b85f308c3752948561d343f14dc072d915bd4c0e765b24a"
+   },
+   "model": "complete",
+   "comparison": "whole frame through AffGame return",
+   "surface_sha256": "bc9089c8c5960bcf8b85f308c3752948561d343f14dc072d915bd4c0e765b24a",
+   "effects": [
+    ["fps_contador_u16",5117870,"0700","0800"],
+    ["fps_tick_u32",5117876,"e8030000","06090000"],
+    ["fps_ultimo_tick_u32",5117872,"e8030000","06090000"],
+    ["fps_digitos",4809620,"303000","303800"],
+    ["fps_contador_u16",5117870,"0800","0000"]
+   ],
+   "trace": {
+    "events": 1,
+    "sha256": "83a7b6d2bcde9274c6028961eaf12d0bbe41d4f22674db9929b8c09734743668"
+   },
+   "cache": {
+    "cursor": 227,
+    "keys_sha256": "0f7bda2da062f1e4b0df014813f14922817d1db4a9ed06691ac495871f88ed61",
+    "payload_sha256": "97359defce9279e6fc65a69897029d68aeddea02205ecd8caa739b55416c9ef0"
+   }
+  },
+  {
+   "cena": "forcado_e_evento",
+   "antes": null,
+   "native": {
+    "stop": "0x417b1c",
+    "instructions": 4731050,
+    "events": 2748,
+    "surface_sha256": "326b4cf4dd7402af8bf734830d893400caed734d6335e3455a4821c7de976ec4"
+   },
+   "model": "complete",
+   "comparison": "whole frame through 0x417b1c",
+   "surface_sha256": "326b4cf4dd7402af8bf734830d893400caed734d6335e3455a4821c7de976ec4",
+   "effects": [
+    ["fps_contador_u16",5117870,"8c00","8d00"],
+    ["fps_tick_u32",5117876,"e8030000","60090000"],
+    ["fps_ultimo_tick_u32",5117872,"e8030000","60090000"],
+    ["fps_contador_u16",5117870,"8d00","6300"],
+    ["fps_digitos",4809620,"303000","393900"],
+    ["fps_contador_u16",5117870,"6300","0000"],
+    ["dd_ponteiro_u32",5117860,"00000000","00000008"],
+    ["dd_travas_u32",5117864,"00000000","01000000"],
+    ["superficie_u32",5279600,"00000000","00000008"],
+    ["recorte_salvo",4825132,"0000000000000000","00001f0300001f02"]
+   ],
+   "trace": {
+    "events": 2748,
+    "sha256": "f8adc480776dbdbbb0ec76e8b777023cef7026e3b50b0ea09da97e7794f4724c"
+   },
+   "cache": {
+    "cursor": 12,
+    "keys_sha256": "92684c972125fc99f8f568aff8062c0cdaf64d66d87aec974362af4113fbbff7",
+    "payload_sha256": "c2414e495f238ca6da80bd7ef02a9f0825666611bdbc080c3aa07efd6404f6bd"
+   }
+  },
+  {
+   "cena": "reinicio_cache",
+   "antes": "InitCache",
+   "native": {
+    "stop": "0x417b1c",
+    "instructions": 4810885,
+    "events": 2744,
+    "surface_sha256": "a649da5dae4250c40e7c1a183e7d68617cfdf87b5ec8bc469523e9c404f5be58"
+   },
+   "model": "complete",
+   "comparison": "whole frame through 0x417b1c",
+   "surface_sha256": "a649da5dae4250c40e7c1a183e7d68617cfdf87b5ec8bc469523e9c404f5be58",
+   "effects": [
+    ["fps_contador_u16",5117870,"0700","0800"],
+    ["fps_tick_u32",5117876,"e8030000","c4090000"],
+    ["fps_ultimo_tick_u32",5117872,"e8030000","c4090000"],
+    ["fps_digitos",4809620,"303000","303800"],
+    ["fps_contador_u16",5117870,"0800","0000"],
+    ["dd_ponteiro_u32",5117860,"00000000","00000008"],
+    ["dd_travas_u32",5117864,"00000000","01000000"],
+    ["superficie_u32",5279600,"00000000","00000008"],
+    ["recorte_salvo",4825132,"0000000000000000","00001f0300001f02"]
+   ],
+   "trace": {
+    "events": 2744,
+    "sha256": "e96fdef047fd6c7d0a49588cfa83732e42fb8d433e80ea0a99ba6b6269e63476"
+   },
+   "cache": {
+    "cursor": 63,
+    "keys_sha256": "27585906bd19c6ff15ad733170c4e8a4ad5e1d7e8fb9953f17de755202ab49cf",
+    "payload_sha256": "948c4de07095df0083435f6f42843ef2d635d9be3b2c672ac1bf891166564d47"
+   }
+  },
+  {
+   "cena": "caixa_selecao",
+   "antes": null,
+   "native": {
+    "stop": "0x417b1c",
+    "instructions": 4675872,
+    "events": 2745,
+    "surface_sha256": "247e5c833fc439bc2da7d962e77c437f8eb17efa97f5e023c3629d7d6941d7e3"
+   },
+   "model": "named_stop",
+   "stop": "0x417ac8",
+   "detail": "selection drag box (Box 0x45C912) is not composed",
+   "stop_event": ["AffBatimentOmbre",1024,672,5408],
+   "comparison": "partial state at the same original address after trace event 2743",
+   "partial_native_instructions": 4675666,
+   "surface_sha256": "694fc1033643612a43cbd1d1055d980c8af3754c07cd934c9491c66f6e3ac1a8",
+   "effects": [
+    ["fps_contador_u16",5117870,"0700","0800"],
+    ["fps_tick_u32",5117876,"e8030000","280a0000"],
+    ["fps_ultimo_tick_u32",5117872,"e8030000","280a0000"],
+    ["fps_digitos",4809620,"303000","303800"],
+    ["fps_contador_u16",5117870,"0800","0000"],
+    ["dd_ponteiro_u32",5117860,"00000000","00000008"],
+    ["dd_travas_u32",5117864,"00000000","01000000"],
+    ["superficie_u32",5279600,"00000000","00000008"],
+    ["recorte_salvo",4825132,"0000000000000000","00001f0300001f02"]
+   ],
+   "trace": {
+    "events": 2744,
+    "sha256": "0cef2fc92bc54054233389bb8970876afd6b8abafec12bad52e3ccb71ba595c8"
+   },
+   "cache": {
+    "cursor": 105,
+    "keys_sha256": "224a15916bcd9a658ecd3c29cbd702743f73d465a1a04f4366548fbdf4460e0a",
+    "payload_sha256": "e2460f46f047e5c878cca0041de17a21c9030d138f60fda2d771cef1825888b4"
+   }
+  },
+  {
+   "cena": "fachada_e_estrutura",
+   "antes": null,
+   "native": {
+    "stop": "0x417b1c",
+    "instructions": 4677513,
+    "events": 2744,
+    "surface_sha256": "18e2539b985d0bfa39a46113f7517ea06b8fa25290255fbd62f8365635f709d9"
+   },
+   "model": "named_stop",
+   "stop": "0x40f23b",
+   "detail": "building facade for terrain word 0x2ed at cell 3345",
+   "stop_event": ["AffBatiments",544,416,3345],
+   "comparison": "partial state at the same original address after trace event 2179",
+   "partial_native_instructions": 4601570,
+   "surface_sha256": "18e2539b985d0bfa39a46113f7517ea06b8fa25290255fbd62f8365635f709d9",
+   "effects": [
+    ["fps_contador_u16",5117870,"0700","0800"],
+    ["fps_tick_u32",5117876,"e8030000","8c0a0000"],
+    ["fps_ultimo_tick_u32",5117872,"e8030000","8c0a0000"],
+    ["fps_digitos",4809620,"303000","303800"],
+    ["fps_contador_u16",5117870,"0800","0000"],
+    ["dd_ponteiro_u32",5117860,"00000000","00000008"],
+    ["dd_travas_u32",5117864,"00000000","01000000"],
+    ["superficie_u32",5279600,"00000000","00000008"],
+    ["recorte_salvo",4825132,"0000000000000000","00001f0300001f02"]
+   ],
+   "trace": {
+    "events": 2180,
+    "sha256": "e284f249f76f58650099a19da81db58ff340897243ac1b31ef88c0c2d3833601"
+   },
+   "cache": {
+    "cursor": 147,
+    "keys_sha256": "33efff3e2b6fbbcab48544db02d98a977e4d5c017d7bd28ba8c304b7c351f9bd",
+    "payload_sha256": "5d5f771e24edb21323f845e59f0cafb709c7a60b49831297d0548b75d4a9db62"
+   }
+  }
+ ],
+ "totals": {
+  "native_entries": 26,
+  "instructions_observed": 44818311,
+  "bound_calls": 97346,
+  "frames": 9,
+  "complete": 6,
+  "named_stops": 3
+ },
+ "expected_limits": 0,
+ "skips": 0,
+ "seconds": 46.344
+}

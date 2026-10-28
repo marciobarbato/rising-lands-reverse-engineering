@@ -171,6 +171,14 @@ def cenas_sinteticas(base, registros_iniciais):
     return cenas
 
 
+def cenas_validacao(base, registros_iniciais):
+    """Captured scenes plus two fresh-comparison stop scenes (selection box, facade)."""
+    cenas = [cena_monde01(base)]+cenas_sinteticas(base, registros_iniciais); s = cenas[1]
+    return cenas+[dict(s, nome='caixa_selecao', globais=globais_base(caixa_selecao_u8=1, quadro_u32=20), ticks=[2600], antes=None),
+        dict(s, nome='fachada_e_estrutura', mundo=dict(s['mundo'], terreno=base['terreno'], objetos=base['objetos'],
+            auxiliares=base['auxiliares']), globais=globais_base(quadro_u32=21), ticks=[2700], antes=None)]
+
+
 def fundo():
     return bytes((i*17+23) % 256 for i in range(800*600))
 

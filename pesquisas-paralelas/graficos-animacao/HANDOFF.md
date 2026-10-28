@@ -417,3 +417,100 @@ Bounded trace modes also intercept engine callees to record order; these are not
 - The first InitCache in a real session follows MissionLoad's caller branch; a mission snapshot must carry the cache state explicitly or start from `apos_carregar_banco` + `alocar` + `iniciar`.
 
 Concrete gap closed: verified cache startup, restart and release over real bank payloads, with the terrain-pass validator consuming it. The overall estimate stays coordinator-owned.
+
+## Seventeenth stage selected after sixteenth-stage integration
+
+The coordinator accepted stage 16: implementation `c4bd7da`, captures `e3152ea`, feature `a4bb655` and main merge `21ebbee` are all ancestors of `origin/main`. It authorized `AffGame 0x417698` orchestration over the furthest committed MONDE01 checkpoint, with every world, clock, sort-list or palette write returned explicitly. The worktree merged main `9ae9071`, which opens the audio front in the macOS chat; audio is no longer proposed for graphics.
+
+## Seventeenth stage implementation and validation
+
+Order kept: original-byte inventory and native captures were committed alone (`077a05b`), then the translation, the fresh native comparison, tests and docs.
+
+**Scope.** `quadro_jogo.compor_quadro` reproduces AffGame mode `0x12` from its entry to the HUD checkpoint `0x417B1C`. The full contract is in [the manual](../../docs/GRAPHICS.md#in-game-frame-orchestration-affgame--seventeenth-continuation-stage).
+
+**Inputs.**
+- `MundoQuadro` (read-only): terrain words, objects, auxiliaries, region words `0x4E0F38`, the unit pool, the projectile pool, and the four discovery and lighting maps.
+- `EstadoTela`: 30 globals with exact widths, in `GLOBAIS_QUADRO`.
+- The persistent `CicloCacheTerreno` (stage 16).
+- The 256-byte shadow and lighting tables.
+- The previous surface: pitch × screen height.
+- `relogio`: the GetTickCount binding.
+- `directdraw`: the `is_lost`/`restore`/`lock` binding.
+
+**Order and effects.**
+1. CalculFrame. Counter, ticks, FPS digits clamped to 99, and the `itoa` page text at `0x4963B4`.
+2. EvenementEnCours. A flag only; it is returned.
+3. The gate: frame `0x508F7C` mod divisor `0x497284`, unless forced by `0x4E05A2`.
+4. DDLockSurface. Lock count, pointer, pitch 800, and `0x508F70`.
+5. AffTerrain. GetNumBob cache writes and V6 terrain objects.
+6. AffSprite, in the stage-5 order:
+   - AffVeget uses the `0x415A58` code table.
+   - AffBatiments' no-building path writes the saved clip `0x49A02C..32` and restores the clip.
+   - AffEngin uses the routing plus the validated body guard.
+   - AffProjectile uses the public renderer.
+7. The checkpoint.
+
+Every write is in the ordered `efeitos` list. A whole writable-memory diff of each native frame shows no other write: no unit, world, structure, RNG or palette write in the supported domain. The RNG cursor `0x4E1D18` and the palette cycling (`Cyclage`) sit only in unsupported branches or after the checkpoint.
+
+**Partial failures.** `DependenciaQuadro(address)` keeps the partial surface, the trace and the effects. A missing binding stops at its call site:
+- GetTickCount at `0x43F71A`, after the counter increment;
+- IsLost at `0x43F3D7`, Restore at `0x43F3E4`, Lock at `0x43F40C`.
+
+**Bindings.** On top of stage 16:
+- KERNEL32 `GetTickCount` (IAT `0x5231B8`).
+- The `IDirectDrawSurface` vtable methods on the COM object `0x4E1790`. The fixture is never lost; Lock fills `lpSurface`/`lPitch`; Restore and Unlock stop.
+
+The native bench runs PaletteAlloc, LoadSTRATBank/SetBank, CacheAlloc and CalculTabPlayer in ProgInit order. The player tables equal `construcoes.tabelas_jogador()`; the shadow and lighting contents are the real 60% tables from earlier captures.
+
+**Original identities.**
+- Executable `6c556520…43fb`; normalized PE `26c4534b…64d0` is named only.
+- `AffGame 0x417698..0x417F38` hash `0eeac1ce…583a`; `CalculFrame` `ec7f8002…a592`; `DDLockSurface` `3b685f16…4b34`; AffBatiments prefix `616969e1…1be9`; AffBatiments switch/tail `d8fa5152…4fa7`; AffVeget table/prefix `4f9c9cad…b526`.
+- [Inventory](evidencias/quadro-jogo.json), including the DDInit, WndProc and ResetMode configuration and a static absolute-write scan.
+
+**Actual validation.**
+- `capturar_quadro.py`, original-only: 21 native entries / 24,015,999 instructions / 97,331 bound calls over seven frames.
+- `validar_quadro.py`, fresh: 26 native entries / 44,818,311 instructions / 97,346 bound calls.
+  - **Six complete frames** with whole-frame equality: the 800×600 surface, the canonical trace, all 30 globals, the cache state, and a memory diff restricted to those globals.
+  - **Three named stops**, compared at the same original address after the same trace event, with native memory restored first:
+    - MONDE01 at facade trigger `0x2ED` (`0x40F23B`);
+    - the selection box (`0x417AC8`);
+    - real MONDE01 terrain with synthetic visibility (`0x40F23B`).
+  - Every fresh frame reproduces its original-only capture. There are no limits and no skips.
+- Graphics domain: **192 tests**, 0 skips.
+
+**MONDE01 checkpoint (real mission state).** The input is missions' committed load plus unit placement up to the named `DecouvreTerrain` stop at unit 15. The native frame reaches `0x417B1C` (2,324,969 instructions). The model draws the whole terrain pass and sprite rows 0–13, then stops at the type-2 structure facade trigger, cell 3345 = (17,13). Next blockers, in drawing order:
+1. that facade, with structure lookup;
+2. the unit overlays: MONDE01 units have `+0x74 = 0`;
+3. unit types 1 and 8.
+
+[Preview](artefatos/quadro-monde01-parcial.png).
+
+Declared synthetic inputs:
+- From missions: the unit pool pre-fill, regions, selections, search context and bonus table.
+- From this stage: viewport origin (0,0), camera 0, the frame counter, the 800×600 mode, zero projectile and structure pools, and the background surface.
+- DirectDraw locks a single fixture buffer; page flips are not modelled.
+
+**Planned graphics → macOS contract** (requested by macOS; answered in the shared notes and now recorded here). `compor_quadro` is the frame entry. The requested keywords `jogador_camera`, `origem`, `janela_celulas` and `margem_i8` are `EstadoTela` fields at `0x508041`, `0x508720`, `0x508724` and `0x508F90`. `Quadro` returns the surface, the renderer trace, the ordered effects, `desenhado` and `parada`; the cache is the caller's persistent object. The palette is the loaded PIE palette, since the prefix does not change it.
+
+Corrections sent to macOS:
+1. **InitCache is not per frame.** Create the cache once (`apos_carregar_banco` + `alocar`), call `iniciar()` at game start or restart, and thread the same object through every frame.
+2. **A read-only world is now established only for the supported domain**, by whole-memory diffs. Effects are explicit.
+3. **Default window.** 25×17 cells at 800×600 (`DDInit`), pitch 800. The 640×480 mode stops until the stride is validated.
+4. **Draw cadence is ai-runtime's.** AffGame's own gate is `frame mod divisor`, with divisor 1 initially.
+5. **HUD, minimap and cursor are out of scope.**
+
+The app's clamp (`origin + window + 8/10 ≤ 256`) matches the sprite domain.
+
+**Remaining synthetic bindings and limits.** The stage-16 list is unchanged: wrapper-level bank/palette/FileRead stubs in the older validators, and the stage-14 synthetic cache snapshot. Stage 17 adds no synthetic payload binding. Shadow and lighting contents enter as explicit tables because `LoadPalette`/`CalculOmbrage`/`CalculEclairage` are not run in the frame bench.
+
+Not composed:
+- the HUD tail after `0x417B1C`;
+- the clear and background-restore paths;
+- the selection box;
+- facades, structure lookup and the workshop;
+- AffVeget handlers 27 and 55–65;
+- units outside the guard;
+- the 640×480 mode;
+- wrapped or negative viewports.
+
+Stage 18 (wrapped and negative viewports, and the MONDE01 building facades) is next, after coordinator confirmation.

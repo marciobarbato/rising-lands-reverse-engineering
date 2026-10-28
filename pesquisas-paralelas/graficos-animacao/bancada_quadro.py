@@ -67,7 +67,7 @@ class RelogioDeclarado:
 
 class BancadaQuadro(BancadaCicloCache):
     def __init__(self, catalogo):
-        self.rastro = None; self.parar_evento = None; self.evento_parada = None
+        self.rastro = None; self.parar_evento = None; self.parar_endereco = None; self.evento_parada = None
         super().__init__(catalogo)
         # ProgInit order: PaletteAlloc 0x474DAA precedes LoadSTRATBank/SetBank/CacheAlloc.
         r = self.executar(0x45f6e1, [(0x45f6e1, 0x45f760), (0x467ea6, 0x467ecb)], {'EAX': 0, 'EDX': 0x2468ace1})
@@ -122,7 +122,10 @@ class BancadaQuadro(BancadaCicloCache):
                 evento = [nome, i16(self.reg('EAX')), i16(self.reg('EDX')), self.reg('EBX') & 0xffff]
                 self.rastro.append(evento)
                 if self.parar_evento is not None and len(self.rastro)-1 == self.parar_evento:
-                    self.evento_parada = evento; cpu.emu_stop(); return
+                    # Armed: stop at the model's original stop address from here on.
+                    self.evento_parada = evento
+                    if endereco == self.parar_endereco: cpu.emu_stop(); return
+                    self.paradas.add(self.parar_endereco)
         super()._hook(cpu, endereco, tamanho, dados)
 
     def regioes_mutaveis(self):
@@ -176,10 +179,11 @@ class BancadaQuadro(BancadaCicloCache):
         for nome, endereco, largura in globais_nomes:
             self.escrever(endereco, cena['globais'][nome])
 
-    def quadro(self, *, ticks, parar_evento=None):
-        """Run AffGame from its entry; stop at the HUD checkpoint or return."""
+    def quadro(self, *, ticks, parar_evento=None, parar_endereco=None):
+        """Run AffGame from its entry; stop at the HUD checkpoint or return,
+        or after trace event parar_evento at the original address parar_endereco."""
         self.relogio = RelogioDeclarado(ticks, registro=self.registro)
-        self.rastro = []; self.parar_evento = parar_evento; self.evento_parada = None
+        self.rastro = []; self.parar_evento = parar_evento; self.parar_endereco = parar_endereco; self.evento_parada = None
         marca = self.registro.marca(); antes_instr = self.instrucoes
         self.execucoes += 1; self.intervalos = [CODIGO]; self.paradas = {RETORNO, CHECKPOINT_HUD}; self.stubs = dict(self.vinculos)
         for nome in ('EAX', 'EBX', 'ECX', 'EDX', 'ESI', 'EDI', 'EBP'): self.reg(nome, 0)
@@ -187,7 +191,11 @@ class BancadaQuadro(BancadaCicloCache):
         self.escrever(PILHA, bytes(0x10000)); self.escrever(PILHA+0x8000, struct.pack('<I', RETORNO))
         self.cpu.emu_start(0x417698, RETORNO, timeout=LIMITE_QUADRO['timeout_us'], count=LIMITE_QUADRO['instrucoes'])
         eip = self.reg('EIP'); rastro = self.rastro; self.rastro = None
-        if self.evento_parada is None and eip not in (RETORNO, CHECKPOINT_HUD):
+        if parar_endereco is not None:
+            self.paradas.discard(parar_endereco)
+            if self.evento_parada is None or eip != parar_endereco:
+                raise RuntimeError(f'Native frame did not reach the model stop 0x{parar_endereco:08x} (at 0x{eip:08x})')
+        elif eip not in (RETORNO, CHECKPOINT_HUD):
             raise RuntimeError(f'AffGame frame exceeded its declared budget at 0x{eip:08x}')
         return dict(eip=eip, esp=self.reg('ESP'), rastro=rastro, evento_parada=self.evento_parada,
             vinculos=self.registro.desde(marca), instrucoes=self.instrucoes-antes_instr)
