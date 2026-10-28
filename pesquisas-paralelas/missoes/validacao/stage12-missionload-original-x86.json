@@ -1,0 +1,8902 @@
+{
+ "allocation_fill_sensitivity": {
+  "binding_log_equal": true,
+  "fill_bytes_copied_by_missionload": 0,
+  "fills": [
+   "0xa7",
+   "0x5a"
+  ],
+  "final_bytes_differing_otherwise": 0,
+  "final_bytes_still_holding_fill": 552340,
+  "real_return": true,
+  "seconds": 34.113
+ },
+ "capture": "pesquisas-paralelas/missoes/evidencias/captura-carga-missao-original-v2.json",
+ "capture_sha256": "eb7d2303e13e62d4f5692c9cb6ef302b573d138df6a8b51183a6d9b0bd703afc",
+ "code_integrity": {
+  "after": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+  "before": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+  "capture_after": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+  "capture_before": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+  "exe_code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+  "unchanged": true
+ },
+ "critical_class_reads": {
+  "skip_derived_value": 0,
+  "skipped_routine_static_store": 0,
+  "untouched_allocation_fill": 48
+ },
+ "input_footprint": {
+  "bytes_by_class": {
+   "declared_windows_input": 4,
+   "native_stack_entry_frame_or_stale": 4,
+   "startup_executed_original_code_or_pe_image": 1701,
+   "untouched_allocation_fill": 48
+  },
+  "first_readers_by_class": {
+   "declared_windows_input": {
+    "MissionLoad+0x34": 1,
+    "iaRandom+0xf": 3
+   },
+   "native_stack_entry_frame_or_stale": {
+    "VarResetAll": 4
+   },
+   "startup_executed_original_code_or_pe_image": {
+    "BatimentModifyTerrain+0x101": 4,
+    "BatimentModifyTerrain+0x107": 30,
+    "BatimentModifyTerrain+0x45": 4,
+    "BonusGetValEngin+0xca": 6,
+    "CarteCharger+0x124": 4,
+    "CarteCharger+0x1e3": 6,
+    "CarteCharger+0x20c": 6,
+    "Chemin_ModifieZone+0xe6": 5,
+    "Chemin_Remap+0x3b": 4,
+    "Chemin_Remap+0x8e": 4,
+    "Chemin_Remap+0x9": 2,
+    "EnginResetAll+0x49": 4,
+    "EnginResetAll+0x53": 4,
+    "EnginResetAll+0xab": 54,
+    "EnginSetTypeCaract+0x4c": 12,
+    "Engin_RetrieveExperimente+0x22": 40,
+    "ExisteEngin+0x18": 732,
+    "IconeReset+0x49": 20,
+    "IllumineCase+0x33": 4,
+    "IllumineCase+0x50": 8,
+    "InitEntrerMonstre+0x1c8": 8,
+    "MakeMissionName+0x15": 16,
+    "MakeMissionName+0x27": 20,
+    "MiniMapReset+0x1b": 12,
+    "MiniMapReset+0x6": 5,
+    "MissionLoad+0x208": 1,
+    "MissionLoad+0x34": 2,
+    "MissionLoad+0xd8": 12,
+    "MissionLoad+0xe7": 12,
+    "MurAjoute+0x8a": 32,
+    "PlayerGetType+0x17": 4,
+    "PlayerRetrieve+0x15": 4,
+    "PlayerRetrieve+0x4c": 32,
+    "PlayerRetrieve+0xf": 8,
+    "ProjectileReset+0x9": 4,
+    "SetMiniMap+0x135": 4,
+    "SetMiniMap+0x147": 6,
+    "TerrainEstObstacleNaturel+0x25": 360,
+    "TerrainGetColor+0x4a": 144,
+    "TypeEnginEstRealisable+0x19": 3,
+    "__STOSB+0x4": 3,
+    "__STOSD+0x27": 9,
+    "__prtf+0xa6": 1,
+    "__scnf+0x3f": 1,
+    "iaGroupNew+0xa8": 7,
+    "iaRandom+0xf": 1,
+    "iaReset+0x21e": 21,
+    "iaReset+0xca": 4,
+    "iagRessReset+0xe4": 12
+   },
+   "untouched_allocation_fill": {
+    "__STOSB+0x4": 2,
+    "__STOSD+0x27": 46
+   }
+  },
+  "mask_sizes": {
+   "declared_windows_input": 113,
+   "skip_derived_value": 21,
+   "untouched_allocation_fill": 882904
+  },
+  "method": "Unicorn read/write hooks over DGROUP+.bss, CRT thread page, native stack and all pre-entry arena bytes during the oracle only; binding writes mark destinations written; host-side fixture reads (e.g. fopen path strings) are not counted",
+  "perturbation_runs": {
+   "D": {
+    "binding_log_equal": true,
+    "final_bytes_differing_outside_entry_skip_mask": 0,
+    "real_return": true,
+    "seconds": 33.989
+   },
+   "E": {
+    "final_bytes_differing_outside_entry_input_mask": 11,
+    "real_return": true,
+    "seconds": 34.174
+   }
+  },
+  "ranges": 972,
+  "read_before_write_bytes": 1757,
+  "read_ranges": [
+   {
+    "bytes": 20,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x494b3b",
+    "first_reader": "MakeMissionName+0x27",
+    "start": "0x494b27"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x494eda",
+    "first_reader": "__prtf+0xa6",
+    "start": "0x494ed9"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x495a4b",
+    "first_reader": "__scnf+0x3f",
+    "start": "0x495a4a"
+   },
+   {
+    "bytes": 30,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x495c4e",
+    "first_reader": "BatimentModifyTerrain+0x107",
+    "start": "0x495c30"
+   },
+   {
+    "bytes": 4,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x495df8",
+    "first_reader": "BatimentModifyTerrain+0x45",
+    "start": "0x495df4"
+   },
+   {
+    "bytes": 4,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x495e00",
+    "first_reader": "BatimentModifyTerrain+0x101",
+    "start": "0x495dfc"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4962ca",
+    "first_reader": "Chemin_ModifieZone+0xe6",
+    "start": "0x4962c8"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4962ce",
+    "first_reader": "Chemin_ModifieZone+0xe6",
+    "start": "0x4962cd"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4962d1",
+    "first_reader": "Chemin_ModifieZone+0xe6",
+    "start": "0x4962cf"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x496306",
+    "first_reader": "Chemin_Remap+0x9",
+    "start": "0x496304"
+   },
+   {
+    "bytes": 8,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x496318",
+    "first_reader": "MurAjoute+0x8a",
+    "start": "0x496310"
+   },
+   {
+    "bytes": 8,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x496338",
+    "first_reader": "MurAjoute+0x8a",
+    "start": "0x496330"
+   },
+   {
+    "bytes": 8,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x496358",
+    "first_reader": "MurAjoute+0x8a",
+    "start": "0x496350"
+   },
+   {
+    "bytes": 8,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x496378",
+    "first_reader": "MurAjoute+0x8a",
+    "start": "0x496370"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4965d9",
+    "first_reader": "CarteCharger+0x1e3",
+    "start": "0x4965d8"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4965db",
+    "first_reader": "CarteCharger+0x20c",
+    "start": "0x4965da"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4965e0",
+    "first_reader": "EnginSetTypeCaract+0x4c",
+    "start": "0x4965de"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x49660b",
+    "first_reader": "CarteCharger+0x1e3",
+    "start": "0x49660a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x49660d",
+    "first_reader": "CarteCharger+0x20c",
+    "start": "0x49660c"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x496612",
+    "first_reader": "EnginSetTypeCaract+0x4c",
+    "start": "0x496610"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4966d3",
+    "first_reader": "CarteCharger+0x1e3",
+    "start": "0x4966d2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4966d5",
+    "first_reader": "CarteCharger+0x20c",
+    "start": "0x4966d4"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4966da",
+    "first_reader": "EnginSetTypeCaract+0x4c",
+    "start": "0x4966d8"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x496737",
+    "first_reader": "CarteCharger+0x1e3",
+    "start": "0x496736"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x496739",
+    "first_reader": "CarteCharger+0x20c",
+    "start": "0x496738"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x49673e",
+    "first_reader": "EnginSetTypeCaract+0x4c",
+    "start": "0x49673c"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x496769",
+    "first_reader": "CarteCharger+0x1e3",
+    "start": "0x496768"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x49676b",
+    "first_reader": "CarteCharger+0x20c",
+    "start": "0x49676a"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x496770",
+    "first_reader": "EnginSetTypeCaract+0x4c",
+    "start": "0x49676e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x49679b",
+    "first_reader": "CarteCharger+0x1e3",
+    "start": "0x49679a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x49679d",
+    "first_reader": "CarteCharger+0x20c",
+    "start": "0x49679c"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4967a2",
+    "first_reader": "EnginSetTypeCaract+0x4c",
+    "start": "0x4967a0"
+   },
+   {
+    "bytes": 5,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x496fe5",
+    "first_reader": "MiniMapReset+0x6",
+    "start": "0x496fe0"
+   },
+   {
+    "bytes": 16,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x497164",
+    "first_reader": "MakeMissionName+0x15",
+    "start": "0x497154"
+   },
+   {
+    "bytes": 8,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x498408",
+    "first_reader": "InitEntrerMonstre+0x1c8",
+    "start": "0x498400"
+   },
+   {
+    "bytes": 4,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x498468",
+    "first_reader": "iaReset+0xca",
+    "start": "0x498464"
+   },
+   {
+    "bytes": 3,
+    "classes": [
+     "declared_windows_input"
+    ],
+    "end": "0x498db7",
+    "first_reader": "iaRandom+0xf",
+    "start": "0x498db4"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x498db8",
+    "first_reader": "iaRandom+0xf",
+    "start": "0x498db7"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x498ec5",
+    "first_reader": "iaGroupNew+0xa8",
+    "start": "0x498ec4"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x498ed1",
+    "first_reader": "iaGroupNew+0xa8",
+    "start": "0x498ed0"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x498ee1",
+    "first_reader": "iaGroupNew+0xa8",
+    "start": "0x498ee0"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x498ee9",
+    "first_reader": "iaGroupNew+0xa8",
+    "start": "0x498ee8"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x498eed",
+    "first_reader": "iaGroupNew+0xa8",
+    "start": "0x498eec"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x498ef1",
+    "first_reader": "iaGroupNew+0xa8",
+    "start": "0x498ef0"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x498f05",
+    "first_reader": "iaGroupNew+0xa8",
+    "start": "0x498f04"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4dfbac",
+    "first_reader": "BonusGetValEngin+0xca",
+    "start": "0x4dfbab"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4dfbbe",
+    "first_reader": "BonusGetValEngin+0xca",
+    "start": "0x4dfbbd"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4dfc06",
+    "first_reader": "BonusGetValEngin+0xca",
+    "start": "0x4dfc05"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4dfc2a",
+    "first_reader": "BonusGetValEngin+0xca",
+    "start": "0x4dfc29"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4dfc3c",
+    "first_reader": "BonusGetValEngin+0xca",
+    "start": "0x4dfc3b"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4dfc4e",
+    "first_reader": "BonusGetValEngin+0xca",
+    "start": "0x4dfc4d"
+   },
+   {
+    "bytes": 4,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e0f3c",
+    "first_reader": "Chemin_Remap+0x8e",
+    "start": "0x4e0f38"
+   },
+   {
+    "bytes": 4,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e1570",
+    "first_reader": "Chemin_Remap+0x3b",
+    "start": "0x4e156c"
+   },
+   {
+    "bytes": 3,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e193c",
+    "first_reader": "TypeEnginEstRealisable+0x19",
+    "start": "0x4e1939"
+   },
+   {
+    "bytes": 4,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e19a4",
+    "first_reader": "CarteCharger+0x124",
+    "start": "0x4e19a0"
+   },
+   {
+    "bytes": 4,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e19bc",
+    "first_reader": "EnginResetAll+0x49",
+    "start": "0x4e19b8"
+   },
+   {
+    "bytes": 40,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e1a14",
+    "first_reader": "Engin_RetrieveExperimente+0x22",
+    "start": "0x4e19ec"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e2412",
+    "first_reader": "IconeReset+0x49",
+    "start": "0x4e2410"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e2418",
+    "first_reader": "IconeReset+0x49",
+    "start": "0x4e2416"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e241e",
+    "first_reader": "IconeReset+0x49",
+    "start": "0x4e241c"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e2424",
+    "first_reader": "IconeReset+0x49",
+    "start": "0x4e2422"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e242a",
+    "first_reader": "IconeReset+0x49",
+    "start": "0x4e2428"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e2430",
+    "first_reader": "IconeReset+0x49",
+    "start": "0x4e242e"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e2436",
+    "first_reader": "IconeReset+0x49",
+    "start": "0x4e2434"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e243c",
+    "first_reader": "IconeReset+0x49",
+    "start": "0x4e243a"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e2442",
+    "first_reader": "IconeReset+0x49",
+    "start": "0x4e2440"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e2448",
+    "first_reader": "IconeReset+0x49",
+    "start": "0x4e2446"
+   },
+   {
+    "bytes": 4,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4e24b8",
+    "first_reader": "SetMiniMap+0x135",
+    "start": "0x4e24b4"
+   },
+   {
+    "bytes": 12,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x507d68",
+    "first_reader": "MiniMapReset+0x1b",
+    "start": "0x507d5c"
+   },
+   {
+    "bytes": 12,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x507d7c",
+    "first_reader": "MissionLoad+0xe7",
+    "start": "0x507d70"
+   },
+   {
+    "bytes": 8,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x507d90",
+    "first_reader": "IllumineCase+0x50",
+    "start": "0x507d88"
+   },
+   {
+    "bytes": 4,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x507d9c",
+    "first_reader": "IllumineCase+0x33",
+    "start": "0x507d98"
+   },
+   {
+    "bytes": 12,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x507db4",
+    "first_reader": "MissionLoad+0xd8",
+    "start": "0x507da8"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x508042",
+    "first_reader": "MissionLoad+0x208",
+    "start": "0x508041"
+   },
+   {
+    "bytes": 8,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x5080b0",
+    "first_reader": "PlayerRetrieve+0xf",
+    "start": "0x5080a8"
+   },
+   {
+    "bytes": 4,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x5080f4",
+    "first_reader": "ProjectileReset+0x9",
+    "start": "0x5080f0"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "declared_windows_input"
+    ],
+    "end": "0x509595",
+    "first_reader": "MissionLoad+0x34",
+    "start": "0x509594"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x509597",
+    "first_reader": "MissionLoad+0x34",
+    "start": "0x509595"
+   },
+   {
+    "bytes": 14,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x5096b3",
+    "first_reader": "TerrainGetColor+0x4a",
+    "start": "0x5096a5"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x5096b8",
+    "first_reader": "TerrainGetColor+0x4a",
+    "start": "0x5096b7"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x5096ba",
+    "first_reader": "TerrainGetColor+0x4a",
+    "start": "0x5096b9"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x5096bd",
+    "first_reader": "TerrainGetColor+0x4a",
+    "start": "0x5096bb"
+   },
+   {
+    "bytes": 3,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x5096c2",
+    "first_reader": "TerrainGetColor+0x4a",
+    "start": "0x5096bf"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x50975c",
+    "first_reader": "TerrainGetColor+0x4a",
+    "start": "0x50975b"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x50975f",
+    "first_reader": "TerrainGetColor+0x4a",
+    "start": "0x50975e"
+   },
+   {
+    "bytes": 3,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x509766",
+    "first_reader": "TerrainGetColor+0x4a",
+    "start": "0x509763"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x50976c",
+    "first_reader": "TerrainGetColor+0x4a",
+    "start": "0x50976a"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x5097b3",
+    "first_reader": "TerrainGetColor+0x4a",
+    "start": "0x5097b1"
+   },
+   {
+    "bytes": 5,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x5097bb",
+    "first_reader": "TerrainGetColor+0x4a",
+    "start": "0x5097b6"
+   },
+   {
+    "bytes": 3,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x5097c2",
+    "first_reader": "TerrainGetColor+0x4a",
+    "start": "0x5097bf"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x5097c4",
+    "first_reader": "TerrainGetColor+0x4a",
+    "start": "0x5097c3"
+   },
+   {
+    "bytes": 38,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x5097eb",
+    "first_reader": "TerrainGetColor+0x4a",
+    "start": "0x5097c5"
+   },
+   {
+    "bytes": 67,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x509831",
+    "first_reader": "TerrainGetColor+0x4a",
+    "start": "0x5097ee"
+   },
+   {
+    "bytes": 7,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x51a9a5",
+    "first_reader": "iaReset+0x21e",
+    "start": "0x51a99e"
+   },
+   {
+    "bytes": 7,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x51a9b5",
+    "first_reader": "iaReset+0x21e",
+    "start": "0x51a9ae"
+   },
+   {
+    "bytes": 7,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x51a9c5",
+    "first_reader": "iaReset+0x21e",
+    "start": "0x51a9be"
+   },
+   {
+    "bytes": 4,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x51baf4",
+    "first_reader": "iagRessReset+0xe4",
+    "start": "0x51baf0"
+   },
+   {
+    "bytes": 4,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x51bb9c",
+    "first_reader": "iagRessReset+0xe4",
+    "start": "0x51bb98"
+   },
+   {
+    "bytes": 4,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x51bc44",
+    "first_reader": "iagRessReset+0xe4",
+    "start": "0x51bc40"
+   },
+   {
+    "bytes": 4,
+    "classes": [
+     "native_stack_entry_frame_or_stale"
+    ],
+    "end": "0x2007edc",
+    "first_reader": "VarResetAll",
+    "start": "0x2007ed8"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140201f",
+    "first_reader": "SetMiniMap+0x147",
+    "start": "0x4140201e"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140204b",
+    "first_reader": "SetMiniMap+0x147",
+    "start": "0x41402049"
+   },
+   {
+    "bytes": 2,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140209e",
+    "first_reader": "SetMiniMap+0x147",
+    "start": "0x4140209c"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414020e4",
+    "first_reader": "SetMiniMap+0x147",
+    "start": "0x414020e3"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140d003",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4140d002"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140e02f",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4140e02e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140e143",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140e142"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140e257",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140e256"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140e36b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140e36a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140e47f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140e47e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140e593",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140e592"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140e6a7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140e6a6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140e7bb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140e7ba"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140e8cf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140e8ce"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140e9e3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140e9e2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140eaf7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140eaf6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140ec0b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140ec0a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140ed1f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140ed1e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140ee33",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140ee32"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140ef47",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140ef46"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140f05b",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4140f05a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140f16f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140f16e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140f283",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140f282"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140f397",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140f396"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140f4ab",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140f4aa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140f5bf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140f5be"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140f6d3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140f6d2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140f7e7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140f7e6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140f8fb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140f8fa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140fa0f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140fa0e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140fb23",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140fb22"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140fc37",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140fc36"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140fd4b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140fd4a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140fe5f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140fe5e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4140ff73",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4140ff72"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41410087",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x41410086"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141019b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141019a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414102af",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414102ae"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414103c3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414103c2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414104d7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414104d6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414105eb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414105ea"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414106ff",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414106fe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41410813",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41410812"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41410927",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41410926"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41410a3b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41410a3a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41410b4f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41410b4e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41410c63",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41410c62"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41410d77",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41410d76"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41410e8b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41410e8a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41410f9f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41410f9e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414110b3",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x414110b2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414111c7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414111c6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414112db",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414112da"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414113ef",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414113ee"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41411503",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41411502"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41411617",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41411616"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141172b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141172a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141183f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141183e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41411953",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41411952"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41411a67",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41411a66"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41411b7b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41411b7a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41411c8f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41411c8e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41411da3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41411da2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41411eb7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41411eb6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41411fcb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41411fca"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414120df",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x414120de"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414121f3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414121f2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41412307",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41412306"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141241b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141241a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141252f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141252e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41412643",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41412642"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41412757",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41412756"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141286b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141286a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141297f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141297e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41412a93",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41412a92"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41412ba7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41412ba6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41412cbb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41412cba"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41412dcf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41412dce"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41412ee3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41412ee2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41412ff7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41412ff6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141310b",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4141310a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141321f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141321e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41413333",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41413332"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41413447",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41413446"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141355b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141355a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141366f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141366e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41413783",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41413782"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41413897",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41413896"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414139ab",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414139aa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41413abf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41413abe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41413bd3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41413bd2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41413ce7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41413ce6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41413dfb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41413dfa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41413f0f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41413f0e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41414023",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x41414022"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41414137",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41414136"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141424b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141424a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141435f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141435e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41414473",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41414472"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41414587",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41414586"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141469b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141469a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414147af",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414147ae"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414148c3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414148c2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414149d7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414149d6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41414aeb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41414aea"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41414bff",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41414bfe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41414d13",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41414d12"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41414e27",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41414e26"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41414f3b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41414f3a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141504f",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4141504e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41415163",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41415162"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41415277",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41415276"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141538b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141538a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141549f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141549e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414155b3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414155b2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414156c7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414156c6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414157db",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414157da"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414158ef",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414158ee"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41415a03",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41415a02"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41415b17",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41415b16"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41415c2b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41415c2a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41415d3f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41415d3e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41415e53",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41415e52"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41415f67",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41415f66"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141607b",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4141607a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141618f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141618e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414162a3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414162a2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414163b7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414163b6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414164cb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414164ca"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414165df",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414165de"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414166f3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414166f2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41416807",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41416806"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141691b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141691a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41416a2f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41416a2e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41416b43",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41416b42"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41416c57",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41416c56"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41416d6b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41416d6a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41416e7f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41416e7e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41416f93",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41416f92"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414170a7",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x414170a6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414171bb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414171ba"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414172cf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414172ce"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414173e3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414173e2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414174f7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414174f6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141760b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141760a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141771f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141771e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41417833",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41417832"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41417947",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41417946"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41417a5b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41417a5a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41417b6f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41417b6e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41417c83",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41417c82"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41417d97",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41417d96"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41417eab",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41417eaa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41417fbf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41417fbe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414180d3",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x414180d2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414181e7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414181e6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414182fb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414182fa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141840f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141840e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41418523",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41418522"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41418637",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41418636"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141874b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141874a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141885f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141885e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41418973",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41418972"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41418a87",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41418a86"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41418b9b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41418b9a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41418caf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41418cae"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41418dc3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41418dc2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41418ed7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41418ed6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41418feb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41418fea"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414190ff",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x414190fe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41419213",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41419212"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41419327",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41419326"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141943b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141943a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141954f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141954e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41419663",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41419662"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41419777",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41419776"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141988b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141988a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141999f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141999e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41419ab3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41419ab2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41419bc7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41419bc6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41419cdb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41419cda"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41419def",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41419dee"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41419f03",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41419f02"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141a017",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4141a016"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141a12b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141a12a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141a23f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141a23e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141a353",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141a352"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141a467",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141a466"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141a57b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141a57a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141a68f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141a68e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141a7a3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141a7a2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141a8b7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141a8b6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141a9cb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141a9ca"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141aadf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141aade"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141abf3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141abf2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141ad07",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141ad06"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141ae1b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141ae1a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141af2f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141af2e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141b043",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4141b042"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141b157",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141b156"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141b26b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141b26a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141b37f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141b37e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141b493",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141b492"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141b5a7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141b5a6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141b6bb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141b6ba"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141b7cf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141b7ce"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141b8e3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141b8e2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141b9f7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141b9f6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141bb0b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141bb0a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141bc1f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141bc1e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141bd33",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141bd32"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141be47",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141be46"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141bf5b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141bf5a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141c06f",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4141c06e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141c183",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141c182"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141c297",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141c296"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141c3ab",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141c3aa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141c4bf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141c4be"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141c5d3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141c5d2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141c6e7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141c6e6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141c7fb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141c7fa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141c90f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141c90e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141ca23",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141ca22"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141cb37",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141cb36"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141cc4b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141cc4a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141cd5f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141cd5e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141ce73",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141ce72"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141cf87",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141cf86"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141d09b",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4141d09a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141d1af",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141d1ae"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141d2c3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141d2c2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141d3d7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141d3d6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141d4eb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141d4ea"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141d5ff",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141d5fe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141d713",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141d712"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141d827",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141d826"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141d93b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141d93a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141da4f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141da4e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141db63",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141db62"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141dc77",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141dc76"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141dd8b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141dd8a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141de9f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141de9e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141dfb3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141dfb2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141e0c7",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4141e0c6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141e1db",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141e1da"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141e2ef",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141e2ee"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141e403",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141e402"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141e517",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141e516"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141e62b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141e62a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141e73f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141e73e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141e853",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141e852"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141e967",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141e966"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141ea7b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141ea7a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141eb8f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141eb8e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141eca3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141eca2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141edb7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141edb6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141eecb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141eeca"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141efdf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141efde"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141f0f3",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4141f0f2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141f207",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141f206"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141f31b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141f31a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141f42f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141f42e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141f543",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141f542"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141f657",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141f656"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141f76b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141f76a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141f87f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141f87e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141f993",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141f992"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141faa7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141faa6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141fbbb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141fbba"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141fccf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141fcce"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141fde3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141fde2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4141fef7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4141fef6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142000b",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4142000a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142011f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142011e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41420233",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41420232"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41420347",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41420346"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142045b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142045a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142056f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142056e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41420683",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41420682"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41420797",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41420796"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414208ab",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414208aa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414209bf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414209be"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41420ad3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41420ad2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41420be7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41420be6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41420cfb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41420cfa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41420e0f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41420e0e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41420f23",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41420f22"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41421037",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x41421036"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142114b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142114a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142125f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142125e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41421373",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41421372"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41421487",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41421486"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142159b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142159a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414216af",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414216ae"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414217c3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414217c2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414218d7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414218d6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414219eb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414219ea"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41421aff",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41421afe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41421c13",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41421c12"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41421d27",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41421d26"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41421e3b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41421e3a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41421f4f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41421f4e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41422063",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x41422062"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41422177",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41422176"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142228b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142228a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142239f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142239e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414224b3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414224b2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414225c7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414225c6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414226db",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414226da"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414227ef",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414227ee"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41422903",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41422902"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41422a17",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41422a16"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41422b2b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41422b2a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41422c3f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41422c3e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41422d53",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41422d52"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41422e67",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41422e66"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41422f7b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41422f7a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142308f",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4142308e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414231a3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414231a2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414232b7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414232b6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414233cb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414233ca"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414234df",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414234de"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414235f3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414235f2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41423707",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41423706"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142381b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142381a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142392f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142392e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41423a43",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41423a42"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41423b57",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41423b56"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41423c6b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41423c6a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41423d7f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41423d7e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41423e93",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41423e92"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41423fa7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41423fa6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414240bb",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x414240ba"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414241cf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414241ce"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414242e3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414242e2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414243f7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414243f6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142450b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142450a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142461f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142461e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41424733",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41424732"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41424847",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41424846"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142495b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142495a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41424a6f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41424a6e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41424b83",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41424b82"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41424c97",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41424c96"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41424dab",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41424daa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41424ebf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41424ebe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41424fd3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41424fd2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414250e7",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x414250e6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414251fb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414251fa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142530f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142530e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41425423",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41425422"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41425537",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41425536"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142564b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142564a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142575f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142575e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41425873",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41425872"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41425987",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41425986"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41425a9b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41425a9a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41425baf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41425bae"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41425cc3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41425cc2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41425dd7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41425dd6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41425eeb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41425eea"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41425fff",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41425ffe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41426113",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x41426112"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41426227",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41426226"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142633b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142633a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142644f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142644e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41426563",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41426562"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41426677",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41426676"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142678b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142678a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142689f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142689e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414269b3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414269b2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41426ac7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41426ac6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41426bdb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41426bda"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41426cef",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41426cee"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41426e03",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41426e02"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41426f17",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41426f16"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142702b",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4142702a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142713f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142713e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41427253",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41427252"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41427367",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41427366"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142747b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142747a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142758f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142758e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414276a3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414276a2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414277b7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414277b6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414278cb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414278ca"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414279df",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414279de"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41427af3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41427af2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41427c07",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41427c06"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41427d1b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41427d1a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41427e2f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41427e2e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41427f43",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41427f42"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41428057",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x41428056"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142816b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142816a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142827f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142827e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41428393",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41428392"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414284a7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414284a6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414285bb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414285ba"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414286cf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414286ce"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414287e3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414287e2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414288f7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414288f6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41428a0b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41428a0a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41428b1f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41428b1e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41428c33",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41428c32"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41428d47",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41428d46"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41428e5b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41428e5a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41428f6f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41428f6e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41429083",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x41429082"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41429197",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41429196"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414292ab",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414292aa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414293bf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414293be"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414294d3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414294d2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414295e7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414295e6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414296fb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414296fa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142980f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142980e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41429923",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41429922"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41429a37",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41429a36"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41429b4b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41429b4a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41429c5f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41429c5e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41429d73",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41429d72"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41429e87",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41429e86"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41429f9b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41429f9a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142a0af",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4142a0ae"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142a1c3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142a1c2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142a2d7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142a2d6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142a3eb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142a3ea"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142a4ff",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142a4fe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142a613",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142a612"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142a727",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142a726"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142a83b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142a83a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142a94f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142a94e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142aa63",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142aa62"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142ab77",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142ab76"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142ac8b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142ac8a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142ad9f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142ad9e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142aeb3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142aeb2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142afc7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142afc6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142b0db",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4142b0da"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142b1ef",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142b1ee"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142b303",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142b302"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142b417",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142b416"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142b52b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142b52a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142b63f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142b63e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142b753",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142b752"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142b867",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142b866"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142b97b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142b97a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142ba8f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142ba8e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142bba3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142bba2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142bcb7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142bcb6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142bdcb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142bdca"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142bedf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142bede"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142bff3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142bff2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142c107",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4142c106"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142c21b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142c21a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142c32f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142c32e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142c443",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142c442"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142c557",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142c556"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142c66b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142c66a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142c77f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142c77e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142c893",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142c892"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142c9a7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142c9a6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142cabb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142caba"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142cbcf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142cbce"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142cce3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142cce2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142cdf7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142cdf6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142cf0b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142cf0a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142d01f",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4142d01e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142d133",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142d132"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142d247",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142d246"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142d35b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142d35a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142d46f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142d46e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142d583",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142d582"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142d697",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142d696"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142d7ab",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142d7aa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142d8bf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142d8be"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142d9d3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142d9d2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142dae7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142dae6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142dbfb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142dbfa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142dd0f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142dd0e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142de23",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142de22"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142df37",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142df36"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142e04b",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4142e04a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142e15f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142e15e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142e273",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142e272"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142e387",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142e386"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142e49b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142e49a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142e5af",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142e5ae"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142e6c3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142e6c2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142e7d7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142e7d6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142e8eb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142e8ea"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142e9ff",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142e9fe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142eb13",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142eb12"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142ec27",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142ec26"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142ed3b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142ed3a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142ee4f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142ee4e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142ef63",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142ef62"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142f077",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4142f076"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142f18b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142f18a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142f29f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142f29e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142f3b3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142f3b2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142f4c7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142f4c6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142f5db",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142f5da"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142f6ef",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142f6ee"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142f803",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142f802"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142f917",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142f916"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142fa2b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142fa2a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142fb3f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142fb3e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142fc53",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142fc52"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142fd67",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142fd66"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142fe7b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142fe7a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4142ff8f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4142ff8e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414300a3",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x414300a2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414301b7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414301b6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414302cb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414302ca"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414303df",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414303de"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414304f3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414304f2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41430607",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41430606"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143071b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143071a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143082f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143082e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41430943",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41430942"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41430a57",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41430a56"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41430b6b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41430b6a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41430c7f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41430c7e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41430d93",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41430d92"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41430ea7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41430ea6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41430fbb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41430fba"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414310cf",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x414310ce"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414311e3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414311e2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414312f7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414312f6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143140b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143140a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143151f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143151e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41431633",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41431632"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41431747",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41431746"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143185b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143185a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143196f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143196e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41431a83",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41431a82"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41431b97",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41431b96"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41431cab",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41431caa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41431dbf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41431dbe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41431ed3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41431ed2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41431fe7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41431fe6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414320fb",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x414320fa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143220f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143220e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41432323",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41432322"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41432437",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41432436"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143254b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143254a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143265f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143265e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41432773",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41432772"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41432887",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41432886"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143299b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143299a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41432aaf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41432aae"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41432bc3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41432bc2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41432cd7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41432cd6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41432deb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41432dea"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41432eff",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41432efe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41433013",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x41433012"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41433127",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41433126"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143323b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143323a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143334f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143334e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41433463",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41433462"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41433577",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41433576"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143368b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143368a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143379f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143379e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414338b3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414338b2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414339c7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414339c6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41433adb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41433ada"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41433bef",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41433bee"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41433d03",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41433d02"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41433e17",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41433e16"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41433f2b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41433f2a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143403f",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4143403e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41434153",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41434152"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41434267",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41434266"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143437b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143437a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143448f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143448e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414345a3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414345a2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414346b7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414346b6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414347cb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414347ca"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414348df",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414348de"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414349f3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414349f2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41434b07",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41434b06"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41434c1b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41434c1a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41434d2f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41434d2e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41434e43",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41434e42"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41434f57",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41434f56"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143506b",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4143506a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143517f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143517e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41435293",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41435292"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414353a7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414353a6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414354bb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414354ba"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414355cf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414355ce"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414356e3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414356e2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414357f7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414357f6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143590b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143590a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41435a1f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41435a1e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41435b33",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41435b32"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41435c47",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41435c46"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41435d5b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41435d5a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41435e6f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41435e6e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41435f83",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41435f82"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41436097",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x41436096"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414361ab",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414361aa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414362bf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414362be"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414363d3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414363d2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414364e7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414364e6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414365fb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414365fa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143670f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143670e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41436823",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41436822"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41436937",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41436936"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41436a4b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41436a4a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41436b5f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41436b5e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41436c73",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41436c72"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41436d87",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41436d86"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41436e9b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41436e9a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41436faf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41436fae"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414370c3",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x414370c2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414371d7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414371d6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414372eb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414372ea"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414373ff",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414373fe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41437513",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41437512"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41437627",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41437626"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143773b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143773a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143784f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143784e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41437963",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41437962"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41437a77",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41437a76"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41437b8b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41437b8a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41437c9f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41437c9e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41437db3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41437db2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41437ec7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41437ec6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41437fdb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41437fda"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414380ef",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x414380ee"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41438203",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41438202"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41438317",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41438316"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143842b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143842a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143853f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143853e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41438653",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41438652"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41438767",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41438766"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143887b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143887a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143898f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143898e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41438aa3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41438aa2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41438bb7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41438bb6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41438ccb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41438cca"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41438ddf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41438dde"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41438ef3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41438ef2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41439007",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x41439006"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143911b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143911a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143922f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143922e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41439343",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41439342"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41439457",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41439456"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143956b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143956a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143967f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143967e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41439793",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41439792"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414398a7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414398a6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414399bb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414399ba"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41439acf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41439ace"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41439be3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41439be2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41439cf7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41439cf6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41439e0b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41439e0a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41439f1f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41439f1e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143a033",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4143a032"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143a147",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143a146"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143a25b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143a25a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143a36f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143a36e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143a483",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143a482"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143a597",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143a596"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143a6ab",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143a6aa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143a7bf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143a7be"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143a8d3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143a8d2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143a9e7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143a9e6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143aafb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143aafa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143ac0f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143ac0e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143ad23",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143ad22"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143ae37",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143ae36"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143af4b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143af4a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143b05f",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4143b05e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143b173",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143b172"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143b287",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143b286"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143b39b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143b39a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143b4af",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143b4ae"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143b5c3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143b5c2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143b6d7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143b6d6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143b7eb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143b7ea"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143b8ff",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143b8fe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143ba13",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143ba12"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143bb27",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143bb26"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143bc3b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143bc3a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143bd4f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143bd4e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143be63",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143be62"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143bf77",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143bf76"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143c08b",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4143c08a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143c19f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143c19e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143c2b3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143c2b2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143c3c7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143c3c6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143c4db",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143c4da"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143c5ef",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143c5ee"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143c703",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143c702"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143c817",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143c816"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143c92b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143c92a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143ca3f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143ca3e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143cb53",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143cb52"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143cc67",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143cc66"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143cd7b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143cd7a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143ce8f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143ce8e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143cfa3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143cfa2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143d0b7",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4143d0b6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143d1cb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143d1ca"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143d2df",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143d2de"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143d3f3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143d3f2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143d507",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143d506"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143d61b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143d61a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143d72f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143d72e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143d843",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143d842"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143d957",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143d956"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143da6b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143da6a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143db7f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143db7e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143dc93",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143dc92"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143dda7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143dda6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143debb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143deba"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143dfcf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143dfce"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143e0e3",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4143e0e2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143e1f7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143e1f6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143e30b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143e30a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143e41f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143e41e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143e533",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143e532"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143e647",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143e646"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143e75b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143e75a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143e86f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143e86e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143e983",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143e982"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143ea97",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143ea96"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143ebab",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143ebaa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143ecbf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143ecbe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143edd3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143edd2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143eee7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143eee6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143effb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143effa"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143f10f",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4143f10e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143f223",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143f222"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143f337",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143f336"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143f44b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143f44a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143f55f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143f55e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143f673",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143f672"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143f787",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143f786"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143f89b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143f89a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143f9af",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143f9ae"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143fac3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143fac2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143fbd7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143fbd6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143fceb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143fcea"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143fdff",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143fdfe"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4143ff13",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4143ff12"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41440027",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x41440026"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4144013b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4144013a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4144024f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4144024e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41440363",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41440362"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41440477",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41440476"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4144058b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4144058a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4144069f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4144069e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414407b3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414407b2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414408c7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414408c6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414409db",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414409da"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41440aef",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41440aee"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41440c03",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41440c02"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41440d17",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41440d16"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41440e2b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41440e2a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41440f3f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41440f3e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41441053",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x41441052"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41441167",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41441166"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4144127b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4144127a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4144138f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4144138e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414414a3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414414a2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414415b7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414415b6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414416cb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414416ca"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414417df",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414417de"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414418f3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414418f2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41441a07",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41441a06"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41441b1b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41441b1a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41441c2f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41441c2e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41441d43",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41441d42"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41441e57",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41441e56"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41441f6b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41441f6a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4144207f",
+    "first_reader": "EnginResetAll+0xab",
+    "start": "0x4144207e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41442193",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41442192"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414422a7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414422a6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414423bb",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414423ba"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414424cf",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414424ce"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414425e3",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414425e2"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x414426f7",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x414426f6"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4144280b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4144280a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4144291f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x4144291e"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41442a33",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41442a32"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41442b47",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41442b46"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41442c5b",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41442c5a"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41442d6f",
+    "first_reader": "ExisteEngin+0x18",
+    "start": "0x41442d6e"
+   },
+   {
+    "bytes": 4,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41780004",
+    "first_reader": "EnginResetAll+0x53",
+    "start": "0x41780000"
+   },
+   {
+    "bytes": 14,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x417d501f",
+    "first_reader": "TerrainEstObstacleNaturel+0x25",
+    "start": "0x417d5011"
+   },
+   {
+    "bytes": 14,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x417d502e",
+    "first_reader": "TerrainEstObstacleNaturel+0x25",
+    "start": "0x417d5020"
+   },
+   {
+    "bytes": 24,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x417d5087",
+    "first_reader": "TerrainEstObstacleNaturel+0x25",
+    "start": "0x417d506f"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x417d5094",
+    "first_reader": "TerrainEstObstacleNaturel+0x25",
+    "start": "0x417d5093"
+   },
+   {
+    "bytes": 64,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x417d50dd",
+    "first_reader": "TerrainEstObstacleNaturel+0x25",
+    "start": "0x417d509d"
+   },
+   {
+    "bytes": 128,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x417d519d",
+    "first_reader": "TerrainEstObstacleNaturel+0x25",
+    "start": "0x417d511d"
+   },
+   {
+    "bytes": 101,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x417d5242",
+    "first_reader": "TerrainEstObstacleNaturel+0x25",
+    "start": "0x417d51dd"
+   },
+   {
+    "bytes": 4,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x417d5255",
+    "first_reader": "TerrainEstObstacleNaturel+0x25",
+    "start": "0x417d5251"
+   },
+   {
+    "bytes": 10,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x417d5261",
+    "first_reader": "TerrainEstObstacleNaturel+0x25",
+    "start": "0x417d5257"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41896002",
+    "first_reader": "PlayerGetType+0x17",
+    "start": "0x41896001"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41896016",
+    "first_reader": "PlayerGetType+0x17",
+    "start": "0x41896015"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4189602a",
+    "first_reader": "PlayerGetType+0x17",
+    "start": "0x41896029"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4189603e",
+    "first_reader": "PlayerGetType+0x17",
+    "start": "0x4189603d"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41897007",
+    "first_reader": "PlayerRetrieve+0x15",
+    "start": "0x41897006"
+   },
+   {
+    "bytes": 8,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41897014",
+    "first_reader": "PlayerRetrieve+0x4c",
+    "start": "0x4189700c"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4189701b",
+    "first_reader": "PlayerRetrieve+0x15",
+    "start": "0x4189701a"
+   },
+   {
+    "bytes": 8,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41897028",
+    "first_reader": "PlayerRetrieve+0x4c",
+    "start": "0x41897020"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4189702f",
+    "first_reader": "PlayerRetrieve+0x15",
+    "start": "0x4189702e"
+   },
+   {
+    "bytes": 8,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4189703c",
+    "first_reader": "PlayerRetrieve+0x4c",
+    "start": "0x41897034"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41897043",
+    "first_reader": "PlayerRetrieve+0x15",
+    "start": "0x41897042"
+   },
+   {
+    "bytes": 8,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41897050",
+    "first_reader": "PlayerRetrieve+0x4c",
+    "start": "0x41897048"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41898001",
+    "first_reader": "__STOSB+0x4",
+    "start": "0x41898000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x41899001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x41899000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4189a001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x4189a000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4189b001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x4189b000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4189c001",
+    "first_reader": "__STOSB+0x4",
+    "start": "0x4189c000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4189d001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x4189d000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4189e001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x4189e000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x4189f001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x4189f000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x418a0001",
+    "first_reader": "__STOSB+0x4",
+    "start": "0x418a0000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x418a1001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418a1000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x418a2001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418a2000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "startup_executed_original_code_or_pe_image"
+    ],
+    "end": "0x418a3001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418a3000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418a4001",
+    "first_reader": "__STOSB+0x4",
+    "start": "0x418a4000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418a5001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418a5000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418a6001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418a6000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418a7001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418a7000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418a8001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418a8000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418a9001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418a9000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418aa001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418aa000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418ab001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418ab000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418ac001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418ac000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418ad001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418ad000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418ae001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418ae000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418af001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418af000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418b0001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418b0000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418b1001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418b1000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418b2001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418b2000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418b3001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418b3000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418b4001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418b4000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418b5001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418b5000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418b6001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418b6000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418b7001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418b7000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418b8001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418b8000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418b9001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418b9000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418ba001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418ba000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418bb001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418bb000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418bc001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418bc000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418bd001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418bd000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418be001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418be000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418bf001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418bf000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418c0001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418c0000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418c1001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418c1000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418c2001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418c2000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418c3001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418c3000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418c4001",
+    "first_reader": "__STOSB+0x4",
+    "start": "0x418c4000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418c5001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418c5000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418c6001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418c6000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418c7001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418c7000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418c8001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418c8000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418c9001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418c9000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418ca001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418ca000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418cb001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418cb000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418cc001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418cc000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418cd001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418cd000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418ce001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418ce000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418cf001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418cf000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418d0001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418d0000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418d1001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418d1000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418d2001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418d2000"
+   },
+   {
+    "bytes": 1,
+    "classes": [
+     "untouched_allocation_fill"
+    ],
+    "end": "0x418d3001",
+    "first_reader": "__STOSD+0x27",
+    "start": "0x418d3000"
+   }
+  ]
+ },
+ "m1_accepted": false,
+ "passed": true,
+ "replay": {
+  "al": 1,
+  "binding_log_equal": true,
+  "final_equal": true,
+  "inherited_equal": true,
+  "note": "footprint hooks were active in this replay",
+  "real_return": true,
+  "seconds": 36.851
+ },
+ "schema": "rising-lands/missionload-original-validation/1",
+ "segmentation_invariance": {
+  "al_equal": true,
+  "binding_log_equal": true,
+  "entry_equal": true,
+  "final_equal": true,
+  "oracle_instructions_per_segment": [
+   1000000,
+   77777
+  ],
+  "oracle_segments": [
+   1425,
+   1741
+  ],
+  "real_return": true,
+  "seconds": 33.364
+ },
+ "source_revision": "81815eb33e9f3b34735a1540900dc1b7dc3a4a31",
+ "translation_executed": false
+}
