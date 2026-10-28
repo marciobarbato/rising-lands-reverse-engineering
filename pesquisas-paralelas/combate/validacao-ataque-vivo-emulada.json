@@ -1,0 +1,221 @@
+{
+  "success": false,
+  "tests": 41,
+  "failures": 0,
+  "errors": 1,
+  "skipped": [],
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_normalized_analysis_only": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "original_ranges": "SetAttaqueEngin 0x445a36..0x445af1; EnginNextEtape branch 0x45673b..0x4568ad (entry 0x456886, exit 0x454ccd); declared prelude head 0x45442c..0x454591; CalculAttaqueEngin 0x451914; ProjectileCalcul 0x46fc0f; InfligeDegat/EnginInfligeDegat/SetDyingEngin and their callees",
+  "bounded_x86_executions": 17396,
+  "per_test": [
+    {
+      "teste": "test_ataque_vivo.ContratosAtaqueVivo.test_invalid_target_paths_and_order",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_ataque_vivo.ContratosAtaqueVivo.test_missing_providers_are_named",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_ataque_vivo.ContratosAtaqueVivo.test_mode3_queries_and_untranslated_modes",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_ataque_vivo.ContratosAtaqueVivo.test_original_only_captures_reproduced",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_ataque_vivo.ContratosAtaqueVivo.test_player_type_and_structure_getters",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_ataque_vivo.ContratosAtaqueVivo.test_set_attack_resets_before_refusal_and_keeps_same_order",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_ataque_vivo.DiferencialAtaqueVivo.test_branch_and_set_attack_entries",
+      "execucoes_x86_delimitadas": 20
+    },
+    {
+      "teste": "test_ataque_vivo.DiferencialAtaqueVivo.test_melee_monster_chain_to_physical_death",
+      "execucoes_x86_delimitadas": 667
+    },
+    {
+      "teste": "test_ataque_vivo.DiferencialAtaqueVivo.test_named_stops_in_the_chain",
+      "execucoes_x86_delimitadas": 160
+    },
+    {
+      "teste": "test_ataque_vivo.DiferencialAtaqueVivo.test_ranged_monster_chain_to_physical_death",
+      "execucoes_x86_delimitadas": 248
+    },
+    {
+      "teste": "test_animacao_disparo.ContratosAnimacao.test_disparo_especial_duplo_e_flag_do_alvo",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.ContratosAnimacao.test_incremento_overflow_igualdade_e_divisor",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.ContratosAnimacao.test_quadros_estaticos_e_attaque_termine",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.ContratosAnimacao.test_som_e_efeito_externo_obrigatorio",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.ContratosAnimacao.test_subestado2_underflow_e_subestado3_sem_reiniciar_fase",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_animacao_26_tipos_subestados_overflow_e_quadro255",
+      "execucoes_x86_delimitadas": 3744
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_ciclo_continuo_60_atualizacoes",
+      "execucoes_x86_delimitadas": 60
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_disparo_indice7",
+      "execucoes_x86_delimitadas": 1
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_emissao_com_slot_livre_executa_projectile_set_original",
+      "execucoes_x86_delimitadas": 1
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_fronteiras_balao_e_som_nao_sao_mocks",
+      "execucoes_x86_delimitadas": 2
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_giro_corpo_e_torre",
+      "execucoes_x86_delimitadas": 1200
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_magia_invalida_seguida_reset_original",
+      "execucoes_x86_delimitadas": 6
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_saidas_e_deslocamentos_do_corpo_tipos_orientacoes",
+      "execucoes_x86_delimitadas": 896
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestado0_preparacao_giro_recarga_e_navegacao_delegada",
+      "execucoes_x86_delimitadas": 234
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestado1_disparo_e_retorno_de_quadros_todos_tipos",
+      "execucoes_x86_delimitadas": 312
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestado1_melee_sem_duplicar_dano",
+      "execucoes_x86_delimitadas": 26
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestado2_contador_animacao16_e_limpeza",
+      "execucoes_x86_delimitadas": 200
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestado3_e_invalido_todos_tipos_sem_rng",
+      "execucoes_x86_delimitadas": 312
+    },
+    {
+      "teste": "test_animacao_disparo.DiferencialAnimacao.test_subestados_construcoes_com_consultas_originais",
+      "execucoes_x86_delimitadas": 72
+    },
+    {
+      "teste": "test_maquina_projeteis.ContratosMaquina.test_calcul_30_passagens_portao_e_inativos",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_maquina_projeteis.ContratosMaquina.test_circulo30_sem_dano_central_duplicado",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_maquina_projeteis.ContratosMaquina.test_falta_rng_preserva_desativacao_anterior",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_maquina_projeteis.ContratosMaquina.test_temporarios_ordem_desativacao_e_igualdade",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_maquina_projeteis.ContratosMaquina.test_tipo28_tempo_word_e_atacante_byte",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_maquina_projeteis.ContratosMaquina.test_tipo33_filho_destino_antigo_dano_destino_novo",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_maquina_projeteis.DiferencialMaquina.test_calcul_misto_com_area_sorteio_luz_e_expiracao",
+      "execucoes_x86_delimitadas": 1837
+    },
+    {
+      "teste": "test_maquina_projeteis.DiferencialMaquina.test_calcul_pool_inativo_e_criacoes_antes_depois_do_pai",
+      "execucoes_x86_delimitadas": 2974
+    },
+    {
+      "teste": "test_maquina_projeteis.DiferencialMaquina.test_despacho_todos_bytes_tipo_e_quadros",
+      "execucoes_x86_delimitadas": 2560
+    },
+    {
+      "teste": "test_maquina_projeteis.DiferencialMaquina.test_tipo28_tempo_16bits_e_extincao_sem_celulas",
+      "execucoes_x86_delimitadas": 70
+    },
+    {
+      "teste": "test_maquina_projeteis.DiferencialMaquina.test_tipo30_circulo_cantos_recorte_e_pool_cheio",
+      "execucoes_x86_delimitadas": 1734
+    },
+    {
+      "teste": "test_maquina_projeteis.DiferencialMaquina.test_tipo33_sorteio_destino_e_saturacao",
+      "execucoes_x86_delimitadas": 60
+    }
+  ],
+  "lockstep_segments": 847,
+  "chain_frames": 273,
+  "final_stops": {
+    "branch-mode1-target-dying": null,
+    "branch-mode1-target-owner200": null,
+    "branch-mode1-target-hidden72": null,
+    "branch-mode1-no-target": null,
+    "branch-mode1-ai-attacker-stop": "iagUnitSendMessage",
+    "branch-mode1-valid-prepare": null,
+    "branch-mode3-no-target": null,
+    "branch-mode3-destroying": null,
+    "branch-mode3-owner200": null,
+    "branch-mode3-valid-checkpoint": "CalculAttaqueEngin",
+    "branch-mode5-cell": "DeplaceEngin",
+    "set-mode1-accept": null,
+    "set-same-order-early": null,
+    "set-mode1-self": null,
+    "set-mode3-accept": null,
+    "set-mode5-accept": null,
+    "set-mode2-reset-only": null,
+    "set-colonist-refused": null,
+    "set-builder-refused": null,
+    "set-moving-attacker": null,
+    "melee-monster-to-death": "iagUnitSendMessage",
+    "diplomacy-stop-ai-attacker": "PlayerAAttaqueSet",
+    "audio-stop-visible-attacker": "EnginGetVolume",
+    "level-stop-soldier-kill": "EnginSetLevelExperience"
+  },
+  "native_8a_writes": {
+    "0x445ab3 -> 0": 19,
+    "0x445ad1 -> 0": 2,
+    "0x451e08 -> 1": 14,
+    "0x452a3a -> 0": 11
+  },
+  "compared_state": "Per segment: units, structures, groups, objects, every Core grid and route, projectile pool, search/iteration/alert globals in full bytes; every other mapped page must stay unchanged",
+  "regression_x86": 16301,
+  "scope": "Declared synthetic world with real loaded type/DEGAT tables: SetAttaqueEngin, branch validity, emission, live pool, ProjectileCalcul, impact, damage, retaliation and Core physical death",
+  "excluded": "Full EnginNextEtape prelude/dispatcher order, AI message bodies, audio, diplomacy statistics, movement, RNG, level experience, building-target damage, real MONDE01 placement",
+  "diagnostics": [
+    {
+      "test": "test_ataque_vivo.DiferencialAtaqueVivo.test_ranged_monster_chain_to_physical_death",
+      "detail": "Traceback (most recent call last):\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/test_ataque_vivo.py\", line 333, in test_ranged_monster_chain_to_physical_death\n    fim = self.lockstep('ranged-monster-to-death')\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/test_ataque_vivo.py\", line 321, in lockstep\n    conduzir(nome, Par(), lambda seg, q, un, parada: ultimo.append((seg, q, parada)))\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/test_ataque_vivo.py\", line 145, in conduzir\n    if passo('ProjectileCalcul', quadro, None, ex.projeteis):\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/test_ataque_vivo.py\", line 130, in passo\n    parada = chamada()\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/test_ataque_vivo.py\", line 306, in projeteis\n    return self._par(b.projeteis, py.projeteis)\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/test_ataque_vivo.py\", line 284, in _par\n    parada_n, _ = nativo()\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/bancada_ataque_vivo.py\", line 103, in projeteis\n    return self._segmento(0x46fc0f, None, RETORNO)\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/bancada_ataque_vivo.py\", line 76, in _segmento\n    r = self.executar(entrada, INTERVALOS, registradores, parada={saida, *PARADAS},\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/ferramentas/emulador.py\", line 95, in executar\n    return self._executar_ate_parada(entrada, limite_instrucoes)\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/ferramentas/emulador.py\", line 113, in _executar_ate_parada\n    raise RuntimeError('Trecho n\u00e3o alcan\u00e7ou a parada dentro do limite da bancada')\nRuntimeError: Trecho n\u00e3o alcan\u00e7ou a parada dentro do limite da bancada\n"
+    }
+  ]
+}
