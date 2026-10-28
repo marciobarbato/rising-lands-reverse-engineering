@@ -1,0 +1,69 @@
+{
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "ranges": [
+    {
+      "symbol": "EnginInfligeDegat",
+      "start": "0x004502f0",
+      "end_exclusive": "0x00450856",
+      "sha256_bytes": "e829541752adaf3ccc6d881217a0bc17ee319e253238225353c5717a24a5ae31",
+      "file": "consumo-004502f0.asm"
+    },
+    {
+      "symbol": "ChercheTypeEnginProximite",
+      "start": "0x004500e4",
+      "end_exclusive": "0x00450286",
+      "sha256_bytes": "0584acae56bc982e07a85107b3c0948046b4b88edf378cb491d3c1e00eb1a7c9",
+      "file": "consumo-004500e4.asm"
+    },
+    {
+      "symbol": "ChercheIndiceEnginCible",
+      "start": "0x004465df",
+      "end_exclusive": "0x00446693",
+      "sha256_bytes": "f3a9bd57f2fd9dfe18e7db9a992250068e0cd3754c14af65a62a940b262b81b3",
+      "file": "consumo-004465df.asm"
+    },
+    {
+      "symbol": "TerrainEstDecouvert",
+      "start": "0x004766f0",
+      "end_exclusive": "0x0047670a",
+      "sha256_bytes": "c7d7973f063848a5fbb332c9d87310bfea7ce416069d880fc6c7cfb2f0a58262",
+      "file": "consumo-004766f0.asm"
+    },
+    {
+      "symbol": "EnginGetVolume",
+      "start": "0x00440c5d",
+      "end_exclusive": "0x00440d5e",
+      "sha256_bytes": "bf4f0c8b29c1572aef82aef8b66e41b16f0ebebea79f0d588fcf882fb3fd1eac",
+      "file": "consumo-00440c5d.asm"
+    },
+    {
+      "symbol": "EnginEstSelectionne",
+      "start": "0x00472174",
+      "end_exclusive": "0x004721a8",
+      "sha256_bytes": "b49e702a37459620b36232c74c9fbb525b9cffa1a786eee1d744435c5e00b78c",
+      "file": "consumo-00472174.asm"
+    },
+    {
+      "symbol": "PlayerGetType",
+      "start": "0x0046d817",
+      "end_exclusive": "0x0046d838",
+      "sha256_bytes": "e7dccad3502b5e1780fe4892ed485fb45325ceba840e4973e3e319d156358495",
+      "file": "consumo-0046d817.asm"
+    },
+    {
+      "symbol": "iagUnitSendMessage_entry",
+      "start": "0x004829c8",
+      "end_exclusive": "0x00482a14",
+      "sha256_bytes": "2e870845223bb3e6d550a7ba86086411a4a15b135bebae94df9965920d41a611",
+      "file": "consumo-004829c8.asm"
+    },
+    {
+      "symbol": "iagUnitSendMessage_non_ai_return",
+      "start": "0x00482eb5",
+      "end_exclusive": "0x00482ebc",
+      "sha256_bytes": "3c7089108f657d67184775645e7f3ede50a6a9d602907395e1dbc97bde4a5952",
+      "file": "consumo-00482eb5.asm"
+    }
+  ],
+  "scope": "Mode 1 unit consumer; non-AI message return, no audio backend or death branch execution"
+}
