@@ -436,3 +436,30 @@ This is light original-byte/contract work only. No native observations, heavy ch
 The coordinator also approved four tiny original-only `MissionGetNum 0x46c11a` observations inside this same Stage11 to unblock the M1 identity query. Its [exact bytes](../pesquisas-paralelas/missoes/evidencias/mission-get-num-inventario.json) read only byte `0x496fe4`, clear AH, retain highEAX16 and return. Planned API `consultas_missao.numero_missao(missao_u8)` reads an explicit live one-byte buffer/view and returns semantic AX0..255, with no neighbor read, replacement state or literal mission default. No query translation exists yet; AI/runtime retains its named dependency until original-backed integration.
 
 The first [original-only Stage11 capture](../pesquisas-paralelas/missoes/evidencias/captura-terreno-estruturas-missao-original.json) now completes the approved eight scans plus four query observations, before either Python translation. Capture SHA-256:`52232213ef3585a8523a04d24d5bcc9d472c90ff137769fb0cea48f9a41b777e`, source `24ca5a794ff4c6979a8f5ed7c23621d75adcdf32`. Seven tail entries and one joined entry yield six returns and two exact pre-CALL stops (`0x46c1b1`, `0x41cdb9`) in56 scan segments (18 minimap/30 pixel-loop resumes, max156,130 instructions). Six full mapped-state blocks cover5,263,360 bytes per snapshot, plus ordered call/effect traces. Four separately counted getter entries confirm one-byte AX semantics and unchanged whole global image. The short heavy lease was released immediately; no Python equality, heavy domain gate, integration or full-load acceptance is claimed by these observations.
+
+### Stage11 translation and light capture replay
+
+The original observations were independently committed at `ed0172a364310b28584824b3e49dc63db371ed93` **before** the following source was written. Fresh native validation/integration remain pending at this checkpoint.
+
+[consultas_missao.py](../pesquisas-paralelas/missoes/consultas_missao.py) publishes two read-only explicit-buffer queries:
+
+- `numero_missao(missao_u8)` consumes exactly one contiguous B/b byte, accepting read-only views. It reads the actual live field on every call, returns semantic AX0..255 and never reads the adjacent byte. Native highEAX16 preservation is a CPU-register fact, outside this scalar API.
+- `existe_estrutura(estruturas, indice)` consumes the actual276,000-byte pool/view, truncates the index to low16 then protects0..999, and returns AL1 iff state byte+5 is nonzero. It includes raw states1/4/5/255. No copy, constructor defaults or generic alive filter is supplied.
+
+The coordinator resolved existence-query ownership from economy's existing Stage15 handoff: **Missions provides the single BatimentExiste implementation**, reusable by AI/economy. The temporary proposal to wait for an economic duplicate was canceled before adding either body elsewhere.
+
+[terreno_estruturas_missao.py](../pesquisas-paralelas/missoes/terreno_estruturas_missao.py) supplies `ProvedoresTerrenoEstruturas(existe,colocar,habitada,habitar,modificar_mapa)` and `preparar_estruturas_no_terreno(provedores)`. It performs the exact live1000-slot ascending scan, consuming lowAL from both queries. For each existing structure, place first, query habitation, conditionally make habitable, then call map modification(index,1). Return completed placed/habitable index tuples and the shared original RET address `0x46b6f7`; this describes L8, not a loaded world.
+
+`provedores_terreno_estruturas_core(world, *, habitacao=None, mascara_tipo20=None)` binds the actual Missions existence query, Core placement/minimap provider and supplied Economy habitation methods. Habitation and Core must share the identical live unit/structure pools. A missing habitation provider raises only when its query is reached, after completed placement; no successful fallback is installed. Type20 retains Core's explicit mutable20-byte mask requirement. The combined `preparar_terreno_missao(unit_providers,structure_providers)` composes unchanged Stage8 unit/capacity orchestration followed by this scan, matching the whole MissionPlaceTerrain caller. Failures retain every previous effect; entry replay is not continuation.
+
+Missing callbacks raise `DependenciaTerrenoEstruturas` with callee, CALL site and exact arguments. Actual lower-provider errors propagate unchanged. Local checks cover lowAL poison, live post-placement queries, selective callback order, alias rejection, query widths/protection and all eight frozen observations. Every replay matches all six full mapped-state hashes and complete ordered traces; actual MONDE01's joined fixture completes8unit placements and its one sanctuary placement. Inherited grids/allocations remain explicitly synthetic, so **this does not establish whole MissionLoad or M1**.
+
+The first memory-only replay attempt hit sandbox SIGILL during Unicorn initialization, before any original instruction. The ordinary-context replay passed; local replay now uses a pure byte-ledger backend solely for fixture serialization, with execution/resume forbidden. It hashes the same frozen memory blocks and does not model any engine operation. Nine focused tests are discovered: five light tests pass and four optional fresh-native methods are skipped. Failure/success logs remain in ignored `.local`; no capture or expected byte was altered.
+
+```sh
+python3 -B pesquisas-paralelas/missoes/validar_terreno_estruturas_missao.py
+# Only after the coordinator grants the serialized validation window:
+python3 -B pesquisas-paralelas/missoes/validar_terreno_estruturas_missao.py --emular
+python3 -B scripts/check.py --domain missions
+python3 scripts/workstream.py integrate missions
+```
