@@ -1,0 +1,23 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": true,
+  "tests": 12,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 1986,
+  "success": true,
+  "scope": "Live shared-state conversion and caller 0x420f5a..0x420f6e; no complete production/mission.",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "unicorn": "2.1.4",
+  "reached_stops": {
+    "0x3000000": 832,
+    "0x457845": 2,
+    "0x4475ac": 4,
+    "0x457da2": 4,
+    "0x420f6e": 1144
+  },
+  "expected_native_exceptions": 0,
+  "expected_execution_limits": 0,
+  "dependency_scope": "Caller stops before healing; missing Python query providers are compared to native pre-query checkpoints, not native faults."
+}
