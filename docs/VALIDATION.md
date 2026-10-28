@@ -10,6 +10,7 @@ python3 -B scripts/check.py --domain economy
 python3 -B scripts/check.py --domain graphics
 python3 -B scripts/check.py --domain missions
 python3 -B scripts/check.py --domain ai-runtime
+python3 -B scripts/check.py --domain audio
 ```
 
 The common runner uses unittest discovery without rewriting versioned validation reports. It checks the maintained documentation's relative links, excludes immutable local archives, and runs the requested research suites. Missing graphics copied inputs produce an explicit missing-input result; full integration requires those inputs. Optional differential tests are skipped unless enabled. Read skipped counts and reasons rather than calling a local-only run an x86 verification.

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Prepare isolated research worktrees and serialize verified merges to origin/main.
 
-Seven research fronts plus a coordinator maintenance front share one canonical
-repository. Every front has its own branch, worktree, write ownership and
+Seven research fronts, the second-wave audio front and a coordinator
+maintenance front share one canonical repository. Every front has its own branch, worktree, write ownership and
 integration validation. The integration helper holds one advisory lock in the
 common Git directory across fetch, ownership review, feature merge/push, the
 detached merge candidate, common and domain checks and the non-force main push.
@@ -32,6 +32,8 @@ MISSION_NATIVE = ('env', 'RISING_EMULAR=1', '{python}', '-B', '-m', 'unittest', 
                   '-s', 'pesquisas-paralelas/missoes/testes', '-p', 'test_*.py', '-v')
 AI_RUNTIME_NATIVE = ('env', 'RISING_EMULAR=1', '{python}', '-B', '-m', 'unittest', 'discover',
                      '-s', 'pesquisas-paralelas/ia-runtime/testes', '-p', 'test_*.py', '-v')
+AUDIO_NATIVE = ('env', 'RISING_EMULAR=1', '{python}', '-B', '-m', 'unittest', 'discover',
+                '-s', 'pesquisas-paralelas/audio/testes', '-p', 'test_*.py', '-v')
 APP_BUILD = ('{python}', '-B', 'compilar-jogável', '--development-ref', 'HEAD')
 
 FRONTS = {
@@ -46,6 +48,9 @@ FRONTS = {
                       (MISSION_NATIVE,)),
     'ai-runtime': Front('feat/re-ai-runtime', 're-ai-runtime', ('pesquisas-paralelas/ia-runtime/',),
                         ('docs/AI_RUNTIME.md',), (AI_RUNTIME_NATIVE,)),
+    # Second-wave front, executed by the macOS chat until its milestone trigger.
+    'audio': Front('feat/re-audio', 're-audio', ('pesquisas-paralelas/audio/',), ('docs/AUDIO.md',),
+                   (AUDIO_NATIVE,)),
     'macos': Front('feat/macos-playable', 'macos-playable', ('apps/macos-preview/',),
                    ('compilar-jogável', 'docs/MACOS_PLAYABLE.md'), (APP_BUILD,)),
     # The coordinator front owns every shared path that no research front owns.

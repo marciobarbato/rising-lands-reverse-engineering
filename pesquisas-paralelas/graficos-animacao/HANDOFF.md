@@ -337,3 +337,83 @@ Actual `python3 -B pesquisas-paralelas/graficos-animacao/validar_passe_terreno.p
 All predicate words, window dimensions1–32, corners/insets/empty views, substitution/hidden invalid sources, narrow object clip, unaligned opaque blocks and a full1024×1024 buffer are covered. Chosen ground assets commute under deferred ordering in these pixel fixtures; precise native callback traces establish block/object interleaving. Initial regression failures were unsupported Python3.9 `int.bit_count` and an invalid expectation of a pixel-order counterexample; neither required changing implementation or captured native evidence. Corrected regressions all pass: seven new tests, graphics domain **176 tests**, zero skips and valid links.
 
 Concrete gap closed locally/independently validated: complete bounded nonwrapping terrain traversal, its exact fallback and opaque block/object composition over original assets. Synthetic world/cache inputs are not a mission or full frame. AffSprite/AffGame orchestration, negative/wrapped views, cache startup/lifecycle, real-mission initialization and consumer activation remain separate gaps. Overall estimate stays coordinator-owned; integration status follows helper.
+
+## Sixteenth stage selected after fifteenth-stage integration
+
+Stage fifteen implementation `9db0735a4f7a81a7b53993d84413420da7983d80`, final feature `506012c834d0994c3c6a02ae92a53cee8507aa17` and main merge `1c12c2fda0c36106e85178ba17f4237af2df5baa` were fetched and verified as ancestors of `origin/main`. The clean worktree then fast-forwarded to the seven-front organization `8a499a9`. The coordinator assigned `InitCache 0x40FA38` and the verified cache lifecycle (allocation, fill, replacement) through declared bindings only, replacing the terrain-pass validator's synthetic cache-payload binding.
+
+## Sixteenth stage implementation and validation
+
+Order kept: original-byte inventory, then original-only native captures committed alone as `e3152ea`, then translation, fresh native comparison, tests and docs.
+
+**API** (`ciclo_cache_terreno.py`, full contract in [the manual](../../docs/GRAPHICS.md#terrain-cache-lifecycle--sixteenth-continuation-stage)):
+
+- `MemoriaMotor(*, contador_u32, vinculos)` models MemAlloc/MemFree.
+  - `mem_alloc(n_u32)`: counter 0x4E2F3C += n, then `global_alloc(0,n)` at 0x467EB9, then `global_lock(h)` at 0x467EC1.
+  - `mem_free(p_u32)`: `global_handle` 0x467ED1 → `global_unlock` 0x467ED9 (ignored) → `global_handle` 0x467EE1 → `global_free` 0x467EE9, whose result is returned. It never subtracts.
+  - The five bindings are callables returning u32. A missing binding raises `DependenciaCicloCache(address)` after earlier effects.
+- `CicloCacheTerreno(blocos_crus_270336, *, proximo_u16)` is the post-LoadSTRATBank/SetBank state; `apos_carregar_banco(catalog)` gives the real BLOCS.CMP 1090–1345 payloads with cursor 0.
+  - `alocar(memoria)`: CacheAlloc, `MemAlloc(1024)`; keys stay undefined (`registros is None`).
+  - `iniciar()`: InitCache; zero keys, keep cursor and payloads, EAX 256.
+  - `cache`: the live `CacheTerreno`, only while initialized.
+  - `liberar(memoria)`: CacheFree; the stale pointer is kept.
+- Refusals: a null or freed table raises at 0x40FA49; a second CacheAlloc at 0x40FA18; CacheFree out of order at 0x40FA2E; a key read outside the initialized state at 0x40FE50.
+- Invalid widths and types raise `ValueError`.
+
+**Inherited state and effects.**
+
+- Inherited: payload bytes, the cursor and the MemAlloc counter. The pointer 0 comes from `.bss`.
+- Effects, in order: counter, then bindings, then pointer store; then the key zeroing; then GetNumBob misses through the existing `resolver_bloco_terreno`; then MemFree bindings.
+- No callbacks, RNG, clock or world state.
+- Stale payloads and the cursor survive InitCache, so the next miss after a restart lands at the inherited cursor.
+
+**Bindings.** `bancada_ciclo_cache.py` and `vinculos_graficos.py` bind only:
+
+- the KERNEL32 IAT slots `0x5231C0/C8/CC/D0/D8` (GlobalAlloc/Free/Handle/Lock/Unlock), resolved to trampolines as the loader would;
+- the C-runtime `fopen 0x48C71F`, `fread 0x48C97B` and `fclose 0x48C80B`.
+
+The game wrappers, MemAlloc/MemFree, LoadSTRATBank, SetBank and the cache routines run unchanged. Every call logs exact arguments and the returned value. Requests the fixture cannot honor stop with `ParadaVinculo`: non-`GMEM_FIXED` flags, zero sizes, exhaustion, stale handles, non-`rb` modes, unknown names and short reads. The fixture declares GMEM_FIXED content as `0xA5`, and the bank path prefix as empty. **Migration note for core:** these stay local until core publishes the generic declared-binding facility in `ferramentas/emulador.py`. `MemoriaMotor` is the first Python MemAlloc/MemFree model; core may adopt it as a shared provider.
+
+**Original identities.** Executable `6c556520…43fb` is the only oracle; normalized PE `26c4534b…64d0` is named and not executed. Region hashes:
+
+| Region | SHA-256 |
+|---|---|
+| CacheAlloc..InitCache | `29e4373d…c3dc` |
+| MemInit..MemClose RET | `b1c0ba63…c0dd` |
+| LoadSTRATBank | `2682bf21…e9da` |
+| File wrappers | `ad54bf31…67b7` |
+| ProgInit window | `144952e5…2889` |
+| CalculGame start | `4c0bf171…c636` |
+| MenuNewSelect window | `d3f80619…4503` |
+
+The full list and the static scan are in [evidencias/ciclo-cache.json](evidencias/ciclo-cache.json).
+
+**Actual validation.**
+
+- `capturar_ciclo_cache.py` (original-only): 554 native entries / 9,364,336 instructions / 97,294 bound calls, 547 GetNumBob calls, and the expected null-table fault at 0x40FA49.
+- `validar_ciclo_cache.py` (fresh): 554 native entries / 9,364,346 observed instructions / 97,294 bound calls / **552 whole-state comparisons**. Each compares pointer, all 1,024 keys, cursor, all 256 payloads, the counter and the binding log. Branches: 3 undiscovered, 3 direct, 7 hits, 534 misses. Every original-only row is reproduced. There are 0 limits and 0 skips; the one expected fault matches the model's named dependency.
+- `validar_passe_terreno.py` (migrated): real bank and lifecycle, InitCache before scenes `interior` and `large`, 72,261 segments / 16,013,021 instructions. All 8 surfaces, IDs and final cache states match; the PNG and `evidencias/passe-terreno.json` are byte-identical. The stage-15 report is superseded at this commit and recoverable from `9db0735`.
+- Graphics domain: **184 tests**, 0 skips, links valid.
+
+**Remaining synthetic bindings** (listed as the stage requires):
+
+1. `bancada_x86.Bancada.carregar_banco_original` replaces `FileOpen 0x458420`, `FileRead 0x458461`, `FileClose 0x45844c` and `MemAlloc 0x467ea6` wholesale. It keeps no argument log, does not write the handle global 0x4E1D1C or the counter 0x4E2F3C, and allocates zero-filled memory from the harness heap. It is used by every graphics validator except `validar_ciclo_cache.py`, `validar_passe_terreno.py` and `validar_python.py`.
+2. `validar_composicao.BancadaComposicao.carregar_paleta` stubs `FileOpen/FileRead/FileSeek 0x45848b/FileClose` around `LoadPalette 0x4798E9`.
+3. `validar_objetos.py` (`0x46C3A2..0x46C3DE`) and `validar_construcoes.py` (`0x46C517..0x46C578`) stub `FileRead 0x458461` to feed mission bytes.
+4. `validar_cache_terreno.BancadaCache` still has stage 14's synthetic cache-payload binding. Its 256 payload pointers point into one guarded RAM snapshot, and its explicit synthetic key/cursor states use keys FFFF/FF/FF, fill 82 and cursors 0/255, with the key table taken from the harness heap. It is kept deliberately for arbitrary-state coverage.
+
+Bounded trace modes also intercept engine callees to record order; these are not external bindings, and the pixel modes run the callees unchanged.
+
+- Blitters `PasteBobCmp 0x45B247` and `PasteOmbreCmp 0x45B796` are intercepted in the objects, construction, death, work, type-2, selection, attack and gate validators; `0x45BA23` additionally in projectiles.
+- The structures validator intercepts `PastePlayerCmp 0x45C455` and `MurAjoute 0x43E616`.
+- The sprite-pass validator intercepts its callees `0x415ACF`, `0x407DD3`, `0x40F49B`, `0x41591F` and `0x46FF70`.
+- Terrain traces intercept `GetNumBob`, `AffBloc` and `AffVegetTerrain`.
+- `capturar_desenho` intercepts shadow capture at `0x45B796`.
+
+**Gaps.**
+
+- Not covered: MemInit (`GlobalMemoryStatus`/`GlobalCompact`), DeleteBank, a Python LoadSTRATBank, GlobalAlloc failure, movable memory, palette lifecycle and wrapped/negative viewports.
+- Not exercised here: AffGame orchestration (stage 17), and the mission/runtime consumer of the lifecycle. Nothing in this stage reached a real loaded mission.
+- The first InitCache in a real session follows MissionLoad's caller branch; a mission snapshot must carry the cache state explicitly or start from `apos_carregar_banco` + `alocar` + `iniciar`.
+
+Concrete gap closed: verified cache startup, restart and release over real bank payloads, with the terrain-pass validator consuming it. The overall estimate stays coordinator-owned.

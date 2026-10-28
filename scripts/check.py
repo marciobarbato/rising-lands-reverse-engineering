@@ -13,7 +13,8 @@ SUITES = {'core': 'testes', 'combat': 'pesquisas-paralelas/combate',
           'economy': 'pesquisas-paralelas/economia/testes',
           'graphics': 'pesquisas-paralelas/graficos-animacao',
           'missions': 'pesquisas-paralelas/missoes/testes',
-          'ai-runtime': 'pesquisas-paralelas/ia-runtime/testes'}
+          'ai-runtime': 'pesquisas-paralelas/ia-runtime/testes',
+          'audio': 'pesquisas-paralelas/audio/testes'}
 
 
 def documentation_links(root):

@@ -23,6 +23,10 @@ class WorkflowTests(unittest.TestCase):
         self.assertTrue(workflow.owned('ai-runtime', 'pesquisas-paralelas/ia-runtime/testes/test_namespace.py'))
         self.assertTrue(workflow.owned('ai-runtime', 'docs/AI_RUNTIME.md'))
         self.assertFalse(workflow.owned('ai-runtime', 'ferramentas/ia.py'))
+        self.assertTrue(workflow.owned('audio', 'pesquisas-paralelas/audio/testes/test_namespace_audio.py'))
+        self.assertTrue(workflow.owned('audio', 'docs/AUDIO.md'))
+        self.assertFalse(workflow.owned('audio', 'apps/macos-preview/src/engine.py'))
+        self.assertFalse(workflow.owned('macos', 'pesquisas-paralelas/audio/README.md'))
         self.assertTrue(workflow.owned('macos', 'compilar-jogável'))
         self.assertTrue(workflow.owned('macos', 'apps/macos-preview/src/engine.py'))
         self.assertFalse(workflow.owned('macos', 'ferramentas/unidades.py'))
@@ -48,6 +52,7 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(workflow.FRONTS['missions'].branch, 'feat/re-missions')
         self.assertEqual(workflow.FRONTS['macos'].worktree, 'macos-playable')
         self.assertEqual(workflow.FRONTS['ai-runtime'].branch, 'feat/re-ai-runtime')
+        self.assertEqual(workflow.FRONTS['audio'].worktree, 're-audio')
 
     def test_start_tracks_existing_remote_branch(self):
         with tempfile.TemporaryDirectory(prefix='rising-workflow-') as directory:
