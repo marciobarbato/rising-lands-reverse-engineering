@@ -33,7 +33,7 @@ class RegistroVinculos:
         return len(self.chamadas)
 
     def desde(self, marca, fim=None):
-        return [list(c) for c in self.chamadas[marca:fim]]
+        return [[nome, list(argumentos), retorno] for nome, argumentos, retorno in self.chamadas[marca:fim]]
 
     def resumo(self, marca=0, fim=None):
         trecho = self.chamadas[marca:fim]; contagem = {}

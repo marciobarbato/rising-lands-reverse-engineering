@@ -187,6 +187,7 @@ class BancadaCicloCache(BancadaComposicao):
         for nome in ('EBX', 'ECX', 'ESI', 'EDI', 'EBP'):
             if r[nome] != PRESERVADOS[nome]: raise RuntimeError('GetNumBob changed callee-saved '+nome)
         if self.ramo is None or self.registro.marca() != marca: raise RuntimeError('Unexpected GetNumBob path')
+        if self.u32(0x4e24b4) != self.shadow: raise RuntimeError('Shadow table pointer changed')
         return r['EAX'], self.ramo
 
     def verificar_entradas(self):
@@ -194,5 +195,5 @@ class BancadaCicloCache(BancadaComposicao):
             for camera in range(4):
                 if self.ler(self.maps[indice][camera], 65536) != bytes(self.expected_maps[indice][camera]):
                     raise RuntimeError('Visibility input changed')
-        if self.u16(CAPACIDADE) != 256 or self.u32(0x4e24b4) != self.shadow:
-            raise RuntimeError('Static capacity or shadow pointer changed')
+        if self.u16(CAPACIDADE) != 256:
+            raise RuntimeError('Static capacity changed')
