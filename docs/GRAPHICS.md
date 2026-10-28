@@ -180,7 +180,7 @@ This inventory distinguishes reconstructed behavior, captured original behavior,
 |---|---|---|
 | Gate shared tail | The full-return API now reconstructs `AffBatiments 0x40F342..0x40F49C` for terrain other than `0x356`; 882 fresh x86 calls validate return/clip/guards | Close the workshop-trigger lookup with a committed world-provider contract; integrate the consumer |
 | Other building facades and overlays | `AffBatiments 0x407DD3..0x40F49C`; only the Sanctuary subset and gate facade are reconstructed | Recover per-type/mode layers, clipping and anchors against original buffers |
-| Unit action handlers | Prepared type-0/type-2 attacks, six-type corpse copy/fade and type-6/type-7 construction display are reconstructed; work `0x414A8A` and remaining types/effects remain open | Extend supported handlers and coordinate simulation task/phase/corpse-counter producers |
+| Unit action handlers | Prepared type-0/type-2 attacks, six-type corpse copy/fade, type-6/type-7 construction and type-5/type-6/type-7 work display are reconstructed | Extend other types/effects and coordinate simulation task/phase/corpse-counter producers |
 | Type-2 normal body | Separate raw-record mapper/compositor reconstructs branch `0x412ECE`, raw frame stride and exact anchor; full native calls and indexed buffers match | Consume the committed provider in the app; recover other players/effects/actions independently |
 | Projectile display inputs/rendering | The 100-record selection/sort, cell queries and public `AffProjectile` mapper/compositor are reconstructed; eight bounded complete sprite scenes use the public renderer | Integrate the consumer and physical producers; preserve explicit catalog limits and raw phase semantics |
 | Projectile/effect lighting | `CalculEclairage`, clipping-enabled mask remap and public projectile consumers are independently validated | Recover remaining palette effects and their lifecycle separately |
@@ -333,6 +333,37 @@ Matrix covers all task/phase/direction/camera/mode/+BD bytes in focused combinat
 
 ```sh
 python3 -B pesquisas-paralelas/graficos-animacao/validar_construcao_grafica.py
+python3 -B scripts/check.py --domain graphics
+```
+
+## Prepared worker work display — thirteenth continuation stage
+
+`trabalho_grafico.py:consultar_trabalho_grafico(record276, *, x, y, indice_u16, camera_u8, indice_selecionado_u16, modo_selecao_u8)` consumes projected signed-i16 origins, actual pool index 0–799, raw camera/mode u8 and selected-index u16. Supported record: owner 0, state 5, type 5/6/7, effects byte +DC zero. The selected-target prefix is unsupported when +BD is nonzero and camera matches owner. The API reads raw task +89, phase +A4, direction +91, Bag count word +0A and i8 shifts +86/+87. It does not produce or advance those values.
+
+| Type | Task +89 | Body choice | Branch constant / fixed stride |
+|---|---|---|---|
+| 5 | 0, 2, 3 | Bag count zero / nonzero | 1594 / 8 or 1690 / 8 |
+| 5 | 1 | Bag ignored | 1662 / 4 |
+| 6 | 0, 1 | Bag count zero / nonzero | 2970 / 8 or 3034 / 8 |
+| 6 | 2 | Bag ignored | 3034 / 8 |
+| 7 | 0, 3, 4, 5 | Bag count zero / nonzero | 1338 / 8 or 1466 / 8 |
+| 7 | 12 | Bag ignored | 1402 / 8 |
+| All three | Other task values | No body | No asset lookup |
+
+Engine ID = low-u16 `constant + floor((direction+1)/2)*stride + phase`, independently of +A5/+A6/+A8. Raw phase/direction spill is reproduced without a natural animation claim. Shadow 10784 at `(x+dx+2,y+dy+26)` precedes body at the existing type anchor (5:11,11; 6:16,20; 7:26,26), final positions wrapped i16. Mechanic task 2 deliberately differs from its construction action sprite.
+
+Two kinds of no-body return must remain distinct. Type 6 task 3 and type 7 tasks 1/2 clear an original local flag and **skip all later selection/fatigue/experience overlays**. Once the initial selected-target guard is absent, those tasks accept selected-index equality, nonzero selection mode, any fatigue word and any +BA byte. Other no-body/body tasks still require selected index different from pool index, selection mode 0, unsigned +74 at least 100 and +BA zero; otherwise the API raises `NotImplementedError` before composition. These narrower supported guards do not claim every rejected original input necessarily paints an indicator.
+
+`compor_trabalho_grafico` takes catalog, indexed destination/dimensions, the same required inputs, explicit 256-byte `tabela_sombra` and optional inclusive clip; returns `(new_bytes,plan)`. No-body tasks avoid catalog access. Inputs remain unchanged, with no callbacks, RNG/clock, economic/world effects or rollback behavior. Unsupported record/overlay domains raise `NotImplementedError`; invalid widths/lengths raise `ValueError`, missing keywords `TypeError`. Type 13 work, selected-target/structure markers, player colors/effects, resource semantics and task/phase producers remain unsupported.
+
+Original executable identity unchanged. Complete `AffWorkEngin 0x414A8A..0x415496` hash `4aae4288bd307f9de5b93ce32772b04ab3d7ef6803f42de3ecd412c22704694f`, full `AffEngin` caller `0x41591F..0x415A57`; EAX/EDX projected origins, low EBX actual index, pool pointer `0x4E19A0`, selection globals `0x508041/0x496AC2/0x508F8F`. [Exact-byte evidence and unchanged predecessors](../pesquisas-paralelas/graficos-animacao/evidencias/trabalho-grafico.json). Original instruction review directly establishes the task-local flag; independent native runs corroborate it, without needing new REA interpretation.
+
+Fresh validator: **19,700 original calls / 23,007,614 observed instruction hooks**, comprising 18,516 command captures, **1,179 exact indexed buffers**, three initializations and two bank calls. Captures: **16,971 complete returns** (including 1,530 empty-body returns), **768 declared selected-target prefix stops**, **765 declared selection-info stops**, **12 declared indicator-boundary stops**. Supported calls reaching `0x41531C` resume from that checkpoint with the same CPU/stack through the real return; some calls use two bounded segments, each limited to 300,000 instructions/2 seconds. Call count is not a segment count. Unsupported boundary stops retain earlier native body effects; public preflight rejects before composition. Every complete call has ESP `0x2008004`; pool/selection globals are unchanged. Zero expected/unexpected faults, limits or skips. Capture blitters intercepted; pixel renderers and Bag query intact; only bank IO/allocation substituted. [Native report](../pesquisas-paralelas/graficos-animacao/validacao/x86-trabalho-grafico.json).
+
+Focused matrices cover all task/phase/direction/camera/mode/+BD bytes, Bag boundaries, pool 0/799 and signed coordinate/shift edges. Each bypass task has all 256 selection-mode bytes with active selected index/BD under another camera, fatigue 0 and +BA 255, plus a native indexed empty result. Pixels exercise all 16 directions, phases 0–7 and nine body variants plus no-body/clipping cases; this does not prove phase cadence. Seven new regressions pass; graphics domain **162 tests**, zero skips and valid links. Background/table are synthetic fixtures, not mission/runtime operation.
+
+```sh
+python3 -B pesquisas-paralelas/graficos-animacao/validar_trabalho_grafico.py
 python3 -B scripts/check.py --domain graphics
 ```
 
