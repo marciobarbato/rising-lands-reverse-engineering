@@ -1,6 +1,6 @@
 # Stage12: whole-MissionLoad original oracle preparation
 
-Status: **light scaffold only; no whole-load execution or Python composition**. Stage11 is integrated at main `7f617fab29ce382f96b690ea70da25a33fab8bae` (pushed feature `c0f0a873c3657e72a3e478cf6fd7ea73c84dd58a`, implementation `2f6d96b89039590c598f312752d4fe0e3c5b3607`, original captures `ed0172a364310b28584824b3e49dc63db371ed93`). All four commits are ancestors of fetched main. Its locked candidate passed80native tests, common local gates, then9focused native tests reproduced on main with unchanged counts/state/trace. The heavy lease was released; no prior work or evidence is replaced here.
+Status (updated): **runnable; the intact MissionLoad reached its real return for MONDE01 — see [Stage12 result](#stage12-result-runnable-program-start-oracle-and-original-only-missionload-capture-2026-10-28-claude) at the end. No Python composition; M1 not accepted.** Original preparation status: light scaffold only. Stage11 is integrated at main `7f617fab29ce382f96b690ea70da25a33fab8bae` (pushed feature `c0f0a873c3657e72a3e478cf6fd7ea73c84dd58a`, implementation `2f6d96b89039590c598f312752d4fe0e3c5b3607`, original captures `ed0172a364310b28584824b3e49dc63db371ed93`). All four commits are ancestors of fetched main. Its locked candidate passed80native tests, common local gates, then9focused native tests reproduced on main with unchanged counts/state/trace. The heavy lease was released; no prior work or evidence is replaced here.
 
 ## Scaffold and inherited-state closure
 
@@ -55,3 +55,80 @@ Use the actual `conclusao_remapeamento.remapear_mundo(world, *, alocar, fixar, o
 Published measurement: original MONDE01 full remap alone31.157seconds,56components,731segments; Core also reproduced realRET/AL1 on main. This is a measured **remap** cost, not a whole-MissionLoad estimate. Core's original snapshots include compressed full mapped input/output bytes, resource states and traces; they may supply identified raw subsets for the inherited registry, but they are not a complete program-start/MissionLoad input package. Preserve their exact base/alias/provenance rather than treating unrelated constructor arenas as interchangeable.
 
 `Engin_RetrieveExperimente0x441623` remains unimplemented and was canceled for this development window. Raw inherited-state assembly, concrete external fixtures and real AI/Economy adapter adoption remain as above. No new run or implementation was started on this notification; preserve the pending Stage12 branch for the next owner.
+
+## Stage12 result: runnable program-start oracle and original-only MissionLoad capture (2026-10-28, Claude)
+
+**Status: the intact original MissionLoad 0x46c2cf for MONDE01 reached its real return 0x42d22d (AL=1) from an inherited state produced by the original program-start path. Original-only; no Python whole-load composition exists; M1 is not accepted.** The earlier scaffold below (`estado_herdado_missao.py`, `bancada_mission_load_original.py`) is kept; its registry now validates the frozen entry state.
+
+### What runs
+
+[oraculo_carga_missao.py](oraculo_carga_missao.py) (`BancadaCargaMissaoOriginal`) runs the intact executable on Core's `BancadaX86` and the committed Stage16 binding transport. Core's per-instruction Python checker is replaced, for speed, by equivalent native guards: address-scoped stop hooks, BEGTEXT `R|X`, headers/.reloc/.rsrc `R`, DGROUP/.bss/.idata `RW`, the mapped tail `0x52e000..0x600000` without access, stack/arena/thread pages `RW` without execute, and instruction-count segments resumed at the same instruction. The code-section SHA-256 is recorded before and after and must equal the executable bytes (`02985de5…`).
+
+Startup, all original code executed natively in one memory image:
+
+1. CRT main-thread data: `__InitThreadData` 0x490de8 on a zeroed 0xe4-byte block (the `__WinMain` memset at 0x48fe2a), pointer stored at 0x522244 as `__NTInit` does at 0x48e7ee; then `__NTInitFileHandles` 0x48fc83. Needed because `InitRand` calls CRT `rand` (thread data) and `IaAlloc`'s `debugSymLoad` uses CRT `open/read/lseek/close`.
+2. `AppInit` 0x418188 (EAX = declared hInstance 0x400000), i.e. the whole `ProgInit`: MemInit, Randomize/InitRand, getcwd, FindCD, path strings, SortLoadCaract, palette, all allocators (Engin/Batiment/Mission/Player/MiniMap/Chemin/Ia/Projectile), RISING.SBL/RUL loading, RechercheInit, MarcheInit, InitPlayer, InitInputPlayer, TerrainLoadObstacle/Color and the palette tables.
+3. Five native `CalculGame` frames: state 1 (intro probe, main menu `MenuInit(0,2)` with RechercheReset/Engin_ResetExperience/InitPlayer), state 2 (Enter on default item 0 → `MenuNewSelect`), state 3 (Enter on item 0 → new campaign: ReseauActif=0, MissionReset, viewer 0, SetPlayerType ×4, `MenuInit(0,0x11)` with ObjectifLoadText and RechercheCalculNew), state 0x11 (Enter, no research click → state 0), state 0 (MouseInit, InitCache, InitGouttes, stores) which stops at the real `CALL MissionLoad` 0x42d228.
+
+Not executed during startup (47 calls of 16 routines, each stopped at its entry and returned with its own RET cleanup and declared/unchanged EAX): AffInit, DDSetPalette, DDLockSurface (EAX 0), DDUnlockSurface, DDFlipPage, LoadPie, FilledBox (`ret 8`), ResetMode, AffText (`ret 0x10`), MCICD_Play/Stop, PlayVideo, Create/FreeCredits, InitTextLangue (needs `FileReadLine`/CRT `fgets`, not an inventoried I/O boundary), TextGetMessage (EAX 0), LoadSTRATBank (EAX 0, 24k sprite allocations), SetBank, LoadBank (EAX 0), DeleteBank. ProgIteration (frame counters, cursor), AffGame, WndProc, AppWindowInit, DisableIME, PlaySnd_InitSoundLib and MCICD_Init are not run either. During the oracle phase a skip address is a hard stop.
+
+The oracle phase resumes the stopped CPU at 0x46c2cf with the real CalculGame frame and stops at the real return 0x42d22d. Only declared bindings answer calls; any other import reaches a trap page and stops.
+
+### Declared external boundaries ([fronteiras_carga_missao.py](fronteiras_carga_missao.py))
+
+| Boundary | Fixture |
+|---|---|
+| CRT fopen/fread/fclose 0x48c71f/0x48c97b/0x48c80b, FileSeek 0x45848b | Read-only original media: install dir → `source/cd/INSTALHD`, `D:` → `source/cd`, case-insensitive, `.\` = current dir. Modes `rb`/`r` only (TEXTES.TXT `rt` is why InitTextLangue is skipped). FILE* is an unmapped opaque value; fread returns item counts and copies partial tails; a path absent from the media returns NULL; paths outside the roots stop |
+| GlobalAlloc/Lock/Handle/Unlock/Free | Finite arena 0x40000000..0x50000000, ≤60,000 allocations, GMEM_FIXED/ZEROINIT only, handle==pointer, page-aligned, never reused, declared fill byte for non-ZEROINIT; unlock-without-lock, free-while-locked and stale handles stop |
+| VirtualAlloc | Commit (±reserve), RW/RWX, zero pages from the same arena (CRT heap growth) |
+| GetPrivateProfileIntA/StringA | Windows subset: `;` comments, trimmed names/values, quoted strings unquoted, decimal integers only, queried duplicate keys and enumeration stop; file must exist on the media |
+| CreateFileA/ReadFile/SetFilePointer/CloseHandle/GetFileType/GetLastError/GetStdHandle | Read-only OPEN_EXISTING over the media (debugSymLoad's RISING.SBL via original CRT bodies); GetStdHandle answers 0 (GUI process) |
+| timeGetTime/GetTickCount, GetAsyncKeyState, SetCursorPos, ShowCursor, SetErrorMode, GetDriveTypeA, GetVolumeInformationA, GetCurrentDirectoryA, GetCurrentThreadId, GlobalMemoryStatus/Compact | Named inputs below; ordered answers are consumed and exhaustion stops |
+
+Named inputs (all recorded in the captures): install directory `C:\RISING` (installer `TemplateTargetDir`), CD drive `D`, volume label `RISING_LANDS_BR_` from the BIN PVD, clock 0x00123456 (seeds `0x498db4` via `iaRandom(0)`), allocation fill 0xA7, MEMORYSTATUS 32 zero bytes, thread id 1, key script Enter/release ×2 then Enter.
+
+### Startup-control and inherited-state findings
+
+- **Live player controls at MissionLoad entry are (1,2,2,2)**, written by original code twice: `InitPlayer` 0x46dcb4 (ProgInit and the main-menu block 0x468e37) and the new-campaign `SetPlayerType(0,1),(1,2),(2,2),(3,2)` at 0x42c479..0x42c4b2. This equals the AI front's fixture. The stored player table's type bytes are never initialized (allocation fill); `PlayerRetrieve` copies only +6 and +0xc..+0x13, so it does not touch types.
+- Mission byte 0x496fe4=1 (`MissionReset`), viewer 0x508041=0, ReseauActif 0x4e0730=0, state 0x4e2f78=0.
+- Saved experience 0x4e19ec..0x4e1a14 = `ff00`×20 (`Engin_ResetExperience` in MenuInit(2)); after MissionLoad the current buffer 0x4e19c4 holds the same 40 bytes.
+- Research tables 0x508134.. are zero after RechercheReset/RechercheCalculNew with no research click.
+- `ObjectifLoadText` 0x47c557 opens MONDE01.TXT as an existence test and reopens it without closing the first FILE*: one original leaked stream is recorded in the entry artifact.
+
+### Evidence
+
+| File | SHA-256 | Content |
+|---|---|---|
+| `evidencias/captura-carga-missao-original.json` (v1, commit 61847e5, source 865d5ab) | `e0b7ca47…331ec` | First capture, before the coordinator review |
+| `evidencias/captura-carga-missao-original-v2.json` (commit 81815eb, source 14b56a9) | `eb7d2303…3afc` | Hardened bench; inherited image, final image and 1,400-event oracle binding log byte-identical to v1 |
+| `evidencias/entrada-carga-missao-original.json` | `0692dea1…2ddf` | First-class MissionLoad entry: 882 blocks (DGROUP+.bss, CRT thread data, 879 live allocations, 64 KiB native stack), registers, segments/GDT, arena next-free 0x418e9000 and policy, open streams/handles, remaining declared answers |
+| `validacao/stage12-missionload-original-x86.json` | `4355d395…5efe` | Original-only checks below |
+
+Startup: 31.0 s, 3,583 segments, 3,106 binding calls (1,276 profile reads, 879 GlobalAlloc), 881 allocations. Oracle: 2.49 s, 1,425 segments, 1,400 binding calls (1,019 fread, 1 fopen/fclose, 17 FileSeek, 4+16 profile reads, 57 Global allocation lifecycles = remap class buffer + 56 components). Every compressed block carries its SHA-256.
+
+### Original-only checks (validation report, all passed)
+
+1. **Replay**: same inputs reproduce the committed inherited image, real return, AL=1, final image and binding log (with footprint hooks active).
+2. **Code integrity**: code SHA-256 before = after = executable bytes, in the capture and the replay.
+3. **Segmentation invariance**: oracle with 77,777-instruction segments (1,741 segments) vs 1,000,000 (1,425): identical entry, final image, binding log and AL.
+4. **Fill independence**: fill 0x5A vs 0xA7: 552,340 final bytes still hold the fill, 0 other differing bytes, 0 fill bytes copied by MissionLoad, identical binding log.
+5. **Input footprint** (oracle-only read-before-write over DGROUP+.bss, CRT thread page, native stack and all pre-entry arena bytes; binding writes mark their destinations): 1,757 bytes in 972 ranges. Classes from perturbation masks: 1,701 startup-executed original code or PE image; 4 declared inputs (the clock-seeded RNG 0x498db4 by `iaRandom`, the CD drive letter 0x509594 by MissionLoad's path strcpy); 4 native stack (the entry return-address slot read by the final RET); 48 untouched allocation fill, all read by Watcom `__STOSD`'s cache-touch `cmp byte [eax+0x20],dl` 0x48d8ee (and `__STOSB`) just before overwriting, flags discarded, consistent with check 4. Skip-derived values (21-byte mask, e.g. DDLockSurface→0 at 0x508f70) and skipped-routine static stores: **0 bytes read**. With every skipped call returning a distinct marker, the final image differs only inside the entry skip mask and the binding log is identical. Changing clock/install directory/drive/thread id/memory status changes 11 final bytes outside the input mask (clock-driven IaReset draws), as expected for a named input.
+6. A separate static read-watch of 70 ranges written by non-executed routines recorded no reads.
+
+### Tests and gates
+
+- Light CPU-free: `test_carga_missao_original.py` 10 tests (handlers, profile subset, CRT/Win32 files, arena identity/budgets, declared answers, PVD label, skip RET cleanup vs original bytes, frozen-entry closure of the Stage12 registry: live types (1,2,2,2), saved XP). Native replay test (`RISING_EMULAR=1`) re-runs both captures: 11 run, 0 skipped, passed (68 s).
+- `python3 -B scripts/check.py --domain missions`: 93 tests, 32 optional native skips, passed.
+- Full native missions suite, common checks, integration and committed-main reproduction: **not run** in this slice.
+
+### Development attempts preserved or recorded
+
+Trial stops while closing inputs (all superseded by the committed captures): CRT `rand` fault on uninitialized thread data (→ step 1); fopen `rt` for TEXTES.TXT (→ InitTextLangue skip); sprite banks exhausted an 8,192-allocation budget (→ LoadSTRATBank skip); `debugSymLoad` reached undeclared CreateFileA (→ Win32 file fixture); wrong stack cleanup for FilledBox (fault at 0x1b3, → RET-immediate table); 90 s wall budget under Core's per-instruction hook (→ native guards); `./monstre.ini` path (→ `.\` handling); entry-state check found the leaked briefing stream (→ recorded). Kept under `.local/`: `stage12-calibration-1.json`, `stage12-calibration-fill5a.json`, `stage12-hardened-trial.json`, `stage12-validation-trial.json`, `stage12-missionload-failed-*.json`, capture/validation/test/domain logs.
+
+### Limits
+
+Startup frames between CalculGame calls are not executed (ProgIteration frame counters stay 0; no AffGame/WndProc). The research screen gets no click. Menu text pointers are NULL. The profile parser and Win32 file fixtures are declared subsets. Host-side fixture reads (path strings, 0x4e1d1c in FileSeek) are not in the footprint. The static watch over-approximates direct stores only.
+
+### Next: Python composition (not started)
+
+Start from `entrada-carga-missao-original.json` bytes exactly and compare against the v2 final image, AL and ordered binding log. Needed providers: Core resets/remap/placement (on main), Core `Engin_RetrieveExperimente` (main 3d782ca), the AI adapter `reinicio_ia_compartilhado` for IaReset over live types (1,2,2,2) and the clock-seeded RNG (main 977c890), Economy MarcheResetAll/initializers, and the Missions loaders. The declared file/profile/allocation answers in the oracle log are the composition's external inputs.
