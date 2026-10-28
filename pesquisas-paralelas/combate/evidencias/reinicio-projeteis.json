@@ -1,0 +1,1236 @@
+{
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_pe_normalizado_somente_analise": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "identidade": "All bytes and addresses come from the intact executable; the normalized PE is named only as the analysis identity and is not read here.",
+  "rotina": {
+    "nome": "ProjectileReset",
+    "inicio": "0x46e00a",
+    "fim_exclusivo": "0x46e02c",
+    "tamanho": 34,
+    "sha256_bytes": "9941723e3ce90cbe1637fc3ade4844c9e099c2179e128d3d0a67f1aa264e1e71",
+    "bytes_hex": "535231c0eb0f6bda388b15f080500040c6441a020031d26689c283fa647ce75a5bc3",
+    "arquivo": "0046e00a.asm",
+    "instrucoes": [
+      "0046e00a push ebx",
+      "0046e00b push edx",
+      "0046e00c xor eax, eax",
+      "0046e00e jmp 0x46e01f",
+      "0046e010 imul ebx, edx, 0x38",
+      "0046e013 mov edx, dword ptr [0x5080f0]",
+      "0046e019 inc eax",
+      "0046e01a mov byte ptr [edx + ebx + 2], 0",
+      "0046e01f xor edx, edx",
+      "0046e021 mov dx, ax",
+      "0046e024 cmp edx, 0x64",
+      "0046e027 jl 0x46e010",
+      "0046e029 pop edx",
+      "0046e02a pop ebx",
+      "0046e02b ret"
+    ]
+  },
+  "contrato": {
+    "entradas": "None: EAX/EBX/ECX/EDX/ESI/EDI/EBP and stack arguments are not read; dword [0x5080f0] is reread before every store",
+    "stores": [
+      {
+        "ordem": 1,
+        "endereco": "[0x5080f0]+0x2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 2,
+        "endereco": "[0x5080f0]+0x3a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 3,
+        "endereco": "[0x5080f0]+0x72",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 4,
+        "endereco": "[0x5080f0]+0xaa",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 5,
+        "endereco": "[0x5080f0]+0xe2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 6,
+        "endereco": "[0x5080f0]+0x11a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 7,
+        "endereco": "[0x5080f0]+0x152",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 8,
+        "endereco": "[0x5080f0]+0x18a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 9,
+        "endereco": "[0x5080f0]+0x1c2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 10,
+        "endereco": "[0x5080f0]+0x1fa",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 11,
+        "endereco": "[0x5080f0]+0x232",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 12,
+        "endereco": "[0x5080f0]+0x26a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 13,
+        "endereco": "[0x5080f0]+0x2a2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 14,
+        "endereco": "[0x5080f0]+0x2da",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 15,
+        "endereco": "[0x5080f0]+0x312",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 16,
+        "endereco": "[0x5080f0]+0x34a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 17,
+        "endereco": "[0x5080f0]+0x382",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 18,
+        "endereco": "[0x5080f0]+0x3ba",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 19,
+        "endereco": "[0x5080f0]+0x3f2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 20,
+        "endereco": "[0x5080f0]+0x42a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 21,
+        "endereco": "[0x5080f0]+0x462",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 22,
+        "endereco": "[0x5080f0]+0x49a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 23,
+        "endereco": "[0x5080f0]+0x4d2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 24,
+        "endereco": "[0x5080f0]+0x50a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 25,
+        "endereco": "[0x5080f0]+0x542",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 26,
+        "endereco": "[0x5080f0]+0x57a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 27,
+        "endereco": "[0x5080f0]+0x5b2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 28,
+        "endereco": "[0x5080f0]+0x5ea",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 29,
+        "endereco": "[0x5080f0]+0x622",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 30,
+        "endereco": "[0x5080f0]+0x65a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 31,
+        "endereco": "[0x5080f0]+0x692",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 32,
+        "endereco": "[0x5080f0]+0x6ca",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 33,
+        "endereco": "[0x5080f0]+0x702",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 34,
+        "endereco": "[0x5080f0]+0x73a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 35,
+        "endereco": "[0x5080f0]+0x772",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 36,
+        "endereco": "[0x5080f0]+0x7aa",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 37,
+        "endereco": "[0x5080f0]+0x7e2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 38,
+        "endereco": "[0x5080f0]+0x81a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 39,
+        "endereco": "[0x5080f0]+0x852",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 40,
+        "endereco": "[0x5080f0]+0x88a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 41,
+        "endereco": "[0x5080f0]+0x8c2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 42,
+        "endereco": "[0x5080f0]+0x8fa",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 43,
+        "endereco": "[0x5080f0]+0x932",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 44,
+        "endereco": "[0x5080f0]+0x96a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 45,
+        "endereco": "[0x5080f0]+0x9a2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 46,
+        "endereco": "[0x5080f0]+0x9da",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 47,
+        "endereco": "[0x5080f0]+0xa12",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 48,
+        "endereco": "[0x5080f0]+0xa4a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 49,
+        "endereco": "[0x5080f0]+0xa82",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 50,
+        "endereco": "[0x5080f0]+0xaba",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 51,
+        "endereco": "[0x5080f0]+0xaf2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 52,
+        "endereco": "[0x5080f0]+0xb2a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 53,
+        "endereco": "[0x5080f0]+0xb62",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 54,
+        "endereco": "[0x5080f0]+0xb9a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 55,
+        "endereco": "[0x5080f0]+0xbd2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 56,
+        "endereco": "[0x5080f0]+0xc0a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 57,
+        "endereco": "[0x5080f0]+0xc42",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 58,
+        "endereco": "[0x5080f0]+0xc7a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 59,
+        "endereco": "[0x5080f0]+0xcb2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 60,
+        "endereco": "[0x5080f0]+0xcea",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 61,
+        "endereco": "[0x5080f0]+0xd22",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 62,
+        "endereco": "[0x5080f0]+0xd5a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 63,
+        "endereco": "[0x5080f0]+0xd92",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 64,
+        "endereco": "[0x5080f0]+0xdca",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 65,
+        "endereco": "[0x5080f0]+0xe02",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 66,
+        "endereco": "[0x5080f0]+0xe3a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 67,
+        "endereco": "[0x5080f0]+0xe72",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 68,
+        "endereco": "[0x5080f0]+0xeaa",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 69,
+        "endereco": "[0x5080f0]+0xee2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 70,
+        "endereco": "[0x5080f0]+0xf1a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 71,
+        "endereco": "[0x5080f0]+0xf52",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 72,
+        "endereco": "[0x5080f0]+0xf8a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 73,
+        "endereco": "[0x5080f0]+0xfc2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 74,
+        "endereco": "[0x5080f0]+0xffa",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 75,
+        "endereco": "[0x5080f0]+0x1032",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 76,
+        "endereco": "[0x5080f0]+0x106a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 77,
+        "endereco": "[0x5080f0]+0x10a2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 78,
+        "endereco": "[0x5080f0]+0x10da",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 79,
+        "endereco": "[0x5080f0]+0x1112",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 80,
+        "endereco": "[0x5080f0]+0x114a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 81,
+        "endereco": "[0x5080f0]+0x1182",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 82,
+        "endereco": "[0x5080f0]+0x11ba",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 83,
+        "endereco": "[0x5080f0]+0x11f2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 84,
+        "endereco": "[0x5080f0]+0x122a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 85,
+        "endereco": "[0x5080f0]+0x1262",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 86,
+        "endereco": "[0x5080f0]+0x129a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 87,
+        "endereco": "[0x5080f0]+0x12d2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 88,
+        "endereco": "[0x5080f0]+0x130a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 89,
+        "endereco": "[0x5080f0]+0x1342",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 90,
+        "endereco": "[0x5080f0]+0x137a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 91,
+        "endereco": "[0x5080f0]+0x13b2",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 92,
+        "endereco": "[0x5080f0]+0x13ea",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 93,
+        "endereco": "[0x5080f0]+0x1422",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 94,
+        "endereco": "[0x5080f0]+0x145a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 95,
+        "endereco": "[0x5080f0]+0x1492",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 96,
+        "endereco": "[0x5080f0]+0x14ca",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 97,
+        "endereco": "[0x5080f0]+0x1502",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 98,
+        "endereco": "[0x5080f0]+0x153a",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 99,
+        "endereco": "[0x5080f0]+0x1572",
+        "largura": "u8",
+        "valor": 0
+      },
+      {
+        "ordem": 100,
+        "endereco": "[0x5080f0]+0x15aa",
+        "largura": "u8",
+        "valor": 0
+      }
+    ],
+    "outros_bytes": "The other 55 bytes of every 56-byte record and every global are not written",
+    "pilha": "push ebx; push edx scratch at [entry_esp-4],[entry_esp-8]; restored by pop; plain ret",
+    "retorno": "EAX=0x64; EBX/EDX restored; ECX/ESI/EDI/EBP untouched; flags from final cmp edx(0x64),0x64",
+    "chamadas": [],
+    "dominio": "The pool pointer must address 5600 mapped writable bytes; ProjectileAlloc 0x46dfa0 provides it once at ProgInit"
+  },
+  "chamadores": [
+    {
+      "endereco": "0x46b5ac",
+      "rotina": "MissionReStart+0x2d",
+      "retorno": "0x46b5b1"
+    },
+    {
+      "endereco": "0x46b8c1",
+      "rotina": "GameLoad+0x34",
+      "retorno": "0x46b8c6"
+    },
+    {
+      "endereco": "0x46c373",
+      "rotina": "MissionLoad+0xa4",
+      "retorno": "0x46c378"
+    },
+    {
+      "endereco": "0x46c623",
+      "rotina": "MissionLoadName+0x40",
+      "retorno": "0x46c628"
+    }
+  ],
+  "ponteiros_absolutos_para_rotina": [],
+  "contextos": {
+    "MissionLoad": {
+      "inicio": "0x46c34c",
+      "fim_exclusivo": "0x46c382",
+      "sha256_bytes": "e18e1687b83f9c62e0c600466d3efef6d7b714393b3f4bd656c213d399ace7a5",
+      "chamadas": [
+        {
+          "endereco": "0x46c35a",
+          "alvo": "0x45e88f",
+          "rotina": "IconeReset"
+        },
+        {
+          "endereco": "0x46c35f",
+          "alvo": "0x46b315",
+          "rotina": "TerrainReset"
+        },
+        {
+          "endereco": "0x46c364",
+          "alvo": "0x469f00",
+          "rotina": "MiniMapReset"
+        },
+        {
+          "endereco": "0x46c369",
+          "alvo": "0x41a75c",
+          "rotina": "BatimentResetAll"
+        },
+        {
+          "endereco": "0x46c36e",
+          "alvo": "0x441659",
+          "rotina": "EnginResetAll"
+        },
+        {
+          "endereco": "0x46c373",
+          "alvo": "0x46e00a",
+          "rotina": "ProjectileReset"
+        },
+        {
+          "endereco": "0x46c378",
+          "alvo": "0x469908",
+          "rotina": "MessageBoxInit"
+        },
+        {
+          "endereco": "0x46c37d",
+          "alvo": "0x441b6c",
+          "rotina": "BallonInit"
+        }
+      ]
+    },
+    "MissionLoadName": {
+      "inicio": "0x46c5f5",
+      "fim_exclusivo": "0x46c62d",
+      "sha256_bytes": "ca54c56d4062a7b0b42fa6b315cd7452e6bbb09b4060b14f577d606d864949bb",
+      "chamadas": [
+        {
+          "endereco": "0x46c60a",
+          "alvo": "0x45e88f",
+          "rotina": "IconeReset"
+        },
+        {
+          "endereco": "0x46c60f",
+          "alvo": "0x46b315",
+          "rotina": "TerrainReset"
+        },
+        {
+          "endereco": "0x46c614",
+          "alvo": "0x469f00",
+          "rotina": "MiniMapReset"
+        },
+        {
+          "endereco": "0x46c619",
+          "alvo": "0x41a75c",
+          "rotina": "BatimentResetAll"
+        },
+        {
+          "endereco": "0x46c61e",
+          "alvo": "0x441659",
+          "rotina": "EnginResetAll"
+        },
+        {
+          "endereco": "0x46c623",
+          "alvo": "0x46e00a",
+          "rotina": "ProjectileReset"
+        },
+        {
+          "endereco": "0x46c628",
+          "alvo": "0x469908",
+          "rotina": "MessageBoxInit"
+        }
+      ]
+    },
+    "MissionReStart": {
+      "inicio": "0x46b57f",
+      "fim_exclusivo": "0x46b5b8",
+      "sha256_bytes": "0ff63d2c616bff16d1f2af514580717f8ad48f107e94b26056fea4692b9043b8",
+      "chamadas": [
+        {
+          "endereco": "0x46b593",
+          "alvo": "0x45e88f",
+          "rotina": "IconeReset"
+        },
+        {
+          "endereco": "0x46b598",
+          "alvo": "0x46b315",
+          "rotina": "TerrainReset"
+        },
+        {
+          "endereco": "0x46b59d",
+          "alvo": "0x469f00",
+          "rotina": "MiniMapReset"
+        },
+        {
+          "endereco": "0x46b5a2",
+          "alvo": "0x41a75c",
+          "rotina": "BatimentResetAll"
+        },
+        {
+          "endereco": "0x46b5a7",
+          "alvo": "0x441659",
+          "rotina": "EnginResetAll"
+        },
+        {
+          "endereco": "0x46b5ac",
+          "alvo": "0x46e00a",
+          "rotina": "ProjectileReset"
+        },
+        {
+          "endereco": "0x46b5b1",
+          "alvo": "0x469908",
+          "rotina": "MessageBoxInit"
+        }
+      ]
+    },
+    "GameLoad": {
+      "inicio": "0x46b895",
+      "fim_exclusivo": "0x46b8cb",
+      "sha256_bytes": "43880d19d90b46565e8b974ece97c34afb1f1908d23d962430afc00efd4943a1",
+      "chamadas": [
+        {
+          "endereco": "0x46b8a8",
+          "alvo": "0x45e88f",
+          "rotina": "IconeReset"
+        },
+        {
+          "endereco": "0x46b8ad",
+          "alvo": "0x46b315",
+          "rotina": "TerrainReset"
+        },
+        {
+          "endereco": "0x46b8b2",
+          "alvo": "0x469f00",
+          "rotina": "MiniMapReset"
+        },
+        {
+          "endereco": "0x46b8b7",
+          "alvo": "0x41a75c",
+          "rotina": "BatimentResetAll"
+        },
+        {
+          "endereco": "0x46b8bc",
+          "alvo": "0x441659",
+          "rotina": "EnginResetAll"
+        },
+        {
+          "endereco": "0x46b8c1",
+          "alvo": "0x46e00a",
+          "rotina": "ProjectileReset"
+        },
+        {
+          "endereco": "0x46b8c6",
+          "alvo": "0x469908",
+          "rotina": "MessageBoxInit"
+        }
+      ]
+    }
+  },
+  "alocacao_pool": {
+    "rotina": "ProjectileAlloc",
+    "inicio": "0x46dfa0",
+    "fim_exclusivo": "0x46dfb0",
+    "sha256_bytes": "16e8e3c2a6770008649d38b9c8b5b1384a7aa7199887fdceb472673a03e3a9c8",
+    "bytes_hex": "b8e0150000e8fc9effffa3f0805000c3",
+    "tamanho_bytes": 5600,
+    "chamadores": [
+      {
+        "endereco": "0x474ed7",
+        "rotina": "ProgInit+0x2ec"
+      }
+    ],
+    "liberacao": [
+      {
+        "endereco": "0x474f91",
+        "rotina": "ProgExit+0x5"
+      }
+    ]
+  },
+  "globais_combate": {
+    "0x5080f0": {
+      "descricao": "projectile pool pointer (dword)",
+      "referencias": [
+        {
+          "endereco": "0x46dfaa",
+          "rotina": "ProjectileAlloc+0xa",
+          "instrucao": "mov dword ptr [0x5080f0], eax",
+          "acesso": "write"
+        },
+        {
+          "endereco": "0x46dfb0",
+          "rotina": "ProjectileFree+0x0",
+          "instrucao": "mov eax, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46dfc3",
+          "rotina": "LoadProjectile+0x9",
+          "instrucao": "mov eax, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46dfeb",
+          "rotina": "SaveProjectile+0x9",
+          "instrucao": "mov eax, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46e013",
+          "rotina": "ProjectileReset+0x9",
+          "instrucao": "mov edx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46e03b",
+          "rotina": "ProjectileExiste+0xf",
+          "instrucao": "mov eax, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46e220",
+          "rotina": "ProjectileSet+0x18",
+          "instrucao": "mov eax, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46e437",
+          "rotina": "ProjectileGetLibre+0x15",
+          "instrucao": "mov edx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46e467",
+          "rotina": "ProjectileInit+0x1b",
+          "instrucao": "mov edx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46e53b",
+          "rotina": "ProjectileAnim+0xf",
+          "instrucao": "mov edx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46ec50",
+          "rotina": "ProjectileAvance+0x158",
+          "instrucao": "mov ebx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46ed44",
+          "rotina": "ProjectileAvance+0x24c",
+          "instrucao": "mov ebx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46edec",
+          "rotina": "ProjectileAvance+0x2f4",
+          "instrucao": "mov ebx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46efde",
+          "rotina": "ProjectileAvance+0x4e6",
+          "instrucao": "mov edx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46f217",
+          "rotina": "ProjectileAvance+0x71f",
+          "instrucao": "mov edx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46f32e",
+          "rotina": "ProjectileAvance+0x836",
+          "instrucao": "mov ebx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46f3fe",
+          "rotina": "ProjectileAvance+0x906",
+          "instrucao": "mov ebx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46f617",
+          "rotina": "ProjectileAvance+0xb1f",
+          "instrucao": "mov edx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46f70d",
+          "rotina": "ProjectileAvance+0xc15",
+          "instrucao": "mov ebx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46f7a5",
+          "rotina": "ProjectileAvance+0xcad",
+          "instrucao": "mov ebx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46f8c8",
+          "rotina": "ProjectileAvance+0xdd0",
+          "instrucao": "mov edx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46f989",
+          "rotina": "ProjectileAvance+0xe91",
+          "instrucao": "mov ebx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46fa30",
+          "rotina": "ProjectileAvance+0xf38",
+          "instrucao": "mov ebx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46fc4b",
+          "rotina": "ProjectileCalcul+0x3c",
+          "instrucao": "mov eax, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46fc78",
+          "rotina": "ProjectileCalcul+0x69",
+          "instrucao": "mov eax, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46fcb2",
+          "rotina": "ProjectileTrierAffichage+0x27",
+          "instrucao": "mov ecx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46fde9",
+          "rotina": "ProjectileTrierAffichage+0x15e",
+          "instrucao": "mov ecx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46fe44",
+          "rotina": "ProjectileTrierAffichage+0x1b9",
+          "instrucao": "mov ecx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46fea9",
+          "rotina": "ProjectileGetCase+0xf",
+          "instrucao": "mov ebx, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x46ff85",
+          "rotina": "AffProjectile+0x15",
+          "instrucao": "mov esi, dword ptr [0x5080f0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x47019d",
+          "rotina": "AffProjectile+0x22d",
+          "instrucao": "mov eax, dword ptr [0x5080f0]",
+          "acesso": "read"
+        }
+      ]
+    },
+    "0x4e19c0": {
+      "descricao": "last local alert counter (dword)",
+      "referencias": [
+        {
+          "endereco": "0x440aec",
+          "rotina": "TryLanceAttaqueSound+0x2c",
+          "instrucao": "mov eax, dword ptr [0x4e19c0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x440afb",
+          "rotina": "TryLanceAttaqueSound+0x3b",
+          "instrucao": "mov esi, dword ptr [0x4e19c0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x440b11",
+          "rotina": "TryLanceAttaqueSound+0x51",
+          "instrucao": "mov dword ptr [0x4e19c0], eax",
+          "acesso": "write"
+        },
+        {
+          "endereco": "0x440b71",
+          "rotina": "GoLastAttaque+0xe",
+          "instrucao": "sub edx, dword ptr [0x4e19c0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x451045",
+          "rotina": "InfligeDegat+0x7d1",
+          "instrucao": "mov eax, dword ptr [0x4e19c0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x451054",
+          "rotina": "InfligeDegat+0x7e0",
+          "instrucao": "mov esi, dword ptr [0x4e19c0]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x45106f",
+          "rotina": "InfligeDegat+0x7fb",
+          "instrucao": "mov dword ptr [0x4e19c0], eax",
+          "acesso": "write"
+        }
+      ]
+    },
+    "0x496acc": {
+      "descricao": "last local alert cell (dword store, u16 consumer)",
+      "referencias": [
+        {
+          "endereco": "0x440b34",
+          "rotina": "TryLanceAttaqueSound+0x74",
+          "instrucao": "mov dword ptr [0x496acc], eax",
+          "acesso": "write"
+        },
+        {
+          "endereco": "0x440b86",
+          "rotina": "GoLastAttaque+0x23",
+          "instrucao": "mov ebx, dword ptr [0x496acc]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x45108e",
+          "rotina": "InfligeDegat+0x81a",
+          "instrucao": "mov dword ptr [0x496acc], eax",
+          "acesso": "write"
+        }
+      ]
+    },
+    "0x4dfb44": {
+      "descricao": "impact presentation displacement input",
+      "referencias": [
+        {
+          "endereco": "0x41a430",
+          "rotina": "BatimentInfligeDegat+0x16f",
+          "instrucao": "mov byte ptr [0x4dfb44], 0x14",
+          "acesso": "write"
+        },
+        {
+          "endereco": "0x41ee34",
+          "rotina": "VendreBatiment+0x55",
+          "instrucao": "mov byte ptr [0x4dfb44], 0x14",
+          "acesso": "write"
+        },
+        {
+          "endereco": "0x41ef87",
+          "rotina": "DetruireBatiment+0x4a",
+          "instrucao": "mov byte ptr [0x4dfb44], 0x14",
+          "acesso": "write"
+        },
+        {
+          "endereco": "0x43f15e",
+          "rotina": "DDFlipPage+0xf",
+          "instrucao": "mov bl, byte ptr [0x4dfb44]",
+          "acesso": "read"
+        },
+        {
+          "endereco": "0x43f1a0",
+          "rotina": "DDFlipPage+0x51",
+          "instrucao": "mov byte ptr [0x4dfb44], dl",
+          "acesso": "write"
+        },
+        {
+          "endereco": "0x46f08c",
+          "rotina": "ProjectileAvance+0x594",
+          "instrucao": "mov byte ptr [0x4dfb44], ch",
+          "acesso": "write"
+        }
+      ]
+    }
+  },
+  "engin_reset_all_stores": {
+    "rotina": "EnginResetAll",
+    "inicio": "0x441659",
+    "fim_exclusivo": "0x441775",
+    "proprietario": "core",
+    "stores": [
+      {
+        "endereco": "0x441662",
+        "instrucao": "mov dword ptr [esp], edx"
+      },
+      {
+        "endereco": "0x44167b",
+        "instrucao": "mov word ptr [ecx + ebx*2 + 6], 0"
+      },
+      {
+        "endereco": "0x441683",
+        "instrucao": "mov byte ptr [ecx + eax + 0x42], 0"
+      },
+      {
+        "endereco": "0x4416b1",
+        "instrucao": "mov word ptr [eax], 0"
+      },
+      {
+        "endereco": "0x4416b6",
+        "instrucao": "mov word ptr [eax + 0x66], 0"
+      },
+      {
+        "endereco": "0x4416be",
+        "instrucao": "mov word ptr [eax + 4], 0"
+      },
+      {
+        "endereco": "0x4416c6",
+        "instrucao": "mov word ptr [eax + 2], 0"
+      },
+      {
+        "endereco": "0x4416d4",
+        "instrucao": "mov word ptr [ecx + ebx*2 + 6], 0"
+      },
+      {
+        "endereco": "0x4416dc",
+        "instrucao": "mov byte ptr [ecx + eax + 0x42], 0"
+      },
+      {
+        "endereco": "0x44171f",
+        "instrucao": "mov word ptr [ebx + eax + 0x9a], 0"
+      },
+      {
+        "endereco": "0x44172f",
+        "instrucao": "mov byte ptr [ebx + eax + 2], 0"
+      },
+      {
+        "endereco": "0x44173a",
+        "instrucao": "mov byte ptr [ebx + eax + 0xaf], 0"
+      },
+      {
+        "endereco": "0x44174d",
+        "instrucao": "mov word ptr [eax + 0x66], 0"
+      },
+      {
+        "endereco": "0x441753",
+        "instrucao": "mov word ptr [eax + 4], 0"
+      },
+      {
+        "endereco": "0x44175b",
+        "instrucao": "mov word ptr [eax + 2], 0"
+      },
+      {
+        "endereco": "0x441763",
+        "instrucao": "mov word ptr [eax], 0"
+      }
+    ]
+  },
+  "conclusao": "ProjectileReset is the only combat-owned reset in the MissionLoad/MissionLoadName prefixes. EnginResetAll writes Bag words, +2, +0x9A and +0xAF; attack fields are retained. The combat globals above have no writer inside the prefix callees."
+}

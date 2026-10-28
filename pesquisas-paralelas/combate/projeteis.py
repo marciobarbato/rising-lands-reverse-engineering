@@ -8,6 +8,8 @@ Não implementa aritmética de dano, desenho nem uma duração de tick.
 from dataclasses import dataclass, field
 import struct
 
+from reinicio_projeteis import resetar_projeteis
+
 TAMANHO, QUANTIDADE = 56, 100
 
 
@@ -98,9 +100,8 @@ class PoolProjeteis:
         return memoryview(self.memoria)[indice * TAMANHO:(indice + 1) * TAMANHO]
 
     def resetar(self):
-        """0x46e00a: limpa somente +02 dos 100 registros."""
-        for i in range(QUANTIDADE):
-            self.memoria[i * TAMANHO + 2] = 0
+        """0x46e00a: limpa somente +02 dos 100 registros; devolve EAX=0x64."""
+        return resetar_projeteis(self.memoria)
 
     def existe(self, indice):
         """0x46e02c: byte bruto em AL, sem normalização booleana."""
