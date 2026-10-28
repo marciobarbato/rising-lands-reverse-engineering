@@ -1,0 +1,179 @@
+{
+  "success": true,
+  "tests": 40,
+  "failures": 0,
+  "errors": 0,
+  "skipped": [],
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "original_ranges": "prefix0x4504c6..0x450588; table0x450288..0x4502f0; common original tail",
+  "bounded_x86_executions": 6354,
+  "per_test": [
+    {
+      "teste": "test_dano_modo4.ContratosDanoModo4.test_loaded_direction_selection_and_signed_quarter",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo4.ContratosDanoModo4.test_missing_values_and_uninitialized_directions_fail_early",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo4.ContratosDanoModo4.test_mode4_does_not_call_mode1_lethal_handler",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo4.DiferencialDanoModo4.test_original_all_types_and_both_loaded_bytes",
+      "execucoes_x86_delimitadas": 364
+    },
+    {
+      "teste": "test_dano_modo4.DiferencialDanoModo4.test_original_every_raw_byte_in_both_classes",
+      "execucoes_x86_delimitadas": 1024
+    },
+    {
+      "teste": "test_dano_modo4.DiferencialDanoModo4.test_original_id_aliases_and_audio_handles",
+      "execucoes_x86_delimitadas": 28
+    },
+    {
+      "teste": "test_dano_modo4.DiferencialDanoModo4.test_original_reduction_protection_and_life_edges",
+      "execucoes_x86_delimitadas": 432
+    },
+    {
+      "teste": "test_dano_modo9.ContratosDanoModo9.test_life_half_is_truncated_before_zero_to_one",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo9.ContratosDanoModo9.test_mode1_lethal_handler_is_not_called_for_mode9",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo9.DiferencialDanoModo9.test_original_all_raw_damage_bytes_at_multiple_life_bands",
+      "execucoes_x86_delimitadas": 2048
+    },
+    {
+      "teste": "test_dano_modo9.DiferencialDanoModo9.test_original_reduction_protection_and_life_edges",
+      "execucoes_x86_delimitadas": 216
+    },
+    {
+      "teste": "test_dano_modo9.DiferencialDanoModo9.test_original_sources_targets_and_aliased_ids",
+      "execucoes_x86_delimitadas": 112
+    },
+    {
+      "teste": "test_dano_modo9.DiferencialDanoModo9.test_original_visible_audio_and_existing_handles",
+      "execucoes_x86_delimitadas": 20
+    },
+    {
+      "teste": "test_dano_modo8.ContratosDanoModo8.test_missing_row_and_unsupported_modes_fail_before_callbacks",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo8.ContratosDanoModo8.test_mode8_never_uses_mode1_lethal_handler",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo8.ContratosDanoModo8.test_special_row_has_no_mode1_bonus_or_message_prefix",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo8.DiferencialDanoModo8.test_original_every_source_victim_type_and_loaded_bonus",
+      "execucoes_x86_delimitadas": 676
+    },
+    {
+      "teste": "test_dano_modo8.DiferencialDanoModo8.test_original_fixed_width_life_protection_and_reduction_edges",
+      "execucoes_x86_delimitadas": 540
+    },
+    {
+      "teste": "test_dano_modo8.DiferencialDanoModo8.test_original_id_edges_and_source_victim_alias",
+      "execucoes_x86_delimitadas": 8
+    },
+    {
+      "teste": "test_dano_modo8.DiferencialDanoModo8.test_original_visible_audio_and_existing_handles",
+      "execucoes_x86_delimitadas": 20
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_audio_dependency_occurs_after_f9_write_before_life",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_callback_rereads_and_protected_zero_heals",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_death_preserves_life_and_prior_effects",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_mode_width_and_nonlethal_consumer",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_unsupported_and_missing_callbacks_fail_without_fabricated_damage",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_consumer_boundaries_and_all_valid_types",
+      "execucoes_x86_delimitadas": 676
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_id_edges_and_aliased_source",
+      "execucoes_x86_delimitadas": 8
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_projectile_to_occupied_consumer_checkpoint",
+      "execucoes_x86_delimitadas": 8
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_reads_after_synthetic_message_callback_mutation",
+      "execucoes_x86_delimitadas": 1
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_visible_existing_handle_and_audio_stops",
+      "execucoes_x86_delimitadas": 20
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_zero_protection_and_life_edges",
+      "execucoes_x86_delimitadas": 50
+    },
+    {
+      "teste": "test_consumo_fisico.ContratosConsumoFisico.test_invalid_backing_pool_fails_before_callbacks",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.ContratosConsumoFisico.test_missing_level_still_precedes_life_and_physical_death",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.ContratosConsumoFisico.test_physical_exception_identity_and_prior_child_are_retained",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.ContratosConsumoFisico.test_shared_records_see_both_world_and_combat_writes",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.DiferencialConsumoFisico.test_original_child_pool_saturation_and_id_edges",
+      "execucoes_x86_delimitadas": 6
+    },
+    {
+      "teste": "test_consumo_fisico.DiferencialConsumoFisico.test_original_inactive_guard_preserves_physical_state",
+      "execucoes_x86_delimitadas": 2
+    },
+    {
+      "teste": "test_consumo_fisico.DiferencialConsumoFisico.test_original_ordinary_targets_and_current_reserved_cells",
+      "execucoes_x86_delimitadas": 76
+    },
+    {
+      "teste": "test_consumo_fisico.DiferencialConsumoFisico.test_original_physical_partial_failures_retain_prior_combat_effects",
+      "execucoes_x86_delimitadas": 11
+    },
+    {
+      "teste": "test_consumo_fisico.DiferencialConsumoFisico.test_original_projectile_consumer_and_physical_death_return",
+      "execucoes_x86_delimitadas": 8
+    }
+  ],
+  "mode4_complete_returns": 1580,
+  "expected_mode4_death_stops": 264,
+  "expected_mode4_audio_stops": 4,
+  "regression_x86": 4506,
+  "scope": "Mode4 loaded damage bytes for directions29/30; original signed quarter classification; common tail and mode9/8/1 regressions",
+  "excluded": "Uninitialized mode4 directions; mode4 lethal/world caller completion or game meaning; other unsupported modes; mission/runtime",
+  "diagnostics": []
+}

@@ -1,5 +1,6 @@
 import AppKit
 import WebKit
+import CryptoKit
 
 final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler, WKNavigationDelegate, NSWindowDelegate {
     var window: NSWindow!
@@ -28,7 +29,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         web.navigationDelegate = self
         web.setValue(false, forKey: "drawsBackground")
         window = NSWindow(contentRect: NSRect(x:0,y:0,width:1360,height:900), styleMask:[.titled,.closable,.miniaturizable,.resizable], backing:.buffered, defer:false)
-        window.title = "Rising Lands — Observatório da reconstrução"
+        window.title = "RisingLands-ptbr — Sessão jogável"
         window.minSize = NSSize(width:1080,height:740)
         window.contentView = web
         window.delegate = self
@@ -51,9 +52,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         let main = NSMenu()
         let appItem = NSMenuItem(); main.addItem(appItem)
         let appMenu = NSMenu(); appItem.submenu = appMenu
-        appMenu.addItem(withTitle:"Sobre Rising Lands Preview",action:#selector(showAbout),keyEquivalent:"")
+        appMenu.addItem(withTitle:"Sobre RisingLands-ptbr",action:#selector(showAbout),keyEquivalent:"")
         appMenu.addItem(.separator())
-        appMenu.addItem(withTitle:"Encerrar Rising Lands Preview",action:#selector(NSApplication.terminate(_:)),keyEquivalent:"q")
+        appMenu.addItem(withTitle:"Encerrar RisingLands-ptbr",action:#selector(NSApplication.terminate(_:)),keyEquivalent:"q")
         let edit = NSMenuItem(); main.addItem(edit); let editMenu = NSMenu(title:"Editar"); edit.submenu = editMenu
         editMenu.addItem(withTitle:"Copiar",action:#selector(NSText.copy(_:)),keyEquivalent:"c")
         editMenu.addItem(withTitle:"Colar",action:#selector(NSText.paste(_:)),keyEquivalent:"v")
@@ -64,7 +65,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         NSApp.mainMenu = main
     }
     @objc func showAbout() {
-        NSApp.orderFrontStandardAboutPanel(options:[.applicationName:"Rising Lands Preview", .applicationVersion:"0.1", .credits:NSAttributedString(string:"Visualizador local de pesquisa. Movimento Python reconstruído; consulte a procedência dentro do aplicativo.")])
+        NSApp.orderFrontStandardAboutPanel(options:[.applicationName:"RisingLands-ptbr", .applicationVersion:"0.1", .credits:NSAttributedString(string:"Sessão interativa de pesquisa reconstruída. Consulte a procedência e os limites dentro do aplicativo.")])
     }
     func launchEngine() throws {
         let process = Process()
@@ -73,6 +74,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         process.currentDirectoryURL = resourceRoot
         var env = ProcessInfo.processInfo.environment
         env.removeValue(forKey:"PYTHONPATH"); env.removeValue(forKey:"PYTHONHOME")
+        env.removeValue(forKey:"RISING_APP_ROOT")
         env["PYTHONDONTWRITEBYTECODE"] = "1"
         process.environment = env
         let stdinPipe = Pipe(); let stdoutPipe = Pipe(); let stderrPipe = Pipe()
@@ -112,8 +114,29 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         }
     }
     func userContentController(_ userContentController:WKUserContentController,didReceive message:WKScriptMessage) {
+        if message.frameInfo.isMainFrame, let body = message.body as? [String:Any],
+           body["action"] as? String == "capture", smokeOutput != nil,
+           let shot = screenshotOutput, let label = body["label"] as? String,
+           ["before", "after"].contains(label), let requestID = body["id"] {
+            web.takeSnapshot(with:nil) { [weak self] image,error in
+                var response:[String:Any] = ["id":requestID,"ok":false,"error":"Falha na captura nativa"]
+                if let image = image, let tiff = image.tiffRepresentation,
+                   let bitmap = NSBitmapImageRep(data:tiff), let png = bitmap.representation(using:.png,properties:[:]) {
+                    let url = shot.deletingPathExtension().appendingPathExtension(label + ".png")
+                    do {
+                        try png.write(to:url)
+                        let hash = SHA256.hash(data:png).map { String(format:"%02x",$0) }.joined()
+                        response = ["id":requestID,"ok":true,"capture":["sha256":hash,"path":url.path]]
+                    } catch { response["error"] = error.localizedDescription }
+                }
+                if let data = try? JSONSerialization.data(withJSONObject:response), let json = String(data:data,encoding:.utf8) {
+                    self?.web.evaluateJavaScript("window.receive(\(json));",completionHandler:nil)
+                }
+            }
+            return
+        }
         guard message.frameInfo.isMainFrame, let body = message.body as? [String:Any], let action = body["action"] as? String,
-              ["init","reset","select","order","pause","play","speed","step","pump","state","economy","combat"].contains(action),
+              ["init","reset","select","order","pause","play","speed","step","pump","state","economy","combat","interact"].contains(action),
               let data = try? JSONSerialization.data(withJSONObject:body) else { return }
         ioQueue.async { [weak self] in
             do { try self?.input?.write(contentsOf:data + Data([10])) }
@@ -126,7 +149,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
     }
     func webView(_ webView:WKWebView,didFinish navigation:WKNavigation!) {
         guard smokeOutput != nil else { return }
-        webView.callAsyncJavaScript("return await window.runSmokeTests();",arguments:[:],in:nil,in:.page) { [weak self] result in
+        webView.callAsyncJavaScript("return await window.runSmokeTests().catch(e=>({passed:false,error:String(e),stack:e.stack,diagnostics:window.smokeDiagnostics?window.smokeDiagnostics():{}}));",arguments:[:],in:nil,in:.page) { [weak self] result in
             switch result {
             case .success(let value):self?.finishSmoke(value as? [String:Any] ?? ["passed":false,"error":"Resposta inválida"])
             case .failure(let error):self?.finishSmoke(["passed":false,"error":error.localizedDescription,"pythonStderr":self?.errorText ?? ""])
@@ -149,7 +172,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
     }
     func fail(_ message:String) {
         if smokeOutput != nil { finishSmoke(["passed":false,"error":message]); return }
-        let alert = NSAlert(); alert.messageText = "Rising Lands Preview"; alert.informativeText = message; alert.alertStyle = .critical; alert.runModal()
+        let alert = NSAlert(); alert.messageText = "RisingLands-ptbr"; alert.informativeText = message; alert.alertStyle = .critical; alert.runModal()
     }
     func applicationShouldTerminateAfterLastWindowClosed(_ sender:NSApplication)->Bool { true }
     func applicationWillTerminate(_ notification:Notification) {

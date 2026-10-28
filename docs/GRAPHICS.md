@@ -181,6 +181,7 @@ This inventory distinguishes reconstructed behavior, captured original behavior,
 | Gate shared tail | The full-return API now reconstructs `AffBatiments 0x40F342..0x40F49C` for terrain other than `0x356`; 882 fresh x86 calls validate return/clip/guards | Close the workshop-trigger lookup with a committed world-provider contract; integrate the consumer |
 | Other building facades and overlays | `AffBatiments 0x407DD3..0x40F49C`; only the Sanctuary subset and gate facade are reconstructed | Recover per-type/mode layers, clipping and anchors against original buffers |
 | Unit action handlers | `AffEngin` dispatches to attack `0x41374C`, construction `0x414495`, work `0x414A8A`, death `0x41559A` | Map each supported type/action input and coordinate simulation phase producers |
+| Type-2 normal body | Separate raw-record mapper/compositor reconstructs branch `0x412ECE`, raw frame stride and exact anchor; full native calls and indexed buffers match | Consume the committed provider in the app; recover other players/effects/actions independently |
 | Projectile display inputs/rendering | The 100-record selection/sort, cell queries and public `AffProjectile` mapper/compositor are reconstructed; eight bounded complete sprite scenes use the public renderer | Integrate the consumer and physical producers; preserve explicit catalog limits and raw phase semantics |
 | Projectile/effect lighting | `CalculEclairage`, clipping-enabled mask remap and public projectile consumers are independently validated | Recover remaining palette effects and their lifecycle separately |
 | Scene traversal/projection | Complete interior `AffSprite` planning/execution and relative projection are reconstructed; native complete-pass traces and bounded indexed scenes match | Recover margin wraparound/negative origins, `AffGame` projection/cadence and a real-mission consumer |
@@ -219,6 +220,25 @@ Seven new saved-capture regressions pass; `python3 -B scripts/check.py --domain 
 
 ```sh
 python3 -B pesquisas-paralelas/graficos-animacao/validar_projeteis_graficos.py
+python3 -B scripts/check.py --domain graphics
+```
+
+## Type-2 normal body — eighth continuation stage
+
+The app's type-2 body gap is reconstructed in a separate `unidade_tipo2.py`, preserving the existing five-type modules and their frozen provenance. `consultar_corpo_tipo2(registro276, *, x, y)` requires one 276-byte prepared runtime record and signed-i16 projected cell origins. Supported inputs: owner byte `+0=0`, type `+1=2`, state `+2` in 2/7, oscillation `+0x99=0`, effects byte `+0xDC=0`, auxiliary indicator `+0xBA=0` and unsigned word `+0x74>=100`. These are explicit conditions, not defaults inferred from a loaded mission. The bag word at `+0x0A` does not affect this branch.
+
+It reads signed-i8 displacement `+0x86/+0x87`, raw direction u8 `+0x91`, phase u8 `+0xA4` and count u8 `+0xA5`. Body ID is low-u16 `3202 + (floor((direction+1)/2)-1)*count + phase`; direction zero therefore uses group -1, rather than being silently clamped. Native type initialization sets count=8 and oscillation=0, but this renderer consumes every count/phase byte raw. It does not reset state-7 phase to the separate stop-phase value, infer animation cadence or advance simulation.
+
+Exact order is shadow ID10784 at `(x+dx+2,y+dy+26)`, then body at `(x+dx-32,y+dy-16)`, with every final coordinate wrapped to signed i16. The plan contains engine/file/local IDs and operations. `compor_corpo_tipo2(catalogo,destino,largura,altura,registro276,*,x,y,tabela_sombra,recorte=None)` requires an explicit 256-byte shadow table and returns `(new_indexed_bytes,plan)` through the existing indexed blitters/inclusive clip. Record, surface and table remain unchanged; no callbacks or world mutations occur. Invalid widths/lengths raise `ValueError`, missing keywords `TypeError`, unsupported guards/types/states and out-of-catalog raw IDs `NotImplementedError` before composition. Other owners, oscillation, effects, indicators and action handlers remain unsupported by this API.
+
+Original evidence: unchanged executable SHA-256 above; type-2 branch `0x412ECE..0x412F1C` hash `2861dce18904b697f56ffba18973c8f0707d9dd8f8b9ea5b51140e764afb6c57`, anchor `0x410F6C -> 0x410FF8..0x411001` hash `6463df6bf40d3200669072267440eb994d87cc54b1086ec86a052805abf44670`, body table slot `0x412330`, join `0x412CB8`, type initialization `0x4576CA..0x457727`, caller `AffEngin 0x41591F..0x415A57`. Native input is signed-i16 x/y in EAX/EDX and pool index in low EBX; unit pool pointer is `0x4E19A0`. Type table `0x496612` identifies French `CAPITAINE`; no new translated player label is introduced. [Exact-byte evidence](../pesquisas-paralelas/graficos-animacao/evidencias/unidade-tipo2.json).
+
+Fresh validator: **12,851 bounded original-x86 calls / 8,553,649 instructions** = 12,564 layer captures, 21 unsigned guard/bag captures, **263 exact indexed buffers**, one original type initialization and two bank setup calls. Both states exercise all 256 phase bytes at directions1–16/count8; additional matrices cover all count/direction bytes, pool slots0/799, signed displacements and coordinate boundaries. Every caller reaches `0x3000000`, ESP `0x2008004`, with the entire 220,800-byte pool unchanged. Zero skips, expected faults or limits. **555 raw out-of-catalog captures** are explicitly unsupported; intercepted capture blitters prove selected commands, not valid native asset dereferences. Pixel calls execute the full original renderer without substitutions. Only bank setup file IO/allocation is substituted. The supplied background/table are explicit fixtures; no scene caller, loaded mission or natural animation is established. [Native report](../pesquisas-paralelas/graficos-animacao/validacao/x86-unidade-tipo2.json), [contact sheet](../pesquisas-paralelas/graficos-animacao/artefatos/unidade-tipo2-contato.png) (eight odd directions, phase0 above phase7).
+
+The [focused REA review](../pesquisas-paralelas/graficos-animacao/evidencias/rea-unidade-tipo2-review.json) retains the raw-count MOV at `0x412F06`, pinned source revision and separate original/normalized PE hashes. Exact instruction bytes corroborate the runtime stride; Listing operand tokens do not establish effective-address roles or a Watcom signature. The private read-only session exported and closed. Seven new saved-capture regressions pass; the graphics domain passes **129 tests**, zero skips and valid documentation links.
+
+```sh
+python3 -B pesquisas-paralelas/graficos-animacao/validar_unidade_tipo2.py
 python3 -B scripts/check.py --domain graphics
 ```
 

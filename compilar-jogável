@@ -1,0 +1,83 @@
+#!/usr/bin/env python3
+"""Build the local playable consumer from one immutable Git revision."""
+import argparse
+import fcntl
+import hashlib
+import io
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tarfile
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Compila RisingLands-ptbr.app a partir de origin/main.')
+    parser.add_argument('--offline', action='store_true', help='Usa o origin/main já buscado, sem rede.')
+    parser.add_argument('--development-ref', metavar='REF', help='Verificação separada de uma revisão de desenvolvimento commitada.')
+    parser.add_argument('--skip-ui-smoke', action='store_true', help='Compila sem abrir a janela de validação.')
+    args = parser.parse_args()
+    repo = Path(__file__).resolve().parent
+    def git(*params):
+        return subprocess.check_output(['git', '-C', str(repo), *params])
+    common = Path(git('rev-parse', '--git-common-dir').decode().strip())
+    if not common.is_absolute():
+        common = (repo / common).resolve()
+    workspace = common.parent.parent
+    data = workspace / 'local-data/macos-playable'
+    data.mkdir(parents=True, exist_ok=True)
+    build_lock = (data / 'build.lock').open('a')
+    fcntl.flock(build_lock, fcntl.LOCK_EX)
+    if not args.development_ref and not args.offline:
+        subprocess.run(['git', '-C', str(repo), 'fetch', 'origin', 'main'], check=True)
+    ref = args.development_ref or 'origin/main'
+    # Resolve once. Every subsequent Git operation uses this immutable object ID.
+    revision = git('rev-parse', '--verify', ref + '^{commit}').decode().strip()
+    mode = 'development' if args.development_ref else 'main'
+    source = data / 'sources' / revision
+    source.mkdir(parents=True, exist_ok=True)
+    entries = []
+    archive = git('archive', '--format=tar', revision)
+    with tarfile.open(fileobj=io.BytesIO(archive)) as stream:
+        for member in stream:
+            if not member.isfile():
+                if member.isdir():
+                    continue
+                raise ValueError('Tipo de arquivo Git não suportado: ' + member.name)
+            path = Path(member.name)
+            if path.is_absolute() or '..' in path.parts:
+                raise ValueError('Caminho Git inválido')
+            content = stream.extractfile(member).read()
+            target = source / path
+            if target.is_symlink() or (target.exists() and target.read_bytes() != content):
+                raise ValueError('Fonte imutável foi alterada: ' + str(target))
+            if not target.exists():
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(content)
+                target.chmod(member.mode)
+            entries.append({'path': member.name, 'bytes': len(content), 'sha256': hashlib.sha256(content).hexdigest()})
+    actual = {str(path.relative_to(source)) for path in source.rglob('*') if path.is_file() or path.is_symlink()}
+    if actual != {entry['path'] for entry in entries}:
+        raise ValueError('A fonte imutável contém arquivos que não pertencem ao commit: ' + str(source))
+    manifest = {'commit': revision, 'tree': git('rev-parse', revision + '^{tree}').decode().strip(),
+                'requestedRef': ref, 'mode': mode, 'snapshot': 'source', 'files': entries,
+                'features': {name: git('log', '-1', '--format=%H', revision, '--', path).decode().strip()
+                             for name, path in [('app', 'apps/macos-preview'), ('core', 'ferramentas'),
+                                                ('combat', 'pesquisas-paralelas/combate'),
+                                                ('economy', 'pesquisas-paralelas/economia'),
+                                                ('graphics', 'pesquisas-paralelas/graficos-animacao')]}}
+    manifest_path = data / ('source-' + mode + '.json')
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
+    builder = source / 'apps/macos-preview/scripts/playable_build.py'
+    if not builder.is_file():
+        raise SystemExit('Esta revisão ainda não inclui o build jogável. Integre a feature ou use --development-ref.')
+    command = [sys.executable, '-B', str(builder), '--data', str(data), '--workspace', str(workspace),
+               '--source', str(source), '--manifest', str(manifest_path)]
+    if args.skip_ui_smoke:
+        command.append('--skip-ui-smoke')
+    subprocess.run(command, check=True, env={**os.environ, 'PYTHONDONTWRITEBYTECODE': '1'})
+
+
+if __name__ == '__main__':
+    main()

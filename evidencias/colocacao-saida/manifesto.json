@@ -1,0 +1,37 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "SetSortEngin",
+      "start": "0x445fbc",
+      "end_exclusive": "0x446189",
+      "sha256": "73b2c98564f5c40ed8dd4a094e53c0279b7a095f8b6a4ac9555e4288fa24c0ae",
+      "file": "00445fbc.asm"
+    },
+    {
+      "name": "shared_epilogue",
+      "start": "0x4431fb",
+      "end_exclusive": "0x443203",
+      "sha256": "103a0bad9a9647fe48c2dc29b3d10723411a718f8d60aeb700f84cba8393b4cc",
+      "file": "004431fb.asm"
+    },
+    {
+      "name": "SortieTroupe_placement_movement",
+      "start": "0x420f8a",
+      "end_exclusive": "0x420f9e",
+      "sha256": "5e356b6556398dfaec71565d8637068b983467700a8e5ef24171593341c607b2",
+      "file": "00420f8a.asm"
+    }
+  ],
+  "unit_pool_pointer": "0x4e19a0",
+  "unit_count": 800,
+  "stride": 276,
+  "physical_calls": [
+    "SetEnginCollision 0x442cb4",
+    "DecouvreTerrain 0x476851",
+    "IllumineTerrain 0x476cb3",
+    "SetMiniMap 0x46a388"
+  ],
+  "scope": "Complete exit body plus movement caller; stop before conditional request."
+}

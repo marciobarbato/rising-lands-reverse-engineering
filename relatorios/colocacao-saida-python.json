@@ -1,0 +1,16 @@
+{
+  "x86_executed": false,
+  "pending_address": "0x420f9e",
+  "current_cell": 2056,
+  "step_cell": 2056,
+  "destination": 2313,
+  "state": 2,
+  "enabled": 1,
+  "search_completion": 77,
+  "old_collision_retained": [
+    1,
+    1
+  ],
+  "new_collision": 1,
+  "scope": "Synthetic original exit/order effects; no movement advancement, request/audio, economic cleanup or real mission."
+}

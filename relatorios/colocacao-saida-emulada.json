@@ -1,0 +1,35 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": true,
+  "tests": 12,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 1038,
+  "success": true,
+  "scope": "Physical exit and joined movement-order caller; stops before conditional request.",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "unicorn": "2.1.4",
+  "reached_stops": {
+    "0x3000000": 666,
+    "0x420f9e": 156,
+    "0x446146": 6
+  },
+  "expected_native_exceptions": 0,
+  "expected_execution_limits": 0,
+  "expected_python_dependency_exceptions_in_differential": 6,
+  "native_instruction_cap": 1000000,
+  "maximum_native_instructions_per_segment": 929654,
+  "failed_native_segment": null,
+  "segmented_radius_entries": {
+    "0x445fbc": 18
+  },
+  "preserved_minimap_resumptions": 192,
+  "segmented_stops": {
+    "0x46a388": 192,
+    "0x3000000": 18
+  },
+  "segmented_max_instructions": 55454,
+  "interval_guard": "Bisect over exact union of declared intervals; original bytes unchanged",
+  "native_subcalls": "Unpatched position/conversion/query/recovery/experience/collision/vision/minimap/order calls"
+}
