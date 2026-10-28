@@ -1,0 +1,116 @@
+{
+  "executa_x86": false,
+  "contexto": "Portão, registros e trajeto sintéticos; sem desenho ou seleção de quadros.",
+  "cenario": {
+    "atualizacoes": 169,
+    "portao": [
+      6,
+      5
+    ],
+    "comandos": [
+      {
+        "ciclo": 0,
+        "acao": "solicitar_liberacao",
+        "fase": 1
+      },
+      {
+        "ciclo": 87,
+        "acao": "bloqueio_recusado_com_ocupante",
+        "fase": 15
+      },
+      {
+        "ciclo": 121,
+        "acao": "solicitar_bloqueio_livre",
+        "fase": 16
+      }
+    ],
+    "mudancas": [
+      {
+        "ciclo": 14,
+        "fase": 15,
+        "colisao": 0,
+        "regiao": 1
+      },
+      {
+        "ciclo": 136,
+        "fase": 0,
+        "colisao": 1,
+        "regiao": 32928
+      }
+    ],
+    "trajeto": [
+      [
+        2,
+        4
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        5,
+        4
+      ],
+      [
+        5,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        5
+      ],
+      [
+        7,
+        4
+      ],
+      [
+        8,
+        4
+      ],
+      [
+        9,
+        4
+      ],
+      [
+        10,
+        4
+      ]
+    ],
+    "posicao_final": [
+      10,
+      4
+    ],
+    "fase_final": 0,
+    "colisao_final": 1,
+    "buscas": [
+      {
+        "unidade": 0,
+        "origem": 1029,
+        "destino": 1034,
+        "status": 1,
+        "concluida": 1,
+        "sucesso": 1,
+        "quantidade": 2
+      }
+    ],
+    "eventos": [
+      {
+        "ciclo": 169,
+        "unidade": 0,
+        "grupo": 0,
+        "tarefa": 0,
+        "bits": 8,
+        "resultado": 1
+      }
+    ],
+    "tarefas_ativas": 0
+  }
+}

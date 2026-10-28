@@ -1,0 +1,99 @@
+{
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "trechos": [
+    {
+      "nome": "HerseEnAnimation",
+      "inicio": "0x004191fd",
+      "fim_exclusivo": "0x00419233",
+      "tamanho": 54,
+      "sha256": "c5b8470126f8abc5f20350cc75f3789fb8e8a568d7a2de788d9dfed642e1d637",
+      "arquivo": "004191fd.asm"
+    },
+    {
+      "nome": "HerseEstBaisser",
+      "inicio": "0x0041934f",
+      "fim_exclusivo": "0x00419379",
+      "tamanho": 42,
+      "sha256": "b27afc591f8ecae3daa13c1c2a9dd79b8a107d715de2c200c8c32f8654b15aa9",
+      "arquivo": "0041934f.asm"
+    },
+    {
+      "nome": "HerseEstLever",
+      "inicio": "0x00419379",
+      "fim_exclusivo": "0x004193ac",
+      "tamanho": 51,
+      "sha256": "f071f64bb2e67a932d7654086ce6691b1d6b33e8fe3f0c4174dedefea481f253",
+      "arquivo": "00419379.asm"
+    },
+    {
+      "nome": "HerseEstFace",
+      "inicio": "0x004193ac",
+      "fim_exclusivo": "0x004193d4",
+      "tamanho": 40,
+      "sha256": "19cf0fc8c3ffa5ca276cb6d0abab4d994ad3b3c9364a47c519b95c2fe6002e68",
+      "arquivo": "004193ac.asm"
+    },
+    {
+      "nome": "BaisseTouteHerse",
+      "inicio": "0x004193d4",
+      "fim_exclusivo": "0x004195ca",
+      "tamanho": 502,
+      "sha256": "5ba07ce2633ff6b3a4fced5a4a5490c278091ed2def95c95d6efab038f58768a",
+      "arquivo": "004193d4.asm"
+    },
+    {
+      "nome": "RemonteTouteHerse",
+      "inicio": "0x004195ca",
+      "fim_exclusivo": "0x00419917",
+      "tamanho": 845,
+      "sha256": "03b4dc6b8579b2ab4ecf91ec30ed18d8e8f38d5d0f1824d3204823d51fd3f933",
+      "arquivo": "004195ca.asm"
+    },
+    {
+      "nome": "ChercheEtatHerse",
+      "inicio": "0x00419917",
+      "fim_exclusivo": "0x004199a3",
+      "tamanho": 140,
+      "sha256": "04379cf509417c8a2a1c8c149af57904898abf7561b56e4557a09c93d88f43cc",
+      "arquivo": "00419917.asm"
+    },
+    {
+      "nome": "epilogo_BaisseTouteHerse",
+      "inicio": "0x0041c87f",
+      "fim_exclusivo": "0x0041c887",
+      "tamanho": 8,
+      "sha256": "bb4b292a5c79c52fab7de82ed748cb9c8bb68b8a1550e1e9f17ab2eabfca36c7",
+      "arquivo": "0041c87f.asm"
+    },
+    {
+      "nome": "BatimentNextEtape_prologo",
+      "inicio": "0x004268d4",
+      "fim_exclusivo": "0x00426918",
+      "tamanho": 68,
+      "sha256": "6a724d30775ad7366d6d8c1e4e1a29d9a289d586238da9af5391cdd5b2aff72b",
+      "arquivo": "004268d4.asm"
+    },
+    {
+      "nome": "BatimentNextEtape_tipo12",
+      "inicio": "0x00427bb7",
+      "fim_exclusivo": "0x00427d5d",
+      "tamanho": 422,
+      "sha256": "6683147e9d09f7205364c04a55207ad745a2fa7948163554e72b26d79cdd8e66",
+      "arquivo": "00427bb7.asm"
+    },
+    {
+      "nome": "BatimentNextEtape_epilogo",
+      "inicio": "0x004281c0",
+      "fim_exclusivo": "0x004281c7",
+      "tamanho": 7,
+      "sha256": "bdf58c0ddb45652182825bb0b5175c4a6c313845097300472b566887ee516e08",
+      "arquivo": "004281c0.asm"
+    }
+  ],
+  "despacho_tipo12": {
+    "entrada_tabela": "0x004268ac",
+    "destino": "0x00427bb7"
+  },
+  "limite": "Efeitos de simulação; entrada de mouse desativada na bancada e nenhum sprite escolhido."
+}

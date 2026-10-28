@@ -1,5 +1,27 @@
 # Estado da pesquisa e continuidade
 
+## Portões: simulação e passagem
+
+Os predicados, pedidos coletivos e avanço físico do tipo 12 foram traduzidos em
+[PORTOES.md](PORTOES.md). A demonstração cruza um portão, recusa fechamento
+durante a ocupação e reinsere o bloqueio após a saída. O núcleo passou com
+226 testes e 49.305 execuções x86 delimitadas. Os sprites, a seleção por
+cursor e o despacho global permanecem pendentes. A implementação altera somente
+o núcleo; os arquivos da frente gráfica foram consultados em leitura para
+confirmar o limite de responsabilidade e não foram alterados.
+
+## Branch do núcleo — colocação, muros e portões
+
+Esta frente agora usa o branch `codex/nucleo-construcoes` e a worktree isolada
+`engenharia-reversa-nucleo`, criada a partir de `3f5c84f`. Foram traduzidos
+`PlaceBatiment`, `ValideHerse`, `ChercheMurCombinaisons` e `SetMurAllentour`,
+incluindo a seleção dos tiles por tipo e os efeitos locais de muros/portões.
+A suíte do núcleo passou com 209 testes e 46.223 execuções x86 delimitadas.
+Os contratos, limites e demonstrações estão em
+[COLOCACAO_ESTRUTURAS.md](COLOCACAO_ESTRUTURAS.md). Custos, criação de registros,
+progresso, abertura do portão e integração de uma missão inteira permanecem
+pendentes. Os outros checkouts e pesquisas não foram alterados por esta etapa.
+
 ## Retomada de 28/10/2026 — terreno de construções
 
 Foram traduzidas `BatimentModifyTerrain`, `ResetBatimentTerrainModify` e

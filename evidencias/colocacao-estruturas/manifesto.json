@@ -1,0 +1,160 @@
+{
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "trechos": [
+    {
+      "nome": "ValideHerse",
+      "inicio": "0x0041ac8b",
+      "fim_exclusivo": "0x0041ad78",
+      "tamanho": 237,
+      "sha256": "21db74b530a69b5f85e674516f31f71f5219dea373b9c89b0e8797e06ac7f52e",
+      "arquivo": "0041ac8b.asm"
+    },
+    {
+      "nome": "ChercheMurCombinaisons",
+      "inicio": "0x0041c18a",
+      "fim_exclusivo": "0x0041c251",
+      "tamanho": 199,
+      "sha256": "a0181d260d81bbf4747d15fe69317433871ab6f8e5156a8182e21ccf354ba2d1",
+      "arquivo": "0041c18a.asm"
+    },
+    {
+      "nome": "SetMurAllentour",
+      "inicio": "0x0041c251",
+      "fim_exclusivo": "0x0041c451",
+      "tamanho": 512,
+      "sha256": "13030069bec218f13fdb2a45049755616e5ed19b0c3ed7ccf569538a7948f822",
+      "arquivo": "0041c251.asm"
+    },
+    {
+      "nome": "PlaceBatiment",
+      "inicio": "0x0041c4ac",
+      "fim_exclusivo": "0x0041c652",
+      "tamanho": 422,
+      "sha256": "b2476d0792e3276a0479549d83786f4042c794ccb566202817c1c7ef89e8ac5a",
+      "arquivo": "0041c4ac.asm"
+    }
+  ],
+  "tabela": {
+    "endereco": "0x0041c454",
+    "bytes_hex": "fbc44100f1c44100e7c4410005c541004ac5410019c5410074c541005fc5410051c5410079c541006dc5410066c5410079c541000fc5410020c5410058c5410035c5410043c541003cc5410027c5410058c541002ec54100",
+    "sha256": "d0ea0891f70f3aadba9879ca1f97d463803edb3d4e4d72e592692ffc02adae78",
+    "tipos": [
+      {
+        "tipo": 0,
+        "alvo": "0x0041c4fb",
+        "primeiro_tile": 762
+      },
+      {
+        "tipo": 1,
+        "alvo": "0x0041c4f1",
+        "primeiro_tile": 702
+      },
+      {
+        "tipo": 2,
+        "alvo": "0x0041c4e7",
+        "primeiro_tile": 732
+      },
+      {
+        "tipo": 3,
+        "alvo": "0x0041c505",
+        "primeiro_tile": 774
+      },
+      {
+        "tipo": 4,
+        "alvo": "0x0041c54a",
+        "primeiro_tile": 915
+      },
+      {
+        "tipo": 5,
+        "alvo": "0x0041c519",
+        "primeiro_tile": 819
+      },
+      {
+        "tipo": 6,
+        "alvo": "0x0041c574",
+        "primeiro_tile": 1045
+      },
+      {
+        "tipo": 7,
+        "alvo": "0x0041c55f",
+        "primeiro_tile": 983
+      },
+      {
+        "tipo": 8,
+        "alvo": "0x0041c551",
+        "primeiro_tile": 927
+      },
+      {
+        "tipo": 9,
+        "alvo": "0x0041c579",
+        "primeiro_tile": null
+      },
+      {
+        "tipo": 10,
+        "alvo": "0x0041c56d",
+        "primeiro_tile": 1027
+      },
+      {
+        "tipo": 11,
+        "alvo": "0x0041c566",
+        "primeiro_tile": 1075
+      },
+      {
+        "tipo": 12,
+        "alvo": "0x0041c579",
+        "primeiro_tile": null
+      },
+      {
+        "tipo": 13,
+        "alvo": "0x0041c50f",
+        "primeiro_tile": 799
+      },
+      {
+        "tipo": 14,
+        "alvo": "0x0041c520",
+        "primeiro_tile": 855
+      },
+      {
+        "tipo": 15,
+        "alvo": "0x0041c558",
+        "primeiro_tile": 963
+      },
+      {
+        "tipo": 16,
+        "alvo": "0x0041c535",
+        "primeiro_tile": 879
+      },
+      {
+        "tipo": 17,
+        "alvo": "0x0041c543",
+        "primeiro_tile": 911
+      },
+      {
+        "tipo": 18,
+        "alvo": "0x0041c53c",
+        "primeiro_tile": 1007
+      },
+      {
+        "tipo": 19,
+        "alvo": "0x0041c527",
+        "primeiro_tile": 899
+      },
+      {
+        "tipo": 20,
+        "alvo": "0x0041c558",
+        "primeiro_tile": 963
+      },
+      {
+        "tipo": 21,
+        "alvo": "0x0041c52e",
+        "primeiro_tile": 1033
+      }
+    ]
+  },
+  "objetos_iniciais": {
+    "muro": 254,
+    "portao": 253
+  },
+  "limite": "Colocação de registro já preparado; não é criação nem ordem completa de construir."
+}

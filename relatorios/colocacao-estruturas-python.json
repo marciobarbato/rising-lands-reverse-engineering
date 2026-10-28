@@ -1,0 +1,352 @@
+{
+  "executa_x86": false,
+  "contexto": "Registros e terreno sintéticos; sem criação, custos ou ordem de construir.",
+  "cenarios": [
+    {
+      "nome": "edificio",
+      "estruturas": [
+        {
+          "indice": 7,
+          "tipo": 0,
+          "celula": 1029,
+          "objeto": 0,
+          "tile": 762,
+          "atributos": 1,
+          "valor_7c": 0,
+          "regiao": 32992
+        }
+      ],
+      "atualizacoes": 129,
+      "trajeto": [
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          10,
+          4
+        ]
+      ],
+      "posicao_final": [
+        10,
+        4
+      ],
+      "buscas": [],
+      "eventos": [
+        {
+          "ciclo": 129,
+          "unidade": 0,
+          "grupo": 0,
+          "tarefa": 0,
+          "bits": 8,
+          "resultado": 1
+        }
+      ],
+      "tarefas_ativas": 0
+    },
+    {
+      "nome": "muro_com_portao",
+      "estruturas": [
+        {
+          "indice": 1,
+          "tipo": 9,
+          "celula": 262,
+          "objeto": 254,
+          "tile": 0,
+          "atributos": 1,
+          "valor_7c": 3,
+          "regiao": 32800
+        },
+        {
+          "indice": 2,
+          "tipo": 9,
+          "celula": 518,
+          "objeto": 254,
+          "tile": 0,
+          "atributos": 1,
+          "valor_7c": 4,
+          "regiao": 32832
+        },
+        {
+          "indice": 3,
+          "tipo": 9,
+          "celula": 774,
+          "objeto": 254,
+          "tile": 0,
+          "atributos": 1,
+          "valor_7c": 4,
+          "regiao": 32864
+        },
+        {
+          "indice": 4,
+          "tipo": 9,
+          "celula": 1030,
+          "objeto": 254,
+          "tile": 0,
+          "atributos": 1,
+          "valor_7c": 4,
+          "regiao": 32896
+        },
+        {
+          "indice": 6,
+          "tipo": 9,
+          "celula": 1542,
+          "objeto": 254,
+          "tile": 0,
+          "atributos": 1,
+          "valor_7c": 4,
+          "regiao": 32960
+        },
+        {
+          "indice": 7,
+          "tipo": 9,
+          "celula": 1798,
+          "objeto": 254,
+          "tile": 0,
+          "atributos": 1,
+          "valor_7c": 4,
+          "regiao": 32992
+        },
+        {
+          "indice": 8,
+          "tipo": 9,
+          "celula": 2054,
+          "objeto": 254,
+          "tile": 0,
+          "atributos": 1,
+          "valor_7c": 4,
+          "regiao": 33024
+        },
+        {
+          "indice": 9,
+          "tipo": 9,
+          "celula": 2310,
+          "objeto": 254,
+          "tile": 0,
+          "atributos": 1,
+          "valor_7c": 4,
+          "regiao": 33056
+        },
+        {
+          "indice": 10,
+          "tipo": 9,
+          "celula": 2566,
+          "objeto": 254,
+          "tile": 0,
+          "atributos": 1,
+          "valor_7c": 0,
+          "regiao": 33088
+        },
+        {
+          "indice": 5,
+          "tipo": 12,
+          "celula": 1286,
+          "objeto": 253,
+          "tile": 0,
+          "atributos": 1,
+          "valor_7c": 1,
+          "regiao": 32928
+        }
+      ],
+      "atualizacoes": 279,
+      "trajeto": [
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          8
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          10,
+          6
+        ],
+        [
+          10,
+          5
+        ],
+        [
+          10,
+          4
+        ]
+      ],
+      "posicao_final": [
+        10,
+        4
+      ],
+      "buscas": [
+        {
+          "unidade": 0,
+          "origem": 1029,
+          "destino": 1034,
+          "status": 1,
+          "concluida": 1,
+          "sucesso": 1,
+          "quantidade": 8
+        }
+      ],
+      "eventos": [
+        {
+          "ciclo": 279,
+          "unidade": 0,
+          "grupo": 0,
+          "tarefa": 0,
+          "bits": 8,
+          "resultado": 1
+        }
+      ],
+      "tarefas_ativas": 0
+    },
+    {
+      "nome": "portao_sem_encaixe",
+      "estruturas": [
+        {
+          "indice": 7,
+          "tipo": 12,
+          "celula": 1030,
+          "objeto": 0,
+          "tile": 0,
+          "atributos": 0,
+          "valor_7c": 0,
+          "regiao": 1
+        }
+      ],
+      "atualizacoes": 129,
+      "trajeto": [
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          10,
+          4
+        ]
+      ],
+      "posicao_final": [
+        10,
+        4
+      ],
+      "buscas": [],
+      "eventos": [
+        {
+          "ciclo": 129,
+          "unidade": 0,
+          "grupo": 0,
+          "tarefa": 0,
+          "bits": 8,
+          "resultado": 1
+        }
+      ],
+      "tarefas_ativas": 0
+    }
+  ]
+}
