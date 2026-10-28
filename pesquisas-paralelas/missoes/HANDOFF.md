@@ -135,3 +135,35 @@ Reset-prefix inventory for Stage 10, read from the original bytes:
 - **Tails:** MissionLoad 441459, 419112, 441623, 46df41, 47f36e, 46027c. MissionLoadName 441459, 419112, 47150f, 47f36e, 46027c.
 
 Final Stage 9 validation: 65 native-mode tests pass, with zero skips, errors, failures or faults. Fresh chain coverage is 270 caller entries resolving to 227 returns, 18 declared boundary stops and 25 strict-input failure stops, over 324,811 segments with 318,287 read and 4,744 profile bindings. Every comparison is whole-image equality over DGROUP+.bss plus the read sequence and the profile log. The new report is validacao/stage9-suite-x86.json; predecessor reports are unchanged. Local runs execute 65 tests with 24 optional skips. Common checks at f18b5a0 pass: core 357/169, combat 227/143, economy 393/180, graphics 176/0, missions 65/24, ai-runtime 3/0, workflow 8/0. No real mission runtime was tested.
+
+Stage 10 (authorized by the coordinator, base main `7b7b96960cee0ec7868914e811f51b851fc27dba`, which includes core Stage 14 and combat ProjectileReset main `9e579b4`) composes both reset prefixes up to FileOpen. Module `reinicio_missao.py`:
+- `resetar_para_missao(MemoriaReinicio, diretorio_0x509594, ProvedoresReinicio, *, variante_u8, simpatia)` returns `PedidoAbertura(caminho, b'rb', nome, 0x458420)`.
+- `resetar_para_missao_nome(memoria, MemoriaReinicioNome, nome, {0x509494, 0x509594}, provedores)`.
+- Continuations `continuar_reinicio_missao` / `continuar_reinicio_missao_nome` from `0x46c369` / `0x46c619`.
+- Missions-owned leaves, assigned by the coordinator: `resetar_icones` (IconeReset 45e88f), `inicializar_caixas_mensagem` (MessageBoxInit 469908) and `inicializar_baloes` (BallonInit 441b6c), plus the u16 ffff words 4e1a38/4e1a3a. Exact orders are in docs/MISSIONS.md Stage 10.
+- Committed providers are called at their CALLs: core `resetar_todas_estruturas` and `resetar_todas_unidades`, combat `resetar_projeteis`, and, for MissionLoadName, economy `Aprendizagem.zerar_tecnologia`.
+- Named `DependenciaReinicio` stops at their CALL sites, with earlier effects kept:
+  - TerrainReset 46b315 (46c35f / 46c60f) and MiniMapReset 469f00 (46c364 / 46c614), from core's next stage;
+  - RechercheReset 470b46 (46c68c), RechercheCheat 4716fe (46c6a6) and RechercheStore 4714f0 (46c6ab), requested from economy;
+  - Engin_ResetExperience 441470 (46c691), requested from core.
+- ReseauActif 42c3b0 = AL=[0x4e0730], taken as an explicit inherited byte; ai-runtime was told.
+- Domain limits:
+  - MissionLoad: a path ≥ 0x100 raises `ForaDoDominioReinicio` at 46c333.
+  - MissionLoadName: a name shorter than 4 bytes raises at 46c6c5; a path ≥ 0x114 raises at 46c742.
+
+Boundaries agreed or recorded:
+- Economy's balloon table `PropriedadeConstrucoes.baloes` (0x4e1a14) gets only the store-only BallonInit reset, by identity. The habitation tables 0x4e1934/0x4dfad4 are zeroed inline by MissionLoadName, also by identity.
+- BatimentResetAll writes 0x49a070 (4×22), not economy's 0x4dfad4; both tables exist.
+- My earlier summary "MissionLoadName without BallonInit" was wrong; BallonInit is at 46c6b0. I sent corrections to ai-runtime and combat; COMBAT.md has the same wording.
+- The Stage 10 call list was sent to core, combat, economy and ai-runtime.
+
+Other contracts received:
+- **Economy habitation** (main 7a60f54, for Stage 11). Caller order 46c16d..46c1b8: BatimentExiste 41a735 → PlaceBatiment 41c4ac → BatimentEstHabiter 41a5b8 → BatimentHabitable 41cc70 only if AL≠0 → BatimentModifyMap 419e97(index, 1) for every existing structure. API `construcoes_habitaveis.HabitacaoConstrucoes(aprendizagem, unidades_realizaveis, estruturas_realizaveis)` with identity wiring, `estrutura_habitada(index)`, `tornar_habitavel(world, index)`, and `DependenciaHabitacao` at 0x476851 / 0x476cb3. MONDE01 structure 0 completes with core's 23/20 radii.
+- **Core Stage 14** at main 7b7b969: `SOMA_VISAO_MAXIMA_INSERCAO=11`. Missions reproduced 6/6 placement tests natively; MONDE01 now completes the unit scan against the v2 capture.
+- **macOS M1 contract**: recorded as planned in docs/MISSIONS.md, with the Divers and iaInit corrections sent to macOS.
+
+Stage 10 validation:
+- 170 original-only captures came before translation and all match Python.
+- Fresh native run: 71/71 mission tests, with zero skips, errors or faults. Reset coverage is 459 entries/segments, all at their declared stops: 176 leaf returns, 259 + 5 TerrainReset CALL stops, 4 FileOpen stops and 15 RechercheReset CALL stops. Each comparison covers the whole DGROUP+.bss image plus the units, Bags, projectiles, players and frame strings.
+- The first full run failed one Stage 2 header segment (MONDE17, camera 4) on the harness's 1-second wall-clock timeout under load average 11. It is logged in .local/stage10-validar-timeout-failure.log and not counted. The test passed in isolation and the clean full rerun passed.
+- Local: 71 tests with 27 optional skips. Common checks at 7b7b969: core 368/175, combat 236/145, economy 413/190, graphics 184/0, missions 71/27, ai-runtime 25/1, audio 2/0, workflow 8/0. No real mission was run.

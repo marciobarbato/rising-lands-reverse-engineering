@@ -1,0 +1,190 @@
+{
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_analysis_pe_not_executed": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "sha256_sbl": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "scope": "Economy-owned MissionLoad initializer tails; RechercheCalculNew inventoried for ownership only",
+  "mission_load_tail": [
+    "0x46c5aa MissionPlaceTerrain (missions)",
+    "0x46c5af EnginInitTechnologie (economy)",
+    "0x46c5b4 BatimentInitCave (economy)",
+    "0x46c5b9 Engin_RetrieveExperimente 0x441623 (core)",
+    "0x46c5be PlayerRetrieve (economy)",
+    "0x46c5c3..0x46c5cc iaReset 0x47f36e AL=[esp+0x128] (ai-runtime)",
+    "0x46c5d1 MarcheResetAll (economy)",
+    "0x46c5d6 AL=1"
+  ],
+  "mission_load_name_tail": [
+    "0x46c973 MissionPlaceTerrain",
+    "0x46c978 EnginInitTechnologie",
+    "0x46c97d BatimentInitCave",
+    "0x46c982 RechercheCalculNew 0x47150f (economy)",
+    "0x46c987..0x46c98e iaReset AL=[0x496fe4]",
+    "0x46c993 MarcheResetAll",
+    "0x46c998 AL=1"
+  ],
+  "engin_set_technologie": {
+    "order_table": "[0x4e19b8] -> four owner pointers -> 26 unit-type Bags of 104 bytes",
+    "bags": [
+      "unit 7: inline reset, capacity 22; tag 3 value t for t 0..21 except 20 when TypeBatimentEstRealisable",
+      "unit 14: inline reset, capacity 1; tag 7 value 6",
+      "unit 8: inline reset, capacity 4; tag 2 values 0,1,2,3"
+    ],
+    "inline_reset": "Same bytes as BagInit 0x447148: header, 30 values, 30 tags; +0x60..+0x65 kept"
+  },
+  "recherche_calcul_new": {
+    "calls": [
+      "TechnologieReset 0x46b517",
+      "BonusReset 0x428e71",
+      "InventionSetEffet 0x470f98",
+      "MissionGetNum 0x46c11a (missions)"
+    ],
+    "copies": "16 bytes per owner 0x508134 -> 0x5080f4 before the research loops",
+    "owner": "economy (research/technology); reached only by MissionLoadName, not by MissionLoad/MONDE01"
+  },
+  "captures": [
+    {
+      "start": "0x46c5a5",
+      "end_exclusive": "0x46c5d8",
+      "symbol": "MissionLoad",
+      "role": "Tail: FileClose, MissionPlaceTerrain, then the six initializers",
+      "bytes_hex": "e8a2befeffe873fbffffe8a54efdffe859cbfaffe86550fdffe87e19000031c08a842428010000e89d2d0100e8a63cffffb001",
+      "sha256": "49c1ab3f2e5d01b75d1f696318cdb0b7434544f5068558c081904d8661341eab",
+      "listing": "cauda-carga-0046c5a5.asm"
+    },
+    {
+      "start": "0x46c969",
+      "end_exclusive": "0x46c99a",
+      "symbol": "MissionLoadName",
+      "role": "Tail: RechercheCalculNew replaces Engin_RetrieveExperimente/PlayerRetrieve",
+      "bytes_hex": "e8c2e20000e8d9bafeffe8aaf7ffffe8dc4afdffe890c7faffe8884b000031c0a0e46f4900e8db290100e8e438ffffb001",
+      "sha256": "4c88205fe37f2cb250316a07616748b4b4157fc5c3a98b99a78b587f61c88487",
+      "listing": "cauda-carga-0046c969.asm"
+    },
+    {
+      "start": "0x441459",
+      "end_exclusive": "0x441470",
+      "symbol": "EnginInitTechnologie",
+      "role": "EnginSetTechnologie for DL owners 0..3",
+      "bytes_hex": "5230d2eb07e87efdfffffec231c088d083f8047cf05ac3",
+      "sha256": "43e08d7d8e77ee21c89f1a2d473ac887b9e12521209c8914754135edc4b31712",
+      "listing": "cauda-carga-00441459.asm"
+    },
+    {
+      "start": "0x4411e1",
+      "end_exclusive": "0x441459",
+      "symbol": "EnginSetTechnologie",
+      "role": "Unit-order Bags 7 (buildings), 14 and 8 of one owner",
+      "bytes_hex": "535152565783ec108844240c31c08b15b8194e008a44240c8b048205d802000066c74066000066c740040000ba1600000066c74002000089c689142466c700000089c231c0eb0f89d966c7444a06000040c6441a420031db6689c383fb1e7ce78b042431db66894602eb014331f66689de83fe167d4c31c931d28a4c240c88da89c8e82b78fdff84c074e083fe1474db8b15b8194e0089c88b048205d802000031f6668b4866668b10416689d66689486689f2c64406420366895c500666ff00eba931c08b15b8194e008a44240c8b048205b005000066c740660000bb0100000066c740040000895c240866c74002000031d289c189c666c7000000eb0f89c366c7445e06000042c64406420031c06689d083f81e7ce78b4424086689410231c9a1b8194e008a4c240c8b048805b005000031db668b7866668b10476689d36689786689dac64403420766c7445006060066ff00a1b8194e008b04880540030000bb0400000066c740660000895c240466c74004000031d266c74002000089c689c166c7000000eb0f89c366c7445906000042c64401420031c06689d083f81e7ce78b44240431d2668946028a54240ca1b8194e008b0490668b88a6030000054003000041668b186689486681e3ffff0000c64403420266c7445806000066ff00a1b8194e008b0490054003000031c9668b7866668b18476689d96689786689cbc64401420266c7445806010066ff00a1b8194e008b0490668b88a6030000054003000041668b186689486681e3ffff0000c64403420266c7445806020066ff00a1b8194e008b0490054003000031db668b7866668b10476689d36689786689dac64403420266c7445006030066ff0083c410e9fff8ffff",
+      "sha256": "e01afe101200b871738b62708cc6367fcdccef3a94c7f5a7adad08ab87b319e4",
+      "listing": "cauda-carga-004411e1.asm"
+    },
+    {
+      "start": "0x440d58",
+      "end_exclusive": "0x440d5e",
+      "symbol": "EnginGetVolume",
+      "role": "Shared pop edi..ebx/ret epilogue of EnginSetTechnologie",
+      "bytes_hex": "5f5e5a595bc3",
+      "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "listing": "cauda-carga-00440d58.asm"
+    },
+    {
+      "start": "0x418a93",
+      "end_exclusive": "0x418ad3",
+      "symbol": "TypeBatimentEstRealisable",
+      "role": "Network flag excludes types 8/12; else byte 0x4dfad4+22*owner+type",
+      "bytes_hex": "5388c788d3e81339010084c0741231c088d083f808740583f80c750430c05bc331d288fa89d0c1e00229d0c1e00229d08d140031c088d88a8402d4fa4d005bc3",
+      "sha256": "9321dffcf44964385dc9525e25e8e700f66d4c0cbc635f6361efa8cc6690f5c3",
+      "listing": "cauda-carga-00418a93.asm"
+    },
+    {
+      "start": "0x42c3b0",
+      "end_exclusive": "0x42c3b6",
+      "symbol": "ReseauActif",
+      "role": "Byte 0x4e0730",
+      "bytes_hex": "a030074e00c3",
+      "sha256": "825f12d3c95c19deffd9d1e9b49a7aca994adf03b31b7eb847c2ffdc996c9275",
+      "listing": "cauda-carga-0042c3b0.asm"
+    },
+    {
+      "start": "0x419112",
+      "end_exclusive": "0x4191c9",
+      "symbol": "BatimentInitCave",
+      "role": "Per-owner active type counts 0x49a070, CAVE count to 0x4dfb2c, type 18 to 0x4dfb4c",
+      "bytes_hex": "5351525657bfc8a0490030ffeb2731c988f96bc1166bd106660fb6b073a049008a8082a04900fec788814cfb4d006689b22cfb4d0031c088f883f8040f8dca49000088fb31d2eb1031c988d96bc91642c6840170a049000031c06689d083f8167ce631d2eb014231c06689d03de80300007d9b69c0140100008a44070525ff0000000f95c084c074dd31c06689d069c01401000001f88a480438d975c931c988d96bc9168a40088d8970a0490025ff000000fe0401ebaf",
+      "sha256": "5807a6c8efbb2f2f4244b2262754bf72db4d690be0f9724f5600e30aa959765f",
+      "listing": "cauda-carga-00419112.asm"
+    },
+    {
+      "start": "0x41db1e",
+      "end_exclusive": "0x41db24",
+      "symbol": "BatimentEnleveUneTroupeHospi",
+      "role": "Shared epilogue of BatimentInitCave",
+      "bytes_hex": "5f5e5a595bc3",
+      "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "listing": "cauda-carga-0041db1e.asm"
+    },
+    {
+      "start": "0x46df41",
+      "end_exclusive": "0x46dfa0",
+      "symbol": "PlayerRetrieve",
+      "role": "Copies +6 and +0x0c..+0x13 of four 20-byte players from [0x5080ac] to [0x5080a8]",
+      "bytes_hex": "5351525631c08b1dac80500083c0148b15a88050008a5c03f2885c02f283f85075e431f6eb0c83c61483fe500f8463fbffff89f131c08b15ac80500001ca8d1c028b15a880500083c00201ca668b5b0c66895c020a83f80874ccebda000000",
+      "sha256": "fe720289811d6c248820a639ce1fc20ab0a15b28292cb3d4bd73fa5e9a52269a",
+      "listing": "cauda-carga-0046df41.asm"
+    },
+    {
+      "start": "0x46dad6",
+      "end_exclusive": "0x46dadb",
+      "symbol": "PlayerInitAllianceCompteur",
+      "role": "Shared pop esi..ebx/ret epilogue of PlayerRetrieve",
+      "bytes_hex": "5e5a595bc3",
+      "sha256": "c70b099133a170ddd772c96ac18c8da37f2e3656fb63fc1ce635782f3483d656",
+      "listing": "cauda-carga-0046dad6.asm"
+    },
+    {
+      "start": "0x46027c",
+      "end_exclusive": "0x4602cd",
+      "symbol": "MarcheResetAll",
+      "role": "Seven stores per player, ascending",
+      "bytes_hex": "5351525631c031d283c2024030db30c931f6b5ff88987b2e4e006689b22e294e00b70188a88b6f490030ed88b82b294e00889827294e0030ff66898a3e294e0066899a36294e0083f8047cbc5e5a595bc3",
+      "sha256": "82df4d0128506f6381b5cc963867cc7b3e5da5c6a1c9687f6c57f38b335ae9fd",
+      "listing": "cauda-carga-0046027c.asm"
+    },
+    {
+      "start": "0x47150f",
+      "end_exclusive": "0x4716fe",
+      "symbol": "RechercheCalculNew",
+      "role": "Inventory only (MissionLoadName tail); not reconstructed in Stage 16",
+      "bytes_hex": "53515256575583ec08e8fa9fffff31d2e84d79fbff6689542404eb1d8b4c2404c1e604418dbef48050008db63481500066894c2404a5a5a5a531f6668b74240483fe047cd731db66895c2404eb0566ff44240431c0668b44240483f8040f8d7400000031ff31edeb014731c06689f883f8047dda89eeeb014631c031d2668b4424046689fac1e0048a8402f480500025ff00000039c67dd169d26801000031c06689f06bc00c8a84028281500025ff0000003dff0000000f95c084c074ba31db31d231c031c98a4424046689fb6689f2e8b4f9ffffeba131f66689742404eb0566ff44240431c0668b44240483f8040f8df100000030d231ff88901c875000eb014731c06689f883f8047dd431c0bdf4805000668b44240431d2c1e0046689142401c531f66689fe69f66801000031c0668b04246bc00c01c631c08a86828150003dff000000741931d28a9681815000e8b6aaffff25ffff000039c20f9ec0eb0230c084c0749a31c06689f88a142831f681e2ff000000668b342439f27f5e69c0680100006bf60c01c631c08a86828150003dff000000741931d28a9680815000e865aaffff25ffff000039c20f9ec0eb0230c084c07425b90100000031f631d231c0668b14246689fe8a44240489f3e8b4f8ffff8a0424fec088042e66ff0424e93dffffff83c4085de9f5f2ffff",
+      "sha256": "6bf7b9ae47c2e2657a40436539de7c30971b7a6c33bef659b753469fc97e5dad",
+      "listing": "cauda-carga-0047150f.asm"
+    },
+    {
+      "start": "0x4709f3",
+      "end_exclusive": "0x4709f9",
+      "symbol": "InventionLoadCaract",
+      "role": "Shared epilogue of RechercheCalculNew",
+      "bytes_hex": "5f5e5a595bc3",
+      "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "listing": "cauda-carga-004709f3.asm"
+    }
+  ],
+  "committed_evidence": [
+    {
+      "path": "evidencias/habitaveis.json",
+      "sha256": "a55129ba4e5e75f35c0887429ac3e478f6522973f8c1e2ad89cbf7706342611a"
+    },
+    {
+      "path": "evidencias/manifesto.json",
+      "sha256": "7714d0076ed3aeadfa9d905e1950aaac16c672857a507ccef67429250ce06361"
+    },
+    {
+      "path": "evidencias/ciclo-mercado.json",
+      "sha256": "8ec5b1701632f42146ee876f243de69875f8bb381ba648c192d3b9f4981495dc"
+    },
+    {
+      "path": "../../relatorios/simbolos-originais.json",
+      "sha256": "7e1e63b5340bc771e4dd743008058e1e47cea79ec74e76c72a70904884f4595e"
+    }
+  ]
+}
