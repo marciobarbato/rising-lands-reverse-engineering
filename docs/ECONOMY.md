@@ -296,3 +296,36 @@ python3 -B scripts/check.py --domain economy
 The [fresh composed report](../pesquisas-paralelas/economia/validacao-bonus-compartilhados-emulada.json) passes 11 tests with no skips/errors/failures: 454 native calls, 448 complete returns and six deliberate pre-query stops. There are zero native exceptions or execution limits. Nested capacity/bonus query counts are reported separately from top-level calls. Whole 220,800-byte unit pools, 1,872 bonus bytes, runtime-type buffers/guards, original nested-query order, table-write-before-unit-store order, all ordinary owner/type pairs, sentinel/byte boundaries, unrelated selectors, and later partial failures are covered. Local stage: five passed/six optional skipped. Domain gate: 289 tests/129 optional skips. Historical and earlier-stage reports were preserved.
 
 Global gap closed: the previously pending economic capacity-table mutation now has a validated actual world-refresh connection using committed providers. This is shared synthetic loaded-state operation, not a real-mission run. Mission/event loading and complete production/exit/cleanup remain open. The coordinator's coarse project estimate remains approximately 50% (40–60% uncertainty).
+
+### Seventh-stage selection before implementation
+
+Stage 6 is integrated at `15e49e8dfe7c77f60ec0c468e5546bc891384f42`, final feature `e07dc41562af96e7bc909146cbf81e7653f0e4a7`; common gate 827 tests/357 optional skips. The next stage resumed the same clean helper-managed tree and merged updated main before new implementation.
+
+The remaining market lifecycle gap is now selected: complete `MarcheResetAll` `[0x46027C,0x4602CD)`, `ResetMarche` `[0x46634E,0x4663D6)`, and `MarcheQuitte` `[0x4663D6,0x4663EB)`. Inspected original bytes reset seven per-player fields but leave proposals, approval bytes, global difference, balances and sympathy intact. Pair reset mutates its first row before using the second index; quit captures the contact before that mutation. Exact supported u8 indices, ordered writes and protected invalid-contact partial state will be recovered without assuming a transactional or whole-market reset. Core's remaining production physical helpers and live-mission dispatch remain separate dependencies.
+
+## Selective market lifecycle
+
+After the human resumed research, the worktree incorporated committed main `5e2bf0831d3aaa776481a6ab023be262ef0df1bd`. The current core production continuation still stops before healing; the exact remaining shared-world calls were requested from core. This independently bounded market slice follows the inventory above while those providers are unavailable.
+
+`CicloMercado(mercado, **buffers)` in `ciclo_mercado.py` shares the supplied `Mercado` object, including its live `contatos` and `indicadores`. It copies five additional loaded buffers: raw u8 arrays `bytes_2e7c`, `bytes_292c`, `bytes_2928` (four bytes each), and u16 arrays `words_2938`, `words_2940` (eight bytes each). Unknown names or wrong sizes raise before use. Omitted data are synthetic zeros, not a recovered loader. These raw names make no unverified gameplay interpretation.
+
+The three methods return `None`, invoke no callbacks, and reproduce complete original bodies in the protected player domain 0–3 after u8 truncation:
+
+- `resetar_todos()` (`MarcheResetAll`, `[0x46027c,0x4602cd)`) visits players 0–3. Each row writes `2e7c=0`, indicator word=0, contact=255, `292c=1`, `2928=0`, `2940` word=0, `2938` word=0, in that order.
+- `resetar(j,k)` (`ResetMarche`, `[0x46634e,0x4663d6)`) first writes row j in order `2e7c`, `292c`, `2928`, contact, indicator, `2940`, `2938`, with the same values. **Only after these writes** is k protected/validated. The second row order is `2e7c`, contact, `292c`, `2928`, `2938`, `2940`, indicator. Aliased rows still receive both write sequences. Invalid j raises before mutation; invalid k raises after j's writes, which remain committed. These Python guards are not original executable branches.
+- `sair(j)` (`MarcheQuitte`, `[0x4663d6,0x4663eb)`) captures the live contact byte before calling pair reset. An invalid contact, including 255 after a prior quit/reset, therefore raises after the first row's reset. Repeating quit is not an automatically harmless operation in this protected model.
+
+Proposals, prices, approvals at `0x4e2968`, global difference, balances, player records, sympathy and neighboring bytes are preserved. This is not whole-market clearing or exchange execution. The [additive original manifest](../pesquisas-paralelas/economia/evidencias/ciclo-mercado.json) records three byte/hash intervals under the unchanged EXE/SBL identities. The actual original pair caller executes unchanged for quit; no call return is substituted. Protected invalid-second comparisons stop at original `0x466395`, after the complete first row and before the original second-index use. They do not claim original native exceptions for unchecked indices.
+
+[Complementary REA evidence](../pesquisas-paralelas/economia/evidencias/ciclo-mercado-rea.json) records pinned source `b9a8f8e9f25feb9cc97bf4960748f2bdf8c898bc`, original and normalized-analysis hashes, provider/profile, retained dossier hash, and the reviewed quit instructions/call edge. Ghidra's inferred ECX `__fastcall` parameter is explicitly rejected against the Watcom AL/DL instructions and native comparisons. The restricted first startup failed Java `spawn EPERM`; the authorized context succeeded and the session closed/exported cleanly. No shared tool or original project was changed.
+
+```sh
+python3 -B pesquisas-paralelas/economia/capturar_ciclo_mercado.py
+python3 -B pesquisas-paralelas/economia/validar_ciclo_mercado.py
+python3 -B pesquisas-paralelas/economia/validar_ciclo_mercado.py --emular
+python3 -B scripts/check.py --domain economy
+```
+
+[Fresh native report](../pesquisas-paralelas/economia/validacao-ciclo-mercado-emulada.json): 14 tests passed, zero skips/errors/failures; **1,275 executions = 259 complete returns + 1,016 deliberate first-row checkpoints**, zero native faults or limits. Coverage includes all player pairs/aliases, poisoned high register bits, all 252 invalid second bytes × four first players, quit contact boundaries, persistent reset/quit sequences, exact native/model write order (including duplicate alias writes), complete market/economy/player buffers, and seeded neighboring gaps/guards. Local stage executes seven tests and skips seven optional native tests. Historical and earlier-stage reports remain unchanged. The required economy gate passes 303 discovered tests with 136 optional skips and valid documentation links.
+
+Global gap closed: original selective market reset/quit lifecycle, shared with the existing proposal/approval model and preserving its transaction state. Implemented and independently original-x86 validated; required integration result follows separately. Real-mission market dispatch, unit exchange, complete production and mission loading remain open. Overall project estimate remains coordinator-owned, approximately 50% with 40–60% uncertainty, independently of test totals.
