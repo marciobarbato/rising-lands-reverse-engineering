@@ -32,7 +32,8 @@ class CapturasEstruturas(unittest.TestCase):
                 self.assertEqual(pool[item['index']*276:(item['index']+1)*276].hex(),item['record_hex'])
 
     def test_committed_raw_reader_and_retained_tail(self):
-        from construcoes import ler_estruturas_eta
+        from integracao.providers import load_graphics_structures
+        ler_estruturas_eta=load_graphics_structures().ler_estruturas_eta
         data=(CD/'WORLD/MONDE01.ETA').read_bytes()
         pool=bytearray(b'\x63'*276000)
         result=carregar_estruturas_missao(Leitor(data,ler_eta(data)['blocos'][0]['offset']),pool)

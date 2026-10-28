@@ -5,7 +5,6 @@ import os
 from pathlib import Path
 import random
 import struct
-import subprocess
 import sys
 import unittest
 
@@ -31,26 +30,14 @@ class CapturasAuxiliares(unittest.TestCase):
             self.assertEqual(result.rotina_seguinte,0x47bcc7)
 
     def test_actual_economy_buffer_identity_and_unloaded_reserve_retention(self):
-        # Existing economic/graphics flat `construcoes` names collide. Keep the
-        # actual provider test isolated; do not rewrite either owner's imports.
-        script='''import sys,struct
-sys.path.insert(0,sys.argv[1])
-from extracao import RecursosTerreno
-sys.path.insert(0,sys.argv[2])
-from carregador_auxiliares import carregar_minas_missao
-from formatos import Leitor
-r=RecursosTerreno(minas=b"\\x63"*80)
-memory=r.minas
-carregar_minas_missao(Leitor(struct.pack("<H",0)),memory)
-assert r.minas is memory
-for i in range(20):
-    assert memory[i*4:i*4+2]==b"\\0\\0"
-    assert r.capacidade_mina(i)==0x6363
-'''
-        result=subprocess.run([sys.executable,'-B','-c',script,
-                               str(ROOT/'pesquisas-paralelas/economia'),str(OWNED)],
-                              capture_output=True,text=True)
-        self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+        from integracao.providers import load_economy_resources,load_graphics_structures
+        resources=load_economy_resources().RecursosTerreno(minas=b'\x63'*80)
+        memory=resources.minas
+        carregar_minas_missao(Leitor(struct.pack('<H',0)),memory)
+        self.assertIs(resources.minas,memory)
+        for index in range(20):
+            self.assertEqual((memory[index*4:index*4+2],resources.capacidade_mina(index)),(b'\0\0',0x6363))
+        self.assertEqual(len(load_graphics_structures().ler_estruturas_eta((CD/'WORLD/MONDE01.ETA').read_bytes())),1)
         attacks=bytearray(b'\xa5'*1004)
         carregar_ataques_missao(Leitor(struct.pack('<HH',0,8)),attacks)
         self.assertEqual((attacks[9:1000:10],attacks[1000:]),(b'\xa5'*100,bytes(4)))

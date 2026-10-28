@@ -1,0 +1,48 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "inspected_main": "6b15be1c96348d51dac7a46208126e6974290eca",
+  "start": "0x46c122",
+  "end_exclusive": "0x46c16d",
+  "file": "terreno-unidades-0046c122.asm",
+  "prefix_sha256": "f11ae4f9b35c4c1fef800150a27bfbd8e10a16f5b6c8275a15be944008fd7d03",
+  "providers": [
+    {
+      "path": "ferramentas/consultas_unidades.py",
+      "sha256": "eeea9a04cd052de7aaa6db6283318f87503be4faf5b3bad67a6f78e4d942ee7e"
+    },
+    {
+      "path": "ferramentas/colocacao_missao.py",
+      "sha256": "3e1b68d642c53b3fa0d275d456d1f494b6b732fc93977df63a75c20b30c79dc9"
+    },
+    {
+      "path": "ferramentas/insercao_unidades.py",
+      "sha256": "48ae7a737b3fd1e4c0c014b75061a06b64f12360d53326f98c9d298e9a8ca7c4"
+    },
+    {
+      "path": "ferramentas/capacidades_unidades.py",
+      "sha256": "55625882b2e24374c66642fa0bc898df57312c4cd8703c580df2f8ecdc3f6d5f"
+    },
+    {
+      "path": "pesquisas-paralelas/economia/bonus_unidades.py",
+      "sha256": "84b76f27121ec9da91c8b4e4b59e6c21f1b6b44ff15ecb1a1f5ebbfa8fd7c2cf"
+    },
+    {
+      "path": "integracao/providers.py",
+      "sha256": "5a904ad97b351483107046b04e79f0e08fb4b7a127e81bb07214d3db655989fd"
+    }
+  ],
+  "call_order": [
+    "exists(index) lowAL",
+    "visible(index) lowAL if exists",
+    "place(index) if visible",
+    "capacity_refresh(owner0..3) after all800 slots"
+  ],
+  "boundaries": {
+    "structures": "0x46c16d",
+    "missing_bonus": "0x428cc0",
+    "unsupported_vision_callsite": "0x457019",
+    "unsupported_vision_target": "0x476851"
+  },
+  "capture_correction": "Original-v1 input parent_calls aliased its later output trace. V2 freezes that list and asserts every original output dictionary unchanged; v1 retained.",
+  "scope": "Exact caller order with actual committed providers and explicit inherited physical state. Real MONDE01 reaches radius10 at unit15 after seven complete insertions; preserve the dependency. No full startup/remap, structure insertion, condition execution or running mission."
+}
