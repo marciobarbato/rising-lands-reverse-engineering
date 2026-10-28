@@ -6,3 +6,12 @@ __pycache__/
 ghidra/projetos/
 ghidra/logs/
 ghidra/scripts/bin/
+/apps/macos-preview/assets
+/apps/macos-preview/build
+/apps/macos-preview/dependencies
+/apps/macos-preview/dist
+/apps/macos-preview/research
+/apps/macos-preview/snapshots
+/apps/macos-preview/source
+/apps/macos-preview/snapshot.json
+/apps/macos-preview/research.json

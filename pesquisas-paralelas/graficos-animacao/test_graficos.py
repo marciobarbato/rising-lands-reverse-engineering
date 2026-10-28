@@ -70,7 +70,7 @@ class GraficosTest(unittest.TestCase):
         # Referência somente do snapshot privado identificado, nunca do checkout vivo.
         pasta=RAIZ/'snapshot'/COMMIT/'ferramentas';sys.path.insert(0,str(pasta))
         ref=importlib.import_module('formatos')
-        self.assertEqual(Path(ref.__file__).resolve(),pasta/'formatos.py')
+        self.assertEqual(Path(ref.__file__).resolve(),(pasta/'formatos.py').resolve())
         total=0
         for nome in list(ORDEM)+['MENU.CMP','INVENTE.CMP']:
             dados=self.catalogo._ler('cd/INSTALHD/GRAPHICS/'+nome)

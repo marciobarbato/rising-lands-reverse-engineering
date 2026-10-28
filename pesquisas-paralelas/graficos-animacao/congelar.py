@@ -19,7 +19,7 @@ def congelar(identificador):
         if report['resultado']!='PASSOU':raise RuntimeError(f'Validação {nome} não passou')
     destino=RAIZ/'entregas'/identificador
     destino.mkdir(parents=True,exist_ok=False)
-    arquivos=['README.md','INTEGRACAO.md','VALIDACAO.md','graficos.py','extrair_evidencias.py',
+    arquivos=['HANDOFF.md','README.md','INTEGRACAO.md','VALIDACAO.md','graficos.py','extrair_evidencias.py',
               'bancada_x86.py','validar_x86.py','validar_python.py','test_graficos.py',
               'gerar_artefatos.py','demo.template.html','congelar.py','verificar_manifesto.py',
               'validar_trabalhadores.py','gerar_trabalhadores.py','unidades.template.html',
@@ -32,7 +32,12 @@ def congelar(identificador):
               'test_objetos.py','CONTINUIDADE_V5.md',
               'sequenciais.py','validar_sequenciais.py','gerar_sequenciais.py',
               'sequenciais.template.html','test_sequenciais.py','CONTINUIDADE_V6.md']
-    for nome in arquivos:shutil.copyfile(RAIZ/nome,destino/nome)
+    for nome in arquivos:
+        if nome.endswith('.md'):
+            (destino/nome).write_text((RAIZ/nome).read_text().replace('../../docs/', 'docs/'))
+        else:
+            shutil.copyfile(RAIZ/nome,destino/nome)
+    shutil.copytree(RAIZ.parents[1]/'docs', destino/'docs')
     for pasta in ('fontes','snapshot','dependencias','evidencias','artefatos','validacao'):
         shutil.copytree(RAIZ/pasta,destino/pasta,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
     items=[]

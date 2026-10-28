@@ -253,9 +253,9 @@ def main():
         dados = arquivo.read_bytes()
         manifesto.append(dict(arquivo=str(arquivo.relative_to(cd)), tamanho=len(dados), sha256=sha(dados)))
     gravar_json(saida / 'fontes.json', manifesto)
-    linhas = ['# Unidades recuperadas', '',
-              'Extraídas de RISING.EXE e RISING.INI. Tempos em unidades internas não calibradas.', '',
-              '| ID | Seção original | Nome português | Comida | Pedra | Peças | Visão | Alcance | Recrutamento |',
+    linhas = ['# Recovered units', '',
+              'Extracted from RISING.EXE and RISING.INI. Times use uncalibrated internal units.', '',
+              '| ID | Original section | PT-BR name | Food | Stone | Parts | Vision | Range | Recruitment |',
               '|---:|---|---|---:|---:|---:|---:|---:|---:|']
     for u in regras['unidades']:
         linhas.append(f"| {u['id']} | {u['secao_original']} | {u['nome']} | {u['custo_comida']} | "

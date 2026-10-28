@@ -1,2 +1,2 @@
-# Opcional: somente validação de rotinas isoladas, instalado em .local/python.
+# Optional: bounded original-x86 validation; install locally in .local/python.
 unicorn==2.1.4

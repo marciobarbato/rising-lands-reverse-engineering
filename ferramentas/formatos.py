@@ -1,7 +1,7 @@
 """Leitores independentes, em português, dos formatos observados no CD brasileiro.
 
 Não executam o jogo. Campos sem semântica comprovada permanecem anônimos.
-Os limites e offsets estão explicados em documentacao/FORMATOS.md.
+Os limites e offsets estão explicados em docs/FORMATS.md.
 """
 from dataclasses import dataclass
 import hashlib

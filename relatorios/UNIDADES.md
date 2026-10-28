@@ -1,8 +1,8 @@
-# Unidades recuperadas
+# Recovered units
 
-Extraídas de RISING.EXE e RISING.INI. Tempos em unidades internas não calibradas.
+Extracted from RISING.EXE and RISING.INI. Times use uncalibrated internal units.
 
-| ID | Seção original | Nome português | Comida | Pedra | Peças | Visão | Alcance | Recrutamento |
+| ID | Original section | PT-BR name | Food | Stone | Parts | Vision | Range | Recruitment |
 |---:|---|---|---:|---:|---:|---:|---:|---:|
 | 0 | SOLDAT | SOLDADO | 6 | 0 | 0 | 7 | 1 | 800 |
 | 1 | GARDIEN DU FEU | INCENDIÁRIO | 5 | 1 | 0 | 7 | 1 | 1000 |

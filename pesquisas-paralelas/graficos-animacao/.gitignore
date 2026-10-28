@@ -1,4 +1,4 @@
-# Insumos locais. Preservar manifestos para recuperação pelo SHA-256.
+# Local inputs; preserve manifests for SHA-256 recovery.
 /fontes/**
 !/fontes/manifesto.json
 /snapshot/**
@@ -6,7 +6,7 @@
 /dependencias/**
 !/dependencias/manifesto.json
 
-# A entrega completa permanece local e imutável; Git conserva a parte pública.
+# Historical releases remain local and immutable; Git history retains public records.
 /entregas/*/fontes/**
 !/entregas/*/fontes/manifesto.json
 /entregas/*/snapshot/**
@@ -14,7 +14,7 @@
 /entregas/*/dependencias/**
 !/entregas/*/dependencias/manifesto.json
 
-# Apenas material transitório/operacional desta frente.
+# Transient and operational data for this domain.
 **/__pycache__/
 *.pyc
 /tmp/
@@ -24,3 +24,6 @@
 /INVENTARIO_PUBLICACAO.json
 /publicacao-pathspec.txt
 /ESTADO.md
+
+# Immutable releases live in the workspace archive; recover tracked records from Git history.
+/entregas
