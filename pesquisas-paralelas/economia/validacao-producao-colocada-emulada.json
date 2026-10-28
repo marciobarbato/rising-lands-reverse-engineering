@@ -1,0 +1,20 @@
+{
+  "scope": "Actual CalculTroupe through physical exit and movement order; stop before conditional request",
+  "mode": "original x86 and Python",
+  "tests": 13,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 552,
+  "declared_stops": 552,
+  "completed_returns": 64,
+  "request_dependency_stops": 118,
+  "pre_discovery_stops": 8,
+  "post_experience_import_stops": 2,
+  "original_entry_calls": 192,
+  "preserved_minimap_resumptions": 360,
+  "expected_x86_exceptions": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}

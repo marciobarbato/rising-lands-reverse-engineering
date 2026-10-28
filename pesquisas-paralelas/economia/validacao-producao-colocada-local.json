@@ -1,0 +1,49 @@
+{
+  "scope": "Actual CalculTroupe through physical exit and movement order; stop before conditional request",
+  "mode": "Python only",
+  "tests": 13,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_104_full_producer_types_owners_edges_and_live_movement_object (test_producao_colocada.DiferencialProducaoColocada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_2_late_provider_import_checkpoints_after_queue_consumption (test_producao_colocada.DiferencialProducaoColocada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_36_inactive_or_incomplete_native_returns (test_producao_colocada.DiferencialProducaoColocada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_6_unsaturated_vision_sum_boundaries_with_native_cpu_resumes (test_producao_colocada.DiferencialProducaoColocada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_8_large_vision_stops_after_economy_experience_and_collision (test_producao_colocada.DiferencialProducaoColocada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_four_persistent_progress_sequences_stop_after_first_physical_exit (test_producao_colocada.DiferencialProducaoColocada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_four_real_production_building_types (test_producao_colocada.DiferencialProducaoColocada)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "declared_stops": 0,
+  "completed_returns": 0,
+  "request_dependency_stops": 0,
+  "pre_discovery_stops": 0,
+  "post_experience_import_stops": 0,
+  "original_entry_calls": 0,
+  "preserved_minimap_resumptions": 0,
+  "expected_x86_exceptions": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}
