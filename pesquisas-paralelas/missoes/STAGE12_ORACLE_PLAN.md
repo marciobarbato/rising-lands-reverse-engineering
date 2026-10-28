@@ -45,3 +45,13 @@ The proposed Core17 Python shape is compatible: `alocar(flags,size)->handle`, `f
 5. Freeze/commit the complete original-only result before writing a Python whole-load composition.
 
 Core17 full remap/cleanup/final AL is not adopted yet; current committed class reset/allocation/classification stops at0x42ef8b. Core `Engin_RetrieveExperimente 0x441623` and the production AI/Economy adapters remain explicit composition dependencies. The original oracle may execute original engine bodies once inputs are declared, but Python M1 acceptance requires the actual committed providers and full post-load byte equality at return to0x42d22d. No whole-load, real mission or objective result is claimed here.
+
+## Late published provider update for handover
+
+At18:19BRT Core published and reported exact-main reproduction of full remap main `09d3953c6dda02ba6e4f6ca9ac61e51ca48782e6`. Its committed `docs/core/REMAP_COMPLETION.md` was read directly from that immutable commit and its local fetched-main ancestry verified. This resolves the earlier **availability** gap; the Stage12 prototype remains based on Missions main7f617fa and has not merged, consumed or validated the new provider.
+
+Use the actual `conclusao_remapeamento.remapear_mundo(world, *, alocar, fixar, obter_handle, desfixar, liberar)`; it returns the original consumedAL bool, performs no unit reinsertion, and preserves callback exceptions/resource effects. `retomar_conclusao_remapeamento` accepts retained state, preserving the class buffer and completed work. GlobalHandle consumes live-buffer identity on the Python side and locked pointers natively. The original ignores unlock/free return values; do not invent a conditional engine branch based on them. Component-lock NULL remains an explicit original write fault at42efd9/address0.
+
+Published measurement: original MONDE01 full remap alone31.157seconds,56components,731segments; Core also reproduced realRET/AL1 on main. This is a measured **remap** cost, not a whole-MissionLoad estimate. Core's original snapshots include compressed full mapped input/output bytes, resource states and traces; they may supply identified raw subsets for the inherited registry, but they are not a complete program-start/MissionLoad input package. Preserve their exact base/alias/provenance rather than treating unrelated constructor arenas as interchangeable.
+
+`Engin_RetrieveExperimente0x441623` remains unimplemented and was canceled for this development window. Raw inherited-state assembly, concrete external fixtures and real AI/Economy adapter adoption remain as above. No new run or implementation was started on this notification; preserve the pending Stage12 branch for the next owner.
