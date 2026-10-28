@@ -18,6 +18,7 @@ Owner: combat. Source and tests live in `pesquisas-paralelas/combate/`. Shared d
 | `impacto_unidades.py` | Mode-1 unit impact wrapper: lookup, reaction requests, consumer, hit allocation, diplomacy and alert requests |
 | `bonus_combate.py` | Argument-order adapter from damage's modifier queries to economy's committed loaded-table provider |
 | `morte_dano.py` | Optional mode-1 lethal tail: local experience/life writes, child allocation and explicit level/lifecycle/sympathy requests |
+| `alvos_impacto.py` | Read-only impact-victim selection with original ground/elevated tie rules, reusable as a unit-wrapper query |
 
 Input units use raw 276-byte records. Callbacks must describe external world effects explicitly; receiving a resolved query or stopping at a dependency is a narrower claim than executing the complete caller. Whole-record/grid comparisons distinguish local copies from mutations of the live world.
 
@@ -96,6 +97,12 @@ For a different-owner victim owned by the local player, alert throttling uses u3
 
 The reference suite finishes five type-9 occupied impacts, including consumer life loss, hit allocation/RNG, diplomacy requests and parent retirement; all 220,800 unit bytes and 5,600 pool bytes match. Its world queries execute original code. Navigation/refuge/audio entries are explicit native stops. The full allied-order fixture executes original inactive `MAJSympathie` returns and `PlayerResetAllie` with a nonparticipating local player; Python still delegates those bodies. No real mission, AI message body, lethal effect, building damage, other damage mode or whole battle is established by those fixtures.
 
+The unit lookup is now available as `encontrar_vitima_impacto(units, cell, excluded=FFFF, flag=0)`, reconstructing `ChercheIndiceEnginCible` (`0x4465DF..0x446693`, range hash `f3a9bd57f2fd9dfe18e7db9a992250068e0cd3754c14af65a62a940b262b81b3`). It requires exactly 800 readable 276-byte records; cell/excluded truncate to u16 and flag to u8. IDs scan 0..799, skipping the excluded ID, state 0/4 and `+0x72=0`. Combat's existing `ocupa_celula` handles state 14, current/step cells, type-specific geometry and stratum filtering: flag zero uses filter 1, every nonzero byte uses filter 2. Interpreted live types require the established 0..25 domain; inactive bytes need not describe a valid type.
+
+Each matching ground record (`+0xAB=0`) replaces the candidate, so the **last** matching ID is returned; a matching elevated record (`+0xAB!=0`) returns immediately, so the **first** matching ID is returned. FFFF means no victim. The full EAX result contains that u16 ID with high bits zero. No owner, alliance, life, distance, navigation or grid filter is added. The function writes no state and must receive a stable view for the duration of its callback-free scan. `ConsultaAlvosImpacto(units, outras=None)` answers `ChercheIndiceEnginCible` and delegates every other query; a missing delegate raises explicitly. Building lookup and all world effects remain separate.
+
+The [selection report](../pesquisas-paralelas/combate/validacao-alvos-impacto-emulada.json) contains 376 complete original lookup returns and five complete occupied projectile impacts using **computed** selection, not a replayed native victim ID. Overlapping ground candidates prove unit 799 receives damage while unit 1 remains unchanged. Whole unit/pool buffers match, and standalone lookup leaves all 220,800 unit bytes unchanged. These remain synthetic world fixtures, not mission/runtime tests.
+
 ## Caller cadence and rendering boundary
 
 Three distinct gates occur after menu return (`0x42D14C`), event handling (`0x42D2E3`), and players/commands with a reread state (`0x42D3C0`). Projectile calculation precedes units in the traced caller. Preserve the low byte of the accumulated counter passed into logical animation; do not replace it with an arbitrary frame number or wall-clock delta.
@@ -123,6 +130,7 @@ python3 -B pesquisas-paralelas/combate/validar_impacto_unidades.py --emular
 python3 -B pesquisas-paralelas/combate/validar_ordem_tipo4.py --emular
 python3 -B pesquisas-paralelas/combate/validar_bonus_combate.py --emular
 python3 -B pesquisas-paralelas/combate/validar_morte_dano.py --emular
+python3 -B pesquisas-paralelas/combate/validar_alvos_impacto.py --emular
 python3 -B scripts/check.py --domain combat
 ```
 
