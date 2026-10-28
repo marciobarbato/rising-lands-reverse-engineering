@@ -27,6 +27,7 @@ class MundoNavegacao(MundoFisico):
         self.permitir_aliados_parados = 0
         self.cores_estruturas = CoresEstruturas(largura, altura)
         self.ultimo_bloqueador = self.ultima_celula_livre = 0
+        self.objeto_muro, self.objeto_portao = 254, 253  # bytes 0x495bf8/0x495bf9
 
     def modificar_regiao_estrutura(self, indice, subcelula, celula, inserir):
         return modificar_regiao_estrutura(self, indice, subcelula, celula, inserir)
@@ -42,6 +43,14 @@ class MundoNavegacao(MundoFisico):
     def remover_regioes_estrutura(self, indice):
         from terreno_estruturas import remover_regioes_estrutura
         return remover_regioes_estrutura(self, indice)
+
+    def colocar_estrutura(self, indice, mascara_tipo20=None):
+        from colocacao_estruturas import colocar_estrutura
+        return colocar_estrutura(self, indice, mascara_tipo20)
+
+    def atualizar_muros_vizinhos(self, celula):
+        from colocacao_estruturas import atualizar_muros_vizinhos
+        return atualizar_muros_vizinhos(self, celula)
 
     def refazer_regioes(self):
         """Reconstrói rótulos e reaplica ocupação; usar antes de executar a busca."""

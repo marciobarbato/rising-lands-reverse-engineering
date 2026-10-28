@@ -1,7 +1,7 @@
 {
   "python": "3.9.6",
   "emulacao_habilitada": false,
-  "testes": 193,
+  "testes": 209,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -139,6 +139,30 @@
     },
     {
       "teste": "test_emulacao_caminhos_ia.ExperimentosSolucionador.test_nove_cenarios_documentados",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_colocacao_estruturas.DiferencialColocacaoEstruturas.test_colocacao_todos_tipos_e_origens_com_bordas_entre_linhas",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_colocacao_estruturas.DiferencialColocacaoEstruturas.test_combinacoes_e_validade_dos_portoes_com_ids_de_objeto_variaveis",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_colocacao_estruturas.DiferencialColocacaoEstruturas.test_limites_lineares_e_preferencia_horizontal",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_colocacao_estruturas.DiferencialColocacaoEstruturas.test_muros_vizinhos_exigem_objeto_e_rotulo_sem_filtrar_tipo_do_registro",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_colocacao_estruturas.DiferencialColocacaoEstruturas.test_portoes_todas_as_vizinhancas_e_sobreposicoes_da_regiao",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_colocacao_estruturas.DiferencialColocacaoEstruturas.test_trajetos_mensagens_e_tarefas_depois_da_colocacao",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {

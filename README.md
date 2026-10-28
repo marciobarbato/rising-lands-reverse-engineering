@@ -11,13 +11,21 @@ reimplementação completa do jogo.** Parte dos nomes foi atribuída pela pesqui
 
 ## Retomada do núcleo — 28/10/2026
 
+O desenvolvimento desta frente segue no branch `codex/nucleo-construcoes`,
+com checkout próprio em `engenharia-reversa-nucleo`. `PlaceBatiment`, a escolha
+do primeiro tile, os caminhos de muro/portão e a atualização dos muros vizinhos
+estão traduzidos; veja [COLOCACAO_ESTRUTURAS.md](documentacao/COLOCACAO_ESTRUTURAS.md).
+A suíte do núcleo passou com 209 testes e 46.223 execuções x86 delimitadas,
+sem testes ignorados.
+O remoto `origin` foi configurado pelo usuário em
+[rising-lands-reverse-engineering](https://github.com/marciobarbato/rising-lands-reverse-engineering).
+
 Foram traduzidas a aplicação do terreno de edifícios completos e suas rotinas
 de limpeza, com máscara de colisão, slots compactos, tiles, objetos, regiões e
 cores. Há três trajetos demonstráveis em Python, incluindo a remoção de uma
 construção durante o movimento. Veja [TERRENO_ESTRUTURAS.md](documentacao/TERRENO_ESTRUTURAS.md).
-A API mantém explícita a máscara em RAM exigida pelo tipo 20. A suíte do núcleo
-passou com 193 testes e 43.170 execuções x86 delimitadas, sem testes
-ignorados. Os relatórios de validação refletem esta retomada; a consolidação abaixo é histórica.
+A API mantém explícita a máscara em RAM exigida pelo tipo 20. Os relatórios de
+validação refletem a etapa mais recente desta retomada; a consolidação abaixo é histórica.
 
 ## Consolidação das entregas — 27/10/2026
 
@@ -108,6 +116,7 @@ delegados e dependências pendentes. O estado, as fontes e a continuidade estão
 20. [Contrato da pesquisa de combate](pesquisas-paralelas/combate/INTEGRACAO.md).
 21. [Contrato da pesquisa de economia](pesquisas-paralelas/economia/INTEGRACAO.md).
 22. [Aplicação e limpeza do terreno de construções](documentacao/TERRENO_ESTRUTURAS.md).
+23. [Colocação de estruturas, muros e portões](documentacao/COLOCACAO_ESTRUTURAS.md).
 
 ## Reproduzir
 
@@ -171,4 +180,5 @@ para comparar as traduções e os efeitos administrativos ainda não portados.
 
 Os relatórios são versionados para permitir comparação entre descobertas. Os
 testes que dependem do CD são explicitamente marcados como ignorados se ele
-não estiver disponível; os demais continuam executando. Nenhum remoto Git foi configurado.
+não estiver disponível; os demais continuam executando. As frentes mantêm seus
+próprios branches e checkouts para preservar o trabalho em paralelo.
