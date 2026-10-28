@@ -1,0 +1,53 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "BatimentAlloc_prefix",
+      "start": "0x418e95",
+      "end_exclusive": "0x419004",
+      "size": 367,
+      "sha256": "83ebd6740eec96560b917104805802bc432bdf0406ff656a7f5da0f90c2a369c",
+      "file": "00418e95.asm"
+    },
+    {
+      "name": "BatimentResetAll",
+      "start": "0x41a75c",
+      "end_exclusive": "0x41a860",
+      "size": 260,
+      "sha256": "3e430da9e57e50c104f8874a10188f4f1715a04a4e8364388831e565be4ecea6",
+      "file": "0041a75c.asm"
+    },
+    {
+      "name": "ResetBatiment",
+      "start": "0x41b9d6",
+      "end_exclusive": "0x41ba49",
+      "size": 115,
+      "sha256": "c1b43650504b17427d124141ddacd873455bcbece5e87820497e815b2b9380af",
+      "file": "0041b9d6.asm"
+    },
+    {
+      "name": "CreerBatiment_first_free_scan",
+      "start": "0x41fea2",
+      "end_exclusive": "0x41ff04",
+      "size": 98,
+      "sha256": "7db2cd1c85bd96bef45fff51781b77a37d45beb6aaad8fcfba647ca13be7792c",
+      "file": "0041fea2.asm"
+    },
+    {
+      "name": "CreerBatiment_failure_epilogue",
+      "start": "0x4202c1",
+      "end_exclusive": "0x4202ce",
+      "size": 13,
+      "sha256": "c5908cb3d6dde823be25490256b2ea69fcb75827bf07e29788e62e4a64ce6447",
+      "file": "004202c1.asm"
+    }
+  ],
+  "record_base": "0x49a0c8",
+  "record_stride": 276,
+  "record_count": 1000,
+  "flags_base": "0x49a070",
+  "flags_size": 88,
+  "selections_base": "0x495be0",
+  "scope": "Synthetic memory; startup stops at 0x419004 before economic effects. Free scan stops at 0x41ff04 or the original failure return. No whole-game or mission-loader validation."
+}
