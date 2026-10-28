@@ -1,0 +1,24 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 7,
+  "failures": 0,
+  "errors": 0,
+  "success": true,
+  "skips": [
+    {
+      "test": "test_emulacao_remapeamento_mundo.DiferencialRemapeamentoMundo.test_no_dimension_or_active_unit_guard_before_allocation",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_remapeamento_mundo.DiferencialRemapeamentoMundo.test_patterns_search_states_and_all_retained_world_buffers",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_remapeamento_mundo.DiferencialRemapeamentoMundo.test_search_then_color_fills_free_list_then_region_fill_order",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "scope": "Ordered Chemin_Remap reset, stop before first GlobalAlloc; no Windows imports substituted"
+}

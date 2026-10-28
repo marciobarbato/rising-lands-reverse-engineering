@@ -1,0 +1,27 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": true,
+  "tests": 7,
+  "failures": 1,
+  "errors": 0,
+  "success": false,
+  "skips": [],
+  "bounded_x86_executions": 29,
+  "scope": "Ordered Chemin_Remap reset, stop before first GlobalAlloc; no Windows imports substituted",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "unicorn": "2.1.4",
+  "original_entries": {
+    "0x42ee1c": 29
+  },
+  "reached_stops": {
+    "0x42eebd": 29
+  },
+  "expected_native_exceptions": 0,
+  "expected_execution_limits": 0,
+  "expected_python_dependency_exceptions": 0,
+  "compared_ordered_events": null,
+  "maximum_native_instructions": 88073,
+  "failed_native_segment": null,
+  "native_subcalls": "Three intact memset calls, each executing its original fill leaf",
+  "reached_windows_imports": 0
+}
