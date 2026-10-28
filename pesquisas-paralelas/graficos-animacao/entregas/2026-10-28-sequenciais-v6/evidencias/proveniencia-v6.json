@@ -1,0 +1,95 @@
+{
+  "commit_predecessor": "d96034af2a264e77dc49269c6e0fe563cfddabf4",
+  "commit_snapshot": "1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e",
+  "exe_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "branch": "codex/graficos-animacao",
+  "fontes_predecessoras": [
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/graficos.py",
+      "commit": "d96034af2a264e77dc49269c6e0fe563cfddabf4",
+      "sha256": "80066cbc6093cb69f158828226304b8493bab3744753f32b8601df683ca0d3ae",
+      "bytes": 11368
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/composicao.py",
+      "commit": "d96034af2a264e77dc49269c6e0fe563cfddabf4",
+      "sha256": "2532c0726422ab985859f6e87140aa376ce5b0da83fc27300875ecf4664b26f4",
+      "bytes": 6045
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/objetos.py",
+      "commit": "d96034af2a264e77dc49269c6e0fe563cfddabf4",
+      "sha256": "f90d477dca2ccc463ddb42861bfad0d9950222409915db35ad19ebb41da0e33b",
+      "bytes": 6194
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/validar_objetos.py",
+      "commit": "d96034af2a264e77dc49269c6e0fe563cfddabf4",
+      "sha256": "c8f6604b893293c8967778ba6d0c7317e45b1adf55886b930267f2ec7c678a59",
+      "bytes": 10346
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/bancada_x86.py",
+      "commit": "d96034af2a264e77dc49269c6e0fe563cfddabf4",
+      "sha256": "725a5e5c3ad091fd1a332d0b85a90fd9c947eef12fc6e2c6aaca0e9a6f656612",
+      "bytes": 7261
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/gerar_objetos.py",
+      "commit": "d96034af2a264e77dc49269c6e0fe563cfddabf4",
+      "sha256": "737194e2280dc26dd400114474543cb0a15bccc047312b5abce3b628957d87c8",
+      "bytes": 6204
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/gerar_artefatos.py",
+      "commit": "d96034af2a264e77dc49269c6e0fe563cfddabf4",
+      "sha256": "93f090d3014fb6c4e13630d7db2c4d2f29ace96258496a2c098926b9f3d6421f",
+      "bytes": 7801
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/validacao/x86-composicao.json",
+      "commit": "d96034af2a264e77dc49269c6e0fe563cfddabf4",
+      "sha256": "8ce5b88fa8b6675e2a582f3a05e37b0585665caaa70960d3b2bad8f7dd353980",
+      "bytes": 767625
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/evidencias/00410085.asm",
+      "commit": "d96034af2a264e77dc49269c6e0fe563cfddabf4",
+      "sha256": "0fbeb6360b88ab4cd591f7768e4c8184752284b13e9003a2c6289eebcbce15d9",
+      "bytes": 23350
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/evidencias/004772ec.asm",
+      "commit": "d96034af2a264e77dc49269c6e0fe563cfddabf4",
+      "sha256": "f47a93fa932659dc9daa625244daf4a7a86bf2c232a047b7aa13decdb440ed3c",
+      "bytes": 8342
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/evidencias/0046c2cf.asm",
+      "commit": "d96034af2a264e77dc49269c6e0fe563cfddabf4",
+      "sha256": "aae74003be3cda46ed0a666bea74569f2d96316de763e85bf62911dd0788afe6",
+      "bytes": 11914
+    }
+  ],
+  "manifestos_insumos": [
+    {
+      "caminho": "fontes/manifesto.json",
+      "sha256": "e961e585a9f3823f505dd78f0e05789001a440efa646918142e29dd2993bc0a7"
+    },
+    {
+      "caminho": "snapshot/manifesto.json",
+      "sha256": "b1db3dd9498791386da48ba4a4e8976b0e27727ecb47a02e6cc836d4726225a4"
+    },
+    {
+      "caminho": "dependencias/manifesto.json",
+      "sha256": "c7b1de3a499f72d294f2e454011c16612affdd66d76d3917cc642ad5267779bd"
+    }
+  ],
+  "intervalos_comparados": [
+    "AffVegetTerrain 0x410085..0x41068e",
+    "AffVeget 0x415acf..0x416864 + retorno 0x410b38",
+    "MissionLoad laço 0x46c3de..0x46c40a",
+    "NextAnimVeget 0x4772ec..0x4774fa + epílogo 0x475bf8"
+  ],
+  "regra": "Somente fontes próprias commitadas e insumos imutáveis; nenhuma importação de módulos vivos de outra frente."
+}

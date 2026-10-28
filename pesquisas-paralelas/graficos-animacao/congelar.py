@@ -13,7 +13,8 @@ def congelar(identificador):
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,100}',identificador):
         raise ValueError('Identificador inválido')
     for nome in ('python','x86','visual','x86-trabalhadores','visual-trabalhadores',
-                 'x86-composicao','visual-composicao','x86-construcoes','visual-construcoes'):
+                 'x86-composicao','visual-composicao','x86-construcoes','visual-construcoes',
+                 'x86-objetos','visual-objetos','x86-sequenciais','visual-sequenciais'):
         report=json.loads((RAIZ/'validacao'/f'{nome}.json').read_text())
         if report['resultado']!='PASSOU':raise RuntimeError(f'Validação {nome} não passou')
     destino=RAIZ/'entregas'/identificador
@@ -26,7 +27,11 @@ def congelar(identificador):
               'composicao.py','validar_composicao.py','gerar_composicao.py',
               'composicao.template.html','test_composicao.py','CONTINUIDADE_V3.md',
               'construcoes.py','validar_construcoes.py','gerar_construcoes.py',
-              'construcoes.template.html','test_construcoes.py','CONTINUIDADE_V4.md']
+              'construcoes.template.html','test_construcoes.py','CONTINUIDADE_V4.md',
+              'objetos.py','validar_objetos.py','gerar_objetos.py','objetos.template.html',
+              'test_objetos.py','CONTINUIDADE_V5.md',
+              'sequenciais.py','validar_sequenciais.py','gerar_sequenciais.py',
+              'sequenciais.template.html','test_sequenciais.py','CONTINUIDADE_V6.md']
     for nome in arquivos:shutil.copyfile(RAIZ/nome,destino/nome)
     for pasta in ('fontes','snapshot','dependencias','evidencias','artefatos','validacao'):
         shutil.copytree(RAIZ/pasta,destino/pasta,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
@@ -35,7 +40,7 @@ def congelar(identificador):
         if p.is_file():items.append(dict(caminho=p.relative_to(destino).as_posix(),bytes=p.stat().st_size,
                                          sha256=hashlib.sha256(p.read_bytes()).hexdigest()))
     manifesto=dict(identificador=identificador,commit_base=COMMIT,exe_sha256=HASH_EXE,
-                   commit_entrega_anterior='b67215a3870d17a51b063cb9d82ea391c1852f56',
+                   commit_entrega_anterior='d96034af2a264e77dc49269c6e0fe563cfddabf4',
                    regra='Imutável após publicação; alterações exigem nova revisão.',
                    arquivos=items,quantidade_arquivos=len(items))
     if identificador == '2026-10-28-composicao-v3r2':

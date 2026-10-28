@@ -8,7 +8,7 @@ from extrair_evidencias import exigir_area_editavel
 
 exigir_area_editavel()
 inicio=time.monotonic();saida=io.StringIO()
-suite=unittest.defaultTestLoader.loadTestsFromNames(['test_graficos','test_trabalhadores','test_composicao','test_construcoes'])
+suite=unittest.defaultTestLoader.loadTestsFromNames(['test_graficos','test_trabalhadores','test_composicao','test_construcoes','test_objetos','test_sequenciais'])
 resultado=unittest.TextTestRunner(stream=saida,verbosity=2).run(suite)
 report=dict(resultado='PASSOU' if resultado.wasSuccessful() else 'FALHOU',testes=resultado.testsRun,
             falhas=len(resultado.failures),erros=len(resultado.errors),ignorados=len(resultado.skipped),

@@ -1,0 +1,3487 @@
+{
+  "commit": "1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e",
+  "exe_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "unicorn": "2.1.4",
+  "limites": {
+    "instrucoes_por_chamada_maximo": 1000000,
+    "microssegundos_por_chamada": 2000000
+  },
+  "substituicoes": {
+    "LoadSTRATBank": [
+      "0x458420 abrir arquivo",
+      "0x458461 ler bytes",
+      "0x45844c fechar",
+      "0x467ea6 alocar heap"
+    ],
+    "captura_desenho": [
+      "0x45b796 sombra: registra argumentos e retorna; corpo executado até PasteBobCmp"
+    ],
+    "animacao": [],
+    "PasteBobCmp": []
+  },
+  "agregacao": {
+    "quadros_comparados": 12156,
+    "aberturas": [
+      "BLOCS.CMP",
+      "TROOPS.CMP",
+      "VEHICULE.CMP",
+      "CREATURE.CMP",
+      "BUILDING.CMP",
+      "OTHERS.CMP",
+      "BLOCS.CMP",
+      "TROOPS.CMP",
+      "VEHICULE.CMP",
+      "CREATURE.CMP",
+      "BUILDING.CMP",
+      "OTHERS.CMP"
+    ],
+    "bancos": [
+      {
+        "arquivo": "BLOCS.CMP",
+        "quadros": 1345,
+        "ultimo_id_motor": 1345,
+        "sha256": "318069f1728621d98a4409b5a8809ea410d7b4adc94d6ba421d69b14c98a99db"
+      },
+      {
+        "arquivo": "TROOPS.CMP",
+        "quadros": 2848,
+        "ultimo_id_motor": 4193,
+        "sha256": "b9012e0bc6119e1f4745ff6e25bf8ba912423e9c364513118a31b5355c87beac"
+      },
+      {
+        "arquivo": "VEHICULE.CMP",
+        "quadros": 915,
+        "ultimo_id_motor": 5108,
+        "sha256": "f7ee4ce0ec957af609f0ae9ab845ac1bc08c2b598c749b9c3b78ec37f45324d8"
+      },
+      {
+        "arquivo": "CREATURE.CMP",
+        "quadros": 1920,
+        "ultimo_id_motor": 7028,
+        "sha256": "4a1db7d2a92f421970d35f8a6402eb6489969257c54d07b5590186f011327e1d"
+      },
+      {
+        "arquivo": "BUILDING.CMP",
+        "quadros": 611,
+        "ultimo_id_motor": 7639,
+        "sha256": "af4f94ea996a65d36592bb6cefc407dc628b3d488c9c335b8f6015bbfcb6a3ae"
+      },
+      {
+        "arquivo": "OTHERS.CMP",
+        "quadros": 4517,
+        "ultimo_id_motor": 12156,
+        "sha256": "0282fa4bc5241fb6905a0daa0c00f43e63fe63c0f00ff6beda01d3602141fd1d"
+      }
+    ],
+    "descricao": "Todos os descritores, dimensões, tamanhos e bytes comprimidos comparados na ordem original."
+  },
+  "inicializacao_soldado": {
+    "quantidade_0xa5": 8,
+    "periodo_0xa7": 2
+  },
+  "parada": {
+    "casos": 8,
+    "fase_resultante": 2,
+    "rotina": "0x448194",
+    "sem_substituicoes": true
+  },
+  "capturas_desenho": [
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 1,
+      "fase": 0,
+      "id_motor": 2082,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 1,
+      "fase": 1,
+      "id_motor": 2083,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 1,
+      "fase": 2,
+      "id_motor": 2084,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 1,
+      "fase": 3,
+      "id_motor": 2085,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 1,
+      "fase": 4,
+      "id_motor": 2086,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 1,
+      "fase": 5,
+      "id_motor": 2087,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 1,
+      "fase": 6,
+      "id_motor": 2088,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 1,
+      "fase": 7,
+      "id_motor": 2089,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "parado",
+      "direcao": 1,
+      "fase": 2,
+      "id_motor": 2084,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 2,
+      "fase": 0,
+      "id_motor": 2082,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 2,
+      "fase": 1,
+      "id_motor": 2083,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 2,
+      "fase": 2,
+      "id_motor": 2084,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 2,
+      "fase": 3,
+      "id_motor": 2085,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 2,
+      "fase": 4,
+      "id_motor": 2086,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 2,
+      "fase": 5,
+      "id_motor": 2087,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 2,
+      "fase": 6,
+      "id_motor": 2088,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 2,
+      "fase": 7,
+      "id_motor": 2089,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "parado",
+      "direcao": 2,
+      "fase": 2,
+      "id_motor": 2084,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 3,
+      "fase": 0,
+      "id_motor": 2090,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 3,
+      "fase": 1,
+      "id_motor": 2091,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 3,
+      "fase": 2,
+      "id_motor": 2092,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 3,
+      "fase": 3,
+      "id_motor": 2093,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 3,
+      "fase": 4,
+      "id_motor": 2094,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 3,
+      "fase": 5,
+      "id_motor": 2095,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 3,
+      "fase": 6,
+      "id_motor": 2096,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 3,
+      "fase": 7,
+      "id_motor": 2097,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "parado",
+      "direcao": 3,
+      "fase": 2,
+      "id_motor": 2092,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 4,
+      "fase": 0,
+      "id_motor": 2090,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 4,
+      "fase": 1,
+      "id_motor": 2091,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 4,
+      "fase": 2,
+      "id_motor": 2092,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 4,
+      "fase": 3,
+      "id_motor": 2093,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 4,
+      "fase": 4,
+      "id_motor": 2094,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 4,
+      "fase": 5,
+      "id_motor": 2095,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 4,
+      "fase": 6,
+      "id_motor": 2096,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 4,
+      "fase": 7,
+      "id_motor": 2097,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "parado",
+      "direcao": 4,
+      "fase": 2,
+      "id_motor": 2092,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 5,
+      "fase": 0,
+      "id_motor": 2098,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 5,
+      "fase": 1,
+      "id_motor": 2099,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 5,
+      "fase": 2,
+      "id_motor": 2100,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 5,
+      "fase": 3,
+      "id_motor": 2101,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 5,
+      "fase": 4,
+      "id_motor": 2102,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 5,
+      "fase": 5,
+      "id_motor": 2103,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 5,
+      "fase": 6,
+      "id_motor": 2104,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 5,
+      "fase": 7,
+      "id_motor": 2105,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "parado",
+      "direcao": 5,
+      "fase": 2,
+      "id_motor": 2100,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 6,
+      "fase": 0,
+      "id_motor": 2098,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 6,
+      "fase": 1,
+      "id_motor": 2099,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 6,
+      "fase": 2,
+      "id_motor": 2100,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 6,
+      "fase": 3,
+      "id_motor": 2101,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 6,
+      "fase": 4,
+      "id_motor": 2102,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 6,
+      "fase": 5,
+      "id_motor": 2103,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 6,
+      "fase": 6,
+      "id_motor": 2104,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 6,
+      "fase": 7,
+      "id_motor": 2105,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "parado",
+      "direcao": 6,
+      "fase": 2,
+      "id_motor": 2100,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 7,
+      "fase": 0,
+      "id_motor": 2106,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 7,
+      "fase": 1,
+      "id_motor": 2107,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 7,
+      "fase": 2,
+      "id_motor": 2108,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 7,
+      "fase": 3,
+      "id_motor": 2109,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 7,
+      "fase": 4,
+      "id_motor": 2110,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 7,
+      "fase": 5,
+      "id_motor": 2111,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 7,
+      "fase": 6,
+      "id_motor": 2112,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 7,
+      "fase": 7,
+      "id_motor": 2113,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "parado",
+      "direcao": 7,
+      "fase": 2,
+      "id_motor": 2108,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 8,
+      "fase": 0,
+      "id_motor": 2106,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 8,
+      "fase": 1,
+      "id_motor": 2107,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 8,
+      "fase": 2,
+      "id_motor": 2108,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 8,
+      "fase": 3,
+      "id_motor": 2109,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 8,
+      "fase": 4,
+      "id_motor": 2110,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 8,
+      "fase": 5,
+      "id_motor": 2111,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 8,
+      "fase": 6,
+      "id_motor": 2112,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 8,
+      "fase": 7,
+      "id_motor": 2113,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "parado",
+      "direcao": 8,
+      "fase": 2,
+      "id_motor": 2108,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 9,
+      "fase": 0,
+      "id_motor": 2114,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 9,
+      "fase": 1,
+      "id_motor": 2115,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 9,
+      "fase": 2,
+      "id_motor": 2116,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 9,
+      "fase": 3,
+      "id_motor": 2117,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 9,
+      "fase": 4,
+      "id_motor": 2118,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 9,
+      "fase": 5,
+      "id_motor": 2119,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 9,
+      "fase": 6,
+      "id_motor": 2120,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 9,
+      "fase": 7,
+      "id_motor": 2121,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "parado",
+      "direcao": 9,
+      "fase": 2,
+      "id_motor": 2116,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 10,
+      "fase": 0,
+      "id_motor": 2114,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 10,
+      "fase": 1,
+      "id_motor": 2115,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 10,
+      "fase": 2,
+      "id_motor": 2116,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 10,
+      "fase": 3,
+      "id_motor": 2117,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 10,
+      "fase": 4,
+      "id_motor": 2118,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 10,
+      "fase": 5,
+      "id_motor": 2119,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 10,
+      "fase": 6,
+      "id_motor": 2120,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 10,
+      "fase": 7,
+      "id_motor": 2121,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "parado",
+      "direcao": 10,
+      "fase": 2,
+      "id_motor": 2116,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 11,
+      "fase": 0,
+      "id_motor": 2122,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 11,
+      "fase": 1,
+      "id_motor": 2123,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 11,
+      "fase": 2,
+      "id_motor": 2124,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 11,
+      "fase": 3,
+      "id_motor": 2125,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 11,
+      "fase": 4,
+      "id_motor": 2126,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 11,
+      "fase": 5,
+      "id_motor": 2127,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 11,
+      "fase": 6,
+      "id_motor": 2128,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 11,
+      "fase": 7,
+      "id_motor": 2129,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "parado",
+      "direcao": 11,
+      "fase": 2,
+      "id_motor": 2124,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 12,
+      "fase": 0,
+      "id_motor": 2122,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 12,
+      "fase": 1,
+      "id_motor": 2123,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 12,
+      "fase": 2,
+      "id_motor": 2124,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 12,
+      "fase": 3,
+      "id_motor": 2125,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 12,
+      "fase": 4,
+      "id_motor": 2126,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 12,
+      "fase": 5,
+      "id_motor": 2127,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 12,
+      "fase": 6,
+      "id_motor": 2128,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 12,
+      "fase": 7,
+      "id_motor": 2129,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "parado",
+      "direcao": 12,
+      "fase": 2,
+      "id_motor": 2124,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 13,
+      "fase": 0,
+      "id_motor": 2130,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 13,
+      "fase": 1,
+      "id_motor": 2131,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 13,
+      "fase": 2,
+      "id_motor": 2132,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 13,
+      "fase": 3,
+      "id_motor": 2133,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 13,
+      "fase": 4,
+      "id_motor": 2134,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 13,
+      "fase": 5,
+      "id_motor": 2135,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 13,
+      "fase": 6,
+      "id_motor": 2136,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 13,
+      "fase": 7,
+      "id_motor": 2137,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "parado",
+      "direcao": 13,
+      "fase": 2,
+      "id_motor": 2132,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 14,
+      "fase": 0,
+      "id_motor": 2130,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 14,
+      "fase": 1,
+      "id_motor": 2131,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 14,
+      "fase": 2,
+      "id_motor": 2132,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 14,
+      "fase": 3,
+      "id_motor": 2133,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 14,
+      "fase": 4,
+      "id_motor": 2134,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 14,
+      "fase": 5,
+      "id_motor": 2135,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 14,
+      "fase": 6,
+      "id_motor": 2136,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 14,
+      "fase": 7,
+      "id_motor": 2137,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "parado",
+      "direcao": 14,
+      "fase": 2,
+      "id_motor": 2132,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 15,
+      "fase": 0,
+      "id_motor": 2138,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 15,
+      "fase": 1,
+      "id_motor": 2139,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 15,
+      "fase": 2,
+      "id_motor": 2140,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 15,
+      "fase": 3,
+      "id_motor": 2141,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 15,
+      "fase": 4,
+      "id_motor": 2142,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 15,
+      "fase": 5,
+      "id_motor": 2143,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 15,
+      "fase": 6,
+      "id_motor": 2144,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 15,
+      "fase": 7,
+      "id_motor": 2145,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "parado",
+      "direcao": 15,
+      "fase": 2,
+      "id_motor": 2140,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 16,
+      "fase": 0,
+      "id_motor": 2138,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 16,
+      "fase": 1,
+      "id_motor": 2139,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 16,
+      "fase": 2,
+      "id_motor": 2140,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 16,
+      "fase": 3,
+      "id_motor": 2141,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 16,
+      "fase": 4,
+      "id_motor": 2142,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 16,
+      "fase": 5,
+      "id_motor": 2143,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 16,
+      "fase": 6,
+      "id_motor": 2144,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "andando",
+      "direcao": 16,
+      "fase": 7,
+      "id_motor": 2145,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    },
+    {
+      "tipo": 0,
+      "estado": "parado",
+      "direcao": 16,
+      "fase": 2,
+      "id_motor": 2140,
+      "x": 88,
+      "y": 106,
+      "sombras": [
+        {
+          "id_motor": 10784,
+          "x": 130,
+          "y": 154
+        }
+      ]
+    }
+  ],
+  "ancoragem": [
+    {
+      "dx": 0,
+      "dy": 0,
+      "resultado": {
+        "id_motor": 2084,
+        "x": 88,
+        "y": 106,
+        "sombras": [
+          {
+            "id_motor": 10784,
+            "x": 130,
+            "y": 154
+          }
+        ]
+      }
+    },
+    {
+      "dx": 1,
+      "dy": 2,
+      "resultado": {
+        "id_motor": 2084,
+        "x": 89,
+        "y": 108,
+        "sombras": [
+          {
+            "id_motor": 10784,
+            "x": 131,
+            "y": 156
+          }
+        ]
+      }
+    },
+    {
+      "dx": -1,
+      "dy": -2,
+      "resultado": {
+        "id_motor": 2084,
+        "x": 87,
+        "y": 104,
+        "sombras": [
+          {
+            "id_motor": 10784,
+            "x": 129,
+            "y": 152
+          }
+        ]
+      }
+    },
+    {
+      "dx": 31,
+      "dy": 31,
+      "resultado": {
+        "id_motor": 2084,
+        "x": 119,
+        "y": 137,
+        "sombras": [
+          {
+            "id_motor": 10784,
+            "x": 161,
+            "y": 185
+          }
+        ]
+      }
+    },
+    {
+      "dx": -31,
+      "dy": -31,
+      "resultado": {
+        "id_motor": 2084,
+        "x": 57,
+        "y": 75,
+        "sombras": [
+          {
+            "id_motor": 10784,
+            "x": 99,
+            "y": 123
+          }
+        ]
+      }
+    },
+    {
+      "dx": -128,
+      "dy": 127,
+      "resultado": {
+        "id_motor": 2084,
+        "x": -40,
+        "y": 233,
+        "sombras": [
+          {
+            "id_motor": 10784,
+            "x": 2,
+            "y": 281
+          }
+        ]
+      }
+    },
+    {
+      "dx": 127,
+      "dy": -128,
+      "resultado": {
+        "id_motor": 2084,
+        "x": 215,
+        "y": -22,
+        "sombras": [
+          {
+            "id_motor": 10784,
+            "x": 257,
+            "y": 26
+          }
+        ]
+      }
+    }
+  ],
+  "contadores": {
+    "casos": 4416,
+    "rotinas": [
+      "0x448088",
+      "0x448f50..0x449048"
+    ],
+    "periodos": [
+      0,
+      1,
+      2,
+      3,
+      255
+    ],
+    "contadores_periodo_2": "todos 0..255",
+    "fases": "todas 0..7",
+    "taxa_segundos": null,
+    "sem_passo_preserva": true
+  },
+  "direcoes": [
+    {
+      "dx": -1,
+      "dy": 0,
+      "direcao": 1
+    },
+    {
+      "dx": -1,
+      "dy": -1,
+      "direcao": 3
+    },
+    {
+      "dx": 0,
+      "dy": -1,
+      "direcao": 5
+    },
+    {
+      "dx": 1,
+      "dy": -1,
+      "direcao": 7
+    },
+    {
+      "dx": 1,
+      "dy": 0,
+      "direcao": 9
+    },
+    {
+      "dx": 1,
+      "dy": 1,
+      "direcao": 11
+    },
+    {
+      "dx": 0,
+      "dy": 1,
+      "direcao": 13
+    },
+    {
+      "dx": -1,
+      "dy": 1,
+      "direcao": 15
+    }
+  ],
+  "composicao": {
+    "casos": 76,
+    "comparacoes": [
+      {
+        "id_motor": 2082,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "020c41739c2247230a975ab8cd935c0305f748489abe20bfc3961fa15d62f3a3"
+      },
+      {
+        "id_motor": 2083,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "3894b92cf0a3f3a9b5823fafde204c2e672ccf92065a7e567ab0479d5885d035"
+      },
+      {
+        "id_motor": 2084,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "0d8f6cdf6911c63d86c06e6e1bd8b2be9ab550eed8459063bf3ca101f6b86887"
+      },
+      {
+        "id_motor": 2085,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "77abd624948dde52d629b71244230fbffe4e6edcab6bc314a37b5886554e66fd"
+      },
+      {
+        "id_motor": 2086,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "dac792db4133a65922bc2b357ab22bed77b7fdcfa9c08e140efcd3aa6253c9c7"
+      },
+      {
+        "id_motor": 2087,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "722ca8ce732c647187845e4e347a8625eef86f6f1201aa02fe8e794315896fb3"
+      },
+      {
+        "id_motor": 2088,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "1e13116d1abb7a125cfd346058f2d741714e45744b7c41008ff0bd517616bf66"
+      },
+      {
+        "id_motor": 2089,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "6992f73d2d48084771de45a6dd8f2833aac3715ffdd40b44bbe942ca3c8da4f2"
+      },
+      {
+        "id_motor": 2090,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "08cf76897d1030d29c75eaedc12c7df2918f6a8808e8b3b960f2c508847955bc"
+      },
+      {
+        "id_motor": 2091,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "5b100a25075bd77d48d90c86b72c4bbcce3375f4756bc81484a584349d3c0fd9"
+      },
+      {
+        "id_motor": 2092,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "d4e503f1f3b1ca8a1d0c5319039ca8f1b1eeed6b186582fd8aacfe0403a829f7"
+      },
+      {
+        "id_motor": 2093,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "6b43c1e607d8bf51dd3b7ab4dc1afe7d86cc09bcb9f357b183dfe4fcfc89475a"
+      },
+      {
+        "id_motor": 2094,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "0167e9585bea924f41dba6b862fffbf347b0eb1466072fb9d6d362ccc9297284"
+      },
+      {
+        "id_motor": 2095,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "b9d145a2ab184fec85646a0b1863d17ecd1182bd8c9690ca348e5a8b2dea580c"
+      },
+      {
+        "id_motor": 2096,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "68265a314ea505ff68336540dd495517df19b4f2daf48086afcd8765329397c0"
+      },
+      {
+        "id_motor": 2097,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "4122f5dbe496237f0db04286c6437b60c65e545f4298624cc73386c4aa3b9745"
+      },
+      {
+        "id_motor": 2098,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "ec57132c553f8508892ba231083f492ced96daf50f070ce19b9f3728a3be1b25"
+      },
+      {
+        "id_motor": 2099,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "4e17a0b07c7819847d8db0565b82220a4cda809a85fbeeeb2ba69693a2114122"
+      },
+      {
+        "id_motor": 2100,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "7702969a1d07c9fcc3606b09c53f1d9bf9c1eec282edfe5d013ea038aa011cd3"
+      },
+      {
+        "id_motor": 2101,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "24da3dcd5f66a930a0ab03376f998565800d004660830e12bc213872015d3fc4"
+      },
+      {
+        "id_motor": 2102,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "821c7fab51c0ba77b20ba3aa80fc3b486231bbc3fe99700899eb3619b54cca90"
+      },
+      {
+        "id_motor": 2103,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "61b71acf472559e0291373b9a83f655f2cf8fe77c49c664ab34b4f83ca914998"
+      },
+      {
+        "id_motor": 2104,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "5bf647e5a204b385814dd7b650a09d9dbeaca9fe95e82c0cd879421ccc485ffc"
+      },
+      {
+        "id_motor": 2105,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "063b879a15eaa86543fed09b9bb9574e315c0fd732c1d6044bdd42b8f1fa9c12"
+      },
+      {
+        "id_motor": 2106,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "79b228b9b96ae28b927ce317ea57b0e84b46962657fbaaf556f17cb5c3491827"
+      },
+      {
+        "id_motor": 2107,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "a454cf8b901ec283f11045bf63971402747ee858faddf90c5eec44f505f7f140"
+      },
+      {
+        "id_motor": 2108,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "c1350be2c32d53ab3f11391818df2d98420ad89af95e5ba709a07076fb4ec7cb"
+      },
+      {
+        "id_motor": 2109,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "65fabce403654b57c23e7957daeba2f54d2ad38be19ac5f3d6f0bda817e92a74"
+      },
+      {
+        "id_motor": 2110,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "70c539e9673f27be206f924b7972af3d512b8d705e8278d8b3c14a1f5685d214"
+      },
+      {
+        "id_motor": 2111,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "1e8b368a4d314b2b8ce7ebcece498fd341e2cfac22d86f2ef2acd8fa532a3946"
+      },
+      {
+        "id_motor": 2112,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "0171f2a65486f299c44a739c5e2a90f1513fa1034050b8f90a50cfa207f8b431"
+      },
+      {
+        "id_motor": 2113,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "60daecc20e353f15d94eeef61fd3fbfc4c144d43b2f1ce4c99100c07b5f45bd6"
+      },
+      {
+        "id_motor": 2114,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "230ae2ced63ac93c460102ce9ddd30f856cd2bb462b6a1c601513ebb8f1590e7"
+      },
+      {
+        "id_motor": 2115,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "89f2b9ce5fe1655f09308f22da44e34c8e60abf2a7f0f07d8dea82118bc01c53"
+      },
+      {
+        "id_motor": 2116,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "e2f5632ec1f8d0c6b00617a95938a5cabb1fb6877070fd60d9aa4dee9f1db3ae"
+      },
+      {
+        "id_motor": 2117,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "c9662109dc53238a62e614bfd9e8a23e0c484f507bb52b4aac75209f0b94351d"
+      },
+      {
+        "id_motor": 2118,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "ffa0e53554d857533c455f38c9f00f3db5ee5d2b65bb3afb1ca26de2de0923c7"
+      },
+      {
+        "id_motor": 2119,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "ba32d94ffa05dad2a22bf3e472d4857d9224118bfb95dd2896289e63c388ad9e"
+      },
+      {
+        "id_motor": 2120,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "b37650c7aa0e3295c66ccdd2423669a4e1d69c6cf338d14c000befeb6d15fdeb"
+      },
+      {
+        "id_motor": 2121,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "413485a879a8f182d0e34e78ffa7e8024292a8b842c3f165ea6a56387a6c4710"
+      },
+      {
+        "id_motor": 2122,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "45276adbebdcf184884f221a603e58c1ff0ff800da7000cdcd3a3031c911bc11"
+      },
+      {
+        "id_motor": 2123,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "548a2e224c22010bb7932659f96aea9a492379ede20f4b5628dc37b4cbecaa35"
+      },
+      {
+        "id_motor": 2124,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "5e1afa2221e6e07c289d9d79768ecc64ee41d2d84741b9299051a9137bcf2af4"
+      },
+      {
+        "id_motor": 2125,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "ed5ad3aecdb1918bd5230b862e11e4c06793cbabb72d159d7a7b29af57510b8a"
+      },
+      {
+        "id_motor": 2126,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "a8bee4888fdf659111bed5791a45eace1cc0cac3b4ca50efd6dab5ca867d0fff"
+      },
+      {
+        "id_motor": 2127,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "d263740ce73f87dd4f6ced9c617473063d17ae6ed029c31965d1e7951adcce63"
+      },
+      {
+        "id_motor": 2128,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "93cb491490339cd73da2cfe9a8ee5819c2e4c1f95c96758c229c353ebd377823"
+      },
+      {
+        "id_motor": 2129,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "cdc1bf64b88eaf9bab367757ae8b6860db5547f646b8563861c832ead7ae08f6"
+      },
+      {
+        "id_motor": 2130,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "bd513f687c00ab69f592a1bd391c46c79979990523677399f1da739ceeb76275"
+      },
+      {
+        "id_motor": 2131,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "d2af556a02789774400a706f4490321fe95fb48eed4347cda78379626a056321"
+      },
+      {
+        "id_motor": 2132,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "b37a9a5265cdc671f5a2e0093d2e9b6f49ac31062940bebb75c1e41d719c189b"
+      },
+      {
+        "id_motor": 2133,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "42da03911c720a894ef4e6971d8301461f26cb628d3b4a917804e6458681ab76"
+      },
+      {
+        "id_motor": 2134,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "7d1fdb0c4a30c6986e4504111aededcc1950462892c68ef5663ed7dc87260e45"
+      },
+      {
+        "id_motor": 2135,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "ec8730ca6b66df3997460d4101b799b4ad4c56b11657656226d71c240a44d9c3"
+      },
+      {
+        "id_motor": 2136,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "471716b32dab7079749353f16863b11a95d7fc0c62eadd6f9463334c2484999d"
+      },
+      {
+        "id_motor": 2137,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "541b98ced744b7c1240e4c65800c2c20bceb06f32f56a0ce2a39f24b3cf31906"
+      },
+      {
+        "id_motor": 2138,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "78e71a3cdbe530668dc4076116b4f346b481ebd2880ba8ea94f3033339a473a7"
+      },
+      {
+        "id_motor": 2139,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "640850d3c11749ccacc01cb3e049ceb0d5e319a7be00ddfc936129395d2e0ecd"
+      },
+      {
+        "id_motor": 2140,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "d0ddfdaad414eaf7bf0f200a932edd1f9ee6ad049d712ea1cb2df51fcdab3577"
+      },
+      {
+        "id_motor": 2141,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "a7ac3c1f3ab6af71ddb7690e308c691076b21dce46974bd44b2b017ed94d8df7"
+      },
+      {
+        "id_motor": 2142,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "f65dcf00d0577b85c879039073059a9c4d963d1973cabe05d932a3eea9d35651"
+      },
+      {
+        "id_motor": 2143,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "ef2fd7dc5b1c7898c19286d0a109e6283cb3e37d586a8951f5ffcb3959c2d4f6"
+      },
+      {
+        "id_motor": 2144,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "e9bc543a305fb58e96dc08a0df332181bdd7b6e8daecf03cee44206cb28878f7"
+      },
+      {
+        "id_motor": 2145,
+        "x": 24,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "73af4fd9b743d99041f8bebf71fa58e3460a61be43728ce6378e9ba46e2252f9"
+      },
+      {
+        "id_motor": 2084,
+        "x": -20,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "5c2821736f9815bedbba99ccbf22936a0b8a3a2ab2ef1dc5f4cf3d4357fb6149"
+      },
+      {
+        "id_motor": 2084,
+        "x": 30,
+        "y": -20,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "4d9ead17a04995abf28f1bf785f7b37e43f24e1ce953116031e37d1cd6b1c2e9"
+      },
+      {
+        "id_motor": 2084,
+        "x": 100,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "4d7dd9064d972144e0bc519f38f9057389789407f2a5c3bc470b219328069dd6"
+      },
+      {
+        "id_motor": 2084,
+        "x": 30,
+        "y": 100,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "b57945bfdc329b80b33b2f44354b03070203bf9699777ff3379a236549755028"
+      },
+      {
+        "id_motor": 2084,
+        "x": -100,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "4d7dd9064d972144e0bc519f38f9057389789407f2a5c3bc470b219328069dd6"
+      },
+      {
+        "id_motor": 2084,
+        "x": 30,
+        "y": -100,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "4d7dd9064d972144e0bc519f38f9057389789407f2a5c3bc470b219328069dd6"
+      },
+      {
+        "id_motor": 2084,
+        "x": 200,
+        "y": 30,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "4d7dd9064d972144e0bc519f38f9057389789407f2a5c3bc470b219328069dd6"
+      },
+      {
+        "id_motor": 2084,
+        "x": 30,
+        "y": 200,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "4d7dd9064d972144e0bc519f38f9057389789407f2a5c3bc470b219328069dd6"
+      },
+      {
+        "id_motor": 2084,
+        "x": 12,
+        "y": 12,
+        "recorte": [
+          24,
+          24,
+          70,
+          70
+        ],
+        "sha256_superficie": "85dc258037d1461d70f0d2b0489cfef10dbdc41bac1886beff192d36964799a6"
+      },
+      {
+        "id_motor": 2084,
+        "x": -10,
+        "y": -10,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "b0d2c063eea165c7b8a9726682ecbce56b27d8a131fd17a16490e4e3d225f51b"
+      },
+      {
+        "id_motor": 2084,
+        "x": 125,
+        "y": 125,
+        "recorte": [
+          0,
+          0,
+          127,
+          127
+        ],
+        "sha256_superficie": "4d7dd9064d972144e0bc519f38f9057389789407f2a5c3bc470b219328069dd6"
+      }
+    ],
+    "literal_zero_opaco": true,
+    "rotina": "0x45b247",
+    "substituicoes": []
+  },
+  "execucoes_delimitadas": 4814,
+  "instrucoes_observadas": 1254037,
+  "duracao_segundos": 2.406,
+  "resultado": "PASSOU",
+  "limites_de_conclusao": [
+    "Não executa o jogo inteiro; unidade e superfície são cenários sintéticos.",
+    "IO e alocação do agregador substituídos; todos os bytes CMP comparados.",
+    "Sombra interceptada na captura. Transformação de cores da sombra não validada.",
+    "Palette PIE herdada de evidência commitada; nenhuma comparação DirectDraw.",
+    "Taxa em segundos e despacho completo de simulação não determinados."
+  ]
+}

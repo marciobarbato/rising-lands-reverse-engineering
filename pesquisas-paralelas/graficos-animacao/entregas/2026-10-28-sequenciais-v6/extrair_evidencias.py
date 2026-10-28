@@ -1,0 +1,140 @@
+"""Extrai bytes/assembly somente da cópia conferida do executável brasileiro."""
+from pathlib import Path
+import hashlib
+import json
+import struct
+import sys
+
+RAIZ = Path(__file__).resolve().parent
+COMMIT = '1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e'
+HASH_EXE = '6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb'
+
+
+def exigir_area_editavel():
+    if RAIZ.parent.name == 'entregas':
+        raise RuntimeError('Entrega congelada: copie para uma nova pasta de trabalho dentro de graficos-animacao antes de gerar arquivos.')
+
+
+def imagem_pe(caminho=None):
+    dados = Path(caminho or RAIZ / 'fontes/cd/INSTALHD/RISING.EXE').read_bytes()
+    if hashlib.sha256(dados).hexdigest() != HASH_EXE:
+        raise ValueError('SHA-256 do executável incompatível')
+    pe = struct.unpack_from('<I', dados, 0x3c)[0]
+    n = struct.unpack_from('<H', dados, pe + 6)[0]
+    opcional = struct.unpack_from('<H', dados, pe + 20)[0]
+    base = struct.unpack_from('<I', dados, pe + 52)[0]
+    imagem = bytearray(struct.unpack_from('<I', dados, pe + 80)[0])
+    for i in range(n):
+        cab = pe + 24 + opcional + i * 40
+        rva, tamanho, offset = struct.unpack_from('<III', dados, cab + 12)
+        if tamanho and offset:
+            imagem[rva:rva+tamanho] = dados[offset:offset+tamanho]
+    return base, bytes(imagem)
+
+
+def simbolos():
+    resultado = {}
+    for linha in (RAIZ / 'snapshot' / COMMIT / 'relatorios/simbolos-originais.tsv').read_text().splitlines():
+        endereco, nome = linha.split('\t')
+        try:
+            resultado[int(endereco, 16)] = nome
+        except ValueError:
+            pass
+    return resultado
+
+
+def extrair():
+    exigir_area_editavel()
+    sys.path.insert(0, str(RAIZ / 'dependencias'))
+    import capstone
+    base, imagem = imagem_pe()
+    nomes = simbolos()
+    ordenados = sorted(nomes)
+    cs = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+    cs.detail = True
+    pasta = RAIZ / 'evidencias'
+    pasta.mkdir(exist_ok=True)
+    selecionados = [a for a in ordenados if
+                   0x410fcc <= a < 0x415acf or 0x4478ee <= a < 0x448194 or
+                   a in (0x41877a, 0x418590, 0x457350, 0x45b247, 0x45b796, 0x45c455,
+                         0x477042, 0x4770ee, 0x448599, 0x448194, 0x448f50, 0x416864,
+                         0x467d97, 0x442025, 0x442045, 0x44fffe, 0x45002e, 0x474beb,
+                         0x4470b9, 0x4798e9, 0x43ee31, 0x45f940, 0x4795af,
+                         0x45f7ba, 0x45f618, 0x45f5ac, 0x45f6e1,
+                         0x407dd3, 0x40f4b7, 0x40f4e8, 0x40f519, 0x41a08c,
+                         0x41a4f4, 0x41a5b8, 0x41a6ec, 0x41a8e5, 0x41b54a,
+                         0x41c4ac, 0x41ba49, 0x43e138, 0x4766d6, 0x476251,
+                         0x47622e, 0x44724a, 0x45ff61, 0x45f850, 0x41068e,
+                         0x47500e, 0x46c2cf, 0x418af7,
+                         0x410085,0x415acf,0x4772ec,0x4774fa,0x4766f0,
+                         0x47693a,0x476951,0x410a2c)]
+    registros = []
+    for a in selecionados:
+        fim = {0x448088:0x44812b,0x41591f:0x415a57,0x407dd3:0x40f49c}.get(a, ordenados[ordenados.index(a)+1])
+        bruto = imagem[a-base:fim-base]
+        linhas = [f'; {nomes[a]} [{a:#x}, {fim:#x})', f'; SHA-256 EXE: {HASH_EXE}',
+                  '; Desmontagem linear. Algumas regiões entre símbolos contêm tabelas; não são prova de fluxo.']
+        for ins in cs.disasm(bruto, a):
+            extra = ''
+            if ins.mnemonic in ('call', 'jmp') and ins.operands[0].type == capstone.x86.X86_OP_IMM:
+                extra = ' ; ' + nomes.get(ins.operands[0].imm, '')
+            linhas.append(f'{ins.address:08x}  {ins.bytes.hex():22} {ins.mnemonic:8} {ins.op_str}{extra}'.rstrip())
+        arquivo = pasta / f'{a:08x}.asm'
+        arquivo.write_text('\n'.join(linhas)+'\n')
+        registros.append(dict(nome=nomes[a],inicio=hex(a),fim=hex(fim),sha256_bytes=hashlib.sha256(bruto).hexdigest(),arquivo=arquivo.name))
+    a,fim=0x475bf8,0x475bfe
+    bruto=imagem[a-base:fim-base];nome='EpilogoCompartilhadoNextAnimVeget (rótulo da pesquisa)'
+    arquivo=pasta/f'{a:08x}.asm'
+    linhas=[f'; {nome} [{a:#x}, {fim:#x})', f'; SHA-256 EXE: {HASH_EXE}']
+    linhas += [f'{i.address:08x}  {i.bytes.hex():22} {i.mnemonic:8} {i.op_str}'.rstrip() for i in cs.disasm(bruto,a)]
+    arquivo.write_text('\n'.join(linhas)+'\n')
+    registros.append(dict(nome=nome,inicio=hex(a),fim=hex(fim),sha256_bytes=hashlib.sha256(bruto).hexdigest(),arquivo=arquivo.name))
+    (pasta / 'manifesto.json').write_text(json.dumps(dict(commit=COMMIT,exe_sha256=HASH_EXE,capstone=capstone.__version__,trechos=registros),indent=2)+'\n')
+    tabelas=[]
+    for a,n,papel in [(0x495bc8,6,'nomes dos bancos'),(0x410f64,26,'ancoragem por tipo'),
+                       (0x412328,26,'desenho por tipo'),(0x4572e8,26,'parametros por tipo'),
+                       (0x44812c,26,'fase de parada por tipo')]:
+        bruto=imagem[a-base:a-base+n*4]
+        vals=struct.unpack('<'+'I'*n,bruto)
+        registro=dict(endereco=hex(a),papel=papel,ponteiros=[hex(v) for v in vals],
+                      bytes_hex=bruto.hex(),sha256=hashlib.sha256(bruto).hexdigest())
+        if a==0x495bc8:
+            registro['nomes']=[imagem[v-base:].split(b'\0')[0].decode('ascii') for v in vals]
+        tabelas.append(registro)
+    (pasta/'tabelas.json').write_text(json.dumps(tabelas,indent=2)+'\n')
+    tipos=[]
+    for tipo in range(26):
+        endereco=0x4965ae+tipo*50
+        bruto=imagem[endereco-base:endereco-base+50]
+        tipos.append(dict(tipo=tipo,endereco=hex(endereco),tamanho=50,
+                          chave_ini=bruto[12:42].split(b'\0')[0].decode('ascii'),
+                          bytes_hex=bruto.hex(),sha256=hashlib.sha256(bruto).hexdigest()))
+    (pasta/'identidade-tipos.json').write_text(json.dumps(dict(
+        exe_sha256=HASH_EXE,commit_snapshot=COMMIT,registros=tipos,
+        ressalva='Somente identidade; presença nesta tabela não valida seus gráficos.'),
+        ensure_ascii=False,indent=2)+'\n')
+    construcoes=[]
+    for tipo in range(22):
+        a=0x495d8c+tipo*52;raw=imagem[a-base:a-base+52]
+        w,h=struct.unpack_from('<HH',raw);ptr=struct.unpack_from('<I',raw,8)[0]
+        construcoes.append(dict(tipo=tipo,endereco=hex(a),tamanho=52,
+            chave_ini=raw[19:].split(b'\0')[0].decode('ascii'),dimensoes_celulas=[w,h],
+            ponteiro_mascara=hex(ptr),bytes_hex=raw.hex(),sha256=hashlib.sha256(raw).hexdigest()))
+    (pasta/'identidade-construcoes.json').write_text(json.dumps(dict(
+        exe_sha256=HASH_EXE,commit_snapshot=COMMIT,registros=construcoes,
+        mascara_santuario=list(imagem[0x495c30-base:0x495c30-base+30]),
+        faixas_jogador=[list(imagem[0x496d4c-base+i*8:0x496d4c-base+(i+1)*8]) for i in range(3)],
+        ressalva='Identidade dos 22 tipos; associação gráfica validada somente para o Santuário no contrato v4.'),
+        ensure_ascii=False,indent=2)+'\n')
+    chaves=imagem[0x415a58-base:0x415a58-base+24]
+    ponteiros=struct.unpack_from('<24I',imagem,0x415a6f-base)
+    tabela_objetos=dict(exe_sha256=HASH_EXE,chaves_endereco='0x415a58',chaves_hex=chaves.hex(),
+        ponteiros_endereco='0x415a6f',ponteiros=[hex(v) for v in ponteiros],
+        observacao='REPNE SCASB com ECX=24; o último byte examinado coincide com o primeiro byte da tabela de ponteiros. Última correspondência ou ausência usa índice 0.',
+        ramos={str(k):hex(ponteiros[next((23-j for j,v in enumerate(chaves) if v==k),0)]) for k in range(256)})
+    (pasta/'despacho-objetos.json').write_text(json.dumps(tabela_objetos,ensure_ascii=False,indent=2)+'\n')
+    print('Trechos extraídos:', len(registros))
+
+
+if __name__ == '__main__':
+    extrair()

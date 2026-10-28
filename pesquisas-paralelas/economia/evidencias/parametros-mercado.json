@@ -1,0 +1,17 @@
+{
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "origem": "Valores estáticos da imagem PE; não são custos de recrutamento nem carga INI",
+  "precos_unidades": {
+    "endereco": "0x496fb0",
+    "bytes_hex": "0a0d1612140a0d0a10050a19231e192d00000000000000000019"
+  },
+  "precos_recursos": {
+    "endereco": "0x496fcc",
+    "ordem": [
+      "pecas",
+      "comida",
+      "pedra"
+    ],
+    "bytes_hex": "020101"
+  }
+}

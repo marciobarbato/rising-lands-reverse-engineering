@@ -32,11 +32,25 @@
       "arquivo": "0040f519.asm"
     },
     {
+      "nome": "AffVegetTerrain",
+      "inicio": "0x410085",
+      "fim": "0x41068e",
+      "sha256_bytes": "e2feb64a4a13842c9472022027e5cc9b105bc33f6414efcb6585112167284186",
+      "arquivo": "00410085.asm"
+    },
+    {
       "nome": "AffTerrain",
       "inicio": "0x41068e",
       "fim": "0x41087e",
       "sha256_bytes": "4e0b75233c42cb4e1d60daaa14b7473f19b5546507421e3520deb68e935abd0b",
       "arquivo": "0041068e.asm"
+    },
+    {
+      "nome": "AffContenanceEngin",
+      "inicio": "0x410a2c",
+      "fim": "0x410b40",
+      "sha256_bytes": "2e321a897e8ff0d1662a24dedcd34a7593f326fb65fbdfa90c0ba3a1c9793de3",
+      "arquivo": "00410a2c.asm"
     },
     {
       "nome": "AffCorpsEnginDecalage",
@@ -128,6 +142,13 @@
       "fim": "0x415acf",
       "sha256_bytes": "98ba4c1a60ef2d46604184851991a9018e81d8d1b8b45b73475aba16313fbd06",
       "arquivo": "00415a56.asm"
+    },
+    {
+      "nome": "AffVeget",
+      "inicio": "0x415acf",
+      "fim": "0x416864",
+      "sha256_bytes": "31ca045ac7f2d30cf213b903dfcfbee98b69537a95025dc0bf4cb1190e90c2ae",
+      "arquivo": "00415acf.asm"
     },
     {
       "nome": "AffSprite",
@@ -487,6 +508,27 @@
       "arquivo": "004766d6.asm"
     },
     {
+      "nome": "TerrainEstDecouvert",
+      "inicio": "0x4766f0",
+      "fim": "0x47670a",
+      "sha256_bytes": "c7d7973f063848a5fbb332c9d87310bfea7ce416069d880fc6c7cfb2f0a58262",
+      "arquivo": "004766f0.asm"
+    },
+    {
+      "nome": "CaseEstIlluminee",
+      "inicio": "0x47693a",
+      "fim": "0x476951",
+      "sha256_bytes": "b46acc48550bd8b0d1fb2db1c993546676f0b6188076cb7aaab0d4c138157362",
+      "arquivo": "0047693a.asm"
+    },
+    {
+      "nome": "TerrainEstIllumine",
+      "inicio": "0x476951",
+      "fim": "0x476968",
+      "sha256_bytes": "84c59d08cf94319d014b5f96ea9329a025f205f1d3d20e496a65bcf296ea0cd0",
+      "arquivo": "00476951.asm"
+    },
+    {
       "nome": "CalculDirection",
       "inicio": "0x477042",
       "fim": "0x4770ee",
@@ -501,6 +543,20 @@
       "arquivo": "004770ee.asm"
     },
     {
+      "nome": "NextAnimVeget",
+      "inicio": "0x4772ec",
+      "fim": "0x4774fa",
+      "sha256_bytes": "76891268bb76b2282b7867a9f5ff5079b029225d601512acfa97deb0babf21b8",
+      "arquivo": "004772ec.asm"
+    },
+    {
+      "nome": "NextAnimVegetFullMap",
+      "inicio": "0x4774fa",
+      "fim": "0x477700",
+      "sha256_bytes": "1b48f09aeed10c7f46369be4ece3f67700f34c8aed9806ac50eeb1c36f293320",
+      "arquivo": "004774fa.asm"
+    },
+    {
       "nome": "Distance3d",
       "inicio": "0x4795af",
       "fim": "0x479610",
@@ -513,6 +569,13 @@
       "fim": "0x4799c4",
       "sha256_bytes": "2dc316d3ea91d74b0bf93e82695928fb9f57314e4361e2f1c6eda8d2ad223b69",
       "arquivo": "004798e9.asm"
+    },
+    {
+      "nome": "EpilogoCompartilhadoNextAnimVeget (r\u00f3tulo da pesquisa)",
+      "inicio": "0x475bf8",
+      "fim": "0x475bfe",
+      "sha256_bytes": "9651d68480e9031dd95d190ca598519a163040c3b73f617ef4b3a789f33597ef",
+      "arquivo": "00475bf8.asm"
     }
   ]
 }
