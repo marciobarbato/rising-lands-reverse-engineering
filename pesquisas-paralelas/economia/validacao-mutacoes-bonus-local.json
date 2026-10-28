@@ -1,0 +1,41 @@
+{
+  "scope": "BonusReset and BonusSetEngin table producer; no world capacity refresh",
+  "mode": "Python only",
+  "tests": 11,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_120_all_type_sentinels_and_filters (test_mutacoes_bonus.DiferencialMutacoesBonus)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_1352_all_single_type_selectors_and_widths (test_mutacoes_bonus.DiferencialMutacoesBonus)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_24_divide_exceptions_preserve_buffers (test_mutacoes_bonus.DiferencialMutacoesBonus)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_32_selective_resets_and_original_write_order (test_mutacoes_bonus.DiferencialMutacoesBonus)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_486_unsupported_selector_noops_ignore_invalid_owner_type (test_mutacoes_bonus.DiferencialMutacoesBonus)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_80_arithmetic_boundaries (test_mutacoes_bonus.DiferencialMutacoesBonus)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "declared_stops": 0,
+  "complete_returns": 0,
+  "capacity_dependency_stops": 0,
+  "expected_exceptions": 0,
+  "expected_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}
