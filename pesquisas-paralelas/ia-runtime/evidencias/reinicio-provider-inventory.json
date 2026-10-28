@@ -216,10 +216,10 @@
   ]
  },
  "latest_adapter_preparation": {
-  "time_brt": "2026-10-28 18:10",
+  "time_brt": "2026-10-28 18:23:56",
   "owner_query_main": "2456848e57c1fbb63f3590023e424012c0916d3e",
   "implementation_prepared": true,
-  "fresh_native_validated": false,
+  "fresh_native_validated": true,
   "integrated": false,
   "real_mission_tested": false,
   "local_frozen_inputs": 11,
@@ -231,6 +231,13 @@
   "unresolved_core_primitives": [
    "EnginGetEtat",
    "EnginSetPlayer"
-  ]
+  ],
+  "validated_source_revision": "a5316d4b8b22265eaeb29afd4909c39314f52044",
+  "native_cases": 11,
+  "native_complete_inputs": 2,
+  "native_named_stops": 9,
+  "native_segments": 75967,
+  "owning_domain_gate_run": false,
+  "full_suite_run": false
  }
 }
