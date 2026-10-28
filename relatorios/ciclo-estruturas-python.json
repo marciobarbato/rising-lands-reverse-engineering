@@ -1,0 +1,44 @@
+{
+  "x86_executed": false,
+  "scope": "Synthetic caller-prepared gate; pool reset is not demolition or terrain teardown.",
+  "events": [
+    {
+      "stage": "startup_prefix",
+      "first_free": 0,
+      "pool_sha256": "269fe39662e7cf72793ebe183177a16aa79403855d444e32de617055be6f21a6"
+    },
+    {
+      "stage": "caller_prepared_gate_placed",
+      "first_free": 1,
+      "record_state": 2,
+      "record_type": 12,
+      "counter": 0,
+      "orientation": 0,
+      "object": 253,
+      "attributes": 1,
+      "region": 32768
+    },
+    {
+      "stage": "single_reset_retains_counter_and_terrain",
+      "first_free": 1,
+      "record_state": 5,
+      "record_type": 12,
+      "counter": 7,
+      "orientation": 0,
+      "object": 253,
+      "attributes": 1,
+      "region": 32768
+    },
+    {
+      "stage": "pool_reset_requires_separate_world_teardown",
+      "first_free": 0,
+      "record_state": 0,
+      "record_type": 12,
+      "counter": 0,
+      "orientation": 0,
+      "object": 253,
+      "attributes": 1,
+      "region": 32768
+    }
+  ]
+}

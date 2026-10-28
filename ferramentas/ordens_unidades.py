@@ -25,6 +25,8 @@ class MundoUnidades:
     def __init__(self):
         self.unidades = bytearray(800 * PASSO)
         self.estruturas = bytearray(1000 * PASSO)
+        self.realizaveis_estruturas = bytearray(88)  # raw table 0x49a070
+        self.selecoes_estruturas = bytearray(8)     # four u16 at 0x495be0
         self.grupos = bytearray(100 * 32)
         for grupo in range(100):
             struct.pack_into('<H', self.grupos, grupo * 32 + 0x10, 0xffff)
@@ -32,6 +34,22 @@ class MundoUnidades:
         self.busca = ContextoBusca()
         self.grupo_em_iteracao = 0  # ponteiro global 0x51b844
         self.unidade_em_iteracao = 0  # u16 global 0x51b848
+
+    def inicializar_registros_estruturas(self):
+        from ciclo_estruturas import inicializar_registros_estruturas
+        return inicializar_registros_estruturas(self.estruturas, self.realizaveis_estruturas)
+
+    def resetar_todas_estruturas(self):
+        from ciclo_estruturas import resetar_todas_estruturas
+        return resetar_todas_estruturas(self.estruturas, self.realizaveis_estruturas, self.selecoes_estruturas)
+
+    def resetar_estrutura(self, indice):
+        from ciclo_estruturas import resetar_estrutura
+        return resetar_estrutura(self.estruturas, indice)
+
+    def buscar_estrutura_livre(self):
+        from ciclo_estruturas import buscar_estrutura_livre
+        return buscar_estrutura_livre(self.estruturas)
 
     @staticmethod
     def _indice(indice):
