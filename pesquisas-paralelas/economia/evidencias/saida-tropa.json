@@ -1,0 +1,100 @@
+{
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_sbl": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "capstone": "5.0.7",
+  "scope": "Unmodified original bytes; synthetic state; prefix only, not a completed spawn.",
+  "captures": [
+    {
+      "start": "0x00420e4c",
+      "end_exclusive": "0x00420f5f",
+      "description": "SortieTroupe economic prefix, through call to CalculPosition",
+      "bytes_hex": "535156575583ec0c508854240c31c0668b042489c2c1e20401c2c1e20201c2bfc8a04900c1e20201d731c08a477be83802020025ffff000089c2c1e20229c2c1e20301c28b9f8c000000c1e20239da0f8749030000bb09000000ba010000008d470ce8376402008944240425ffff0000e8e565020089c6bb0200000089f089dae8e76202006685c0742bbb0200000089f00fb66f0431c989da668b0c24e8fc63020031d289eb6689c2b802000000e810250000ebc2bb01000000ba0200000089f0e8a66202006685c0742ebb01000000ba0200000089f00fb66f0431c9e8bc630200668b0c2431d289eb6689c2b801000000e8cc240000ebbc31c031c931db31f6668b04248a5c240c668b742404e839f7ffff",
+      "sha256": "708fbdb1555a8562c5248924e749e537e4fdafa6f13ba98968612c9ffbf285ad",
+      "listing": "saida-tropa-00420e4c.asm"
+    },
+    {
+      "start": "0x00420f5f",
+      "end_exclusive": "0x00420fb7",
+      "description": "SortieTroupe world-call context; outside implemented prefix",
+      "bytes_hex": "0fb7e88a4f7b89ea89f0e8196c0300bae803000089f0e8a861030089f0e87c21030089f089eae8b8ee020089f0e82b50020031d289f0668b577ce8354802008a47043a0541805000750eba0600000089f031dbe8a7fd0100",
+      "sha256": "29b1fee3ec28b33378791b175249bced345ee0b5301b6ad9ef3cb39cfd680f04",
+      "listing": "saida-tropa-00420f5f.asm"
+    },
+    {
+      "start": "0x004211ea",
+      "end_exclusive": "0x004211f2",
+      "description": "SortieTroupe return path",
+      "bytes_hex": "83c410e9a8270000",
+      "sha256": "6d8cce1610f42b1086910f9770468577f2f9c5a268c05ed163f4537cef0c052a",
+      "listing": "saida-tropa-004211ea.asm"
+    },
+    {
+      "start": "0x004474a6",
+      "end_exclusive": "0x004474c7",
+      "description": "EnginGetBag",
+      "bytes_hex": "5231d26689c289d0c1e00401d0c1e00201c2a1a0194e00c1e20201d083c00a5ac3",
+      "sha256": "70bca63b13e2b77b4c28f933848fdc5e0c6d49143b24ae2b2b5d55f19c5c152b",
+      "listing": "saida-tropa-004474a6.asm"
+    }
+  ],
+  "support": [
+    {
+      "start": "0x004410b7",
+      "end_exclusive": "0x004410d2",
+      "sha256": "2b69e5c70f795a83ddc98ad5c0e8251dee59f53b1a728a859bbc56e45348ccf9"
+    },
+    {
+      "start": "0x004471b8",
+      "end_exclusive": "0x0044724a",
+      "sha256": "50f55cdcda9fbac09d1cd2b486f7e3daac6e58d0468b3c5b5739c0f717922257"
+    },
+    {
+      "start": "0x004472ea",
+      "end_exclusive": "0x004473cf",
+      "sha256": "2426302f5ad4cda1db07d4616c8745f91d8da0a932c9db082c2dc2f8f764290a"
+    },
+    {
+      "start": "0x0042340f",
+      "end_exclusive": "0x004235bd",
+      "sha256": "6a30ef2f78ac015a154681817e34d11e286ea669adc409bbbb692500fdb229d7"
+    },
+    {
+      "start": "0x0042399a",
+      "end_exclusive": "0x004239a0",
+      "sha256": "9651d68480e9031dd95d190ca598519a163040c3b73f617ef4b3a789f33597ef"
+    }
+  ],
+  "bag_contient_jump_table": {
+    "address": "0x0044719c",
+    "bytes_hex": "d37144001272440019724400fb714400fb7144001972440019724400",
+    "entries": [
+      "0x004471d3",
+      "0x00447212",
+      "0x00447219",
+      "0x004471fb",
+      "0x004471fb",
+      "0x00447219",
+      "0x00447219"
+    ]
+  },
+  "dependency": {
+    "call": "0x00420f5a",
+    "stop": "0x00420698",
+    "symbol": "CalculPosition",
+    "inputs": {
+      "AX": "building index u16",
+      "BL": "direction u8"
+    },
+    "output": "AX position u16"
+  },
+  "next_dependency": {
+    "call": "0x00420f69",
+    "target": "0x00457b87",
+    "symbol": "EnginSetType",
+    "inputs": {
+      "EAX": "existing unit index",
+      "DX": "position from CalculPosition",
+      "CL": "building +0x7b requested type"
+    }
+  }
+}

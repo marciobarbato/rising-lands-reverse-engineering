@@ -1,0 +1,34 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 12,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_ciclo_estruturas.DiferencialCicloEstruturas.test_first_free_scan_full_and_sparse_without_mutation",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_ciclo_estruturas.DiferencialCicloEstruturas.test_original_lifecycle_sequence",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_ciclo_estruturas.DiferencialCicloEstruturas.test_reset_all_full_pool_and_global_tables",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_ciclo_estruturas.DiferencialCicloEstruturas.test_single_reset_types_states_and_index_width",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_ciclo_estruturas.DiferencialCicloEstruturas.test_startup_full_pool_and_untouched_globals",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "expected_x86_exceptions": 0,
+  "expected_execution_limits": 0,
+  "scope": "Structure record lifecycle with synthetic full-pool buffers; no mission/game run."
+}
