@@ -1,0 +1,14 @@
+{
+  "tests": 12,
+  "skipped": 0,
+  "errors": 0,
+  "failures": 0,
+  "bounded_segments": 14056,
+  "native_loads": 469,
+  "native_returns": 457,
+  "expected_modifier_checkpoints": 12,
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "scope": "Successful indexed unit-load continuation only; real ETA blocks plus synthetic inherited state/loaded bonuses. File I/O substituted; native selection/type/bonus helpers unpatched.",
+  "native_faults": 0,
+  "real_mission_runtime_tested": false
+}
