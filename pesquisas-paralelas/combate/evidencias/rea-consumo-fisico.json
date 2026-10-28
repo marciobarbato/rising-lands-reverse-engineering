@@ -1,0 +1,188 @@
+{
+  "scope": "Focused REA metadata and entry review only; original-byte differential execution remains authoritative",
+  "rea_source_revision": "b9a8f8e9f25feb9cc97bf4960748f2bdf8c898bc",
+  "analysis_sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "review": "SetDyingEngin uses AX unit ID despite the inferred no-argument stdcall signature. MAJSympathie receives owner EAX, source owner EDX, flag EBX despite the inferred two-argument signature. Original assembly confirms inactive owner flags at 51A990+16*owner precede all table/counter effects.",
+  "observations": [
+    {
+      "evidence_id": "ev_9145a2e0b46bca6efbda7bfaf2abee215b14cc24637aef3eff6578b31e078164",
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.2"
+      },
+      "procedure": {
+        "address": "0x444938",
+        "name": "OriginaisSBL::SetDyingEngin",
+        "symbol": {
+          "primary": true,
+          "dynamic": false,
+          "external": false,
+          "type": "function",
+          "source": "user_defined"
+        },
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x444938",
+              "end": "0x444dac"
+            }
+          ],
+          "total_bytes": 1141,
+          "span_bytes": 1141,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined __stdcall SetDyingEngin(void)",
+        "locals": []
+      },
+      "assembly_review": [
+        "0x444938: PUSH EBX",
+        "0x444939: PUSH ECX",
+        "0x44493a: PUSH EDX",
+        "0x44493b: PUSH ESI",
+        "0x44493c: PUSH EDI",
+        "0x44493d: PUSH EBP",
+        "0x44493e: MOV EDI, EAX",
+        "0x444940: XOR EDX, EDX",
+        "0x444942: MOV DX, AX",
+        "0x444945: MOV EAX, EDX",
+        "0x444947: SHL EAX, 0x4",
+        "0x44494a: ADD EAX, EDX",
+        "0x44494c: SHL EAX, 0x2",
+        "0x44494f: ADD EAX, EDX",
+        "0x444951: MOV ESI, dword ptr [0x004e19a0]",
+        "0x444957: SHL EAX, 0x2",
+        "0x44495a: ADD ESI, EAX",
+        "0x44495c: XOR EAX, EAX",
+        "0x44495e: MOV AL, byte ptr [ESI + 0x2]",
+        "0x444961: TEST EAX, EAX",
+        "0x444963: JZ 0x0044496e",
+        "0x444965: CMP EAX, 0x4",
+        "0x444968: JZ 0x0044496e",
+        "0x44496a: MOV AL, 0x1",
+        "0x44496c: JMP 0x00444970"
+      ],
+      "limitations": [
+        "This session opens a caller-selected existing Ghidra project through a private copy, without import, auto-analysis or repair scripts. Original analysis completeness and settings are unknown.",
+        "The original project is never opened by Ghidra or modified. The private copy is read-only to bridge operations and deleted on close; original executable bytes are never written.",
+        "The analysis profile records the selected project content fingerprint and program name. The imported program SHA-256 must match the admitted target; the project may contain caller annotations or earlier edits, which are not fresh REA discoveries.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program. Decompilation runs until completion or caller cancellation unless REA_GHIDRA_DECOMPILE_TIMEOUT_SECONDS sets a per-function limit. That limit stops the requested decompile without requesting session closure; caller cancellation requests session closure.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state.",
+        "This session uses Ghidra 12.2. The bridge is verified against 12.1.4; other 12.x (>=12.1) builds are accepted and the observed version is reported."
+      ]
+    },
+    {
+      "evidence_id": "ev_28d9954d277ff5e23ec1bb68537fc4dde3001852a1effbedc766f9a8cb494692",
+      "provider": {
+        "id": "ghidra",
+        "name": "Ghidra",
+        "version": "12.2"
+      },
+      "procedure": {
+        "address": "0x475118",
+        "name": "OriginaisSBL::MAJSympathie",
+        "symbol": {
+          "primary": true,
+          "dynamic": false,
+          "external": false,
+          "type": "function",
+          "source": "user_defined"
+        },
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x475118",
+              "end": "0x475266"
+            }
+          ],
+          "total_bytes": 335,
+          "span_bytes": 335,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined __fastcall MAJSympathie(undefined4 param_1, uint param_2)",
+        "locals": [
+          {
+            "description": "undefined4 local_14 @ Stack[-0x14]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_18 @ Stack[-0x18]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_1c @ Stack[-0x1c]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_20 @ Stack[-0x20]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "assembly_review": [
+        "0x475118: PUSH ECX",
+        "0x475119: PUSH ESI",
+        "0x47511a: PUSH EDI",
+        "0x47511b: PUSH EBP",
+        "0x47511c: SUB ESP, 0x10",
+        "0x47511f: MOV ECX, EAX",
+        "0x475121: CMP EAX, EDX",
+        "0x475123: JZ 0x0047525f",
+        "0x475129: CMP EAX, 0x4",
+        "0x47512c: JNC 0x0047525f",
+        "0x475132: CMP EDX, 0x4",
+        "0x475135: JNC 0x0047525f",
+        "0x47513b: SHL EAX, 0x4",
+        "0x47513e: CMP byte ptr [EAX + 0x51a990], 0x0",
+        "0x475145: JNZ 0x0047525f",
+        "0x47514b: MOV EAX, EDX",
+        "0x47514d: SHL EAX, 0x4",
+        "0x475150: CMP byte ptr [EAX + 0x51a990], 0x0",
+        "0x475157: JNZ 0x0047525f",
+        "0x47515d: MOV EAX, EBX",
+        "0x47515f: SHL EAX, 0x4",
+        "0x475162: MOV EBX, dword ptr [EAX + 0x497290]",
+        "0x475168: INC EBX",
+        "0x475169: MOV ESI, dword ptr [EAX + 0x497294]",
+        "0x47516f: MOV dword ptr [EAX + 0x497290], EBX"
+      ],
+      "limitations": [
+        "This session opens a caller-selected existing Ghidra project through a private copy, without import, auto-analysis or repair scripts. Original analysis completeness and settings are unknown.",
+        "The original project is never opened by Ghidra or modified. The private copy is read-only to bridge operations and deleted on close; original executable bytes are never written.",
+        "The analysis profile records the selected project content fingerprint and program name. The imported program SHA-256 must match the admitted target; the project may contain caller annotations or earlier edits, which are not fresh REA discoveries.",
+        "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+        "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+        "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+        "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "The Java bridge serializes one function request per Program. Decompilation runs until completion or caller cancellation unless REA_GHIDRA_DECOMPILE_TIMEOUT_SECONDS sets a per-function limit. That limit stops the requested decompile without requesting session closure; caller cancellation requests session closure.",
+        "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state.",
+        "This session uses Ghidra 12.2. The bridge is verified against 12.1.4; other 12.x (>=12.1) builds are accepted and the observed version is reported."
+      ]
+    }
+  ]
+}
