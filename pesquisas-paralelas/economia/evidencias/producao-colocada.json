@@ -1,0 +1,58 @@
+{
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_sbl": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "scope": "Actual CalculTroupe through economy, conversion/recovery/experience, physical exit/order; before request",
+  "placement_implementation": "6b3882b5b4a3a0c99dddcaccbd4d1c08a765f8ce",
+  "placement_main": "aa9cba47af34aef3b0b4b67faded0b884bb1e428",
+  "captures": [
+    {
+      "start": "0x420f8a",
+      "end_exclusive": "0x420f9e",
+      "description": "Original placement and live-destination movement caller",
+      "bytes_hex": "89f0e82b50020031d289f0668b577ce835480200",
+      "sha256": "5e356b6556398dfaec71565d8637068b983467700a8e5ef24171593341c607b2",
+      "listing": "producao-colocada-00420f8a.asm"
+    },
+    {
+      "start": "0x475736",
+      "end_exclusive": "0x475763",
+      "description": "Terrain paired raw-byte pointer consumers",
+      "bytes_hex": "5231d26689c2a1747d50008a040225ff00000083f8427c1183f8447f0ca1ac7d50008a040230e45ac331c05ac3",
+      "sha256": "655983fdf6179a2bb0d8f46be5d2eea5dda368b1d137fa3925fc94729083f3aa",
+      "listing": "producao-colocada-00475736.asm"
+    },
+    {
+      "start": "0x47610f",
+      "end_exclusive": "0x476134",
+      "description": "Movement raw-object query",
+      "bytes_hex": "5231d26689c2a1747d50008a040225ff00000083f842740583f8367504b0015ac330c05ac3",
+      "sha256": "d782207666a38e2c9620cc96c9478ffe2773cfea4aeca6ea03853dd00bd3fbcc",
+      "listing": "producao-colocada-0047610f.asm"
+    },
+    {
+      "start": "0x476662",
+      "end_exclusive": "0x4766f0",
+      "description": "Resource-removal pointer context",
+      "bytes_hex": "5351525689c331c96689c1a1ac7d500001c80fb63030d285f6740dfe08a1747d50008a140180ea4231c08b0dac7d50006689d88a0c0181e1ff000000750a8b0d747d5000c604010088d05e5a595bc35231d26689c2a1747d50008a040225ff00000083f8427c0983f8447f04b0015ac330c05ac381e2ff00000025ffff00008b1495787d5000f60402100f94c0c3",
+      "sha256": "b6451dc3acc0adb015146d8ba037729093f84bb74e3307c8361a9b3e0f183e15",
+      "listing": "producao-colocada-00476662.asm"
+    }
+  ],
+  "committed_evidence": [
+    {
+      "path": "evidencias/producao-experiente.json",
+      "sha256": "1f7b86caedd3a7f9c304200766eb1356b698e0aa87d8c5aecb16dca8fa6911b9"
+    },
+    {
+      "path": "../../evidencias/colocacao-saida/manifesto.json",
+      "sha256": "4cb472739564c6a99ab5de4dccaca4ec1e19eb5609922ca7b7184fc5d3bb1fe7"
+    }
+  ],
+  "raw_aliases": {
+    "0x507d74": "economic terreno.tipos IS physical objetos",
+    "0x507dac": "economic terreno.quantidades IS physical donos_objetos"
+  },
+  "native_entry": "0x4259e6",
+  "pending": "0x420f9e",
+  "native_execution": "Actual core harness preserves registers/flags/stack at declared minimap entry pauses; no call/ret replacement"
+}
