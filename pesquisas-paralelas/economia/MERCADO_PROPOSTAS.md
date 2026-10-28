@@ -167,15 +167,16 @@ dependências nem altera configuração compartilhada. `-B` impede bytecode nos
 módulos lidos. Os relatórios são gravados somente na economia desta worktree.
 A suíte completa está resumida em README.md e nos dois JSON de validação.
 
-O chat principal pode revisar/incorporar o commit deste branch quando decidir;
-não houve merge automático no `main`. A promoção para módulos compartilhados
-e a combinação das suítes continuam sob responsabilidade dele.
+O usuário autorizou push e integração no `main` remoto na continuação de
+[transferências](TRANSFERENCIAS_MERCADO.md), preservando o checkout compartilhado.
+A promoção para módulos compartilhados e a combinação das suítes continuam
+sob responsabilidade do chat principal.
 
 ## Pendências explícitas
 
-Próximo alvo econômico: `VideMatiere` (`0x4663eb`), seguido dos chamadores da
-troca. O trecho sugere créditos diretos em RMI/total, diferentes de AjouteMatiere,
-mas esses efeitos ainda precisam de tradução e validação diferencial próprias.
-Também faltam a atualização dos preços, aceitação/cancelamento e a execução
+`VideMatiere` (`0x4663eb`) foi traduzida e validada na continuação
+[TRANSFERENCIAS_MERCADO.md](TRANSFERENCIAS_MERCADO.md), confirmando os créditos
+diretos em RMI/total. Faltam os chamadores completos da troca,
+a atualização dos preços, aceitação/cancelamento e a execução
 integral da troca. A preparação/movimentação das unidades será mantida como
 dependência do subsistema responsável. A economia ainda não está concluída.

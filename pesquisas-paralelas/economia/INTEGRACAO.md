@@ -9,8 +9,8 @@ não criar caches nos módulos compartilhados lidos pela pesquisa.
 
 ## Como incorporar
 
-1. Revisar [README.md](README.md), os ASM e o relatório com 194 testes aprovados
-   e 52.480 execuções x86 (incluindo 120 exceções, três limites esperados e
+1. Revisar [README.md](README.md), os ASM e o relatório com 214 testes aprovados
+   e 54.871 execuções x86 (incluindo 176 exceções, três limites esperados e
    paradas em dependências/sufixos delimitados em cada documento).
    Executar `validar.py --emular` se houver Unicorn/JIT.
 2. Incorporar `economia.py` em `ferramentas/` ou manter a pesquisa como módulo
@@ -332,8 +332,25 @@ Sincronizar as quatro linhas das duas metades da proposta: ambas são indexadas
 pelo jogador avaliado. Uma falha de divisão com fator zero não altera saídas.
 Os preços fornecidos são distintos dos custos de recrutamento; os padrões
 brutos do EXE estão em `evidencias/parametros-mercado.json`, sem alegação de que
-permanecem constantes durante o jogo. Incorporação do branch fica a cargo do
-chat principal; esta entrega não faz merge no `main`.
+permanecem constantes durante o jogo. A integração Git no `main` remoto foi
+autorizada pelo usuário; promoção para módulos compartilhados continua a cargo
+do chat principal.
+
+## Transferências de recursos do mercado
+
+`TransferenciasMercado(mercado, mundo)` exige que os dois objetos compartilhem
+a mesma Economia. `transferir(jogador, outro)` traduz VideMatiere (`0x4663eb`)
+e usa ambas as metades da linha do primeiro jogador, sem consultar o contato.
+Sincronizar esses buffers antes e exportar saldos/capacidades depois.
+
+Cada pagador tipo 1 é debitado via BatimentEnleveMatiere; os créditos seguintes
+aumentam diretamente RMI e total, sem teto 9.999 nem limite por capacidade.
+Não substituir pelos depósitos ou créditos primitivos existentes. Quantidade
+zero também debita/recalcula; falha de divisão deixa o estado parcial aplicado.
+Não repetir nem desfazer automaticamente. A proposta não é limpa pela rotina.
+
+O retorno None não significa aceitação. Testes, memória, ordem e exemplos de
+falha estão em [TRANSFERENCIAS_MERCADO.md](TRANSFERENCIAS_MERCADO.md).
 
 ## Atualizações de documentação sugeridas, não realizadas
 
@@ -346,7 +363,7 @@ chat principal; esta entrega não faz merge no `main`.
   conservar os demais chamadores completos,
   tecnologias, transporte, consumo e filas como pendências.
 - SIMBOLOS.md/IA.md: registrar os diferentes índices da IA e o retorno 1/-1.
-- EMULACAO.md/validação geral: integrar os 87 testes diferenciais sem somar
+- EMULACAO.md/validação geral: integrar os 95 testes diferenciais sem somar
   automaticamente as contagens desta pesquisa à suíte compartilhada.
 
 ## Próximas investigações de economia
@@ -365,9 +382,11 @@ chat principal; esta entrega não faz merge no `main`.
    [INICIO_APRENDIZAGEM.md](INICIO_APRENDIZAGEM.md). Investigar a agenda,
    o carregador de configuração e os demais ramos de tecnologia.
    Não interpretar AL=1 dos helpers de avanço como produto concluído.
-4. Mercado: traduzir `VideMatiere` (`0x4663eb`) e os chamadores da troca;
-   investigar atualização de preços, aceitação/cancelamento e transferências.
-   A consulta e a avaliação da proposta estão em [MERCADO_PROPOSTAS.md](MERCADO_PROPOSTAS.md).
+4. Mercado: traduzir `MatiereEstDemander` (`0x464ba2`) e os chamadores da troca,
+   incluindo decisão/limpeza em `CalculValeur` (`0x466533`); investigar atualização
+   de preços e aceitação/cancelamento. Consulta e avaliação estão em
+   [MERCADO_PROPOSTAS.md](MERCADO_PROPOSTAS.md), e a transferência econômica em
+   [TRANSFERENCIAS_MERCADO.md](TRANSFERENCIAS_MERCADO.md).
 5. Confirmar o significado de RMI, o quarto registro e o byte +7 em gameplay
    ou por outros consumidores, preservando nomes neutros enquanto não confirmado.
 6. Integrar as primitivas de extração aos chamadores de unidades e à agenda

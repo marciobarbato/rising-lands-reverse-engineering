@@ -49,6 +49,7 @@ NOMES = (
     'InitApprentissage', 'ApprentissageSortTerminer', 'SortilegeGetCoutApprentissage',
     'EvalueCoutProposition', 'GetNbRessource', 'PlayerGetType',
     'PlayerEstAllie', 'PlayerGetSympathie',
+    'VideMatiere',
 )
 # O RET precede dados; não apresentá-los como instruções da função.
 FINS_CONFIRMES = {0x41aace: 0x41ab04, 0x4283e2: 0x428691, 0x478806: 0x478a01,

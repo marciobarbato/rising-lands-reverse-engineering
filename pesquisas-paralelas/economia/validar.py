@@ -31,11 +31,13 @@ def main():
     from test_aprendizagem import DiferencialAprendizagem
     from test_inicio_aprendizagem import DiferencialInicioAprendizagem
     from test_mercado import DiferencialMercado
+    from test_transferencias_mercado import DiferencialTransferenciasMercado
     bancadas = {classe.__name__: getattr(classe, 'b', None)
                 for classe in (Diferencial, DiferencialConstrucoes, DiferencialRetiradaRecalculo,
                                DiferencialInitCave, DiferencialProprietarios, DiferencialExtracao,
                                DiferencialRecrutamento, DiferencialProducao, DiferencialAprendizagem,
-                               DiferencialInicioAprendizagem, DiferencialMercado)}
+                               DiferencialInicioAprendizagem, DiferencialMercado,
+                               DiferencialTransferenciasMercado)}
     contagens = {nome: getattr(b, 'execucoes', 0) for nome, b in bancadas.items()}
     excecoes = sum(getattr(b, 'excecoes_esperadas', 0) for b in bancadas.values())
     limites = sum(getattr(b, 'limites_esperados', 0) for b in bancadas.values())

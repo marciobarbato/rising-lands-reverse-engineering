@@ -29,9 +29,12 @@ com ciclos completos da biblioteca comparados ao x86.
 A consulta de totais e a avaliação das propostas de mercado estão em
 [MERCADO_PROPOSTAS.md](MERCADO_PROPOSTAS.md), incluindo preços globais,
 simpatia direcional, aliança e aritmética signed32.
+As transferências de recursos de `VideMatiere` estão em
+[TRANSFERENCIAS_MERCADO.md](TRANSFERENCIAS_MERCADO.md), com crédito em RMI/total
+e preservação dos efeitos parciais quando o recálculo falha.
 A conclusão da produção de unidades permanece pendente.
-**194 testes passaram**, com 52.480 execuções x86: 52.357 paradas declaradas,
-120 exceções de divisão por zero e três limites de execução esperados.
+**214 testes passaram**, com 54.871 execuções x86: 54.692 paradas declaradas,
+176 exceções de divisão por zero e três limites de execução esperados.
 Não houve testes ignorados na execução emulada. O ramo de retirada de colono
 tem dependência explícita; veja [capacidade e excedentes](CAPACIDADE_EXCEDENTES.md).
 
@@ -56,9 +59,9 @@ python3 -B pesquisas-paralelas/economia/validar.py --emular
 ```
 
 O primeiro usa `pefile` e `capstone` já presentes em `../source/python`, verifica
-o hash do EXE e grava os trechos nesta pasta. O segundo passa 107 testes Python
-e ignora explicitamente 87 testes diferenciais. O terceiro exige Unicorn,
-reutilizado de `.local/python`, e executa todos os 194 testes. Nenhum comando
+o hash do EXE e grava os trechos nesta pasta. O segundo passa 119 testes Python
+e ignora explicitamente 95 testes diferenciais. O terceiro exige Unicorn,
+reutilizado de `.local/python`, e executa todos os 214 testes. Nenhum comando
 invoca o gerador de relatórios geral ou altera arquivos fora desta pesquisa.
 O uso de `-B` evita caches de bytecode nos módulos compartilhados importados.
 Para a worktree isolada, os comandos e o PYTHONPATH da dependência somente
@@ -220,9 +223,11 @@ estão em [CONTAGEM_ARMAZENS.md](CONTAGEM_ARMAZENS.md).
 - `LoadGameRessource` e SauveRessource serializam a tabela de 128 bytes; o formato
   completo de salvamento e suas posições no arquivo não foram reconstruídos.
 
-**Interpretação provisória:** RMI parece representar provisões iniciais ainda
-disponíveis fora da parcela computada como estoque. Isso é apoiado pela carga
-do ETA, pelo crédito que não altera RMI e pelo débito que o reduz até zero.
+**Interpretação provisória atualizada:** RMI é subtraído do total na consulta
+de estoque, recebe os valores iniciais do ETA e é consumido pelo débito.
+AjouteMatiere não o aumenta, mas **VideMatiere também credita RMI**, como
+confirmado em [TRANSFERENCIAS_MERCADO.md](TRANSFERENCIAS_MERCADO.md).
+Portanto, não é uma parcela exclusivamente inicial: contempla entradas do mercado.
 O nome completo da sigla, a justificativa de design e o vínculo com depósitos
 físicos exigem outros chamadores ou uma partida observada. O código conserva
 o nome original RMI, sem renomeá-lo para reserva de compras ou dívida.
@@ -252,9 +257,10 @@ A etapa de [avanço de produção](PRODUCAO.md) acrescenta 20.266.
 A etapa de [conclusão da aprendizagem](APRENDIZAGEM.md) acrescenta 3.732.
 A etapa de [início da aprendizagem](INICIO_APRENDIZAGEM.md) acrescenta 1.849.
 A etapa de [avaliação do mercado](MERCADO_PROPOSTAS.md) acrescenta 4.357.
-A suíte atual soma 52.480. Destas, 52.357 alcançam parada declarada (64 na entrada
+A etapa de [transferências do mercado](TRANSFERENCIAS_MERCADO.md) acrescenta 2.391.
+A suíte atual soma 54.871. Destas, 54.692 alcançam parada declarada (64 na entrada
 de BatimentRetireColon, 32 nas dependências de balão e 546 na escolha da saída de
-recrutamento; incluem também 128 sufixos isolados), 120 conferem divisão por zero e três conferem o limite
+recrutamento; incluem também 128 sufixos isolados), 176 conferem divisão por zero e três conferem o limite
 no ciclo de pilhas corrompidas.
 
 A bancada existente verifica hash, endereços permitidos, parada explícita e
@@ -277,8 +283,9 @@ No recrutamento, cobrança, estado inicial, consultas e avanço foram traduzidos
 a escolha da saída, a conclusão das unidades e o fluxo completo das filas continuam pendentes.
 Na biblioteca, custos, início, avanço, conclusão e atualização das listas foram traduzidos;
 escalonamento, carregador de configuração e os demais ramos de tecnologia continuam pendentes.
-No mercado, consulta de recursos e avaliação da proposta estão traduzidas;
-atualização dos preços, transferências e execução completa da troca estão pendentes.
+No mercado, consulta de recursos, avaliação da proposta e transferências
+econômicas estão traduzidas; atualização dos preços, aceitação/cancelamento e
+execução completa da troca estão pendentes.
 O avanço assume o controle x87 inicial 0x127f; não generalizar o cálculo para
 outras precisões ou exceções desmascaradas. Sua frequência de chamada não foi estabelecida.
 Os testes não alegam invariantes de gameplay para todos os estados possíveis.

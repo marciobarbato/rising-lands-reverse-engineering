@@ -1,10 +1,10 @@
 {
   "modo": "x86 original e Python",
-  "testes": 194,
+  "testes": 214,
   "falhas": 0,
   "erros": 0,
   "ignorados": [],
-  "execucoes_x86_delimitadas": 52480,
+  "execucoes_x86_delimitadas": 54871,
   "execucoes_x86_por_bancada": {
     "Diferencial": 6471,
     "DiferencialConstrucoes": 2541,
@@ -16,11 +16,12 @@
     "DiferencialProducao": 20266,
     "DiferencialAprendizagem": 3732,
     "DiferencialInicioAprendizagem": 1849,
-    "DiferencialMercado": 4357
+    "DiferencialMercado": 4357,
+    "DiferencialTransferenciasMercado": 2391
   },
-  "excecoes_x86_esperadas": 120,
+  "excecoes_x86_esperadas": 176,
   "limites_x86_esperados": 3,
-  "execucoes_x86_ate_parada": 52357,
+  "execucoes_x86_ate_parada": 54692,
   "paradas_dependencia_proprietarios": 32,
   "paradas_dependencia_recrutamento": 546,
   "sufixos_isolados_recrutamento": 128,

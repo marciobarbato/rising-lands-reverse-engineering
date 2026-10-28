@@ -47,6 +47,7 @@
     "0x0045d753": "BatimentRessourceNecessaire",
     "0x0045d7cf": "TroupeRessourceNecessaire",
     "0x00462a58": "GetNbRessource",
+    "0x004663eb": "VideMatiere",
     "0x00466bac": "EvalueCoutProposition",
     "0x00467640": "GetRessourceRMI",
     "0x00467670": "GetRessource",
@@ -5517,6 +5518,42 @@
       "instrucao": "call",
       "alvo": "0x00447148",
       "nome": "BagInit",
+      "simbolo_anterior": [
+        "CalculValeur"
+      ]
+    },
+    {
+      "endereco": "0x0046665c",
+      "instrucao": "call",
+      "alvo": "0x004663eb",
+      "nome": "VideMatiere",
+      "simbolo_anterior": [
+        "CalculValeur"
+      ]
+    },
+    {
+      "endereco": "0x00466671",
+      "instrucao": "call",
+      "alvo": "0x004663eb",
+      "nome": "VideMatiere",
+      "simbolo_anterior": [
+        "CalculValeur"
+      ]
+    },
+    {
+      "endereco": "0x00466732",
+      "instrucao": "call",
+      "alvo": "0x004663eb",
+      "nome": "VideMatiere",
+      "simbolo_anterior": [
+        "CalculValeur"
+      ]
+    },
+    {
+      "endereco": "0x00466747",
+      "instrucao": "call",
+      "alvo": "0x004663eb",
+      "nome": "VideMatiere",
       "simbolo_anterior": [
         "CalculValeur"
       ]
