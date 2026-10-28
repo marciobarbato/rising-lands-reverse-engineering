@@ -1,0 +1,180 @@
+{
+ "base_main": "5d24c91104e8b7f66b774e5b46969508708cc01f",
+ "scope": "LIGHT source/ABI audit only; no native adapter validation or production binding implemented",
+ "callbacks": [
+  {
+   "callback": "PlayerGetType",
+   "entry": "0x0046d817",
+   "sites": [
+    "0x0047f576",
+    "0x004827e0",
+    "0x004864fe"
+   ],
+   "status": "existing production delegate",
+   "provider": {
+    "path": "pesquisas-paralelas/economia/mercado.py",
+    "symbol": "Mercado.tipo_jogador",
+    "sha256": "69178c8480d40b93d9605986ec667307812514e56674f1e6520c7d6ed406614e"
+   },
+   "memory": "[0x5080a8] -> live 80-byte player table, same actual range as Mercado.jogadores"
+  },
+  {
+   "callback": "EnginEstVivant",
+   "entry": "0x00443dad",
+   "sites": [
+    "0x0047f4e7",
+    "0x0048283f",
+    "0x0047aff1"
+   ],
+   "status": "existing production delegate",
+   "provider": {
+    "path": "ferramentas/ordens_unidades.py",
+    "symbol": "MundoUnidades.viva",
+    "sha256": "ba960424f6228daf83ffd69a28a71d9cbbec03e0a5b756b379dab290dd8cf2d4"
+   },
+   "memory": "[0x4e19a0] -> same live 220800-byte world.unidades allocation"
+  },
+  {
+   "callback": "EnginGetType",
+   "entry": "0x00442025",
+   "sites": [
+    "0x0047affc"
+   ],
+   "status": "missing direct reusable Core getter; coordinator requested in current Core M1 slice",
+   "memory": "same live world.unidades; no VM/task body copied",
+   "existing_related_operation": {
+    "path": "ferramentas/ordens_unidades.py",
+    "symbol": "MundoUnidades.executar_operacao('I_DonneTypeUnite',[index])",
+    "sha256": "ba960424f6228daf83ffd69a28a71d9cbbec03e0a5b756b379dab290dd8cf2d4"
+   },
+   "note": "No fake VM/world object will be constructed merely to obtain a getter"
+  },
+  {
+   "callback": "GetRessource",
+   "entry": "0x00467670",
+   "sites": [
+    "0x004850b3"
+   ],
+   "status": "existing production delegate",
+   "provider": {
+    "path": "pesquisas-paralelas/economia/economia.py",
+    "symbol": "Economia.consultar",
+    "sha256": "1f89ab9252fab13b25bc35b8e52aada6c9ea19b1dce51fc1036ee5d515ce5849"
+   },
+   "memory": "0x4e2ea8..0x4e2f28 exactly aliases Economia.memoria; constructor copies must not masquerade as aliases"
+  },
+  {
+   "callback": "MissionGetNum",
+   "entry": "0x0046c11a",
+   "sites": [
+    "0x0047f4b0",
+    "0x0047b02c"
+   ],
+   "status": "missing standalone missions getter; requested",
+   "memory": "original xor AH,AH; read AL from exact live one-byte 0x496fe4; adjacent byte is irrelevant"
+  },
+  {
+   "callback": "TypeEnginEstMonstre",
+   "entry": "0x004422dd",
+   "sites": [
+    "0x0047b006"
+   ],
+   "status": "missing standalone core predicate; requested",
+   "memory": "AL input type, AL output; original true tail0x4422da must be included in owner evidence"
+  },
+  {
+   "callback": "EnginGetEtat",
+   "entry": "0x00440e11",
+   "sites": [
+    "0x004843ea",
+    "0x00484407"
+   ],
+   "status": "missing standalone core getter; requested",
+   "memory": "live unit record state byte +2"
+  },
+  {
+   "callback": "EnginSetPlayer",
+   "entry": "0x00443108",
+   "sites": [
+    "0x0047b01f"
+   ],
+   "status": "missing standalone core mutator; requested",
+   "memory": "live unit ownership, including original passenger-owner propagation for selected vehicle types; not a generic byte store"
+  },
+  {
+   "callback": "RechercheGetNiveau",
+   "entry": "0x004717c2",
+   "sites": [
+    "0x0047f43f"
+   ],
+   "status": "missing standalone economy getter",
+   "memory": "0x5080f4 + player*16 + (branch & 0xffff), protected branch to be owner-declared"
+  },
+  {
+   "callback": "RechercheSetBranche",
+   "entry": "0x00470b37",
+   "sites": [
+    "0x0047f4ca"
+   ],
+   "status": "missing standalone economy setter",
+   "memory": "byte0x5080f8 + player*16, original DL branch store"
+  },
+  {
+   "callback": "BatimentExiste",
+   "entry": "0x0041a735",
+   "sites": [
+    "0x00484348"
+   ],
+   "status": "missing standalone committed owner getter",
+   "memory": "world.estruturas at0x49a0c8; state+5 !=0; active state4/5 not excluded"
+  },
+  {
+   "callback": "BatimentGetPlayer",
+   "entry": "0x0041a08c",
+   "sites": [
+    "0x00484353"
+   ],
+   "status": "combat bridge exists; economy-owned query contract required",
+   "provider": {
+    "path": "pesquisas-paralelas/combate/ataque_vivo.py",
+    "symbol": "batiment_get_player",
+    "sha256": "21d3f0c9e2a307b82874c6634730a62b301751ec76c51e9ff7d151429fb7c86c"
+   },
+   "memory": "same live world.estruturas, raw +4"
+  },
+  {
+   "callback": "BatimentGetType",
+   "entry": "0x0041a4f4",
+   "sites": [
+    "0x00484363",
+    "0x0048437a"
+   ],
+   "status": "inline within economy transport query; standalone delegate absent",
+   "memory": "same live world.estruturas, raw +8"
+  }
+ ],
+ "aliasing": [
+  "AI groups0x51a9e0..0x51b660 must be the same actual range as world.grupos",
+  "AI iterator pointer0x51b844/u16 unit0x51b848 are scalar core-world attributes; bridge must preserve both raw slots and existing core attribute values",
+  "All pointer and inline input mappings are explicit; no constructor-zero state or copied resource/player arrays"
+ ],
+ "nearest_monde01_stop": {
+  "callback": "TypeEnginEstMonstre",
+  "site": "0x0047b006",
+  "reason": "first live unit after unit/group reset; do not replay from entry to continue",
+  "fixture_boundary": "Applies only to the historical declared(1,0,0,0) player-control fixture, not an assumption about real M1 state"
+ },
+ "statuses": {
+  "implemented": false,
+  "validated_against_original": false,
+  "integrated": false,
+  "real_mission_tested": false
+ },
+ "player_control_boundary": "Player-control types are inherited live bytes, never adapter defaults. Historical MONDE01 fixtures declare(1,0,0,0) or(1,2,2,2); neither establishes actual menu/program initialization. A reached type2 player requires real economy research/structure/resource delegates.",
+ "type2_first_stop": {
+  "callback": "RechercheGetNiveau",
+  "site": "0x0047f43f",
+  "entry": "0x004717c2",
+  "input": "AI playeru8, branchu16; actual raw research state0x5080f4, not a fabricated level"
+ }
+}
