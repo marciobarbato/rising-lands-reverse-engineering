@@ -1,0 +1,16 @@
+{
+  "scope": "CalculTroupe types1/2/13/16 with original economic exit prefix",
+  "mode": "original x86 and Python",
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 1432,
+  "declared_stops": 1428,
+  "complete_returns": 1268,
+  "position_dependency_stops": 160,
+  "expected_exceptions": 4,
+  "expected_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}

@@ -1,0 +1,61 @@
+{
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_sbl": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "capstone": "5.0.7",
+  "scope": "CalculTroupe types1/2/13/16 through real SortieTroupe preparation; no world completion",
+  "captures": [
+    {
+      "description": "CalculTroupe entry and selected production branches",
+      "start": "0x004259e6",
+      "end_exclusive": "0x00425c4e",
+      "bytes_hex": "53515256575581ec9c00000089c131db6689c389d8c1e00401d8c1e00201d8bac8a04900c1e00201c28a42083c0d0f82cb0900008dba8c0000000f86380100003c100f82ea080000761b3c120f82d50900000f866c0600003c140f84da080000e9c209000031db6689cb89d8c1e00401d8c1e00201d8bac8a04900c1e00201c283ba8c000000000f84e7000000807a74000f84dd00000031c08a427b31f6e82eb601006689c689f0c1e00229f0c1e00301f0c1e0023b828c0000000f869500000089d881c28c000000e8104affff25ffff000089842490000000db84249000000089d8dd5c2428e81b99ffff30e489842498000000df84249800000089d8dd5c2410e8074affff25ff00000083f80e7410dd442428dc742410dc0d3a444900eb0edd442428dc742410dc0d32444900dd1c24dd0424e81e690600db9c24900000008b84249000000025ffff00008b3a83c06401c7893ab00184c00f84c708000031c0ba040000006689c8e8f7b2ffffe9b308000030c0ebe083ba8c000000000f84cd000000807a74000f84c300000031c08a427b31f6e836b501006689c689f0c1e00229f0c1e00301f08baa8c000000c1e00239e80f869300000089d889fae81a49ffff25ffff000089842490000000db84249000000089d8dd5c2478e82598ffff30e489842498000000df84249800000089d8dd5c2438e81149ffff25ff00000083f80e7410dd442478dc742438dc0d3a444900eb0edd442478dc742438dc0d32444900dd5c2420dd442420e826680600db9c24900000008b84249000000025ffff00008b1a83c06401c3891ab001eb0230c084c00f84cb07000031c0ba0e000000e9fffeffff",
+      "sha256": "73e011aabea0f0c75b62714eb94fa44be75232520bc0d7e935a72facf3d26b29",
+      "listing": "ciclo-producao-004259e6.asm"
+    },
+    {
+      "description": "CalculTroupe low-type dispatch and common return",
+      "start": "0x004263e5",
+      "end_exclusive": "0x00426418",
+      "bytes_hex": "3c0572180f86a1f8ffff3c060f86a2faffff3c080f846bfaffffeb0c3c0172083c020f863ef6ffff81c49c000000e90577ffff",
+      "sha256": "1564c5edf2a507199c2b7230748746ce79eb9a83cb188446bb2168c7468ee408",
+      "listing": "ciclo-producao-004263e5.asm"
+    },
+    {
+      "description": "CalculTroupe shared return epilogue",
+      "start": "0x0041db1d",
+      "end_exclusive": "0x0041db24",
+      "bytes_hex": "5d5f5e5a595bc3",
+      "sha256": "7227c48dab9cf58cef6ab93b965ca6429bd0f282cc829c7d338a55a23a93f08d",
+      "listing": "ciclo-producao-0041db1d.asm"
+    }
+  ],
+  "input": "AX building index u16, protected 0..999",
+  "directions": {
+    "1": 4,
+    "2": 4,
+    "13": 14,
+    "16": 4
+  },
+  "progress": {
+    "offset": "0x8c",
+    "width": "u32",
+    "active_byte": "0x74",
+    "time_type_offset": "0x7b",
+    "x87_control": "0x127f",
+    "call_order": "advance once if active, then SortieTroupe even below threshold"
+  },
+  "coefficients": [
+    {
+      "address": "0x00494432",
+      "bytes_hex": "0000000000002440",
+      "value": 10.0
+    },
+    {
+      "address": "0x0049443a",
+      "bytes_hex": "0000000000005940",
+      "value": 100.0
+    }
+  ],
+  "prefix_evidence": "saida-tropa.json",
+  "progress_support_evidence": "parametros-producao.json"
+}
