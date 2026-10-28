@@ -1,0 +1,32 @@
+{
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_sbl": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "scope": "Actual CalculTroupe through preparation/conversion/recovery/experience; no placement",
+  "core_experience_implementation": "f67898b75423adcfaf90a7b6e6c710c409e6f9ee",
+  "core_experience_main": "dae42125f45c348c10dff7e727e803138be7670f",
+  "captures": [
+    {
+      "start": "0x420f81",
+      "end_exclusive": "0x420f8a",
+      "bytes_hex": "89f089eae8b8ee0200",
+      "sha256": "99af2d9991ea9b551119f6278842fce2771ecbdaca1d6d2bc8e42b1fe7cb5a55",
+      "listing": "producao-experiente-00420f81.asm"
+    }
+  ],
+  "committed_evidence": [
+    {
+      "path": "evidencias/producao-compartilhada.json",
+      "sha256": "655136da86cf7a01dd0b850259c7264eb4e7ff151adb59444abcf85b2c4bf62d"
+    },
+    {
+      "path": "../../evidencias/experiencia-unidades/manifesto.json",
+      "sha256": "aaf12ca91ad4b6620e64f0e19c460ac44d0b34e9e2917182797e4ee8183a5d9b"
+    }
+  ],
+  "queue": {
+    "address": "0x4e19c4",
+    "size": 40,
+    "domain": "four owners; supplied raw state"
+  },
+  "pending_address": "0x420f8a"
+}
