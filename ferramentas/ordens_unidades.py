@@ -61,6 +61,11 @@ class MundoUnidades:
         return converter_unidade(self, indice, celula, direcao, tipo, tipos_unidades,
                                  capacidade_tipo=capacidade_tipo, modificador=modificador)
 
+    def atualizar_capacidades_unidades(self, jogador, *, capacidade_tipo=None, modificador=None):
+        from capacidades_unidades import atualizar_capacidades_unidades
+        return atualizar_capacidades_unidades(self, jogador, capacidade_tipo=capacidade_tipo,
+                                              modificador=modificador)
+
     @staticmethod
     def _indice(indice):
         indice &= 65535

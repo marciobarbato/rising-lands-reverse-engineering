@@ -57,7 +57,7 @@ class DiferencialImpactoUnidades(unittest.TestCase):
         cls.dependency_stops = {}
         cls.completed_projectiles = 0
 
-    def model(self, us, rows, pool, native, counter=0, previous=0, local=0):
+    def model(self, us, rows, pool, native, counter=0, previous=0, local=0, morte=None):
         from bancada_impacto_unidades import QUERIES, EFFECTS
         stop = QUERIES.get(native['EIP']) or EFFECTS.get(native['EIP'])
         events = iter(self.b.eventos_wrapper)
@@ -74,6 +74,7 @@ class DiferencialImpactoUnidades(unittest.TestCase):
         consumer, consumer_remaining = consumer_tests.DiferencialConsumoDano.replay(
             self, us, rows, self.b.eventos_consumo)
         consumer.jogador_local = local
+        consumer.morte = morte
         def consume(*args):
             next_event('EnginInfligeDegat', args)
             consumer.infligir(*args)
