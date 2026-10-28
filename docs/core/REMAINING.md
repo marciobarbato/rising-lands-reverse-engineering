@@ -1,6 +1,6 @@
 # Core dependency inventory — continued research round
 
-Updated 2026-10-28 after resuming the clean `feat/re-core` worktree at committed main `82a0468f5482ef00357bc077a75947c01b44aec4`. This inventory precedes the next implementation. Original-address references use executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+Updated 2026-10-28 after resuming the clean `feat/re-core` worktree at committed main `9e0efeaa8032cbef76f58236ebe2d34fff9501ae`. Stage 12 was inventoried before implementation. Original-address references use executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
 
 | Subcomponent | Evidence and present status | Remaining dependency |
 |---|---|---|
@@ -11,7 +11,8 @@ Updated 2026-10-28 after resuming the clean `feat/re-core` worktree at committed
 | Unit Bag capacity refresh | Integrated at main `8126f1aed299e19337e2b1ac4f95cfa85c068214`; 284 native calls include 278 full scans and six conditional query stops | [Contract](CAPACITY_REFRESH.md). Only u16 unit `+0c` changes; preserves count/contents and prior stores. The economic setter can supply this callback without duplicating world logic |
 | Structure creation and teardown | `CreerBatiment` `0x41fea2` has known first-free prefix; existing placement/terrain/gate bodies are implemented independently | Cost validation/charging, reservation, type-specific preparation, destruction and terrain teardown order |
 | Selection initialization | Stage 9 SelectionInit integrated at main `140cc1a2`; 262 native returns | [Contract](SELECTION_INIT.md). Four count words only; list tails/unit flags retained. Missions owns caller/load readiness |
-| Unit/global Bag reset | Stage 11 complete EnginResetAll and shared raw reset independently validated in 46 original executions; integration pending | [Contract](UNIT_RESET.md). State-zero units and six Bag bytes retained; physical teardown/remap/selection remain separate |
+| Unit/global Bag reset | Stage 11 complete EnginResetAll and shared raw reset integrated at main `b9b6f726895a2e0f800bb8f986f28a767104a882`; 46 original executions | [Contract](UNIT_RESET.md). State-zero units and six Bag bytes retained; physical teardown/remap/selection remain separate |
+| Mission unit placement and predicates | Stage 12 physical PlaceEngin and raw ExisteEngin/EnginVisible pass 2,014 original entries / 3,938 bounded segments; integration pending | [Contract](MISSION_PLACEMENT.md). Mission scan/order and complete remapping remain external; sum above 8 stops before discovery |
 | Mission loading/remapping | ETA disk-to-RAM unit copy and individual terrain/occupancy bodies are known; loaded records are not complete live state | Missions chat owns complete loader/remapping/orchestration and coordinated real-mission validation; Core supplies lower physical/pool/navigation/task providers |
 | Gate/world dispatch | Physical type-12 branch `0x427bb7..0x427d5d` and gate commands are integrated; graphics facade consumes explicit raw state | `CalculBatimentNextEtape` `0x4281c7`, complete caller cadence, input/cursor dispatch and remaining building branches |
 | Unit lethal/world-impact lifecycle | Stage 5 ordinary hidden-unit `SetDyingEngin` integrated at main `5e2bf0831d3aaa776481a6ab023be262ef0df1bd`; 283 native calls, 264 complete returns and 19 explicit dependency stops | [Contract](PHYSICAL_DYING.md). Life is not zeroed by this body. AI/sound/Bag/selection/effect/special-flag branches, level changes and final corpse removal remain open |

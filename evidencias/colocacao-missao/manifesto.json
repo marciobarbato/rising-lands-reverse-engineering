@@ -1,0 +1,39 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "PlaceEngin",
+      "start": "0x456fa6",
+      "end_exclusive": "0x457058",
+      "sha256": "8e5a5c69605b4d2bf39bfa707adfff015686f743dfadfc68572210bd97d00d3a",
+      "file": "00456fa6.asm"
+    },
+    {
+      "name": "shared_epilogue",
+      "start": "0x440d58",
+      "end_exclusive": "0x440d5e",
+      "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "file": "00440d58.asm"
+    },
+    {
+      "name": "ExisteEngin",
+      "start": "0x441fff",
+      "end_exclusive": "0x442025",
+      "sha256": "f4980b0dcff87b1988164362f30fc86f7cfecb83dfed697bc311988ada4326a4",
+      "file": "00441fff.asm"
+    },
+    {
+      "name": "EnginVisible",
+      "start": "0x4465bf",
+      "end_exclusive": "0x4465df",
+      "sha256": "b05595404eb983f223ae34cb5966ef6e739c2aabcbeeb4f40bff7b8acf20c7a7",
+      "file": "004465bf.asm"
+    }
+  ],
+  "unit_pool_pointer": "0x4e19a0",
+  "unit_count": 800,
+  "stride": 276,
+  "queries": "state !=0 returns EAX boolean; +72 returns consumed raw AL",
+  "scope": "Physical PlaceEngin and raw predicates; no mission scan, loading or remap."
+}
