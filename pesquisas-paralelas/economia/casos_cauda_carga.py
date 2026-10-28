@@ -51,3 +51,23 @@ def casos_monde01():
 def caso_pool(nome, *, semente, rede, padrao='aleatorio'):
     caso = base.caso_sintetico(nome, 2, 0, 0x4040, padrao=padrao, semente=semente)
     return estender(caso, semente=semente, rede=rede, pool_aleatorio=True)
+
+
+def montar_cauda(caso):
+    """Compose existing economy classes over the case buffers, by identity."""
+    from mercado import Mercado
+    from ciclo_mercado import CicloMercado
+    from cauda_carga import CaudaCargaEconomia
+    h = base.montar_habitacao(caso)
+    c = h.construcoes
+    c.contagens_por_tipo = caso.mundo.realizaveis_estruturas
+    c.contagens_tipo18 = caso.contagens_tipo18
+    h.propriedade.ordens = caso.ordens
+    mercado = Mercado(c.economia)
+    mercado.jogadores, mercado.contatos, mercado.indicadores = (caso.jogadores, caso.mercado['contatos'],
+                                                                caso.mercado['indicadores'])
+    ciclo = CicloMercado(mercado)
+    for nome in ('bytes_2e7c', 'bytes_292c', 'bytes_2928', 'words_2940', 'words_2938'):
+        setattr(ciclo, nome, caso.mercado[nome])
+    caso.rede_bytes = bytearray([caso.rede])
+    return h, CaudaCargaEconomia(h, ciclo, rede=caso.rede_bytes, jogadores_guardados=caso.jogadores_guardados)
