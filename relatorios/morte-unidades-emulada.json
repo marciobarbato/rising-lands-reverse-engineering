@@ -1,0 +1,26 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": true,
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 283,
+  "success": true,
+  "scope": "Ordinary hidden-unit physical dying transition; explicit unresolved branches; no complete lifecycle/mission.",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "unicorn": "2.1.4",
+  "reached_stops": {
+    "0x3000000": 264,
+    "0x444c7e": 2,
+    "0x482c58": 2,
+    "0x48a446": 2,
+    "0x440c5d": 2,
+    "0x443dfc": 2,
+    "0x472683": 2,
+    "0x4704dc": 6,
+    "0x46e44c": 1
+  },
+  "expected_native_exceptions": 0,
+  "expected_execution_limits": 0
+}

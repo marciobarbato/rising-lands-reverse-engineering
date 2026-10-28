@@ -1,0 +1,28 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_morte_unidades.DiferencialMorteUnidades.test_complete_ordinary_types_states_indices_and_reservations",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_morte_unidades.DiferencialMorteUnidades.test_dependency_boundaries_preserve_exact_prior_world_state",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_morte_unidades.DiferencialMorteUnidades.test_inactive_and_control_guard_complete_returns",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_morte_unidades.DiferencialMorteUnidades.test_vehicle_effect_dependencies_follow_physical_cleanup",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "scope": "Ordinary hidden-unit physical dying transition; explicit unresolved branches; no complete lifecycle/mission."
+}
