@@ -1,0 +1,210 @@
+Waiting for the repository integration lock...
+Already up to date.
+To https://github.com/marciobarbato/rising-lands-reverse-engineering.git
+   477a00c..2224a22  coordinator/maintenance -> coordinator/maintenance
+branch 'coordinator/maintenance' set up to track 'origin/coordinator/maintenance'.
+Preparing worktree (detached HEAD 85dc813)
+HEAD is now at 85dc813 Merge branch 'feat/re-economy' into HEAD
+Merge made by the 'ort' strategy.
+ docs/HANDOVER_CLAUDE_20261028.md                   | 160 ++--
+ docs/PROGRESS.md                                   |  62 +-
+ docs/ROADMAP_MONDE01.md                            |  10 +-
+ docs/STATUS.md                                     |  20 +-
+ docs/progress/2026-10-28-CXR-02-closed.md          | 126 ++++
+ docs/progress/2026-10-28-CXR-03-closed.md          | 123 ++++
+ docs/progress/2026-10-28-CXR-04-closed.md          | 124 ++++
+ docs/progress/2026-10-28-CXR-05-closed.md          | 125 ++++
+ docs/progress/2026-10-28-CXR-06-checkpoint.md      | 126 ++++
+ docs/progress/README.md                            |  10 +
+ .../validacao/cxr-20261028-02-ai-legacy.json       | 818 +++++++++++++++++++++
+ .../validacao/cxr-20261028-02-core-native.json     |  40 +
+ .../cxr-20261028-02-core-reproduction.json         | 106 +++
+ .../cxr-20261028-03-missions-reproduction.json     |  51 ++
+ .../cxr-20261028-04-core-reproduction.json         |  40 +
+ .../validacao/cxr-20261028-05-economy-main.txt     |  27 +
+ .../cxr-20261028-06-ai-adapter-attempt.json        |  23 +
+ .../cxr-20261028-06-ai-adapter-native.json         | 307 ++++++++
+ .../validacao/cxr-20261028-final-worktrees.json    | 188 +++++
+ 19 files changed, 2396 insertions(+), 90 deletions(-)
+ create mode 100644 docs/progress/2026-10-28-CXR-02-closed.md
+ create mode 100644 docs/progress/2026-10-28-CXR-03-closed.md
+ create mode 100644 docs/progress/2026-10-28-CXR-04-closed.md
+ create mode 100644 docs/progress/2026-10-28-CXR-05-closed.md
+ create mode 100644 docs/progress/2026-10-28-CXR-06-checkpoint.md
+ create mode 100644 integracao/validacao/cxr-20261028-02-ai-legacy.json
+ create mode 100644 integracao/validacao/cxr-20261028-02-core-native.json
+ create mode 100644 integracao/validacao/cxr-20261028-02-core-reproduction.json
+ create mode 100644 integracao/validacao/cxr-20261028-03-missions-reproduction.json
+ create mode 100644 integracao/validacao/cxr-20261028-04-core-reproduction.json
+ create mode 100644 integracao/validacao/cxr-20261028-05-economy-main.txt
+ create mode 100644 integracao/validacao/cxr-20261028-06-ai-adapter-attempt.json
+ create mode 100644 integracao/validacao/cxr-20261028-06-ai-adapter-native.json
+ create mode 100644 integracao/validacao/cxr-20261028-final-worktrees.json
+Broken documentation links:
+docs/progress/2026-10-28-CXR-04-closed.md: ROADMAP_MONDE01.md
+docs/progress/2026-10-28-CXR-04-closed.md: STATUS.md
+docs/progress/2026-10-28-CXR-04-closed.md: progress/README.md
+docs/progress/2026-10-28-CXR-04-closed.md: STATUS.md
+docs/progress/2026-10-28-CXR-04-closed.md: ../relatorios/descoberta-terreno-emulada.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../relatorios/descoberta-terreno-monde01-emulada.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../pesquisas-paralelas/missoes/validacao/stage9-suite-x86.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../pesquisas-paralelas/missoes/validacao/stage10-suite-x86.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../pesquisas-paralelas/missoes/HANDOFF.md
+docs/progress/2026-10-28-CXR-04-closed.md: ../pesquisas-paralelas/economia/validacao-habitaveis-emulada.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../pesquisas-paralelas/economia/validacao-cauda-carga-emulada.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../pesquisas-paralelas/economia/HANDOFF.md
+docs/progress/2026-10-28-CXR-04-closed.md: ../pesquisas-paralelas/combate/validacao-ataque-vivo-emulada.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../pesquisas-paralelas/combate/HANDOFF.md
+docs/progress/2026-10-28-CXR-04-closed.md: ../pesquisas-paralelas/graficos-animacao/validacao/x86-quadro-jogo.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../pesquisas-paralelas/graficos-animacao/HANDOFF.md
+docs/progress/2026-10-28-CXR-04-closed.md: ../pesquisas-paralelas/audio/validacao/x86-som.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../pesquisas-paralelas/audio/HANDOFF.md
+docs/progress/2026-10-28-CXR-04-closed.md: ../relatorios/recuperacao-stage15-reset-emulada.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../relatorios/recuperacao-stage15-descoberta-emulada.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../relatorios/recuperacao-stage15-source-audit.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../integracao/validacao/cxr-20261028-01-core-reproduction.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../pesquisas-paralelas/ia-runtime/validacao/recuperacao-stage2-native.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../pesquisas-paralelas/ia-runtime/validacao/recuperacao-stage2-local.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../pesquisas-paralelas/ia-runtime/validacao/recuperacao-stage2-attempts.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../integracao/validacao/cxr-20261028-01-ai-reproduction.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../relatorios/classificacao-remapeamento-emulada.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../relatorios/stage16-legacy-emulada.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../relatorios/stage16-legacy-first-attempt.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../integracao/validacao/cxr-20261028-02-core-reproduction.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../integracao/validacao/cxr-20261028-02-core-native.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../integracao/validacao/cxr-20261028-02-ai-legacy.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../pesquisas-paralelas/missoes/validacao/stage11-focused-x86.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../integracao/validacao/cxr-20261028-03-missions-reproduction.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../relatorios/conclusao-remapeamento-emulada.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../relatorios/stage17-classificacao-regressao.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../integracao/validacao/cxr-20261028-04-core-reproduction.json
+docs/progress/2026-10-28-CXR-04-closed.md: ../relatorios/stage17-native-first-attempt.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ROADMAP_MONDE01.md
+docs/progress/2026-10-28-CXR-06-checkpoint.md: STATUS.md
+docs/progress/2026-10-28-CXR-06-checkpoint.md: progress/README.md
+docs/progress/2026-10-28-CXR-06-checkpoint.md: STATUS.md
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../relatorios/descoberta-terreno-emulada.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../relatorios/descoberta-terreno-monde01-emulada.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/missoes/validacao/stage9-suite-x86.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/missoes/validacao/stage10-suite-x86.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/missoes/HANDOFF.md
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/economia/validacao-habitaveis-emulada.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/economia/validacao-cauda-carga-emulada.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/economia/HANDOFF.md
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/combate/validacao-ataque-vivo-emulada.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/combate/HANDOFF.md
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/graficos-animacao/validacao/x86-quadro-jogo.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/graficos-animacao/HANDOFF.md
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/audio/validacao/x86-som.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/audio/HANDOFF.md
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../relatorios/recuperacao-stage15-reset-emulada.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../relatorios/recuperacao-stage15-descoberta-emulada.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../relatorios/recuperacao-stage15-source-audit.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../integracao/validacao/cxr-20261028-01-core-reproduction.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/ia-runtime/validacao/recuperacao-stage2-native.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/ia-runtime/validacao/recuperacao-stage2-local.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/ia-runtime/validacao/recuperacao-stage2-attempts.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../integracao/validacao/cxr-20261028-01-ai-reproduction.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../relatorios/classificacao-remapeamento-emulada.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../relatorios/stage16-legacy-emulada.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../relatorios/stage16-legacy-first-attempt.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../integracao/validacao/cxr-20261028-02-core-reproduction.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../integracao/validacao/cxr-20261028-02-core-native.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../integracao/validacao/cxr-20261028-02-ai-legacy.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/missoes/validacao/stage11-focused-x86.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../integracao/validacao/cxr-20261028-03-missions-reproduction.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../relatorios/conclusao-remapeamento-emulada.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../relatorios/stage17-classificacao-regressao.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../integracao/validacao/cxr-20261028-04-core-reproduction.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../relatorios/stage17-native-first-attempt.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../pesquisas-paralelas/economia/validacao-consultas-reinicio-economia-emulada.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../integracao/validacao/cxr-20261028-05-economy-main.txt
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../integracao/validacao/cxr-20261028-06-ai-adapter-native.json
+docs/progress/2026-10-28-CXR-06-checkpoint.md: ../integracao/validacao/cxr-20261028-06-ai-adapter-attempt.json
+docs/progress/2026-10-28-CXR-03-closed.md: ROADMAP_MONDE01.md
+docs/progress/2026-10-28-CXR-03-closed.md: STATUS.md
+docs/progress/2026-10-28-CXR-03-closed.md: progress/README.md
+docs/progress/2026-10-28-CXR-03-closed.md: STATUS.md
+docs/progress/2026-10-28-CXR-03-closed.md: ../relatorios/descoberta-terreno-emulada.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../relatorios/descoberta-terreno-monde01-emulada.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../pesquisas-paralelas/missoes/validacao/stage9-suite-x86.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../pesquisas-paralelas/missoes/validacao/stage10-suite-x86.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../pesquisas-paralelas/missoes/HANDOFF.md
+docs/progress/2026-10-28-CXR-03-closed.md: ../pesquisas-paralelas/economia/validacao-habitaveis-emulada.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../pesquisas-paralelas/economia/validacao-cauda-carga-emulada.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../pesquisas-paralelas/economia/HANDOFF.md
+docs/progress/2026-10-28-CXR-03-closed.md: ../pesquisas-paralelas/combate/validacao-ataque-vivo-emulada.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../pesquisas-paralelas/combate/HANDOFF.md
+docs/progress/2026-10-28-CXR-03-closed.md: ../pesquisas-paralelas/graficos-animacao/validacao/x86-quadro-jogo.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../pesquisas-paralelas/graficos-animacao/HANDOFF.md
+docs/progress/2026-10-28-CXR-03-closed.md: ../pesquisas-paralelas/audio/validacao/x86-som.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../pesquisas-paralelas/audio/HANDOFF.md
+docs/progress/2026-10-28-CXR-03-closed.md: ../relatorios/recuperacao-stage15-reset-emulada.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../relatorios/recuperacao-stage15-descoberta-emulada.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../relatorios/recuperacao-stage15-source-audit.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../integracao/validacao/cxr-20261028-01-core-reproduction.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../pesquisas-paralelas/ia-runtime/validacao/recuperacao-stage2-native.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../pesquisas-paralelas/ia-runtime/validacao/recuperacao-stage2-local.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../pesquisas-paralelas/ia-runtime/validacao/recuperacao-stage2-attempts.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../integracao/validacao/cxr-20261028-01-ai-reproduction.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../relatorios/classificacao-remapeamento-emulada.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../relatorios/stage16-legacy-emulada.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../relatorios/stage16-legacy-first-attempt.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../integracao/validacao/cxr-20261028-02-core-reproduction.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../integracao/validacao/cxr-20261028-02-core-native.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../integracao/validacao/cxr-20261028-02-ai-legacy.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../pesquisas-paralelas/missoes/validacao/stage11-focused-x86.json
+docs/progress/2026-10-28-CXR-03-closed.md: ../integracao/validacao/cxr-20261028-03-missions-reproduction.json
+docs/progress/2026-10-28-CXR-05-closed.md: ROADMAP_MONDE01.md
+docs/progress/2026-10-28-CXR-05-closed.md: STATUS.md
+docs/progress/2026-10-28-CXR-05-closed.md: progress/README.md
+docs/progress/2026-10-28-CXR-05-closed.md: STATUS.md
+docs/progress/2026-10-28-CXR-05-closed.md: ../relatorios/descoberta-terreno-emulada.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../relatorios/descoberta-terreno-monde01-emulada.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/missoes/validacao/stage9-suite-x86.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/missoes/validacao/stage10-suite-x86.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/missoes/HANDOFF.md
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/economia/validacao-habitaveis-emulada.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/economia/validacao-cauda-carga-emulada.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/economia/HANDOFF.md
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/combate/validacao-ataque-vivo-emulada.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/combate/HANDOFF.md
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/graficos-animacao/validacao/x86-quadro-jogo.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/graficos-animacao/HANDOFF.md
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/audio/validacao/x86-som.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/audio/HANDOFF.md
+docs/progress/2026-10-28-CXR-05-closed.md: ../relatorios/recuperacao-stage15-reset-emulada.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../relatorios/recuperacao-stage15-descoberta-emulada.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../relatorios/recuperacao-stage15-source-audit.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../integracao/validacao/cxr-20261028-01-core-reproduction.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/ia-runtime/validacao/recuperacao-stage2-native.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/ia-runtime/validacao/recuperacao-stage2-local.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/ia-runtime/validacao/recuperacao-stage2-attempts.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../integracao/validacao/cxr-20261028-01-ai-reproduction.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../relatorios/classificacao-remapeamento-emulada.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../relatorios/stage16-legacy-emulada.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../relatorios/stage16-legacy-first-attempt.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../integracao/validacao/cxr-20261028-02-core-reproduction.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../integracao/validacao/cxr-20261028-02-core-native.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../integracao/validacao/cxr-20261028-02-ai-legacy.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/missoes/validacao/stage11-focused-x86.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../integracao/validacao/cxr-20261028-03-missions-reproduction.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../relatorios/conclusao-remapeamento-emulada.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../relatorios/stage17-classificacao-regressao.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../integracao/validacao/cxr-20261028-04-core-reproduction.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../relatorios/stage17-native-first-attempt.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../pesquisas-paralelas/economia/validacao-consultas-reinicio-economia-emulada.json
+docs/progress/2026-10-28-CXR-05-closed.md: ../integracao/validacao/cxr-20261028-05-economy-main.txt
+Integration candidate preserved: /Users/marcio/git/Rising Lands/worktrees/integration-maintenance-bf616e24
+Traceback (most recent call last):
+  File "/Users/marcio/git/Rising Lands/worktrees/maintenance/scripts/workstream.py", line 229, in <module>
+    main()
+  File "/Users/marcio/git/Rising Lands/worktrees/maintenance/scripts/workstream.py", line 225, in main
+    integrate(repo, args.domain)
+  File "/Users/marcio/git/Rising Lands/worktrees/maintenance/scripts/workstream.py", line 181, in integrate
+    run_validation(domain, target)
+  File "/Users/marcio/git/Rising Lands/worktrees/maintenance/scripts/workstream.py", line 147, in run_validation
+    subprocess.check_call([sys.executable, '-B', str(target / 'scripts/check.py')], cwd=target)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 373, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['/Applications/Xcode.app/Contents/Developer/usr/bin/python3', '-B', '/Users/marcio/git/Rising Lands/worktrees/integration-maintenance-bf616e24/scripts/check.py']' returned non-zero exit status 1.
