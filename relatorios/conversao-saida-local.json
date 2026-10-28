@@ -1,0 +1,28 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 12,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_conversao_saida.DiferencialConversaoSaida.test_complete_conversion_full_pools_states_owners_and_indices",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_conversao_saida.DiferencialConversaoSaida.test_missing_bonus12_matches_native_frame_write_order",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_conversao_saida.DiferencialConversaoSaida.test_missing_capacity_and_bonus1_match_native_checkpoint_memory",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_conversao_saida.DiferencialConversaoSaida.test_position_and_live_type_reload_complete_original_caller_fragment",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "scope": "Live shared-state conversion and caller 0x420f5a..0x420f6e; no complete production/mission."
+}
