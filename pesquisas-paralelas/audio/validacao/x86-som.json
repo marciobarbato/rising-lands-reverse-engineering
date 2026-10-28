@@ -1,0 +1,80 @@
+{
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "banks": [
+  "A",
+  "B",
+  "P"
+ ],
+ "sounds": {
+  "A": {
+   "file": 14,
+   "memory": 3,
+   "decoded_bytes": 2088918
+  },
+  "B": {
+   "file": 102,
+   "memory": 3,
+   "decoded_bytes": 6655248
+  },
+  "P": {
+   "file": 435,
+   "memory": 4,
+   "decoded_bytes": 39909114
+  }
+ },
+ "scenarios": [
+  {
+   "scenario": "validacao",
+   "native_vs_python": [],
+   "native_vs_committed": []
+  },
+  {
+   "scenario": "indice",
+   "native_vs_python": [],
+   "native_vs_committed": [],
+   "instructions": 611646,
+   "segments": 2795
+  },
+  {
+   "scenario": "decodificador",
+   "native_vs_python": [],
+   "native_vs_committed": [],
+   "instructions": 458312
+  },
+  {
+   "scenario": "bank_A",
+   "native_vs_python": [],
+   "native_vs_committed": [],
+   "instructions_file": 43281606,
+   "segments_file": 2193,
+   "instructions_memory": 5314530,
+   "segments_memory": 288,
+   "file_seconds": 19.2
+  },
+  {
+   "scenario": "bank_B",
+   "native_vs_python": [],
+   "native_vs_committed": [],
+   "instructions_file": 137098639,
+   "segments_file": 7475,
+   "instructions_memory": 4530744,
+   "segments_memory": 250,
+   "file_seconds": 56.6
+  },
+  {
+   "scenario": "bank_P",
+   "native_vs_python": [],
+   "native_vs_committed": [],
+   "instructions_file": 823182052,
+   "segments_file": 43168,
+   "instructions_memory": 5654565,
+   "segments_memory": 304,
+   "file_seconds": 340.5
+  }
+ ],
+ "passed": true,
+ "instructions": 1020132094,
+ "segments": 56473,
+ "seconds": 430.4,
+ "note": "Segments are bounded bench executions (entries, binding resumptions and loop-head checkpoints), not routine calls. Instruction counts cover bank scenarios and the index bench only."
+}

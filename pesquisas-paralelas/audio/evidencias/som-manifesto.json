@@ -1,0 +1,508 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "analysis_pe_sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "analysis_note": "Analysis PE identity named for cross-reference only; all bytes here are from the intact executable.",
+  "symbols": "relatorios/simbolos-originais.tsv (original RISING.SBL)",
+  "intervals": [
+    {
+      "group": "identity",
+      "name": "HndSound_LoadDataInfo",
+      "start": "0x48a0f4",
+      "end_exclusive": "0x48a14a",
+      "bytes": 86,
+      "sha256": "185f2b9467b61eedf1d12c2f47ec5eea7ebdc9d5f51d41f4ddbb698306650ecb"
+    },
+    {
+      "group": "identity",
+      "name": "PlaySnd_CreateSoundPath",
+      "start": "0x48a834",
+      "end_exclusive": "0x48a87f",
+      "bytes": 75,
+      "sha256": "27df1419d42781aa0984e1dac84cb54a371e38144ce2b0160dc9640dd27ba371"
+    },
+    {
+      "group": "identity",
+      "name": "SoundFile",
+      "start": "0x48a87f",
+      "end_exclusive": "0x48a894",
+      "bytes": 21,
+      "sha256": "301b6a76fa0f23495cbd0ae75dd17f5f66d910d3e902acd49938ad30c317e07e"
+    },
+    {
+      "group": "identity",
+      "name": "PlaySnd_MakeID",
+      "start": "0x48a894",
+      "end_exclusive": "0x48a89f",
+      "bytes": 11,
+      "sha256": "f58ae51454c8f6dd2620fee02abe0567aa76c8704ff65b895eee1554791d088f"
+    },
+    {
+      "group": "identity",
+      "name": "PlaySnd_InitSoundLib",
+      "start": "0x48a89f",
+      "end_exclusive": "0x48aa04",
+      "bytes": 357,
+      "sha256": "61ae1f5521a813261d38313ed8cf67a969bf8dd2e533ffa13cca4b5ba72d9675"
+    },
+    {
+      "group": "identity",
+      "name": "PlaySnd_PostSound",
+      "start": "0x48aa79",
+      "end_exclusive": "0x48aac0",
+      "bytes": 71,
+      "sha256": "700c9124db2ee5f88eb3a97aa75c0a56a2e6410b4b2f0c80e0518e8a2e74338a"
+    },
+    {
+      "group": "buffer",
+      "name": "PSB_CreateMySurfaceWithSound",
+      "start": "0x48aad4",
+      "end_exclusive": "0x48abb9",
+      "bytes": 229,
+      "sha256": "9c0d4a394d9a0fecd12c76f3c0e2181b656c5ae30149553ae909744af1fc14f7"
+    },
+    {
+      "group": "bank",
+      "name": "UseBank_FindIdInBanque",
+      "start": "0x48b390",
+      "end_exclusive": "0x48b3b3",
+      "bytes": 35,
+      "sha256": "2a4b0899f0c85f8318bceca04bd36669cb67a93fd60cbacd33ce648c798e70b2"
+    },
+    {
+      "group": "bank",
+      "name": "UseBank_GetDataHeader",
+      "start": "0x48b3b3",
+      "end_exclusive": "0x48b3ea",
+      "bytes": 55,
+      "sha256": "b1096ce945d41f759c53e9562aa3113ac416c53d152e24221d537f01df4a397c"
+    },
+    {
+      "group": "bank",
+      "name": "BanqSon_OpenDataFile",
+      "start": "0x48b3ec",
+      "end_exclusive": "0x48b446",
+      "bytes": 90,
+      "sha256": "c6439bb51e79737533d064fb07e59999a33e4b9db1b66fbef6d73e3356ee6733"
+    },
+    {
+      "group": "bank",
+      "name": "BanqSon_CloseDataFile",
+      "start": "0x48b446",
+      "end_exclusive": "0x48b44e",
+      "bytes": 8,
+      "sha256": "20e7793defeef0535365dc34c7e9345c2029b058f4dfc23ac8baa8ad273f8a74"
+    },
+    {
+      "group": "bank",
+      "name": "BanqSon_ControleValiditeHeader",
+      "start": "0x48b44e",
+      "end_exclusive": "0x48b496",
+      "bytes": 72,
+      "sha256": "8493ab95a6e3daeed56d35c3bc605da172bea7b7bcf93eaa94d9d32a59f1035a"
+    },
+    {
+      "group": "bank",
+      "name": "BanqSon_LoadHeader",
+      "start": "0x48b496",
+      "end_exclusive": "0x48b596",
+      "bytes": 256,
+      "sha256": "851136cf2cb643b7defeeec86cd7b5e079bf3f34f67624a7bb34924e273eadee"
+    },
+    {
+      "group": "bank",
+      "name": "BanqSon_FreeHeader",
+      "start": "0x48b596",
+      "end_exclusive": "0x48b5a6",
+      "bytes": 16,
+      "sha256": "450e1167c38a52adb3776462e6f45ad73140326088abdb0582643aaf273dc826"
+    },
+    {
+      "group": "bank",
+      "name": "BanqSon_Open",
+      "start": "0x48b5a6",
+      "end_exclusive": "0x48b650",
+      "bytes": 170,
+      "sha256": "97269884a3c021c933a87840b72671d213ff27c74f6cbd5dd55f0961e319963b"
+    },
+    {
+      "group": "bank",
+      "name": "BanqSon_FreeDataInMemory",
+      "start": "0x48b650",
+      "end_exclusive": "0x48b687",
+      "bytes": 55,
+      "sha256": "292e050c69c4f5874a1fbc3cc8f53fcfdc1a3d51cbef69cd302198847009c1e5"
+    },
+    {
+      "group": "bank",
+      "name": "BanqSon_Close",
+      "start": "0x48b687",
+      "end_exclusive": "0x48b6e7",
+      "bytes": 96,
+      "sha256": "47bd5e702468f6006efcebeb4c6030371da42669e2534bf19a2ac00781536050"
+    },
+    {
+      "group": "bank",
+      "name": "BanqSon_LoadAllData",
+      "start": "0x48b6e7",
+      "end_exclusive": "0x48b733",
+      "bytes": 76,
+      "sha256": "0fa937869cb0babb9aa2aaa74be134ddc8f09e1e15fe0c24eb72e71fa981175d"
+    },
+    {
+      "group": "bank",
+      "name": "BanqSon_LoadDataInMemory",
+      "start": "0x48b733",
+      "end_exclusive": "0x48b791",
+      "bytes": 94,
+      "sha256": "02dad54b1d9c5dfe9d16980a8ee21e13708b75f57a1aa6b3ce1a27379f98819f"
+    },
+    {
+      "group": "buffer",
+      "name": "DSB_CreateEmptySoundBuffer",
+      "start": "0x48b7b1",
+      "end_exclusive": "0x48b843",
+      "bytes": 146,
+      "sha256": "03b44d2de8f41dd11e6bd14a52931cc12294b727cca2db656b3e6925c59cb613"
+    },
+    {
+      "group": "decode",
+      "name": "imaadpcmNextStepIndex",
+      "start": "0x48b844",
+      "end_exclusive": "0x48b86b",
+      "bytes": 39,
+      "sha256": "d95d05e4261fd7f0e1a4686c3c54330aa810a39c02108b8f9d32afb28ef8cbd9"
+    },
+    {
+      "group": "decode",
+      "name": "imaadpcmSampleDecode",
+      "start": "0x48b86b",
+      "end_exclusive": "0x48b8b7",
+      "bytes": 76,
+      "sha256": "ad018655ba170f6b93b4e38880040198494392ee3df354ba0c84f8eebb50a713"
+    },
+    {
+      "group": "decode",
+      "name": "imaadpcmValidStepIndex",
+      "start": "0x48b8b7",
+      "end_exclusive": "0x48b8c9",
+      "bytes": 18,
+      "sha256": "b2bc5a288c184aea85e4311f10b0643977575f004aa69b6dab98356dd876a45e"
+    },
+    {
+      "group": "decode",
+      "name": "imaadpcmDecode4Bit_M16",
+      "start": "0x48b8c9",
+      "end_exclusive": "0x48ba96",
+      "bytes": 461,
+      "sha256": "77823a192829d8005fa6c30cf1a37835b0ffe6dcd043a8fa68feb26961925938"
+    },
+    {
+      "group": "decode",
+      "name": "imaadpcmDecode4Bit_S16",
+      "start": "0x48ba96",
+      "end_exclusive": "0x48bd12",
+      "bytes": 636,
+      "sha256": "f6dc835842b8ba5f178cd3484607844a2f905bfe30fb2846af26d12da550f555"
+    },
+    {
+      "group": "wrapper",
+      "name": "CreatM",
+      "start": "0x48c008",
+      "end_exclusive": "0x48c017",
+      "bytes": 15,
+      "sha256": "2c7cb8b45eaa704b893aa9fd8a9cb78f45e2416c5dcf539e364b129615437edd"
+    },
+    {
+      "group": "wrapper",
+      "name": "OpenM",
+      "start": "0x48c017",
+      "end_exclusive": "0x48c026",
+      "bytes": 15,
+      "sha256": "44370748002c4ef77660b09a071b7e5867b0ffee771225ebc9b82aa9df298776"
+    },
+    {
+      "group": "wrapper",
+      "name": "CloseM",
+      "start": "0x48c026",
+      "end_exclusive": "0x48c03e",
+      "bytes": 24,
+      "sha256": "93102f7ab3e0c0a8484067ea06dce84bc4c58d75e2e1d41fba24f34c3d1994ba"
+    },
+    {
+      "group": "wrapper",
+      "name": "ReadM",
+      "start": "0x48c03e",
+      "end_exclusive": "0x48c04e",
+      "bytes": 16,
+      "sha256": "f280dcd12c33c486480b10ebf5ac3f786c870e8c0c3e50f9d20f6cb72afbdc77"
+    },
+    {
+      "group": "wrapper",
+      "name": "WriteM",
+      "start": "0x48c04e",
+      "end_exclusive": "0x48c05e",
+      "bytes": 16,
+      "sha256": "d27d8eb249ea1150be77b3ad20c1f2c858bcb002e4c59a2a33110f26ba49155c"
+    },
+    {
+      "group": "wrapper",
+      "name": "SeekM",
+      "start": "0x48c05e",
+      "end_exclusive": "0x48c06e",
+      "bytes": 16,
+      "sha256": "12e35993d73369eb2d243964363b366e846b6dfe255c1bbeebf0c8f18840dcf2"
+    },
+    {
+      "group": "decode",
+      "name": "LoadSoundBuffer_LoadDataFromFileInSoundBuffer",
+      "start": "0x48c070",
+      "end_exclusive": "0x48c0bc",
+      "bytes": 76,
+      "sha256": "9450fcf5771f0da7623c1634c0777ae601aa615d2f9ba0626683aa629074d57a"
+    },
+    {
+      "group": "decode",
+      "name": "LoadSoundBuffer_DecompactInSoundBuffer",
+      "start": "0x48c0bc",
+      "end_exclusive": "0x48c137",
+      "bytes": 123,
+      "sha256": "6cc2cb776e5d337726293aa07223d05689b24562802826653f8743a1547c3d14"
+    },
+    {
+      "group": "decode",
+      "name": "LoadSoundBuffer_PlaceOnSample",
+      "start": "0x48c137",
+      "end_exclusive": "0x48c141",
+      "bytes": 10,
+      "sha256": "e6e53964851caf0fa2735ed6056df35014421888782984c392d425c024717536"
+    },
+    {
+      "group": "decode",
+      "name": "LoadSoundBuffer_LoadCompactedData",
+      "start": "0x48c141",
+      "end_exclusive": "0x48c16c",
+      "bytes": 43,
+      "sha256": "f81fa7c3a86452f6eca47abdddf357cd787b970837fc50b3f84d7e1f247ffb97"
+    },
+    {
+      "group": "decode",
+      "name": "LoadSoundBuffer_InitCompressedBuffer",
+      "start": "0x48c16c",
+      "end_exclusive": "0x48c18d",
+      "bytes": 33,
+      "sha256": "7064323e1fef63607c00071de9308dd6528a2fc690c1288fa317f9d8fec5fcff"
+    },
+    {
+      "group": "decode",
+      "name": "LoadSoundBuffer_FreeCompressedBuffer",
+      "start": "0x48c18d",
+      "end_exclusive": "0x48c1a8",
+      "bytes": 27,
+      "sha256": "1964e0b19dfc4f01c83107c26c17d376a650304fa3609cfb8b658c494102058e"
+    },
+    {
+      "group": "decode",
+      "name": "LoadSoundBuffer_LoadDataFromMemoryInSoundBuffer",
+      "start": "0x48c1a8",
+      "end_exclusive": "0x48c202",
+      "bytes": 90,
+      "sha256": "da4edb1e72f5049c50f6e58281e7c32d3be5eadcd1ec7a11df6d3864c5b8da8f"
+    },
+    {
+      "group": "wrapper",
+      "name": "OurAlloc",
+      "start": "0x48c204",
+      "end_exclusive": "0x48c241",
+      "bytes": 61,
+      "sha256": "9acac85b5873c5a9b31ea72553395e1ab581e9bc1e7ab68dfb00854fb0cd57da"
+    },
+    {
+      "group": "wrapper",
+      "name": "OurCalloc",
+      "start": "0x48c241",
+      "end_exclusive": "0x48c27f",
+      "bytes": 62,
+      "sha256": "3c897f6d71e294e226e3edc01e855cc6234de6adca958d41f16727b7ab2571ee"
+    },
+    {
+      "group": "wrapper",
+      "name": "OurFree",
+      "start": "0x48c27f",
+      "end_exclusive": "0x48c2d7",
+      "bytes": 88,
+      "sha256": "2f44e28203db654678389e5d930acd662eeaac3be3c0d78d84ed9808391de8d6"
+    },
+    {
+      "group": "crt",
+      "name": "memset",
+      "start": "0x48c3b0",
+      "end_exclusive": "0x48c3f5",
+      "bytes": 69,
+      "sha256": "357b82ba8937fb4fd0bec6df9d087134343ceced049518877585002b85a8eaf9"
+    },
+    {
+      "group": "crt",
+      "name": "sprintf_character_sink",
+      "start": "0x48cfa8",
+      "end_exclusive": "0x48cfbb",
+      "bytes": 19,
+      "sha256": "753d5db183e60fc4daa999dea99935fff7d6290b87c7c02cb22e85e6a18ef49b"
+    },
+    {
+      "group": "crt",
+      "name": "sprintf",
+      "start": "0x48cfbb",
+      "end_exclusive": "0x48cfeb",
+      "bytes": 48,
+      "sha256": "fbf3ae49f76ad50839dce1fe319518f9f1dc6d5a564fd35cd62b070e25eec03d"
+    },
+    {
+      "group": "crt",
+      "name": "__STOSB",
+      "start": "0x48d890",
+      "end_exclusive": "0x48d8c7",
+      "bytes": 55,
+      "sha256": "a90ce072d983ac3aae0caf1dda227c54fe347d777ff1f99691b47212c7b4cb5c"
+    },
+    {
+      "group": "crt",
+      "name": "__STOSD",
+      "start": "0x48d8c7",
+      "end_exclusive": "0x48d942",
+      "bytes": 123,
+      "sha256": "00a3f9d19540ceb3ad46e08439f9122915d509530d5e410f83676e5f62f79f47"
+    },
+    {
+      "group": "crt",
+      "name": "__prtf",
+      "start": "0x48efe8",
+      "end_exclusive": "0x48fb01",
+      "bytes": 2841,
+      "sha256": "c64b4e2e5543046113c00c92c02564fa9be40fcc68a6e82fc8791e22fa2a297a"
+    }
+  ],
+  "disassembly": "som-rotinas.asm",
+  "tables": [
+    {
+      "name": "ima_index_words",
+      "start": "0x498f6c",
+      "bytes": 32,
+      "sha256": "2d5e4634ad10143d20a09528e3cf96549c73009919e2324734fa4e0f3db82bfd",
+      "hex": "ffffffffffffffff0200040006000800ffffffffffffffff0200040006000800"
+    },
+    {
+      "name": "ima_step_words",
+      "start": "0x498f8c",
+      "bytes": 178,
+      "sha256": "98d29d10eef87b44f37e4e6a0410e9f3db98eaf56579d1189c7e3317e63bc3f3",
+      "hex": "0700080009000a000b000c000d000e001000110013001500170019001c001f002200250029002d00320037003c00420049005000580061006b00760082008f009d00ad00be00d100e600fd0017013301510173019801c101ee01200256029202d4021c036c03c30324048e04020583051006ab0656071208e008c309bd0ad00bff0c4c0eba0f4c110713ee1406175419dc1ba51eb6211525ca28df2c5b314b36b93bb24144487e4f71572f60ce696274ff7f"
+    },
+    {
+      "name": "sound_strings",
+      "start": "0x49537c",
+      "bytes": 450,
+      "sha256": "a87bb8081006eaa0f36f453201c7be1864e6010170cba6d315632c1b3e95a04f",
+      "hex": "534f554e44002573257300534f554e440025735c25730025735c257300410042005000002e534e44002e4845440042616e71536f6e5f4c6f61644865616465723a416c6c6f636174696f6e20627566666572204865616465720042616e71536f6e5f4c6f61644865616465723a4c696265726174696f6e20647520627566666572204865616465720042616e71536f6e5f467265654865616465720042616e71536f6e5f4672656544617461496e4d656d6f72793a4c696265726174696f6e206461746120736f6e6f7265207265736964656e74650042616e71536f6e5f4c6f6164416c6c446174613a20416c6c6f636174696f6e20627566666572206461746120736f6e6f72650042616e71536f6e5f4c6f6164416c6c446174613a4c696265726174696f6e20616e7469636970e9000000004c6f6164536f756e644275666665725f496e6974436f6d707265737365644275666665723a20416c6c6f636174696f6e20627566666572004c6f6164536f756e644275666665725f46726565436f6d707265737365644275666665723a204c696265726174696f6e2064752062756666657220636f6d707265737365000000000000507472204e554c4c20210000"
+    }
+  ],
+  "globals": {
+    "bank_A": [
+      "0x521fc8",
+      28
+    ],
+    "bank_B": [
+      "0x521fe4",
+      28
+    ],
+    "bank_P": [
+      "0x522000",
+      28
+    ],
+    "sound_directory": [
+      "0x52201c",
+      256
+    ],
+    "bank_file_name": [
+      "0x5221c0",
+      128
+    ],
+    "variant_counter": [
+      "0x5221bc",
+      4
+    ],
+    "direct_sound": [
+      "0x522228",
+      4
+    ],
+    "compressed_buffer": [
+      "0x52222c",
+      4
+    ],
+    "allocation_count": [
+      "0x522230",
+      4
+    ],
+    "physical_count": [
+      "0x498f60",
+      4
+    ],
+    "game_volume": [
+      "0x498f58",
+      4
+    ]
+  },
+  "import_slots": {
+    "0x5231c0": "KERNEL32.GlobalAlloc",
+    "0x5231c8": "KERNEL32.GlobalFree",
+    "0x5231e8": "KERNEL32._hread",
+    "0x5231ec": "KERNEL32._hwrite",
+    "0x5231f0": "KERNEL32._lclose",
+    "0x5231f4": "KERNEL32._lcreat",
+    "0x5231f8": "KERNEL32._llseek",
+    "0x5231fc": "KERNEL32._lopen",
+    "0x5232b0": "USER32.MessageBoxA"
+  },
+  "banks": {
+    "A.HED": {
+      "bytes": 372,
+      "sha256": "e98c8cbe1c7734b638c008c905b68bdb2023f185327c3b7ec86b88d5e7707072"
+    },
+    "A.SND": {
+      "bytes": 525824,
+      "sha256": "ec4874144eca50ddab6bc8fbb5f9db86d06d77960bd6a3e7ec313b2c9288f60b"
+    },
+    "B.HED": {
+      "bytes": 2872,
+      "sha256": "48bf0fbc8c7f93963c3ff2d9ad79963fade15ae165a685f6f30e2e440107bd4a"
+    },
+    "B.SND": {
+      "bytes": 1675264,
+      "sha256": "9b617f4bbb47c5de05ea9a29af1dae03f53ab77b57ed8c8b15582c76126079f3"
+    },
+    "P.HED": {
+      "bytes": 10312,
+      "sha256": "05170234f723c1e9e10c0edf494a432f7dc4fbd4a5c2b917f953b50cace4c66e"
+    },
+    "P.SND": {
+      "bytes": 10337891,
+      "sha256": "c1193ed24382ba755e0e026c65e51dfc27264e0b480722e7c5779b918a94a977"
+    }
+  },
+  "bank_letters": {
+    "A": "0x41 -> 0x521fc8",
+    "B": "0x42 -> 0x521fe4",
+    "P": "0x50 -> 0x522000"
+  },
+  "no_direct_callers_note": "No rel32 CALL/JMP and no absolute 32-bit reference anywhere in the intact image.",
+  "no_direct_callers": [
+    "BanqSon_OpenDataFile",
+    "BanqSon_CloseDataFile",
+    "BanqSon_ControleValiditeHeader",
+    "BanqSon_LoadAllData",
+    "BanqSon_LoadDataInMemory",
+    "PlaySnd_CreateSoundPath",
+    "SoundFile",
+    "PlaySnd_MakeID"
+  ],
+  "scope": "Stage 1 inventory: bank header/index/data-header readers, buffer creation and sample decoding, file/allocation wrappers, sound identity. Queue tables, emitters and DirectSound playback are later stages."
+}
