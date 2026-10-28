@@ -10,20 +10,24 @@ INTERVALOS = CONSUMO + [(0x418b42, 0x418b97), (0x41a08c, 0x41a0ab), (0x41a4f4, 0
 ESTRUTURAS = 0x49a0c8
 
 
+def observar_fonte(bancada, cpu, at):
+    if at not in QUERIES:
+        return
+    sp = cpu.reg_read(x86.UC_X86_REG_ESP)
+    ret = struct.unpack('<I', cpu.mem_read(sp, 4))[0]
+    if not 0x4502f0 <= ret < 0x450856:
+        return
+    a, d, b = (cpu.reg_read(getattr(x86, 'UC_X86_REG_'+n)) for n in ('EAX', 'EDX', 'EBX'))
+    args = (a & 255, d & 255, b & 255) if at == 0x418b8a else (a & 65535,)
+    event = [QUERIES[at], args]
+    bancada.eventos_consumo.append(event)
+    bancada.pendentes.append((ret, event))
+
+
 class BancadaDanoModo3(BancadaConsumoDano):
     def _observar_consumo(self, cpu, at, size, data):
         super()._observar_consumo(cpu, at, size, data)
-        if at not in QUERIES:
-            return
-        sp = cpu.reg_read(x86.UC_X86_REG_ESP)
-        ret = struct.unpack('<I', cpu.mem_read(sp, 4))[0]
-        if not 0x4502f0 <= ret < 0x450856:
-            return
-        a, d, b = (cpu.reg_read(getattr(x86, 'UC_X86_REG_'+n)) for n in ('EAX', 'EDX', 'EBX'))
-        args = (a & 255, d & 255, b & 255) if at == 0x418b8a else (a & 65535,)
-        event = [QUERIES[at], args]
-        self.eventos_consumo.append(event)
-        self.pendentes.append((ret, event))
+        observar_fonte(self, cpu, at)
 
     def carregar_fonte(self, structures, row10, row11):
         self.cpu.mem_write(ESTRUTURAS, bytes(structures))
