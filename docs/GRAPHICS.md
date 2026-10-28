@@ -180,7 +180,7 @@ This inventory distinguishes reconstructed behavior, captured original behavior,
 |---|---|---|
 | Gate shared tail | The full-return API now reconstructs `AffBatiments 0x40F342..0x40F49C` for terrain other than `0x356`; 882 fresh x86 calls validate return/clip/guards | Close the workshop-trigger lookup with a committed world-provider contract; integrate the consumer |
 | Other building facades and overlays | `AffBatiments 0x407DD3..0x40F49C`; only the Sanctuary subset and gate facade are reconstructed | Recover per-type/mode layers, clipping and anchors against original buffers |
-| Unit action handlers | Prepared type-0/type-2 attack bodies and six-type corpse copy/fade rendering are reconstructed; construction `0x414495`, work `0x414A8A` and remaining types/effects remain open | Extend supported handlers and coordinate simulation phase/corpse-counter producers |
+| Unit action handlers | Prepared type-0/type-2 attacks, six-type corpse copy/fade and type-6/type-7 construction display are reconstructed; work `0x414A8A` and remaining types/effects remain open | Extend supported handlers and coordinate simulation task/phase/corpse-counter producers |
 | Type-2 normal body | Separate raw-record mapper/compositor reconstructs branch `0x412ECE`, raw frame stride and exact anchor; full native calls and indexed buffers match | Consume the committed provider in the app; recover other players/effects/actions independently |
 | Projectile display inputs/rendering | The 100-record selection/sort, cell queries and public `AffProjectile` mapper/compositor are reconstructed; eight bounded complete sprite scenes use the public renderer | Integrate the consumer and physical producers; preserve explicit catalog limits and raw phase semantics |
 | Projectile/effect lighting | `CalculEclairage`, clipping-enabled mask remap and public projectile consumers are independently validated | Recover remaining palette effects and their lifecycle separately |
@@ -305,6 +305,34 @@ Matrix covers counters0–340 and large-u16 boundaries, all phase/direction/stri
 
 ```sh
 python3 -B pesquisas-paralelas/graficos-animacao/validar_morte_grafica.py
+python3 -B scripts/check.py --domain graphics
+```
+
+## Prepared construction display — twelfth continuation stage
+
+`construcao_grafica.py:consultar_construcao_grafica(record276, *, x, y, indice_u16, indice_selecionado_u16, modo_selecao_u8)` consumes one prepared runtime record, projected signed-i16 cell origins, actual pool index 0–799, raw selected index u16 and raw selection-mode u8. Supported record: owner 0, type 6/7, state 11/15, +BD/+DC/+BA zero, unsigned fatigue word +74 at least 100. Nonzero +BD invokes the original construction selection prefix **regardless of camera**; the API rejects it before composition. It also rejects selected-index equality or nonzero selection mode. With +BD zero, camera cannot change the supported branch, so no camera default/input is needed; all camera bytes were independently captured.
+
+The renderer reads raw task byte +89, phase +A4, direction +91, Bag count word +0A and signed-i8 shifts +86/+87. Task 0 chooses by count zero versus nonzero; task 1 ignores the Bag; tasks 2–255 produce no body layers under the required guards. This describes display branching, not task production or transport semantics. The branch uses fixed strides, independently of +A5/+A6/+A8:
+
+| Type | Task +89 | Bag word | Branch constant | Fixed stride |
+|---|---|---|---:|---:|
+| 6 | 0 | 0 | 2970 | 8 |
+| 6 | 0 | nonzero | 3034 | 8 |
+| 6 | 1 | ignored | 3166 | 4 |
+| 7 | 0 | 0 | 1338 | 8 |
+| 7 | 0 | nonzero | 1466 | 8 |
+| 7 | 1 | ignored | 1402 | 8 |
+
+Engine ID = low-u16 `constant + floor((direction+1)/2)*stride + phase`. Direction 0 and all phase bytes retain their raw behavior; they can cross semantic sprite ranges without establishing a legal animation sequence. Shadow 10784 at `(x+dx+2,y+dy+26)` precedes the body at `(x+dx-16,y+dy-20)` for type 6 or `(x+dx-26,y+dy-26)` for type 7, with final signed-i16 wrap. Tasks above 1 do not fetch assets. `compor_construcao_grafica` takes catalog/destination/dimensions, the same required inputs, explicit 256-byte `tabela_sombra` and optional inclusive `recorte`; returns `(new_indexed_bytes,plan)`. All inputs stay intact; no callback, RNG/clock, task, building-progress or economic effect occurs. Invalid widths/lengths raise `ValueError`, missing keywords `TypeError`, unsupported guards/types/states `NotImplementedError` before composition.
+
+Evidence: unchanged original executable identity; complete `AffConstruireBatiment 0x414495..0x414A8A` hash `22d386a7b6ac4af35f190e4293d06a64dd489c4746f0db31c2cd618e8d8d3c9a`, `BagVide 0x4470B9..0x4470C5` hash `a4b23a2dfd610b631864b3ffd40674fc62f9bc18fec11a6d3b824a770aa937af`, full `AffEngin` caller. Native x/y enter EAX/EDX, actual index low EBX; unit pointer `0x4E19A0`, selected-index/mode at `0x496AC2/0x508F8F`. [Exact-byte evidence and unchanged predecessors](../pesquisas-paralelas/graficos-animacao/evidencias/construcao-grafica.json). Direct original-byte review and independent native execution establish this small branch mapping; no new REA interpretation is needed.
+
+Fresh validator: **32,338 bounded original calls / 33,469,945 instructions**, 30,780 route/layer captures, **1,554 exact indexed buffers**, two type initializations and two bank calls. Capture outcomes: **29,246 complete returns** (including 1,016 empty-body returns), **1,020 declared selection-prefix stops at `0x41451D`**, **514 declared selection-info stops at `0x410BE4`**. Stops are unimplemented overlay boundaries, not complete returns. Every complete call has ESP `0x2008004`; full pool and selection globals remain unchanged. Zero expected/unexpected exceptions, limits or skips. Capture blitters are intercepted; pixel renderers and Bag query execute unchanged. Bank setup substitutes file IO/allocation. [Native report](../pesquisas-paralelas/graficos-animacao/validacao/x86-construcao-grafica.json), [six-variant direction sheet](../pesquisas-paralelas/graficos-animacao/artefatos/construcao-tipos6-7.png) (type 6 then 7, empty/filled task-0 then task-1 rows, eight odd directions, phase 0).
+
+Matrix covers all task/phase/direction/camera/mode/+BD bytes in focused combinations, Bag-word boundaries, pool 0/799, shifts and signed coordinate edges. Pixels cover both states, all 16 directions, phases 0–7 and each body variant plus no-body/clipping cases. These phases are raw fixtures, not a recovered task cadence. Seven new regressions pass; graphics domain **155 tests**, no skips and valid links. Background/table remain synthetic inputs; other types/owners/effects, selection rendering, work/task producers and real-mission operation are separate gaps.
+
+```sh
+python3 -B pesquisas-paralelas/graficos-animacao/validar_construcao_grafica.py
 python3 -B scripts/check.py --domain graphics
 ```
 
