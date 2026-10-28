@@ -1,0 +1,46 @@
+{
+  "scope": "Complementary existing-project coverage limitation at EnginApporteMatiere; not native decoder evidence",
+  "rea_source_revision": "b9a8f8e9f25feb9cc97bf4960748f2bdf8c898bc",
+  "sha256_original_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_analysis_exe": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "provider": {
+    "id": "ghidra",
+    "name": "Ghidra",
+    "version": "12.2"
+  },
+  "analysis_profile_digest": "33da723a26733dd8b59046612d0c42bf95bb1b59c46a63f17b127521af169a3d",
+  "instruction_evidence_id": "ev_f471f6a8b2a2b62ac7c76cf473fdc69278d4ad36f2137e68bd7ef8ee0fecd08a",
+  "sha256_instruction_record": "6605cefbcf62b30e64638596a6fe06a07d19b6919d0189326e466f534471a375",
+  "sha256_dossier_failure_record": "64204e141a64a07ae7dfa848f97840dc10ec21f1b3028a121929e7c632c1199c",
+  "dossier_observation": "analyze_function0x456d35 returned invalid_request: no procedure exists at requested address.",
+  "instruction_observation": {
+    "address": "0x456d35",
+    "status": "undecodable",
+    "procedure": null,
+    "architecture": "x86:LE:32:default",
+    "mode": "default",
+    "bytes": null,
+    "length": null,
+    "mnemonic": null,
+    "raw_disassembly": null,
+    "operands": [],
+    "flow": {
+      "kind": "unavailable",
+      "conditional": false,
+      "computed": false,
+      "direct_destinations": [],
+      "classification_evidence": []
+    },
+    "references": [],
+    "incoming_references": [],
+    "limitations": [
+      "Operand components are Ghidra Listing decoder tokens; effective memory base/index/displacement roles and per-instruction context mode are unavailable. The mode field is the program language variant."
+    ]
+  },
+  "reviewed_findings": [
+    "The selected existing Ghidra Listing has no procedure or decoded instruction at0x456d35.",
+    "This is analysis coverage, not evidence that the intact original CPU bytes are undecodable.",
+    "SBL, intact original Capstone bytes and independent original-x86 comparisons define the reconstructed query.",
+    "Read-only private project was not repaired or auto-analyzed; session exported and closed."
+  ]
+}

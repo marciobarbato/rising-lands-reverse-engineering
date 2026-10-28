@@ -1,0 +1,38 @@
+{
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_sbl": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "scope": "Complete read-only status queries; no cargo/order/transport state-machine effects",
+  "captures": [
+    {
+      "symbol": "EnginRentreMatiere",
+      "start": "0x456cd9",
+      "end_exclusive": "0x456d35",
+      "bytes_hex": "5388d331d26689c289d0c1e00401d0c1e00201c2a1a0194e00c1e20201d031d28a500283fa05740a83fa12740583fa11752631d28a908200000083fa027519668b808000000025ffff0000e8cb37fcff38d87504b0015bc330c05bc3",
+      "sha256": "a04e4fd41546867a79ce89b382f7985a91bf98eb6d26267e9e8c788085897432",
+      "listing": "consultas-transporte-00456cd9.asm"
+    },
+    {
+      "symbol": "EnginApporteMatiere",
+      "start": "0x456d35",
+      "end_exclusive": "0x456d92",
+      "bytes_hex": "5188d131d26689c289d0c1e00401d0c1e00201c2a1a0194e00c1e20201d031d28a500283fa05740a83fa12740583fa11752731d2668b908400000081e1ff00000039ca751431ca88da85d274083a98820000007504b00159c330c059c3",
+      "sha256": "824dd786e8614aa82692e9adb352d65bc665f3462cd24de20a2e5cdbe9caac25",
+      "listing": "consultas-transporte-00456d35.asm"
+    },
+    {
+      "symbol": "BatimentGetType",
+      "start": "0x41a4f4",
+      "end_exclusive": "0x41a513",
+      "bytes_hex": "5231d26689c289d0c1e00401d0c1e00201d0c1e00205c8a049008a40085ac3",
+      "sha256": "b3f55e7d1ddbe9eb0c88c8042cc80aa415dd5b8f280b6c018978cbe182cf7584",
+      "listing": "consultas-transporte-0041a4f4.asm"
+    }
+  ],
+  "inputs": {
+    "AX": "unit index u16 protected0..799",
+    "DL": "comparison byte",
+    "BL": "Apporte mode byte,0 wildcard"
+  },
+  "conditional_building_guard": "Rentre reads target+80 only after state5/17/18 and+82byte2; protected target0..999",
+  "mutation": "none; AL returns0/1"
+}
