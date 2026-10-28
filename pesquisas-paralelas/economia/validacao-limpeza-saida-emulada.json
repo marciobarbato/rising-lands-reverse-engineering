@@ -1,0 +1,17 @@
+{
+  "scope": "Isolated production cleanup types1/2/13/16 and complete BagVide; no preceding world caller",
+  "mode": "original x86 and Python",
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 1184,
+  "declared_stops": 1184,
+  "completed_returns": 512,
+  "terrain_dependency_stops": 117,
+  "unit_message_dependency_stops": 555,
+  "expected_x86_exceptions": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}

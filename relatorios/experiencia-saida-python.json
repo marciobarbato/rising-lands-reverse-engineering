@@ -1,0 +1,20 @@
+{
+  "x86_executed": false,
+  "experience_byte": 129,
+  "f8": 30,
+  "queue_after": [
+    9,
+    3,
+    8,
+    4,
+    7,
+    5,
+    6,
+    6,
+    255,
+    0
+  ],
+  "exit_cell": 2056,
+  "pending_address": "0x420f8a",
+  "scope": "Synthetic live owner queue and recovery handoff; stops before placement; no real mission."
+}

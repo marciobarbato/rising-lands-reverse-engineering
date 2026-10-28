@@ -1,0 +1,32 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 12,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_experiencia_unidades.DiferencialExperienciaUnidades.test_every_level_byte_and_unknown_type_table_free_branches",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_experiencia_unidades.DiferencialExperienciaUnidades.test_guards_and_nested_missing_table_preserve_original_partial_state",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_experiencia_unidades.DiferencialExperienciaUnidades.test_joined_position_conversion_recovery_experience_original_prefix",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_experiencia_unidades.DiferencialExperienciaUnidades.test_local_all_types_levels_and_characteristic_division_edges",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_experiencia_unidades.DiferencialExperienciaUnidades.test_queue_all_owners_types_levels_indices_and_edx_preservation",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "scope": "Local experience effects and owner queue; production caller prefix stops before placement."
+}
