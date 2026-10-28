@@ -1,0 +1,8368 @@
+{
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "scope": "Static reachability over intact bytes; call order is claimed only by the native captures.",
+ "dispatch": {
+  "calcul_game": {
+   "state_byte": "0x004e2f78",
+   "entry_state_copy": "[esp+0x104]",
+   "table": "0x0042c804",
+   "targets": {
+    "0": "0x0042d1da",
+    "1": "0x0042c8bf",
+    "2": "0x0042cfe3",
+    "3": "0x0042cfe3",
+    "4": "0x0042cfe3",
+    "5": "0x0042cfe3",
+    "6": "0x0042cda4",
+    "7": "0x0042cd7d",
+    "8": "0x0042d4e2",
+    "9": "0x0042d4e2",
+    "10": "0x0042c979",
+    "11": "0x0042d4e2",
+    "12": "0x0042cfe3",
+    "13": "0x0042cfe3",
+    "14": "0x0042cfe3",
+    "15": "0x0042d1da",
+    "16": "0x0042cfe3",
+    "17": "0x0042caa9",
+    "18": "0x0042d2de",
+    "19": "0x0042c9c5",
+    "20": "0x0042cd5f",
+    "21": "0x0042d4d9",
+    "22": "0x0042d197",
+    "23": "0x0042cbfd",
+    "24": "0x0042c947"
+   },
+   "gates": {
+    "gate_1": "0x0042d14c",
+    "gate_2": "0x0042d2e3",
+    "gate_3": "0x0042d3c0"
+   },
+   "input_loop": {
+    "entry": "0x0042d2de",
+    "instructions": 71,
+    "calls": [
+     {
+      "address": "0x00429278",
+      "name": "InputGame",
+      "sites": [
+       "0x0042d33b",
+       "0x0042d36c"
+      ]
+     },
+     {
+      "address": "0x004581b6",
+      "name": "EvenementEnCours",
+      "sites": [
+       "0x0042d2e3"
+      ]
+     },
+     {
+      "address": "0x0045ea7c",
+      "name": "InputReceive",
+      "sites": [
+       "0x0042d34b"
+      ]
+     },
+     {
+      "address": "0x0045ec9f",
+      "name": "InputSend",
+      "sites": [
+       "0x0042d342"
+      ]
+     },
+     {
+      "address": "0x0045edc0",
+      "name": "ProcessInputGame",
+      "sites": [
+       "0x0042d3b0"
+      ]
+     },
+     {
+      "address": "0x00467a8c",
+      "name": "MCICD_Play",
+      "sites": [
+       "0x0042d328"
+      ]
+     },
+     {
+      "address": "0x0046c11a",
+      "name": "MissionGetNum",
+      "sites": [
+       "0x0042d354"
+      ]
+     },
+     {
+      "address": "0x0046d628",
+      "name": "PlayerAttaqueReset",
+      "sites": [
+       "0x0042d2de"
+      ]
+     },
+     {
+      "address": "0x0046d817",
+      "name": "PlayerGetType",
+      "sites": [
+       "0x0042d379"
+      ]
+     },
+     {
+      "address": "0x0047fbea",
+      "name": "CalculNextReflect",
+      "sites": [
+       "0x0042d35d"
+      ]
+     }
+    ],
+    "imports": {},
+    "indirect_calls": [],
+    "tail_calls": {},
+    "stops_reached": [
+     "0x0042d3c0",
+     "0x0042d4ea"
+    ],
+    "returns": []
+   },
+   "frame_body": {
+    "entry": "0x0042d3e1",
+    "instructions": 60,
+    "calls": [
+     {
+      "address": "0x004281c7",
+      "name": "CalculBatimentNextEtape",
+      "sites": [
+       "0x0042d3fa"
+      ]
+     },
+     {
+      "address": "0x00456db5",
+      "name": "CalculEnginNextEtape",
+      "sites": [
+       "0x0042d3f5"
+      ]
+     },
+     {
+      "address": "0x00458606",
+      "name": "TestFinDeMission",
+      "sites": [
+       "0x0042d481"
+      ]
+     },
+     {
+      "address": "0x0045d015",
+      "name": "GameNextFrame",
+      "sites": [
+       "0x0042d3e6"
+      ]
+     },
+     {
+      "address": "0x0045e944",
+      "name": "CalculIconeAction",
+      "sites": [
+       "0x0042d3eb"
+      ]
+     },
+     {
+      "address": "0x00466dd1",
+      "name": "CalculCompteurMarche",
+      "sites": [
+       "0x0042d41f"
+      ]
+     },
+     {
+      "address": "0x00466e9b",
+      "name": "CalculCompteurProposition",
+      "sites": [
+       "0x0042d42d"
+      ]
+     },
+     {
+      "address": "0x00467718",
+      "name": "CalculMatiere",
+      "sites": [
+       "0x0042d413"
+      ]
+     },
+     {
+      "address": "0x0046994b",
+      "name": "MessageBoxSet",
+      "sites": [
+       "0x0042d4b1"
+      ]
+     },
+     {
+      "address": "0x00469dce",
+      "name": "MessageBoxCalcul",
+      "sites": [
+       "0x0042d3e1"
+      ]
+     },
+     {
+      "address": "0x0046c11a",
+      "name": "MissionGetNum",
+      "sites": [
+       "0x0042d48f"
+      ]
+     },
+     {
+      "address": "0x0046d629",
+      "name": "PlayerAttaqueCalculSympa",
+      "sites": [
+       "0x0042d46c"
+      ]
+     },
+     {
+      "address": "0x0046da3b",
+      "name": "PlayerInitAllianceCompteur",
+      "sites": [
+       "0x0042d404"
+      ]
+     },
+     {
+      "address": "0x0046fc0f",
+      "name": "ProjectileCalcul",
+      "sites": [
+       "0x0042d3f0"
+      ]
+     },
+     {
+      "address": "0x0047125c",
+      "name": "RechercheCalcul",
+      "sites": [
+       "0x0042d3ff"
+      ]
+     },
+     {
+      "address": "0x00475328",
+      "name": "SetUpdateChamp",
+      "sites": [
+       "0x0042d409"
+      ]
+     },
+     {
+      "address": "0x004772ec",
+      "name": "NextAnimVeget",
+      "sites": [
+       "0x0042d467"
+      ]
+     },
+     {
+      "address": "0x004774fa",
+      "name": "NextAnimVegetFullMap",
+      "sites": [
+       "0x0042d44f"
+      ]
+     },
+     {
+      "address": "0x00477700",
+      "name": "NextAnimTerrain",
+      "sites": [
+       "0x0042d441"
+      ]
+     },
+     {
+      "address": "0x00478806",
+      "name": "UpdateChamp",
+      "sites": [
+       "0x0042d40e"
+      ]
+     },
+     {
+      "address": "0x0048aac5",
+      "name": "PlaySnd_StopAllSound",
+      "sites": [
+       "0x0042d4c8"
+      ]
+     }
+    ],
+    "imports": {},
+    "indirect_calls": [],
+    "tail_calls": {},
+    "stops_reached": [
+     "0x0042c92c",
+     "0x0042d4e2"
+    ],
+    "returns": []
+   }
+  },
+  "engin_next_etape": {
+   "loop": {
+    "entry": "0x00456db5",
+    "instructions": 106,
+    "calls": [
+     {
+      "address": "0x0045442c",
+      "name": "EnginNextEtape",
+      "sites": [
+       "0x00456ead"
+      ]
+     },
+     {
+      "address": "0x0047fbfd",
+      "name": "IATestUtilite",
+      "sites": [
+       "0x00456e65"
+      ]
+     }
+    ],
+    "imports": {},
+    "indirect_calls": [],
+    "tail_calls": {},
+    "stops_reached": [],
+    "returns": [
+     "0x004517a1"
+    ]
+   },
+   "prelude": {
+    "entry": "0x0045442c",
+    "instructions": 672,
+    "calls": [
+     {
+      "address": "0x00428cc0",
+      "name": "BonusGetValEngin",
+      "sites": [
+       "0x0045456e"
+      ]
+     },
+     {
+      "address": "0x00440c5d",
+      "name": "EnginGetVolume",
+      "sites": [
+       "0x0045447b",
+       "0x00454646"
+      ]
+     },
+     {
+      "address": "0x00442cb4",
+      "name": "SetEnginCollision",
+      "sites": [
+       "0x00454b6d"
+      ]
+     },
+     {
+      "address": "0x00444938",
+      "name": "SetDyingEngin",
+      "sites": [
+       "0x00454847"
+      ]
+     },
+     {
+      "address": "0x004457d3",
+      "name": "SetDeplaceEngin",
+      "sites": [
+       "0x00454a68"
+      ]
+     },
+     {
+      "address": "0x00445a36",
+      "name": "SetAttaqueEngin",
+      "sites": [
+       "0x004547db"
+      ]
+     },
+     {
+      "address": "0x004484a7",
+      "name": "RotateTourEngin",
+      "sites": [
+       "0x00454c85"
+      ]
+     },
+     {
+      "address": "0x00452cc8",
+      "name": "CalculFatigue",
+      "sites": [
+       "0x004548ac"
+      ]
+     },
+     {
+      "address": "0x00453b84",
+      "name": "EnginSetFatigue",
+      "sites": [
+       "0x0045498f"
+      ]
+     },
+     {
+      "address": "0x00453f74",
+      "name": "EnginTrouveCible",
+      "sites": [
+       "0x0045479d"
+      ]
+     },
+     {
+      "address": "0x00457058",
+      "name": "RetireEngin",
+      "sites": [
+       "0x00454ab1"
+      ]
+     },
+     {
+      "address": "0x00467d71",
+      "name": "SetBit",
+      "sites": [
+       "0x00454be5",
+       "0x00454c4a"
+      ]
+     },
+     {
+      "address": "0x00467d97",
+      "name": "GetBit",
+      "sites": [
+       "0x00454808",
+       "0x0045489d",
+       "0x00454b9c",
+       "0x00454c05"
+      ]
+     },
+     {
+      "address": "0x0046d817",
+      "name": "PlayerGetType",
+      "sites": [
+       "0x00454721",
+       "0x0045496e"
+      ]
+     },
+     {
+      "address": "0x0047474f",
+      "name": "SortilegeGetTempsFin",
+      "sites": [
+       "0x00454816"
+      ]
+     },
+     {
+      "address": "0x004766f0",
+      "name": "TerrainEstDecouvert",
+      "sites": [
+       "0x0045463b"
+      ]
+     },
+     {
+      "address": "0x004829c8",
+      "name": "iagUnitSendMessage",
+      "sites": [
+       "0x004547bf",
+       "0x00454986"
+      ]
+     },
+     {
+      "address": "0x0048aa79",
+      "name": "PlaySnd_PostSound",
+      "sites": [
+       "0x0045467b"
+      ]
+     },
+     {
+      "address": "0x0048aac0",
+      "name": "PlaySnd_StopSound",
+      "sites": [
+       "0x004545ee"
+      ]
+     },
+     {
+      "address": "0x0048aacf",
+      "name": "PlaySnd_PostVolume",
+      "sites": [
+       "0x0045448a"
+      ]
+     }
+    ],
+    "imports": {},
+    "indirect_calls": [],
+    "tail_calls": {},
+    "stops_reached": [
+     "0x00454ccd",
+     "0x00456c1c"
+    ],
+    "returns": []
+   },
+   "state_switch": "0x00456c1c",
+   "state_table": "0x004543c8",
+   "exit": "0x00454ccd",
+   "states": [
+    {
+     "state": 0,
+     "target": "0x00454ccd",
+     "instructions": 0,
+     "calls": [],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 1,
+     "target": "0x00456886",
+     "instructions": 106,
+     "calls": [
+      {
+       "address": "0x0041a08c",
+       "name": "BatimentGetPlayer",
+       "sites": [
+        "0x0045675d"
+       ]
+      },
+      {
+       "address": "0x0041a70b",
+       "name": "BatimentEnDestruction",
+       "sites": [
+        "0x0045674b"
+       ]
+      },
+      {
+       "address": "0x004457d3",
+       "name": "SetDeplaceEngin",
+       "sites": [
+        "0x004567bb"
+       ]
+      },
+      {
+       "address": "0x00451914",
+       "name": "CalculAttaqueEngin",
+       "sites": [
+        "0x004568a3"
+       ]
+      },
+      {
+       "address": "0x0046d817",
+       "name": "PlayerGetType",
+       "sites": [
+        "0x00456791",
+        "0x0045686e"
+       ]
+      },
+      {
+       "address": "0x004829c8",
+       "name": "iagUnitSendMessage",
+       "sites": [
+        "0x004567a9"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 2,
+     "target": "0x004563da",
+     "instructions": 88,
+     "calls": [
+      {
+       "address": "0x00448194",
+       "name": "EnginEnArret",
+       "sites": [
+        "0x004563ff"
+       ]
+      },
+      {
+       "address": "0x00448599",
+       "name": "RotateEngin",
+       "sites": [
+        "0x00455a74"
+       ]
+      },
+      {
+       "address": "0x0044930c",
+       "name": "DeplaceEngin",
+       "sites": [
+        "0x004555ac"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 3,
+     "target": "0x00455a61",
+     "instructions": 58,
+     "calls": [
+      {
+       "address": "0x00448599",
+       "name": "RotateEngin",
+       "sites": [
+        "0x00455a74"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 4,
+     "target": "0x00456ae5",
+     "instructions": 165,
+     "calls": [
+      {
+       "address": "0x00442eac",
+       "name": "ResetEnginCollision",
+       "sites": [
+        "0x00456a1a",
+        "0x00456a33"
+       ]
+      },
+      {
+       "address": "0x00443dfc",
+       "name": "EnginRetire",
+       "sites": [
+        "0x00456ad7",
+        "0x00456bfb"
+       ]
+      },
+      {
+       "address": "0x00457058",
+       "name": "RetireEngin",
+       "sites": [
+        "0x00456b18",
+        "0x00456c05"
+       ]
+      },
+      {
+       "address": "0x00467d97",
+       "name": "GetBit",
+       "sites": [
+        "0x00456b59"
+       ]
+      },
+      {
+       "address": "0x00472648",
+       "name": "DeselectionEngin",
+       "sites": [
+        "0x00456a0f",
+        "0x00456ab3",
+        "0x00456bd9"
+       ]
+      },
+      {
+       "address": "0x0047605d",
+       "name": "CreerSac",
+       "sites": [
+        "0x00456bab"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 5,
+     "target": "0x00456600",
+     "instructions": 101,
+     "calls": [
+      {
+       "address": "0x0041a08c",
+       "name": "BatimentGetPlayer",
+       "sites": [
+        "0x0045662c"
+       ]
+      },
+      {
+       "address": "0x0041a70b",
+       "name": "BatimentEnDestruction",
+       "sites": [
+        "0x0045661a"
+       ]
+      },
+      {
+       "address": "0x00442cb4",
+       "name": "SetEnginCollision",
+       "sites": [
+        "0x0045669c"
+       ]
+      },
+      {
+       "address": "0x004457d3",
+       "name": "SetDeplaceEngin",
+       "sites": [
+        "0x004550b4"
+       ]
+      },
+      {
+       "address": "0x0044bc74",
+       "name": "CalculWorkEngin",
+       "sites": [
+        "0x00456731"
+       ]
+      },
+      {
+       "address": "0x0046a388",
+       "name": "SetMiniMap",
+       "sites": [
+        "0x004550a4"
+       ]
+      },
+      {
+       "address": "0x004754de",
+       "name": "MineEndWork",
+       "sites": [
+        "0x0045666f"
+       ]
+      },
+      {
+       "address": "0x00476851",
+       "name": "DecouvreTerrain",
+       "sites": [
+        "0x004566f2"
+       ]
+      },
+      {
+       "address": "0x00476cb3",
+       "name": "IllumineTerrain",
+       "sites": [
+        "0x00456714"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 6,
+     "target": "0x004568ad",
+     "instructions": 50,
+     "calls": [],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 7,
+     "target": "0x00456966",
+     "instructions": 50,
+     "calls": [
+      {
+       "address": "0x00447b2f",
+       "name": "AnimBallonStatic",
+       "sites": [
+        "0x0045695c"
+       ]
+      },
+      {
+       "address": "0x004704dc",
+       "name": "Random",
+       "sites": [
+        "0x004569bd"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 8,
+     "target": "0x00454ccd",
+     "instructions": 0,
+     "calls": [],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 9,
+     "target": "0x00454ccd",
+     "instructions": 0,
+     "calls": [],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 10,
+     "target": "0x00454ccd",
+     "instructions": 0,
+     "calls": [],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 11,
+     "target": "0x004564ef",
+     "instructions": 18,
+     "calls": [
+      {
+       "address": "0x0041a70b",
+       "name": "BatimentEnDestruction",
+       "sites": [
+        "0x00456504"
+       ]
+      },
+      {
+       "address": "0x004457d3",
+       "name": "SetDeplaceEngin",
+       "sites": [
+        "0x00454cc8"
+       ]
+      },
+      {
+       "address": "0x0044ab60",
+       "name": "CalculConstruireBatiment",
+       "sites": [
+        "0x00456516"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 12,
+     "target": "0x00454ccd",
+     "instructions": 0,
+     "calls": [],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 13,
+     "target": "0x004558e4",
+     "instructions": 117,
+     "calls": [
+      {
+       "address": "0x0041a08c",
+       "name": "BatimentGetPlayer",
+       "sites": [
+        "0x00455921",
+        "0x0045593f",
+        "0x0045596e",
+        "0x00455980"
+       ]
+      },
+      {
+       "address": "0x0041a4f4",
+       "name": "BatimentGetType",
+       "sites": [
+        "0x00455951"
+       ]
+      },
+      {
+       "address": "0x0041a70b",
+       "name": "BatimentEnDestruction",
+       "sites": [
+        "0x00455901"
+       ]
+      },
+      {
+       "address": "0x004457d3",
+       "name": "SetDeplaceEngin",
+       "sites": [
+        "0x00454da2",
+        "0x004567bb"
+       ]
+      },
+      {
+       "address": "0x00449716",
+       "name": "CalculEntreBatiment",
+       "sites": [
+        "0x004559a8"
+       ]
+      },
+      {
+       "address": "0x0044a2ed",
+       "name": "CalculEntreEngin",
+       "sites": [
+        "0x00455a57"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 14,
+     "target": "0x00454ccd",
+     "instructions": 0,
+     "calls": [],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 15,
+     "target": "0x0045652f",
+     "instructions": 72,
+     "calls": [
+      {
+       "address": "0x0041a70b",
+       "name": "BatimentEnDestruction",
+       "sites": [
+        "0x004565e4"
+       ]
+      },
+      {
+       "address": "0x004457d3",
+       "name": "SetDeplaceEngin",
+       "sites": [
+        "0x00454da2"
+       ]
+      },
+      {
+       "address": "0x0044b5f5",
+       "name": "CalculReparer",
+       "sites": [
+        "0x004565f6"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 16,
+     "target": "0x00455e32",
+     "instructions": 141,
+     "calls": [
+      {
+       "address": "0x004438d8",
+       "name": "EnginRetireType",
+       "sites": [
+        "0x00455fc7"
+       ]
+      },
+      {
+       "address": "0x004457d3",
+       "name": "SetDeplaceEngin",
+       "sites": [
+        "0x00455fd4"
+       ]
+      },
+      {
+       "address": "0x0044930c",
+       "name": "DeplaceEngin",
+       "sites": [
+        "0x004555ac"
+       ]
+      },
+      {
+       "address": "0x00476038",
+       "name": "TerrainGetSacType",
+       "sites": [
+        "0x00455e54"
+       ]
+      },
+      {
+       "address": "0x00476662",
+       "name": "TerrainRetireMatiere",
+       "sites": [
+        "0x00455ed2"
+       ]
+      },
+      {
+       "address": "0x004766b1",
+       "name": "TerrainEstSac",
+       "sites": [
+        "0x00455e63"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 17,
+     "target": "0x00455e32",
+     "instructions": 141,
+     "calls": [
+      {
+       "address": "0x004438d8",
+       "name": "EnginRetireType",
+       "sites": [
+        "0x00455fc7"
+       ]
+      },
+      {
+       "address": "0x004457d3",
+       "name": "SetDeplaceEngin",
+       "sites": [
+        "0x00455fd4"
+       ]
+      },
+      {
+       "address": "0x0044930c",
+       "name": "DeplaceEngin",
+       "sites": [
+        "0x004555ac"
+       ]
+      },
+      {
+       "address": "0x00476038",
+       "name": "TerrainGetSacType",
+       "sites": [
+        "0x00455e54"
+       ]
+      },
+      {
+       "address": "0x00476662",
+       "name": "TerrainRetireMatiere",
+       "sites": [
+        "0x00455ed2"
+       ]
+      },
+      {
+       "address": "0x004766b1",
+       "name": "TerrainEstSac",
+       "sites": [
+        "0x00455e63"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 18,
+     "target": "0x00455d26",
+     "instructions": 86,
+     "calls": [
+      {
+       "address": "0x0041a08c",
+       "name": "BatimentGetPlayer",
+       "sites": [
+        "0x00455d52"
+       ]
+      },
+      {
+       "address": "0x0041a70b",
+       "name": "BatimentEnDestruction",
+       "sites": [
+        "0x00455d40"
+       ]
+      },
+      {
+       "address": "0x00442cb4",
+       "name": "SetEnginCollision",
+       "sites": [
+        "0x00455d8f"
+       ]
+      },
+      {
+       "address": "0x004457d3",
+       "name": "SetDeplaceEngin",
+       "sites": [
+        "0x004550b4"
+       ]
+      },
+      {
+       "address": "0x0044f2d4",
+       "name": "CalculTransporteEngin",
+       "sites": [
+        "0x00455e28"
+       ]
+      },
+      {
+       "address": "0x0046a388",
+       "name": "SetMiniMap",
+       "sites": [
+        "0x004550a4"
+       ]
+      },
+      {
+       "address": "0x00476851",
+       "name": "DecouvreTerrain",
+       "sites": [
+        "0x00455de3"
+       ]
+      },
+      {
+       "address": "0x00476cb3",
+       "name": "IllumineTerrain",
+       "sites": [
+        "0x00455e0b"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 19,
+     "target": "0x004554db",
+     "instructions": 868,
+     "calls": [
+      {
+       "address": "0x0041a08c",
+       "name": "BatimentGetPlayer",
+       "sites": [
+        "0x00454dd0",
+        "0x00454eeb",
+        "0x00454fd9",
+        "0x004550fa",
+        "0x00455215",
+        "0x00455233",
+        "0x00455267",
+        "0x004553f1",
+        "0x00455407",
+        "0x004556a4"
+       ]
+      },
+      {
+       "address": "0x0041a4f4",
+       "name": "BatimentGetType",
+       "sites": [
+        "0x00455688"
+       ]
+      },
+      {
+       "address": "0x0041a70b",
+       "name": "BatimentEnDestruction",
+       "sites": [
+        "0x00454cb0",
+        "0x00454d8a",
+        "0x00454dbe",
+        "0x00454ed9",
+        "0x00454fc7",
+        "0x004550e8",
+        "0x004551ff",
+        "0x00455255",
+        "0x004553cd"
+       ]
+      },
+      {
+       "address": "0x004235bd",
+       "name": "BatimentEnleveMatiere",
+       "sites": [
+        "0x004556d7"
+       ]
+      },
+      {
+       "address": "0x0042381f",
+       "name": "BatimentAdjacent",
+       "sites": [
+        "0x00455584"
+       ]
+      },
+      {
+       "address": "0x00440c5d",
+       "name": "EnginGetVolume",
+       "sites": [
+        "0x00455631",
+        "0x00455723",
+        "0x004557fa",
+        "0x00455879"
+       ]
+      },
+      {
+       "address": "0x00442cb4",
+       "name": "SetEnginCollision",
+       "sites": [
+        "0x00454e0f",
+        "0x00454f26",
+        "0x00455018",
+        "0x00455166"
+       ]
+      },
+      {
+       "address": "0x004457d3",
+       "name": "SetDeplaceEngin",
+       "sites": [
+        "0x00454cc8",
+        "0x00454da2",
+        "0x004550b4",
+        "0x004552c5",
+        "0x004567bb"
+       ]
+      },
+      {
+       "address": "0x0044930c",
+       "name": "DeplaceEngin",
+       "sites": [
+        "0x004555ac"
+       ]
+      },
+      {
+       "address": "0x0045315f",
+       "name": "EnginRestaureEtat",
+       "sites": [
+        "0x0045566a"
+       ]
+      },
+      {
+       "address": "0x004676e5",
+       "name": "TestRessource",
+       "sites": [
+        "0x004556c1"
+       ]
+      },
+      {
+       "address": "0x0046a388",
+       "name": "SetMiniMap",
+       "sites": [
+        "0x00454ea1",
+        "0x004550a4"
+       ]
+      },
+      {
+       "address": "0x0046d817",
+       "name": "PlayerGetType",
+       "sites": [
+        "0x0045529b",
+        "0x0045537b"
+       ]
+      },
+      {
+       "address": "0x004754de",
+       "name": "MineEndWork",
+       "sites": [
+        "0x00455139"
+       ]
+      },
+      {
+       "address": "0x00476038",
+       "name": "TerrainGetSacType",
+       "sites": [
+        "0x004555ce"
+       ]
+      },
+      {
+       "address": "0x00476662",
+       "name": "TerrainRetireMatiere",
+       "sites": [
+        "0x004555e9"
+       ]
+      },
+      {
+       "address": "0x004766f0",
+       "name": "TerrainEstDecouvert",
+       "sites": [
+        "0x00455626",
+        "0x00455714",
+        "0x004557eb",
+        "0x0045586a"
+       ]
+      },
+      {
+       "address": "0x00476851",
+       "name": "DecouvreTerrain",
+       "sites": [
+        "0x00454e64",
+        "0x00454f73",
+        "0x0045506d",
+        "0x004551bc"
+       ]
+      },
+      {
+       "address": "0x00476cb3",
+       "name": "IllumineTerrain",
+       "sites": [
+        "0x00454e8c",
+        "0x00454f95",
+        "0x0045508f",
+        "0x004551de"
+       ]
+      },
+      {
+       "address": "0x00477b74",
+       "name": "ChercheVegetLibre",
+       "sites": [
+        "0x00455756"
+       ]
+      },
+      {
+       "address": "0x004829c8",
+       "name": "iagUnitSendMessage",
+       "sites": [
+        "0x004552b3"
+       ]
+      },
+      {
+       "address": "0x0048aa79",
+       "name": "PlaySnd_PostSound",
+       "sites": [
+        "0x00455660",
+        "0x0045582d"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 20,
+     "target": "0x00455b28",
+     "instructions": 158,
+     "calls": [
+      {
+       "address": "0x0041a08c",
+       "name": "BatimentGetPlayer",
+       "sites": [
+        "0x00455b43",
+        "0x00455c43"
+       ]
+      },
+      {
+       "address": "0x0041a70b",
+       "name": "BatimentEnDestruction",
+       "sites": [
+        "0x00455b31",
+        "0x00455c31"
+       ]
+      },
+      {
+       "address": "0x00442cb4",
+       "name": "SetEnginCollision",
+       "sites": [
+        "0x00455b82",
+        "0x00455c82"
+       ]
+      },
+      {
+       "address": "0x004457d3",
+       "name": "SetDeplaceEngin",
+       "sites": [
+        "0x004550b4"
+       ]
+      },
+      {
+       "address": "0x0044e35c",
+       "name": "CalculDechargeCaveEngin",
+       "sites": [
+        "0x00455d1c"
+       ]
+      },
+      {
+       "address": "0x0046a388",
+       "name": "SetMiniMap",
+       "sites": [
+        "0x00454ea1"
+       ]
+      },
+      {
+       "address": "0x00476851",
+       "name": "DecouvreTerrain",
+       "sites": [
+        "0x00455bd7",
+        "0x00455cd7"
+       ]
+      },
+      {
+       "address": "0x00476cb3",
+       "name": "IllumineTerrain",
+       "sites": [
+        "0x00455bff",
+        "0x00455cff"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 21,
+     "target": "0x004558b4",
+     "instructions": 16,
+     "calls": [
+      {
+       "address": "0x0041a70b",
+       "name": "BatimentEnDestruction",
+       "sites": [
+        "0x004558c8"
+       ]
+      },
+      {
+       "address": "0x004457d3",
+       "name": "SetDeplaceEngin",
+       "sites": [
+        "0x00454cc8"
+       ]
+      },
+      {
+       "address": "0x00449530",
+       "name": "CalculGareBatiment",
+       "sites": [
+        "0x004558da"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 22,
+     "target": "0x00456520",
+     "instructions": 4,
+     "calls": [
+      {
+       "address": "0x0044a706",
+       "name": "CalculPiege",
+       "sites": [
+        "0x00456525"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 23,
+     "target": "0x00455fe2",
+     "instructions": 297,
+     "calls": [
+      {
+       "address": "0x0041a08c",
+       "name": "BatimentGetPlayer",
+       "sites": [
+        "0x00456001",
+        "0x0045601f",
+        "0x004560c0"
+       ]
+      },
+      {
+       "address": "0x0041a70b",
+       "name": "BatimentEnDestruction",
+       "sites": [
+        "0x00455feb"
+       ]
+      },
+      {
+       "address": "0x0041aee2",
+       "name": "BatimentGetCase",
+       "sites": [
+        "0x0045605d"
+       ]
+      },
+      {
+       "address": "0x0042340f",
+       "name": "BatimentAjouteMatiere",
+       "sites": [
+        "0x0045628e"
+       ]
+      },
+      {
+       "address": "0x004235bd",
+       "name": "BatimentEnleveMatiere",
+       "sites": [
+        "0x00456268"
+       ]
+      },
+      {
+       "address": "0x0042381f",
+       "name": "BatimentAdjacent",
+       "sites": [
+        "0x0045603b"
+       ]
+      },
+      {
+       "address": "0x004457d3",
+       "name": "SetDeplaceEngin",
+       "sites": [
+        "0x00454da2"
+       ]
+      },
+      {
+       "address": "0x0044930c",
+       "name": "DeplaceEngin",
+       "sites": [
+        "0x004555ac"
+       ]
+      },
+      {
+       "address": "0x00457058",
+       "name": "RetireEngin",
+       "sites": [
+        "0x00456139",
+        "0x00456354"
+       ]
+      },
+      {
+       "address": "0x00461222",
+       "name": "RechercheTypeBatiment",
+       "sites": [
+        "0x00456228"
+       ]
+      },
+      {
+       "address": "0x0046769d",
+       "name": "GetRessourceStock",
+       "sites": [
+        "0x0045621c"
+       ]
+      },
+      {
+       "address": "0x0046994b",
+       "name": "MessageBoxSet",
+       "sites": [
+        "0x004561cc",
+        "0x004562b5",
+        "0x0045630e"
+       ]
+      },
+      {
+       "address": "0x004704dc",
+       "name": "Random",
+       "sites": [
+        "0x004560ff"
+       ]
+      },
+      {
+       "address": "0x0047149d",
+       "name": "RechercheEndTechnologie",
+       "sites": [
+        "0x0045631b"
+       ]
+      },
+      {
+       "address": "0x004717b1",
+       "name": "RechercheGetBranche",
+       "sites": [
+        "0x004562d8"
+       ]
+      },
+      {
+       "address": "0x004717c2",
+       "name": "RechercheGetNiveau",
+       "sites": [
+        "0x004562e3",
+        "0x004562ee"
+       ]
+      },
+      {
+       "address": "0x00475118",
+       "name": "MAJSympathie",
+       "sites": [
+        "0x00456200",
+        "0x004562cb"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    },
+    {
+     "state": 24,
+     "target": "0x00456886",
+     "instructions": 106,
+     "calls": [
+      {
+       "address": "0x0041a08c",
+       "name": "BatimentGetPlayer",
+       "sites": [
+        "0x0045675d"
+       ]
+      },
+      {
+       "address": "0x0041a70b",
+       "name": "BatimentEnDestruction",
+       "sites": [
+        "0x0045674b"
+       ]
+      },
+      {
+       "address": "0x004457d3",
+       "name": "SetDeplaceEngin",
+       "sites": [
+        "0x004567bb"
+       ]
+      },
+      {
+       "address": "0x00451914",
+       "name": "CalculAttaqueEngin",
+       "sites": [
+        "0x004568a3"
+       ]
+      },
+      {
+       "address": "0x0046d817",
+       "name": "PlayerGetType",
+       "sites": [
+        "0x00456791",
+        "0x0045686e"
+       ]
+      },
+      {
+       "address": "0x004829c8",
+       "name": "iagUnitSendMessage",
+       "sites": [
+        "0x004567a9"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x00454ccd"
+     ],
+     "returns": []
+    }
+   ]
+  },
+  "batiment_next_etape": {
+   "loop": {
+    "entry": "0x004281c7",
+    "instructions": 169,
+    "calls": [
+     {
+      "address": "0x00419233",
+      "name": "BatimentIllumine",
+      "sites": [
+       "0x00428363",
+       "0x004283c7"
+      ]
+     },
+     {
+      "address": "0x004199f9",
+      "name": "BatimentContourEstIllumine",
+      "sites": [
+       "0x004283ac"
+      ]
+     },
+     {
+      "address": "0x00419c4f",
+      "name": "BatimentEstDecouvert",
+      "sites": [
+       "0x00428338"
+      ]
+     },
+     {
+      "address": "0x00419d54",
+      "name": "BatimentDecouvre",
+      "sites": [
+       "0x00428345"
+      ]
+     },
+     {
+      "address": "0x0041aee2",
+      "name": "BatimentGetCase",
+      "sites": [
+       "0x004282e1"
+      ]
+     },
+     {
+      "address": "0x0041effd",
+      "name": "DemonteBatiment",
+      "sites": [
+       "0x004282bb"
+      ]
+     },
+     {
+      "address": "0x004268d4",
+      "name": "BatimentNextEtape",
+      "sites": [
+       "0x004282da"
+      ]
+     },
+     {
+      "address": "0x00461e33",
+      "name": "ResetTableauHangar",
+      "sites": [
+       "0x004281d0"
+      ]
+     },
+     {
+      "address": "0x004766d6",
+      "name": "CaseEstDecouverte",
+      "sites": [
+       "0x0042832b"
+      ]
+     },
+     {
+      "address": "0x0047fbfd",
+      "name": "IATestUtilite",
+      "sites": [
+       "0x004282d3"
+      ]
+     }
+    ],
+    "imports": {},
+    "indirect_calls": [],
+    "tail_calls": {},
+    "stops_reached": [],
+    "returns": [
+     "0x0041db23"
+    ]
+   },
+   "type_table": "0x00426880",
+   "exit": "0x004281c0",
+   "types": [
+    {
+     "type": 1,
+     "target": "0x00426918",
+     "instructions": 39,
+     "calls": [
+      {
+       "address": "0x004259e6",
+       "name": "CalculTroupe",
+       "sites": [
+        "0x00426983"
+       ]
+      },
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x0042696a"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x00426942",
+        "0x00426954"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 2,
+     "target": "0x00426918",
+     "instructions": 39,
+     "calls": [
+      {
+       "address": "0x004259e6",
+       "name": "CalculTroupe",
+       "sites": [
+        "0x00426983"
+       ]
+      },
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x0042696a"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x00426942",
+        "0x00426954"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 3,
+     "target": "0x00426aff",
+     "instructions": 88,
+     "calls": [
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x00426b8d"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x00426b43",
+        "0x00426b77"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 4,
+     "target": "0x00426c10",
+     "instructions": 99,
+     "calls": [
+      {
+       "address": "0x0041f76e",
+       "name": "BatimentLogeEngin",
+       "sites": [
+        "0x00426d3d"
+       ]
+      },
+      {
+       "address": "0x00428cc0",
+       "name": "BonusGetValEngin",
+       "sites": [
+        "0x00426cce"
+       ]
+      },
+      {
+       "address": "0x0044115f",
+       "name": "EnginSetEtat",
+       "sites": [
+        "0x00426d4b"
+       ]
+      },
+      {
+       "address": "0x004470d2",
+       "name": "BagAccepte",
+       "sites": [
+        "0x00426d04"
+       ]
+      },
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x00426cab"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x00426c60",
+        "0x00426c95"
+       ]
+      },
+      {
+       "address": "0x00457e0c",
+       "name": "EnginNewPossible",
+       "sites": [
+        "0x00426cef"
+       ]
+      },
+      {
+       "address": "0x00457e6c",
+       "name": "CreerEngin",
+       "sites": [
+        "0x00426d2e"
+       ]
+      },
+      {
+       "address": "0x004829c8",
+       "name": "iagUnitSendMessage",
+       "sites": [
+        "0x00426d57"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 5,
+     "target": "0x0042698d",
+     "instructions": 42,
+     "calls": [
+      {
+       "address": "0x00420d3a",
+       "name": "AnimPorteBatiment",
+       "sites": [
+        "0x004269fe"
+       ]
+      },
+      {
+       "address": "0x004259e6",
+       "name": "CalculTroupe",
+       "sites": [
+        "0x004269f4"
+       ]
+      },
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x004269df"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x004269b7",
+        "0x004269c9"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 6,
+     "target": "0x00428095",
+     "instructions": 90,
+     "calls": [
+      {
+       "address": "0x004259e6",
+       "name": "CalculTroupe",
+       "sites": [
+        "0x00428145"
+       ]
+      },
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x0042812c"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x004280df",
+        "0x00428116"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 7,
+     "target": "0x00426d61",
+     "instructions": 72,
+     "calls": [
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x00426deb",
+        "0x00426e27"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x00426da3",
+        "0x00426dd5"
+       ]
+      },
+      {
+       "address": "0x00470bf7",
+       "name": "RechercheAddScientifique",
+       "sites": [
+        "0x00426e39"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 8,
+     "target": "0x00426a08",
+     "instructions": 81,
+     "calls": [
+      {
+       "address": "0x00420d3a",
+       "name": "AnimPorteBatiment",
+       "sites": [
+        "0x00426ac0"
+       ]
+      },
+      {
+       "address": "0x00424de4",
+       "name": "ControleArrivageHangar",
+       "sites": [
+        "0x00426acd"
+       ]
+      },
+      {
+       "address": "0x004259e6",
+       "name": "CalculTroupe",
+       "sites": [
+        "0x00426ab9"
+       ]
+      },
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x00426a9e"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x00426a54",
+        "0x00426a88"
+       ]
+      },
+      {
+       "address": "0x00461e6e",
+       "name": "SetTableauHangar",
+       "sites": [
+        "0x00426af5"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 9,
+     "target": "0x004281c0",
+     "instructions": 0,
+     "calls": [],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 10,
+     "target": "0x00426e43",
+     "instructions": 532,
+     "calls": [
+      {
+       "address": "0x00419d54",
+       "name": "BatimentDecouvre",
+       "sites": [
+        "0x0042724a",
+        "0x0042733f"
+       ]
+      },
+      {
+       "address": "0x0041a0ab",
+       "name": "BatimentGetVolume",
+       "sites": [
+        "0x00427276",
+        "0x0042736b"
+       ]
+      },
+      {
+       "address": "0x0041aee2",
+       "name": "BatimentGetCase",
+       "sites": [
+        "0x004272fa"
+       ]
+      },
+      {
+       "address": "0x00423fb9",
+       "name": "TourelleTrouveEngin",
+       "sites": [
+        "0x00426f42"
+       ]
+      },
+      {
+       "address": "0x00424123",
+       "name": "TourelleTrouveBatiment",
+       "sites": [
+        "0x00426f67"
+       ]
+      },
+      {
+       "address": "0x00424624",
+       "name": "CibleTourelleValide",
+       "sites": [
+        "0x00426ef0"
+       ]
+      },
+      {
+       "address": "0x00425100",
+       "name": "RechercheDecalageProjectile",
+       "sites": [
+        "0x00427231",
+        "0x00427311"
+       ]
+      },
+      {
+       "address": "0x00440df0",
+       "name": "EnginGetStart",
+       "sites": [
+        "0x00426fc5",
+        "0x00426fea"
+       ]
+      },
+      {
+       "address": "0x0044113e",
+       "name": "EnginGetCase",
+       "sites": [
+        "0x0042721a"
+       ]
+      },
+      {
+       "address": "0x00442045",
+       "name": "EnginGetPlayer",
+       "sites": [
+        "0x00427241"
+       ]
+      },
+      {
+       "address": "0x00443dad",
+       "name": "EnginEstVivant",
+       "sites": [
+        "0x004273f3"
+       ]
+      },
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x00426ed5"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x00426e8b",
+        "0x00426ebf"
+       ]
+      },
+      {
+       "address": "0x004704dc",
+       "name": "Random",
+       "sites": [
+        "0x0042747a",
+        "0x00427498"
+       ]
+      },
+      {
+       "address": "0x004796cb",
+       "name": "AngleCalcul",
+       "sites": [
+        "0x0042719a"
+       ]
+      },
+      {
+       "address": "0x0048aa79",
+       "name": "PlaySnd_PostSound",
+       "sites": [
+        "0x004272a3"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 11,
+     "target": "0x00427549",
+     "instructions": 482,
+     "calls": [
+      {
+       "address": "0x00419d54",
+       "name": "BatimentDecouvre",
+       "sites": [
+        "0x00427945",
+        "0x00427a3a"
+       ]
+      },
+      {
+       "address": "0x0041a0ab",
+       "name": "BatimentGetVolume",
+       "sites": [
+        "0x00427971"
+       ]
+      },
+      {
+       "address": "0x0041aee2",
+       "name": "BatimentGetCase",
+       "sites": [
+        "0x004279f5"
+       ]
+      },
+      {
+       "address": "0x00423fb9",
+       "name": "TourelleTrouveEngin",
+       "sites": [
+        "0x0042764a"
+       ]
+      },
+      {
+       "address": "0x00424123",
+       "name": "TourelleTrouveBatiment",
+       "sites": [
+        "0x0042766f"
+       ]
+      },
+      {
+       "address": "0x00424624",
+       "name": "CibleTourelleValide",
+       "sites": [
+        "0x004275f8"
+       ]
+      },
+      {
+       "address": "0x00425100",
+       "name": "RechercheDecalageProjectile",
+       "sites": [
+        "0x0042792c",
+        "0x00427a0c"
+       ]
+      },
+      {
+       "address": "0x00440df0",
+       "name": "EnginGetStart",
+       "sites": [
+        "0x004276cd",
+        "0x004276f2"
+       ]
+      },
+      {
+       "address": "0x0044113e",
+       "name": "EnginGetCase",
+       "sites": [
+        "0x00427915"
+       ]
+      },
+      {
+       "address": "0x00442045",
+       "name": "EnginGetPlayer",
+       "sites": [
+        "0x0042793c"
+       ]
+      },
+      {
+       "address": "0x00443dad",
+       "name": "EnginEstVivant",
+       "sites": [
+        "0x00427a97"
+       ]
+      },
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x004275dd"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x00427593",
+        "0x004275c7"
+       ]
+      },
+      {
+       "address": "0x004704dc",
+       "name": "Random",
+       "sites": [
+        "0x00427aef",
+        "0x00427b0d"
+       ]
+      },
+      {
+       "address": "0x004796cb",
+       "name": "AngleCalcul",
+       "sites": [
+        "0x00427893"
+       ]
+      },
+      {
+       "address": "0x0048aa79",
+       "name": "PlaySnd_PostSound",
+       "sites": [
+        "0x0042799e"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 12,
+     "target": "0x00427bb7",
+     "instructions": 132,
+     "calls": [
+      {
+       "address": "0x004193d4",
+       "name": "BaisseTouteHerse",
+       "sites": [
+        "0x00427ca2"
+       ]
+      },
+      {
+       "address": "0x004195ca",
+       "name": "RemonteTouteHerse",
+       "sites": [
+        "0x00427c90"
+       ]
+      },
+      {
+       "address": "0x00426799",
+       "name": "HerseSousCurseur",
+       "sites": [
+        "0x00427be0"
+       ]
+      },
+      {
+       "address": "0x0043e138",
+       "name": "Chemin_ModifieZone",
+       "sites": [
+        "0x00427d29"
+       ]
+      },
+      {
+       "address": "0x0047622e",
+       "name": "SetCollision",
+       "sites": [
+        "0x00427d56"
+       ]
+      },
+      {
+       "address": "0x0047623e",
+       "name": "ResetCollision",
+       "sites": [
+        "0x00427d17"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 13,
+     "target": "0x00426918",
+     "instructions": 39,
+     "calls": [
+      {
+       "address": "0x004259e6",
+       "name": "CalculTroupe",
+       "sites": [
+        "0x00426983"
+       ]
+      },
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x0042696a"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x00426942",
+        "0x00426954"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 14,
+     "target": "0x0042698d",
+     "instructions": 42,
+     "calls": [
+      {
+       "address": "0x00420d3a",
+       "name": "AnimPorteBatiment",
+       "sites": [
+        "0x004269fe"
+       ]
+      },
+      {
+       "address": "0x004259e6",
+       "name": "CalculTroupe",
+       "sites": [
+        "0x004269f4"
+       ]
+      },
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x004269df"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x004269b7",
+        "0x004269c9"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 15,
+     "target": "0x00427d5d",
+     "instructions": 29,
+     "calls": [
+      {
+       "address": "0x004259e6",
+       "name": "CalculTroupe",
+       "sites": [
+        "0x00426983"
+       ]
+      },
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x00427d9a"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x00427d6b",
+        "0x00427d84"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 16,
+     "target": "0x00426918",
+     "instructions": 39,
+     "calls": [
+      {
+       "address": "0x004259e6",
+       "name": "CalculTroupe",
+       "sites": [
+        "0x00426983"
+       ]
+      },
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x0042696a"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x00426942",
+        "0x00426954"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 17,
+     "target": "0x00427ed9",
+     "instructions": 4,
+     "calls": [
+      {
+       "address": "0x004249de",
+       "name": "CristalCherchePretre",
+       "sites": [
+        "0x00427edb"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 18,
+     "target": "0x00427eec",
+     "instructions": 98,
+     "calls": [
+      {
+       "address": "0x0042195c",
+       "name": "CalculReparation",
+       "sites": [
+        "0x00427f47"
+       ]
+      },
+      {
+       "address": "0x004259e6",
+       "name": "CalculTroupe",
+       "sites": [
+        "0x00427f53"
+       ]
+      },
+      {
+       "address": "0x00447148",
+       "name": "BagInit",
+       "sites": [
+        "0x00427fbf",
+        "0x00428026"
+       ]
+      },
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x00427f22",
+        "0x00427fa5"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x00427efa",
+        "0x00427f0c"
+       ]
+      },
+      {
+       "address": "0x004472ea",
+       "name": "BagRetire",
+       "sites": [
+        "0x00428032"
+       ]
+      },
+      {
+       "address": "0x00447483",
+       "name": "BagPrend",
+       "sites": [
+        "0x00427fcb"
+       ]
+      },
+      {
+       "address": "0x00456d92",
+       "name": "TypeEnginGetNb",
+       "sites": [
+        "0x00427f6a",
+        "0x00427fe7"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 19,
+     "target": "0x0042803c",
+     "instructions": 29,
+     "calls": [
+      {
+       "address": "0x00424c2e",
+       "name": "BatimentSoignePerso",
+       "sites": [
+        "0x0042808b"
+       ]
+      },
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x00428072"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x0042804a",
+        "0x0042805c"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 20,
+     "target": "0x00427da4",
+     "instructions": 87,
+     "calls": [
+      {
+       "address": "0x004259e6",
+       "name": "CalculTroupe",
+       "sites": [
+        "0x00427e1f"
+       ]
+      },
+      {
+       "address": "0x00426418",
+       "name": "InitNova",
+       "sites": [
+        "0x00427e18"
+       ]
+      },
+      {
+       "address": "0x00447148",
+       "name": "BagInit",
+       "sites": [
+        "0x00427eb1"
+       ]
+      },
+      {
+       "address": "0x004471b8",
+       "name": "BagContient",
+       "sites": [
+        "0x00427dda"
+       ]
+      },
+      {
+       "address": "0x0044724a",
+       "name": "BagContientTroupe",
+       "sites": [
+        "0x00427db2",
+        "0x00427dc4"
+       ]
+      },
+      {
+       "address": "0x00447483",
+       "name": "BagPrend",
+       "sites": [
+        "0x00427ebd",
+        "0x00427ecb"
+       ]
+      }
+     ],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    },
+    {
+     "type": 21,
+     "target": "0x004281c0",
+     "instructions": 0,
+     "calls": [],
+     "imports": {},
+     "indirect_calls": [],
+     "tail_calls": {},
+     "stops_reached": [
+      "0x004281c0"
+     ],
+     "returns": []
+    }
+   ]
+  },
+  "ia_calcul_player": {
+   "entry": "0x0047f927",
+   "instructions": 94,
+   "calls": [
+    {
+     "address": "0x0047b283",
+     "name": "AvanceMonstre",
+     "sites": [
+      "0x0047f939"
+     ]
+    },
+    {
+     "address": "0x0047d314",
+     "name": "iaSolver",
+     "sites": [
+      "0x0047f945",
+      "0x0047fa12"
+     ]
+    },
+    {
+     "address": "0x00482936",
+     "name": "iagUnitNoyau",
+     "sites": [
+      "0x0047f9df"
+     ]
+    },
+    {
+     "address": "0x00483d95",
+     "name": "iagUnitDeleteAllGroups",
+     "sites": [
+      "0x0047f9ad"
+     ]
+    },
+    {
+     "address": "0x0048453c",
+     "name": "iagVilleNoyau",
+     "sites": [
+      "0x0047f9ea"
+     ]
+    },
+    {
+     "address": "0x00485183",
+     "name": "iagRessNoyau",
+     "sites": [
+      "0x0047f9f5"
+     ]
+    },
+    {
+     "address": "0x004866d7",
+     "name": "iagWarNoyau",
+     "sites": [
+      "0x0047fa02"
+     ]
+    }
+   ],
+   "imports": {},
+   "indirect_calls": [],
+   "tail_calls": {},
+   "stops_reached": [],
+   "returns": [
+    "0x0047f96b",
+    "0x0047f97b",
+    "0x0047fa2e"
+   ]
+  }
+ },
+ "messages": {
+  "iagUnitSendMessage": {
+   "entry": "0x004829c8",
+   "end_exclusive": "0x00482ebc",
+   "message_table": "0x00482998",
+   "first_message": "0x41",
+   "branches": [
+    {
+     "message": "0x41",
+     "target": "0x00482a51",
+     "calls": [
+      "iagUnitRemoveFromGroup"
+     ],
+     "indirect_calls": []
+    },
+    {
+     "message": "0x42",
+     "target": "0x00482ae5",
+     "calls": [
+      "iagUnitRemoveFromGroup",
+      "iagUnitDispatch"
+     ],
+     "indirect_calls": []
+    },
+    {
+     "message": "0x43",
+     "target": "0x00482b60",
+     "calls": [
+      "EnginGetPlayer",
+      "iaProbPost"
+     ],
+     "indirect_calls": []
+    },
+    {
+     "message": "0x44",
+     "target": "0x00482c50",
+     "calls": [
+      "iaProbReturnTo",
+      "iagUnitRemoveFromGroup",
+      "iagWarUnlockTargetAfterDeath",
+      "iagWarProbReturnTo"
+     ],
+     "indirect_calls": []
+    },
+    {
+     "message": "0x45",
+     "target": "0x00482cbb",
+     "calls": [
+      "EnginGetType",
+      "EnginGetPlayer",
+      "iaProbPost",
+      "iagUnitDispatch"
+     ],
+     "indirect_calls": []
+    },
+    {
+     "message": "0x46",
+     "target": "0x00482d31",
+     "calls": [
+      "EnginGetType",
+      "EnginGetPlayer",
+      "iaProbPost",
+      "iagUnitRemoveFromGroup",
+      "iagUnitDispatch"
+     ],
+     "indirect_calls": []
+    },
+    {
+     "message": "0x47",
+     "target": "0x00482eb5",
+     "calls": [],
+     "indirect_calls": []
+    },
+    {
+     "message": "0x48",
+     "target": "0x00482d77",
+     "calls": [],
+     "indirect_calls": [
+      "0x00482dae"
+     ]
+    },
+    {
+     "message": "0x49",
+     "target": "0x00482df6",
+     "calls": [],
+     "indirect_calls": [
+      "0x00482e2e"
+     ]
+    },
+    {
+     "message": "0x4a",
+     "target": "0x00482e36",
+     "calls": [
+      "iagWarProbReturnTo"
+     ],
+     "indirect_calls": [
+      "0x00482e62"
+     ]
+    },
+    {
+     "message": "0x4b",
+     "target": "0x00482e7e",
+     "calls": [
+      "EnginSetFatigue"
+     ],
+     "indirect_calls": [
+      "0x00482ea6"
+     ]
+    },
+    {
+     "message": "0x4c",
+     "target": "0x00482db6",
+     "calls": [],
+     "indirect_calls": [
+      "0x00482dee"
+     ]
+    }
+   ],
+   "callers": [
+    {
+     "site": "0x0041d9b7",
+     "routine": "BatimentEnleveUnColon",
+     "message": "0x42"
+    },
+    {
+     "site": "0x0041da48",
+     "routine": "BatimentEnleveUnColon",
+     "message": "0x42"
+    },
+    {
+     "site": "0x004211d3",
+     "routine": "SortieTroupe",
+     "message": "0x46"
+    },
+    {
+     "site": "0x004215f4",
+     "routine": "EnleveTroupeHangar",
+     "message": "0x45"
+    },
+    {
+     "site": "0x004217a3",
+     "routine": "SortTroupeHangar",
+     "message": "0x45"
+    },
+    {
+     "site": "0x00422b2e",
+     "routine": "CalculTrajectoire",
+     "message": "0x45"
+    },
+    {
+     "site": "0x00426d57",
+     "routine": "BatimentNextEtape",
+     "message": "0x43"
+    },
+    {
+     "site": "0x00441c26",
+     "routine": "BallonPrepareArrivee",
+     "message": "0x45"
+    },
+    {
+     "site": "0x00441e31",
+     "routine": "BallonPrepareSortie",
+     "message": "0x44"
+    },
+    {
+     "site": "0x00444355",
+     "routine": "EnginRetire",
+     "message": "0x42"
+    },
+    {
+     "site": "0x004449b8",
+     "routine": "SetDyingEngin",
+     "message": "0x44"
+    },
+    {
+     "site": "0x004499ee",
+     "routine": "CalculEntreBatiment",
+     "message": "computed"
+    },
+    {
+     "site": "0x00449af8",
+     "routine": "CalculEntreBatiment",
+     "message": "computed"
+    },
+    {
+     "site": "0x00449bb8",
+     "routine": "CalculEntreBatiment",
+     "message": "0x47"
+    },
+    {
+     "site": "0x004503ae",
+     "routine": "EnginInfligeDegat",
+     "message": "computed"
+    },
+    {
+     "site": "0x00450452",
+     "routine": "EnginInfligeDegat",
+     "message": "0x48"
+    },
+    {
+     "site": "0x004547bf",
+     "routine": "EnginNextEtape",
+     "message": "0x49"
+    },
+    {
+     "site": "0x00454986",
+     "routine": "EnginNextEtape",
+     "message": "0x4b"
+    },
+    {
+     "site": "0x004552b3",
+     "routine": "EnginNextEtape",
+     "message": "0x4a"
+    },
+    {
+     "site": "0x004567a9",
+     "routine": "EnginNextEtape",
+     "message": "0x4a"
+    },
+    {
+     "site": "0x00484109",
+     "routine": "iagMessTestSendMessageEngin",
+     "message": "computed"
+    },
+    {
+     "site": "0x0048419d",
+     "routine": "iagMessTestSendMessageEngin",
+     "message": "computed"
+    }
+   ],
+   "globals": [
+    "0x004989f9/1/r",
+    "0x00498e94/4/r",
+    "0x004e19a0/4/r",
+    "0x0051a9e4/4/r",
+    "0x0051a9fa/1/r",
+    "0x0051b664/4/r",
+    "0x0051b68c/4/r",
+    "0x0051b690/4/r",
+    "0x0051b6b4/4/r"
+   ]
+  },
+  "iagVilleSendMessage": {
+   "entry": "0x00484808",
+   "end_exclusive": "0x0048491f",
+   "message_table": "0x004847f8",
+   "first_message": "0x01",
+   "branches": [
+    {
+     "message": "0x01",
+     "target": "0x00484879",
+     "calls": [
+      "BatimentGetType",
+      "0x0048499d",
+      "iagRessAddToCaveList"
+     ],
+     "indirect_calls": []
+    },
+    {
+     "message": "0x02",
+     "target": "0x004848a5",
+     "calls": [
+      "BatimentGetType",
+      "0x0048499d",
+      "iagRessRemoveFromCaveList"
+     ],
+     "indirect_calls": []
+    },
+    {
+     "message": "0x03",
+     "target": "0x00484894",
+     "calls": [
+      "0x0048499d"
+     ],
+     "indirect_calls": []
+    },
+    {
+     "message": "0x04",
+     "target": "0x004848d6",
+     "calls": [
+      "EnginGetCase",
+      "iaProbPost",
+      "iagWarSearchBattleFromPos",
+      "iagWarAddEnnemyToBattle"
+     ],
+     "indirect_calls": []
+    }
+   ],
+   "callers": [
+    {
+     "site": "0x0041a411",
+     "routine": "BatimentInfligeDegat",
+     "message": "0x02"
+    },
+    {
+     "site": "0x0041ee15",
+     "routine": "VendreBatiment",
+     "message": "0x02"
+    },
+    {
+     "site": "0x0041ef68",
+     "routine": "DetruireBatiment",
+     "message": "0x02"
+    },
+    {
+     "site": "0x004211e5",
+     "routine": "SortieTroupe",
+     "message": "0x03"
+    },
+    {
+     "site": "0x00422b3d",
+     "routine": "CalculTrajectoire",
+     "message": "0x03"
+    },
+    {
+     "site": "0x0045091b",
+     "routine": "InfligeDegat",
+     "message": "0x04"
+    },
+    {
+     "site": "0x00484127",
+     "routine": "iagMessTestSendMessageEngin",
+     "message": "computed"
+    },
+    {
+     "site": "0x004841bd",
+     "routine": "iagMessTestSendMessageEngin",
+     "message": "computed"
+    }
+   ],
+   "globals": []
+  },
+  "behaviors": {
+   "table": "0x00498e94",
+   "selector": "group byte +0x1b (written by V_AffecteComportement 0x4897a5)",
+   "slot_messages": [
+    "0x48",
+    "0x4a",
+    "0x49",
+    "0x4c",
+    "0x4b"
+   ],
+   "records": [
+    {
+     "index": 0,
+     "record": "0x00521368",
+     "handlers": "record outside initialized data; resolved at run time only"
+    },
+    {
+     "index": 1,
+     "record": "0x00498e44",
+     "handlers": {
+      "0x48": "iabTouche_AjouteEnnemiOuNeChangePasDeCibleOuAlerteConflit",
+      "0x4a": "iabPlusCible_ChangeDeCibleOuObjectifRealise",
+      "0x49": "iabDetection_AjouteEnnemiSaufCivilOuAlerteConflit",
+      "0x4c": "iabToucheParBatiment_Ajoute",
+      "0x4b": "iabFaim_TricheFaim"
+     }
+    },
+    {
+     "index": 2,
+     "record": "0x00498dcc",
+     "handlers": {
+      "0x48": "iabTouche_AjouteEnnemiOuNeChangePasDeCibleOuAlerteConflit",
+      "0x4a": "iabPlusCible_ChangeDeCibleOuObjectifRealise",
+      "0x49": "iabDetection_AjouteEnnemiOuAlerteConflit",
+      "0x4c": "iabToucheParBatiment_Ajoute",
+      "0x4b": "iabFaim_TricheFaim"
+     }
+    },
+    {
+     "index": 3,
+     "record": "0x00498de0",
+     "handlers": {
+      "0x48": "iabTouche_AjouteEnnemiOuNeChangePasDeCibleOuAlerteConflit",
+      "0x4a": "iabPlusCible_ChangeDeCibleOuObjectifRealise",
+      "0x49": "iabDetection_AjouteEnnemiSaufCivilOuAlerteConflit",
+      "0x4c": "iabToucheParBatiment_Ajoute",
+      "0x4b": "iabFaim_TricheFaim"
+     }
+    },
+    {
+     "index": 4,
+     "record": "0x00498df4",
+     "handlers": {
+      "0x48": "iabAlerteConflitVilleOuUnite",
+      "0x4a": "iabPlusCible_Unlock",
+      "0x49": "iabAlerteConflitVilleOuUnite",
+      "0x4c": null,
+      "0x4b": "iabFaim_VaTeNourrir"
+     }
+    },
+    {
+     "index": 5,
+     "record": "0x00498e08",
+     "handlers": {
+      "0x48": "iabAlerteConflitMinageOuVille",
+      "0x4a": null,
+      "0x49": "iabAlerteConflitMinageOuVille",
+      "0x4c": null,
+      "0x4b": "iabFaim_VaTeNourrir"
+     }
+    },
+    {
+     "index": 6,
+     "record": "0x00498e1c",
+     "handlers": {
+      "0x48": "iabAlerteConflitChampOuVille",
+      "0x4a": null,
+      "0x49": "iabAlerteConflitChampOuVille",
+      "0x4c": null,
+      "0x4b": "iabFaim_VaTeNourrir"
+     }
+    },
+    {
+     "index": 7,
+     "record": "0x00498e30",
+     "handlers": {
+      "0x48": "iabAlerteConflitVilleOuUnite",
+      "0x4a": null,
+      "0x49": "iabAlerteConflitVilleOuUnite",
+      "0x4c": null,
+      "0x4b": "iabFaim_VaTeNourrir"
+     }
+    },
+    {
+     "index": 8,
+     "record": "0x00498e44",
+     "handlers": {
+      "0x48": "iabTouche_AjouteEnnemiOuNeChangePasDeCibleOuAlerteConflit",
+      "0x4a": "iabPlusCible_ChangeDeCibleOuObjectifRealise",
+      "0x49": "iabDetection_AjouteEnnemiSaufCivilOuAlerteConflit",
+      "0x4c": "iabToucheParBatiment_Ajoute",
+      "0x4b": "iabFaim_TricheFaim"
+     }
+    },
+    {
+     "index": 9,
+     "record": "0x00498e58",
+     "handlers": {
+      "0x48": "iabTouche_AjouteEnnemiOuNeChangePasDeCibleOuAlerteConflit",
+      "0x4a": "iabPlusCible_ChangeDeCibleOuObjectifRealise",
+      "0x49": "iabDetection_AjouteEnnemiOuAlerteConflit",
+      "0x4c": null,
+      "0x4b": "iabFaim_TricheFaim"
+     }
+    },
+    {
+     "index": 10,
+     "record": "0x00498e6c",
+     "handlers": {
+      "0x48": "iabTouche_AjouteEnnemiOuNeChangePasDeCibleOuAlerteConflit",
+      "0x4a": "iabPlusCible_ChangeDeCibleOuObjectifRealise",
+      "0x49": "iabDetection_AjouteEnnemiOuAlerteConflit",
+      "0x4c": "iabToucheParBatiment_Ajoute",
+      "0x4b": "iabFaim_TricheFaim"
+     }
+    },
+    {
+     "index": 11,
+     "record": "0x00498e80",
+     "handlers": {
+      "0x48": "iabTouche_AjouteEnnemiOuNeChangePasDeCibleOuAlerteConflit",
+      "0x4a": "iabPlusCible_ChangeDeCibleOuObjectifRealise",
+      "0x49": "iabDetection_AjouteEnnemiSaufCivilOuAlerteConflit",
+      "0x4c": "iabToucheParBatiment_Ajoute",
+      "0x4b": "iabFaim_TricheFaim"
+     }
+    }
+   ]
+  }
+ },
+ "ai_tables": {
+  "IaAlloc": {
+   "entry": "0x0047fb15",
+   "calls": [
+    "iaProbInit",
+    "iagUnitInit",
+    "iagVilleInit",
+    "iagRessInit",
+    "iagWarInit",
+    "iaRandom",
+    "debugSymLoad"
+   ],
+   "globals": []
+  },
+  "iaInit": {
+   "entry": "0x0047f328",
+   "calls": [
+    "iaProbInit",
+    "iagUnitInit",
+    "iagVilleInit",
+    "iagRessInit",
+    "iagWarInit",
+    "iaRandom",
+    "debugSymLoad",
+    "debugSymUnload"
+   ],
+   "globals": []
+  },
+  "IaReset": {
+   "entry": "0x0047f36e",
+   "calls": [
+    "EnginEstVivant",
+    "MissionGetNum",
+    "PlayerGetType",
+    "RechercheSetBranche",
+    "RechercheGetNiveau",
+    "InitMissionMonstre",
+    "iaProbReset",
+    "iafRessourceReset",
+    "iagUnitReset",
+    "iagVilleReset",
+    "iagVilleSetMode",
+    "iagRessReset",
+    "iagRessSetMode",
+    "iagWarReset",
+    "iagWarSetMode",
+    "iaRandom"
+   ],
+   "globals": [
+    {
+     "address": "0x00498464",
+     "width": 1,
+     "access": "r",
+     "base": "ebx",
+     "index": null
+    },
+    {
+     "address": "0x004e19a0",
+     "width": 4,
+     "access": "r",
+     "base": null,
+     "index": null
+    }
+   ]
+  },
+  "listInit": {
+   "entry": "0x0047cfd0",
+   "calls": [],
+   "globals": []
+  },
+  "iaProbInit": {
+   "entry": "0x0047d1a4",
+   "calls": [
+    "iaProbLoadBinaryRules"
+   ],
+   "globals": []
+  },
+  "iaProbReset": {
+   "entry": "0x0047d220",
+   "calls": [
+    "listInit"
+   ],
+   "globals": []
+  },
+  "iagUnitInit": {
+   "entry": "0x004826a4",
+   "calls": [],
+   "globals": []
+  },
+  "iagUnitReset": {
+   "entry": "0x0048270b",
+   "calls": [
+    "EnginEstVivant",
+    "PlayerGetType",
+    "iaGroupNew"
+   ],
+   "globals": [
+    {
+     "address": "0x004e19a0",
+     "width": 4,
+     "access": "r",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0051a9c0",
+     "width": 4,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9c4",
+     "width": 4,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9c8",
+     "width": 4,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9cc",
+     "width": 4,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9d0",
+     "width": 2,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9d2",
+     "width": 2,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9d4",
+     "width": 2,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9d6",
+     "width": 2,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9d8",
+     "width": 1,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9d9",
+     "width": 1,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9da",
+     "width": 1,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9db",
+     "width": 1,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9dc",
+     "width": 4,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051b660",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    }
+   ]
+  },
+  "iagVilleInit": {
+   "entry": "0x00484214",
+   "calls": [
+    "iaConfigGetValue"
+   ],
+   "globals": [
+    {
+     "address": "0x00498c10",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498c14",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498c18",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498c1c",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    }
+   ]
+  },
+  "iagVilleReset": {
+   "entry": "0x00484310",
+   "calls": [
+    "BatimentGetPlayer",
+    "BatimentGetType",
+    "BatimentExiste",
+    "EnginGetEtat",
+    "iagUnitAddToGroup",
+    "iagUnitRemoveFromPool",
+    "iagUnitFindTypeIntoPool",
+    "iaGroupNew",
+    "iagRessAddToCaveList"
+   ],
+   "globals": [
+    {
+     "address": "0x005080a8",
+     "width": 4,
+     "access": "r",
+     "base": null,
+     "index": null
+    }
+   ]
+  },
+  "iagRessInit": {
+   "entry": "0x00484bc4",
+   "calls": [
+    "iaConfigGetValue"
+   ],
+   "globals": [
+    {
+     "address": "0x00498c38",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498c3c",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498c40",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498c44",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498c4c",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498c50",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498c54",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498c58",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498c60",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498c70",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498c80",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498c90",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0051bcdc",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0051bce0",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0051bce4",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0051bce8",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0051bcec",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0051bcf0",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0051bcf4",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0051bcf8",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    }
+   ]
+  },
+  "iagRessReset": {
+   "entry": "0x00485002",
+   "calls": [
+    "GetRessource",
+    "iaGroupNew"
+   ],
+   "globals": [
+    {
+     "address": "0x005080a8",
+     "width": 4,
+     "access": "r",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0051ba3c",
+     "width": 4,
+     "access": "w",
+     "base": "esi",
+     "index": null
+    },
+    {
+     "address": "0x0051ba40",
+     "width": 4,
+     "access": "w",
+     "base": "esi",
+     "index": null
+    },
+    {
+     "address": "0x0051ba44",
+     "width": 4,
+     "access": "w",
+     "base": "esi",
+     "index": null
+    }
+   ]
+  },
+  "iagWarInit": {
+   "entry": "0x0048614c",
+   "calls": [
+    "iaConfigGetValue",
+    "sprintf"
+   ],
+   "globals": [
+    {
+     "address": "0x00498cb0",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498cb4",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498cb8",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498cbc",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498cc4",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498cc8",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498ccc",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498cd0",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00498cf0",
+     "width": 4,
+     "access": "r",
+     "base": "ecx",
+     "index": null
+    },
+    {
+     "address": "0x00498cf0",
+     "width": 4,
+     "access": "w",
+     "base": "ecx",
+     "index": null
+    },
+    {
+     "address": "0x00521350",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00521354",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00521358",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0052135c",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00521360",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x00521364",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    }
+   ]
+  },
+  "iagWarReset": {
+   "entry": "0x004864c1",
+   "calls": [
+    "PlayerGetType",
+    "iagUnitAddToGroup",
+    "iagUnitRemoveFromPool",
+    "iagUnitFindSuitableForGroupIntoPool",
+    "iaGroupNew",
+    "iagVilleGetNbBatBuiltTotal"
+   ],
+   "globals": [
+    {
+     "address": "0x00498cf4",
+     "width": 4,
+     "access": "r",
+     "base": null,
+     "index": "eax"
+    },
+    {
+     "address": "0x004e19a0",
+     "width": 4,
+     "access": "r",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0051bd04",
+     "width": 4,
+     "access": "r",
+     "base": "ebp",
+     "index": null
+    }
+   ]
+  },
+  "iafRessourceReset": {
+   "entry": "0x0048134c",
+   "calls": [],
+   "globals": [
+    {
+     "address": "0x0051a9cb",
+     "width": 1,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    }
+   ]
+  },
+  "InitMissionMonstre": {
+   "entry": "0x0047af90",
+   "calls": [
+    "EnginGetType",
+    "TypeEnginEstMonstre",
+    "EnginSetPlayer",
+    "EnginEstVivant",
+    "MissionGetNum",
+    "iagUnitAddToGroup",
+    "iagUnitRemoveFromGroup",
+    "iagUnitFindTypeIntoGroup",
+    "iagUnitGetFirstUnitInGroup",
+    "iaGroupNew",
+    "iaGroupDelete"
+   ],
+   "globals": [
+    {
+     "address": "0x0050a9cc",
+     "width": 1,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0050ae80",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0050af84",
+     "width": 1,
+     "access": "r",
+     "base": "edi",
+     "index": "ebx"
+    },
+    {
+     "address": "0x0050b124",
+     "width": 1,
+     "access": "r",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0050b124",
+     "width": 1,
+     "access": "r",
+     "base": "ebx",
+     "index": null
+    },
+    {
+     "address": "0x0050b134",
+     "width": 1,
+     "access": "r",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0050b134",
+     "width": 1,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0050b138",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": "eax"
+    },
+    {
+     "address": "0x0050b138",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": "ebx"
+    },
+    {
+     "address": "0x0050b178",
+     "width": 4,
+     "access": "r",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0050b178",
+     "width": 4,
+     "access": "rw",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0050b178",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0050b17c",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0050b180",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    }
+   ]
+  },
+  "IAResetAttaque": {
+   "entry": "0x0047c162",
+   "calls": [],
+   "globals": [
+    {
+     "address": "0x0050d5b4",
+     "width": 1,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0050d5b5",
+     "width": 1,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0050d5b6",
+     "width": 2,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0050d5b8",
+     "width": 1,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0050d5b9",
+     "width": 1,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0050d5ba",
+     "width": 2,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0050d5bc",
+     "width": 1,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0050d99c",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    }
+   ]
+  },
+  "iaConfigGetValue": {
+   "entry": "0x0047fc54",
+   "calls": [],
+   "globals": []
+  },
+  "iaGroupNew": {
+   "entry": "0x00483bd8",
+   "calls": [],
+   "globals": [
+    {
+     "address": "0x00498ec4",
+     "width": 1,
+     "access": "r",
+     "base": null,
+     "index": "ebx"
+    },
+    {
+     "address": "0x0051a9e0",
+     "width": 4,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9e0",
+     "width": 4,
+     "access": "w",
+     "base": "edx",
+     "index": null
+    },
+    {
+     "address": "0x0051a9e4",
+     "width": 4,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9e8",
+     "width": 4,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9ec",
+     "width": 4,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9f0",
+     "width": 2,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9f2",
+     "width": 2,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9f4",
+     "width": 2,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9f6",
+     "width": 2,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9f8",
+     "width": 1,
+     "access": "r",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9f8",
+     "width": 1,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9f9",
+     "width": 1,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9fa",
+     "width": 1,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9fb",
+     "width": 1,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051a9fc",
+     "width": 4,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051b660",
+     "width": 4,
+     "access": "r",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0051b660",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": null
+    },
+    {
+     "address": "0x0051b664",
+     "width": 4,
+     "access": "r",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051b664",
+     "width": 4,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    }
+   ]
+  },
+  "iagVilleSetMode": {
+   "entry": "0x004846a7",
+   "calls": [],
+   "globals": [
+    {
+     "address": "0x00498c10",
+     "width": 4,
+     "access": "r",
+     "base": null,
+     "index": "edx"
+    },
+    {
+     "address": "0x0051b8a4",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": "eax"
+    },
+    {
+     "address": "0x0051b8b0",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": "eax"
+    }
+   ]
+  },
+  "iagRessSetMode": {
+   "entry": "0x0048569a",
+   "calls": [],
+   "globals": [
+    {
+     "address": "0x00498c38",
+     "width": 4,
+     "access": "r",
+     "base": null,
+     "index": "esi"
+    },
+    {
+     "address": "0x00498c4c",
+     "width": 4,
+     "access": "r",
+     "base": null,
+     "index": "edx"
+    },
+    {
+     "address": "0x0051ba7c",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": "eax"
+    },
+    {
+     "address": "0x0051ba84",
+     "width": 4,
+     "access": "w",
+     "base": null,
+     "index": "eax"
+    }
+   ]
+  },
+  "iagWarSetMode": {
+   "entry": "0x00486ca7",
+   "calls": [],
+   "globals": [
+    {
+     "address": "0x00498cb0",
+     "width": 4,
+     "access": "r",
+     "base": null,
+     "index": "edx"
+    },
+    {
+     "address": "0x00498cc4",
+     "width": 4,
+     "access": "r",
+     "base": null,
+     "index": "edx"
+    },
+    {
+     "address": "0x0051bcfc",
+     "width": 4,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    },
+    {
+     "address": "0x0051bd04",
+     "width": 4,
+     "access": "w",
+     "base": "eax",
+     "index": null
+    }
+   ]
+  }
+ },
+ "operations": {
+  "names": 140,
+  "addresses": 136,
+  "instructions": 1157,
+  "unresolved_names": [],
+  "records": [
+   {
+    "address": "0x0046030a",
+    "end_exclusive": "0x00460341",
+    "names": [
+     "B_EtatMarche"
+    ],
+    "occurrences": {
+     "B_EtatMarche": 1
+    },
+    "sha256": "c1499a13949b897d403e118efe9a269ed716ff4b2d5d34b157be2d1a86a6535f",
+    "instructions": 19,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x004e2918/1/r"
+    ],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "B_EtatMarche": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0047b6db",
+    "end_exclusive": "0x0047b796",
+    "names": [
+     "V_iaMonstreAttendLaReponseVachementCoolMemeQueJeLaVeux"
+    ],
+    "occurrences": {
+     "V_iaMonstreAttendLaReponseVachementCoolMemeQueJeLaVeux": 7
+    },
+    "sha256": "303ca3eb862f740658f2ada2dc7b04bb211d95e4a19a0655b2fc1bc2ec014f41",
+    "instructions": 69,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x0047a817..0x0047a81d"
+    ],
+    "globals": [
+     "0x0050ae80/4/r",
+     "0x0050ae80/4/w",
+     "0x0050ae84/4/r",
+     "0x0050ae88/4/r",
+     "0x0050b134/1/r",
+     "0x0050b134/1/w",
+     "0x0050b138/4/w",
+     "0x0050b178/4/r",
+     "0x0050b178/4/w"
+    ],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "V_iaMonstreAttendLaReponseVachementCoolMemeQueJeLaVeux": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0047da7a",
+    "end_exclusive": "0x0047daa4",
+    "names": [
+     "V_Attendre"
+    ],
+    "occurrences": {
+     "V_Attendre": 15
+    },
+    "sha256": "28da46a2a19620952081e873fce83c469b5724bf0118e462a60ca72745a74869",
+    "instructions": 16,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "V_Attendre": "core: implemented without world state"
+    }
+   },
+   {
+    "address": "0x0047f31c",
+    "end_exclusive": "0x0047f322",
+    "names": [
+     "B_AccessibiliteBatiment",
+     "B_AccessibiliteChemin",
+     "B_Bidon"
+    ],
+    "occurrences": {
+     "B_AccessibiliteBatiment": 2,
+     "B_AccessibiliteChemin": 6,
+     "B_Bidon": 3
+    },
+    "sha256": "2db31f4e09597946e56e859813bfdad7046d457c32332c3a882654d1e3ffdf67",
+    "instructions": 2,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "B_AccessibiliteBatiment": "core: implemented without world state",
+     "B_AccessibiliteChemin": "core: implemented without world state",
+     "B_Bidon": "core: implemented without world state"
+    }
+   },
+   {
+    "address": "0x0047f322",
+    "end_exclusive": "0x0047f328",
+    "names": [
+     "B_GicleUniteAmieDeZone",
+     "B_TestUniteAmieSurZone",
+     "B_TestUniteEnnemieSurZone"
+    ],
+    "occurrences": {
+     "B_GicleUniteAmieDeZone": 1,
+     "B_TestUniteAmieSurZone": 1,
+     "B_TestUniteEnnemieSurZone": 1
+    },
+    "sha256": "534009b1b3a0d4a912f5ccd5fb57fbfb8be45d709f8cb2068df72297c946e59e",
+    "instructions": 2,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "B_GicleUniteAmieDeZone": "core: implemented without world state",
+     "B_TestUniteAmieSurZone": "core: implemented without world state",
+     "B_TestUniteEnnemieSurZone": "core: implemented without world state"
+    }
+   },
+   {
+    "address": "0x0047fc58",
+    "end_exclusive": "0x0047fce9",
+    "names": [
+     "I_DonneForceGroupe"
+    ],
+    "occurrences": {
+     "I_DonneForceGroupe": 8
+    },
+    "sha256": "92c3fee482a030b416387f1fc344298d275250d3c3c90c288e4f4c3359f6e72f",
+    "instructions": 47,
+    "callees": [
+     "EnginEstVivant",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x004989f8/4/",
+     "0x00498cf4/4/r",
+     "0x004e19a0/4/r"
+    ],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units"
+    ],
+    "core_status": {
+     "I_DonneForceGroupe": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0047fce9",
+    "end_exclusive": "0x0047fe4b",
+    "names": [
+     "I_CompleteMilitairesDansGroupe"
+    ],
+    "occurrences": {
+     "I_CompleteMilitairesDansGroupe": 26
+    },
+    "sha256": "5057d270f6fa6c9d1072bd35510d8d7d43515b0edc20b1ed4f51971d7edbb2ec",
+    "instructions": 112,
+    "callees": [
+     "Distance2dFromCases",
+     "EnginEstVivant",
+     "EnginGetCase",
+     "iagUnitAddToGroup",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup",
+     "iagUnitRemoveFromGroup",
+     "iagWarComputeGroupStrength"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x0047fce2..0x0047fce9"
+    ],
+    "globals": [
+     "0x004989f8/4/",
+     "0x00498cf4/4/r",
+     "0x004e19a0/4/r"
+    ],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core terrain/navigation",
+     "core units"
+    ],
+    "core_status": {
+     "I_CompleteMilitairesDansGroupe": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0047fe4b",
+    "end_exclusive": "0x0047fe9b",
+    "names": [
+     "I_DonneForceNation"
+    ],
+    "occurrences": {
+     "I_DonneForceNation": 1
+    },
+    "sha256": "b05a67efc21739e446655d8152cac2f905323ce83b7670502206d08d13798228",
+    "instructions": 34,
+    "callees": [
+     "EnginEstVivant",
+     "EnginGetPlayer",
+     "EnginGetType"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x00498cf4/4/r"
+    ],
+    "provider_families": [
+     "core units"
+    ],
+    "core_status": {
+     "I_DonneForceNation": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0047fe9b",
+    "end_exclusive": "0x0047fead",
+    "names": [
+     "I_DonneForceEnnemieDansZone"
+    ],
+    "occurrences": {
+     "I_DonneForceEnnemieDansZone": 7
+    },
+    "sha256": "5c445ad42c37c918ae9da358a52ba1444d9f4a52c3a9ce61fee0f975e8e9ef41",
+    "instructions": 9,
+    "callees": [
+     "iagWarComputeEnnemyStrengthInZone"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "I_DonneForceEnnemieDansZone": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0047fead",
+    "end_exclusive": "0x0047febf",
+    "names": [
+     "I_DonneForceGroupeDansZone"
+    ],
+    "occurrences": {
+     "I_DonneForceGroupeDansZone": 3
+    },
+    "sha256": "a6603bf882144b3609f72fecfcdd42aed6d6dc8f5473571ef1914ba00dd2384f",
+    "instructions": 9,
+    "callees": [
+     "iagWarComputeGroupStrengthInZone"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "I_DonneForceGroupeDansZone": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0047febf",
+    "end_exclusive": "0x0047fee0",
+    "names": [
+     "B_InitConflit"
+    ],
+    "occurrences": {
+     "B_InitConflit": 2
+    },
+    "sha256": "8711c257f5f8736e0be6b4a0e8f1d1cb2c5b15313bf9731e78dc20a1eb87c66d",
+    "instructions": 15,
+    "callees": [
+     "iagWarSetParamsBattleToPos"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "B_InitConflit": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0047fee0",
+    "end_exclusive": "0x0047ff22",
+    "names": [
+     "B_NewConflit"
+    ],
+    "occurrences": {
+     "B_NewConflit": 24
+    },
+    "sha256": "6c911307be7e98861449202ebeb9b36a655872d58a5b838b42b713c9b70cf811",
+    "instructions": 31,
+    "callees": [
+     "iagWarNewBattleToPos",
+     "iagWarSearchBattleFromPos"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "B_NewConflit": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0047ff22",
+    "end_exclusive": "0x0047ff34",
+    "names": [
+     "V_FreeConflit"
+    ],
+    "occurrences": {
+     "V_FreeConflit": 23
+    },
+    "sha256": "9bc2659521896a1323a3a8e445e0edce50a15577b0f3d0047bde2d060d5e5d82",
+    "instructions": 7,
+    "callees": [
+     "iagWarDeleteBattle"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "V_FreeConflit": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0047ff34",
+    "end_exclusive": "0x0047ff4d",
+    "names": [
+     "I_CommandeForceDefense"
+    ],
+    "occurrences": {
+     "I_CommandeForceDefense": 2
+    },
+    "sha256": "8d0ce8d5c1457312dafd50b989f11e536918b88fa8478b666aca8a75c5d2091f",
+    "instructions": 9,
+    "callees": [
+     "iagWarStartBuildUnits"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "I_CommandeForceDefense": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0047ff4d",
+    "end_exclusive": "0x0047ff65",
+    "names": [
+     "B_AttenteConflit"
+    ],
+    "occurrences": {
+     "B_AttenteConflit": 16
+    },
+    "sha256": "e9e55081b4783557cf53f24de7cee0d65fd22c68fa72f0c5b60060022d067963",
+    "instructions": 14,
+    "callees": [
+     "iagWarSetWait"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x0047fed7..0x0047fee0"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "B_AttenteConflit": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0047ff65",
+    "end_exclusive": "0x0047ffa4",
+    "names": [
+     "B_TestUniteDanger"
+    ],
+    "occurrences": {
+     "B_TestUniteDanger": 12
+    },
+    "sha256": "74060db57147494109b0145c16df65d5711fd6ebd4e26bcd4dd931d2e0a3207d",
+    "instructions": 26,
+    "callees": [
+     "iagWarTestIfOffensiveBuildingInZone",
+     "iagWarTestIfOffensiveUnitInZone"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "B_TestUniteDanger": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0047ffa4",
+    "end_exclusive": "0x0047ffd8",
+    "names": [
+     "V_AttacheConflitGroupe"
+    ],
+    "occurrences": {
+     "V_AttacheConflitGroupe": 1
+    },
+    "sha256": "b90dd19247df23674e6619f0026cdb2cc3f762fa10e52987b0c015edf5d786ef",
+    "instructions": 20,
+    "callees": [
+     "iagWarSearchBattleFromPos"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "V_AttacheConflitGroupe": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0047ffd8",
+    "end_exclusive": "0x0047fffb",
+    "names": [
+     "B_AiJeConnaissanceBatiment"
+    ],
+    "occurrences": {
+     "B_AiJeConnaissanceBatiment": 1
+    },
+    "sha256": "830aa8dc441a61abe2251236f0e3949f11186eb29689baf82324264a35e51698",
+    "instructions": 12,
+    "callees": [
+     "TypeBatimentEstRealisable"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "economy resources/production/technology"
+    ],
+    "core_status": {
+     "B_AiJeConnaissanceBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0047fffb",
+    "end_exclusive": "0x0048001e",
+    "names": [
+     "B_AiJeConnaissanceUnitee"
+    ],
+    "occurrences": {
+     "B_AiJeConnaissanceUnitee": 1
+    },
+    "sha256": "4c572237ecccab0e13a25fd521c03556301c59e1dab8eaac892e454423ea5c64",
+    "instructions": 12,
+    "callees": [
+     "TypeEnginEstRealisable"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "core units"
+    ],
+    "core_status": {
+     "B_AiJeConnaissanceUnitee": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0048001e",
+    "end_exclusive": "0x00480041",
+    "names": [
+     "B_AiJeConnaissanceFutureBatiment"
+    ],
+    "occurrences": {
+     "B_AiJeConnaissanceFutureBatiment": 1
+    },
+    "sha256": "77159ecd60aed94628d087d91e020f05f10ffbb6155a07d2114d5bf8804b58e4",
+    "instructions": 13,
+    "callees": [
+     "InventionFutureEstRealisable"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "economy resources/production/technology"
+    ],
+    "core_status": {
+     "B_AiJeConnaissanceFutureBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480064",
+    "end_exclusive": "0x004800f1",
+    "names": [
+     "I_TrouvePlaceLibreProche"
+    ],
+    "occurrences": {
+     "I_TrouvePlaceLibreProche": 3
+    },
+    "sha256": "a8a26cfdd953c6eaf09c3b663c79cd3495459c3d2663fb508c661c906f4b4cdc",
+    "instructions": 59,
+    "callees": [
+     "BatimentPlaceLibre",
+     "Distance2dFromCases",
+     "GetCaseCentraleOfGhost",
+     "GetCaseOfGhost",
+     "GetNumIndiceTypeGhostFullFree",
+     "OccupationIndiceGhost"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x004802f4..0x004802fb"
+    ],
+    "globals": [],
+    "provider_families": [
+     "core terrain/navigation",
+     "structure ghosts",
+     "structures"
+    ],
+    "core_status": {
+     "I_TrouvePlaceLibreProche": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x004800f1",
+    "end_exclusive": "0x004801a2",
+    "names": [
+     "I_TrouvePlaceOccupeProche"
+    ],
+    "occurrences": {
+     "I_TrouvePlaceOccupeProche": 2
+    },
+    "sha256": "bd034f3c2d27b6b4a44bb32ba2c7f5d241c62276dfa925405a8beaa55695392c",
+    "instructions": 68,
+    "callees": [
+     "ChercheIndiceBatiment",
+     "Distance2dFromCases",
+     "GetCaseBatPlaceOccupeLibreInTypeBat",
+     "GetCaseCentraleOfGhost",
+     "GetCaseIndiceBatiment",
+     "GetCaseOfGhost",
+     "GetNumIndiceTypeGhostFullFree",
+     "OccupationIndiceGhost"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x004802f4..0x004802fb"
+    ],
+    "globals": [],
+    "provider_families": [
+     "core terrain/navigation",
+     "structure ghosts",
+     "structures"
+    ],
+    "core_status": {
+     "I_TrouvePlaceOccupeProche": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x004801a2",
+    "end_exclusive": "0x004801d2",
+    "names": [
+     "I_DonneCaseLibreZoneProche"
+    ],
+    "occurrences": {
+     "I_DonneCaseLibreZoneProche": 2
+    },
+    "sha256": "cc7eae55a9952c442c0c2449406d289537171c68bb973be358eb6f54ec3841a0",
+    "instructions": 21,
+    "callees": [
+     "GetFreeCaseZoneInfluenceRayon"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "core terrain/navigation"
+    ],
+    "core_status": {
+     "I_DonneCaseLibreZoneProche": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x004801d2",
+    "end_exclusive": "0x004802fb",
+    "names": [
+     "I_DonneBatimentDansZone"
+    ],
+    "occurrences": {
+     "I_DonneBatimentDansZone": 1
+    },
+    "sha256": "2dbe5dfe33eac442d1450e8d5b0a4037552708d656fe78811f283209176df140",
+    "instructions": 107,
+    "callees": [
+     "BatimentGetPlayer",
+     "ChercheIndiceBatiment"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "structures"
+    ],
+    "core_status": {
+     "I_DonneBatimentDansZone": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x004802fb",
+    "end_exclusive": "0x004804a1",
+    "names": [
+     "I_ChercheWayPoint"
+    ],
+    "occurrences": {
+     "I_ChercheWayPoint": 3
+    },
+    "sha256": "8f90336142b9d3cbf2c594e9a4cb8917f682d1a87cc21f12cf03fe441b7e09d4",
+    "instructions": 153,
+    "callees": [
+     "CaseEstDecouverte",
+     "CaseEstIlluminee",
+     "Chemin_Accessible",
+     "ChercheIndiceBatiment"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x004802f1..0x004802fb"
+    ],
+    "globals": [],
+    "provider_families": [
+     "core terrain/navigation",
+     "structures"
+    ],
+    "core_status": {
+     "I_ChercheWayPoint": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x004804a1",
+    "end_exclusive": "0x0048060a",
+    "names": [
+     "I_ChercheCivilProche"
+    ],
+    "occurrences": {
+     "I_ChercheCivilProche": 3
+    },
+    "sha256": "874cfa51b3ffd22efb42a1cb3dd8c6dfb5dd2b79788bec0a119b9e4cb8884cf2",
+    "instructions": 119,
+    "callees": [
+     "EnginGetPlayer",
+     "EnginGetType",
+     "TypeEnginEstArmee"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x004802f4..0x004802fb"
+    ],
+    "globals": [
+     "0x004e0f38/4/r"
+    ],
+    "provider_families": [
+     "core units"
+    ],
+    "core_status": {
+     "I_ChercheCivilProche": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480617",
+    "end_exclusive": "0x00480644",
+    "names": [
+     "I_DonneCaseLibreProcheGhostBatiment"
+    ],
+    "occurrences": {
+     "I_DonneCaseLibreProcheGhostBatiment": 3
+    },
+    "sha256": "e4b9eb273dac3642955684a471f0130cd943707f9f45e1782dac4c85444530db",
+    "instructions": 16,
+    "callees": [
+     "ChercheType",
+     "EnginCherchePlace"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "core units"
+    ],
+    "core_status": {
+     "I_DonneCaseLibreProcheGhostBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480644",
+    "end_exclusive": "0x0048068f",
+    "names": [
+     "I_AiJeBatiment"
+    ],
+    "occurrences": {
+     "I_AiJeBatiment": 14
+    },
+    "sha256": "758cef821e51560bb12ede0a5f9ccf27032a486b31f9254230fb736534587f70",
+    "instructions": 35,
+    "callees": [
+     "BatimentEnDestruction",
+     "GetNumIndiceTypeBatiment"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "structures"
+    ],
+    "core_status": {
+     "I_AiJeBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0048068f",
+    "end_exclusive": "0x004806db",
+    "names": [
+     "B_EtatBatiment"
+    ],
+    "occurrences": {
+     "B_EtatBatiment": 34
+    },
+    "sha256": "690635efeedddc775d4f23f5cc9d70231057392242395a66a38d6aa987f87b54",
+    "instructions": 31,
+    "callees": [
+     "BatimentGetModeEtat"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x00498610/4/r"
+    ],
+    "provider_families": [
+     "structures"
+    ],
+    "core_status": {
+     "B_EtatBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x004806db",
+    "end_exclusive": "0x004806ed",
+    "names": [
+     "I_DonneTypeBatiment"
+    ],
+    "occurrences": {
+     "I_DonneTypeBatiment": 2
+    },
+    "sha256": "a8b262521f4faec01ec2770f49e80fe192a92e0ee5847af4720b4459972e1059",
+    "instructions": 5,
+    "callees": [
+     "GetTypeBatimentFromTypeUnite"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "structures"
+    ],
+    "core_status": {
+     "I_DonneTypeBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x004806ed",
+    "end_exclusive": "0x00480712",
+    "names": [
+     "B_OccupationColonMinBatiment"
+    ],
+    "occurrences": {
+     "B_OccupationColonMinBatiment": 3
+    },
+    "sha256": "29efe069e6dcd67d8981bb3689ebad206b3a84c75fedd832d8ebeb377da050f4",
+    "instructions": 14,
+    "callees": [
+     "BatimentGetColons"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "structures"
+    ],
+    "core_status": {
+     "B_OccupationColonMinBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480712",
+    "end_exclusive": "0x00480731",
+    "names": [
+     "V_BatimentSortColon"
+    ],
+    "occurrences": {
+     "V_BatimentSortColon": 4
+    },
+    "sha256": "88f6ec165cd157c4a072483053162af974c706dd6e14ba2b4efdd5c10fbed2db",
+    "instructions": 8,
+    "callees": [
+     "BatimentRetireColon"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "structures"
+    ],
+    "core_status": {
+     "V_BatimentSortColon": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480731",
+    "end_exclusive": "0x00480760",
+    "names": [
+     "V_BatimentRecruteUnite"
+    ],
+    "occurrences": {
+     "V_BatimentRecruteUnite": 1
+    },
+    "sha256": "88a1670ccf02143522af8a5b1d43a9917daf6d4bf4627dc940f5e844f9de4dbe",
+    "instructions": 18,
+    "callees": [
+     "BatimentDeselectionner",
+     "BatimentSelection",
+     "InitRecruteTroupe"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "economy resources/production/technology",
+     "user interface"
+    ],
+    "core_status": {
+     "V_BatimentRecruteUnite": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480760",
+    "end_exclusive": "0x00480803",
+    "names": [
+     "I_DonneBatimentOccupe"
+    ],
+    "occurrences": {
+     "I_DonneBatimentOccupe": 2
+    },
+    "sha256": "509684b9c712ceb1046ae24de98e8764d6d4a368ceb7bf83a6df0741cc090fce",
+    "instructions": 55,
+    "callees": [
+     "BatimentGetColons",
+     "BatimentGetType",
+     "GetNumIndiceBatimentPlayer",
+     "memset"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x00498588/4/r"
+    ],
+    "provider_families": [
+     "C runtime",
+     "structures"
+    ],
+    "core_status": {
+     "I_DonneBatimentOccupe": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480803",
+    "end_exclusive": "0x00480816",
+    "names": [
+     "I_DonnePositionBatiment"
+    ],
+    "occurrences": {
+     "I_DonnePositionBatiment": 11
+    },
+    "sha256": "52bf15dea2ce27475e592f6a0664a77870faf497cadd321afed12aba6acc0d88",
+    "instructions": 5,
+    "callees": [
+     "GetCaseIndiceBatiment"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "structures"
+    ],
+    "core_status": {
+     "I_DonnePositionBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480816",
+    "end_exclusive": "0x00480842",
+    "names": [
+     "B_ReserveGhostBatiment"
+    ],
+    "occurrences": {
+     "B_ReserveGhostBatiment": 4
+    },
+    "sha256": "080c0f787ffd100737cb7c24f3f632b2951ae0110c2ac5976795c2db2f1f2a1f",
+    "instructions": 17,
+    "callees": [
+     "GetCaseOfGhostFromCaseCentrale",
+     "ImplantePlayerInGhost"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "structure ghosts"
+    ],
+    "core_status": {
+     "B_ReserveGhostBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480842",
+    "end_exclusive": "0x00480859",
+    "names": [
+     "V_LibereGhostBatiment"
+    ],
+    "occurrences": {
+     "V_LibereGhostBatiment": 9
+    },
+    "sha256": "0828dbacf3a225de65ed22ee59997d572273ad8dc2d8836642d0eb6364bc0f73",
+    "instructions": 8,
+    "callees": [
+     "GetCaseOfGhostFromCaseCentrale",
+     "LiberePlayerInGhost"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "structure ghosts"
+    ],
+    "core_status": {
+     "V_LibereGhostBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480859",
+    "end_exclusive": "0x004808b4",
+    "names": [
+     "I_DonnePositionMaVille"
+    ],
+    "occurrences": {
+     "I_DonnePositionMaVille": 12
+    },
+    "sha256": "0a3b15fc9b5e5cebe89dc93737a429b494224f12bb9d834cc65f8a8037973758",
+    "instructions": 35,
+    "callees": [
+     "GetCaseIndiceBatiment",
+     "GetCaseOfGhost",
+     "GetNumIndiceTypeBatiment",
+     "GetNumIndiceTypeGhost"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "structure ghosts",
+     "structures"
+    ],
+    "core_status": {
+     "I_DonnePositionMaVille": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x004808b4",
+    "end_exclusive": "0x0048093a",
+    "names": [
+     "I_DonneBatimentProche"
+    ],
+    "occurrences": {
+     "I_DonneBatimentProche": 1
+    },
+    "sha256": "523c1c01e8f450c43aead4f07dd393effb4db98c96557dde75df7f330f53c97d",
+    "instructions": 56,
+    "callees": [
+     "Chemin_Accessible",
+     "Distance2dFromCases",
+     "GetCaseIndiceBatiment",
+     "GetNumIndiceTypeBatiment"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "core terrain/navigation",
+     "structures"
+    ],
+    "core_status": {
+     "I_DonneBatimentProche": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0048094a",
+    "end_exclusive": "0x00480951",
+    "names": [
+     "I_DonneBatimentOuEstUnite"
+    ],
+    "occurrences": {
+     "I_DonneBatimentOuEstUnite": 2
+    },
+    "sha256": "2814653c52360b59db1ec36f3246117168dcfabc64e5b67d77da604b3e5515a4",
+    "instructions": 3,
+    "callees": [
+     "GetIndiceBatimentFromIndEngin"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "structures"
+    ],
+    "core_status": {
+     "I_DonneBatimentOuEstUnite": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480951",
+    "end_exclusive": "0x00480a2f",
+    "names": [
+     "I_DonneBatimentPasPlein"
+    ],
+    "occurrences": {
+     "I_DonneBatimentPasPlein": 1
+    },
+    "sha256": "62ed7546f2b3d32173f5db9b0d46c7e07719278ffc71349c87fcc6eb566c6fed",
+    "instructions": 73,
+    "callees": [
+     "BatimentGetType",
+     "DetectPlaceLibreIndBatiment",
+     "GetNbTroupesAPiedsBatiment",
+     "GetNumIndiceBatimentPlayer",
+     "memset"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00480934..0x0048093a"
+    ],
+    "globals": [
+     "0x004985cc/4/r"
+    ],
+    "provider_families": [
+     "C runtime",
+     "structures"
+    ],
+    "core_status": {
+     "I_DonneBatimentPasPlein": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480abd",
+    "end_exclusive": "0x00480ace",
+    "names": [
+     "B_TestBatimentBesoinColon"
+    ],
+    "occurrences": {
+     "B_TestBatimentBesoinColon": 4
+    },
+    "sha256": "cf71fb909b6c17c406e039ea6d1fb6b47cf984a24b12680ecd7b8254225aa156",
+    "instructions": 9,
+    "callees": [
+     "GetTypeBatimentCapacite"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x0048072b..0x00480731",
+     "0x00480a62..0x00480a68"
+    ],
+    "globals": [],
+    "provider_families": [
+     "structures"
+    ],
+    "core_status": {
+     "B_TestBatimentBesoinColon": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480ace",
+    "end_exclusive": "0x00480aed",
+    "names": [
+     "I_DonneBatimentSurCase"
+    ],
+    "occurrences": {
+     "I_DonneBatimentSurCase": 2
+    },
+    "sha256": "b842f186421e38ca9423d4be50e17fda0df8b26afecc99c9ee7e491e84ac4357",
+    "instructions": 8,
+    "callees": [
+     "ChercheCaseBatiment"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "structures"
+    ],
+    "core_status": {
+     "I_DonneBatimentSurCase": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480aed",
+    "end_exclusive": "0x00480cee",
+    "names": [
+     "I_DonneBatimentAAttaquer"
+    ],
+    "occurrences": {
+     "I_DonneBatimentAAttaquer": 3
+    },
+    "sha256": "76acadc6aec218c50b792446a10f9fb0f054d3d5f6391f807298f62a33ce302d",
+    "instructions": 170,
+    "callees": [
+     "BatimentNbType",
+     "Distance2dFromCases",
+     "GetCaseIndiceBatiment",
+     "GetNumIndiceTypeBatiment",
+     "Random"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00480933..0x0048093a"
+    ],
+    "globals": [
+     "0x00498468/4/r",
+     "0x004984f8/1/r",
+     "0x004984f8/4/r",
+     "0x004984fc/4/r"
+    ],
+    "provider_families": [
+     "core RNG",
+     "core terrain/navigation",
+     "structures"
+    ],
+    "core_status": {
+     "I_DonneBatimentAAttaquer": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480cee",
+    "end_exclusive": "0x00480d56",
+    "names": [
+     "I_DonneBatimentMarchandage"
+    ],
+    "occurrences": {
+     "I_DonneBatimentMarchandage": 3
+    },
+    "sha256": "06e9282e9d7eb181f581b75aad0b81ef20420e7a4b68a1462286cd28614f11e6",
+    "instructions": 46,
+    "callees": [
+     "Distance2dFromCases",
+     "GetCaseIndiceBatiment",
+     "GetNumIndiceTypeBatiment"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00480931..0x0048093a"
+    ],
+    "globals": [],
+    "provider_families": [
+     "core terrain/navigation",
+     "structures"
+    ],
+    "core_status": {
+     "I_DonneBatimentMarchandage": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480d56",
+    "end_exclusive": "0x00480d68",
+    "names": [
+     "I_DonneNationBatiment"
+    ],
+    "occurrences": {
+     "I_DonneNationBatiment": 3
+    },
+    "sha256": "096f80ddf78b1740f2c2fbb87c0f978eb84e4158d3891fca549a79b79ffa723b",
+    "instructions": 6,
+    "callees": [
+     "BatimentGetPlayer"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x004806e7..0x004806ed"
+    ],
+    "globals": [],
+    "provider_families": [
+     "structures"
+    ],
+    "core_status": {
+     "I_DonneNationBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480d68",
+    "end_exclusive": "0x00480d97",
+    "names": [
+     "I_DeterminationEnnemi"
+    ],
+    "occurrences": {
+     "I_DeterminationEnnemi": 2
+    },
+    "sha256": "3664d4d4a6a7eba4c1790145f57f60b212d350869d5a1a0f048b3b00087df7e8",
+    "instructions": 12,
+    "callees": [
+     "BatimentGetPlayer",
+     "ChercheCaseBatiment"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "structures"
+    ],
+    "core_status": {
+     "I_DeterminationEnnemi": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480d97",
+    "end_exclusive": "0x00480e1f",
+    "names": [
+     "V_FixeAlliance"
+    ],
+    "occurrences": {
+     "V_FixeAlliance": 5
+    },
+    "sha256": "6834dd939c864e3c592072510171ba0833cc66ab6115fec1ca85455d71b24256",
+    "instructions": 52,
+    "callees": [
+     "MAJSympathie",
+     "PlayerEstAllie",
+     "PlayerResetAllie",
+     "PlayerSetAllie"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00480e9d..0x00480ea6"
+    ],
+    "globals": [],
+    "provider_families": [
+     "economy players/diplomacy"
+    ],
+    "core_status": {
+     "V_FixeAlliance": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480e1f",
+    "end_exclusive": "0x00480e4f",
+    "names": [
+     "V_RefuseAlliance"
+    ],
+    "occurrences": {
+     "V_RefuseAlliance": 1
+    },
+    "sha256": "54f04185c171ae240d6b50cace62ea6866ff765e13fd9eab7da7ed810c82249f",
+    "instructions": 17,
+    "callees": [
+     "MessageBoxSet"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x00508041/1/r"
+    ],
+    "provider_families": [
+     "user interface"
+    ],
+    "core_status": {
+     "V_RefuseAlliance": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480e4f",
+    "end_exclusive": "0x00480e72",
+    "names": [
+     "B_Allie"
+    ],
+    "occurrences": {
+     "B_Allie": 5
+    },
+    "sha256": "76b4b7b6ef09d987968cf2b6848e147a4847a12dd123ee95beaa1f70d66ec180",
+    "instructions": 12,
+    "callees": [
+     "PlayerEstAllie"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "economy players/diplomacy"
+    ],
+    "core_status": {
+     "B_Allie": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480e72",
+    "end_exclusive": "0x00480ea6",
+    "names": [
+     "V_DeclareGuerre"
+    ],
+    "occurrences": {
+     "V_DeclareGuerre": 1
+    },
+    "sha256": "78f4db0e3b41cb329da7242d000af33fea422e97acdaceac99313ac15057463d",
+    "instructions": 21,
+    "callees": [
+     "PlayerSetSympathie"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "economy players/diplomacy"
+    ],
+    "core_status": {
+     "V_DeclareGuerre": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480ea6",
+    "end_exclusive": "0x00480ee2",
+    "names": [
+     "I_DonneNationPlusHaute"
+    ],
+    "occurrences": {
+     "I_DonneNationPlusHaute": 1
+    },
+    "sha256": "35b6093b2dffca04e53f6660663b466878c3594a4aa7ef7cf65cb2c59cc03da7",
+    "instructions": 32,
+    "callees": [
+     "PlayerGetSympathie"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "economy players/diplomacy"
+    ],
+    "core_status": {
+     "I_DonneNationPlusHaute": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480ee2",
+    "end_exclusive": "0x00480f16",
+    "names": [
+     "I_DonneNationPlusBasse"
+    ],
+    "occurrences": {
+     "I_DonneNationPlusBasse": 2
+    },
+    "sha256": "eb1016b80648dfbb2f7192c7958fa6bd306b5227389d0fcb68e6b59e55d548d8",
+    "instructions": 32,
+    "callees": [
+     "PlayerGetSympathie"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00480eda..0x00480ee2"
+    ],
+    "globals": [],
+    "provider_families": [
+     "economy players/diplomacy"
+    ],
+    "core_status": {
+     "I_DonneNationPlusBasse": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480f16",
+    "end_exclusive": "0x00480f50",
+    "names": [
+     "I_CombienDAlliances"
+    ],
+    "occurrences": {
+     "I_CombienDAlliances": 2
+    },
+    "sha256": "2ed7d9fb7778e9bf3698d5bebb12013cc719e90b1584d6c369e1d710aa39f2e5",
+    "instructions": 29,
+    "callees": [
+     "PlayerEstAllie"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "economy players/diplomacy"
+    ],
+    "core_status": {
+     "I_CombienDAlliances": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00480fc7",
+    "end_exclusive": "0x00481034",
+    "names": [
+     "B_ChoixPlaceLibre"
+    ],
+    "occurrences": {
+     "B_ChoixPlaceLibre": 1
+    },
+    "sha256": "25fcaaba218c9bdb817ddeb1fd567ae7010e4585d3ec2fe0268b6db8830c5ed0",
+    "instructions": 52,
+    "callees": [
+     "PlayerEstAllie"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "economy players/diplomacy"
+    ],
+    "core_status": {
+     "B_ChoixPlaceLibre": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481034",
+    "end_exclusive": "0x00481049",
+    "names": [
+     "I_RecupereSympathie"
+    ],
+    "occurrences": {
+     "I_RecupereSympathie": 4
+    },
+    "sha256": "f51c7a98b23d52c5089b27384c25989a8dea3ce7437efa5ecb8df0e121000a3a",
+    "instructions": 9,
+    "callees": [
+     "PlayerGetSympathie"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "economy players/diplomacy"
+    ],
+    "core_status": {
+     "I_RecupereSympathie": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481075",
+    "end_exclusive": "0x004810aa",
+    "names": [
+     "I_NombreAlliances"
+    ],
+    "occurrences": {
+     "I_NombreAlliances": 4
+    },
+    "sha256": "e49036fad63e8aeb1c373174f6a9f6ed229c3f32afd20396d2813ed09bcf3e0f",
+    "instructions": 29,
+    "callees": [
+     "PlayerEstAllie"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00480f49..0x00480f50"
+    ],
+    "globals": [],
+    "provider_families": [
+     "economy players/diplomacy"
+    ],
+    "core_status": {
+     "I_NombreAlliances": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x004810aa",
+    "end_exclusive": "0x00481110",
+    "names": [
+     "I_ChercheNationPasAllie"
+    ],
+    "occurrences": {
+     "I_ChercheNationPasAllie": 2
+    },
+    "sha256": "8a4a36aba69699c0476ce29d2bd6d1d53606e59cf71d3bdf39b313f143777747",
+    "instructions": 45,
+    "callees": [
+     "PlayerEstAllie",
+     "PlayerGetSympathie"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00480edc..0x00480ee2"
+    ],
+    "globals": [],
+    "provider_families": [
+     "economy players/diplomacy"
+    ],
+    "core_status": {
+     "I_ChercheNationPasAllie": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481133",
+    "end_exclusive": "0x00481146",
+    "names": [
+     "I_DonneTypeUnite"
+    ],
+    "occurrences": {
+     "I_DonneTypeUnite": 1
+    },
+    "sha256": "299d9490fc371018721f3d15aee324f2bda2c95158c70c1aed5b75ffc9b400ff",
+    "instructions": 5,
+    "callees": [
+     "EnginGetType"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "core units"
+    ],
+    "core_status": {
+     "I_DonneTypeUnite": "core: implemented, needs unit world"
+    }
+   },
+   {
+    "address": "0x00481146",
+    "end_exclusive": "0x00481173",
+    "names": [
+     "V_DeplacerUnite"
+    ],
+    "occurrences": {
+     "V_DeplacerUnite": 1
+    },
+    "sha256": "65fd0ac16f29b074249ca225470563c404204142e8e95e6bd2c625aacb9f092f",
+    "instructions": 18,
+    "callees": [
+     "EnginEstVivant",
+     "SetDeplaceEngin"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "core units"
+    ],
+    "core_status": {
+     "V_DeplacerUnite": "core: implemented, needs unit world"
+    }
+   },
+   {
+    "address": "0x00481280",
+    "end_exclusive": "0x00481296",
+    "names": [
+     "B_Egalite"
+    ],
+    "occurrences": {
+     "B_Egalite": 47
+    },
+    "sha256": "56cedf10bbe9062cec0b468647de477f8cec0a46c24ddcdb7bd37e630763884a",
+    "instructions": 10,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "B_Egalite": "core: implemented without world state"
+    }
+   },
+   {
+    "address": "0x00481296",
+    "end_exclusive": "0x004812ac",
+    "names": [
+     "B_Superieur"
+    ],
+    "occurrences": {
+     "B_Superieur": 28
+    },
+    "sha256": "f58a5f2f1ff8c0882ceab5cbddcefffae52cf2b33761376912cf8e94382767d8",
+    "instructions": 10,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "B_Superieur": "core: implemented without world state"
+    }
+   },
+   {
+    "address": "0x004812ac",
+    "end_exclusive": "0x004812b9",
+    "names": [
+     "I_Addition"
+    ],
+    "occurrences": {
+     "I_Addition": 19
+    },
+    "sha256": "a5f89b15f7a34a9cc049163df66d222350573819d2cac7cec2593b436867e0e2",
+    "instructions": 8,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "I_Addition": "core: implemented without world state"
+    }
+   },
+   {
+    "address": "0x004812b9",
+    "end_exclusive": "0x004812d0",
+    "names": [
+     "I_Soustraction"
+    ],
+    "occurrences": {
+     "I_Soustraction": 17
+    },
+    "sha256": "d61e2803702355ddb7f1093c624e73d17f26e6b78a37395d4dacdda3e21e21a3",
+    "instructions": 15,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "I_Soustraction": "core: implemented without world state"
+    }
+   },
+   {
+    "address": "0x004812d0",
+    "end_exclusive": "0x004812f4",
+    "names": [
+     "I_PourcentageAB"
+    ],
+    "occurrences": {
+     "I_PourcentageAB": 2
+    },
+    "sha256": "6d0f1b2f25095b4ed6d1d7a052648d43fea147018f5b6e0d9a6d0d4eb1e5559c",
+    "instructions": 19,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "I_PourcentageAB": "core: implemented without world state"
+    }
+   },
+   {
+    "address": "0x004812f4",
+    "end_exclusive": "0x004812f7",
+    "names": [
+     "I_Affecte"
+    ],
+    "occurrences": {
+     "I_Affecte": 52
+    },
+    "sha256": "2f1077715974fe5c7be1e9eb34dd222d3b53fed99b35c99567b9178a4b4e67ff",
+    "instructions": 2,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "I_Affecte": "core: implemented without world state"
+    }
+   },
+   {
+    "address": "0x004812f7",
+    "end_exclusive": "0x00481302",
+    "names": [
+     "I_NumMission"
+    ],
+    "occurrences": {
+     "I_NumMission": 2
+    },
+    "sha256": "44301cc6cfed3f074f77975f8230ca4520cd92d0b5692d335b70698c5d7ed523",
+    "instructions": 3,
+    "callees": [
+     "MissionGetNum"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "missions"
+    ],
+    "core_status": {
+     "I_NumMission": "core: implemented without world state"
+    }
+   },
+   {
+    "address": "0x00481302",
+    "end_exclusive": "0x00481328",
+    "names": [
+     "I_Divise"
+    ],
+    "occurrences": {
+     "I_Divise": 1
+    },
+    "sha256": "60774a1e64d421e8563f6a005abb07f58868fd7b7e09434382b20f5e9fe6447e",
+    "instructions": 19,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "I_Divise": "core: implemented without world state"
+    }
+   },
+   {
+    "address": "0x00481372",
+    "end_exclusive": "0x00481399",
+    "names": [
+     "I_CombienCouteUnite"
+    ],
+    "occurrences": {
+     "I_CombienCouteUnite": 6
+    },
+    "sha256": "bd5084d73ea3aa6949f66f87567dbd78fc5e146165b5f72180b6989d587dacac",
+    "instructions": 22,
+    "callees": [
+     "EnginGetRessource"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x004813f1..0x004813f9"
+    ],
+    "globals": [],
+    "provider_families": [
+     "core units"
+    ],
+    "core_status": {
+     "I_CombienCouteUnite": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481399",
+    "end_exclusive": "0x004813b8",
+    "names": [
+     "I_CombienCouteBatiment"
+    ],
+    "occurrences": {
+     "I_CombienCouteBatiment": 2
+    },
+    "sha256": "adaa07b4cb2c96cabdfec53b495535f93f42e132dd5e9b63f09e6447379f31da",
+    "instructions": 23,
+    "callees": [
+     "BatimentGetRessource"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x0048138f..0x00481399",
+     "0x004813f1..0x004813f9"
+    ],
+    "globals": [],
+    "provider_families": [
+     "structures"
+    ],
+    "core_status": {
+     "I_CombienCouteBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481400",
+    "end_exclusive": "0x00481426",
+    "names": [
+     "B_TestRessource"
+    ],
+    "occurrences": {
+     "B_TestRessource": 11
+    },
+    "sha256": "8ed94e8f041b22464e5926f3fa02d492fa50e66376d70179bce938d67ca1cd44",
+    "instructions": 29,
+    "callees": [
+     "GetRessource"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x004813dc..0x00481400"
+    ],
+    "globals": [],
+    "provider_families": [
+     "economy resources/production/technology"
+    ],
+    "core_status": {
+     "B_TestRessource": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481426",
+    "end_exclusive": "0x00481738",
+    "names": [
+     "I_ChercheChampNonExploite"
+    ],
+    "occurrences": {
+     "I_ChercheChampNonExploite": 4
+    },
+    "sha256": "b9084068a502387a415d0f939a2015924a48f3a2524d9ca474dd6184bad2ea75",
+    "instructions": 210,
+    "callees": [
+     "Chemin_Accessible",
+     "Distance2dFromCases",
+     "GetCaseIndiceBatiment",
+     "GetNbrPatatesRayon",
+     "GetNumIndiceTypeBatiment",
+     "iagRessTestChampExploite"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481793..0x0048179a"
+    ],
+    "globals": [
+     "0x00507d74/4/r",
+     "0x0051bcdc/4/r",
+     "0x0051bce8/4/r",
+     "0x0051bcec/4/r"
+    ],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core terrain/navigation",
+     "economy resources/production/technology",
+     "structures"
+    ],
+    "core_status": {
+     "I_ChercheChampNonExploite": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481738",
+    "end_exclusive": "0x0048179e",
+    "names": [
+     "I_DonneCaveAssocieeChamp"
+    ],
+    "occurrences": {
+     "I_DonneCaveAssocieeChamp": 8
+    },
+    "sha256": "3aededf01697989ac67819545531c388f5491b409722838a0f6970228991841a",
+    "instructions": 45,
+    "callees": [
+     "Distance2dFromCases",
+     "GetCaseIndiceBatiment",
+     "GetNumIndiceTypeBatiment"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "core terrain/navigation",
+     "structures"
+    ],
+    "core_status": {
+     "I_DonneCaveAssocieeChamp": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0048179e",
+    "end_exclusive": "0x004817f2",
+    "names": [
+     "I_DonneCaveAssocieeMine"
+    ],
+    "occurrences": {
+     "I_DonneCaveAssocieeMine": 5
+    },
+    "sha256": "c76061e8aa9684addf02cbafc47a298a62c06309dc930923324d697f5f5e8715",
+    "instructions": 45,
+    "callees": [
+     "Distance2dFromCases",
+     "GetCaseIndiceBatiment",
+     "GetNumIndiceTypeBatiment"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x0048178c..0x0048179e"
+    ],
+    "globals": [],
+    "provider_families": [
+     "core terrain/navigation",
+     "structures"
+    ],
+    "core_status": {
+     "I_DonneCaveAssocieeMine": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x004817f2",
+    "end_exclusive": "0x00481806",
+    "names": [
+     "I_DonneValeurChamp"
+    ],
+    "occurrences": {
+     "I_DonneValeurChamp": 5
+    },
+    "sha256": "18a84c6e02e5fc5edde605f24759ee2c6c8ee4524b1f812a406060eb94c6aca9",
+    "instructions": 9,
+    "callees": [
+     "GetNbrPatatesRayon"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x0051bce8/4/r"
+    ],
+    "provider_families": [
+     "economy resources/production/technology"
+    ],
+    "core_status": {
+     "I_DonneValeurChamp": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481806",
+    "end_exclusive": "0x0048181a",
+    "names": [
+     "I_DonneMaxExploitantsDansChamp"
+    ],
+    "occurrences": {
+     "I_DonneMaxExploitantsDansChamp": 5
+    },
+    "sha256": "cd9cd8d600acf1fb89e43165d62671223dd259c0a18c0d9fe0024a4150bd1d9d",
+    "instructions": 10,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x0051bcec/4/r"
+    ],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "I_DonneMaxExploitantsDansChamp": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0048181a",
+    "end_exclusive": "0x00481833",
+    "names": [
+     "I_DonneChampAssocieGroupe"
+    ],
+    "occurrences": {
+     "I_DonneChampAssocieGroupe": 5
+    },
+    "sha256": "0f63eaecf7c772239d81400b7cc53fd6a325ce13c8687a5baeebdc2519f3c68b",
+    "instructions": 9,
+    "callees": [
+     "iagRessGetChampExploiteParGroupe"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "I_DonneChampAssocieGroupe": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481833",
+    "end_exclusive": "0x004819d7",
+    "names": [
+     "I_ChercheMine"
+    ],
+    "occurrences": {
+     "I_ChercheMine": 3
+    },
+    "sha256": "0cf6411b8abaff7e98fc5771f1eef6ca17259d413fd1d32e6dcbf7285fb125a1",
+    "instructions": 130,
+    "callees": [
+     "Chemin_Accessible",
+     "GetCaseIndiceBatiment",
+     "GetIndiceMineFromCaseFreePath",
+     "GetNumIndiceTypeBatiment",
+     "MineGetCapacite",
+     "MineGetIndice"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481793..0x0048179a"
+    ],
+    "globals": [
+     "0x00509954/2/r",
+     "0x0051a9cc/1/r",
+     "0x0051bce0/4/r"
+    ],
+    "provider_families": [
+     "core terrain/navigation",
+     "economy resources/production/technology",
+     "structures"
+    ],
+    "core_status": {
+     "I_ChercheMine": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x004819d7",
+    "end_exclusive": "0x00481b46",
+    "names": [
+     "I_CherchePiece"
+    ],
+    "occurrences": {
+     "I_CherchePiece": 1
+    },
+    "sha256": "ee026a81b00a6664dd9cb07b1c94cc28b0baad44983b7dbc65dda5f73a50ad02",
+    "instructions": 119,
+    "callees": [
+     "Chemin_Accessible",
+     "GetCaseIndiceBatiment",
+     "GetNumIndiceTypeBatiment",
+     "TerrainEstSac",
+     "TerrainGetSacType"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481793..0x0048179a",
+     "0x004819cf..0x004819d7"
+    ],
+    "globals": [
+     "0x0051bce4/4/r"
+    ],
+    "provider_families": [
+     "core terrain/navigation",
+     "structures"
+    ],
+    "core_status": {
+     "I_CherchePiece": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481b46",
+    "end_exclusive": "0x00481b9e",
+    "names": [
+     "I_DonneCaveProchePiece"
+    ],
+    "occurrences": {
+     "I_DonneCaveProchePiece": 1
+    },
+    "sha256": "4a1e442f55d1369cd829360574e90a24069f66754fd69636e67aecb0a221f6c1",
+    "instructions": 45,
+    "callees": [
+     "Distance2dFromCases",
+     "GetCaseIndiceBatiment",
+     "GetNumIndiceTypeBatiment"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x0048178c..0x0048179e"
+    ],
+    "globals": [],
+    "provider_families": [
+     "core terrain/navigation",
+     "structures"
+    ],
+    "core_status": {
+     "I_DonneCaveProchePiece": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481b9e",
+    "end_exclusive": "0x00481bb1",
+    "names": [
+     "I_DonneValeurPiece"
+    ],
+    "occurrences": {
+     "I_DonneValeurPiece": 1
+    },
+    "sha256": "940bf19f44ead39a3e81508542919343386e1f79dfc0d69bc84f2df22d36a987",
+    "instructions": 5,
+    "callees": [
+     "SacGetCapacite"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "economy resources/production/technology"
+    ],
+    "core_status": {
+     "I_DonneValeurPiece": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481bb1",
+    "end_exclusive": "0x00481bcf",
+    "names": [
+     "B_EncorePiece"
+    ],
+    "occurrences": {
+     "B_EncorePiece": 5
+    },
+    "sha256": "a489b68c2a439f5db0ef9ec338a833bdc0d86f338b504a1af312020135638f8b",
+    "instructions": 9,
+    "callees": [
+     "SacGetCapacite"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "economy resources/production/technology"
+    ],
+    "core_status": {
+     "B_EncorePiece": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481bcf",
+    "end_exclusive": "0x00481be8",
+    "names": [
+     "I_DonneValeurMine"
+    ],
+    "occurrences": {
+     "I_DonneValeurMine": 1
+    },
+    "sha256": "968a33c1a72edbfcf8d4786701600e0c22157ef2026d9fd3458f3e2ae23e2e23",
+    "instructions": 8,
+    "callees": [
+     "MineGetCapacite",
+     "MineGetIndice"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481bab..0x00481bb1"
+    ],
+    "globals": [],
+    "provider_families": [
+     "economy resources/production/technology"
+    ],
+    "core_status": {
+     "I_DonneValeurMine": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481be8",
+    "end_exclusive": "0x00481c03",
+    "names": [
+     "V_InterditCaseMine"
+    ],
+    "occurrences": {
+     "V_InterditCaseMine": 1
+    },
+    "sha256": "8c24d06e1b8356d3d2db514b7a76145f2dc22fcacc2b7fe2b4a3b3b207b47a34",
+    "instructions": 8,
+    "callees": [
+     "MineGetIndice"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481bc3..0x00481bc9"
+    ],
+    "globals": [
+     "0x0051a9cc/1/w"
+    ],
+    "provider_families": [
+     "economy resources/production/technology"
+    ],
+    "core_status": {
+     "V_InterditCaseMine": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481c03",
+    "end_exclusive": "0x00481c28",
+    "names": [
+     "V_RestoreCaseMine"
+    ],
+    "occurrences": {
+     "V_RestoreCaseMine": 1
+    },
+    "sha256": "0aa67c287f832e5212a47573c8bb86d3187dde5deaeda587f3ea920d3043f7a9",
+    "instructions": 10,
+    "callees": [
+     "MineGetIndice"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x0051a9cc/1/w"
+    ],
+    "provider_families": [
+     "economy resources/production/technology"
+    ],
+    "core_status": {
+     "V_RestoreCaseMine": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481c28",
+    "end_exclusive": "0x00481c38",
+    "names": [
+     "I_DonneNoGroupe"
+    ],
+    "occurrences": {
+     "I_DonneNoGroupe": 41
+    },
+    "sha256": "40eecec6db0882609f0538a2e21cf8d341825c5fb5f3aa895563b26f2a9f07fa",
+    "instructions": 7,
+    "callees": [
+     "iaGroupNew"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "I_DonneNoGroupe": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481c38",
+    "end_exclusive": "0x00481c4a",
+    "names": [
+     "V_LibereGroupeVide"
+    ],
+    "occurrences": {
+     "V_LibereGroupeVide": 55
+    },
+    "sha256": "c30edcf007914731b810f303015318202e6e78f6038e553c5ff0dc004fecd455",
+    "instructions": 7,
+    "callees": [
+     "iaGroupDelete"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "V_LibereGroupeVide": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481c4a",
+    "end_exclusive": "0x00481c75",
+    "names": [
+     "B_TransfertUnite"
+    ],
+    "occurrences": {
+     "B_TransfertUnite": 25
+    },
+    "sha256": "6aaf5871e740ac28ada27e4c780b1cf380f2608ef7bf8764a7fd6e4c550b0e58",
+    "instructions": 17,
+    "callees": [
+     "iagUnitTransfert"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "B_TransfertUnite": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481c75",
+    "end_exclusive": "0x00481c9b",
+    "names": [
+     "B_CompleteGroupe"
+    ],
+    "occurrences": {
+     "B_CompleteGroupe": 11
+    },
+    "sha256": "070e1abb525b91ed54231c1700fd2f69ae87fa951ee7f55b1bb80423827f3c45",
+    "instructions": 16,
+    "callees": [
+     "iagUnitTransfertUpToMax"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "B_CompleteGroupe": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481c9b",
+    "end_exclusive": "0x00481cb8",
+    "names": [
+     "B_AjusteNbUnitesGroupe"
+    ],
+    "occurrences": {
+     "B_AjusteNbUnitesGroupe": 3
+    },
+    "sha256": "0aa3f5aa802fdf92d48ca9c165f8e855f26a62600d6335b643620cf9cbf35a9e",
+    "instructions": 12,
+    "callees": [
+     "iagUnitReturnGroupToPoolDownToMax"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "B_AjusteNbUnitesGroupe": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481cb8",
+    "end_exclusive": "0x00481ce3",
+    "names": [
+     "V_MiseADisposition"
+    ],
+    "occurrences": {
+     "V_MiseADisposition": 34
+    },
+    "sha256": "0e6a7e97410c06e14b1b6701e5df3b0a1d6d82e415736379f5c31dc9d4a1eb66",
+    "instructions": 19,
+    "callees": [
+     "iaGroupDelete",
+     "iagUnitReturnGroupToPool",
+     "iagUnitReturnGroupToReserve"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481c93..0x00481c9b"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "V_MiseADisposition": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481ce3",
+    "end_exclusive": "0x00481d7e",
+    "names": [
+     "V_ConstruireBatiment"
+    ],
+    "occurrences": {
+     "V_ConstruireBatiment": 3
+    },
+    "sha256": "30fc2775c47001641e27605f8560fbb07415cd1909310bcfe435d31670ff854c",
+    "instructions": 51,
+    "callees": [
+     "EnginEstVivant",
+     "EnginGetEtat",
+     "EnginVisible",
+     "MineEndWork",
+     "PlaceEngin",
+     "SetEnginConstruitBatiment",
+     "iagMessDispatchWith",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x004e19a0/4/r"
+    ],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units",
+     "economy resources/production/technology"
+    ],
+    "core_status": {
+     "V_ConstruireBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481d7e",
+    "end_exclusive": "0x00481e07",
+    "names": [
+     "V_ReparerBatiment"
+    ],
+    "occurrences": {
+     "V_ReparerBatiment": 2
+    },
+    "sha256": "33e97167d45a743248f04cde3dab9c946d48ec5e5ad52f461fc162f23f824318",
+    "instructions": 49,
+    "callees": [
+     "EnginEstVivant",
+     "EnginGetEtat",
+     "EnginVisible",
+     "MineEndWork",
+     "PlaceEngin",
+     "SetEnginRepareBatiment",
+     "iagMessDispatchWith",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481d6f..0x00481d7e"
+    ],
+    "globals": [
+     "0x004e19a0/4/r"
+    ],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units",
+     "economy resources/production/technology"
+    ],
+    "core_status": {
+     "V_ReparerBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481e07",
+    "end_exclusive": "0x00481e4f",
+    "names": [
+     "V_EntreBatiment"
+    ],
+    "occurrences": {
+     "V_EntreBatiment": 4
+    },
+    "sha256": "aa0ed3e02663f441d25c07ea9608fb6ae227147bc4239a145eb98db42cccdf67",
+    "instructions": 26,
+    "callees": [
+     "SetEnginRentreBatiment",
+     "iagMessDispatchWith",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units"
+    ],
+    "core_status": {
+     "V_EntreBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481e4f",
+    "end_exclusive": "0x00481e88",
+    "names": [
+     "V_ActiveBatiment"
+    ],
+    "occurrences": {
+     "V_ActiveBatiment": 4
+    },
+    "sha256": "162aab7f63d5c09d22d11dd94e127ec6283e9456d03ab8bccab72be8db66a870",
+    "instructions": 27,
+    "callees": [
+     "SetEnginRentreBatiment",
+     "iagMessDispatchWith",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481e3e..0x00481e4f"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units"
+    ],
+    "core_status": {
+     "V_ActiveBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481e88",
+    "end_exclusive": "0x00481ece",
+    "names": [
+     "V_VideEngin"
+    ],
+    "occurrences": {
+     "V_VideEngin": 2
+    },
+    "sha256": "df6ca07ad9a41409fb0b4050a83ca2ac96d7077d036f94a1b5732a1d52ada010",
+    "instructions": 29,
+    "callees": [
+     "EnginEstVivant",
+     "SetEnginDepose",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481d74..0x00481d7e"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units"
+    ],
+    "core_status": {
+     "V_VideEngin": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481ece",
+    "end_exclusive": "0x00481f1a",
+    "names": [
+     "V_EntreDansEngin"
+    ],
+    "occurrences": {
+     "V_EntreDansEngin": 2
+    },
+    "sha256": "7cbf10aa07a4bbcfc06171106d53e90662e432aae0a344a59e5b5f3553d76f0e",
+    "instructions": 31,
+    "callees": [
+     "EnginEstVivant",
+     "SetEnginRentreEngin",
+     "iagMessDispatchWith",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481e41..0x00481e4f"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units"
+    ],
+    "core_status": {
+     "V_EntreDansEngin": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481f1a",
+    "end_exclusive": "0x00481f2e",
+    "names": [
+     "I_AttenteMessageGroupe"
+    ],
+    "occurrences": {
+     "I_AttenteMessageGroupe": 19
+    },
+    "sha256": "da004cf012bfa7d376d219c02f8b2c3e13f89dc4cc6e6cdaddce353ec06ea707",
+    "instructions": 11,
+    "callees": [
+     "iagMessSetWait"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481c93..0x00481c9b"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "I_AttenteMessageGroupe": "core: implemented, needs unit world"
+    }
+   },
+   {
+    "address": "0x00481f2e",
+    "end_exclusive": "0x00481f4c",
+    "names": [
+     "I_AiJeUniteDansGroupe"
+    ],
+    "occurrences": {
+     "I_AiJeUniteDansGroupe": 41
+    },
+    "sha256": "b383ed3a683563db477e181b5e749349c0d41ce2e4637119661f12a55d736932",
+    "instructions": 10,
+    "callees": [
+     "iagUnitFindTypeIntoGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "I_AiJeUniteDansGroupe": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481f4c",
+    "end_exclusive": "0x00481fb4",
+    "names": [
+     "V_DeplaceGroupe"
+    ],
+    "occurrences": {
+     "V_DeplaceGroupe": 30
+    },
+    "sha256": "048406cade3ef245cb90bc1656cddf7935fede52c0a42b0cc8313d14ef6f3e6c",
+    "instructions": 38,
+    "callees": [
+     "EnginEstVivant",
+     "SetDeplaceEngin",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481e46..0x00481e4f"
+    ],
+    "globals": [
+     "0x004e19a0/4/r"
+    ],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units"
+    ],
+    "core_status": {
+     "V_DeplaceGroupe": "core: implemented, needs unit world"
+    }
+   },
+   {
+    "address": "0x00481fb4",
+    "end_exclusive": "0x00481fc4",
+    "names": [
+     "I_RecupereNoGroupe"
+    ],
+    "occurrences": {
+     "I_RecupereNoGroupe": 27
+    },
+    "sha256": "b633bf5bcc769c95fcf857c7e7cea26ca2c7f25d500ccf9bad461bd75053794a",
+    "instructions": 7,
+    "callees": [
+     "iagUnitGetFirstGroupFromType"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "I_RecupereNoGroupe": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00481fc4",
+    "end_exclusive": "0x00482000",
+    "names": [
+     "V_AttendreDispatcher"
+    ],
+    "occurrences": {
+     "V_AttendreDispatcher": 21
+    },
+    "sha256": "a195d79c9f3900203acdb33b4293f1c55f30dcc8ac1581e0963675d8ffb2ea01",
+    "instructions": 26,
+    "callees": [
+     "iagUnitSetWait",
+     "iagUnitTransfert"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481d74..0x00481d7e"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "V_AttendreDispatcher": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00482000",
+    "end_exclusive": "0x00482010",
+    "names": [
+     "I_DonneGroupeNonComplet"
+    ],
+    "occurrences": {
+     "I_DonneGroupeNonComplet": 2
+    },
+    "sha256": "7be85f424006d44fe513a4329a309b506bbb2a2fa39c2cafbbcb5681fa8cdac6",
+    "instructions": 7,
+    "callees": [
+     "iagUnitFindGroupNotFull"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "I_DonneGroupeNonComplet": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00482010",
+    "end_exclusive": "0x00482020",
+    "names": [
+     "V_SetMaxUnites"
+    ],
+    "occurrences": {
+     "V_SetMaxUnites": 5
+    },
+    "sha256": "bf30137c4446dda2a98ec61bd562324c56f437539fa5929c7ab5f1c8a6085653",
+    "instructions": 8,
+    "callees": [
+     "iagUnitSetMaxUnitsForGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481cb1..0x00481cb8"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "V_SetMaxUnites": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00482020",
+    "end_exclusive": "0x00482085",
+    "names": [
+     "V_Recolter"
+    ],
+    "occurrences": {
+     "V_Recolter": 8
+    },
+    "sha256": "fef21cd04e8b12811808e2d3ea2fafb9d0f13db090410a25e0da14223fc4c0fe",
+    "instructions": 42,
+    "callees": [
+     "EnginEstVivant",
+     "EnginGetEtat",
+     "SetDepotEngin",
+     "SetRecolteEngin",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x0048225b..0x00482265",
+     "0x0048242d..0x00482433"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units"
+    ],
+    "core_status": {
+     "V_Recolter": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00482085",
+    "end_exclusive": "0x004820e7",
+    "names": [
+     "V_CueillirChamp"
+    ],
+    "occurrences": {
+     "V_CueillirChamp": 1
+    },
+    "sha256": "f56b8ab8004b05bc4120f3613954e5b593d25e170366e54f992341f73e008cac",
+    "instructions": 42,
+    "callees": [
+     "EnginEstVivant",
+     "EnginGetEtat",
+     "SetDepotEngin",
+     "SetRecolteEngin",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x0048225b..0x00482265",
+     "0x0048242d..0x00482433"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units"
+    ],
+    "core_status": {
+     "V_CueillirChamp": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x004820e7",
+    "end_exclusive": "0x0048213c",
+    "names": [
+     "V_SetNavetteCaveToCulture"
+    ],
+    "occurrences": {
+     "V_SetNavetteCaveToCulture": 1
+    },
+    "sha256": "565ebd99b9ca97d23b4691abdf78103d81fe4f65c21b26bb4a5879f0d837d0cb",
+    "instructions": 36,
+    "callees": [
+     "EnginEstVivant",
+     "SetDechargeCaveEngin",
+     "SetDepotEngin",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x0048225b..0x00482265",
+     "0x0048242d..0x00482433"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units"
+    ],
+    "core_status": {
+     "V_SetNavetteCaveToCulture": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0048213c",
+    "end_exclusive": "0x0048219e",
+    "names": [
+     "V_ExploiteMine"
+    ],
+    "occurrences": {
+     "V_ExploiteMine": 5
+    },
+    "sha256": "ca7ec96143797f8c522ad38ebcabd746be03902c912b47a2f1f55de088d04dc5",
+    "instructions": 42,
+    "callees": [
+     "EnginEstVivant",
+     "EnginGetEtat",
+     "SetDepotEngin",
+     "SetMineEngin",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x0048225b..0x00482265",
+     "0x0048242d..0x00482433"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units"
+    ],
+    "core_status": {
+     "V_ExploiteMine": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0048219e",
+    "end_exclusive": "0x004821f0",
+    "names": [
+     "V_RienFaire"
+    ],
+    "occurrences": {
+     "V_RienFaire": 7
+    },
+    "sha256": "108dcdceedb4cca767a84289fbfbe97cc1d88a0806fb2e26b25396cb5fb31d3f",
+    "instructions": 29,
+    "callees": [
+     "EnginEstVivant",
+     "EnginVisible",
+     "SetDeplaceEngin",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481c93..0x00481c9b"
+    ],
+    "globals": [
+     "0x004e19a0/4/r"
+    ],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units"
+    ],
+    "core_status": {
+     "V_RienFaire": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x004821f0",
+    "end_exclusive": "0x00482265",
+    "names": [
+     "V_ExploitePiece"
+    ],
+    "occurrences": {
+     "V_ExploitePiece": 2
+    },
+    "sha256": "1b7b16ca4770260044b95a0bd0ab75bba4348ff5c416fafb610ef21daedfd589",
+    "instructions": 45,
+    "callees": [
+     "EnginEstVivant",
+     "EnginGetEtat",
+     "SetDepotEngin",
+     "SetTransporteEngin",
+     "iagMessDispatchWith",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x0048242d..0x00482433"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units"
+    ],
+    "core_status": {
+     "V_ExploitePiece": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00482265",
+    "end_exclusive": "0x004822ab",
+    "names": [
+     "V_DeposerPiece"
+    ],
+    "occurrences": {
+     "V_DeposerPiece": 2
+    },
+    "sha256": "544c42040ea21f7ade27a96f398abd89343e5c888f6bfd9d3994b8370c0ddc10",
+    "instructions": 35,
+    "callees": [
+     "EnginEstVivant",
+     "SetEnginDepose",
+     "iagMessDispatchWith",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00482256..0x00482265",
+     "0x0048242d..0x00482433"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units"
+    ],
+    "core_status": {
+     "V_DeposerPiece": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x004822ab",
+    "end_exclusive": "0x004822ed",
+    "names": [
+     "V_PrendrePiece"
+    ],
+    "occurrences": {
+     "V_PrendrePiece": 1
+    },
+    "sha256": "cc69ac18f8e9f91693e4c602c18cec3ef99513049df21e809d9e325a785d39c5",
+    "instructions": 29,
+    "callees": [
+     "EnginEstVivant",
+     "SetRamasseEngin",
+     "iagMessDispatchWith",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481e3e..0x00481e4f"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units"
+    ],
+    "core_status": {
+     "V_PrendrePiece": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x004822ed",
+    "end_exclusive": "0x0048232f",
+    "names": [
+     "V_AttaquerBatiment"
+    ],
+    "occurrences": {
+     "V_AttaquerBatiment": 5
+    },
+    "sha256": "6076fbf9c03de21f9120d0e6b41e23773015c6b310966a99c31f7f2833f03b1a",
+    "instructions": 28,
+    "callees": [
+     "EnginEstVivant",
+     "SetAttaqueEngin",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481d74..0x00481d7e"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state",
+     "combat",
+     "core units"
+    ],
+    "core_status": {
+     "V_AttaquerBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0048232f",
+    "end_exclusive": "0x00482354",
+    "names": [
+     "B_TestGroupeVide"
+    ],
+    "occurrences": {
+     "B_TestGroupeVide": 77
+    },
+    "sha256": "7ba5dd76922efbba8414618a65c2a38e4cd4103fbe0877ed33ee4cd10cf54b5c",
+    "instructions": 12,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "B_TestGroupeVide": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00482354",
+    "end_exclusive": "0x00482433",
+    "names": [
+     "I_DetermineTempsTrajet"
+    ],
+    "occurrences": {
+     "I_DetermineTempsTrajet": 7
+    },
+    "sha256": "d3758f8e50028e3b14635d1ed74e36434b28a1f76574c6df84a40ce20f46c356",
+    "instructions": 86,
+    "callees": [
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x004e19a0/4/r"
+    ],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "I_DetermineTempsTrajet": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00482433",
+    "end_exclusive": "0x00482501",
+    "names": [
+     "B_TransfertUniteFastest"
+    ],
+    "occurrences": {
+     "B_TransfertUniteFastest": 1
+    },
+    "sha256": "833b7f473eef8fbc2be88f25048adc1f5f97490c36f449b573a991d36a58ef19",
+    "instructions": 71,
+    "callees": [
+     "iagUnitAddToGroup",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup",
+     "iagUnitRemoveFromGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x0048242c..0x00482433"
+    ],
+    "globals": [
+     "0x004989f8/4/",
+     "0x004e19a0/4/r"
+    ],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "B_TransfertUniteFastest": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00482501",
+    "end_exclusive": "0x00482550",
+    "names": [
+     "V_TricheToutLeMondeMange"
+    ],
+    "occurrences": {
+     "V_TricheToutLeMondeMange": 4
+    },
+    "sha256": "e830fb37a5e6a55448b610cd2143bb9a34caf6414882b4d77a55a3e764244235",
+    "instructions": 24,
+    "callees": [
+     "EnginEstVivant",
+     "iagUnitGetFirstUnitInGroup",
+     "iagUnitGetNextUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00481c93..0x00481c9b"
+    ],
+    "globals": [
+     "0x004e19a0/4/r"
+    ],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units"
+    ],
+    "core_status": {
+     "V_TricheToutLeMondeMange": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00482550",
+    "end_exclusive": "0x00482579",
+    "names": [
+     "I_DonnePositionGroupe"
+    ],
+    "occurrences": {
+     "I_DonnePositionGroupe": 13
+    },
+    "sha256": "9d274abf745d7337b01d651ce8ca09b2c5446cde3b58c6c13aa06f2a3cfeb66a",
+    "instructions": 11,
+    "callees": [
+     "EnginGetCase",
+     "iagUnitGetFirstUnitInGroup"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units"
+    ],
+    "core_status": {
+     "I_DonnePositionGroupe": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00482579",
+    "end_exclusive": "0x00482610",
+    "names": [
+     "V_TricheColon"
+    ],
+    "occurrences": {
+     "V_TricheColon": 1
+    },
+    "sha256": "fa02f5238fec3cceada5f58469396c98f451f70a8defe243a27c1d763811d8e8",
+    "instructions": 55,
+    "callees": [
+     "BagAccepte",
+     "BatimentLogeEngin",
+     "CreerEngin",
+     "EnginNewPossible",
+     "EnginSetEtat",
+     "iagUnitAddToGroup",
+     "iagUnitGetFirstGroupFromType"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state",
+     "core units",
+     "economy resources/production/technology",
+     "structures"
+    ],
+    "core_status": {
+     "V_TricheColon": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00482610",
+    "end_exclusive": "0x00482630",
+    "names": [
+     "V_BatimentNestPlusEnConstructionWithAbort"
+    ],
+    "occurrences": {
+     "V_BatimentNestPlusEnConstructionWithAbort": 4
+    },
+    "sha256": "05e23193effd6e6a09a28cb2fb03f3c834ed7de88d0c46530df56b5032125164",
+    "instructions": 13,
+    "callees": [
+     "iagVilleAbortWaitingProblems",
+     "iagVilleDecBatEnCours"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "V_BatimentNestPlusEnConstructionWithAbort": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00482630",
+    "end_exclusive": "0x0048264a",
+    "names": [
+     "V_MiseAJourBatimentConstruit"
+    ],
+    "occurrences": {
+     "V_MiseAJourBatimentConstruit": 1
+    },
+    "sha256": "d2b159ef583f534e3466b4000001ff3c88aa3ce80606340cf1c21ef62db78ada",
+    "instructions": 14,
+    "callees": [
+     "iagVilleDecBatEnCours",
+     "iagVilleIncBatBuilt"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00482628..0x00482630"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "V_MiseAJourBatimentConstruit": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x0048264a",
+    "end_exclusive": "0x00482667",
+    "names": [
+     "B_AiJeBatimentEnCoursConstruction"
+    ],
+    "occurrences": {
+     "B_AiJeBatimentEnCoursConstruction": 4
+    },
+    "sha256": "d7877b835980728de29831d3b898fd6cbff6581aa88b32aa5f39787e0d7ba0e9",
+    "instructions": 12,
+    "callees": [
+     "iagVilleGetNbBatEnCoursType"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "B_AiJeBatimentEnCoursConstruction": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00482667",
+    "end_exclusive": "0x00482679",
+    "names": [
+     "V_MiseAJourBatimentEnCoursConstruction"
+    ],
+    "occurrences": {
+     "V_MiseAJourBatimentEnCoursConstruction": 1
+    },
+    "sha256": "d54b784bb701a6bc42cf74c10f55207de5a26bebeb943b8f91f8ffb50afce57c",
+    "instructions": 7,
+    "callees": [
+     "iagVilleIncBatEnCours"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "V_MiseAJourBatimentEnCoursConstruction": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00482679",
+    "end_exclusive": "0x00482697",
+    "names": [
+     "I_AttenteBatimentConstruit"
+    ],
+    "occurrences": {
+     "I_AttenteBatimentConstruit": 4
+    },
+    "sha256": "28fda2936f7f0050d9b0f497fcdf82a3b1c31d79bfe4c609e8a08bafca17c48e",
+    "instructions": 13,
+    "callees": [
+     "iagVilleRequest"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "I_AttenteBatimentConstruit": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00482697",
+    "end_exclusive": "0x004826a4",
+    "names": [
+     "I_AttenteMessageBatiment"
+    ],
+    "occurrences": {
+     "I_AttenteMessageBatiment": 5
+    },
+    "sha256": "c5b9dffb686173252dbef936b258f2cbaf26aa41b6dbcc158e905ffe931ed2f9",
+    "instructions": 14,
+    "callees": [
+     "iagVilleRequest"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00482686..0x00482697"
+    ],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "I_AttenteMessageBatiment": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00485d53",
+    "end_exclusive": "0x00485d75",
+    "names": [
+     "V_AttendreRessource"
+    ],
+    "occurrences": {
+     "V_AttendreRessource": 1
+    },
+    "sha256": "8df8436f29085d797e606ed3829a59884eb5b06f3810d80c31d125b88fc04857",
+    "instructions": 16,
+    "callees": [
+     "iagRessRequest"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "ai-runtime AI state"
+    ],
+    "core_status": {
+     "V_AttendreRessource": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00485d7b",
+    "end_exclusive": "0x00485dfc",
+    "names": [
+     "V_SetChampExploite"
+    ],
+    "occurrences": {
+     "V_SetChampExploite": 4
+    },
+    "sha256": "b4a4e933cd95bbec9fdb7d8b9051011d575c03dcc6fea66317486354111589e7",
+    "instructions": 51,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00485694..0x0048569a"
+    ],
+    "globals": [
+     "0x0051ba90/4/w",
+     "0x0051ba94/4/r",
+     "0x0051ba94/4/w",
+     "0x0051bac4/4/rw",
+     "0x0051bcf0/4/r"
+    ],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "V_SetChampExploite": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00485dfc",
+    "end_exclusive": "0x00485e53",
+    "names": [
+     "V_SetChampNonExploite"
+    ],
+    "occurrences": {
+     "V_SetChampNonExploite": 7
+    },
+    "sha256": "bd67aeffdda67a18b1db9458681915523cc9938048d39f97a06175a3e01ea609",
+    "instructions": 34,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x0051ba90/4/w",
+     "0x0051ba94/4/r",
+     "0x0051ba94/4/w",
+     "0x0051bac4/4/rw",
+     "0x0051bcf0/4/r"
+    ],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "V_SetChampNonExploite": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00485e53",
+    "end_exclusive": "0x00485e66",
+    "names": [
+     "V_SetProductionColonsOn"
+    ],
+    "occurrences": {
+     "V_SetProductionColonsOn": 1
+    },
+    "sha256": "6c788d028753c39308a7a5ecf000297a29defdd39ab566f1e496ecf9c89a892d",
+    "instructions": 5,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x0051a98d/1/w"
+    ],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "V_SetProductionColonsOn": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00485e66",
+    "end_exclusive": "0x00485e7c",
+    "names": [
+     "V_SetProductionColonsOff"
+    ],
+    "occurrences": {
+     "V_SetProductionColonsOff": 1
+    },
+    "sha256": "5c27c66ccefd0b86ccf770747dd09888ec31bc746ff42474e6f3d62396ac3c12",
+    "instructions": 8,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x0051a98d/1/w"
+    ],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "V_SetProductionColonsOff": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00485e7c",
+    "end_exclusive": "0x00485e98",
+    "names": [
+     "B_TesteProductionColons"
+    ],
+    "occurrences": {
+     "B_TesteProductionColons": 2
+    },
+    "sha256": "0c75bad2bfbad85733dbeba1849bf35b6980539cd5f6c66b9b9bd718a0ff22fb",
+    "instructions": 8,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x0051a98d/1/r"
+    ],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "B_TesteProductionColons": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00485e98",
+    "end_exclusive": "0x00485ec2",
+    "names": [
+     "V_SetMineExploitee"
+    ],
+    "occurrences": {
+     "V_SetMineExploitee": 3
+    },
+    "sha256": "a40d73ce84a21974e4c3504f5813a8ac4dadadace45d3594dcf7d5e6751a71c9",
+    "instructions": 19,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [
+     "0x00485d6c..0x00485d75"
+    ],
+    "globals": [
+     "0x0051bab8/4/w",
+     "0x0051babc/4/w"
+    ],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "V_SetMineExploitee": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00485ec2",
+    "end_exclusive": "0x00485ef3",
+    "names": [
+     "I_DonneMineAssocieeGroupe"
+    ],
+    "occurrences": {
+     "I_DonneMineAssocieeGroupe": 3
+    },
+    "sha256": "187a5be9dbcf6564b0e76d43fbac7d44985ca7fc180e07ec5b12315af3711bf6",
+    "instructions": 19,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x0051bab8/4/r",
+     "0x0051babc/4/r"
+    ],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "I_DonneMineAssocieeGroupe": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00485ef3",
+    "end_exclusive": "0x00485f20",
+    "names": [
+     "B_TestMaxChampsExploites"
+    ],
+    "occurrences": {
+     "B_TestMaxChampsExploites": 2
+    },
+    "sha256": "9272df1ef28fb116a16f66806ec096be03d52949b8b6ea1b1e2b6531d4b42f6e",
+    "instructions": 16,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x0051bac4/4/r",
+     "0x0051bcf0/4/r"
+    ],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "B_TestMaxChampsExploites": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x00485f20",
+    "end_exclusive": "0x00485fa3",
+    "names": [
+     "B_TestMaxRocheDansStock"
+    ],
+    "occurrences": {
+     "B_TestMaxRocheDansStock": 1
+    },
+    "sha256": "1d0f23fd9bc45ba305cd0e69ed2f1b0530953988f2f3d189692e7dd55835eb1c",
+    "instructions": 43,
+    "callees": [
+     "GetRessourceStock"
+    ],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [
+     "0x004dfb2c/2/r",
+     "0x004dfb2e/2/r",
+     "0x0051bcf4/4/r",
+     "0x0051bcf8/4/r"
+    ],
+    "provider_families": [
+     "economy resources/production/technology"
+    ],
+    "core_status": {
+     "B_TestMaxRocheDansStock": "pending: world operation not reconstructed"
+    }
+   },
+   {
+    "address": "0x004897a5",
+    "end_exclusive": "0x004897c8",
+    "names": [
+     "V_AffecteComportement"
+    ],
+    "occurrences": {
+     "V_AffecteComportement": 12
+    },
+    "sha256": "01ca3e66759c6848ead5f4417af010bff4b0eb1cc7aa397615e741a6c4852db7",
+    "instructions": 13,
+    "callees": [],
+    "imports": [],
+    "indirect_calls": [],
+    "shared_tails": [],
+    "globals": [],
+    "provider_families": [
+     "no callee (arithmetic or direct table access)"
+    ],
+    "core_status": {
+     "V_AffecteComportement": "pending: world operation not reconstructed"
+    }
+   }
+  ]
+ },
+ "callers": {
+  "0x004259e6": {
+   "name": "CalculTroupe",
+   "sites": [
+    {
+     "site": "0x00426983",
+     "routine": "BatimentNextEtape"
+    },
+    {
+     "site": "0x004269f4",
+     "routine": "BatimentNextEtape"
+    },
+    {
+     "site": "0x00426ab9",
+     "routine": "BatimentNextEtape"
+    },
+    {
+     "site": "0x00427e1f",
+     "routine": "BatimentNextEtape"
+    },
+    {
+     "site": "0x00427f53",
+     "routine": "BatimentNextEtape"
+    },
+    {
+     "site": "0x00428145",
+     "routine": "BatimentNextEtape"
+    }
+   ]
+  },
+  "0x004268d4": {
+   "name": "BatimentNextEtape",
+   "sites": [
+    {
+     "site": "0x004282da",
+     "routine": "CalculBatimentNextEtape"
+    }
+   ]
+  },
+  "0x004281c7": {
+   "name": "CalculBatimentNextEtape",
+   "sites": [
+    {
+     "site": "0x0042d3fa",
+     "routine": "CalculGame"
+    }
+   ]
+  },
+  "0x0042c868": {
+   "name": "CalculGame",
+   "sites": [
+    {
+     "site": "0x0047505e",
+     "routine": "ProgIteration"
+    }
+   ]
+  },
+  "0x0044bc74": {
+   "name": "CalculWorkEngin",
+   "sites": [
+    {
+     "site": "0x00456731",
+     "routine": "EnginNextEtape"
+    }
+   ]
+  },
+  "0x0044f2d4": {
+   "name": "CalculTransporteEngin",
+   "sites": [
+    {
+     "site": "0x00455e28",
+     "routine": "EnginNextEtape"
+    }
+   ]
+  },
+  "0x00451914": {
+   "name": "CalculAttaqueEngin",
+   "sites": [
+    {
+     "site": "0x004568a3",
+     "routine": "EnginNextEtape"
+    }
+   ]
+  },
+  "0x00453062": {
+   "name": "CalculEnginStatic",
+   "sites": []
+  },
+  "0x0045442c": {
+   "name": "EnginNextEtape",
+   "sites": [
+    {
+     "site": "0x00456ead",
+     "routine": "CalculEnginNextEtape"
+    }
+   ]
+  },
+  "0x00456db5": {
+   "name": "CalculEnginNextEtape",
+   "sites": [
+    {
+     "site": "0x0042d3f5",
+     "routine": "CalculGame"
+    }
+   ]
+  },
+  "0x0045d015": {
+   "name": "GameNextFrame",
+   "sites": [
+    {
+     "site": "0x0042d3e6",
+     "routine": "CalculGame"
+    }
+   ]
+  },
+  "0x0047c162": {
+   "name": "IAResetAttaque",
+   "sites": []
+  },
+  "0x0047f328": {
+   "name": "iaInit",
+   "sites": []
+  },
+  "0x0047f36e": {
+   "name": "IaReset",
+   "sites": [
+    {
+     "site": "0x0046c5cc",
+     "routine": "MissionLoad"
+    },
+    {
+     "site": "0x0046c98e",
+     "routine": "MissionLoadName"
+    }
+   ]
+  },
+  "0x0047f927": {
+   "name": "iaCalculPlayer",
+   "sites": [
+    {
+     "site": "0x0047fbf5",
+     "routine": "CalculNextReflect"
+    }
+   ]
+  },
+  "0x0047fb15": {
+   "name": "IaAlloc",
+   "sites": [
+    {
+     "site": "0x00474ed2",
+     "routine": "ProgInit"
+    }
+   ]
+  }
+ }
+}
