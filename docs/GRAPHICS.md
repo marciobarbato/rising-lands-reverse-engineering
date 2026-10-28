@@ -85,6 +85,50 @@ python3 -B pesquisas-paralelas/graficos-animacao/validar_portoes_completos.py
 python3 -B scripts/check.py --domain graphics
 ```
 
+## Unit selection and exact sorting — third continuation stage
+
+`ordem_unidades.py:selecionar_ordem_unidades` reconstructs the read-only prefix of `AffSprite`, before projectile sorting or drawing. It requires exactly **220,800 runtime unit bytes** (800 records × 276), two separately selected camera byte maps of 65,536 bytes each, a required `origem` pair in 0–255, and `janela_celulas` width/height in 1–256. It reads only record state u8 `+0x02`, cell u16 `+0x08`, and priority u8 `+0xAB`. It does not infer unit type, owner, life, or economic state.
+
+The original scans pool indices 0–799 and accepts a record exactly when its state byte is nonzero, its discovery map byte has `(flag & 31) == 0`, its separate illumination map has `(flag & 16) == 0`, and its cell coordinates satisfy:
+
+```text
+origin_x <= cell_x < origin_x + window_width_cells + 2
+origin_y <= cell_y < origin_y + window_height_cells + 10
+```
+
+The result contains `selecionadas` in initial pool-index order and `ordenadas` in the exact original swap order. The primary key is the full cell word, then the priority byte. The original selection sort is **unstable for equal keys**: initial indices `[0,1,2]` with cells `[A,A,B]`, `B < A`, and equal priorities produce `[2,1,0]`. A stable sort would produce `[2,0,1]`. State 4 is included as a nonzero state; no independent death precedence was observed in this prefix.
+
+No input buffer is mutated and there are no callbacks or rendering effects in this API. Incorrect buffer lengths or origin/window pairs raise `ValueError`; missing required keyword arguments raise `TypeError`. The sorted buffer is an intermediate caller input, not the final draw order: subsequent code divides units into two priority passes and interleaves other renderers/projectiles. The overlapping-unit demonstration separately invokes the original supported unit renderer using the captured order at a declared common projected position; it is not a full `AffSprite` scene.
+
+Original evidence: `AffSprite 0x416864..0x416A6C`, byte SHA-256 `9c1d0287c39058b803a9f23c0080354ab769c5127132919bd03d1a82768bad0e`; original `ExisteEngin 0x441FFF..0x442025`, discovery `0x4766F0..0x47670A`, illumination `0x47693A..0x476951`. [Exact bytes and predecessor provenance](../pesquisas-paralelas/graficos-animacao/evidencias/ordem-unidades.json) use the same original executable identity recorded above.
+
+Fresh validation: **2,354 bounded x86 segments / 15,600,001 observed instructions**, covering 327 selection/sort fixtures, all state and camera-flag byte values, index 799, window margins, deterministic mixed pools, the full 800-selected pool, and eight separately captured overlap buffers. The large sort preserves CPU/stack at outer-loop checkpoints to stay within each execution limit. There are zero skipped cases, expected exceptions or limit failures. Eight original indexed overlap buffers match; a hypothetical stable-sort composition differs by **44–127 pixels** per buffer. Forty original type initialization calls, forty original complete supported body draws, and two bank setup calls are included in this stage's segment count, not added as historical totals. Six new capture regressions pass; the full graphics domain passes **94 tests** without skips. [Saved ordering report](../pesquisas-paralelas/graficos-animacao/validacao/x86-ordem-unidades.json).
+
+```sh
+python3 -B pesquisas-paralelas/graficos-animacao/validar_ordem_unidades.py
+python3 -B scripts/check.py --domain graphics
+```
+
+## Projectile display list and cell query — fourth continuation stage
+
+`ordem_projeteis.py` reconstructs two read-only display inputs required by `AffSprite`. These functions consume the existing **100×56-byte projectile pool**; they do not advance, allocate, expire or damage anything.
+
+- `consultar_celula_projetil(pool, indice_u16)` accepts indices 0–99 and reads unsigned pixel words `+0x0C/+0x0E`, regardless of the activity byte. It returns `x_celula=x//32`, `y_celula=y//32`, `chave_u32=y_celula*256+x_celula`, and `celula_u16=chave_u32 & 65535`. The full dword matters: raw maximum coordinates yield **526079**, while the scene commonly compares its low word. Origin/target fields `+0x14/+0x16` are not read.
+- `selecionar_ordem_projeteis(pool, descoberta, iluminacao, indices_entrada, *, origem, janela_celulas)` requires two camera maps of 65,536 bytes, a **200-byte caller index array**, origin coordinates 0–255, and window dimensions 1–256 cells. It returns selected/ordered indices, count 0–100 and a new output index array whose unused tail remains identical to the caller input.
+
+The sorter scans indices 0–99; nonzero u8 `+0x02` is active. It derives the pixel-coordinate cell, applies **mask 31 to both discovery and illumination** at the low-word key, and applies the same +2-column/+10-row window margins as the unit selector. Raw coordinate words can derive coordinates beyond 255; the query preserves that arithmetic rather than silently clamping to a physical map.
+
+It selection-sorts the output by the **unsigned low 16-bit key**, choosing the **last equal candidate** at each swap. Four equal keys initially `[0,1,2,3]` produce `[3,0,1,2]`. This is a different tie rule from the unit sort. Only the first `count*2` output bytes are replaced; no pool, camera map, or input index bytes mutate. Invalid lengths, scalar indices, or origin/window ranges raise `ValueError`; missing required keywords raise `TypeError`. Negative camera origins and raw indices outside the 100-record pool are unsupported.
+
+Evidence: original `ProjectileTrierAffichage 0x46FC8B..0x46FE9A` SHA-256 `3b26fd5f75330b32f114f8546c332e9fb13e3740af97519a8c6283cbf74e5dc5`; `ProjectileGetCase 0x46FE9A..0x46FEE5` SHA-256 `5cf91836f9b460da243a56f8f62400d840dff7b8a5014a223ceb13c89c97ccc1`; shared epilogue `0x46FC08..0x46FC0F`; terrain illumination `0x476951..0x476968`. Sort input `EAX` points to the output array, returns `EAX=count`; globals supply the pool at `0x5080F0`, selected camera at `0x508041`, origin words `0x508720/+2` and window words `0x508724/+2`. GetCase takes the record index in `AX` and returns the full key in `EAX`. [Exact original bytes](../pesquisas-paralelas/graficos-animacao/evidencias/ordem-projeteis.json).
+
+Fresh validation: **1,310 bounded x86 segments / 1,736,567 instructions**: 581 full index-buffer fixtures, 98 cell queries (including pixel/u16 boundaries and indices 0/99), eight original type-1 projectile overlap captures, 32 complete original draw calls, and two bank setup calls. Sort capture deliberately pauses at `0x46FD9C` before sorting, preserves CPU/stack, then reaches the actual return; GetCase and demo draws also return normally. Zero skips, expected exceptions or limit failures. Seven new capture regressions pass. The eight indexed demos replay independently captured sprite IDs/positions in the reconstructed index order; **they do not establish a public `AffProjectile` sprite mapping**. [Saved display report](../pesquisas-paralelas/graficos-animacao/validacao/x86-ordem-projeteis.json).
+
+```sh
+python3 -B pesquisas-paralelas/graficos-animacao/validar_ordem_projeteis.py
+python3 -B scripts/check.py --domain graphics
+```
+
 ## Remaining component inventory — continuation after the gate facade
 
 This inventory distinguishes reconstructed behavior, captured original behavior, and runtime integration. The integrated gate facade at `ff4bc269c6d8534f4683bd0429072286ea8eaaf1` has exact indexed comparisons; it is not yet exercised by the macOS consumer or a complete loaded mission.
@@ -94,11 +138,16 @@ This inventory distinguishes reconstructed behavior, captured original behavior,
 | Gate shared tail | The full-return API now reconstructs `AffBatiments 0x40F342..0x40F49C` for terrain other than `0x356`; 882 fresh x86 calls validate return/clip/guards | Close the workshop-trigger lookup with a committed world-provider contract; integrate the consumer |
 | Other building facades and overlays | `AffBatiments 0x407DD3..0x40F49C`; only the Sanctuary subset and gate facade are reconstructed | Recover per-type/mode layers, clipping and anchors against original buffers |
 | Unit action handlers | `AffEngin` dispatches to attack `0x41374C`, construction `0x414495`, work `0x414A8A`, death `0x41559A` | Map each supported type/action input and coordinate simulation phase producers |
-| Scene traversal/projection | Individual `AffTerrain 0x41068E`, `AffVegetTerrain 0x410085`, `AffVeget 0x415ACF`, and unit/building passes are captured separately | Recover their real caller's projection, visitation and draw order |
+| Projectile display inputs | The 100-record display selection/sort and full/low-word cell queries are reconstructed and independently validated | Connect the committed pool view to the two scene passes; recover public `AffProjectile` sprite mappings |
+| Scene traversal/projection | `AffSprite 0x416864..0x416E41` is the vegetation/building/unit caller; its selection/sort prefix is now reconstructed and independently validated through `0x416A6C` | Recover both scene passes, projection, projectile interleaving and viewport edge behavior |
 | Visibility, palette and clocks | Indexed composition/shadow helpers and clock prefix are reconstructed; visibility bytes are explicit runtime inputs | Connect validated world providers and original frame cadence |
 | Real-mission consumer | V6 reads all serialized mission-1 object codes; the preview uses older pinned snapshots | Coordinate complete world loading/remapping, dynamic render state, input, effects and original-reference runtime scenes |
 
 The gate-tail stage proves the explicit type-12 returns in `BatimentPoseCadre 0x4022C8` and `AffJaugeBatiment 0x4020EC`, plus the supported terrain guard in `AffVehiculeAtelier 0x402864`. This does not establish that the shared tail is visually inert for other buildings.
+
+Original direct-call sites are `0x416B8A -> AffVeget`, `0x416BBD -> AffBatiments`, and `0x416C5D/0x416E2F -> AffEngin`. Recovering the prefix does not by itself reconstruct those passes or projectile integration.
+
+The projectile-display slice is read-only with respect to combat state. Both visibility predicates use mask 31; the query uses pixel-coordinate-derived keys and the swap sort chooses the last equal candidate. These independently validated differences must remain distinct from the unit selector and physical projectile targeting.
 
 ## Terrain objects and sequential codes
 

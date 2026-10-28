@@ -1,0 +1,58 @@
+{
+  "success": true,
+  "tests": 6,
+  "failures": 0,
+  "errors": 0,
+  "skipped": [
+    {
+      "test": "test_ordem_tipo4.DiferencialOrdemTipo4.test_original_characterization_dependency_boundary",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_ordem_tipo4.DiferencialOrdemTipo4.test_original_mission_postload_dependency_boundary",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_ordem_tipo4.DiferencialOrdemTipo4.test_original_success_and_special_owner_bypass",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_ordem_tipo4.DiferencialOrdemTipo4.test_original_type_conversion_dependency_boundary",
+      "reason": "Optional: RISING_EMULAR=1"
+    }
+  ],
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "bounded_x86_executions": 0,
+  "per_test": [
+    {
+      "teste": "test_ordem_tipo4.ContratosOrdemTipo4.test_callback_return_then_frame_then_amount",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_ordem_tipo4.ContratosOrdemTipo4.test_query_sees_inherited_frame_and_common_amount",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_ordem_tipo4.DiferencialOrdemTipo4.test_original_characterization_dependency_boundary",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_ordem_tipo4.DiferencialOrdemTipo4.test_original_mission_postload_dependency_boundary",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_ordem_tipo4.DiferencialOrdemTipo4.test_original_success_and_special_owner_bypass",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_ordem_tipo4.DiferencialOrdemTipo4.test_original_type_conversion_dependency_boundary",
+      "execucoes_x86_delimitadas": 0
+    }
+  ],
+  "expected_modifier_stops": 0,
+  "successful_original_returns": 0,
+  "evidence": "Existing 00457350.asm: call 0x457845; frame write 0x45784c; amount write 0x457850. Callers 0x457b87 and mission checkpoint 0x46ad8b.",
+  "scope": "Type4: live whole 276-byte records and conversion search state at original modifier12 dependency entry, plus successful owner bypass parity",
+  "excluded": "Other type changes, economic query provider body reconstruction, mission I/O/whole loading, runtime game",
+  "diagnostics": []
+}

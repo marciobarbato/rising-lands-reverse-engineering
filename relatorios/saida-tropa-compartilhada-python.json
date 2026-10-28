@@ -1,0 +1,37 @@
+{
+  "x86_executed": false,
+  "shares_unit_and_structure_buffers": true,
+  "scope": "Synthetic integration stops before healing/fatigue/experience/exit/movement/cleanup; no complete unit production, occupancy or mission execution.",
+  "events": [
+    {
+      "stage": "economic_preparation",
+      "unit_type": 9,
+      "balance": [
+        1,
+        2,
+        0,
+        0
+      ],
+      "pending_address": "0x420698"
+    },
+    {
+      "stage": "local_conversion_before_healing",
+      "unit_type": 7,
+      "cell": 2056,
+      "state": 7,
+      "life": 50,
+      "attack_phase": 2,
+      "wait_byte": 0,
+      "search": [
+        65535,
+        0,
+        0,
+        0,
+        77
+      ],
+      "bag_count": 0,
+      "bag_capacity": 1,
+      "pending_address": "0x420f6e"
+    }
+  ]
+}

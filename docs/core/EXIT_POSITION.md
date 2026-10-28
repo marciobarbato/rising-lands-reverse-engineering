@@ -44,7 +44,7 @@ With the original initial geometry, the observed offsets are:
 
 Economy's committed `PreparacaoSaidaTropa` is a pending handoff after colonist and cargo removal. Its `indice` and `direcao` can be passed to this function using the shared structure buffer. The returned cell is available for the next original call to `EnginSetType` at `0x420f69`. The original reloads the building's requested unit type from u8 `+7b` after `CalculPosition` returns. This positioning implementation has no callbacks or mutations, but a future composed adapter must preserve that order instead of substituting a stale diagnostic snapshot.
 
-This stage closes the position-query dependency only. It neither consumes/retries the economic prefix nor converts the existing colonist, reserves occupancy, heals, resets fatigue, issues movement, updates vision/minimap, or proves a unit was produced. `EnginSetType` and the remaining production continuation are the next core investigation.
+This stage closes the position-query dependency only. It neither consumes/retries the economic prefix nor converts the existing colonist, reserves occupancy, heals, resets fatigue, issues movement, updates vision/minimap, or proves a unit was produced. The subsequent [shared conversion adapter](CONVERSION.md) reuses the committed `EnginSetType` provider and joins these two original calls; the remaining production continuation is still unsupported.
 
 ## Actual validation
 
