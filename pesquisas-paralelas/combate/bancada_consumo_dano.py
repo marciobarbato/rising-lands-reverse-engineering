@@ -54,7 +54,7 @@ class BancadaConsumoDano(BancadaAvanco):
             if nome == 'Modificateur':
                 args = (a & 255, d & 255, b & 255)
             elif nome == 'ChercheTypeEnginProximite':
-                args = (a & 255, d & 255, b & 65535, c & 65535)
+                args = (a & 255, d & 255, b & 65535, c)
             elif nome == 'TerrainEstDecouvert':
                 args = (a & 65535, d & 255)
             else:
