@@ -1,0 +1,42 @@
+{
+  "scope": "SortieTroupe economic prefix before CalculPosition; no world conversion",
+  "mode": "Python only",
+  "tests": 15,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_256_mixed_cargo_and_building_bags_whole_buffers (test_saida_tropa.DiferencialSaidaTropa)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_4_existing_deposit_dependency_stops_after_cargo_removal (test_saida_tropa.DiferencialSaidaTropa)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_8_divide_exceptions_after_removal_and_credit (test_saida_tropa.DiferencialSaidaTropa)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_capacity_limits_duplicate_colonists_and_counter_wrap (test_saida_tropa.DiferencialSaidaTropa)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_full_seeded_buffers_preserve_untouched_bytes (test_saida_tropa.DiferencialSaidaTropa)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_threshold_unsigned_widths_and_no_activity_gate (test_saida_tropa.DiferencialSaidaTropa)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "declared_x86_stops": 0,
+  "early_returns": 0,
+  "position_dependency_stops": 0,
+  "deposit_dependency_stops": 0,
+  "expected_x86_exceptions": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}
