@@ -261,3 +261,16 @@ Merged `origin/main` eb2f1c2 (fast-forward; Stage13 integrated). To let Economy'
 - Tests assert the outcome for the contract in use: legacy = strict stop + bridged equality; per-owner = strict AL=1 with whole-state, record and binding equality, no bridge.
 - Legacy (this checkout): `test_composicao_carga_missao.py` 10/10 passed.
 - Per-owner, scratch only: Economy `31b5232` files were extracted read-only to `.local/economy-31b5232/`; the eight differing non-test modules were placed in `.local/economy-31b5232-overlay/`, first on `sys.path` after the economy bootstrap, through a scratchpad runner that asserts the overlay modules are imported. Nothing foreign is committed. Results: `test_composicao_carga_missao` 10/10 passed (strict reaches AL=1, whole state equal, no bridge). Also `test_terreno_estruturas_missao` 9 run/4 skipped, `test_auxiliares` 6/2, `test_carga_missao_original` 11/1 and `test_estado_herdado_missao` 2/0, all passed. Log: `.local/stage13-compat-per-owner-overlay-tests.log`. This is NOT M1 evidence; Step 2 writes the strict report on integrated code.
+
+## Stage14 strict M1 composition on integrated code (Claude, 2026-10-28)
+
+Merged `origin/main` ff2f5cf (Economy per-owner `[0x4e19b8]` Bag contract integrated). Source `ea1aac5` makes that contract mandatory (`ligacao_provedores_m1` raises ImportError without `proprietarios.validar_ordens`) and removes the `ordens` bridge, `PONTES` and the legacy test branch. Report [validacao/stage14-m1-composition-strict.json](validacao/stage14-m1-composition-strict.json) was generated CPU-free from that clean tree. The Stage13 report is unchanged.
+
+- **Strict result: M1 candidate (not accepted).** All 32 steps ran with no bridge and the run reached the 0x42d22d return semantics with **AL=1**. **Whole state equal: 881/881 blocks, 2,659,375 bytes, 0 differing.** **938/938 allocation records** and **1,400/1,400 binding requests** are equal. The poisoned provider excess is unchanged. IaReset returned EAX 0 over live controls (1,2,2,2).
+- **Determinism.** A second run gave the identical state SHA-256 `da9ce107…` (also equal to the Stage13 bridged run), the identical binding-request SHA-256 and the identical AL.
+- **Explicit exclusions** (listed in the report):
+  - the 16 `GROUPE%02d` key strings live in an uncaptured native stack frame; every other field at those positions is compared;
+  - the allocation-record caller-return and stack-dword metadata is native observation, not state;
+  - the native stack block is absent from the original final capture.
+- **Tests.** `test_composicao_carga_missao.py`: 11 run, 0 skipped, all passed. This includes the strict whole-state test, determinism and the mandatory-contract guard. `scripts/check.py --domain missions` under the lease: 104 tests, 32 optional native skips, passed (log `.local/stage14-domain.log`). Native suites, common gates, integration and committed-main reproduction are left to the coordinator.
+- **Acceptance.** M1 is accepted only after the coordinator's integration and committed-main reproduction.

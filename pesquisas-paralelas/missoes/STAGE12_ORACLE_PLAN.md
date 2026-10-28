@@ -1,6 +1,6 @@
 # Stage12: whole-MissionLoad original oracle preparation
 
-Status (updated): **runnable; the intact MissionLoad reached its real return for MONDE01 — see [Stage12 result](#stage12-result-runnable-program-start-oracle-and-original-only-missionload-capture-2026-10-28-claude). The Python whole-load composition exists ([Stage13](#stage13-m1-composition-and-comparison-2026-10-28-claude)): the strict run stops at an Economy provider contract at CALL 0x46c5af; M1 not accepted.** Original preparation status: light scaffold only. Stage11 is integrated at main `7f617fab29ce382f96b690ea70da25a33fab8bae` (pushed feature `c0f0a873c3657e72a3e478cf6fd7ea73c84dd58a`, implementation `2f6d96b89039590c598f312752d4fe0e3c5b3607`, original captures `ed0172a364310b28584824b3e49dc63db371ed93`). All four commits are ancestors of fetched main. Its locked candidate passed80native tests, common local gates, then9focused native tests reproduced on main with unchanged counts/state/trace. The heavy lease was released; no prior work or evidence is replaced here.
+Status (updated): **runnable; the intact MissionLoad reached its real return for MONDE01 — see [Stage12 result](#stage12-result-runnable-program-start-oracle-and-original-only-missionload-capture-2026-10-28-claude). The Python whole-load composition exists. [Stage13](#stage13-m1-composition-and-comparison-2026-10-28-claude) stopped at an Economy contract. With that contract integrated, the [Stage14](#stage14-strict-m1-composition-on-integrated-code-2026-10-28-claude) strict run reaches AL=1 with the whole state equal: an M1 candidate, not yet accepted.** Original preparation status: light scaffold only. Stage11 is integrated at main `7f617fab29ce382f96b690ea70da25a33fab8bae` (pushed feature `c0f0a873c3657e72a3e478cf6fd7ea73c84dd58a`, implementation `2f6d96b89039590c598f312752d4fe0e3c5b3607`, original captures `ed0172a364310b28584824b3e49dc63db371ed93`). All four commits are ancestors of fetched main. Its locked candidate passed80native tests, common local gates, then9focused native tests reproduced on main with unchanged counts/state/trace. The heavy lease was released; no prior work or evidence is replaced here.
 
 ## Scaffold and inherited-state closure
 
@@ -180,3 +180,34 @@ The strict run takes about 2.9 s.
 **Tests.** `test_composicao_carga_missao.py` ran 10 tests, all passed with none skipped. `scripts/check.py --domain missions` ran 103 tests with 32 optional native skips and passed.
 
 **Not run:** native suites, common gates, integration and committed-main reproduction. Logs are in `.local/stage13-m1-composition-attempt1.log` (pre-commit run, same result), `.local/stage13-m1-composition-final.log` and `.local/stage13-domain.log`.
+
+## Stage14: strict M1 composition on integrated code (2026-10-28, Claude)
+
+Economy's per-owner `[0x4e19b8]` Bag contract is on main ff2f5cf. Source `ea1aac5` makes it mandatory and removes every bridge. Report: [validacao/stage14-m1-composition-strict.json](validacao/stage14-m1-composition-strict.json). It is CPU-free and was generated from a clean tree. The Stage13 report is kept unchanged as history.
+
+| Criterion | Result |
+|---|---|
+| Return semantics (0x42d22d) and AL | reached, AL=1, 32 steps, no stop |
+| Whole state | 881/881 blocks, 2,659,375 bytes, 0 differing |
+| Allocation records | 938/938 equal (881 entry + 57 remap, freed-bytes SHA-256 included) |
+| Binding requests | 1,400/1,400 equal |
+| Bridges / provider excess | none / unchanged |
+| Determinism | two runs: identical state SHA-256 `da9ce107…`, binding SHA-256 and AL |
+
+**Explicit comparison exclusions:**
+- The 16 `GetPrivateProfileStringA` key strings `GROUPE00..15`. The original builds them in its stack frame at 0x2007d38, which the capture does not keep. All other fields at those positions are compared.
+- The allocation-record `caller_return`, `freed_caller_return` and `stack` fields. These are native observation metadata, not state.
+- The native stack. It is not in the original final capture and is not mission state.
+
+**Status: M1 candidate.** Acceptance requires the coordinator's gates, integration and committed-main reproduction.
+
+**Non-blocking Core recommendations, unchanged from Stage13:**
+- accept exact 16,384-byte minimap allocations;
+- use optional u16 views for the list grids.
+
+**Tests:** `test_composicao_carga_missao.py` ran 11 tests, 0 skipped, all passed. `scripts/check.py --domain missions` under the lease ran 104 tests with 32 optional native skips and passed.
+
+**Logs:**
+- `.local/stage14-strict-trial.log`: pre-commit run, same result.
+- `.local/stage14-strict-final.log`
+- `.local/stage14-domain.log`

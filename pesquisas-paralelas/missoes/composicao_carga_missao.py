@@ -184,22 +184,8 @@ def entradas_nomeadas(entrada):
         proveniencia=n.get('provenance', {}))
 
 
-PONTES = {
-    'ordens': ('DIAGNOSTIC ONLY, not M1 evidence: around EnginInitTechnologie 0x46c5af, copy the four live '
-               'Core Bag allocations [[0x4e19b8]+4j] into Economy PropriedadeConstrucoes.ordens (its own '
-               '10,816-byte buffer), call the provider, then copy the 4 x 2,704 bytes back. Needed only '
-               'because Economy cannot alias the four distinct allocations.'),
-}
-
-
 class ComposicaoCargaMissaoM1:
-    def __init__(self, entrada, *, cd_dir=None, pontes=()):
-        """``pontes``: named diagnostic bridges (see PONTES). The default strict run uses none."""
-        desconhecidas = set(pontes) - set(PONTES)
-        if desconhecidas:
-            raise ValueError(f'Unknown diagnostic bridges {sorted(desconhecidas)}')
-        self.pontes = tuple(pontes)
-        self.pontes_usadas = []
+    def __init__(self, entrada, *, cd_dir=None):
         self.entrada = entrada
         self.mapa = MapaMemoriaM1(carregar_blocos(entrada['blocks']))
         self.provedores = montar_provedores(self.mapa)
@@ -357,10 +343,7 @@ class ComposicaoCargaMissaoM1:
                                    structures_placed=list(terreno.estruturas.colocadas),
                                    structures_inhabited=list(terreno.estruturas.habitadas))
             cauda = p.cauda
-            if 'ordens' in self.pontes and not p.ordens_por_dono:
-                self._passo('EnginInitTechnologie', lambda: self._ponte_ordens(cauda.inicializar_tecnologia_unidades))
-            else:
-                self._passo('EnginInitTechnologie', cauda.inicializar_tecnologia_unidades)
+            self._passo('EnginInitTechnologie', cauda.inicializar_tecnologia_unidades)
             self._passo('BatimentInitCave', lambda: cauda.inicializar_cavernas(w))
             self._passo('Engin_RetrieveExperimente', lambda: recuperar_experiencia_missao(
                 w, p.vistas['experiencia_guardada']))
@@ -392,30 +375,8 @@ class ComposicaoCargaMissaoM1:
                 completed_steps=[q['step'] for q in self.passos])
         return self._fechar(resultado)
 
-    def _ponte_ordens(self, funcao):
-        """Diagnostic copy-in/copy-out bridge for Economy's single Bag buffer (PONTES['ordens'])."""
-        propriedade = self.provedores.habitacao.propriedade
-        negados = type(propriedade)._m1_negados
-        motivo = negados.pop('ordens')
-        ordens = vars(propriedade)['ordens']
-        bolsas = self.provedores.mundo.bolsas_tipos_unidades
-        try:
-            ordens[:] = b''.join(bytes(b) for b in bolsas)
-            resultado = funcao()
-            for j, bolsa in enumerate(bolsas):
-                bolsa[:] = ordens[j * 2704:(j + 1) * 2704]
-        finally:
-            negados['ordens'] = motivo
-        self.pontes_usadas.append(dict(bridge='ordens', step='EnginInitTechnologie', description=PONTES['ordens']))
-        return resultado
-
     def _fechar(self, resultado):
         resultado.detalhes = dict(
-            ordens_contract='per-owner [0x4e19b8] pools' if self.provedores.ordens_por_dono
-            else 'legacy single 10,816-byte buffer',
-            diagnostic_bridges=list(self.pontes_usadas),
-            bridges_not_needed=[b for b in self.pontes
-                                if b == 'ordens' and self.provedores.ordens_por_dono],
             excess_changed=verificar_excessos(self.provedores),
             live_arena_allocations=len(self.arena.vivos), next_free=hex(self.arena.proximo),
             identity_sharing=self.provedores.compartilhados,

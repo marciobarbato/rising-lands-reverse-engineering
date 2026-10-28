@@ -493,3 +493,12 @@ The composition starts from the frozen entry snapshot and runs `MissionLoad 0x46
   - the only state differences are the 3,966 bytes that the six tails write.
 - **Diagnostic bridge (not M1 evidence).** A declared copy-in/copy-out of `ordens` gets past the stop. With it, the run reaches AL=1 and the whole 2,659,375-byte final state matches byte for byte.
 - **Needed:** Economy must accept the four live Bag pools by identity. After that, rerun `validar_composicao_carga_missao.py`.
+
+## Stage14: strict whole-MissionLoad composition — M1 candidate
+
+Economy's per-owner `[0x4e19b8]` Bag contract is now on main, and the composition requires it. No bridge remains. The strict Python `MissionLoad` for MONDE01, starting from the frozen entry snapshot, reaches **AL=1**, and the full comparison with the original capture is equal:
+- 881 blocks, 2,659,375 bytes;
+- 938 allocation records;
+- 1,400 ordered binding requests.
+
+Two runs are identical. The exclusions are listed in the report: 16 profile key strings that exist only on the native stack, plus native call-site and stack metadata. Details: [STAGE12_ORACLE_PLAN.md — Stage14](../pesquisas-paralelas/missoes/STAGE12_ORACLE_PLAN.md#stage14-strict-m1-composition-on-integrated-code-2026-10-28-claude) and [stage14-m1-composition-strict.json](../pesquisas-paralelas/missoes/validacao/stage14-m1-composition-strict.json). This is an M1 **candidate**. Acceptance follows integration and committed-main reproduction.
