@@ -1,0 +1,21 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "SelectionInit",
+      "start": "0x472555",
+      "end_exclusive": "0x472576",
+      "sha256": "ca774f6a8f4398e1e9f7c92265585ddb2cbdadf44f24ceea60c45089a3d0ec26",
+      "file": "00472555.asm"
+    }
+  ],
+  "preserved_unit_pool_bytes": 220800,
+  "selection_words": [
+    "0x508728",
+    "0x508928",
+    "0x508b28",
+    "0x508d28"
+  ],
+  "scope": "Four count-word stores only; all list tails and unit flags preserved."
+}

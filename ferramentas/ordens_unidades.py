@@ -28,6 +28,7 @@ class MundoUnidades:
         self.realizaveis_estruturas = bytearray(88)  # raw table 0x49a070
         self.selecoes_estruturas = bytearray(8)     # four u16 at 0x495be0
         self.experiencias_unidades = bytearray(40) # raw four-owner queue at 0x4e19c4
+        self.selecoes_unidades = bytearray(2048)   # raw four selection lists at 0x508728
         self.grupos = bytearray(100 * 32)
         for grupo in range(100):
             struct.pack_into('<H', self.grupos, grupo * 32 + 0x10, 0xffff)
@@ -82,6 +83,10 @@ class MundoUnidades:
     def consumir_experiencia_unidade(self, indice, tipos_unidades=None):
         from experiencia_unidades import consumir_experiencia_unidade
         return consumir_experiencia_unidade(self, indice, tipos_unidades)
+
+    def inicializar_selecoes_unidades(self):
+        from selecao_unidades import inicializar_selecoes_unidades
+        return inicializar_selecoes_unidades(self.selecoes_unidades)
 
     @staticmethod
     def _indice(indice):

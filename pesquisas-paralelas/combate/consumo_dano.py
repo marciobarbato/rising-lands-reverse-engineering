@@ -1,4 +1,4 @@
-"""Bounded EnginInfligeDegat modes 1/4/8/9, with live world callbacks.
+"""Bounded EnginInfligeDegat modes 1/3/4/8/9, with live world callbacks.
 
 This is the unit consumer at 0x4502f0, not InfligeDegat's cell selection,
 reaction, diplomacy or presentation wrapper. Other modes are explicit
@@ -71,13 +71,13 @@ class ConsumidorDanoUnidade:
         """Consume AX/DL/BX/CL; mode 4 supports direction bytes 29/30.
 
         Returns None on the original nonlethal return. LimiteMorte is raised
-        before death when no mode-1 handler is supplied, and always in 4/8/9.
+        before death when no mode-1 handler is supplied, and always in 3/4/8/9.
         Unsupported modes/types/IDs fail before queries, effects or writes.
         """
         vitima, atacante, modo = vitima & 65535, atacante & 65535, modo & 255
         direcao &= 255
-        if modo not in (1, 4, 8, 9):
-            raise NotImplementedError('Only EnginInfligeDegat mode 1, 4, 8 or 9 is supported')
+        if modo not in (1, 3, 4, 8, 9):
+            raise NotImplementedError('Only EnginInfligeDegat mode 1, 3, 4, 8 or 9 is supported')
         if modo == 4 and direcao not in (29, 30):
             raise NotImplementedError('Mode 4 supports only initialized direction bytes 29/30')
         if modo == 4 and self.danos_modo4 is None:
@@ -101,6 +101,12 @@ class ConsumidorDanoUnidade:
                 bruto = dano_bruto_unidade(bruto, bonus_proximidade=self.bonus_4965ac & 255)
             self._emitir('iagUnitSendMessage', vitima, 0x48, atacante)
             dono_morte = fonte[0]  # saved before reduction/visibility
+        elif modo == 3:
+            saved_type = alvo[1]
+            building_type = self._consultar('BatimentGetType', atacante) & 255
+            bruto = self._consultar('TypeBatimentGetDegat', building_type, 1, saved_type) & 255
+            dono_morte = self._consultar('BatimentGetPlayer', atacante) & 255
+            self._emitir('iagUnitSendMessage', vitima, 0x4c, atacante)
         elif modo == 8:
             # 0x450475: mode 8 uses only the separately loaded special row.
             bruto = self.danos[26][alvo[1]]

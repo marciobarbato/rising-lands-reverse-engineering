@@ -1,0 +1,41 @@
+{
+  "scope": "Complete read-only EnginRentreMatiere/EnginApporteMatiere; conditional building lookup",
+  "mode": "Python only",
+  "tests": 12,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_1024_all_state_bytes_both_queries_and_edge_unit_slots (test_consultas_transporte.DiferencialConsultasTransporte)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_1024_apporte_comparison_bytes_and_high_word_nonmatches (test_consultas_transporte.DiferencialConsultasTransporte)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_2304_apporte_mode_wildcard_and_exact_matches (test_consultas_transporte.DiferencialConsultasTransporte)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_512_return_mode_bytes_and_building_type_comparison (test_consultas_transporte.DiferencialConsultasTransporte)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_64_seeded_complete_pools_and_untouched_economy (test_consultas_transporte.DiferencialConsultasTransporte)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_6_invalid_building_references_stop_only_at_conditional_lookup (test_consultas_transporte.DiferencialConsultasTransporte)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "declared_stops": 0,
+  "completed_returns": 0,
+  "protected_index_stops": 0,
+  "expected_x86_exceptions": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}
