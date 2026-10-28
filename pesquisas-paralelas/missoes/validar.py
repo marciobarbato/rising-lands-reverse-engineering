@@ -25,6 +25,7 @@ def main():
         from test_auxiliares import DiferencialAuxiliares
         from test_terreno_unidades import DiferencialTerrenoUnidades,SOMA_VISAO
         from test_cadeia_auxiliar import DiferencialCadeiaAuxiliar
+        from test_reinicio_missao import DiferencialReinicio
         native = DiferencialCarga.native
         prelude = DiferencialCabecalho.native
         tables = DiferencialCondicoes.native
@@ -34,6 +35,7 @@ def main():
         auxiliaries = DiferencialAuxiliares.native
         placement = DiferencialTerrenoUnidades.native
         chain = DiferencialCadeiaAuxiliar.native
+        reset = DiferencialReinicio.native
         report = dict(tests=result.testsRun, skipped=len(result.skipped), errors=len(result.errors),
                       failures=len(result.failures), unit_bounded_segments=native.execucoes,
                       unit_native_fixtures=native.loads, unit_native_returns=native.returned,
@@ -78,9 +80,14 @@ def main():
                       chain_declared_boundary_stops=DiferencialCadeiaAuxiliar.boundary_stops,
                       chain_failure_stops=DiferencialCadeiaAuxiliar.failure_stops,
                       chain_stop_before='FileClose 0x45844c',
-                      chain_compared_image='0x494000..0x523000 DGROUP+.bss')
+                      chain_compared_image='0x494000..0x523000 DGROUP+.bss',
+                      reset_native_entries=reset.entries,
+                      reset_declared_stops=reset.stops,
+                      reset_bounded_segments=reset.execucoes,
+                      reset_compared_state='0x494000..0x523000 plus unit pool, four type Bags, projectile pool and players',
+                      reset_provider_dependencies={'TerrainReset': '0x46c35f / 0x46c60f', 'RechercheReset': '0x46c68c'})
         (OWNED/'validacao').mkdir(exist_ok=True)
-        (OWNED/'validacao/stage9-suite-x86.json').write_text(json.dumps(report, indent=2)+'\n')
+        (OWNED/'validacao/stage10-suite-x86.json').write_text(json.dumps(report, indent=2)+'\n')
         print(json.dumps(report, indent=2))
     return 0 if result.wasSuccessful() else 1
 
