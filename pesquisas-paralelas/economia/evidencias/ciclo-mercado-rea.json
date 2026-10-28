@@ -1,0 +1,84 @@
+{
+  "scope": "Reviewed complementary MarcheQuitte dossier excerpt; original instructions and execution remain authoritative",
+  "rea_source_revision": "b9a8f8e9f25feb9cc97bf4960748f2bdf8c898bc",
+  "sha256_original_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_analysis_exe": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "rea_evidence_id": "ev_d75972e494dc0559c94791683a1fdfc237fe9b8735764b9a858ac8a97ffb0dfd",
+  "sha256_complete_dossier": "10a2df876a7d8ce5a917cc8e366e2b40c63d5337885cd90a0cfd2ad5f22cdf6d",
+  "provider": {
+    "id": "ghidra",
+    "name": "Ghidra",
+    "version": "12.2"
+  },
+  "analysis_profile_digest": "33da723a26733dd8b59046612d0c42bf95bb1b59c46a63f17b127521af169a3d",
+  "operation": "analyze_function",
+  "parameters": {
+    "procedure": "0x4663d6"
+  },
+  "procedure": {
+    "address": "0x4663d6",
+    "name": "OriginaisSBL::MarcheQuitte",
+    "symbol": {
+      "primary": true,
+      "dynamic": false,
+      "external": false,
+      "type": "function",
+      "source": "user_defined"
+    },
+    "classification": {
+      "external": false,
+      "thunk": false,
+      "thunk_target": null,
+      "provenance": "ghidra-function-manager"
+    },
+    "body": {
+      "available": true,
+      "provenance": "ghidra-function-body-address-set",
+      "ranges": [
+        {
+          "start": "0x4663d6",
+          "end": "0x4663ea"
+        }
+      ],
+      "total_bytes": 21,
+      "span_bytes": 21,
+      "non_contiguous": false,
+      "contains_entry": true
+    },
+    "signature": "undefined __fastcall MarcheQuitte(undefined4 param_1)",
+    "locals": []
+  },
+  "assembly": [
+    "0x4663d6: PUSH EDX",
+    "0x4663d7: AND EAX, 0xff",
+    "0x4663dc: XOR EDX, EDX",
+    "0x4663de: MOV DL, byte ptr [EAX + 0x496f8c]",
+    "0x4663e4: CALL 0x0046634e",
+    "0x4663e9: POP EDX",
+    "0x4663ea: RET"
+  ],
+  "pseudocode": "\nvoid __fastcall OriginaisSBL::MarcheQuitte(undefined4 param_1)\n\n{\n  uint in_EAX;\n  \n  ResetMarche(param_1,(&DAT_00496f8c)[in_EAX & 0xff]);\n  return;\n}\n\n",
+  "callers": [
+    {
+      "address": "0x45edc0",
+      "name": "OriginaisSBL::ProcessInputGame"
+    }
+  ],
+  "callees": [
+    {
+      "address": "0x46634e",
+      "name": "OriginaisSBL::ResetMarche"
+    }
+  ],
+  "reviewed_findings": [
+    "Original 0x4663de reads contact using low EAX before ResetMarche at 0x4663e4.",
+    "Resolved caller at 0x45f26b belongs to ProcessInputGame; no runtime dispatch is implemented here.",
+    "Recovered ECX fastcall parameter is unreliable for Watcom: original AL is player and DL carries captured contact.",
+    "Normalized analysis PE differs from intact original oracle; no native oracle bytes were modified."
+  ],
+  "limitations": [
+    "Selected existing Ghidra project private read-only copy; original analysis completeness/settings unknown.",
+    "Excerpt is selected from the retained dossier; it is not a full evidence bundle or original source.",
+    "Restricted first startup failed Java spawn EPERM; authorized context succeeded and session closed cleanly."
+  ]
+}

@@ -153,6 +153,25 @@ python3 -B pesquisas-paralelas/graficos-animacao/validar_passe_sprites.py
 python3 -B scripts/check.py --domain graphics
 ```
 
+## Lighting table and masked destination remap — sixth continuation stage
+
+`eclairage.py` adds `tabela_eclairage(paleta, *, percentual, ciclos)` and `compor_eclairage`. The table constructor requires 768 RGB bytes, percentage u8 restricted to **1–255**, and up to 255 inclusive ordered u8 cycle ranges. For each palette component it calculates `q=floor(component*100/percentage)`, then uses target component **30 if q is zero**, otherwise `min(q,255)`. It selects the closest palette color by squared RGB distance, keeping the smaller eligible index on a tie. Palette index 0 is the initial candidate and remains eligible even when a cycle covers it; candidates 1–255 inside any cycle are excluded. There are no per-index exceptions inherited from `CalculOmbrage`.
+
+The original writes its destination table sequentially at indices 0–255. The pure API returns 256 new bytes and preserves palette/cycle inputs. Invalid percentage/width/range inputs raise `ValueError`. Percentage zero is outside the public domain: original `IDIV` faults at `0x45FB46` before writing any output entry, independently captured as one expected exception. The API rejects it before effects.
+
+`compor_eclairage(destino, largura, altura, quadro, x, y, tabela, recorte=None)` supports the original clipping-enabled `PasteEclairCmp` path, with i16 positions and an explicit 256-byte remap table. Only the CMP opacity mask matters: for each opaque source pixel, including literal palette zero, map the **existing destination index** through the table. Transparent skips leave the destination intact. Literal source colors are ignored. This is the same mask geometry as the verified shadow primitive with a distinct table, not RGB/alpha blending. Input buffers remain unchanged; new indexed bytes are returned. `CL=0`, full palette initialization/cycling and projectile simulation remain outside this contract.
+
+Original evidence: `CalculEclairage 0x45FAFC..0x45FCA5`, SHA-256 `9a9709bd01200af21f1848f13901ab946e11b1449ddaaf052ceae98a90ddb156`; `PasteEclairCmp 0x45BA23..0x45BCB0`, SHA-256 `81371fcc66cb61a61031de5c4c841b844f124754909f7246ec51c3e867969407`; `MemEclairCopy 0x45F7D8..0x45F7F6`; original setup call `0x474F04..0x474F13` explicitly loads percentage 60. Table input is `EAX=palette pointer`, `DL=percentage`, with destination pointer `0x4E24B8` and cycle metadata `0x4E24E1/0x4E24E4`. [Exact bytes and predecessor hashes](../pesquisas-paralelas/graficos-animacao/evidencias/eclairage.json).
+
+Fresh validation: **4,412 bounded segments / 35,074,931 instructions**, eight complete table fixtures (real palette, parameter boundaries, cycles, synthetic ties/all candidate exclusions), **297 exact indexed buffers** (all 256 destination indices, five real masks with clipping boundaries, one synthetic literal-zero fixture), two bank setup calls and **one expected zero-divisor exception**. Table generation uses original CPU/stack checkpoints before/after each sequential output write, then returns normally. Zero skipped cases, unexpected exceptions or execution-limit failures. Seven new capture regressions pass. [Saved original lighting report](../pesquisas-paralelas/graficos-animacao/validacao/x86-eclairage.json).
+
+On resumption, the complete lighting validator was rerun against the intact original and reproduced the same observations/counts; only report elapsed seconds changed. The graphics domain passed **115 tests** with no skips. A [focused read-only REA review](../pesquisas-paralelas/graficos-animacao/evidencias/rea-eclairage-review.json), pinned to source revision `b9a8f8e9f25feb9cc97bf4960748f2bdf8c898bc`, corroborates the arithmetic using normalized analysis PE SHA-256 `26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0`. Its Watcom signature/register artifacts are documented; original SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb` remains the execution oracle. These are repeat runs of one fixture set, not additive coverage.
+
+```sh
+python3 -B pesquisas-paralelas/graficos-animacao/validar_eclairage.py
+python3 -B scripts/check.py --domain graphics
+```
+
 ## Remaining component inventory — continuation after the gate facade
 
 This inventory distinguishes reconstructed behavior, captured original behavior, and runtime integration. The integrated gate facade at `ff4bc269c6d8534f4683bd0429072286ea8eaaf1` has exact indexed comparisons; it is not yet exercised by the macOS consumer or a complete loaded mission.
@@ -163,6 +182,7 @@ This inventory distinguishes reconstructed behavior, captured original behavior,
 | Other building facades and overlays | `AffBatiments 0x407DD3..0x40F49C`; only the Sanctuary subset and gate facade are reconstructed | Recover per-type/mode layers, clipping and anchors against original buffers |
 | Unit action handlers | `AffEngin` dispatches to attack `0x41374C`, construction `0x414495`, work `0x414A8A`, death `0x41559A` | Map each supported type/action input and coordinate simulation phase producers |
 | Projectile display inputs | The 100-record display selection/sort and full/low-word cell queries are reconstructed and independently validated | Connect the committed pool view to the two scene passes; recover public `AffProjectile` sprite mappings |
+| Projectile/effect lighting | `CalculEclairage`, mask remap and clipping-enabled `PasteEclairCmp` are reconstructed and independently validated | Use the explicit table in a public projectile/effect renderer; recover remaining palette effects separately |
 | Scene traversal/projection | Complete interior `AffSprite` planning/execution and relative projection are reconstructed; native complete-pass traces and bounded indexed scenes match | Recover margin wraparound/negative origins, `AffGame` projection/cadence and a real-mission consumer |
 | Visibility, palette and clocks | Indexed composition/shadow helpers and clock prefix are reconstructed; visibility bytes are explicit runtime inputs | Connect validated world providers and original frame cadence |
 | Real-mission consumer | V6 reads all serialized mission-1 object codes; the preview uses older pinned snapshots | Coordinate complete world loading/remapping, dynamic render state, input, effects and original-reference runtime scenes |
@@ -174,6 +194,8 @@ Original direct-call sites are `0x416B8A -> AffVeget`, `0x416BBD -> AffBatiments
 The projectile-display slice is read-only with respect to combat state. Both visibility predicates use mask 31; the query uses pixel-coordinate-derived keys and the swap sort chooses the last equal candidate. These independently validated differences must remain distinct from the unit selector and physical projectile targeting.
 
 The complete interior scene stage closes the two caller passes and projectile/unit interleaving. It preserves the asymmetric margins and relative projection while keeping callbacks and their supported sprite domains explicit. The terrain pass, global frame caller, boundary viewports and full mission/runtime operation remain independent missing components.
+
+Lighting remap is now available as an explicit independently validated graphics provider. Its original setup literal 60 is recorded without claiming whole initialization or temporal palette behavior. Public projectile sprite mapping remains the next consumer dependency, and physical advancement stays combat-owned.
 
 ## Terrain objects and sequential codes
 
