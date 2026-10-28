@@ -1,0 +1,44 @@
+{
+  "exe_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "regions": [
+    {
+      "name": "selection_prefix",
+      "start": "0x4124a9",
+      "end": "0x4124c4",
+      "bytes_hex": "80bebd000000000f84690100008a35418050003a360f855b010000",
+      "sha256": "3b5ba362e33afa065ac4c8e7e6f02d5f19ee5f83cd2d4fe3cae72d89f745f0fb"
+    },
+    {
+      "name": "selection_tail",
+      "start": "0x412a53",
+      "end": "0x412a9f",
+      "bytes_hex": "8a1d418050003a1e750980bebd00000000751a8b7c240c663b3dc26a4900740d803d8f8f5000000f84e80a00008b54241e31db8b44241a668b5c240cc1fa10c1f810e84ae1ffffe93d0c0000",
+      "sha256": "6c0faf8eef6ee356a1c23c6e76892e689f1093bc7769245cd29838db7317fee2"
+    },
+    {
+      "name": "image_camera",
+      "start": "0x508041",
+      "end": "0x508042",
+      "bytes_hex": "00",
+      "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    },
+    {
+      "name": "image_selected_index",
+      "start": "0x496ac2",
+      "end": "0x496ac4",
+      "bytes_hex": "ffff",
+      "sha256": "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+    },
+    {
+      "name": "image_mode",
+      "start": "0x508f8f",
+      "end": "0x508f90",
+      "bytes_hex": "00",
+      "sha256": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+    }
+  ],
+  "unchanged_reports": {
+    "validacao/x86-unidade-tipo2.json": "38ec6e45d06ba19fe2d5479984275b220e3f0cdb30167b740731fcaa0e5b5695",
+    "evidencias/unidade-tipo2.json": "0a5a9cb4aba46cc57f50aaf1c34e86414a724382e0f30ad2f1a4ff0eaff42570"
+  }
+}
