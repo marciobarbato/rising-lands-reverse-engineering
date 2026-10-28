@@ -1,35 +1,41 @@
-# Research status — 2026-10-28, seven-front round
+# Research status — Codex recovery, 2026-10-28
 
-Main `2da89cd7655998f3b3f240be192b4b2badf94b63` closed the previous round: core stage 13, combat stage 16, economy stage 14, graphics stage 15, missions stage 8 and the playable macOS consumer are all integrated, pushed and ancestry-verified. The organization baseline of the earlier four-chat round was `1231ebff9463871b124d736c9e0333a6f8b5c87a`. This round reorganizes the work into seven fronts aimed at [a running original mission](ROADMAP_MONDE01.md); the roadmap holds the dependency map, milestones, per-front stage sequences, the validation oracle strategy and the completion inventory.
+The coordinator fetched and verified `origin/main` at `8810b3730a0fb788af3eac2b447dea65372f597f`, then fast-forwarded the clean canonical checkout from `8204deb`. The closed recovery now advances verified research main to `5d24c91104e8b7f66b774e5b46969508708cc01f` through Core15 and AI initialization. This snapshot replaces the earlier round-baseline status; [the consolidated report](PROGRESS.md) has the four independent stage states and current critical path. The human authorized resumption, superseding the historical stop instruction. The seven-front ownership and integration rules remain in [AGENTS.md](../AGENTS.md) and [PARALLEL_WORK.md](PARALLEL_WORK.md).
 
-## Current local check results at the round baseline
+## Verified integrated scope
 
-| Suite | Discovered | Explicit optional skips |
-|---|---:|---:|
-| Core | 357 | 169 |
-| Combat | 227 | 143 |
-| Economy | 393 | 180 |
-| Graphics, including comparison with captured original buffers | 176 | 0 |
-| Missions | 56 | 21 |
-| AI/runtime (namespace guard only; no research stage yet) | 3 | 0 |
-| Workflow and provider-import tests | 8 | 0 |
+These findings come from committed history, domain contracts and preserved reports. Earlier domain results remain historical. Core15 and AI initialization recovery results below are fresh from this resumption, including mandatory integration gates and committed-main reproductions.
 
-These are local runs of `python3 -B scripts/check.py`; the fresh native counts of each integrated stage are recorded in the owners' manuals and handoffs. They are not an aggregate integrated-game test.
+| Front | Integrated evidence and behavior | Remaining boundary |
+|---|---|---|
+| Core | Stage 14 discovery/light domain (`f8d9371`, main `7b7b969`): MONDE01 unit 15 and its type-2 structure's 13/10 radii are supported. Existing physical world, navigation, task/VM, pool/reset, placement and experience-queue providers remain available. | Complete `Chemin_Remap`, generic declared bindings, experience retrieval; Stage15 terrain/minimap/reset providers are now validated/integrated at `b610bfa`; caller composition remains. |
+| Missions | Stage 9 complete eight-loader auxiliary chain; Stage 10 reset-prefix composition (`a0e0211`, main `57aa441`) with explicit missing-provider stops. Unit placement reaches pre-structure checkpoint `0x46c16d`. | Compose structure traversal and all load tails, then compare whole `MissionLoad`; events and `TestFinDeMission` remain separate. |
+| AI/runtime | Stage1 contracts plus Stage2 bounded raw-memory IaReset/IaAlloc/IAResetAttaque, recovered from ad97e42 and integrated at `5d24c91`. Core retains VM/task primitives. | Concrete production adapters and Core experience retrieval remain needed for L9. Frame/unit/structure dispatchers, kernels, operations and messages remain open. |
+| Economy | Structure habitation and economy `MissionLoad` initializer tails (`b6eebec`, main `8204deb`), plus prepared production through the supported cleanup boundary. | Natural production start has a local inventory only; complete transport/work cycles remain open. |
+| Combat | Stage 18 live state-1/24 attack chain through emission, projectile simulation, impact, damage and supported physical death (`248d055`, main `b602b07`); reset provider is integrated. | Real mission raid, AI messages, audio, diplomacy, level effects and building-target/turret/trap branches remain separate. |
+| Graphics | Cache lifecycle and bounded `AffGame` composition (`7eff798`, checkpoint correction `d483dec`, main `0756062`). MONDE01 input is a pinned partial-load checkpoint. | Type-2 structure facade/lookup, overlays, unit types 1/8, HUD and remaining viewport/render paths; no complete loaded-mission frame. |
+| Audio | Bank readers and IMA ADPCM decoding (`fa4a759`, `0fc99df`); fresh three-way report `9a0c171`; merge `8810b37`. Committed native/Python/capture comparisons pass for 551 bank sounds. | `PlaySnd_PostSound`, queues, `Manage`, lifecycle and actual playback remain open. |
+| macOS | Existing app consumes an immutable committed revision in a synthetic training exercise via `compilar-jogável`. | Switch to real mission state at the M1 trigger. The training exercise is not MONDE01. |
 
-## Implemented research scope
+All listed feature and merge commits are reachable from the fetched `origin/main` snapshot. Consult each domain manual and handoff for precise supported inputs, original executable identity, mutation order and validation limits. Original media and predecessor captures have been preserved.
 
-Core includes 38 ETA maps, eight CMP banks, 26 unit types, damage primitives, movement and occupancy, independent Python pathfinding for occupancy classes 1–3, task operations and messages, structure footprints/terrain, placement, walls, physical gate transitions, structure pool lifecycle, exit position, conversion, recovery, experience queue, physical exit, unit request/volume, selection initialization, global unit/Bag reset, mission placement predicates and the pre-allocation remap reset. The original SBL supplies 1,995 records; the decoded AI program contains 1,157 instructions, 42 registered types, and 140 resolved operation names; the VM control flow and five unit operations are reconstructed.
+## Pending local recovery
 
-Missions includes the indexed unit loader with selection initialization, the header prelude, end-condition/objective table loaders, the indexed structure copy, the mission filename selection, the mine/attack auxiliary loaders and the `MissionPlaceTerrain` unit scan with capacity refresh through committed core/economy providers. Actual MONDE01 stops at unit 15 (vision radius 10) inside core's discovery boundary.
+All worktrees were clean at inspection; the shared integration lock was free and no earlier native comparison/integration child process was running. Claude application processes were still present, without a research child process at that inspection. Two old detached integration candidates remain preserved at `worktrees/integration-graphics-a0f20f22` and `worktrees/integration-macos-56537e42`.
 
-Combat includes targeting, aiming, attack states, the projectile pool and dispatcher, caller gating, damage modes 1/3/4/8/9, the unit impact wrapper, optional lethal sequencing and the shared-world physical death connection. Natural emission/runtime and the building-target branch remain open.
+| Front | Preserved local commit | Required recovery gate |
+|---|---|---|
+| Core | Preserved `a572e8c`, recovery `2f9d0df`, merge `b610bfa` | **Recovered/integrated/reproduced.** Fresh reset14/759entries/2139segments and discovery32/4293entries/10503segments pass,0 native skips/faults/limits. Core382/181optional; common gate passed. |
+| AI/runtime | Preserved `ad97e42`, recovery `1e56e5c`, merge `5d24c91` | **Recovered/integrated/reproduced.** Fresh native36/36,0 skips/failures; local/domain36/4optional. Two failed initial cycle proofs preserved; final explicit repeated-state proof passed. Adapter/full MissionLoad remain open. |
+| Economy | `3868ce5d6f3cfd82c577595e528d8e803fe81e19` | Review Stage 17 original-byte inventory as inventory, integrate the demonstrated slice, then obtain independent natural-production captures before translation. |
+| Audio | Already integrated at `8810b37` | Do not duplicate integration or rerun the full unchanged corpus without cause. Continue queue research as a new bounded stage. |
 
-Economy includes resource queries and mutations, capacity/excess handling, deposits/withdrawals, warehouse counts, extraction/regeneration, recruitment, production increments, learning, market proposals/transfers, bonus producers, read-only transport status queries and the prepared production pipeline through position, conversion, recovery, experience, physical exit, movement order, conditional request and selective cleanup. Natural startup and the transport cycle remain open.
+The coordinator reuses six archived Codex executor chats and creates only the missing AI/runtime chat. Work proceeds in waves of at most three active executors plus the coordinator. Heavy native runs, domain/integration checks and Ghidra are serialized separately. Historical Claude `local_` IDs are retained as references, never used as Codex chat IDs. Current dispatch and heavy-work ownership live in workspace `local-data/coordination/progress.json` and `CODEX_RESUME.md`.
 
-Graphics includes verified bodies for several unit types and states, indexed composition and shadows, facades, gate facade/tail, selection sorting, projectile display and lighting, the complete interior sprite pass order, the terrain block cache and the bounded terrain pass. Frame orchestration and cache initialization remain open.
+## Milestones and estimate
 
-The macOS playable consumer runs a synthetic exercise over committed providers from one pinned revision. Audio and save/load have no reconstruction yet; they are inventoried for the second wave.
+M1 complete load, M2 advancing mission, M3 interactive original mission and M4 demonstrated objective/transitions have not been accepted. The next critical path is Core's declared bindings and complete remap, Core experience retrieval and concrete AI provider adaptation, then Missions' complete composition and whole-state oracle. The Core reset/map and raw AI initialization providers are already integrated. The old unit-15 discovery boundary is resolved.
 
-## Next stages
+MONDE01 starts with a type-2 Santuário, not a type-3 Armazém/CAVE. The objective condition must be established by `TestFinDeMission`, not inferred from briefing prose.
 
-The per-front wave-1 sequences and the cross-front contracts are in [the roadmap](ROADMAP_MONDE01.md#wave-1-stage-sequence-per-front). Each stage must stop at its declared boundary, publish an English contract and tests, state what remains unsupported, and be integrated before the next begins. A complete playable mission still needs coordinated world loading, dispatch, dynamic rendering, combat/economy integration, events, save/load, audio integration, and reference-game comparison.
+The coarse full-game estimate remains **50% (40–60%, change 0 percentage points)**. The inventory in [the roadmap](ROADMAP_MONDE01.md#inventory-for-the-completion-estimate) separates implemented, original-validated, integrated and real-mission-tested work. Recovering accurate status does not itself increase completion. Save/load, menus/campaign progression and broader original-game behavior remain beyond the immediate M1 work.
