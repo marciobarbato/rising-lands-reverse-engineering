@@ -71,8 +71,9 @@ def fixture_message(world, name, args):
     p = index*276
     owner = world.unidades[p]
     group = struct.unpack_from('<I', world.unidades, p+0x10c)[0]
-    if (owner >= 4 or world.controle_jogadores[owner] == 2) and group != 0xffffffff:
-        raise NotImplementedError('Active AI group fixture is unsupported')
+    if owner >= 4 or world.controle_jogadores[owner] == 2:
+        if group != 0xffffffff or message not in (0x44, 0x48, 0x4c):
+            raise NotImplementedError('AI fixture supports only proven null-group combat-message guards')
 
 
 class ContratosConsumoFisico(unittest.TestCase):

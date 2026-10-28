@@ -1,4 +1,4 @@
-"""InfligeDegat mode-1/4 unit branches, with explicit world-effect providers.
+"""InfligeDegat mode-1/3/4 unit branches, with explicit world-effect providers.
 
 Original [0x450874,0x4510dd). Building damage is a named stop. World lookup,
 navigation, diplomacy and sound remain callbacks; the unit consumer and live
@@ -74,7 +74,8 @@ class ImpactoUnidades:
             elif self._query('PlayerGetType', owner) & 255 == 2 and target[2] == 7:
                 self._effect('SetAttaqueEngin', victim, 1, attacker)
             return
-        origin = 0 if mode == 4 else u16(source, 0x7c)
+        origin = (self._query('BatimentGetCase', attacker) & 65535) if mode == 3 else (
+            0 if mode == 4 else u16(source, 0x7c))
         direction = self._query('CalculDirection', origin, u16(target, 0x7c)) & 255
         cell = self._query('CalculDirCase', u16(target, 0x7c), direction) & 65535
         if cell != 65535:
@@ -87,15 +88,17 @@ class ImpactoUnidades:
             value = self._query('Random', 0x22) & 0xffffffff
             self.pool.iniciar(15 + (value & 1), cell, cell, 0, 0, 0, 0, 0, int(kind == 16))
 
-    def _diplomacia(self, victim, attacker):
+    def _diplomacia(self, victim, attacker, mode=1):
         target, source = self.unidades[victim], self.unidades[attacker]
-        owner = source[0]  # preserved across all subsequent external effects
+        owner = (self._query('BatimentGetPlayer', attacker) & 255) if mode == 3 else source[0]
         if self._query('PlayerEstAllie', owner, target[0]) & 255:
             self._effect('MAJSympathie', target[0], owner, 10)
             self._effect('MAJSympathie', target[0], owner, 6)
             self._effect('PlayerResetAllie', owner, target[0])
             self._effect('PlayerResetAllie', target[0], owner)
         self._effect('PlayerAAttaqueSet', owner, target[0])
+        if mode == 3:
+            return  # Original building-source suffix has no unit alert block.
         if target[0] == owner or target[0] != (self.jogador_local & 255):
             return
         now, previous = self.contador & 0xffffffff, self.ultimo_alerta & 0xffffffff
@@ -109,7 +112,7 @@ class ImpactoUnidades:
                      0, 0x100, '0x496ac8')
 
     def infligir(self, cell, mode, attacker, direction, flag):
-        """AX/DL/BX/CL/stack-byte inputs; modes 1/4 (4 needs CL 29/30).
+        """AX/DL/BX/CL/stack-byte inputs; modes 1/3/4 (4 needs CL 29/30).
 
         Input widths truncate first. Empty unit lookup returns None. Building,
         missing providers and consumer exceptions stop without rollback.
@@ -117,8 +120,8 @@ class ImpactoUnidades:
         """
         cell, mode, attacker = cell & 65535, mode & 255, attacker & 65535
         direction, flag = direction & 255, flag & 255
-        if mode not in (1, 4):
-            raise NotImplementedError('Only InfligeDegat mode 1 or 4 is supported')
+        if mode not in (1, 3, 4):
+            raise NotImplementedError('Only InfligeDegat mode 1, 3 or 4 is supported')
         if mode == 4 and direction not in (29, 30):
             raise NotImplementedError('Mode-4 impact requires initialized direction byte 29/30')
         if not 0 <= attacker < 800:
@@ -139,4 +142,4 @@ class ImpactoUnidades:
             raise NotImplementedError('External consumer required: EnginInfligeDegat')
         self.consumir(victim, mode, attacker, direction)
         self._apresentar(cell, kind)
-        self._diplomacia(victim, attacker)
+        self._diplomacia(victim, attacker, mode)
