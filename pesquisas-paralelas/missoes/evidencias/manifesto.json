@@ -1,0 +1,61 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "intervals": [
+    {
+      "name": "LoadEngin",
+      "start": "0x46acbf",
+      "end_exclusive": "0x46b01e",
+      "sha256": "f8c2d6c2a13571990691c2d02c674a585637e52fc19771afb9e9d0bba1853142",
+      "file": "0046acbf.asm"
+    },
+    {
+      "name": "LoadEngin_shared_return",
+      "start": "0x46b112",
+      "end_exclusive": "0x46b119",
+      "sha256": "bb985c90e4a1bb8270461998d16aefa81c4959d7b2704d7d12f24b0ee7752053",
+      "file": "0046b112.asm"
+    },
+    {
+      "name": "MissionLoad",
+      "start": "0x46c2cf",
+      "end_exclusive": "0x46c5e3",
+      "sha256": "8c7508554525257a4ece37e63e68d13ccddb4bc7cc60a8c4d02cd53fca13e35f",
+      "file": "0046c2cf.asm"
+    },
+    {
+      "name": "MissionLoadName",
+      "start": "0x46c5e3",
+      "end_exclusive": "0x46c9a5",
+      "sha256": "12245ae8bcac096d2ae4d13d2249ea1e811ae0aabfe8cc7d62946c69b214f329",
+      "file": "0046c5e3.asm"
+    },
+    {
+      "name": "MissionPlaceTerrain",
+      "start": "0x46c122",
+      "end_exclusive": "0x46c1b8",
+      "sha256": "d95bbd7ef21783546c85ea76d53a3bd09569528bb565e67ddcba2ced9d355c3d",
+      "file": "0046c122.asm"
+    },
+    {
+      "name": "SelectionInit",
+      "start": "0x472555",
+      "end_exclusive": "0x472576",
+      "sha256": "ca774f6a8f4398e1e9f7c92265585ddb2cbdadf44f24ceea60c45089a3d0ec26",
+      "file": "00472555.asm"
+    },
+    {
+      "name": "FileReadSeek",
+      "start": "0x458461",
+      "end_exclusive": "0x4584a3",
+      "sha256": "c07f57881c846028e0350c33415073c5f382f3efa5741859ffa0a8eba0f3d193",
+      "file": "00458461.asm"
+    }
+  ],
+  "analysis_sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "inspected_main": "1f9019d8027f59e0fa304df29961b9c13ea5f4be",
+  "provider_files": {
+    "ferramentas/formatos.py": "c60506832e3e5ab6863a8e62d94fdd75843fb87d396423d3fd8cb050bd70b968",
+    "ferramentas/unidades.py": "00ce73b9eb8abd817f3760db570addefcb4187a3a4066f0cdaa802c6c3cef140",
+    "pesquisas-paralelas/combate/inicializacao_ataque.py": "4d1dc28c4b8dbcca1a0ea203d95c89cb3db3e5738eaad3f6b21be9abd7be55fc"
+  }
+}

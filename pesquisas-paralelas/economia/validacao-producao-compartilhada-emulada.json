@@ -1,0 +1,18 @@
+{
+  "scope": "CalculTroupe actual entry through preparation, conversion and recovery; stops before experience",
+  "mode": "original x86 and Python",
+  "tests": 13,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 782,
+  "declared_stops": 778,
+  "completed_returns": 136,
+  "experience_dependency_stops": 636,
+  "bonus_query_stops": 4,
+  "core_import_stops": 2,
+  "expected_x86_exceptions": 4,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}
