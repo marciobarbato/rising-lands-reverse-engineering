@@ -276,13 +276,74 @@ Actual stage-17 validation:
 
 Limits: the pool must already be allocated; Python rejects absent or short buffers where the original would fault. Stack scratch is native-only. Other prefix routines, whole-prefix equality, `LoadProjectile`/`SaveProjectile` and the save/load callers' surrounding behavior are not reconstructed here. Global gap closed: the combat step of L2 is an exact provider with native whole-pool/whole-global equality, and the absence of any other combat reset in L2 is recorded from original bytes.
 
+Stage 17 integrated successfully: implementation `f72668f`, final feature `91dfc63086e9b75a7d42139acd02e3e102c4c5a8`, remote-main merge `9e579b4df5f92d896ec9595ab5963b9a469141c5`. The coordinator accepted it and opened Stage 18.
+
+### Completed stage 18: live attack state machine from the unit dispatcher
+
+Contract agreed with ai-runtime by message and recorded on both sides (ai-runtime's integrated `docs/AI_RUNTIME.md`, main `19e824d`):
+
+| Dispatcher call | Owner | Entry |
+|---|---|---|
+| Unit states 1/24 → `0x456886` (table `0x4543c8`), whole body to exit `0x454ccd` | combat | `ataque_vivo.ramo_estado_ataque(ctx, indice, consultar, efetuar)` / `AtaqueVivo.ramo(indice)`; u16 index (ESI record, DI index natively); return ignored |
+| Prelude 32-frame scan target query `EnginTrouveCible 0x453f74` | combat body, ai-runtime order | `alvos_alcance.encontrar_alvo`; AX target or 0xffff |
+| Prelude scan reaction `SetAttaqueEngin 0x445a36(eax unit, dl=1, bx target)` | combat body, ai-runtime order and message 0x49 | `ataque_vivo.definir_ataque` / `AtaqueVivo.definir_ataque` |
+| `CalculGame` → `ProjectileCalcul 0x46fc0f` at `0x42d3f0` | combat | `AtaqueVivo.calcular_projeteis()` or `MaquinaProjeteis.calcular(low byte of u32 0x508f7c)` |
+| Reload advance `0x454530..0x454591` | ai-runtime places it; core arithmetic `combate.avancar_recarga` | not a combat entry |
+| Structure turret types 10/11 (`0x426e43`, `0x427549`), unit state 22 `CalculPiege 0x456520` | combat in principle, not yet sequenced | named dependencies in the skeletons |
+| `iagUnitSendMessage` (0x48 at `EnginInfligeDegat+0x162`, computed code at `+0xbe`, 0x4a in this branch), `iagVilleSendMessage` (code 2 `BatimentInfligeDegat+0x150`, code 4 `InfligeDegat+0xa7`) | ai-runtime | named dependencies at those call sites |
+
+**Inventory** (`rastrear_ataque_vivo.py`, [evidence](evidencias/ataque-vivo.json), [listing](evidencias/ataque-vivo.asm)). Intact EXE `6c556520…43fb`; the normalized PE `26c4534b…64d0` is named only. It records the state table and the branch `[0x45673b,0x4568ad)`, which has no esp/ebp access and a single caller of `CalculAttaqueEngin`. It also records the exit, the declared prelude head `[0x45442c,0x454591)`, `SetAttaqueEngin`, `PlayerGetType`, `PlayerEstAllie`, `PlayerAAttaqueSet`, `BatimentEnDestruction` and `BatimentGetPlayer`, each with its hash.
+
+**`+0x8A` trace (closes the 2/3 question for executable code).** The eight confirmed unit writers store 0/1. `0x452a3a mov [esi+0x8a],ah` has exactly one predecessor, `je` at `0x452469` after `mov ah,[esi+0x8b]; test ah,ah`, so it stores 0. The previous by-byte dword candidates in hangar/turret/structure-dispatch code are `66`-prefixed word stores to structure records at `0x49a0c8`; the `iagRessReset` one is an AI resource record loop. No `rep movs/stos` occurs in a unit routine. The `memset` table resets (`Load` on open failure, `calloc`) fill with zero. Whole unit records therefore come only from `FileRead` loaders, and 2/3 can be only externally supplied bytes; none occur in the 2,604 ETA records. A native write hook on every unit `+0x8a` in all Stage 18 runs saw only `0x445ab3`→0, `0x445ad1`→0, `0x451e08`→1 and `0x452a3a`→0. Not covered: network receive buffers and arbitrary pointer aliasing. No 2/3 transition was added.
+
+**Original-only captures** (`capturar_ataque_vivo.py`, [captures](evidencias/captura-ataque-vivo-original.json)) were taken before `ataque_vivo.py` existed: 25 scenarios, 1,208 native segments, zero writes outside the modeled areas.
+- **Real loaded inputs:** Core's committed `regras` rebuilds the type table (26×50, `0x4965ae`) and the DEGAT rows from the original EXE/INI. Units come from the committed `EnginSetType` translation.
+- **Declared synthetic inputs:** 256×256 map with region label 1, positions, owners, life, zero bonus table, controls, local player 3 with undiscovered terrain, alert/statistic/sympathy globals as in the earlier physical fixtures, frame counter 1000+frame, and order fields for single entries.
+- **Why not real MONDE01:** main has core's vision-sum provider (`f8d9371`), but no composed placed MONDE01 world yet. MONDE01's 16 units are all owner 0; the raid comes from AI tables/kernels.
+- **Frame driver:** set counter → `ProjectileCalcul` → for each unit in state 1/24 in live index order, prelude head then branch.
+
+| Scenario | Native segments | Frames | End |
+|---|---:|---:|---|
+| Melee ESMAGADOR (type 20, owner 200) vs human SOLDADO | 667 | 220 | victim physically dead, attacker branch stops at `iagUnitSendMessage` `0x4567a9` |
+| Ranged ARAIGNEE (type 18, owner 200, projectile 17) vs SOLDADO 6 cells away | 361 | 114 | same |
+| ARAIGNEE owner 1 (AI) vs SOLDADO | 44 | 15 | `PlayerAAttaqueSet(1,0)` diplomacy stop at the first arrival |
+| ESMAGADOR, local player 0 sees the attacker | 64 | 21 | `EnginGetVolume` audio stop when firing |
+| SOLDADO (type 0) owner 200 kills a SOLDADO with 15 life | 52 | 17 | `EnginSetLevelExperience 0x44fb20` (mode-1 award for source types 0..10/25; provider still open) |
+| 11 branch entries | 11 | — | four mode-1 invalid outcomes, AI-owner stop, valid prepare, three mode-3 invalid outcomes, mode-3 valid checkpoint at `0x451914`, mode-5 `DeplaceEngin` stop |
+| 9 `SetAttaqueEngin` entries | 9 | — | accept 1/3/5, same-order early return, self target, mode 2, colonist/builder refusal after reset, moving attacker |
+
+The complete chains include every hit's retaliation `SetAttaqueEngin(victim,1,attacker)`. The victim's own branch then rejects the owner-200 target and requests `SetDeplaceEngin(victim, +7e)`. Non-attack states are not dispatched by this bounded chain. Their branches belong to Core/economy and the real dispatcher order to ai-runtime.
+
+**Implementation** (`ataque_vivo.py`): see [the manual](../../docs/COMBAT.md#live-attack-chain-from-the-unit-dispatcher) for inputs, widths, order and routing.
+- `definir_ataque` reuses `ordem_ja_definida`/`ordem_apos_reset` around Core `ResetOrdre`.
+- `ramo_estado_ataque` reuses `alvo_ordem_valido` and `calcular_ataque`.
+- `AtaqueVivo` composes the live context, pool, impact wrapper, physical consumer (both lethal tails) and projectile machine.
+- New read-only bridges: `tipo_jogador` (`PlayerGetType 0x46d817`, controls of owners 0..3, otherwise 2) and `batiment_en_destruction`/`batiment_get_player` (`0x41a70b`/`0x41a08c`, IDs 0..999). These are bounded getters over Core's committed `controle_jogadores`/`estruturas`. Economy/core may replace them with an owner provider later.
+- Missing providers raise `DependenciaAtaqueVivo(nome, argumentos)`, carrying the original entry address and retaining earlier effects.
+- Test fixtures supply only the proven original no-effect guards: the non-AI message prefix and null-group combat messages, `MAJSympathie` owner/inactive returns, and `PlayerAAttaqueSet` owner-range returns.
+
+**Validation.**
+- `python3 -B pesquisas-paralelas/combate/validar_ataque_vivo.py --emular`: **41 tests / 17,509 bounded original-x86 executions**, with zero failures, errors or skips.
+  - **1,208 lockstep segments** (387 chain frames) compare full bytes after every segment: units, structures, groups, objects, every Core grid and route, the pool, and the search/iteration/alert globals.
+  - No native write outside those areas, and every segment digest equals its original-only capture.
+  - Both complete chains end at the named AI stop `0x4567a9` after the victim's physical death. The three named chain stops and all 20 single entries match.
+  - Observed `+0x8a` writes: `0x445ab3`→0 ×23, `0x445ad1`→0 ×2, `0x451e08`→1 ×17, `0x452a3a`→0 ×15.
+  - The other 16,301 executions rerun the attack-substate and projectile-machine regressions.
+- A first native run failed: one ranged `ProjectileCalcul` segment exceeded the harness's 1-second wall-clock limit while Ghidra/REA and the domain check were running concurrently. I merged main `04c7bfb` and reran on a quiet machine; that rerun is the pass above. The failed run is not counted.
+- Local run: 41 tests, 24 optional native skips; the Python composition reproduces all 1,208 captured digests.
+- `python3 -B scripts/check.py --domain combat`: 246 tests / 149 optional skips, no failures/errors.
+
+**REA (complementary only).** I ran the worker CLI on `0x456886` (pinned source `b9a8f8e9…`, Ghidra 12.2, analysis identity `26c4534b…`); it returned the whole `EnginNextEtape` `0x45442c..0x456c33`. A [reviewed excerpt](evidencias/rea-ataque-vivo.json) of the state-1/24 case matches the assembly, but its Watcom arguments are wrong: `PlayerGetType` is shown with the unit index instead of the owner byte. It also shows the same target-validity pattern inside the state-19 body, which ai-runtime assigns to economy; that body is not translated here. `WORKER_USAGE.txt` sits one level above the scripts folder, as the coordinator corrected.
+
+
 
 | Subcomponent | Evidence / implemented state | Remaining work |
 |---|---|---|
 | Cell impact wrapper | Mode-1/3/4 unit branches with computed priority; prepared mode-3 type-1 and mode-4 type-29 shared-world returns/stops validated | Concrete source-cell/navigation/diplomacy/audio/AI/RNG providers and building-target branch; undefined mode-8/9 reaction origin remains separate |
 | Unit damage modes | Initialized mode-1/3/4/8/9 prefixes and common nonlethal tail translated; explicit source tables/queries and mode-4 direction domain | Broader world callers and mode-3/4/8/9 lethal completion; modes with undefined inputs remain explicit |
 | Lethal effects | Mode-1 opt-in physical tail plus explicit separate mode-3/4 no-award tail on live views; original whole-world complete/stopped fixtures | Core-owned level and special physical effects; undefined mode-8/9 owner/death; general sympathy/message/audio and broader world effects |
-| Attack phase producers | Existing field audit found direct writes 0/1; no 2/3 in 2,604 serialized ETA records | Trace indirect writes/callers without inventing `+0x8A=2/3` transitions |
+| Attack phase producers | Stage 18 trace: every executable unit writer stores 0/1 (AH store proven 0); 2/3 only via file loaders of external bytes; native runs saw only 0/1 | Network/multiplayer buffers and pointer aliasing remain unproven |
+| Live attack chain | Stage 18 `ataque_vivo`: SetAttaqueEngin, state-1/24 branch, emission, pool, ProjectileCalcul, impact, damage, retaliation and Core physical death in native lockstep | Real MONDE01 raid state, AI message/audio/diplomacy/level providers, building-target branch (Stage 19), turrets and traps |
 | World providers | Committed economy modifiers, computed building/unit selection and radius-10 proximity composed; Core physical death delegated over shared views | Loaded-state/grid initialization, core navigation/special lifecycle, level/message/diplomacy/audio bodies; real building geometry |
 | Mission reset prefix | Stage-17 `resetar_projeteis` exact `ProjectileReset` with native whole-pool/whole-global equality from dirty state, direct and through all four CALL sites; no other combat reset exists in L2 | Missions composes it between `EnginResetAll` and `MessageBoxInit` in its native whole-prefix oracle |
 | Runtime/mission integration | No game/runtime is started by these harnesses; preview uses old pinned snapshots | Coordinate committed mission state/caller dispatch and runtime operation in a maintenance-owned consumer |
