@@ -8,8 +8,8 @@ não criar caches nos módulos compartilhados lidos pela pesquisa.
 
 ## Como incorporar
 
-1. Revisar [README.md](README.md), os ASM e o relatório com 145 testes aprovados
-   e 42.542 execuções x86 (incluindo 88 exceções, três limites esperados e
+1. Revisar [README.md](README.md), os ASM e o relatório com 161 testes aprovados
+   e 46.274 execuções x86 (incluindo 88 exceções, três limites esperados e
    paradas em dependências/sufixos delimitados em cada documento).
    Executar `validar.py --emular` se houver Unicorn/JIT.
 2. Incorporar `economia.py` em `ferramentas/` ou manter a pesquisa como módulo
@@ -235,7 +235,7 @@ from producao import Producao
 p = Producao(r, tipos_construcoes=bloco_1144_bytes_desde_495d8c,
              ajuste_hospital=byte_495be8)
 p.avancar_unidade(indice_construcao)     # ConstruitPerso 0x423b9b
-# No chamador apropriado para aprendizagem:
+# Avanço isolado; para o fluxo completo da biblioteca, usar Aprendizagem abaixo:
 p.avancar_sortilegio(indice_construcao)  # ConstruitSort 0x423d14
 ```
 
@@ -252,7 +252,36 @@ unidades e o tipo do registro referenciado; não usar só a ocupação da Bag.
 Sincronizar também a tabela de tipos de construção e o byte de ajuste do
 hospital. Contratos, endereços, guardas adicionais e evidências estão em
 [PRODUCAO.md](PRODUCAO.md). Não se estabeleceu o escalonamento dessas chamadas
-nem se executou a finalização da produção.
+nem se executou a finalização da produção de unidades.
+
+## Conclusão da aprendizagem na biblioteca
+
+Reutilizar as mesmas instâncias de Producao e PropriedadeConstrucoes. Elas
+devem apontar para o mesmo `EconomiaConstrucoes`; o construtor verifica isso.
+
+```python
+from aprendizagem import Aprendizagem
+
+a = Aprendizagem(p, propriedade_existente, inventados=bloco_20_bytes_desde_508f44)
+a.calcular_biblioteca(indice_construcao)  # CalculTroupe 0x4259e6, somente tipo 6.
+```
+
+O método já avança e conclui a aprendizagem; não chamar `avancar_sortilegio`
+antes dele na mesma atualização. A API retorna None, e os efeitos ficam nos
+buffers compartilhados: `propriedade.sortilegios`, `propriedade.ordens`,
+`propriedade.pendencias` e `r.mundo.estruturas`. O buffer `inventados` é copiado
+e permanece distinto dos disponíveis em `propriedade.sortilegios`.
+
+Sincronizar as duas tabelas de 20 bytes e as duas famílias de Bags com o jogo.
+Os setters/resets de flags não refazem listas automaticamente; conservar a
+ordem original das chamadas. A conclusão chama liberar, reconstruir ordens e
+reconstruir opções da biblioteca, depois limpa os campos da construção.
+Não cobrar recursos novamente. Guardas, endereços e campos preservados estão
+em [APRENDIZAGEM.md](APRENDIZAGEM.md).
+
+Somente o ramo tipo 6 de CalculTroupe e o ramo DL=6 de BatimentSetTechnologie
+foram traduzidos. Não substituir os despachos completos por esses métodos.
+O início da aprendizagem e a agenda de atualização continuam pendentes.
 
 ## Atualizações de documentação sugeridas, não realizadas
 
@@ -260,11 +289,12 @@ nem se executou a finalização da produção.
   peças=0, citando os débitos de InitRecruteTroupe.
 - ROTINAS.md: adicionar os acessores e mutações `0x467640..0x4679d0`.
 - CONTINUIDADE.md: marcar consultas, crédito/débito, recálculo do indicador,
-  depósito, contagens, efeitos econômicos de propriedade, extração no terreno
-  regeneração de campos e avanço de produção como traduzidos; conservar chamadores completos,
+  depósito, contagens, efeitos econômicos de propriedade, extração no terreno,
+  regeneração de campos, avanço de produção e conclusão da biblioteca como traduzidos;
+  conservar os demais chamadores completos,
   tecnologias, transporte, consumo e filas como pendências.
 - SIMBOLOS.md/IA.md: registrar os diferentes índices da IA e o retorno 1/-1.
-- EMULACAO.md/validação geral: integrar os 66 testes diferenciais sem somar
+- EMULACAO.md/validação geral: integrar os 73 testes diferenciais sem somar
   automaticamente as contagens desta pesquisa à suíte compartilhada.
 
 ## Próximas investigações de economia
@@ -276,9 +306,11 @@ nem se executou a finalização da produção.
    neutralização, mantendo criação/movimento de balões no subsistema responsável.
    Completar tecnologia e o restante de TerrainDeposeMatiere fora da flag zero.
 3. Recrutamento: ligar a dependência de saída de InitRecruteTroupe, traduzir
-   conclusão/escalonamento e completar o fluxo das filas. O início econômico e
+   conclusão de unidades/escalonamento e completar o fluxo das filas. O início econômico e
    as consultas estão em [RECRUTAMENTO.md](RECRUTAMENTO.md); o avanço já está em
-   [PRODUCAO.md](PRODUCAO.md). Não interpretar AL=1 como produto concluído.
+   [PRODUCAO.md](PRODUCAO.md). A conclusão da biblioteca está em
+   [APRENDIZAGEM.md](APRENDIZAGEM.md); investigar seu início e demais ramos de tecnologia.
+   Não interpretar AL=1 dos helpers de avanço como produto concluído.
 4. Mercado e trocas em `0x466533..0x467640`: preços, propostas e transferências.
 5. Confirmar o significado de RMI, o quarto registro e o byte +7 em gameplay
    ou por outros consumidores, preservando nomes neutros enquanto não confirmado.

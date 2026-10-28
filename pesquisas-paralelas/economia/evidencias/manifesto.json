@@ -6,13 +6,17 @@
     "0x00418e95": "BatimentAlloc",
     "0x00419112": "BatimentInitCave",
     "0x00419fc8": "BatimentRecalculRessource",
+    "0x0041a4c4": "BatimentGetColons",
+    "0x0041a4f4": "BatimentGetType",
     "0x0041aace": "BatimentGetRessource",
     "0x0041b1c6": "GarageCalculCoutReparation",
     "0x0041bb8a": "TerrainDeposeMatiere",
     "0x0041be88": "InitBatimentPlayer",
     "0x0041c017": "InitBatimentNeutre",
+    "0x0041c76c": "BatimentSetTechnologie",
     "0x0041cde0": "BatimentInitTechnologie",
     "0x0041dde0": "BatimentRetireColon",
+    "0x0041f3ed": "BatimentGetCapacite",
     "0x00420ba5": "SortEnRecrutement",
     "0x00420bdf": "EnginEnRecrutement",
     "0x00422fde": "StockPossible",
@@ -24,6 +28,7 @@
     "0x00423e65": "CalculNovaRecrute",
     "0x00423f83": "GetStatusRecrute",
     "0x00423f9d": "CalculStatusRecrute",
+    "0x004259e6": "CalculTroupe",
     "0x004283e2": "InitRecruteTroupe",
     "0x004410b7": "EnginGetTimeRecrute",
     "0x004410d2": "EnginGetRessource",
@@ -52,8 +57,14 @@
     "0x0046ab33": "SauveRessource",
     "0x004704dc": "Random",
     "0x0047476a": "SortilegeGetTimeAprentissage",
+    "0x00474958": "SortilegeEstRealisable",
+    "0x00474974": "SortilegeSetRealisable",
+    "0x00474991": "SortilegeEstInvente",
+    "0x004749ad": "SortilegeSetInvention",
     "0x004749ca": "SortilegeResetRealisable",
+    "0x004749f2": "SortilegeResetTechnologie",
     "0x00474a38": "SortilegeSetTechnologie",
+    "0x00474a95": "SortilegeInitTechnologie",
     "0x00475328": "SetUpdateChamp",
     "0x0047534a": "LoadMine",
     "0x0047539c": "LoadMissionMine",
@@ -102,6 +113,10 @@
     "0x00423eb2": {
       "nome": "corpo_compartilhado_de_CalculStatusRecrute",
       "fim_exclusivo": "0x00423f83"
+    },
+    "0x0041db1d": {
+      "nome": "epilogo_compartilhado_de_CalculTroupe",
+      "fim_exclusivo": "0x0041db24"
     }
   },
   "tipos_construcao_confirmados": [
@@ -159,6 +174,15 @@
       ]
     },
     {
+      "endereco": "0x00401939",
+      "instrucao": "call",
+      "alvo": "0x0041f3ed",
+      "nome": "BatimentGetCapacite",
+      "simbolo_anterior": [
+        "AffContenanceHospi"
+      ]
+    },
+    {
       "endereco": "0x004019b9",
       "instrucao": "call",
       "alvo": "0x00441108",
@@ -174,6 +198,132 @@
       "nome": "EnginGetVieMax",
       "simbolo_anterior": [
         "AffContenanceHospi"
+      ]
+    },
+    {
+      "endereco": "0x00401aa2",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "AffContenanceBatiment"
+      ]
+    },
+    {
+      "endereco": "0x00401ac3",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "AffContenanceBatiment"
+      ]
+    },
+    {
+      "endereco": "0x00401b7f",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "AffContenanceBatiment"
+      ]
+    },
+    {
+      "endereco": "0x00401c18",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "AffContenanceBatiment"
+      ]
+    },
+    {
+      "endereco": "0x00401d41",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "AffChrono"
+      ]
+    },
+    {
+      "endereco": "0x00401d56",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "AffChrono"
+      ]
+    },
+    {
+      "endereco": "0x00401d6b",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "AffChrono"
+      ]
+    },
+    {
+      "endereco": "0x00401d80",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "AffChrono"
+      ]
+    },
+    {
+      "endereco": "0x00401d95",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "AffChrono"
+      ]
+    },
+    {
+      "endereco": "0x00401da6",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "AffChrono"
+      ]
+    },
+    {
+      "endereco": "0x00401db7",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "AffChrono"
+      ]
+    },
+    {
+      "endereco": "0x00401dc8",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "AffChrono"
+      ]
+    },
+    {
+      "endereco": "0x00401dd9",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "AffChrono"
+      ]
+    },
+    {
+      "endereco": "0x00401dea",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "AffChrono"
       ]
     },
     {
@@ -201,6 +351,15 @@
       "nome": "CalculNovaRecrute",
       "simbolo_anterior": [
         "AffChrono"
+      ]
+    },
+    {
+      "endereco": "0x0040f456",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "AffBatiments"
       ]
     },
     {
@@ -798,12 +957,39 @@
       ]
     },
     {
+      "endereco": "0x0041cb29",
+      "instrucao": "call",
+      "alvo": "0x00474991",
+      "nome": "SortilegeEstInvente",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041cb36",
+      "instrucao": "call",
+      "alvo": "0x00474958",
+      "nome": "SortilegeEstRealisable",
+      "simbolo_anterior": [
+        "BatimentSetTechnologie"
+      ]
+    },
+    {
       "endereco": "0x0041cb46",
       "instrucao": "call",
       "alvo": "0x00447483",
       "nome": "BagPrend",
       "simbolo_anterior": [
         "BatimentSetTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041cca4",
+      "instrucao": "call",
+      "alvo": "0x0041c76c",
+      "nome": "BatimentSetTechnologie",
+      "simbolo_anterior": [
+        "BatimentHabitable"
       ]
     },
     {
@@ -820,6 +1006,15 @@
       "instrucao": "call",
       "alvo": "0x0046769d",
       "nome": "GetRessourceStock",
+      "simbolo_anterior": [
+        "BatimentInitTechnologie"
+      ]
+    },
+    {
+      "endereco": "0x0041ceba",
+      "instrucao": "call",
+      "alvo": "0x0041c76c",
+      "nome": "BatimentSetTechnologie",
       "simbolo_anterior": [
         "BatimentInitTechnologie"
       ]
@@ -1266,10 +1461,28 @@
       ]
     },
     {
+      "endereco": "0x00421276",
+      "instrucao": "call",
+      "alvo": "0x00474974",
+      "nome": "SortilegeSetRealisable",
+      "simbolo_anterior": [
+        "ApprentissageSortTerminer"
+      ]
+    },
+    {
       "endereco": "0x00421282",
       "instrucao": "call",
       "alvo": "0x00474a38",
       "nome": "SortilegeSetTechnologie",
+      "simbolo_anterior": [
+        "ApprentissageSortTerminer"
+      ]
+    },
+    {
+      "endereco": "0x00421294",
+      "instrucao": "call",
+      "alvo": "0x0041c76c",
+      "nome": "BatimentSetTechnologie",
       "simbolo_anterior": [
         "ApprentissageSortTerminer"
       ]
@@ -1932,6 +2145,33 @@
       ]
     },
     {
+      "endereco": "0x00425aaf",
+      "instrucao": "call",
+      "alvo": "0x0041a4c4",
+      "nome": "BatimentGetColons",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425acd",
+      "instrucao": "call",
+      "alvo": "0x0041f3ed",
+      "nome": "BatimentGetCapacite",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425ae8",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
       "endereco": "0x00425b1b",
       "instrucao": "call",
       "alvo": "0x0048c43e",
@@ -1945,6 +2185,33 @@
       "instrucao": "call",
       "alvo": "0x004410b7",
       "nome": "EnginGetTimeRecrute",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425ba5",
+      "instrucao": "call",
+      "alvo": "0x0041a4c4",
+      "nome": "BatimentGetColons",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425bc3",
+      "instrucao": "call",
+      "alvo": "0x0041f3ed",
+      "nome": "BatimentGetCapacite",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425bde",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
       "simbolo_anterior": [
         "CalculTroupe"
       ]
@@ -1972,6 +2239,33 @@
       "instrucao": "call",
       "alvo": "0x004410b7",
       "nome": "EnginGetTimeRecrute",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425cf9",
+      "instrucao": "call",
+      "alvo": "0x0041a4c4",
+      "nome": "BatimentGetColons",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425d1a",
+      "instrucao": "call",
+      "alvo": "0x0041f3ed",
+      "nome": "BatimentGetCapacite",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425d38",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
       "simbolo_anterior": [
         "CalculTroupe"
       ]
@@ -2013,6 +2307,33 @@
       ]
     },
     {
+      "endereco": "0x00425f17",
+      "instrucao": "call",
+      "alvo": "0x0041a4c4",
+      "nome": "BatimentGetColons",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425f38",
+      "instrucao": "call",
+      "alvo": "0x0041f3ed",
+      "nome": "BatimentGetCapacite",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00425f56",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
       "endereco": "0x00425fa5",
       "instrucao": "call",
       "alvo": "0x0048c43e",
@@ -2031,6 +2352,15 @@
       ]
     },
     {
+      "endereco": "0x00426025",
+      "instrucao": "call",
+      "alvo": "0x00474974",
+      "nome": "SortilegeSetRealisable",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
       "endereco": "0x00426031",
       "instrucao": "call",
       "alvo": "0x00474a38",
@@ -2040,10 +2370,46 @@
       ]
     },
     {
+      "endereco": "0x00426043",
+      "instrucao": "call",
+      "alvo": "0x0041c76c",
+      "nome": "BatimentSetTechnologie",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
       "endereco": "0x004260d1",
       "instrucao": "call",
       "alvo": "0x004410b7",
       "nome": "EnginGetTimeRecrute",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x004260fa",
+      "instrucao": "call",
+      "alvo": "0x0041a4c4",
+      "nome": "BatimentGetColons",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00426118",
+      "instrucao": "call",
+      "alvo": "0x0041f3ed",
+      "nome": "BatimentGetCapacite",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x00426136",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
       "simbolo_anterior": [
         "CalculTroupe"
       ]
@@ -2112,6 +2478,33 @@
       ]
     },
     {
+      "endereco": "0x00426386",
+      "instrucao": "call",
+      "alvo": "0x0041a4c4",
+      "nome": "BatimentGetColons",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x004263a4",
+      "instrucao": "call",
+      "alvo": "0x0041f3ed",
+      "nome": "BatimentGetCapacite",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
+      "endereco": "0x004263bf",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "CalculTroupe"
+      ]
+    },
+    {
       "endereco": "0x004264a0",
       "instrucao": "call",
       "alvo": "0x004676e5",
@@ -2166,6 +2559,15 @@
       ]
     },
     {
+      "endereco": "0x00426983",
+      "instrucao": "call",
+      "alvo": "0x004259e6",
+      "nome": "CalculTroupe",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
       "endereco": "0x004269df",
       "instrucao": "call",
       "alvo": "0x004471b8",
@@ -2175,10 +2577,28 @@
       ]
     },
     {
+      "endereco": "0x004269f4",
+      "instrucao": "call",
+      "alvo": "0x004259e6",
+      "nome": "CalculTroupe",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
       "endereco": "0x00426a9e",
       "instrucao": "call",
       "alvo": "0x004471b8",
       "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00426ab9",
+      "instrucao": "call",
+      "alvo": "0x004259e6",
+      "nome": "CalculTroupe",
       "simbolo_anterior": [
         "BatimentNextEtape"
       ]
@@ -2301,6 +2721,15 @@
       ]
     },
     {
+      "endereco": "0x00427e1f",
+      "instrucao": "call",
+      "alvo": "0x004259e6",
+      "nome": "CalculTroupe",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
       "endereco": "0x00427eb1",
       "instrucao": "call",
       "alvo": "0x00447148",
@@ -2332,6 +2761,15 @@
       "instrucao": "call",
       "alvo": "0x004471b8",
       "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00427f53",
+      "instrucao": "call",
+      "alvo": "0x004259e6",
+      "nome": "CalculTroupe",
       "simbolo_anterior": [
         "BatimentNextEtape"
       ]
@@ -2413,6 +2851,15 @@
       "instrucao": "call",
       "alvo": "0x004471b8",
       "nome": "BagContient",
+      "simbolo_anterior": [
+        "BatimentNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00428145",
+      "instrucao": "call",
+      "alvo": "0x004259e6",
+      "nome": "CalculTroupe",
       "simbolo_anterior": [
         "BatimentNextEtape"
       ]
@@ -2526,6 +2973,33 @@
       ]
     },
     {
+      "endereco": "0x00429ac2",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x00429ea2",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x00429ec5",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
       "endereco": "0x0042a8f6",
       "instrucao": "call",
       "alvo": "0x00441108",
@@ -2539,6 +3013,132 @@
       "instrucao": "call",
       "alvo": "0x004471b8",
       "nome": "BagContient",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042ac61",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042addf",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042adf6",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042afef",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042b018",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042b109",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042b357",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042b3ff",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042b4e9",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042b58e",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042b671",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042b9d4",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042bd0d",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
+      "endereco": "0x0042bee4",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
       "simbolo_anterior": [
         "InputGame"
       ]
@@ -2706,6 +3306,15 @@
       ]
     },
     {
+      "endereco": "0x00445b32",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "SetEnginRentreBatiment"
+      ]
+    },
+    {
       "endereco": "0x00447b6c",
       "instrucao": "call",
       "alvo": "0x004704dc",
@@ -2757,6 +3366,51 @@
       "nome": "Random",
       "simbolo_anterior": [
         "AvanceEngin"
+      ]
+    },
+    {
+      "endereco": "0x0044977d",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "CalculEntreBatiment"
+      ]
+    },
+    {
+      "endereco": "0x004499c1",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "CalculEntreBatiment"
+      ]
+    },
+    {
+      "endereco": "0x00449a98",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "CalculEntreBatiment"
+      ]
+    },
+    {
+      "endereco": "0x00449b83",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "CalculEntreBatiment"
+      ]
+    },
+    {
+      "endereco": "0x00449b9b",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "CalculEntreBatiment"
       ]
     },
     {
@@ -3228,6 +3882,33 @@
       ]
     },
     {
+      "endereco": "0x00450380",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "EnginInfligeDegat"
+      ]
+    },
+    {
+      "endereco": "0x0045092e",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InfligeDegat"
+      ]
+    },
+    {
+      "endereco": "0x0045093d",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "InfligeDegat"
+      ]
+    },
+    {
       "endereco": "0x004509cc",
       "instrucao": "call",
       "alvo": "0x004704dc",
@@ -3291,6 +3972,24 @@
       ]
     },
     {
+      "endereco": "0x0045394f",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "ChercheTypeBatimentProximite"
+      ]
+    },
+    {
+      "endereco": "0x00453aaf",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "ChercheBatimentProximiteCaveOuSanctuaire"
+      ]
+    },
+    {
       "endereco": "0x00453c5f",
       "instrucao": "call",
       "alvo": "0x004676e5",
@@ -3318,6 +4017,15 @@
       ]
     },
     {
+      "endereco": "0x00455688",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
       "endereco": "0x004556c1",
       "instrucao": "call",
       "alvo": "0x004676e5",
@@ -3331,6 +4039,15 @@
       "instrucao": "call",
       "alvo": "0x004235bd",
       "nome": "BatimentEnleveMatiere",
+      "simbolo_anterior": [
+        "EnginNextEtape"
+      ]
+    },
+    {
+      "endereco": "0x00455951",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
       "simbolo_anterior": [
         "EnginNextEtape"
       ]
@@ -3408,6 +4125,15 @@
       ]
     },
     {
+      "endereco": "0x00456d24",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "EnginRentreMatiere"
+      ]
+    },
+    {
       "endereco": "0x0045865d",
       "instrucao": "call",
       "alvo": "0x004676e5",
@@ -3426,10 +4152,28 @@
       ]
     },
     {
+      "endereco": "0x0045882c",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "TestFinDeMission"
+      ]
+    },
+    {
       "endereco": "0x004589a0",
       "instrucao": "call",
       "alvo": "0x004676e5",
       "nome": "TestRessource",
+      "simbolo_anterior": [
+        "TestFinDeMission"
+      ]
+    },
+    {
+      "endereco": "0x00458a34",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
       "simbolo_anterior": [
         "TestFinDeMission"
       ]
@@ -3495,6 +4239,33 @@
       "nome": "EnginGetRessource",
       "simbolo_anterior": [
         "TroupeRessourceNecessaire"
+      ]
+    },
+    {
+      "endereco": "0x0045d846",
+      "instrucao": "call",
+      "alvo": "0x0041a4c4",
+      "nome": "BatimentGetColons",
+      "simbolo_anterior": [
+        "ChercheSurplusColons"
+      ]
+    },
+    {
+      "endereco": "0x0045d971",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "ChercheCibleBatiment"
+      ]
+    },
+    {
+      "endereco": "0x0045d988",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "ChercheCibleBatiment"
       ]
     },
     {
@@ -3576,6 +4347,24 @@
       "nome": "TestRessource",
       "simbolo_anterior": [
         "IconeFillContenu"
+      ]
+    },
+    {
+      "endereco": "0x0045e926",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "IconeSetRecrute"
+      ]
+    },
+    {
+      "endereco": "0x0045e9d8",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "CalculIconeAction"
       ]
     },
     {
@@ -3702,6 +4491,15 @@
       "nome": "GetRessource",
       "simbolo_anterior": [
         "ComposeCommande"
+      ]
+    },
+    {
+      "endereco": "0x00461252",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "RechercheTypeBatiment"
       ]
     },
     {
@@ -3957,10 +4755,28 @@
       ]
     },
     {
+      "endereco": "0x0046b576",
+      "instrucao": "call",
+      "alvo": "0x004749f2",
+      "nome": "SortilegeResetTechnologie",
+      "simbolo_anterior": [
+        "TechnologieReset"
+      ]
+    },
+    {
       "endereco": "0x0046bb0b",
       "instrucao": "call",
       "alvo": "0x0041cde0",
       "nome": "BatimentInitTechnologie",
+      "simbolo_anterior": [
+        "GameLoad"
+      ]
+    },
+    {
+      "endereco": "0x0046bb15",
+      "instrucao": "call",
+      "alvo": "0x00474a95",
+      "nome": "SortilegeInitTechnologie",
       "simbolo_anterior": [
         "GameLoad"
       ]
@@ -4017,6 +4833,15 @@
       "nome": "BatimentInitCave",
       "simbolo_anterior": [
         "MissionLoad"
+      ]
+    },
+    {
+      "endereco": "0x0046c687",
+      "instrucao": "call",
+      "alvo": "0x004749f2",
+      "nome": "SortilegeResetTechnologie",
+      "simbolo_anterior": [
+        "MissionLoadName"
       ]
     },
     {
@@ -4161,6 +4986,51 @@
       "nome": "BatimentInitTechnologie",
       "simbolo_anterior": [
         "InventionSetEffet"
+      ]
+    },
+    {
+      "endereco": "0x0047121f",
+      "instrucao": "call",
+      "alvo": "0x004749ad",
+      "nome": "SortilegeSetInvention",
+      "simbolo_anterior": [
+        "InventionSetEffet"
+      ]
+    },
+    {
+      "endereco": "0x0047122b",
+      "instrucao": "call",
+      "alvo": "0x0041c76c",
+      "nome": "BatimentSetTechnologie",
+      "simbolo_anterior": [
+        "InventionSetEffet"
+      ]
+    },
+    {
+      "endereco": "0x004722b2",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "EnginSelectPeutDeposer"
+      ]
+    },
+    {
+      "endereco": "0x00472bd1",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "EnginSelectPeutEntrer"
+      ]
+    },
+    {
+      "endereco": "0x00473f62",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "SetEnginSelectRentreBatiment"
       ]
     },
     {
@@ -4434,6 +5304,15 @@
       ]
     },
     {
+      "endereco": "0x004806f5",
+      "instrucao": "call",
+      "alvo": "0x0041a4c4",
+      "nome": "BatimentGetColons",
+      "simbolo_anterior": [
+        "B_OccupationColonMinBatiment"
+      ]
+    },
+    {
       "endereco": "0x0048071a",
       "instrucao": "call",
       "alvo": "0x0041dde0",
@@ -4449,6 +5328,51 @@
       "nome": "InitRecruteTroupe",
       "simbolo_anterior": [
         "V_BatimentRecruteUnite"
+      ]
+    },
+    {
+      "endereco": "0x0048079f",
+      "instrucao": "call",
+      "alvo": "0x0041a4c4",
+      "nome": "BatimentGetColons",
+      "simbolo_anterior": [
+        "I_DonneBatimentOccupe"
+      ]
+    },
+    {
+      "endereco": "0x004807af",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "I_DonneBatimentOccupe"
+      ]
+    },
+    {
+      "endereco": "0x004809b2",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "I_DonneBatimentPasPlein"
+      ]
+    },
+    {
+      "endereco": "0x004809cc",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "I_DonneBatimentPasPlein"
+      ]
+    },
+    {
+      "endereco": "0x004809dc",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "I_DonneBatimentPasPlein"
       ]
     },
     {
@@ -4605,6 +5529,42 @@
       ]
     },
     {
+      "endereco": "0x00484363",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "iagVilleReset"
+      ]
+    },
+    {
+      "endereco": "0x0048437a",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "iagVilleReset"
+      ]
+    },
+    {
+      "endereco": "0x0048487b",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "iagVilleSendMessage"
+      ]
+    },
+    {
+      "endereco": "0x004848a9",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "iagVilleSendMessage"
+      ]
+    },
+    {
       "endereco": "0x004850b3",
       "instrucao": "call",
       "alvo": "0x00467670",
@@ -4728,6 +5688,42 @@
       "nome": "BagAccepte",
       "simbolo_anterior": [
         "iagWarStartBuildUnits"
+      ]
+    },
+    {
+      "endereco": "0x004878f4",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "iagWarComputeEnnemyStrengthInZone"
+      ]
+    },
+    {
+      "endereco": "0x00488497",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "iagWarNewTargetForUnit"
+      ]
+    },
+    {
+      "endereco": "0x00488ae3",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "iagWarTestIfOffensiveBuildingInZone"
+      ]
+    },
+    {
+      "endereco": "0x00488c7e",
+      "instrucao": "call",
+      "alvo": "0x0041a4f4",
+      "nome": "BatimentGetType",
+      "simbolo_anterior": [
+        "iagWarTestIfOffensiveBuildingInZone"
       ]
     },
     {

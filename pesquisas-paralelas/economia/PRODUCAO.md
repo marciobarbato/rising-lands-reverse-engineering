@@ -50,7 +50,8 @@ continua abaixo do limite. Não há limpeza de `+0x74`, retirada de colonos,
 criação de unidade, concessão de sortilégio, cobrança ou devolução de recursos.
 Não há verificação de proprietário, estado `+5` ou compatibilidade entre tipo
 de construção e produto. A conclusão e a frequência de chamada dependem dos
-chamadores, ainda não traduzidos nesta fase.
+chamadores, ainda não traduzidos nesta fase. A continuação
+[APRENDIZAGEM.md](APRENDIZAGEM.md) traduz o ramo de conclusão da biblioteca.
 
 ## Contagem e divisor
 
@@ -183,7 +184,8 @@ referência se sua etiqueta for 1. O original não impõe todas essas guardas;
 não se reivindica equivalência para acessos fora das tabelas. Em particular,
 índice `0xffff` não é uma sentinela tratada nestas duas rotinas.
 
-A emulação não inicia uma partida nem reproduz escalonamento, conclusão,
-criação de unidades, aprendizagem efetiva, filas completas, transporte,
-consumo/fome ou mercado. Esses fluxos continuam pendentes, juntamente com
-as dependências econômicas registradas nas etapas anteriores.
+A emulação desta etapa não inicia uma partida nem reproduz escalonamento,
+conclusão, criação de unidades, aprendizagem efetiva, filas completas,
+transporte, consumo/fome ou mercado. A conclusão da aprendizagem foi tratada
+na continuação [APRENDIZAGEM.md](APRENDIZAGEM.md); os demais fluxos continuam
+pendentes, juntamente com as dependências econômicas das etapas anteriores.

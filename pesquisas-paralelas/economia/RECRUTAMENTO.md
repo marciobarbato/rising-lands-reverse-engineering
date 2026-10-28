@@ -138,8 +138,9 @@ com índice válido provoca exceção em `0x423ea8`.
 de tempo em segundos não está estabelecida; não converter os tempos para ms.
 Os nomes sugerem recrutamento e aprendizagem, mas esta etapa não implementa
 o avanço por tick, conclusão da produção, criação de unidades ou fila FIFO.
-O avanço foi traduzido na continuação [PRODUCAO.md](PRODUCAO.md); sua frequência
-de chamada, a conclusão e as demais dependências continuam em aberto.
+O avanço foi traduzido em [PRODUCAO.md](PRODUCAO.md), e a conclusão da biblioteca
+em [APRENDIZAGEM.md](APRENDIZAGEM.md). A frequência de chamada, a conclusão
+das unidades e as demais dependências continuam em aberto.
 
 ## Validação e alcance
 
@@ -187,7 +188,8 @@ domínios; essa diferença não é apresentada como equivalência validada.
 O manifesto contém chamadas diretas candidatas de ProcessInputGame e
 V_BatimentRecruteUnite para InitRecruteTroupe, além das consultas por AffChrono
 e IconeFillContenu. A varredura não prova os fluxos completos desses chamadores.
-O avanço foi entregue em [PRODUCAO.md](PRODUCAO.md). Permanecem pendentes
-conclusão/escalonamento, produção efetiva, filas e integração
+O avanço foi entregue em [PRODUCAO.md](PRODUCAO.md), e a conclusão da biblioteca
+em [APRENDIZAGEM.md](APRENDIZAGEM.md). Permanecem pendentes
+conclusão de unidades/escalonamento, produção efetiva de unidades, filas e integração
 com as rotinas responsáveis pela saída. Mercado, consumo/fome e transporte
 completo também permanecem pendentes.

@@ -42,6 +42,10 @@ NOMES = (
     'CalculStatusRecrute', 'CalculNovaRecrute', 'EnginGetTimeRecrute',
     'SortilegeGetTimeAprentissage', 'EnginGetVieMax',
     'ConstruitPerso', 'ConstruitSort', '__CHP', '__init_8087', '__init_80x87',
+    'CalculTroupe', 'BatimentGetColons', 'BatimentGetType', 'BatimentGetCapacite',
+    'BatimentSetTechnologie', 'SortilegeEstRealisable', 'SortilegeSetRealisable',
+    'SortilegeEstInvente', 'SortilegeSetInvention', 'SortilegeResetTechnologie',
+    'SortilegeInitTechnologie',
 )
 # O RET precede dados; não apresentá-los como instruções da função.
 FINS_CONFIRMES = {0x41aace: 0x41ab04, 0x4283e2: 0x428691, 0x478806: 0x478a01,
@@ -51,6 +55,7 @@ TRECHOS_AUXILIARES = {
     0x41db1e: ('epilogo_compartilhado_de_BatimentInitCave', 0x41db24),
     0x440d58: ('epilogo_compartilhado_de_BallonPrepareArrivee', 0x440d5e),
     0x423eb2: ('corpo_compartilhado_de_CalculStatusRecrute', 0x423f83),
+    0x41db1d: ('epilogo_compartilhado_de_CalculTroupe', 0x41db24),
 }
 
 
@@ -122,7 +127,7 @@ def extrair():
         ajuste_hospital=dict(endereco='0x495be8', valor=imagem[0x495be8-base]),
         coeficientes=[dict(endereco=f'0x{a:08x}', valor=struct.unpack_from('<d', imagem, a-base)[0],
                            bytes_hex=imagem[a-base:a-base+8].hex())
-                      for a in (0x4943e7, 0x4943ef, 0x494402, 0x49440a)],
+                      for a in (0x4943e7, 0x4943ef, 0x494402, 0x49440a, 0x494432, 0x49443a)],
         tipos=[dict(id=t, endereco=f'0x{0x495d8c+t*52:08x}',
                     nome=imagem[0x495d8c+t*52+19-base:0x495d8c+t*52+49-base].split(b'\0')[0].decode('cp1252'),
                     divisor_bruto=imagem[0x495d8c+t*52+18-base],

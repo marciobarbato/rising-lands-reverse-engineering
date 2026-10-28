@@ -21,8 +21,10 @@ Extração de minas, coleta de sacolas/campos e regeneração estão traduzidas 
 O início econômico e as consultas de recrutamento estão traduzidos em
 [RECRUTAMENTO.md](RECRUTAMENTO.md), com escolha da saída como dependência explícita.
 O avanço de unidades e sortilégios está traduzido em [PRODUCAO.md](PRODUCAO.md),
-incluindo contagem de colonos e arredondamento x87; a conclusão permanece pendente.
-**145 testes passaram**, com 42.542 execuções x86: 42.451 paradas declaradas,
+incluindo contagem de colonos e arredondamento x87. A conclusão da aprendizagem
+na biblioteca e suas listas estão traduzidas em [APRENDIZAGEM.md](APRENDIZAGEM.md).
+A conclusão da produção de unidades permanece pendente.
+**161 testes passaram**, com 46.274 execuções x86: 46.183 paradas declaradas,
 88 exceções de divisão por zero e três limites de execução esperados.
 Não houve testes ignorados na execução emulada. O ramo de retirada de colono
 tem dependência explícita; veja [capacidade e excedentes](CAPACIDADE_EXCEDENTES.md).
@@ -48,9 +50,9 @@ python3 -B pesquisas-paralelas/economia/validar.py --emular
 ```
 
 O primeiro usa `pefile` e `capstone` já presentes em `../source/python`, verifica
-o hash do EXE e grava os trechos nesta pasta. O segundo passa 79 testes Python
-e ignora explicitamente 66 testes diferenciais. O terceiro exige Unicorn,
-reutilizado de `.local/python`, e executa todos os 145 testes. Nenhum comando
+o hash do EXE e grava os trechos nesta pasta. O segundo passa 88 testes Python
+e ignora explicitamente 73 testes diferenciais. O terceiro exige Unicorn,
+reutilizado de `.local/python`, e executa todos os 161 testes. Nenhum comando
 invoca o gerador de relatórios geral ou altera arquivos fora desta pesquisa.
 O uso de `-B` evita caches de bytecode nos módulos compartilhados importados.
 
@@ -239,7 +241,8 @@ e a de [contagem de armazéns](CONTAGEM_ARMAZENS.md), mais 114. Os
 A etapa de [extração e campos](EXTRACAO_CAMPOS.md) acrescenta 5.641.
 A etapa de [recrutamento](RECRUTAMENTO.md) acrescenta 2.777.
 A etapa de [avanço de produção](PRODUCAO.md) acrescenta 20.266.
-A suíte atual soma 42.542. Destas, 42.451 alcançam parada declarada (64 na entrada
+A etapa de [conclusão da aprendizagem](APRENDIZAGEM.md) acrescenta 3.732.
+A suíte atual soma 46.274. Destas, 46.183 alcançam parada declarada (64 na entrada
 de BatimentRetireColon, 32 nas dependências de balão e 546 na escolha da saída de
 recrutamento; incluem também 128 sufixos isolados), 88 conferem divisão por zero e três conferem o limite
 no ciclo de pilhas corrompidas.
@@ -261,7 +264,9 @@ chamadores de propriedade, tecnologia, persistência integral e filas continuam 
 A recontagem global e os efeitos incrementais econômicos estão traduzidos;
 os caminhos de criação/movimento de balões permanecem dependências explícitas.
 No recrutamento, cobrança, estado inicial, consultas e avanço foram traduzidos;
-a escolha da saída, a conclusão e o fluxo completo das filas continuam pendentes.
+a escolha da saída, a conclusão das unidades e o fluxo completo das filas continuam pendentes.
+Na biblioteca, conclusão da aprendizagem e atualização das listas foram traduzidas;
+o início da aprendizagem, escalonamento e os demais ramos de tecnologia continuam pendentes.
 O avanço assume o controle x87 inicial 0x127f; não generalizar o cálculo para
 outras precisões ou exceções desmascaradas. Sua frequência de chamada não foi estabelecida.
 Os testes não alegam invariantes de gameplay para todos os estados possíveis.
@@ -296,6 +301,9 @@ identificar IDs foi conferida nos trechos dos chamadores.
 - [producao.py](producao.py): ConstruitPerso, ConstruitSort e contagem de unidades na Bag.
 - [bancada_producao.py](bancada_producao.py): referência integral com controle x87 explícito.
 - [testes/test_producao.py](testes/test_producao.py): oito testes locais e sete diferenciais.
+- [aprendizagem.py](aprendizagem.py): conclusão da biblioteca, flags e listas de sortilégios.
+- [bancada_aprendizagem.py](bancada_aprendizagem.py): entrada normal de CalculTroupe, ramo tipo 6 até RET.
+- [testes/test_aprendizagem.py](testes/test_aprendizagem.py): nove testes locais e sete diferenciais.
 - [testes/test_construcoes.py](testes/test_construcoes.py): dez testes locais e dez diferenciais novos.
 - [testes/test_economia.py](testes/test_economia.py): dez testes locais e nove diferenciais.
 - [testes/test_retirada_recalculo.py](testes/test_retirada_recalculo.py): oito testes locais e seis diferenciais.
@@ -314,3 +322,4 @@ identificar IDs foi conferida nos trechos dos chamadores.
 - [EXTRACAO_CAMPOS.md](EXTRACAO_CAMPOS.md): endereços, fatos, limites e validação de extração/regeneração.
 - [RECRUTAMENTO.md](RECRUTAMENTO.md): cobrança, campos iniciais, consultas de progresso e dependências.
 - [PRODUCAO.md](PRODUCAO.md): avanço, divisor, arredondamento, limites e integração.
+- [APRENDIZAGEM.md](APRENDIZAGEM.md): conclusão, tabelas distintas, listas e limites de escopo.

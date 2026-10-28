@@ -1,9 +1,37 @@
 {
   "modo": "Python sem emulação",
-  "testes": 145,
+  "testes": 161,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
+    {
+      "teste": "test_2048_listas_todas_combinacoes_de_flags (test_aprendizagem.DiferencialAprendizagem)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_256_estados_da_construcao_e_inatividade_com_tipo_invalido (test_aprendizagem.DiferencialAprendizagem)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_256_guardas_originais_da_tecnologia_de_biblioteca (test_aprendizagem.DiferencialAprendizagem)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_256_resets_e_reconstrucao_global_em_sequencia (test_aprendizagem.DiferencialAprendizagem)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_320_acessores_flags_preservam_tabelas_e_listas (test_aprendizagem.DiferencialAprendizagem)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_512_bibliotecas_com_estados_limites_e_campos_opacos (test_aprendizagem.DiferencialAprendizagem)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_sequencias_de_aprendizagem_e_chamadas_apos_conclusao (test_aprendizagem.DiferencialAprendizagem)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
     {
       "teste": "test_capacidade_1024_estados_inclusive_pilha_suja (test_construcoes.DiferencialConstrucoes)",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
@@ -278,7 +306,8 @@
     "DiferencialProprietarios": 0,
     "DiferencialExtracao": 0,
     "DiferencialRecrutamento": 0,
-    "DiferencialProducao": 0
+    "DiferencialProducao": 0,
+    "DiferencialAprendizagem": 0
   },
   "excecoes_x86_esperadas": 0,
   "limites_x86_esperados": 0,
