@@ -1,0 +1,70 @@
+{
+ "round": "CXR-20261028-07 (Claude resumption)",
+ "intact_executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "starting_main": "9bf217dd72bcb2f621f396401f9f9b1d3f7d9bd2",
+ "heavy_lease": "local-data/coordination/heavy_lease.py (flock); journal claude-20261028/heavy-lease-journal.jsonl",
+ "deliveries": [
+  {
+   "front": "ai-runtime",
+   "feature": "16e5ada1b21e100c4f06ef2c4aa20299ca82ae44",
+   "feature_merge": "d7c6328",
+   "main": "977c8909f22795bdf183410569095320e5c4bab4",
+   "pre_integration_gates": {
+    "full_native_suite": "41 run, OK, 0 skipped (31.5s)",
+    "domain_gate": "41 discovered, 36 executed, 5 optional native skips, docs links OK"
+   },
+   "helper": "workstream.py integrate ai-runtime: common gates + native suite 41/41 OK, non-force push, ancestry verified",
+   "main_reproduction": {
+    "native_suite": "41/41 OK, 0 skips at 977c890",
+    "focused_adapter": "11 cases: 2 complete MONDE01, 9 named stops; report equal to feature report except base_revision",
+    "report": "integracao/validacao/cxr-20261028-07-ai-adapter-main.json",
+    "report_sha256": "3fa21426912036f4537cf96e575360d9835824637ee3a06c462db3ef0e27137d"
+   }
+  },
+  {
+   "front": "core",
+   "capture_commit": "ff92691",
+   "implementation": "5b82b99",
+   "handoff": "0dd1ec2",
+   "main": "3d782ca76ee29a782eea5de9c763278c7674db65",
+   "routine": "Engin_RetrieveExperimente 0x441623 + shared epilogue 0x440d59",
+   "pre_integration": {
+    "native_differential": "10 tests, 74 comparisons, 78 segments, 0 skips",
+    "core_gate": "418 discovered, 192 optional skips, 0 failures"
+   },
+   "helper": "workstream.py integrate core: passed, non-force push, ancestry verified",
+   "main_reproduction": "discover testes/test*recuperacao_experiencia.py with RISING_EMULAR=1: 10/10 OK (5.7s). First coordinator attempt used a wrong module invocation (ImportError, not a game failure); rerun with discover passed. Standalone validator not rerun on main because it overwrites the committed report."
+  },
+  {
+   "front": "missions",
+   "commits": [
+    "865d5ab",
+    "61847e5",
+    "14b56a9",
+    "81815eb",
+    "3990b7c"
+   ],
+   "main": "14c01228218b51d2e7d42a3c35cbd4119efa6b5b",
+   "evidence": {
+    "capture_v2_sha256": "eb7d2303e13e62d4f5692c9cb6ef302b573d138df6a8b51183a6d9b0bd703afc",
+    "entry_sha256": "0692dea1a4797a05785245a2c5bdbbbf24408e5efeb0b4e82e895075a7c52ddf",
+    "validation_sha256": "4355d3958e8bae505a0cbaca5f53627b9a57676a37e61585fea952aa87985efe"
+   },
+   "result": "original MissionLoad 0x46c2cf reaches real return 0x42d22d AL=1 from original new-campaign startup; oracle phase 0 skips/faults/limits, 1425 segments, 1400 binding events",
+   "checks": {
+    "code_integrity": "pass",
+    "segmentation_invariance": "77777 vs 1000000 instr/segment identical",
+    "input_footprint": "1757 read-before-write bytes; 0 skip-derived; 48 fill bytes read only by CRT stos cache-touch before overwrite",
+    "entry_snapshot": "882 blocks frozen"
+   },
+   "interrupted_attempt": "first helper run stopped by the app during the native suite; no push; candidate worktrees/integration-missions-e5a74b52 and log missions-integrate-interrupted-1.log preserved",
+   "helper": "rerun passed common gates (core 418, combat 246, economy 432, graphics 192, missions 93/32 optional skips, ai-runtime 41/5, audio 20/3, workflow 8) then full missions native suite 93/93 with 0 skips (226s); non-force push; ancestry verified",
+   "main_reproduction": {
+    "native_replay": "test_carga_missao_original 11/11 OK",
+    "fresh_capture_on_main": "inherited image, final image (sha 58a5020e...), 1400 binding events, AL=1 identical to committed v2; only timings/revision/absolute BIN path/oracle_seconds limit differ"
+   }
+  }
+ ],
+ "m1_accepted": false,
+ "m1_remaining": "Python composition of MissionLoad from frozen entry snapshot and whole-state comparison (dispatched to Missions)"
+}
