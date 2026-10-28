@@ -1,0 +1,533 @@
+{
+  "success": true,
+  "tests": 78,
+  "failures": 0,
+  "errors": 0,
+  "skipped": [
+    {
+      "test": "test_impacto_modo4.DiferencialImpactoModo4.test_original_building_priority_and_default_death_stop",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_modo4.DiferencialImpactoModo4.test_original_neutral_types_flags_and_directions",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_modo4.DiferencialImpactoModo4.test_original_zero_origin_evasion_and_refuge_stops",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_modo4.DiferencialPipelineModo4.test_original_complete_mode4_cell_impacts",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_modo4.DiferencialPipelineModo4.test_original_later_building_and_navigation_stops_keep_prior_state",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_modo4.DiferencialPipelineModo4.test_original_prepared_type29_arrivals_and_full_pool",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_unidades.DiferencialImpactoUnidades.test_ai_and_neutral_prefix_consumer_boundary",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_unidades.DiferencialImpactoUnidades.test_all_unit_types_flags_hit_pool_and_rng",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_unidades.DiferencialImpactoUnidades.test_ally_effect_order_and_alert_counter_edges",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_unidades.DiferencialImpactoUnidades.test_lookup_empty_filters_and_building_priority",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_unidades.DiferencialImpactoUnidades.test_pool_saturation_still_consumes_hit_rng",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_unidades.DiferencialImpactoUnidades.test_projectile_finishes_occupied_impact_and_parent_retirement",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_unidades.DiferencialImpactoUnidades.test_refuge_evasion_and_special_attacker_stops",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_impacto_unidades.DiferencialImpactoUnidades.test_retaliation_tick_boundaries_and_provider_stops",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_morte_sem_experiencia.DiferencialMorteSemExperiencia.test_original_child_pool_saturation_and_id_edges",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_morte_sem_experiencia.DiferencialMorteSemExperiencia.test_original_inactive_physical_guards_without_experience",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_morte_sem_experiencia.DiferencialMorteSemExperiencia.test_original_ordinary_modes3_mode4_current_reserved_cells",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_morte_sem_experiencia.DiferencialMorteSemExperiencia.test_original_physical_partial_failures_keep_life_child_and_cleanup",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_morte_dano.DiferencialMorteDano.test_original_dying_boundary_child_pool_and_saved_entry_cell",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_morte_dano.DiferencialMorteDano.test_original_post_dying_sympathy_fragment",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_morte_dano.DiferencialMorteDano.test_original_projectile_reaches_physical_dying_request",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_morte_dano.DiferencialMorteDano.test_original_source_types_and_all_experience_bytes",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_dano_modo3.DiferencialDanoModo3.test_original_all_building_and_victim_types",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_dano_modo3.DiferencialDanoModo3.test_original_getter_calls_and_selector1_rows",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_dano_modo3.DiferencialDanoModo3.test_original_id_overlap_and_audio_handles",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_dano_modo3.DiferencialDanoModo3.test_original_reduction_life_and_protection_edges",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_dano_modo4.DiferencialDanoModo4.test_original_all_types_and_both_loaded_bytes",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_dano_modo4.DiferencialDanoModo4.test_original_every_raw_byte_in_both_classes",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_dano_modo4.DiferencialDanoModo4.test_original_id_aliases_and_audio_handles",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_dano_modo4.DiferencialDanoModo4.test_original_reduction_protection_and_life_edges",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_dano_modo9.DiferencialDanoModo9.test_original_all_raw_damage_bytes_at_multiple_life_bands",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_dano_modo9.DiferencialDanoModo9.test_original_reduction_protection_and_life_edges",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_dano_modo9.DiferencialDanoModo9.test_original_sources_targets_and_aliased_ids",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_dano_modo9.DiferencialDanoModo9.test_original_visible_audio_and_existing_handles",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_dano_modo8.DiferencialDanoModo8.test_original_every_source_victim_type_and_loaded_bonus",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_dano_modo8.DiferencialDanoModo8.test_original_fixed_width_life_protection_and_reduction_edges",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_dano_modo8.DiferencialDanoModo8.test_original_id_edges_and_source_victim_alias",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_dano_modo8.DiferencialDanoModo8.test_original_visible_audio_and_existing_handles",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_dano.DiferencialConsumoDano.test_original_consumer_boundaries_and_all_valid_types",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_dano.DiferencialConsumoDano.test_original_id_edges_and_aliased_source",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_dano.DiferencialConsumoDano.test_original_projectile_to_occupied_consumer_checkpoint",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_dano.DiferencialConsumoDano.test_original_reads_after_synthetic_message_callback_mutation",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_dano.DiferencialConsumoDano.test_original_visible_existing_handle_and_audio_stops",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_dano.DiferencialConsumoDano.test_original_zero_protection_and_life_edges",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_fisico.DiferencialConsumoFisico.test_original_child_pool_saturation_and_id_edges",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_fisico.DiferencialConsumoFisico.test_original_inactive_guard_preserves_physical_state",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_fisico.DiferencialConsumoFisico.test_original_ordinary_targets_and_current_reserved_cells",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_fisico.DiferencialConsumoFisico.test_original_physical_partial_failures_retain_prior_combat_effects",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_fisico.DiferencialConsumoFisico.test_original_projectile_consumer_and_physical_death_return",
+      "reason": "Optional: RISING_EMULAR=1"
+    }
+  ],
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "original_ranges": "unit wrapper0x450a9d..0x4510d5, original ProjectileAvance/InfligeDegat, mode4 consumer and actual physical dying",
+  "bounded_x86_executions": 0,
+  "per_test": [
+    {
+      "teste": "test_impacto_modo4.ContratosImpactoModo4.test_mode4_directions_are_explicit_before_queries",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_modo4.ContratosImpactoModo4.test_neutral_victim_forwards_mode4_without_retaliation",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_modo4.DiferencialImpactoModo4.test_original_building_priority_and_default_death_stop",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_modo4.DiferencialImpactoModo4.test_original_neutral_types_flags_and_directions",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_modo4.DiferencialImpactoModo4.test_original_zero_origin_evasion_and_refuge_stops",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_modo4.DiferencialPipelineModo4.test_original_complete_mode4_cell_impacts",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_modo4.DiferencialPipelineModo4.test_original_later_building_and_navigation_stops_keep_prior_state",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_modo4.DiferencialPipelineModo4.test_original_prepared_type29_arrivals_and_full_pool",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.ContratosImpactoUnidades.test_building_and_unsupported_mode_boundaries",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.ContratosImpactoUnidades.test_empty_lookup_and_flag_width",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.ContratosImpactoUnidades.test_missing_query_does_not_retire_parent",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_ai_and_neutral_prefix_consumer_boundary",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_all_unit_types_flags_hit_pool_and_rng",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_ally_effect_order_and_alert_counter_edges",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_lookup_empty_filters_and_building_priority",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_pool_saturation_still_consumes_hit_rng",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_projectile_finishes_occupied_impact_and_parent_retirement",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_refuge_evasion_and_special_attacker_stops",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_retaliation_tick_boundaries_and_provider_stops",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_sem_experiencia.ContratosMorteSemExperiencia.test_factory_preserves_mode3_mode4_stop_without_new_opt_in",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_sem_experiencia.ContratosMorteSemExperiencia.test_undefined_owner_modes8_mode9_remain_stops_with_opt_in",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_sem_experiencia.DiferencialMorteSemExperiencia.test_original_child_pool_saturation_and_id_edges",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_sem_experiencia.DiferencialMorteSemExperiencia.test_original_inactive_physical_guards_without_experience",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_sem_experiencia.DiferencialMorteSemExperiencia.test_original_ordinary_modes3_mode4_current_reserved_cells",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_sem_experiencia.DiferencialMorteSemExperiencia.test_original_physical_partial_failures_keep_life_child_and_cleanup",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_dano.ContratosMorteDano.test_default_death_boundary_is_preserved",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_dano.ContratosMorteDano.test_missing_level_provider_preserves_life_after_experience_clear",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_dano.DiferencialMorteDano.test_original_dying_boundary_child_pool_and_saved_entry_cell",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_dano.DiferencialMorteDano.test_original_post_dying_sympathy_fragment",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_dano.DiferencialMorteDano.test_original_projectile_reaches_physical_dying_request",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_morte_dano.DiferencialMorteDano.test_original_source_types_and_all_experience_bytes",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo3.ContratosDanoModo3.test_live_source_pool_rows_and_explicit_other_queries",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo3.ContratosDanoModo3.test_mode3_death_does_not_use_mode1_award_handler",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo3.ContratosDanoModo3.test_prefix_owner_and_unit_source_modifier_remain_distinct",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo3.DiferencialDanoModo3.test_original_all_building_and_victim_types",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo3.DiferencialDanoModo3.test_original_getter_calls_and_selector1_rows",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo3.DiferencialDanoModo3.test_original_id_overlap_and_audio_handles",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo3.DiferencialDanoModo3.test_original_reduction_life_and_protection_edges",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo4.ContratosDanoModo4.test_loaded_direction_selection_and_signed_quarter",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo4.ContratosDanoModo4.test_missing_values_and_uninitialized_directions_fail_early",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo4.ContratosDanoModo4.test_mode4_does_not_call_mode1_lethal_handler",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo4.DiferencialDanoModo4.test_original_all_types_and_both_loaded_bytes",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo4.DiferencialDanoModo4.test_original_every_raw_byte_in_both_classes",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo4.DiferencialDanoModo4.test_original_id_aliases_and_audio_handles",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo4.DiferencialDanoModo4.test_original_reduction_protection_and_life_edges",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo9.ContratosDanoModo9.test_life_half_is_truncated_before_zero_to_one",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo9.ContratosDanoModo9.test_mode1_lethal_handler_is_not_called_for_mode9",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo9.DiferencialDanoModo9.test_original_all_raw_damage_bytes_at_multiple_life_bands",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo9.DiferencialDanoModo9.test_original_reduction_protection_and_life_edges",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo9.DiferencialDanoModo9.test_original_sources_targets_and_aliased_ids",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo9.DiferencialDanoModo9.test_original_visible_audio_and_existing_handles",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo8.ContratosDanoModo8.test_missing_row_and_unsupported_modes_fail_before_callbacks",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo8.ContratosDanoModo8.test_mode8_never_uses_mode1_lethal_handler",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo8.ContratosDanoModo8.test_special_row_has_no_mode1_bonus_or_message_prefix",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo8.DiferencialDanoModo8.test_original_every_source_victim_type_and_loaded_bonus",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo8.DiferencialDanoModo8.test_original_fixed_width_life_protection_and_reduction_edges",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo8.DiferencialDanoModo8.test_original_id_edges_and_source_victim_alias",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_dano_modo8.DiferencialDanoModo8.test_original_visible_audio_and_existing_handles",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_audio_dependency_occurs_after_f9_write_before_life",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_callback_rereads_and_protected_zero_heals",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_death_preserves_life_and_prior_effects",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_mode_width_and_nonlethal_consumer",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_unsupported_and_missing_callbacks_fail_without_fabricated_damage",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_consumer_boundaries_and_all_valid_types",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_id_edges_and_aliased_source",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_projectile_to_occupied_consumer_checkpoint",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_reads_after_synthetic_message_callback_mutation",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_visible_existing_handle_and_audio_stops",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_zero_protection_and_life_edges",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.ContratosConsumoFisico.test_invalid_backing_pool_fails_before_callbacks",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.ContratosConsumoFisico.test_missing_level_still_precedes_life_and_physical_death",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.ContratosConsumoFisico.test_physical_exception_identity_and_prior_child_are_retained",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.ContratosConsumoFisico.test_shared_records_see_both_world_and_combat_writes",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.DiferencialConsumoFisico.test_original_child_pool_saturation_and_id_edges",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.DiferencialConsumoFisico.test_original_inactive_guard_preserves_physical_state",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.DiferencialConsumoFisico.test_original_ordinary_targets_and_current_reserved_cells",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.DiferencialConsumoFisico.test_original_physical_partial_failures_retain_prior_combat_effects",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_fisico.DiferencialConsumoFisico.test_original_projectile_consumer_and_physical_death_return",
+      "execucoes_x86_delimitadas": 0
+    }
+  ],
+  "complete_mode4_wrappers": 0,
+  "expected_wrapper_stops": {},
+  "complete_shared_world_impacts": 0,
+  "complete_shared_world_type29_arrivals": 0,
+  "expected_later_building_stops": 0,
+  "expected_shared_navigation_stops": 0,
+  "original_projectile_impact_requests": 0,
+  "original_projectile_rng_returns": 0,
+  "regression_x86": 0,
+  "scope": "Initialized mode4 unit wrapper, zero-origin evasion, shared neutral hidden ordinary world; prepared type29 arrivals/RNG/child pool/physical death and retained partial failures",
+  "excluded": "Mode3/8/9 wrapper, building damage, general navigation/AI/audio/diplomacy/RNG provider, special physical completion, natural mission dispatch/runtime",
+  "diagnostics": []
+}

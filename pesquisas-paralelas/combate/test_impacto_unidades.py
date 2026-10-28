@@ -57,7 +57,7 @@ class DiferencialImpactoUnidades(unittest.TestCase):
         cls.dependency_stops = {}
         cls.completed_projectiles = 0
 
-    def model(self, us, rows, pool, native, counter=0, previous=0, local=0, morte=None):
+    def model(self, us, rows, pool, native, counter=0, previous=0, local=0, morte=None, danos_modo4=None):
         from bancada_impacto_unidades import QUERIES, EFFECTS
         stop = QUERIES.get(native['EIP']) or EFFECTS.get(native['EIP'])
         events = iter(self.b.eventos_wrapper)
@@ -75,6 +75,7 @@ class DiferencialImpactoUnidades(unittest.TestCase):
             self, us, rows, self.b.eventos_consumo)
         consumer.jogador_local = local
         consumer.morte = morte
+        consumer.danos_modo4 = danos_modo4
         def consume(*args):
             next_event('EnginInfligeDegat', args)
             consumer.infligir(*args)
@@ -84,24 +85,25 @@ class DiferencialImpactoUnidades(unittest.TestCase):
 
     def compare(self, us, rows, pool=None, counter=0, previous=0, local=0,
                 flag=0, direction=0, prepare=None, consumer_stop=False, allied=False,
-                player_type=1, complete_diplomacy=False, projectile=False):
+                player_type=1, complete_diplomacy=False, projectile=False, mode=1, mode4=None):
         from bancada_impacto_unidades import RETORNO
         pool = pool or PoolProjeteis(bytearray(5600))
         self.b.preparar_wrapper(us, rows, counter, previous, local, aliado=allied,
-                               tipo_jogador=player_type)
+                               tipo_jogador=player_type, modo4=mode4)
         self.b.pool(pool.memoria)
         if prepare:
             prepare()
         cell = u16(us[1], 8)
         native = (self.b.avancar_ate_fim() if projectile else
-            self.b.impacto(cell, flag, direction, consumer_stop, complete_diplomacy))
-        w, remaining, consumer_remaining = self.model(us, rows, pool, native, counter, previous, local)
+            self.b.impacto(cell, flag, direction, consumer_stop, complete_diplomacy, mode))
+        w, remaining, consumer_remaining = self.model(us, rows, pool, native, counter, previous, local,
+                                                       danos_modo4=mode4)
         def run():
             if projectile:
                 pool.efeito_externo = w.receber
                 avancar_linear(pool, 37)
             else:
-                w.infligir(cell, 1, 0, direction, flag)
+                w.infligir(cell, mode, 0, direction, flag)
         if native['EIP'] == 0x4508af:
             with self.assertRaises(LimiteImpactoBatiment):
                 run()

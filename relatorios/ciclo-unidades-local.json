@@ -1,0 +1,28 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 9,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_ciclo_unidades.DiferencialCicloUnidades.test_all_inactive_records_preserved_and_all_owner_type_bags_reset",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_ciclo_unidades.DiferencialCicloUnidades.test_every_state_byte_unknown_types_and_entire_nonzero_pools",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_ciclo_unidades.DiferencialCicloUnidades.test_exact_whole_driver_write_order_before_units_and_local_header_order",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_ciclo_unidades.DiferencialCicloUnidades.test_original_inline_bag_contexts_offsets_patterns_and_write_order",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "scope": "Complete EnginResetAll and shared raw Bag fragments; no loading or physical teardown."
+}
