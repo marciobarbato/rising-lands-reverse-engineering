@@ -1,13 +1,13 @@
 {
-  "success": false,
+  "success": true,
   "tests": 41,
   "failures": 0,
-  "errors": 1,
+  "errors": 0,
   "skipped": [],
   "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
   "sha256_normalized_analysis_only": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
   "original_ranges": "SetAttaqueEngin 0x445a36..0x445af1; EnginNextEtape branch 0x45673b..0x4568ad (entry 0x456886, exit 0x454ccd); declared prelude head 0x45442c..0x454591; CalculAttaqueEngin 0x451914; ProjectileCalcul 0x46fc0f; InfligeDegat/EnginInfligeDegat/SetDyingEngin and their callees",
-  "bounded_x86_executions": 17396,
+  "bounded_x86_executions": 17509,
   "per_test": [
     {
       "teste": "test_ataque_vivo.ContratosAtaqueVivo.test_invalid_target_paths_and_order",
@@ -47,7 +47,7 @@
     },
     {
       "teste": "test_ataque_vivo.DiferencialAtaqueVivo.test_ranged_monster_chain_to_physical_death",
-      "execucoes_x86_delimitadas": 248
+      "execucoes_x86_delimitadas": 361
     },
     {
       "teste": "test_animacao_disparo.ContratosAnimacao.test_disparo_especial_duplo_e_flag_do_alvo",
@@ -174,8 +174,8 @@
       "execucoes_x86_delimitadas": 60
     }
   ],
-  "lockstep_segments": 847,
-  "chain_frames": 273,
+  "lockstep_segments": 1208,
+  "chain_frames": 387,
   "final_stops": {
     "branch-mode1-target-dying": null,
     "branch-mode1-target-owner200": null,
@@ -200,22 +200,18 @@
     "melee-monster-to-death": "iagUnitSendMessage",
     "diplomacy-stop-ai-attacker": "PlayerAAttaqueSet",
     "audio-stop-visible-attacker": "EnginGetVolume",
-    "level-stop-soldier-kill": "EnginSetLevelExperience"
+    "level-stop-soldier-kill": "EnginSetLevelExperience",
+    "ranged-monster-to-death": "iagUnitSendMessage"
   },
   "native_8a_writes": {
-    "0x445ab3 -> 0": 19,
+    "0x445ab3 -> 0": 23,
     "0x445ad1 -> 0": 2,
-    "0x451e08 -> 1": 14,
-    "0x452a3a -> 0": 11
+    "0x451e08 -> 1": 17,
+    "0x452a3a -> 0": 15
   },
   "compared_state": "Per segment: units, structures, groups, objects, every Core grid and route, projectile pool, search/iteration/alert globals in full bytes; every other mapped page must stay unchanged",
   "regression_x86": 16301,
   "scope": "Declared synthetic world with real loaded type/DEGAT tables: SetAttaqueEngin, branch validity, emission, live pool, ProjectileCalcul, impact, damage, retaliation and Core physical death",
   "excluded": "Full EnginNextEtape prelude/dispatcher order, AI message bodies, audio, diplomacy statistics, movement, RNG, level experience, building-target damage, real MONDE01 placement",
-  "diagnostics": [
-    {
-      "test": "test_ataque_vivo.DiferencialAtaqueVivo.test_ranged_monster_chain_to_physical_death",
-      "detail": "Traceback (most recent call last):\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/test_ataque_vivo.py\", line 333, in test_ranged_monster_chain_to_physical_death\n    fim = self.lockstep('ranged-monster-to-death')\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/test_ataque_vivo.py\", line 321, in lockstep\n    conduzir(nome, Par(), lambda seg, q, un, parada: ultimo.append((seg, q, parada)))\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/test_ataque_vivo.py\", line 145, in conduzir\n    if passo('ProjectileCalcul', quadro, None, ex.projeteis):\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/test_ataque_vivo.py\", line 130, in passo\n    parada = chamada()\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/test_ataque_vivo.py\", line 306, in projeteis\n    return self._par(b.projeteis, py.projeteis)\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/test_ataque_vivo.py\", line 284, in _par\n    parada_n, _ = nativo()\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/bancada_ataque_vivo.py\", line 103, in projeteis\n    return self._segmento(0x46fc0f, None, RETORNO)\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/bancada_ataque_vivo.py\", line 76, in _segmento\n    r = self.executar(entrada, INTERVALOS, registradores, parada={saida, *PARADAS},\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/ferramentas/emulador.py\", line 95, in executar\n    return self._executar_ate_parada(entrada, limite_instrucoes)\n  File \"/Users/marcio/git/Rising Lands/worktrees/re-combat/ferramentas/emulador.py\", line 113, in _executar_ate_parada\n    raise RuntimeError('Trecho n\u00e3o alcan\u00e7ou a parada dentro do limite da bancada')\nRuntimeError: Trecho n\u00e3o alcan\u00e7ou a parada dentro do limite da bancada\n"
-    }
-  ]
+  "diagnostics": []
 }

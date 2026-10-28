@@ -322,6 +322,17 @@ The complete chains include every hit's retaliation `SetAttaqueEngin(victim,1,at
 - Missing providers raise `DependenciaAtaqueVivo(nome, argumentos)`, carrying the original entry address and retaining earlier effects.
 - Test fixtures supply only the proven original no-effect guards: the non-AI message prefix and null-group combat messages, `MAJSympathie` owner/inactive returns, and `PlayerAAttaqueSet` owner-range returns.
 
+**Validation.**
+- `python3 -B pesquisas-paralelas/combate/validar_ataque_vivo.py --emular`: **41 tests / 17,509 bounded original-x86 executions**, with zero failures, errors or skips.
+  - **1,208 lockstep segments** (387 chain frames) compare full bytes after every segment: units, structures, groups, objects, every Core grid and route, the pool, and the search/iteration/alert globals.
+  - No native write outside those areas, and every segment digest equals its original-only capture.
+  - Both complete chains end at the named AI stop `0x4567a9` after the victim's physical death. The three named chain stops and all 20 single entries match.
+  - Observed `+0x8a` writes: `0x445ab3`→0 ×23, `0x445ad1`→0 ×2, `0x451e08`→1 ×17, `0x452a3a`→0 ×15.
+  - The other 16,301 executions rerun the attack-substate and projectile-machine regressions.
+- A first native run failed: one ranged `ProjectileCalcul` segment exceeded the harness's 1-second wall-clock limit while Ghidra/REA and the domain check were running concurrently. I merged main `04c7bfb` and reran on a quiet machine; that rerun is the pass above. The failed run is not counted.
+- Local run: 41 tests, 24 optional native skips; the Python composition reproduces all 1,208 captured digests.
+- `python3 -B scripts/check.py --domain combat`: 246 tests / 149 optional skips, no failures/errors.
+
 **REA (complementary only).** I ran the worker CLI on `0x456886` (pinned source `b9a8f8e9…`, Ghidra 12.2, analysis identity `26c4534b…`); it returned the whole `EnginNextEtape` `0x45442c..0x456c33`. A [reviewed excerpt](evidencias/rea-ataque-vivo.json) of the state-1/24 case matches the assembly, but its Watcom arguments are wrong: `PlayerGetType` is shown with the unit index instead of the owner byte. It also shows the same target-validity pattern inside the state-19 body, which ai-runtime assigns to economy; that body is not translated here. `WORKER_USAGE.txt` sits one level above the scripts folder, as the coordinator corrected.
 
 
