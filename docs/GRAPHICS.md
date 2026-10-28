@@ -185,7 +185,8 @@ This inventory distinguishes reconstructed behavior, captured original behavior,
 | Projectile display inputs/rendering | The 100-record selection/sort, cell queries and public `AffProjectile` mapper/compositor are reconstructed; eight bounded complete sprite scenes use the public renderer | Integrate the consumer and physical producers; preserve explicit catalog limits and raw phase semantics |
 | Projectile/effect lighting | `CalculEclairage`, clipping-enabled mask remap and public projectile consumers are independently validated | Recover remaining palette effects and their lifecycle separately |
 | Scene traversal/projection | Complete interior `AffSprite` planning/execution and relative projection are reconstructed; native complete-pass traces and bounded indexed scenes match | Recover margin wraparound/negative origins, `AffGame` projection/cadence and a real-mission consumer |
-| Terrain pass/cache | Bounded nonwrapping `AffTerrain` traversal, opaque blocks, terrain objects, the `GetNumBob` cache and its verified CacheAlloc/InitCache/CacheFree lifecycle over real bank payloads match full native buffers | Recover negative/wrapped viewports and frame orchestration |
+| Terrain pass/cache | Bounded nonwrapping `AffTerrain` traversal, opaque blocks, terrain objects, the `GetNumBob` cache and its verified CacheAlloc/InitCache/CacheFree lifecycle over real bank payloads match full native buffers | Recover negative/wrapped viewports |
+| Frame orchestration | `AffGame` mode 0x12 through the HUD checkpoint `0x417B1C`: CalculFrame, draw gate, surface lock, terrain and sprite passes with committed renderers, every write returned; whole-frame native equality and named stops over the MONDE01 checkpoint | Building facades (MONDE01's type-2 trigger `0x2ED` first), unit overlays/types 1 and 8, HUD tail, palette cycling, 640×480 mode |
 | Visibility, palette and clocks | Indexed composition/shadow helpers and clock prefix are reconstructed; visibility bytes are explicit runtime inputs | Connect validated world providers and original frame cadence |
 | Real-mission consumer | V6 reads all serialized mission-1 object codes; the preview uses older pinned snapshots | Coordinate complete world loading/remapping, dynamic render state, input, effects and original-reference runtime scenes |
 
@@ -443,6 +444,122 @@ Supported limits: first-ProgInit payloads and cursor, or explicit inherited ones
 python3 -B pesquisas-paralelas/graficos-animacao/capturar_ciclo_cache.py   # original-only; rewrites the two evidence files
 python3 -B pesquisas-paralelas/graficos-animacao/validar_ciclo_cache.py
 python3 -B pesquisas-paralelas/graficos-animacao/validar_passe_terreno.py
+```
+
+## In-game frame orchestration (`AffGame`) — seventeenth continuation stage
+
+`AffGame 0x417698` (only caller `ProgIteration 0x475063`) switches on the game-mode byte `0x4E2F78`. Mode `0x12`, the running mission, is the branch reconstructed here, from its entry to the **HUD checkpoint `0x417B1C`**. The original order is:
+
+1. `CalculFrame 0x43F710` runs on every call.
+2. `EvenementEnCours 0x4581B6` reads byte `0x4E1B0E` into a local flag that only the HUD tail consumes.
+3. The draw-cadence gate: unless `0x4E05A2` is set, the frame is drawn only when `frame 0x508F7C mod divisor 0x497284` is 0; otherwise AffGame returns.
+4. The video-surface clear path (`0x508F92` with screen width 800).
+5. `DDLockSurface`, storing the surface pointer at `0x508F70`.
+6. The saved-background restore path (`0x49A041`).
+7. `AffTerrain(0x508720, 0x508722)`, then `AffSprite` with the same origin.
+8. The selection drag box (`0x4E19B0` → `Box`).
+9. HUD panels, the destination-marker animation (`0x4E05AC`/`0x496204`), minimap, info texts, cursor save/draw, unlock, page flips, cursor-visibility toggle, the reset of `0x4E05A2`, `Cyclage` palette cycling every fifth frame, and the switch to mode `0x16` while an event runs. **Stage 17 does not compose this step.**
+
+Configuration from the original bytes:
+- `DDInit` sets either 800×600 with a **25×17-cell window**, or 640×480 with 20×13 cells (`0x49A018/1A`, `0x508724/26`). The pitch global `0x4E17A0` is always 800.
+- `ResetMode` derives the clip `0x49A01C..22` (top, bottom, left, right) from the window and inset `0x508F90`.
+- The draw divisor `0x497284` starts at 1, and `WndProc` keys set it to 1–4.
+- Which frames reach AffGame is frame-loop cadence owned by ai-runtime.
+
+**API** (`quadro_jogo.py`, the planned graphics → macOS frame contract):
+
+`compor_quadro(mundo, tela, *, ciclo_cache, catalogo, tabela_sombra, tabela_eclairage, superficie, relogio, directdraw) -> dict`
+
+| Input | Meaning |
+|---|---|
+| `mundo` | `MundoQuadro`, read-only. Terrain words (131,072 bytes), objects, auxiliaries, region/occupancy words `0x4E0F38` (131,072), units 800×276, projectiles 100×56, and four 65,536-byte discovery (`0x507D78`) and lighting (`0x507D88`) maps. These are the buffers of core's world (`tiles`, `objetos`, `donos_objetos`, `regioes`, `descoberto`, `luz_bordas`). |
+| `tela` | `EstadoTela`: the 30 frame globals listed in `GLOBAIS_QUADRO`, as raw little-endian bytes. The requested `jogador_camera`, `origem`, `janela_celulas` and `margem_i8` are its `camera_u8` `0x508041`, `origem` `0x508720`, `janela` `0x508724` and `margem_i8` `0x508F90`. |
+| `ciclo_cache` | The persistent `CicloCacheTerreno` after `InitCache`, threaded through every frame. It is never rebuilt per frame (see stage 16). |
+| `tabela_sombra`, `tabela_eclairage` | The 256-byte tables in PaletteAlloc's buffers. |
+| `superficie` | The locked surface's previous bytes, pitch × screen height (800×600). |
+| `relogio` | `GetTickCount` binding (u32). |
+| `directdraw` | Surface binding: `is_lost()`, `restore()`, `lock() -> (hresult, pointer)`. |
+
+| Output field | Meaning |
+|---|---|
+| `superficie` | Indexed bytes at native pitch. |
+| `desenhado` | `False` when the gate skips drawing. |
+| `parada` | `0x417B1C`, or `'retorno'` when the gate skipped the frame. |
+| `chamadas` | Ordered renderer trace with French IDs and arguments: `CalculFrame`, `DDLockSurface`, `AffTerrain(x,y)`, per cell `GetNumBob(source,cell)`/`AffBloc`/`AffVegetTerrain(x,y,cell)`, `AffSprite(x,y)`, then `AffVeget`/`AffBatiments`/`AffBatimentOmbre(x,y,cell)`, `AffEngin(x,y,index)`, `AffProjectile(index)`. |
+| `efeitos` | Ordered `(name, address, old, new)` for every global write. |
+| `evento` | The `EvenementEnCours` flag. |
+
+The palette is not changed before the checkpoint; the PIE palette stays valid, and `Cyclage` comes later.
+
+An unsupported branch raises `DependenciaQuadro(endereco, detalhe)`. It carries the **partial surface**, the trace up to and including the refused call, and the effects so far. Placeholder art is never substituted.
+
+**Every write made while drawing** is returned, established by a whole writable-memory diff of every native frame. A frame writes nothing else, and there are no unit, world, structure or RNG writes in the supported domain.
+
+| Routine | Effects |
+|---|---|
+| `CalculFrame` | Counter `0x4E17AE` += 1 (u16). Tick `0x4E17B4`. When `(tick − 0x4E17B0) mod 2³² ≥ 1000`: last tick, counter clamped to 99, ASCII digits `0x496394..96`, counter 0. Page-count text `0x4963B4` via the statically linked `itoa` of byte `0x49A05B`. |
+| `DDLockSurface` | When unlocked (count `0x4E17A8` = 0 or pointer `0x4E17A4` = 0): `IsLost`, `Restore` if `DDERR_SURFACELOST`, then `Lock`. On success: pitch `0x4E17A0` = 800 and the pointer. Count += 1 on both the fresh and the already-locked path. A failed lock returns 0 without writes. |
+| AffGame | `0x508F70` = surface pointer. |
+| AffBatiments | On each discovered cell, `SaveCurrentClipping` copies (left, right, top, bottom) to `0x49A02C..32`, and `RestaureClipping` writes the clip back unchanged. |
+| GetNumBob | Mutates `ciclo_cache` (cursor `0x49A04E`, keys, cached blocks). |
+
+**Renderer dispatch** (domains from the original bytes; outside them the frame stops at the named address):
+
+| Renderer | Draws in this domain | Named stop |
+|---|---|---|
+| `AffVegetTerrain` | Objects 0 and 253, and cells with `discovery & 31`, skip. Other codes use V6 `consultar_objeto_v6`. | `0x410085` |
+| `AffVeget` | Codes outside the 23-entry table at `0x415A58` return at `0x410B38`. Trees 1–11 use V5 `consultar_objeto`. | Codes 27 and 55–65: `0x415ACF` |
+| `AffBatiments` | Undiscovered cells (`CaseEstDecouverte`: `discovery & 0x10`) return. Discovered cells save the clip, check objects 254/253, check the 19 facade-trigger terrain words (`0x2CB..0x436`) and workshop word `0x356`, then restore the clip. | Building occupancy bit 15 of `0x4E0F38`: `0x407DEF`. Objects 254/253 (ChercheIndiceBatiment): `0x407EA7`/`0x407FB8`. Facade triggers: `0x40F23B`. Workshop: `0x40288B`. |
+| `AffBatimentOmbre` | A literal RET. | — |
+| `AffEngin` | Routing by `encaminhamento` for types 0/5/6/7/9; the `sem_desenho` route draws nothing (for example MONDE01's type-9 state 14). Bodies use `compor_unidade` only with all of: states 2/7, owner 0 = camera 0, `u16 +0x74 ≥ 100`, `+0xBA = 0`, `+0xBD = 0`, not the selected unit (`0x496AC2`), selection mode `0x508F8F` = 0, direction 1–16, phase 0–7. | Everything else: `0x41591F` |
+| `AffProjectile` | The public projectile renderer with the selected camera's lighting. | `0x46FF70` |
+| Selection box | — | `0x417AC8` |
+
+**Stops before drawing:** mode ≠ `0x12` (`0x4176A8`); divisor 0 (`0x417921`); the clear path (`0x41794B`); a NULL lock (`0x4179D4`); the background restore (`0x4179E1`); and an `AffTerrain` or `AffSprite` viewport outside the reconstructed domain (`0x41068E`/`0x416864`). The terrain domain requires window width × 32 = pitch = screen-width word, so the 640×480 mode stops. The sprite domain requires `origin + window + 8/10 ≤ 256`.
+
+**Bindings.** On top of the stage-16 bank and memory bindings:
+- KERNEL32 `GetTickCount` (IAT `0x5231B8`).
+- The `IDirectDrawSurface` methods reached through the COM object at `0x4E1790` (vtable `+0x60` IsLost, `+0x64` Lock, `+0x6C` Restore, `+0x80` Unlock). The fixture is never lost. Lock honors only a whole-surface `DDLOCK_WAIT` with a 0x6C-byte descriptor, writing `lpSurface`/`lPitch`; Restore and Unlock stop.
+
+The bench follows ProgInit's order:
+1. `PaletteAlloc` runs natively through the allocation bindings.
+2. LoadSTRATBank, SetBank and CacheAlloc run.
+3. Native `CalculTabPlayer` builds the player tables, which equal the committed `construcoes.tabelas_jogador()`.
+
+The shadow and lighting contents are the real 60% tables from earlier native captures. All renderers execute unchanged inside the whole code section; only the bindings are replaced.
+
+**MONDE01 checkpoint.** The frame consumes missions' committed MONDE01 checkpoint. With core's discovery domain integrated, the `MissionPlaceTerrain` unit scan completes all 16 units to the pre-structure checkpoint `0x46C16D`. The buffers are pinned as [a hashed snapshot](../pesquisas-paralelas/graficos-animacao/evidencias/monde01-checkpoint-quadro.json) (9 KB zlib), recording the checkout revision, so later upstream progress cannot silently change the validated input; the capture script re-pins from the live pipeline. Declared synthetic inputs:
+- From missions: the unit-pool pre-fill, regions, selections, search context and bonus table.
+- From this stage: the camera/viewport (origin (0,0), camera 0), the zero projectile and structure pools, and the background surface.
+
+The native frame completes to `0x417B1C` (2,201,940 instructions; 16 AffEngin calls). The model draws the whole terrain pass and sprite rows 0–13, then stops at **`0x40F23B` for facade trigger `0x2ED` at cell 3345 = (17,13)**. That is the trigger cell of MONDE01's single type-2 structure, whose origin is cell 2828; its facade is drawn from terrain words even before the mission places the structure. The next blockers are MONDE01's units: `+0x74 = 0` enables an overlay; types 1 and 8. [Partial frame preview](../pesquisas-paralelas/graficos-animacao/artefatos/quadro-monde01-parcial.png).
+
+Original evidence ([inventory](../pesquisas-paralelas/graficos-animacao/evidencias/quadro-jogo.json), unchanged intact executable, normalized PE named but not executed):
+
+| Region | SHA-256 |
+|---|---|
+| `AffGame 0x417698..0x417F38` | `0eeac1cee741e147e5c1979a320bbb280fea3d5151c7cf662de6c514cbd6583a` |
+| `CalculFrame` | `ec7f8002…a592` |
+| `DDLockSurface` | `3b685f16…4b34` |
+| AffBatiments prefix | `616969e1…1be9` |
+| AffBatiments switch/tail | `d8fa5152…4fa7` |
+| AffVeget table/prefix | `4f9c9cad…b526` |
+
+Unchanged `AffSprite`/`AffTerrain`. The inventory also holds DDInit, WndProc and ResetMode evidence and a static absolute-write scan.
+
+**Validation:**
+- **Original-only capture** ([record](../pesquisas-paralelas/graficos-animacao/evidencias/captura-quadro-original.json)): 21 native entries / 23,908,934 instructions / 97,331 bound calls over seven frames. It was first committed before translation (`077a05b`), then regenerated by the same native-only script after main advanced the MONDE01 checkpoint.
+- **Fresh run `validar_quadro.py`**: 26 native entries / 44,585,739 instructions / 97,346 bound calls over **nine frames**.
+  - Six are complete: terrain and objects; units and projectiles; inset 1 at origin (2,3); a gate-skipped frame; a forced frame with an event and FPS clamp; and a cache restart. Each has whole-frame equality of the 800×600 surface, canonical trace, all 30 globals, cache keys/blocks/cursor, and the full memory diff restricted to those globals.
+  - Three are named stops: the MONDE01 facade, the selection box, and real MONDE01 terrain over synthetic visibility. Native memory is restored and rerun to the same original address after the same trace event, then compared.
+- Every fresh native frame reproduces its original-only capture. There are no limits or skips.
+- [Report](../pesquisas-paralelas/graficos-animacao/validacao/x86-quadro-jogo.json).
+
+**Not composed:** the HUD and everything after `0x417B1C`, palette cycling, the 640×480 mode, wrapped or negative viewports, building facades and structure lookup, the selection box, the clear and restore paths, unit bodies outside the guard, and AffVeget handlers 27/55–65.
+
+```sh
+python3 -B pesquisas-paralelas/graficos-animacao/capturar_quadro.py   # original-only; rewrites the two evidence files
+python3 -B pesquisas-paralelas/graficos-animacao/validar_quadro.py
 ```
 
 ## Terrain objects and sequential codes

@@ -2,9 +2,9 @@
 
 Owner: the Audio front (`feat/re-audio`, `worktrees/re-audio`). Owned paths are `pesquisas-paralelas/audio/` and this manual. Audio is a second-wave domain of the [MONDE01 roadmap](ROADMAP_MONDE01.md#second-wave). On 2026-10-28 the human approved anticipating it in the macOS chat while that chat waits for its M1 trigger. No eighth executor was created. When the coordinator triggers M1, the chat returns to the `macos` front and audio pauses at its last integrated stage.
 
-Addresses apply to executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`. The normalized analysis PE (`26c4534b…64d0`) is analysis-only. The original sound banks are `INSTALHD/SOUND/{A,B,P}.HED` and `.SND` on the read-only CD copy (`../source/cd`), plus `TICKONE.WAV`. Their sizes and hashes are in `relatorios/fontes.json`. PT-BR voices and music are preserved byte-exactly. They are never re-recorded, translated or normalized.
+Addresses apply to executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`. The normalized analysis PE (`26c4534b…64d0`) is analysis-only. The original sound banks are `INSTALHD/SOUND/{A,B,P}.HED` and `.SND` on the read-only CD copy (`../source/cd`); `TICKONE.WAV` sits at the CD root and is not part of the banks. `relatorios/fontes.json` does not list the sound files, so their sizes and SHA-256 are recorded in [`ambiente_audio.py`](../pesquisas-paralelas/audio/ambiente_audio.py) and the [audio manifest](../pesquisas-paralelas/audio/evidencias/som-manifesto.json). PT-BR voices and music are preserved byte-exactly. They are never re-recorded, translated or normalized, and no decoded audio is committed.
 
-This manual starts as a coordinator skeleton. Each stage replaces its planned section with original-byte evidence.
+Each stage replaces its planned section with original-byte evidence. Stage 1 is complete; stages 2 and 3 are planned.
 
 ## Original subsystem inventory (symbols from the original SBL)
 
@@ -27,12 +27,99 @@ This manual starts as a coordinator skeleton. Each stage replaces its planned se
 - Core, economy and combat keep their emitting call sites. They replace a pending descriptor with the audio provider only after the audio contract for that request is integrated.
 - The macos front plays decoded samples at M2/M3. It consumes committed audio APIs only.
 
+## Stage 1: bank format and sample decoding (complete)
+
+### Evidence
+
+[`extrair_som.py`](../pesquisas-paralelas/audio/extrair_som.py) exports 47 intact intervals with SHA-256 into the [manifest](../pesquisas-paralelas/audio/evidencias/som-manifesto.json) and [disassembly](../pesquisas-paralelas/audio/evidencias/som-rotinas.asm). Each interval runs from its SBL symbol to the next one, minus zero padding. The manifest also holds the IMA tables, the strings, the globals, the import slots and the bank identities. Watcom CRT intervals that run natively (`sprintf` and its character sink, `__prtf`, `memset`, `__STOSB`, `__STOSD`) are hashed; `__prtf` is listed by hash only.
+
+The original-only captures were produced by [`capturar_som.py`](../pesquisas-paralelas/audio/capturar_som.py) and committed before the Python translation:
+
+- [`captura-som-estrutura.json`](../pesquisas-paralelas/audio/evidencias/captura-som-estrutura.json): open and validation branches, index lookup over every ID, path building, direct decoder calls and synthetic surfaces.
+- `captura-som-banco-{A,B,P}.json`: every data header of every bank decoded natively, plus the dead-code in-memory path.
+
+Commercial bytes appear only as SHA-256.
+
+### Bank file layout (HED/SND)
+
+| Bytes | Content |
+|---|---|
+| HED 0..15 | `ABCD` magic, u32 header body size, u32 SND size, u32 entry count (stored as u16 in the bank record) |
+| HED body, 12 bytes per entry | u32 sound ID, u16 word (100 or 256 in the corpus), u16 variant count, u32 offset of the first data header in the body |
+| HED body, 16 bytes per data header | u32 SND offset, u32 SND bytes, u8 channels, u8 bits, u16 sample rate, u8 format (0 PCM, 4 IMA ADPCM), u8 byte13 (200 in six P headers, read by nothing in stage 1), u16 ADPCM block alignment |
+
+| Bank | Entries | Data headers | Formats |
+|---|---|---|---|
+| A (selector `0x41`, record `0x521fc8`) | 11 | 14 | IMA ADPCM mono, 16-bit, 22,050 Hz, 512-byte blocks |
+| B (selector `0x42`, record `0x521fe4`) | 102 | 102 | Same |
+| P (selector `0x50`, record `0x522000`) | 278 | 435 | 434 ADPCM as above, one 16-bit PCM |
+
+### Python API
+
+All APIs take explicit inherited buffers and a `sistema` provider for the Windows and CRT calls. Nothing is opened, allocated or defaulted implicitly.
+
+- [`bancos_som.py`](../pesquisas-paralelas/audio/bancos_som.py):
+  - `GlobaisSom` holds every inherited global: the 104-byte bank file name at `0x5221c0`, the 256-byte sound directory at `0x52201c`, the u32 variant counter at `0x5221bc` and allocation counter at `0x522230`, the window handle at `0x4e27e8`, the compressed-buffer pointer at `0x52222c` and the IDirectSound pointer at `0x522228`.
+  - `BancoSom(registro28, endereco)` is the original 28-byte bank record: +0 open, +4 u16 count, +8 handle, +0xc header pointer, +0x10 in-memory flag, +0x14 data pointer, +0x18 data size.
+  - The routine functions are `criar_caminho_sons`, `arquivo_som`, `criar_id_som`, `validar_cabecalho_banco`, `carregar_cabecalho_banco`, `abrir_banco`, `carregar_todos_dados`, `carregar_dados_em_memoria`, `procurar_som`, `cabecalho_dados_som`, `carregar_info_som` and `entradas_banco`.
+- [`adpcm_som.py`](../pesquisas-paralelas/audio/adpcm_som.py): `decodificar_ima_mono16`, `decodificar_ima_estereo16`, `iniciar_buffer_comprimido`, `criar_buffer_vazio`, `criar_superficie_som` (`PSB_CreateMySurfaceWithSound`) and `carregar_dados_comprimidos`.
+- The `sistema` provider has these parts:
+  - `arquivos.abrir/ler/posicionar/fechar`, standing for `_lopen`/`_hread`/`_llseek`/`_lclose`;
+  - `alocador.alocar/liberar`, standing for `GlobalAlloc`/`GlobalFree`;
+  - `directsound.criar/travar/destravar` with numbered `buffers`, standing for `CreateSoundBuffer`/`Lock`/`Unlock`;
+  - `getcwd`, `free` and `mensagem` (MessageBoxA).
+  [`provedores_som.SistemaFixo`](../pesquisas-paralelas/audio/provedores_som.py) is the deterministic fixture used on both sides of every comparison.
+
+### Original behavior reproduced
+
+- **Path.** `getcwd(NULL,1000)`. A trailing backslash gives `<cwd>SOUND`, otherwise `<cwd>\SOUND`. Then `free`. `SoundFile` appends `\<letter>`; `BanqSon_LoadHeader`/`Open` append `.HED`/`.SND` into the 104-byte global and open with mode 0.
+- **Header.** Reads 16 bytes and checks the magic. On a bad magic it closes the file and returns 0, writing nothing to the bank record. On success it stores the count (u16) and the data size before allocating. Then OurAlloc and a body read; a short body read closes, frees and returns 0, keeping the count and size it already stored. `Open` stores the header pointer (0 on failure), opens `.SND` and stores the handle, even `0xffffffff`. A failed `.SND` open frees the header and zeroes +0xc. Success clears +0x14 and +0x10, then sets +0 = 1. An already-open record (+0 == 1) returns 0 untouched.
+- **Index.** `FindIdInBanque` scans the entries in order and matches the first equal u32 ID. `GetDataHeader` increments the u32 counter, then picks `(n-1) & counter` when n-1 > 0. A 3-variant entry never selects variant 1, and a 5-variant entry selects only 0 or 4. `HndSound_LoadDataInfo` store order: +0x18, +0, +4, (counter), +0x1c, +0xc, +0x10 (0x100 when the entry word is 256, else the stack argument), +0x14 = 0.
+- **`PlaySnd_MakeID`.** `(a<<16)|(b<<8)|c` on full u32 inputs, without masking.
+- **Buffer creation and decoding.** A file-backed bank seeks the data file to 0 for every sound. The buffer is created as PCM, flags `0xe0`, block alignment `(channels*bits)>>3`.
+  - Format 0: seek, then lock/read/unlock; the in-memory path copies instead.
+  - Format 4: the buffer is 4× the compressed size. Seek and read into the 160,000-byte compressed buffer, then lock **only the compressed size** and decode about 4× as many bytes through the same pointer, then unlock. A 512-byte block yields 1,017 samples, so 14 bytes per block at the end of the buffer stay unwritten.
+  - Other formats create nothing.
+- **Decoders.** The mono decoder takes min(remaining, alignment) bytes per block while at least 4 bytes remain. A step index above 88 stops with EAX 0 and keeps the output written so far. The stereo decoder interleaves L/R nibbles from paired dwords.
+- **Dead code.** `BanqSon_OpenDataFile`, `CloseDataFile`, `ControleValiditeHeader`, `LoadAllData`, `LoadDataInMemory`, `PlaySnd_CreateSoundPath`, `SoundFile` and `PlaySnd_MakeID` have no CALL/JMP and no absolute reference. `LoadDataInMemory` does not seek, and it sets the in-memory flag even after a failed allocation or read, leaving a NULL data pointer.
+
+### Supported domain and stops
+
+- Paths:
+  - a non-empty working directory;
+  - a sound directory of at most 256 bytes and bank file names of at most 104 bytes, NUL included.
+- Header prefixes must be complete 16-byte reads.
+- ADPCM:
+  - the mono block alignment must be at least 4;
+  - stereo needs whole blocks with `(alignment-8) % 8 == 0`;
+  - the compressed buffer must exist and the read must be complete, with no sample above 160,000 bytes;
+  - a resident path needs a non-NULL data pointer.
+
+Outside this domain the original would read stack garbage, wrap a counter or dereference NULL. Python raises `DependenciaSom` with the original address after earlier effects. In the fixture, `MessageBoxA` and every unbound import or COM slot are declared stops.
+
+### Validation
+
+- **Captures.** Every data header in the three banks was decoded by the intact code: 14 + 102 + 435 sounds, 43,281,606 / 137,098,639 / 823,182,052 instructions for the file path.
+- **Python vs captures.** The Python replays in [`reproduzir_som.py`](../pesquisas-paralelas/audio/reproduzir_som.py) equal the captures record for record. That covers bank records, globals, call logs with exact arguments and results, and the whole DirectSound buffer SHA-256 (fixture `0xcd` in the unwritten tail).
+- **Fresh native comparison.** [`validar_som.py`](../pesquisas-paralelas/audio/validar_som.py) repeats the three-way comparison (fresh native, Python, committed) and writes `validacao/x86-som.json`.
+- **Catalogue.** [`catalogo-amostras.json`](../pesquisas-paralelas/audio/catalogo-amostras.json) lists 551 sounds keyed by bank, selector, ID and variant. Each entry records header fields, SND slice SHA-256, decoded length and SHA-256, and whether `GetDataHeader` can reach the variant. No labels are assigned.
+
+```sh
+python3 -B pesquisas-paralelas/audio/extrair_som.py
+python3 -B pesquisas-paralelas/audio/capturar_som.py        # original-only, ~9 min
+python3 -B pesquisas-paralelas/audio/validar_som.py         # fresh three-way comparison, ~10 min
+python3 -B pesquisas-paralelas/audio/catalogo_som.py
+```
+
+### Remaining gaps
+
+- **Queue and lifecycle not reconstructed.** `PlaySnd_InitSoundLib` beyond the path/open order, `PlaySnd_PostSound` dispatch into `HandlSnd_Insert`, all queue tables, `BanqSon_Close`/`Free*` and `DSB_Destroy`.
+- **DirectSound is modeled only as fixture semantics.** The fixture treats the lock pointer as direct buffer memory and fills new buffers with `0xcd`. Real buffer content after creation, hardware-buffer lock copies and playback are not reconstructed. The decoder's writes past the locked length depend on that lock-pointer behavior.
+- **Pending binding migration.** The bindings live in `bancada_som.py` and will migrate to core's generic binding facility when Stage 15 commits it.
+
 ## Stages
 
-1. **Bank format and sample decoding.**
-   - Inventory the original bytes of the `BanqSon_*` and `LoadSoundBuffer_*` routines and the HED header/index layout. Run original-only captures over the real A/B/P banks first.
-   - Python readers must reproduce the original header validation, index and decompressed sample buffers byte for byte. Compare them natively over every sound in the three banks, with file and allocation bindings declared.
-   - Inventory the sound identity (`PlaySnd_MakeID`, `PlaySnd_CreateSoundPath`, `SoundFile`) that maps a request ID to a bank entry. Publish a PT-BR sample catalogue with hashes, recording sound IDs, not invented labels.
+1. **Bank format and sample decoding.** Complete; see above.
 2. **Request queue state.** `PlaySnd_PostSound`/`PlaySnd_Manage` with the `HandlSnd_*`, `LSB_*`, `PSB_*` and `WaitSnd_*` tables, compared natively as whole-table state. DirectSound buffer creation, playback and position queries are declared stops. Afterwards, the emitting owners can consume it in place of their pending descriptors.
 3. **Game-side emitters** (`TryLanceAttaqueSound`, `VoixOffAsk`) and the volume/visibility rules, coordinated with combat and economy.
 

@@ -1,0 +1,162 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "inspected_main": "7b7b96960cee0ec7868914e811f51b851fc27dba",
+  "intervals": [
+    {
+      "name": "MissionLoad_reset_prefix",
+      "start": "0x46c2cf",
+      "end_exclusive": "0x46c396",
+      "sha256": "9e688dd3d9335d9d384889beda2e75caf067437490597129263ab06fec8ad83e",
+      "file": "reinicio-0046c2cf.asm"
+    },
+    {
+      "name": "MissionLoadName_reset_prefix",
+      "start": "0x46c5e3",
+      "end_exclusive": "0x46c76c",
+      "sha256": "97d651d5eef1bdd3471c670d240d0aacd561df8e954abab2b7056a26d5531530",
+      "file": "reinicio-0046c5e3.asm"
+    },
+    {
+      "name": "IconeReset",
+      "start": "0x45e88f",
+      "end_exclusive": "0x45e90b",
+      "sha256": "e1be6580df00eee5176c11045223293fc8c8b6eeaa72d23e8f6b4592398200ec",
+      "file": "reinicio-0045e88f.asm"
+    },
+    {
+      "name": "MessageBoxInit",
+      "start": "0x469908",
+      "end_exclusive": "0x46994b",
+      "sha256": "de4facb756ba8db64253a487c9bb76ceb352ed5e0a018f52d376668e926d606f",
+      "file": "reinicio-00469908.asm"
+    },
+    {
+      "name": "BallonInit",
+      "start": "0x441b6c",
+      "end_exclusive": "0x441baa",
+      "sha256": "cd456b16ee3fb15addd7ba053b238775f5f35519ddb87fb3e09261ea5e25d857",
+      "file": "reinicio-00441b6c.asm"
+    }
+  ],
+  "callees": [
+    {
+      "name": "TerrainReset",
+      "start": "0x46b315",
+      "end_exclusive": "0x46b38f",
+      "owner": "core, pending",
+      "sha256": "543a4936c56fe8d58eaad5dd3d71dc5123bcbe9db7671dbae60e50db92e996eb"
+    },
+    {
+      "name": "MiniMapReset",
+      "start": "0x469f00",
+      "end_exclusive": "0x469f68",
+      "owner": "core, pending",
+      "sha256": "640dd84288531a1b03d80f9fcceaa78358229297edd989061257d5d3c5b2ff22"
+    },
+    {
+      "name": "BatimentResetAll",
+      "start": "0x41a75c",
+      "end_exclusive": "0x41a860",
+      "owner": "core ciclo_estruturas.resetar_todas_estruturas",
+      "sha256": "3e430da9e57e50c104f8874a10188f4f1715a04a4e8364388831e565be4ecea6"
+    },
+    {
+      "name": "EnginResetAll",
+      "start": "0x441659",
+      "end_exclusive": "0x441775",
+      "owner": "core ciclo_unidades.resetar_todas_unidades",
+      "sha256": "5be7031d6a0a682d9c1fdfe11bfe96eed535cabeef1a5c22dc1239fec31d603b"
+    },
+    {
+      "name": "ProjectileReset",
+      "start": "0x46e00a",
+      "end_exclusive": "0x46e02c",
+      "owner": "combat reinicio_projeteis.resetar_projeteis",
+      "sha256": "9941723e3ce90cbe1637fc3ade4844c9e099c2179e128d3d0a67f1aa264e1e71"
+    },
+    {
+      "name": "SortilegeResetTechnologie",
+      "start": "0x4749f2",
+      "end_exclusive": "0x474a38",
+      "owner": "economy AprendizagemEconomia.zerar_tecnologia",
+      "sha256": "c7c6b7659f5e35edfb7278604092214fbf602e492702a0fa98a085df9382cda8"
+    },
+    {
+      "name": "RechercheReset",
+      "start": "0x470b46",
+      "end_exclusive": "0x470b9c",
+      "owner": "requested from economy",
+      "sha256": "09f9b3a046241cd2942bcc5379f2b9a674875097fed3dd300b292dd8bd81c783"
+    },
+    {
+      "name": "Engin_ResetExperience",
+      "start": "0x441470",
+      "end_exclusive": "0x4414ad",
+      "owner": "requested from core; tail jumps to 0x440d5a",
+      "sha256": "31ca4aa77fbd2c5d22fb9a3d2a96fcaad530de926a222f6cfcde07e392e0a35c"
+    },
+    {
+      "name": "ReseauActif",
+      "start": "0x42c3b0",
+      "end_exclusive": "0x42c3b6",
+      "owner": "AL=[0x4e0730]; explicit inherited byte",
+      "sha256": "825f12d3c95c19deffd9d1e9b49a7aca994adf03b31b7eb847c2ffdc996c9275"
+    },
+    {
+      "name": "MakeMissionName",
+      "start": "0x46c1b8",
+      "end_exclusive": "0x46c2cf",
+      "owner": "missions Stage 6",
+      "sha256": "7d168702cd43567d99f94b650b4397b917d7b904ab98b41508b56e604d985961"
+    }
+  ],
+  "strings": {
+    "0x494b3b": "rb",
+    "0x494b3e": ".NET",
+    "0x494b43": "\\WORLD\\",
+    "0x494b4b": "rb"
+  },
+  "mission_load_order": [
+    "AL=[0x496fe4] -> MakeMissionName 0x46c1b8 (local+0x100)",
+    "strcpy(local, 0x509594)",
+    "strcat(local, local+0x100)",
+    "u16 [0x4e1a38]=[0x4e1a3a]=0xffff",
+    "IconeReset @0x46c35a",
+    "TerrainReset @0x46c35f",
+    "MiniMapReset @0x46c364",
+    "BatimentResetAll @0x46c369",
+    "EnginResetAll @0x46c36e",
+    "ProjectileReset @0x46c373",
+    "MessageBoxInit @0x46c378",
+    "BallonInit @0x46c37d",
+    "FileOpen(local, \"rb\") @0x46c389"
+  ],
+  "mission_load_name_order": [
+    "u16 [0x4e1a38]=[0x4e1a3a]=0xffff",
+    "IconeReset @0x46c60a",
+    "TerrainReset @0x46c60f",
+    "MiniMapReset @0x46c614",
+    "BatimentResetAll @0x46c619",
+    "EnginResetAll @0x46c61e",
+    "ProjectileReset @0x46c623",
+    "MessageBoxInit @0x46c628",
+    "zero 4x26 @0x4e1934",
+    "zero 4x22 @0x4dfad4",
+    "SortilegeResetTechnologie @0x46c687",
+    "RechercheReset @0x46c68c",
+    "Engin_ResetExperience @0x46c691",
+    "u8 [0x496fe4]=0x32",
+    "ReseauActif @0x46c69d",
+    "if AL: RechercheCheat 0x4716fe @0x46c6a6, RechercheStore 0x4714f0 @0x46c6ab",
+    "BallonInit @0x46c6b0",
+    "dir = stricmp(name+len-4, \".NET\")==0 ? 0x509494 : 0x509594",
+    "path = dir + \"\\WORLD\\\" + name",
+    "FileOpen(path, \"rb\") @0x46c75f"
+  ],
+  "leaf_buffers": {
+    "IconeReset": "10x6 at 0x4e2410 (u16 0x29b1,u16 1,u16 0); changed flag u8 0x4e05a2",
+    "MessageBoxInit": "256x518 records at 0x4e7754 (byte +0); u16 0x507d54,0x507d56; u8 0x507d58,0x507d59",
+    "BallonInit": "4x8 at 0x4e1a14: u16 +4/+6=ffff, u16 +0=0, u8 +2=0, +3 kept"
+  },
+  "scope": "Reset prefixes of both callers to FileOpen, UI leaf resets owned by missions, and the callee inventory. No terrain/minimap/research/experience body is reconstructed here."
+}

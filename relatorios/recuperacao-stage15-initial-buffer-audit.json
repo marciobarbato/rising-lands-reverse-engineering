@@ -1,0 +1,17 @@
+{
+  "scope": "Local reproduction before recovery fix, no native execution",
+  "cases": [
+    {
+      "case": "signed_byte_view",
+      "error": "ValueError",
+      "message": "memoryview assignment: lvalue and rvalue have different structures",
+      "earlier_aux_writes": true
+    },
+    {
+      "case": "multidimensional_view",
+      "error": "NotImplementedError",
+      "message": "memoryview slice assignments are currently restricted to ndim = 1",
+      "earlier_final_layer_writes": true
+    }
+  ]
+}

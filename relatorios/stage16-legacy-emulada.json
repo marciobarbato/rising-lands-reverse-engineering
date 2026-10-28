@@ -1,0 +1,38 @@
+{
+  "tests": 7,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "success": true,
+  "bounded_segments": 241,
+  "selected_tests": [
+    "test_emulacao_remapeamento_mundo",
+    "test_reset_terreno.ResetTerreno.test_eight_original_captures_whole_buffers_mines_seed_and_minimap_calls",
+    "test_emulacao_reset_terreno.DiferencialResetTerreno.test_live_unsigned_and_signed_byte_views",
+    "test_emulacao_reset_terreno.DiferencialResetTerreno.test_minimap_reset_dimensions_including_empty_and_full_layers",
+    "test_emulacao_reset_terreno.DiferencialResetTerreno.test_monde01_dimensions_sanctuary_record"
+  ],
+  "benches": [
+    {
+      "original_entries": {
+        "0x42ee1c": 29
+      },
+      "segments": 29,
+      "maximum_instructions": 88073,
+      "failed_native_segment": null,
+      "bindings": 0
+    },
+    {
+      "original_entries": {
+        "0x46b315": 2,
+        "0x469f00": 12,
+        "0x419e97": 2
+      },
+      "segments": 212,
+      "maximum_instructions": 86186,
+      "failed_native_segment": null,
+      "bindings": 0
+    }
+  ],
+  "full_flow_status": "NOT RUN: focused legacy no-binding remap/reset providers"
+}
