@@ -4,7 +4,7 @@ Evidence-based reconstruction of the Brazilian PC release of Rising Lands. The p
 
 **Documentation is English. All player-facing text, mission stories, objectives, unit names, and audio stay Brazilian Portuguese (PT-BR).** Original French SBL symbols and established Python identifiers remain unchanged so evidence and APIs stay traceable.
 
-Start with [the documentation index](docs/README.md), [current research status](docs/STATUS.md), [the roadmap to a running original mission](docs/ROADMAP_MONDE01.md), and [the seven-front workflow](docs/PARALLEL_WORK.md). The [restart prompt](docs/RESTART_PROMPT.md) defines the seven fronts and their merge procedure.
+Start with [consolidated progress](docs/PROGRESS.md), [the documentation index](docs/README.md), [current research status](docs/STATUS.md), [the roadmap to a running original mission](docs/ROADMAP_MONDE01.md), and [the seven-front workflow](docs/PARALLEL_WORK.md). The [restart prompt](docs/RESTART_PROMPT.md) defines the seven fronts and their merge procedure.
 
 ## Repository map
 

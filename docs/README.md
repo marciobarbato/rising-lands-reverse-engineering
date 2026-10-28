@@ -4,6 +4,7 @@ The maintained manuals below replace the scattered research handoffs. Historical
 
 | Manual | Contents |
 |---|---|
+| [Consolidated progress](PROGRESS.md) | M1–M4 acceptance, four independent states per L/R stage, critical path, evidence and Portuguese executive summary |
 | [Status](STATUS.md) | Confirmed scope, historical validation counts, and next investigations |
 | [Workspace](WORKSPACE.md) | Repository, original media, converted assets, apps, and archives |
 | [Roadmap to MONDE01](ROADMAP_MONDE01.md) | Milestones, dependency map, seven fronts, oracle strategy, and completion inventory |
