@@ -22,7 +22,9 @@ from fronteiras_carga_missao import (ArenaAlocacoes, ArquivosCRT, ArquivosWin32,
                                      rotulo_volume_iso)
 from vinculos_declarados import ParadaVinculoDeclarado
 
-CAPTURA = ambiente_missoes.OWNED/'evidencias/captura-carga-missao-original.json'
+CAPTURAS = [ambiente_missoes.OWNED/'evidencias'/n for n in ('captura-carga-missao-original.json',
+                                                              'captura-carga-missao-original-v2.json')]
+ENTRADA = ambiente_missoes.OWNED/'evidencias/entrada-carga-missao-original.json'
 BIN = ambiente_missoes.ROOT.parent/'source/RISING_LANDS_BR_.BIN'
 
 
@@ -209,12 +211,35 @@ class FronteirasTest(unittest.TestCase):
             self.assertEqual(rets, {limpeza}, nome)
 
 
+class EntradaCongeladaTest(unittest.TestCase):
+    @unittest.skipUnless(ENTRADA.exists(), 'Entry artifact not committed yet')
+    def test_frozen_entry_closes_the_stage12_inherited_registry(self):
+        from estado_herdado_missao import BlocoHerdadoMissao, EstadoHerdadoMissao
+        entrada = json.loads(ENTRADA.read_text())
+        blocos = []
+        for nome, b in entrada['blocks'].items():
+            dados = bytearray(zlib.decompress(base64.b64decode(b['zlib_base64'])))
+            self.assertEqual(hashlib.sha256(dados).hexdigest(), b['sha256'])
+            blocos.append(BlocoHerdadoMissao(nome, int(b['base'], 16), dados, 'MissionLoad entry artifact'))
+        estado = EstadoHerdadoMissao(entrada['source_revision'], 'Frozen MONDE01 MissionLoad entry', tuple(blocos))
+        resumo = estado.validar_fechamento_m1()
+        self.assertEqual(resumo['live_player_types'], [1, 2, 2, 2])
+        self.assertEqual(bytes(estado.vista(0x4e19ec, 40)), b'\xff\x00'*20)
+        self.assertEqual(entrada['registers']['EIP'], '0x46c2cf')
+        self.assertEqual(entrada['stack_return'], '0x42d22d')
+
+
 @unittest.skipUnless(os.environ.get('RISING_EMULAR') == '1', 'Optional intact-x86: RISING_EMULAR=1')
 class ReplayOriginalTest(unittest.TestCase):
-    def test_program_start_missionload_reproduces_committed_original_capture(self):
+    def test_program_start_missionload_reproduces_committed_original_captures(self):
+        for caminho in CAPTURAS:
+            if caminho.exists():
+                with self.subTest(capture=caminho.name):
+                    self._replay(json.loads(caminho.read_text()))
+
+    def _replay(self, captura):
         import capturar_carga_missao_original as c
         from oraculo_carga_missao import BancadaCargaMissaoOriginal, RETORNO_MISSION_LOAD
-        captura = json.loads(CAPTURA.read_text())
         ni = captura['named_inputs']
         b = BancadaCargaMissaoOriginal(c.entradas(ni['allocation_fill'], ni['clock_ms'][0]), segundos=120)
         b.iniciar_relogio()

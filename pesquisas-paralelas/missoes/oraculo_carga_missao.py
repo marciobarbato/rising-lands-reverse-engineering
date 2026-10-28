@@ -29,7 +29,7 @@ import zlib
 import base64
 
 import ambiente_missoes
-from emulador import BancadaX86, RETORNO, TRAMPOLINS_DECLARADOS as TRAMPOLINS, unicorn, x86
+from emulador import BancadaX86, DESCRITORES, PILHA, RETORNO, TRAMPOLINS_DECLARADOS as TRAMPOLINS, unicorn, x86
 from vinculos_declarados import ArgumentoVinculo
 from fronteiras_carga_missao import (ArenaAlocacoes, ArquivosCRT, ArquivosWin32, MidiaOriginal,
                                      PerfilWindows, WindowsDeclarado)
@@ -155,6 +155,7 @@ class BancadaCargaMissaoOriginal(BancadaX86):
         self.eventos_pulados, self.fase = [], 'startup'
         self.segmentos_retomados = 0
         self.passos, self._pedidas, self._retomando = [], set(), set()
+        self._pegada, self._eventos_vistos = None, 0
         self._inicio, self._seg0 = time.monotonic(), 0
         self._declarar()
         self._proteger_e_ganchar()
@@ -221,19 +222,38 @@ class BancadaCargaMissaoOriginal(BancadaX86):
 
     def _proteger_e_ganchar(self):
         rw = unicorn.UC_PROT_READ | unicorn.UC_PROT_WRITE
+        rx = unicorn.UC_PROT_READ | unicorn.UC_PROT_EXEC
         codigo = self.intervalos
         if codigo != [(0x401000, 0x493c00)]:
             raise ValueError('Unexpected original code section layout')
-        self.cpu.mem_protect(0x400000, 0x1000, rw)
-        self.cpu.mem_protect(0x494000, 0x600000-0x494000, rw)
+        # Image layout (SizeOfImage 0x12e000): headers R, BEGTEXT R|X (its last
+        # page tail is zero padding), DGROUP+.bss RW, .idata RW (IAT slots are
+        # data), .reloc/.rsrc R; the mapped tail beyond the image has no access.
+        self.cpu.mem_protect(0x400000, 0x1000, unicorn.UC_PROT_READ)
+        self.cpu.mem_protect(0x401000, 0x494000-0x401000, rx)
+        self.cpu.mem_protect(0x494000, 0x524000-0x494000, rw)
+        self.cpu.mem_protect(0x524000, 0x52e000-0x524000, unicorn.UC_PROT_READ)
+        self.cpu.mem_protect(0x52e000, 0x600000-0x52e000, unicorn.UC_PROT_NONE)
         for inicio, fim, _ in list(self.cpu.mem_regions()):
             if inicio >= 0x1000000 and inicio not in (RETORNO, ARMADILHAS, TRAMPOLINS):
                 self.cpu.mem_protect(inicio, fim-inicio+1, rw)
+        self.sha256_codigo_exe = hashlib.sha256(self._bytes_codigo_exe()).hexdigest()
+        self.sha256_codigo_inicial = self.sha256_codigo()
+        if self.sha256_codigo_inicial != self.sha256_codigo_exe:
+            raise ValueError('Mapped code section differs from the intact executable bytes')
         enderecos = set(self.vinculos_declarados.vinculos) | set(self.pulos) | {
             MISSION_LOAD, RETORNO_MISSION_LOAD}
         for a in sorted(enderecos):
             self.cpu.hook_add(unicorn.UC_HOOK_CODE, self._parar_se_pedido, begin=a, end=a)
         self.cpu.hook_add(unicorn.UC_HOOK_CODE, self._parar_se_pedido, begin=ARMADILHAS, end=ARMADILHAS+0xfff)
+
+    @staticmethod
+    def _bytes_codigo_exe():
+        dados = (ambiente_missoes.CD/'INSTALHD/RISING.EXE').read_bytes()
+        return dados[0x400:0x400+0x92c00]   # BEGTEXT raw offset/size
+
+    def sha256_codigo(self):
+        return hashlib.sha256(bytes(self.cpu.mem_read(0x401000, 0x92c00))).hexdigest()
 
     def _parar_se_pedido(self, cpu, endereco, tamanho, _):
         if endereco in self.paradas or endereco in self.armadilhas:
@@ -271,6 +291,8 @@ class BancadaCargaMissaoOriginal(BancadaX86):
         raise OraculoInterrompido(motivo, detalhe)
 
     def _executar_ate_parada(self, entrada, limite_instrucoes):
+        if self._pegada is not None:
+            self._marcar_escritas_vinculos()
         while True:
             restante = self.limite_segundos-(time.monotonic()-self._inicio)
             if restante <= 0:
@@ -383,7 +405,7 @@ class BancadaCargaMissaoOriginal(BancadaX86):
                 return regs
         raise RuntimeError('MissionLoad was not reached within the declared frame budget')
 
-    def executar_mission_load(self, segundos):
+    def executar_mission_load(self, segundos, instrucoes_segmento=None):
         """Run the intact MissionLoad from its real caller frame to 0x42d22d."""
         if self.cpu.reg_read(x86.UC_X86_REG_EIP) != MISSION_LOAD:
             raise RuntimeError('The oracle must start at the real MissionLoad entry')
@@ -391,12 +413,106 @@ class BancadaCargaMissaoOriginal(BancadaX86):
         if retorno != RETORNO_MISSION_LOAD:
             raise RuntimeError('MissionLoad was not entered from CalculGame 0x42d228')
         self.fase, self.limite_segundos = 'oracle', segundos
+        if instrucoes_segmento is not None:
+            if not 1 <= instrucoes_segmento <= 1000000:
+                raise ValueError('Segment size must be within the Core bench bound')
+            self.instrucoes_segmento = instrucoes_segmento
         self.iniciar_relogio()
         self.evento_inicio_oraculo = len(self.vinculos_declarados.eventos)
         self.segmentos_inicio_oraculo = self.execucoes
         regs = self._correr('missionload', MISSION_LOAD, {}, (RETORNO_MISSION_LOAD,), retomar=True)
         self.segundos_oraculo = time.monotonic()-self._inicio
         return regs
+
+    def snapshot_entrada(self):
+        """First-class MissionLoad entry state: every block, stack, CPU and fixture state."""
+        if self.cpu.reg_read(x86.UC_X86_REG_EIP) != MISSION_LOAD or self.fase != 'startup':
+            raise RuntimeError('Entry snapshot is defined only at the real MissionLoad entry')
+        # ObjectifLoadText 0x47c557 opens the briefing as an existence test and,
+        # on success, reopens it at 0x47c5cd without closing the first FILE*:
+        # that original leak is recorded, not hidden. No Win32 handle may remain.
+        if self.arquivos_win32.abertos:
+            raise RuntimeError('A Win32 file handle is still open at MissionLoad entry')
+        corrente = struct.unpack('<I', self.cpu.mem_read(0x4e1d1c, 4))[0]
+        abertos = [dict(stream=hex(k), path=v['record']['path'], cursor=v['cursor'], reads=v['reads'],
+                        referenced_by_0x4e1d1c=k == corrente) for k, v in self.arquivos.abertos.items()]
+        regs = self._registros()
+        segs = {n: self.cpu.reg_read(getattr(x86, 'UC_X86_REG_'+n)) for n in ('CS', 'DS', 'ES', 'SS', 'FS', 'GS')}
+        blocos = self.imagem()
+        blocos['native_stack'] = (PILHA, bytes(self.cpu.mem_read(PILHA, 0x10000)))
+        return dict(blocks=blocos, registers=regs, segments=segs,
+                    gdt=dict(base=hex(DESCRITORES), limit=23,
+                             bytes=bytes(self.cpu.mem_read(DESCRITORES, 24)).hex()),
+                    arena=dict(base=hex(self.arena.base), limit=hex(self.arena.limite),
+                               next_free=hex(self.arena.proximo), fill=self.arena.preenchimento,
+                               count_budget=self.arena.maximo, allocations=len(self.arena.ordem),
+                               policy='GMEM_FIXED handle==pointer, page-aligned, never reused; '
+                                      'ZEROINIT zero else declared fill; VirtualAlloc commit zero'),
+                    crt_streams_open=abertos, file_stream_slot_0x4e1d1c=hex(corrente), win32_handles_open=[],
+                    crt_next_stream_index=self.arquivos.proximo, win32_next_handle_index=self.arquivos_win32.proximo,
+                    remaining_clock=list(self.windows.relogio),
+                    remaining_keys=[list(t) for t in self.windows.teclas],
+                    stack_return=hex(struct.unpack('<I', self.cpu.mem_read(regs['ESP'], 4))[0]))
+
+    # ------------------------------------------------------------ footprint
+    def iniciar_pegada(self):
+        """Track inherited bytes read before written during the oracle phase.
+
+        Regions: DGROUP+.bss, the CRT thread page, the native stack and every
+        arena byte allocated before MissionLoad. Binding writes (fread etc.)
+        mark their destination as written before the next native segment.
+        """
+        regioes = [(DGROUP[0], DGROUP[1]-DGROUP[0]), (DADOS_THREAD_CRT, 0x1000), (PILHA, 0x10000),
+                   (self.arena.base, self.arena.proximo-self.arena.base)]
+        self._pegada = []
+        for base, tamanho in regioes:
+            r = (base, bytearray(tamanho), bytearray(tamanho), {})
+            self._pegada.append(r)
+            self.cpu.hook_add(unicorn.UC_HOOK_MEM_READ, self._pegada_ler, r, begin=base, end=base+tamanho-1)
+            self.cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE, self._pegada_escrever, r, begin=base, end=base+tamanho-1)
+        self._eventos_vistos = len(self.vinculos_declarados.eventos)
+
+    def _pegada_ler(self, cpu, acesso, endereco, tamanho, valor, r):
+        base, escrito, lido, leitor = r
+        o = endereco-base
+        for i in range(o, min(o+tamanho, len(escrito))):
+            if not escrito[i] and not lido[i]:
+                lido[i] = 1
+                leitor[i] = cpu.reg_read(x86.UC_X86_REG_EIP)
+
+    def _pegada_escrever(self, cpu, acesso, endereco, tamanho, valor, r):
+        base, escrito = r[0], r[1]
+        o = endereco-base
+        fim = min(o+tamanho, len(escrito))
+        escrito[o:fim] = b'\x01'*(fim-o)
+
+    def _marcar_escritas_vinculos(self):
+        eventos = self.vinculos_declarados.eventos
+        for ev in eventos[self._eventos_vistos:]:
+            for w in ev['memory_writes']:
+                a, n = int(w['address'], 16), w['size']
+                for base, escrito, _, _ in self._pegada:
+                    if base <= a < base+len(escrito):
+                        o = a-base
+                        escrito[o:min(o+n, len(escrito))] = b'\x01'*(min(o+n, len(escrito))-o)
+        self._eventos_vistos = len(eventos)
+
+    def pegada(self):
+        """Read-before-write byte ranges: [(start, end, first_reader_routine)]."""
+        self._marcar_escritas_vinculos()
+        faixas = []
+        for base, _, lido, leitor in self._pegada:
+            i, n = 0, len(lido)
+            while True:
+                i = lido.find(1, i)
+                if i < 0:
+                    break
+                j = i
+                while j < n and lido[j]:
+                    j += 1
+                faixas.append((base+i, base+j, self.nome(leitor[i])))
+                i = j
+        return faixas
 
     def conjunto_vigiado(self):
         """Byte ranges written by non-executed original routines (see NAO_EXECUTADOS)."""

@@ -25,12 +25,13 @@ ROOT = ambiente_missoes.ROOT
 BIN = ROOT.parent/'source/RISING_LANDS_BR_.BIN'
 
 
-def entradas(preenchimento, relogio):
+def entradas(preenchimento, relogio, diretorio=b'C:\\RISING', unidade=b'D', id_thread=1,
+             estado_memoria=bytes(32)):
     rotulo, pvd = rotulo_volume_iso(BIN)
     return EntradasNomeadas(
-        diretorio_instalacao=b'C:\\RISING', unidade_cd=b'D', rotulo_cd=rotulo,
-        relogio_ms=(relogio,), preenchimento_alocacao=preenchimento, estado_memoria=bytes(32),
-        teclas=((0x0d, 0x8000), (0x0d, 0), (0x0d, 0x8000), (0x0d, 0), (0x0d, 0x8000)), id_thread=1,
+        diretorio_instalacao=diretorio, unidade_cd=unidade, rotulo_cd=rotulo,
+        relogio_ms=(relogio,), preenchimento_alocacao=preenchimento, estado_memoria=estado_memoria,
+        teclas=((0x0d, 0x8000), (0x0d, 0), (0x0d, 0x8000), (0x0d, 0), (0x0d, 0x8000)), id_thread=id_thread,
         proveniencia=dict(
             install_directory='WINSTALL.INF TemplateTargetDir=RISING under drive C: (installer default); '
                               'machine-specific, used only to build profile/data paths',
@@ -61,6 +62,7 @@ def eventos_json(eventos):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--saida', required=True)
+    ap.add_argument('--entrada', help='also write the first-class MissionLoad entry snapshot here')
     ap.add_argument('--preenchimento', type=lambda x: int(x, 0), default=0xa7)
     ap.add_argument('--relogio', type=lambda x: int(x, 0), default=0x00123456)
     ap.add_argument('--segundos-inicio', type=float, default=120.0)
@@ -104,6 +106,19 @@ def main():
             routines=list(NAO_EXECUTADOS)+['ProgIteration'],
             ranges=[[hex(x), hex(z)] for x, z in b.intervalos_vigiados],
             sources=[dict(address=hex(k[0]), size=k[1], indexed=k[2], writers=v) for k, v in sorted(vigiado.items())])
+        if a.entrada:
+            entrada_snap = b.snapshot_entrada()
+            entrada_doc = dict(schema='rising-lands/missionload-entry-state/1', original_sha256=HASH_ORIGINAL,
+                               source_revision=revisao, named_inputs=e.manifesto(),
+                               summary=b.resumo_imagem(entrada_snap['blocks']),
+                               blocks=b.serializar(entrada_snap['blocks']),
+                               registers={k: hex(v) for k, v in entrada_snap['registers'].items()},
+                               segment_registers={k: hex(v) for k, v in entrada_snap['segments'].items()},
+                               **{k: v for k, v in entrada_snap.items()
+                                  if k not in ('blocks', 'registers', 'segments')},
+                               allocations=b.arena.manifesto(), skipped_startup_calls=b.eventos_pulados,
+                               note='Python M1 composition starts from exactly these bytes; the startup '
+                                    'emulation is provenance only')
         pre = b.imagem()
         relatorio['inherited_state'] = dict(summary=b.resumo_imagem(pre), blocks=b.serializar(pre),
                                             registers_at_entry={k: hex(v) for k, v in b._registros().items()})
@@ -119,6 +134,9 @@ def main():
             watched_reads=[dict(address=hex(k[0]), size=k[1], reader=k[2], count=v)
                            for k, v in sorted(b.leituras_vigiadas.items())],
             final_state=dict(summary=b.resumo_imagem(post), blocks=b.serializar(post)))
+        relatorio['code_integrity'] = dict(exe_code_sha256=b.sha256_codigo_exe, before=b.sha256_codigo_inicial,
+                                           after=b.sha256_codigo(), protection='BEGTEXT R|X; headers/.reloc/.rsrc R; '
+                                           'DGROUP/.bss/.idata RW; 0x52e000..0x600000 no access; stack/arena RW no exec')
         resultado = 0
     except (OraculoInterrompido, ParadaVinculoDeclarado, RuntimeError) as erro:
         detalhe = getattr(erro, 'detalhe', None)
@@ -145,6 +163,12 @@ def main():
     with open(saida, 'x') as f:
         json.dump(relatorio, f, indent=1, sort_keys=True)
         f.write('\n')
+    if not resultado and a.entrada:
+        caminho_entrada = ROOT/a.entrada
+        with open(caminho_entrada, 'x') as f:
+            json.dump(entrada_doc, f, indent=1, sort_keys=True)
+            f.write('\n')
+        print('entry', caminho_entrada, hashlib.sha256(caminho_entrada.read_bytes()).hexdigest())
     print(json.dumps(dict(output=str(saida), sha256=hashlib.sha256(saida.read_bytes()).hexdigest(),
                           result='real_return' if not resultado else 'stopped',
                           oracle={k: v for k, v in relatorio.get('oracle', {}).items()

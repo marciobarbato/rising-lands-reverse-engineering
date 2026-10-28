@@ -486,6 +486,8 @@ class WindowsDeclarado:
         raiz = _cadeia(chamada, chamada.argumentos[0], 16).lower()
         if raiz == self.e.unidade_cd.lower()+b':\\':
             return 5   # DRIVE_CDROM
+        if len(raiz) == 3 and raiz[1:] == b':\\' and b'd' <= raiz[:1] < self.e.unidade_cd.lower():
+            return 1   # DRIVE_NO_ROOT_DIR: declared absent drive probed before the CD drive
         raise ParadaVinculoDeclarado(f'GetDriveTypeA({raiz!r}) is not a declared drive')
 
     def volume(self, chamada):
