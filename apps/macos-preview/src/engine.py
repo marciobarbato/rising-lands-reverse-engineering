@@ -4,11 +4,12 @@ import copy
 import hashlib
 import json
 import math
+import os
 import struct
 import sys
 import traceback
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(os.environ.get('RISING_APP_ROOT', Path(__file__).resolve().parent))
 if not (ROOT/'snapshot.json').exists(): ROOT=ROOT.parent
 MANIFEST=json.loads((ROOT/'snapshot.json').read_text())
 SNAP=ROOT/MANIFEST['snapshot']
@@ -68,9 +69,10 @@ class Preview:
             if backend not in ("python","local"):raise ValueError("Backend desconhecido")
             if backend=="python" and not PYTHON_SOLVER_AVAILABLE:raise ValueError("Solucionador Python não consta deste snapshot")
             self.backend=backend
-        if scenario not in ('obstaculo','parede','livre','missao'): raise ValueError('Cenário desconhecido')
+        if scenario not in ('obstaculo','parede','livre','missao','jogavel'): raise ValueError('Cenário desconhecido')
         self.scenario=scenario;self.tick=0;self.paused=True;self.speed=1;self.events=[];self.selected=0
         self.research=BancadaPesquisa(self.mission,self.catalog)
+        self.session=None
         self.pump_fraction=0;self.blocked={};self.requested={};self.routes={};self.trails={};self.plans={};self.errors=[]
         if scenario=='missao':
             self.world=None
@@ -83,7 +85,7 @@ class Preview:
             start=y*256+(16 if y<16 else 0);end=(y+1)*256
             self.world.atributos[start:end]=bytes([1])*(end-start)
             self.world.objetos[start:end]=bytes([1])*(end-start)
-        self.obstacles=([(6,4)] if scenario=='obstaculo' else ([(6,y) for y in range(11)] if scenario=='parede' else []))
+        self.obstacles=([(6,4)] if scenario=='obstaculo' else ([(6,y) for y in range(11)] if scenario in ('parede','jogavel') else []))
         for x,y in self.obstacles:
             c=cell(x,y);self.world.atributos[c]=1;self.world.objetos[c]=1
         self.world.refazer_regioes()
@@ -99,6 +101,9 @@ class Preview:
             self.world.descobrir_area(cell(x,y),u[0xbb]+2,u[0]);self.world.iluminar_area(cell(x,y),u[0xbb],u[0])
             self.trails[i]=[[x,y]];self.routes[i]=[];self.plans[i]='sem ordem'
         self.log('Laboratório sintético pronto. Selecione uma unidade e clique no destino.')
+        if scenario=='jogavel':
+            from playable_session import SessaoJogavel
+            self.session=SessaoJogavel(self)
     def log(self,text):
         self.events.append({'tick':self.tick,'text':text});self.events=self.events[-80:]
     def _index(self,value):
@@ -109,6 +114,7 @@ class Preview:
     def order(self,i,x,y):
         if self.world is None:raise ValueError('A missão 1 está em modo de inspeção. Use o laboratório para mover.')
         self._index(i)
+        if self.session:self.session.controllable(i)
         if any(isinstance(v,bool) or not isinstance(v,int) for v in (x,y)) or not(0<=x<16 and 0<=y<16):raise ValueError('Destino fora do mapa')
         self.world.mover_unidade(cell(x,y),i)
         self.blocked.pop(i,None);self.requested[i]=[x,y]
@@ -134,6 +140,7 @@ class Preview:
             for i in range(3):
                 if i in self.blocked:continue
                 before=self.world.unidades[i*276+2]
+                if self.session and before==1:continue
                 try:self.world.atualizar_movimento(i)
                 except NotImplementedError as e:
                     self.blocked[i]=str(e);self.log(f'U{i} bloqueada: {e}');self.paused=True
@@ -142,7 +149,11 @@ class Preview:
                 if before==2 and self.world.unidades[i*276+2]==7:
                     reached=p==self.requested.get(i)
                     self.log(f'U{i}: '+('destino solicitado alcançado.' if reached else 'ordem encerrada sem alcançar o destino solicitado.'))
-            if all(i in self.blocked or self.world.unidades[i*276+2]!=2 for i in range(3)):
+            if self.session:
+                try:self.session.step()
+                except NotImplementedError as e:
+                    self.session.stop(str(e));self.paused=True
+            if not self.session and all(i in self.blocked or self.world.unidades[i*276+2]!=2 for i in range(3)):
                 self.paused=True
     def capabilities(self):
         return [
@@ -166,8 +177,21 @@ class Preview:
                 u=self.world.ler_unidade(i);signed=lambda b:b-256 if b>127 else b
                 units.append({'id':i,'type':u[1],'name':self.catalog[u[1]]['nome'],'pos':xy(self.world.palavra(i,8)),'offset':[signed(u[0x86])/32,signed(u[0x87])/32],'progress':u[0x97],'state':u[2],'pathState':u[0x88],'direction':u[0x91],'next':xy(self.world.palavra(i,0x7c)),'target':xy(self.world.palavra(i,0x7e)),'requested':self.requested.get(i),'trail':self.trails[i],'route':self.routes[i],'plan':self.plans[i],'blocked':self.blocked.get(i),'owner':u[0],'health':self.world.palavra(i,0x9a)})
         result={'scenario':self.scenario,'backend':self.backend,'pythonSolverAvailable':PYTHON_SOLVER_AVAILABLE,'width':self.width,'height':self.height,'tick':self.tick,'paused':self.paused,'speed':self.speed,'selected':self.selected,'units':units,'searches':len(self.world.historico_navegacao) if self.world else 0,'collisions':self.world.colisoes[-40:] if self.world else [],'research':self.research.state(),'fog':[self.world.descoberto[0][cell(x,y)] for y in range(self.height) for x in range(self.width)] if self.world else None,'events':self.events[-12:],'commit':MANIFEST['commit'],'snapshotFiles':len(MANIFEST['files']),'capabilities':self.capabilities(),'python':sys.version.split()[0],'architecture':__import__('platform').machine()}
+        if self.session:
+            result['session']=self.session.state()
+            result['capabilities']=[
+                {'name':'Sessão de treino interativa','status':'experimental','detail':'Mapa, relógio, transporte de carga e objetivos são regras declaradas deste exercício. Movimento e desvios usam as APIs recuperadas no mesmo commit.'},
+                {'name':'Golpes diretos em unidades','status':'confirmado','detail':'Soldado adjacente: ordem, mira, animação, recarga e consumidor de dano em modo 1. Câmera sonora oculta; sem reação, diplomacia ou apresentação de InfligeDegat. O golpe letal pausa antes da rotina pendente.'},
+                {'name':'Sacolas e depósito','status':'experimental','detail':'Retirada de uma unidade e depósito com capacidade usam as rotinas econômicas. O transporte entre células é regra do treino; não é o chamador original de coleta.'},
+                {'name':'Corpos gráficos recuperados','status':'confirmado','detail':'Tipos 0/7/9 do jogador 0, estados 2/7, com paleta e opacidade recuperadas. Outros estados e o adversário usam marcadores; sombra e quadro global ainda não estão integrados.'},
+                {'name':'Campanha, som, produção e morte completos','status':'pendente','detail':'Missão 1 permanece em inspeção. Áudio, carga/dispatch completos, morte visível, saída completa de recrutamento, salvar/carregar e fidelidade global não são oferecidos.'}]
+            for info in units:
+                u=self.world.ler_unidade(info['id'])
+                if u[0]==0 and u[1] in (0,7,9) and u[2] in (2,7) and u[0xa4]<8:
+                    info['spriteKey']=f'{u[1]}/{u[0x91]}/{u[0xa4]}/{int(self.world.palavra(info["id"],0xa)!=0)}'
         if include_map:
             result['atlas']=json.loads((ROOT/'assets/atlas.json').read_text())
+            if (ROOT/'assets/unidades.json').exists():result['unitAtlas']=json.loads((ROOT/'assets/unidades.json').read_text())
             result['map']={'tiles':self.mission['terreno'],'attributes':self.mission['atributos'],'objects':self.mission['objetos']} if not self.world else {'tiles':[1+((x*13+y*7)%4) for y in range(16) for x in range(16)],'obstacles':self.obstacles}
         return result
     def handle(self,msg):
@@ -192,6 +216,9 @@ class Preview:
                 if n:self.step(n)
         elif action=='economy':self.log(self.research.mutate(msg))
         elif action=='combat':self.research.combat(self.world,self._index(msg.get('unit',self.selected)),self._index(msg['target']))
+        elif action=='interact':
+            if not self.session:raise ValueError('Abra a sessão jogável para interagir.')
+            self.session.interact(msg.get('operation'),self._index(msg.get('unit',self.selected)),msg.get('target',2))
         elif action=='state':pass
         else:raise ValueError('Ação desconhecida')
         return self.state()

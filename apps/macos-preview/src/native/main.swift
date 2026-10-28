@@ -28,7 +28,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         web.navigationDelegate = self
         web.setValue(false, forKey: "drawsBackground")
         window = NSWindow(contentRect: NSRect(x:0,y:0,width:1360,height:900), styleMask:[.titled,.closable,.miniaturizable,.resizable], backing:.buffered, defer:false)
-        window.title = "Rising Lands — Observatório da reconstrução"
+        window.title = "RisingLands-ptbr — Sessão jogável"
         window.minSize = NSSize(width:1080,height:740)
         window.contentView = web
         window.delegate = self
@@ -51,9 +51,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         let main = NSMenu()
         let appItem = NSMenuItem(); main.addItem(appItem)
         let appMenu = NSMenu(); appItem.submenu = appMenu
-        appMenu.addItem(withTitle:"Sobre Rising Lands Preview",action:#selector(showAbout),keyEquivalent:"")
+        appMenu.addItem(withTitle:"Sobre RisingLands-ptbr",action:#selector(showAbout),keyEquivalent:"")
         appMenu.addItem(.separator())
-        appMenu.addItem(withTitle:"Encerrar Rising Lands Preview",action:#selector(NSApplication.terminate(_:)),keyEquivalent:"q")
+        appMenu.addItem(withTitle:"Encerrar RisingLands-ptbr",action:#selector(NSApplication.terminate(_:)),keyEquivalent:"q")
         let edit = NSMenuItem(); main.addItem(edit); let editMenu = NSMenu(title:"Editar"); edit.submenu = editMenu
         editMenu.addItem(withTitle:"Copiar",action:#selector(NSText.copy(_:)),keyEquivalent:"c")
         editMenu.addItem(withTitle:"Colar",action:#selector(NSText.paste(_:)),keyEquivalent:"v")
@@ -64,7 +64,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         NSApp.mainMenu = main
     }
     @objc func showAbout() {
-        NSApp.orderFrontStandardAboutPanel(options:[.applicationName:"Rising Lands Preview", .applicationVersion:"0.1", .credits:NSAttributedString(string:"Visualizador local de pesquisa. Movimento Python reconstruído; consulte a procedência dentro do aplicativo.")])
+        NSApp.orderFrontStandardAboutPanel(options:[.applicationName:"RisingLands-ptbr", .applicationVersion:"0.1", .credits:NSAttributedString(string:"Sessão interativa de pesquisa reconstruída. Consulte a procedência e os limites dentro do aplicativo.")])
     }
     func launchEngine() throws {
         let process = Process()
@@ -73,6 +73,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         process.currentDirectoryURL = resourceRoot
         var env = ProcessInfo.processInfo.environment
         env.removeValue(forKey:"PYTHONPATH"); env.removeValue(forKey:"PYTHONHOME")
+        env.removeValue(forKey:"RISING_APP_ROOT")
         env["PYTHONDONTWRITEBYTECODE"] = "1"
         process.environment = env
         let stdinPipe = Pipe(); let stdoutPipe = Pipe(); let stderrPipe = Pipe()
@@ -113,7 +114,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
     }
     func userContentController(_ userContentController:WKUserContentController,didReceive message:WKScriptMessage) {
         guard message.frameInfo.isMainFrame, let body = message.body as? [String:Any], let action = body["action"] as? String,
-              ["init","reset","select","order","pause","play","speed","step","pump","state","economy","combat"].contains(action),
+              ["init","reset","select","order","pause","play","speed","step","pump","state","economy","combat","interact"].contains(action),
               let data = try? JSONSerialization.data(withJSONObject:body) else { return }
         ioQueue.async { [weak self] in
             do { try self?.input?.write(contentsOf:data + Data([10])) }
@@ -149,7 +150,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
     }
     func fail(_ message:String) {
         if smokeOutput != nil { finishSmoke(["passed":false,"error":message]); return }
-        let alert = NSAlert(); alert.messageText = "Rising Lands Preview"; alert.informativeText = message; alert.alertStyle = .critical; alert.runModal()
+        let alert = NSAlert(); alert.messageText = "RisingLands-ptbr"; alert.informativeText = message; alert.alertStyle = .critical; alert.runModal()
     }
     func applicationShouldTerminateAfterLastWindowClosed(_ sender:NSApplication)->Bool { true }
     func applicationWillTerminate(_ notification:Notification) {
