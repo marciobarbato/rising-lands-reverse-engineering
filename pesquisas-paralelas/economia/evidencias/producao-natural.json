@@ -1,0 +1,247 @@
+{
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_analysis_pe_not_executed": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "sha256_sbl": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "sha256_ini": "e4762aae51d8aa7bd56280af43a7408a19571ab6dbfcd170fb59cffbcdc8338b",
+  "scope": "Natural production: InitRecruteTroupe exit search, BatimentNextEtape branch 0x426918, CalculTroupe chain and the empty-Bag cleanup continuation after 0x42110c",
+  "callers_of_init_recrute": [
+    "ProcessInputGame 0x45f1a9 (player input)",
+    "V_BatimentRecruteUnite 0x480749 (AI operation)"
+  ],
+  "dispatcher_branch": {
+    "types": [
+      1,
+      2,
+      13,
+      16
+    ],
+    "entry": "0x426918",
+    "exit": "0x4281c0 (mov esp,ebp; jmp 0x41db1d)",
+    "body": "inline BatimentEstHabiter (identical predicate to 0x41a5b8), then CalculTroupe(AX) if AL"
+  },
+  "recherche_decalage_sortie": {
+    "radius": 1,
+    "base": "CalculPosition 0x420698 (core) with AX index, BL 0",
+    "ring": "dy -1..1 outer, dx -1..1 inner, skip (0,0), x+dx and y+dy within 0..255 (not map size)",
+    "test": "TerrainEnCollision(cell, DL=1) false selects the cell; otherwise the CalculPosition cell",
+    "unreached_types": "9/12/17 read uninitialised stack; InitRecruteTroupe only reaches recruiting types"
+  },
+  "empty_cleanup_order": [
+    "BatimentGetCase 0x41aee2 (AX building, DX R ignored)",
+    "EteintTerrain 0x476e82 (AX cell, DX R, BL owner +4) — core",
+    "if word [0x495be0+2*owner] == building: store 0xffff",
+    "byte +4 = 200",
+    "BatimentModifyMap 0x419e97 (AX building, EDX 1) — core",
+    "inline reset 0x421153..0x4211c5 (same stores as core resetar_estrutura)",
+    "iagUnitSendMessage 0x4829c8 (AX unit, DL 0x46, EBX 0) — ai-runtime",
+    "iagVilleSendMessage 0x484808 (AX building, DL 3, EBX 0) — ai-runtime"
+  ],
+  "structure_type_table": {
+    "static_sha256": "d4662af52ab3603b13be7f526f1fe040c38b87b1cbb399f25d27614aa20841ee",
+    "ini_loaded_fields": "BatimentLoadCaract: +4 TMPSCONSTRUCTION (default 300), +0x0c COUTPATATE (5), +0x0e COUTROCHE (5), +0x13 NAME (30-byte buffer, default the static name)",
+    "consumed_by_production": "+0/+2 dimensions and +0x12 divisor are static; LOGEMENT is not a string in the EXE",
+    "runtime_names": "[SANCTUAIRE] NAME=SANTUÁRIO and [CAVE] NAME=ARMAZÉM in RISING.INI"
+  },
+  "captures": [
+    {
+      "start": "0x4268d4",
+      "end_exclusive": "0x426918",
+      "symbol": "BatimentNextEtape",
+      "role": "Prologue and type switch (EDI = AX index, EBP frame)",
+      "bytes_hex": "53515256575589e583ec3489c731d26689c289d0c1e00401d0c1e00201d0bec8a04900c1e00201c68a460888c4fecc80fc140f87b418000031db88e32eff249d80684200",
+      "sha256": "6a724d30775ad7366d6d8c1e4e1a29d9a289d586238da9af5391cdd5b2aff72b",
+      "listing": "producao-natural-004268d4.asm"
+    },
+    {
+      "start": "0x426918",
+      "end_exclusive": "0x42698d",
+      "symbol": "BatimentNextEtape",
+      "role": "Branch for types 1/2/13/16: inline BatimentEstHabiter, then CalculTroupe",
+      "bytes_hex": "31d26689fa89d0c1e00401d0c1e00201d0bac8a04900c1e00201c231db8a420888c38d420c83fb15750de80309020084c07429b001eb2783fb027509e8f108020084c075ee8d420cbb09000000ba01000000e8490802006685c0ebd530c084c00f844218000031c06689f8e85ef0ffffe933180000",
+      "sha256": "52b41c560652e7a2b11a5dd7494a09b5930bac5caa6fce33ea42b9e66708ddb0",
+      "listing": "producao-natural-00426918.asm"
+    },
+    {
+      "start": "0x4281c0",
+      "end_exclusive": "0x4281c7",
+      "symbol": "BatimentNextEtape",
+      "role": "Shared branch exit into 0x41db1d",
+      "bytes_hex": "89ece95659ffff",
+      "sha256": "bdf58c0ddb45652182825bb0b5175c4a6c313845097300472b566887ee516e08",
+      "listing": "producao-natural-004281c0.asm"
+    },
+    {
+      "start": "0x4283e2",
+      "end_exclusive": "0x428691",
+      "symbol": "InitRecruteTroupe",
+      "role": "Recruitment start; exit search at 0x42863b",
+      "bytes_hex": "5351565783ec448844243c885424400fb6fa668b047de05b49008d4c240c25ffff00008d5c242889c631d2c1e6048954240801c68954240cc1e6028954242801c631c08d5424088a44243cc1e602e89d8c01005731db31d231c031c9668b5c2410668b54242c668b44240c81c6c8a04900e88df2030084c00f85e8010000e922020000807e74000f8518020000b80100000031c931d28a4c2440668b54240889cf89cbc1e702e89ff4030029cf89c801ff31c8668b872cfb4d0085c07e4e8d5c24148d542410518d4424248d4c2420e8e7f103008b4424208b542410668b9f2cfb4d0001d031d266f7f331d26689c289d0c1e00329d031db89c2668b9f2efb4d00c1fa1ff7fb888730fb4d00b80200000031c931d28a4c2440668b54242889cf89cbc1e702e820f4030029cf89c801ff31c8668b872cfb4d0085c07e4e8d5c24308d54242c518d44241c8d4c2428e868f103008b4424188b4c242c668b9f2cfb4d0031d201c866f7f331d26689c289d0c1e00329d031db89c2668b9f2efb4d00c1fa1ff7fb888730fb4d0031c931d231c08a4c2440668b54240c89cf89cbc1e702e8a4f3030029cf89c801ff31c8668b872cfb4d0085c07e4e8d5c24048d542438518d4424388d4c2404e8ecf003008b4424348b4c2438668b9f2cfb4d0031d201c866f7f331d26689c289d0c1e00329d031db89c2668b9f2efb4d00c1fa1ff7fb888730fb4d00c6467401c6467a00c64605048a44243cc7868c0000000100000088467b31c08a460866c7467e000083f814741266c78680000000000066c78682000000000031c08a442440668b0445e05b490025ffff0000e8904bffff6689467cb001eb418a46083c0f721e0f8610feffff3c1272100f8606feffff3c140f84fefdffffeb1e3c10ebf43c05720a0f86eefdffff3c0debe63c0172083c020f86defdffff30c083c4445f5e595bc3",
+      "sha256": "bb73355fba6bf21141ebe4ec996f9e4c184cfe5976c990a081d4ebd27962e47f",
+      "listing": "producao-natural-004283e2.asm"
+    },
+    {
+      "start": "0x41d1d0",
+      "end_exclusive": "0x41d2fc",
+      "symbol": "RechercheDecalageSortie",
+      "role": "CalculPosition, then radius-1 ring with TerrainEnCollision(cell, 1)",
+      "bytes_hex": "53515256575583ec1089c231c96689c189c8c1e00401c8c1e00201c8c1e00205c8a049008a40083c15774225ff0000002eff248578d14100b301b90001000031c0885c240c6689d031dbe8793400006689c389042489da89d8c1fa1ff7f989d789da89d8c1fa1ff7f989442404660fb674240cf7de89f0c1e0086689442408bd01000000eb20c644240c0189c831dbe834340000b900010000ebb48a7c2409fec746887c240931d20fbfc68a54240c39d00f8f6a00000031d2668b54240401d085c07cd73d000100007dd031db8a5c240c8b0c24f7db8b54240801d901d1eb02414331d20fbfc38a54240c39d07fac31d26689fa01c285d27ce681fa000100007dde85c075070fbfc685c074d331c089ea6689c8e8eb8e050084c075c389c8eb038b042483c410e921080000",
+      "sha256": "292228ca7a6f076ed78ffcd8d14370de728ad8da8b45f4bdad67f23a2d1d43d5",
+      "listing": "producao-natural-0041d1d0.asm"
+    },
+    {
+      "start": "0x4761d4",
+      "end_exclusive": "0x4761f1",
+      "symbol": "TerrainEnCollision",
+      "role": "(byte [0x507da8]+AX & DL) != 0",
+      "bytes_hex": "538b1da87d500025ffff000001d831db8a1831c088d085c30f95c05bc3",
+      "sha256": "5a4df51651db84b2b01819a672e0ad7c0253524d5ee65192abfde4bffdf41b3a",
+      "listing": "producao-natural-004761d4.asm"
+    },
+    {
+      "start": "0x4210f7",
+      "end_exclusive": "0x4211f2",
+      "symbol": "SortieTroupe",
+      "role": "Empty-Bag cleanup: GetCase, EteintTerrain, deselect, owner 200, ModifyMap, reset, messages",
+      "bytes_hex": "c74424081400000031c031d2668b0424668b542408e8d19dffff25ffff0000e8675d050031c08a47048b1c24663b1c45e05b490075128a470425ff00000066c70445e05b4900ffff31c0ba01000000668b0424c64704c8e8448dffff31c0668b042489c2c1e20401c2c1e20201c2c1e20281c2c8a0490066c74278ffffc6427bff66c7427c000031c066c7427e00008a420866c78286000000ffff83f814741266c78280000000000066c782820000000000c642740031c08a4205c7828c0000000000000083f8037404c6420505ba4600000031c031db668b442404e8f0170600ba0300000031c031db668b0424e81e36060083c410e9a8270000",
+      "sha256": "556bdc05eacd58af10c700e20f5b6816ba5be54dde05a3b815f39548125a9b8f",
+      "listing": "producao-natural-004210f7.asm"
+    },
+    {
+      "start": "0x45f19a",
+      "end_exclusive": "0x45f1ae",
+      "symbol": "ProcessInputGame",
+      "role": "Player-input caller of InitRecruteTroupe",
+      "bytes_hex": "e93f0100008a400225ff00000089f2e83492fcff",
+      "sha256": "15852e8b1fea7fe0264acf8533bd0cd6d19da172b56f3683f5d5e7b7a77e2f4f",
+      "listing": "producao-natural-0045f19a.asm"
+    },
+    {
+      "start": "0x48073a",
+      "end_exclusive": "0x48074e",
+      "symbol": "V_BatimentRecruteUnite",
+      "role": "AI-operation caller of InitRecruteTroupe",
+      "bytes_hex": "31d2e832aff9ff31c08a531c8a4304e8947cfaff",
+      "sha256": "0292b05eb7e867b8dc2ad263d21f2297246fef8854642a91a3bf6bc89c388eb7",
+      "listing": "producao-natural-0048073a.asm"
+    },
+    {
+      "start": "0x418c70",
+      "end_exclusive": "0x418e95",
+      "symbol": "BatimentLoadCaract",
+      "role": "INI loader: TMPSCONSTRUCTION +4, COUTPATATE +0x0c, COUTROCHE +0x0e, NAME +0x13, DIVERS globals",
+      "bytes_hex": "535152565589e583ec04b80b000000e813ffffffb80a00000031d2e807ffffff668955fce98f0000006bdb3431c08a45fc6bc03468948f5000682c010000058c5d4900686a4249008d7013562eff15ac31520068948f50006a05687b42490056668983905d49002eff15ac31520068948f50006a05688642490056668983985d49002eff15ac3152006689839a5d4900b88c5d490068948f500001d86a1e83c01350568b5dfc6890424900435666895dfc2eff15b031520031db668b5dfc83fb160f8c62ffffff68948f50006800020000689542490068a34249002eff15ac31520068948f5000680002000068aa42490068b942490066a3ea7349002eff15ac31520068948f5000680002000068c042490068ce42490066a3f45b49002eff15ac31520068948f5000680002000068d542490068e442490066a3f65b49002eff15ac31520068948f5000680002000068eb42490068f542490066a3f05b49002eff15ac31520068948f50006a6468fc424900680d43490066a3f25b49002eff15ac31520068948f50006a646814434900682543490066a3906f49002eff15ac31520068948f50006a1e682c434900683f43490066a3926f49002eff15ac31520066a3fa5b490068948f50006a1e6846434900685d4349002eff15ac31520068948f50006a076864434900687743490066a3fc5b49002eff15ac31520068948f50006a07687e434900689443490066a3005c49002eff15ac31520066a3fe5b4900e9d3fdffff",
+      "sha256": "5756570ce5f4f33e46958336a1f37b087b3b6f6fd0a64d7072f4651a9917c909",
+      "listing": "producao-natural-00418c70.asm"
+    }
+  ],
+  "jump_tables": [
+    {
+      "start": "0x426880",
+      "entries": [
+        "0x426918",
+        "0x426918",
+        "0x426aff",
+        "0x426c10",
+        "0x42698d",
+        "0x428095",
+        "0x426d61",
+        "0x426a08",
+        "0x4281c0",
+        "0x426e43",
+        "0x427549",
+        "0x427bb7",
+        "0x426918",
+        "0x42698d",
+        "0x427d5d",
+        "0x426918",
+        "0x427ed9",
+        "0x427eec",
+        "0x42803c",
+        "0x427da4",
+        "0x4281c0"
+      ],
+      "role": "BatimentNextEtape type-1 switch",
+      "sha256": "8179b83c32f16aa958c12c873735c80d58a5765528068c5dfb5bfe882d47720d"
+    },
+    {
+      "start": "0x41d178",
+      "entries": [
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d23d",
+        "0x41d208",
+        "0x41d208",
+        "0x41d23d",
+        "0x41d256",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d23d",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208",
+        "0x41d208"
+      ],
+      "role": "RechercheDecalageSortie type switch",
+      "sha256": "c50a91b3ab537271fe046ff32443a2dc48296e3410ccaec35b9113d081a38661"
+    },
+    {
+      "start": "0x420df4",
+      "entries": [
+        "0x4210f7",
+        "0x4211ff",
+        "0x4211f2",
+        "0x4211ff",
+        "0x421219",
+        "0x4211ff",
+        "0x4211ff",
+        "0x4211ff",
+        "0x4211ff",
+        "0x4210ff",
+        "0x421226",
+        "0x421226",
+        "0x4210ff",
+        "0x4211ff",
+        "0x4211ff",
+        "0x4211ff",
+        "0x4211ff",
+        "0x42120c",
+        "0x4211ff",
+        "0x42120c",
+        "0x4211ff",
+        "0x42120c"
+      ],
+      "role": "Cleanup radius switch (same mapping as BatimentHabitable)",
+      "sha256": "ca374cf651a3700a3e7d75f245fdb7e538f2f207dcacdd529312c3ad28703e45"
+    }
+  ],
+  "committed_evidence": [
+    {
+      "path": "evidencias/limpeza-saida.json",
+      "sha256": "f22cc044c58fd2dbfa63777e9037b9a8f6265fcba81a447db67740b011e7f1ce"
+    },
+    {
+      "path": "evidencias/producao-limpa.json",
+      "sha256": "90a41c528ebc9466340e9a4631b73c5813d6434e77b6d6770602d30b84d57024"
+    },
+    {
+      "path": "evidencias/habitaveis.json",
+      "sha256": "a55129ba4e5e75f35c0887429ac3e478f6522973f8c1e2ad89cbf7706342611a"
+    },
+    {
+      "path": "evidencias/cauda-carga.json",
+      "sha256": "36063649da951d140d026698f0d29d87c8a77784ffc45738ade5f6c6afdac9ff"
+    },
+    {
+      "path": "../../relatorios/simbolos-originais.json",
+      "sha256": "7e1e63b5340bc771e4dd743008058e1e47cea79ec74e76c72a70904884f4595e"
+    }
+  ]
+}

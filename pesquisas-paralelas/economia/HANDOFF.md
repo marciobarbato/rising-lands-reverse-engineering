@@ -504,3 +504,28 @@ Delivered in `cauda_carga.py`; the full contract is in [ECONOMY.md](../../docs/E
 - `DemonteBatiment` refund query.
 - Natural production start (next sequence item 2) and the transport/work cycle (item 3).
 - Note for core: `0x49a070` holds per-owner, per-type counts of active structures (`BatimentInitCave`), not realizability flags. Only the name is misleading; no change is requested.
+
+## Stage 17 in progress: natural production start (not integrated)
+
+Authorized by the coordinator after Stage 16 was accepted. Only the original-byte inventory is done and committed: `capturar_producao_natural.py` and `evidencias/producao-natural.json`, with 10 intervals and 3 jump tables. Facts established from bytes:
+- **Starting production:** `InitRecruteTroupe 0x4283e2` is reached only from `ProcessInputGame 0x45f1a9` (player input) and `V_BatimentRecruteUnite 0x480749` (AI operation). Its only missing piece is `RechercheDecalageSortie 0x41d1d0`: core `CalculPosition`, then the radius-1 ring (cells 0..255) taking the first cell where `TerrainEnCollision(cell, 1)` is false (`(atributos[cell] & 1) != 0`), else the base cell.
+- **Dispatcher branch:** `0x426918` (structure types 1/2/13/16) is an inline copy of `BatimentEstHabiter`, then `CalculTroupe(AX)`. Entry contract: AI/runtime's (u16 index, return ignored).
+- **Empty-Bag cleanup after `0x42110c`, in order:**
+  1. `BatimentGetCase`.
+  2. Core `EteintTerrain 0x476e82(cell, R, owner)`, with R from table `0x420df4` (same mapping as `RAIOS`).
+  3. Deselection at `0x495be0`.
+  4. Owner byte `+4 = 200`.
+  5. Core `BatimentModifyMap 0x419e97(AX, 1)`.
+  6. Inline reset.
+  7. `iagUnitSendMessage(unit, 0x46)`, then `iagVilleSendMessage(building, 3)`.
+- **Structure-type table:** `BatimentLoadCaract 0x418c70` loads from INI only `+4`, `+0x0c`, `+0x0e` and the `NAME` at `+0x13` (`SANCTUAIRE`→`SANTUÁRIO`, `CAVE`→`ARMAZÉM`) and `[DIVERS]` globals. Production consumes the static `+0/+2/+0x12`.
+- **MONDE01 inputs:** player 0 has food 30 / stone 30. Type 5 costs 4 food with time 500. Every colonist's sound handle `+0x104` is `ffffffff`, so with camera 0 the first completed unit ends at the explicit pending-sound boundary.
+
+**Pending questions to core** (sent, no reply yet): a validated direct-call radius for `EteintTerrain`; a `BatimentModifyMap` provider; and whether economy may read `atributos & 1` for `TerrainEnCollision` inside `RechercheDecalageSortie`.
+
+**Next steps:**
+- Fixtures over MONDE01 post-load state, with declared synthetic selection, bonus, experience queue and viewport.
+- Native bench extending `BancadaProducaoLimpa` (entries `0x4283e2`, `0x41d1d0`, `0x4268d4`).
+- Original-only captures before translation.
+- `producao_natural.py` (`recherche_decalage_sortie`, `iniciar_recrutamento_no_mundo`, `ramo_producao_estrutura`, cleanup continuation gated on core).
+- Native comparisons, documentation, check and integration.
