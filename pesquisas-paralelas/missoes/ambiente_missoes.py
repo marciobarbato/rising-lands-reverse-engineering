@@ -11,3 +11,5 @@ for path in (ROOT / 'ferramentas', ROOT / 'pesquisas-paralelas/combate',
              ROOT.parent / 'source/python'):
     if str(path) not in sys.path:
         sys.path.insert(0, str(path))
+if str(ROOT) not in sys.path:
+    sys.path.insert(0,str(ROOT))

@@ -23,6 +23,7 @@ def main():
         from test_carga_estruturas import DiferencialEstruturas
         from test_nome_missao import DiferencialNome
         from test_auxiliares import DiferencialAuxiliares
+        from test_terreno_unidades import DiferencialTerrenoUnidades
         native = DiferencialCarga.native
         prelude = DiferencialCabecalho.native
         tables = DiferencialCondicoes.native
@@ -30,12 +31,13 @@ def main():
         structures = DiferencialEstruturas.native
         names = DiferencialNome.native
         auxiliaries = DiferencialAuxiliares.native
+        placement = DiferencialTerrenoUnidades.native
         report = dict(tests=result.testsRun, skipped=len(result.skipped), errors=len(result.errors),
                       failures=len(result.failures), unit_bounded_segments=native.execucoes,
                       unit_native_fixtures=native.loads, unit_native_returns=native.returned,
                       expected_modifier_checkpoints=native.dependency_stops,
                       original_sha256='6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb',
-                      scope='Separate filename, prelude, indexed structure/unit, initial auxiliary and condition/objective paths; successful file I/O supplied. Native bodies unpatched; inherited state/player/bonus tables are explicit synthetic inputs. No extraction, AI, condition or mission execution.',
+                      scope='Separate filename, prelude, indexed structure/unit, initial auxiliary, condition/objective and unit placement-prefix paths; successful file I/O supplied. Native bodies unpatched; inherited physical/player/bonus tables are explicit synthetic inputs. MONDE01 placement stops at the actual radius10 dependency. No extraction, AI, condition or mission execution.',
                       native_faults=0 if not result.errors else 'see errors; not classified',
                       real_mission_runtime_tested=False,
                       prelude_native_calls=prelude.calls, prelude_bounded_segments=prelude.execucoes,
@@ -56,9 +58,17 @@ def main():
                       filename_expected_query_stops=names.dependency_stops,
                       auxiliary_native_caller_fixtures=auxiliaries.calls,
                       auxiliary_bounded_segments=auxiliaries.execucoes,
-                      auxiliary_stop_before_ghost_loader=True)
+                      auxiliary_stop_before_ghost_loader=True,
+                      placement_prefix_native_fixtures=placement.prefixes,
+                      placement_prefix_completed_to_structure_boundary=placement.prefix_returns,
+                      placement_prefix_expected_dependency_stops=placement.prefix_dependency_stops,
+                      placement_prefix_bounded_segments=placement.prefix_segments,
+                      placement_fixture_unit_load_entries=placement.loads,
+                      placement_fixture_unit_load_segments=placement.unit_load_segments,
+                      placement_preserved_minimap_resumes=placement.retomadas_minimapa,
+                      placement_stop_before_structures='0x46c16d')
         (OWNED/'validacao').mkdir(exist_ok=True)
-        (OWNED/'validacao/stage7-suite-x86.json').write_text(json.dumps(report, indent=2)+'\n')
+        (OWNED/'validacao/stage8-suite-x86.json').write_text(json.dumps(report, indent=2)+'\n')
         print(json.dumps(report, indent=2))
     return 0 if result.wasSuccessful() else 1
 

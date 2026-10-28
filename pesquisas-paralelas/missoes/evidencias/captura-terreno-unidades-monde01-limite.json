@@ -1,0 +1,195 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "name": "MONDE01",
+  "unit_index": 15,
+  "checkpoint": "0x457019",
+  "output": {
+    "unit_pool_sha256": "4bd9168b0a8ea6b244130b767830d7c09b7da5d3d3d5950fe3390c2ccd8661a4",
+    "physical_sha256": {
+      "atributos": "f4e996263e169953befcbdc36273661c60c9cdf89bd2a13917410a8d22fc44ba",
+      "regioes": "c2ba9226dc98fcfe0e99a14612857454ad7238b730a92624ea92448c9df91a53",
+      "tiles": "8251b2d21bdce6eebee8980c1bcd0c8b74b2af107af6ae86be2e3e70ac2e66ab",
+      "mini_final": "f1de056857ffdce8da654773f2145fe1883cad08e326879dcdeec1d542aa5d02",
+      "mini_unidades": "d2f9ecd2e12a3fdb60edc893979a98a5d2630102f4d395f7b2a1e4c01229d5a1",
+      "mini_estruturas": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+      "descoberto": "5f48a83b9379198fae64254cf98469be4f42dde60db4cc6b9474b36af0f94bad",
+      "luz_bordas": "7fa86b1ee69816ca9315ff2d5db121f7dcc5155817b17905c1818db39fa016ef",
+      "contagem_luz": "50504bceb63020a0385e4985cc9c1a6d302cc6251c5b02e62f34e1c970255f90",
+      "donos_objetos": "d95bd7b0170042e6cabe8eac184e995b4b91eab71532e8f833ac3604af7a2d8d"
+    },
+    "selection_sha256": "414db27d0dd7604aaeb268e514dcc594c078cde7c28b347f952e44633724b373",
+    "search": [
+      7,
+      1,
+      1,
+      305419896,
+      77
+    ],
+    "parent_calls": [
+      [
+        "exists",
+        0
+      ],
+      [
+        "visible",
+        0
+      ],
+      [
+        "place",
+        0
+      ],
+      [
+        "exists",
+        1
+      ],
+      [
+        "visible",
+        1
+      ],
+      [
+        "place",
+        1
+      ],
+      [
+        "exists",
+        2
+      ],
+      [
+        "visible",
+        2
+      ],
+      [
+        "place",
+        2
+      ],
+      [
+        "exists",
+        3
+      ],
+      [
+        "visible",
+        3
+      ],
+      [
+        "exists",
+        4
+      ],
+      [
+        "visible",
+        4
+      ],
+      [
+        "exists",
+        5
+      ],
+      [
+        "visible",
+        5
+      ],
+      [
+        "exists",
+        6
+      ],
+      [
+        "visible",
+        6
+      ],
+      [
+        "exists",
+        7
+      ],
+      [
+        "visible",
+        7
+      ],
+      [
+        "exists",
+        8
+      ],
+      [
+        "visible",
+        8
+      ],
+      [
+        "exists",
+        9
+      ],
+      [
+        "visible",
+        9
+      ],
+      [
+        "exists",
+        10
+      ],
+      [
+        "visible",
+        10
+      ],
+      [
+        "exists",
+        11
+      ],
+      [
+        "visible",
+        11
+      ],
+      [
+        "place",
+        11
+      ],
+      [
+        "exists",
+        12
+      ],
+      [
+        "visible",
+        12
+      ],
+      [
+        "place",
+        12
+      ],
+      [
+        "exists",
+        13
+      ],
+      [
+        "visible",
+        13
+      ],
+      [
+        "place",
+        13
+      ],
+      [
+        "exists",
+        14
+      ],
+      [
+        "visible",
+        14
+      ],
+      [
+        "place",
+        14
+      ],
+      [
+        "exists",
+        15
+      ],
+      [
+        "visible",
+        15
+      ],
+      [
+        "place",
+        15
+      ]
+    ],
+    "physical_effect_count": 971,
+    "physical_effect_sha256": "abf4c736895a26266ea5bf17ea60f000f52467a79939d8bac0e4ab443b383e35"
+  },
+  "bounded_segments": 82,
+  "scope": "Actual MONDE01 unit stream, synthetic inherited physical state; stop before radius10 discovery CALL for unit15, after its collision and visibility stores. Earlier seven insertions retained; no replay or wider provider claim."
+}
