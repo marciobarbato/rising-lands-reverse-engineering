@@ -33,6 +33,8 @@ Attack substate 0 prepares, aims, and waits for readiness; 1 animates and emits 
 
 The origin of `+0x8A=2/3` remains unproven: direct writes found by the audit use 0/1, and none of the 2,604 records in 38 ETA maps contain 2/3. Loaders can preserve externally supplied values; this neither proves those phases impossible nor licenses inventing their producer. The audit also tracks `+0x79`, `+0x7A`, and `+0x8B`.
 
+Type-4 initialization has an important provider boundary: `caracterizar_tipo` calls modifier 12 before writing `+0x7A=5`, then stores `+0xDA=(modifier+10)&255`. Original call `0x457845`, frame store `0x45784C`, amount store `0x457850` establish that order. A failed modifier leaves the inherited frame intact and the earlier common `+0xDA=1` intact. The corrected order also applies through `definir_tipo` and mission postload, including writable memoryviews of the live table. Owners 4/200 bypass the Python modifier callback as before. The [focused reference report](../pesquisas-paralelas/combate/validacao-ordem-tipo4-emulada.json) records 108 expected modifier-entry stops and 18 successful original returns; no phase transitions or other type behavior were added.
+
 The projectile pool and dispatcher preserve fixed-width arithmetic, allocation behavior, line increments, creation/arrival order, expiration, and RNG consumption. Type 30's circular effects and type 33's old-target child/new-target damage behavior require their own paths. `Calcul` processes the live pool in 30 passes; a snapshot iteration can change newly allocated record behavior.
 
 Damage distribution produces requests and invokes declared callbacks. Building, unit, magic, sound, message, and navigation effects must remain explicit. Original effect-edge conditions are not automatically interchangeable with linear-motion bounds. Tests using synthetic 1×1/3×3 building geometry do not establish all real building footprints.
@@ -102,6 +104,7 @@ python3 -B pesquisas-paralelas/combate/rastrear_consumo_dano.py
 python3 -B pesquisas-paralelas/combate/validar_consumo_dano.py
 python3 -B pesquisas-paralelas/combate/validar_consumo_dano.py --emular
 python3 -B pesquisas-paralelas/combate/validar_impacto_unidades.py --emular
+python3 -B pesquisas-paralelas/combate/validar_ordem_tipo4.py --emular
 python3 -B scripts/check.py --domain combat
 ```
 
