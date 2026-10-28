@@ -26,7 +26,7 @@ class ContratosDanoModo8(unittest.TestCase):
         c, calls = damage_tests.local(us, rows)
         with self.assertRaisesRegex(ValueError, 'row 26'):
             c.infligir(1, 8, 0)
-        for mode in (0, 2, 3, 5, 6, 7, 255):
+        for mode in (0, 2, 5, 6, 7, 255):
             with self.assertRaises(NotImplementedError):
                 c.infligir(1, mode, 0)
         self.assertEqual(calls, [])

@@ -1,0 +1,27 @@
+{
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "ranges": [
+    {
+      "name": "TypeBatimentGetDegat_selector_bodies",
+      "start": "0x418b42",
+      "end_exclusive": "0x418b97",
+      "sha256_bytes": "a7bece3fb77cf2a1bd94cd29cffb13fcb0b566eaf8039755f0f889f9dad0d578",
+      "file": "dano-modo3-00418b42.asm"
+    },
+    {
+      "name": "BatimentGetPlayer",
+      "start": "0x41a08c",
+      "end_exclusive": "0x41a0ab",
+      "sha256_bytes": "73c7960bdd0b83a8016cc9f7097a635079ae215bfcd10f91c37badd7e6c90932",
+      "file": "dano-modo3-0041a08c.asm"
+    },
+    {
+      "name": "BatimentGetType",
+      "start": "0x41a4f4",
+      "end_exclusive": "0x41a513",
+      "sha256_bytes": "b3f55e7d1ddbe9eb0c88c8042cc80aa415dd5b8f280b6c018978cbe182cf7584",
+      "file": "dano-modo3-0041a4f4.asm"
+    }
+  ],
+  "scope": "Mode3 source getters and damage selector1; full EAX of record getters retains address bits, caller consumes AL"
+}

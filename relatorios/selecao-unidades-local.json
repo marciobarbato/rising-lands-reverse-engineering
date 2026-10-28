@@ -1,0 +1,20 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 5,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_selecao_unidades.DiferencialSelecaoUnidades.test_every_count_low_byte_and_arbitrary_preserved_list_contents",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_selecao_unidades.DiferencialSelecaoUnidades.test_full_word_counts_and_live_selected_flags_are_unconsulted",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "scope": "Complete SelectionInit; no unit scan, deselection or mission orchestration."
+}
