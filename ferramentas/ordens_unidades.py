@@ -97,6 +97,14 @@ class MundoUnidades:
         from ciclo_unidades import resetar_todas_unidades
         return resetar_todas_unidades(self)
 
+    def existe_unidade(self,indice):
+        from consultas_unidades import existe_unidade
+        return existe_unidade(self,indice)
+
+    def visibilidade_unidade(self,indice):
+        from consultas_unidades import visibilidade_unidade
+        return visibilidade_unidade(self,indice)
+
     @staticmethod
     def _indice(indice):
         indice &= 65535
