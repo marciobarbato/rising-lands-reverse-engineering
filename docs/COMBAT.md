@@ -20,6 +20,7 @@ Owner: combat. Source and tests live in `pesquisas-paralelas/combate/`. Shared d
 | `morte_dano.py` | Optional mode-1 lethal tail: local experience/life writes, child allocation and explicit level/lifecycle/sympathy requests |
 | `consumo_fisico.py` | Opt-in shared-pool connection from damage/death sequencing to Core's committed physical dying provider |
 | `alvos_impacto.py` | Read-only impact-victim selection with original ground/elevated tie rules, reusable as a unit-wrapper query |
+| `grade_impacto.py` | Read-only building-ID selection from the loaded region grid, preserving building-before-unit priority |
 | `proximidade_ataque.py` | Read-only radius-10 owner proximity query for the damage consumer, with explicit loaded grid inputs |
 
 Input units use raw 276-byte records. Callbacks must describe external world effects explicitly; receiving a resolved query or stopping at a dependency is a narrower claim than executing the complete caller. Whole-record/grid comparisons distinguish local copies from mutations of the live world.
@@ -99,6 +100,12 @@ Comparisons include all 220,800 unit bytes, all 5,600 projectile bytes, Core str
 
 ## Unit impact wrapper
 
+`encontrar_estrutura_impacto(grid,cell)` supplies original `ChercheIndiceBatiment` at `[0x41B54A,0x41B579)`. The explicit grid contains 65,536 little-endian u16 words (131,072 bytes), and cell truncates to u16. Bit 15 set returns `(word & 0x7FE0)>>5`; otherwise the full result is `0xFFFF`. No structure record, footprint, owner or activity is consulted. IDs 1000..1023 remain valid query outputs even though they exceed Core's 1000-record allocation. This query does not dereference them. Low five bits are ignored, and grid memory is unchanged.
+
+`ConsultaGradeImpacto(grid,outras=None)` handles only `ChercheIndiceBatiment(cell)` and delegates other queries unchanged, or raises without a provider. Compose `ConsultaAlvosImpacto(units, ConsultaGradeImpacto(grid, remaining_queries))` to compute both impact lookups. Grid views are read on each call without copying; callers construct/update the loaded grid. A flag-zero impact still takes the building stop before consulting any unit, including when both representations name an occupant. This provider does not implement the building damage branch.
+
+The [focused grid-lookup report](../pesquisas-paralelas/combate/validacao-grade-impacto-emulada.json) records **4,120 original-x86 executions**: 4,110 complete queries, five expected building stops, and five complete nonlethal projectile arrivals using computed building and unit lookups. Query coverage includes all 1024 encoded IDs with four low-bit patterns, nonbuilding tags and cell-width edges; full result EAX, preserved EDX and unchanged grid/unit bytes match. Connected impacts preserve building priority and last-ground-victim selection. Their other world queries/effects remain declared observed fixture inputs/requests.
+
 `ImpactoUnidades.infligir(cell, mode, attacker, direction, flag)` now reconstructs the **mode-1 unit branch** of `InfligeDegat` (`0x450874..0x4510DD`). Cell/attacker truncate to u16; mode/direction/flag to u8. Mode must be 1, attacker 0..799, the live table must have 800 records, and resolved unit types must be 0..25. `receber(name, args)` connects directly to `PoolProjeteis.efeito_externo` for `InfligeDegat`; other effect names stop explicitly. Supply the same live unit table, projectile pool and callable unit consumer, normally `ConsumidorDanoUnidade.infligir`.
 
 Queries/effects use `(name, arguments_tuple)`. Lookup is external: flag zero first queries `ChercheIndiceBatiment(cell:u16)` and a non-FFFF result raises `LimiteImpactoBatiment` at `0x4508AF`; nonzero flag skips that query. The unit query is `ChercheIndiceEnginCible(cell:u16, excluded:u16=FFFF, flag:u8)`. FFFF is an empty impact. Unit IDs outside 0..799 fail before record access. Queries may already have had effects when such a returned ID is rejected.
@@ -149,6 +156,7 @@ python3 -B pesquisas-paralelas/combate/validar_morte_dano.py --emular
 python3 -B pesquisas-paralelas/combate/validar_alvos_impacto.py --emular
 python3 -B pesquisas-paralelas/combate/validar_proximidade_ataque.py --emular
 python3 -B pesquisas-paralelas/combate/validar_consumo_fisico.py --emular
+python3 -B pesquisas-paralelas/combate/validar_grade_impacto.py --emular
 python3 -B scripts/check.py --domain combat
 ```
 
