@@ -154,10 +154,26 @@ Global gap closed: the previously external initialized mode-8 damage prefix now 
 
 Stage-10 domain gate passed **185 tests / 115 optional x86 skips**, no failures/errors and valid documentation links. Commit and required clean integration follow before the next bounded stage.
 
+Stage 10 integrated successfully: implementation/final feature `92d9fd6d4438eca922d06b89e9290c3f2b799657`, remote-main merge `7bb3f8d4ae70c6687b96edf6ac2279810d7b061e`. Common local suites passed: core 302/143 optional skips, combat 185/115, economy 316/142, graphics 115/0, workflow 3/0. The clean feature resumed with the helper and fast-forwarded to that main revision before stage 11.
+
+### Completed stage 11: mode-9 life-derived nonlethal consumer
+
+Original mode 9 dispatch reaches `[0x450494,0x4504C6)`: read current victim life u16, divide by 2, store the low u8 as raw damage, replace raw zero with 1, then enter the same common reduction/visibility/life tail. The byte truncation happens before the zero test and reduction; do not use an unbounded half-life value. Like mode 8, this prefix has no modifier 5/proximity/message/source-F7 contribution and does not initialize the later saved sympathy owner.
+
+Extend only `ConsumidorDanoUnidade` mode 9 through nonlethal return; retain existing record/type/callback domains and always stop at the original death entry for mode 9, including when a mode-1 lethal handler exists. Validate all raw-byte values at multiple u16 life wrap bands, life/protection/reduction boundaries, source types/ID aliases and visibility/audio handles, then rerun mode-8 and mode-1 regressions in a new report. `ImpactoUnidades` remains mode-1-only; mode-9 world callers, lethal semantics, game meaning and other uninitialized modes remain open.
+
+Implemented the bounded mode-9 prefix in the existing consumer, sharing its common tail and explicit `LimiteMorte.modo=9` boundary. The exact [mode-9 contract](../../docs/COMBAT.md#life-derived-damage-mode-9) preserves byte truncation before zero replacement and reduction. Native helper reuse adds a mode parameter with mode-8 defaults preserved; no historical report was overwritten.
+
+Fresh `python3 -B pesquisas-paralelas/combate/validar_dano_modo9.py --emular` passed **33 tests / 4,506 bounded original-x86 calls**, zero failures/errors/skips or limits: **2,396 new mode-9 calls** and **2,110 mode-8/mode-1 regression calls**. Mode-9 coverage checks every raw byte value with both life parities in four u16 life bands, reduction/protection/life edges, all source types against representative victim types, ID edges/aliasing and audio handles. Whole unit and unchanged loaded bonus buffers match; modifier 6 uses the committed economy provider, visibility is declared, and volume remains an observed external query. Reports: [reference](validacao-dano-modo9-emulada.json), [local](validacao-dano-modo9-local.json). Local focused run passed **33 tests / 19 optional x86 skips / 0 x86 calls**, no failures/errors.
+
+Global gap closed: the initialized life-derived mode-9 prefix can now reach a reconstructed original nonlethal return. Mode-8/9 lethal and world-caller semantics, the remaining damage modes, broad world providers, phase producers and real mission/runtime remain open. No undefined saved owner or game rule was supplied.
+
+The mode-9 breakdown is **2,359 complete consumers + 33 expected death-entry stops + 4 expected audio stops**. Stage-11 domain gate passed **191 tests / 119 optional x86 skips**, no failures/errors and valid documentation links. An imported test class initially duplicated discovery; changing that import to a module removed the duplicate without changing the explicit 33-test reference suite. Commit and required clean integration follow before the next bounded stage.
+
 | Subcomponent | Evidence / implemented state | Remaining work |
 |---|---|---|
 | Cell impact wrapper | Mode-1 unit branch and computed building/unit priority translated; computed selection in complete original occupied impacts | Concrete remaining world providers and building/other-mode branches; other modes remain separate |
-| Unit damage modes | Mode 1 and initialized mode-8 special-row nonlethal path translated; explicit mode-8 lethal stop | Other mode preparation, mode-8 caller/lethal domain; determine initialized versus undefined input domains |
+| Unit damage modes | Modes 1/8/9 initialized prefixes and common nonlethal tail translated; explicit mode-8/9 lethal stops | Other mode preparation, mode-8/9 caller/lethal domain; determine initialized versus undefined input domains |
 | Lethal effects | Default stop at `0x4506A1`; opt-in local tail now composes committed Core physical death over live views; 50 complete original consumer/projectile fixtures | Core-owned level and special physical effects, general sympathy/message/audio providers; broader complete lethal/world effects |
 | Attack phase producers | Existing field audit found direct writes 0/1; no 2/3 in 2,604 serialized ETA records | Trace indirect writes/callers without inventing `+0x8A=2/3` transitions |
 | World providers | Committed economy modifiers, computed building/unit selection and radius-10 proximity composed; Core physical death delegated over shared views | Loaded-state/grid initialization, core navigation/special lifecycle, level/message/diplomacy/audio bodies; real building geometry |
