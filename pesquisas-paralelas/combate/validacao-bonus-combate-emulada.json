@@ -1,0 +1,137 @@
+{
+  "success": true,
+  "tests": 27,
+  "failures": 0,
+  "errors": 0,
+  "skipped": [],
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "provider_implementation_commit": "b1eb0c06e3b016f9abc2d27f3a836f6c20abf2f9",
+  "bounded_x86_executions": 1304,
+  "per_test": [
+    {
+      "teste": "test_bonus_combate.ContratosBonusCombate.test_no_guessed_provider_or_undefined_selector",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_bonus_combate.ContratosBonusCombate.test_provider_widths_and_argument_permutation",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_bonus_combate.DiferencialBonusCombate.test_all_loaded_owners_and_types",
+      "execucoes_x86_delimitadas": 104
+    },
+    {
+      "teste": "test_bonus_combate.DiferencialBonusCombate.test_all_low_bytes_with_nonzero_high_bytes",
+      "execucoes_x86_delimitadas": 256
+    },
+    {
+      "teste": "test_bonus_combate.DiferencialBonusCombate.test_selector5_word_and_selector6_byte_boundaries",
+      "execucoes_x86_delimitadas": 90
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_audio_dependency_occurs_after_f9_write_before_life",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_callback_rereads_and_protected_zero_heals",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_death_preserves_life_and_prior_effects",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_mode_width_and_nonlethal_consumer",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_unsupported_and_missing_callbacks_fail_without_fabricated_damage",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_consumer_boundaries_and_all_valid_types",
+      "execucoes_x86_delimitadas": 676
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_id_edges_and_aliased_source",
+      "execucoes_x86_delimitadas": 8
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_projectile_to_occupied_consumer_checkpoint",
+      "execucoes_x86_delimitadas": 8
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_reads_after_synthetic_message_callback_mutation",
+      "execucoes_x86_delimitadas": 1
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_visible_existing_handle_and_audio_stops",
+      "execucoes_x86_delimitadas": 20
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_zero_protection_and_life_edges",
+      "execucoes_x86_delimitadas": 50
+    },
+    {
+      "teste": "test_impacto_unidades.ContratosImpactoUnidades.test_building_and_unsupported_mode_boundaries",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.ContratosImpactoUnidades.test_empty_lookup_and_flag_width",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.ContratosImpactoUnidades.test_missing_query_does_not_retire_parent",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_ai_and_neutral_prefix_consumer_boundary",
+      "execucoes_x86_delimitadas": 5
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_all_unit_types_flags_hit_pool_and_rng",
+      "execucoes_x86_delimitadas": 52
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_ally_effect_order_and_alert_counter_edges",
+      "execucoes_x86_delimitadas": 7
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_lookup_empty_filters_and_building_priority",
+      "execucoes_x86_delimitadas": 6
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_pool_saturation_still_consumes_hit_rng",
+      "execucoes_x86_delimitadas": 3
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_projectile_finishes_occupied_impact_and_parent_retirement",
+      "execucoes_x86_delimitadas": 5
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_refuge_evasion_and_special_attacker_stops",
+      "execucoes_x86_delimitadas": 7
+    },
+    {
+      "teste": "test_impacto_unidades.DiferencialImpactoUnidades.test_retaliation_tick_boundaries_and_provider_stops",
+      "execucoes_x86_delimitadas": 6
+    }
+  ],
+  "completed_real_provider_consumers": 450,
+  "expected_death_stops": 256,
+  "expected_consumer_audio_stops": 4,
+  "consumer_pipeline_checkpoints": 4,
+  "wrapper_dependency_stops": {
+    "0x4502f0": 4,
+    "0x445a36": 5,
+    "0x48aa79": 4,
+    "0x4508af": 1,
+    "0x4539f3": 2,
+    "0x4457d3": 5
+  },
+  "completed_wrapper_projectiles": 5,
+  "correction": "Reference fixture now writes selector5 u16 at+08 and selector6 u8 at+0a. Predecessor reports remain historical and unchanged.",
+  "scope": "450 complete native damage consumers composed with real committed economy queries, plus fresh damage/wrapper regressions with corrected loaded inputs",
+  "excluded": "Bonus loading/reset, unknown inherited-ECX selectors, death/AI/audio/navigation bodies, real mission/game runtime",
+  "diagnostics": []
+}
