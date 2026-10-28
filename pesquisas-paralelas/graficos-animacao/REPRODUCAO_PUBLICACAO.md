@@ -1,6 +1,6 @@
 # Publicação parcial no Git e recuperação local
 
-A revisão local atual é `entregas/2026-10-28-santuario-v4/`; o manifesto e
+A revisão local atual é `entregas/2026-10-28-objetos-v5/`; o manifesto e
 `SHA256SUMS` descrevem o pacote completo, incluindo os insumos locais.
 A revisão anterior `entregas/2026-10-27-soldado-v1/` permanece intacta; o hash
 de seu manifesto é `56d17ebe830036ac9e115549b640f994587590f61b7bcd650fecbf0f3eca5671`.
@@ -49,7 +49,7 @@ import hashlib, json, subprocess
 from verificar_manifesto import verificar
 
 raiz = Path.cwd().resolve()
-identificador = '2026-10-28-santuario-v4'
+identificador = '2026-10-28-objetos-v5'
 revisao = raiz / 'entregas' / identificador
 destino = raiz / ('recuperacao-' + identificador)
 destino.mkdir(exist_ok=False)
@@ -93,8 +93,11 @@ de dependências externas.
 ## Publicação Git autorizada
 
 O usuário autorizou commitar as continuações desta frente sem alterar o trabalho
-dos outros chats. A v4 usa uma lista explícita revisada, depois do congelamento,
-com as exclusões acima. Sem push. Staging/commit e hashes finais são registrados
+dos outros chats. A v5 usa uma lista explícita revisada, depois do congelamento,
+com as exclusões acima. Publicação na branch própria `codex/graficos-animacao`,
+criada de `3f5c84f12141d9c327a5256aa233ace77aa2035e`. O checkout privado fica
+dentro da pasta exclusiva, em `tmp/checkout-graficos/`; o checkout compartilhado
+continua na branch que já utilizava. Sem push. Staging/commit e hashes finais são registrados
 em `ESTADO.md`, fora das revisões congeladas.
 
 Não usar `git add` na pasta inteira. Preservar o índice e os arquivos das demais

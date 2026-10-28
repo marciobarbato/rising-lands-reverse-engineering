@@ -1,0 +1,70 @@
+{
+  "commit_predecessor": "b67215a3870d17a51b063cb9d82ea391c1852f56",
+  "commit_snapshot": "1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e",
+  "repositorio": "/Users/marcio/git/Rising Lands/engenharia-reversa",
+  "fontes_predecessoras": [
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/graficos.py",
+      "commit": "b67215a3870d17a51b063cb9d82ea391c1852f56",
+      "sha256": "80066cbc6093cb69f158828226304b8493bab3744753f32b8601df683ca0d3ae",
+      "bytes": 11368
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/bancada_x86.py",
+      "commit": "b67215a3870d17a51b063cb9d82ea391c1852f56",
+      "sha256": "725a5e5c3ad091fd1a332d0b85a90fd9c947eef12fc6e2c6aaca0e9a6f656612",
+      "bytes": 7261
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/composicao.py",
+      "commit": "b67215a3870d17a51b063cb9d82ea391c1852f56",
+      "sha256": "2532c0726422ab985859f6e87140aa376ce5b0da83fc27300875ecf4664b26f4",
+      "bytes": 6045
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/extrair_evidencias.py",
+      "commit": "b67215a3870d17a51b063cb9d82ea391c1852f56",
+      "sha256": "49ef37a9f9dc46c19faf704f76bf587dcc71d2e3c73288fececfccb7fd448947",
+      "bytes": 5088
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/gerar_artefatos.py",
+      "commit": "b67215a3870d17a51b063cb9d82ea391c1852f56",
+      "sha256": "93f090d3014fb6c4e13630d7db2c4d2f29ace96258496a2c098926b9f3d6421f",
+      "bytes": 7801
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/congelar.py",
+      "commit": "b67215a3870d17a51b063cb9d82ea391c1852f56",
+      "sha256": "6aa9c05ab62efc4dd7a4370411c1db86c28d9d1cf688560ff11929ccef9a1c1a",
+      "bytes": 3185
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/README.md",
+      "commit": "b67215a3870d17a51b063cb9d82ea391c1852f56",
+      "sha256": "29f688ca976867406bbbdc409b75aa08468942c36aaa1522c277e7129056af9e",
+      "bytes": 17480
+    },
+    {
+      "caminho": "pesquisas-paralelas/graficos-animacao/INTEGRACAO.md",
+      "commit": "b67215a3870d17a51b063cb9d82ea391c1852f56",
+      "sha256": "659d11ec6ef992cce4fa17891bf14a79455621fa70757e1540f8fccb1e8771e3",
+      "bytes": 11602
+    }
+  ],
+  "manifestos_insumos": [
+    {
+      "caminho": "fontes/manifesto.json",
+      "sha256": "e961e585a9f3823f505dd78f0e05789001a440efa646918142e29dd2993bc0a7"
+    },
+    {
+      "caminho": "snapshot/manifesto.json",
+      "sha256": "b1db3dd9498791386da48ba4a4e8976b0e27727ecb47a02e6cc836d4726225a4"
+    },
+    {
+      "caminho": "dependencias/manifesto.json",
+      "sha256": "c7b1de3a499f72d294f2e454011c16612affdd66d76d3917cc642ad5267779bd"
+    }
+  ],
+  "regra": "Leituras git show; nenhum módulo vivo de outra frente importado."
+}

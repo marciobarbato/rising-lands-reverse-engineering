@@ -1,15 +1,40 @@
-# Gráficos e animação — unidades e Santuário
+# Gráficos e animação — unidades, Santuário e objetos
 
 **Soldado, Fazendeiro, Mecânico, Construtor e Colono: parada e movimento
 mapeados e comparados com o x86 original.** São 1.152 associações e 512 quadros
 distintos, incluindo variantes de bolsa vazia/não vazia nos tipos 5/6/7.
 O adaptador e a demonstração funcionam sem Unicorn e sem executar o EXE.
 
-Revisão atual: `entregas/2026-10-28-santuario-v4/`. As revisões anteriores
+Revisão atual: `entregas/2026-10-28-objetos-v5/`. As revisões anteriores
 permanecem intactas. Cada pasta de revisão contém
 seu próprio `MANIFESTO.json` e `SHA256SUMS`. Não editar uma revisão publicada.
 
-## Avanços da v4
+## Avanços da v5
+
+**47 códigos de objetos ligados a 156 quadros originais**, em 344 associações:
+árvores/grupos (1..11), vegetação baixa (12..22) e detalhes do solo (28..52).
+Os nomes descrevem aparência; os IDs, âncoras, fases e operações foram comparados
+com o x86. A cobertura alcança **470 dos 486 objetos** serializados na missão 1;
+os 16 restantes, códigos 66/67, continuam sem associação.
+
+- [Demonstração independente dos objetos](artefatos/demo-objetos.html): fases,
+  iluminação, dois passes, sombras, âncora e cálculo explícito do avanço.
+- [Atlas de 156 CMPs](artefatos/atlas-objetos.png) e
+  [47 objetos claros/escuros](artefatos/objetos-contato.png).
+- [344 associações JSON](artefatos/associacoes-objetos.json),
+  [CSV](artefatos/associacoes-objetos.csv) e
+  [registros ETA](artefatos/exemplos-eta-objetos.json).
+- **63 testes Python**; **6.442 execuções x86** delimitadas; **193 superfícies
+  idênticas**. A página confere 160 planos e 102 buffers contra Python.
+
+As árvores desenham corpo e depois sombra, intercalados nos grupos. Avançam
+somente sob condições do relógio A e de uma tabela aleatória compartilhada;
+a API exige tabela e cursor, sem inventar cadência em segundos. Descoberta e
+iluminação são entradas explícitas. O carregador ETA completo e a ordenação
+global da cena continuam em aberto. [Continuidade v5](CONTINUIDADE_V5.md)
+detalha evidências e limites; [INTEGRACAO](INTEGRACAO.md) inclui o novo adaptador.
+
+## Histórico — avanços da v4
 
 **Santuário tipo 2: terreno 6×5 e fachada de sete camadas validados.**
 A missão 1 foi ligada ao tipo, à célula que dispara o desenho e aos quadros
@@ -79,7 +104,7 @@ Consulte [Continuidade v3](CONTINUIDADE_V3.md) para evidências e contratos pend
 ```sh
 python3 -B graficos.py --tipo 0 --estado parado --direcao 1
 python3 -B graficos.py --tipo 7 --estado parado --direcao 9 --bolsa-u16 256
-python3 -B -m unittest -v test_graficos test_trabalhadores test_composicao test_construcoes
+python3 -B -m unittest -v test_graficos test_trabalhadores test_composicao test_construcoes test_objetos
 ```
 
 Os comandos acima são somente leitura, inclusive dentro da entrega congelada.
@@ -93,7 +118,8 @@ Snapshot: **`1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e`**. Foram copiados 942 arq
 commitados de leitores, testes, relatórios, documentação e evidências, excluindo
 as pesquisas paralelas. `snapshot/manifesto.json` registra cada caminho e SHA-256.
 Nenhuma importação usa os módulos do checkout em edição por outros chats.
-A v4 parte do commit próprio `b67215a3870d17a51b063cb9d82ea391c1852f56`,
+A v5 parte do commit próprio `46e826c7c112a2ddda4376d8587500cc7e742f68`,
+registrado em `evidencias/proveniencia-v5.json`. A v4 parte do commit próprio `b67215a3870d17a51b063cb9d82ea391c1852f56`,
 registrado em `evidencias/proveniencia-v4.json`. A v3 parte do commit próprio `0c76b34a017c185ab24344137a1cb52266b599d2`,
 registrado em `evidencias/proveniencia-v3.json`. O desenvolvimento v2 partiu do commit próprio
 `e531dbbdbe650ae2cbdeab03567981d2d8cd15bd`; os arquivos predecessores e hashes
@@ -291,6 +317,8 @@ deltas de direção, âncoras,
 deslocamentos, transparência e blitter básico com recorte; na v3, paleta inicial,
 despacho, tabela de sombra com parâmetros explícitos e composição sombra/corpo.
 Na v4: fachada do Santuário no contrato delimitado, terreno/ocupação, relógios e tabelas por jogador.
+Na v5: 47 códigos de objetos nos dois passes, visibilidade, âncoras, quatro fases
+das árvores e avanço condicionado com cursor compartilhado.
 
 **Confirmado apenas por leitura estática ou por arquivo:** encadeamento superior
 da parada, contexto global de inicialização da sombra, origem lógica da grade, identidade
@@ -303,7 +331,7 @@ transpor fórmulas para outros tipos, chamar fase 0 de parada, converter o perí
 em FPS, reaplicar a imagem de sombra como um PNG preto sem sua tabela.
 
 Ainda faltam: outros 21 tipos de unidade, outros 21 tipos de construção,
-modos adicionais do Santuário, árvores/pedras, camadas de objetos e variantes
+modos adicionais do Santuário, objetos 23..27 e 53..255, pós-processamento
 ETA, ordenação completa de desenho, efeitos, estado global da sombra, aplicação
 das tabelas de jogador às unidades, HUD, minimapa e seleção. Ataques permanecem com a frente de
 combate; esta pasta poderá apenas catalogar suas imagens futuramente.
@@ -325,11 +353,13 @@ python3 -B validar_x86.py       # opcional: precisa de Unicorn
 python3 -B validar_trabalhadores.py  # comparações adicionais, precisa de Unicorn
 python3 -B validar_construcoes.py  # comparação original do Santuário, precisa de Unicorn
 python3 -B gerar_construcoes.py    # atlas e HTML, somente Python
+python3 -B validar_objetos.py       # dois passes/animação, precisa de Unicorn
+python3 -B gerar_objetos.py         # atlas e HTML, somente Python
 python3 -B validar_python.py
 python3 -B congelar.py NOVO_IDENTIFICADOR
 ```
 
 Rodar geradores apenas na área editável, nunca em `entregas/`. Eles recusam a
-pasta congelada. A bancada usa Capstone 5.0.9/Unicorn 2.1.4 copiados localmente;
+pasta congelada. A bancada usa Capstone 5.0.7/Unicorn 2.1.4 copiados localmente;
 seus hashes e origens constam em `dependencias/manifesto.json`. As bibliotecas
 nativas incluídas são macOS arm64. Nenhum Ghidra foi aberto ou criado.

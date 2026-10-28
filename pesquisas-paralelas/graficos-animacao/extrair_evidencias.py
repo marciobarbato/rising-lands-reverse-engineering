@@ -65,7 +65,9 @@ def extrair():
                          0x41a4f4, 0x41a5b8, 0x41a6ec, 0x41a8e5, 0x41b54a,
                          0x41c4ac, 0x41ba49, 0x43e138, 0x4766d6, 0x476251,
                          0x47622e, 0x44724a, 0x45ff61, 0x45f850, 0x41068e,
-                         0x47500e, 0x46c2cf, 0x418af7)]
+                         0x47500e, 0x46c2cf, 0x418af7,
+                         0x410085,0x415acf,0x4772ec,0x4774fa,0x4766f0,
+                         0x47693a,0x476951,0x410a2c)]
     registros = []
     for a in selecionados:
         fim = {0x448088:0x44812b,0x41591f:0x415a57,0x407dd3:0x40f49c}.get(a, ordenados[ordenados.index(a)+1])
@@ -80,6 +82,13 @@ def extrair():
         arquivo = pasta / f'{a:08x}.asm'
         arquivo.write_text('\n'.join(linhas)+'\n')
         registros.append(dict(nome=nomes[a],inicio=hex(a),fim=hex(fim),sha256_bytes=hashlib.sha256(bruto).hexdigest(),arquivo=arquivo.name))
+    a,fim=0x475bf8,0x475bfe
+    bruto=imagem[a-base:fim-base];nome='EpilogoCompartilhadoNextAnimVeget (rótulo da pesquisa)'
+    arquivo=pasta/f'{a:08x}.asm'
+    linhas=[f'; {nome} [{a:#x}, {fim:#x})', f'; SHA-256 EXE: {HASH_EXE}']
+    linhas += [f'{i.address:08x}  {i.bytes.hex():22} {i.mnemonic:8} {i.op_str}'.rstrip() for i in cs.disasm(bruto,a)]
+    arquivo.write_text('\n'.join(linhas)+'\n')
+    registros.append(dict(nome=nome,inicio=hex(a),fim=hex(fim),sha256_bytes=hashlib.sha256(bruto).hexdigest(),arquivo=arquivo.name))
     (pasta / 'manifesto.json').write_text(json.dumps(dict(commit=COMMIT,exe_sha256=HASH_EXE,capstone=capstone.__version__,trechos=registros),indent=2)+'\n')
     tabelas=[]
     for a,n,papel in [(0x495bc8,6,'nomes dos bancos'),(0x410f64,26,'ancoragem por tipo'),
@@ -117,6 +126,13 @@ def extrair():
         faixas_jogador=[list(imagem[0x496d4c-base+i*8:0x496d4c-base+(i+1)*8]) for i in range(3)],
         ressalva='Identidade dos 22 tipos; associação gráfica validada somente para o Santuário no contrato v4.'),
         ensure_ascii=False,indent=2)+'\n')
+    chaves=imagem[0x415a58-base:0x415a58-base+24]
+    ponteiros=struct.unpack_from('<24I',imagem,0x415a6f-base)
+    tabela_objetos=dict(exe_sha256=HASH_EXE,chaves_endereco='0x415a58',chaves_hex=chaves.hex(),
+        ponteiros_endereco='0x415a6f',ponteiros=[hex(v) for v in ponteiros],
+        observacao='REPNE SCASB com ECX=24; o último byte examinado coincide com o primeiro byte da tabela de ponteiros. Última correspondência ou ausência usa índice 0.',
+        ramos={str(k):hex(ponteiros[next((23-j for j,v in enumerate(chaves) if v==k),0)]) for k in range(256)})
+    (pasta/'despacho-objetos.json').write_text(json.dumps(tabela_objetos,ensure_ascii=False,indent=2)+'\n')
     print('Trechos extraídos:', len(registros))
 
 
