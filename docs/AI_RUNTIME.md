@@ -31,8 +31,8 @@ These captures fix call order and gates. They are not whole-state oracles.
 | Area | Core keeps (`ferramentas/`) | AI/runtime implements (`pesquisas-paralelas/ia-runtime/`) | Others |
 |---|---|---|---|
 | Frame loop | `cadencia` counters, draw predicate, RNG step | `ProgIteration 0x47500e` order; the in-game paths of `CalculGame 0x42c868` (load entry for states 0/15, frame state 0x12, the network gate for state 0x10, gates 1–3, end-condition tail); `GameNextFrame 0x45d015` | Missions: `EvenementEnCours`, `TestFinDeMission`, the `MissionLoad`/`MissionLoadName` composition. Economy: `RechercheCalcul`, `PlayerInitAllianceCompteur`, `PlayerAttaqueCalculSympa`, `SetUpdateChamp`, `UpdateChamp`, `CalculMatiere`, `CalculCompteurMarche`, `CalculCompteurProposition`. Graphics: `NextAnim*`. Combat: `ProjectileCalcul`. Menu states and input are second wave |
-| Unit dispatcher | Bodies of states 2, 3, 4, 13, 16 and 17. Prelude primitives `SetDeplaceEngin 0x4457d3`, `SetDyingEngin 0x444938`, `Set/ResetEnginCollision`, `RetireEngin 0x457058`, `CalculFatigue 0x452cc8`/`EnginSetFatigue`, plus `DecouvreTerrain`/`IllumineTerrain`/`SetMiniMap` | The `CalculEnginNextEtape 0x456db5` loop and counters; `EnginNextEtape 0x45442c` prelude order (32-frame target scan, spell timer, fatigue branch) and the state switch at `0x4543c8`; inline state 6; `IATestUtilite 0x47fbfd` | Combat: states 1/24 (`CalculAttaqueEngin 0x451914`), `EnginTrouveCible`, `SetAttaqueEngin`. Economy: states 5, 7, 11, 15, 18, 19, 20, 21, 23, plus the prelude's HP bonus query `BonusGetValEngin` and `CreerSac` inside state 4 |
-| Structure dispatcher | Body of the type-12 gate branch; `BatimentDecouvre`/`BatimentIllumine` | The `CalculBatimentNextEtape 0x4281c7` loop and counters; the `BatimentNextEtape 0x4268d4` type switch at `0x426880` | Core: `DemonteBatiment 0x41effd` (structure state 3), with the refund arithmetic as an economy query. Economy: types 1–8 and 13–20 (`CalculTroupe 0x4259e6` and the other production bodies). Combat (proposed): turret types 10/11 |
+| Unit dispatcher | Bodies of states 2, 3, 4, 13, 16 and 17. Prelude primitives `SetDeplaceEngin 0x4457d3`, `SetDyingEngin 0x444938`, `Set/ResetEnginCollision`, `RetireEngin 0x457058`, `CalculFatigue 0x452cc8`/`EnginSetFatigue`, plus `DecouvreTerrain`/`IllumineTerrain`/`SetMiniMap` | The `CalculEnginNextEtape 0x456db5` loop and counters; `EnginNextEtape 0x45442c` prelude order (32-frame target scan, spell timer, fatigue branch) and the state switch at `0x4543c8`; inline state 6; `IATestUtilite 0x47fbfd` | Combat: the whole state-1/24 branch body `0x456886`..exit (target-mode switch, validity checks, `CalculAttaqueEngin 0x451914`), `EnginTrouveCible`, `SetAttaqueEngin`, state 22 `CalculPiege`. Economy: states 5, 7, 11, 15, 18, 19, 20, 21, 23, plus the prelude's bonus query `BonusGetValEngin` and `CreerSac` inside state 4 |
+| Structure dispatcher | Body of the type-12 gate branch; `BatimentDecouvre`/`BatimentIllumine` | The `CalculBatimentNextEtape 0x4281c7` loop and counters; the `BatimentNextEtape 0x4268d4` type switch at `0x426880` | Core: `DemonteBatiment 0x41effd` (structure state 3), with the refund arithmetic as an economy query. Economy: types 1–8 and 13–20 (`CalculTroupe 0x4259e6` and the other production bodies). Combat: turret types 10/11 |
 | AI players | `ia.atualizar_ia` (iaCalculPlayer order, verified below), the `chamar` protocol, `EstadoIA` | The callbacks `iagUnitNoyau 0x482936`, `iagVilleNoyau 0x48453c`, `iagRessNoyau 0x485183`, `iagWarNoyau 0x4866d7`, `AvanceMonstre 0x47b283`, `iagUnitDeleteAllGroups 0x483d95` | Missions: mission number and attack-table inputs |
 | Rule VM | `tarefas_ia.MaquinaTarefas` (task memory, lists, waiting, control flow, arithmetic), `simbolos_ia`, `ordens_unidades.OPERACOES`, `mensagens_chegada` | The world operations, registered through `MaquinaTarefas(operacoes=...)` and grouped below | Each operation calls its providers' committed queries and raises a named dependency where none exists |
 | Messages | Arrival/state-change profiles | `iagUnitSendMessage 0x4829c8`, `iagVilleSendMessage 0x484808`, the 12-entry behavior table `0x498e94` and the `iab*` handlers, `iagMessTestSendMessageEngin 0x483ed7` | Callers in other owners' bodies raise named dependencies until these are committed |
@@ -42,10 +42,10 @@ Agreement record:
 
 | Front | Status |
 |---|---|
-| Core | Confirmed 2026-10-28, with two clarifications. Sound, HP bonus, targeting and `CreerSac` stay with their owners and raise named dependencies inside core bodies. The 32-frame scan, spell timer and fatigue branches are sequenced by ai-runtime. Core also accepted unit state 13 and `DemonteBatiment`. Core will record the table in `docs/core/HANDOFF.md` in its Stage 14 commit |
+| Core | Confirmed 2026-10-28, with two clarifications. Sound, the bonus query, targeting and `CreerSac` stay with their owners and raise named dependencies inside core bodies. The 32-frame scan, spell timer and fatigue branches are sequenced by ai-runtime. Core also accepted unit state 13 and `DemonteBatiment`. Core will record the table in `docs/core/HANDOFF.md` in its Stage 14 commit |
 | Economy | Confirmed 2026-10-28 for every economy branch listed above, with the call shape eax = zero-extended u16 index and return ignored. Recorded in economy's Stage 15 commit |
-| Missions | Requested 2026-10-28; see `HANDOFF.md` for the current answer |
-| Combat | Requested 2026-10-28; see `HANDOFF.md` for the current answer |
+| Missions | Confirmed 2026-10-28. Missions keeps the `MissionLoad`/`MissionLoadName` composition and calls `reiniciar_ia` (IaReset) at `0x46c5cc`/`0x46c98e` without the unused AL. It keeps the event bodies, `TestFinDeMission`, `MissionGetNum` and the attack/monster tables. The oracle inherits IaAlloc's program-start state as declared input, and the M1 snapshot is taken at `0x42d22d`. Recorded in `pesquisas-paralelas/missoes/HANDOFF.md` (Stage 9, main `bb8c6d0`) |
+| Combat | Confirmed 2026-10-28. Combat owns the whole state-1/24 branch body (one entry with the u16 unit index), `EnginTrouveCible`, `SetAttaqueEngin`, `ProjectileCalcul`, and in principle turret types 10/11 and state 22. Recorded in combat's Stage 18 commit |
 
 ## Frame loop
 
@@ -92,7 +92,7 @@ The capture declares `MenuInit`'s store of DL into `0x4e2f78` (original store `0
    - Other types: nothing.
 5. `0x4e2480` = local player; `ProcessInputGame(0..3)`.
 6. **Gate 3 `0x42d3c0`:** state 0x12 continues. State 0x10 continues only in network games. Anything else exits at `0x42d4e2` (capture `gate3_state_left_during_input`).
-7. In order: `MessageBoxCalcul`, `GameNextFrame`, `CalculIconeAction`, `ProjectileCalcul 0x46fc0f`, `CalculEnginNextEtape 0x456db5`, `CalculBatimentNextEtape 0x4281c7`, `RechercheCalcul`, `PlayerInitAllianceCompteur`, `SetUpdateChamp`, `UpdateChamp`, `CalculMatiere`, `CalculCompteurMarche(local)`, `CalculCompteurProposition(local, 0)`, `NextAnimTerrain(u16 0x508720, u16 0x508722)`.
+7. In order: `MessageBoxCalcul`, `GameNextFrame`, `CalculIconeAction`, `ProjectileCalcul 0x46fc0f` (no register inputs; its Python entry takes the low byte of u32 `0x508f7c` as it stands here), `CalculEnginNextEtape 0x456db5`, `CalculBatimentNextEtape 0x4281c7`, `RechercheCalcul`, `PlayerInitAllianceCompteur`, `SetUpdateChamp`, `UpdateChamp`, `CalculMatiere`, `CalculCompteurMarche(local)`, `CalculCompteurProposition(local, 0)`, `NextAnimTerrain(u16 0x508720, u16 0x508722)`.
 8. Network games: `NextAnimVegetFullMap`. Single player: `NextAnimVeget(u16 0x508720, u16 0x508722)`. Then `PlayerAttaqueCalculSympa`.
 9. Network games exit here.
 10. `TestFinDeMission(local)` stores AL in `0x4e05a0`; zero exits.
@@ -124,6 +124,8 @@ The capture declares `MenuInit`'s store of DL into `0x4e2f78` (original store `0
      - `0x4e1928[owner]` += 1 when the owner is not 200 and the type is not 5.
    - `EnginNextEtape(eax=i)`, in every case (state 4 included).
 
+`MissionLoad`'s reset prefix stores 0xffff in `0x4e1a38`/`0x4e1a3a` (reported by missions), so their value before the first frame is not zero.
+
 The capture `unit_loop_monde01` uses MONDE01's 16 serialized owner/type/state bytes plus five synthetic units. It confirms the order, that the state-0 unit is skipped, that state 4 is dispatched without `IATestUtilite`, and the counter values.
 
 ### `EnginNextEtape 0x45442c..0x456c34` (shared tail `0x44f29d`)
@@ -131,8 +133,8 @@ The capture `unit_loop_monde01` uses MONDE01's 16 serialized owner/type/state by
 For a unit whose state is not 0 or 4, a common prelude runs first, in this order:
 1. Sound volume and handle (`EnginGetVolume`, `PlaySnd_PostVolume`, `PlaySnd_StopSound`/`PostSound`).
 2. Type-16 animation counter.
-3. HP regeneration: u16 `+0x102` grows by 1 up to the type maximum (u16 `0x4965de + type·50`) minus `BonusGetValEngin(owner, 3)`.
-4. Target scan, when `([0x508f7c] + unit) & 0x1f` = 0, the state is not 14, 1 or 19, the owner is not 200, and the type is in {0–3, 8, 11, 12, 15, 16, 18–25} (types 14/16 also need byte `+0xda` ≠ 0). It calls `EnginTrouveCible 0x453f74`. With a target and an AI owner (`PlayerGetType` = 2) it sends `iagUnitSendMessage(unit, dl=0x49, ebx=target)`. With a target, a non-AI owner and state 7 it calls `SetAttaqueEngin(unit, 1)`.
+3. Reload advance (`0x454530..0x454591`, identified by combat): u16 `+0x102` grows by 1 up to the type value (u16 `0x4965de + type·50`) minus `BonusGetValEngin(owner, 3)`.
+4. Target scan, when `([0x508f7c] + unit) & 0x1f` = 0, the state is not 14, 1 or 19, the owner is not 200, and the type is in {0–3, 8, 11, 12, 15, 16, 18–25} (types 14/16 also need byte `+0xda` ≠ 0). It calls `EnginTrouveCible 0x453f74`. With a target and an AI owner (`PlayerGetType` = 2) it sends `iagUnitSendMessage(unit, dl=0x49, ebx=target)`. With a target, a non-AI owner and state 7 it calls `SetAttaqueEngin(eax=unit, dl=1 (target mode: unit), bx=target)`.
 5. Spell timer (`GetBit(+0xdc, 2)`, `SortilegeGetTempsFin(2)`, u16 `+0x9a` countdown). On expiry it calls `SetDyingEngin` and exits.
 6. Fatigue branch for types 0–10 and 25: `CalculFatigue`, then message 0x4b for an AI owner or `EnginSetFatigue` otherwise.
 7. The type-17 branch (`0x4549c2`).
@@ -145,7 +147,7 @@ Static callees per state (`inventario.json` → `dispatch.engin_next_etape.state
 | State | Target | Instructions | Callees reached (static) | Branch owner |
 |---:|---|---:|---|---|
 | 0, 8, 9, 10, 12, 14 | `454ccd` | 0 | direct exit | — |
-| 1, 24 | `456886` | 106 | BatimentGetPlayer, BatimentEnDestruction, SetDeplaceEngin, CalculAttaqueEngin, PlayerGetType, iagUnitSendMessage. Substate `+0xb7` = 1 → inline `0x4567ce`, = 3 → inline `0x45673b`, otherwise `CalculAttaqueEngin` | combat |
+| 1, 24 | `456886` | 106 | BatimentGetPlayer, BatimentEnDestruction, SetDeplaceEngin, CalculAttaqueEngin, PlayerGetType, iagUnitSendMessage. Target mode `+0xb7` (1 = unit, 3 = structure, 5 = cell) selects the inline validity checks `0x4567ce`/`0x45673b`, otherwise `CalculAttaqueEngin`. An invalid target sends message 0x4a for an AI owner, else `SetDeplaceEngin(unit, u16 +0x7e)`, then `+0xb8` = 0xffff | combat (whole body) |
 | 2 | `4563da` | 88 | EnginEnArret, RotateEngin, DeplaceEngin | core |
 | 3 | `455a61` | 58 | RotateEngin | core |
 | 4 | `456ae5` | 165 | ResetEnginCollision, EnginRetire, RetireEngin, GetBit, DeselectionEngin, CreerSac | core (CreerSac: economy) |
@@ -160,7 +162,7 @@ Static callees per state (`inventario.json` → `dispatch.engin_next_etape.state
 | 19 | `4554db` | 868 | harvest: BatimentGetPlayer/GetType/EnDestruction/EnleveMatiere/Adjacent, EnginGetVolume, SetEnginCollision, SetDeplaceEngin, DeplaceEngin, EnginRestaureEtat, TestRessource, SetMiniMap, PlayerGetType, MineEndWork, TerrainGetSacType, TerrainRetireMatiere, TerrainEstDecouvert, DecouvreTerrain, IllumineTerrain, ChercheVegetLibre, iagUnitSendMessage, PlaySnd_PostSound | economy |
 | 20 | `455b28` | 158 | BatimentGetPlayer, BatimentEnDestruction, SetEnginCollision, SetDeplaceEngin, CalculDechargeCaveEngin, SetMiniMap, DecouvreTerrain, IllumineTerrain | economy |
 | 21 | `4558b4` | 16 | BatimentEnDestruction, SetDeplaceEngin, CalculGareBatiment | economy (physical lodging: core) |
-| 22 | `456520` | 4 | CalculPiege | open: proposed combat |
+| 22 | `456520` | 4 | CalculPiege | combat (in principle) |
 | 23 | `455fe2` | 297 | market/technology: BatimentGetPlayer/EnDestruction/GetCase/AjouteMatiere/EnleveMatiere/Adjacent, SetDeplaceEngin, DeplaceEngin, RetireEngin, RechercheTypeBatiment/EndTechnologie/GetBranche/GetNiveau, GetRessourceStock, MessageBoxSet, Random, MAJSympathie | economy |
 
 `CalculEnginStatic 0x453062` has no direct caller and no pointer anywhere in the image; it is not part of the dispatcher.
@@ -203,7 +205,7 @@ It switches on type byte `+8` − 1 through the 21-entry table `0x426880`. Types
 | 6 | `428095` | CalculTroupe, BagContient(Troupe) | economy |
 | 7 | `426d61` | BagContient(Troupe), RechercheAddScientifique | economy |
 | 8 | `426a08` | AnimPorteBatiment, ControleArrivageHangar, CalculTroupe, BagContient(Troupe), SetTableauHangar | economy |
-| 10, 11 | `426e43`, `427549` | turret: BatimentDecouvre, BatimentGetVolume, BatimentGetCase, TourelleTrouveEngin, TourelleTrouveBatiment, CibleTourelleValide, RechercheDecalageProjectile, EnginGetStart/GetCase/GetPlayer/EstVivant, Random, AngleCalcul, PlaySnd_PostSound | proposed combat |
+| 10, 11 | `426e43`, `427549` | turret: BatimentDecouvre, BatimentGetVolume, BatimentGetCase, TourelleTrouveEngin, TourelleTrouveBatiment, CibleTourelleValide, RechercheDecalageProjectile, EnginGetStart/GetCase/GetPlayer/EstVivant, Random, AngleCalcul, PlaySnd_PostSound | combat (in principle) |
 | 12 | `427bb7` | BaisseTouteHerse, RemonteTouteHerse, HerseSousCurseur, Chemin_ModifieZone, SetCollision, ResetCollision | core (gate) |
 | 15 | `427d5d` | CalculTroupe, BagContient(Troupe) | economy |
 | 17 | `427ed9` | CristalCherchePretre | economy |
@@ -269,6 +271,11 @@ The capture `ia_reset_empty_world` (player types 1, 2, 0, 0, 2; no live unit or 
 | `0x51ce44..0x51de68`, `0x520234..0x521234` | 4132, 4096 | 2/4 | iagWarReset |
 
 Every cell with its first and last value and its writer is in the capture. Stage 2 turns these into exact providers; a different player or world fixture writes more cells.
+
+`InitMissionMonstre 0x47af90` consumes the monster tables that missions loads (`carregar_entrada_monstros_missao`):
+- `0x50a9bc`: HumanOnly u8; dwords +4/+8/+12 ProbaCaveJoueur/ProbaCaveIA/ProbaEmbuscade; u16 count at +18; 100 × 12-byte records at +20.
+- `0x50af84`: 16 × 26 group type counts, then 16 group counts at +416.
+- The live `Random` state `0x497164`.
 
 **`IAResetAttaque 0x47c162` has no caller and no pointer in the image.** It is not part of `MissionLoad`.
 
