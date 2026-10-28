@@ -1,0 +1,147 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "calls": {
+    "MissionLoad": 2,
+    "MissionLoadName": 2
+  },
+  "bounded_segments": 22,
+  "inherited_pool": "0xa5 in every byte",
+  "scope": "Original inline copies only; explicit synthetic caller stack scratch; stop before unit loading. No remap, reset, allocation, insertion or mission execution.",
+  "cases": [
+    {
+      "name": "MONDE01",
+      "caller": "MissionLoad",
+      "source_sha256": "19237b8c3f3c0c76022276da229bec727b17603440823c43561aba159dd47015",
+      "offset": 327728,
+      "cursor": 327938,
+      "reads": [
+        [
+          327728,
+          2
+        ],
+        [
+          327730,
+          2
+        ],
+        [
+          327732,
+          2
+        ],
+        [
+          327734,
+          204
+        ]
+      ],
+      "output_pool_sha256": "6ebe1974d1d5215b0234a00dbef8f81fb7ccb08a3119563b3a9f84f37efe4664",
+      "changed": [
+        {
+          "index": 0,
+          "record_hex": "00000c0b000500000200580208001000000003000400050006000700080009000a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010100000000000000000000000000000000000000000000000000000000080000000000ffff01ff0000000000000000c800ffffffff0101000000000100ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000000ffff0000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+        }
+      ]
+    },
+    {
+      "name": "MONDE01_name",
+      "caller": "MissionLoadName",
+      "source_sha256": "19237b8c3f3c0c76022276da229bec727b17603440823c43561aba159dd47015",
+      "offset": 327728,
+      "cursor": 327938,
+      "reads": [
+        [
+          327728,
+          2
+        ],
+        [
+          327730,
+          2
+        ],
+        [
+          327732,
+          2
+        ],
+        [
+          327734,
+          204
+        ]
+      ],
+      "output_pool_sha256": "6ebe1974d1d5215b0234a00dbef8f81fb7ccb08a3119563b3a9f84f37efe4664",
+      "changed": [
+        {
+          "index": 0,
+          "record_hex": "00000c0b000500000200580208001000000003000400050006000700080009000a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010100000000000000000000000000000000000000000000000000000000080000000000ffff01ff0000000000000000c800ffffffff0101000000000100ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000000ffff0000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+        }
+      ]
+    },
+    {
+      "name": "sparse_repeated",
+      "caller": "MissionLoad",
+      "source_sha256": "46dd9cb606b807f746d42129e96e7959f82836538591218d9616e11ecc685219",
+      "offset": 0,
+      "cursor": 622,
+      "reads": [
+        [
+          0,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          6,
+          204
+        ],
+        [
+          210,
+          2
+        ],
+        [
+          212,
+          204
+        ],
+        [
+          416,
+          2
+        ],
+        [
+          418,
+          204
+        ]
+      ],
+      "output_pool_sha256": "40a6dfca695ca4151cc0f6c49a4b3af64886ab68927e9fecd7c612880af8dea2",
+      "changed": [
+        {
+          "index": 7,
+          "record_hex": "0718293a4b5c6d7e8fa0b1c2d3e4f5061728394a5b6c7d8e9fb0c1d2e3f405162738495a6b7c8d9eafc0d1e2f30415263748596a7b8c9daebfd0e1f2031425364758697a8b9cadbecfe0f102132435465768798a9bacbdcedff00112233445566778899aabbccddeef00112233445566778899aabbccddeeff102132435465768798a9bacbdcedfe0f2031425364758697a8b9cadbecfd0e1f30415263748596a7b8c9daebfc0d1e2f405162738495a6b7c8d9eafb0c1d2e3f5061728394a5b6c7d8e9fa0b1c2d3e4f607182a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+        },
+        {
+          "index": 999,
+          "record_hex": "e7f8091a2b3c4d5e6f8091a2b3c4d5e6f708192a3b4c5d6e7f90a1b2c3d4e5f60718293a4b5c6d7e8fa0b1c2d3e4f5061728394a5b6c7d8e9fb0c1d2e3f405162738495a6b7c8d9eafc0d1e2f30415263748596a7b8c9daebfd0e1f2031425364758697a8b9cadbecfe0f102132435465768798a9bacbdcedff00112233445566778899aabbccddeef00112233445566778899aabbccddeeff102132435465768798a9bacbdcedfe0f2031425364758697a8b9cadbecfd0e1f30415263748596a7b8c9daebfc0d1e2f405162a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "caller": "MissionLoadName",
+      "source_sha256": "a324e231e132206486e0a212d18e83ff92aab8f0f85d87b71ff6880223047fd0",
+      "offset": 0,
+      "cursor": 4,
+      "reads": [
+        [
+          0,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "output_pool_sha256": "b8461ea734796c5bd803b732cbe9d0912932b8648c9eaa14d82990bd9d34b9dd",
+      "changed": []
+    }
+  ]
+}
