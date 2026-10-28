@@ -1,0 +1,87 @@
+{
+  "success": true,
+  "tests": 11,
+  "failures": 0,
+  "errors": 0,
+  "skipped": [
+    {
+      "test": "test_consumo_dano.DiferencialConsumoDano.test_original_consumer_boundaries_and_all_valid_types",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_dano.DiferencialConsumoDano.test_original_id_edges_and_aliased_source",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_dano.DiferencialConsumoDano.test_original_projectile_to_occupied_consumer_checkpoint",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_dano.DiferencialConsumoDano.test_original_reads_after_synthetic_message_callback_mutation",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_dano.DiferencialConsumoDano.test_original_visible_existing_handle_and_audio_stops",
+      "reason": "Optional: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_consumo_dano.DiferencialConsumoDano.test_original_zero_protection_and_life_edges",
+      "reason": "Optional: RISING_EMULAR=1"
+    }
+  ],
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "bounded_x86_executions": 0,
+  "per_test": [
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_audio_dependency_occurs_after_f9_write_before_life",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_callback_rereads_and_protected_zero_heals",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_death_preserves_life_and_prior_effects",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_mode_width_and_nonlethal_consumer",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.ContratosConsumoDano.test_unsupported_and_missing_callbacks_fail_without_fabricated_damage",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_consumer_boundaries_and_all_valid_types",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_id_edges_and_aliased_source",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_projectile_to_occupied_consumer_checkpoint",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_reads_after_synthetic_message_callback_mutation",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_visible_existing_handle_and_audio_stops",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_consumo_dano.DiferencialConsumoDano.test_original_zero_protection_and_life_edges",
+      "execucoes_x86_delimitadas": 0
+    }
+  ],
+  "expected_death_stops": 0,
+  "expected_audio_stops": 0,
+  "pipeline_checkpoints": 0,
+  "scope": "Original mode 1 consumer; 800 whole unit records; callback order/arguments; live projectile buffer at consumer-return boundary",
+  "dependencies": "Non-AI message path executed natively; volume/proximity/modifiers/visibility execute natively; audio stops at 0x48aa79 and death at 0x4506a1, no instruction replacement",
+  "excluded": "Other damage modes, world wrapper reaction/diplomacy/presentation implementation, AI message bodies, audio backend, death, navigation, attack phase producers, whole game",
+  "diagnostics": []
+}
