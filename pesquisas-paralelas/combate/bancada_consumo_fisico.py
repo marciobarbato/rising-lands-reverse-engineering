@@ -4,7 +4,7 @@ import struct
 from consumo_dano import ConsumidorDanoUnidade  # establish committed Core path
 from bancada_morte_unidades import BancadaMorteUnidades
 from bancada_consumo_dano import BancadaConsumoDano
-from bancada_impacto_unidades import BancadaImpactoUnidades, WRAPPER
+from bancada_impacto_unidades import BancadaImpactoUnidades, WRAPPER, DEPENDENCIES
 from bancada_dano_modo3 import observar_fonte, INTERVALOS as SOURCE_INTERVALS
 from emulador import RETORNO, x86
 
@@ -20,6 +20,7 @@ class BancadaConsumoFisico(BancadaMorteUnidades):
         self.cpu.mem_write(0x5080f0, struct.pack('<I', PROJETEIS))
         self.cpu.mem_write(0x4e199c, struct.pack('<I', TIPOS))
         self.cpu.mem_write(TIPOS, struct.pack('<26I', *(MATRIZES+32*i for i in range(26))))
+        self.random_projectile, self.rand_pendentes, self.impactos_projetil = [], [], []
         self.cpu.hook_add(unicorn.UC_HOOK_CODE, self._observe)
 
     def preparar(self, mundo, danos, pool, modo4=None, fonte10=None, fonte11=None):
@@ -48,8 +49,22 @@ class BancadaConsumoFisico(BancadaMorteUnidades):
         self.eventos_wrapper, self.retornos_wrapper, self.eventos_morte = [], [], []
         self.on_message = None
         self.after_dying = False
+        self.random_projectile, self.rand_pendentes, self.impactos_projetil = [], [], []
 
     def _observe(self, cpu, at, size, data):
+        if self.rand_pendentes and at == self.rand_pendentes[-1][0]:
+            _, marker = self.rand_pendentes.pop()
+            self.random_projectile.append((marker, cpu.reg_read(x86.UC_X86_REG_EAX)))
+        if at in (0x4704dc, 0x450874):
+            sp = cpu.reg_read(x86.UC_X86_REG_ESP)
+            ret = struct.unpack('<I', cpu.mem_read(sp, 4))[0]
+            if at == 0x4704dc and 0x46eaf8 <= ret < 0x46fc0f:
+                self.rand_pendentes.append((ret, cpu.reg_read(x86.UC_X86_REG_EAX)))
+            if at == 0x450874 and 0x46e5fe <= ret < 0x46eaf8:
+                a, d, b, c = (cpu.reg_read(getattr(x86, 'UC_X86_REG_'+n))
+                              for n in ('EAX', 'EDX', 'EBX', 'ECX'))
+                self.impactos_projetil.append(('InfligeDegat',
+                    (a & 65535, d & 255, b & 65535, c & 255, cpu.mem_read(sp+4, 1)[0])))
         BancadaConsumoDano._observar_consumo(self, cpu, at, size, data)
         observar_fonte(self, cpu, at)
         BancadaImpactoUnidades._observar_wrapper(self, cpu, at, size, data)
@@ -82,3 +97,14 @@ class BancadaConsumoFisico(BancadaMorteUnidades):
 
     def ler_pool(self):
         return bytes(self.cpu.mem_read(PROJETEIS, 5600))
+
+    def impacto_modo4(self, cell, direction=29, flag=0, projectile=False):
+        stops = {RETORNO, 0x4508af, *DEPENDENCIES} - {0x475118, 0x46d8cb}
+        result = self.executar(0x46eaf8 if projectile else 0x450874, INTERVALOS,
+            dict(EAX=PROJETEIS+37*56) if projectile else
+            dict(EAX=cell, EDX=4, EBX=0, ECX=direction),
+            pilha=None if projectile else {4: struct.pack('<I', flag | 0xa5a50000)},
+            parada=stops, limite_instrucoes=500000)
+        if result['EIP'] in DEPENDENCIES:
+            self._observe(self.cpu, result['EIP'], 0, None)
+        return result
