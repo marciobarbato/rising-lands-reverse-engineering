@@ -1,0 +1,25 @@
+{
+  "x86_executed": false,
+  "nonzero_record": {
+    "state": 0,
+    "life": 0,
+    "experience": 0,
+    "selection_flag": 1,
+    "bag_reserved_hex": "a5a5a5a5a5a5"
+  },
+  "zero_state_record": {
+    "life": 222,
+    "experience": 99
+  },
+  "inherited_collision": 1,
+  "inherited_region": 16440,
+  "inherited_search": {
+    "unidade": 7,
+    "ocupada": 1,
+    "sucesso": 1,
+    "ponteiro_rota": 305419896,
+    "concluida": 77
+  },
+  "last_table_reserved_hex": "a5a5a5a5a5a5",
+  "scope": "Synthetic complete raw pool reset; physical/search/selection retained, no mission loading, remap, teardown or insertion."
+}
