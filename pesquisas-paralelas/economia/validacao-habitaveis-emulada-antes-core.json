@@ -1,0 +1,37 @@
+{
+  "scope": "BatimentEstHabiter 0x41a5b8, BatimentHabitable 0x41cc70 (MissionPlaceTerrain caller 0x46c195..0x46c1a7), BatimentSetTechnologie 0x41c76c and BatimentGetCase 0x41aee2 against Python on core physical state",
+  "mode": "original x86 and Python",
+  "tests": 20,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "core_vision_gates": {
+    "discovery": 10,
+    "light": 8,
+    "overridden_for_diagnostic": false
+  },
+  "original_entries": {
+    "predicado": 192,
+    "habitavel": 144,
+    "chamador": 17,
+    "tecnologia": 1024,
+    "celula": 132
+  },
+  "outcomes": {
+    "chamador@0x476851": 13,
+    "habitavel@0x476851": 88,
+    "habitavel@0x3000000": 53,
+    "chamador@0x46c1a7": 4,
+    "celula@0x3000000": 132,
+    "habitavel@0x476cb3": 2,
+    "predicado@0x3000000": 192,
+    "tecnologia@0x3000000": 1024,
+    "falha@0x41cd55": 1
+  },
+  "bounded_x86_executions": 1571,
+  "preserved_minimap_resumptions": 62,
+  "expected_original_division_faults": 1,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}

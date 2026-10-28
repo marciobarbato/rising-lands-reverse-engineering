@@ -47,8 +47,8 @@
     }
   ],
   "core_vision_gates": {
-    "discovery": 10,
-    "light": 8,
+    "discovery": 23,
+    "light": 20,
     "overridden_for_diagnostic": false
   },
   "original_entries": {},
