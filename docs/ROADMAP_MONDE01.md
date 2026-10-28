@@ -4,7 +4,7 @@ Coordinator architecture for the seven-front research round, written 2026-10-28 
 
 ## Goal and milestones
 
-The first major milestone is **loading MONDE01 exactly as the original does, running the complete mission, and comparing its behavior with the original executable**. MONDE01's PT-BR briefing (`WORLD/MONDE01.TXT`, read-only) sets the player goal: protect a cave and store 50 bags of food and 50 bags of stone in it, while the "Grupo dos Assassinos" raids the region. The map holds one structure (disk type byte +8 = 2, origin cell 2828) and 16 owner-0 units (disk type byte +1): three type 0, eight type 9 in state 14 at cell 3086, and single units of types 1, 7, 5, 5, 8. The hostile group is not serialized as units; it comes from the loaded attack table (`IALoadAttaqueIni`, 100×8-byte records) and the AI war/unit kernels. Whether structure type 2 is the cave named by the briefing must be confirmed by its owner from original tables, not inferred from the story.
+The first major milestone is **loading MONDE01 exactly as the original does, running the complete mission, and comparing its behavior with the original executable**. MONDE01's PT-BR briefing (`WORLD/MONDE01.TXT`, read-only) sets the player goal: protect a cave and store 50 bags of food and 50 bags of stone in it, while the "Grupo dos Assassinos" raids the region. The map holds one structure (disk type byte +8 = 2, origin cell 2828) and 16 owner-0 units (disk type byte +1): three type 0, eight type 9 in state 14 at cell 3086, and single units of types 1, 7, 5, 5, 8. The hostile group is not serialized as units; it comes from the loaded attack table (`IALoadAttaqueIni`, 100×8-byte records) and the AI war/unit kernels. Economy confirmed from original tables during this round that structure type 2 is **not** the cave. The type-name table read by `BatimentGetTypeName 0x418af7` (`0x495d8c + type*52 + 0x13`) names type 2 `SANCTUAIRE` (PT-BR "Santuário") and type 3 `CAVE` (PT-BR "Armazém"). `BatimentInitCave 0x419112` counts only type 3, so MONDE01 starts with no cave and a zero warehouse count. Its structure 0 (owner 0, state 5) holds the eight type-9 colonists. The missions front must establish from the objective/end-condition trace whether the objective requires building a type-3 cave; the story does not settle it.
 
 | Milestone | Definition | Acceptance evidence |
 |---|---|---|
@@ -45,7 +45,7 @@ Status keys: **done** = integrated on main with original comparison; **partial**
 | R6 Structures | `CalculBatimentNextEtape 0x4281c7` → gates (core, done), `CalculTroupe 0x4259e6` production (economy, to cleanup boundary), construction/repair/market/nova (economy) | partial | ai-runtime skeleton; economy/core branches |
 | R7 Projectiles | `ProjectileCalcul 0x46fc0f`, impacts, damage, death | done for supported modes (combat) | combat |
 | R8 End condition | `TestFinDeMission 0x458606` and its 11 resolved queries | open | missions |
-| R9 Audio | `PlaySnd_PostSound 0x48aa79`, `PlaySnd_Manage 0x48aaca`, HED/SND backend | open; explicit pending descriptors exist | second wave |
+| R9 Audio | `PlaySnd_PostSound 0x48aa79`, `PlaySnd_Manage 0x48aaca`, HED/SND backend | open; explicit pending descriptors exist | audio (second wave, anticipated in the macOS chat; [contract](AUDIO.md)) |
 | R10 Rendering | `AffGame 0x417698` frame orchestration, `InitCache 0x40fa38` | partial (graphics passes) | graphics |
 | R11 Save/load | `GameSave 0x46bd45`, `GameLoad 0x46b88d`, `Sauve*`/`Load*` family | open | second wave |
 
@@ -74,7 +74,7 @@ Unicorn JIT needs the ordinary macOS execution context; sandboxed SIGILL results
 | macOS Playable Build and Validation | `feat/macos-playable` / `worktrees/macos-playable` | `apps/macos-preview/`, `compilar-jogável`, `docs/MACOS_PLAYABLE.md` | Consume committed APIs at milestones only: M1 loaded-mission inspection, M2 running mission, M3 orders; record divergences |
 | Coordinator maintenance | `coordinator/maintenance` / `worktrees/maintenance` | every shared path | Infrastructure, shared manuals, estimate, inventory, dependency arbitration |
 
-`python3 scripts/workstream.py start <front>` and `python3 scripts/workstream.py integrate <front>` support all eight names (`core`, `combat`, `economy`, `graphics`, `missions`, `ai-runtime`, `macos`, `maintenance`). Integration always runs the common checks; missions and ai-runtime additionally run their native suites with `RISING_EMULAR=1`, and macos runs `compilar-jogável --development-ref HEAD`, all inside the detached candidate under the common lock.
+`python3 scripts/workstream.py start <front>` and `python3 scripts/workstream.py integrate <front>` support all nine names (`core`, `combat`, `economy`, `graphics`, `missions`, `ai-runtime`, `audio`, `macos`, `maintenance`). Integration always runs the common checks; missions, ai-runtime and audio additionally run their native suites with `RISING_EMULAR=1`, and macos runs `compilar-jogável --development-ref HEAD`, all inside the detached candidate under the common lock.
 
 ### Wave-1 stage sequence per front
 
@@ -168,7 +168,7 @@ The estimate stays approximately **50% (40–60%)** at the start of this round. 
 
 When a wave-1 front closes its mandate, the coordinator reallocates it rather than opening an eighth executor:
 
-- **Audio**: `PlaySnd_PostSound`/`PlaySnd_Manage`/`HandleSnd_*` queues and the HED/SND decoding backend, consuming the pending descriptors already published by core/economy/combat. Proposed owner: Graphics (presentation domain) after M2 frames, or Combat if it closes first. It is anticipated earlier only if a required sequence blocks on a sound insertion.
+- **Audio**: `PlaySnd_PostSound`/`PlaySnd_Manage`/`HandleSnd_*` queues and the HED/SND decoding backend, consuming the pending descriptors already published by core/economy/combat. On 2026-10-28 the human approved anticipating it in the macOS chat, which was idle until its M1 trigger. It is the `audio` front (`feat/re-audio`, `pesquisas-paralelas/audio/`, [contract](AUDIO.md)). No eighth executor exists: at the M1 trigger the chat returns to `macos` and audio pauses at its last integrated stage.
 - **Save/load**: `GameSave 0x46bd45`/`GameLoad 0x46b88d` and the `Sauve*`/`Load*` family over the M1 state. Proposed owner: Missions after M2.
 - **Input/menus/campaign**: `InputGame`, `MenuBefore`, `MissionNext`/`MissionReStart`, briefing display. Proposed owner: ai-runtime (dispatch) with macos (UI).
 
