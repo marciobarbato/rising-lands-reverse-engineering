@@ -38,7 +38,25 @@ def capturar_monde01():
     return report
 
 
+def capturar_continuacao_visao9():
+    """Same vision9 fixture, native discovery executed through the pre-structure checkpoint."""
+    from bancada_terreno_unidades import BancadaTerrenoUnidades
+    native=BancadaTerrenoUnidades()
+    args=list(preparar_caso('ordinary'))
+    types=bytearray(args[3]);struct.pack_into('<H',types,42,9);args[3]=types
+    native.carregar_caso(*args)
+    regs=native.prefixo()
+    report=dict(original_sha256=HASH_ESTUDADO,name='vision9',vision_sum=9,
+                checkpoint=hex(regs['EIP']),output=resumo_original(native),
+                unit_loader_entries=native.loads,placement_prefix_entries=native.prefixes,
+                bounded_segments=native.execucoes,preserved_cpu_minimap_resumes=native.retomadas_minimapa,
+                scope='Original-only continuation of the caller-aligned vision9 fixture: unpatched DecouvreTerrain/IllumineTerrain/SetMiniMap run natively to 0x46c16d. Explicit synthetic physical fixture; applies only when vision sum 9 is inside the published supported discovery domain. No structure insertion or mission execution.')
+    (OWNED/'evidencias/captura-terreno-unidades-visao9-continuacao.json').write_text(json.dumps(report,indent=2)+'\n')
+    return report
+
+
 if __name__=='__main__':
     print('Original placement boundaries:',len(capturar()['cases']))
     print('Original caller-aligned boundaries:',len(capturar(True)['cases']))
     print('MONDE01 dependency:',capturar_monde01()['checkpoint'])
+    print('Vision9 continuation:',capturar_continuacao_visao9()['checkpoint'])
