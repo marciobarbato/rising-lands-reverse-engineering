@@ -145,7 +145,7 @@ python3 -B pesquisas-paralelas/economia/validar.py --emular
 ```
 
 O último comando exige Unicorn e permissão para seu JIT neste ambiente. O
-exportador inclui 93 símbolos e cinco trechos auxiliares; ter ASM exportado
+exportador desta etapa incluía 93 símbolos e cinco trechos auxiliares; ter ASM exportado
 não significa que todos os ramos da rotina estejam traduzidos. Os relatórios
 de validação são gravados somente nesta pasta.
 
@@ -160,8 +160,10 @@ são sintéticos. Sincronizar os buffers com o estado real do jogo.
 No ramo da biblioteca, chamar `calcular_biblioteca(indice)` **em lugar de**
 chamar primeiro `avancar_sortilegio`: o método já inclui o avanço e duplicar
 as chamadas altera o progresso. Outros tipos continuam com seu próprio fluxo.
-O início da aprendizagem, a agenda de CalculTroupe, o uso dos sortilégios e os
-outros ramos de tecnologia ainda estão pendentes.
+O início da aprendizagem foi integrado na continuação
+[INICIO_APRENDIZAGEM.md](INICIO_APRENDIZAGEM.md), juntamente com o término
+explícito ApprentissageSortTerminer. A agenda de CalculTroupe, o uso dos
+sortilégios e os outros ramos de tecnologia ainda estão pendentes.
 
 Guardas adicionais Python: jogador 0..3 nos acessores/ordens, tipo 0..4 após
 truncar DX, índice dentro do buffer e as guardas de produção/Bag existentes.

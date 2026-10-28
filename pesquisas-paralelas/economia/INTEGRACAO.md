@@ -8,8 +8,8 @@ não criar caches nos módulos compartilhados lidos pela pesquisa.
 
 ## Como incorporar
 
-1. Revisar [README.md](README.md), os ASM e o relatório com 161 testes aprovados
-   e 46.274 execuções x86 (incluindo 88 exceções, três limites esperados e
+1. Revisar [README.md](README.md), os ASM e o relatório com 177 testes aprovados
+   e 48.123 execuções x86 (incluindo 104 exceções, três limites esperados e
    paradas em dependências/sufixos delimitados em cada documento).
    Executar `validar.py --emular` se houver Unicorn/JIT.
 2. Incorporar `economia.py` em `ferramentas/` ou manter a pesquisa como módulo
@@ -281,7 +281,38 @@ em [APRENDIZAGEM.md](APRENDIZAGEM.md).
 
 Somente o ramo tipo 6 de CalculTroupe e o ramo DL=6 de BatimentSetTechnologie
 foram traduzidos. Não substituir os despachos completos por esses métodos.
-O início da aprendizagem e a agenda de atualização continuam pendentes.
+A agenda de atualização continua pendente. O início está integrado abaixo.
+
+## Custos e início da aprendizagem
+
+`a.custos(tipo)` lê comida, pedra e peças da tabela de 46 bytes em Recrutamento.
+`a.iniciar(jogador, tipo)` executa InitApprentissage (`0x422d9f`), resolvendo
+`r.selecoes` para o jogador informado. Sincronizar essa seleção e os tipos de
+sortilégio com o jogo; os construtores não executam o carregador INI.
+
+```python
+a.iniciar(jogador_do_comando, tipo_sortilegio)  # AL=jogador, DL=tipo; retorna None.
+# Nas atualizações do tipo 6:
+a.calcular_biblioteca(indice_biblioteca)       # Já inclui avanço e conclusão.
+```
+
+O início só recusa por ocupação. Não acrescentar verificação de suficiência,
+de dono ou de tecnologia à tradução. Ela cobra comida e pedra do jogador
+do comando, ignora o custo de peças e recalcula após cada débito. Uma falha
+de recálculo pode deixar apenas comida debitada, sem iniciar a construção;
+preservar o estado parcial em vez de refazer ou desfazer a operação.
+
+`a.terminar_biblioteca(indice)` representa ApprentissageSortTerminer
+(`0x421250`) no domínio tipo 6 e não verifica o limiar: é término explícito.
+Para atualizações normais, manter `calcular_biblioteca`, que verifica tempo e
+progresso. O dono da construção recebe a disponibilidade, mesmo se diferir
+do jogador cobrado no início. Os casos inconsistentes foram comparados ao
+original, sem afirmar que a interface normal os gera.
+
+O contexto estático da interface e as diferenças nas verificações de custos
+estão em [INICIO_APRENDIZAGEM.md](INICIO_APRENDIZAGEM.md). Não usar o retorno
+None de `iniciar` como booleano nem interpretar as chamadas manuais dos testes
+como tradução da agenda ou da interface completa.
 
 ## Atualizações de documentação sugeridas, não realizadas
 
@@ -290,11 +321,11 @@ O início da aprendizagem e a agenda de atualização continuam pendentes.
 - ROTINAS.md: adicionar os acessores e mutações `0x467640..0x4679d0`.
 - CONTINUIDADE.md: marcar consultas, crédito/débito, recálculo do indicador,
   depósito, contagens, efeitos econômicos de propriedade, extração no terreno,
-  regeneração de campos, avanço de produção e conclusão da biblioteca como traduzidos;
+  regeneração de campos, avanço de produção e início/conclusão da biblioteca como traduzidos;
   conservar os demais chamadores completos,
   tecnologias, transporte, consumo e filas como pendências.
 - SIMBOLOS.md/IA.md: registrar os diferentes índices da IA e o retorno 1/-1.
-- EMULACAO.md/validação geral: integrar os 73 testes diferenciais sem somar
+- EMULACAO.md/validação geral: integrar os 80 testes diferenciais sem somar
   automaticamente as contagens desta pesquisa à suíte compartilhada.
 
 ## Próximas investigações de economia
@@ -309,7 +340,9 @@ O início da aprendizagem e a agenda de atualização continuam pendentes.
    conclusão de unidades/escalonamento e completar o fluxo das filas. O início econômico e
    as consultas estão em [RECRUTAMENTO.md](RECRUTAMENTO.md); o avanço já está em
    [PRODUCAO.md](PRODUCAO.md). A conclusão da biblioteca está em
-   [APRENDIZAGEM.md](APRENDIZAGEM.md); investigar seu início e demais ramos de tecnologia.
+   [APRENDIZAGEM.md](APRENDIZAGEM.md), e seu início em
+   [INICIO_APRENDIZAGEM.md](INICIO_APRENDIZAGEM.md). Investigar a agenda,
+   o carregador de configuração e os demais ramos de tecnologia.
    Não interpretar AL=1 dos helpers de avanço como produto concluído.
 4. Mercado e trocas em `0x466533..0x467640`: preços, propostas e transferências.
 5. Confirmar o significado de RMI, o quarto registro e o byte +7 em gameplay

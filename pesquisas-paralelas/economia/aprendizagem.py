@@ -1,4 +1,4 @@
-"""Conclusão da aprendizagem na biblioteca e listas de sortilégios.
+"""Custos, início e conclusão da aprendizagem e listas de sortilégios.
 
 CalculTroupe 0x4259e6: somente o ramo tipo 6. Os outros ramos, incluindo
 criação/saída/movimento de unidades, não são executados por esta API.
@@ -6,6 +6,7 @@ criação/saída/movimento de unidades, não são executados por esta API.
 import struct
 
 from producao import Producao
+from economia import Saldos
 from proprietarios import (PropriedadeConstrucoes, PASSO_BAG, PASSO_ORDENS_JOGADOR,
                            PASSO_PENDENCIAS_JOGADOR, inicializar_bag)
 
@@ -98,6 +99,63 @@ class Aprendizagem:
                  and self.propriedade.sortilegios[j * 5 + t] == 0)
         _lista_sortilegios(self.propriedade.pendencias, j * PASSO_PENDENCIAS_JOGADOR + 6 * PASSO_BAG, tipos)
 
+    def custos(self, tipo):
+        """SortilegeGetCoutApprentissage 0x4746fe: AL=tipo; words +4/+2/+6.
+
+        Retorna comida, pedra, peças (e quarto=0), na ordem dos ponteiros
+        EDX/EBX/ECX. A chamada original só grava dois bytes por saída.
+        """
+        tipo &= 255
+        if tipo >= 5:
+            raise ValueError('Sortilégio fora de 0..4 após truncar AL')
+        pedra, comida, pecas = struct.unpack_from('<3H', self.producao.recrutamento.tipos_sortilegios, tipo * 46 + 2)
+        return Saldos(comida, pedra, pecas)
+
+    def iniciar(self, jogador, tipo):
+        """InitApprentissage 0x422d9f: AL=jogador, DL=tipo; sem retorno semântico.
+
+        Resolve a construção selecionada e recusa apenas se +0x74 != 0.
+        Não verifica suficiência, dono, tipo da construção ou flags de pesquisa.
+        Debita comida e pedra, recalculando após cada uma; não debita peças.
+        Uma exceção de recálculo pode deixar somente o primeiro débito aplicado.
+        """
+        r = self.producao.recrutamento
+        jogador, indice = r._selecao(jogador)
+        o = r._offset(indice)
+        s = r.mundo.estruturas
+        if s[o + 0x74] != 0:
+            return
+        tipo &= 255
+        custos = self.custos(tipo)
+        r.mundo.retirar(jogador, 1, custos.comida)
+        r.mundo.retirar(jogador, 2, custos.pedra)
+        s[o + 0x74], s[o + 5], s[o + 0x7b] = 1, 4, tipo
+        struct.pack_into('<I', s, o + 0x8c, 1)
+
+    def terminar_biblioteca(self, indice):
+        """ApprentissageSortTerminer 0x421250, domínio tipo 6.
+
+        Conclui incondicionalmente, sem verificar flag, tempo ou progresso.
+        Outros tipos têm efeitos de tecnologia ainda não cobertos nesta API.
+        """
+        r = self.producao.recrutamento
+        o = r._offset(indice)
+        s = r.mundo.estruturas
+        if s[o + 8] != 6:
+            raise NotImplementedError('ApprentissageSortTerminer: somente o domínio tipo 6 foi traduzido')
+        self.liberar(s[o + 4], s[o + 0x7b])
+        self.atualizar_ordens(s[o + 4])
+        self.atualizar_pesquisas_biblioteca(s[o + 4])
+        struct.pack_into('<H', s, o + 0x78, 65535)
+        s[o + 0x7b] = 255
+        for campo in (0x7c, 0x7e, 0x80, 0x82):
+            struct.pack_into('<H', s, o + campo, 0)
+        struct.pack_into('<H', s, o + 0x86, 65535)
+        s[o + 0x74] = 0
+        struct.pack_into('<I', s, o + 0x8c, 0)
+        if s[o + 5] != 3:
+            s[o + 5] = 5
+
     def calcular_biblioteca(self, indice):
         """CalculTroupe 0x4259e6, ramo tipo 6 completo, incluindo conclusão.
 
@@ -118,17 +176,5 @@ class Aprendizagem:
         limite = r.tempo_sortilegio(tipo) * 100
         if struct.unpack_from('<I', s, o + 0x8c)[0] < limite:
             return
-        jogador = s[o + 4]
-        self.liberar(jogador, tipo)
-        self.atualizar_ordens(jogador)
-        self.atualizar_pesquisas_biblioteca(jogador)
-        # Corpo inline 0x426048..0x4260a5, alcançável aqui apenas com tipo 6.
-        struct.pack_into('<H', s, o + 0x78, 65535)
-        s[o + 0x7b] = 255
-        for campo in (0x7c, 0x7e, 0x80, 0x82):
-            struct.pack_into('<H', s, o + campo, 0)
-        struct.pack_into('<H', s, o + 0x86, 65535)
-        s[o + 0x74] = 0
-        struct.pack_into('<I', s, o + 0x8c, 0)
-        if s[o + 5] != 3:
-            s[o + 5] = 5
+        # O original tem esse corpo inline; a reutilização é apenas no Python.
+        self.terminar_biblioteca(indice)

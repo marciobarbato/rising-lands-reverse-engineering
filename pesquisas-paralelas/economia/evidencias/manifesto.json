@@ -19,6 +19,8 @@
     "0x0041f3ed": "BatimentGetCapacite",
     "0x00420ba5": "SortEnRecrutement",
     "0x00420bdf": "EnginEnRecrutement",
+    "0x00421250": "ApprentissageSortTerminer",
+    "0x00422d9f": "InitApprentissage",
     "0x00422fde": "StockPossible",
     "0x00423355": "BatimentCalculResource",
     "0x0042340f": "BatimentAjouteMatiere",
@@ -56,6 +58,7 @@
     "0x0046ab21": "LoadGameRessource",
     "0x0046ab33": "SauveRessource",
     "0x004704dc": "Random",
+    "0x004746fe": "SortilegeGetCoutApprentissage",
     "0x0047476a": "SortilegeGetTimeAprentissage",
     "0x00474958": "SortilegeEstRealisable",
     "0x00474974": "SortilegeSetRealisable",
@@ -117,6 +120,24 @@
     "0x0041db1d": {
       "nome": "epilogo_compartilhado_de_CalculTroupe",
       "fim_exclusivo": "0x0041db24"
+    },
+    "0x0042399a": {
+      "nome": "epilogo_compartilhado_de_InitApprentissage",
+      "fim_exclusivo": "0x004239a0"
+    }
+  },
+  "trechos_contexto": {
+    "0x0042bec6": {
+      "nome": "InputGame_custos_e_comando_de_aprendizagem",
+      "fim_exclusivo": "0x0042bf92"
+    },
+    "0x0045f246": {
+      "nome": "ProcessInputGame_despacho_de_InitApprentissage",
+      "fim_exclusivo": "0x0045f257"
+    },
+    "0x0045e1d6": {
+      "nome": "IconeFillContenu_teste_de_custos_de_aprendizagem",
+      "fim_exclusivo": "0x0045e210"
     }
   },
   "tipos_construcao_confirmados": [
@@ -1758,6 +1779,15 @@
       ]
     },
     {
+      "endereco": "0x00422dee",
+      "instrucao": "call",
+      "alvo": "0x004746fe",
+      "nome": "SortilegeGetCoutApprentissage",
+      "simbolo_anterior": [
+        "InitApprentissage"
+      ]
+    },
+    {
       "endereco": "0x00422e06",
       "instrucao": "call",
       "alvo": "0x0046792c",
@@ -3144,6 +3174,15 @@
       ]
     },
     {
+      "endereco": "0x0042bf0f",
+      "instrucao": "call",
+      "alvo": "0x004746fe",
+      "nome": "SortilegeGetCoutApprentissage",
+      "simbolo_anterior": [
+        "InputGame"
+      ]
+    },
+    {
       "endereco": "0x0042bf6b",
       "instrucao": "call",
       "alvo": "0x004676e5",
@@ -4305,6 +4344,15 @@
       ]
     },
     {
+      "endereco": "0x0045e1e4",
+      "instrucao": "call",
+      "alvo": "0x004746fe",
+      "nome": "SortilegeGetCoutApprentissage",
+      "simbolo_anterior": [
+        "IconeFillContenu"
+      ]
+    },
+    {
       "endereco": "0x0045e203",
       "instrucao": "call",
       "alvo": "0x004676e5",
@@ -4381,6 +4429,15 @@
       "instrucao": "call",
       "alvo": "0x0041dde0",
       "nome": "BatimentRetireColon",
+      "simbolo_anterior": [
+        "ProcessInputGame"
+      ]
+    },
+    {
+      "endereco": "0x0045f24d",
+      "instrucao": "call",
+      "alvo": "0x00422d9f",
+      "nome": "InitApprentissage",
       "simbolo_anterior": [
         "ProcessInputGame"
       ]

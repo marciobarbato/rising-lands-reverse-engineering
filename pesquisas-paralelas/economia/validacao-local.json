@@ -1,6 +1,6 @@
 {
   "modo": "Python sem emulação",
-  "testes": 161,
+  "testes": 177,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -157,6 +157,34 @@
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {
+      "teste": "test_16_excecoes_apos_primeiro_debito_preservam_estado_parcial (test_inicio_aprendizagem.DiferencialInicioAprendizagem)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_256_custos_u16_e_bytes_vizinhos_das_saidas (test_inicio_aprendizagem.DiferencialInicioAprendizagem)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_256_terminos_explicitos_sem_condicoes_de_progresso (test_inicio_aprendizagem.DiferencialInicioAprendizagem)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_40_chamadas_com_dono_diferente_do_jogador_cobrado (test_inicio_aprendizagem.DiferencialInicioAprendizagem)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_512_inicios_saldos_rmi_custos_capacidade_e_pilha_suja (test_inicio_aprendizagem.DiferencialInicioAprendizagem)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_512_tipos_de_construcao_livres_e_ocupados (test_inicio_aprendizagem.DiferencialInicioAprendizagem)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
+      "teste": "test_cinco_registros_do_exe_e_20_ciclos_completos (test_inicio_aprendizagem.DiferencialInicioAprendizagem)",
+      "motivo": "Emulação opcional: usar --emular"
+    },
+    {
       "teste": "test_16_limites_de_contagem_de_armazens_e_heliportos (test_init_cave.DiferencialInitCave)",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
@@ -307,7 +335,8 @@
     "DiferencialExtracao": 0,
     "DiferencialRecrutamento": 0,
     "DiferencialProducao": 0,
-    "DiferencialAprendizagem": 0
+    "DiferencialAprendizagem": 0,
+    "DiferencialInicioAprendizagem": 0
   },
   "excecoes_x86_esperadas": 0,
   "limites_x86_esperados": 0,

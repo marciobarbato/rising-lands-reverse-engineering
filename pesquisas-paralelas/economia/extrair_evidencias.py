@@ -46,6 +46,7 @@ NOMES = (
     'BatimentSetTechnologie', 'SortilegeEstRealisable', 'SortilegeSetRealisable',
     'SortilegeEstInvente', 'SortilegeSetInvention', 'SortilegeResetTechnologie',
     'SortilegeInitTechnologie',
+    'InitApprentissage', 'ApprentissageSortTerminer', 'SortilegeGetCoutApprentissage',
 )
 # O RET precede dados; não apresentá-los como instruções da função.
 FINS_CONFIRMES = {0x41aace: 0x41ab04, 0x4283e2: 0x428691, 0x478806: 0x478a01,
@@ -56,6 +57,12 @@ TRECHOS_AUXILIARES = {
     0x440d58: ('epilogo_compartilhado_de_BallonPrepareArrivee', 0x440d5e),
     0x423eb2: ('corpo_compartilhado_de_CalculStatusRecrute', 0x423f83),
     0x41db1d: ('epilogo_compartilhado_de_CalculTroupe', 0x41db24),
+    0x42399a: ('epilogo_compartilhado_de_InitApprentissage', 0x4239a0),
+}
+TRECHOS_CONTEXTO = {
+    0x42bec6: ('InputGame_custos_e_comando_de_aprendizagem', 0x42bf92),
+    0x45f246: ('ProcessInputGame_despacho_de_InitApprentissage', 0x45f257),
+    0x45e1d6: ('IconeFillContenu_teste_de_custos_de_aprendizagem', 0x45e210),
 }
 
 
@@ -79,8 +86,12 @@ def extrair():
     pasta.mkdir(exist_ok=True)
     exportacoes = dict(alvos)
     exportacoes.update({a: n for a, (n, _) in TRECHOS_AUXILIARES.items()})
+    exportacoes.update({a: n for a, (n, _) in TRECHOS_CONTEXTO.items()})
     for inicio, nome in exportacoes.items():
-        if inicio in TRECHOS_AUXILIARES:
+        if inicio in TRECHOS_CONTEXTO:
+            fim = TRECHOS_CONTEXTO[inicio][1]
+            criterio = 'trecho de contexto; não é função independente nem execução até RET'
+        elif inicio in TRECHOS_AUXILIARES:
             fim = TRECHOS_AUXILIARES[inicio][1]
             criterio = 'trecho auxiliar até RET; não é uma função independente'
         else:
@@ -118,6 +129,8 @@ def extrair():
                      rotinas={f'0x{a:08x}': n for a, n in alvos.items()},
                      trechos_auxiliares={f'0x{a:08x}': dict(nome=n, fim_exclusivo=f'0x{fim:08x}')
                                          for a, (n, fim) in TRECHOS_AUXILIARES.items()},
+                     trechos_contexto={f'0x{a:08x}': dict(nome=n, fim_exclusivo=f'0x{fim:08x}')
+                                       for a, (n, fim) in TRECHOS_CONTEXTO.items()},
                      tipos_construcao_confirmados=tipos,
                      referencias_diretas_candidatas=referencias)
     (pasta / 'manifesto.json').write_text(json.dumps(manifesto, ensure_ascii=False, indent=2) + '\n')
@@ -132,9 +145,14 @@ def extrair():
                     nome=imagem[0x495d8c+t*52+19-base:0x495d8c+t*52+49-base].split(b'\0')[0].decode('cp1252'),
                     divisor_bruto=imagem[0x495d8c+t*52+18-base],
                     registro_hex=imagem[0x495d8c+t*52-base:0x495d8c+(t+1)*52-base].hex())
-               for t in range(22)])
+               for t in range(22)],
+        tipos_sortilegios=[dict(id=t, endereco=f'0x{0x497174+t*46:08x}',
+                                nome=imagem[0x497174+t*46+12-base:0x497174+t*46+42-base].split(b'\0')[0].decode('cp1252'),
+                                registro_hex=imagem[0x497174+t*46-base:0x497174+(t+1)*46-base].hex())
+                           for t in range(5)])
     (pasta / 'parametros-producao.json').write_text(json.dumps(parametros, ensure_ascii=False, indent=2) + '\n')
-    print(f'{len(alvos)} rotinas, {len(TRECHOS_AUXILIARES)} trechos auxiliares e {len(referencias)} referências candidatas: {pasta}')
+    print(f'{len(alvos)} rotinas, {len(TRECHOS_AUXILIARES)} trechos auxiliares, '
+          f'{len(TRECHOS_CONTEXTO)} contextos e {len(referencias)} referências candidatas: {pasta}')
 
 
 if __name__ == '__main__':
