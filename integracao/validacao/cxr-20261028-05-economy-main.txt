@@ -1,0 +1,27 @@
+test_buffer_shape_guards_precede_stores (test_consultas_reinicio_economia.ContratosConsultasReinicioEconomia) ... ok
+test_frozen_original_capture_precedes_translation (test_consultas_reinicio_economia.ContratosConsultasReinicioEconomia) ... ok
+test_one_byte_write_through_slice_and_live_reads (test_consultas_reinicio_economia.ContratosConsultasReinicioEconomia) ... ok
+test_recorded_original_replay_checks_all_fourteen_new_leaf_calls (test_consultas_reinicio_economia.ContratosConsultasReinicioEconomia) ... ok
+test_signed_views_and_read_only_query_buffers (test_consultas_reinicio_economia.ContratosConsultasReinicioEconomia) ... ok
+test_type_is_raw_and_observes_later_live_mutation (test_consultas_reinicio_economia.ContratosConsultasReinicioEconomia) ... ok
+test_widths_and_protected_indices (test_consultas_reinicio_economia.ContratosConsultasReinicioEconomia) ... ok
+test_fresh_twenty_original_returns_match_frozen_observations_and_python (test_consultas_reinicio_economia.DiferencialConsultasReinicioEconomia) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.088s
+
+OK
+{
+  "scope": "Three economy IaReset leaves; exact live buffers, no whole mission claim",
+  "mode": "fresh original x86 + Python + frozen capture",
+  "tests": 8,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "fresh_original_entries": 20,
+  "fresh_real_returns": 20,
+  "recorded_translated_leaf_calls": 14,
+  "existing_get_player_observations": 6,
+  "module_sha256": "c81239ae0b7527c01242ef3f95b0c11cfa35cbae6333e7c0068ef6a67e1ec268",
+  "success": true
+}
