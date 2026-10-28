@@ -1,0 +1,33 @@
+{
+  "scope": "CalculTroupe types1/2/13/16 with original economic exit prefix",
+  "mode": "Python only",
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_16_real_update_sequences_stop_after_preparation (test_ciclo_producao.DiferencialCicloProducao)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_4_post_increment_deposit_exceptions_keep_partial_effects (test_ciclo_producao.DiferencialCicloProducao)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_992_colonist_capacity_float_samples_in_real_caller (test_ciclo_producao.DiferencialCicloProducao)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_thresholds_activity_time_zero_and_index_widths (test_ciclo_producao.DiferencialCicloProducao)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "declared_stops": 0,
+  "complete_returns": 0,
+  "position_dependency_stops": 0,
+  "expected_exceptions": 0,
+  "expected_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}
