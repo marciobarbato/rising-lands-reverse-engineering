@@ -472,3 +472,35 @@ Further records:
 - From AI/runtime: core owns `DemonteBatiment 0x41effd` (physical removal) and unit state 13. Economy owes the `DemonteBatiment` refund arithmetic as a callable query; until published it is a named dependency. `BatimentGetPlayer`/`BatimentGetType`/`BatimentEnDestruction` stay economy queries.
 - Missions will consume the habitation contract in its Stage 11, after its reset-prefix Stage 10.
 - Next, pending coordinator confirmation: Stage 16, the `EnginInitTechnologie 0x441459` → `BatimentInitCave 0x419112` tail, then `PlayerRetrieve 0x46df41`.
+
+## Stage 16: economy MissionLoad initializer tails
+
+Delivered in `cauda_carga.py`; the full contract is in [ECONOMY.md](../../docs/ECONOMY.md#economy-load-tails-of-missionload-stage-16). Inventory: `evidencias/cauda-carga.json` (14 intervals). Original-only captures: `evidencias/captura-cauda-carga-original.json` (22 fragment entries / 30 segments), committed as `8d0f2a9` before translation.
+
+**API for missions' tail composition.**
+- `CaudaCargaEconomia(habitacao, ciclo_mercado, *, rede, jogadores_guardados)`:
+  - `habitacao` is the Stage 15 `HabitacaoConstrucoes`. Its economy world's `contagens_por_tipo` must be the same object as core's `mundo.realizaveis_estruturas` (`0x49a070`), and its `propriedade.ordens` is the `[0x4e19b8]` unit-order Bags (10,816 bytes).
+  - `ciclo_mercado` is a `CicloMercado` over the loaded market buffers and the live player table `Mercado.jogadores` (`[0x5080a8]`); it must share the `Economia`.
+  - `rede` is the byte at `0x4e0730`.
+  - `jogadores_guardados` is the 80-byte source table `[0x5080ac]`.
+  - `casos_cauda_carga.montar_cauda` shows the identity wiring.
+- Calls in MissionLoad order: `.inicializar_tecnologia_unidades()` (`0x441459`), `.inicializar_cavernas(mundo)` (`0x419112`), [core `0x441623`], `.recuperar_jogadores()` (`0x46df41`), [ai-runtime `iaReset`], `.resetar_mercado()` (`0x46027c`).
+- MissionLoadName replaces core and `PlayerRetrieve` with economy's `RechercheCalculNew 0x47150f`. It is not implemented, so it must raise a named dependency at `0x46c982`.
+- Protected-domain `ValueError`s come before the call's stores. No call is replayed.
+
+**Answers to the coordinator.**
+- `MarcheResetAll 0x46027c` is exactly the committed `CicloMercado.resetar_todos`: same seven stores per player, same order, no difference. It is now also validated in tail position.
+- `0x47150f` is `RechercheCalculNew`, owned by economy (research/technology); it is on the MissionLoadName path only, and was proposed as a separate later stage.
+
+**Validation.**
+- Fresh native: 11 tests, 435 original entries / 451 segments / 16 resumptions, every entry at its declared checkpoint, 0 mismatches/faults/limits/skips.
+- Actual MONDE01 (four table/network configurations plus two chained after Stage 15 habitation) matches whole state. MONDE01 counts one sanctuary and no cave, so all warehouse words are 0.
+- Local: 5 run / 6 optional skips; all 7 captures replay to full equality. Economy gate: 424 discovered / 196 optional skips.
+
+**Stage 15 on core's main.** The actual-MONDE01 result is recorded in the Stage 15 follow-up above: main `04c7bfb`, 12/12 caller configurations complete through discovery 13 / light 10.
+
+**Gaps.**
+- `RechercheCalculNew` and its `InventionSetEffet 0x470f98`.
+- `DemonteBatiment` refund query.
+- Natural production start (next sequence item 2) and the transport/work cycle (item 3).
+- Note for core: `0x49a070` holds per-owner, per-type counts of active structures (`BatimentInitCave`), not realizability flags. Only the name is misleading; no change is requested.
