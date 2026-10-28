@@ -1,0 +1,16 @@
+{
+  "scope": "Complete read-only EnginRentreMatiere/EnginApporteMatiere; conditional building lookup",
+  "mode": "original x86 and Python",
+  "tests": 12,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 4934,
+  "declared_stops": 4934,
+  "completed_returns": 4928,
+  "protected_index_stops": 6,
+  "expected_x86_exceptions": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}
