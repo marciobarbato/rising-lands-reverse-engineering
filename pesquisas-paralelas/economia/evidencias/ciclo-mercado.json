@@ -1,0 +1,44 @@
+{
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_sbl": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "capstone": "5.0.7",
+  "scope": "Selective market lifecycle; protected u8 players 0..3; invalid second index stops after first row",
+  "captures": [
+    {
+      "symbol": "MarcheResetAll",
+      "start": "0x0046027c",
+      "end_exclusive": "0x004602cd",
+      "bytes_hex": "5351525631c031d283c2024030db30c931f6b5ff88987b2e4e006689b22e294e00b70188a88b6f490030ed88b82b294e00889827294e0030ff66898a3e294e0066899a36294e0083f8047cbc5e5a595bc3",
+      "sha256": "82df4d0128506f6381b5cc963867cc7b3e5da5c6a1c9687f6c57f38b335ae9fd",
+      "listing": "ciclo-mercado-0046027c.asm"
+    },
+    {
+      "symbol": "ResetMarche",
+      "start": "0x0046634e",
+      "end_exclusive": "0x004663d6",
+      "bytes_hex": "53515657b301b1ff25ff00000030f631f688b07c2e4e0088982c294e0088b028294e0088888c6f49006689344530294e0030ff31c930db66890c4540294e0066891c4538294e0031c088d031ffb3ff88b07c2e4e00b20188988c6f490088902c294e0088b028294e0030d266893c4538294e006689144540294e006689144530294e005f5e595bc3",
+      "sha256": "8b185d38ee8baa81a03d5198857c7b02c63da3baf584a506ec436b86ce01b243",
+      "listing": "ciclo-mercado-0046634e.asm"
+    },
+    {
+      "symbol": "MarcheQuitte",
+      "start": "0x004663d6",
+      "end_exclusive": "0x004663eb",
+      "bytes_hex": "5225ff00000031d28a908c6f4900e865ffffff5ac3",
+      "sha256": "e3b57f86c3af03b0f4899382da3b448e9209c41fa5ec32f76a90cdb326970351",
+      "listing": "ciclo-mercado-004663d6.asm"
+    }
+  ],
+  "invalid_second_checkpoint": "0x00466395",
+  "reset_fields": {
+    "0x004e2e7c": "u8=0",
+    "0x004e292c": "u8=1",
+    "0x004e2928": "u8=0",
+    "0x00496f8c": "u8=255",
+    "0x004e2930": "u16=0",
+    "0x004e2938": "u16=0",
+    "0x004e2940": "u16=0"
+  },
+  "preserved": "Proposals, approvals, difference, prices, economy, player records and all gaps",
+  "calling_convention": "ResetMarche AL first, DL second; MarcheQuitte AL first reads live contact before reset"
+}

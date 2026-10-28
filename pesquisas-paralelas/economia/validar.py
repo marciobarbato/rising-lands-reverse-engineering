@@ -38,6 +38,7 @@ def main():
     from test_mutacoes_bonus import DiferencialMutacoesBonus
     from test_ciclo_producao import DiferencialCicloProducao
     from test_bonus_compartilhados import DiferencialBonusCompartilhados
+    from test_ciclo_mercado import DiferencialCicloMercado
     bancadas = {classe.__name__: getattr(classe, 'b', None)
                 for classe in (Diferencial, DiferencialConstrucoes, DiferencialRetiradaRecalculo,
                                DiferencialInitCave, DiferencialProprietarios, DiferencialExtracao,
@@ -49,7 +50,7 @@ def main():
     # expected exception rather than a single class-level benchmark.
     grupos = {nome: [b] if b is not None else [] for nome, b in bancadas.items()}
     grupos.update({c.__name__: c.bancadas for c in
-                   (DiferencialSaidaTropa, DiferencialOrdemMercado, DiferencialMutacoesBonus, DiferencialCicloProducao, DiferencialBonusCompartilhados)})
+                   (DiferencialSaidaTropa, DiferencialOrdemMercado, DiferencialMutacoesBonus, DiferencialCicloProducao, DiferencialBonusCompartilhados, DiferencialCicloMercado)})
     grupos['DiferencialBonusUnidades'] = ([DiferencialBonusUnidades.b]
                                          if DiferencialBonusUnidades.b is not None else [])
     contagens = {nome: sum(getattr(b, 'execucoes', 0) for b in bs) for nome, bs in grupos.items()}
