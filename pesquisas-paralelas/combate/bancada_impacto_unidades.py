@@ -87,8 +87,11 @@ class BancadaImpactoUnidades(BancadaConsumoDano):
             self.retornos_wrapper.append((ret, event))
 
     def preparar_wrapper(self, unidades, danos, contador=0, anterior=0, local=0,
-                          aliado=False, tipo_jogador=1, **kwargs):
+                          aliado=False, tipo_jogador=1, modo4=None, **kwargs):
         self.preparar_consumo(unidades, danos, jogador=local, **kwargs)
+        if modo4 is not None:
+            self.cpu.mem_write(0x49716c, bytes([modo4[0]]))
+            self.cpu.mem_write(0x49716e, bytes([modo4[1]]))
         from bancada_combate import JOGADORES
         self.cpu.mem_write(JOGADORES + 20 * unidades[1][0] + 1, bytes([tipo_jogador]))
         self.cpu.mem_write(JOGADORES + 20 * unidades[0][0] + 6, bytes([2 if aliado else 0]))
@@ -100,14 +103,14 @@ class BancadaImpactoUnidades(BancadaConsumoDano):
         self.eventos_wrapper, self.retornos_wrapper = [], []
         self.random_wrapper = False
 
-    def impacto(self, cell, flag=0, direction=0, parar_consumidor=False, diplomacia_completa=False):
+    def impacto(self, cell, flag=0, direction=0, parar_consumidor=False, diplomacia_completa=False, mode=1):
         stops = {RETORNO, 0x4508af, 0x4506a1, *DEPENDENCIES}
         if diplomacia_completa:
             stops -= {0x475118, 0x46d8cb}
         if parar_consumidor:
             stops.add(0x4502f0)
         r = self.executar(0x450874, WRAPPER,
-            dict(EAX=cell | 0xabcd0000, EDX=0xface0001, EBX=0xbeef0000,
+            dict(EAX=cell | 0xabcd0000, EDX=0xface0000 | mode, EBX=0xbeef0000,
                  ECX=direction | 0xcafe0000), parada=stops,
             pilha={4: struct.pack('<I', flag | 0xa5a50000)}, limite_instrucoes=100000)
         if r['EIP'] in {*DEPENDENCIES, 0x4502f0}:
