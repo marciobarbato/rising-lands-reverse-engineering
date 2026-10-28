@@ -41,14 +41,19 @@
    "sites": [
     "0x0047affc"
    ],
-   "status": "missing direct reusable Core getter; coordinator requested in current Core M1 slice",
+   "status": "committed owner delegate now available for Stage2b preparation",
    "memory": "same live world.unidades; no VM/task body copied",
    "existing_related_operation": {
     "path": "ferramentas/ordens_unidades.py",
     "symbol": "MundoUnidades.executar_operacao('I_DonneTypeUnite',[index])",
     "sha256": "ba960424f6228daf83ffd69a28a71d9cbbec03e0a5b756b379dab290dd8cf2d4"
    },
-   "note": "No fake VM/world object will be constructed merely to obtain a getter"
+   "note": "No fake VM/world object will be constructed merely to obtain a getter",
+   "provider": {
+    "path": "ferramentas/consultas_unidades.py",
+    "symbol": "tipo_unidade",
+    "sha256": "b0e8788b2424104accc28ca160befc8d494bc33808d996bc70c0cd4a9f27f851"
+   }
   },
   {
    "callback": "GetRessource",
@@ -72,8 +77,13 @@
     "0x0047f4b0",
     "0x0047b02c"
    ],
-   "status": "missing standalone missions getter; requested",
-   "memory": "original xor AH,AH; read AL from exact live one-byte 0x496fe4; adjacent byte is irrelevant"
+   "status": "committed owner delegate now available for Stage2b preparation",
+   "memory": "original xor AH,AH; read AL from exact live one-byte 0x496fe4; adjacent byte is irrelevant",
+   "provider": {
+    "path": "pesquisas-paralelas/missoes/consultas_missao.py",
+    "symbol": "numero_missao",
+    "sha256": "23a4e6bbc8bbdf9f1ad1f7855aacca8f181f44f10eabf8d748a5a768942604eb"
+   }
   },
   {
    "callback": "TypeEnginEstMonstre",
@@ -81,8 +91,13 @@
    "sites": [
     "0x0047b006"
    ],
-   "status": "missing standalone core predicate; requested",
-   "memory": "AL input type, AL output; original true tail0x4422da must be included in owner evidence"
+   "status": "committed owner delegate now available for Stage2b preparation",
+   "memory": "AL input type, AL output; original true tail0x4422da must be included in owner evidence",
+   "provider": {
+    "path": "ferramentas/consultas_unidades.py",
+    "symbol": "tipo_unidade_monstro",
+    "sha256": "b0e8788b2424104accc28ca160befc8d494bc33808d996bc70c0cd4a9f27f851"
+   }
   },
   {
    "callback": "EnginGetEtat",
@@ -129,9 +144,14 @@
    "sites": [
     "0x00484348"
    ],
-   "status": "missing standalone committed owner getter",
+   "status": "committed owner delegate now available for Stage2b preparation",
    "memory": "world.estruturas at0x49a0c8; state+5 !=0; active state4/5 not excluded",
-   "owner_contract": "Missing leaf. lowAX0..999 returns0/1 for rawstate+5 !=0 including3/4/5; read only,EDX retained"
+   "owner_contract": "Missing leaf. lowAX0..999 returns0/1 for rawstate+5 !=0 including3/4/5; read only,EDX retained",
+   "provider": {
+    "path": "pesquisas-paralelas/missoes/consultas_missao.py",
+    "symbol": "existe_estrutura",
+    "sha256": "23a4e6bbc8bbdf9f1ad1f7855aacca8f181f44f10eabf8d748a5a768942604eb"
+   }
   },
   {
    "callback": "BatimentGetPlayer",
@@ -193,6 +213,24 @@
    "RechercheSetBranche",
    "BatimentExiste",
    "BatimentGetType"
+  ]
+ },
+ "latest_adapter_preparation": {
+  "time_brt": "2026-10-28 18:10",
+  "owner_query_main": "2456848e57c1fbb63f3590023e424012c0916d3e",
+  "implementation_prepared": true,
+  "fresh_native_validated": false,
+  "integrated": false,
+  "real_mission_tested": false,
+  "local_frozen_inputs": 11,
+  "local_complete_inputs": 1,
+  "local_named_stops": 10,
+  "guard_tests_passed": 4,
+  "native_test_not_run": 1,
+  "missing_current_economy_module": "pesquisas-paralelas/economia/consultas_reinicio_economia.py",
+  "unresolved_core_primitives": [
+   "EnginGetEtat",
+   "EnginSetPlayer"
   ]
  }
 }
