@@ -1,0 +1,230 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "inspected_main": "f18b5a00a27e716fd3662d56f9482b67b110ef16",
+  "caller_order": [
+    "LoadMine 0x47534a",
+    "IALoadAttaqueIni 0x47c24d",
+    "LoadBatimentGhost 0x47bcc7",
+    "LoadCadreInfluence 0x47c04a",
+    "LoadFinMission 0x458b05",
+    "LoadCalculMissionDivers 0x47c30f",
+    "LoadObjectif 0x47c404",
+    "LoadEntrerMonstre 0x47ac30",
+    "next FileClose 0x45844c"
+  ],
+  "caller_call_sites": {
+    "MissionLoad": [
+      "0x46c57d",
+      "0x46c582",
+      "0x46c587",
+      "0x46c58c",
+      "0x46c591",
+      "0x46c596",
+      "0x46c59b",
+      "0x46c5a0",
+      "0x46c5a5"
+    ],
+    "MissionLoadName": [
+      "0x46c946",
+      "0x46c94b",
+      "0x46c950",
+      "0x46c955",
+      "0x46c95a",
+      "0x46c95f",
+      "0x46c964",
+      "0x46c969",
+      "0x46c96e"
+    ]
+  },
+  "intervals": [
+    {
+      "name": "LoadBatimentGhost",
+      "start": "0x47bcc7",
+      "end_exclusive": "0x47bd40",
+      "sha256": "b1d656f12585f1ee3fc427fdac8290680ca515868d5d41e238b5e6e88adf33b5",
+      "file": "cadeia-0047bcc7.asm"
+    },
+    {
+      "name": "LoadCadreInfluence",
+      "start": "0x47c04a",
+      "end_exclusive": "0x47c0c3",
+      "sha256": "d9fb80338f5c8232ba8da0c3fa1b07933dfba253ed8bc63218aa71bfda6ec64c",
+      "file": "cadeia-0047c04a.asm"
+    },
+    {
+      "name": "LoadCalculMissionDivers",
+      "start": "0x47c30f",
+      "end_exclusive": "0x47c359",
+      "sha256": "4c9bb1b6009448b4c5a6ee205112b86033d33a7254b504f2759e67484e3d8111",
+      "file": "cadeia-0047c30f.asm"
+    },
+    {
+      "name": "LoadEntrerMonstre",
+      "start": "0x47ac30",
+      "end_exclusive": "0x47ad6a",
+      "sha256": "e623b7fa891620a4bfd65509458ec7a2ac0cf1d16eac5bb0af8123ccb1ca7fec",
+      "file": "cadeia-0047ac30.asm"
+    },
+    {
+      "name": "InitEntrerMonstre",
+      "start": "0x47a601",
+      "end_exclusive": "0x47a81d",
+      "sha256": "2e6140e96408377d3ea63f3a4d88338d6dc8e183629f275c87c3fd08c21a852f",
+      "file": "cadeia-0047a601.asm"
+    },
+    {
+      "name": "Random",
+      "start": "0x4704dc",
+      "end_exclusive": "0x470520",
+      "sha256": "14a68ad1377bfab0397ed5570d166095375d9fcf633da6524d28f118e80917c2",
+      "file": "cadeia-004704dc.asm"
+    },
+    {
+      "name": "MissionLoad_auxiliary_chain",
+      "start": "0x46c57d",
+      "end_exclusive": "0x46c5a5",
+      "sha256": "9adc69c897602f4f134ab110870e024eae981197c201146ae61c34c9927a347f",
+      "file": "cadeia-0046c57d.asm"
+    },
+    {
+      "name": "MissionLoadName_auxiliary_chain",
+      "start": "0x46c946",
+      "end_exclusive": "0x46c96e",
+      "sha256": "dba9828313965b07e4a2a2919268565c5fd4aa79f472cc9d96c6d482f22ae38e",
+      "file": "cadeia-0046c946.asm"
+    }
+  ],
+  "watcom_crt_bodies": [
+    {
+      "start": "0x48c341",
+      "end_exclusive": "0x48c38b",
+      "sha256": "001d0dd266fbb6ef88cd74315f8927794418cc28e83fe77a26ff3eb46f2ef7ab"
+    },
+    {
+      "start": "0x48c38b",
+      "end_exclusive": "0x48c3b0",
+      "sha256": "eedbf74c05dbb684ee3eef96a8203020b0bf26586072af0dcb3b058241c3b656"
+    },
+    {
+      "start": "0x48c3b0",
+      "end_exclusive": "0x48c3f5",
+      "sha256": "357b82ba8937fb4fd0bec6df9d087134343ceced049518877585002b85a8eaf9"
+    },
+    {
+      "start": "0x48c3f5",
+      "end_exclusive": "0x48c41c",
+      "sha256": "a9a4c93e588a9621c871fec3e946ea905bc4234ebdfeadad109e6db97669ab44"
+    },
+    {
+      "start": "0x48c41c",
+      "end_exclusive": "0x48c43e",
+      "sha256": "8016b2aecd8912e1b991c731d5debc90603ad89335f2be63084263e9041789b6"
+    },
+    {
+      "start": "0x48cfa8",
+      "end_exclusive": "0x48cfbb",
+      "sha256": "753d5db183e60fc4daa999dea99935fff7d6290b87c7c02cb22e85e6a18ef49b"
+    },
+    {
+      "start": "0x48cfbb",
+      "end_exclusive": "0x48cfeb",
+      "sha256": "fbf3ae49f76ad50839dce1fe319518f9f1dc6d5a564fd35cd62b070e25eec03d"
+    },
+    {
+      "start": "0x48d890",
+      "end_exclusive": "0x48d8c7",
+      "sha256": "a90ce072d983ac3aae0caf1dda227c54fe347d777ff1f99691b47212c7b4cb5c"
+    },
+    {
+      "start": "0x48d8c7",
+      "end_exclusive": "0x48d942",
+      "sha256": "00a3f9d19540ceb3ad46e08439f9122915d509530d5e410f83676e5f62f79f47"
+    },
+    {
+      "start": "0x48d942",
+      "end_exclusive": "0x48e564",
+      "sha256": "31051db11c1df3e30c9d3e7ba63f7802f6d618b7e314e4d97a6773d95699b19c"
+    },
+    {
+      "start": "0x48e940",
+      "end_exclusive": "0x48e94e",
+      "sha256": "12faceab764ccdbbbeeaffb3213def7775e07263b5d2a97f620a888f07514172"
+    },
+    {
+      "start": "0x48efe8",
+      "end_exclusive": "0x48fb01",
+      "sha256": "c64b4e2e5543046113c00c92c02564fa9be40fcc68a6e82fc8791e22fa2a297a"
+    }
+  ],
+  "data": [
+    {
+      "name": "monstre_profile_strings",
+      "start": "0x494e4c",
+      "end_exclusive": "0x494efe",
+      "hex": "2e2f6d6f6e737472652e696e690048756d616e4f6e6c790047454e4552414c002e2f6d6f6e737472652e696e690050726f6261436176654a6f756575720047454e4552414c002e2f6d6f6e737472652e696e690050726f62614361766549410047454e4552414c002e2f6d6f6e737472652e696e690050726f6261456d627573636164650047454e4552414c0047524f55504525303269002e2f6d6f6e737472652e696e69000047454e4552414c00256900"
+    },
+    {
+      "name": "group_monster_types",
+      "start": "0x498400",
+      "end_exclusive": "0x498408",
+      "hex": "0001081415161718"
+    }
+  ],
+  "buffers": {
+    "ghost": {
+      "base": "0x50b18c",
+      "bytes": 5254,
+      "count": "u16 +0",
+      "ids": "750 u16 at +2",
+      "gap": "+1502..+1504",
+      "values": "750 u32 at +1504",
+      "flags": "750 u8 at +4504"
+    },
+    "influence": {
+      "base": "0x50c614",
+      "bytes": 4000,
+      "records": 400,
+      "stride": 10,
+      "prefilled_words": "+0,+2,+4,+6"
+    },
+    "monsters": {
+      "base": "0x50a9bc",
+      "bytes": 1220,
+      "human_only": "u8 +0",
+      "profile_dwords": "+4,+8,+12",
+      "count": "u16 +18",
+      "records": "100x12 at +20"
+    },
+    "groups": {
+      "base": "0x50af84",
+      "bytes": 432,
+      "type_counts": "16x26 u8 at +0",
+      "group_counts": "16 u8 at +416"
+    },
+    "random_seed": "0x497164 u32"
+  },
+  "external_bindings": {
+    "read": "FileRead wrapper 0x458461 (fixture bytes)",
+    "GetPrivateProfileIntA": {
+      "iat": "0x5231ac",
+      "call_sites": [
+        "0x47a665",
+        "0x47a688",
+        "0x47a6a5",
+        "0x47a6c7"
+      ]
+    },
+    "GetPrivateProfileStringA": {
+      "iat": "0x5231b0",
+      "call_sites": [
+        "0x47a74d"
+      ]
+    }
+  },
+  "shipped_profile": {
+    "path": "INSTALHD/MONSTRE.INI",
+    "sha256": "6be59feea11e20eda101ee1e528b3306be447da9e9c3a3807bc2c1bf9e071046",
+    "bytes": 233
+  },
+  "scope": "Raw L7 auxiliary loaders and their exact caller order in both callers. No monster spawning, AI, ghost/influence runtime, events or mission execution."
+}
