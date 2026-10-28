@@ -1,6 +1,6 @@
 """Consume the committed ETA and type-table readers without rebuilding them."""
 import hashlib
-from caminhos import CD
+from ambiente_missoes import CD
 from analisar import dependencias, HASH_ESTUDADO
 from formatos import ler_eta
 from regras import extrair_regras

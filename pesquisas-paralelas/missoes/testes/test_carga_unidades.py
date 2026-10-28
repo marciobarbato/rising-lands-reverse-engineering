@@ -10,7 +10,7 @@ import unittest
 
 OWNED = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(OWNED))
-from caminhos import CD
+from ambiente_missoes import CD
 from carregador_unidades import continuar_carga_unidades, DependenciaCargaUnidades
 from entradas import bloco_unidades, tipos_originais
 from formatos import Leitor, ErroFormato
@@ -95,6 +95,13 @@ class CapturasCarga(unittest.TestCase):
         with self.assertRaises(ValueError):
             continuar_carga_unidades(reader, pool, flags, bytes(1300))
         self.assertEqual((reader.posicao, flags), (0, b'abcd'))
+
+    def test_imports_compose_with_committed_navigation(self):
+        from navegacao_unidades import MundoNavegacao
+        from caminhos import proxima_celula
+        world = MundoNavegacao()
+        self.assertEqual(len(world.unidades), 220800)
+        self.assertTrue(callable(proxima_celula))
 
     def test_unsupported_header_or_index_preserves_reached_effects(self):
         for data, cursor in ((struct.pack('<HH', 1, 783), 4),

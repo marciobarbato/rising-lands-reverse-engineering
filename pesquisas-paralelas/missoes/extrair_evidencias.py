@@ -2,7 +2,7 @@
 import hashlib
 import json
 from collections import Counter
-from caminhos import CD, OWNED, ROOT
+from ambiente_missoes import CD, OWNED, ROOT
 from analisar import dependencias, HASH_ESTUDADO
 from formatos import ler_eta
 

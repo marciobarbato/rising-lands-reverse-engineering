@@ -4,7 +4,7 @@ import argparse
 import json
 import os
 import unittest
-from caminhos import OWNED
+from ambiente_missoes import OWNED
 
 
 def main():

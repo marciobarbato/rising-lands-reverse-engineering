@@ -4,7 +4,7 @@ SelectionInit and every native postload/type/bonus subcall execute unchanged.
 The translated scope begins at the checkpoint after SelectionInit. No Win32
 runtime, short-read behavior, or complete mission execution is provided here.
 """
-import caminhos
+import ambiente_missoes
 from emulador import BancadaX86, UNIDADES, RETORNO, x86
 
 INTERVALS = [(0x46acbf, 0x46b01e), (0x46b112, 0x46b119),

@@ -7,7 +7,7 @@ effects. Modifier callbacks must be read-only with respect to loader inputs.
 """
 from dataclasses import dataclass
 import struct
-import caminhos
+import ambiente_missoes
 from formatos import Leitor
 from inicializacao_ataque import CaracteristicasTipo, preparar_apos_carga_missao
 

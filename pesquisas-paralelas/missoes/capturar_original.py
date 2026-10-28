@@ -2,7 +2,7 @@
 import hashlib
 import json
 import struct
-from caminhos import CD, OWNED
+from ambiente_missoes import CD, OWNED
 from entradas import bloco_unidades, tipos_originais
 from analisar import HASH_ESTUDADO as HASH_ORIGINAL
 
