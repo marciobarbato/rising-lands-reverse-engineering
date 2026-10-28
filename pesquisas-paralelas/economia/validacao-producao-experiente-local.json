@@ -1,0 +1,38 @@
+{
+  "scope": "Actual production update through experience; stop before physical placement",
+  "mode": "Python only",
+  "tests": 11,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_12_persistent_update_sequences_stop_once_before_placement (test_producao_experiente.DiferencialProducaoExperiente)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_14_after_recovery_queue_and_import_failures (test_producao_experiente.DiferencialProducaoExperiente)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_32_first_pair_guards_do_not_search_later_matching_pairs (test_producao_experiente.DiferencialProducaoExperiente)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_36_inactive_or_incomplete_returns (test_producao_experiente.DiferencialProducaoExperiente)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_416_building_type_owner_pairs_and_all_eight_levels (test_producao_experiente.DiferencialProducaoExperiente)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "declared_stops": 0,
+  "completed_returns": 0,
+  "placement_dependency_stops": 0,
+  "after_recovery_guard_stops": 0,
+  "expected_x86_exceptions": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}
