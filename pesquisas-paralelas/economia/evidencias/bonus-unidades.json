@@ -1,0 +1,106 @@
+{
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_sbl": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "capstone": "5.0.7",
+  "scope": "Complete read-only unit bonus/capacity queries; no bonus initialization or world conversion",
+  "captures": [
+    {
+      "symbol": "BonusGetValEngin",
+      "start": "0x00428cc0",
+      "end_exclusive": "0x00428e71",
+      "bytes_hex": "5125ff0000003dc8000000740983f8040f858401000031c059c369c8d401000031d288da89d0c1e00301d0668b8c41a0fb4d0089c859c369c8d401000031d288da89d0c1e00301d001c001c830ed8a88a2fb4d0089c859c369c8d401000031d288da89d0c1e00301d0668b8c41a4fb4d0089c859c369c8d401000031d288da89d0c1e00301d001c001c830ed8a88aafb4d0089c859c369c8d401000031d288da89d0c1e00301d0668b8c41a8fb4d0089c859c369c8d401000031d288da89d0c1e00301d001c001c830ed8a88abfb4d0089c859c369c8d401000031d288da89d0c1e00301d001c001c830ed8a88a6fb4d0089c859c369c8d401000031d288da89d0c1e00301d001c001c830ed8a88acfb4d0089c859c369c8d401000031d288da89d0c1e00301d001c001c830ed8a88b1fb4d0089c859c369c8d401000031d288da89d0c1e00301d001c001c830ed8a88b0fb4d0089c859c369c8d401000031d288da89d0c1e00301d001c001c830ed8a88affb4d0089c859c369c8d401000031d288da89d0c1e00301d001c001c830ed8a88aefb4d0089c859c380fa0c0f8790feffff81e2ff0000002eff24958c8c4200",
+      "sha256": "2809a1654c287424102c5b232995439863c112835aefa435151b0f06e1de5b86",
+      "listing": "bonus-unidades-00428cc0.asm"
+    },
+    {
+      "symbol": "EnginTypeGetCapacite",
+      "start": "0x004475ac",
+      "end_exclusive": "0x004475ef",
+      "bytes_hex": "5288c231c080fa190f870bffffff81e2ff0000002eff249544754400b8020000005ac3b8010000005ac3b8050000005ac3b8030000005ac3b8060000005ac331c05ac3",
+      "sha256": "d369a3f5de0a7300cbf1812be79a28b6b649c02a23ac6e3ca82d927132cc1dde",
+      "listing": "bonus-unidades-004475ac.asm"
+    },
+    {
+      "symbol": "shared capacity return",
+      "start": "0x004474c5",
+      "end_exclusive": "0x004474c7",
+      "bytes_hex": "5ac3",
+      "sha256": "b631b8bfe6e6e14e61c8aa2d81a5d6cd5ffa1bc8f32138363ff91787b4079c28",
+      "listing": "bonus-unidades-004474c5.asm"
+    }
+  ],
+  "dispatch_tables": [
+    {
+      "address": "0x00428c8c",
+      "bytes_hex": "da8c4200738d4200f78c4200188d4200948d4200568d4200358d4200b58d4200f38c4200398e4200d68d4200188e4200f78d4200",
+      "targets": [
+        "0x00428cda",
+        "0x00428d73",
+        "0x00428cf7",
+        "0x00428d18",
+        "0x00428d94",
+        "0x00428d56",
+        "0x00428d35",
+        "0x00428db5",
+        "0x00428cf3",
+        "0x00428e39",
+        "0x00428dd6",
+        "0x00428e18",
+        "0x00428df7"
+      ],
+      "sha256": "b3af50bb78b194ac0e6d0765076c5367dded65e7e00f1a1e34d30f7c126162e5"
+    },
+    {
+      "address": "0x00447544",
+      "bytes_hex": "c5744400c5744400c5744400eb754400c5744400cf754400cf754400cf754400c5744400c5744400c5744400cf754400c8754400d6754400cf754400dd754400cf754400e4754400c5744400c5744400c5744400c5744400c5744400c5744400c5744400eb754400",
+      "targets": [
+        "0x004474c5",
+        "0x004474c5",
+        "0x004474c5",
+        "0x004475eb",
+        "0x004474c5",
+        "0x004475cf",
+        "0x004475cf",
+        "0x004475cf",
+        "0x004474c5",
+        "0x004474c5",
+        "0x004474c5",
+        "0x004475cf",
+        "0x004475c8",
+        "0x004475d6",
+        "0x004475cf",
+        "0x004475dd",
+        "0x004475cf",
+        "0x004475e4",
+        "0x004474c5",
+        "0x004474c5",
+        "0x004474c5",
+        "0x004474c5",
+        "0x004474c5",
+        "0x004474c5",
+        "0x004474c5",
+        "0x004475eb"
+      ],
+      "sha256": "74b81e0ff8c7566d890381941a291ab19441d0632a8ba2f6b3655aca1a28811e"
+    }
+  ],
+  "bonus_state": {
+    "address": "0x004dfba0",
+    "players": 4,
+    "types": 26,
+    "record_bytes": 18,
+    "player_stride": 468
+  },
+  "callback_consumers": {
+    "core_selectors": [
+      1,
+      12
+    ],
+    "combat_selectors": [
+      5,
+      6
+    ],
+    "established_callback_identifier": "Modificateur"
+  },
+  "default_return": "For non-neutral owners, selectors 8 or >12 return incoming ECX as u32 without table reads"
+}
