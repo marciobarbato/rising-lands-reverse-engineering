@@ -387,6 +387,34 @@
       "arquivo": "0046fc0f.asm"
     },
     {
+      "nome": "ProjectileAnim",
+      "inicio": "0x0046e52c",
+      "fim_exclusivo": "0x0046e5fe",
+      "sha256_bytes": "cb7c905c167fb5064918f592c9ac883f52f7513ea1360230c0d8c4af8af251f9",
+      "arquivo": "0046e52c.asm"
+    },
+    {
+      "nome": "ProjectileInfligeDegat",
+      "inicio": "0x0046e5fe",
+      "fim_exclusivo": "0x0046eaf8",
+      "sha256_bytes": "f16f4db0afd282df2e81cd631cd3a1f8924ad02844b2b78757dc4cbaad6901bd",
+      "arquivo": "0046e5fe.asm"
+    },
+    {
+      "nome": "ProjectileAvance",
+      "inicio": "0x0046eaf8",
+      "fim_exclusivo": "0x0046fc0f",
+      "sha256_bytes": "79d4b4b480105c6cc1e04c771e44c99e9e27865ebfa049feb947d6df0aea8751",
+      "arquivo": "0046eaf8.asm"
+    },
+    {
+      "nome": "Random",
+      "inicio": "0x004704dc",
+      "fim_exclusivo": "0x00470520",
+      "sha256_bytes": "14a68ad1377bfab0397ed5570d166095375d9fcf633da6524d28f118e80917c2",
+      "arquivo": "004704dc.asm"
+    },
+    {
       "nome": "TypeEnginGetSortieProjectile",
       "inicio": "0x004511a5",
       "fim_exclusivo": "0x004513c7",

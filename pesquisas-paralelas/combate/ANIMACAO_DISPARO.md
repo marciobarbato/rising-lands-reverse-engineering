@@ -24,7 +24,7 @@ simula voos de projéteis; comunica efeitos externos por chamadas explícitas.
 | `0x46e208` / `0x46e049` | `ProjectileSet` / `ProjectileLineaire` | Preparação original de um slot livre no ensaio adicional |
 | `0x450874` | `InfligeDegat` | Fronteira de dano; sem nova tradução aritmética |
 
-O [manifesto](evidencias/manifesto.json) tem 81 intervalos, SHA-256 original,
+O [manifesto](evidencias/manifesto.json) tem 85 intervalos, SHA-256 original,
 constantes e tabelas de despacho. Os offsets de saída e deslocamento do corpo
 estão em [dados-disparo.json](evidencias/dados-disparo.json), extraídos do EXE
 original por [extrair_evidencias.py](extrair_evidencias.py). Os testes conferem
@@ -159,8 +159,8 @@ fica com o backend de som. Não há chamada Win32/DirectSound pela implementaç�
 ## Validação e limites
 
 Esta etapa acrescenta **19 testes** (cinco de contrato e 14 diferenciais) e
-**7.066 execuções x86 delimitadas**. A suíte completa tem **78 testes aprovados,
-182.491 execuções, zero falhas/erros/ignorados**, registrados em
+**7.066 execuções x86 delimitadas**. A suíte completa tem **90 testes aprovados,
+204.271 execuções, zero falhas/erros/ignorados**, registrados em
 [validacao-emulada.json](validacao-emulada.json).
 
 | Conferência nova | Execuções |
@@ -223,8 +223,8 @@ qualquer adaptação ao contexto geral fica para o chat principal. A lista de
 chamadas é cumulativa: pode ser limpa entre passos para inspecionar cada tick.
 
 Reprodução: `python3 -B validar.py --emular`, com JIT do Unicorn permitido.
-Sem JIT, `python3 -B validar.py` executa 26 contratos e ignora explicitamente
-52 diferenciais. Nenhuma etapa inicia o jogo.
+Sem JIT, `python3 -B validar.py` executa 32 contratos e ignora explicitamente
+58 diferenciais. Nenhuma etapa inicia o jogo.
 
 A inicialização de +8b/+7a/+79 e o rastreio de fases 2/3 estão em
 [INICIALIZACAO_ATAQUE.md](INICIALIZACAO_ATAQUE.md). Pool e preparo linear foram ampliados em [PROJETEIS.md](PROJETEIS.md).

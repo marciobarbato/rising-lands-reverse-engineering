@@ -34,9 +34,11 @@ def main():
     from test_animacao_disparo import ContratosAnimacao, DiferencialAnimacao
     from test_inicializacao_ataque import ContratosInicializacao, DiferencialInicializacao
     from test_projeteis import ContratosProjeteis, DiferencialProjeteis
+    from test_avanco_projeteis import ContratosAvanco, DiferencialAvanco
     suite = unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromTestCase(c)
         for c in (Contratos, Diferencial, ContratosMira, DiferencialMira, ContratosAnimacao, DiferencialAnimacao,
-                  ContratosInicializacao, DiferencialInicializacao, ContratosProjeteis, DiferencialProjeteis))
+                  ContratosInicializacao, DiferencialInicializacao, ContratosProjeteis, DiferencialProjeteis,
+                  ContratosAvanco, DiferencialAvanco))
     r = unittest.TextTestRunner(verbosity=2, resultclass=Resultado).run(suite)
     saida = Path(__file__).resolve().parent / ('validacao-emulada.json' if args.emular else 'validacao-local.json')
     relatorio = dict(sucesso=r.wasSuccessful(), testes=r.testsRun, falhas=len(r.failures),
@@ -45,7 +47,7 @@ def main():
         execucoes_x86_delimitadas=sum(t['execucoes_x86_delimitadas'] for t in r.contagens),
         por_teste=r.contagens,
         limites=dict(tempo_por_chamada_segundos=1, instrucoes_padrao=20000,
-            instrucoes_selecao=1000000, instrucoes_linha=100000),
+            instrucoes_selecao=1000000, instrucoes_linha=100000, instrucoes_avanco_impacto=500000),
         escopo='Trechos isolados do EXE original com memória sintética. Não inicia Windows/jogo.',
         consultas_resolvidas='O teste antigo de fragmentos fornece AL como entrada. Os novos testes de mira/manutenção executam EnginViseCible, AngleCalcul e chamadas x87 originais, sem substituições.',
         configuracao_x87=dict(control_word='0x037f', workaround_fpatan_0x49946c=0,
@@ -61,6 +63,11 @@ def main():
                 '0x46e208', '0x46e049', '0x46e4ca'],
             comparacao='5600 bytes do pool e ordem/argumentos dos efeitos; tipos 0..255; trajetórias e overflow de palavras.',
             limites='Dano com grade vazia; descoberta/iluminação com dimensões zero e raio 0..10, sem células visitadas. Não valida impacto, ProjectileAvance ou renderização.'),
+        avanco_projeteis=dict(rotinas=['0x46e52c', '0x46e5fe'],
+            avanco_parcial='0x46eaf8: tipos 1..5, 9..13, 17, 20..23 e 29, incluindo chegada.',
+            comparacao='5600 bytes, sequência de pedidos de dano, marcadores/resultados Random e argumentos de ProjectileSet.',
+            consultas='Random original executado; seus resultados são entradas externas do Python. Não se revalida nem duplica o gerador.',
+            limites='InfligeDegat original com grade vazia, sem dano em vítimas. Não traduz os demais ramos de Avance nem o despacho temporal de ProjectileCalcul.'),
         diagnosticos=[dict(teste=t.id(), detalhe=e) for t, e in [*r.failures, *r.errors]])
     saida.write_text(json.dumps(relatorio, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(f'Relatório: {saida}\nExecuções x86 delimitadas: {relatorio["execucoes_x86_delimitadas"]}')

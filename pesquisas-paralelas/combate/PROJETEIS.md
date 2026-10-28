@@ -169,7 +169,7 @@ alegar uma execução nativa desses laços para raios extremos.
 
 Esta etapa acrescenta **11 testes**, quatro de contrato e sete diferenciais,
 com **12.196 execuções x86 delimitadas**. A regressão de combate totaliza
-**78 testes, 182.491 execuções x86, zero falhas/erros/ignorados**.
+**90 testes, 204.271 execuções x86, zero falhas/erros/ignorados**.
 Relatórios: [emulado](validacao-emulada.json) e [local](validacao-local.json).
 
 | Comparação | Execuções x86 |
@@ -189,11 +189,11 @@ emissão. A ligação Python entre ataque e pool existe **somente no teste**;
 não foi feita integração ao mundo do projeto.
 
 Reprodução nesta pasta: `python3 -B validar.py --emular`, com o JIT local do
-Unicorn permitido. Sem emulação: `python3 -B validar.py` aprova 26 contratos
-e ignora explicitamente 52 diferenciais. Sementes fixas nos testes.
+Unicorn permitido. Sem emulação: `python3 -B validar.py` aprova 32 contratos
+e ignora explicitamente 58 diferenciais. Sementes fixas nos testes.
 
-Faltam `ProjectileAnim`, o corpo completo de `ProjectileAvance`, colisão,
-impacto e despacho temporal. Não chamar `calcular_linha` uma vez por frame
-como substituição desses consumidores. O próximo passo de combate pode
-rastrear `ProjectileAvance` e `ProjectileInfligeDegat` (`0x46E5FE`), mantendo
-as consultas e a aritmética de dano existentes como dependências explícitas.
+A continuação em [AVANCO_PROJETEIS.md](AVANCO_PROJETEIS.md) traduz
+`ProjectileAnim`, `ProjectileInfligeDegat` e o avanço/chegada de 16 tipos
+lineares. Faltam os demais ramos de `ProjectileAvance` e o despacho temporal.
+Não chamar `calcular_linha` uma vez por frame como substituição desses
+consumidores. Consultas e aritmética de dano permanecem dependências explícitas.

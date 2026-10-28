@@ -215,9 +215,9 @@ python3 -B rastrear_campos.py
 python3 -B validar.py --emular
 ```
 
-O [relatório completo](validacao-emulada.json) registra **78 testes e 182.491
-execuções**, sem falhas. A execução sem `--emular` passa 26 contratos e ignora
-52 diferenciais explicitamente. O manifesto contém 81 intervalos originais.
+O [relatório completo](validacao-emulada.json) registra **90 testes e 204.271
+execuções**, sem falhas. A execução sem `--emular` passa 32 contratos e ignora
+58 diferenciais explicitamente. O manifesto contém 85 intervalos originais.
 
 Para integrar depois: selecionar a entrada de inicialização correta, fornecer
 `CaracteristicasTipo` já carregadas e consultas de capacidade/modificadores,

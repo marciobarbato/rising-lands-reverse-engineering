@@ -3,13 +3,14 @@
 A entrega está isolada nesta pasta. O escopo autorizado do commit é somente
 esta pasta, no branch `main`, preservando as alterações dos chats paralelos.
 Arquivos originais foram somente lidos.
-A versão validada tem **78 testes aprovados e 182.491 execuções x86 delimitadas**;
+A versão validada tem **90 testes aprovados e 204.271 execuções x86 delimitadas**;
 ver [relatório](validacao-emulada.json) e [pesquisa técnica](README.md).
 
 ## Contrato de dados
 
 Importar `alvos_alcance.py`, `mira_angular.py`, `animacao_disparo.py` e
-`inicializacao_ataque.py` e `projeteis.py` como módulos separados. Nenhum depende de `movimento`,
+`inicializacao_ataque.py`, `projeteis.py` e `avanco_projeteis.py` como módulos
+separados. Nenhum depende de `movimento`,
 `combate`, economia ou tarefas; usam biblioteca padrão, dados extraídos e consultas locais.
 
 - `unidades`: sequência de 800 registros `bytes`/`bytearray`, cada um com 276 bytes.
@@ -132,9 +133,35 @@ o raio duas vezes e conserva a ordem descrita em [PROJETEIS.md](PROJETEIS.md).
 
 `preparar_linha(registro)` e `calcular_linha(registro)` operam em uma view
 mutável de 56 bytes. A segunda avança no máximo um passo e não desativa o
-registro ao terminar. Não equivale ao tick completo: faltam a animação, o
-despacho `ProjectileCalcul`, `ProjectileAvance`, colisão e impacto. O campo
+registro ao terminar. Não equivale ao tick completo: o despacho
+`ProjectileCalcul` e parte de `ProjectileAvance` continuam pendentes. O campo
 +04 é um limiar de contador no consumidor examinado, não velocidade confirmada.
+
+## Avanço linear e impacto
+
+`avancar_linear(pool, indice, aleatorio)` cobre os tipos 1..5, 9..13, 17,
+20..23 e 29. O caller deve selecionar esses tipos; os demais causam
+`NotImplementedError` antes das escritas. Passar `aleatorio(marcador) -> u32`
+como consulta ao RNG existente: os marcadores 0x2F/0x30 não são limites de
+sorteio. Não consultar espaço no pool antes do RNG; o original consome um
+valor mesmo quando não pode criar o filho.
+
+O avanço chama `infligir_dano_projetil(pool, indice)` na chegada dos tipos
+correspondentes. Não aplicar o impacto junto ao passo que zera +34: ele ocorre
+no próximo despacho. Manter o pai ocupado até concluir todas as tentativas de
+emissão, e conservar a limpeza de +19 mesmo se a criação secundária falhar.
+
+`infligir_dano_projetil` ordena os pedidos `InfligeDegat` e usa o backend já
+fornecido ao pool. Tipos 20/22/29 expandem para vizinhos; o tipo 29 usa modo 4
+e tipo como direção nos vizinhos. Não trocar esses pedidos por uma única
+chamada genérica de dano em área, pois a ordem e os parâmetros são observáveis.
+A disposição dos efeitos criados nas bordas difere da área de dano; ver
+[AVANCO_PROJETEIS.md](AVANCO_PROJETEIS.md).
+
+`animar_projetil(registro, incremento_global)` traduz o avanço do quadro +18
+para todos os tipos e não filtra inativos. Seu incremento é o byte 0x508F7C.
+O chamador ainda precisa reproduzir a ordem de `ProjectileCalcul`; esta etapa
+não determina um tick por frame nem conecta os projéteis à simulação principal.
 
 ## Inicialização e persistência dos campos
 
@@ -174,8 +201,8 @@ independentes; nenhuma adaptação ao mundo compartilhado foi aplicada.
 ## Reproduzir a conferência sem afetar o trabalho dos outros chats
 
 Nesta pasta, executar `python3 -B validar.py --emular` com Unicorn e JIT
-permitido. Sem JIT, `python3 -B validar.py` executa 26 testes de contrato
-e marca 52 diferenciais como ignorados. Os relatórios ficam aqui.
+permitido. Sem JIT, `python3 -B validar.py` executa 32 testes de contrato
+e marca 58 diferenciais como ignorados. Os relatórios ficam aqui.
 
 O teste antigo de fragmentos de manutenção fornece consultas como entradas;
 o novo teste executa alcance/mira originais em 676 cenários. O teste antigo de

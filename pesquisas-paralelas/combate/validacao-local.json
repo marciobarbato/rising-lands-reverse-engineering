@@ -1,6 +1,6 @@
 {
   "sucesso": true,
-  "testes": 78,
+  "testes": 90,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -210,6 +210,30 @@
     },
     {
       "teste": "test_projeteis.DiferencialProjeteis.test_trajetos_completos_quadrantes_diagonal_e_empate",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_avanco_projeteis.DiferencialAvanco.test_alias_registro_inativo_reusado_como_filho",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_avanco_projeteis.DiferencialAvanco.test_animacao_todos_bytes_tipos_quadros_incrementos",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_avanco_projeteis.DiferencialAvanco.test_avanco_memoria_bruta_filhos_contadores_e_wrap",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_avanco_projeteis.DiferencialAvanco.test_chegada_area_bordas_deriva_e_pool_saturado",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_avanco_projeteis.DiferencialAvanco.test_dano_todos_tipos_bordas_e_dimensoes_ignoradas",
+      "motivo": "Opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_avanco_projeteis.DiferencialAvanco.test_sequencias_desde_set_ate_chegada",
       "motivo": "Opcional: RISING_EMULAR=1"
     }
   ],
@@ -527,13 +551,62 @@
     {
       "teste": "test_projeteis.DiferencialProjeteis.test_trajetos_completos_quadrantes_diagonal_e_empate",
       "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_avanco_projeteis.ContratosAvanco.test_aquecimento_animacao_e_tipo_pendente",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_avanco_projeteis.ContratosAvanco.test_area_ordem_flags_e_modo29",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_avanco_projeteis.ContratosAvanco.test_backend_obrigatorio_preserva_escritas_anteriores",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_avanco_projeteis.ContratosAvanco.test_deriva_dos_efeitos_e_area_de_dano_distintas",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_avanco_projeteis.ContratosAvanco.test_filho_perdido_sem_repeticao_e_rng_mesmo_sem_espaco",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_avanco_projeteis.ContratosAvanco.test_ultimo_passo_nao_produz_dano_ate_proximo_despacho",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_avanco_projeteis.DiferencialAvanco.test_alias_registro_inativo_reusado_como_filho",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_avanco_projeteis.DiferencialAvanco.test_animacao_todos_bytes_tipos_quadros_incrementos",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_avanco_projeteis.DiferencialAvanco.test_avanco_memoria_bruta_filhos_contadores_e_wrap",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_avanco_projeteis.DiferencialAvanco.test_chegada_area_bordas_deriva_e_pool_saturado",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_avanco_projeteis.DiferencialAvanco.test_dano_todos_tipos_bordas_e_dimensoes_ignoradas",
+      "execucoes_x86_delimitadas": 0
+    },
+    {
+      "teste": "test_avanco_projeteis.DiferencialAvanco.test_sequencias_desde_set_ate_chegada",
+      "execucoes_x86_delimitadas": 0
     }
   ],
   "limites": {
     "tempo_por_chamada_segundos": 1,
     "instrucoes_padrao": 20000,
     "instrucoes_selecao": 1000000,
-    "instrucoes_linha": 100000
+    "instrucoes_linha": 100000,
+    "instrucoes_avanco_impacto": 500000
   },
   "escopo": "Trechos isolados do EXE original com memória sintética. Não inicia Windows/jogo.",
   "consultas_resolvidas": "O teste antigo de fragmentos fornece AL como entrada. Os novos testes de mira/manutenção executam EnginViseCible, AngleCalcul e chamadas x87 originais, sem substituições.",
@@ -571,6 +644,16 @@
     ],
     "comparacao": "5600 bytes do pool e ordem/argumentos dos efeitos; tipos 0..255; trajetórias e overflow de palavras.",
     "limites": "Dano com grade vazia; descoberta/iluminação com dimensões zero e raio 0..10, sem células visitadas. Não valida impacto, ProjectileAvance ou renderização."
+  },
+  "avanco_projeteis": {
+    "rotinas": [
+      "0x46e52c",
+      "0x46e5fe"
+    ],
+    "avanco_parcial": "0x46eaf8: tipos 1..5, 9..13, 17, 20..23 e 29, incluindo chegada.",
+    "comparacao": "5600 bytes, sequência de pedidos de dano, marcadores/resultados Random e argumentos de ProjectileSet.",
+    "consultas": "Random original executado; seus resultados são entradas externas do Python. Não se revalida nem duplica o gerador.",
+    "limites": "InfligeDegat original com grade vazia, sem dano em vítimas. Não traduz os demais ramos de Avance nem o despacho temporal de ProjectileCalcul."
   },
   "diagnosticos": []
 }
