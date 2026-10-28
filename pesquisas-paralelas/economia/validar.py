@@ -46,6 +46,7 @@ def main():
     from test_producao_colocada import DiferencialProducaoColocada
     from test_producao_solicitada import DiferencialProducaoSolicitada
     from test_producao_limpa import DiferencialProducaoLimpa
+    from test_consultas_reinicio_economia import DiferencialConsultasReinicioEconomia
     bancadas = {classe.__name__: getattr(classe, 'b', None)
                 for classe in (Diferencial, DiferencialConstrucoes, DiferencialRetiradaRecalculo,
                                DiferencialInitCave, DiferencialProprietarios, DiferencialExtracao,
@@ -57,7 +58,7 @@ def main():
     # expected exception rather than a single class-level benchmark.
     grupos = {nome: [b] if b is not None else [] for nome, b in bancadas.items()}
     grupos.update({c.__name__: c.bancadas for c in
-                   (DiferencialSaidaTropa, DiferencialOrdemMercado, DiferencialMutacoesBonus, DiferencialCicloProducao, DiferencialBonusCompartilhados, DiferencialCicloMercado, DiferencialProducaoCompartilhada, DiferencialLimpezaSaida, DiferencialProducaoExperiente, DiferencialConsultasTransporte, DiferencialProducaoColocada, DiferencialProducaoSolicitada, DiferencialProducaoLimpa)})
+                   (DiferencialSaidaTropa, DiferencialOrdemMercado, DiferencialMutacoesBonus, DiferencialCicloProducao, DiferencialBonusCompartilhados, DiferencialCicloMercado, DiferencialProducaoCompartilhada, DiferencialLimpezaSaida, DiferencialProducaoExperiente, DiferencialConsultasTransporte, DiferencialProducaoColocada, DiferencialProducaoSolicitada, DiferencialProducaoLimpa, DiferencialConsultasReinicioEconomia)})
     grupos['DiferencialBonusUnidades'] = ([DiferencialBonusUnidades.b]
                                          if DiferencialBonusUnidades.b is not None else [])
     contagens = {nome: sum(getattr(b, 'execucoes', 0) for b in bs) for nome, bs in grupos.items()}

@@ -1,0 +1,85 @@
+{
+  "tests": 7,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "success": true,
+  "bounded_segments": 2267,
+  "x86_enabled": true,
+  "scope": "Complete natural Chemin_Remap over explicit inherited fixtures/resources, plus separate low-u16 final-tail test; no MissionLoad",
+  "original_entries": {
+    "0x42ee1c": 7
+  },
+  "whole_remap_segments": 2263,
+  "binding_resumptions": 408,
+  "preserved_loop_resumptions": 1848,
+  "maximum_segment_instructions": 88074,
+  "observations": [
+    {
+      "case": "MONDE01",
+      "outcome": "original_return",
+      "whole_bytes": 5246976,
+      "component_allocations": 56,
+      "ordered_writes_equal": true,
+      "resource_calls": 342,
+      "consumed_al": 1
+    },
+    {
+      "case": "uniform_zero_edge",
+      "outcome": "original_return",
+      "whole_bytes": 5246976,
+      "component_allocations": 1,
+      "ordered_writes_equal": true,
+      "resource_calls": 12,
+      "consumed_al": 1
+    },
+    {
+      "case": "diagonal_one",
+      "outcome": "original_return",
+      "whole_bytes": 5246976,
+      "component_allocations": 3,
+      "ordered_writes_equal": true,
+      "resource_calls": 24,
+      "consumed_al": 1
+    },
+    {
+      "case": "diagonal_zero",
+      "outcome": "original_return",
+      "whole_bytes": 5246976,
+      "component_allocations": 2,
+      "ordered_writes_equal": true,
+      "resource_calls": 18,
+      "consumed_al": 1
+    },
+    {
+      "case": "component_lock_unavailable",
+      "outcome": "declared_fixture_stop",
+      "whole_bytes": 5246976,
+      "component_allocations": 1,
+      "ordered_writes_equal": true,
+      "resource_calls": 4,
+      "consumed_al": null
+    },
+    {
+      "case": "component_lock_null",
+      "outcome": "expected_original_null_lock_fault",
+      "whole_bytes": 5246976,
+      "component_allocations": 1,
+      "ordered_writes_equal": true,
+      "resource_calls": 4,
+      "consumed_al": null
+    },
+    {
+      "case": "cleanup_unavailable",
+      "outcome": "declared_fixture_stop",
+      "whole_bytes": 5246976,
+      "component_allocations": 1,
+      "ordered_writes_equal": true,
+      "resource_calls": 6,
+      "consumed_al": null
+    }
+  ],
+  "tail_entries": 4,
+  "intentional_null_lock_original_fault": "UC_ERR_WRITE_UNMAPPED at0x42efd9; exact capture case only",
+  "full_mission_load": "NOT RUN"
+}
