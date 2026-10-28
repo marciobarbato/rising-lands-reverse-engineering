@@ -4,6 +4,7 @@ The maintained manuals below replace the scattered research handoffs. Historical
 
 | Manual | Contents |
 |---|---|
+| [Claude handover 2026-10-28](HANDOVER_CLAUDE_20261028.md) | Deadline, verified deliveries, preserved writers/worktrees and ordered continuation; draft until final handover |
 | [Consolidated progress](PROGRESS.md) | M1–M4 acceptance, four independent states per L/R stage, critical path, evidence and Portuguese executive summary |
 | [Status](STATUS.md) | Confirmed scope, historical validation counts, and next investigations |
 | [Workspace](WORKSPACE.md) | Repository, original media, converted assets, apps, and archives |

@@ -4,4 +4,6 @@ The live consolidated report is [docs/PROGRESS.md](../PROGRESS.md). It separates
 
 - [Recovery baseline CXR-20261028-01](2026-10-28-CXR-01-baseline.md): first visibility snapshot, round still in progress, research main `8810b37`.
 
+- [Closed recovery CXR-20261028-01](2026-10-28-CXR-01-closed.md): research main advanced from8810b37 to5d24c91 with verified Core15 and AI initialization providers; full MissionLoad still unaccepted.
+
 At each actual execution-round closure, append a new `YYYY-MM-DD-CXR-NN-closed.md` snapshot copied from the verified live report and add it here. Keep a failed/pending round too, with its unchanged main SHA and reason. Never edit a prior snapshot to reflect later success. A repeated heartbeat without a changed round disposition does not require a duplicate snapshot.
