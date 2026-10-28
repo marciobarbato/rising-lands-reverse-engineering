@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build the local playable consumer from one immutable Git revision."""
 import argparse
+import fcntl
 import hashlib
 import io
 import json
@@ -25,6 +26,9 @@ def main():
         common = (repo / common).resolve()
     workspace = common.parent.parent
     data = workspace / 'local-data/macos-playable'
+    data.mkdir(parents=True, exist_ok=True)
+    build_lock = (data / 'build.lock').open('a')
+    fcntl.flock(build_lock, fcntl.LOCK_EX)
     if not args.development_ref and not args.offline:
         subprocess.run(['git', '-C', str(repo), 'fetch', 'origin', 'main'], check=True)
     ref = args.development_ref or 'origin/main'
@@ -46,13 +50,16 @@ def main():
                 raise ValueError('Caminho Git inválido')
             content = stream.extractfile(member).read()
             target = source / path
-            if target.exists() and target.read_bytes() != content:
+            if target.is_symlink() or (target.exists() and target.read_bytes() != content):
                 raise ValueError('Fonte imutável foi alterada: ' + str(target))
             if not target.exists():
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_bytes(content)
                 target.chmod(member.mode)
             entries.append({'path': member.name, 'bytes': len(content), 'sha256': hashlib.sha256(content).hexdigest()})
+    actual = {str(path.relative_to(source)) for path in source.rglob('*') if path.is_file() or path.is_symlink()}
+    if actual != {entry['path'] for entry in entries}:
+        raise ValueError('A fonte imutável contém arquivos que não pertencem ao commit: ' + str(source))
     manifest = {'commit': revision, 'tree': git('rev-parse', revision + '^{tree}').decode().strip(),
                 'requestedRef': ref, 'mode': mode, 'snapshot': 'source', 'files': entries,
                 'features': {name: git('log', '-1', '--format=%H', revision, '--', path).decode().strip()

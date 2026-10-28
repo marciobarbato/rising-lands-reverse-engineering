@@ -103,15 +103,16 @@ def main():
         archive.parent.mkdir(parents=True, exist_ok=True)
         final.rename(archive)
     app.rename(final)
+    verify(final)
     if not args.skip_ui_smoke:
         smoke, screenshot = base / 'build/logs/native-smoke.json', base / 'build/logs/native-smoke.png'
         smoke.unlink(missing_ok=True)
-        proc = subprocess.run([str(final / 'Contents/MacOS/RisingLands-ptbr'), '--smoke-test', str(smoke),
+        proc = subprocess.run(['open', '-W', '-n', str(final), '--args', '--smoke-test', str(smoke),
                                '--screenshot', str(screenshot)], capture_output=True, text=True, timeout=60,
                               env={k: v for k, v in os.environ.items() if k not in ('RISING_APP_ROOT', 'PYTHONPATH', 'PYTHONHOME')})
-        (base / 'build/logs/native-process.log').write_text(proc.stdout + proc.stderr)
+        (base / 'build/logs/native-process.log').write_text('LaunchServices exit: ' + str(proc.returncode) + '\n' + proc.stdout + proc.stderr)
         result = json.loads(smoke.read_text()) if smoke.exists() else {'passed': False, 'error': 'Smoke output missing'}
-        if not result.get('passed') or not result.get('nativeWindowVisible') or result.get('commit') != revision:
+        if proc.returncode or not result.get('passed') or not result.get('nativeWindowVisible') or result.get('commit') != revision:
             raise SystemExit('Falha na validação da janela: ' + json.dumps(result, ensure_ascii=False))
     report = {'commit': revision, 'mode': mode, 'features': manifest['features'], 'bundle': str(final),
               'uiSmoke': not args.skip_ui_smoke, 'logs': str(base / 'build/logs'),
