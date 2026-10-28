@@ -1,0 +1,21 @@
+{
+  "scope": "Original-symbol naming correction only; predecessor evidence remains byte-identical",
+  "sha256_sbl": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "predecessor": {
+    "path": "evidencias/limpeza-saida.json",
+    "sha256": "f22cc044c58fd2dbfa63777e9037b9a8f6265fcba81a447db67740b011e7f1ce"
+  },
+  "symbol_catalog": {
+    "path": "../../relatorios/simbolos-originais.json",
+    "sha256": "7e1e63b5340bc771e4dd743008058e1e47cea79ec74e76c72a70904884f4595e"
+  },
+  "address": "0x41aee2",
+  "incorrect_informal_label": "BatimentGetPosition",
+  "original_symbol": {
+    "nome_original": "BatimentGetCase",
+    "deslocamento": "0x19ee2",
+    "endereco": "0x41aee2"
+  },
+  "checkpoint": "0x42110c",
+  "effect": "Address, captured code, stop and reconstructed behavior are unchanged"
+}
