@@ -15,8 +15,16 @@ from terreno_unidades import (preparar_unidades_no_terreno,provedores_terreno_co
 from carregador_unidades import carregar_unidades_missao
 from formatos import Leitor
 from bonus_unidades import BonusUnidades
+import colocacao_missao
 from colocacao_missao import DependenciaColocacaoMissao
 from navegacao_unidades import MundoNavegacao
+
+# Core-published inclusive maximum of the normal-owner vision sum
+# u8 unit+0xbb + u8 unit+0xf5 completing DecouvreTerrain 0x476851; an absent
+# symbol is the committed limit 8. 510 leaves no reachable discovery stop.
+SOMA_VISAO=getattr(colocacao_missao,'SOMA_VISAO_MAXIMA_INSERCAO',8)
+SOMA_VISAO_U8_U8=510
+MONDE01_SOMA_UNIDADE15=10
 
 
 class MundoRastreado(MundoNavegacao):
@@ -49,6 +57,17 @@ def carregar_python(args):
                              modificador12=lambda owner,kind:provider.consultar(owner,kind,12))
     world.efeitos=[]
     return provider
+
+
+def soma_visao(world,index):
+    return world.unidades[index*276+0xbb]+world.unidades[index*276+0xf5]
+
+
+def visao_forcada(args,vision):
+    """Ordinary unit7 sum via its type word (<=255) or BB=255 plus post-load F5."""
+    args=list(args);types=bytearray(args[3])
+    struct.pack_into('<H',types,42,min(vision,255));args[3]=types
+    return args,max(vision-255,0)
 
 
 def rastrear(providers,trace):
@@ -90,6 +109,8 @@ class CapturasTerrenoUnidades(unittest.TestCase):
             self.assertEqual(resumo_python(world,[]),case['input_after_native_unit_load'])
             trace=[]
             if case['name']=='MONDE01':
+                self.assertEqual(soma_visao(world,15),MONDE01_SOMA_UNIDADE15)
+            if case['name']=='MONDE01' and MONDE01_SOMA_UNIDADE15>SOMA_VISAO:
                 with self.assertRaises(DependenciaColocacaoMissao) as error:
                     preparar_unidades_no_terreno(rastrear(provedores_terreno_core(world,bonus_unidades=bonus),trace))
                 self.assertEqual(error.exception.unidade,15)
@@ -101,6 +122,7 @@ class CapturasTerrenoUnidades(unittest.TestCase):
 
     def test_original_caller_aligned_dependency_snapshots(self):
         report=json.loads((OWNED/'evidencias/captura-terreno-unidades-limites-chamador.json').read_text())
+        continuation=json.loads((OWNED/'evidencias/captura-terreno-unidades-visao9-continuacao.json').read_text())
         for case in report['cases']:
             args=list(preparar_caso('ordinary',MundoRastreado))
             if case['name']=='vision9':
@@ -108,6 +130,12 @@ class CapturasTerrenoUnidades(unittest.TestCase):
             bonus=carregar_python(args);world=args[0];trace=[]
             if case['name']=='missing_bonus':
                 bonus=None
+            if case['name']=='vision9' and 9<=SOMA_VISAO:
+                # Inside the published domain: original native continuation, not the stop.
+                result=preparar_unidades_no_terreno(rastrear(provedores_terreno_core(world,bonus_unidades=bonus),trace))
+                self.assertEqual(resumo_python(world,trace),continuation['output'])
+                self.assertEqual(result.endereco_dependencia,0x46c16d)
+                continue
             error_type=DependenciaTerrenoUnidades if bonus is None else DependenciaColocacaoMissao
             with self.assertRaises(error_type):
                 preparar_unidades_no_terreno(rastrear(provedores_terreno_core(world,bonus_unidades=bonus),trace))
@@ -131,11 +159,16 @@ class DiferencialTerrenoUnidades(unittest.TestCase):
         from bancada_terreno_unidades import BancadaTerrenoUnidades
         cls.native=BancadaTerrenoUnidades()
 
-    def compare(self,args,stop=None,stop_unit_index=None):
+    def compare(self,args,stop=None,stop_unit_index=None,extra_f5=0):
         native=self.native
         native.carregar_caso(*args)
+        if extra_f5:
+            from emulador import UNIDADES
+            native.cpu.mem_write(UNIDADES+7*276+0xf5,bytes([extra_f5]))
         native.prefixo(stop,stop_unit_index)
         world=args[0];bonus=carregar_python(args);trace=[]
+        if extra_f5:
+            world.unidades[7*276+0xf5]=extra_f5
         if stop==0x428cc0:
             bonus=None
         providers=rastrear(provedores_terreno_core(world,bonus_unidades=bonus),trace)
@@ -150,8 +183,8 @@ class DiferencialTerrenoUnidades(unittest.TestCase):
 
     def test_loaded_mission1_and_three_declared_physical_fixtures(self):
         for name in ('ordinary','state4_neutral','hidden14','MONDE01'):
-            self.compare(preparar_caso(name,MundoRastreado),
-                         0x457019 if name=='MONDE01' else None,15 if name=='MONDE01' else None)
+            stop=name=='MONDE01' and MONDE01_SOMA_UNIDADE15>SOMA_VISAO
+            self.compare(preparar_caso(name,MundoRastreado),0x457019 if stop else None,15 if stop else None)
 
     def test_literal_state_flag_owner_and_pool_edges(self):
         for index in (0,799):
@@ -166,6 +199,10 @@ class DiferencialTerrenoUnidades(unittest.TestCase):
 
     def test_partial_bonus_and_original_discovery_call_boundaries(self):
         self.compare(preparar_caso('ordinary',MundoRastreado),0x428cc0)
-        args=list(preparar_caso('ordinary',MundoRastreado))
-        types=bytearray(args[3]);struct.pack_into('<H',types,42,9);args[3]=types
-        self.compare(args,0x457019)
+        if SOMA_VISAO<SOMA_VISAO_U8_U8:
+            args,extra=visao_forcada(preparar_caso('ordinary',MundoRastreado),SOMA_VISAO+1)
+            self.compare(args,0x457019,extra_f5=extra)
+        else:
+            # No unsupported sum remains: compare the native continuation instead.
+            args,extra=visao_forcada(preparar_caso('ordinary',MundoRastreado),9)
+            self.compare(args,extra_f5=extra)
