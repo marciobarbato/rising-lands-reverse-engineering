@@ -105,3 +105,38 @@ python3 -B pesquisas-paralelas/missoes/validar.py --emular
 No unit records, structures or auxiliary mission tables are loaded by this prelude. Stage 1 is a later independent continuation separated by `Chemin_Remap` and structure loading. Their passing tests do not join those missing operations. Selection initialization, complete world insertion, mission-specific objective/event execution and runtime comparison remain open. After Stage 2 integrates and is reproduced, the next independently supported slice is the mission auxiliary-table load path, beginning with exact original `LoadFinMission`/`LoadObjectif` input and retention rules; no end-condition semantics will be inferred from names or disk values alone.
 
 Final Stage 2 checks:18 mission tests pass in native mode, zero skips/failures/errors/native faults. New prelude coverage is237 calls/9,480 bounded segments, all stopped before remap. Unit revalidation separately repeats469 fixtures/14,056 segments (457 returns,12 expected query checkpoints); these are not new aggregate mission coverage. Local mode executes12 tests and skips six optional native tests. Common suites at inspected main pass core302/143 optional skips,combat191/119,economy326/146,graphics122/0,workflow3/0.
+
+Stage 2 integrated at main `b8f424dde0bc12d829b8653bdd9deb4906093397`, final feature `0c7d825fe008b2c8ecc24a9e54bd0af8efb546d0`, reviewed implementation `5361b496e61265275cc129de8efc018d267d266f`. The clean worker fetched main `6a9168e42f917096af88fc6c510b3f25b7230516`, verified ancestry and reproduced all 18 native tests / exact per-slice counts before Stage 3 implementation.
+
+## Stage 3: end-condition and objective table initialization
+
+[carregador_condicoes.py](../pesquisas-paralelas/missoes/carregador_condicoes.py) adds two exact original table loaders. These are initialization APIs; **`TestFinDeMission`, objective consumption, victory/loss and events remain unsupported**. The [original-byte manifest](../pesquisas-paralelas/missoes/evidencias/condicoes-manifesto.json) includes both loader bodies and the still-unimplemented consumer/query bodies. [Reviewed private REA evidence](../pesquisas-paralelas/missoes/evidencias/rea-condicoes-review.json) inventories the consumer's caller and 11 resolved native queries without adopting its fallible Watcom pseudocode as semantics.
+
+`carregar_condicoes_fim(leitor, memoria)` consumes a committed `Leitor` positioned at the format manual's `tabela_458b05` block, and a separate writable contiguous **114-byte** inherited buffer corresponding to `0x4e1d20..0x4e1d92`:
+
+| Relative bytes | Original loading effects |
+|---|---|
+| 0..99 | Ten 10-byte records. Before reading the header, set **only the first byte of every record to255**, retaining the other nine bytes |
+| 100..103 | Four adjacent result/global bytes; retain all of them |
+| 104..113 | Ten status bytes. Clear a status only **after** its corresponding record read completes; statuses beyond the supplied count retain inherited values |
+
+The protected header domain is u16 count0..10 and size10. Read count then size, then copy each entire record in order and clear its one status byte. Count0 still marks the ten record codes, but preserves all statuses and other record bytes. Unsupported count/size raises after code marking and header reads. A strict read failure retains previous copies/status stores and the initial marking. Return `TabelaMissaoCarregada(count, fim, rotina_seguinte=0x47c30f)`; the next original call is not executed. Raw record codes are opaque inputs to this loader, including codes outside the observed corpus.
+
+`carregar_objetivos(leitor, memoria)` takes a committed `Leitor` at `listas_por_jogador` and **804 inherited writable bytes** at `0x511ffc`: four players ×100 u16 ID words (800 bytes), followed by four retained player cursor bytes at `0x51231c`. It first fills the800 ID bytes with `0xff`. In player/ordinal order it reads and stores each u16 ID, then consumes one disk flag byte into discarded scratch. The flag is not copied into runtime objective memory. A failure before the flag read retains the preceding stored word. Cursor bytes are never reset by this routine. Return `TabelaMissaoCarregada(400, fim, rotina_seguinte=0x47ac30)`; no monster-entry load, cursor query or text load is executed.
+
+Both APIs validate input shape/writability before reads or effects. These strict in-memory adapters do not model Win32 partial reads or malformed native buffer overruns. They neither initialize unrelated world state nor infer objective rules from raw IDs. The original `LoadObjectif`/`LoadFinMission` callers occur after intervening auxiliary loaders; APIs may only be joined when those operations are explicitly supplied.
+
+Across all38 original maps, serialized objective words are `0xffff`; this is a disk observation, **not evidence that missions lack objectives**. Separate end-condition records contain first-byte values0/1/3/4/5/255. MONDE01's PT-BR briefing is an independent player-facing source; its wording is preserved in the original file and is not substituted for executing the condition evaluator. The original consumer `TestFinDeMission 0x458606` is called by `CalculGame 0x42c868` and queries resources, structures, ownership, influence, alliances, invention count, mission number and illumination. Its mission-specific branches and callback order need independent traces before implementation.
+
+Four [original-only table captures](../pesquisas-paralelas/missoes/evidencias/captura-condicoes-original.json), created before translation, cover real MONDE01, zero-record condition input and synthetic nonempty objective words/flags. They returned in1,618 bounded segments with explicit inherited patterns, retaining adjacent globals/cursors. Native table-loader instructions execute unchanged; only successful FileRead data is supplied. Earlier evidence and reports remain untouched.
+
+```sh
+python3 -B pesquisas-paralelas/missoes/extrair_condicoes.py
+python3 -B pesquisas-paralelas/missoes/capturar_condicoes.py
+RISING_EMULAR=1 python3 -B -m unittest discover -s pesquisas-paralelas/missoes/testes -p test_condicoes.py -v
+python3 -B pesquisas-paralelas/missoes/validar.py --emular
+```
+
+The next supported dependency now available is core's explicit selection-list initializer, integrated at main `140cc1a2ff38811fcbc02a1bda583e45f5f72462`; its four u16 stores preserve unit+bd flags and the rest of the2,048-byte allocation. A subsequent bounded mission wrapper can consume it before Stage1's continuation. It has not been silently replaced by constructor zeros, and no larger world/mission readiness follows from its existence. Remapping, structure/unit insertion, auxiliary AI tables, complete initialization tails, event/condition execution, dispatch and reference-game runtime remain open.
+
+Fresh Stage 3 results:all26 mission tests pass with native mode, zero skips/failures/errors/native faults. The new table slice completes71 native FinMission calls and41 native Objectif calls in33,599 segments. Prior unit and prelude counts are separate repeats in the [Stage 3 report](../pesquisas-paralelas/missoes/validacao/stage3-suite-x86.json). Local mode executes17 tests and skips nine optional native tests. Common checks at inspected main pass core314/149 optional skips,combat198/123,economy337/151,graphics134/0,workflow3/0.

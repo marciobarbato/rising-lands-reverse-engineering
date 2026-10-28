@@ -1,0 +1,66 @@
+{
+  "rea_source_revision": "b9a8f8e9f25feb9cc97bf4960748f2bdf8c898bc",
+  "analysis_sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "original_oracle_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "provider": {
+    "id": "ghidra",
+    "name": "Ghidra",
+    "version": "12.2"
+  },
+  "evidence_id": "ev_cc04700400f714b0c25d6f4a476d077d0dc533e7563383876a036e4da37caffe",
+  "procedure": "0x458606",
+  "callers": [
+    {
+      "address": "0x42c868",
+      "name": "OriginaisSBL::CalculGame"
+    }
+  ],
+  "callees": [
+    {
+      "address": "0x41a08c",
+      "name": "OriginaisSBL::BatimentGetPlayer"
+    },
+    {
+      "address": "0x41a4f4",
+      "name": "OriginaisSBL::BatimentGetType"
+    },
+    {
+      "address": "0x41a735",
+      "name": "OriginaisSBL::BatimentExiste"
+    },
+    {
+      "address": "0x41aee2",
+      "name": "OriginaisSBL::BatimentGetCase"
+    },
+    {
+      "address": "0x4676e5",
+      "name": "OriginaisSBL::TestRessource"
+    },
+    {
+      "address": "0x46c11a",
+      "name": "OriginaisSBL::MissionGetNum"
+    },
+    {
+      "address": "0x46d838",
+      "name": "OriginaisSBL::PlayerEstAllie"
+    },
+    {
+      "address": "0x470554",
+      "name": "OriginaisSBL::RechercheGetNbInvention"
+    },
+    {
+      "address": "0x47693a",
+      "name": "OriginaisSBL::CaseEstIlluminee"
+    },
+    {
+      "address": "0x47bf66",
+      "name": "OriginaisSBL::CaseGetZoneInfluence"
+    },
+    {
+      "address": "0x47c114",
+      "name": "OriginaisSBL::GetTopLeftCaseZoneInfluence"
+    }
+  ],
+  "unresolved_calls": [],
+  "review": "Consumer inventoried only. Decompiled register/stack signatures remain fallible; original assembly governs. No victory, condition or query behavior is translated by this stage. Private session exported and closed."
+}
