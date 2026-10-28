@@ -88,6 +88,10 @@ class MundoUnidades:
         from selecao_unidades import inicializar_selecoes_unidades
         return inicializar_selecoes_unidades(self.selecoes_unidades)
 
+    def unidade_selecionada(self, jogador, indice):
+        from selecao_unidades import unidade_selecionada
+        return unidade_selecionada(self, jogador, indice)
+
     @staticmethod
     def _indice(indice):
         indice &= 65535

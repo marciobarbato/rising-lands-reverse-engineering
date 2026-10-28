@@ -1,0 +1,18 @@
+{
+  "x86_executed": false,
+  "foreign_owner_cleanup_boundary": "0x420fb7",
+  "own_visible_request": {
+    "checkpoint": "0x440de7",
+    "dependency": "0x48aa79",
+    "request": {
+      "unidade": 7,
+      "codigo": 460288,
+      "flag": 0,
+      "volume": 256,
+      "offset_handle": 2192,
+      "opcode": 80
+    }
+  },
+  "flag_after": 0,
+  "scope": "Two synthetic placement handoffs only; no audio insertion/playback or economic cleanup."
+}

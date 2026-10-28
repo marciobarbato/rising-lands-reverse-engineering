@@ -46,6 +46,14 @@ class MundoFisico(MundoUnidades, VisaoMovimento):
         from colocacao_saida import colocar_unidade_saida
         return colocar_unidade_saida(self, indice, celula)
 
+    def consultar_volume_unidade(self, indice, janela):
+        from voz_unidades import consultar_volume_unidade
+        return consultar_volume_unidade(self, indice, janela)
+
+    def solicitar_voz_unidade(self, indice, modo, flag, *, janela=None):
+        from voz_unidades import solicitar_voz_unidade
+        return solicitar_voz_unidade(self, indice, modo, flag, janela=janela)
+
     def _pegada(self, tipo, celula):
         return [(celula - d) & 65535 for d in ((0, 1, 257, 256) if tipo in QUADRUPLOS else (0,))]
 
