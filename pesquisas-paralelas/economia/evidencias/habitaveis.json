@@ -1,0 +1,523 @@
+{
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_analysis_pe_not_executed": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "sha256_sbl": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "scope": "MissionPlaceTerrain structure habitation: BatimentEstHabiter predicate, BatimentHabitable with complete BatimentSetTechnologie and BatimentGetCase; core DecouvreTerrain/IllumineTerrain called directly",
+  "caller_order": [
+    "for AX/EDX index 0..999 ascending (u16 loop, exit 0x46c17d -> 0x46b6f5)",
+    "BatimentExiste 0x41a735 (AL)",
+    "PlaceBatiment 0x41c4ac (core)",
+    "BatimentEstHabiter 0x41a5b8 (AL)",
+    "if AL: BatimentHabitable 0x41cc70",
+    "BatimentModifyMap 0x419e97 AX=index EDX=1 (core), for every existing structure"
+  ],
+  "habitable_order": [
+    "BatimentSetTechnologie AL=owner +4 DL=type +8",
+    "types 17/9/12: word +0x84=200, return",
+    "type 4: word +0x78=0",
+    "type 3 and owner<4: inline BatimentCalculResource level",
+    "R = radius jump table (types >21 keep the inherited EDI)",
+    "BatimentGetCase AX=index (EDX=R, EBX=0 ignored and preserved)",
+    "DecouvreTerrain 0x476851 AX=cell DX=(R+3)&0xffff BL=owner +4",
+    "IllumineTerrain 0x476cb3 AX=cell DX=R BL=owner +4",
+    "word +0x84=200"
+  ],
+  "radius_by_type": [
+    20,
+    8,
+    10,
+    8,
+    5,
+    8,
+    8,
+    8,
+    8,
+    null,
+    7,
+    7,
+    null,
+    8,
+    8,
+    8,
+    8,
+    4,
+    8,
+    4,
+    8,
+    4
+  ],
+  "captures": [
+    {
+      "start": "0x46c16d",
+      "end_exclusive": "0x46c1b8",
+      "symbol": "MissionPlaceTerrain",
+      "role": "Structure scan after the unit scan; caller order",
+      "bytes_hex": "31dbeb014331d26689da81fae80300000f8d72f5ffff89d0e8abe5faff84c074e389d0e81703fbff89d0e81ce4faff84c0740789d0e8c90afbff31c0ba010000006689d8e8e1dcfaffebb9",
+      "sha256": "46afd064111d0f83632c4d3fa2830340198461ac1d42c4797b9e08fef5310e55",
+      "listing": "habitaveis-0046c16d.asm"
+    },
+    {
+      "start": "0x46b6f5",
+      "end_exclusive": "0x46b6f8",
+      "symbol": "LoadVar",
+      "role": "Shared pop edx/pop ebx/ret epilogue reached by the MissionPlaceTerrain scan exit 0x46c17d",
+      "bytes_hex": "5a5bc3",
+      "sha256": "b39b98e5fec26b89a4d95ff11dcc8e9a60b6efbea74809eded6f2e897705d575",
+      "listing": "habitaveis-0046b6f5.asm"
+    },
+    {
+      "start": "0x41a5b8",
+      "end_exclusive": "0x41a61c",
+      "symbol": "BatimentEstHabiter",
+      "role": "Caller predicate before BatimentHabitable",
+      "bytes_hex": "535231d26689c289d0c1e00401d0c1e00201d0bac8a04900c1e00201c231db8a420888c38d420c83fb15750ee861cc020084c0742ab0015a5bc383fb027509e84ecc020084c075ed8d420cbb09000000ba01000000e8a6cb02006685c0ebd430c05a5bc3",
+      "sha256": "8db6619013ef9a6ed8f6b8bb53cac82fb4752b1ff95e62d2b61531dfe28a67b1",
+      "listing": "habitaveis-0041a5b8.asm"
+    },
+    {
+      "start": "0x41cc70",
+      "end_exclusive": "0x41cde0",
+      "symbol": "BatimentHabitable",
+      "role": "Complete body",
+      "bytes_hex": "53515256575583ec105031c0668b042489c6c1e60401c6c1e60201c6c1e60281c6c8a0490031d28a460888c28a460425ff000000e8c3faffff31c08a460883f8110f841801000083f8090f840f01000083f80c0f840601000083f804750b66c746780000e98400000083f8030f857b0000008a460425ff00000083f8040f8d6a00000089c5c1e50229c589c201ed31c2668b952cfb4d0085d20f8e4e0000008d4c24048d5c2408508d5424108d442414e878a904008b4424108b54240c668b9d2cfb4d0001d031d266f7f331d26689c289d0c1e00329d031db89c2668b9d2efb4d00c1fa1ff7fb888530fb4d008a46083c15773525ff0000002eff248518cc4100bf14000000eb21bf0a000000eb1abf08000000eb13bf04000000eb0cbf05000000eb05bf0700000031c089fa668b042431dbe83ae1ffff83c2038a5e040fb7e881e2ffff000089e8e8939a050089e831d231db6689fa8a5e04e8e49e050066c78684000000c80083c414e93d0d0000",
+      "sha256": "03d1c554a29a638f8af3893fca25b3d8f29156bfdf329c63a63804e574ecc581",
+      "listing": "habitaveis-0041cc70.asm"
+    },
+    {
+      "start": "0x41db1d",
+      "end_exclusive": "0x41db24",
+      "symbol": "BatimentEnleveUneTroupeHospi",
+      "role": "Shared epilogue (inside this symbol) entered at 0x41db1d by BatimentHabitable and at 0x41db1e by BatimentGetCase",
+      "bytes_hex": "5d5f5e5a595bc3",
+      "sha256": "7227c48dab9cf58cef6ab93b965ca6429bd0f282cc829c7d338a55a23a93f08d",
+      "listing": "habitaveis-0041db1d.asm"
+    },
+    {
+      "start": "0x41c76c",
+      "end_exclusive": "0x41cb9a",
+      "symbol": "BatimentSetTechnologie",
+      "role": "Complete technology-Bag producer",
+      "bytes_hex": "5351565783ec0488042431db88c383fb040f8dfc00000089d9c1e10301d9c1e10429d9b8e8d64d00c1e1040fb6f201c889f1c1e10229f1c1e10201f1c1e10301c189ce80fa060f82b20300000f864303000080fa100f82860300000f866902000080fa120f82a90000000f866f01000080fa140f84e0020000e995000000ba0400000089c8e852a9020031c031d288d8e88d5a020084c0740eba0600000089c831dbe870ac020031c0ba010000008a0424e86c5a020084c07411bb01000000ba0600000089f0e84cac020031c0ba020000008a0424e8485a020084c07411bb02000000ba0600000089f0e828ac020031c0ba080000008a0424e8245a020084c07411bb08000000ba0600000089f0e804ac020083c4045f5e595bc3ba0400000089c8e8b5a80200ba0500000089d8e8ef59020084c07411bb05000000ba0600000089c8e8cfab020031c0ba060000008a0424e8cb59020084c0740ebb0600000089f089dae8aeab020031c0ba070000008a0424e8aa59020084c07497bb07000000eb84ba0300000089c8e84da80200eb82ba0200000089c8e83fa80200ba0300000089d8e87959020084c07411bb03000000ba0600000089c8e859ab020031c0ba190000008a0424e85559020084c00f843effffffbb19000000e928ffffffba0100000089c8e8f1a70200ba1000000089d8e82b59020084c00f8414ffffffbb10000000ba0600000089c8e9fefeffffba0500000089c8e8c0a70200ba0b00000089d8e8fa58020084c07411bb0b000000ba0600000089c8e8daaa020031c0ba0c0000008a0424e8d658020084c07411bb0c000000ba0600000089f0e8b6aa020031c0ba0d0000008a0424e8b258020084c07411bb0d000000ba0600000089f0e892aa020031c0ba0e0000008a0424e88e58020084c07411bb0e000000ba0600000089f0e86eaa020031c0ba0f0000008a0424e86a58020084c00f8453feffffbb0f000000e93dfeffffba0100000089c8e806a70200ba0a00000089d8e84058020084c00f8429feffffbb0a000000e910ffffffba0200000089c8e8dca60200ba0400000089d8e81658020084c07411bb04000000ba0600000089c8e8f6a9020031c98a0c2489cbc1e30229cbc1e30229cb01dbe80bf900008d43148a80d4fa4d0084c00f84c9fdffffbb14000000ba03000000e9b3fdffffba0200000089c8e877a60200ba0400000089d8e8b157020084c07411bb04000000ba0600000089c8e891a90200bb05000000ba04000000e977fdffffba0500000089c8e83ba6020031ffeb014731db6689fb83fb050f8d5ffdffff31c98a0c2489da89c8e8637e050084c074df89da89c8e81d7e050084c075d2ba0400000089f0e838a90200ebc480fa0d0f8229fdffff0f86a1fdffff80fa0f0f84fbfeffffe915fdffff80fa02721d0f8612fdffff80fa030f8671fdffff80fa050f84f5fdffffe9f3fcffff80fa010f8455fcffffe9e5fcffff",
+      "sha256": "caba9328e3ef756f5624b02ec8b26da0d91b6c9c6c487c1e541ccef8a17b17c3",
+      "listing": "habitaveis-0041c76c.asm"
+    },
+    {
+      "start": "0x41aee2",
+      "end_exclusive": "0x41aff8",
+      "symbol": "BatimentGetCase",
+      "role": "Pure footprint-centre query; EDX/EBX are not inputs",
+      "bytes_hex": "535152565783ec1889c131d26689c289d0c1e00401d0c1e00201d0bec8a04900c1e00201c6668b460231d2894424088a460888c289d0c1e00229d0bfffff0000c1e00231db01c231c9c1e202893c24668b828c5d4900895c241089442404668b828e5d4900895c24148944240ceb0141663b4c240c735031dbeb01438b5424046639d373ea89d00fafc131d201d86689c231c08a4608e8dffbffff84c074dc663b1c247303891c246639cf760289cf663b4c24107604894c2410663b5c241476ba895c2414ebb431d231c0668b5424106689f829c289d0c1fa1f2bc2d1f889c331d231c0668b1424668b44241429d089c2c1fa1f2bc2d1f889c289d801f88b5c2408c1e00801c38b042401d001d883c418e9262b0000",
+      "sha256": "00757b16af936eb460e2a4195e9ac487cf76c972b908ae3270f5221e76e20f2e",
+      "listing": "habitaveis-0041aee2.asm"
+    },
+    {
+      "start": "0x41ab5c",
+      "end_exclusive": "0x41ac8b",
+      "symbol": "BatimentCollision",
+      "role": "Static masks; tables owned by core pegadas_estruturas",
+      "bytes_hex": "5388c389d080fb150f871d01000031d288da2eff249504ab410025ffff00008a80045c49005bc325ffff00008a80105c49005bc325ffff00008a80305c49005bc325ffff00008a80505c49005bc325ffff00008a80ec5c49005bc325ffff00008a80805c49005bc325ffff00008a806c5d49005bc325ffff00008a80305d49005bc325ffff00008a80f85c49005bc325ffff00008a808a5d49005bc325ffff00008a80645d49005bc325ffff00008a805c5d49005bc325ffff00008a808b5d49005bc325ffff00008a806c5c49005bc325ffff00008a80a45c49005bc325ffff00008a801c5d49005bc325ffff00008a80d45c49005bc325ffff00008a80e85c49005bc325ffff00008a80485d49005bc325ffff00008a80bc5c49005bc325ffff00008a80c85c49005bc330c05bc3",
+      "sha256": "5b3d3484d48fe0e3bde39cb69224113789d583f301074ec252dfbd3be2c2bdf0",
+      "listing": "habitaveis-0041ab5c.asm"
+    },
+    {
+      "start": "0x447148",
+      "end_exclusive": "0x447197",
+      "symbol": "BagInit",
+      "role": "Bag reset",
+      "bytes_hex": "53515683ec0489c689142466c700000066c74066000066c74004000089c166c74002000031d2eb0f89c366c7445906000042c64401420031c06689d083f81e7ce78b04246689460283c4045e595bc3",
+      "sha256": "b407efade7ed0ea802ec0e9108e94f308772082856e01c01ca3bb9e9ad456310",
+      "listing": "habitaveis-00447148.asm"
+    },
+    {
+      "start": "0x447483",
+      "end_exclusive": "0x4474a6",
+      "symbol": "BagPrend",
+      "role": "Unchecked append",
+      "bytes_hex": "515688d189de66ff406631db668b106689d389da884c0342668974500666ff005e59c3",
+      "sha256": "f4ee661016d452b9e06a3c92cca41abf4ceea9304de807123c9321940e62c5f1",
+      "listing": "habitaveis-00447483.asm"
+    },
+    {
+      "start": "0x4471b8",
+      "end_exclusive": "0x44724a",
+      "symbol": "BagContient",
+      "role": "Mode-1 type count used by the predicate",
+      "bytes_hex": "5156575583ec0888142489df8a0c2431dbfec931d2884c2404eb29668b74700681e6ffff000069ee140100008b35a0194e008a4c2e0131f60fb6e96689fe39f575014342663b5002733e31f66689d68a4c06423a0c24741cebe9663b7c7006ebdf31f66689d6663b7c700675d6b801000000eb168a4c240480f90677c60fb6e92eff24ad9c71440089d883c4085d5f5e59c3",
+      "sha256": "50f55cdcda9fbac09d1cd2b486f7e3daac6e58d0468b3c5b5739c0f717922257",
+      "listing": "habitaveis-004471b8.asm"
+    },
+    {
+      "start": "0x44724a",
+      "end_exclusive": "0x4472d3",
+      "symbol": "BagContientTroupe",
+      "role": "Unit-type predicate (erratum: not BagVide)",
+      "bytes_hex": "53515289c231dbeb0143663b5a020f836f00000031c96689d98a44114225ff00000083f8017402ebe089c8668b44420625ffff000069c0140100008b0da0194e008a440101b4013c0e721676203c12721c76243c1772203c18761c3c19740eeb183c06720c3c08760e3c0b720a30e4eb083c03720276f6b40184e4748cb0015a595bc330c05a595bc3",
+      "sha256": "1da9b4cab9146553320717a2aeebc8198415eeadde61b0f14046297dbdd6e362",
+      "listing": "habitaveis-0044724a.asm"
+    },
+    {
+      "start": "0x44228e",
+      "end_exclusive": "0x4422b0",
+      "symbol": "TypeEnginEstRealisable",
+      "role": "Byte table 0x4e1934 + 26*owner + type",
+      "bytes_hex": "5388d331d288c289d0c1e00229d0c1e00201c231c001d288d88a840234194e005bc3",
+      "sha256": "af7c5938cb9ab84b176424412ec5d89dd02d90ef948c73a9c9ef7af3fe710a64",
+      "listing": "habitaveis-0044228e.asm"
+    },
+    {
+      "start": "0x42c3b0",
+      "end_exclusive": "0x42c3b6",
+      "symbol": "ReseauActif",
+      "role": "Called by type 15; AL result discarded",
+      "bytes_hex": "a030074e00c3",
+      "sha256": "825f12d3c95c19deffd9d1e9b49a7aca994adf03b31b7eb847c2ffdc996c9275",
+      "listing": "habitaveis-0042c3b0.asm"
+    },
+    {
+      "start": "0x474958",
+      "end_exclusive": "0x474974",
+      "symbol": "SortilegeEstRealisable",
+      "role": "Type-6 branch",
+      "bytes_hex": "5389d331d288c289d0c1e00201c231c06689d88a8402308f50005bc3",
+      "sha256": "0377017f312be5ac69152ce8da74625a049692b04569e2dbeeecc32f497d1a9f",
+      "listing": "habitaveis-00474958.asm"
+    },
+    {
+      "start": "0x474991",
+      "end_exclusive": "0x4749ad",
+      "symbol": "SortilegeEstInvente",
+      "role": "Type-6 branch",
+      "bytes_hex": "5389d331d288c289d0c1e00201c231c06689d88a8402448f50005bc3",
+      "sha256": "f34af01576f4bbec85060cddbecead2ad4f3a7ea8727f01caf8542c8cee6b1f4",
+      "listing": "habitaveis-00474991.asm"
+    },
+    {
+      "start": "0x46769d",
+      "end_exclusive": "0x4676e5",
+      "symbol": "GetRessourceStock",
+      "role": "Type-3 level recomputation",
+      "bytes_hex": "565789c689d731c08a44240cc1e005668b90b22e4e00662b90b02e4e00668916668b90ba2e4e00668bb0b82e4e0029f2668917668b90aa2e4e00668bb8a82e4e0029fa668913eb81",
+      "sha256": "d58a63c1d9858eb5b063c10dec0317e206d8151eb5763debc9c48f9aa8ee2a36",
+      "listing": "habitaveis-0046769d.asm"
+    },
+    {
+      "start": "0x423355",
+      "end_exclusive": "0x4233d8",
+      "symbol": "BatimentCalculResource",
+      "role": "Same level formula as the inline type-3 block",
+      "bytes_hex": "5351525683ec1025ff00000083f8040f8dbbfcffff89c6c1e60229c689c201f631c2668b962cfb4d0085d20f8e9ffcffff8d4c24048d5c2408508d5424108d442404e8014304008b04248b54240c668b9e2cfb4d0001d031d266f7f331d26689c289d0c1e00329d031db89c2668b9e2efb4d00c1fa1ff7fb888630fb4d00e94dfcffff",
+      "sha256": "ad5347c53207c5e14dcb01f80070bd60a7935f825436a03cad539bbbace4702d",
+      "listing": "habitaveis-00423355.asm"
+    },
+    {
+      "start": "0x418af7",
+      "end_exclusive": "0x418b15",
+      "symbol": "BatimentGetTypeName",
+      "role": "Returns 0x495d8c + type*52 + 0x13",
+      "bytes_hex": "5231d288c289d0c1e00229d0c1e00201d0c1e002058c5d490083c0135ac3",
+      "sha256": "318ac5bed49b5af270137d614956a92647e5dfe2f84dfb96ce60686709b791c0",
+      "listing": "habitaveis-00418af7.asm"
+    },
+    {
+      "start": "0x419112",
+      "end_exclusive": "0x4191c9",
+      "symbol": "BatimentInitCave",
+      "role": "Counts type 3 (CAVE) into warehouse word 0x4dfb2c",
+      "bytes_hex": "5351525657bfc8a0490030ffeb2731c988f96bc1166bd106660fb6b073a049008a8082a04900fec788814cfb4d006689b22cfb4d0031c088f883f8040f8dca49000088fb31d2eb1031c988d96bc91642c6840170a049000031c06689d083f8167ce631d2eb014231c06689d03de80300007d9b69c0140100008a44070525ff0000000f95c084c074dd31c06689d069c01401000001f88a480438d975c931c988d96bc9168a40088d8970a0490025ff000000fe0401ebaf",
+      "sha256": "5807a6c8efbb2f2f4244b2262754bf72db4d690be0f9724f5600e30aa959765f",
+      "listing": "habitaveis-00419112.asm"
+    }
+  ],
+  "jump_tables": [
+    {
+      "start": "0x41cc18",
+      "entries": [
+        "0x41cd71",
+        "0x41cd7f",
+        "0x41cd78",
+        "0x41cd7f",
+        "0x41cd8d",
+        "0x41cd7f",
+        "0x41cd7f",
+        "0x41cd7f",
+        "0x41cd7f",
+        "0x41cd99",
+        "0x41cd94",
+        "0x41cd94",
+        "0x41cd99",
+        "0x41cd7f",
+        "0x41cd7f",
+        "0x41cd7f",
+        "0x41cd7f",
+        "0x41cd86",
+        "0x41cd7f",
+        "0x41cd86",
+        "0x41cd7f",
+        "0x41cd86"
+      ],
+      "role": "BatimentHabitable radius jump table, types 0..21",
+      "sha256": "3d9443f5201b1bddf96f1da30483b34978f2e4d2507e02d41ba7840cdb75ea73"
+    },
+    {
+      "start": "0x41ab04",
+      "entries": [
+        "0x41ab76",
+        "0x41ab83",
+        "0x41ab90",
+        "0x41ab9d",
+        "0x41abaa",
+        "0x41abb7",
+        "0x41abc4",
+        "0x41abd1",
+        "0x41abde",
+        "0x41abeb",
+        "0x41abf8",
+        "0x41ac05",
+        "0x41ac12",
+        "0x41ac1f",
+        "0x41ac2c",
+        "0x41ac39",
+        "0x41ac46",
+        "0x41ac53",
+        "0x41ac60",
+        "0x41ac6d",
+        "0x41ac39",
+        "0x41ac7a"
+      ],
+      "role": "BatimentCollision mask jump table, types 0..21",
+      "sha256": "fc0399ef52586c10ddcb013870e55d74c0dae730bdcbce7f0d06e85d744c7f8c"
+    },
+    {
+      "start": "0x44719c",
+      "entries": [
+        "0x4471d3",
+        "0x447212",
+        "0x447219",
+        "0x4471fb",
+        "0x4471fb",
+        "0x447219",
+        "0x447219"
+      ],
+      "role": "BagContient tag jump table, tags 0..6",
+      "sha256": "38f41f0159a70c52ad817d27f63ddb231279e949eb065f4d22d65c4ef997a4d7"
+    }
+  ],
+  "structure_type_table": {
+    "start": "0x495d8c",
+    "stride": 52,
+    "name_offset": "0x13",
+    "accessor": "BatimentGetTypeName 0x418af7",
+    "hover_callers": [
+      "InputGame 0x429ad1",
+      "InputGame 0x42c141"
+    ],
+    "sha256": "d4662af52ab3603b13be7f526f1fe040c38b87b1cbb399f25d27614aa20841ee",
+    "records": [
+      {
+        "type": 0,
+        "width": 3,
+        "height": 4,
+        "name": "PHARE",
+        "record_hex": "03000400c8000000045c49000c000400000002504841524500000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 1,
+        "width": 5,
+        "height": 6,
+        "name": "CASERNE",
+        "record_hex": "0500060090010000105c49001400100000000843415345524e450000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 2,
+        "width": 6,
+        "height": 5,
+        "name": "SANCTUAIRE",
+        "record_hex": "0600050058020000305c490032001e0000000853414e435455414952450000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 3,
+        "width": 5,
+        "height": 5,
+        "name": "CAVE",
+        "record_hex": "0500050064000000505c49000a000600000002434156450000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 4,
+        "width": 3,
+        "height": 4,
+        "name": "CULTURE",
+        "record_hex": "0300040064000000ec5c49000c00060000000543554c545552450000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 5,
+        "width": 6,
+        "height": 6,
+        "name": "ATELIER",
+        "record_hex": "060006002c010000805c49001e0010000000084154454c4945520000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 6,
+        "width": 6,
+        "height": 5,
+        "name": "BIBLIOTHEQUE",
+        "record_hex": "06000500f40100006c5d490014000a000000034249424c494f544845515545000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 7,
+        "width": 4,
+        "height": 6,
+        "name": "LABORATOIRE",
+        "record_hex": "0400060090010000305d490018000c000000024c41424f5241544f49524500000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 8,
+        "width": 6,
+        "height": 6,
+        "name": "HANGAR",
+        "record_hex": "06000600f4010000f85c49002800180000001148414e474152000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 9,
+        "width": 1,
+        "height": 1,
+        "name": "MUR",
+        "record_hex": "010001001e0000008a5d4900040004000000004d5552000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 10,
+        "width": 2,
+        "height": 3,
+        "name": "TOURCATAPULTE",
+        "record_hex": "0200030032000000645d49000a000400000001544f55524341544150554c54450000000000000000000000000000000000000000"
+      },
+      {
+        "type": 11,
+        "width": 2,
+        "height": 3,
+        "name": "TOURCANON",
+        "record_hex": "02000300640000005c5d490014000600000002544f555243414e4f4e000000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 12,
+        "width": 1,
+        "height": 1,
+        "name": "HERSE",
+        "record_hex": "01000100460000008b5d490008000800000000484552534500000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 13,
+        "width": 4,
+        "height": 5,
+        "name": "CIRQUE",
+        "record_hex": "040005005e0100006c5c490014000600000006434952515545000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 14,
+        "width": 4,
+        "height": 6,
+        "name": "GARAGE",
+        "record_hex": "040006005e010000a45c490018001000000004474152414745000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 15,
+        "width": 4,
+        "height": 5,
+        "name": "MONASTERE",
+        "record_hex": "04000500900100001c5d4900140004000000064d4f4e415354455245000000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 16,
+        "width": 4,
+        "height": 5,
+        "name": "MARCHE",
+        "record_hex": "040005002c010000d45c49000c0008000000024d4152434845000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 17,
+        "width": 2,
+        "height": 2,
+        "name": "CRISTAL",
+        "record_hex": "020002002c010000e85c4900100006000000004352495354414c0000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 18,
+        "width": 4,
+        "height": 5,
+        "name": "HELIOPORT",
+        "record_hex": "040005002c010000485d49001400080000000448454c494f504f5254000000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 19,
+        "width": 3,
+        "height": 4,
+        "name": "HOSPI",
+        "record_hex": "030004002c010000bc5c49000a000400000007484f53504900000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "type": 20,
+        "width": 4,
+        "height": 5,
+        "name": "MONASTEREFUSION",
+        "record_hex": "04000500900100009cfb4d00140004000000064d4f4e415354455245465553494f4e000000000000000000000000000000000000"
+      },
+      {
+        "type": 21,
+        "width": 3,
+        "height": 4,
+        "name": "TENTE",
+        "record_hex": "030004002c010000c85c49000a00040000000654454e544500000000000000000000000000000000000000000000000000000000"
+      }
+    ]
+  },
+  "cave_identity": {
+    "conclusion": "Structure type 3 is the original CAVE; type 2 is SANCTUAIRE. MONDE01 serializes one type-2 structure.",
+    "evidence": [
+      "0x495d8c type-name table: 2=SANCTUAIRE, 3=CAVE",
+      "BatimentInitCave 0x419112 copies byte 0x49a073+22*owner (type-3 count) to word 0x4dfb2c+6*owner",
+      "BatimentCalculResource 0x423355 and BatimentAjouteMatiere use that word as warehouse count",
+      "TEXTES.TXT building list (70->91) gives Armazém at position 3 and Santuário at 2; no code path adding 70 to a structure type was found, so that list is corroborating, not decisive"
+    ],
+    "not_inferred": "The PT-BR briefing wording and the mission objective evaluation (TestFinDeMission) are not used"
+  },
+  "symbol_erratum": {
+    "address": "0x44724a",
+    "original_symbol": [
+      "BagContientTroupe"
+    ],
+    "informal_label_used_before": "BagVide",
+    "bagvide_actual_address": "0x4470b9",
+    "effect": "Naming only; Stage 9/14 code, bytes and behaviour unchanged"
+  },
+  "core_calls": {
+    "DecouvreTerrain": "0x476851",
+    "IllumineTerrain": "0x476cb3",
+    "SetMiniMap": "0x46a388",
+    "gate": "R+3 <= visao_movimento.RAIO_DESCOBERTA_MAXIMO_VALIDADO and R <= RAIO_LUZ_MAXIMO_VALIDADO (fallback 10/8 while absent); owners 0..3 only"
+  },
+  "committed_evidence": [
+    {
+      "path": "evidencias/manifesto.json",
+      "sha256": "7714d0076ed3aeadfa9d905e1950aaac16c672857a507ccef67429250ce06361"
+    },
+    {
+      "path": "evidencias/limpeza-saida.json",
+      "sha256": "f22cc044c58fd2dbfa63777e9037b9a8f6265fcba81a447db67740b011e7f1ce"
+    },
+    {
+      "path": "evidencias/limpeza-saida-symbol-erratum.json",
+      "sha256": "fb1498a4ad76d92d1fa1956a3e53e5345e4a7da9613b2daf311aec1ea95fdbe9"
+    },
+    {
+      "path": "../../evidencias/colocacao-estruturas/manifesto.json",
+      "sha256": "5daf66a2a7ff1023c0f3751366b656df4091643b901a8245789d404c716c322c"
+    },
+    {
+      "path": "../../evidencias/colocacao-saida/manifesto.json",
+      "sha256": "4cb472739564c6a99ab5de4dccaca4ec1e19eb5609922ca7b7184fc5d3bb1fe7"
+    },
+    {
+      "path": "../../relatorios/simbolos-originais.json",
+      "sha256": "7e1e63b5340bc771e4dd743008058e1e47cea79ec74e76c72a70904884f4595e"
+    }
+  ]
+}
