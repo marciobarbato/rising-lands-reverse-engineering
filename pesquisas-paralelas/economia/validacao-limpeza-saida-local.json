@@ -1,0 +1,34 @@
+{
+  "scope": "Isolated production cleanup types1/2/13/16 and complete BagVide; no preceding world caller",
+  "mode": "Python only",
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_512_complete_bag_predicates_all_type_bytes_and_count_independence (test_limpeza_saida.DiferencialLimpezaSaida)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_512_type_two_cleanup_paths_include_unknown_types_and_stale_capacity (test_limpeza_saida.DiferencialLimpezaSaida)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_64_seeded_mixed_bags_and_duplicate_references (test_limpeza_saida.DiferencialLimpezaSaida)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_96_cleanup_building_state_index_and_retention_boundaries (test_limpeza_saida.DiferencialLimpezaSaida)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "declared_stops": 0,
+  "completed_returns": 0,
+  "terrain_dependency_stops": 0,
+  "unit_message_dependency_stops": 0,
+  "expected_x86_exceptions": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}
