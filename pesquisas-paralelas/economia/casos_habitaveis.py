@@ -67,7 +67,8 @@ def _grades_semeadas(mundo, rng):
                 mundo.contagem_luz[dono][celula] = rng.choice((0, 1, 2, 254, 255))
 
 
-def caso_monde01(nome='MONDE01', *, padrao='zero', semear_grades=False, semente=0x41cc70):
+def caso_monde01(nome='MONDE01', *, padrao='zero', semear_grades=False, semente=0x41cc70,
+                 classe=MundoNavegacao, local=0):
     """Actual MONDE01 header, structure record 0 and 16 units via committed loaders.
 
     Physical grids, technology/spell tables, Bags and pools outside the
@@ -85,7 +86,8 @@ def caso_monde01(nome='MONDE01', *, padrao='zero', semear_grades=False, semente=
     rng = random.Random(semente)
     dados = (ambiente_missoes.CD/'WORLD/MONDE01.ETA').read_bytes()
     meta = ler_eta(dados)
-    mundo = MundoNavegacao(meta['largura'], meta['altura'])
+    mundo = classe(meta['largura'], meta['altura'])
+    mundo.jogador_local = local
     economia = Economia(bytearray(rng.randbytes(128)))
     camadas = [bytearray(65536), bytearray(131072), bytearray(65536), bytearray(65536)]
     continuar_cabecalho(Leitor(dados, 0), *camadas, economia, bytearray(4), bytearray(4), 0)
@@ -133,10 +135,10 @@ def registro_estrutura(rng, tipo, dono, origem, *, unidades=(), etiquetas=None, 
 
 def caso_sintetico(nome, tipo, dono, origem, *, largura=256, altura=256, unidades=(), tipos_unidades=(),
                    etiquetas=None, capacidade=None, padrao='aleatorio', semear_grades=False,
-                   armazens=None, semente=0, indice=None, local=0):
+                   armazens=None, semente=0, indice=None, local=0, classe=MundoNavegacao):
     """One structure on an explicit synthetic world; units carry given type bytes."""
     rng = random.Random(f'{nome}:{semente}')
-    mundo = MundoNavegacao(largura, altura)
+    mundo = classe(largura, altura)
     mundo.jogador_local = local
     mundo.unidades[:] = rng.randbytes(220800)
     for u, t in zip(unidades, tipos_unidades):
@@ -160,3 +162,24 @@ def caso_sintetico(nome, tipo, dono, origem, *, largura=256, altura=256, unidade
     ur, er, so, inv = _tabelas(rng, padrao)
     return CasoHabitavel(nome, 'synthetic', indice, mundo, economia, capacidades,
                          bytearray(rng.randbytes(9152)), so, inv, ur, er, rng.randrange(256))
+
+
+def montar_habitacao(caso):
+    """Compose existing economy classes over the case buffers, by identity."""
+    from construcoes import EconomiaConstrucoes
+    from recrutamento import Recrutamento
+    from producao import Producao
+    from proprietarios import PropriedadeConstrucoes
+    from aprendizagem import Aprendizagem
+    from construcoes_habitaveis import HabitacaoConstrucoes
+    m = caso.mundo
+    construcoes = EconomiaConstrucoes(caso.economia, caso.capacidades)
+    construcoes.estruturas = m.estruturas
+    recrutamento = Recrutamento(construcoes)
+    recrutamento.unidades = m.unidades
+    propriedade = PropriedadeConstrucoes(construcoes)
+    propriedade.pendencias, propriedade.sortilegios = caso.pendencias, caso.sortilegios
+    aprendizagem = Aprendizagem(Producao(recrutamento), propriedade)
+    aprendizagem.inventados = caso.inventados
+    return HabitacaoConstrucoes(aprendizagem, unidades_realizaveis=caso.unidades_realizaveis,
+                                estruturas_realizaveis=caso.estruturas_realizaveis)

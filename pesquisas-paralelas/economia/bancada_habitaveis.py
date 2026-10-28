@@ -38,7 +38,8 @@ class BancadaHabitaveis(BancadaColocacaoSaida):
 
     def __init__(self):
         super().__init__(segmentar=True)
-        self.entradas = {'predicado': 0, 'habitavel': 0, 'chamador': 0}
+        self.entradas = {'predicado': 0, 'habitavel': 0, 'chamador': 0, 'tecnologia': 0, 'celula': 0}
+        self.falhas = 0
         self.resultados = {}
         self.chamadas = []
         self.cpu.hook_add(unicorn.UC_HOOK_CODE, self._chamada)
@@ -95,6 +96,26 @@ class BancadaHabitaveis(BancadaColocacaoSaida):
         chave = (rotulo, hex(regs['EIP']))
         self.resultados[chave] = self.resultados.get(chave, 0) + 1
         return regs
+
+    def executar_ou_falhar(self, metodo, *args, **kwargs):
+        """Return registers, or None after an original CPU exception (e.g. #DE)."""
+        try:
+            return metodo(*args, **kwargs)
+        except unicorn.UcError:
+            self.falhas += 1
+            self.resultados[('falha', hex(self.cpu.reg_read(x86.UC_X86_REG_EIP)))] = (
+                self.resultados.get(('falha', hex(self.cpu.reg_read(x86.UC_X86_REG_EIP))), 0) + 1)
+            return None
+
+    def definir_tecnologia(self, jogador, tipo):
+        self.entradas['tecnologia'] += 1
+        return self._resultado('tecnologia', self.executar(
+            0x41c76c, self.intervalos, dict(EAX=jogador, EDX=tipo), limite_instrucoes=1000000))
+
+    def celula_central(self, indice, *, edx=0x1234abcd, ebx=0x5eed0bb5):
+        self.entradas['celula'] += 1
+        return self._resultado('celula', self.executar(
+            0x41aee2, self.intervalos, dict(EAX=indice, EDX=edx, EBX=ebx), limite_instrucoes=1000000))
 
     def esta_habitada(self, indice):
         self.entradas['predicado'] += 1
