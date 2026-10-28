@@ -1,0 +1,25 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": true,
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 78,
+  "success": true,
+  "seconds": 5.55,
+  "scope": "Engin_RetrieveExperimente 0x441623 only: frozen original replay, input protection and fresh intact differential. Producers (Reset/Store) run natively only as provenance.",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "unicorn": "2.1.4",
+  "original_entries": {
+    "0x441623": 74,
+    "0x441470": 2,
+    "0x4414f8": 2
+  },
+  "python_native_comparisons": 74,
+  "maximum_native_instructions_per_segment": 59091,
+  "expected_native_exceptions": 0,
+  "expected_execution_limits": 0,
+  "bindings": 0,
+  "patches": 0
+}
