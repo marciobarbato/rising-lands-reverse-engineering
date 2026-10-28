@@ -1,0 +1,924 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "normalized_analysis_sha256": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "DecouvreCase",
+      "start": "0x47670a",
+      "end_exclusive": "0x476851",
+      "sha256": "bd501f025169c5917b71b3e4c1b0bc38b7c5ca59b6810cbb27a9d739ad047e0e",
+      "file": "0047670a.asm"
+    },
+    {
+      "name": "DecouvreTerrain",
+      "start": "0x476851",
+      "end_exclusive": "0x47693a",
+      "sha256": "6087dba50a99a69f556c7faaaa8f5ad6ea62f9736913ca4c6a905db001fee3bf",
+      "file": "00476851.asm"
+    },
+    {
+      "name": "IllumineCase",
+      "start": "0x476968",
+      "end_exclusive": "0x476adc",
+      "sha256": "2c423b5cdb3aae2fb700f3885d97d8564333fb3aff04997782a03e588112b3a1",
+      "file": "00476968.asm"
+    },
+    {
+      "name": "IllumineTerrain",
+      "start": "0x476cb3",
+      "end_exclusive": "0x476e82",
+      "sha256": "da33ff49f67ac8bc8966b7c15bfed3470f1a6864b0a6aeccb8f56e1c9147c377",
+      "file": "00476cb3.asm"
+    },
+    {
+      "name": "Distance",
+      "start": "0x47954c",
+      "end_exclusive": "0x479555",
+      "sha256": "f5ac3791464f1faf51c65f82399c75bbc0427f31d40340206ca2564444e937e2",
+      "file": "0047954c.asm"
+    },
+    {
+      "name": "SetMiniMap",
+      "start": "0x46a388",
+      "end_exclusive": "0x46a70c",
+      "sha256": "f8b2951d05ca23f6fa0893d6c3a0180f2fd8c010985ef624e9ea69c598049e34",
+      "file": "0046a388.asm"
+    },
+    {
+      "name": "TerrainGetColor",
+      "start": "0x4765f4",
+      "end_exclusive": "0x476647",
+      "sha256": "c332c78cbf9fe2f23674b8f628d64bf889508d974932b35a7ce7ce2be6bbe41a",
+      "file": "004765f4.asm"
+    },
+    {
+      "name": "PlayerGetColor",
+      "start": "0x46003b",
+      "end_exclusive": "0x460051",
+      "sha256": "29d91a479f230bc8807a5b067329a30597dd2a6a6a0431ba8aeabbd256ba0363",
+      "file": "0046003b.asm"
+    },
+    {
+      "name": "TerrainEstDecouvert",
+      "start": "0x4766f0",
+      "end_exclusive": "0x47670a",
+      "sha256": "c7d7973f063848a5fbb332c9d87310bfea7ce416069d880fc6c7cfb2f0a58262",
+      "file": "004766f0.asm"
+    },
+    {
+      "name": "TerrainEstIllumine",
+      "start": "0x476951",
+      "end_exclusive": "0x476968",
+      "sha256": "84c59d08cf94319d014b5f96ea9329a025f205f1d3d20e496a65bcf296ea0cd0",
+      "file": "00476951.asm"
+    },
+    {
+      "name": "PlaceEngin_vision_sums",
+      "start": "0x456feb",
+      "end_exclusive": "0x457040",
+      "sha256": "278a3c82a07e6538dd8dcf72e879c2cb4ca28d069f6edbb560343e09ee61a5df",
+      "file": "00456feb.asm"
+    },
+    {
+      "name": "SetSortEngin_vision_sums",
+      "start": "0x446118",
+      "end_exclusive": "0x446171",
+      "sha256": "bb62c1c1cbafc9d59643fa71366e76d18777edffcc98ba3140dfee51ec0afdbe",
+      "file": "00446118.asm"
+    },
+    {
+      "name": "BatimentHabitable_vision_radii",
+      "start": "0x41cd5d",
+      "end_exclusive": "0x41cdcf",
+      "sha256": "25555b63ab303ba8a7637c6dbcda0aff161079521f69778f8037bcdae8edc554",
+      "file": "0041cd5d.asm"
+    },
+    {
+      "name": "BatimentGetCase_prologue",
+      "start": "0x41aee2",
+      "end_exclusive": "0x41aee7",
+      "sha256": "4c15ca2a74a54d7e042fe9de66ade2a6cb3bde3974f51ba77a74ebffb1804d8b",
+      "file": "0041aee2.asm"
+    },
+    {
+      "name": "BatimentGetCase_tail",
+      "start": "0x41aff0",
+      "end_exclusive": "0x41aff8",
+      "sha256": "7a59dfcf174476aeafaaed9b29f4e2b4a92b7c9c32cc09036450bcea819fb844",
+      "file": "0041aff0.asm"
+    },
+    {
+      "name": "BatimentGetCase_shared_epilogue",
+      "start": "0x41db1e",
+      "end_exclusive": "0x41db24",
+      "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "file": "0041db1e.asm"
+    }
+  ],
+  "writers": [
+    {
+      "address": "0x44fa98",
+      "routine": "EnginSetNewExperience",
+      "field": "0xf5",
+      "bytes": "c683f500000001",
+      "instruction": "mov byte ptr [ebx + 0xf5], 1"
+    },
+    {
+      "address": "0x44fbfa",
+      "routine": "EnginSetLevelExperience",
+      "field": "0xf5",
+      "bytes": "c683f500000001",
+      "instruction": "mov byte ptr [ebx + 0xf5], 1"
+    },
+    {
+      "address": "0x44fc9d",
+      "routine": "EnginSetLevelExperience",
+      "field": "0xf5",
+      "bytes": "c683f500000001",
+      "instruction": "mov byte ptr [ebx + 0xf5], 1"
+    },
+    {
+      "address": "0x457241",
+      "routine": "EnginResetType",
+      "field": "0xbb",
+      "bytes": "c681bb00000005",
+      "instruction": "mov byte ptr [ecx + 0xbb], 5"
+    },
+    {
+      "address": "0x457908",
+      "routine": "EnginSetTypeCaract",
+      "field": "0xbb",
+      "bytes": "c681bb00000005",
+      "instruction": "mov byte ptr [ecx + 0xbb], 5"
+    },
+    {
+      "address": "0x457d55",
+      "routine": "EnginSetType",
+      "field": "0xbb",
+      "bytes": "888abb000000",
+      "instruction": "mov byte ptr [edx + 0xbb], cl"
+    },
+    {
+      "address": "0x457f7b",
+      "routine": "CreerEngin",
+      "field": "0xf5",
+      "bytes": "c686f500000000",
+      "instruction": "mov byte ptr [esi + 0xf5], 0"
+    },
+    {
+      "address": "0x46adeb",
+      "routine": "LoadEngin",
+      "field": "0xbb",
+      "bytes": "8890bb000000",
+      "instruction": "mov byte ptr [eax + 0xbb], dl"
+    },
+    {
+      "address": "0x46ae46",
+      "routine": "LoadEngin",
+      "field": "0xf5",
+      "bytes": "c68402f500000000",
+      "instruction": "mov byte ptr [edx + eax + 0xf5], 0"
+    }
+  ],
+  "writer_scan_bodies": 1339,
+  "domain": {
+    "rising_ini_sha256": "e4762aae51d8aa7bd56280af43a7408a19571ab6dbfcd170fb59cffbcdc8338b",
+    "type_rayon_u16": [
+      7,
+      7,
+      8,
+      7,
+      5,
+      5,
+      5,
+      5,
+      10,
+      5,
+      5,
+      7,
+      10,
+      5,
+      5,
+      8,
+      5,
+      10,
+      10,
+      10,
+      7,
+      7,
+      8,
+      7,
+      10,
+      10
+    ],
+    "type_bb_values": [
+      5,
+      7,
+      8,
+      10
+    ],
+    "f5_values": [
+      0,
+      1
+    ],
+    "maps": [
+      {
+        "file": "MONDE01.ETA",
+        "sha256": "19237b8c3f3c0c76022276da229bec727b17603440823c43561aba159dd47015",
+        "units": 16,
+        "normal_owner_placed_sums": {
+          "5": 11,
+          "7": 4,
+          "10": 1
+        }
+      },
+      {
+        "file": "MONDE02.ETA",
+        "sha256": "291566a7486cb15616c4778d36d6b0ad4f717c65de745b941e640f7f835ad2ba",
+        "units": 16,
+        "normal_owner_placed_sums": {
+          "5": 10,
+          "7": 5,
+          "10": 1
+        }
+      },
+      {
+        "file": "MONDE03.ETA",
+        "sha256": "11e4fc67e687736267699b075ce1a0c6b289fb8180707e37de27649e15810ea6",
+        "units": 13,
+        "normal_owner_placed_sums": {
+          "5": 7,
+          "7": 5,
+          "10": 1
+        }
+      },
+      {
+        "file": "MONDE04.ETA",
+        "sha256": "c4940953c4ce8d256039347cc9d0b4516c98ff3a82a439a0babbdd4c6965ddc4",
+        "units": 40,
+        "normal_owner_placed_sums": {
+          "5": 31,
+          "7": 7,
+          "10": 2
+        }
+      },
+      {
+        "file": "MONDE05.ETA",
+        "sha256": "817f5db77b907dfa69ab8ceb71981e2055dede3fd0e4cd208c8efce33a0c6fc6",
+        "units": 55,
+        "normal_owner_placed_sums": {
+          "5": 35,
+          "7": 16,
+          "10": 4
+        }
+      },
+      {
+        "file": "MONDE06.ETA",
+        "sha256": "c80feed76c2db702a4ed2ff6b3c6e1fe84eabe68138f6660367c14e98a3c10c9",
+        "units": 11,
+        "normal_owner_placed_sums": {
+          "5": 6,
+          "7": 4,
+          "10": 1
+        }
+      },
+      {
+        "file": "MONDE07.ETA",
+        "sha256": "6d574c7428127c966b04f22353dc8a711d4b5897853a61dd579b921e36e0afb1",
+        "units": 16,
+        "normal_owner_placed_sums": {
+          "5": 9,
+          "7": 5,
+          "10": 1
+        }
+      },
+      {
+        "file": "MONDE08.ETA",
+        "sha256": "a8a5156251a2937c49f7331a9f8890ec3d857ae420fd6dbe6eb465cae2965e9c",
+        "units": 14,
+        "normal_owner_placed_sums": {
+          "5": 14
+        }
+      },
+      {
+        "file": "MONDE09.ETA",
+        "sha256": "3b626f3fe831844f4e6f0b7d343c5c8e316dc56ee03447fd028ad8b0beb88eb9",
+        "units": 48,
+        "normal_owner_placed_sums": {
+          "5": 31,
+          "7": 12
+        }
+      },
+      {
+        "file": "MONDE09A.ETA",
+        "sha256": "4a49802ea11b7c1029cee2c84002c80d80ea7033ccb282e065c9a9f701b7eec4",
+        "units": 55,
+        "normal_owner_placed_sums": {
+          "5": 30,
+          "7": 16,
+          "10": 4
+        }
+      },
+      {
+        "file": "MONDE09B.ETA",
+        "sha256": "7e47f32f08a1467f2b7a7fe0916b61c4421a60672b79d93d0d02354f349e18fd",
+        "units": 61,
+        "normal_owner_placed_sums": {
+          "5": 36,
+          "7": 16,
+          "10": 4
+        }
+      },
+      {
+        "file": "MONDE09C.ETA",
+        "sha256": "dc40f8b68a59fb91cd2b33b9624ffe49294df9419042e4847402be135535ce7a",
+        "units": 61,
+        "normal_owner_placed_sums": {
+          "5": 36,
+          "7": 17,
+          "10": 3
+        }
+      },
+      {
+        "file": "MONDE09D.ETA",
+        "sha256": "f69e52f7a56e837945ec0beb9787be93c611c33b09fe1c0f6b9b1dfc12e1ec69",
+        "units": 62,
+        "normal_owner_placed_sums": {
+          "5": 37,
+          "7": 16,
+          "10": 4
+        }
+      },
+      {
+        "file": "MONDE10.ETA",
+        "sha256": "827f832bbc33635e2111bab0f58a218b9efbe319705ac66032ad13b8ffbc3a37",
+        "units": 55,
+        "normal_owner_placed_sums": {
+          "5": 35,
+          "7": 16,
+          "10": 4
+        }
+      },
+      {
+        "file": "MONDE10A.ETA",
+        "sha256": "5d809594106280f178ceaaa5c5fa49fa33a506a6ae420c31f7f16323bfd33452",
+        "units": 57,
+        "normal_owner_placed_sums": {
+          "5": 37,
+          "7": 16,
+          "10": 4
+        }
+      },
+      {
+        "file": "MONDE10B.ETA",
+        "sha256": "3840989e98f0ea8183eb5fe4ae9f68a37f24952f58a8a34fa5caf734f20ddbf0",
+        "units": 58,
+        "normal_owner_placed_sums": {
+          "5": 37,
+          "7": 17,
+          "10": 4
+        }
+      },
+      {
+        "file": "MONDE10C.ETA",
+        "sha256": "86b85d1e7c6ada741d3644a442f364d97c8493ba092086d10541e9664a812bbe",
+        "units": 57,
+        "normal_owner_placed_sums": {
+          "5": 37,
+          "7": 16,
+          "10": 4
+        }
+      },
+      {
+        "file": "MONDE11.ETA",
+        "sha256": "5c66041c076747afbf29b0a8e1c6a2ff3222e9b1a60a0cde18abb666a9ea2840",
+        "units": 58,
+        "normal_owner_placed_sums": {
+          "5": 38,
+          "7": 16,
+          "10": 4
+        }
+      },
+      {
+        "file": "MONDE12.ETA",
+        "sha256": "6abdcec07fb8afd82fe3697dde2ac6fed8911f613ea840541d23b6451cf7998d",
+        "units": 114,
+        "normal_owner_placed_sums": {
+          "5": 57,
+          "7": 41,
+          "8": 8,
+          "10": 8
+        }
+      },
+      {
+        "file": "MONDE12A.ETA",
+        "sha256": "90860a9e7d5ec934f8d345ac15f849f8637db4ca574dac1e6f609a630aaa33c4",
+        "units": 133,
+        "normal_owner_placed_sums": {
+          "5": 62,
+          "7": 45,
+          "8": 11,
+          "10": 15
+        }
+      },
+      {
+        "file": "MONDE12B.ETA",
+        "sha256": "69fb5140fd0636ac9e0f5f63323e8f3c2013aaf3e117603785079b007363c50a",
+        "units": 143,
+        "normal_owner_placed_sums": {
+          "5": 62,
+          "7": 51,
+          "8": 15,
+          "10": 15
+        }
+      },
+      {
+        "file": "MONDE12C.ETA",
+        "sha256": "f09c5165f88ca7f1575e87cbf7a420a7588d5d3b150e41a5623ebf1e4225ed48",
+        "units": 133,
+        "normal_owner_placed_sums": {
+          "5": 62,
+          "7": 45,
+          "8": 11,
+          "10": 15
+        }
+      },
+      {
+        "file": "MONDE13.ETA",
+        "sha256": "b1dd08943dee2afc32ca3d35ffd30d0229c87078c6b99362fc0a437639044bc2",
+        "units": 20,
+        "normal_owner_placed_sums": {
+          "5": 20
+        }
+      },
+      {
+        "file": "MONDE14.ETA",
+        "sha256": "75370d077e6c0e0fe4f3b5d16c4bb5e2d564d19989394966d81910b8dec57fe1",
+        "units": 16,
+        "normal_owner_placed_sums": {
+          "5": 10,
+          "7": 6
+        }
+      },
+      {
+        "file": "MONDE15.ETA",
+        "sha256": "89ff2906dfddf1a4665b07e14251f60eba899d3e61123b2d9ba483762add9df7",
+        "units": 58,
+        "normal_owner_placed_sums": {
+          "5": 38,
+          "7": 16,
+          "10": 4
+        }
+      },
+      {
+        "file": "MONDE16.ETA",
+        "sha256": "3be9f1479506b112edc266315b6e3bfee74f786bf7fc0edea9973b46ca327f77",
+        "units": 58,
+        "normal_owner_placed_sums": {
+          "5": 38,
+          "7": 16,
+          "10": 4
+        }
+      },
+      {
+        "file": "MONDE17.ETA",
+        "sha256": "f176fb3d72437709de034b1b5c60359ae41518a70ff678715c6bc2500160cbe7",
+        "units": 169,
+        "normal_owner_placed_sums": {
+          "5": 139,
+          "7": 21,
+          "8": 4,
+          "10": 5
+        }
+      },
+      {
+        "file": "MONDE17A.ETA",
+        "sha256": "f176fb3d72437709de034b1b5c60359ae41518a70ff678715c6bc2500160cbe7",
+        "units": 169,
+        "normal_owner_placed_sums": {
+          "5": 139,
+          "7": 21,
+          "8": 4,
+          "10": 5
+        }
+      },
+      {
+        "file": "MONDE17B.ETA",
+        "sha256": "c27ee407371f9a0d9d2b032123d03a5a57228ace8b3c99e2c4979873d5476771",
+        "units": 169,
+        "normal_owner_placed_sums": {
+          "5": 135,
+          "7": 26,
+          "8": 4,
+          "10": 4
+        }
+      },
+      {
+        "file": "MONDE17C.ETA",
+        "sha256": "3cff0609b10bbe3c439c068d42850b8cac9e6895fefae282b457224f66eb3836",
+        "units": 173,
+        "normal_owner_placed_sums": {
+          "5": 139,
+          "7": 25,
+          "8": 4,
+          "10": 5
+        }
+      },
+      {
+        "file": "MONDE18.ETA",
+        "sha256": "e5d4ead32b9422160a3334a0735400cd702179dbc29f471c373657883b65dadc",
+        "units": 58,
+        "normal_owner_placed_sums": {
+          "5": 38,
+          "7": 16,
+          "10": 4
+        }
+      },
+      {
+        "file": "MONDE19.ETA",
+        "sha256": "95a1bd20475db7f39f7ff2c10a9ba904f1246145ba73006d40a8a0521501d213",
+        "units": 57,
+        "normal_owner_placed_sums": {
+          "5": 37,
+          "7": 16,
+          "10": 4
+        }
+      },
+      {
+        "file": "MONDE20.ETA",
+        "sha256": "585b2b087368b56aae56cd08833078a7d257d717c49873d5effb51bf78457c68",
+        "units": 33,
+        "normal_owner_placed_sums": {
+          "5": 33
+        }
+      },
+      {
+        "file": "MONDE21.ETA",
+        "sha256": "b7de440f4761476b86ebe33924471fecf99c051b4db07dac7edb88699a4e5875",
+        "units": 59,
+        "normal_owner_placed_sums": {
+          "5": 38,
+          "7": 16,
+          "10": 5
+        }
+      },
+      {
+        "file": "MONDE22.ETA",
+        "sha256": "b6bce6b3df38e3f497224598175e653859f26554ed0982bcd799139acc23d018",
+        "units": 55,
+        "normal_owner_placed_sums": {
+          "5": 35,
+          "7": 16,
+          "10": 4
+        }
+      },
+      {
+        "file": "MONDE23.ETA",
+        "sha256": "c83bfdfa6236b9c1000b3715340296479cfcc02e867275ef9f03437cf1b61630",
+        "units": 116,
+        "normal_owner_placed_sums": {
+          "5": 12,
+          "7": 2
+        }
+      },
+      {
+        "file": "MONDE24.ETA",
+        "sha256": "7f09a9d659978e2b095baa986fc3435336222acd6fc92818a9833c5ddb6420bd",
+        "units": 61,
+        "normal_owner_placed_sums": {
+          "5": 37,
+          "7": 15,
+          "10": 4
+        }
+      },
+      {
+        "file": "MONDE25.ETA",
+        "sha256": "d134d11c1227a6441b3dce7b452f06a649f953ce69fe74de367973b4620df70e",
+        "units": 57,
+        "normal_owner_placed_sums": {
+          "5": 37,
+          "7": 16,
+          "10": 4
+        }
+      }
+    ],
+    "map_count": 38,
+    "map_sum_values": [
+      5,
+      7,
+      8,
+      10
+    ]
+  },
+  "reachable_vision_sum_max": 11,
+  "structure_caller": {
+    "jump_table": "0x41cc18",
+    "table_sha256": "3d9443f5201b1bddf96f1da30483b34978f2e4d2507e02d41ba7840cdb75ea73",
+    "radius_by_type": {
+      "0": 20,
+      "1": 8,
+      "2": 10,
+      "3": 8,
+      "4": 5,
+      "5": 8,
+      "6": 8,
+      "7": 8,
+      "8": 8,
+      "10": 7,
+      "11": 7,
+      "13": 8,
+      "14": 8,
+      "15": 8,
+      "16": 8,
+      "18": 8,
+      "19": 4,
+      "20": 8,
+      "21": 4
+    },
+    "skipped_types": [
+      9,
+      12,
+      17
+    ],
+    "discovery_dx": "(R+3)&0xffff; BatimentGetCase pushes/pops EDX",
+    "light_dx": "R",
+    "owner": "structure +4 byte in BL",
+    "inherited_edi_types": "type byte > 21 (ja 0x41cd99)",
+    "maximum_discovery_dx": 23,
+    "maximum_light_dx": 20
+  },
+  "direct_radius_max": {
+    "discovery": 23,
+    "light": 20
+  },
+  "callers": [
+    {
+      "target": "DecouvreCase",
+      "call": "0x419e90",
+      "routine": "BatimentDecouvre+0x13c"
+    },
+    {
+      "target": "DecouvreCase",
+      "call": "0x47692c",
+      "routine": "DecouvreTerrain+0xdb"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x41cdb9",
+      "routine": "BatimentHabitable+0x149"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x441c9a",
+      "routine": "BallonPrepareArrivee+0xf0"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x443b05",
+      "routine": "EnginRetireType+0x22d"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x443d18",
+      "routine": "EnginRetireType+0x440"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x44408b",
+      "routine": "EnginRetire+0x28f"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x4442e0",
+      "routine": "EnginRetire+0x4e4"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x4444a9",
+      "routine": "EnginRetire+0x6ad"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x446146",
+      "routine": "SetSortEngin+0x18a"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x4477b2",
+      "routine": "EnginLogeEngin+0x11e"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x448988",
+      "routine": "AvanceEngin+0x284"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x44c206",
+      "routine": "CalculWorkEngin+0x592"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x44c3f5",
+      "routine": "CalculWorkEngin+0x781"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x44fc5a",
+      "routine": "EnginSetLevelExperience+0x13a"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x454e64",
+      "routine": "EnginNextEtape+0xa38"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x454f73",
+      "routine": "EnginNextEtape+0xb47"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x45506d",
+      "routine": "EnginNextEtape+0xc41"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x4551bc",
+      "routine": "EnginNextEtape+0xd90"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x455bd7",
+      "routine": "EnginNextEtape+0x17ab"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x455cd7",
+      "routine": "EnginNextEtape+0x18ab"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x455de3",
+      "routine": "EnginNextEtape+0x19b7"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x4566f2",
+      "routine": "EnginNextEtape+0x22c6"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x456f63",
+      "routine": "PlaceEnginTerrain+0x59"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x457019",
+      "routine": "PlaceEngin+0x73"
+    },
+    {
+      "target": "DecouvreTerrain",
+      "call": "0x46e3df",
+      "routine": "ProjectileSet+0x1d7"
+    },
+    {
+      "target": "IllumineCase",
+      "call": "0x419341",
+      "routine": "BatimentIllumine+0x10e"
+    },
+    {
+      "target": "IllumineCase",
+      "call": "0x476dae",
+      "routine": "IllumineTerrain+0xfb"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x41cdca",
+      "routine": "BatimentHabitable+0x15a"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x441cc0",
+      "routine": "BallonPrepareArrivee+0x116"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x443b27",
+      "routine": "EnginRetireType+0x24f"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x443d40",
+      "routine": "EnginRetireType+0x468"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x4440b3",
+      "routine": "EnginRetire+0x2b7"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x444308",
+      "routine": "EnginRetire+0x50c"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x4444d1",
+      "routine": "EnginRetire+0x6d5"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x44616c",
+      "routine": "SetSortEngin+0x1b0"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x4477da",
+      "routine": "EnginLogeEngin+0x146"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x4489ae",
+      "routine": "AvanceEngin+0x2aa"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x44c22e",
+      "routine": "CalculWorkEngin+0x5ba"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x44c422",
+      "routine": "CalculWorkEngin+0x7ae"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x44fc80",
+      "routine": "EnginSetLevelExperience+0x160"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x454e8c",
+      "routine": "EnginNextEtape+0xa60"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x454f95",
+      "routine": "EnginNextEtape+0xb69"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x45508f",
+      "routine": "EnginNextEtape+0xc63"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x4551de",
+      "routine": "EnginNextEtape+0xdb2"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x455bff",
+      "routine": "EnginNextEtape+0x17d3"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x455cff",
+      "routine": "EnginNextEtape+0x18d3"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x455e0b",
+      "routine": "EnginNextEtape+0x19df"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x456714",
+      "routine": "EnginNextEtape+0x22e8"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x456f89",
+      "routine": "PlaceEnginTerrain+0x7f"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x45703b",
+      "routine": "PlaceEngin+0x95"
+    },
+    {
+      "target": "IllumineTerrain",
+      "call": "0x46e3f4",
+      "routine": "ProjectileSet+0x1ec"
+    }
+  ],
+  "callers_covered": [
+    "PlaceEngin+0x73/0x95",
+    "SetSortEngin+0x18a/0x1b0",
+    "BatimentHabitable+0x149/0x15a"
+  ],
+  "caller_arithmetic": "Both callers zero AH, load u8 BB, add 2 in 32 bits, add u8 F5 and pass DX; light reloads both bytes and passes u16 BB+F5. No 8-bit wrap.",
+  "scope": "Instruction-level displacement stores inside the 1,339 Ghidra-listed bodies (function list from the normalized analysis copy; bytes from the intact oracle). LoadEngin bulk disk copies are overwritten by 0x46adeb/0x46ae46 for every unit ExisteEngin admits; GameLoad and other block restores are outside this inventory."
+}

@@ -144,3 +144,58 @@ The frozen `RemapeamentoPendente(flags=0,tamanho=65536,endereco_dependencia=0x42
 Stage 13 evidence/checks: four audited intact-original intervals cover complete 965-byte body, 161-byte prefix, 24-byte memset wrapper and 163-byte fill leaf. Focused REA dossiers from the pinned private provider keep normalized/original identities distinct; session exported and closed. Four independent original captures preceded translation. Final seven tests pass 29 fresh original entries, all at 0x42eebd, with full loaded world buffers, exact stack arguments and 263 ordered events matching. Three native memset/fill calls execute unchanged; zero Windows imports reached/substituted. Maximum segment 88,073 instructions; final faults/limits/failures/errors/skips/dependency exceptions zero. Two observer-only failure reports are preserved (callback signature, then byte-value normalization). The source audit caught and corrected overlapping export filenames before completion. Local four executed / three optional skips; core 357 / 169 optional skips passes. Synthetic demo clears regions/colors in place and retains units/attributes/search completion, with no allocator or real mission.
 
 Stage 13 closes the precise pre-allocation reset prerequisite and is ready for required integration. Continue next with the original first allocation/lock return and terrain classification, using explicit resource effects and raw obstacle-marker input. Normal components and their allocation/cleanup/failure behavior remain open until independently compared. No mission/runtime or global completion claim follows from these counts.
+
+Completed Stage 13: implementation `dac71c04900fcac6f7a67bb07e24c52a30dbd69e`, final feature `6754df4052637a3c2de2a73ff9506c520b3a803a`, remote-main merge `8fcf1d35e9945d98eac07da8975ff933e4b9fe0b`. The seven-front round then resumed this worktree at main `8a499a9`, committed the untracked Stage 15 inventory [REMAP_CLASSIFICATION.md](REMAP_CLASSIFICATION.md) (inventory only, `a4a67efd52faefdddd173719faf732df35a62c22`) and merged main `f18b5a0` before Stage 14 implementation.
+
+Stage 14: [discovery domain contract](DISCOVERY_DOMAIN.md).
+
+Published symbols:
+- `insercao_unidades.SOMA_VISAO_MAXIMA_INSERCAO = 11`, re-exported unchanged by `colocacao_missao` and `colocacao_saida`. It is the inclusive normal-owner u8 +0xbb + u8 +0xf5 sum for which `PlaceEngin`/`SetSortEngin` run `DecouvreTerrain` (sum+2), `IllumineTerrain` (sum) and `SetMiniMap`.
+- `visao_movimento.RAIO_DESCOBERTA_MAXIMO_VALIDADO = 23` and `RAIO_LUZ_MAXIMO_VALIDADO = 20`, the natively validated direct-call DX radii for owners 0..3, re-exported by the same three modules.
+- Agreed by message: missions reads the symbol through `colocacao_missao` (9a, main `dbff65199a8e2d81620a3abec6a7e49713194ec2`); economy reads it through `insercao_unidades` (main `f18b5a00a27e716fd3662d56f9482b67b110ef16`). Economy gates its `BatimentHabitable` on the two radius symbols.
+- The coordinator asked for the structure caller to be covered with separate symbols, without widening the unit symbol.
+
+Inventory from intact bytes (`extrair_descoberta_terreno.py`; 16 hashed intervals, 9 writer sites, 52 call sites):
+- BB comes only from the type table low byte (`LoadEngin` 0x46adeb, `EnginSetType` 0x457d55) or a literal 5. F5 is only ever 0 or 1.
+- The shipped `RAYON` values are {5,7,8,10} and the 38 ETA maps place {5,7,8,10}, so the reachable maximum is 11.
+- `BatimentHabitable` 0x41cc70 passes R+3 / R from jump table 0x41cc18 (maxima 23/20, type 0); `BatimentGetCase` preserves EDX.
+
+Implementation: `_aplicar_insercao` compares the sum with the symbol instead of literal 8; order and partial effects are unchanged. The native bench gains a per-cell `DecouvreCase`/`IllumineCase` trace, direct entries under the exact routine and leaf intervals, and an opt-in preserved-state resume at `SetMiniMap`'s pixel-loop head 0x46a623.
+
+Validation:
+- Seven original-only captures (80 segments) preceded the change and match Python.
+- The initial full native run failed because the direct-entry guard omitted `SetMiniMap`'s leaf queries; it is preserved. A 1×1 segment-budget diagnostic is also preserved.
+- Final `validar_descoberta_terreno.py --emular` passes 32 tests over 10,503 segments with zero failures, errors, skips, native faults or limits.
+- New entries: 1,433, with 1,423 returns and 10 declared pre-discovery stops. Maximum segment: 164,737 instructions.
+- The unchanged 0–8 regressions reproduce Stage 8/12 counts: 2,014 and 846 entries.
+- `conferir_monde01_descoberta.py --emular` shows missions' committed scan on actual MONDE01 placing units 0, 1, 2 and 11–15, reaching 0x46c16d and equalling their original v2 capture. A fresh native prefix equals both.
+- Missions and economy suites pass natively on this branch (6/6 and 13/13). Locally: missions 56/21 skips, economy 393/180, core 368/175.
+
+Remaining:
+- sums 12..510;
+- direct radii above 23/20 and owners of 4 or more;
+- radius domains of the other 46 call sites (including AvanceEngin and the BatimentDecouvre/BatimentIllumine loops);
+- loaded-mission readiness.
+
+Next stage after coordinator confirmation: Stage 15 (remap allocation/classification with the declared-binding facility).
+
+## Agreed ownership with ai-runtime (seven-front round, 2026-10-28)
+
+Proposed by ai-runtime from intact bytes and confirmed by core by message:
+- **ai-runtime implements** the `CalculGame` 0x42c868 frame skeleton; the `CalculEnginNextEtape` 0x456db5 loop and its counters (0x4e1a38/0x4e1a3a, the 4×26 table at 0x4e1a3c, per-owner totals 0x4e1928); the `EnginNextEtape` 0x45442c prelude order and its 25-entry state switch at 0x4543c8; the `CalculBatimentNextEtape` 0x4281c7 loop/counters (0x4dfaa8) and the `BatimentNextEtape` 0x4268d4 type switch at 0x426880; `IATestUtilite` 0x47fbfd; AI kernels, rule-VM world operations, `iagUnit`/`iagVille` messages, iab* behaviors and the `IaAlloc`/`IaReset` tables.
+- **core keeps** the bodies of unit states 2, 3, 4, 16 and 17; the prelude primitives `SetDeplaceEngin` 0x4457d3, `SetDyingEngin` 0x444938, `SetEnginCollision`/`ResetEnginCollision`, `RetireEngin` 0x457058, `CalculFatigue` 0x452cc8/`EnginSetFatigue`; `DecouvreTerrain`/`IllumineTerrain`/`SetMiniMap` and `BatimentDecouvre`/`BatimentIllumine`; the type-12 gate branch body 0x427bb7; and, unchanged, `ia.atualizar_ia`, `MaquinaTarefas`, `OPERACOES`, `mensagens_chegada` and `cadencia`, which ai-runtime consumes without copying.
+- **Owned elsewhere:** the prelude's sound, HP regeneration through `BonusGetValEngin` (economy query), `EnginTrouveCible`/`SetAttaqueEngin` (combat) and state-4 `CreerSac` (economy). Core bodies raise named dependencies at those call sites. ai-runtime sequences the 32-frame target scan, spell timer and fatigue branches; core supplies primitives only. The fatigue bonus read at 0x4dfba0 and the provisions/Bag consumption are economy dependencies.
+- **Requested core API (not yet scheduled):** the committed `MundoNavegacao.atualizar_movimento(indice, maquina=None)` is a coordination over `girar` (RotateEngin 0x448599), `avancar_passo` (AvanceEngin prefix 0x448704) and `concluir_movimento` (state-2 tail 0x4563da), not the exact branch bodies. Proposed exact entries, each `(mundo, indice)` with a u16 index, returning None (the dispatcher ignores the value) and raising named dependencies at original call sites: `executar_estado_movimento` (state 2), `executar_estado_rotacao` (state 3), `executar_estado_retirada` (state 4) and `executar_estado_saco` (states 16/17). The coordinator schedules them; they are outside Stages 15–17.
+- **Also accepted by core, not yet scheduled:** `DemonteBatiment` 0x41effd, called by `CalculBatimentNextEtape` with a u16 structure index when state byte +5 is 3. It is the physical structure removal; economy supplies refund arithmetic as a callable query. Unit state 13 (0x4558e4, entering a structure or vehicle) is the physical entry body. `BatimentGetPlayer`/`BatimentGetType`/`BatimentEnDestruction` (economy queries) and `CalculEntreBatiment`'s `iagUnitSendMessage` 0x47 (ai-runtime) remain named dependencies at their call sites.
+- The declared-binding facility in `ferramentas/emulador.py` is Stage 15. A binding declared at an import thunk or game wrapper stops before entry, records the exact stack/register arguments, obtains the fixture result, applies the stdcall return and resumes at the caller. A fixture that cannot honor Windows semantics raises, and the run is reported as a stop.
+
+## Stage 15 binding requests received (inputs, not implemented)
+
+- **ai-runtime:** a frame oracle on the declared-binding facility (shape agreed above).
+- **missions:** a whole-`MissionLoad` oracle; real ETA bytes through the file wrappers and a deterministic allocation arena.
+- **graphics** (Stage 16 on main `21ebbee` uses local bindings it will migrate):
+  - KERNEL32 IAT slots, all stdcall with the callee popping and the result in EAX: 0x5231C0 GlobalAlloc (2 arguments), 0x5231C8 GlobalFree (1), 0x5231CC GlobalHandle (1), 0x5231D0 GlobalLock (1), 0x5231D8 GlobalUnlock (1).
+  - Statically linked Watcom-register C runtime, so the game's FileOpen/FileRead/FileClose wrappers and handle global 0x4E1D1C run natively: fopen 0x48C71F (EAX name, EDX mode), fread 0x48C97B (EAX buf, EDX size, EBX n, ECX FILE*), fclose 0x48C80B (EAX FILE*).
+  - Each call is logged as [name, exact arguments, return].
+  - These requests become stops: non-GMEM_FIXED flags, zero sizes, exhaustion, stale handles, non-"rb" modes and short reads.
+  - Graphics offers its natively validated `ciclo_cache_terreno.MemoriaMotor` model of MemAlloc 0x467EA6 / MemFree 0x467ECB as a shared provider. MemAlloc adds to counter 0x4E2F3C before GlobalAlloc; MemFree never subtracts and falls into MemClose's RET at 0x467EF3.
