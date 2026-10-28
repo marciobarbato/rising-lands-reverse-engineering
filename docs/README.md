@@ -8,6 +8,7 @@ The maintained manuals below replace the scattered research handoffs. Historical
 | [Consolidated progress](PROGRESS.md) | M1–M4 acceptance, four independent states per L/R stage, critical path, evidence and Portuguese executive summary |
 | [Status](STATUS.md) | Confirmed scope, historical validation counts, and next investigations |
 | [Workspace](WORKSPACE.md) | Repository, original media, converted assets, apps, and archives |
+| [M1 oracle review](M1_ORACLE_REVIEW.md) | Whole-MissionLoad oracle architecture review, proven behavior, risks and the minimal path to M1 |
 | [Roadmap to MONDE01](ROADMAP_MONDE01.md) | Milestones, dependency map, seven fronts, oracle strategy, and completion inventory |
 | [Parallel work](PARALLEL_WORK.md) | Seven owners, branch/worktree isolation, contracts, and integration |
 | [Restart prompt](RESTART_PROMPT.md) | Copyable coordinator prompt and individual chat assignments |
