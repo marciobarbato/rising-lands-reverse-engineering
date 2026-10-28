@@ -1,4 +1,4 @@
-"""InfligeDegat mode-1 unit branch, with explicit world-effect providers.
+"""InfligeDegat mode-1/4 unit branches, with explicit world-effect providers.
 
 Original [0x450874,0x4510dd). Building damage is a named stop. World lookup,
 navigation, diplomacy and sound remain callbacks; the unit consumer and live
@@ -49,7 +49,7 @@ class ImpactoUnidades:
             raise NotImplementedError('Unsupported projectile effect: ' + name)
         return self.infligir(*args)
 
-    def _reagir(self, victim, attacker, owner, kind):
+    def _reagir(self, victim, attacker, owner, kind, mode=1):
         target, source = self.unidades[victim], self.unidades[attacker]
         if owner == 200:
             return
@@ -61,7 +61,7 @@ class ImpactoUnidades:
                 cell = self._query('BatimentGetCase', building) & 65535
                 self._effect('SetDeplaceEngin', victim, cell)
             return
-        eligible = (kind in RETALIATION_TYPES and not target[0xdc] & 2
+        eligible = (mode == 1 and kind in RETALIATION_TYPES and not target[0xdc] & 2
                     and source[1] not in (10, 17)
                     and (source[1] != 16 or kind in (2, 8))
                     and source[0] != owner)
@@ -74,7 +74,8 @@ class ImpactoUnidades:
             elif self._query('PlayerGetType', owner) & 255 == 2 and target[2] == 7:
                 self._effect('SetAttaqueEngin', victim, 1, attacker)
             return
-        direction = self._query('CalculDirection', u16(source, 0x7c), u16(target, 0x7c)) & 255
+        origin = 0 if mode == 4 else u16(source, 0x7c)
+        direction = self._query('CalculDirection', origin, u16(target, 0x7c)) & 255
         cell = self._query('CalculDirCase', u16(target, 0x7c), direction) & 65535
         if cell != 65535:
             self._effect('SetDeplaceEngin', victim, cell)
@@ -108,7 +109,7 @@ class ImpactoUnidades:
                      0, 0x100, '0x496ac8')
 
     def infligir(self, cell, mode, attacker, direction, flag):
-        """AX/DL/BX/CL/stack-byte inputs; mode 1 only.
+        """AX/DL/BX/CL/stack-byte inputs; modes 1/4 (4 needs CL 29/30).
 
         Input widths truncate first. Empty unit lookup returns None. Building,
         missing providers and consumer exceptions stop without rollback.
@@ -116,8 +117,10 @@ class ImpactoUnidades:
         """
         cell, mode, attacker = cell & 65535, mode & 255, attacker & 65535
         direction, flag = direction & 255, flag & 255
-        if mode != 1:
-            raise NotImplementedError('Only InfligeDegat mode 1 is supported')
+        if mode not in (1, 4):
+            raise NotImplementedError('Only InfligeDegat mode 1 or 4 is supported')
+        if mode == 4 and direction not in (29, 30):
+            raise NotImplementedError('Mode-4 impact requires initialized direction byte 29/30')
         if not 0 <= attacker < 800:
             raise ValueError('Expected an attacker ID in 0..799')
         if not flag and self._query('ChercheIndiceBatiment', cell) & 65535 != 65535:
@@ -131,9 +134,9 @@ class ImpactoUnidades:
         owner, kind = target[0], target[1]
         if kind >= 26 or self.unidades[attacker][1] >= 26:
             raise ValueError('Supported unit types are 0..25')
-        self._reagir(victim, attacker, owner, kind)
+        self._reagir(victim, attacker, owner, kind, mode)
         if self.consumir is None:
             raise NotImplementedError('External consumer required: EnginInfligeDegat')
-        self.consumir(victim, 1, attacker, direction)
+        self.consumir(victim, mode, attacker, direction)
         self._apresentar(cell, kind)
         self._diplomacia(victim, attacker)

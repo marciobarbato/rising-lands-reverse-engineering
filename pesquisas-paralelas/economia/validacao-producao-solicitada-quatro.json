@@ -1,0 +1,21 @@
+{
+  "scope": "Actual CalculTroupe through supported conditional request; explicit volume and PostSound boundaries",
+  "mode": "original x86 and Python",
+  "tests": 8,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 20,
+  "declared_stops": 20,
+  "completed_returns": 0,
+  "cleanup_dependency_stops": 4,
+  "pending_volume_stops": 0,
+  "pending_post_sound_stops": 0,
+  "post_placement_import_stops": 0,
+  "original_entry_calls": 4,
+  "preserved_minimap_resumptions": 16,
+  "expected_x86_exceptions": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}
