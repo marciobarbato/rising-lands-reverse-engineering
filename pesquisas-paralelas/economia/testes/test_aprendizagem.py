@@ -12,7 +12,8 @@ sys.path.insert(0, str(PASTA))
 from aprendizagem import Aprendizagem
 from construcoes import EconomiaConstrucoes
 from producao import Producao, CONTROLE_X87_INICIAL
-from proprietarios import PropriedadeConstrucoes, PASSO_ORDENS_JOGADOR, PASSO_PENDENCIAS_JOGADOR
+from proprietarios import PropriedadeConstrucoes, PASSO_PENDENCIAS_JOGADOR, juntar_ordens
+from test_proprietarios import preencher_ordens
 from recrutamento import Recrutamento
 
 
@@ -63,18 +64,18 @@ class ExemplosAprendizagem(unittest.TestCase):
         self.assertEqual(a.inventado(1, 2), 128)
         a.marcar_inventado(1, 2)
         self.assertEqual(a.inventado(1, 2), 1)
-        self.assertEqual(a.propriedade.ordens, bytes(10816))
+        self.assertEqual(juntar_ordens(a.propriedade.ordens), bytes(10816))
         self.assertEqual(a.propriedade.pendencias, bytes(9152))
 
     def test_listas_usam_predicados_diferentes_e_preservam_bytes_opacos(self):
         a = preparar(jogador=2)
-        a.propriedade.ordens[:] = b'\xa5' * 10816
+        preencher_ordens(a.propriedade.ordens, b'\xa5' * 10816)
         a.propriedade.pendencias[:] = b'\x5a' * 9152
         a.inventados[10:15] = bytes((1, 255, 0, 128, 1))
         a.propriedade.sortilegios[10:15] = bytes((0, 2, 255, 0, 0))
         a.atualizar_ordens(2)
         a.atualizar_pesquisas_biblioteca(2)
-        for m, o, itens, opaco in ((a.propriedade.ordens, 2 * PASSO_ORDENS_JOGADOR + 416, [1, 2], 0xa5),
+        for m, o, itens, opaco in ((a.propriedade.ordens[2], 416, [1, 2], 0xa5),
                                   (a.propriedade.pendencias, 2 * PASSO_PENDENCIAS_JOGADOR + 624, [0, 3, 4], 0x5a)):
             self.assertEqual(lista(m, o), [(4, i) for i in itens])
             self.assertEqual(struct.unpack_from('<HH', m, o), (len(itens), 5))
@@ -83,21 +84,36 @@ class ExemplosAprendizagem(unittest.TestCase):
             self.assertEqual(m[o - 1], opaco)
             self.assertEqual(m[o + 104], opaco)
 
+    def test_listas_de_ordens_gravam_nos_quatro_pools_do_chamador(self):
+        r = Recrutamento(EconomiaConstrucoes(estruturas=bytes(1000 * 276)))
+        bolsas = [bytearray(b'\x5c' * 2704) for _ in range(4)]
+        a = Aprendizagem(Producao(r), PropriedadeConstrucoes(r.mundo, ordens=bolsas))
+        a.propriedade.sortilegios[:] = bytes((1, 0, 1, 0, 0) * 4)
+        a.inicializar_ordens()
+        for j, bolsa in enumerate(bolsas):
+            self.assertIs(a.propriedade.ordens[j], bolsa)
+            self.assertEqual(lista(bolsa, 416), [(4, 0), (4, 2)], j)
+            self.assertEqual(bolsa[:416] + bolsa[416 + 0x60:416 + 0x66] + bolsa[520:],
+                             b'\x5c' * (416 + 6 + 2704 - 520), j)
+        a.propriedade.ordens = bytearray(10816)
+        with self.assertRaises(ValueError):
+            a.atualizar_ordens(0)
+
     def test_resets_nao_refazem_listas_e_init_ordens_nao_zera_flags(self):
         a = preparar()
         a.inventados[:] = b'\x80' * 20
         a.propriedade.sortilegios[:] = b'\xff' * 20
         a.inicializar_ordens()
-        ordens = bytes(a.propriedade.ordens)
+        ordens = juntar_ordens(a.propriedade.ordens)
         self.assertEqual(a.propriedade.sortilegios, b'\xff' * 20)
         a.zerar_disponiveis(1)
         self.assertEqual(a.inventados, b'\x80' * 20)
         self.assertEqual(a.propriedade.sortilegios, b'\xff' * 5 + bytes(5) + b'\xff' * 10)
-        self.assertEqual(a.propriedade.ordens, ordens)
+        self.assertEqual(juntar_ordens(a.propriedade.ordens), ordens)
         a.zerar_tecnologia()
         self.assertEqual(a.inventados, bytes(20))
         self.assertEqual(a.propriedade.sortilegios, bytes(20))
-        self.assertEqual(a.propriedade.ordens, ordens)
+        self.assertEqual(juntar_ordens(a.propriedade.ordens), ordens)
 
     def test_flag_zero_retorna_antes_da_consulta_de_tempo(self):
         a = preparar()
@@ -135,9 +151,9 @@ class ExemplosAprendizagem(unittest.TestCase):
             self.assertEqual(s[campo:campo + 2], b'\0\0')
         for campo in (0x75, 0x76, 0x77, 0x7a, 0x84, 0x85, 0x88, 0x89, 0x8a, 0x8b):
             self.assertEqual(s[campo], 0xa5)
-        antes = bytes(s), bytes(a.propriedade.ordens), bytes(a.propriedade.pendencias)
+        antes = bytes(s), juntar_ordens(a.propriedade.ordens), bytes(a.propriedade.pendencias)
         a.calcular_biblioteca(0)
-        self.assertEqual((bytes(s), bytes(a.propriedade.ordens), bytes(a.propriedade.pendencias)), antes)
+        self.assertEqual((bytes(s), juntar_ordens(a.propriedade.ordens), bytes(a.propriedade.pendencias)), antes)
 
     def test_estado3_preservado_outros_viram5_sem_cobranca(self):
         for estado in (0, 3, 4, 5, 255):
@@ -157,7 +173,7 @@ class ExemplosAprendizagem(unittest.TestCase):
         a.propriedade.inicializar_neutro(0, 0)
         self.assertEqual(a.propriedade.sortilegios[:5], bytes(5))
         self.assertEqual(a.inventados, b'\1' * 20)
-        self.assertEqual(lista(a.propriedade.ordens, 416), [])
+        self.assertEqual(lista(a.propriedade.ordens[0], 416), [])
 
     def test_guardas_de_dominio_e_ramos_fora_do_escopo(self):
         a = preparar()
@@ -204,8 +220,10 @@ class DiferencialAprendizagem(unittest.TestCase):
                         ajuste_hospital=p.ajuste_hospital & 255, inventados=bytes(a.inventados),
                         jogador_deposito=a.propriedade.jogador_deposito)
         for objeto, campos in ((r, ('selecoes', 'tipos_unidades', 'tipos_sortilegios', 'unidades')),
-                               (a.propriedade, ('bibliotecas', 'baloes', 'numeros_unidades', 'pendencias', 'ordens', 'sortilegios'))):
+                               (a.propriedade, ('bibliotecas', 'baloes', 'numeros_unidades', 'pendencias', 'sortilegios'))):
             esperado.update({k: bytes(getattr(objeto, k)) for k in campos})
+        # The native bench keeps the four pools contiguous (owner stride 2,704).
+        esperado['ordens'] = juntar_ordens(a.propriedade.ordens)
         atual = self.b.estado()
         atual.update(self.b.estado_recrutamento())
         atual.update(self.b.estado_producao())
@@ -260,7 +278,7 @@ class DiferencialAprendizagem(unittest.TestCase):
                         a = preparar()
                         a.inventados[:] = self.rng.randbytes(20)
                         a.propriedade.sortilegios[:] = self.rng.randbytes(20)
-                        a.propriedade.ordens[:] = self.rng.randbytes(10816)
+                        preencher_ordens(a.propriedade.ordens, self.rng.randbytes(10816))
                         a.propriedade.pendencias[:] = self.rng.randbytes(9152)
                         a.inventados[j * 5 + tipo] = valor
                         a.propriedade.sortilegios[j * 5 + tipo] = valor
@@ -271,7 +289,7 @@ class DiferencialAprendizagem(unittest.TestCase):
             for inventados in range(32):
                 a = preparar()
                 j = (disponiveis + inventados) % 4
-                a.propriedade.ordens[:] = self.rng.randbytes(10816)
+                preencher_ordens(a.propriedade.ordens, self.rng.randbytes(10816))
                 a.propriedade.pendencias[:] = self.rng.randbytes(9152)
                 a.inventados[:] = self.rng.randbytes(20)
                 a.propriedade.sortilegios[:] = self.rng.randbytes(20)
@@ -293,7 +311,7 @@ class DiferencialAprendizagem(unittest.TestCase):
             a = preparar()
             a.inventados[:] = self.rng.randbytes(20)
             a.propriedade.sortilegios[:] = self.rng.randbytes(20)
-            a.propriedade.ordens[:] = self.rng.randbytes(10816)
+            preencher_ordens(a.propriedade.ordens, self.rng.randbytes(10816))
             self.carregar(a)
             self.helper(a, 0x474a95, 'inicializar_ordens', carregar=False)
             self.helper(a, 0x4749ca, 'zerar_disponiveis', n % 4, carregar=False)
@@ -315,7 +333,7 @@ class DiferencialAprendizagem(unittest.TestCase):
             s[o + 0x74] = self.rng.choice((0, 1, 255))
             a.inventados[:] = self.rng.randbytes(20)
             a.propriedade.sortilegios[:] = self.rng.randbytes(20)
-            a.propriedade.ordens[:] = self.rng.randbytes(10816)
+            preencher_ordens(a.propriedade.ordens, self.rng.randbytes(10816))
             a.propriedade.pendencias[:] = self.rng.randbytes(9152)
             r.mundo.economia.memoria[:] = self.rng.randbytes(128)
             r.mundo.capacidades.memoria[:] = self.rng.randbytes(24)

@@ -3,13 +3,20 @@
 Chegada/saída de balão que exige criação ou movimento é dependência explícita.
 Os ramos econômicos, listas de ordens e resets locais são traduções diretas.
 """
+import ctypes
 import struct
 
 from construcoes import EconomiaConstrucoes, PASSO_CONSTRUCAO
 
 PASSO_BAG = 104
 PASSO_PENDENCIAS_JOGADOR = 22 * PASSO_BAG
+# One owner's unit-order pool: 26 unit-type Bags of 104 bytes (2,704 bytes).
 PASSO_ORDENS_JOGADOR = 26 * PASSO_BAG
+# Pointer table of the four per-owner unit-order pools. The original fills it
+# with four separate page-aligned GlobalAlloc allocations (MONDE01:
+# 0x41781000, 0x41782000, 0x41783000, 0x41784000), so the pools are NOT one
+# contiguous array: [[0x4e19b8]+4*owner] + 104*type is owner/type's Bag.
+BASE_TABELA_ORDENS = 0x4e19b8
 BASE_PENDENCIAS = 0x4dd6e8
 BASE_BIBLIOTECAS = 0x4dfb48
 BASE_BALOES = 0x4e1a14
@@ -50,18 +57,81 @@ def bag_contem_modo6(memoria, offset, valor):
                for i in range(capacidade))
 
 
+def _endereco_gravavel(bolsa):
+    """Address of a writable, contiguous unsigned-byte buffer (no copy)."""
+    if isinstance(bolsa, memoryview):
+        if bolsa.readonly or bolsa.ndim != 1 or bolsa.format not in ('B', 'b') or not bolsa.c_contiguous:
+            raise ValueError('Unit-order pool views must be writable, one-dimensional and contiguous bytes')
+    elif not isinstance(bolsa, bytearray):
+        raise ValueError('Unit-order pools must be writable bytearray or memoryview buffers')
+    if len(bolsa) != PASSO_ORDENS_JOGADOR:
+        raise ValueError(f'Each unit-order pool must have {PASSO_ORDENS_JOGADOR} bytes')
+    janela = (ctypes.c_char * PASSO_ORDENS_JOGADOR).from_buffer(bolsa)
+    try:
+        return ctypes.addressof(janela)
+    finally:
+        del janela  # release the buffer export at once
+
+
+def validar_ordens(ordens):
+    """Validate the four live per-owner unit-order pools of [0x4e19b8].
+
+    ``ordens`` is a list or tuple of exactly four distinct, writable,
+    non-overlapping 2,704-byte buffers (owner 0..3). Returns a tuple holding the
+    SAME four buffer objects; nothing is copied. Raises ValueError otherwise.
+    A single contiguous buffer is rejected: use ``ordens_contiguas`` for it.
+    """
+    if not isinstance(ordens, (list, tuple)) or len(ordens) != 4:
+        raise ValueError('Unit-order Bags must be a sequence of four per-owner pools ([0x4e19b8])')
+    bolsas = tuple(ordens)
+    if len({id(b) for b in bolsas}) != 4:
+        raise ValueError('The four per-owner unit-order pools must be distinct objects')
+    faixas = sorted(_endereco_gravavel(b) for b in bolsas)
+    if any(b - a < PASSO_ORDENS_JOGADOR for a, b in zip(faixas, faixas[1:])):
+        raise ValueError('The four per-owner unit-order pools must not overlap')
+    return bolsas
+
+
+def ordens_contiguas(memoria):
+    """Legacy/fixture form: four owner views over ONE 10,816-byte buffer.
+
+    The native benches lay the pools out contiguously (owner stride 2,704);
+    this returns the four non-overlapping writable views of that buffer, so
+    writes through ``PropriedadeConstrucoes.ordens`` land in ``memoria``.
+    It is not the original layout (see BASE_TABELA_ORDENS).
+    """
+    if not isinstance(memoria, (bytearray, memoryview)) or len(memoria) != 4 * PASSO_ORDENS_JOGADOR:
+        raise ValueError('Contiguous unit-order fixture must be a writable 10,816-byte buffer')
+    vista = memoryview(memoria)
+    if vista.readonly:
+        raise ValueError('Contiguous unit-order fixture must be writable')
+    return tuple(vista[j * PASSO_ORDENS_JOGADOR:(j + 1) * PASSO_ORDENS_JOGADOR] for j in range(4))
+
+
+def juntar_ordens(ordens):
+    """Bytes of the four per-owner pools in owner order (contiguous bench layout)."""
+    return b''.join(bytes(b) for b in validar_ordens(ordens))
+
+
 class PropriedadeConstrucoes:
     def __init__(self, mundo=None, *, bibliotecas=None, baloes=None, numeros_unidades=None,
                  pendencias=None, ordens=None, sortilegios=None, jogador_deposito=0):
+        """``ordens``: the four live per-owner unit-order pools of [0x4e19b8], used by
+        identity (e.g. core's ``MundoUnidades.bolsas_tipos_unidades``); owner j's
+        unit-type t Bag is ``self.ordens[j]`` at ``t*104``. None allocates four
+        fresh zero pools. Validation precedes every other effect.
+        """
+        ordens = validar_ordens([bytearray(PASSO_ORDENS_JOGADOR) for _ in range(4)]
+                                if ordens is None else ordens)
         self.mundo = EconomiaConstrucoes() if mundo is None else mundo
         self.bibliotecas = bytearray(4 if bibliotecas is None else bibliotecas)
         self.baloes = bytearray(32 if baloes is None else baloes)
         self.numeros_unidades = bytearray(208 if numeros_unidades is None else numeros_unidades)
         self.pendencias = bytearray(4 * PASSO_PENDENCIAS_JOGADOR if pendencias is None else pendencias)
-        self.ordens = bytearray(4 * PASSO_ORDENS_JOGADOR if ordens is None else ordens)
+        self.ordens = ordens
         self.sortilegios = bytearray(20 if sortilegios is None else sortilegios)
         esperados = ((self.bibliotecas, 4), (self.baloes, 32), (self.numeros_unidades, 208),
-                     (self.pendencias, 9152), (self.ordens, 10816), (self.sortilegios, 20))
+                     (self.pendencias, 9152), (self.sortilegios, 20))
         if any(len(memoria) != tamanho for memoria, tamanho in esperados):
             raise ValueError('Comprimento de buffer de propriedade incompatível')
         self.jogador_deposito = jogador_deposito & 255
@@ -163,7 +233,7 @@ class PropriedadeConstrucoes:
             self.bibliotecas[jogador] = (self.bibliotecas[jogador] - 1) & 255
             if self.bibliotecas[jogador] == 0:
                 self.sortilegios[jogador * 5:jogador * 5 + 5] = bytes(5)
-                inicializar_bag(self.ordens, jogador * PASSO_ORDENS_JOGADOR + 4 * PASSO_BAG, 5)
+                inicializar_bag(self.ordens[jogador], 4 * PASSO_BAG, 5)
         elif tipo == 18:
             dono = self._dono_unidades(offset)
             self._saida_balao(jogador, preparar_saida)

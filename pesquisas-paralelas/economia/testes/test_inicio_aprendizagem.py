@@ -12,6 +12,7 @@ sys.dont_write_bytecode = True
 sys.path.insert(0, str(PASTA))
 import test_aprendizagem as _comparacoes
 from test_aprendizagem import preparar, w, d
+from test_proprietarios import preencher_ordens
 
 
 def preparar_inicio(jogador=0, indice=0, tipo=0):
@@ -253,7 +254,7 @@ class DiferencialInicioAprendizagem(unittest.TestCase):
             d(s, o + 0x8c, self.rng.choice((0, 1, 0xffffffff)))
             a.inventados[:] = self.rng.randbytes(20)
             a.propriedade.sortilegios[:] = self.rng.randbytes(20)
-            a.propriedade.ordens[:] = self.rng.randbytes(10816)
+            preencher_ordens(a.propriedade.ordens, self.rng.randbytes(10816))
             a.propriedade.pendencias[:] = self.rng.randbytes(9152)
             self.terminar(a, indice | 0xbeef0000)
 
