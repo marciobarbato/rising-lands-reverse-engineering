@@ -1,0 +1,42 @@
+{
+  "scope": "Whole original BonusSetEngin through committed core refresh and economic queries",
+  "mode": "Python only",
+  "tests": 11,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_104_single_type_mutations_refresh_all_matching_units (test_bonus_compartilhados.DiferencialBonusCompartilhados)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_256_seeded_complete_pools_and_untouched_fields (test_bonus_compartilhados.DiferencialBonusCompartilhados)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_32_all_type_sentinel_and_byte_boundaries (test_bonus_compartilhados.DiferencialBonusCompartilhados)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_3_invalid_type_guards_compare_prequery_native_checkpoints (test_bonus_compartilhados.DiferencialBonusCompartilhados)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_3_later_bonus_failures_keep_table_and_prior_unit_stores (test_bonus_compartilhados.DiferencialBonusCompartilhados)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_56_other_selectors_do_not_refresh_world (test_bonus_compartilhados.DiferencialBonusCompartilhados)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "complete_returns": 0,
+  "native_prequery_stops": 0,
+  "nested_capacity_queries": 0,
+  "nested_bonus_queries": 0,
+  "native_exceptions": 0,
+  "expected_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}
