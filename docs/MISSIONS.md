@@ -463,3 +463,11 @@ python3 -B pesquisas-paralelas/missoes/validar_terreno_estruturas_missao.py --em
 python3 -B scripts/check.py --domain missions
 python3 scripts/workstream.py integrate missions
 ```
+
+### Stage11 fresh validation before integration
+
+After merging verified Core16 main `b4c5a1072a2b2e494b3a6bf374bd978fc6e67b9a` into the feature as `13619b6e36deda8cbb7f289b8404d8371e57fe96`, the first [focused native run](../pesquisas-paralelas/missoes/validacao/stage11-focused-x86.json) passes all9tests with zero skips/errors/failures/native faults. Actual new scan coverage is63entries (62structure continuations,1joined MissionPlaceTerrain):56returns and7expected pre-CALL dependencies in161segments,49minimap-entry plus49pixel-loop resumes, maximum156,130instructions per segment. Every scan compares all six mapped blocks byte for byte and the full call/physical trace; this includes the actual MONDE01 joined input.
+
+Separately,512original BatimentExiste entries cover all256state bytes at indices0/999 with poisoned high index bits and preserved EDX;256MissionGetNum entries cover every byte with poisoned neighbors/highEAX16. All768query segments match the public APIs and preserve the entire global image. The independent8+4pretranslation captures remain unchanged and are not counted as this new differential run. The CPU-free local capture replay is separate evidence, not native execution.
+
+The required domain command passes80tests with31declared optional native skips and valid documentation links. Logs `.local/stage11-native-attempt1.log` and `.local/stage11-domain.log` are preserved. Integration and committed-main reproduction are still pending at this source checkpoint; no whole MissionLoad, natural remap completion, objective execution or real mission is claimed. No additional stage starts before the checked helper merge and remote ancestry verification.
