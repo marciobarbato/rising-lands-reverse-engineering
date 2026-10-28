@@ -1,13 +1,12 @@
 """Physical SetSortEngin using established core collision/vision primitives."""
 from dataclasses import dataclass
 import struct
+from insercao_unidades import DependenciaInsercaoUnidade,_preparar_insercao,_aplicar_insercao
 
 
-class DependenciaColocacaoSaida(NotImplementedError):
+class DependenciaColocacaoSaida(DependenciaInsercaoUnidade):
     def __init__(self, unidade):
-        self.unidade, self.endereco, self.checkpoint = unidade, 0x476851, 0x446146
-        super().__init__('Vision radius above the validated 0..8 sum requires DecouvreTerrain; '
-                         'prior record/collision effects retained')
+        super().__init__(unidade,0x446146)
 
 
 def colocar_unidade_saida(mundo, indice, celula):
@@ -16,16 +15,8 @@ def colocar_unidade_saida(mundo, indice, celula):
     Uses a live physical world, known type/owner, in-map cell and 128x128
     minimap. BB+F5 >8 stops before discovery, after collision/+72 stores.
     """
-    indice, celula = indice & 65535, celula & 65535
+    indice,celula,p=_preparar_insercao(mundo,indice,celula & 65535)
     u = mundo.unidades
-    if (not isinstance(u, bytearray) or len(u) != 220800 or indice >= 800
-            or not 1 <= mundo.largura <= 256 or not 1 <= mundo.altura <= 256
-            or not 0 <= mundo.jogador_local < 4 or mundo.tamanho_minimapa != (128, 128)
-            or (celula & 255) >= mundo.largura or (celula >> 8) >= mundo.altura):
-        raise ValueError('Exit requires a live physical pool, valid index/cell/camera and 128x128 minimap')
-    p = indice*276
-    if u[p+1] >= 26 or u[p] not in (0, 1, 2, 3, 4, 200):
-        raise ValueError('Exit requires known type 0..25 and owner 0..3/4/200')
     for off in (0x7e, 0x7c, 8, 0x7e):
         struct.pack_into('<H', u, p+off, celula)
     mundo._liberar_busca(indice)
@@ -36,17 +27,7 @@ def colocar_unidade_saida(mundo, indice, celula):
     struct.pack_into('<H', u, p+0xc0, 65535)
     struct.pack_into('<H', u, p+0xb8, 65535)
     u[p+0x87] = u[p+0x86] = 0
-    mundo.ocupar(indice, celula, True)
-    u[p+0x72] = 1
-    dono = u[p]
-    if dono not in (4, 200):
-        raio = u[p+0xbb]+u[p+0xf5]
-        if raio > 8:
-            raise DependenciaColocacaoSaida(indice)
-        mundo.descobrir_area(celula, raio+2, dono)
-        raio = u[p+0xbb]+u[p+0xf5]
-        mundo.iluminar_area(celula, raio, dono)
-    mundo.minimapa(u[p], celula, 4)
+    _aplicar_insercao(mundo,indice,celula,DependenciaColocacaoSaida)
 
 
 @dataclass(frozen=True)
