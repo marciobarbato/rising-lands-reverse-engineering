@@ -404,3 +404,55 @@ Integrated implementation `e1bbc3d5cc9f0441e56e96a203170b0341f09d2e`, feature co
 ## Compatibility with core's discovery extension (before Stage 15)
 
 Core Stage 14 moves the normal-owner insertion vision boundary of `SetSortEngin` from a sum of 8 to 11 and publishes `insercao_unidades.SOMA_VISAO_MAXIMA_INSERCAO`. At core's request, `testes/test_producao_colocada.py` now derives its dependency-stop fixtures from that symbol (`LIMITE_VISAO`, falling back to 8 while the symbol is absent from main): the local stop uses vision `LIMITE_VISAO+1`, and the native `erro='visao'` matrix uses `(LIMITE_VISAO+1, level 0)` and `(LIMITE_VISAO, level 3)`, both sum `LIMITE_VISAO+1`. Before core lands the values are exactly the old 9/0 and 8/3. No reconstructed behavior or report changed. Verified on this branch: the local test file passes (13 discovered, 7 optional skips) and the native vision test reaches all eight original stops at `0x446146`. The unsaturated boundary matrix `(0,0),(7,3),(8,0)` remains inside both the old and the new domain.
+
+## Stage 15: structure habitation for `MissionPlaceTerrain`
+
+Delivered in `construcoes_habitaveis.py`; the full contract is in [ECONOMY.md](../../docs/ECONOMY.md#structure-habitation-for-missionplaceterrain-stage-15). Original-byte inventory: `evidencias/habitaveis.json` (20 intervals, 3 jump tables, 22 type records; EXE `6c5565…43fb`, SBL `c3a541…c627`; analysis PE `26c4534b…64d0` named, never executed). Original-only captures: `evidencias/captura-habitaveis-original.json`, 22 entries in 79 segments, committed as `7081ac9` before any translation.
+
+**API for missions' structure scan** (`MissionPlaceTerrain 0x46c16d..0x46c1b8`). Missions keeps the loop, `BatimentExiste`, core `PlaceBatiment 0x41c4ac` and core `BatimentModifyMap 0x419e97(AX, EDX=1)`. Economy supplies:
+- `HabitacaoConstrucoes(aprendizagem, *, unidades_realizaveis, estruturas_realizaveis)`.
+  - Buffers are used by identity: `0x4dd6e8` technology Bags 9,152 bytes, `0x508f30`/`0x508f44` spells 20+20, `0x4e1934` unit realizability 104, `0x4dfad4` structure realizability 88, plus `0x4dfb2c` capacities and `0x4e2ea8` resources of the economy world.
+  - The economy structure/unit pools must be the same objects as core's world.
+  - All of these are inherited load state; the whole-load oracle supplies them. None is defaulted.
+- `.estrutura_habitada(indice)` → AL 1/0 (`0x41a5b8`).
+- `.tornar_habitavel(mundo, indice)` → `HabitacaoAplicada` (`0x41cc70`), called only when AL ≠ 0.
+- AX inputs are u16 with protected index 0..999; structure type byte 0..21 for `BatimentHabitable`.
+
+**Effects, in order:**
+1. Technology Bag (complete `BatimentSetTechnologie`).
+2. Types 17/9/12: `+0x84 = 200`, done.
+3. Type 4: `+0x78 = 0`. Type 3 with owner < 4: warehouse level.
+4. `BatimentGetCase`.
+5. Core `descobrir_area(cell, R+3, owner)`.
+6. Core `iluminar_area(cell, R, owner)`.
+7. `+0x84 = 200`.
+
+**Named dependencies and boundaries:**
+- `DependenciaHabitacao` at `0x476851`/`0x476cb3` when R exceeds core's `RAIO_DESCOBERTA_MAXIMO_VALIDADO`/`RAIO_LUZ_MAXIMO_VALIDADO` (core will publish 23/20 in `visao_movimento`, re-exported by `insercao_unidades`/`colocacao_missao`; fallback 10/8 today).
+- The same `DependenciaHabitacao` at `0x476851` for owner bytes ≥ 4 (the original aliases core's grid pointers).
+- `ValueError` before any effect for type bytes > 21 (inherited EDI).
+- `ZeroDivisionError` for the original type-3 `#DE`.
+- Earlier effects are retained. Never replay.
+
+**Cave identity.** Established from original tables: type 2 = `SANCTUAIRE`, type 3 = `CAVE` (`0x495d8c+0x13`, accessor `BatimentGetTypeName 0x418af7`; `BatimentInitCave` counts type 3 into `0x4dfb2c`). MONDE01's serialized structure is the sanctuary; centre cell `0x0c0e`. The coordinator was told and forwarded it to missions.
+
+**Erratum.** `0x44724a` is SBL `BagContientTroupe`, not `BagVide` (`0x4470b9`). Maintained prose and docstrings are corrected; alias `bag_contient_troupe` was added, with no behaviour change.
+
+**Validation.** Fresh native run on current main gates (10/8): 20 tests, 1,509 original entries / 1,571 segments / 62 minimap resumptions. Outcomes: 53 full returns, 101 discovery-gate stops (including MONDE01), 2 light stops, 1 expected `#DE`, 0 mismatches/limits/skips. A labelled diagnostic with core's announced 23/20 gives the same entries in 1,967 segments / 458 resumptions, and all 12 actual-MONDE01 caller configurations complete with whole-buffer equality. Local: 10 run / 10 optional skips. Required economy gate: 413 discovered / 190 optional skips; documentation links pass.
+
+**Gaps.**
+- Actual MONDE01 completes once core Stage 14 publishes the constants. I will rerun the native suite on that main and report.
+- `BatimentHabitable` callers `BatimentConstruction 0x41d000` and `BatimentLogeEngin 0x41fa81` are not composed.
+- Stage 16 proposal: the `EnginInitTechnologie 0x441459` → `BatimentInitCave 0x419112` tail pair (InitCave is already reconstructed; its mission-world composition remains), then `PlayerRetrieve 0x46df41`.
+
+**Cross-front records:**
+- Core changed its discovery domain: `test_producao_colocada.py` follows `SOMA_VISAO_MAXIMA_INSERCAO` (`db77da6`, main `f18b5a0`). If no vision sum above the limit is representable (u8 255), the stop cases compare the original continuation instead.
+- Core agreed that economy owns `BatimentGetCase`.
+- Answer sent to AI/runtime (dispatcher branches; call shape: `eax` = zero-extended u16 index, return ignored):
+  - Economy owns unit states 5 (`CalculWorkEngin`), 18 (`CalculTransporteEngin`), 7, 11, 15, 19, 20, 21 and 23.
+  - Economy owns structure `CalculTroupe` (committed entry `producao_limpa.calcular_tropa_com_limpeza_no_mundo` for types 1/2/13/16; library via `aprendizagem`) and structure types 3/4, 7, 8, 17, 18, 19 and 20. Inside them, `CreerEngin` and physical lodging stay core, and `iagUnitSendMessage` stays AI/runtime.
+  - Frame calls owned by economy: `RechercheCalcul`, `PlayerInitAllianceCompteur`, `PlayerAttaqueCalculSympa`, `SetUpdateChamp`/`UpdateChamp` (committed: `extracao.RecursosTerreno.agendar_campos`/`atualizar_campos`), `CalculMatiere`, `CalculCompteurMarche` and `CalculCompteurProposition`.
+  - Graphics owns `NextAnim*`.
+  - I proposed core for `DemonteBatiment 0x41effd`.
+  - Unimplemented bodies must raise at their call sites.
+- For missions' reset prefix: economy owns `MarcheResetAll 0x46027c` (selective reset exists: `ciclo_mercado.CicloMercado.resetar_todos`) and `BallonInit 0x441b6c` (not implemented; a named dependency until then). Pending missions' published call list.
