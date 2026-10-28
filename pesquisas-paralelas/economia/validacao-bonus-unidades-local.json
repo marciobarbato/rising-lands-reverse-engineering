@@ -1,0 +1,32 @@
+{
+  "scope": "Complete read-only BonusGetValEngin and EnginTypeGetCapacite queries",
+  "mode": "Python only",
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_1352_valid_owner_type_selector_combinations (test_bonus_unidades.DiferencialBonusUnidades)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_416_boundary_word_byte_loads (test_bonus_unidades.DiferencialBonusUnidades)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_768_capacity_queries_and_register_preservation (test_bonus_unidades.DiferencialBonusUnidades)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_all_selector_bytes_bypasses_and_untouched_invalid_indices (test_bonus_unidades.DiferencialBonusUnidades)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "complete_x86_returns": 0,
+  "dependency_stops": 0,
+  "expected_exceptions": 0,
+  "expected_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}

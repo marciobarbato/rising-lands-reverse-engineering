@@ -102,3 +102,32 @@ python3 -B scripts/check.py --domain economy
 - The current stage will use the authorized serialized `workstream.py integrate economy` from a clean committed tree; resulting feature/main hashes and actual common-gate counts will be sent to the coordinator before further implementation.
 
 Remaining next dependencies: core's committed `CalculPosition` provider, then existing-unit type conversion and the rest of the production caller; market nonzero-unit bodies; general arrival/transport credit; market reset/input/persistence and real-mission dispatch. No live-world unit provider has been invented.
+
+## Stage 2 integration and third-stage selection
+
+Stage 2 successfully integrated: implementation `9801898fe79b74c2e2a84132f6135ed32e092245`, final pushed feature `a86311134b64ef4a5d875476bcd26b5194a47a48`, main merge `ac26806908d3d631c5f5910a9e0e379d39a1fb69`. Required helper passed core 248/122 optional skips, combat 124/76, economy 247/109, graphics 88/0, workflow 3/0: 710 discovered tests, 307 optional skips, no failures. Only after reporting this result did the next stage start from a clean helper-resumed worktree and updated-main merge.
+
+Before new implementation, the remaining-component inventory selects the economic providers required by core's reuse of committed combat conversion: complete `EnginTypeGetCapacite` AL-byte query and complete `BonusGetValEngin` owner/type/selector query. Original addresses/tables and the incoming-ECX default-return quirk are published in the maintained manual. Core has been informed and owns the shared-world converter; this economy stage will not duplicate it. Runtime bonus table initialization/mutation and complete production continuation remain later dependencies.
+
+## Stage 3: capacity and unit-bonus query providers
+
+`bonus_unidades.capacidade_tipo(tipo)` is the complete AL-byte `EnginTypeGetCapacite` query at `0x4475AC`, with shared return `0x4474C5` and original dispatch at `0x447544`. It supports all 256 byte values and returns base capacity 0–6. `BonusUnidades(memoria).consultar(jogador,tipo,seletor,ecx=0)` is complete `BonusGetValEngin` at `[0x428CC0,0x428E71)`, using the original 13-entry dispatch at `0x428C8C`. It reads 1,872 already-loaded bytes at `0x4DFBA0`: player stride 468, type stride 18. Constructor zeros are synthetic, not a loader/reset.
+
+Original input widths are AL owner, BL type, DL selector. Owners 4/200 return zero before dispatch/validation. Other owners with selector 8 or above 12 return incoming ECX u32 without lookup or index validation; the optional `ecx=0` argument is caller input, not an original default. Remaining lookups protect owner 0–3 and type 0–25 with `ValueError` on invalid indices; original out-of-table behavior remains unsupported. No mutations/callbacks occur. Selector offsets/widths are fully published in the maintained manual, including u16 fields and untouched opaque bytes.
+
+Core's callbacks use `(owner,type,id)`: selector 1 is u8 `+0x0B`, selector 12 u8 `+0x10`. Combat's existing `Modificateur(owner,selector,type)` contract adapts via argument permutation, preserving original callback identifiers: selector 5 is u16 `+8`, selector 6 is u8 `+0x0A`; low-byte consumption remains combat's caller behavior. Both owners were notified, and no other-owner converter/damage implementation was duplicated.
+
+Original EXE/SBL hashes remain those above. Additive `evidencias/bonus-unidades.json` and three listings publish exact code bytes/hashes plus the two dispatch tables. The original bodies run unpatched to return with no substituted queries.
+
+Fresh commands:
+
+```sh
+python3 -B pesquisas-paralelas/economia/capturar_bonus_unidades.py
+python3 -B pesquisas-paralelas/economia/validar_bonus_unidades.py
+python3 -B pesquisas-paralelas/economia/validar_bonus_unidades.py --emular
+python3 -B scripts/check.py --domain economy
+```
+
+Actual new results: 10 tests pass with no x86 skips/failures/errors; **4,060 complete original calls**, zero dependency stops/expected exceptions/limits. Coverage is 1,352 valid combinations, 1,524 selector-byte/neutral/default cases, 768 capacity-width/register-preservation cases, and 416 poisoned byte/word cases. Full query-state buffers/guards remain unchanged. Local stage: six passed/four optional skipped. Domain gate: 257 discovered/113 optional skips, zero failures; documentation links passed. No historical or prior-stage x86 totals are presented as rerun.
+
+Global gap closed: exact read-only capacity/bonus providers needed for existing-unit conversion and attacker modifier queries. Status before integration: implemented and independently original-x86 validated; not yet wired into live mission/core/combat consumers. Loaded bonus initialization/setters, production continuation, and runtime dispatch remain. The coordinator's current overall estimate is approximately 50% (uncertainty 40–60%); this bounded provider delivery does not independently justify changing that coarse estimate. Required clean-tree serialized integration and actual feature/main hashes will be reported before another stage begins.
