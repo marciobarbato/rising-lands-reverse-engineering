@@ -268,3 +268,49 @@ Stage17 fresh native comparison now PASSES seven tests /2,267segments in157.394s
 Focused Stage16 regression also passes19tests /1,073segments with zero failures/errors/skips; `relatorios/stage17-classificacao-regressao.json` preserves its separate fresh result. The legacy report scope describes its own checkpoint-only tests; Stage17's separate report above establishes full remap returns.
 
 Required Core gate PASS:408discovered /188explicit optional native skips, documentation links valid,10.350seconds; `relatorios/stage17-core-check.json`. Stage17 and focused legacy original comparisons above ran without skips. The owned commit is ready for the unchanged locked integration helper and focused committed-main reproduction.
+
+
+### Stage17 delivered boundary and cutoff handover
+
+Implementation `93620d34a7a1cf722764a690fb3b945920d9531e`, final feature `e5f0b69573688418430524171058e3df124a4904`, main merge `09d3953c6dda02ba6e4f6ca9ac61e51ca48782e6`. The unchanged helper held the common lock through fetch, semantic merge, common checks and normal feature/main pushes; all delivery/capture/feature/merge ancestry was verified on fetched main. Common suites all pass: Core408/188optional skips, combat246/149, economy424/196, graphics192/0, missions80/31, AI36/4, audio20/3 and workflow8/0. Fresh Stage17 and focused legacy native comparisons have no optional skips.
+
+Focused reproduction on that exact main passes: all seven frozen whole-state/Python cases, four native final-tail entries, and a fresh complete original MONDE01 return AL1 with56components. All5,246,976mapped bytes, resource generations/results, ordered LIFO/label/edge writes and registers equal immutable evidence. Total735native segments (731whole MONDE01 plus four tail),342binding resumptions,388preserved loop resumptions, maximum88,074instructions; no unexpected fault or limit. Relevant Core/mission-fixture source identities match the tested implementation; captures remain unchanged. Reports/logs: `.local/stage17-main-repro.json`, `.local/stage17-main-repro.log`, `.local/stage17-integration.log`. Main reproduction was complete and the exclusive heavy lease explicitly released at approximately18:19 BRT on2026-10-28. No child remains. Full MissionLoad and a whole loaded-mission snapshot remain NOT RUN by this Core stage.
+
+The remaining note is LIGHT handover documentation, added after that verified main boundary. The coordinator canceled queued P2 development at18:16 to preserve the remaining validation window for Economy. No P2 capture, implementation, native comparison or integration was started.
+
+### Next window: static Engin_RetrieveExperimente lead only
+
+Coordinator's independent intact-EXE static read:54bytes at0x441623..0x441659, SHA256 `9e9298121bdb5c12a6d8912f5430b3cdcbcb5cb7831c466a672b320f8c7d4522`. The observed shape appears to copy20u16 words in ascending order, grouped as five words per owner across four owners. Actual source40bytes are0x4e19ec..0x4e1a14 exclusive; destination40bytes are0x4e19c4..0x4e19ec exclusive. The source must be the live saved experience buffer, and destination the existing live current queue; neither zero state nor a copied/default queue is justified. The shared epilogue at0x440d59 still needs its own byte/ABI audit. This paragraph preserves the coordinator's static finding; Core has not independently executed or validated the routine.
+
+Future bounded work starts with an independent original-only copy/guard/word-order capture and committed immutable evidence before translation, then focused fresh comparisons, required gates, locked integration and committed-main reproduction. Schedule it under a new coordinator grant. Unit-state13, DemonteBatiment, other dispatch primitives, full MissionLoad, frames and loaded gameplay remain separate gaps. Development stops at18:25 BRT;18:25–18:40 is handover only. No new development round is authorized by this note.
+
+
+### Engin_RetrieveExperimente 0x441623 — original-first delivery on `feat/re-core`
+
+This entry follows the static lead above, under a new coordinator grant. The branch first merged `origin/main` `9bf217d` normally (merge `f291638`). The [retrieval contract](EXPERIENCE_RETRIEVAL.md) holds the ABI, the API, the domain and the saved-buffer provenance.
+
+**Static findings.** An independent byte audit confirms the coordinator's static lead: 54 bytes, SHA `9e9298…4522`.
+- The routine is an unguarded ascending copy of 20 u16 words from `0x4e19ec..0x4e1a14` to `0x4e19c4..0x4e19ec`.
+- It consumes no register. EBX, ECX, EDX and ESI are pushed and popped; EDI and EBP are untouched.
+- The shared epilogue `0x440d59..0x440d5e` is POP ESI, EDX, ECX, EBX and then RET, with no stack arguments.
+- On exit EAX=`0x28`, ZF=PF=1 and CF=AF=SF=OF=0, with DF kept. The caller ignores all of these: `PlayerRetrieve` begins with XOR EAX,EAX.
+
+**Saved-buffer provenance.** The buffer is in `.bss`, and 23 code references cover it.
+- `Engin_ResetExperience 0x441470`, called from MenuInit and MissionLoadName, fills it with (`FF`,0) pairs.
+- `Engin_StoreExperimente 0x4414f8`, called from `CalculGame+0x21a` after `MissionNext`=1, stores the top five AF values per owner.
+- `Engin_LoadExperimente 0x4414ad`, called from GameLoad, reads it when the save version is ≥4. `Engin_SaveExperimente` writes it out.
+
+These producers are recorded and run natively as provenance only; they are not translated.
+
+**Evidence and validation.**
+1. Static export, bench and capture were committed in `ff92691` before translation. Capture SHA `5c734542…20d3`: 20 cases, 22 segments, including native Reset and Store chains. The image changes only in the current queue. The capture regenerated byte-identically later in the same session.
+2. Implementation commit `5b82b99` adds `recuperacao_experiencia.recuperar_experiencias(atuais, guardadas)` and `recuperar_experiencia_missao(mundo, guardadas)`. Both work on the live buffers, raise `DependenciaExperienciaGuardada` at `0x441645` for a missing saved queue, and fail protected inputs before any store.
+3. The CPU-free replay of all 20 frozen cases passes.
+4. The fresh native differential PASSES: 10 tests, 74 Python/native comparisons, 78 segments, with zero failures, errors, skips, faults or limits, and no binding or patch.
+5. Local mode runs 10 tests, 6 executed and 4 optional skips.
+6. The Core gate result is recorded in `relatorios/recuperacao-experiencia-core-check.json`.
+
+No failed attempt occurred in this slice. Logs are in `.local/xp/`.
+
+**NOT RUN:** complete MissionLoad or six-tail composition; a real MONDE01 queue snapshot; translation of the producers; locked integration and exact-main reproduction, which the coordinator performs. Missions should call `recuperar_experiencia_missao(mundo, guardadas)` with the session's actual live saved buffer, and never with a constructed default.
+
