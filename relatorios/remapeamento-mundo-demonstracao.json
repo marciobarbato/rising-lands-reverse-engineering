@@ -1,0 +1,25 @@
+{
+  "scope": "Synthetic pre-allocation reset only; no x86 or actual mission",
+  "pending": {
+    "flags": 0,
+    "tamanho": 65536,
+    "endereco_dependencia": 4386493,
+    "importacao": 5386688
+  },
+  "search": {
+    "unidade": 65535,
+    "ocupada": 0,
+    "sucesso": 0,
+    "ponteiro_rota": 0,
+    "concluida": 165
+  },
+  "cleared_regions": true,
+  "cleared_colors": true,
+  "free_color_count": 255,
+  "released_status_values": [
+    1
+  ],
+  "unit_pool_retained": true,
+  "terrain_attributes_retained": true,
+  "allocation_aliases_retained": true
+}

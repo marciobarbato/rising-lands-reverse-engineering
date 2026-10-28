@@ -1,0 +1,41 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "Chemin_Remap",
+      "start": "0x42ee1c",
+      "end_exclusive": "0x42f1e1",
+      "sha256": "c33e422865e5265030189389bf72f3ad75d7952546c35f737a53565e811aafd2",
+      "file": "0042ee1c.asm"
+    },
+    {
+      "name": "pre_allocation_prefix",
+      "start": "0x42ee1c",
+      "end_exclusive": "0x42eebd",
+      "sha256": "9e8827f015a2afa5f450c4d806c4372833e830fe03a1d2af4eb3d732d9ccdba6",
+      "file": "0042ee1c-prefix.asm"
+    },
+    {
+      "name": "native_memset",
+      "start": "0x48c3b0",
+      "end_exclusive": "0x48c3c8",
+      "sha256": "b473e3315e7881b7c91100eef6d9f373e9ba34e184a57f83c5b443c730886228",
+      "file": "0048c3b0.asm"
+    },
+    {
+      "name": "native_fill_leaf",
+      "start": "0x48d890",
+      "end_exclusive": "0x48d933",
+      "sha256": "0d817cb2566a6e1c69d28ad408e2c64dbe30f5718e5c9e2a0126d2bc4d8ebc03",
+      "file": "0048d890.asm"
+    }
+  ],
+  "pending_allocation": {
+    "caller": "0x42eebd",
+    "iat": "0x5231c0",
+    "flags": 0,
+    "size": 65536
+  },
+  "scope": "Complete body exported; translation ends before first allocation, after ordered world reset."
+}

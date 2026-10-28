@@ -1,0 +1,55 @@
+{
+  "scope": "Actual CalculTroupe through economic cleanup before first terrain query or unit AI message",
+  "mode": "Python only",
+  "tests": 16,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_208_building_output_type_and_retention_pairs (test_producao_limpa.DiferencialProducaoLimpa)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_32_remaining_type_predicates_use_capacity_not_only_colonists (test_producao_limpa.DiferencialProducaoLimpa)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_36_inactive_or_incomplete_producers_do_not_enter_cleanup (test_producao_limpa.DiferencialProducaoLimpa)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_eight_pending_sound_or_viewport_dependencies_preserve_prior_effects (test_producao_limpa.DiferencialProducaoLimpa)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_eight_stale_capacity_entries_survive_live_output_removal (test_producao_limpa.DiferencialProducaoLimpa)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_four_distinct_colonist_producer_cleanup_paths (test_producao_limpa.DiferencialProducaoLimpa)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_four_persistent_sequences_stop_at_first_terrain_or_message (test_producao_limpa.DiferencialProducaoLimpa)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_two_reset_import_stops_match_first_original_inline_store (test_producao_limpa.DiferencialProducaoLimpa)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "declared_stops": 0,
+  "completed_returns": 0,
+  "pending_unit_message_stops": 0,
+  "pending_terrain_query_stops": 0,
+  "pending_volume_stops": 0,
+  "pending_post_sound_stops": 0,
+  "pre_reset_import_stops": 0,
+  "original_entry_calls": 0,
+  "preserved_minimap_resumptions": 0,
+  "expected_x86_exceptions": 0,
+  "expected_x86_limits": 0,
+  "success": true,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb"
+}

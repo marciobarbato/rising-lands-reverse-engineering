@@ -1,0 +1,51 @@
+{
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_sbl": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "scope": "Actual CalculTroupe through supported request and existing cleanup; no terrain/AI/audio result substituted",
+  "captures": [
+    {
+      "start": "0x420fb7",
+      "end_exclusive": "0x421250",
+      "bytes_hex": "31c0668b042489c2c1e20401c2c1e20201c2c1e20281c2c8a0490031db8a420888c38d420c83fb15750de86462020084c07429b001eb2783fb027509e85262020084c075ee8d420cbb09000000ba01000000e8aa6102006685c0ebd530c084c00f85360100008b1c2431c06689d889c2c1e20401c2c1e20201c2b8c8a049008a4490083c0172083c02763b3c05743731c0668b042489c2c1e20401c2c1e20201c2b8c8a049008a44900825ff00000083f8090f84ac00000083f80c0f85bb010000e99e00000031c06689d889c2c1e20401c2c1e20201c2c1e20281c2c8a0490066c74278ffffc6427bff66c7427c000031c066c7427e00008a420866c78286000000ffff83f814741266c78280000000000066c782820000000000c642740031c08a4205c7828c0000000000000083f8030f8458ffffffc6420505e94fffffffc74424081400000031c031d2668b0424668b542408e8d19dffff25ffff0000e8675d050031c08a47048b1c24663b1c45e05b490075128a470425ff00000066c70445e05b4900ffff31c0ba01000000668b0424c64704c8e8448dffff31c0668b042489c2c1e20401c2c1e20201c2c1e20281c2c8a0490066c74278ffffc6427bff66c7427c000031c066c7427e00008a420866c78286000000ffff83f814741266c78280000000000066c782820000000000c642740031c08a4205c7828c0000000000000083f8037404c6420505ba4600000031c031db668b442404e8f0170600ba0300000031c031db668b0424e81e36060083c410e9a8270000c74424080a000000e900ffffffc744240808000000e9f3feffffc744240804000000e9e6feffffc744240805000000e9d9feffffc744240807000000e9ccfeffff31db8a47088a5f043c150f87bcfeffff25ff0000002eff2485f40d4200",
+      "sha256": "aa86196de7c4eaa07002b958074537ec28cfc5f92b2c2f1510fd27c73e2ff211",
+      "listing": "producao-limpa-00420fb7.asm"
+    }
+  ],
+  "committed_evidence": [
+    {
+      "path": "evidencias/producao-solicitada.json",
+      "sha256": "e68bf2140166e2f073b7b884181e14234e67da0e2103dc380cce5a1ae18e4682"
+    },
+    {
+      "path": "evidencias/limpeza-saida.json",
+      "sha256": "f22cc044c58fd2dbfa63777e9037b9a8f6265fcba81a447db67740b011e7f1ce"
+    },
+    {
+      "path": "../../evidencias/ciclo-estruturas/manifesto.json",
+      "sha256": "c206aac063304e825e0fad4b6cd1323777d98da1b03461b13eba660d08425de3"
+    },
+    {
+      "path": "../../relatorios/simbolos-originais.json",
+      "sha256": "7e1e63b5340bc771e4dd743008058e1e47cea79ec74e76c72a70904884f4595e"
+    }
+  ],
+  "request_composition_implementation": "7fe62277516d4ebac77f1e862cb4a9b8f36f3b2b",
+  "cleanup_implementation": "3a7ac12a4906553b73b84037a17f51c0c552cf88",
+  "native_entry": "0x4259e6",
+  "first_terrain_query": {
+    "checkpoint": "0x42110c",
+    "callee": "0x41aee2",
+    "symbol": "BatimentGetCase"
+  },
+  "first_unit_message": {
+    "checkpoint": "0x4211d3",
+    "callee": "0x4829c8",
+    "message": 70
+  },
+  "reset_import_checkpoints": [
+    "0x421097",
+    "0x42116e"
+  ],
+  "fixture_contract": "Distinct existing remaining unit; count/capacity discrepancies are explicit raw-state cases",
+  "native_execution": "Actual core preserved-state minimap resumptions; no CALL/RET/algorithm replacement"
+}
