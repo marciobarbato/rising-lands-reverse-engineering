@@ -26,6 +26,7 @@ def main():
         from test_terreno_unidades import DiferencialTerrenoUnidades,SOMA_VISAO
         from test_cadeia_auxiliar import DiferencialCadeiaAuxiliar
         from test_reinicio_missao import DiferencialReinicio
+        from test_terreno_estruturas_missao import DiferencialEstruturasMissao
         native = DiferencialCarga.native
         prelude = DiferencialCabecalho.native
         tables = DiferencialCondicoes.native
@@ -36,6 +37,7 @@ def main():
         placement = DiferencialTerrenoUnidades.native
         chain = DiferencialCadeiaAuxiliar.native
         reset = DiferencialReinicio.native
+        structure_placement = DiferencialEstruturasMissao.native
         report = dict(tests=result.testsRun, skipped=len(result.skipped), errors=len(result.errors),
                       failures=len(result.failures), unit_bounded_segments=native.execucoes,
                       unit_native_fixtures=native.loads, unit_native_returns=native.returned,
@@ -85,9 +87,16 @@ def main():
                       reset_declared_stops=reset.stops,
                       reset_bounded_segments=reset.execucoes,
                       reset_compared_state='0x494000..0x523000 plus unit pool, four type Bags, projectile pool and players',
-                      reset_provider_dependencies={'TerrainReset': '0x46c35f / 0x46c60f', 'RechercheReset': '0x46c68c'})
+                      reset_provider_dependencies={'TerrainReset': '0x46c35f / 0x46c60f', 'RechercheReset': '0x46c68c'},
+                      structure_placement_entries=structure_placement.entradas,
+                      structure_placement_returns=structure_placement.retornos,
+                      structure_placement_expected_stops=structure_placement.dependencias,
+                      structure_placement_segments=structure_placement.execucoes,
+                      structure_existence_query_entries=DiferencialEstruturasMissao.structure_queries,
+                      mission_number_query_entries=DiferencialEstruturasMissao.mission_queries,
+                      structure_placement_complete_mission_runtime=False)
         (OWNED/'validacao').mkdir(exist_ok=True)
-        (OWNED/'validacao/stage10-suite-x86.json').write_text(json.dumps(report, indent=2)+'\n')
+        (OWNED/'validacao/stage11-suite-x86.json').write_text(json.dumps(report, indent=2)+'\n')
         print(json.dumps(report, indent=2))
     return 0 if result.wasSuccessful() else 1
 
