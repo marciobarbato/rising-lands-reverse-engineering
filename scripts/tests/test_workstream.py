@@ -18,9 +18,60 @@ class WorkflowTests(unittest.TestCase):
         self.assertTrue(workflow.owned('core', 'ferramentas/portoes.py'))
         self.assertFalse(workflow.owned('core', 'pesquisas-paralelas/economia/economia.py'))
         self.assertTrue(workflow.owned('graphics', 'docs/GRAPHICS.md'))
-        for domain in workflow.DOMAINS:
+        self.assertTrue(workflow.owned('missions', 'pesquisas-paralelas/missoes/validar.py'))
+        self.assertTrue(workflow.owned('missions', 'docs/MISSIONS.md'))
+        self.assertTrue(workflow.owned('ai-runtime', 'pesquisas-paralelas/ia-runtime/testes/test_namespace.py'))
+        self.assertTrue(workflow.owned('ai-runtime', 'docs/AI_RUNTIME.md'))
+        self.assertFalse(workflow.owned('ai-runtime', 'ferramentas/ia.py'))
+        self.assertTrue(workflow.owned('macos', 'compilar-jogável'))
+        self.assertTrue(workflow.owned('macos', 'apps/macos-preview/src/engine.py'))
+        self.assertFalse(workflow.owned('macos', 'ferramentas/unidades.py'))
+        for domain in workflow.RESEARCH:
             self.assertFalse(workflow.owned(domain, 'scripts/check.py'))
             self.assertFalse(workflow.owned(domain, 'docs/STATUS.md'))
+            self.assertFalse(workflow.owned(domain, 'integracao/providers.py'))
+        self.assertTrue(workflow.owned('maintenance', 'scripts/check.py'))
+        self.assertTrue(workflow.owned('maintenance', 'docs/STATUS.md'))
+        self.assertTrue(workflow.owned('maintenance', 'AGENTS.md'))
+        self.assertFalse(workflow.owned('maintenance', 'docs/MISSIONS.md'))
+        self.assertFalse(workflow.owned('maintenance', 'pesquisas-paralelas/ia-runtime/README.md'))
+        self.assertFalse(workflow.owned('maintenance', 'pesquisas-paralelas/ia-runtime/README.md', 'D'))
+        # Seeding a new front adds files under its paths without touching existing research files.
+        self.assertTrue(workflow.owned('maintenance', 'pesquisas-paralelas/ia-runtime/README.md', 'A'))
+        self.assertFalse(workflow.owned('core', 'pesquisas-paralelas/ia-runtime/README.md', 'A'))
+
+    def test_every_front_has_distinct_branch_and_worktree(self):
+        branches = [front.branch for front in workflow.FRONTS.values()]
+        worktrees = [front.worktree for front in workflow.FRONTS.values()]
+        self.assertEqual(len(branches), len(set(branches)))
+        self.assertEqual(len(worktrees), len(set(worktrees)))
+        self.assertEqual(workflow.FRONTS['missions'].branch, 'feat/re-missions')
+        self.assertEqual(workflow.FRONTS['macos'].worktree, 'macos-playable')
+        self.assertEqual(workflow.FRONTS['ai-runtime'].branch, 'feat/re-ai-runtime')
+
+    def test_start_tracks_existing_remote_branch(self):
+        with tempfile.TemporaryDirectory(prefix='rising-workflow-') as directory:
+            base = Path(directory)
+            remote, repo = base / 'remote.git', base / 'repository'
+            environment = dict(os.environ, GIT_AUTHOR_NAME='Workflow Test', GIT_AUTHOR_EMAIL='workflow@example.invalid',
+                               GIT_COMMITTER_NAME='Workflow Test', GIT_COMMITTER_EMAIL='workflow@example.invalid')
+            def run(*args, cwd=None):
+                return subprocess.check_output(['git', *map(str, args)], cwd=cwd, env=environment, stderr=subprocess.STDOUT, text=True).strip()
+            run('init', '--bare', remote)
+            run('init', '-b', 'main', repo)
+            (repo / 'README.md').write_text('fixture\n')
+            run('add', '.', cwd=repo);run('commit', '-m', 'Initial fixture', cwd=repo)
+            run('remote', 'add', 'origin', remote, cwd=repo);run('push', '-u', 'origin', 'main', cwd=repo)
+            # A branch that exists only on the remote must be resumed, not recreated from main.
+            run('branch', 'feat/re-missions', cwd=repo)
+            (repo / 'note.txt').write_text('remote feature\n')
+            run('checkout', '-q', 'feat/re-missions', cwd=repo);run('add', 'note.txt', cwd=repo)
+            run('commit', '-m', 'Remote feature', cwd=repo);run('push', 'origin', 'feat/re-missions', cwd=repo)
+            run('checkout', '-q', 'main', cwd=repo);run('branch', '-D', 'feat/re-missions', cwd=repo)
+            missions = workflow.start(repo, 'missions')
+            self.assertEqual(run('branch', '--show-current', cwd=missions), 'feat/re-missions')
+            self.assertEqual((missions / 'note.txt').read_text(), 'remote feature\n')
+            self.assertEqual(run('rev-parse', '--abbrev-ref', '@{upstream}', cwd=missions), 'origin/feat/re-missions')
 
     def test_two_stale_workers_merge_without_modifying_canonical_checkout(self):
         with tempfile.TemporaryDirectory(prefix='rising-workflow-') as directory:

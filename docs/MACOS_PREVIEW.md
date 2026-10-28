@@ -49,4 +49,4 @@ dependencies/python/bin/python3 -B scripts/testar.py
 codesign --verify --deep --strict dist/RisingLands-Preview.app
 ```
 
-`build/logs/tests.json` records actual suites/skips; other logs record build, opening, package, architecture, and signature checks. Source changes do not update the existing bundle until a rebuild. The preview is outside the next four research ownership slices; cross-domain app integration waits for supported contracts and a dedicated follow-up.
+`build/logs/tests.json` records actual suites/skips; other logs record build, opening, package, architecture, and signature checks. Source changes do not update the existing bundle until a rebuild. The preview is outside the research ownership slices; the playable consumer in [the playable manual](MACOS_PLAYABLE.md) is the milestone-triggered integration path.

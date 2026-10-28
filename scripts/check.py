@@ -11,7 +11,9 @@ from urllib.parse import unquote
 ROOT = Path(__file__).resolve().parents[1]
 SUITES = {'core': 'testes', 'combat': 'pesquisas-paralelas/combate',
           'economy': 'pesquisas-paralelas/economia/testes',
-          'graphics': 'pesquisas-paralelas/graficos-animacao'}
+          'graphics': 'pesquisas-paralelas/graficos-animacao',
+          'missions': 'pesquisas-paralelas/missoes/testes',
+          'ai-runtime': 'pesquisas-paralelas/ia-runtime/testes'}
 
 
 def documentation_links(root):
@@ -20,6 +22,7 @@ def documentation_links(root):
     paths += list((root / 'docs').rglob('*.md'))
     paths += list((root / 'apps/macos-preview').glob('*.md'))
     paths += list((root / 'pesquisas-paralelas').glob('*/*.md'))
+    paths += list((root / 'integracao').glob('*.md'))
     for path in paths:
         if not path.exists():
             continue
