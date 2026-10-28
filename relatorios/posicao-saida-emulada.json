@@ -1,0 +1,17 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": true,
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 7546,
+  "success": true,
+  "expected_exceptions": 0,
+  "expected_execution_limits": 0,
+  "dependency_stops": 0,
+  "scope": "Complete CalculPosition using synthetic records and dimensions; no conversion or game run.",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "unicorn": "2.1.4",
+  "stop": "normal benchmark return 0x3000000"
+}
