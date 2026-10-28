@@ -1,7 +1,7 @@
 {
   "python": "3.9.6",
   "emulacao_habilitada": false,
-  "testes": 209,
+  "testes": 226,
   "falhas": 0,
   "erros": 0,
   "ignorados": [
@@ -335,6 +335,42 @@
     },
     {
       "teste": "test_emulacao_otimizacao.DiferencialOtimizacao.test_otimizacao_lacos_cauda_e_rotas_deterministicas",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_portoes.DiferencialPortoes.test_avanco_todas_as_fases_e_bits_de_colisao",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_portoes.DiferencialPortoes.test_bloqueio_com_e_sem_ocupacao_nas_duas_orientacoes",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_portoes.DiferencialPortoes.test_ciclo_de_liberacao_e_bloqueio_com_cores_e_regioes",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_portoes.DiferencialPortoes.test_liberacao_conserva_exclusao_da_ultima_coluna_ou_linha",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_portoes.DiferencialPortoes.test_liberacao_horizontal_vertical_e_membros_sem_filtro_de_tipo",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_portoes.DiferencialPortoes.test_lista_horizontal_de_bloqueio_pode_alcancar_a_linha_seguinte",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_portoes.DiferencialPortoes.test_predicados_todos_os_bytes_e_orientacoes",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_portoes.DiferencialPortoes.test_residuos_da_lista_e_teste_vertical_de_coluna_zero",
+      "motivo": "Emulação opcional: RISING_EMULAR=1"
+    },
+    {
+      "teste": "test_emulacao_portoes.DiferencialPortoes.test_trajeto_atravessa_portao_e_recusa_bloqueio_enquanto_ocupado",
       "motivo": "Emulação opcional: RISING_EMULAR=1"
     },
     {

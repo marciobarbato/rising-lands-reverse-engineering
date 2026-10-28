@@ -52,6 +52,14 @@ class MundoNavegacao(MundoFisico):
         from colocacao_estruturas import atualizar_muros_vizinhos
         return atualizar_muros_vizinhos(self, celula)
 
+    def alternar_portoes(self, celula, indice):
+        from portoes import alternar_portoes
+        return alternar_portoes(self,celula,indice)
+
+    def avancar_estado_portao(self, indice):
+        from portoes import avancar_estado_portao
+        return avancar_estado_portao(self,indice)
+
     def refazer_regioes(self):
         """Reconstrói rótulos e reaplica ocupação; usar antes de executar a busca."""
         if any(v & 0x8000 for v in self.regioes):

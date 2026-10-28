@@ -15,10 +15,15 @@ O desenvolvimento desta frente segue no branch `codex/nucleo-construcoes`,
 com checkout próprio em `engenharia-reversa-nucleo`. `PlaceBatiment`, a escolha
 do primeiro tile, os caminhos de muro/portão e a atualização dos muros vizinhos
 estão traduzidos; veja [COLOCACAO_ESTRUTURAS.md](documentacao/COLOCACAO_ESTRUTURAS.md).
-A suíte do núcleo passou com 209 testes e 46.223 execuções x86 delimitadas,
+A suíte do núcleo passou com 226 testes e 49.305 execuções x86 delimitadas,
 sem testes ignorados.
 O remoto `origin` foi configurado pelo usuário em
 [rising-lands-reverse-engineering](https://github.com/marciobarbato/rising-lands-reverse-engineering).
+
+Os comandos de portões e seu avanço físico também foram traduzidos: liberação
+da passagem, recusa de fechamento com ocupante e retorno do bloqueio após a
+passagem. Veja [PORTOES.md](documentacao/PORTOES.md); a etapa não seleciona sprites
+e mantém a frente gráfica separada.
 
 Foram traduzidas a aplicação do terreno de edifícios completos e suas rotinas
 de limpeza, com máscara de colisão, slots compactos, tiles, objetos, regiões e
@@ -117,6 +122,7 @@ delegados e dependências pendentes. O estado, as fontes e a continuidade estão
 21. [Contrato da pesquisa de economia](pesquisas-paralelas/economia/INTEGRACAO.md).
 22. [Aplicação e limpeza do terreno de construções](documentacao/TERRENO_ESTRUTURAS.md).
 23. [Colocação de estruturas, muros e portões](documentacao/COLOCACAO_ESTRUTURAS.md).
+24. [Portões: comandos e efeitos sobre a passagem](documentacao/PORTOES.md).
 
 ## Reproduzir
 

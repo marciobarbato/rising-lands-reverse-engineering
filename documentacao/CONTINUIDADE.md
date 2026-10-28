@@ -1,5 +1,15 @@
 # Estado da pesquisa e continuidade
 
+## Portões: simulação e passagem
+
+Os predicados, pedidos coletivos e avanço físico do tipo 12 foram traduzidos em
+[PORTOES.md](PORTOES.md). A demonstração cruza um portão, recusa fechamento
+durante a ocupação e reinsere o bloqueio após a saída. O núcleo passou com
+226 testes e 49.305 execuções x86 delimitadas. Os sprites, a seleção por
+cursor e o despacho global permanecem pendentes. A implementação altera somente
+o núcleo; os arquivos da frente gráfica foram consultados em leitura para
+confirmar o limite de responsabilidade e não foram alterados.
+
 ## Branch do núcleo — colocação, muros e portões
 
 Esta frente agora usa o branch `codex/nucleo-construcoes` e a worktree isolada
