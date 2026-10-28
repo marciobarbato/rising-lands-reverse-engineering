@@ -1,0 +1,77 @@
+{
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "ranges": [
+    {
+      "symbol": "InfligeDegat",
+      "start": "0x450874",
+      "end_exclusive": "0x4510dd",
+      "sha256_bytes": "2409dae0ab60fcb3e9f267532469d670d3476835843b5c6c2e1074d8eaaecf3f",
+      "file": "00450874.asm",
+      "predecessor_reused": true
+    },
+    {
+      "symbol": "PlayerEstAllie",
+      "start": "0x46d838",
+      "end_exclusive": "0x46d877",
+      "sha256_bytes": "9eb1a3a1733a40d2b48c996ea96ea13d11072a1c588fb19df67364851f2ddd74",
+      "file": "0046d838.asm",
+      "predecessor_reused": true
+    },
+    {
+      "symbol": "PlayerAAttaqueSet",
+      "start": "0x46d600",
+      "end_exclusive": "0x46d629",
+      "sha256_bytes": "a4a85ea1bfa0264820ce566f7cbf6172480422488f33eee6bce8822afc3f6091",
+      "file": "impacto-0046d600.asm",
+      "predecessor_reused": false
+    },
+    {
+      "symbol": "PlayerResetAllie",
+      "start": "0x46d8cb",
+      "end_exclusive": "0x46d927",
+      "sha256_bytes": "262eb5ebf86d3eb119246b973e41f860826c47673821483c6f88f8003ec39c05",
+      "file": "impacto-0046d8cb.asm",
+      "predecessor_reused": false
+    },
+    {
+      "symbol": "MAJSympathie",
+      "start": "0x475118",
+      "end_exclusive": "0x475267",
+      "sha256_bytes": "2f6bee7269d71cc161fa51df6620e62ffddbb52eaaf173d2be770a2926d1a4cc",
+      "file": "impacto-00475118.asm",
+      "predecessor_reused": false
+    },
+    {
+      "symbol": "CalculDirection",
+      "start": "0x477042",
+      "end_exclusive": "0x4770ee",
+      "sha256_bytes": "96571c2bae91ee0774f6e10c8efc82968f1d8759a13b7a703ece4c16c8e582a8",
+      "file": "impacto-00477042.asm",
+      "predecessor_reused": false
+    },
+    {
+      "symbol": "CalculDirCase",
+      "start": "0x4770ee",
+      "end_exclusive": "0x4772ec",
+      "sha256_bytes": "f3dbe32cdf2479c8ba98946732615c1186f687eb902e05de944798d5daa7a226",
+      "file": "impacto-004770ee.asm",
+      "predecessor_reused": false
+    }
+  ],
+  "hit_dispatch": {
+    "address": "0x450858",
+    "first_type": 11,
+    "bytes": "0e0e45000e0e45000e0e45000e0e45000e0e45000e0e45000e0e4500",
+    "sha256_bytes": "b36ad61f2e6f4d7622fe731b6b29d7873fa2e2b71f104eac649e2ec07d5e0963",
+    "destinations": [
+      "0x450e0e",
+      "0x450e0e",
+      "0x450e0e",
+      "0x450e0e",
+      "0x450e0e",
+      "0x450e0e",
+      "0x450e0e"
+    ]
+  },
+  "scope": "Mode-1 unit wrapper; building branch remains unsupported; query/effect bodies are explicit providers"
+}

@@ -15,6 +15,7 @@ Owner: combat. Source and tests live in `pesquisas-paralelas/combate/`. Shared d
 | `maquina_projeteis.py` | Supported full advancement/expiration dispatcher, types 30/33, and live-pool `Calcul` passes |
 | `cadencia_projeteis.py` | Original caller gates, accumulated-counter input, and impact presentation preparation |
 | `consumo_dano.py` | Mode-1 occupied-unit damage consumer, live callbacks and explicit death boundary |
+| `impacto_unidades.py` | Mode-1 unit impact wrapper: lookup, reaction requests, consumer, hit allocation, diplomacy and alert requests |
 
 Input units use raw 276-byte records. Callbacks must describe external world effects explicitly; receiving a resolved query or stopping at a dependency is a narrower claim than executing the complete caller. Whole-record/grid comparisons distinguish local copies from mutations of the live world.
 
@@ -31,6 +32,8 @@ Aiming resolves target cells and quantizes the original angular result. Body, ty
 Attack substate 0 prepares, aims, and waits for readiness; 1 animates and emits at its marked frame; 2 waits/revalidates; 3 ends the local order. Retain exact original sequencing, counter widths, and dependency calls. Do not infer transitions from an attractive animation sequence.
 
 The origin of `+0x8A=2/3` remains unproven: direct writes found by the audit use 0/1, and none of the 2,604 records in 38 ETA maps contain 2/3. Loaders can preserve externally supplied values; this neither proves those phases impossible nor licenses inventing their producer. The audit also tracks `+0x79`, `+0x7A`, and `+0x8B`.
+
+Type-4 initialization has an important provider boundary: `caracterizar_tipo` calls modifier 12 before writing `+0x7A=5`, then stores `+0xDA=(modifier+10)&255`. Original call `0x457845`, frame store `0x45784C`, amount store `0x457850` establish that order. A failed modifier leaves the inherited frame intact and the earlier common `+0xDA=1` intact. The corrected order also applies through `definir_tipo` and mission postload, including writable memoryviews of the live table. Owners 4/200 bypass the Python modifier callback as before. The [focused reference report](../pesquisas-paralelas/combate/validacao-ordem-tipo4-emulada.json) records 108 expected modifier-entry stops and 18 successful original returns; no phase transitions or other type behavior were added.
 
 The projectile pool and dispatcher preserve fixed-width arithmetic, allocation behavior, line increments, creation/arrival order, expiration, and RNG consumption. Type 30's circular effects and type 33's old-target child/new-target damage behavior require their own paths. `Calcul` processes the live pool in 30 passes; a snapshot iteration can change newly allocated record behavior.
 
@@ -61,6 +64,22 @@ The connected scenario uses original `ProjectileAvance` → `ProjectileInfligeDe
 
 Original input remains `RISING.EXE` SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`. New immutable-byte extracts and individual range hashes are in [the consumer evidence manifest](../pesquisas-paralelas/combate/evidencias/consumo-dano.json). Predecessor extracts and saved historical reports were not regenerated.
 
+## Unit impact wrapper
+
+`ImpactoUnidades.infligir(cell, mode, attacker, direction, flag)` now reconstructs the **mode-1 unit branch** of `InfligeDegat` (`0x450874..0x4510DD`). Cell/attacker truncate to u16; mode/direction/flag to u8. Mode must be 1, attacker 0..799, the live table must have 800 records, and resolved unit types must be 0..25. `receber(name, args)` connects directly to `PoolProjeteis.efeito_externo` for `InfligeDegat`; other effect names stop explicitly. Supply the same live unit table, projectile pool and callable unit consumer, normally `ConsumidorDanoUnidade.infligir`.
+
+Queries/effects use `(name, arguments_tuple)`. Lookup is external: flag zero first queries `ChercheIndiceBatiment(cell:u16)` and a non-FFFF result raises `LimiteImpactoBatiment` at `0x4508AF`; nonzero flag skips that query. The unit query is `ChercheIndiceEnginCible(cell:u16, excluded:u16=FFFF, flag:u8)`. FFFF is an empty impact. Unit IDs outside 0..799 fail before record access. Queries may already have had effects when such a returned ID is rejected.
+
+The wrapper snapshots victim owner/type before reacting. Owner 200 bypasses reaction. Other owners query `PlayerGetType(owner:u8)`. Human states 5/18 query `ChercheBatimentProximiteCaveOuSanctuaire(current_cell:u16, owner:u8)`, then optionally `BatimentGetCase(building:u16)` and effect `SetDeplaceEngin(victim:u16, cell:u16)`. Eligible retaliation checks type, protection bit 1, source type and owner, then repeats the original player-type queries. Human retaliation requests `SetAttaqueEngin(victim:u16, mode:u8=1, attacker:u16)` for state 7 or unsigned wrapped elapsed counter **>250**. AI retaliation requests it only in state 7. Other reactions query `CalculDirection(source_step:u16, victim_step:u16)`, then `CalculDirCase(reread_victim_step:u16, direction:u8)` and request movement if the cell is not FFFF. Navigation implementation belongs to core.
+
+The unit consumer runs next with `(victim:u16, mode:u8=1, attacker:u16, direction:u8)`. Its exception propagates; later effects do not run. After return, the wrapper uses the **saved** victim type to allocate hit projectiles in the live pool. Types 0/1/2, 4..10 and 18..24 allocate type 14. Types 11..17 query `Random(marker:u32=0x22)` even when the pool is full, then allocate type `15+(result&1)`; only victim type 16 sets height flag 1. Types 3/25 allocate none. Hit origin and destination both use the original impact cell; mode, attacker, direction and offsets are zero. The [original seven-entry hit table](../pesquisas-paralelas/combate/evidencias/impacto-unidades.json) sends all types 11..17 to this RNG path.
+
+After hit allocation, source owner is captured again. Query `PlayerEstAllie(source_owner:u8, live_victim_owner:u8)` conditionally emits, in order, `MAJSympathie(live_victim_owner, saved_source_owner, 10)`, the same with 6, `PlayerResetAllie(saved_source_owner, live_victim_owner)` and its reverse. Each owner argument is reread at its original call site. `PlayerAAttaqueSet(saved_source_owner, live_victim_owner)` always follows. These are effect requests, not implementations of their world bodies.
+
+For a different-owner victim owned by the local player, alert throttling uses u32 `contador` and `ultimo_alerta`: a counter reset/wrap (`previous>now`) or elapsed **>=200** updates `ultimo_alerta` and u16 `celula_alerta` before emitting `PlaySnd_PostSound(0x50, (live_victim_type<<16)|0x700, 0, 0x100, '0x496ac8')`. The string token represents the original alert-context pointer, distinct from a unit's sound handle. Missing providers preserve all earlier life, pool, alert and callback effects. This wrapper never moves units itself.
+
+The reference suite finishes five type-9 occupied impacts, including consumer life loss, hit allocation/RNG, diplomacy requests and parent retirement; all 220,800 unit bytes and 5,600 pool bytes match. Its world queries execute original code. Navigation/refuge/audio entries are explicit native stops. The full allied-order fixture executes original inactive `MAJSympathie` returns and `PlayerResetAllie` with a nonparticipating local player; Python still delegates those bodies. No real mission, AI message body, lethal effect, building damage, other damage mode or whole battle is established by those fixtures.
+
 ## Caller cadence and rendering boundary
 
 Three distinct gates occur after menu return (`0x42D14C`), event handling (`0x42D2E3`), and players/commands with a reread state (`0x42D3C0`). Projectile calculation precedes units in the traced caller. Preserve the low byte of the accumulated counter passed into logical animation; do not replace it with an arbitrary frame number or wall-clock delta.
@@ -84,7 +103,9 @@ The occupied-unit consumer has its own bounded validator, so it does not overwri
 python3 -B pesquisas-paralelas/combate/rastrear_consumo_dano.py
 python3 -B pesquisas-paralelas/combate/validar_consumo_dano.py
 python3 -B pesquisas-paralelas/combate/validar_consumo_dano.py --emular
+python3 -B pesquisas-paralelas/combate/validar_impacto_unidades.py --emular
+python3 -B pesquisas-paralelas/combate/validar_ordem_tipo4.py --emular
 python3 -B scripts/check.py --domain combat
 ```
 
-The current slice's actual results and expected dependency stops are recorded in [the combat handoff](../pesquisas-paralelas/combate/HANDOFF.md) and its `validacao-consumo-dano-*.json` reports. Reference calls execute original modifiers, proximity, visibility, volume, and the original non-AI message return without replacing instructions or return registers. AI message bodies and audio/death backends remain external. Further work can reconstruct the cell wrapper around this consumer, add other damage modes and lethal effects, and trace `+0x8A=2/3` producers.
+The slices' actual results and expected dependency stops are recorded in [the combat handoff](../pesquisas-paralelas/combate/HANDOFF.md) and their `validacao-consumo-dano-*.json` / `validacao-impacto-unidades-*.json` reports. AI message bodies and audio/death backends remain external. Further work can add other damage modes and lethal effects, and trace `+0x8A=2/3` producers.

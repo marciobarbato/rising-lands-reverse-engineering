@@ -79,10 +79,12 @@ def caracterizar_tipo(u, recarga, modificador12):
         u[0x78], u[0x79] = 1, PROJETIL_POR_TIPO[tipo]
     elif tipo in (19, 20, 24):
         u[0x78] = 0
-    if tipo in QUADRO_POR_TIPO:
+    if tipo in QUADRO_POR_TIPO and tipo != 4:
         u[0x7a] = QUADRO_POR_TIPO[tipo]
     if tipo == 4:
         mod = 0 if u[0] in (4, 200) else modificador12(u[0], tipo)
+        # 0x457845 queries first; frame/amount are not written on failure.
+        u[0x7a] = QUADRO_POR_TIPO[4]
         u[0xda] = (mod + 10) & 255
     elif tipo == 6:
         u[0xbb] = 5
