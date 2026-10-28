@@ -1,0 +1,6348 @@
+{
+ "bank": "B",
+ "open": {
+  "record_hex": "010000006600000006000000f0030004000000000000000000901900",
+  "file_name_hex": "433a5c524953494e475c534f554e445c422e534e440000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "allocations": 1,
+  "eax": 1,
+  "stop": null,
+  "log": [
+   [
+    "getcwd",
+    0,
+    1000,
+    67108864
+   ],
+   [
+    "free",
+    67108864
+   ],
+   [
+    "_lopen",
+    "C:\\RISING\\SOUND\\B.HED",
+    0,
+    5
+   ],
+   [
+    "_hread",
+    5,
+    16,
+    16
+   ],
+   [
+    "GlobalAlloc",
+    0,
+    2856,
+    67109872
+   ],
+   [
+    "_hread",
+    5,
+    2856,
+    2856
+   ],
+   [
+    "_lclose",
+    5,
+    0
+   ],
+   [
+    "_lopen",
+    "C:\\RISING\\SOUND\\B.SND",
+    0,
+    6
+   ]
+  ],
+  "sound_directory": "C:\\RISING\\SOUND",
+  "bank_path": "C:\\RISING\\SOUND\\B",
+  "header_sha256": "5a018aaf6ffba0ea7a42159fa89c2be1338c2ba80bac4a4fb176e68ab970f23e"
+ },
+ "init_compressed": {
+  "eax": 1,
+  "pointer": 67112736,
+  "log": [
+   [
+    "GlobalAlloc",
+    0,
+    160000,
+    67112736
+   ]
+  ]
+ },
+ "surfaces_from_file": [
+  {
+   "index": 0,
+   "id": 256,
+   "variant": 0,
+   "data_header_offset": 1224,
+   "data_header_hex": "00000000002400000110225604000002",
+   "eax_object": 1,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000009000000000000000000000",
+     "010001002256000044ac000002001000",
+     1,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "_hread",
+     6,
+     9216,
+     9216
+    ],
+    [
+     "Lock",
+     1,
+     0,
+     9216,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     1,
+     0,
+     9216,
+     0,
+     0,
+     "483dd5a2fc09db6a9ccbb59a7f90c57df7d8e0886f9d64ef39d6ce9782d1ff9f"
+    ]
+   ],
+   "decoder_returns": [
+    36612
+   ],
+   "buffer_bytes": 36864,
+   "buffer_sha256": "483dd5a2fc09db6a9ccbb59a7f90c57df7d8e0886f9d64ef39d6ce9782d1ff9f"
+  },
+  {
+   "index": 1,
+   "id": 1280,
+   "variant": 0,
+   "data_header_offset": 1240,
+   "data_header_hex": "00240000005400000110225604000002",
+   "eax_object": 2,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000005001000000000000000000",
+     "010001002256000044ac000002001000",
+     2,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     9216,
+     0,
+     9216
+    ],
+    [
+     "_hread",
+     6,
+     21504,
+     21504
+    ],
+    [
+     "Lock",
+     2,
+     0,
+     21504,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     2,
+     0,
+     21504,
+     0,
+     0,
+     "26e2238863582d6be914287f687cbf3e53663a572f5ad7825de9d462586b3177"
+    ]
+   ],
+   "decoder_returns": [
+    85428
+   ],
+   "buffer_bytes": 86016,
+   "buffer_sha256": "26e2238863582d6be914287f687cbf3e53663a572f5ad7825de9d462586b3177"
+  },
+  {
+   "index": 2,
+   "id": 2048,
+   "variant": 0,
+   "data_header_offset": 1256,
+   "data_header_hex": "00780000006000000110225604000002",
+   "eax_object": 3,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000008001000000000000000000",
+     "010001002256000044ac000002001000",
+     3,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     30720,
+     0,
+     30720
+    ],
+    [
+     "_hread",
+     6,
+     24576,
+     24576
+    ],
+    [
+     "Lock",
+     3,
+     0,
+     24576,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     3,
+     0,
+     24576,
+     0,
+     0,
+     "c48632eede94790a5bf65611ebc211daecbfe181b82cbd158da8fa884a5c23f4"
+    ]
+   ],
+   "decoder_returns": [
+    97632
+   ],
+   "buffer_bytes": 98304,
+   "buffer_sha256": "c48632eede94790a5bf65611ebc211daecbfe181b82cbd158da8fa884a5c23f4"
+  },
+  {
+   "index": 3,
+   "id": 9728,
+   "variant": 0,
+   "data_header_offset": 1272,
+   "data_header_hex": "00d80000005000000110225604000002",
+   "eax_object": 4,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000004001000000000000000000",
+     "010001002256000044ac000002001000",
+     4,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     55296,
+     0,
+     55296
+    ],
+    [
+     "_hread",
+     6,
+     20480,
+     20480
+    ],
+    [
+     "Lock",
+     4,
+     0,
+     20480,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     4,
+     0,
+     20480,
+     0,
+     0,
+     "2c1587465d26e7eee4e4dd68feb99b7bce66fead189c8f235b1eaad423dc3a12"
+    ]
+   ],
+   "decoder_returns": [
+    81360
+   ],
+   "buffer_bytes": 81920,
+   "buffer_sha256": "2c1587465d26e7eee4e4dd68feb99b7bce66fead189c8f235b1eaad423dc3a12"
+  },
+  {
+   "index": 4,
+   "id": 9984,
+   "variant": 0,
+   "data_header_offset": 1288,
+   "data_header_hex": "00280100005a00000110225604000002",
+   "eax_object": 5,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000006801000000000000000000",
+     "010001002256000044ac000002001000",
+     5,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     75776,
+     0,
+     75776
+    ],
+    [
+     "_hread",
+     6,
+     23040,
+     23040
+    ],
+    [
+     "Lock",
+     5,
+     0,
+     23040,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     5,
+     0,
+     23040,
+     0,
+     0,
+     "e4b8f3e34d1ffaad23b64f639fce82617c947db4921186585b47e8036638819f"
+    ]
+   ],
+   "decoder_returns": [
+    91530
+   ],
+   "buffer_bytes": 92160,
+   "buffer_sha256": "e4b8f3e34d1ffaad23b64f639fce82617c947db4921186585b47e8036638819f"
+  },
+  {
+   "index": 5,
+   "id": 65792,
+   "variant": 0,
+   "data_header_offset": 1304,
+   "data_header_hex": "00820100001800000110225604000002",
+   "eax_object": 6,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000006000000000000000000000",
+     "010001002256000044ac000002001000",
+     6,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     98816,
+     0,
+     98816
+    ],
+    [
+     "_hread",
+     6,
+     6144,
+     6144
+    ],
+    [
+     "Lock",
+     6,
+     0,
+     6144,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     6,
+     0,
+     6144,
+     0,
+     0,
+     "624e9ced6faeb37c26166a113fd8caf54d425926ce9dd69bebba19e5bbb92222"
+    ]
+   ],
+   "decoder_returns": [
+    24408
+   ],
+   "buffer_bytes": 24576,
+   "buffer_sha256": "624e9ced6faeb37c26166a113fd8caf54d425926ce9dd69bebba19e5bbb92222"
+  },
+  {
+   "index": 6,
+   "id": 66816,
+   "variant": 0,
+   "data_header_offset": 1320,
+   "data_header_hex": "009a0100004600000110225604000002",
+   "eax_object": 7,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000001801000000000000000000",
+     "010001002256000044ac000002001000",
+     7,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     104960,
+     0,
+     104960
+    ],
+    [
+     "_hread",
+     6,
+     17920,
+     17920
+    ],
+    [
+     "Lock",
+     7,
+     0,
+     17920,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     7,
+     0,
+     17920,
+     0,
+     0,
+     "bb9ce0910fdeb092c9e356d831bef145c960b7b98d5bb4f35639aac7fea2c585"
+    ]
+   ],
+   "decoder_returns": [
+    71190
+   ],
+   "buffer_bytes": 71680,
+   "buffer_sha256": "bb9ce0910fdeb092c9e356d831bef145c960b7b98d5bb4f35639aac7fea2c585"
+  },
+  {
+   "index": 7,
+   "id": 67584,
+   "variant": 0,
+   "data_header_offset": 1336,
+   "data_header_hex": "00e00100002800000110225604000002",
+   "eax_object": 8,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000a000000000000000000000",
+     "010001002256000044ac000002001000",
+     8,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     122880,
+     0,
+     122880
+    ],
+    [
+     "_hread",
+     6,
+     10240,
+     10240
+    ],
+    [
+     "Lock",
+     8,
+     0,
+     10240,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     8,
+     0,
+     10240,
+     0,
+     0,
+     "11a1a59683f5735bd9d840b837590f1d5df1e1c7a3497aa8f0630a17f5773f48"
+    ]
+   ],
+   "decoder_returns": [
+    40680
+   ],
+   "buffer_bytes": 40960,
+   "buffer_sha256": "11a1a59683f5735bd9d840b837590f1d5df1e1c7a3497aa8f0630a17f5773f48"
+  },
+  {
+   "index": 8,
+   "id": 75264,
+   "variant": 0,
+   "data_header_offset": 1352,
+   "data_header_hex": "00080200005400000110225604000002",
+   "eax_object": 9,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000005001000000000000000000",
+     "010001002256000044ac000002001000",
+     9,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     133120,
+     0,
+     133120
+    ],
+    [
+     "_hread",
+     6,
+     21504,
+     21504
+    ],
+    [
+     "Lock",
+     9,
+     0,
+     21504,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     9,
+     0,
+     21504,
+     0,
+     0,
+     "240fcd9aa0297a4e5417a8a377221a128ba4b0c14cadb4d2670e20fc055748df"
+    ]
+   ],
+   "decoder_returns": [
+    85428
+   ],
+   "buffer_bytes": 86016,
+   "buffer_sha256": "240fcd9aa0297a4e5417a8a377221a128ba4b0c14cadb4d2670e20fc055748df"
+  },
+  {
+   "index": 9,
+   "id": 75520,
+   "variant": 0,
+   "data_header_offset": 1368,
+   "data_header_hex": "005c0200004c00000110225604000002",
+   "eax_object": 10,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000003001000000000000000000",
+     "010001002256000044ac000002001000",
+     10,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     154624,
+     0,
+     154624
+    ],
+    [
+     "_hread",
+     6,
+     19456,
+     19456
+    ],
+    [
+     "Lock",
+     10,
+     0,
+     19456,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     10,
+     0,
+     19456,
+     0,
+     0,
+     "5b8313a55b1ac36a7300528b499372856a47de299904103b4e8e1bf3fc47cc92"
+    ]
+   ],
+   "decoder_returns": [
+    77292
+   ],
+   "buffer_bytes": 77824,
+   "buffer_sha256": "5b8313a55b1ac36a7300528b499372856a47de299904103b4e8e1bf3fc47cc92"
+  },
+  {
+   "index": 10,
+   "id": 131328,
+   "variant": 0,
+   "data_header_offset": 1384,
+   "data_header_hex": "00a80200002400000110225604000002",
+   "eax_object": 11,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000009000000000000000000000",
+     "010001002256000044ac000002001000",
+     11,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     174080,
+     0,
+     174080
+    ],
+    [
+     "_hread",
+     6,
+     9216,
+     9216
+    ],
+    [
+     "Lock",
+     11,
+     0,
+     9216,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     11,
+     0,
+     9216,
+     0,
+     0,
+     "483dd5a2fc09db6a9ccbb59a7f90c57df7d8e0886f9d64ef39d6ce9782d1ff9f"
+    ]
+   ],
+   "decoder_returns": [
+    36612
+   ],
+   "buffer_bytes": 36864,
+   "buffer_sha256": "483dd5a2fc09db6a9ccbb59a7f90c57df7d8e0886f9d64ef39d6ce9782d1ff9f"
+  },
+  {
+   "index": 11,
+   "id": 132352,
+   "variant": 0,
+   "data_header_offset": 1400,
+   "data_header_hex": "00cc0200004800000110225604000002",
+   "eax_object": 12,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000002001000000000000000000",
+     "010001002256000044ac000002001000",
+     12,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     183296,
+     0,
+     183296
+    ],
+    [
+     "_hread",
+     6,
+     18432,
+     18432
+    ],
+    [
+     "Lock",
+     12,
+     0,
+     18432,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     12,
+     0,
+     18432,
+     0,
+     0,
+     "afb838ffc672cb5b1a7fb7fca3324dae86880c69570b942e1d83f83038c30a74"
+    ]
+   ],
+   "decoder_returns": [
+    73224
+   ],
+   "buffer_bytes": 73728,
+   "buffer_sha256": "afb838ffc672cb5b1a7fb7fca3324dae86880c69570b942e1d83f83038c30a74"
+  },
+  {
+   "index": 12,
+   "id": 133120,
+   "variant": 0,
+   "data_header_offset": 1416,
+   "data_header_hex": "00140300003e00000110225604000002",
+   "eax_object": 13,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000f800000000000000000000",
+     "010001002256000044ac000002001000",
+     13,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     201728,
+     0,
+     201728
+    ],
+    [
+     "_hread",
+     6,
+     15872,
+     15872
+    ],
+    [
+     "Lock",
+     13,
+     0,
+     15872,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     13,
+     0,
+     15872,
+     0,
+     0,
+     "bba712c4bbe437b7a7431916f300fe845d9a4a890320c3ab67e97fb603ab29d4"
+    ]
+   ],
+   "decoder_returns": [
+    63054
+   ],
+   "buffer_bytes": 63488,
+   "buffer_sha256": "bba712c4bbe437b7a7431916f300fe845d9a4a890320c3ab67e97fb603ab29d4"
+  },
+  {
+   "index": 13,
+   "id": 140800,
+   "variant": 0,
+   "data_header_offset": 1432,
+   "data_header_hex": "00520300005e00000110225604000002",
+   "eax_object": 14,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000007801000000000000000000",
+     "010001002256000044ac000002001000",
+     14,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     217600,
+     0,
+     217600
+    ],
+    [
+     "_hread",
+     6,
+     24064,
+     24064
+    ],
+    [
+     "Lock",
+     14,
+     0,
+     24064,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     14,
+     0,
+     24064,
+     0,
+     0,
+     "ea1e9c49cf8c0b485cb9f75a50f010ab0a8dcefba1d68969706c7e6f9256aca3"
+    ]
+   ],
+   "decoder_returns": [
+    95598
+   ],
+   "buffer_bytes": 96256,
+   "buffer_sha256": "ea1e9c49cf8c0b485cb9f75a50f010ab0a8dcefba1d68969706c7e6f9256aca3"
+  },
+  {
+   "index": 14,
+   "id": 141056,
+   "variant": 0,
+   "data_header_offset": 1448,
+   "data_header_hex": "00b00300006a00000110225604000002",
+   "eax_object": 15,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000a801000000000000000000",
+     "010001002256000044ac000002001000",
+     15,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     241664,
+     0,
+     241664
+    ],
+    [
+     "_hread",
+     6,
+     27136,
+     27136
+    ],
+    [
+     "Lock",
+     15,
+     0,
+     27136,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     15,
+     0,
+     27136,
+     0,
+     0,
+     "d67aa69aac28277697fcca0970a1db2a5880aedc57b2c2d988f7697439c14628"
+    ]
+   ],
+   "decoder_returns": [
+    107802
+   ],
+   "buffer_bytes": 108544,
+   "buffer_sha256": "d67aa69aac28277697fcca0970a1db2a5880aedc57b2c2d988f7697439c14628"
+  },
+  {
+   "index": 15,
+   "id": 196864,
+   "variant": 0,
+   "data_header_offset": 1464,
+   "data_header_hex": "001a0400000600000110225604000002",
+   "eax_object": 16,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000001800000000000000000000",
+     "010001002256000044ac000002001000",
+     16,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     268800,
+     0,
+     268800
+    ],
+    [
+     "_hread",
+     6,
+     1536,
+     1536
+    ],
+    [
+     "Lock",
+     16,
+     0,
+     1536,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     16,
+     0,
+     1536,
+     0,
+     0,
+     "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+    ]
+   ],
+   "decoder_returns": [
+    6102
+   ],
+   "buffer_bytes": 6144,
+   "buffer_sha256": "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+  },
+  {
+   "index": 16,
+   "id": 197888,
+   "variant": 0,
+   "data_header_offset": 1480,
+   "data_header_hex": "00200400004c00000110225604000002",
+   "eax_object": 17,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000003001000000000000000000",
+     "010001002256000044ac000002001000",
+     17,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     270336,
+     0,
+     270336
+    ],
+    [
+     "_hread",
+     6,
+     19456,
+     19456
+    ],
+    [
+     "Lock",
+     17,
+     0,
+     19456,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     17,
+     0,
+     19456,
+     0,
+     0,
+     "6e18a1712228a0e05b75547a95e809755d51c5bac9c9a5046ff22d84eb566530"
+    ]
+   ],
+   "decoder_returns": [
+    77292
+   ],
+   "buffer_bytes": 77824,
+   "buffer_sha256": "6e18a1712228a0e05b75547a95e809755d51c5bac9c9a5046ff22d84eb566530"
+  },
+  {
+   "index": 17,
+   "id": 198656,
+   "variant": 0,
+   "data_header_offset": 1496,
+   "data_header_hex": "006c0400002600000110225604000002",
+   "eax_object": 18,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000009800000000000000000000",
+     "010001002256000044ac000002001000",
+     18,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     289792,
+     0,
+     289792
+    ],
+    [
+     "_hread",
+     6,
+     9728,
+     9728
+    ],
+    [
+     "Lock",
+     18,
+     0,
+     9728,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     18,
+     0,
+     9728,
+     0,
+     0,
+     "64c4e26b3ccbd2bf7f5897959f91e9034984e0411a2668141706a65d90b0021e"
+    ]
+   ],
+   "decoder_returns": [
+    38646
+   ],
+   "buffer_bytes": 38912,
+   "buffer_sha256": "64c4e26b3ccbd2bf7f5897959f91e9034984e0411a2668141706a65d90b0021e"
+  },
+  {
+   "index": 18,
+   "id": 206336,
+   "variant": 0,
+   "data_header_offset": 1512,
+   "data_header_hex": "00920400004800000110225604000002",
+   "eax_object": 19,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000002001000000000000000000",
+     "010001002256000044ac000002001000",
+     19,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     299520,
+     0,
+     299520
+    ],
+    [
+     "_hread",
+     6,
+     18432,
+     18432
+    ],
+    [
+     "Lock",
+     19,
+     0,
+     18432,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     19,
+     0,
+     18432,
+     0,
+     0,
+     "df5cb02acf9f52fd6bac7884a54364f418dfb17e278888a01d90aaa88b15bc92"
+    ]
+   ],
+   "decoder_returns": [
+    73224
+   ],
+   "buffer_bytes": 73728,
+   "buffer_sha256": "df5cb02acf9f52fd6bac7884a54364f418dfb17e278888a01d90aaa88b15bc92"
+  },
+  {
+   "index": 19,
+   "id": 206592,
+   "variant": 0,
+   "data_header_offset": 1528,
+   "data_header_hex": "00da0400004800000110225604000002",
+   "eax_object": 20,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000002001000000000000000000",
+     "010001002256000044ac000002001000",
+     20,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     317952,
+     0,
+     317952
+    ],
+    [
+     "_hread",
+     6,
+     18432,
+     18432
+    ],
+    [
+     "Lock",
+     20,
+     0,
+     18432,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     20,
+     0,
+     18432,
+     0,
+     0,
+     "13b2b81d8808b95cb72b547bb4aad464755ab1623565782ddb4fdfe8e8ac4632"
+    ]
+   ],
+   "decoder_returns": [
+    73224
+   ],
+   "buffer_bytes": 73728,
+   "buffer_sha256": "13b2b81d8808b95cb72b547bb4aad464755ab1623565782ddb4fdfe8e8ac4632"
+  },
+  {
+   "index": 20,
+   "id": 262400,
+   "variant": 0,
+   "data_header_offset": 1544,
+   "data_header_hex": "00220500002a00000110225604000002",
+   "eax_object": 21,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000a800000000000000000000",
+     "010001002256000044ac000002001000",
+     21,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     336384,
+     0,
+     336384
+    ],
+    [
+     "_hread",
+     6,
+     10752,
+     10752
+    ],
+    [
+     "Lock",
+     21,
+     0,
+     10752,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     21,
+     0,
+     10752,
+     0,
+     0,
+     "f8e911d171efc277280656635ff715b06c8f48a65de8a144367c8bea7509dbc3"
+    ]
+   ],
+   "decoder_returns": [
+    42714
+   ],
+   "buffer_bytes": 43008,
+   "buffer_sha256": "f8e911d171efc277280656635ff715b06c8f48a65de8a144367c8bea7509dbc3"
+  },
+  {
+   "index": 21,
+   "id": 263424,
+   "variant": 0,
+   "data_header_offset": 1560,
+   "data_header_hex": "004c0500006000000110225604000002",
+   "eax_object": 22,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000008001000000000000000000",
+     "010001002256000044ac000002001000",
+     22,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     347136,
+     0,
+     347136
+    ],
+    [
+     "_hread",
+     6,
+     24576,
+     24576
+    ],
+    [
+     "Lock",
+     22,
+     0,
+     24576,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     22,
+     0,
+     24576,
+     0,
+     0,
+     "df8f108db4047bd619fff7b1cd2d2d32becd4223b877ae1f1662c448cce95462"
+    ]
+   ],
+   "decoder_returns": [
+    97632
+   ],
+   "buffer_bytes": 98304,
+   "buffer_sha256": "df8f108db4047bd619fff7b1cd2d2d32becd4223b877ae1f1662c448cce95462"
+  },
+  {
+   "index": 22,
+   "id": 264192,
+   "variant": 0,
+   "data_header_offset": 1576,
+   "data_header_hex": "00ac0500003e00000110225604000002",
+   "eax_object": 23,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000f800000000000000000000",
+     "010001002256000044ac000002001000",
+     23,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     371712,
+     0,
+     371712
+    ],
+    [
+     "_hread",
+     6,
+     15872,
+     15872
+    ],
+    [
+     "Lock",
+     23,
+     0,
+     15872,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     23,
+     0,
+     15872,
+     0,
+     0,
+     "a8636a426ee3a69d3d7ff2bfe28816a21b5fd65705a361b30f51e67e695c949d"
+    ]
+   ],
+   "decoder_returns": [
+    63054
+   ],
+   "buffer_bytes": 63488,
+   "buffer_sha256": "a8636a426ee3a69d3d7ff2bfe28816a21b5fd65705a361b30f51e67e695c949d"
+  },
+  {
+   "index": 23,
+   "id": 271872,
+   "variant": 0,
+   "data_header_offset": 1592,
+   "data_header_hex": "00ea0500004000000110225604000002",
+   "eax_object": 24,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000000001000000000000000000",
+     "010001002256000044ac000002001000",
+     24,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     387584,
+     0,
+     387584
+    ],
+    [
+     "_hread",
+     6,
+     16384,
+     16384
+    ],
+    [
+     "Lock",
+     24,
+     0,
+     16384,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     24,
+     0,
+     16384,
+     0,
+     0,
+     "1ddf4aa9f0384dd00a7739113e9bab15b995d527ba6d8250cbeb3920f21798d8"
+    ]
+   ],
+   "decoder_returns": [
+    65088
+   ],
+   "buffer_bytes": 65536,
+   "buffer_sha256": "1ddf4aa9f0384dd00a7739113e9bab15b995d527ba6d8250cbeb3920f21798d8"
+  },
+  {
+   "index": 24,
+   "id": 272128,
+   "variant": 0,
+   "data_header_offset": 1608,
+   "data_header_hex": "002a0600006c00000110225604000002",
+   "eax_object": 25,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000b001000000000000000000",
+     "010001002256000044ac000002001000",
+     25,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     403968,
+     0,
+     403968
+    ],
+    [
+     "_hread",
+     6,
+     27648,
+     27648
+    ],
+    [
+     "Lock",
+     25,
+     0,
+     27648,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     25,
+     0,
+     27648,
+     0,
+     0,
+     "29e8897d4ed6221cf6a8a0a8adc95d3b13aefd38f8f2b997bd36f333c960d240"
+    ]
+   ],
+   "decoder_returns": [
+    109836
+   ],
+   "buffer_bytes": 110592,
+   "buffer_sha256": "29e8897d4ed6221cf6a8a0a8adc95d3b13aefd38f8f2b997bd36f333c960d240"
+  },
+  {
+   "index": 25,
+   "id": 327936,
+   "variant": 0,
+   "data_header_offset": 1624,
+   "data_header_hex": "00960600001400000110225604000002",
+   "eax_object": 26,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000005000000000000000000000",
+     "010001002256000044ac000002001000",
+     26,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     431616,
+     0,
+     431616
+    ],
+    [
+     "_hread",
+     6,
+     5120,
+     5120
+    ],
+    [
+     "Lock",
+     26,
+     0,
+     5120,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     26,
+     0,
+     5120,
+     0,
+     0,
+     "f3ea61fe05d261ee98617623d29027b0e988a48b93ba9f7eb2e998fe313784d6"
+    ]
+   ],
+   "decoder_returns": [
+    20340
+   ],
+   "buffer_bytes": 20480,
+   "buffer_sha256": "f3ea61fe05d261ee98617623d29027b0e988a48b93ba9f7eb2e998fe313784d6"
+  },
+  {
+   "index": 26,
+   "id": 328960,
+   "variant": 0,
+   "data_header_offset": 1640,
+   "data_header_hex": "00aa0600007000000110225604000002",
+   "eax_object": 27,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000c001000000000000000000",
+     "010001002256000044ac000002001000",
+     27,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     436736,
+     0,
+     436736
+    ],
+    [
+     "_hread",
+     6,
+     28672,
+     28672
+    ],
+    [
+     "Lock",
+     27,
+     0,
+     28672,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     27,
+     0,
+     28672,
+     0,
+     0,
+     "7826307befa9d72d7da808688491638701e80a2c66487465c6bee6120024395d"
+    ]
+   ],
+   "decoder_returns": [
+    113904
+   ],
+   "buffer_bytes": 114688,
+   "buffer_sha256": "7826307befa9d72d7da808688491638701e80a2c66487465c6bee6120024395d"
+  },
+  {
+   "index": 27,
+   "id": 329728,
+   "variant": 0,
+   "data_header_offset": 1656,
+   "data_header_hex": "001a0700003000000110225604000002",
+   "eax_object": 28,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000c000000000000000000000",
+     "010001002256000044ac000002001000",
+     28,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     465408,
+     0,
+     465408
+    ],
+    [
+     "_hread",
+     6,
+     12288,
+     12288
+    ],
+    [
+     "Lock",
+     28,
+     0,
+     12288,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     28,
+     0,
+     12288,
+     0,
+     0,
+     "2855a680e42938d03c3a674b63d5839e024ba2fcf77e9c1612003162b095035c"
+    ]
+   ],
+   "decoder_returns": [
+    48816
+   ],
+   "buffer_bytes": 49152,
+   "buffer_sha256": "2855a680e42938d03c3a674b63d5839e024ba2fcf77e9c1612003162b095035c"
+  },
+  {
+   "index": 28,
+   "id": 337408,
+   "variant": 0,
+   "data_header_offset": 1672,
+   "data_header_hex": "004a0700006200000110225604000002",
+   "eax_object": 29,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000008801000000000000000000",
+     "010001002256000044ac000002001000",
+     29,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     477696,
+     0,
+     477696
+    ],
+    [
+     "_hread",
+     6,
+     25088,
+     25088
+    ],
+    [
+     "Lock",
+     29,
+     0,
+     25088,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     29,
+     0,
+     25088,
+     0,
+     0,
+     "b302e7fbdb061d4b749112481b7c80c238a681fb20813fddccd143749b12bb8f"
+    ]
+   ],
+   "decoder_returns": [
+    99666
+   ],
+   "buffer_bytes": 100352,
+   "buffer_sha256": "b302e7fbdb061d4b749112481b7c80c238a681fb20813fddccd143749b12bb8f"
+  },
+  {
+   "index": 29,
+   "id": 337664,
+   "variant": 0,
+   "data_header_offset": 1688,
+   "data_header_hex": "00ac0700005a00000110225604000002",
+   "eax_object": 30,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000006801000000000000000000",
+     "010001002256000044ac000002001000",
+     30,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     502784,
+     0,
+     502784
+    ],
+    [
+     "_hread",
+     6,
+     23040,
+     23040
+    ],
+    [
+     "Lock",
+     30,
+     0,
+     23040,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     30,
+     0,
+     23040,
+     0,
+     0,
+     "90e53d52eb5b491e8dc8d1a079e8c1ed52287f53f2f94ea3bd599e46db668b7b"
+    ]
+   ],
+   "decoder_returns": [
+    91530
+   ],
+   "buffer_bytes": 92160,
+   "buffer_sha256": "90e53d52eb5b491e8dc8d1a079e8c1ed52287f53f2f94ea3bd599e46db668b7b"
+  },
+  {
+   "index": 30,
+   "id": 393472,
+   "variant": 0,
+   "data_header_offset": 1704,
+   "data_header_hex": "00060800006000000110225604000002",
+   "eax_object": 31,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000008001000000000000000000",
+     "010001002256000044ac000002001000",
+     31,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     525824,
+     0,
+     525824
+    ],
+    [
+     "_hread",
+     6,
+     24576,
+     24576
+    ],
+    [
+     "Lock",
+     31,
+     0,
+     24576,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     31,
+     0,
+     24576,
+     0,
+     0,
+     "ef9be7b54d6dc47dc9bd4db638325543a4223310186a8366bca763d749787b90"
+    ]
+   ],
+   "decoder_returns": [
+    97632
+   ],
+   "buffer_bytes": 98304,
+   "buffer_sha256": "ef9be7b54d6dc47dc9bd4db638325543a4223310186a8366bca763d749787b90"
+  },
+  {
+   "index": 31,
+   "id": 394496,
+   "variant": 0,
+   "data_header_offset": 1720,
+   "data_header_hex": "00660800005200000110225604000002",
+   "eax_object": 32,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000004801000000000000000000",
+     "010001002256000044ac000002001000",
+     32,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     550400,
+     0,
+     550400
+    ],
+    [
+     "_hread",
+     6,
+     20992,
+     20992
+    ],
+    [
+     "Lock",
+     32,
+     0,
+     20992,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     32,
+     0,
+     20992,
+     0,
+     0,
+     "3eef2e2645f225e8f6652d3d06fc80a71c5ca8b17c2e1da2e83bcccc89225df3"
+    ]
+   ],
+   "decoder_returns": [
+    83394
+   ],
+   "buffer_bytes": 83968,
+   "buffer_sha256": "3eef2e2645f225e8f6652d3d06fc80a71c5ca8b17c2e1da2e83bcccc89225df3"
+  },
+  {
+   "index": 32,
+   "id": 395264,
+   "variant": 0,
+   "data_header_offset": 1736,
+   "data_header_hex": "00b80800003000000110225604000002",
+   "eax_object": 33,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000c000000000000000000000",
+     "010001002256000044ac000002001000",
+     33,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     571392,
+     0,
+     571392
+    ],
+    [
+     "_hread",
+     6,
+     12288,
+     12288
+    ],
+    [
+     "Lock",
+     33,
+     0,
+     12288,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     33,
+     0,
+     12288,
+     0,
+     0,
+     "82842390bed8584b706f459f538d4ad50586a0c9ee9c5e0bcb6556251cd2152f"
+    ]
+   ],
+   "decoder_returns": [
+    48816
+   ],
+   "buffer_bytes": 49152,
+   "buffer_sha256": "82842390bed8584b706f459f538d4ad50586a0c9ee9c5e0bcb6556251cd2152f"
+  },
+  {
+   "index": 33,
+   "id": 402944,
+   "variant": 0,
+   "data_header_offset": 1752,
+   "data_header_hex": "00e80800003a00000110225604000002",
+   "eax_object": 34,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000e800000000000000000000",
+     "010001002256000044ac000002001000",
+     34,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     583680,
+     0,
+     583680
+    ],
+    [
+     "_hread",
+     6,
+     14848,
+     14848
+    ],
+    [
+     "Lock",
+     34,
+     0,
+     14848,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     34,
+     0,
+     14848,
+     0,
+     0,
+     "4f9f4dc4fad940ccf4bc7fd599f8fbbbf4a173bf9e16e5025ea4a652c8ed0808"
+    ]
+   ],
+   "decoder_returns": [
+    58986
+   ],
+   "buffer_bytes": 59392,
+   "buffer_sha256": "4f9f4dc4fad940ccf4bc7fd599f8fbbbf4a173bf9e16e5025ea4a652c8ed0808"
+  },
+  {
+   "index": 34,
+   "id": 403200,
+   "variant": 0,
+   "data_header_offset": 1768,
+   "data_header_hex": "00220900006400000110225604000002",
+   "eax_object": 35,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000009001000000000000000000",
+     "010001002256000044ac000002001000",
+     35,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     598528,
+     0,
+     598528
+    ],
+    [
+     "_hread",
+     6,
+     25600,
+     25600
+    ],
+    [
+     "Lock",
+     35,
+     0,
+     25600,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     35,
+     0,
+     25600,
+     0,
+     0,
+     "30cbccf8ab16aa8ce1469dbfdd739402c852782b8312ea96589acac2db72ef06"
+    ]
+   ],
+   "decoder_returns": [
+    101700
+   ],
+   "buffer_bytes": 102400,
+   "buffer_sha256": "30cbccf8ab16aa8ce1469dbfdd739402c852782b8312ea96589acac2db72ef06"
+  },
+  {
+   "index": 35,
+   "id": 459008,
+   "variant": 0,
+   "data_header_offset": 1784,
+   "data_header_hex": "00860900002400000110225604000002",
+   "eax_object": 36,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000009000000000000000000000",
+     "010001002256000044ac000002001000",
+     36,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     624128,
+     0,
+     624128
+    ],
+    [
+     "_hread",
+     6,
+     9216,
+     9216
+    ],
+    [
+     "Lock",
+     36,
+     0,
+     9216,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     36,
+     0,
+     9216,
+     0,
+     0,
+     "56a90a920aeca41bd72bbdb15209c04c378b823b8a996f12c6d52ab825bc35cb"
+    ]
+   ],
+   "decoder_returns": [
+    36612
+   ],
+   "buffer_bytes": 36864,
+   "buffer_sha256": "56a90a920aeca41bd72bbdb15209c04c378b823b8a996f12c6d52ab825bc35cb"
+  },
+  {
+   "index": 36,
+   "id": 460032,
+   "variant": 0,
+   "data_header_offset": 1800,
+   "data_header_hex": "00aa0900005200000110225604000002",
+   "eax_object": 37,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000004801000000000000000000",
+     "010001002256000044ac000002001000",
+     37,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     633344,
+     0,
+     633344
+    ],
+    [
+     "_hread",
+     6,
+     20992,
+     20992
+    ],
+    [
+     "Lock",
+     37,
+     0,
+     20992,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     37,
+     0,
+     20992,
+     0,
+     0,
+     "0e8f3b7ec820fdcc4554b3ccb7ecc94506fb3b08dcabcd731bb6ac09c33f5d37"
+    ]
+   ],
+   "decoder_returns": [
+    83394
+   ],
+   "buffer_bytes": 83968,
+   "buffer_sha256": "0e8f3b7ec820fdcc4554b3ccb7ecc94506fb3b08dcabcd731bb6ac09c33f5d37"
+  },
+  {
+   "index": 37,
+   "id": 460800,
+   "variant": 0,
+   "data_header_offset": 1816,
+   "data_header_hex": "00fc0900004c00000110225604000002",
+   "eax_object": 38,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000003001000000000000000000",
+     "010001002256000044ac000002001000",
+     38,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     654336,
+     0,
+     654336
+    ],
+    [
+     "_hread",
+     6,
+     19456,
+     19456
+    ],
+    [
+     "Lock",
+     38,
+     0,
+     19456,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     38,
+     0,
+     19456,
+     0,
+     0,
+     "2a5aa56850105bc9a856651dfb7fb1d3ad10bfe2583b5d73925961d25631e566"
+    ]
+   ],
+   "decoder_returns": [
+    77292
+   ],
+   "buffer_bytes": 77824,
+   "buffer_sha256": "2a5aa56850105bc9a856651dfb7fb1d3ad10bfe2583b5d73925961d25631e566"
+  },
+  {
+   "index": 38,
+   "id": 468480,
+   "variant": 0,
+   "data_header_offset": 1832,
+   "data_header_hex": "00480a00004600000110225604000002",
+   "eax_object": 39,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000001801000000000000000000",
+     "010001002256000044ac000002001000",
+     39,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     673792,
+     0,
+     673792
+    ],
+    [
+     "_hread",
+     6,
+     17920,
+     17920
+    ],
+    [
+     "Lock",
+     39,
+     0,
+     17920,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     39,
+     0,
+     17920,
+     0,
+     0,
+     "93bad792b6b6048fb34969841dbc1f8003551bebda4705dd473ced212a59b568"
+    ]
+   ],
+   "decoder_returns": [
+    71190
+   ],
+   "buffer_bytes": 71680,
+   "buffer_sha256": "93bad792b6b6048fb34969841dbc1f8003551bebda4705dd473ced212a59b568"
+  },
+  {
+   "index": 39,
+   "id": 468736,
+   "variant": 0,
+   "data_header_offset": 1848,
+   "data_header_hex": "008e0a00004c00000110225604000002",
+   "eax_object": 40,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000003001000000000000000000",
+     "010001002256000044ac000002001000",
+     40,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     691712,
+     0,
+     691712
+    ],
+    [
+     "_hread",
+     6,
+     19456,
+     19456
+    ],
+    [
+     "Lock",
+     40,
+     0,
+     19456,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     40,
+     0,
+     19456,
+     0,
+     0,
+     "e7b81a797e80aac82e7bdb9ee91a1e8f6afe5c105a4b7e51df256fbc7e2e00ff"
+    ]
+   ],
+   "decoder_returns": [
+    77292
+   ],
+   "buffer_bytes": 77824,
+   "buffer_sha256": "e7b81a797e80aac82e7bdb9ee91a1e8f6afe5c105a4b7e51df256fbc7e2e00ff"
+  },
+  {
+   "index": 40,
+   "id": 524544,
+   "variant": 0,
+   "data_header_offset": 1864,
+   "data_header_hex": "00da0a00000600000110225604000002",
+   "eax_object": 41,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000001800000000000000000000",
+     "010001002256000044ac000002001000",
+     41,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     711168,
+     0,
+     711168
+    ],
+    [
+     "_hread",
+     6,
+     1536,
+     1536
+    ],
+    [
+     "Lock",
+     41,
+     0,
+     1536,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     41,
+     0,
+     1536,
+     0,
+     0,
+     "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+    ]
+   ],
+   "decoder_returns": [
+    6102
+   ],
+   "buffer_bytes": 6144,
+   "buffer_sha256": "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+  },
+  {
+   "index": 41,
+   "id": 525568,
+   "variant": 0,
+   "data_header_offset": 1880,
+   "data_header_hex": "00e00a00005400000110225604000002",
+   "eax_object": 42,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000005001000000000000000000",
+     "010001002256000044ac000002001000",
+     42,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     712704,
+     0,
+     712704
+    ],
+    [
+     "_hread",
+     6,
+     21504,
+     21504
+    ],
+    [
+     "Lock",
+     42,
+     0,
+     21504,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     42,
+     0,
+     21504,
+     0,
+     0,
+     "d3638e6deff829da9c0ee32fabdaa7a8431123c4875c4dee443d6bf518c4626b"
+    ]
+   ],
+   "decoder_returns": [
+    85428
+   ],
+   "buffer_bytes": 86016,
+   "buffer_sha256": "d3638e6deff829da9c0ee32fabdaa7a8431123c4875c4dee443d6bf518c4626b"
+  },
+  {
+   "index": 42,
+   "id": 526336,
+   "variant": 0,
+   "data_header_offset": 1896,
+   "data_header_hex": "00340b00004800000110225604000002",
+   "eax_object": 43,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000002001000000000000000000",
+     "010001002256000044ac000002001000",
+     43,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     734208,
+     0,
+     734208
+    ],
+    [
+     "_hread",
+     6,
+     18432,
+     18432
+    ],
+    [
+     "Lock",
+     43,
+     0,
+     18432,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     43,
+     0,
+     18432,
+     0,
+     0,
+     "a15a940463225703df66d996907c67741cf9dbc21ed9241d45839057a6a66128"
+    ]
+   ],
+   "decoder_returns": [
+    73224
+   ],
+   "buffer_bytes": 73728,
+   "buffer_sha256": "a15a940463225703df66d996907c67741cf9dbc21ed9241d45839057a6a66128"
+  },
+  {
+   "index": 43,
+   "id": 534016,
+   "variant": 0,
+   "data_header_offset": 1912,
+   "data_header_hex": "007c0b00002000000110225604000002",
+   "eax_object": 44,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000008000000000000000000000",
+     "010001002256000044ac000002001000",
+     44,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     752640,
+     0,
+     752640
+    ],
+    [
+     "_hread",
+     6,
+     8192,
+     8192
+    ],
+    [
+     "Lock",
+     44,
+     0,
+     8192,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     44,
+     0,
+     8192,
+     0,
+     0,
+     "f15421c48ed8043dbfc3b46492a0246c5342190df5d989f89128ff4c4212d0d9"
+    ]
+   ],
+   "decoder_returns": [
+    32544
+   ],
+   "buffer_bytes": 32768,
+   "buffer_sha256": "f15421c48ed8043dbfc3b46492a0246c5342190df5d989f89128ff4c4212d0d9"
+  },
+  {
+   "index": 44,
+   "id": 534272,
+   "variant": 0,
+   "data_header_offset": 1928,
+   "data_header_hex": "009c0b00006200000110225604000002",
+   "eax_object": 45,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000008801000000000000000000",
+     "010001002256000044ac000002001000",
+     45,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     760832,
+     0,
+     760832
+    ],
+    [
+     "_hread",
+     6,
+     25088,
+     25088
+    ],
+    [
+     "Lock",
+     45,
+     0,
+     25088,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     45,
+     0,
+     25088,
+     0,
+     0,
+     "35303438486c7e191e7b47cc1e4f6336c477beea34fdd03a2cc1b161cbbb47ad"
+    ]
+   ],
+   "decoder_returns": [
+    99666
+   ],
+   "buffer_bytes": 100352,
+   "buffer_sha256": "35303438486c7e191e7b47cc1e4f6336c477beea34fdd03a2cc1b161cbbb47ad"
+  },
+  {
+   "index": 45,
+   "id": 590080,
+   "variant": 0,
+   "data_header_offset": 1944,
+   "data_header_hex": "00fe0b00000600000110225604000002",
+   "eax_object": 46,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000001800000000000000000000",
+     "010001002256000044ac000002001000",
+     46,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     785920,
+     0,
+     785920
+    ],
+    [
+     "_hread",
+     6,
+     1536,
+     1536
+    ],
+    [
+     "Lock",
+     46,
+     0,
+     1536,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     46,
+     0,
+     1536,
+     0,
+     0,
+     "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+    ]
+   ],
+   "decoder_returns": [
+    6102
+   ],
+   "buffer_bytes": 6144,
+   "buffer_sha256": "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+  },
+  {
+   "index": 46,
+   "id": 591104,
+   "variant": 0,
+   "data_header_offset": 1960,
+   "data_header_hex": "00040c00006600000110225604000002",
+   "eax_object": 47,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000009801000000000000000000",
+     "010001002256000044ac000002001000",
+     47,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     787456,
+     0,
+     787456
+    ],
+    [
+     "_hread",
+     6,
+     26112,
+     26112
+    ],
+    [
+     "Lock",
+     47,
+     0,
+     26112,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     47,
+     0,
+     26112,
+     0,
+     0,
+     "457692f837b8129083a482ab2e2613c21e4b775627a0892ca41b866bbcbd9fed"
+    ]
+   ],
+   "decoder_returns": [
+    103734
+   ],
+   "buffer_bytes": 104448,
+   "buffer_sha256": "457692f837b8129083a482ab2e2613c21e4b775627a0892ca41b866bbcbd9fed"
+  },
+  {
+   "index": 47,
+   "id": 655616,
+   "variant": 0,
+   "data_header_offset": 1976,
+   "data_header_hex": "006a0c00000600000110225604000002",
+   "eax_object": 48,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000001800000000000000000000",
+     "010001002256000044ac000002001000",
+     48,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     813568,
+     0,
+     813568
+    ],
+    [
+     "_hread",
+     6,
+     1536,
+     1536
+    ],
+    [
+     "Lock",
+     48,
+     0,
+     1536,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     48,
+     0,
+     1536,
+     0,
+     0,
+     "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+    ]
+   ],
+   "decoder_returns": [
+    6102
+   ],
+   "buffer_bytes": 6144,
+   "buffer_sha256": "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+  },
+  {
+   "index": 48,
+   "id": 656640,
+   "variant": 0,
+   "data_header_offset": 1992,
+   "data_header_hex": "00700c00006600000110225604000002",
+   "eax_object": 49,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000009801000000000000000000",
+     "010001002256000044ac000002001000",
+     49,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     815104,
+     0,
+     815104
+    ],
+    [
+     "_hread",
+     6,
+     26112,
+     26112
+    ],
+    [
+     "Lock",
+     49,
+     0,
+     26112,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     49,
+     0,
+     26112,
+     0,
+     0,
+     "b10e5f2d4bea77eae44d9a3f5a15ff8dc0147dd938a9895e6e347f2c902dccb4"
+    ]
+   ],
+   "decoder_returns": [
+    103734
+   ],
+   "buffer_bytes": 104448,
+   "buffer_sha256": "b10e5f2d4bea77eae44d9a3f5a15ff8dc0147dd938a9895e6e347f2c902dccb4"
+  },
+  {
+   "index": 49,
+   "id": 657408,
+   "variant": 0,
+   "data_header_offset": 2008,
+   "data_header_hex": "00d60c00002000000110225604000002",
+   "eax_object": 50,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000008000000000000000000000",
+     "010001002256000044ac000002001000",
+     50,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     841216,
+     0,
+     841216
+    ],
+    [
+     "_hread",
+     6,
+     8192,
+     8192
+    ],
+    [
+     "Lock",
+     50,
+     0,
+     8192,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     50,
+     0,
+     8192,
+     0,
+     0,
+     "fa83457d67f1e555e8f61c356c7e79c3e3715721108c9a53a60c8ccdb33a2482"
+    ]
+   ],
+   "decoder_returns": [
+    32544
+   ],
+   "buffer_bytes": 32768,
+   "buffer_sha256": "fa83457d67f1e555e8f61c356c7e79c3e3715721108c9a53a60c8ccdb33a2482"
+  },
+  {
+   "index": 50,
+   "id": 664320,
+   "variant": 0,
+   "data_header_offset": 2024,
+   "data_header_hex": "00f60c00001c00000110225604000002",
+   "eax_object": 51,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000007000000000000000000000",
+     "010001002256000044ac000002001000",
+     51,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     849408,
+     0,
+     849408
+    ],
+    [
+     "_hread",
+     6,
+     7168,
+     7168
+    ],
+    [
+     "Lock",
+     51,
+     0,
+     7168,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     51,
+     0,
+     7168,
+     0,
+     0,
+     "cc33da28dfa66be4042d17f6bfb6a6eb51f490ea86a680012eb070313a4f423b"
+    ]
+   ],
+   "decoder_returns": [
+    28476
+   ],
+   "buffer_bytes": 28672,
+   "buffer_sha256": "cc33da28dfa66be4042d17f6bfb6a6eb51f490ea86a680012eb070313a4f423b"
+  },
+  {
+   "index": 51,
+   "id": 665088,
+   "variant": 0,
+   "data_header_offset": 2040,
+   "data_header_hex": "00120d00002600000110225604000002",
+   "eax_object": 52,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000009800000000000000000000",
+     "010001002256000044ac000002001000",
+     52,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     856576,
+     0,
+     856576
+    ],
+    [
+     "_hread",
+     6,
+     9728,
+     9728
+    ],
+    [
+     "Lock",
+     52,
+     0,
+     9728,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     52,
+     0,
+     9728,
+     0,
+     0,
+     "6bc8892e8147a3f8729ceee8f623f111764dabf7703346028544bfaac3291301"
+    ]
+   ],
+   "decoder_returns": [
+    38646
+   ],
+   "buffer_bytes": 38912,
+   "buffer_sha256": "6bc8892e8147a3f8729ceee8f623f111764dabf7703346028544bfaac3291301"
+  },
+  {
+   "index": 52,
+   "id": 665344,
+   "variant": 0,
+   "data_header_offset": 2056,
+   "data_header_hex": "00380d00001000000110225604000002",
+   "eax_object": 53,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000004000000000000000000000",
+     "010001002256000044ac000002001000",
+     53,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     866304,
+     0,
+     866304
+    ],
+    [
+     "_hread",
+     6,
+     4096,
+     4096
+    ],
+    [
+     "Lock",
+     53,
+     0,
+     4096,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     53,
+     0,
+     4096,
+     0,
+     0,
+     "6c9700b519238497c167a03dc454d5950048caabf80031eb0ffc0705affbd789"
+    ]
+   ],
+   "decoder_returns": [
+    16272
+   ],
+   "buffer_bytes": 16384,
+   "buffer_sha256": "6c9700b519238497c167a03dc454d5950048caabf80031eb0ffc0705affbd789"
+  },
+  {
+   "index": 53,
+   "id": 721152,
+   "variant": 0,
+   "data_header_offset": 2072,
+   "data_header_hex": "00480d00000600000110225604000002",
+   "eax_object": 54,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000001800000000000000000000",
+     "010001002256000044ac000002001000",
+     54,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     870400,
+     0,
+     870400
+    ],
+    [
+     "_hread",
+     6,
+     1536,
+     1536
+    ],
+    [
+     "Lock",
+     54,
+     0,
+     1536,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     54,
+     0,
+     1536,
+     0,
+     0,
+     "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+    ]
+   ],
+   "decoder_returns": [
+    6102
+   ],
+   "buffer_bytes": 6144,
+   "buffer_sha256": "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+  },
+  {
+   "index": 54,
+   "id": 722176,
+   "variant": 0,
+   "data_header_offset": 2088,
+   "data_header_hex": "004e0d00006400000110225604000002",
+   "eax_object": 55,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000009001000000000000000000",
+     "010001002256000044ac000002001000",
+     55,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     871936,
+     0,
+     871936
+    ],
+    [
+     "_hread",
+     6,
+     25600,
+     25600
+    ],
+    [
+     "Lock",
+     55,
+     0,
+     25600,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     55,
+     0,
+     25600,
+     0,
+     0,
+     "d026437be1d84d8d0b218b781ea3ba3f089a1b78757f320befc10164c26eb798"
+    ]
+   ],
+   "decoder_returns": [
+    101700
+   ],
+   "buffer_bytes": 102400,
+   "buffer_sha256": "d026437be1d84d8d0b218b781ea3ba3f089a1b78757f320befc10164c26eb798"
+  },
+  {
+   "index": 55,
+   "id": 722944,
+   "variant": 0,
+   "data_header_offset": 2104,
+   "data_header_hex": "00b20d00002a00000110225604000002",
+   "eax_object": 56,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000a800000000000000000000",
+     "010001002256000044ac000002001000",
+     56,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     897536,
+     0,
+     897536
+    ],
+    [
+     "_hread",
+     6,
+     10752,
+     10752
+    ],
+    [
+     "Lock",
+     56,
+     0,
+     10752,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     56,
+     0,
+     10752,
+     0,
+     0,
+     "dded415058b99b194de897cbbb570a379759d2a43de785936b956d7cab3110f7"
+    ]
+   ],
+   "decoder_returns": [
+    42714
+   ],
+   "buffer_bytes": 43008,
+   "buffer_sha256": "dded415058b99b194de897cbbb570a379759d2a43de785936b956d7cab3110f7"
+  },
+  {
+   "index": 56,
+   "id": 729856,
+   "variant": 0,
+   "data_header_offset": 2120,
+   "data_header_hex": "00dc0d00001e00000110225604000002",
+   "eax_object": 57,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000007800000000000000000000",
+     "010001002256000044ac000002001000",
+     57,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     908288,
+     0,
+     908288
+    ],
+    [
+     "_hread",
+     6,
+     7680,
+     7680
+    ],
+    [
+     "Lock",
+     57,
+     0,
+     7680,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     57,
+     0,
+     7680,
+     0,
+     0,
+     "030a4fe20e173427fec985a7e8d8d4e5ea0ac65cacb535fcc20aff8724ab794e"
+    ]
+   ],
+   "decoder_returns": [
+    30510
+   ],
+   "buffer_bytes": 30720,
+   "buffer_sha256": "030a4fe20e173427fec985a7e8d8d4e5ea0ac65cacb535fcc20aff8724ab794e"
+  },
+  {
+   "index": 57,
+   "id": 730624,
+   "variant": 0,
+   "data_header_offset": 2136,
+   "data_header_hex": "00fa0d00003c00000110225604000002",
+   "eax_object": 58,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000f000000000000000000000",
+     "010001002256000044ac000002001000",
+     58,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     915968,
+     0,
+     915968
+    ],
+    [
+     "_hread",
+     6,
+     15360,
+     15360
+    ],
+    [
+     "Lock",
+     58,
+     0,
+     15360,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     58,
+     0,
+     15360,
+     0,
+     0,
+     "4eadf19cc1ed44f3328036d336b7dacf63a0b707f3eddb3703b2d0971b5d71a2"
+    ]
+   ],
+   "decoder_returns": [
+    61020
+   ],
+   "buffer_bytes": 61440,
+   "buffer_sha256": "4eadf19cc1ed44f3328036d336b7dacf63a0b707f3eddb3703b2d0971b5d71a2"
+  },
+  {
+   "index": 58,
+   "id": 730880,
+   "variant": 0,
+   "data_header_offset": 2152,
+   "data_header_hex": "00360e00003c00000110225604000002",
+   "eax_object": 59,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000f000000000000000000000",
+     "010001002256000044ac000002001000",
+     59,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     931328,
+     0,
+     931328
+    ],
+    [
+     "_hread",
+     6,
+     15360,
+     15360
+    ],
+    [
+     "Lock",
+     59,
+     0,
+     15360,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     59,
+     0,
+     15360,
+     0,
+     0,
+     "006d16c4b32299f9fede7fb9a4749cd79a2ff6db61e02637d73a89fa3db89f0d"
+    ]
+   ],
+   "decoder_returns": [
+    61020
+   ],
+   "buffer_bytes": 61440,
+   "buffer_sha256": "006d16c4b32299f9fede7fb9a4749cd79a2ff6db61e02637d73a89fa3db89f0d"
+  },
+  {
+   "index": 59,
+   "id": 786688,
+   "variant": 0,
+   "data_header_offset": 2168,
+   "data_header_hex": "00720e00000600000110225604000002",
+   "eax_object": 60,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000001800000000000000000000",
+     "010001002256000044ac000002001000",
+     60,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     946688,
+     0,
+     946688
+    ],
+    [
+     "_hread",
+     6,
+     1536,
+     1536
+    ],
+    [
+     "Lock",
+     60,
+     0,
+     1536,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     60,
+     0,
+     1536,
+     0,
+     0,
+     "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+    ]
+   ],
+   "decoder_returns": [
+    6102
+   ],
+   "buffer_bytes": 6144,
+   "buffer_sha256": "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+  },
+  {
+   "index": 60,
+   "id": 787712,
+   "variant": 0,
+   "data_header_offset": 2184,
+   "data_header_hex": "00780e00007a00000110225604000002",
+   "eax_object": 61,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000e801000000000000000000",
+     "010001002256000044ac000002001000",
+     61,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     948224,
+     0,
+     948224
+    ],
+    [
+     "_hread",
+     6,
+     31232,
+     31232
+    ],
+    [
+     "Lock",
+     61,
+     0,
+     31232,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     61,
+     0,
+     31232,
+     0,
+     0,
+     "4a13f059181334a52258ddc85f6cc287b101e080d184d374266082b6beac7e74"
+    ]
+   ],
+   "decoder_returns": [
+    124074
+   ],
+   "buffer_bytes": 124928,
+   "buffer_sha256": "4a13f059181334a52258ddc85f6cc287b101e080d184d374266082b6beac7e74"
+  },
+  {
+   "index": 61,
+   "id": 796160,
+   "variant": 0,
+   "data_header_offset": 2200,
+   "data_header_hex": "00f20e00003400000110225604000002",
+   "eax_object": 62,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000d000000000000000000000",
+     "010001002256000044ac000002001000",
+     62,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     979456,
+     0,
+     979456
+    ],
+    [
+     "_hread",
+     6,
+     13312,
+     13312
+    ],
+    [
+     "Lock",
+     62,
+     0,
+     13312,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     62,
+     0,
+     13312,
+     0,
+     0,
+     "ab97fe3fe09ebe60912af77d534eb47f36d587eab0b34b721da0798e14148189"
+    ]
+   ],
+   "decoder_returns": [
+    52884
+   ],
+   "buffer_bytes": 53248,
+   "buffer_sha256": "ab97fe3fe09ebe60912af77d534eb47f36d587eab0b34b721da0798e14148189"
+  },
+  {
+   "index": 62,
+   "id": 796416,
+   "variant": 0,
+   "data_header_offset": 2216,
+   "data_header_hex": "00260f00004800000110225604000002",
+   "eax_object": 63,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000002001000000000000000000",
+     "010001002256000044ac000002001000",
+     63,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     992768,
+     0,
+     992768
+    ],
+    [
+     "_hread",
+     6,
+     18432,
+     18432
+    ],
+    [
+     "Lock",
+     63,
+     0,
+     18432,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     63,
+     0,
+     18432,
+     0,
+     0,
+     "b2969a57597f739c1588db96f577029f1b033eb930c2de2a98b77932caf241b6"
+    ]
+   ],
+   "decoder_returns": [
+    73224
+   ],
+   "buffer_bytes": 73728,
+   "buffer_sha256": "b2969a57597f739c1588db96f577029f1b033eb930c2de2a98b77932caf241b6"
+  },
+  {
+   "index": 63,
+   "id": 852224,
+   "variant": 0,
+   "data_header_offset": 2232,
+   "data_header_hex": "006e0f00003400000110225604000002",
+   "eax_object": 64,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000d000000000000000000000",
+     "010001002256000044ac000002001000",
+     64,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1011200,
+     0,
+     1011200
+    ],
+    [
+     "_hread",
+     6,
+     13312,
+     13312
+    ],
+    [
+     "Lock",
+     64,
+     0,
+     13312,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     64,
+     0,
+     13312,
+     0,
+     0,
+     "97584fd14dd92d754f5778bbfc612bb2c26a19cf7d93af7da56467c87c1f5cb1"
+    ]
+   ],
+   "decoder_returns": [
+    52884
+   ],
+   "buffer_bytes": 53248,
+   "buffer_sha256": "97584fd14dd92d754f5778bbfc612bb2c26a19cf7d93af7da56467c87c1f5cb1"
+  },
+  {
+   "index": 64,
+   "id": 853248,
+   "variant": 0,
+   "data_header_offset": 2248,
+   "data_header_hex": "00a20f00006400000110225604000002",
+   "eax_object": 65,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000009001000000000000000000",
+     "010001002256000044ac000002001000",
+     65,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1024512,
+     0,
+     1024512
+    ],
+    [
+     "_hread",
+     6,
+     25600,
+     25600
+    ],
+    [
+     "Lock",
+     65,
+     0,
+     25600,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     65,
+     0,
+     25600,
+     0,
+     0,
+     "3ea4fb53e89b49bbde0277a331c2e2eb42bff7c49b449ec9ac21aea93777c4b7"
+    ]
+   ],
+   "decoder_returns": [
+    101700
+   ],
+   "buffer_bytes": 102400,
+   "buffer_sha256": "3ea4fb53e89b49bbde0277a331c2e2eb42bff7c49b449ec9ac21aea93777c4b7"
+  },
+  {
+   "index": 65,
+   "id": 854016,
+   "variant": 0,
+   "data_header_offset": 2264,
+   "data_header_hex": "00061000005600000110225604000002",
+   "eax_object": 66,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000005801000000000000000000",
+     "010001002256000044ac000002001000",
+     66,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1050112,
+     0,
+     1050112
+    ],
+    [
+     "_hread",
+     6,
+     22016,
+     22016
+    ],
+    [
+     "Lock",
+     66,
+     0,
+     22016,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     66,
+     0,
+     22016,
+     0,
+     0,
+     "d6020ef8b0d02aeed620082735f71e9c703c90ba1d6a16dd815aceee3a41fe6e"
+    ]
+   ],
+   "decoder_returns": [
+    87462
+   ],
+   "buffer_bytes": 88064,
+   "buffer_sha256": "d6020ef8b0d02aeed620082735f71e9c703c90ba1d6a16dd815aceee3a41fe6e"
+  },
+  {
+   "index": 66,
+   "id": 861696,
+   "variant": 0,
+   "data_header_offset": 2280,
+   "data_header_hex": "005c1000001400000110225604000002",
+   "eax_object": 67,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000005000000000000000000000",
+     "010001002256000044ac000002001000",
+     67,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1072128,
+     0,
+     1072128
+    ],
+    [
+     "_hread",
+     6,
+     5120,
+     5120
+    ],
+    [
+     "Lock",
+     67,
+     0,
+     5120,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     67,
+     0,
+     5120,
+     0,
+     0,
+     "4dad81635c50a77170fd5610a262d29133196da77a3e5c3dabbf53435cad1bd7"
+    ]
+   ],
+   "decoder_returns": [
+    20340
+   ],
+   "buffer_bytes": 20480,
+   "buffer_sha256": "4dad81635c50a77170fd5610a262d29133196da77a3e5c3dabbf53435cad1bd7"
+  },
+  {
+   "index": 67,
+   "id": 861952,
+   "variant": 0,
+   "data_header_offset": 2296,
+   "data_header_hex": "00701000005400000110225604000002",
+   "eax_object": 68,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000005001000000000000000000",
+     "010001002256000044ac000002001000",
+     68,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1077248,
+     0,
+     1077248
+    ],
+    [
+     "_hread",
+     6,
+     21504,
+     21504
+    ],
+    [
+     "Lock",
+     68,
+     0,
+     21504,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     68,
+     0,
+     21504,
+     0,
+     0,
+     "2e91b820a140db21ea95bcd676052a29d8ee66160cb324542a0e43952c2502f3"
+    ]
+   ],
+   "decoder_returns": [
+    85428
+   ],
+   "buffer_bytes": 86016,
+   "buffer_sha256": "2e91b820a140db21ea95bcd676052a29d8ee66160cb324542a0e43952c2502f3"
+  },
+  {
+   "index": 68,
+   "id": 917760,
+   "variant": 0,
+   "data_header_offset": 2312,
+   "data_header_hex": "00c41000000600000110225604000002",
+   "eax_object": 69,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000001800000000000000000000",
+     "010001002256000044ac000002001000",
+     69,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1098752,
+     0,
+     1098752
+    ],
+    [
+     "_hread",
+     6,
+     1536,
+     1536
+    ],
+    [
+     "Lock",
+     69,
+     0,
+     1536,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     69,
+     0,
+     1536,
+     0,
+     0,
+     "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+    ]
+   ],
+   "decoder_returns": [
+    6102
+   ],
+   "buffer_bytes": 6144,
+   "buffer_sha256": "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+  },
+  {
+   "index": 69,
+   "id": 918784,
+   "variant": 0,
+   "data_header_offset": 2328,
+   "data_header_hex": "00ca1000005c00000110225604000002",
+   "eax_object": 70,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000007001000000000000000000",
+     "010001002256000044ac000002001000",
+     70,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1100288,
+     0,
+     1100288
+    ],
+    [
+     "_hread",
+     6,
+     23552,
+     23552
+    ],
+    [
+     "Lock",
+     70,
+     0,
+     23552,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     70,
+     0,
+     23552,
+     0,
+     0,
+     "180579792b1d2ddd31208bf9dd11a03ec673a5f8a6df7face561acfe6d5b0678"
+    ]
+   ],
+   "decoder_returns": [
+    93564
+   ],
+   "buffer_bytes": 94208,
+   "buffer_sha256": "180579792b1d2ddd31208bf9dd11a03ec673a5f8a6df7face561acfe6d5b0678"
+  },
+  {
+   "index": 70,
+   "id": 919552,
+   "variant": 0,
+   "data_header_offset": 2344,
+   "data_header_hex": "00261100007000000110225604000002",
+   "eax_object": 71,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000c001000000000000000000",
+     "010001002256000044ac000002001000",
+     71,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1123840,
+     0,
+     1123840
+    ],
+    [
+     "_hread",
+     6,
+     28672,
+     28672
+    ],
+    [
+     "Lock",
+     71,
+     0,
+     28672,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     71,
+     0,
+     28672,
+     0,
+     0,
+     "ea5c123682da3d833996a3c053f5a24366d7bbee23abdfc1c383cf6648f8d186"
+    ]
+   ],
+   "decoder_returns": [
+    113904
+   ],
+   "buffer_bytes": 114688,
+   "buffer_sha256": "ea5c123682da3d833996a3c053f5a24366d7bbee23abdfc1c383cf6648f8d186"
+  },
+  {
+   "index": 71,
+   "id": 927232,
+   "variant": 0,
+   "data_header_offset": 2360,
+   "data_header_hex": "00961100007600000110225604000002",
+   "eax_object": 72,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000d801000000000000000000",
+     "010001002256000044ac000002001000",
+     72,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1152512,
+     0,
+     1152512
+    ],
+    [
+     "_hread",
+     6,
+     30208,
+     30208
+    ],
+    [
+     "Lock",
+     72,
+     0,
+     30208,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     72,
+     0,
+     30208,
+     0,
+     0,
+     "11d97800e6a17689b74fb72d1f60daa4947ad12d8a3f54fe0e9170284dfddcba"
+    ]
+   ],
+   "decoder_returns": [
+    120006
+   ],
+   "buffer_bytes": 120832,
+   "buffer_sha256": "11d97800e6a17689b74fb72d1f60daa4947ad12d8a3f54fe0e9170284dfddcba"
+  },
+  {
+   "index": 72,
+   "id": 927488,
+   "variant": 0,
+   "data_header_offset": 2376,
+   "data_header_hex": "000c1200008600000110225604000002",
+   "eax_object": 73,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000001802000000000000000000",
+     "010001002256000044ac000002001000",
+     73,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1182720,
+     0,
+     1182720
+    ],
+    [
+     "_hread",
+     6,
+     34304,
+     34304
+    ],
+    [
+     "Lock",
+     73,
+     0,
+     34304,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     73,
+     0,
+     34304,
+     0,
+     0,
+     "9e069489ff299510ffe6f9437c9cd766f5de3364baba13d9dbd8b123ed80661a"
+    ]
+   ],
+   "decoder_returns": [
+    136278
+   ],
+   "buffer_bytes": 137216,
+   "buffer_sha256": "9e069489ff299510ffe6f9437c9cd766f5de3364baba13d9dbd8b123ed80661a"
+  },
+  {
+   "index": 73,
+   "id": 983296,
+   "variant": 0,
+   "data_header_offset": 2392,
+   "data_header_hex": "00921200003400000110225604000002",
+   "eax_object": 74,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000d000000000000000000000",
+     "010001002256000044ac000002001000",
+     74,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1217024,
+     0,
+     1217024
+    ],
+    [
+     "_hread",
+     6,
+     13312,
+     13312
+    ],
+    [
+     "Lock",
+     74,
+     0,
+     13312,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     74,
+     0,
+     13312,
+     0,
+     0,
+     "a31484fa958ccaffdda220230024f48b25fd7b02de88cb951ecd366a1fe5189c"
+    ]
+   ],
+   "decoder_returns": [
+    52884
+   ],
+   "buffer_bytes": 53248,
+   "buffer_sha256": "a31484fa958ccaffdda220230024f48b25fd7b02de88cb951ecd366a1fe5189c"
+  },
+  {
+   "index": 74,
+   "id": 984320,
+   "variant": 0,
+   "data_header_offset": 2408,
+   "data_header_hex": "00c61200005800000110225604000002",
+   "eax_object": 75,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000006001000000000000000000",
+     "010001002256000044ac000002001000",
+     75,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1230336,
+     0,
+     1230336
+    ],
+    [
+     "_hread",
+     6,
+     22528,
+     22528
+    ],
+    [
+     "Lock",
+     75,
+     0,
+     22528,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     75,
+     0,
+     22528,
+     0,
+     0,
+     "a4e2c73a1a1b8f41ca38da966629a433843330eafe59bd4ec9eb58f0da2efaec"
+    ]
+   ],
+   "decoder_returns": [
+    89496
+   ],
+   "buffer_bytes": 90112,
+   "buffer_sha256": "a4e2c73a1a1b8f41ca38da966629a433843330eafe59bd4ec9eb58f0da2efaec"
+  },
+  {
+   "index": 75,
+   "id": 985088,
+   "variant": 0,
+   "data_header_offset": 2424,
+   "data_header_hex": "001e1300004800000110225604000002",
+   "eax_object": 76,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000002001000000000000000000",
+     "010001002256000044ac000002001000",
+     76,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1252864,
+     0,
+     1252864
+    ],
+    [
+     "_hread",
+     6,
+     18432,
+     18432
+    ],
+    [
+     "Lock",
+     76,
+     0,
+     18432,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     76,
+     0,
+     18432,
+     0,
+     0,
+     "a441cd23af1f843bce2cf4bddc2d9278c99c1aa931ca0e516aeb56862097608c"
+    ]
+   ],
+   "decoder_returns": [
+    73224
+   ],
+   "buffer_bytes": 73728,
+   "buffer_sha256": "a441cd23af1f843bce2cf4bddc2d9278c99c1aa931ca0e516aeb56862097608c"
+  },
+  {
+   "index": 76,
+   "id": 992000,
+   "variant": 0,
+   "data_header_offset": 2440,
+   "data_header_hex": "00661300003c00000110225604000002",
+   "eax_object": 77,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000f000000000000000000000",
+     "010001002256000044ac000002001000",
+     77,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1271296,
+     0,
+     1271296
+    ],
+    [
+     "_hread",
+     6,
+     15360,
+     15360
+    ],
+    [
+     "Lock",
+     77,
+     0,
+     15360,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     77,
+     0,
+     15360,
+     0,
+     0,
+     "506e06ae5cf1b8e4a142dd83edb9b8e49cf29e10b68076ac24d5561cb2d05279"
+    ]
+   ],
+   "decoder_returns": [
+    61020
+   ],
+   "buffer_bytes": 61440,
+   "buffer_sha256": "506e06ae5cf1b8e4a142dd83edb9b8e49cf29e10b68076ac24d5561cb2d05279"
+  },
+  {
+   "index": 77,
+   "id": 992768,
+   "variant": 0,
+   "data_header_offset": 2456,
+   "data_header_hex": "00a21300005200000110225604000002",
+   "eax_object": 78,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000004801000000000000000000",
+     "010001002256000044ac000002001000",
+     78,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1286656,
+     0,
+     1286656
+    ],
+    [
+     "_hread",
+     6,
+     20992,
+     20992
+    ],
+    [
+     "Lock",
+     78,
+     0,
+     20992,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     78,
+     0,
+     20992,
+     0,
+     0,
+     "0656e60acce9c45600ef9f4f1728f3faf0f00780e35004fcf98fc2b0b0fea617"
+    ]
+   ],
+   "decoder_returns": [
+    83394
+   ],
+   "buffer_bytes": 83968,
+   "buffer_sha256": "0656e60acce9c45600ef9f4f1728f3faf0f00780e35004fcf98fc2b0b0fea617"
+  },
+  {
+   "index": 78,
+   "id": 993024,
+   "variant": 0,
+   "data_header_offset": 2472,
+   "data_header_hex": "00f41300004a00000110225604000002",
+   "eax_object": 79,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000002801000000000000000000",
+     "010001002256000044ac000002001000",
+     79,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1307648,
+     0,
+     1307648
+    ],
+    [
+     "_hread",
+     6,
+     18944,
+     18944
+    ],
+    [
+     "Lock",
+     79,
+     0,
+     18944,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     79,
+     0,
+     18944,
+     0,
+     0,
+     "6890ef6715cc7fdc1996a0cc5e7092f8a307aa40a90e0ad65dd5168d25bc53fa"
+    ]
+   ],
+   "decoder_returns": [
+    75258
+   ],
+   "buffer_bytes": 75776,
+   "buffer_sha256": "6890ef6715cc7fdc1996a0cc5e7092f8a307aa40a90e0ad65dd5168d25bc53fa"
+  },
+  {
+   "index": 79,
+   "id": 1048832,
+   "variant": 0,
+   "data_header_offset": 2488,
+   "data_header_hex": "003e1400000600000110225604000002",
+   "eax_object": 80,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000001800000000000000000000",
+     "010001002256000044ac000002001000",
+     80,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1326592,
+     0,
+     1326592
+    ],
+    [
+     "_hread",
+     6,
+     1536,
+     1536
+    ],
+    [
+     "Lock",
+     80,
+     0,
+     1536,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     80,
+     0,
+     1536,
+     0,
+     0,
+     "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+    ]
+   ],
+   "decoder_returns": [
+    6102
+   ],
+   "buffer_bytes": 6144,
+   "buffer_sha256": "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+  },
+  {
+   "index": 80,
+   "id": 1049856,
+   "variant": 0,
+   "data_header_offset": 2504,
+   "data_header_hex": "00441400005600000110225604000002",
+   "eax_object": 81,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000005801000000000000000000",
+     "010001002256000044ac000002001000",
+     81,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1328128,
+     0,
+     1328128
+    ],
+    [
+     "_hread",
+     6,
+     22016,
+     22016
+    ],
+    [
+     "Lock",
+     81,
+     0,
+     22016,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     81,
+     0,
+     22016,
+     0,
+     0,
+     "dc9b7ae9981bf59989b5684c4691ff4132db4aea09a0f7f63e57ffd8e176b1c2"
+    ]
+   ],
+   "decoder_returns": [
+    87462
+   ],
+   "buffer_bytes": 88064,
+   "buffer_sha256": "dc9b7ae9981bf59989b5684c4691ff4132db4aea09a0f7f63e57ffd8e176b1c2"
+  },
+  {
+   "index": 81,
+   "id": 1050624,
+   "variant": 0,
+   "data_header_offset": 2520,
+   "data_header_hex": "009a1400004c00000110225604000002",
+   "eax_object": 82,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000003001000000000000000000",
+     "010001002256000044ac000002001000",
+     82,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1350144,
+     0,
+     1350144
+    ],
+    [
+     "_hread",
+     6,
+     19456,
+     19456
+    ],
+    [
+     "Lock",
+     82,
+     0,
+     19456,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     82,
+     0,
+     19456,
+     0,
+     0,
+     "c5e684430c249d153150d5c107b8411b45192c356ffa33dbd88c522afdb87f71"
+    ]
+   ],
+   "decoder_returns": [
+    77292
+   ],
+   "buffer_bytes": 77824,
+   "buffer_sha256": "c5e684430c249d153150d5c107b8411b45192c356ffa33dbd88c522afdb87f71"
+  },
+  {
+   "index": 82,
+   "id": 1058304,
+   "variant": 0,
+   "data_header_offset": 2536,
+   "data_header_hex": "00e61400007000000110225604000002",
+   "eax_object": 83,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000c001000000000000000000",
+     "010001002256000044ac000002001000",
+     83,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1369600,
+     0,
+     1369600
+    ],
+    [
+     "_hread",
+     6,
+     28672,
+     28672
+    ],
+    [
+     "Lock",
+     83,
+     0,
+     28672,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     83,
+     0,
+     28672,
+     0,
+     0,
+     "81c898174f2ea4d88f66542cbd1b03eac039a196ae4ad89e6b699751b0fca963"
+    ]
+   ],
+   "decoder_returns": [
+    113904
+   ],
+   "buffer_bytes": 114688,
+   "buffer_sha256": "81c898174f2ea4d88f66542cbd1b03eac039a196ae4ad89e6b699751b0fca963"
+  },
+  {
+   "index": 83,
+   "id": 1058560,
+   "variant": 0,
+   "data_header_offset": 2552,
+   "data_header_hex": "00561500005600000110225604000002",
+   "eax_object": 84,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000005801000000000000000000",
+     "010001002256000044ac000002001000",
+     84,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1398272,
+     0,
+     1398272
+    ],
+    [
+     "_hread",
+     6,
+     22016,
+     22016
+    ],
+    [
+     "Lock",
+     84,
+     0,
+     22016,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     84,
+     0,
+     22016,
+     0,
+     0,
+     "20bc199edb271104b4a1701e4a502d597b48eb4098b23e2bb1d4f444f56b3b46"
+    ]
+   ],
+   "decoder_returns": [
+    87462
+   ],
+   "buffer_bytes": 88064,
+   "buffer_sha256": "20bc199edb271104b4a1701e4a502d597b48eb4098b23e2bb1d4f444f56b3b46"
+  },
+  {
+   "index": 84,
+   "id": 1114368,
+   "variant": 0,
+   "data_header_offset": 2568,
+   "data_header_hex": "00ac1500000600000110225604000002",
+   "eax_object": 85,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000001800000000000000000000",
+     "010001002256000044ac000002001000",
+     85,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1420288,
+     0,
+     1420288
+    ],
+    [
+     "_hread",
+     6,
+     1536,
+     1536
+    ],
+    [
+     "Lock",
+     85,
+     0,
+     1536,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     85,
+     0,
+     1536,
+     0,
+     0,
+     "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+    ]
+   ],
+   "decoder_returns": [
+    6102
+   ],
+   "buffer_bytes": 6144,
+   "buffer_sha256": "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+  },
+  {
+   "index": 85,
+   "id": 1115392,
+   "variant": 0,
+   "data_header_offset": 2584,
+   "data_header_hex": "00b21500003600000110225604000002",
+   "eax_object": 86,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000d800000000000000000000",
+     "010001002256000044ac000002001000",
+     86,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1421824,
+     0,
+     1421824
+    ],
+    [
+     "_hread",
+     6,
+     13824,
+     13824
+    ],
+    [
+     "Lock",
+     86,
+     0,
+     13824,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     86,
+     0,
+     13824,
+     0,
+     0,
+     "9cc78adc5bea36d58325658c9cac635d0479435a9b01511a26aa0911ed53c8c7"
+    ]
+   ],
+   "decoder_returns": [
+    54918
+   ],
+   "buffer_bytes": 55296,
+   "buffer_sha256": "9cc78adc5bea36d58325658c9cac635d0479435a9b01511a26aa0911ed53c8c7"
+  },
+  {
+   "index": 86,
+   "id": 1116160,
+   "variant": 0,
+   "data_header_offset": 2600,
+   "data_header_hex": "00e81500003000000110225604000002",
+   "eax_object": 87,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000c000000000000000000000",
+     "010001002256000044ac000002001000",
+     87,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1435648,
+     0,
+     1435648
+    ],
+    [
+     "_hread",
+     6,
+     12288,
+     12288
+    ],
+    [
+     "Lock",
+     87,
+     0,
+     12288,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     87,
+     0,
+     12288,
+     0,
+     0,
+     "d8af2532982df33a9715f27f49dbf869db4d9fb044f7e6091961e165db2694ff"
+    ]
+   ],
+   "decoder_returns": [
+    48816
+   ],
+   "buffer_bytes": 49152,
+   "buffer_sha256": "d8af2532982df33a9715f27f49dbf869db4d9fb044f7e6091961e165db2694ff"
+  },
+  {
+   "index": 87,
+   "id": 1179904,
+   "variant": 0,
+   "data_header_offset": 2616,
+   "data_header_hex": "00181600001800000110225604000002",
+   "eax_object": 88,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000006000000000000000000000",
+     "010001002256000044ac000002001000",
+     88,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1447936,
+     0,
+     1447936
+    ],
+    [
+     "_hread",
+     6,
+     6144,
+     6144
+    ],
+    [
+     "Lock",
+     88,
+     0,
+     6144,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     88,
+     0,
+     6144,
+     0,
+     0,
+     "e6dd0617a74f1b16eba4a03b92581f578231a8593f2c80513f26ad28b65c956a"
+    ]
+   ],
+   "decoder_returns": [
+    24408
+   ],
+   "buffer_bytes": 24576,
+   "buffer_sha256": "e6dd0617a74f1b16eba4a03b92581f578231a8593f2c80513f26ad28b65c956a"
+  },
+  {
+   "index": 88,
+   "id": 1180928,
+   "variant": 0,
+   "data_header_offset": 2632,
+   "data_header_hex": "00301600006000000110225604000002",
+   "eax_object": 89,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000008001000000000000000000",
+     "010001002256000044ac000002001000",
+     89,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1454080,
+     0,
+     1454080
+    ],
+    [
+     "_hread",
+     6,
+     24576,
+     24576
+    ],
+    [
+     "Lock",
+     89,
+     0,
+     24576,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     89,
+     0,
+     24576,
+     0,
+     0,
+     "beeb7bbb843772e6136ce4285eacb07847de6cddf0f64e3ae28d33a30aab00f5"
+    ]
+   ],
+   "decoder_returns": [
+    97632
+   ],
+   "buffer_bytes": 98304,
+   "buffer_sha256": "beeb7bbb843772e6136ce4285eacb07847de6cddf0f64e3ae28d33a30aab00f5"
+  },
+  {
+   "index": 89,
+   "id": 1181696,
+   "variant": 0,
+   "data_header_offset": 2648,
+   "data_header_hex": "00901600001000000110225604000002",
+   "eax_object": 90,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000004000000000000000000000",
+     "010001002256000044ac000002001000",
+     90,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1478656,
+     0,
+     1478656
+    ],
+    [
+     "_hread",
+     6,
+     4096,
+     4096
+    ],
+    [
+     "Lock",
+     90,
+     0,
+     4096,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     90,
+     0,
+     4096,
+     0,
+     0,
+     "31f937ecaa39e93046ae863d2152aa801a5a231cb23a522aba0a86e97b06e447"
+    ]
+   ],
+   "decoder_returns": [
+    16272
+   ],
+   "buffer_bytes": 16384,
+   "buffer_sha256": "31f937ecaa39e93046ae863d2152aa801a5a231cb23a522aba0a86e97b06e447"
+  },
+  {
+   "index": 90,
+   "id": 1189376,
+   "variant": 0,
+   "data_header_offset": 2664,
+   "data_header_hex": "00a01600005e00000110225604000002",
+   "eax_object": 91,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000007801000000000000000000",
+     "010001002256000044ac000002001000",
+     91,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1482752,
+     0,
+     1482752
+    ],
+    [
+     "_hread",
+     6,
+     24064,
+     24064
+    ],
+    [
+     "Lock",
+     91,
+     0,
+     24064,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     91,
+     0,
+     24064,
+     0,
+     0,
+     "5cb0bdecc8adf68de5d38bcce9f60d78ec699725c02e9b02eb2cc573c42e1472"
+    ]
+   ],
+   "decoder_returns": [
+    95598
+   ],
+   "buffer_bytes": 96256,
+   "buffer_sha256": "5cb0bdecc8adf68de5d38bcce9f60d78ec699725c02e9b02eb2cc573c42e1472"
+  },
+  {
+   "index": 91,
+   "id": 1189632,
+   "variant": 0,
+   "data_header_offset": 2680,
+   "data_header_hex": "00fe1600008c00000110225604000002",
+   "eax_object": 92,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000003002000000000000000000",
+     "010001002256000044ac000002001000",
+     92,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1506816,
+     0,
+     1506816
+    ],
+    [
+     "_hread",
+     6,
+     35840,
+     35840
+    ],
+    [
+     "Lock",
+     92,
+     0,
+     35840,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     92,
+     0,
+     35840,
+     0,
+     0,
+     "795ec920a4ce9769bce41171288f48d56d5cac514d0d855104fa27fc7fc19b1c"
+    ]
+   ],
+   "decoder_returns": [
+    142380
+   ],
+   "buffer_bytes": 143360,
+   "buffer_sha256": "795ec920a4ce9769bce41171288f48d56d5cac514d0d855104fa27fc7fc19b1c"
+  },
+  {
+   "index": 92,
+   "id": 1245440,
+   "variant": 0,
+   "data_header_offset": 2696,
+   "data_header_hex": "008a1700004200000110225604000002",
+   "eax_object": 93,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000000801000000000000000000",
+     "010001002256000044ac000002001000",
+     93,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1542656,
+     0,
+     1542656
+    ],
+    [
+     "_hread",
+     6,
+     16896,
+     16896
+    ],
+    [
+     "Lock",
+     93,
+     0,
+     16896,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     93,
+     0,
+     16896,
+     0,
+     0,
+     "510c83bd030186fc0890f15572b180d10e52152c342fd9d125a7f36d7c9fa455"
+    ]
+   ],
+   "decoder_returns": [
+    67122
+   ],
+   "buffer_bytes": 67584,
+   "buffer_sha256": "510c83bd030186fc0890f15572b180d10e52152c342fd9d125a7f36d7c9fa455"
+  },
+  {
+   "index": 93,
+   "id": 1246464,
+   "variant": 0,
+   "data_header_offset": 2712,
+   "data_header_hex": "00cc1700005000000110225604000002",
+   "eax_object": 94,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000004001000000000000000000",
+     "010001002256000044ac000002001000",
+     94,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1559552,
+     0,
+     1559552
+    ],
+    [
+     "_hread",
+     6,
+     20480,
+     20480
+    ],
+    [
+     "Lock",
+     94,
+     0,
+     20480,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     94,
+     0,
+     20480,
+     0,
+     0,
+     "f4624739fa4d61d97922e01b63074e483fca74d4ebc1a35ae36218351e0cc30d"
+    ]
+   ],
+   "decoder_returns": [
+    81360
+   ],
+   "buffer_bytes": 81920,
+   "buffer_sha256": "f4624739fa4d61d97922e01b63074e483fca74d4ebc1a35ae36218351e0cc30d"
+  },
+  {
+   "index": 94,
+   "id": 1247232,
+   "variant": 0,
+   "data_header_offset": 2728,
+   "data_header_hex": "001c1800003400000110225604000002",
+   "eax_object": 95,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e000000000d000000000000000000000",
+     "010001002256000044ac000002001000",
+     95,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1580032,
+     0,
+     1580032
+    ],
+    [
+     "_hread",
+     6,
+     13312,
+     13312
+    ],
+    [
+     "Lock",
+     95,
+     0,
+     13312,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     95,
+     0,
+     13312,
+     0,
+     0,
+     "ea0efcc39949b6406ca494f576d75e0c607474b98ccdfebbe8dc91c26da11e99"
+    ]
+   ],
+   "decoder_returns": [
+    52884
+   ],
+   "buffer_bytes": 53248,
+   "buffer_sha256": "ea0efcc39949b6406ca494f576d75e0c607474b98ccdfebbe8dc91c26da11e99"
+  },
+  {
+   "index": 95,
+   "id": 1254912,
+   "variant": 0,
+   "data_header_offset": 2744,
+   "data_header_hex": "00501800002000000110225604000002",
+   "eax_object": 96,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000008000000000000000000000",
+     "010001002256000044ac000002001000",
+     96,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1593344,
+     0,
+     1593344
+    ],
+    [
+     "_hread",
+     6,
+     8192,
+     8192
+    ],
+    [
+     "Lock",
+     96,
+     0,
+     8192,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     96,
+     0,
+     8192,
+     0,
+     0,
+     "4dc3e1dd0f2ad83647fca2c197b4c76f75f79790f098152ca77389f05ce0d959"
+    ]
+   ],
+   "decoder_returns": [
+    32544
+   ],
+   "buffer_bytes": 32768,
+   "buffer_sha256": "4dc3e1dd0f2ad83647fca2c197b4c76f75f79790f098152ca77389f05ce0d959"
+  },
+  {
+   "index": 96,
+   "id": 1255168,
+   "variant": 0,
+   "data_header_offset": 2760,
+   "data_header_hex": "00701800000a00000110225604000002",
+   "eax_object": 97,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000002800000000000000000000",
+     "010001002256000044ac000002001000",
+     97,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1601536,
+     0,
+     1601536
+    ],
+    [
+     "_hread",
+     6,
+     2560,
+     2560
+    ],
+    [
+     "Lock",
+     97,
+     0,
+     2560,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     97,
+     0,
+     2560,
+     0,
+     0,
+     "88f688dc8b7fcdce4b8ce391989766d9229f3b3beb342d0d099776c7441ca694"
+    ]
+   ],
+   "decoder_returns": [
+    10170
+   ],
+   "buffer_bytes": 10240,
+   "buffer_sha256": "88f688dc8b7fcdce4b8ce391989766d9229f3b3beb342d0d099776c7441ca694"
+  },
+  {
+   "index": 97,
+   "id": 1376512,
+   "variant": 0,
+   "data_header_offset": 2776,
+   "data_header_hex": "007a1800000600000110225604000002",
+   "eax_object": 98,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000001800000000000000000000",
+     "010001002256000044ac000002001000",
+     98,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1604096,
+     0,
+     1604096
+    ],
+    [
+     "_hread",
+     6,
+     1536,
+     1536
+    ],
+    [
+     "Lock",
+     98,
+     0,
+     1536,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     98,
+     0,
+     1536,
+     0,
+     0,
+     "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+    ]
+   ],
+   "decoder_returns": [
+    6102
+   ],
+   "buffer_bytes": 6144,
+   "buffer_sha256": "5c2f193b9d144028123cf6b14530eab65780934734fe99941d30121a20426f69"
+  },
+  {
+   "index": 98,
+   "id": 1377536,
+   "variant": 0,
+   "data_header_offset": 2792,
+   "data_header_hex": "00801800004a00000110225604000002",
+   "eax_object": 99,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000002801000000000000000000",
+     "010001002256000044ac000002001000",
+     99,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1605632,
+     0,
+     1605632
+    ],
+    [
+     "_hread",
+     6,
+     18944,
+     18944
+    ],
+    [
+     "Lock",
+     99,
+     0,
+     18944,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     99,
+     0,
+     18944,
+     0,
+     0,
+     "8d96f208fc0f78598dd326c4c822be92a11b063176805ca8f39c45491d9a9a9d"
+    ]
+   ],
+   "decoder_returns": [
+    75258
+   ],
+   "buffer_bytes": 75776,
+   "buffer_sha256": "8d96f208fc0f78598dd326c4c822be92a11b063176805ca8f39c45491d9a9a9d"
+  },
+  {
+   "index": 99,
+   "id": 1378304,
+   "variant": 0,
+   "data_header_offset": 2808,
+   "data_header_hex": "00ca1800009e00000110225604000002",
+   "eax_object": 100,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000007802000000000000000000",
+     "010001002256000044ac000002001000",
+     100,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1624576,
+     0,
+     1624576
+    ],
+    [
+     "_hread",
+     6,
+     40448,
+     40448
+    ],
+    [
+     "Lock",
+     100,
+     0,
+     40448,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     100,
+     0,
+     40448,
+     0,
+     0,
+     "5863732287228b7ea524a5de0929d9ede8929d9d9d989d2d85023ae17a3494f7"
+    ]
+   ],
+   "decoder_returns": [
+    160686
+   ],
+   "buffer_bytes": 161792,
+   "buffer_sha256": "5863732287228b7ea524a5de0929d9ede8929d9d9d989d2d85023ae17a3494f7"
+  },
+  {
+   "index": 100,
+   "id": 1385984,
+   "variant": 0,
+   "data_header_offset": 2824,
+   "data_header_hex": "00681900001400000110225604000002",
+   "eax_object": 101,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000005000000000000000000000",
+     "010001002256000044ac000002001000",
+     101,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1665024,
+     0,
+     1665024
+    ],
+    [
+     "_hread",
+     6,
+     5120,
+     5120
+    ],
+    [
+     "Lock",
+     101,
+     0,
+     5120,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     101,
+     0,
+     5120,
+     0,
+     0,
+     "6047893ff766f3500677855f0d31ff83298507d8da377d377a0ffd9532298f4a"
+    ]
+   ],
+   "decoder_returns": [
+    20340
+   ],
+   "buffer_bytes": 20480,
+   "buffer_sha256": "6047893ff766f3500677855f0d31ff83298507d8da377d377a0ffd9532298f4a"
+  },
+  {
+   "index": 101,
+   "id": 1386240,
+   "variant": 0,
+   "data_header_offset": 2840,
+   "data_header_hex": "007c1900001400000110225604000002",
+   "eax_object": 102,
+   "stop": null,
+   "log": [
+    [
+     "_llseek",
+     6,
+     0,
+     0,
+     0
+    ],
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000005000000000000000000000",
+     "010001002256000044ac000002001000",
+     102,
+     0
+    ],
+    [
+     "_llseek",
+     6,
+     1670144,
+     0,
+     1670144
+    ],
+    [
+     "_hread",
+     6,
+     5120,
+     5120
+    ],
+    [
+     "Lock",
+     102,
+     0,
+     5120,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     102,
+     0,
+     5120,
+     0,
+     0,
+     "4dad81635c50a77170fd5610a262d29133196da77a3e5c3dabbf53435cad1bd7"
+    ]
+   ],
+   "decoder_returns": [
+    20340
+   ],
+   "buffer_bytes": 20480,
+   "buffer_sha256": "4dad81635c50a77170fd5610a262d29133196da77a3e5c3dabbf53435cad1bd7"
+  }
+ ],
+ "file_seconds": 57.9,
+ "instructions_file": 137098639,
+ "segments_file": 7475,
+ "load_data_in_memory": {
+  "eax": 1,
+  "stop": null,
+  "log": [
+   [
+    "GlobalAlloc",
+    0,
+    1675264,
+    67272736
+   ],
+   [
+    "_hread",
+    6,
+    1675264,
+    1675264
+   ]
+  ],
+  "state": {
+   "record_hex": "010000006600000006000000f0030004010000002080020400901900",
+   "file_name_hex": "433a5c524953494e475c534f554e445c422e534e440000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+   "allocations": 3
+  },
+  "data_sha256": "9b617f4bbb47c5de05ea9a29af1dae03f53ab77b57ed8c8b15582c76126079f3"
+ },
+ "surfaces_from_memory": [
+  {
+   "index": 0,
+   "id": 256,
+   "variant": 0,
+   "data_header_offset": 1224,
+   "data_header_hex": "00000000002400000110225604000002",
+   "eax_object": 1,
+   "stop": null,
+   "log": [
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000009000000000000000000000",
+     "010001002256000044ac000002001000",
+     1,
+     0
+    ],
+    [
+     "Lock",
+     1,
+     0,
+     9216,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     1,
+     0,
+     9216,
+     0,
+     0,
+     "483dd5a2fc09db6a9ccbb59a7f90c57df7d8e0886f9d64ef39d6ce9782d1ff9f"
+    ]
+   ],
+   "decoder_returns": [
+    36612
+   ],
+   "buffer_bytes": 36864,
+   "buffer_sha256": "483dd5a2fc09db6a9ccbb59a7f90c57df7d8e0886f9d64ef39d6ce9782d1ff9f"
+  },
+  {
+   "index": 1,
+   "id": 1280,
+   "variant": 0,
+   "data_header_offset": 1240,
+   "data_header_hex": "00240000005400000110225604000002",
+   "eax_object": 2,
+   "stop": null,
+   "log": [
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000005001000000000000000000",
+     "010001002256000044ac000002001000",
+     2,
+     0
+    ],
+    [
+     "Lock",
+     2,
+     0,
+     21504,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     2,
+     0,
+     21504,
+     0,
+     0,
+     "26e2238863582d6be914287f687cbf3e53663a572f5ad7825de9d462586b3177"
+    ]
+   ],
+   "decoder_returns": [
+    85428
+   ],
+   "buffer_bytes": 86016,
+   "buffer_sha256": "26e2238863582d6be914287f687cbf3e53663a572f5ad7825de9d462586b3177"
+  },
+  {
+   "index": 2,
+   "id": 2048,
+   "variant": 0,
+   "data_header_offset": 1256,
+   "data_header_hex": "00780000006000000110225604000002",
+   "eax_object": 3,
+   "stop": null,
+   "log": [
+    [
+     "CreateSoundBuffer",
+     "14000000e0000000008001000000000000000000",
+     "010001002256000044ac000002001000",
+     3,
+     0
+    ],
+    [
+     "Lock",
+     3,
+     0,
+     24576,
+     0,
+     0
+    ],
+    [
+     "Unlock",
+     3,
+     0,
+     24576,
+     0,
+     0,
+     "c48632eede94790a5bf65611ebc211daecbfe181b82cbd158da8fa884a5c23f4"
+    ]
+   ],
+   "decoder_returns": [
+    97632
+   ],
+   "buffer_bytes": 98304,
+   "buffer_sha256": "c48632eede94790a5bf65611ebc211daecbfe181b82cbd158da8fa884a5c23f4"
+  }
+ ],
+ "instructions_memory": 4530744,
+ "segments_memory": 250,
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "created_before_translation": true,
+ "fixture": "C:\\RISING working directory; files matched by exact path; GlobalAlloc arena 0x4000000, 16-byte aligned; non-zeroinit memory and new DirectSound buffers filled with 0xcd; one DirectSound buffer mapped at 0x6000000 at a time; IDirectSound pointer set to the fixture object"
+}
