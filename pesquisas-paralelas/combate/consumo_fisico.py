@@ -4,7 +4,7 @@ from morte_dano import MorteDanoUnidade
 
 
 def criar_consumidor_fisico(mundo, pool, danos, consulta=None, efeito=None,
-                            bonus_4965ac=0):
+                            bonus_4965ac=0, mortes_sem_experiencia=False):
     """Return an opt-in consumer over writable views of mundo.unidades.
 
     The world owns physical state and iniciar_morte_unidade. The caller owns
@@ -13,6 +13,8 @@ def criar_consumidor_fisico(mundo, pool, danos, consulta=None, efeito=None,
     still delegate or fail at their original request; no rollback or entry
     retry follows a provider exception. Do not replace/resize backing pools or
     replace records during callbacks. Views retain the original backing pool.
+    mortes_sem_experiencia explicitly enables the separate mode-3/4 common
+    lethal tail; its default False and the mode-8/9 stops are unchanged.
     """
     if not isinstance(mundo.unidades, bytearray) or len(mundo.unidades) != 220800:
         raise ValueError('Expected the writable 800-record Core unit pool')
@@ -30,4 +32,5 @@ def criar_consumidor_fisico(mundo, pool, danos, consulta=None, efeito=None,
 
     death = MorteDanoUnidade(records, pool, lethal_effect)
     return ConsumidorDanoUnidade(records, danos, consulta, efeito,
-        jogador_local=mundo.jogador_local, bonus_4965ac=bonus_4965ac, morte=death)
+        jogador_local=mundo.jogador_local, bonus_4965ac=bonus_4965ac, morte=death,
+        morte_sem_experiencia=death.sem_experiencia if mortes_sem_experiencia else None)

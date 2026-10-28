@@ -5,10 +5,11 @@ from consumo_dano import ConsumidorDanoUnidade  # establish committed Core path
 from bancada_morte_unidades import BancadaMorteUnidades
 from bancada_consumo_dano import BancadaConsumoDano
 from bancada_impacto_unidades import BancadaImpactoUnidades, WRAPPER
+from bancada_dano_modo3 import observar_fonte, INTERVALOS as SOURCE_INTERVALS
 from emulador import RETORNO, x86
 
 PROJETEIS, TIPOS, MATRIZES = 0x5000000, 0x5002000, 0x5003000
-INTERVALOS = BancadaMorteUnidades.intervalos + WRAPPER
+INTERVALOS = BancadaMorteUnidades.intervalos + WRAPPER + SOURCE_INTERVALS
 
 
 class BancadaConsumoFisico(BancadaMorteUnidades):
@@ -21,10 +22,16 @@ class BancadaConsumoFisico(BancadaMorteUnidades):
         self.cpu.mem_write(TIPOS, struct.pack('<26I', *(MATRIZES+32*i for i in range(26))))
         self.cpu.hook_add(unicorn.UC_HOOK_CODE, self._observe)
 
-    def preparar(self, mundo, danos, pool):
+    def preparar(self, mundo, danos, pool, modo4=None, fonte10=None, fonte11=None):
         self.carregar_fisica(mundo)
         self.cpu.mem_write(PROJETEIS, bytes(pool.memoria))
         self.cpu.mem_write(0x4dfba0, bytes(1872))
+        if modo4 is not None:
+            self.cpu.mem_write(0x49716c, bytes([modo4[0]]))
+            self.cpu.mem_write(0x49716e, bytes([modo4[1]]))
+        if fonte10 is not None:
+            self.cpu.mem_write(0x4dfb80, bytes(fonte10))
+            self.cpu.mem_write(0x4dfb64, bytes(fonte11))
         self.cpu.mem_write(0x4965ac, b'\0')
         self.cpu.mem_write(0x508f7c, bytes(4))
         self.cpu.mem_write(0x4e19c0, bytes(4))
@@ -44,6 +51,7 @@ class BancadaConsumoFisico(BancadaMorteUnidades):
 
     def _observe(self, cpu, at, size, data):
         BancadaConsumoDano._observar_consumo(self, cpu, at, size, data)
+        observar_fonte(self, cpu, at)
         BancadaImpactoUnidades._observar_wrapper(self, cpu, at, size, data)
         if at == 0x4507af:
             self.after_dying = True
@@ -60,10 +68,11 @@ class BancadaConsumoFisico(BancadaMorteUnidades):
             if at == 0x444938 else ('MAJSympathie', (a & 255, d & 255, b)))
         self.eventos_morte.append((name, args))
 
-    def consumir(self, victim=1, attacker=0, checkpoint=RETORNO, projectile=False):
+    def consumir(self, victim=1, attacker=0, checkpoint=RETORNO, projectile=False,
+                 mode=1, direction=255):
         result = self.executar(0x46eaf8 if projectile else 0x4502f0, INTERVALOS,
             dict(EAX=PROJETEIS+37*56) if projectile else
-            dict(EAX=victim, EDX=1, EBX=attacker, ECX=255),
+            dict(EAX=victim, EDX=mode, EBX=attacker, ECX=direction),
             parada={RETORNO, checkpoint, 0x44fb20, 0x48aa79},
             limite_instrucoes=500000)
         if result['EIP'] in (0x475118, 0x44fb20, 0x48aa79):
