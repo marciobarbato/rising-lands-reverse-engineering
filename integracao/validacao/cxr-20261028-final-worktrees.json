@@ -184,5 +184,13 @@
         "e7ea60ffc8d922979e06841939ddda349ed3a622 Prepare explicit-state whole MissionLoad oracle scaffold"
       ]
     }
-  ]
+  ],
+  "additional_preserved_documentation_candidate": {
+    "path": "/Users/marcio/git/Rising Lands/worktrees/integration-maintenance-bf616e24",
+    "head": "fc8d2329dc145fe09f7edd0bcf7ab90a582534b8",
+    "changes": [],
+    "failure": "broken relative Markdown links in nested round snapshots; source/captures untouched",
+    "log": "integracao/validacao/cxr-20261028-documentation-first-attempt.txt",
+    "recorded_at_utc": "2026-10-28T21:30:10.674223+00:00"
+  }
 }
