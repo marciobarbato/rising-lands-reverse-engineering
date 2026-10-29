@@ -101,7 +101,132 @@ The MenuInit arguments prepared around the load reset (EAX=player byte, EBX=0, E
 
 ### Gaps and dependency stops
 
-- The frame-1 re-validation waits for Missions' frame-1 capture and entry trace. It must be rerun at the exact frame-1 inputs and extended only to the branches the trace reaches.
+- The frame-1 re-validation is done at the exact frame inputs: see [Frame 0/frame 1](#frame-0frame-1-re-validation-and-the-reached-core-callees-m21) below.
 - `iaRandom(0)` needs a declared clock value from the frame oracle. Core supplies no default.
 - Not translated by Core: `InitRand` (startup producer of the table), CRT `srand`, and the owners' routines (`SetUpdateChamp`/`UpdateChamp`: Economy; `NextAnim*`: Graphics; `CalculNextReflect`/`PlayerAttaqueReset`: ai-runtime; `SetClipping`: Graphics; `InitGameZone`: UI).
 - The viewport size (0×0 in M1) and the rendering-side cursor consumption are frame-oracle inputs that Core cannot decide.
+
+## Frame 0/frame 1: re-validation and the reached Core callees (M2.1)
+
+**Inputs.** Missions' first-frame original capture (`pesquisas-paralelas/missoes/evidencias/captura-quadro1-monde01-original.json`, SHA-256 `c06f78ea…fed8`) and its entry trace (`rastro-quadro1-monde01.json`, `45859330…3fb0e`). "Frame 0" is the load-state CalculGame body (`load_tail`). Frame 1 is the second pass. Every number below is at these exact frame inputs. None is at the M1 post-load input.
+
+**Order.** The original-only isolated capture came first, committed before any translation (`2e5cc6d`). The translation and its fresh native differential followed.
+
+### Foundations re-validated at the frame inputs
+
+These are checked against the phase snapshots and boundary events in `testes/test_chamadas_quadro_core.py::ReValidacaoFundacoesQuadro1`, with no CPU:
+
+| Primitive | Frame 0 (`load_tail`) | Between frames | Frame 1 |
+|---|---|---|---|
+| Load counter reset | `zerar_contadores_carga` on S0 (0,0,0) equals the after-(a) bytes | — | — |
+| `ProgIteration` prefix | — | `avancar_contadores_iteracao` stores only +0 (cycle 1). It is the only DGROUP change in (b) | counters unchanged |
+| `GameNextFrame` | 1 entry, counter 1→2 | — | 1 entry, 2→3 |
+| `Random` | 8 entries (one per state-7 unit), `0x4926732e`→`0x1c019f87` | — | 8 entries, →`0x78fe3b37` |
+| `iaRandom` | not entered, `0x498db4` unchanged | — | not entered, unchanged |
+| Permutation draw | two draws: MenuInit+0x202, then the CalculGame CD branch `0x42d2f9`. The MCICD_Play boundary sees EAX=2+byte%2, EDX=0 and BL=the new cursor (0→1→2) | — | one draw (CD branch), byte `0x81`, EAX=3, cursor 2→3 |
+| Viewport size `0x508724/26` | 0×0 | 0×0 | 0×0, so NextAnimTerrain/NextAnimVeget visit no cell. Only the origin changes, through the edge scroll |
+
+The per-frame cursor step is therefore Core's CD-branch draw (`[0x4e2f28]`=0), not NextAnim*. `CalculGame_cd_permutation_draw` is reached in both frames. `LongRand`, `iaRandom` and the counter-reset path in frame 1 are not reached.
+
+**Owners' routines in the trace.** `SetUpdateChamp`/`UpdateChamp` belong to Economy, `NextAnimTerrain`/`NextAnimVeget` to Graphics and `CalculNextReflect` to ai-runtime. `SetClipping` (Graphics) and `InitGameZone` (UI) are entered in frame 0 only. Core has no implementation of these to re-validate. Its share is the inline primitives above.
+
+### Reached Core callees
+
+Ownership was confirmed from the bytes. Callers in the trace:
+- ai-runtime: `EnginNextEtape` and `CalculBatimentNextEtape`.
+- Economy: `CalculMatiere`, which calls GetBit/SetBit.
+
+The callees are the generic bit helpers, the per-owner discovery/light grids, the structure pool geometry, the unit collision/region tags and unit fatigue.
+
+Not Core:
+- `BonusGetValEngin` 0x428cc0 (Economy) is a provider argument.
+- `BatimentExiste` belongs to Missions and `BatimentGetPlayer` has a Combat bridge.
+- `BatimentGetType` and `EnginTrouveCible`/`PlayerEstAllie` (frame 0, Combat) are not claimed here.
+- `CaseGetZoneInfluence`/`GetTopLeftCaseZoneInfluence` are not reached in frame 0/1.
+
+**Native capture** (`evidencias/fundacoes-quadro/captura-chamadas-quadro1.json`, `ferramentas/capturar_chamadas_core_quadro1.py`). The run reuses `oraculo_quadro_missao.Isolamento` over the committed path. It made 678 isolated calls, 339 per frame:
+
+| Routine | Calls per frame |
+|---|---|
+| GetBit | 80 |
+| CaseEstDecouverte | 93 |
+| CaseEstIlluminee | 78 |
+| BatimentCollision | 30 |
+| CalculFatigue | 16 |
+| SetEnginCollision / SetCollision / Chemin_ModifieZone / Random | 8 each |
+| BatimentEstDecouvert / BatimentContourEstIllumine | 3 each |
+| SetBit | 2 |
+| BatimentGetCase / GameNextFrame | 1 each |
+
+The path reproduction passed: phase states, boundaries, entry trace and code section. Read and write hooks are added and the Unicorn translation cache is flushed before every isolated call, so no cached block can under-count reads. The earlier `BancadaFundacoesQuadro` adds its hooks before its first translation, so it needs no flush.
+
+**Static evidence** (`evidencias/fundacoes-quadro/chamadas-quadro1/manifesto.json`, `ferramentas/extrair_chamadas_quadro1.py`). It covers 16 hash-checked intervals (routines, shared tails and epilogues), the four jump tables, the four initialized data tables the translations index, and `caller_flag_use`. All 20 captured call sites overwrite the arithmetic flags before reading any.
+
+### API (`ferramentas/chamadas_quadro_core.py`, memory `ferramentas/memoria_quadro_core.py`)
+
+`memoria` is any object with `u8/u16/u32(endereco, valor=None)` over the live original buffers. `MemoriaQuadro(segmentos)` wraps the caller's own writable buffers. Ai-runtime's `MemoriaDeclarada` has the same interface. An address outside every segment raises `AcessoForaDosSegmentos`. Each function returns a dict of the general registers the routine changes. Unlisted registers are preserved.
+
+`provedores_core(memoria, bonus)` adapts the functions to ai-runtime's `provider(sitio=..., **keywords) -> EAX` convention: `caso`, `jogador`, `estrutura`, `unidade`, `valor`/`bit`.
+
+| Function | Original | Domain translated | Registers out |
+|---|---|---|---|
+| `obter_bit(eax, edx)` | GetBit 0x467d97 | complete | EAX=((AL) sar (DL&31))&1 |
+| `definir_bit(m, eax, edx, ebx)` | SetBit 0x467d71 | complete: BL=0 clears, BL=1 sets, BL>1 returns; 8-bit shift (index ≥8 → mask 0) | clear: EBX low=new byte, EDX low=~mask; set: EDX low=mask |
+| `caso_esta_descoberta(m, eax, edx)` | CaseEstDecouverte 0x4766d6 | complete; owner byte indexes `0x507d78+4·DL` (owner ≥4 aliases the next tables) | EAX=(AX&0xff00)\|((grid&0x10)==0), EDX=grid pointer |
+| `caso_esta_iluminada(m, eax, edx)` | CaseEstIlluminee 0x47693a | complete, table `0x507d88` | same |
+| `colisao_estrutura(m, eax, edx)` | BatimentCollision 0x41ab5c | complete; type>0x15 → AL 0 | EAX=(DX&0xff00)\|mask byte, EDX=type; above 0x15 EAX=EDX&~0xff |
+| `caso_estrutura(m, eax)` | BatimentGetCase 0x41aee2 | complete, including empty masks and the high word of index·276 in the origin dword | EAX only |
+| `estrutura_esta_descoberta(m, eax, edx)` | BatimentEstDecouvert 0x419c4f | complete (rectangle, rows then columns, map clipping) | 1: EAX/EDX = call's \| 1; 0: both = height&0xff00 |
+| `contorno_estrutura_iluminado(m, eax, edx)` | BatimentContourEstIllumine 0x4199f9 | complete (ring dy∈[−1,H], dx∈[−1,W]) | 1: EAX low=1, EDX=grid pointer; 0: EAX=(H+1)&~0xff, EDX=H+1 |
+| `definir_colisao(m, eax, edx)` | SetCollision 0x47622e | complete | EAX=attribute grid pointer |
+| `modificar_zona_caminho(m, eax, edx, ebx, ecx, sub)` | Chemin_ModifieZone 0x43e138 | mode 2 (unit tag insert or occupied) | EAX low=0/1, EBX=tag, EDX=2·cell |
+| `definir_colisao_unidade(m, eax, edx)` | SetEnginCollision 0x442cb4 | complete over its type table (single, quad, type-16/17 mask-2, type>0x19) | last Chemin EAX/EDX, or attribute pointer and EDX=2 |
+| `calcular_fadiga(m, eax, bonus)` | CalculFatigue 0x452cc8 | +0x72=0, types 11..17, counter below the threshold | EAX |
+| `aleatorio_mundo_memoria(m)`, `avancar_quadro_jogo_memoria(m)` | Random, GameNextFrame | as `fundacoes_quadro`, over memory | EAX / none |
+
+Reached at the frame inputs:
+- CalculFatigue takes the inactive return and the counter increment (threshold 3000+`+0xf8`+bonus).
+- SetEnginCollision takes the single-cell path for unit types {0,1,5,7,8}, with a re-asserted mask and an occupied region (Chemin AL=0).
+- The structure visibility queries all return 0.
+- The fresh differential's perturbations cover the remaining outcomes.
+
+### Validation (actual results)
+
+- **CPU-free replay** (`testes/test_chamadas_quadro_core.py`, 15 tests). All 678 calls replay from exactly the bytes the original read before writing. Any other read raises, so a translation that reads more than the original fails. Stores and all seven general registers match. CalculFatigue's Economy bonus query gives the same result for table fills 0x00/0x5a/0xa7/0xff outside the footprint. The static manifest regenerates from the intact bytes, and the translation tables equal the jump tables.
+- **Fresh native differential** (`python3 -B ferramentas/validar_chamadas_quadro_core.py`, under the heavy lease, 48 s). It made **1,918 Python/native comparisons** at the exact entry states: the 678 captured calls plus declared perturbations on the first 4 calls of each routine per frame. The perturbations cover:
+  - registers;
+  - unit and structure types and origins;
+  - grid owners 0–7;
+  - a discovered footprint cell;
+  - free region cells (Chemin insert);
+  - counter wrap;
+  - owner bonus;
+  - seed edge values.
+
+  Results:
+  - **0 mismatches and 0 dependency stops.**
+  - The path reproduction still passed.
+  - Positive AL exits were reached for the four visibility queries and for Chemin (insert).
+  - 48 SetEnginCollision cases stored.
+
+  `RISING_EMULAR=1` reruns it as `testes/test_emulacao_chamadas_quadro_core.py`. Report: [chamadas-quadro1-emulada.json](../../relatorios/chamadas-quadro1-emulada.json).
+- **Failed attempts** are preserved in `.local/frame/`. Three were perturbation-domain or validator bugs, none a translation divergence:
+  1. A wrong unit-pool base gave an unmapped native write.
+  2. A light-grid owner 11 read pointer slot 15, which is 0, giving a native fault.
+  3. Owner 10's light slot points to a smaller block. The Python memory refused a read the native made outside every live allocation.
+
+  Owners are now limited to 0–7.
+
+### Dependency stops and gaps
+
+Each raises `DependenciaRamoCore` before any store:
+- **CalculFatigue**:
+  - The threshold-reached branch at `0x452d61` (provisions decrement, `BagContient`/`BagRetire`, `SetDyingEngin`, the local-player sound) is not reached in frame 0/1.
+  - A missing Economy bonus provider stops at `0x452d48`.
+- **Chemin_ModifieZone** modes:
+  - 0 (`0x43e153`, unit tag removal);
+  - 1 (`0x43e1b4`, MurRetire);
+  - 3 (`0x43e256`, MurAjoute);
+  - BL>3 (`0x43e29c`).
+
+Not translated: GetBit's callers' bodies (ai-runtime/Economy) and the AffGame cursor consumption (Graphics).
