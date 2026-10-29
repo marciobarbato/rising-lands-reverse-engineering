@@ -63,6 +63,18 @@ def load_graphics_structures():
     ))
 
 
+def load_economy_bonus():
+    """Return Economy's actual bonus_unidades module (BonusGetValEngin owner).
+
+    Public replacement for consumers that previously called the private
+    loader with the same two entries; identities are checked the same way.
+    """
+    return _load_providers((
+        ('economia', ECONOMY / 'economia.py'),
+        ('bonus_unidades', ECONOMY / 'bonus_unidades.py'),
+    ))
+
+
 def load_economy_resources():
     """Return actual extracao with its same-checkout economic dependencies.
 

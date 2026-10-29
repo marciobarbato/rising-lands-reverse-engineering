@@ -229,3 +229,82 @@ class MaquinaTarefas:
                 self.gravar(indice, 12, destino)
             indice = seguinte
         return 0 if self.ativas else 0x1a1a000e
+
+
+# Original task memory (iaProbReset listInit layout): 100 records of 0x60 bytes, the
+# free-list header, five context headers (+0 s32 head, +4 u32 count, +8 stride,
+# +12 base) and the u32 active-task count.
+POOL_TAREFAS, LISTA_LIVRE, CONTEXTOS_TAREFAS = 0x512320, 0x5148a0, 0x5148b0
+TAREFAS_ATIVAS, FIM_TAREFAS = 0x514904, 0x514908
+
+
+class _CabecaLista:
+    """Live list header: [0] = s32 head at +0, [1] = u32 count at +4 (stores wrap to u32)."""
+    __slots__ = ('_v', '_o')
+
+    def __init__(self, view, offset):
+        self._v, self._o = view, offset
+
+    def __getitem__(self, i):
+        if i == 0:
+            return i32(struct.unpack_from('<I', self._v, self._o)[0])
+        if i == 1:
+            return struct.unpack_from('<I', self._v, self._o + 4)[0]
+        raise IndexError(i)
+
+    def __setitem__(self, i, valor):
+        if i not in (0, 1):
+            raise IndexError(i)
+        struct.pack_into('<I', self._v, self._o + 4 * i, u32(valor))
+
+    def __iter__(self):
+        return iter((self[0], self[1]))
+
+    def __eq__(self, outro):
+        return list(self) == list(outro)
+
+    def __repr__(self):
+        return f'[{self[0]}, {self[1]}]'
+
+
+class MaquinaTarefasViva(MaquinaTarefas):
+    """MaquinaTarefas bound to the original task memory 0x512320..0x514908 (no reset).
+
+    ``memoria`` is the caller's own writable contiguous buffer holding exactly
+    those 0x25e8 bytes (for example a memoryview slice of the live DGROUP+.bss);
+    records, list headers and the active count are read and written in place, so
+    no load/store bridge is needed. Every VM method is the inherited one; only the
+    storage differs, and nothing is initialized (the state is whatever iaProbReset
+    and the game left there).
+    """
+
+    def __init__(self, programa: ProgramaRegras, memoria, operacoes=None, missao=0, mundo=None):
+        view = memoryview(memoria)
+        if view.readonly or view.ndim != 1 or not view.c_contiguous or view.nbytes != FIM_TAREFAS - POOL_TAREFAS:
+            raise ValueError('Task memory must be the live writable 0x512320..0x514908 buffer')
+        view = view.cast('B')
+        self.programa = programa
+        self.operacoes = operacoes or {}
+        self.missao = missao
+        self.mundo = mundo
+        self.memoria = view[:LISTA_LIVRE - POOL_TAREFAS]
+        self.livres = _CabecaLista(view, LISTA_LIVRE - POOL_TAREFAS)
+        self.contextos = [_CabecaLista(view, CONTEXTOS_TAREFAS - POOL_TAREFAS + 16 * k) for k in range(5)]
+        self._vista = view
+
+    @classmethod
+    def sobre_memoria(cls, programa, memoria, **argumentos):
+        """Bind through a flat memory whose ``segmentos`` are (base, end, view) tuples
+        (``memoria_quadro_core.MemoriaQuadro`` or ai-runtime's ``MemoriaDeclarada``)."""
+        for base, fim, view in memoria.segmentos:
+            if base <= POOL_TAREFAS and FIM_TAREFAS <= fim:
+                return cls(programa, view[POOL_TAREFAS - base:FIM_TAREFAS - base], **argumentos)
+        raise ValueError('No live segment holds the task memory 0x512320..0x514908')
+
+    @property
+    def ativas(self):
+        return struct.unpack_from('<I', self._vista, TAREFAS_ATIVAS - POOL_TAREFAS)[0]
+
+    @ativas.setter
+    def ativas(self, valor):
+        struct.pack_into('<I', self._vista, TAREFAS_ATIVAS - POOL_TAREFAS, u32(valor))

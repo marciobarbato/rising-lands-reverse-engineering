@@ -17,7 +17,7 @@ class DiferencialChamadasQuadro1(unittest.TestCase):
         self.assertTrue(r['path_reproduction']['passed'], r['path_reproduction'])
         self.assertEqual(r['mismatches'], [])
         self.assertEqual(r['dependencies'], [])
-        self.assertEqual(r['calls'], 678)
+        self.assertEqual(r["calls"], 678 + 61)
         self.assertGreater(r['comparisons'], 678)
         # Perturbations reach the non-captured outcomes: positive visibility exits, region inserts.
         for nome in ('BatimentEstDecouvert', 'BatimentContourEstIllumine', 'CaseEstDecouverte', 'CaseEstIlluminee'):
