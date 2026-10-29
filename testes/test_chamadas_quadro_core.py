@@ -75,6 +75,25 @@ class MemoriaEsparsa:
     def mudancas(self):
         return sorted([hex(a), self.iniciais.get(a), v] for a, v in self.bytes.items() if self.iniciais.get(a) != v)
 
+    def conferir(self, teste, capturadas):
+        """Every captured change is reproduced and no known byte changes otherwise. Returns the
+        number of stores to bytes the original never read whose native value did not change
+        (absent from the capture by construction; the native differential compares them)."""
+        esperado = {int(a, 16): (velho, novo) for a, velho, novo in capturadas}
+        for a, (velho, novo) in esperado.items():
+            teste.assertEqual(self.bytes.get(a), novo, hex(a))
+            if a in self.iniciais:
+                teste.assertEqual(self.iniciais[a], velho, hex(a))
+        sem_leitura = 0
+        for a, v in self.bytes.items():
+            if a in esperado:
+                continue
+            if a in self.iniciais:
+                teste.assertEqual(v, self.iniciais[a], f'unexpected change at {hex(a)}')
+            else:
+                sem_leitura += 1
+        return sem_leitura
+
 
 def regs(d):
     return {k: int(v, 16) for k, v in d.items()}
@@ -104,8 +123,15 @@ def replay(chamada, classe_bonus, preenchimento=None):
     conhecidos = {int(a, 16): v for a, v, _ in chamada['read_before_write']}
     m = MemoriaEsparsa(conhecidos, preenchimento)
     entrada = regs(chamada['entry_registers'])
-    sub = sub_chemin(m, entrada) if chamada['routine'] == 'Chemin_ModifieZone' else None
-    saida = ROTINAS[chamada['routine']][1](m, entrada, sub, bonus_de(m, classe_bonus))
+    if chamada['routine'] == 'Chemin_ModifieZone':
+        pilha = sub_chemin(m, entrada)
+    elif chamada['routine'] == 'MouseSetZone':
+        # The pushed y1 word lies below the exit ESP, so the capture does not list it; the
+        # callee leaves it in EDX. Recovered here (the native differential reads the stack).
+        pilha = int(chamada['exit_registers']['EDX'], 16)
+    else:
+        pilha = None
+    saida = ROTINAS[chamada['routine']][1](m, entrada, pilha, bonus_de(m, classe_bonus))
     return m, entrada, saida
 
 
@@ -122,7 +148,8 @@ class ReplayChamadasQuadro1(unittest.TestCase):
         self.assertTrue(c['path_reproduction']['passed'])
         self.assertEqual(len(c['calls']), 678)
         self.assertTrue(all(x['reached_return'] for x in c['calls']))
-        self.assertEqual({n: int(a, 16) for n, a in c['routines'].items()}, {n: e for n, (e, _) in ROTINAS.items()})
+        self.assertEqual({n: int(a, 16) for n, a in c['routines'].items()},
+                         {n: ROTINAS[n][0] for n in c['routines']})
 
     def test_every_captured_call_replays_exactly(self):
         for i, chamada in enumerate(self.captura['calls']):
@@ -199,6 +226,72 @@ class DominioEDependencias(unittest.TestCase):
         self.assertEqual(p['GetBit'](sitio=0x456ead, valor=4, bit=2), 1)
         self.assertTrue({'CaseEstDecouverte', 'BatimentEstDecouvert', 'BatimentContourEstIllumine', 'BatimentGetCase',
                          'CalculFatigue', 'SetEnginCollision', 'Random', 'GetBit', 'CaseEstIlluminee'} <= set(p))
+
+
+ZONAS = RAIZ / 'evidencias/fundacoes-quadro/captura-zonas-animacao-quadro1.json'
+ZONAS_SHA256 = '277496ffb203b28e02120f202cd7430af757bedc777f4941b2eb752fba8f1adc'
+
+
+class ReplayZonasAnimacaoQuadro1(unittest.TestCase):
+    """SetClipping, InitGameZone (and the routines it calls), NextAnimTerrain/NextAnimVeget."""
+    @classmethod
+    def setUpClass(cls):
+        dados = ZONAS.read_bytes()
+        if hashlib.sha256(dados).hexdigest() != ZONAS_SHA256:
+            raise AssertionError('Committed zone/animation capture changed')
+        cls.captura = json.loads(dados)
+
+    def test_capture_scope(self):
+        c = self.captura
+        self.assertFalse(c['translation_executed'])
+        self.assertTrue(c['path_reproduction']['passed'])
+        self.assertEqual(len(c['calls']), 61)
+        self.assertEqual(c['not_reached'], ['MarcheGetPos', 'MarcheGetTaille', 'NextAnimVegetFullMap'])
+        self.assertEqual({n: int(a, 16) for n, a in c['routines'].items()}, {n: ROTINAS[n][0] for n in c['routines']})
+
+    def test_every_captured_call_replays_exactly(self):
+        self.sem_leitura = 0
+        for i, chamada in enumerate(self.captura['calls']):
+            with self.subTest(i=i, routine=chamada['routine'], phase=chamada['phase']):
+                m, entrada, saida = replay(chamada, None)
+                self.sem_leitura += m.conferir(self, chamada['changed_bytes'])
+                esperado, nativo = dict(entrada, **saida), regs(chamada['exit_registers'])
+                self.assertEqual({k: esperado[k] for k in REGISTROS}, {k: nativo[k] for k in REGISTROS})
+
+    def test_reached_branches(self):
+        chamadas = self.captura['calls']
+        zonas = [c for c in chamadas if c['routine'] == 'InitGameZone']
+        self.assertEqual([c['caller'] for c in zonas], ['MenuInit+0x1ce', 'CalculGame+0xa76'])
+        for c in zonas:
+            blocos = {int(b, 16) for b in c['native_blocks']}
+            self.assertIn(0x471aa4, blocos)                 # mode 1
+            self.assertIn(0x471d74, blocos)                 # screen width != 640 (0x49a018 = 0)
+            self.assertIn(0x471d7d, blocos)                 # minimap rectangle
+            self.assertIn(0x471ec7, blocos)                 # contact type not 1/2/3: default zone 0x1a
+            self.assertIn(0x471f30, blocos)                 # no message box
+            self.assertNotIn(0x471f7f, blocos)              # no alliance zone
+        for c in chamadas:
+            if c['routine'] in ('NextAnimTerrain', 'NextAnimVeget'):
+                self.assertNotIn(0x477737 if c['routine'] == 'NextAnimTerrain' else 0x47731b,
+                                 {int(b, 16) for b in c['native_blocks']})
+
+    def test_unreached_modes_raise_before_any_store(self):
+        from chamadas_quadro_core import iniciar_zonas_jogo, animar_terreno, animar_vegetacao, animar_vegetacao_mapa
+        dgroup = bytearray(0x523000 - 0x494000)
+        dgroup[0x508726 - 0x494000] = 3
+        m = MemoriaQuadro([(0x494000, dgroup)])
+        antes = bytes(dgroup)
+        for modo, alvo in ((2, 0x4719be), (3, 0x47194f), (4, 0x47184d), (0, 0x471949), (5, 0x471949)):
+            with self.assertRaises(DependenciaRamoCore) as e:
+                iniciar_zonas_jogo(m, modo, 0)
+            self.assertEqual(e.exception.endereco, alvo)
+        for funcao, alvo in ((animar_terreno, 0x477737), (animar_vegetacao, 0x47731b)):
+            with self.assertRaises(DependenciaRamoCore) as e:
+                funcao(m, 3, 5)
+            self.assertEqual(e.exception.endereco, alvo)
+        with self.assertRaises(DependenciaRamoCore):
+            animar_vegetacao_mapa(m)
+        self.assertEqual(bytes(dgroup), antes)
 
 
 QUADRO1 = RAIZ / 'pesquisas-paralelas/missoes/evidencias/captura-quadro1-monde01-original.json'

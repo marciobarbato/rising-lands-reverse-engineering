@@ -1,7 +1,8 @@
 """Fresh native differential of the Core frame-0/frame-1 callees at the exact frame inputs.
 
-Reruns the committed first-frame path with ``oraculo_quadro_missao.Isolamento``
-at every Core callee entry (as ``capturar_chamadas_core_quadro1``). For each
+Reruns the committed first-frame path (``percurso_quadro1``) with
+``oraculo_quadro_missao.Isolamento`` at every Core callee entry of both captures
+(``capturar_chamadas_core_quadro1`` and ``capturar_zonas_animacao_quadro1``). For each
 call the captured inputs and, for the first calls of each routine per phase,
 declared perturbations (registers and/or explicit byte writes at the exact
 entry state) run natively; an observer then runs the Python translation over
@@ -21,7 +22,8 @@ import time
 RAIZ = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(RAIZ))
 import capturar_chamadas_core_quadro1 as cc   # noqa: E402  (adds the Missions folder to sys.path)
-from chamadas_quadro_core import ROTINAS, DependenciaRamoCore   # noqa: E402
+from chamadas_quadro_core import ROTINAS, ARGUMENTO_PILHA, DependenciaRamoCore   # noqa: E402
+import capturar_zonas_animacao_quadro1 as cz   # noqa: E402
 from memoria_quadro_core import MemoriaQuadro   # noqa: E402
 
 REGISTROS = ('EAX', 'EBX', 'ECX', 'EDX', 'ESI', 'EDI', 'EBP')
@@ -73,6 +75,31 @@ def perturbacoes(unidades, descoberta0):
         'BatimentGetCase': estruturas, 'BatimentEstDecouvert': estruturas, 'BatimentContourEstIllumine': estruturas,
         'Random': [w('seed_zero', [(0x497164, [0, 0, 0, 0])]), w('seed_max', [(0x497164, [0xff] * 4)])],
         'GameNextFrame': [w('wrap', [(0x496d40, [0xff] * 4)])],
+        'SetClipping': [r('high_bits', EAX=0x12345678, EBX=0x9abcdef0, ECX=1, EDX=0xffff)],
+        'InitGameZone': [
+            w('screen640_480', [(0x49a018, [0x80, 0x02]), (0x49a01a, [0xe0, 0x01])]),
+            w('minimap_off', [(0x497285, [0])]),
+            w('contact_type1_screen640', [(0x4e2e7c + 0xff, [1]), (0x49a018, [0x80, 0x02]), (0x508726, [15, 0])]),
+            w('contact_type2_panel_negative', [(0x4e2e7c + 0xff, [2]), (0x508f90, [0xfe]), (0x508726, [15, 0])]),
+            w('contact_type3_market', [(0x4e2e7c + 0xff, [3]), (0x4e2906, [5, 0]), (0x496f80, [7, 0]),
+                                       (0x496f7c, [20, 0]), (0x496f7e, [30, 0])]),
+            w('contact_self_type2', [(0x4e2928, [1]), (0x4e2e7c, [2]), (0x508f90, [3])]),
+            w('message_box_panel_negative', [(0x507d56, [5, 0]), (0x508f90, [0xf0]), (0x508726, [12, 0])]),
+            w('alliances', [(0x5080b0 + 4, [1, 0, 0, 0]), (0x5080b0 + 12, [0, 1, 0, 0]), (0x508724, [20, 0]),
+                            (0x508726, [15, 0]), (0x508f90, [3])]),
+            w('local_player2_alliances', [(0x508041, [2]), (0x5080b0 + 32, [1, 0, 0, 0]), (0x508724, [9, 0])])],
+        'MouseSetZone': [r('index256_aliases_test_and_max', EAX=0x100), r('high_bits', EAX=0x10005, EDX=0xffff1234,
+                                                                            EBX=0xabcd0001, ECX=0x8000ffff)],
+        'MouseTestZone': [r('high_bits', EAX=0x12345678, EDX=0x9abcdef0)],
+        'ChercheContacteur': [r('owner1', EAX=1), r('owner3_high', EAX=0x103),
+                              w('contacted_self', [(0x4e2928, [1])], EAX=0)],
+        'MessageBoxExiste': [w('box_differs_high_eax', [(0x507d56, [0x34, 0x12])], EAX=0xabcd1234)],
+        'PlayerEstContacterPourAlliance': [w('owner1_target3', [(0x5080b0 + 16 + 12, [9, 0, 0, 0])],
+                                             EAX=0x101, EDX=0x203)],
+        'MiniMapGetPos': [w('values', [(0x507d68, [1, 2]), (0x507d6a, [3, 4])])],
+        'MiniMapGetTaille': [w('values', [(0x496fe0, [5, 6]), (0x496fe2, [7, 8])])],
+        'NextAnimTerrain': [r('high_bits', EAX=0xffff0002, EDX=0x01000005)],
+        'NextAnimVeget': [r('high_bits', EAX=0xffff0002, EDX=0x01000005)],
     }
 
 
@@ -91,7 +118,7 @@ def executar_python(nome, antes, entrada, classe_bonus):
     """Run the translation over copies of the exact entry blocks; returns (changed bytes, registers)."""
     buffers = {n: (base, bytearray(dados)) for n, (base, dados) in antes.items()}
     m = MemoriaQuadro(buffers.values())
-    sub = m.u8(entrada['ESP'] + 4) if nome == 'Chemin_ModifieZone' else None
+    sub = m.u32(entrada['ESP'] + 4) if nome in ARGUMENTO_PILHA else None
     bonus = lambda jogador, tipo, seletor: classe_bonus(m.ler(TABELA_BONUS, TAMANHO_BONUS)).consultar(jogador, tipo,
                                                                                                     seletor)
     saida = ROTINAS[nome][1](m, entrada, sub, bonus)
@@ -145,39 +172,14 @@ def diferencial(limite=LIMITE_POR_FASE):
     unidades = int.from_bytes(bytes(lidos[0x4e19a0 + i] for i in range(4)), 'little')
     from estado_m1_quadro import carregar_m1   # the grid pointers are set by MissionLoad and never move
     descoberta0 = int.from_bytes(carregar_m1()[0][0x507d78 - 0x494000:0x507d7c - 0x494000], 'little')
-    b, iso, cap, reproducao = _executar(perturbacoes(unidades, descoberta0), observador, limite)
+    import percurso_quadro1 as pq
+    casos = perturbacoes(unidades, descoberta0)
+    rotinas = cc.ROTINAS + tuple(n for n in cz.ROTINAS if n not in cc.ROTINAS)
+    b, iso, cap, reproducao, _ = pq.executar(rotinas, lambda b: PerturbacoesLimitadas(b, casos, limite), observador)
     registro.update(path_reproduction=reproducao, calls=len(iso.registros), cases_with_stores=caixa,
                     unit_pool_base=hex(unidades), owner0_discovery_grid=hex(descoberta0),
                     perturbation_limit_per_phase=limite)
     return registro
-
-
-def _executar(casos, observador, limite):
-    import capturar_isolados_quadro1 as ci
-    import capturar_quadro_missao_original as cq
-    from oraculo_quadro_missao import BancadaQuadroMissaoOriginal, Isolamento
-    cap = json.loads(ci.CAPTURA.read_bytes())
-    ni = cap['named_inputs']['m1']
-    b = BancadaQuadroMissaoOriginal(cq.entradas_quadro(ni['allocation_fill'], ni['clock_ms'][0]), segundos=120)
-    b.iniciar_relogio()
-    b.executar_inicio()
-    b.executar_mission_load(60)
-    iso = Isolamento(b, cc.ROTINAS, PerturbacoesLimitadas(b, casos, limite), observador)
-    iso.instalar()
-    resumos = {}
-    for nome, correr in (('load_tail', lambda: b.executar_cauda_carga(3600)),
-                         ('between_frames', lambda: b.executar_entre_quadros(120)),
-                         ('frame1', lambda: b.executar_quadro(3600))):
-        correr()
-        resumos[nome] = b.resumo_imagem(b.imagem())
-    fases = {p['phase']: p['state_after']['summary'] for p in cap['phases']}
-    reproducao = dict(phase_states_equal={f: resumos[f] == fases[f] for f in fases},
-                      entry_trace_equal=json.loads(json.dumps(b.rastro_json())) == cap['entry_trace'],
-                      boundaries_equal=b.eventos_fronteira == [e for p in cap['phases'] for e in p['boundaries']],
-                      code_unchanged=b.sha256_codigo() == cap['code_integrity']['after'])
-    reproducao['passed'] = all(reproducao['phase_states_equal'].values()) and all(
-        reproducao[k] for k in ('entry_trace_equal', 'boundaries_equal', 'code_unchanged'))
-    return b, iso, cap, reproducao
 
 
 def main():
