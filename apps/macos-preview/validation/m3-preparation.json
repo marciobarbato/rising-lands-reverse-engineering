@@ -2,24 +2,24 @@
   "date": "2026-10-29",
   "baseline": "99c0e4ec97c97700cf9081becff14dbb72a64497",
   "branch": "feat/codex-macos-m3-preparation",
-  "contract": "rising-lands/macos-state-consumer/2",
+  "contract": "rising-lands/macos-state-consumer/3",
   "consumer": {
-    "tests": 65,
+    "tests": 71,
     "failures": 0,
     "errors": 0,
     "skipped": 0,
-    "context": "Packaged CPython 3.12.14 app consumer suite"
+    "context": "Full app discovery in committed-revision build, bundled CPython 3.12.14"
   },
   "inspection": {
     "blocks": 881,
     "bytes": 2659375
   },
   "macos_full": {
-    "tests": 65,
+    "tests": 71,
     "failures": 0,
     "errors": 0,
     "skipped": 0,
-    "context": "Packaged CPython 3.12.14 app consumer suite"
+    "context": "Full app discovery in committed-revision build, bundled CPython 3.12.14"
   },
   "common": {
     "status": "FAILED",
@@ -64,11 +64,11 @@
   },
   "native_build": {
     "status": "PASSED",
-    "commit": "2314804cbfe30f3866338284cc8141abf6493a86",
-    "bundle": "/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable/dist/development/RisingLands-ptbr.app",
+    "commit": "12e534b03241ff64c6cf65fa2ae9f7c1d0bbdbe8",
+    "bundle": "/Users/marcio/git/Rising-Lands-Codex/.local/round3-workspace/local-data/macos-playable/dist/development/RisingLands-ptbr.app",
     "architecture": "arm64",
     "runtime": "3.12.14",
-    "signature": "ad-hoc codesign --verify --deep --strict passed",
+    "signature": "codesign --verify --deep --strict passed",
     "exercise_smoke": {
       "passed": true,
       "checks": 27,
@@ -77,7 +77,7 @@
     },
     "inspection_smoke": {
       "passed": true,
-      "checks": 8,
+      "checks": 9,
       "visible": true,
       "python_stderr": ""
     },
@@ -250,6 +250,105 @@
       "common": {
         "path": "apps/macos-preview/validation/m3-round2-common.log",
         "sha256": "dae48f39a357da58e695bab723dbd138d8d785442b6a22c2aa850ceed15eea6c"
+      }
+    }
+  },
+  "round2_consumer": {
+    "tests": 65,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "context": "Packaged CPython 3.12.14 app consumer suite"
+  },
+  "round2_macos_full": {
+    "tests": 65,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "context": "Packaged CPython 3.12.14 app consumer suite"
+  },
+  "round2_native_build": {
+    "status": "PASSED",
+    "commit": "2314804cbfe30f3866338284cc8141abf6493a86",
+    "bundle": "/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable/dist/development/RisingLands-ptbr.app",
+    "architecture": "arm64",
+    "runtime": "3.12.14",
+    "signature": "ad-hoc codesign --verify --deep --strict passed",
+    "exercise_smoke": {
+      "passed": true,
+      "checks": 27,
+      "visible": true,
+      "python_stderr": ""
+    },
+    "inspection_smoke": {
+      "passed": true,
+      "checks": 8,
+      "visible": true,
+      "python_stderr": ""
+    },
+    "inputs_root": "/Users/marcio/git/Rising Lands",
+    "runtime_input": "/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python",
+    "outputs_inside_clone": true
+  },
+  "round3": {
+    "base": "a7405668e630650f67f6ff792bd07348ae7697f7",
+    "main_merge": "7e771c4e9f46a22536a86f7d3331d1de74d9151d",
+    "implementation_and_native_commit": "12e534b03241ff64c6cf65fa2ae9f7c1d0bbdbe8",
+    "graphics_api": [
+      1,
+      2
+    ],
+    "other_versions_refused": true,
+    "service_key_error": "Secondary test lookup after explicit version refusal; success assertion, error_type and response shape checks added",
+    "playback": {
+      "phases": 257,
+      "checkpoints": 11,
+      "summary_equal": true,
+      "checkpoint_equal": true
+    },
+    "render": {
+      "report": "apps/macos-preview/validation/m3-m22-render-v3.json",
+      "calls": 128,
+      "partial": 128,
+      "undrawn": 129,
+      "full": 0,
+      "graphics_chain_hashes_equal": 12,
+      "first_stop_frame": 1,
+      "stop_address": "0x0041591f",
+      "limits": [
+        "unit types 8 and 1",
+        "HUD rows >=544 not drawn",
+        "cursor not drawn",
+        "no independent mid-sequence cache",
+        "native pixel checkpoint references end at frame12"
+      ],
+      "known_stop_after_frame6": "Preserved exactly as Graphics reference returns, even when visible playfield is equal"
+    },
+    "common_gate": "Not rerun in round3; earlier failed setup results retained as historical, not current pass",
+    "logs": {
+      "consumer-tests.log": {
+        "path": "apps/macos-preview/validation/m3-round3-consumer-tests.log",
+        "sha256": "6f960832983bdec46b9af20c0ac0780af398e40544702135a08f9b103449002a"
+      },
+      "native-smoke.json": {
+        "path": "apps/macos-preview/validation/m3-round3-native-smoke.json",
+        "sha256": "756d188d93de47bcd2c4b7c862e7f2d5a14ada3d74d4217904c2a83f0d5e09bb"
+      },
+      "native-inspection-smoke.json": {
+        "path": "apps/macos-preview/validation/m3-round3-native-inspection-smoke.json",
+        "sha256": "32c5752b58d2c5764f967fb17a6f1ac4eb309d4a292a2ba44f2cbda1298bfd55"
+      },
+      "architecture.log": {
+        "path": "apps/macos-preview/validation/m3-round3-architecture.log",
+        "sha256": "734f35d29cd5b671f3f9100daf79e584e9f3f37bbd5b247ede65061ae54c3366"
+      },
+      "codesign-verify.log": {
+        "path": "apps/macos-preview/validation/m3-round3-codesign-verify.log",
+        "sha256": "899caa2a0e748671c99800aa23f422067ebcad5613117c91a63c7685216190f6"
+      },
+      "build": {
+        "path": "apps/macos-preview/validation/m3-round3-build.log",
+        "sha256": "23cb27449fb0fd69e8e6eb0ec729bb8cc3a847b2500e30f1b44b8dea4fd23efb"
       }
     }
   }

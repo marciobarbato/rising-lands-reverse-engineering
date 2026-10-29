@@ -353,3 +353,43 @@ Targeted version/cache/sequence/error tests pass. The full committed-revision
 consumer discovery, bundle build and both native smokes follow below after
 execution with the coordinator's explicit inputs-root/data-root/runtime flags.
 No live delivery, game input protocol, renderer or M2.3 work is added.
+
+
+### Round-3 native results and review identity
+
+Implementation/native-tested revision:
+`12e534b03241ff64c6cf65fa2ae9f7c1d0bbdbe8`.
+The full committed app discovery passed **71/71 tests, zero skips**. Strict
+source mirroring, source/asset binding, bundled CPython 3.12.14 isolation,
+Swift compilation, ARM64 architecture and ad hoc signature checks passed.
+Native LaunchServices passed **27 synthetic-exercise checks and 9 inspection
+checks**, with visible windows and empty Python stderr. The inspection test
+uses actual DOM controls, reaches frame 12, checks PNG presence and the explicit
+inherited stop/HUD limitation, reads original counter memory, filters blocks
+and resets to the same captured identity. It no longer expects a missing surface.
+
+Exact build command (from the independent macOS clone):
+
+```sh
+RISING_PYTHON_RUNTIME='/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python' \
+./compilar-jogável --development-ref HEAD \
+  --inputs-root '/Users/marcio/git/Rising Lands' \
+  --data-root '/Users/marcio/git/Rising-Lands-Codex/.local/round3-workspace/local-data/macos-playable'
+```
+
+The CD and runtime inputs are read-only; generated source archives, manifests,
+runtime copies, assets, bundles and logs stay inside this clone. Bundle name
+and identity remain unchanged. The normal launcher and explicit development
+arguments remain supported. The prior failed candidate was not touched.
+
+Saved [full discovery](validation/m3-round3-consumer-tests.log),
+[exercise smoke](validation/m3-round3-native-smoke.json),
+[inspection smoke](validation/m3-round3-native-inspection-smoke.json),
+[build log](validation/m3-round3-build.log) and
+[structured results](validation/m3-preparation.json) identify the real run.
+Documentation links and git diff --check pass. Cross-front common gates were
+not repeated in round 3; their prior environment failures remain historical,
+not represented as a current pass. No native x86 emulation or Mac mini job was
+needed by this consumer. Remaining dependencies are Graphics' unsupported
+bodies/HUD/cursor and new reference/cache artifacts for independent starts,
+plus the separately reserved live runtime/input contract. No milestone changes.
