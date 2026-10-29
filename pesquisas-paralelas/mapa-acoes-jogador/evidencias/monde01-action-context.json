@@ -1,0 +1,316 @@
+{
+  "schema": "rising-lands/monde01-action-context/1",
+  "intact_executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "unit_name_getter": {
+    "address": "0x00441775",
+    "end_exclusive": "0x00441792",
+    "hex": "5231d288c289d0c1e00229d0c1e00301d001c005ae65490083c00c5ac3",
+    "formula": "0x4965ae + 50 * (AL & 255) + 12",
+    "evidence": "original_file_bytes"
+  },
+  "unit_type_records": [
+    {
+      "type_u8": 0,
+      "address": "0x004965ae",
+      "bytes": 50,
+      "hex": "780006000000000064000200534f4c4441540000000000000000000000000000000000000000000000000000000000000000",
+      "name_offset": 12,
+      "name": "SOLDAT",
+      "evidence": "original_file_bytes"
+    },
+    {
+      "type_u8": 7,
+      "address": "0x0049670c",
+      "bytes": 50,
+      "hex": "7800060000000000640002004241544953534555520000000000000000000000000000000000000000000000000000000000",
+      "name_offset": 12,
+      "name": "BATISSEUR",
+      "evidence": "original_file_bytes"
+    },
+    {
+      "type_u8": 9,
+      "address": "0x00496770",
+      "bytes": 50,
+      "hex": "640002000000000064000200434f4c4f4e000000000000000000000000000000000000000000000000000000000000000000",
+      "name_offset": 12,
+      "name": "COLON",
+      "evidence": "original_file_bytes"
+    }
+  ],
+  "accepted_m1": {
+    "path": "pesquisas-paralelas/missoes/evidencias/captura-carga-missao-original-v2.json",
+    "sha256": "eb7d2303e13e62d4f5692c9cb6ef302b573d138df6a8b51183a6d9b0bd703afc",
+    "scenario": "MONDE01 new campaign original-v2",
+    "evidence": "accepted_original_reference_bytes_not_a_new_action_execution",
+    "conditions_address": "0x004e1d20",
+    "condition_records": [
+      {
+        "index": 0,
+        "address": "0x004e1d20",
+        "hex": "040003000000ffffffff",
+        "type_u8": 4,
+        "pad_u8": 0,
+        "parameters_u16": [
+          3,
+          0,
+          65535,
+          65535
+        ]
+      },
+      {
+        "index": 1,
+        "address": "0x004e1d2a",
+        "hex": "00003200ffffffffffff",
+        "type_u8": 0,
+        "pad_u8": 0,
+        "parameters_u16": [
+          50,
+          65535,
+          65535,
+          65535
+        ]
+      },
+      {
+        "index": 2,
+        "address": "0x004e1d34",
+        "hex": "01003200ffffffffffff",
+        "type_u8": 1,
+        "pad_u8": 0,
+        "parameters_u16": [
+          50,
+          65535,
+          65535,
+          65535
+        ]
+      },
+      {
+        "index": 3,
+        "address": "0x004e1d3e",
+        "hex": "ff00ffffffffffffffff",
+        "type_u8": 255,
+        "pad_u8": 0,
+        "parameters_u16": [
+          65535,
+          65535,
+          65535,
+          65535
+        ]
+      },
+      {
+        "index": 4,
+        "address": "0x004e1d48",
+        "hex": "ff00ffffffffffffffff",
+        "type_u8": 255,
+        "pad_u8": 0,
+        "parameters_u16": [
+          65535,
+          65535,
+          65535,
+          65535
+        ]
+      },
+      {
+        "index": 5,
+        "address": "0x004e1d52",
+        "hex": "ff00ffffffffffffffff",
+        "type_u8": 255,
+        "pad_u8": 0,
+        "parameters_u16": [
+          65535,
+          65535,
+          65535,
+          65535
+        ]
+      },
+      {
+        "index": 6,
+        "address": "0x004e1d5c",
+        "hex": "ff00ffffffffffffffff",
+        "type_u8": 255,
+        "pad_u8": 0,
+        "parameters_u16": [
+          65535,
+          65535,
+          65535,
+          65535
+        ]
+      },
+      {
+        "index": 7,
+        "address": "0x004e1d66",
+        "hex": "ff00ffffffffffffffff",
+        "type_u8": 255,
+        "pad_u8": 0,
+        "parameters_u16": [
+          65535,
+          65535,
+          65535,
+          65535
+        ]
+      },
+      {
+        "index": 8,
+        "address": "0x004e1d70",
+        "hex": "ff00ffffffffffffffff",
+        "type_u8": 255,
+        "pad_u8": 0,
+        "parameters_u16": [
+          65535,
+          65535,
+          65535,
+          65535
+        ]
+      },
+      {
+        "index": 9,
+        "address": "0x004e1d7a",
+        "hex": "01003200ffffffffffff",
+        "type_u8": 1,
+        "pad_u8": 0,
+        "parameters_u16": [
+          50,
+          65535,
+          65535,
+          65535
+        ]
+      }
+    ],
+    "word_0x4e1a3a_hex": "ffff",
+    "unit_pool_pointer": "0x4140d000",
+    "initial_roster_first_16": [
+      {
+        "index": 0,
+        "address": "0x4140d000",
+        "owner_u8": 0,
+        "type_u8": 0,
+        "state_u8": 7,
+        "header_hex": "000007"
+      },
+      {
+        "index": 1,
+        "address": "0x4140d114",
+        "owner_u8": 0,
+        "type_u8": 0,
+        "state_u8": 7,
+        "header_hex": "000007"
+      },
+      {
+        "index": 2,
+        "address": "0x4140d228",
+        "owner_u8": 0,
+        "type_u8": 0,
+        "state_u8": 7,
+        "header_hex": "000007"
+      },
+      {
+        "index": 3,
+        "address": "0x4140d33c",
+        "owner_u8": 0,
+        "type_u8": 9,
+        "state_u8": 14,
+        "header_hex": "00090e"
+      },
+      {
+        "index": 4,
+        "address": "0x4140d450",
+        "owner_u8": 0,
+        "type_u8": 9,
+        "state_u8": 14,
+        "header_hex": "00090e"
+      },
+      {
+        "index": 5,
+        "address": "0x4140d564",
+        "owner_u8": 0,
+        "type_u8": 9,
+        "state_u8": 14,
+        "header_hex": "00090e"
+      },
+      {
+        "index": 6,
+        "address": "0x4140d678",
+        "owner_u8": 0,
+        "type_u8": 9,
+        "state_u8": 14,
+        "header_hex": "00090e"
+      },
+      {
+        "index": 7,
+        "address": "0x4140d78c",
+        "owner_u8": 0,
+        "type_u8": 9,
+        "state_u8": 14,
+        "header_hex": "00090e"
+      },
+      {
+        "index": 8,
+        "address": "0x4140d8a0",
+        "owner_u8": 0,
+        "type_u8": 9,
+        "state_u8": 14,
+        "header_hex": "00090e"
+      },
+      {
+        "index": 9,
+        "address": "0x4140d9b4",
+        "owner_u8": 0,
+        "type_u8": 9,
+        "state_u8": 14,
+        "header_hex": "00090e"
+      },
+      {
+        "index": 10,
+        "address": "0x4140dac8",
+        "owner_u8": 0,
+        "type_u8": 9,
+        "state_u8": 14,
+        "header_hex": "00090e"
+      },
+      {
+        "index": 11,
+        "address": "0x4140dbdc",
+        "owner_u8": 0,
+        "type_u8": 1,
+        "state_u8": 7,
+        "header_hex": "000107"
+      },
+      {
+        "index": 12,
+        "address": "0x4140dcf0",
+        "owner_u8": 0,
+        "type_u8": 7,
+        "state_u8": 7,
+        "header_hex": "000707"
+      },
+      {
+        "index": 13,
+        "address": "0x4140de04",
+        "owner_u8": 0,
+        "type_u8": 5,
+        "state_u8": 7,
+        "header_hex": "000507"
+      },
+      {
+        "index": 14,
+        "address": "0x4140df18",
+        "owner_u8": 0,
+        "type_u8": 5,
+        "state_u8": 7,
+        "header_hex": "000507"
+      },
+      {
+        "index": 15,
+        "address": "0x4140e02c",
+        "owner_u8": 0,
+        "type_u8": 8,
+        "state_u8": 7,
+        "header_hex": "000807"
+      }
+    ]
+  },
+  "briefing": {
+    "path": "WORLD/MONDE01.TXT",
+    "sha256": "8df9ece7af27efd64357d52ef783a8ed40b6d36f428895a35358b1a3efdef712",
+    "role": "corroborating player-visible objective text only"
+  }
+}
