@@ -117,3 +117,21 @@ The writer's parts carry complete deltas, so the logic-only delta form in the br
    - requires the final allocation records to be equal in the last part.
 
 On the synthetic pack the result is `equal`, 257/257.
+
+## Combat's readiness matrix: AI/runtime gaps (round 3)
+
+Combat's matrix (`e3f0f8b`) reads main `99c0e4e`, which predates `ffa62fd`…`5b71905` on this branch.
+
+| Gap | Status on `feat/re-ai-runtime` |
+|---|---|
+| Battle-task kernels: B_TestGroupeVide, B_AttenteConflit, B_NewConflit, I_DetermineTempsTrajet, V_DeplaceGroupe, the three iagWar* kernels, iagUnitGet{First,Next}UnitInGroup | translated, validated against the native 9000 capture (6/6 calls), wired as `MaquinaTarefas` `operacoes` |
+| B_Superieur | Core's VM operation, checked against the captured call in `test_regras_incursao_ia` |
+| Task poster (interface a) | StockeAction posts through Core's raid-validated `incursao_core.postar_tarefa`; iaSolver's own child tasks stay in Core's VM |
+| iaSolver world operations (interface b) | the VM gets `operacoes=operacoes_regras(mm, p)`, `mundo=MundoRegras(mm, p)` (V_DeplaceGroupe; other unit operations are named stops) and `missao` from `0x496fe4` |
+| **EnginNextEtape state 2 and the owner-4 prelude** | capture `6fe01d2`: the raid unit's 12 calls at counters 9000–9011. Translation `26ecd4a`: short of its target cell (`+0x7e` ≠ `+8`) it calls DeplaceEngin (Core) and exits; arrival stops at `0x4563e8`. `test_proxima_etapa_incursao_ia` finds all 12 equal: prelude (reload gate, GetBit gates, CalculFatigue, SetEnginCollision), the 9008 scan, and state 2 |
+| CalculBatimentNextEtape at counter % 1000 | confirmed: the branch (`0x4281e5`) stores 0 to `0x4dfb9b` and does nothing else. Frame 0 runs it at counter 0, inside the proven M2.2 window |
+
+**Still Core's:**
+- DeplaceEngin and the movement routines;
+- SetDeplaceEngin and EnginEstVivant (V_DeplaceGroupe);
+- GetFreeCell's native stack-residue contract.
