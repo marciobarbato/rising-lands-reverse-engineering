@@ -47,7 +47,7 @@
 00467d36: pop      esi
 00467d37: pop      ecx
 00467d38: pop      ebx
-00467d39: ret      
+00467d39: ret
 
 ; BCDToInt sha256 70017bfced23d7152b038f9ff2cc56de712aa3fe7b1bfa6dcf30a05ef28101bf
 00467d3a: push     ebx
@@ -75,4 +75,4 @@
 00467d6d: pop      esi
 00467d6e: pop      ecx
 00467d6f: pop      ebx
-00467d70: ret      
+00467d70: ret
