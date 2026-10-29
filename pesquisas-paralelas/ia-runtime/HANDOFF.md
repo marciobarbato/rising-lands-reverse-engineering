@@ -209,3 +209,22 @@ Branch `feat/re-ai-runtime`, merged with main `81ebbf9` (fast-forward). The inta
 - **Combat**: EnginTrouveCible (→ PlayerEstAllie) is reached for unit 0 at frame counter 0, and ProjectileCalcul is reached every frame.
 
 **Statuses:** implemented: loops, IATestUtilite and the frame skeleton. Original-validated: yes, at the M1 post-load input (23/23 hybrid, 17/17 local IATestUtilite, 8/8 Stage 1 frame captures). Integrated: no (the coordinator integrates). Tested at the exact frame-1 input: no (waits for Missions).
+
+
+## M2.1 round 2 — first-frame composition (2026-10-28)
+
+Merged main `ec931d2`. The report is [FRAME1_COMPARISON.md](FRAME1_COMPARISON.md).
+
+- **Commits:**
+  - `3b4d227`: isolated original captures at the exact frame-0/1 inputs (before translation).
+  - The composition, translations and comparator commit, followed by the report/docs commits (see git log).
+- **API:**
+  - `composicao_quadro1_ia.fase_cauda_carga`, `fase_entre_quadros` and `fase_quadro`. Inputs: a `MapaMemoriaM1` and its providers, a `ContextoQuadro` (Core task machine + original jump tables), a `Registro` for bindings/boundaries, and the declared Windows answers.
+  - `rotinas_quadro_ia.calcular_caixa_mensagens`, `processar_entrada`, `avancar_monstros` and `resolver_ia`, over a `MemoriaDeclarada`. `REGIOES_ROTINAS` plus the dynamic regions (unit pool, input records) must be declared.
+- **Validation:** native composition compare: (a) stop equal at RestoreAll, (b) full equality, (c) stop equal at InputGame. The isolated differential is 22/24 equal; 2 are structure-loop provider stops. Missions' path reproduction passed in both native runs. The local suite has a sparse-read regression on the isolated captures.
+- **Gaps:**
+  - The owners of InputGame/InputSend and of RestoreAll/SetClipping/MenuInit/InitGameZone (coordinator).
+  - The EnginNextEtape prelude (this front, next).
+  - iaSolver beyond the empty context, which goes through a bridge into Core's private machine (a Core contract is requested).
+  - The AffGame write set (graphics, open item).
+- `validacao/m2-despachantes-native.json` (slice 1) predates the lazy-read change in CalculNextReflect. The behavior is unchanged, and the change is re-checked by the new native differential.

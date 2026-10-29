@@ -65,9 +65,19 @@ class Quadro:
         jogador, missao = jogador & 0xff, missao & 0xff
         self.chamadas.append(dict(sitio=0x42d35d, rotina='CalculNextReflect', jogador=jogador, missao=missao))
         contexto = 0x51a98c + 16 * jogador
-        estado = EstadoIA(inativo=m.u8(contexto + 4), ciclos_sem_efetivo=m.u8(contexto + 9)) if jogador < 4 else EstadoIA()
-        estruturas = m.u32(0x4dfaa8 + 4 * jogador) if jogador < 4 else 0
-        unidades = m.u16(0x4e1928 + 2 * jogador) if jogador < 4 else 0
+        # Reads in the original order, and only where the original reads: player 4 reads none of
+        # these (0x47f939); an inactive player reads only its inactive byte (0x47f96c); the
+        # unit counter is read only when the structure counter is 0, and the empty-cycle byte
+        # only when both are 0 (0x47f998). atualizar_ia does not consume the values it skips.
+        estado, estruturas, unidades = EstadoIA(), 0, 0
+        if jogador < 4:
+            estado.inativo = m.u8(contexto + 4)
+            if not estado.inativo:
+                estruturas = m.u32(0x4dfaa8 + 4 * jogador)
+                if estruturas == 0:
+                    unidades = m.u16(0x4e1928 + 2 * jogador)
+                    if unidades == 0:
+                        estado.ciclos_sem_efetivo = m.u8(contexto + 9)
 
         def kernel(endereco, *valores):
             if endereco == 0x47d314:
