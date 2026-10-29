@@ -598,3 +598,7 @@ Individual `validar_x86.py`, `validar_trabalhadores.py`, `validar_composicao.py`
 The original private reference snapshot is commit `1c8ebdd43b0a820652b7cb852ae1fe218d4dea5e`. Keep that snapshot and its manifest immutable. Predecessor-source hashes in `evidencias/proveniencia-v6.json` deliberately refer to historical implementations. Current research must append provenance instead of rewriting old claims.
 
 Next: remaining building render mappings, workshop-trigger gate terrain, general building tails and original scene render-order callers. The gate facade and supported full-return path are bounded indexed composition scenarios; they do not implement physical gate effects, establish economic semantics, or integrate the older macOS preview.
+
+## Static M1 render (optional)
+
+See `pesquisas-paralelas/graficos-animacao/RENDER_M1_ESTATICO.md`: terrain/vegetation render of the accepted MONDE01 M1 state; the Santuario facade stops at `0x407DEF` (structure occupancy, not reconstructed).
