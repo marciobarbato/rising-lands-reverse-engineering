@@ -253,10 +253,12 @@ def calcular_fadiga(memoria, eax, bonus):
     economy's BonusGetValEngin 0x428cc0 (called with AL=owner, BL=type, DL=0).
 
     Translated: +0x72 == 0 returns; types 11..17 return AL 1; otherwise the
-    threshold u16 [0x4965dc+50*type] + u8 +0xf8 + bonus is compared with the
-    incremented u16 counter +0x74, which is stored while it stays below. When
-    the counter reaches the threshold (provisions/bag/death/sound, 0x452d61)
-    DependenciaRamoCore is raised before the counter store. Only EAX changes.
+    incremented u16 counter +0x74 is stored, then compared with the threshold
+    u16 [0x4965dc+50*type] + u8 +0xf8 + bonus (EAX = bonus while below). At the
+    threshold with provisions u16 +4 left (0x452ee5): +0x74 = 0, +4 - 1, EAX =
+    the provisions before. With no provisions the hunger branch (local-player
+    sound, Bag, life, death; 0x452d6f) raises DependenciaRamoCore after the
+    counter store. Only EAX changes.
     """
     indice = eax & 0xffff
     registro = (memoria.u32(PONTEIRO_UNIDADES) + indice * PASSO) & M32
@@ -271,10 +273,15 @@ def calcular_fadiga(memoria, eax, bonus):
     valor = bonus(memoria.u8(registro), tipo, 0) & M32
     limite = (memoria.u16(LIMITE_FADIGA + 50 * tipo) + memoria.u8(registro + 0xf8) + valor) & 0xffff
     contador = (memoria.u16(registro + 0x74) + 1) & 0xffff
-    if limite <= contador:
-        raise DependenciaRamoCore('CalculFatigue', 0x452d61, 'fatigue threshold reached: branch not translated')
-    memoria.u16(registro + 0x74, contador)
-    return dict(EAX=valor)
+    memoria.u16(registro + 0x74, contador)          # 0x452d54: stored before the comparison
+    if limite > contador:
+        return dict(EAX=valor)
+    provisoes = memoria.u16(registro + 4)
+    if not provisoes:
+        raise DependenciaRamoCore('CalculFatigue', 0x452d6f, 'hunger with no provisions (sound, Bag, life, death)')
+    memoria.u16(registro + 0x74, 0)                 # 0x452ee5: one provision consumed
+    memoria.u16(registro + 4, provisoes - 1)
+    return dict(EAX=provisoes)
 
 
 # ------------------------------------------------------------------ frame counter and world RNG

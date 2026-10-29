@@ -592,3 +592,16 @@ The contract is in [RAID_CORE](RAID_CORE.md#movement-and-pathfinding-after-the-s
 - **M2.2 proof:** `provar_quadros_ia.py`, Python only, 63 s. All 257 of 257 phases equal (128 frames), 0 crossings writing compared bytes, HUD flag equal.
 - **9000–9200 native differential:** 0 mismatches. That is 251 snapshot-world, 261 live-world and 135 flat comparisons; the only stops are the snapshot binding's denied solver.
 - **Gate:** 502 tests, OK.
+
+### M2.3 follow-ups past the window: fatigue threshold and the 9700 divergence
+
+- **CalculFatigue at the threshold.** The original stores the incremented counter +0x74 before comparing it, and the translation now does the same. At the threshold with provisions u16 +4 left (`0x452ee5`): +0x74 = 0, +4 − 1, EAX = the provisions before. With no provisions, the hunger branch (sound, Bag, life, death) raises `DependenciaRamoCore` at `0x452d6f`, after the counter store.
+  - Native check, windowed run over counters 10860–10900 (`relatorios/movimento-incursao-janelas-emulada.json`): 865 CalculFatigue comparisons, 0 mismatches. That includes unit 16's threshold at counter 10879: +4 4→3, +0x74 0x0bb7→0, EAX = 4.
+  - This removes ai-runtime's stop near 10880.
+- **Known divergence at 9700** (outside the M2.3 window; the cause is ai-runtime's dispatcher, not Core):
+  - Natively, unit 16 is idle (state 7) at `0x2820` from 9504. EnginNextEtape's own state-7 body turns it twice, +0x90/+0x91 3→4 at counter 9573 and 4→5 at 9591, without entering any Core routine.
+  - At 9700 the order is V_DeplaceGroupe → EnginEstVivant → SetDeplaceEngin → ResetOrdre, then the unit's EnginNextEtape → DeplaceEngin in the same frame. DeplaceEngin turns it 5→15/5→4 and reserves `0x291f`.
+  - ai-runtime's Python enters 9700 with 4/4. From there the turn completes one frame sooner, so the unit is one step ahead.
+  - Every Core call in 9500–9699 and 9699–9703 matches the original at its own entry state: 0 mismatches over 1,823 live and 5,404 flat comparisons.
+- **Validator tools:** `--janelas` (isolate and compare only inside counter windows), `--ordem` (native call order, with unit 16's key fields and changes), `--rotinas-extra`.
+- **Open:** the flat `Chemin_ModifieZone` mode 0 (removal) is not translated. These windows reach it through ResetEnginCollision; the chain uses the world model's `ocupar` instead.
