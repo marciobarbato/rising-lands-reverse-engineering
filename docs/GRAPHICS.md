@@ -602,3 +602,7 @@ Next: remaining building render mappings, workshop-trigger gate terrain, general
 ## Static M1 render (optional)
 
 See `pesquisas-paralelas/graficos-animacao/RENDER_M1_ESTATICO.md`: terrain/vegetation render of the accepted MONDE01 M1 state; the Santuario facade stops at `0x407DEF` (structure occupancy, not reconstructed).
+
+## AffGame write set between frames (M2 dependency)
+
+See `pesquisas-paralelas/graficos-animacao/ESCRITAS_AFFGAME_ENTRE_QUADROS.md`: static closure plus native M1 capture; verdict per address (the shared RNG cursor `0x4e1d18` is the only one with state-dependent writes).
