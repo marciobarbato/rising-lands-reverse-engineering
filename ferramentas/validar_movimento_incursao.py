@@ -13,6 +13,8 @@ The mapping is ``ADAPTADORES``. Exceptions are recorded and never ignored:
 - any other exception is a mismatch.
 Routines with a flat translation (``incursao_core.traducao_core``) are also compared, with
 registers EAX..EBP, over copies of the same entry blocks. Routines with neither are listed as gaps.
+The world adapters also run on ``mundo_vivo.mundo_vivo`` (the world bound live to a flat memory)
+over copies of the entry blocks, and are compared in the same way.
 
     python3 -B ferramentas/validar_movimento_incursao.py --quadros 12 --por-rotina 4
 """
@@ -51,7 +53,7 @@ def _adaptadores():
         'EnginNextCaseChemin': lambda w, r: w.escolher_da_rota(u16(r, 'EAX')) and {},
         'AvanceEngin': lambda w, r: w.avancar_passo(u16(r, 'EAX')) and {},
         'CalculNextCase': lambda w, r: w.calcular_proxima_celula(u16(r, 'EAX')) or {},
-        'DeplaceEngin': lambda w, r: w.atualizar_movimento(u16(r, 'EAX'), animacao=True) and {},
+        'DeplaceEngin': lambda w, r: w.deslocar(u16(r, 'EAX')) or {},
     }
 
 
@@ -68,6 +70,7 @@ def main():
     from mapa_memoria_m1 import MapaMemoriaM1
     from memoria_quadro_core import MemoriaQuadro
     from incursao_core import traducao_core
+    from mundo_vivo import mundo_vivo
     from integracao.providers import load_economy_bonus
     ap = argparse.ArgumentParser()
     ap.add_argument('--quadros', type=int, default=201)
@@ -76,7 +79,8 @@ def main():
     a = ap.parse_args()
     saida = RAIZ / (a.saida or 'relatorios/movimento-incursao-mundo-emulada.json')
     adaptadores = _adaptadores()
-    registro = dict(comparisons=0, by_routine={}, flat_comparisons=0, flat_by_routine={}, mismatches=[],
+    registro = dict(comparisons=0, by_routine={}, flat_comparisons=0, flat_by_routine={}, live_comparisons=0,
+                    live_by_routine={}, mismatches=[],
                     dependencies=[], isolated={},
                     gaps=sorted(n for n in cm.ROTINAS if n not in adaptadores and traducao_core(n) is None))
     classe = load_economy_bonus().BonusUnidades
@@ -115,10 +119,41 @@ def main():
                                                native_registers={k: hex(nativo[k]) for k in REGISTROS},
                                                python_changed=mudancas[:24], native_changed=nativas[:24]))
 
+    def vivo(nome, caso, antes, resultado):
+        """The world adapter on ``mundo_vivo`` over copies of the entry blocks (the live binding)."""
+        entrada = {k: int(v, 16) for k, v in resultado['entry_registers'].items()}
+        chave = dict(routine=nome, entry=resultado['entry_registers'], kind='live')
+        copias = {n: (b, bytearray(d)) for n, (b, d) in antes.items()}
+        try:
+            partes = adaptadores[nome](mundo_vivo(MemoriaQuadro(copias.values())), entrada) or {}
+        except NotImplementedError as e:
+            registro['dependencies'].append(dict(chave, reason=f'{type(e).__name__}: {e}'))
+            return
+        except Exception as e:      # recorded as a failing comparison, never ignored
+            registro['mismatches'].append(dict(chave, python_error=f'{type(e).__name__}: {e}'))
+            return
+        mudancas = []
+        for n, (base, dados) in copias.items():
+            if n != 'native_stack' and dados != antes[n][1]:
+                velho = antes[n][1]
+                mudancas += [[hex(base + i), velho[i], dados[i]] for i in range(len(dados)) if dados[i] != velho[i]]
+        mudancas.sort(key=lambda x: int(x[0], 16))
+        nativas = sorted(resultado['changed_bytes'], key=lambda x: int(x[0], 16))
+        saida_nativa = int(resultado['exit_registers']['EAX'], 16)
+        retorno_ok = all((saida_nativa & PARTES[k][0]) == (v & PARTES[k][0]) for k, v in partes.items())
+        registro['live_comparisons'] += 1
+        registro['live_by_routine'][nome] = registro['live_by_routine'].get(nome, 0) + 1
+        if mudancas != nativas or not retorno_ok:
+            registro['mismatches'].append(dict(chave, python_return={k: hex(v) for k, v in partes.items()},
+                                               native_eax=hex(saida_nativa), python_changed=mudancas[:24],
+                                               native_changed=nativas[:24]))
+
     def observador(nome, caso, antes, resultado):
         registro['isolated'][nome] = registro['isolated'].get(nome, 0) + 1
         if traducao_core(nome) is not None and registro['flat_by_routine'].get(nome, 0) < a.por_rotina:
             plano(nome, caso, antes, resultado)
+        if nome in adaptadores and registro['live_by_routine'].get(nome, 0) < a.por_rotina:
+            vivo(nome, caso, antes, resultado)
         if nome not in adaptadores or registro['by_routine'].get(nome, 0) + sum(
                 1 for d in registro['dependencies'] if d['routine'] == nome) >= a.por_rotina:
             return
@@ -170,6 +205,7 @@ def main():
         json.dump(registro, f, indent=1, sort_keys=True)
         f.write('\n')
     print(json.dumps({k: registro[k] for k in ('comparisons', 'by_routine', 'flat_comparisons', 'flat_by_routine',
+                                               'live_comparisons', 'live_by_routine',
                                                'gaps', 'seconds')}
                      | dict(mismatches=len(registro['mismatches']), dependencies=len(registro['dependencies']),
                             output=str(saida)), indent=1))

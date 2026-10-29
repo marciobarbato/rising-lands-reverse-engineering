@@ -244,6 +244,20 @@ class MundoNavegacao(MundoFisico):
         if pode_avancar(u[p + 0x90], u[p + 0x91]):
             self.avancar_passo(indice)
 
+    def deslocar(self, indice):
+        """DeplaceEngin 0x44930c: the path-state switch on +0x88 (table 0x4492f0).
+
+        States 0 and 5, and 3 with a pending offset, run CalculNextCase (``calcular_proxima_celula``);
+        1, 3, 4 and 6 are ``atualizar_estado_caminho`` (3/4 need the path solver); 2 and above 6 do nothing.
+        """
+        p = indice * 276
+        u = self.unidades
+        estado = u[p + 0x88]
+        if estado in (0, 5) or (estado == 3 and (u[p + 0x86] or u[p + 0x87])):
+            self.calcular_proxima_celula(indice)
+        elif estado in (1, 3, 4, 6):
+            self.atualizar_estado_caminho(indice)
+
     def atualizar_movimento(self, indice, maquina=None, animacao=False):
         """DeplaceEngin's movement for state 2. With ``animacao=True`` it also runs CalculNextCase's walk
         animation and the local-player sound test (0x448fc3..0x4490fd); the default keeps the declared

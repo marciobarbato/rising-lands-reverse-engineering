@@ -101,3 +101,22 @@ class ReplayMovimento(unittest.TestCase):
                 vistos[c['routine']] = vistos.get(c['routine'], 0) + 1
         self.assertEqual(set(vistos), {'SetEnginCollision', 'SetCollision', 'Chemin_ModifieZone', 'TerrainEnCollision',
                                        'ResetCollision', 'memset'})
+
+
+class ProvedoresMovimento(unittest.TestCase):
+    def test_movement_providers_are_exported_with_keywords(self):
+        from chamadas_quadro_core import provedores_core
+        p = provedores_core(None, None)
+        for nome in ('SetDeplaceEngin', 'ResetOrdre', 'DeplaceEngin', 'CalculNextCase', 'AvanceEngin', 'RotateEngin',
+                     'EnginNextCase', 'EnginNextCaseChemin', 'ResetEnginCollision', 'EnginEstVivant', 'EnginOccupeCase',
+                     'EnginPeutPasser', 'ChercheIndiceEngin', 'CalculDirection', 'CalculDirCase', 'Distance2d'):
+            self.assertIn(nome, p)
+        self.assertEqual(p['CalculDirection'](sitio=0, origem=0x3e3e, destino=0x2e03) & 0xff, 3)
+        self.assertEqual(p['Distance2d'](sitio=0, x1=3, y1=4, x2=0, y2=0), 25)
+
+    def test_world_state_without_an_address_raises(self):
+        from mundo_vivo import EstadoSemEndereco, MundoNavegacaoVivo
+        w = MundoNavegacaoVivo.__new__(MundoNavegacaoVivo)
+        for nome in ('solucionador', 'resultados_busca', 'historico_navegacao'):
+            with self.assertRaises(EstadoSemEndereco):
+                getattr(w, nome)

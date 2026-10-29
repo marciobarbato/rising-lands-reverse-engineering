@@ -859,6 +859,49 @@ def _provedores_incursao(memoria, bonus):
         'iaProbNew': lambda sitio, tipo: ic.tarefa_nova(m, tipo)['EAX'],
         'listNewElem': lambda sitio, lista: ic.lista_novo_elemento(m, lista)['EAX'],
         'listLinkElemToTail': lambda sitio, lista, elemento: ic.lista_ligar_ao_fim(m, lista, elemento)['EAX'],
+        **_provedores_movimento(memoria),
+    }
+
+
+def _provedores_movimento(memoria):
+    """Movement and orders over Core's navigation world bound live to ``memoria`` (``mundo_vivo``), built on
+    first use. They return the part the native differential validates (AL/AX/EAX as noted in RAID_CORE.md);
+    routines whose callers use no result return None."""
+    from movimento import celula_vizinha, direcao_entre_celulas, distancia_quadratica
+    from passagem_unidades import consultar_passagem, ocupa_celula, procurar_ocupante
+    estado = {}
+
+    def w():
+        if 'mundo' not in estado:
+            from mundo_vivo import mundo_vivo
+            estado['mundo'] = mundo_vivo(memoria)
+        return estado['mundo']
+
+    def nada(f):
+        def provedor(sitio, **argumentos):
+            f(**argumentos)
+        return provedor
+
+    return {
+        'SetDeplaceEngin': nada(lambda unidade, destino: w().definir_movimento(unidade & 0xffff, destino)),
+        'ResetOrdre': nada(lambda unidade: w().redefinir_ordem(unidade & 0xffff)),
+        'DeplaceEngin': nada(lambda unidade: w().deslocar(unidade & 0xffff)),
+        'CalculNextCase': nada(lambda unidade: w().calcular_proxima_celula(unidade & 0xffff)),
+        'AvanceEngin': nada(lambda unidade: w().avancar_passo(unidade & 0xffff)),
+        'RotateEngin': nada(lambda unidade: w().girar(unidade & 0xffff)),
+        'EnginNextCase': nada(lambda unidade: w().escolher_direto(unidade & 0xffff)),
+        'EnginNextCaseChemin': nada(lambda unidade: w().escolher_da_rota(unidade & 0xffff)),
+        'ResetEnginCollision': nada(lambda unidade, caso: w().ocupar(unidade & 0xffff, caso & 0xffff, False)),
+        'EnginEstVivant': lambda sitio, unidade: int(w().viva(unidade & 0xffff)),
+        'EnginOccupeCase': lambda sitio, unidade, caso, mascara: int(ocupa_celula(w(), unidade & 0xffff,
+                                                                                 caso & 0xffff, mascara & 0xff)),
+        'EnginPeutPasser': lambda sitio, unidade, caso, mascara: int(consultar_passagem(
+            w(), unidade & 0xffff, caso & 0xffff, mascara & 0xff)[0]),
+        'ChercheIndiceEngin': lambda sitio, caso: procurar_ocupante(w(), caso & 0xffff),
+        'CalculDirection': lambda sitio, origem, destino: direcao_entre_celulas(origem & 0xffff, destino & 0xffff),
+        'CalculDirCase': lambda sitio, caso, direcao: celula_vizinha(caso & 0xffff, direcao & 0xff, w().largura,
+                                                                      w().altura),
+        'Distance2d': lambda sitio, x1, y1, x2, y2: distancia_quadratica(x1, y1, x2, y2),
     }
 
 

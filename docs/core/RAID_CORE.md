@@ -138,6 +138,23 @@ Routines with a flat translation (SetEnginCollision, SetCollision, Chemin_Modifi
 
 **Smoke over counters 9000–9004:** 0 mismatches and 0 dependency stops. That is 23 world-model comparisons and 11 flat ones.
 
+**Live world (`ferramentas/mundo_vivo.py`).** `mundo_vivo(memoria)` returns a `MundoNavegacao` whose buffers are live views of the flat memory, and whose scalars are properties at their original addresses. It uses the same addresses as Missions' `montar_provedores`, with no copy and no pull/push. World state with no original address raises `EstadoSemEndereco`: the Python solver hook, its result cache and trace, and `mascaras_alianca[4]`.
+- The validator also runs every world adapter on it and compares with the native result.
+- `MundoNavegacao.deslocar` is DeplaceEngin exactly: the +0x88 switch of table `0x4492f0`.
+
+**Live movement providers** (`provedores_core`, built on `mundo_vivo` at first use):
+- SetDeplaceEngin(`unidade`, `destino`);
+- ResetOrdre, DeplaceEngin, CalculNextCase, AvanceEngin, RotateEngin, EnginNextCase, EnginNextCaseChemin (`unidade`);
+- ResetEnginCollision(`unidade`, `caso`);
+- EnginEstVivant(`unidade`) → AL;
+- EnginOccupeCase / EnginPeutPasser(`unidade`, `caso`, `mascara`) → AL;
+- ChercheIndiceEngin(`caso`) → AX;
+- CalculDirection(`origem`, `destino`) → AL;
+- CalculDirCase(`caso`, `direcao`) → AX;
+- Distance2d(`x1`=AX, `y1`=DX, `x2`=BX, `y2`=CX) → EAX.
+
+The void routines return None.
+
 **Open gaps:**
 - The path-search internals (CheminCalcul, Chemin_Verouille, OptimiseChemin, TestLigneOptimise). The world model runs them through `SolucionadorCaminhosPython`, whose work buffers and route identifiers are not yet bound to the original globals: Missions' composition denies `solucionador`.
 - The EnginNextEtape dispatcher, which has no single world-model method.
