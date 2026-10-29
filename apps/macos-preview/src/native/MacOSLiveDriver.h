@@ -14,6 +14,7 @@ typedef struct {
  * No callback is used by the normal native UI. */
 typedef int32_t (*MacOSPhaseObserver)(void *,uint64_t,uint32_t,uint32_t);
 uint32_t macos_live_abi_version(void);
+uint32_t macos_live_engine_binding(void);
 uint32_t macos_live_status_size(void);
 MacOSLiveDriver *macos_live_create(const char *library,const char *inputs,char *error,uint32_t capacity);
 void macos_live_audit_window(MacOSLiveDriver *,uint32_t);

@@ -245,3 +245,41 @@ No PNG compression occurs on this path. `--png-output PATH` exports a final
 Graphics PNG for evidence, refusing overwrite; the immutable evidence inspector
 retains its PNG presentation for compatibility. Unsupported orders, display
 effects, clock/RNG semantics and Graphics 1.5 pixels are unchanged.
+
+## Current native live path — ABI 1.3 / app driver v1
+
+This section supersedes the Python-rendered live/v2 path above. The production
+UI intercepts live operations in Swift and never sends them to the Python
+worker, which explicitly refuses `NativeLivePathRequired`. Python remains the
+immutable evidence inspector and proof oracle. The inspector explicitly accepts
+Graphics 1.7 (native 128-frame pin `4448aeb44920d89b271e9af276477ee545fe797164b5b654e26c18a545d1a16c`);
+its optional `texto` callback stays absent. Rust retains Graphics 1.5 semantics.
+
+`macos_live_create` owns one actual ABI1.3 world/renderer and caller buffers.
+Only accepted S0 and four hash-checked original table inputs initialize world
+state. Prepared native files include the original initial surface/cache, nine
+verified assets, phase-entry inputs, layout/mask spans and original expected
+hashes. Expected hashes are comparisons only and never become world bytes.
+The runtime order is phase1; then repeatedly generation query → Rust render
+with HUD=1 → phase2 → phase3. The read-only render does not apply effects;
+phase2 owns them. Successful body phases increment the completed-frame count.
+
+The driver checks the first 257 states/11 checkpoints in production and every
+surface through 9200. Proof mode extends the identical full-state comparison
+to 18,401 phases, without a separate frame implementation. Callback hooks are
+proof observers only, not game providers. Cache/ordered-effect exports and
+Python rendering are compared in tests. Unknown paths latch the actual callee/
+address/reason; partial pixels remain actual prefixes. The native Metal view
+copies indexed/palette outputs into reusable textures/buffers, waits for GPU
+completion before reuse, and reports real presented-window throughput. No
+JSON pixels, PNG encoding, full Python projection or Python simulation runs
+in live play. GPU readback/PNG is an explicit evidence action only.
+
+The hardened Swift executable links the same Rust ABI and app C driver
+statically. This avoids loading an ad-hoc non-platform library into a hardened
+process and needs no weakened library-validation entitlement. The shared Rust
+library and dynamically bound driver remain in proof tooling; static and shared
+artifacts are built from the same pinned sources and recorded separately.
+All world/renderer/host-buffer access is serialized. Reset prepares a valid
+replacement before freeing the old handles. Native-window input orders remain
+unsupported; existing record/replay inspection scaffolding is separate.

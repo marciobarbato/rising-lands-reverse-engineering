@@ -24,6 +24,13 @@ struct MacOSLiveDriver {
  Entry *entries; Span *spans; uint32_t entry_count,span_count;
 };
 uint32_t macos_live_abi_version(void){return 1;}
+uint32_t macos_live_engine_binding(void){
+#ifdef MACOS_STATIC_ENGINE
+ return 1;
+#else
+ return 0;
+#endif
+}
 uint32_t macos_live_status_size(void){return sizeof(MacOSLiveStatus);}
 static uint64_t now(void){struct timespec t;clock_gettime(CLOCK_MONOTONIC,&t);return (uint64_t)t.tv_sec*1000000000+t.tv_nsec;}
 static uint32_t le(const uint8_t*p){return p[0]|((uint32_t)p[1]<<8)|((uint32_t)p[2]<<16)|((uint32_t)p[3]<<24);}
@@ -54,10 +61,16 @@ static int proof(MacOSLiveDriver*d,uint32_t index,uint32_t phase,MacOSPhaseObser
  if(observer&&observer(ctx,d->world,index,phase)){d->status.stopped=1;snprintf(d->status.message,sizeof(d->status.message),"PhaseObserverRejected %u",index);return 5;}
  d->status.proof_ns+=now()-t;return 0;
 }
+#ifdef MACOS_STATIC_ENGINE
+#define LOAD(name) do {d->name=&name;} while(0)
+#else
 #define LOAD(name) do { d->name=(__typeof__(d->name))dlsym(d->library,#name);if(!d->name){snprintf(error,capacity,"Missing ABI symbol %s",#name);goto bad;} } while(0)
+#endif
 MacOSLiveDriver *macos_live_create(const char*library,const char*root,char*error,uint32_t capacity){
  MacOSLiveDriver*d=calloc(1,sizeof(*d));if(!d)return NULL;d->status.phase_index=UINT32_MAX;
+#ifndef MACOS_STATIC_ENGINE
  d->library=dlopen(library,RTLD_NOW|RTLD_LOCAL);if(!d->library){snprintf(error,capacity,"%s",dlerror());goto bad;}
+#endif
  LOAD(rl_versao);LOAD(rl_criar_mundo);LOAD(rl_carregar_blocos);LOAD(rl_passo_quadro);LOAD(rl_liberar_mundo);LOAD(rl_projetar_tudo);LOAD(rl_erro_mensagem);
  LOAD(rl_render_criar);LOAD(rl_render_geracao);LOAD(rl_render_quadro);LOAD(rl_render_liberar);
  if(d->rl_versao()!=0x10003){snprintf(error,capacity,"ABI1.3 required");goto bad;}

@@ -206,35 +206,50 @@ inspection/playback runtime; whether it ships later remains undecided. Live fram
 
 ## Live no-input Rust session and input recording
 
-Open the inspection page, select **Abrir Rust ao vivo**, then advance the load
-tail and frames or select **Executar Rust**. Each frame runs Rust ABI 1.1,
-projects original-address memory into persistent Graphics views and renders through Graphics 1.5 with HUD. Live output uses a raw indexed canvas; PNG is retained for explicit evidence export and immutable playback.
-Through frame 128, masked state and full surface hashes must match accepted
-M2.2 before publication. Later frames carry explicit unverified-reference status.
-A named engine/Graphics stop pauses execution and remains visible. Reopening
-Rust resets to S0. The legacy evidence selectors still navigate immutable
-playback. The UI and all player-facing labels remain Brazilian Portuguese.
+Open the inspection page and select **Abrir Rust ao vivo**. The app opens a
+native **Rust e Metal** window. **Executar**, **Pausar**, **Avançar quadro** and
+**Reiniciar** control one serial ABI 1.3 world and renderer, initialized from
+accepted display-v2 S0 and original static tables. The native driver renders
+at the exact phase-1/3 generation before phase 2. Phase 2 alone applies display
+logic effects. Swift uploads original indexed pixels and RGB palette to
+reusable Metal resources and presents every completed frame. Python supplies
+only evidence inspection, asset/input preparation and proof oracles.
 
-Image mouse/key events are **record-only** and start no earlier than frame 129.
-The native save panel exports the raw event/poll journal. The Missions scripted
-export is an explicit dependency until its schema lands; unsupported orders
-are never sent to the engine. See [contract v6](../apps/macos-preview/M3_CONTRACT.md)
-for exact ownership, copying, ordering, mask, recorder and stop semantics.
+The live driver checks all 257 M2.2 masked state hashes and 11 checkpoints,
+plus original full-surface hashes through frame 9200. The full 18,401-state
+M2.3 audit uses the same stepping/render path in proof mode. Beyond the pinned
+window, surface verification is explicitly unavailable; execution continues
+to its first named engine/render stop. The driver latches the reason without
+replaying captured frames or inventing state. Reset creates valid replacement
+handles before releasing the previous world/renderer. Original-address reads
+are explicit diagnostics. The normal native no-input scenario injects no
+human orders. The prior recorder/export scaffolding remains an independent
+inspection feature; native gameplay input/orders are not implemented here.
 
-Builds require the hash-checked intact `INSTALHD/RISING.EXE` for four static
-jump tables, the relocatable Python runtime, assets and installed Rust toolchain.
-Cargo output goes to the ignored build target; `motor/` sources are untouched.
-The dylib is copied/signature-checked with the existing app packaging path.
+The Swift executable statically links the unchanged Rust C ABI and app driver,
+so existing hardened ad-hoc signing remains enabled without a library-validation
+exception. The shared library remains available to proof tooling and is hash-
+recorded separately. The builder compiles integrated `motor/` into its ignored
+target. While ABI 1.3 is pending main, an explicit development-only
+`RISING_MACOS_ENGINE_SOURCE` may select the clean approved engine checkout at
+363faa9; final integrated builds default to main's archived `motor/`.
+
+Python evidence inspection explicitly accepts Graphics **1.7**, with its new
+required regions and strict absent-text-provider stops. Rust ABI 1.3 retains
+the separately published **Graphics 1.5** render domain. No CAVE/glyph support
+or M3 orders are implied by the newer evidence inspector. The UI remains
+Brazilian Portuguese; immutable M1/M2 evidence APIs remain separately labeled.
 
 ## Renderer port input
 
-The app needs a **versioned C ABI**, callable directly from Swift, with no
+This input spec is implemented by engine **ABI 1.3** and consumed by the native app.
+The original requested interface follows for traceability. The app needs no
 Python projection or PNG work per displayed frame. At 25 fps the frame budget
 is 40 ms: target at most 12 ms logic, 22 ms rendering, 4 ms transfer/presentation
 and 2 ms headroom on the declared Apple Silicon host. Measure the whole
 fixed-step pipeline; these are budgets for implementation, not achieved rates.
 
-Proposed call shape (names are a request, not existing engine symbols):
+Original requested call shape (the published ABI header defines final layouts):
 
 ```c
 rl_render_criar(world, assets, initial_surface, initial_cache, &renderer);
@@ -289,6 +304,5 @@ checkpoints from the no-input world. Test the actual Swift output-buffer path,
 wrong sizes/generations, resets, named stops and palette changes. Swift should
 upload indexed pixels plus palette to a reusable Metal texture/shader (or a
 native RGBA surface), scaling only at presentation. PNG remains an explicit
-evidence export. The current indexed WebKit canvas transport is a temporary
-bridge and retains exact original pixels; it implements none of this proposed
-Rust renderer ABI.
+evidence export. The native live window now uses Rust indexed buffers and Metal. The indexed
+WebKit canvas and Python renderer remain diagnostic/evidence tools only.

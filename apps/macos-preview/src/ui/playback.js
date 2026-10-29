@@ -37,7 +37,7 @@ window.runSmokeTests=async()=>{
  $('live-step').click();await until(()=>image.phase==='load_tail'&&!$('live-step').disabled,'live load tail');
  $('live-step').click();await until(()=>image.phase==='frame1'&&!$('live-step').disabled,'live frame1');
  check('Rust native frame1 state and full native surface equal',image.verified_phases===3&&image.render.equals_native_phase_end===true&&!image.live_stop);
- check('Rust ABI 1.3 native Metal window shown',image.native_metal===true&&image.native_window_visible===true&&!image.render.frame&&!image.render.image);
+ check('Rust ABI 1.3 native Metal window shown',image.native_metal===true&&image.native_engine_binding==='static-abi13'&&image.native_window_visible===true&&!image.render.frame&&!image.render.image);
  $('live-play').click();
  await until(()=>image.phase_index>=800&&!image.live_stop,'native play reaches frame400');
  $('live-play').click();

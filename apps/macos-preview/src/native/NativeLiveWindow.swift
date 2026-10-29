@@ -144,7 +144,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
                 "summary_sha256":index>=0 && index<=256 ? sha:"", "summary_verified":s.stopped==0 && index>=0 && index<=256,
                 "checkpoint_verified":false,"verified_phases":s.phases_equal,"verified_checkpoints":s.checkpoints_equal,"verified_surfaces":s.surfaces_equal,
                 "observed":["counter":["address":"0x508f7c","bytes":4,"value":s.counter]],"blocks":0,"bytes":0,"memory":[],"input_policy":"record-only","live_stop":stop,
-                "native_metal":true,"native_running":running,"native_metrics":timing,
+                "native_metal":true,"native_engine_binding":macos_live_engine_binding()==1 ? "static-abi13":"dynamic-abi13","native_running":running,"native_metrics":timing,
                 "render":["status":s.disposition==2 ? "partial":s.frames==0 ? "undrawn":"full","hud":true,"version":[1,5],"backend":"Rust ABI 1.3 + Metal","equals_native_phase_end":equal,"native_phase_end_sha256":NSNull()]]
     }
     func deliver(_ completion:(([String:Any])->Void)?=nil){

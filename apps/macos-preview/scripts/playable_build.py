@@ -64,6 +64,14 @@ def main():
     legacy.run(['cargo','build','--release','--locked','--manifest-path',engine_source/'Cargo.toml',
                 '--target-dir',base/'build/engine-target'], 'rust-engine-build.log')
     library = base/'build/engine-target/release/librising_engine.dylib'
+    legacy.run(['cargo','rustc','--release','--locked','-p','rl-ffi','--lib','--crate-type','staticlib',
+                '--manifest-path',engine_source/'Cargo.toml','--target-dir',base/'build/engine-target'], 'rust-static-build.log')
+    static_library=base/'build/engine-target/release/librising_engine.a'
+    static_driver=base/'build/macos-live-static.o'
+    static_codec=base/'build/macos-codec-static.o'
+    for source,target,extra in [('macos_live_driver.c',static_driver,['-DMACOS_STATIC_ENGINE','-I',engine_source/'include']),('macos_projection_codec.c',static_codec,[])]:
+        legacy.run(['xcrun','clang','-O3','-c','-arch','arm64','-mmacosx-version-min=13.0','-Wno-deprecated-declarations',
+                    *extra,app_source/'src/native'/source,'-o',target], 'native-static-'+source+'.log')
     projection_library=base/'build/librising_macos_projection.dylib'
     legacy.run(['xcrun','clang','-O3','-dynamiclib','-arch','arm64','-mmacosx-version-min=13.0',
                 '-Wno-deprecated-declarations',app_source/'src/native/macos_projection_codec.c',
@@ -126,7 +134,7 @@ def main():
                 '-module-cache-path', base / 'build/module-cache', '-framework', 'AppKit', '-framework', 'WebKit',
                 '-framework','Metal','-framework','QuartzCore',
                 '-import-objc-header',app_source/'src/native/MacOSLiveDriver.h',
-                '-L',payload,'-lrising_macos_live','-Xlinker','-rpath','-Xlinker','@executable_path/../Resources/preview',
+                static_driver,static_codec,static_library,
                 app_source/'src/native/NativeLiveWindow.swift',app_source / 'src/native/SmokeReadiness.swift', app_source / 'src/native/main.swift', '-o', contents / 'MacOS/RisingLands-ptbr'], 'swift-build.log')
     for path in sorted((resources / 'Python').rglob('*.so')):
         legacy.run(['codesign', '--force', '--sign', '-', '--timestamp=none', path])
@@ -162,7 +170,7 @@ def main():
                 raise SystemExit('Native UI smoke failed: ' + json.dumps(result, ensure_ascii=False))
     report = {'commit': revision, 'mode': mode, 'features': manifest['features'], 'bundle': str(final),
               'uiSmoke': not args.skip_ui_smoke, 'logs': str(base / 'build/logs'),
-              'inputsRoot': str(args.workspace), 'engineSourceRevision':engine_revision, 'engineSourceRoot':str(engine_source), 'pythonRuntimeInput': os.environ.get('RISING_PYTHON_RUNTIME'),
+              'inputsRoot': str(args.workspace), 'engineSourceRevision':engine_revision, 'engineSourceRoot':str(engine_source), 'engineStaticArchiveSHA256':hashlib.sha256(static_library.read_bytes()).hexdigest(), 'nativeEngineBinding':'static-abi13', 'pythonRuntimeInput': os.environ.get('RISING_PYTHON_RUNTIME'),
               'inspectionSmoke': not args.skip_ui_smoke,
               'builtAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
               'files': [{'path': str(p.relative_to(final)), 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}

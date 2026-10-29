@@ -6,6 +6,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
     var window: NSWindow!
     var web: WKWebView!
     var nativeLive: NativeLiveWindow?
+    var horizonOutput: URL?
+    var horizonFinished=false
+    var horizonLastProgress=0.0
     var engine: Process?
     var input: FileHandle?
     var outPipe: Pipe?
@@ -55,6 +58,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         catch { fail("Não foi possível iniciar o Python incluído: \(error.localizedDescription)"); return }
         let page = resourceRoot.appendingPathComponent(args.contains("--inspection") ? "ui/playback.html" : "ui/index.html")
         web.loadFileURL(page, allowingReadAccessTo:resourceRoot)
+        if let index=args.firstIndex(of:"--native-horizon"),args.count>index+1 {
+            horizonOutput=URL(fileURLWithPath:args[index+1])
+            DispatchQueue.main.asyncAfter(deadline:.now()+1){[weak self] in self?.startNativeHorizon()}
+        }
         if smokeOutput != nil {
             smokeTimer = Timer.scheduledTimer(withTimeInterval:0.5,repeats:true) { [weak self] _ in
                 guard let self = self, !self.finishedSmoke else { return }
@@ -227,6 +234,39 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         ioQueue.async { [weak self] in
             do { try self?.input?.write(contentsOf:data + Data([10])) }
             catch { DispatchQueue.main.async { self?.fail("Falha na comunicação com o motor: \(error.localizedDescription)") } }
+        }
+    }
+    func startNativeHorizon() {
+        do {
+            nativeLive=try NativeLiveWindow(root:resourceRoot)
+            nativeLive?.update={ [weak self] value in
+                guard let self=self,!self.horizonFinished else{return}
+                if value["live_stop"] is [String:Any] {self.finishNativeHorizon(value);return}
+                let now=ProcessInfo.processInfo.systemUptime
+                if now-self.horizonLastProgress>2,let path=self.horizonOutput,let data=try? JSONSerialization.data(withJSONObject:value,options:[.sortedKeys]) {
+                    self.horizonLastProgress=now;try? data.write(to:path.appendingPathExtension("progress.json"),options:.atomic)
+                }
+            }
+            nativeLive?.work.async{[weak self] in guard let live=self?.nativeLive else{return};macos_live_audit_window(live.driver,18401)}
+            nativeLive?.perform("live-step"){[weak self] _ in self?.nativeLive?.perform("live-play",completion:nil)}
+            DispatchQueue.main.asyncAfter(deadline:.now()+1100){[weak self] in
+                guard let self=self,!self.horizonFinished else{return}
+                self.nativeLive?.perform("live-pause"){value in var value=value;value["horizon_pending"]=true;self.finishNativeHorizon(value)}
+            }
+        } catch {
+            if let path=horizonOutput,let data=try? JSONSerialization.data(withJSONObject:["passed":false,"error":error.localizedDescription]){try? data.write(to:path,options:.atomic)}
+            NSApp.terminate(nil)
+        }
+    }
+    func finishNativeHorizon(_ value:[String:Any]) {
+        guard !horizonFinished,let path=horizonOutput,let live=nativeLive else{return};horizonFinished=true
+        live.capture(path.deletingPathExtension().appendingPathExtension("metal.png")){[weak self] readback in
+            guard let self=self else{return};var result=value
+            result["commit"]=Bundle.main.object(forInfoDictionaryKey:"RisingLandsSourceCommit") as? String
+            result["native_window_visible"]=live.window.isVisible;result["metal_readback"]=readback
+            result["passed"]=(value["verified_phases"] as? UInt64 ?? 0)>=18401 && (value["verified_surfaces"] as? UInt64 ?? 0)>=9200 && value["live_stop"] is [String:Any] && readback["error"]==nil && live.window.isVisible
+            if let data=try? JSONSerialization.data(withJSONObject:result,options:[.prettyPrinted,.sortedKeys]){try? data.write(to:path,options:.atomic)}
+            NSApp.terminate(nil)
         }
     }
     func nativeReply(_ id:Any?,value:[String:Any]=[:],error:String?=nil) {
