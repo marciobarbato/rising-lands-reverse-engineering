@@ -621,13 +621,16 @@ See `pesquisas-paralelas/graficos-animacao/FRONTEIRAS_EXIBICAO.md`: `fronteiras_
 
 **Named stops (visible, not guessed).** `0x41591F`: the 16 M1 units have life word `+0x74` = 1 (< 100), which enables the tired/overlay branch of the unit body (`0x414320..0x414409`, `TypeEnginSeFatigue`) that no committed unit module covers; this is the first stop and all later sprite cells are absent. `0x408AC8`: modes 0, 1, 2, 6, 7, for which the original draws one common image different from the facade (identical across those five modes; captured natively, not reconstructed). `0x40892D`: uninhabited facade (gray effect). `0x40863E`: mode 3 uninhabited (advances the RNG cursor). `0x4022C8` / `0x4020EC`: selection frame / gauge of a selected structure. The raid unit (unit 16) on screen and the effect projectiles 31/32 were captured as logic-state-clean (see EFEITOS_LOGICOS_EXIBICAO.md) but their **pixel** composition is not reconstructed; the composition stops at the unit overlay before reaching them.
 
-**Render API, contract version 1.0** ([render_quadro.py](../pesquisas-paralelas/graficos-animacao/render_quadro.py)). This is the contract the macOS integration layer consumes. A change of any input, output field, format or stop semantics bumps `VERSAO_RENDER_QUADRO` (major for breaking changes, minor for additions); the version is returned in every result.
+**Render API, contract version 1.2** ([render_quadro.py](../pesquisas-paralelas/graficos-animacao/render_quadro.py)). This is the contract the macOS integration layer consumes. A change of any input, output field, format or stop semantics bumps `VERSAO_RENDER_QUADRO` (major for breaking changes, minor for additions); the version is returned in every result.
 
 ```python
-VERSAO_RENDER_QUADRO = (1, 0)
-renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=None, habitado=None, relogio=None) -> QuadroRenderizado
+VERSAO_RENDER_QUADRO = (1, 2)
+renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=None, habitado=None, relogio=None, cache=None) -> QuadroRenderizado
 regioes_necessarias(memoria) -> [(start, end_exclusive, name)]
-QuadroRenderizado(versao, largura, altura, pixels, rgba, parada, chamadas, efeitos)
+QuadroRenderizado(versao, largura, altura, pixels, rgba, parada, chamadas, efeitos, cache)
+EstadoCache(registros, blocos_crus, proximo)
+carregar_superficie_inicial(caminho) -> bytes
+carregar_cache_inicial(caminho, catalogo=None) -> EstadoCache
 ```
 
 *Inputs.*
@@ -637,7 +640,7 @@ QuadroRenderizado(versao, largura, altura, pixels, rgba, parada, chamadas, efeit
 - `relogio() -> int` (optional): GetTickCount; default the tick copy at `0x4E17B4`. `catalogo`/`paleta` (optional): asset catalog and a 768-byte palette; defaults are the local PLATGAME assets.
 
 *Outputs* (`QuadroRenderizado`, frozen).
-- `versao`: `(1, 0)`. `largura`, `altura`: 800, 600.
+- `versao`: `(1, 2)`. `largura`, `altura`: 800, 600.
 - `pixels`: 480,000 bytes, palette indices, row-major, origin top-left, pitch 800. The surface after the composed passes; pixels the composition did not reach keep `superficie_anterior`.
 - `rgba`: 1,920,000 bytes, 4 bytes per pixel (R, G, B, 255), same order as `pixels`; `rgba[4i:4i+3] = palette[3*pixels[i]:3*pixels[i]+3]`.
 - `parada`: `None` for a complete composition, otherwise `{'endereco': '0x........', 'detalhe': str}`: the first original branch the reconstruction does not cover. The frame is then **partial** (everything drawn before the stop is exact, everything after is absent); the consumer must show or log it, never treat it as complete.
@@ -647,6 +650,38 @@ QuadroRenderizado(versao, largura, altura, pixels, rgba, parada, chamadas, efeit
 
 *Supported domain.* Mode `[0x4E2F78] = 0x12` (in-game), 800×600 session (`[0x49A018] = 800`, window 25×17 cells), camera 0..3, terrain/vegetation/structure passes as captured. Frame cadence gates (`[0x4E05A2]`, divisor) can return an undrawn frame (`pixels == superficie_anterior`, stop at the cadence return). The HUD (from `0x417B1C`), the selection drag box, other game modes and the video-surface clear path are outside; they stop at their original address.
 
-*Named stops* (address → meaning). `0x4176A8` mode ≠ 0x12; `0x41794B` video-surface clear; `0x4179D4` lock returned NULL; `0x4179E1` saved-background restore; `0x41068E`/`0x416864` viewport outside the reconstructed terrain/sprite domain; `0x417AC8` selection drag box; `0x41591F` unit body outside its validated domain (including the life < 100 overlay); `0x46FF70` projectile outside its domain; `0x40863E`/`0x40892D`/`0x408AC8` structure mode 3 uninhabited / uninhabited facade / modes 0, 1, 2, 6, 7; `0x4087AA`/`0x40F378` habitation provider missing; `0x4022C8`/`0x4020EC` selection frame / gauge; `0x407EA7`/`0x407FB8`/`0x40288B`/`0x40F23B` wall, gate, workshop and other structure facades; `0x410085`/`0x415ACF`/`0x40FD95`/`0x45C72A` terrain object, vegetation, block and engine-ID outside the committed domain. The full list grows only by reconstructing a pass, never silently.
+*Named stops* (address → meaning). `0x4176A8` mode ≠ 0x12; `0x41794B` video-surface clear; `0x4179D4` lock returned NULL; `0x4179E1` saved-background restore; `0x41068E`/`0x416864` viewport outside the reconstructed terrain/sprite domain; `0x417AC8` selection drag box; `0x41591F` unit body outside its validated domain (type without a committed body: 1 and 8 in MONDE01; owner/overlay conditions of the validated body); `0x46FF70` projectile outside its domain; `0x40863E`/`0x40892D`/`0x408AC8` structure mode 3 uninhabited / uninhabited facade / modes 0, 1, 2, 6, 7; `0x4087AA`/`0x40F378` habitation provider missing; `0x4022C8`/`0x4020EC` selection frame / gauge; `0x407EA7`/`0x407FB8`/`0x40288B`/`0x40F23B` wall, gate, workshop and other structure facades; `0x410085`/`0x415ACF`/`0x40FD95`/`0x45C72A` terrain object, vegetation, block and engine-ID outside the committed domain. The full list grows only by reconstructing a pass, never silently.
 
 *Properties.* Pure function, no files after the catalog loads, no emulation, about 0.3 s per frame, deterministic. Verified against the original: [fixture and native pixels](../pesquisas-paralelas/graficos-animacao/evidencias/quadro-original-pixels-m1.json); all pixels above row 279 equal at the M1 post-load frame (terrain, vegetation, Santuário facade), first stop `0x41591F`.
+
+*Changelog.* **1.1** (additive, not breaking): the low-life tired icon of units is composed (tail `0x413568..0x413655` of the body routine: word `+4` = word `+0x76`, life `< 100`, `(life/5)` even, `TypeEnginSeFatigue` true → bob `word(+4) + 0x1E2B` drawn with the owner's player table at cell origin − (8, 11)), so the M1 frame no longer stops at unit 0: types 0, 5, 7 and 9 now match the original pixel for pixel. The first stop moves to `0x41591F` for unit 15 (type 8 has no committed body); type 1 (unit 11) is the next. Experience icon (`+0xBA ≠ 0`), a nonzero body shift with the icon, and owner ≥ 5 stop. **1.0**: initial contract.
+
+Native evidence for 1.1: [captura-cauda-engin-m1.json](../pesquisas-paralelas/graficos-animacao/evidencias/captura-cauda-engin-m1.json) (hooks on the tail inside the real AffGame run: per unit the gate values, TypeEnginSeFatigue's answer and the PastePlayerCmp arguments). With types 1 and 8 skipped, the Python frame differs from the original only inside those two units' footprints (2,080 pixels); every other pixel at the HUD checkpoint is equal.
+
+### Playback sequences (contract 1.2, additive)
+
+**What persists between frames.** Two things outside the live game state feed a frame: the surface AffGame draws over, and GetNumBob's terrain cache (a cache hit reuses its stored pixels even when lighting or discovery changed, so a sequence is exact only if the cache is carried). `renderizar_quadro` therefore takes `cache` (an `EstadoCache`, `None` = the cold cache) and returns the state after the frame in `QuadroRenderizado.cache`.
+
+**Chaining rule.** Render frame k over the `pixels` of frame k−1 and with the `cache` of frame k−1:
+
+```python
+pixels, cache = carregar_superficie_inicial(SUPERFICIE), carregar_cache_inicial(CACHE)
+for k, memoria_k in enumerate(memorias, 1):      # one live-memory view per drawing phase
+    q = renderizar_quadro(memoria_k, superficie_anterior=pixels, cache=cache, habitado=...)
+    pixels, cache = q.pixels, q.cache
+```
+
+Which phases draw: **AffGame in `between_frames(k)`** (the ProgIteration tail after CalculGame(k−1); `between_frames` is k = 1) and the `RestoreAll` of the load tail (before the sequence). `frame(k)` (CalculGame) and the window-loop remainder leave the surface unchanged: the original's surface hash is equal at the end of `between_frames(k)` and `frame(k)`. The memory view for AffGame(k) is the state at the entry of AffGame in `between_frames(k)`; the display-only bytes AffGame itself writes (fps, ticks, clip words) do not change the pixels. Not reproduced: everything AffGame draws after the HUD checkpoint `0x417B1C` (the bottom strip from row 544 and the cursor), so in a chain those pixels keep the initial surface's values, and a stop (`parada`) leaves the later sprite cells as they were.
+
+**Initial artifacts (M2.2 sequence start, -v2 display scenario).**
+- [superficie-inicial-m22-v2.json](../pesquisas-paralelas/graficos-animacao/evidencias/superficie-inicial-m22-v2.json): the original's 800×600 offscreen surface at the entry of AffGame in `between_frames`, after the load tail (RestoreAll and the MenuInit tail). SHA-256 `e8cb862d…2db76`, **equal to the surface hash Missions' capture records for the `load_tail` phase**; provenance (producing revision, source capture and its hash, command) inside. Load with `carregar_superficie_inicial`.
+- [cache-terreno-inicial-m22-v2.json](../pesquisas-paralelas/graficos-animacao/evidencias/cache-terreno-inicial-m22-v2.json): the terrain cache at the same instant (256 keys, cursor 76, the 76 payloads GetNumBob rewrote; the others are the bank's original payloads, hash-pinned). Load with `carregar_cache_inicial`.
+- Captured natively by [capturar_serie_quadros.py](../pesquisas-paralelas/graficos-animacao/capturar_serie_quadros.py) (about 2 min), committed before use.
+
+**Are the M2.2 capture's surface hashes usable?** [superficies-fase-m22-v2.json](../pesquisas-paralelas/graficos-animacao/evidencias/superficies-fase-m22-v2.json) extracts them (257 phases; pinned to the xz capture's SHA-256). They are SHA-256 of the **complete** surface at the end of each phase (primary equals offscreen after DDFlipPage). They witness the native run (my native phase-end surfaces equal them in all 12 frames checked) and are the right check for a *complete* render. They **cannot** validate the Python frame today: the render stops at the HUD checkpoint and has the type 1/8 stop, so its surface cannot equal a post-HUD hash. For the Python comparison use the native checkpoint surfaces in the verification below.
+
+**Verification** ([verificacao-cadeia-m22-v2.json](../pesquisas-paralelas/graficos-animacao/evidencias/verificacao-cadeia-m22-v2.json), frames 1..12, native run plus the chain above):
+- The native phase-end surface hash equals Missions' recorded hash in 12/12 frames; the cache carried by the chain equals the native cache at every frame entry (keys, cursor and payloads).
+- **First stop and first differing frame: frame 1**, `0x41591F` (unit 15, type 8, then type 1: no committed body). Frames 1–5 differ in the rows below the sprite cut (the view scrolls one cell per frame toward origin (0,0), so those units move down 32 pixels per frame).
+- From **frame 6** on (view origin (0,0), the two unreconstructed units are below the visible window) the composed rows 0..543 equal the original's checkpoint surface exactly when drawn over the native previous surface, and the chained render differs only in the bottom strip (rows ≥ 547: HUD, not composed).
+- So the chain is a faithful playfield render from frame 6 of this sequence; before that it is partial by the named stop.

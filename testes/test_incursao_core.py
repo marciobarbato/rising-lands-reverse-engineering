@@ -8,7 +8,9 @@ RAIZ = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(RAIZ / 'ferramentas'))
 sys.path.insert(0, str(RAIZ / 'testes'))
 CAPTURAS = sorted((RAIZ / 'evidencias/fundacoes-quadro').glob('captura-incursao-core-*.json'))
-NAO_ALCANCADAS = {'GetCaseIndiceBatiment'}
+# GetCaseIndiceBatiment: MONDE01 has no cave. TerrainEnCollision, ResetCollision and memset run in the
+# movement window after the spawn (captura-movimento-incursao, validar_movimento_incursao), not in it.
+NAO_ALCANCADAS = {'GetCaseIndiceBatiment', 'TerrainEnCollision', 'ResetCollision', 'memset'}
 REGISTROS = ('EAX', 'EBX', 'ECX', 'EDX', 'ESI', 'EDI', 'EBP')
 
 
@@ -63,3 +65,46 @@ class IncursaoCore(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+# ai-runtime keyword arguments of each raid provider, from the call's entry registers and stack words.
+ARGUMENTOS = {
+    'GetFreeCell': lambda r, p: dict(celula=r['EAX'], tipo=r['EDX']),
+    'CreerEngin': lambda r, p: dict(celula=r['EAX'], edx=r['EDX'], tipo=r['EBX'], jogador=r['ECX']),
+    'EnginSetPlayer': lambda r, p: dict(unidade=r['EAX'], jogador=r['EDX']),
+    'PlaceEngin': lambda r, p: dict(unidade=r['EAX']),
+    'SetMiniMap': lambda r, p: dict(jogador=r['EAX'], modo=r['EDX'], caso=r['EBX']),
+    'PlayerGetColor': lambda r, p: dict(jogador=r['EAX']),
+    'EnginGetCase': lambda r, p: dict(unidade=r['EAX']),
+    'GetRandCaseChamps': lambda r, p: {},
+    'GetRandCaseTypeBatPlayer': lambda r, p: dict(jogador=r['EAX'], tipo=r['EDX']),
+    'Chemin_Accessible': lambda r, p: dict(origem=r['EAX'], destino=r['EDX']),
+    'iaProbPost': lambda r, p: dict(jogador=r['EAX'], tipo=r['EDX'], ebx=r['EBX'], ecx=r['ECX'], pilha=p[:4]),
+}
+
+
+@unittest.skipUnless(CAPTURAS, 'No raid capture committed')
+class ProvedoresIncursao(unittest.TestCase):
+    """``provedores_core`` exports the raid routines with ai-runtime's keyword names; each returns the original
+    EAX (GetFreeCell: AX, the stack-free form) and makes the original stores."""
+    def test_keyword_providers_match_every_captured_call(self):
+        from chamadas_quadro_core import provedores_core
+        from integracao.providers import load_economy_bonus
+        from test_chamadas_quadro_core import MemoriaEsparsa, bonus_de, regs
+        classe = load_economy_bonus().BonusUnidades
+        vistos = set()
+        for nome_captura, c in chamadas():
+            if c['routine'] not in ARGUMENTOS:
+                continue
+            with self.subTest(capture=nome_captura, case=c['case'], index=c['index'], routine=c['routine']):
+                m = MemoriaEsparsa({int(a, 16): v for a, v, _ in c['read_before_write']}, 0)
+                entrada = regs(c['entry_registers'])
+                pilha = [int(x, 16) for x in c['stack_words']]
+                provedor = provedores_core(m, bonus_de(m, classe))[c['routine']]
+                eax = provedor(sitio=0, **ARGUMENTOS[c['routine']](entrada, pilha))
+                nativo = int(c['exit_registers']['EAX'], 16)
+                self.assertEqual(eax, nativo & 0xffff if c['routine'] == 'GetFreeCell' else nativo)
+                m.conferir(self, c['changed_bytes'])
+                vistos.add(c['routine'])
+        self.assertEqual(vistos, set(ARGUMENTOS) - {'SetMiniMap', 'PlayerGetColor'} | (vistos & {'SetMiniMap',
+                                                                                              'PlayerGetColor'}))

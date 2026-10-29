@@ -29,6 +29,7 @@ class SolucionadorCaminhosPython:
         self.escolhas_python = []
         self.otimizacoes_python = []
         self._resultado = None
+        self.ultimo_contorno = self.ultima_regiao_origem = None   # the last search that traced contours
 
     def iniciar(self, mundo, indice):
         contexto = ContextoLinha.da_unidade(mundo, indice)
@@ -48,6 +49,7 @@ class SolucionadorCaminhosPython:
             self.inicios_candidatos_python.append(dict(unidade=indice, obstaculo_proximo=dados.obstaculo_proximo,
                                                         todos_bloqueados=dados.todos_bloqueados, regioes=list(dados.regioes)))
             contorno = construir_contornos(contexto, dados, self.buffers, self.regioes, self.registros)
+            self.ultimo_contorno, self.ultima_regiao_origem = contorno, mundo.palavra(indice, 0xfa)
             self.buffers, self.regioes, self.registros = contorno.buffers, contorno.regioes, contorno.registros
             self.contornos_python.append(dict(unidade=indice, custos=list(contorno.custos),
                                               contagens=[struct.unpack_from('<H', b)[0] for b in contorno.buffers]))

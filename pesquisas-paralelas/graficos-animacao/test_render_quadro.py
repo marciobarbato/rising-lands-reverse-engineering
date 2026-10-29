@@ -50,7 +50,8 @@ class QuadroTest(unittest.TestCase):
 
     def test_api_matches_the_native_reference_up_to_the_first_unreconstructed_pass(self):
         q, _ = self.renderizar()
-        self.assertEqual(q.parada['endereco'], '0x0041591f')            # units with life < 100: overlay not reconstructed
+        self.assertEqual(q.parada['endereco'], '0x0041591f')            # first unit type without a committed body
+        self.assertIn('unit 15 type 8', q.parada['detalhe'])
         ref = self.fx.referencia
         dif = [i for i in range(len(ref)) if ref[i] != q.pixels[i]]
         self.assertTrue(dif and min(dif)//800 >= 279, (len(dif), min(dif)//800))   # terrain, vegetation and the facade equal
@@ -60,7 +61,7 @@ class QuadroTest(unittest.TestCase):
     def test_contract_shape(self):
         q, _ = self.renderizar()
         self.assertEqual((q.versao, q.largura, q.altura), (Q.VERSAO_RENDER_QUADRO, 800, 600))
-        self.assertEqual(Q.VERSAO_RENDER_QUADRO, (1, 0))
+        self.assertEqual(Q.VERSAO_RENDER_QUADRO, (1, 2))
         pal = Q.Catalogo().paleta()
         self.assertEqual(len(pal), 768)
         for i in (0, 4000, 123456, 479999):    # rgba = palette[index] expanded to RGB, alpha 255, row-major, origin top-left
@@ -69,6 +70,42 @@ class QuadroTest(unittest.TestCase):
         self.assertEqual(sorted(q.parada), ['detalhe', 'endereco'])
         with self.assertRaises(ValueError):
             Q.renderizar_quadro(Memoria(self.fx), superficie_anterior=b'\0'*10)
+
+    def test_units_with_the_tired_icon_equal_the_original_pixels(self):
+        # Types 1 and 8 have no committed body (skipped here); every other unit, with its low-life icon, must match.
+        import quadro_jogo as QJ
+        original = QJ._Composicao.engin
+        faltando = []
+
+        def engin(c, x, y, indice):
+            tipo = c.mundo.unidades[indice*276+1]
+            if tipo not in QJ.TIPOS:
+                faltando.append((indice, tipo, x, y)); return
+            return original(c, x, y, indice)
+        QJ._Composicao.engin = engin
+        try:
+            q, _ = self.renderizar()
+        finally:
+            QJ._Composicao.engin = original
+        self.assertIsNone(q.parada)
+        self.assertEqual(sorted(faltando), [(11, 1, 224, 480), (15, 8, 288, 416)])
+        ref = self.fx.referencia
+        dif = [i for i in range(len(ref)) if ref[i] != q.pixels[i]]
+        for i in dif:
+            x, y = i % 800, i//800
+            self.assertTrue(any(fx_-64 <= x < fx_+128 and fy_-128 <= y < fy_+64 for _, _, fx_, fy_ in faltando), (x, y))
+        self.assertEqual(len(dif), 2080)
+        icones = [c for c in q.chamadas if c[0] == 'EngineIconeFadiga']
+        self.assertEqual(len(icones), 6)             # units 0, 1, 2 (type 0), 13, 14 (type 5), 12 (type 7)
+
+    def test_tired_icon_native_capture(self):
+        d = json.loads((EVID/'captura-cauda-engin-m1.json').read_text())
+        nativos = [e for e in d['events'] if e['at'] == 'player_draw']
+        self.assertEqual(len(nativos), 8)            # six drawn types plus types 1 and 8
+        self.assertEqual({e['regs']['EBX'] for e in nativos}, {0x1e2f})     # word +4 (= 4) + 0x1E2B
+        self.assertTrue(all(e['unit']['life74'] == 1 and e['unit']['w4'] == e['unit']['w76'] for e in nativos))
+        self.assertEqual(sorted((e['regs']['EAX'], e['regs']['EDX']) for e in nativos if e['unit']['type'] in (0, 5, 7)),
+                         sorted([(88, 277), (152, 309), (248, 309), (312, 309), (408, 309), (120, 373)]))
 
     def test_api_reads_only(self):
         mem = Memoria(self.fx)
@@ -104,6 +141,44 @@ class QuadroTest(unittest.TestCase):
     def test_missing_habitation_provider_stops(self):
         q = Q.renderizar_quadro(Memoria(self.fx), superficie_anterior=self.fx.antes)
         self.assertEqual(q.parada['endereco'], '0x0040f378')   # first footprint cell reaches the tail query
+
+
+class SequenciaTest(unittest.TestCase):
+    def test_initial_artifacts_are_bound_to_missions_capture(self):
+        sup = json.loads((EVID/'superficie-inicial-m22-v2.json').read_text())
+        tabela = json.loads((EVID/'superficies-fase-m22-v2.json').read_text())
+        gravado = {p['phase']: p['offscreen'] for p in tabela['phases']}
+        pixels = Q.carregar_superficie_inicial(EVID/'superficie-inicial-m22-v2.json')
+        self.assertEqual(len(pixels), 480000)
+        self.assertEqual(sup['sha256'], gravado['load_tail'])          # equals the capture's recorded load-tail surface hash
+        self.assertEqual(sup['source_capture_sha256'], tabela['source_xz_sha256'])
+        cache = Q.carregar_cache_inicial(EVID/'cache-terreno-inicial-m22-v2.json')
+        self.assertEqual((len(cache.registros), len(cache.blocos_crus), cache.proximo), (1024, 256*1056, 76))
+
+    def test_fixture_frame1_entry_surface_is_the_initial_artifact(self):
+        fx = Fixture(FIXTURE)
+        self.assertEqual(fx.antes, Q.carregar_superficie_inicial(EVID/'superficie-inicial-m22-v2.json'))
+
+    def test_chain_verification_report(self):
+        d = json.loads((EVID/'verificacao-cadeia-m22-v2.json').read_text())
+        self.assertEqual(d['frames'], 12)
+        self.assertEqual(d['first_stop']['endereco'], '0x0041591f')
+        self.assertEqual(d['first_chained_difference_frame'], 1)
+        for r in d['rows']:
+            self.assertTrue(r['end_hash_equals_recorded'])          # native phase-end surface == Missions' recorded hash
+            self.assertTrue(r['chain_cache_equals_native_entry_cache'])   # the carried cache equals the native cache at every frame
+        for r in d['rows'][5:]:                                     # view scrolled out: only the bottom strip differs
+            self.assertEqual(r['over_native_previous']['pixels'], 0)
+            self.assertGreaterEqual(r['chained']['first_row'], 544)
+
+    def test_cache_state_is_carried(self):
+        fx = Fixture(FIXTURE)
+        q1 = Q.renderizar_quadro(Memoria(fx), superficie_anterior=fx.antes, habitado=lambda i: True)
+        self.assertEqual(len(q1.cache.registros), 1024)
+        q2 = Q.renderizar_quadro(Memoria(fx), superficie_anterior=q1.pixels, habitado=lambda i: True, cache=q1.cache)
+        self.assertEqual(q2.cache.proximo, q1.cache.proximo)       # same viewport: every block hits
+        with self.assertRaises(ValueError):
+            Q.renderizar_quadro(Memoria(fx), superficie_anterior=fx.antes, cache=Q.EstadoCache(b'', b'', 0))
 
 
 if __name__ == '__main__':

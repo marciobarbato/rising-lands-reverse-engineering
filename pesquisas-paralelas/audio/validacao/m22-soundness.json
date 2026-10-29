@@ -1,0 +1,142 @@
+{
+  "schema": "rising-lands/audio-m22-soundness-report/1",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "scope": "MONDE01 accepted display-v2 M2.2, no human input, no CD track playing, sound/MCI initializers not executed",
+  "translated_engine_behavior": false,
+  "accepted_evidence_or_policy_modified": false,
+  "accepted_declared_replay": {
+    "phases": 257,
+    "strict_summary_equal": 257,
+    "seconds": 186.752,
+    "hook_backward_prefix": 3,
+    "limitation": "Initial hook prefix assumes dword accesses; chained experiment below uses widened 15-byte prefix"
+  },
+  "original_pump_experiment": {
+    "phases": 257,
+    "strict_summary_equal": 1,
+    "private_difference_phases": 256,
+    "sole_differing_byte": {
+      "address": "0x498f5c",
+      "accepted": 1,
+      "actual": 0
+    },
+    "all_other_captured_bytes_equal": true,
+    "original_entry_counts": {
+      "MCICD_Play": 130,
+      "PlaySnd_Manage": 128,
+      "MCICD_Manage": 128
+    },
+    "seconds": 189.97,
+    "code_unchanged": true,
+    "watched_ranges": [
+      {
+        "start": "0x498f14",
+        "end": "0x498f6c",
+        "name": "initialized_sound_scalars"
+      },
+      {
+        "start": "0x521358",
+        "end": "0x522234",
+        "name": "request_waiting_logical_physical_bank_state"
+      },
+      {
+        "start": "0x496fdc",
+        "end": "0x496fe0",
+        "name": "mci_clock_copy"
+      },
+      {
+        "start": "0x4e2f28",
+        "end": "0x4e2f34",
+        "name": "game_cd_playing_and_mci_initialized_flags"
+      },
+      {
+        "start": "0x4e1d18",
+        "end": "0x4e1d1c",
+        "name": "shared_random_permutation_cursor"
+      }
+    ],
+    "memory_width_audit": {
+      "text_start": "0x401000",
+      "text_bytes": 601088,
+      "text_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+      "max_explicit_memory_operand_bytes": 10,
+      "hook_backward_prefix": 15,
+      "linear_skipdata_bytes": 18,
+      "scope": "Static original-text disassembly, including legacy x87. REP accesses are per element."
+    },
+    "game_or_display_reads_of_watched_private_sound_state": 0,
+    "read_access_counts": [
+      {
+        "range": "game_cd_playing_and_mci_initialized_flags",
+        "code_owner": "game-or-display",
+        "count": 129
+      },
+      {
+        "range": "game_cd_playing_and_mci_initialized_flags",
+        "code_owner": "mci-cd",
+        "count": 258
+      },
+      {
+        "range": "initialized_sound_scalars",
+        "code_owner": "sound-library",
+        "count": 256
+      },
+      {
+        "range": "request_waiting_logical_physical_bank_state",
+        "code_owner": "sound-library",
+        "count": 2837
+      },
+      {
+        "range": "shared_random_permutation_cursor",
+        "code_owner": "game-or-display",
+        "count": 293
+      }
+    ]
+  },
+  "pump_stores": {
+    "PlaySnd_Manage": [
+      {
+        "instruction": "0x48a650",
+        "address": "0x521f88",
+        "bytes": 4,
+        "old": "00000000",
+        "value": "0x0"
+      },
+      {
+        "instruction": "0x48a658",
+        "address": "0x498f5c",
+        "bytes": 4,
+        "old": "01000000",
+        "value": "0x0"
+      }
+    ],
+    "MCICD_Play": [],
+    "MCICD_Manage": []
+  },
+  "cd_warning": "0x4e2f28 is shared game input, not private audio state. Zero makes CalculGame consume and advance the shared 0x4e1d18 permutation cursor every frame; playing CD is a different scenario with long-run game-state effects.",
+  "conclusion": "Within the watched static sound neighborhoods and exact 128-frame scenario, the chained original pumps have no game/display reader and change only the private sound flag 0x498f5c. This is not strict whole-state equality and not an initialized-audio or arbitrary-heap isolation proof.",
+  "gaps": [
+    "No initialized DirectSound queues or playback",
+    "No playing-CD/MCI-device scenario",
+    "No M2.3 or later extrapolation",
+    "No proof over arbitrary dynamic sound heaps or indirect accesses outside the explicitly watched static ranges"
+  ],
+  "artifacts": {
+    "m22-sound-original-inventory.json": {
+      "path": "pesquisas-paralelas/audio/evidencias/m22-sound-original-inventory.json",
+      "sha256": "db36fa2099bfa719256fd4c9b3b657d4086295f67dbc6927004199a93e143558"
+    },
+    "m22-sound-original-pumps.json": {
+      "path": "pesquisas-paralelas/audio/evidencias/m22-sound-original-pumps.json",
+      "sha256": "52303cf0a56c2e5106e8ad650f484f73bc529ef5b88ee7ecaa83344c22b66569"
+    },
+    "m22-sound-original-accesses.json": {
+      "path": "pesquisas-paralelas/audio/evidencias/m22-sound-original-accesses.json",
+      "sha256": "c1352aa222408dd5c9a2054ca7457361740dad20c6402f19df39ef20dd2bdef4"
+    },
+    "m22-sound-original-chained-pumps.json": {
+      "path": "pesquisas-paralelas/audio/evidencias/m22-sound-original-chained-pumps.json",
+      "sha256": "9c0656a5d85e2007f4533ebb55516d771bc8343d11681e0b23c962c00b25835a"
+    }
+  }
+}

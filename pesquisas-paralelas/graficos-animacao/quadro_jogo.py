@@ -13,7 +13,7 @@ from passe_sprites import planejar_passe_sprites
 from sequenciais import consultar_objeto_v6
 from objetos import consultar_objeto, compor_passe
 from composicao import encaminhamento, compor_unidade
-from graficos import TIPOS
+from graficos import TIPOS, localizar, Quadro, compor_indices
 from projeteis_graficos import compor_projetil
 from construcoes import consultar_santuario, compor_fachada, tabelas_jogador as _tabelas_jogador
 
@@ -39,6 +39,9 @@ ENDERECOS = {nome: endereco for nome, endereco, largura in GLOBAIS_QUADRO}
 GATILHOS_FACHADA = frozenset((0x2cb, 0x2ed, 0x2fb, 0x30d, 0x326, 0x343, 0x35e, 0x37a, 0x388, 0x390, 0x398,
     0x3b0, 0x3ce, 0x3e1, 0x3f8, 0x406, 0x40e, 0x42a, 0x436))
 OFICINA = 0x356
+# TypeEnginSeFatigue 0x442C34: jump table 0x442BCC over types 0..25 (type > 25 answers false)
+SE_FATIGUE = tuple(int(c) for c in '11111111111000000000000001')
+ICONE_FADIGA = 0x1e2b   # bob id = unit word +4 + 0x1E2B (0x41362E / 0x413650)
 GATILHO_SANTUARIO = 0x2ed   # type-2 structure facade trigger (terrain switch 0x40F23B)
 OBJETO_MURO, OBJETO_PORTAO = 254, 253  # bytes 0x495BF8/0x495BF9
 # AffVeget table 0x415A58: codes with a handler; others return at 0x410B38.
@@ -270,7 +273,7 @@ class _Composicao:
         rota = encaminhamento(tipo, estado, auxiliar_8a=r[0x8a])
         if rota['rota'] == 'sem_desenho': return
         guarda = (rota['rota'] == 'corpo_base' and estado in (2, 7) and r[0] == 0 and self.camera == 0
-            and struct.unpack_from('<H', r, 0x74)[0] >= 100 and r[0xba] == 0 and r[0xbd] == 0
+            and r[0xba] == 0 and r[0xbd] == 0
             and self.tela.u('selecionada_unidade_u16') != indice and self.tela.u('modo_selecao_u8') == 0
             and 1 <= r[0x91] <= 16 and r[0xa4] <= 7)
         if not guarda: self.parar(0x41591F, f'AffEngin unit {indice} type {tipo} state {estado} route {rota["rota"]} outside the validated body domain')
@@ -278,6 +281,19 @@ class _Composicao:
         self.saida, _ = compor_unidade(self.catalogo, self.saida, self.largura, self.altura, tipo=tipo, estado_u8=estado,
             direcao=r[0x91], fase=r[0xa4], x=x, y=y, tabela=self.sombra, bolsa_u16=struct.unpack_from('<H', r, 0xa)[0],
             auxiliar_8a=r[0x8a], dx=i8(r[0x86]), dy=i8(r[0x87]), recorte=self.recorte())
+        self._icone_fadiga(r, x, y, indice, i8(r[0x86]), i8(r[0x87]))
+
+    def _icone_fadiga(self, r, x, y, indice, dx, dy):
+        """Tail 0x413568..0x413655 of the body routine: the low-life tired icon (life < 100, word +4 == word +0x76)."""
+        vida, w4, w76 = struct.unpack_from('<H', r, 0x74)[0], struct.unpack_from('<H', r, 4)[0], struct.unpack_from('<H', r, 0x76)[0]
+        if not (w4 == w76 and vida < 100): return
+        if (vida//5) % 2: return
+        if r[1] > 25 or not SE_FATIGUE[r[1]]: return
+        if dx or dy: self.parar(0x4135FA, 'tired icon with a nonzero body shift (+0x86/+0x87): origin not verified')
+        self.chamadas.append(['EngineIconeFadiga', indice])
+        q = self.catalogo.quadro(localizar(w4+ICONE_FADIGA)['id_motor'])   # drawn at the cell origin - (8, 11): native args of 0x41362E/0x413650
+        if r[0] != 0xc8: q = Quadro(q.largura, q.altura, q.pixels.translate(self.tabelas_jogador[r[0]] if r[0] < 5 else self.parar(0x413650, f'owner {r[0]} has no player table')), q.opacidade, 0, b'')
+        self.saida = compor_indices(self.saida, self.largura, self.altura, q, x-8, y-11, self.recorte())
 
     def projetil(self, indice):
         r = self.mundo.projeteis[indice*56:(indice+1)*56]; px, py = struct.unpack_from('<HH', r, 0xc)

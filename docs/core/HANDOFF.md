@@ -543,3 +543,63 @@ Contract and measurements: [UNICORN_TEARDOWN](UNICORN_TEARDOWN.md). This is tool
 - GetCaseIndiceBatiment, which MONDE01 never reaches (no cave);
 - PlaceEngin's discovery path for player owners in flat memory;
 - integration.
+
+### M2.3 movement stage (counters 9000–9200) on `feat/re-core`
+
+- **Capture script** `capturar_movimento_incursao.py` (`7a90689`): 27 Core routines, Combat's forced-counter method. The full run is Mac mini request #5.
+- **World-model differential** `validar_movimento_incursao.py`: Core's existing world model, bound over each isolated call's exact entry blocks through Missions' `montar_provedores`, compared with the native result. Flat translations are compared with full registers.
+- **Gap closed:** CalculNextCase's walk animation (`MundoNavegacao.animar_movimento`, `calcular_proxima_celula`, `atualizar_movimento(animacao=True)`). Type 17 and the local-player sound branch raise.
+- **New flat translations:** TerrainEnCollision, ResetCollision, CRT memset (`incursao_core`).
+- **Smoke (9000–9004):** 0 mismatches.
+
+**NOT RUN / open:**
+- the full 201-frame world differential (Mac mini);
+- the pathfinding internals, which need the solver's buffers bound to memory;
+- the EnginNextEtape dispatcher.
+
+The contract is in [RAID_CORE](RAID_CORE.md#movement-and-pathfinding-after-the-spawn-counters-90009200).
+
+### M2.3 readiness: providers wired, live world, live path search on `feat/re-core`
+
+- **Raid providers:** `provedores_core` exports the raid routines with ai-runtime's keywords, and the task VM posts through the same `postar_tarefa` (`9f27899`).
+- **Live world:** `mundo_vivo` binds the navigation world live to flat memory. The movement providers run on it, with `deslocar` as the exact DeplaceEngin (`bc256c5`, `aa2e6b1`). SetDeplaceEngin and ResetOrdre return the record address, and EnginEstVivant returns the exact EAX.
+- **Path search:** `SolucionadorCaminhosVivo` keeps its work state at the original globals. Route updates are now in place.
+- **Full 9000–9200 native differential:** 0 mismatches, except 6 bytes of CheminCalcul's contour-engine scratch at the 9177 search (`0x4e0f40`, `0x4e0f50..52`, `0x4e0f68`, `0x4e1772`). The search result itself is equal.
+- **Native movement regressions:** 56 tests pass with `RISING_EMULAR=1` (needs `testes/` on `PYTHONPATH`).
+- See [RAID_CORE](RAID_CORE.md).
+
+### M2.3: byte-exact path search on `feat/re-core`
+
+- **Contour state written:** `SolucionadorCaminhosVivo` now also writes CheminCalcul's contour state: `0x4e1772` (the unit's +0xfa), `0x4e0f40` (the step count, `fase`), `0x4e0f68` (the region count) and `0x4e0f50` (the record pointer). The Python solver keeps its last contour result (`ultimo_contorno`).
+- **Per-routine comparison:** Chemin_Verouille (`verrouiller`), CheminCalcul (`calcular`), TestLigneOptimise and OptimiseChemin (EAX = compacted cells + 1).
+- **Full 9000–9200 native differential:** 0 mismatches. Every call from 9170 is compared, including the 9177 search; memory after the search is byte-exact. The only stops are Missions' snapshot binding denying the solver, which AI/runtime's chain does not use.
+- See [RAID_CORE](RAID_CORE.md).
+
+### M2.3 display-scenario spawn/order differential (Mac mini run #7)
+
+`ferramentas/validar_incursao_core.py --cenario exibicao` at `201e208` ran on the Mac mini (exit 0, 1,821 s, report-only, nothing committed). Over the 21 forced cases it made **689 comparisons, with 0 mismatches, 0 dependency stops and nothing untranslated**. The load_tail/between_frames/frame1 path reproduced, and the code was unchanged. It is the display-scenario counterpart of the v1 run (`relatorios/incursao-core-v1-emulada.json`, 689/0). Per routine:
+- Chemin_Accessible 20, Chemin_ModifieZone 21;
+- CreerEngin 21, EnginEnArret 21, EnginGetCase 20, EnginGetType 20, EnginSetPlayer 21, EnginSetType 21, EnginSetTypeCaract 21, EnginTypeGetCapacite 21;
+- GetFreeCell 23, GetNumIndiceTypeBatiment 1, GetRandCaseChamps 20, GetRandCaseTypeBatPlayer 1;
+- MissionGetNum 22, PlaceEngin 21, PlayerGetColor 84, Random 83;
+- SetCollision 21, SetEnginCollision 21, SetMiniMap 21, TerrainEstIllumine 84;
+- iaProbNew 20, iaProbPost 20, listLinkElemToTail 20, listNewElem 20.
+
+### M2.3: live world inside ai-runtime's chain (option 1, no binding change)
+
+`6e12550` and the merge `07c36b4`. ai-runtime's chained composition stopped at counter 9000, at the first EnginEstVivant: its memory is Missions' map, where tiles, regions and the structure-colour stack are u16 lists. `mundo_vivo` now adopts those lists by identity (`grade_u16_viva`), so there is a single source of truth, no copy, and Missions' binding is unchanged. Checks at `07c36b4`:
+- **AI's probe:** `sondar_incursao_ia.py 3`, from ai-runtime's branch, run against this Core: no stop through counter 9002.
+- **M2.2 proof:** `provar_quadros_ia.py`, Python only, 63 s. All 257 of 257 phases equal (128 frames), 0 crossings writing compared bytes, HUD flag equal.
+- **9000–9200 native differential:** 0 mismatches. That is 251 snapshot-world, 261 live-world and 135 flat comparisons; the only stops are the snapshot binding's denied solver.
+- **Gate:** 502 tests, OK.
+
+### M2.3 follow-ups past the window: fatigue threshold and the 9700 divergence
+
+- **CalculFatigue at the threshold.** The original stores the incremented counter +0x74 before comparing it, and the translation now does the same. At the threshold with provisions u16 +4 left (`0x452ee5`): +0x74 = 0, +4 − 1, EAX = the provisions before. With no provisions, the hunger branch (sound, Bag, life, death) raises `DependenciaRamoCore` at `0x452d6f`, after the counter store.
+  - Native check, windowed run over counters 10860–10900 (`relatorios/movimento-incursao-janelas-emulada.json`): 865 CalculFatigue comparisons, 0 mismatches. That includes unit 16's threshold at counter 10879: +4 4→3, +0x74 0x0bb7→0, EAX = 4.
+  - This removes ai-runtime's stop near 10880.
+- **The 9700 one-step report, withdrawn by ai-runtime.** It was an artifact of their probe's start: they started after frame 1 with the counter set to 8999, which consumed one extra frame of draws. With the equivalent start (the -v2 state after between_frames, counter 9000, frame 1 run as the 9000 frame), their Python and the original are equal. The world RNG and unit 16's state, facing and cell match at every counter 8999–9705, and the cell matches Combat's native course through 10878.
+  - The windowed native run gives the same picture from Core's side. Natively, the idle unit is turned by EnginNextEtape's own state-7 body at 9573 and 9591 (+0x90/+0x91 3→4→5). The order at 9700 is V_DeplaceGroupe → EnginEstVivant → SetDeplaceEngin → ResetOrdre → EnginNextEtape → DeplaceEngin.
+  - Every Core call in 9500–9703 matches the original (0 mismatches over 1,823 live and 5,404 flat comparisons).
+- **Validator tools:** `--janelas` (isolate and compare only inside counter windows), `--ordem` (native call order, with unit 16's key fields and changes), `--rotinas-extra`.
+- **Open:** the flat `Chemin_ModifieZone` mode 0 (removal) is not translated. These windows reach it through ResetEnginCollision; the chain uses the world model's `ocupar` instead.

@@ -78,6 +78,22 @@ class WorkflowTests(unittest.TestCase):
             self.assertEqual((missions / 'note.txt').read_text(), 'remote feature\n')
             self.assertEqual(run('rev-parse', '--abbrev-ref', '@{upstream}', cwd=missions), 'origin/feat/re-missions')
 
+    def test_non_ascii_owned_path_is_not_quoted(self):
+        with tempfile.TemporaryDirectory(prefix='rising-workflow-') as directory:
+            repo = Path(directory) / 'repository'
+            environment = dict(os.environ, GIT_AUTHOR_NAME='Workflow Test', GIT_AUTHOR_EMAIL='workflow@example.invalid',
+                               GIT_COMMITTER_NAME='Workflow Test', GIT_COMMITTER_EMAIL='workflow@example.invalid')
+            def run(*args):
+                return subprocess.check_output(['git', *map(str, args)], cwd=repo, env=environment, text=True).strip()
+            subprocess.check_call(['git', 'init', '-q', '-b', 'main', str(repo)], env=environment)
+            (repo / 'README.md').write_text('fixture\n')
+            run('add', '.');run('commit', '-q', '-m', 'Initial fixture')
+            run('checkout', '-q', '-b', 'feat/macos-playable')
+            (repo / 'compilar-jogável').write_text('launcher\n')
+            run('add', '.');run('commit', '-q', '-m', 'Owned launcher')
+            self.assertEqual(workflow.changed_statuses(repo, 'main', 'feat/macos-playable'), [('A', 'compilar-jogável')])
+            self.assertTrue(workflow.owned('macos', 'compilar-jogável', 'A'))
+
     def test_two_stale_workers_merge_without_modifying_canonical_checkout(self):
         with tempfile.TemporaryDirectory(prefix='rising-workflow-') as directory:
             base = Path(directory)
