@@ -1,0 +1,686 @@
+{
+ "crossings": {
+  "count": 0,
+  "note": "the composition crosses nothing; travessias carries no crossing data in mode prova",
+  "writing_compared_bytes": 0
+ },
+ "declared_inputs": {
+  "frame_inputs": {
+   "caller_registers": {
+    "EBP": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "ESI": "0x0"
+   },
+   "cursor": [
+    0,
+    0
+   ],
+   "get_async_key_state": "every frame-phase call answers 0 (not pressed, no transition)",
+   "peek_message": "PeekMessageA answers 0 (no message queued)",
+   "provenance": {
+    "async_keys": "no human input: every frame-phase GetAsyncKeyState answers 0",
+    "caller_registers": "declared saved ECX/EDX in ProgIteration's frame and carried ESI/EDI/EBP of _WinMain@16 (never executed by the bench); influence measured by the sensitivity run",
+    "cursor": "GetCursorPos answer. Equals the last SetCursorPos target of the accepted path (CalculGame 0x42c89e passes the words at 0x5099a8/0x5099aa, which ProgIteration fills from GetCursorPos); Windows keeps the cursor there when the mouse does not move",
+    "peek_message": "no human input and no window message: PeekMessageA answers 0, so _WinMain@16 takes the active-flag branch to ProgIteration"
+   }
+  },
+  "offscreen_provenance": "reference display_state (Graphics backend layout): the EAX DDLockSurface returns to MenuInit, stored at 0x508f70",
+  "offscreen_surface_pixels": "0x60076000"
+ },
+ "display_root_tracking": {
+  "open_roots": [],
+  "unclosed_intervals": []
+ },
+ "display_roots_not_executed": {
+  "all_restored": true,
+  "calls": [
+   {
+    "block_events": [],
+    "caller_return": "0x42d284",
+    "compared_bytes": [],
+    "masked_bytes": 78050,
+    "phase": "load_tail",
+    "routine": "RestoreAll"
+   },
+   {
+    "block_events": [],
+    "caller_return": "0x46837f",
+    "compared_bytes": [
+     {
+      "address": "0x4e17a5",
+      "after": 96,
+      "before": 0,
+      "block": "dgroup"
+     },
+     {
+      "address": "0x4e17a6",
+      "after": 7,
+      "before": 0,
+      "block": "dgroup"
+     },
+     {
+      "address": "0x4e17a7",
+      "after": 96,
+      "before": 0,
+      "block": "dgroup"
+     },
+     {
+      "address": "0x4e17a8",
+      "after": 1,
+      "before": 0,
+      "block": "dgroup"
+     }
+    ],
+    "masked_bytes": 0,
+    "phase": "load_tail",
+    "routine": "DDLockSurface"
+   },
+   {
+    "block_events": [],
+    "caller_return": "0x468405",
+    "compared_bytes": [],
+    "masked_bytes": 0,
+    "phase": "load_tail",
+    "routine": "FilledBox"
+   },
+   {
+    "block_events": [],
+    "caller_return": "0x468c96",
+    "compared_bytes": [
+     {
+      "address": "0x4e17a5",
+      "after": 0,
+      "before": 96,
+      "block": "dgroup"
+     },
+     {
+      "address": "0x4e17a6",
+      "after": 0,
+      "before": 7,
+      "block": "dgroup"
+     },
+     {
+      "address": "0x4e17a7",
+      "after": 0,
+      "before": 96,
+      "block": "dgroup"
+     },
+     {
+      "address": "0x4e17a8",
+      "after": 0,
+      "before": 1,
+      "block": "dgroup"
+     }
+    ],
+    "masked_bytes": 0,
+    "phase": "load_tail",
+    "routine": "DDUnlockSurface"
+   },
+   {
+    "block_events": [],
+    "caller_return": "0x468ca7",
+    "compared_bytes": [],
+    "masked_bytes": 0,
+    "phase": "load_tail",
+    "routine": "DDFlipPage"
+   },
+   {
+    "block_events": [],
+    "caller_return": "0x475068",
+    "compared_bytes": [],
+    "masked_bytes": 43,
+    "phase": "between_frames",
+    "routine": "AffGame"
+   }
+  ],
+  "compared_bytes_written": 8,
+  "restoration": [
+   {
+    "address": "0x4e17a5",
+    "block": "dgroup",
+    "first_before": 0,
+    "phase": "load_tail",
+    "phase_end": 0,
+    "restored": true,
+    "writers": 2
+   },
+   {
+    "address": "0x4e17a6",
+    "block": "dgroup",
+    "first_before": 0,
+    "phase": "load_tail",
+    "phase_end": 0,
+    "restored": true,
+    "writers": 2
+   },
+   {
+    "address": "0x4e17a7",
+    "block": "dgroup",
+    "first_before": 0,
+    "phase": "load_tail",
+    "phase_end": 0,
+    "restored": true,
+    "writers": 2
+   },
+   {
+    "address": "0x4e17a8",
+    "block": "dgroup",
+    "first_before": 0,
+    "phase": "load_tail",
+    "phase_end": 0,
+    "restored": true,
+    "writers": 2
+   }
+  ]
+ },
+ "native_checkpoints": 103,
+ "path_reproduction": {
+  "boundaries_equal": true,
+  "code_unchanged": true,
+  "entry_trace_equal": true,
+  "passed": true,
+  "phase_states_equal": {
+   "between_frames": true,
+   "frame1": true,
+   "load_tail": true
+  }
+ },
+ "phases": {
+  "between_frames": {
+   "allocation_records": {
+    "equal": true,
+    "excluded_metadata": [
+     "caller_return",
+     "stack",
+     "freed_caller_return"
+    ],
+    "first_differences": [],
+    "freed_by_memfree_total": 228,
+    "freed_by_python_composition": 146,
+    "python": 25482,
+    "reference": 25482
+   },
+   "bindings": {
+    "display_context_not_modeled": 8,
+    "equal": true,
+    "not_modeled": [],
+    "original": 2,
+    "python": 2
+   },
+   "boundaries": {
+    "display_context_not_modeled": [],
+    "equal": true,
+    "not_modeled": [],
+    "original": 2,
+    "python": 2
+   },
+   "checkpoints": {
+    "equal": 1,
+    "total": 1
+   },
+   "display_roots_python": [
+    {
+     "guards": [
+      [
+       "[0x4dfb44]",
+       0
+      ],
+      [
+       "[0x508724]",
+       25
+      ],
+      [
+       "[0x508726]",
+       17
+      ],
+      [
+       "[0x508720]",
+       4
+      ],
+      [
+       "[0x508722]",
+       6
+      ],
+      [
+       "structure states",
+       [
+        0,
+        5
+       ]
+      ]
+     ],
+     "phase": "between_frames",
+     "provider": "graficos efeitos_logicos_exibicao",
+     "routine": "AffGame",
+     "site": "0x475063",
+     "writes": []
+    }
+   ],
+   "equal": true,
+   "registers": {
+    "EAX": {
+     "equal": true,
+     "python": "0x0",
+     "reference": "0x0"
+    },
+    "EBP": {
+     "equal": true,
+     "python": "0x0",
+     "reference": "0x0"
+    },
+    "EBX": {
+     "equal": true,
+     "python": "0x3",
+     "reference": "0x3"
+    },
+    "ECX": {
+     "equal": true,
+     "python": "0x0",
+     "reference": "0x0"
+    },
+    "EDI": {
+     "equal": true,
+     "python": "0x0",
+     "reference": "0x0"
+    },
+    "EDX": {
+     "equal": true,
+     "python": "0x2007fe8",
+     "reference": "0x2007fe8"
+    },
+    "ESI": {
+     "equal": true,
+     "python": "0x0",
+     "reference": "0x0"
+    },
+    "ESP": {
+     "equal": true,
+     "python": "0x2007fe4",
+     "reference": "0x2007fe4"
+    }
+   },
+   "result": "returned",
+   "rng": {
+    "equal": true,
+    "python": {
+     "0x497164": "0x1c019f87",
+     "0x498db4": "0x3212b7ce"
+    },
+    "reference": {
+     "0x497164": "0x1c019f87",
+     "0x498db4": "0x3212b7ce"
+    }
+   },
+   "state": {
+    "blocks": 25197,
+    "compared_bytes": 16097242,
+    "differing_blocks": [],
+    "equal": true,
+    "first_differences": {}
+   }
+  },
+  "frame1": {
+   "allocation_records": {
+    "equal": true,
+    "excluded_metadata": [
+     "caller_return",
+     "stack",
+     "freed_caller_return"
+    ],
+    "first_differences": [],
+    "freed_by_memfree_total": 228,
+    "freed_by_python_composition": 146,
+    "python": 25482,
+    "reference": 25482
+   },
+   "bindings": {
+    "display_context_not_modeled": 0,
+    "equal": true,
+    "not_modeled": [],
+    "original": 13,
+    "python": 13
+   },
+   "boundaries": {
+    "display_context_not_modeled": [],
+    "equal": true,
+    "not_modeled": [
+     {
+      "index": 0,
+      "routine": "MCICD_Play",
+      "words": [
+       0,
+       1,
+       2,
+       3
+      ]
+     }
+    ],
+    "original": 1,
+    "python": 1
+   },
+   "checkpoints": {
+    "equal": 38,
+    "total": 38
+   },
+   "display_roots_python": [],
+   "equal": true,
+   "result": "returned",
+   "rng": {
+    "equal": true,
+    "python": {
+     "0x497164": "0x78fe3b37",
+     "0x498db4": "0x3212b7ce"
+    },
+    "reference": {
+     "0x497164": "0x78fe3b37",
+     "0x498db4": "0x3212b7ce"
+    }
+   },
+   "state": {
+    "blocks": 25197,
+    "compared_bytes": 16097242,
+    "differing_blocks": [],
+    "equal": true,
+    "first_differences": {}
+   }
+  },
+  "load_tail": {
+   "allocation_records": {
+    "equal": true,
+    "excluded_metadata": [
+     "caller_return",
+     "stack",
+     "freed_caller_return"
+    ],
+    "first_differences": [],
+    "freed_by_memfree_total": 228,
+    "freed_by_python_composition": 146,
+    "python": 25482,
+    "reference": 25482
+   },
+   "bindings": {
+    "display_context_not_modeled": 19,
+    "equal": true,
+    "not_modeled": [],
+    "original": 597,
+    "python": 597
+   },
+   "boundaries": {
+    "display_context_not_modeled": [
+     "LoadPie @ RestoreAll+0x67",
+     "LoadPie @ RestoreAll+0xae"
+    ],
+    "equal": true,
+    "not_modeled": [
+     {
+      "index": 2,
+      "routine": "MCICD_Play",
+      "words": [
+       0,
+       1,
+       2,
+       3
+      ]
+     }
+    ],
+    "original": 3,
+    "python": 3
+   },
+   "checkpoints": {
+    "equal": 48,
+    "total": 48
+   },
+   "display_roots_python": [
+    {
+     "guards": [
+      [
+       "[0x4dfb44]",
+       0
+      ],
+      [
+       "[0x508724]",
+       25
+      ],
+      [
+       "[0x508726]",
+       17
+      ],
+      [
+       "[0x508720]",
+       4
+      ],
+      [
+       "[0x508722]",
+       6
+      ],
+      [
+       "structure states",
+       [
+        0,
+        5
+       ]
+      ]
+     ],
+     "phase": "load_tail",
+     "provider": "graficos efeitos_logicos_exibicao",
+     "routine": "RestoreAll",
+     "site": "0x42d27f",
+     "writes": []
+    },
+    {
+     "eax": "0x60076000",
+     "phase": "load_tail",
+     "provider": null,
+     "routine": "DDLockSurface",
+     "site": "0x46837a"
+    },
+    {
+     "eax": null,
+     "phase": "load_tail",
+     "provider": null,
+     "routine": "FilledBox",
+     "site": "0x468400"
+    },
+    {
+     "eax": null,
+     "phase": "load_tail",
+     "provider": null,
+     "routine": "DDUnlockSurface",
+     "site": "0x468c91"
+    },
+    {
+     "eax": null,
+     "phase": "load_tail",
+     "provider": null,
+     "routine": "DDFlipPage",
+     "site": "0x468ca2"
+    }
+   ],
+   "equal": true,
+   "result": "returned",
+   "rng": {
+    "equal": true,
+    "python": {
+     "0x497164": "0x1c019f87",
+     "0x498db4": "0x3212b7ce"
+    },
+    "reference": {
+     "0x497164": "0x1c019f87",
+     "0x498db4": "0x3212b7ce"
+    }
+   },
+   "state": {
+    "blocks": 25197,
+    "compared_bytes": 16097242,
+    "differing_blocks": [],
+    "equal": true,
+    "first_differences": {}
+   }
+  }
+ },
+ "policy": {
+  "exclusion_ranges": 8780,
+  "masked_bytes": {
+   "display_only": 78093,
+   "game_logic": 776
+  },
+  "path": "pesquisas-paralelas/missoes/validacao/m2-politica-comparacao-quadro1.json",
+  "sha256": "64c7fa739c76fc1f9a12bc4678181d0d8fa97c5887f5d8ced1b964d9e6cae73c"
+ },
+ "references": {
+  "captura_m1": {
+   "path": "pesquisas-paralelas/missoes/evidencias/captura-carga-missao-exibicao-v2.json",
+   "sha256": "a71351ed3b74bf7f8327910f8d06459327c10e6a97dc4e272f9a95ee237bca7e"
+  },
+  "captura_quadro": {
+   "path": "pesquisas-paralelas/missoes/evidencias/captura-quadro1-monde01-exibicao-v2.json",
+   "sha256": "d800be5aee2cda363b6fca08fd162e5f7a1a61e849c1384e29fefe9e031e1d1d"
+  },
+  "entrada": {
+   "path": "pesquisas-paralelas/missoes/evidencias/entrada-carga-missao-exibicao-v2.json",
+   "sha256": "0bfbe98a7fbdb73e3c1f0c8510095e259a127bcfb842edf161ae072cde13c03a"
+  },
+  "rastro_quadro": {
+   "path": "pesquisas-paralelas/missoes/evidencias/rastro-quadro1-monde01-exibicao-v2.json",
+   "sha256": "7e7aa9f616a6784e7d38497dccb8edd6552293efe83b55facfb2ce786cb93fd0"
+  }
+ },
+ "round4_classification_check": [
+  {
+   "agree": true,
+   "compared_blocks": [],
+   "phase": "between_frames",
+   "policy": "display-only (masked)",
+   "round4": "display",
+   "routine": "AffGame",
+   "unmasked_bytes": []
+  },
+  {
+   "agree": true,
+   "compared_blocks": [
+    "crt_thread_data"
+   ],
+   "phase": "frame1",
+   "policy": "logic (compared)",
+   "round4": "logic",
+   "routine": "NextAnimTerrain",
+   "unmasked_bytes": []
+  },
+  {
+   "agree": true,
+   "compared_blocks": [],
+   "phase": "frame1",
+   "policy": "no write",
+   "round4": "logic",
+   "routine": "NextAnimVeget",
+   "unmasked_bytes": []
+  },
+  {
+   "agree": true,
+   "compared_blocks": [],
+   "phase": "load_tail",
+   "policy": "display-only (masked)",
+   "round4": "display",
+   "routine": "RestoreAll",
+   "unmasked_bytes": []
+  },
+  {
+   "agree": false,
+   "compared_blocks": [],
+   "phase": "load_tail",
+   "policy": "logic (compared)",
+   "round4": "display",
+   "routine": "DDLockSurface",
+   "unmasked_bytes": [
+    "0x4e17a6",
+    "0x4e17a7",
+    "0x4e17a8"
+   ]
+  },
+  {
+   "agree": false,
+   "compared_blocks": [],
+   "phase": "load_tail",
+   "policy": "display-only (masked); 146 freed allocation records compared (coordinator decision)",
+   "round4": "display",
+   "routine": "DeleteBank",
+   "unmasked_bytes": []
+  },
+  {
+   "agree": true,
+   "compared_blocks": [],
+   "phase": "load_tail",
+   "policy": "no write",
+   "round4": "display",
+   "routine": "FilledBox",
+   "unmasked_bytes": []
+  },
+  {
+   "agree": false,
+   "compared_blocks": [],
+   "phase": "load_tail",
+   "policy": "logic (compared)",
+   "round4": "display",
+   "routine": "DDUnlockSurface",
+   "unmasked_bytes": [
+    "0x4e17a6",
+    "0x4e17a7",
+    "0x4e17a8"
+   ]
+  },
+  {
+   "agree": true,
+   "compared_blocks": [],
+   "phase": "load_tail",
+   "policy": "no write",
+   "round4": "display",
+   "routine": "DDFlipPage",
+   "unmasked_bytes": []
+  },
+  {
+   "agree": true,
+   "compared_blocks": [
+    "crt_thread_data"
+   ],
+   "phase": "load_tail",
+   "policy": "logic (compared)",
+   "round4": "logic",
+   "routine": "NextAnimTerrain",
+   "unmasked_bytes": []
+  },
+  {
+   "agree": true,
+   "compared_blocks": [],
+   "phase": "load_tail",
+   "policy": "logic (compared)",
+   "round4": "logic",
+   "routine": "NextAnimVeget",
+   "unmasked_bytes": [
+    "0x4e1d18"
+   ]
+  }
+ ],
+ "schema": "rising-lands/ai-runtime-m2.1-first-frame-proof/1",
+ "seconds": 122.463,
+ "source_dirty_paths": [],
+ "source_revision": "32bb39131931ba615c78e13c60b5d0740d6ccfd7",
+ "summary": {
+  "crossings_writing_compared_bytes": 0,
+  "display_root_compared_writes_restored": true,
+  "phases": {
+   "between_frames": true,
+   "frame1": true,
+   "load_tail": true
+  },
+  "result": "equal"
+ },
+ "unmodeled": [
+  "stack words of MCICD_Play in the CalculGame frame bodies (uninitialized caller locals)",
+  "EFLAGS and EIP",
+  "bindings and boundaries issued inside policy display roots (DirectDraw COM calls, display ticks, palette, LoadPie inside RestoreAll): Graphics' provider produces none; counted per phase",
+  "masked display-only state (policy exclusion_mask) and the surfaces (outside the state)",
+  "ProgIteration frame words of phase (b): saved EDX/ECX/EBX = 0 and the MSG buffer [0x3000000, 0, 0, 0] (declared from the boundary registers and the bench loop frame)"
+ ]
+}
