@@ -306,3 +306,5 @@ M2 slice 1 captures the frame body's combat-relevant calls natively from the acc
 python3 -B pesquisas-paralelas/combate/capturar_quadro_m1.py
 RISING_EMULAR=1 python3 -B -m unittest discover -s pesquisas-paralelas/combate -p test_quadro_m1.py
 ```
+
+M2.1 round 2 revalidates those calls at the exact frame-0 and frame-1 inputs of Missions' first-frame path. It uses isolated native calls, `captura-isolada-combate-quadro1.json`. Frame 0 (the load-state pass) reaches `ProjectileCalcul` (the 100 `+1` clears), `EnginTrouveCible` for unit 0 (no target) and 7 `PlayerEstAllie` calls. Frame 1 reaches only an empty projectile pass. `PlayerEstAllie 0x46d838` is `alvos_alcance.aliados(AL origin, DL target, masks)`, where `masks[p]` is byte `[[0x5080a8] + 20·p + 6]`. Its native register contract (ECX preserved, DL = `1 << target` on the in-range path) is in `test_quadro1_combate.py`.
