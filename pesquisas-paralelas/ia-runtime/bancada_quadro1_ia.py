@@ -75,3 +75,46 @@ def executar_caminho(executadas, instantaneos=(), observador=None, instantaneo=N
     reproducao['passed'] = (all(reproducao['phase_states_equal'].values()) and reproducao['entry_trace_equal']
                             and reproducao['boundaries_equal'] and reproducao['code_unchanged'])
     return b, pausa, cap, reproducao
+
+
+class PausaEnderecos(Isolamento):
+    """Pause at arbitrary code addresses (routine entries or call-return sites) and hand the
+    bench to ``observador(rotulo, fase, registradores, bancada)``. Nothing extra is executed;
+    the phase resumes at the same instruction."""
+
+    def __init__(self, bancada, enderecos, observador):
+        self.b, self.entradas, self.observador = bancada, dict(enderecos), observador
+        self.perturbacoes, self.registros, self.ativo = {}, [], True
+
+    def executar(self, regs):
+        self.observador(self.entradas[regs['EIP']], self.b.fase, regs, self.b)
+
+
+def executar_caminho_pausas(enderecos, observador, blocos=None):
+    """Replay Missions' committed path with ``PausaEnderecos``; ``blocos(fase, endereco)`` sees every executed block."""
+    cap = json.loads(CAPTURA_QUADRO.read_bytes())
+    ni = cap['named_inputs']['m1']
+    b = BancadaQuadroMissaoOriginal(cq.entradas_quadro(ni['allocation_fill'], ni['clock_ms'][0]), segundos=120)
+    b.iniciar_relogio()
+    b.executar_inicio()
+    b.executar_mission_load(60)
+    pausa = PausaEnderecos(b, enderecos, observador)
+    pausa.instalar()
+    if blocos is not None:
+        from emulador import unicorn
+        b.cpu.hook_add(unicorn.UC_HOOK_BLOCK, lambda cpu, a, n, _: blocos(b.fase, a), begin=0x401000, end=0x493bff)
+        b.cpu.ctl_flush_tb()
+    resumos = {}
+    for nome, correr in (('load_tail', lambda: b.executar_cauda_carga(600)),
+                         ('between_frames', lambda: b.executar_entre_quadros(120)),
+                         ('frame1', lambda: b.executar_quadro(600))):
+        correr()
+        resumos[nome] = b.resumo_imagem(b.imagem())
+    fases = {p['phase']: p['state_after']['summary'] for p in cap['phases']}
+    reproducao = dict(phase_states_equal={f: resumos[f] == fases[f] for f in fases},
+                      entry_trace_equal=json.loads(json.dumps(b.rastro_json())) == cap['entry_trace'],
+                      boundaries_equal=b.eventos_fronteira == [e for p in cap['phases'] for e in p['boundaries']],
+                      code_unchanged=b.sha256_codigo() == cap['code_integrity']['after'])
+    reproducao['passed'] = (all(reproducao['phase_states_equal'].values()) and reproducao['entry_trace_equal']
+                            and reproducao['boundaries_equal'] and reproducao['code_unchanged'])
+    return b, cap, reproducao
