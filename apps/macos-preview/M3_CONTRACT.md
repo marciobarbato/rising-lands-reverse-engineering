@@ -97,21 +97,21 @@ appropriate, never mislabeled as a complete-render success.
 
 Graphics 1.3 is additive over 1.2: the inputs, outputs, indexed format and
 cache/surface chaining stay unchanged. Its validated normal bodies for unit
-types1/8 remove the prior 0x41591F stop from accepted M2.2 playback. Other
+types 1/8 remove the prior 0x41591F stop from accepted M2.2 playback. Other
 records outside Graphics' published domain retain their named stops; generic
 partial/stop handling and version refusal tests remain required.
 
-The consumer pins Graphics' full128-frame reference, SHA-256
+The consumer pins Graphics' full 128-frame reference, SHA-256
 `4f2d536fec21cde39f885f1e6cccbbda83c5130b8ba60cc557f38c27fc508407`.
 Every drawing phase must match the applicable chained-pixel hash before
-publication. This replaces the old12-frame1.2 reference for current validation;
-the historical reports remain unchanged. There are still257 memory phase
-summaries and11 full memory checkpoints.
+publication. This replaces the old 12-frame 1.2 reference for current validation;
+the historical reports remain unchanged. There are still 257 memory phase
+summaries and 11 full memory checkpoints.
 
 HUD rows >=544 and cursor remain **not drawn**. `full` means the supported
 playfield composition returned without a named stop, not a post-HUD full-frame
 equality claim. Graphics' chain differs from its native checkpoint only below
-the supported playfield (first differing row547, from frame2). Native phase-end
+the supported playfield (first differing row 547, from frame 2). Native phase-end
 hashes remain recorded honestly and are not substituted for checkpoint hashes.
 The initial cache/surface are still required; no independent mid-sequence
 start, fallback drawing, live delivery or game input is added. The current

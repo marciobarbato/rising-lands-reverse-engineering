@@ -518,13 +518,13 @@ There is no milestone claim, live frame plumbing or new game feature.
 
 Base `cb3e3245d919eee47b9c05b07a296032fd19a3e9` was fetched and fast-forwarded
 into this dedicated macOS branch with a clean tree. The published additive
-Graphics1.3 contract retains all1.2 signatures/formats and cache/pixel chaining.
-Its normal bodies for types1/8 remove the previous M2.2 unit stop. The consumer
-now accepts exactly(1,3), refuses1.2/1.4/other versions, and pins the committed
-128-frame1.3 reference. Current consumer contract is v4; source snapshot bytes
+Graphics 1.3 contract retains all 1.2 signatures/formats and cache/pixel chaining.
+Its normal bodies for types 1/8 remove the previous M2.2 unit stop. The consumer
+now accepts exactly (1,3), refuses 1.2/1.4/other versions, and pins the committed
+128-frame 1.3 reference. Current consumer contract is v4; source snapshot bytes
 and accepted M1/M2 identities remain hash-pinned and unchanged.
 
-The native page labels1.3 and tests no inherited unit stop, retaining the
+The native page labels 1.3 and tests no inherited unit stop, retaining the
 explicit HUD/cursor limitation. Generic partial-result tests remain in place
 for records outside the provider domain. No renderer or live delivery was
 implemented. Python remains evidence inspection/reference; the native Rust C ABI
@@ -534,3 +534,10 @@ The large asset payload branch is not merged here. Asset data moves to the
 separate public rising-lands-assets repository; this small app update uses the
 existing explicit read-only CD/runtime inputs. Current full playback and exact
 coordinator native-build results will follow after committed validation.
+
+The full real-capture validation passed on implementation `0e10276`:257/257
+phase summaries,11/11 memory checkpoints,128/128 Graphics1.3 chained hashes,
+128 supported-playfield full results,129 undrawn phases, zero partial results
+and no named unit stops. HUD/cursor remain absent. See the new
+[per-phase v4 report](validation/m3-m22-render-v4.json); older1.2 reports remain
+historical and unchanged. The exact committed native build follows separately.

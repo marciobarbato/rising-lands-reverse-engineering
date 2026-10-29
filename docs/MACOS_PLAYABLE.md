@@ -143,15 +143,15 @@ original-v2 inspection remains a separately labeled API.
 
 The shell pins Graphics API **1.3** and carries both the surface and terrain
 cache from the original initial artifacts. This additive contract composes
-normal unit types1/8 and removes their stop from accepted M2.2 playback. Other
+normal unit types 1/8 and removes their stop from accepted M2.2 playback. Other
 versions are refused until explicitly reviewed and tested. Rendering still
 comes exclusively from Graphics.
 
-All128 drawing phases are checked against the pinned Graphics1.3 chain
+All 128 drawing phases are checked against the pinned Graphics 1.3 chain
 reference before publication. `full` in the inspector means its supported
 playfield passes completed; HUD rows>=544 and cursor remain absent. The page
 shows those limits. Generic named stops remain visible for unsupported states.
-Memory playback still verifies257 phases and11 checkpoints. The inspector
+Memory playback still verifies 257 phases and 11 checkpoints. The inspector
 uses DOM phase/frame navigation, reads, filter and reset; it does not emit live
 orders. See the [v4 contract](../apps/macos-preview/M3_CONTRACT.md) and
 [handoff](../apps/macos-preview/HANDOFF.md) for exact evidence and test results.
