@@ -3,6 +3,7 @@
 // any assertion. A bounded diagnostic delay exercises slow initialization.
 (()=>{
  const send=(action,extra)=>{if(window.nativeSmoke?.enabled)window.webkit.messageHandlers.engine.postMessage({action,...extra});};
+ window.reportSmokeProgress=stage=>send('smokeProgress',{stage,diagnostics:window.smokeDiagnostics?window.smokeDiagnostics():{}});
  window.signalAppInitializationFailure=error=>send('appInitializationFailed',{error:String(error)});
  window.signalAppReady=async info=>{
   if(!window.nativeSmoke?.enabled)return;

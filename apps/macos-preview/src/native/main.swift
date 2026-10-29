@@ -21,6 +21,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
     var smokeMode = "exercise"
     var readySignal: [String:Any]?
     var readyDelayMs = 0
+    var smokeProgress: [String:Any]?
     let resourceRoot = Bundle.main.resourceURL!.appendingPathComponent("preview", isDirectory: true)
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -132,6 +133,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
     }
     func userContentController(_ userContentController:WKUserContentController,didReceive message:WKScriptMessage) {
         if message.frameInfo.isMainFrame, smokeOutput != nil, let body = message.body as? [String:Any] {
+            if body["action"] as? String == "smokeProgress" {
+                smokeProgress = body
+                return
+            }
             if body["action"] as? String == "appInitializationFailed" {
                 finishSmoke(["passed":false,"error":body["error"] as? String ?? "Initialization failed"])
                 return
@@ -231,6 +236,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         }
         final["readiness"] = smokeLifecycle.diagnostics(now)
         final["readySignal"] = readySignal
+        final["lastProgress"] = smokeProgress
         final["diagnosticReadyDelayMs"] = readyDelayMs
         final["nativeWindowVisible"] = window.isVisible
         final["bundlePath"] = Bundle.main.bundlePath
