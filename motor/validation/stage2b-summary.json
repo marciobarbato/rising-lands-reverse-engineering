@@ -1,0 +1,59 @@
+{
+  "schema": "rising-lands/rust-engine-stage2b-delivery/1",
+  "branch": "feat/codex-rust-engine",
+  "implementation_commit": "8a4643031f6980825032848c122c0fe915afe44a",
+  "tested_revision": "9ff8aef246a3de2b677727e094ff253cd199799b",
+  "stage2a_delivery_commit": "9ff8aef246a3de2b677727e094ff253cd199799b",
+  "proof": {
+    "path": "motor/validation/stage2b-128-frame-proof.json",
+    "sha256": "3814173026fcbe50f3a75c82fe85ccad8e8bd0df402ed2dd1257ce21cc580967",
+    "complete_proof": true,
+    "phases_compared": 257,
+    "phases_equal": 257,
+    "phases_requested": 257,
+    "result": "equal"
+  },
+  "state": {
+    "compared_bytes_per_phase": 16022275,
+    "masked_display_bytes": 153060,
+    "mask_ranges": 4948,
+    "published_logic_changed_bytes": 999,
+    "mismatches": 0,
+    "first_divergence": null
+  },
+  "allocation_records": 25482,
+  "allocation_records_equal": true,
+  "abi": "1.1",
+  "performance": {
+    "frames_completed": 128,
+    "frames_per_second": 119.82651872354087,
+    "rust_phase_seconds": 1.0682109550000085,
+    "scope": "C ABI phase execution only; excludes corpus replay, projection and comparison",
+    "scope_clarification": "Includes Rust private projection transactions and semantic reload, all phase logic, load-tail startup and between-frame effects; excludes exported snapshot copies, Python replay/comparison and rendering.",
+    "profile": "release, overflow checks enabled",
+    "lease": "exclusive, slots0..5",
+    "machine": {
+      "cpu": "Apple M4 Pro",
+      "memory_bytes": 25769803776,
+      "logical_cpus": 12,
+      "os": "macOS27.0.1 (26A434)",
+      "target": "aarch64-apple-darwin"
+    },
+    "python_baseline_seconds_per_frame": 0.5,
+    "python_baseline_source": "task-supplied approximation; full Python chain not rerun"
+  },
+  "release_checks": {
+    "python_tests": 39,
+    "python_failures": 0,
+    "pilot_comparisons": 75,
+    "pilot_mismatches": 0,
+    "pilot_skipped": 0,
+    "native_frame_phases": 257,
+    "native_frame_mismatches": 0
+  },
+  "inherited_gates": "stage2a-summary.json: fmt, Clippy-Dwarnings,21 Rust tests,39 Python tests,C layout,Swift1.1 smoke; common checker remains missing local inputs/Unicorn",
+  "unported_scope": "Active task VM/AI kernels, spawning/raids, moving/combat/transport branches, completed production and other named stops outside accepted128-frame window; pixels, orders and app integration remain separate.",
+  "mac_mini": "No further Rust offline proof required. Prepared coordinator checkout must rerun common checker. Fresh x86 or full Python128 recomposition, if requested, belongs on prepared Mac mini.",
+  "acceptance": "coordinator_only",
+  "main_merge": "not_performed"
+}

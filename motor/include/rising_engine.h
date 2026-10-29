@@ -4,7 +4,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Pilot ABI1.0. No engine frame-step, rendering or asset ABI is defined here.
+/* ABI1.1. Frame logic phases are additive; rendering/assets are separate.
  * Addresses are original u32 values, NOT host pointers. Handles are opaque
  * integer tokens, never dereferenceable; zero/stale/double-free are rejected.
  * Calls are serialized inside the library. Caller must synchronize handle use
@@ -16,7 +16,7 @@ extern "C" {
  * Load replaces ALL blocks atomically, preserving the explicit virtual clock.
  * Count<=65536 and total<=64MiB. Empty load is allowed; empty regions are not.
  */
-#define RL_ABI_VERSION 0x00010000u
+#define RL_ABI_VERSION 0x00010001u
 enum { RL_OK=0, RL_INVALID_ARGUMENT=1, RL_INVALID_HANDLE=2, RL_MEMORY_ERROR=3,
  RL_UNKNOWN_ROUTINE=4, RL_UNSUPPORTED_PATH=5, RL_BUFFER_TOO_SMALL=6,
  RL_PANIC=7, RL_POISONED=8, RL_RESOURCE_LIMIT=9, RL_VERSION_MISMATCH=10 };
@@ -42,6 +42,48 @@ int32_t rl_avancar_ticks(RlMundo world, uint64_t ticks);
 int32_t rl_relogio(RlMundo world, uint64_t *tick, uint32_t *milliseconds);
 /* Thread-local error, UTF8+NUL. Does not clear error. NULL/zero size query. */
 int32_t rl_erro_mensagem(uint8_t *buffer, uint32_t capacity, uint32_t *required);
+/* ABI1.1 additions. Creation also accepts1.0; existing layouts/signatures retain
+ * their1.0 semantics. One caller must serialize a phase plus snapshot/events.
+ * Input states are explicitly declared memory blocks, including original tables.
+ * Supported scenario: MONDE01 no-key display path. Unported branches fail with
+ * RL_UNSUPPORTED_PATH naming the original address. All calls are transactional.
+ * Phase1(load_tail/frame0) and3(frame) tick once; phase2(between) does not tick.
+ * No human-input protocol, pixels or render surface is returned. */
+typedef struct { uint32_t eax,ebx,ecx,edx,esi,edi,ebp,esp; } RlFrameRegisters;
+typedef struct {
+ int32_t cursor_x,cursor_y; uint32_t offscreen; RlFrameRegisters registers;
+ uint32_t saved[3],msg[4];
+} RlFrameInput;
+/* saved is ProgIteration's saved EDX/ECX/EBX; msg is its four loop words.
+ * registers is the declared phase entry. Phase2 returns next CalculGame entry;
+ * phase3 returns preserved registers with ESP+4; EAX is unspecified for phase3.
+ * Phase1's register output is unspecified. On failure input is unchanged. */
+enum { RL_LOAD_TAIL=1,RL_BETWEEN_FRAMES=2,RL_FRAME=3 };
+int32_t rl_passo_quadro(RlMundo world,uint32_t phase,RlFrameInput *input);
+typedef struct {
+ uint32_t kind,id,site,args[5],result,registers[4],stack[4],stack_mask;
+} RlFrameEvent;
+/* kind1 binding,2 boundary,3 free; site is original return address. Binding ids:
+ *1 ShowCursor,2 GetAsyncKeyState,3 GlobalHandle,4 GlobalUnlock,5 GlobalFree,
+ *6 PeekMessageA,7 GetCursorPos,8 SetCursorPos. Boundary ids101 LoadPie,
+ *102 MCICD_Play,103 PlaySnd_Manage,104 MCICD_Manage. Registers EAX/EDX/EBX/ECX.
+ * stack_mask selects known stack words (uninitialized locals stay unmodeled).
+ * MCICD args0/1 carry music guards0x4e2f28/29. Free args0=address,result=size.
+ * Unused slots are structural zero. required is record count, not byte count.
+ * Successful load/isolated routine clears events; errors retain previous events.
+ */
+int32_t rl_eventos_quadro(RlMundo world,RlFrameEvent *buffer,uint32_t capacity,uint32_t *required);
+/* Packed copied snapshot: LEu32 count then repeated LEu32 address,length,bytes.
+ * No alignment padding. NULL/zero query returns RL_BUFFER_TOO_SMALL with
+ * required byte count. Other buffer errors never copy a prefix. Freed snapshot
+ * contains actual bytes at free, from the last successful phase, sorted by
+ * numeric address; it is empty after load or isolated routine calls. */
+int32_t rl_projetar_tudo(RlMundo world,uint8_t *buffer,uint32_t capacity,uint32_t *required);
+int32_t rl_projetar_liberados(RlMundo world,uint8_t *buffer,uint32_t capacity,uint32_t *required);
+/* Isolated provider effects, no tick. Id table: frame_{ai,units,core,economy}
+ * ::isolated in rl-core. Argument counts are exact. Returns only the published
+ * semantic EAX/provider value; void adapters return0, no GPR claim. */
+int32_t rl_executar_rotina_quadro(RlMundo world,uint32_t routine,const uint32_t *args,uint32_t count,uint32_t *output);
 #ifdef __cplusplus
 }
 #endif

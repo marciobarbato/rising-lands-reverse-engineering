@@ -1,8 +1,18 @@
 //! Semantic pilot state and an explicit original-address projection.
 mod clock;
+pub mod frame;
+pub mod frame_ai;
+pub mod frame_core;
+pub mod frame_economy;
+pub mod frame_input;
+pub mod frame_missions;
+pub mod frame_state;
+pub use frame_state::{FrameGlobals, FrameState, StructureState, UnitState};
+pub mod frame_units;
 mod memory;
 mod state;
 pub use clock::*;
+pub use frame::{FrameEvent, FrameInput, FrameRegisters};
 pub use memory::*;
 pub use state::*;
 
@@ -17,11 +27,16 @@ pub enum EngineError {
     UnsupportedThreadGetter { address: u32, value: u32 },
     UnknownRoutine(u32),
     InvalidTickRate,
+    UnportedCallee { name: &'static str, address: u32 },
+    InvalidFramePhase(u32),
 }
 pub type Result<T> = std::result::Result<T, EngineError>;
 impl std::fmt::Display for EngineError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{self:?}")
+        match self {
+            Self::UnportedCallee { name, address } => write!(f, "{name} at 0x{address:08x}"),
+            _ => write!(f, "{self:?}"),
+        }
     }
 }
 impl std::error::Error for EngineError {}

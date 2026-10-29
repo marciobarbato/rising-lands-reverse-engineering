@@ -1,8 +1,8 @@
-# Native Rust engine pilot
+# Native Rust engine
 
-This is a method/foundation pilot, not a playable engine, M2.3 work or M3
-acceptance. The game engine and rendering will be Rust; Swift owns the macOS
-shell, C only small tooling, and Python remains the original-validated reference
+The pilot foundations and bounded frame-logic port are documented below.
+This is not a playable engine, M2.3 work or M3 acceptance. The game engine and
+rendering will be Rust; Swift owns the macOS shell, C only small tooling, and Python remains the original-validated reference
 and test harness. This work owns only `motor/` and this document. The existing
 app, references, captures and other fronts are unchanged.
 
@@ -259,5 +259,119 @@ integration the coordinator still needs to publish:
 - whether a shipped app retains Python. It remains the reference/harness and
   present evidence inspector; this pilot changes no app runtime.
 
-Until then, the macOS consumer's LIVE apply_frame stays RuntimeContractPending.
-No engine frame ABI, input protocol, milestone or acceptance is invented here.
+The macOS consumer's LIVE apply_frame stays RuntimeContractPending. The
+additive bounded frame ABI below does not establish an app input/render contract.
+
+## Stage 2 frame logic — ABI 1.1
+
+The current library adds the accepted M2 phase chain: `load_tail` (frame 0),
+`between_frames`, and `frame` (`CalculGame 0x42c868`). Stage 2a's three phases
+are compared against the intact-original display-scenario evidence, under its
+unchanged published mask. This is a bounded native logic port, with pixels and
+human orders outside its contract. It does not declare project acceptance.
+The preceding ABI 1.0 section describes the preserved pilot interface;
+`rl_versao` now returns `0x00010001`. Creation accepts explicitly requested
+1.0 or 1.1; existing signatures, layouts, status values and semantics remain.
+
+`GameState` now owns an optional semantic `FrameState`: 800 `UnitState` values,
+1,000 `StructureState` values and `FrameGlobals` (counters, AI seed, permutation
+cursor, viewport, mission/mode, input and owner/kind counts). Named fields are
+loaded/projected with explicit widths and original bindings; unmodeled bytes
+remain opaque in `Projection`. A complete frame state is modeled only when
+both pools and every declared frame-global field are present. Sparse isolated
+routine fixtures retain absent frame state rather than inventing a mission.
+Removing a bound state, rebinding a pool or changing pool cardinality fails.
+Tests prove every-byte identity, semantic mutation/reload and opaque-byte
+preservation. This remains incremental: provider translations operate on a
+private original-layout projection transaction to preserve original alias and
+read/write order, then reload the semantic state after success. Moving each
+provider's internal access to typed fields is further refactoring, not a
+claim that every original field already has Rust semantics.
+
+The [C header](../motor/include/rising_engine.h) defines these additive calls:
+
+| Call | Contract |
+| --- | --- |
+| `rl_passo_quadro` | Phase 1/2/3, copied 72-byte `RlFrameInput`; named unsupported branches fail atomically |
+| `rl_eventos_quadro` | Last successful phase's ordered bindings, boundaries and frees; copied 72-byte records |
+| `rl_projetar_tudo` | Bulk copied memory projection, LE count then address/length/data records |
+| `rl_projetar_liberados` | Same format, actual bytes retained at each free in the last phase |
+| `rl_executar_rotina_quadro` | Versioned isolated provider IDs/argument counts for differential testing; no tick |
+
+`RlFrameInput` explicitly carries cursor coordinates, the offscreen address,
+eight phase-entry registers, three saved ProgIteration words and four MSG
+words. Supported host answers are the accepted no-input scenario: no key,
+PeekMessageA=0, ShowCursor=0, SetCursorPos/GetCursorPos=1, and fixed allocations
+with handle equal to address. Inputs and all outputs remain unchanged on a
+failed phase, including clock and previous events. Each successful CalculGame
+body (phase 1's frame 0 or phase 3) ticks once; phase 2 does not tick. No host
+clock is read. Phase 2 produces all eight next-entry registers; phase 3 preserves
+the six saved data registers and returns ESP+4. Its EAX remains unmodeled,
+matching the accepted proof. No renderer or blank frame is supplied.
+
+The port includes the player loop, empty/inactive task paths, monster timers,
+input/menu, messages/icons, unit/structure dispatch and their reached state
+branches, research/resources/alliances/market/field providers, terrain and
+vegetation animation, original RNGs, end conditions and influence queries.
+The original display-effect domain guards are retained. Display-only pixels
+are excluded, while HUD refresh, CRT draws, shared cursor and shake effects
+are modeled. DeleteBank frees its sub-buffers, entries, table and header in
+original order; freed bytes and host bindings are exposed for independent
+allocation-record validation. Active AI kernels/tasks, raid spawn, movement,
+combat, transport, completed troop production and other unsupported branches
+stop with a callee name and original address; no empty callback substitutes
+for those routines. Projectile animation is implemented across its type
+branches; effect-only lifetime branches are supported, while reached damage,
+movement and spell calls stop explicitly.
+
+Reproduce the separate full phase proof under the shared heavy lease (read-only
+intact executable supplies static tables/issuer classification):
+
+```sh
+python3 -B motor/testes/frame_differential.py \
+  --executable '/path/to/cd/INSTALHD/RISING.EXE' \
+  --output .local/engine-frame1-new.json
+```
+
+The executable is hash-checked. The proof pins the original M1 display input,
+frame evidence and exact mask, independently verifies all replay checkpoints,
+and chains one Rust world from S0 without importing later expected states.
+Four immutable original jump tables are explicit additional inputs and must
+remain byte-identical. The comparer checks every unmasked byte, RNGs, bindings,
+boundary arguments/registers/guards, between-frame registers and complete final
+allocation records with actual freed-buffer hashes. Actual projected-byte,
+binding-result and boundary-register corruptions must be rejected. Reports
+record source/library hashes and source stability. The 128-frame extension
+uses `--m22 --frames 128`, with its separate cumulative mask.
+
+`sh motor/validate.sh` includes Rust projection tests, 923 selected original
+frame-provider records (773 Core, 132 Economy, 8 AI, 10 Input/Missions), randomized/perturbed
+Python comparisons, ABI failure tests, the unchanged 75-record pilot proof,
+C layout and an actual Swift client calling the frame ABI. The sparse isolated
+captures omit unobserved/same-value bytes in places; the Core/Economy replay
+uses explicitly synthetic surrounding pages, checks every captured changed
+byte and defined return, and compares the entire fixture against Python.
+Only the full-phase proof establishes whole original mission-state equality.
+See [frame audit](../motor/research/FRAME_AUDIT.md) and the current stage
+[handoff](../motor/HANDOFF.md) for actual results, limits and evidence.
+
+### Proven migration window and performance
+
+[Stage 2a](../motor/validation/stage2a-frame-proof.json) proves frame 0/1 in all
+three phases: 16,097,242 compared bytes each, zero mismatches.
+[Stage 2b](../motor/validation/stage2b-128-frame-proof.json) extends the same
+engine code to 128 frames and **257/257 equal phases**, each comparing
+**16,022,275 bytes with zero mismatches** under the unchanged cumulative mask
+(153,060 display bytes). RNGs, external observations, registers and all 25,482
+allocation records are equal. These are native-port evidence results; project
+acceptance remains the coordinator's decision.
+
+The release phase chain runs at **119.83 frames/s** on this Apple M4 Pro
+MacBook (24 GiB), under an exclusive heavy lease: 1.0682 seconds of Rust
+execution for 128 frames. This includes private state projection/reload and
+between-frame effects; it excludes exported snapshots, Python comparison and
+rendering. The task's ~0.5 s/frame Python baseline was not freshly rerun.
+Full validation and remaining common-check prerequisites are in the
+[stage handoff](../motor/HANDOFF.md) and
+[summary](../motor/validation/stage2b-summary.json). App/rendering contracts and
+support beyond the bounded window remain open.

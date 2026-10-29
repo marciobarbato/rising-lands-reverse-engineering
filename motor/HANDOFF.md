@@ -104,3 +104,182 @@ Swift client. The clock/projection/source scopes remain unchanged. Current
 [full log](validation/pilot-latest-main-validation.log) supersede the earlier
 reports only for delivery-baseline identification; historical results remain
 preserved. The final metadata commit does not modify executable code.
+
+## Stage 2a — native frame logic (2026-10-29)
+
+Branch `feat/codex-rust-engine`, fetched/merged baseline
+`d9f70bab2506fea55f6cb0ad926290fed3803595`. Ownership remains motor/ and
+`docs/ENGINE.md`; Python references, original evidence and published policies
+are unchanged. This delivery is a proof for coordinator review, not acceptance
+or a merge into main. Stage 2b starts only after this stage is pushed.
+
+### API, state and supported domain
+
+ABI **1.1** preserves all 1.0 entry points and adds frame phases, ordered event
+observations, bulk copied projection, actual freed-byte projection and isolated
+provider comparisons. The complete pointer/size/version/input contract is in
+`include/rising_engine.h`. Frame input is 72 bytes: cursor, offscreen address,
+eight entry registers, saved EDX/ECX/EBX and MSG words. No Rust pointer escapes.
+Inputs and outputs are transactional on error. Phase1 (load_tail, including
+frame0) and phase3 each advance one virtual tick; phase2 does not. Host pacing
+never changes arithmetic. Frame3 return EAX is intentionally unspecified, as in
+the accepted evidence; its preserved registers and ESP+4 carry forward.
+
+GameState owns semantic unit/structure vectors and named frame globals when
+the complete declared mission pools/globals are present. Explicit bindings
+project these values onto the retained original layout. Unmodeled bytes stay
+opaque. Mechanical providers execute on a private projection transaction and
+reload semantic state only after success. This is an incremental semantic port;
+terrain, Bags and every AI table do not yet have complete semantic Rust models.
+Sparse isolated fixtures remain sparse; absence is never a fabricated mission.
+
+Supported proof domain is the accepted no-human-input MONDE01 display scenario,
+from display-v2 MissionLoad S0 through the load tail, window loop and frame1.
+Four intact original jump tables are explicit immutable inputs. The library
+executes native Rust; no Python callback, emulator or expected-state replay is
+used to produce its state. Read-only expected deltas are replayed separately
+by the comparator, which checks all reference checkpoints before comparison.
+
+Routine families: CalculGame and player loop/CalculNextReflect; inactive
+players and empty task VM; monster timing; InputGame/no key, InputSend,
+MouseZone/scroll/rain, MenuInit/load path, message/icon timers; unit and
+structure dispatch and reached idle/inhabited production branches; collision,
+fatigue, visibility queries; research, resource presentation, alliances,
+sympathy, market counters and field growth; NextAnimTerrain/NextAnimVeget,
+world/CRT RNG and shared permutation cursor; TestFinDeMission/influence;
+ProjectileAnim and effect lifetimes; guarded display logic effects/HUD.
+
+Mutation and host-effect order is the Python chain's original order:
+load-tail restore/clipping/counter reset/menu/bank frees/zones/frame0;
+between-frame display effects/flags/boundaries/message poll/counter advance/
+cursor; frame player loop/input/messages/game counter/icons/projectiles/units/
+structures/research/alliances/fields/material/market/animations/sympathy/end
+condition. DeleteBank frees each sub-buffer before its entry, clears the header
+count, then frees table and header. Every MemFree emits Handle/Unlock/Handle/Free.
+Actual bytes at free are retained for independent freed_sha256 validation.
+No callbacks cross the ABI; unported paths fail by name and original address.
+
+Original executable SHA-256:
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+Principal addresses: CalculGame0x42c868, unit dispatcher0x456db5,
+structure dispatcher0x4281c7, iaCalculPlayer0x47f927, iaSolver0x47d314,
+MenuInit0x4682bb, AffGame0x417698, DeleteBank0x418a12, TestFinDeMission0x458606.
+Capture/mask/source identities are pinned in `testes/frame_differential.py` and
+provider tests. See `research/FRAME_AUDIT.md` for exclusion and observation scope.
+
+### Validation scope and results
+
+The full stage2a report records **3/3 phases equal**, **16,097,242 compared bytes
+in each phase**, **zero mismatched bytes**, unchanged exact display mask
+(78,093 bytes/8,780 ranges), equal RNGs and all 597/2/13 bindings and3/2/1
+boundaries outside display. All25,482 final allocation records are equal,
+including146 freed buffers hashed from actual Rust output. Eight between-frame
+registers are equal. The report also checks immutable input tables, virtual
+ticks and rejection of actual projected-byte/binding-result/boundary-register
+corruptions. Exact source/library identities and timing are in the committed
+report; committed-revision reproduction is recorded below after execution.
+
+The native engine gate covers fmt, Clippy-Dwarnings, Rust semantic projection
+and pilot tests, Python provider/ABI/harness tests, all75 pilot captures,
+C layout and a real Swift1.1 client exercising a successful frame phase.
+Selected isolated frame-provider capture records are not independent missions:
+Core773, Economy132, AI8 and Input/Missions10; historical sparse captures use explicitly synthetic
+surrounding bytes, compare all captured changes/defined returns and compare
+whole fixtures with unchanged Python. Perturbed cases exercise animation/RNG,
+resource presentation, field growth, message timers, command clearing, monster
+timing and target/occupancy scans. Whole-mission equality comes from the full
+phase report, not these synthetic fixtures.
+
+The requested `python3 -B scripts/check.py` was run under the heavy lease in
+this clone. It failed on local prerequisites, not a Rust assertion: missing
+`../source/cd` (mission media/intact executable), linked Graphics `fontes/cd`,
+and Unicorn. Core, Combat, Economy, Graphics, Missions, AI/runtime and Audio
+reported errors/dependency failures; workflow passed. The unmodified checker
+and references were not patched to hide these missing inputs. The preserved
+common-check log records the actual errors/skips. Coordinator reproduction in
+a prepared checkout is needed for the common gate. Fresh x86 emulation and
+the long128-frame Python composition are not rerun here; committed intact
+original evidence is the oracle for this port.
+
+### Remaining boundaries
+
+Active AI kernels/task instructions, monster spawning/raids, moving/combat/
+transport unit branches, completed production SortieTroupe, invention effects,
+alliance expiry, nontrivial market contacts, and other unported branches stop
+explicitly. No fallback is installed. Rendering/pixels, player orders, sound
+playback, app integration and historical tick-rate calibration remain separate.
+The display-effect provider is restricted to the original sampled-origin/type2
+structure domain. Native frame throughput measures phase execution only,
+including projection transactions, excluding Python corpus parsing/comparison,
+rendering and app pacing. Stage2b full128-phase evidence/timing follows in its
+own delivery. No Mac mini run is needed for the offline Rust corpus; any fresh
+original emulation or long Python re-composition remains coordinator work.
+
+### Committed stage 2a reproduction
+
+Implementation commit `8a46430` was reproduced from a clean committed tree.
+[Full proof](validation/stage2a-frame-proof.json) records3/3 equal phases,
+16,097,242 bytes/phase,0 mismatches and no source changes during execution.
+[Summary](validation/stage2a-summary.json) links exact hashes and counts.
+The debug phase-only rate was4.23frames/s including initial load-tail overhead;
+release128-frame throughput is measured in stage2b.
+
+[Engine gate](validation/stage2a-engine-gates.log):21 Rust tests,39 Python tests,
+75/75 pilot records,923 selected frame-provider records and592 perturbed
+comparisons,0 engine failures/skips; fmt, strict Clippy, C layout and Swift1.1
+frame smoke pass. The requested common checker log is preserved losslessly as
+`validation/stage2a-common.log.gz`:1,574 tests run,64 errors,2 dependency-related
+fixture failures,651 optional skips; Graphics not run for missing linked
+inputs. A prepared coordinator checkout must rerun that gate. No main merge
+or acceptance was recorded.
+
+## Stage 2b — 128-frame release proof (2026-10-29)
+
+Stage 2a was pushed at `9ff8aef` before this run began. No engine code changed
+for stage 2b: implementation remains `8a46430`. From clean committed `9ff8aef`,
+the release library passes [all 257 phases](validation/stage2b-128-frame-proof.json)
+(load_tail plus 128 between/frame pairs), with **16,022,275 compared bytes per
+phase and zero mismatches**. The exact cumulative policy masks 153,060 display
+bytes in 4,948 ranges; its 999 observed logic-changing bytes stay compared.
+There is no first divergence, dependency stop or crossing. All 257 replay
+summaries and recorded full-state checkpoints, immutable original tables,
+RNGs, bindings/boundaries outside display, eight between-frame registers,
+carried registers, virtual clock increments and event corruption rejection
+checks pass. All 25,482 allocation records equal the accepted reference,
+including 146 actual freed-byte hashes. Original identities are unchanged.
+
+**Performance:** Apple M4 Pro, 24 GiB, 12 logical CPUs, macOS 27.0.1; aarch64
+Rust release with overflow checks, exclusive heavy lease over slots 0–5.
+Native phase execution totals **1.068210955 seconds for 128 frames:
+119.83 frames/s**, about 8.35 ms/frame. This includes startup/frame 0,
+between-frame effects, private projection transactions and semantic reload.
+It excludes exported snapshots, Python replay/comparison, rendering and app
+pacing. The full proof takes 36.71 seconds including oracle checks. The task's
+Python baseline (~0.5 s/frame, ~2 fps) was not rerun; the native phase rate is
+approximately 60 times that reported baseline, with different measurement scope.
+
+[Release validation log](validation/stage2b-release-validation.log) records
+39/39 Python tests against the release dylib and
+[75/75 pilot capture records](validation/stage2b-release-pilot.json), with zero
+mismatches/skips. The earlier 21 Rust tests, fmt/strict Clippy, C layouts and
+Swift 1.1 frame smoke remain valid because engine sources are unchanged.
+[Stage 2b summary](validation/stage2b-summary.json) records source/library/report
+hashes and timing scope.
+
+The common checker still requires the prepared media/Graphics/Unicorn setup
+described in stage 2a. No fresh original emulation or full 128-frame Python
+composition was run. No Mac mini run is needed to finish the Rust evidence
+proof; coordinator common-gate reproduction in a prepared checkout remains,
+and any fresh long Python/original run should use the Mac mini. All named
+unported branches listed above remain explicit stops. This is logic-only
+workstream delivery; project acceptance and playable-app integration are separate.
+
+Reproduce under the heavy lease (use exclusive mode for comparable timing):
+
+```sh
+cargo build --manifest-path motor/Cargo.toml --workspace --locked --release
+python3 -B motor/testes/frame_differential.py --m22 --frames 128 \
+  --library motor/target/release/librising_engine.dylib \
+  --executable '/path/to/cd/INSTALHD/RISING.EXE' \
+  --output .local/engine-128-new.json
+```

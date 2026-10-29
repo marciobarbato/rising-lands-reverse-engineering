@@ -25,4 +25,31 @@ var tick: UInt64 = 0
 var milliseconds: UInt32 = 0
 precondition(rl_relogio(world, &tick, &milliseconds) == 0)
 precondition(tick == 20 && milliseconds == 1000)
-print("Swift C ABI pilot passed: version1.0, Random=16807, projection equal, clock=1000ms")
+// A successful sparse between-frame phase exercises the new struct layouts,
+// pointer contract, virtual clock, event query and copied bulk projection.
+let frameBase = 0x494000
+var frameBytes = [UInt8](repeating: 0, count: 0x50a000-frameBase)
+frameBytes[0x4e2f78-frameBase] = 0x12
+frameBytes[0x497284-frameBase] = 2
+frameBytes[0x508f7c-frameBase] = 1
+frameBytes[0x49a058-frameBase] = 1
+frameBytes.withUnsafeBufferPointer { bytes in
+    var block = RlBloco(address: UInt32(frameBase), length: UInt32(bytes.count), data: bytes.baseAddress!)
+    precondition(rl_carregar_blocos(world, &block, 1) == 0)
+}
+var frame = RlFrameInput()
+frame.cursor_x = 24; frame.cursor_y = 36
+frame.registers.esp = 0x3000100
+precondition(rl_passo_quadro(world, UInt32(RL_BETWEEN_FRAMES), &frame) == 0)
+precondition(frame.registers.eax == 36 && frame.registers.ebx == 3)
+precondition(frame.registers.edx == 0x3000100 && frame.registers.esp == 0x30000fc)
+precondition(rl_relogio(world, &tick, &milliseconds) == 0 && tick == 20)
+precondition(rl_eventos_quadro(world, nil, 0, &required) == RL_BUFFER_TOO_SMALL && required == 4)
+var events = [RlFrameEvent](repeating: RlFrameEvent(), count: Int(required))
+events.withUnsafeMutableBufferPointer { records in
+    precondition(rl_eventos_quadro(world, records.baseAddress!, UInt32(records.count), &required) == 0)
+}
+precondition(events[0].kind == 2 && events[0].id == 103 && events[3].id == 7)
+precondition(rl_projetar_tudo(world, nil, 0, &required) == RL_BUFFER_TOO_SMALL)
+precondition(required == UInt32(frameBytes.count + 12))
+print("Swift C ABI1.1 passed: RNG, projection, frame phase, events, clock")
