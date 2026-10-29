@@ -1,6 +1,131 @@
 # Audio handoff
 
-Owner: the independent Audio front, branch `feat/re-audio`, clone `/Users/marcio/git/Rising-Lands-Codex-Audio/repository`. Owned paths: `pesquisas-paralelas/audio/` and `docs/AUDIO.md`. Historical sections below preserve earlier scopes; the current delivery is the final request/record and PCM section.
+## M3 sound provider and ordered request stream — 2026-10-29
+
+Current worktree: `/Users/marcio/git/Rising Lands/worktrees/re-audio`, branch
+`feat/re-audio`. Synced by fetch/merge from `5f4052c`; this task authorizes a
+feature push only. No main integration or acceptance record is performed.
+Historical owner locations and earlier stage scopes below remain historical.
+
+Evidence first: **`37ad346`** commits the intact-original 58-request display
+capture before implementation. **`87921d8`** commits the projected original
+M2.2/M2.3 streams, their provenance, the two-phase raid calibration and its
+capture tool. **`2c8a0b9`** commits the complete original raid reader audit and
+its checked soundness summary. Original-only files are additive; no predecessor capture, policy,
+commercial media, original-byte manifest or original identity was rewritten.
+All executable addresses use intact SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`;
+the normalized analysis PE was not executed.
+
+The full contract is [M3_REQUEST_CONTRACT.md](M3_REQUEST_CONTRACT.md).
+`provedor_pedidos_m3_audio.SoundRequestProvider(memory, *, domain, stream=None,
+capture=None)` is exactly Core's callable
+`som(nome, registradores, pilha) -> EAX`. `LiveAudioMemory` adapts Core's live
+memory without copying. PostSound takes EAX/EDX/EBX/ECX u32 plus one pushed
+u32 volume; StopSound takes EAX caller-word address; Manage takes no arguments.
+The unopened-display domain checks the complete accepted private image (dirty
+word 0 or 1) and free handles. The initialized domain requires an exact native
+fixture/sequence and its explicit platform transcript. Other behavior raises.
+
+All **56 PostSound + two StopSound calls return EAX 0**, with unchanged final
+private/caller memory. Core's existing unchanged-EAX boundary is a declaration,
+not the real return. Empty Manage returns 1 and clears `0x498f5c`; its store to
+`0x521f88` retains zero. An unopened post transiently reserves index 20, stores
+the absent entry pointer to zero, then restores index 19 and returns 0. No NULL
+header is read when the entry count is zero. Initialized calls retain the
+earlier queue's exact admission, compaction, PSB/LSB reuse, release/promotion,
+descending launch order and platform callback order, with no rollback/default.
+The accepted M2 scenario never executes `PlaySnd_InitSoundLib 0x48a89f`.
+
+Final replay report:
+[m3-pedidos-replay-v4.json](validacao/m3-pedidos-replay-v4.json): **58 display
+calls + 111 initialized calls / 99 initialized scenarios, zero EAX/full-memory
+or platform-transcript mismatches**. Older v1–v3 replay reports are the same
+coverage during source/recorder binding refinement, not additional unique cases.
+
+Stream schema: `rising-lands/audio-request-stream/1`, with ordered events
+`sequence, frame, phase, routine, caller_return, registers, stack_words`.
+PostSound retains full EAX/EDX/EBX/ECX and one volume; StopSound retains EAX;
+Manage has no arguments. Unused registers/stack residue and boundary-declared
+return EAX are excluded. The exact comparator rejects changed/missing/extra or
+reordered events; there is no mask, sorting or deduplication. The committed
+compressed streams are the argument projection of immutable Missions evidence,
+with source/output hashes in
+[m3-fluxo-original-proveniencia.json](evidencias/m3-fluxo-original-proveniencia.json).
+
+Trace-driven provider/recorder replay equals both raw-boundary projections and
+the committed streams: **M2.2: 128 events /257 phases; M2.3: 9,200 events /18,401
+phases; raid window 8991..9200:210 events /420 phases; zero mismatches**. The
+128-event prefix is equal across packages. These windows contain only Manage,
+not PostSound/StopSound. This proves stream transport over those captures;
+S1 emitter logic remains to be captured and compared by its owner.
+
+Sound-state reader finding: the prior native M2.2 audit proves no game/display
+readers of private sound scalars/tables over 128 frames, including real manager
+execution (only dirty byte `0x498f5c` differs from the accepted boundary state).
+Do not extend that to caller-owned handles. `EnginNextEtape` reads unit u32
+`+0x104` at **0x45446a**, compares it with -1, clears unit `+0xf9` at 0x454491
+when free, or calls `PlaySnd_PostVolume` at 0x45448a when busy. The new raid
+calibration observes that read in all 16 nonempty units in frame 8991, with exact
+state/boundary-argument equality in both phases. Shared CD flag `0x4e2f28` and
+cursor `0x4e1d18` are game logic state, not isolated sound memory.
+
+Cross-owner contract: Core binds the actual return provider; Core/AI-runtime
+preserves caller handles and `+0xf9`. To record call sites, the emitter supplies
+phase and original return address (the current Core callback omits callsite
+metadata). Core PostSound sites 0x440de7/0x41b785 and StopSound site 0x474582 have
+return = site+5. Initialized mission execution needs PostVolume wiring; this
+adapter raises on that entry. No other owner's files were edited.
+
+The complete [raid audit](evidencias/m3-raid-leituras-original-v2.json) and
+[checked summary](validacao/m3-raid-soundness.json) cover frames 8991..9200:
+**420/420 state summaries and ordered boundary argument logs equal**, zero
+mismatches, **274.484 seconds** under `audio-m3-raid-full`. Private sound ranges
+have zero native readers/writers with the accepted sound/MCI boundaries.
+Game-owned voice handles have **3,561 dword reads at 0x45446a**, all -1.
+CalculGame reads CD-playing byte `0x4e2f28` 210 times at 0x42d2f0 and the shared
+cursor byte `0x4e1d18` 210 times at 0x42d2f9. NextAnimVeget reads that cursor
+265 times at 0x47732f; their corresponding cursor stores remain visible.
+No structure `+0x100` or unit `+0x10c` reads occur in the watched window.
+The new unit 16 gets -1 at `+0x104/+0x10c` in CreerEngin, then
+`iagUnitAddToGroup 0x48297a` writes **0x12** to `+0x10c`: this watched word is
+not classified as exclusively audio. No game/AI field is excluded by this work.
+
+This is independent native phase re-entry from accepted memory/registers with
+explicit caller stack words, checked against every output summary. The capture
+format excludes the native stack; it is not a resumable CPU checkpoint or a new
+strict chained run with initialized sound. The code SHA matches the accepted
+original; script/input identities are pinned in the audit and checked summary.
+
+Final gates:
+
+- `python3 -B scripts/check.py --domain audio`: **79 tests, 75 passed, zero
+  failures, four optional native skips**; documentation links passed
+  ([delivery log](validacao/m3-audio-domain-check-delivery.log)).
+- Complete Audio suite with `RISING_EMULAR=1`, under `audio-m3-native-gates`:
+  **79 passed, zero failures,zero skips**, 39.253 seconds
+  ([log](validacao/m3-audio-native-tests.log)). This includes a fresh repeat of
+  the 58 original display calls and the stage-1 native bank-A, selected-P and
+  structure/decoder tests. The unchanged complete 551-sound corpus was not rerun.
+- Fresh [continuation three-way](validacao/m3-continuacao-three-way.json):
+  **139 original entries /132 scenarios,zero mismatches,zero stops**,0.796s.
+- Fresh [dictator three-way](validacao/m3-dictador-three-way.json):
+  **140 original entries /35 scenarios,zero mismatches,one expected NULL
+  allocation/MessageBox dependency stop**,0.464s. These refresh existing
+  initialized coverage; they are not additional unique research cases.
+
+Every fresh native execution used the unchanged MacBook heavy lease. The
+longest new job took 274.484s, below the 18-minute alarm; no Mac mini run is needed.
+No app build was required or attempted in this Audio-only task. No main merge,
+push to main, milestone acceptance, original evidence rewrite or force push.
+
+Gaps remain real device/library initialization, asynchronous playback, busy
+unopened-display handles, initialized mission state, S1/game-emitter equality,
+app playback and M4 StopAllSound/result-screen music. Middle M2.3 frames are
+transport-checked from committed evidence; no 9,200-frame native rerun is claimed.
+
+
+Owner: the Audio front, branch `feat/re-audio`, worktree `/Users/marcio/git/Rising Lands/worktrees/re-audio`. Owned paths: `pesquisas-paralelas/audio/` and `docs/AUDIO.md`. Historical sections below preserve earlier scopes; the current delivery is the M3 request-provider and stream section above.
 
 ## Stage 1: bank format and sample decoding (complete)
 
