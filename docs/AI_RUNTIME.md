@@ -592,3 +592,16 @@ The full report is [FRAME1_COMPARISON.md](../pesquisas-paralelas/ia-runtime/FRAM
 - **(c) frame1** stops at `InputGame`, CALL `0x42d33b` (input; ownership to be confirmed). The state and the event prefix equal the original at that entry.
 
 This front's reached routines were captured natively at the exact frame-0/1 entries first (`evidencias/captura-isolada-ia-quadro1.json`) and then translated in `rotinas_quadro_ia.py`: MessageBoxCalcul, ProcessInputGame (no-command path), AvanceMonstre (reached branches) and iaSolver (via Core `MaquinaTarefas` with a live-memory bridge). In the native differential, 22 of 24 isolated cases are equal. The structure loop stops at the Economy/Core per-structure providers.
+
+## M2.1 round 3 — chained composition: frames 0 and 1 equal to the original
+
+[FRAME1_CHAINED_COMPARISON.md](../pesquisas-paralelas/ia-runtime/FRAME1_CHAINED_COMPARISON.md); the data is in `validacao/m2-quadro1-encadeado-ia.json`.
+
+Running on one M1 map, chained from Python and wired to every integrated Core, Economy, Combat and Missions provider, the composition equals the original at the end of each phase:
+- **(a) load tail**: all blocks, RNGs, bindings and boundaries.
+- **(b) window loop**: also the modeled registers.
+- **(c) frame 1**.
+
+All 81 checkpoints are equal. Declared stops crossed (state equal at entry): RestoreAll (graphics), and SetClipping, InitGameZone ×2 and NextAnimTerrain/NextAnimVeget (core, pending).
+
+New this round, translated from captured executed blocks: InputGame (MouseZone, ScrollTerrain edge scroll, NextGouttes), InputSend, CalculIconeAction, MenuInit, the EnginNextEtape prelude and switch, and the BatimentNextEtape switch.
