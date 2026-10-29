@@ -7,6 +7,7 @@ returned as an explicit effect; renderers outside committed domains raise
 DependenciaQuadro at their original call site with the partial surface.
 """
 import struct
+import sobreposicoes_entrada_m3 as entrada_m3
 from cache_terreno import resolver_bloco_terreno
 from passe_terreno import planejar_passe_terreno, executar_passe_terreno, pixels_bloco_terreno, compor_bloco_terreno
 from passe_sprites import planejar_passe_sprites
@@ -145,6 +146,7 @@ class _Composicao:
         self.camera = tela.u('camera_u8')
         if self.camera > 3: raise ValueError('camera_u8 must select one of four player maps')
         self.descoberta, self.iluminacao = mundo.descoberta[self.camera], mundo.iluminacao[self.camera]
+        self.leitura_entrada = None
         self.habitado = self.relogios_extra = self.selecao_estruturas = self.tabelas_jogador = None
 
     def recorte(self):
@@ -227,9 +229,9 @@ class _Composicao:
             self._fachada_santuario(x, y, celula, indice)
         elif palavra in GATILHOS_FACHADA: self.parar(0x40F23B, f'building facade for terrain word 0x{palavra:x} at cell {celula}')
         if palavra == OFICINA: self.parar(0x40288B, f'workshop facade at cell {celula}')
-        self._cauda_batiments(celula, indice)
         salvo = struct.unpack('<4H', self.tela.bruto('recorte_salvo'))  # RestaureClipping 0x40F4E8
         self.tela.gravar('recorte', struct.pack('<4H', salvo[2], salvo[3], salvo[0], salvo[1]))
+        self._cauda_batiments(celula, indice)
 
     def _fachada_santuario(self, x, y, celula, indice):
         """Terrain word 0x2ED (0x408577..0x408ab3): inline lookup, state query, type-2 facade layers."""
@@ -242,6 +244,7 @@ class _Composicao:
         if modo == 3 and not habitado: self.parar(0x40863E, 'mode 3 without habitation advances the RNG cursor and draws the construction body')
         if not habitado: self.parar(0x40892D, 'uninhabited facade needs the gray effect')
         auxiliar = struct.unpack_from('<H', r, 6)[0]
+        if auxiliar: self.parar(0x4085cb, 'sanctuary damage/fire (+0x06 nonzero): facade provider stops before drawing')
         if self.relogios_extra is None: self.parar(0x4087E3, 'frame clocks 0x508F80/0x508F84 are not supplied')
         relogios = [self.tela.u('quadro_u32'), *self.relogios_extra]
         plano = consultar_santuario(tipo=2, modo=5, habitado=True, jogador=r[4], relogios=relogios,
@@ -260,39 +263,57 @@ class _Composicao:
             if self.selecao_estruturas is None: self.parar(0x40F3C2, 'per-owner structure selection words 0x495BE0 are not supplied')
             dono = self.selecao_estruturas[r[4]] if r[4] < len(self.selecao_estruturas) else None
             if dono is None: self.parar(0x40F3C2, f'owner {r[4]} is outside the supplied selection words')
-            if dono == indice and r[4] == self.camera:
-                self.parar(0x4022C8, 'BatimentPoseCadre (selection frame) is not reconstructed')
-            if r[4] == self.camera and (self.tela.u('selecionada_estrutura_u16') == indice or dono == indice):
-                self.parar(0x4020EC, 'AffJaugeBatiment is not reconstructed')
+            frame = dono == indice and r[4] == self.camera
+            gauge = r[4] == self.camera and (self.tela.u('selecionada_estrutura_u16') == indice or dono == indice)
+            if frame or gauge:
+                if r[8] == 2 and self.mundo.palavra('terreno', celula) != GATILHO_SANTUARIO: return
+                entrada_m3.estrutura(self, r, celula, indice, frame=frame, gauge=gauge)
             return
         if r[8] == 0x11 and r[4] == self.camera and self.tela.u('selecionada_estrutura_u16') == indice:
             self.parar(0x4020EC, 'AffJaugeBatiment is not reconstructed')
 
     def engin(self, x, y, indice):
         r = self.mundo.unidades[indice*276:(indice+1)*276]; tipo, estado = r[1], r[2]
+        if tipo in TIPOS and encaminhamento(tipo, estado, auxiliar_8a=r[0x8a])['rota'] == 'sem_desenho': return
+        overlay = bool(r[0xba] or r[0xbd] or self.tela.u('selecionada_unidade_u16') == indice or self.tela.u('modo_selecao_u8'))
+        i8 = lambda v: v-256 if v > 127 else v
+        px, py = x+i8(r[0x86]), y+i8(r[0x87])
+        if overlay:
+            if self.leitura_entrada is None: self.parar(0x41591f, 'AffEngin input overlays require the live type-table read view')
+            entrada_m3.validar_unidade(self, r)
+            entrada_m3.quadro_selecao_unidade(self, r, px, py)
         if tipo in CORPOS_TIPOS1_8:   # render API 1.3: AffDeplaceEngin branches 0x412D4C / 0x412962 (native capture)
             try:
                 self.saida, _ = compor_corpo_tipos1_8(self.catalogo, self.saida, self.largura, self.altura, r, x=x, y=y,
                     indice_u16=indice, camera_u8=self.camera, indice_selecionado_u16=self.tela.u('selecionada_unidade_u16'),
-                    modo_selecao_u8=self.tela.u('modo_selecao_u8'), tabela_sombra=self.sombra, recorte=self.recorte())
+                    modo_selecao_u8=self.tela.u('modo_selecao_u8'), tabela_sombra=self.sombra, recorte=self.recorte(), sobreposicoes_compostas=overlay)
             except NotImplementedError as erro:
                 self.parar(0x41591F, f'AffEngin unit {indice} type {tipo} state {estado}: {erro}')
             i8 = lambda v: v-256 if v > 127 else v
-            self._icone_fadiga(r, x, y, indice, i8(r[0x86]), i8(r[0x87]))
+            self._cauda_unidade_m3(r, x, y, indice, overlay)
             return
         if tipo not in TIPOS: self.parar(0x41591F, f'AffEngin unit {indice} type {tipo} has no committed body')
         rota = encaminhamento(tipo, estado, auxiliar_8a=r[0x8a])
         if rota['rota'] == 'sem_desenho': return
         guarda = (rota['rota'] == 'corpo_base' and estado in (2, 7) and r[0] == 0 and self.camera == 0
-            and r[0xba] == 0 and r[0xbd] == 0
-            and self.tela.u('selecionada_unidade_u16') != indice and self.tela.u('modo_selecao_u8') == 0
+            and (overlay or (r[0xba] == 0 and r[0xbd] == 0
+                and self.tela.u('selecionada_unidade_u16') != indice and self.tela.u('modo_selecao_u8') == 0))
             and 1 <= r[0x91] <= 16 and r[0xa4] <= 7)
         if not guarda: self.parar(0x41591F, f'AffEngin unit {indice} type {tipo} state {estado} route {rota["rota"]} outside the validated body domain')
         i8 = lambda v: v-256 if v > 127 else v
         self.saida, _ = compor_unidade(self.catalogo, self.saida, self.largura, self.altura, tipo=tipo, estado_u8=estado,
             direcao=r[0x91], fase=r[0xa4], x=x, y=y, tabela=self.sombra, bolsa_u16=struct.unpack_from('<H', r, 0xa)[0],
             auxiliar_8a=r[0x8a], dx=i8(r[0x86]), dy=i8(r[0x87]), recorte=self.recorte())
-        self._icone_fadiga(r, x, y, indice, i8(r[0x86]), i8(r[0x87]))
+        self._cauda_unidade_m3(r, x, y, indice, overlay)
+
+    def _cauda_unidade_m3(self, r, x, y, indice, overlay):
+        i8 = lambda v: v-256 if v > 127 else v
+        px, py = x+i8(r[0x86]), y+i8(r[0x87])-9
+        if overlay and ((r[0] == self.camera and r[0xbd]) or self.tela.u('selecionada_unidade_u16') == indice or self.tela.u('modo_selecao_u8')):
+            entrada_m3.info_unidade(self, r, px, py, indice)
+        else:
+            self._icone_fadiga(r, x, y, indice, i8(r[0x86]), i8(r[0x87]))
+            if overlay: entrada_m3.experiencia(self, r, px, py)
 
     def _icone_fadiga(self, r, x, y, indice, dx, dy):
         """Tail 0x413568..0x413655 of the body routine: the low-life tired icon (life < 100, word +4 == word +0x76)."""
@@ -318,7 +339,7 @@ class _Composicao:
 
 
 def compor_quadro(mundo, tela, *, ciclo_cache, catalogo, tabela_sombra, tabela_eclairage, superficie, relogio, directdraw,
-                  habitado=None, relogios_extra=None, selecao_estruturas=None, tabelas_jogador=None):
+                  habitado=None, relogios_extra=None, selecao_estruturas=None, tabelas_jogador=None, leitura_entrada=None):
     """One AffGame call in mode 0x12, through the HUD checkpoint 0x417B1C.
 
     mundo: MundoQuadro (read-only). tela: EstadoTela, mutated with original
@@ -351,6 +372,7 @@ def compor_quadro(mundo, tela, *, ciclo_cache, catalogo, tabela_sombra, tabela_e
     largura, altura = tela.u('pitch_u32'), tela.u('altura_tela_u16')
     if len(superficie) != largura*altura: raise ValueError('Surface must be pitch x screen height bytes')
     c = _Composicao(mundo, tela, superficie, catalogo, ciclo_cache, bytes(tabela_sombra), bytes(tabela_eclairage))
+    c.leitura_entrada = leitura_entrada
     c.habitado, c.relogios_extra, c.selecao_estruturas = habitado, relogios_extra, selecao_estruturas
     c.tabelas_jogador = tabelas_jogador if tabelas_jogador is not None else _tabelas_jogador()
     c.chamadas += [['CalculFrame'], ['DDLockSurface']]
@@ -380,6 +402,6 @@ def compor_quadro(mundo, tela, *, ciclo_cache, catalogo, tabela_sombra, tabela_e
         elif nome == 'AffBatiments': c.batiments(evento_sprite['x'], evento_sprite['y'], argumento)
         elif nome == 'AffEngin': c.engin(evento_sprite['x'], evento_sprite['y'], argumento)
     if tela.u('caixa_selecao_u8'):
-        c.parar(0x417AC8, 'selection drag box (Box 0x45C912) is not composed')
+        entrada_m3.drag(c)
     return dict(desenhado=True, parada=CHECKPOINT_HUD, superficie=c.saida, chamadas=c.chamadas,
         efeitos=list(tela.efeitos), evento=evento)
