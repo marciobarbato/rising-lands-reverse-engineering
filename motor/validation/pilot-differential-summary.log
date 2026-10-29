@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "comparisons": 75,
+  "by_routine": {
+    "Random": 24,
+    "LongRand": 12,
+    "rand": 12,
+    "IntToBCD": 19,
+    "BCDToInt": 8
+  },
+  "mismatches": 0,
+  "skipped": 0
+}

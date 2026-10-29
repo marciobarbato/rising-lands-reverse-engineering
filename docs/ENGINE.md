@@ -194,6 +194,20 @@ contains no renderer, palette, frame output function, asset extraction or blank
 placeholder frame. Original assets will be committed/bundled by their later
 owner; the projection/oracle harness requires none.
 
+## Ported routine semantics
+
+| Routine / ABI id | Original address | Semantic effect |
+| --- | --- | --- |
+| Random /1 |0x4704dc|World seed at0x497164: unsigned `(q,r)=divmod(seed,127773)`, wrapped32-bit `n=r*16807-q*2836`; if zero or high bit set, wrapped add0x7fffffff; write seed and return EAX=n|
+| LongRand /2, CRT rand /3 |0x45841b /0x48c51d|Getter at0x4990cc must equal0x48e7c7. Seed address is wrapped `u32[0x522244]+12`; address zero returns EAX0 without stores. Otherwise wrapped seed*0x41c64e6d+0x3039, return `(seed>>16)&0x7fff`; EDX preserved|
+| IntToBCD /4 |0x467cd1|Low16 DX to four unpacked bytes at EAX, units first, stores thousands→units; no thousands clamp|
+| BCDToInt /5 |0x467d3a|Read digits at EDX with destination-alias semantics and project wrapped u16 at EAX|
+
+The32-bit world and CRT seeds are independent. Getter/seed declarations are
+required for the selected path; absent bytes and unproved getters are named
+errors. The world RNG uses the unsigned full32-bit input path, not an assumed
+positive-only seed. The audit and code give exact clobbers and widths.
+
 ## Original-first porting and validation procedure
 
 1. Select a fully proved Python routine and original-only capture from its
