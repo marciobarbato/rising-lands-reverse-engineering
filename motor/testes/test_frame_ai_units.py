@@ -176,7 +176,10 @@ class FrameAiUnitTests(unittest.TestCase):
             self.assertEqual(after, blocks)
 
     def test_active_task_is_named_atomic_dependency_stop(self):
-        blocks = [(0x5148b0, struct.pack('<I', 0))]
+        task=bytearray(96)
+        struct.pack_into('<I',task,0,0xffffffff)
+        blocks=[(0x512320,bytes(task)),(0x5148b0,struct.pack('<4I',0,1,96,0x512320)),
+                (0x514910,struct.pack('<5I',0x401234,0,0,0,0))]
         handle = self.pilot.create()
         try:
             self.pilot.load(handle, blocks)
@@ -184,8 +187,8 @@ class FrameAiUnitTests(unittest.TestCase):
             output = C.c_uint32(0xaabbccdd)
             code = self.pilot.lib.rl_executar_rotina_quadro(handle, 103, argv, 1, C.byref(output))
             self.assertEqual(code, 5)
-            self.assertIn('iaSolver active task', self.pilot.error())
-            self.assertIn('0x0047d314', self.pilot.error())  # 0x47d314
+            self.assertIn('iaSolver unported rule', self.pilot.error())
+            self.assertIn('0x00401234', self.pilot.error())
             self.assertEqual(output.value, 0xaabbccdd)
             self.assertEqual(self.pilot.project(handle), blocks)
         finally:

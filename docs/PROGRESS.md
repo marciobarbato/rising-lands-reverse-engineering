@@ -1,8 +1,14 @@
 # Consolidated progress — MONDE01
 
-Round: **CXR-20261029-M2R6 (M2 round 6 — M2.2 128 frames ACCEPTED; M2.3 first raid running on the Mac mini)**. Current fetched/ancestry-verified main: `b9f4b5d`. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)); M2.1 accepted at `32bb391` ([record](../integracao/validacao/cxr-20261029-m2r5-m2-1-acceptance.json)); **M2.2 accepted at `b9f4b5d`** ([record](../integracao/validacao/cxr-20261029-m2r6-m2-2-acceptance.json)). [Roadmap](ROADMAP_MONDE01.md), [snapshots](progress/README.md).
+Round: **CXR-20261029-M2R7 (M2 round 7 — M2.3 first raid ACCEPTED; M2 ACCEPTED; M3 under way)**. Current fetched/ancestry-verified main: `ea62eb4` (later merges listed below). M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)); M2.1 accepted at `32bb391` ([record](../integracao/validacao/cxr-20261029-m2r5-m2-1-acceptance.json)); M2.2 accepted at `b9f4b5d` ([record](../integracao/validacao/cxr-20261029-m2r6-m2-2-acceptance.json)); **M2.3 and M2 accepted at `ea62eb4`** ([record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json)). [Roadmap](ROADMAP_MONDE01.md), [snapshots](progress/README.md).
 
 ## Resumo executivo
+
+**M2 aceito (rodada 7, main `ea62eb4`).** A composição Python dos quadros 0 a 9.200 de MONDE01 após o MissionLoad, 18.401 fases, é igual ao executável original em todas as fases. A janela inclui a primeira incursão inimiga: o grupo surge no quadro 9000 e faz a primeira busca de caminho nos quadros 9176 a 9179. Em cada fase foram comparados 16.022.275 bytes; os 153.060 bytes só de tela foram mascarados com prova de escritor e leitor, e nenhum byte mudou sem escritor observado. Também batem os RNGs, os 25.482 registros de alocação, 138.597 bindings e 27.603 fronteiras fora da tela, os registradores e a flag do HUD, sem nenhum cruzamento. A captura original (10 partes, 93 MB comprimidos) foi feita no Mac mini. A prova foi reproduzida na `main` nas duas máquinas, com os dez hashes de cadeia idênticos. Com M2.1 e M2.2, isso fecha o **M2**.
+
+**M3 em andamento, em paralelo.** Já estão na `main`, cada um validado contra o original antes da tradução: a renderização 1.5 com HUD, cursor e estados de seleção; a seleção de unidades e as ordens (Core, 130/130); os setters de economia e o custo da construção (121/121); a colocação da construção (153/153); o combate com ataque, dano e morte (Codex, em integração); o provedor de pedidos de som (Codex). O motor nativo em **Rust** (Codex) reproduz o M2.2 inteiro, conferido pelo coordenador a 108 quadros/s, e o app macOS já roda esse motor ao vivo, igual à evidência nos 128 quadros. No Mac mini, o harness de entrada roteirizada funciona e as sondas P1–P3/K1 foram capturadas no original: seleção, movimento e ordem da caverna, que fica pronta no quadro 1812. Em aberto: o que dá dono à caverna (ela permanece com dono 0xc8), e como os recursos chegam ao estoque do jogador.
+
+A estimativa global continua em ~50% (40–60%); o M2 fecha a maior incerteza de runtime sem entrada, e o M3 (entrada e ordens) passa a ser o principal desconhecido.
 
 **Passagem de coordenação (29/10, tarde):** um novo coordenador assume a partir de [HANDOVER_CLAUDE_20261029](HANDOVER_CLAUDE_20261029.md). Pendente: a evidência do M2.3 no Mac mini, a comparação formal e o aceite. O plano do M3 está em [M3_PLAN](M3_PLAN.md). Após o M2.2, entraram na `main` os hooks de política nativos em C (6,45× mais rápidos, com resultado idêntico), a renderização 1.3 de Gráficos, os pré-requisitos do M2.3 (Core, IA/runtime e Economia) e as entregas do Codex (macOS, Áudio e mapa de ações).
 
@@ -23,7 +29,7 @@ Nesta rodada a referência original foi integrada (`14c0122`) e a composição P
 
 ## M2 status (live)
 
-**M2 is not accepted. M2.1 (first frame) is ACCEPTED at `32bb391`; M2.2 (128 frames) is ACCEPTED at `b9f4b5d`** ([record](../integracao/validacao/cxr-20261029-m2r5-m2-1-acceptance.json)). M2.2 (128 frames) and M2.3 (first raid, frame 9000) remain.
+**M2 is ACCEPTED.** M2.1 (first frame) at `32bb391`, M2.2 (128 frames) at `b9f4b5d` and **M2.3 (frames 0–9,200, first raid) at `ea62eb4`** ([record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json)).
 
 | Item | Original capture | Implementation | Native differential | Integrated / main reproduction | Whole-frame flow |
 |---|---|---|---|---|---|
@@ -85,11 +91,23 @@ Gates: missions native 126/126 and ai-runtime 57/57 (helpers). Main reproduction
 
 Acceptance: [M2.2 record](../integracao/validacao/cxr-20261029-m2r6-m2-2-acceptance.json). The proof reproduces exactly on main `b9f4b5d` on the MacBook (59 s) and on the Mac mini (54.8 s).
 
-**M2.3 (running on the Mac mini):**
-- Window: frames 0–9,200. It covers the raid spawn at 9000 and the first path search at 9176–9179.
-- Evidence: 1,000-frame parts, each opening with a full state, each under 50 MB. Logic-byte deltas plus a masked display hash per phase. Complete deltas through 8,990–9,200.
-- Policy: the proven pass 2, aggregated per 1,000-frame window, reproduces the M2.2 report exactly.
-- Early warning: frames 0–128 are byte-equal to the M2.2 capture.
+**Round 7 (main `ea62eb4`, M2.3 and M2 accepted).**
+
+| Front | Merge on main | Delivered |
+|---|---|---|
+| Missions (Mac mini) | `de154b5` → `5f4052c` | M2.3 original capture: 10 xz parts (93 MB), 18,401 phases, full states after 8999/9000/9176; cumulative 9,200-frame policy (153,060 display-only bytes, 1,560 logic bytes changed, 0 without writer, 0 logic surface accesses) |
+| AI/runtime | `ecaf853` → `ea62eb4` | **M2.3 proof: 18,401/18,401 phases equal, 0 crossings**, measured crossings, part chain hashes for second-machine reproduction |
+| Maintenance | `5fbef82`, `187ed51`, `a742af4` | Rust engine validation as a common gate; Codex assets tooling pinned to `rising-lands-assets` v1-4eb88f2 (payload branch deleted after a 761/761 blob identity check); comparator repin with a transition pin |
+| Graphics | `ccbdcf0`, `c08e1fb` | Render API 1.4 (HUD tail and cursor, full 800×600 surface 128/128) and 1.5 (input-time selection, action/cost panels, drag box, target marker; 114 native cases, 0 mismatches; Codex) |
+| Core | `b3ebdfb`, construction in integration | Selection and order setters (130 cases, 0 mismatches); construction world routines PlaceBatiment/BatimentConstructible/BatimentPosable/DeplaceEngin… (153 cases, 0 mismatches) |
+| Economy | `406823a` | Mine/depot/harvest setters, TestRessource/EnleveMatiere/CreerBatiment/CalculConstruireBatiment (121 cases, 0 mismatches); CAVE costs 10 food / 6 stone |
+| Rust engine (Codex D) | `d0c2cf4` | ABI 1.1 frame step; M2.2 257/257 phases equal, reproduced by the coordinator at 108 fps; stage 2c (M2.3, 18,401/18,401 reported) under review |
+| macOS (Codex A) | `d9f70ba`, `23dfd6e` | Graphics 1.4/1.5 consumer; live frames from the Rust engine equal the accepted evidence (257/257 states, 128/128 surfaces); live pipeline 1.15 → 9.9 fps in review |
+| Audio (Codex B) | `cebd3da` | Sound-request provider (169 calls, 0 mismatches), request log over M2.2/M2.3; game logic reads no sound-library state |
+
+Acceptance: [M2.3 record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json). The proof reproduces on main `ea62eb4` on the MacBook (1,596 s, 4 parallel parts) and on the Mac mini, with all ten part chain hashes identical.
+
+M3 status: the Mac mini's scripted-input harness (`pesquisas-paralelas/missoes/m3/entrada_roteirizada.py`) and native probes P1 (select), P2 (move), P3 (CAVE order → CreerBatiment at frame 220, complete at 1812) and K1 (keys) are replay-equal over two runs on `feat/re-missions`. Open: what lodges a unit in the cave (its owner stays 0xc8 through frame 3129), and how harvested goods reach `0x4e2ea8`.
 
 Rules adopted: non-native gates run outside the heavy lease. Long native work goes to the Mac mini through `runs/<front>/<tag>` branches.
 
@@ -171,12 +189,12 @@ An execution round closes when its scheduled bounded slice has reached a reporte
 
 ## Current milestone and acceptance
 
-**M1 — load original MONDE01 completely and match the original post-load state: ACCEPTED at `927c7e5` (see the [acceptance record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)). Current milestone: M2 — advancing mission frames from the accepted M1 state. Status: not started.**
+**M1 — load original MONDE01 completely and match the original post-load state: ACCEPTED at `927c7e5` (see the [acceptance record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)). Current milestone: M3 — interactive original mission. M2 ACCEPTED at `ea62eb4` ([record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json)).**
 
 | Milestone | Acceptance criterion | Unmet criteria / current limit |
 |---|---|---|
 | M1 — complete load | Run `MissionLoad 0x46c2cf` through its real return, composing reset, remap, pools, all auxiliary loaders, placement and initializer tails. Match every declared loaded buffer, return and external-binding log with the intact executable. | **ACCEPTED at 927c7e5** for MONDE01/new campaign: Stage14 strict composition equals original capture v2 (881 blocks/2,659,375 bytes, 938 allocation records, 1,400 bindings, AL=1), deterministic, no bridges; committed-main reproduction of both original and composition passed. Listed exclusions are observation metadata only. |
-| M2 — advancing mission | From accepted M1 state, compare complete per-frame state for a declared run including events, AI, units, structures, projectiles, end-condition test and first scripted raid. | M1, runtime dispatchers/kernels/messages, required economy/combat branches, events/end-condition evaluation and frame oracle. No original mission frame sequence has been accepted. |
+| M2 — advancing mission | From accepted M1 state, compare complete per-frame state for a declared run including events, AI, units, structures, projectiles, end-condition test and first scripted raid. | **ACCEPTED at ea62eb4**: M2.1 (frame 1), M2.2 (128 frames) and M2.3 (frames 0–9,200 with the first raid) equal the original phase by phase under the published cumulative mask, zero crossings, reproduced on two machines. |
 | M3 — interactive original mission | App consumes the accepted live mission state, composes its real frames and accepts human orders, with divergences recorded against the original. | M1/M2, facade/overlay/type and input coverage, app live-state integration. Existing training and partial frames do not satisfy this criterion. |
 | M4 — proven objective and transition | Trace `TestFinDeMission` and demonstrate the required state sequence plus victory/defeat transition against the original. | End-condition implementation/query providers and real economy/transport/combat progression. Briefing mentions 50/50 bags; the actual condition must be traced. MONDE01 begins with a type-2 Santuário, not a type-3 Armazém. |
 
