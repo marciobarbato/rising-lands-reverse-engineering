@@ -159,7 +159,12 @@ class VoltasTest(unittest.TestCase):
 
     def test_structure_modes_are_accepted_only_for_one_type_2_record(self):
         for estado_ in range(8):
-            self.assertEqual(e.desenhar_jogo(estado(pool={0: estado_})).escritas, ())
+            self.assertEqual(e.desenhar_jogo(estado(pool={0: estado_}), habitado=lambda i: True).escritas, ())
+        with self.assertRaises(e.DependenciaExibicao) as c:      # mode 3 without the inhabited result stops
+            e.desenhar_jogo(estado(pool={0: 3}))
+        self.assertEqual(c.exception.sitio, 0x40863e)
+        with self.assertRaises(e.DependenciaExibicao):
+            e.restaurar_tudo(estado(pool={0: 3}), habitado=lambda i: False)
         with self.assertRaises(e.DependenciaExibicao):
             e.desenhar_jogo(estado(pool={0: 5, 1: 5}))
         m = estado(pool={0: 5})

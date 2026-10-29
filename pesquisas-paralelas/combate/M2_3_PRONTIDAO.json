@@ -1,0 +1,4182 @@
+{
+ "schema": "rising-lands/m2-3-provider-readiness/1",
+ "main": "99c0e4e",
+ "coverage": {
+  "commit": "7193999",
+  "path": "relatorios/cobertura-quadros-exibicao-9200.json",
+  "sha256": "6ee6d95d23af4a318f18f47dac9b0f60b1197e0da9e2d159da7bcede5b77a844",
+  "frames_run": 9200,
+  "routines": 215,
+  "scenario": "exibicao"
+ },
+ "m22_window": [
+  0,
+  128
+ ],
+ "chain_status_counts": {
+  "boundary": 4,
+  "direct": 86,
+  "display": 45,
+  "nested": 39,
+  "none": 28,
+  "not-wired": 13
+ },
+ "new_in_raid": 56,
+ "gaps_by_owner": {
+  "ai-runtime": [
+   {
+    "routine": "CalculBatimentNextEtape",
+    "first_frame": 0,
+    "kind": "confirm",
+    "detail": "periodic counter-%1000 branch beyond frame 128 (M2.3a states, not raid)"
+   },
+   {
+    "routine": "EnginNextEtape",
+    "first_frame": 0,
+    "kind": "missing-branch",
+    "detail": "EnginNextEtape state-2 movement branch (0x456c1c table) calling DeplaceEngin @EnginNextEtape+0x1185; owner-4 type-0 prelude (reload gate, fatigue)"
+   },
+   {
+    "routine": "B_AttenteConflit",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "iaSolver rule kernels of the monster battle task, wired as VM operations over the live memory"
+   },
+   {
+    "routine": "B_NewConflit",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "iaSolver rule kernels of the monster battle task, wired as VM operations over the live memory"
+   },
+   {
+    "routine": "B_Superieur",
+    "first_frame": 9000,
+    "kind": "unvalidated",
+    "detail": "inline VM operation never compared at a raid state"
+   },
+   {
+    "routine": "B_TestGroupeVide",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "iaSolver rule kernels of the monster battle task, wired as VM operations over the live memory"
+   },
+   {
+    "routine": "I_DetermineTempsTrajet",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "iaSolver rule kernels of the monster battle task, wired as VM operations over the live memory"
+   },
+   {
+    "routine": "V_DeplaceGroupe",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "iaSolver rule kernels of the monster battle task, wired as VM operations over the live memory"
+   },
+   {
+    "routine": "iagUnitGetFirstUnitInGroup",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "kernel-side callers have no provider (see V_DeplaceGroupe, I_DetermineTempsTrajet)"
+   },
+   {
+    "routine": "iagUnitGetNextUnitInGroup",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "iagUnitGetNextUnitInGroup (group iterator, pairs with incursao_ia.primeira_unidade)"
+   },
+   {
+    "routine": "iagWarNewBattleToPos",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "iaSolver rule kernels of the monster battle task, wired as VM operations over the live memory"
+   },
+   {
+    "routine": "iagWarSearchBattleFromPos",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "iaSolver rule kernels of the monster battle task, wired as VM operations over the live memory"
+   },
+   {
+    "routine": "iagWarSetWait",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "iaSolver rule kernels of the monster battle task, wired as VM operations over the live memory"
+   }
+  ],
+  "combat": [
+   {
+    "routine": "EnginOccupeCase",
+    "first_frame": 0,
+    "kind": "follows",
+    "detail": "Combat provider exists; raid-state comparison needs the movement callers"
+   }
+  ],
+  "core": [
+   {
+    "routine": "CalculFatigue",
+    "first_frame": 0,
+    "kind": "unvalidated",
+    "detail": "fatigue for the monster unit; compare on the raid states"
+   },
+   {
+    "routine": "ChercheIndiceEngin",
+    "first_frame": 0,
+    "kind": "missing-provider",
+    "detail": "pathfinding-side ChercheIndiceEngin use is not provided"
+   },
+   {
+    "routine": "__STOSB",
+    "first_frame": 0,
+    "kind": "follows",
+    "detail": "covered once CheminCalcul has a provider"
+   },
+   {
+    "routine": "__STOSD",
+    "first_frame": 0,
+    "kind": "follows",
+    "detail": "covered once CheminCalcul has a provider"
+   },
+   {
+    "routine": "iaSolver",
+    "first_frame": 0,
+    "kind": "missing-branch",
+    "detail": "live task execution with world operations (operacoes/mundo not supplied)"
+   },
+   {
+    "routine": "memset",
+    "first_frame": 0,
+    "kind": "follows",
+    "detail": "covered once CheminCalcul has a provider"
+   },
+   {
+    "routine": "AvanceEngin",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   {
+    "routine": "CalculDirCase",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   {
+    "routine": "CalculDirection",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   {
+    "routine": "CalculNextCase",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   {
+    "routine": "Chemin_Accessible",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   {
+    "routine": "CreerEngin",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   {
+    "routine": "DeplaceEngin",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   {
+    "routine": "EnginEnArret",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   {
+    "routine": "EnginEstVivant",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "EnginEstVivant over the live unit table"
+   },
+   {
+    "routine": "EnginGetCase",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   {
+    "routine": "EnginNextCase",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   {
+    "routine": "EnginPeutPasser",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   {
+    "routine": "EnginSetPlayer",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   {
+    "routine": "EnginSetType",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   {
+    "routine": "EnginSetTypeCaract",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   {
+    "routine": "EnginTypeGetCapacite",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   {
+    "routine": "GetFreeCell",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   {
+    "routine": "GetRandCaseChamps",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   {
+    "routine": "PlaceEngin",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   {
+    "routine": "PlayerGetColor",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   {
+    "routine": "ResetCollision",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   {
+    "routine": "ResetEnginCollision",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   {
+    "routine": "ResetOrdre",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "SetDeplaceEngin/ResetOrdre over the live unit table"
+   },
+   {
+    "routine": "RotateEngin",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   {
+    "routine": "SetDeplaceEngin",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "SetDeplaceEngin/ResetOrdre over the live unit table"
+   },
+   {
+    "routine": "SetMiniMap",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   {
+    "routine": "TerrainEnCollision",
+    "first_frame": 9000,
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   {
+    "routine": "iaProbNew",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "follows iaProbPost"
+   },
+   {
+    "routine": "iaProbPost",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "the chain posts through the VM method, while the raid-validated provider is incursao_core.postar_tarefa; one of them must be wired and compared"
+   },
+   {
+    "routine": "iaProbSleep",
+    "first_frame": 9000,
+    "kind": "unvalidated",
+    "detail": "reached only through a missing kernel; compare once iagWarSetWait exists"
+   },
+   {
+    "routine": "listLinkElemToTail",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "follows iaProbPost"
+   },
+   {
+    "routine": "listNewElem",
+    "first_frame": 9000,
+    "kind": "not-wired",
+    "detail": "follows iaProbPost"
+   },
+   {
+    "routine": "CheminCalcul",
+    "first_frame": 9177,
+    "kind": "missing-provider",
+    "detail": "pathfinding (CheminCalcul and the route follower) over the live memory"
+   },
+   {
+    "routine": "Chemin_Verouille",
+    "first_frame": 9177,
+    "kind": "missing-provider",
+    "detail": "pathfinding (CheminCalcul and the route follower) over the live memory"
+   },
+   {
+    "routine": "OptimiseChemin",
+    "first_frame": 9177,
+    "kind": "missing-provider",
+    "detail": "pathfinding (CheminCalcul and the route follower) over the live memory"
+   },
+   {
+    "routine": "TestLigneOptimise",
+    "first_frame": 9177,
+    "kind": "missing-provider",
+    "detail": "pathfinding (CheminCalcul and the route follower) over the live memory"
+   },
+   {
+    "routine": "EnginNextCaseChemin",
+    "first_frame": 9179,
+    "kind": "missing-provider",
+    "detail": "pathfinding (CheminCalcul and the route follower) over the live memory"
+   }
+  ],
+  "economy": [
+   {
+    "routine": "MAJSympathie",
+    "first_frame": 0,
+    "kind": "confirm",
+    "detail": "same inactive branch expected at counters 2000k; not compared beyond frame 0"
+   },
+   {
+    "routine": "PlayerAttaqueCalculSympa",
+    "first_frame": 0,
+    "kind": "confirm",
+    "detail": "same inactive branch expected at counters 2000k; not compared beyond frame 0"
+   }
+  ],
+  "graphics": [
+   {
+    "routine": "AffDeplaceEngin",
+    "first_frame": 1,
+    "kind": "confirm",
+    "detail": "moving-unit sprite path (AffDeplaceEngin) is display-only; confirm mask/logic effects with the raid display capture"
+   },
+   {
+    "routine": "AffGame",
+    "first_frame": 1,
+    "kind": "confirm",
+    "detail": "desenhar_jogo/affgame_hud over the raid display state (monster unit, live effect projectile, minimap dot) and the display mask beyond frame 128"
+   },
+   {
+    "routine": "ProjectileTrierAffichage",
+    "first_frame": 1,
+    "kind": "confirm",
+    "detail": "projectile display ordering with a live pool slot"
+   }
+  ]
+ },
+ "routines": [
+  {
+   "routine": "AffBloc",
+   "entries": 3910850,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffTerrain",
+   "entries": 9202,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffVegetTerrain",
+   "entries": 3910850,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AvanceMonstre",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "incursao_ia.avancar_monstros (via rotinas_quadro_ia)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)",
+    "Combat captura-incursao-m2-3-original.json (v1, forced 9000, frame 9000)"
+   ],
+   "m23_exposure": "raid frame 9000 validated (forced v1); 9001-9200 run the action loop over one 0x2f action and return (not captured, same code path)",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "BCDToInt",
+   "entries": 36804,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "periodic gates beyond 128 (market %100, propositions %800, research) - M2.3a states, not raid",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "BagContientTroupe",
+   "entries": 27601,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia / producao / construcoes_habitaveis (production branch, TestFinDeMission queries; display callers inside AffGame)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "BatimentCollision",
+   "entries": 276030,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "BatimentContourEstIllumine",
+   "entries": 27603,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "BatimentEstDecouvert",
+   "entries": 27603,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "BatimentExiste",
+   "entries": 9201000,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia / producao / construcoes_habitaveis (production branch, TestFinDeMission queries; display callers inside AffGame)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "BatimentGetCase",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "BatimentGetPlayer",
+   "entries": 174801,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia / producao / construcoes_habitaveis (production branch, TestFinDeMission queries; display callers inside AffGame)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "BatimentGetSelection",
+   "entries": 9202,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "entrada_quadro_ia.calcular_icone_acao",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "BatimentGetType",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia / producao / construcoes_habitaveis (production branch, TestFinDeMission queries; display callers inside AffGame)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "BatimentNextEtape",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "proxima_etapa_quadro.proxima_etapa_estrutura",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "per-structure %50 gate and production branch beyond frame 128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "BonusGetValEngin",
+   "entries": 221424,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "bonus_unidades.BonusUnidades.consultar",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)",
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "owner-4 type-0 unit (CreerEngin path validated by Core with this provider; EnginNextEtape reload gate for the raid unit is not)",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "CalculBatimentNextEtape",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "laco_despachantes.calcular_proxima_etapa_estruturas",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "structure step gate counter % 1000 fires at 1000..9000 (inside frames 0-128 only at 0)",
+   "gap": {
+    "kind": "confirm",
+    "detail": "periodic counter-%1000 branch beyond frame 128 (M2.3a states, not raid)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "CalculCompteurMarche",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "periodic gates beyond 128 (market %100, propositions %800, research) - M2.3a states, not raid",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "CalculCompteurProposition",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "periodic gates beyond 128 (market %100, propositions %800, research) - M2.3a states, not raid",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "CalculEnginNextEtape",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "laco_despachantes.calcular_proxima_etapa_unidades",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "the loop now includes units 16 (and 17 from 10800), owner 4",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "CalculFatigue",
+   "entries": 147614,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.calcular_fadiga",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "first owner-4 type-0 unit (the raid unit) from 9000",
+   "gap": {
+    "kind": "unvalidated",
+    "detail": "fatigue for the monster unit; compare on the raid states"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "CalculIconeAction",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "entrada_quadro_ia.calcular_icone_acao",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "CalculMatiere",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "periodic gates beyond 128 (market %100, propositions %800, research) - M2.3a states, not raid",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "CalculNextReflect",
+   "entries": 36804,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "quadro_calcul_game.calcul_next_reflect",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "CalculTroupe",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia / producao / construcoes_habitaveis (production branch, TestFinDeMission queries; display callers inside AffGame)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "CaseEstDecouverte",
+   "entries": 11445744,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "CaseEstIlluminee",
+   "entries": 8760389,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "Chemin_ModifieZone",
+   "entries": 73876,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core (definir_colisao_unidade, modificar_zona_caminho)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)",
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "raid unit placed (PlaceEngin, validated) and re-collided every frame while it moves (state-2 path, no provider upstream)",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "ChercheContacteur",
+   "entries": 6,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "core",
+   "provider": "chamadas_quadro_core (nested in InitGameZone/InputGame)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "ChercheIndiceEngin",
+   "entries": 4,
+   "first_frame": 0,
+   "last_frame": 9176,
+   "owner": "core",
+   "provider": "entrada_quadro_ia.procurar_unidade (map hover only)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "new caller at 9176: the first path search (DeplaceEngin/pathfinding)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "pathfinding-side ChercheIndiceEngin use is not provided"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "CopyBitmap32x32",
+   "entries": 149,
+   "first_frame": 0,
+   "last_frame": 7,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "DDFlipPage",
+   "entries": 9203,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "graficos efeitos_logicos_exibicao.ddflippage (MenuInit display calls)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "load_tail and AffGame only",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "DDLockSurface",
+   "entries": 9203,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "graficos efeitos_logicos_exibicao.ddlocksurface (MenuInit display calls)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "load_tail and AffGame only",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "DDSetPalette",
+   "entries": 1841,
+   "first_frame": 0,
+   "last_frame": 9196,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "DDUnlockSurface",
+   "entries": 9203,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "graficos efeitos_logicos_exibicao.ddunlocksurface (MenuInit display calls)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "load_tail and AffGame only",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "DeleteBank",
+   "entries": 1,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "graphics",
+   "provider": "graficos efeitos_logicos_exibicao.deletebank (MenuInit display calls)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "load_tail and AffGame only",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "DesTroupesSelectionnes",
+   "entries": 3,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "ai-runtime",
+   "provider": "entrada_quadro_ia.calcular_icone_acao",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "EnginGetNbSelection",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "entrada_quadro_ia.calcular_icone_acao",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "EnginNextEtape",
+   "entries": 147417,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "proxima_etapa_quadro.proxima_etapa_unidade",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "the raid unit is in state 2 (moving) from 9000: the state switch target for state 2 is not translated (_trocar_estado raises \"EnginNextEtape state 2\"), and its reload/fatigue gates run for owner 4 type 0",
+   "gap": {
+    "kind": "missing-branch",
+    "detail": "EnginNextEtape state-2 movement branch (0x456c1c table) calling DeplaceEngin @EnginNextEtape+0x1185; owner-4 type-0 prelude (reload gate, fatigue)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "EnginOccupeCase",
+   "entries": 52,
+   "first_frame": 0,
+   "last_frame": 9196,
+   "owner": "combat",
+   "provider": "alvos_alcance.ocupa_celula",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "called by EnginNextCase/pathfinding for the moving raid unit (9000 on), whose callers have no provider",
+   "gap": {
+    "kind": "follows",
+    "detail": "Combat provider exists; raid-state comparison needs the movement callers"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "EnginTrouveCible",
+   "entries": 1443,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "combat",
+   "provider": "alvos_alcance.encontrar_alvo (encontrar_alvo_scan, distancia2)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Combat captura-isolada-combate-quadro1.json (frames 0/1)",
+    "Combat captura-vida-incursao-m2-3-original.json (v1, forced 9000-9100, every call isolated)"
+   ],
+   "m23_exposure": "raid unit (owner 4, type 0) queries at 9008+32k and unit 15 scans at 9009+32k, all validated 9000-9100; no target through 12000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "EstConstructionTerrain",
+   "entries": 3910850,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "EvenementEnCours",
+   "entries": 36801,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "missions",
+   "provider": "fim_missao (evento_em_curso, testar_fim_missao)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Missions frame-0/1 differentials (fim_missao, influencia_missao)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "FilledBox",
+   "entries": 1,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "graphics",
+   "provider": "graficos efeitos_logicos_exibicao.filledbox (MenuInit display calls)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "load_tail and AffGame only",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "GameNextFrame",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "quadro_calcul_game (inc [0x496d40]) / fundacoes_quadro.avancar_quadro_jogo",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "GetBit",
+   "entries": 1068084,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "GetNumBob",
+   "entries": 3910850,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "IATestUtilite",
+   "entries": 156618,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "laco_despachantes.calcular_proxima_etapa_unidades",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "the loop now includes units 16 (and 17 from 10800), owner 4",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "InitGameZone",
+   "entries": 2,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "core",
+   "provider": "chamadas_quadro_core (definir_recorte, iniciar_zonas_jogo, animar_terreno, animar_vegetacao)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "InputGame",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "entrada_quadro_ia.entrada_jogo",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "map hover sees the raid unit only if it enters the hovered cell (cursor stays at (0,0))",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "InputSend",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "entrada_quadro_ia.enviar_entrada",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "IntToBCD",
+   "entries": 101208,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "periodic gates beyond 128 (market %100, propositions %800, research) - M2.3a states, not raid",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "LoadPie",
+   "entries": 3,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "graphics",
+   "provider": "declared boundary (RestoreAll pictures)",
+   "chain": "boundary",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "load_tail only",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "LongRand",
+   "entries": 3910425,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core (aleatorio_mundo_memoria, aleatorio_crt_memoria)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)",
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "raid draws at 9000 (effect type, target player, %100, field)",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MAJSympathie",
+   "entries": 60,
+   "first_frame": 0,
+   "last_frame": 8000,
+   "owner": "economy",
+   "provider": "quadro_economia.calcular_simpatia_ataques / atualizar_simpatia",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)",
+    "Combat captura-vida-incursao-m2-3-original.json (v1, forced 9000-9100, every call isolated)"
+   ],
+   "m23_exposure": "counter % 2000 fires at 2000..8000 (MAJSympathie x12 each); frames 0-128 cover only counter 0",
+   "gap": {
+    "kind": "confirm",
+    "detail": "same inactive branch expected at counters 2000k; not compared beyond frame 0"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MCICD_Play",
+   "entries": 9202,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "audio",
+   "provider": "declared boundary (CalculGame/ProgIteration)",
+   "chain": "boundary",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MemClose",
+   "entries": 146,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MemFree",
+   "entries": 146,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MemOmbreCopy",
+   "entries": 3360125,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MenuInit",
+   "entries": 1,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "ai-runtime",
+   "provider": "entrada_quadro_ia.iniciar_menu",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "load_tail only",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MessageBoxCalcul",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "rotinas_quadro_ia.calcular_caixa_mensagens",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MessageBoxExiste",
+   "entries": 2,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "core",
+   "provider": "chamadas_quadro_core (nested in InitGameZone/InputGame)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MiniMapGetPos",
+   "entries": 2,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "core",
+   "provider": "chamadas_quadro_core (nested in InitGameZone/InputGame)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MiniMapGetTaille",
+   "entries": 2,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "core",
+   "provider": "chamadas_quadro_core (nested in InitGameZone/InputGame)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MissionGetNum",
+   "entries": 92010,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "composicao_encadeada_ia (u8 0x496fe4) / chamadas_quadro_core.numero_missao",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MouseSetZone",
+   "entries": 34,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "core",
+   "provider": "chamadas_quadro_core (nested in InitGameZone/InputGame)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MouseTestZone",
+   "entries": 2,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "core",
+   "provider": "chamadas_quadro_core (nested in InitGameZone/InputGame)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MouseZone",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "entrada_quadro_ia (zona_mouse, rolar_terreno, proximas_gotas, pairar_mapa)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "NextAnimTerrain",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core (definir_recorte, iniciar_zonas_jogo, animar_terreno, animar_vegetacao)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "NextAnimVeget",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core (definir_recorte, iniciar_zonas_jogo, animar_terreno, animar_vegetacao)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "NextGouttes",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "entrada_quadro_ia (zona_mouse, rolar_terreno, proximas_gotas, pairar_mapa)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "OmbreBitmap32x32",
+   "entries": 149,
+   "first_frame": 0,
+   "last_frame": 7,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "PasteBitmap32x32",
+   "entries": 31,
+   "first_frame": 0,
+   "last_frame": 7,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "PasteBobCmp",
+   "entries": 636776,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "PlayerAttaqueCalculSympa",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia.calcular_simpatia_ataques / atualizar_simpatia",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)",
+    "Combat captura-vida-incursao-m2-3-original.json (v1, forced 9000-9100, every call isolated)"
+   ],
+   "m23_exposure": "counter % 2000 fires at 2000..8000 (MAJSympathie x12 each); frames 0-128 cover only counter 0",
+   "gap": {
+    "kind": "confirm",
+    "detail": "same inactive branch expected at counters 2000k; not compared beyond frame 0"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "PlayerAttaqueReset",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "combat",
+   "provider": "quadro_calcul_game (one-byte RET, no effect)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Combat captura-isolada-combate-quadro1.json (frames 0/1)",
+    "Combat captura-vida-incursao-m2-3-original.json (v1, forced 9000-9100, every call isolated)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "PlayerEstAllie",
+   "entries": 38240,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "combat",
+   "provider": "alvos_alcance.aliados (+ register contract)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Combat captura-isolada-combate-quadro1.json (frames 0/1)",
+    "Combat captura-vida-incursao-m2-3-original.json (v1, forced 9000-9100, every call isolated)"
+   ],
+   "m23_exposure": "owner-4 queries inside the raid unit's target query, validated 9000-9100",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "PlayerEstContacterPourAlliance",
+   "entries": 27606,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core (nested in InitGameZone/InputGame)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "PlayerGetType",
+   "entries": 47464,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "mercado.tipo_jogador",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "player 4 (constant 2) at the raid",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "PlayerInitAllianceCompteur",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "periodic gates beyond 128 (market %100, propositions %800, research) - M2.3a states, not raid",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "ProcessInputGame",
+   "entries": 36804,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "rotinas_quadro_ia.processar_entrada",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "ProjectileAnim",
+   "entries": 920100,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "combat",
+   "provider": "maquina_projeteis.MaquinaProjeteis.calcular (avanco_projeteis.animar_projetil)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Combat captura-isolada-combate-quadro1.json (frames 0/1)",
+    "Combat captura-incursao-m2-3-original.json (v1, forced 9000, frame 9000)",
+    "Combat captura-vida-incursao-m2-3-original.json (v1, forced 9000-9100, every call isolated)",
+    "Combat native suites on synthetic pools/records (RISING_EMULAR)"
+   ],
+   "m23_exposure": "live type-32 effect 9000-9031, validated every frame 9000-9100 (forced v1)",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "ProjectileCalcul",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "combat",
+   "provider": "maquina_projeteis.MaquinaProjeteis.calcular (avanco_projeteis.animar_projetil)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Combat captura-isolada-combate-quadro1.json (frames 0/1)",
+    "Combat captura-incursao-m2-3-original.json (v1, forced 9000, frame 9000)",
+    "Combat captura-vida-incursao-m2-3-original.json (v1, forced 9000-9100, every call isolated)",
+    "Combat native suites on synthetic pools/records (RISING_EMULAR)"
+   ],
+   "m23_exposure": "live type-32 effect 9000-9031, validated every frame 9000-9100 (forced v1)",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "Random",
+   "entries": 78826,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core (aleatorio_mundo_memoria, aleatorio_crt_memoria)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)",
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "raid draws at 9000 (effect type, target player, %100, field)",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "RechercheCalcul",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "periodic gates beyond 128 (market %100, propositions %800, research) - M2.3a states, not raid",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "ReseauActif",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "entrada_quadro_ia.enviar_entrada",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "ResetTableauHangar",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "periodic gates beyond 128 (market %100, propositions %800, research) - M2.3a states, not raid",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "RestoreAll",
+   "entries": 1,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "graphics",
+   "provider": "graficos efeitos_logicos_exibicao.restaurar_tudo",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "load_tail only",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "SetBit",
+   "entries": 12,
+   "first_frame": 0,
+   "last_frame": 5,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "SetClipping",
+   "entries": 1,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "core",
+   "provider": "chamadas_quadro_core (definir_recorte, iniciar_zonas_jogo, animar_terreno, animar_vegetacao)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "SetCollision",
+   "entries": 73850,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "SetEnginCollision",
+   "entries": 73850,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core (definir_colisao_unidade, modificar_zona_caminho)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)",
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "raid unit placed (PlaceEngin, validated) and re-collided every frame while it moves (state-2 path, no provider upstream)",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "SetUpdateChamp",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia.agendar_campos / atualizar_campos (extracao.propagar_planta)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "second and later field sweeps (frames 256+) - M2.3a states, not raid",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "TerrainEstDecouvert",
+   "entries": 5245113,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "TerrainEstGc",
+   "entries": 1,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "ai-runtime",
+   "provider": "entrada_quadro_ia (zona_mouse, rolar_terreno, proximas_gotas, pairar_mapa)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "TerrainEstIllumine",
+   "entries": 2558632,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "TerrainEstMine",
+   "entries": 1,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "ai-runtime",
+   "provider": "entrada_quadro_ia (zona_mouse, rolar_terreno, proximas_gotas, pairar_mapa)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "TerrainEstPiege",
+   "entries": 1,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "ai-runtime",
+   "provider": "entrada_quadro_ia (zona_mouse, rolar_terreno, proximas_gotas, pairar_mapa)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "TerrainEstSac",
+   "entries": 1,
+   "first_frame": 0,
+   "last_frame": 0,
+   "owner": "ai-runtime",
+   "provider": "entrada_quadro_ia (zona_mouse, rolar_terreno, proximas_gotas, pairar_mapa)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "TestFinDeMission",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "missions",
+   "provider": "fim_missao (evento_em_curso, testar_fim_missao)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Missions frame-0/1 differentials (fim_missao, influencia_missao)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "TestRessource",
+   "entries": 27603,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia / producao / construcoes_habitaveis (production branch, TestFinDeMission queries; display callers inside AffGame)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "UpdateChamp",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia.agendar_campos / atualizar_campos (extracao.propagar_planta)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "second and later field sweeps (frames 256+) - M2.3a states, not raid",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "__STOSB",
+   "entries": 46605,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "CRT helpers inline in their callers (reset_terreno/minimap in load_tail)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "also inside CheminCalcul at 9177 (pathfinding scratch clear)",
+   "gap": {
+    "kind": "follows",
+    "detail": "covered once CheminCalcul has a provider"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "__STOSD",
+   "entries": 46605,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "CRT helpers inline in their callers (reset_terreno/minimap in load_tail)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "also inside CheminCalcul at 9177 (pathfinding scratch clear)",
+   "gap": {
+    "kind": "follows",
+    "detail": "covered once CheminCalcul has a provider"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "iaCalculPlayer",
+   "entries": 36804,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "quadro_calcul_game.calcul_next_reflect",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "iaSolver",
+   "entries": 9201,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "ferramentas/tarefas_ia.MaquinaTarefasViva.atualizar",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "frames 0-128 validate only empty/idle contexts; from 9000 player 4 has a live battle task",
+   "gap": {
+    "kind": "missing-branch",
+    "detail": "live task execution with world operations (operacoes/mundo not supplied)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "iabTestEngin",
+   "entries": 147417,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "laco_despachantes.calcular_proxima_etapa_unidades",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "the loop now includes units 16 (and 17 from 10800), owner 4",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "iagMessTestSendMessageEngin",
+   "entries": 147417,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "laco_despachantes.calcular_proxima_etapa_unidades",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "the loop now includes units 16 (and 17 from 10800), owner 4",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "memset",
+   "entries": 46605,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "CRT helpers inline in their callers (reset_terreno/minimap in load_tail)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "also inside CheminCalcul at 9177 (pathfinding scratch clear)",
+   "gap": {
+    "kind": "follows",
+    "detail": "covered once CheminCalcul has a provider"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "rand",
+   "entries": 3910425,
+   "first_frame": 0,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core (aleatorio_mundo_memoria, aleatorio_crt_memoria)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)",
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "raid draws at 9000 (effect type, target player, %100, field)",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffBatimentOmbre",
+   "entries": 13358400,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffBatiments",
+   "entries": 6679200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffChrono",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffCompteurMatiere",
+   "entries": 27600,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffCorpsEngin",
+   "entries": 73600,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffCorpsEnginDecalage",
+   "entries": 73600,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffDeplaceEngin",
+   "entries": 73600,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Graphics evidencias/dominio-exibicao-incursao*.json (AffGame at a raid display state)"
+   ],
+   "m23_exposure": "first moving unit drawn: the raid unit walks from 9000 (frames 0-128 have no moving unit)",
+   "gap": {
+    "kind": "confirm",
+    "detail": "moving-unit sprite path (AffDeplaceEngin) is display-only; confirm mask/logic effects with the raid display capture"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffDrapeauAlliance",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffEngin",
+   "entries": 147200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffGame",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Graphics evidencias/dominio-exibicao-incursao*.json (AffGame at a raid display state)"
+   ],
+   "m23_exposure": "draws the monster unit and a live type-31/32 effect from 9000 on; Graphics raid-domain capture exists, its comparison with desenhar_jogo is Graphics' to confirm",
+   "gap": {
+    "kind": "confirm",
+    "detail": "desenhar_jogo/affgame_hud over the raid display state (monster unit, live effect projectile, minimap dot) and the display mask beyond frame 128"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffInfoAide",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffMarche",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffMiniMap",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffSprite",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffTrame",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffVeget",
+   "entries": 579595,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffVehiculeAtelier",
+   "entries": 5170354,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffZoneIconeAction",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AffZoneInfo",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "BagVide",
+   "entries": 27600,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia / producao / construcoes_habitaveis (production branch, TestFinDeMission queries; display callers inside AffGame)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "BatimentEstHabiter",
+   "entries": 18400,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "economy",
+   "provider": "quadro_economia / producao / construcoes_habitaveis (production branch, TestFinDeMission queries; display callers inside AffGame)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "BatimentGetEtat",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "BatimentGetModeEtat",
+   "entries": 156400,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "Box",
+   "entries": 18400,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "CalculFrame",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "CalculGame",
+   "entries": 18400,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "quadro_calcul_game.calcular_quadro",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "Cyclage",
+   "entries": 1840,
+   "first_frame": 1,
+   "last_frame": 9196,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "EnginEstArmure",
+   "entries": 73600,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "EnginEstMiroir",
+   "entries": 73600,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "EnginEstTerreur",
+   "entries": 73600,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "EnginGetPlayer",
+   "entries": 73600,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "EnginGetType",
+   "entries": 220801,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.tipo_da_unidade",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "new logic caller AvanceMonstre (pending branch) at 9000, monster unit type 0",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "ExisteEngin",
+   "entries": 7360000,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MCICD_Manage",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "audio",
+   "provider": "declared boundary (CalculGame/ProgIteration)",
+   "chain": "boundary",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MemPlayerCopy",
+   "entries": 4214056,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "MessageBoxAffiche",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "PasteOmbreCmp",
+   "entries": 174800,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "PastePlayerCmp",
+   "entries": 37192,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "PlaySnd_Manage",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "audio",
+   "provider": "declared boundary (CalculGame/ProgIteration)",
+   "chain": "boundary",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "ProgIteration",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "composicao_encadeada_ia.fase_entre_quadros_exibicao + Core fundacoes_quadro.avancar_contadores_iteracao",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "ProjectileTrierAffichage",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Graphics evidencias/dominio-exibicao-incursao*.json (AffGame at a raid display state)"
+   ],
+   "m23_exposure": "sorts a live projectile for the first time (slot 0, type 31/32, 9000-9031)",
+   "gap": {
+    "kind": "confirm",
+    "detail": "projectile display ordering with a live pool slot"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "RestaureClipping",
+   "entries": 5170354,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "SaveCurrentClipping",
+   "entries": 5170354,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "ScrollTerrain",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "ai-runtime",
+   "provider": "entrada_quadro_ia (zona_mouse, rolar_terreno, proximas_gotas, pairar_mapa)",
+   "chain": "nested",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "AI-runtime frame-0/1 entry captures (evidencias/captura-entradas-quadro1-ia-v2.json, captura-isolada-ia-quadro1.json)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "TypeEnginSeFatigue",
+   "entries": 392,
+   "first_frame": 1,
+   "last_frame": 94,
+   "owner": "core",
+   "provider": "chamadas_quadro_core.provedores_core",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Core frame-0/1 isolated calls (ferramentas/validar_chamadas_quadro_core.py, display v2 frames 0/1)"
+   ],
+   "m23_exposure": "no new state: same calls as frames 0-128",
+   "gap": null,
+   "beyond_m22_window": false,
+   "new_in_raid": false
+  },
+  {
+   "routine": "itoa",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "utoa",
+   "entries": 9200,
+   "first_frame": 1,
+   "last_frame": 9200,
+   "owner": "graphics",
+   "provider": "inside graficos efeitos_logicos_exibicao.desenhar_jogo + ia-runtime affgame_hud_ia (AffGame root)",
+   "chain": "display",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128"
+   ],
+   "m23_exposure": "display only; AffEngin/AffSprite/AffMiniMap draw the raid unit from 9000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "EnginTrouveCibleScan",
+   "entries": 287,
+   "first_frame": 17,
+   "last_frame": 9169,
+   "owner": "combat",
+   "provider": "alvos_alcance.encontrar_alvo (encontrar_alvo_scan, distancia2)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Combat captura-isolada-combate-quadro1.json (frames 0/1)",
+    "Combat captura-vida-incursao-m2-3-original.json (v1, forced 9000-9100, every call isolated)"
+   ],
+   "m23_exposure": "raid unit (owner 4, type 0) queries at 9008+32k and unit 15 scans at 9009+32k, all validated 9000-9100; no target through 12000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "ScanNouvellePatate",
+   "entries": 181,
+   "first_frame": 45,
+   "last_frame": 9018,
+   "owner": "economy",
+   "provider": "quadro_economia.agendar_campos / atualizar_campos (extracao.propagar_planta)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Economy frame-0/1 captures (captura-quadro1-economia-exibicao.json, captura-consultas-economia-exibicao-v2.json)"
+   ],
+   "m23_exposure": "second and later field sweeps (frames 256+) - M2.3a states, not raid",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": false
+  },
+  {
+   "routine": "AvanceEngin",
+   "entries": 197,
+   "first_frame": 9000,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "none in the chain (avanco_unidades / navegacao_unidades / movimento exist on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "every frame the raid unit moves (9000 on)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "B_AttenteConflit",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "ai-runtime",
+   "provider": "none: Core's MaquinaTarefasViva is built without operacoes/mundo, so executar_operacao raises \"Operação de mundo ainda não reconstruída\" (V_DeplaceGroupe: \"Estado das unidades não fornecido\")",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "iaSolver runs the posted 0x2f task for player 4 at 9000 (and re-plans at 9500, 9700, ...)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "iaSolver rule kernels of the monster battle task, wired as VM operations over the live memory"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "B_NewConflit",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "ai-runtime",
+   "provider": "none: Core's MaquinaTarefasViva is built without operacoes/mundo, so executar_operacao raises \"Operação de mundo ainda não reconstruída\" (V_DeplaceGroupe: \"Estado das unidades não fornecido\")",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "iaSolver runs the posted 0x2f task for player 4 at 9000 (and re-plans at 9500, 9700, ...)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "iaSolver rule kernels of the monster battle task, wired as VM operations over the live memory"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "B_Superieur",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "ai-runtime",
+   "provider": "ferramentas/tarefas_ia.MaquinaTarefas.executar_operacao (inline)",
+   "chain": "nested",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "first use at 9000 inside the battle task",
+   "gap": {
+    "kind": "unvalidated",
+    "detail": "inline VM operation never compared at a raid state"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "B_TestGroupeVide",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "ai-runtime",
+   "provider": "none: Core's MaquinaTarefasViva is built without operacoes/mundo, so executar_operacao raises \"Operação de mundo ainda não reconstruída\" (V_DeplaceGroupe: \"Estado das unidades não fornecido\")",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "iaSolver runs the posted 0x2f task for player 4 at 9000 (and re-plans at 9500, 9700, ...)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "iaSolver rule kernels of the monster battle task, wired as VM operations over the live memory"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "CalculDirCase",
+   "entries": 14,
+   "first_frame": 9000,
+   "last_frame": 9176,
+   "owner": "core",
+   "provider": "none in the chain (avanco_unidades / navegacao_unidades / movimento exist on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "every frame the raid unit moves (9000 on)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "CalculDirection",
+   "entries": 15,
+   "first_frame": 9000,
+   "last_frame": 9196,
+   "owner": "core",
+   "provider": "none in the chain (avanco_unidades / navegacao_unidades / movimento exist on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "every frame the raid unit moves (9000 on)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "CalculNextCase",
+   "entries": 199,
+   "first_frame": 9000,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "none in the chain (avanco_unidades / navegacao_unidades / movimento exist on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "every frame the raid unit moves (9000 on)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "Chemin_Accessible",
+   "entries": 2,
+   "first_frame": 9000,
+   "last_frame": 9177,
+   "owner": "core",
+   "provider": "incursao_core.ROTINAS (validated) - not in provedores_core, so the chain raises DependenciaIA at the incursao_ia call site",
+   "chain": "not-wired",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "spawn and first order at 9000 (10800 for the second raid; Chemin_Accessible again at 11101 and inside Chemin_Verouille at 9177)",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "ConstruitGroupeMonstre",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "ai-runtime",
+   "provider": "incursao_ia (construir_grupo_monstros, novo_grupo, adicionar_ao_grupo, guardar_acao)",
+   "chain": "nested",
+   "validated": [
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)",
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "frame 9000 only",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "CreerEngin",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "incursao_core.ROTINAS (validated) - not in provedores_core, so the chain raises DependenciaIA at the incursao_ia call site",
+   "chain": "not-wired",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "spawn and first order at 9000 (10800 for the second raid; Chemin_Accessible again at 11101 and inside Chemin_Verouille at 9177)",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "DeplaceEngin",
+   "entries": 201,
+   "first_frame": 9000,
+   "last_frame": 9200,
+   "owner": "core",
+   "provider": "none in the chain (avanco_unidades / navegacao_unidades / movimento exist on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "every frame the raid unit moves (9000 on)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "EnginEnArret",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "incursao_core.ROTINAS (validated) - not in provedores_core, so the chain raises DependenciaIA at the incursao_ia call site",
+   "chain": "not-wired",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "spawn and first order at 9000 (10800 for the second raid; Chemin_Accessible again at 11101 and inside Chemin_Verouille at 9177)",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "EnginEstVivant",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "none in the chain (ordens_unidades.viva exists on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "frame 9000 (raid order path)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "EnginEstVivant over the live unit table"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "EnginGetCase",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "incursao_core.ROTINAS (validated) - not in provedores_core, so the chain raises DependenciaIA at the incursao_ia call site",
+   "chain": "not-wired",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "spawn and first order at 9000 (10800 for the second raid; Chemin_Accessible again at 11101 and inside Chemin_Verouille at 9177)",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "EnginNextCase",
+   "entries": 12,
+   "first_frame": 9000,
+   "last_frame": 9176,
+   "owner": "core",
+   "provider": "none in the chain (avanco_unidades / navegacao_unidades / movimento exist on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "every frame the raid unit moves (9000 on)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "EnginPeutPasser",
+   "entries": 17,
+   "first_frame": 9000,
+   "last_frame": 9196,
+   "owner": "core",
+   "provider": "none in the chain (avanco_unidades / navegacao_unidades / movimento exist on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "every frame the raid unit moves (9000 on)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "EnginSetPlayer",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "incursao_core.ROTINAS (validated) - not in provedores_core, so the chain raises DependenciaIA at the incursao_ia call site",
+   "chain": "not-wired",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "spawn and first order at 9000 (10800 for the second raid; Chemin_Accessible again at 11101 and inside Chemin_Verouille at 9177)",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "EnginSetType",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "incursao_core.ROTINAS (validated) - not in provedores_core, so the chain raises DependenciaIA at the incursao_ia call site",
+   "chain": "not-wired",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "spawn and first order at 9000 (10800 for the second raid; Chemin_Accessible again at 11101 and inside Chemin_Verouille at 9177)",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "EnginSetTypeCaract",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "incursao_core.ROTINAS (validated) - not in provedores_core, so the chain raises DependenciaIA at the incursao_ia call site",
+   "chain": "not-wired",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "spawn and first order at 9000 (10800 for the second raid; Chemin_Accessible again at 11101 and inside Chemin_Verouille at 9177)",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "EnginTypeGetCapacite",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "incursao_core.ROTINAS (validated) - not in provedores_core, so the chain raises DependenciaIA at the incursao_ia call site",
+   "chain": "not-wired",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "spawn and first order at 9000 (10800 for the second raid; Chemin_Accessible again at 11101 and inside Chemin_Verouille at 9177)",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "GetFreeCell",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "incursao_core.ROTINAS (validated) - not in provedores_core, so the chain raises DependenciaIA at the incursao_ia call site",
+   "chain": "not-wired",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "spawn and first order at 9000 (10800 for the second raid; Chemin_Accessible again at 11101 and inside Chemin_Verouille at 9177)",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "GetRandCaseChamps",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "incursao_core.ROTINAS (validated) - not in provedores_core, so the chain raises DependenciaIA at the incursao_ia call site",
+   "chain": "not-wired",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "spawn and first order at 9000 (10800 for the second raid; Chemin_Accessible again at 11101 and inside Chemin_Verouille at 9177)",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "I_DetermineTempsTrajet",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "ai-runtime",
+   "provider": "none: Core's MaquinaTarefasViva is built without operacoes/mundo, so executar_operacao raises \"Operação de mundo ainda não reconstruída\" (V_DeplaceGroupe: \"Estado das unidades não fornecido\")",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "iaSolver runs the posted 0x2f task for player 4 at 9000 (and re-plans at 9500, 9700, ...)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "iaSolver rule kernels of the monster battle task, wired as VM operations over the live memory"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "PlaceEngin",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "incursao_core.ROTINAS (validated) - not in provedores_core, so the chain raises DependenciaIA at the incursao_ia call site",
+   "chain": "not-wired",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "spawn and first order at 9000 (10800 for the second raid; Chemin_Accessible again at 11101 and inside Chemin_Verouille at 9177)",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "PlayerGetColor",
+   "entries": 52,
+   "first_frame": 9000,
+   "last_frame": 9195,
+   "owner": "core",
+   "provider": "incursao_core.ROTINAS (validated) - not in provedores_core, so the chain raises DependenciaIA at the incursao_ia call site",
+   "chain": "not-wired",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "spawn and first order at 9000 (10800 for the second raid; Chemin_Accessible again at 11101 and inside Chemin_Verouille at 9177)",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "ProjectileAvance",
+   "entries": 930,
+   "first_frame": 9000,
+   "last_frame": 9031,
+   "owner": "combat",
+   "provider": "maquina_projeteis.MaquinaProjeteis.avancar",
+   "chain": "nested",
+   "validated": [
+    "Combat captura-incursao-m2-3-original.json (v1, forced 9000, frame 9000)",
+    "Combat captura-vida-incursao-m2-3-original.json (v1, forced 9000-9100, every call isolated)",
+    "Combat native suites on synthetic pools/records (RISING_EMULAR)"
+   ],
+   "m23_exposure": "live effect 9000-9031 (slot order validated)",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "ProjectileInit",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "combat",
+   "provider": "projeteis.PoolProjeteis.iniciar",
+   "chain": "direct",
+   "validated": [
+    "Combat captura-incursao-m2-3-original.json (v1, forced 9000, frame 9000)",
+    "Combat native suites on synthetic pools/records (RISING_EMULAR)"
+   ],
+   "m23_exposure": "spawn effect at 9000 (10800)",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "ProjectileSet",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "combat",
+   "provider": "projeteis.PoolProjeteis.definir (inside iniciar)",
+   "chain": "nested",
+   "validated": [
+    "Combat captura-projectile-set-m2-3-original.json (v1, forced 9000, isolated; types 0x20 and 0x1f)",
+    "Combat captura-incursao-m2-3-original.json (v1, forced 9000, frame 9000)",
+    "Combat native suites on synthetic pools/records (RISING_EMULAR)"
+   ],
+   "m23_exposure": "spawn effect at 9000, types 0x20 and 0x1f validated at the raid entry",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "ResetCollision",
+   "entries": 26,
+   "first_frame": 9000,
+   "last_frame": 9196,
+   "owner": "core",
+   "provider": "none in the chain (avanco_unidades / navegacao_unidades / movimento exist on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "every frame the raid unit moves (9000 on)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "ResetEnginCollision",
+   "entries": 26,
+   "first_frame": 9000,
+   "last_frame": 9196,
+   "owner": "core",
+   "provider": "none in the chain (avanco_unidades / navegacao_unidades / movimento exist on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "every frame the raid unit moves (9000 on)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "ResetOrdre",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "none in the chain (ordens_unidades.definir_movimento / redefinir_ordem exist on Core's object world; Combat alvos_alcance.ordem_apos_reset covers ResetOrdre inside SetAttaqueEngin only)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "V_DeplaceGroupe orders the raid unit at 9000 (re-orders at 9500, 9700, 10200, ...)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "SetDeplaceEngin/ResetOrdre over the live unit table"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "RotateEngin",
+   "entries": 8,
+   "first_frame": 9000,
+   "last_frame": 9197,
+   "owner": "core",
+   "provider": "none in the chain (avanco_unidades / navegacao_unidades / movimento exist on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "every frame the raid unit moves (9000 on)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "SetDeplaceEngin",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "none in the chain (ordens_unidades.definir_movimento / redefinir_ordem exist on Core's object world; Combat alvos_alcance.ordem_apos_reset covers ResetOrdre inside SetAttaqueEngin only)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "V_DeplaceGroupe orders the raid unit at 9000 (re-orders at 9500, 9700, 10200, ...)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "SetDeplaceEngin/ResetOrdre over the live unit table"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "SetMiniMap",
+   "entries": 25,
+   "first_frame": 9000,
+   "last_frame": 9195,
+   "owner": "core",
+   "provider": "incursao_core.ROTINAS (validated) - not in provedores_core, so the chain raises DependenciaIA at the incursao_ia call site",
+   "chain": "not-wired",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)",
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "spawn and first order at 9000 (10800 for the second raid; Chemin_Accessible again at 11101 and inside Chemin_Verouille at 9177)",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "export incursao_core routines as chain providers (original-name signatures used by incursao_ia)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "StockeAction",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "ai-runtime",
+   "provider": "incursao_ia (construir_grupo_monstros, novo_grupo, adicionar_ao_grupo, guardar_acao)",
+   "chain": "nested",
+   "validated": [
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)",
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "frame 9000 only",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "TerrainEnCollision",
+   "entries": 16,
+   "first_frame": 9000,
+   "last_frame": 9196,
+   "owner": "core",
+   "provider": "none in the chain (avanco_unidades / navegacao_unidades / movimento exist on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "every frame the raid unit moves (9000 on)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "unit movement over the live memory, called from the EnginNextEtape state-2 branch"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "V_DeplaceGroupe",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "ai-runtime",
+   "provider": "none: Core's MaquinaTarefasViva is built without operacoes/mundo, so executar_operacao raises \"Operação de mundo ainda não reconstruída\" (V_DeplaceGroupe: \"Estado das unidades não fornecido\")",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "iaSolver runs the posted 0x2f task for player 4 at 9000 (and re-plans at 9500, 9700, ...)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "iaSolver rule kernels of the monster battle task, wired as VM operations over the live memory"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "iaGroupNew",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "ai-runtime",
+   "provider": "incursao_ia (construir_grupo_monstros, novo_grupo, adicionar_ao_grupo, guardar_acao)",
+   "chain": "nested",
+   "validated": [
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)",
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "frame 9000 only",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "iaProbNew",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "nested in the iaProbPost provider (incursao_core.tarefa_nova / lista_novo_elemento / lista_ligar_ao_fim validated)",
+   "chain": "nested",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "frame 9000",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "follows iaProbPost"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "iaProbPost",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "chain: tarefas_ia.MaquinaTarefasViva.postar; validated translation: incursao_core.postar_tarefa (not the one wired)",
+   "chain": "direct",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "frame 9000 (StockeAction 0x2f), 10800, 11101",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "the chain posts through the VM method, while the raid-validated provider is incursao_core.postar_tarefa; one of them must be wired and compared"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "iaProbSleep",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "ferramentas/tarefas_ia.MaquinaTarefas.suspender",
+   "chain": "nested",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "called by iagWarSetWait at 9000 (whose kernel has no provider)",
+   "gap": {
+    "kind": "unvalidated",
+    "detail": "reached only through a missing kernel; compare once iagWarSetWait exists"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "iagUnitAddToGroup",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "ai-runtime",
+   "provider": "incursao_ia (construir_grupo_monstros, novo_grupo, adicionar_ao_grupo, guardar_acao)",
+   "chain": "nested",
+   "validated": [
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)",
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "frame 9000 only",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "iagUnitGetFirstUnitInGroup",
+   "entries": 3,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "ai-runtime",
+   "provider": "incursao_ia.primeira_unidade (AvanceMonstre path only)",
+   "chain": "nested",
+   "validated": [
+    "AI-runtime evidencias/captura-incursao-ia.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "also called by the iaSolver kernels I_DetermineTempsTrajet and V_DeplaceGroupe at 9000, which have no provider",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "kernel-side callers have no provider (see V_DeplaceGroupe, I_DetermineTempsTrajet)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "iagUnitGetNextUnitInGroup",
+   "entries": 2,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "ai-runtime",
+   "provider": "none",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "iaSolver kernels I_DetermineTempsTrajet and V_DeplaceGroupe at 9000",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "iagUnitGetNextUnitInGroup (group iterator, pairs with incursao_ia.primeira_unidade)"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "iagWarNewBattleToPos",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "ai-runtime",
+   "provider": "none: Core's MaquinaTarefasViva is built without operacoes/mundo, so executar_operacao raises \"Operação de mundo ainda não reconstruída\" (V_DeplaceGroupe: \"Estado das unidades não fornecido\")",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "iaSolver runs the posted 0x2f task for player 4 at 9000 (and re-plans at 9500, 9700, ...)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "iaSolver rule kernels of the monster battle task, wired as VM operations over the live memory"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "iagWarSearchBattleFromPos",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "ai-runtime",
+   "provider": "none: Core's MaquinaTarefasViva is built without operacoes/mundo, so executar_operacao raises \"Operação de mundo ainda não reconstruída\" (V_DeplaceGroupe: \"Estado das unidades não fornecido\")",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "iaSolver runs the posted 0x2f task for player 4 at 9000 (and re-plans at 9500, 9700, ...)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "iaSolver rule kernels of the monster battle task, wired as VM operations over the live memory"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "iagWarSetWait",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "ai-runtime",
+   "provider": "none: Core's MaquinaTarefasViva is built without operacoes/mundo, so executar_operacao raises \"Operação de mundo ainda não reconstruída\" (V_DeplaceGroupe: \"Estado das unidades não fornecido\")",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "iaSolver runs the posted 0x2f task for player 4 at 9000 (and re-plans at 9500, 9700, ...)",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "iaSolver rule kernels of the monster battle task, wired as VM operations over the live memory"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "listLinkElemToTail",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "nested in the iaProbPost provider (incursao_core.tarefa_nova / lista_novo_elemento / lista_ligar_ao_fim validated)",
+   "chain": "nested",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "frame 9000",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "follows iaProbPost"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "listNewElem",
+   "entries": 1,
+   "first_frame": 9000,
+   "last_frame": 9000,
+   "owner": "core",
+   "provider": "nested in the iaProbPost provider (incursao_core.tarefa_nova / lista_novo_elemento / lista_ligar_ao_fim validated)",
+   "chain": "nested",
+   "validated": [
+    "Core evidencias/fundacoes-quadro/captura-incursao-core-v1.json (v1, counter forced to 9000, frame 9000 only)"
+   ],
+   "m23_exposure": "frame 9000",
+   "gap": {
+    "kind": "not-wired",
+    "detail": "follows iaProbPost"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "Distance2d",
+   "entries": 6,
+   "first_frame": 9009,
+   "last_frame": 9169,
+   "owner": "combat",
+   "provider": "alvos_alcance.encontrar_alvo (encontrar_alvo_scan, distancia2)",
+   "chain": "direct",
+   "validated": [
+    "M2.2 chained proof (ia-runtime validacao/m2-2-prova-128-quadros.json): display reference frames 0-128",
+    "Combat captura-isolada-combate-quadro1.json (frames 0/1)",
+    "Combat captura-vida-incursao-m2-3-original.json (v1, forced 9000-9100, every call isolated)"
+   ],
+   "m23_exposure": "raid unit (owner 4, type 0) queries at 9008+32k and unit 15 scans at 9009+32k, all validated 9000-9100; no target through 12000",
+   "gap": null,
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "CheminCalcul",
+   "entries": 1,
+   "first_frame": 9177,
+   "last_frame": 9177,
+   "owner": "core",
+   "provider": "none in the chain (preparacao_destino / navegacao_unidades.escolher_da_rota exist on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "first path search at 9177, route following from 9179",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "pathfinding (CheminCalcul and the route follower) over the live memory"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "Chemin_Verouille",
+   "entries": 1,
+   "first_frame": 9177,
+   "last_frame": 9177,
+   "owner": "core",
+   "provider": "none in the chain (preparacao_destino / navegacao_unidades.escolher_da_rota exist on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "first path search at 9177, route following from 9179",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "pathfinding (CheminCalcul and the route follower) over the live memory"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "OptimiseChemin",
+   "entries": 1,
+   "first_frame": 9177,
+   "last_frame": 9177,
+   "owner": "core",
+   "provider": "none in the chain (preparacao_destino / navegacao_unidades.escolher_da_rota exist on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "first path search at 9177, route following from 9179",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "pathfinding (CheminCalcul and the route follower) over the live memory"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "TestLigneOptimise",
+   "entries": 5,
+   "first_frame": 9177,
+   "last_frame": 9177,
+   "owner": "core",
+   "provider": "none in the chain (preparacao_destino / navegacao_unidades.escolher_da_rota exist on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "first path search at 9177, route following from 9179",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "pathfinding (CheminCalcul and the route follower) over the live memory"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  },
+  {
+   "routine": "EnginNextCaseChemin",
+   "entries": 3,
+   "first_frame": 9179,
+   "last_frame": 9196,
+   "owner": "core",
+   "provider": "none in the chain (preparacao_destino / navegacao_unidades.escolher_da_rota exist on Core's object world)",
+   "chain": "none",
+   "validated": [
+    "Combat percurso-incursao-m2-3-original.json (v1, forced 9000-12000, entries only)"
+   ],
+   "m23_exposure": "first path search at 9177, route following from 9179",
+   "gap": {
+    "kind": "missing-provider",
+    "detail": "pathfinding (CheminCalcul and the route follower) over the live memory"
+   },
+   "beyond_m22_window": true,
+   "new_in_raid": true
+  }
+ ]
+}

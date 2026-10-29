@@ -52,7 +52,7 @@ class EfeitosExibicao:
     eax: object = None            # EAX observed at the original return; None when it is a leftover register
 
 
-def _guardas(memoria, rotina):
+def _guardas(memoria, rotina, habitado=None):
     lidas = []
     def ler(nome, valor):
         lidas.append((nome, valor))
@@ -73,6 +73,11 @@ def _guardas(memoria, rotina):
         raise DependenciaExibicao(rotina, CURSOR_RNG_SITIOS[0], f'structure states {sorted(estados)}, occupied '
                                   f'records {ocupadas}: captured only for one type-{TIPO_ESTRUTURA_PROVADO} structure in '
                                   'modes 0..7 (AffBatiments has 69 0x4e1d18 sites, none reached there)')
+    for i in ocupadas:
+        # AffBatiments 0x408627: mode 3 without habitation advances 0x4e1d18 (0x408679); the captured Santuario is inhabited
+        if memoria.u8(ESTRUTURAS + i*ESTRUTURA_PASSO + ESTRUTURA_ESTADO) == 3 and not (callable(habitado) and habitado(i)):
+            raise DependenciaExibicao(rotina, 0x40863e, f'structure {i} in mode 3 needs BatimentEstHabiter true '
+                                      '(uninhabited advances the RNG cursor; not captured)')
     monstros = memoria.u8(MONSTROS)
     if monstros > 1:
         raise DependenciaExibicao(rotina, 0x41591f, f'monster count {monstros}: only 0 and 1 (raid unit 16, '
@@ -105,15 +110,15 @@ def _voltas(memoria, voltas):
     return (((CURSOR, 1, cursor),) if cursor != cursor0 else ()) + (((TREMOR, 1, n),) if n != n0 else ())
 
 
-def restaurar_tudo(memoria):
+def restaurar_tudo(memoria, habitado=None):
     """RestoreAll 0x474b08 in the captured domain: only the shake path of its two DDFlipPage calls writes logic state."""
-    guardas = _guardas(memoria, 'RestoreAll')
+    guardas = _guardas(memoria, 'RestoreAll', habitado)
     return EfeitosExibicao('RestoreAll', _voltas(memoria, 2), guardas)
 
 
-def desenhar_jogo(memoria):
+def desenhar_jogo(memoria, habitado=None):
     """AffGame 0x417698 (mode 0x12 body): the flip loop runs [0x49a05b] + 1 DDFlipPage calls (shake path only)."""
-    guardas = _guardas(memoria, 'AffGame')
+    guardas = _guardas(memoria, 'AffGame', habitado)
     return EfeitosExibicao('AffGame', _voltas(memoria, memoria.u8(PAGINAS)+1), guardas)
 
 
