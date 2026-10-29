@@ -68,3 +68,10 @@ playing states update volume and clear dirty fields, even on the declared
 SetVolume error HRESULT. All 204 v4 calls return except the one explicit
 CreateSoundBuffer dependency stop; the original physical-index increment and
 seek call before that stop are retained. v1/v2 diagnostics and v3 remain frozen.
+
+Diagnostic correction: v3/v4's pending Manage path first stopped at the undeclared
+native CRT memset interval 0x48c3b0, not at COM creation. v5 reuses the exact
+stage-1 native memset/STOS intervals (no Python substitution). Its sole stop is
+now proven at COM slot +0x0c, original caller return 0x48b834, while 203 cases
+return. Earlier raw reports are unchanged and are not counted as complete
+buffer-creation captures. The provider/three-way differential use v5.

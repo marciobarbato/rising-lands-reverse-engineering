@@ -160,7 +160,7 @@ class QueueNativeBench(BancadaX86):
 def run_case(fixture):
     b=QueueNativeBench(fixture);stop=None;regs={}
     try:
-        regs=b.executar(ENTRIES[fixture['operation']],[(0x489dac,0x48c204)],fixture['regs'],
+        regs=b.executar(ENTRIES[fixture['operation']],[(0x489dac,0x48c204),(0x48c3b0,0x48c3c8),(0x48d890,0x48d942)],fixture['regs'],
                        pilha={4+4*i:struct.pack('<I',v) for i,v in enumerate(fixture['arguments'])},limite_instrucoes=20000)
     except Exception as exc:stop=dict(type=type(exc).__name__,detail=str(exc),eip=hex(b.cpu.reg_read(x86.UC_X86_REG_EIP)))
     return dict(name=fixture['name'],operation=fixture['operation'],input=fixture,output=b.snapshot(),
