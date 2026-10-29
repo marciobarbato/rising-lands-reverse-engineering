@@ -1,0 +1,38 @@
+{
+  "schema": "rising-lands/rust-engine-stage2a-delivery/1",
+  "branch": "feat/codex-rust-engine",
+  "baseline_main": "d9f70bab2506fea55f6cb0ad926290fed3803595",
+  "implementation_commit": "8a4643031f6980825032848c122c0fe915afe44a",
+  "proof": {
+    "path": "motor/validation/stage2a-frame-proof.json",
+    "sha256": "e7564dad0ba05bde5523fa545feac4cf926cc22af7dbd82333d7933aa4651166",
+    "complete_proof": true,
+    "phases_compared": 3,
+    "phases_equal": 3,
+    "phases_requested": 3,
+    "result": "equal"
+  },
+  "abi": "1.1",
+  "gates": {
+    "motor_validate": "passed",
+    "rust_tests": 21,
+    "python_tests": 39,
+    "pilot_original_records": 75,
+    "frame_provider_original_records": 923,
+    "frame_provider_perturbed_comparisons": 592,
+    "swift_frame_smoke": "passed",
+    "common_check": "failed_missing_local_inputs_and_unicorn",
+    "common_log": "motor/validation/stage2a-common.log.gz",
+    "common_log_uncompressed_sha256": "b17c4b5a9ba2f5b376ad4f9182d9d71e763129ed2ce966a724458fb95b869352",
+    "common": {
+      "tests_run": 1574,
+      "errors": 64,
+      "failures": 2,
+      "skipped": 651,
+      "graphics_suite": "not_run_missing_linked_inputs"
+    }
+  },
+  "stage2b": "not_started_before_stage2a_push",
+  "main_merge": "not_performed",
+  "acceptance": "coordinator_only"
+}

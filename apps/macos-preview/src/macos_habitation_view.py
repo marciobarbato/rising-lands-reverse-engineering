@@ -4,13 +4,15 @@ Only pure read methods are compiled, avoiding Economy/Graphics flat-name
 collisions. There are no constructor defaults, mutable world or callbacks.
 """
 import ast
+from functools import lru_cache
 from pathlib import Path
 import struct
 from types import SimpleNamespace, MethodType
 from macos_state_consumer import StateValidationError
 
 
-def habitation_query(root, image):
+@lru_cache(maxsize=4)
+def _read_contract(root):
     folder = Path(root) / 'pesquisas-paralelas/economia'
     namespace = dict(struct=struct)
     selections = {
@@ -33,6 +35,11 @@ def habitation_query(root, image):
         exec(compile(ast.Module(body=nodes, type_ignores=[]), str(path), 'exec'), namespace)
         if any(name not in namespace for name in names):
             raise StateValidationError('Economy read contract changed: ' + filename)
+    return namespace
+
+
+def habitation_query(root, image):
+    namespace = _read_contract(str(Path(root).resolve()))
     recruitment = SimpleNamespace(mundo=SimpleNamespace(estruturas=image.read(0x49a0c8, 276000)),
                                   unidades=image.read(image.u32(0x4e19a0), 220800))
     recruitment._offset = MethodType(namespace['_offset'], recruitment)

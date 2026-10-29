@@ -1,0 +1,212 @@
+{
+ "schema": "rising-lands/audio-m3-original-raid-accesses/1",
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "translation_executed": false,
+ "source_compressed_sha256": "6c385670a501389efbf2465f7d45468b00926911732916840d33ab13394e6b9a",
+ "source_raw_sha256": "f70e893eb74aa7a399c803f6aa28c7916e6182a6e8bd37ffe84bece5eb92c39b",
+ "scope": "Independent native phase re-entry, frames 8991..9200, declared accepted display boundaries",
+ "phases": [
+  {
+   "phase": "between_frames8991",
+   "summary_equal": true,
+   "differences": [],
+   "difference_count": 0,
+   "boundaries_equal": true
+  },
+  {
+   "phase": "frame8991",
+   "summary_equal": true,
+   "differences": [],
+   "difference_count": 0,
+   "boundaries_equal": true
+  }
+ ],
+ "complete": false,
+ "reads": [
+  {
+   "phase": "frame8991",
+   "instruction": "0x42d2f0",
+   "routine": "CalculGame+0xa88",
+   "address": "0x4e2f28",
+   "bytes": 1,
+   "range": "game_cd_playing_and_mci_initialized_flags",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x42d2f9",
+   "routine": "CalculGame+0xa91",
+   "address": "0x4e1d18",
+   "bytes": 1,
+   "range": "shared_random_permutation_cursor",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "address": "0x474a8104",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "address": "0x474a8218",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "address": "0x474a832c",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "address": "0x474a8440",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "address": "0x474a8554",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "address": "0x474a8668",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "address": "0x474a877c",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "address": "0x474a8890",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "address": "0x474a89a4",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "address": "0x474a8ab8",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "address": "0x474a8bcc",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "address": "0x474a8ce0",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "address": "0x474a8df4",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "address": "0x474a8f08",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "address": "0x474a901c",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "count": 1
+  },
+  {
+   "phase": "frame8991",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "address": "0x474a9130",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "count": 1
+  }
+ ],
+ "writes": [
+  {
+   "phase": "frame8991",
+   "instruction": "0x42d322",
+   "routine": "CalculGame+0xaba",
+   "address": "0x4e1d18",
+   "bytes": 1,
+   "range": "shared_random_permutation_cursor",
+   "count": 1
+  }
+ ],
+ "memory_width_audit": {
+  "text_start": "0x401000",
+  "text_bytes": 601088,
+  "text_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+  "max_explicit_memory_operand_bytes": 10,
+  "hook_backward_prefix": 15,
+  "linear_skipdata_bytes": 18,
+  "scope": "Static original-text disassembly, including legacy x87. REP accesses are per element."
+ },
+ "code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+ "script_sha256": "0ab7f91fc2a2e093cb769263ed76c7dd21883de0c98f06beb131e1f6510b8fc3",
+ "seconds": 79.232
+}

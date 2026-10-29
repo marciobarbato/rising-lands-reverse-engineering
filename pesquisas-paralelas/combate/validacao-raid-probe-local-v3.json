@@ -1,0 +1,596 @@
+{
+ "schema": "rising-lands/combat-real-raid-differential/1",
+ "capture": "pesquisas-paralelas/combate/evidencias/probe-combate-raid-original-v1.json",
+ "capture_sha256": "d19c00c2bc1252ff04b0ab882feb63422f16c493b800f2f420af0cdd445080c0",
+ "provenance": {
+  "manifest": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.manifest.json",
+  "manifest_sha256": "e88dc3fcaca11d03a774dad8bd9c768345f13c884cc2d8df493107ec9d180b09",
+  "artifact": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.parte09.json.xz",
+  "compressed_sha256": "6c385670a501389efbf2465f7d45468b00926911732916840d33ab13394e6b9a",
+  "raw_sha256": "f70e893eb74aa7a399c803f6aa28c7916e6182a6e8bd37ffe84bece5eb92c39b",
+  "checkpoints": {
+   "9000": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "711e8d75a325c1e08c6094be3463ae8d1722078b772fb4e6bbf0b72a9e5d3f61"
+   },
+   "9176": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "e52f04d848a34bae235ed5dbca068c67fb30a1460084665246cf42685d8e7066"
+   }
+  }
+ },
+ "native": false,
+ "cases": [
+  {
+   "case": "f9000-order-0-1-16",
+   "routine": "SetAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-attack-0-1-16",
+   "routine": "CalculAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-order-1-1-16",
+   "routine": "SetAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-attack-1-1-16",
+   "routine": "CalculAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-order-2-1-16",
+   "routine": "SetAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-attack-2-1-16",
+   "routine": "CalculAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-order-16-1-0",
+   "routine": "SetAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-attack-16-1-0",
+   "routine": "CalculAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-order-16-3-0",
+   "routine": "SetAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-attack-16-3-0",
+   "routine": "CalculAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-dying-0",
+   "routine": "SetDyingEngin",
+   "dependency": {
+    "name": "SetDyingEngin",
+    "address": 4475192,
+    "arguments": [
+     0
+    ]
+   },
+   "register_scope": [],
+   "native": false,
+   "result": "dependency_not_compared"
+  },
+  {
+   "case": "f9000-dying-16",
+   "routine": "SetDyingEngin",
+   "dependency": {
+    "name": "SetDyingEngin",
+    "address": 4475192,
+    "arguments": [
+     16
+    ]
+   },
+   "register_scope": [],
+   "native": false,
+   "result": "dependency_not_compared"
+  },
+  {
+   "case": "f9000-damage-16",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagUnitSendMessage",
+    "address": 4729288,
+    "arguments": [
+     16,
+     72,
+     0
+    ]
+   },
+   "register_scope": [],
+   "native": false,
+   "result": "dependency_not_compared"
+  },
+  {
+   "case": "f9000-damage-0",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagUnitSendMessage",
+    "address": 4729288,
+    "arguments": [
+     0,
+     72,
+     16
+    ]
+   },
+   "register_scope": [],
+   "native": false,
+   "result": "dependency_not_compared"
+  },
+  {
+   "case": "f9000-sanctuary-damage",
+   "routine": "BatimentInfligeDegat",
+   "dependency": {
+    "name": "PlaySnd_PostSound",
+    "address": 4762233,
+    "arguments": [
+     66,
+     131328,
+     0,
+     256,
+     4825544
+    ]
+   },
+   "register_scope": [],
+   "native": false,
+   "result": "dependency_not_compared"
+  },
+  {
+   "case": "f9176-order-0-1-16",
+   "routine": "SetAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-attack-0-1-16",
+   "routine": "CalculAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-order-1-1-16",
+   "routine": "SetAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-attack-1-1-16",
+   "routine": "CalculAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-order-2-1-16",
+   "routine": "SetAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-attack-2-1-16",
+   "routine": "CalculAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-order-16-1-0",
+   "routine": "SetAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-attack-16-1-0",
+   "routine": "CalculAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-order-16-3-0",
+   "routine": "SetAttaqueEngin",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": false,
+   "result": "equal",
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-attack-16-3-0",
+   "routine": "CalculAttaqueEngin",
+   "dependency": {
+    "name": "BatimentAdjacent",
+    "address": 4339743,
+    "arguments": [
+     0,
+     13107
+    ]
+   },
+   "register_scope": [],
+   "native": false,
+   "result": "dependency_not_compared"
+  },
+  {
+   "case": "f9176-dying-0",
+   "routine": "SetDyingEngin",
+   "dependency": {
+    "name": "SetDyingEngin",
+    "address": 4475192,
+    "arguments": [
+     0
+    ]
+   },
+   "register_scope": [],
+   "native": false,
+   "result": "dependency_not_compared"
+  },
+  {
+   "case": "f9176-dying-16",
+   "routine": "SetDyingEngin",
+   "dependency": {
+    "name": "SetDyingEngin",
+    "address": 4475192,
+    "arguments": [
+     16
+    ]
+   },
+   "register_scope": [],
+   "native": false,
+   "result": "dependency_not_compared"
+  },
+  {
+   "case": "f9176-damage-16",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagUnitSendMessage",
+    "address": 4729288,
+    "arguments": [
+     16,
+     72,
+     0
+    ]
+   },
+   "register_scope": [],
+   "native": false,
+   "result": "dependency_not_compared"
+  },
+  {
+   "case": "f9176-damage-0",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagUnitSendMessage",
+    "address": 4729288,
+    "arguments": [
+     0,
+     72,
+     16
+    ]
+   },
+   "register_scope": [],
+   "native": false,
+   "result": "dependency_not_compared"
+  },
+  {
+   "case": "f9176-sanctuary-damage",
+   "routine": "BatimentInfligeDegat",
+   "dependency": {
+    "name": "PlaySnd_PostSound",
+    "address": 4762233,
+    "arguments": [
+     66,
+     131328,
+     0,
+     256,
+     4825544
+    ]
+   },
+   "register_scope": [],
+   "native": false,
+   "result": "dependency_not_compared"
+  }
+ ],
+ "seconds": 6.626,
+ "summary": {
+  "cases": 30,
+  "equal": 19,
+  "mismatches": 0,
+  "dependency_not_compared": 11,
+  "dependency_stops": 11
+ }
+}

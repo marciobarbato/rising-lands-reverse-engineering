@@ -1033,3 +1033,141 @@ Native facts:
 - The construction progress branch (+0x89 = 1: BatimentConstruit, AnimConstruireBatiment, the voice), the state-15 approach and gate/wall orders. These need a structure under construction, which the leaf bench can only fake.
 - BatimentConstructible's own result on the real walk (EnginOccupeCase with the builder on the footprint) and DeplaceEngin's progress over frames.
 - The work and transport cycles that follow the orders (`CalculWorkEngin`, `MineRecolte`, `TerrainRecolte`, `CalculTransporteEngin`, `BatimentAjouteMatiere`), and the record-0 mark once the cave is lodged (`BatimentLogeEngin`).
+
+## Work cycle, deposit and lodging credit (M3/M4)
+
+How harvested food and mined stone reach player 0's totals (`0x4e2ea8 + 32p`, the u16 total at +2 of each 8-byte record), and what makes a cave owned. First execution evidence; addresses apply only to the intact `RISING.EXE`.
+
+### Answer (native, MONDE01)
+
+**The only non-debit writer of a total is `AjouteMatiere 0x4678f2`**, and its only caller is `BatimentAjouteMatiere 0x42340f`. It adds to the total (+2) only, never to the RMI (+0), and clamps at 9999. `BatimentAjouteMatiere(AL resource, DX quantity, BL player, CX structure)` credits **only when the player's cave count (u16 `0x4dfb2c + 6p`) is nonzero**. The limit is `count × per-cave word` (MONDE01: 100) on the stock, food + stone (total − RMI). Whatever does not fit, and everything when the count is 0, becomes sacks on the ground:
+- next to a cave: origin + 0x202 for food, + 3 for stone;
+- next to a sanctuary: + 0x303;
+- at any other structure it is lost.
+
+So **without an owned cave nothing reaches the totals**, wherever the goods are delivered.
+
+**The cave count rises only in `InitBatimentPlayer 0x41be88`** (type 3: count += 1, level byte recomputed). For a player cave it is reached from `BatimentLogeEngin 0x41f76e`: when a unit lodges in a structure whose owner is `0xc8`, the owner becomes the unit's player, then `BatimentHabitable(s, 1)`, `BatimentModifyMap`, `InitBatimentPlayer`. `CreerBatiment` stores owner 0xc8 for the cave, and `BatimentConstruction` completing it (+5 = 5) does not change the owner.
+
+**Who can lodge.** Through the UI, a unit lodges only via tag 0x10 sub 3 → `SetEnginSelectRentreBatiment` → `SetEnginRentreBatiment 0x445b10` (state 13). Then each frame `EnginNextEtape` state 13 (`0x4559a8`) → `CalculEntreBatiment 0x449716` walks to the structure and, when `BatimentAdjacent`, calls `BatimentLogeEngin`. InputGame emits that tag only when `EnginSelectPeutEntrer(player, 3, structure)` holds and `BatimentConstruit` (progress +0xa equals the type word +4); otherwise the same press is a tag-5 move. `EnginSelectPeutEntrer` mode 3, native on the frame-2 state:
+
+| Selection | Structure | Result |
+|---|---|---|
+| a type-5 unit | own sanctuary (type 2) | 1: every live selected unit is a troop (`TypeEnginEstTroupe`: types 5 and 7 are) |
+| a type-5 unit | the completed 0xc8 cave | **0** (this is P3's tag-5 move) |
+| a type-5 unit | the cave once owned by player 0 | 0: troops can enter types 2, 8, 0x12/0x13/0x15 with conditions, never a cave |
+| the colonist (type 9) | the 0xc8 cave | **1**: an all-colonist selection may enter any own or 0xc8 structure except type 9 |
+| the colonist | own sanctuary | 1 |
+
+**So the cave becomes the player's when a colonist enters it.** Colonists live in the sanctuary's Bag. A double-click on the selected own sanctuary (tag 0x21, `0x42b259`; WndProc `0x203` sets `0x5099b0`) runs `BatimentRetireColon` and puts one outside.
+
+**Delivering goods.** A carried entry is tag 2 with value 1 (food) or 2 (stone). The Bag capacity of types 5 and 7 is **1** in MONDE01. There are two native routes to `BatimentAjouteMatiere`; each credits **1 per entry, whatever the entry value** (stone value 2 still credits 1 stone).
+- **The unit's own depot (Ctrl orders).** The depot tuple is +0x82 mode (0 none, 1 a ground cell, 2 a structure), +0x80 target (a cell, or a structure index), +0x84 resource kind (1 food, 2 stone; sack object 0x42 + kind).
+  - A plain press on a field or mine (tags 7/6) sends the tuple (0, 0, 0).
+  - Only the Ctrl mode 8 → mode 9 press sends (2, structure, kind) on a structure, or (1, cell, kind) on the ground (`0x429c32..0x429d84`, table `0x42923c`: mine → tag 6, field → 7, sack → 8, cave → 0x13).
+  - With mode 2, `CalculWorkEngin` carries the full Bag to the structure and unloads: food in type-5 phase 3, stone in type-7 phase 4.
+  - With mode 0 the unit stops **idle (state 7) holding its cargo**.
+- **Lodging (`BatimentLogeEngin`).** An idle carrier sent into the own sanctuary (tag 0x10) unloads stone, then food, each entry through `BatimentAjouteMatiere(resource, 1, player, structure)` then `BagRetire`. The unit stays inside (state 14).
+  - A carrier that lodges in a still-0xc8 cave is credited **before** the owner changes, so those goods become sacks.
+
+**Native run** ([capture](../pesquisas-paralelas/economia/evidencias/ciclo-trabalho/captura-ciclo-trabalho-exibicao.json.xz), counter 2 → 1,600):
+
+| Frame | Event | Food | Stone | Caves |
+|---|---|---|---|---|
+| 2 | `CreerBatiment` cave at (23,14) charges 10/6; `BatimentConstruction` completes it (owner 0xc8); colonist 3 released | 20 | 24 | 0 |
+| 20 | colonist ordered into the cave (state 13) | 20 | 24 | 0 |
+| 125 | colonist lodges: `BatimentLogeEngin` → owner 0, `InitBatimentPlayer` | 20 | 24 | **1** |
+| 511 | unit 13 (plain tag 7) harvests 1 food, goes idle (state 7) | 20 | 24 | 1 |
+| 803 | unit 13, ordered into the sanctuary at 512, lodges: +1 food | **21** | 24 | 1 |
+| 885 | unit 14 (Ctrl depot = sanctuary) unloads in phase 3: +1 food | **22** | 24 | 1 |
+| 1026 | unit 12 (Ctrl depot = sanctuary) unloads in phase 4: +1 stone | 22 | **25** | 1 |
+
+The probe without a cave (scratch run, same orders): all three units end idle with cargo by frame 572, and the totals stay 30/30.
+
+**Rates (MONDE01, no bonus, Bag capacity 1).**
+- Units start walking about 18 frames after the order, at about 14 frames per cell.
+- Food: the harvest timer is the type word − bonus byte, about 250 frames; one `TerrainRecolte` per trip. The field object is cleared (or lowered by 10 for 0x33/0x34), so the next trip picks another field by `ChercheGc`. Unload: word / 5 = 50 frames. Field (27,32) to sanctuary: about 290 frames each way. That is about **1 food per 880 frames per worker**.
+- Stone: 100 frames inside the mine, then a 50-frame exit, then about 400 frames to the sanctuary and a 50-frame unload; mine 0 loses 1 of its 50 reserve per trip. That is about **1 stone per 1,000 frames per builder**.
+- At these rates, 30 food and 26 stone with the two type-5 workers and the single type-7 builder do not fit in 9,000 frames. S1 needs more workers, closer depots (a cave next to the fields or the mine), or bonuses (selector 1 is the Bag capacity; selector 7 doubles a harvest when the Bag has room).
+
+### Method (original first)
+
+- **Bench** ([`bancada_ciclo_trabalho.py`](../pesquisas-paralelas/economia/bancada_ciclo_trabalho.py)). Missions' display reference: frames 0/1 must reproduce their committed summaries. Then real frames run with the reference's no-input answers and display clock rule, as Core's coverage run does.
+  - At chosen CalculGame entries, declared actions call **original** routines natively (stores kept, CPU context restored), or write named bytes.
+  - A `case` action runs steps and restores the whole state.
+  - Recorded calls follow Missions' `Isolamento` method (run natively from the exact entry state to the return, restored, then the frame resumes). They add the economy recorder's per-store call attribution and nested exit registers. A binding inside a recorded call stops the run.
+- **Declared actions** ([`capturar_ciclo_trabalho.py`](../pesquisas-paralelas/economia/capturar_ciclo_trabalho.py)), at frame 2:
+  - `DecouvreTerrain` on field (26,32) and mine (43,8);
+  - `CreerBatiment(0x0e17, 3, 0)`;
+  - the cave progress word := target − 2, then `BatimentConstruction(1)`;
+  - the tag-7/6 setter pairs: unit 13 plain; unit 14 and unit 12 with the Ctrl tuple (2, sanctuary 0, kind);
+  - `BatimentRetireColon(0)`;
+  - five restored `EnginSelectPeutEntrer`/`BatimentConstruit` probes.
+  - Conditional: `SetEnginRentreBatiment(colonist, cave, 9)` when the colonist is idle (frame 20); `SetEnginRentreBatiment(13, 0, 5)` when unit 13 is idle with cargo (frame 512).
+- **Capture**, committed before any translation (`63e8d2e`, widened in `ca8594b`): 1,600 frames, 449 recorded calls. Raw SHA-256 `3134c999fcd67f580a6d49eb733fca7be9b0346963231bdb12d89df530c5316d`; 589 s on the MacBook. [`extrair_ciclo_trabalho.py`](../pesquisas-paralelas/economia/extrair_ciclo_trabalho.py) exports the 30 original intervals and 4 jump tables (`evidencias/ciclo-trabalho/*.asm`, `manifesto.json`).
+- **Translation** ([`ciclo_trabalho.py`](../pesquisas-paralelas/economia/ciclo_trabalho.py), class `CicloTrabalho`) over live flat memory.
+- **Validation.**
+  - CPU-free replay ([`replay_ciclo_trabalho.py`](../pesquisas-paralelas/economia/replay_ciclo_trabalho.py), [test](../pesquisas-paralelas/economia/testes/test_ciclo_trabalho.py)): **407 recorded calls, 0 mismatches**. That is 394 CalculWorkEngin, 2 BatimentLogeEngin, 3 BatimentAjouteMatiere, 3 TerrainRecolte, 2 MineRecolte, 2 MineSetWork and 1 MineEndWork.
+    - Memory holds only the bytes the original read before writing, so any other read fails.
+    - Compared: the exit registers, the final value of every changed byte, and each call into another front (name and the argument bits it reads).
+    - Three deliberate mutations are each caught.
+  - Native differential ([`validar_ciclo_trabalho.py`](../pesquisas-paralelas/economia/validar_ciclo_trabalho.py) → [report](../pesquisas-paralelas/economia/validacao-ciclo-trabalho-emulada.json)): **407 compared, 0 mismatches**, rerun equal to the capture (449 calls, 646 s). The same comparisons over a copy of the whole mapped entry state, and the rerun must equal the capture call for call.
+
+```sh
+python3 "…/heavy_lease.py" economy -- python3 -B pesquisas-paralelas/economia/capturar_ciclo_trabalho.py --ate 1600 --saida <new>.json.xz   # ~10 min
+python3 "…/heavy_lease.py" economy -- python3 -B pesquisas-paralelas/economia/validar_ciclo_trabalho.py \
+    --captura pesquisas-paralelas/economia/evidencias/ciclo-trabalho/captura-ciclo-trabalho-exibicao.json.xz \
+    --saida pesquisas-paralelas/economia/validacao-ciclo-trabalho-emulada.json                                      # ~11 min
+python3 -B pesquisas-paralelas/economia/replay_ciclo_trabalho.py                                                    # seconds
+```
+
+### API
+
+`CicloTrabalho(memoria, *, externo=None, proprias=None)`. Each routine takes EAX..EBP plus ESP (the return slot) and returns EAX..EBP and the ESP after RET; flags are not modeled.
+
+| Routine | Entry | Arguments | Effects | Exit registers |
+|---|---|---|---|---|
+| CalculWorkEngin | 0x44bc74 | AX unit | Types 5 (phases 0–3) and 7 (phases 0–5), below | only EAX |
+| BatimentLogeEngin | 0x41f76e | AX structure, DX unit | Gate (troop/colonist owner), PlaceLibre, cargo credit (stone then food, 1 each), 0xc8 hand-over, BagPrend; AL = 1 lodged / 0 refused | EAX, EDX = the last callee's (AL set); others restored |
+| BatimentAjouteMatiere | 0x42340f | AL res, DX qty, BL player, CX structure | As above | EAX..EDX; ECX bits 16..31 are frame garbage (`_incertos`) |
+| AjouteMatiere | 0x4678f2 | AL res, BX player, DX qty | total += DX, clamp 9999 | EAX offset, EBX 32-bit sum, EDX u16 sum |
+| TerrainRecolte | 0x4781e8 | AX cell | object grid `[0x507d74]`: 0x33/0x34 −10, other 0x1d..0x32 → 0 | EAX |
+| MineRecolte | 0x4755a7 | AX cell | reserve −1; at ≤1: 0, tiles 0x1db/0x1dc; EAX = 1 / old reserve / 0 | EAX |
+| MineSetWork / MineEndWork | 0x4754a7 / 0x4754de | AX cell | work bytes of the two origin cells `[0x507dac]` ±1 | EAX |
+| MineGetIndice / MineEstSurTerrain | 0x47544c / 0x475402 | AX cell | mine index / tile 0x253–0x254 | EAX |
+
+**CalculWorkEngin.** The Bag at +0xa is tested as u16 +0x66 + 1 ≤ capacity +2. Entries are appended inline: +0x66 += 1, then the tag and value at the count, then the count += 1. The timer is +0x8b.
+- **Type 5, food.**
+  - Phase 0: walk to +0x7e; on a `TerrainEstGc` cell go to phase 1, with +0xa4 = 0 and timer = type byte `0x4965de + 50t` − `BonusGetValEngin(owner, type, 3)`. Off a field, `ChercheGcLibre` radius 5 retargets; if none, the voice plays and the unit goes to its depot.
+  - Phase 1: `AnimWorkEngin`, then the timer counts down. At 0: `TerrainRecolte`, one food entry (two with bonus 7), then `Random` ×2 and `ChercheGc` radius 5 for the next field. Room left → phase 0 there. Full → depot: mode 2 goes to `BatimentGetCase(+0x80)` (+0xc0 = +0x80) in phase 2; mode 0 → state 7.
+  - Phase 2: adjacent (`BatimentAdjacent`, +0x86/+0x87 zero) → phase 3, timer = word / 5.
+  - Phase 3: the timer counts down. At 0, for each food entry: `BatimentAjouteMatiere`, `BagRetire`, timer 0x32. Then back to +0xb2 (phase 0), or state 7.
+- **Type 7, stone.**
+  - Phase 0: walk below the mine (+0x7e = mine + 0x100). There, with +0xb2 the cell and `MineEstSurTerrain`: `MineSetWork`, `RetireEngin`, phase 1, the bonus timer.
+  - Phase 1: the timer counts down. At 0, `MineRecolte` gives one entry of value 2 and timer 0x32; a full Bag → phase 2.
+  - Phase 2: wait for `EnginPeutPasser`, then `MineEndWork`, `SetEnginCollision`, +0x72 = 1, `DecouvreTerrain`/`IllumineTerrain`, `SetMiniMap`. Then mode 2 → `GetCaseCentrale(+0x80)` in phase 3; mode 0 → state 7.
+  - Phase 3: adjacent → phase 4, timer 0x32.
+  - Phase 4: `BagRetire`, then `BatimentAjouteMatiere(2, 1, …)`, timer = word / 2. Empty → phase 5.
+  - Phase 5: back to +0xb2 while `MineGetCapacite` > 0, else state 7 and +0x82 = 0.
+- **Search lock.** Every change of +0x7e releases the path search (`0x4e0f36/37/3c`, `0x496304` = 0xffff) when the search belongs to the unit, and clears +0x88.
+
+**Named dependencies** (`externo(nome, chamada, regs) -> regs`; argument bits in `ARGUMENTOS`). Nothing is defaulted.
+- **Core:** DeplaceEngin, SetDeplaceEngin, BatimentGetCase, GetCaseCentrale, BatimentAdjacent, EnginPeutPasser, SetEnginCollision, RetireEngin, AnimWorkEngin, EnginGetVolume, EnginGetType/EnginGetPlayer/EnginGetBag, PlaceLibre, BatimentModifyMap, BatimentGetVolume, the Bag primitives (BagContient, BagContientTroupe, BagRetire, BagPrend), DecouvreTerrain/IllumineTerrain, TerrainEstDecouvert.
+- **Economy, other slices:** BonusGetValEngin (`bonus_unidades`), BatimentHabitable (`construcoes_habitaveis`), InitBatimentPlayer, MineGetCapacite, TerrainDeposeSac.
+- **Terrain search:** TerrainEstGc, ChercheGc, ChercheGcLibre.
+- **AI/runtime:** Random.
+- **Graphics:** SetMiniMap.
+- **Audio:** PlaySnd_PostSound (frame boundary).
+
+**Outside the domain** (`ForaDoDominioTrabalho`, raised before the branch's stores):
+- in CalculWorkEngin: depot mode 1 (sacks on a cell), unit types 6 and 13, a depleted mine, a builder below a cell that is not a mine tile;
+- type-4 structures in BatimentAjouteMatiere;
+- type-10 units in BatimentLogeEngin.
+
+### Not covered yet
+
+- `CalculTransporteEngin 0x44f2d4` (state 18, Ctrl + sack, tag 8) and `CalculDechargeCaveEngin` (state 20, tag 0x13). Neither lies on a no-Ctrl S1. The state-16 pickup (`SetRamasseEngin`, a press on a sack) only matters once sacks exist, which they do only after a deposit without room or without a cave.
+- `TerrainRetireMatiere 0x476662` (sack pickup), `CalculEntreBatiment` itself (Core/AI state 13), `InitBatimentPlayer` as a translation (its type-3 count is shown natively).
+- Paths the run did not reach: the voice, ChercheGcLibre, depleted mines, excess sacks.
+
+**Mac mini / scripted input.** P3 should send the colonist into the completed cave: release it with a double-click on the selected sanctuary, select it, then click the cave. Only then can P4/P5 deliveries count.

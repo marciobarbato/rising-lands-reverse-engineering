@@ -74,7 +74,7 @@ class QuadroTest(unittest.TestCase):
     def test_contract_shape(self):
         q, _ = self.renderizar()
         self.assertEqual((q.versao, q.largura, q.altura), (Q.VERSAO_RENDER_QUADRO, 800, 600))
-        self.assertEqual(Q.VERSAO_RENDER_QUADRO, (1, 4))
+        self.assertEqual(Q.VERSAO_RENDER_QUADRO, (1, 5))
         pal = Q.Catalogo().paleta()
         self.assertEqual(len(pal), 768)
         for i in (0, 4000, 123456, 479999):    # rgba = palette[index] expanded to RGB, alpha 255, row-major, origin top-left
