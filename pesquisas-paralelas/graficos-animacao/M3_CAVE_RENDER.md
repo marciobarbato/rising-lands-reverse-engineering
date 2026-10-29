@@ -54,6 +54,8 @@ API 1.7 adds uninhabited CAVE/sanctuary construction facades, selected builder c
 markers, CAVE placement grid, tooltip frame/shadow/background save and restoration. The original placement ghost is
 a gray rectangle with invalid-cell outlines, not the CAVE sprite. Existing inhabited sanctuary and other predecessor
 providers remain byte-identical. The frame globals schema is unchanged. Glyphs remain a named `0x459454` dependency.
+Construction progress at or above 100 is restricted to the captured CAVE variant byte `+0x76 = 0`; the native
+nonzero-variant branch remains `0x4099A6`. Full uninhabited modes 3/4/5 do not consume that variant byte.
 
 The fixture-only `FronteiraTextoGravada` implements the probe's declared non-execution after verifying text, font,
 rectangle, flags and the entire native pre-text surface. It rejects unrecorded calls or a single wrong pixel. It is

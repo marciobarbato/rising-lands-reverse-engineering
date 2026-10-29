@@ -764,3 +764,14 @@ and the final leased domain gate passes **254 tests, zero skips**, in **87.702 s
 The final gate log is `validacao/api17-graphics-tests-final.log`.
 Historical native matrices were consumed by the graphics suite; they were not recaptured. Full P3, P4/P5 and glyph
 execution are skipped for the concrete evidence/runtime gaps above.
+
+**Final domain guard.** Static review of the already committed original interval found the CAVE construction
+variant read at `0x409C08`. All 600 matrix entries have `+0x76 = 0`; nonzero values at progress >=100 therefore stop
+at the construction-body entry `0x4099A6`, before drawing, rather than silently using variant zero. A negative
+fixture test covers this bound. Full uninhabited modes 3/4/5 use constant layers independently of this byte.
+The 128-frame M2.2 domain contains no CAVE and its existing fresh regression is unchanged by this additional bound.
+
+After that guard, the final source-pinned probe replay is **286.089 s**, still 1,274/1,274 surfaces and zero
+argument/effect mismatches. The final leased graphics gate passes **255 tests, zero skips**, in **88.764 s**, including
+the new negative variant test; documentation links pass. The final log/report replace only derived validation output,
+never native evidence. Translation was first pushed as `4cd16b7`; the bounded-domain correction is the following commit.

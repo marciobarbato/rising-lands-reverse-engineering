@@ -3,7 +3,7 @@ import contextlib,hashlib,io,json,struct,unittest
 from pathlib import Path
 from graficos import Catalogo
 from validar_sondas_graficos_m3 import CapturaSondaGrafica,FronteiraTextoGravada,compare_matrix
-from validar_entrada_m3 import ArgumentosRasterM3,CatalogoRastreado
+from validar_entrada_m3 import ArgumentosRasterM3,CatalogoRastreado,MemoriaEntradaM3
 
 AQUI=Path(__file__).resolve().parent
 
@@ -70,5 +70,16 @@ class CaveScriptadaM3(unittest.TestCase):
         self.assertEqual((report['frames'],report['render_api_version'],report['hud'],report['chained_equals_recorded_count']),
                          (128,[1,7],True,128))
         self.assertIsNone(report['first_stop']);self.assertIsNone(report['first_chained_difference_frame'])
+
+    def test_uncaptured_cave_construction_variant_stops(self):
+        from render_quadro import renderizar_quadro
+        cap=CapturaSondaGrafica(AQUI/'evidencias/matriz-cave-toda-vida-api17.json.xz')
+        row=next(r for r in cap.d['rows'] if r['name']=='type3_mode0_state100')
+        m=cap.memory(row);blocks=[(a,bytearray(d)) for a,d in m.blocks];address=0x49a0c8+276+0x76
+        for a,d in blocks:
+            if a<=address<a+len(d):d[address-a]=1;break
+        result=renderizar_quadro(MemoriaEntradaM3(blocks),superficie_anterior=cap.blob(row['before']),cache=cap.cache_entry(row),
+            catalogo=Catalogo(),habitado=lambda i:False,hud=True)
+        self.assertEqual(result.parada['endereco'],'0x004099a6')
 
 if __name__=='__main__':unittest.main()

@@ -6,12 +6,12 @@
   "quadro_jogo.py": "1be65d397e59a23a30c9981612ae267ca073a45ee396450dce544bced46162fb",
   "hud_quadro.py": "c42331f2007ffe293696258f0beb0d8069a7624bf768029fd09cdd6ac948f22b",
   "sobreposicoes_entrada_m3.py": "3cd01d1d24de0bc028272c6c310ceead19d723f0d0266342d201867312dd520f",
-  "cave_scriptada_m3.py": "f8460061c985dce4a992fe5ad3ff13c47d0791c5d9eb266dc991d4d597b80e02",
+  "cave_scriptada_m3.py": "6df10daa76e10778b4111d481b95c83205e0d38a51ca1a17f2f574b42f4aee29",
   "hud_scriptado_m3.py": "61565a419780089bf7944fc5754f9b7a8d6c15bb881426c65f29976a886dd5c6",
   "validar_entrada_m3.py": "69c953d5515fc747593df307584549ea0791d3b1dcac579f58839d12e00cb7bc",
   "validar_sondas_graficos_m3.py": "f6ba8a3c52c55b015a4d0e071fa61d3ef88dd72a890d8842515c0be7c5821eb2"
  },
- "elapsed_seconds": 296.81,
+ "elapsed_seconds": 286.089,
  "probes": [
   {
    "probe": "P1",

@@ -36,6 +36,8 @@ def facade(c,x,y,cell,index,*,habitacao=None):
     height,scaffold,dx,dy={2:(153,7031,150,93),3:(97,7093,57,47)}[kind]
     x,y=i16(x-dx),i16(y-dy);w,h=c.tela.palavras('janela')
     state=200*word(r,0xa)//maximum
+    if kind==3 and mode in (0,1,2,6,7) and state>=100 and r[0x76]:
+        c.parar(0x4099a6,'CAVE construction variant +0x76 is outside the captured zero-value domain')
     if mode in (0,1,2,6,7):
         if state<100:
             clip(c,max(0,x),max(0,i16(y+(100-state)*height//100)),w*32-1,h*32-1)
