@@ -308,3 +308,15 @@ Merged main `5c0dac2`. The report is [M2_2_PREPARACAO.md](M2_2_PREPARACAO.md). N
   - Graphics' origin domain: (3,5), (2,4), (1,3), (0,2), (0,1).
   - The formal per-frame comparison.
   - The display-context events, EFLAGS/EIP, and the MCICD_Play stale locals.
+
+
+## M2.2 — delta-form capture reader (2026-10-29)
+
+`comparar_quadros_ia.py` reads the Mac mini capture format (contract in [M2_2_PREPARACAO.md](M2_2_PREPARACAO.md)).
+- It rebuilds each phase from `state_s0` plus `state_delta` (`released`, `allocated`, `ranges`).
+- It checks every `state_after.summary` (Missions' `resumo_imagem`) and the checkpoint `full_state`s.
+- It accepts `.xz` with a pinned raw-JSON SHA-256 (`--sha256`).
+- An inconsistent replay stops the run as a capture-integrity failure before any comparison.
+- The `-v2` path is unchanged and now also checks the summaries.
+
+**Validation:** the `-v2` frame-1 data and its delta-form conversion (in `.local/`) both reproduce the M2.1 proof. `test_quadros_ia.py` now has 12 tests, including replay, checkpoint and named-failure cases.

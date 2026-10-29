@@ -56,13 +56,36 @@ The cursor `0x4e1d18` agrees at every frame, so the original's AffGame did not a
 
 ## Contract for the Mac mini capture
 
-`comparar_quadros_ia.py` expects:
-- the schema of `captura-quadro1-monde01-exibicao-v2.json`, with phases `load_tail, between_frames, frame1, between_frames2, frame2, …`;
-- per phase: `state_after` (`blocks_changed_since_previous` and `block_hashes`), `entry`/`exit` registers, RNGs and allocation counts, and `bindings` and `boundaries`;
-- `state_s0` equal to the `-v2` MissionLoad final state;
+`comparar_quadros_ia.py --captura <file[.xz]> --sha256 <raw JSON hash> --politica <N-frame report> --saida …`. It reads the xz file and checks the pinned hash of the raw JSON.
+
+**Top level**, as in `captura-quadro1-monde01-exibicao-v2.json`:
+- `state_s0` with `summary.sha256` equal to the `-v2` MissionLoad final state;
+- `named_inputs`;
+- `phases`, named `load_tail, between_frames, frame1, between_frames2, frame2, …`;
 - the final `allocations` list.
 
-The policy is the `politica_comparacao_quadros.py --quadros N` report; only its cumulative mask is used. Display context is derived statically. When display roots and logic share an issuer (MenuInit, MemFree), the comparator matches it in order against Python's events and reports it as a difference if it stays unmatched. A per-event context field in the capture would make this exact.
+**Per phase:** `entry`/`exit` (`registers`, `rng`, `allocations` count), `bindings` and `boundaries`. The state comes in one of two forms.
+
+| Form | Fields |
+|---|---|
+| `-v2` | `state_after.blocks_changed_since_previous` and `state_after.block_hashes` |
+| M2.2 delta | `state_delta`, against the previous phase's state |
+
+The M2.2 delta form, applied in this order:
+
+| Field | Content |
+|---|---|
+| `state_delta.released` | `[block name, …]` |
+| `state_delta.allocated` | `{name: {base, zlib_base64}}` |
+| `state_delta.ranges` | `[{address, zlib_base64 or hex}]`, each range inside one live block |
+| `state_after.summary` | `{blocks, bytes, sha256}`, computed like Missions' `resumo_imagem`: SHA-256 over the name-sorted blocks, each as `<II base, size>` then its bytes, `native_stack` excluded. Required for every delta phase |
+| `state_after.full_state` | `{name: {base, zlib_base64}}`, at the checkpoint frames only. It must equal the replayed state exactly |
+
+**Failures:** a replay, summary or checkpoint mismatch stops the run as `capture_integrity_failure_<phase>` before Python is compared. Each phase in the report records `reference_integrity`.
+
+**Self-test:** the committed `-v2` capture was converted to the delta form, xz-compressed and given a pinned raw hash. It has 3,059/18/359 ranges, 146 releases in load_tail, and a full state at frame1. Both forms reproduce the M2.1 proof: 16,097,242 compared bytes per phase, 597/2/13 bindings, 25,482 records, every summary replayed, and the frame1 checkpoint equal. A wrong pinned hash is refused.
+
+**Policy:** the `politica_comparacao_quadros.py --quadros N` report; only its cumulative mask is used. Display context is derived statically. When display roots and logic share an issuer (MenuInit, MemFree), the comparator matches it in order against Python's events and reports it as a difference if it stays unmatched. A per-event context field in the capture would make this exact.
 
 ## Not done
 
