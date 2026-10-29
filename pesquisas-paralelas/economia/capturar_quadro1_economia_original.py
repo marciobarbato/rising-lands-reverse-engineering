@@ -19,7 +19,7 @@ address and run to their declared exits. No Python translation is imported.
     python3 -B pesquisas-paralelas/economia/capturar_quadro1_economia_original.py --cenario exibicao \
         --saida pesquisas-paralelas/economia/evidencias/captura-quadro1-economia-exibicao.json
     python3 -B pesquisas-paralelas/economia/capturar_quadro1_economia_original.py --cenario exibicao \
-        --conjunto consultas --saida pesquisas-paralelas/economia/evidencias/captura-consultas-economia-exibicao.json
+        --conjunto consultas --saida pesquisas-paralelas/economia/evidencias/captura-consultas-economia-exibicao-v2.json
 """
 import argparse
 import hashlib
@@ -49,14 +49,18 @@ FRAGMENTOS = {0x456966: ('EnginNextEtape:state7', 0x454ccd),
 # BagContientTroupe. Kept apart so the ``quadro`` set stays comparable call by call across scenarios.
 CONSULTAS = ('PlayerGetType', 'PlayerEstAllie', 'TestRessource', 'BatimentGetType', 'BatimentEstHabiter',
              'IntToBCD', 'BCDToInt', 'BagVide')
-CONJUNTOS = {'quadro': (ROTINAS, FRAGMENTOS), 'consultas': (CONSULTAS, {})}
+CONJUNTOS = {'quadro': (ROTINAS, FRAGMENTOS, False), 'consultas': (CONSULTAS, {}, True)}
 
 
 class IsolamentoEconomia(oq.Isolamento):
     """Missions' isolation plus fragment entries that run to a declared exit instead of a stack return."""
-    def __init__(self, bancada, rotinas, fragmentos):
+    def __init__(self, bancada, rotinas, fragmentos, pilha_chamador=False):
         super().__init__(bancada, rotinas)
         self.fragmentos = fragmentos
+        # Also record writes into the caller's frame (at or above the exit ESP; the entry ESP for
+        # fragments), e.g. IntToBCD's caller buffer. Off for the ``quadro`` set, whose frozen captures
+        # predate it; on for ``consultas`` (v2).
+        self.pilha_chamador = pilha_chamador
         self.entradas.update({a: nome for a, (nome, _) in fragmentos.items()})
 
     def executar(self, regs):
@@ -107,6 +111,15 @@ class IsolamentoEconomia(oq.Isolamento):
                 read_before_write=[[hex(a), self._valor(antes, a), b.nome(lidos[a])] for a in leituras]))
             # Callee-popped arguments (RET n) lie below the exit ESP, so the read set above excludes them:
             # record their entry bytes. Absent for routines that pop nothing (every ``quadro`` routine).
+            if self.pilha_chamador:
+                pilha_antes, pilha_depois = antes['native_stack'][1], depois['native_stack'][1]
+                topo = oq.PILHA + len(pilha_antes)
+                self.registros[-1]['caller_stack_changes'] = [
+                    [hex(a), pilha_antes[a - oq.PILHA], pilha_depois[a - oq.PILHA]] for a in range(limite, topo)
+                    if pilha_antes[a - oq.PILHA] != pilha_depois[a - oq.PILHA]]
+                self.registros[-1]['caller_stack_written_unchanged'] = [
+                    [hex(a), pilha_depois[a - oq.PILHA]] for a in sorted(escritos)
+                    if limite <= a < topo and pilha_antes[a - oq.PILHA] == pilha_depois[a - oq.PILHA]]
             if not fragmento and saida['ESP'] > regs['ESP'] + 4:
                 self.registros[-1]['stack_arguments'] = bytes(
                     self._valor(antes, a) for a in range(regs['ESP'] + 4, saida['ESP'])).hex()
