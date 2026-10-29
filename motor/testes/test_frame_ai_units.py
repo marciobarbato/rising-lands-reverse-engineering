@@ -6,6 +6,9 @@ is present in the committed read-before-write capture. Dispatcher equality is
 covered by the separate whole-phase comparison, where all unchanged stores are
 observable through the complete mission projection.
 """
+from pinned_reference import activate, reference_file, pinned_file
+SOURCE_ROOT = activate()
+
 import ctypes as C
 import hashlib
 import importlib
@@ -24,7 +27,7 @@ PINS = {'pesquisas-paralelas/ia-runtime/evidencias/captura-isolada-ia-quadro1.js
 
 def references():
     for folder in ('ferramentas', 'pesquisas-paralelas/ia-runtime', 'pesquisas-paralelas/combate'):
-        path = str(ROOT / folder)
+        path = str(SOURCE_ROOT / folder)
         if path not in sys.path:
             sys.path.insert(0, path)
     return (importlib.import_module('rotinas_quadro_ia'),
@@ -37,7 +40,7 @@ class FrameAiUnitTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         for path, expected in PINS.items():
-            if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != expected:
+            if hashlib.sha256(pinned_file(ROOT / path).read_bytes()).hexdigest() != expected:
                 raise ValueError('FrameReferenceIdentityMismatch: ' + path)
         cls.pilot = Pilot()
         cls.routines, cls.frame, cls.targets, cls.memory_type = references()
@@ -176,7 +179,10 @@ class FrameAiUnitTests(unittest.TestCase):
             self.assertEqual(after, blocks)
 
     def test_active_task_is_named_atomic_dependency_stop(self):
-        blocks = [(0x5148b0, struct.pack('<I', 0))]
+        task=bytearray(96)
+        struct.pack_into('<I',task,0,0xffffffff)
+        blocks=[(0x512320,bytes(task)),(0x5148b0,struct.pack('<4I',0,1,96,0x512320)),
+                (0x514910,struct.pack('<5I',0x401234,0,0,0,0))]
         handle = self.pilot.create()
         try:
             self.pilot.load(handle, blocks)
@@ -184,8 +190,8 @@ class FrameAiUnitTests(unittest.TestCase):
             output = C.c_uint32(0xaabbccdd)
             code = self.pilot.lib.rl_executar_rotina_quadro(handle, 103, argv, 1, C.byref(output))
             self.assertEqual(code, 5)
-            self.assertIn('iaSolver active task', self.pilot.error())
-            self.assertIn('0x0047d314', self.pilot.error())  # 0x47d314
+            self.assertIn('iaSolver unported rule', self.pilot.error())
+            self.assertIn('0x00401234', self.pilot.error())
             self.assertEqual(output.value, 0xaabbccdd)
             self.assertEqual(self.pilot.project(handle), blocks)
         finally:

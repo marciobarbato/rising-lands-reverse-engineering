@@ -1,0 +1,142 @@
+{
+ "allocation_records": {
+  "equal": true,
+  "excluded_metadata": [
+   "caller_return",
+   "stack",
+   "freed_caller_return"
+  ],
+  "first_differences": [],
+  "python": 25482,
+  "reference": 25482
+ },
+ "capture_integrity": {
+  "all_equal": true,
+  "final_part_phases_replayed": 420
+ },
+ "claim": "Supplemental serial throughput and endpoint equality; not per-phase proof",
+ "clock": {
+  "equal": true,
+  "expected_tick": 9201,
+  "milliseconds": 460050,
+  "tick": 9201
+ },
+ "engine_source_sha256": {
+  "motor/crates/rl-core/src/clock.rs": "c1ee5833dd254feeb61503733305c881f2c8c751142181ede0438a35377df40a",
+  "motor/crates/rl-core/src/frame.rs": "2c0e3644ea951a98c50be3a722f8bee6565af534cb69e093dfc05276b28bacb0",
+  "motor/crates/rl-core/src/frame_ai.rs": "41625137d3e1d85ede46ca18fc2370f4e217084f09eeb12c4956c59d9873a85d",
+  "motor/crates/rl-core/src/frame_combat.rs": "1c2f9090f2bb9e272a59f580631dfd3e0a833d1267dc5cd56c4cdfdc47cea1ed",
+  "motor/crates/rl-core/src/frame_core.rs": "971697c9ee2d083ea56dfb5705d310536d7c8512ae628cbd48858842c0c0d2b3",
+  "motor/crates/rl-core/src/frame_economy.rs": "f144a7304d4ca1f1062c389092941862f10f61878abf334410ccfbee625f1278",
+  "motor/crates/rl-core/src/frame_input.rs": "3fb4861f133adbc8036f6dcb7003aba70f1839e501f137bd2f28762503d1e471",
+  "motor/crates/rl-core/src/frame_missions.rs": "4a4fc5c845a22be27e1d2194e32439052ebe6277d53680c9f74c154bba11cf8c",
+  "motor/crates/rl-core/src/frame_movement.rs": "99f4a892462af3167e3b87785a6c7b2c5ab5f10f92c1e0d8bdcdfe1d116b8b53",
+  "motor/crates/rl-core/src/frame_path.rs": "80d303cde21aec8ada3550d90db51fe8c2d42d5a7b44fce4b14d6276f4758ba0",
+  "motor/crates/rl-core/src/frame_raid.rs": "991be736acb4408fc4fe79aca4c4612861dd885e0617ea3c5ea30443038a0297",
+  "motor/crates/rl-core/src/frame_runtime_state.rs": "2d7dd91f1e68c21b99dd14d82a26d5a84412daa2f04b9b493e8a8261c62bf447",
+  "motor/crates/rl-core/src/frame_spawn.rs": "f9c902141661d3be66f45ce30c5b485eb1914798946616906e819a1ccb60073f",
+  "motor/crates/rl-core/src/frame_state.rs": "a57cfd60c1381c3a9f5bdad82da7c8f516ad798b7b3299d8a9ab5fbdae936ddd",
+  "motor/crates/rl-core/src/frame_tasks.rs": "2a8d437f8e307d0814ad37f551dd137bf3c83e7f9bb7191486573c15b7fbebef",
+  "motor/crates/rl-core/src/frame_units.rs": "4f784149a5a62d4b8cddf3a7ed058e37626c793ce449b67d6a5389563ff3e6ca",
+  "motor/crates/rl-core/src/lib.rs": "b9763f124fa3d4085e59fb8ac5de59b32eec3f396fb080b5c0a8d937e52edbd5",
+  "motor/crates/rl-core/src/memory.rs": "adee7ee48a9dd1e7df1af03e305473c7254c7c352dd3de945cffcfa7bac87f75",
+  "motor/crates/rl-core/src/state.rs": "2907369a8ea9b2280edb3b37bcb0c2f385a45d843a7e24d216f8bbd7db07ddd8",
+  "motor/crates/rl-core/tests/frame_runtime_state.rs": "d46a07b75697c6ba6eaf820946e0b737324e35206626399f701d4f38220eb08d",
+  "motor/crates/rl-core/tests/frame_state.rs": "c88a74bd290b488721111043655d896c81498c638e665fde8fce15a8cdfaa57c",
+  "motor/crates/rl-core/tests/pilot.rs": "b4a9442dd29ebbeb4f52a7b7d940101e2310d8f4b33f108ff407a902d92cad05",
+  "motor/crates/rl-ffi/src/lib.rs": "c0c2fb146356fd7385ca7b53ae1b659fcc2d8b2bfa1a7643ea088dd358af7bf6",
+  "motor/include/module.modulemap": "2648b6970ff597900f90bf1eb208170fa5995fa41cd6d0d90c4ec8fd472d295a",
+  "motor/include/rising_engine.h": "f585698023a6d3351309cdad2ca8dd26da747de665b46c3cf5d0068e053d87a8",
+  "motor/testes/differential.py": "5a90c0382e3cefb7be91b1c8d47f6d9cdbef2fb32303f62ceb5d338af9cadbba",
+  "motor/testes/frame_abi.py": "26bd44ea629401037d0b8ee241d4c1737b322e1c9a8b0c18335247805dbd91bf",
+  "motor/testes/frame_differential.py": "b441e3d17766e95ea8c0e8de84c8b403dfa67a84c545c9b8cb3100e273e03164",
+  "motor/testes/frame_evidence.py": "e22c2c1d5e483cbec14d84bc61e16662d82b89caac5f03bcbb2197a9a3e9121d",
+  "motor/testes/frame_long_benchmark.py": "534d750373e6089d70b19ddec4b3573d6fbec9271c2b4ef9a2f42bd0a7e14d75",
+  "motor/testes/frame_long_differential.py": "14ab45f303c35f9181e72762bd683638d3b46625449b531d15bdaa8a1a016017",
+  "motor/testes/frame_long_evidence.py": "dbdbfef57d450f9095a159dcba2a47f1f4859b2dbc64d7a7e60950e3e4fffa3d",
+  "motor/testes/pilot_abi.py": "09805080242166cdf232130da63fb21c5894c92affe437574cce50aab92b83fa",
+  "motor/testes/test_frame_ai_units.py": "0f98756070a5778e5cb377db6b8b99c9e88ce484a31e5949e24f78316234df9b",
+  "motor/testes/test_frame_combat.py": "bb15a179407ed798842855dad90f7166bfa74beeed7eb60314d193146701b32e",
+  "motor/testes/test_frame_contract.py": "04f9e5393d1059b2e15f25cd84dc0db9bf276c127b32569b2734d00fe5ce4022",
+  "motor/testes/test_frame_core_economy.py": "a035f445148b761dd72f31ba53d36474f7b1308ef4717b99c07ff30a9e040db2",
+  "motor/testes/test_frame_evidence.py": "f7225f87bb363d69a4060910951da0dd2d97f87f2983d78a15f18d27a5c2827f",
+  "motor/testes/test_frame_input_missions.py": "e0c0eb6eda2d5846682b865a919c4a99d58e9bfa7fc70483a747a179254dda9b",
+  "motor/testes/test_frame_long.py": "773dd91e73cde165b2d90276bbc71ef0384a136b29f2a45c7b94c882ba98a32f",
+  "motor/testes/test_frame_movement.py": "7efd55d3f31bb24e33e6e606fa092f0d4d5b743eb3c662b0fd65560a49aac3f5",
+  "motor/testes/test_frame_raid.py": "b4663fa5336e951225df68e9715d1842087276d41f81ccda2bc65df5a2607e3c",
+  "motor/testes/test_pilot.py": "3db81a7a0ce9de160049313948a04578d854f603c7e44c51b3d3a3cf9279f6a6"
+ },
+ "engine_sources_unchanged_during_run": true,
+ "first_stop": null,
+ "immutable_tables_equal": true,
+ "inputs": {
+  "cursor": [
+   0,
+   0
+  ],
+  "msg": [
+   50331648,
+   0,
+   0,
+   0
+  ],
+  "no_reference_checkpoint_reload": true,
+  "offscreen": "0x60076000",
+  "saved": [
+   0,
+   0,
+   0
+  ],
+  "source": "accepted display MissionLoad S0; only first between-frame registers are declared"
+ },
+ "library": {
+  "bytes": 791712,
+  "path": "/Users/marcio/git/Rising-Lands-Codex-Engine/motor/target/release/librising_engine.dylib",
+  "profile": "release",
+  "sha256": "aa268176a7448fcae0f2f8de060ac8b0e6857a66bf2930a7327d971589ab3615"
+ },
+ "manifest": {
+  "path": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.manifest.json",
+  "sha256": "e88dc3fcaca11d03a774dad8bd9c768345f13c884cc2d8df493107ec9d180b09"
+ },
+ "original_executable_input": "/Users/marcio/git/Rising Lands/local-data/originals/cd/INSTALHD/RISING.EXE",
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "policy": {
+  "path": "pesquisas-paralelas/missoes/validacao/m2-3-politica-comparacao-9200-quadros.json",
+  "sha256": "384f985bea05137197ea22b3439f96db2f1e6b9a6d8b1a6c986f4955697fc21e"
+ },
+ "rng": {
+  "equal": true,
+  "reference": {
+   "0x497164": "0x128b8024",
+   "0x498db4": "0x3212b7ce"
+  },
+  "rust": {
+   "0x497164": "0x128b8024",
+   "0x498db4": "0x3212b7ce"
+  }
+ },
+ "schema": "rising-lands/rust-engine-long-serial-benchmark/1",
+ "source_dirty_paths": [],
+ "source_revision": "e87b943f45e5744b873424294a323bce77552b26",
+ "state": {
+  "blocks": 25197,
+  "compared_bytes": 16022275,
+  "compared_summary_equal": true,
+  "differing_blocks": [],
+  "equal": true,
+  "first_differences": {},
+  "mismatched_bytes": 0
+ },
+ "summary": {
+  "complete_endpoint": true,
+  "complete_phase_proof": false,
+  "result": "equal"
+ },
+ "timing": {
+  "frames_completed": 9200,
+  "frames_per_second": 101.87495126528644,
+  "rust_phase_seconds": 90.306791667,
+  "scope": "C ABI phase1 and9200 phase2/3pairs including Python call overhead; no timed exports/comparisons/rendering"
+ }
+}

@@ -1,0 +1,101 @@
+{
+ "compared": "per frame: inputs consumed, SetPlayerOrdre/ProcessInputGame, counter, game frame, RNGs, CRT seed, 0x4e1d18, view, selection head, objective block, units 11..15 whole-record SHA-256 prefix",
+ "core_construction_reference": {
+  "construcao_core_sha256": "7ccf640c5adda6e1a2c0e81bcce0307c0117eca862699af5fc7d34d5fe35a5fa",
+  "path": ".local/entrada/nucleo-ref"
+ },
+ "first_difference": null,
+ "frames_equal": 91,
+ "frames_requested": 3001,
+ "input_sha256": "11d2907b3915368b868c988c9ead24aa493efe2cecc81bd99c9bc072370b986f",
+ "last_frame": 220,
+ "orders_python": [
+  {
+   "frame": 133,
+   "player": 0,
+   "site": "0x42ba20",
+   "tag": 1,
+   "word2": 4113,
+   "word4": 4113,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 133,
+   "jump_target": "0x45ee46",
+   "packet": "01001110111000000000",
+   "player": 0,
+   "tag": 1
+  },
+  {
+   "frame": 153,
+   "player": 0,
+   "site": "0x42a03c",
+   "tag": 4,
+   "word2": 3,
+   "word4": 3093,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 153,
+   "jump_target": "0x45ef73",
+   "packet": "04000300150c00000000",
+   "player": 0,
+   "tag": 4
+  }
+ ],
+ "probe": "P3",
+ "probe_files_sha256": {
+  "comandos.jsonl.xz": "3ef53eac1c228c3ad09493a76b4bcf07df226dd3da8b764a11badf0aeca500c3",
+  "entradas.jsonl.xz": "652c8af3e1f3932ed39652460d192e1456319d8bf4bfa4b53b7cddfaf2babec4",
+  "quadros.jsonl.xz": "ccde3e8df8faf678ab9e68dc64dca9873e01a14de5db56c44fa05766c839ac48",
+  "replay.json": "3cf82c3da76ff6f6927857c65b6635c8efaac9c003e121dd4c34fdd722652fbd"
+ },
+ "probe_ref": {
+  "ref": "origin/feat/re-missions",
+  "sha": "b1cd5bdba7e306eeaf618bbdde1e78a19cf0b40c"
+ },
+ "schema": "rising-lands/m3-1-input-chain-check/1",
+ "seconds": 24.33,
+ "source_revision": "58bdd81ff2883540ca3382b2f0f47b05b2d06248",
+ "source_sha256": {
+  "pesquisas-paralelas/ia-runtime/affgame_hud_ia.py": "afdb24dacf4c58646b81e16e6826a106065a2e8b200e3013ed3f89bdb9332708",
+  "pesquisas-paralelas/ia-runtime/composicao_encadeada_ia.py": "4d4f45ce5fc2c2599884d876f7c189554c61b71852115a83d4c96a6f4efc873b",
+  "pesquisas-paralelas/ia-runtime/composicao_entrada_ia.py": "87b987750e95022141c8be3fc5b7c85c0eea277939ef7168dd24c20f714cb45d",
+  "pesquisas-paralelas/ia-runtime/composicao_quadros_ia.py": "afdc8a396b254f5e65167b215c9a785d18cba530169c683ad5c35d63ed786e43",
+  "pesquisas-paralelas/ia-runtime/construcao_entrada_ia.py": "0d70bed2600a4970109f86440d498d46c158c2c339d0fa09f2c8ecbddcbd581c",
+  "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "2fd86024ae0d96f7686f82c64d4aab92add23fba0acee0794574a79897c3a676",
+  "pesquisas-paralelas/ia-runtime/provar_entrada_ia.py": "391e2eeb1358c0556d33e0dd18756f7cb887526398b2d96936fc601a191b4a9a",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "9bb28f2c40a5855f012033c4076874c187e9ad84866a7170173fbd393584ff7f",
+  "pesquisas-paralelas/ia-runtime/proxima_etapa_quadro.py": "d9a3c39db33703c43d0cc16de2446b6cf860f894aa2d875a1828bbfda3f11f80"
+ },
+ "start": {
+  "frame": 128,
+  "source": "pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz",
+  "summary": {
+   "blocks": 25197,
+   "bytes": 16175335,
+   "sha256": "eb714f7d5a694ad91bab9b41c37a28860006c89be03f9170e3b312064a4b04b2"
+  }
+ },
+ "stop": {
+  "dependency": "BatimentNextEtape type 3 required at 0x00426aff; earlier stores retained",
+  "frame": 220,
+  "orders_before_stop": {
+   "equal": true,
+   "probe": [],
+   "python": []
+  },
+  "owner": null,
+  "phase": "frame220"
+ },
+ "text_boundary": {
+  "binding": "TextGetMessage as Missions' declared display-scenario boundary (EAX 0, no cleanup, logged)",
+  "frames": [],
+  "frames_equal": 0,
+  "note": "probe_entries counts every TextGetMessage entry of frame k (both phases); python_frame_phase counts the frame-phase calls of the chain (InputGame); the display-phase callers are Graphics'"
+ }
+}

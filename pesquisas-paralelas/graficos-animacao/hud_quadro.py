@@ -15,6 +15,7 @@ from graficos import compor_indices, Quadro
 from composicao import compor_sombra
 from construcoes import tabelas_jogador
 from quadro_jogo import DependenciaQuadro
+import hud_scriptado_m3 as script_m3
 
 FIM_HUD = 0x417D30
 LARGURA_FIXA_MINIMAPA = 800      # AffMiniMap 0x46A737..0x46A749: destination row stride is the constant 25*32
@@ -61,7 +62,7 @@ class LeituraHud:
 
 
 class _Hud:
-    def __init__(self, leitura, superficie, catalogo, evento):
+    def __init__(self, leitura, superficie, catalogo, evento, texto=None):
         self.m, self.catalogo, self.evento = leitura, catalogo, evento
         self.largura, self.altura = leitura.u32(0x4e17a0), 600     # pitch as the blitters read it
         if self.largura != LARGURA_FIXA_MINIMAPA or len(superficie) != self.largura*self.altura:
@@ -69,6 +70,7 @@ class _Hud:
         self.saida = bytearray(superficie)
         self.chamadas, self.efeitos = [], []
         self.camera = leitura.u8(0x508041)
+        self.texto = texto
 
     def parar(self, endereco, extra=''):
         raise DependenciaQuadro(endereco, ENDERECOS_PARADA[endereco] + (f': {extra}' if extra else ''),
@@ -197,7 +199,7 @@ class _Hud:
         """AffTrame 0x41721F (EBX = 0): returns unless the mouse is inside the view and mode 0x4E05AE is 3."""
         mx, my = self.m.u16(0x5099a8), self.m.u16(0x5099aa)
         if mx > self.m.u16(0x508724)*32 or my > self.m.u16(0x508726)*32: return
-        if self.m.u16(0x4e05ae) == 3: self.parar(0x41729b)
+        if self.m.u16(0x4e05ae) == 3: script_m3.placement(self)
 
     def marcha(self):
         """AffMarche 0x46677D: market state byte 0x4E2E7C[camera]; 0 and > 4 return."""
@@ -261,7 +263,7 @@ class _Hud:
 
     def info_ajuda(self):
         """AffInfoAide 0x40F8AA: returns while the tooltip text pointer 0x4E060C is NULL."""
-        if self.m.u32(0x4e060c): self.parar(0x40f8c0)
+        if self.m.u32(0x4e060c): script_m3.tooltip(self)
 
     def drapeau_alliance(self):
         """AffDrapeauAlliance 0x417581: no flag while no other player 0..3 is allied or contacting the camera player."""
@@ -300,13 +302,13 @@ class _Hud:
         return bytes(self.saida)
 
 
-def compor_hud(leitura, superficie, *, catalogo, evento):
+def compor_hud(leitura, superficie, *, catalogo, evento, texto=None):
     """Compose AffGame's tail 0x417B1C..0x417D30 over ``superficie`` (the surface at the checkpoint).
 
     leitura: LeituraHud over the live memory with the AffGame prefix's writes overlaid. evento: EvenementEnCours as
     read by the prefix (AffGame's local [ebp-4]). Returns dict(superficie, chamadas, efeitos); raises
     DependenciaQuadro (partial surface, calls and effects) at the first branch outside the captured domain.
     """
-    h = _Hud(leitura, superficie, catalogo, evento)
+    h = _Hud(leitura, superficie, catalogo, evento, texto)
     pixels = h.compor()
     return dict(superficie=pixels, chamadas=h.chamadas, efeitos=h.efeitos)

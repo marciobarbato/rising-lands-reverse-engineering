@@ -1,0 +1,65 @@
+{
+ "milestone": "M2.3 — MONDE01 frames 0-9,200 after MissionLoad, including the first scripted raid (spawn at frame 9000, first path search at 9176-9179), equal to the original phase by phase; with M2.1 and M2.2 this completes M2",
+ "decision": "ACCEPTED",
+ "m2_decision": "ACCEPTED (M2.1 at 32bb391, M2.2 at b9f4b5d, M2.3 at ea62eb4)",
+ "decided_at": "2026-10-29 18:25 BRT",
+ "decided_by": "coordinator (Claude) on committed-main reproduction on two machines (MacBook and Mac mini)",
+ "main": "ea62eb45d15488abe6c76266536cc65f4148855a (merge of feat/re-ai-runtime with the formal proof)",
+ "intact_executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "scope": "Display scenario -v2, MONDE01 new campaign, declared Windows inputs and display clock, no player input, no CD track playing; load tail, between-frames and frame phases for frames 1-9,200 (18,401 phases). Includes everything in M2.2 plus the periodic economy timers, the raid group construction and orders at frame 9000 and the raid's live movement and path search with byte-exact scratch.",
+ "original_reference": {
+  "capture_dir": "pesquisas-paralelas/missoes/evidencias/m2-3/",
+  "manifest": "captura-quadros9200-monde01-exibicao-v2.manifest.json",
+  "manifest_sha256": "e88dc3fcaca11d03a774dad8bd9c768345f13c884cc2d8df493107ec9d180b09",
+  "parts": "10 self-checking xz parts (93,012,400 bytes), each opening with a full state; full states also after frames 8999, 9000 and 9176",
+  "captured_on": "Mac mini (Missions front, Stage 21, de154b5): pass-2 segments reproduced 18,401/18,401 phase states; packager re-read every part, the opening-state chain from s0 and all replayed summaries; frames 0-128 equal the accepted M2.2 capture (257/257)"
+ },
+ "comparison_policy": {
+  "path": "pesquisas-paralelas/missoes/validacao/m2-3-politica-comparacao-9200-quadros.json",
+  "sha256": "384f985bea05137197ea22b3439f96db2f1e6b9a6d8b1a6c986f4955697fc21e",
+  "rule": "a byte is display-only only if every writer and every reader is display code; only the cumulative mask excludes bytes",
+  "masked_display_only_bytes": 153060,
+  "compared_logic_bytes_changed_in_window": 1560,
+  "bytes_without_observed_writer": 0,
+  "logic_context_surface_accesses": 0
+ },
+ "proof": {
+  "path": "pesquisas-paralelas/ia-runtime/validacao/m2-3-prova-9200-quadros.json",
+  "sha256": "e96a691f7932792910ac7d5132702792b9a941b8365ef7290228e4a245559c98",
+  "source_revision": "8a5787d6a899dc80a07cc1cdbbbd754d1a138612",
+  "driver": "pesquisas-paralelas/ia-runtime/provar_quadros_9200_ia.py (tudo --paralelo N | parte N | agregar)",
+  "result": "equal in 18,401/18,401 phases (10/10 parts): 16,022,275 compared bytes per phase; RNGs; 138,597 bindings and 27,603 boundaries outside display; 9,200/9,200 between-frames exit registers; 9,191/9,191 carried entry registers; HUD flag 9,200/9,200; 25,482 allocation records in every phase, part 09 final records equal in full",
+  "crossings": 0,
+  "crossings_writing_compared_bytes": 0,
+  "core_provider_stops": 0,
+  "part_phase_chain_sha256": [
+   "9903ccd49ed9e4170098ed5cc29b1dcd35f8fefc3317401bd9bedc386675d2eb",
+   "a4f633206ab300324e2281202f46bcd0d12779d99523b8d28433766559882649",
+   "5660d4038a5a139dac18d78f55037f29c6f34f819cd23c351aad86733dfb2f0b",
+   "1fe202a1b49cde49f68b0f21f185540d50447af776fddba2fdcafead94a007fe",
+   "c518c4da4330fc3ecc131c94b733b8728e85d8b217d9d5ad00ecd4e0b9ad5ff8",
+   "bd938e40f1ef251718b72d8b1527ba12f23fba534f9c5a9a3aae49f90e850c5c",
+   "3b8418826cc81e824d111e56606d287c181d8868e60f5f73ae2159280e883e28",
+   "71b5139e7af171d5df771731faf86226ab0506d7f325d6a9085d269cd63f383b",
+   "34d69394bb5f8e9b3d5b16ab1313499deff037f08b8a391d9c1658b6dca31206",
+   "eb171e7d8b6e0c9385ceccba8bc789be49d9e4cef7b81bf46e021f76aeafa164"
+  ]
+ },
+ "unmodeled_declared": "as in M2.2: MCICD_Play caller stack locals, EFLAGS/EIP, bindings/boundaries issued inside display roots (58,904 bindings and 2 boundaries, counted), masked display state and surfaces, allocation call-site metadata. Parts 01-09 open with the -v2 final allocation records as a declared input (no block is allocated or released in the window); part 09's full final comparison confirms it.",
+ "reproductions": {
+  "macbook_main_ea62eb4": {
+   "artifact": "integracao/validacao/cxr-20261029-m2r7-m2-3-proof-main-ea62eb4-macbook.json",
+   "result": "equal 18,401/18,401, 10/10 parts, crossings 0, final allocation records equal, HUD flag equal; all ten part chain hashes identical to the committed proof",
+   "wall_s": 1595.7,
+   "parallel": 4
+  },
+  "mac_mini_main_ea62eb4": {
+   "artifact": "integracao/validacao/cxr-20261029-m2r7-m2-3-proof-main-ea62eb4-mac-mini.json",
+   "result": "equal 18,401/18,401, 10/10 parts, crossings 0, final allocation records equal, HUD flag equal; all ten part chain hashes identical to the committed proof and to the MacBook run",
+   "parallel": 4,
+   "run_by": "coordinator over SSH in a prepared detached worktree at ea62eb4"
+  }
+ },
+ "independent_corroboration": "Codex workstream D (Rust engine, not part of this acceptance): stage 2b 257/257 M2.2 phases reproduced by the coordinator at 108 fps (integrated d0c2cf4); stage 2c reports 18,401/18,401 M2.3 phases at ~102 fps (review in progress).",
+ "next": "M3 — interactive original MONDE01 (docs/M3_PLAN.md): scripted-input probes P1-P3/K1 captured on the Mac mini; selection/order, construction and economy setters translated; live Rust frames in the macOS app"
+}

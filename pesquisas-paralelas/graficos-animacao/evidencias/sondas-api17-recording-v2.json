@@ -1,0 +1,29 @@
+{
+  "recording_source_sha256": "93cc53512affcca833967067b2b94bacd03b9a8d1dccc47aa78e1c229ee51d11",
+  "containers": {
+    "sonda-render-P1-api17.json.xz": {
+      "sha256": "f262c87435a24d76afaf46307f104a4385cc60b663520d54e8d186539aadc678",
+      "raw_sha256": "4982577c749c0119dd921f4aac3e927ecc96f557d1e87c4b6a953af47fdf3003",
+      "bytes": 41016492,
+      "raw_bytes": 198057421
+    },
+    "sonda-render-P2-api17.json.xz": {
+      "sha256": "a0af911bc554e03002d12896f99bce7a11c850517f4b82370aa3ff55624acd3e",
+      "raw_sha256": "84f26be18524005ff489caec2a10050f9d46a33166a3444750f4d572755c0c6e",
+      "bytes": 51245060,
+      "raw_bytes": 230578659
+    },
+    "sonda-render-P3-api17.json.xz": {
+      "sha256": "5f303d91ad089d48e60e8f3ca794f79f1f3b80cd69cf8e6024281eec9ca86a53",
+      "raw_sha256": "68cac4273dc62ce568b31472de2e49d543a50f34c6933cdf6a66ccfedc27dd40",
+      "bytes": 16219340,
+      "raw_bytes": 53489896
+    },
+    "matriz-cave-api17.json.xz": {
+      "sha256": "5fdeff2b5f4dbfdf9596e6349e8a8d2519324c6eaa536451e128fe1cd6de408a",
+      "raw_sha256": "77843110efc9c564ff8516a3124a3456111d745ad0dede60c56bc6390fea3f8b",
+      "bytes": 2302648,
+      "raw_bytes": 10179102
+    }
+  }
+}
