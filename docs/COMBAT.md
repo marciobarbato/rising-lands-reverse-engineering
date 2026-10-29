@@ -264,7 +264,7 @@ python3 -B pesquisas-paralelas/combate/validar.py --emular
 
 The saved emulated result records 113 tests and 234,245 bounded original-x86 executions. Local-only execution explicitly skips optional differential cases. Harnesses, original-byte extracts, dispatch tables, field/cadence audits, and data tables stay in this domain's `evidencias/`. Use a worktree because the validation entry point writes its own report.
 
-The next slice traces missing attack-phase producers and original damage/world consumers, then publishes adapters with explicit effects and one bounded end-to-end supported scenario. It does not silently replace callbacks, import the preview as an oracle, or claim a complete battle from independent routine tests. Publish outstanding core/economy/graphics requests in the combat handoff before integration.
+The current Stage 19 [building-target inventory](../pesquisas-paralelas/combate/CONTRACT_BUILDING_DAMAGE.md) is static readiness only: original damage arithmetic, destruction stores and explicit dependency boundaries, plus the future type-10/11 turret contract. Its new byte exports are not runtime validation or a public provider. The bounded Stage 18 attack chain is already integrated. The human's later steering ends this recovery turn after the light inventory; native captures, translation, heavy gates and integration were not run. Unknown AI/audio/diplomacy effects and real mission behavior remain open.
 
 The occupied-unit consumer has its own bounded validator, so it does not overwrite the historical 234,245-execution report:
 
@@ -298,4 +298,4 @@ python3 -B pesquisas-paralelas/combate/validar_ataque_vivo.py --emular
 python3 -B scripts/check.py --domain combat
 ```
 
-The slices' actual results and expected dependency stops are recorded in [the combat handoff](../pesquisas-paralelas/combate/HANDOFF.md) and their dedicated reports. General AI message, audio, level and diplomacy bodies remain external. The shared-world adapter delegates supported physical death to Core; special/vehicle effects remain explicit stops. Further work can add other damage modes and lethal effects, and trace `+0x8A=2/3` producers.
+The slices' actual results and expected dependency stops are recorded in [the combat handoff](../pesquisas-paralelas/combate/HANDOFF.md) and their dedicated reports. General AI message, audio, level and diplomacy bodies remain external. The shared-world adapter delegates supported physical death to Core; special/vehicle effects remain explicit stops. The Stage 18 field audit above supersedes the older open producer inventory. Building-target behavior and natural MONDE01 runtime remain separate unimplemented work.

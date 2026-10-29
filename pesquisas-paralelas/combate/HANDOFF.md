@@ -1,5 +1,34 @@
 # Combat handoff — 2026-10-28
 
+## Current resumption: Stage 19 light inventory only
+
+The new human authorization supersedes the previous stop while preserving every prior Codex/Claude commit and capture. The later coordinator steering limits this recovery round to the **already-started static combat inventory**, prioritizing Core/AI recovery for M1. This turn ends after the reviewable notes; no implementation, native capture, Ghidra, heavy gate, integration, rebuild or automatic next round is authorized here.
+
+The existing `feat/re-combat` tree was clean at `d24b09c1ff4e6a81356fbfecbb24bf3140309af3`, with no feature-only commits relative to fetched main. `python3 scripts/workstream.py start combat` reused it, then `git merge --ff-only origin/main` reached `8810b3730a0fb788af3eac2b447dea65372f597f`. No worktree/candidate was removed or recreated. The coordinator independently checked old process/lock state; a local `ps` read was unavailable in the restricted execution context and was not retried through another route.
+
+Stage 18 is already delivered: implementation `248d0556c216d0a8161a1264525b24ccb69fe51f`, pushed feature `d24b09c1ff4e6a81356fbfecbb24bf3140309af3`, main merge `b602b07e406ced7c8c67a9f011a8899718d32a87`. All three are ancestors of the current fetched baseline. Its historical report passes 41 tests / 17,509 native executions (1,208 lockstep segments, including the bounded synthetic live-chain fixtures and 16,301 regression calls). That run was **not repeated** in this resumption and remains distinct from the new static work.
+
+The [Stage 19 proposed contract](CONTRACT_BUILDING_DAMAGE.md) records original building-target modes 1/3/4, the accumulated-damage/destruction sequence, widths and callback/partial-effects order, plus the dispatcher boundary for future turrets. The [new static manifest](evidencias/dano-batiment-stage19.json) and [listing](evidencias/dano-batiment-stage19.asm) export 11 intact intervals with byte hashes, 15 asserted instructions and the 21-entry structure-type table. Key differences from the unit path: mode-1 damage column 26; mode-3 selector 3 loaded bytes; mode-4 u16/2; u16 accumulated damage written before audio; low-u16 scaled strict destruction comparison; city message before state +5=3; sympathy before final voice. Physical structure removal is not performed by this damage routine. Turret entries are **types 10/11**, selected by +8, not runtime state +5. No callable turret API is published by this inventory.
+
+Fresh light validation commands passed:
+
+- `python3 -B pesquisas-paralelas/combate/rastrear_dano_batiment.py`: verified original EXE identity and exported the new files only.
+- The same command with `--verificar`: deterministic full-file comparison passed; no predecessor file changed.
+- `git diff --check`: passed after the notes were reviewed.
+
+The first extraction assertion exposed padding and the following voice dispatch data after `BatimentGetVolume`; its code interval was corrected to `[0x41A0AB,0x41A18F)`, without modifying original bytes or expected runtime outputs. This was a static extraction boundary correction; no x86 execution failed or ran.
+
+| Current Stage 19 state | Evidence |
+|---|---|
+| Implemented | No behavior translated; static exporter and proposed contract only |
+| Validated against original | Fresh intact-byte/hash/instruction checks passed; **runtime captures and differential execution not run** |
+| Domain/common gate | Not run; no heavy lease granted |
+| Commit / main integration | Not committed or integrated; owned inventory/notes preserved in this worktree for review |
+| Full flow / original mission | Not run; historical synthetic Stage 18 chains do not establish MONDE01 raid/cave behavior |
+| Next action | End this light-readiness turn; no polling, implementation or further round without new human/coordinator scheduling authorization |
+
+No native skips are promoted to passes. Unknown AI messages, audio, diplomacy, level/special physical effects and missing structure lifecycle remain named dependencies. Core owns physical/VM/task primitives, AI owns orchestration, and the coordinator owns consolidated `docs/PROGRESS.md` and the completion estimate. Existing Stage 18 API contracts remain available to AI without copying its dispatcher.
+
 Chat: `01a18262-bf98-7530-a8d2-ea4fe025dad8` (local). Worktree: `/Users/marcio/git/Rising Lands/worktrees/re-combat`. Branch: `feat/re-combat`. First slice starts at organization revision `6634be3af2d255846a847d8aa21ad4edf1cdb589`.
 
 ## Completed slice: mode-1 unit damage consumer
