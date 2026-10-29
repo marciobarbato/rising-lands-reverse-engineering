@@ -26,3 +26,5 @@ The maintained manuals below replace the scattered research handoffs. Historical
 | [Audio](AUDIO.md) | Sound banks, sample decoding, request queue, and the DirectSound boundary |
 | [macOS playable](MACOS_PLAYABLE.md) | Building the playable consumer from one revision and its supported exercise |
 | [Migration](MIGRATION.md) | Preserved historical records, compatibility, and recovery |
+- [Coordinator handover 2026-10-29](HANDOVER_CLAUDE_20261029.md): state at M2.3 closure, machines, working mode, Codex workstreams, architecture decisions.
+- [M3/M4 plan (draft)](M3_PLAN.md): the scripted-input capture, the workstream split, the Rust engine and the future features.
