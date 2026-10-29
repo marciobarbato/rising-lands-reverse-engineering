@@ -174,6 +174,31 @@ consumer in isolated Python against the real M1 evidence. They cover valid
 bundle defaults, missing archives/declarations, malformed manifests, traversal,
 absolute paths, escaping symlinks and explicit roots.
 
-A real committed-revision launcher attempt and its prerequisite result will be
-recorded separately; these source/package regressions do not constitute a
-native application build or UI smoke pass.
+Real launcher attempt: `./compilar-jogável --development-ref HEAD` at
+`38ed65b2565c15f031b59660d7271dcd59d30097`, exit 1. To preserve isolation,
+a local validation clone of that commit was created under the independent
+clone's ignored `.local/bundle-validation/workspace/checkout`; its launcher
+writes only under that temporary workspace, not shared host local-data.
+No launcher or other domain files were modified.
+
+The first stop is missing relocatable CPython 3.12 ARM64 at
+`.local/bundle-validation/workspace/local-data/macos-preview/dependencies/python/bin/python3`
+(and `lib/python3.12`). `RISING_PYTHON_RUNTIME` can declare a compatible runtime.
+The temporary workspace also lacks the entire `source/cd` tree, including
+`INSTALHD/PLATGAME.PIE`, `INSTALHD/GRAPHICS/BLOCS.CMP`,
+`INSTALHD/GRAPHICS/TROOPS.CMP` and `WORLD/MONDE01.ETA`.
+Native compilation, signing, full bundle runtime verification and UI smoke
+were not reached. No existing Claude runtime, media, bundle or local data
+was read or modified. Integration must rerun the real build with these inputs.
+
+The full app discovery was rerun: 21 tests, 3 import errors due to missing
+generated snapshot.json; all 18 independent consumer/package tests passed.
+Documentation links and git diff --check pass. Unchanged cross-domain common
+checks were not repeated; their previous failed prerequisite results remain
+recorded above.
+
+Preserved logs: [targeted tests](validation/m3-packaging-fix-tests.log),
+[real build attempt](validation/m3-packaging-fix-build.log),
+[full app discovery](validation/m3-packaging-fix-full-tests.log).
+These regressions verify the packaging omission and bundled source resolution;
+they do not constitute a native application build or UI smoke pass.

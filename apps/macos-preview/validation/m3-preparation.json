@@ -58,7 +58,7 @@
       "errors": 0
     }
   },
-  "native_build": "NOT RUN: isolation, generated assets and relocatable runtime unavailable",
+  "native_build": "ATTEMPTED at 38ed65b: failed prerequisite; relocatable CPython 3.12 ARM64 missing; compilation and UI smoke not reached",
   "milestone_status_modified": false,
   "logs": {
     "consumer": {
@@ -76,6 +76,49 @@
     "inspection": {
       "path": "/private/tmp/rising-codex-m1-inspection.json",
       "sha256": "93a953817b316f622d0b073860baca7e452a918fc8f2745f05f5d320b5d5b598"
+    }
+  },
+  "round1_native_build": "NOT RUN: isolation, generated assets and relocatable runtime unavailable",
+  "packaging_correction": {
+    "implementation_commit": "38ed65b2565c15f031b59660d7271dcd59d30097",
+    "tests": {
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "macos_full": {
+      "tests": 21,
+      "errors": 3,
+      "reason": "generated snapshot.json absent"
+    },
+    "source_verification": "Shared source copier passes actual source verifier; omission and tampering regressions pass. Unrelated game-runtime subprocess is mocked only in source-verifier unit tests.",
+    "bundled_consumer": "Isolated Python loads real 881-block M1 evidence using relocated bundle snapshot declaration",
+    "command": "./compilar-jog\u00e1vel --development-ref HEAD",
+    "cwd": "/Users/marcio/git/Rising-Lands-Codex/.local/bundle-validation/workspace/checkout",
+    "exit_code": 1,
+    "first_missing_input": "/Users/marcio/git/Rising-Lands-Codex/.local/bundle-validation/workspace/local-data/macos-preview/dependencies/python/bin/python3",
+    "other_missing_inputs": [
+      "local-data/macos-preview/dependencies/python/lib/python3.12",
+      "source/cd (entire original media tree, including INSTALHD/PLATGAME.PIE, INSTALHD/GRAPHICS/BLOCS.CMP, INSTALHD/GRAPHICS/TROOPS.CMP and WORLD/MONDE01.ETA)"
+    ],
+    "native_compile": "NOT REACHED",
+    "codesign": "NOT REACHED",
+    "native_ui_smoke": "NOT REACHED",
+    "shared_local_data_touched": false,
+    "logs": {
+      "tests": {
+        "path": "apps/macos-preview/validation/m3-packaging-fix-tests.log",
+        "sha256": "12bf915dd4ad7c858730b78312bf513857179a9e6992cf76bfd868c79876fb62"
+      },
+      "build": {
+        "path": "apps/macos-preview/validation/m3-packaging-fix-build.log",
+        "sha256": "099203d7fcdcc85dc41d480092010c7b5b97bed91d3308a1b3a299965231952a"
+      },
+      "macos_full": {
+        "path": "apps/macos-preview/validation/m3-packaging-fix-full-tests.log",
+        "sha256": "61ba1d5065511ef768c36001a63a77f5fa081a4a91f238cbe4d0b3baaa949437"
+      }
     }
   }
 }
