@@ -2,6 +2,8 @@
 
 Original-only. The intact executable (SHA-256 `6c556520…43fb`) runs the display code instead of skipping it, and the result is compared with the v1 frame capture. Nothing in the accepted M1 or v1 evidence was modified.
 
+**Superseded as the reference (Stage18):** the M2 reference is now the `-exibicao-v2` artifacts over Graphics' backend. They are equal to these except for 10 backend-pointer bytes; see [POLITICA_COMPARACAO_M2_1.md](POLITICA_COMPARACAO_M2_1.md).
+
 ## Scenario `exibicao`
 
 Bench: [oraculo_exibicao_missao.py](oraculo_exibicao_missao.py), scenario definitions in [cenarios_oraculo.py](cenarios_oraculo.py).

@@ -497,3 +497,54 @@ All passed:
 | Missions | the oracle is still held at frame 1 |
 
 **Size.** The display entry and captures total about 60 MB (25k bank allocation records and per-block hashes).
+
+## Stage18 (M2 round 4): frozen display reference, Graphics' backend, comparison policy (Claude, 2026-10-29)
+
+Merged `origin/main` 81e0a26. Contract: [docs/MISSIONS.md — Stage18](../../docs/MISSIONS.md#stage18-m2-round-4-frozen-display-reference-and-comparison-policy). Policy: [POLITICA_COMPARACAO_M2_1.md](POLITICA_COMPARACAO_M2_1.md).
+
+### Commits
+
+| Commit | Content |
+|---|---|
+| `af1ccbe` | backend wiring and policy script |
+| `5b5256f` | backend comparison script |
+| `ac6b5f3` | M1 v2 reference (generated from `af1ccbe`) |
+| `73badbe` | frames v2 reference (generated from `ac6b5f3`) |
+| `c40999e` | backend equivalence |
+| `8525e0d` | policy tracker fix and tests |
+| `24ae9e1` | policy and validation reports |
+
+### API inputs
+
+- **`cenarios_oraculo`:**
+  - `bancada('exibicao', ...)`: Graphics' backend, `-v2` artifacts.
+  - `caminho('exibicao_interino', ...)`: the Stage17 artifacts, historical.
+- **`politica_comparacao_quadro1`:** produces `exclusion_mask`, per-range writers and readers with context, and the surface proof.
+
+### Mutation order
+
+Unchanged: the real loop, with every DirectDraw call recorded in order by the backend.
+
+### Original hashes
+
+The intact executable is unchanged (code-section SHA `02985de5…`). The artifact hashes are in each report.
+
+### Validation
+
+All passed: backend equivalence (except the 10 backend-pointer bytes), the Stage14 regression, both original-only validations, and the policy (with phase states reproduced).
+
+### Discarded and failed attempts (preserved under `.local/`)
+
+- **Dirty-provenance capture.** A first M1 v2 capture recorded an uncommitted bench. Its local commit was never pushed; I soft-reset it, and the files are under `m2r4-dirty-provenance/`.
+- **Policy tracker.** The first tracker kept display roots open across sibling calls (`m2r4-policy-attempt1-stale-root-context.json`).
+
+### Gaps and dependencies
+
+| Owner | Gap |
+|---|---|
+| Core | inventory CRT fgets `0x48ce96` and fseek `0x48cda2`. Text and LoadPie then run, and I recapture as a new version. |
+| Coordinator | decide how to treat the allocation records of the 146 freed menu banks |
+| AI/runtime | compare against the v2 reference with the `exclusion_mask` |
+| Missions | the oracle is held at frame 1 |
+
+The policy proof covers only the declared phases and must be re-derived for M2.2.
