@@ -78,8 +78,8 @@ def passo1(n):
     return fases, alterados, resumos, liberados
 
 
-def passo2(n, alvos):
-    b = bancada()
+def ganchos(b, alvos):
+    """Pass-2 hooks on ``b``: (accesses, surface accesses, collect(phase) for the phase's binding writes)."""
     raizes = {b.sym[r] for r in RAIZES_EXIBICAO if r in b.sym}
     pilha, acessos, superficie = [], {}, {}
 
@@ -124,9 +124,10 @@ def passo2(n, alvos):
         b.cpu.hook_add(gancho, gancho_superficie(tipo), None, begin=BASE_SUPERFICIES,
                        end=BASE_SUPERFICIES+TAMANHO_SUPERFICIES-1)
     b.cpu.ctl_flush_tb()
-    resumos, visto = {}, len(b.vinculos_declarados.eventos)
-    for fase, _ in b.executar_quadros(n):
-        for ev in b.vinculos_declarados.eventos[visto:]:
+    visto = [len(b.vinculos_declarados.eventos)]
+
+    def coletar(fase):
+        for ev in b.vinculos_declarados.eventos[visto[0]:]:
             ctx = 'backend' if ev['kind'] == 'backend' or ev['name'].startswith('DDRAW.') else 'logic'
             for w in ev['memory_writes']:
                 a0 = int(w['address'], 16)
@@ -138,7 +139,16 @@ def passo2(n, alvos):
                 if BASE_SUPERFICIES <= a0 < BASE_SUPERFICIES+TAMANHO_SUPERFICIES:
                     chave = ('write', ctx, fase, 'binding '+ev['name'] if ctx == 'logic' else '*')
                     superficie[chave] = superficie.get(chave, 0)+1
-        visto = len(b.vinculos_declarados.eventos)
+        visto[0] = len(b.vinculos_declarados.eventos)
+    return acessos, superficie, coletar
+
+
+def passo2(n, alvos):
+    b = bancada()
+    acessos, superficie, coletar = ganchos(b, alvos)
+    resumos = {}
+    for fase, _ in b.executar_quadros(n):
+        coletar(fase)
         resumos[fase] = b.resumo_imagem(b.imagem())
     return acessos, superficie, resumos
 
@@ -164,13 +174,43 @@ def main():
         raise SystemExit(f'Refusing to overwrite {saida}')
     t0 = time.monotonic()
     fases, alterados, resumos1, liberados = passo1(args.quadros)
+    alvos, origem = alvos_de(alterados)
+    acessos, superficie, resumos2 = passo2(args.quadros, alvos)
+    rel = relatorio(args.quadros, fases, alterados, resumos1, liberados, alvos, origem, acessos, superficie, resumos2)
+    revisao = subprocess.run(['git', '-C', str(ambiente_missoes.ROOT), 'rev-parse', 'HEAD'],
+                             capture_output=True, text=True).stdout.strip()
+    rel = dict(dict(schema='rising-lands/monde01-n-frame-comparison-policy/1', source_revision=revisao,
+                    translation_executed=False,
+                    evidence='.local' not in saida.relative_to(ambiente_missoes.ROOT).parts), **rel)
+    rel['seconds'] = round(time.monotonic()-t0, 1)
+    rel['passed'] = rel.pop('passed')
+    saida.parent.mkdir(parents=True, exist_ok=True)
+    with open(saida, 'x') as f:
+        json.dump(rel, f, indent=1)
+        f.write('\n')
+    print(json.dumps({k: rel[k] for k in ('passed', 'frames', 'changed_bytes', 'changed_bytes_by_phase',
+                                           'phase_states_reproduced', 'seconds')}
+                     | dict(cumulative=rel['cumulative']['totals'],
+                            windows={w: v['totals'] for w, v in rel['windows'].items()},
+                            without_writer=rel['bytes_without_observed_writer'][:10],
+                            surface_logic=rel['surfaces']['logic_context_accesses']), indent=1))
+    from encerramento_captura import encerrar_captura
+    encerrar_captura(0 if rel['passed'] else 1, saida)
+
+
+def alvos_de(alterados):
+    """Changed addresses of pass 1 and, per address, (block, base, phases)."""
     alvos, origem = set(), {}
     for fase, blocos in alterados.items():
         for nome, (base, offs) in blocos.items():
             for o in offs:
                 alvos.add(base+o)
                 origem.setdefault(base+o, [nome, base, set()])[2].add(fase)
-    acessos, superficie, resumos2 = passo2(args.quadros, alvos)
+    return alvos, origem
+
+
+def relatorio(n, fases, alterados, resumos1, liberados, alvos, origem, acessos, superficie, resumos2):
+    """Policy report body from pass-1 changes and pass-2 accesses (no revision, timing or evidence flag)."""
     janelas = sorted({janela(f) for f in fases})
     cumulativo, por_janela, sem_escritor = {}, {w: {} for w in janelas}, []
     for a in sorted(alvos):
@@ -186,8 +226,6 @@ def main():
 
     def mascara(classes):
         return [[hex(x), hex(z)] for x, z in faixas([a for a, c in classes.items() if c == 'display_only'])]
-    revisao = subprocess.run(['git', '-C', str(ambiente_missoes.ROOT), 'rev-parse', 'HEAD'],
-                             capture_output=True, text=True).stdout.strip()
     contagem = lambda classes: {c: sum(1 for v in classes.values() if v == c)
                                 for c in ('display_only', 'game_logic', 'read_only_in_window')}
     detalhe = {}
@@ -199,9 +237,7 @@ def main():
                                    writers=sorted({f'{c}:{r}' for (t, c, f, r) in acs if t == 'write'}),
                                    readers=sorted({f'{c}:{r}' for (t, c, f, r) in acs if t == 'read'}))
     sup_logica = {f'{t}:{c}:{f}:{r}': n for (t, c, f, r), n in superficie.items() if c == 'logic'}
-    rel = dict(schema='rising-lands/monde01-n-frame-comparison-policy/1', source_revision=revisao,
-               translation_executed=False, evidence='.local' not in saida.relative_to(ambiente_missoes.ROOT).parts,
-               frames=args.quadros, phases=fases,
+    rel = dict(frames=n, phases=fases,
                display_roots=list(RAIZES_EXIBICAO),
                phase_states_reproduced={f: resumos1[f] == resumos2.get(f) for f in fases},
                phase_state_summaries=resumos1, changed_bytes=len(alvos),
@@ -212,20 +248,9 @@ def main():
                bytes_without_observed_writer=sem_escritor, game_logic_bytes=detalhe,
                surfaces=dict(accesses_by_context={c: sum(n for k, n in superficie.items() if k[1] == c)
                                                   for c in ('display', 'backend', 'logic')},
-                             logic_context_accesses=sup_logica, excluded_with_proof=not sup_logica),
-               seconds=round(time.monotonic()-t0, 1))
+                             logic_context_accesses=sup_logica, excluded_with_proof=not sup_logica))
     rel['passed'] = all(rel['phase_states_reproduced'].values()) and not sem_escritor and not sup_logica
-    saida.parent.mkdir(parents=True, exist_ok=True)
-    with open(saida, 'x') as f:
-        json.dump(rel, f, indent=1)
-        f.write('\n')
-    print(json.dumps({k: rel[k] for k in ('passed', 'frames', 'changed_bytes', 'changed_bytes_by_phase',
-                                           'phase_states_reproduced', 'seconds')}
-                     | dict(cumulative=rel['cumulative']['totals'],
-                            windows={w: v['totals'] for w, v in rel['windows'].items()},
-                            without_writer=sem_escritor[:10], surface_logic=sup_logica), indent=1))
-    from encerramento_captura import encerrar_captura
-    encerrar_captura(0 if rel['passed'] else 1, saida)
+    return rel
 
 
 if __name__ == '__main__':

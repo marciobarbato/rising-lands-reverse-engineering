@@ -1,6 +1,6 @@
 # M2.2 / M2.3 preparation: frame sequence, events and boundaries (MONDE01)
 
-**Status: preparation only.** Nothing here is a reference capture. The reference is still the frozen `-v2` display scenario through frame 1. Every multi-frame run mentioned below wrote under `.local/` and is not evidence. Addresses refer to the intact `RISING.EXE` (SHA-256 `6c556520…43fb`). The MONDE01 values come from the `-v2` reference state.
+**Status:** M2.2 is captured. The original-only 128-frame capture and its comparison policy are committed evidence (HANDOFF Stage20). The sections below are the preparation record. The multi-frame runs they mention wrote under `.local/` and are not evidence. Addresses refer to the intact `RISING.EXE` (SHA-256 `6c556520…43fb`). The MONDE01 values come from the `-v2` reference state.
 
 ## 1. Tooling (committed)
 

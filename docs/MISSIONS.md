@@ -764,3 +764,22 @@ The attack table is empty and the AI players are inactive, so there is no other 
 - **Audio:** sound-library state.
 
 **v3 preparation (not committed as reference).** The CRT `fseek`/`fgets` fixtures and the `exibicao_v3` scenario run LoadPie natively, with explicit budgets of 3M segments and 1M bindings (the Core bench cap).
+
+## Stage20 (M2.2): 128-frame original capture and comparison policy
+
+The M2.2 reference extends the frozen `-v2` display scenario from frame 1 to frame 128, original only.
+
+- **Capture:** [captura-quadros128-monde01-exibicao-v2.json.xz](../pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz), with its [manifest](../pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.manifest.json). It has 257 phases in delta form, a state summary in every phase and full states at frames 1, 31, 32, 45, 50–52, 64, 100, 101 and 128. The raw JSON SHA-256 is pinned in the manifest.
+- **Policy:** [m2-2-politica-comparacao-128-quadros.json](../pesquisas-paralelas/missoes/validacao/m2-2-politica-comparacao-128-quadros.json). Its cumulative mask has 153,060 display-only bytes; 999 logic bytes are compared. Only the cumulative mask may exclude bytes from a whole-run comparison.
+- **Declared inputs and decisions:**
+  - No CD track plays: `[0x4e2f28] = 0` is checked in every phase.
+  - The HUD flag `0x4e05a2` is compared.
+  - The 146 freed MenuInit bank records are compared.
+- **Checks:**
+  - The first three phases equal the M2.1 frame-1 capture.
+  - Replaying s0 plus the deltas reproduces every summary and checkpoint.
+  - Two full runs are identical apart from wall-clock fields.
+
+**Segment-parallel execution** ([segmentos_quadros_missao.py](../pesquisas-paralelas/missoes/segmentos_quadros_missao.py)) restores exact snapshots (memory, CPU context, bench state) in fresh benches. On M2.2, its segmented capture records and its segmented policy both equal the sequential results byte for byte. It is the planned tool for M2.3a.
+
+Details: [missions handoff](../pesquisas-paralelas/missoes/HANDOFF.md), Stage20.
