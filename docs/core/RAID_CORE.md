@@ -70,6 +70,14 @@ All functions are in [`ferramentas/incursao_core.py`](../../ferramentas/incursao
 | iaProbPost `0x47d920` | `postar_tarefa(m, eax, edx, ebx, ecx, pilha)` | player, type, args EBX/ECX/4 stack words → EAX task |
 | iaProbNew `0x47d7ec`, listNewElem `0x47d012`, listLinkElemToTail `0x47d07a` | `tarefa_nova`, `lista_novo_elemento`, `lista_ligar_ao_fim` | the live lists at `0x5148a0`/`0x5148b0` |
 
+## Live-memory providers for ai-runtime's chain
+
+`chamadas_quadro_core.provedores_core(memoria, bonus)` exports the raid routines with `incursao_ia`'s keyword names: GetFreeCell (`celula`, `tipo`), CreerEngin (`celula`, `edx`, `tipo`, `jogador`), EnginSetType, EnginSetTypeCaract, EnginTypeGetCapacite, EnginEnArret, EnginSetPlayer (`unidade`, `jogador`), PlaceEngin (`unidade`), SetMiniMap (`jogador`, `modo`, `caso`), PlayerGetColor, EnginGetCase, GetRandCaseChamps, GetRandCaseTypeBatPlayer (`jogador`, `tipo`), Chemin_Accessible (`origem`, `destino`), TerrainEnCollision/ResetCollision (`caso`, `mascara`), iaProbPost (`jogador`, `tipo`, `ebx`, `ecx`, `pilha`), iaProbNew, listNewElem and listLinkElemToTail. Each returns the original EAX.
+
+GetFreeCell without a native stack returns AX: the cells tested, the order and AX do not depend on the stack residue, only EAX's upper word does. `testes/test_incursao_core.py::ProvedoresIncursao` calls every provider by keyword on every captured call, of both scenarios.
+
+**One task poster.** `MaquinaTarefasViva.sobre_memoria(...)` posts through the same original-equivalent `incursao_core.tarefa_nova`/`postar_tarefa`: the program entry comes from u16 `0x51a720`, and the lists use their own size/base fields. The chain's iaProbPost provider and the VM therefore share one implementation. The legacy buffer-only VM keeps its own `nova`/`postar`.
+
 ## Original details kept
 
 - **GetFreeCell** searches rings 1..29. In each ring it tests the row y−k, then the row y+k, then the columns x−k and x+k.

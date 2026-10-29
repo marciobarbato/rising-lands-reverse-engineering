@@ -314,6 +314,11 @@ def memset_crt(m, eax, edx, ebx):
 
 # ------------------------------------------------------------------ free cell
 def celula_livre(m, eax, edx, esp):
+    r = _celula_livre(m, eax, edx, esp)
+    return r if esp is not None else dict(EAX=r['EAX'] & 0xffff)
+
+
+def _celula_livre(m, eax, edx, esp):
     """GetFreeCell 0x479f20: AX centre cell, DX unit type -> EAX = first free cell of rings 1..29.
 
     Each ring k tests the row y-k (x-k..x+k), the row y+k, then the columns x-k and x+k, in
@@ -323,6 +328,9 @@ def celula_livre(m, eax, edx, esp):
     first cell lags the row by one, as in the original. Type class (0x4962c8) 0 or above 3 takes
     the first candidate; 1 tests the attribute mask; 2..3 test a 2x2 footprint up-left.
     EAX = 0xffff when the centre is off the map or no ring has a free cell; other registers kept.
+
+    With ``esp=None`` (no native stack) the residue is not read and only AX is returned: AX, the
+    cells tested and the search order do not depend on the residue (the callers read AX).
     """
     a = eax & M32
     x, y = a & 0xff, (a & 0xffff) >> 8
@@ -335,7 +343,7 @@ def celula_livre(m, eax, edx, esp):
     tipo = edx & 0xffff
     mascara = 2 if tipo in (0x10, 0x11) else 1
     classe = m.u8(CLASSE_TAMANHO + tipo)
-    residuo = lambda d: m.u16((esp - d) & M32)
+    residuo = (lambda d: 0) if esp is None else (lambda d: m.u16((esp - d) & M32))
 
     def livre(c):
         if classe < 1 or classe > 3:

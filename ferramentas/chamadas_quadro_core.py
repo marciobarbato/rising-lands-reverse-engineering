@@ -825,6 +825,43 @@ ROTINAS = {
 ARGUMENTO_PILHA = ('Chemin_ModifieZone', 'MouseSetZone')
 
 
+def _provedores_incursao(memoria, bonus):
+    import incursao_core as ic
+    m = memoria
+
+    def bonus_exigido(jogador, tipo, seletor):
+        if bonus is None:
+            raise DependenciaRamoCore('BonusGetValEngin', 0x428cc0, 'Economy bonus provider required')
+        return bonus(jogador, tipo, seletor)
+
+    return {
+        'GetFreeCell': lambda sitio, celula, tipo: ic.celula_livre(m, celula, tipo, None)['EAX'],
+        'CreerEngin': lambda sitio, celula, edx, tipo, jogador: ic.criar_unidade(m, celula, edx, tipo, jogador,
+                                                                                bonus_exigido)['EAX'],
+        'EnginSetType': lambda sitio, unidade, caso, direcao, tipo: ic.definir_tipo_unidade(
+            m, unidade, caso, direcao, tipo, bonus_exigido)['EAX'],
+        'EnginSetTypeCaract': lambda sitio, unidade: ic.caracterizar_unidade(m, unidade, bonus_exigido)['EAX'],
+        'EnginTypeGetCapacite': lambda sitio, tipo: ic.capacidade_tipo_engin(tipo)['EAX'],
+        'EnginEnArret': lambda sitio, unidade: ic.unidade_em_arret(m, unidade)['EAX'],
+        'EnginSetPlayer': lambda sitio, unidade, jogador: ic.definir_dono_unidade(m, unidade, jogador)['EAX'],
+        'PlaceEngin': lambda sitio, unidade: ic.colocar_unidade(m, unidade)['EAX'],
+        'SetMiniMap': lambda sitio, jogador, modo, caso: ic.definir_minimapa(m, jogador, modo, caso)['EAX'],
+        'PlayerGetColor': lambda sitio, jogador: ic.cor_jogador(m, jogador)['EAX'],
+        'EnginGetCase': lambda sitio, unidade: ic.caso_unidade(m, unidade)['EAX'],
+        'GetRandCaseChamps': lambda sitio: ic.caso_campo_aleatoria(m)['EAX'],
+        'GetRandCaseTypeBatPlayer': lambda sitio, jogador, tipo: ic.caso_estrutura_tipo_jogador(m, jogador,
+                                                                                                tipo)['EAX'],
+        'Chemin_Accessible': lambda sitio, origem, destino: ic.acessivel(m, origem, destino)['EAX'],
+        'TerrainEnCollision': lambda sitio, caso, mascara: ic.terreno_em_colisao(m, caso, mascara)['EAX'],
+        'ResetCollision': lambda sitio, caso, mascara: ic.remover_colisao(m, caso, mascara)['EAX'],
+        'iaProbPost': lambda sitio, jogador, tipo, ebx, ecx, pilha: ic.postar_tarefa(m, jogador, tipo, ebx, ecx,
+                                                                                      pilha)['EAX'],
+        'iaProbNew': lambda sitio, tipo: ic.tarefa_nova(m, tipo)['EAX'],
+        'listNewElem': lambda sitio, lista: ic.lista_novo_elemento(m, lista)['EAX'],
+        'listLinkElemToTail': lambda sitio, lista, elemento: ic.lista_ligar_ao_fim(m, lista, elemento)['EAX'],
+    }
+
+
 def provedores_core(memoria, bonus=None):
     """ai-runtime provider adapters ``provider(sitio=..., **arguments) -> EAX``.
 
@@ -866,4 +903,6 @@ def provedores_core(memoria, bonus=None):
         'EnginEstMiroir': lambda sitio, unidade: unidade_espelho(memoria, unidade)['EAX'],
         'EnginEstArmure': lambda sitio, unidade: unidade_armadura(memoria, unidade)['EAX'],
         'TypeEnginSeFatigue': lambda sitio, tipo: tipo_cansa(tipo)['EAX'],
+        # M2.3 raid spawn and first order (incursao_core; keyword names follow ai-runtime's incursao_ia).
+        **_provedores_incursao(memoria, bonus),
     }
