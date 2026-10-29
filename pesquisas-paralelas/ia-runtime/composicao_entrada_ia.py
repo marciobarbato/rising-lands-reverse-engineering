@@ -262,6 +262,7 @@ class ComposicaoEntrada(ComposicaoQuadros):
             self.roteiro.fase = quadro
             inicio_eventos = len(self.roteiro.eventos)
             registro, ordens = Registro(quadro), []
+            self.ordens_fase = ordens                  # readable after a stop inside the phase
             entrada_anterior = dict(saida)
             self._quadro(dict(saida), registro, quadro, ordens)
             yield dict(phase=quadro, registro=registro, entry=dict(saida), exit=None, ordens=ordens,

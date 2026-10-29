@@ -180,6 +180,13 @@ def main():
                     break
     except DependenciaIA as erro:
         parada = dict(frame=k, dependency=str(erro))
+        if r['phase'].startswith('between'):           # the stop is inside frame k's CalculGame
+            ordens_k = [(o.get('event', 'SetPlayerOrdre'), o['tag'], o.get('word2'), o.get('word4'), o.get('word6'),
+                         o.get('word8'), o.get('jump_target')) for o in getattr(comp, 'ordens_fase', [])]
+            ref_k = [(c['event'], c['tag'], c.get('word2'), c.get('word4'), c.get('word6'), c.get('word8'),
+                      c.get('jump_target')) for c in comandos_ref if c['frame'] == k]
+            parada.update(orders_before_stop=dict(python=ordens_k, probe=ref_k, equal=ordens_k == ref_k))
+            ordens_py += [dict(o, frame=k) for o in getattr(comp, 'ordens_fase', [])]
     relatorio = dict(
         schema='rising-lands/m3-1-input-chain-check/1', probe=a.sonda, probe_ref=dict(ref=a.ref, sha=sha_ref),
         probe_files_sha256={n: hashlib.sha256(d).hexdigest() for n, d in arquivos.items()},
