@@ -277,7 +277,8 @@ def main():
     with open(saida, 'w') as f:
         json.dump(relatorio, f, indent=1, sort_keys=True)
         f.write('\n')
-    destino_leituras = LEITURAS if ok and completo else ROOT / '.local/entrada/leituras-entrada-ordens-ia.json.xz'
+    evidencia = ok and completo and not a.saida.startswith('.local/')          # test runs never touch evidence
+    destino_leituras = LEITURAS if evidencia else ROOT / '.local/entrada/leituras-entrada-ordens-ia.json.xz'
     por_caso = {}
     for r in resultados:
         bytes_ = {}
