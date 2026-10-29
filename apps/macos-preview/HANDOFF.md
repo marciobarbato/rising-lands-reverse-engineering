@@ -425,3 +425,8 @@ native result will be recorded after running the committed revision.
 
 After this bounded robustness change, A waits for Claude's M2.3 publication and
 M3 plan. C remains complete. No milestone or main integration is performed.
+
+The legacy preview opener uses the same bounded runner and evidence archive;
+its old outer60-second guard no longer contradicts the shared shell's separate
+readiness budget. This changes no legacy game behavior. The playable integration
+build remains the authoritative native validation for this delivery.
