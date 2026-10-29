@@ -140,7 +140,7 @@ def main():
         estaticos.update(range(ad, ad+tam))
 
     classes, faixas = {}, []
-    for inicio, fim, leitor in A['pegada']:
+    for inicio, fim, leitor, *_ in A['pegada']:
         atual = None
         for endereco in range(inicio, fim+1):
             if endereco < fim:
