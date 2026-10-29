@@ -79,7 +79,8 @@ def proxima_etapa_unidade(m, provedores, unidade, tabelas):
                     alvo = _chamar(provedores, 'EnginTrouveCible', 0x45479d, unidade=unidade) & 0xffff
                     if alvo != 0xffff:
                         if tipo_jogador == 2:
-                            _chamar(provedores, 'iagUnitSendMessage', 0x4547bf, unidade=unidade, mensagem=0x49)
+                            _chamar(provedores, 'iagUnitSendMessage', 0x4547bf, unidade=unidade, mensagem=0x49,
+                                    alvo=alvo)
                         elif m.u8(r + 2) == 7:
                             _chamar(provedores, 'SetAttaqueEngin', 0x4547db, unidade=unidade, edx=1)
     if _chamar(provedores, 'GetBit', 0x454808, valor=m.u8(registro() + 0xdc), bit=2) & 0xff:

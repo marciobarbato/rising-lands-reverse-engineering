@@ -42,44 +42,69 @@ PRESERVADOS_CALCUL_GAME = ('EBX', 'ECX', 'EDX', 'ESI', 'EDI', 'EBP')
 MSG_LACO = (0x3000000, 0, 0, 0)          # bench _WinMain@16 loop frame MSG words (M2.1 declared input)
 
 
-def fases_quadros(n):
-    """Phase names of load_tail plus N frames, in order."""
-    saida = ['load_tail']
-    for k in range(1, n + 1):
+def fases_quadros(n, inicio=0):
+    """Phase names of load_tail plus N frames, in order; from a checkpoint after frame ``inicio``, the N frames
+    that follow it."""
+    saida = [] if inicio else ['load_tail']
+    for k in range(inicio + 1, inicio + n + 1):
         saida += nomes_fases(k)
     return saida
 
 
 class ComposicaoQuadros:
-    """One map carried through load_tail and N frames; ``executar`` yields one record per phase."""
+    """One map carried through load_tail and N frames; ``executar`` yields one record per phase.
 
-    def __init__(self, estado_s0, captura_quadro, entrada, captura_m1, hashes_ponto=None, pontos=None,
-                 planejamento=False):
-        self.cap = captura_quadro
+    ``inicio = k > 0`` starts instead from a checkpoint: ``estado`` is the full block state after frame(k),
+    ``alocacoes`` the allocation records live at that point, and ``regs_inicio`` the entry registers of
+    between_frames(k+1), all taken from the capture as declared inputs. The run then begins with
+    between_frames(k+1). ProgIteration's saved (EDX, ECX, EBX) words are (0, 0, 0) at every frame of the
+    chain (bindings write EAX only and the boundaries are skipped), and the comparator checks the
+    between-frames exit registers that depend on them.
+    """
+
+    def __init__(self, estado, captura_quadro, entrada, captura_m1, hashes_ponto=None, pontos=None,
+                 planejamento=False, inicio=0, alocacoes=None, regs_inicio=None):
+        self.cap, self.inicio = captura_quadro, inicio
         fases = {p['phase']: p for p in captura_quadro['phases']}
-        superficie = next(s for s in fases['load_tail']['display_state']['surfaces'] if s['role'] == 'offscreen')
-        self.mapa, self.prov = mundo(estado_s0)
-        self.arena = ArenaQuadro(self.mapa, entrada['arena'], captura_m1['allocations'])
+        superficie = None
+        if 'load_tail' in fases:
+            superficie = next(s for s in fases['load_tail']['display_state']['surfaces'] if s['role'] == 'offscreen')
+        if inicio and (alocacoes is None or regs_inicio is None):
+            raise ValueError('A checkpoint start needs the allocation records and the next entry registers')
+        if not inicio and superficie is None:
+            raise ValueError('A start at load_tail needs the capture\'s load_tail display state')
+        self.mapa, self.prov = mundo(estado)
+        self.arena = ArenaQuadro(self.mapa, entrada['arena'], alocacoes if inicio else captura_m1['allocations'])
         self.ctx = ContextoEncadeado(OriginalImage(), 'exibicao', modo='prova', arena=self.arena,
-                                     superficie=int(superficie['pixels'], 16), planejamento=planejamento)
+                                     superficie=int(superficie['pixels'], 16) if superficie else None,
+                                     planejamento=planejamento)
         self.travessias = Travessias(pontos or {}, {}, hashes_ponto or (lambda m: {}))
-        self.regs_carga = {k: int(v, 16) for k, v in fases['load_tail']['entry']['registers'].items()}
-        self.regs_entre1 = {k: int(v, 16) for k, v in fases['between_frames']['entry']['registers'].items()}
         self.cursor = tuple(captura_quadro['named_inputs']['frame']['cursor'])
-        self.declarados = dict(offscreen_surface_pixels=superficie['pixels'], msg_words=[hex(x) for x in MSG_LACO],
-                               saved_frame_words_frame1=[0, 0, 0], cursor=list(self.cursor),
-                               between_frames1_entry_registers=fases['between_frames']['entry']['registers'])
+        if inicio:
+            self.regs_entre = {k: int(v, 16) for k, v in regs_inicio.items()}
+            self.declarados = dict(start_frame=inicio, start_entry_registers=dict(regs_inicio),
+                                   msg_words=[hex(x) for x in MSG_LACO], saved_frame_words=[0, 0, 0],
+                                   cursor=list(self.cursor), allocation_records=len(alocacoes))
+        else:
+            self.regs_carga = {k: int(v, 16) for k, v in fases['load_tail']['entry']['registers'].items()}
+            self.regs_entre = {k: int(v, 16) for k, v in fases['between_frames']['entry']['registers'].items()}
+            self.declarados = dict(offscreen_surface_pixels=superficie['pixels'],
+                                   msg_words=[hex(x) for x in MSG_LACO], saved_frame_words_frame1=[0, 0, 0],
+                                   cursor=list(self.cursor),
+                                   between_frames1_entry_registers=fases['between_frames']['entry']['registers'])
 
     def executar(self, n):
-        """Yield ``dict(phase, registro, entry, exit)`` per phase. A stop propagates to the caller."""
-        registro = Registro('load_tail')
-        fase_cauda_carga(self.mapa, self.prov, self.ctx, registro, self.travessias, dict(self.regs_carga))
-        yield dict(phase='load_tail', registro=registro, entry=dict(self.regs_carga), exit=None)
+        """Yield ``dict(phase, registro, entry, exit)`` per phase, up to frame(inicio + n) (load_tail first when
+        ``inicio`` is 0). A stop propagates to the caller."""
+        if not self.inicio:
+            registro = Registro('load_tail')
+            fase_cauda_carga(self.mapa, self.prov, self.ctx, registro, self.travessias, dict(self.regs_carga))
+            yield dict(phase='load_tail', registro=registro, entry=dict(self.regs_carga), exit=None)
         palavras, entrada_quadro_anterior = (0, 0, 0), None
-        for k in range(1, n + 1):
+        for k in range(self.inicio + 1, self.inicio + n + 1):
             entre, quadro = nomes_fases(k)
-            if k == 1:
-                regs = dict(self.regs_entre1)
+            if entrada_quadro_anterior is None:
+                regs = dict(self.regs_entre)
             else:
                 regs = {r: entrada_quadro_anterior[r] for r in PRESERVADOS_CALCUL_GAME}
                 regs.update(ESP=(entrada_quadro_anterior['ESP'] + 4) & 0xffffffff, EAX=None)

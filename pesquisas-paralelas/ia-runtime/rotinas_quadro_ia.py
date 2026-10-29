@@ -8,7 +8,7 @@ Translated after the original isolated captures at the exact frame-0/1 entries
   (command word 0, or above 0x27, goes through table 0x45ed20 to 0x45f2de and
   clears the 10-byte record). Any other command raises DependenciaIA at its
   table target;
-- ``avancar_monstros``: AvanceMonstre 0x47b283. Reconstructed: the first-call
+- ``avancar_monstros``: AvanceMonstre 0x47b283, now delegated to ``incursao_ia`` (M2.3). Formerly: the first-call
   stamp, the mission-0x17 test and the monster-spec period scan. The
   ConstruitGroupeMonstre branch (0x47b349), the group-action loop (0x47b3ad),
   the pending-attack branch (0x47b44c) and the mission-0x17 branch (0x47b2d3)
@@ -73,25 +73,9 @@ def processar_entrada(m, jogador, comandos):
 
 
 def avancar_monstros(m, provedores):
-    """AvanceMonstre 0x47b283 (player 4), reached branches only."""
-    if m.u8(MONSTROS) == 0:
-        m.u8(MONSTROS, 1)
-        indice = 0
-        while indice < m.u16(CONTAGEM_MONSTROS):
-            indice += 1
-            m.u32(MONSTROS + 12 * indice, m.u32(CONTADOR))
-    if _chamar(provedores, 'MissionGetNum', 0x47b2c4) & 0xffff == 0x17:
-        raise DependenciaIA('AvanceMonstre mission-0x17 attack branch', 0x47b2d3)
-    agora = m.u32(CONTADOR)
-    for k in range(m.u16(CONTAGEM_MONSTROS)):
-        registro = REGISTROS_MONSTROS + 12 * k
-        periodo = m.u16(registro + 4)
-        if periodo and s32(agora - m.u32(registro + 8)) >= periodo:
-            raise DependenciaIA('AvanceMonstre ConstruitGroupeMonstre branch', 0x47b349)
-    if s32(m.u32(ACOES_MONSTROS)) > 0:
-        raise DependenciaIA('AvanceMonstre group-action loop', 0x47b3ad)
-    if m.u8(ATAQUES_MONSTROS):
-        raise DependenciaIA('AvanceMonstre pending-attack branch', 0x47b44c)
+    """AvanceMonstre 0x47b283 (player 4): the whole routine is ``incursao_ia.avancar_monstros`` since M2.3."""
+    from incursao_ia import avancar_monstros as avancar
+    return avancar(m, provedores)
 
 
 class PonteTarefas:
