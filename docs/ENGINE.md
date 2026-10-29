@@ -539,3 +539,20 @@ every text/font/rectangle/flags argument and the entire pre-text surface hash.
 The production C ABI cannot install this adapter. Qualified full-window results
 and normal production-prefix results are reported separately. Graphics 1.8
 windows and glyph reconstruction remain outside this port.
+
+[Committed Graphics 1.7 results](../motor/validation/graphics17/summary.json):
+**128/128 M2.2** and **9,200/9,200 M2.3** surfaces equal; the latter has no stop
+or difference. Qualified P1/P2/P3 chains equal Python 1.7 and the original in
+**501/501**, **601/601**, **172/172** frames, including drawing order, DGROUP,
+carried cache/background and **1,037** exactly verified non-executed text
+boundaries. The independent construction matrix is **600/600** equal.
+Production glyph stops remain at P1/P2/P3 frames **170/219/141**, respectively,
+with exact native partial pixels. Logic regression remains **257/257** equal.
+
+`sh motor/validate.sh` passes on implementation `53efd9a`, containing merged
+main `ce44185`: **28 Rust tests**, **61 Python tests** with ten isolated renderer
+checks, fmt/strict Clippy, C/Swift ABI 1.4 and actual Metal output checks.
+Prepared common validation passes **1,936 tests**, 614 optional skips. No
+renderer case is skipped. The [handoff](../motor/HANDOFF.md) records precise
+qualification, source/library hashes, reproduction commands and gaps. These
+results neither port Graphics 1.8 nor establish M3 simulation/app acceptance.

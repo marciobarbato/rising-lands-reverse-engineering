@@ -673,3 +673,84 @@ foreign/effect bodies, unknown tooltip modes and all other 1.7 boundaries retain
 named original-address stops. Shared assets, cache behavior, layer plans and
 saved-background state allow bounded extensions without changing old ABI layouts.
 Phase 2 remains the sole owner of world/display logic effects.
+
+## Graphics 1.7 follow-up — committed results
+
+Implementation `53efd9a454d40e6c12d469b890786c78c75791aa` includes merged main
+`ce44185` and produces release dylib SHA-256
+`a4ecdf9626c53837d5bdb688f3447c32e54a311d382a14a8ca6920ea200fb7a3`.
+All delivered native proofs ran from that clean commit with unchanged sources.
+[Delivery summary](validation/graphics17/summary.json) pins reports, source
+revisions, reference-tree identity and logs.
+
+| Proof | Actual result | Scope |
+|---|---|---|
+| [M2.2](validation/graphics17/m22-128.json) | **128/128** equal | Rust's own chained engine state; Python 1.7 pixels/cache/effects/palette and original full-surface hashes; world unchanged |
+| [M2.3](validation/graphics17/m23-9200.json.xz) | **9,200/9,200** equal | One S0 engine chain; carried Rust renderer state; every recorded original full-surface hash; no later original-state reload, no stop/difference |
+| [P1](validation/graphics17/probe-P1.json) | **501/501** equal | Native input states, Rust-carried surface/cache/background; Python 1.7/original pixels, drawing sequences and DGROUP; 460 attested text boundaries |
+| [P2](validation/graphics17/probe-P2.json) | **601/601** equal | Same qualified chain; 511 attested text boundaries |
+| [P3](validation/graphics17/probe-P3.json) | **172/172** equal | Frames 129–300; same qualified chain; 66 attested text boundaries |
+| [Facade matrix](validation/graphics17/facade-600.json) | **600/600** equal | Independent original calls; complete surfaces, drawing arguments, DGROUP and unchanged cache |
+| [Logic regression](validation/graphics17/logic-257.json) | **257/257** equal | Unchanged accepted M2.2 logic mask and exact original evidence |
+
+The three complete probe counts are explicitly qualified by the original
+Missions display-v2 **AffText non-execution contract**. All **1,037** boundary
+calls verify text, font, rectangle, flags and full pre-text surface SHA. They
+are not glyph proof. The default production renderer independently proves
+[first stops](validation/graphics17/default-P1.json) at P1 frame **170** (41
+full prefix frames), [P2](validation/graphics17/default-P2.json) **219** (90),
+and [P3](validation/graphics17/default-P3.json) **141** (12), all at **0x459454**.
+Every first partial surface/argument sequence equals the native pre-text
+checkpoint and Python. Wrong argument/pixel attestations are rejected. The
+production C ABI exposes no switch for the fixture adapter.
+
+[Validation on the merged tree](validation/graphics17/engine-gate.log.gz)
+passes `sh motor/validate.sh`: fmt, strict Clippy, **28 Rust tests**, **61 Python
+discovery tests** including the wrapper for **10 isolated renderer checks**,
+75/75 pilot records, C layouts and Swift ABI 1.4/Metal checks over 128 original
+surfaces and first/last complete RGBA readbacks. Snapshot tests demonstrate that
+a changed live source is harmless while corrupt evidence/frozen source fails.
+[Common check](validation/graphics17/common-check.log.gz) passes **1,936 tests**
+with **614 optional skips**. Renderer/probe cases have no skips. No new x86
+execution was needed: the immutable original captures remain exact oracles.
+All native/gate runs used heavy leases and completed below twenty minutes.
+The long-window release C ABI path measures 217.29 render fps and 61.29
+engine+render fps, excluding proof/presentation; this is not a fresh release
+Metal/app-pacing benchmark.
+
+Remaining gaps are production glyphs, Graphics 1.8 windows and engine M3
+human-input progression/app integration. Probe world states are original
+captured inputs; their pixels/cache/background are produced and carried by
+Rust. The no-input M2 proofs instead use Rust's own complete engine chain.
+No new project acceptance or main merge is claimed.
+
+Reproduce from a prepared checkout, under separate bounded leases and with
+fresh output paths:
+
+```sh
+lease='/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py'
+python3 "$lease" engine-g17-build -- \
+  cargo build --manifest-path motor/Cargo.toml --workspace --locked --release
+python3 "$lease" engine-g17-gate -- sh motor/validate.sh
+python3 "$lease" engine-g17-m22 -- \
+  python3 -B motor/testes/render_proof.py --frames 128 \
+  --library motor/target/release/librising_engine.dylib --output .local/g17-m22-new.json
+python3 "$lease" engine-g17-m23 -- \
+  python3 -B motor/testes/render_proof.py --frames 9200 --no-python \
+  --library motor/target/release/librising_engine.dylib --output .local/g17-m23-new.json.xz
+for probe in P1 P2 P3; do
+  python3 "$lease" "engine-g17-$probe" -- \
+    python3 -B motor/testes/render_probe_proof.py --probe "$probe" \
+    --output ".local/g17-$probe-qualified-new.json" || break
+  python3 "$lease" "engine-g17-$probe-default" -- \
+    python3 -B motor/testes/render_probe_proof.py --probe "$probe" --strict \
+    --output ".local/g17-$probe-default-new.json" || break
+done
+python3 "$lease" engine-g17-facades -- \
+  python3 -B motor/testes/render_facade_proof.py --output .local/g17-facades-new.json
+```
+
+The probe proof CLI is an offline fixture tool: its default scope is the
+explicit qualified non-execution contract; `--strict` checks production glyph
+stops. That default never changes the production renderer. Full P3 after frame
+300 and P4–P7 require their separate later-version evidence/port.

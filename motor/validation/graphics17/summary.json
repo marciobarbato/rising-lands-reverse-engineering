@@ -1,0 +1,161 @@
+{
+  "schema": "rising-lands/rust-graphics17-delivery/1",
+  "branch": "feat/codex-rust-engine",
+  "implementation_revision": "53efd9a454d40e6c12d469b890786c78c75791aa",
+  "merged_main": "ce441852bcada750a8f91da8ed3302f1668c4405",
+  "merge_revision": "ea40b31af6fd8355cbb8275e6e9d4c30b8b64a5e",
+  "reference_snapshot": {
+    "graphics": "ce441852bcada750a8f91da8ed3302f1668c4405",
+    "logic": "7ceeff909b52b7d4f59723f35dfe43a9deda41ff",
+    "source_and_fixtures": "Git objects; no working-tree source hash gate",
+    "tree_manifest_sha256": "0ce0849537f2d45b396ba0efd088ac1f089eefebb07c11561f2995fa5851abb1"
+  },
+  "pinning": {
+    "method": "Git-object source and fixture tree, verified against immutable Git blobs; existing selected SHA-256 source checks and AST tests use that tree, not working-tree source files. Original evidence/policy SHA-256 pins still verify checkout files.",
+    "working_tree_source_sha_integration_gate": false,
+    "original_evidence_pins_exact": true,
+    "snapshots_and_media_committed": false,
+    "missing_revision_policy": "Fail explicitly; fetch the pinned commits. No working-tree fallback."
+  },
+  "abi": {
+    "version": "1.4",
+    "hex": "0x00010004",
+    "graphics_contract": [
+      1,
+      7
+    ],
+    "additive": true,
+    "old_creation_versions": [
+      "1.0",
+      "1.1",
+      "1.2",
+      "1.3"
+    ],
+    "unchanged_frame_bytes": 72,
+    "unchanged_result_bytes": 304,
+    "unchanged_observation_bytes": 108,
+    "new_calls": [
+      "rl_render_contrato",
+      "rl_render_fundo_salvo"
+    ],
+    "new_observation_kinds": {
+      "3": "write-only background payload; copied query",
+      "4": "exact AffText request at glyph dependency"
+    }
+  },
+  "library_sha256": "a4ecdf9626c53837d5bdb688f3447c32e54a311d382a14a8ca6920ea200fb7a3",
+  "original_executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "m22": {
+    "frames_equal_python_and_original": 128,
+    "cache_effects_palette_equal": 128,
+    "world_read_only": 128,
+    "first_difference": null
+  },
+  "m23": {
+    "surfaces_equal_original_hash": 9200,
+    "serial_from_s0": true,
+    "later_original_state_reloads": 0,
+    "first_stop": null,
+    "first_difference": null,
+    "timing": {
+      "end_to_end_fps": 61.28815655058288,
+      "engine_seconds": 107.77136205199943,
+      "render_fps": 217.29269039894876,
+      "render_seconds": 42.339206087001024,
+      "scope": "C ABI engine phases + world generation + render + caller buffer copies; timing excludes proof snapshots/Python/exports/presentation; initialization excluded"
+    }
+  },
+  "probes": {
+    "P1": {
+      "qualified_full_surfaces_equal_python_and_original": 501,
+      "frames": 501,
+      "drawing_sequences_and_dgroup_equal": 501,
+      "entry_cache_and_background_equal": 501,
+      "text_boundaries_verified": 460,
+      "qualification": "published exact recorded AffText non-execution contract; not glyph reconstruction",
+      "production_full_prefix": 41,
+      "production_first_stop_frame": 170,
+      "production_first_stop_address": "0x459454",
+      "production_native_partial_equal": true,
+      "first_difference": null
+    },
+    "P2": {
+      "qualified_full_surfaces_equal_python_and_original": 601,
+      "frames": 601,
+      "drawing_sequences_and_dgroup_equal": 601,
+      "entry_cache_and_background_equal": 601,
+      "text_boundaries_verified": 511,
+      "qualification": "published exact recorded AffText non-execution contract; not glyph reconstruction",
+      "production_full_prefix": 90,
+      "production_first_stop_frame": 219,
+      "production_first_stop_address": "0x459454",
+      "production_native_partial_equal": true,
+      "first_difference": null
+    },
+    "P3": {
+      "qualified_full_surfaces_equal_python_and_original": 172,
+      "frames": 172,
+      "drawing_sequences_and_dgroup_equal": 172,
+      "entry_cache_and_background_equal": 172,
+      "text_boundaries_verified": 66,
+      "qualification": "published exact recorded AffText non-execution contract; not glyph reconstruction",
+      "production_full_prefix": 12,
+      "production_first_stop_frame": 141,
+      "production_first_stop_address": "0x459454",
+      "production_native_partial_equal": true,
+      "first_difference": null
+    }
+  },
+  "facade_matrix": {
+    "original_cases": 600,
+    "full_surfaces_arguments_dgroup_equal": 600,
+    "cache_preserved": 600
+  },
+  "logic_regression": {
+    "complete_proof": true,
+    "phases_compared": 257,
+    "phases_equal": 257,
+    "phases_requested": 257,
+    "result": "equal"
+  },
+  "validation": {
+    "merged_tree_motor_validate": "passed",
+    "rust_tests": 28,
+    "python_discovery_tests": 61,
+    "isolated_renderer_contract_tests": 10,
+    "pilot_records_equal": 75,
+    "renderer_case_skips": 0,
+    "strict_clippy": true,
+    "fmt": true,
+    "c_layout": true,
+    "swift_abi_and_metal": "1.4 passed, 128 original surface hashes and full first/last RGBA readbacks",
+    "common_check": "passed",
+    "common_tests_run": 1936,
+    "common_optional_skips": 614,
+    "working_source_change_and_corruption_tests": "passed",
+    "bad_text_argument_and_pixel_attestations": "rejected",
+    "fresh_original_emulation": false
+  },
+  "machine_and_leases": "Apple M4 Pro MacBook; all native/gate jobs used shared heavy leases and each actual job finished below 20 minutes.",
+  "gaps": [
+    "Glyph reconstruction is absent: production AffText stops at 0x459454. Full probe counts use the exact published recorded non-execution contract, unavailable through the production C ABI.",
+    "Graphics 1.8 windows are outside the pinned 1.7 scope.",
+    "M3 human-input simulation and app integration are separate; probe renderer states are captured original inputs, with Rust-carried pixels/cache/background.",
+    "Shallow checkouts must fetch the pinned Git objects; original media/dependencies still require the standard prepared links."
+  ],
+  "artifacts": {
+    "common-check.log.gz": "8438dc6ae4a03999e0ae6afa5baa09ee92e4d917ba9f86d321851fdae9f3d117",
+    "default-P1.json": "3328f4e6511a0f13fb4481fac0cd9b54d494748c46de44a775290574c391c3cf",
+    "default-P2.json": "050ae7a980feaa4e58b2f9f6145411a4d7e0fa28f40bac1b386aa7265501aab8",
+    "default-P3.json": "4004f76b6615ddfe09c3e3fd20c4d61b42d33d9c814c5f090faba12b5da0a0ef",
+    "engine-gate.log.gz": "b72fc04e7c0faab064c0d55e79bd94f58d97952cb30e21e7cc57cd22e90f9f3c",
+    "facade-600.json": "5022054a0d756a193fb8cced451e77604ad6055d5a62f005bcfe247a06f1e79e",
+    "logic-257.json": "fd83eef1c78019d10fb1cdcddd13f06fd7921c674e92dad348b0150d4bfa1e9d",
+    "m22-128.json": "047442e5f3058ab6bfa864b03a62db3d0eeac4a16aec39d41a2254abe318f9cb",
+    "m23-9200.json.xz": "125950a4c5dc5d4c1848c838702f2f3742db54120df9118b94bc46c43e6f9ee8",
+    "probe-P1.json": "1c08bb5f7c7553cc8a956b421a164f5938fe27435a810eb23111f04079d80e58",
+    "probe-P2.json": "d7e99766dcca63c92bd707aaf47e142c51852bbafc8c8a0dd39ab72e0d3c1729",
+    "probe-P3.json": "b426a247c8560ec57aed2a401ceffe8273cfdd4afbc79ef97e1c90deb88e5792",
+    "release-build.log.gz": "a655c4bdc6ebfd9781ba8c95fefe82a472288f82b34c785dcbc5206168cd61e8"
+  }
+}
