@@ -1,8 +1,10 @@
 """Economy routines the CalculGame frame reaches in MONDE01 (M2), over live memory.
 
-Every entry takes ``memoria``: any object whose ``vista(endereco, tamanho)``
-returns a writable view of the live bytes at that original address (the M1
-``MapaMemoriaM1`` does). Nothing is copied or cached between calls, so the
+Every entry takes ``memoria``: any object whose ``ler(endereco, tamanho)``
+returns the live bytes at that original address and whose
+``vista(endereco, tamanho)`` returns a writable view of them (the M1
+``MapaMemoriaM1`` has both). Reads use ``ler``, writes use ``vista``.
+Nothing is copied or cached between calls, so the
 providers bound at those addresses (``Economia.memoria`` 0x4e2ea8,
 ``CicloMercado`` buffers, the unit pool ``[0x4e19a0]``, the RNG 0x497164)
 are read and written by identity.
@@ -43,7 +45,7 @@ class DependenciaQuadro(NotImplementedError):
 
 
 def _u8(m, a):
-    return m.vista(a, 1)[0]
+    return m.ler(a, 1)[0]
 
 
 def _w8(m, a, v):
@@ -51,7 +53,7 @@ def _w8(m, a, v):
 
 
 def _u16(m, a):
-    return struct.unpack('<H', m.vista(a, 2))[0]
+    return struct.unpack('<H', m.ler(a, 2))[0]
 
 
 def _w16(m, a, v):
@@ -59,7 +61,7 @@ def _w16(m, a, v):
 
 
 def _u32(m, a):
-    return struct.unpack('<I', m.vista(a, 4))[0]
+    return struct.unpack('<I', m.ler(a, 4))[0]
 
 
 def _w32(m, a, v):
@@ -67,7 +69,7 @@ def _w32(m, a, v):
 
 
 def _f64(m, a):
-    return struct.unpack('<d', m.vista(a, 8))[0]
+    return struct.unpack('<d', m.ler(a, 8))[0]
 
 
 def _wf64(m, a, v):
@@ -197,8 +199,9 @@ def contar_aliancas(m, zona=None, simpatia=None):
 
     A nonzero u32 at 0x5080b0+16p+4q is decremented. When the local player's
     counter reaches 0, InitGameZone 0x471830 (EAX=1, EDX=EBX=ECX=0) then
-    MAJSympathie 0x475118 (AL=q, DL=p, EBX=9) run; without callbacks the
-    first raises ``DependenciaQuadro`` after the decrement.
+    MAJSympathie 0x475118 (EAX=q, EDX=p, EBX=9) run. Without ``zona`` the
+    first raises ``DependenciaQuadro`` after the decrement; ``simpatia``
+    defaults to ``atualizar_simpatia``.
     """
     for p in range(4):
         for q in range(4):
@@ -213,29 +216,24 @@ def contar_aliancas(m, zona=None, simpatia=None):
                 raise DependenciaQuadro('PlayerInitAllianceCompteur', 0x471830, 'InitGameZone',
                                         dict(EAX=1, EDX=0, EBX=0, ECX=0))
             zona()
-            if simpatia is None:
-                raise DependenciaQuadro('PlayerInitAllianceCompteur', 0x475118, 'MAJSympathie',
-                                        dict(AL=q, DL=p, EBX=9))
-            simpatia(q, p, 9)
+            (simpatia or (lambda x, y, e: atualizar_simpatia(m, x, y, e)))(q, p, 9)
 
 
 def calcular_simpatia_ataques(m, simpatia=None):
     """PlayerAttaqueCalculSympa 0x46d629: every 2000 frames, reward unattacked pairs.
 
     When u32 0x508f7c % 2000 = 0, for p, q in 0..3: a zero attack flag
-    0x508044+20p+4q with p != q calls MAJSympathie 0x475118 (AL=p, DL=q,
-    EBX=0x13); then the flag is zeroed. Without ``simpatia`` the call raises
-    ``DependenciaQuadro`` before that pair's flag store.
+    0x508044+20p+4q with p != q calls MAJSympathie 0x475118 (EAX=p, EDX=q,
+    EBX=0x13); then the flag is zeroed. ``simpatia`` defaults to
+    ``atualizar_simpatia``; an error leaves that pair's flag unstored.
     """
+    simpatia = simpatia or (lambda x, y, e: atualizar_simpatia(m, x, y, e))
     if _u32(m, CONTADOR) % 2000:
         return
     for p in range(4):
         for q in range(4):
             a = ATAQUES + 20 * p + 4 * q
             if _u32(m, a) == 0 and p != q:
-                if simpatia is None:
-                    raise DependenciaQuadro('PlayerAttaqueCalculSympa', 0x475118, 'MAJSympathie',
-                                            dict(AL=p, DL=q, EBX=0x13))
                 simpatia(p, q, 0x13)
             _w32(m, a, 0)
 
@@ -249,7 +247,7 @@ def _campos(m, recursos, metodo):
     alvos = [(a, f, recursos if dono is None else getattr(recursos, dono), nome)
              for a, f, dono, nome in _ESCALARES_CAMPOS]
     for a, f, objeto, nome in alvos:
-        setattr(objeto, nome, struct.unpack('<' + f, m.vista(a, struct.calcsize(f)))[0])
+        setattr(objeto, nome, struct.unpack('<' + f, m.ler(a, struct.calcsize(f)))[0])
     try:
         metodo()
     finally:
@@ -280,6 +278,40 @@ def atualizar_campos(m, recursos):
 def _indice_mercado(m, jogador):
     jogador &= 0xff
     return jogador if _u8(m, CONTATO + jogador) == 1 else _u8(m, PARCEIRO + jogador)
+
+
+IA_INATIVO = 0x51a990
+TABELA_HANGAR = 0x4e296c
+
+
+def atualizar_simpatia(m, a, b, evento):
+    """MAJSympathie 0x475118 (EAX=a, EDX=b, EBX=event), gates only.
+
+    It returns at once when a = b, a >= 4, b >= 4 (unsigned u32), or when
+    the AI context byte 0x51a990+16a, then 0x51a990+16b, is nonzero. MONDE01
+    frame 0 returns here for all twelve calls (AI players 1-3 are flagged).
+    Otherwise the event counter branch at 0x47515d (table 0x497288+16·event,
+    PlayerGetSympathie/PlayerSetSympathie) raises ``DependenciaQuadro``.
+    """
+    a &= 0xffffffff
+    b &= 0xffffffff
+    if a == b or a >= 4 or b >= 4:
+        return
+    if _u8(m, IA_INATIVO + 16 * a) or _u8(m, IA_INATIVO + 16 * b):
+        return
+    raise DependenciaQuadro('MAJSympathie', 0x47515d, 'event counter branch', dict(EAX=a, EDX=b, EBX=evento))
+
+
+def resetar_tabela_hangar(m):
+    """ResetTableauHangar 0x461e33: the 4 x 10 u16 table at 0x4e296c (player stride 20) = 0xffff."""
+    for jogador in range(4):
+        for i in range(10):
+            _w16(m, TABELA_HANGAR + 20 * jogador + 2 * i, 0xffff)
+
+
+def numero_invencoes(m, jogador):
+    """RechercheGetNbInvention 0x470554: AL = byte 0x50871c[AL & 0xff] (no range check)."""
+    return _u8(m, INVENCOES + (jogador & 0xff))
 
 
 def calcular_contador_mercado(m, jogador):

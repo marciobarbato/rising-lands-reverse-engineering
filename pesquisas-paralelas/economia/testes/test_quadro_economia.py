@@ -42,7 +42,9 @@ class Memoria:
         self.blocos = [(nome, base, bytearray(raw)) for nome, base, raw in blocos()]
         self.ordem = sorted(self.blocos, key=lambda b: b[1])
         self.bases = [b[1] for b in self.ordem]
-        self.acessos = []
+        self.acessos = []    # vista calls (writes, and reads by bound providers)
+        self.leituras = []   # ler calls
+        self.ordem_acessos = []  # both, in call order
 
     def vista(self, endereco, tamanho):
         i = bisect.bisect_right(self.bases, endereco) - 1
@@ -50,11 +52,16 @@ class Memoria:
             _, base, raw = self.ordem[i]
             if endereco + tamanho <= base + len(raw):
                 self.acessos.append((endereco, tamanho))
+                self.ordem_acessos.append(('vista', endereco, tamanho))
                 return memoryview(raw)[endereco - base:endereco - base + tamanho]
         raise KeyError(f'0x{endereco:08x}+{tamanho} is not mapped in the M1 state')
 
     def ler(self, endereco, tamanho):
-        return bytes(self.vista(endereco, tamanho))
+        dados = bytes(self.vista(endereco, tamanho))
+        self.acessos.pop()
+        self.ordem_acessos[-1] = ('ler', endereco, tamanho)
+        self.leituras.append((endereco, tamanho))
+        return dados
 
     def escrever(self, endereco, dados):
         self.vista(endereco, len(dados))[:] = bytes(dados)
@@ -96,16 +103,21 @@ class Provedores:
         return self.producao.calcular_tropa(indice)
 
 
+def parar_simpatia(a, b, evento):
+    """The v2 capture declares MAJSympathie's entry 0x475118 as a stop."""
+    raise q.DependenciaQuadro('MAJSympathie', 0x475118, 'declared capture stop', dict(AL=a, DL=b, EBX=evento))
+
+
 def executar(m, p, entrada, regs):
     rotinas = {
         0x47125c: lambda: q.calcular_pesquisa(m),
-        0x46da3b: lambda: q.contar_aliancas(m),
+        0x46da3b: lambda: q.contar_aliancas(m, simpatia=parar_simpatia),
         0x475328: lambda: q.agendar_campos(m, p.recursos),
         0x478806: lambda: q.atualizar_campos(m, p.recursos),
         0x467718: lambda: q.calcular_materia(m),
         0x466dd1: lambda: q.calcular_contador_mercado(m, regs['EAX']),
         0x466e9b: lambda: q.calcular_contador_proposicao(m, regs['EAX'], regs['EDX']),
-        0x46d629: lambda: q.calcular_simpatia_ataques(m),
+        0x46d629: lambda: q.calcular_simpatia_ataques(m, simpatia=parar_simpatia),
         0x456966: lambda: q.estado_parado_unidade(m, regs['EDI']),
         0x426918: lambda: q.ramo_producao_estrutura(p.producao, regs['EDI'], p.calcular_tropa),
     }
@@ -153,6 +165,7 @@ def comparar(teste, memoria=None):
             teste.assertEqual((c['call'], int(c['entry'], 16)), (passo[1], passo[2]))
             regs = {k: int(v, 16) for k, v in c['regs_in'].items()}
             m.acessos.clear()
+            m.leituras.clear()
             erro = executar(m, p, int(c['entry'], 16), regs)
             if c['outcome'] == 'return':
                 teste.assertIsNone(erro, f'{nome}/{c["call"]}')
@@ -163,7 +176,7 @@ def comparar(teste, memoria=None):
                                   f'{nome}/{c["call"]}')
             for endereco, tamanho, valor in c['writes']:
                 espelho.escrever(int(endereco, 16), valor.to_bytes(tamanho, 'little'))
-            for endereco, tamanho in m.acessos + [(int(a, 16), t) for a, t, _ in c['writes']]:
+            for endereco, tamanho in m.acessos + m.leituras + [(int(a, 16), t) for a, t, _ in c['writes']]:
                 teste.assertEqual(m.ler(endereco, tamanho), espelho.ler(endereco, tamanho),
                                   f'{nome}/{c["call"]} at 0x{endereco:08x}')
             total += 1
@@ -204,15 +217,32 @@ class ContratosQuadroEconomia(unittest.TestCase):
 
     def test_unreached_calls_are_named_dependencies(self):
         m = Memoria()
+        m.escrever(q.IA_INATIVO, b'\x00')
+        m.escrever(q.IA_INATIVO + 16, b'\x00')
         m.escrever(captura.CONTADOR, struct.pack('<I', 2000))
         with self.assertRaises(q.DependenciaQuadro) as erro:
             q.calcular_simpatia_ataques(m)
-        self.assertEqual((erro.exception.endereco, erro.exception.argumentos), (0x475118, dict(AL=0, DL=1, EBX=0x13)))
+        self.assertEqual((erro.exception.endereco, erro.exception.argumentos), (0x47515d, dict(EAX=0, EDX=1, EBX=0x13)))
         chamadas = []
         m = Memoria()
         m.escrever(captura.CONTADOR, struct.pack('<I', 4000))
         q.calcular_simpatia_ataques(m, simpatia=lambda *a: chamadas.append(a))
         self.assertEqual(chamadas, [(p, d, 0x13) for p in range(4) for d in range(4) if p != d])
+
+    def test_research_count_query_matches_original_capture(self):
+        r = json.loads((PASTA / 'evidencias/captura-invencoes-original.json').read_text())
+        self.assertFalse(r['translation_executed'])
+        self.assertEqual((r['original_entries'], r['returns']), (1024, 1024))
+        for cenario in r['captures']:
+            m = Memoria()
+            for o in cenario['overrides']:
+                m.escrever(int(o['address'], 16), bytes.fromhex(o['bytes']))
+            self.assertEqual(m.sha(), cenario['initial_state_sha256'])
+            for c in cenario['calls']:
+                self.assertEqual(c['writes'], [])
+                # The original zero-extends: and eax, 0xff, then loads AL.
+                self.assertEqual(q.numero_invencoes(m, int(c['regs_in']['EAX'], 16)), int(c['regs_out']['EAX'], 16))
+            self.assertEqual(m.sha(), cenario['final_state_sha256'])
 
     def test_random_matches_existing_sack_generator(self):
         from construcoes import TerrenoSacolas

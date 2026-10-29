@@ -147,7 +147,7 @@ class BancadaCargaMissaoOriginal(BancadaX86):
         self.arquivos = ArquivosCRT(self.midia)
         self.arquivos_win32 = ArquivosWin32(self.midia)
         self.perfil = PerfilWindows(self.midia)
-        self.windows = WindowsDeclarado(entradas)
+        self.windows = self._criar_windows(entradas)
         self.intervalos = sorted(self.vinculos_declarados.codigo_protegido)
         self._inicios = [a for a, _ in self.intervalos]
         self._fins = [b for _, b in self.intervalos]
@@ -197,7 +197,7 @@ class BancadaCargaMissaoOriginal(BancadaX86):
                 (0x52343c, 'KERNEL32.VirtualAlloc', 4, a.reservar),
                 (0x5232d0, 'USER32.ShowCursor', 1, w.constante(0, 'declared display counter 0')),
                 (0x5232c8, 'USER32.SetCursorPos', 2, w.constante(1, 'declared success')),
-                (0x523290, 'USER32.GetAsyncKeyState', 1, w.tecla)):
+                (0x523290, 'USER32.GetAsyncKeyState', 1, w.tecla)) + tuple(self._importacoes_extras()):
             self.declarar_importacao(slot, nome, argc, atender)
         # Every other import slot points at a private trap: reaching it is a
         # visible unsupported boundary, never a call into unmapped hint data.
@@ -311,15 +311,12 @@ class BancadaCargaMissaoOriginal(BancadaX86):
             self._retomando = set()
             if eip in self.armadilhas:
                 self._interromper('undeclared_import', import_name=self.armadilhas[eip])
-            if eip in self.pulos and eip not in self._pedidas:
-                nome, (valor, limpeza) = self.pulos[eip]
-                if self.fase != 'startup':
-                    self._interromper('display_boundary_in_oracle', callee=nome)
+            pulo = None if eip in self._pedidas else self._pulo(eip)
+            if pulo is not None:
+                nome, (valor, limpeza) = pulo
                 esp = self.cpu.reg_read(x86.UC_X86_REG_ESP)
                 retorno = struct.unpack('<I', self.cpu.mem_read(esp, 4))[0]
-                self.eventos_pulados.append(dict(routine=nome, caller_return=hex(retorno),
-                                                 caller=self.nome(retorno), declared_eax=valor,
-                                                 stack_cleanup=limpeza))
+                self._registrar_pulo(nome, retorno, valor, limpeza)
                 if valor is not None:
                     self.cpu.reg_write(x86.UC_X86_REG_EAX, valor)
                 self.cpu.reg_write(x86.UC_X86_REG_ESP, esp+4+limpeza)
@@ -338,9 +335,34 @@ class BancadaCargaMissaoOriginal(BancadaX86):
             self._retomando = {eip}
             entrada = eip
 
+    # Extension points (behavior-preserving for the MissionLoad oracle): a
+    # subclass may add declared imports, its own Windows answers and
+    # phase-specific non-executed routines.
+    def _criar_windows(self, entradas):
+        return WindowsDeclarado(entradas)
+
+    def _importacoes_extras(self):
+        return ()
+
+    def _enderecos_pulo(self):
+        return set(self.pulos)
+
+    def _pulo(self, eip):
+        """(name, (declared EAX, cleanup)) of a non-executed routine at ``eip``, or None."""
+        if eip not in self.pulos:
+            return None
+        if self.fase != 'startup':
+            self._interromper('display_boundary_in_oracle', callee=self.pulos[eip][0])
+        return self.pulos[eip]
+
+    def _registrar_pulo(self, nome, retorno, valor, limpeza):
+        self.eventos_pulados.append(dict(routine=nome, caller_return=hex(retorno),
+                                         caller=self.nome(retorno), declared_eax=valor,
+                                         stack_cleanup=limpeza))
+
     def _correr(self, rotulo, entrada, registradores, paradas, retomar=False):
         self._pedidas = set(paradas)
-        todas = set(paradas) | set(self.armadilhas) | set(self.pulos)
+        todas = set(paradas) | set(self.armadilhas) | self._enderecos_pulo()
         if retomar:
             return self.retomar(entrada, self.intervalos, parada=todas,
                                 limite_instrucoes=self.instrucoes_segmento,
@@ -471,6 +493,10 @@ class BancadaCargaMissaoOriginal(BancadaX86):
             self.cpu.hook_add(unicorn.UC_HOOK_MEM_READ, self._pegada_ler, r, begin=base, end=base+tamanho-1)
             self.cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE, self._pegada_escrever, r, begin=base, end=base+tamanho-1)
         self._eventos_vistos = len(self.vinculos_declarados.eventos)
+        # Unicorn instruments memory hooks when a block is translated: without
+        # this flush, code translated during startup (memset, menu routines)
+        # runs unhooked and its reads are missing from the footprint.
+        self.cpu.ctl_flush_tb()
 
     def _pegada_ler(self, cpu, acesso, endereco, tamanho, valor, r):
         base, escrito, lido, leitor = r
@@ -539,6 +565,7 @@ class BancadaCargaMissaoOriginal(BancadaX86):
         self.intervalos_vigiados = [tuple(x) for x in unidos]
         for a, z in unidos:
             self.cpu.hook_add(unicorn.UC_HOOK_MEM_READ, self._leitura_vigiada, begin=a, end=z-1)
+        self.cpu.ctl_flush_tb()
 
     def _leitura_vigiada(self, cpu, acesso, endereco, tamanho, valor, _):
         if self.fase == 'oracle':

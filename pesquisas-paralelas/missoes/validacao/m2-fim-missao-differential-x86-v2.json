@@ -1,0 +1,1103 @@
+{
+ "all_native_returned": true,
+ "cases": 48,
+ "compared": 38,
+ "dependency_stops": [
+  {
+   "call": "0x4589dc",
+   "case": "victory_mission8_without_type4_match",
+   "dependency": "uninitialized local [esp+8]",
+   "native_al": 1,
+   "phase": "load_tail",
+   "routine": "TestFinDeMission"
+  },
+  {
+   "call": "0x45879c",
+   "case": "record3_type3",
+   "dependency": "RechercheGetNbInvention 0x470554",
+   "native_al": 0,
+   "phase": "load_tail",
+   "routine": "TestFinDeMission"
+  },
+  {
+   "call": "0x458903",
+   "case": "record3_type5",
+   "dependency": "PlayerEstAllie 0x46d838",
+   "native_al": 0,
+   "phase": "load_tail",
+   "routine": "TestFinDeMission"
+  },
+  {
+   "call": "0x45871c",
+   "case": "mission6",
+   "dependency": "CaseEstIlluminee 0x47693a",
+   "native_al": 0,
+   "phase": "load_tail",
+   "routine": "TestFinDeMission"
+  },
+  {
+   "call": "0x45883f",
+   "case": "structure0_type3",
+   "dependency": "BatimentGetCase 0x41aee2",
+   "native_al": 0,
+   "phase": "load_tail",
+   "routine": "TestFinDeMission"
+  },
+  {
+   "call": "0x4589dc",
+   "case": "victory_mission8_without_type4_match",
+   "dependency": "uninitialized local [esp+8]",
+   "native_al": 1,
+   "phase": "frame1",
+   "routine": "TestFinDeMission"
+  },
+  {
+   "call": "0x45879c",
+   "case": "record3_type3",
+   "dependency": "RechercheGetNbInvention 0x470554",
+   "native_al": 0,
+   "phase": "frame1",
+   "routine": "TestFinDeMission"
+  },
+  {
+   "call": "0x458903",
+   "case": "record3_type5",
+   "dependency": "PlayerEstAllie 0x46d838",
+   "native_al": 0,
+   "phase": "frame1",
+   "routine": "TestFinDeMission"
+  },
+  {
+   "call": "0x45871c",
+   "case": "mission6",
+   "dependency": "CaseEstIlluminee 0x47693a",
+   "native_al": 0,
+   "phase": "frame1",
+   "routine": "TestFinDeMission"
+  },
+  {
+   "call": "0x45883f",
+   "case": "structure0_type3",
+   "dependency": "BatimentGetCase 0x41aee2",
+   "native_al": 0,
+   "phase": "frame1",
+   "routine": "TestFinDeMission"
+  }
+ ],
+ "differing": [],
+ "equal": 38,
+ "passed": true,
+ "path_reproduction": {
+  "boundaries_equal": true,
+  "code_after": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+  "code_unchanged": true,
+  "entry_trace_equal": true,
+  "passed": true,
+  "phase_states_equal": {
+   "between_frames": true,
+   "frame1": true,
+   "load_tail": true
+  }
+ },
+ "rows": [
+  {
+   "case": "captured_inputs",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "load_tail",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "EvenementEnCours",
+   "status": "compared"
+  },
+  {
+   "case": "event_active",
+   "equal": true,
+   "native_al": 1,
+   "native_changed": [],
+   "phase": "load_tail",
+   "python_al": 1,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "EvenementEnCours",
+   "status": "compared"
+  },
+  {
+   "case": "event_0x80",
+   "equal": true,
+   "native_al": 128,
+   "native_changed": [],
+   "phase": "load_tail",
+   "python_al": 128,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "EvenementEnCours",
+   "status": "compared"
+  },
+  {
+   "case": "captured_inputs",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "load_tail",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "food_50",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [
+    [
+     "0x4e1d89",
+     0,
+     1
+    ]
+   ],
+   "phase": "load_tail",
+   "python_al": 0,
+   "python_changed": [
+    [
+     "0x4e1d89",
+     0,
+     1
+    ]
+   ],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "food_49",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "load_tail",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "food_and_stone_50",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [
+    [
+     "0x4e1d89",
+     0,
+     1
+    ],
+    [
+     "0x4e1d8a",
+     0,
+     1
+    ],
+    [
+     "0x4e1d91",
+     0,
+     1
+    ]
+   ],
+   "phase": "load_tail",
+   "python_al": 0,
+   "python_changed": [
+    [
+     "0x4e1d89",
+     0,
+     1
+    ],
+    [
+     "0x4e1d8a",
+     0,
+     1
+    ],
+    [
+     "0x4e1d91",
+     0,
+     1
+    ]
+   ],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "marks_all_set",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [
+    [
+     "0x4e1d89",
+     1,
+     0
+    ],
+    [
+     "0x4e1d8a",
+     1,
+     0
+    ],
+    [
+     "0x4e1d91",
+     1,
+     0
+    ]
+   ],
+   "phase": "load_tail",
+   "python_al": 0,
+   "python_changed": [
+    [
+     "0x4e1d89",
+     1,
+     0
+    ],
+    [
+     "0x4e1d8a",
+     1,
+     0
+    ],
+    [
+     "0x4e1d91",
+     1,
+     0
+    ]
+   ],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "latch_set",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "load_tail",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "first_record_none",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "load_tail",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "initial_word_zero",
+   "equal": true,
+   "native_al": 1,
+   "native_changed": [],
+   "phase": "load_tail",
+   "python_al": 1,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "victory_without_cave_record",
+   "equal": true,
+   "native_al": 1,
+   "native_changed": [
+    [
+     "0x4e1d84",
+     0,
+     1
+    ],
+    [
+     "0x4e1d89",
+     0,
+     1
+    ],
+    [
+     "0x4e1d8a",
+     0,
+     1
+    ],
+    [
+     "0x4e1d91",
+     0,
+     1
+    ]
+   ],
+   "phase": "load_tail",
+   "python_al": 1,
+   "python_changed": [
+    [
+     "0x4e1d84",
+     0,
+     1
+    ],
+    [
+     "0x4e1d89",
+     0,
+     1
+    ],
+    [
+     "0x4e1d8a",
+     0,
+     1
+    ],
+    [
+     "0x4e1d91",
+     0,
+     1
+    ]
+   ],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "call": "0x4589dc",
+   "case": "victory_mission8_without_type4_match",
+   "dependency": "uninitialized local [esp+8]",
+   "equal": null,
+   "message": "uninitialized local [esp+8] required at TestFinDeMission CALL 0x4589dc: no type-4 match stored the record index this call",
+   "native_al": 1,
+   "native_changed": [
+    [
+     "0x4e1d84",
+     0,
+     1
+    ],
+    [
+     "0x4e1d89",
+     0,
+     1
+    ],
+    [
+     "0x4e1d8a",
+     0,
+     1
+    ],
+    [
+     "0x4e1d91",
+     0,
+     1
+    ]
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "python_dependency_stop"
+  },
+  {
+   "case": "record3_type2_zero",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [
+    [
+     "0x4e1d8b",
+     0,
+     1
+    ]
+   ],
+   "phase": "load_tail",
+   "python_al": 0,
+   "python_changed": [
+    [
+     "0x4e1d8b",
+     0,
+     1
+    ]
+   ],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "record3_type0_above",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "load_tail",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "record3_type7_ignored",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "load_tail",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "call": "0x45879c",
+   "case": "record3_type3",
+   "dependency": "RechercheGetNbInvention 0x470554",
+   "equal": null,
+   "message": "RechercheGetNbInvention 0x470554 required at TestFinDeMission CALL 0x45879c",
+   "native_al": 0,
+   "native_changed": [
+    [
+     "0x4e1d8b",
+     0,
+     1
+    ]
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "python_dependency_stop"
+  },
+  {
+   "call": "0x458903",
+   "case": "record3_type5",
+   "dependency": "PlayerEstAllie 0x46d838",
+   "equal": null,
+   "message": "PlayerEstAllie 0x46d838 required at TestFinDeMission CALL 0x458903",
+   "native_al": 0,
+   "native_changed": [
+    [
+     "0x4e1d8b",
+     0,
+     1
+    ]
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "python_dependency_stop"
+  },
+  {
+   "call": "0x45871c",
+   "case": "mission6",
+   "dependency": "CaseEstIlluminee 0x47693a",
+   "equal": null,
+   "message": "CaseEstIlluminee 0x47693a required at TestFinDeMission CALL 0x45871c",
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "load_tail",
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "python_dependency_stop"
+  },
+  {
+   "call": "0x45883f",
+   "case": "structure0_type3",
+   "dependency": "BatimentGetCase 0x41aee2",
+   "equal": null,
+   "message": "BatimentGetCase 0x41aee2 required at TestFinDeMission CALL 0x45883f",
+   "native_al": 0,
+   "native_changed": [
+    [
+     "0x4e1d88",
+     0,
+     1
+    ]
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "python_dependency_stop"
+  },
+  {
+   "case": "structure0_owner1",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "load_tail",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "player1",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "load_tail",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "player1_food_stone_50",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [
+    [
+     "0x4e1d89",
+     0,
+     1
+    ],
+    [
+     "0x4e1d8a",
+     0,
+     1
+    ],
+    [
+     "0x4e1d91",
+     0,
+     1
+    ]
+   ],
+   "phase": "load_tail",
+   "python_al": 0,
+   "python_changed": [
+    [
+     "0x4e1d89",
+     0,
+     1
+    ],
+    [
+     "0x4e1d8a",
+     0,
+     1
+    ],
+    [
+     "0x4e1d91",
+     0,
+     1
+    ]
+   ],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "player0_high_eax_bits",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "load_tail",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "captured_inputs",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "frame1",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "EvenementEnCours",
+   "status": "compared"
+  },
+  {
+   "case": "event_active",
+   "equal": true,
+   "native_al": 1,
+   "native_changed": [],
+   "phase": "frame1",
+   "python_al": 1,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "EvenementEnCours",
+   "status": "compared"
+  },
+  {
+   "case": "event_0x80",
+   "equal": true,
+   "native_al": 128,
+   "native_changed": [],
+   "phase": "frame1",
+   "python_al": 128,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "EvenementEnCours",
+   "status": "compared"
+  },
+  {
+   "case": "captured_inputs",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "frame1",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "food_50",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [
+    [
+     "0x4e1d89",
+     0,
+     1
+    ]
+   ],
+   "phase": "frame1",
+   "python_al": 0,
+   "python_changed": [
+    [
+     "0x4e1d89",
+     0,
+     1
+    ]
+   ],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "food_49",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "frame1",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "food_and_stone_50",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [
+    [
+     "0x4e1d89",
+     0,
+     1
+    ],
+    [
+     "0x4e1d8a",
+     0,
+     1
+    ],
+    [
+     "0x4e1d91",
+     0,
+     1
+    ]
+   ],
+   "phase": "frame1",
+   "python_al": 0,
+   "python_changed": [
+    [
+     "0x4e1d89",
+     0,
+     1
+    ],
+    [
+     "0x4e1d8a",
+     0,
+     1
+    ],
+    [
+     "0x4e1d91",
+     0,
+     1
+    ]
+   ],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "marks_all_set",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [
+    [
+     "0x4e1d89",
+     1,
+     0
+    ],
+    [
+     "0x4e1d8a",
+     1,
+     0
+    ],
+    [
+     "0x4e1d91",
+     1,
+     0
+    ]
+   ],
+   "phase": "frame1",
+   "python_al": 0,
+   "python_changed": [
+    [
+     "0x4e1d89",
+     1,
+     0
+    ],
+    [
+     "0x4e1d8a",
+     1,
+     0
+    ],
+    [
+     "0x4e1d91",
+     1,
+     0
+    ]
+   ],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "latch_set",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "frame1",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "first_record_none",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "frame1",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "initial_word_zero",
+   "equal": true,
+   "native_al": 1,
+   "native_changed": [],
+   "phase": "frame1",
+   "python_al": 1,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "victory_without_cave_record",
+   "equal": true,
+   "native_al": 1,
+   "native_changed": [
+    [
+     "0x4e1d84",
+     0,
+     1
+    ],
+    [
+     "0x4e1d89",
+     0,
+     1
+    ],
+    [
+     "0x4e1d8a",
+     0,
+     1
+    ],
+    [
+     "0x4e1d91",
+     0,
+     1
+    ]
+   ],
+   "phase": "frame1",
+   "python_al": 1,
+   "python_changed": [
+    [
+     "0x4e1d84",
+     0,
+     1
+    ],
+    [
+     "0x4e1d89",
+     0,
+     1
+    ],
+    [
+     "0x4e1d8a",
+     0,
+     1
+    ],
+    [
+     "0x4e1d91",
+     0,
+     1
+    ]
+   ],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "call": "0x4589dc",
+   "case": "victory_mission8_without_type4_match",
+   "dependency": "uninitialized local [esp+8]",
+   "equal": null,
+   "message": "uninitialized local [esp+8] required at TestFinDeMission CALL 0x4589dc: no type-4 match stored the record index this call",
+   "native_al": 1,
+   "native_changed": [
+    [
+     "0x4e1d84",
+     0,
+     1
+    ],
+    [
+     "0x4e1d89",
+     0,
+     1
+    ],
+    [
+     "0x4e1d8a",
+     0,
+     1
+    ],
+    [
+     "0x4e1d91",
+     0,
+     1
+    ]
+   ],
+   "phase": "frame1",
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "python_dependency_stop"
+  },
+  {
+   "case": "record3_type2_zero",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [
+    [
+     "0x4e1d8b",
+     0,
+     1
+    ]
+   ],
+   "phase": "frame1",
+   "python_al": 0,
+   "python_changed": [
+    [
+     "0x4e1d8b",
+     0,
+     1
+    ]
+   ],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "record3_type0_above",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "frame1",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "record3_type7_ignored",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "frame1",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "call": "0x45879c",
+   "case": "record3_type3",
+   "dependency": "RechercheGetNbInvention 0x470554",
+   "equal": null,
+   "message": "RechercheGetNbInvention 0x470554 required at TestFinDeMission CALL 0x45879c",
+   "native_al": 0,
+   "native_changed": [
+    [
+     "0x4e1d8b",
+     0,
+     1
+    ]
+   ],
+   "phase": "frame1",
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "python_dependency_stop"
+  },
+  {
+   "call": "0x458903",
+   "case": "record3_type5",
+   "dependency": "PlayerEstAllie 0x46d838",
+   "equal": null,
+   "message": "PlayerEstAllie 0x46d838 required at TestFinDeMission CALL 0x458903",
+   "native_al": 0,
+   "native_changed": [
+    [
+     "0x4e1d8b",
+     0,
+     1
+    ]
+   ],
+   "phase": "frame1",
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "python_dependency_stop"
+  },
+  {
+   "call": "0x45871c",
+   "case": "mission6",
+   "dependency": "CaseEstIlluminee 0x47693a",
+   "equal": null,
+   "message": "CaseEstIlluminee 0x47693a required at TestFinDeMission CALL 0x45871c",
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "frame1",
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "python_dependency_stop"
+  },
+  {
+   "call": "0x45883f",
+   "case": "structure0_type3",
+   "dependency": "BatimentGetCase 0x41aee2",
+   "equal": null,
+   "message": "BatimentGetCase 0x41aee2 required at TestFinDeMission CALL 0x45883f",
+   "native_al": 0,
+   "native_changed": [
+    [
+     "0x4e1d88",
+     0,
+     1
+    ]
+   ],
+   "phase": "frame1",
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "python_dependency_stop"
+  },
+  {
+   "case": "structure0_owner1",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "frame1",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "player1",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "frame1",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "player1_food_stone_50",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [
+    [
+     "0x4e1d89",
+     0,
+     1
+    ],
+    [
+     "0x4e1d8a",
+     0,
+     1
+    ],
+    [
+     "0x4e1d91",
+     0,
+     1
+    ]
+   ],
+   "phase": "frame1",
+   "python_al": 0,
+   "python_changed": [
+    [
+     "0x4e1d89",
+     0,
+     1
+    ],
+    [
+     "0x4e1d8a",
+     0,
+     1
+    ],
+    [
+     "0x4e1d91",
+     0,
+     1
+    ]
+   ],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  },
+  {
+   "case": "player0_high_eax_bits",
+   "equal": true,
+   "native_al": 0,
+   "native_changed": [],
+   "phase": "frame1",
+   "python_al": 0,
+   "python_changed": [],
+   "reached_return": true,
+   "routine": "TestFinDeMission",
+   "status": "compared"
+  }
+ ],
+ "schema": "rising-lands/monde01-fim-missao-native-differential/1",
+ "seconds": 35.323,
+ "source_dirty_paths": [
+  "?? pesquisas-paralelas/missoes/validacao/m2-influencia-differential-x86.json"
+ ],
+ "source_revision": "3cb9173a40f6c285edaa224404665afb66522aac",
+ "source_sha256": {
+  "diferencial_fim_missao.py": "5c3808592342c0f843089decf974063ccdb8db1f7581547873240387a04b0b43",
+  "fim_missao.py": "d4fd4ba3db45952f7f31c83a5e80b0481c58f99257b84f2bf68888b0862697da",
+  "oraculo_quadro_missao.py": "c01a55adfbb6abb996587fdfd9643e6286d32d551c896f4b369fecaba2ba90f8"
+ }
+}

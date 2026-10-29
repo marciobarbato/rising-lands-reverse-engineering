@@ -274,3 +274,169 @@ Merged `origin/main` ff2f5cf (Economy per-owner `[0x4e19b8]` Bag contract integr
   - the native stack block is absent from the original final capture.
 - **Tests.** `test_composicao_carga_missao.py`: 11 run, 0 skipped, all passed. This includes the strict whole-state test, determinism and the mandatory-contract guard. `scripts/check.py --domain missions` under the lease: 104 tests, 32 optional native skips, passed (log `.local/stage14-domain.log`). Native suites, common gates, integration and committed-main reproduction are left to the coordinator.
 - **Acceptance.** M1 is accepted only after the coordinator's integration and committed-main reproduction.
+
+## Stage15 (M2.1): MONDE01 first frame, original first (Claude, 2026-10-28)
+
+Merged `origin/main` 81ebbf9; M1 was accepted at 927c7e5. Full contract: [docs/MISSIONS.md — Stage15](../../docs/MISSIONS.md#stage15-m21-monde01-first-frame-original-first). Readable summary: [QUADRO1_MONDE01.md](QUADRO1_MONDE01.md).
+
+### Commits
+
+| Commit | Content |
+|---|---|
+| `e6aa305` | bench source |
+| `ca35221` | original capture and trace, before any translation |
+| `51381b1` | validation and summary |
+| `6516b41`, `e15465b`, `46dc93d` | isolation bench and fixes |
+| `d619787` | isolated captures and the M1 footprint re-validation |
+| `b25e8d6` | translation |
+| `0a7da75` | native differential |
+
+### API inputs
+
+**Bench** (`oraculo_quadro_missao`):
+
+`BancadaQuadroMissaoOriginal(EntradasQuadro(base=EntradasNomeadas, cursor, registradores_chamador))` exposes `executar_cauda_carga`, `executar_entre_quadros` and `executar_quadro`, plus `rastro_json()`.
+
+`Isolamento(bancada, rotinas, perturbacoes, observador)` pauses at routine entries.
+
+The scripts are `capturar_quadro_missao_original`, `validar_quadro_missao_original`, `capturar_isolados_quadro1` and `diferencial_fim_missao`.
+
+**Translation** (`fim_missao`):
+- `evento_em_curso(view 0x4e1b0e)`
+- `testar_fim_missao(jogador, condicoes 0x4e1d20/100, estado 0x4e1d84/14, contagem_inicial 0x4e1a3a/2, exercitos 0x4e1928/8, exercitos_ia 0x4dfaa8/16, ConsultasFimMissao)`
+- `consultas_publicadas(estruturas 0x49a0c8/276000, Economia over 0x4e2ea8, missao_u8 0x496fe4, **optional providers)`
+
+### Supported domain
+
+The frame-1 capture covers the accepted M1 path, then three phases:
+- **(a)** the load-state CalculGame tail;
+- **(b)** the window loop;
+- **(c)** frame 1, which ends at its real return `0x475063`.
+
+TestFinDeMission supports every record type. Callees that are not supplied stop as named dependencies.
+
+### Order of mutations and callbacks
+
+- **Frame phases:** see the trace. The boundaries are not executed and are recorded in call order.
+- **TestFinDeMission:**
+  1. Process records 0..9 in order, setting or clearing each record's mark.
+  2. Apply the mission-6 override.
+  3. Set the latch, then the `0x4e1a3a`==0 override.
+  4. For missions 8/13, run the owner-count scan into `0x4e1d85`.
+  5. Return AL.
+
+### Original addresses and hashes
+
+The intact executable SHA-256 is `6c556520…43fb`, with code-section SHA `02985de5…` unchanged after every run. Main addresses:
+- CalculGame `0x42c868`
+- ProgIteration `0x47500e`
+- `_WinMain@16` loop `0x4601c0`
+- EvenementEnCours `0x4581b6`
+- TestFinDeMission `0x458606`
+
+Evidence files:
+
+| File | SHA-256 |
+|---|---|
+| captura-quadro1 | `c06f78ea…` |
+| rastro | `45859330…` |
+| captura-isolada | `d0365055…` |
+
+### Validation
+
+| Report | Result |
+|---|---|
+| `validacao/m2-frame1-original-x86.json` | passed (see QUADRO1_MONDE01.md) |
+| `validacao/stage12-missionload-original-x86-tbflush.json` | passed |
+| `validacao/m2-fim-missao-differential-x86.json` | passed: 38/38 compared equal, 10 named dependency stops |
+
+Light tests: `test_quadro_missao_original.py` and `test_fim_missao.py`.
+
+### Gaps and dependencies
+
+**Graphics.** Does AffGame, running over the (b) state, store into:
+- `0x4e2f78`
+- `0x4e1b0e`
+- `0x4e060c` / `0x4e0610`
+- `0x507d54`
+- `0x50a9b4` / `0x50a9b6`
+- `0x4e1d18`
+
+Frame 1 reads these. AffGame cannot run on this bench because its sprite banks were never loaded.
+
+**Audio.** The sound library is a boundary because PlaySnd_InitSoundLib never runs. MCICD_* return early while `[0x4e2f29]`=0.
+
+**Core / Economy / Combat / AI.** TestFinDeMission still needs these providers:
+
+| Provider | Address |
+|---|---|
+| BatimentGetCase | `0x41aee2` |
+| CaseGetZoneInfluence | `0x47bf66` |
+| RechercheGetNbInvention | `0x470554` |
+| PlayerEstAllie | `0x46d838` (combat `alvos_alcance.aliados` exists; its register mapping is not verified here) |
+| GetTopLeftCaseZoneInfluence | `0x47c114` |
+| CaseEstIlluminee | `0x47693a` |
+
+MONDE01 needs BatimentGetCase and CaseGetZoneInfluence as soon as a type-3 cave exists.
+
+**AI/runtime.** The frame pipeline consumes `fim_missao` and the trace. No whole-frame composition was built here.
+
+**Inputs.**
+- The cursor (0,0) is a declared input, and it causes an edge scroll in frame 1.
+- The M1 startup still does not execute WndProc or AppWindowInit; their static UI stores are read and classified in the footprint.
+- The `[esp+8]` stale local of the mission 8/13 scan is not modeled.
+
+### Not run
+
+- The full native missions suite
+- The common gates
+- Integration
+- Committed-main reproduction
+
+## Stage16 (M2): influence queries and register trace view (Claude, 2026-10-28)
+
+Merged `origin/main` ec931d2, which contains M2.1. Contract: [docs/MISSIONS.md — Stage16](../../docs/MISSIONS.md#stage16-m2-influence-zone-queries-and-the-register-trace-view).
+
+### Commits
+
+| Commit | Content |
+|---|---|
+| `c1bb6b2` | injection source |
+| `60f00c2` | original influence capture |
+| `72dd272` | translation and `fim_missao` wiring |
+| `3cb9173` | register-view source |
+| `0002794` | both differential reports |
+| `1594ae7` | register view |
+
+### API inputs
+
+- `influencia_missao.zona_influencia(table 0x50c614/4000, AX cell)`
+- `influencia_missao.canto_zona_influencia(table, AX zone 0..399)`
+- `fim_missao.consultas_publicadas(..., influencia)`: the table argument is now required.
+- `Isolamento(..., injecoes={routine: f(iso, phase, regs)})`, with `chamar_folha` and `verificar_puro`, for native leaf calls injected at a pause.
+
+### Domain
+
+- The two influence queries cover the complete original domain, except that GetTopLeftCaseZoneInfluence is protected for AX ≥ 400, where the original reads beyond the table.
+- CaseInZoneInfluence `0x47bfdd` is not translated. It is not reached.
+
+### Mutation and callback order
+
+Neither query performs a store. Both preserve EBX/ECX/EDX, which the native capture and the differential checked.
+
+### Validation
+
+| Check | Result |
+|---|---|
+| Influence native differential | 5 tables × 66,192 calls, all equal |
+| `fim_missao` native differential v2 | 38/38 equal |
+| CPU-free tests | full sweep replay |
+
+### Gaps and dependencies
+
+- **Economy:** BatimentGetCase is the next stop of the MONDE01 cave condition. RechercheGetNbInvention is also Economy's.
+- **Core:** CaseEstIlluminee.
+- **Combat:** PlayerEstAllie register mapping still needs confirmation.
+- **Graphics:** the AffGame inter-frame write set is pending, and the boundary policy may change when it arrives.
+- **AI/runtime:** no extension of `mapa_memoria_m1` / `ligacao_provedores_m1` has been requested yet; I will implement one if asked. The register trace view it requested is published.
+- **Frame limit:** the original oracle is held at frame 1 until the frame-1 comparison passes.
