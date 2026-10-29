@@ -10,7 +10,12 @@ RechercheGetNbInvention for Missions' TestFinDeMission. Round 4 adds the
 queries the display-scenario frames reach outside those calls
 (``evidencias/captura-consultas-economia-exibicao.json``): PlayerGetType,
 PlayerEstAllie, TestRessource, BatimentGetType, BatimentEstHabiter,
-IntToBCD, BCDToInt and BagVide.
+IntToBCD, BCDToInt and BagVide. PlayerEstAllie and TestRessource are the live
+functions (original index handling, player 4 included), never the 0..3-protected
+class forms. ``recursos`` should be live (round 5):
+``extracao.RecursosTerreno.do_mundo(mundo, minas=m.vista(0x509954, 80))`` over
+Core's ``MundoFisico.vincular_grades`` world, or
+``RecursosTerreno.da_memoria(m, mosaicos=mundo.tiles.buffer)``.
 
 ``memoria`` is the declared live memory: either an object with
 ``ler(endereco, tamanho)`` and ``vista(endereco, tamanho)`` (Missions'
