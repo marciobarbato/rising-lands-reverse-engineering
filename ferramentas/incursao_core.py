@@ -286,8 +286,39 @@ def colocar_unidade(m, eax):
     return dict(EAX=definir_minimapa(m, dono, 4, m.u16(u + 8))['EAX'])
 
 
+def terreno_em_colisao(m, eax, edx):
+    """TerrainEnCollision 0x4761d4: EAX = attribute[AX] & DL != 0; EDX kept."""
+    return dict(EAX=int(bool(m.u8((m.u32(GRADE_ATRIBUTOS) + (eax & 0xffff)) & M32) & (edx & 0xff))))
+
+
+def remover_colisao(m, eax, edx):
+    """ResetCollision 0x47623e: attribute[AX] &= ~DL; EAX = AX, DL = ~DL."""
+    endereco = (m.u32(GRADE_ATRIBUTOS) + (eax & 0xffff)) & M32
+    m.u8(endereco, m.u8(endereco) & ~edx & 0xff)
+    return dict(EAX=eax & 0xffff, EDX=(edx & 0xffffff00) | (~edx & 0xff))
+
+
+def memset_crt(m, eax, edx, ebx):
+    """CRT memset 0x48c3b0 (Watcom: EAX dest, DL byte, EBX count) through __STOSB 0x48d890.
+
+    Reads the first destination byte (CMP at 0x48d894) when the count is not 0. EAX/EBX/ECX
+    kept; EDX = DL repeated in all four bytes.
+    """
+    valor, n = edx & 0xff, ebx & M32
+    if n:
+        m.u8(eax)
+    for i in range(n):
+        m.u8((eax + i) & M32, valor)
+    return dict(EDX=valor * 0x01010101)
+
+
 # ------------------------------------------------------------------ free cell
 def celula_livre(m, eax, edx, esp):
+    r = _celula_livre(m, eax, edx, esp)
+    return r if esp is not None else dict(EAX=r['EAX'] & 0xffff)
+
+
+def _celula_livre(m, eax, edx, esp):
     """GetFreeCell 0x479f20: AX centre cell, DX unit type -> EAX = first free cell of rings 1..29.
 
     Each ring k tests the row y-k (x-k..x+k), the row y+k, then the columns x-k and x+k, in
@@ -297,6 +328,9 @@ def celula_livre(m, eax, edx, esp):
     first cell lags the row by one, as in the original. Type class (0x4962c8) 0 or above 3 takes
     the first candidate; 1 tests the attribute mask; 2..3 test a 2x2 footprint up-left.
     EAX = 0xffff when the centre is off the map or no ring has a free cell; other registers kept.
+
+    With ``esp=None`` (no native stack) the residue is not read and only AX is returned: AX, the
+    cells tested and the search order do not depend on the residue (the callers read AX).
     """
     a = eax & M32
     x, y = a & 0xff, (a & 0xffff) >> 8
@@ -309,7 +343,7 @@ def celula_livre(m, eax, edx, esp):
     tipo = edx & 0xffff
     mascara = 2 if tipo in (0x10, 0x11) else 1
     classe = m.u8(CLASSE_TAMANHO + tipo)
-    residuo = lambda d: m.u16((esp - d) & M32)
+    residuo = (lambda d: 0) if esp is None else (lambda d: m.u16((esp - d) & M32))
 
     def livre(c):
         if classe < 1 or classe > 3:
@@ -549,6 +583,9 @@ ROTINAS = {
     'GetCaseIndiceBatiment': (0x41aab2, lambda m, r, p, b: caso_indice_estrutura(m, r['EAX'])),
     'GetRandCaseTypeBatPlayer': (0x489300, lambda m, r, p, b: caso_estrutura_tipo_jogador(m, r['EAX'], r['EDX'])),
     'Chemin_Accessible': (0x42d4f8, lambda m, r, p, b: acessivel(m, r['EAX'], r['EDX'])),
+    'TerrainEnCollision': (0x4761d4, lambda m, r, p, b: terreno_em_colisao(m, r['EAX'], r['EDX'])),
+    'ResetCollision': (0x47623e, lambda m, r, p, b: remover_colisao(m, r['EAX'], r['EDX'])),
+    'memset': (0x48c3b0, lambda m, r, p, b: memset_crt(m, r['EAX'], r['EDX'], r['EBX'])),
     'listNewElem': (0x47d012, lambda m, r, p, b: lista_novo_elemento(m, r['EAX'])),
     'listLinkElemToTail': (0x47d07a, lambda m, r, p, b: lista_ligar_ao_fim(m, r['EAX'], r['EDX'])),
     'iaProbNew': (0x47d7ec, lambda m, r, p, b: tarefa_nova(m, r['EAX'])),

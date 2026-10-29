@@ -543,3 +543,27 @@ Contract and measurements: [UNICORN_TEARDOWN](UNICORN_TEARDOWN.md). This is tool
 - GetCaseIndiceBatiment, which MONDE01 never reaches (no cave);
 - PlaceEngin's discovery path for player owners in flat memory;
 - integration.
+
+### M2.3 movement stage (counters 9000–9200) on `feat/re-core`
+
+- **Capture script** `capturar_movimento_incursao.py` (`7a90689`): 27 Core routines, Combat's forced-counter method. The full run is Mac mini request #5.
+- **World-model differential** `validar_movimento_incursao.py`: Core's existing world model, bound over each isolated call's exact entry blocks through Missions' `montar_provedores`, compared with the native result. Flat translations are compared with full registers.
+- **Gap closed:** CalculNextCase's walk animation (`MundoNavegacao.animar_movimento`, `calcular_proxima_celula`, `atualizar_movimento(animacao=True)`). Type 17 and the local-player sound branch raise.
+- **New flat translations:** TerrainEnCollision, ResetCollision, CRT memset (`incursao_core`).
+- **Smoke (9000–9004):** 0 mismatches.
+
+**NOT RUN / open:**
+- the full 201-frame world differential (Mac mini);
+- the pathfinding internals, which need the solver's buffers bound to memory;
+- the EnginNextEtape dispatcher.
+
+The contract is in [RAID_CORE](RAID_CORE.md#movement-and-pathfinding-after-the-spawn-counters-90009200).
+
+### M2.3 readiness: providers wired, live world, live path search on `feat/re-core`
+
+- **Raid providers:** `provedores_core` exports the raid routines with ai-runtime's keywords, and the task VM posts through the same `postar_tarefa` (`9f27899`).
+- **Live world:** `mundo_vivo` binds the navigation world live to flat memory. The movement providers run on it, with `deslocar` as the exact DeplaceEngin (`bc256c5`, `aa2e6b1`). SetDeplaceEngin and ResetOrdre return the record address, and EnginEstVivant returns the exact EAX.
+- **Path search:** `SolucionadorCaminhosVivo` keeps its work state at the original globals. Route updates are now in place.
+- **Full 9000–9200 native differential:** 0 mismatches, except 6 bytes of CheminCalcul's contour-engine scratch at the 9177 search (`0x4e0f40`, `0x4e0f50..52`, `0x4e0f68`, `0x4e1772`). The search result itself is equal.
+- **Native movement regressions:** 56 tests pass with `RISING_EMULAR=1` (needs `testes/` on `PYTHONPATH`).
+- See [RAID_CORE](RAID_CORE.md).
