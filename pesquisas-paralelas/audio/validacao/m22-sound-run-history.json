@@ -1,0 +1,20 @@
+{
+  "schema": "rising-lands/audio-m22-run-history/1",
+  "runs": [
+    {
+      "mode": "pumps",
+      "lease_tag": "codex-audio-m22-pumps",
+      "result": "passed",
+      "native_calls": 3,
+      "states_verified": 258,
+      "seconds": 4.37
+    },
+    {
+      "mode": "logic",
+      "lease_tag": "codex-audio-m22-accesses",
+      "result": "failed_before_startup",
+      "reason": "Convenience factory required source/RISING_LANDS_BR_.BIN, outside authorized CD-only inputs",
+      "resolution": "Reused accepted named Windows inputs through committed input dataclasses; no ISO file was guessed or read"
+    }
+  ]
+}

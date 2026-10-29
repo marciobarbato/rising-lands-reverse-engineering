@@ -159,7 +159,7 @@ def native_pumps(destination):
     print(json.dumps(dict(output=str(path),coverage=result['coverage'],stops=sum(c['stop'] is not None for c in cases))))
 
 
-def native_logic_reads(destination,frames):
+def native_logic_reads(destination,frames,execute_pumps=False):
     """Run the original accepted scenario with sound/CD declared boundaries unchanged.
 
     This measures only native game accesses to the explicit static neighborhoods;
@@ -174,9 +174,31 @@ def native_logic_reads(destination,frames):
     m1=json.loads((ROOT/'pesquisas-paralelas/missoes/evidencias/captura-carga-missao-exibicao-v2.json').read_bytes())
     ni=m1['named_inputs']
     t0=time.monotonic()
-    b,_,_=cen.bancada('exibicao',ni['allocation_fill'],ni['clock_ms'][0],segundos=300)
+    # Reuse the accepted declared Windows answers directly. The convenience
+    # factory additionally reads an ISO PVD, unavailable in the authorized CD
+    # tree; no ISO or volume-label guess is required for this exact replay.
+    from fronteiras_carga_missao import EntradasNomeadas
+    from oraculo_quadro_missao import EntradasQuadro
+    from oraculo_exibicao_missao import EntradasExibicao, BancadaExibicaoOriginal
+    base=EntradasNomeadas(diretorio_instalacao=ni['install_directory'].encode('latin-1'),
+        unidade_cd=ni['cd_drive'].encode(),rotulo_cd=ni['cd_volume_label'].encode('latin-1'),
+        relogio_ms=tuple(ni['clock_ms']),preenchimento_alocacao=ni['allocation_fill'],
+        estado_memoria=bytes.fromhex(ni['memory_status_hex']),teclas=tuple(map(tuple,ni['async_keys'])),
+        id_thread=ni['thread_id'],proveniencia=ni['provenance'])
+    frame=EntradasQuadro(base=base,cursor=tuple(ni['frame']['cursor']),
+        registradores_chamador={k:int(v,16) for k,v in ni['frame']['caller_registers'].items()},
+        proveniencia=ni['frame']['provenance'])
+    display=ni['display']
+    entry=EntradasExibicao(quadro=frame,ticks=tuple(display['display_ticks']),
+        preenchimento_superficie=display['surface_fill'],proveniencia=display['provenance'])
+    b=BancadaExibicaoOriginal(entry,segundos=300)
     b.iniciar_relogio();b.executar_inicio();b.executar_mission_load(60)
     if b.resumo_imagem(b.imagem())!=capture['state_s0']['summary']: raise ValueError('Native initial state differs')
+    if execute_pumps:
+        for name in ('PlaySnd_Manage','MCICD_Play','MCICD_Manage'):
+            address=b.sym[name]
+            b.pulos.pop(address,None);b.fronteiras.pop(address,None)
+        b.cpu.ctl_flush_tb()
     access=Counter();writes=Counter()
     def hook(target):
         def capture_access(cpu,kind,a,n,value,_):
@@ -190,20 +212,39 @@ def native_logic_reads(destination,frames):
         b.cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE,hook(writes),None,begin=a-3,end=z-1)
     b.cpu.ctl_flush_tb()
     phases=[];expected={p['phase']:p for p in capture['phases']}
+    references=iter(accepted_states(capture));next(references)
     for phase,regs in b.executar_quadros(frames,segundos=180):
-        summary=b.resumo_imagem(b.imagem())
+        actual=b.imagem();summary=b.resumo_imagem(actual)
         equal=summary==expected[phase]['state_after']['summary']
-        phases.append(dict(phase=phase,summary_equal=equal))
-        if not equal: raise ValueError('Native phase differs from accepted capture: '+phase)
+        name,reference=next(references)
+        if name!=phase:raise ValueError('Reference order differs')
+        differences=[]
+        for block in sorted(set(actual)|set(reference)):
+            if block=='native_stack':continue
+            av,rv=actual.get(block),reference.get(block)
+            if av==rv:continue
+            if av is None or rv is None or av[0]!=rv[0] or len(av[1])!=len(rv[1]):
+                differences.append(dict(block=block,layout_differs=True));continue
+            differences.extend(dict(block=block,address=hex(av[0]+i),accepted=old,actual=new)
+                               for i,(new,old) in enumerate(zip(av[1],rv[1])) if new!=old)
+        phases.append(dict(phase=phase,summary_equal=equal,differences=differences))
+        if not equal and not execute_pumps: raise ValueError('Native phase differs from accepted capture: '+phase)
+        if execute_pumps and any(d.get('address')!='0x498f5c' for d in differences):
+            raise ValueError('Chained pumps changed bytes outside the original pump write set: '+phase)
     def rows(counter):
-        return [dict(phase=phase,instruction=hex(ip),routine=b.nome(ip),address=hex(a),bytes=n,range=label,count=count)
+        return [dict(phase=phase,instruction=hex(ip),routine=b.nome(ip),address=hex(a),bytes=n,range=label,count=count,
+                             code_owner='sound-library' if 0x489dac<=ip<0x48c204 else 'mci-cd' if 0x4679d0<=ip<0x467cbf else 'game-or-display')
                 for (phase,ip,a,n,label),count in sorted(counter.items())]
     result=dict(schema='rising-lands/audio-m22-original-native-accesses/1',original_sha256=ORIGINAL_SHA256,
                 translation_executed=False,accepted_capture_sha256=CAPTURE_SHA,accepted_policy_sha256=POLICY_SHA,
-                scope='Native accesses in accepted scenario; sound/CD declared boundaries stay unchanged',
+                scope='Original native accesses in the M2.2 scenario',execute_original_pumps=execute_pumps,
+                sound_boundaries_removed=['PlaySnd_Manage','MCICD_Play','MCICD_Manage'] if execute_pumps else [],
                 declared_cd_input='No CD track playing, flag 0x4e2f28 stays zero; MCICD_Init never executed',
                 frames=frames,phases=phases,reads=rows(access),writes=rows(writes),
                 boundary_counts=dict(Counter(e['routine'] for e in b.eventos_fronteira if e.get('phase') in expected)),
+                declared_inputs_source='Exact named_inputs of the accepted display-v2 M1 capture; no new ISO-label inference',
+                source_revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
+                script_sha256=sha(Path(__file__).read_bytes()),
                 watched_ranges=[dict(start=hex(a),end=hex(z),name=n) for a,z,n in SOUND_RANGES+SHARED_RANGES],
                 start_summary=capture['state_s0']['summary'],end_summary=summary,
                 code_sha256_after=b.sha256_codigo(),seconds=round(time.monotonic()-t0,3))
@@ -215,7 +256,7 @@ def native_logic_reads(destination,frames):
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('mode',choices=('inventory','pumps','logic'))
-    parser.add_argument('--output',required=True);parser.add_argument('--frames',type=int,default=128)
+    parser.add_argument('--output',required=True);parser.add_argument('--frames',type=int,default=128);parser.add_argument('--execute-pumps',action='store_true')
     args=parser.parse_args()
     if args.mode != 'inventory':
         import signal
@@ -223,7 +264,7 @@ def main():
         signal.alarm(18*60)
     if args.mode=='inventory': print('Exported',len(inventory(args.output)['routines']),'original intervals')
     elif args.mode=='pumps':native_pumps(args.output)
-    else:native_logic_reads(args.output,args.frames)
+    else:native_logic_reads(args.output,args.frames,args.execute_pumps)
 
 
 if __name__=='__main__':main()
