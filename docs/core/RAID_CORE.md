@@ -161,11 +161,21 @@ The other void routines return None: their EAX is path-dependent and not modeled
 
 The live world keeps the search result at the original pair: status `0x4e0f4c` and alternative cell `0x4e0f4a`. Route updates are now written in place, in `avancar_passo` and `_aplicar_resultado`. That fixed the route count lost on arrival through Missions' snapshot binding.
 
-**Full run over 9000–9200** (`relatorios/movimento-incursao-mundo-emulada.json`, every call compared from counter 9170): 251 snapshot-world, 253 live-world and 135 flat comparisons.
-- **The one mismatch** is the live DeplaceEngin that runs the first search (9177). The unit, route, search context, status and alternative cell are all equal. What differs is 6 bytes of CheminCalcul's contour-engine scratch, which the Python solver has no field for: u8 `0x4e0f40`, pointer u32 `0x4e0f50`, contour state u8 `0x4e0f68` and u16 `0x4e1772`.
-- **The 2 dependency stops** are the same search through Missions' snapshot binding, which denies the solver hook.
+**Contour state, byte-exact.** CheminCalcul's contour engine keeps four more globals, and `SolucionadorCaminhosVivo` writes all of them from the Python contour result:
+- u16 `0x4e1772`: the unit's region backup +0xfa at entry (`0x42f26c`);
+- u8 `0x4e0f40`: the last traced side's step count (`fase`);
+- u8 `0x4e0f68`: the region-list count (`quantidade_regioes`; each add stores `0x4e0f6a + 2·count`, `0x42fd9b`);
+- u32 `0x4e0f50`: the current record. It is `0x4e0f54`, then `0x4e0f5e` once the second side starts (`0x4355e1`), unless every start was blocked.
 
-**Open gaps:**
-- The contour-engine scratch fields above, so that the memory after a search is byte-exact.
-- The path-search internals as separate routines (CheminCalcul, Chemin_Verouille, OptimiseChemin, TestLigneOptimise). They are covered as one search through DeplaceEngin, not compared call by call.
-- The EnginNextEtape dispatcher, which has no single world-model method.
+**Per routine.** The validator also compares the path-search routines one by one on the live world:
+- Chemin_Verouille: `SolucionadorCaminhosVivo.verrouiller`, the search context at the original globals;
+- CheminCalcul: `calcular`;
+- TestLigneOptimise: `otimizacao_caminhos.testar_linha`, AL = allowed, cells written at EBX;
+- OptimiseChemin: `otimizar_rota`. EAX = compacted cells + 1, because the loop exits when its 1-based cursor passes the compacted count (`0x42ea6e`).
+
+**Full run over 9000–9200** (`relatorios/movimento-incursao-mundo-emulada.json`, every call compared from counter 9170): **0 mismatches**.
+- Comparisons: 251 snapshot-world, 261 live-world and 135 flat.
+- The live comparisons include the first search: Chemin_Verouille 1, CheminCalcul 1, OptimiseChemin 1, TestLigneOptimise 5, and 37 DeplaceEngin calls. The memory after the search is byte-exact.
+- **The 2 dependency stops** are the same search through Missions' snapshot binding (`montar_provedores`), which denies the solver hook. AI/runtime's chain never reaches them: its DeplaceEngin/SetDeplaceEngin come from `provedores_core`, which runs on `mundo_vivo` with `SolucionadorCaminhosVivo`.
+
+**Open gaps:** the EnginNextEtape dispatcher, which is AI/runtime's (`proxima_etapa_quadro`). Core has no adapter for it.
