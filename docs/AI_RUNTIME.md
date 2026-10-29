@@ -612,3 +612,7 @@ New this round, translated from captured executed blocks: InputGame (MouseZone, 
 - **Core providers:** SetClipping, InitGameZone and the live task VM replace the earlier crossings and the bridge. Core's NextAnim* stop on the 25×17 viewport (`0x477737`/`0x47731b`) and are crossed. They are the only logic crossings: the CRT seed and `0x4e1d18`.
 - **Graphics' display routines:** RestoreAll, AffGame, and DD*/FilledBox/DeleteBank inside MenuInit are crossed and write no logic byte.
 - **New translations:** the MouseZone no-zone tail, the InputGame map hover, and MenuInit's DeleteBank branch.
+
+## M2.1 round 5 — formal first-frame equality proof
+
+[M2_1_PROVA_QUADRO1.md](../pesquisas-paralelas/ia-runtime/M2_1_PROVA_QUADRO1.md); the data is in `validacao/m2-1-prova-quadro1.json`. Against Missions' display -v2 reference and comparison policy, the chained composition is equal in phases (a), (b) and (c) on every compared byte (16,097,242 outside the exclusion mask), both RNGs, the bindings and boundaries outside display context, the modeled registers, and the 25,482 allocation records. It uses **zero crossings**: Core's 25×17 NextAnim*, Graphics' `efeitos_logicos_exibicao`, and DeleteBank/MemFree on Missions' arena. MenuInit's display roots are not executed, and the proof shows their write sets are masked, outside the state, or restored lock bookkeeping.
