@@ -314,6 +314,87 @@ def numero_invencoes(m, jogador):
     return _u8(m, INVENCOES + (jogador & 0xff))
 
 
+JOGADORES = 0x5080a8   # DWORD pointer to the 20-byte player records
+RECURSOS = 0x4e2ea8    # resource table: 4 players x 4 records x 8 bytes, +2 total
+ESTRUTURAS = 0x49a0c8  # structure pool, 276 bytes per structure
+
+
+def tipo_jogador(m, jogador):
+    """PlayerGetType 0x46d817: AL = record byte +1 of player AL & 0xff, or 2 when that is >= 4.
+
+    Live form of ``Mercado.tipo_jogador``; the record base is read from 0x5080a8 on every call.
+    """
+    j = jogador & 0xff
+    return _u8(m, _u32(m, JOGADORES) + 20 * j + 1) if j < 4 else 2
+
+
+def aliado(m, jogador, outro):
+    """PlayerEstAllie 0x46d838: AL = 1 when AL == DL, else 0 when either is > 4, else the alliance bit.
+
+    The bit is ``1 << DL`` tested against the sign-extended byte +6 of AL's record,
+    read as the dword at +3 (``sar 24``). Indices 4 are not rejected (the original
+    reads a fifth record). Live form of ``Mercado.aliado``, without its 0..3 protection.
+    """
+    j, k = jogador & 0xff, outro & 0xff
+    if j == k:
+        return 1
+    if j > 4 or k > 4:
+        return 0
+    registro = _u32(m, _u32(m, JOGADORES) + 20 * j + 3)
+    return int(bool((registro >> 24) & (1 << k)))
+
+
+def recursos_suficientes(m, jogador, comida, pedra, pecas):
+    """TestRessource 0x4676e5: AX food, DX stone, BX parts, player byte as the RET-4 stack argument.
+
+    AL = 1 when each u16 cost is <= the player's total (+2 of records 1, 2, 0, compared
+    in that order with unsigned jumps), else 0. No player range check. Live form of
+    ``Economia.suficiente``.
+    """
+    base = RECURSOS + 32 * (jogador & 0xff)
+    for custo, registro in ((comida, 1), (pedra, 2), (pecas, 0)):
+        if custo & 0xffff > _u16(m, base + 8 * registro + 2):
+            return 0
+    return 1
+
+
+def tipo_estrutura_viva(m, estrutura):
+    """BatimentGetType 0x41a4f4: AL = byte +8 of structure AX (u16, no range check)."""
+    return _u8(m, ESTRUTURAS + 276 * (estrutura & 0xffff) + 8)
+
+
+def escrever_bcd(m, destino, valor):
+    """IntToBCD 0x467cd1: EDX value (u16), EAX destination; byte destino+3-i = digit i (thousands first).
+
+    The four stores happen in that order through ``vista``; see ``int_para_bcd``.
+    """
+    digitos = int_para_bcd(valor)
+    for i in range(4):
+        _w8(m, (destino + 3 - i) & 0xffffffff, digitos[3 - i])
+
+
+def ler_bcd(m, destino, origem):
+    """BCDToInt 0x467d3a: EAX destination word, EDX four digit bytes (units first).
+
+    Stores 0, then adds digit k * 10**k to the word four times, rereading it each
+    time, so an overlapping destination behaves as in the original.
+    """
+    _w16(m, destino, 0)
+    for k in range(4):
+        d = _u8(m, (origem + k) & 0xffffffff)
+        _w16(m, destino, (_u16(m, destino) + d * 10 ** k) & 0xffff)
+
+
+def bolsa_vazia(m, bolsa):
+    """BagVide 0x4470b9: reads the Bag count word at EAX; EAX = (count & 0xff00) | (count == 0).
+
+    ``mov ax,[eax]; and eax,0xffff; sete al``: AH keeps the count's high byte.
+    Any address is accepted, as in the original.
+    """
+    contagem = _u16(m, bolsa & 0xffffffff)
+    return (contagem & 0xff00) | int(contagem == 0)
+
+
 def calcular_contador_mercado(m, jogador):
     """CalculCompteurMarche 0x466dd1 (AL=player): read-only unless market state is 3.
 

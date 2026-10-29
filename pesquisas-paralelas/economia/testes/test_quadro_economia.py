@@ -37,9 +37,10 @@ def blocos():
 
 
 class Memoria:
-    """M1 blocks as separate bytearrays; ``vista`` is a live view, like MapaMemoriaM1.vista."""
-    def __init__(self):
-        self.blocos = [(nome, base, bytearray(raw)) for nome, base, raw in blocos()]
+    """M1 blocks (or another declared base state) as separate bytearrays; ``vista`` is a live view, like
+    MapaMemoriaM1.vista."""
+    def __init__(self, fonte=None):
+        self.blocos = [(nome, base, bytearray(raw)) for nome, base, raw in (blocos() if fonte is None else fonte)]
         self.ordem = sorted(self.blocos, key=lambda b: b[1])
         self.bases = [b[1] for b in self.ordem]
         self.acessos = []    # vista calls (writes, and reads by bound providers)
