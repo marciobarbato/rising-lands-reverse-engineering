@@ -286,7 +286,19 @@ def alocacoes_no_ponto(cap, fase_ponto, seguintes):
     return cap['allocations'], 'final allocations (unchanged after the checkpoint)'
 
 
-def comparar(captura, politica, n=None, sha256_bruto=None, inicio=0):
+INDICADORES = (('world_rng', 0x497164, 4), ('ai_rng', 0x498db4, 4), ('cursor_4e1d18', 0x4e1d18, 1),
+               ('hud_4e05a2', BANDEIRA_HUD, 1), ('counter', 0x508f7c, 4), ('view_x', 0x508720, 2),
+               ('view_y', 0x508722, 2))
+
+
+def ler_estado(estado, endereco, largura):
+    for base, dados in estado.values():
+        if base <= endereco and endereco + largura <= base + len(dados):
+            return int.from_bytes(dados[endereco - base:endereco - base + largura], 'little')
+    return None
+
+
+def comparar(captura, politica, n=None, sha256_bruto=None, inicio=0, continuar=False):
     """Run the composition along the capture's phases and compare each one. Returns the report body.
 
     ``inicio = k > 0`` starts Python from the reference state after frame(k) instead of composing frames 1..k.
@@ -385,6 +397,10 @@ def comparar(captura, politica, n=None, sha256_bruto=None, inicio=0):
                                 drew=aff[-1]['drew'], python=comp.mapa.ler(BANDEIRA_HUD, 1)[0],
                                 reference=dados[BANDEIRA_HUD - base], masked=mascara.mascarado(BANDEIRA_HUD)))
                 hud[-1]['equal'] = hud[-1]['python'] == hud[-1]['reference']
+            r['indicators'] = {nome_: dict(python=int.from_bytes(comp.mapa.ler(a, k), 'little'),
+                                           reference=ler_estado(estado_ref, a, k)) for nome_, a, k in INDICADORES}
+            for v in r['indicators'].values():
+                v['equal'] = v['python'] == v['reference']
             r['equal'] = (r['state']['equal'] and r['rng']['equal'] and r['bindings']['equal'] and
                           r['boundaries']['equal'] and r['allocation_count']['equal'] and
                           all(v['equal'] for v in r.get('registers', {}).values()) and
@@ -395,8 +411,10 @@ def comparar(captura, politica, n=None, sha256_bruto=None, inicio=0):
         primeira = False
         print(nome, r['result'], r['equal'], r.get('stop', ''), flush=True)
         if not r['equal']:
-            resultado = 'first_difference_' + nome
-            break
+            if resultado == 'equal':
+                resultado = 'first_difference_' + nome
+            if not continuar or r['result'] != 'returned':
+                break
     alocacoes = comparar_alocacoes(comp.arena.registros, cap['allocations']) if resultado == 'equal' else None
     if alocacoes and not alocacoes['equal']:
         resultado = 'allocation_records_differ'
@@ -421,11 +439,15 @@ def main():
     ap.add_argument('--politica', required=True)
     ap.add_argument('--quadros', type=int)
     ap.add_argument('--sha256', help='pinned SHA-256 of the raw (decompressed) capture JSON')
+    ap.add_argument('--continuar', action='store_true',
+                    help='diagnostic only (output under .local/): keep comparing after the first difference')
     ap.add_argument('--a-partir-de', type=int, default=0, metavar='K',
                     help='start Python from the reference state after frame K (checkpoint start)')
     ap.add_argument('--saida', required=True)
     a = ap.parse_args()
     saida = ROOT / a.saida
+    if a.continuar and not saida.resolve().is_relative_to((ROOT / '.local').resolve()):
+        raise SystemExit('A --continuar diagnostic writes under .local/ only')
     if saida.exists():
         raise SystemExit(f'Refusing to overwrite {saida}')
     t0 = time.monotonic()
@@ -435,7 +457,8 @@ def main():
                source_dirty_paths=subprocess.run(['git', '-C', str(ROOT), 'status', '--porcelain', '--',
                                                   'pesquisas-paralelas/ia-runtime'], capture_output=True,
                                                  text=True).stdout.splitlines())
-    rel.update(comparar(ROOT / a.captura, ROOT / a.politica, a.quadros, a.sha256, a.a_partir_de))
+    rel.update(comparar(ROOT / a.captura, ROOT / a.politica, a.quadros, a.sha256, a.a_partir_de, a.continuar))
+    rel['diagnostic_continued_after_difference'] = a.continuar
     rel['seconds'] = round(time.monotonic() - t0, 1)
     saida.parent.mkdir(parents=True, exist_ok=True)
     with open(saida, 'x') as f:
