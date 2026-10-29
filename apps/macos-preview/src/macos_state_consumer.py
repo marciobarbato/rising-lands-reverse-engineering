@@ -50,12 +50,12 @@ class MacOSAcceptedImage:
     def read(self, address, size):
         """Read one captured range; never fabricate bytes across gaps."""
         if type(address) is not int or type(size) is not int or size <= 0:
-            raise StateValidationError('Endereço/tamanho de leitura inválido')
+            raise StateValidationError('Invalid read address or size')
         for block in self.blocks:
             offset = address - block.base
             if 0 <= offset and offset + size <= len(block.data):
                 return block.data[offset:offset + size]
-        raise StateValidationError('Intervalo fora dos blocos capturados')
+        raise StateValidationError('Range is outside the captured blocks')
 
     def inspect(self):
         return dict(contract=self.contract, source_sha256=self.source_sha256,
@@ -68,7 +68,7 @@ class MacOSAcceptedImage:
 def _decode_blocks(records, decoder):
     """Validate structure before invoking the unchanged Missions decoder."""
     if not isinstance(records, dict) or not records:
-        raise StateValidationError('Mapa de blocos vazio ou inválido')
+        raise StateValidationError('Empty or invalid block map')
     try:
         for name, block in records.items():
             if not isinstance(name, str) or not name or not isinstance(block, dict):
@@ -92,17 +92,49 @@ def _decode_blocks(records, decoder):
                 raise ValueError('overlapping blocks')
         return blocks
     except Exception as exc:
-        raise StateValidationError('Blocos de memória inválidos: ' + str(exc)) from exc
+        raise StateValidationError('Invalid memory blocks: ' + str(exc)) from exc
+
+
+
+def _source_root(source_root):
+    """Resolve an explicit root, declared bundle archive or source checkout.
+
+    A deployed module never guesses a repository from its ancestor directories.
+    Bundle manifests must select a relative archive contained in the payload.
+    """
+    if source_root is not None:
+        return Path(source_root)
+    module = Path(__file__).resolve()
+    payload = module.parent
+    manifest_path = payload / 'snapshot.json'
+    if manifest_path.is_file():
+        manifest = json.loads(manifest_path.read_bytes())
+        snapshot = manifest['snapshot']
+        if not isinstance(snapshot, str) or not snapshot:
+            raise ValueError('Bundle snapshot must declare a relative source archive')
+        relative = Path(snapshot)
+        if relative.is_absolute() or '..' in relative.parts:
+            raise ValueError('Bundle source archive must remain inside the payload')
+        root = (payload / relative).resolve()
+        if not root.is_relative_to(payload) or root == payload:
+            raise ValueError('Bundle source archive must remain inside the payload')
+        return root
+    if (payload.name == 'src' and payload.parent.name == 'macos-preview'
+            and payload.parent.parent.name == 'apps'):
+        return payload.parents[2]
+    raise ValueError('No source archive declared beside the deployed consumer; '
+                     'provide source_root explicitly or a valid bundle snapshot.json')
 
 
 def load_accepted_m1(source_root=None):
     """Load the exact acceptance-pinned original-v2 capture, not an ETA copy.
 
     source_root is the same immutable source archive used by the app packager,
-    or the checkout root for independent developer inspection. No CD is read.
+    or the checkout root for independent developer inspection. Without an explicit
+    root, bundles use only their snapshot.json archive. No CD is read.
     """
-    root = Path(source_root) if source_root is not None else Path(__file__).resolve().parents[3]
     try:
+        root = _source_root(source_root)
         acceptance = json.loads((root / ACCEPTANCE).read_bytes())
         reference = acceptance['original_reference']
         if (acceptance['decision'] != 'ACCEPTED' or reference['capture_v2'] != CAPTURE
@@ -129,7 +161,7 @@ def load_accepted_m1(source_root=None):
     except StateValidationError:
         raise
     except (OSError, ValueError, KeyError, TypeError) as exc:
-        raise StateValidationError('Não foi possível validar o estado M1: ' + str(exc)) from exc
+        raise StateValidationError('Unable to validate M1 state: ' + str(exc)) from exc
 
 
 class MacOSStateConsumer:
@@ -157,12 +189,12 @@ class MacOSStateConsumer:
     def apply_frame(self, frame):
         """Reserved local call boundary; no frame payload schema is invented."""
         raise RuntimeContractPending(
-            'Contrato M2 pendente: fase validada, sequência, cenário e propriedade dos buffers')
+            'M2 contract pending: validated phase, sequence, scenario and buffer ownership')
 
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description='Inspecionar o snapshot M1 aceito')
+    parser = argparse.ArgumentParser(description='Inspect the accepted M1 snapshot')
     parser.add_argument('--source-root', type=Path)
     args = parser.parse_args()
     try:

@@ -149,3 +149,31 @@ This boundary is implemented and tested as an inspection consumer; common
 checks and native application delivery remain incomplete. Runtime/Graphics
 contracts remain the stop for further state/frame integration. The coordinator
 reviews and integrates the remote feature; this task never merges/pushes main.
+
+
+## Round-1 packaging correction
+
+Coordinator integration found that the playable verifier correctly required
+`src/macos_state_consumer.py` in the bundle, but both builders had fixed copy
+lists that omitted it. Both now use `build.copy_preview_sources` to mirror
+Python modules and UI assets, including the consumer and playable session.
+Source verification remains strict. The playable runtime check also imports
+the bundled consumer and loads all 881 accepted M1 blocks from its declared
+archive. The shell's behavior and bundle identity are unchanged.
+
+The deployed consumer resolves its default source root from its adjacent
+`snapshot.json` relative archive; it refuses missing/invalid declarations and
+paths escaping the payload. Explicit roots and checkout loading remain
+supported. Consumer errors and CLI help are now English. Contract version 1
+and the evidence identity are unchanged.
+
+18 consumer/packaging tests pass with zero skips. The seven new regressions
+exercise the actual source-copy helper and source verifier, reproduce the
+original omitted-module failure, retain tamper detection, and run a relocated
+consumer in isolated Python against the real M1 evidence. They cover valid
+bundle defaults, missing archives/declarations, malformed manifests, traversal,
+absolute paths, escaping symlinks and explicit roots.
+
+A real committed-revision launcher attempt and its prerequisite result will be
+recorded separately; these source/package regressions do not constitute a
+native application build or UI smoke pass.
