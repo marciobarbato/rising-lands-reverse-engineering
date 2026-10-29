@@ -1,0 +1,12 @@
+{
+  "command": "python3 -B scripts/check.py --domain core (outside the lease: non-native)",
+  "tree": "working tree on 2798a11 plus the raid translations",
+  "tests": 490,
+  "skips": 200,
+  "failures": 0,
+  "errors": 0,
+  "success": true,
+  "seconds": 24.852,
+  "documentation_links": "PASS",
+  "scope": "Core gate for M2.3 stage 1; includes test_incursao_core (CPU-free replay of all 689 captured v1 raid calls) and test_cobrir_quadros_exibicao. Native runs under the lease separately: validar_incursao_core.py --cenario v1 (689 comparisons, 0 mismatches, 0 dependencies, 114 s); capturar_incursao_core.py --cenario v1 (689 calls, 78.7 s); display --casos 8 budget check (733.9 s)"
+}

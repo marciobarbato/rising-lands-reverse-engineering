@@ -500,3 +500,46 @@ Contract and measurements: [UNICORN_TEARDOWN](UNICORN_TEARDOWN.md). This is tool
   - **Combat:** the same applies to `capturar_quadro_m1.py`.
 - **Gate.** Gate on the merged tree: see `relatorios/teardown-core-check.json`.
 - **NOT RUN:** the other fronts' scripts are unchanged. Applying `mapear_paginas` and `encerrar_captura` to them is their owners' change.
+
+### M2.3 acceleration: coverage run, and the raid's spawn/order Core routines on `feat/re-core`
+
+1. **Coverage-only long run** (`287be9d`): `ferramentas/cobrir_quadros_exibicao.py --ate N --saida PATH`. It runs the display reference past frames 0/1 to cycle counter N, and records:
+   - each routine's first and last entry frame and total entries;
+   - per frame: the counter, RNGs, CRT seed, cursor, view origin, the DGROUP hash (every frame), the whole-state hash (every `--hash-cada` frames), boundaries and display ticks.
+
+   It uses one code-range block hook that counts every symbol entry inside each executed block, fall-through included. At about 0.4 s per frame, this is roughly 9× lighter than 1,952 per-entry code hooks, and the counts are equal apart from the 20 declared boundaries, which are listed. Frames are written to a JSONL file fsynced at checkpoints, with an atomic summary; a stop is recorded and exits 2; the run ends with `encerrar_captura`. The display clock is extended by its own rule. Frames 0–12 equal the committed 0–128 survey. The 9,200-counter run was requested from the Mac mini. Its output is coverage, not evidence.
+2. **Capture first.** `ferramentas/capturar_incursao_core.py` captures the Core calls inside 21 declared forced cases at frame 1's AvanceMonstre entry: counter 9000, plus 16 RNG seeds; counter 10800; four spawn cells. It uses Missions' read-only Isolamento, the same technique as Combat's.
+   - **v1** (`99432d3`): `evidencias/fundacoes-quadro/captura-incursao-core-v1.json`, 689 calls, all returned. It reproduces the phases and the code.
+   - **Display:** requested from the Mac mini at `2798a11`. Run #3 at `99432d3` hit the shared 600 s frame budget; the budget is now 600 s + 150 s per case, and exceptions go to `.local/raid/`.
+3. **Translations** (`ferramentas/incursao_core.py`, contract in [RAID_CORE](RAID_CORE.md)):
+   - GetFreeCell;
+   - CreerEngin → EnginSetType/EnginSetTypeCaract (Combat's committed provider over a record copy, plus the flat search release), EnginTypeGetCapacite, EnginEnArret;
+   - EnginSetPlayer;
+   - PlaceEngin for owners 4/200, with SetMiniMap mode 4;
+   - EnginGetCase, PlayerGetColor;
+   - GetRandCaseChamps, GetRandCaseTypeBatPlayer, GetNumIndiceTypeBatiment, GetCaseIndiceBatiment;
+   - Chemin_Accessible;
+   - iaProbPost, iaProbNew, listNewElem, listLinkElemToTail.
+
+   All return exact output registers.
+
+   **Faithful quirks kept:**
+   - GetFreeCell's stack-residue upper words, mixed axes and lagging column cell;
+   - GetRandCaseChamps's 201st entry, returned + 1;
+   - EnginSetType's exit EBX 0x1d and EDX 0x1e.
+
+   **Dependency stops:** PlaceEngin for other owners (`0x457019`), the other SetMiniMap modes, and GetRandCaseTypeBatPlayer with more than 200 matches.
+4. **Validation:**
+   - `testes/test_incursao_core.py` replays every captured call without a CPU, including the frame-1 Core routines the raid reaches.
+   - `ferramentas/validar_incursao_core.py` is the native differential: at each nested Core call of each forced case, the translation runs over a copy-on-write view of the live entry state and is compared at the native return.
+   - **v1 native differential:** `relatorios/incursao-core-v1-emulada.json` has **689 comparisons, 0 mismatches and 0 dependency stops** over 26 routines; the phases and code reproduce; 114 s.
+
+**For AI/runtime:** `incursao_core.ROTINAS` / `traducao_core(name)` provide everything ConstruitGroupeMonstre and the pending-order branch call in Core, over the same flat memory as `provedores_core`. The bonus provider is Economy's `BonusUnidades.consultar`.
+
+**Next stage:** Combat's course capture lists the routines the raid reaches after the spawn, from 9000 to about 9200. These are the movement routines, the first path search at 9176–9179, and the unit dispatcher EnginNextEtape. Most already exist in Core's world model (`ordens_unidades`, `navegacao_unidades`, `otimizacao_caminhos`, `passagem_unidades`). The next stage captures them in isolation at those frames and validates them natively.
+
+**NOT RUN:**
+- the display differential, until its capture lands;
+- GetCaseIndiceBatiment, which MONDE01 never reaches (no cave);
+- PlaceEngin's discovery path for player owners in flat memory;
+- integration.
