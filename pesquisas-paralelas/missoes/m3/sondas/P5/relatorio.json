@@ -1,0 +1,1068 @@
+{
+ "baseline": {
+  "branch": "runs/core/coverage-9200",
+  "commit": "71939991cb06e9d23c059e1d422830ba996d2f23",
+  "path": "relatorios/cobertura-quadros-exibicao-9200.json",
+  "routines": 215,
+  "sha256": "6ee6d95d23af4a318f18f47dac9b0f60b1197e0da9e2d159da7bcede5b77a844"
+ },
+ "evidence": "original-only native capture",
+ "frames": [
+  129,
+  3129
+ ],
+ "input": "pesquisas-paralelas/missoes/m3/entradas/P5.json",
+ "input_sha256": "647f6d1207d4eb29e022be6049a96b1ea1fd5bfa3cd8828b89139f96e16e2b7b",
+ "objective_changes": [
+  {
+   "al": "00",
+   "food": 30,
+   "frame": 129,
+   "marks": "0000000000000000000000000000",
+   "parts": 0,
+   "selection": "0000000000000000",
+   "stone": 30,
+   "structures": [
+    [
+     0,
+     0,
+     2,
+     2828,
+     5
+    ]
+   ],
+   "ui": {
+    "0x496207": 255,
+    "0x496208": 255,
+    "0x4e05ae": 0
+   },
+   "units": {
+    "11": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 5387,
+     "f110": "00000000",
+     "state": 7,
+     "target_b2": 65535
+    },
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 4113,
+     "f110": "00000000",
+     "state": 7,
+     "target_b2": 65535
+    },
+    "13": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 4110,
+     "f110": "00000000",
+     "state": 7,
+     "target_b2": 65535
+    },
+    "14": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 4108,
+     "f110": "00000000",
+     "state": 7,
+     "target_b2": 65535
+    },
+    "15": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 4877,
+     "f110": "00000000",
+     "state": 7,
+     "target_b2": 65535
+    }
+   },
+   "victory_counter": "00000000",
+   "view_origin": [
+    0,
+    0
+   ]
+  },
+  {
+   "frame": 133,
+   "selection": "01000c0000000000"
+  },
+  {
+   "frame": 141,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 3858,
+     "f110": "8d000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 142,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 3858,
+     "f110": "8e000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 143,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 3858,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 160,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 3603,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 176,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 3348,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 192,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 3093,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 208,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2838,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 224,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2583,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 240,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2328,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 256,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2073,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 272,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2074,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 288,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2075,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 304,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2076,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 320,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2077,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 336,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2078,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 352,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2079,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 368,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2080,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 384,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2081,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 400,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2082,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 416,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2083,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 432,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2084,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 448,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2085,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 464,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2086,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 480,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2087,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 496,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2088,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 515,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2345,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 532,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2346,
+     "f110": "8f000000",
+     "state": 2,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 548,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2346,
+     "f110": "8f000000",
+     "state": 7,
+     "target_b2": 65535
+    }
+   }
+  },
+  {
+   "frame": 561,
+   "selection": "00000c0000000000"
+  },
+  {
+   "frame": 571,
+   "view_origin": [
+    31,
+    0
+   ]
+  },
+  {
+   "frame": 583,
+   "selection": "01000c0000000000"
+  },
+  {
+   "frame": 593,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2347,
+     "f110": "8f000000",
+     "state": 5,
+     "target_b2": 2347
+    }
+   }
+  },
+  {
+   "frame": 609,
+   "selection": "00000c0000000000"
+  },
+  {
+   "frame": 760,
+   "units": {
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 2347,
+     "f110": "8f000000",
+     "state": 7,
+     "target_b2": 2347
+    }
+   }
+  }
+ ],
+ "orders": [
+  {
+   "caller": "InputGame+0x27ad",
+   "caller_return": "0x42ba25",
+   "event": "SetPlayerOrdre",
+   "frame": 133,
+   "packet_address": "0x4797f000",
+   "packet_before": "00000000000000000000",
+   "player": 0,
+   "tag": 1,
+   "word2": 4113,
+   "word4": 4113,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "caller": "InputGame+0x2963",
+   "caller_return": "0x42bbdb",
+   "event": "SetPlayerOrdre",
+   "frame": 141,
+   "packet_address": "0x4797f000",
+   "packet_before": "00000000000000000000",
+   "player": 0,
+   "tag": 5,
+   "word2": 2091,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "caller": "InputGame+0x2963",
+   "caller_return": "0x42bbdb",
+   "event": "SetPlayerOrdre",
+   "frame": 142,
+   "packet_address": "0x4797f000",
+   "packet_before": "00000000000000000000",
+   "player": 0,
+   "tag": 5,
+   "word2": 2091,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "caller": "InputGame+0x2963",
+   "caller_return": "0x42bbdb",
+   "event": "SetPlayerOrdre",
+   "frame": 143,
+   "packet_address": "0x4797f000",
+   "packet_before": "00000000000000000000",
+   "player": 0,
+   "tag": 5,
+   "word2": 2091,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "caller": "InputGame+0x27ad",
+   "caller_return": "0x42ba25",
+   "event": "SetPlayerOrdre",
+   "frame": 583,
+   "packet_address": "0x4797f000",
+   "packet_before": "00000000000000000000",
+   "player": 0,
+   "tag": 1,
+   "word2": 2346,
+   "word4": 2346,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "caller": "InputGame+0x1b1b",
+   "caller_return": "0x42ad93",
+   "event": "SetPlayerOrdre",
+   "frame": 593,
+   "packet_address": "0x4797f000",
+   "packet_before": "00000000000000000000",
+   "player": 0,
+   "tag": 6,
+   "word2": 2091,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  }
+ ],
+ "probe": "P5",
+ "process_input_game": [
+  {
+   "frame": 133,
+   "jump_target": "0x45ee46",
+   "jump_target_routine": "ProcessInputGame+0x86",
+   "packet": "01001110111000000000",
+   "tag": 1
+  },
+  {
+   "frame": 141,
+   "jump_target": "0x45efc1",
+   "jump_target_routine": "ProcessInputGame+0x201",
+   "packet": "05002b08000000000000",
+   "tag": 5
+  },
+  {
+   "frame": 142,
+   "jump_target": "0x45efc1",
+   "jump_target_routine": "ProcessInputGame+0x201",
+   "packet": "05002b08000000000000",
+   "tag": 5
+  },
+  {
+   "frame": 143,
+   "jump_target": "0x45efc1",
+   "jump_target_routine": "ProcessInputGame+0x201",
+   "packet": "05002b08000000000000",
+   "tag": 5
+  },
+  {
+   "frame": 583,
+   "jump_target": "0x45ee46",
+   "jump_target_routine": "ProcessInputGame+0x86",
+   "packet": "01002a092a0900000000",
+   "tag": 1
+  },
+  {
+   "frame": 593,
+   "jump_target": "0x45efe2",
+   "jump_target_routine": "ProcessInputGame+0x222",
+   "packet": "06002b08000000000000",
+   "tag": 6
+  }
+ ],
+ "replay_equal": true,
+ "routines_first_entered_beyond_no_input": {
+  "AffContenanceEngin": {
+   "caller": "AffInfoSelection+0x304",
+   "caller_return": "0x410ee8",
+   "first_frame": 131,
+   "phase": "between_frames131"
+  },
+  "AffInfoSelection": {
+   "caller": "AffDeplaceEngin+0x70a",
+   "caller_return": "0x412a9a",
+   "first_frame": 131,
+   "phase": "between_frames131"
+  },
+  "AffJaugeVie": {
+   "caller": "AffInfoSelection+0x88",
+   "caller_return": "0x410c6c",
+   "first_frame": 131,
+   "phase": "between_frames131"
+  },
+  "AffWorkEngin": {
+   "caller": "AffEngin+0xce",
+   "caller_return": "0x4159ed",
+   "first_frame": 594,
+   "phase": "between_frames594"
+  },
+  "AnimWorkEngin": {
+   "caller": "CalculWorkEngin+0x479",
+   "caller_return": "0x44c0ed",
+   "first_frame": 610,
+   "phase": "frame610"
+  },
+  "BatimentDeselectionner": {
+   "caller": "InputGame+0x2790",
+   "caller_return": "0x42ba08",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "BatimentGetRessource": {
+   "caller": "IconeFillContenu+0x3a9",
+   "caller_return": "0x45df79",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "CalculWorkEngin": {
+   "caller": "EnginNextEtape+0x230a",
+   "caller_return": "0x456736",
+   "first_frame": 593,
+   "phase": "frame593"
+  },
+  "DeSelectionGroupe": {
+   "caller": "InputGame+0x26c2",
+   "caller_return": "0x42b93a",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "DecouvreCase": {
+   "caller": "DecouvreTerrain+0xe0",
+   "caller_return": "0x476931",
+   "first_frame": 159,
+   "phase": "frame159"
+  },
+  "DecouvreTerrain": {
+   "caller": "AvanceEngin+0x289",
+   "caller_return": "0x44898d",
+   "first_frame": 159,
+   "phase": "frame159"
+  },
+  "DeselectionEngin": {
+   "caller": "RetireEngin+0x2c",
+   "caller_return": "0x457084",
+   "first_frame": 609,
+   "phase": "frame609"
+  },
+  "Distance": {
+   "caller": "EteintTerrain+0xd8",
+   "caller_return": "0x476f5a",
+   "first_frame": 159,
+   "phase": "frame159"
+  },
+  "EnginAsk": {
+   "caller": "SelectionEngin+0x2b2",
+   "caller_return": "0x47458e",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "EnginEstSelectionne": {
+   "caller": "InputGame+0x8bd",
+   "caller_return": "0x429b35",
+   "first_frame": 130,
+   "phase": "frame130"
+  },
+  "EnginGetBag": {
+   "caller": "AffContenanceEngin+0x18",
+   "caller_return": "0x410a44",
+   "first_frame": 131,
+   "phase": "between_frames131"
+  },
+  "EnginGetBagOrdre": {
+   "caller": "CalculIconeAction+0x59",
+   "caller_return": "0x45e99d",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "EnginGetEtat": {
+   "caller": "SelectionEngin+0x268",
+   "caller_return": "0x474544",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "EnginGetLevelExperience": {
+   "caller": "AffInfoSelection+0x2b1",
+   "caller_return": "0x410e95",
+   "first_frame": 131,
+   "phase": "between_frames131"
+  },
+  "EnginGetSelection": {
+   "caller": "CalculIconeAction+0x4a",
+   "caller_return": "0x45e98e",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "EnginGetTaille": {
+   "caller": "AffDeplaceEngin+0x150",
+   "caller_return": "0x4124e0",
+   "first_frame": 134,
+   "phase": "between_frames134"
+  },
+  "EnginGetTypeName": {
+   "caller": "InputGame+0x8a2",
+   "caller_return": "0x429b1a",
+   "first_frame": 130,
+   "phase": "frame130"
+  },
+  "EnginGetVieMax": {
+   "caller": "AffInfoSelection+0x68",
+   "caller_return": "0x410c4c",
+   "first_frame": 131,
+   "phase": "between_frames131"
+  },
+  "EnginGetVolume": {
+   "caller": "EnginAsk+0x46",
+   "caller_return": "0x440da4",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "EnginInZone": {
+   "caller": "SelectionEngin+0xff",
+   "caller_return": "0x4743db",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "EnginSelectPeutAttaquer": {
+   "caller": "InputGame+0x1583",
+   "caller_return": "0x42a7fb",
+   "first_frame": 134,
+   "phase": "frame134"
+  },
+  "EnginSelectPeutEntrer": {
+   "caller": "InputGame+0x1639",
+   "caller_return": "0x42a8b1",
+   "first_frame": 134,
+   "phase": "frame134"
+  },
+  "EnginTravailSelectionne": {
+   "caller": "InputGame+0x2294",
+   "caller_return": "0x42b50c",
+   "first_frame": 590,
+   "phase": "frame590"
+  },
+  "EnginVisible": {
+   "caller": "SelectionEngin+0x30f",
+   "caller_return": "0x4745eb",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "EteintCase": {
+   "caller": "EteintTerrain+0x108",
+   "caller_return": "0x476f8a",
+   "first_frame": 159,
+   "phase": "frame159"
+  },
+  "EteintTerrain": {
+   "caller": "AvanceEngin+0x21f",
+   "caller_return": "0x448923",
+   "first_frame": 159,
+   "phase": "frame159"
+  },
+  "IconeFillContenu": {
+   "caller": "CalculIconeAction+0x5e",
+   "caller_return": "0x45e9a2",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "IllumineCase": {
+   "caller": "IllumineTerrain+0x100",
+   "caller_return": "0x476db3",
+   "first_frame": 159,
+   "phase": "frame159"
+  },
+  "IllumineTerrain": {
+   "caller": "AvanceEngin+0x2af",
+   "caller_return": "0x4489b3",
+   "first_frame": 159,
+   "phase": "frame159"
+  },
+  "MemNoirBlancCopy": {
+   "caller": "PasteNoirBlancCmp+0x21e",
+   "caller_return": "0x45c15b",
+   "first_frame": 134,
+   "phase": "between_frames134"
+  },
+  "MineEndWork": {
+   "caller": "CalculWorkEngin+0x6f1",
+   "caller_return": "0x44c365",
+   "first_frame": 760,
+   "phase": "frame760"
+  },
+  "MineEstSurTerrain": {
+   "caller": "CalculWorkEngin+0xc7",
+   "caller_return": "0x44bd3b",
+   "first_frame": 609,
+   "phase": "frame609"
+  },
+  "MineGetCapacite": {
+   "caller": "InputGame+0x7af",
+   "caller_return": "0x429a27",
+   "first_frame": 590,
+   "phase": "frame590"
+  },
+  "MineGetIndice": {
+   "caller": "InputGame+0x7a5",
+   "caller_return": "0x429a1d",
+   "first_frame": 590,
+   "phase": "frame590"
+  },
+  "MineRecolte": {
+   "caller": "CalculWorkEngin+0x4dc",
+   "caller_return": "0x44c150",
+   "first_frame": 709,
+   "phase": "frame709"
+  },
+  "MineSetWork": {
+   "caller": "CalculWorkEngin+0xd6",
+   "caller_return": "0x44bd4a",
+   "first_frame": 609,
+   "phase": "frame609"
+  },
+  "MiniMapGetCase": {
+   "caller": "InputGame+0x294e",
+   "caller_return": "0x42bbc6",
+   "first_frame": 141,
+   "phase": "frame141"
+  },
+  "MiniMapGetCenterSelect": {
+   "caller": "InputGame+0x2982",
+   "caller_return": "0x42bbfa",
+   "first_frame": 571,
+   "phase": "frame571"
+  },
+  "PasteNoirBlancCmp": {
+   "caller": "AffZoneIconeAction+0x15b",
+   "caller_return": "0x417084",
+   "first_frame": 134,
+   "phase": "between_frames134"
+  },
+  "PlaySnd_PostSound": {
+   "caller": "EnginAsk+0x8e",
+   "caller_return": "0x440dec",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "RetireEngin": {
+   "caller": "CalculWorkEngin+0xe2",
+   "caller_return": "0x44bd56",
+   "first_frame": 609,
+   "phase": "frame609"
+  },
+  "RetireSelectionEngin": {
+   "caller": "DeSelectionGroupe+0x6a",
+   "caller_return": "0x4726f5",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "SelectionEngin": {
+   "caller": "InputGame+0x26d7",
+   "caller_return": "0x42b94f",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "SetDebug": {
+   "caller": "InputGame+0x27c2",
+   "caller_return": "0x42ba3a",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "SetDeplaceEnginSelect": {
+   "caller": "ProcessInputGame+0x21d",
+   "caller_return": "0x45efdd",
+   "first_frame": 141,
+   "phase": "frame141"
+  },
+  "SetDepotEngin": {
+   "caller": "SetDepotEnginSelect+0x60",
+   "caller_return": "0x47318c",
+   "first_frame": 593,
+   "phase": "frame593"
+  },
+  "SetDepotEnginSelect": {
+   "caller": "ProcessInputGame+0x27c",
+   "caller_return": "0x45f03c",
+   "first_frame": 593,
+   "phase": "frame593"
+  },
+  "SetMineEngin": {
+   "caller": "SetMineEnginSelect+0x6b",
+   "caller_return": "0x47338f",
+   "first_frame": 593,
+   "phase": "frame593"
+  },
+  "SetMineEnginSelect": {
+   "caller": "ProcessInputGame+0x23e",
+   "caller_return": "0x45effe",
+   "first_frame": 593,
+   "phase": "frame593"
+  },
+  "SetPlayerOrdre": {
+   "caller": "InputGame+0x27ad",
+   "caller_return": "0x42ba25",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "TerrainGetColor": {
+   "caller": "SetMiniMap+0x26a",
+   "caller_return": "0x46a5f2",
+   "first_frame": 159,
+   "phase": "frame159"
+  },
+  "TerrainGetSacType": {
+   "caller": "InputGame+0x20c2",
+   "caller_return": "0x42b33a",
+   "first_frame": 560,
+   "phase": "frame560"
+  },
+  "TextGetMessage": {
+   "caller": "InputGame+0x79b",
+   "caller_return": "0x429a13",
+   "first_frame": 590,
+   "phase": "frame590"
+  },
+  "TypeEnginEstAerien": {
+   "caller": "SetDeplaceEnginSelect+0xa1",
+   "caller_return": "0x473f0f",
+   "first_frame": 141,
+   "phase": "frame141"
+  },
+  "TypeEnginEstArmee": {
+   "caller": "EnginSelectPeutAttaquer+0x89",
+   "caller_return": "0x4723de",
+   "first_frame": 134,
+   "phase": "frame134"
+  },
+  "TypeEnginEstEnLoop": {
+   "caller": "SelectionEngin+0x244",
+   "caller_return": "0x474520",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "TypeEnginEstEngin": {
+   "caller": "EnginSelectPeutEntrer+0x448",
+   "caller_return": "0x472fb4",
+   "first_frame": 134,
+   "phase": "frame134"
+  },
+  "TypeEnginEstVehicule": {
+   "caller": "SetDeplaceEnginSelect+0x8c",
+   "caller_return": "0x473efa",
+   "first_frame": 141,
+   "phase": "frame141"
+  },
+  "TypeEnginGagneXP": {
+   "caller": "AffInfoSelection+0x2bd",
+   "caller_return": "0x410ea1",
+   "first_frame": 131,
+   "phase": "between_frames131"
+  },
+  "WndProc": {
+   "caller": "_WinMain@16+0x93",
+   "caller_return": "0x460203",
+   "first_frame": 130,
+   "phase": "between_frames130"
+  }
+ },
+ "routines_first_entered_total": 233,
+ "schema": "rising-lands/m3-probe-report/1",
+ "seconds": [
+  1581.1,
+  1553.2
+ ],
+ "status": "completed",
+ "stop": null
+}

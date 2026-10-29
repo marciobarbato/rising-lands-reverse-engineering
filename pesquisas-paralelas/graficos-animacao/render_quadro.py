@@ -21,8 +21,8 @@ from hud_quadro import compor_hud, LeituraHud
 from graficos import RAIZ
 import json
 
-# Contract version: bump the major number for any change of an input, output field, format or stop semantics.
-VERSAO_RENDER_QUADRO = (1, 5)
+# Contract version: major for breaking changes; minor for optional inputs and newly evidenced branches.
+VERSAO_RENDER_QUADRO = (1, 7)
 LARGURA, ALTURA = 800, 600
 DGROUP, DGROUP_FIM = 0x494000, 0x523000
 ESTRUTURAS, PASSO_ESTRUTURA = 0x49a0c8, 276
@@ -94,12 +94,18 @@ def carregar_cache_inicial(caminho, catalogo=None):
 def regioes_necessarias(memoria, hud=False):
     """(start, end_exclusive, name) regions a MemoriaDeclarada must declare to render from its current pointers.
 
-    hud=True adds the minimap, player table and (1.5) 256-byte grayscale lookup read by disabled action icons.
+    1.7 adds the facade/placement gray table and the saved-background buffer when restoration is pending.
+    hud=True adds the minimap, player table, disabled-icon grayscale table and tooltip shadow table.
     """
     regioes = [(DGROUP, DGROUP_FIM, 'dgroup')]
     for nome, slot, tamanho in BLOCOS:
         base = memoria.u32(slot)
         regioes.append((base, base+tamanho, nome))
+    base = memoria.u32(0x4e24c4)
+    if base: regioes.append((base, base+256, 'gray_effect'))
+    if memoria.u8(0x49a041):
+        base = memoria.u32(0x49a03c)
+        regioes.append((base, base+memoria.u16(0x49a04a)*memoria.u16(0x49a04c), 'saved_background'))
     if hud:
         base = memoria.u32(MINIMAPA[0])
         regioes.append((base, base+memoria.u16(MINIMAPA[1])*memoria.u16(MINIMAPA[2]), 'minimapa'))
@@ -107,10 +113,12 @@ def regioes_necessarias(memoria, hud=False):
         regioes.append((base, base+5*PASSO_JOGADOR, 'jogadores'))
         base = memoria.u32(0x4e24bc)
         regioes.append((base, base+256, 'noir_blanc'))
+        base = memoria.u32(0x4e24b4)
+        if base: regioes.append((base, base+256, 'tooltip_shadow'))
     return regioes
 
 
-def renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=None, habitado=None, relogio=None, cache=None, hud=False):
+def renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=None, habitado=None, relogio=None, cache=None, hud=False, texto=None):
     """Compose the frame.  ``superficie_anterior``: 800*600 bytes (the surface the game draws over).
 
     hud=False (default, contract 1.3 behaviour): the composition ends at the HUD checkpoint 0x417B1C.
@@ -121,6 +129,12 @@ def renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=Non
     relogio() -> GetTickCount; defaults to the tick copy at 0x4E17B4 in memory.
     cache: EstadoCache carried from the previous frame (None = the cold cache of the first InitCache: zero keys, cursor 0,
     original bank payloads); the state after this frame is returned in ``QuadroRenderizado.cache``.
+    texto(request, indexed_surface) -> bytes (optional, 1.7): AffText glyph provider. request contains text bytes,
+    x/y/right/bottom, font and flags. Called after the tooltip background is saved/framed/shaded, before the cursor.
+    Without it, a tooltip whose timer has expired stops visibly at 0x459454. The probe's declared text boundary is
+    available only as a strict fixture adapter in validar_sondas_graficos_m3, never as a normal rendering default.
+    GetBob exports a write-only saved_background_pixels effect (old hex empty); carry these bytes for the following
+    frame's PasteBob restoration. memoria is never mutated, including by that copy.
     """
     if len(superficie_anterior) != LARGURA*ALTURA: raise ValueError('The previous surface must be 800 x 600 bytes')
     lido = lambda a, n: bytes(memoria.ler_mundo(a, n))
@@ -155,7 +169,7 @@ def renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=Non
             for nome, endereco, largura in GLOBAIS_QUADRO:
                 for i, v in enumerate(tela.bruto(nome)): sobrepostos[endereco+i] = v
             try:
-                h = compor_hud(LeituraHud(memoria, sobrepostos), pixels, catalogo=catalogo, evento=q['evento'])
+                h = compor_hud(LeituraHud(memoria, sobrepostos), pixels, catalogo=catalogo, evento=q['evento'], texto=texto)
             except DependenciaQuadro as e:
                 e.chamadas, e.efeitos = list(chamadas)+e.chamadas, list(efeitos)+e.efeitos
                 raise

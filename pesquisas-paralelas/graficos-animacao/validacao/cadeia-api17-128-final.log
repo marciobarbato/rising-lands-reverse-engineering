@@ -1,0 +1,3 @@
+[lease] graphics17-hud128-final waiting
+[lease] graphics17-hud128-final granted slots [1]
+{"initial": "e8cb862ddcfb", "equals_recorded": true, "first_stop": null, "first_diff": null, "end_hashes_equal": true, "chained_equals_recorded": 128}

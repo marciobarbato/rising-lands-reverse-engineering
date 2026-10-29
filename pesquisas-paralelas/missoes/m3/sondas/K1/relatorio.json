@@ -1,0 +1,432 @@
+{
+ "baseline": {
+  "branch": "runs/core/coverage-9200",
+  "commit": "71939991cb06e9d23c059e1d422830ba996d2f23",
+  "path": "relatorios/cobertura-quadros-exibicao-9200.json",
+  "routines": 215,
+  "sha256": "6ee6d95d23af4a318f18f47dac9b0f60b1197e0da9e2d159da7bcede5b77a844"
+ },
+ "evidence": "original-only native capture",
+ "frames": [
+  129,
+  629
+ ],
+ "input": "pesquisas-paralelas/missoes/m3/entradas/K1.json",
+ "input_sha256": "92a69cdd087cdc644ef3b8d7abdbf3cfa176d7f564a914b17b2dfc901e4a0600",
+ "objective_changes": [
+  {
+   "al": "00",
+   "food": 30,
+   "frame": 129,
+   "marks": "0000000000000000000000000000",
+   "parts": 0,
+   "selection": "0000000000000000",
+   "stone": 30,
+   "structures": [
+    [
+     0,
+     0,
+     2,
+     2828,
+     5
+    ]
+   ],
+   "ui": {
+    "0x496207": 255,
+    "0x496208": 255,
+    "0x4e05ae": 0
+   },
+   "units": {
+    "11": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 5387,
+     "f110": "00000000",
+     "state": 7,
+     "target_b2": 65535
+    },
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 4113,
+     "f110": "00000000",
+     "state": 7,
+     "target_b2": 65535
+    },
+    "13": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 4110,
+     "f110": "00000000",
+     "state": 7,
+     "target_b2": 65535
+    },
+    "14": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 4108,
+     "f110": "00000000",
+     "state": 7,
+     "target_b2": 65535
+    },
+    "15": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 4877,
+     "f110": "00000000",
+     "state": 7,
+     "target_b2": 65535
+    }
+   },
+   "victory_counter": "00000000",
+   "view_origin": [
+    0,
+    0
+   ]
+  },
+  {
+   "frame": 140,
+   "view_origin": [
+    1,
+    0
+   ]
+  },
+  {
+   "frame": 141,
+   "view_origin": [
+    2,
+    0
+   ]
+  },
+  {
+   "frame": 142,
+   "view_origin": [
+    3,
+    0
+   ]
+  },
+  {
+   "frame": 143,
+   "view_origin": [
+    4,
+    0
+   ]
+  },
+  {
+   "frame": 144,
+   "view_origin": [
+    5,
+    0
+   ]
+  },
+  {
+   "frame": 145,
+   "view_origin": [
+    6,
+    0
+   ]
+  },
+  {
+   "frame": 146,
+   "view_origin": [
+    7,
+    0
+   ]
+  },
+  {
+   "frame": 147,
+   "view_origin": [
+    8,
+    0
+   ]
+  },
+  {
+   "frame": 148,
+   "view_origin": [
+    9,
+    0
+   ]
+  },
+  {
+   "frame": 149,
+   "view_origin": [
+    10,
+    0
+   ]
+  },
+  {
+   "frame": 150,
+   "view_origin": [
+    11,
+    0
+   ]
+  },
+  {
+   "frame": 151,
+   "view_origin": [
+    12,
+    0
+   ]
+  },
+  {
+   "frame": 152,
+   "view_origin": [
+    13,
+    0
+   ]
+  },
+  {
+   "frame": 153,
+   "view_origin": [
+    14,
+    0
+   ]
+  },
+  {
+   "frame": 154,
+   "view_origin": [
+    15,
+    0
+   ]
+  },
+  {
+   "frame": 155,
+   "view_origin": [
+    16,
+    0
+   ]
+  },
+  {
+   "frame": 156,
+   "view_origin": [
+    17,
+    0
+   ]
+  },
+  {
+   "frame": 157,
+   "view_origin": [
+    18,
+    0
+   ]
+  },
+  {
+   "frame": 158,
+   "view_origin": [
+    19,
+    0
+   ]
+  },
+  {
+   "frame": 170,
+   "view_origin": [
+    19,
+    1
+   ]
+  },
+  {
+   "frame": 171,
+   "view_origin": [
+    19,
+    2
+   ]
+  },
+  {
+   "frame": 172,
+   "view_origin": [
+    19,
+    3
+   ]
+  },
+  {
+   "frame": 173,
+   "view_origin": [
+    19,
+    4
+   ]
+  },
+  {
+   "frame": 174,
+   "view_origin": [
+    19,
+    5
+   ]
+  },
+  {
+   "frame": 175,
+   "view_origin": [
+    19,
+    6
+   ]
+  },
+  {
+   "frame": 176,
+   "view_origin": [
+    19,
+    7
+   ]
+  },
+  {
+   "frame": 177,
+   "view_origin": [
+    19,
+    8
+   ]
+  },
+  {
+   "frame": 178,
+   "view_origin": [
+    19,
+    9
+   ]
+  },
+  {
+   "frame": 179,
+   "view_origin": [
+    19,
+    10
+   ]
+  },
+  {
+   "frame": 180,
+   "view_origin": [
+    19,
+    11
+   ]
+  },
+  {
+   "frame": 181,
+   "view_origin": [
+    19,
+    12
+   ]
+  },
+  {
+   "frame": 182,
+   "view_origin": [
+    19,
+    13
+   ]
+  },
+  {
+   "frame": 183,
+   "view_origin": [
+    19,
+    14
+   ]
+  },
+  {
+   "frame": 184,
+   "view_origin": [
+    19,
+    15
+   ]
+  },
+  {
+   "frame": 185,
+   "view_origin": [
+    19,
+    16
+   ]
+  },
+  {
+   "frame": 186,
+   "view_origin": [
+    19,
+    17
+   ]
+  },
+  {
+   "frame": 187,
+   "view_origin": [
+    19,
+    18
+   ]
+  },
+  {
+   "frame": 188,
+   "view_origin": [
+    19,
+    19
+   ]
+  }
+ ],
+ "orders": [
+  {
+   "caller": "InputGame+0x2cd",
+   "caller_return": "0x429545",
+   "event": "SetPlayerOrdre",
+   "frame": 200,
+   "packet_address": "0x4797f000",
+   "packet_before": "00000000000000000000",
+   "player": 0,
+   "tag": 12,
+   "word2": 1,
+   "word4": 0,
+   "word6": 0,
+   "word8": 0
+  }
+ ],
+ "probe": "K1",
+ "process_input_game": [
+  {
+   "frame": 200,
+   "jump_target": "0x45ef02",
+   "jump_target_routine": "ProcessInputGame+0x142",
+   "packet": "0c000100000000000000",
+   "tag": 12
+  }
+ ],
+ "replay_equal": true,
+ "routines_first_entered_beyond_no_input": {
+  "BatimentDeselectionner": {
+   "caller": "ProcessInputGame+0x14c",
+   "caller_return": "0x45ef0c",
+   "first_frame": 200,
+   "phase": "frame200"
+  },
+  "DeSelectionGroupe": {
+   "caller": "ProcessInputGame+0x156",
+   "caller_return": "0x45ef16",
+   "first_frame": 200,
+   "phase": "frame200"
+  },
+  "GoLastAttaque": {
+   "caller": "InputGame+0x51d",
+   "caller_return": "0x429795",
+   "first_frame": 220,
+   "phase": "frame220"
+  },
+  "RestaureSelectionGroupe": {
+   "caller": "ProcessInputGame+0x171",
+   "caller_return": "0x45ef31",
+   "first_frame": 200,
+   "phase": "frame200"
+  },
+  "SetPlayerOrdre": {
+   "caller": "InputGame+0x2cd",
+   "caller_return": "0x429545",
+   "first_frame": 200,
+   "phase": "frame200"
+  },
+  "WndProc": {
+   "caller": "_WinMain@16+0x93",
+   "caller_return": "0x460203",
+   "first_frame": 140,
+   "phase": "between_frames140"
+  }
+ },
+ "routines_first_entered_total": 148,
+ "schema": "rising-lands/m3-probe-report/1",
+ "seconds": [
+  199.9,
+  205.1
+ ],
+ "status": "completed",
+ "stop": null
+}
