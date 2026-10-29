@@ -1,0 +1,114 @@
+{
+ "description": "Select unit 12, press the CAVE icon (bag slot 2), press the proposed site (21,12); follow the walk and the construction start.",
+ "frames": [
+  {
+   "cursor": [
+    560,
+    528
+   ],
+   "frame": 130,
+   "messages": [
+    [
+     512,
+     0,
+     34603568
+    ]
+   ]
+  },
+  {
+   "frame": 131,
+   "messages": [
+    [
+     513,
+     1,
+     34603568
+    ]
+   ]
+  },
+  {
+   "frame": 133,
+   "messages": [
+    [
+     514,
+     0,
+     34603568
+    ]
+   ]
+  },
+  {
+   "cursor": [
+    180,
+    573
+   ],
+   "frame": 140,
+   "messages": [
+    [
+     512,
+     0,
+     37552308
+    ]
+   ]
+  },
+  {
+   "frame": 141,
+   "messages": [
+    [
+     513,
+     1,
+     37552308
+    ]
+   ]
+  },
+  {
+   "frame": 143,
+   "messages": [
+    [
+     514,
+     0,
+     37552308
+    ]
+   ]
+  },
+  {
+   "cursor": [
+    688,
+    400
+   ],
+   "frame": 150,
+   "messages": [
+    [
+     512,
+     0,
+     26215088
+    ]
+   ]
+  },
+  {
+   "frame": 151,
+   "messages": [
+    [
+     513,
+     1,
+     26215088
+    ]
+   ]
+  },
+  {
+   "frame": 153,
+   "messages": [
+    [
+     514,
+     0,
+     26215088
+    ]
+   ]
+  }
+ ],
+ "name": "P3",
+ "schema": "rising-lands/monde01-scripted-input/1",
+ "start": {
+  "checkpoint": "M2.2 frame128",
+  "frame": 128
+ },
+ "stop_frame": 3129
+}

@@ -1,0 +1,158 @@
+{
+  "schema": "rising-lands/macos-live-performance-delivery/1",
+  "branch": "feat/macos-playable",
+  "integrated_base": "23dfd6ef7d239237695789f7f185152edb606f18",
+  "validated_build_commit": "604046b2b6602cc73d6acea3fd78661465bf39c5",
+  "runtime": "CPython 3.12.14 ARM64",
+  "rust_engine_changed": false,
+  "graphics_source_changed": false,
+  "previous_pipeline_fps": 1.1549548395465525,
+  "pipeline_fps": 9.897736529324408,
+  "speedup": 8.569803935546402,
+  "timing": {
+    "rust_seconds": 1.1355041740462184,
+    "projection_seconds": 3.2665075858822092,
+    "render_seconds": 8.246009920607321,
+    "total_seconds": 12.66042471327819,
+    "transfer_seconds": 0.2718249602476135,
+    "frames_per_second": 9.897736529324408,
+    "rust_projection_render_transfer_fps": 9.907238341045746,
+    "rust_frames_per_second": 112.72525713744318,
+    "render_frames_per_second": 15.522658986877955,
+    "wall_seconds": 13.272361500072293,
+    "scope": "Phase calls + bulk projection/hash/oracle comparison + render + raw indexed JSON encode/decode/hash; initialization/IPC/native canvas excluded"
+  },
+  "native_ui_fps": 8.470089994706195,
+  "native_ui_frames": 32,
+  "native_canvas_transfer_ms": {
+    "mean": 1.1764705882352942,
+    "maximum": 3,
+    "samples": 34
+  },
+  "proof": {
+    "phases_equal": 257,
+    "checkpoints_equal": 11,
+    "surfaces_equal": 128,
+    "raw_transfers_equal": 128,
+    "all_previous_state_hashes_equal": true
+  },
+  "tests": {
+    "consumer_passed": 99,
+    "consumer_skipped": 0,
+    "native_exercise_passed": 27,
+    "native_inspection_passed": 14,
+    "common_passed": true,
+    "common_tests": 1874,
+    "common_skips": 610
+  },
+  "common": {
+    "command": "/usr/bin/python3 -B scripts/check.py",
+    "cwd": "/Users/marcio/git/Rising Lands/worktrees/maintenance",
+    "python_dependencies": ".local/python",
+    "observed_revision": "4279ad8fe237a679253e4dfde976b4694b4fd1ee"
+  },
+  "projection": {
+    "path": "persistent-graphics-regions",
+    "bulk_calls": 257,
+    "bulk_buffer_allocations": 2,
+    "region_buffer_allocations": 36,
+    "retained_graphics_bytes": 1746372,
+    "abi_limitation": "ABI 1.1 bulk snapshot has no region filter"
+  },
+  "renderer_spec": "docs/MACOS_PLAYABLE.md#renderer-port-input",
+  "screenshots": [
+    {
+      "path": "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/604046b2b6602cc73d6acea3fd78661465bf39c5/build/logs/native-smoke.before.png",
+      "bytes": 1653783,
+      "sha256": "05c5db679e90117b1375dcce125f05521a07e345113199517272f8e84009ff54"
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/604046b2b6602cc73d6acea3fd78661465bf39c5/build/logs/native-smoke.after.png",
+      "bytes": 1619791,
+      "sha256": "6e95f7912fbda2732339b6af111f81f2995133ad419065c651d82a5ce94ec689"
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/604046b2b6602cc73d6acea3fd78661465bf39c5/build/logs/native-smoke.png",
+      "bytes": 1619791,
+      "sha256": "6e95f7912fbda2732339b6af111f81f2995133ad419065c651d82a5ce94ec689"
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/604046b2b6602cc73d6acea3fd78661465bf39c5/build/logs/native-inspection-smoke.before.png",
+      "bytes": 640851,
+      "sha256": "709962f16dec0cfe69e8ce1cbe3f05023970277960e582a4c4a886d2c5a6d1f2"
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/604046b2b6602cc73d6acea3fd78661465bf39c5/build/logs/native-inspection-smoke.after.png",
+      "bytes": 862109,
+      "sha256": "03640e79925faf2a4ae043b0afa336d79d47a56f33c773a33c4cbc584a902131"
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/604046b2b6602cc73d6acea3fd78661465bf39c5/build/logs/native-inspection-smoke.png",
+      "bytes": 862109,
+      "sha256": "03640e79925faf2a4ae043b0afa336d79d47a56f33c773a33c4cbc584a902131"
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/worktrees/macos-playable/.local/macos-speed-final.png",
+      "bytes": 169569,
+      "sha256": "4e30b73ddf1a3d20a6733f776b18a85ba811704d62b2596669b7003d73477634",
+      "scope": "Explicit final Graphics PNG evidence export"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "apps/macos-preview/validation/m3-speed-architecture.log",
+      "bytes": 962,
+      "sha256": "b936e9454df6bb655500c8fd8fd54575b06e87c277fcf3824a284530090b1cd7"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-speed-build.log",
+      "bytes": 4345,
+      "sha256": "e9f1f940f422402c23d8eb0ac0a8c206e18e2954af0e5d5c52519d0673e8cd18"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-speed-codesign-verify.log",
+      "bytes": 327,
+      "sha256": "e4333e5b23c2c5bdb345c9a47c8d234d45d54a0b17f0bc741b127c16865923cc"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-speed-common-maintenance.log.gz",
+      "bytes": 40502,
+      "sha256": "7dbf8244e9a1794abd9a62ffc564f474883b919ef6076b9c7ca9d436a70a164e"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-speed-consumer-tests.log",
+      "bytes": 14902,
+      "sha256": "2e19074e66a0a42d14495fc7249bc453c4a105c3100b61bee3abc5ca78280227"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-speed-fast-128.json",
+      "bytes": 1079162,
+      "sha256": "83c50eb43f7aa8f08de6a5135434f2ab198626239eb0812671962f859c67f82e"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-speed-fast-128.log",
+      "bytes": 1672,
+      "sha256": "d5e158a68de3ed4c73d4f4cb9d6076e45292d6273e6279bd6faf3e36d12d768e"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-speed-macos-projection-build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-speed-native-inspection-smoke.json",
+      "bytes": 1978,
+      "sha256": "255b13713cb8579fc82ee46908ce6eb9e1bf0ccb58469b7f0e1eaf8798d59f59"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-speed-native-smoke.json",
+      "bytes": 7548,
+      "sha256": "17bbddc2a3d8202fe71cf14d88bd2d82fffdf05fea5c766856dbac5edef10c4b"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-speed-rust-engine-build.log",
+      "bytes": 374,
+      "sha256": "ad8336e699c77c2fc84a04b44cc1456cdf3db4a8299b0069d3726505730299c0"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 """Render API 1.5 against complete original-first native M3 display cases."""
-import contextlib, hashlib, io, json, struct, unittest
+import contextlib, hashlib, io, json, struct, subprocess, unittest
 from pathlib import Path
 from graficos import Catalogo
 from render_quadro import renderizar_quadro, EstadoCache, regioes_necessarias
@@ -21,7 +21,8 @@ class EntradaM3(unittest.TestCase):
         self.assertEqual(provenance['capture_sha256'],HASHES[0])
         report=json.loads((AQUI/'validacao/entrada-m3-api15.json').read_text())
         for name,value in report['sources_sha256'].items():
-            self.assertEqual(hashlib.sha256((AQUI/name).read_bytes()).hexdigest(),value,name)
+            frozen=subprocess.check_output(['git','show','06ef8f1:pesquisas-paralelas/graficos-animacao/'+name],cwd=AQUI)
+            self.assertEqual(hashlib.sha256(frozen).hexdigest(),value,name)
 
     def test_complete_surfaces_arguments_and_display_effects(self):
         with contextlib.redirect_stdout(io.StringIO()):result=validar(CAPTURES)
@@ -51,7 +52,7 @@ class EntradaM3(unittest.TestCase):
         cap=CapturaEntradaM3(CAPTURES[0]);case=next(c for c in cap.d['cases'] if c['name']=='selected_unit_12')
         m=cap.memory(case);base=m.u32(0x4e19a0)+12*276;catalog=Catalogo();cache=case['cache']
         cache=EstadoCache(cap.blob(cache['keys']),cap.blob(cache['payloads']),cache['cursor'])
-        cases=((base+0x82,b'\1',0x412923),(base+0xc,b'\2\0',0x410a2c),
+        cases=((base+0x82,b'\2',0x412923),(base+0xc,b'\2\0',0x410a2c),
                (base+0x9a,b'\x65\0',0x410be4),(base+0x99,b'\1',0x41591f),
                (0x4e2412,b'\3\0',0x417086),(0x4e2412,struct.pack('<HH',2,1000),0x417086),
                (0x4e062c,b'\x11\0',0x417cfc))

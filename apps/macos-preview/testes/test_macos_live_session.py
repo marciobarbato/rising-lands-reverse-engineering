@@ -36,6 +36,24 @@ class LiveTests(unittest.TestCase):
         self.assertEqual(live.index,-1)
         live.apply_frame();self.assertEqual(live.abi.frame.call_count,1)
 
+    def test_failed_fast_render_preserves_published_image_and_full_read_buffer(self):
+        from types import SimpleNamespace as NS
+        from macos_state_consumer import StateValidationError
+        live=object.__new__(MacOSLiveSession)
+        before=NS(identity='published');published=Mock()
+        candidate=Mock();candidate.update.return_value=candidate
+        candidate.masked_summary.return_value='hash'
+        live.stop=None;live.index=-1;live.current=before;live.bulk=published
+        live.bulks=[candidate,Mock()];live.views=[Mock(),Mock()]
+        live.handle=7;live.inputs=object();live.abi=Mock()
+        live.names={};live.static={};live.ranges=[];live.expected=['hash']
+        live.renderer=NS(api=object(),consume=Mock(side_effect=StateValidationError('surface mismatch')))
+        self.assertIs(live.apply_frame(),before)
+        self.assertIs(live.bulk,published)
+        self.assertEqual(live.index,-1)
+        self.assertIn('surface mismatch',live.stop['detail'])
+        live.apply_frame();self.assertEqual(live.abi.frame.call_count,1)
+
     def test_real_rust_s0_three_phases_reset_and_owned_lifetime(self):
         library=Path(os.environ.get('RL_MACOS_ENGINE_LIBRARY',ROOT/'motor/target/release/librising_engine.dylib'))
         executable=Path(os.environ.get('RL_ORIGINAL_EXE','/Users/marcio/git/Rising Lands/source/cd/INSTALHD/RISING.EXE'))

@@ -1,0 +1,11 @@
+[lease] graphics17-matrix-final waiting
+[lease] graphics17-matrix-final granted slots [2]
+matrix 20 native calls returned
+matrix 40 native calls returned
+matrix 60 native calls returned
+matrix 80 native calls returned
+matrix 100 native calls returned
+matrix 120 native calls returned
+matrix 140 native calls returned
+matrix 160 native calls returned
+{"schema": "rising-lands/m3-cave-facade-matrix/1", "probe_ref": "f0588447b6cea3cc10701233a55bbcd16551e5e5", "source_snapshot_sha256": "f254869c92f93d49a9f4819879819f40cdc445e25bb2265ab38b5be16d0eb8d5", "cases": 160, "elapsed_seconds": 21.657, "code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4"}

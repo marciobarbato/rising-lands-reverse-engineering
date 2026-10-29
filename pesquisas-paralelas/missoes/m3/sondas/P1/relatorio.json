@@ -1,0 +1,380 @@
+{
+ "baseline": {
+  "branch": "runs/core/coverage-9200",
+  "commit": "71939991cb06e9d23c059e1d422830ba996d2f23",
+  "path": "relatorios/cobertura-quadros-exibicao-9200.json",
+  "routines": 215,
+  "sha256": "6ee6d95d23af4a318f18f47dac9b0f60b1197e0da9e2d159da7bcede5b77a844"
+ },
+ "evidence": "original-only native capture",
+ "frames": [
+  129,
+  629
+ ],
+ "input": "pesquisas-paralelas/missoes/m3/entradas/P1.json",
+ "input_sha256": "28f71d2cf55a9715214da06e42212d3e04bdb1919cd003754c1a290e26d1a20a",
+ "objective_changes": [
+  {
+   "al": "00",
+   "food": 30,
+   "frame": 129,
+   "marks": "0000000000000000000000000000",
+   "parts": 0,
+   "selection": "0000000000000000",
+   "stone": 30,
+   "structures": [
+    [
+     0,
+     0,
+     2,
+     2828,
+     5
+    ]
+   ],
+   "ui": {
+    "0x496207": 255,
+    "0x496208": 255,
+    "0x4e05ae": 0
+   },
+   "units": {
+    "11": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 5387,
+     "f110": "00000000",
+     "state": 7,
+     "target_b2": 65535
+    },
+    "12": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 4113,
+     "f110": "00000000",
+     "state": 7,
+     "target_b2": 65535
+    },
+    "13": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 4110,
+     "f110": "00000000",
+     "state": 7,
+     "target_b2": 65535
+    },
+    "14": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 4108,
+     "f110": "00000000",
+     "state": 7,
+     "target_b2": 65535
+    },
+    "15": {
+     "b7": 0,
+     "b8": 255,
+     "be": 255,
+     "cell": 4877,
+     "f110": "00000000",
+     "state": 7,
+     "target_b2": 65535
+    }
+   },
+   "victory_counter": "00000000",
+   "view_origin": [
+    0,
+    0
+   ]
+  },
+  {
+   "frame": 133,
+   "selection": "01000c0000000000"
+  }
+ ],
+ "orders": [
+  {
+   "caller": "InputGame+0x27ad",
+   "caller_return": "0x42ba25",
+   "event": "SetPlayerOrdre",
+   "frame": 133,
+   "packet_address": "0x4797f000",
+   "packet_before": "00000000000000000000",
+   "player": 0,
+   "tag": 1,
+   "word2": 4113,
+   "word4": 4113,
+   "word6": 0,
+   "word8": 0
+  }
+ ],
+ "probe": "P1",
+ "process_input_game": [
+  {
+   "frame": 133,
+   "jump_target": "0x45ee46",
+   "jump_target_routine": "ProcessInputGame+0x86",
+   "packet": "01001110111000000000",
+   "tag": 1
+  }
+ ],
+ "replay_equal": true,
+ "routines_first_entered_beyond_no_input": {
+  "AffContenanceEngin": {
+   "caller": "AffInfoSelection+0x304",
+   "caller_return": "0x410ee8",
+   "first_frame": 131,
+   "phase": "between_frames131"
+  },
+  "AffInfoSelection": {
+   "caller": "AffDeplaceEngin+0x70a",
+   "caller_return": "0x412a9a",
+   "first_frame": 131,
+   "phase": "between_frames131"
+  },
+  "AffJaugeVie": {
+   "caller": "AffInfoSelection+0x88",
+   "caller_return": "0x410c6c",
+   "first_frame": 131,
+   "phase": "between_frames131"
+  },
+  "AffText": {
+   "caller": "AffTextEncadre+0x251",
+   "caller_return": "0x45a469",
+   "first_frame": 170,
+   "phase": "between_frames170"
+  },
+  "AffTextEncadre": {
+   "caller": "AffInfoAide+0x158",
+   "caller_return": "0x40fa02",
+   "first_frame": 170,
+   "phase": "between_frames170"
+  },
+  "BatimentDeselectionner": {
+   "caller": "InputGame+0x2790",
+   "caller_return": "0x42ba08",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "BatimentGetRessource": {
+   "caller": "IconeFillContenu+0x3a9",
+   "caller_return": "0x45df79",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "BobGetTaille": {
+   "caller": "TextGetLargeur+0x18e",
+   "caller_return": "0x4590ea",
+   "first_frame": 170,
+   "phase": "between_frames170"
+  },
+  "DeSelectionGroupe": {
+   "caller": "InputGame+0x26c2",
+   "caller_return": "0x42b93a",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "EnginAsk": {
+   "caller": "SelectionEngin+0x2b2",
+   "caller_return": "0x47458e",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "EnginEstSelectionne": {
+   "caller": "InputGame+0x8bd",
+   "caller_return": "0x429b35",
+   "first_frame": 130,
+   "phase": "frame130"
+  },
+  "EnginGetBag": {
+   "caller": "AffContenanceEngin+0x18",
+   "caller_return": "0x410a44",
+   "first_frame": 131,
+   "phase": "between_frames131"
+  },
+  "EnginGetBagOrdre": {
+   "caller": "CalculIconeAction+0x59",
+   "caller_return": "0x45e99d",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "EnginGetEtat": {
+   "caller": "SelectionEngin+0x268",
+   "caller_return": "0x474544",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "EnginGetLevelExperience": {
+   "caller": "AffInfoSelection+0x2b1",
+   "caller_return": "0x410e95",
+   "first_frame": 131,
+   "phase": "between_frames131"
+  },
+  "EnginGetSelection": {
+   "caller": "CalculIconeAction+0x4a",
+   "caller_return": "0x45e98e",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "EnginGetTaille": {
+   "caller": "AffDeplaceEngin+0x150",
+   "caller_return": "0x4124e0",
+   "first_frame": 134,
+   "phase": "between_frames134"
+  },
+  "EnginGetTypeName": {
+   "caller": "InputGame+0x8a2",
+   "caller_return": "0x429b1a",
+   "first_frame": 130,
+   "phase": "frame130"
+  },
+  "EnginGetVieMax": {
+   "caller": "AffInfoSelection+0x68",
+   "caller_return": "0x410c4c",
+   "first_frame": 131,
+   "phase": "between_frames131"
+  },
+  "EnginGetVolume": {
+   "caller": "EnginAsk+0x46",
+   "caller_return": "0x440da4",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "EnginInZone": {
+   "caller": "SelectionEngin+0xff",
+   "caller_return": "0x4743db",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "EnginSelectPeutAttaquer": {
+   "caller": "InputGame+0x1583",
+   "caller_return": "0x42a7fb",
+   "first_frame": 134,
+   "phase": "frame134"
+  },
+  "EnginSelectPeutEntrer": {
+   "caller": "InputGame+0x1639",
+   "caller_return": "0x42a8b1",
+   "first_frame": 134,
+   "phase": "frame134"
+  },
+  "EnginVisible": {
+   "caller": "SelectionEngin+0x30f",
+   "caller_return": "0x4745eb",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "FilledBoxOmbre": {
+   "caller": "AffTextEncadre+0x218",
+   "caller_return": "0x45a430",
+   "first_frame": 170,
+   "phase": "between_frames170"
+  },
+  "GetBob": {
+   "caller": "AffTextEncadre+0x1c2",
+   "caller_return": "0x45a3da",
+   "first_frame": 170,
+   "phase": "between_frames170"
+  },
+  "IconeFillContenu": {
+   "caller": "CalculIconeAction+0x5e",
+   "caller_return": "0x45e9a2",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "MemNoirBlancCopy": {
+   "caller": "PasteNoirBlancCmp+0x21e",
+   "caller_return": "0x45c15b",
+   "first_frame": 134,
+   "phase": "between_frames134"
+  },
+  "PasteNoirBlancCmp": {
+   "caller": "AffZoneIconeAction+0x15b",
+   "caller_return": "0x417084",
+   "first_frame": 134,
+   "phase": "between_frames134"
+  },
+  "PlaySnd_PostSound": {
+   "caller": "EnginAsk+0x8e",
+   "caller_return": "0x440dec",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "RetireSelectionEngin": {
+   "caller": "DeSelectionGroupe+0x6a",
+   "caller_return": "0x4726f5",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "SelectionEngin": {
+   "caller": "InputGame+0x26d7",
+   "caller_return": "0x42b94f",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "SetDebug": {
+   "caller": "InputGame+0x27c2",
+   "caller_return": "0x42ba3a",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "SetPlayerOrdre": {
+   "caller": "InputGame+0x27ad",
+   "caller_return": "0x42ba25",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "TextGetLargeur": {
+   "caller": "AffTextEncadre+0x29",
+   "caller_return": "0x45a241",
+   "first_frame": 170,
+   "phase": "between_frames170"
+  },
+  "TextGetTaille": {
+   "caller": "AffInfoAide+0x40",
+   "caller_return": "0x40f8ea",
+   "first_frame": 170,
+   "phase": "between_frames170"
+  },
+  "TypeEnginEstArmee": {
+   "caller": "EnginSelectPeutAttaquer+0x89",
+   "caller_return": "0x4723de",
+   "first_frame": 134,
+   "phase": "frame134"
+  },
+  "TypeEnginEstEnLoop": {
+   "caller": "SelectionEngin+0x244",
+   "caller_return": "0x474520",
+   "first_frame": 133,
+   "phase": "frame133"
+  },
+  "TypeEnginEstEngin": {
+   "caller": "EnginSelectPeutEntrer+0x448",
+   "caller_return": "0x472fb4",
+   "first_frame": 134,
+   "phase": "frame134"
+  },
+  "TypeEnginGagneXP": {
+   "caller": "AffInfoSelection+0x2bd",
+   "caller_return": "0x410ea1",
+   "first_frame": 131,
+   "phase": "between_frames131"
+  },
+  "WndProc": {
+   "caller": "_WinMain@16+0x93",
+   "caller_return": "0x460203",
+   "first_frame": 130,
+   "phase": "between_frames130"
+  }
+ },
+ "routines_first_entered_total": 183,
+ "schema": "rising-lands/m3-probe-report/1",
+ "seconds": [
+  309.5,
+  305.6
+ ],
+ "status": "completed",
+ "stop": null
+}

@@ -1,0 +1,3 @@
+[lease] combat-post-kill-removal waiting
+[lease] combat-post-kill-removal granted slots [1]
+{"cases": 2, "returns": 2, "faults": 0, "limits": 0}

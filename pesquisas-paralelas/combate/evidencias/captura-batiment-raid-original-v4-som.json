@@ -1,0 +1,9648 @@
+{
+ "schema": "rising-lands/combat-real-raid-original/1",
+ "translation_executed": false,
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "provenance": {
+  "manifest": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.manifest.json",
+  "manifest_sha256": "e88dc3fcaca11d03a774dad8bd9c768345f13c884cc2d8df493107ec9d180b09",
+  "artifact": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.parte09.json.xz",
+  "compressed_sha256": "6c385670a501389efbf2465f7d45468b00926911732916840d33ab13394e6b9a",
+  "raw_sha256": "f70e893eb74aa7a399c803f6aa28c7916e6182a6e8bd37ffe84bece5eb92c39b",
+  "checkpoints": {
+   "9000": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "711e8d75a325c1e08c6094be3463ae8d1722078b772fb4e6bbf0b72a9e5d3f61"
+   },
+   "9176": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "e52f04d848a34bae235ed5dbca068c67fb30a1460084665246cf42685d8e7066"
+   }
+  }
+ },
+ "cases": [
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDX": "0x1",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x1",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDX": "0x3",
+    "ESI": "0x49a0c8",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fa4",
+    "EIP": "0x41a1ac",
+    "EFLAGS": "0x46"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": false,
+   "stop": "VoixOffAsk",
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "711e8d75a325c1e08c6094be3463ae8d1722078b772fb4e6bbf0b72a9e5d3f61"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "ccc347eeaee65305b27f1b72f8ccef9ad025c0a1e81f70dedb4ef6ea17a1af11"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "02"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    2,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x2"
+    ],
+    [
+     "0x48af10",
+     "0x498f68",
+     4,
+     "0x14"
+    ],
+    [
+     "0x48a103",
+     "0x521704",
+     4,
+     "0x0"
+    ],
+    [
+     "0x48afe0",
+     "0x498f68",
+     4,
+     "0x13"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x0",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x0",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "address": "0x428cc0",
+     "caller_return": "0x450908",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "iagVilleSendMessage",
+     "address": "0x484808",
+     "caller_return": "0x450920",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x484823",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerGetType",
+     "address": "0x46d817",
+     "caller_return": "0x48483e",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "BatimentGetVolume",
+     "address": "0x41a0ab",
+     "caller_return": "0x41a30d",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x2",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x41a141",
+     "registers": {
+      "EAX": "0xc",
+      "EBX": "0xc",
+      "ECX": "0xb",
+      "EDX": "0x8"
+     }
+    },
+    {
+     "routine": "PlaySnd_PostSound",
+     "address": "0x48aa79",
+     "caller_return": "0x41a336",
+     "registers": {
+      "EAX": "0x42",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0x20100"
+     }
+    },
+    {
+     "routine": "HandlSnd_Insert",
+     "address": "0x48a218",
+     "caller_return": "0x48aaa3",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0x521fe4"
+     }
+    },
+    {
+     "routine": "WaitSnd_GetFirstFreePlace",
+     "address": "0x48aef8",
+     "caller_return": "0x48a3c9",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0xffffffff"
+     }
+    },
+    {
+     "routine": "HndSound_LoadDataInfo",
+     "address": "0x48a0f4",
+     "caller_return": "0x48a3fb",
+     "registers": {
+      "EAX": "0x5216ec",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x20100"
+     }
+    },
+    {
+     "routine": "UseBank_FindIdInBanque",
+     "address": "0x48b390",
+     "caller_return": "0x48a103",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x521fe4"
+     }
+    },
+    {
+     "routine": "WaitSnd_SorryGiveBackOnePlace",
+     "address": "0x48afd0",
+     "caller_return": "0x48a404",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1267,
+   "case": "f9000-solid-impact-source0-camera0",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x508041",
+     "00"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDX": "0x1",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBX": "0x6",
+    "ECX": "0x0",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008008",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x12"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "621fc7cf9c877b9b40fc0814afc67f09a51a946a3a579f058813088c01fea2f2"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "ebb10a818cf9dd959036b7b0518a06ca86e8c804f7bf056a52f7c144e20ab97f"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x4797d038",
+      "hex": "0f010100"
+     },
+     {
+      "address": "0x4797d044",
+      "hex": "a0016001000000000d0b0d0b00000c000000a70000000000000000000000"
+     },
+     {
+      "address": "0x497164",
+      "hex": "045f4541"
+     },
+     {
+      "address": "0x49a0ce",
+      "hex": "02"
+     },
+     {
+      "address": "0x508044",
+      "hex": "01"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x2"
+    ],
+    [
+     "0x470512",
+     "0x497164",
+     4,
+     "0x41455f04"
+    ],
+    [
+     "0x46e22a",
+     "0x4797d038",
+     1,
+     "0xf"
+    ],
+    [
+     "0x46e22c",
+     "0x4797d04c",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e234",
+     "0x4797d04e",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e23a",
+     "0x4797d05b",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e25e",
+     "0x4797d044",
+     2,
+     "0x1a0"
+    ],
+    [
+     "0x46e269",
+     "0x4797d039",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e26d",
+     "0x4797d05c",
+     4,
+     "0x0"
+    ],
+    [
+     "0x46e274",
+     "0x4797d060",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e27a",
+     "0x4797d03a",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e27e",
+     "0x4797d050",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e282",
+     "0x4797d03b",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e290",
+     "0x4797d052",
+     2,
+     "0xc"
+    ],
+    [
+     "0x46e298",
+     "0x4797d046",
+     2,
+     "0x160"
+    ],
+    [
+     "0x46e2a0",
+     "0x4797d048",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2a8",
+     "0x4797d04a",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2b0",
+     "0x4797d057",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2b7",
+     "0x4797d058",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2bf",
+     "0x4797d05a",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2c5",
+     "0x4797d051",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2cb",
+     "0x4797d054",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46d620",
+     "0x508044",
+     4,
+     "0x1"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x0",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x0",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "address": "0x428cc0",
+     "caller_return": "0x450908",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "iagVilleSendMessage",
+     "address": "0x484808",
+     "caller_return": "0x450920",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x484823",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerGetType",
+     "address": "0x46d817",
+     "caller_return": "0x48483e",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "Random",
+     "address": "0x4704dc",
+     "caller_return": "0x4509d1",
+     "registers": {
+      "EAX": "0x21",
+      "EBX": "0x258",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "ProjectileInit",
+     "address": "0x46e44c",
+     "caller_return": "0x450a05",
+     "registers": {
+      "EAX": "0xf",
+      "EBX": "0xb0d",
+      "ECX": "0x0",
+      "EDX": "0xb0d"
+     }
+    },
+    {
+     "routine": "ProjectileSet",
+     "address": "0x46e208",
+     "caller_return": "0x46e4c2",
+     "registers": {
+      "EAX": "0x1",
+      "EBX": "0xb0d",
+      "ECX": "0xb0d",
+      "EDX": "0xf"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a18",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerEstAllie",
+     "address": "0x46d838",
+     "caller_return": "0x450a21",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a31",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a42",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a49",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a5a",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a63",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a6c",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a73",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a7f",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a8b",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerAAttaqueSet",
+     "address": "0x46d600",
+     "caller_return": "0x450a98",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1293,
+   "case": "f9000-solid-impact-source0-camera1",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x1",
+    "ECX": "0x0",
+    "EDX": "0x1",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x1",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDX": "0x3",
+    "ESI": "0x49a0c8",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fa4",
+    "EIP": "0x41a1ac",
+    "EFLAGS": "0x46"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": false,
+   "stop": "VoixOffAsk",
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "711e8d75a325c1e08c6094be3463ae8d1722078b772fb4e6bbf0b72a9e5d3f61"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "ccc347eeaee65305b27f1b72f8ccef9ad025c0a1e81f70dedb4ef6ea17a1af11"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "02"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    1,
+    2,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x2"
+    ],
+    [
+     "0x48af10",
+     "0x498f68",
+     4,
+     "0x14"
+    ],
+    [
+     "0x48a103",
+     "0x521704",
+     4,
+     "0x0"
+    ],
+    [
+     "0x48afe0",
+     "0x498f68",
+     4,
+     "0x13"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x1",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x1",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "address": "0x428cc0",
+     "caller_return": "0x450908",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "iagVilleSendMessage",
+     "address": "0x484808",
+     "caller_return": "0x450920",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x1",
+      "ECX": "0x2",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x484823",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "PlayerGetType",
+     "address": "0x46d817",
+     "caller_return": "0x48483e",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "BatimentGetVolume",
+     "address": "0x41a0ab",
+     "caller_return": "0x41a30d",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x2",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x41a141",
+     "registers": {
+      "EAX": "0xc",
+      "EBX": "0xc",
+      "ECX": "0xb",
+      "EDX": "0x8"
+     }
+    },
+    {
+     "routine": "PlaySnd_PostSound",
+     "address": "0x48aa79",
+     "caller_return": "0x41a336",
+     "registers": {
+      "EAX": "0x42",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0x20100"
+     }
+    },
+    {
+     "routine": "HandlSnd_Insert",
+     "address": "0x48a218",
+     "caller_return": "0x48aaa3",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0x521fe4"
+     }
+    },
+    {
+     "routine": "WaitSnd_GetFirstFreePlace",
+     "address": "0x48aef8",
+     "caller_return": "0x48a3c9",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0xffffffff"
+     }
+    },
+    {
+     "routine": "HndSound_LoadDataInfo",
+     "address": "0x48a0f4",
+     "caller_return": "0x48a3fb",
+     "registers": {
+      "EAX": "0x5216ec",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x20100"
+     }
+    },
+    {
+     "routine": "UseBank_FindIdInBanque",
+     "address": "0x48b390",
+     "caller_return": "0x48a103",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x521fe4"
+     }
+    },
+    {
+     "routine": "WaitSnd_SorryGiveBackOnePlace",
+     "address": "0x48afd0",
+     "caller_return": "0x48a404",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.126,
+   "case": "f9000-solid-impact-source1-camera0",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x508041",
+     "00"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x1",
+    "ECX": "0x0",
+    "EDX": "0x1",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBX": "0x6",
+    "ECX": "0x0",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008008",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x12"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "621fc7cf9c877b9b40fc0814afc67f09a51a946a3a579f058813088c01fea2f2"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "ebb10a818cf9dd959036b7b0518a06ca86e8c804f7bf056a52f7c144e20ab97f"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x4797d038",
+      "hex": "0f010100"
+     },
+     {
+      "address": "0x4797d044",
+      "hex": "a0016001000000000d0b0d0b00000c000000a70000000000000000000000"
+     },
+     {
+      "address": "0x497164",
+      "hex": "045f4541"
+     },
+     {
+      "address": "0x49a0ce",
+      "hex": "02"
+     },
+     {
+      "address": "0x508044",
+      "hex": "01"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x2"
+    ],
+    [
+     "0x470512",
+     "0x497164",
+     4,
+     "0x41455f04"
+    ],
+    [
+     "0x46e22a",
+     "0x4797d038",
+     1,
+     "0xf"
+    ],
+    [
+     "0x46e22c",
+     "0x4797d04c",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e234",
+     "0x4797d04e",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e23a",
+     "0x4797d05b",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e25e",
+     "0x4797d044",
+     2,
+     "0x1a0"
+    ],
+    [
+     "0x46e269",
+     "0x4797d039",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e26d",
+     "0x4797d05c",
+     4,
+     "0x0"
+    ],
+    [
+     "0x46e274",
+     "0x4797d060",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e27a",
+     "0x4797d03a",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e27e",
+     "0x4797d050",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e282",
+     "0x4797d03b",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e290",
+     "0x4797d052",
+     2,
+     "0xc"
+    ],
+    [
+     "0x46e298",
+     "0x4797d046",
+     2,
+     "0x160"
+    ],
+    [
+     "0x46e2a0",
+     "0x4797d048",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2a8",
+     "0x4797d04a",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2b0",
+     "0x4797d057",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2b7",
+     "0x4797d058",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2bf",
+     "0x4797d05a",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2c5",
+     "0x4797d051",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2cb",
+     "0x4797d054",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46d620",
+     "0x508044",
+     4,
+     "0x1"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x1",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x1",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "address": "0x428cc0",
+     "caller_return": "0x450908",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "iagVilleSendMessage",
+     "address": "0x484808",
+     "caller_return": "0x450920",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x1",
+      "ECX": "0x2",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x484823",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "PlayerGetType",
+     "address": "0x46d817",
+     "caller_return": "0x48483e",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "Random",
+     "address": "0x4704dc",
+     "caller_return": "0x4509d1",
+     "registers": {
+      "EAX": "0x21",
+      "EBX": "0x258",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "ProjectileInit",
+     "address": "0x46e44c",
+     "caller_return": "0x450a05",
+     "registers": {
+      "EAX": "0xf",
+      "EBX": "0xb0d",
+      "ECX": "0x0",
+      "EDX": "0xb0d"
+     }
+    },
+    {
+     "routine": "ProjectileSet",
+     "address": "0x46e208",
+     "caller_return": "0x46e4c2",
+     "registers": {
+      "EAX": "0x1",
+      "EBX": "0xb0d",
+      "ECX": "0xb0d",
+      "EDX": "0xf"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a18",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerEstAllie",
+     "address": "0x46d838",
+     "caller_return": "0x450a21",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a31",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a42",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a49",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a5a",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a63",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a6c",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a73",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a7f",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a8b",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerAAttaqueSet",
+     "address": "0x46d600",
+     "caller_return": "0x450a98",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1281,
+   "case": "f9000-solid-impact-source1-camera1",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x2",
+    "ECX": "0x0",
+    "EDX": "0x1",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x1",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDX": "0x3",
+    "ESI": "0x49a0c8",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fa4",
+    "EIP": "0x41a1ac",
+    "EFLAGS": "0x46"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": false,
+   "stop": "VoixOffAsk",
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "711e8d75a325c1e08c6094be3463ae8d1722078b772fb4e6bbf0b72a9e5d3f61"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "ccc347eeaee65305b27f1b72f8ccef9ad025c0a1e81f70dedb4ef6ea17a1af11"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "02"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    2,
+    2,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x2"
+    ],
+    [
+     "0x48af10",
+     "0x498f68",
+     4,
+     "0x14"
+    ],
+    [
+     "0x48a103",
+     "0x521704",
+     4,
+     "0x0"
+    ],
+    [
+     "0x48afe0",
+     "0x498f68",
+     4,
+     "0x13"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x2",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x2",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "address": "0x428cc0",
+     "caller_return": "0x450908",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "iagVilleSendMessage",
+     "address": "0x484808",
+     "caller_return": "0x450920",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x2",
+      "ECX": "0x2",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x484823",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "PlayerGetType",
+     "address": "0x46d817",
+     "caller_return": "0x48483e",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "BatimentGetVolume",
+     "address": "0x41a0ab",
+     "caller_return": "0x41a30d",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x2",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x41a141",
+     "registers": {
+      "EAX": "0xc",
+      "EBX": "0xc",
+      "ECX": "0xb",
+      "EDX": "0x8"
+     }
+    },
+    {
+     "routine": "PlaySnd_PostSound",
+     "address": "0x48aa79",
+     "caller_return": "0x41a336",
+     "registers": {
+      "EAX": "0x42",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0x20100"
+     }
+    },
+    {
+     "routine": "HandlSnd_Insert",
+     "address": "0x48a218",
+     "caller_return": "0x48aaa3",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0x521fe4"
+     }
+    },
+    {
+     "routine": "WaitSnd_GetFirstFreePlace",
+     "address": "0x48aef8",
+     "caller_return": "0x48a3c9",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0xffffffff"
+     }
+    },
+    {
+     "routine": "HndSound_LoadDataInfo",
+     "address": "0x48a0f4",
+     "caller_return": "0x48a3fb",
+     "registers": {
+      "EAX": "0x5216ec",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x20100"
+     }
+    },
+    {
+     "routine": "UseBank_FindIdInBanque",
+     "address": "0x48b390",
+     "caller_return": "0x48a103",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x521fe4"
+     }
+    },
+    {
+     "routine": "WaitSnd_SorryGiveBackOnePlace",
+     "address": "0x48afd0",
+     "caller_return": "0x48a404",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1277,
+   "case": "f9000-solid-impact-source2-camera0",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x508041",
+     "00"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x2",
+    "ECX": "0x0",
+    "EDX": "0x1",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBX": "0x6",
+    "ECX": "0x0",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008008",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x12"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "621fc7cf9c877b9b40fc0814afc67f09a51a946a3a579f058813088c01fea2f2"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "ebb10a818cf9dd959036b7b0518a06ca86e8c804f7bf056a52f7c144e20ab97f"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x4797d038",
+      "hex": "0f010100"
+     },
+     {
+      "address": "0x4797d044",
+      "hex": "a0016001000000000d0b0d0b00000c000000a70000000000000000000000"
+     },
+     {
+      "address": "0x497164",
+      "hex": "045f4541"
+     },
+     {
+      "address": "0x49a0ce",
+      "hex": "02"
+     },
+     {
+      "address": "0x508044",
+      "hex": "01"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x2"
+    ],
+    [
+     "0x470512",
+     "0x497164",
+     4,
+     "0x41455f04"
+    ],
+    [
+     "0x46e22a",
+     "0x4797d038",
+     1,
+     "0xf"
+    ],
+    [
+     "0x46e22c",
+     "0x4797d04c",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e234",
+     "0x4797d04e",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e23a",
+     "0x4797d05b",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e25e",
+     "0x4797d044",
+     2,
+     "0x1a0"
+    ],
+    [
+     "0x46e269",
+     "0x4797d039",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e26d",
+     "0x4797d05c",
+     4,
+     "0x0"
+    ],
+    [
+     "0x46e274",
+     "0x4797d060",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e27a",
+     "0x4797d03a",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e27e",
+     "0x4797d050",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e282",
+     "0x4797d03b",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e290",
+     "0x4797d052",
+     2,
+     "0xc"
+    ],
+    [
+     "0x46e298",
+     "0x4797d046",
+     2,
+     "0x160"
+    ],
+    [
+     "0x46e2a0",
+     "0x4797d048",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2a8",
+     "0x4797d04a",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2b0",
+     "0x4797d057",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2b7",
+     "0x4797d058",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2bf",
+     "0x4797d05a",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2c5",
+     "0x4797d051",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2cb",
+     "0x4797d054",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46d620",
+     "0x508044",
+     4,
+     "0x1"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x2",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x2",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "address": "0x428cc0",
+     "caller_return": "0x450908",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "iagVilleSendMessage",
+     "address": "0x484808",
+     "caller_return": "0x450920",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x2",
+      "ECX": "0x2",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x484823",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "PlayerGetType",
+     "address": "0x46d817",
+     "caller_return": "0x48483e",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "Random",
+     "address": "0x4704dc",
+     "caller_return": "0x4509d1",
+     "registers": {
+      "EAX": "0x21",
+      "EBX": "0x258",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "ProjectileInit",
+     "address": "0x46e44c",
+     "caller_return": "0x450a05",
+     "registers": {
+      "EAX": "0xf",
+      "EBX": "0xb0d",
+      "ECX": "0x0",
+      "EDX": "0xb0d"
+     }
+    },
+    {
+     "routine": "ProjectileSet",
+     "address": "0x46e208",
+     "caller_return": "0x46e4c2",
+     "registers": {
+      "EAX": "0x1",
+      "EBX": "0xb0d",
+      "ECX": "0xb0d",
+      "EDX": "0xf"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a18",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerEstAllie",
+     "address": "0x46d838",
+     "caller_return": "0x450a21",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a31",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a42",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a49",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a5a",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a63",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a6c",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a73",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a7f",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a8b",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerAAttaqueSet",
+     "address": "0x46d600",
+     "caller_return": "0x450a98",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1263,
+   "case": "f9000-solid-impact-source2-camera1",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x10",
+    "ECX": "0x0",
+    "EDX": "0x1",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x1",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDX": "0x3",
+    "ESI": "0x49a0c8",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fa4",
+    "EIP": "0x41a1ac",
+    "EFLAGS": "0x46"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": false,
+   "stop": "VoixOffAsk",
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "711e8d75a325c1e08c6094be3463ae8d1722078b772fb4e6bbf0b72a9e5d3f61"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "ccc347eeaee65305b27f1b72f8ccef9ad025c0a1e81f70dedb4ef6ea17a1af11"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "02"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    16,
+    2,
+    4
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x2"
+    ],
+    [
+     "0x48af10",
+     "0x498f68",
+     4,
+     "0x14"
+    ],
+    [
+     "0x48a103",
+     "0x521704",
+     4,
+     "0x0"
+    ],
+    [
+     "0x48afe0",
+     "0x498f68",
+     4,
+     "0x13"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x10",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x10",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "address": "0x428cc0",
+     "caller_return": "0x450908",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "iagVilleSendMessage",
+     "address": "0x484808",
+     "caller_return": "0x450920",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x10",
+      "ECX": "0x2",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x484823",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x10"
+     }
+    },
+    {
+     "routine": "PlayerGetType",
+     "address": "0x46d817",
+     "caller_return": "0x48483e",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x10"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "BatimentGetVolume",
+     "address": "0x41a0ab",
+     "caller_return": "0x41a30d",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x2",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x41a141",
+     "registers": {
+      "EAX": "0xc",
+      "EBX": "0xc",
+      "ECX": "0xb",
+      "EDX": "0x8"
+     }
+    },
+    {
+     "routine": "PlaySnd_PostSound",
+     "address": "0x48aa79",
+     "caller_return": "0x41a336",
+     "registers": {
+      "EAX": "0x42",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0x20100"
+     }
+    },
+    {
+     "routine": "HandlSnd_Insert",
+     "address": "0x48a218",
+     "caller_return": "0x48aaa3",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0x521fe4"
+     }
+    },
+    {
+     "routine": "WaitSnd_GetFirstFreePlace",
+     "address": "0x48aef8",
+     "caller_return": "0x48a3c9",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0xffffffff"
+     }
+    },
+    {
+     "routine": "HndSound_LoadDataInfo",
+     "address": "0x48a0f4",
+     "caller_return": "0x48a3fb",
+     "registers": {
+      "EAX": "0x5216ec",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x20100"
+     }
+    },
+    {
+     "routine": "UseBank_FindIdInBanque",
+     "address": "0x48b390",
+     "caller_return": "0x48a103",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x521fe4"
+     }
+    },
+    {
+     "routine": "WaitSnd_SorryGiveBackOnePlace",
+     "address": "0x48afd0",
+     "caller_return": "0x48a404",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.125,
+   "case": "f9000-solid-impact-source16-camera0",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x508041",
+     "00"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x10",
+    "ECX": "0x0",
+    "EDX": "0x1",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x4",
+    "EBX": "0x6",
+    "ECX": "0x0",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008008",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x12"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "621fc7cf9c877b9b40fc0814afc67f09a51a946a3a579f058813088c01fea2f2"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "e5803f021e8611a4b850beb919d4b9b9c81fdbadc2949aec0f4289da7697e060"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x47931056",
+      "hex": "a6"
+     },
+     {
+      "address": "0x4797d038",
+      "hex": "0f010100"
+     },
+     {
+      "address": "0x4797d044",
+      "hex": "a0016001000000000d0b0d0b00000c000000a70000000000000000000000"
+     },
+     {
+      "address": "0x497164",
+      "hex": "045f4541"
+     },
+     {
+      "address": "0x49a0ce",
+      "hex": "02"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x2"
+    ],
+    [
+     "0x470512",
+     "0x497164",
+     4,
+     "0x41455f04"
+    ],
+    [
+     "0x46e22a",
+     "0x4797d038",
+     1,
+     "0xf"
+    ],
+    [
+     "0x46e22c",
+     "0x4797d04c",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e234",
+     "0x4797d04e",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e23a",
+     "0x4797d05b",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e25e",
+     "0x4797d044",
+     2,
+     "0x1a0"
+    ],
+    [
+     "0x46e269",
+     "0x4797d039",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e26d",
+     "0x4797d05c",
+     4,
+     "0x0"
+    ],
+    [
+     "0x46e274",
+     "0x4797d060",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e27a",
+     "0x4797d03a",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e27e",
+     "0x4797d050",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e282",
+     "0x4797d03b",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e290",
+     "0x4797d052",
+     2,
+     "0xc"
+    ],
+    [
+     "0x46e298",
+     "0x4797d046",
+     2,
+     "0x160"
+    ],
+    [
+     "0x46e2a0",
+     "0x4797d048",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2a8",
+     "0x4797d04a",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2b0",
+     "0x4797d057",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2b7",
+     "0x4797d058",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2bf",
+     "0x4797d05a",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2c5",
+     "0x4797d051",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2cb",
+     "0x4797d054",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46d900",
+     "0x47931056",
+     1,
+     "0xa6"
+    ],
+    [
+     "0x46d900",
+     "0x47931006",
+     1,
+     "0x1"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x10",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x10",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "address": "0x428cc0",
+     "caller_return": "0x450908",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "iagVilleSendMessage",
+     "address": "0x484808",
+     "caller_return": "0x450920",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x10",
+      "ECX": "0x2",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x484823",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x10"
+     }
+    },
+    {
+     "routine": "PlayerGetType",
+     "address": "0x46d817",
+     "caller_return": "0x48483e",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x10"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "Random",
+     "address": "0x4704dc",
+     "caller_return": "0x4509d1",
+     "registers": {
+      "EAX": "0x21",
+      "EBX": "0x258",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "ProjectileInit",
+     "address": "0x46e44c",
+     "caller_return": "0x450a05",
+     "registers": {
+      "EAX": "0xf",
+      "EBX": "0xb0d",
+      "ECX": "0x0",
+      "EDX": "0xb0d"
+     }
+    },
+    {
+     "routine": "ProjectileSet",
+     "address": "0x46e208",
+     "caller_return": "0x46e4c2",
+     "registers": {
+      "EAX": "0x1",
+      "EBX": "0xb0d",
+      "ECX": "0xb0d",
+      "EDX": "0xf"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a18",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerEstAllie",
+     "address": "0x46d838",
+     "caller_return": "0x450a21",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a31",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a42",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a49",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a5a",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a63",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a6c",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a73",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0xa600"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a7f",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a8b",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerAAttaqueSet",
+     "address": "0x46d600",
+     "caller_return": "0x450a98",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1291,
+   "case": "f9000-solid-impact-source16-camera1",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x10",
+    "ECX": "0x1d",
+    "EDX": "0x4",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x4",
+    "EBX": "0x6",
+    "ECX": "0x0",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008008",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x12"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "621fc7cf9c877b9b40fc0814afc67f09a51a946a3a579f058813088c01fea2f2"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "a676068cf0daa7a49137ad3fbaccc9026b260ca283075f846d82024e57c811e9"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x47931056",
+      "hex": "a6"
+     },
+     {
+      "address": "0x4797d038",
+      "hex": "0f010100"
+     },
+     {
+      "address": "0x4797d044",
+      "hex": "a0016001000000000d0b0d0b00000c000000a70000000000000000000000"
+     },
+     {
+      "address": "0x497164",
+      "hex": "045f4541"
+     },
+     {
+      "address": "0x49a0ce",
+      "hex": "14"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x14"
+    ],
+    [
+     "0x470512",
+     "0x497164",
+     4,
+     "0x41455f04"
+    ],
+    [
+     "0x46e22a",
+     "0x4797d038",
+     1,
+     "0xf"
+    ],
+    [
+     "0x46e22c",
+     "0x4797d04c",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e234",
+     "0x4797d04e",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e23a",
+     "0x4797d05b",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e25e",
+     "0x4797d044",
+     2,
+     "0x1a0"
+    ],
+    [
+     "0x46e269",
+     "0x4797d039",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e26d",
+     "0x4797d05c",
+     4,
+     "0x0"
+    ],
+    [
+     "0x46e274",
+     "0x4797d060",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e27a",
+     "0x4797d03a",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e27e",
+     "0x4797d050",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e282",
+     "0x4797d03b",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e290",
+     "0x4797d052",
+     2,
+     "0xc"
+    ],
+    [
+     "0x46e298",
+     "0x4797d046",
+     2,
+     "0x160"
+    ],
+    [
+     "0x46e2a0",
+     "0x4797d048",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2a8",
+     "0x4797d04a",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2b0",
+     "0x4797d057",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2b7",
+     "0x4797d058",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2bf",
+     "0x4797d05a",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2c5",
+     "0x4797d051",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2cb",
+     "0x4797d054",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46d900",
+     "0x47931056",
+     1,
+     "0xa6"
+    ],
+    [
+     "0x46d900",
+     "0x47931006",
+     1,
+     "0x1"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x10",
+      "ECX": "0x1d",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x10",
+      "ECX": "0x1d",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x14",
+      "EDX": "0x14"
+     }
+    },
+    {
+     "routine": "Random",
+     "address": "0x4704dc",
+     "caller_return": "0x4509d1",
+     "registers": {
+      "EAX": "0x21",
+      "EBX": "0x258",
+      "ECX": "0x14",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "ProjectileInit",
+     "address": "0x46e44c",
+     "caller_return": "0x450a05",
+     "registers": {
+      "EAX": "0xf",
+      "EBX": "0xb0d",
+      "ECX": "0x0",
+      "EDX": "0xb0d"
+     }
+    },
+    {
+     "routine": "ProjectileSet",
+     "address": "0x46e208",
+     "caller_return": "0x46e4c2",
+     "registers": {
+      "EAX": "0x1",
+      "EBX": "0xb0d",
+      "ECX": "0xb0d",
+      "EDX": "0xf"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a18",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerEstAllie",
+     "address": "0x46d838",
+     "caller_return": "0x450a21",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a31",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a42",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a49",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a5a",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a63",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a6c",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a73",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0xa600"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a7f",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a8b",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerAAttaqueSet",
+     "address": "0x46d600",
+     "caller_return": "0x450a98",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.123,
+   "case": "f9000-solid-impact-mode4-dir29",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x10",
+    "ECX": "0x1e",
+    "EDX": "0x4",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x4",
+    "EBX": "0x6",
+    "ECX": "0x0",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008008",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x12"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "621fc7cf9c877b9b40fc0814afc67f09a51a946a3a579f058813088c01fea2f2"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "3897b7843152021d7a8c9ac38005b44825abf8c72147d7f0eff0d66eabfd3580"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x47931056",
+      "hex": "a6"
+     },
+     {
+      "address": "0x4797d038",
+      "hex": "0f010100"
+     },
+     {
+      "address": "0x4797d044",
+      "hex": "a0016001000000000d0b0d0b00000c000000a70000000000000000000000"
+     },
+     {
+      "address": "0x497164",
+      "hex": "045f4541"
+     },
+     {
+      "address": "0x49a0ce",
+      "hex": "1e"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x1e"
+    ],
+    [
+     "0x470512",
+     "0x497164",
+     4,
+     "0x41455f04"
+    ],
+    [
+     "0x46e22a",
+     "0x4797d038",
+     1,
+     "0xf"
+    ],
+    [
+     "0x46e22c",
+     "0x4797d04c",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e234",
+     "0x4797d04e",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e23a",
+     "0x4797d05b",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e25e",
+     "0x4797d044",
+     2,
+     "0x1a0"
+    ],
+    [
+     "0x46e269",
+     "0x4797d039",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e26d",
+     "0x4797d05c",
+     4,
+     "0x0"
+    ],
+    [
+     "0x46e274",
+     "0x4797d060",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e27a",
+     "0x4797d03a",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e27e",
+     "0x4797d050",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e282",
+     "0x4797d03b",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e290",
+     "0x4797d052",
+     2,
+     "0xc"
+    ],
+    [
+     "0x46e298",
+     "0x4797d046",
+     2,
+     "0x160"
+    ],
+    [
+     "0x46e2a0",
+     "0x4797d048",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2a8",
+     "0x4797d04a",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2b0",
+     "0x4797d057",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2b7",
+     "0x4797d058",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2bf",
+     "0x4797d05a",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2c5",
+     "0x4797d051",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2cb",
+     "0x4797d054",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46d900",
+     "0x47931056",
+     1,
+     "0xa6"
+    ],
+    [
+     "0x46d900",
+     "0x47931006",
+     1,
+     "0x1"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x10",
+      "ECX": "0x1e",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x10",
+      "ECX": "0x1e",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x1e",
+      "EDX": "0x1e"
+     }
+    },
+    {
+     "routine": "Random",
+     "address": "0x4704dc",
+     "caller_return": "0x4509d1",
+     "registers": {
+      "EAX": "0x21",
+      "EBX": "0x258",
+      "ECX": "0x1e",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "ProjectileInit",
+     "address": "0x46e44c",
+     "caller_return": "0x450a05",
+     "registers": {
+      "EAX": "0xf",
+      "EBX": "0xb0d",
+      "ECX": "0x0",
+      "EDX": "0xb0d"
+     }
+    },
+    {
+     "routine": "ProjectileSet",
+     "address": "0x46e208",
+     "caller_return": "0x46e4c2",
+     "registers": {
+      "EAX": "0x1",
+      "EBX": "0xb0d",
+      "ECX": "0xb0d",
+      "EDX": "0xf"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a18",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerEstAllie",
+     "address": "0x46d838",
+     "caller_return": "0x450a21",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a31",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d038",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a42",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a49",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a5a",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a63",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a6c",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a73",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0xa600"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a7f",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a8b",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerAAttaqueSet",
+     "address": "0x46d600",
+     "caller_return": "0x450a98",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1233,
+   "case": "f9000-solid-impact-mode4-dir30",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "BatimentInfligeDegat",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x31415926",
+    "EDX": "0x257",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x41a2c1"
+   },
+   "exit_registers": {
+    "EAX": "0xc8",
+    "EBX": "0x258",
+    "ECX": "0x31415926",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008004",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x6"
+   },
+   "stack_words": [],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "621fc7cf9c877b9b40fc0814afc67f09a51a946a3a579f058813088c01fea2f2"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "42c62dfde5d0850076c4a531a452ae2f8545f368cf321318ae896152c50bba66"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "5702"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x257"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x31415926",
+      "EDX": "0x257"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1228,
+   "case": "f9000-solid-threshold-599",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "BatimentInfligeDegat",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x31415926",
+    "EDX": "0x258",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x41a2c1"
+   },
+   "exit_registers": {
+    "EAX": "0xc8",
+    "EBX": "0x258",
+    "ECX": "0x31415926",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008004",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x6"
+   },
+   "stack_words": [],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "621fc7cf9c877b9b40fc0814afc67f09a51a946a3a579f058813088c01fea2f2"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "07d0564ecd0a161ecf987681f4a9d4f6c6b92f753c547276b625752739d4a58a"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "5802"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x258"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x31415926",
+      "EDX": "0x258"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1208,
+   "case": "f9000-solid-threshold-600",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "BatimentInfligeDegat",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x31415926",
+    "EDX": "0x259",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x41a2c1"
+   },
+   "exit_registers": {
+    "EAX": "0xc8",
+    "EBX": "0x258",
+    "ECX": "0x31415926",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008004",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x6"
+   },
+   "stack_words": [],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "621fc7cf9c877b9b40fc0814afc67f09a51a946a3a579f058813088c01fea2f2"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "84c40233df95cb042a8187ddd5f598c6202d9cdf29e6150846031ea4c636d40e"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "5902"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x259"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x31415926",
+      "EDX": "0x259"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1193,
+   "case": "f9000-solid-threshold-601",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "BatimentInfligeDegat",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x31415926",
+    "EDX": "0x257",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x41a2c1"
+   },
+   "exit_registers": {
+    "EAX": "0xc8",
+    "EBX": "0x258",
+    "ECX": "0x31415926",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008004",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x6"
+   },
+   "stack_words": [],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "621fc7cf9c877b9b40fc0814afc67f09a51a946a3a579f058813088c01fea2f2"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "42c62dfde5d0850076c4a531a452ae2f8545f368cf321318ae896152c50bba66"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "5702"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x257"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x31415926",
+      "EDX": "0x257"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1185,
+   "case": "f9000-solid-threshold-599",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "BatimentInfligeDegat",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x31415926",
+    "EDX": "0x258",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x41a2c1"
+   },
+   "exit_registers": {
+    "EAX": "0xc8",
+    "EBX": "0x258",
+    "ECX": "0x31415926",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008004",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x6"
+   },
+   "stack_words": [],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "621fc7cf9c877b9b40fc0814afc67f09a51a946a3a579f058813088c01fea2f2"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "07d0564ecd0a161ecf987681f4a9d4f6c6b92f753c547276b625752739d4a58a"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "5802"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x258"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x31415926",
+      "EDX": "0x258"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1167,
+   "case": "f9000-solid-threshold-600",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "BatimentInfligeDegat",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x31415926",
+    "EDX": "0x259",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x41a2c1"
+   },
+   "exit_registers": {
+    "EAX": "0xc8",
+    "EBX": "0x258",
+    "ECX": "0x31415926",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008004",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x6"
+   },
+   "stack_words": [],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "621fc7cf9c877b9b40fc0814afc67f09a51a946a3a579f058813088c01fea2f2"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "84c40233df95cb042a8187ddd5f598c6202d9cdf29e6150846031ea4c636d40e"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "5902"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x259"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x31415926",
+      "EDX": "0x259"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1192,
+   "case": "f9000-solid-threshold-601",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "ProjectileInit",
+   "entry_registers": {
+    "EAX": "0x1e",
+    "EBX": "0x3d3d",
+    "ECX": "0x4",
+    "EDX": "0x3d3d",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x46e44c"
+   },
+   "exit_registers": {
+    "EAX": "0x10",
+    "EBX": "0x4797d038",
+    "ECX": "0x3d3d",
+    "EDX": "0x1d",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008018",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x2"
+   },
+   "stack_words": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "711e8d75a325c1e08c6094be3463ae8d1722078b772fb4e6bbf0b72a9e5d3f61"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "6f7871a62227cc80fc712ff9cf24c5e86c8248723c3b44d6ce4c12e758567719"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x4797d038",
+      "zlib_base64": "eNqTY2RkWA4EC9i/MCxgX8DOAAS2QMDAIAJkLWdhgANGBQYFASCtwCDAAAA3xQfa"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x46e22a",
+     "0x4797d038",
+     1,
+     "0x1e"
+    ],
+    [
+     "0x46e22c",
+     "0x4797d04c",
+     2,
+     "0x3d3d"
+    ],
+    [
+     "0x46e234",
+     "0x4797d04e",
+     2,
+     "0x3d3d"
+    ],
+    [
+     "0x46e23a",
+     "0x4797d05b",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e25e",
+     "0x4797d044",
+     2,
+     "0x7a0"
+    ],
+    [
+     "0x46e269",
+     "0x4797d039",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e26d",
+     "0x4797d05c",
+     4,
+     "0x0"
+    ],
+    [
+     "0x46e274",
+     "0x4797d060",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e27a",
+     "0x4797d03a",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e27e",
+     "0x4797d050",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e282",
+     "0x4797d03b",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e290",
+     "0x4797d052",
+     2,
+     "0xc"
+    ],
+    [
+     "0x46e298",
+     "0x4797d046",
+     2,
+     "0x7a0"
+    ],
+    [
+     "0x46e2a0",
+     "0x4797d048",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2a8",
+     "0x4797d04a",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2b0",
+     "0x4797d057",
+     1,
+     "0x4"
+    ],
+    [
+     "0x46e2b7",
+     "0x4797d058",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2bf",
+     "0x4797d05a",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2c5",
+     "0x4797d051",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2cb",
+     "0x4797d054",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e3b4",
+     "0x4797d051",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e107",
+     "0x4797d06c",
+     2,
+     "0x10"
+    ],
+    [
+     "0x46e114",
+     "0x4797d064",
+     2,
+     "0x2000"
+    ],
+    [
+     "0x46e11a",
+     "0x4797d06a",
+     2,
+     "0x20"
+    ],
+    [
+     "0x46e124",
+     "0x4797d062",
+     2,
+     "0x2001"
+    ],
+    [
+     "0x46e139",
+     "0x4797d068",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e142",
+     "0x4797d040",
+     4,
+     "0xf407a0"
+    ],
+    [
+     "0x46e148",
+     "0x4797d066",
+     2,
+     "0x10"
+    ],
+    [
+     "0x46e382",
+     "0x4797d052",
+     2,
+     "0x14"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "ProjectileInit",
+     "address": "0x46e44c",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x1e",
+      "EBX": "0x3d3d",
+      "ECX": "0x4",
+      "EDX": "0x3d3d"
+     }
+    },
+    {
+     "routine": "ProjectileSet",
+     "address": "0x46e208",
+     "caller_return": "0x46e4c2",
+     "registers": {
+      "EAX": "0x1",
+      "EBX": "0x3d3d",
+      "ECX": "0x3d3d",
+      "EDX": "0x1e"
+     }
+    },
+    {
+     "routine": "ProjectileLineaire",
+     "address": "0x46e049",
+     "caller_return": "0x46e3bd",
+     "registers": {
+      "EAX": "0x4797d038",
+      "EBX": "0x4797d038",
+      "ECX": "0x3d3d",
+      "EDX": "0x1d"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1196,
+   "case": "f9000-type30-init",
+   "checkpoint": 9000,
+   "declared_writes": []
+  },
+  {
+   "routine": "ProjectileAvance",
+   "entry_registers": {
+    "EAX": "0x4797d038",
+    "EBX": "0x2468ace0",
+    "ECX": "0x31415926",
+    "EDX": "0x27182818",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x46eaf8"
+   },
+   "exit_registers": {
+    "EAX": "0x363d",
+    "EBX": "0x0",
+    "ECX": "0x1e",
+    "EDX": "0x4",
+    "ESI": "0x4797d038",
+    "EDI": "0x363d",
+    "EBP": "0x0",
+    "ESP": "0x2007e1c",
+    "EIP": "0x450874",
+    "EFLAGS": "0x46"
+   },
+   "stack_words": [],
+   "reached_return": false,
+   "stop": "InfligeDegat checkpoint",
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "23aa6ff853c8692e9ae3867948e8a4bd610954d6acde1314ddd3cfc0f8752047"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "d23944b643db04c03deb97d489026ab50574a7f671ec07def6e49b72dcdf943e"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x4797d03b",
+      "hex": "01"
+     },
+     {
+      "address": "0x4dfb44",
+      "hex": "0f"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x46ef6b",
+     "0x4797d03b",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46f08c",
+     "0x4dfb44",
+     1,
+     "0xf"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "ProjectileAvance",
+     "address": "0x46eaf8",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x4797d038",
+      "EBX": "0x2468ace0",
+      "ECX": "0x31415926",
+      "EDX": "0x27182818"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x46f2dd",
+     "registers": {
+      "EAX": "0x3d",
+      "EBX": "0x36",
+      "ECX": "0x36",
+      "EDX": "0x3d"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x46f2dd",
+     "registers": {
+      "EAX": "0x3d",
+      "EBX": "0x37",
+      "ECX": "0x36",
+      "EDX": "0x3d"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x46f2dd",
+     "registers": {
+      "EAX": "0x3d",
+      "EBX": "0x38",
+      "ECX": "0x36",
+      "EDX": "0x3d"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x46f2dd",
+     "registers": {
+      "EAX": "0x3d",
+      "EBX": "0x39",
+      "ECX": "0x36",
+      "EDX": "0x3d"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x46f2dd",
+     "registers": {
+      "EAX": "0x3d",
+      "EBX": "0x3a",
+      "ECX": "0x36",
+      "EDX": "0x3d"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x46f2dd",
+     "registers": {
+      "EAX": "0x3d",
+      "EBX": "0x3b",
+      "ECX": "0x36",
+      "EDX": "0x3d"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x46f2dd",
+     "registers": {
+      "EAX": "0x3d",
+      "EBX": "0x3c",
+      "ECX": "0x36",
+      "EDX": "0x3d"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x46f2dd",
+     "registers": {
+      "EAX": "0x3d",
+      "EBX": "0x3d",
+      "ECX": "0x36",
+      "EDX": "0x3d"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1185,
+   "case": "f9000-type30-first-impact",
+   "checkpoint": 9000,
+   "declared_writes": [
+    [
+     "0x4797d050",
+     "0c"
+    ],
+    [
+     "0x4797d06c",
+     "0000"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDX": "0x1",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x1",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDX": "0x3",
+    "ESI": "0x49a0c8",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fa4",
+    "EIP": "0x41a1ac",
+    "EFLAGS": "0x46"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": false,
+   "stop": "VoixOffAsk",
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "e52f04d848a34bae235ed5dbca068c67fb30a1460084665246cf42685d8e7066"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "fdecaeeeb4029e9832b3e69568c667e7e2f06412e6a4595f7d456fd4a3f7e5ff"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "02"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    2,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x2"
+    ],
+    [
+     "0x48af10",
+     "0x498f68",
+     4,
+     "0x14"
+    ],
+    [
+     "0x48a103",
+     "0x521704",
+     4,
+     "0x0"
+    ],
+    [
+     "0x48afe0",
+     "0x498f68",
+     4,
+     "0x13"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x0",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x0",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "address": "0x428cc0",
+     "caller_return": "0x450908",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "iagVilleSendMessage",
+     "address": "0x484808",
+     "caller_return": "0x450920",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x484823",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerGetType",
+     "address": "0x46d817",
+     "caller_return": "0x48483e",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "BatimentGetVolume",
+     "address": "0x41a0ab",
+     "caller_return": "0x41a30d",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x2",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x41a141",
+     "registers": {
+      "EAX": "0xc",
+      "EBX": "0xc",
+      "ECX": "0xb",
+      "EDX": "0x8"
+     }
+    },
+    {
+     "routine": "PlaySnd_PostSound",
+     "address": "0x48aa79",
+     "caller_return": "0x41a336",
+     "registers": {
+      "EAX": "0x42",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0x20100"
+     }
+    },
+    {
+     "routine": "HandlSnd_Insert",
+     "address": "0x48a218",
+     "caller_return": "0x48aaa3",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0x521fe4"
+     }
+    },
+    {
+     "routine": "WaitSnd_GetFirstFreePlace",
+     "address": "0x48aef8",
+     "caller_return": "0x48a3c9",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0xffffffff"
+     }
+    },
+    {
+     "routine": "HndSound_LoadDataInfo",
+     "address": "0x48a0f4",
+     "caller_return": "0x48a3fb",
+     "registers": {
+      "EAX": "0x5216ec",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x20100"
+     }
+    },
+    {
+     "routine": "UseBank_FindIdInBanque",
+     "address": "0x48b390",
+     "caller_return": "0x48a103",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x521fe4"
+     }
+    },
+    {
+     "routine": "WaitSnd_SorryGiveBackOnePlace",
+     "address": "0x48afd0",
+     "caller_return": "0x48a404",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.119,
+   "case": "f9176-solid-impact-source0-camera0",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x508041",
+     "00"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDX": "0x1",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBX": "0x6",
+    "ECX": "0x0",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008008",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x12"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "a4ccdc43e015c2fa66960116034d1342fa385cb0a8eb5126af9423bb7f8ab572"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "8a2fba7e51ae3b52a0c758a78d046fcfca17026cca00f5ae2fba49fce4d8e788"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x4797d000",
+      "hex": "0f0101"
+     },
+     {
+      "address": "0x4797d00c",
+      "hex": "a0016001000000000d0b0d0b00"
+     },
+     {
+      "address": "0x497164",
+      "hex": "8ef81f03"
+     },
+     {
+      "address": "0x49a0ce",
+      "hex": "02"
+     },
+     {
+      "address": "0x508044",
+      "hex": "01"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x2"
+    ],
+    [
+     "0x470512",
+     "0x497164",
+     4,
+     "0x31ff88e"
+    ],
+    [
+     "0x46e22a",
+     "0x4797d000",
+     1,
+     "0xf"
+    ],
+    [
+     "0x46e22c",
+     "0x4797d014",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e234",
+     "0x4797d016",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e23a",
+     "0x4797d023",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e25e",
+     "0x4797d00c",
+     2,
+     "0x1a0"
+    ],
+    [
+     "0x46e269",
+     "0x4797d001",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e26d",
+     "0x4797d024",
+     4,
+     "0x0"
+    ],
+    [
+     "0x46e274",
+     "0x4797d028",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e27a",
+     "0x4797d002",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e27e",
+     "0x4797d018",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e282",
+     "0x4797d003",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e290",
+     "0x4797d01a",
+     2,
+     "0xc"
+    ],
+    [
+     "0x46e298",
+     "0x4797d00e",
+     2,
+     "0x160"
+    ],
+    [
+     "0x46e2a0",
+     "0x4797d010",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2a8",
+     "0x4797d012",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2b0",
+     "0x4797d01f",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2b7",
+     "0x4797d020",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2bf",
+     "0x4797d022",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2c5",
+     "0x4797d019",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2cb",
+     "0x4797d01c",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46d620",
+     "0x508044",
+     4,
+     "0x1"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x0",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x0",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "address": "0x428cc0",
+     "caller_return": "0x450908",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "iagVilleSendMessage",
+     "address": "0x484808",
+     "caller_return": "0x450920",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x484823",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerGetType",
+     "address": "0x46d817",
+     "caller_return": "0x48483e",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "Random",
+     "address": "0x4704dc",
+     "caller_return": "0x4509d1",
+     "registers": {
+      "EAX": "0x21",
+      "EBX": "0x258",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "ProjectileInit",
+     "address": "0x46e44c",
+     "caller_return": "0x450a05",
+     "registers": {
+      "EAX": "0xf",
+      "EBX": "0xb0d",
+      "ECX": "0x0",
+      "EDX": "0xb0d"
+     }
+    },
+    {
+     "routine": "ProjectileSet",
+     "address": "0x46e208",
+     "caller_return": "0x46e4c2",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xb0d",
+      "ECX": "0xb0d",
+      "EDX": "0xf"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a18",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerEstAllie",
+     "address": "0x46d838",
+     "caller_return": "0x450a21",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a31",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a42",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a49",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a5a",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a63",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a6c",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a73",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a7f",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a8b",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerAAttaqueSet",
+     "address": "0x46d600",
+     "caller_return": "0x450a98",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1177,
+   "case": "f9176-solid-impact-source0-camera1",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x1",
+    "ECX": "0x0",
+    "EDX": "0x1",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x1",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDX": "0x3",
+    "ESI": "0x49a0c8",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fa4",
+    "EIP": "0x41a1ac",
+    "EFLAGS": "0x46"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": false,
+   "stop": "VoixOffAsk",
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "e52f04d848a34bae235ed5dbca068c67fb30a1460084665246cf42685d8e7066"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "fdecaeeeb4029e9832b3e69568c667e7e2f06412e6a4595f7d456fd4a3f7e5ff"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "02"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    1,
+    2,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x2"
+    ],
+    [
+     "0x48af10",
+     "0x498f68",
+     4,
+     "0x14"
+    ],
+    [
+     "0x48a103",
+     "0x521704",
+     4,
+     "0x0"
+    ],
+    [
+     "0x48afe0",
+     "0x498f68",
+     4,
+     "0x13"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x1",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x1",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "address": "0x428cc0",
+     "caller_return": "0x450908",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "iagVilleSendMessage",
+     "address": "0x484808",
+     "caller_return": "0x450920",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x1",
+      "ECX": "0x2",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x484823",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "PlayerGetType",
+     "address": "0x46d817",
+     "caller_return": "0x48483e",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "BatimentGetVolume",
+     "address": "0x41a0ab",
+     "caller_return": "0x41a30d",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x2",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x41a141",
+     "registers": {
+      "EAX": "0xc",
+      "EBX": "0xc",
+      "ECX": "0xb",
+      "EDX": "0x8"
+     }
+    },
+    {
+     "routine": "PlaySnd_PostSound",
+     "address": "0x48aa79",
+     "caller_return": "0x41a336",
+     "registers": {
+      "EAX": "0x42",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0x20100"
+     }
+    },
+    {
+     "routine": "HandlSnd_Insert",
+     "address": "0x48a218",
+     "caller_return": "0x48aaa3",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0x521fe4"
+     }
+    },
+    {
+     "routine": "WaitSnd_GetFirstFreePlace",
+     "address": "0x48aef8",
+     "caller_return": "0x48a3c9",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0xffffffff"
+     }
+    },
+    {
+     "routine": "HndSound_LoadDataInfo",
+     "address": "0x48a0f4",
+     "caller_return": "0x48a3fb",
+     "registers": {
+      "EAX": "0x5216ec",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x20100"
+     }
+    },
+    {
+     "routine": "UseBank_FindIdInBanque",
+     "address": "0x48b390",
+     "caller_return": "0x48a103",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x521fe4"
+     }
+    },
+    {
+     "routine": "WaitSnd_SorryGiveBackOnePlace",
+     "address": "0x48afd0",
+     "caller_return": "0x48a404",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.116,
+   "case": "f9176-solid-impact-source1-camera0",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x508041",
+     "00"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x1",
+    "ECX": "0x0",
+    "EDX": "0x1",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBX": "0x6",
+    "ECX": "0x0",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008008",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x12"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "a4ccdc43e015c2fa66960116034d1342fa385cb0a8eb5126af9423bb7f8ab572"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "8a2fba7e51ae3b52a0c758a78d046fcfca17026cca00f5ae2fba49fce4d8e788"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x4797d000",
+      "hex": "0f0101"
+     },
+     {
+      "address": "0x4797d00c",
+      "hex": "a0016001000000000d0b0d0b00"
+     },
+     {
+      "address": "0x497164",
+      "hex": "8ef81f03"
+     },
+     {
+      "address": "0x49a0ce",
+      "hex": "02"
+     },
+     {
+      "address": "0x508044",
+      "hex": "01"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x2"
+    ],
+    [
+     "0x470512",
+     "0x497164",
+     4,
+     "0x31ff88e"
+    ],
+    [
+     "0x46e22a",
+     "0x4797d000",
+     1,
+     "0xf"
+    ],
+    [
+     "0x46e22c",
+     "0x4797d014",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e234",
+     "0x4797d016",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e23a",
+     "0x4797d023",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e25e",
+     "0x4797d00c",
+     2,
+     "0x1a0"
+    ],
+    [
+     "0x46e269",
+     "0x4797d001",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e26d",
+     "0x4797d024",
+     4,
+     "0x0"
+    ],
+    [
+     "0x46e274",
+     "0x4797d028",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e27a",
+     "0x4797d002",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e27e",
+     "0x4797d018",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e282",
+     "0x4797d003",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e290",
+     "0x4797d01a",
+     2,
+     "0xc"
+    ],
+    [
+     "0x46e298",
+     "0x4797d00e",
+     2,
+     "0x160"
+    ],
+    [
+     "0x46e2a0",
+     "0x4797d010",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2a8",
+     "0x4797d012",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2b0",
+     "0x4797d01f",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2b7",
+     "0x4797d020",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2bf",
+     "0x4797d022",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2c5",
+     "0x4797d019",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2cb",
+     "0x4797d01c",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46d620",
+     "0x508044",
+     4,
+     "0x1"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x1",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x1",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "address": "0x428cc0",
+     "caller_return": "0x450908",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "iagVilleSendMessage",
+     "address": "0x484808",
+     "caller_return": "0x450920",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x1",
+      "ECX": "0x2",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x484823",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "PlayerGetType",
+     "address": "0x46d817",
+     "caller_return": "0x48483e",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "Random",
+     "address": "0x4704dc",
+     "caller_return": "0x4509d1",
+     "registers": {
+      "EAX": "0x21",
+      "EBX": "0x258",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "ProjectileInit",
+     "address": "0x46e44c",
+     "caller_return": "0x450a05",
+     "registers": {
+      "EAX": "0xf",
+      "EBX": "0xb0d",
+      "ECX": "0x0",
+      "EDX": "0xb0d"
+     }
+    },
+    {
+     "routine": "ProjectileSet",
+     "address": "0x46e208",
+     "caller_return": "0x46e4c2",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xb0d",
+      "ECX": "0xb0d",
+      "EDX": "0xf"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a18",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerEstAllie",
+     "address": "0x46d838",
+     "caller_return": "0x450a21",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a31",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a42",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a49",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a5a",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a63",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a6c",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a73",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a7f",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a8b",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerAAttaqueSet",
+     "address": "0x46d600",
+     "caller_return": "0x450a98",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1138,
+   "case": "f9176-solid-impact-source1-camera1",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x2",
+    "ECX": "0x0",
+    "EDX": "0x1",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x1",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDX": "0x3",
+    "ESI": "0x49a0c8",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fa4",
+    "EIP": "0x41a1ac",
+    "EFLAGS": "0x46"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": false,
+   "stop": "VoixOffAsk",
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "e52f04d848a34bae235ed5dbca068c67fb30a1460084665246cf42685d8e7066"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "fdecaeeeb4029e9832b3e69568c667e7e2f06412e6a4595f7d456fd4a3f7e5ff"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "02"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    2,
+    2,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x2"
+    ],
+    [
+     "0x48af10",
+     "0x498f68",
+     4,
+     "0x14"
+    ],
+    [
+     "0x48a103",
+     "0x521704",
+     4,
+     "0x0"
+    ],
+    [
+     "0x48afe0",
+     "0x498f68",
+     4,
+     "0x13"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x2",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x2",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "address": "0x428cc0",
+     "caller_return": "0x450908",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "iagVilleSendMessage",
+     "address": "0x484808",
+     "caller_return": "0x450920",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x2",
+      "ECX": "0x2",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x484823",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "PlayerGetType",
+     "address": "0x46d817",
+     "caller_return": "0x48483e",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "BatimentGetVolume",
+     "address": "0x41a0ab",
+     "caller_return": "0x41a30d",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x2",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x41a141",
+     "registers": {
+      "EAX": "0xc",
+      "EBX": "0xc",
+      "ECX": "0xb",
+      "EDX": "0x8"
+     }
+    },
+    {
+     "routine": "PlaySnd_PostSound",
+     "address": "0x48aa79",
+     "caller_return": "0x41a336",
+     "registers": {
+      "EAX": "0x42",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0x20100"
+     }
+    },
+    {
+     "routine": "HandlSnd_Insert",
+     "address": "0x48a218",
+     "caller_return": "0x48aaa3",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0x521fe4"
+     }
+    },
+    {
+     "routine": "WaitSnd_GetFirstFreePlace",
+     "address": "0x48aef8",
+     "caller_return": "0x48a3c9",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0xffffffff"
+     }
+    },
+    {
+     "routine": "HndSound_LoadDataInfo",
+     "address": "0x48a0f4",
+     "caller_return": "0x48a3fb",
+     "registers": {
+      "EAX": "0x5216ec",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x20100"
+     }
+    },
+    {
+     "routine": "UseBank_FindIdInBanque",
+     "address": "0x48b390",
+     "caller_return": "0x48a103",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x521fe4"
+     }
+    },
+    {
+     "routine": "WaitSnd_SorryGiveBackOnePlace",
+     "address": "0x48afd0",
+     "caller_return": "0x48a404",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1138,
+   "case": "f9176-solid-impact-source2-camera0",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x508041",
+     "00"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x2",
+    "ECX": "0x0",
+    "EDX": "0x1",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBX": "0x6",
+    "ECX": "0x0",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008008",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x12"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "a4ccdc43e015c2fa66960116034d1342fa385cb0a8eb5126af9423bb7f8ab572"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "8a2fba7e51ae3b52a0c758a78d046fcfca17026cca00f5ae2fba49fce4d8e788"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x4797d000",
+      "hex": "0f0101"
+     },
+     {
+      "address": "0x4797d00c",
+      "hex": "a0016001000000000d0b0d0b00"
+     },
+     {
+      "address": "0x497164",
+      "hex": "8ef81f03"
+     },
+     {
+      "address": "0x49a0ce",
+      "hex": "02"
+     },
+     {
+      "address": "0x508044",
+      "hex": "01"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x2"
+    ],
+    [
+     "0x470512",
+     "0x497164",
+     4,
+     "0x31ff88e"
+    ],
+    [
+     "0x46e22a",
+     "0x4797d000",
+     1,
+     "0xf"
+    ],
+    [
+     "0x46e22c",
+     "0x4797d014",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e234",
+     "0x4797d016",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e23a",
+     "0x4797d023",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e25e",
+     "0x4797d00c",
+     2,
+     "0x1a0"
+    ],
+    [
+     "0x46e269",
+     "0x4797d001",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e26d",
+     "0x4797d024",
+     4,
+     "0x0"
+    ],
+    [
+     "0x46e274",
+     "0x4797d028",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e27a",
+     "0x4797d002",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e27e",
+     "0x4797d018",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e282",
+     "0x4797d003",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e290",
+     "0x4797d01a",
+     2,
+     "0xc"
+    ],
+    [
+     "0x46e298",
+     "0x4797d00e",
+     2,
+     "0x160"
+    ],
+    [
+     "0x46e2a0",
+     "0x4797d010",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2a8",
+     "0x4797d012",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2b0",
+     "0x4797d01f",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2b7",
+     "0x4797d020",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2bf",
+     "0x4797d022",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2c5",
+     "0x4797d019",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2cb",
+     "0x4797d01c",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46d620",
+     "0x508044",
+     4,
+     "0x1"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x2",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x2",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "address": "0x428cc0",
+     "caller_return": "0x450908",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "iagVilleSendMessage",
+     "address": "0x484808",
+     "caller_return": "0x450920",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x2",
+      "ECX": "0x2",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x484823",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "PlayerGetType",
+     "address": "0x46d817",
+     "caller_return": "0x48483e",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "Random",
+     "address": "0x4704dc",
+     "caller_return": "0x4509d1",
+     "registers": {
+      "EAX": "0x21",
+      "EBX": "0x258",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "ProjectileInit",
+     "address": "0x46e44c",
+     "caller_return": "0x450a05",
+     "registers": {
+      "EAX": "0xf",
+      "EBX": "0xb0d",
+      "ECX": "0x0",
+      "EDX": "0xb0d"
+     }
+    },
+    {
+     "routine": "ProjectileSet",
+     "address": "0x46e208",
+     "caller_return": "0x46e4c2",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xb0d",
+      "ECX": "0xb0d",
+      "EDX": "0xf"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a18",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerEstAllie",
+     "address": "0x46d838",
+     "caller_return": "0x450a21",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a31",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a42",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a49",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a5a",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a63",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a6c",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a73",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a7f",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a8b",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerAAttaqueSet",
+     "address": "0x46d600",
+     "caller_return": "0x450a98",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1141,
+   "case": "f9176-solid-impact-source2-camera1",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x10",
+    "ECX": "0x0",
+    "EDX": "0x1",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x1",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDX": "0x3",
+    "ESI": "0x49a0c8",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fa4",
+    "EIP": "0x41a1ac",
+    "EFLAGS": "0x46"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": false,
+   "stop": "VoixOffAsk",
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "e52f04d848a34bae235ed5dbca068c67fb30a1460084665246cf42685d8e7066"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "fdecaeeeb4029e9832b3e69568c667e7e2f06412e6a4595f7d456fd4a3f7e5ff"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "02"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    16,
+    2,
+    4
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x2"
+    ],
+    [
+     "0x48af10",
+     "0x498f68",
+     4,
+     "0x14"
+    ],
+    [
+     "0x48a103",
+     "0x521704",
+     4,
+     "0x0"
+    ],
+    [
+     "0x48afe0",
+     "0x498f68",
+     4,
+     "0x13"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x10",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x10",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "address": "0x428cc0",
+     "caller_return": "0x450908",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "iagVilleSendMessage",
+     "address": "0x484808",
+     "caller_return": "0x450920",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x10",
+      "ECX": "0x2",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x484823",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x10"
+     }
+    },
+    {
+     "routine": "PlayerGetType",
+     "address": "0x46d817",
+     "caller_return": "0x48483e",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x10"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "BatimentGetVolume",
+     "address": "0x41a0ab",
+     "caller_return": "0x41a30d",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x2",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x41a141",
+     "registers": {
+      "EAX": "0xc",
+      "EBX": "0xc",
+      "ECX": "0xb",
+      "EDX": "0x8"
+     }
+    },
+    {
+     "routine": "PlaySnd_PostSound",
+     "address": "0x48aa79",
+     "caller_return": "0x41a336",
+     "registers": {
+      "EAX": "0x42",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0x20100"
+     }
+    },
+    {
+     "routine": "HandlSnd_Insert",
+     "address": "0x48a218",
+     "caller_return": "0x48aaa3",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0x521fe4"
+     }
+    },
+    {
+     "routine": "WaitSnd_GetFirstFreePlace",
+     "address": "0x48aef8",
+     "caller_return": "0x48a3c9",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x49a1c8",
+      "ECX": "0x0",
+      "EDX": "0xffffffff"
+     }
+    },
+    {
+     "routine": "HndSound_LoadDataInfo",
+     "address": "0x48a0f4",
+     "caller_return": "0x48a3fb",
+     "registers": {
+      "EAX": "0x5216ec",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x20100"
+     }
+    },
+    {
+     "routine": "UseBank_FindIdInBanque",
+     "address": "0x48b390",
+     "caller_return": "0x48a103",
+     "registers": {
+      "EAX": "0x20100",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x521fe4"
+     }
+    },
+    {
+     "routine": "WaitSnd_SorryGiveBackOnePlace",
+     "address": "0x48afd0",
+     "caller_return": "0x48a404",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x521fe4",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.114,
+   "case": "f9176-solid-impact-source16-camera0",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x508041",
+     "00"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x10",
+    "ECX": "0x0",
+    "EDX": "0x1",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x4",
+    "EBX": "0x6",
+    "ECX": "0x0",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008008",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x12"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "a4ccdc43e015c2fa66960116034d1342fa385cb0a8eb5126af9423bb7f8ab572"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "3c502d2dba5b32c394b2d81ca7e4b1511fdae6c03acc788edd6eafb4ffce389e"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x47931056",
+      "hex": "a6"
+     },
+     {
+      "address": "0x4797d000",
+      "hex": "0f0101"
+     },
+     {
+      "address": "0x4797d00c",
+      "hex": "a0016001000000000d0b0d0b00"
+     },
+     {
+      "address": "0x497164",
+      "hex": "8ef81f03"
+     },
+     {
+      "address": "0x49a0ce",
+      "hex": "02"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x2"
+    ],
+    [
+     "0x470512",
+     "0x497164",
+     4,
+     "0x31ff88e"
+    ],
+    [
+     "0x46e22a",
+     "0x4797d000",
+     1,
+     "0xf"
+    ],
+    [
+     "0x46e22c",
+     "0x4797d014",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e234",
+     "0x4797d016",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e23a",
+     "0x4797d023",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e25e",
+     "0x4797d00c",
+     2,
+     "0x1a0"
+    ],
+    [
+     "0x46e269",
+     "0x4797d001",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e26d",
+     "0x4797d024",
+     4,
+     "0x0"
+    ],
+    [
+     "0x46e274",
+     "0x4797d028",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e27a",
+     "0x4797d002",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e27e",
+     "0x4797d018",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e282",
+     "0x4797d003",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e290",
+     "0x4797d01a",
+     2,
+     "0xc"
+    ],
+    [
+     "0x46e298",
+     "0x4797d00e",
+     2,
+     "0x160"
+    ],
+    [
+     "0x46e2a0",
+     "0x4797d010",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2a8",
+     "0x4797d012",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2b0",
+     "0x4797d01f",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2b7",
+     "0x4797d020",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2bf",
+     "0x4797d022",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2c5",
+     "0x4797d019",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2cb",
+     "0x4797d01c",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46d900",
+     "0x47931056",
+     1,
+     "0xa6"
+    ],
+    [
+     "0x46d900",
+     "0x47931006",
+     1,
+     "0x1"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x10",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x10",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "address": "0x428cc0",
+     "caller_return": "0x450908",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "iagVilleSendMessage",
+     "address": "0x484808",
+     "caller_return": "0x450920",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x10",
+      "ECX": "0x2",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x484823",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x10"
+     }
+    },
+    {
+     "routine": "PlayerGetType",
+     "address": "0x46d817",
+     "caller_return": "0x48483e",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x0",
+      "ECX": "0x2",
+      "EDX": "0x10"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x2",
+      "EDX": "0x2"
+     }
+    },
+    {
+     "routine": "Random",
+     "address": "0x4704dc",
+     "caller_return": "0x4509d1",
+     "registers": {
+      "EAX": "0x21",
+      "EBX": "0x258",
+      "ECX": "0x2",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "ProjectileInit",
+     "address": "0x46e44c",
+     "caller_return": "0x450a05",
+     "registers": {
+      "EAX": "0xf",
+      "EBX": "0xb0d",
+      "ECX": "0x0",
+      "EDX": "0xb0d"
+     }
+    },
+    {
+     "routine": "ProjectileSet",
+     "address": "0x46e208",
+     "caller_return": "0x46e4c2",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xb0d",
+      "ECX": "0xb0d",
+      "EDX": "0xf"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a18",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerEstAllie",
+     "address": "0x46d838",
+     "caller_return": "0x450a21",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a31",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a42",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a49",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a5a",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a63",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a6c",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a73",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0xa600"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a7f",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a8b",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerAAttaqueSet",
+     "address": "0x46d600",
+     "caller_return": "0x450a98",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1177,
+   "case": "f9176-solid-impact-source16-camera1",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x10",
+    "ECX": "0x1d",
+    "EDX": "0x4",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x4",
+    "EBX": "0x6",
+    "ECX": "0x0",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008008",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x12"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "a4ccdc43e015c2fa66960116034d1342fa385cb0a8eb5126af9423bb7f8ab572"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "1aa5a4c9cfda01b708d45a3fc7d6ae653da8f348f5407a12bd4939296b85e8d3"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x47931056",
+      "hex": "a6"
+     },
+     {
+      "address": "0x4797d000",
+      "hex": "0f0101"
+     },
+     {
+      "address": "0x4797d00c",
+      "hex": "a0016001000000000d0b0d0b00"
+     },
+     {
+      "address": "0x497164",
+      "hex": "8ef81f03"
+     },
+     {
+      "address": "0x49a0ce",
+      "hex": "14"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x14"
+    ],
+    [
+     "0x470512",
+     "0x497164",
+     4,
+     "0x31ff88e"
+    ],
+    [
+     "0x46e22a",
+     "0x4797d000",
+     1,
+     "0xf"
+    ],
+    [
+     "0x46e22c",
+     "0x4797d014",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e234",
+     "0x4797d016",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e23a",
+     "0x4797d023",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e25e",
+     "0x4797d00c",
+     2,
+     "0x1a0"
+    ],
+    [
+     "0x46e269",
+     "0x4797d001",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e26d",
+     "0x4797d024",
+     4,
+     "0x0"
+    ],
+    [
+     "0x46e274",
+     "0x4797d028",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e27a",
+     "0x4797d002",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e27e",
+     "0x4797d018",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e282",
+     "0x4797d003",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e290",
+     "0x4797d01a",
+     2,
+     "0xc"
+    ],
+    [
+     "0x46e298",
+     "0x4797d00e",
+     2,
+     "0x160"
+    ],
+    [
+     "0x46e2a0",
+     "0x4797d010",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2a8",
+     "0x4797d012",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2b0",
+     "0x4797d01f",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2b7",
+     "0x4797d020",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2bf",
+     "0x4797d022",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2c5",
+     "0x4797d019",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2cb",
+     "0x4797d01c",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46d900",
+     "0x47931056",
+     1,
+     "0xa6"
+    ],
+    [
+     "0x46d900",
+     "0x47931006",
+     1,
+     "0x1"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x10",
+      "ECX": "0x1d",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x10",
+      "ECX": "0x1d",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x14",
+      "EDX": "0x14"
+     }
+    },
+    {
+     "routine": "Random",
+     "address": "0x4704dc",
+     "caller_return": "0x4509d1",
+     "registers": {
+      "EAX": "0x21",
+      "EBX": "0x258",
+      "ECX": "0x14",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "ProjectileInit",
+     "address": "0x46e44c",
+     "caller_return": "0x450a05",
+     "registers": {
+      "EAX": "0xf",
+      "EBX": "0xb0d",
+      "ECX": "0x0",
+      "EDX": "0xb0d"
+     }
+    },
+    {
+     "routine": "ProjectileSet",
+     "address": "0x46e208",
+     "caller_return": "0x46e4c2",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xb0d",
+      "ECX": "0xb0d",
+      "EDX": "0xf"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a18",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerEstAllie",
+     "address": "0x46d838",
+     "caller_return": "0x450a21",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a31",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a42",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a49",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a5a",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a63",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a6c",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a73",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0xa600"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a7f",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a8b",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerAAttaqueSet",
+     "address": "0x46d600",
+     "caller_return": "0x450a98",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1132,
+   "case": "f9176-solid-impact-mode4-dir29",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "InfligeDegat",
+   "entry_registers": {
+    "EAX": "0xb0d",
+    "EBX": "0x10",
+    "ECX": "0x1e",
+    "EDX": "0x4",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x450874"
+   },
+   "exit_registers": {
+    "EAX": "0x4",
+    "EBX": "0x6",
+    "ECX": "0x0",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008008",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x12"
+   },
+   "stack_words": [
+    0
+   ],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "a4ccdc43e015c2fa66960116034d1342fa385cb0a8eb5126af9423bb7f8ab572"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "c08036de1743e5296a1486494dc735860c3b41ea7d44aa9986153ba5e8529b1b"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x47931056",
+      "hex": "a6"
+     },
+     {
+      "address": "0x4797d000",
+      "hex": "0f0101"
+     },
+     {
+      "address": "0x4797d00c",
+      "hex": "a0016001000000000d0b0d0b00"
+     },
+     {
+      "address": "0x497164",
+      "hex": "8ef81f03"
+     },
+     {
+      "address": "0x49a0ce",
+      "hex": "1e"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x1e"
+    ],
+    [
+     "0x470512",
+     "0x497164",
+     4,
+     "0x31ff88e"
+    ],
+    [
+     "0x46e22a",
+     "0x4797d000",
+     1,
+     "0xf"
+    ],
+    [
+     "0x46e22c",
+     "0x4797d014",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e234",
+     "0x4797d016",
+     2,
+     "0xb0d"
+    ],
+    [
+     "0x46e23a",
+     "0x4797d023",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e25e",
+     "0x4797d00c",
+     2,
+     "0x1a0"
+    ],
+    [
+     "0x46e269",
+     "0x4797d001",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e26d",
+     "0x4797d024",
+     4,
+     "0x0"
+    ],
+    [
+     "0x46e274",
+     "0x4797d028",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e27a",
+     "0x4797d002",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e27e",
+     "0x4797d018",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e282",
+     "0x4797d003",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e290",
+     "0x4797d01a",
+     2,
+     "0xc"
+    ],
+    [
+     "0x46e298",
+     "0x4797d00e",
+     2,
+     "0x160"
+    ],
+    [
+     "0x46e2a0",
+     "0x4797d010",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2a8",
+     "0x4797d012",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2b0",
+     "0x4797d01f",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2b7",
+     "0x4797d020",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2bf",
+     "0x4797d022",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2c5",
+     "0x4797d019",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2cb",
+     "0x4797d01c",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46d900",
+     "0x47931056",
+     1,
+     "0xa6"
+    ],
+    [
+     "0x46d900",
+     "0x47931006",
+     1,
+     "0x1"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "InfligeDegat",
+     "address": "0x450874",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x10",
+      "ECX": "0x1e",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "ChercheIndiceBatiment",
+     "address": "0x41b54a",
+     "caller_return": "0x450897",
+     "registers": {
+      "EAX": "0xb0d",
+      "EBX": "0x10",
+      "ECX": "0x1e",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x4509c7",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x1e",
+      "EDX": "0x1e"
+     }
+    },
+    {
+     "routine": "Random",
+     "address": "0x4704dc",
+     "caller_return": "0x4509d1",
+     "registers": {
+      "EAX": "0x21",
+      "EBX": "0x258",
+      "ECX": "0x1e",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "ProjectileInit",
+     "address": "0x46e44c",
+     "caller_return": "0x450a05",
+     "registers": {
+      "EAX": "0xf",
+      "EBX": "0xb0d",
+      "ECX": "0x0",
+      "EDX": "0xb0d"
+     }
+    },
+    {
+     "routine": "ProjectileSet",
+     "address": "0x46e208",
+     "caller_return": "0x46e4c2",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xb0d",
+      "ECX": "0xb0d",
+      "EDX": "0xf"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a18",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerEstAllie",
+     "address": "0x46d838",
+     "caller_return": "0x450a21",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a31",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4797d000",
+      "ECX": "0x0",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a42",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a49",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0xa",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "MAJSympathie",
+     "address": "0x475118",
+     "caller_return": "0x450a5a",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a63",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a6c",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a73",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0xa600"
+     }
+    },
+    {
+     "routine": "PlayerResetAllie",
+     "address": "0x46d8cb",
+     "caller_return": "0x450a7f",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x4"
+     }
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "address": "0x41a08c",
+     "caller_return": "0x450a8b",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "PlayerAAttaqueSet",
+     "address": "0x46d600",
+     "caller_return": "0x450a98",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x6",
+      "ECX": "0x0",
+      "EDX": "0x0"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1149,
+   "case": "f9176-solid-impact-mode4-dir30",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "BatimentInfligeDegat",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x31415926",
+    "EDX": "0x257",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x41a2c1"
+   },
+   "exit_registers": {
+    "EAX": "0xc8",
+    "EBX": "0x258",
+    "ECX": "0x31415926",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008004",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x6"
+   },
+   "stack_words": [],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "a4ccdc43e015c2fa66960116034d1342fa385cb0a8eb5126af9423bb7f8ab572"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "a38913cb5af78881f7c9273fd4d71e0f174c7040f53ef159194b8023ff0c3737"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "5702"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x257"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x31415926",
+      "EDX": "0x257"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1162,
+   "case": "f9176-solid-threshold-599",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "BatimentInfligeDegat",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x31415926",
+    "EDX": "0x258",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x41a2c1"
+   },
+   "exit_registers": {
+    "EAX": "0xc8",
+    "EBX": "0x258",
+    "ECX": "0x31415926",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008004",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x6"
+   },
+   "stack_words": [],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "a4ccdc43e015c2fa66960116034d1342fa385cb0a8eb5126af9423bb7f8ab572"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "48d48476a75d48fb883c3993ea10ee1b6a4333f8f48b2db1aa3cc750a3af4bc0"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "5802"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x258"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x31415926",
+      "EDX": "0x258"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1143,
+   "case": "f9176-solid-threshold-600",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "BatimentInfligeDegat",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x31415926",
+    "EDX": "0x259",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x41a2c1"
+   },
+   "exit_registers": {
+    "EAX": "0xc8",
+    "EBX": "0x258",
+    "ECX": "0x31415926",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008004",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x6"
+   },
+   "stack_words": [],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "a4ccdc43e015c2fa66960116034d1342fa385cb0a8eb5126af9423bb7f8ab572"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "4e0f54d63315764fbf0b095b1f1c9dc86348660f092e77ff2e2358d64e115ac7"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "5902"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x259"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x31415926",
+      "EDX": "0x259"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1161,
+   "case": "f9176-solid-threshold-601",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "BatimentInfligeDegat",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x31415926",
+    "EDX": "0x257",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x41a2c1"
+   },
+   "exit_registers": {
+    "EAX": "0xc8",
+    "EBX": "0x258",
+    "ECX": "0x31415926",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008004",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x6"
+   },
+   "stack_words": [],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "a4ccdc43e015c2fa66960116034d1342fa385cb0a8eb5126af9423bb7f8ab572"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "a38913cb5af78881f7c9273fd4d71e0f174c7040f53ef159194b8023ff0c3737"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "5702"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x257"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x31415926",
+      "EDX": "0x257"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1122,
+   "case": "f9176-solid-threshold-599",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "BatimentInfligeDegat",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x31415926",
+    "EDX": "0x258",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x41a2c1"
+   },
+   "exit_registers": {
+    "EAX": "0xc8",
+    "EBX": "0x258",
+    "ECX": "0x31415926",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008004",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x6"
+   },
+   "stack_words": [],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "a4ccdc43e015c2fa66960116034d1342fa385cb0a8eb5126af9423bb7f8ab572"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "48d48476a75d48fb883c3993ea10ee1b6a4333f8f48b2db1aa3cc750a3af4bc0"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "5802"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x258"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x31415926",
+      "EDX": "0x258"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.112,
+   "case": "f9176-solid-threshold-600",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "BatimentInfligeDegat",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x31415926",
+    "EDX": "0x259",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x41a2c1"
+   },
+   "exit_registers": {
+    "EAX": "0xc8",
+    "EBX": "0x258",
+    "ECX": "0x31415926",
+    "EDX": "0x0",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008004",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x6"
+   },
+   "stack_words": [],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "a4ccdc43e015c2fa66960116034d1342fa385cb0a8eb5126af9423bb7f8ab572"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "4e0f54d63315764fbf0b095b1f1c9dc86348660f092e77ff2e2358d64e115ac7"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x49a0ce",
+      "hex": "5902"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x41a2fa",
+     "0x49a0ce",
+     2,
+     "0x259"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "BatimentInfligeDegat",
+     "address": "0x41a2c1",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x4",
+      "ECX": "0x31415926",
+      "EDX": "0x259"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1105,
+   "case": "f9176-solid-threshold-601",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x508041",
+     "01"
+    ]
+   ]
+  },
+  {
+   "routine": "ProjectileInit",
+   "entry_registers": {
+    "EAX": "0x1e",
+    "EBX": "0x3333",
+    "ECX": "0x4",
+    "EDX": "0x3333",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x46e44c"
+   },
+   "exit_registers": {
+    "EAX": "0x10",
+    "EBX": "0x4797d000",
+    "ECX": "0x3333",
+    "EDX": "0x1d",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008018",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x2"
+   },
+   "stack_words": [
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "e52f04d848a34bae235ed5dbca068c67fb30a1460084665246cf42685d8e7066"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "845cd6cf96d6d43bff4e15a4c73fb5fc59eeca427548811a1a2a6c72f4b1dd71"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x4797d000",
+      "hex": "1e010100a7a7a7a76006cc00600660060000000033333333000014000000a704"
+     },
+     {
+      "address": "0x4797d02a",
+      "hex": "012000201000000020001000"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x46e22a",
+     "0x4797d000",
+     1,
+     "0x1e"
+    ],
+    [
+     "0x46e22c",
+     "0x4797d014",
+     2,
+     "0x3333"
+    ],
+    [
+     "0x46e234",
+     "0x4797d016",
+     2,
+     "0x3333"
+    ],
+    [
+     "0x46e23a",
+     "0x4797d023",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e25e",
+     "0x4797d00c",
+     2,
+     "0x660"
+    ],
+    [
+     "0x46e269",
+     "0x4797d001",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e26d",
+     "0x4797d024",
+     4,
+     "0x0"
+    ],
+    [
+     "0x46e274",
+     "0x4797d028",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e27a",
+     "0x4797d002",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46e27e",
+     "0x4797d018",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e282",
+     "0x4797d003",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e290",
+     "0x4797d01a",
+     2,
+     "0xc"
+    ],
+    [
+     "0x46e298",
+     "0x4797d00e",
+     2,
+     "0x660"
+    ],
+    [
+     "0x46e2a0",
+     "0x4797d010",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2a8",
+     "0x4797d012",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2b0",
+     "0x4797d01f",
+     1,
+     "0x4"
+    ],
+    [
+     "0x46e2b7",
+     "0x4797d020",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e2bf",
+     "0x4797d022",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2c5",
+     "0x4797d019",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e2cb",
+     "0x4797d01c",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e3b4",
+     "0x4797d019",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46e107",
+     "0x4797d034",
+     2,
+     "0x10"
+    ],
+    [
+     "0x46e114",
+     "0x4797d02c",
+     2,
+     "0x2000"
+    ],
+    [
+     "0x46e11a",
+     "0x4797d032",
+     2,
+     "0x20"
+    ],
+    [
+     "0x46e124",
+     "0x4797d02a",
+     2,
+     "0x2001"
+    ],
+    [
+     "0x46e139",
+     "0x4797d030",
+     2,
+     "0x0"
+    ],
+    [
+     "0x46e142",
+     "0x4797d008",
+     4,
+     "0xcc0660"
+    ],
+    [
+     "0x46e148",
+     "0x4797d02e",
+     2,
+     "0x10"
+    ],
+    [
+     "0x46e382",
+     "0x4797d01a",
+     2,
+     "0x14"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "ProjectileInit",
+     "address": "0x46e44c",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x1e",
+      "EBX": "0x3333",
+      "ECX": "0x4",
+      "EDX": "0x3333"
+     }
+    },
+    {
+     "routine": "ProjectileSet",
+     "address": "0x46e208",
+     "caller_return": "0x46e4c2",
+     "registers": {
+      "EAX": "0x0",
+      "EBX": "0x3333",
+      "ECX": "0x3333",
+      "EDX": "0x1e"
+     }
+    },
+    {
+     "routine": "ProjectileLineaire",
+     "address": "0x46e049",
+     "caller_return": "0x46e3bd",
+     "registers": {
+      "EAX": "0x4797d000",
+      "EBX": "0x4797d000",
+      "ECX": "0x3333",
+      "EDX": "0x1d"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1274,
+   "case": "f9176-type30-init",
+   "checkpoint": 9176,
+   "declared_writes": []
+  },
+  {
+   "routine": "ProjectileAvance",
+   "entry_registers": {
+    "EAX": "0x4797d000",
+    "EBX": "0x2468ace0",
+    "ECX": "0x31415926",
+    "EDX": "0x27182818",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x46eaf8"
+   },
+   "exit_registers": {
+    "EAX": "0x2c33",
+    "EBX": "0x0",
+    "ECX": "0x1e",
+    "EDX": "0x4",
+    "ESI": "0x4797d000",
+    "EDI": "0x2c33",
+    "EBP": "0x0",
+    "ESP": "0x2007e1c",
+    "EIP": "0x450874",
+    "EFLAGS": "0x46"
+   },
+   "stack_words": [],
+   "reached_return": false,
+   "stop": "InfligeDegat checkpoint",
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "daba80fd2431f7036d4138b84f968c55bdc3eab0845d5729780cf281c248230c"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "7a9ab01313ba536b6974dcafb7db8975649755fe626444f9be0a6ce9e92a8d13"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x4797d003",
+      "hex": "01"
+     },
+     {
+      "address": "0x4dfb44",
+      "hex": "0f"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x46ef6b",
+     "0x4797d003",
+     1,
+     "0x1"
+    ],
+    [
+     "0x46f08c",
+     "0x4dfb44",
+     1,
+     "0xf"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "ProjectileAvance",
+     "address": "0x46eaf8",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x4797d000",
+      "EBX": "0x2468ace0",
+      "ECX": "0x31415926",
+      "EDX": "0x27182818"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x46f2dd",
+     "registers": {
+      "EAX": "0x33",
+      "EBX": "0x2c",
+      "ECX": "0x2c",
+      "EDX": "0x33"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x46f2dd",
+     "registers": {
+      "EAX": "0x33",
+      "EBX": "0x2d",
+      "ECX": "0x2c",
+      "EDX": "0x33"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x46f2dd",
+     "registers": {
+      "EAX": "0x33",
+      "EBX": "0x2e",
+      "ECX": "0x2c",
+      "EDX": "0x33"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x46f2dd",
+     "registers": {
+      "EAX": "0x33",
+      "EBX": "0x2f",
+      "ECX": "0x2c",
+      "EDX": "0x33"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x46f2dd",
+     "registers": {
+      "EAX": "0x33",
+      "EBX": "0x30",
+      "ECX": "0x2c",
+      "EDX": "0x33"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x46f2dd",
+     "registers": {
+      "EAX": "0x33",
+      "EBX": "0x31",
+      "ECX": "0x2c",
+      "EDX": "0x33"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x46f2dd",
+     "registers": {
+      "EAX": "0x33",
+      "EBX": "0x32",
+      "ECX": "0x2c",
+      "EDX": "0x33"
+     }
+    },
+    {
+     "routine": "Distance2d",
+     "address": "0x479555",
+     "caller_return": "0x46f2dd",
+     "registers": {
+      "EAX": "0x33",
+      "EBX": "0x33",
+      "ECX": "0x2c",
+      "EDX": "0x33"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1319,
+   "case": "f9176-type30-first-impact",
+   "checkpoint": 9176,
+   "declared_writes": [
+    [
+     "0x4797d018",
+     "0c"
+    ],
+    [
+     "0x4797d034",
+     "0000"
+    ]
+   ]
+  }
+ ],
+ "source_sha256": {
+  "capturar_batiment_raid.py": "2edc1e151d1d5d46f992dce8a3315377167a2e5f77aafc74ddf7a149bdd6bb02",
+  "bancada_combate_raid.py": "7bdb51398692579cec872ba8c179a246c3e6e18664bb3e50e2ba96df73775dee"
+ }
+}

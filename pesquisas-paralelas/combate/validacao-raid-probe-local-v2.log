@@ -1,0 +1,29 @@
+{"case": "f9000-order-0-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-attack-0-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-order-1-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-attack-1-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-order-2-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-attack-2-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-order-16-1-0", "result": "equal", "dependency": null}
+{"case": "f9000-attack-16-1-0", "result": "equal", "dependency": null}
+{"case": "f9000-order-16-3-0", "result": "equal", "dependency": null}
+{"case": "f9000-attack-16-3-0", "result": "equal", "dependency": null}
+{"case": "f9176-order-0-1-16", "result": "equal", "dependency": null}
+{"case": "f9176-attack-0-1-16", "result": "equal", "dependency": null}
+{"case": "f9176-order-1-1-16", "result": "equal", "dependency": null}
+{"case": "f9176-attack-1-1-16", "result": "equal", "dependency": null}
+{"case": "f9176-order-2-1-16", "result": "equal", "dependency": null}
+{"case": "f9176-attack-2-1-16", "result": "equal", "dependency": null}
+{"case": "f9176-order-16-1-0", "result": "equal", "dependency": null}
+{"case": "f9176-attack-16-1-0", "result": "equal", "dependency": null}
+{"case": "f9176-order-16-3-0", "result": "equal", "dependency": null}
+Traceback (most recent call last):
+  File "/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/validar_combate_raid.py", line 168, in <module>
+    raise SystemExit(main())
+  File "/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/validar_combate_raid.py", line 163, in main
+    r=compare(a.captura,a.emular,a.saida);print(json.dumps(r['summary']),flush=True)
+  File "/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/validar_combate_raid.py", line 145, in compare
+    report=dict(schema='rising-lands/combat-real-raid-differential/1',capture=str(capture.relative_to(ROOT)),
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 929, in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+ValueError: 'pesquisas-paralelas/combate/evidencias/probe-combate-raid-original-v1.json' is not in the subpath of '/Users/marcio/git/Rising Lands/worktrees/re-combat' OR one path is relative and the other is absolute.
