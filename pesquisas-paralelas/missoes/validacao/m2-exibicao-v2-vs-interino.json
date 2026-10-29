@@ -1,0 +1,509 @@
+{
+ "schema": "rising-lands/display-reference-backend-equivalence/1",
+ "source_revision": "73badbe04e63d4cdc7dc6801b1c4293654fc3c9d",
+ "cpu_free": true,
+ "inputs": {
+  "exibicao_interino_entrada": {
+   "path": "pesquisas-paralelas/missoes/evidencias/entrada-carga-missao-exibicao.json",
+   "sha256": "88c7c953753c4366e56f2fdc70acb766f253a49e880ed1092f1cc5c92b65dd7c"
+  },
+  "exibicao_interino_captura_m1": {
+   "path": "pesquisas-paralelas/missoes/evidencias/captura-carga-missao-exibicao.json",
+   "sha256": "6339736e9cc1b0c53628295a2a81d51e168e37ac14d6255eb7c30a99a784dcf6"
+  },
+  "exibicao_interino_captura_quadro": {
+   "path": "pesquisas-paralelas/missoes/evidencias/captura-quadro1-monde01-exibicao.json",
+   "sha256": "b7e55bb2e00672fa0941682eb797f6678bdf29ca5ed2e0dc25b3790665aaaad1"
+  },
+  "exibicao_entrada": {
+   "path": "pesquisas-paralelas/missoes/evidencias/entrada-carga-missao-exibicao-v2.json",
+   "sha256": "0bfbe98a7fbdb73e3c1f0c8510095e259a127bcfb842edf161ae072cde13c03a"
+  },
+  "exibicao_captura_m1": {
+   "path": "pesquisas-paralelas/missoes/evidencias/captura-carga-missao-exibicao-v2.json",
+   "sha256": "a71351ed3b74bf7f8327910f8d06459327c10e6a97dc4e272f9a95ee237bca7e"
+  },
+  "exibicao_captura_quadro": {
+   "path": "pesquisas-paralelas/missoes/evidencias/captura-quadro1-monde01-exibicao-v2.json",
+   "sha256": "d800be5aee2cda363b6fca08fd162e5f7a1a61e849c1384e29fefe9e031e1d1d"
+  }
+ },
+ "states": {
+  "entry": {
+   "blocks_only_interim": [],
+   "blocks_only_v2": [],
+   "differing": [
+    {
+     "block": "dgroup",
+     "address": "0x4e1788",
+     "interim": 0,
+     "v2": 16,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e1789",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e178c",
+     "interim": 64,
+     "v2": 32,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e178d",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e1790",
+     "interim": 128,
+     "v2": 48,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e1791",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e179c",
+     "interim": 192,
+     "v2": 64,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e179d",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x508f71",
+     "interim": 0,
+     "v2": 96,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x508f72",
+     "interim": 8,
+     "v2": 7,
+     "cls": "backend_address"
+    }
+   ],
+   "unexplained": []
+  },
+  "s0": {
+   "blocks_only_interim": [],
+   "blocks_only_v2": [],
+   "differing": [
+    {
+     "block": "dgroup",
+     "address": "0x4e1788",
+     "interim": 0,
+     "v2": 16,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e1789",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e178c",
+     "interim": 64,
+     "v2": 32,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e178d",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e1790",
+     "interim": 128,
+     "v2": 48,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e1791",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e179c",
+     "interim": 192,
+     "v2": 64,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e179d",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x508f71",
+     "interim": 0,
+     "v2": 96,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x508f72",
+     "interim": 8,
+     "v2": 7,
+     "cls": "backend_address"
+    }
+   ],
+   "unexplained": []
+  },
+  "load_tail": {
+   "blocks_only_interim": [],
+   "blocks_only_v2": [],
+   "differing": [
+    {
+     "block": "dgroup",
+     "address": "0x4e1788",
+     "interim": 0,
+     "v2": 16,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e1789",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e178c",
+     "interim": 64,
+     "v2": 32,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e178d",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e1790",
+     "interim": 128,
+     "v2": 48,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e1791",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e179c",
+     "interim": 192,
+     "v2": 64,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e179d",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x508f71",
+     "interim": 0,
+     "v2": 96,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x508f72",
+     "interim": 8,
+     "v2": 7,
+     "cls": "backend_address"
+    }
+   ],
+   "unexplained": []
+  },
+  "between_frames": {
+   "blocks_only_interim": [],
+   "blocks_only_v2": [],
+   "differing": [
+    {
+     "block": "dgroup",
+     "address": "0x4e1788",
+     "interim": 0,
+     "v2": 16,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e1789",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e178c",
+     "interim": 64,
+     "v2": 32,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e178d",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e1790",
+     "interim": 128,
+     "v2": 48,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e1791",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e179c",
+     "interim": 192,
+     "v2": 64,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e179d",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x508f71",
+     "interim": 0,
+     "v2": 96,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x508f72",
+     "interim": 8,
+     "v2": 7,
+     "cls": "backend_address"
+    }
+   ],
+   "unexplained": []
+  },
+  "frame1": {
+   "blocks_only_interim": [],
+   "blocks_only_v2": [],
+   "differing": [
+    {
+     "block": "dgroup",
+     "address": "0x4e1788",
+     "interim": 0,
+     "v2": 16,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e1789",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e178c",
+     "interim": 64,
+     "v2": 32,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e178d",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e1790",
+     "interim": 128,
+     "v2": 48,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e1791",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e179c",
+     "interim": 192,
+     "v2": 64,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x4e179d",
+     "interim": 128,
+     "v2": 65,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x508f71",
+     "interim": 0,
+     "v2": 96,
+     "cls": "backend_address"
+    },
+    {
+     "block": "dgroup",
+     "address": "0x508f72",
+     "interim": 8,
+     "v2": 7,
+     "cls": "backend_address"
+    }
+   ],
+   "unexplained": []
+  }
+ },
+ "allocation_records_equal": true,
+ "missionload_binding_log_equal": true,
+ "missionload_al": [
+  1,
+  1
+ ],
+ "startup_binding_counts_equal": true,
+ "entry_trace_equal": true,
+ "phases": {
+  "load_tail": {
+   "binding_names_equal": true,
+   "binding_counts": "equal",
+   "boundaries_equal": true,
+   "windows_answers_equal": true,
+   "directdraw_methods": [
+    [
+     "IDirectDrawSurface::IsLost",
+     "IDirectDrawSurface::Lock",
+     "IDirectDrawSurface::IsLost",
+     "IDirectDrawSurface::Unlock",
+     "IDirectDrawSurface::BltFast",
+     "IDirectDrawSurface::BltFast",
+     "IDirectDrawPalette::SetEntries",
+     "IDirectDrawSurface::IsLost",
+     "IDirectDrawSurface::Lock",
+     "IDirectDrawSurface::IsLost",
+     "IDirectDrawSurface::Unlock",
+     "IDirectDrawSurface::BltFast",
+     "IDirectDrawSurface::BltFast",
+     "IDirectDrawSurface::IsLost",
+     "IDirectDrawSurface::Lock",
+     "IDirectDrawSurface::IsLost",
+     "IDirectDrawSurface::Unlock",
+     "IDirectDrawSurface::BltFast",
+     "IDirectDrawSurface::BltFast"
+    ],
+    [
+     "Lock",
+     "Unlock",
+     "BltFast",
+     "BltFast",
+     "SetEntries",
+     "Lock",
+     "Unlock",
+     "BltFast",
+     "BltFast",
+     "Lock",
+     "Unlock",
+     "BltFast",
+     "BltFast"
+    ]
+   ]
+  },
+  "between_frames": {
+   "binding_names_equal": true,
+   "binding_counts": "equal",
+   "boundaries_equal": true,
+   "windows_answers_equal": true,
+   "directdraw_methods": [
+    [
+     "IDirectDrawSurface::IsLost",
+     "IDirectDrawSurface::Lock",
+     "IDirectDrawSurface::IsLost",
+     "IDirectDrawSurface::Unlock",
+     "IDirectDrawSurface::BltFast",
+     "IDirectDrawSurface::BltFast",
+     "IDirectDrawPalette::SetEntries"
+    ],
+    [
+     "Lock",
+     "Unlock",
+     "BltFast",
+     "BltFast",
+     "SetEntries"
+    ]
+   ]
+  },
+  "frame1": {
+   "binding_names_equal": true,
+   "binding_counts": "equal",
+   "boundaries_equal": true,
+   "windows_answers_equal": true,
+   "directdraw_methods": [
+    [],
+    []
+   ]
+  }
+ },
+ "method": "CPU-free, from committed captures only.  Compared: the MissionLoad entry snapshot, the MissionLoad final state, allocation records, the ordered MissionLoad binding log, startup binding counts, and for load_tail / between_frames / frame1 the state after the phase, the per-routine entry trace, the declared boundaries, the Windows answers and the binding names in order.  A differing state dword is classified ``backend_address`` only when both values lie inside the two backends' declared object/surface regions (0x3600000..0x3610000, 0x60000000..0x60400000): the program stored a pointer the backend chose.  Anything else is reported as unexplained.",
+ "byte_for_byte": false,
+ "equal_except_backend_addresses": true
+}
