@@ -26,6 +26,10 @@ This handover is for a fresh Claude coordinator session. Read it first, then `do
 4. Record the acceptance like M2.2: an `integracao/validacao/` record, PROGRESS with a dated snapshot and the index entry, the ROADMAP update. M2 is then accepted.
 5. Start M3 per `docs/M3_PLAN.md`.
 
+## Known open item for the macOS front
+
+main carries Graphics render API 1.3, but the macOS consumer still pins 1.2, so the app build fails until Codex workstream A accepts 1.3. The task is already sent.
+
 ## Machines and execution
 
 - **MacBook Pro** (the user's workstation, user `marcio`):
@@ -61,9 +65,9 @@ They report through pushed branches plus the user, and the coordinator reviews a
 | A. macOS layer | `feat/codex-macos-m3-preparation` | merge into `feat/macos-playable`, then `integrate macos`. The native build and UI smoke run in the gate with explicit `--inputs-root`/`--data-root`. A first-try UI-smoke timeout under load happened once, and the retry passed. |
 | B. Audio | `feat/re-audio` | `integrate audio` |
 | C. Player-action map | — | integrated |
-| D. Rust engine pilot | `feat/codex-rust-engine`, new path `motor/` | will need a Rust gate step: `cargo test` plus the Python differential harness; rustc 1.99.1 is on both Macs |
-| E. Asset extraction (may be started) | `feat/codex-assets`, `assets/` | |
-| F. Hidden-difficulty scan (may be started) | `feat/codex-difficulty-scan` | |
+| D. Rust engine pilot | `feat/codex-rust-engine`, path `motor/` | integrated (`33842de`): C ABI 1.0, 75/75 equal. Validate with `./motor/validate.sh` (rustc 1.99.1 on both Macs). TODO: add it to the maintenance gate |
+| E. Asset extraction | data goes to `rising-lands-assets` with a release tag; tooling goes to `feat/codex-assets-tooling` | integrate only the tooling branch, through maintenance; never `feat/codex-assets` |
+| F. Hidden-difficulty scan | `feat/codex-difficulty-scan` | integrated (`33842de`): four hidden MONSTRE.INI targeting keys, no selectable difficulty |
 
 New paths that no front owns (`motor/`, `assets/`, `pesquisas-paralelas/mapa-acoes-jogador/`, `pesquisas-paralelas/dificuldade/`) come in through `coordinator/maintenance`. Declare owners in `scripts/workstream.py` when a workstream becomes long-lived.
 
@@ -73,7 +77,7 @@ New paths that no front owns (`motor/`, `assets/`, `pesquisas-paralelas/mapa-aco
 - **1. State:** idiomatic Rust structures, plus a tested **projection** to the original memory layout for byte-exact comparison.
 - **2. Pace:** fixed-step deterministic ticks decoupled from host speed. Ticks/second is configurable, with a period-like default; logic wall-clock reads come from a virtual tick clock.
 - **3. Presentation:** the original 800×600 8-bit frame, scaled. The renderer is separable for a future HD version.
-- **4. Assets:** extracted assets are committed to the public repository and bundled with the app.
+- **4. Assets:** extracted assets live in the SEPARATE public repo `marciobarbato/rising-lands-assets`, with a local clone at `/Users/marcio/git/Rising Lands/rising-lands-assets` and an HTTPS remote (SSH to GitHub is not configured on the MacBook). They are bundled with the app. The code repo keeps only the extractor and the pin `assets/ORIGIN.json`. Never merge `feat/codex-assets`, the ~630 MB payload branch. Delete it from the code remote only after confirming the assets repo holds byte-identical content.
 - **Repository:** it is PUBLIC and already contains game-derived evidence. The user accepts this and will make it private only if someone complains. Do not re-raise it or hold pushes over it.
 - **Future, after M4:** a per-mission difficulty selector (no original setting is known; a hidden-parameter scan is in workstream F), an HD renderer, adjustable speed.
 - **Scope** stops at MONDE01 (M4). No other missions without authorization.
