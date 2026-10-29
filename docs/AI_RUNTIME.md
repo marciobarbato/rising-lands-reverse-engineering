@@ -582,3 +582,13 @@ In frame order, the providers that do not exist yet in Python:
 8. RechercheCalcul … PlayerAttaqueCalculSympa (economy/core), and `TestFinDeMission` (missions).
 
 The exact frame-1 input differs from the M1 post-load state: the load-entry tail and the earlier frame steps run first. Everything above is re-validated at Missions' first-frame capture when it is published.
+
+## M2.1 round 2 — whole first-frame composition compared with the original
+
+The full report is [FRAME1_COMPARISON.md](../pesquisas-paralelas/ia-runtime/FRAME1_COMPARISON.md); the data is in `validacao/m2-quadro1-composicao-ia.json`. The composition (`composicao_quadro1_ia.py`) runs Missions' `MapaMemoriaM1`/`montar_provedores` by import and calls integrated providers in original order. It is compared phase by phase with Missions' first-frame capture.
+
+- **(a) load_tail** stops at `RestoreAll`, CALL `0x42d27f` (UI/display, no owner yet). The Python state equals the original at that entry.
+- **(b) between_frames** is in **full equality**: state, both RNGs, the 8 modeled registers, the bindings and the boundaries.
+- **(c) frame1** stops at `InputGame`, CALL `0x42d33b` (input; ownership to be confirmed). The state and the event prefix equal the original at that entry.
+
+This front's reached routines were captured natively at the exact frame-0/1 entries first (`evidencias/captura-isolada-ia-quadro1.json`) and then translated in `rotinas_quadro_ia.py`: MessageBoxCalcul, ProcessInputGame (no-command path), AvanceMonstre (reached branches) and iaSolver (via Core `MaquinaTarefas` with a live-memory bridge). In the native differential, 22 of 24 isolated cases are equal. The structure loop stops at the Economy/Core per-structure providers.
