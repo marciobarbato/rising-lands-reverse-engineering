@@ -502,3 +502,117 @@ Economy's per-owner `[0x4e19b8]` Bag contract is now on main, and the compositio
 - 1,400 ordered binding requests.
 
 Two runs are identical. The exclusions are listed in the report: 16 profile key strings that exist only on the native stack, plus native call-site and stack metadata. Details: [STAGE12_ORACLE_PLAN.md — Stage14](../pesquisas-paralelas/missoes/STAGE12_ORACLE_PLAN.md#stage14-strict-m1-composition-on-integrated-code-2026-10-28-claude) and [stage14-m1-composition-strict.json](../pesquisas-paralelas/missoes/validacao/stage14-m1-composition-strict.json). This is an M1 **candidate**. Acceptance follows integration and committed-main reproduction.
+
+**Update:** M1 was accepted at main `927c7e5` (CXR-20261028-08).
+
+## Stage15 (M2.1): MONDE01 first frame, original first
+
+### Original-only capture (Deliverable 1)
+
+[oraculo_quadro_missao.py](../pesquisas-paralelas/missoes/oraculo_quadro_missao.py) extends the accepted M1 bench; it does not rewrite it. After the original MissionLoad returns at `0x42d22d`, the intact executable runs three phases:
+- **(a)** the rest of the load-state CalculGame invocation, to its RET;
+- **(b)** the window-loop bytes between two frames: ProgIteration `0x475063`, `_WinMain@16` `0x460212..0x460225`, PeekMessageA, a new ProgIteration with its frame counters and GetCursorPos, up to the CalculGame entry `0x42c868`;
+- **(c)** the first game-state CalculGame frame, to its real return `0x475063`.
+
+Readable result: [QUADRO1_MONDE01.md](../pesquisas-paralelas/missoes/QUADRO1_MONDE01.md), with the per-routine entry trace in [rastro-quadro1-monde01.json](../pesquisas-paralelas/missoes/evidencias/rastro-quadro1-monde01.json). The capture is [captura-quadro1-monde01-original.json](../pesquisas-paralelas/missoes/evidencias/captura-quadro1-monde01-original.json) (SHA-256 `c06f78ea…`, source `e6aa305`, commit `ca35221`), and it was committed before any translation.
+
+**Key facts:**
+- The load-state invocation already runs one complete frame body ("frame 0"), because MenuInit(…, 0x12) passes the `0x42d3c0` gate.
+- Frame 1 reaches the end-condition test but none of the AI kernels.
+- No phase performs file I/O, allocates memory or reads the clock.
+- RNG `0x497164` advances in (a) and (c); `0x498db4` does not change.
+
+**Declared boundary policy:**
+- Display, sound-library and MCI CD routines are not executed. Each call is recorded with its registers, stack words and guard bytes.
+- Each declared stack cleanup equals the RET immediates reachable in the intact bytes, found by following shared epilogues, thunks and switch tables.
+
+**Named inputs:** GetAsyncKeyState answers 0, PeekMessageA reports no message, the cursor is (0,0), and the caller frame is declared.
+
+**Validation:** [m2-frame1-original-x86.json](../pesquisas-paralelas/missoes/validacao/m2-frame1-original-x86.json) passed:
+- replay, code integrity and segmentation invariance;
+- fills 0x5A and 0x00 are state-independent;
+- boundary-EAX markers propagate 0 bytes;
+- the M1 Windows inputs propagate 0 bytes;
+- the cursor matters: (0,0) edge-scrolls the view in frame 1.
+
+The footprint holds 4,932 read-before-write bytes, classified by provenance.
+
+**Open graphics dependency:** frame 1 reads AffGame's possible stores, listed in QUADRO1_MONDE01.md.
+
+**Bench fix with M1 impact:**
+- Unicorn instruments hooks at translation time, so hooks added after startup missed reads from code translated earlier.
+- The bench now flushes the translation cache after adding hooks.
+- Rerunning the M1 original-only validation with the fix ([stage12-missionload-original-x86-tbflush.json](../pesquisas-paralelas/missoes/validacao/stage12-missionload-original-x86-tbflush.json)) passes again: 9,585 read-before-write bytes instead of 1,757, still with 0 skip-derived and 0 skipped-store bytes. The extra bytes are memset touches on allocation fill.
+
+### EvenementEnCours and TestFinDeMission (Deliverable 2)
+
+**Isolated captures (original only).** [captura-isolada-missoes-quadro1.json](../pesquisas-paralelas/missoes/evidencias/captura-isolada-missoes-quadro1.json), source `46dc93d`, records each routine at its exact frame-0 and frame-1 entry: AL, registers, changed bytes, and the bytes read before written. Both calls of each routine return AL=0 and change nothing. TestFinDeMission reads 1,031 bytes. After every isolation the paused path still reproduces the committed phase states and trace.
+
+**API** ([fim_missao.py](../pesquisas-paralelas/missoes/fim_missao.py)):
+
+`evento_em_curso(evenement_u8)` returns AL = byte `0x4e1b0e`.
+
+`testar_fim_missao(jogador, condicoes, estado, contagem_inicial, exercitos, exercitos_ia, consultas)` takes these live views:
+
+| Argument | Address | Size | Access |
+|---|---|---|---|
+| `condicoes` | `0x4e1d20` | 100 | read |
+| `estado` | `0x4e1d84` | 14: latch +0, owner count +1, marks +4..+13 | written |
+| `contagem_inicial` | `0x4e1a3a` | 2 | read |
+| `exercitos` | `0x4e1928` | 8 | read |
+| `exercitos_ia` | `0x4dfaa8` | 16 | read |
+
+`ConsultasFimMissao` supplies the callees. `consultas_publicadas(estruturas, recursos, missao_u8)` binds the committed ones:
+
+| Callee | Address | Owner |
+|---|---|---|
+| BatimentExiste | `0x41a735` | Missions |
+| BatimentGetPlayer | `0x41a08c` | Combat |
+| BatimentGetType | `0x41a4f4` | Economy |
+| TestRessource | `0x4676e5` | Economy (`Economia.suficiente`) |
+| MissionGetNum | `0x46c11a` | Missions |
+
+**Mutation order**, as in the original:
+1. Records 0–9 are processed in order. Each record's mark is set or cleared as its test runs.
+2. The result accumulates across records.
+3. The MissionGetNum==6 override runs.
+4. Latch: set to 1 if the result is non-zero, then cleared and the result forced to 1 when `[0x4e1a3a]`==0.
+5. When the result and the latch are both non-zero and the mission is 8 or 13, the owner count at `[0x4e1d85]` is written.
+
+**Supported domain:**
+
+| Record type | Test |
+|---|---|
+| 0, 1, 2 | resource |
+| 3 | inventions |
+| 4 | structure of a type in up to three influence zones (`0x00ff` = wildcard) |
+| 5 | no non-allied opponent forces |
+| `0xff` | blocks only when it is the first record |
+| any other | ignored |
+
+**Named dependencies** (`DependenciaFimMissao`, raised at the original CALL):
+
+| Missing callee or state | CALL |
+|---|---|
+| BatimentGetCase | `0x45883f` / `0x458a44` |
+| CaseGetZoneInfluence | `0x45884b` / `0x458a50` |
+| RechercheGetNbInvention | `0x45879c` |
+| PlayerEstAllie | `0x458903` |
+| GetTopLeftCaseZoneInfluence | `0x45870e` |
+| CaseEstIlluminee | `0x45871c` |
+| uninitialized stack local `[esp+8]` in the mission 8/13 scan when no type-4 match stored it | `0x4589dc` |
+| a structure owner ≥4 in that scan (the original writes the caller stack) | `0x458aa8` |
+
+**MONDE01 conditions:**
+- record 0 is type 4: a **type-3 CAVE structure** of the player in influence zone 0;
+- records 1 and 2 require 50 food and 50 stone;
+- record 9 repeats the 50-stone test;
+- records 3–8 are `0xff`.
+
+So **the objective requires building a cave**, which answers the roadmap's open question.
+
+**Validation:**
+- CPU-free ([test_fim_missao.py](../pesquisas-paralelas/missoes/testes/test_fim_missao.py)): each captured call is rebuilt from only the bytes the original read, under two poisons.
+- Native differential ([m2-fim-missao-differential-x86.json](../pesquisas-paralelas/missoes/validacao/m2-fim-missao-differential-x86.json), source `b25e8d6`): of 48 native cases at both frame entries, 38 compared cases are equal in AL and every changed byte. The other 10 stop at the named dependencies above.
+
+No whole-frame composition is built. The AI/runtime front owns the frame pipeline.
