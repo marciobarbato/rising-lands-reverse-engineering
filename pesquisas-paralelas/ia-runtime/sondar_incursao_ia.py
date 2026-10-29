@@ -49,7 +49,7 @@ def main():
     def gravar():
         u = comp.mapa.ler(u32(UNIDADES) + UNIDADE * 276, 276)
         c = u32(CONTADOR)
-        por_contador[c] = dict(rng=hex(u32(RNG)), state=u[2], facing=[u[0x90], u[0x91]], cell=hex(u[8] | u[9] << 8))
+        por_contador[c] = dict(rng=hex(u32(RNG)), state=u[2], facing=[u[0x90], u[0x91], u[0x92]], cell=hex(u[8] | u[9] << 8))
         if not registros or registros[-1][1] != u.hex():
             registros.append((c, u.hex()))
     t0, parada = time.time(), None

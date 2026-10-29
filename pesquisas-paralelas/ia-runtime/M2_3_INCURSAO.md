@@ -197,3 +197,13 @@ These two captures ran on the MacBook under the new lease (3 work-hour slots; na
 - **Call order:** the native run also confirms that at 9700 the dispatcher calls DeplaceEngin in the same frame as the AI's re-order, as the composition does.
 - **Tool:** `sondar_incursao_ia.py` now uses this start and records RNG, state, facing and cell at every counter.
 - **Remaining stop:** Core's CalculFatigue branch `0x452d61`, around counter 10880.
+
+**Fatigue threshold (counter 10879):**
+- **Capture:** `evidencias/captura-proxima-etapa-fadiga-ia.json`, unit 16 at 10877–10882, 187 s.
+- **Translation:** `0x4548e3` for provisions `+4` ≠ 4. A unit not in state 0/4, with `+0x72` set, no provisions left, and `+0x86`/`+0x87` clear starves: an AI-type-2 owner gets `iagUnitSendMessage(0x4b)`, any other owner gets `EnginSetFatigue`. Both are still named stops. Otherwise it continues at `0x454994`.
+- **Differential:** `test_proxima_etapa_incursao_ia` finds all 27 captured raid-unit calls equal: 9000–9011, 10523–10531 and 10877–10882.
+
+**Probe with Core's `e5be382`** (throwaway worktree, Graphics stops bypassed for planning):
+- 3,000 Python frames, counters 9000–11999, with no stop.
+- Unit 16's cell equals Combat's native course at every counter 9000–11999.
+- Graphics' drawing-domain guard was bypassed 1,199 times; extending that domain is Graphics' job.

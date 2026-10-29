@@ -100,7 +100,16 @@ def proxima_etapa_unidade(m, provedores, unidade, tabelas):
         if m.u8(registro() + 2) in (0, 4):
             return SAIDA
         if m.u16(r + 4) != 4:
-            _parar('EnginNextEtape fatigue result', 0x4548e3)
+            # 0x4548e3 (captura-proxima-etapa-fadiga-ia.json, counters 10879..10882): a unit in a state other than
+            # 0/4 with +0x72 set and no provisions left (+4 == 0) and both +0x86/+0x87 clear is told it starves:
+            # AI type 2 -> iagUnitSendMessage(0x4b), else EnginSetFatigue. Then the normal path at 0x454994.
+            rr = registro()
+            if m.u8(rr + 2) not in (0, 4) and m.u8(rr + 0x72) and m.u16(rr + 4) == 0 \
+                    and not m.u8(r + 0x86) and not m.u8(r + 0x87):
+                if _chamar(provedores, 'PlayerGetType', 0x45496e, jogador=m.u8(rr)) & 0xff == 2:
+                    _chamar(provedores, 'iagUnitSendMessage', 0x454986, unidade=unidade, mensagem=0x4b, alvo=0)
+                else:
+                    _chamar(provedores, 'EnginSetFatigue', 0x45498f, unidade=unidade)
     if m.u8(registro() + 1) == 0x11:
         _parar('EnginNextEtape type 17', 0x4549c2)
     rr = registro()
