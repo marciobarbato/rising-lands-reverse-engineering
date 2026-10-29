@@ -314,3 +314,28 @@ No failed attempt occurred in this slice. Logs are in `.local/xp/`.
 
 **NOT RUN:** complete MissionLoad or six-tail composition; a real MONDE01 queue snapshot; translation of the producers; locked integration and exact-main reproduction, which the coordinator performs. Missions should call `recuperar_experiencia_missao(mundo, guardadas)` with the session's actual live saved buffer, and never with a constructed default.
 
+
+### M2 frame foundations — original-first delivery on `feat/re-core`
+
+The branch merged `origin/main` `81ebbf9` (fast-forward). The [frame-foundations contract](FRAME_FOUNDATIONS.md) holds the inventory, ownership, API and validation.
+
+**Inventory.** `extrair_fundacoes_quadro.py` exports 29 hash-checked intervals into `evidencias/fundacoes-quadro/` (commit `a5830f6`, static only). For each it records the operand-derived reads and writes, the grids, the callees and whole-code reference lists.
+- **Core-owned:** the `ProgIteration` counters, the load counter reset, `GameNextFrame`, the `Random` family, `iaRandom`, `LongRand`/CRT `rand` and the permutation draw.
+- **Other owners:** `SetUpdateChamp`/`UpdateChamp`/`ScanNouvellePatate` belong to Economy, which has committed them. `NextAnim*` belongs to Graphics under the agreed contract. `CalculNextReflect` and `PlayerAttaqueReset` (a single RET) belong to ai-runtime, `SetClipping` to Graphics, and `InitGameZone` (mouse zones) to UI.
+
+**Cross-front findings** (requested contracts, not edits):
+1. The permutation cursor `0x4e1d18` is advanced by rendering (`AffBatiments`, `AffCorpsEngin`, `AffDeplaceEngin`, `AffVeget`, `DDFlipPage`) and also consumed by the world stores of `NextAnim*`. The frame oracle therefore needs AffGame's cursor consumption, which depends on the draw divisor.
+2. Single-player `NextAnimTerrain`/`NextAnimVeget` visit only the viewport. The viewport size `0x508724`/`0x508726` is **0×0 in the frozen M1 state**, so the frame oracle must declare its source.
+3. The load case zeroes the counters and falls through into a frame body in the same CalculGame call, provided `MenuInit` leaves state `0x12`. Missions' trace decides this.
+4. `iaRandom(0)` needs a declared clock.
+
+**Evidence and validation.** These are M1 post-load inputs, not yet frame-1 inputs.
+1. The capture is committed before translation (`9a80499`): 62 cases, 195 steps, 202 segments, with the code hash unchanged and timeGetTime as the only binding.
+2. Implementation commit `06ed6d9`: `fundacoes_quadro.py` plus the CPU-free M1 loader `estado_m1_quadro.py`. The loader reuses `cadencia.avancar_contadores` and `candidatos_rota.aleatorio_caminhos`.
+3. The CPU-free replay of all 195 steps matches the whole state, the ordered writes and the registers.
+4. The fresh native differential PASSES: 11 tests, 659 comparisons and 677 segments, with zero failures, errors, skips, faults or limits.
+5. Local mode runs 11 tests: 8 executed and 3 optional skips.
+
+Logs are in `.local/frame/`. No failed attempt occurred.
+
+**NOT RUN:** re-validation at frame-1 inputs, which waits for Missions' capture and entry trace; any frame-oracle composition; locked integration and exact-main reproduction, which the coordinator performs.

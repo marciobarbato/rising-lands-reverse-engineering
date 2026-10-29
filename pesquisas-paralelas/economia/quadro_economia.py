@@ -1,0 +1,350 @@
+"""Economy routines the CalculGame frame reaches in MONDE01 (M2), over live memory.
+
+Every entry takes ``memoria``: any object whose ``vista(endereco, tamanho)``
+returns a writable view of the live bytes at that original address (the M1
+``MapaMemoriaM1`` does). Nothing is copied or cached between calls, so the
+providers bound at those addresses (``Economia.memoria`` 0x4e2ea8,
+``CicloMercado`` buffers, the unit pool ``[0x4e19a0]``, the RNG 0x497164)
+are read and written by identity.
+
+Scope (see M2_FRAME_INVENTORY.md): the routines and branches the frozen M1
+state reaches. Calls the MONDE01 frames do not reach raise
+``DependenciaQuadro`` at the original callee or branch address, after the
+original's earlier writes, unless an exact callback is supplied. No index
+guards are added: the original reads out-of-table bytes (for example
+``0x4e2e7c + 0xff``) and so does this module, through ``memoria``.
+"""
+import struct
+
+LOCAL = 0x508041
+CONTADOR = 0x508f7c
+ALEATORIO = 0x497164
+UNIDADES = 0x4e19a0
+RECURSOS = 0x4e2ea8
+REDESENHO_RECURSOS = 0x4e05a2
+INVENCOES = 0x50871c
+PESQUISA = 0x5080f4
+CIENTISTAS = 0x508174
+TABELA_PESQUISA = 0x50817c
+CONSTANTE_PESQUISA = 0x494cbb
+MISSAO = 0x496fe4
+ALIANCAS = 0x5080b0
+ATAQUES = 0x508044
+CONTATO = 0x4e2928
+PARCEIRO = 0x496f8c
+ESTADO_MERCADO = 0x4e2e7c
+
+
+class DependenciaQuadro(NotImplementedError):
+    """An original call the MONDE01 frames do not reach; earlier writes stay."""
+    def __init__(self, rotina, endereco, chamada, argumentos):
+        self.rotina, self.endereco, self.chamada, self.argumentos = rotina, endereco, chamada, argumentos
+        super().__init__(f'{rotina} needs 0x{endereco:08x} ({chamada}) with {argumentos}')
+
+
+def _u8(m, a):
+    return m.vista(a, 1)[0]
+
+
+def _w8(m, a, v):
+    m.vista(a, 1)[0] = v & 0xff
+
+
+def _u16(m, a):
+    return struct.unpack('<H', m.vista(a, 2))[0]
+
+
+def _w16(m, a, v):
+    m.vista(a, 2)[:] = struct.pack('<H', v & 0xffff)
+
+
+def _u32(m, a):
+    return struct.unpack('<I', m.vista(a, 4))[0]
+
+
+def _w32(m, a, v):
+    m.vista(a, 4)[:] = struct.pack('<I', v & 0xffffffff)
+
+
+def _f64(m, a):
+    return struct.unpack('<d', m.vista(a, 8))[0]
+
+
+def _wf64(m, a, v):
+    m.vista(a, 8)[:] = struct.pack('<d', v)
+
+
+def aleatorio(m):
+    """Random 0x4704dc on the live u32 at 0x497164 (Schrage, 32-bit wrap); EAX is ignored."""
+    s = _u32(m, ALEATORIO)
+    quociente, resto = divmod(s, 0x1f31d)
+    novo = ((resto * 0x41a7) - (quociente * 0xb14)) & 0xffffffff
+    if novo == 0 or novo & 0x80000000:
+        novo = (novo + 0x7fffffff) & 0xffffffff
+    _w32(m, ALEATORIO, novo)
+    return novo
+
+
+def int_para_bcd(valor):
+    """IntToBCD 0x467cd1: four bytes, units first; the thousands byte may exceed 9."""
+    valor &= 0xffff
+    digitos, acumulado, divisor = [0] * 4, 0, 1000
+    for i in range(4):
+        quociente = (valor - (acumulado & 0xffff)) // divisor
+        digitos[3 - i] = quociente & 0xff
+        acumulado = (acumulado + quociente * divisor) & 0xffffffff
+        divisor //= 10
+    return digitos
+
+
+def bcd_para_int(digitos):
+    """BCDToInt 0x467d3a: sum of digit·10^k, stored as u16."""
+    return sum(d * 10 ** k for k, d in enumerate(digitos)) & 0xffff
+
+
+def calcular_materia(m):
+    """CalculMatiere 0x467718: step the local player's four displayed resource values.
+
+    Each BCD digit of presentation +4 moves one unit toward total +2 every
+    two calls, using bit c of +6: upward, a clear bit is set, a set bit
+    increments and clears; downward, a clear bit decrements and sets, a set
+    bit clears. An equal digit only clears a set bit. Any move or clear
+    stores 1 into 0x4e05a2. The result is written back through BCDToInt.
+    """
+    local = _u8(m, LOCAL)
+    for r in range(4):
+        registro = RECURSOS + ((local * 4 + r) << 3)
+        exibido = int_para_bcd(_u16(m, registro + 4))
+        alvo = int_para_bcd(_u16(m, registro + 2))
+        bits = registro + 6
+        for c in range(4):
+            d, t = exibido[c], alvo[c]
+            ligado = (_u8(m, bits) >> c) & 1
+            if d < t:
+                _w8(m, REDESENHO_RECURSOS, 1)
+                if ligado:
+                    exibido[c] = (d + 1) & 0xff
+                    _w8(m, bits, _u8(m, bits) & ~(1 << c))
+                else:
+                    _w8(m, bits, _u8(m, bits) | (1 << c))
+            elif d > t:
+                _w8(m, REDESENHO_RECURSOS, 1)
+                if ligado:
+                    _w8(m, bits, _u8(m, bits) & ~(1 << c))
+                else:
+                    exibido[c] = (d - 1) & 0xff
+                    _w8(m, bits, _u8(m, bits) | (1 << c))
+            elif ligado:
+                _w8(m, bits, _u8(m, bits) & ~(1 << c))
+                _w8(m, REDESENHO_RECURSOS, 1)
+        _w16(m, registro + 4, bcd_para_int(exibido))
+
+
+def calcular_pesquisa(m, invencao=None):
+    """RechercheCalcul 0x47125c: accumulate research and detect a reached invention.
+
+    Players 0..3 whose invention count 0x50871c[p] is below 2 look at their
+    current item (branch +4, item byte +branch, 12-byte record at 0x50817c).
+    An available item (marker +6 != 0xff and minimum mission +5 <= the
+    mission number at 0x496fe4) adds 0.0, or 2.0 - 1/scientists (constant
+    read from 0x494cbb), to the f64 at +8 and zeroes the scientist word. When
+    the u32 cost is not above the accumulator, the count is incremented and
+    InventionSetEffet 0x470f98 (AL=player, DL=item, BL=branch, ECX=1) runs;
+    then the item advances and the accumulator is zeroed. Without
+    ``invencao(jogador, item, ramo)`` that call raises ``DependenciaQuadro``
+    after the count increment. An unavailable item at its end marker rotates
+    the branch; a mission-gated item whose +4 byte is not 100 is skipped.
+    """
+    missao = _u8(m, MISSAO)
+    for p in range(4):
+        if _u8(m, INVENCOES + p) >= 2:
+            continue
+        base = PESQUISA + 16 * p
+
+        def registro():
+            ramo = _u8(m, base + 4)
+            return ramo, _u8(m, base + ramo), TABELA_PESQUISA + ramo * 0x168 + _u8(m, base + ramo) * 12
+
+        ramo, item, reg = registro()
+        disponivel = _u8(m, reg + 6) != 0xff and _u8(m, reg + 5) <= missao
+        if disponivel:
+            cientistas = _u16(m, CIENTISTAS + 2 * p)
+            incremento = 0.0 if cientistas == 0 else _f64(m, CONSTANTE_PESQUISA) - 1.0 / cientistas
+            _wf64(m, base + 8, _f64(m, base + 8) + incremento)
+            _w16(m, CIENTISTAS + 2 * p, 0)
+            ramo, item, reg = registro()
+            if float(_u32(m, reg)) > _f64(m, base + 8):
+                continue
+            _w8(m, INVENCOES + p, _u8(m, INVENCOES + p) + 1)
+            item = _u8(m, base + _u8(m, base + 4))
+            if invencao is None:
+                raise DependenciaQuadro('RechercheCalcul', 0x470f98, 'InventionSetEffet',
+                                        dict(AL=p, DL=item, BL=_u8(m, base + 4), ECX=1))
+            invencao(p, item, _u8(m, base + 4))
+        elif _u8(m, reg + 6) == 0xff:
+            _w8(m, base + 4, (ramo + 1) % 4)
+            continue
+        elif _u8(m, reg + 4) == 100:
+            continue
+        ramo = _u8(m, base + 4)
+        _w8(m, base + ramo, _u8(m, base + ramo) + 1)
+        _w32(m, base + 8, 0)
+        _w32(m, base + 12, 0)
+
+
+def contar_aliancas(m, zona=None, simpatia=None):
+    """PlayerInitAllianceCompteur 0x46da3b: count down the 16 alliance counters.
+
+    A nonzero u32 at 0x5080b0+16p+4q is decremented. When the local player's
+    counter reaches 0, InitGameZone 0x471830 (EAX=1, EDX=EBX=ECX=0) then
+    MAJSympathie 0x475118 (AL=q, DL=p, EBX=9) run; without callbacks the
+    first raises ``DependenciaQuadro`` after the decrement.
+    """
+    for p in range(4):
+        for q in range(4):
+            a = ALIANCAS + 16 * p + 4 * q
+            v = _u32(m, a)
+            if v == 0:
+                continue
+            _w32(m, a, v - 1)
+            if v != 1 or p != _u8(m, LOCAL):
+                continue
+            if zona is None:
+                raise DependenciaQuadro('PlayerInitAllianceCompteur', 0x471830, 'InitGameZone',
+                                        dict(EAX=1, EDX=0, EBX=0, ECX=0))
+            zona()
+            if simpatia is None:
+                raise DependenciaQuadro('PlayerInitAllianceCompteur', 0x475118, 'MAJSympathie',
+                                        dict(AL=q, DL=p, EBX=9))
+            simpatia(q, p, 9)
+
+
+def calcular_simpatia_ataques(m, simpatia=None):
+    """PlayerAttaqueCalculSympa 0x46d629: every 2000 frames, reward unattacked pairs.
+
+    When u32 0x508f7c % 2000 = 0, for p, q in 0..3: a zero attack flag
+    0x508044+20p+4q with p != q calls MAJSympathie 0x475118 (AL=p, DL=q,
+    EBX=0x13); then the flag is zeroed. Without ``simpatia`` the call raises
+    ``DependenciaQuadro`` before that pair's flag store.
+    """
+    if _u32(m, CONTADOR) % 2000:
+        return
+    for p in range(4):
+        for q in range(4):
+            a = ATAQUES + 20 * p + 4 * q
+            if _u32(m, a) == 0 and p != q:
+                if simpatia is None:
+                    raise DependenciaQuadro('PlayerAttaqueCalculSympa', 0x475118, 'MAJSympathie',
+                                            dict(AL=p, DL=q, EBX=0x13))
+                simpatia(p, q, 0x13)
+            _w32(m, a, 0)
+
+
+_ESCALARES_CAMPOS = ((CONTADOR, 'I', None, 'tempo'), (0x4973ea, 'H', None, 'periodo'),
+                     (0x509952, 'B', None, 'atualizar'), (0x4973e8, 'H', None, 'linha'),
+                     (ALEATORIO, 'I', 'terreno', 'semente'))
+
+
+def _campos(m, recursos, metodo):
+    alvos = [(a, f, recursos if dono is None else getattr(recursos, dono), nome)
+             for a, f, dono, nome in _ESCALARES_CAMPOS]
+    for a, f, objeto, nome in alvos:
+        setattr(objeto, nome, struct.unpack('<' + f, m.vista(a, struct.calcsize(f)))[0])
+    try:
+        metodo()
+    finally:
+        for a, f, objeto, nome in alvos:
+            m.vista(a, struct.calcsize(f))[:] = struct.pack('<' + f, getattr(objeto, nome))
+
+
+def agendar_campos(m, recursos):
+    """SetUpdateChamp 0x475328 through the validated ``extracao.RecursosTerreno``.
+
+    The counter, period, flag, row and RNG are pulled from their original
+    addresses before the call and pushed back after it (also on error). The
+    caller binds the provider's grids by identity; none is copied here.
+    """
+    _campos(m, recursos, recursos.agendar_campos)
+
+
+def atualizar_campos(m, recursos):
+    """UpdateChamp 0x478806 through ``extracao.RecursosTerreno``, same scalar binding.
+
+    ``recursos.terreno.tipos``/``quantidades`` must be the live grids at
+    [0x507d74]/[0x507dac], ``atributos`` [0x507da8], ``mosaicos`` the u16
+    grid at [0x507d70] as bytes, and ``minas`` 0x509954.
+    """
+    _campos(m, recursos, recursos.atualizar_campos)
+
+
+def _indice_mercado(m, jogador):
+    jogador &= 0xff
+    return jogador if _u8(m, CONTATO + jogador) == 1 else _u8(m, PARCEIRO + jogador)
+
+
+def calcular_contador_mercado(m, jogador):
+    """CalculCompteurMarche 0x466dd1 (AL=player): read-only unless market state is 3.
+
+    The index is the player when 0x4e2928[player] = 1, otherwise the partner
+    byte 0x496f8c[player] (0xff in MONDE01, so 0x4e2e7c+0xff is read). State 3
+    enters the counter branch at 0x466e01, which raises ``DependenciaQuadro``.
+    """
+    x = _indice_mercado(m, jogador)
+    if _u8(m, ESTADO_MERCADO + x) == 3:
+        raise DependenciaQuadro('CalculCompteurMarche', 0x466e01, 'state-3 counter branch',
+                                dict(indice=x))
+
+
+def calcular_contador_proposicao(m, jogador, edx=0):
+    """CalculCompteurProposition 0x466e9b (AL=player, EDX unused): read-only unless state 4/5.
+
+    Same index as ``calcular_contador_mercado``. State 4 (branch 0x466ed1) and
+    state 5 (branch 0x466fe1) raise ``DependenciaQuadro``.
+    """
+    x = _indice_mercado(m, jogador)
+    estado = _u8(m, ESTADO_MERCADO + x)
+    if estado == 4:
+        raise DependenciaQuadro('CalculCompteurProposition', 0x466ed1, 'state-4 branch',
+                                dict(indice=x))
+    if estado == 5:
+        raise DependenciaQuadro('CalculCompteurProposition', 0x466fe1, 'state-5 branch',
+                                dict(indice=x))
+
+
+def ramo_producao_estrutura(producao, indice, calcular_tropa):
+    """BatimentNextEtape branch 0x426918..0x42698d for structure types 1/2/13/16 (AX index).
+
+    The branch inlines BatimentEstHabiter (the existing ``estrutura_habitada``):
+    type 2 tries BagContientTroupe first and skips BagContient when it is
+    nonzero. An inhabited structure then calls CalculTroupe 0x4259e6 once
+    through ``calcular_tropa(indice)``, the caller's world-joined producer
+    (``producao_limpa.calcular_tropa_com_limpeza_no_mundo``); its result is
+    returned. An uninhabited one returns None. The exit is 0x4281c0.
+    """
+    from construcoes_habitaveis import estrutura_habitada
+    indice &= 0xffff
+    if not estrutura_habitada(producao, indice):
+        return None
+    return calcular_tropa(indice)
+
+
+def estado_parado_unidade(m, unidade):
+    """Unit state-7 body 0x456966..0x4569f0 of EnginNextEtape (DI = unit).
+
+    Types 0–10 and 18–25 draw Random once; on a draw % 200 = 0, facing bytes
+    +0x90 and +0x91 become (+0x91 % 16) + 1. Types 11–16 and 26–255 exit
+    without a draw. Type 17 calls AnimBallonStatic 0x447b2f (EAX = unit),
+    which raises ``DependenciaQuadro``. Exit is 0x454ccd in every case.
+    """
+    unidade &= 0xffff
+    registro = _u32(m, UNIDADES) + unidade * 276
+    tipo = _u8(m, registro + 1)
+    if tipo == 17:
+        raise DependenciaQuadro('EnginNextEtape state 7', 0x447b2f, 'AnimBallonStatic', dict(EAX=unidade))
+    if 11 <= tipo <= 16 or tipo >= 26:
+        return
+    if aleatorio(m) % 200:
+        return
+    direcao = _u8(m, registro + 0x91) % 16 + 1
+    _w8(m, registro + 0x90, direcao)
+    _w8(m, registro + 0x91, direcao)
