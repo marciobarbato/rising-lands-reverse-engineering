@@ -147,6 +147,17 @@ def scenarios():
                com=[response('_llseek',pointer=0x1234,args=(0,0))])
 
 
+    descriptor=struct.pack('<IIIII',20,0xe0,64,0,0).hex()
+    wave=struct.pack('<HHIIHH',1,1,22050,44100,2,16).hex()
+    for created in (0,COM_BUFFER):
+        for hresult in (0,0x80004005):
+            m=fixture_memory(original);m.w32(INDEX,20);record(m,20)
+            plan=[response('_llseek',pointer=0x1234,args=(0,0)),
+                  response('CreateSoundBuffer',pointer=COM_DEVICE,args=(descriptor,wave,0),value=created,hresult=hresult)]
+            if created:plan.append(response('_llseek',pointer=0x1234,args=(0,0)))
+            yield dict(name=f'manage-create-{created:x}-{hresult:x}',operation='manage',regs={},arguments=[],memory=m.snapshot(),com=plan)
+
+
 class QueueNativeBench(BancadaX86):
     def __init__(self,fixture):
         super().__init__();self.fixture=fixture;self.plan=ScriptedCOM(fixture['com']);self.raw_com=[]
@@ -171,6 +182,19 @@ class QueueNativeBench(BancadaX86):
                     call.escrever(args[1],struct.pack('<I',answer['value']))
                 return answer['hresult']
             self.declarar_vinculo(address,'AudioCOM.'+method,tuple(range(4,4*(nargs+1),4)),handler,desempilhar=4*nargs,natureza='backend')
+        if any(answer['method']=='CreateSoundBuffer' for answer in fixture['com']):
+            address=COM_BASE+0x400c
+            self.cpu.mem_write(COM_BASE+0x200c,struct.pack('<I',address))
+            def create(call):
+                this,description,output,outer=call.argumentos
+                raw=call.ler(description,20);wave=call.ler(struct.unpack_from('<I',raw,16)[0],16)
+                normalized=(raw[:16]+bytes(4)).hex()
+                answer=self.plan.answer('CreateSoundBuffer',this,[normalized,wave.hex(),outer])
+                self.raw_com.append(dict(method='CreateSoundBuffer',args=list(call.argumentos),descriptor=raw.hex(),wave=wave.hex(),answer=answer))
+                if 'value' not in answer:raise ParadaVinculoDeclarado('CreateSoundBuffer requires an explicit output pointer write')
+                call.escrever(output,struct.pack('<I',answer['value']))
+                return answer['hresult']
+            self.declarar_vinculo(address,'AudioCOM.CreateSoundBuffer',(4,8,12,16),create,desempilhar=16,natureza='backend')
         def seek(call):
             args=call.argumentos
             answer=self.plan.answer('_llseek',args[0],list(args[1:]))

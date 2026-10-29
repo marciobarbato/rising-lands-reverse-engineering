@@ -75,3 +75,15 @@ stage-1 native memset/STOS intervals (no Python substitution). Its sole stop is
 now proven at COM slot +0x0c, original caller return 0x48b834, while 203 cases
 return. Earlier raw reports are unchanged and are not counted as complete
 buffer-creation captures. The provider/three-way differential use v5.
+
+Creation input extension (v8, original-only): a declared CreateSoundBuffer call
+receives the 20-byte original descriptor (size20, flags0xe0, size64, reserved0,
+format pointer), the pointed 16-byte PCM WAVEFORMAT (1 channel, 22050Hz,
+16 bits, alignment2), and outer=NULL. The log retains the raw stack pointer;
+comparison normalizes only its address, not the pointed bytes. Each fixture
+explicitly writes the output pointer and returns a declared HRESULT. Null
+output returns through Manage with EAX0 for both HRESULT0 and 0x80004005;
+non-null output proceeds for either HRESULT and stops at undeclared Lock slot
++0x2c (original caller0x48c097), after a second declared seek. No status or
+creation response is inferred from HRESULT alone. v8 has234 native calls in228
+scenarios, with the original missing-Create stop plus two missing-Lock stops.
