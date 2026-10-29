@@ -1,0 +1,177 @@
+[lease] combat-final-raid-native waiting
+[lease] combat-final-raid-native granted slots [2]
+{"case": "f9000-scan-0", "result": "equal", "dependency": null}
+{"case": "f9000-scan-1", "result": "equal", "dependency": null}
+{"case": "f9000-scan-2", "result": "equal", "dependency": null}
+{"case": "f9000-scan-15", "result": "equal", "dependency": null}
+{"case": "f9000-scan-16", "result": "equal", "dependency": null}
+{"case": "f9000-order-0-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-attack-0-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-order-1-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-attack-1-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-order-2-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-attack-2-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-order-16-1-0", "result": "equal", "dependency": null}
+{"case": "f9000-attack-16-1-0", "result": "equal", "dependency": null}
+{"case": "f9000-order-16-3-0", "result": "equal", "dependency": null}
+{"case": "f9000-attack-16-3-0", "result": "equal", "dependency": null}
+{"case": "f9000-dying-0", "result": "equal", "dependency": {"name": "SetDyingEngin", "address": 4475192, "arguments": [0]}}
+{"case": "f9000-dying-16", "result": "equal", "dependency": {"name": "SetDyingEngin", "address": 4475192, "arguments": [16]}}
+{"case": "f9000-hits-16-1", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9000-hits-16-2", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9000-hits-16-3", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9000-hits-16-4", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9000-hits-16-5", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9000-hits-16-6", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-7", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-8", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-9", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-10", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-11", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-12", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-13", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-14", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-15", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-16", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-17", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-18", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-19", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-20", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-21", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-22", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-23", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-24", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-25", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-26", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-27", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-28", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-29", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-30", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-31", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-32", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-33", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-34", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-35", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-36", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-37", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-38", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-39", "result": "equal", "dependency": null}
+{"case": "f9000-hits-16-40", "result": "equal", "dependency": null}
+{"case": "f9000-hits-0-1", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [0, 72, 16]}}
+{"case": "f9000-lethal-hp0-16", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9000-lethal-hp1-16", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9000-lethal-hp0-0", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [0, 72, 16]}}
+{"case": "f9000-lethal-hp1-0", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [0, 72, 16]}}
+{"case": "f9000-camera1-lethal-hp0-16", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9000-camera1-lethal-hp1-16", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9000-camera1-lethal-hp0-0", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [0, 72, 16]}}
+{"case": "f9000-camera1-lethal-hp1-0", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [0, 72, 16]}}
+{"case": "f9000-dying-to-removal-16", "result": "equal", "dependency": {"name": "SetDyingEngin", "address": 4475192, "arguments": [16]}}
+{"case": "f9000-retire-16", "result": "equal", "dependency": {"name": "RetireEngin", "address": 4550744, "arguments": [16]}}
+{"case": "f9000-sanctuary-0", "result": "equal", "dependency": {"name": "PlaySnd_PostSound", "address": 4762233, "arguments": [66, 131328, 0, 256, 4825544]}}
+{"case": "f9000-sanctuary-1", "result": "equal", "dependency": {"name": "PlaySnd_PostSound", "address": 4762233, "arguments": [66, 131328, 0, 256, 4825544]}}
+{"case": "f9000-sanctuary-50", "result": "equal", "dependency": {"name": "PlaySnd_PostSound", "address": 4762233, "arguments": [66, 131328, 0, 256, 4825544]}}
+{"case": "f9000-sanctuary-65535", "result": "equal", "dependency": {"name": "PlaySnd_PostSound", "address": 4762233, "arguments": [66, 131328, 0, 256, 4825544]}}
+{"case": "f9000-sanctuary-65536", "result": "equal", "dependency": {"name": "PlaySnd_PostSound", "address": 4762233, "arguments": [66, 131328, 0, 256, 4825544]}}
+{"case": "f9000-sanctuary-4294967295", "result": "equal", "dependency": {"name": "PlaySnd_PostSound", "address": 4762233, "arguments": [66, 131328, 0, 256, 4825544]}}
+{"case": "f9000-sanctuary-camera1-0", "result": "equal", "dependency": null}
+{"case": "f9000-sanctuary-camera1-1", "result": "equal", "dependency": null}
+{"case": "f9000-sanctuary-camera1-49", "result": "equal", "dependency": null}
+{"case": "f9000-sanctuary-camera1-50", "result": "equal", "dependency": null}
+{"case": "f9000-sanctuary-camera1-51", "result": "equal", "dependency": null}
+{"case": "f9000-sanctuary-camera1-99", "result": "equal", "dependency": null}
+{"case": "f9000-sanctuary-camera1-100", "result": "equal", "dependency": null}
+{"case": "f9000-sanctuary-camera1-101", "result": "equal", "dependency": null}
+{"case": "f9000-sanctuary-camera1-255", "result": "equal", "dependency": null}
+{"case": "f9000-sanctuary-camera1-65535", "result": "equal", "dependency": {"name": "iagVilleSendMessage", "address": 4737032, "arguments": [0, 2, 0]}}
+{"case": "f9000-sanctuary-camera1-65536", "result": "equal", "dependency": null}
+{"case": "f9000-sanctuary-camera1-4294967295", "result": "equal", "dependency": {"name": "iagVilleSendMessage", "address": 4737032, "arguments": [0, 2, 0]}}
+{"case": "f9000-sanctuary-impact", "result": "equal", "dependency": null}
+{"case": "f9176-scan-0", "result": "equal", "dependency": null}
+{"case": "f9176-scan-1", "result": "equal", "dependency": null}
+{"case": "f9176-scan-2", "result": "equal", "dependency": null}
+{"case": "f9176-scan-15", "result": "equal", "dependency": null}
+{"case": "f9176-scan-16", "result": "equal", "dependency": null}
+{"case": "f9176-order-0-1-16", "result": "equal", "dependency": null}
+{"case": "f9176-attack-0-1-16", "result": "equal", "dependency": null}
+{"case": "f9176-order-1-1-16", "result": "equal", "dependency": null}
+{"case": "f9176-attack-1-1-16", "result": "equal", "dependency": null}
+{"case": "f9176-order-2-1-16", "result": "equal", "dependency": null}
+{"case": "f9176-attack-2-1-16", "result": "equal", "dependency": null}
+{"case": "f9176-order-16-1-0", "result": "equal", "dependency": null}
+{"case": "f9176-attack-16-1-0", "result": "equal", "dependency": null}
+{"case": "f9176-order-16-3-0", "result": "equal", "dependency": null}
+{"case": "f9176-attack-16-3-0", "result": "equal", "dependency": {"name": "BatimentAdjacent", "address": 4339743, "arguments": [0, 13107]}}
+{"case": "f9176-dying-0", "result": "equal", "dependency": {"name": "SetDyingEngin", "address": 4475192, "arguments": [0]}}
+{"case": "f9176-dying-16", "result": "equal", "dependency": {"name": "SetDyingEngin", "address": 4475192, "arguments": [16]}}
+{"case": "f9176-hits-16-1", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9176-hits-16-2", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9176-hits-16-3", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9176-hits-16-4", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9176-hits-16-5", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9176-hits-16-6", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-7", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-8", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-9", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-10", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-11", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-12", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-13", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-14", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-15", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-16", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-17", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-18", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-19", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-20", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-21", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-22", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-23", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-24", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-25", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-26", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-27", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-28", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-29", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-30", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-31", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-32", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-33", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-34", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-35", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-36", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-37", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-38", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-39", "result": "equal", "dependency": null}
+{"case": "f9176-hits-16-40", "result": "equal", "dependency": null}
+{"case": "f9176-hits-0-1", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [0, 72, 16]}}
+{"case": "f9176-lethal-hp0-16", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9176-lethal-hp1-16", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9176-lethal-hp0-0", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [0, 72, 16]}}
+{"case": "f9176-lethal-hp1-0", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [0, 72, 16]}}
+{"case": "f9176-camera1-lethal-hp0-16", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9176-camera1-lethal-hp1-16", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [16, 72, 0]}}
+{"case": "f9176-camera1-lethal-hp0-0", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [0, 72, 16]}}
+{"case": "f9176-camera1-lethal-hp1-0", "result": "equal", "dependency": {"name": "iagUnitSendMessage", "address": 4729288, "arguments": [0, 72, 16]}}
+{"case": "f9176-dying-to-removal-16", "result": "equal", "dependency": {"name": "SetDyingEngin", "address": 4475192, "arguments": [16]}}
+{"case": "f9176-retire-16", "result": "equal", "dependency": {"name": "RetireEngin", "address": 4550744, "arguments": [16]}}
+{"case": "f9176-sanctuary-0", "result": "equal", "dependency": {"name": "PlaySnd_PostSound", "address": 4762233, "arguments": [66, 131328, 0, 256, 4825544]}}
+{"case": "f9176-sanctuary-1", "result": "equal", "dependency": {"name": "PlaySnd_PostSound", "address": 4762233, "arguments": [66, 131328, 0, 256, 4825544]}}
+{"case": "f9176-sanctuary-50", "result": "equal", "dependency": {"name": "PlaySnd_PostSound", "address": 4762233, "arguments": [66, 131328, 0, 256, 4825544]}}
+{"case": "f9176-sanctuary-65535", "result": "equal", "dependency": {"name": "PlaySnd_PostSound", "address": 4762233, "arguments": [66, 131328, 0, 256, 4825544]}}
+{"case": "f9176-sanctuary-65536", "result": "equal", "dependency": {"name": "PlaySnd_PostSound", "address": 4762233, "arguments": [66, 131328, 0, 256, 4825544]}}
+{"case": "f9176-sanctuary-4294967295", "result": "equal", "dependency": {"name": "PlaySnd_PostSound", "address": 4762233, "arguments": [66, 131328, 0, 256, 4825544]}}
+{"case": "f9176-sanctuary-camera1-0", "result": "equal", "dependency": null}
+{"case": "f9176-sanctuary-camera1-1", "result": "equal", "dependency": null}
+{"case": "f9176-sanctuary-camera1-49", "result": "equal", "dependency": null}
+{"case": "f9176-sanctuary-camera1-50", "result": "equal", "dependency": null}
+{"case": "f9176-sanctuary-camera1-51", "result": "equal", "dependency": null}
+{"case": "f9176-sanctuary-camera1-99", "result": "equal", "dependency": null}
+{"case": "f9176-sanctuary-camera1-100", "result": "equal", "dependency": null}
+{"case": "f9176-sanctuary-camera1-101", "result": "equal", "dependency": null}
+{"case": "f9176-sanctuary-camera1-255", "result": "equal", "dependency": null}
+{"case": "f9176-sanctuary-camera1-65535", "result": "equal", "dependency": {"name": "iagVilleSendMessage", "address": 4737032, "arguments": [0, 2, 0]}}
+{"case": "f9176-sanctuary-camera1-65536", "result": "equal", "dependency": null}
+{"case": "f9176-sanctuary-camera1-4294967295", "result": "equal", "dependency": {"name": "iagVilleSendMessage", "address": 4737032, "arguments": [0, 2, 0]}}
+{"case": "f9176-sanctuary-impact", "result": "equal", "dependency": null}
+{"cases": 174, "equal": 174, "mismatches": 0, "dependency_not_compared": 0, "dependency_stops": 53}

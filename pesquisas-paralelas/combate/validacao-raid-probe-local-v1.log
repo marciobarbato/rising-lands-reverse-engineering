@@ -1,0 +1,20 @@
+{"case": "f9000-order-0-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-attack-0-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-order-1-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-attack-1-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-order-2-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-attack-2-1-16", "result": "equal", "dependency": null}
+{"case": "f9000-order-16-1-0", "result": "equal", "dependency": null}
+{"case": "f9000-attack-16-1-0", "result": "equal", "dependency": null}
+{"case": "f9000-order-16-3-0", "result": "equal", "dependency": null}
+{"case": "f9000-attack-16-3-0", "result": "equal", "dependency": null}
+Traceback (most recent call last):
+  File "/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/validar_combate_raid.py", line 168, in <module>
+    raise SystemExit(main())
+  File "/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/validar_combate_raid.py", line 163, in main
+    r=compare(a.captura,a.emular,a.saida);print(json.dumps(r['summary']),flush=True)
+  File "/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/validar_combate_raid.py", line 108, in compare
+    py,regs,checked,dep=execute(case,before)
+  File "/Users/marcio/git/Rising Lands/worktrees/re-combat/pesquisas-paralelas/combate/validar_combate_raid.py", line 89, in execute
+    output=live.infligir_estrutura_registradores(regs);checked=GENERAL
+AttributeError: 'CombateRaidVivo' object has no attribute 'infligir_estrutura_registradores'

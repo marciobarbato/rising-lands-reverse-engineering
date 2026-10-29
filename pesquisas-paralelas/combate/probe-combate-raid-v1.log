@@ -1,0 +1,33 @@
+[lease] combat-raid-probe waiting
+[lease] combat-raid-probe granted slots [4]
+{"case": "f9000-order-0-1-16", "routine": "SetAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 2, "stores": 11}
+{"case": "f9000-attack-0-1-16", "routine": "CalculAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 45, "stores": 17}
+{"case": "f9000-order-1-1-16", "routine": "SetAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 2, "stores": 11}
+{"case": "f9000-attack-1-1-16", "routine": "CalculAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 45, "stores": 17}
+{"case": "f9000-order-2-1-16", "routine": "SetAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 2, "stores": 11}
+{"case": "f9000-attack-2-1-16", "routine": "CalculAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 45, "stores": 17}
+{"case": "f9000-order-16-1-0", "routine": "SetAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 2, "stores": 9}
+{"case": "f9000-attack-16-1-0", "routine": "CalculAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 7, "stores": 10}
+{"case": "f9000-order-16-3-0", "routine": "SetAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 2, "stores": 9}
+{"case": "f9000-attack-16-3-0", "routine": "CalculAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 7, "stores": 10}
+{"case": "f9000-dying-0", "routine": "SetDyingEngin", "returned": false, "stop": "PlaySnd_StopSound", "fault": null, "limit": false, "entries": 4, "stores": 0}
+{"case": "f9000-dying-16", "routine": "SetDyingEngin", "returned": false, "stop": "PlaySnd_StopSound", "fault": null, "limit": false, "entries": 8, "stores": 6}
+{"case": "f9000-damage-16", "routine": "InfligeDegat", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 41, "stores": 39}
+{"case": "f9000-damage-0", "routine": "InfligeDegat", "returned": false, "stop": "PlaySnd_PostSound", "fault": null, "limit": false, "entries": 28, "stores": 12}
+{"case": "f9000-sanctuary-damage", "routine": "BatimentInfligeDegat", "returned": false, "stop": "PlaySnd_PostSound", "fault": null, "limit": false, "entries": 3, "stores": 1}
+{"case": "f9176-order-0-1-16", "routine": "SetAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 2, "stores": 11}
+{"case": "f9176-attack-0-1-16", "routine": "CalculAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 45, "stores": 17}
+{"case": "f9176-order-1-1-16", "routine": "SetAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 2, "stores": 11}
+{"case": "f9176-attack-1-1-16", "routine": "CalculAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 45, "stores": 17}
+{"case": "f9176-order-2-1-16", "routine": "SetAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 2, "stores": 11}
+{"case": "f9176-attack-2-1-16", "routine": "CalculAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 45, "stores": 17}
+{"case": "f9176-order-16-1-0", "routine": "SetAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 2, "stores": 11}
+{"case": "f9176-attack-16-1-0", "routine": "CalculAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 73, "stores": 4}
+{"case": "f9176-order-16-3-0", "routine": "SetAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 2, "stores": 11}
+{"case": "f9176-attack-16-3-0", "routine": "CalculAttaqueEngin", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 149, "stores": 4}
+{"case": "f9176-dying-0", "routine": "SetDyingEngin", "returned": false, "stop": "PlaySnd_StopSound", "fault": null, "limit": false, "entries": 4, "stores": 0}
+{"case": "f9176-dying-16", "routine": "SetDyingEngin", "returned": false, "stop": "PlaySnd_StopSound", "fault": null, "limit": false, "entries": 8, "stores": 6}
+{"case": "f9176-damage-16", "routine": "InfligeDegat", "returned": true, "stop": null, "fault": null, "limit": false, "entries": 50, "stores": 41}
+{"case": "f9176-damage-0", "routine": "InfligeDegat", "returned": false, "stop": "PlaySnd_PostSound", "fault": null, "limit": false, "entries": 28, "stores": 12}
+{"case": "f9176-sanctuary-damage", "routine": "BatimentInfligeDegat", "returned": false, "stop": "PlaySnd_PostSound", "fault": null, "limit": false, "entries": 3, "stores": 1}
+{"output": "pesquisas-paralelas/combate/evidencias/probe-combate-raid-original-v1.json", "cases": 30, "returned": 22, "faults": 0, "limits": 0}

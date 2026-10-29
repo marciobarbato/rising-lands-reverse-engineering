@@ -1,5 +1,14 @@
 # Stage 19: building-target damage inventory
 
+Current update, 2026-10-29: the live-memory consumer/wrapper is now published in
+[COMBAT.md](../../docs/COMBAT.md#real-m23-raid-memory-api-2026-10-29), with
+[evidence chronology](RAID_CAPTURE_MATRIX.md) and the current
+[handoff](HANDOFF.md). `dano_estrutura_raid.DanoEstruturaRaid` implements the
+consumer; `combate_raid_vivo.CombateRaidVivo` composes the cell wrapper and
+explicit foreign dependencies. The dated 2026-10-28 static inventory below is
+retained as historical planning context; its "not started" status is superseded
+by the current delivery, not by an M3/M4 acceptance.
+
 Status on 2026-10-28: **light static readiness only**. This is a proposed contract for the next bounded implementation, not a public provider. No behavior was translated and no native execution was run in this resumption. The coordinator's exclusive heavy lease is required before original-only captures, differential comparisons, domain checks or integration.
 
 Baseline: main `8810b3730a0fb788af3eac2b447dea65372f597f`, reached by a clean fast-forward of the existing combat worktree. Stage 18 implementation `248d0556c216d0a8161a1264525b24ccb69fe51f`, pushed feature `d24b09c1ff4e6a81356fbfecbb24bf3140309af3` and main merge `b602b07e406ced7c8c67a9f011a8899718d32a87` are already ancestors of this baseline. Their 17,509 native executions are historical evidence, not fresh validation in this turn.
