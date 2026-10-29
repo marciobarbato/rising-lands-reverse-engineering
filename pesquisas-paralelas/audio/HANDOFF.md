@@ -577,3 +577,38 @@ new versus historical counts, tested code commit and open dependencies.
 Original v1/v2/v3 evidence sizes are387036/1011135/1113571 bytes respectively;
 v1/v2 are diagnostics and v3 is the valid140-entry corpus. No Mac mini request,
 main merge/push, milestone change, device output or Rust implementation occurs.
+
+
+## Bounded integration refresh over main3579c40
+
+No new research, API or reconstructed behavior was added. The clean feature
+retained delivery `383b143` and safely merged fetched latest main
+`3579c40ad455564f2a9b32c9a01b815b24d68f87` at committed merge
+`a9c151085b7623bdf813d9afca0deb26c8ff98d5`. Latest-main ancestry was verified.
+All Audio provider/probe/replay hashes remain identical to the preceding
+140-entry report. Original captures and first build evidence remain untouched.
+
+Repeated Audio gate: **69 discovered,66 passed,zero failures,three unchanged
+optional native skips**,11.467 seconds. Repeated fresh native differential:
+**140 actual entries /35 scenarios,34 returned scenarios plus one expected
+NULL-allocation/UI boundary,zero failures**,0.428 seconds under the unchanged
+shared lease and existing600-second/50,000-instruction bounds. This repeats
+existing coverage; it is **zero new unique original coverage**, not another
+140 independent cases. Ten dictator API tests continue to pass without skips.
+
+The exact coordinator build command above was run once from merge commit
+`a9c151085b7623bdf813d9afca0deb26c8ff98d5`, preserving the first outcome:
+**exit1,80 consumer tests,78 passed,2 failures,0 skips**,36.829 seconds. The same
+two tests fail the explicit Graphics1.2/1.3 mismatch. Compilation, signing and
+AppKit were not reached; no new bundle/UI JSON/PNG was produced. No app edit,
+version bypass or retry occurred. This remains coordinator/macOS-owned.
+
+[Refresh report and payload sizes](validacao/audio-dictator-integration-refresh.json),
+[Audio gate](validacao/audio-dictator-refresh-check.log),
+[fresh native result](validacao/dictador-audio-three-way-refresh-v1.json),
+[first refreshed launcher log](validacao/audio-dictator-refresh-native-build.log)
+and [consumer log](validacao/audio-dictator-refresh-consumer-tests.log) contain
+exact tested commit, results and bytes/hashes. The prior delivery manifest is a
+historical snapshot of commit383b143; the refresh report describes the current
+payload. No milestone status, main push, device behavior or Rust implementation
+changes are included.

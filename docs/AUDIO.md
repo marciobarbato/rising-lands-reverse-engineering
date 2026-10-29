@@ -447,3 +447,12 @@ Audio gate remains69 discovered/66 passed/3 optional baseline skips/0 failures;
 new140-entry/35-scenario differential has one expected allocation/UI boundary
 and zero comparison failures. The handoff's structured manifest contains exact
 SHAs, output file/byte sizes and pending coordinator/device dependencies.
+
+
+Bounded integration refresh: main `3579c40` merged at tested commit `a9c1510`;
+Audio code/evidence unchanged. Gate repeats69/66/3 optional skips/0 failures;
+fresh native repeats140 entries/35 scenarios with one expected boundary and
+zero failures. Exact build repeats78/80 consumer tests, with the same two
+Graphics1.2/1.3 failures before compilation/AppKit. These are integration
+revalidation results, not new unique original coverage. The Audio handoff and
+structured refresh report retain all earlier results and current payload sizes.
