@@ -1,0 +1,702 @@
+{
+ "schema": "rising-lands/ai-runtime-m2-frame-inventory/1",
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "input": {
+  "label": "M1 post-load input",
+  "capture": "pesquisas-paralelas/missoes/evidencias/captura-carga-missao-original-v2.json",
+  "capture_sha256": "eb7d2303e13e62d4f5692c9cb6ef302b573d138df6a8b51183a6d9b0bd703afc",
+  "final_state_sha256": "58a5020e79f812e741991410bde0ebc847c927ce141176975a82c0a51a7a1114",
+  "point": "MissionLoad real return 0x42d22d (before the load-entry tail 0x42d22d..0x42d2de)"
+ },
+ "frame_body": {
+  "interval": [
+   "0x0042d2de",
+   "0x0042d4f5"
+  ],
+  "calls": [
+   {
+    "site": "0x0042d2de",
+    "target": "0x0046d628",
+    "routine": "PlayerAttaqueReset",
+    "owner": "economy"
+   },
+   {
+    "site": "0x0042d2e3",
+    "target": "0x004581b6",
+    "routine": "EvenementEnCours",
+    "owner": "missions"
+   },
+   {
+    "site": "0x0042d328",
+    "target": "0x00467a8c",
+    "routine": "MCICD_Play",
+    "owner": "audio (second wave)"
+   },
+   {
+    "site": "0x0042d33b",
+    "target": "0x00429278",
+    "routine": "InputGame",
+    "owner": "ai-runtime (input: second wave)"
+   },
+   {
+    "site": "0x0042d342",
+    "target": "0x0045ec9f",
+    "routine": "InputSend",
+    "owner": "ai-runtime (network: second wave)"
+   },
+   {
+    "site": "0x0042d34b",
+    "target": "0x0045ea7c",
+    "routine": "InputReceive",
+    "owner": "ai-runtime (network: second wave)"
+   },
+   {
+    "site": "0x0042d354",
+    "target": "0x0046c11a",
+    "routine": "MissionGetNum",
+    "owner": "missions"
+   },
+   {
+    "site": "0x0042d35d",
+    "target": "0x0047fbea",
+    "routine": "CalculNextReflect",
+    "owner": "ai-runtime"
+   },
+   {
+    "site": "0x0042d36c",
+    "target": "0x00429278",
+    "routine": "InputGame",
+    "owner": "ai-runtime (input: second wave)"
+   },
+   {
+    "site": "0x0042d379",
+    "target": "0x0046d817",
+    "routine": "PlayerGetType",
+    "owner": "economy"
+   },
+   {
+    "site": "0x0042d3b0",
+    "target": "0x0045edc0",
+    "routine": "ProcessInputGame",
+    "owner": "ai-runtime"
+   },
+   {
+    "site": "0x0042d3e1",
+    "target": "0x00469dce",
+    "routine": "MessageBoxCalcul",
+    "owner": "ai-runtime"
+   },
+   {
+    "site": "0x0042d3e6",
+    "target": "0x0045d015",
+    "routine": "GameNextFrame",
+    "owner": "ai-runtime"
+   },
+   {
+    "site": "0x0042d3eb",
+    "target": "0x0045e944",
+    "routine": "CalculIconeAction",
+    "owner": "ai-runtime (interface: second wave)"
+   },
+   {
+    "site": "0x0042d3f0",
+    "target": "0x0046fc0f",
+    "routine": "ProjectileCalcul",
+    "owner": "combat"
+   },
+   {
+    "site": "0x0042d3f5",
+    "target": "0x00456db5",
+    "routine": "CalculEnginNextEtape",
+    "owner": "ai-runtime"
+   },
+   {
+    "site": "0x0042d3fa",
+    "target": "0x004281c7",
+    "routine": "CalculBatimentNextEtape",
+    "owner": "ai-runtime"
+   },
+   {
+    "site": "0x0042d3ff",
+    "target": "0x0047125c",
+    "routine": "RechercheCalcul",
+    "owner": "economy"
+   },
+   {
+    "site": "0x0042d404",
+    "target": "0x0046da3b",
+    "routine": "PlayerInitAllianceCompteur",
+    "owner": "economy"
+   },
+   {
+    "site": "0x0042d409",
+    "target": "0x00475328",
+    "routine": "SetUpdateChamp",
+    "owner": "core"
+   },
+   {
+    "site": "0x0042d40e",
+    "target": "0x00478806",
+    "routine": "UpdateChamp",
+    "owner": "core"
+   },
+   {
+    "site": "0x0042d413",
+    "target": "0x00467718",
+    "routine": "CalculMatiere",
+    "owner": "economy"
+   },
+   {
+    "site": "0x0042d41f",
+    "target": "0x00466dd1",
+    "routine": "CalculCompteurMarche",
+    "owner": "economy"
+   },
+   {
+    "site": "0x0042d42d",
+    "target": "0x00466e9b",
+    "routine": "CalculCompteurProposition",
+    "owner": "economy"
+   },
+   {
+    "site": "0x0042d441",
+    "target": "0x00477700",
+    "routine": "NextAnimTerrain",
+    "owner": "core"
+   },
+   {
+    "site": "0x0042d44f",
+    "target": "0x004774fa",
+    "routine": "NextAnimVegetFullMap",
+    "owner": "core"
+   },
+   {
+    "site": "0x0042d467",
+    "target": "0x004772ec",
+    "routine": "NextAnimVeget",
+    "owner": "core"
+   },
+   {
+    "site": "0x0042d46c",
+    "target": "0x0046d629",
+    "routine": "PlayerAttaqueCalculSympa",
+    "owner": "economy"
+   },
+   {
+    "site": "0x0042d481",
+    "target": "0x00458606",
+    "routine": "TestFinDeMission",
+    "owner": "missions"
+   },
+   {
+    "site": "0x0042d48f",
+    "target": "0x0046c11a",
+    "routine": "MissionGetNum",
+    "owner": "missions"
+   },
+   {
+    "site": "0x0042d4b1",
+    "target": "0x0046994b",
+    "routine": "MessageBoxSet",
+    "owner": "ai-runtime (interface: second wave)"
+   },
+   {
+    "site": "0x0042d4c8",
+    "target": "0x0048aac5",
+    "routine": "PlaySnd_StopAllSound",
+    "owner": "audio (second wave)"
+   },
+   {
+    "site": "0x0042d4db",
+    "routine": "USER32.dll!PostQuitMessage",
+    "owner": "Win32 import"
+   }
+  ],
+  "gates": [
+   {
+    "site": "0x0042d2ea",
+    "instruction": "jne 0x42d4ea",
+    "meaning": "gate 2: EvenementEnCours AL != 0 exits at 0x42d4ea (skips the 0x5099b0 clear)"
+   },
+   {
+    "site": "0x0042d2f7",
+    "instruction": "jne 0x42d32d",
+    "meaning": "byte 0x4e2f28 != 0 skips MCICD_Play"
+   },
+   {
+    "site": "0x0042d380",
+    "instruction": "jb 0x42d388",
+    "meaning": "PlayerGetType(cl) AL: 1 -> human input, 2 -> CalculNextReflect, other -> nothing"
+   },
+   {
+    "site": "0x0042d337",
+    "instruction": "jne 0x42d349",
+    "meaning": "type 1: cl == local 0x508041 -> InputGame+InputSend, else InputReceive"
+   },
+   {
+    "site": "0x0042d368",
+    "instruction": "jne 0x42d388",
+    "meaning": "type 2: cl == local 0x508041 -> InputGame after CalculNextReflect"
+   },
+   {
+    "site": "0x0042d391",
+    "instruction": "jg 0x42d3a2",
+    "meaning": "player loop cl = 0..4 single player"
+   },
+   {
+    "site": "0x0042d3a0",
+    "instruction": "jne 0x42d373",
+    "meaning": "network flag 0x4e0730 set: player 4 skipped"
+   },
+   {
+    "site": "0x0042d3be",
+    "instruction": "jl 0x42d3b0",
+    "meaning": "ProcessInputGame for bl = 0..3"
+   },
+   {
+    "site": "0x0042d3c9",
+    "instruction": "je 0x42d3e1",
+    "meaning": "gate 3: state 0x4e2f78 == 0x12 continues"
+   },
+   {
+    "site": "0x0042d3ce",
+    "instruction": "jne 0x42d4e2",
+    "meaning": "gate 3: state 0x10 continues only with the network flag; else exit 0x42d4e2"
+   },
+   {
+    "site": "0x0042d44d",
+    "instruction": "je 0x42d456",
+    "meaning": "network flag: NextAnimVegetFullMap, else NextAnimVeget"
+   },
+   {
+    "site": "0x0042d478",
+    "instruction": "jne 0x42d4e2",
+    "meaning": "network flag: exit before TestFinDeMission"
+   },
+   {
+    "site": "0x0042d48d",
+    "instruction": "je 0x42d4e2",
+    "meaning": "TestFinDeMission AL (stored at 0x4e05a0) == 0 exits"
+   },
+   {
+    "site": "0x0042d49c",
+    "instruction": "jne 0x42d4b6",
+    "meaning": "MissionGetNum == 6 and u32 0x4e061c == 0 -> MessageBoxSet(10, 500)"
+   },
+   {
+    "site": "0x0042d4c6",
+    "instruction": "jl 0x42d4e2",
+    "meaning": "u32 0x4e061c += 1; below 100 exits, at 100 stop sound and MenuInit(local, 0x13)"
+   }
+  ]
+ },
+ "gate_inputs_post_load": {
+  "state_4e2f78": 0,
+  "state_note": "MenuInit(local, 0x12, 1) at 0x42d2cb stores 0x12 before the body",
+  "evenement_en_cours_4e1b0e": 0,
+  "cd_music_off_4e2f28": 0,
+  "network_4e0730": 0,
+  "local_player_508041": 0,
+  "mission_496fe4": 1,
+  "end_counter_4e061c": 0,
+  "frame_counters_508f7c_80_84": [
+   0,
+   0,
+   0
+  ],
+  "frame_counters_note": "zeroed again by the load entry (0x42d1da step 5) before the body",
+  "game_next_frame_496d40": 1,
+  "structure_period_495c02": 1000,
+  "unit_counters_4e1a38_4e1a3a": [
+   65535,
+   65535
+  ],
+  "structure_counters_4dfaa8": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "unit_counters_4e1928": [
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "players": [
+  {
+   "player": 0,
+   "type": 1,
+   "type_source": "[0x5080a8]+1",
+   "calls": "InputGame+InputSend (local)"
+  },
+  {
+   "player": 1,
+   "type": 2,
+   "type_source": "[0x5080a8]+21",
+   "calls": "CalculNextReflect(player, MissionGetNum) -> iaCalculPlayer",
+   "context": "0x0051a99c",
+   "context_bytes": "00000000011142536400000000000000",
+   "inactive_byte_51a990": 1,
+   "ia_calcul_player_path": "inactive: return 0, no call"
+  },
+  {
+   "player": 2,
+   "type": 2,
+   "type_source": "[0x5080a8]+41",
+   "calls": "CalculNextReflect(player, MissionGetNum) -> iaCalculPlayer",
+   "context": "0x0051a9ac",
+   "context_bytes": "00000000011141526400000000000000",
+   "inactive_byte_51a990": 1,
+   "ia_calcul_player_path": "inactive: return 0, no call"
+  },
+  {
+   "player": 3,
+   "type": 2,
+   "type_source": "[0x5080a8]+61",
+   "calls": "CalculNextReflect(player, MissionGetNum) -> iaCalculPlayer",
+   "context": "0x0051a9bc",
+   "context_bytes": "00000000012e40526400000000000000",
+   "inactive_byte_51a990": 1,
+   "ia_calcul_player_path": "inactive: return 0, no call"
+  },
+  {
+   "player": 4,
+   "type": 2,
+   "type_source": "PlayerGetType constant 0x46d834",
+   "calls": "CalculNextReflect(player, MissionGetNum) -> iaCalculPlayer",
+   "ia_calcul_player_path": "AvanceMonstre(4) then iaSolver(0x5148f0)"
+  }
+ ],
+ "monster_tables": {
+  "count_u16_50a9ce": 5,
+  "human_only_u8_50a9bc": 0,
+  "group_counts_50b124": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   2,
+   2,
+   2,
+   2,
+   3,
+   4,
+   7,
+   0
+  ]
+ },
+ "units": {
+  "pool": "0x4140d000",
+  "live": 16,
+  "by_state": {
+   "7": {
+    "branch": "0x00456966",
+    "units": [
+     0,
+     1,
+     2,
+     11,
+     12,
+     13,
+     14,
+     15
+    ]
+   },
+   "14": {
+    "branch": "0x00454ccd",
+    "units": [
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   }
+  },
+  "records": [
+   {
+    "index": 0,
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "branch": "0x00456966",
+    "counted": true,
+    "ia_test_utilite": true,
+    "counter_4e1a3x": "0x4e1a3a (local)",
+    "target_scan_frame1": true,
+    "fatigue_branch": true,
+    "group": "0xffffffff",
+    "spell_bit_byte_dc": 0,
+    "reload_u16_102": 20
+   },
+   {
+    "index": 1,
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "branch": "0x00456966",
+    "counted": true,
+    "ia_test_utilite": true,
+    "counter_4e1a3x": "0x4e1a3a (local)",
+    "target_scan_frame1": false,
+    "fatigue_branch": true,
+    "group": "0xffffffff",
+    "spell_bit_byte_dc": 0,
+    "reload_u16_102": 20
+   },
+   {
+    "index": 2,
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "branch": "0x00456966",
+    "counted": true,
+    "ia_test_utilite": true,
+    "counter_4e1a3x": "0x4e1a3a (local)",
+    "target_scan_frame1": false,
+    "fatigue_branch": true,
+    "group": "0xffffffff",
+    "spell_bit_byte_dc": 0,
+    "reload_u16_102": 20
+   },
+   {
+    "index": 3,
+    "owner": 0,
+    "type": 9,
+    "state": 14,
+    "branch": "0x00454ccd",
+    "counted": true,
+    "ia_test_utilite": true,
+    "counter_4e1a3x": "0x4e1a3a (local)",
+    "target_scan_frame1": false,
+    "fatigue_branch": true,
+    "group": "0xffffffff",
+    "spell_bit_byte_dc": 0,
+    "reload_u16_102": 1
+   },
+   {
+    "index": 4,
+    "owner": 0,
+    "type": 9,
+    "state": 14,
+    "branch": "0x00454ccd",
+    "counted": true,
+    "ia_test_utilite": true,
+    "counter_4e1a3x": "0x4e1a3a (local)",
+    "target_scan_frame1": false,
+    "fatigue_branch": true,
+    "group": "0xffffffff",
+    "spell_bit_byte_dc": 0,
+    "reload_u16_102": 1
+   },
+   {
+    "index": 5,
+    "owner": 0,
+    "type": 9,
+    "state": 14,
+    "branch": "0x00454ccd",
+    "counted": true,
+    "ia_test_utilite": true,
+    "counter_4e1a3x": "0x4e1a3a (local)",
+    "target_scan_frame1": false,
+    "fatigue_branch": true,
+    "group": "0xffffffff",
+    "spell_bit_byte_dc": 0,
+    "reload_u16_102": 1
+   },
+   {
+    "index": 6,
+    "owner": 0,
+    "type": 9,
+    "state": 14,
+    "branch": "0x00454ccd",
+    "counted": true,
+    "ia_test_utilite": true,
+    "counter_4e1a3x": "0x4e1a3a (local)",
+    "target_scan_frame1": false,
+    "fatigue_branch": true,
+    "group": "0xffffffff",
+    "spell_bit_byte_dc": 0,
+    "reload_u16_102": 1
+   },
+   {
+    "index": 7,
+    "owner": 0,
+    "type": 9,
+    "state": 14,
+    "branch": "0x00454ccd",
+    "counted": true,
+    "ia_test_utilite": true,
+    "counter_4e1a3x": "0x4e1a3a (local)",
+    "target_scan_frame1": false,
+    "fatigue_branch": true,
+    "group": "0xffffffff",
+    "spell_bit_byte_dc": 0,
+    "reload_u16_102": 1
+   },
+   {
+    "index": 8,
+    "owner": 0,
+    "type": 9,
+    "state": 14,
+    "branch": "0x00454ccd",
+    "counted": true,
+    "ia_test_utilite": true,
+    "counter_4e1a3x": "0x4e1a3a (local)",
+    "target_scan_frame1": false,
+    "fatigue_branch": true,
+    "group": "0xffffffff",
+    "spell_bit_byte_dc": 0,
+    "reload_u16_102": 1
+   },
+   {
+    "index": 9,
+    "owner": 0,
+    "type": 9,
+    "state": 14,
+    "branch": "0x00454ccd",
+    "counted": true,
+    "ia_test_utilite": true,
+    "counter_4e1a3x": "0x4e1a3a (local)",
+    "target_scan_frame1": false,
+    "fatigue_branch": true,
+    "group": "0xffffffff",
+    "spell_bit_byte_dc": 0,
+    "reload_u16_102": 1
+   },
+   {
+    "index": 10,
+    "owner": 0,
+    "type": 9,
+    "state": 14,
+    "branch": "0x00454ccd",
+    "counted": true,
+    "ia_test_utilite": true,
+    "counter_4e1a3x": "0x4e1a3a (local)",
+    "target_scan_frame1": false,
+    "fatigue_branch": true,
+    "group": "0xffffffff",
+    "spell_bit_byte_dc": 0,
+    "reload_u16_102": 1
+   },
+   {
+    "index": 11,
+    "owner": 0,
+    "type": 1,
+    "state": 7,
+    "branch": "0x00456966",
+    "counted": true,
+    "ia_test_utilite": true,
+    "counter_4e1a3x": "0x4e1a3a (local)",
+    "target_scan_frame1": false,
+    "fatigue_branch": true,
+    "group": "0xffffffff",
+    "spell_bit_byte_dc": 0,
+    "reload_u16_102": 50
+   },
+   {
+    "index": 12,
+    "owner": 0,
+    "type": 7,
+    "state": 7,
+    "branch": "0x00456966",
+    "counted": true,
+    "ia_test_utilite": true,
+    "counter_4e1a3x": "0x4e1a3a (local)",
+    "target_scan_frame1": false,
+    "fatigue_branch": true,
+    "group": "0xffffffff",
+    "spell_bit_byte_dc": 0,
+    "reload_u16_102": 100
+   },
+   {
+    "index": 13,
+    "owner": 0,
+    "type": 5,
+    "state": 7,
+    "branch": "0x00456966",
+    "counted": true,
+    "ia_test_utilite": true,
+    "counter_4e1a3x": "0x4e1a3a (local)",
+    "target_scan_frame1": false,
+    "fatigue_branch": true,
+    "group": "0xffffffff",
+    "spell_bit_byte_dc": 0,
+    "reload_u16_102": 250
+   },
+   {
+    "index": 14,
+    "owner": 0,
+    "type": 5,
+    "state": 7,
+    "branch": "0x00456966",
+    "counted": true,
+    "ia_test_utilite": true,
+    "counter_4e1a3x": "0x4e1a3a (local)",
+    "target_scan_frame1": false,
+    "fatigue_branch": true,
+    "group": "0xffffffff",
+    "spell_bit_byte_dc": 0,
+    "reload_u16_102": 250
+   },
+   {
+    "index": 15,
+    "owner": 0,
+    "type": 8,
+    "state": 7,
+    "branch": "0x00456966",
+    "counted": true,
+    "ia_test_utilite": true,
+    "counter_4e1a3x": "0x4e1a3a (local)",
+    "target_scan_frame1": false,
+    "fatigue_branch": true,
+    "group": "0xffffffff",
+    "spell_bit_byte_dc": 0,
+    "reload_u16_102": 30
+   }
+  ]
+ },
+ "structures": {
+  "pool": "0x0049a0c8",
+  "live": 1,
+  "by_type": {
+   "2": {
+    "branch": "0x00426918",
+    "structures": [
+     0
+    ]
+   }
+  },
+  "records": [
+   {
+    "index": 0,
+    "owner": 0,
+    "state": 5,
+    "type": 2,
+    "branch": "0x00426918",
+    "counted": true,
+    "decouvre_illumine_players": [
+     1,
+     2,
+     3
+    ],
+    "illumination_flags_110": [
+     0,
+     0,
+     0,
+     0
+    ]
+   }
+  ]
+ }
+}
