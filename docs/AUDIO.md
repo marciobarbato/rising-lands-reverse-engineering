@@ -4,7 +4,7 @@ Owner: the Audio front (`feat/re-audio`, `worktrees/re-audio`). Owned paths are 
 
 Addresses apply to executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`. The normalized analysis PE (`26c4534b…64d0`) is analysis-only. The original sound banks are `INSTALHD/SOUND/{A,B,P}.HED` and `.SND` on the read-only CD copy (`../source/cd`); `TICKONE.WAV` sits at the CD root and is not part of the banks. `relatorios/fontes.json` does not list the sound files, so their sizes and SHA-256 are recorded in [`ambiente_audio.py`](../pesquisas-paralelas/audio/ambiente_audio.py) and the [audio manifest](../pesquisas-paralelas/audio/evidencias/som-manifesto.json). PT-BR voices and music are preserved byte-exactly. They are never re-recorded, translated or normalized, and no decoded audio is committed.
 
-Stage 1 is the integrated baseline. The independent 2026-10-29 continuation adds a bounded M2.2 soundness audit and the first original-first queue-index slice; full stages 2 and 3 remain incomplete.
+Stage 1 is the integrated baseline. The independent 2026-10-29 continuation adds the bounded M2.2 audit, queue helpers and the declared-platform request/PCM slice below. Full stages 2 and 3 remain incomplete. Historical inventory and handoff sections retain their original scope; the current API is defined in the final section.
 
 ## Original subsystem inventory (symbols from the original SBL)
 
@@ -262,8 +262,64 @@ helper, for example at 0x48a351. Manage consumes GetMaxIndice at 0x48a80c.
 The new provider covers those index helpers only. Record population/compaction,
 transfer/sorting, logical/physical ownership and the DirectSound status/position,
 volume, play/stop lifecycle remain unimplemented. Initialized ClearListe reaches
-DSB_IsThisSoundPlaying 0x48beb9 (call 0x489fd9), requiring an explicit COM status
+DSB_IsStopped 0x48beb9 (call 0x489fd9), requiring an explicit COM status
 fixture. This is a declared dependency boundary, not a completed queue or a
 successful sound request. Stage-3 emitters remain with their game-side owners
 until that request contract is integrated; original bank/decoder work is baseline,
 not new validation claimed by this round.
+
+
+## Current request/record API and declared PCM bridge — 2026-10-29
+
+This continuation starts from fetched main `a7405668e630650f67f6ff792bd07348ae7697f7`
+(with the prior Audio delivery already integrated), in the dedicated Audio clone
+and branch. No other-front files or formal milestone status are changed.
+
+`fila_audio.AudioQueue(memory, external)` is a bounded Stage-2 provider.
+[QUEUE_COM_CONTRACT.md](../pesquisas-paralelas/audio/QUEUE_COM_CONTRACT.md)
+defines exact inherited regions, scalar widths, protected domains, callback
+answers/order, error effects, original addresses and evidence chronology.
+The constructor retains supplied memory/backend identities and initializes
+nothing. A caller must supply the original layout, reference words and explicit
+external answers. The fixture memory/backend are test tools, not a game engine
+or an automatically initialized audio subsystem.
+
+| API | Original entry | Validated effect |
+|---|---|---|
+| status(pointer, kind), stop_buffer(pointer) | 0x48be90 / 0x48beb9 / 0x48bedb / 0x48bf74 | Null guards; explicit GetStatus bits and original HRESULT handling |
+| post(selector, id, reference, flags, volume) | 0x48aa79 | A/B/P selector, new/repeated/replaced/cancelled requests, absent IDs and full queue; unsupported selector preserves original EAX=id |
+| insert(id, bank, reference, flags, volume) | 0x48a218 | Caller-owned handle word, Stage-1 metadata identity/variant cursor and exact 44-byte record mutation |
+| set_volume(reference, volume), stop_handle(reference) | 0x48a14a / 0x48a438 | Waiting/playing cancellation or dirty stores, entry-word 256 branch |
+| compact(record_address, clear), destroy_waiting(index) | 0x48af1b / 0x48b11d | External-reference writes, swap-with-last bytes, selective state-byte clear and counter order |
+| permute(address_a, address_b), sort() | 0x48b317 / 0x48a664 | Full record/reference swap; caller dirty-flag handling around literal-RET waiting sorter |
+| destroy_logical(slot), transfer_to_waiting(index), transfer_to_playing(index) | 0x48adb3 / 0x48b01b / 0x48b1e9 | Captured logical cleanup and playing/waiting movement with original slot back-pointers and aliasing |
+| manage() | 0x48aaca | Empty, captured active-logical cleanup/volume and one new file-backed PCM request; explicit dependency stops elsewhere |
+
+Reserve/give-back are also available over the same inherited memory image;
+the earlier `WaitingSlotIndex` API remains unchanged. `volume_word`,
+`start_buffer` and `create_pending_pcm` are narrow bridge operations, with
+original table arithmetic and Stage-1 `criar_superficie_som` reused. The supported
+Manage pending state is maximum index 20 with physical last-index -1; broader
+loaded reuse, duplicate/promotion, dictator and multiple-request behavior stop
+at the addresses listed in the contract. Resident/compressed queue bridging,
+wrapped or short Lock regions and real asynchronous device state remain outside.
+An exception retains earlier validated calls/stores; there is no rollback or
+implicit successful callback.
+
+Original-only captures v1–v9 were committed before their translations. The
+current v9 image contains **244 original calls in 238 scenarios**: 235 returned
+scenarios and three deliberately unbound creation/Lock stops. A seven-call
+persistent PostSound sequence compares each intermediate image, not only its
+last state. The PCM matrix supplies exact descriptor/output/status/HRESULT/read
+bytes and exercises success, creation-error-with-output, Lock/Unlock errors,
+short/empty read, already-playing and position/volume/Play failures. These are
+declared platform responses, not real hardware or audible playback results.
+
+The [fresh three-way report](../pesquisas-paralelas/audio/validacao/fila-audio-three-way-v2.json)
+is byte-exact for all supplied memory regions and ordered external calls;
+consumed EAX results and intermediate sequence states also equal. Three named
+stops are expected, with the PSB -1→0 reservation and seek/dirty effects retained.
+Native capture uses unchanged original bodies, Core's declared binding facility,
+20,000 instructions per call and a 600-second SIGALRM after lease acquisition.
+All new native queue jobs took under two seconds each. Exact fresh commands,
+actual gate results and remaining gaps are in the current handoff section.

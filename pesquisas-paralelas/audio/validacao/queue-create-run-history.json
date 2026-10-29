@@ -1,0 +1,14 @@
+{
+  "schema": "rising-lands/audio-queue-create-run-history/1",
+  "attempts": [
+    {
+      "tag": "codex-audio-queue-pcm-original-v9",
+      "status": "capture setup failed before PCM execution",
+      "exception": "ValueError: Declare an explicit data IAT slot and supported stdcall argument count",
+      "cause": "_hread was erroneously declared at 0x523200; intact original call 0x48c042 and Stage-1 SLOTS prove 0x5231e8",
+      "native_job_wall_seconds": 0.981,
+      "report_created": false,
+      "correction": "Use verified original 0x5231e8; no original bytes changed"
+    }
+  ]
+}
