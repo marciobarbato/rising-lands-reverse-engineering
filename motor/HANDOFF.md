@@ -448,3 +448,183 @@ actual Rust checkpoint for parts 1–9; aggregate with `--serial`. This mode
 requires every continuation hash to match. It is implemented and covered by
 harness tests but was not the completed 18,401-phase run's scope. The serial
 benchmark above is the completed uninterrupted S0 endpoint run.
+
+
+## Stage 3 — native renderer implementation contract
+
+This additive ABI 1.3 stage ports Graphics `renderizar_quadro` 1.5, including
+HUD/cursor and input-time selection overlays, to Rust. Python providers,
+original captures, assets and masks remain read-only. The original executable
+identity is unchanged: `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+The app input contract reviewed is `docs/MACOS_PLAYABLE.md` on committed
+`origin/feat/macos-playable` at `16918c0` (Renderer port input).
+
+The C header defines create, generation query, render, reset, release, cache
+export and observation export. Existing 1.0/1.1/1.2 creation remains supported;
+old signatures/layouts and the 72-byte frame structures are unchanged.
+`RlRenderResult` is 304 bytes; `RlRenderObservation` is 108 bytes on the
+supported 64-bit host. Output is indexed8, top-down 800×600, stride 800, plus
+256 RGB24 entries (768 bytes), copied to caller-owned reusable buffers.
+`hud_flags=1` enables Graphics 1.5 HUD/cursor; zero ends at its playfield
+checkpoint. The complete persistent cache is 1,024 key bytes, 270,336 raw
+payload bytes and a cursor in 0..255. Creation/reset copy all inputs and never
+invent a cold cache or blank prior surface. Callers provide initialization
+with established provenance; proofs use Graphics' pinned original artifacts.
+
+The renderer owns verified copies of six original CMP banks in catalog order,
+PLATGAME.PIE and the original 256-byte shadow and lighting tables. All nine
+SHA-256 identities are enforced at creation. It decodes original row RLE with
+an explicit opacity mask: literal zero remains opaque. It draws opaque terrain
+blocks and destination-remap masks, preserves cache-hit stale payloads and
+replacement order, selects/sorts units/projectiles with the original unstable
+tie rules, interleaves scene passes, draws terrain objects and tree layers,
+inhabited sanctuary facades, supported normal unit bodies and fatigue icons,
+projectiles, input overlays, HUD counters/icons/minimap/target/cursors in
+reference order. BatimentEstHabiter reads the actual structure bag/live units.
+AffBatimentOmbre is the original literal RET; no unknown callback is replaced.
+No original-effect stream, Python callback or host wall clock enters rendering.
+
+AffGame 0x417698 enters after phase 1/3 and before phase 2. World generation
+increments on successful state writes, separately from virtual ticks; an exact
+generation and eligible phase are required. Stale generation is additive
+status 11. Repeated generation+HUD flags is idempotent. All calls use the same
+registry mutex. Undrawn output preserves the previous surface/cache; partial
+output retains the actual drawn prefix and first original-address stop.
+Size queries change only required-size metadata. ABI errors publish no frame,
+cache or world writes. World release invalidates its bound render operations;
+renderer release remains available. Reset copies explicit initial data and
+clears the last-result generation. Palette generation is static 1; Cyclage is
+outside the 1.5 surface contract.
+
+Phase 2 retains sole ownership of display effects that affect logic. Rendering
+uses local overrides and exports ordered changed bytes/raster calls, without
+writing the world or consuming RNGs a second time. Diagnostic DD lock/surface
+pointers use the same explicit software binding as Python; only 0x4E17A4 and
+0x508F70 retain the public reference's process-local pointer exclusions when
+checking native DGROUP. Other effects, cache cursor and compared bytes are
+checked. The default renderer tick follows Python's published copied-tick
+contract; isolated native leaf fixtures bind their observed GetTickCount.
+
+Renderer reference identities are pinned in
+[test pins](testes/render-reference-pins.json). Graphics' ambiguous flat
+`construcoes` import is isolated in a fresh test consumer process, so it cannot
+replace Economy's provider during the engine gate. Only motor/ and
+`docs/ENGINE.md` are edited. App integration/acceptance remain with the
+coordinator. Final committed-run proof and timing results follow below.
+
+The standalone `render_smoke.swift` client exercises the actual C structs,
+generation/size errors and reusable Swift output arrays, uploads indexed pixels
+and palette to Metal, converts to an opaque RGBA texture and waits for GPU
+completion. It verifies all 128 indexed surface hashes and complete RGBA
+readbacks for the first/last frames. Timing excludes initialization, proof
+hashing/readback and app display pacing. This client does not modify the macOS
+app. `motor/validate.sh` runs it against the debug library for correctness;
+release throughput is measured separately under an exclusive heavy lease.
+
+## Stage 3 — committed proof and throughput
+
+Native implementation `7ceeff909b52b7d4f59723f35dfe43a9deda41ff` is validated
+with release dylib SHA-256
+`f85dddbb7cfc71357c36c7f4fb66890841905cdcf9dd6123b93f8ee7aa8e0068`.
+The subsequent `b9c7cfd` changes only diagnostic expected-hash labels and gives
+the perturbed stop probes a separate schema/scope. No native Rust/header source
+or library changed; all reports keep their actual clean source provenance.
+The [summary](validation/stage3/summary.json) pins every packaged report/log.
+
+- [128-frame own-world proof](validation/stage3/128-frame-proof.json):
+  **128/128** chained full surfaces equal Python byte for byte and the original
+  full-surface hashes, with **zero differing pixels**. Each comparison covers
+  480,000 indices (61,440,000 total). All 128 carried caches, palettes and
+  exported effect sequences agree; complete before/after snapshots show that
+  rendering never changes the engine world. No stop or first difference.
+- [Original input-time matrix](validation/stage3/native-input-matrix.json):
+  **113/113** complete native surfaces equal (54,240,000 indices); all 114
+  drawing sequences match the original, and all 113 complete DGROUP projections
+  match under only the two existing DD pointer exclusions. The one captured
+  damaged-sanctuary case stops at **AffBatiments 0x4085CB**. All 114 Python
+  pixel prefixes, caches and effects match, including that partial case.
+- [Perturbed stop matrix](validation/stage3/named-stops.json): **26/26** stop
+  addresses, actual drawn prefixes, caches and effects match Python 1.5.
+  These are declared perturbations of a captured entry, not new original
+  executions or additional native mission cases.
+- [M2.3 serial window](validation/stage3/9200-frame-proof.json.xz):
+  **9,200/9,200** complete rendered surfaces equal the recorded original hashes
+  (4,416,000,000 indexed bytes hashed), **no first stop or first difference**.
+  One Rust world advances from S0 through all 18,401 engine phases, with no
+  later original-state reload. There are 9,200 recorded AffGame calls between
+  frames; the initial load-tail surface/cache are the declared pinned inputs.
+  The long run compares original surface hashes; full Python recomposition is
+  the separate 128-frame proof. Long-window C ABI timing is 229.45 render fps
+  and 64.52 engine+render fps, excluding proof exports/comparison/presentation.
+- [Logic regression](validation/stage3/logic-257.json): the current ABI 1.3
+  library remains **257/257 phases equal** under the accepted M2.2 logic mask.
+
+The exclusive-lease [release Swift/Metal benchmark](validation/stage3/swift-metal.json)
+measures **248.64 renders/s** and **61.22 engine+render+Metal frames/s** over
+128 frames on the Apple M4 Pro. The complete measured pipeline takes 2.09065 s:
+1.29929 s logic, 0.51479 s rendering and 0.27652 s Metal upload/conversion.
+This is approximately **16.33 ms/frame**, below the 40 ms budget. It includes
+world generation queries, C ABI calls, reused Swift output buffers, indexed
+texture/palette upload, GPU RGBA conversion and GPU completion. Initialization,
+proof hashing/readback and app UI/display pacing are excluded. All 128 indexed
+hashes and the two complete RGBA readbacks match. This proves the supplied
+native consumer path exceeds 25 fps; the app front still needs to wire it into
+its UI. The debug-library Swift run is a correctness gate, not the performance
+measurement.
+
+[Engine gate](validation/stage3/engine-gate.log.gz) passes fmt, strict Clippy,
+27 Rust tests, 57 Python discovery tests (including a wrapper running seven
+isolated renderer contract tests), 75/75 pilot records, C layouts and actual
+Swift ABI/Metal tests. There are no renderer-case skips.
+[Prepared common gate](validation/stage3/common-check.log.gz) passes 1,881 tests
+with 610 optional skips. No fresh original emulation or full 9,200-frame Python
+recomposition was run; the accepted immutable native captures/hashes are the
+oracles. All native jobs used the heavy lease and finished below twenty
+minutes; no Mac mini run is needed for these delivered proofs.
+
+Remaining boundaries are Graphics 1.6 construction, unsupported viewport/body/
+HUD branches and Cyclage, all outside this 1.5 port. Input-time rendering
+supports the captured states; engine human-input progression and its existing
+named display-marker stops remain separate. Renderer effect observations must
+not be applied on top of phase 2. No app source, main branch or project
+acceptance record is changed.
+
+Reproduce from a clean checkout with prepared original/catalog inputs; choose
+fresh output names. Each leased command below is a bounded native job:
+
+```sh
+lease='/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py'
+python3 "$lease" engine-render-build -- \
+  cargo build --manifest-path motor/Cargo.toml --workspace --locked --release
+python3 "$lease" engine-render-m22 -- \
+  python3 -B motor/testes/render_proof.py --frames 128 \
+  --library motor/target/release/librising_engine.dylib \
+  --output .local/render-128-new.json
+python3 "$lease" engine-render-native-cases -- \
+  python3 -B motor/testes/render_matrix.py --python \
+  --binary motor/target/release/render_fixtures --output .local/render-matrix-new.json
+python3 "$lease" engine-render-stop-cases -- \
+  python3 -B motor/testes/render_stops.py \
+  --binary motor/target/release/render_fixtures --output .local/render-stops-new.json
+python3 "$lease" engine-render-m23 -- \
+  python3 -B motor/testes/render_proof.py --frames 9200 --no-python \
+  --library motor/target/release/librising_engine.dylib \
+  --output .local/render-9200-new.json.xz
+```
+
+For the exclusive Swift/Metal release measurement, prepare once, compile the
+client against the release dylib, then run it through the report wrapper:
+
+```sh
+python3 -B motor/testes/render_swift_inputs.py --output .local/render-swift-new.bin
+python3 "$lease" engine-render-swift-build -- \
+  xcrun swiftc -O -I motor/include -L motor/target/release -lrising_engine \
+  -Xlinker -rpath -Xlinker "$PWD/motor/target/release" \
+  -module-cache-path motor/target/swift-module-cache \
+  motor/testes/render_smoke.swift -o motor/target/render-smoke-release
+python3 "$lease" --exclusive engine-render-swift-timing -- \
+  python3 -B motor/testes/render_swift_benchmark.py \
+  --binary motor/target/render-smoke-release --inputs .local/render-swift-new.bin \
+  --library motor/target/release/librising_engine.dylib \
+  --output .local/render-swift-timing-new.json
+```
