@@ -1,0 +1,41 @@
+Running audio
+test_all_133_original_capture_cases (test_indices_fila_audio.WaitingSlotIndexTests) ... ok
+test_full_and_lower_bound_keep_inherited_bytes (test_indices_fila_audio.WaitingSlotIndexTests) ... ok
+test_live_identity_and_external_status_changes (test_indices_fila_audio.WaitingSlotIndexTests) ... ok
+test_malformed_buffers_rejected_without_initializing_state (test_indices_fila_audio.WaitingSlotIndexTests) ... ok
+test_unknown_counter_is_a_named_stop_before_any_write (test_indices_fila_audio.WaitingSlotIndexTests) ... ok
+test_chained_pumps_keep_the_private_difference_and_no_game_readers (test_m22_soundness_audio.M22AudioSoundnessTests) ... ok
+test_declared_reference_is_reproduced_in_all_257_phases (test_m22_soundness_audio.M22AudioSoundnessTests) ... ok
+test_isolated_original_pumps_are_not_all_noops (test_m22_soundness_audio.M22AudioSoundnessTests) ... ok
+test_new_original_intervals_match_intact_pe (test_m22_soundness_audio.M22AudioSoundnessTests) ... ok
+test_shared_cd_flags_and_cursor_are_not_classified_private (test_m22_soundness_audio.M22AudioSoundnessTests) ... ok
+test_contract_and_handoff_exist (test_namespace_audio.NamespaceTests) ... ok
+test_owned_module_names_do_not_collide_with_sibling_fronts (test_namespace_audio.NamespaceTests) ... ok
+test_catalogue_is_reproducible (test_som_local.Capturas) ... ok
+test_every_sound_in_every_bank (test_som_local.Capturas) ... ok
+test_sound_counts (test_som_local.Capturas) ... ok
+test_structure_scenarios (test_som_local.Capturas) ... ok
+test_decoder_domains (test_som_local.Contratos) ... ok
+test_invalid_step_index_keeps_partial_output (test_som_local.Contratos) ... ok
+test_make_id_full_width_or (test_som_local.Contratos) ... ok
+test_paths_and_unsupported_empty_directory (test_som_local.Contratos) ... ok
+test_reachable_variants (test_som_local.Contratos) ... ok
+test_shapes_are_explicit (test_som_local.Contratos) ... ok
+test_surface_without_compressed_buffer_is_a_dependency (test_som_local.Contratos) ... ok
+test_without_directsound_no_buffer_is_created (test_som_local.Contratos) ... ok
+test_bank_identities (test_som_local.Evidencia) ... ok
+test_exported_intervals_match_intact_executable (test_som_local.Evidencia) ... ok
+test_no_decoded_audio_or_media_in_owned_paths (test_som_local.Evidencia) ... ok
+test_bank_a_every_sound (test_som_nativo.Nativo) ... skipped 'Optional intact-x86: RISING_EMULAR=1'
+test_bank_p_subset (test_som_nativo.Nativo) ... skipped 'Optional intact-x86: RISING_EMULAR=1'
+test_structure_scenarios (test_som_nativo.Nativo) ... skipped 'Optional intact-x86: RISING_EMULAR=1'
+test_existing_file_or_dangling_link_refuses_before_capture (test_validator_indices_audio.QueueValidatorCLITests) ... ok
+test_fresh_output_path_works_without_native_execution (test_validator_indices_audio.QueueValidatorCLITests) ... ok
+test_help_exposes_output_and_missing_argument_refuses (test_validator_indices_audio.QueueValidatorCLITests) ... ok
+test_late_output_race_keeps_the_other_report (test_validator_indices_audio.QueueValidatorCLITests) ... ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 11.935s
+
+OK (skipped=3)
+Documentation links and requested research suites passed.
