@@ -34,7 +34,8 @@ AI_RUNTIME_NATIVE = ('env', 'RISING_EMULAR=1', '{python}', '-B', '-m', 'unittest
                      '-s', 'pesquisas-paralelas/ia-runtime/testes', '-p', 'test_*.py', '-v')
 AUDIO_NATIVE = ('env', 'RISING_EMULAR=1', '{python}', '-B', '-m', 'unittest', 'discover',
                 '-s', 'pesquisas-paralelas/audio/testes', '-p', 'test_*.py', '-v')
-APP_BUILD = ('{python}', '-B', 'compilar-jogável', '--development-ref', 'HEAD')
+APP_BUILD = ('{python}', '-B', 'compilar-jogável', '--development-ref', 'HEAD',
+             '--inputs-root', '{workspace}', '--data-root', '{workspace}/local-data/macos-playable')
 
 FRONTS = {
     'core': Front('feat/re-core', 're-core',
@@ -147,10 +148,18 @@ def check_ownership(repo, domain, branch):
 
 def run_validation(domain, target):
     subprocess.check_call([sys.executable, '-B', str(target / 'scripts/check.py')], cwd=target)
+    # Read-only inputs (source/cd, the bundled runtime) and build outputs live in
+    # the shared workspace, never in the disposable integration candidate.
+    workspace = str(canonical(target).parent)
+    environment = dict(os.environ)
+    runtime = Path(workspace) / 'local-data/macos-preview/dependencies/python'
+    if runtime.is_dir():
+        environment.setdefault('RISING_PYTHON_RUNTIME', str(runtime))
     for command in FRONTS[domain].validation:
-        argv = [sys.executable if part == '{python}' else part for part in command]
+        argv = [sys.executable if part == '{python}' else part.replace('{workspace}', workspace)
+                for part in command]
         print('Front validation:', ' '.join(argv), flush=True)
-        subprocess.check_call(argv, cwd=target)
+        subprocess.check_call(argv, cwd=target, env=environment)
     if git(target, 'status', '--porcelain'):
         raise RuntimeError('Validation modified tracked candidate state; inspect the candidate.')
 
