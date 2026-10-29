@@ -23,6 +23,7 @@ class ArgumentosRasterM3:
     def __init__(self,catalog):self.catalog,self.calls=catalog,[]
     def __enter__(self):
         import composicao, construcoes, corpo_tipos1_8, hud_quadro, objetos, projeteis_graficos, quadro_jogo, sobreposicoes_entrada_m3
+        import cave_scriptada_m3, hud_scriptado_m3
         self.stack=ExitStack()
         def wrap(fn,shadow):
             def call(*args,**kwargs):
@@ -38,11 +39,12 @@ class ArgumentosRasterM3:
                     if 'owner' in local and local['owner'] is not None:routine,owner='PastePlayerCmp',local['owner']
                     if 'recorte' in local:clip=int(bool(local['recorte']))
                 elif shadow and name=='zona_icone_acao':routine,clip='PasteNoirBlancCmp',0
+                elif shadow and name=='gray':routine='PasteGrisCmp'
                 x,y=args[4:6];i16=lambda v:(v+32768)%65536-32768
                 self.calls.append([routine,i16(x),i16(y),self.catalog.ultimo_id,clip]+([] if owner is None else [owner]))
                 return fn(*args,**kwargs)
             return call
-        for module in (composicao,construcoes,corpo_tipos1_8,hud_quadro,objetos,projeteis_graficos,quadro_jogo,sobreposicoes_entrada_m3):
+        for module in (composicao,construcoes,corpo_tipos1_8,hud_quadro,objetos,projeteis_graficos,quadro_jogo,sobreposicoes_entrada_m3,cave_scriptada_m3):
             for attr,shadow in (('compor_indices',False),('compor_sombra',True)):
                 if hasattr(module,attr):self.stack.enter_context(patch.object(module,attr,wrap(getattr(module,attr),shadow)))
         original_box=hud_quadro._Hud.caixa
@@ -56,6 +58,14 @@ class ArgumentosRasterM3:
             x0,y0,x1,y1=(c.leitura_entrada.i16(a) for a in (0x49a024,0x49a026,0x49a028,0x49a02a));w,h=c.tela.palavras('janela')
             self.calls.append(['Box',x0,y0,min(x1,w*32),min(y1,h*32),1,1]);return original_drag(c)
         self.stack.enter_context(patch.object(sobreposicoes_entrada_m3,'drag',drag))
+        def observe_direct(fn,names):
+            def call(c,*args,**kwargs):
+                before=len(c.chamadas);result=fn(c,*args,**kwargs)
+                self.calls.extend(ev for ev in c.chamadas[before:] if ev[0] in names)
+                return result
+            return call
+        for name,ops in (('save_background',('GetBob',)),('restore_background',('PasteBob',)),('shaded_box',('FilledBoxGris','FilledBoxOmbre'))):
+            self.stack.enter_context(patch.object(hud_scriptado_m3,name,observe_direct(getattr(hud_scriptado_m3,name),ops)))
         return self
     def __exit__(self,*args):return self.stack.__exit__(*args)
 

@@ -1,0 +1,33 @@
+[lease] graphics17-cave-all-health waiting
+[lease] graphics17-cave-all-health granted slots [3]
+matrix 20 native calls returned
+matrix 40 native calls returned
+matrix 60 native calls returned
+matrix 80 native calls returned
+matrix 100 native calls returned
+matrix 120 native calls returned
+matrix 140 native calls returned
+matrix 160 native calls returned
+matrix 180 native calls returned
+matrix 200 native calls returned
+matrix 220 native calls returned
+matrix 240 native calls returned
+matrix 260 native calls returned
+matrix 280 native calls returned
+matrix 300 native calls returned
+matrix 320 native calls returned
+matrix 340 native calls returned
+matrix 360 native calls returned
+matrix 380 native calls returned
+matrix 400 native calls returned
+matrix 420 native calls returned
+matrix 440 native calls returned
+matrix 460 native calls returned
+matrix 480 native calls returned
+matrix 500 native calls returned
+matrix 520 native calls returned
+matrix 540 native calls returned
+matrix 560 native calls returned
+matrix 580 native calls returned
+matrix 600 native calls returned
+{"schema": "rising-lands/m3-cave-facade-matrix/1", "probe_ref": "f0588447b6cea3cc10701233a55bbcd16551e5e5", "source_snapshot_sha256": "f254869c92f93d49a9f4819879819f40cdc445e25bb2265ab38b5be16d0eb8d5", "cases": 600, "all_cave_health": true, "source_sha256": "810e664d4045c3133d747a3a172430e4f048f5bfc804cbf241efe180ef811919", "cases_source_revision": "9a1f8460510ac0af423a473b7fe7e933a1f8e0f9", "elapsed_seconds": 82.035, "code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4"}
