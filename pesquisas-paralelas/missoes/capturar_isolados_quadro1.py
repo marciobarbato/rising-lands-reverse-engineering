@@ -30,14 +30,14 @@ CAPTURA = OWNED/'evidencias/captura-quadro1-monde01-original.json'
 ROTINAS = ('EvenementEnCours', 'TestFinDeMission')
 
 
-def executar(perturbacoes=None):
+def executar(perturbacoes=None, observador=None):
     cap = json.loads(CAPTURA.read_bytes())
     ni = cap['named_inputs']['m1']
     b = BancadaQuadroMissaoOriginal(cq.entradas_quadro(ni['allocation_fill'], ni['clock_ms'][0]), segundos=120)
     b.iniciar_relogio()
     b.executar_inicio()
     b.executar_mission_load(60)
-    iso = Isolamento(b, ROTINAS, perturbacoes)
+    iso = Isolamento(b, ROTINAS, perturbacoes, observador)
     iso.instalar()
     resumos = {}
     for nome, correr in (('load_tail', lambda: b.executar_cauda_carga(600)),

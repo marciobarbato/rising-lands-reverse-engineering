@@ -521,8 +521,9 @@ class Isolamento:
     from the restored entry and executes the routine as usual.  A binding or
     boundary inside an isolated call stops the run.
     """
-    def __init__(self, bancada, rotinas, perturbacoes=None):
+    def __init__(self, bancada, rotinas, perturbacoes=None, observador=None):
         self.b = bancada
+        self.observador = observador   # f(routine, case, blocks before the call, result) after each case
         self.entradas = {bancada.sym[n]: n for n in rotinas}
         self.perturbacoes = perturbacoes or {}
         self.registros = []
@@ -620,6 +621,8 @@ class Isolamento:
                     reached_return=saida['EIP'] == retorno,
                     changed_bytes=[[hex(a), v[0], v[1]] for a, v in sorted(mudados.items())],
                     read_before_write=[[hex(a), self._valor(antes, a), b.nome(lidos[a])] for a in leituras]))
+                if self.observador is not None:
+                    self.observador(nome, fase, caso, antes, resultados[-1])
         finally:
             self._restaurar(contexto, blocos)
             b.fase = fase
