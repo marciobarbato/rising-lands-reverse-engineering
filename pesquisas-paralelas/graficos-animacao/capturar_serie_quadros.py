@@ -54,6 +54,7 @@ def capturar_serie(n):
     iso = oq.Isolamento(b, ('AffGame',)); iso.instalar()
     alvos = {'between_frames' if k == 1 else f'between_frames{k}' for k in range(1, n+1)}
     frames, fins = {}, {}
+    finais = capturar_serie.finais = {}   # native end-of-phase surfaces of the drawing phases
     dd = b.directdraw
 
     def executar(self, regs):
@@ -70,6 +71,8 @@ def capturar_serie(n):
         blocos = {'dgroup': (cq.DGROUP[0], bytes(m(*cq.DGROUP)))}
         for nome, slot, tam in cq.BLOCOS:
             base = u(slot, 4); blocos[nome] = (base, bytes(m(base, tam)))
+        for ini, fim, nome in RQ.regioes_necessarias(Memoria(blocos), hud=True)[1+len(cq.BLOCOS):]:
+            blocos[nome] = (ini, bytes(m(ini, fim-ini)))   # HUD tail buffers (render API 1.4): minimap, player table
         pool = blocos['dgroup'][1][0x49a0c8-cq.DGROUP[0]:0x49a0c8-cq.DGROUP[0]+276000]
         habitacao = {}
         for i in range(1000):
@@ -94,6 +97,7 @@ def capturar_serie(n):
     fins['load_tail'] = None
     for fase, _ in b.executar_quadros(n):
         fins[fase] = sha(dd.pixels('offscreen'))
+        if fase.startswith('between_frames'): finais[fase] = dd.pixels('offscreen')
         if fase == ('between_frames' if n == 1 else f'frame{n}'): break
     return frames, fins
 
@@ -126,22 +130,25 @@ def principal(args):
     linhas, anterior, cache_cad = [], inicial, cache0
     nativo_anterior = inicial
     primeira_parada = primeira_dif = None
+    ref = 'full_surface' if args.hud else 'checkpoint'
     for k in range(1, args.quadros+1):
         fase = 'between_frames' if k == 1 else f'between_frames{k}'
         fr = frames[fase]
         mem = Memoria(fr['blocos'])
         hab = lambda i, fr=fr: bool(fr['habitacao'][i])
         nat_cache = RQ.EstadoCache(fr['cache'][0], fr['cache'][1], fr['cache'][2])
-        q_nat = RQ.renderizar_quadro(mem, superficie_anterior=fr['antes'], habitado=hab, cache=nat_cache)
-        q_cad = RQ.renderizar_quadro(mem, superficie_anterior=anterior, habitado=hab, cache=cache_cad)
-        cp = fr['checkpoint']
+        q_nat = RQ.renderizar_quadro(mem, superficie_anterior=fr['antes'], habitado=hab, cache=nat_cache, hud=args.hud)
+        q_cad = RQ.renderizar_quadro(mem, superficie_anterior=anterior, habitado=hab, cache=cache_cad, hud=args.hud)
+        cp = capturar_serie.finais[fase] if args.hud else fr['checkpoint']
         def dif(p): 
             d = [i for i in range(len(cp)) if cp[i] != p[i]]
             return dict(pixels=len(d), first_row=(min(d)//800 if d else None))
         linha = dict(frame=k, phase=fase, counter=fr['contador'], native_end_of_phase_sha256=fins[fase], recorded_sha256=gravado[fase],
-                     end_hash_equals_recorded=fins[fase] == gravado[fase], native_checkpoint_sha256=sha(cp),
-                     over_native_previous=dict(stop=q_nat.parada, **dif(q_nat.pixels), sha256=sha(q_nat.pixels), equals_native_checkpoint=q_nat.pixels == cp),
-                     chained=dict(stop=q_cad.parada, **dif(q_cad.pixels), sha256=sha(q_cad.pixels), equals_native_checkpoint=q_cad.pixels == cp),
+                     reference='native end-of-phase surface (full 800x600)' if args.hud else 'native checkpoint 0x417B1C surface',
+                     chained_sha256_equals_recorded=sha(q_cad.pixels) == gravado[fase],
+                     end_hash_equals_recorded=fins[fase] == gravado[fase], **{'native_'+ref+'_sha256': sha(cp)},
+                     over_native_previous=dict(stop=q_nat.parada, **dif(q_nat.pixels), sha256=sha(q_nat.pixels), **{'equals_native_'+ref: q_nat.pixels == cp}),
+                     chained=dict(stop=q_cad.parada, **dif(q_cad.pixels), sha256=sha(q_cad.pixels), **{'equals_native_'+ref: q_cad.pixels == cp}),
                      chain_input_equals_native_previous=anterior == fr['antes'],
                      chain_cache_equals_native_entry_cache=(cache_cad.registros == nat_cache.registros and cache_cad.proximo == nat_cache.proximo and cache_cad.blocos_crus == nat_cache.blocos_crus))
         un = Memoria(fr['blocos']).ler_mundo(Memoria(fr['blocos']).u32(0x4e19a0), 220800)
@@ -150,17 +157,20 @@ def principal(args):
         anterior = q_cad.pixels
         cache_cad = q_cad.cache
         if primeira_parada is None and q_cad.parada: primeira_parada = (k, q_cad.parada)
-        if primeira_dif is None and not linha['chained']['equals_native_checkpoint']: primeira_dif = k
+        if primeira_dif is None and not linha['chained']['equals_native_'+ref]: primeira_dif = k
     Path(args.verificacao).write_text(json.dumps(dict(schema='rising-lands/m22-chain-render-check/1', frames=args.quadros,
-        render_api_version=list(RQ.VERSAO_RENDER_QUADRO), initial_surface_sha256=artefato['sha256'],
+        render_api_version=list(RQ.VERSAO_RENDER_QUADRO), hud=args.hud, initial_surface_sha256=artefato['sha256'],
+        chained_equals_recorded_count=sum(l['chained_sha256_equals_recorded'] for l in linhas),
         first_stop=dict(frame=primeira_parada[0], **primeira_parada[1]) if primeira_parada else None,
         first_chained_difference_frame=primeira_dif, rows=linhas), indent=1))
     print(json.dumps(dict(initial=artefato['sha256'][:12], equals_recorded=artefato['equals_recorded_load_tail_hash'], first_stop=primeira_parada,
-                          first_diff=primeira_dif, end_hashes_equal=all(l['end_hash_equals_recorded'] for l in linhas))))
+                          first_diff=primeira_dif, end_hashes_equal=all(l['end_hash_equals_recorded'] for l in linhas),
+                          chained_equals_recorded=sum(l['chained_sha256_equals_recorded'] for l in linhas))))
 
 
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument('--quadros', type=int, default=12)
+    ap.add_argument('--hud', action='store_true', help='render API 1.4 hud=True, compared with the full end-of-phase surface')
     ap.add_argument('--cache', required=True); ap.add_argument('--superficie', required=True); ap.add_argument('--verificacao', required=True)
     principal(ap.parse_args())

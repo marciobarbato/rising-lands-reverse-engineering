@@ -1,0 +1,144 @@
+{
+ "schema": "rising-lands/hud-tail-provenance/1",
+ "executable": "RISING.EXE (intact, ../source/cd/INSTALHD)",
+ "executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "note": "Original byte intervals the HUD tail translation (hud_quadro.py, render API 1.4) relies on; raw-offset mapping of the section table. The behaviour is established by the native capture, committed before the translation.",
+ "intervals": [
+  {
+   "name": "AffGame HUD-mode switch table (4 slots, all 0x417B32)",
+   "start": "0x417688",
+   "end_exclusive": "0x417698",
+   "sha256": "35ee41733897b43bb69d6fc3c4957a747c7505f4105cb1a6828629e71d2e1da8"
+  },
+  {
+   "name": "AffGame tail from the HUD checkpoint through the DDUnlockSurface call",
+   "start": "0x417b1c",
+   "end_exclusive": "0x417d35",
+   "sha256": "0c649707d05e1cf1cc68c99027b151c98459e5504f959944972a36ce085f5f94"
+  },
+  {
+   "name": "AffCompteurMatiere",
+   "start": "0x417f38",
+   "end_exclusive": "0x4180d8",
+   "sha256": "d3432e0b225e2891c0bf74ceb99806ec7ac77d9f38cb9c816da46e2d6be7296e"
+  },
+  {
+   "name": "IntToBCD",
+   "start": "0x467cd1",
+   "end_exclusive": "0x467d3a",
+   "sha256": "8a21d5981c52647419ce7dab510c048a52230db9fbacb5a573daade33cb78de4"
+  },
+  {
+   "name": "GetBit",
+   "start": "0x467d97",
+   "end_exclusive": "0x467da6",
+   "sha256": "5ad94644e5a4950ec556cde4a48ab0e2a827235472d9c33dd7112adb595e098e"
+  },
+  {
+   "name": "AffZoneIconeAction",
+   "start": "0x416f29",
+   "end_exclusive": "0x4171f8",
+   "sha256": "3a1c66ea106bd21c40cef1c3e288f644ce728abf4676617a353acc2c8dc53daa"
+  },
+  {
+   "name": "AffTrame",
+   "start": "0x41721f",
+   "end_exclusive": "0x417435",
+   "sha256": "73827358aa85de356b19fae6594e97ae169404d6a7995ce8d37be9dd4623aaba"
+  },
+  {
+   "name": "AffDrapeauAlliance",
+   "start": "0x417581",
+   "end_exclusive": "0x417675",
+   "sha256": "bb49aa034b1f703d477c9450e856748b67e4366e4697882287f92a977b8609b0"
+  },
+  {
+   "name": "AffMarche",
+   "start": "0x46677d",
+   "end_exclusive": "0x4668aa",
+   "sha256": "56df554c8eb203a4c3b2da6ce805777fdded404f76dd60fe343e2b0c3404ce25"
+  },
+  {
+   "name": "AffMiniMap and its shared epilogue",
+   "start": "0x46a70c",
+   "end_exclusive": "0x46a8a2",
+   "sha256": "844a01e1729efc8bd86a276b06827bc1d6724ffb5eb0668158da874e612070ee"
+  },
+  {
+   "name": "shared epilogue 0x46A198",
+   "start": "0x46a198",
+   "end_exclusive": "0x46a19e",
+   "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b"
+  },
+  {
+   "name": "Box",
+   "start": "0x45c912",
+   "end_exclusive": "0x45cacd",
+   "sha256": "628e2a11180265f7191bf76da33527228a5cef3a4a903b13117204462bed04ae"
+  },
+  {
+   "name": "PasteBobCmp clip-window prologue",
+   "start": "0x45b247",
+   "end_exclusive": "0x45b2a6",
+   "sha256": "93c62aab3cc154962971bc63d44396bb64dba19c30422c387820bc889f3bca32"
+  },
+  {
+   "name": "AffChrono selection test",
+   "start": "0x401cc6",
+   "end_exclusive": "0x401d18",
+   "sha256": "51efb0851b92a8cc245360bed2b21c487e4f8b0180ad952a2fb0ee8c6b123337"
+  },
+  {
+   "name": "AffChrono no-selection exit",
+   "start": "0x40208a",
+   "end_exclusive": "0x402094",
+   "sha256": "7422cb68380d564aefffb0bdcb041cce429915ba8eaaafd53010956cd297d468"
+  },
+  {
+   "name": "AffZoneInfo",
+   "start": "0x40f758",
+   "end_exclusive": "0x40f8aa",
+   "sha256": "f09169992c6908954e9fa8660aec6f4019aeef1699b24f0300604c180e0ffd86"
+  },
+  {
+   "name": "AffInfoAide tooltip test",
+   "start": "0x40f8aa",
+   "end_exclusive": "0x40f8d3",
+   "sha256": "697140800f015c11b32d9bd5384c0c485924d72926d31948c3da50264cefdc76"
+  },
+  {
+   "name": "AffDebug",
+   "start": "0x4408b7",
+   "end_exclusive": "0x4408c7",
+   "sha256": "3c588266e08190e4c38ce83a427497972064a48a67824fcce286266c1e687ef4"
+  },
+  {
+   "name": "EvenementEnCours",
+   "start": "0x4581b6",
+   "end_exclusive": "0x4581bc",
+   "sha256": "e9ffd11138a7f620e9466c62b46cfbbfc13136895d80b8596b60780b43659a62"
+  },
+  {
+   "name": "MessageBoxAffiche queue test",
+   "start": "0x469c44",
+   "end_exclusive": "0x469c5f",
+   "sha256": "4fdf65bb3dd0854cd998ccdf5620e8319e6b9229f553403ea4816ce07cea28e1"
+  },
+  {
+   "name": "PlayerEstAllie",
+   "start": "0x46d838",
+   "end_exclusive": "0x46d877",
+   "sha256": "9eb1a3a1733a40d2b48c996ea96ea13d11072a1c588fb19df67364851f2ddd74"
+  },
+  {
+   "name": "PlayerEstContacterPourAlliance",
+   "start": "0x46da1e",
+   "end_exclusive": "0x46da3b",
+   "sha256": "c08f184d924f0e69e1483d90e2270572075f18cf4b1510d217c6d19bb292ec39"
+  }
+ ],
+ "native_capture": {
+  "path": "evidencias/captura-hud-m22-v2.json",
+  "sha256": "94086e38b1d6d355b7793817674d2dda93d0ab8918abd82f77e74d370be5fed5"
+ }
+}
