@@ -50,8 +50,10 @@ def escolher(nome, regs, ordem):
     return True
 
 
-def executar(quadros, observador=None):
-    """``observador(nome, caso, antes, resultado)``, optional, after every isolated case (validators)."""
+def executar(quadros, observador=None, rotinas=ROTINAS, janelas=None):
+    """``observador(nome, caso, antes, resultado)``, optional, after every isolated case (validators).
+    ``janelas``: optional [(first counter, last counter)]; outside them no call is isolated (frames still run
+    natively), inside them every call of ``rotinas`` is."""
     sys.path.insert(0, str(RAIZ / 'pesquisas-paralelas/missoes'))
     sys.path.insert(0, str(RAIZ / 'pesquisas-paralelas/combate'))
     import ambiente_missoes  # noqa: F401  (Missions bootstrap)
@@ -71,6 +73,11 @@ def executar(quadros, observador=None):
             if self.quadro is None:         # frames 0/1 before the forced write: not isolated
                 return
             nome = self.entradas[regs['EIP']]
+            if janelas is not None:
+                contador = struct.unpack('<I', self.b.cpu.mem_read(CONTADOR, 4))[0]
+                if any(a <= contador <= z for a, z in janelas):
+                    super().executar(regs)
+                return
             chave = (nome, self.quadro)
             self.vistos[chave] = self.vistos.get(chave, 0) + 1
             if escolher(nome, regs, self.vistos[chave]):
@@ -82,7 +89,7 @@ def executar(quadros, observador=None):
         if observador is not None:
             observador(nome, caso, antes, resultado)
 
-    iso = IsolamentoMovimento(b, ROTINAS, {'(no routine)': []}, observar)
+    iso = IsolamentoMovimento(b, rotinas, {'(no routine)': []}, observar)
     iso.vistos, iso.quadro = {}, None
     iso.instalar()
     b.executar_cauda_carga(600)

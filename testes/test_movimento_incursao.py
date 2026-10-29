@@ -131,3 +131,37 @@ class RetornoOrdens(unittest.TestCase):
             if c['routine'] in ('SetDeplaceEngin', 'ResetOrdre'):
                 eax = int(c['entry_registers']['EAX'], 16) & 0xffff
                 self.assertEqual(int(c['exit_registers']['EAX'], 16) - eax * 276, 0x4140d000, c['routine'])
+
+
+CAPTURA_V1_M1 = RAIZ / 'pesquisas-paralelas/missoes/evidencias/captura-carga-missao-original-v2.json'
+
+
+@unittest.skipUnless(CAPTURA_V1_M1.exists(), 'Missions v1 MissionLoad capture not available')
+class MundoVivoNaComposicao(unittest.TestCase):
+    """ai-runtime's chain: Missions' map (montar_provedores) wrapped by MemoriaMapaM1; tiles/regions are lists."""
+    @classmethod
+    def setUpClass(cls):
+        sys.path.insert(0, str(RAIZ / 'pesquisas-paralelas/missoes'))
+        sys.path.insert(0, str(RAIZ / 'pesquisas-paralelas/ia-runtime'))
+        import ambiente_missoes  # noqa: F401
+        import cenarios_oraculo as cen
+        from ligacao_provedores_m1 import montar_provedores
+        from mapa_memoria_m1 import MapaMemoriaM1, carregar_blocos, carregar_json, expandir_captura
+        from memoria_composicao_ia import MemoriaMapaM1
+        captura = expandir_captura(carregar_json(cen.caminho('v1', 'captura_m1')), carregar_json(cen.caminho('v1', 'entrada')))
+        cls.mapa = MapaMemoriaM1(carregar_blocos(captura['oracle']['final_state']['blocks']))
+        cls.prov = montar_provedores(cls.mapa)
+        cls.mapa.fechar()
+        cls.memoria = MemoriaMapaM1(cls.mapa)
+
+    def test_list_backed_grids_are_shared_by_identity_and_providers_run(self):
+        from chamadas_quadro_core import provedores_core
+        from mundo_vivo import mundo_vivo
+        w = mundo_vivo(self.memoria)
+        self.assertIs(w.tiles, self.prov.mundo.tiles)
+        self.assertIs(w.regioes, self.prov.mundo.regioes)
+        self.assertIs(w.cores_estruturas.pilha, self.prov.mundo.cores_estruturas.pilha)
+        p = provedores_core(self.memoria, None)
+        for unidade in range(800):
+            self.assertEqual(p['EnginEstVivant'](sitio=0, unidade=unidade),
+                             int(self.prov.mundo.unidades[unidade * 276 + 2] not in (0, 4)))

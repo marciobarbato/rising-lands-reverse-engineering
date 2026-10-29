@@ -101,7 +101,7 @@ GetCaseIndiceBatiment is translated but no capture reaches it, because MONDE01 h
 ## Validation
 
 - **Without a CPU:** [`testes/test_incursao_core.py`](../../testes/test_incursao_core.py) replays every captured call of every scenario from its read-before-write bytes, with registers EAX..EBP and changed bytes exact. That includes the frame-1 Core routines the raid reaches.
-- **Native differential:** [`ferramentas/validar_incursao_core.py`](../../ferramentas/validar_incursao_core.py) reruns the forced cases. At every nested Core call it runs the translation over a copy-on-write view of the live memory at that entry, and compares its registers and changed bytes with the original's at the return. The results are in `relatorios/incursao-core-<scenario>-emulada.json`. For v1: **689 comparisons, 0 mismatches and 0 dependency stops**, every captured call of the 26 routines reached, with the phases and code reproduced (114 s). The display differential follows its capture.
+- **Native differential:** [`ferramentas/validar_incursao_core.py`](../../ferramentas/validar_incursao_core.py) reruns the forced cases. At every nested Core call it runs the translation over a copy-on-write view of the live memory at that entry, and compares its registers and changed bytes with the original's at the return. The results are in `relatorios/incursao-core-<scenario>-emulada.json`. For v1: **689 comparisons, 0 mismatches and 0 dependency stops**, every captured call of the 26 routines reached, with the phases and code reproduced (114 s). The display-scenario differential (Mac mini run #7 at `201e208`, report-only) is also 689 comparisons with 0 mismatches and 0 dependency stops; see the HANDOFF.
 
 ## Movement and pathfinding after the spawn (counters 9000–9200)
 
@@ -141,6 +141,8 @@ Routines with a flat translation (SetEnginCollision, SetCollision, Chemin_Modifi
 **Live world (`ferramentas/mundo_vivo.py`).** `mundo_vivo(memoria)` returns a `MundoNavegacao` whose buffers are live views of the flat memory, and whose scalars are properties at their original addresses. It uses the same addresses as Missions' `montar_provedores`, with no copy and no pull/push. World state with no original address raises `EstadoSemEndereco`: the Python solver hook, its result cache and trace, and `mascaras_alianca[4]`.
 - The validator also runs every world adapter on it and compares with the native result.
 - `MundoNavegacao.deslocar` is DeplaceEngin exactly: the +0x88 switch of table `0x4492f0`.
+
+**Inside ai-runtime's chain.** There the memory is Missions' map wrapped by `MemoriaMapaM1`, and the tiles, regions and structure-colour stack are list-backed segments. `mundo_vivo` adopts those lists by identity (`grade_u16_viva`), so it and `prov.mundo` share the grids. Scalars are bytes, so a composition that also uses `prov.mundo` pulls (`mapa.puxar()`) after these providers run and pushes before. `MundoVivoNaComposicao` tests this.
 
 **Live movement providers** (`provedores_core`, built on `mundo_vivo` at first use):
 - SetDeplaceEngin(`unidade`, `destino`) and ResetOrdre(`unidade`) → EAX = the unit record address (every path ends there; the captured calls agree);
