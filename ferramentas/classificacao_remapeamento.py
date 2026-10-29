@@ -3,6 +3,7 @@ import ctypes
 from dataclasses import dataclass
 
 from remapeamento_mundo import RemapeamentoPendente
+from grade_u16 import GradeU16
 from regioes_mapa import obstaculo_natural
 
 
@@ -63,10 +64,11 @@ def retomar_classificacao_remapeamento(mundo, pedido, *, alocar=None, fixar=None
     atributos = _vista(mundo.atributos, 65536)
     objetos = _vista(mundo.objetos, 65536)
     marcadores = _vista(mundo.marcadores_obstaculos_tiles, 702)
-    if (not isinstance(mundo.tiles, (list, tuple)) or len(mundo.tiles) != 65536
-            or any(not isinstance(t, int) or not 0 <= t <= 65535 for t in mundo.tiles)):
+    vivo = isinstance(mundo.tiles, GradeU16)       # live grid: u16 by construction
+    if not vivo and (not isinstance(mundo.tiles, (list, tuple)) or len(mundo.tiles) != 65536
+                     or any(not isinstance(t, int) or not 0 <= t <= 65535 for t in mundo.tiles)):
         raise ValueError('Classification requires 65536 explicit u16 tiles')
-    _sem_sobreposicao(classes, (atributos, objetos, marcadores))
+    _sem_sobreposicao(classes, (atributos, objetos, marcadores) + ((_vista(memoryview(mundo.tiles.buffer).cast("B"), 131072),) if vivo else ()))
     for celula in range(65536):
         classes[celula] = atributos[celula] & 1
     for celula in range(65536):
