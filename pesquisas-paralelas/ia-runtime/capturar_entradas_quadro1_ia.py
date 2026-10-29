@@ -50,6 +50,7 @@ def eventos(b, inicio):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--saida', required=True)
+    ap.add_argument('--cenario', default='v1', choices=('v1', 'exibicao'))
     a = ap.parse_args()
     saida = ROOT / a.saida
     if saida.exists():
@@ -84,6 +85,7 @@ def main():
                 mudados.append(dict(block=n, event='allocated'))
             elif velho != dados:
                 mudados += [[hex(base + i), velho[i], dados[i]] for i in range(len(dados)) if dados[i] != velho[i]]
+        mudados += [dict(block=n, event='released') for n in aberta['image'] if n not in depois]
         vinculos, fronteiras = eventos(b, aberta['counts'])
         chamadas.append(dict(routine=nome, phase=aberta['phase'], caller_return=aberta['caller_return'],
                              entry_registers={k: hex(v) for k, v in aberta['registers'].items()},
@@ -97,16 +99,17 @@ def main():
         for nome in executados:
             executados[nome].add(endereco)
 
+    import cenarios_oraculo
+    captura = cenarios_oraculo.caminho(a.cenario, 'captura_quadro')
     t0 = time.monotonic()
-    b, cap, reproducao = executar_caminho_pausas(enderecos, observador, blocos)
+    b, cap, reproducao = executar_caminho_pausas(enderecos, observador, blocos, a.cenario)
     relatorio = dict(
-        schema='rising-lands/ai-runtime-frame1-entry-return-captures/1', label=LABEL, original_sha256=HASH_ORIGINAL,
+        schema='rising-lands/ai-runtime-frame1-entry-return-captures/1', label=LABEL, scenario=a.cenario, original_sha256=HASH_ORIGINAL,
         translation_executed=False, source_revision=revisao, source_dirty_paths=sujo.splitlines(),
         source_sha256={str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in (
             OWNED / 'bancada_quadro1_ia.py', OWNED / 'capturar_entradas_quadro1_ia.py',
             MISSOES / 'oraculo_quadro_missao.py')},
-        frame_capture=dict(path=str(CAPTURA_QUADRO.relative_to(ROOT)),
-                           sha256=hashlib.sha256(CAPTURA_QUADRO.read_bytes()).hexdigest()),
+        frame_capture=dict(path=str(captura.relative_to(ROOT)), sha256=hashlib.sha256(captura.read_bytes()).hexdigest()),
         routines={n: dict(entry=hex(e), returns=[hex(s) for s in r], interval=[hex(x) for x in INTERVALOS[n]])
                   for n, (e, r) in ROTINAS.items()},
         path_reproduction=reproducao, unclosed=sorted(abertas), calls=chamadas,
