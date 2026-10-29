@@ -134,8 +134,8 @@ def passo2(n, alvos):
                         d = acessos.setdefault(a0+k, {})
                         chave = ('write', ctx, fase, 'binding '+ev['name'])
                         d[chave] = d.get(chave, 0)+1
-                if BASE_SUPERFICIES <= a0 < BASE_SUPERFICIES+TAMANHO_SUPERFICIES and ctx == 'logic':
-                    chave = ('write', ctx, fase, 'binding '+ev['name'])
+                if BASE_SUPERFICIES <= a0 < BASE_SUPERFICIES+TAMANHO_SUPERFICIES:
+                    chave = ('write', ctx, fase, 'binding '+ev['name'] if ctx == 'logic' else '*')
                     superficie[chave] = superficie.get(chave, 0)+1
         visto = len(b.vinculos_declarados.eventos)
         resumos[fase] = b.resumo_imagem(b.imagem())
