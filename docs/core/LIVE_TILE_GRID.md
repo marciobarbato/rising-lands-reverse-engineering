@@ -31,11 +31,41 @@ mundo.vincular_tiles(buffer)   # buffer: the live 131,072-byte allocation at [0x
   - `len`, iteration, `list(t)` and equality with any sequence.
 - It refuses, before writing, any store outside 0..65535 or any slice store that would change the size. A list accepted such values, but the original u16 grid cannot hold them.
 
+## All the grids field growth touches (round 5)
+
+`mundo.vincular_grades(tiles=…, regioes=…, atributos=…, objetos=…, donos_objetos=…)` binds any subset of the world's terrain grids live, by identity:
+
+| Grid | Original | Bytes | Core attribute after binding |
+|---|---|---|---|
+| tiles | `[0x507d70]` u16 | 131,072 | `mundo.tiles` (`GradeU16`, `.buffer` is the given object) |
+| regions | `[0x4e0f38]` u16 | 131,072 | `mundo.regioes` (`GradeU16`) |
+| attributes | `[0x507da8]` u8 | 65,536 | `mundo.atributos` (the given object) |
+| objects | `[0x507d74]` u8 | 65,536 | `mundo.objetos` (the given object) |
+| owners / quantities | `[0x507dac]` u8 | 65,536 | `mundo.donos_objetos` (the given object) |
+
+All buffers are validated before any of them is bound. `vincular_tiles(buffer)` is the tiles-only form. Bound grids keep their identity through Core's region rebuild (`refazer_regioes` writes in place) and through the remap reset.
+
+**What UpdateChamp/ScanNouvellePatate need** (Economy `extracao.RecursosTerreno`), and where Core supplies it:
+- **tiles:** read-only LE u16 at `2·neighbour`, testing 0x84..0x86 / 0x9d..0xdc → `mundo.tiles.buffer`.
+- **attribute bit 0:** read-only, blocks planting → `mundo.atributos`.
+- **object grid:** read, and written with 0x1d/0x29 → `mundo.objetos`.
+- **quantity grid** → `mundo.donos_objetos`. Core calls this allocation "owners"; Economy's growth uses it as quantities. It is one allocation.
+- The RNG `0x497164` and the mines `0x509954` are not Core grids.
+
+`RecursosTerreno`'s constructor copies its arguments. Until Economy adds a live constructor, consumers assign the live objects after construction:
+
+```python
+recursos.mosaicos, recursos.atributos = mundo.tiles.buffer, mundo.atributos
+recursos.terreno.tipos, recursos.terreno.quantidades = mundo.objetos, mundo.donos_objetos
+```
+
+`testes/test_grade_u16.py::GradesVivasMundo` runs Economy's actual `propagar_planta` this way, and the plant lands in Core's live object grid. A live constructor `RecursosTerreno.vivo(...)` is requested from Economy, matching `BonusUnidades.vivo`.
+
 ## Consumers
 
 - **Economy:** pass `mundo.tiles.buffer`, or the same live view, as the `mosaicos` bytes that `quadro_economia.atualizar_campos` / `extracao.RecursosTerreno` expect. Do not copy it.
 - **Missions:** replace the list bridge `vincular_lista(P(TILES), w.tiles, 'H', …)` with `w.vincular_tiles(mapa.vista(P(TILES), 131072))`, so the world and the memory map share the allocation.
-- The region grid `[0x4e0f38]` is also a u16 list in `MundoFisico`. `GradeU16` can carry it the same way when a consumer needs it live. That is not bound yet.
+- **Missions:** the other `vincular`/`vincular_lista` grid bindings can likewise become `w.vincular_grades(...)` over `mapa.vista(...)` views, so the world and the map share every terrain allocation.
 
 ## Validation
 

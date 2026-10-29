@@ -1,8 +1,10 @@
 # Consolidated progress — MONDE01
 
-Round: **CXR-20261029-M2R3 (M2 round 3 — chained frame-0/1 composition equal on v1; display-scenario reference adopted)**. Current fetched/ancestry-verified main: `81e0a2688b196bcacf37e44c1d26a79a46bc24d8`. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)). [Roadmap](ROADMAP_MONDE01.md), [snapshots](progress/README.md), [M2R3 main reproduction](../integracao/validacao/cxr-20261029-m2r3-main-reproduction.txt).
+Round: **CXR-20261029-M2R4 (M2 round 4 — display-scenario reference v2, comparison policy published, chained frames 0/1 equal with two Core crossings)**. Current fetched/ancestry-verified main: `d94a59e1d10296fed076d54b04f7be218f4aba98`. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)). [Roadmap](ROADMAP_MONDE01.md), [snapshots](progress/README.md), [M2R4 main reproduction](../integracao/validacao/cxr-20261029-m2r4-main-reproduction.txt).
 
 ## Resumo executivo
+
+**M2, rodada 4 (main `d94a59e`): M2 ainda não foi aceito.** A referência do primeiro quadro (cenário com tela, `-v2`) e a política de comparação estão publicadas: 776 bytes de lógica comparados e 78.093 bytes só de tela mascarados, com prova de escritor e leitor. A composição Python encadeada dos quadros 0 e 1 é igual ao original, mas ainda cruza NextAnimTerrain e NextAnimVeget do Core. A tradução 25×17 dessas rotinas chegou à main nesta mesma rodada. A prova formal do M2.1 (contra `-v2`, com a máscara e sem cruzamentos em lógica) é a próxima entrega. Três testes nativos de Economia quebraram na main por causa de um arquivo removido por Missões; a correção já foi atribuída. A estimativa global continua em ~50%.
 
 **M1 foi aceito.** A composição Python de `MissionLoad 0x46c2cf` para MONDE01 parte do estado de entrada original congelado e executa até o retorno com AL=1. O resultado é idêntico ao executável original: 881 blocos de memória (2.659.375 bytes), 938 registros de alocação, as 1.400 requisições externas na mesma ordem e o retorno. Não há pontes nem dependências substituídas. O resultado foi reproduzido na main integrada `927c7e5`, junto com uma nova execução nativa do original, idêntica à referência congelada.
 
@@ -19,7 +21,7 @@ Nesta rodada a referência original foi integrada (`14c0122`) e a composição P
 
 ## M2 status (live)
 
-**M2 is not accepted.** M2.1, the first frame, has an original reference. Its Python comparison is in progress.
+**M2 is not accepted.** M2.1, the first frame, has an original reference (display scenario, `-v2`) and a published comparison policy. The formal no-crossing proof is round 5's task.
 
 | Item | Original capture | Implementation | Native differential | Integrated / main reproduction | Whole-frame flow |
 |---|---|---|---|---|---|
@@ -68,7 +70,31 @@ No unit, structure, player, resource, AI, condition or market byte differs, and 
 
 Gates: missions native 126/126 and ai-runtime 57/57 (helpers). Main reproduction: 7 suites, 45 tests OK.
 
-**Open M2.1 items:**
+**Round 4 (main `d94a59e`).**
+
+| Front | Merge on main | Delivered |
+|---|---|---|
+| Core | `762e101` | CRT `fseek` 0x48cda2 and `fgets` 0x48ce96 are added to `FRONTEIRAS_IO`, with an owner review and ABIs. 70 isolated calls were captured at the display frame-0/1 inputs before translation. NextAnimTerrain and NextAnimVeget now cover the real 25×17 viewport, and CRT `rand`/LongRand runs over live memory. Native differentials: display scenario 194/0 mismatches; earlier scenario still 2,034/0. The Economy bonus table goes through `load_economy_bonus()`. The tile grid at `[0x507d70]` can be bound live by identity (`MundoFisico.vincular_tiles`). |
+| Economy | `62c541d` | Display-scenario captures: 104 frame calls and 77 query calls. The query capture is v2; v1 dropped stack writes and is kept unchanged. Live-memory providers cover PlayerGetType, PlayerEstAllie, TestRessource, BatimentGetType, BatimentEstHabiter, IntToBCD, BCDToInt and BagVide (a new translation). Python equals all calls. |
+| Graphics | `f4bf230` | RestoreAll and AffGame write no byte that logic code reads in the display frames, shown by a two-pass write/read capture. A read-only logic-effect provider with named stops outside the proven domain. |
+| Missions | `e508f09`, Stage18 | The display reference now runs on Graphics' `ExibicaoDeclarada`. It produces new `-v2` references, which differ from Stage17 only in 10 backend-chosen pointer bytes; Stage14 strict regression is whole-state equal. Comparison policy [`m2-politica-comparacao-quadro1.json`](../pesquisas-paralelas/missoes/validacao/m2-politica-comparacao-quadro1.json): 78,093 display-only bytes are masked (every writer and reader is display) and 776 logic bytes are compared. |
+| AI/runtime | `d94a59e` | The chained Python (a)→(b)→(c) equals the original display reference in every phase: all blocks, RNGs, bindings, boundaries and 96 checkpoints. MouseZone, the InputGame hover path and the MenuInit DeleteBank branch are translated original-first. The task-pool bridge is removed. Remaining **logic** crossings: only Core's NextAnimTerrain and NextAnimVeget, built before Core's 25×17 translation reached main. Display crossings remain: RestoreAll, AffGame and MenuInit's DD* calls. The comparison was made against Stage17 artifacts with AI's own classification, not against `-v2` with the published mask. |
+
+Validation:
+- All five helper integrations passed, with non-force pushes and verified ancestry.
+- Main reproduction (`RISING_EMULAR=1`): 8 suites. 74 tests OK.
+- **3 native Economy errors on main:** `test_quadro1_economia` fresh-capture tests. Economy's capture tool hashes `missoes/exibicao_declarada.py`, which Stage18 deleted when it switched to Graphics' backend. This is a cross-front break that the helpers' non-native gates did not catch. The fix is assigned to Economy as a priority. The frozen captures and Economy's pre-merge native run (23/23) are unaffected.
+
+Decision: the 146 MenuInit bank-allocation records stay compared, not masked.
+
+**Open M2.1 items (round 5):**
+1. **AI/runtime: formal proof** against `-v2` with the published mask. Requirements: no crossing writes a compared byte; Core's 25×17 providers replace the last logic crossings; every remaining display crossing has a write-set proof.
+2. **Economy:** repair the native fresh-capture tests on main.
+3. **Graphics:** logic-effect providers for MenuInit's DD*/FilledBox/DeleteBank, and a mask check of the lock state 0x4e17a4..ab.
+
+Preparation for M2.2 and M2.3 uses isolated captures only; the frame oracle stays at frame 1. Missions: an N-frame harness, plus static mapping of frame counter 128 and the first raid. Core: `ftell`, NextAnimVegetFullMap, InitGameZone modes 2–4. Economy: field growth over the live tile grid. Combat (reactivated): the first-raid routines.
+
+**Round 3 open items (historical):**
 1. Python composition of frames 0/1 compared phase by phase (AI/runtime).
 2. Reached providers still missing: Core GetBit/CalculFatigue/SetEnginCollision/Random/illumination; Economy BonusGetValEngin/state-7/type-2/ResetTableauHangar/BatimentGetCase/RechercheGetNbInvention; Combat EnginTrouveCible/PlayerEstAllie; Missions influence queries.
 3. **AffGame write set between frames.** The oracle does not execute AffGame, and frame 1 re-reads eight bytes it might write, including the game-state byte 0x4e2f78. Graphics is proving this from bytes. Until that is resolved, M2 acceptance is blocked.
