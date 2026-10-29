@@ -26,4 +26,6 @@ The live consolidated report is [docs/PROGRESS.md](../PROGRESS.md). It separates
 
 - [Closed M2 round 3 CXR-20261029-M2R3](2026-10-29-M2R3-closed.md): chained frame-0/1 composition equal on v1; display-scenario reference adopted at `81e0a26`; M2 not accepted.
 
+- [Closed M2 round 4 CXR-20261029-M2R4](2026-10-29-M2R4-closed.md): display reference v2 and comparison policy published; chained frames 0/1 equal with two Core crossings at `d94a59e`; M2.1 formal proof pending; M2 not accepted.
+
 At each actual execution-round closure, append a new `YYYY-MM-DD-CXR-NN-closed.md` snapshot copied from the verified live report and add it here. Keep a failed/pending round too, with its unchanged main SHA and reason. Never edit a prior snapshot to reflect later success. A repeated heartbeat without a changed round disposition does not require a duplicate snapshot.
