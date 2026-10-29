@@ -301,3 +301,55 @@ Preserved round-2 evidence: [consumer tests](validation/m3-round2-consumer-tests
 Graphics 1.1 remains the render dependency. Runtime live delivery/input remains
 reserved. The remote feature is delivered for Claude coordinator review;
 this work establishes no milestone and never merges or pushes main.
+
+## Round 3 — explicit Graphics 1.2 chained playback
+
+Round 2 was not integrated: its Graphics 1.0 gate correctly rejected 1.2 on the
+coordinator's candidate. Fetched main for this continuation:
+`a7405668e630650f67f6ff792bd07348ae7697f7`, merged safely into the existing
+feature at `7e771c4e9f46a22536a86f7d3331d1de74d9151d`. New implementation
+changes stay in app-owned paths and the macOS manual. Other-front changes
+arrived only through the main merge; no owner implementation is edited.
+
+Contract v3 explicitly accepts only Graphics (1,2), checks both module/result,
+and SHA-pins its initial surface, initial terrain cache and verification files.
+Both initial loaders are the unchanged Graphics APIs. The cache never starts
+cold, and navigation never loads an independent mid-sequence state: forward
+seeks process every phase; backward seeks reset and replay from the start.
+AffGame reads the preceding captured frame/load-tail state, not the ending
+between_frames counter. The surface AND cache are carried after each draw;
+frame(k) is undrawn and preserves both. RestoreAll/MenuInit output is supplied
+by the original initial-surface artifact, not reconstructed by this consumer.
+
+Read-only habitation is now supplied by the unchanged Economy predicates,
+loaded as pure AST definitions with their actual constants and read methods.
+They bind captured structure/unit bytes without constructing a synthetic world,
+adding defaults or replacing any Graphics/Economy module. The original native
+habitation reference is checked by consumer tests.
+
+The completed [per-phase render report](validation/m3-m22-render-v3.json) verifies
+257/257 memory summaries, 11/11 complete memory checkpoints, 128 Graphics calls,
+and **12/12 applicable chained surface hashes**. Actual provider statuses are
+**128 partial, 129 undrawn, zero full**. Every drawing phase preserves the
+0x41591F stop for type 8 (then type 1). Graphics' own frame 6..12 references
+still carry this stop although their first pixel difference is row 547; no
+consumer silently promotes them to full. The HUD (rows >=544) and cursor are
+not drawn, and no native pixel checkpoints beyond frame 12 are claimed.
+The initial load_tail surface equals its recorded full-surface hash. Later
+native phase-end/post-HUD hashes are reported for comparison, not treated as
+successful complete-render checks.
+
+The playback-service KeyError was confirmed as a secondary test failure: the
+worker returned a valid error without a playback key after rejecting Graphics.
+The service now checks Graphics before opening/publishing playback, returns an
+explicit error_type, and tests assert response success before indexing. A real
+isolated worker test with API (1,3) confirms the refusal response. Successful
+response shape is checked by the client. Renderer/version/reference errors do
+not publish a new inspection image. The native page shows actual PNG output,
+partial/inherited stops, undrawn phases and all limitations; its DOM smoke uses
+frame 12 while the separate report covers all 128 frames.
+
+Targeted version/cache/sequence/error tests pass. The full committed-revision
+consumer discovery, bundle build and both native smokes follow below after
+execution with the coordinator's explicit inputs-root/data-root/runtime flags.
+No live delivery, game input protocol, renderer or M2.3 work is added.

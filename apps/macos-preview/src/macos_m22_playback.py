@@ -10,7 +10,7 @@ import types
 from macos_state_consumer import (MacOSAcceptedImage, MacOSMemoryBlock, StateValidationError,
                                   RuntimeContractPending, _source_root, _sha)
 
-CONTRACT = 'rising-lands/macos-state-consumer/2'
+CONTRACT = 'rising-lands/macos-state-consumer/3'
 SCENARIO = 'MONDE01/display-v2/M2.2-accepted-evidence'
 MISSIONS = 'pesquisas-paralelas/missoes/'
 EVIDENCE = MISSIONS + 'evidencias/'
@@ -209,6 +209,20 @@ class MacOSM22Playback:
     def inspect(self): return self.current.inspect()
     def apply_frame(self, frame):
         raise RuntimeContractPending('Live frame delivery remains reserved; use accepted-evidence playback')
+
+    def fork(self):
+        """Independent cursor over the same verified immutable evidence inputs."""
+        return MacOSM22Playback(self.root, self._capture, self._s0, self._delta, self._reader, self.integrity)
+
+    def drawing_input(self):
+        """AffGame entry memory: previous frame/load-tail return, before loop counters.
+
+        between_frames ends at the NEXT CalculGame entry; its ending counter is
+        already incremented. Rendering must read the preceding captured state.
+        """
+        if not self.current.phase_name.startswith('between_frames'):
+            raise StateValidationError('Only between_frames phases have an AffGame input')
+        return self._image(self._previous, self._index - 1)
 
     def previous_surface(self, supplied=None):
         """Exact preceding offscreen bytes, from memory or hash-bound external evidence.
