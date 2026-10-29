@@ -1,6 +1,6 @@
 # Audio handoff
 
-Owner: the Audio front. Branch `feat/re-audio`, worktree `worktrees/re-audio`. Owned paths: `pesquisas-paralelas/audio/` and `docs/AUDIO.md`. The macOS chat executes this front while it waits for the M1 trigger, as approved by the human on 2026-10-28.
+Owner: the independent Audio front, branch `feat/re-audio`, clone `/Users/marcio/git/Rising-Lands-Codex-Audio/repository`. Owned paths: `pesquisas-paralelas/audio/` and `docs/AUDIO.md`. Historical sections below preserve earlier scopes; the current delivery is the final request/record and PCM section.
 
 ## Stage 1: bank format and sample decoding (complete)
 
@@ -200,7 +200,7 @@ milestone record changes are requested by this audit.
 
 Next Audio capture boundary is HandlSnd_Insert 0x48a218, including [EBX] at
 0x48a225 and 44-byte record population/compaction. ClearListe's initialized
-branch calls DSB_IsThisSoundPlaying 0x48beb9; the new COM status/position,
+branch calls DSB_IsStopped 0x48beb9; the new COM status/position,
 volume, play/stop fixture contract remains required. The index helper alone
 must not replace PostSound/Manage with a successful request or playback.
 Stage-3 game emitters and owners' pending descriptors remain unchanged until
@@ -227,3 +227,127 @@ without executing original instructions. The original native report is
 byte-identical; no unchanged native algorithm was rerun. See
 [validator-reproducibility.json](validacao/validator-reproducibility.json) and
 [the gate log](validacao/validator-reproducibility-check.log).
+
+
+## Current delivery: request records and declared-platform PCM queue slice
+
+The human authorized this independent continuation after the prior Audio
+`e06e787` delivery was integrated. The clone was inspected clean, remote feature
+history was fast-forwarded, and latest main was merged by fast-forward to
+`a7405668e630650f67f6ff792bd07348ae7697f7`. Main was not checked out, pushed or
+integrated. All new changes belong to Audio only; no milestone is established.
+Read-only CD input is `/Users/marcio/git/Rising Lands/source/cd`, linked as
+`../source/cd` inside the dedicated Audio workspace. Analysis packages remain
+in ignored `.local/python`; original media, runtime and other checkouts are
+unchanged. The only external local coordination access is execution of the
+unchanged human-mandated shared lease.
+
+### API, domain and original-first provenance
+
+Current API and original addresses are in
+[docs/AUDIO.md](../../docs/AUDIO.md#current-requestrecord-api-and-declared-pcm-bridge--2026-10-29).
+[QUEUE_COM_CONTRACT.md](QUEUE_COM_CONTRACT.md) specifies each scalar width,
+protected memory range, original call order, COM answer and dependency address.
+The provider is [fila_audio.py](fila_audio.py), with frozen-input replay in
+[reproduzir_fila_audio.py](reproduzir_fila_audio.py). Its constructor retains
+caller objects and creates no initialized audio state or backend defaults.
+
+The original-only research sequence is `0af28b0`, `7e29ac1`, `3806164`,
+`ba251fa`; its first request/record implementation is `6bd1ca9`.
+Original-only creation descriptors/output evidence is `d0bfdd7`; PCM
+creation/fill/start and error evidence is `fd8642c`. The subsequent bridge
+implementation reuses Stage-1 `criar_superficie_som` rather than reimplementing
+sample decoding. The 551-bank/sample baseline was preserved and not rerun as
+new native work. Full commit SHAs accompany the delivery message.
+
+Preserved diagnostics include the v1 incomplete fixture answers, v2 missing
+seek binding, the v3/v4 CRT interval stop (earlier premature Create attribution
+corrected), v5's actual creation stop, and all v6 replacement effects. A rejected
+first v9 _hread declaration used wrong IAT 0x523200; original instruction
+0x48c042 and the existing Stage-1 map prove 0x5231e8. The corrected run is
+separate; [queue-create-run-history.json](validacao/queue-create-run-history.json)
+retains the setup failure. No frozen evidence or accepted policy was edited.
+The maintained legacy symbol at 0x48beb9 is corrected to `DSB_IsStopped`.
+
+### What passed
+
+[v9 original-only capture](evidencias/captura-fila-audio-original-v9.json):
+**244 actual intact-original calls / 238 scenarios**. The seven-call persistent
+PostSound sequence retains every intermediate image. All 235 returned scenarios
+and three intentionally unbound cases match Python: full inherited memory,
+reference and slot back-pointers, aliasing index 70, partial writes, ordered COM
+calls/arguments/results and meaningful EAX values. The three expected stops
+are missing CreateSoundBuffer at caller 0x48b834 and two missing Lock bindings
+at caller 0x48c097; earlier PSB reservation -1→0, dirty resets and seek calls
+remain visible. They are dependency tests, not successful device creation.
+
+The new defined PCM path additionally reaches CreateSoundBuffer, Lock, explicit
+_hread bytes, Unlock, GetStatus, SetPosition, SetVolume and Play in that order.
+The declared matrix covers null/non-null output independently of HRESULT,
+Lock/Unlock error results, 64/32/0 returned bytes, already-playing status and
+position/volume/Play failures. A start failure still moves the request into a
+playing record exactly as the original does. No actual sound is emitted and no
+real DirectSound allocation, initialization or timing is inferred.
+
+[fila-audio-three-way-v2.json](validacao/fila-audio-three-way-v2.json): fresh
+native/frozen/Python comparison **passed**, 244 calls, 238 scenarios, three
+expected stops, zero unexpected failures, 0.965 seconds. Earlier v7 fresh
+report remains [v1](validacao/fila-audio-three-way-v1.json): 230 calls, 224
+scenarios, one expected stop, 0.871 seconds. These reports are separate, not
+summed as independent unique scenario coverage. The provider hash is recorded
+in each corresponding report.
+
+### Exact bounded reproduction
+
+Run from the independent clone. Choose a fresh output path; existing files or
+symlinks are refused before importing/starting native capture. Output creation
+is exclusive as well. Do not overwrite committed reports.
+
+```sh
+python3 '/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py' \
+  codex-audio-queue-repeat-001 -- \
+  /Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -B \
+  pesquisas-paralelas/audio/validar_fila_audio.py \
+  --output .local/audio/queue-repeat-001.json
+```
+
+The same wrapper with `capturar_fila_audio.py --output <fresh-path>` performs
+an original-only run. Each call permits at most 20,000 original instructions;
+the capture installs SIGALRM 600 seconds after acquiring the lease. No new
+native queue job exceeded two seconds, and no Mac mini time is requested for
+this slice. The native runtime is read-only and must see the clone's ignored
+analysis packages. Non-native checks run outside the lease:
+
+```sh
+python3 -B scripts/check.py --domain audio
+```
+
+### Remaining validated boundary
+
+Manage supports the captured empty/one-active-logical states and exactly one
+new file-backed PCM request with no loaded physical slots. Multiple pending
+requests stop at 0x48a80c; loaded physical lookup/reuse at 0x48acd3,
+physical transfer at 0x48ac53, promotion at 0x489e6d, dictator lifecycle at
+0x48a0a1 and dictator creation at 0x48a702 remain outside. Queue bridging for
+resident/compressed data stops at 0x48aad4 (their separate Stage-1 sample APIs
+remain baseline). Wrapped/short Lock outputs, unwritten output/status words,
+real buffer ownership and asynchronous/device initialization remain undeclared.
+These are explicit caller/provider boundaries, not fabricated successful
+callbacks. Future original-first captures may extend them.
+
+No emitter/game-side code, M2.3, renderer, native application, acceptance record
+or formal milestone is changed. This is a tested queue foundation plus a
+bounded declared-platform PCM path; complete audio stages 2/3 and M3 audio
+acceptance remain incomplete.
+
+
+Final non-native gate: **49 discovered, 46 passed, zero failures, three unchanged
+optional Stage-1 native skips**, 11.052 seconds. All **15 new queue replay/API
+tests pass with zero skips**. Three additional CLI checks confirm help, required
+--output and refusal to overwrite the committed report before native capture.
+The exact gate log is [audio-queue-check.log](validacao/audio-queue-check.log);
+[audio-queue-validation.json](validacao/audio-queue-validation.json) records
+source hashes, command, actual skips, CLI results and the fresh native report.
+The 244-call fresh comparison ran under the lease despite the optional baseline
+native skips; those are separate results. No unchanged 551-sound native corpus
+was rerun or claimed anew.
