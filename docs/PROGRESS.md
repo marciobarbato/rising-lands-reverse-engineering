@@ -1,6 +1,6 @@
 # Consolidated progress — MONDE01
 
-Round: **CXR-20261029-M2R2 (M2 round 2 — frame-1 callees validated at exact inputs; chained composition and executed display path pending)**. Current fetched/ancestry-verified main: `e44021a4cd146d2af3ab96099157b965be8f1f23`. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)). [Roadmap](ROADMAP_MONDE01.md), [snapshots](progress/README.md), [M2R2 main reproduction](../integracao/validacao/cxr-20261029-m2r2-main-reproduction.txt).
+Round: **CXR-20261029-M2R3 (M2 round 3 — chained frame-0/1 composition equal on v1; display-scenario reference adopted)**. Current fetched/ancestry-verified main: `81e0a2688b196bcacf37e44c1d26a79a46bc24d8`. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)). [Roadmap](ROADMAP_MONDE01.md), [snapshots](progress/README.md), [M2R3 main reproduction](../integracao/validacao/cxr-20261029-m2r3-main-reproduction.txt).
 
 ## Resumo executivo
 
@@ -46,6 +46,27 @@ Integrations:
 Validation:
 - Helpers: missions native 123/123 and ai-runtime 54/54 with 0 skips; all common gates passed.
 - Main reproduction: 6 suites, 48 tests OK.
+
+**Round 3 (main `81e0a26`).**
+
+| Front | Commit | Delivered |
+|---|---|---|
+| AI/runtime | `507b6a6` | Chained Python composition (a)→(b)→(c) equals the **v1** oracle in every phase. It covers 881 blocks, both RNGs, bindings and boundaries, with 81 checkpoints. Eight declared stops were crossed only after entry-state equality: RestoreAll, SetClipping, InitGameZone ×2 and NextAnim* ×4. It also adds InputGame, InputSend, CalculIconeAction, MenuInit and the EnginNextEtape/BatimentNextEtape switches, all original-first. |
+| Core | `c503f0f` | SetClipping, InitGameZone and NextAnim* are captured and translated. The task VM now runs in place on live memory. |
+| Economy | `c90c566` | Live bonus table bound by identity. Frame providers added. |
+| Graphics | `d8b1af9` | Declared DirectDraw backend and bank/file inventory. |
+| Missions | `2d3def9`, Stage17 | Display scenario: startup runs the real window loop, and the display path (DDInit, banks, RestoreAll, AffGame) runs natively. A new MissionLoad entry and capture plus Stage14 regression are whole-state equal over 25,343 blocks. Frames 0/1 were recaptured. |
+
+**Finding: v1 differs from the real display behavior in game logic, not only in display state.** With display initialization:
+- the viewport is 25×17, so NextAnimTerrain makes 425 CRT `rand` calls per frame;
+- NextAnimVeget advances the shared cursor 0x4e1d18;
+- MouseInit centres the cursor, so frame 0 no longer edge-scrolls.
+
+No unit, structure, player, resource, AI, condition or market byte differs, and the game RNG 0x497164 is equal. AffGame between frames writes no logic byte at frame 1.
+
+**Decision:** the display scenario is the M2 reference. The v1 composition result is historical evidence only. The M2.1 comparison will use a published display-only exclusion mask with writer/reader proof; every other byte is compared.
+
+Gates: missions native 126/126 and ai-runtime 57/57 (helpers). Main reproduction: 7 suites, 45 tests OK.
 
 **Open M2.1 items:**
 1. Python composition of frames 0/1 compared phase by phase (AI/runtime).
