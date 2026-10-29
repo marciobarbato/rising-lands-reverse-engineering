@@ -11,8 +11,9 @@ complete original mission or campaign.
 From the repository, run:
 
 ```sh
-./compilar-jogável
-open '/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/RisingLands-ptbr.app'
+export RISING_PYTHON_RUNTIME=/absolute/path/to/relocatable-python-3.12-arm64
+./compilar-jogável --inputs-root /absolute/path/to/inputs
+open .local/macos-playable/dist/RisingLands-ptbr.app
 ```
 
 From the workspace, use `./engenharia-reversa/compilar-jogável`. The normal build
@@ -30,7 +31,7 @@ Before feature integration, a separate check is available:
 It requires a committed revision and writes under `dist/development/`, preserving
 the normal delivery. The build prints the absolute bundle path. Generated
 sources, assets, runtime, compiler caches, logs and prior bundles remain under
-workspace `local-data/macos-playable/`, outside tracked research folders.
+clone-local `.local/macos-playable/`, outside tracked research folders.
 Existing preview distributions and historical manifests are untouched.
 
 Prerequisites: macOS 13+ on ARM64, Apple Swift command-line tools, Git, Python
@@ -129,3 +130,48 @@ It loads the exact acceptance-pinned evidence with the existing Python block
 decoder. It does not switch the native app to MONDE01 or establish M3 acceptance.
 The [independent audit](../apps/macos-preview/M3_AUDIT.md) records isolation and
 provider dependencies.
+
+
+## Independent accepted-evidence playback (contract v2)
+
+The app offers **Inspeção M2.2 · evidência aceita** separately from the synthetic
+training exercise. It loads the accepted display-v2 MissionLoad state and all
+257 phases / 11 checkpoints using committed Missions/runtime readers. Choose a
+phase or frame, inspect original-address memory/observed words, or reset. This
+is read-only playback, not a running Python mission or M3 acceptance. M1
+original-v2 inspection remains a separately labeled API.
+
+The shell displays only images returned by Graphics API **1.0** and explicitly
+shows partial frames/named stops. Currently the required previous surface is
+not in the accepted capture: every phase stops at `missing_previous_surface`
+before the render API call. No blank image/fallback is drawn. Graphics' initial
+surface artifact and chaining contract (planned API 1.1) are pending; 1.1 will
+require an explicit tested consumer update.
+
+Inputs and outputs are explicit. For the authorized local read-only inputs:
+
+```sh
+export RISING_PYTHON_RUNTIME="$HOME/.cache/codex-runtimes/codex-primary-runtime/dependencies/python"
+./compilar-jogável --development-ref HEAD \
+  --inputs-root '/Users/marcio/git/Rising Lands' \
+  --data-root '/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable'
+```
+
+`--inputs-root` (or `RISING_INPUTS_ROOT`) must contain `source/cd`; it defaults
+to the current clone. `RISING_PYTHON_RUNTIME` is required and points to a
+relocatable CPython 3.12 ARM64 root (`bin/python3`, `lib/python3.12`). Preflight
+reports missing inputs before creating outputs. The output default is this
+clone's `.local/macos-playable`; it no longer derives a shared directory from
+Git's parent. Original CD/runtime inputs are never modified. The bundle name
+and identity remain RisingLands-ptbr / local.risinglands.ptbr.
+
+Both the existing exercise and the new inspection view have native UI smoke
+checks. Their reports are `native-smoke.json` and `native-inspection-smoke.json`
+under the build log directory. Native inspection can also be opened with:
+
+```sh
+open -n .local/macos-playable/dist/development/RisingLands-ptbr.app --args --inspection
+```
+
+The [v2 contract](../apps/macos-preview/M3_CONTRACT.md) documents exact API
+semantics, evidence pins, ordering, publication and remaining dependencies.

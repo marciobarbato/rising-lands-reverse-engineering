@@ -242,9 +242,18 @@ class Preview:
 
 def main():
     preview=Preview()
+    from macos_playback_client import MacOSPlaybackClient
+    import atexit
+    playback=MacOSPlaybackClient(SNAP, Path(__file__).resolve().parent, MANIFEST['commit'])
+    atexit.register(playback.close)
     for line in sys.stdin:
         try:
-            req=json.loads(line);response={'id':req.get('id'),'ok':True,'state':preview.handle(req)}
+            req=json.loads(line)
+            if req.get('action') == 'playback':
+                preview.paused=True; preview.pump_time=None
+                response=playback.request(req)
+            else:
+                response={'id':req.get('id'),'ok':True,'state':preview.handle(req)}
         except Exception as e:
             response={'id':req.get('id') if isinstance(locals().get('req'),dict) else None,'ok':False,'error':str(e),'state':preview.state()}
             traceback.print_exc(file=sys.stderr)

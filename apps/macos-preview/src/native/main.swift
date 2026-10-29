@@ -39,7 +39,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         NSApp.activate(ignoringOtherApps:true)
         do { try launchEngine() }
         catch { fail("Não foi possível iniciar o Python incluído: \(error.localizedDescription)"); return }
-        let page = resourceRoot.appendingPathComponent("ui/index.html")
+        let page = resourceRoot.appendingPathComponent(args.contains("--inspection") ? "ui/playback.html" : "ui/index.html")
         web.loadFileURL(page, allowingReadAccessTo:resourceRoot)
         if smokeOutput != nil {
             DispatchQueue.main.asyncAfter(deadline:.now()+45) { [weak self] in
@@ -136,7 +136,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             return
         }
         guard message.frameInfo.isMainFrame, let body = message.body as? [String:Any], let action = body["action"] as? String,
-              ["init","reset","select","order","pause","play","speed","step","pump","state","economy","combat","interact"].contains(action),
+              ["init","reset","select","order","pause","play","speed","step","pump","state","economy","combat","interact","playback"].contains(action),
               let data = try? JSONSerialization.data(withJSONObject:body) else { return }
         ioQueue.async { [weak self] in
             do { try self?.input?.write(contentsOf:data + Data([10])) }

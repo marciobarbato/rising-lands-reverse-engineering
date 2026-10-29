@@ -202,3 +202,56 @@ Preserved logs: [targeted tests](validation/m3-packaging-fix-tests.log),
 [full app discovery](validation/m3-packaging-fix-full-tests.log).
 These regressions verify the packaging omission and bundled source resolution;
 they do not constitute a native application build or UI smoke pass.
+
+## Round 2 — accepted M2.2 playback and independent native inspection
+
+Started only after fetched `origin/main` contained packaging correction
+`fac29d6d0be7ee9e0aed41c2e8f3dc339adaab19`; verified base:
+`c59781cdffafbd0f7120fd801293f9f7d589f39f`. The existing dedicated feature
+was advanced by fast-forward. Only app-owned paths, the launcher and the
+macOS manual are changed. No formal milestone is established.
+
+Contract v2 retains M1 original-v2 inspection and adds separately labeled,
+read-only M2.2 display-v2 playback. Inputs, widths, ordering, provenance pins,
+atomic publication and identity are specified in [M3_CONTRACT.md](M3_CONTRACT.md).
+No simulation provider is called or stubbed. The runtime comparator's unchanged
+pure reader definitions are loaded by path without its simulation imports;
+Missions' unchanged delta applier handles navigation. Images retain original
+names, addresses and immutable bytes. LIVE apply_frame remains reserved.
+
+The real capture verifies **257/257 summaries and 11/11 full checkpoints**.
+[Per-phase report](validation/m3-m22-playback.json) includes observed words,
+state identity and render status for every phase. All 257 render attempts stop
+before calling Graphics at `missing_previous_surface`. The coordinator confirmed
+that no previous-surface pixels exist in this capture and instructed this stop.
+Thus this report records **zero actual Graphics calls, zero full/partial images**;
+it must not be interpreted as rendered-phase validation.
+
+Graphics API (1, 0) is pinned on import and result. Only Graphics supplies image
+pixels and PNG encoding; its partial frame and named stop remain explicit.
+The adapter has an unset surface-source extension point. No alternate surface
+artifact, zero-filled fallback, habitation result or drawing code is invented.
+Graphics' original-first initial surface, chaining rule and per-phase surface
+hash verification (planned API 1.1) remain required. Version 1.1 is refused until
+an explicit tested consumer change. Other Graphics scene gaps and live runtime
+input/frame delivery remain external dependencies.
+
+The AppKit/WebView shell now exposes a separate inspection page and isolated
+worker, preserving the synthetic exercise. It supports phase/frame navigation,
+reset, memory reads, block filtering, observed words and verification status.
+Inspection pauses training. The existing game input commands are unchanged.
+Both views have native smoke paths; no engine or renderer is added.
+
+Build inputs are now explicit (`--inputs-root` / RISING_INPUTS_ROOT and
+RISING_PYTHON_RUNTIME), with clone-local default outputs `.local/macos-playable`
+and optional `--data-root`. CD/runtime inputs are read-only. The renderer's
+catalog assets are copied and hash-checked into the bundle. Source mirroring
+and the original bundle identity are preserved. See the manual for invocation.
+
+Independent checks before the native build: 34 targeted tests passed, zero
+skips, plus the separate real worker/bridge test passed (35 total). Tests cover
+all API paths, corrupt/missing pinned inputs, order/checkpoint failures, atomic
+failure, repeat/reset identity, reserved live delivery, Graphics API mismatch,
+explicit surface stop and launcher preflight. These tests use real M2.2 evidence;
+synthetic Graphics test outputs validate adapter branching only.
+Native build and UI results are recorded after the committed-revision run.

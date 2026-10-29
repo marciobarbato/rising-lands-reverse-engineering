@@ -64,3 +64,23 @@ def prepare_units(source, cd, output):
     provenance['outputs'] = [{'path': p.name, 'sha256': hashlib.sha256(p.read_bytes()).hexdigest(), 'bytes': p.stat().st_size}
                              for p in sorted(output.iterdir()) if p.is_file() and p.name != 'fontes.json']
     (output / 'fontes.json').write_text(json.dumps(provenance, ensure_ascii=False, indent=2) + '\n')
+
+
+def prepare_render_inputs(source, cd, output):
+    """Copy hash-checked Graphics catalog assets, never a linked CD tree."""
+    manifest = source / 'pesquisas-paralelas/graficos-animacao/fontes/manifesto.json'
+    entries = json.loads(manifest.read_bytes())
+    output.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(manifest, output / 'manifesto.json')
+    for entry in entries:
+        relative = Path(entry['copia'])
+        if (not str(relative).startswith('fontes/cd/INSTALHD/GRAPHICS/')
+                and str(relative) != 'fontes/cd/INSTALHD/PLATGAME.PIE'):
+            continue
+        relative = relative.relative_to('fontes/cd')
+        data = (cd / relative).read_bytes()
+        if hashlib.sha256(data).hexdigest() != entry['sha256']:
+            raise ValueError('Graphics input hash differs: ' + str(relative))
+        target = output / 'cd' / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
