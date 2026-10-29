@@ -111,7 +111,7 @@ def collect_code(cd,reader):
         data=reader._bytes(raw,start,end)
         intervals.append(dict(name=name,start=hex(start),end_exclusive=hex(end),sha256=sha(data),bytes=len(data)))
         lines+=['','; '+name+' '+hex(start)+'..'+hex(end)+' sha256 '+sha(data)]
-        lines += [f'{i.address:08x}  {i.bytes.hex():<24} {i.mnemonic} {i.op_str}' for i in md.disasm(data,start)]
+        lines += [f'{i.address:08x}  {i.bytes.hex():<24} {i.mnemonic} {i.op_str}'.rstrip() for i in md.disasm(data,start)]
     getter=reader._bytes(raw,0x47fc54,0x47fc57)
     if getter!=bytes.fromhex('89d8c3'):
         raise ValueError('ConfigStubMismatch')

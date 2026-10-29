@@ -150,7 +150,7 @@
 0047a819  5a                       pop edx
 0047a81a  59                       pop ecx
 0047a81b  5b                       pop ebx
-0047a81c  c3                       ret 
+0047a81c  c3                       ret
 
 ; ReadConfigMonstre 0x47aba9..0x47ac30 sha256 3996046f71630fbb178e635f3babab477c3bc46960451eb59e0faf2e5bbe7491
 0047aba9  51                       push ecx
@@ -185,7 +185,7 @@
 0047ac28  a3c8a95000               mov dword ptr [0x50a9c8], eax
 0047ac2d  5a                       pop edx
 0047ac2e  59                       pop ecx
-0047ac2f  c3                       ret 
+0047ac2f  c3                       ret
 
 ; LoadEntrerMonstre 0x47ac30..0x47ad6a sha256 e623b7fa891620a4bfd65509458ec7a2ac0cf1d16eac5bb0af8123ccb1ca7fec
 0047ac30  53                       push ebx
@@ -718,7 +718,7 @@
 0047b8e4  5a                       pop edx
 0047b8e5  59                       pop ecx
 0047b8e6  5b                       pop ebx
-0047b8e7  c3                       ret 
+0047b8e7  c3                       ret
 
 ; LoadCalculMissionDivers 0x47c30f..0x47c359 sha256 4c9bb1b6009448b4c5a6ee205112b86033d33a7254b504f2759e67484e3d8111
 0047c30f  53                       push ebx
@@ -746,11 +746,11 @@
 0047c353  83c404                   add esp, 4
 0047c356  5a                       pop edx
 0047c357  5b                       pop ebx
-0047c358  c3                       ret 
+0047c358  c3                       ret
 
 ; iaConfigGetValue 0x47fc54..0x47fc57 sha256 93b5600a402a472f2004a7f9f6e9816519fe2bab72db90614cb375bb822d6324
 0047fc54  89d8                     mov eax, ebx
-0047fc56  c3                       ret 
+0047fc56  c3                       ret
 
 ; iaSetMode 0x47f8b7..0x47f8e7 sha256 735703a3d1b1c2624ca3594c0d4ede07b389561150cb216add2bdf1917d8137e
 0047f8b7  53                       push ebx
@@ -771,4 +771,4 @@
 0047f8df  e8c3730000               call 0x486ca7
 0047f8e4  59                       pop ecx
 0047f8e5  5b                       pop ebx
-0047f8e6  c3                       ret 
+0047f8e6  c3                       ret
