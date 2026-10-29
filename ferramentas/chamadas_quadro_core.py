@@ -878,13 +878,18 @@ def _provedores_movimento(memoria):
         return estado['mundo']
 
     def nada(f):
-        def provedor(sitio, **argumentos):
+        def provedor(sitio, **argumentos):     # EAX not modeled (path-dependent); callers do not use it
             f(**argumentos)
         return provedor
 
+    def registro(unidade, _):
+        return (memoria.u32(PONTEIRO_UNIDADES) + (unidade & 0xffff) * PASSO) & M32
+
     return {
-        'SetDeplaceEngin': nada(lambda unidade, destino: w().definir_movimento(unidade & 0xffff, destino)),
-        'ResetOrdre': nada(lambda unidade: w().redefinir_ordem(unidade & 0xffff)),
+        # Both end every path with EAX = the unit record address (store base of their last writes).
+        'SetDeplaceEngin': lambda sitio, unidade, destino: registro(
+            unidade, w().definir_movimento(unidade & 0xffff, destino)),
+        'ResetOrdre': lambda sitio, unidade: registro(unidade, w().redefinir_ordem(unidade & 0xffff)),
         'DeplaceEngin': nada(lambda unidade: w().deslocar(unidade & 0xffff)),
         'CalculNextCase': nada(lambda unidade: w().calcular_proxima_celula(unidade & 0xffff)),
         'AvanceEngin': nada(lambda unidade: w().avancar_passo(unidade & 0xffff)),

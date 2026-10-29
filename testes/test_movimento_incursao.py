@@ -120,3 +120,14 @@ class ProvedoresMovimento(unittest.TestCase):
         for nome in ('solucionador', 'resultados_busca', 'historico_navegacao'):
             with self.assertRaises(EstadoSemEndereco):
                 getattr(w, nome)
+
+
+@unittest.skipUnless(CAPTURA_MOVIMENTO.exists(), 'Movement capture not committed')
+class RetornoOrdens(unittest.TestCase):
+    def test_order_providers_return_the_captured_record_address(self):
+        import json
+        d = json.loads(CAPTURA_MOVIMENTO.read_bytes())
+        for c in d['calls']:
+            if c['routine'] in ('SetDeplaceEngin', 'ResetOrdre'):
+                eax = int(c['entry_registers']['EAX'], 16) & 0xffff
+                self.assertEqual(int(c['exit_registers']['EAX'], 16) - eax * 276, 0x4140d000, c['routine'])

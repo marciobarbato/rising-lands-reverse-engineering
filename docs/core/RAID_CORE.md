@@ -143,17 +143,17 @@ Routines with a flat translation (SetEnginCollision, SetCollision, Chemin_Modifi
 - `MundoNavegacao.deslocar` is DeplaceEngin exactly: the +0x88 switch of table `0x4492f0`.
 
 **Live movement providers** (`provedores_core`, built on `mundo_vivo` at first use):
-- SetDeplaceEngin(`unidade`, `destino`);
-- ResetOrdre, DeplaceEngin, CalculNextCase, AvanceEngin, RotateEngin, EnginNextCase, EnginNextCaseChemin (`unidade`);
+- SetDeplaceEngin(`unidade`, `destino`) and ResetOrdre(`unidade`) → EAX = the unit record address (every path ends there; the captured calls agree);
+- DeplaceEngin, CalculNextCase, AvanceEngin, RotateEngin, EnginNextCase, EnginNextCaseChemin (`unidade`);
 - ResetEnginCollision(`unidade`, `caso`);
-- EnginEstVivant(`unidade`) → AL;
+- EnginEstVivant(`unidade`) → EAX (0 or 1, the original zero-extends);
 - EnginOccupeCase / EnginPeutPasser(`unidade`, `caso`, `mascara`) → AL;
 - ChercheIndiceEngin(`caso`) → AX;
 - CalculDirection(`origem`, `destino`) → AL;
 - CalculDirCase(`caso`, `direcao`) → AX;
 - Distance2d(`x1`=AX, `y1`=DX, `x2`=BX, `y2`=CX) → EAX.
 
-The void routines return None.
+The other void routines return None: their EAX is path-dependent and not modeled (DeplaceEngin's EAX is 0, 0x3333 or a pointer in the capture), and their callers do not use it.
 
 **Open gaps:**
 - The path-search internals (CheminCalcul, Chemin_Verouille, OptimiseChemin, TestLigneOptimise). The world model runs them through `SolucionadorCaminhosPython`, whose work buffers and route identifiers are not yet bound to the original globals: Missions' composition denies `solucionador`.
