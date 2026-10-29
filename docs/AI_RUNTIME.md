@@ -459,3 +459,68 @@ At 18:13 BRT a separate preparation replay used the coordinator-authorized, hash
 
 
 Final focused proof at 18:23:56 BRT uses the **actual same-checkout integrated Economy provider** from main `85dc813`, with no test-only override. The 11 frozen-input original full/stopped runs pass against the real adapter over 75,967 segments: two complete MONDE01 fixtures and nine exact dependency states (eight missing EnginGetEtat, one missing EnginSetPlayer). Iterator aliases, images, returns where consumed and provider order agree. Source revision `a5316d4`; native report `pesquisas-paralelas/ia-runtime/validacao/stage2b-adapter-native.json`. Full suite/domain/helper integration and real mission were **not run** under this final bounded grant. The adapter remains a feature-branch WIP with focused original evidence, not a main delivery or L9/full MissionLoad closure. Heavy lease released on child exit; no new development after 18:25.
+
+## M2 — frame pipeline inventory at the M1 post-load state (step 1, static)
+
+`inventario_quadro_m2.py` writes `evidencias/inventario-quadro-m2.json`. It reads only intact bytes, SBL names and the frozen accepted M1 capture `pesquisas-paralelas/missoes/evidencias/captura-carga-missao-original-v2.json` (file SHA-256 `eb7d2303…`, final state `58a5020e…`, read-only, every block hash verified). Nothing is executed. **Input label: "M1 post-load input"** — MissionLoad's real return `0x42d22d`. The load-entry tail `0x42d22d..0x42d2de` (RestoreAll, SetClipping, frame-counter reset, `MenuInit(local, 0x12, 1)`, `InitGameZone(1, 0)`) still runs before the frame body, so its writes are not yet in this state. The exact frame-1 input is Missions' first-frame oracle.
+
+### Frame body `0x42d2de..0x42d4f5`: order, gates and owners
+
+| Site | Callee | Owner | Reached at MONDE01 frame 1 |
+|---|---|---|---|
+| `42d2de` | PlayerAttaqueReset (`ret`) | economy | yes |
+| `42d2e3` | EvenementEnCours (AL = byte `0x4e1b0e`) | missions | yes; post-load byte 0 → continue (gate 2 `jne 42d2ea`) |
+| `42d328` | MCICD_Play | audio (second wave) | **yes**: byte `0x4e2f28` = 0 post-load. A frame oracle must bind MCI CD audio |
+| `42d379` | PlayerGetType(cl), cl = 0..4 | economy | yes, five calls |
+| `42d33b`, `42d342` | InputGame, InputSend | ai-runtime input/network (second wave) | player 0 (type 1, local) |
+| `42d34b` | InputReceive | network (second wave) | no (no remote type-1 player) |
+| `42d354`, `42d35d` | MissionGetNum, CalculNextReflect | missions, ai-runtime | players 1, 2, 3 and **4** |
+| `42d36c` | InputGame after AI | ai-runtime | no (local player is human) |
+| `42d3b0` | ProcessInputGame(0..3) | ai-runtime | yes, four calls |
+| `42d3c9`/`42d3ce` | gate 3 | — | state `0x12` (stored by MenuInit before the body) continues |
+| `42d3e1`…`42d441` | MessageBoxCalcul, GameNextFrame, CalculIconeAction, ProjectileCalcul, CalculEnginNextEtape, CalculBatimentNextEtape, RechercheCalcul, PlayerInitAllianceCompteur, SetUpdateChamp, UpdateChamp, CalculMatiere, CalculCompteurMarche(local), CalculCompteurProposition(local, 0), NextAnimTerrain | ai-runtime ×3 (CalculIconeAction: interface, second wave), combat, ai-runtime ×2, economy ×2, core ×2, economy ×3, core | yes |
+| `42d467` | NextAnimVeget (`42d44f` NextAnimVegetFullMap is network only) | core | yes |
+| `42d46c` | PlayerAttaqueCalculSympa | economy | yes |
+| `42d481` | TestFinDeMission(local) → byte `0x4e05a0` | missions | yes; zero exits at `0x42d4e2` |
+| `42d48f`, `42d4b1`, `42d4c8` | MissionGetNum, MessageBoxSet(10, 500) (mission 6 only), PlaySnd_StopAllSound | missions, interface, audio | only after a nonzero end result; MONDE01 is mission 1, so MessageBoxSet is unreachable |
+
+The JSON lists all 33 call sites with targets and the 15 gate instructions verified as conditional jumps in the bytes.
+
+**PlayerGetType 0x46d817 returns AL = 2 for any index ≥ 4** (`cmp edx, 4; jge 0x46d834; mov al, 2`). The single-player loop runs cl = 0..4, so player 4 (monsters) runs `CalculNextReflect(4, 1)` → `iaCalculPlayer(4)` → `AvanceMonstre(4)` → `iaSolver(0x5148f0)` **every frame**, in addition to the declared controls 1,2,2,2 of players 0–3.
+
+### AI players at the M1 post-load state
+
+| Player | Type | AI context `0x51a98c + 16p` | Frame-1 path |
+|---:|---:|---|---|
+| 0 | 1 (human, local) | — | InputGame, InputSend |
+| 1 | 2 | `00000000 01 114253 64 …` | inactive byte `+4` = 1 → `iaCalculPlayer` returns 0, no call |
+| 2 | 2 | `00000000 01 114152 64 …` | inactive → return 0 |
+| 3 | 2 | `00000000 01 2e4052 64 …` | inactive → return 0 |
+| 4 | 2 (constant) | — | AvanceMonstre(4), then iaSolver(context 4) |
+
+IaReset set the inactive byte because players 1–3 own no living unit in MONDE01. Only player 0 owns units and the structure. The monster table holds 5 records (u16 `0x50a9ce`), HumanOnly = 0, and the 16 group counts at `0x50b124` are 1,1,1,1,1,1,1,1,2,2,2,2,3,4,7,0. **The only AI computation MONDE01 frame 1 can reach is the monster player's `AvanceMonstre` and its rule-VM solve.** `iagUnit/Ville/Ress/WarNoyau` are not reached while players 1–3 stay inactive. Static `AvanceMonstre` callees: MissionGetNum, iaProbPost, ConstruitGroupeMonstre, iagUnitGet{First,Next}UnitInGroup, V_iaMonstreAttendLaReponse…, iaGroupDelete, SetDeplaceEngin, Random, PlayerGetType, EnginGetCase, EnginGetType, GetRandCaseChamps, Chemin_Accessible, StockeAction, GetRandCaseTypeBatPlayer.
+
+### Unit dispatcher at the M1 post-load state
+
+All 16 live units are owned by player 0 (human, local). The other 784 slots are state 0 and are skipped.
+
+| State (table `0x4543c8`) | Branch | Units | Types |
+|---:|---|---|---|
+| 7 | `0x456966` (economy: AnimBallonStatic, Random) | 0, 1, 2, 11, 12, 13, 14, 15 | 0, 0, 0, 1, 7, 5, 5, 8 |
+| 14 | `0x454ccd` (direct exit) | 3–10 | 9 |
+
+Every live unit is counted and calls `IATestUtilite(1, i)`, which is `iagMessTestSendMessageEngin(i)` followed by a tail jump to `iabTestEngin` (a one-byte `ret`). All of them increment `0x4e1a3a` (local). Type 5 is excluded from `0x4e1928`. With u32 `0x508f7c` = 0 in frame 1, the target scan runs only for unit 0 (`(0 + i) & 0x1f` = 0, type 0, state 7). Its owner is human, so a found target uses `SetAttaqueEngin`, not message 0x49. Fatigue branch: types 0–10 and 25, which covers all 16 units. Group dword `+0x10c` is 0xffffffff for every unit. Before the first frame the counters hold `0x4e1a38`/`0x4e1a3a` = 0xffff, and `0x4e1928` is all zero.
+
+### Structure dispatcher at the M1 post-load state
+
+One live structure: index 0, owner 0, state 5, type 2. Its branch is `0x426918` (economy: BagContientTroupe, BagContient, CalculTroupe). It is counted in `0x4dfaa8[0]`, and `IATestUtilite(3, 0)` returns immediately. Discover/illuminate loops run for players 1–3, with flags `+0x110..0x113` = 0. With `0x508f7c` = 0 and period u16 `0x495c02` = 1000, byte `0x4dfb9b` is cleared. No structure is in state 3, so DemonteBatiment is unreachable.
+
+### Messages
+
+`ProcessInputGame 0x45edc0` (390 static instructions) decodes the player command queue into selection/order setters: Set*Select, Marche*, BatimentSelection, MenuInit, VendreBatiment, InitRecruteTroupe and others. It has no import and no indirect call. `MessageBoxCalcul 0x469dce` is 32 instructions with no call. Which commands reach frame 1 is a native question (step 2).
+
+### Cross-frame and cross-front facts recorded here
+
+- Audio: frame 1 reaches `MCICD_Play` (`0x4e2f28` = 0). Missions' frame-1 oracle needs a declared MCI binding or an audio-owned stop.
+- Missions: the frame-1 input differs from the M1 post-load state at least in `0x4e2f78` (0 → 0x12 by MenuInit) and in the writes of RestoreAll, SetClipping and InitGameZone. Re-validation at the exact frame-1 input waits for Missions' capture.
+- Economy: PlayerGetType's constant 2 for player 4 is part of the economy-owned player API. Any Python `PlayerGetType` must reproduce it, because the frame and IaReset consume it.
