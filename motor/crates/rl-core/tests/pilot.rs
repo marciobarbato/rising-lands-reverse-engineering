@@ -213,3 +213,35 @@ fn clock_pacing_never_changes_rng_results_or_routine_tick_count() {
     assert_eq!(a.clock.tick(), 100);
     assert_eq!(b.clock.tick(), 500);
 }
+
+#[test]
+fn projection_refuses_removed_or_unbound_semantic_fields() {
+    let (mut state, layout) =
+        GameState::load(memory(&[(WORLD_SEED, &1u32.to_le_bytes())])).unwrap();
+    state.world_rng = None;
+    assert!(matches!(
+        state.project(&layout),
+        Err(EngineError::ProjectionFieldMismatch {
+            address: WORLD_SEED
+        })
+    ));
+    let (mut state, layout) = GameState::load(MemoriaJogo::default()).unwrap();
+    state.crt_rng = Some(CrtRng { seed: 123 });
+    assert!(matches!(
+        state.project(&layout),
+        Err(EngineError::ProjectionFieldMismatch {
+            address: THREAD_DATA
+        })
+    ));
+    let (mut state, layout) = GameState::load(memory(&[
+        (CRT_GETTER, &SINGLE_THREAD_GETTER.to_le_bytes()),
+        (THREAD_DATA, &0x1000u32.to_le_bytes()),
+        (0x100c, &1u32.to_le_bytes()),
+    ]))
+    .unwrap();
+    state.crt_rng = None;
+    assert!(matches!(
+        state.project(&layout),
+        Err(EngineError::ProjectionFieldMismatch { address: 0x100c })
+    ));
+}

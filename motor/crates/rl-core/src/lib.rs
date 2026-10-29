@@ -13,6 +13,7 @@ pub enum EngineError {
     OverlappingRegions,
     UndeclaredAccess { address: u32, size: usize },
     IncompleteField { address: u32 },
+    ProjectionFieldMismatch { address: u32 },
     UnsupportedThreadGetter { address: u32, value: u32 },
     UnknownRoutine(u32),
     InvalidTickRate,

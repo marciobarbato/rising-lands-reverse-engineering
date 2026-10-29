@@ -153,6 +153,23 @@ impl GameState {
         ))
     }
     pub fn project(&self, layout: &Projection) -> Result<MemoriaJogo> {
+        // Presence belongs to the captured layout. Dropping a typed value must
+        // not silently publish its stale opaque template bytes.
+        let world_declared = layout.template.optional_u32(WORLD_SEED)?.is_some();
+        if self.world_rng.is_some() != world_declared {
+            return Err(EngineError::ProjectionFieldMismatch {
+                address: WORLD_SEED,
+            });
+        }
+        let crt_declared = match layout.crt_seed_address {
+            Some(address) => layout.template.optional_u32(address)?.is_some(),
+            None => false,
+        };
+        if self.crt_rng.is_some() != crt_declared {
+            return Err(EngineError::ProjectionFieldMismatch {
+                address: layout.crt_seed_address.unwrap_or(THREAD_DATA),
+            });
+        }
         let mut memory = layout.template.clone();
         if let Some(rng) = self.world_rng {
             memory.set_u32(WORLD_SEED, rng.seed)?;
