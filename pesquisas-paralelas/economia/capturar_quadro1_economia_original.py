@@ -18,6 +18,8 @@ address and run to their declared exits. No Python translation is imported.
         --saida pesquisas-paralelas/economia/evidencias/captura-quadro1-economia-original-v2.json
     python3 -B pesquisas-paralelas/economia/capturar_quadro1_economia_original.py --cenario exibicao \
         --saida pesquisas-paralelas/economia/evidencias/captura-quadro1-economia-exibicao.json
+    python3 -B pesquisas-paralelas/economia/capturar_quadro1_economia_original.py --cenario exibicao \
+        --conjunto consultas --saida pesquisas-paralelas/economia/evidencias/captura-consultas-economia-exibicao.json
 """
 import argparse
 import hashlib
@@ -42,6 +44,12 @@ ROTINAS = ('RechercheCalcul', 'PlayerInitAllianceCompteur', 'SetUpdateChamp', 'U
            'BonusGetValEngin', 'ResetTableauHangar', 'BagContientTroupe', 'CalculTroupe', 'BatimentGetCase')
 FRAGMENTOS = {0x456966: ('EnginNextEtape:state7', 0x454ccd),
               0x426918: ('BatimentNextEtape:type1_2_13_16', 0x4281c0)}
+# ``--conjunto consultas``: the economy queries the frames reach outside the routines above (nested calls
+# included, e.g. IntToBCD/BCDToInt inside CalculMatiere), plus BagVide, which AffGame reaches next to
+# BagContientTroupe. Kept apart so the ``quadro`` set stays comparable call by call across scenarios.
+CONSULTAS = ('PlayerGetType', 'PlayerEstAllie', 'TestRessource', 'BatimentGetType', 'BatimentEstHabiter',
+             'IntToBCD', 'BCDToInt', 'BagVide')
+CONJUNTOS = {'quadro': (ROTINAS, FRAGMENTOS), 'consultas': (CONSULTAS, {})}
 
 
 class IsolamentoEconomia(oq.Isolamento):
@@ -97,6 +105,11 @@ class IsolamentoEconomia(oq.Isolamento):
                 written_unchanged=[[hex(a), self._valor(depois, a)] for a in sorted(escritos)
                                    if a not in mudados and not oq.PILHA <= a < oq.PILHA + 0x10000],
                 read_before_write=[[hex(a), self._valor(antes, a), b.nome(lidos[a])] for a in leituras]))
+            # Callee-popped arguments (RET n) lie below the exit ESP, so the read set above excludes them:
+            # record their entry bytes. Absent for routines that pop nothing (every ``quadro`` routine).
+            if not fragmento and saida['ESP'] > regs['ESP'] + 4:
+                self.registros[-1]['stack_arguments'] = bytes(
+                    self._valor(antes, a) for a in range(regs['ESP'] + 4, saida['ESP'])).hex()
         finally:
             self._restaurar(contexto, blocos)
             b.fase = fase
@@ -107,7 +120,7 @@ def captura_quadro(cenario):
     return cenarios_oraculo.caminho(cenario, 'captura_quadro')
 
 
-def executar(cenario='v1'):
+def executar(cenario='v1', conjunto='quadro'):
     cap = json.loads(captura_quadro(cenario).read_bytes())
     if cap.get('scenario', 'v1') != cenario:
         raise RuntimeError(f'Frame capture scenario {cap.get("scenario")!r} is not {cenario!r}')
@@ -121,7 +134,7 @@ def executar(cenario='v1'):
     b.iniciar_relogio()
     b.executar_inicio()
     b.executar_mission_load(60)
-    iso = IsolamentoEconomia(b, ROTINAS, FRAGMENTOS)
+    iso = IsolamentoEconomia(b, *CONJUNTOS[conjunto])
     iso.instalar()
     resumos = {}
     for nome, correr in (('load_tail', lambda: b.executar_cauda_carga(600)),
@@ -143,13 +156,14 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--saida', required=True)
     ap.add_argument('--cenario', default='v1', choices=tuple(cenarios_oraculo.ARTEFATOS))
+    ap.add_argument('--conjunto', default='quadro', choices=tuple(CONJUNTOS))
     a = ap.parse_args()
     saida = RAIZ / a.saida
     if saida.exists():
         raise SystemExit(f'Refusing to overwrite existing evidence {saida}')
     revisao = subprocess.run(['git', '-C', str(RAIZ), 'rev-parse', 'HEAD'], capture_output=True, text=True).stdout.strip()
     t0 = time.monotonic()
-    b, iso, cap, reproducao = executar(a.cenario)
+    b, iso, cap, reproducao = executar(a.cenario, a.conjunto)
     contagem = {}
     for r in iso.registros:
         contagem.setdefault(f"{r['phase']}:{r['routine']}", 0)
@@ -165,7 +179,8 @@ def main():
         frame_capture=dict(path=str(captura_quadro(a.cenario).relative_to(RAIZ)),
                            sha256=hashlib.sha256(captura_quadro(a.cenario).read_bytes()).hexdigest()),
         phases_label='load_tail = frame 0 (counter 0), frame1 = frame 1 (counter 1)',
-        routines=list(ROTINAS), fragments={hex(a): dict(name=n, exit=hex(x)) for a, (n, x) in FRAGMENTOS.items()},
+        routine_set=a.conjunto, routines=list(CONJUNTOS[a.conjunto][0]),
+        fragments={hex(a): dict(name=n, exit=hex(x)) for a, (n, x) in CONJUNTOS[a.conjunto][1].items()},
         path_reproduction=reproducao, call_counts=contagem, calls=iso.registros,
         method='Missions Isolamento: native call from the exact saved entry state to its stack return (routines) '
                'or declared exit (fragments), local read/write hooks with the translation cache flushed, state '
@@ -173,7 +188,7 @@ def main():
         seconds=round(time.monotonic()-t0, 3))
     falhou = not reproducao['passed'] or not all(r['reached_exit'] for r in iso.registros)
     if falhou:
-        saida = RAIZ / '.local' / (f'economia-quadro1-{a.cenario}-isolado-falhou-' + time.strftime('%Y%m%dT%H%M%S') + '.json')
+        saida = RAIZ / '.local' / (f'economia-quadro1-{a.cenario}-{a.conjunto}-isolado-falhou-' + time.strftime('%Y%m%dT%H%M%S') + '.json')
     saida.parent.mkdir(parents=True, exist_ok=True)
     with open(saida, 'x') as f:
         json.dump(relatorio, f, indent=1, sort_keys=True)
