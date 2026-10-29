@@ -75,7 +75,10 @@ def bancada(cenario, preenchimento=0xa7, relogio=0x00123456, *, pulos=None, fron
     if cenario in ('exibicao', 'exibicao_v3'):
         from oraculo_exibicao_missao import BancadaExibicaoOriginal
         e = entradas_exibicao(preenchimento, relogio, **entradas_kw)
-        b = BancadaExibicaoOriginal(e, segundos=segundos, pulos=pulos, fronteiras=fronteiras,
-                                    v3=cenario == 'exibicao_v3')
+        v3 = cenario == 'exibicao_v3'
+        # v3 executes LoadPie: MenuInit's menu pictures alone exceed 200,000 FileRead
+        # resumptions (attempt 1 stopped there); budgets stay explicit and finite.
+        limites = dict(segmentos=3000000, vinculos=3000000) if v3 else {}
+        b = BancadaExibicaoOriginal(e, segundos=segundos, pulos=pulos, fronteiras=fronteiras, v3=v3, **limites)
         return b, e.quadro.base, dict(m1=e.quadro.base.manifesto(), frame=e.quadro.manifesto(), display=e.manifesto())
     raise ValueError(f'Unknown oracle scenario {cenario!r}')
