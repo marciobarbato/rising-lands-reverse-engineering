@@ -1,0 +1,270 @@
+{
+ "description": "P3, then: right click deselects; click the sanctuary (16,12) (structure selection); double click it (WM_LBUTTONDBLCLK: one colonist leaves); select that colonist at (14,14); click the cave cell (20,10): the colonist enters and lodges.",
+ "frames": [
+  {
+   "cursor": [
+    560,
+    528
+   ],
+   "frame": 130,
+   "messages": [
+    [
+     512,
+     0,
+     34603568
+    ]
+   ]
+  },
+  {
+   "frame": 131,
+   "messages": [
+    [
+     513,
+     1,
+     34603568
+    ]
+   ]
+  },
+  {
+   "frame": 133,
+   "messages": [
+    [
+     514,
+     0,
+     34603568
+    ]
+   ]
+  },
+  {
+   "cursor": [
+    180,
+    573
+   ],
+   "frame": 140,
+   "messages": [
+    [
+     512,
+     0,
+     37552308
+    ]
+   ]
+  },
+  {
+   "frame": 141,
+   "messages": [
+    [
+     513,
+     1,
+     37552308
+    ]
+   ]
+  },
+  {
+   "frame": 143,
+   "messages": [
+    [
+     514,
+     0,
+     37552308
+    ]
+   ]
+  },
+  {
+   "cursor": [
+    688,
+    400
+   ],
+   "frame": 150,
+   "messages": [
+    [
+     512,
+     0,
+     26215088
+    ]
+   ]
+  },
+  {
+   "frame": 151,
+   "messages": [
+    [
+     513,
+     1,
+     26215088
+    ]
+   ]
+  },
+  {
+   "frame": 153,
+   "messages": [
+    [
+     514,
+     0,
+     26215088
+    ]
+   ]
+  },
+  {
+   "cursor": [
+    400,
+    272
+   ],
+   "frame": 2005,
+   "messages": [
+    [
+     512,
+     0,
+     17826192
+    ]
+   ]
+  },
+  {
+   "frame": 2006,
+   "messages": [
+    [
+     516,
+     2,
+     17826192
+    ]
+   ]
+  },
+  {
+   "frame": 2008,
+   "messages": [
+    [
+     517,
+     0,
+     17826192
+    ]
+   ]
+  },
+  {
+   "cursor": [
+    528,
+    400
+   ],
+   "frame": 2015,
+   "messages": [
+    [
+     512,
+     0,
+     26214928
+    ]
+   ]
+  },
+  {
+   "frame": 2016,
+   "messages": [
+    [
+     513,
+     1,
+     26214928
+    ]
+   ]
+  },
+  {
+   "frame": 2018,
+   "messages": [
+    [
+     514,
+     0,
+     26214928
+    ]
+   ]
+  },
+  {
+   "frame": 2030,
+   "messages": [
+    [
+     515,
+     1,
+     26214928
+    ]
+   ]
+  },
+  {
+   "frame": 2032,
+   "messages": [
+    [
+     514,
+     0,
+     26214928
+    ]
+   ]
+  },
+  {
+   "cursor": [
+    464,
+    464
+   ],
+   "frame": 2060,
+   "messages": [
+    [
+     512,
+     0,
+     30409168
+    ]
+   ]
+  },
+  {
+   "frame": 2061,
+   "messages": [
+    [
+     513,
+     1,
+     30409168
+    ]
+   ]
+  },
+  {
+   "frame": 2063,
+   "messages": [
+    [
+     514,
+     0,
+     30409168
+    ]
+   ]
+  },
+  {
+   "cursor": [
+    656,
+    336
+   ],
+   "frame": 2070,
+   "messages": [
+    [
+     512,
+     0,
+     22020752
+    ]
+   ]
+  },
+  {
+   "frame": 2071,
+   "messages": [
+    [
+     513,
+     1,
+     22020752
+    ]
+   ]
+  },
+  {
+   "frame": 2073,
+   "messages": [
+    [
+     514,
+     0,
+     22020752
+    ]
+   ]
+  }
+ ],
+ "name": "P6",
+ "schema": "rising-lands/monde01-scripted-input/1",
+ "start": {
+  "checkpoint": "M2.2 frame128",
+  "frame": 128
+ },
+ "stop_frame": 2400
+}

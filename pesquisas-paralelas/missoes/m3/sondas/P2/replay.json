@@ -1,0 +1,49 @@
+{
+ "comandos.jsonl": {
+  "equal": true,
+  "lines": [
+   4,
+   4
+  ],
+  "sha256": "1118e54dd12ad3c9a2068f70ee2546e62e801566c2d5202fd7dc9e4e015bf78f"
+ },
+ "entradas.jsonl": {
+  "equal": true,
+  "lines": [
+   9034,
+   9034
+  ],
+  "sha256": "14c74c82b9f313d346158bbc3e70813bc73e4ac4dae1296bf9778c03feff49d8"
+ },
+ "equal": true,
+ "fronteiras.jsonl": {
+  "equal": true,
+  "lines": [
+   1818,
+   1818
+  ],
+  "sha256": "149634a62b6d23f46a240682032837e629494a1a4b55b705e2c965b26acad9eb"
+ },
+ "quadros.jsonl": {
+  "equal": true,
+  "lines": [
+   601,
+   601
+  ],
+  "sha256": "61dbcfd38347b6ed6e6324162f8fc48044d90a4bd2dc8a9684909d6ef1115a0a"
+ },
+ "runs": [
+  {
+   "frames": 601,
+   "input_sha256": "027a08ce9126e22cc1ce9421970f634141f2e1b706c2f19bab7926739d1d934e",
+   "seconds": 369.7,
+   "status": "completed"
+  },
+  {
+   "frames": 601,
+   "input_sha256": "027a08ce9126e22cc1ce9421970f634141f2e1b706c2f19bab7926739d1d934e",
+   "seconds": 353.3,
+   "status": "completed"
+  }
+ ]
+}

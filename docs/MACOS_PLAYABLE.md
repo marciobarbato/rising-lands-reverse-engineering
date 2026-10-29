@@ -208,7 +208,7 @@ inspection/playback runtime; whether it ships later remains undecided. Live fram
 
 Open the inspection page, select **Abrir Rust ao vivo**, then advance the load
 tail and frames or select **Executar Rust**. Each frame runs Rust ABI 1.1,
-exports original-address memory and renders through Graphics 1.5 with HUD.
+projects original-address memory into persistent Graphics views and renders through Graphics 1.5 with HUD. Live output uses a raw indexed canvas; PNG is retained for explicit evidence export and immutable playback.
 Through frame 128, masked state and full surface hashes must match accepted
 M2.2 before publication. Later frames carry explicit unverified-reference status.
 A named engine/Graphics stop pauses execution and remains visible. Reopening
@@ -225,3 +225,70 @@ Builds require the hash-checked intact `INSTALHD/RISING.EXE` for four static
 jump tables, the relocatable Python runtime, assets and installed Rust toolchain.
 Cargo output goes to the ignored build target; `motor/` sources are untouched.
 The dylib is copied/signature-checked with the existing app packaging path.
+
+## Renderer port input
+
+The app needs a **versioned C ABI**, callable directly from Swift, with no
+Python projection or PNG work per displayed frame. At 25 fps the frame budget
+is 40 ms: target at most 12 ms logic, 22 ms rendering, 4 ms transfer/presentation
+and 2 ms headroom on the declared Apple Silicon host. Measure the whole
+fixed-step pipeline; these are budgets for implementation, not achieved rates.
+
+Proposed call shape (names are a request, not existing engine symbols):
+
+```c
+rl_render_criar(world, assets, initial_surface, initial_cache, &renderer);
+rl_render_quadro(renderer, expected_generation, hud_flags,
+                 indexed_buffer, indexed_capacity,
+                 palette_rgb24, palette_capacity, &result);
+rl_render_reset(renderer, initial_surface, initial_cache);
+rl_render_liberar(renderer);
+```
+
+- `assets` names the bundled, hash-checked Graphics catalog/banks. Parse and
+  retain them once. Creation copies/owns accepted input bytes; caller input
+  storage can be released afterward. The M2.2 proof supplies the pinned original
+  480,000-byte initial surface and terrain cache, never an invented blank/cold
+  start. Other initialization states need their own established contract.
+- Bind the renderer to one world and require the **AffGame-entry generation**
+  immediately after load_tail or the preceding CalculGame body. Render that
+  state before the next between_frames mutation. A generation must distinguish
+  phases as well as ticks. Serialize world/render/reset/free calls. Return the
+  exact generation and frame counter; reject stale/mismatched generations.
+- Input `hud_flags=1` explicitly requests Graphics 1.5 HUD/cursor composition;
+  zero retains its published pre-HUD behavior. Preserve draw/callback order,
+  signed clipping, 16/32-bit arithmetic, indexed pixels and cache cursor/payloads.
+  Query habitation from the actual world, without a host callback or default.
+- Caller owns/reuses the two output buffers. A successful call copies a coherent
+  **800×600, top-down, indexed8 surface, stride 800**, and **256 RGB24 entries,
+  768 bytes**, as one result. Alpha is opaque for presentation. No Rust pointer
+  escapes; no per-frame allocation or filesystem access is required by the
+  caller. Size-query/BufferTooSmall returns required capacities without changing
+  buffers or advancing the render cache. Reset/free lifetimes are explicit.
+- `result` reports full / undrawn / partial, ABI status, generation, width,
+  height, stride, palette generation, cache generation and optional first stop
+  (original address, callee and UTF-8 reason). An undrawn phase preserves the
+  preceding surface/cache. Partial output is the actual drawn prefix with its
+  named stop; it must never masquerade as a complete frame. ABI errors publish
+  neither an output frame nor a cache update. Palette changes are explicit;
+  static palette equality must remain while Cyclage is unsupported.
+- Display effects already modeled by ABI 1.1 phase 2 must have **one owner**.
+  A read-only render call must not apply those RNG/counter/target effects twice.
+  Export their ordered observations for diagnostic comparison. Define the
+  composition boundary with the engine owner before moving effect ownership.
+- Keep full `rl_projetar_tudo` as an optional proof/debug path. ABI 1.1 has no
+  region selector: it always copies the complete world. If Python Graphics
+  remains during migration, add a copied, generation-checked
+  `rl_projetar_regioes(world, requests[], buffers[], &generation)` for precisely
+  `regioes_necessarias(..., hud=True)`. A direct native render should read world
+  state internally and need neither bulk nor selective host snapshots.
+
+Acceptance inputs are the existing Graphics 1.5 native leaf matrix and the
+128-frame chained full-surface/cache proof, plus 257 masked states and 11
+checkpoints from the no-input world. Test the actual Swift output-buffer path,
+wrong sizes/generations, resets, named stops and palette changes. Swift should
+upload indexed pixels plus palette to a reusable Metal texture/shader (or a
+native RGBA surface), scaling only at presentation. PNG remains an explicit
+evidence export. The current indexed WebKit canvas transport is a temporary
+bridge and retains exact original pixels; it implements none of this proposed
+Rust renderer ABI.
