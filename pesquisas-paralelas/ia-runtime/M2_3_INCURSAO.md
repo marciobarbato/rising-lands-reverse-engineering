@@ -60,3 +60,78 @@ Branch `feat/re-ai-runtime`, main `8564ca7`. Intact `RISING.EXE` `6c556520…43f
 | Mac mini (through you) | the first native `iagUnitSendMessage(0x49)` call in M2.3b, to validate the dispatch and to capture `iabDetection_AjouteEnnemiOuAlerteConflit` before I translate it |
 
 Until Core's providers land, the composition at frame 9000 stops at GetFreeCell (`0x47a8ec`).
+
+## Raid task rules at counter 9000 (round 2)
+
+**Capture:** [capturar_regras_incursao_ia.py](capturar_regras_incursao_ia.py) → [evidencias/captura-regras-incursao-9000-ia.json](evidencias/captura-regras-incursao-9000-ia.json), a native run of 38 s under the lease.
+- **Input:** Missions' v1 bench, with the counter written to 9000 at frame 1's CalculGame entry (Combat's course input); three frames.
+- **Recorded:** each rule call returning to iaSolver's `0x47d4ec`/`0x47d73c`, with its argument block, exit EAX, read-before-write footprint, every written byte and its outside calls.
+- **Calls at 9000:** B_TestGroupeVide, B_NewConflit (→ iagWarSearchBattleFromPos, iagWarNewBattleToPos), I_DetermineTempsTrajet, B_Superieur, V_DeplaceGroupe (→ EnginEstVivant, SetDeplaceEngin) and B_AttenteConflit (→ iagWarSetWait → iaProbSleep).
+- **Earlier attempt:** it added the memory hooks during the run, and Unicorn did not apply them to blocks translated earlier, so it missed reads. It is kept in `.local/`; the committed run installs the hooks before the frame and flushes the translation cache.
+- **Order of work:** the translations were drafted from the code and the first attempt's call list, before this capture. The differential below ran only after the committed capture.
+
+**Translation:** [regras_incursao_ia.py](regras_incursao_ia.py) has the five rules plus the war kernels, iaProbSleep and iagUnitGetNextUnitInGroup. B_Superieur is Core's (`MaquinaTarefas`).
+- **Composition:** the rules run as `MaquinaTarefas` `operacoes`. V_DeplaceGroupe is reached through the VM's unit-operation hook (`MundoRegras`); the other unit operations are named stops.
+
+**Differential:** `test_regras_incursao_ia`.
+- **Result:** all six calls equal. Every rule's EAX and every written byte match, and the outside calls come in the native order with the native arguments.
+- **Mutation check:** three mutations on exercised paths fail. The walking-unit skip is not reached at 9000.
+
+**Core's raid providers** (`ferramentas/incursao_core.py`, `3a81e66`) are wired into the composition: CreerEngin, EnginSetPlayer, PlaceEngin, EnginGetCase, GetRandCaseChamps, GetRandCaseTypeBatPlayer, Chemin_Accessible and iaProbPost.
+- **Cross-check:** a second raid differential runs six of them in place of the replayed native effects (CreerEngin keeps its effect, because it nests Economy's BonusGetValEngin). Every changed byte equals the native one.
+- **GetFreeCell** stays a named stop in the composition. Core's translation reads native stack residue, the upper words of 16-bit locals at ESP−0x32/−0x1a/−0x3a/−0x2e, and the composition has no native stack.
+
+**Still needed for frame 9000 in Python:**
+- Core: GetFreeCell's residue contract, EnginEstVivant and SetDeplaceEngin.
+- Economy: BonusGetValEngin inside CreerEngin, already in the composition through `prov.bonus`.
+
+## Segmented M2.3 comparison
+
+`comparar_quadros_ia.py --parte <part.json.xz> --sha256 <raw> --politica <policy>` compares one part of Missions' `pacotes_quadros_missao` format (`eb08940`). It was coded against the real writer.
+- **Opening state:** its full state must match its summary, `compared_summary` and `masked_sha256` (`resumos_mascarados` uses Missions' definitions).
+- **Replay:** every phase is checked on all three hashes, and every full state (8999, 9000, 9176 in the window part) is checked.
+- **Python run:** Python starts from the opening state. Part 0 starts from the `-v2` MissionLoad state with load_tail; a later part starts as a checkpoint with the first phase's entry registers.
+- **Per phase:** the compared-summary hash and the masked bytes are compared, plus RNGs, events, registers and the HUD flag.
+- **Independence:** parts run independently, so they can run in parallel.
+- **Self-test:** synthetic parts were cut from the M2.2 capture (load_tail–frame 64, and frames 65–128 with full states at 100 and 128). Run in parallel, both are equal: 129/129 and 128/128 phases.
+
+**Requests to Missions:**
+- `opening_state.allocations` in every part. Until then, a later part uses the `-v2` records, but only when it keeps the count and allocates or releases nothing.
+- Optionally `named_inputs` in every part. A later part uses the `-v2` frame inputs, which are the same declared answers.
+
+The writer's parts carry complete deltas, so the logic-only delta form in the brief is not needed.
+
+**Against the real writer (`eb08940`):**
+- **Writer check:** a synthetic two-part pack, cut from the M2.2 capture in the writer's exact format (`seconds` removed, `frames`/`last_phase`/`policy` fields), passes the writer's own `verificar()`. It was extracted read-only from `eb08940` and gave `equal`, 257/257 phases equal to the M2.2 capture, with the chain checked.
+- **Comparator:** `--parte` finds both parts equal (129/129 and 128/128), run in parallel.
+- **Policy:** the aggregated schema (`5a14cea`) keeps `cumulative.exclusion_mask`, `display_roots` and the per-byte `writers`/`readers`, so the comparator reads it unchanged.
+
+**Manifest workflow** ([partes_quadros_ia.py](partes_quadros_ia.py)):
+1. `verificar --manifesto … --plano …`
+   - checks every part's compressed and raw hash and the policy pin;
+   - checks the chain from hashes alone: `previous_part_raw_sha256`, each opening's summary, compared_summary and masked_sha256 against the previous part's last phase, and contiguous frames;
+   - writes one independent `--parte` command per part.
+2. The parts run in any order or in parallel.
+3. `agregar --plano … --saida …`
+   - requires every report to be equal, made from a clean tree, for the planned part, with the same policy and covering the whole part;
+   - requires the final allocation records to be equal in the last part.
+
+On the synthetic pack the result is `equal`, 257/257.
+
+## Combat's readiness matrix: AI/runtime gaps (round 3)
+
+Combat's matrix (`e3f0f8b`) reads main `99c0e4e`, which predates `ffa62fd`…`5b71905` on this branch.
+
+| Gap | Status on `feat/re-ai-runtime` |
+|---|---|
+| Battle-task kernels: B_TestGroupeVide, B_AttenteConflit, B_NewConflit, I_DetermineTempsTrajet, V_DeplaceGroupe, the three iagWar* kernels, iagUnitGet{First,Next}UnitInGroup | translated, validated against the native 9000 capture (6/6 calls), wired as `MaquinaTarefas` `operacoes` |
+| B_Superieur | Core's VM operation, checked against the captured call in `test_regras_incursao_ia` |
+| Task poster (interface a) | StockeAction posts through Core's raid-validated `incursao_core.postar_tarefa`; iaSolver's own child tasks stay in Core's VM |
+| iaSolver world operations (interface b) | the VM gets `operacoes=operacoes_regras(mm, p)`, `mundo=MundoRegras(mm, p)` (V_DeplaceGroupe; other unit operations are named stops) and `missao` from `0x496fe4` |
+| **EnginNextEtape state 2 and the owner-4 prelude** | capture `6fe01d2`: the raid unit's 12 calls at counters 9000–9011. Translation `26ecd4a`: short of its target cell (`+0x7e` ≠ `+8`) it calls DeplaceEngin (Core) and exits; arrival stops at `0x4563e8`. `test_proxima_etapa_incursao_ia` finds all 12 equal: prelude (reload gate, GetBit gates, CalculFatigue, SetEnginCollision), the 9008 scan, and state 2 |
+| CalculBatimentNextEtape at counter % 1000 | confirmed: the branch (`0x4281e5`) stores 0 to `0x4dfb9b` and does nothing else. Frame 0 runs it at counter 0, inside the proven M2.2 window |
+
+**Still Core's:**
+- DeplaceEngin and the movement routines;
+- SetDeplaceEngin and EnginEstVivant (V_DeplaceGroupe);
+- GetFreeCell's native stack-residue contract.

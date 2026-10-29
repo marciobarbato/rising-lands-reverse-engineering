@@ -47,9 +47,14 @@ class MemoriaEsparsa:
         self.iniciais, self.atuais, self.proprias = dict(iniciais), {}, set()
         self.fora_do_rastro = []
 
+    preenchimento = None   # cross-checks only: a filler for bytes another owner's translation reads beyond the footprint
+
     def _ler(self, a):
         if a in self.atuais:
             return self.atuais[a]
+        if a not in self.iniciais and self.preenchimento is not None:
+            self.fora_do_rastro.append(hex(a))
+            return self.preenchimento
         if a not in self.iniciais:
             self.fora_do_rastro.append(hex(a))
             raise KeyError(f'0x{a:x}: the original did not read this byte before writing it')
@@ -64,6 +69,9 @@ class MemoriaEsparsa:
             if propria:
                 self.proprias.add(a + i)
         return valor
+
+    def ler(self, a, n):
+        return bytes(self._ler(a + i) for i in range(n))
 
     def u8(self, a, v=None):
         return self._acesso(1, a, v)
@@ -126,6 +134,58 @@ class RaidFrame(unittest.TestCase):
                 antes = memoria.iniciais.get(a, next((x[1] for x in registro['own_writes'] if H(x[0]) == a), None))
                 self.assertIsNotNone(antes, hex(a))
                 self.assertEqual(v, antes, hex(a))
+
+
+class RaidFrameWithCoreProviders(unittest.TestCase):
+    """The same forced call, with Core's committed raid translations (``incursao_core``) answering every call
+    they cover, and the native effect replayed only for the rest. Each call keeps its order and arguments.
+
+    CreerEngin keeps its native effect here: it calls Economy's BonusGetValEngin inside, which this sparse memory
+    cannot host. A Core translation that reads a byte beyond the original's footprint reads the filler 0xa5,
+    and every byte the call changes must still equal the native value.
+    """
+
+    def test_core_translations_in_place(self):
+        import incursao_core as ic
+        caso = next(c for r in CAPTURA['avance_monstre_cases'] for c in r['cases']
+                    if c['case'] == 'forced-counter-9000')
+        registro = CAPTURA['forced_outside_calls'][0]
+        memoria = MemoriaEsparsa({H(a): v for a, v, _ in caso['read_before_write']})
+        feitas = []
+        p = replay(memoria, registro['outside_calls'], feitas)
+        core = {
+            'EnginSetPlayer': lambda a: ic.definir_dono_unidade(memoria, a['unidade'], a['jogador'])['EAX'],
+            'PlaceEngin': lambda a: ic.colocar_unidade(memoria, a['unidade'])['EAX'],
+            'EnginGetCase': lambda a: ic.caso_unidade(memoria, a['unidade'])['EAX'],
+            'GetRandCaseChamps': lambda a: ic.caso_campo_aleatoria(memoria)['EAX'],
+            'Chemin_Accessible': lambda a: ic.acessivel(memoria, a['origem'], a['destino'])['EAX'],
+            'iaProbPost': lambda a: ic.postar_tarefa(memoria, a['jogador'], a['tipo'], a['ebx'], a['ecx'],
+                                                     a['pilha'])['EAX']}
+        usados = []
+
+        def com_core(nome, nativo):
+            def chamar(sitio, **argumentos):
+                esperado = registro['outside_calls'][len(feitas)]
+                feitas.append(nome)
+                self.assertEqual(esperado['routine'], nome)
+                usados.append(nome)
+                memoria.preenchimento = 0xa5
+                try:
+                    eax = core[nome](argumentos)
+                finally:
+                    memoria.preenchimento = None
+                self.assertEqual(eax & 0xffff, H(esperado['exit']['EAX']) & 0xffff, nome)
+                return eax
+            return chamar
+        for nome in core:
+            p[nome] = com_core(nome, p[nome])
+        avancar_monstros(memoria, p)
+        self.assertEqual(feitas, [c['routine'] for c in registro['outside_calls']])
+        self.assertEqual(sorted(set(usados)), sorted(core))
+        mudados = {H(a): novo for a, _velho, novo in caso['changed_bytes'] if not em_pilha(H(a))}
+        for a, novo in mudados.items():
+            self.assertEqual(memoria.atuais.get(a), novo, hex(a))
+        self.fora_do_rastro = sorted(set(memoria.fora_do_rastro))
 
 
 if __name__ == '__main__':
