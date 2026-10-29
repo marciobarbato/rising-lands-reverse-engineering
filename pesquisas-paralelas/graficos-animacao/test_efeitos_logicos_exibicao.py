@@ -16,6 +16,7 @@ class Memoria:
         return self.d.get(a, (n, 0))[1]
     u8 = lambda self, a: self._ler(a, 1)
     u16 = lambda self, a: self._ler(a, 2)
+    u32 = lambda self, a: self._ler(a, 4)
 
 
 class Pool(Memoria):
@@ -173,6 +174,41 @@ class VoltasTest(unittest.TestCase):
                 self.assertTrue(c['calls'][0]['returned'] and not c['calls'][0]['stopped'])
                 sitios = {hex(int(a, 16)) for a, *_ in json.loads((Path(__file__).resolve().parent/'evidencias/fechamento-escritas-affgame-modo12.json').read_text())['escritas_absolutas']['0x4e1d18']}
                 self.assertEqual({k for k in c['coverage'] if k != 'readers_of_record_head'} & sitios, set())
+
+
+INCURSAO = Path(__file__).resolve().parent/'evidencias/dominio-exibicao-incursao.json'
+
+
+class IncursaoTest(unittest.TestCase):
+    def test_native_raid_frames_are_clean_and_projectile_drawn(self):
+        d = json.loads(INCURSAO.read_text())
+        self.assertEqual([r['phase'] for r in d['records']], ['between_frames3', 'between_frames4', 'between_frames10', 'between_frames33'])
+        for r in d['records']:
+            self.assertEqual(r['probe']['monsters'], 1)
+            self.assertEqual([p[1] for p in r['probe']['projectiles']], [31])
+            vistos = [c for c in r['cases'] if c['case'].startswith('projectile_type_')]
+            self.assertEqual(len(vistos), 2)
+            for c in r['cases']:
+                self.assertTrue(c['calls'][0]['returned'] and not c['calls'][0]['stopped'])
+            for c in vistos:
+                self.assertEqual(c['coverage']['0x46ff70'], 1)    # AffProjectile ran
+
+    def test_projectile_and_monster_guards(self):
+        m = estado()
+        m.d[0x50b178] = (1, 1)
+        m.d[0x5080f0] = (4, 0x9000)
+        m.d[0x9002] = (1, 1)
+        m.d[0x9000] = (1, 31)
+        self.assertEqual(e.desenhar_jogo(m).escritas, ())
+        m.d[0x9000] = (1, 9)
+        with self.assertRaises(e.DependenciaExibicao) as c:
+            e.desenhar_jogo(m)
+        self.assertEqual(c.exception.sitio, 0x46ff70)
+        m.d[0x9000] = (1, 31)
+        m.d[0x50b178] = (1, 2)
+        with self.assertRaises(e.DependenciaExibicao) as c:
+            e.restaurar_tudo(m)
+        self.assertEqual(c.exception.sitio, 0x41591f)
 
 
 class CamposTest(unittest.TestCase):

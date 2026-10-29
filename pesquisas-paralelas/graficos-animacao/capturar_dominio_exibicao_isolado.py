@@ -23,6 +23,8 @@ from mapa_memoria_m1 import carregar_json
 SO_VISIVEL = '--so-visivel' in sys.argv
 ESTADOS = '--estados' in sys.argv
 FLIPS = '--flips' in sys.argv
+INCURSAO = [int(k) for k in sys.argv[sys.argv.index('--incursao')+1].split(',')] if '--incursao' in sys.argv else None
+ORIGENS_INCURSAO = ((4, 6), (39, 47), (38, 46), (36, 44), (34, 42), (30, 40), (24, 30), (12, 11))
 ORIGENS_EXATAS = ([tuple(int(v) for v in o.split(',')) for o in sys.argv[sys.argv.index('--origens')+1].split(';')]
                   if '--origens' in sys.argv else None)
 ENTRADAS_DESENHO = (0x41591f, 0x412390, 0x415acf, 0x46ff70, 0x478a04, 0x410085)   # AffEngin, AffDeplaceEngin, AffVeget, AffProjectile, AffEnginProjectile, AffVegetTerrain
@@ -40,6 +42,8 @@ class IsolamentoExibicao(oq.Isolamento):
     def executar(self, regs):
         b, entrada = self.b, regs['EIP']
         nome, fase = self.entradas[entrada], b.fase
+        if INCURSAO is not None and fase not in {f'between_frames{k}' for k in INCURSAO}:
+            return   # raid mode: isolate only the declared frames
         retorno = struct.unpack('<I', b.cpu.mem_read(regs['ESP'], 4))[0]
         contexto, blocos = self._salvar()
         m = b.cpu.mem_read
@@ -51,6 +55,9 @@ class IsolamentoExibicao(oq.Isolamento):
         pool = bytes(m(POOL, 1000*PASSO))
         santuario = next(i for i in range(1000) if pool[i*PASSO+5] == 5) if nome in ('AffGame', 'RestoreAll') else 0
         casos = [dict(case='captured_inputs', writes=[], repeat=1)]
+        sonda = dict(counter=int.from_bytes(m(0x508f7c, 4), 'little'), monsters=m(0x50b178, 1)[0], pending=m(0x50b138, 1)[0],
+                     projectiles=[(i, m(int.from_bytes(m(0x5080f0, 4), 'little')+i*56, 1)[0]) for i in range(100)
+                                  if m(int.from_bytes(m(0x5080f0, 4), 'little')+i*56+2, 1)[0]])
         for y in range(0, altura-16, max(1, (altura-17)//6)) if not SO_VISIVEL else ():
             for x in range(0, largura-24, max(1, (largura-25)//6)):
                 casos.append(dict(case=f'origin_{x}_{y}', writes=[(0x508720, u16(x)), (0x508722, u16(y))], repeat=1))
@@ -78,6 +85,19 @@ class IsolamentoExibicao(oq.Isolamento):
                                                   (POOL+santuario*PASSO+5, bytes([estado]))], repeat=1))
             elif nome == 'AffGame':
                 casos.append(dict(case='three_consecutive_calls', writes=[], repeat=3))
+        if INCURSAO is not None:
+            casos = [casos[0]]+[dict(case=f'origin_{x}_{y}', writes=[(0x508720, u16(x)), (0x508722, u16(y))], repeat=1)
+                                for x, y in ORIGENS_INCURSAO[1:]]
+            proj = int.from_bytes(m(0x5080f0, 4), 'little')
+            if m(proj+2, 1)[0]:   # slot 0 holds the raid's effect projectile: move it onto visible cells (pixel = cell*32)
+                for cx, cy in ((14, 12), (5, 7), (27, 21)):
+                    casos.append(dict(case=f'projectile_cell_{cx}_{cy}', writes=[
+                        (proj+0xc, (cx*32).to_bytes(2, 'little')+(cy*32).to_bytes(2, 'little')),
+                        (proj+0x14, bytes([cx, cy, cx, cy]))], repeat=1))
+                for tipo in (31, 32):   # Combat: ProjectileInit picks 0x20 for an even Random, 0x1f for an odd one
+                    casos.append(dict(case=f'projectile_type_{tipo}_cell_14_12', writes=[
+                        (proj, bytes([tipo])), (proj+0xc, (14*32).to_bytes(2, 'little')+(12*32).to_bytes(2, 'little')),
+                        (proj+0x14, bytes([14, 12, 14, 12]))], repeat=1))
         if FLIPS:   # shake path of DDFlipPage: [0x4dfb44] x frame-counter parity x flip-loop count [0x49a05b]
             casos = [casos[0]]
             for n in (1, 2, 5, 20):
@@ -155,7 +175,7 @@ class IsolamentoExibicao(oq.Isolamento):
             self._restaurar_exibicao(dd, trava0, eventos0, sup0)
             del b.eventos_pulados[pulos0:], b.eventos_fronteira[front0:]
             self.ativo = True
-        self.registros.append(dict(routine=nome, structure_record=[santuario, pool[santuario*PASSO:santuario*PASSO+32].hex()], phase=fase, entry=hex(entrada), caller=b.nome(retorno),
+        self.registros.append(dict(routine=nome, probe=sonda, structure_record=[santuario, pool[santuario*PASSO:santuario*PASSO+32].hex()], phase=fase, entry=hex(entrada), caller=b.nome(retorno),
                                    map=[largura, altura], cases=resultados))
 
     def _restaurar_exibicao(self, dd, trava, eventos, sup):
@@ -184,10 +204,19 @@ def principal(saida):
     b.iniciar_relogio()
     b.executar_inicio()
     b.executar_mission_load(60)
-    iso = IsolamentoExibicao(b, ('RestoreAll', 'AffGame'))
-    iso.instalar()
-    b.executar_cauda_carga(1800)
-    b.executar_entre_quadros(1800)
+    if INCURSAO is not None:
+        iso = IsolamentoExibicao(b, ('AffGame',))
+        iso.instalar()
+        for fase, _ in b.executar_quadros(max(INCURSAO)+1):
+            if fase == 'between_frames2':   # force the first raid: counter 9000 at frame 2's CalculGame (as Combat's capture)
+                b.cpu.mem_write(0x508f7c, (9000).to_bytes(4, 'little'))
+            if fase == f'between_frames{max(INCURSAO)}':
+                break
+    else:
+        iso = IsolamentoExibicao(b, ('RestoreAll', 'AffGame'))
+        iso.instalar()
+        b.executar_cauda_carga(1800)
+        b.executar_entre_quadros(1800)
     resumo = []
     for r in iso.registros:
         for c in r['cases']:
@@ -201,6 +230,7 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument('--saida', required=True)
     ap.add_argument('--so-visivel', action='store_true')
+    ap.add_argument('--incursao', help='k,k,..: isolate AffGame at these frames after forcing counter 9000 at frame 2')
     ap.add_argument('--flips', action='store_true', help='DDFlipPage shake-path cases at the captured origin')
     ap.add_argument('--estados', action='store_true', help='with --origens: structure modes 0..7 at each origin')
     ap.add_argument('--origens', help='x,y;x,y exact view origins (replaces the grid and perturbations)')
