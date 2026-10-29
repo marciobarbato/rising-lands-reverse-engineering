@@ -1,0 +1,3388 @@
+{
+ "schema": "rising-lands/menuinit-display-calls/1",
+ "phases_reproduced": {
+  "load_tail": true,
+  "between_frames": true,
+  "frame1": true
+ },
+ "calls": [
+  {
+   "phase": "startup",
+   "root": "DDLockSurface",
+   "caller": "ProgInit+0x238",
+   "regs_in": {
+    "EAX": "0x0",
+    "EDX": "0x100",
+    "EBX": "0x400000",
+    "ECX": "0xfffffff5"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x6c705c47",
+    "0x61677461"
+   ],
+   "eax_out": "0x60076000",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Lock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDUnlockSurface",
+   "caller": "ProgInit+0x2a1",
+   "regs_in": {
+    "EAX": "0x60076000",
+    "EDX": "0x60076000",
+    "EBX": "0x400000",
+    "ECX": "0xfffffff5"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x6c705c47",
+    "0x61677461"
+   ],
+   "eax_out": "0x1",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Unlock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDFlipPage",
+   "caller": "ProgInit+0x2ab",
+   "regs_in": {
+    "EAX": "0x1",
+    "EDX": "0x60076000",
+    "EBX": "0x400000",
+    "ECX": "0xfffffff5"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x6c705c47",
+    "0x61677461"
+   ],
+   "eax_out": "0x0",
+   "bindings": [
+    "IDirectDrawSurface::BltFast",
+    "IDirectDrawSurface::BltFast"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDLockSurface",
+   "caller": "MenuInit+0xbf",
+   "regs_in": {
+    "EAX": "0x0",
+    "EDX": "0x2",
+    "EBX": "0x103",
+    "ECX": "0xfffffffc"
+   },
+   "stack_args": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "eax_out": "0x60076000",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Lock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDUnlockSurface",
+   "caller": "MenuInit+0x9d6",
+   "regs_in": {
+    "EAX": "0x60076000",
+    "EDX": "0x60070000",
+    "EBX": "0x103",
+    "ECX": "0xfffffff5"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x69745c47",
+    "0x2e657274"
+   ],
+   "eax_out": "0x1",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Unlock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDFlipPage",
+   "caller": "MenuInit+0x9e7",
+   "regs_in": {
+    "EAX": "0x1",
+    "EDX": "0x60070000",
+    "EBX": "0x203",
+    "ECX": "0xfffffff5"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x69745c47",
+    "0x2e657274"
+   ],
+   "eax_out": "0x0",
+   "bindings": [
+    "IDirectDrawSurface::BltFast",
+    "IDirectDrawSurface::BltFast"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDLockSurface",
+   "caller": "AffGame+0x41",
+   "regs_in": {
+    "EAX": "0x2",
+    "EDX": "0x2007fe8",
+    "EBX": "0x3",
+    "ECX": "0x0"
+   },
+   "stack_args": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "eax_out": "0x60076000",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Lock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDUnlockSurface",
+   "caller": "AffGame+0x102",
+   "regs_in": {
+    "EAX": "0x60076000",
+    "EDX": "0x47a63d19",
+    "EBX": "0x600e4490",
+    "ECX": "0x47a56000"
+   },
+   "stack_args": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "eax_out": "0x1",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Unlock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDFlipPage",
+   "caller": "AffGame+0x10c",
+   "regs_in": {
+    "EAX": "0x1",
+    "EDX": "0x47a63d19",
+    "EBX": "0x600e4490",
+    "ECX": "0x47a56000"
+   },
+   "stack_args": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "eax_out": "0x0",
+   "bindings": [
+    "IDirectDrawSurface::BltFast",
+    "IDirectDrawSurface::BltFast"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDLockSurface",
+   "caller": "MenuInit+0xbf",
+   "regs_in": {
+    "EAX": "0x0",
+    "EDX": "0x3",
+    "EBX": "0x200",
+    "ECX": "0x0"
+   },
+   "stack_args": [
+    "0x5",
+    "0x320",
+    "0x582",
+    "0x468e3c"
+   ],
+   "eax_out": "0x60076000",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Lock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDUnlockSurface",
+   "caller": "MenuInit+0x9d6",
+   "regs_in": {
+    "EAX": "0x60076000",
+    "EDX": "0x60070000",
+    "EBX": "0x200",
+    "ECX": "0xfffffff5"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x69745c47",
+    "0x2e657274"
+   ],
+   "eax_out": "0x1",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Unlock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDFlipPage",
+   "caller": "MenuInit+0x9e7",
+   "regs_in": {
+    "EAX": "0x1",
+    "EDX": "0x60070000",
+    "EBX": "0x300",
+    "ECX": "0xfffffff5"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x69745c47",
+    "0x2e657274"
+   ],
+   "eax_out": "0x0",
+   "bindings": [
+    "IDirectDrawSurface::BltFast",
+    "IDirectDrawSurface::BltFast"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDLockSurface",
+   "caller": "AffGame+0x41",
+   "regs_in": {
+    "EAX": "0x3",
+    "EDX": "0x2007fe8",
+    "EBX": "0x3",
+    "ECX": "0x0"
+   },
+   "stack_args": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "eax_out": "0x60076000",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Lock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDUnlockSurface",
+   "caller": "AffGame+0x102",
+   "regs_in": {
+    "EAX": "0x60076000",
+    "EDX": "0x47a63d19",
+    "EBX": "0x600e4490",
+    "ECX": "0x47a56000"
+   },
+   "stack_args": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "eax_out": "0x1",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Unlock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDFlipPage",
+   "caller": "AffGame+0x10c",
+   "regs_in": {
+    "EAX": "0x1",
+    "EDX": "0x47a63d19",
+    "EBX": "0x600e4490",
+    "ECX": "0x47a56000"
+   },
+   "stack_args": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "eax_out": "0x0",
+   "bindings": [
+    "IDirectDrawSurface::BltFast",
+    "IDirectDrawSurface::BltFast"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDLockSurface",
+   "caller": "MenuInit+0xbf",
+   "regs_in": {
+    "EAX": "0x0",
+    "EDX": "0x11",
+    "EBX": "0x300",
+    "ECX": "0x100"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x69745c47",
+    "0x2e657274"
+   ],
+   "eax_out": "0x60076000",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Lock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DeleteBank",
+   "caller": "MenuInit+0x2df",
+   "regs_in": {
+    "EAX": "0x47984000",
+    "EDX": "0x8",
+    "EBX": "0x2d",
+    "ECX": "0x7e"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x61705c47",
+    "0x696d6567"
+   ],
+   "eax_out": "0x0",
+   "bindings": [
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree"
+   ],
+   "bank_walk": {
+    "bank": 1201160192,
+    "count": 40,
+    "table": 1201164288,
+    "free_order": [
+     1201172480,
+     1201168384,
+     1201205248,
+     1201201152,
+     1201238016,
+     1201233920,
+     1201270784,
+     1201266688,
+     1201303552,
+     1201299456,
+     1201336320,
+     1201332224,
+     1201369088,
+     1201364992,
+     1201401856,
+     1201397760,
+     1201434624,
+     1201430528,
+     1201467392,
+     1201463296,
+     1201500160,
+     1201496064,
+     1201532928,
+     1201528832,
+     1201565696,
+     1201561600,
+     1201598464,
+     1201594368,
+     1201631232,
+     1201627136,
+     1201664000,
+     1201659904,
+     1201696768,
+     1201692672,
+     1201717248,
+     1201713152,
+     1201737728,
+     1201733632,
+     1201758208,
+     1201754112,
+     1201778688,
+     1201774592,
+     1201799168,
+     1201795072,
+     1201819648,
+     1201815552,
+     1201840128,
+     1201836032,
+     1201860608,
+     1201856512,
+     1201881088,
+     1201876992,
+     1201901568,
+     1201897472,
+     1201922048,
+     1201917952,
+     1201942528,
+     1201938432,
+     1201963008,
+     1201958912,
+     1201983488,
+     1201979392,
+     1202003968,
+     1201999872,
+     1202024448,
+     1202020352,
+     1202081792,
+     1202077696,
+     1202139136,
+     1202135040,
+     1202196480,
+     1202192384,
+     1202253824,
+     1202249728,
+     1202311168,
+     1202307072,
+     1202368512,
+     1202364416,
+     1202425856,
+     1202421760,
+     1201164288,
+     1201160192
+    ]
+   },
+   "freed_pointers": [
+    1201172480,
+    1201168384,
+    1201205248,
+    1201201152,
+    1201238016,
+    1201233920,
+    1201270784,
+    1201266688,
+    1201303552,
+    1201299456,
+    1201336320,
+    1201332224,
+    1201369088,
+    1201364992,
+    1201401856,
+    1201397760,
+    1201434624,
+    1201430528,
+    1201467392,
+    1201463296,
+    1201500160,
+    1201496064,
+    1201532928,
+    1201528832,
+    1201565696,
+    1201561600,
+    1201598464,
+    1201594368,
+    1201631232,
+    1201627136,
+    1201664000,
+    1201659904,
+    1201696768,
+    1201692672,
+    1201717248,
+    1201713152,
+    1201737728,
+    1201733632,
+    1201758208,
+    1201754112,
+    1201778688,
+    1201774592,
+    1201799168,
+    1201795072,
+    1201819648,
+    1201815552,
+    1201840128,
+    1201836032,
+    1201860608,
+    1201856512,
+    1201881088,
+    1201876992,
+    1201901568,
+    1201897472,
+    1201922048,
+    1201917952,
+    1201942528,
+    1201938432,
+    1201963008,
+    1201958912,
+    1201983488,
+    1201979392,
+    1202003968,
+    1201999872,
+    1202024448,
+    1202020352,
+    1202081792,
+    1202077696,
+    1202139136,
+    1202135040,
+    1202196480,
+    1202192384,
+    1202253824,
+    1202249728,
+    1202311168,
+    1202307072,
+    1202368512,
+    1202364416,
+    1202425856,
+    1202421760,
+    1201164288,
+    1201160192
+   ],
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "FilledBox",
+   "caller": "MenuInit+0x3b7",
+   "regs_in": {
+    "EAX": "0x1ba",
+    "EDX": "0x1a9",
+    "EBX": "0x1be",
+    "ECX": "0x1b3"
+   },
+   "stack_args": [
+    "0xa0",
+    "0x0",
+    "0x525c3a43",
+    "0x4e495349"
+   ],
+   "eax_out": "0x600cb11a",
+   "bindings": [],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "FilledBox",
+   "caller": "MenuInit+0x3b7",
+   "regs_in": {
+    "EAX": "0x1ba",
+    "EDX": "0x19a",
+    "EBX": "0x1be",
+    "ECX": "0x1a4"
+   },
+   "stack_args": [
+    "0xa0",
+    "0x0",
+    "0x525c3a43",
+    "0x4e495349"
+   ],
+   "eax_out": "0x600c823a",
+   "bindings": [],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "FilledBox",
+   "caller": "MenuInit+0x3b7",
+   "regs_in": {
+    "EAX": "0x221",
+    "EDX": "0x1a9",
+    "EBX": "0x225",
+    "ECX": "0x1b3"
+   },
+   "stack_args": [
+    "0xa0",
+    "0x0",
+    "0x525c3a43",
+    "0x4e495349"
+   ],
+   "eax_out": "0x600cb181",
+   "bindings": [],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "FilledBox",
+   "caller": "MenuInit+0x3b7",
+   "regs_in": {
+    "EAX": "0x221",
+    "EDX": "0x19a",
+    "EBX": "0x225",
+    "ECX": "0x1a4"
+   },
+   "stack_args": [
+    "0xa0",
+    "0x0",
+    "0x525c3a43",
+    "0x4e495349"
+   ],
+   "eax_out": "0x600c82a1",
+   "bindings": [],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "FilledBox",
+   "caller": "MenuInit+0x3b7",
+   "regs_in": {
+    "EAX": "0x221",
+    "EDX": "0x18b",
+    "EBX": "0x225",
+    "ECX": "0x195"
+   },
+   "stack_args": [
+    "0xa0",
+    "0x0",
+    "0x525c3a43",
+    "0x4e495349"
+   ],
+   "eax_out": "0x600c53c1",
+   "bindings": [],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "FilledBox",
+   "caller": "MenuInit+0x3b7",
+   "regs_in": {
+    "EAX": "0x221",
+    "EDX": "0x17c",
+    "EBX": "0x225",
+    "ECX": "0x186"
+   },
+   "stack_args": [
+    "0xa0",
+    "0x0",
+    "0x525c3a43",
+    "0x4e495349"
+   ],
+   "eax_out": "0x600c24e1",
+   "bindings": [],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "FilledBox",
+   "caller": "MenuInit+0x3b7",
+   "regs_in": {
+    "EAX": "0x288",
+    "EDX": "0x1a9",
+    "EBX": "0x28c",
+    "ECX": "0x1b3"
+   },
+   "stack_args": [
+    "0xa0",
+    "0x0",
+    "0x525c3a43",
+    "0x4e495349"
+   ],
+   "eax_out": "0x600cb1e8",
+   "bindings": [],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "FilledBox",
+   "caller": "MenuInit+0x3b7",
+   "regs_in": {
+    "EAX": "0x288",
+    "EDX": "0x19a",
+    "EBX": "0x28c",
+    "ECX": "0x1a4"
+   },
+   "stack_args": [
+    "0xa0",
+    "0x0",
+    "0x525c3a43",
+    "0x4e495349"
+   ],
+   "eax_out": "0x600c8308",
+   "bindings": [],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDUnlockSurface",
+   "caller": "MenuInit+0x9d6",
+   "regs_in": {
+    "EAX": "0x60076000",
+    "EDX": "0x33",
+    "EBX": "0x2df",
+    "ECX": "0x57"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x72475c47",
+    "0x69687061"
+   ],
+   "eax_out": "0x1",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Unlock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDFlipPage",
+   "caller": "MenuInit+0x9e7",
+   "regs_in": {
+    "EAX": "0x1",
+    "EDX": "0x33",
+    "EBX": "0x11df",
+    "ECX": "0x57"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x72475c47",
+    "0x69687061"
+   ],
+   "eax_out": "0x0",
+   "bindings": [
+    "IDirectDrawSurface::BltFast",
+    "IDirectDrawSurface::BltFast"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDLockSurface",
+   "caller": "AffGame+0x189",
+   "regs_in": {
+    "EAX": "0x0",
+    "EDX": "0x2007fe8",
+    "EBX": "0x3",
+    "ECX": "0x0"
+   },
+   "stack_args": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "eax_out": "0x60076000",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Lock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "FilledBox",
+   "caller": "AffObjectif+0x4a",
+   "regs_in": {
+    "EAX": "0x37",
+    "EDX": "0xd4",
+    "EBX": "0x136",
+    "ECX": "0x1e6"
+   },
+   "stack_args": [
+    "0x2a",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "eax_out": "0x600d4ef7",
+   "bindings": [],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDUnlockSurface",
+   "caller": "AffGame+0x102",
+   "regs_in": {
+    "EAX": "0x60076000",
+    "EDX": "0x47acf5c2",
+    "EBX": "0x600e954d",
+    "ECX": "0x47acc000"
+   },
+   "stack_args": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "eax_out": "0x1",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Unlock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "startup",
+   "root": "DDFlipPage",
+   "caller": "AffGame+0x10c",
+   "regs_in": {
+    "EAX": "0x1",
+    "EDX": "0x47acf5c2",
+    "EBX": "0x600e954d",
+    "ECX": "0x47acc000"
+   },
+   "stack_args": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "eax_out": "0x0",
+   "bindings": [
+    "IDirectDrawSurface::BltFast",
+    "IDirectDrawSurface::BltFast"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 0,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "load_tail",
+   "root": "DDLockSurface",
+   "caller": "RestoreAll+0x54",
+   "regs_in": {
+    "EAX": "0x0",
+    "EDX": "0x0",
+    "EBX": "0x0",
+    "ECX": "0xfffffff5"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x6c705c47",
+    "0x61677461"
+   ],
+   "eax_out": "0x60076000",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Lock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 188,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {
+    "0x4e17a4": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x72"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a5": {
+     "final_writes": [
+      0,
+      96
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x72"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a6": {
+     "final_writes": [
+      0,
+      7
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x72"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a7": {
+     "final_writes": [
+      0,
+      96
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x72"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a8": {
+     "final_writes": [
+      0,
+      1
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x83"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a9": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x83"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17aa": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x83"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17ab": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x83"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    }
+   }
+  },
+  {
+   "phase": "load_tail",
+   "root": "DDUnlockSurface",
+   "caller": "RestoreAll+0x82",
+   "regs_in": {
+    "EAX": "0x60076000",
+    "EDX": "0x11",
+    "EBX": "0x0",
+    "ECX": "0xfffffff5"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x6c705c47",
+    "0x61677461"
+   ],
+   "eax_out": "0x1",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Unlock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 28,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {
+    "0x4e17a8": {
+     "final_writes": [
+      1,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x23"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a9": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x23"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17aa": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x23"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17ab": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x23"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a4": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x54"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a5": {
+     "final_writes": [
+      96,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x54"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a6": {
+     "final_writes": [
+      7,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x54"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a7": {
+     "final_writes": [
+      96,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x54"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    }
+   }
+  },
+  {
+   "phase": "load_tail",
+   "root": "DDFlipPage",
+   "caller": "RestoreAll+0x8c",
+   "regs_in": {
+    "EAX": "0x1",
+    "EDX": "0x11",
+    "EBX": "0x0",
+    "ECX": "0xfffffff5"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x6c705c47",
+    "0x61677461"
+   ],
+   "eax_out": "0x0",
+   "bindings": [
+    "IDirectDrawSurface::BltFast",
+    "IDirectDrawSurface::BltFast"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 61,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "load_tail",
+   "root": "DDLockSurface",
+   "caller": "RestoreAll+0x9b",
+   "regs_in": {
+    "EAX": "0x0",
+    "EDX": "0x11",
+    "EBX": "0x0",
+    "ECX": "0xfffffff5"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x6c705c47",
+    "0x61677461"
+   ],
+   "eax_out": "0x60076000",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Lock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 172,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {
+    "0x4e17a4": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x72"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a5": {
+     "final_writes": [
+      0,
+      96
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x72"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a6": {
+     "final_writes": [
+      0,
+      7
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x72"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a7": {
+     "final_writes": [
+      0,
+      96
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x72"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a8": {
+     "final_writes": [
+      0,
+      1
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x83"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a9": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x83"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17aa": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x83"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17ab": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x83"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    }
+   }
+  },
+  {
+   "phase": "load_tail",
+   "root": "DDUnlockSurface",
+   "caller": "RestoreAll+0xc9",
+   "regs_in": {
+    "EAX": "0x60076000",
+    "EDX": "0x11",
+    "EBX": "0x0",
+    "ECX": "0xfffffff5"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x6c705c47",
+    "0x61677461"
+   ],
+   "eax_out": "0x1",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Unlock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 28,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {
+    "0x4e17a8": {
+     "final_writes": [
+      1,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x23"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a9": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x23"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17aa": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x23"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17ab": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x23"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a4": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x54"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a5": {
+     "final_writes": [
+      96,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x54"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a6": {
+     "final_writes": [
+      7,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x54"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a7": {
+     "final_writes": [
+      96,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x54"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    }
+   }
+  },
+  {
+   "phase": "load_tail",
+   "root": "DDFlipPage",
+   "caller": "RestoreAll+0xd3",
+   "regs_in": {
+    "EAX": "0x1",
+    "EDX": "0x11",
+    "EBX": "0x0",
+    "ECX": "0xfffffff5"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x6c705c47",
+    "0x61677461"
+   ],
+   "eax_out": "0x0",
+   "bindings": [
+    "IDirectDrawSurface::BltFast",
+    "IDirectDrawSurface::BltFast"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 61,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "load_tail",
+   "root": "DDLockSurface",
+   "caller": "MenuInit+0xbf",
+   "regs_in": {
+    "EAX": "0x0",
+    "EDX": "0x12",
+    "EBX": "0x0",
+    "ECX": "0x1"
+   },
+   "stack_args": [
+    "0x3604130",
+    "0x2007d7c",
+    "0x10",
+    "0x0"
+   ],
+   "eax_out": "0x60076000",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Lock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 172,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {
+    "0x4e17a4": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x72"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a5": {
+     "final_writes": [
+      0,
+      96
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x72"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a6": {
+     "final_writes": [
+      0,
+      7
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x72"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a7": {
+     "final_writes": [
+      0,
+      96
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x72"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a8": {
+     "final_writes": [
+      0,
+      1
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x83"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a9": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x83"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17aa": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x83"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17ab": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x83"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    }
+   }
+  },
+  {
+   "phase": "load_tail",
+   "root": "DeleteBank",
+   "caller": "MenuInit+0xf3",
+   "regs_in": {
+    "EAX": "0x47ac6000",
+    "EDX": "0x1212",
+    "EBX": "0x47ac6000",
+    "ECX": "0x0"
+   },
+   "stack_args": [
+    "0x3604130",
+    "0x2007d7c",
+    "0x10",
+    "0x0"
+   ],
+   "eax_out": "0x0",
+   "bindings": [
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalUnlock",
+    "KERNEL32.GlobalHandle",
+    "KERNEL32.GlobalFree"
+   ],
+   "bank_walk": {
+    "bank": 1202479104,
+    "count": 72,
+    "table": 1202483200,
+    "free_order": [
+     1202491392,
+     1202487296,
+     1202507776,
+     1202503680,
+     1202524160,
+     1202520064,
+     1202540544,
+     1202536448,
+     1202556928,
+     1202552832,
+     1202573312,
+     1202569216,
+     1202589696,
+     1202585600,
+     1202606080,
+     1202601984,
+     1202622464,
+     1202618368,
+     1202638848,
+     1202634752,
+     1202655232,
+     1202651136,
+     1202671616,
+     1202667520,
+     1202688000,
+     1202683904,
+     1202704384,
+     1202700288,
+     1202720768,
+     1202716672,
+     1202737152,
+     1202733056,
+     1202753536,
+     1202749440,
+     1202769920,
+     1202765824,
+     1202786304,
+     1202782208,
+     1202802688,
+     1202798592,
+     1202819072,
+     1202814976,
+     1202835456,
+     1202831360,
+     1202851840,
+     1202847744,
+     1202868224,
+     1202864128,
+     1202884608,
+     1202880512,
+     1202900992,
+     1202896896,
+     1202917376,
+     1202913280,
+     1202933760,
+     1202929664,
+     1202950144,
+     1202946048,
+     1202966528,
+     1202962432,
+     1202982912,
+     1202978816,
+     1202999296,
+     1202995200,
+     1203015680,
+     1203011584,
+     1203032064,
+     1203027968,
+     1203048448,
+     1203044352,
+     1203064832,
+     1203060736,
+     1203081216,
+     1203077120,
+     1203097600,
+     1203093504,
+     1203113984,
+     1203109888,
+     1203130368,
+     1203126272,
+     1203146752,
+     1203142656,
+     1203163136,
+     1203159040,
+     1203179520,
+     1203175424,
+     1203195904,
+     1203191808,
+     1203212288,
+     1203208192,
+     1203228672,
+     1203224576,
+     1203245056,
+     1203240960,
+     1203261440,
+     1203257344,
+     1203277824,
+     1203273728,
+     1203294208,
+     1203290112,
+     1203310592,
+     1203306496,
+     1203326976,
+     1203322880,
+     1203343360,
+     1203339264,
+     1203359744,
+     1203355648,
+     1203376128,
+     1203372032,
+     1203392512,
+     1203388416,
+     1203408896,
+     1203404800,
+     1203425280,
+     1203421184,
+     1203441664,
+     1203437568,
+     1203458048,
+     1203453952,
+     1203474432,
+     1203470336,
+     1203490816,
+     1203486720,
+     1203507200,
+     1203503104,
+     1203523584,
+     1203519488,
+     1203539968,
+     1203535872,
+     1203548160,
+     1203544064,
+     1203556352,
+     1203552256,
+     1203564544,
+     1203560448,
+     1203572736,
+     1203568640,
+     1203580928,
+     1203576832,
+     1203589120,
+     1203585024,
+     1203597312,
+     1203593216,
+     1202483200,
+     1202479104
+    ]
+   },
+   "freed_pointers": [
+    1202491392,
+    1202487296,
+    1202507776,
+    1202503680,
+    1202524160,
+    1202520064,
+    1202540544,
+    1202536448,
+    1202556928,
+    1202552832,
+    1202573312,
+    1202569216,
+    1202589696,
+    1202585600,
+    1202606080,
+    1202601984,
+    1202622464,
+    1202618368,
+    1202638848,
+    1202634752,
+    1202655232,
+    1202651136,
+    1202671616,
+    1202667520,
+    1202688000,
+    1202683904,
+    1202704384,
+    1202700288,
+    1202720768,
+    1202716672,
+    1202737152,
+    1202733056,
+    1202753536,
+    1202749440,
+    1202769920,
+    1202765824,
+    1202786304,
+    1202782208,
+    1202802688,
+    1202798592,
+    1202819072,
+    1202814976,
+    1202835456,
+    1202831360,
+    1202851840,
+    1202847744,
+    1202868224,
+    1202864128,
+    1202884608,
+    1202880512,
+    1202900992,
+    1202896896,
+    1202917376,
+    1202913280,
+    1202933760,
+    1202929664,
+    1202950144,
+    1202946048,
+    1202966528,
+    1202962432,
+    1202982912,
+    1202978816,
+    1202999296,
+    1202995200,
+    1203015680,
+    1203011584,
+    1203032064,
+    1203027968,
+    1203048448,
+    1203044352,
+    1203064832,
+    1203060736,
+    1203081216,
+    1203077120,
+    1203097600,
+    1203093504,
+    1203113984,
+    1203109888,
+    1203130368,
+    1203126272,
+    1203146752,
+    1203142656,
+    1203163136,
+    1203159040,
+    1203179520,
+    1203175424,
+    1203195904,
+    1203191808,
+    1203212288,
+    1203208192,
+    1203228672,
+    1203224576,
+    1203245056,
+    1203240960,
+    1203261440,
+    1203257344,
+    1203277824,
+    1203273728,
+    1203294208,
+    1203290112,
+    1203310592,
+    1203306496,
+    1203326976,
+    1203322880,
+    1203343360,
+    1203339264,
+    1203359744,
+    1203355648,
+    1203376128,
+    1203372032,
+    1203392512,
+    1203388416,
+    1203408896,
+    1203404800,
+    1203425280,
+    1203421184,
+    1203441664,
+    1203437568,
+    1203458048,
+    1203453952,
+    1203474432,
+    1203470336,
+    1203490816,
+    1203486720,
+    1203507200,
+    1203503104,
+    1203523584,
+    1203519488,
+    1203539968,
+    1203535872,
+    1203548160,
+    1203544064,
+    1203556352,
+    1203552256,
+    1203564544,
+    1203560448,
+    1203572736,
+    1203568640,
+    1203580928,
+    1203576832,
+    1203589120,
+    1203585024,
+    1203597312,
+    1203593216,
+    1202483200,
+    1202479104
+   ],
+   "stack_bytes_changed": 4100,
+   "other_memory_bytes_changed": 2,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [
+    [
+     "0x47ac6000",
+     72,
+     0,
+     "DeleteBank+0x42"
+    ],
+    [
+     "0x47ac6001",
+     0,
+     0,
+     "DeleteBank+0x42"
+    ]
+   ],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "load_tail",
+   "root": "FilledBox",
+   "caller": "MenuInit+0x145",
+   "regs_in": {
+    "EAX": "0x0",
+    "EDX": "0x0",
+    "EBX": "0x31f",
+    "ECX": "0x257"
+   },
+   "stack_args": [
+    "0x2",
+    "0x0",
+    "0x3604130",
+    "0x2007d7c"
+   ],
+   "eax_out": "0x600eafe0",
+   "bindings": [],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 4858,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 455972,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "load_tail",
+   "root": "DDUnlockSurface",
+   "caller": "MenuInit+0x9d6",
+   "regs_in": {
+    "EAX": "0x60076000",
+    "EDX": "0x0",
+    "EBX": "0x201",
+    "ECX": "0x2"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x6c705c47",
+    "0x61677461"
+   ],
+   "eax_out": "0x1",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Unlock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 32,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {
+    "0x4e17a8": {
+     "final_writes": [
+      1,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x23"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a9": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x23"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17aa": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x23"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17ab": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x23"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a4": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x54"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a5": {
+     "final_writes": [
+      96,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x54"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a6": {
+     "final_writes": [
+      7,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x54"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a7": {
+     "final_writes": [
+      96,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x54"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    }
+   }
+  },
+  {
+   "phase": "load_tail",
+   "root": "DDFlipPage",
+   "caller": "MenuInit+0x9e7",
+   "regs_in": {
+    "EAX": "0x1",
+    "EDX": "0x0",
+    "EBX": "0x1201",
+    "ECX": "0x2"
+   },
+   "stack_args": [
+    "0x525c3a43",
+    "0x4e495349",
+    "0x6c705c47",
+    "0x61677461"
+   ],
+   "eax_out": "0x0",
+   "bindings": [
+    "IDirectDrawSurface::BltFast",
+    "IDirectDrawSurface::BltFast"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 73,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  },
+  {
+   "phase": "between_frames",
+   "root": "DDLockSurface",
+   "caller": "AffGame+0x331",
+   "regs_in": {
+    "EAX": "0x496300",
+    "EDX": "0x2007fe8",
+    "EBX": "0x3",
+    "ECX": "0x0"
+   },
+   "stack_args": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "eax_out": "0x60076000",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Lock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 152,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {
+    "0x4e17a4": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x72"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a5": {
+     "final_writes": [
+      0,
+      96
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x72"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a6": {
+     "final_writes": [
+      0,
+      7
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x72"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a7": {
+     "final_writes": [
+      0,
+      96
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x72"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a8": {
+     "final_writes": [
+      0,
+      1
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x83"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a9": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x83"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17aa": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x83"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17ab": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDLockSurface+0x83"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    }
+   }
+  },
+  {
+   "phase": "between_frames",
+   "root": "DDUnlockSurface",
+   "caller": "AffGame+0x69d",
+   "regs_in": {
+    "EAX": "0x60076000",
+    "EDX": "0x450cf0c4",
+    "EBX": "0x600b36d0",
+    "ECX": "0x450ce000"
+   },
+   "stack_args": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "eax_out": "0x1",
+   "bindings": [
+    "IDirectDrawSurface::IsLost",
+    "IDirectDrawSurface::Unlock"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 36,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {
+    "0x4e17a8": {
+     "final_writes": [
+      1,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x23"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a9": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x23"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17aa": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x23"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17ab": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x23"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a4": {
+     "final_writes": [
+      0,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x54"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a5": {
+     "final_writes": [
+      96,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x54"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a6": {
+     "final_writes": [
+      7,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x54"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    },
+    "0x4e17a7": {
+     "final_writes": [
+      96,
+      0
+     ],
+     "count": 1,
+     "writers": [
+      "DDUnlockSurface+0x54"
+     ],
+     "policy": "not in phase diff (net unchanged)"
+    }
+   }
+  },
+  {
+   "phase": "between_frames",
+   "root": "DDFlipPage",
+   "caller": "AffGame+0x6b5",
+   "regs_in": {
+    "EAX": "0x1",
+    "EDX": "0x0",
+    "EBX": "0x600b36d0",
+    "ECX": "0x450ce000"
+   },
+   "stack_args": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "eax_out": "0x0",
+   "bindings": [
+    "IDirectDrawSurface::BltFast",
+    "IDirectDrawSurface::BltFast"
+   ],
+   "bank_walk": null,
+   "freed_pointers": null,
+   "stack_bytes_changed": 73,
+   "other_memory_bytes_changed": 0,
+   "surface_bytes_changed": 0,
+   "other_memory_writes": [],
+   "dgroup_writes": {}
+  }
+ ]
+}
