@@ -1026,3 +1026,77 @@ changing that input. Native binaries and all
 prepared inputs remain inside the declared ignored data root. No implicit
 library fallback or uncommitted source snapshot is accepted. Final integrated
 builds, GPU readbacks, real-window throughput and common gates follow below.
+
+### Final native validation and delivery
+
+Exact coordinator development build **869ffaa22db49105c39c31444790b4648551a886**
+passes with the explicitly approved engine-source override. Both the builder
+and all native/proof runs use the shared heavy lease; each execution is below
+20 minutes. The builder archives 363faa9 from the external engine repository
+read-only. The external checkout and both `motor/` trees are unmodified.
+The linked Rust static archive SHA-256 is
+`8b089afc9d1a92330c376dbdd62f155a6603377f01b796a11a56e393858faf7d`;
+the signed bundled shared library used by proof tools is
+`3b98ff15054128b2ced4dee51ed3fb60402ae5affeb289b4d618146e286de713`.
+The [structured delivery](validation/m3-abi13-delivery.json) also pins the live
+Swift executable, native driver, input manifest, build manifest and logs.
+
+The [final bundled Python comparison](validation/m3-abi13-final-prefix.json)
+passes **257/257 states, 11/11 checkpoints and 128/128 full surfaces**, plus
+128 Python surface/palette/cache/ordered-effect comparisons. Python is only
+the test oracle. The [final actual native-window horizon](validation/m3-abi13-native-horizon.json)
+passes **18,401/18,401 states and 9,200/9,200 surfaces** using the same statically
+linked production driver and visible Metal view. It completes frame **10,800**,
+then displays the first named stop at frame **10,801**:
+`between_frames · quadro 10801 · ABI 5: Display monster count at 0x0041591f`.
+No reset, evidence-state loading or surface substitution occurs in that chain.
+The entire full-state audit takes **420.244 s, 25.699 fps**; the preceding
+1486c82 run also passes in 409.110 s at 26.399 fps. Both final GPU readbacks
+check every one of 1,920,000 displayed pixels; the horizon PNG SHA-256 is
+`62de37f3e04ed53174dc64f6ae6fe65cb1dc82e95a1bb4a1f1d9cb6bdf7f860c`.
+
+The [normal native live smoke](validation/m3-abi13-native-inspection-smoke.json)
+measures **40.914 fps**, 406 frames / 9.923 s, including the required startup
+proofs and all reached surface comparisons. Per frame: Rust logic **11.042 ms**,
+Rust renderer/generation **4.451 ms**, proof export/hash **8.000 ms**, Metal
+upload/presentation/GPU completion **0.921 ms**, other loop/notification work
+**0.027 ms**, total **24.441 ms**. Host projection belongs only to proof/debug;
+native rendering has no Python pixels, per-frame JSON/PNG or Python IPC. The
+previous real Python/raw-canvas UI measured 8.470 fps; its 9.898-fps worker
+measurement excluded IPC/native presentation. Frame counts differ and the
+machine is shared. GPU PNG evidence is exported after pausing, outside timing.
+
+The [build](validation/m3-abi13-build.log) passes **102 consumer tests, zero
+skips**, **27 native exercise checks** and **16 inspection/live checks**.
+Source/asset binding, portable isolated Python imports, relocated runtime,
+ARM64 architecture and strict deep signing pass. Existing 90-second readiness
+and 45-second check budgets remain unchanged. The initial dynamic-link build
+passed signing verification but failed LaunchServices startup because hardened
+DYLD library validation rejected the ad-hoc dylib's Team ID. Its
+[failed log](validation/m3-abi13-initial-dynamic-build.log) is preserved. Static
+linkage fixes that failure while retaining hardened signing and adding no
+library-validation exception. Another failed source-revision guard is recorded
+in the delivery; immutable Git-object extraction fixes the advancing-checkout
+race without editing or resetting the engine repository.
+
+[Common checks](validation/m3-abi13-common-maintenance.log.gz) pass with
+`/usr/bin/python3 -B scripts/check.py`, read-only in the maintenance worktree,
+using its `.local/python`; observed revision
+`b896665b39696bf3bc5ff90b3c6bf6446d06581c`. Core 545/211 optional skips,
+Combat 279/153, Economy 513/208, Graphics 255/0, Missions 154/33, AI/runtime
+109/7, Audio 79/4 and workflow 9/0: **1,943 tests, 616 optional skips, zero
+failures/errors**. Owned commit paths/trailers, documentation links and
+`git diff --check` also pass. No new original-x86 capture is claimed: these
+app proofs compare unchanged original evidence and the Python oracle.
+
+Final fetch still exposes main **c5988c4** with **ABI 1.2**. Consequently a
+default integrated-main ABI 1.3 build remains **pending**, not passed. The
+builder defaults to archived integrated `motor/`, with the visible named
+`RustRendererABI1.3NotIntegrated` guard until its renderer lands; the temporary
+external override is development-only and never an implicit fallback. Native
+input/orders and M3.3 Test A remain unsupported; the prior inspection recorder
+remains separate and injects no orders. Rust's Graphics 1.5 domain, later text/
+input branches, Cyclage and the frame-10801 engine branch remain explicit gaps.
+Only the feature branch is pushed; main integration and acceptance are left
+to the coordinator. Final evidence/documentation commits change no executable
+code after the validated 869ffaa build.

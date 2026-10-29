@@ -308,3 +308,30 @@ upload indexed pixels plus palette to a reusable Metal texture/shader (or a
 native RGBA surface), scaling only at presentation. PNG remains an explicit
 evidence export. The native live window now uses Rust indexed buffers and Metal. The indexed
 WebKit canvas and Python renderer remain diagnostic/evidence tools only.
+
+### Native application measurements
+
+Development build `869ffaa22db49105c39c31444790b4648551a886` uses the approved
+ABI 1.3 engine source `363faa9c252ffb00d62c81db0da2ee5d4a3d7615`. The real
+visible Swift/Metal window measures **40.914 fps** over 406 frames in 9.923 s,
+including the required 257-state startup audit and all reached surface checks.
+The previous Python/raw-canvas application measured 8.470 fps; its separate
+worker-only rate was 9.898 fps. These are shared-machine measurements, not an
+exclusive benchmark or a comparison of identical frame counts.
+
+| Component | Native UI milliseconds/frame |
+| --- | ---: |
+| Rust logic | 11.042 |
+| Rust renderer, including generation query | 4.451 |
+| State export/hash and surface proofs | 8.000 |
+| Metal upload, presentation and GPU completion | 0.921 |
+| Loop/notification overhead | 0.027 |
+| Total | 24.441 |
+
+Host projection is confined to proof/debug reads. Python rendering, per-frame
+pixel JSON, PNG encoding and Python IPC are absent from native live drawing.
+The native smoke also reads back all 1,920,000 actual displayed GPU pixels and
+compares each against the indexed output and palette. PNG export runs only
+after pausing, outside the rate measurement. The
+[handoff](../apps/macos-preview/HANDOFF.md#rust-renderer-integration--abi-13)
+records complete-window proofs, the first engine stop and build provenance.
