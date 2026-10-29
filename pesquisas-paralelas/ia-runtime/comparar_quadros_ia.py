@@ -6,11 +6,20 @@
 
 Reference contract: the capture uses the schema of Missions' frame capture (``captura-quadro1-monde01-exibicao-v2``)
 with phases ``load_tail, between_frames, frame1, between_frames2, frame2, ...`` (``nomes_fases``). Its
-``state_s0`` must be the -v2 MissionLoad final state. Each phase must carry:
-- ``state_after`` (``blocks_changed_since_previous`` and ``block_hashes``);
+``state_s0`` must be the -v2 MissionLoad final state. The file may be xz-compressed (``.xz``); ``--sha256``
+pins the hash of the raw JSON. Each phase must carry:
+- its state, in one of two forms:
+  - -v2 form: ``state_after.blocks_changed_since_previous`` (full changed blocks) and ``block_hashes``;
+  - M2.2 delta form (Mac mini): ``state_delta`` against the previous phase's state, with
+    ``released`` (block names), ``allocated`` (``{name: {base, zlib_base64}}``) and ``ranges``
+    (``[{address, zlib_base64 | hex}]``, each inside one block), applied in that order.
+    ``state_after.summary`` (Missions' ``resumo_imagem``: blocks, bytes, SHA-256 over the name-sorted blocks
+    as ``<II base, size>`` + bytes) checks the replay. At checkpoint frames, ``state_after.full_state``
+    (``{name: {base, zlib_base64}}``) must equal the replayed state exactly;
 - ``entry``/``exit`` registers and RNGs;
 - ``bindings`` and ``boundaries``.
-The top-level ``allocations`` list is the record set after the last phase.
+The top-level ``allocations`` list is the record set after the last phase. Any replay or checkpoint mismatch
+stops the comparison as a capture-integrity failure before Python is compared.
 
 Policy: only the CUMULATIVE ``exclusion_mask`` of the N-frame report excludes bytes. The M2.1 report's
 per-block mask format is accepted too.
@@ -91,14 +100,98 @@ def carregar_politica(caminho):
     return pol, pol['exclusion_mask'], pol['display_roots']
 
 
+class IntegridadeCaptura(RuntimeError):
+    """The capture's own replay (deltas, summaries, checkpoint full states) is inconsistent."""
+
+
+def resumo_estado(blocos):
+    """Missions' ``oraculo_carga_missao.resumo_imagem`` over a block dict (name -> (base, bytes))."""
+    h = hashlib.sha256()
+    for nome in sorted(blocos):
+        base, dados = blocos[nome]
+        h.update(struct.pack('<II', base, len(dados)))
+        h.update(dados)
+    return dict(blocks=len(blocos), bytes=sum(len(d) for _, d in blocos.values()), sha256=h.hexdigest())
+
+
+def _dados(campo):
+    if 'zlib_base64' in campo:
+        return zlib.decompress(base64.b64decode(campo['zlib_base64']))
+    return bytes.fromhex(campo['hex'])
+
+
+def aplicar_delta(estado, delta, fase):
+    """``state_delta`` onto a copy of ``estado``: released, then allocated, then the byte ranges."""
+    novo = dict(estado)
+    for nome in delta.get('released', ()):
+        if nome not in novo:
+            raise IntegridadeCaptura(f'{fase}: released block {nome} is not live')
+        del novo[nome]
+    for nome, bloco in delta.get('allocated', {}).items():
+        if nome in novo:
+            raise IntegridadeCaptura(f'{fase}: allocated block {nome} already live')
+        novo[nome] = (int(bloco['base'], 16), _dados(bloco))
+    por_base = sorted((b, n) for n, (b, _) in novo.items())
+    bases = [b for b, _ in por_base]
+    editados = {}
+    for faixa in delta.get('ranges', ()):
+        endereco, dados = int(faixa['address'], 16), _dados(faixa)
+        i = bisect.bisect_right(bases, endereco) - 1
+        nome = por_base[i][1] if i >= 0 else None
+        if nome is None or endereco + len(dados) > novo[nome][0] + len(novo[nome][1]):
+            raise IntegridadeCaptura(f'{fase}: range 0x{endereco:x}+{len(dados)} is not inside one live block')
+        if nome not in editados:
+            editados[nome] = bytearray(novo[nome][1])
+        o = endereco - novo[nome][0]
+        editados[nome][o:o + len(dados)] = dados
+    for nome, dados in editados.items():
+        novo[nome] = (novo[nome][0], bytes(dados))
+    return novo
+
+
 def fases_referencia(cap, s0):
-    """Yield (phase capture, full block state after it), rebuilding each state from the previous one."""
+    """Yield (phase capture, full block state after it, integrity record), replaying from ``s0``."""
     estado = dict(s0)
     for fase in cap['phases']:
-        for nome, bloco in fase['state_after']['blocks_changed_since_previous'].items():
-            estado[nome] = (int(bloco['base'], 16), zlib.decompress(base64.b64decode(bloco['zlib_base64'])))
-        estado = {n: v for n, v in estado.items() if n in fase['state_after']['block_hashes']}
-        yield fase, estado
+        apos = fase['state_after']
+        if 'blocks_changed_since_previous' in apos:
+            estado = dict(estado)
+            for nome, bloco in apos['blocks_changed_since_previous'].items():
+                estado[nome] = (int(bloco['base'], 16), _dados(bloco))
+            estado = {n: v for n, v in estado.items() if n in apos['block_hashes']}
+            forma = 'v2_blocks'
+        else:
+            estado = aplicar_delta(estado, fase['state_delta'], fase['phase'])
+            forma = 'delta'
+        integridade = dict(form=forma)
+        if 'summary' in apos:
+            resumo = resumo_estado({n: v for n, v in estado.items() if n != 'native_stack'})
+            integridade['summary_equal'] = resumo == apos['summary']
+            if not integridade['summary_equal']:
+                raise IntegridadeCaptura(f"{fase['phase']}: replayed state {resumo} != summary {apos['summary']}")
+        if 'full_state' in apos:
+            completo = {n: (int(b['base'], 16), _dados(b)) for n, b in apos['full_state'].items()}
+            atual = {n: v for n, v in estado.items() if n in completo or n != 'native_stack'}
+            integridade['checkpoint_full_state_equal'] = completo == atual
+            if not integridade['checkpoint_full_state_equal']:
+                diferentes = sorted(n for n in set(completo) | set(atual) if completo.get(n) != atual.get(n))
+                raise IntegridadeCaptura(f"{fase['phase']}: checkpoint full state differs from the replay in "
+                                         f"{diferentes[:8]}")
+        elif forma == 'delta' and 'summary' not in apos:
+            raise IntegridadeCaptura(f"{fase['phase']}: delta phase without a summary hash")
+        yield fase, estado, integridade
+
+
+def carregar_captura(caminho, sha256_bruto=None):
+    """The capture JSON, xz-decompressed when the name ends in .xz; the raw JSON hash checked when pinned."""
+    import lzma
+    bruto = caminho.read_bytes()
+    if caminho.suffix == '.xz':
+        bruto = lzma.decompress(bruto)
+    h = hashlib.sha256(bruto).hexdigest()
+    if sha256_bruto is not None and h != sha256_bruto:
+        raise IntegridadeCaptura(f'raw capture SHA-256 {h} != pinned {sha256_bruto}')
+    return json.loads(bruto), h
 
 
 def comparar_estado(mascara, python, referencia):
@@ -169,11 +262,10 @@ def comparar_alocacoes(python, referencia):
                 excluded_metadata=list(METADADOS_ALOCACAO))
 
 
-def comparar(captura, politica, n=None):
+def comparar(captura, politica, n=None, sha256_bruto=None):
     """Run the composition along the capture's phases and compare each one. Returns the report body."""
-    import cenarios_oraculo
     from composicao_quadros_ia import carregar_cenario_exibicao
-    cap = json.loads(captura.read_bytes())
+    cap, sha_bruto = carregar_captura(captura, sha256_bruto)
     pol, faixas, raizes = carregar_politica(politica)
     mascara = MascaraEnderecos(faixas)
     estados, cap_v2, entrada, m1 = carregar_cenario_exibicao()
@@ -190,8 +282,14 @@ def comparar(captura, politica, n=None):
     referencia = fases_referencia(cap, estados['s0'])
     passos = comp.executar(quadros)
     for nome in fases_quadros(quadros):
-        fase_cap, estado_ref = next(referencia)
-        r = {}
+        try:
+            fase_cap, estado_ref, integridade = next(referencia)
+        except IntegridadeCaptura as erro:
+            fases[nome] = dict(result='capture_integrity_failure', message=str(erro), equal=False)
+            print(nome, 'capture integrity failure:', erro, flush=True)
+            resultado = 'capture_integrity_failure_' + nome
+            break
+        r = dict(reference_integrity=integridade)
         try:
             passo = next(passos)
             r['result'] = 'returned'
@@ -245,7 +343,12 @@ def comparar(captura, politica, n=None):
     if alocacoes and not alocacoes['equal']:
         resultado = 'allocation_records_differ'
     return dict(
-        capture=dict(path=str(captura.relative_to(ROOT)), sha256=sha(captura), frames=quadros),
+        capture=dict(path=str(captura.relative_to(ROOT)), sha256=sha(captura), raw_json_sha256=sha_bruto,
+                     raw_json_sha256_pinned=sha256_bruto, frames=quadros,
+                     state_forms=sorted({v['reference_integrity']['form'] for v in fases.values()
+                                         if 'reference_integrity' in v}),
+                     checkpoint_full_states=[f for f, v in fases.items() if 'checkpoint_full_state_equal' in
+                                             v.get('reference_integrity', {})]),
         policy=dict(path=str(politica.relative_to(ROOT)), sha256=sha(politica), masked_bytes=mascara.bytes,
                     format='cumulative' if 'cumulative' in pol else 'm2.1'),
         crossings=dict(count=0, writing_compared_bytes=0),
@@ -259,6 +362,7 @@ def main():
     ap.add_argument('--captura', required=True)
     ap.add_argument('--politica', required=True)
     ap.add_argument('--quadros', type=int)
+    ap.add_argument('--sha256', help='pinned SHA-256 of the raw (decompressed) capture JSON')
     ap.add_argument('--saida', required=True)
     a = ap.parse_args()
     saida = ROOT / a.saida
@@ -271,7 +375,7 @@ def main():
                source_dirty_paths=subprocess.run(['git', '-C', str(ROOT), 'status', '--porcelain', '--',
                                                   'pesquisas-paralelas/ia-runtime'], capture_output=True,
                                                  text=True).stdout.splitlines())
-    rel.update(comparar(ROOT / a.captura, ROOT / a.politica, a.quadros))
+    rel.update(comparar(ROOT / a.captura, ROOT / a.politica, a.quadros, a.sha256))
     rel['seconds'] = round(time.monotonic() - t0, 1)
     saida.parent.mkdir(parents=True, exist_ok=True)
     with open(saida, 'x') as f:

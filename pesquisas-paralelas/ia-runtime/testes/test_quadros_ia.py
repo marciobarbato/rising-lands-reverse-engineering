@@ -139,6 +139,51 @@ class MascaraEContexto(unittest.TestCase):
             self.assertTrue(set(v + b) <= {'display', 'logic', 'shared:MenuInit', 'shared:MemFree'})
 
 
+class CapturaDelta(unittest.TestCase):
+    """The M2.2 delta form: replay from s0, summary hashes, checkpoint full states, failures named."""
+
+    def captura(self, resumo=None, completo=None):
+        import base64
+        import zlib
+        from comparar_quadros_ia import resumo_estado
+        s0 = {'dgroup': (0x494000, bytes(16)), 'alloc00001': (0x40000000, b'\x01' * 8)}
+        depois = {'dgroup': (0x494000, bytes(4) + b'\xaa\xbb' + bytes(10)), 'alloc00002': (0x40001000, b'\x07' * 4)}
+        fase = dict(phase='load_tail', state_delta=dict(
+            released=['alloc00001'],
+            allocated={'alloc00002': dict(base='0x40001000', zlib_base64=base64.b64encode(
+                zlib.compress(b'\x07' * 4)).decode())},
+            ranges=[dict(address='0x494004', hex='aabb')]),
+            state_after=dict(summary=resumo or resumo_estado(depois)))
+        if completo is not None:
+            fase['state_after']['full_state'] = completo
+        return dict(phases=[fase]), s0, depois
+
+    def test_replay_and_checkpoint(self):
+        import base64
+        import zlib
+        from comparar_quadros_ia import fases_referencia
+        _, _, depois = self.captura()
+        completo = {n: dict(base=hex(b), zlib_base64=base64.b64encode(zlib.compress(d)).decode())
+                    for n, (b, d) in depois.items()}
+        cap, s0, depois = self.captura(completo=completo)
+        [(fase, estado, integridade)] = list(fases_referencia(cap, s0))
+        self.assertEqual(estado, depois)
+        self.assertEqual(integridade, dict(form='delta', summary_equal=True, checkpoint_full_state_equal=True))
+
+    def test_integrity_failures_are_named(self):
+        from comparar_quadros_ia import IntegridadeCaptura, fases_referencia
+        cap, s0, _ = self.captura(resumo=dict(blocks=2, bytes=20, sha256='0' * 64))
+        with self.assertRaises(IntegridadeCaptura):
+            list(fases_referencia(cap, s0))
+        cap, s0, _ = self.captura()
+        cap['phases'][0]['state_delta']['ranges'] = [dict(address='0x49400f', hex='aabb')]   # crosses the block end
+        with self.assertRaises(IntegridadeCaptura):
+            list(fases_referencia(cap, s0))
+        cap, s0, _ = self.captura(completo={'dgroup': dict(base='0x494000', hex='00' * 16)})
+        with self.assertRaises(IntegridadeCaptura):
+            list(fases_referencia(cap, s0))
+
+
 class Fases(unittest.TestCase):
     def test_phase_names_follow_missions(self):
         from composicao_quadros_ia import fases_quadros
