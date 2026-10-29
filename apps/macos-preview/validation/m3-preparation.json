@@ -1,6 +1,6 @@
 {
   "date": "2026-10-29",
-  "baseline": "ea3175b2e903413d8d8bcde796d0910ff524af9f",
+  "baseline": "5fbef8252f5f63afcdbdaba56425da479073cec8",
   "branch": "feat/codex-macos-m3-preparation",
   "contract": "rising-lands/macos-state-consumer/4",
   "consumer": {
@@ -8,7 +8,7 @@
     "failures": 0,
     "errors": 0,
     "skipped": 0,
-    "seconds": 47.87,
+    "seconds": 47.279,
     "context": "Exact coordinator native build, bundled CPython3.12.14, Graphics1.3"
   },
   "inspection": {
@@ -20,7 +20,7 @@
     "failures": 0,
     "errors": 0,
     "skipped": 0,
-    "seconds": 47.87,
+    "seconds": 47.279,
     "context": "Exact coordinator native build, bundled CPython3.12.14, Graphics1.3"
   },
   "common": {
@@ -66,7 +66,7 @@
   },
   "native_build": {
     "status": "PASSED",
-    "commit": "6d03502ba7140ce0f01c0243b1b3e6900b0d445b",
+    "commit": "585684fef34ecedeb904b97681421a7b2e85c63a",
     "command": "RISING_PYTHON_RUNTIME='/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python' ./compilar-jog\u00e1vel --development-ref HEAD --inputs-root '/Users/marcio/git/Rising Lands' --data-root '/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable'",
     "architecture": "arm64",
     "runtime": "3.12.14",
@@ -78,11 +78,11 @@
       "readiness": {
         "appReady": true,
         "checksBudgetSeconds": 45,
-        "checksSeconds": 21.51384258340113,
+        "checksSeconds": 5.116971333278343,
         "documentLoaded": true,
-        "elapsedSeconds": 22.237925125053152,
+        "elapsedSeconds": 5.7579897083342075,
         "initializationBudgetSeconds": 90,
-        "initializationSeconds": 0.7240825416520238,
+        "initializationSeconds": 0.6410183750558645,
         "phase": "checks",
         "windowBudgetSeconds": 45,
         "windowVisibleSignal": true
@@ -95,11 +95,11 @@
       "readiness": {
         "appReady": true,
         "checksBudgetSeconds": 45,
-        "checksSeconds": 9.639248374965973,
+        "checksSeconds": 6.672480750014074,
         "documentLoaded": true,
-        "elapsedSeconds": 16.210841958294623,
+        "elapsedSeconds": 12.882580833393149,
         "initializationBudgetSeconds": 90,
-        "initializationSeconds": 6.571593583328649,
+        "initializationSeconds": 6.210100083379075,
         "phase": "checks",
         "windowBudgetSeconds": 45,
         "windowVisibleSignal": true
@@ -800,7 +800,7 @@
   },
   "graphics13": {
     "implementation_commit": "0e10276c667e68a56b0716195665e6def2e2352f",
-    "tested_commit": "6d03502ba7140ce0f01c0243b1b3e6900b0d445b",
+    "tested_commit": "585684fef34ecedeb904b97681421a7b2e85c63a",
     "exact_version": [
       1,
       3
@@ -888,6 +888,122 @@
     ],
     "asset_payload_in_code": false,
     "live_apply_frame": "RuntimeContractPending; future native Rust frame ABI",
-    "milestone_acceptance_claimed": false
+    "milestone_acceptance_claimed": false,
+    "first_passing_native_build": {
+      "status": "PASSED",
+      "commit": "6d03502ba7140ce0f01c0243b1b3e6900b0d445b",
+      "command": "RISING_PYTHON_RUNTIME='/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python' ./compilar-jog\u00e1vel --development-ref HEAD --inputs-root '/Users/marcio/git/Rising Lands' --data-root '/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable'",
+      "architecture": "arm64",
+      "runtime": "3.12.14",
+      "signature": "codesign --verify --deep --strict passed",
+      "bundle": "/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable/dist/development/RisingLands-ptbr.app",
+      "exercise_smoke": {
+        "passed": true,
+        "checks": 27,
+        "readiness": {
+          "appReady": true,
+          "checksBudgetSeconds": 45,
+          "checksSeconds": 21.51384258340113,
+          "documentLoaded": true,
+          "elapsedSeconds": 22.237925125053152,
+          "initializationBudgetSeconds": 90,
+          "initializationSeconds": 0.7240825416520238,
+          "phase": "checks",
+          "windowBudgetSeconds": 45,
+          "windowVisibleSignal": true
+        },
+        "python_stderr": ""
+      },
+      "inspection_smoke": {
+        "passed": true,
+        "checks": 9,
+        "readiness": {
+          "appReady": true,
+          "checksBudgetSeconds": 45,
+          "checksSeconds": 9.639248374965973,
+          "documentLoaded": true,
+          "elapsedSeconds": 16.210841958294623,
+          "initializationBudgetSeconds": 90,
+          "initializationSeconds": 6.571593583328649,
+          "phase": "checks",
+          "windowBudgetSeconds": 45,
+          "windowVisibleSignal": true
+        },
+        "python_stderr": ""
+      },
+      "inputs_read_only": true,
+      "outputs_inside_clone": true
+    },
+    "latest_main_refresh": {
+      "base": "5fbef8252f5f63afcdbdaba56425da479073cec8",
+      "tested_commit": "585684fef34ecedeb904b97681421a7b2e85c63a",
+      "upstream_changes": "Only coordinator common Rust-gate hook; no consumer/provider/reference source change",
+      "tests": 80,
+      "skipped": 0,
+      "native_build": "PASSED",
+      "artifacts": {
+        "consumer-tests.log": {
+          "path": "apps/macos-preview/validation/m3-graphics13-latest-consumer-tests.log",
+          "sha256": "9ca2895da09328ef6a544bc47d9a11ee26f06f757c46e5c1f962957074ff2c61"
+        },
+        "native-smoke.json": {
+          "path": "apps/macos-preview/validation/m3-graphics13-latest-native-smoke.json",
+          "sha256": "cbfc7dac10391625f53b7bdb557adc25957fdf1599ab1ddb77819ca519e8bd72"
+        },
+        "native-inspection-smoke.json": {
+          "path": "apps/macos-preview/validation/m3-graphics13-latest-native-inspection-smoke.json",
+          "sha256": "9e1fc2955bc2a9f60928a6dee1be05217457cb563f2f26e5d2f41fc0e4e9d117"
+        },
+        "architecture.log": {
+          "path": "apps/macos-preview/validation/m3-graphics13-latest-architecture.log",
+          "sha256": "579e5b1b549a91e73c22f7a3d967f4d7b19ab7cf8d5ee85111fdecb0c4dc49df"
+        },
+        "codesign-verify.log": {
+          "path": "apps/macos-preview/validation/m3-graphics13-latest-codesign-verify.log",
+          "sha256": "3cad2b9415a29f4c7cc29d20188dde26b404825a6631e5e6912bcf2ffa80d5a0"
+        },
+        "build.log": {
+          "path": "apps/macos-preview/validation/m3-graphics13-latest-build.log",
+          "sha256": "23cefeefbaa552d704c1ef77188f38c22cd1c9b415bb21afc84432fc41ad8795"
+        }
+      },
+      "screenshots": [
+        {
+          "path": "/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable/build/development/585684fef34ecedeb904b97681421a7b2e85c63a/build/logs/native-inspection-smoke.after.png",
+          "sha256": "f8a8829c8287c30d1b6e03e5f38bb4ef1d0ef1904987d8cc9293f2ecdea51077",
+          "bytes": 413632
+        },
+        {
+          "path": "/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable/build/development/585684fef34ecedeb904b97681421a7b2e85c63a/build/logs/native-inspection-smoke.before.png",
+          "sha256": "a367f93f54a65275dda06f9542b7fd318093e77d456a7fbf6717dd5f9328d5c5",
+          "bytes": 619469
+        },
+        {
+          "path": "/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable/build/development/585684fef34ecedeb904b97681421a7b2e85c63a/build/logs/native-inspection-smoke.png",
+          "sha256": "f8a8829c8287c30d1b6e03e5f38bb4ef1d0ef1904987d8cc9293f2ecdea51077",
+          "bytes": 413632
+        },
+        {
+          "path": "/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable/build/development/585684fef34ecedeb904b97681421a7b2e85c63a/build/logs/native-smoke.after.png",
+          "sha256": "4478de72d50fe475667c137975d8ba65386acdf8cc47bd525a3d4904bc1c1825",
+          "bytes": 1619708
+        },
+        {
+          "path": "/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable/build/development/585684fef34ecedeb904b97681421a7b2e85c63a/build/logs/native-smoke.before.png",
+          "sha256": "8009588bac8954e31deafe0dc10815e7c50b0eafe798a52f35cb603473803bc9",
+          "bytes": 1653750
+        },
+        {
+          "path": "/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable/build/development/585684fef34ecedeb904b97681421a7b2e85c63a/build/logs/native-smoke.paint.png",
+          "sha256": "4478de72d50fe475667c137975d8ba65386acdf8cc47bd525a3d4904bc1c1825",
+          "bytes": 1619708
+        },
+        {
+          "path": "/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable/build/development/585684fef34ecedeb904b97681421a7b2e85c63a/build/logs/native-smoke.png",
+          "sha256": "4478de72d50fe475667c137975d8ba65386acdf8cc47bd525a3d4904bc1c1825",
+          "bytes": 1619708
+        }
+      ]
+    }
   }
 }

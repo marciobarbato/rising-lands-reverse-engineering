@@ -579,3 +579,21 @@ frame ABI; the published pilot routine ABI is not a live-frame implementation.
 Review/integrate only feat/codex-macos-m3-preparation. The separate assets DATA
 release and clean tooling branch are delivered independently. This app branch
 does not include the old asset payload commits and claims no milestone.
+
+
+### Final latest-main native refresh
+
+Main advanced to `5fbef8252f5f63afcdbdaba56425da479073cec8` with a coordinator
+common Rust-validation hook only. It was merged into this feature and the exact
+coordinator build ran again on `585684fef34ecedeb904b97681421a7b2e85c63a`.
+Consumer, Graphics and reference sources did not change. **80/80 tests, zero
+skips**, 47.279 seconds; ARM64 compile/signature/relocation and native exercise
+**27/27** plus inspection **9/9** all passed. No readiness budget or assertion
+was relaxed. Earlier passing results remain preserved. Current
+[full discovery](validation/m3-graphics13-latest-consumer-tests.log),
+[exercise](validation/m3-graphics13-latest-native-smoke.json),
+[inspection](validation/m3-graphics13-latest-native-inspection-smoke.json) and
+[exact build](validation/m3-graphics13-latest-build.log) identify this final
+merged checkout. Structured validation records all hashes and screenshot paths.
+The final report-only commit changes no executable code. No merge into or push
+to the code repository's main was performed.
