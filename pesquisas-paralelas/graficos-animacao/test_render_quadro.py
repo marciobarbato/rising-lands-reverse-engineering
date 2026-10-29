@@ -50,7 +50,8 @@ class QuadroTest(unittest.TestCase):
 
     def test_api_matches_the_native_reference_up_to_the_first_unreconstructed_pass(self):
         q, _ = self.renderizar()
-        self.assertEqual(q.parada['endereco'], '0x0041591f')            # units with life < 100: overlay not reconstructed
+        self.assertEqual(q.parada['endereco'], '0x0041591f')            # first unit type without a committed body
+        self.assertIn('unit 15 type 8', q.parada['detalhe'])
         ref = self.fx.referencia
         dif = [i for i in range(len(ref)) if ref[i] != q.pixels[i]]
         self.assertTrue(dif and min(dif)//800 >= 279, (len(dif), min(dif)//800))   # terrain, vegetation and the facade equal
@@ -60,7 +61,7 @@ class QuadroTest(unittest.TestCase):
     def test_contract_shape(self):
         q, _ = self.renderizar()
         self.assertEqual((q.versao, q.largura, q.altura), (Q.VERSAO_RENDER_QUADRO, 800, 600))
-        self.assertEqual(Q.VERSAO_RENDER_QUADRO, (1, 0))
+        self.assertEqual(Q.VERSAO_RENDER_QUADRO, (1, 1))
         pal = Q.Catalogo().paleta()
         self.assertEqual(len(pal), 768)
         for i in (0, 4000, 123456, 479999):    # rgba = palette[index] expanded to RGB, alpha 255, row-major, origin top-left
@@ -69,6 +70,42 @@ class QuadroTest(unittest.TestCase):
         self.assertEqual(sorted(q.parada), ['detalhe', 'endereco'])
         with self.assertRaises(ValueError):
             Q.renderizar_quadro(Memoria(self.fx), superficie_anterior=b'\0'*10)
+
+    def test_units_with_the_tired_icon_equal_the_original_pixels(self):
+        # Types 1 and 8 have no committed body (skipped here); every other unit, with its low-life icon, must match.
+        import quadro_jogo as QJ
+        original = QJ._Composicao.engin
+        faltando = []
+
+        def engin(c, x, y, indice):
+            tipo = c.mundo.unidades[indice*276+1]
+            if tipo not in QJ.TIPOS:
+                faltando.append((indice, tipo, x, y)); return
+            return original(c, x, y, indice)
+        QJ._Composicao.engin = engin
+        try:
+            q, _ = self.renderizar()
+        finally:
+            QJ._Composicao.engin = original
+        self.assertIsNone(q.parada)
+        self.assertEqual(sorted(faltando), [(11, 1, 224, 480), (15, 8, 288, 416)])
+        ref = self.fx.referencia
+        dif = [i for i in range(len(ref)) if ref[i] != q.pixels[i]]
+        for i in dif:
+            x, y = i % 800, i//800
+            self.assertTrue(any(fx_-64 <= x < fx_+128 and fy_-128 <= y < fy_+64 for _, _, fx_, fy_ in faltando), (x, y))
+        self.assertEqual(len(dif), 2080)
+        icones = [c for c in q.chamadas if c[0] == 'EngineIconeFadiga']
+        self.assertEqual(len(icones), 6)             # units 0, 1, 2 (type 0), 13, 14 (type 5), 12 (type 7)
+
+    def test_tired_icon_native_capture(self):
+        d = json.loads((EVID/'captura-cauda-engin-m1.json').read_text())
+        nativos = [e for e in d['events'] if e['at'] == 'player_draw']
+        self.assertEqual(len(nativos), 8)            # six drawn types plus types 1 and 8
+        self.assertEqual({e['regs']['EBX'] for e in nativos}, {0x1e2f})     # word +4 (= 4) + 0x1E2B
+        self.assertTrue(all(e['unit']['life74'] == 1 and e['unit']['w4'] == e['unit']['w76'] for e in nativos))
+        self.assertEqual(sorted((e['regs']['EAX'], e['regs']['EDX']) for e in nativos if e['unit']['type'] in (0, 5, 7)),
+                         sorted([(88, 277), (152, 309), (248, 309), (312, 309), (408, 309), (120, 373)]))
 
     def test_api_reads_only(self):
         mem = Memoria(self.fx)
