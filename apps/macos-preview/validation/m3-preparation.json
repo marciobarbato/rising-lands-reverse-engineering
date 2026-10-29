@@ -1,0 +1,81 @@
+{
+  "date": "2026-10-29",
+  "baseline": "99c0e4ec97c97700cf9081becff14dbb72a64497",
+  "branch": "feat/codex-macos-m3-preparation",
+  "contract": "rising-lands/macos-state-consumer/1",
+  "consumer": {
+    "tests": 11,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "inspection": {
+    "blocks": 881,
+    "bytes": 2659375
+  },
+  "macos_full": {
+    "tests": 14,
+    "errors": 3,
+    "reason": "generated snapshot.json absent"
+  },
+  "common": {
+    "status": "FAILED",
+    "core": {
+      "tests": 490,
+      "errors": 7,
+      "skipped": 226
+    },
+    "combat": {
+      "tests": 260,
+      "errors": 1,
+      "skipped": 147
+    },
+    "economy": {
+      "tests": 487,
+      "failures": 1,
+      "errors": 7,
+      "skipped": 205
+    },
+    "missions": {
+      "tests": 104,
+      "failures": 1,
+      "errors": 22,
+      "skipped": 31
+    },
+    "ai_runtime": {
+      "tests": 82,
+      "errors": 7,
+      "skipped": 23
+    },
+    "audio": {
+      "tests": 20,
+      "errors": 8,
+      "skipped": 3
+    },
+    "graphics": "NOT RUN: hash-checked CD files absent",
+    "workflow": {
+      "tests": 8,
+      "errors": 0
+    }
+  },
+  "native_build": "NOT RUN: isolation, generated assets and relocatable runtime unavailable",
+  "milestone_status_modified": false,
+  "logs": {
+    "consumer": {
+      "path": "/private/tmp/rising-codex-consumer-tests.log",
+      "sha256": "d619c9590ae25caeda3b4ddb19f1f2d40dc1d1abba42ce5e1e73196c448c1b24"
+    },
+    "macos": {
+      "path": "/private/tmp/rising-codex-macos-check.log",
+      "sha256": "64e062221044e01c0bae8dd103d219dbc8b5b28e037df9a8495a362ae00ed59a"
+    },
+    "common": {
+      "path": "/private/tmp/rising-codex-common-check.log",
+      "sha256": "9dced58c448a5f62a169f2950c75d302b248fd442aa9232e85427a6b3833ba0b"
+    },
+    "inspection": {
+      "path": "/private/tmp/rising-codex-m1-inspection.json",
+      "sha256": "93a953817b316f622d0b073860baca7e452a918fc8f2745f05f5d320b5d5b598"
+    }
+  }
+}

@@ -106,3 +106,46 @@ must not be called with an invented app domain. Final delivery requires a new
 normal build from verified fetched `origin/main`, recording its actual revision
 in the local build/source manifests. Integration/main-output evidence is sent
 after that build rather than predicting a future merge SHA here.
+
+## Independent M3 preparation (2026-10-29)
+
+The independent clone and dedicated `feat/codex-macos-m3-preparation` branch
+add an immutable M1 consumer and command-line inspector. See the
+[contract and runtime/Graphics dependency requests](M3_CONTRACT.md) and
+[audit](M3_AUDIT.md). This is a validated inspection boundary, with future
+frame application explicitly stopped before mutation. It introduces no
+recovered behavior, renderer, input protocol or formal milestone acceptance.
+The existing native shell continues to expose the synthetic exercise.
+
+The accepted capture is read in place using the existing Missions decoder;
+all 881 original-name/address blocks (2,659,375 bytes) match that decoder.
+Consumer tests cover deterministic ordering, immutable bytes, rejection of
+malformed payloads/metadata/hashes/ranges, atomic failure, idempotent load,
+reset/reload identity and the M2 dependency stop. No original-x86 run is
+needed or claimed for this read-only adapter.
+
+Actual independent validation on Apple Silicon, Python 3.9.6:
+
+* New consumer suite: **11/11 passed, zero skips**. Inspector CLI succeeds.
+* `git diff --check` and documentation link validation: passed.
+* Full app test discovery: 14 tests, 3 import errors (missing generated
+  `apps/macos-preview/snapshot.json`); the 11 new tests passed.
+* Common `scripts/check.py`: failed. Core 490 tests / 7 errors / 226 skips;
+  Combat 260 / 1 error / 147 skips; Economy 487 / 1 failure / 7 errors /
+  205 skips; Missions 104 / 1 failure / 22 errors / 31 skips; AI/runtime
+  82 / 7 errors / 23 skips; Audio 20 / 8 errors / 3 skips. Graphics did not
+  run (missing hash-checked CD files). Workflow **8/8 passed**.
+* Observed missing inputs include MONDE01.ETA, RISING.EXE, capstone, unicorn,
+  pefile and audio media. The two assertions also depend on missing media
+  (38-map inventory and opening the original CRT stream). These failures
+  are recorded, not changed or suppressed by this delivery.
+* No native bundle build/UI smoke was run. The existing launcher derives
+  shared `/Users/marcio/git/local-data` from the independent clone parent,
+  outside this task's isolation scope, and required local runtime/CD inputs
+  are absent from the clone. No existing bundle or Claude local data was used.
+
+Detailed results and log hashes: [M3 validation](validation/m3-preparation.json).
+This boundary is implemented and tested as an inspection consumer; common
+checks and native application delivery remain incomplete. Runtime/Graphics
+contracts remain the stop for further state/frame integration. The coordinator
+reviews and integrates the remote feature; this task never merges/pushes main.
