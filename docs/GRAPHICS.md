@@ -612,3 +612,25 @@ See `pesquisas-paralelas/graficos-animacao/ESCRITAS_AFFGAME_ENTRE_QUADROS.md`: s
 See `pesquisas-paralelas/graficos-animacao/FRONTEIRAS_EXIBICAO.md`: `fronteiras_exibicao.py` (Core16 DirectDraw COM backend; original wrappers run natively), boundary table, bank/file inventory and RestoreAll's static DGROUP effects.
 
 - [Logic-state effects of RestoreAll/AffGame](../pesquisas-paralelas/graficos-animacao/EFEITOS_LOGICOS_EXIBICAO.md): native capture shows no logic-read byte written in the captured domain; `efeitos_logicos_exibicao.py` provider with named stops.
+
+## M3 preparation: native pixel reference, structure facade in the frame, render API
+
+**Reference.** [capturar_quadro_original_pixels.py](../pesquisas-paralelas/graficos-animacao/capturar_quadro_original_pixels.py) runs Missions' display scenario to the real entry of AffGame in `between_frames` (frame 1), saves the entry state, and runs the intact AffGame natively to the HUD checkpoint `0x417B1C`. [quadro-original-pixels-m1.json](../pesquisas-paralelas/graficos-animacao/evidencias/quadro-original-pixels-m1.json) (199 KB, every block hash-verified on load) holds the entry state the composition needs, the 1000×276 structure pool, BatimentEstHabiter's native result per occupied record, and the 800×600 offscreen surface before and at the checkpoint. [quadro-original-pixels-m1-modos.json](../pesquisas-paralelas/graficos-animacao/evidencias/quadro-original-pixels-m1-modos.json) holds the same run with the Santuário's mode byte `+5` set to 0..7 (surface hash and a crop of the facade box). Requires `RISING_EMULAR` only to regenerate; the tests read the fixtures.
+
+**What the Python frame now reproduces.** `quadro_jogo.batiments` follows AffBatiments for structure cells: occupancy lookup (`0x407DEF..0x407E56`), the foreign-owner visibility byte, the type-2 facade through the committed seven-layer `construcoes` provider (terrain word `0x2ED`, modes 3/4/5 share the same layers at `0x40873A`), and the `0x40F342` tail (AffVehiculeAtelier only for terrain `0x356`, selection frame and gauge only for a selected structure). Against the native surface at `0x417B1C`, every pixel above row 279 is equal: terrain, vegetation and the full Santuário facade; modes 3, 4 and 5 equal the original's facade crop pixel for pixel (the original draws the identical image for the three).
+
+**Named stops (visible, not guessed).** `0x41591F`: the 16 M1 units have life word `+0x74` = 1 (< 100), which enables the tired/overlay branch of the unit body (`0x414320..0x414409`, `TypeEnginSeFatigue`) that no committed unit module covers; this is the first stop and all later sprite cells are absent. `0x408AC8`: modes 0, 1, 2, 6, 7, for which the original draws one common image different from the facade (identical across those five modes; captured natively, not reconstructed). `0x40892D`: uninhabited facade (gray effect). `0x40863E`: mode 3 uninhabited (advances the RNG cursor). `0x4022C8` / `0x4020EC`: selection frame / gauge of a selected structure. The raid unit (unit 16) on screen and the effect projectiles 31/32 were captured as logic-state-clean (see EFEITOS_LOGICOS_EXIBICAO.md) but their **pixel** composition is not reconstructed; the composition stops at the unit overlay before reaching them.
+
+**Render API** ([render_quadro.py](../pesquisas-paralelas/graficos-animacao/render_quadro.py)).
+
+```python
+renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=None, habitado=None, relogio=None) -> QuadroRenderizado
+regioes_necessarias(memoria) -> [(start, end_exclusive, name)]
+QuadroRenderizado(pixels, rgba, parada, chamadas, efeitos)
+```
+
+- `memoria`: the `MemoriaDeclarada` read contract: `u8/u16/u32(address)` and `ler_mundo(address, n)`. It is never written. Declare `regioes_necessarias(memoria)`: DGROUP+.bss `0x494000..0x523000` and the buffers addressed by the slots `0x507D70, 0x507D74, 0x507DAC, 0x4E0F38, 0x4E19A0, 0x5080F0, 0x507D78+4c, 0x507D88+4c`.
+- `superficie_anterior`: 800×600 palette indices the game draws over (AffGame does not clear the surface).
+- `habitado(indice) -> bool`: BatimentEstHabiter (economy's result), required once a structure is occupied; `relogio()`: GetTickCount (default: the tick copy at `0x4E17B4`).
+- Result: `pixels` (800×600 indices), `rgba` (through the PLATGAME palette, or `paleta`), `parada` (`None`, or the first unreconstructed original address and reason — the frame is then partial), the ordered original calls and the writes to the frame globals. The palette is the static PLATGAME one; the live palette cycling (`Cyclage`) is not applied. Pure function: no files, no emulation, about 0.3 s per frame.
+- Domain: the mode-0x12 in-game view of an 800×600 session as captured; other modes, sub-views and the HUD (from `0x417B1C`) are not rendered.
