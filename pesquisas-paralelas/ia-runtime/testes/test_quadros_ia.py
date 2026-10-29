@@ -184,6 +184,24 @@ class CapturaDelta(unittest.TestCase):
             list(fases_referencia(cap, s0))
 
 
+class ResumosMascarados(unittest.TestCase):
+    """compared_summary and masked_sha256 as Missions' pacotes_quadros_missao defines them."""
+
+    def test_definitions(self):
+        import hashlib
+        import struct
+        from comparar_quadros_ia import MascaraEnderecos, resumo_estado, resumos_mascarados
+        blocos = {'b': (0x2000, bytes(range(8))), 'a': (0x1000, b'\x11' * 4), 'native_stack': (0, b'\xff')}
+        mascara = MascaraEnderecos([['0x1001', '0x1003'], ['0x2006', '0x200a']])
+        comparado, mascarado = resumos_mascarados(mascara, blocos)
+        self.assertEqual(comparado, resumo_estado({'a': (0x1000, b'\x11\x00\x00\x11'),
+                                                    'b': (0x2000, bytes(range(6)) + b'\x00\x00')}))
+        h = hashlib.sha256()
+        for inicio, dados in ((0x1001, b'\x11\x11'), (0x2006, bytes([6, 7]))):
+            h.update(struct.pack('<II', inicio, len(dados)) + dados)
+        self.assertEqual(mascarado, h.hexdigest())
+
+
 class Fases(unittest.TestCase):
     def test_phase_names_follow_missions(self):
         from composicao_quadros_ia import fases_quadros
