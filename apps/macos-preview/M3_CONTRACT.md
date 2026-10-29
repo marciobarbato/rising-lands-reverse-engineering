@@ -45,12 +45,19 @@ python3 -B apps/macos-preview/src/macos_state_consumer.py
 python3 -B -m unittest discover -s apps/macos-preview/testes -p test_macos_state_consumer.py -v
 ```
 
-For an archived app source tree, pass `source_root` explicitly to the loader
-(or `--source-root` to the command). The existing playable packager already
-archives the full committed source tree. The native shell is not switched to
-this inspection module and its synthetic UI schema is unchanged. A later
-shell integration must import from that same pinned source tree and select
-inspection mode explicitly. Historical preview archives without accepted M1
+For an archived app source tree, `source_root` (or CLI `--source-root`) may
+select the root explicitly. Without that argument, a source checkout uses its
+repository root; a deployed module uses only the relative archive declared by
+`snapshot.json` beside it. Absolute paths, parent traversal and symlinks escaping
+the payload are rejected. A deployed module without a declaration fails with a
+clear English error instead of guessing a repository from ancestor directories.
+Legacy archives without accepted M1 evidence likewise fail rather than falling
+back to an external checkout. The existing playable packager archives the full
+committed source tree and declares `snapshot: source`. The native shell is not switched to
+this inspection module and its synthetic UI schema is unchanged. Both playable and legacy builders mirror the consumer module using the same
+source-copy helper. The playable verifier imports the bundled consumer and loads
+its declared M1 archive using the isolated bundled interpreter. A later shell
+integration must select inspection mode explicitly. Historical preview archives without accepted M1
 artifacts fail validation rather than falling back to synthetic state.
 
 ## State transitions and ownership

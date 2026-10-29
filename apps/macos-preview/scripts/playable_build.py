@@ -67,9 +67,7 @@ def main():
     payload.mkdir(parents=True)
     shutil.copytree(runtime, resources / 'Python')
     shutil.copytree(args.source, payload / 'source', ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
-    for item in ('engine.py', 'research_adapter.py', 'playable_session.py', 'ui'):
-        src, dst = app_source / 'src' / item, payload / item
-        shutil.copytree(src, dst) if src.is_dir() else shutil.copy2(src, dst)
+    legacy.copy_preview_sources(app_source / 'src', payload)
     shutil.copytree(base / 'assets', payload / 'assets')
     shutil.copy2(args.manifest, payload / 'snapshot.json')
     shutil.copy2(base / 'dependencies/runtime-manifest.json', payload / 'runtime-manifest.json')

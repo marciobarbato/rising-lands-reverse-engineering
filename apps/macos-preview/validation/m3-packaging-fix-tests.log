@@ -1,0 +1,23 @@
+test_bundle_cannot_select_external_or_malformed_archive (test_macos_bundle.MacOSBundleTests) ... ok
+test_bundled_default_reads_declared_archive (test_macos_bundle.MacOSBundleTests) ... ok
+test_declared_archive_missing_evidence_does_not_fall_back (test_macos_bundle.MacOSBundleTests) ... ok
+test_deployed_module_without_manifest_refuses_ancestor_guess (test_macos_bundle.MacOSBundleTests) ... ok
+test_real_verifier_detects_original_missing_consumer_regression (test_macos_bundle.MacOSBundleTests) ... ok
+test_real_verifier_still_detects_modified_mirrored_source (test_macos_bundle.MacOSBundleTests) ... ok
+test_shared_packager_satisfies_real_verifier (test_macos_bundle.MacOSBundleTests) ... ok
+test_accepted_evidence_matches_existing_python_decoder (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_bad_payload_size_hash_and_compression (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_canonical_order_independent_of_json_order (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_empty_and_wrong_shape (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_failed_load_preserves_previous_image (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_frames_stop_before_mutation_both_empty_and_loaded (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_load_idempotent_reset_reload (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_malformed_block_metadata (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_missing_malformed_unaccepted_and_tampered_capture (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_overlap_and_address_overflow (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_read_bounds_and_immutable_image (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 1.288s
+
+OK
