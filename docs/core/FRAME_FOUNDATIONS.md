@@ -354,3 +354,58 @@ The providers `NextAnimTerrain(x, y)` and `NextAnimVeget(x, y)` are unchanged; b
 - The remaining stops are InitGameZone modes 2–4 and NextAnimVegetFullMap (network only, not reached).
 
 The task VM's live binding (round 3), the CRT I/O boundaries ([DECLARED_BINDINGS](DECLARED_BINDINGS.md)) and the [live tile grid](LIVE_TILE_GRID.md) complete this round.
+
+## Round 5: frames up to cycle counter 128, unreachable modes, display-path queries
+
+**Reference.** Missions' Stage18 display reference over Graphics' backend (`captura-quadro1-monde01-exibicao-v2.json`). `percurso_quadro1` resolves `'exibicao'` to it, and every new run reproduces frames 0/1 against it.
+
+**Survey first** (`f426e30`, `levantar_quadros_exibicao.py`, `evidencias/fundacoes-quadro/levantamento-quadros-exibicao.json`). The original program kept running with the same declared no-input answers up to cycle counter 128: 128 frames in 197 s. It records per-frame routine entries, boundaries, RNGs, CRT seed, cursor, view origin and state hash. Findings:
+- **Only two routines are first entered after frame 1:**
+  - Combat's EnginTrouveCibleScan, from frame 17, inside the periodic EnginTrouveCible target scan (frames 17, 21, 30–32, …);
+  - Economy's ScanNouvellePatate, from frame 45.
+- **No raid by counter 128.** No attack, projectile creation or damage routine is entered, so the first raid lies beyond counter 128. It was not surveyed further.
+- **Core routines reached by the frame logic in frames 2–128** are exactly the frame-0/1 set: NextAnim*, GameNextFrame, Random, LongRand/rand, GetBit/SetBit, CalculFatigue (still below its threshold), Set*Collision/Chemin, and the structure and cell queries. All of them are translated.
+- **Core queries reached by the display path (AffGame, between frames):** TerrainEstDecouvert, TerrainEstIllumine, ExisteEngin, EnginGetType, EnginGetPlayer, EnginEstArmure/Miroir/Terreur and TypeEnginSeFatigue, alongside the already-translated cell queries and GetBit.
+
+**Capture before translation** (`ca5a7f3`, `capturar_quadros_seguintes.py`, `evidencias/fundacoes-quadro/captura-quadros-seguintes.json`). The run took 2,410 s and covered frames 0–128. It is stored with a lossless run encoding (`compactar_captura_isolada.py`; the 79.7 MB raw file, SHA-256 `07bec0cc…`, is kept under `.local/frame`).
+- **NextAnimTerrain/NextAnimVeget:** every frame is isolated. Kept are frame 0, the sampled frames 1, 2, 3, 4, 17, 45, 64, 127, 128, and the 20 frames in which vegetation changed objects. No NextAnimTerrain call changed more than the CRT seed up to counter 128.
+- **InitGameZone** in frame 0, with mode perturbations:
+  - 2: MissionGetNum < 7 and ≥ 7;
+  - 3: the original item count, 5 items, and 0 items with high EBX/ECX;
+  - 4;
+  - the invalid modes 0 and 5.
+- **NextAnimVegetFullMap** as a *foreign entry*. It is network-only: CalculGame calls it at `0x42d44f` only when `[0x4e0730]` is set. It runs natively from NextAnimVeget's exact paused state, which is the same state, since both follow NextAnimTerrain. It ran in frames 1, 2, 64 and 128, with counter cases 0, 2 and 1.
+- **In the sampled frames:** the display-path queries, GameNextFrame, Random, LongRand and rand, and all MissionGetNum calls.
+
+Static reach of InitGameZone's modes:
+- Game-time callers pass mode 1: CalculGame, alliance counters, the market, message boxes and input.
+- Modes 2–4 come from MenuInit's menu states (for example `MenuInit+0x7e0` passes 4), ResetMode, WndProc and GameLoad.
+- None is reached without input up to counter 128.
+
+**Translations** (`chamadas_quadro_core.py`):
+- **InitGameZone:**
+  - mode 2: zones 1–8, with zone 4 only from mission 7 on;
+  - mode 3: one zone per menu item, 0x19 apart from y=0x11e, then MouseTestZone(1, n). It needs the caller's EBX/ECX for 0 items, and 256 or more items raise at `0x4719ba`;
+  - mode 4: fixed zones 1–8;
+  - invalid modes store nothing and return EAX−1.
+- **NextAnimVegetFullMap** shares NextAnimVeget's per-cell body over all 65,536 cells. It returns EAX=0x100 and keeps every other register.
+- **Display-path queries:** `terreno_esta_descoberto`, `terreno_esta_iluminado`, `unidade_existe`, `tipo_da_unidade`, `dono_da_unidade`, `unidade_terror`/`unidade_espelho`/`unidade_armadura`, `tipo_cansa`.
+- **InitGameZone helpers:** `numero_missao` and `itens_menu`, the MissionGetNum/MenuGetNbItem getters it uses.
+- All of these are also available through `provedores_core`.
+
+**Validation.**
+- **CPU-free replay** of every kept case of the frames 0–128 capture is exact: stores and seven GPRs. That includes 16 FullMap foreign-entry cases, 18 InitGameZone mode cases, the later-frame NextAnim* records, the queries and 1,290 MissionGetNum calls.
+- **Fresh native differential**, display reference (`validar_chamadas_quadro_core.py --cenario exibicao`, under the lease): 124 isolated calls (FullMap as a foreign entry at both NextAnimVeget pauses) and **484 comparisons, 0 mismatches, 0 dependency stops**. The path reproduction passed against v2. The perturbations cover:
+  - the InitGameZone modes;
+  - FullMap object classes with counters 0, 2 and 1;
+  - grid owners 0, 4 and 7 and high cell bits for the terrain queries;
+  - units 799, high index and overwritten bytes;
+  - unit flag bytes 0x0e/0x02/0x04/0x08/0xf1;
+  - every TypeEnginSeFatigue class and high bits;
+  - MissionGetNum.
+- **v1 rerun:** 2,048 comparisons (now with the InitGameZone modes), 0 mismatches.
+
+**Remaining stops:**
+- CalculFatigue's threshold branch (`0x452d61`), still unreached at counter 128;
+- Chemin_ModifieZone modes 0/1/3;
+- InitGameZone mode 3 with 256 or more items (`0x4719ba`).

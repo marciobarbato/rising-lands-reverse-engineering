@@ -50,7 +50,9 @@
    "1": 26
   },
   "InitGameZone": {
-   "1": 20
+   "1": 30,
+   "255": 2,
+   "4": 2
   },
   "MessageBoxExiste": {
    "0": 2,
@@ -147,7 +149,7 @@
   "ChercheContacteur": 18,
   "GameNextFrame": 4,
   "GetBit": 200,
-  "InitGameZone": 20,
+  "InitGameZone": 34,
   "MessageBoxExiste": 4,
   "MiniMapGetPos": 4,
   "MiniMapGetTaille": 4,
@@ -167,7 +169,7 @@
   "CalculFatigue": 40,
   "Chemin_ModifieZone": 32,
   "GameNextFrame": 4,
-  "InitGameZone": 19,
+  "InitGameZone": 28,
   "MouseSetZone": 24,
   "MouseTestZone": 3,
   "Random": 32,
@@ -176,7 +178,7 @@
   "SetCollision": 24,
   "SetEnginCollision": 48
  },
- "comparisons": 2034,
+ "comparisons": 2048,
  "dependencies": [],
  "mismatches": [],
  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
@@ -194,11 +196,11 @@
  },
  "perturbation_limit_per_phase": 4,
  "scenario": "v1",
- "seconds": 52.958,
+ "seconds": 52.682,
  "source_sha256": {
-  "ferramentas/chamadas_quadro_core.py": "35532d1159c3e763f45724c28761a9f5b4a36d2db85fcd776f1f90ff8e93b143",
+  "ferramentas/chamadas_quadro_core.py": "f8a9059e3c97c024f1a947201398a725948a1efd0032e33925c8d571e84ca8df",
   "ferramentas/memoria_quadro_core.py": "346e60dbf08f64c0a8dd21b3f3442fa7b8241e90c02f3c0876500b742ffe7020",
-  "ferramentas/validar_chamadas_quadro_core.py": "2534d9d8344b8eae424310c18592de0e93a9e43287cda5a9085e96419211dc76"
+  "ferramentas/validar_chamadas_quadro_core.py": "66eb03721a72017d763e52714c6856fea1ddb68f665fcdb44f4fa63546d9b216"
  },
  "unit_pool_base": "0x4140d000"
 }

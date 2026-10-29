@@ -104,5 +104,79 @@ class MundoComTilesVivos(unittest.TestCase):
                                              m.marcadores_obstaculos_tiles, 64, 64), esperado)
 
 
+class GradesVivasMundo(unittest.TestCase):
+    def mundo_vivo(self, m):
+        buffers = dict(tiles=vivo(m.tiles), regioes=vivo(m.regioes), atributos=bytearray(m.atributos),
+                       objetos=bytearray(m.objetos), donos_objetos=bytearray(m.donos_objetos))
+        m.vincular_grades(**buffers)
+        return buffers
+
+    def test_identity_for_every_grid_and_refusal_before_binding(self):
+        from avanco_unidades import MundoFisico
+        m = MundoFisico()
+        buffers = self.mundo_vivo(m)
+        self.assertIs(m.tiles.buffer, buffers['tiles'])
+        self.assertIs(m.regioes.buffer, buffers['regioes'])
+        for nome in ('atributos', 'objetos', 'donos_objetos'):
+            self.assertIs(getattr(m, nome), buffers[nome])
+        self.assertEqual(m.grades_vivas, frozenset(buffers))
+        outro = MundoFisico()
+        antes = (outro.tiles, outro.atributos)
+        with self.assertRaises(ValueError):
+            outro.vincular_grades(tiles=bytearray(131072), atributos=bytes(65536))
+        self.assertIs(outro.tiles, antes[0])
+        self.assertIs(outro.atributos, antes[1])
+
+    def test_structure_placement_with_every_grid_live(self):
+        from test_terreno_estruturas import mundo_estrutura
+        lista, viva = mundo_estrutura(0, 7, 0x505), mundo_estrutura(0, 7, 0x505)
+        buffers = self.mundo_vivo(viva)
+        self.assertEqual(lista.aplicar_terreno_estrutura(7, 0x505, 600), viva.aplicar_terreno_estrutura(7, 0x505, 600))
+        self.assertEqual(bytes(buffers['tiles']), struct.pack('<65536H', *lista.tiles))
+        self.assertEqual(bytes(buffers['regioes']), struct.pack('<65536H', *lista.regioes))
+        self.assertEqual((bytes(buffers['atributos']), bytes(buffers['objetos'])),
+                         (bytes(lista.atributos), bytes(lista.objetos)))
+
+    def test_original_classification_captures_with_every_grid_live(self):
+        from test_classificacao_remapeamento import executar_classificacao, resumo_classificacao_python
+        from cenarios_classificacao_remapeamento import preparar_classificacao
+        d = json.loads((RAIZ / 'relatorios/capturas-classificacao-remapeamento-original.json').read_text())
+        for c in d['cases']:
+            with self.subTest(c['name']):
+                m, nula, desconhecido, _ = preparar_classificacao(c['name'])
+                self.mundo_vivo(m)
+                recurso, resultado = executar_classificacao(m, nula, desconhecido)
+                self.assertEqual(resumo_classificacao_python(m, recurso, resultado), c['output'])
+
+    def test_region_rebuild_keeps_live_identity(self):
+        from navegacao_unidades import MundoNavegacao
+        lista, viva = MundoNavegacao(32, 24), MundoNavegacao(32, 24)
+        for m in (lista, viva):
+            m.tiles[:] = [i % 704 for i in range(65536)]
+            m.objetos[:] = bytes(i % 13 for i in range(65536))
+            m.atributos[:] = bytes(i & 3 for i in range(65536))
+        buffers = self.mundo_vivo(viva)
+        self.assertEqual(lista.refazer_regioes(), viva.refazer_regioes())
+        self.assertIs(viva.regioes.buffer, buffers['regioes'])
+        self.assertIs(viva.atributos, buffers['atributos'])
+        self.assertEqual((viva.regioes, bytes(viva.atributos)), (lista.regioes, bytes(lista.atributos)))
+
+    def test_economy_field_growth_reads_and_writes_the_core_grids_by_identity(self):
+        """ScanNouvellePatate/NouvellePatate (Economy's extracao) over Core's live grids."""
+        from integracao.providers import load_economy_resources
+        extracao = load_economy_resources()
+        from avanco_unidades import MundoFisico
+        m = MundoFisico()
+        buffers = self.mundo_vivo(m)
+        m.tiles[0x1235] = 0x9d                     # a growable tile right of 0x1234
+        m.atributos[0x1233] = 1                    # left neighbour blocked by attribute bit 0
+        recursos = extracao.RecursosTerreno()
+        recursos.mosaicos, recursos.atributos = m.tiles.buffer, m.atributos
+        recursos.terreno.tipos, recursos.terreno.quantidades = m.objetos, m.donos_objetos
+        recursos.propagar_planta(0x1234)
+        self.assertIn(buffers['objetos'][0x1235], (0x1d, 0x29))      # the plant landed in Core's live grid
+        self.assertEqual(buffers['objetos'][0x1233], 0)
+
+
 if __name__ == '__main__':
     unittest.main()

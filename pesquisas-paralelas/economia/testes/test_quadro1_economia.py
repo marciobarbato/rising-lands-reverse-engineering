@@ -38,7 +38,11 @@ CAPTURA_CONSULTAS = PASTA / 'evidencias/captura-consultas-economia-exibicao-v2.j
 # caller's buffer was not recorded; it is kept and must equal v2 without those fields.
 CAPTURA_CONSULTAS_V1 = PASTA / 'evidencias/captura-consultas-economia-exibicao.json'
 CAPTURAS = {'v1': CAPTURA, 'exibicao': CAPTURA_EXIBICAO, 'consultas': CAPTURA_CONSULTAS}
-CENARIO_DA_CAPTURA = {'v1': 'v1', 'exibicao': 'exibicao', 'consultas': 'exibicao'}
+# Missions' artifact set each capture was recorded on: the frozen display captures predate Missions'
+# Stage18 backend switch, so they replay over the Stage17 artifacts (now ``exibicao_interino``); fresh
+# reruns use the current ``exibicao`` (v2) reference and must still equal them. ``campos`` is v2.
+CENARIO_DA_CAPTURA = {'v1': 'v1', 'exibicao': 'exibicao_interino', 'consultas': 'exibicao_interino',
+                      'campos': 'exibicao'}
 _BASES = {}
 SO_VISTA = {'RechercheCalcul', 'PlayerInitAllianceCompteur', 'CalculMatiere', 'CalculCompteurMarche',
             'CalculCompteurProposition', 'PlayerAttaqueCalculSympa', 'MAJSympathie', 'ResetTableauHangar',
@@ -51,7 +55,7 @@ def evidencia(cenario='v1'):
 
 def base_cenario(cenario):
     """Post-MissionLoad blocks of the scenario (None = the accepted M1 state of test_quadro_economia)."""
-    cenario = CENARIO_DA_CAPTURA[cenario]
+    cenario = CENARIO_DA_CAPTURA.get(cenario, cenario)
     if cenario == 'v1':
         return None
     if cenario not in _BASES:
@@ -411,6 +415,11 @@ class DiferencialQuadro1Economia(unittest.TestCase):
                            env=dict(os.environ, PYTHONDONTWRITEBYTECODE='1'))
             fresca = json.loads(saida.read_text())
         frozen = evidencia('consultas' if conjunto == 'consultas' else cenario)
+        if cenario == 'exibicao':
+            # The fresh run uses Missions' current reference (Graphics' backend, -v2 artifacts); the frozen
+            # captures were made on Stage17. Equal calls show the moved backend pointers reach no economy call.
+            self.assertTrue(fresca['frame_capture']['path'].endswith('captura-quadro1-monde01-exibicao-v2.json'))
+            self.assertTrue(frozen['frame_capture']['path'].endswith('captura-quadro1-monde01-exibicao.json'))
         self.assertTrue(fresca['path_reproduction']['passed'])
         self.assertEqual(fresca['calls'], frozen['calls'])
         type(self).execucoes += len(fresca['calls'])

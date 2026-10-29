@@ -9,7 +9,7 @@ import unittest
 RAIZ = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(RAIZ / 'ferramentas'))
 EXE = RAIZ.parent / 'source/cd/INSTALHD/RISING.EXE'
-FSEEK, FGETS, FOPEN = 0x48cda2, 0x48ce96, 0x48c71f
+FSEEK, FGETS, FTELL, FOPEN = 0x48cda2, 0x48ce96, 0x48cf11, 0x48c71f
 
 
 def _bytes(raw, inicio, fim):
@@ -37,8 +37,8 @@ class FronteirasIOCRT(unittest.TestCase):
     def test_table_contains_exactly_the_reviewed_entries(self):
         from emulador import FRONTEIRAS_IO
         self.assertEqual(FRONTEIRAS_IO, frozenset((0x458420, 0x45844c, 0x458461, 0x45848b, 0x48c71f, 0x48c97b,
-                                                   0x48c80b, FSEEK, FGETS)))
-        self.assertEqual((self.simbolos[FSEEK], self.simbolos[FGETS]), ('fseek', 'fgets'))
+                                                   0x48c80b, FSEEK, FGETS, FTELL)))
+        self.assertEqual((self.simbolos[FSEEK], self.simbolos[FGETS], self.simbolos[FTELL]), ('fseek', 'fgets', 'ftell'))
 
     def test_intact_bodies_and_register_abi(self):
         # Pinned intact bodies: fseek 0x48cda2..0x48ce96, fgets 0x48ce96..0x48cf11.
@@ -50,6 +50,10 @@ class FronteirasIOCRT(unittest.TestCase):
         self.assertEqual(_bytes(self.raw, FGETS, FGETS + 14), bytes.fromhex('5156575583ec0489c689d18b4310'))
         self.assertEqual(_bytes(self.raw, 0x48cf07, 0x48cf11), bytes.fromhex('89f083c4045d5f5e59c3'))
         self.assertEqual(_bytes(self.raw, 0x48ce92, 0x48ce96), bytes.fromhex('5f5e59c3'))
+        # ftell 0x48cf11..0x48cf55: push ebx/ecx/edx/esi; EDX = FILE* (EAX); pops all four; EAX = position.
+        self.assertEqual(hashlib.sha256(_bytes(self.raw, FTELL, 0x48cf55)).hexdigest(), 'b3f1cca1f55392be148d246c0149f0bcd03b120f533eb951615f5c330fca1ad4')
+        self.assertEqual(_bytes(self.raw, FTELL, FTELL + 6), bytes.fromhex('5351525689c2'))
+        self.assertEqual(_bytes(self.raw, 0x48cf50, 0x48cf55), bytes.fromhex('5e5a595bc3'))
 
     def test_every_call_site_takes_its_file_from_the_inventoried_fopen(self):
         nome = lambda a: next(f'{self.simbolos[b]}+0x{a - b:x}' for b in sorted(self.simbolos, reverse=True) if b <= a)
@@ -57,6 +61,7 @@ class FronteirasIOCRT(unittest.TestCase):
                          ['FileReadLine+0xd', 'iaProbLoadTextRules+0x74'])
         self.assertEqual(sorted(nome(a) for a in chamadores(self.raw, FSEEK)),
                          ['FileSeek+0x10', 'FileSize+0x29', 'FileSize+0xf', 'ReadLZSImage+0x4c', '__open_flags+0x183'])
+        self.assertEqual(sorted(nome(a) for a in chamadores(self.raw, FTELL)), ['FileSize+0x19', '__doclose+0x3a'])
         self.assertIn('iaProbLoadTextRules+0x11', [nome(a) for a in chamadores(self.raw, FOPEN)])
         self.assertIn('LoadLZSAt+0x1d', [nome(a) for a in chamadores(self.raw, FOPEN)])
         # FileReadLine/FileSeek/FileSize load the FILE* from FileOpen's handle global 0x4e1d1c.
@@ -68,7 +73,8 @@ class FronteirasIOCRT(unittest.TestCase):
         b = BancadaX86()
         b.declarar_vinculo(FSEEK, 'CRT.fseek', ('EAX', 'EDX', 'EBX'), lambda c: 0, natureza='io')
         b.declarar_vinculo(FGETS, 'CRT.fgets', ('EAX', 'EDX', 'EBX'), lambda c: c.argumentos[0], natureza='io')
-        for endereco, natureza in ((FGETS + 1, 'io'), (0x48cf11, 'io'), (FSEEK, 'backend')):
+        b.declarar_vinculo(FTELL, 'CRT.ftell', ('EAX',), lambda c: 0, natureza='io')
+        for endereco, natureza in ((FGETS + 1, 'io'), (0x48efab, 'io'), (FTELL, 'backend')):
             with self.assertRaises(ValueError):
                 BancadaX86().declarar_vinculo(endereco, 'X', ('EAX',), lambda c: 0, natureza=natureza)
 
