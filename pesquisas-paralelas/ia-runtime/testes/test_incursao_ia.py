@@ -210,5 +210,43 @@ class RaidFrameWithCoreProviders(unittest.TestCase):
         self.fora_do_rastro = sorted(set(memoria.fora_do_rastro))
 
 
+class AmbushRepost(unittest.TestCase):
+    """AvanceMonstre at counters 11100 and 11101 (captura-avance-monstre-emboscada-ia.json, routine mode).
+
+    At 11101 the re-queued group is ordered to the ambush cell 0x320e (StockeAction 0x2e). In this capture this
+    front's own iagUnitGetFirstUnitInGroup and StockeAction appear as outside calls; the translation runs them
+    itself, so they are checked through the bytes of the whole call. iaProbPost (nested in StockeAction) is
+    Core's ``incursao_core.postar_tarefa``; a byte it reads beyond the footprint reads the filler 0xa5.
+    """
+
+    def test_both_calls(self):
+        import incursao_core as ic
+        cap = json.loads((OWNED / 'evidencias/captura-avance-monstre-emboscada-ia.json').read_bytes())
+        self.assertEqual([c['counter'] for c in cap['rule_calls']], [11100, 11101])
+        proprias = {'iagUnitGetFirstUnitInGroup', 'StockeAction'}
+        for chamada in cap['rule_calls']:
+            with self.subTest(contador=chamada['counter']):
+                memoria = MemoriaEsparsa({H(a): v for a, v in chamada['read_before_write']})
+                fora = [c for c in chamada['outside_calls'] if c['routine'] not in proprias]
+                feitas = []
+                p = replay(memoria, fora, feitas)
+
+                def postar(sitio, jogador, tipo, ebx, ecx, pilha):
+                    memoria.preenchimento = 0xa5
+                    try:
+                        return ic.postar_tarefa(memoria, jogador, tipo, ebx, ecx, tuple(pilha))['EAX']
+                    finally:
+                        memoria.preenchimento = None
+                p['iaProbPost'] = postar
+                avancar_monstros(memoria, p)
+                self.assertEqual(feitas, [c['routine'] for c in fora])
+                escritos = {H(a): depois for a, _antes, depois in chamada['written_bytes']}
+                for a in memoria.proprias:
+                    self.assertIn(a, escritos, hex(a))
+                    self.assertEqual(memoria.atuais[a], escritos[a], hex(a))
+                for a, _antes, depois in chamada['changed_bytes']:
+                    self.assertEqual(memoria.atuais.get(H(a)), depois, a)
+
+
 if __name__ == '__main__':
     unittest.main()

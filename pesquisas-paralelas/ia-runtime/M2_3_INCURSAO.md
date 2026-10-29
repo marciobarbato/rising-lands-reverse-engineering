@@ -169,4 +169,6 @@ These two captures ran on the MacBook under the new lease (3 work-hour slots; na
 - **Raid unit:** `test_proxima_etapa_incursao_ia` finds all 21 calls equal: 9000–9011, moving 10523–10527, arrival at 10528, and state 7 at 10529–10531 through Economy's `estado_parado_unidade`, whose own Random draw matches the native one.
 - **Mutation check:** three mutations of the new rules fail the test.
 
-**Not covered yet:** the AvanceMonstre ambush re-post at 11101 (`StockeAction(0x2e)`). It is translated but not captured. A third capture of AvanceMonstre at 11101 can follow.
+**Ambush re-post:** `evidencias/captura-avance-monstre-emboscada-ia.json` (AvanceMonstre at 11100 and 11101, 208 s). `test_incursao_ia.AmbushRepost` finds both equal.
+- At 11101 the translation takes the ambush branch: the Random % 100 threshold, the cyclic ambush cursor walk, `Chemin_Accessible`, then `StockeAction(0x2e, 0x12, 0x320e)` with Core's `postar_tarefa`.
+- It writes only bytes the original writes, and reproduces every changed byte.
