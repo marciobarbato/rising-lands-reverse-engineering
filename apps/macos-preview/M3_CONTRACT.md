@@ -133,10 +133,9 @@ separately by the per-phase report, not by relaxing the window-open smoke.
 
 `compilar-jogável --development-ref HEAD` accepts explicit `--inputs-root` and
 `--data-root`, with RISING_PYTHON_RUNTIME for relocatable CPython 3.12 ARM64.
-All inputs remain read-only and outputs stay inside this independent clone.
+Inputs remain read-only and outputs stay under the explicitly declared data root.
 Bundle name and identity are unchanged. See [manual](../../docs/MACOS_PLAYABLE.md)
-and [handoff](HANDOFF.md) for actual commands and results. Live runtime delivery,
-orders, remaining Graphics passes and M2.3 stay outside this consumer's scope.
+and [handoff](HANDOFF.md) for actual commands and results. Orders and branches beyond the published Rust/Graphics domains remain dependency stops; live no-input execution is specified below.
 
 
 ## Live Rust ABI 1.1 session
@@ -144,7 +143,9 @@ orders, remaining Graphics passes and M2.3 stay outside this consumer's scope.
 `MacOSLiveSession(root, library, executable, renderer=None)` owns one serial
 world. `reset()` frees/recreates it at 20 configurable-policy ticks/s, epoch 0,
 and loads accepted **display-v2 S0** plus only the four original immutable jump
-tables declared by Stage 2. The intact PE is hash-checked to the identity above;
+tables declared by Stage 2: `0x45ed20`/160 bytes, `0x454344`/104,
+`0x4543c8`/100 and `0x426880`/84. Captured overlaps must agree byte-for-byte;
+only missing subranges are added. The intact PE is hash-checked to the identity above;
 no later state becomes an engine input. The ABI is exactly `0x00010001`.
 The app builder compiles integrated `motor/` release sources into its ignored
 build target, copies/signs the dylib beside the worker and copies the hash-checked

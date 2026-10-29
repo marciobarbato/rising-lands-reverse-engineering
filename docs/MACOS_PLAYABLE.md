@@ -124,8 +124,9 @@ native algorithm and does not aggregate domain totals into a game-fidelity claim
 
 ## Independent M3 preparation boundary
 
-The [accepted-state contract](../apps/macos-preview/M3_CONTRACT.md) defines an
-app-owned read-only M1 inspector and an explicit pending-M2 update boundary.
+The original preparation added an app-owned read-only M1 inspector with a
+pending-M2 update boundary. That evidence interface remains immutable; the
+[current contract](../apps/macos-preview/M3_CONTRACT.md) separately defines M2.2 playback and live Rust execution.
 It loads the exact acceptance-pinned evidence with the existing Python block
 decoder. It does not switch the native app to MONDE01 or establish M3 acceptance.
 The [independent audit](../apps/macos-preview/M3_AUDIT.md) records isolation and
@@ -188,8 +189,7 @@ worker/asset success or generating CPU load. It is ignored outside smoke mode
 and bounded to 0..80000 ms. Native state-machine tests exercise missing ready,
 late window, out-of-order document/ready events and an unchanged check deadline.
 Graphics stays pinned to its explicitly accepted 1.5 contract; other versions
-still fail. After this robustness delivery, workstream A awaits M2.3 and the
-Claude M3 plan; no new game/UI features are planned here.
+still fail. That robustness delivery preserved the inspection boundary. Current live no-input work follows the published M3 plan and is described below.
 
 An occluded WebView can report a hidden document while its native window is
 visible. Native smoke repaint barriers therefore wait for a completed WebView
