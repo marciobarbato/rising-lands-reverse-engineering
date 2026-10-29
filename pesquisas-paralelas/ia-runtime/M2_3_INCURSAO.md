@@ -179,3 +179,11 @@ These two captures ran on the MacBook under the new lease (3 work-hour slots; na
 - **Wiring:** with Core's exported providers in place (GetFreeCell, EnginEnArret, SetDeplaceEngin, DeplaceEngin, EnginEstVivant), the 128-frame probe and every owned test are unchanged.
 - **First stop:** frame 9000, the first EnginEstVivant call from V_DeplaceGroupe. Core's `provedores_core` builds `mundo_vivo` over memory, and its `vincular_grades` needs byte views of the tile and region grids (`GradeU16`). The chain's map binds those grids as the Core world's u16 lists (Missions' `ligacao_provedores_m1.py:177`), so they have no byte view.
 - **Owner:** Core (with Missions for the map binding). Sent to Core with two options: reuse the chain's own world, or bind the grids as bytes with `vincular_grades`, which means rerunning the M1/M2 proofs.
+
+**After Core's `6e12550`** (`feat/re-core`, not yet on main): the probe ran in a throwaway worktree, my head plus that branch, not committed. Outputs are in `.local/m2-3-sonda-*-core-6e12550.json`.
+- **Run length:** 1,880 Python frames, from counter 9000 to about 10879.
+- **Comparison:** raid unit 16 against Combat's native course (`percurso-incursao-m2-3-original.json`), on head, cell `+8`, target `+0x7e`, `+0xb7` and `+0xb8`.
+  - Counters 9000–9716: equal at every counter, including Core's first path search at 9177.
+  - From 9717: Python is one 16-frame step ahead (32 differing counters up to 10878).
+- **Where it starts:** entering 9700, the unit's bytes that SetDeplaceEngin writes equal the native ones. In that frame, Core's DeplaceEngin takes the first step and turn of the re-ordered unit, which was idle in state 7, one step earlier than the original. Sent to Core with the data.
+- **Next stop:** at about 10880, Core's CalculFatigue fatigue-threshold branch `0x452d61`, which is not translated.
