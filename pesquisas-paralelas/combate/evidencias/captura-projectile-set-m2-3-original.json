@@ -1,0 +1,499 @@
+{
+ "calls": [
+  {
+   "caller": "ProjectileInit+0x76",
+   "caller_return": "0x46e4c2",
+   "cases": [
+    {
+     "al": 31,
+     "case": "captured_inputs",
+     "changed_bytes": [
+      [
+       "0x418e2000",
+       167,
+       32
+      ],
+      [
+       "0x418e2001",
+       0,
+       1
+      ],
+      [
+       "0x418e2002",
+       0,
+       1
+      ],
+      [
+       "0x418e2003",
+       167,
+       0
+      ],
+      [
+       "0x418e200c",
+       167,
+       192
+      ],
+      [
+       "0x418e200d",
+       167,
+       7
+      ],
+      [
+       "0x418e200e",
+       167,
+       192
+      ],
+      [
+       "0x418e200f",
+       167,
+       7
+      ],
+      [
+       "0x418e2010",
+       167,
+       0
+      ],
+      [
+       "0x418e2011",
+       167,
+       0
+      ],
+      [
+       "0x418e2012",
+       167,
+       0
+      ],
+      [
+       "0x418e2013",
+       167,
+       0
+      ],
+      [
+       "0x418e2014",
+       167,
+       62
+      ],
+      [
+       "0x418e2015",
+       167,
+       62
+      ],
+      [
+       "0x418e2016",
+       167,
+       62
+      ],
+      [
+       "0x418e2017",
+       167,
+       62
+      ],
+      [
+       "0x418e2018",
+       167,
+       0
+      ],
+      [
+       "0x418e2019",
+       167,
+       0
+      ],
+      [
+       "0x418e201a",
+       167,
+       12
+      ],
+      [
+       "0x418e201b",
+       167,
+       0
+      ],
+      [
+       "0x418e201c",
+       167,
+       0
+      ],
+      [
+       "0x418e201d",
+       167,
+       0
+      ],
+      [
+       "0x418e201f",
+       167,
+       0
+      ],
+      [
+       "0x418e2020",
+       167,
+       0
+      ],
+      [
+       "0x418e2021",
+       167,
+       0
+      ],
+      [
+       "0x418e2022",
+       167,
+       0
+      ],
+      [
+       "0x418e2023",
+       167,
+       0
+      ],
+      [
+       "0x418e2024",
+       167,
+       0
+      ],
+      [
+       "0x418e2025",
+       167,
+       0
+      ],
+      [
+       "0x418e2026",
+       167,
+       0
+      ],
+      [
+       "0x418e2027",
+       167,
+       0
+      ],
+      [
+       "0x418e2028",
+       167,
+       0
+      ],
+      [
+       "0x418e2029",
+       167,
+       0
+      ]
+     ],
+     "counter": 9000,
+     "entry_registers": {
+      "EAX": "0x0",
+      "EBP": "0x12",
+      "EBX": "0x3e3e",
+      "ECX": "0x3e3e",
+      "EDI": "0x3e3e",
+      "EDX": "0x20",
+      "EIP": "0x46e208",
+      "ESI": "0x3e3e",
+      "ESP": "0x2007dfc"
+     },
+     "exit_registers": {
+      "EAX": "0x1f",
+      "EBP": "0x12",
+      "EBX": "0x418e2000",
+      "ECX": "0x3e3e",
+      "EDI": "0x3e3e",
+      "EDX": "0x1f",
+      "EIP": "0x46e4c2",
+      "ESI": "0x3e3e",
+      "ESP": "0x2007e18"
+     },
+     "perturbation": {
+      "registers": {},
+      "writes": []
+     },
+     "pool_before": {
+      "bytes": 5600,
+      "sha256": "68ae4d5d3f731a9072ab73b89b03129019fa4477e93f0e0e1da8177dd5ac36b0",
+      "zlib_base64": "eNrtyyEBAAAMAjD6F6HmO2BuNr8mnXie53me53me53me53me53mv7wCWMcNs"
+     },
+     "reached_return": true,
+     "read_before_write": [
+      [
+       "0x5080f0",
+       0,
+       "ProjectileSet+0x18"
+      ],
+      [
+       "0x5080f1",
+       32,
+       "ProjectileSet+0x18"
+      ],
+      [
+       "0x5080f2",
+       142,
+       "ProjectileSet+0x18"
+      ],
+      [
+       "0x5080f3",
+       65,
+       "ProjectileSet+0x18"
+      ]
+     ],
+     "stack_words": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+     ]
+    },
+    {
+     "al": 30,
+     "case": "type-0x1f",
+     "changed_bytes": [
+      [
+       "0x418e2000",
+       167,
+       31
+      ],
+      [
+       "0x418e2001",
+       0,
+       1
+      ],
+      [
+       "0x418e2002",
+       0,
+       1
+      ],
+      [
+       "0x418e2003",
+       167,
+       0
+      ],
+      [
+       "0x418e200c",
+       167,
+       192
+      ],
+      [
+       "0x418e200d",
+       167,
+       7
+      ],
+      [
+       "0x418e200e",
+       167,
+       192
+      ],
+      [
+       "0x418e200f",
+       167,
+       7
+      ],
+      [
+       "0x418e2010",
+       167,
+       0
+      ],
+      [
+       "0x418e2011",
+       167,
+       0
+      ],
+      [
+       "0x418e2012",
+       167,
+       0
+      ],
+      [
+       "0x418e2013",
+       167,
+       0
+      ],
+      [
+       "0x418e2014",
+       167,
+       62
+      ],
+      [
+       "0x418e2015",
+       167,
+       62
+      ],
+      [
+       "0x418e2016",
+       167,
+       62
+      ],
+      [
+       "0x418e2017",
+       167,
+       62
+      ],
+      [
+       "0x418e2018",
+       167,
+       0
+      ],
+      [
+       "0x418e2019",
+       167,
+       0
+      ],
+      [
+       "0x418e201a",
+       167,
+       12
+      ],
+      [
+       "0x418e201b",
+       167,
+       0
+      ],
+      [
+       "0x418e201c",
+       167,
+       0
+      ],
+      [
+       "0x418e201d",
+       167,
+       0
+      ],
+      [
+       "0x418e201f",
+       167,
+       0
+      ],
+      [
+       "0x418e2020",
+       167,
+       0
+      ],
+      [
+       "0x418e2021",
+       167,
+       0
+      ],
+      [
+       "0x418e2022",
+       167,
+       0
+      ],
+      [
+       "0x418e2023",
+       167,
+       0
+      ],
+      [
+       "0x418e2024",
+       167,
+       0
+      ],
+      [
+       "0x418e2025",
+       167,
+       0
+      ],
+      [
+       "0x418e2026",
+       167,
+       0
+      ],
+      [
+       "0x418e2027",
+       167,
+       0
+      ],
+      [
+       "0x418e2028",
+       167,
+       0
+      ],
+      [
+       "0x418e2029",
+       167,
+       0
+      ]
+     ],
+     "counter": 9000,
+     "entry_registers": {
+      "EAX": "0x0",
+      "EBP": "0x12",
+      "EBX": "0x3e3e",
+      "ECX": "0x3e3e",
+      "EDI": "0x3e3e",
+      "EDX": "0x20",
+      "EIP": "0x46e208",
+      "ESI": "0x3e3e",
+      "ESP": "0x2007dfc"
+     },
+     "exit_registers": {
+      "EAX": "0x1e",
+      "EBP": "0x12",
+      "EBX": "0x418e2000",
+      "ECX": "0x3e3e",
+      "EDI": "0x3e3e",
+      "EDX": "0x1e",
+      "EIP": "0x46e4c2",
+      "ESI": "0x3e3e",
+      "ESP": "0x2007e18"
+     },
+     "perturbation": {
+      "registers": {
+       "EDX": "0x1f"
+      },
+      "writes": []
+     },
+     "pool_before": {
+      "bytes": 5600,
+      "sha256": "68ae4d5d3f731a9072ab73b89b03129019fa4477e93f0e0e1da8177dd5ac36b0",
+      "zlib_base64": "eNrtyyEBAAAMAjD6F6HmO2BuNr8mnXie53me53me53me53me53mv7wCWMcNs"
+     },
+     "reached_return": true,
+     "read_before_write": [
+      [
+       "0x5080f0",
+       0,
+       "ProjectileSet+0x18"
+      ],
+      [
+       "0x5080f1",
+       32,
+       "ProjectileSet+0x18"
+      ],
+      [
+       "0x5080f2",
+       142,
+       "ProjectileSet+0x18"
+      ],
+      [
+       "0x5080f3",
+       65,
+       "ProjectileSet+0x18"
+      ]
+     ],
+     "stack_words": [
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0",
+      "0x0"
+     ]
+    }
+   ],
+   "entry": "0x46e208",
+   "phase": "frame1",
+   "routine": "ProjectileSet"
+  }
+ ],
+ "code_sha256_after": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+ "frame_capture": {
+  "path": "pesquisas-paralelas/missoes/evidencias/captura-quadro1-monde01-original.json",
+  "sha256": "c06f78ea2f611d668b4a2fc7bde712b07c21ed8eb0a929668d4d70e56d47fed8"
+ },
+ "label": "forced input: v1 path, u32 0x508f7c = 9000 at frame 1's CalculGame entry; ProjectileSet isolated",
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "schema": "rising-lands/monde01-raid-projectile-set/1",
+ "seconds": 36.615,
+ "source_sha256": {
+  "capturar_projectile_set_m2_3.py": "ba39126ea56cc983af326d66ac9f29af8686f03377489c97e3c517102888635e",
+  "oraculo_quadro_missao.py": "3d60ae363ebf6b9ba3a966d2da5683da61626dfa1129f484fd1d56328fd4ae88",
+  "sondar_vida_incursao.py": "ff2d793d0536016f0e750e9a2afe43da39581126ea7dffc7bfe1245a9aee1a8b"
+ },
+ "stack_format": "six u32 words after the return address: mode, attacker, direction, dx, dy, flag",
+ "translation_executed": false
+}
