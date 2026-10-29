@@ -1,0 +1,29 @@
+test_symlink_alias_and_real_path_resolve_inside_same_app (test_preview_paths.PackagePathTests) ... ok
+test_actual_providers_and_shared_mission_buffers_in_both_orders (test_provider_imports.ProviderImports) ... ok
+test_existing_legacy_collision_is_rejected_without_rebinding (test_provider_imports.ProviderImports) ... ok
+test_foreign_snapshot_bindings_fail_before_any_import (test_provider_imports.ProviderImports) ... ok
+test_every_front_has_distinct_branch_and_worktree (test_workstream.WorkflowTests) ... ok
+test_ownership_excludes_foreign_and_shared_paths (test_workstream.WorkflowTests) ... ok
+test_start_tracks_existing_remote_branch (test_workstream.WorkflowTests) ... Preparing worktree (new branch 'feat/re-missions')
+branch 'feat/re-missions' set up to track 'origin/feat/re-missions'.
+HEAD is now at 6754a03 Remote feature
+ok
+test_two_stale_workers_merge_without_modifying_canonical_checkout (test_workstream.WorkflowTests) ... Preparing worktree (new branch 'feat/re-core')
+branch 'feat/re-core' set up to track 'origin/main'.
+HEAD is now at 6da9462 Initial fixture
+Preparing worktree (new branch 'feat/re-economy')
+branch 'feat/re-economy' set up to track 'origin/main'.
+HEAD is now at 6da9462 Initial fixture
+Worktree: /private/var/folders/yy/ylsnbtxn23qbz3f9wffb_2n80000gn/T/rising-workflow-gmdnp5cq/worktrees/re-missions 
+Branch: feat/re-missions
+Worktree: /private/var/folders/yy/ylsnbtxn23qbz3f9wffb_2n80000gn/T/rising-workflow-z5b5vl_z/worktrees/re-core 
+Branch: feat/re-core
+Worktree: /private/var/folders/yy/ylsnbtxn23qbz3f9wffb_2n80000gn/T/rising-workflow-z5b5vl_z/worktrees/re-economy 
+Branch: feat/re-economy
+Waiting for the repository integration lock...
+ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 2.107s
+
+OK
