@@ -1,0 +1,155 @@
+{
+  "schema": "rising-lands/rust-engine-stage3-delivery/1",
+  "branch": "feat/codex-rust-engine",
+  "native_code_revision": "7ceeff909b52b7d4f59723f35dfe43a9deda41ff",
+  "diagnostic_label_revision": "b9c7cfd64a6fa5fb317f48d90f6ecb5840d1428d",
+  "diagnostic_change": "Only expected-hash labels and perturbed-stop schema/scope changed after native proofs. Native Rust/header sources and release library are unchanged; original reports retain their clean source provenance.",
+  "abi": {
+    "version": "1.3",
+    "hex": "0x00010003",
+    "additive": true,
+    "old_explicit_versions": [
+      "1.0",
+      "1.1",
+      "1.2"
+    ],
+    "calls": [
+      "rl_render_criar",
+      "rl_render_geracao",
+      "rl_render_quadro",
+      "rl_render_reset",
+      "rl_render_liberar",
+      "rl_render_observacoes",
+      "rl_render_cache"
+    ],
+    "result_bytes": 304,
+    "observation_bytes": 108,
+    "frame_input_and_event_bytes": 72,
+    "pixel_bytes": 480000,
+    "palette_bytes": 768,
+    "stride": 800,
+    "dimensions": [
+      800,
+      600
+    ]
+  },
+  "library_sha256": "f85dddbb7cfc71357c36c7f4fb66890841905cdcf9dd6123b93f8ee7aa8e0068",
+  "original_executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "graphics_contract": [
+    1,
+    5
+  ],
+  "m22": {
+    "frames": 128,
+    "rust_python_pixel_equal": 128,
+    "original_full_surface_hash_equal": 128,
+    "cache_equal": 128,
+    "effects_equal": 128,
+    "palette_equal": 128,
+    "world_read_only": 128,
+    "pixel_indices_per_comparison": 61440000,
+    "first_stop": null,
+    "first_difference": null
+  },
+  "input_native_cases": {
+    "cases": 114,
+    "complete_surfaces_equal": 113,
+    "compared_pixel_indices": 54240000,
+    "drawing_sequences_equal": 114,
+    "dgroup_equal": 113,
+    "expected_stop": {
+      "case": "sanctuary_health600_malus100",
+      "callee": "AffBatiments",
+      "address": "0x4085cb"
+    },
+    "mismatches": 0,
+    "python_pixels_effects_cache_equal": 114,
+    "dd_pointer_exclusions": [
+      "0x4e17a4",
+      "0x508f70"
+    ]
+  },
+  "perturbed_stops": {
+    "cases": 26,
+    "addresses_equal": 26,
+    "python_prefix_cache_effects_equal": 26,
+    "original_executions": 0,
+    "mismatches": 0
+  },
+  "m23": {
+    "recorded_affgame_calls": 9200,
+    "full_surfaces_equal_to_original_hash": 9200,
+    "pixel_indices_hashed": 4416000000,
+    "first_stop": null,
+    "first_difference": null,
+    "serial_from_s0": true,
+    "later_original_state_reloads": 0,
+    "python_recomposition_frames": 0,
+    "engine_phase_count": 18401,
+    "timing": {
+      "end_to_end_fps": 64.52281484244116,
+      "engine_seconds": 102.4894037820002,
+      "render_fps": 229.45035109311172,
+      "render_seconds": 40.095820103001756,
+      "scope": "C ABI engine phases + world generation + render + caller buffer copies; timing excludes proof snapshots/Python/exports/presentation; initialization excluded"
+    }
+  },
+  "exclusive_release_swift_metal": {
+    "render_fps": 248.6432655775758,
+    "engine_render_metal_fps": 61.22497199595499,
+    "render_seconds": 0.5147937536239624,
+    "logic_seconds": 1.2992929220199585,
+    "metal_upload_conversion_seconds": 0.2765153646469116,
+    "pipeline_seconds": 2.090650200843811,
+    "frames_equal": 128,
+    "target_fps": 25,
+    "target_met": true,
+    "scope": "Swift C ABI engine+render+generation+reused output buffers+Metal upload and RGBA conversion; excludes proof hashing/readback, initialization and app display pacing",
+    "metal_device": "Apple M4 Pro"
+  },
+  "logic_regression": {
+    "complete_proof": true,
+    "phases_compared": 257,
+    "phases_equal": 257,
+    "phases_requested": 257,
+    "result": "equal"
+  },
+  "validation": {
+    "engine_gate": "passed",
+    "rust_tests": 27,
+    "python_discovery_tests": 57,
+    "isolated_renderer_contract_tests": 7,
+    "pilot_records": 75,
+    "native_renderer_case_skips": 0,
+    "fmt": true,
+    "strict_clippy": true,
+    "c_layout": true,
+    "swift_abi": "1.3",
+    "swift_metal_surfaces_equal": 128,
+    "common_gate": "passed",
+    "common_tests_run": 1881,
+    "common_optional_skips": 610,
+    "fresh_original_emulation": false,
+    "full_python_m23_recomposition": false
+  },
+  "runtime_effect_owner": "Engine phase 2; renderer is read-only and exports local effects without applying them.",
+  "gaps": [
+    "No macOS app source was edited; standalone Swift+Metal throughput excludes app UI/display pacing.",
+    "Graphics 1.6 construction, unsupported viewport/body/HUD branches and Cyclage remain outside 1.5.",
+    "Input-time rendering supports the captured 1.5 states; engine human-input progression and its pre-existing named display-marker stops are separate.",
+    "The 9200-frame run checks original surface hashes; full Python renderer recomposition is the 128-frame proof, not another 9200-frame run."
+  ],
+  "machine": "Apple M4 Pro MacBook; macOS 27.0.1; 24 GiB; 12 logical CPUs",
+  "leases": "All native/gate jobs used the shared heavy lease; release Swift/Metal timing used exclusive mode. All actual jobs completed below 20 minutes; no Mac mini run needed.",
+  "artifacts": {
+    "128-frame-proof.json": "2e08506dfccc7b5f0354108fbc2d3065d9b0e17cad27f7a88e35e33095af1a75",
+    "9200-frame-proof.json.xz": "18241c3d844089e70405a77e2bedd212fa6fe60190a28e5e7cb1bcdf2751b965",
+    "common-check.log.gz": "caf65eed928e698cffbfe40da3f4cb87ca4cd938cb1ef467f5aec5da01322c0b",
+    "engine-gate.log.gz": "1ee46af0230921d5126d111e447cc13482714624415d618a9da487c4dbd9c7de",
+    "logic-257.json": "1f6ecdf79155af5b07ca04855cce5cdd907e5f3d3e9220887d1a14d07407e0af",
+    "named-stops.json": "d493f77d63b2f1847937da56f855734ed119bc82540456e7492b2d781d967fbf",
+    "native-input-matrix.json": "65d3c3ff0387339ea2d6fa219c193d2c4d99d8cb07dee3ccbcb4635efa6d94f7",
+    "release-build.log.gz": "4ca087f7e2a92283f6a7f9d1c07bf2971ea9b5955abd05631f9a32fae3d9b731",
+    "swift-metal.json": "2a57c2a4434bfc509ae1103d10112445554c888a91b3c395a21d4f6249c576c4"
+  }
+}

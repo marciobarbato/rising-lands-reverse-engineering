@@ -52,4 +52,4 @@ events.withUnsafeMutableBufferPointer { records in
 precondition(events[0].kind == 2 && events[0].id == 103 && events[3].id == 7)
 precondition(rl_projetar_tudo(world, nil, 0, &required) == RL_BUFFER_TOO_SMALL)
 precondition(required == UInt32(frameBytes.count + 12))
-print("Swift C ABI1.2 passed: RNG, projection, frame phase, events, clock")
+print("Swift C ABI1.4 passed: RNG, projection, frame phase, events, clock")
