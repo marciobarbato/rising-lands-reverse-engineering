@@ -8,7 +8,7 @@ Stage 16 API, 2026-10-28, base main `b610bfad77ffadaa0ee5f6af02160d786ccfdc7b`. 
 
 `BancadaX86.declarar_vinculo(endereco, nome, argumentos, atender, *, desempilhar=0, natureza)` declares a known external boundary or I/O wrapper. `natureza` must be `importacao`, `io`, `relogio` or `backend`; an unknown engine body is never an appropriate binding. The caller supplies the exact boundary address and ABI from its source evidence. The return address is popped and exactly `desempilhar` additional stack bytes are removed. A register-ABI/cdecl wrapper normally uses zero cleanup.
 
-Inside the original PE, direct declarations are restricted to the inventoried I/O entries FileOpen/FileClose/FileRead/FileSeek and CRT fopen/fread/fclose/fseek/fgets (the explicit `FRONTEIRAS_IO` table), with kind `io`. Other original engine addresses are rejected regardless of a proposed kind label. Outside the image, owners may explicitly declare mapped external backend entries. Adding an original-image boundary requires its own byte-grounded owner review; the standalone registry transport is not evidence that an arbitrary engine replacement is valid.
+Inside the original PE, direct declarations are restricted to the inventoried I/O entries FileOpen/FileClose/FileRead/FileSeek and CRT fopen/fread/fclose/fseek/fgets/ftell (the explicit `FRONTEIRAS_IO` table), with kind `io`. Other original engine addresses are rejected regardless of a proposed kind label. Outside the image, owners may explicitly declare mapped external backend entries. Adding an original-image boundary requires its own byte-grounded owner review; the standalone registry transport is not evidence that an arbitrary engine replacement is valid.
 
 Argument selectors are full uppercase GPR names (EAX/EBX/ECX/EDX/ESI/EDI/EBP) or aligned byte offsets from ESP, excluding offset zero. `ArgumentoVinculo(origem, bits=32, assinado=False)` declares a consumed 8/16/32-bit register/stack width. Plain strings/integers mean unsigned 32-bit selectors. For example:
 
@@ -42,6 +42,7 @@ All of these use the Watcom register ABI, with no stack arguments and zero clean
 | `0x48c80b` | CRT `fclose` | EAX FILE* | EAX 0 or −1 | — |
 | `0x48cda2` | CRT `fseek` | EAX FILE*, EDX s32 offset, EBX whence (0 set, 1 cur, 2 end) | EAX 0 or 0xffffffff | EBX, ECX, ESI, EDI, EBP |
 | `0x48ce96` | CRT `fgets` | EAX buf, EDX n (s32), EBX FILE* | EAX = buf, or 0 when EOF is hit before any byte (or EOF with the stream error flag) | EBX, ECX, ESI, EDI, EBP |
+| `0x48cf11` | CRT `ftell` | EAX FILE* | EAX s32 position or −1 | EBX, ECX, EDX, ESI, EDI, EBP (all but EAX) |
 
 `fgets` stores at most n−1 bytes, up to and including `\n`, then a NUL. It stores nothing when n ≤ 1, apart from the NUL.
 
@@ -65,7 +66,20 @@ The original does not preserve EDX in either routine:
   Once `fopen` is declared, the FILE object belongs to the fixture. Executing these bodies natively would dereference a fixture handle, so they qualify on the same grounds as `fread`/`fclose`.
 - **EDX after the call.** At all five direct call sites the game overwrites EDX or returns before reading it. The callers of FileReadLine and FileSeek overwrite it or branch on AL/EAX first. A fixture that preserves EDX is therefore not observable on these paths. Consumers that want native EDX must return it explicitly with `RetornoVinculo`.
 - **Fixture obligations.** The fixture owns the FILE state and errno. It must also write the buffer, the NUL and the stream flags it models.
-- **Not inventoried.** `ftell` `0x48cf11` (called by `FileSize`) still needs its own review before `FileSize` can run over a fixture FILE*.
+**Owner review for `ftell`** (2026-10-29, M2 round 5):
+- **Location.** `ftell` `0x48cf11` lies in the same static Watcom CRT block.
+- **What it touches.** Only:
+  - `tell` `0x48efab` (SetFilePointer through the OS handle table `[0x522254]`, and errno through `__set_errno_nt` on failure);
+  - the stream lock hooks;
+  - the FILE fields +4 (cnt), +0xd (flags) and +0x10 (handle).
+- **Result.** EAX is the position, adjusted by the buffered count: + for write mode, − for read mode.
+- **Preserved.** It pushes and pops EBX/ECX/EDX/ESI and leaves EDI/EBP untouched.
+- **Where the FILE* comes from.** Its callers are:
+  - `FileSize+0x19`, with the FILE* from FileOpen's `[0x4e1d1c]` (FileSize: fseek end, ftell, fseek set 0);
+  - `__doclose+0x3a`, inside the already-bound CRT `fclose`.
+
+  So with `fopen` declared, the FILE belongs to the fixture.
+- **Native test.** The original `FileSize` runs over declared fseek/ftell fixtures: the call order, EAX = size, and EBX/ECX/EDX restored.
 
 ## Validation status
 

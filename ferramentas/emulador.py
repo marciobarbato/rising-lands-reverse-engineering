@@ -27,9 +27,9 @@ DESCRITORES = 0x3100000
 TRAMPOLINS_DECLARADOS = 0x3200000
 # Only source-inventoried I/O boundaries may replace an original code entry: the game
 # wrappers FileOpen/FileClose/FileRead/FileSeek and the statically linked Watcom CRT
-# fopen/fread/fclose/fseek/fgets (see docs/core/DECLARED_BINDINGS.md for each ABI).
+# fopen/fread/fclose/fseek/fgets/ftell (see docs/core/DECLARED_BINDINGS.md for each ABI).
 FRONTEIRAS_IO = frozenset((0x458420, 0x45844c, 0x458461, 0x45848b, 0x48c71f, 0x48c97b, 0x48c80b,
-                           0x48cda2, 0x48ce96))
+                           0x48cda2, 0x48ce96, 0x48cf11))
 
 
 class BancadaX86:
