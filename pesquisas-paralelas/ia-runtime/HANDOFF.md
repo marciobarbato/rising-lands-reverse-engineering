@@ -228,3 +228,24 @@ Merged main `ec931d2`. The report is [FRAME1_COMPARISON.md](FRAME1_COMPARISON.md
   - iaSolver beyond the empty context, which goes through a bridge into Core's private machine (a Core contract is requested).
   - The AffGame write set (graphics, open item).
 - `validacao/m2-despachantes-native.json` (slice 1) predates the lazy-read change in CalculNextReflect. The behavior is unchanged, and the change is re-checked by the new native differential.
+
+
+## M2.1 round 3 — chained frame-0/1 composition (2026-10-29)
+
+Merged main `67fb81f`. The report is [FRAME1_CHAINED_COMPARISON.md](FRAME1_CHAINED_COMPARISON.md).
+
+- **Result:** (a), (b) and (c) are all equal to the original, chained from Python. Eight declared-stop crossings, each with the state equal at entry: RestoreAll (graphics), SetClipping, InitGameZone ×2 and NextAnim* ×4 (core, pending).
+- **Commits:**
+  - `f60137a`/`4e10cdd`: captures before translation.
+  - The translation + composition commit, then the report/docs commit (see git log).
+- **API:**
+  - `entrada_quadro_ia.entrada_jogo(m, jogador, registro, janelas)`.
+  - `enviar_entrada(m, jogador)`.
+  - `calcular_icone_acao(m)`.
+  - `iniciar_menu(m, jogador, estado, ecx, registro, janelas, provedores, ebx, esp)`.
+  - `proxima_etapa_quadro.proxima_etapa_unidade(m, provedores, unidade, tabelas)`.
+  - `proxima_etapa_estrutura(m, provedores, estrutura, tabelas)`.
+  - `composicao_encadeada_ia.fase_cauda_carga` and `fase_quadro`, with `Travessias` (crossings and checkpoints).
+  - `memoria_composicao_ia.MemoriaMapaM1`.
+- **Mutation and callback order:** original order throughout. The providers receive `sitio` and original-width arguments. Untaken branches raise `DependenciaIA` at their addresses.
+- **Gaps:** the stack words of stale locals in four boundaries; the tile-grid list/bytes contract between Economy and Core; iaSolver beyond the empty context; the crossings, until Graphics/Core land their routines.

@@ -1,0 +1,791 @@
+{
+ "frame_capture": "e6aa30515bd80777259cd8ceae7cba71c2266c60",
+ "original_checkpoints": 81,
+ "original_crossings": 8,
+ "path_reproduction": {
+  "boundaries_equal": true,
+  "code_unchanged": true,
+  "entry_trace_equal": true,
+  "passed": true,
+  "phase_states_equal": {
+   "between_frames": true,
+   "frame1": true,
+   "load_tail": true
+  }
+ },
+ "phases": {
+  "between_frames": {
+   "bindings": {
+    "equal": true,
+    "not_modeled": [],
+    "original": 2,
+    "python": 2
+   },
+   "boundaries": {
+    "equal": true,
+    "not_modeled": [],
+    "original": 3,
+    "python": 3
+   },
+   "checkpoints": [],
+   "crossings": [],
+   "declared_inputs": "caller frame, cursor and PeekMessageA answer of the capture",
+   "differing_blocks": [],
+   "equal": true,
+   "registers_equal": {
+    "EAX": true,
+    "EBP": true,
+    "EBX": true,
+    "ECX": true,
+    "EDI": true,
+    "EDX": true,
+    "ESI": true,
+    "ESP": true
+   },
+   "registers_not_modeled": [
+    "EFLAGS",
+    "EIP"
+   ],
+   "result": "returned",
+   "rng": {
+    "0x497164": "0x1c019f87",
+    "0x498db4": "0x3212b7ce"
+   },
+   "rng_equal": true,
+   "state_equal": true
+  },
+  "frame1": {
+   "bindings": {
+    "equal": true,
+    "not_modeled": [],
+    "original": 13,
+    "python": 13
+   },
+   "boundaries": {
+    "equal": true,
+    "not_modeled": [
+     {
+      "index": 0,
+      "routine": "MCICD_Play",
+      "words": [
+       0,
+       1,
+       2,
+       3
+      ]
+     }
+    ],
+    "original": 1,
+    "python": 1
+   },
+   "checkpoints": [
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "InputGame"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "InputSend"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "equal": true,
+     "occurrence": 1,
+     "phase": "frame1",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "equal": true,
+     "occurrence": 2,
+     "phase": "frame1",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "equal": true,
+     "occurrence": 3,
+     "phase": "frame1",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "MessageBoxCalcul"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculIconeAction"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "ProjectileCalcul"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculEnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 1,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 2,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 3,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 4,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 5,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 6,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 7,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 8,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 9,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 10,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 11,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 12,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 13,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 14,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 15,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculBatimentNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "RechercheCalcul"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "PlayerInitAllianceCompteur"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "SetUpdateChamp"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "UpdateChamp"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculMatiere"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculCompteurMarche"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculCompteurProposition"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "NextAnimTerrain"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "NextAnimVeget"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "PlayerAttaqueCalculSympa"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "TestFinDeMission"
+    }
+   ],
+   "crossings": [
+    {
+     "bindings": 0,
+     "boundaries": 0,
+     "eax": "0x0",
+     "occurrence": 0,
+     "owner": "core",
+     "phase": "frame1",
+     "routine": "NextAnimTerrain",
+     "site": "0x42d441",
+     "state_equal_at_entry": true
+    },
+    {
+     "bindings": 0,
+     "boundaries": 0,
+     "eax": "0x2",
+     "occurrence": 0,
+     "owner": "core",
+     "phase": "frame1",
+     "routine": "NextAnimVeget",
+     "site": "0x42d467",
+     "state_equal_at_entry": true
+    }
+   ],
+   "differing_blocks": [],
+   "equal": true,
+   "result": "returned",
+   "rng": {
+    "0x497164": "0x78fe3b37",
+    "0x498db4": "0x3212b7ce"
+   },
+   "rng_equal": true,
+   "state_equal": true
+  },
+  "load_tail": {
+   "bindings": {
+    "equal": true,
+    "not_modeled": [],
+    "original": 13,
+    "python": 13
+   },
+   "boundaries": {
+    "equal": true,
+    "not_modeled": [
+     {
+      "index": 9,
+      "routine": "DDLockSurface",
+      "words": [
+       0,
+       1,
+       2,
+       3
+      ]
+     },
+     {
+      "index": 10,
+      "routine": "FilledBox",
+      "words": [
+       2,
+       3
+      ]
+     },
+     {
+      "index": 15,
+      "routine": "MCICD_Play",
+      "words": [
+       0,
+       1,
+       2,
+       3
+      ]
+     }
+    ],
+    "original": 16,
+    "python": 16
+   },
+   "checkpoints": [
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "RestoreAll"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "SetClipping"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "MenuInit"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "InitGameZone"
+    },
+    {
+     "equal": true,
+     "occurrence": 1,
+     "phase": "load_tail",
+     "routine": "InitGameZone"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "InputGame"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "InputSend"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "equal": true,
+     "occurrence": 1,
+     "phase": "load_tail",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "equal": true,
+     "occurrence": 2,
+     "phase": "load_tail",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "equal": true,
+     "occurrence": 3,
+     "phase": "load_tail",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "MessageBoxCalcul"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculIconeAction"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "ProjectileCalcul"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculEnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 1,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 2,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 3,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 4,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 5,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 6,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 7,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 8,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 9,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 10,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 11,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 12,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 13,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 14,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 15,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculBatimentNextEtape"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "RechercheCalcul"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "PlayerInitAllianceCompteur"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "SetUpdateChamp"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "UpdateChamp"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculMatiere"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculCompteurMarche"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculCompteurProposition"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "NextAnimTerrain"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "NextAnimVeget"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "PlayerAttaqueCalculSympa"
+    },
+    {
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "TestFinDeMission"
+    }
+   ],
+   "crossings": [
+    {
+     "bindings": 0,
+     "boundaries": 9,
+     "eax": "0x1",
+     "occurrence": 0,
+     "owner": "graphics",
+     "phase": "load_tail",
+     "routine": "RestoreAll",
+     "site": "0x42d27f",
+     "state_equal_at_entry": true
+    },
+    {
+     "bindings": 0,
+     "boundaries": 0,
+     "eax": "0x0",
+     "occurrence": 0,
+     "owner": "core",
+     "phase": "load_tail",
+     "routine": "SetClipping",
+     "site": "0x42d2a6",
+     "state_equal_at_entry": true
+    },
+    {
+     "bindings": 0,
+     "boundaries": 0,
+     "eax": "0x1",
+     "occurrence": 0,
+     "owner": "core",
+     "phase": "load_tail",
+     "routine": "InitGameZone",
+     "site": "0x468484",
+     "state_equal_at_entry": true
+    },
+    {
+     "bindings": 0,
+     "boundaries": 0,
+     "eax": "0x1",
+     "occurrence": 1,
+     "owner": "core",
+     "phase": "load_tail",
+     "routine": "InitGameZone",
+     "site": "0x42d2d9",
+     "state_equal_at_entry": true
+    },
+    {
+     "bindings": 0,
+     "boundaries": 0,
+     "eax": "0x0",
+     "occurrence": 0,
+     "owner": "core",
+     "phase": "load_tail",
+     "routine": "NextAnimTerrain",
+     "site": "0x42d441",
+     "state_equal_at_entry": true
+    },
+    {
+     "bindings": 0,
+     "boundaries": 0,
+     "eax": "0x3",
+     "occurrence": 0,
+     "owner": "core",
+     "phase": "load_tail",
+     "routine": "NextAnimVeget",
+     "site": "0x42d467",
+     "state_equal_at_entry": true
+    }
+   ],
+   "differing_blocks": [],
+   "equal": true,
+   "result": "returned",
+   "rng": {
+    "0x497164": "0x1c019f87",
+    "0x498db4": "0x3212b7ce"
+   },
+   "rng_equal": true,
+   "state_equal": true
+  }
+ },
+ "schema": "rising-lands/ai-runtime-m2-frame1-chained-composition/1",
+ "seconds": 37.963,
+ "source_dirty_paths": [],
+ "source_revision": "07fab74b934e0a9507a79cc0d5572088e6484def",
+ "summary": {
+  "phases": {
+   "between_frames": {
+    "at": null,
+    "crossings": [],
+    "equal": true,
+    "result": "returned",
+    "stop": null
+   },
+   "frame1": {
+    "at": null,
+    "crossings": [
+     [
+      "NextAnimTerrain",
+      "core"
+     ],
+     [
+      "NextAnimVeget",
+      "core"
+     ]
+    ],
+    "equal": true,
+    "result": "returned",
+    "stop": null
+   },
+   "load_tail": {
+    "at": null,
+    "crossings": [
+     [
+      "RestoreAll",
+      "graphics"
+     ],
+     [
+      "SetClipping",
+      "core"
+     ],
+     [
+      "InitGameZone",
+      "core"
+     ],
+     [
+      "InitGameZone",
+      "core"
+     ],
+     [
+      "NextAnimTerrain",
+      "core"
+     ],
+     [
+      "NextAnimVeget",
+      "core"
+     ]
+    ],
+    "equal": true,
+    "result": "returned",
+    "stop": null
+   }
+  },
+  "result": "complete"
+ },
+ "unclosed_original_crossings": []
+}
