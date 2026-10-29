@@ -254,6 +254,9 @@ def capturar(destino):
     if hashlib.sha256(original).hexdigest() != HASH_EXE:
         raise ValueError('Not the intact executable')
     c = Captura()
+    # Scenario addresses (unit pool, local player) are read from the loaded M1 state, never the bench image.
+    c.recarregar()
+    pool = struct.unpack('<I', c.ler(0x4e19a0, 4))[0]
     resultados = [cenario(c, *x) for x in cenarios(c)]
     chamadas = [k for r in resultados for k in r['calls']]
     arquivos = [Path(__file__), RAIZ / 'ferramentas/emulador.py', ENTRADA_M1]
@@ -266,6 +269,7 @@ def capturar(destino):
                       for p in arquivos],
         captured_at_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
         x87_control_word=hex(CONTROLE_X87), translation_executed=False,
+        m1_unit_pool=hex(pool),
         allowed_original_intervals=[[hex(a), hex(b)] for a, b in c.codigo],
         stops={hex(a): n for a, n in PARADAS.items()},
         scenarios=len(resultados), original_entries=len(chamadas),
