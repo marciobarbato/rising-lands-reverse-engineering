@@ -1,0 +1,19 @@
+{
+  "bundlePath" : "\/Users\/marcio\/git\/Rising-Lands-Codex\/.local\/macos-playable\/dist\/development\/RisingLands-ptbr.app",
+  "commit" : "2314804cbfe30f3866338284cc8141abf6493a86",
+  "nativeWindowVisible" : true,
+  "passed" : true,
+  "pythonStderr" : "",
+  "render" : "stop",
+  "scenario" : "MONDE01\/display-v2\/M2.2-accepted-evidence",
+  "tests" : [
+    "257 summaries and 11 checkpoints shown",
+    "captured blocks listed",
+    "DOM next phase reaches frame1",
+    "DOM memory read returns captured counter",
+    "DOM frame selection reaches frame128",
+    "missing previous surface shown without fallback image",
+    "DOM block filter",
+    "DOM reset preserves initial state identity"
+  ]
+}

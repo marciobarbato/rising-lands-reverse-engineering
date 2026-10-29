@@ -500,3 +500,137 @@ Contract and measurements: [UNICORN_TEARDOWN](UNICORN_TEARDOWN.md). This is tool
   - **Combat:** the same applies to `capturar_quadro_m1.py`.
 - **Gate.** Gate on the merged tree: see `relatorios/teardown-core-check.json`.
 - **NOT RUN:** the other fronts' scripts are unchanged. Applying `mapear_paginas` and `encerrar_captura` to them is their owners' change.
+
+### M2.3 acceleration: coverage run, and the raid's spawn/order Core routines on `feat/re-core`
+
+1. **Coverage-only long run** (`287be9d`): `ferramentas/cobrir_quadros_exibicao.py --ate N --saida PATH`. It runs the display reference past frames 0/1 to cycle counter N, and records:
+   - each routine's first and last entry frame and total entries;
+   - per frame: the counter, RNGs, CRT seed, cursor, view origin, the DGROUP hash (every frame), the whole-state hash (every `--hash-cada` frames), boundaries and display ticks.
+
+   It uses one code-range block hook that counts every symbol entry inside each executed block, fall-through included. At about 0.4 s per frame, this is roughly 9× lighter than 1,952 per-entry code hooks, and the counts are equal apart from the 20 declared boundaries, which are listed. Frames are written to a JSONL file fsynced at checkpoints, with an atomic summary; a stop is recorded and exits 2; the run ends with `encerrar_captura`. The display clock is extended by its own rule. Frames 0–12 equal the committed 0–128 survey. The 9,200-counter run was requested from the Mac mini. Its output is coverage, not evidence.
+2. **Capture first.** `ferramentas/capturar_incursao_core.py` captures the Core calls inside 21 declared forced cases at frame 1's AvanceMonstre entry: counter 9000, plus 16 RNG seeds; counter 10800; four spawn cells. It uses Missions' read-only Isolamento, the same technique as Combat's.
+   - **v1** (`99432d3`): `evidencias/fundacoes-quadro/captura-incursao-core-v1.json`, 689 calls, all returned. It reproduces the phases and the code.
+   - **Display:** requested from the Mac mini at `2798a11`. Run #3 at `99432d3` hit the shared 600 s frame budget; the budget is now 600 s + 150 s per case, and exceptions go to `.local/raid/`.
+3. **Translations** (`ferramentas/incursao_core.py`, contract in [RAID_CORE](RAID_CORE.md)):
+   - GetFreeCell;
+   - CreerEngin → EnginSetType/EnginSetTypeCaract (Combat's committed provider over a record copy, plus the flat search release), EnginTypeGetCapacite, EnginEnArret;
+   - EnginSetPlayer;
+   - PlaceEngin for owners 4/200, with SetMiniMap mode 4;
+   - EnginGetCase, PlayerGetColor;
+   - GetRandCaseChamps, GetRandCaseTypeBatPlayer, GetNumIndiceTypeBatiment, GetCaseIndiceBatiment;
+   - Chemin_Accessible;
+   - iaProbPost, iaProbNew, listNewElem, listLinkElemToTail.
+
+   All return exact output registers.
+
+   **Faithful quirks kept:**
+   - GetFreeCell's stack-residue upper words, mixed axes and lagging column cell;
+   - GetRandCaseChamps's 201st entry, returned + 1;
+   - EnginSetType's exit EBX 0x1d and EDX 0x1e.
+
+   **Dependency stops:** PlaceEngin for other owners (`0x457019`), the other SetMiniMap modes, and GetRandCaseTypeBatPlayer with more than 200 matches.
+4. **Validation:**
+   - `testes/test_incursao_core.py` replays every captured call without a CPU, including the frame-1 Core routines the raid reaches.
+   - `ferramentas/validar_incursao_core.py` is the native differential: at each nested Core call of each forced case, the translation runs over a copy-on-write view of the live entry state and is compared at the native return.
+   - **v1 native differential:** `relatorios/incursao-core-v1-emulada.json` has **689 comparisons, 0 mismatches and 0 dependency stops** over 26 routines; the phases and code reproduce; 114 s.
+
+**For AI/runtime:** `incursao_core.ROTINAS` / `traducao_core(name)` provide everything ConstruitGroupeMonstre and the pending-order branch call in Core, over the same flat memory as `provedores_core`. The bonus provider is Economy's `BonusUnidades.consultar`.
+
+**Next stage:** Combat's course capture lists the routines the raid reaches after the spawn, from 9000 to about 9200. These are the movement routines, the first path search at 9176–9179, and the unit dispatcher EnginNextEtape. Most already exist in Core's world model (`ordens_unidades`, `navegacao_unidades`, `otimizacao_caminhos`, `passagem_unidades`). The next stage captures them in isolation at those frames and validates them natively.
+
+**NOT RUN:**
+- the display differential, until its capture lands;
+- GetCaseIndiceBatiment, which MONDE01 never reaches (no cave);
+- PlaceEngin's discovery path for player owners in flat memory;
+- integration.
+
+### M2.3 movement stage (counters 9000–9200) on `feat/re-core`
+
+- **Capture script** `capturar_movimento_incursao.py` (`7a90689`): 27 Core routines, Combat's forced-counter method. The full run is Mac mini request #5.
+- **World-model differential** `validar_movimento_incursao.py`: Core's existing world model, bound over each isolated call's exact entry blocks through Missions' `montar_provedores`, compared with the native result. Flat translations are compared with full registers.
+- **Gap closed:** CalculNextCase's walk animation (`MundoNavegacao.animar_movimento`, `calcular_proxima_celula`, `atualizar_movimento(animacao=True)`). Type 17 and the local-player sound branch raise.
+- **New flat translations:** TerrainEnCollision, ResetCollision, CRT memset (`incursao_core`).
+- **Smoke (9000–9004):** 0 mismatches.
+
+**NOT RUN / open:**
+- the full 201-frame world differential (Mac mini);
+- the pathfinding internals, which need the solver's buffers bound to memory;
+- the EnginNextEtape dispatcher.
+
+The contract is in [RAID_CORE](RAID_CORE.md#movement-and-pathfinding-after-the-spawn-counters-90009200).
+
+### M2.3 readiness: providers wired, live world, live path search on `feat/re-core`
+
+- **Raid providers:** `provedores_core` exports the raid routines with ai-runtime's keywords, and the task VM posts through the same `postar_tarefa` (`9f27899`).
+- **Live world:** `mundo_vivo` binds the navigation world live to flat memory. The movement providers run on it, with `deslocar` as the exact DeplaceEngin (`bc256c5`, `aa2e6b1`). SetDeplaceEngin and ResetOrdre return the record address, and EnginEstVivant returns the exact EAX.
+- **Path search:** `SolucionadorCaminhosVivo` keeps its work state at the original globals. Route updates are now in place.
+- **Full 9000–9200 native differential:** 0 mismatches, except 6 bytes of CheminCalcul's contour-engine scratch at the 9177 search (`0x4e0f40`, `0x4e0f50..52`, `0x4e0f68`, `0x4e1772`). The search result itself is equal.
+- **Native movement regressions:** 56 tests pass with `RISING_EMULAR=1` (needs `testes/` on `PYTHONPATH`).
+- See [RAID_CORE](RAID_CORE.md).
+
+### M2.3: byte-exact path search on `feat/re-core`
+
+- **Contour state written:** `SolucionadorCaminhosVivo` now also writes CheminCalcul's contour state: `0x4e1772` (the unit's +0xfa), `0x4e0f40` (the step count, `fase`), `0x4e0f68` (the region count) and `0x4e0f50` (the record pointer). The Python solver keeps its last contour result (`ultimo_contorno`).
+- **Per-routine comparison:** Chemin_Verouille (`verrouiller`), CheminCalcul (`calcular`), TestLigneOptimise and OptimiseChemin (EAX = compacted cells + 1).
+- **Full 9000–9200 native differential:** 0 mismatches. Every call from 9170 is compared, including the 9177 search; memory after the search is byte-exact. The only stops are Missions' snapshot binding denying the solver, which AI/runtime's chain does not use.
+- See [RAID_CORE](RAID_CORE.md).
+
+### M2.3 display-scenario spawn/order differential (Mac mini run #7)
+
+`ferramentas/validar_incursao_core.py --cenario exibicao` at `201e208` ran on the Mac mini (exit 0, 1,821 s, report-only, nothing committed). Over the 21 forced cases it made **689 comparisons, with 0 mismatches, 0 dependency stops and nothing untranslated**. The load_tail/between_frames/frame1 path reproduced, and the code was unchanged. It is the display-scenario counterpart of the v1 run (`relatorios/incursao-core-v1-emulada.json`, 689/0). Per routine:
+- Chemin_Accessible 20, Chemin_ModifieZone 21;
+- CreerEngin 21, EnginEnArret 21, EnginGetCase 20, EnginGetType 20, EnginSetPlayer 21, EnginSetType 21, EnginSetTypeCaract 21, EnginTypeGetCapacite 21;
+- GetFreeCell 23, GetNumIndiceTypeBatiment 1, GetRandCaseChamps 20, GetRandCaseTypeBatPlayer 1;
+- MissionGetNum 22, PlaceEngin 21, PlayerGetColor 84, Random 83;
+- SetCollision 21, SetEnginCollision 21, SetMiniMap 21, TerrainEstIllumine 84;
+- iaProbNew 20, iaProbPost 20, listLinkElemToTail 20, listNewElem 20.
+
+### M2.3: live world inside ai-runtime's chain (option 1, no binding change)
+
+`6e12550` and the merge `07c36b4`. ai-runtime's chained composition stopped at counter 9000, at the first EnginEstVivant: its memory is Missions' map, where tiles, regions and the structure-colour stack are u16 lists. `mundo_vivo` now adopts those lists by identity (`grade_u16_viva`), so there is a single source of truth, no copy, and Missions' binding is unchanged. Checks at `07c36b4`:
+- **AI's probe:** `sondar_incursao_ia.py 3`, from ai-runtime's branch, run against this Core: no stop through counter 9002.
+- **M2.2 proof:** `provar_quadros_ia.py`, Python only, 63 s. All 257 of 257 phases equal (128 frames), 0 crossings writing compared bytes, HUD flag equal.
+- **9000–9200 native differential:** 0 mismatches. That is 251 snapshot-world, 261 live-world and 135 flat comparisons; the only stops are the snapshot binding's denied solver.
+- **Gate:** 502 tests, OK.
+
+### M2.3 follow-ups past the window: fatigue threshold and the 9700 divergence
+
+- **CalculFatigue at the threshold.** The original stores the incremented counter +0x74 before comparing it, and the translation now does the same. At the threshold with provisions u16 +4 left (`0x452ee5`): +0x74 = 0, +4 − 1, EAX = the provisions before. With no provisions, the hunger branch (sound, Bag, life, death) raises `DependenciaRamoCore` at `0x452d6f`, after the counter store.
+  - Native check, windowed run over counters 10860–10900 (`relatorios/movimento-incursao-janelas-emulada.json`): 865 CalculFatigue comparisons, 0 mismatches. That includes unit 16's threshold at counter 10879: +4 4→3, +0x74 0x0bb7→0, EAX = 4.
+  - This removes ai-runtime's stop near 10880.
+- **The 9700 one-step report, withdrawn by ai-runtime.** It was an artifact of their probe's start: they started after frame 1 with the counter set to 8999, which consumed one extra frame of draws. With the equivalent start (the -v2 state after between_frames, counter 9000, frame 1 run as the 9000 frame), their Python and the original are equal. The world RNG and unit 16's state, facing and cell match at every counter 8999–9705, and the cell matches Combat's native course through 10878.
+  - The windowed native run gives the same picture from Core's side. Natively, the idle unit is turned by EnginNextEtape's own state-7 body at 9573 and 9591 (+0x90/+0x91 3→4→5). The order at 9700 is V_DeplaceGroupe → EnginEstVivant → SetDeplaceEngin → ResetOrdre → EnginNextEtape → DeplaceEngin.
+  - Every Core call in 9500–9703 matches the original (0 mismatches over 1,823 live and 5,404 flat comparisons).
+- **Validator tools:** `--janelas` (isolate and compare only inside counter windows), `--ordem` (native call order, with unit 16's key fields and changes), `--rotinas-extra`.
+- **Open:** the flat `Chemin_ModifieZone` mode 0 (removal) is not translated. These windows reach it through ResetEnginCollision; the chain uses the world model's `ocupar` instead.
+
+### Native pass-2 hooks for the comparison policy (tooling only)
+
+See [NATIVE_POLICY_HOOKS](NATIVE_POLICY_HOOKS.md).
+- **What changed.** Pass 2 of Missions' comparison policy can now use a C library (`ferramentas/nativo/ganchos_memoria.c`). It is built deterministically by `ferramentas/compilar_ganchos_nativos.py` into ignored `.local/nativo/` and registered with Unicorn 2.1.4's C `uc_hook_add` through ctypes. It holds the display-root tracker and the access aggregates natively; Python drains them once per phase.
+- **Interface.** `ganchos_nativos.ganchos_politica(b, alvos)` is a drop-in for `politica_comparacao_quadros.ganchos`. `politica_ganchos_nativos.py` injects it at runtime. Missions' files are untouched, and no Missions adapter is needed.
+- **Failure handling.** A missing or stale library fails loudly. There is no fallback to Python hooks.
+- **Result.** M2.2, 128 frames: the native policy body is JSON-identical to the committed report, sequentially and joined from four segments: mask, 999 game-logic bytes with writers/readers, 153,060/999 totals, windows and surface verdict.
+- **Timing.** The pass-2 phase loop takes 8.291 s/frame with Python hooks and 1.285 s/frame with native hooks on the same machine and windows, a 6.45× speedup.
+- **Cause of the old cost.** Most of it was Unicorn walking the 10,600 per-range hooks on every access, not the Python callbacks. The native `agrupado` mode uses one spanning hook plus a per-address multiplicity table.
+- **Tests.** Native tests are opt-in (`RISING_EMULAR=1`). The non-native gate does not need the library.
+
+### M3 groundwork: player selection and order setters on `feat/re-core`
+
+See [SELECTION_ORDERS](SELECTION_ORDERS.md).
+- **Captured first.** `bancada_selecao_ordens` pauses the accepted display path at frame 1's first `ProcessInputGame` entry and runs 130 declared leaf calls natively. The phase summaries reproduce and the code is unchanged. The capture (`evidencias/selecao-ordens/`) was committed in `75ed19b`, before the translation.
+- **Translated.** `selecao_ordens.SelecaoOrdens` covers:
+  - SelectionEngin, EnginAddSelection, EnginSelectionnable, SelectionAddEngin, RetireSelectionEngin, DeselectionEngin, DeSelectionGroupe, Deselection, EnginInZone, BatimentSelection and BatimentDeselectionner;
+  - SetDeplaceEnginSelect, SetAttaqueEnginSelect, SetConstruitBatimentSelect, SetEnginConstruitBatiment, SetRecolteEngin(Select) and SetTransporteEngin(Select);
+  - EnginAsk with its volume, and the Bag and volume helpers BatimentSelection reaches.
+
+  `chamar(nome, regs, pilha)` returns EAX..EBP exactly.
+- **Native differential** (`validar_selecao_ordens.py` → `relatorios/selecao-ordens-emulada.json`): 130 comparisons, 0 mismatches. It compares registers, the whole changed state (481 bytes) and 58 sound requests, and the native run equals the committed capture. 94 cases also replay without a CPU (`testes/test_selecao_ordens.py`). The native test is `test_emulacao_selecao_ordens` (RISING_EMULAR=1, about 2 minutes).
+- **Named dependencies:**
+  - Audio: `som(nome, regs, pilha) -> EAX` for PlaySnd_PostSound/StopSound;
+  - Combat: `definir_ataque(unidade, modo, referencia) -> {EAX, EDX}` for SetAttaqueEngin 0x445a36. The validator wires Combat's `ataque_vivo.definir_ataque`.
+- **Deferred to the scripted-input captures:**
+  - the ProcessInputGame tag → setter → argument mapping;
+  - action mode `0x496207` and the HUD rectangles;
+  - the real PlaySnd return values;
+  - the type-6 SetDeplaceEngin branch and BagContient modes other than 1.

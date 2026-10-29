@@ -1,0 +1,5007 @@
+{
+  "schema": "rising-lands/monde01-player-action-static-graph/1",
+  "scope": "MONDE01 M3 planning; static only; no translations or native action execution",
+  "baseline": "daa6ed2da79827b2472929f7e5c82aad1d631782",
+  "intact_executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "provenance": [
+    {
+      "path": "evidencias/original-player-action-bytes.json",
+      "sha256": "5e88746e31bba79a0ff817751cbcbc9313d6cba3c19d030f81d17384d837a2bb"
+    },
+    {
+      "path": "evidencias/monde01-action-context.json",
+      "sha256": "81c295200732240bd6fe73a88b366b60a60e1764bb0934fc1d62a9de855d2566"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "WndProc",
+      "address": "0x004181a1",
+      "kind": "routine",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "WndProc",
+        "start": "0x004181a1",
+        "end_exclusive": "0x00418590",
+        "sha256": "9a58e9449c89a51e92ecdc99101325b1f12af1febde89b82978dbd7e3a6a5735"
+      }
+    },
+    {
+      "id": "USER32.dll!BeginPaint",
+      "address": "0x00523278",
+      "kind": "import_slot",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "original PE import table",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "USER32.dll!EndPaint",
+      "address": "0x00523288",
+      "kind": "import_slot",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "original PE import table",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "USER32.dll!PostQuitMessage",
+      "address": "0x005232bc",
+      "kind": "import_slot",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "original PE import table",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "USER32.dll!DefWindowProcA",
+      "address": "0x00523280",
+      "kind": "import_slot",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "original PE import table",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "_WinMain@16",
+      "address": "0x00460170",
+      "kind": "routine",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "_WinMain@16",
+        "start": "0x00460170",
+        "end_exclusive": "0x0046027c",
+        "sha256": "ea3ab4838cc7900d086b46abad60592ce0b605a9e88903fcf42fa14889961234"
+      }
+    },
+    {
+      "id": "USER32.dll!FindWindowA",
+      "address": "0x0052328c",
+      "kind": "import_slot",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "original PE import table",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "USER32.dll!PeekMessageA",
+      "address": "0x005232b8",
+      "kind": "import_slot",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "original PE import table",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "USER32.dll!GetMessageA",
+      "address": "0x00523298",
+      "kind": "import_slot",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "original PE import table",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "USER32.dll!TranslateMessage",
+      "address": "0x005232d8",
+      "kind": "import_slot",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "original PE import table",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "USER32.dll!DispatchMessageA",
+      "address": "0x00523284",
+      "kind": "import_slot",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "original PE import table",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "ProgIteration",
+      "address": "0x0047500e",
+      "kind": "routine",
+      "owners": [
+        "ai-runtime"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "ProgIteration",
+        "start": "0x0047500e",
+        "end_exclusive": "0x00475118",
+        "sha256": "d04c5ef8b2e1c48b12726e6907fe6a38e632e7ae451b3b325d78225060049897"
+      }
+    },
+    {
+      "id": "USER32.dll!WaitMessage",
+      "address": "0x005232e4",
+      "kind": "import_slot",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "original PE import table",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "USER32.dll!UnregisterClassA",
+      "address": "0x005232dc",
+      "kind": "import_slot",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "original PE import table",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "USER32.dll!MessageBoxA",
+      "address": "0x005232b0",
+      "kind": "import_slot",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "original PE import table",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "USER32.dll!GetCursorPos",
+      "address": "0x00523294",
+      "kind": "import_slot",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "original PE import table",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "CalculGame",
+      "address": "0x0042c868",
+      "kind": "routine",
+      "owners": [
+        "ai-runtime"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "CalculGame",
+        "start": "0x0042c868",
+        "end_exclusive": "0x0042d4f8",
+        "sha256": "d6d2bf1d02d17cd5dc2b2e7b041be3e981855e7e6298cf32969b818d4b435a94"
+      }
+    },
+    {
+      "id": "GrabAllInput",
+      "address": "0x00474fe6",
+      "kind": "routine",
+      "owners": [
+        "ai-runtime"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "GrabAllInput",
+        "start": "0x00474fe6",
+        "end_exclusive": "0x0047500e",
+        "sha256": "3f6cee5c0f5c416e0548a32493ff2ae78f4a27f545dfd52220d276da081ec191"
+      }
+    },
+    {
+      "id": "InputGame",
+      "address": "0x00429278",
+      "kind": "routine",
+      "owners": [
+        "ai-runtime"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "InputGame",
+        "start": "0x00429278",
+        "end_exclusive": "0x0042c31b",
+        "sha256": "6253a1206e68afe9c6cdf4c21c293243d2e31911e953fc013435292a2aadb939"
+      }
+    },
+    {
+      "id": "USER32.dll!GetAsyncKeyState",
+      "address": "0x00523290",
+      "kind": "import_slot",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "original PE import table",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "SetPlayerOrdre",
+      "address": "0x0045ecd4",
+      "kind": "routine",
+      "owners": [
+        "ai-runtime"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "SetPlayerOrdre",
+        "start": "0x0045ecd4",
+        "end_exclusive": "0x0045edc0",
+        "sha256": "f6f413fe5a6957124e3ba8998b45e13b1debfe651840f05930cde581e1ae3e47"
+      }
+    },
+    {
+      "id": "MouseZone",
+      "address": "0x00479cac",
+      "kind": "routine",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "MouseZone",
+        "start": "0x00479cac",
+        "end_exclusive": "0x00479d10",
+        "sha256": "f242b714cacdec5dc0251adad7d447fcc63afda6ccc24526cd879cf27954e5e8"
+      }
+    },
+    {
+      "id": "DeSelectionGroupe",
+      "address": "0x0047268b",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "DeSelectionGroupe",
+        "start": "0x0047268b",
+        "end_exclusive": "0x004726f7",
+        "sha256": "1857333c0fc1b856760a07c619fef0ce3ec9c1179c53b95d8d39a8f606546f3e"
+      }
+    },
+    {
+      "id": "BatimentDeselectionner",
+      "address": "0x0041b663",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "BatimentGetTypeName",
+      "address": "0x00418af7",
+      "kind": "routine",
+      "owners": [
+        "missions"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "BatimentGetTypeName",
+        "start": "0x00418af7",
+        "end_exclusive": "0x00418b15",
+        "sha256": "318ac5bed49b5af270137d614956a92647e5dfe2f84dfb96ce60686709b791c0"
+      }
+    },
+    {
+      "id": "BatimentConstruit",
+      "address": "0x0041c652",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "BatimentConstruit",
+        "start": "0x0041c652",
+        "end_exclusive": "0x0041c6ec",
+        "sha256": "00f267b213a590f30405e32f813c2a42aed9894d510817fe2226a3ea9687535e"
+      }
+    },
+    {
+      "id": "SelectionEngin",
+      "address": "0x004742dc",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "SelectionEngin",
+        "start": "0x004742dc",
+        "end_exclusive": "0x00474610",
+        "sha256": "9a9f362b0346e9874b2a9478cfae37761627572c94fe7ec05cb1a908dbaccdb4"
+      }
+    },
+    {
+      "id": "BatimentSelection",
+      "address": "0x0041b673",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "TestRessource",
+      "address": "0x004676e5",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "KeyboardInit",
+      "address": "0x0042c31b",
+      "kind": "routine",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "KeyboardInit",
+        "start": "0x0042c31b",
+        "end_exclusive": "0x0042c339",
+        "sha256": "9992d42dc2290cc34ed321ebc0093e1111fe4e10664186c930acc6338ac7a815"
+      }
+    },
+    {
+      "id": "KeyPressed",
+      "address": "0x0042c339",
+      "kind": "routine",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "KeyPressed",
+        "start": "0x0042c339",
+        "end_exclusive": "0x0042c361",
+        "sha256": "d15d1c7b03d619d550a7464bdfaee90d2706ed16940c66711c1427ab65d00c36"
+      }
+    },
+    {
+      "id": "KeyUnPressed",
+      "address": "0x0042c361",
+      "kind": "routine",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "KeyUnPressed",
+        "start": "0x0042c361",
+        "end_exclusive": "0x0042c396",
+        "sha256": "8fba017a60d398dfe2be0b6d954ec67766e9cb0e699f51ce6a2f9d659dd7f8d4"
+      }
+    },
+    {
+      "id": "KeyTestRelease",
+      "address": "0x0042c396",
+      "kind": "routine",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "KeyTestRelease",
+        "start": "0x0042c396",
+        "end_exclusive": "0x0042c3b0",
+        "sha256": "c4171feff5bcbf2afad23668fa49d9586721b86894786c0fad88e1e4c0ddfc61"
+      }
+    },
+    {
+      "id": "MouseInit",
+      "address": "0x004717e4",
+      "kind": "routine",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "MouseInit",
+        "start": "0x004717e4",
+        "end_exclusive": "0x00471830",
+        "sha256": "254a60bbc4856759805950245acbfe816bdd274e710f85f07a1e5b3d6ea70d3e"
+      }
+    },
+    {
+      "id": "MouseEstDeplacer",
+      "address": "0x004291bc",
+      "kind": "routine",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "MouseEstDeplacer",
+        "start": "0x004291bc",
+        "end_exclusive": "0x0042921e",
+        "sha256": "6007b3fbdb2bd73dbd63051d9e9beeb06af877a1142ad885e483427a075628a2"
+      }
+    },
+    {
+      "id": "Deselection",
+      "address": "0x00429180",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "Deselection",
+        "start": "0x00429180",
+        "end_exclusive": "0x004291bc",
+        "sha256": "e349438377df89f2cd5aa7bdf200d9f0e0808e189e52e8b4a36a9111836fe035"
+      }
+    },
+    {
+      "id": "InputReceive",
+      "address": "0x0045ea7c",
+      "kind": "routine",
+      "owners": [
+        "ai-runtime"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "InputReceive",
+        "start": "0x0045ea7c",
+        "end_exclusive": "0x0045ec9f",
+        "sha256": "2e323365ef481dc8d1a47248f80c66dfc69513cbd0e3b8262f93e3892ae92ac5"
+      }
+    },
+    {
+      "id": "MenuInit",
+      "address": "0x004682bb",
+      "kind": "routine",
+      "owners": [
+        "ai-runtime"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "MenuInit",
+        "start": "0x004682bb",
+        "end_exclusive": "0x00469320",
+        "sha256": "9dabe5fdeaceb72094c1f31fdb967d403dad55bafb71ae4c7f7d015233114732"
+      }
+    },
+    {
+      "id": "InputSend",
+      "address": "0x0045ec9f",
+      "kind": "routine",
+      "owners": [
+        "ai-runtime"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "InputSend",
+        "start": "0x0045ec9f",
+        "end_exclusive": "0x0045ecd4",
+        "sha256": "2b9ec7fb593c0fdf66fd13caf63fce5ea55dd60f4b8882e217a6d7c4ef6bf7c9"
+      }
+    },
+    {
+      "id": "ProcessInputGame",
+      "address": "0x0045edc0",
+      "kind": "routine",
+      "owners": [
+        "ai-runtime"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "ProcessInputGame",
+        "start": "0x0045edc0",
+        "end_exclusive": "0x0045f32b",
+        "sha256": "5dfa98c2fdd6b425399b8763ff11d7632721aa96dd1f14d0f6662a606c9b8c3e"
+      }
+    },
+    {
+      "id": "EnginAddSelection",
+      "address": "0x004741cd",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "EnginAddSelection",
+        "start": "0x004741cd",
+        "end_exclusive": "0x004742dc",
+        "sha256": "1813f58427f5b5b9a109e31911ca829957c1e608b700b555d2520a12f06faaac"
+      }
+    },
+    {
+      "id": "SetConstruitBatimentSelect",
+      "address": "0x00473a07",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "SetConstruitBatimentSelect",
+        "start": "0x00473a07",
+        "end_exclusive": "0x00473ac0",
+        "sha256": "febf0fcbb135c4c5afde369e1d00293810f5da388a56bc94ad9f01be0fbeddac"
+      }
+    },
+    {
+      "id": "SetDeplaceEnginSelect",
+      "address": "0x00473e6e",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "SetDeplaceEnginSelect",
+        "start": "0x00473e6e",
+        "end_exclusive": "0x00473f4b",
+        "sha256": "6cce038278bf96242f080247d569f5627b57ff05d3643e1139de890f896e2143"
+      }
+    },
+    {
+      "id": "SetMineEnginSelect",
+      "address": "0x00473324",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "SetMineEnginSelect",
+        "start": "0x00473324",
+        "end_exclusive": "0x004733b8",
+        "sha256": "d6eb5b147f00f2bb2c695dc016f4e62faf9173df4431620b19edfccb8d4292ef"
+      }
+    },
+    {
+      "id": "SetDepotEnginSelect",
+      "address": "0x0047312c",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "SetDepotEnginSelect",
+        "start": "0x0047312c",
+        "end_exclusive": "0x00473194",
+        "sha256": "b3468e4feda57d7c36fd9140420f70fbd7cbf7b68ba9be3790cb55c774d1e81e"
+      }
+    },
+    {
+      "id": "SetRecolteEnginSelect",
+      "address": "0x00473290",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "SetRecolteEnginSelect",
+        "start": "0x00473290",
+        "end_exclusive": "0x00473324",
+        "sha256": "40c1e224959378e1c4759252496cb0349b5175bed0c6f31245eee5d503c9ea74"
+      }
+    },
+    {
+      "id": "SetTransporteEnginSelect",
+      "address": "0x00473212",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "SetTransporteEnginSelect",
+        "start": "0x00473212",
+        "end_exclusive": "0x00473290",
+        "sha256": "88cfd22b6ea956d7d3cf76037c90edbe63a4c9322ddc6744505da2a3fd4d0ed4"
+      }
+    },
+    {
+      "id": "SetAttaqueEnginSelect",
+      "address": "0x00473dbf",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "SetAttaqueEnginSelect",
+        "start": "0x00473dbf",
+        "end_exclusive": "0x00473e6e",
+        "sha256": "b6c0891e9381af7f4875c5f7d78f41dddba9130b18336f815c1964912bff9ef2"
+      }
+    },
+    {
+      "id": "InitRecruteTroupe",
+      "address": "0x004283e2",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "InitRecruteTroupe",
+        "start": "0x004283e2",
+        "end_exclusive": "0x004286a0",
+        "sha256": "653ea10f643c8d0728aa874e7a998c9e63ada0f980f281f9ff766af098c9cc66"
+      }
+    },
+    {
+      "id": "SetRamasseEnginSelect",
+      "address": "0x00473d2c",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "SetRamasseEnginSelect",
+        "start": "0x00473d2c",
+        "end_exclusive": "0x00473dbf",
+        "sha256": "b68373452f6bcb6b0b30990f4c8acd33a6ce03fc5b104b39989c5bf91f2483be"
+      }
+    },
+    {
+      "id": "InitInputPlayer",
+      "address": "0x0045f32b",
+      "kind": "routine",
+      "owners": [
+        "ai-runtime"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "InitInputPlayer",
+        "start": "0x0045f32b",
+        "end_exclusive": "0x0045f352",
+        "sha256": "6417992e23115a2c95edb60bb8ac3dcfe185208edbfac0bf79cb4bc12e6784d2"
+      }
+    },
+    {
+      "id": "SetEnginConstruitBatiment",
+      "address": "0x004454ce",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "SetEnginConstruitBatiment",
+        "start": "0x004454ce",
+        "end_exclusive": "0x0044564c",
+        "sha256": "fdb115a7e36016e3350827fd2983250dd4b77863c064879e0f26a905eacfe666"
+      }
+    },
+    {
+      "id": "SetDeplaceEngin",
+      "address": "0x004457d3",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "SetDeplaceEngin",
+        "start": "0x004457d3",
+        "end_exclusive": "0x00445947",
+        "sha256": "f9faa6d08a44b375c04aaec66d36f9481cb103c8806a2207b88a3bee9b9c6b3a"
+      }
+    },
+    {
+      "id": "SetAttaqueEngin",
+      "address": "0x00445a36",
+      "kind": "routine",
+      "owners": [
+        "combat"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "SetAttaqueEngin",
+        "start": "0x00445a36",
+        "end_exclusive": "0x00445b10",
+        "sha256": "050fd5f02f57df1596bda6975d64785021421e9c05df2e7db2751abc564118ab"
+      }
+    },
+    {
+      "id": "SetRecolteEngin",
+      "address": "0x00444ebd",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "SetRecolteEngin",
+        "start": "0x00444ebd",
+        "end_exclusive": "0x00444f48",
+        "sha256": "25810c6870d178472e81b3b5e61d37c700a6a34ddc368ad2375310eb92f09e3d"
+      }
+    },
+    {
+      "id": "SetTransporteEngin",
+      "address": "0x00444e7f",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "SetTransporteEngin",
+        "start": "0x00444e7f",
+        "end_exclusive": "0x00444ebd",
+        "sha256": "64927dca5906fb336c46544dcb3e730a938475275e3a46ca9a358cd3075f1a2f"
+      }
+    },
+    {
+      "id": "SelectionAddEngin",
+      "address": "0x004725ee",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "SelectionAddEngin",
+        "start": "0x004725ee",
+        "end_exclusive": "0x00472648",
+        "sha256": "04439370063f811b4536f0a3171a0a638e2de3a880500f305ab29af0d8b2ae4d"
+      }
+    },
+    {
+      "id": "DeselectionEngin",
+      "address": "0x00472648",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "DeselectionEngin",
+        "start": "0x00472648",
+        "end_exclusive": "0x0047268b",
+        "sha256": "0422c13ff6d7f2890337f2c27c62580d3f4fcb3e5b844769ea03e864dc177a37"
+      }
+    },
+    {
+      "id": "ResetOrdre",
+      "address": "0x0044357c",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "ResetOrdre",
+        "start": "0x0044357c",
+        "end_exclusive": "0x004436ab",
+        "sha256": "4929632b2a118060e6a1eada825ea57d420a0b2e4ddb6868261fcb02b3e5f450"
+      }
+    },
+    {
+      "id": "CalculConstruireBatiment",
+      "address": "0x0044ab60",
+      "kind": "routine",
+      "owners": [
+        "economy",
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "CalculConstruireBatiment",
+        "start": "0x0044ab60",
+        "end_exclusive": "0x0044b595",
+        "sha256": "78e4ac233c6c3afe934d79ebf9476baa0d64534408e04a3c34bc06a54791a72c"
+      }
+    },
+    {
+      "id": "DeplaceEngin",
+      "address": "0x0044930c",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "CreerBatiment",
+      "address": "0x0041fea2",
+      "kind": "routine",
+      "owners": [
+        "economy",
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "CreerBatiment",
+        "start": "0x0041fea2",
+        "end_exclusive": "0x00420698",
+        "sha256": "b3614234923c8b0f302b66ed13b6c9feec55267ef3ef0d4b2ba96733fa6c1445"
+      }
+    },
+    {
+      "id": "ProjectileInit",
+      "address": "0x0046e44c",
+      "kind": "routine",
+      "owners": [
+        "combat"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "BatimentConstruction",
+      "address": "0x0041cf59",
+      "kind": "routine",
+      "owners": [
+        "economy",
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "BatimentConstruction",
+        "start": "0x0041cf59",
+        "end_exclusive": "0x0041d02b",
+        "sha256": "796c12b706fc2478994edd8a554ab773f92012969280a6e2eff7626fb2ad0cea"
+      }
+    },
+    {
+      "id": "CalculWorkEngin",
+      "address": "0x0044bc74",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "CalculWorkEngin",
+        "start": "0x0044bc74",
+        "end_exclusive": "0x0044e35c",
+        "sha256": "39af5b1578608571cb64be2801848505c857c58a1846141405917603f1dc6dc3"
+      }
+    },
+    {
+      "id": "MineRecolte",
+      "address": "0x004755a7",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "MineRecolte",
+        "start": "0x004755a7",
+        "end_exclusive": "0x00475620",
+        "sha256": "2407e8cb7e8bddb3eefcce3dfcdf634a5b98d34e797bedd1b2bc7aa19ad23b77"
+      }
+    },
+    {
+      "id": "BatimentAjouteMatiere",
+      "address": "0x0042340f",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "BatimentAjouteMatiere",
+        "start": "0x0042340f",
+        "end_exclusive": "0x004235bd",
+        "sha256": "6a30ef2f78ac015a154681817e34d11e286ea669adc409bbbb692500fdb229d7"
+      }
+    },
+    {
+      "id": "TerrainRetireMatiere",
+      "address": "0x00476662",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "TerrainRetireMatiere",
+        "start": "0x00476662",
+        "end_exclusive": "0x004766b1",
+        "sha256": "937aa1db2b826df396a30049b42d8a21d205c39d6bf252fbd220f86a41fb1b24"
+      }
+    },
+    {
+      "id": "TerrainRecolte",
+      "address": "0x004781e8",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "TerrainRecolte",
+        "start": "0x004781e8",
+        "end_exclusive": "0x00478247",
+        "sha256": "4a9e85afb6f8d605d8d8195a6c27dc3af3466887e4a1be8c079679627b69768f"
+      }
+    },
+    {
+      "id": "CalculTransporteEngin",
+      "address": "0x0044f2d4",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "CalculTransporteEngin",
+        "start": "0x0044f2d4",
+        "end_exclusive": "0x0044f8a7",
+        "sha256": "8dc7dfe754868f37b0743c5605345fd6f02e317857680c2924ff9f64edebc8d5"
+      }
+    },
+    {
+      "id": "CalculAttaqueEngin",
+      "address": "0x00451914",
+      "kind": "routine",
+      "owners": [
+        "combat"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "CalculAttaqueEngin",
+        "start": "0x00451914",
+        "end_exclusive": "0x00452c94",
+        "sha256": "5063a40da1b98b9aa921978118a8d4a7634cc691b7d61cae3498d7b41b697550"
+      }
+    },
+    {
+      "id": "InfligeDegat",
+      "address": "0x00450874",
+      "kind": "routine",
+      "owners": [
+        "combat"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "CalculEnginNextEtape",
+      "address": "0x00456db5",
+      "kind": "routine",
+      "owners": [
+        "ai-runtime"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "CalculEnginNextEtape",
+        "start": "0x00456db5",
+        "end_exclusive": "0x00456f0a",
+        "sha256": "0f723207d66d7f17e359250511a4bc1042d885ea7898e07b3871f017ad9f2b59"
+      }
+    },
+    {
+      "id": "EnginNextEtape",
+      "address": "0x0045442c",
+      "kind": "routine",
+      "owners": [
+        "ai-runtime"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "EnginNextEtape",
+        "start": "0x0045442c",
+        "end_exclusive": "0x00456c34",
+        "sha256": "2356aec6cf88f980e5a3e6583890f9e55f7cd27cf54c8aab639b1fec4e27d573"
+      }
+    },
+    {
+      "id": "CalculBatimentNextEtape",
+      "address": "0x004281c7",
+      "kind": "routine",
+      "owners": [
+        "ai-runtime"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "CalculBatimentNextEtape",
+        "start": "0x004281c7",
+        "end_exclusive": "0x004283e2",
+        "sha256": "b5eb39a4599b78e57d4a10cffc8c9b8d826c96bcc9f057fc845e85f35fbe5787"
+      }
+    },
+    {
+      "id": "BatimentNextEtape",
+      "address": "0x004268d4",
+      "kind": "routine",
+      "owners": [
+        "ai-runtime"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "BatimentNextEtape",
+        "start": "0x004268d4",
+        "end_exclusive": "0x004281c7",
+        "sha256": "036fc675f06a28661163382d1aaa42317bc7b2920b5ea1b5e44eb84cc4e6a3b0"
+      }
+    },
+    {
+      "id": "ConstruitPerso",
+      "address": "0x00423b9b",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "ConstruitPerso",
+        "start": "0x00423b9b",
+        "end_exclusive": "0x00423d14",
+        "sha256": "bd282806f822537bb9194dba3d0da91180f0a7eeccf020b24aea4384669ca260"
+      }
+    },
+    {
+      "id": "EnleveMatiere",
+      "address": "0x0046792c",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "GetRessourceStock",
+      "address": "0x0046769d",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "CalculTroupe",
+      "address": "0x004259e6",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "CalculTroupe",
+        "start": "0x004259e6",
+        "end_exclusive": "0x00426418",
+        "sha256": "53fb303f599bd07fe7cadb6b3a4ab3a0784a9e65769622cd5482403f7b1a2c0d"
+      }
+    },
+    {
+      "id": "BatimentAlloc",
+      "address": "0x00418e95",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "BatimentAlloc",
+        "start": "0x00418e95",
+        "end_exclusive": "0x0041908e",
+        "sha256": "54d4c2204f12c359b54eacc5f24e99f950d4571c7638d20c089bc3ea3cc1ca6b"
+      }
+    },
+    {
+      "id": "TestFinDeMission",
+      "address": "0x00458606",
+      "kind": "routine",
+      "owners": [
+        "missions"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "TestFinDeMission",
+        "start": "0x00458606",
+        "end_exclusive": "0x00458ae6",
+        "sha256": "ccf3d2595343ffff9853884dfec8d44672e1c97dabd9d689b4e6d7acc658610b"
+      }
+    },
+    {
+      "id": "TestFinDeMission6",
+      "address": "0x004585ea",
+      "kind": "routine",
+      "owners": [
+        "missions"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "TestFinDeMission6",
+        "start": "0x004585ea",
+        "end_exclusive": "0x00458606",
+        "sha256": "8e0e39a94139563456b984c8accf4c18d382aac00d7a306061c20e9766874313"
+      }
+    },
+    {
+      "id": "USER32.dll!SetCursorPos",
+      "address": "0x005232c8",
+      "kind": "import_slot",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "original PE import table",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "PartieGetResultat",
+      "address": "0x004585e4",
+      "kind": "routine",
+      "owners": [
+        "missions"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "PartieGetResultat",
+        "start": "0x004585e4",
+        "end_exclusive": "0x004585ea",
+        "sha256": "0b36616e783680fe859c0261ef908ea99e80b842f870e5b6ea1b0490d73cdf89"
+      }
+    },
+    {
+      "id": "MissionNext",
+      "address": "0x0046c08c",
+      "kind": "routine",
+      "owners": [
+        "missions"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "MissionNext",
+        "start": "0x0046c08c",
+        "end_exclusive": "0x0046c11a",
+        "sha256": "155d1ec2b05d816c5fe356160cfb67411a6d476b43c6754eaf977ac3d9f40764"
+      }
+    },
+    {
+      "id": "MissionLoad",
+      "address": "0x0046c2cf",
+      "kind": "routine",
+      "owners": [
+        "missions"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "USER32.dll!ShowCursor",
+      "address": "0x005232d0",
+      "kind": "import_slot",
+      "owners": [
+        "macos"
+      ],
+      "naming_evidence": "original PE import table",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "ProjectileCalcul",
+      "address": "0x0046fc0f",
+      "kind": "routine",
+      "owners": [
+        "combat"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "RechercheCalcul",
+      "address": "0x0047125c",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "RechercheCalcul",
+        "start": "0x0047125c",
+        "end_exclusive": "0x0047149d",
+        "sha256": "19f9e5a645a56d9b593179809bb4191c3dc777664ed54f8326c8900c98af4e0f"
+      }
+    },
+    {
+      "id": "CalculMatiere",
+      "address": "0x00467718",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "CalculMatiere",
+        "start": "0x00467718",
+        "end_exclusive": "0x004678f2",
+        "sha256": "747a6f4a5ef584d93d6b6b97b7273dd693822617b5f83d4eaaa303673f1c2013"
+      }
+    },
+    {
+      "id": "MissionReStart",
+      "address": "0x0046b57f",
+      "kind": "routine",
+      "owners": [
+        "missions"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "MissionReStart",
+        "start": "0x0046b57f",
+        "end_exclusive": "0x0046b5b8",
+        "sha256": "0ff63d2c616bff16d1f2af514580717f8ad48f107e94b26056fea4692b9043b8"
+      }
+    },
+    {
+      "id": "PlaceBatiment",
+      "address": "0x0041c4ac",
+      "kind": "routine",
+      "owners": [
+        "core"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map"
+    },
+    {
+      "id": "InitBatimentPlayer",
+      "address": "0x0041be88",
+      "kind": "routine",
+      "owners": [
+        "economy"
+      ],
+      "naming_evidence": "imported original symbol",
+      "runtime_reachability": "not established by this static map",
+      "byte_evidence": {
+        "path": "evidencias/original-player-action-bytes.json",
+        "routine": "InitBatimentPlayer",
+        "start": "0x0041be88",
+        "end_exclusive": "0x0041bfe6",
+        "sha256": "98368a83f63b800976c6a9efa6f15ea2b519c8732d5ccc3534e08e23959140c5"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "WndProc",
+      "target": "USER32.dll!BeginPaint",
+      "site": "0x00418276",
+      "bytes_hex": "2eff1578325200",
+      "target_address": "0x00523278",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "WndProc",
+      "target": "USER32.dll!EndPaint",
+      "site": "0x00418281",
+      "bytes_hex": "2eff1588325200",
+      "target_address": "0x00523288",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "WndProc",
+      "target": "USER32.dll!PostQuitMessage",
+      "site": "0x0041851f",
+      "bytes_hex": "2eff15bc325200",
+      "target_address": "0x005232bc",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "WndProc",
+      "target": "USER32.dll!DefWindowProcA",
+      "site": "0x00418581",
+      "bytes_hex": "2eff1580325200",
+      "target_address": "0x00523280",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "_WinMain@16",
+      "target": "USER32.dll!FindWindowA",
+      "site": "0x00460186",
+      "bytes_hex": "2eff158c325200",
+      "target_address": "0x0052328c",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "_WinMain@16",
+      "target": "USER32.dll!PeekMessageA",
+      "site": "0x004601d1",
+      "bytes_hex": "2eff15b8325200",
+      "target_address": "0x005232b8",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "_WinMain@16",
+      "target": "USER32.dll!GetMessageA",
+      "site": "0x004601e4",
+      "bytes_hex": "2eff1598325200",
+      "target_address": "0x00523298",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "_WinMain@16",
+      "target": "USER32.dll!TranslateMessage",
+      "site": "0x004601f2",
+      "bytes_hex": "2eff15d8325200",
+      "target_address": "0x005232d8",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "_WinMain@16",
+      "target": "USER32.dll!DispatchMessageA",
+      "site": "0x004601fc",
+      "bytes_hex": "2eff1584325200",
+      "target_address": "0x00523284",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "_WinMain@16",
+      "target": "ProgIteration",
+      "site": "0x0046020d",
+      "bytes_hex": "e8fc4d0100",
+      "target_address": "0x0047500e",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "_WinMain@16",
+      "target": "USER32.dll!WaitMessage",
+      "site": "0x00460214",
+      "bytes_hex": "2eff15e4325200",
+      "target_address": "0x005232e4",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "_WinMain@16",
+      "target": "USER32.dll!UnregisterClassA",
+      "site": "0x00460247",
+      "bytes_hex": "2eff15dc325200",
+      "target_address": "0x005232dc",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "_WinMain@16",
+      "target": "USER32.dll!MessageBoxA",
+      "site": "0x00460267",
+      "bytes_hex": "2eff15b0325200",
+      "target_address": "0x005232b0",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProgIteration",
+      "target": "USER32.dll!GetCursorPos",
+      "site": "0x00475044",
+      "bytes_hex": "2eff1594325200",
+      "target_address": "0x00523294",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProgIteration",
+      "target": "CalculGame",
+      "site": "0x0047505e",
+      "bytes_hex": "e80578fbff",
+      "target_address": "0x0042c868",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "GrabAllInput",
+      "target": "USER32.dll!GetCursorPos",
+      "site": "0x00474fee",
+      "bytes_hex": "2eff1594325200",
+      "target_address": "0x00523294",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x004292f9",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x00429320",
+      "bytes_hex": "e8af590300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x00429327",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "MouseZone",
+      "site": "0x004293c6",
+      "bytes_hex": "e8e1080500",
+      "target_address": "0x00479cac",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x004293e2",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x004293fc",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x00429425",
+      "bytes_hex": "e8aa580300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x00429540",
+      "bytes_hex": "e88f570300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042954f",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "DeSelectionGroupe",
+      "site": "0x004295c0",
+      "bytes_hex": "e8c6900400",
+      "target_address": "0x0047268b",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "BatimentDeselectionner",
+      "site": "0x004295c9",
+      "bytes_hex": "e89520ffff",
+      "target_address": "0x0041b663",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x004295f5",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x00429677",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x004296a6",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x004296d5",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x004296ea",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x00429704",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042972b",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x00429745",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042976c",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042977a",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "BatimentGetTypeName",
+      "site": "0x00429ad1",
+      "bytes_hex": "e821f0feff",
+      "target_address": "0x00418af7",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x00429c88",
+      "bytes_hex": "e847500300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042a03c",
+      "bytes_hex": "e8934c0300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042a0e3",
+      "bytes_hex": "e8ec4b0300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042a488",
+      "bytes_hex": "e847480300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042a52c",
+      "bytes_hex": "e8a3470300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042a5e6",
+      "bytes_hex": "e8e9460300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042a6a3",
+      "bytes_hex": "e82c460300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "BatimentDeselectionner",
+      "site": "0x0042a6aa",
+      "bytes_hex": "e8b40fffff",
+      "target_address": "0x0041b663",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042a764",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042a77f",
+      "bytes_hex": "e850450300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042ab7d",
+      "bytes_hex": "e852410300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042ad8e",
+      "bytes_hex": "e8413f0300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042aecf",
+      "bytes_hex": "e8003e0300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "BatimentConstruit",
+      "site": "0x0042af25",
+      "bytes_hex": "e82817ffff",
+      "target_address": "0x0041c652",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042af96",
+      "bytes_hex": "e8393d0300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "BatimentConstruit",
+      "site": "0x0042b03e",
+      "bytes_hex": "e80f16ffff",
+      "target_address": "0x0041c652",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "BatimentConstruit",
+      "site": "0x0042b0d2",
+      "bytes_hex": "e87b15ffff",
+      "target_address": "0x0041c652",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042b486",
+      "bytes_hex": "e849380300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042b61c",
+      "bytes_hex": "e8b3360300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042b82a",
+      "bytes_hex": "e8a5340300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "DeSelectionGroupe",
+      "site": "0x0042b935",
+      "bytes_hex": "e8516d0400",
+      "target_address": "0x0047268b",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SelectionEngin",
+      "site": "0x0042b94a",
+      "bytes_hex": "e88d890400",
+      "target_address": "0x004742dc",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042b9aa",
+      "bytes_hex": "e825330300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "BatimentSelection",
+      "site": "0x0042b9b9",
+      "bytes_hex": "e8b5fcfeff",
+      "target_address": "0x0041b673",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "BatimentDeselectionner",
+      "site": "0x0042ba03",
+      "bytes_hex": "e85bfcfeff",
+      "target_address": "0x0041b663",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042ba20",
+      "bytes_hex": "e8af320300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042bbd6",
+      "bytes_hex": "e8f9300300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "TestRessource",
+      "site": "0x0042bf6b",
+      "bytes_hex": "e875b70300",
+      "target_address": "0x004676e5",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "SetPlayerOrdre",
+      "site": "0x0042bf88",
+      "bytes_hex": "e8472d0300",
+      "target_address": "0x0045ecd4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "TestRessource",
+      "site": "0x0042c0fa",
+      "bytes_hex": "e8e6b50300",
+      "target_address": "0x004676e5",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "BatimentGetTypeName",
+      "site": "0x0042c141",
+      "bytes_hex": "e8b1c9feff",
+      "target_address": "0x00418af7",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputGame",
+      "target": "TestRessource",
+      "site": "0x0042c1a9",
+      "bytes_hex": "e837b50300",
+      "target_address": "0x004676e5",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "KeyPressed",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042c341",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "KeyUnPressed",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042c376",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "KeyTestRelease",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042c3a0",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "Deselection",
+      "target": "DeSelectionGroupe",
+      "site": "0x00429187",
+      "bytes_hex": "e8ff940400",
+      "target_address": "0x0047268b",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "Deselection",
+      "target": "BatimentDeselectionner",
+      "site": "0x0042918e",
+      "bytes_hex": "e8d024ffff",
+      "target_address": "0x0041b663",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InputReceive",
+      "target": "MenuInit",
+      "site": "0x0045ec4b",
+      "bytes_hex": "e86b960000",
+      "target_address": "0x004682bb",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "MenuInit",
+      "site": "0x0045ee23",
+      "bytes_hex": "e893940000",
+      "target_address": "0x004682bb",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "DeSelectionGroupe",
+      "site": "0x0045ee32",
+      "bytes_hex": "e854380100",
+      "target_address": "0x0047268b",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "BatimentDeselectionner",
+      "site": "0x0045ee3c",
+      "bytes_hex": "e822c8fbff",
+      "target_address": "0x0041b663",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "DeSelectionGroupe",
+      "site": "0x0045ee4b",
+      "bytes_hex": "e83b380100",
+      "target_address": "0x0047268b",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "BatimentDeselectionner",
+      "site": "0x0045ee55",
+      "bytes_hex": "e809c8fbff",
+      "target_address": "0x0041b663",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "SelectionEngin",
+      "site": "0x0045ee83",
+      "bytes_hex": "e854540100",
+      "target_address": "0x004742dc",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "BatimentDeselectionner",
+      "site": "0x0045ee8f",
+      "bytes_hex": "e8cfc7fbff",
+      "target_address": "0x0041b663",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "EnginAddSelection",
+      "site": "0x0045eea5",
+      "bytes_hex": "e823530100",
+      "target_address": "0x004741cd",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "DeSelectionGroupe",
+      "site": "0x0045eeb4",
+      "bytes_hex": "e8d2370100",
+      "target_address": "0x0047268b",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "BatimentDeselectionner",
+      "site": "0x0045eebe",
+      "bytes_hex": "e8a0c7fbff",
+      "target_address": "0x0041b663",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "BatimentSelection",
+      "site": "0x0045eed8",
+      "bytes_hex": "e896c7fbff",
+      "target_address": "0x0041b673",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "BatimentDeselectionner",
+      "site": "0x0045ef07",
+      "bytes_hex": "e857c7fbff",
+      "target_address": "0x0041b663",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "DeSelectionGroupe",
+      "site": "0x0045ef11",
+      "bytes_hex": "e875370100",
+      "target_address": "0x0047268b",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "SetConstruitBatimentSelect",
+      "site": "0x0045ef9b",
+      "bytes_hex": "e8674a0100",
+      "target_address": "0x00473a07",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "SetDeplaceEnginSelect",
+      "site": "0x0045efd8",
+      "bytes_hex": "e8914e0100",
+      "target_address": "0x00473e6e",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "SetMineEnginSelect",
+      "site": "0x0045eff9",
+      "bytes_hex": "e826430100",
+      "target_address": "0x00473324",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "SetDepotEnginSelect",
+      "site": "0x0045f037",
+      "bytes_hex": "e8f0400100",
+      "target_address": "0x0047312c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "SetRecolteEnginSelect",
+      "site": "0x0045f058",
+      "bytes_hex": "e833420100",
+      "target_address": "0x00473290",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "SetTransporteEnginSelect",
+      "site": "0x0045f076",
+      "bytes_hex": "e897410100",
+      "target_address": "0x00473212",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "SetAttaqueEnginSelect",
+      "site": "0x0045f105",
+      "bytes_hex": "e8b54c0100",
+      "target_address": "0x00473dbf",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "InitRecruteTroupe",
+      "site": "0x0045f1a9",
+      "bytes_hex": "e83492fcff",
+      "target_address": "0x004283e2",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "ProcessInputGame",
+      "target": "SetRamasseEnginSelect",
+      "site": "0x0045f217",
+      "bytes_hex": "e8104b0100",
+      "target_address": "0x00473d2c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "SetConstruitBatimentSelect",
+      "target": "SetEnginConstruitBatiment",
+      "site": "0x00473a84",
+      "bytes_hex": "e8451afdff",
+      "target_address": "0x004454ce",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "SetDeplaceEnginSelect",
+      "target": "SetDeplaceEngin",
+      "site": "0x00473ed2",
+      "bytes_hex": "e8fc18fdff",
+      "target_address": "0x004457d3",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "SetAttaqueEnginSelect",
+      "target": "SetAttaqueEngin",
+      "site": "0x00473e39",
+      "bytes_hex": "e8f81bfdff",
+      "target_address": "0x00445a36",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "SetRecolteEnginSelect",
+      "target": "SetRecolteEngin",
+      "site": "0x004732f6",
+      "bytes_hex": "e8c21bfdff",
+      "target_address": "0x00444ebd",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "SetTransporteEnginSelect",
+      "target": "SetTransporteEngin",
+      "site": "0x00473262",
+      "bytes_hex": "e8181cfdff",
+      "target_address": "0x00444e7f",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "SetDeplaceEngin",
+      "target": "ResetOrdre",
+      "site": "0x004457fa",
+      "bytes_hex": "e87dddffff",
+      "target_address": "0x0044357c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "SetDeplaceEngin",
+      "target": "ResetOrdre",
+      "site": "0x0044586a",
+      "bytes_hex": "e80dddffff",
+      "target_address": "0x0044357c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "SetEnginConstruitBatiment",
+      "target": "ResetOrdre",
+      "site": "0x00445560",
+      "bytes_hex": "e817e0ffff",
+      "target_address": "0x0044357c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "SetRecolteEngin",
+      "target": "ResetOrdre",
+      "site": "0x00444edc",
+      "bytes_hex": "e89be6ffff",
+      "target_address": "0x0044357c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "SetAttaqueEngin",
+      "target": "ResetOrdre",
+      "site": "0x00445a7b",
+      "bytes_hex": "e8fcdaffff",
+      "target_address": "0x0044357c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculConstruireBatiment",
+      "target": "DeplaceEngin",
+      "site": "0x0044accb",
+      "bytes_hex": "e83ce6ffff",
+      "target_address": "0x0044930c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculConstruireBatiment",
+      "target": "CreerBatiment",
+      "site": "0x0044ad89",
+      "bytes_hex": "e81451fdff",
+      "target_address": "0x0041fea2",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculConstruireBatiment",
+      "target": "BatimentConstruit",
+      "site": "0x0044b1eb",
+      "bytes_hex": "e86214fdff",
+      "target_address": "0x0041c652",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculConstruireBatiment",
+      "target": "ProjectileInit",
+      "site": "0x0044b28d",
+      "bytes_hex": "e8ba310200",
+      "target_address": "0x0046e44c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculConstruireBatiment",
+      "target": "BatimentConstruction",
+      "site": "0x0044b2be",
+      "bytes_hex": "e8961cfdff",
+      "target_address": "0x0041cf59",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculWorkEngin",
+      "target": "DeplaceEngin",
+      "site": "0x0044bd16",
+      "bytes_hex": "e8f1d5ffff",
+      "target_address": "0x0044930c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculWorkEngin",
+      "target": "MineRecolte",
+      "site": "0x0044c14b",
+      "bytes_hex": "e857940200",
+      "target_address": "0x004755a7",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculWorkEngin",
+      "target": "BatimentAjouteMatiere",
+      "site": "0x0044c925",
+      "bytes_hex": "e8e56afdff",
+      "target_address": "0x0042340f",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculWorkEngin",
+      "target": "DeplaceEngin",
+      "site": "0x0044cc42",
+      "bytes_hex": "e8c5c6ffff",
+      "target_address": "0x0044930c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculWorkEngin",
+      "target": "TerrainRetireMatiere",
+      "site": "0x0044cc65",
+      "bytes_hex": "e8f8990200",
+      "target_address": "0x00476662",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculWorkEngin",
+      "target": "DeplaceEngin",
+      "site": "0x0044cd27",
+      "bytes_hex": "e8e0c5ffff",
+      "target_address": "0x0044930c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculWorkEngin",
+      "target": "TerrainRecolte",
+      "site": "0x0044d079",
+      "bytes_hex": "e86ab10200",
+      "target_address": "0x004781e8",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculWorkEngin",
+      "target": "SetDeplaceEngin",
+      "site": "0x0044da0f",
+      "bytes_hex": "e8bf7dffff",
+      "target_address": "0x004457d3",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculWorkEngin",
+      "target": "TerrainRecolte",
+      "site": "0x0044dabb",
+      "bytes_hex": "e828a70200",
+      "target_address": "0x004781e8",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculWorkEngin",
+      "target": "BatimentAjouteMatiere",
+      "site": "0x0044e1da",
+      "bytes_hex": "e83052fdff",
+      "target_address": "0x0042340f",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculTransporteEngin",
+      "target": "DeplaceEngin",
+      "site": "0x0044f356",
+      "bytes_hex": "e8b19fffff",
+      "target_address": "0x0044930c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculTransporteEngin",
+      "target": "TerrainRetireMatiere",
+      "site": "0x0044f455",
+      "bytes_hex": "e808720200",
+      "target_address": "0x00476662",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculTransporteEngin",
+      "target": "BatimentAjouteMatiere",
+      "site": "0x0044f865",
+      "bytes_hex": "e8a53bfdff",
+      "target_address": "0x0042340f",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculAttaqueEngin",
+      "target": "SetDeplaceEngin",
+      "site": "0x00451e82",
+      "bytes_hex": "e84c39ffff",
+      "target_address": "0x004457d3",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculAttaqueEngin",
+      "target": "DeplaceEngin",
+      "site": "0x00452006",
+      "bytes_hex": "e80173ffff",
+      "target_address": "0x0044930c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculAttaqueEngin",
+      "target": "ProjectileInit",
+      "site": "0x004527d1",
+      "bytes_hex": "e876bc0100",
+      "target_address": "0x0046e44c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculAttaqueEngin",
+      "target": "ProjectileInit",
+      "site": "0x0045280b",
+      "bytes_hex": "e83cbc0100",
+      "target_address": "0x0046e44c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculAttaqueEngin",
+      "target": "ProjectileInit",
+      "site": "0x004528b2",
+      "bytes_hex": "e895bb0100",
+      "target_address": "0x0046e44c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculAttaqueEngin",
+      "target": "InfligeDegat",
+      "site": "0x004528cc",
+      "bytes_hex": "e8a3dfffff",
+      "target_address": "0x00450874",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculAttaqueEngin",
+      "target": "ResetOrdre",
+      "site": "0x00452a1b",
+      "bytes_hex": "e85c0bffff",
+      "target_address": "0x0044357c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculEnginNextEtape",
+      "target": "EnginNextEtape",
+      "site": "0x00456ead",
+      "bytes_hex": "e87ad5ffff",
+      "target_address": "0x0045442c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculBatimentNextEtape",
+      "target": "BatimentNextEtape",
+      "site": "0x004282da",
+      "bytes_hex": "e8f5e5ffff",
+      "target_address": "0x004268d4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InitRecruteTroupe",
+      "target": "TestRessource",
+      "site": "0x00428453",
+      "bytes_hex": "e88df20300",
+      "target_address": "0x004676e5",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InitRecruteTroupe",
+      "target": "EnleveMatiere",
+      "site": "0x00428488",
+      "bytes_hex": "e89ff40300",
+      "target_address": "0x0046792c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InitRecruteTroupe",
+      "target": "GetRessourceStock",
+      "site": "0x004284b1",
+      "bytes_hex": "e8e7f10300",
+      "target_address": "0x0046769d",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InitRecruteTroupe",
+      "target": "EnleveMatiere",
+      "site": "0x00428507",
+      "bytes_hex": "e820f40300",
+      "target_address": "0x0046792c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InitRecruteTroupe",
+      "target": "GetRessourceStock",
+      "site": "0x00428530",
+      "bytes_hex": "e868f10300",
+      "target_address": "0x0046769d",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InitRecruteTroupe",
+      "target": "EnleveMatiere",
+      "site": "0x00428583",
+      "bytes_hex": "e8a4f30300",
+      "target_address": "0x0046792c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InitRecruteTroupe",
+      "target": "GetRessourceStock",
+      "site": "0x004285ac",
+      "bytes_hex": "e8ecf00300",
+      "target_address": "0x0046769d",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "TestFinDeMission",
+      "target": "TestRessource",
+      "site": "0x0045865d",
+      "bytes_hex": "e883f00000",
+      "target_address": "0x004676e5",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "TestFinDeMission",
+      "target": "TestRessource",
+      "site": "0x004586bd",
+      "bytes_hex": "e823f00000",
+      "target_address": "0x004676e5",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "TestFinDeMission",
+      "target": "TestRessource",
+      "site": "0x004589a0",
+      "bytes_hex": "e840ed0000",
+      "target_address": "0x004676e5",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!SetCursorPos",
+      "site": "0x0042c89e",
+      "bytes_hex": "2eff15c8325200",
+      "target_address": "0x005232c8",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "MenuInit",
+      "site": "0x0042c931",
+      "bytes_hex": "e885b90300",
+      "target_address": "0x004682bb",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042c97b",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "MenuInit",
+      "site": "0x0042c9ad",
+      "bytes_hex": "e809b90300",
+      "target_address": "0x004682bb",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042c9b4",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "PartieGetResultat",
+      "site": "0x0042c9cc",
+      "bytes_hex": "e813bc0200",
+      "target_address": "0x004585e4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042ca3a",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042ca62",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "MissionNext",
+      "site": "0x0042ca6e",
+      "bytes_hex": "e819f60300",
+      "target_address": "0x0046c08c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042cab8",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "MenuInit",
+      "site": "0x0042cbd0",
+      "bytes_hex": "e8e6b60300",
+      "target_address": "0x004682bb",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "MouseZone",
+      "site": "0x0042cbda",
+      "bytes_hex": "e8cdd00400",
+      "target_address": "0x00479cac",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042cc0c",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "MenuInit",
+      "site": "0x0042ccd1",
+      "bytes_hex": "e8e5b50300",
+      "target_address": "0x004682bb",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "MouseZone",
+      "site": "0x0042ccdb",
+      "bytes_hex": "e8cccf0400",
+      "target_address": "0x00479cac",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042cd61",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "MenuInit",
+      "site": "0x0042cfb0",
+      "bytes_hex": "e806b30300",
+      "target_address": "0x004682bb",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "MouseZone",
+      "site": "0x0042cfc0",
+      "bytes_hex": "e8e7cc0400",
+      "target_address": "0x00479cac",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042cfe5",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042d011",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042d024",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042d03c",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042d04f",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042d067",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042d07a",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "MenuInit",
+      "site": "0x0042d0f9",
+      "bytes_hex": "e8bdb10300",
+      "target_address": "0x004682bb",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042d100",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "MouseZone",
+      "site": "0x0042d10c",
+      "bytes_hex": "e89bcb0400",
+      "target_address": "0x00479cac",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042d1ab",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!GetAsyncKeyState",
+      "site": "0x0042d1bd",
+      "bytes_hex": "2eff1590325200",
+      "target_address": "0x00523290",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "MouseInit",
+      "site": "0x0042d1da",
+      "bytes_hex": "e805460400",
+      "target_address": "0x004717e4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "MissionLoad",
+      "site": "0x0042d228",
+      "bytes_hex": "e8a2f00300",
+      "target_address": "0x0046c2cf",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!ShowCursor",
+      "site": "0x0042d242",
+      "bytes_hex": "2eff15d0325200",
+      "target_address": "0x005232d0",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "MenuInit",
+      "site": "0x0042d263",
+      "bytes_hex": "e853b00300",
+      "target_address": "0x004682bb",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!ShowCursor",
+      "site": "0x0042d26a",
+      "bytes_hex": "2eff15d0325200",
+      "target_address": "0x005232d0",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!ShowCursor",
+      "site": "0x0042d278",
+      "bytes_hex": "2eff15d0325200",
+      "target_address": "0x005232d0",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "MenuInit",
+      "site": "0x0042d2d0",
+      "bytes_hex": "e8e6af0300",
+      "target_address": "0x004682bb",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "InputGame",
+      "site": "0x0042d33b",
+      "bytes_hex": "e838bfffff",
+      "target_address": "0x00429278",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "InputSend",
+      "site": "0x0042d342",
+      "bytes_hex": "e858190300",
+      "target_address": "0x0045ec9f",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "InputReceive",
+      "site": "0x0042d34b",
+      "bytes_hex": "e82c170300",
+      "target_address": "0x0045ea7c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "InputGame",
+      "site": "0x0042d36c",
+      "bytes_hex": "e807bfffff",
+      "target_address": "0x00429278",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "ProcessInputGame",
+      "site": "0x0042d3b0",
+      "bytes_hex": "e80b1a0300",
+      "target_address": "0x0045edc0",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "ProjectileCalcul",
+      "site": "0x0042d3f0",
+      "bytes_hex": "e81a280400",
+      "target_address": "0x0046fc0f",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "CalculEnginNextEtape",
+      "site": "0x0042d3f5",
+      "bytes_hex": "e8bb990200",
+      "target_address": "0x00456db5",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "CalculBatimentNextEtape",
+      "site": "0x0042d3fa",
+      "bytes_hex": "e8c8adffff",
+      "target_address": "0x004281c7",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "RechercheCalcul",
+      "site": "0x0042d3ff",
+      "bytes_hex": "e8583e0400",
+      "target_address": "0x0047125c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "CalculMatiere",
+      "site": "0x0042d413",
+      "bytes_hex": "e800a30300",
+      "target_address": "0x00467718",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "TestFinDeMission",
+      "site": "0x0042d481",
+      "bytes_hex": "e880b10200",
+      "target_address": "0x00458606",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CalculGame",
+      "target": "USER32.dll!PostQuitMessage",
+      "site": "0x0042d4db",
+      "bytes_hex": "2eff15bc325200",
+      "target_address": "0x005232bc",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "MenuInit",
+      "target": "USER32.dll!ShowCursor",
+      "site": "0x0046836a",
+      "bytes_hex": "2eff15d0325200",
+      "target_address": "0x005232d0",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "MenuInit",
+      "target": "USER32.dll!ShowCursor",
+      "site": "0x00468373",
+      "bytes_hex": "2eff15d0325200",
+      "target_address": "0x005232d0",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "MenuInit",
+      "target": "USER32.dll!ShowCursor",
+      "site": "0x004683dd",
+      "bytes_hex": "2eff15d0325200",
+      "target_address": "0x005232d0",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "MenuInit",
+      "target": "USER32.dll!ShowCursor",
+      "site": "0x004684da",
+      "bytes_hex": "2eff15d0325200",
+      "target_address": "0x005232d0",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "MenuInit",
+      "target": "USER32.dll!ShowCursor",
+      "site": "0x004688b9",
+      "bytes_hex": "2eff15d0325200",
+      "target_address": "0x005232d0",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "MenuInit",
+      "target": "USER32.dll!ShowCursor",
+      "site": "0x00468b5d",
+      "bytes_hex": "2eff15d0325200",
+      "target_address": "0x005232d0",
+      "kind": "iat_indirect",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "SetAttaqueEngin",
+      "site": "0x004547db",
+      "bytes_hex": "e85612ffff",
+      "target_address": "0x00445a36",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "SetDeplaceEngin",
+      "site": "0x00454a68",
+      "bytes_hex": "e8660dffff",
+      "target_address": "0x004457d3",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "SetDeplaceEngin",
+      "site": "0x00454cc8",
+      "bytes_hex": "e8060bffff",
+      "target_address": "0x004457d3",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "SetDeplaceEngin",
+      "site": "0x00454da2",
+      "bytes_hex": "e82c0affff",
+      "target_address": "0x004457d3",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "SetDeplaceEngin",
+      "site": "0x004550b4",
+      "bytes_hex": "e81a07ffff",
+      "target_address": "0x004457d3",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "SetDeplaceEngin",
+      "site": "0x004552c5",
+      "bytes_hex": "e80905ffff",
+      "target_address": "0x004457d3",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "DeplaceEngin",
+      "site": "0x004555ac",
+      "bytes_hex": "e85b3dffff",
+      "target_address": "0x0044930c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "TerrainRetireMatiere",
+      "site": "0x004555e9",
+      "bytes_hex": "e874100200",
+      "target_address": "0x00476662",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "TestRessource",
+      "site": "0x004556c1",
+      "bytes_hex": "e81f200100",
+      "target_address": "0x004676e5",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "CalculTransporteEngin",
+      "site": "0x00455e28",
+      "bytes_hex": "e8a794ffff",
+      "target_address": "0x0044f2d4",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "TerrainRetireMatiere",
+      "site": "0x00455ed2",
+      "bytes_hex": "e88b070200",
+      "target_address": "0x00476662",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "SetDeplaceEngin",
+      "site": "0x00455fd4",
+      "bytes_hex": "e8faf7feff",
+      "target_address": "0x004457d3",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "GetRessourceStock",
+      "site": "0x0045621c",
+      "bytes_hex": "e87c140100",
+      "target_address": "0x0046769d",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "BatimentAjouteMatiere",
+      "site": "0x0045628e",
+      "bytes_hex": "e87cd1fcff",
+      "target_address": "0x0042340f",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "CalculConstruireBatiment",
+      "site": "0x00456516",
+      "bytes_hex": "e84546ffff",
+      "target_address": "0x0044ab60",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "CalculWorkEngin",
+      "site": "0x00456731",
+      "bytes_hex": "e83e55ffff",
+      "target_address": "0x0044bc74",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "SetDeplaceEngin",
+      "site": "0x004567bb",
+      "bytes_hex": "e813f0feff",
+      "target_address": "0x004457d3",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "CalculAttaqueEngin",
+      "site": "0x004568a3",
+      "bytes_hex": "e86cb0ffff",
+      "target_address": "0x00451914",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "DeselectionEngin",
+      "site": "0x00456a0f",
+      "bytes_hex": "e834bc0100",
+      "target_address": "0x00472648",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "DeselectionEngin",
+      "site": "0x00456ab3",
+      "bytes_hex": "e890bb0100",
+      "target_address": "0x00472648",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "EnginNextEtape",
+      "target": "DeselectionEngin",
+      "site": "0x00456bd9",
+      "bytes_hex": "e86aba0100",
+      "target_address": "0x00472648",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "BatimentNextEtape",
+      "target": "CalculTroupe",
+      "site": "0x00426983",
+      "bytes_hex": "e85ef0ffff",
+      "target_address": "0x004259e6",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "BatimentNextEtape",
+      "target": "CalculTroupe",
+      "site": "0x004269f4",
+      "bytes_hex": "e8edefffff",
+      "target_address": "0x004259e6",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "BatimentNextEtape",
+      "target": "CalculTroupe",
+      "site": "0x00426ab9",
+      "bytes_hex": "e828efffff",
+      "target_address": "0x004259e6",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "BatimentNextEtape",
+      "target": "CalculTroupe",
+      "site": "0x00427e1f",
+      "bytes_hex": "e8c2dbffff",
+      "target_address": "0x004259e6",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "BatimentNextEtape",
+      "target": "CalculTroupe",
+      "site": "0x00427f53",
+      "bytes_hex": "e88edaffff",
+      "target_address": "0x004259e6",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "BatimentNextEtape",
+      "target": "CalculTroupe",
+      "site": "0x00428145",
+      "bytes_hex": "e89cd8ffff",
+      "target_address": "0x004259e6",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CreerBatiment",
+      "target": "TestRessource",
+      "site": "0x0041ff52",
+      "bytes_hex": "e88e770400",
+      "target_address": "0x004676e5",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CreerBatiment",
+      "target": "EnleveMatiere",
+      "site": "0x0041ff72",
+      "bytes_hex": "e8b5790400",
+      "target_address": "0x0046792c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CreerBatiment",
+      "target": "GetRessourceStock",
+      "site": "0x0041ff9b",
+      "bytes_hex": "e8fd760400",
+      "target_address": "0x0046769d",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CreerBatiment",
+      "target": "EnleveMatiere",
+      "site": "0x0041fff0",
+      "bytes_hex": "e837790400",
+      "target_address": "0x0046792c",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CreerBatiment",
+      "target": "GetRessourceStock",
+      "site": "0x00420019",
+      "bytes_hex": "e87f760400",
+      "target_address": "0x0046769d",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "CreerBatiment",
+      "target": "PlaceBatiment",
+      "site": "0x00420274",
+      "bytes_hex": "e833c2ffff",
+      "target_address": "0x0041c4ac",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "InitBatimentPlayer",
+      "target": "GetRessourceStock",
+      "site": "0x0041bf89",
+      "bytes_hex": "e80fb70400",
+      "target_address": "0x0046769d",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    },
+    {
+      "source": "BatimentAjouteMatiere",
+      "target": "GetRessourceStock",
+      "site": "0x0042347b",
+      "bytes_hex": "e81d420400",
+      "target_address": "0x0046769d",
+      "kind": "direct_e8",
+      "claim": "byte-proven encoding",
+      "scope": "decoded candidate call inside next-symbol interval; no dynamic execution/reachability claim"
+    }
+  ],
+  "command_dispatch": {
+    "table_address": "0x0045ed20",
+    "entry_width_bytes": 4,
+    "guard": {
+      "site": "0x0045eddb",
+      "maximum_tag": 39
+    },
+    "indirect_jump_site": "0x0045edeb",
+    "cases": [
+      {
+        "code_u16": 0,
+        "table_entry": "0x0045ed20",
+        "branch": "0x0045f2de",
+        "possible_calls": [],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 1,
+        "table_entry": "0x0045ed24",
+        "branch": "0x0045ee46",
+        "possible_calls": [
+          {
+            "site": "0x0045ee4b",
+            "target": "0x0047268b",
+            "callee": "DeSelectionGroupe",
+            "hex": "e83b380100"
+          },
+          {
+            "site": "0x0045ee55",
+            "target": "0x0041b663",
+            "callee": "BatimentDeselectionner",
+            "hex": "e809c8fbff"
+          },
+          {
+            "site": "0x0045ee83",
+            "target": "0x004742dc",
+            "callee": "SelectionEngin",
+            "hex": "e854540100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 2,
+        "table_entry": "0x0045ed28",
+        "branch": "0x0045eeaf",
+        "possible_calls": [
+          {
+            "site": "0x0045eeb4",
+            "target": "0x0047268b",
+            "callee": "DeSelectionGroupe",
+            "hex": "e8d2370100"
+          },
+          {
+            "site": "0x0045eebe",
+            "target": "0x0041b663",
+            "callee": "BatimentDeselectionner",
+            "hex": "e8a0c7fbff"
+          },
+          {
+            "site": "0x0045eed8",
+            "target": "0x0041b673",
+            "callee": "BatimentSelection",
+            "hex": "e896c7fbff"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 3,
+        "table_entry": "0x0045ed2c",
+        "branch": "0x0045ee2d",
+        "possible_calls": [
+          {
+            "site": "0x0045ee32",
+            "target": "0x0047268b",
+            "callee": "DeSelectionGroupe",
+            "hex": "e854380100"
+          },
+          {
+            "site": "0x0045ee3c",
+            "target": "0x0041b663",
+            "callee": "BatimentDeselectionner",
+            "hex": "e822c8fbff"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 4,
+        "table_entry": "0x0045ed30",
+        "branch": "0x0045ef73",
+        "possible_calls": [
+          {
+            "site": "0x0045ef9b",
+            "target": "0x00473a07",
+            "callee": "SetConstruitBatimentSelect",
+            "hex": "e8674a0100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 5,
+        "table_entry": "0x0045ed34",
+        "branch": "0x0045efc1",
+        "possible_calls": [
+          {
+            "site": "0x0045efd8",
+            "target": "0x00473e6e",
+            "callee": "SetDeplaceEnginSelect",
+            "hex": "e8914e0100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 6,
+        "table_entry": "0x0045ed38",
+        "branch": "0x0045efe2",
+        "possible_calls": [
+          {
+            "site": "0x0045eff9",
+            "target": "0x00473324",
+            "callee": "SetMineEnginSelect",
+            "hex": "e826430100"
+          },
+          {
+            "site": "0x0045f037",
+            "target": "0x0047312c",
+            "callee": "SetDepotEnginSelect",
+            "hex": "e8f0400100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 7,
+        "table_entry": "0x0045ed3c",
+        "branch": "0x0045f041",
+        "possible_calls": [
+          {
+            "site": "0x0045f037",
+            "target": "0x0047312c",
+            "callee": "SetDepotEnginSelect",
+            "hex": "e8f0400100"
+          },
+          {
+            "site": "0x0045f058",
+            "target": "0x00473290",
+            "callee": "SetRecolteEnginSelect",
+            "hex": "e833420100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 8,
+        "table_entry": "0x0045ed40",
+        "branch": "0x0045f05f",
+        "possible_calls": [
+          {
+            "site": "0x0045f037",
+            "target": "0x0047312c",
+            "callee": "SetDepotEnginSelect",
+            "hex": "e8f0400100"
+          },
+          {
+            "site": "0x0045f076",
+            "target": "0x00473212",
+            "callee": "SetTransporteEnginSelect",
+            "hex": "e897410100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 9,
+        "table_entry": "0x0045ed44",
+        "branch": "0x0045f1b3",
+        "possible_calls": [
+          {
+            "site": "0x0045f205",
+            "target": "0x00444533",
+            "callee": "SetEnginDepose",
+            "hex": "e82953feff"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 10,
+        "table_entry": "0x0045ed48",
+        "branch": "0x0045f0a4",
+        "possible_calls": [
+          {
+            "site": "0x0045f0bd",
+            "target": "0x0041eddf",
+            "callee": "VendreBatiment",
+            "hex": "e81dfdfbff"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 11,
+        "table_entry": "0x0045ed4c",
+        "branch": "0x0045eee2",
+        "possible_calls": [
+          {
+            "site": "0x0045eef8",
+            "target": "0x004726f7",
+            "callee": "SauveSelectionGroupe",
+            "hex": "e8fa370100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 12,
+        "table_entry": "0x0045ed50",
+        "branch": "0x0045ef02",
+        "possible_calls": [
+          {
+            "site": "0x0045ef07",
+            "target": "0x0041b663",
+            "callee": "BatimentDeselectionner",
+            "hex": "e857c7fbff"
+          },
+          {
+            "site": "0x0045ef11",
+            "target": "0x0047268b",
+            "callee": "DeSelectionGroupe",
+            "hex": "e875370100"
+          },
+          {
+            "site": "0x0045ef2c",
+            "target": "0x00472769",
+            "callee": "RestaureSelectionGroupe",
+            "hex": "e838380100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 13,
+        "table_entry": "0x0045ed54",
+        "branch": "0x0045ee0a",
+        "possible_calls": [
+          {
+            "site": "0x0045ee23",
+            "target": "0x004682bb",
+            "callee": "MenuInit",
+            "hex": "e893940000"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 14,
+        "table_entry": "0x0045ed58",
+        "branch": "0x0045f0c7",
+        "possible_calls": [
+          {
+            "site": "0x0045f0cc",
+            "target": "0x0041a4b6",
+            "callee": "BatimentGetSelection",
+            "hex": "e8e5b3fbff"
+          },
+          {
+            "site": "0x0045f105",
+            "target": "0x00473dbf",
+            "callee": "SetAttaqueEnginSelect",
+            "hex": "e8b54c0100"
+          },
+          {
+            "site": "0x0045f13f",
+            "target": "0x004242cc",
+            "callee": "BatimentInitAttaqueSelect",
+            "hex": "e88851fcff"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 15,
+        "table_entry": "0x0045ed5c",
+        "branch": "0x0045f149",
+        "possible_calls": [
+          {
+            "site": "0x0045f14b",
+            "target": "0x0041a860",
+            "callee": "UpdateBatiment",
+            "hex": "e810b7fbff"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 16,
+        "table_entry": "0x0045ed60",
+        "branch": "0x0045f167",
+        "possible_calls": [
+          {
+            "site": "0x0045f17a",
+            "target": "0x004740c2",
+            "callee": "SetEnginSelectRentreEngin",
+            "hex": "e8434f0100"
+          },
+          {
+            "site": "0x0045f195",
+            "target": "0x00473f4b",
+            "callee": "SetEnginSelectRentreBatiment",
+            "hex": "e8b14d0100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 17,
+        "table_entry": "0x0045ed64",
+        "branch": "0x0045f19f",
+        "possible_calls": [
+          {
+            "site": "0x0045f1a9",
+            "target": "0x004283e2",
+            "callee": "InitRecruteTroupe",
+            "hex": "e83492fcff"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 18,
+        "table_entry": "0x0045ed68",
+        "branch": "0x0045f20f",
+        "possible_calls": [
+          {
+            "site": "0x0045f217",
+            "target": "0x00473d2c",
+            "callee": "SetRamasseEnginSelect",
+            "hex": "e8104b0100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 19,
+        "table_entry": "0x0045ed6c",
+        "branch": "0x0045f07d",
+        "possible_calls": [
+          {
+            "site": "0x0045f037",
+            "target": "0x0047312c",
+            "callee": "SetDepotEnginSelect",
+            "hex": "e8f0400100"
+          },
+          {
+            "site": "0x0045f085",
+            "target": "0x00473194",
+            "callee": "SetDechargeCaveEnginSelect",
+            "hex": "e80a410100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 20,
+        "table_entry": "0x0045ed70",
+        "branch": "0x0045ef42",
+        "possible_calls": [
+          {
+            "site": "0x0045ef4e",
+            "target": "0x00473bbc",
+            "callee": "SetRepareSelect",
+            "hex": "e8694c0100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 21,
+        "table_entry": "0x0045ed74",
+        "branch": "0x0045f155",
+        "possible_calls": [
+          {
+            "site": "0x0045f15d",
+            "target": "0x00474067",
+            "callee": "SetEnginSelectSoigneBatiment",
+            "hex": "e8054f0100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 22,
+        "table_entry": "0x0045ed78",
+        "branch": "0x0045efa5",
+        "possible_calls": [
+          {
+            "site": "0x0045efb7",
+            "target": "0x004737e9",
+            "callee": "SetLanceSortilegeSelect",
+            "hex": "e82d480100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 23,
+        "table_entry": "0x0045ed7c",
+        "branch": "0x0045f27e",
+        "possible_calls": [
+          {
+            "site": "0x0045f285",
+            "target": "0x00461bea",
+            "callee": "MarcheOrdreEchange",
+            "hex": "e860290000"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 24,
+        "table_entry": "0x0045ed80",
+        "branch": "0x0045f269",
+        "possible_calls": [
+          {
+            "site": "0x0045f26b",
+            "target": "0x004663d6",
+            "callee": "MarcheQuitte",
+            "hex": "e866710000"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 25,
+        "table_entry": "0x0045ed84",
+        "branch": "0x0045f28c",
+        "possible_calls": [
+          {
+            "site": "0x0045f28e",
+            "target": "0x00461ce5",
+            "callee": "MarcheOrdreSortie",
+            "hex": "e8522a0000"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 26,
+        "table_entry": "0x0045ed88",
+        "branch": "0x0045f295",
+        "possible_calls": [
+          {
+            "site": "0x0045f2a1",
+            "target": "0x0046249d",
+            "callee": "MarcheDebarasse",
+            "hex": "e8f7310000"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 27,
+        "table_entry": "0x0045ed8c",
+        "branch": "0x0045f2a8",
+        "possible_calls": [
+          {
+            "site": "0x0045f2af",
+            "target": "0x00462c65",
+            "callee": "MarcheDebarasseMiniDonne",
+            "hex": "e8b1390000"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 28,
+        "table_entry": "0x0045ed90",
+        "branch": "0x0045f2b6",
+        "possible_calls": [
+          {
+            "site": "0x0045f2bd",
+            "target": "0x00462d89",
+            "callee": "MarcheDebarasseMiniVeut",
+            "hex": "e8c73a0000"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 29,
+        "table_entry": "0x0045ed94",
+        "branch": "0x0045f2c4",
+        "possible_calls": [
+          {
+            "site": "0x0045f2cb",
+            "target": "0x004637e0",
+            "callee": "MarcheChangePlayerContact",
+            "hex": "e810450000"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 30,
+        "table_entry": "0x0045ed98",
+        "branch": "0x0045f275",
+        "possible_calls": [
+          {
+            "site": "0x0045f277",
+            "target": "0x004611e5",
+            "callee": "MarcheReponseQuitte",
+            "hex": "e8691f0000"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 31,
+        "table_entry": "0x0045ed9c",
+        "branch": "0x0045f2d2",
+        "possible_calls": [
+          {
+            "site": "0x0045f2d9",
+            "target": "0x004622a9",
+            "callee": "MarcheDonneVeut",
+            "hex": "e8cb2f0000"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 32,
+        "table_entry": "0x0045eda0",
+        "branch": "0x0045f234",
+        "possible_calls": [
+          {
+            "site": "0x0045f23c",
+            "target": "0x0047348a",
+            "callee": "SetEnginPiegeSelect",
+            "hex": "e849420100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 33,
+        "table_entry": "0x0045eda4",
+        "branch": "0x0045f221",
+        "possible_calls": [
+          {
+            "site": "0x0045f22a",
+            "target": "0x0041dde0",
+            "callee": "BatimentRetireColon",
+            "hex": "e8b1ebfbff"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 34,
+        "table_entry": "0x0045eda8",
+        "branch": "0x0045ef58",
+        "possible_calls": [
+          {
+            "site": "0x0045ef69",
+            "target": "0x004733b8",
+            "callee": "SetVolEnginSelect",
+            "hex": "e84a440100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 35,
+        "table_entry": "0x0045edac",
+        "branch": "0x0045f246",
+        "possible_calls": [
+          {
+            "site": "0x0045f24d",
+            "target": "0x00422d9f",
+            "callee": "InitApprentissage",
+            "hex": "e84d3bfcff"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 36,
+        "table_entry": "0x0045edb0",
+        "branch": "0x0045ee8d",
+        "possible_calls": [
+          {
+            "site": "0x0045ee8f",
+            "target": "0x0041b663",
+            "callee": "BatimentDeselectionner",
+            "hex": "e8cfc7fbff"
+          },
+          {
+            "site": "0x0045eea5",
+            "target": "0x004741cd",
+            "callee": "EnginAddSelection",
+            "hex": "e823530100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 37,
+        "table_entry": "0x0045edb4",
+        "branch": "0x0045ef36",
+        "possible_calls": [
+          {
+            "site": "0x0045ef38",
+            "target": "0x00473cc5",
+            "callee": "EnginSelectSetFatigue",
+            "hex": "e8884d0100"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 38,
+        "table_entry": "0x0045edb8",
+        "branch": "0x0045edf3",
+        "possible_calls": [
+          {
+            "site": "0x0045ee00",
+            "target": "0x0046d927",
+            "callee": "PlayerValideAlliance",
+            "hex": "e822eb0000"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      },
+      {
+        "code_u16": 39,
+        "table_entry": "0x0045edbc",
+        "branch": "0x0045f257",
+        "possible_calls": [
+          {
+            "site": "0x0045f25f",
+            "target": "0x004266e1",
+            "callee": "BatimentLanceNova",
+            "hex": "e87d74fcff"
+          }
+        ],
+        "claim": "byte-proven table plus static branch traversal",
+        "runtime_reachability": "not established; neither accepted M2.2 nor this map supplies player input"
+      }
+    ]
+  },
+  "input_packet": {
+    "pointer_table_address": "0x004e2458",
+    "player_index_scale_bytes": 4,
+    "packet_bytes": 10,
+    "fields": [
+      {
+        "offset": 0,
+        "width_bytes": 2,
+        "role": "command tag"
+      },
+      {
+        "offset": 2,
+        "width_bytes": 2,
+        "role": "tag-specific argument"
+      },
+      {
+        "offset": 4,
+        "width_bytes": 2,
+        "role": "tag-specific argument"
+      },
+      {
+        "offset": 6,
+        "width_bytes": 2,
+        "role": "tag-specific argument"
+      },
+      {
+        "offset": 8,
+        "width_bytes": 2,
+        "role": "tag-specific argument"
+      }
+    ],
+    "setter": "SetPlayerOrdre",
+    "setter_address": "0x0045ecd4",
+    "setter_input": "AL player; DX tag; BX arg+2; CX arg+4; two caller-stack words for +6/+8",
+    "consumer": "ProcessInputGame",
+    "clear_range": "0x0045f2de..0x0045f323",
+    "semantics": "one slot per player, not a new wire/input protocol",
+    "claim": "byte-proven layout/stores"
+  },
+  "memory_contracts": [
+    {
+      "id": "mouse_coordinates",
+      "addresses": [
+        "0x005099a8",
+        "0x005099aa"
+      ],
+      "width_bytes": 2,
+      "writers": [
+        "WndProc",
+        "ProgIteration"
+      ],
+      "readers": [
+        "InputGame"
+      ],
+      "claim": "byte-proven operand locations; runtime timing unproven"
+    },
+    {
+      "id": "mouse_event_flags",
+      "addresses": [
+        "0x005099ae",
+        "0x005099af",
+        "0x005099b0",
+        "0x005099b1",
+        "0x005099b2"
+      ],
+      "width_bytes": 1,
+      "writers": [
+        "WndProc",
+        "ProgIteration"
+      ],
+      "readers": [
+        "InputGame"
+      ],
+      "claim": "byte-proven flag accesses; per-branch read/write subsets are in routine memory_operands"
+    },
+    {
+      "id": "command_slot",
+      "pointer_table": "0x004e2458",
+      "pointer_width_bytes": 4,
+      "index_scale_bytes": 4,
+      "record_bytes": 10,
+      "fields": [
+        {
+          "offset": 0,
+          "width_bytes": 2
+        },
+        {
+          "offset": 2,
+          "width_bytes": 2
+        },
+        {
+          "offset": 4,
+          "width_bytes": 2
+        },
+        {
+          "offset": 6,
+          "width_bytes": 2
+        },
+        {
+          "offset": 8,
+          "width_bytes": 2
+        }
+      ],
+      "writers": [
+        "SetPlayerOrdre",
+        "ProcessInputGame"
+      ],
+      "readers": [
+        "ProcessInputGame",
+        "InputSend"
+      ],
+      "claim": "byte-proven stores/dispatch; InputReceive network delivery remains external"
+    },
+    {
+      "id": "selection_area",
+      "base": "0x00508728",
+      "player_stride_bytes": 512,
+      "count_width_bytes": 2,
+      "index_width_bytes": 2,
+      "index_start_offset": 2,
+      "readers": [
+        "SetConstruitBatimentSelect",
+        "SetDeplaceEnginSelect",
+        "SetAttaqueEnginSelect"
+      ],
+      "claim": "byte-proven wrapper reads; selection mutation routines have their own operand evidence"
+    },
+    {
+      "id": "unit_order_record",
+      "pointer_slot": "0x004e19a0",
+      "pointer_width_bytes": 4,
+      "stride_bytes": 276,
+      "fields": [
+        {
+          "offset": 0,
+          "width_bytes": 1,
+          "role": "owner"
+        },
+        {
+          "offset": 1,
+          "width_bytes": 1,
+          "role": "type"
+        },
+        {
+          "offset": 2,
+          "width_bytes": 1,
+          "role": "state"
+        },
+        {
+          "offset": 178,
+          "width_bytes": 2,
+          "role": "order cell/reference"
+        },
+        {
+          "offset": 190,
+          "width_bytes": 1,
+          "role": "requested building type"
+        },
+        {
+          "offset": 183,
+          "width_bytes": 1,
+          "role": "attack mode"
+        },
+        {
+          "offset": 184,
+          "width_bytes": 2,
+          "role": "attack reference"
+        },
+        {
+          "offset": 272,
+          "width_bytes": 4,
+          "role": "movement order counter copy"
+        }
+      ],
+      "claim": "byte-proven setter/wrapper operands; not every action writes every field"
+    },
+    {
+      "id": "end_conditions",
+      "base": "0x004e1d20",
+      "count": 10,
+      "stride_bytes": 10,
+      "fields": [
+        {
+          "offset": 0,
+          "width_bytes": 1,
+          "role": "condition type"
+        },
+        {
+          "offset": 1,
+          "width_bytes": 1,
+          "role": "padding"
+        },
+        {
+          "offset": 2,
+          "width_bytes": 2,
+          "role": "condition parameter"
+        },
+        {
+          "offset": 4,
+          "width_bytes": 2,
+          "role": "condition parameter"
+        },
+        {
+          "offset": 6,
+          "width_bytes": 2,
+          "role": "condition parameter"
+        },
+        {
+          "offset": 8,
+          "width_bytes": 2,
+          "role": "condition parameter"
+        }
+      ],
+      "writers": [
+        "MissionLoad initialization outside this map"
+      ],
+      "readers": [
+        "TestFinDeMission"
+      ],
+      "claim": "accepted M1 bytes plus original evaluator operands"
+    },
+    {
+      "id": "end_result",
+      "fields": [
+        {
+          "address": "0x004e1d84",
+          "width_bytes": 1,
+          "role": "result latch"
+        },
+        {
+          "address": "0x004e05a0",
+          "width_bytes": 1,
+          "role": "AL result copy"
+        },
+        {
+          "address": "0x004e061c",
+          "width_bytes": 4,
+          "role": "end counter"
+        }
+      ],
+      "writers": [
+        "TestFinDeMission",
+        "CalculGame"
+      ],
+      "readers": [
+        "PartieGetResultat",
+        "CalculGame"
+      ],
+      "claim": "byte-proven stores/calls; victory/defeat meaning is static interpretation"
+    }
+  ],
+  "actions": [
+    {
+      "id": "select",
+      "commands": [
+        1,
+        2,
+        3,
+        36
+      ],
+      "producer_sites": [
+        "0x0042b9aa",
+        "0x0042ba20"
+      ],
+      "stages": [
+        "InputGame",
+        "SetPlayerOrdre",
+        "ProcessInputGame",
+        "SelectionEngin",
+        "EnginAddSelection",
+        "BatimentSelection"
+      ],
+      "data": [
+        "command +2/+4 u16 selection geometry or reference, depending on tag",
+        "selection count u16 at 0x508728 + player*512; u16 entries at +2",
+        "unit pool pointer u32 at 0x4e19a0, stride 276; owner +0 u8, type +1 u8, state +2 u8"
+      ],
+      "gap": "Click/drag hit-testing and modifiers must be traced with original scripted Windows inputs; rectangle and single-index variants differ.",
+      "claim": "static synthesis of byte-proven local edges and published owner contracts",
+      "stages_are_not_a_direct_call_sequence": true,
+      "successful_MONDE01_effect": "not proven",
+      "owners": [
+        "ai-runtime",
+        "core"
+      ]
+    },
+    {
+      "id": "move",
+      "commands": [
+        5
+      ],
+      "producer_sites": [
+        "0x0042a488",
+        "0x0042ad8e",
+        "0x0042b82a",
+        "0x0042bbd6"
+      ],
+      "stages": [
+        "InputGame",
+        "SetPlayerOrdre",
+        "ProcessInputGame",
+        "SetDeplaceEnginSelect",
+        "SetDeplaceEngin",
+        "EnginNextEtape",
+        "DeplaceEngin"
+      ],
+      "data": [
+        "packet +2 u16 cell -> SetDeplaceEnginSelect DX",
+        "selection iteration checks owner/alive; original call at 0x473ed2",
+        "unit +0x110 u32 receives frame counter 0x508f7c at 0x473ee2; state/path setters can reset prior orders"
+      ],
+      "gap": "Actual path branch, destination acceptance and subsequent movement are not executed here.",
+      "claim": "static synthesis of byte-proven local edges and published owner contracts",
+      "stages_are_not_a_direct_call_sequence": true,
+      "successful_MONDE01_effect": "not proven",
+      "owners": [
+        "ai-runtime",
+        "core"
+      ]
+    },
+    {
+      "id": "construct_objective_cave",
+      "commands": [
+        4
+      ],
+      "producer_sites": [
+        "0x0042a03c"
+      ],
+      "stages": [
+        "InputGame",
+        "SetPlayerOrdre",
+        "ProcessInputGame",
+        "SetConstruitBatimentSelect",
+        "SetEnginConstruitBatiment",
+        "EnginNextEtape",
+        "CalculConstruireBatiment",
+        "CreerBatiment",
+        "BatimentConstruction"
+      ],
+      "data": [
+        "packet +2 u8 type -> DL; packet +4 u16 cell -> BX at ProcessInputGame call 0x45ef9b",
+        "selected unit must have type +1 == 7; branch at 0x473a71/74",
+        "original type 7 name BATISSEUR; accepted M1 unit 12 is player 0/type 7",
+        "setter writes unit +2 u8 = 11, +0xbe u8 requested type, +0xb2 u16 cell; original type 3 name CAVE",
+        "CreerBatiment has TestRessource/EnleveMatiere calls and physical placement; completion calls BatimentHabitable and BatimentModifyMap"
+      ],
+      "gap": "No proof yet that selecting the CAVE UI emits tag 4/type 3, which site/cell passes gates, or that construction completes on MONDE01.",
+      "claim": "static synthesis of byte-proven local edges and published owner contracts",
+      "stages_are_not_a_direct_call_sequence": true,
+      "successful_MONDE01_effect": "not proven",
+      "owners": [
+        "ai-runtime",
+        "core",
+        "economy"
+      ]
+    },
+    {
+      "id": "gather_food_and_stone",
+      "commands": [
+        6,
+        7,
+        8,
+        18,
+        19
+      ],
+      "producer_sites": [
+        "0x0042b486",
+        "0x0042b61c"
+      ],
+      "stages": [
+        "InputGame",
+        "SetPlayerOrdre",
+        "ProcessInputGame",
+        "SetRecolteEnginSelect",
+        "SetTransporteEnginSelect",
+        "SetRecolteEngin",
+        "SetTransporteEngin",
+        "EnginNextEtape",
+        "CalculWorkEngin",
+        "CalculTransporteEngin",
+        "TerrainRecolte",
+        "MineRecolte",
+        "TerrainRetireMatiere",
+        "BatimentAjouteMatiere"
+      ],
+      "data": [
+        "tag 7: packet +2 u16 cell -> SetRecolteEnginSelect; tag 8 -> SetTransporteEnginSelect",
+        "tags 6/7/8/19 share a later SetDepotEnginSelect call at 0x45f037 using +4 u8, +6 u16, +8 u8",
+        "harvest setter writes unit +2 u8 = 5; transport setter writes +2 u8 = 18",
+        "work branch calls TerrainRecolte/MineRecolte; deposit callers mutate building/resource providers"
+      ],
+      "gap": "Local producer for tag 8 and exact UI choice between mining/harvest/bag/cave actions are not established. No natural resource delivery was executed.",
+      "claim": "static synthesis of byte-proven local edges and published owner contracts",
+      "stages_are_not_a_direct_call_sequence": true,
+      "successful_MONDE01_effect": "not proven",
+      "owners": [
+        "ai-runtime",
+        "core",
+        "economy"
+      ]
+    },
+    {
+      "id": "recruit_or_produce",
+      "commands": [
+        17
+      ],
+      "producer_sites": [],
+      "stages": [
+        "InputGame",
+        "SetPlayerOrdre",
+        "ProcessInputGame",
+        "InitRecruteTroupe",
+        "BatimentNextEtape",
+        "CalculTroupe",
+        "ConstruitPerso"
+      ],
+      "data": [
+        "ProcessInputGame 0x45f19f loads packet +2 u8 into AX; owner goes to EDX; call 0x45f1a9",
+        "InitRecruteTroupe reads selected structure u16 at 0x495be0 + 2*player and calls cost/capacity gates",
+        "This is unit recruitment, not a claim that it manufactures food/stone. Resource gathering is a separate route."
+      ],
+      "gap": "The MONDE01 menu producer, available worker types, charges and production completion need original input captures.",
+      "claim": "static synthesis of byte-proven local edges and published owner contracts",
+      "stages_are_not_a_direct_call_sequence": true,
+      "successful_MONDE01_effect": "not proven",
+      "owners": [
+        "ai-runtime",
+        "economy"
+      ]
+    },
+    {
+      "id": "attack",
+      "commands": [
+        14
+      ],
+      "producer_sites": [
+        "0x0042a52c",
+        "0x0042a5e6",
+        "0x0042aecf"
+      ],
+      "stages": [
+        "InputGame",
+        "SetPlayerOrdre",
+        "ProcessInputGame",
+        "SetAttaqueEnginSelect",
+        "SetAttaqueEngin",
+        "EnginNextEtape",
+        "CalculAttaqueEngin",
+        "ProjectileInit",
+        "ProjectileCalcul",
+        "InfligeDegat"
+      ],
+      "data": [
+        "packet +2 u8 attack mode and +4 u16 reference; selected-building branch instead calls BatimentInitAttaqueSelect at 0x45f13f",
+        "SetAttaqueEngin calls ResetOrdre at 0x445a7b; accepted order state +2 = 1, mode +0xb7 u8, reference +0xb8 u16",
+        "ranged/projectile and direct-damage calls are separate conditional paths, not one mandatory sequence"
+      ],
+      "gap": "No attack selection/targeting trace or combat result from player input is claimed. AI raid coverage is owned elsewhere.",
+      "claim": "static synthesis of byte-proven local edges and published owner contracts",
+      "stages_are_not_a_direct_call_sequence": true,
+      "successful_MONDE01_effect": "not proven",
+      "owners": [
+        "ai-runtime",
+        "combat",
+        "core"
+      ]
+    }
+  ],
+  "end_of_mission": {
+    "stages": [
+      "CalculGame",
+      "TestFinDeMission",
+      "PartieGetResultat",
+      "MenuInit",
+      "MissionNext"
+    ],
+    "static_calls": {
+      "test": [
+        "0x0042d481"
+      ],
+      "menu": [
+        "0x0042c931",
+        "0x0042c9ad",
+        "0x0042cbd0",
+        "0x0042ccd1",
+        "0x0042cfb0",
+        "0x0042d0f9",
+        "0x0042d263",
+        "0x0042d2d0"
+      ],
+      "next": [
+        "0x0042ca6e"
+      ]
+    },
+    "data": [
+      "condition table 0x4e1d20: 10 records x 10 bytes; type u8, padding u8, four u16 parameters",
+      "latch/result byte 0x4e1d84; per-condition marks 0x4e1d88..0x4e1d91; word 0x4e1a3a==0 forces result with latch 0",
+      "CalculGame stores AL to 0x4e05a0 and increments u32 0x4e061c when nonzero; >=100 requests MenuInit mode 0x13",
+      "PartieGetResultat returns byte 0x4e1d84; successful next path calls MissionNext and stores progression data",
+      "MissionNext increments mission byte 0x496fe4 before MakeMissionName/FileExists; it is not itself MissionLoad"
+    ],
+    "branches": [
+      {
+        "source": "CalculGame",
+        "site": "0x0042d4d4",
+        "target": "0x0042c92c",
+        "bytes_hex": "e953f4ffff",
+        "mnemonic": "jmp",
+        "claim": "byte-proven relative branch encoding"
+      },
+      {
+        "source": "CalculGame",
+        "site": "0x0042ca7b",
+        "target": "0x0042ca9d",
+        "bytes_hex": "7520",
+        "mnemonic": "jne",
+        "claim": "byte-proven relative branch encoding"
+      }
+    ],
+    "claim": "byte-proven local stores/calls; victory/defeat label is static interpretation",
+    "runtime_transition": "not executed; no M3/M4 acceptance or next mission behavior claimed"
+  },
+  "unresolved": [
+    "No human input occurs in the accepted M2.2 sequence; none of these action routes is dynamically accepted.",
+    "InputReceive is a separate network branch for remote humans; no new packet or input protocol is proposed.",
+    "Linear LLVM disassembly is bounded by next imported symbol, not proven function extents; candidate edges can include unreachable code. Exact encoded calls are checked, dynamic reachability is not.",
+    "Shared tails can jump outside an exported interval; graph is not a complete control-flow closure.",
+    "General computed branches and indirect calls are not resolved except the 40-entry ProcessInputGame table.",
+    "Building placement, resource availability, terrain cell choice, UI hover context and command producer gaps need original scripted-input coverage.",
+    "Windows messages are platform inputs; macOS event mapping remains a separate owner-defined contract."
+  ]
+}

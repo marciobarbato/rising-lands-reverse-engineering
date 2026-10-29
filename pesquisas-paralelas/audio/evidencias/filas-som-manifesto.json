@@ -1,0 +1,386 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "symbol_source": "relatorios/simbolos-originais.tsv",
+  "symbol_source_sha256": "6f43d1d03ee1ec83f03d3ab16fa8bc1944ffdfd15d748c7232b43b6488eae2ca",
+  "intervals": [
+    {
+      "name": "HandlSnd_GetAverageVolume",
+      "start": "0x489dac",
+      "end_exclusive": "0x489df3",
+      "bytes": 71,
+      "sha256": "7dca30664bfc9cfef73e23a5560a26e83b66120109f5b085279085f636e88a35"
+    },
+    {
+      "name": "DeleteHandle",
+      "start": "0x489df3",
+      "end_exclusive": "0x489e35",
+      "bytes": 66,
+      "sha256": "21fdddd27f4f89fa7d9316ae325687ebd56923074981d6a554d158657b7be9fb"
+    },
+    {
+      "name": "DestroyOnlySound",
+      "start": "0x489e35",
+      "end_exclusive": "0x489eb6",
+      "bytes": 129,
+      "sha256": "b02708ca520f9a37448cbc7ba66c7c9f1f6c5365ae125bce9e064979a9735b5e"
+    },
+    {
+      "name": "DestroyHandle",
+      "start": "0x489eb6",
+      "end_exclusive": "0x489f04",
+      "bytes": 78,
+      "sha256": "457221a64b85108022b9938bbc69e5b8cff014266fcbf3191b373c398915344e"
+    },
+    {
+      "name": "HandleSnd_DestroyDictator",
+      "start": "0x489f04",
+      "end_exclusive": "0x489f39",
+      "bytes": 53,
+      "sha256": "acc8a0d359da6faaee506d46289cb436f6c744990ba2578d8812eab74a7231e6"
+    },
+    {
+      "name": "HandleSnd_InitDictator",
+      "start": "0x489f39",
+      "end_exclusive": "0x489f76",
+      "bytes": 61,
+      "sha256": "e937d39a41229e1ed684bca18d3f230845805204f3a94931bd3abb42bb965db4"
+    },
+    {
+      "name": "HandleSnd_FreeDictator",
+      "start": "0x489f76",
+      "end_exclusive": "0x489f96",
+      "bytes": 32,
+      "sha256": "93f7354db5b05c24dd70ef42e253d848f28b59b2c87535634385690fcf3fd80f"
+    },
+    {
+      "name": "HandlSnd_ClearListe",
+      "start": "0x489f96",
+      "end_exclusive": "0x48a0f4",
+      "bytes": 350,
+      "sha256": "07a671f05f918fe96bdad243d8becd07c295c61a17bb22f124e14fb5ca9b8331"
+    },
+    {
+      "name": "HndSound_LoadDataInfo",
+      "start": "0x48a0f4",
+      "end_exclusive": "0x48a14a",
+      "bytes": 86,
+      "sha256": "185f2b9467b61eedf1d12c2f47ec5eea7ebdc9d5f51d41f4ddbb698306650ecb"
+    },
+    {
+      "name": "HandlSnd_SetVolume",
+      "start": "0x48a14a",
+      "end_exclusive": "0x48a218",
+      "bytes": 206,
+      "sha256": "89432a3dbfc37b81af5f3340645e451aae958d9a4f5e68fa931f4a20ca78e4de"
+    },
+    {
+      "name": "HandlSnd_Insert",
+      "start": "0x48a218",
+      "end_exclusive": "0x48a438",
+      "bytes": 544,
+      "sha256": "8fa52b07aad2ee7e454e7e0e17866aad32642d95735e26a90c0c00971eb2dda3"
+    },
+    {
+      "name": "HandleSnd_StopHandle",
+      "start": "0x48a438",
+      "end_exclusive": "0x48a4a8",
+      "bytes": 112,
+      "sha256": "ff9c71dafa98b5a17e678816fa7150135175ba45443bd6f0abe96a6452da7df2"
+    },
+    {
+      "name": "HandleSnd_StopAllHandle",
+      "start": "0x48a4a8",
+      "end_exclusive": "0x48a517",
+      "bytes": 111,
+      "sha256": "671a659653ec2e14d5182bc918d60c369972aa0a20ab9385b2ca86dfd4a8cafa"
+    },
+    {
+      "name": "HandlSnd_AffectVolumeOut",
+      "start": "0x48a517",
+      "end_exclusive": "0x48a664",
+      "bytes": 333,
+      "sha256": "a7d936b43b61050e41f70dfab610c7e9fc91e4adc0c8a12fc5278de74cd7191a"
+    },
+    {
+      "name": "HandlSnd_TriWaitingHandle",
+      "start": "0x48a664",
+      "end_exclusive": "0x48a7f9",
+      "bytes": 405,
+      "sha256": "a85e8ec23b29133db8c60306974b55d185982b406645a677b09df0a9d8351956"
+    },
+    {
+      "name": "HandlSnd_ValidateListe",
+      "start": "0x48a7f9",
+      "end_exclusive": "0x48a803",
+      "bytes": 10,
+      "sha256": "04d5254ceaa2e290fe85cd870eb4f13874d78761bec1d38dba5bf213db40bcd3"
+    },
+    {
+      "name": "HandlSnd_LaunchWaitingSound",
+      "start": "0x48a803",
+      "end_exclusive": "0x48a832",
+      "bytes": 47,
+      "sha256": "951a55672e92d04c6c4870e696a051abbaf8f8bcaa93abbb870c64a043211c39"
+    },
+    {
+      "name": "PlaySnd_CreateSoundPath",
+      "start": "0x48a834",
+      "end_exclusive": "0x48a87f",
+      "bytes": 75,
+      "sha256": "27df1419d42781aa0984e1dac84cb54a371e38144ce2b0160dc9640dd27ba371"
+    },
+    {
+      "name": "SoundFile",
+      "start": "0x48a87f",
+      "end_exclusive": "0x48a894",
+      "bytes": 21,
+      "sha256": "301b6a76fa0f23495cbd0ae75dd17f5f66d910d3e902acd49938ad30c317e07e"
+    },
+    {
+      "name": "PlaySnd_MakeID",
+      "start": "0x48a894",
+      "end_exclusive": "0x48a89f",
+      "bytes": 11,
+      "sha256": "f58ae51454c8f6dd2620fee02abe0567aa76c8704ff65b895eee1554791d088f"
+    },
+    {
+      "name": "PlaySnd_InitSoundLib",
+      "start": "0x48a89f",
+      "end_exclusive": "0x48aa04",
+      "bytes": 357,
+      "sha256": "61ae1f5521a813261d38313ed8cf67a969bf8dd2e533ffa13cca4b5ba72d9675"
+    },
+    {
+      "name": "PlaySnd_FreeSoundLib",
+      "start": "0x48aa04",
+      "end_exclusive": "0x48aa45",
+      "bytes": 65,
+      "sha256": "a9bd1c1622f2e1789c28a52d5574cf227769cbb879d4f5dd08ae0bf50274d4c8"
+    },
+    {
+      "name": "PlaySnd_SetGameVolume",
+      "start": "0x48aa45",
+      "end_exclusive": "0x48aa79",
+      "bytes": 52,
+      "sha256": "844fd6f47a587beac7d8522d15d41f4f73be0ac95dcede7c3de03cde30159d75"
+    },
+    {
+      "name": "PlaySnd_PostSound",
+      "start": "0x48aa79",
+      "end_exclusive": "0x48aac0",
+      "bytes": 71,
+      "sha256": "700c9124db2ee5f88eb3a97aa75c0a56a2e6410b4b2f0c80e0518e8a2e74338a"
+    },
+    {
+      "name": "PlaySnd_StopSound",
+      "start": "0x48aac0",
+      "end_exclusive": "0x48aac5",
+      "bytes": 5,
+      "sha256": "c63a505ddbe4f9e1854eb14dc7a40defa273650f066d491a1b283ecde908b378"
+    },
+    {
+      "name": "PlaySnd_StopAllSound",
+      "start": "0x48aac5",
+      "end_exclusive": "0x48aaca",
+      "bytes": 5,
+      "sha256": "ab9f01f76230956c1c21e91cc1d311e256ffca1bfe99a61fec5c6a596c5dc541"
+    },
+    {
+      "name": "PlaySnd_Manage",
+      "start": "0x48aaca",
+      "end_exclusive": "0x48aacf",
+      "bytes": 5,
+      "sha256": "8e55e57199316fdd2b2b7faf7bd0c454eaac5947168f998b363feebfe042223e"
+    },
+    {
+      "name": "PlaySnd_PostVolume",
+      "start": "0x48aacf",
+      "end_exclusive": "0x48aad4",
+      "bytes": 5,
+      "sha256": "a535b6e3a2949d0c8f57ea7021523e9a4d938a087a8401388930fa833feb7dc5"
+    },
+    {
+      "name": "PSB_CreateMySurfaceWithSound",
+      "start": "0x48aad4",
+      "end_exclusive": "0x48abb9",
+      "bytes": 229,
+      "sha256": "9c0d4a394d9a0fecd12c76f3c0e2181b656c5ae30149553ae909744af1fc14f7"
+    },
+    {
+      "name": "PSB_FindFirstFreePlace",
+      "start": "0x48abb9",
+      "end_exclusive": "0x48abdc",
+      "bytes": 35,
+      "sha256": "c35a855fae1c5b99224f653ffaecea6fb9967de7dc0cfd4ae915479db9f9fe8e"
+    },
+    {
+      "name": "PSB_ReplaceLastSoundInFreePlace",
+      "start": "0x48abdc",
+      "end_exclusive": "0x48ac53",
+      "bytes": 119,
+      "sha256": "686efb0ee0eb915ac30b8f3006b7fb68e7d8b7e6fdd9991a063b2434f50ba765"
+    },
+    {
+      "name": "PSB_DestroyPhyBuff",
+      "start": "0x48ac53",
+      "end_exclusive": "0x48ac78",
+      "bytes": 37,
+      "sha256": "9d7bd12775e58b41e66d63f6d580495c007b187ae0df50d680c13646d04cda97"
+    },
+    {
+      "name": "PSB_CreatePhySound",
+      "start": "0x48ac78",
+      "end_exclusive": "0x48acd3",
+      "bytes": 91,
+      "sha256": "7b54dad1e7a84dcd513f949f45fc34b6b5f3f1512daeed37797c549ed1302192"
+    },
+    {
+      "name": "PSB_IsThisSoundLoaded",
+      "start": "0x48acd3",
+      "end_exclusive": "0x48ad0c",
+      "bytes": 57,
+      "sha256": "e30388ff3fa991c2356b7193c20c8f6a70a7e5c273d405ac7d533c976b5d0b55"
+    },
+    {
+      "name": "PSB_TranfertLogicalSoundInPhysicalTable",
+      "start": "0x48ad0c",
+      "end_exclusive": "0x48ad2a",
+      "bytes": 30,
+      "sha256": "6b56f9023319e478d499be83b00d45e40e4e19bc696e26a8e54789cdd1084ad8"
+    },
+    {
+      "name": "PSB_IsFullListe",
+      "start": "0x48ad2a",
+      "end_exclusive": "0x48ad3a",
+      "bytes": 16,
+      "sha256": "2d7e8b9eadc25b42bd0581d0196faf02cf823cc6f3056024c97e41123bfe320f"
+    },
+    {
+      "name": "LSB_ReplaceLastSoundInFreePlace",
+      "start": "0x48ad3c",
+      "end_exclusive": "0x48adb3",
+      "bytes": 119,
+      "sha256": "b72520c7fc452aa76616ffb04b0499a2b6310fa353c5b3758fd5d91bdc6c9ccf"
+    },
+    {
+      "name": "LSB_DestroyLogBuff",
+      "start": "0x48adb3",
+      "end_exclusive": "0x48ae3c",
+      "bytes": 137,
+      "sha256": "6cd2dc1b29f2b185bd5953f0839559e1c081ae55f8c1a20d6c09c792a2b5162d"
+    },
+    {
+      "name": "LSB_FindFirstFreePlace",
+      "start": "0x48ae3c",
+      "end_exclusive": "0x48ae5f",
+      "bytes": 35,
+      "sha256": "81768f0e53a0ffcb2539aaff97859f9d61bdbf3ce66abef649a4d20ca9d90a55"
+    },
+    {
+      "name": "LSB_CreateLogicalSound",
+      "start": "0x48ae5f",
+      "end_exclusive": "0x48aeb3",
+      "bytes": 84,
+      "sha256": "8a1f8c9dd027cdc9ed4e70c24bb8030495cb2adee96e9101bbe402621be51b21"
+    },
+    {
+      "name": "LSB_IsThisSoundPresent",
+      "start": "0x48aeb3",
+      "end_exclusive": "0x48aee7",
+      "bytes": 52,
+      "sha256": "ef5c29502e00d435a01e5c8007476876e9f3a255f097652209aa969932c148c0"
+    },
+    {
+      "name": "LSB_IsFullListe",
+      "start": "0x48aee7",
+      "end_exclusive": "0x48aef7",
+      "bytes": 16,
+      "sha256": "b9bd0798588005c4115cf23f2f71b0b9fe5c022cff293c98282cac1c432f0cc2"
+    },
+    {
+      "name": "WaitSnd_GetFirstFreePlace",
+      "start": "0x48aef8",
+      "end_exclusive": "0x48af1b",
+      "bytes": 35,
+      "sha256": "d2e24a57482d7780019113cd1f72cb25545d391722504d30948d93559822fab2"
+    },
+    {
+      "name": "WaitSnd_Compact",
+      "start": "0x48af1b",
+      "end_exclusive": "0x48afd0",
+      "bytes": 181,
+      "sha256": "dcfa4c83f62d3577789dee2db24b12eb8cf589728d1c58383881912d2bd5477e"
+    },
+    {
+      "name": "WaitSnd_SorryGiveBackOnePlace",
+      "start": "0x48afd0",
+      "end_exclusive": "0x48afe9",
+      "bytes": 25,
+      "sha256": "64741df67603dc8cf9a6b03568734585508828818671fc91b6828429b451b4b7"
+    },
+    {
+      "name": "WaitSnd_GetMaxIndice",
+      "start": "0x48afe9",
+      "end_exclusive": "0x48afef",
+      "bytes": 6,
+      "sha256": "feafc13d32eaf14be53ae5449b2c4a8721abd0520c40387f4b95d528d3632e41"
+    },
+    {
+      "name": "WaitSnd_FindPlace",
+      "start": "0x48afef",
+      "end_exclusive": "0x48b01b",
+      "bytes": 44,
+      "sha256": "cdb57a88712f41318ab3a7aa46193c7d70affc35961037587e42d7bcab99d517"
+    },
+    {
+      "name": "WaitSnd_TransferPlayingSoundToWaitingSound",
+      "start": "0x48b01b",
+      "end_exclusive": "0x48b0d3",
+      "bytes": 184,
+      "sha256": "d75118011a8ba6ca292b6368a6719f0b388acefe3589a20087b722e042b36f74"
+    },
+    {
+      "name": "WaitSnd_TransferALLPlayingSoundToWaitingSound",
+      "start": "0x48b0d3",
+      "end_exclusive": "0x48b11d",
+      "bytes": 74,
+      "sha256": "80ca1adacf26c513f34e4648b916b62e764256899addc9aaa7d9be3187375c91"
+    },
+    {
+      "name": "WaitSnd_DestroyWaitingSound",
+      "start": "0x48b11d",
+      "end_exclusive": "0x48b1e9",
+      "bytes": 204,
+      "sha256": "d2de3388a73466e68d0a6a6d922da2f9da0f4c1c2085e29025d8a0608598b2b0"
+    },
+    {
+      "name": "WaitSnd_TransferWaitingSoundToPlayingSound",
+      "start": "0x48b1e9",
+      "end_exclusive": "0x48b317",
+      "bytes": 302,
+      "sha256": "b8af3f8a5139797b56079f9f18eca0a105c0c3ad9e5e168e7c4ec6633ed96238"
+    },
+    {
+      "name": "WaitSnd_Permute",
+      "start": "0x48b317",
+      "end_exclusive": "0x48b38f",
+      "bytes": 120,
+      "sha256": "3bda8b3183ce359e7add79a1323f784637f92f9796945656d32cd7006de91a28"
+    },
+    {
+      "name": "WaitSnd_Trier",
+      "start": "0x48b38f",
+      "end_exclusive": "0x48b390",
+      "bytes": 1,
+      "sha256": "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e"
+    }
+  ],
+  "disassembly": "filas-som-rotinas.asm",
+  "initialized_data": {
+    "start": "0x498f14",
+    "bytes": 88,
+    "hex": "f0d8ffff60f0ffff54f2ffff48f4ffff3cf6ffff30f8ffff2af9ffff24faffff1efbffff18fcffff12fdffff0cfeffff06ffffff4cffffff83ffffffc2ffffff000000000001000001000000ffffffffffffffff13000000",
+    "sha256": "0b2870b9918d5b00ab7495e59bcd31a38a2e717ee014106ee43b1564c0ea5706"
+  },
+  "scope": "Static evidence for request/queue original-first capture planning. No queue translation, native execution, playback or complete-flow claim."
+}

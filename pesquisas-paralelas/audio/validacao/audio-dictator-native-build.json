@@ -1,0 +1,37 @@
+{
+  "schema": "rising-lands/audio-dictator-native-build/1",
+  "attempt": 1,
+  "tested_commit": "f328a5f751850f2eb45af2844225aeac18bd051d",
+  "latest_main_verified_after_build": "a7427fd0e416d212f08af7f0df3d36a224d12f2d",
+  "exit_code": 1,
+  "passed": false,
+  "command": "RISING_PYTHON_RUNTIME='/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python' ./compilar-jog\u00e1vel --development-ref HEAD --inputs-root '/Users/marcio/git/Rising Lands' --data-root '/Users/marcio/git/Rising-Lands-Codex-Audio/repository/.local/macos-playable'",
+  "consumer_tests": {
+    "discovered": 80,
+    "passed": 78,
+    "failures": 2,
+    "skipped": 0,
+    "seconds": 40.256,
+    "log": "audio-dictator-consumer-tests.log"
+  },
+  "failure": {
+    "type": "GraphicsVersionError",
+    "message": "Graphics API version mismatch: expected (1, 2), got (1, 3)",
+    "tests": [
+      "test_real_graphics_api_loads_in_isolated_process_at_version_1_2",
+      "test_worker_open_step_read_reset_errors_and_close"
+    ],
+    "owner": "macOS/coordinator"
+  },
+  "native_compilation": "Not reached",
+  "codesign": "Not reached",
+  "appkit_smoke": "Not reached",
+  "inspection_smoke": "Not reached",
+  "new_bundle_produced": false,
+  "screenshots": "No new UI screenshots or smoke JSON: failure preceded compilation/AppKit; earlier attempt artifacts remain untouched",
+  "inputs_read_only": true,
+  "all_outputs_inside_clone": true,
+  "other_front_files_modified": false,
+  "repeat_attempted": false,
+  "disposition": "First consumer/build logs preserved; exact failure reported to parent; no app edit or version bypass"
+}

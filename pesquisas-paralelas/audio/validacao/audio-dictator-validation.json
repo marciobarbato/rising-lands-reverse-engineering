@@ -1,0 +1,76 @@
+{
+  "schema": "rising-lands/audio-dictator-validation/1",
+  "base_main": "a7427fd0e416d212f08af7f0df3d36a224d12f2d",
+  "gate": {
+    "command": "python3 -B scripts/check.py --domain audio",
+    "discovered": 69,
+    "passed": 66,
+    "skipped": 3,
+    "failures": 0,
+    "seconds": 12.011,
+    "skip_reason": "Unchanged optional Stage-1 native tests require RISING_EMULAR=1",
+    "log": "audio-dictator-check.log"
+  },
+  "new_tests": {
+    "discovered": 10,
+    "passed": 10,
+    "skipped": 0
+  },
+  "validator_cli": [
+    {
+      "name": "help",
+      "returncode": 0,
+      "stderr": ""
+    },
+    {
+      "name": "required-output",
+      "returncode": 2,
+      "stderr": "usage: validar_dictador_audio.py [-h] --output OUTPUT\nvalidar_dictador_audio.py: error: the following arguments are required: --output\n"
+    },
+    {
+      "name": "refuse-existing",
+      "returncode": 2,
+      "stderr": "usage: validar_dictador_audio.py [-h] --output OUTPUT\nvalidar_dictador_audio.py: error: Refusing to overwrite report\n"
+    }
+  ],
+  "fresh_native": {
+    "schema": "rising-lands/audio-dictator-three-way/1",
+    "passed": true,
+    "original_capture_equal": true,
+    "original_native_calls": 140,
+    "scenarios": 35,
+    "dependency_stops": 1,
+    "failures": [],
+    "seconds": 0.423,
+    "register_comparison": "Meaningful API results only; void EAX metadata remains in native/frozen evidence",
+    "source_sha256": {
+      "fila_audio.py": "273979991defc0dd3d7c364a61685c161a2fd7b4baf0e5f94703907320e98f17",
+      "reproduzir_fila_audio.py": "dc810d69053fac25efc623690ba979594743bd9d2b8a31037977511a4da4138a",
+      "capturar_dictador_audio.py": "c45d54a2ce5b679e2cb0942521203976cda7b1bc3f8b47db888ae39693a562f1"
+    }
+  },
+  "new_original_evidence": [
+    {
+      "path": "pesquisas-paralelas/audio/evidencias/captura-dictador-audio-original-v1.json",
+      "bytes": 387036,
+      "sha256": "77ecc979a6472047031905c01e55f4181f82088f90ba02add4d76d461517ea20"
+    },
+    {
+      "path": "pesquisas-paralelas/audio/evidencias/captura-dictador-audio-original-v2.json",
+      "bytes": 1011135,
+      "sha256": "6f77d4ccc9f0fb5264414d213e38cf4d5497099c3c42f0356d260b697832cf51"
+    },
+    {
+      "path": "pesquisas-paralelas/audio/evidencias/captura-dictador-audio-original-v3.json",
+      "bytes": 1113571,
+      "sha256": "3e707484fee0c1f046b7d98c3648f8623c326c3138ab01889c35c0779a35dca9"
+    }
+  ],
+  "historical": "Earlier139-call continuation,244-call queue and551-sound decoder evidence unchanged and not recounted as fresh native work",
+  "native_bounds": {
+    "alarm_seconds": 600,
+    "monotonic_deadline_seconds": 600,
+    "instructions_per_entry": 50000
+  },
+  "architecture": "Python reference/harness for future Rust library+C ABI; no live platform behavior or ABI added"
+}

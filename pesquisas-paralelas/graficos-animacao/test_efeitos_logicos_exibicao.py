@@ -159,7 +159,12 @@ class VoltasTest(unittest.TestCase):
 
     def test_structure_modes_are_accepted_only_for_one_type_2_record(self):
         for estado_ in range(8):
-            self.assertEqual(e.desenhar_jogo(estado(pool={0: estado_})).escritas, ())
+            self.assertEqual(e.desenhar_jogo(estado(pool={0: estado_}), habitado=lambda i: True).escritas, ())
+        with self.assertRaises(e.DependenciaExibicao) as c:      # mode 3 without the inhabited result stops
+            e.desenhar_jogo(estado(pool={0: 3}))
+        self.assertEqual(c.exception.sitio, 0x40863e)
+        with self.assertRaises(e.DependenciaExibicao):
+            e.restaurar_tudo(estado(pool={0: 3}), habitado=lambda i: False)
         with self.assertRaises(e.DependenciaExibicao):
             e.desenhar_jogo(estado(pool={0: 5, 1: 5}))
         m = estado(pool={0: 5})
@@ -209,6 +214,23 @@ class IncursaoTest(unittest.TestCase):
         with self.assertRaises(e.DependenciaExibicao) as c:
             e.restaurar_tudo(m)
         self.assertEqual(c.exception.sitio, 0x41591f)
+
+
+class UnidadeTest(unittest.TestCase):
+    def test_raid_unit_walk_and_visible_unit_cases_are_clean(self):
+        base = Path(__file__).resolve().parent/'evidencias'
+        d = json.loads((base/'dominio-exibicao-incursao-unidade.json').read_text())
+        self.assertEqual([r['phase'] for r in d['records']], ['between_frames300', 'between_frames450', 'between_frames620', 'between_frames700'])
+        for r in d['records']:
+            self.assertTrue(r['probe']['unit16']['cell'])
+            for c in r['cases']:
+                self.assertTrue(c['calls'][0]['returned'] and not c['calls'][0]['stopped'])
+        v = json.loads((base/'dominio-exibicao-incursao-unidade-visivel.json').read_text())
+        casos = [c for r in v['records'] for c in r['cases'] if c['case'].startswith('unit16_')]
+        self.assertEqual(len(casos), 2)
+        for c in casos:
+            self.assertEqual(c['coverage']['0x41591f'], 17)      # AffEngin drew the 16 M1 units plus unit 16
+            self.assertTrue(c['calls'][0]['returned'] and not c['calls'][0]['stopped'])
 
 
 class CamposTest(unittest.TestCase):

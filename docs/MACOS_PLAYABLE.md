@@ -11,8 +11,9 @@ complete original mission or campaign.
 From the repository, run:
 
 ```sh
-./compilar-jogável
-open '/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/RisingLands-ptbr.app'
+export RISING_PYTHON_RUNTIME=/absolute/path/to/relocatable-python-3.12-arm64
+./compilar-jogável --inputs-root /absolute/path/to/inputs
+open .local/macos-playable/dist/RisingLands-ptbr.app
 ```
 
 From the workspace, use `./engenharia-reversa/compilar-jogável`. The normal build
@@ -30,7 +31,7 @@ Before feature integration, a separate check is available:
 It requires a committed revision and writes under `dist/development/`, preserving
 the normal delivery. The build prints the absolute bundle path. Generated
 sources, assets, runtime, compiler caches, logs and prior bundles remain under
-workspace `local-data/macos-playable/`, outside tracked research folders.
+clone-local `.local/macos-playable/`, outside tracked research folders.
 Existing preview distributions and historical manifests are untouched.
 
 Prerequisites: macOS 13+ on ARM64, Apple Swift command-line tools, Git, Python
@@ -120,3 +121,86 @@ Actual validation results and integration identity are recorded in the
 [app handoff](../apps/macos-preview/HANDOFF.md). Historical x86 totals are not
 substitutes for these consumer/runtime checks. This app adds no recovered
 native algorithm and does not aggregate domain totals into a game-fidelity claim.
+
+## Independent M3 preparation boundary
+
+The [accepted-state contract](../apps/macos-preview/M3_CONTRACT.md) defines an
+app-owned read-only M1 inspector and an explicit pending-M2 update boundary.
+It loads the exact acceptance-pinned evidence with the existing Python block
+decoder. It does not switch the native app to MONDE01 or establish M3 acceptance.
+The [independent audit](../apps/macos-preview/M3_AUDIT.md) records isolation and
+provider dependencies.
+
+
+## Independent accepted-evidence playback (contract v5)
+
+The app offers **Inspeção M2.2 · evidência aceita** separately from the synthetic
+training exercise. It loads the accepted display-v2 MissionLoad state and all
+257 phases / 11 checkpoints using committed Missions/runtime readers. Choose a
+phase or frame, inspect original-address memory/observed words, or reset. This
+is read-only playback, not a running Python mission or M3 acceptance. M1
+original-v2 inspection remains a separately labeled API.
+
+The shell pins Graphics API **1.4** and calls it with `hud=True`. HUD and
+captured cursor are included within the published domain. Every required region
+is checked against captured memory before rendering, including the minimap and
+player table. Other versions are refused until explicitly reviewed and tested.
+All rendering continues to come exclusively from Graphics.
+
+All 128 drawing phases are checked against the pinned 1.4 full 800×600 native
+phase-end reference before publication. Undrawn phases preserve the same
+verified surface. Generic named HUD/body stops remain visible outside the
+provider's supported domain. The palette is static; palette cycling is not
+applied. Memory playback verifies 257 phases and 11 checkpoints. The inspector
+uses phase/frame navigation, original-address reads, filter and reset, without
+live orders. See the [v5 contract](../apps/macos-preview/M3_CONTRACT.md) and
+[handoff](../apps/macos-preview/HANDOFF.md) for exact evidence and test results.
+
+The full asset pack is being published in the separate rising-lands-assets
+repository. This app update continues to use an explicit read-only CD inputs
+root and does not add that pack or its commits to the code repository.
+
+## Bounded native smoke readiness
+
+The shell waits for an explicit, source-commit/mode-validated readiness message
+from the UI after its worker and assets finish loading. Merely showing a window
+or finishing document navigation is not readiness. The original interaction
+assertions and per-action waits remain unchanged.
+
+Monotonic budgets are separate: window visibility within 45 seconds;
+initialization/readiness within 90 seconds total from launch (including the
+window); then at most 45 seconds for checks. Progress does not reset any budget.
+A before snapshot must finish before checks begin. A final screenshot has a
+10-second exit guard; LaunchServices has a 165-second outer process guard
+(90 + 45 + 10 + 20 launch allowance). This does not turn an unready window into
+success or extend the 45-second check budget.
+
+Failure JSON includes phase, document/window/ready signals, elapsed times,
+readiness payload and Python stderr. It is written before screenshots, so a
+stuck WebView cannot erase the reason. Both UI smokes preserve paired before/
+after images plus the final snapshot; missing captures fail the delivery.
+Retries archive prior JSON, images and process logs under `previous-smoke/`.
+An outer-process failure preserves any more specific app failure JSON.
+
+`--smoke-ready-delay-ms 50000` is a smoke-only diagnostic: it holds the readiness
+signal after real initialization to reproduce a slow startup without inventing
+worker/asset success or generating CPU load. It is ignored outside smoke mode
+and bounded to 0..80000 ms. Native state-machine tests exercise missing ready,
+late window, out-of-order document/ready events and an unchanged check deadline.
+Graphics stays pinned to its explicitly accepted 1.4 contract; other versions
+still fail. After this robustness delivery, workstream A awaits M2.3 and the
+Claude M3 plan; no new game/UI features are planned here.
+
+An occluded WebView can report a hidden document while its native window is
+visible. Native smoke repaint barriers therefore wait for a completed WebView
+snapshot through the existing 15-second request deadline, rather than waiting
+for animation callbacks that WebKit suspends while hidden. This preserves
+paint verification and every interaction assertion. Timeout JSON also records
+the last assertion/stage and game/visibility diagnostics.
+
+
+The 2026-10-29 architecture decision targets a Rust engine/render library with
+a C ABI called by Swift. Python stays as the validated reference and current
+inspection/playback runtime; whether it ships later remains undecided. Live
+frame delivery awaits the coordinator's published C ABI/M3 plan after M2.3.
+No live Python delivery, guessed C symbols or loader behavior is implemented.

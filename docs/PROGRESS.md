@@ -1,10 +1,12 @@
 # Consolidated progress — MONDE01
 
-Round: **CXR-20261029-M2R5 (M2 round 5 — M2.1 first frame ACCEPTED; M2.2 moves to the Mac mini)**. Current fetched/ancestry-verified main: `32bb39131931ba615c78e13c60b5d0740d6ccfd7`. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)); **M2.1 accepted at `32bb391`** ([record](../integracao/validacao/cxr-20261029-m2r5-m2-1-acceptance.json)). [Roadmap](ROADMAP_MONDE01.md), [snapshots](progress/README.md).
+Round: **CXR-20261029-M2R6 (M2 round 6 — M2.2 128 frames ACCEPTED; M2.3 first raid running on the Mac mini)**. Current fetched/ancestry-verified main: `b9f4b5d`. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)); M2.1 accepted at `32bb391` ([record](../integracao/validacao/cxr-20261029-m2r5-m2-1-acceptance.json)); **M2.2 accepted at `b9f4b5d`** ([record](../integracao/validacao/cxr-20261029-m2r6-m2-2-acceptance.json)). [Roadmap](ROADMAP_MONDE01.md), [snapshots](progress/README.md).
 
 ## Resumo executivo
 
-**M2.1 aceito (rodada 5, main `32bb391`).** A composição Python do primeiro quadro de MONDE01 é igual ao executável original nas três fases: cauda da carga, intervalo entre quadros e quadro 1. A comparação usa a referência `-v2` do cenário com tela e a política publicada: 776 bytes de lógica comparados e 78.093 bytes só de tela mascarados, com prova de escritor e leitor. Também são iguais os 25.482 registros de alocação, os RNGs, os bindings e as fronteiras, em 103 checkpoints nativos, sem nenhum cruzamento. A prova foi reproduzida exatamente na `main` `32bb391` nas duas máquinas, o MacBook e o Mac mini: só o tempo e a revisão diferem. A primeira reprodução, na `0114eee`, revelou um bug de ordem de campos no provider de Gráficos da rodada 5: as verificações de domínio iam parar no campo de liberações de memória. Ele foi corrigido em `19bb87f` antes da aceitação. **M2 ainda não foi aceito:** faltam o M2.2 (128 quadros) e o M2.3 (primeira incursão, no quadro 9000). Por decisão do usuário, as execuções nativas longas do M2.2 em diante rodam no Mac mini, e este MacBook fica como máquina auxiliar das 08:00 às 17:00 nos dias úteis. A estimativa global continua em ~50%.
+**Passagem de coordenação (29/10, tarde):** um novo coordenador assume a partir de [HANDOVER_CLAUDE_20261029](HANDOVER_CLAUDE_20261029.md). Pendente: a evidência do M2.3 no Mac mini, a comparação formal e o aceite. O plano do M3 está em [M3_PLAN](M3_PLAN.md). Após o M2.2, entraram na `main` os hooks de política nativos em C (6,45× mais rápidos, com resultado idêntico), a renderização 1.3 de Gráficos, os pré-requisitos do M2.3 (Core, IA/runtime e Economia) e as entregas do Codex (macOS, Áudio e mapa de ações).
+
+**M2.2 aceito (rodada 6, main `b9f4b5d`).** A composição Python de 128 quadros consecutivos de MONDE01 após o MissionLoad, 257 fases, é igual ao executável original em todas as fases. Foram comparados 999 bytes de lógica, e os 153.060 bytes só de tela foram mascarados com prova de escritor e leitor. Também batem os 25.482 registros de alocação, os RNGs, os bindings e as fronteiras fora da tela, os registradores e a flag do HUD em cada quadro, sem nenhum cruzamento. A janela cobre o crescimento dos campos, as linhas 31 a 51, o ScanNouvellePatate no quadro 45 e os temporizadores de 32, 50 e 100 quadros. A captura original, de 8,65 MB comprimida, foi feita no Mac mini e deu o mesmo resultado em duas execuções. A prova foi reproduzida exatamente na `main` nas duas máquinas. **M2 ainda não foi aceito:** falta o M2.3, a primeira incursão inimiga, no quadro 9000. A captura do M2.3, dos quadros 0 a 9.200, está rodando no Mac mini, e os seus primeiros 128 quadros já são idênticos aos do M2.2. A estimativa global continua em ~50%.
 
 **M1 foi aceito.** A composição Python de `MissionLoad 0x46c2cf` para MONDE01 parte do estado de entrada original congelado e executa até o retorno com AL=1. O resultado é idêntico ao executável original: 881 blocos de memória (2.659.375 bytes), 938 registros de alocação, as 1.400 requisições externas na mesma ordem e o retorno. Não há pontes nem dependências substituídas. O resultado foi reproduzido na main integrada `927c7e5`, junto com uma nova execução nativa do original, idêntica à referência congelada.
 
@@ -21,7 +23,7 @@ Nesta rodada a referência original foi integrada (`14c0122`) e a composição P
 
 ## M2 status (live)
 
-**M2 is not accepted. M2.1 (first frame) is ACCEPTED at `32bb391`** ([record](../integracao/validacao/cxr-20261029-m2r5-m2-1-acceptance.json)). M2.2 (128 frames) and M2.3 (first raid, frame 9000) remain.
+**M2 is not accepted. M2.1 (first frame) is ACCEPTED at `32bb391`; M2.2 (128 frames) is ACCEPTED at `b9f4b5d`** ([record](../integracao/validacao/cxr-20261029-m2r5-m2-1-acceptance.json)). M2.2 (128 frames) and M2.3 (first raid, frame 9000) remain.
 
 | Item | Original capture | Implementation | Native differential | Integrated / main reproduction | Whole-frame flow |
 |---|---|---|---|---|---|
@@ -69,6 +71,27 @@ No unit, structure, player, resource, AI, condition or market byte differs, and 
 **Decision:** the display scenario is the M2 reference. The v1 composition result is historical evidence only. The M2.1 comparison will use a published display-only exclusion mask with writer/reader proof; every other byte is compared.
 
 Gates: missions native 126/126 and ai-runtime 57/57 (helpers). Main reproduction: 7 suites, 45 tests OK.
+
+**Round 6 (main `b9f4b5d`).**
+
+| Front | Merge on main | Delivered |
+|---|---|---|
+| Missions (Mac mini) | `c7ed947` | M2.2 original capture: 128 frames, 257 phases in delta form, 11 checkpoint full states, 8.65 MB xz, replay-checked and deterministic over two runs. Cumulative 128-frame policy: 153,060 display-only bytes masked, 999 logic bytes compared. Segment-parallel execution proven byte-equal on M2.2. |
+| AI/runtime | `2e90697`, `8564ca7`, and the proof merge before `b9f4b5d` | N-frame chain, the HUD-flag model, the EnginNextEtape scan, ScanNouvellePatate over Core's grid, a delta-form comparator, and the **M2.2 proof: 257/257 phases equal, 0 crossings**. |
+| Core | `c60544f`, `b9f4b5d` | Unicorn teardown fix: coalesced mappings; the Mac mini timing run shows 26,262 pages → 5 regions with 0 s close. Coverage tool to frame 9,200 (run on the Mac mini, `runs/core/coverage-9200`). M2.3 raid spawn/order routines captured, translated and natively validated: 689 comparisons, 0 mismatches. |
+| Graphics | `fc0fad2`, `f216227`, `f47ead0` | Field-order fix before M2.1. The AffGame domain is extended to the frame 2–6 view origins, structure modes 0–7, the [0x4dfb44] cursor path and the visible raid unit. |
+| Economy | `e4774c9` | M2.3 periodic timers captured and verified natively: GetMeteo and MAJSympathie's event branch. |
+| Combat | `8c65c65` | Raid course over counters 9000–12000: without player input the raid never fights, and the Combat calls reached equal the Python. |
+
+Acceptance: [M2.2 record](../integracao/validacao/cxr-20261029-m2r6-m2-2-acceptance.json). The proof reproduces exactly on main `b9f4b5d` on the MacBook (59 s) and on the Mac mini (54.8 s).
+
+**M2.3 (running on the Mac mini):**
+- Window: frames 0–9,200. It covers the raid spawn at 9000 and the first path search at 9176–9179.
+- Evidence: 1,000-frame parts, each opening with a full state, each under 50 MB. Logic-byte deltas plus a masked display hash per phase. Complete deltas through 8,990–9,200.
+- Policy: the proven pass 2, aggregated per 1,000-frame window, reproduces the M2.2 report exactly.
+- Early warning: frames 0–128 are byte-equal to the M2.2 capture.
+
+Rules adopted: non-native gates run outside the heavy lease. Long native work goes to the Mac mini through `runs/<front>/<tag>` branches.
 
 **Round 5 (main `32bb391`).**
 

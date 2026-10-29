@@ -10,7 +10,12 @@ RechercheGetNbInvention for Missions' TestFinDeMission. Round 4 adds the
 queries the display-scenario frames reach outside those calls
 (``evidencias/captura-consultas-economia-exibicao.json``): PlayerGetType,
 PlayerEstAllie, TestRessource, BatimentGetType, BatimentEstHabiter,
-IntToBCD, BCDToInt and BagVide.
+IntToBCD, BCDToInt and BagVide; M2.3 adds PlayerGetColor (first entered at frame 9000). PlayerEstAllie and TestRessource are the live
+functions (original index handling, player 4 included), never the 0..3-protected
+class forms. ``recursos`` should be live (round 5):
+``extracao.RecursosTerreno.do_mundo(mundo, minas=m.vista(0x509954, 80))`` over
+Core's ``MundoFisico.vincular_grades`` world, or
+``RecursosTerreno.da_memoria(m, mosaicos=mundo.tiles.buffer)``.
 
 ``memoria`` is the declared live memory: either an object with
 ``ler(endereco, tamanho)`` and ``vista(endereco, tamanho)`` (Missions'
@@ -50,6 +55,8 @@ REGIOES_ECONOMIA_QUADRO = (
     (0x508f7c, 0x508f80, 'frame counter'), (0x509952, 0x509953, 'field update flag'),
     (0x509954, 0x509954 + 80, 'mines'), (0x51a990, 0x51a990 + 64, 'AI contexts (+0 inactive byte)'),
     (0x4e19a0, 0x4e19a4, 'unit pool pointer'), (0x5080a8, 0x5080ac, 'player records pointer'),
+    (0x4e24dc, 0x4e24dc + 256, 'player colors (AL index)'), (0x496d2c, 0x496d30, 'weather byte and drift'),
+    (0x497288, 0x497288 + 16 * 0x16, 'sympathy event records 0..0x15 (MAJSympathie EBX)'),
 )
 # Dynamic ranges besides the unit pool: the player records [0x5080a8] (PlayerGetType/PlayerEstAllie),
 # any Bag count word BagVide is given, and the IntToBCD/BCDToInt destinations and sources.
@@ -148,6 +155,8 @@ def provedores_economia_quadro(memoria, *, bonus, producao, recursos=None, calcu
         'IntToBCD': lambda sitio, destino, valor: q.escrever_bcd(m, destino, valor),
         'BCDToInt': lambda sitio, destino, origem: q.ler_bcd(m, destino, origem),
         'BagVide': lambda sitio, bolsa: q.bolsa_vazia(m, bolsa),
+        'PlayerGetColor': lambda sitio, jogador: q.cor_jogador(m, jogador),
+        'GetMeteo': lambda sitio: q.calcular_meteo(m),
     }
     if recursos is not None:
         p['UpdateChamp'] = lambda sitio: q.atualizar_campos(m, recursos)

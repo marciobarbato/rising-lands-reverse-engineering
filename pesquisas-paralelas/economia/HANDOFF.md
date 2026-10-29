@@ -772,3 +772,95 @@ These queries were validated earlier against synthetic captures, not at the exac
 - `BagVide` is new; its only evidence is the display-frame calls (3 calls, all on empty unit Bags, so the AH = high-count-byte path is unexercised natively). The class forms of PlayerEstAllie/TestRessource still reject player 4, which the original reads.
 - Field growth (counter 128, M2.2) not started; Core's live tile-grid provider for `[0x507d70]` is not on main yet.
 - Still named dependencies, unreached in frames 0/1: `InitGameZone` (Core translates it), the `MAJSympathie` counter branch `0x47515d`, the market state-3/4/5 branches, `AnimBallonStatic`, `InventionSetEffet`, and an active `CalculTroupe` without the world-joined producer.
+
+## Stage 24 (M2 round 5): field growth, BagVide and edge players
+
+**Reference.** Missions' display scenario `exibicao` (`-v2` artifacts) at main `1a82ae6`, after Core's `MundoFisico.vincular_grades` (`30528b5`). Original-first: each capture was committed with its exact producing script before any translation ran against it.
+
+**Captures** (intact RISING.EXE `6c556520…43fb`, whole code section unpatched, `capturar_quadro_m2_original.Captura` hooks over the display post-load block list; input hashes of the three Missions artifacts recorded):
+- `evidencias/captura-campos-exibicao-original.json` (`9703754`, sha256 `11569b72…cecb`): 45 scenarios, 770 calls, 770 returns, 0 dependency stops. SetUpdateChamp `0x475328`, UpdateChamp `0x478806` and BagVide `0x4470b9`; scenarios are listed in docs/ECONOMY.md.
+- `evidencias/captura-consultas-bordas-exibicao-original.json` (`af4d59d`, sha256 `47333cc9…79cc`): 2 scenarios, 218 calls, 218 returns. PlayerEstAllie `0x46d838` and TestRessource `0x4676e5` with edge players.
+
+**API inputs and supported domain:**
+- `RecursosTerreno.vivo(terreno, *, minas, mosaicos, atributos)`, where `terreno` must be `TerrenoSacolas.vivo(tipos, quantidades)`. The buffers are writable contiguous bytes: types `[0x507d74]` and quantities `[0x507dac]` 65,536 bytes each, mines `0x509954` 80 bytes, tiles `[0x507d70]` 131,072 bytes, attributes `[0x507da8]` 65,536 bytes. All are bound by identity and rejected before binding otherwise.
+- `RecursosTerreno.do_mundo(mundo, *, minas)` requires that `tiles`, `atributos`, `objetos` and `donos_objetos` are in `mundo.grades_vivas`, and raises `ValueError` naming the missing ones.
+- `RecursosTerreno.da_memoria(m, *, mosaicos=None)` resolves the four grids through their DGROUP pointers.
+- The live forms carry no scalars: `quadro_economia.agendar_campos`/`atualizar_campos(m, recursos)` pull the counter `0x508f7c`, period `0x4973ea`, flag `0x509952`, row `0x4973e8` and RNG `0x497164` from `m`, run, and push them back.
+- Rows outside 0..255 and period 0 keep their named rejections (`ValueError`, `ZeroDivisionError`), as before.
+- `Economia.da_memoria(m)` and `Mercado.da_memoria(m)` now keep `memoria_viva = m`. Through it, `suficiente` and `aliado` run the original's index handling (any player byte, record 4 read). `Economia.vivo(tabela)` without a map and the copying constructors keep the 0..3 rejection.
+
+**Mutation and callback order.** UpdateChamp per row, columns 1..254:
+1. On a bush (0x1c), Random % 5 == 0 runs ScanNouvellePatate.
+2. On a field cell, Random % 10 must be 0 to continue.
+3. A non-growable stage (0x28, 0x34) is cleared, then ScanNouvellePatate runs.
+4. Stages 0x24..0x27 and 0x30..0x33 advance on Random % 5 == 0, and run ScanNouvellePatate otherwise.
+5. Every other stage advances.
+6. ScanNouvellePatate tries the neighbours −1, +1, −256, +256 (u16-wrapped) on tiles 0x84..0x86 or 0x9d..0xdc. NouvellePatate plants 0x29 or 0x1d by Random parity when the cell is empty and attribute bit 0 is clear.
+7. After row 255, the row returns to 1 and the flag is cleared.
+
+The translation is unchanged from Stage 20; only its binding is new.
+
+**Validation:**
+- Python (`testes/test_campos_exibicao.py`): all 770 field/BagVide calls are reproduced directly and through the providers over a `u8/u16/u32`-only memory, with Core's `vincular_grades` world and `RecursosTerreno.do_mundo`. After every call, the scalars and all four grids equal a mirror of the native writes; every scenario's initial and final whole-state hashes match. All 218 edge calls are reproduced through the live functions, the live-bound class forms and the providers.
+- Mutations, each detected: skipping UpdateChamp; flipping BagVide's AL at count 0x100; an unbound `Mercado` (rejects player 4); a 0..3-protected `aliado` in the functions and in the providers; a 0..3-protected TestRessource in the functions and in the providers.
+- Native rerun (`RISING_EMULAR=1`, under the lease): `test_campos_exibicao` 9 tests, 0 skips, 5,545 s. Fresh reruns of both scripts equal the frozen captures (770 + 218 calls); both runs exit right after writing, with lease exit 0.
+
+**Gaps:**
+- Missions' PLANO_M2_2 places the 124 candidate cells in rows 32..52 (frames 31..51). The grid and the native capture put them in rows 32..41, 45..47 and 55..62 (frames up to 61); reported to Missions through the coordinator.
+- The natural-pass frames that plant or grow depend on the shared RNG `0x497164`, which other frame code also draws. The isolated sequence is evidence for the routines, not a game timeline.
+- Missions' `fim_missao` composer uses `recursos.suficiente` over the copying `Economia(memoria=...)`, which rejects player 4. Contract: use `Economia.da_memoria(m)` or the `TestRessource` provider (Missions-owned file; not edited).
+- Native captures can spin in Unicorn teardown after writing their output. The round-5 runners exit with `os._exit(0)` right after the file is written; Core is investigating the teardown itself.
+- Still named dependencies from Stage 23: `InitGameZone`, the `MAJSympathie` counter branch `0x47515d`, the market state-3/4/5 branches, `AnimBallonStatic`, `InventionSetEffet`, and an active `CalculTroupe` without the world-joined producer.
+
+## Stage 25 (M2.3 prep): periodic branches before the first raid
+
+**Capture** (`5c8c9ac`, `evidencias/captura-temporizadores-original.json`, sha256 `58349e4f…fe01d`):
+- **Producer:** `capturar_temporizadores_original.py`, run under the lease with Core's `mapear_paginas` and `encerrar_captura`; it finished in seconds.
+- **Starting states:** the display post-load state, and the M2.2 frame-128 full-state checkpoint (Missions `ad50ab2`, raw sha256 `1ad031b9…dd930`, summary checked).
+- **Size:** 48 scenarios, 434 calls: 420 returns and 14 stops, at MessageBoxSet ×12 and InitGameZone ×2.
+- **Routines:** CalculCompteurMarche/Proposition (as loaded, and with declared states 3/4/5), PlayerAttaqueCalculSympa, MAJSympathie (with and without AI context), PlayerInitAllianceCompteur, BatimentNextEtape on every live structure, and GetMeteo.
+
+**API:**
+- `quadro_economia.calcular_meteo(m)` (GetMeteo `0x4290cf`) reads the counter `0x508f7c`, writes `0x496d2c` and `0x496d2e`, and draws the RNG `0x497164` once at counter % 100 = 0.
+- `atualizar_simpatia(m, a, b, evento)` now runs the event branch `0x47515d` over the record at `0x497288 + 16·evento` (u32 wrap) and over the sympathy words through `[0x5080a8]`. `EVENTOS_SIMPATIA` names the table.
+- The order of mutations is the original's: counter store, then (at the limit) counter zeroed, then the pairs in i-major order. Mode 1 covers i, j in 0..3 with i ≠ j; any other mode covers (a, b) only.
+
+**Validation:**
+- `testes/test_temporizadores.py` replays both states: GetMeteo, MAJSympathie, PlayerAttaqueCalculSympa, PlayerInitAllianceCompteur and the market gates. Writes and the whole-state hash are compared after every call; BatimentNextEtape's 15 calls per state write nothing natively.
+- Mutations detected: a skipped mode-1 pair, a `<= 3` roll threshold, a dropped counter reset.
+- The native rerun (`RISING_EMULAR=1`, under the lease) equals the frozen capture.
+- `test_quadro_economia`'s dependency test now asserts the translated event branch (pairs (0, 1)/(1, 0) +1 at counter 2000 with AI context cleared).
+- Gate: 487 tests, 205 optional skips, docs OK.
+- The frame-128 replay and the native rerun skip when Missions' frame-128 file is not on the checkout: it is on `feat/re-missions` until Missions integrates it; locally it is read from `.local/m2-3/`.
+
+**Gaps:**
+- The market state-3 (`0x466e01`) and state-4/5 (`0x466ed1`/`0x466fe1`) branches remain named dependencies; they need CalculValeur `0x466533` and ForgetMarche `0x4610a4`. Core's coverage run (frames 0..2,300 so far) reaches none of the market helpers.
+- Unreached and untranslated: InitNova, InventionSetEffet, AnimBallonStatic, and an actively producing CalculTroupe.
+- GetMeteo has no static caller and is not entered in that run.
+
+## Stage 26 (M2.3 readiness): frames 129..9,000 from the real states
+
+**Inputs:**
+- Core's coverage (`runs/core/coverage-9200`).
+- Economy's gate probe: `sondar_temporizadores_exibicao.py` at `574082d`, run on the Mac mini (`runs/economy/gate-probe-9000`, `9c242d6`, merged). Output `evidencias/sondagem-temporizadores-exibicao-9000.json.xz`, sha256 `35dd6b01…7618`: 9,000 frames; frames 0/1 reproduce the reference; code unchanged; 14 CalculGame-entry states saved as deltas against the display post-load state. `sondar_temporizadores_exibicao.estado_da_sondagem(base, registro)` rebuilds a state and checks its summary.
+
+**Captures**, each committed before its replay:
+- `evidencias/captura-cor-jogador-original.json` (`748d745`, sha256 `de089fd4…aa3b`): PlayerGetColor for every AL (upper bits 0 / `0xabcd12`), from the display and frame-128 states at counter 9000. 1,024 returns, no writes.
+- `evidencias/captura-temporizadores-sondagem-original.json` (`260181c`, sha256 `9cc0e7ba…8b27`): from all 14 probe states. 136 scenarios, 2,179 calls: 2,144 returns and 35 stops, all in declared overrides (MessageBoxSet 30, InitGameZone 5).
+
+**API:**
+- `quadro_economia.cor_jogador(m, AL)` and the `PlayerGetColor` provider; the `GetMeteo` provider.
+- Provider regions added: the color table `0x4e24dc` (256 bytes), weather `0x496d2c` (4 bytes) and the sympathy event records `0x497288` (events 0..0x15).
+- `test_temporizadores.reproduzir(teste, blocos, roteiro, original)` replays any timer scenario list.
+
+**Validation:**
+- `test_temporizadores_sondagem` asserts the probe's facts: only the field row/flag and the frames 1..5 resource presentation change in frames 1..9000. It replays all 14 states, comparing 1,849 calls (2,179 minus those after the 45 market-branch dependency points).
+- `test_cor_jogador` replays 1,024 calls directly and through the providers.
+- Native rerun (`RISING_EMULAR=1`, under the lease, MacBook, 48 s): the fresh capture equals the frozen one.
+- Gate, outside the lease: 494 tests, 206 optional skips, docs OK.
+
+**Findings for Combat's readiness matrix:**
+- PlayerAttaqueCalculSympa at 2000/4000/6000/8000 rewrites the 16 attack flags (all already 0); every MAJSympathie call takes the AI-context return; nothing else changes.
+- The alliance counters stay 0 through frame 9000.
+
+**Gaps:** the market state-3/4/5 branches (CalculValeur `0x466533`, ForgetMarche `0x4610a4`), InitNova, InventionSetEffet, AnimBallonStatic and an actively producing CalculTroupe stay untranslated. None of them can run in MONDE01 before the raid, because their gate inputs never change.

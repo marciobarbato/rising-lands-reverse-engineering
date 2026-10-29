@@ -13,8 +13,10 @@ from passe_sprites import planejar_passe_sprites
 from sequenciais import consultar_objeto_v6
 from objetos import consultar_objeto, compor_passe
 from composicao import encaminhamento, compor_unidade
-from graficos import TIPOS
+from graficos import TIPOS, localizar, Quadro, compor_indices
 from projeteis_graficos import compor_projetil
+from construcoes import consultar_santuario, compor_fachada, tabelas_jogador as _tabelas_jogador
+from corpo_tipos1_8 import CORPOS as CORPOS_TIPOS1_8, compor_corpo_tipos1_8
 
 CHECKPOINT_HUD = 0x417B1C
 MODO_JOGO = 0x12
@@ -38,6 +40,10 @@ ENDERECOS = {nome: endereco for nome, endereco, largura in GLOBAIS_QUADRO}
 GATILHOS_FACHADA = frozenset((0x2cb, 0x2ed, 0x2fb, 0x30d, 0x326, 0x343, 0x35e, 0x37a, 0x388, 0x390, 0x398,
     0x3b0, 0x3ce, 0x3e1, 0x3f8, 0x406, 0x40e, 0x42a, 0x436))
 OFICINA = 0x356
+# TypeEnginSeFatigue 0x442C34: jump table 0x442BCC over types 0..25 (type > 25 answers false)
+SE_FATIGUE = tuple(int(c) for c in '11111111111000000000000001')
+ICONE_FADIGA = 0x1e2b   # bob id = unit word +4 + 0x1E2B (0x41362E / 0x413650)
+GATILHO_SANTUARIO = 0x2ed   # type-2 structure facade trigger (terrain switch 0x40F23B)
 OBJETO_MURO, OBJETO_PORTAO = 254, 253  # bytes 0x495BF8/0x495BF9
 # AffVeget table 0x415A58: codes with a handler; others return at 0x410B38.
 CODIGOS_AFFVEGET = frozenset((65, 64, 63, 62, 61, 60, 59, 58, 57, 56, 55, 27, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1))
@@ -80,7 +86,7 @@ class MundoQuadro:
     """Read-only world buffers the prefix consumes (camera-indexed visibility)."""
     TAMANHOS = dict(terreno=131072, objetos=65536, auxiliares=65536, regioes=131072, unidades=220800, projeteis=5600)
 
-    def __init__(self, *, terreno, objetos, auxiliares, regioes, unidades, projeteis, descoberta, iluminacao):
+    def __init__(self, *, terreno, objetos, auxiliares, regioes, unidades, projeteis, descoberta, iluminacao, estruturas=None):
         valores = dict(terreno=terreno, objetos=objetos, auxiliares=auxiliares, regioes=regioes, unidades=unidades, projeteis=projeteis)
         for nome, valor in valores.items():
             if len(valor) != self.TAMANHOS[nome]: raise ValueError('Invalid world buffer: '+nome)
@@ -88,6 +94,8 @@ class MundoQuadro:
         if len(descoberta) != 4 or len(iluminacao) != 4 or any(len(m) != 65536 for m in list(descoberta)+list(iluminacao)):
             raise ValueError('Expected four 65536-byte discovery and lighting maps')
         self.descoberta, self.iluminacao = [bytes(m) for m in descoberta], [bytes(m) for m in iluminacao]
+        if estruturas is not None and len(estruturas) != 1000*276: raise ValueError('Structure pool must be 1000 x 276 bytes')
+        self.estruturas = None if estruturas is None else bytes(estruturas)   # DGROUP 0x49A0C8; None = not inherited
 
     def palavra(self, nome, celula): return struct.unpack_from('<H', getattr(self, nome), celula*2)[0]
 
@@ -137,6 +145,7 @@ class _Composicao:
         self.camera = tela.u('camera_u8')
         if self.camera > 3: raise ValueError('camera_u8 must select one of four player maps')
         self.descoberta, self.iluminacao = mundo.descoberta[self.camera], mundo.iluminacao[self.camera]
+        self.habitado = self.relogios_extra = self.selecao_estruturas = self.tabelas_jogador = None
 
     def recorte(self):
         topo, base, esquerda, direita = self.tela.palavras('recorte')
@@ -185,9 +194,26 @@ class _Composicao:
         self.saida = compor_passe(self.catalogo, self.saida, self.largura, self.altura, plano, 'sprites', x, y,
             tabela_sombra=self.sombra, recorte=self.recorte())
 
+    def _estrutura(self, indice, endereco):
+        if self.mundo.estruturas is None:
+            self.parar(endereco, 'the structure pool is not an inherited input (MundoQuadro.estruturas)')
+        if indice >= 1000: self.parar(endereco, f'structure index {indice} is beyond the 1000-record pool')
+        return self.mundo.estruturas[indice*276:(indice+1)*276]
+
+    def _consulta_habitada(self, indice, endereco):
+        if not callable(self.habitado): self.parar(endereco, 'BatimentEstHabiter provider (economy) is not supplied')
+        return bool(self.habitado(indice))
+
     def batiments(self, x, y, celula):
-        if self.mundo.palavra('regioes', celula) & 0x8000:
+        """AffBatiments 0x407DD3 for one cell: prefix, terrain switch, facade of the type-2 structure, selection tail."""
+        palavra_regiao = self.mundo.palavra('regioes', celula)
+        indice = (palavra_regiao & 0x7fe0) >> 5 if palavra_regiao & 0x8000 else 0xffff   # 0x407DEF..0x407E14
+        if indice != 0xffff and self.mundo.estruturas is None:   # pinned pre-structure inputs keep their original stop
             self.parar(0x407DEF, f'AffBatiments structure occupancy at cell {celula}')
+        if indice != 0xffff:
+            r = self._estrutura(indice, 0x407E1E)
+            # 0x407E1E..0x407E56: mode 3 skips the check; a foreign owner needs its per-camera visibility byte (+0x110+camera)
+            if r[5] != 3 and r[4] != self.camera and r[0x110+self.camera] == 0: return
         if self.descoberta[celula] & 0x10: return  # CaseEstDecouverte false: 0x40F491
         esquerda, topo, direita, base = self.recorte()  # SaveCurrentClipping 0x40F4B7
         self.tela.gravar('recorte_salvo', struct.pack('<4H', esquerda, direita, topo, base))
@@ -195,18 +221,70 @@ class _Composicao:
         if codigo in (OBJETO_MURO, OBJETO_PORTAO):
             self.parar(0x407EA7 if codigo == OBJETO_MURO else 0x407FB8, f'ChercheIndiceBatiment for object {codigo} at cell {celula}')
         palavra = self.mundo.palavra('terreno', celula)
-        if palavra in GATILHOS_FACHADA: self.parar(0x40F23B, f'building facade for terrain word 0x{palavra:x} at cell {celula}')
+        if palavra == GATILHO_SANTUARIO and self.mundo.estruturas is None:
+            self.parar(0x40F23B, f'building facade for terrain word 0x{palavra:x} at cell {celula}')
+        if palavra == GATILHO_SANTUARIO:
+            self._fachada_santuario(x, y, celula, indice)
+        elif palavra in GATILHOS_FACHADA: self.parar(0x40F23B, f'building facade for terrain word 0x{palavra:x} at cell {celula}')
         if palavra == OFICINA: self.parar(0x40288B, f'workshop facade at cell {celula}')
+        self._cauda_batiments(celula, indice)
         salvo = struct.unpack('<4H', self.tela.bruto('recorte_salvo'))  # RestaureClipping 0x40F4E8
         self.tela.gravar('recorte', struct.pack('<4H', salvo[2], salvo[3], salvo[0], salvo[1]))
 
+    def _fachada_santuario(self, x, y, celula, indice):
+        """Terrain word 0x2ED (0x408577..0x408ab3): inline lookup, state query, type-2 facade layers."""
+        if indice == 0xffff: return   # 0x4085C5 -> 0x40F491: no structure at the trigger, nothing drawn
+        r = self._estrutura(indice, 0x4085CB)
+        modo = r[5]
+        if modo not in (3, 4, 5): self.parar(0x408AC8, f'structure mode {modo}: the construction/other body is not reconstructed')
+        if r[8] != 2: self.parar(0x408606, f'structure type {r[8]}: only the type-2 facade is reconstructed')
+        habitado = self._consulta_habitada(indice, 0x4087AA)
+        if modo == 3 and not habitado: self.parar(0x40863E, 'mode 3 without habitation advances the RNG cursor and draws the construction body')
+        if not habitado: self.parar(0x40892D, 'uninhabited facade needs the gray effect')
+        auxiliar = struct.unpack_from('<H', r, 6)[0]
+        if self.relogios_extra is None: self.parar(0x4087E3, 'frame clocks 0x508F80/0x508F84 are not supplied')
+        relogios = [self.tela.u('quadro_u32'), *self.relogios_extra]
+        plano = consultar_santuario(tipo=2, modo=5, habitado=True, jogador=r[4], relogios=relogios,
+            celula_mapa=(celula & 0xff, celula >> 8), auxiliar_06=auxiliar)
+        self.chamadas.append(['AffBatiments.fachada', indice, modo])
+        self.saida = compor_fachada(self.catalogo, self.saida, self.largura, self.altura, plano, x, y,
+            tabelas=self.tabelas_jogador, recorte=self.recorte())
+
+    def _cauda_batiments(self, celula, indice):
+        """0x40F342: AffVehiculeAtelier, RestaureClipping, selection frame and gauge for the selected structure."""
+        if self.mundo.palavra('terreno', celula) == OFICINA: return
+        if indice == 0xffff: return
+        habitado = self._consulta_habitada(indice, 0x40F378)
+        r = self._estrutura(indice, 0x40F399)
+        if habitado and self.mundo.objetos[celula] != OBJETO_MURO and r[5] != 3:
+            if self.selecao_estruturas is None: self.parar(0x40F3C2, 'per-owner structure selection words 0x495BE0 are not supplied')
+            dono = self.selecao_estruturas[r[4]] if r[4] < len(self.selecao_estruturas) else None
+            if dono is None: self.parar(0x40F3C2, f'owner {r[4]} is outside the supplied selection words')
+            if dono == indice and r[4] == self.camera:
+                self.parar(0x4022C8, 'BatimentPoseCadre (selection frame) is not reconstructed')
+            if r[4] == self.camera and (self.tela.u('selecionada_estrutura_u16') == indice or dono == indice):
+                self.parar(0x4020EC, 'AffJaugeBatiment is not reconstructed')
+            return
+        if r[8] == 0x11 and r[4] == self.camera and self.tela.u('selecionada_estrutura_u16') == indice:
+            self.parar(0x4020EC, 'AffJaugeBatiment is not reconstructed')
+
     def engin(self, x, y, indice):
         r = self.mundo.unidades[indice*276:(indice+1)*276]; tipo, estado = r[1], r[2]
+        if tipo in CORPOS_TIPOS1_8:   # render API 1.3: AffDeplaceEngin branches 0x412D4C / 0x412962 (native capture)
+            try:
+                self.saida, _ = compor_corpo_tipos1_8(self.catalogo, self.saida, self.largura, self.altura, r, x=x, y=y,
+                    indice_u16=indice, camera_u8=self.camera, indice_selecionado_u16=self.tela.u('selecionada_unidade_u16'),
+                    modo_selecao_u8=self.tela.u('modo_selecao_u8'), tabela_sombra=self.sombra, recorte=self.recorte())
+            except NotImplementedError as erro:
+                self.parar(0x41591F, f'AffEngin unit {indice} type {tipo} state {estado}: {erro}')
+            i8 = lambda v: v-256 if v > 127 else v
+            self._icone_fadiga(r, x, y, indice, i8(r[0x86]), i8(r[0x87]))
+            return
         if tipo not in TIPOS: self.parar(0x41591F, f'AffEngin unit {indice} type {tipo} has no committed body')
         rota = encaminhamento(tipo, estado, auxiliar_8a=r[0x8a])
         if rota['rota'] == 'sem_desenho': return
         guarda = (rota['rota'] == 'corpo_base' and estado in (2, 7) and r[0] == 0 and self.camera == 0
-            and struct.unpack_from('<H', r, 0x74)[0] >= 100 and r[0xba] == 0 and r[0xbd] == 0
+            and r[0xba] == 0 and r[0xbd] == 0
             and self.tela.u('selecionada_unidade_u16') != indice and self.tela.u('modo_selecao_u8') == 0
             and 1 <= r[0x91] <= 16 and r[0xa4] <= 7)
         if not guarda: self.parar(0x41591F, f'AffEngin unit {indice} type {tipo} state {estado} route {rota["rota"]} outside the validated body domain')
@@ -214,6 +292,19 @@ class _Composicao:
         self.saida, _ = compor_unidade(self.catalogo, self.saida, self.largura, self.altura, tipo=tipo, estado_u8=estado,
             direcao=r[0x91], fase=r[0xa4], x=x, y=y, tabela=self.sombra, bolsa_u16=struct.unpack_from('<H', r, 0xa)[0],
             auxiliar_8a=r[0x8a], dx=i8(r[0x86]), dy=i8(r[0x87]), recorte=self.recorte())
+        self._icone_fadiga(r, x, y, indice, i8(r[0x86]), i8(r[0x87]))
+
+    def _icone_fadiga(self, r, x, y, indice, dx, dy):
+        """Tail 0x413568..0x413655 of the body routine: the low-life tired icon (life < 100, word +4 == word +0x76)."""
+        vida, w4, w76 = struct.unpack_from('<H', r, 0x74)[0], struct.unpack_from('<H', r, 4)[0], struct.unpack_from('<H', r, 0x76)[0]
+        if not (w4 == w76 and vida < 100): return
+        if (vida//5) % 2: return
+        if r[1] > 25 or not SE_FATIGUE[r[1]]: return
+        if dx or dy: self.parar(0x4135FA, 'tired icon with a nonzero body shift (+0x86/+0x87): origin not verified')
+        self.chamadas.append(['EngineIconeFadiga', indice])
+        q = self.catalogo.quadro(localizar(w4+ICONE_FADIGA)['id_motor'])   # drawn at the cell origin - (8, 11): native args of 0x41362E/0x413650
+        if r[0] != 0xc8: q = Quadro(q.largura, q.altura, q.pixels.translate(self.tabelas_jogador[r[0]] if r[0] < 5 else self.parar(0x413650, f'owner {r[0]} has no player table')), q.opacidade, 0, b'')
+        self.saida = compor_indices(self.saida, self.largura, self.altura, q, x-8, y-11, self.recorte())
 
     def projetil(self, indice):
         r = self.mundo.projeteis[indice*56:(indice+1)*56]; px, py = struct.unpack_from('<HH', r, 0xc)
@@ -226,7 +317,8 @@ class _Composicao:
             self.parar(0x46FF70, f'AffProjectile {indice}: {erro}')
 
 
-def compor_quadro(mundo, tela, *, ciclo_cache, catalogo, tabela_sombra, tabela_eclairage, superficie, relogio, directdraw):
+def compor_quadro(mundo, tela, *, ciclo_cache, catalogo, tabela_sombra, tabela_eclairage, superficie, relogio, directdraw,
+                  habitado=None, relogios_extra=None, selecao_estruturas=None, tabelas_jogador=None):
     """One AffGame call in mode 0x12, through the HUD checkpoint 0x417B1C.
 
     mundo: MundoQuadro (read-only). tela: EstadoTela, mutated with original
@@ -259,6 +351,8 @@ def compor_quadro(mundo, tela, *, ciclo_cache, catalogo, tabela_sombra, tabela_e
     largura, altura = tela.u('pitch_u32'), tela.u('altura_tela_u16')
     if len(superficie) != largura*altura: raise ValueError('Surface must be pitch x screen height bytes')
     c = _Composicao(mundo, tela, superficie, catalogo, ciclo_cache, bytes(tabela_sombra), bytes(tabela_eclairage))
+    c.habitado, c.relogios_extra, c.selecao_estruturas = habitado, relogios_extra, selecao_estruturas
+    c.tabelas_jogador = tabelas_jogador if tabelas_jogador is not None else _tabelas_jogador()
     c.chamadas += [['CalculFrame'], ['DDLockSurface']]
     origem = list(tela.palavras('origem')); janela = list(tela.palavras('janela')); margem = tela.u('margem_i8')
     margem = margem-256 if margem > 127 else margem

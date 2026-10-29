@@ -1,0 +1,31 @@
+{
+  "schema": "rising-lands/audio-validator-reproducibility/1",
+  "changes": [
+    "required --output",
+    "existing paths and symlinks refused before native import/capture",
+    "exclusive final creation",
+    "fresh ignored output documented"
+  ],
+  "native_algorithms_rerun": false,
+  "new_cli_tests": {
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0
+  },
+  "domain_gate": {
+    "discovered": 34,
+    "passed": 31,
+    "failed": 0,
+    "optional_native_skips": 3
+  },
+  "original_native_report": {
+    "path": "pesquisas-paralelas/audio/validacao/indices-fila-audio-native.json",
+    "unchanged": true,
+    "sha256": "a345c873b7c3a7716f1641971350bcc6a0568799e51aa258652f607f7d8a6d9c",
+    "native_cases": 133
+  },
+  "log": {
+    "path": "pesquisas-paralelas/audio/validacao/validator-reproducibility-check.log",
+    "sha256": "2e04cf0adc56aef014719f4e1ca4acad8c679626c38ba1465c26f841063b00de"
+  }
+}

@@ -40,6 +40,8 @@ import sys
 from ambiente_ia_runtime import CD, ROOT
 from composicao_quadro1_ia import Registro as RegistroBase
 from entrada_quadro_ia import calcular_icone_acao, entrada_jogo, enviar_entrada, iniciar_menu
+from incursao_ia import enviar_mensagem_unidade
+from regras_incursao_ia import MundoRegras, operacoes_regras
 from laco_despachantes import calcular_proxima_etapa_estruturas, calcular_proxima_etapa_unidades
 from proxima_etapa_quadro import proxima_etapa_estrutura, proxima_etapa_unidade, tabelas_imagem
 from quadro_calcul_game import calcular_quadro
@@ -52,6 +54,7 @@ for _pasta in ('pesquisas-paralelas/combate', 'pesquisas-paralelas/economia'):
     if str(ROOT / _pasta) not in sys.path:
         sys.path.append(str(ROOT / _pasta))
 import chamadas_quadro_core as core  # noqa: E402
+import incursao_core  # noqa: E402
 from fundacoes_quadro import zerar_contadores_carga  # noqa: E402
 from fim_missao import consultas_publicadas, evento_em_curso, testar_fim_missao  # noqa: E402
 import quadro_economia as economia_quadro  # noqa: E402
@@ -273,12 +276,20 @@ def recursos_terreno(mm):
     return recursos
 
 
+def _parar_pilha_nativa(sitio):
+    """Core's GetFreeCell (``incursao_core.celula_livre``) reads the upper words of four 16-bit locals as native
+    stack residue (ESP - 0x32, -0x1a, -0x3a, -0x2e). The composition has no native stack, so the residue
+    contract is Core's to state before this call can run here."""
+    raise DependenciaIA('GetFreeCell (Core): native stack residue at ESP-0x32/-0x1a/-0x3a/-0x2e not modeled', sitio)
+
+
 def provedores(mapa, prov, mm, ctx, registro, janelas, travessias, fase, regs):
     """Original-name providers for every routine the three phases reach."""
     p = {}
     bonus = lambda jogador, tipo, seletor: prov.bonus.consultar(jogador, tipo, seletor)  # noqa: E731
     p.update(core.provedores_core(mm, bonus))
-    maquina = MaquinaTarefasViva(ctx.programa, mm.vista(0x512320, 0x25e8))
+    maquina = MaquinaTarefasViva(ctx.programa, mm.vista(0x512320, 0x25e8), operacoes=operacoes_regras(mm, p),
+                                 missao=mm.u8(0x496fe4), mundo=MundoRegras(mm, p))
     estado_regs = dict(EBX=regs['EBX'])
 
     def ponto(nome, funcao):
@@ -369,6 +380,11 @@ def provedores(mapa, prov, mm, ctx, registro, janelas, travessias, fase, regs):
         'EnginOccupeCase': lambda sitio, unidade, celula, filtro: int(ocupa_celula(
             mm.ler(mm.u32(0x4e19a0) + 276 * unidade, 276), celula, filtro)),
         'AvanceMonstre': lambda sitio, jogador: avancar_monstros(mm, p),
+
+        'ProjectileInit': lambda sitio, tipo, origem, alvo, modo, pilha: PoolProjeteis(
+            memoria=mm.vista(mm.u32(0x5080f0), 5600)).iniciar(tipo, origem, alvo, modo, *pilha),
+        'iagUnitSendMessage': lambda sitio, unidade, mensagem, alvo: enviar_mensagem_unidade(
+            mm, p, unidade, mensagem, alvo),
         'iaSolver': lambda sitio, contexto: maquina.atualizar((contexto - 0x5148b0) // 16) & 0xffffffff,
         'ProcessInputGame': lambda sitio, jogador: processar_entrada(mm, jogador, ctx.comandos),
         'MessageBoxCalcul': lambda sitio: calcular_caixa_mensagens(mm),
@@ -401,6 +417,24 @@ def provedores(mapa, prov, mm, ctx, registro, janelas, travessias, fase, regs):
         'NextAnimTerrain': nucleo('NextAnimTerrain', lambda x, y: core.animar_terreno(mm, x, y)),
         'NextAnimVeget': nucleo('NextAnimVeget', lambda x, y: core.animar_vegetacao(mm, x, y)),
     })
+    # Raid routines (M2.3): Core's provedores_core exports them over live memory from 9f27899 on, and then its
+    # entries win. Until that lands, Core's validated incursao_core functions are bound here directly, and
+    # GetFreeCell stays a named stop.
+    for nome, provedor in {
+        'iaProbPost': lambda sitio, jogador, tipo, ebx, ecx, pilha: incursao_core.postar_tarefa(
+            mm, jogador, tipo, ebx, ecx, tuple(pilha))['EAX'],
+        'GetFreeCell': lambda sitio, celula, tipo: _parar_pilha_nativa(sitio),
+        'CreerEngin': lambda sitio, celula, edx, tipo, jogador: incursao_core.criar_unidade(
+            mm, celula, edx, tipo, jogador, bonus)['EAX'],
+        'EnginSetPlayer': lambda sitio, unidade, jogador: incursao_core.definir_dono_unidade(mm, unidade, jogador),
+        'PlaceEngin': lambda sitio, unidade: incursao_core.colocar_unidade(mm, unidade),
+        'EnginGetCase': lambda sitio, unidade: incursao_core.caso_unidade(mm, unidade)['EAX'],
+        'GetRandCaseChamps': lambda sitio: incursao_core.caso_campo_aleatoria(mm)['EAX'],
+        'GetRandCaseTypeBatPlayer': lambda sitio, jogador, tipo: incursao_core.caso_estrutura_tipo_jogador(
+            mm, jogador, tipo)['EAX'],
+        'Chemin_Accessible': lambda sitio, origem, destino: incursao_core.acessivel(mm, origem, destino)['EAX'],
+    }.items():
+        p.setdefault(nome, provedor)
     for nome in PONTOS:
         if nome in p and nome not in NUCLEO:
             p[nome] = ponto(nome, p[nome])

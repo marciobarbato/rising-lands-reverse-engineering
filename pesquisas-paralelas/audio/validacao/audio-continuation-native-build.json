@@ -1,0 +1,56 @@
+{
+  "schema": "rising-lands/audio-continuation-native-build/1",
+  "built_commit": "588a7942e6a0923574e1a56047bda8213a2f8ed6",
+  "base_main": "8e90beb412a63d5f00965c381d21bc9a800257bc",
+  "attempt": 1,
+  "exit_code": 1,
+  "passed": false,
+  "command": "RISING_PYTHON_RUNTIME='/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python' ./compilar-jog\u00e1vel --development-ref HEAD --inputs-root '/Users/marcio/git/Rising Lands' --data-root '/Users/marcio/git/Rising-Lands-Codex-Audio/repository/.local/macos-playable'",
+  "runtime_read_only": true,
+  "cd_read_only": true,
+  "all_outputs_inside_clone": true,
+  "app_owned_files_modified": false,
+  "consumer_tests": {
+    "discovered": 71,
+    "passed": 71,
+    "skipped": 0,
+    "seconds": 41.051,
+    "log": "audio-continuation-consumer-tests.log"
+  },
+  "architecture": {
+    "app": "arm64",
+    "python": "arm64",
+    "log": "audio-continuation-architecture.log"
+  },
+  "codesign": {
+    "passed": true,
+    "log": "audio-continuation-codesign-verify.log"
+  },
+  "native_smoke": {
+    "bundlePath": "/Users/marcio/git/Rising-Lands-Codex-Audio/repository/.local/macos-playable/dist/development/RisingLands-ptbr.app",
+    "error": "Tempo limite de 45 segundos na abertura",
+    "nativeWindowVisible": true,
+    "passed": false,
+    "pythonStderr": ""
+  },
+  "native_smoke_immutable_copy": "audio-continuation-native-smoke-first.json",
+  "first_attempt_pngs": [
+    {
+      "path": "/Users/marcio/git/Rising-Lands-Codex-Audio/repository/.local/macos-playable/build/development/588a7942e6a0923574e1a56047bda8213a2f8ed6/build/logs/native-smoke.png",
+      "sha256": "1a2cabce66ec74db9eff978e4fdef05a6b1bfba43a84afcef9cd616f03b24ee2",
+      "bytes": 1258939
+    },
+    {
+      "path": "/Users/marcio/git/Rising-Lands-Codex-Audio/repository/.local/macos-playable/build/development/588a7942e6a0923574e1a56047bda8213a2f8ed6/build/logs/native-smoke.before.png",
+      "sha256": "b60c9ad548f0c2c1e7be156a001dcad5aa53bd45458a510889160d9273b8f246",
+      "bytes": 1653587
+    },
+    {
+      "path": "/Users/marcio/git/Rising-Lands-Codex-Audio/repository/.local/macos-playable/build/development/588a7942e6a0923574e1a56047bda8213a2f8ed6/build/logs/native-smoke.after.png",
+      "sha256": "363094ce32addbd5094426229d2783058d590d31ecde01dcf5862b36f9d317c7",
+      "bytes": 1627946
+    }
+  ],
+  "inspection_smoke": "Not reached because initial native smoke failed",
+  "disposition": "Reported to parent coordinator; no repeat, timeout modification or app edit. Readiness fix belongs to macOS front."
+}

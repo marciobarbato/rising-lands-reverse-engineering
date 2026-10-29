@@ -1,0 +1,10 @@
+test_all_sources_and_original_instruction_artifacts_reproduce (test_difficulty_scan.StaticDifficultyTests) ... ok
+test_incompatible_executable_is_refused_before_disassembly (test_difficulty_scan.StaticDifficultyTests) ... ok
+test_missing_mission_corpus_is_refused (test_difficulty_scan.StaticDifficultyTests) ... ok
+test_monster_profile_keys_are_absent_and_stub_bytes_are_exact (test_difficulty_scan.StaticDifficultyTests) ... ok
+test_scenario_tuning_is_not_miscounted_as_global_difficulty (test_difficulty_scan.StaticDifficultyTests) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.683s
+
+OK

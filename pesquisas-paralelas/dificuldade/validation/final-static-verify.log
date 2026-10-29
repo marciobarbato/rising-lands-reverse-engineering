@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "missions": 38,
+  "profile_keys_missing": [
+    "HumanOnly",
+    "ProbaCaveJoueur",
+    "ProbaCaveIA",
+    "ProbaEmbuscade"
+  ],
+  "absolute_profile_operands": 19,
+  "config_calls": 78,
+  "emulated_calls": 0
+}

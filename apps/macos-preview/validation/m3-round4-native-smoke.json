@@ -1,0 +1,325 @@
+{
+  "architecture" : "arm64",
+  "bundlePath" : "\/Users\/marcio\/git\/Rising-Lands-Codex\/.local\/macos-playable\/dist\/development\/RisingLands-ptbr.app",
+  "canvas" : [
+    1664,
+    840
+  ],
+  "clock" : {
+    "maxCatchupSeconds" : 1,
+    "maximumObservedInterval" : 1.0005657920846716,
+    "mode" : "elapsed",
+    "rate" : 20,
+    "recentIntervals" : [
+      0.10406862490344793,
+      0.10432237503118813,
+      0.10447633406147361,
+      0.10396216600202024,
+      0.10370379197411239,
+      0.10342141694854945,
+      0.10480199998710304,
+      0.10411429102532566,
+      0.10303070896770805,
+      0.10437841608654708,
+      0.10459058394189924,
+      0.01595116697717458,
+      0.1044482080033049,
+      0.10374762502033263,
+      0.10402104200329632,
+      0.10388983297161758
+    ]
+  },
+  "commit" : "7980efc3d4bb4e8f4417bf61441b41d3594ebf28",
+  "diagnosticReadyDelayMs" : 0,
+  "interaction" : "DOM selection\/form\/buttons with live setInterval pump",
+  "lastProgress" : {
+    "action" : "smokeProgress",
+    "diagnostics" : {
+      "clock" : {
+        "maxCatchupSeconds" : 1,
+        "maximumObservedInterval" : 1.0005657920846716,
+        "mode" : "elapsed",
+        "rate" : 20,
+        "recentIntervals" : [
+          0.10406862490344793,
+          0.10432237503118813,
+          0.10447633406147361,
+          0.10396216600202024,
+          0.10370379197411239,
+          0.10342141694854945,
+          0.10480199998710304,
+          0.10411429102532566,
+          0.10303070896770805,
+          0.10437841608654708,
+          0.10459058394189924,
+          0.01595116697717458,
+          0.1044482080033049,
+          0.10374762502033263,
+          0.10402104200329632,
+          0.10388983297161758
+        ]
+      },
+      "commit" : "7980efc3d4bb4e8f4417bf61441b41d3594ebf28",
+      "focused" : true,
+      "paused" : true,
+      "pumping" : false,
+      "selected" : 0,
+      "session" : {
+        "boundary" : null,
+        "cargo" : {
+
+        },
+        "delivered" : 1,
+        "depot" : [
+          2,
+          12
+        ],
+        "hits" : 2,
+        "objective" : "Treino livre: leve sacolas ao depósito e pratique golpes com o soldado.",
+        "remaining" : 7,
+        "supply" : [
+          4,
+          9
+        ]
+      },
+      "speed" : 8,
+      "tick" : 817,
+      "units" : [
+        {
+          "blocked" : null,
+          "id" : 0,
+          "pos" : [
+            9,
+            4
+          ],
+          "progress" : 0,
+          "requested" : [
+            9,
+            4
+          ],
+          "state" : 1
+        },
+        {
+          "blocked" : null,
+          "id" : 1,
+          "pos" : [
+            2,
+            12
+          ],
+          "progress" : 0,
+          "requested" : [
+            2,
+            12
+          ],
+          "state" : 7
+        },
+        {
+          "blocked" : null,
+          "id" : 2,
+          "pos" : [
+            10,
+            4
+          ],
+          "progress" : 0,
+          "requested" : null,
+          "state" : 7
+        }
+      ],
+      "visibility" : "visible"
+    },
+    "stage" : "final_animation_frames"
+  },
+  "nativeWindowVisible" : true,
+  "passed" : true,
+  "python" : "3.12.14",
+  "pythonStderr" : "",
+  "readiness" : {
+    "appReady" : true,
+    "checksBudgetSeconds" : 45,
+    "checksSeconds" : 9.487578250002116,
+    "documentLoaded" : true,
+    "elapsedSeconds" : 9.9599783750018105,
+    "initializationBudgetSeconds" : 90,
+    "initializationSeconds" : 0.47240012499969453,
+    "phase" : "checks",
+    "windowBudgetSeconds" : 45,
+    "windowVisibleSignal" : true
+  },
+  "readySignal" : {
+    "action" : "appReady",
+    "assets" : true,
+    "commit" : "7980efc3d4bb4e8f4417bf61441b41d3594ebf28",
+    "mode" : "exercise",
+    "protocol" : 1,
+    "worker" : true
+  },
+  "renderCaptures" : [
+    {
+      "path" : "\/Users\/marcio\/git\/Rising-Lands-Codex\/.local\/macos-playable\/build\/development\/7980efc3d4bb4e8f4417bf61441b41d3594ebf28\/build\/logs\/native-smoke.before.png",
+      "sha256" : "41c95626d837dbad290c2c3a7e8ea320599ca54cdb95a0cb85d4b4cc7df9fd44"
+    },
+    {
+      "path" : "\/Users\/marcio\/git\/Rising-Lands-Codex\/.local\/macos-playable\/build\/development\/7980efc3d4bb4e8f4417bf61441b41d3594ebf28\/build\/logs\/native-smoke.after.png",
+      "sha256" : "f974e1e0b5fd64e28e6b7d97dc5343edbf09c0b5b5ab028f46efd94c1c4a64a4"
+    }
+  ],
+  "scenario" : "jogavel",
+  "session" : {
+    "boundary" : null,
+    "cargo" : {
+
+    },
+    "delivered" : 1,
+    "depot" : [
+      2,
+      12
+    ],
+    "hits" : 2,
+    "objective" : "Treino livre: leve sacolas ao depósito e pratique golpes com o soldado.",
+    "remaining" : 7,
+    "supply" : [
+      4,
+      9
+    ]
+  },
+  "tests" : [
+    {
+      "name" : "inicialização pausada e ARM64",
+      "passed" : true
+    },
+    {
+      "name" : "seleção de unidade",
+      "passed" : true
+    },
+    {
+      "name" : "ordem e rota calculada pelo motor Python",
+      "passed" : true
+    },
+    {
+      "name" : "pausa impede atualizações",
+      "passed" : true
+    },
+    {
+      "name" : "avanço unitário",
+      "passed" : true
+    },
+    {
+      "name" : "velocidade configurável",
+      "passed" : true
+    },
+    {
+      "name" : "chegada ao destino sem atravessar obstáculo",
+      "passed" : true
+    },
+    {
+      "name" : "colisões observadas",
+      "passed" : true
+    },
+    {
+      "name" : "busca Python contorna parede com passagem",
+      "passed" : true
+    },
+    {
+      "name" : "modo local bloqueia busca desativada sem simular sucesso",
+      "passed" : true
+    },
+    {
+      "name" : "missão original em inspeção",
+      "passed" : true
+    },
+    {
+      "name" : "procedência e recursos visíveis",
+      "passed" : true
+    },
+    {
+      "name" : "economia incorporada executa crédito real",
+      "passed" : true
+    },
+    {
+      "name" : "capacidade e excedentes geram sacolas",
+      "passed" : true
+    },
+    {
+      "name" : "combate consulta alcance e mira sem aplicar dano",
+      "passed" : true
+    },
+    {
+      "name" : "bancada de pesquisas visível",
+      "passed" : true
+    },
+    {
+      "name" : "alternância entre visão técnica e visão do jogo",
+      "passed" : true
+    },
+    {
+      "name" : "canvas e interface renderizados",
+      "passed" : true
+    },
+    {
+      "name" : "coleta após deslocamento no relógio vivo",
+      "passed" : true
+    },
+    {
+      "name" : "entrega muda saldo compartilhado",
+      "passed" : true
+    },
+    {
+      "name" : "soldado contorna parede em estado vivo",
+      "passed" : true
+    },
+    {
+      "name" : "combate contínuo reduz vida por dois golpes",
+      "passed" : true
+    },
+    {
+      "name" : "pausa mantém o estado do treino",
+      "passed" : true
+    },
+    {
+      "name" : "renderização acompanha interações",
+      "passed" : true
+    },
+    {
+      "name" : "relógio avança após intervalo real sem pedidos",
+      "passed" : true
+    },
+    {
+      "name" : "relógio vivo mede tempo decorrido entre respostas",
+      "passed" : true
+    },
+    {
+      "name" : "fontes de economia e combate vinculadas à mesma revisão",
+      "passed" : true
+    }
+  ],
+  "tick" : 817,
+  "units" : [
+    {
+      "health" : 100,
+      "id" : 0,
+      "pos" : [
+        9,
+        4
+      ],
+      "state" : 1
+    },
+    {
+      "health" : 100,
+      "id" : 1,
+      "pos" : [
+        2,
+        12
+      ],
+      "state" : 7
+    },
+    {
+      "health" : 60,
+      "id" : 2,
+      "pos" : [
+        10,
+        4
+      ],
+      "state" : 7
+    }
+  ]
+}

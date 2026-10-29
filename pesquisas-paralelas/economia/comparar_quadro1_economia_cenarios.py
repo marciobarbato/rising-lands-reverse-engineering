@@ -35,7 +35,9 @@ def relocacao():
         from comparar_quadros_exibicao import Relocacao, emparelhar
         from mapa_memoria_m1 import carregar_json
     finally:
-        sys.path[:] = caminho
+        # Keep economia's priority but keep the folders the imports added: cached modules such as
+        # ambiente_missoes will not add them again (Missions' carregador_cabecalho needs graficos' sequenciais).
+        sys.path[:] = caminho + [p for p in sys.path if p not in caminho]
     # The frozen display captures were recorded on Missions' Stage17 artifacts (``exibicao_interino``).
     aloc = {c: carregar_json(cen.caminho(c, 'captura_m1'))['allocations'] for c in ('v1', 'exibicao_interino')}
     return Relocacao(aloc['v1'], emparelhar(aloc['v1'], aloc['exibicao_interino']))

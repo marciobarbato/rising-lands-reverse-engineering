@@ -1,0 +1,88 @@
+    Checking rl-core v0.1.0 (/Users/marcio/git/Rising-Lands-Codex-Engine/motor/crates/rl-core)
+    Checking rl-ffi v0.1.0 (/Users/marcio/git/Rising-Lands-Codex-Engine/motor/crates/rl-ffi)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.45s
+   Compiling rl-core v0.1.0 (/Users/marcio/git/Rising-Lands-Codex-Engine/motor/crates/rl-core)
+   Compiling rl-ffi v0.1.0 (/Users/marcio/git/Rising-Lands-Codex-Engine/motor/crates/rl-ffi)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.42s
+     Running unittests src/lib.rs (target/debug/deps/rl_core-131da78e3fabebbf)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/pilot.rs (target/debug/deps/pilot-11f3b326b167178d)
+
+running 16 tests
+test bcd_load_project_and_unusual_digits ... ok
+test bcd_aliasing_an_rng_refreshes_semantic_state ... ok
+test deterministic_ticks_and_virtual_clock_wrap ... ok
+test bcd_aliasing_reads_zeroed_and_updated_destination ... ok
+test crt_wrapped_null_seed_pointer_has_no_store ... ok
+test memory_widths_and_order ... ok
+test missing_bcd_byte_failure_is_atomic ... ok
+test missing_rng_and_unsupported_getter_are_named_atomic_errors ... ok
+test partially_captured_semantic_field_is_not_absent ... ok
+test projection_refuses_removed_or_unbound_semantic_fields ... ok
+test regions_reject_overlap_empty_and_overflow_without_mutation ... ok
+test rng_wrapping_edges_are_explicit_in_debug_builds ... ok
+test typed_state_round_trip_retains_every_opaque_byte ... ok
+test undeclared_and_cross_block_access_never_zero_fill ... ok
+test clock_pacing_never_changes_rng_results_or_routine_tick_count ... ok
+test all_u16_values_have_unclamped_bcd_round_trip ... ok
+
+test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/lib.rs (target/debug/deps/rising_engine-980a8571ffdeda0f)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests rl_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests rising_engine
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
+test_all_committed_calls_match_original_and_python (test_pilot.CaptureHarnessTests) ... ok
+test_bcd_alias_and_width_edges_match_unchanged_python (test_pilot.CaptureHarnessTests) ... ok
+test_harness_detects_a_real_rust_projected_byte_mutation (test_pilot.CaptureHarnessTests) ... ok
+test_harness_detects_a_real_rust_return_register_mutation (test_pilot.CaptureHarnessTests) ... ok
+test_sparse_input_refuses_unknown_conflicting_bytes (test_pilot.CaptureHarnessTests) ... ok
+test_tampered_reference_identity_is_refused (test_pilot.CaptureHarnessTests) ... ok
+test_clock_ticks_and_memory_load_are_separate (test_pilot.PilotAbiTests) ... ok
+test_error_message_query_is_repeatable_and_thread_local (test_pilot.PilotAbiTests) ... ok
+test_failed_bcd_writes_do_not_publish_prefix (test_pilot.PilotAbiTests) ... ok
+test_independent_worlds_repeat_under_concurrent_callers (test_pilot.PilotAbiTests) ... ok
+test_load_and_project_copy_sorted_owned_bytes (test_pilot.PilotAbiTests) ... ok
+test_malformed_load_is_atomic_with_named_errors (test_pilot.PilotAbiTests) ... ok
+test_projection_capacity_query_preserves_output_buffer (test_pilot.PilotAbiTests) ... ok
+test_stale_handles_double_free_and_nonreused_identity (test_pilot.PilotAbiTests) ... ok
+test_unknown_missing_and_unsupported_steps_preserve_registers_and_state (test_pilot.PilotAbiTests) ... ok
+test_version_rate_and_null_output_refuse_creation (test_pilot.PilotAbiTests) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.264s
+
+OK
+{
+  "passed": true,
+  "comparisons": 75,
+  "by_routine": {
+    "Random": 24,
+    "LongRand": 12,
+    "rand": 12,
+    "IntToBCD": 19,
+    "BCDToInt": 8
+  },
+  "mismatches": 0,
+  "skipped": 0
+}
+Swift C ABI pilot passed: version1.0, Random=16807, projection equal, clock=1000ms

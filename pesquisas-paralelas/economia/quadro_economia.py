@@ -284,14 +284,33 @@ IA_INATIVO = 0x51a990
 TABELA_HANGAR = 0x4e296c
 
 
+EVENTOS_SIMPATIA = 0x497288   # 16-byte records: s32 delta, mode byte +4, u32 counter +8, u32 limit +0xc
+
+
+def _s32(v):
+    v &= 0xffffffff
+    return v - (1 << 32) if v & 0x80000000 else v
+
+
+def _ajustar_simpatia(m, i, j, delta):
+    """PlayerGetSympathie 0x46dc6c / PlayerSetSympathie 0x46dc90 on s16 [0x5080a8]+20i+0xc+2j, clamped to ±50."""
+    endereco = (_u32(m, JOGADORES) + 20 * (i & 0xff) + 0xc + 2 * (j & 0xff)) & 0xffffffff
+    atual = _u16(m, endereco)
+    soma = _s32(delta + (atual - 0x10000 if atual & 0x8000 else atual))
+    _w16(m, endereco, max(-50, min(50, soma)) & 0xffff)
+
+
 def atualizar_simpatia(m, a, b, evento):
-    """MAJSympathie 0x475118 (EAX=a, EDX=b, EBX=event), gates only.
+    """MAJSympathie 0x475118 (EAX=a, EDX=b, EBX=event).
 
     It returns at once when a = b, a >= 4, b >= 4 (unsigned u32), or when
     the AI context byte 0x51a990+16a, then 0x51a990+16b, is nonzero. MONDE01
     frame 0 returns here for all twelve calls (AI players 1-3 are flagged).
-    Otherwise the event counter branch at 0x47515d (table 0x497288+16·event,
-    PlayerGetSympathie/PlayerSetSympathie) raises ``DependenciaQuadro``.
+    Otherwise the event record at 0x497288 + 16·event (u32 wrap) counts:
+    counter +8 is incremented and, while below the limit +0xc (unsigned),
+    nothing else happens. At the limit the counter is zeroed and the s32
+    delta +0 is added to sympathy, clamped to ±50: for every ordered pair
+    i != j of players 0..3 when the mode byte +4 is 1, else for (a, b) only.
     """
     a &= 0xffffffff
     b &= 0xffffffff
@@ -299,7 +318,40 @@ def atualizar_simpatia(m, a, b, evento):
         return
     if _u8(m, IA_INATIVO + 16 * a) or _u8(m, IA_INATIVO + 16 * b):
         return
-    raise DependenciaQuadro('MAJSympathie', 0x47515d, 'event counter branch', dict(EAX=a, EDX=b, EBX=evento))
+    registro = (EVENTOS_SIMPATIA + (evento << 4)) & 0xffffffff
+    contador = (_u32(m, registro + 8) + 1) & 0xffffffff
+    _w32(m, registro + 8, contador)
+    if contador < _u32(m, registro + 0xc):
+        return
+    modo = _u8(m, registro + 4)
+    _w32(m, registro + 8, 0)
+    pares = [(i, j) for i in range(4) for j in range(4) if i != j] if modo == 1 else [(a, b)]
+    for i, j in pares:
+        _ajustar_simpatia(m, i, j, _u32(m, registro))
+
+
+METEO, METEO_ROLAGEM = 0x496d2c, 0x496d2e
+
+
+def calcular_meteo(m):
+    """GetMeteo 0x4290cf: weather byte 0x496d2c and the s16 drift at 0x496d2e.
+
+    At counter % 900 = 0 the byte becomes (byte + 1) % 3, then it is always
+    stored 0. At counter % 100 = 0, Random 0x4704dc % 5 < 3 increments the
+    drift word, else decrements it; -5 then becomes -4 and 5 becomes 4.
+    """
+    contador = _u32(m, CONTADOR)
+    if contador % 900 == 0:
+        _w8(m, METEO, (_u8(m, METEO) + 1) % 3)
+    _w8(m, METEO, 0)
+    if contador % 100:
+        return
+    deriva = (_u16(m, METEO_ROLAGEM) + (1 if aleatorio(m) % 5 < 3 else -1)) & 0xffff
+    _w16(m, METEO_ROLAGEM, deriva)
+    if deriva == 0xfffb:
+        _w16(m, METEO_ROLAGEM, 0xfffc)
+    if _u16(m, METEO_ROLAGEM) == 5:
+        _w16(m, METEO_ROLAGEM, 4)
 
 
 def resetar_tabela_hangar(m):
@@ -393,6 +445,15 @@ def bolsa_vazia(m, bolsa):
     """
     contagem = _u16(m, bolsa & 0xffffffff)
     return (contagem & 0xff00) | int(contagem == 0)
+
+
+CORES_JOGADORES = 0x4e24dc
+
+
+def cor_jogador(m, jogador):
+    """PlayerGetColor 0x46003b: EAX = 0x1e when AL = 0xc8, else the byte at 0x4e24dc + AL (upper bits cleared)."""
+    jogador &= 0xff
+    return 0x1e if jogador == 0xc8 else _u8(m, CORES_JOGADORES + jogador)
 
 
 def calcular_contador_mercado(m, jogador):

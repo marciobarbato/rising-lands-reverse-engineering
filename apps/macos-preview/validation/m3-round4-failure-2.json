@@ -1,0 +1,124 @@
+{
+  "bundlePath" : "\/Users\/marcio\/git\/Rising-Lands-Codex\/.local\/macos-playable\/dist\/development\/RisingLands-ptbr.app",
+  "diagnosticReadyDelayMs" : 0,
+  "error" : "checks_timeout",
+  "lastProgress" : {
+    "action" : "smokeProgress",
+    "diagnostics" : {
+      "clock" : {
+        "maxCatchupSeconds" : 1,
+        "maximumObservedInterval" : 1.0001894590677693,
+        "mode" : "elapsed",
+        "rate" : 20,
+        "recentIntervals" : [
+          0.0050691250944510102,
+          0.93763220892287791,
+          0.093396542011760175,
+          0.10381245799362659,
+          0.10481291695032269,
+          0.10366529098246247,
+          0.035759874968789518,
+          0.10491116705816239,
+          0.10471404099371284,
+          0.10382824996486306,
+          0.10318354202900082,
+          0.10316733294166625,
+          0.32317079207859933,
+          1.0000880829757079,
+          1.0001894590677693
+        ]
+      },
+      "commit" : "9b648daf772522b79f8c70ddb9d0dc5b53b74652",
+      "focused" : false,
+      "paused" : true,
+      "pumping" : false,
+      "selected" : 0,
+      "session" : {
+        "boundary" : null,
+        "cargo" : {
+
+        },
+        "delivered" : 1,
+        "depot" : [
+          2,
+          12
+        ],
+        "hits" : 4,
+        "objective" : "Treino livre: leve sacolas ao depósito e pratique golpes com o soldado.",
+        "remaining" : 7,
+        "supply" : [
+          4,
+          9
+        ]
+      },
+      "speed" : 8,
+      "tick" : 676,
+      "units" : [
+        {
+          "blocked" : null,
+          "id" : 0,
+          "pos" : [
+            9,
+            4
+          ],
+          "progress" : 0,
+          "requested" : [
+            9,
+            4
+          ],
+          "state" : 1
+        },
+        {
+          "blocked" : null,
+          "id" : 1,
+          "pos" : [
+            2,
+            12
+          ],
+          "progress" : 0,
+          "requested" : [
+            2,
+            12
+          ],
+          "state" : 7
+        },
+        {
+          "blocked" : null,
+          "id" : 2,
+          "pos" : [
+            10,
+            4
+          ],
+          "progress" : 0,
+          "requested" : null,
+          "state" : 7
+        }
+      ],
+      "visibility" : "hidden"
+    },
+    "stage" : "final_animation_frames"
+  },
+  "nativeWindowVisible" : true,
+  "passed" : false,
+  "pythonStderr" : "",
+  "readiness" : {
+    "appReady" : true,
+    "checksBudgetSeconds" : 45,
+    "checksSeconds" : 45.115235291654244,
+    "documentLoaded" : true,
+    "elapsedSeconds" : 45.640842916676775,
+    "initializationBudgetSeconds" : 90,
+    "initializationSeconds" : 0.52560762502253056,
+    "phase" : "checks",
+    "windowBudgetSeconds" : 45,
+    "windowVisibleSignal" : true
+  },
+  "readySignal" : {
+    "action" : "appReady",
+    "assets" : true,
+    "commit" : "9b648daf772522b79f8c70ddb9d0dc5b53b74652",
+    "mode" : "exercise",
+    "protocol" : 1,
+    "worker" : true
+  }
+}

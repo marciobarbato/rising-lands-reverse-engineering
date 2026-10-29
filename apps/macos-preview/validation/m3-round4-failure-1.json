@@ -1,0 +1,28 @@
+{
+  "bundlePath" : "\/Users\/marcio\/git\/Rising-Lands-Codex\/.local\/macos-playable\/dist\/development\/RisingLands-ptbr.app",
+  "diagnosticReadyDelayMs" : 0,
+  "error" : "checks_timeout",
+  "nativeWindowVisible" : true,
+  "passed" : false,
+  "pythonStderr" : "",
+  "readiness" : {
+    "appReady" : true,
+    "checksBudgetSeconds" : 45,
+    "checksSeconds" : 45.131399791571312,
+    "documentLoaded" : true,
+    "elapsedSeconds" : 45.658119083265774,
+    "initializationBudgetSeconds" : 90,
+    "initializationSeconds" : 0.5267192916944623,
+    "phase" : "checks",
+    "windowBudgetSeconds" : 45,
+    "windowVisibleSignal" : true
+  },
+  "readySignal" : {
+    "action" : "appReady",
+    "assets" : true,
+    "commit" : "1f5929c75b3695201a16a22c1f803186f703d8c5",
+    "mode" : "exercise",
+    "protocol" : 1,
+    "worker" : true
+  }
+}

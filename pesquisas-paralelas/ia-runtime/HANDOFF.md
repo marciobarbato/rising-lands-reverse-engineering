@@ -320,3 +320,66 @@ Merged main `5c0dac2`. The report is [M2_2_PREPARACAO.md](M2_2_PREPARACAO.md). N
 - The `-v2` path is unchanged and now also checks the summaries.
 
 **Validation:** the `-v2` frame-1 data and its delta-form conversion (in `.local/`) both reproduce the M2.1 proof. `test_quadros_ia.py` now has 12 tests, including replay, checkpoint and named-failure cases.
+
+
+## M2.3 preparation — first raid, checkpoint start (2026-10-29)
+
+Main `8564ca7`. The report is [M2_3_INCURSAO.md](M2_3_INCURSAO.md).
+
+- **Capture first:** `capturar_incursao_ia.py` → `evidencias/captura-incursao-ia.json`. It is Combat's forced counter-9000 input, with each outside call's arguments, exit registers and net writes, plus the own-routine writes; native, 40 s, under the lease.
+- **API inputs** (all in `incursao_ia`):
+  - `avancar_monstros(m, p)`, with `rotinas_quadro_ia.avancar_monstros` delegating to it;
+  - `construir_grupo_monstros(m, p, celula, grupo)`;
+  - `guardar_acao(m, p, acao, grupo, celula, origem)`;
+  - `novo_grupo(m, jogador, tipo)`, `adicionar_ao_grupo(m, grupo, unidade)`, `primeira_unidade(m, grupo)`;
+  - `enviar_mensagem_unidade(m, p, unidade, mensagem, alvo)`.
+
+  Provider contract: the table in the module docstring.
+- **Composition:** iaProbPost runs on `MaquinaTarefasViva.postar` and ProjectileInit on `PoolProjeteis.iniciar`. The EnginNextEtape scan hit passes `alvo`.
+- **Checkpoint start:**
+  - `ComposicaoQuadros(..., inicio, alocacoes, regs_inicio)`;
+  - `fases_quadros(n, inicio)`;
+  - `comparar_quadros_ia.py --a-partir-de K`, with `alocacoes_no_ponto`.
+- **Validation:**
+  - `test_incursao_ia` reproduces the forced AvanceMonstre call byte for byte, call for call.
+  - The checkpoint chain equals the full chain over frames 2–4.
+  - The strict 128-frame probe is unchanged (128/128).
+  - Both comparator self-tests are equal.
+- **Gaps:**
+  - Core providers (GetFreeCell, CreerEngin, EnginSetPlayer, PlaceEngin, EnginGetCase, GetRandCaseChamps, GetRandCaseTypeBatPlayer, Chemin_Accessible).
+  - SetDeplaceEngin and SetAttaqueEngin.
+  - The 0x49 behaviour handler; iagUnitSendMessage's dispatch is static and has no native capture.
+
+
+## M2.2 — 128-frame equality proof (2026-10-29)
+
+Main `c7ed947`. The report is [M2_2_PROVA_128_QUADROS.md](M2_2_PROVA_128_QUADROS.md); the data is in `validacao/m2-2-prova-128-quadros.json`. It is Python only, from clean revision `8beb95a`.
+- **Reference:** Missions' 128-frame capture (raw SHA pinned, replay and 11 checkpoints checked).
+- **Policy:** cumulative 128-frame mask.
+- **Result:** all 257 phases equal, with zero crossings.
+  - Every phase has 16,022,275 compared bytes, and RNGs, bindings/boundaries outside display, allocation counts and registers equal.
+  - The final 25,482 records are equal, and the HUD flag matches 128/128.
+- **Mixed bytes:** the HUD flag (modeled) and the clip words (restored by display, equal).
+- **In progress, not pushed:** the M2.3 raid rules at counter 9000 sit on the local branch `wip/ai-raid-rules`. Their capture is waiting for the lease.
+
+
+## M2.3 — raid rules at 9000, Core providers, segmented comparison (2026-10-29)
+
+Main `99c0e4e`. Details are in [M2_3_INCURSAO.md](M2_3_INCURSAO.md), round 2.
+- **Capture first:** `9fbc2bc` (rule calls at counter 9000, native, 38 s under the lease).
+- **Translations:** `regras_incursao_ia` with `REGRAS`, `operacoes_regras(m, p)` and `MundoRegras(m, p)`. Rule signature: `regra(m, p, argumentos, jogador, indice) -> EAX`.
+- **Validation:** `test_regras_incursao_ia` (6/6 calls equal) and `test_incursao_ia.RaidFrameWithCoreProviders`.
+- **Composition:** it uses Core's `incursao_core`; GetFreeCell is a named stop (native stack residue).
+- **Segments:** `comparar_quadros_ia.comparar_parte(caminho, politica, sha256_bruto, alocacoes_caminho)` and `resumos_mascarados(mascara, blocos)`. The CLI is `--parte`/`--alocacoes`.
+- **Gaps:** Core's GetFreeCell residue contract, EnginEstVivant and SetDeplaceEngin; the 9500/9700/11100 rules (their capture needs about 2,100 sequential frames, which goes to the Mac mini); `opening_state.allocations` in Missions' parts.
+
+
+## M2.3 — raid probe beyond the window (2026-10-29)
+
+- **No known divergence.** The "one step ahead after counter 9716" report came from the probe's start point (after frame 1 with counter 8999, one extra frame of draws). It is withdrawn.
+- **Equivalent start:** the native forcing is counter 9000 at frame 1's CalculGame entry. From that start, with Core's `6e12550`, Python equals the original:
+  - world RNG, and unit 16's state, facing and cell: every counter 8999–9705, native probe;
+  - unit 16's cell: every counter 9000–10878, Combat's course.
+- **Call order:** the composition's order is the original's. At 9700 the native dispatcher runs DeplaceEngin in the same frame as the re-order.
+- **Next stop, beyond the M2.3 window:** Core's CalculFatigue fatigue-threshold branch `0x452d61`, around counter 10880.
+- **Tool:** `sondar_incursao_ia.py N` (Python only, `.local/` output) runs the composition with the forcing-equivalent start.
