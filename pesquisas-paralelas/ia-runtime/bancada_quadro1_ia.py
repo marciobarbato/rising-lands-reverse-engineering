@@ -33,7 +33,7 @@ class PausaIA(Isolamento):
     def __init__(self, bancada, executadas, instantaneos=(), observador=None, instantaneo=None):
         super().__init__(bancada, tuple(executadas) + tuple(instantaneos), None, observador)
         self.instantaneos = {bancada.sym[n] for n in instantaneos}
-        self.instantaneo = instantaneo        # f(routine, phase, blocks, registers, caller_return)
+        self.instantaneo = instantaneo        # f(routine, phase, blocks, registers, caller_return, bench)
         self.pausas = []
 
     def executar(self, regs):
@@ -49,7 +49,7 @@ class PausaIA(Isolamento):
                                 registers={k: hex(v) for k, v in regs.items()},
                                 state=b.resumo_imagem({k: v for k, v in blocos.items() if k != 'native_stack'})))
         if self.instantaneo is not None:
-            self.instantaneo(nome, b.fase, blocos, regs, retorno)
+            self.instantaneo(nome, b.fase, blocos, regs, retorno, b)
 
 
 def executar_caminho(executadas, instantaneos=(), observador=None, instantaneo=None):
