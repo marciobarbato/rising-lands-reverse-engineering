@@ -448,3 +448,75 @@ actual Rust checkpoint for parts 1–9; aggregate with `--serial`. This mode
 requires every continuation hash to match. It is implemented and covered by
 harness tests but was not the completed 18,401-phase run's scope. The serial
 benchmark above is the completed uninterrupted S0 endpoint run.
+
+
+## Stage 3 — native renderer implementation contract
+
+This additive ABI 1.3 stage ports Graphics `renderizar_quadro` 1.5, including
+HUD/cursor and input-time selection overlays, to Rust. Python providers,
+original captures, assets and masks remain read-only. The original executable
+identity is unchanged: `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+The app input contract reviewed is `docs/MACOS_PLAYABLE.md` on committed
+`origin/feat/macos-playable` at `16918c0` (Renderer port input).
+
+The C header defines create, generation query, render, reset, release, cache
+export and observation export. Existing 1.0/1.1/1.2 creation remains supported;
+old signatures/layouts and the 72-byte frame structures are unchanged.
+`RlRenderResult` is 304 bytes; `RlRenderObservation` is 108 bytes on the
+supported 64-bit host. Output is indexed8, top-down 800×600, stride 800, plus
+256 RGB24 entries (768 bytes), copied to caller-owned reusable buffers.
+`hud_flags=1` enables Graphics 1.5 HUD/cursor; zero ends at its playfield
+checkpoint. The complete persistent cache is 1,024 key bytes, 270,336 raw
+payload bytes and a cursor in 0..255. Creation/reset copy all inputs and never
+invent a cold cache or blank prior surface. Callers provide initialization
+with established provenance; proofs use Graphics' pinned original artifacts.
+
+The renderer owns verified copies of six original CMP banks in catalog order,
+PLATGAME.PIE and the original 256-byte shadow and lighting tables. All nine
+SHA-256 identities are enforced at creation. It decodes original row RLE with
+an explicit opacity mask: literal zero remains opaque. It draws opaque terrain
+blocks and destination-remap masks, preserves cache-hit stale payloads and
+replacement order, selects/sorts units/projectiles with the original unstable
+tie rules, interleaves scene passes, draws terrain objects and tree layers,
+inhabited sanctuary facades, supported normal unit bodies and fatigue icons,
+projectiles, input overlays, HUD counters/icons/minimap/target/cursors in
+reference order. BatimentEstHabiter reads the actual structure bag/live units.
+AffBatimentOmbre is the original literal RET; no unknown callback is replaced.
+No original-effect stream, Python callback or host wall clock enters rendering.
+
+AffGame 0x417698 enters after phase 1/3 and before phase 2. World generation
+increments on successful state writes, separately from virtual ticks; an exact
+generation and eligible phase are required. Stale generation is additive
+status 11. Repeated generation+HUD flags is idempotent. All calls use the same
+registry mutex. Undrawn output preserves the previous surface/cache; partial
+output retains the actual drawn prefix and first original-address stop.
+Size queries change only required-size metadata. ABI errors publish no frame,
+cache or world writes. World release invalidates its bound render operations;
+renderer release remains available. Reset copies explicit initial data and
+clears the last-result generation. Palette generation is static 1; Cyclage is
+outside the 1.5 surface contract.
+
+Phase 2 retains sole ownership of display effects that affect logic. Rendering
+uses local overrides and exports ordered changed bytes/raster calls, without
+writing the world or consuming RNGs a second time. Diagnostic DD lock/surface
+pointers use the same explicit software binding as Python; only 0x4E17A4 and
+0x508F70 retain the public reference's process-local pointer exclusions when
+checking native DGROUP. Other effects, cache cursor and compared bytes are
+checked. The default renderer tick follows Python's published copied-tick
+contract; isolated native leaf fixtures bind their observed GetTickCount.
+
+Renderer reference identities are pinned in
+[test pins](testes/render-reference-pins.json). Graphics' ambiguous flat
+`construcoes` import is isolated in a fresh test consumer process, so it cannot
+replace Economy's provider during the engine gate. Only motor/ and
+`docs/ENGINE.md` are edited. App integration/acceptance remain with the
+coordinator. Final committed-run proof and timing results follow below.
+
+The standalone `render_smoke.swift` client exercises the actual C structs,
+generation/size errors and reusable Swift output arrays, uploads indexed pixels
+and palette to Metal, converts to an opaque RGBA texture and waits for GPU
+completion. It verifies all 128 indexed surface hashes and complete RGBA
+readbacks for the first/last frames. Timing excludes initialization, proof
+hashing/readback and app display pacing. This client does not modify the macOS
+app. `motor/validate.sh` runs it against the debug library for correctness;
+release throughput is measured separately under an exclusive heavy lease.

@@ -439,3 +439,44 @@ and prepared `python3 -B scripts/check.py` (1,881 tests, 610 optional skips).
 The previous missing-input common-check stop is resolved. No Mac mini run is
 needed for the completed native evidence proof. Unreached branches retain
 named failures; project acceptance and integration remain with the coordinator.
+
+## Stage 3 — native Graphics 1.5 renderer, ABI 1.3
+
+The renderer binds directly to a Rust world and retains owned, hash-verified
+original CMP banks, the PLATGAME palette and the original shadow/lighting
+tables. Asset bytes come from Graphics' catalog sources; no asset payload is
+committed in motor/. Creation requires the explicit original initial indexed
+surface and complete terrain cache. Terrain cache keys, raw 32×33 payloads and
+replacement cursor carry between draws. Generic CMP drawing preserves opaque
+literal zero, transparent skips, signed clipping, destination remaps and player
+colors. Tables and layer plans keep the bounded renderer extensible without
+adding Graphics 1.6 construction behavior to this port.
+
+The additive C interface is `rl_render_criar`, `rl_render_geracao`,
+`rl_render_quadro`, `rl_render_reset`, `rl_render_liberar`,
+`rl_render_observacoes` and `rl_render_cache`. See the versioned
+[header](../motor/include/rising_engine.h) for field layouts. Creation copies
+all inputs. Rendering copies 480,000 top-down indexed8 pixels (800×600, stride
+800) plus 768 RGB24 palette bytes into caller-owned reusable buffers. Palette
+generation is explicitly 1; Cyclage is outside Graphics 1.5's surface contract.
+No Rust pointer escapes. No filesystem access or Python projection is needed
+per frame. Full projection remains an optional proof/debug interface.
+
+A world generation changes on every successful state load, isolated routine or
+frame phase. The renderer requires the exact AffGame-entry generation after
+phase 1 or phase 3 and rejects phase 2. Repeating the same generation and HUD
+flag returns the same committed result. Capacity queries update only required
+sizes/metadata; neither output buffer nor cache advances. ABI failures publish
+nothing. Full, undrawn and partial are distinct successful outcomes; partial
+publishes only the actual drawn prefix/cache and names the first original
+callee/address. Reset copies explicit surface/cache inputs and clears the
+previous-generation result. Freeing the world invalidates its renderer calls;
+renderer release remains available. All native calls share one registry lock.
+
+Phase 2 remains the sole owner of display-related logic effects. Rendering
+reads the entry world, uses local overrides in original write order, and
+exports ordered changed-byte and raster observations without applying them to
+the world. BatimentEstHabiter reads the actual structure bag and live unit
+kinds internally. The default display tick follows the published Python read
+contract, not a host wall clock. Native renderer validation and throughput
+results are recorded in the stage handoff after the measured runs.
