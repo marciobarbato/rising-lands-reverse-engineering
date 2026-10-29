@@ -1,0 +1,514 @@
+{
+ "schema": "rising-lands/combat-post-damage-removal-original/1",
+ "translation_executed": false,
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "provenance": {
+  "manifest": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.manifest.json",
+  "manifest_sha256": "e88dc3fcaca11d03a774dad8bd9c768345f13c884cc2d8df493107ec9d180b09",
+  "artifact": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.parte09.json.xz",
+  "compressed_sha256": "6c385670a501389efbf2465f7d45468b00926911732916840d33ab13394e6b9a",
+  "raw_sha256": "f70e893eb74aa7a399c803f6aa28c7916e6182a6e8bd37ffe84bece5eb92c39b",
+  "checkpoints": {
+   "9000": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "711e8d75a325c1e08c6094be3463ae8d1722078b772fb4e6bbf0b72a9e5d3f61"
+   },
+   "9176": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "e52f04d848a34bae235ed5dbca068c67fb30a1460084665246cf42685d8e7066"
+   }
+  }
+ },
+ "source_capture": {
+  "path": "evidencias/captura-combate-raid-original-v2.json",
+  "sha256": "83fbf5e78cd35496f43c15e49c425dd9f57c9d2720fb6b0d105d8679b2369cdc"
+ },
+ "source_sha256": "8a6a44b753d26974798bba603ecbfe9f1d12aea1ba2d1eece73139c872f3891c",
+ "cases": [
+  {
+   "routine": "RetireEngin",
+   "entry_registers": {
+    "EAX": "0x10",
+    "EBX": "0x2468ace0",
+    "ECX": "0x31415926",
+    "EDX": "0x27182818",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x457058"
+   },
+   "exit_registers": {
+    "EAX": "0x2",
+    "EBX": "0x2468ace0",
+    "ECX": "0x31415926",
+    "EDX": "0x27182818",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008004",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x46"
+   },
+   "stack_words": [],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "ee69ca22b14ee7e80e4f1b89b4e7b80c8df05d2ebbb916db02b36cab4a563e9b"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "33b17e6fe3d3809c941c3beff25a3072948fe57e50fe01a7799292a70d13914b"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x474a91b2",
+      "hex": "00"
+     },
+     {
+      "address": "0x4793ae7c",
+      "hex": "0000"
+     },
+     {
+      "address": "0x4793aefc",
+      "hex": "0000"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x47624c",
+     "0x47853e3e",
+     1,
+     "0x0"
+    ],
+    [
+     "0x47624c",
+     "0x47853d3d",
+     1,
+     "0x0"
+    ],
+    [
+     "0x4570b3",
+     "0x474a91b2",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46a5b4",
+     "0x4793ae7c",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46a5b4",
+     "0x4793ae7d",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46a5b4",
+     "0x4793aefc",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46a5b4",
+     "0x4793aefd",
+     1,
+     "0x0"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "RetireEngin",
+     "address": "0x457058",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x10",
+      "EBX": "0x2468ace0",
+      "ECX": "0x31415926",
+      "EDX": "0x27182818"
+     }
+    },
+    {
+     "routine": "DeselectionEngin",
+     "address": "0x472648",
+     "caller_return": "0x457084",
+     "registers": {
+      "EAX": "0x10",
+      "EBX": "0x10",
+      "ECX": "0x474a9140",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "ResetEnginCollision",
+     "address": "0x442eac",
+     "caller_return": "0x45708e",
+     "registers": {
+      "EAX": "0x10",
+      "EBX": "0x10",
+      "ECX": "0x474a9140",
+      "EDX": "0x3e3e"
+     }
+    },
+    {
+     "routine": "ResetCollision",
+     "address": "0x47623e",
+     "caller_return": "0x442f06",
+     "registers": {
+      "EAX": "0x3e3e",
+      "EBX": "0x0",
+      "ECX": "0x10",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "Chemin_ModifieZone",
+     "address": "0x43e138",
+     "caller_return": "0x442f16",
+     "registers": {
+      "EAX": "0x3e3e",
+      "EBX": "0x0",
+      "ECX": "0x474a923a",
+      "EDX": "0x10"
+     }
+    },
+    {
+     "routine": "ResetEnginCollision",
+     "address": "0x442eac",
+     "caller_return": "0x4570a5",
+     "registers": {
+      "EAX": "0x10",
+      "EBX": "0x10",
+      "ECX": "0x474a9140",
+      "EDX": "0x3d3d"
+     }
+    },
+    {
+     "routine": "ResetCollision",
+     "address": "0x47623e",
+     "caller_return": "0x442f06",
+     "registers": {
+      "EAX": "0x3d3d",
+      "EBX": "0x0",
+      "ECX": "0x10",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "Chemin_ModifieZone",
+     "address": "0x43e138",
+     "caller_return": "0x442f16",
+     "registers": {
+      "EAX": "0x3d3d",
+      "EBX": "0x0",
+      "ECX": "0x474a923a",
+      "EDX": "0x10"
+     }
+    },
+    {
+     "routine": "SetMiniMap",
+     "address": "0x46a388",
+     "caller_return": "0x4570bc",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x3e3e",
+      "ECX": "0x474a9140",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "TerrainEstDecouvert",
+     "address": "0x4766f0",
+     "caller_return": "0x46a5c8",
+     "registers": {
+      "EAX": "0x3e3e",
+      "EBX": "0x3e7c",
+      "ECX": "0x3e3e",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "TerrainEstDecouvert",
+     "address": "0x4766f0",
+     "caller_return": "0x46a5c8",
+     "registers": {
+      "EAX": "0x3e3e",
+      "EBX": "0x3e7d",
+      "ECX": "0x3e3e",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "TerrainEstDecouvert",
+     "address": "0x4766f0",
+     "caller_return": "0x46a5c8",
+     "registers": {
+      "EAX": "0x3e3e",
+      "EBX": "0x3efc",
+      "ECX": "0x3e3e",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "TerrainEstDecouvert",
+     "address": "0x4766f0",
+     "caller_return": "0x46a5c8",
+     "registers": {
+      "EAX": "0x3e3e",
+      "EBX": "0x3efd",
+      "ECX": "0x3e3e",
+      "EDX": "0x1"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1232,
+   "case": "f9000-retire-after-actual-damage",
+   "checkpoint": 9000,
+   "source_case": "f9000-camera1-lethal-hp1-16",
+   "declared_writes": []
+  },
+  {
+   "routine": "RetireEngin",
+   "entry_registers": {
+    "EAX": "0x10",
+    "EBX": "0x2468ace0",
+    "ECX": "0x31415926",
+    "EDX": "0x27182818",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008000",
+    "EFLAGS": "0x2",
+    "EIP": "0x457058"
+   },
+   "exit_registers": {
+    "EAX": "0x2",
+    "EBX": "0x2468ace0",
+    "ECX": "0x31415926",
+    "EDX": "0x27182818",
+    "ESI": "0x12345678",
+    "EDI": "0x23456789",
+    "EBP": "0x3456789a",
+    "ESP": "0x2008004",
+    "EIP": "0x3000000",
+    "EFLAGS": "0x46"
+   },
+   "stack_words": [],
+   "reached_return": true,
+   "stop": null,
+   "fault": null,
+   "limit": false,
+   "state_before": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "93bbf1b29c7e230c2c6bbf1979b60662dc4e0624597124d9710c7f2ce7754f97"
+   },
+   "state_after": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "3abf2833cc11ac035b7d6b59efadcce5b034a84185a14b68d9a7762bb9bf2808"
+   },
+   "delta": {
+    "released": [],
+    "allocated": {},
+    "ranges": [
+     {
+      "address": "0x474a91b2",
+      "hex": "00"
+     },
+     {
+      "address": "0x4793a366",
+      "hex": "0000"
+     },
+     {
+      "address": "0x4793a3e6",
+      "hex": "0000"
+     }
+    ]
+   },
+   "stop_stack_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "stores": [
+    [
+     "0x47624c",
+     "0x47853333",
+     1,
+     "0x0"
+    ],
+    [
+     "0x4570b3",
+     "0x474a91b2",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46a5b4",
+     "0x4793a366",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46a5b4",
+     "0x4793a367",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46a5b4",
+     "0x4793a3e6",
+     1,
+     "0x0"
+    ],
+    [
+     "0x46a5b4",
+     "0x4793a3e7",
+     1,
+     "0x0"
+    ]
+   ],
+   "entries": [
+    {
+     "routine": "RetireEngin",
+     "address": "0x457058",
+     "caller_return": "0x3000000",
+     "registers": {
+      "EAX": "0x10",
+      "EBX": "0x2468ace0",
+      "ECX": "0x31415926",
+      "EDX": "0x27182818"
+     }
+    },
+    {
+     "routine": "DeselectionEngin",
+     "address": "0x472648",
+     "caller_return": "0x457084",
+     "registers": {
+      "EAX": "0x10",
+      "EBX": "0x10",
+      "ECX": "0x474a9140",
+      "EDX": "0x0"
+     }
+    },
+    {
+     "routine": "ResetEnginCollision",
+     "address": "0x442eac",
+     "caller_return": "0x45708e",
+     "registers": {
+      "EAX": "0x10",
+      "EBX": "0x10",
+      "ECX": "0x474a9140",
+      "EDX": "0x3333"
+     }
+    },
+    {
+     "routine": "ResetCollision",
+     "address": "0x47623e",
+     "caller_return": "0x442f06",
+     "registers": {
+      "EAX": "0x3333",
+      "EBX": "0x0",
+      "ECX": "0x10",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "Chemin_ModifieZone",
+     "address": "0x43e138",
+     "caller_return": "0x442f16",
+     "registers": {
+      "EAX": "0x3333",
+      "EBX": "0x0",
+      "ECX": "0x474a923a",
+      "EDX": "0x10"
+     }
+    },
+    {
+     "routine": "SetMiniMap",
+     "address": "0x46a388",
+     "caller_return": "0x4570bc",
+     "registers": {
+      "EAX": "0x4",
+      "EBX": "0x3333",
+      "ECX": "0x474a9140",
+      "EDX": "0x5"
+     }
+    },
+    {
+     "routine": "TerrainEstDecouvert",
+     "address": "0x4766f0",
+     "caller_return": "0x46a5c8",
+     "registers": {
+      "EAX": "0x3333",
+      "EBX": "0x3366",
+      "ECX": "0x3333",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "TerrainEstDecouvert",
+     "address": "0x4766f0",
+     "caller_return": "0x46a5c8",
+     "registers": {
+      "EAX": "0x3333",
+      "EBX": "0x3367",
+      "ECX": "0x3333",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "TerrainEstDecouvert",
+     "address": "0x4766f0",
+     "caller_return": "0x46a5c8",
+     "registers": {
+      "EAX": "0x3333",
+      "EBX": "0x33e6",
+      "ECX": "0x3333",
+      "EDX": "0x1"
+     }
+    },
+    {
+     "routine": "TerrainEstDecouvert",
+     "address": "0x4766f0",
+     "caller_return": "0x46a5c8",
+     "registers": {
+      "EAX": "0x3333",
+      "EBX": "0x33e7",
+      "ECX": "0x3333",
+      "EDX": "0x1"
+     }
+    }
+   ],
+   "writes_outside_checkpoint": [],
+   "seconds": 0.1227,
+   "case": "f9176-retire-after-actual-damage",
+   "checkpoint": 9176,
+   "source_case": "f9176-camera1-lethal-hp1-16",
+   "declared_writes": []
+  }
+ ]
+}
