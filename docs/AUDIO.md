@@ -323,3 +323,64 @@ Native capture uses unchanged original bodies, Core's declared binding facility,
 20,000 instructions per call and a 600-second SIGALRM after lease acquisition.
 All new native queue jobs took under two seconds each. Exact fresh commands,
 actual gate results and remaining gaps are in the current handoff section.
+
+
+## Current buffer reuse and concurrent data bridge — continuation
+
+This round starts from fetched main
+`8e90beb412a63d5f00965c381d21bc9a800257bc`, containing the prior Audio and macOS
+deliveries. The preceding single-request section records the historical
+`73196fc` scope. This continuation supersedes its reuse, promotion, multiple
+request and resident/compressed bridge stops for the captured domains below.
+The [continuation contract](../pesquisas-paralelas/audio/QUEUE_CONTINUATION.md)
+is the current source of exact input declarations, addresses and original-first
+capture chronology.
+
+`AudioQueue` adds `replace_slot(slot, logical=False)`,
+`find_loaded(id, bank, logical=False)`, `destroy_physical(slot)`,
+`duplicate_buffer(pointer)`, `create_logical(pointer, record)`, `clear_list()`
+and `create_physical(record)`. Existing `destroy_only_sound`, transfer and
+Manage methods compose these exact leaves. Records, slot/reference pointers
+and banks remain the supplied original-address memory, retaining identity and
+aliasing. The signed slot maximum domain is -1..9. PSB lookup returns a slot;
+LSB lookup returns a record, both keyed by ID **and bank identity**. Last-slot
+replacement retains its original stale words; moved records get their original
+back-pointer stores. There is no new record or device initialization.
+
+Manage now visits pending requests in descending original index order. A
+loaded physical identity uses a declared DuplicateSoundBuffer answer; different
+banks create distinct buffers even for matching IDs. The captured domain covers
+two/three concurrent requests and explicit full-capacity guards. Constructors
+supply no default answers; each declared HRESULT/output/status remains independent.
+Create or duplicate failure retains earlier reservations/stores. SetPosition
+failure after duplication does not replace its output pointer. ClearListe uses
+the verified **DSB_IsStopped 0x48beb9** masks, including explicit written status
+with error HRESULT; the legacy IsThisSoundPlaying label remains incorrect.
+
+`create_physical` reuses Stage-1 `criar_superficie_som` for resident/file PCM
+and captured mono ADPCM. Resident data and compressed scratch pointers are
+inherited explicitly. File reads write their declared bytes into the actual
+caller-owned destination; resident paths perform no file calls. For the ADPCM
+case the original creates 256 bytes, Locks 64, then decodes beyond the reported
+Lock region. That original quirk and untouched tail are preserved, not repaired.
+No commercial audio or fabricated mission snapshot is committed.
+
+The original-only continuation v1/v2/v3 captures precede their translations.
+Final v3 has **139 native calls / 132 scenarios**, all returned, including an
+eight-call persistent admission/Manage/promotion/repost/cancellation sequence
+whose every intermediate image matches. The
+[fresh three-way report](../pesquisas-paralelas/audio/validacao/continuacao-audio-three-way-v1.json)
+confirms fresh original, frozen evidence, memory/COM/EAX and Python agreement,
+zero stops/failures. Prior 244-call and 551-sound results remain baseline and
+are not counted as new native work.
+
+Remaining boundaries: dictator creation/lifecycle at 0x48a702/0x48a0a1,
+DirectSound/device initialization, unwritten platform outputs, wrapped/short
+Lock regions and asynchronous buffer state. Missing compressed scratch and
+short compressed reads remain named Stage-1 boundaries at 0x48c14f/0x48c15f,
+retaining earlier reads/stores; complete original fault continuation beyond
+those stops is not claimed. The new compressed proof is mono, full declared
+read only; stereo decoding remains a separate Stage-1 API and is not newly
+proved as a queue composition. Arbitrary saturation, aliasing or long mission
+traces outside these captured images are not promoted to general acceptance.
+No game-side emitter, M2.3, M3 acceptance or app behavior is changed.

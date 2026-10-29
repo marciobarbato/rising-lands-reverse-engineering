@@ -24,7 +24,7 @@ class _LiveVariantCounter:
     def contador_variantes(self,value):self.memory.w32(0x5221bc,value)
 
 
-class _QueuePCMFiles:
+class _QueueBufferFiles:
     def __init__(self,queue,device):self.queue,self.device=queue,device
     def posicionar(self,handle,offset,origin):
         return self.queue.call('_llseek',handle,(offset,origin),0x48c05e)['hresult']
@@ -39,8 +39,8 @@ class _QueuePCMFiles:
         return data
 
 
-class _QueuePCMDevice:
-    """Adapter to the already validated Stage-1 PCM body; no device defaults."""
+class _QueueBufferDevice:
+    """Adapter to the already validated Stage-1 buffer body; no device defaults."""
     def __init__(self,queue):self.queue=queue;self.buffers={};self.created_size=None;self.lock_pointer=None
     def criar(self,descriptor,wave):
         q=self.queue
@@ -57,7 +57,7 @@ class _QueuePCMDevice:
         if any(type(outputs[key]) is not int or not 0<=outputs[key]<=0xffffffff for key in outputs):
             raise ValueError('Lock output pointer and size require u32 values')
         if outputs['size']!=size:
-            raise DependenciaSom(0x48c097,'Wrapped/short Lock outputs outside captured PCM domain')
+            raise DependenciaSom(0x48c097,'Wrapped/short Lock outputs outside captured full-Lock domain')
         self.lock_pointer=outputs['pointer'];self.buffers[pointer]=self.queue.memory.view(self.lock_pointer,max(size,self.created_size))
         return 0
     def destravar(self,pointer,offset,size,second,second_size):
@@ -334,7 +334,7 @@ class AudioQueue:
         bank=BancoSom(m.view(m.u32(r+4),28),m.u32(r+4));header=m.read(m.u32(r+28),16)
         if bank.em_memoria==1:
             bank.dados=m.view(bank.ponteiro_dados,bank.tamanho_dados)
-        device=_QueuePCMDevice(self);files=_QueuePCMFiles(self,device)
+        device=_QueueBufferDevice(self);files=_QueueBufferFiles(self,device)
         system=SimpleNamespace(directsound=device,arquivos=files)
         globals_=SimpleNamespace(directsound=m.u32(0x522228),comprimido=m.u32(0x52222c))
         pointer,_=criar_superficie_som(system,globals_,bank,header)
