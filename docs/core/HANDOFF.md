@@ -584,3 +584,11 @@ The contract is in [RAID_CORE](RAID_CORE.md#movement-and-pathfinding-after-the-s
 - MissionGetNum 22, PlaceEngin 21, PlayerGetColor 84, Random 83;
 - SetCollision 21, SetEnginCollision 21, SetMiniMap 21, TerrainEstIllumine 84;
 - iaProbNew 20, iaProbPost 20, listLinkElemToTail 20, listNewElem 20.
+
+### M2.3: live world inside ai-runtime's chain (option 1, no binding change)
+
+`6e12550` and the merge `07c36b4`. ai-runtime's chained composition stopped at counter 9000, at the first EnginEstVivant: its memory is Missions' map, where tiles, regions and the structure-colour stack are u16 lists. `mundo_vivo` now adopts those lists by identity (`grade_u16_viva`), so there is a single source of truth, no copy, and Missions' binding is unchanged. Checks at `07c36b4`:
+- **AI's probe:** `sondar_incursao_ia.py 3`, from ai-runtime's branch, run against this Core: no stop through counter 9002.
+- **M2.2 proof:** `provar_quadros_ia.py`, Python only, 63 s. All 257 of 257 phases equal (128 frames), 0 crossings writing compared bytes, HUD flag equal.
+- **9000–9200 native differential:** 0 mismatches. That is 251 snapshot-world, 261 live-world and 135 flat comparisons; the only stops are the snapshot binding's denied solver.
+- **Gate:** 502 tests, OK.
