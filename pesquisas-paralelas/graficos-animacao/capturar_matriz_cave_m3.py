@@ -11,7 +11,7 @@ import ambiente_missoes
 from oraculo_quadro_missao import Isolamento
 
 
-def cases(b):
+def cases(b,all_cave_health=False):
     m=lambda a,n:bytes(b.cpu.mem_read(a,n));u=lambda a,n:int.from_bytes(m(a,n),'little')
     terrain=m(u(0x507d70,4),131072);regions=m(u(0x4e0f38,4),131072)
     out=[]
@@ -27,7 +27,7 @@ def cases(b):
         # The sanctuary's initial bag is emptied explicitly for uninhabited branches.
         empty=[(record+0xc,b'\0\0'),(record+0x4e,bytes(16))] if index==0 else []
         for mode in (0,1,2,6,7):
-            for state in (0,1,25,50,75,99,100,101,125,150,175,199,200):
+            for state in (range(0,201,2) if all_cave_health and kind==3 else (0,1,25,50,75,99,100,101,125,150,175,199,200)):
                 hp=(maximum*state+199)//200
                 writes=base_writes+[(record+5,bytes([mode])),(record+0xa,struct.pack('<H',hp))]+empty
                 out.append(dict(name=f'type{kind}_mode{mode}_state{state}',index=index,kind=kind,cell=cell,regs=regs,writes=writes))
@@ -46,7 +46,7 @@ def main(args):
     iso=Isolamento(b,());ctx,image=iso._salvar();dd=b.directdraw
     surfaces=bytes(b.cpu.mem_read(dd.base_superficies,dd.tamanho_superficies))
     cap=CapturadorSondasGraficos(b);rows=[]
-    for case in cases(b):
+    for case in cases(b,args.all_cave_health):
         iso._restaurar(ctx,image);b.cpu.mem_write(dd.base_superficies,surfaces)
         for a,value in case['writes']:b.cpu.mem_write(a,bytes(value))
         cap.phase_frame=220;cap.entry(b.cpu,0,0,None);cap.phase_frame=None
@@ -59,9 +59,11 @@ def main(args):
         if time.monotonic()-t>1080:raise RuntimeError('18-minute matrix budget exhausted')
     iso._restaurar(ctx,image);b.cpu.mem_write(dd.base_superficies,surfaces);cap.detach()
     out=dict(schema='rising-lands/m3-cave-facade-matrix/1',method=__doc__,probe_ref=REF,source_snapshot_sha256=sha(Path(args.snapshot).read_bytes()),
-             cases=len(rows),rows=rows,blobs=cap.blobs,elapsed_seconds=round(time.monotonic()-t,3),code_sha256=b.sha256_codigo())
+             cases=len(rows),all_cave_health=args.all_cave_health,source_sha256=sha(Path(__file__).read_bytes()),
+             cases_source_revision=__import__('subprocess').check_output(['git','rev-parse','HEAD'],text=True).strip(),
+             rows=rows,blobs=cap.blobs,elapsed_seconds=round(time.monotonic()-t,3),code_sha256=b.sha256_codigo())
     Path(args.output).write_text(json.dumps(out));print(json.dumps({k:v for k,v in out.items() if k not in ('rows','blobs','method')}))
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--start',required=True);p.add_argument('--snapshot',required=True);p.add_argument('--output',required=True)
+    p=argparse.ArgumentParser();p.add_argument('--start',required=True);p.add_argument('--snapshot',required=True);p.add_argument('--output',required=True);p.add_argument('--all-cave-health',action='store_true')
     main(p.parse_args())
