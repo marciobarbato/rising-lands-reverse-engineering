@@ -42,7 +42,7 @@ def run(binary=None,compare_python=False,rows=None):
         for i,(name,blocks,surface,cache,tick,expected,stop,*extra) in enumerate(rows):
             pixel=(tmp/f'out/{i}.pixels').read_bytes();raw=(tmp/f'out/{i}.cache').read_bytes();observations=(tmp/f'out/{i}.observations').read_text()
             actual_stop=0 if lines[i].endswith('None') else int(lines[i].split('Some((')[1].split(',')[0])
-            row=dict(name=name,stop=actual_stop,expected_stop=stop,stop_equal=actual_stop==stop,sha256=sha(pixel),original_sha256=sha(expected),pixels_equal=pixel==expected if not stop else None)
+            row=dict(name=name,stop=actual_stop,expected_stop=stop,stop_equal=actual_stop==stop,sha256=sha(pixel),expected_sha256=sha(expected),pixels_equal=pixel==expected if not stop else None)
             calls=[];effects=[]
             for line in observations.splitlines():
                 if line.startswith('effect '):

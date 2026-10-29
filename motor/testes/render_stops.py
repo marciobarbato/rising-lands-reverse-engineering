@@ -54,7 +54,10 @@ def stop_cases():
         out.append((name,state,surface,cache,tick,py.pixels,stop))
     return out
 
-def run(binary=None):return matrix_run(binary,True,stop_cases())
+def run(binary=None):
+    report=matrix_run(binary,True,stop_cases())
+    report.update(schema='rising-lands/rust-render-perturbed-stop-matrix/1',scope='26 declared perturbations of a captured entry; expected stops, prefixes, effects and cache come from read-only Python 1.5, not new original executions')
+    return report
 def main():
     p=argparse.ArgumentParser();p.add_argument('--binary');p.add_argument('--output',required=True);a=p.parse_args()
     if Path(a.output).exists():raise SystemExit('Refusing overwrite')
