@@ -66,7 +66,9 @@ The layout retains all uninterpreted declared bytes and explicit original
 address bindings. `GameState::project(layout)` clones that declared template
 and writes semantic fields into their bound addresses. Tests prove identity
 for memory→state→memory and for modified typed state→memory→state, while opaque
-bytes remain unchanged. This is an incremental port: uninterpreted bytes do
+bytes remain unchanged. Modeled-field presence must match the captured layout;
+adding an unbound value or removing a bound value raises ProjectionFieldMismatch
+instead of silently retaining stale template bytes. This is an incremental port: uninterpreted bytes do
 not acquire invented Rust game semantics. The state is not a packed original
 struct or an address-indexed simulation.
 
@@ -141,7 +143,7 @@ are not recoverable status errors.
 |0|OK|
 |1|InvalidArgument|
 |2|InvalidHandle|
-|3|MemoryError (including undeclared, incomplete, overlap, overflow)|
+|3|MemoryError (including undeclared, incomplete, projection mismatch, overlap, overflow)|
 |4|UnknownRoutine|
 |5|UnsupportedPath (including thread getter at 0x48c513)|
 |6|BufferTooSmall|

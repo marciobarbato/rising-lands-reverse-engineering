@@ -40,11 +40,12 @@ Projectiles and Rust rendering are deliberately outside this pilot.
 
 Latest fetched/merged main is `a7427fd0e416d212f08af7f0df3d36a224d12f2d`;
 ancestry was checked before and after validation. Original-first research:
-`b7dfcdd1ad9a72cd6816c3c4ac34efd981028d0e`. Implementation and tested code:
-`347383f22ad27709476c1ea5c29063eaaf8351eb`. The subsequent documentation/
+`b7dfcdd1ad9a72cd6816c3c4ac34efd981028d0e`. Initial implementation:
+`347383f22ad27709476c1ea5c29063eaaf8351eb`. The final projection-invariant
+fix and tested code is `550b4f26d3c087e10d8258ed00ec95ec96cf982e`. The subsequent documentation/
 evidence commit adds these results without changing executable code.
 
-`./motor/validate.sh` passes: rustfmt; Clippy with -D warnings; **15 Rust tests,
+`./motor/validate.sh` passes: rustfmt; Clippy with -D warnings; **16 Rust tests,
 16 Python tests, zero failures/ignores/skips**; **75 captured records with zero
 mismatches**, including 48 explicit RNG checks. The C11 header layout check
 and an actual Swift 6.4→C ABI→Rust CLI run pass. The latter creates/frees a
@@ -64,9 +65,9 @@ export PATH="$CARGO_HOME/bin:$PATH"
 ./motor/validate.sh
 ```
 
-[Structured summary](validation/pilot-summary.json),
-[all 75 call records](validation/pilot-differential.json),
-[full validation log](validation/pilot-validation.log) and
+[Structured summary](validation/pilot-v2-summary.json),
+[all 75 call records](validation/pilot-v2-differential.json),
+[full validation log](validation/pilot-v2-validation.log) and
 [toolchain](validation/toolchain.log) preserve exact results and identities.
 Generated dylib/CLI remain under ignored motor/target; their sizes/hashes are
 recorded in the summary. The crate workspace has no external dependencies.
@@ -77,3 +78,10 @@ No projectile port, rendering, full-frame delivery, performance claim or new
 original emulation is included. The existing macOS apply_frame remains
 RuntimeContractPending. The coordinator reviews/integrates the feature branch;
 no merge into or push to main was performed.
+
+The final review also tests the Rust projection boundary against adding or
+removing typed fields without corresponding captured bindings. Such changes
+now raise ProjectionFieldMismatch instead of silently publishing stale template
+bytes. All 16 Rust and 16 Python tests, 75 original-call comparisons, formatting,
+strict lint, header layout and Swift client pass again from latest main plus
+that committed fix. Earlier v1 reports remain historical and unchanged.
