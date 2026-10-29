@@ -685,3 +685,34 @@ Calls the MONDE01 frames do not reach raise `DependenciaQuadro` at their origina
 - **Composer (Missions/ai-runtime).** Pass `m` = the live memory map. The RNG 0x497164 and the local-player byte 0x508041 are cached scalars of core/economy providers in the M1 map, so pull before and push after each economy call. `atualizar_campos` needs `RecursosTerreno` bound to `[0x507d74]`, `[0x507dac]`, `[0x507da8]` and `0x509954`, and to `[0x507d70]` as bytes. Core keeps that grid as a u16 list, so a byte view must be agreed before counter 128.
 - **Owners still needed** (not reached in MONDE01's first frames): `MAJSympathie 0x475118`, which Economy proposes to own with the player block; `InitGameZone 0x471830` and `MessageBoxSet 0x46994b` (UI); `AnimBallonStatic 0x447b2f` (graphics); `InventionSetEffet 0x470f98` (Economy, later stage).
 - Not implemented: market counter/proposition branches (states 3/4/5), `CalculWorkEngin`, `CalculTransporteEngin`, unit states 11/15/19/20/21/23. MONDE01 cannot reach any of them without input.
+
+## Stage 21 (M2.1 round 2): exact frame-0/1 revalidation
+
+Main `ec931d2` was merged; it includes Missions' original first-frame capture. That capture shows that the load-state `CalculGame` call already runs frame 0 at counter 0, so the M1-state assumption is corrected in the [inventory erratum](M2_FRAME_INVENTORY.md#erratum-after-missions-first-frame-capture-m21-round-2).
+
+**Capture first.** [`capturar_quadro1_economia_original.py`](capturar_quadro1_economia_original.py) reruns Missions' committed path with their `Isolamento`, extended to the two fragments, which run to declared exits (`0x456966→0x454ccd`, `0x426918→0x4281c0`). Every economy call is executed natively in isolation at its exact entry state, then the state is restored. The resumed path reproduces all three committed phase states, the entry trace, the boundaries and the code hash.
+- v1: `2174934`. v2 (`19545cd`) adds `written_unchanged`. Both have 102 calls, deterministic across 3 runs.
+- Frame 0 (57 calls): `BonusGetValEngin` ×24, state 7 ×8, `ResetTableauHangar`, the type-2 branch, `BagContientTroupe`, `CalculTroupe`, `BatimentGetCase`, the eight frame routines, `MAJSympathie` ×12.
+- Frame 1 (45 calls): the same without `MAJSympathie`.
+- `RechercheGetNbInvention` is not reached in frames 0/1; it has an M1-state capture (`captura-invencoes-original.json`, 1,024 entries).
+
+**Translated.**
+- `atualizar_simpatia` (`MAJSympathie` gates; the counter branch is a named dependency at `0x47515d`), now the default sympathy callback.
+- `resetar_tabela_hangar`.
+- `numero_invencoes`.
+- Reads go through `m.ler` and writes through `m.vista`; the M1 map provides both.
+
+Ownership from the bytes: `ResetTableauHangar` writes the market block `0x4e296c`. `MAJSympathie` reads the AI context flags and writes only the player block. `RechercheGetNbInvention` reads research counts. All three are Economy's.
+
+**Differential** ([test](testes/test_quadro1_economia.py)). Python starts from the M1 memory overlaid with each call's captured read-before-write, changed-old and written-unchanged bytes. All 102 calls match the native changed-byte set and the result register. For the nine memory-only routines, the bytes read before written equal the native set exactly. Mutation checks are caught: a wrong hangar word, an extra unit read, and a skipped sympathy-gate read.
+
+**Translation-block flush.** Every Economy bench installs its hooks in the constructor before any execution, so none could miss cached blocks. The M1-state capture now flushes explicitly after installing its hook. Its fresh rerun still equals frozen v2.
+
+**Validation** (under the lease):
+- `validar_quadro_economia.py --emular`: 10 tests, 0 skips/failures/errors. Fresh 102 isolated frame calls equal v2, and fresh 6,692 M1-state entries equal the frozen v2. Python compared 7,818 calls in total.
+- `scripts/check.py --domain economy`: **451 tests, 200 optional skips**, 0 failures, docs pass.
+
+**Gaps.**
+- AffGame is not executed (graphics question, per Missions).
+- `InitGameZone`, the `MAJSympathie` counter branch, the market state-3/4/5 branches, `AnimBallonStatic` and `InventionSetEffet` are still named dependencies; none is reached in frames 0/1.
+- No whole-frame claim: ai-runtime composes the frame.
