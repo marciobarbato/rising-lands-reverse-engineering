@@ -1,0 +1,301 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "CalculWorkEngin",
+      "start": "0x44bc74",
+      "end_exclusive": "0x44e34c",
+      "sha256": "0e83187c438b9df9b8d3f4617634685af56747c694ec11ec641a6e07c2d26077",
+      "file": "0044bc74.asm"
+    },
+    {
+      "name": "epilogue 0x44f29d -> 0x440d58 (CalculWorkEngin)",
+      "start": "0x44f29d",
+      "end_exclusive": "0x44f2a3",
+      "sha256": "b080fef966146bceefcbdf9abf2b8f63e9e525b0ea53261f613e71703b86964f",
+      "file": "0044f29d.asm"
+    },
+    {
+      "name": "MineEstSurTerrain",
+      "start": "0x475402",
+      "end_exclusive": "0x475431",
+      "sha256": "7c1ba79ed9c1d71732da448a99e6733c52203a7d0d911e7f2b611845347f12df",
+      "file": "00475402.asm"
+    },
+    {
+      "name": "MineGetIndice",
+      "start": "0x47544c",
+      "end_exclusive": "0x4754a7",
+      "sha256": "719bd5c867bc9d5de102ca3554cf8344f7ee6cde759c334a2c4336e48df8cd67",
+      "file": "0047544c.asm"
+    },
+    {
+      "name": "MineSetWork",
+      "start": "0x4754a7",
+      "end_exclusive": "0x4754de",
+      "sha256": "ab2a274dc36764ce70f678bd9d495cf32e0aaa9ec89b5947c1b6c04bc9f38863",
+      "file": "004754a7.asm"
+    },
+    {
+      "name": "MineEndWork",
+      "start": "0x4754de",
+      "end_exclusive": "0x475515",
+      "sha256": "962715703d30bb77540b87149fbb1ed3df1bee0f3b05fe9d8feb905e0cba4aaf",
+      "file": "004754de.asm"
+    },
+    {
+      "name": "MineRecolte",
+      "start": "0x4755a7",
+      "end_exclusive": "0x475620",
+      "sha256": "2407e8cb7e8bddb3eefcce3dfcdf634a5b98d34e797bedd1b2bc7aa19ad23b77",
+      "file": "004755a7.asm"
+    },
+    {
+      "name": "TerrainRecolte",
+      "start": "0x4781e8",
+      "end_exclusive": "0x478247",
+      "sha256": "4a9e85afb6f8d605d8d8195a6c27dc3af3466887e4a1be8c079679627b69768f",
+      "file": "004781e8.asm"
+    },
+    {
+      "name": "AjouteMatiere",
+      "start": "0x4678f2",
+      "end_exclusive": "0x46792c",
+      "sha256": "82f440f4f07012d9c8b143852dd9b1622ab5288ba58b6519367372d3064bfcde",
+      "file": "004678f2.asm"
+    },
+    {
+      "name": "BatimentAjouteMatiere",
+      "start": "0x42340f",
+      "end_exclusive": "0x4235bd",
+      "sha256": "6a30ef2f78ac015a154681817e34d11e286ea669adc409bbbb692500fdb229d7",
+      "file": "0042340f.asm"
+    },
+    {
+      "name": "BatimentLogeEngin",
+      "start": "0x41f76e",
+      "end_exclusive": "0x41fb12",
+      "sha256": "4dbe495b073465b1077296ecf7813ad43014cd4657e1eff9a35ecaa05b72198e",
+      "file": "0041f76e.asm"
+    },
+    {
+      "name": "epilogue 0x42399a (BatimentLogeEngin)",
+      "start": "0x42399a",
+      "end_exclusive": "0x4239a0",
+      "sha256": "9651d68480e9031dd95d190ca598519a163040c3b73f617ef4b3a789f33597ef",
+      "file": "0042399a.asm"
+    },
+    {
+      "name": "InitBatimentPlayer",
+      "start": "0x41be88",
+      "end_exclusive": "0x41bfe6",
+      "sha256": "98368a83f63b800976c6a9efa6f15ea2b519c8732d5ccc3534e08e23959140c5",
+      "file": "0041be88.asm"
+    },
+    {
+      "name": "BatimentConstruction",
+      "start": "0x41cf59",
+      "end_exclusive": "0x41d02b",
+      "sha256": "796c12b706fc2478994edd8a554ab773f92012969280a6e2eff7626fb2ad0cea",
+      "file": "0041cf59.asm"
+    },
+    {
+      "name": "BatimentConstruit",
+      "start": "0x41c652",
+      "end_exclusive": "0x41c692",
+      "sha256": "cbc00056223000229cb40d1d186a963d1f59e194c28383bcb9dd58e559ec755c",
+      "file": "0041c652.asm"
+    },
+    {
+      "name": "BatimentEstEnnemi",
+      "start": "0x41a61c",
+      "end_exclusive": "0x41a65c",
+      "sha256": "10587bf2cbee1119cbd19d084eb955e74e22f95be47aa4e63a48f16ada172839",
+      "file": "0041a61c.asm"
+    },
+    {
+      "name": "BatimentEstNeutre",
+      "start": "0x41d02b",
+      "end_exclusive": "0x41d057",
+      "sha256": "e92d1479857e04609dae09aa033cf403c45f2730ed8cac0a8012f0046ed9c815",
+      "file": "0041d02b.asm"
+    },
+    {
+      "name": "EnginSelectPeutEntrer",
+      "start": "0x472b6c",
+      "end_exclusive": "0x4730ae",
+      "sha256": "ee8596e6e310e72e666dffc6cf7f81a585f6e444ba27ea5e959c77fef61932e7",
+      "file": "00472b6c.asm"
+    },
+    {
+      "name": "TypeEnginEstTroupe",
+      "start": "0x442347",
+      "end_exclusive": "0x442380",
+      "sha256": "f1b281ab71b04fef224a1bc1aca9b474b63b088e149afa000bd5650ccc33d9e9",
+      "file": "00442347.asm"
+    },
+    {
+      "name": "SetRecolteEngin",
+      "start": "0x444ebd",
+      "end_exclusive": "0x444f48",
+      "sha256": "25810c6870d178472e81b3b5e61d37c700a6a34ddc368ad2375310eb92f09e3d",
+      "file": "00444ebd.asm"
+    },
+    {
+      "name": "SetEnginDecharge",
+      "start": "0x4447fa",
+      "end_exclusive": "0x44491c",
+      "sha256": "12dc03f103968f04814ffc28815f44fcd20a6fd8ac98bec6e8488da57383a51c",
+      "file": "004447fa.asm"
+    },
+    {
+      "name": "SetDechargeCaveEngin",
+      "start": "0x444dee",
+      "end_exclusive": "0x444e7f",
+      "sha256": "6d9ba2bc95e3856da3ecedafe89918a7667825e445521e951c7c4fb271d684bf",
+      "file": "00444dee.asm"
+    },
+    {
+      "name": "SetTransporteEngin",
+      "start": "0x444e7f",
+      "end_exclusive": "0x444ebd",
+      "sha256": "64927dca5906fb336c46544dcb3e730a938475275e3a46ca9a358cd3075f1a2f",
+      "file": "00444e7f.asm"
+    },
+    {
+      "name": "SetEnginRentreBatiment",
+      "start": "0x445b10",
+      "end_exclusive": "0x445f2d",
+      "sha256": "fd5616e49e3020547d980544db119b959cc09fecac1a58ebf18e2369add57a68",
+      "file": "00445b10.asm"
+    },
+    {
+      "name": "CalculEntreBatiment",
+      "start": "0x449716",
+      "end_exclusive": "0x44a2ed",
+      "sha256": "7fa7edbfcc2df438048667929275e9a0a44d90763a9e3693f234c30aa1e41a5b",
+      "file": "00449716.asm"
+    },
+    {
+      "name": "SetPlayerOrdre",
+      "start": "0x45ecd4",
+      "end_exclusive": "0x45ed1e",
+      "sha256": "33bbbeb13a109f2a00caf0d06c599e80acbddfe87c50e5f30ef54571fdc4878e",
+      "file": "0045ecd4.asm"
+    },
+    {
+      "name": "InputGame building press with troops 0x42ac0c..0x42b26e",
+      "start": "0x42ac0c",
+      "end_exclusive": "0x42b26e",
+      "sha256": "aa071f0bd262fe13dbe76d216c39d112fae061f5bf316b6b015e52724228b59b",
+      "file": "0042ac0c.asm"
+    },
+    {
+      "name": "InputGame food/stone press 0x42b311..0x42b64d",
+      "start": "0x42b311",
+      "end_exclusive": "0x42b64d",
+      "sha256": "7a1fba67e3487318288f6621ce1315e4d21cc3f5b25a0f97cf44ca256fdbddde",
+      "file": "0042b311.asm"
+    },
+    {
+      "name": "InputGame mode-9 depot packets 0x429b92..0x429da1",
+      "start": "0x429b92",
+      "end_exclusive": "0x429da1",
+      "sha256": "0a19cca898fa474bd75f7671973e0b08e84623cea1678da1cdc27bc3c6ec5a1c",
+      "file": "00429b92.asm"
+    },
+    {
+      "name": "ProcessInputGame tags 6/7/8/0x10/0x13/0x21 0x45efe2..0x45f22f",
+      "start": "0x45efe2",
+      "end_exclusive": "0x45f22f",
+      "sha256": "4d7f461019cca09dc9f42304e3eee09d47fed8ba121bdd5f41560d475c77cf3b",
+      "file": "0045efe2.asm"
+    }
+  ],
+  "jump_tables": [
+    {
+      "name": "CalculWorkEngin type 7 phases (and type 13 from +6)",
+      "address": "0x44bc38",
+      "entries": [
+        "0x44bcd5",
+        "0x44c0e3",
+        "0x44c33b",
+        "0x44c660",
+        "0x44c8c0",
+        "0x44c9bb",
+        "0x44ce05",
+        "0x44d01d",
+        "0x44d481",
+        "0x44d64c",
+        "0x44d6ac"
+      ]
+    },
+    {
+      "name": "CalculWorkEngin type 5 phases",
+      "address": "0x44bc64",
+      "entries": [
+        "0x44d880",
+        "0x44da5d",
+        "0x44df0c",
+        "0x44e186"
+      ]
+    },
+    {
+      "name": "InputGame mode-9 source kinds 0..3 (mine, field, sack, cave)",
+      "address": "0x42923c",
+      "entries": [
+        "0x429ca6",
+        "0x429cec",
+        "0x429d38",
+        "0x429c32"
+      ]
+    },
+    {
+      "name": "ProcessInputGame by packet tag",
+      "address": "0x45ed20",
+      "entries": [
+        "0x45f2de",
+        "0x45ee46",
+        "0x45eeaf",
+        "0x45ee2d",
+        "0x45ef73",
+        "0x45efc1",
+        "0x45efe2",
+        "0x45f041",
+        "0x45f05f",
+        "0x45f1b3",
+        "0x45f0a4",
+        "0x45eee2",
+        "0x45ef02",
+        "0x45ee0a",
+        "0x45f0c7",
+        "0x45f149",
+        "0x45f167",
+        "0x45f19f",
+        "0x45f20f",
+        "0x45f07d",
+        "0x45ef42",
+        "0x45f155",
+        "0x45efa5",
+        "0x45f27e",
+        "0x45f269",
+        "0x45f28c",
+        "0x45f295",
+        "0x45f2a8",
+        "0x45f2b6",
+        "0x45f2c4",
+        "0x45f275",
+        "0x45f2d2",
+        "0x45f234",
+        "0x45f221",
+        "0x45ef58",
+        "0x45f246",
+        "0x45ee8d",
+        "0x45ef36",
+        "0x45edf3",
+        "0x45f257"
+      ]
+    }
+  ]
+}
