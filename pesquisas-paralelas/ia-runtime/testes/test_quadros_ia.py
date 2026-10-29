@@ -189,6 +189,32 @@ class Fases(unittest.TestCase):
         from composicao_quadros_ia import fases_quadros
         self.assertEqual(fases_quadros(3), ['load_tail', 'between_frames', 'frame1', 'between_frames2', 'frame2',
                                             'between_frames3', 'frame3'])
+        self.assertEqual(fases_quadros(2, inicio=8999), ['between_frames9000', 'frame9000', 'between_frames9001',
+                                                         'frame9001'])
+
+
+class PontoDeInicio(unittest.TestCase):
+    """Allocation records at a checkpoint start (comparar_quadros_ia.alocacoes_no_ponto)."""
+
+    def fase(self, nome, contagem, delta=None):
+        f = dict(phase=nome, exit=dict(allocations=contagem))
+        if delta is not None:
+            f['state_delta'] = delta
+        return f
+
+    def test_sources(self):
+        from comparar_quadros_ia import alocacoes_no_ponto
+        final = [dict(index=0), dict(index=1)]
+        seguintes = [self.fase('between_frames9000', 2, {}), self.fase('frame9000', 2, dict(ranges=[]))]
+        cap = dict(phases=[self.fase('frame8999', 2)] + seguintes, allocations=final)
+        self.assertEqual(alocacoes_no_ponto(cap, 'frame8999', seguintes), (final, 'final allocations (unchanged '
+                                                                                  'after the checkpoint)'))
+        cap['checkpoint_allocations'] = {'frame8999': [dict(index=7)]}
+        self.assertEqual(alocacoes_no_ponto(cap, 'frame8999', seguintes)[0], [dict(index=7)])
+        del cap['checkpoint_allocations']
+        seguintes[1]['state_delta'] = dict(allocated={'alloc25483': {}})
+        with self.assertRaises(SystemExit):
+            alocacoes_no_ponto(cap, 'frame8999', seguintes)
 
 
 if __name__ == '__main__':
