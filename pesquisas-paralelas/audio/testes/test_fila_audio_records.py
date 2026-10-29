@@ -1,4 +1,4 @@
-"""Queue record/COM provider replay against original-only v7 captures."""
+"""Queue record/COM provider replay against original-only v9 captures."""
 import copy
 import json
 from pathlib import Path
@@ -13,7 +13,7 @@ from bancos_som import DependenciaSom
 from reproduzir_fila_audio import compare,replay
 
 
-def capture():return json.loads((OWNED/'evidencias/captura-fila-audio-original-v7.json').read_text())
+def capture():return json.loads((OWNED/'evidencias/captura-fila-audio-original-v9.json').read_text())
 
 
 class AudioQueueRecordTests(unittest.TestCase):
@@ -22,7 +22,7 @@ class AudioQueueRecordTests(unittest.TestCase):
 
     def test_all_native_record_com_and_partial_effect_cases(self):
         self.assertFalse(self.original['translation_executed'])
-        self.assertEqual((self.original['native_calls'],self.original['scenario_count']),(230,224))
+        self.assertEqual((self.original['native_calls'],self.original['scenario_count']),(244,238))
         for case in self.original['cases']:
             with self.subTest(case=case['name']):
                 errors,_=compare(case);self.assertEqual(errors,[])
@@ -76,3 +76,32 @@ class AudioQueueRecordTests(unittest.TestCase):
         results=[replay(c) for c in cases]
         self.assertEqual(results[0]['output'],results[1]['output'])
         self.assertEqual([c['method'] for c in results[1]['com']],['GetStatus','SetVolume'])
+
+    def test_creation_output_is_used_even_on_error_hresult(self):
+        null=replay(self.cases['manage-create-0-80004005'])
+        self.assertIsNone(null['stop']);self.assertEqual(null['value'],0)
+        nonnull=replay(self.cases['manage-create-7101000-80004005'])
+        self.assertIn('Lock',nonnull['stop']);self.assertEqual(len(nonnull['com']),3)
+
+    def test_pcm_success_and_short_reads_keep_original_memory(self):
+        for name,size in (('pcm-good',64),('short-read',32),('empty-read',0)):
+            case=self.cases['manage-'+name];result=replay(case)
+            before=QueueFixtureMemory.restore(case['input']['memory']);after=QueueFixtureMemory.restore(result['output'])
+            self.assertEqual(after.read(0x7004000,size),bytes((i*7+3)&255 for i in range(size)))
+            self.assertEqual(after.read(0x7004000+size,64-size),before.read(0x7004000+size,64-size))
+            self.assertEqual(after.u32(INDEX),19);self.assertEqual(after.u8(TABLE+8),1)
+            self.assertEqual([c['method'] for c in result['com']],['_llseek','CreateSoundBuffer','_llseek','Lock','_hread','Unlock','GetStatus','SetPosition','SetVolume','Play'])
+
+    def test_start_failure_still_transfers_request_as_original_does(self):
+        for name in ('position-error','volume-error','play-error'):
+            result=replay(self.cases['manage-'+name]);memory=QueueFixtureMemory.restore(result['output'])
+            self.assertEqual(result['value'],0);self.assertEqual(memory.u8(TABLE+8),1)
+            self.assertEqual(memory.u32(INDEX),19);self.assertIsNone(result['stop'])
+
+    def test_multiple_pending_requests_are_a_named_boundary(self):
+        memory=QueueFixtureMemory.restore(self.cases['manage-empty']['input']['memory']);memory.w32(INDEX,21)
+        with self.assertRaisesRegex(DependenciaSom,'Multiple pending'):AudioQueue(memory,None).manage()
+
+    def test_external_hresult_requires_an_explicit_u32(self):
+        plan=ScriptedCOM([dict(method='GetStatus',object=0x1234,args=[],hresult=0x100000000,value=0)])
+        with self.assertRaisesRegex(ValueError,'u32'):AudioQueue(None,plan).status(0x1234,'stopped')

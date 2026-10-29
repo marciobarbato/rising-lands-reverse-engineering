@@ -1,0 +1,11 @@
+{
+  "schema": "rising-lands/audio-queue-three-way/1",
+  "passed": true,
+  "native_calls": 244,
+  "scenarios": 238,
+  "expected_dependency_stops": 3,
+  "unexpected_failures": [],
+  "original_capture_equal": true,
+  "seconds": 0.965,
+  "implementation_sha256": "d737e194dc2abb0da151d3cca18e4c0c5df4ff7c115fe276d70a9c921f458d71"
+}

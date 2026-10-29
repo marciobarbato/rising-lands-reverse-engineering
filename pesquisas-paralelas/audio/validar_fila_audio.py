@@ -12,9 +12,9 @@ def main():
     args=parser.parse_args();path=args.output
     if path.exists() or path.is_symlink():parser.error('Refusing to overwrite report')
     from capturar_fila_audio import capture
-    original=json.loads((OWNED/'evidencias/captura-fila-audio-original-v7.json').read_text())
+    original=json.loads((OWNED/'evidencias/captura-fila-audio-original-v9.json').read_text())
     fresh=capture()
-    if fresh['cases']!=original['cases']:raise ValueError('Fresh original cases differ from frozen v7 evidence')
+    if fresh['cases']!=original['cases']:raise ValueError('Fresh original cases differ from frozen v9 evidence')
     failures=[]
     for case in fresh['cases']:
         errors,_=compare(case)

@@ -5,6 +5,8 @@ initialize audio nor supply a backend response. Unknown branches stop after
 retaining earlier effects. No mixer or asynchronous device state is invented.
 """
 from bancos_som import BancoSom,DependenciaSom,carregar_info_som
+from adpcm_som import criar_superficie_som
+from types import SimpleNamespace
 
 TABLE,STRIDE,INDEX=0x52137c,44,0x498f68
 
@@ -22,6 +24,43 @@ class _LiveVariantCounter:
     def contador_variantes(self,value):self.memory.w32(0x5221bc,value)
 
 
+class _QueuePCMFiles:
+    def __init__(self,queue,device):self.queue,self.device=queue,device
+    def posicionar(self,handle,offset,origin):
+        return self.queue.call('_llseek',handle,(offset,origin),0x48c05e)['hresult']
+    def ler(self,handle,size):
+        answer=self.queue.call('_hread',handle,(self.device.lock_pointer,size),0x48c042)
+        data=bytes.fromhex(answer['value'])
+        if len(data)>size or answer['hresult']!=len(data):
+            raise DependenciaSom(0x48c042,'Read answer outside captured explicit-byte domain')
+        return data
+
+
+class _QueuePCMDevice:
+    """Adapter to the already validated Stage-1 PCM body; no device defaults."""
+    def __init__(self,queue):self.queue=queue;self.buffers={};self.created_size=None;self.lock_pointer=None
+    def criar(self,descriptor,wave):
+        q=self.queue
+        answer=q.call('CreateSoundBuffer',q.memory.u32(0x522228),(descriptor.hex(),wave.hex(),0),0x48b834)
+        if type(answer.get('value')) is not int or not 0<=answer['value']<=0xffffffff:
+            raise DependenciaSom(0x48b834,'CreateSoundBuffer requires an explicit u32 output pointer write')
+        self.created_size=int.from_bytes(descriptor[8:12],'little')
+        return answer['value']
+    def travar(self,pointer,offset,size,flags):
+        answer=self.queue.call('Lock',pointer,(offset,size,flags),0x48c097)
+        outputs=answer.get('value')
+        if not isinstance(outputs,dict) or set(outputs)!={'pointer','size'}:
+            raise DependenciaSom(0x48c097,'Lock requires explicit pointer and byte-count writes')
+        if any(type(outputs[key]) is not int or not 0<=outputs[key]<=0xffffffff for key in outputs):
+            raise ValueError('Lock output pointer and size require u32 values')
+        if outputs['size']!=size or size!=self.created_size:
+            raise DependenciaSom(0x48c097,'Wrapped/short Lock outputs outside captured PCM domain')
+        self.lock_pointer=outputs['pointer'];self.buffers[pointer]=self.queue.memory.view(self.lock_pointer,size)
+        return 0
+    def destravar(self,pointer,offset,size,second,second_size):
+        return self.queue.call('Unlock',pointer,(self.lock_pointer+offset,size,second,second_size),0x48c0b5)['hresult']
+
+
 class AudioQueue:
     def __init__(self,memory,external):
         self.memory,self.external=memory,external
@@ -30,13 +69,15 @@ class AudioQueue:
         if self.external is None:raise DependenciaSom(site,'Explicit external answer required: '+name)
         try:answer=self.external.answer(name,pointer,list(args))
         except ValueError as exc:raise DependenciaSom(site,str(exc)) from exc
-        if type(answer.get('hresult')) is not int:raise ValueError('External answer requires an explicit u32 result')
+        if type(answer.get('hresult')) is not int or not 0<=answer['hresult']<=0xffffffff:
+            raise ValueError('External answer requires an explicit u32 result')
         return answer
 
     def status(self,pointer,kind):
         if not pointer:return 1 if kind=='stopped' else 0
         answer=self.call('GetStatus',pointer,(),{'playing':0x48bea0,'stopped':0x48bed0,'looped':0x48beeb}[kind])
-        if type(answer.get('value')) is not int:raise DependenciaSom(0x48bea3,'GetStatus must explicitly write the status word')
+        if type(answer.get('value')) is not int or not 0<=answer['value']<=0xffffffff:
+            raise DependenciaSom(0x48bea3,'GetStatus must explicitly write a u32 status word')
         value=answer['value']
         return int(value&5==0) if kind=='stopped' else int(bool(value&({'playing':1,'looped':4}[kind])))
 
@@ -204,6 +245,35 @@ class AudioQueue:
         if selector not in banks:return sound_id # Original EAX is EDX, not invented zero.
         return self.insert(sound_id,banks[selector],reference,flags&255,volume)
 
+    def volume_word(self,r):
+        m=self.memory;multiplier=m.u8(m.u32(r+28)+13) or 256
+        if m.u16(m.u32(r+24)+4)==256:m.w32(r+16,256)
+        lookup=_i32(_u32(_u32(m.u32(r+16)*multiplier)*m.u32(0x498f58)))>>20
+        if not 0<=lookup<=16:raise DependenciaSom(0x48a5c2,'Volume lookup outside captured table domain')
+        return m.u32(0x498f14+lookup*4)
+
+    def start_buffer(self,r):
+        m=self.memory;pointer=m.u32(m.u32(r+32));volume=self.volume_word(r)
+        if not pointer:return 0
+        if self.status(pointer,'playing'):return 1
+        if self.call('SetPosition',pointer,(0,),0x48bf3a)['hresult']:return 0
+        if self.call('SetVolume',pointer,(volume,),0x48bf45)['hresult']:return 0
+        return int(self.call('Play',pointer,(0,0,int(m.u32(r+12)==1)),0x48bf62)['hresult']==0)
+
+    def create_pending_pcm(self,r):
+        m=self.memory;bank=BancoSom(m.view(m.u32(r+4),28),m.u32(r+4));header=m.read(m.u32(r+28),16)
+        if header[12]!=0 or bank.em_memoria!=0:
+            raise DependenciaSom(0x48aad4,'Queue bridge currently captures file-backed PCM only')
+        device=_QueuePCMDevice(self);files=_QueuePCMFiles(self,device)
+        system=SimpleNamespace(directsound=device,arquivos=files)
+        globals_=SimpleNamespace(directsound=m.u32(0x522228))
+        pointer,_=criar_superficie_som(system,globals_,bank,header)
+        slot=0x52211c+8*m.u32(0x498f60);m.w32(slot,pointer)
+        if not pointer:return 0
+        m.w32(slot+4,r);m.w32(r+32,slot);m.w32(r+36,0)
+        result=self.start_buffer(r);self.transfer_to_playing((r-TABLE)//STRIDE);m.w32(0x521f84,1)
+        return result
+
     def manage(self):
         m=self.memory
         for base in (0x52216c,0x52211c):
@@ -220,21 +290,16 @@ class AudioQueue:
                 slot=m.u32(r+32)
                 if not slot or not m.u32(slot):continue
                 if m.u32(r+20)!=1 and not m.u32(0x498f5c):continue
-                multiplier=m.u8(m.u32(r+28)+13) or 256
-                if m.u16(m.u32(r+24)+4)==256:m.w32(r+16,256)
-                wrapped=_u32(_u32(m.u32(r+16)*multiplier)*m.u32(0x498f58))
-                lookup=_i32(wrapped)>>20
-                if not 0<=lookup<=16:raise DependenciaSom(0x48a5c2,'Volume lookup outside captured table domain')
-                value=m.u32(0x498f14+lookup*4)
+                value=self.volume_word(r)
                 self.call('SetVolume',m.u32(slot),(value,),0x48a5d5);m.w32(r+20,0)
             m.w32(0x521f88,0)
         m.w32(0x498f5c,0)
         if self.maximum()<=19:return 1
+        if self.maximum()!=20:
+            raise DependenciaSom(0x48a80c,'Multiple pending requests outside captured Manage domain')
         r=self.address(self.maximum())
         if m.u16(m.u32(r+24)+4)==256:raise DependenciaSom(0x48a702,'Dictator request creation not yet captured')
         if _i32(m.u32(0x498f60))!=-1:
             raise DependenciaSom(0x48acd3,'Loaded physical-slot lookup/lifecycle not yet captured')
         m.w32(0x498f60,m.u32(0x498f60)+1)
-        bank=m.u32(r+4)
-        if m.u32(bank+16)==0:self.call('_llseek',m.u32(bank+8),(0,0),0x48c05e)
-        raise DependenciaSom(0x48b834,'DirectSound CreateSoundBuffer ownership/provider remains undeclared')
+        return self.create_pending_pcm(r)

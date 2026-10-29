@@ -1,0 +1,69 @@
+{
+  "schema": "rising-lands/audio-queue-validation/1",
+  "base_main": "a7405668e630650f67f6ff792bd07348ae7697f7",
+  "gate": {
+    "command": "python3 -B scripts/check.py --domain audio",
+    "discovered": 49,
+    "passed": 46,
+    "failures": 0,
+    "skipped": 3,
+    "skip_reason": "Unchanged optional Stage-1 intact-x86 tests require RISING_EMULAR=1",
+    "seconds": 11.052,
+    "log": "audio-queue-check.log"
+  },
+  "new_unit_tests": {
+    "count": 15,
+    "passed": 15,
+    "skipped": 0
+  },
+  "validator_cli": [
+    {
+      "name": "help",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "usage: validar_fila_audio.py [-h] --output OUTPUT\n\nFresh original/Python/frozen queue comparison. Native execution requires\nlease.\n\noptional arguments:\n  -h, --help       show this help message and exit\n  --output OUTPUT\n"
+    },
+    {
+      "name": "required-output",
+      "exit_code": 2,
+      "stderr": "usage: validar_fila_audio.py [-h] --output OUTPUT\nvalidar_fila_audio.py: error: the following arguments are required: --output\n",
+      "stdout": ""
+    },
+    {
+      "name": "refuse-existing",
+      "exit_code": 2,
+      "stderr": "usage: validar_fila_audio.py [-h] --output OUTPUT\nvalidar_fila_audio.py: error: Refusing to overwrite report\n",
+      "stdout": ""
+    }
+  ],
+  "fresh_native": {
+    "schema": "rising-lands/audio-queue-three-way/1",
+    "passed": true,
+    "native_calls": 244,
+    "scenarios": 238,
+    "expected_dependency_stops": 3,
+    "unexpected_failures": [],
+    "original_capture_equal": true,
+    "seconds": 0.965,
+    "implementation_sha256": "d737e194dc2abb0da151d3cca18e4c0c5df4ff7c115fe276d70a9c921f458d71"
+  },
+  "bounds": {
+    "signal_seconds": 600,
+    "per_call_instructions": 20000,
+    "lease": "/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py",
+    "runtime": "/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3"
+  },
+  "source_sha256": {
+    "fila_audio.py": "d737e194dc2abb0da151d3cca18e4c0c5df4ff7c115fe276d70a9c921f458d71",
+    "capturar_fila_audio.py": "24fb63bf9763fde803148303728ac126d1a132feeda438a0bc222383a620e4c7",
+    "audio_queue_fixtures.py": "5470e7a2d969d9a8fe25213ec1bf905cc2553c4e99fb97f4f030ab4ae507ef12",
+    "reproduzir_fila_audio.py": "2426a00cb7534197bd2d098365f1582d9f3af3e8fbc825d2ea622df9e325e8f9",
+    "validar_fila_audio.py": "15d12b98bf951dd58506e76399d8e8d300adb14b514c126af543691082d3695a"
+  },
+  "limitations": [
+    "Declared platform fixtures, no real device initialization or audible playback",
+    "One new file-backed PCM Manage request only; no loaded-slot reuse, promotion, dictator or multiple pending requests",
+    "Resident/compressed queue bridge, wrapped/short Lock regions, unwritten outputs and asynchronous device semantics remain outside",
+    "Prior M2 soundness evidence is baseline and not generalized to initialized sound/CD or M2.3"
+  ]
+}
