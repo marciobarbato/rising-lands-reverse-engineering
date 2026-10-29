@@ -763,4 +763,4 @@ The attack table is empty and the AI players are inactive, so there is no other 
 - **Audio and coordinator:** the CD-availability input. While no CD track plays, CalculGame advances the shared cursor `0x4e1d18` every frame.
 - **Audio:** sound-library state.
 
-**v3 preparation (not committed as reference).** The CRT `fseek`/`fgets` fixtures and the `exibicao_v3` scenario run LoadPie natively, with explicit 3M segment and binding budgets.
+**v3 preparation (not committed as reference).** The CRT `fseek`/`fgets` fixtures and the `exibicao_v3` scenario run LoadPie natively, with explicit budgets of 3M segments and 1M bindings (the Core bench cap).

@@ -117,7 +117,7 @@ The market and proposition gates at frame 100 produced no message box with inact
 
 ### v3 probe
 
-The first attempt stopped at the declared 200,000-segment budget inside MenuInit → LoadPie, because the menu pictures make that many FileRead resumptions. The log is in `.local/`. The v3 scenario now declares 3,000,000-segment and 3,000,000-binding budgets. The result of the rerun is in the HANDOFF.
+The first attempt stopped at the declared 200,000-segment budget inside MenuInit → LoadPie, because the menu pictures make that many FileRead resumptions. The log is in `.local/`. The v3 scenario now declares a 3,000,000-segment budget and a 1,000,000-binding budget, the cap of Core's bench. A second attempt that requested 3,000,000 bindings was refused by that cap; its log is in `.local/`. The result of the rerun is in the HANDOFF.
 
 ## 5. Expected boundaries per frame, and new boundaries that need an owner
 
