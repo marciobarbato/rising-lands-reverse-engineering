@@ -56,7 +56,7 @@ def main():
                              exit_registers=c['exit_registers'], reached_return=c['reached_return'],
                              changed_bytes=c['changed_bytes'], read_before_write=c['read_before_write'],
                              native_blocks=[hex(x) for x in cobertos]))
-    entradas = {f'{n}:{f}': k for (n, f), k in sorted(iso.vistos.items())}
+    entradas = {f'{n}:{f}': k for (n, f, _), k in sorted(iso.vistos.items())}
     contagem = {}
     for c in chamadas:
         contagem[f"{c['phase']}:{c['routine']}"] = contagem.get(f"{c['phase']}:{c['routine']}", 0) + 1

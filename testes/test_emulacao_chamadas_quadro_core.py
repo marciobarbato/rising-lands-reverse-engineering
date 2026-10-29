@@ -30,9 +30,12 @@ class DiferencialChamadasQuadro1(unittest.TestCase):
         r = diferencial(cenario='exibicao')
         self.assertTrue(r['path_reproduction']['passed'], r['path_reproduction'])
         self.assertEqual((r['mismatches'], r['dependencies']), ([], []))
-        self.assertEqual(r['calls'], 70)
-        for nome in ('NextAnimTerrain', 'NextAnimVeget', 'rand', 'LongRand', 'InitGameZone'):
+        self.assertEqual(r['calls'], 124)
+        for nome in ('NextAnimTerrain', 'NextAnimVeget', 'NextAnimVegetFullMap', 'rand', 'LongRand', 'InitGameZone'):
             self.assertIn(nome, r['cases_with_stores'], nome)
+        for nome in ('TerrainEstDecouvert', 'TerrainEstIllumine', 'ExisteEngin', 'EnginGetType', 'EnginGetPlayer',
+                     'EnginEstArmure', 'EnginEstMiroir', 'EnginEstTerreur', 'TypeEnginSeFatigue', 'MissionGetNum'):
+            self.assertIn(nome, r['by_routine'], nome)
 
 
 if __name__ == '__main__':

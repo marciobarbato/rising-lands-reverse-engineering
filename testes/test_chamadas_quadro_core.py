@@ -278,19 +278,17 @@ class ReplayZonasAnimacaoQuadro1(unittest.TestCase):
                 self.assertNotIn(0x477737 if c['routine'] == 'NextAnimTerrain' else 0x47731b,
                                  {int(b, 16) for b in c['native_blocks']})
 
-    def test_unreached_modes_raise_before_any_store(self):
-        from chamadas_quadro_core import iniciar_zonas_jogo, animar_vegetacao_mapa
+    def test_mode3_refusals_before_any_store(self):
+        from chamadas_quadro_core import iniciar_zonas_jogo
         dgroup = bytearray(0x523000 - 0x494000)
-        dgroup[0x508726 - 0x494000] = 3
         m = MemoriaQuadro([(0x494000, dgroup)])
-        antes = bytes(dgroup)
-        for modo, alvo in ((2, 0x4719be), (3, 0x47194f), (4, 0x47184d), (0, 0x471949), (5, 0x471949)):
-            with self.assertRaises(DependenciaRamoCore) as e:
-                iniciar_zonas_jogo(m, modo, 0)
-            self.assertEqual(e.exception.endereco, alvo)
-        with self.assertRaises(DependenciaRamoCore):
-            animar_vegetacao_mapa(m)
-        self.assertEqual(bytes(dgroup), antes)
+        with self.assertRaises(ValueError):                    # zero items returns the caller EBX/ECX
+            iniciar_zonas_jogo(m, 3, 0)
+        dgroup[0x4e2f40 - 0x494000:0x4e2f42 - 0x494000] = (0x100).to_bytes(2, 'little')
+        with self.assertRaises(DependenciaRamoCore) as e:      # byte index never reaches 256 items
+            iniciar_zonas_jogo(m, 3, 0, 0, 0)
+        self.assertEqual(e.exception.endereco, 0x4719ba)
+        self.assertEqual(bytes(dgroup[0x5099b4 - 0x494000:0x50a9c0 - 0x494000]), bytes(0x100c))
 
 
 EXIBICAO = RAIZ / 'evidencias/fundacoes-quadro/captura-exibicao-quadro1.json'
@@ -331,6 +329,48 @@ class ReplayExibicaoQuadro1(unittest.TestCase):
                 bloco = bytearray(16)
                 bloco[12:16] = bytes(lidos[0x340000c + i] for i in range(4))
                 self.assertEqual(aleatorio_crt(bloco), int(chamada['exit_registers']['EAX'], 16))
+
+
+SEGUINTES = RAIZ / 'evidencias/fundacoes-quadro/captura-quadros-seguintes.json'
+SEGUINTES_SHA256 = 'f0ae7513a28e312a496531c76a7aff18aaf4dfa8868f0c920be8d8fc81dafd5c'
+
+
+class ReplayQuadrosSeguintes(unittest.TestCase):
+    """Display-reference frames 0..128: later-frame NextAnim*, InitGameZone modes, FullMap, queries."""
+    @classmethod
+    def setUpClass(cls):
+        from compactar_captura_isolada import expandir
+        dados = SEGUINTES.read_bytes()
+        if hashlib.sha256(dados).hexdigest() != SEGUINTES_SHA256:
+            raise AssertionError('Committed frames 0..128 capture changed')
+        cls.captura = json.loads(dados)
+        cls.chamadas = [expandir(c) for c in cls.captura['calls']]
+
+    def test_capture_scope(self):
+        c = self.captura
+        self.assertEqual((c['scenario'], c['translation_executed'], c['frames_run'], c['code_unchanged']),
+                         ('exibicao', False, 128, True))
+        self.assertTrue(all(c['reproduction_frames_0_1'].values()))
+        self.assertTrue(all(x['reached_return'] for x in self.chamadas))
+        modos = {x['case'] for x in self.chamadas if x['routine'] == 'InitGameZone'}
+        self.assertTrue({'mode2_mission1', 'mode2_mission7', 'mode3_five_items', 'mode4', 'mode0_invalid'} <= modos)
+        self.assertEqual(sorted({x['frame'] for x in self.chamadas if x['routine'] == 'NextAnimVegetFullMap'}),
+                         [1, 2, 64, 128])
+
+    def test_every_captured_case_replays_exactly(self):
+        for i, chamada in enumerate(self.chamadas):
+            with self.subTest(i=i, routine=chamada['routine'], frame=chamada['frame'], case=chamada['case']):
+                regs_entrada = {k: int(v, 16) for k, v in chamada['entry_registers'].items()}
+                regs_entrada.update({k: int(v, 16) for k, v in chamada['perturbation']['registers'].items()})
+                conhecidos = {int(a, 16): v for a, v, _ in chamada['read_before_write'] if v is not None}
+                m = MemoriaEsparsa(conhecidos)
+                pilha = int(chamada['exit_registers']['EDX'], 16) if chamada['routine'] == 'MouseSetZone' else None
+                saida = ROTINAS[chamada['routine']][1](m, regs_entrada, pilha, None)
+                sem_leitura = m.conferir(self, chamada['changed_bytes'])
+                if chamada['routine'] not in ('InitGameZone', 'MouseSetZone', 'MouseTestZone'):
+                    self.assertEqual(sem_leitura, 0)        # only the zone setters store unread bytes
+                esperado, nativo = dict(regs_entrada, **saida), regs(chamada['exit_registers'])
+                self.assertEqual({k: esperado[k] for k in REGISTROS}, {k: nativo[k] for k in REGISTROS})
 
 
 QUADRO1 = RAIZ / 'pesquisas-paralelas/missoes/evidencias/captura-quadro1-monde01-original.json'

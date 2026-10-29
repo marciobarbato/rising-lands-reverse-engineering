@@ -70,7 +70,15 @@ class MundoNavegacao(MundoFisico):
             raise NotImplementedError('Refaça as regiões naturais antes de inserir estruturas; remapeamento integral ainda pendente')
         regioes, atributos, quantidade = reconstruir_regioes(self.atributos, self.tiles, self.objetos,
                                                              self.marcadores_obstaculos_tiles, self.largura, self.altura)
-        self.regioes, self.atributos = regioes, atributos
+        vivas = getattr(self, 'grades_vivas', frozenset())
+        if 'regioes' in vivas:
+            self.regioes[:] = regioes          # a live grid keeps its identity
+        else:
+            self.regioes = regioes
+        if 'atributos' in vivas:
+            self.atributos[:] = atributos
+        else:
+            self.atributos = atributos
         self.busca.unidade = 0xffff
         self.busca.ocupada = self.busca.sucesso = self.busca.ponteiro_rota = 0
         for i in range(800):
