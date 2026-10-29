@@ -11,6 +11,7 @@ from pathlib import Path
 import struct
 import time
 from macos_rust_abi import Frames, FrameInput, FrameRegisters
+from macos_fast_projection import MacOSBulkProjection, MacOSGraphicsView
 from macos_m22_playback import MacOSM22Playback, MacOSPlaybackImage, CHECKPOINTS, PHASES
 from macos_state_consumer import MacOSMemoryBlock, StateValidationError, EXECUTABLE_SHA256, _sha
 
@@ -56,14 +57,16 @@ def masked_summary(state, ranges):
     starts = [a for a,z in ranges]
     for name in sorted(state):
         base, data = state[name]
-        data = bytearray(data)
-        i = max(0,bisect.bisect_right(starts,base)-1)
+        h.update(struct.pack('<II',base,len(data)))
+        cursor=0
+        i=max(0,bisect.bisect_right(starts,base)-1)
         while i<len(ranges) and ranges[i][0]<base+len(data):
-            a,z = ranges[i]
-            i += 1
-            lo,hi = max(a,base), min(z,base+len(data))
-            if lo < hi: data[lo-base:hi-base] = bytes(hi-lo)
-        h.update(struct.pack('<II',base,len(data))); h.update(data)
+            a,z=ranges[i];i+=1
+            lo,hi=max(a,base)-base,min(z,base+len(data))-base
+            if lo>=hi:continue
+            if cursor<lo:h.update(data[cursor:lo])
+            h.update(bytes(hi-lo));cursor=hi
+        if cursor<len(data):h.update(data[cursor:])
     return h.hexdigest()
 
 
@@ -86,6 +89,10 @@ class MacOSLiveSession:
         self.s0 = {n:v for n,v in self.oracle._s0.items() if n != 'native_stack'}
         self.names = {a:n for n,(a,b) in self.s0.items()}
         self.static = original_tables(executable,self.s0)
+        # Replay/hash expected states once at initialization, never in the live loop.
+        # The accepted reader still checks every summary and full checkpoint.
+        self.expected = tuple(masked_summary(state,self.ranges)
+            for _,state,_ in self.oracle._reader.fases_referencia(self.oracle._capture,self.s0))
         self.handle = None
         self.reset()
 
@@ -99,6 +106,10 @@ class MacOSLiveSession:
         try: self.abi.load(self.handle,sorted(list(self.s0.values())+list(self.static.items())))
         except Exception: self.close(); raise
         self.oracle.reset()
+        capacity=4+sum(8+len(b) for a,b in list(self.s0.values())+list(self.static.items()))
+        self.bulks=[MacOSBulkProjection(self.abi,capacity),MacOSBulkProjection(self.abi,capacity)]
+        self.bulk=self.bulks[0]
+        self.views=[MacOSGraphicsView(self.library_sha256),MacOSGraphicsView(self.library_sha256)]
         self.index = -1
         self.stop = None
         self.records = []
@@ -127,19 +138,27 @@ class MacOSLiveSession:
             self.abi.frame(self.handle,phase,self.inputs)
             rust_seconds = time.perf_counter()-t0
             t1 = time.perf_counter()
-            raw = self.abi.snapshot(self.handle)
-            if any(raw.get(a)!=b for a,b in self.static.items()):
-                raise StateValidationError('Immutable static table changed')
-            state = {self.names.get(a,f'rust_extra_{a:08x}'):(a,b) for a,b in raw.items() if a not in self.static}
-            summary = masked_summary(state,self.ranges)
-            equal = None
-            if index<=256:
-                expected = self.oracle.step_to_phase(index)
-                equal = summary == masked_summary(self.oracle._state,self.ranges)
-                if not equal: raise StateValidationError('Live masked state mismatch: '+name)
-            blocks = tuple(MacOSMemoryBlock(n,a,b,_sha(b)) for n,(a,b) in sorted(state.items(),key=lambda x:(x[1][0],x[0])))
-            image = MacOSPlaybackImage('rising-lands/macos-live/1',self.library_sha256,blocks,index,name,
-                                       self.oracle._delta.resumo(state)['sha256'],index<=256 and number in CHECKPOINTS and phase==3)
+            checkpoint=index<=256 and number in CHECKPOINTS and phase==3
+            if self.renderer is not None:
+                bulk=self.bulks[index%2].update(self.handle)
+                if any(bulk.read(a,len(b))!=b for a,b in self.static.items()):
+                    raise StateValidationError('Immutable static table changed')
+                summary=bulk.masked_summary(self.names,self.static,self.ranges)
+                equal=summary==self.expected[index] if index<=256 else None
+                if equal is False:raise StateValidationError('Live masked state mismatch: '+name)
+                image=self.views[index%2].capture(bulk,self.renderer.api,index,name,summary,checkpoint)
+            else:
+                # Explicit full immutable diagnostic path (no renderer); production
+                # and the rendered equality proof both use the persistent path above.
+                raw=self.abi.snapshot(self.handle)
+                if any(raw.get(a)!=b for a,b in self.static.items()):
+                    raise StateValidationError('Immutable static table changed')
+                state={self.names.get(a,f'rust_extra_{a:08x}'):(a,b) for a,b in raw.items() if a not in self.static}
+                summary=masked_summary(state,self.ranges)
+                equal=summary==self.expected[index] if index<=256 else None
+                if equal is False:raise StateValidationError('Live masked state mismatch: '+name)
+                blocks=tuple(MacOSMemoryBlock(n,a,b,_sha(b)) for n,(a,b) in sorted(state.items(),key=lambda x:(x[1][0],x[0])))
+                image=MacOSPlaybackImage('rising-lands/macos-live/1',self.library_sha256,blocks,index,name,summary,checkpoint)
             projection_seconds = time.perf_counter()-t1
             t2 = time.perf_counter()
             render = self.renderer.consume(image,previous if phase==2 else None) if self.renderer else None
@@ -147,14 +166,19 @@ class MacOSLiveSession:
             events = [dict(kind=e.kind,id=e.id,site=hex(e.site),args=list(e.args),result=e.result) for e in self.abi.events(self.handle)]
             record = dict(phase=name,phase_index=index,masked_state_sha256=summary,state_equal=equal,
                           checkpoint=image.checkpoint,rust_seconds=rust_seconds,projection_seconds=projection_seconds,
-                          render_seconds=render_seconds,total_seconds=time.perf_counter()-t0,render=render,events=events)
+                          render_seconds=render_seconds,projection_path='persistent-graphics-regions' if self.renderer else 'full-diagnostic',total_seconds=time.perf_counter()-t0,render=render,events=events)
             self.index,self.current = index,image
+            if self.renderer is not None:self.bulk=bulk
             self.records.append(record)
             if render and (render.get('stop') or render.get('inherited_stop')):
                 self.stop = dict(type='GraphicsDependencyStop',phase=name,detail=render.get('stop') or render.get('inherited_stop'))
         except Exception as exc:
             self.stop = dict(type=type(exc).__name__,phase=name,detail=str(exc))
         return self.current
+
+    def read(self,address,size):
+        if self.index>=0 and self.renderer is not None:return self.bulk.read(address,size)
+        return self.current.read(address,size)
 
     def inspect(self):
         result = self.current.inspect()
@@ -163,5 +187,5 @@ class MacOSLiveSession:
                       verified_phases=sum(r['state_equal'] is True for r in self.records),
                       verified_checkpoints=sum(r['checkpoint'] for r in self.records),
                       live_stop=self.stop,input_policy='record-only',phases=list(PHASES)+( [] if self.index<=256 else [self.current.phase_name]))
-        if self.renderer: result['render'] = self.renderer.present()
+        if self.renderer: result['render'] = self.renderer.present(raw=True)
         return result

@@ -5,7 +5,7 @@ function request(operation,extra={}){return new Promise((resolve,reject)=>{const
 window.receive=response=>{const p=pending.get(response.id);if(!p)return;clearTimeout(p.timer);pending.delete(response.id);response.ok?p.resolve(response.playback):p.reject(Error(response.error));};
 function row(values){const tr=document.createElement('tr');for(const v of values){const td=document.createElement('td');td.textContent=String(v);tr.append(td);}return tr;}
 function blocks(){if(!image)return;const filter=$('filter').value.toLowerCase();const found=image.memory.filter(b=>`${b.name} ${b.base}`.toLowerCase().includes(filter));$('blocks').replaceChildren(...found.slice(0,100).map(b=>row([b.name,b.base,b.bytes,b.sha256])));$('block-count').textContent=`${image.blocks} blocos · ${image.bytes} bytes · ${found.length} resultados`}
-function apply(value){image=value;$('phase').replaceChildren(...['state_s0',...value.phases].map(name=>{const o=document.createElement('option');o.value=name;o.textContent=name;return o;}));$('phase').value=value.phase;$('status').textContent=`${value.scenario}\n${value.phase} · resumo verificado · ${value.checkpoint_verified?'checkpoint igual':'sem checkpoint nesta fase'}\n${value.verified_phases}/257 fases e ${value.verified_checkpoints}/11 checkpoints verificados\nEstado: ${value.summary_sha256}`;if(value.live_stop){playing=false;$('status').textContent+='\nParada explícita: '+value.live_stop.type+' · '+value.live_stop.phase+' · '+JSON.stringify(value.live_stop.detail);}$('live-step').disabled=!live||!!value.live_stop;$('live-play').disabled=!live||!!value.live_stop;if(live){$('status').textContent=value.scenario+'\n'+value.phase+' · '+value.verified_phases+' fases iguais na janela aceita'+(value.live_stop?'\nParada explícita: '+JSON.stringify(value.live_stop):'');}$('words').replaceChildren(...Object.entries(value.observed).map(([name,w])=>row([name,w.address,w.value,`0x${w.value.toString(16)}`])));const r=value.render;$('render-status').textContent=(r.status==='full'?'Quadro completo · HUD e cursor incluídos':r.status==='partial'?'Imagem parcial · parada explícita':r.status==='undrawn'?'Fase sem desenho · superfície preservada':'Render interrompido')+'\n'+((r.stop||r.inherited_stop)?`${(r.stop||r.inherited_stop).endereco}: ${(r.stop||r.inherited_stop).detalhe}`:'')+'\n'+(r.native_phase_end_sha256===null?'Sem referência aceita de superfície nesta fase.':'HUD e cursor incluídos no domínio Graphics; cache encadeado desde a entrada do quadro 1.');$('render-image').hidden=!r.image;if(r.image)$('render-image').src=r.image;else $('render-image').removeAttribute('src');for(const id of ['phase','previous','next','go-frame','reset'])$(id).disabled=false;$('previous').disabled=value.phase_index<0;$('next').disabled=value.phase_index>=256;blocks();}
+function apply(value){image=value;$('phase').replaceChildren(...['state_s0',...value.phases].map(name=>{const o=document.createElement('option');o.value=name;o.textContent=name;return o;}));$('phase').value=value.phase;$('status').textContent=`${value.scenario}\n${value.phase} · resumo verificado · ${value.checkpoint_verified?'checkpoint igual':'sem checkpoint nesta fase'}\n${value.verified_phases}/257 fases e ${value.verified_checkpoints}/11 checkpoints verificados\nEstado: ${value.summary_sha256}`;if(value.live_stop){playing=false;$('status').textContent+='\nParada explícita: '+value.live_stop.type+' · '+value.live_stop.phase+' · '+JSON.stringify(value.live_stop.detail);}$('live-step').disabled=!live||!!value.live_stop;$('live-play').disabled=!live||!!value.live_stop;if(live){$('status').textContent=value.scenario+'\n'+value.phase+' · '+value.verified_phases+' fases iguais na janela aceita'+(value.live_stop?'\nParada explícita: '+JSON.stringify(value.live_stop):'');}$('words').replaceChildren(...Object.entries(value.observed).map(([name,w])=>row([name,w.address,w.value,`0x${w.value.toString(16)}`])));const r=value.render;$('render-status').textContent=(r.status==='full'?'Quadro completo · HUD e cursor incluídos':r.status==='partial'?'Imagem parcial · parada explícita':r.status==='undrawn'?'Fase sem desenho · superfície preservada':'Render interrompido')+'\n'+((r.stop||r.inherited_stop)?`${(r.stop||r.inherited_stop).endereco}: ${(r.stop||r.inherited_stop).detalhe}`:'')+'\n'+(r.native_phase_end_sha256===null?'Sem referência aceita de superfície nesta fase.':'HUD e cursor incluídos no domínio Graphics; cache encadeado desde a entrada do quadro 1.');if(r.frame){drawRawFrame(r.frame);$('render-image').hidden=true;}else{$('render-canvas').hidden=true;$('render-image').hidden=!r.image;if(r.image)$('render-image').src=r.image;else $('render-image').removeAttribute('src');}for(const id of ['phase','previous','next','go-frame','reset'])$(id).disabled=false;$('previous').disabled=value.phase_index<0;$('next').disabled=value.phase_index>=256;blocks();}
 async function run(operation,extra={}){try{for(const id of ['phase','previous','next','go-frame','reset'])$(id).disabled=true;apply(await request(operation,extra));return true;}catch(e){if(image)apply(image);playing=false;$('live-step').disabled=true;$('live-play').disabled=true;$('status').textContent='Falha na inspeção: '+e.message;return false;}}
 $('phase').onchange=()=>{live=false;playing=false;return run('phase',{phase:$('phase').value});};$('previous').onclick=()=>run('phase',{phase:image.phase_index===0?'state_s0':image.phase_index-1});$('next').onclick=()=>run('phase',{phase:image.phase_index+1});$('go-frame').onclick=()=>run('frame',{frame:Number($('frame').value)});$('reset').onclick=()=>run('reset');$('filter').oninput=blocks;$('read-form').onsubmit=async event=>{event.preventDefault();try{const r=await request('read',{address:$('address').value,size:Number($('size').value)});$('read-result').textContent=r.read_hex;}catch(e){$('read-result').textContent=e.message;}};
 window.runSmokeTests=async()=>{
@@ -37,7 +37,17 @@ window.runSmokeTests=async()=>{
  $('live-step').click();await until(()=>image.phase==='load_tail'&&!$('live-step').disabled,'live load tail');
  $('live-step').click();await until(()=>image.phase==='frame1'&&!$('live-step').disabled,'live frame1');
  check('Rust live frame1 state and full native surface equal',image.verified_phases===3&&image.render.equals_native_phase_end===true&&!image.live_stop);
- return {passed:true,tests,commit:image.commit,scenario:image.scenario,render:image.render.status};
+ check('live uses raw indexed canvas and no PNG',!rawCanvas.hidden&&$('render-image').hidden&&!!image.render.frame&&!image.render.image&&rawSequence===image.phase_index);
+ const actual=rawContext.getImageData(0,0,800,600).data;
+ check('native canvas readback equals every raw RGBA byte',actual.every((v,i)=>v===rawImage.data[i]));
+ const liveStarted=performance.now();
+ for(let n=2;n<=16;n++){
+  $('live-step').click();await until(()=>image.phase==='frame'+n&&!$('live-step').disabled,'live frame '+n);
+ }
+ check('raw live UI chain reaches frame16',image.verified_phases===33&&image.render.equals_native_phase_end===true&&rawSequence===32&&!image.live_stop);
+ const liveSeconds=(performance.now()-liveStarted)/1000;
+
+ return {passed:true,tests,commit:image.commit,scenario:image.scenario,render:image.render.status,liveFramesPerSecond:15/liveSeconds,rawTransferMilliseconds:rawTransferTimes};
 };
 window.playbackReady=run('open').then(()=>{
  if(!image||image.verified_phases!==257||image.verified_checkpoints!==11){window.signalAppInitializationFailure('Playback worker did not initialize');return;}
@@ -50,13 +60,30 @@ $('live-play').onclick=async()=>{playing=!playing;$('live-play').textContent=pla
 for(const id of ['phase','previous','next','go-frame','reset'])$(id).addEventListener('click',()=>{live=false;playing=false;});
 const vkeys={Enter:13,Shift:16,Control:17,Alt:18,Escape:27,' ':32,ArrowLeft:37,ArrowUp:38,ArrowRight:39,ArrowDown:40,Delete:46,x:88,X:88};
 function record(event){request('record-event',{event}).then(r=>{$('input-status').textContent='Somente gravação · quadro '+r.frame;}).catch(e=>{$('input-status').textContent=e.message;});}
-const surface=$('render-image');
+for(const surface of [$('render-image'),$('render-canvas')]){
 for(const [type,msg] of [['mousemove',0x200],['mousedown',0x201],['mouseup',0x202]])surface.addEventListener(type,e=>{e.preventDefault();surface.focus();const box=surface.getBoundingClientRect();let m=msg;if(type==='mousedown'&&e.button===0&&e.detail>1&&e.detail%2===0)m=0x203;if(type==='mousedown'&&e.button===2)m=0x204;if(type==='mouseup'&&e.button===2)m=0x205;if(e.button===1&&type!=='mousemove')return;const w=(e.buttons&1?1:0)|(e.buttons&2?2:0)|(e.shiftKey?4:0)|(e.ctrlKey?8:0);record({kind:'mouse',msg:m,x:Math.floor((e.clientX-box.left)*800/box.width),y:Math.floor((e.clientY-box.top)*600/box.height),wParam:w});});
 const heldVkeys=new Set();
 for(const [type,down] of [['keydown',true],['keyup',false]])surface.addEventListener(type,e=>{if(vkeys[e.key]===undefined)return;e.preventDefault();if(down)heldVkeys.add(vkeys[e.key]);else heldVkeys.delete(vkeys[e.key]);record({kind:'key',vkey:vkeys[e.key],down});});
 surface.addEventListener('blur',()=>{for(const vkey of heldVkeys)record({kind:'key',vkey,down:false});heldVkeys.clear();});
+surface.addEventListener('contextmenu',e=>e.preventDefault());
+
+}
 function download(value,name){return new Promise((resolve,reject)=>{const id=++seq;const timer=setTimeout(()=>{pending.delete(id);reject(Error('Tempo limite na exportação.'));},180000);pending.set(id,{resolve,reject,timer});window.webkit.messageHandlers.engine.postMessage({id,action:'saveInput',content:value,script:name==='monde01-input.json'});});}
 $('export-input').onclick=async()=>{try{const r=await request('export-input');await download(r.script,'monde01-input.json');}catch(e){$('input-status').textContent='Exportação interrompida: '+e.message;}};
 $('export-journal').onclick=async()=>{try{const r=await request('export-journal');await download(r.input_journal,'monde01-macos-journal.json');}catch(e){$('input-status').textContent=e.message;}};
 
-surface.addEventListener('contextmenu',e=>e.preventDefault());
+
+const rawCanvas=$('render-canvas'),rawContext=rawCanvas.getContext('2d',{alpha:false});
+const rawImage=rawContext.createImageData(800,600),rawWords=new Uint32Array(rawImage.data.buffer);
+const rawIndices=new Uint8Array(480000),rawPaletteBytes=new Uint8Array(1024),rawPaletteWords=new Uint32Array(rawPaletteBytes.buffer);
+let paletteIdentity=null,rawSequence=-1,rawTransferTimes=[];
+function drawRawFrame(frame){
+ const started=performance.now();
+ if(frame.format!=='indexed8-rgb24/1'||frame.width!==800||frame.height!==600||frame.stride!==800)throw Error('Formato de quadro incompatível.');
+ const pixels=atob(frame.pixels);
+ if(pixels.length!==480000)throw Error('Quadro incompleto.');
+ if(frame.palette!==paletteIdentity){const palette=atob(frame.palette);if(palette.length!==768)throw Error('Paleta incompleta.');for(let i=0;i<256;i++){rawPaletteBytes[i*4]=palette.charCodeAt(i*3);rawPaletteBytes[i*4+1]=palette.charCodeAt(i*3+1);rawPaletteBytes[i*4+2]=palette.charCodeAt(i*3+2);rawPaletteBytes[i*4+3]=255;}paletteIdentity=frame.palette;}
+ for(let i=0;i<480000;i++){const index=pixels.charCodeAt(i);rawIndices[i]=index;rawWords[i]=rawPaletteWords[index];}
+ rawContext.putImageData(rawImage,0,0);rawCanvas.hidden=false;rawSequence=frame.generation;
+ rawTransferTimes.push(performance.now()-started);if(rawTransferTimes.length>256)rawTransferTimes.shift();
+}

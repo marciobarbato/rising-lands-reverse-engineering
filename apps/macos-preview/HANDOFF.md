@@ -840,3 +840,40 @@ The final evidence/docs commit changes no executable app code after the 901b95c
 build. Its [structured delivery](validation/m3-live-delivery.json) records
 artifact and screenshot hashes. Feature push only; no main integration or
 formal acceptance is recorded.
+
+## Live pipeline performance follow-up (macOS-owned paths)
+
+The accepted f508a52 delivery is preserved. This stage starts from integrated
+`23dfd6e` and changes only the macOS front; the engine/Graphics reconstruction
+is unchanged. The proposed C renderer interface is in
+[Renderer port input](../../docs/MACOS_PLAYABLE.md#renderer-port-input).
+
+ABI 1.1 `rl_projetar_tudo` has no region filter and always packs the entire
+world. The adapter now calls it once per phase into alternating reusable caller
+buffers (the second buffer preserves the last published state if later
+projection/verification/rendering fails). Only Graphics' 18 declared regions,
+1,746,372 bytes, are copied into two reusable read-only views. The 25,197 full
+memory blocks are not copied into Python objects or rehashed individually.
+Full masked state verification streams directly over the bulk projection;
+expected hashes are prepared once from accepted evidence before stepping.
+Views are serial leases until reuse, not immutable snapshots retained forever;
+accepted M1/M2 playback remains immutable. Arbitrary current-address inspection
+reads the last successfully published full bulk buffer. Layout/pointer changes
+are revalidated, and missing ranges fail before render publication.
+
+The same fast path runs in the UI and rendered proof. Raw presentation carries
+800×600 indexed bytes and the original RGB24 palette in a versioned packet;
+JavaScript reuses ImageData/palette/index buffers and calls putImageData.
+PNG compression is absent from live transfer. It remains available through
+explicit `validate_live_macos.py --png-output PATH` evidence export and the
+unchanged immutable playback inspector. Economy's unchanged read definitions
+and the hash-checked palette are cached per archive, not reparsed/reread for
+every frame. No drawing algorithm or engine behavior is replaced here.
+
+The initial 128-frame fast-path run passed 257 states, 11 checkpoints, 128 full
+surfaces and 128 decoded raw-transfer surfaces. Every masked state hash also
+exactly equals the preceding f508a52 proof. Preliminary rate: 7.623 fps vs
+1.155 fps (bundled CPython 3.12, shared heavy lease). Final committed build,
+raw native-canvas checks, phase/transfer timings and common maintenance gate
+will be recorded below. This preliminary run used one bulk buffer; the final
+implementation deliberately uses two to preserve failed-publication isolation.
