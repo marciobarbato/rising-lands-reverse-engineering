@@ -135,3 +135,38 @@ Combat's matrix (`e3f0f8b`) reads main `99c0e4e`, which predates `ffa62fd`…`5b
 - DeplaceEngin and the movement routines;
 - SetDeplaceEngin and EnginEstVivant (V_DeplaceGroupe);
 - GetFreeCell's native stack-residue contract.
+
+## Later raid rules and the unit's arrival (round 4)
+
+These two captures ran on the MacBook under the new lease (3 work-hour slots; native runs up to 20 minutes). Both are original only, with the forced counter-9000 input, run sequentially in parallel.
+
+| Capture | Content | Time |
+|---|---|---|
+| `evidencias/captura-regras-incursao-ia.json` | 19 rule calls at counters 9500, 9700, 10200, 11100 and 11101 | 208 s |
+| `evidencias/captura-proxima-etapa-chegada-ia.json` | 9 EnginNextEtape calls of unit 16 at 10523–10531 | 164 s |
+
+**Rule calls by counter:**
+
+| Counter | Rule calls |
+|---|---|
+| 9500, 10200 | I_DonnePositionGroupe (→ EnginGetCase), V_DeplaceGroupe, B_AttenteConflit (re-post) |
+| 9700 | I_Soustraction, B_Egalite (Core's VM), V_DeplaceGroupe, B_AttenteConflit |
+| 11100 | I_Soustraction, B_Egalite, B_TestGroupeVide, V_FreeConflit (→ iagWarDeleteBattle), V_iaMonstreAttendLaReponse… (mode 1: the group is re-queued and its action entry removed) |
+| 11101 | B_TestGroupeVide, B_NewConflit at ambush cell `0x320e`, V_DeplaceGroupe, B_AttenteConflit |
+
+**New translations** in `regras_incursao_ia`:
+- I_DonnePositionGroupe;
+- V_FreeConflit and iagWarDeleteBattle;
+- V_iaMonstreAttendLaReponse…, with mode 1 re-queuing, mode 0 subtracting the monster count, and the action-table compaction.
+
+**Arrival** (`proxima_etapa_quadro`): at its target cell, with facing `+0x91` equal to `+0x90`, the unit calls EnginEnArret (Core). When that is nonzero and the state is neither 0 nor 4, the state becomes 7. Named stops:
+- facing change (`0x455a6f`);
+- EnginEnArret returning 0 (`0x456408`);
+- the path-search unit (`0x4564c8`).
+
+**Differentials:**
+- **Rules:** `test_regras_incursao_ia` finds all 25 captured rule calls equal (9000 through 11101).
+- **Raid unit:** `test_proxima_etapa_incursao_ia` finds all 21 calls equal: 9000–9011, moving 10523–10527, arrival at 10528, and state 7 at 10529–10531 through Economy's `estado_parado_unidade`, whose own Random draw matches the native one.
+- **Mutation check:** three mutations of the new rules fail the test.
+
+**Not covered yet:** the AvanceMonstre ambush re-post at 11101 (`StockeAction(0x2e)`). It is translated but not captured. A third capture of AvanceMonstre at 11101 can follow.
