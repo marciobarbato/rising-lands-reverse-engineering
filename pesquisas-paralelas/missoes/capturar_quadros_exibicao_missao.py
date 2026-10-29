@@ -67,12 +67,52 @@ DECISOES = dict(
     comparison_mask='only the cumulative mask of politica_comparacao_quadros.py --quadros N may exclude bytes')
 
 
+def sem_caminho_host(valor):
+    """Provenance strings naming a host path to the read-only media become workspace-relative ('source/...').
+
+    Only provenance metadata carries these paths; no host path reaches emulated memory or a hashed input."""
+    if isinstance(valor, dict):
+        return {k: sem_caminho_host(v) for k, v in valor.items()}
+    if isinstance(valor, list):
+        return [sem_caminho_host(v) for v in valor]
+    if isinstance(valor, str) and valor.startswith('/') and '/source/' in valor:
+        return 'source/' + valor.split('/source/', 1)[1]
+    return valor
+
+
 def ler(b, endereco, largura):
     return int.from_bytes(bytes(b.cpu.mem_read(endereco, largura)), 'little')
 
 
 def observar(b):
     return {nome: hex(ler(b, a, n)) for nome, a, n in PALAVRAS}
+
+
+def registrar_fase(b, nome, regs, antes, depois, anterior, imagem, ddcalls, checkpoints, segundos):
+    """One phase record of the capture (shared with the segmented runs of segmentos_quadros_missao)."""
+    registro = dict(
+        phase=nome, seconds=segundos, entry=antes, exit=depois,
+        stop=hex(regs['EIP']),
+        stop_routine='bench caller trampoline (load-state CalculGame called by the bench, as in M1)'
+        if regs['EIP'] == RETORNO else b.nome(regs['EIP']),
+        bindings=c.eventos_json(b.vinculos_declarados.eventos[antes['bindings']:depois['bindings']]),
+        binding_counts=c._contar(b.vinculos_declarados.eventos[antes['bindings']:depois['bindings']]),
+        boundaries=b.eventos_fronteira[antes['boundaries']:depois['boundaries']],
+        windows_answers=[list(x) for x in b.windows.consumidos[antes['windows_answers']:depois['windows_answers']]],
+        clock_answers=[list(x) for x in b.windows.consumidos[antes['windows_answers']:depois['windows_answers']]
+                       if x[0] == 'clock'],
+        allocations_created=depois['allocations']-antes['allocations'],
+        display_state=b.estado_exibicao(), directdraw_calls=b.chamadas_exibicao()[ddcalls:],
+        observed=observar(b),
+        state_delta=delta.delta(anterior, imagem),
+        state_after=dict(summary=b.resumo_imagem(imagem)))
+    if nome == 'between_frames':
+        registro['declared_caller_frame'] = b.declaracao_chamador
+    if nome.startswith('frame') and int(nome[5:]) in checkpoints:
+        registro['state_after']['full_state'] = delta.estado_completo(imagem)
+    if registro['observed']['cd_audio_flag_0x4e2f28'] != '0x0':
+        raise RuntimeError(f'{nome}: [0x4e2f28] left the declared no-CD-audio value')
+    return registro
 
 
 def comparar_m21(fase, registro, referencia):
@@ -122,6 +162,7 @@ def main():
     referencia_m21 = {f['phase']: f for f in q1['phases']}
     fill, clock = m1['named_inputs']['allocation_fill'], m1['named_inputs']['clock_ms'][0]
     b, _, named = cenarios_oraculo.bancada('exibicao', fill, clock, segundos=300)
+    named = sem_caminho_host(named)
     named['cd_audio'] = AUDIO_CD
     relatorio = dict(
         schema='rising-lands/monde01-n-frame-original-capture-delta/1', original_sha256=HASH_ORIGINAL,
@@ -167,29 +208,9 @@ def main():
             fase = nome
             depois = b._estado_fase()
             imagem = b.imagem()
-            registro = dict(
-                phase=nome, seconds=round(time.monotonic()-t, 3), entry=antes, exit=depois,
-                stop=hex(regs['EIP']),
-                stop_routine='bench caller trampoline (load-state CalculGame called by the bench, as in M1)'
-                if regs['EIP'] == RETORNO else b.nome(regs['EIP']),
-                bindings=c.eventos_json(b.vinculos_declarados.eventos[antes['bindings']:depois['bindings']]),
-                binding_counts=c._contar(b.vinculos_declarados.eventos[antes['bindings']:depois['bindings']]),
-                boundaries=b.eventos_fronteira[antes['boundaries']:depois['boundaries']],
-                windows_answers=[list(x) for x in b.windows.consumidos[antes['windows_answers']:depois['windows_answers']]],
-                clock_answers=[list(x) for x in b.windows.consumidos[antes['windows_answers']:depois['windows_answers']]
-                               if x[0] == 'clock'],
-                allocations_created=depois['allocations']-antes['allocations'],
-                display_state=b.estado_exibicao(), directdraw_calls=b.chamadas_exibicao()[ddcalls:],
-                observed=observar(b),
-                state_delta=delta.delta(anterior, imagem),
-                state_after=dict(summary=b.resumo_imagem(imagem)))
+            registro = registrar_fase(b, nome, regs, antes, depois, anterior, imagem, ddcalls, checkpoints,
+                                      round(time.monotonic()-t, 3))
             ddcalls = len(b.chamadas_exibicao())
-            if nome == 'between_frames':
-                registro['declared_caller_frame'] = b.declaracao_chamador
-            if nome.startswith('frame') and int(nome[5:]) in checkpoints:
-                registro['state_after']['full_state'] = delta.estado_completo(imagem)
-            if registro['observed']['cd_audio_flag_0x4e2f28'] != '0x0':
-                raise RuntimeError(f'{nome}: [0x4e2f28] left the declared no-CD-audio value')
             if nome in referencia_m21:
                 m21[nome] = comparar_m21(nome, registro, referencia_m21[nome])
                 if m21[nome]:
