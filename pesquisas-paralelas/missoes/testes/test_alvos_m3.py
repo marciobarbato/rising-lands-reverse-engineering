@@ -10,7 +10,7 @@ from pathlib import Path
 import sys
 import unittest
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'm3'))
 import extrair_alvos_m3 as alvos  # noqa: E402
 
 TEM_CAPTURAS = alvos.CAPTURA_128.exists() and alvos.CAPTURA_M1.exists()
