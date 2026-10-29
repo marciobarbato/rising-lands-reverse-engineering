@@ -74,7 +74,7 @@ class QuadroTest(unittest.TestCase):
     def test_contract_shape(self):
         q, _ = self.renderizar()
         self.assertEqual((q.versao, q.largura, q.altura), (Q.VERSAO_RENDER_QUADRO, 800, 600))
-        self.assertEqual(Q.VERSAO_RENDER_QUADRO, (1, 3))
+        self.assertEqual(Q.VERSAO_RENDER_QUADRO, (1, 4))
         pal = Q.Catalogo().paleta()
         self.assertEqual(len(pal), 768)
         for i in (0, 4000, 123456, 479999):    # rgba = palette[index] expanded to RGB, alpha 255, row-major, origin top-left
@@ -206,6 +206,18 @@ class SequenciaTest(unittest.TestCase):
             self.assertTrue(r['over_native_previous']['equals_native_checkpoint'])
             self.assertIsNone(r['chained']['stop'])
             if r['chained']['pixels']: self.assertGreaterEqual(r['chained']['first_row'], 544)
+
+    def test_chain_verification_report_api_1_4_full_surface(self):
+        # hud=True: the chained render is compared with the original's FULL end-of-phase surface (Missions' recorded hash).
+        d = json.loads((EVID/'verificacao-cadeia-m22-v2-api14-128.json').read_text())
+        self.assertEqual((d['frames'], d['render_api_version'], d['hud'], d['first_stop'], len(d['rows'])), (128, [1, 4], True, None, 128))
+        self.assertIsNone(d['first_chained_difference_frame'])
+        self.assertEqual(d['chained_equals_recorded_count'], 128)
+        for r in d['rows']:
+            self.assertTrue(r['end_hash_equals_recorded'] and r['chain_cache_equals_native_entry_cache'])
+            self.assertTrue(r['chained_sha256_equals_recorded'] and r['chain_input_equals_native_previous'])
+            self.assertTrue(r['over_native_previous']['equals_native_full_surface'] and r['chained']['equals_native_full_surface'])
+            self.assertIsNone(r['chained']['stop'])
 
     def test_cache_state_is_carried(self):
         fx = Fixture(FIXTURE)
