@@ -142,6 +142,8 @@ Routines with a flat translation (SetEnginCollision, SetCollision, Chemin_Modifi
 - The validator also runs every world adapter on it and compares with the native result.
 - `MundoNavegacao.deslocar` is DeplaceEngin exactly: the +0x88 switch of table `0x4492f0`.
 
+**Inside ai-runtime's chain.** There the memory is Missions' map wrapped by `MemoriaMapaM1`, and the tiles, regions and structure-colour stack are list-backed segments. `mundo_vivo` adopts those lists by identity (`grade_u16_viva`), so it and `prov.mundo` share the grids. Scalars are bytes, so a composition that also uses `prov.mundo` pulls (`mapa.puxar()`) after these providers run and pushes before. `MundoVivoNaComposicao` tests this.
+
 **Live movement providers** (`provedores_core`, built on `mundo_vivo` at first use):
 - SetDeplaceEngin(`unidade`, `destino`) and ResetOrdre(`unidade`) → EAX = the unit record address (every path ends there; the captured calls agree);
 - DeplaceEngin, CalculNextCase, AvanceEngin, RotateEngin, EnginNextCase, EnginNextCaseChemin (`unidade`);
