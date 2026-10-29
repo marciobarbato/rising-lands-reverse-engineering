@@ -14,7 +14,8 @@ original-only records (read from a pinned git ref, never merged):
   of units 11..15 (SHA-256 prefix, cell, state and order fields); DGROUP's SHA-256 is reported, not required
   (DGROUP holds display-only bytes of the published mask).
 
-The run stops at the first difference or at the first ``DependenciaIA`` and reports it. This is an indicator-
+The run stops at the first difference, at the first ``DependenciaIA`` or at Graphics' display-path named stop
+(``efeitos_logicos_exibicao.DependenciaExibicao``, reported with owner ``graphics``) and reports it. This is an indicator-
 level check: the per-phase whole-state comparison under the published mask needs the probes' pass-2 delta
 captures (``docs/M3_PLAN.md`` §2), which do not exist yet.
 
@@ -41,7 +42,8 @@ SONDAS = 'pesquisas-paralelas/missoes/m3'
 UNIDADES = (11, 12, 13, 14, 15)
 FONTES = tuple(f'pesquisas-paralelas/ia-runtime/{n}' for n in (
     'provar_entrada_ia.py', 'composicao_entrada_ia.py', 'entrada_ordens_ia.py', 'provedores_entrada_ia.py',
-    'composicao_quadros_ia.py', 'composicao_encadeada_ia.py', 'affgame_hud_ia.py', 'proxima_etapa_quadro.py'))
+    'composicao_quadros_ia.py', 'composicao_encadeada_ia.py', 'affgame_hud_ia.py', 'proxima_etapa_quadro.py',
+    'construcao_entrada_ia.py'))
 
 
 def git_show(ref, caminho):
@@ -121,6 +123,7 @@ def main():
     from composicao_quadros_ia import carregar_cenario_exibicao
     from composicao_encadeada_ia import MemoriaMapaRapida
     from reinicio_ia import DependenciaIA
+    from efeitos_logicos_exibicao import DependenciaExibicao      # Graphics' display-path named stop
     ap = argparse.ArgumentParser()
     ap.add_argument('--sonda', required=True)
     ap.add_argument('--ref', required=True, help='git ref holding the probe (read with git show, never merged)')
@@ -178,8 +181,11 @@ def main():
                 if dif:
                     primeira_diferenca = dict(frame=k, differences=dif)
                     break
-    except DependenciaIA as erro:
-        parada = dict(frame=k, dependency=str(erro))
+    except (DependenciaIA, DependenciaExibicao) as erro:
+        fase = (f'frame{k}' if r['phase'].startswith('between') else f'between_frames{k + 1}') if k > 128 else \
+            'between_frames129'
+        parada = dict(frame=k if fase.startswith('frame') else k + 1, phase=fase, dependency=str(erro),
+                      owner='graphics' if isinstance(erro, DependenciaExibicao) else None)
         if r['phase'].startswith('between'):           # the stop is inside frame k's CalculGame
             ordens_k = [(o.get('event', 'SetPlayerOrdre'), o['tag'], o.get('word2'), o.get('word4'), o.get('word6'),
                          o.get('word8'), o.get('jump_target')) for o in getattr(comp, 'ordens_fase', [])]

@@ -55,13 +55,101 @@ def _ataque_combate(m, core):
     return provedor
 
 
-def construcao_core(m):
+def construcao_core(m, bonus=None):
     """Core's ConstrucaoCore over ``m``, or None when ``construcao_core`` is not importable yet."""
     try:
         from construcao_core import ConstrucaoCore
     except ImportError:
         return None
-    return ConstrucaoCore(m)
+    return ConstrucaoCore(m, bonus=bonus)
+
+
+class _MundoMinimapa:
+    """Core's live world (``mundo_vivo``) for Core's ``minimapa_estruturas.modificar_minimapa_estrutura``, with the
+    structure pool handed as an immutable snapshot taken at the call (the routine reads it and writes none of it;
+    a write would raise). Every other attribute is the live world's."""
+
+    def __init__(self, mundo, m):
+        self._mundo = mundo
+        self.estruturas = bytes(m.vista(0x49a0c8, 276000))
+
+    def __getattr__(self, nome):
+        return getattr(self._mundo, nome)
+
+
+def construcao_viva(m, *, som, bonus, provedores_nucleo=None):
+    """``construcao_entrada_ia.ConstrucaoEntrada`` over ``m`` with the committed owners:
+    - Economy ``ordens_economia.OrdensEconomia.calcul_construire_batiment`` with Core's ``selecao_ordens`` and
+      ``construcao_core`` callees (``provedor_core(..., provedor_construcao(...))``; without ``construcao_core`` the
+      walk stops at DeplaceEngin, a named dependency);
+    - Core ``chamadas_quadro_core.provedores_core`` (or ``provedores_nucleo``, the caller's same-named dict):
+      RotateEngin, SetDeplaceEngin, CalculDirCase, Random, TerrainEstDecouvert; Core ``selecao_ordens``:
+      EnginGetVolume, BatimentGetVolume; Core ``minimapa_estruturas``: BatimentModifyMap over the live world;
+    - Combat ``projeteis.PoolProjeteis.iniciar`` over the live pool [0x5080f0]: ProjectileInit;
+    - ``som(nome, registradores, pilha) -> EAX``: the sound-library boundary (PlaySnd_PostSound).
+    ``bonus(jogador, tipo, seletor) -> value`` is Economy's BonusGetValEngin (Core's CalculFatigue in DeplaceEngin).
+    Not provided (named dependencies): BatimentHabitable, SetMurAllentour."""
+    from chamadas_quadro_core import provedores_core
+    from construcao_entrada_ia import ConstrucaoEntrada
+    from ordens_economia import OrdensEconomia, provedor_core
+    from projeteis import PoolProjeteis
+    from reinicio_ia import DependenciaIA
+    from selecao_ordens import SelecaoOrdens
+    core = SelecaoOrdens(m, som=som)
+    nucleo = provedores_nucleo if provedores_nucleo is not None else provedores_core(m, bonus)
+    cc = construcao_core(m, bonus=bonus)
+    outros = None
+    if cc is not None:
+        from construcao_core import provedor_construcao
+        outros = provedor_construcao(cc)
+    economia = OrdensEconomia(m, externo=provedor_core(core, outros))
+    estado = {}
+
+    def mundo():
+        if 'mundo' not in estado:
+            from mundo_vivo import mundo_vivo
+            from solucionador_vivo import SolucionadorCaminhosVivo
+            estado['mundo'] = mundo_vivo(m, SolucionadorCaminhosVivo(m))
+        return estado['mundo']
+
+    def modificar_mapa(r):
+        from minimapa_estruturas import modificar_minimapa_estrutura
+        modificar_minimapa_estrutura(_MundoMinimapa(mundo(), m), r['EAX'] & 0xffff, r['EDX'] & 0xff)
+        return dict(EAX=None)
+
+    def projetil(r):
+        PoolProjeteis(memoria=m.vista(m.u32(0x5080f0), 5600)).iniciar(
+            r['EAX'] & 0xff, r['EDX'] & 0xffff, r['EBX'] & 0xffff, r['ECX'] & 0xff, *r['pilha'])
+        return dict(EAX=None, EBX=None, ECX=None, EDX=None)
+
+    funcoes = {
+        'RotateEngin': lambda r: dict(EAX=nucleo['RotateEngin'](sitio=0, unidade=r['EAX'] & 0xffff)),
+        'SetDeplaceEngin': lambda r: dict(EAX=nucleo['SetDeplaceEngin'](sitio=0, unidade=r['EAX'] & 0xffff,
+                                                                          destino=r['EDX'] & 0xffff)),
+        'CalculDirCase': lambda r: dict(EAX=nucleo['CalculDirCase'](sitio=0, caso=r['EAX'] & 0xffff,
+                                                                      direcao=r['EDX'] & 0xff)),
+        'Random': lambda r: dict(EAX=nucleo['Random'](sitio=0)),
+        'TerrainEstDecouvert': lambda r: dict(EAX=nucleo['TerrainEstDecouvert'](sitio=0, caso=r['EAX'],
+                                                                                  jogador=r['EDX'])),
+        'EnginGetVolume': lambda r: dict(EAX=core._volume_unidade(r['EAX'] & 0xffff)),
+        'BatimentGetVolume': lambda r: dict(EAX=core._volume_estrutura(r['EAX'] & 0xffff)),
+        'BatimentModifyMap': modificar_mapa,
+        'ProjectileInit': projetil,
+        'PlaySnd_PostSound': lambda r: dict(EAX=som('PlaySnd_PostSound', {k: r[k] & M32 for k in
+                                                                          ('EAX', 'EDX', 'EBX', 'ECX')},
+                                                    list(r['pilha']))),
+    }
+
+    def externo(nome, sitio, regs):
+        f = funcoes.get(nome)
+        if f is None:
+            raise DependenciaIA(nome, sitio)
+        return f(regs)
+
+    def calcul(regs):
+        return economia.calcul_construire_batiment(dict({k: (regs.get(k) or 0) & M32 for k in REG7},
+                                                        ESP=ESP_CHAMADA))
+    return ConstrucaoEntrada(m, externo, calcul)
 
 
 def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None):

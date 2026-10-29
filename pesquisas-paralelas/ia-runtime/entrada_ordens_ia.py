@@ -53,6 +53,7 @@ UNIDADE_SOB, ESTRUTURA_SOB = 0x496ac2, 0x496ac4
 CURSOR_ID, CURSOR_ANIM = 0x49a010, 0x49a014
 VISTA = 0x508720                 # u16 x, y, width, height
 LARGURA_MAPA, ALTURA_MAPA = 0x497168, 0x49716a
+GRUPO, ESTADO_JOGO = 0x49a05a, 0x4e2f78   # WndProc's digit key; CalculGame's state (0x12 = playing)
 ICONES = 0x4e2410                # 10 slots of (u16 id, u16 active, u16 extra)
 
 
@@ -63,6 +64,11 @@ def _parar(descricao, endereco):
 def _s16(v):
     v &= 0xffff
     return v - 0x10000 if v & 0x8000 else v
+
+
+def _s8(v):
+    v &= 0xff
+    return v - 0x100 if v & 0x80 else v
 
 
 def _s32(v):
@@ -384,9 +390,82 @@ class Entrada:
             m.u8(B1, 1)
         elif msg == 0x205:
             m.u8(B2, 1)
+        elif msg == 0x100:
+            wparam = self._tecla_baixo(wparam)
+        elif msg == 0x101:
+            r = self._tecla_cima(regs, wparam, lparam)
+            if r is not None:
+                return r
         else:
             _parar(f'WndProc message 0x{msg:x}', 0x4181b5)
         return dict(regs, EAX=0, EBX=regs['EBX'], ECX=lparam, EDX=wparam)
+
+    def _tecla_baixo(self, wparam):
+        """WM_KEYDOWN 0x418301 (in game state 0x12 only): digits 1..9 store [0x49a05a] = digit (DL -= 0x30, EDX
+        keeps the result), F1..F4 [0x497284] = 1..4. VK_ADD/VK_SUBTRACT (zoom) and F11 are named stops past their
+        gates. Returns EDX."""
+        m = self.m
+        if m.u8(ESTADO_JOGO) != 0x12:
+            return wparam
+        if 0x31 <= wparam <= 0x39:
+            m.u8(GRUPO, wparam - 0x30)
+            return (wparam & 0xffffff00) | ((wparam - 0x30) & 0xff)
+        if 0x70 <= wparam <= 0x73:
+            m.u8(0x497284, wparam - 0x6f)
+        elif wparam == 0x6b:
+            if _s8(m.u8(0x508f90)) > 0 and m.u16(0x49a018) == 0x320:
+                _parar('WndProc VK_ADD zoom (InitGameZone/SetClipping)', 0x418374)
+        elif wparam == 0x6d:
+            if _s8(m.u8(0x508f90)) < 3 and m.u16(0x49a018) == 0x320:
+                _parar('WndProc VK_SUBTRACT zoom (MiniMapRecentre)', 0x41843e)
+        elif wparam == 0x7a:
+            _parar('WndProc F11 (ResetMode, MiniMapRecentre)', 0x418488)
+        return wparam
+
+    def _tecla_cima(self, regs, wparam, lparam):
+        """WM_KEYUP 0x4182eb: F5 (0x74) without a network ([0x4e0730] = 0, ReseauActif) steps [0x49a05b] mod 4
+        (EDX = the remainder); Tab (9) toggles [0x497285] and calls InitGameZone(1, 0) (Core). Returns the exit
+        registers when they differ from the plain exit, else None."""
+        m = self.m
+        if wparam == 0x74:
+            if self.reseau_actif(dict(regs, EAX=0x101, EDX=wparam, ECX=lparam))['EAX'] & 0xff:
+                return None
+            _, resto = _idiv(m.u8(0x49a05b) + 1, 4)
+            m.u8(0x49a05b, resto)
+            return dict(regs, EAX=0, ECX=lparam, EDX=resto)
+        if wparam == 9:
+            m.u8(0x497285, int(m.u8(0x497285) == 0))
+            saida = self.p('InitGameZone', 0x4182bb, eax=1, edx=0)
+            return dict(regs, EAX=0, ECX=None, EDX=None) if saida is None else dict(
+                regs, EAX=0, ECX=saida.get('ECX'), EDX=saida.get('EDX'))
+        return None
+
+    def reseau_actif(self, regs):
+        """ReseauActif 0x42c3b0: AL = [0x4e0730]."""
+        return dict(regs, EAX=_baixo(regs['EAX'], self.m.u8(0x4e0730)))
+
+    def go_last_attaque(self, regs):
+        """GoLastAttaque 0x440b63 (EAX, EDX: the view word addresses): within 1,000 cycles (unsigned) of the last
+        attack [0x4e19c0] at a cell [0x496acc] != 0xffff, centres the view there, clamped to the map. EBX, ECX,
+        ESI, EDI preserved; EDX = the cycle difference, or EAX = EDX = map height - view height when it moves."""
+        m = self.m
+        dif = (m.u32(0x508f7c) - m.u32(0x4e19c0)) & M32
+        celula = m.u16(0x496acc)
+        if dif > 1000 or celula == 0xffff:
+            return dict(regs, EDX=dif)
+        x = celula % 256 - _idiv(m.u16(VISTA + 4), 2)[0]
+        y = celula // 256 - _idiv(m.u16(VISTA + 6), 2)[0]
+        x = max(x, 0)
+        limite = m.u16(LARGURA_MAPA) - m.u16(VISTA + 4)
+        if x > _s32(limite):
+            x = limite
+        y = max(y, 0)
+        limite = m.u16(ALTURA_MAPA) - m.u16(VISTA + 6)
+        if y > _s32(limite):
+            y = limite
+        m.u16(regs['EAX'], x & 0xffff)
+        m.u16(regs['EDX'], y & 0xffff)
+        return dict(regs, EAX=limite & M32, EDX=limite & M32)
 
     # ------------------------------------------------------------ minimap
     def mini_map_get_case(self, regs):
@@ -586,6 +665,19 @@ class Entrada:
         elif etiqueta == 36:
             chamar('BatimentDeselectionner', 0x45ee8f, EAX=j)
             chamar('EnginAddSelection', 0x45eea5, EAX=w(2), EDX=j)
+        elif etiqueta == 0xb:
+            chamar('SauveSelectionGroupe', 0x45eef8, EAX=j, EDX=b(2))
+        elif etiqueta == 0xc:
+            chamar('BatimentDeselectionner', 0x45ef07, EAX=j)
+            chamar('DeSelectionGroupe', 0x45ef11, EAX=j)
+            chamar('RestaureSelectionGroupe', 0x45ef2c, EAX=j, EDX=b(2))
+        elif etiqueta == 0x10:
+            if w(2) == 1:
+                chamar('SetEnginSelectRentreEngin', 0x45f17a, EAX=j, EDX=w(4))
+            elif w(2) == 3:
+                chamar('SetEnginSelectRentreBatiment', 0x45f195, EAX=j, EDX=w(4))
+        elif etiqueta == 0x21:
+            chamar('BatimentRetireColon', 0x45f22a, EAX=w(2))
         elif alvo != LIMPAR:
             _parar(f'ProcessInputGame tag 0x{etiqueta:x}', alvo)
         for o in (0, 2, 4, 6, 8):
@@ -624,6 +716,26 @@ class Entrada:
             for f in acoes[direcao]:
                 f()
 
+    def _grupo(self, p):
+        """0x4293e0: the digit WndProc stored. Ctrl held: tag 0xb (store group); else tag 0xc (restore), and with
+        Shift held the view is centred on the group (EnginGetCentreGroupe, then clamped to the map). Then
+        [0x49a05a] = 0."""
+        m = self.m
+        g = m.u8(GRUPO)
+        if self._tecla(0x11, 0x4293e9) < 0:
+            self._ordre(p, 0xb, g, 0, sitio=0x429540)
+        elif self._tecla(0x10, 0x429403) >= 0:
+            self._ordre(p, 0xc, g, 0, sitio=0x429540)
+        else:
+            self._ordre(p, 0xc, g, 0, sitio=0x429425)
+            self.p('EnginGetCentreGroupe', 0x42943e, regs=dict(EAX=p, EDX=VISTA, EBX=VISTA + 2, ECX=g))
+            for o, t, mapa in ((0, 4, LARGURA_MAPA), (2, 6, ALTURA_MAPA)):
+                meio = _idiv(m.u16(VISTA + t), 2)[0]
+                m.u16(VISTA + o, m.u16(VISTA + o) - meio if m.u16(VISTA + o) >= meio else 0)
+                if m.u16(VISTA + o) + m.u16(VISTA + t) >= m.u16(mapa):
+                    m.u16(VISTA + o, m.u16(VISTA + o) - (m.u16(VISTA + o) + m.u16(VISTA + t) - m.u16(mapa)))
+        m.u8(GRUPO, 0)
+
     def _core(self, nome, sitio, **regs):
         return self.p(nome, sitio, regs=dict(dict.fromkeys(REG7, 0), **regs))
 
@@ -658,8 +770,8 @@ class Entrada:
         else:
             m.u8(ARRASTO, 0)
             m.u16(ZONA, self.mouse_zone())
-        if m.u8(0x49a05a):
-            _parar('InputGame group-number key path', 0x4293e0)
+        if m.u8(GRUPO):
+            self._grupo(p)
         if self._tecla(0x10, 0x429556) < 0:
             m.u16(PAGINA, 0xc)
         elif m.u16(PAGINA) == 0xc:
@@ -698,7 +810,7 @@ class Entrada:
         elif self._tecla(0x25, 0x42974c) < 0:
             self._rolar(8, 1)
         if self._tecla(0x0d, 0x429773) & 0xffff or self._tecla(0x58, 0x429781) & 0xffff:
-            _parar('InputGame GoLastAttaque key', 0x429786)
+            self.go_last_attaque(dict(dict.fromkeys(REG7, 0), EAX=VISTA, EDX=VISTA + 2))
         if m.u16(PAGINA) == 0xd:
             _parar('InputGame help page 0xd (VoixOffAsk)', 0x4297a6)
         zona = m.u16(ZONA)

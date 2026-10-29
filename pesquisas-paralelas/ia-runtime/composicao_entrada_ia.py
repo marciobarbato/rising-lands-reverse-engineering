@@ -21,7 +21,9 @@ Declared-input API (``RoteiroEntrada``, ``ComposicaoEntrada``):
     before: PeekMessageA = 0 and ProgIteration with frame k's GetCursorPos answer;
   * ``frame{k}``: CalculGame with this front's InputGame, ProcessInputGame and CalculIconeAction
     (``entrada_ordens_ia``) and their committed owners (``provedores_entrada_ia``) in place of the no-input
-    translations; every other provider is the M2.3 chain's.
+    translations, and EnginNextEtape's states 11 and 13 dispatched by ``construcao_entrada_ia`` (state 11 with
+    Economy's CalculConstruireBatiment and the construction-progress branch); every other provider is the M2.3
+    chain's.
   ``executar(n)`` yields ``dict(phase, registro, entry, exit, ordens, eventos)`` per phase: ``ordens`` are the
   SetPlayerOrdre packets (frame, player, tag, words) and the ProcessInputGame dispatches of the phase.
 
@@ -31,8 +33,9 @@ import struct
 
 from composicao_encadeada_ia import (JanelasDeclaradas, MemoriaMapaRapida, Registro, provedores)
 from composicao_quadros_ia import ComposicaoQuadros, PRESERVADOS_CALCUL_GAME, MSG_LACO
-from entrada_ordens_ia import Entrada, LIMPAR, PACOTES
-from provedores_entrada_ia import provedores_vivos
+from construcao_entrada_ia import proxima_etapa_entrada
+from entrada_ordens_ia import Entrada, LIMPAR, PACOTES, Provedores
+from provedores_entrada_ia import construcao_viva, provedores_vivos
 from quadro_calcul_game import calcular_quadro
 from reinicio_ia import DependenciaIA
 
@@ -165,7 +168,8 @@ class ComposicaoEntrada(ComposicaoQuadros):
         r['EDX'], r['ECX'], r['EBX'] = entradas['salvo_edx'], entradas['salvo_ecx'], entradas['salvo_ebx']
         r['ESP'] = point + 8 + 12 + 4
         msg = r['ESP']
-        entrada_wnd = Entrada(mm, None)
+        entrada_wnd = Entrada(mm, Provedores({'InitGameZone': lambda eax, edx: p['InitGameZone'](
+            sitio=0x4182bb, eax=eax, edx=edx)}))
         while True:
             for rotina, retorno, chamador in (('PlaySnd_Manage', 0x460220, '_WinMain@16+0xb0'),
                                               ('MCICD_Manage', 0x460225, '_WinMain@16+0xb5')):
@@ -229,6 +233,11 @@ class ComposicaoEntrada(ComposicaoQuadros):
                                    packet=bytes(mm.u8(pac + i) for i in range(10)).hex(),
                                    jump_target=hex(LIMPAR if etiqueta > 0x27 else e.comandos[etiqueta])))
             return e.process_input_game(dict(EAX=jogador & 0xff, EBX=0, ECX=0, EDX=0, ESI=0, EDI=0, EBP=0))['EAX']
+        construcao = construcao_viva(mm, som=som, provedores_nucleo=p, bonus=lambda j, t, s: p['BonusGetValEngin'](
+            sitio=0x452d48, jogador=j, tipo=t, seletor=s, ecx=0))
+        etapa_pinada = p['EnginNextEtape']
+        p['EnginNextEtape'] = lambda sitio, unidade: proxima_etapa_entrada(
+            mm, p, unidade, self.ctx.tabelas, construcao, etapa=lambda: etapa_pinada(sitio=sitio, unidade=unidade))
         p['InputGame'] = lambda sitio, jogador: e.input_game(jogador)
         p['ProcessInputGame'] = process
         p['CalculIconeAction'] = lambda sitio: e.calcul_icone_action(dict(EAX=0, EBX=0, ECX=0, EDX=0, ESI=0, EDI=0,
