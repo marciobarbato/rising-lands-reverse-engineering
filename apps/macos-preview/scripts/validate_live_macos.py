@@ -10,6 +10,19 @@ from macos_live_session import MacOSLiveSession
 from macos_graphics_inspection import GraphicsInspectionRenderer, RENDER_PINS
 
 
+def source_revision(root):
+    root=root.resolve()
+    manifest=root.parent/'snapshot.json'
+    if manifest.is_file():
+        data=json.loads(manifest.read_bytes())
+        if (root.parent/data['snapshot']).resolve()!=root:
+            raise ValueError('Source archive differs from declared snapshot')
+        return data['commit']
+    top=Path(subprocess.check_output(['git','-C',str(root),'rev-parse','--show-toplevel'],text=True).strip()).resolve()
+    if top!=root: raise ValueError('Source root is neither a checkout nor a declared archive')
+    return subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'],text=True).strip()
+
+
 def main():
     p=argparse.ArgumentParser()
     p.add_argument('--source-root',type=Path,required=True)
@@ -54,7 +67,7 @@ def main():
         frames=sum(r['phase'].startswith('frame') for r in records)
         totals={k:sum(r[k] for r in records) for k in ('rust_seconds','projection_seconds','render_seconds','total_seconds')}
         report=dict(schema='rising-lands/macos-live-proof/1',
-                    source_revision=subprocess.check_output(['git','-C',str(a.source_root),'rev-parse','HEAD'],text=True).strip(),
+                    source_revision=source_revision(a.source_root),
                     library_sha256=live.library_sha256,graphics_pins=RENDER_PINS,
                     logic_only=a.logic_only,frames_requested=a.frames,frames_completed=frames,
                     last_phase=horizon_last or live.current.phase_name,first_stop=live.stop,
