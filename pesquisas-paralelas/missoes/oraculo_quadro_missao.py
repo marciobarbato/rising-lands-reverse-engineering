@@ -232,6 +232,7 @@ class BancadaQuadroMissaoOriginal(BancadaCargaMissaoOriginal):
         self.rastro = {}
         self.fases = []
         self._passar_uma_vez = set()
+        self.linhas_registradores = None   # set to {} to log every routine entry with EAX EDX EBX ECX
 
     # ------------------------------------------------------------ extension points
     def _criar_windows(self, entradas):
@@ -357,6 +358,11 @@ class BancadaQuadroMissaoOriginal(BancadaCargaMissaoOriginal):
             return
         retorno = struct.unpack('<I', cpu.mem_read(esp, 4))[0]
         nome = self.nomes[endereco]
+        if self.linhas_registradores is not None:
+            chamador = hex(retorno) if retorno == RETORNO else self.nome(retorno)
+            valores = ' '.join(f'{cpu.reg_read(r):x}' for r in (x86.UC_X86_REG_EAX, x86.UC_X86_REG_EDX,
+                                                                  x86.UC_X86_REG_EBX, x86.UC_X86_REG_ECX))
+            self.linhas_registradores.setdefault(self.fase, []).append(f'{nome}@{chamador} {valores}')
         fase = self.rastro.setdefault(self.fase, dict(order=[], top=[], top_index={}))
         if self._raiz(retorno):
             self._topo = (nome, retorno)
