@@ -116,13 +116,18 @@ def main():
     ap.add_argument('--quadros', type=int, default=201)
     ap.add_argument('--por-rotina', type=int, default=6, help='world-model comparisons per routine')
     ap.add_argument('--saida')
+    ap.add_argument('--janelas', help='counter windows "a-b,c-d": isolate and compare every call only inside them')
+    ap.add_argument('--rotinas-extra', default='', help='more routines to isolate, comma-separated')
     a = ap.parse_args()
+    janelas = [tuple(int(x) for x in j.split('-')) for j in a.janelas.split(',')] if a.janelas else None
+    rotinas = cm.ROTINAS + tuple(n for n in a.rotinas_extra.split(',') if n and n not in cm.ROTINAS)
     saida = RAIZ / (a.saida or 'relatorios/movimento-incursao-mundo-emulada.json')
     adaptadores = _adaptadores()
     registro = dict(comparisons=0, by_routine={}, flat_comparisons=0, flat_by_routine={}, live_comparisons=0,
                     live_by_routine={}, mismatches=[],
                     dependencies=[], isolated={},
                     gaps=sorted(n for n in cm.ROTINAS if n not in adaptadores and traducao_core(n) is None))
+    registro['windows'] = a.janelas
     classe = load_economy_bonus().BonusUnidades
 
     def bonus_de(m):
@@ -205,12 +210,12 @@ def main():
     def observador(nome, caso, antes, resultado):
         registro['isolated'][nome] = registro['isolated'].get(nome, 0) + 1
         # Every call from counter JANELA_BUSCA on (the first path search is at 9176-9179); a sample before.
-        todas = contador(antes) >= JANELA_BUSCA
+        todas = contador(antes) >= JANELA_BUSCA or janelas is not None
         if traducao_core(nome) is not None and (todas or registro['flat_by_routine'].get(nome, 0) < a.por_rotina):
             plano(nome, caso, antes, resultado)
         if nome in adaptadores and (todas or registro['live_by_routine'].get(nome, 0) < a.por_rotina):
             vivo(nome, caso, antes, resultado)
-        if nome not in adaptadores or nome in SO_VIVO or (contador(antes) < JANELA_BUSCA and registro['by_routine'].get(nome, 0) + sum(
+        if nome not in adaptadores or nome in SO_VIVO or (contador(antes) < JANELA_BUSCA and janelas is None and registro['by_routine'].get(nome, 0) + sum(
                 1 for d in registro['dependencies'] if d['routine'] == nome) >= a.por_rotina):
             return
         entrada = {k: int(v, 16) for k, v in resultado['entry_registers'].items()}
@@ -245,7 +250,7 @@ def main():
                                                native_changed=nativas[:LISTA]))
 
     t0 = time.monotonic()
-    b, cap, iso, quadro_de, resumo = cm.executar(a.quadros, observador)
+    b, cap, iso, quadro_de, resumo = cm.executar(a.quadros, observador, rotinas, janelas)
     registro.update(
         schema='rising-lands/monde01-raid-movement-world-differential/1', original_sha256=HASH_ORIGINAL,
         frames=a.quadros, per_routine_limit=a.por_rotina,
