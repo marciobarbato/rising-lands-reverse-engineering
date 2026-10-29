@@ -7,14 +7,67 @@ bit 0 que impede o nascimento de plantas; não implementa colisão ou caminhos.
 import struct
 
 from construcoes import TerrenoSacolas
+from economia import _buffer_vivo
 
 BASE_MINAS = 0x509954
 TOTAL_MINAS = 20
 
 
 class RecursosTerreno:
+    """Mines, sacks and field growth over the type/quantity grids of ``terreno``.
+
+    ``RecursosTerreno.vivo``/``do_mundo``/``da_memoria`` bind the live grids
+    by identity: mines 0x509954 (80 bytes), the u16 tile grid [0x507d70] as
+    its 131,072 bytes (Core's ``mundo.tiles.buffer``), the attribute grid
+    [0x507da8] and the type/quantity grids; ``do_mundo`` takes every grid from
+    a ``MundoFisico.vincular_grades`` world. The scalars (row, flag, period,
+    counter, RNG) are pulled from and pushed to memory around each call by
+    ``quadro_economia``. The constructor copies; it is the fixture form.
+    """
+    @classmethod
+    def vivo(cls, terreno, *, minas, mosaicos, atributos):
+        if not isinstance(terreno, TerrenoSacolas):
+            raise TypeError('terreno must be TerrenoSacolas.vivo over the live grids')
+        _buffer_vivo(terreno.tipos, 65536, 'Live type grid ([0x507d74])')
+        _buffer_vivo(terreno.quantidades, 65536, 'Live quantity grid ([0x507dac])')
+        minas = _buffer_vivo(minas, 80, 'Live mines (0x509954)')
+        mosaicos = _buffer_vivo(mosaicos, 131072, 'Live tile grid ([0x507d70])')
+        atributos = _buffer_vivo(atributos, 65536, 'Live attribute grid ([0x507da8])')
+        self = cls.__new__(cls)
+        self.terreno, self.minas, self.mosaicos, self.atributos = terreno, minas, mosaicos, atributos
+        # Scalars: never defaulted; quadro_economia pulls them from memory before every call.
+        return self
+
+    @classmethod
+    def do_mundo(cls, mundo, *, minas):
+        """``vivo`` over Core's ``MundoFisico`` after ``vincular_grades(tiles=, atributos=, objetos=, donos_objetos=)``.
+
+        Uses ``mundo.tiles.buffer``, ``mundo.atributos``, ``mundo.objetos`` and
+        ``mundo.donos_objetos`` (Core's name for the quantity grid [0x507dac]) by
+        identity; ``minas`` is the live 80 bytes at 0x509954 (not a Core grid).
+        """
+        faltam = {'tiles', 'atributos', 'objetos', 'donos_objetos'} - getattr(mundo, 'grades_vivas', frozenset())
+        if faltam:
+            raise ValueError(f'MundoFisico grids not bound live: {sorted(faltam)}')
+        return cls.vivo(TerrenoSacolas.vivo(mundo.objetos, mundo.donos_objetos), minas=minas,
+                        mosaicos=mundo.tiles.buffer, atributos=mundo.atributos)
+
+    @classmethod
+    def da_memoria(cls, m, *, mosaicos=None):
+        """``vivo`` over a live memory map; grids are found through their DGROUP pointers.
+
+        ``mosaicos`` may be passed explicitly (Core's ``mundo.tiles.buffer``); it must be
+        the same allocation [0x507d70] points to, which the caller guarantees.
+        """
+        ponteiro = lambda g: struct.unpack('<I', bytes(m.ler(g, 4)))[0]
+        terreno = TerrenoSacolas.vivo(m.vista(ponteiro(0x507d74), 65536), m.vista(ponteiro(0x507dac), 65536))
+        return cls.vivo(terreno, minas=m.vista(BASE_MINAS, 80),
+                        mosaicos=m.vista(ponteiro(0x507d70), 131072) if mosaicos is None else mosaicos,
+                        atributos=m.vista(ponteiro(0x507da8), 65536))
+
     def __init__(self, terreno=None, *, minas=None, mosaicos=None, atributos=None,
                  linha=1, atualizar=0, periodo=1, tempo=0):
+        # Legacy/fixture form: copies. Use RecursosTerreno.vivo/da_memoria for the live grids.
         self.terreno = TerrenoSacolas() if terreno is None else terreno
         self.minas = bytearray(80 if minas is None else minas)
         self.mosaicos = bytearray(131072 if mosaicos is None else mosaicos)
