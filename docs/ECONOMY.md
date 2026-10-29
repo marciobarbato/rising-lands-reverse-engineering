@@ -933,3 +933,103 @@ It also saves 14 CalculGame-entry states (counters 50, 100, 200, 800, 900, 1000,
 Python reproduces every call ([test_temporizadores_sondagem.py](../pesquisas-paralelas/economia/testes/test_temporizadores_sondagem.py)): writes and the whole-state hash after every call, and PlayerGetColor's EAX. The 45 declared market-state overrides still stop at their named branches. The native rerun equals the frozen capture.
 
 **PlayerGetColor `0x46003b`** ([capture](../pesquisas-paralelas/economia/evidencias/captura-cor-jogador-original.json), `748d745`). It returns 0x1e for AL 0xc8, otherwise the byte at `0x4e24dc + AL`; the upper EAX bits are cleared. Players 0..4 are 0xa0, 0x90, 0x88, 0x30 and 0x2f. It is `quadro_economia.cor_jogador` and the `PlayerGetColor` provider; its callers are `0x468646`, `0x469864`, `0x46a567`, `0x46a592` and `0x46a64f`.
+
+## Order setters and construction gates (M3 groundwork)
+
+None of these routines runs in the no-input coverage run ([M3 plan](M3_PLAN.md) §0), so this is their first execution evidence. Addresses apply only to the intact `RISING.EXE` (SHA-256 `6c556520…8543fb`).
+
+**Method (original first).**
+- **Bench** ([`bancada_ordens_economia.py`](../pesquisas-paralelas/economia/bancada_ordens_economia.py)). It reuses Core's selection-orders pause ([SELECTION_ORDERS.md](core/SELECTION_ORDERS.md)): Missions' accepted MONDE01 display path, paused at frame 1's first `ProcessInputGame` entry. Each case runs one routine natively from the exact restored state plus its declared writes and argument registers. `PlaySnd_*` is the frame bench's boundary (not executed, EAX unchanged). Over Core's recorder it adds one thing: each store carries the nested call it happened in, and each nested call records all its exit registers.
+- **Cases** ([`casos_ordens_economia.py`](../pesquisas-paralelas/economia/casos_ordens_economia.py)): 121. The capture checks the pause facts they rely on (pool, stocks, indicator words, cave cost, builder, free record 1). They cover:
+  - units 12 (builder), 13/14 (type 5), 11, 15, colonists, a free record and retyped units (6, 13);
+  - owner/player mismatches, the voice rules (local player, busy handle, undiscovered unit cell), search ownership and upper register bits;
+  - mine 0 (43,8), mine 1 (6,59), cell 0xffff, discovered and undiscovered targets;
+  - stocks at and around the cave cost (food 9/10, stone 5/6), RMI values below and above the total, players 0, 1 and 3;
+  - structure types 2, 3, 9, 12 (with and without a live type-9 record at the cell) and 17, a full pool, the stock-indicator recalculation;
+  - one `CalculConstruireBatiment` tick: walking, arrived at the proposed CAVE site (21,12), arrived on the sanctuary, pushed, target moved, no order, stock short, owner 1.
+- **Capture** ([`capturar_ordens_economia.py`](../pesquisas-paralelas/economia/capturar_ordens_economia.py) → [`captura-ordens-economia-exibicao.json`](../pesquisas-paralelas/economia/evidencias/ordens-economia/captura-ordens-economia-exibicao.json)), committed before any translation (`69ef238`). All 121 calls return. The run reproduces load_tail, between_frames and frame1 and leaves the code section unchanged. [`extrair_ordens_economia.py`](../pesquisas-paralelas/economia/extrair_ordens_economia.py) exports the bodies, epilogues, the two `ProcessInputGame` call sites and its tag table (`evidencias/ordens-economia/*.asm`, `manifesto.json`).
+- **Translation** ([`ordens_economia.py`](../pesquisas-paralelas/economia/ordens_economia.py), class `OrdensEconomia`) over live flat memory.
+- **Native differential** ([`validar_ordens_economia.py`](../pesquisas-paralelas/economia/validar_ordens_economia.py) → [report](../pesquisas-paralelas/economia/validacao-ordens-economia-emulada.json)): **121 comparisons, 0 mismatches.**
+  - Compared per case: EAX..EBP and ESP; every changed byte of the whole mapped state (1,593); the 14 sound requests; and, in order, each of the 142 calls into another front, by name and EAX/EDX/EBX/ECX at the callee entry.
+  - The native run also equals the committed capture in every case.
+  - The three out-of-domain cases raise at their declared address with no store.
+  - The same run records the bytes each case read before writing ([`leituras-ordens-economia-exibicao.json`](../pesquisas-paralelas/economia/evidencias/ordens-economia/leituras-ordens-economia-exibicao.json)). With them, 95 cases (all that avoid Core's ResetOrdre) replay without a CPU in [`test_ordens_economia.py`](../pesquisas-paralelas/economia/testes/test_ordens_economia.py). That replay compares the final value of every stored byte, and five deliberate mutations are each detected.
+
+```sh
+python3 "…/heavy_lease.py" economy -- python3 -B pesquisas-paralelas/economia/capturar_ordens_economia.py --saida .local/ordens-economia/x.json --casos 500   # ~105 s
+python3 "…/heavy_lease.py" economy -- python3 -B pesquisas-paralelas/economia/validar_ordens_economia.py                                                    # ~115 s
+RISING_EMULAR=1 python3 -B -m unittest discover -s pesquisas-paralelas/economia/testes -p test_ordens_economia.py
+```
+
+**API.** `OrdensEconomia(memoria, *, externo=None)`.
+- `memoria`: `u8/u16/u32(addr, value=None)` (`memoria_quadro_core.MemoriaQuadro`). The native stack is never written: GetRessourceStock's outputs into CreerBatiment's frame are consumed as values.
+- `chamar(nome, regs, pilha=())`: `regs` holds EAX..EBP and ESP (the address of the return slot). It returns EAX..EBP as the original leaves them, callee-saved ones included, plus the ESP after RET. `pilha` holds the pushed player word of the two RET-4 routines. Each routine is also a method (`set_mine_engin_select`, `creer_batiment`, …).
+- Arithmetic flags are not modeled. Argument widths are what the original reads; other bits are ignored unless noted.
+
+| Routine | Entry | Arguments | Effects | Registers changed |
+|---|---|---|---|---|
+| EnginTravailSelectionne | 0x47248f | AL player, DL kind | AL = 1 when every live unit of the player's selection list has the kind's type and at least one exists: kind 0 type 6 (parts), 1 types 5/13 (food), 2 type 7 (stone). The first live unit with another type returns AL = 0 at once (EAX = pool pointer & ~0xff). Kinds above 2 never set it. No owner test | EAX, DH (= AL) |
+| SetMineEnginSelect | 0x473324 | AL player, DX cell | Each live selected unit of that owner, **of any type**, gets SetMineEngin. Only the first can speak: EnginAsk mode 0xf when the player is local | EAX, EDX |
+| SetMineEngin | 0x444f48 | AX unit, DX mine cell | ResetOrdre; +0x7e = cell + 0x100 (the cell below, u16); search released if owned; +0x88 = +0x89 = 0; **state 5**; +0x82 = 0; +0xb2 = cell with its row byte + 1 | EAX = EDX = record |
+| SetDepotEnginSelect | 0x47312c | AL player, DL byte, BX word, CL byte | Each live unit of the list, **no owner test, no voice**: SetDepotEngin | EAX, EBX, ECX, EDX |
+| SetDepotEngin | 0x444dad | AX unit, DL, BX, CL | +0x82 = DL, +0x80 = BX, u16 +0x84 = CL | EAX = (unit·276 & 0xffff0000) \| CL, EDX = record |
+| SetRamasseEnginSelect | 0x473d2c | AL player, DX cell | As SetMineEnginSelect, with SetRamasseEngin | EAX, EDX |
+| SetRamasseEngin | 0x445947 | AX unit, DX cell | ResetOrdre; +0x7e = cell; search released if owned; +0x88 = 0; **state 0x10**; +0x89 = 0; +0xb2 = cell | EAX = EDX = record |
+| TestRessource | 0x4676e5 | AX food, DX stone, BX parts, pushed player (RET 4) | AL = each u16 cost ≤ the player's total (`+2` of records 1, 2, 0) | EAX (upper = (player << 5) upper) |
+| GetRessourceStock | 0x46769d | EAX/EDX/EBX/ECX output addresses, pushed player (RET 4) | Writes food, stone and parts stock (total − RMI, u16 wrap) and 0, in that order | EAX = player << 5, EDX = the last 32-bit subtraction |
+| EnleveMatiere | 0x46792c | AL resource, BX player, DX quantity | Record (BX·4 + AL)·8: total (+2) then RMI (+0) each lose DX, flooring at 0 | EAX = offset; EBX = AL, or RMI − EDX (32-bit) |
+| CreerBatiment | 0x41fea2 | AX cell (all of EAX is subtracted from), DL type, BL player | See below | EAX = index or 0xffff; EBX; EDX |
+| BagReset / BagInit | 0x44710b / 0x447148 | EAX Bag (BagInit: EDX capacity) | Clear count, +0x66, +4, capacity, 30 values, 30 tags; BagInit then sets capacity | EAX = 30 / entry EDX; BagInit EDX = 30 |
+| CalculConstruireBatiment | 0x44ab60 | AX unit | One builder tick, see below | EAX only |
+
+**CreerBatiment** (the cost and record part; PlaceBatiment is Core's).
+1. First record of the 1,000-record pool with +5 = 0. A full pool returns 0xffff, and nothing is written.
+2. TestRessource(food `+0xc`, stone `+0xe` of the 52-byte type record `0x495d8c`, **parts 0**: the parts word `+0x10` is read but not tested). If the stock is short it returns 0xffff, and nothing is written.
+3. EnleveMatiere(food), then EnleveMatiere(stone). After each, when the player's indicator word `0x4dfb2c + 6p` is nonzero, the level byte `+4` = ((food + stone stock) u16 // word0) · 7 // word2, low byte. A zero word2 there faults; the translation raises ZeroDivisionError at that point, after the debit.
+4. Record: +5 = 2, owner +4 = **0xc8**, +2 = cell − (((h − 1) << 8) + (w − 1)), type 17 owner = player.
+5. Type 12 only: the first live type-9 record whose footprint holds the new origin, if BatimentCollision confirms it, is reset (+5 = 0, +0 = +0x7b = 0xff, +0x78 = 0xffff, others zero) and handed to ResetCheminTerrainModify.
+6. +8 = type, +0xa = 1, +6 = 0; PlaceBatiment(AX = index); BagReset(+0xc); types 9/12 owner = player; BagInit(+0xc, capacity byte `+0x12`).
+
+Native facts:
+- MONDE01's player 0 starts with food and stone total = RMI = 30, so the cave leaves 20/24 in both fields.
+- The cave clicked at (21,12) is built at cell (23,14) (offset 0x202). Its record 1 has origin (19,10), and PlaceBatiment succeeds there.
+- MONDE01's indicator words are (0, 100), so the indicator is skipped.
+
+**CalculConstruireBatiment tick (translated domain).**
+- Only type 7 acts. Other types return EAX = type. +0x89 ≥ 2 returns it. A state other than 11 returns the state.
+- In state 11 with order type +0xbe ∉ {9, 12}:
+  - Not at the target (+8 ≠ +0x7e), or pushed (+0x86 or +0x87 nonzero): DeplaceEngin; EAX is its EAX.
+  - At the target with +0xb2 moved: the order is abandoned. +0xbe = 0xff, +0xb2 = +0xc0 = 0xffff, +0x89 = 0, state 7, the search is released if owned, +0x88 = 0.
+  - +0xbe = 0xff: returns.
+  - Otherwise BatimentConstructible(type, cell + BatimentGetDecalageConstruction(type), unit). When it holds: CreerBatiment(that cell, type, owner) → +0xc0.
+    - Success: +0x89 = 1, +0x8b = 0x14, +0xa9 = +0xa4 = 0, +0x90 = 7 (type 17) or 3.
+    - Failure: state 7, search released if owned.
+- Outside this domain the translation raises `ForaDoDominioOrdem` before any store:
+  - gate/wall orders, `0x44abbf`;
+  - the state-15 approach, `0x44b15d`;
+  - construction progress (+0x89 = 1), `0x44b1c1`.
+
+**`ProcessInputGame` wiring [B].** The packet is at `[0x4e2458 + 4p]`; the tag table is at `0x45ed20`.
+- Tag 6 calls SetMineEnginSelect(cell = packet +2), then **SetDepotEnginSelect(DL = +4, BX = +6, CL = +8)**. `0x45f037` is that call site inside `ProcessInputGame`, not a distinct routine.
+- Tag 7 calls SetRecolteEnginSelect (Core).
+- Tag 0x12 calls SetRamasseEnginSelect.
+
+**Named dependencies.** Nothing is defaulted.
+- Every callee owned by another front goes through `externo(nome, chamada, registradores) -> registradores`:
+  - `chamada` is the original call address;
+  - the input holds EAX..EBP and ESP at the callee entry;
+  - the provider returns EAX..EBP after making the callee's stores.
+- Without a provider the path raises `DependenciaOrdemEconomia` at that call, after the stores the original made before it.
+- `_incertos` (`{register: mask}`) marks bits the original leaves as uninitialized frame bytes. The only one is ECX's upper half at PlaceBatiment after the second indicator recalculation.
+- **Core**: EnginEstVivant, ResetOrdre (live navigation world), EnginAsk (which hands `PlaySnd_PostSound` to Audio) and BatimentGetDecalageConstruction. `provedor_core(SelecaoOrdens(m, som=…), outros)` wires all four to Core's committed translations.
+- **Core**, no provider yet: DeplaceEngin 0x44930c and PlaceBatiment 0x41c4ac.
+- **Placement and gates**: BatimentConstructible 0x41fb12, BatimentCollision 0x41ab5c and ResetCheminTerrainModify 0x41b78f.
+- In the differential these five are the original's own call replayed after its name and arguments are checked: its stores in order and its exit registers. That is validation scaffolding, not a translation.
+
+**What waits for the scripted-input captures (P3–P5).**
+- Which packets the UI actually produces for tags 6/7/0x12, and with which depot tuple (+4/+6/+8). The leaf calls declare them.
+- What +0x80/+0x82/+0x84 mean to the work cycle.
+- Whether the AI reaches these setters with other arguments.
+- The construction progress branch (+0x89 = 1: BatimentConstruit, AnimConstruireBatiment, the voice), the state-15 approach and gate/wall orders. These need a structure under construction, which the leaf bench can only fake.
+- BatimentConstructible's own result on the real walk (EnginOccupeCase with the builder on the footprint) and DeplaceEngin's progress over frames.
+- The work and transport cycles that follow the orders (`CalculWorkEngin`, `MineRecolte`, `TerrainRecolte`, `CalculTransporteEngin`, `BatimentAjouteMatiere`), and the record-0 mark once the cave is lodged (`BatimentLogeEngin`).

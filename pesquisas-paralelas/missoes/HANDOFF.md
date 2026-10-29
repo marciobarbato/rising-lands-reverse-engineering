@@ -687,3 +687,73 @@ Measured costs: pass 2 runs at about 8–9 s per frame per slot; peak RSS is 1.0
 - **Display clock beyond 4,096 answers:** M2.3 needs it. The agreed definition is Core's: the same rule `0x123456 + 40·k`, extended.
 - **v3 (text/LoadPie):** still waits for Core's `ftell`.
 - **Python per-frame comparison:** AI/runtime runs it against these artifacts.
+
+## Stage21 (M2.3): 9,200-frame original capture and long-run comparison policy (Claude, Mac mini, 2026-10-29)
+
+Executed on the Mac mini (Apple M4, 16 GB, macOS 27.2, python 3.9.6, unicorn 2.1.4) with the tools at `eb08940`. Reference: the frozen `-v2` display scenario, the same declared inputs and decisions as Stage20. Window: frames 0–9,200; the coordinator dropped the extension to 10,800. Every artifact is original-only; no Python translation was imported.
+
+### Commits
+
+| Commit | Content |
+|---|---|
+| `5e5c746` | binding-event log compaction (`EventosCompactos`) and a light pass A; fixes `passo-a` on int snapshot keys |
+| `45aa285` | display clock extended to 200,000 answers by Core's rule `0x123456 + 40·k` |
+| `5a14cea` | aggregated pass-2 access keys, validated exactly on M2.2 |
+| `192f000` | segment-end records (allocations, entry trace, answers, code integrity) |
+| `eb08940` | part packager with re-read verification ([pacotes_quadros_missao.py](pacotes_quadros_missao.py)) |
+| `6d5c27d` | original-only capture in 10 parts (`evidencias/m2-3/`) + manifest |
+| `ab99eab` | long-run comparison policy (`validacao/m2-3-politica-comparacao-9200-quadros.json`) |
+
+### Capture (API inputs for AI/runtime)
+
+[evidencias/m2-3/](evidencias/m2-3/) holds `captura-quadros9200-monde01-exibicao-v2.parteNN.json.xz` (NN = 00–09) and the manifest `captura-quadros9200-monde01-exibicao-v2.manifest.json` (schema `compressed-evidence-manifest/2`).
+
+| Part | Frames | Phases | xz bytes | Raw bytes |
+|---|---|---|---|---|
+| 00 | 0–1000 (`load_tail` … `frame1000`) | 2,001 | 9,708,140 | 123,523,842 |
+| 01–07 | 1001–2000 … 7001–8000 | 2,000 each | 9,298,748–9,312,468 | about 122.4 MB each |
+| 08 | 8001–8990 | 1,980 | 9,300,020 | 121,268,819 |
+| 09 | 8991–9200 | 420 | 8,862,004 | 297,283,210 |
+| total | 0–9200 | 18,401 | 93,012,400 | |
+
+The raw JSON of each part is kept under `.local/m2-3/partes/`; the manifest pins both hashes per part.
+
+- **Every part** opens with `opening_state` (`full_state`, `summary`, `compared_summary`, `masked_sha256`) and carries complete deltas, display bytes included.
+- **Every phase** keeps the Stage20 record fields; `state_after` adds `compared_summary` and `masked_sha256`.
+- **Full states** also follow frames 8999, 9000 and 9176 (part 09).
+- **Run-level records:** named inputs and decisions in part 00, with the display clock declared by its rule, N = 200,000 and the SHA-256 of the answer list (its first 4,096 answers equal the Stage20 ones); final allocations, entry trace, declared Windows answers, import resolutions and code integrity in part 09.
+
+Definitions (also in the manifest). The mask is the policy's `cumulative.exclusion_mask`, sorted `[start, end)` ranges; `native_stack` is never a block.
+- **`compared_summary`:** `resumo_imagem` of the state with every masked byte set to 0 (blocks sorted by name, each hashed as `<II base, size>` + bytes).
+- **`masked_sha256`:** SHA-256 over, for each block sorted by name and each mask range intersecting it in address order, `<II start, length>` + the bytes of that intersection.
+
+A Python run that matches the original reproduces `compared_summary` in every phase. `masked_sha256` hashes only the excluded display bytes, so a mismatch there alone is display-only.
+
+### Execution
+
+| Step | Result |
+|---|---|
+| Pass A (sequential, light, snapshots at frame 0 and every 250 frames) | 7,861 s, peak RSS 1.87 GB, 37 snapshots |
+| Records (37 segments from the snapshots, lease slots) | 218–307 s each |
+| Pass 1 (from the records, CPU only) | 18,401 phases, 154,620 changed bytes, about 6 min |
+| Pass 2 (37 segments, aggregated keys, 5 then 7–8 lease slots) | 1,817–2,783 s each; 11:22–15:54 wall clock |
+| Long report | `passed: true` |
+| Packaging and re-read verification | 1,696 s, peak RSS 3.6 GB |
+
+### Validation
+
+| Check | Result |
+|---|---|
+| Segment 0–250 records vs the M2.2 capture | 257/257 phases equal |
+| Pass-2 summaries vs pass-1 record summaries | 18,401/18,401 equal |
+| Re-read of the written parts | raw hashes; chain of opening states (part 00 opens with s0); every replayed summary, compared summary and masked hash; every full state |
+| First 128 frames vs the committed M2.2 capture | 257/257 phases equal |
+| Policy totals | 154,620 changed bytes; cumulative mask 153,060 display-only bytes, **1,560 compared logic bytes**, 0 without an observed writer, 0 logic-context surface accesses (display 1,282,055,899, backend 5,109,920) |
+
+The 1,560 logic bytes are the 999 of M2.2 (the same addresses) plus 561 that first change after frame 128. 413 of those first change in the 9,000-frame window, the first raid. Their main writers there are CheminCalcul (108), SetMiniMap (52), EnginSetType (46), ProjectileSet (32), CreerEngin (31) and Chemin_ModifieZone (30). The remaining 148 spread over frames 129–8,999; their writers are UpdateChamp (116), ScanNouvellePatate (31), CalculFatigue (16), EnginNextEtape (8), ProgIteration, CalculGame and GameNextFrame.
+
+### Not run / gaps
+
+- **Python per-frame comparison over 9,200 frames:** AI/runtime runs it against these parts.
+- **Native pass-2 hooks** (Core `5580c2d`, about 6.45× faster): not used for M2.3. Before any later long policy run (M3), check on the mini that they reproduce the M2.2 128-frame policy.
+- **v3 (text/LoadPie):** still waits for Core's `ftell`.

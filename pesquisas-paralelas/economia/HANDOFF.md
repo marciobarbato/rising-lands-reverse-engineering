@@ -2,6 +2,23 @@
 
 Chat: `01a18262-c6d5-7cd3-80fa-8431bf5f2657` (Economy and Production). Worktree: `/Users/marcio/git/Rising Lands/worktrees/re-economy`. Branch: `feat/re-economy`. Organization base: `6634be3af2d255846a847d8aa21ad4edf1cdb589`. Implementation commit: `f5a5e9b` (`Reconstruct troop completion preparation and cargo credits`); the following handoff commit and serialized integration result are identified in the completion chat. Only economy-owned paths changed.
 
+## M3 groundwork: order setters and construction gates (2026-10-29)
+
+Branch `feat/re-economy`; not integrated. Full contract: [ECONOMY.md](../../docs/ECONOMY.md#order-setters-and-construction-gates-m3-groundwork).
+
+- **Original first.** Capture `69ef238`: 121 native leaf calls at Core's frame-1 `ProcessInputGame` pause (`bancada_ordens_economia.py`, `casos_ordens_economia.py`, `capturar_ordens_economia.py`). All return; the path reproduces.
+- **Translation.** `ordens_economia.OrdensEconomia` over live memory covers:
+  - EnginTravailSelectionne;
+  - SetMine/SetDepot/SetRamasse `*EnginSelect` and their single-unit setters;
+  - TestRessource, GetRessourceStock, EnleveMatiere;
+  - CreerBatiment with BagReset/BagInit;
+  - the CalculConstruireBatiment build-attempt tick (types other than 9/12).
+- **Validation.** Native differential: 121 comparisons, 0 mismatches ([report](validacao-ordens-economia-emulada.json)). 95 cases replay without a CPU, and 5 mutations are detected.
+- **Named dependencies, raised via `externo`.**
+  - Core: EnginEstVivant, ResetOrdre, EnginAsk and BatimentGetDecalageConstruction (`provedor_core`), plus DeplaceEngin and PlaceBatiment.
+  - Placement: BatimentConstructible, BatimentCollision and ResetCheminTerrainModify.
+- **Waits for scripted input.** The real packets for tags 6/7/0x12 and the depot tuple; construction progress (+0x89 = 1); the state-15 approach; gates; the work/transport cycles.
+
 ## Delivered boundary
 
 `saida_tropa.SaidaTropa(recrutamento).preparar(indice, direcao)` reconstructs the economic prefix of original `SortieTroupe` (`0x420E4C`) through the real dependency stop at `CalculPosition` (`0x420698`, call `0x420F5A`). It detaches an existing type-9 colonist and unloads its carried stone and food. It returns `None` below the unsigned completion threshold, otherwise an immutable `PreparacaoSaidaTropa` pending record. This is not a completed spawn or a world allocator.
