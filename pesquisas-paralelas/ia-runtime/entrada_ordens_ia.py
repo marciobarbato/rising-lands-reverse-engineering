@@ -214,11 +214,17 @@ class Entrada:
                 return False
         return True
 
-    def _texto(self, n):                                 # TextGetMessage 0x478a3b
-        """u32 [[0x5099a4] + 4n]. In the MONDE01 display bench the text table pointer is 0 (no text file is
-        loaded), so the original would read unmapped low memory: a named gap, never a guessed 0."""
+    def _texto(self, n, sitio):                          # TextGetMessage 0x478a3b, called at ``sitio``
+        """u32 [[0x5099a4] + 4n]. In the MONDE01 display scenario InitTextLangue never runs (TEXTES.TXT needs CRT
+        fgets/ftell, not inventoried I/O boundaries), so the table pointer is 0 and the body would read unmapped
+        low memory. The frame chain declares TextGetMessage as the same boundary as Missions' display scenario
+        (``oraculo_exibicao_missao.FRONTEIRAS_EXIBICAO``: EAX 0, no cleanup, the body never executed): a bound
+        provider ``TextGetMessage(n, sitio) -> EAX`` answers it. Without one (the leaf bench) the pointer-0 read
+        is a named gap, never a guessed 0."""
         tabela = self.m.u32(0x5099a4)
         if tabela == 0:
+            if self.p is not None and 'TextGetMessage' in getattr(self.p, 'funcoes', {}):
+                return self.p('TextGetMessage', sitio, n=n & 0xffff, sitio=sitio) & M32
             _parar('TextGetMessage with the text table pointer 0x5099a4 = 0 (texts not loaded)', 0x478a47)
         return self.m.u32(tabela + 4 * (n & 0xffff))
 
@@ -900,7 +906,7 @@ class Entrada:
             codigo = self._bag_code(bag, indice)
             tipo = self._bag_type(bag, indice)
             if codigo == 2:
-                loc['info'] = self._texto((tipo & 0xff) + 0x28)
+                loc['info'] = self._texto((tipo & 0xff) + 0x28, 0x42be16)
                 loc['info2'], loc['flag'] = 0xffff, 0
                 for a in (0x4e0614, 0x4e0616, 0x4e0612, 0x4e0618):
                     m.u16(a, 0)
@@ -927,7 +933,7 @@ class Entrada:
                             m.u16(PAGINA, 3)
                             m.u8(MODO_ACAO, t)
             elif codigo == 7:
-                loc['info'] = self._texto(0x61)
+                loc['info'] = self._texto(0x61, 0x42c218)
                 loc['info2'], loc['flag'] = 0xffff, 0
                 if ae and af:
                     m.u8(MODO_ACAO, tipo)
@@ -970,17 +976,17 @@ class Entrada:
                 m.u32(CURSOR_ANIM, 0)
             return
         if self._sac(si):
-            loc['info'] = self._texto(((self._tipo_sac(si) & 0xff) + 0x28) & 0xffff)
+            loc['info'] = self._texto(((self._tipo_sac(si) & 0xff) + 0x28) & 0xffff, 0x4299d0)
             loc['info2'] = self.p('SacGetCapacite', 0x4299da, celula=si)
         elif self._gc(si):
-            loc['info'] = self._texto(0x2c)
+            loc['info'] = self._texto(0x2c, 0x4299f4)
         elif self._mina(si):
-            loc['info'] = self._texto(0x5b)
+            loc['info'] = self._texto(0x5b, 0x429a0e)
             loc['info2'] = self.p('MineGetCapacite', 0x429a22,
                                   indice=self.p('MineGetIndice', 0x429a18, celula=si) & 0xffff)
             loc['flag'] = 0
         elif self._armadilha(si, p):
-            loc['info'] = self._texto(0x33)
+            loc['info'] = self._texto(0x33, 0x429a46)
             loc['info2'], loc['flag'] = 0xffff, 0
         tipo_sob = 5
         if self._iluminada(si, p):

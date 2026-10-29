@@ -148,6 +148,7 @@ class ComposicaoEntrada(ComposicaoQuadros):
         super().__init__(estado, captura_quadro, entrada, captura_m1, **kw)
         self.roteiro = roteiro
         self.palavras_msg = MSG_LACO
+        self.textos = []              # TextGetMessage boundary events (frame, call site, message number)
 
     # ---------------------------------------------------------------- between_frames{k}
     def _entre(self, regs, entradas, registro, fase):
@@ -221,6 +222,13 @@ class ComposicaoEntrada(ComposicaoQuadros):
             registro.fronteira(nome, 0, None, regs_som, palavras=list(pilha))
             return regs_som['EAX']
         vivos = provedores_vivos(mm, janelas=_TeclasSitio(self.roteiro), som=som)
+        def texto(n, sitio):
+            """TextGetMessage as Missions' declared display-scenario boundary: EAX 0, no cleanup, logged."""
+            registro.fronteira('TextGetMessage', sitio + 5, f'InputGame+0x{sitio + 5 - 0x429278:x}', dict(EAX=n),
+                               declarado=0)
+            self.textos.append(dict(frame=self.roteiro.quadro, site=hex(sitio), message=n))
+            return 0
+        vivos.funcoes['TextGetMessage'] = texto
         e = Entrada(mm, vivos)
         e.comandos = self.ctx.comandos
         e.ordens = ordens

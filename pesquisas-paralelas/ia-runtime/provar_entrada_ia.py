@@ -152,7 +152,7 @@ def main():
     comp = ComposicaoEntrada(estado, cap, entrada, m1, roteiro, inicio=128, alocacoes=cap['allocations'],
                              regs_inicio=regs)
     n = a.quadros or (max(quadros_ref) - 128)
-    quadros, parada, primeira_diferenca = [], None, None
+    quadros, parada, primeira_diferenca, textos = [], None, None, []
     ordens_py = []
     k = 128
     try:
@@ -178,6 +178,11 @@ def main():
                     dif['orders'] = dict(python=ord_py, probe=ord_ref)
                 quadros.append(dict(frame=k, equal=not dif, orders=len(ord_ref),
                                     dgroup_sha256_python=None))
+                n_py = sum(t['frame'] == k for t in comp.textos)
+                n_ref = quadros_ref[k].get('entries', {}).get('TextGetMessage', 0)
+                if n_py or n_ref:
+                    textos.append(dict(frame=k, python_frame_phase=n_py, probe_entries=n_ref,
+                                       sites=sorted({t['site'] for t in comp.textos if t['frame'] == k})))
                 if dif:
                     primeira_diferenca = dict(frame=k, differences=dif)
                     break
@@ -200,6 +205,11 @@ def main():
         start=dict(frame=128, source=str(M22.relative_to(ROOT)), summary=cap['phases'][-1]['state_after']['summary']),
         frames_requested=n, frames_equal=sum(q['equal'] for q in quadros), last_frame=k,
         orders_python=ordens_py, first_difference=primeira_diferenca, stop=parada,
+        text_boundary=dict(
+            binding='TextGetMessage as Missions\' declared display-scenario boundary (EAX 0, no cleanup, logged)',
+            frames=textos, frames_equal=sum(t['python_frame_phase'] == t['probe_entries'] for t in textos),
+            note='probe_entries counts every TextGetMessage entry of frame k (both phases); python_frame_phase '
+                 'counts the frame-phase calls of the chain (InputGame); the display-phase callers are Graphics\''),
         core_construction_reference=a.nucleo_ref and dict(path=a.nucleo_ref, construcao_core_sha256=hashlib.sha256(
             (ROOT / a.nucleo_ref / 'construcao_core.py').read_bytes()).hexdigest()),
         source_revision=subprocess.run(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], capture_output=True,
