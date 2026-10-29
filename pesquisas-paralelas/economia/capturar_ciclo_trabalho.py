@@ -24,11 +24,12 @@ Conditional actions at later CalculGame entries (first frame the condition holds
 
 Recorded calls (``Ciclo`` isolation): every BatimentLogeEngin, BatimentAjouteMatiere, InitBatimentPlayer,
 TerrainRecolte, MineRecolte, MineSetWork, MineEndWork call that is not nested in another recorded call;
-CalculWorkEngin of units 12/13/14 and CalculEntreBatiment of units 13/colonist when the unit stands on
-its destination with an expired or unused timer, plus every 50th frame. Per frame: units 12/13/14/colonist,
+CalculWorkEngin of units 12/13/14 when its timer is about to expire (type 5 phases 1/3, type 7 phases 1/4),
+in the builder's mine-exit and return phases (7: 2/5), or otherwise within 3 cells of its destination;
+CalculEntreBatiment of units 13/colonist within 3 cells of their destination; and both every 50th frame. Per frame: units 12/13/14/colonist,
 player-0 resources, the cave-count words, structures 0 and 1.
 
-    python3 -B pesquisas-paralelas/economia/capturar_ciclo_trabalho.py --ate 1150 \
+    python3 -B pesquisas-paralelas/economia/capturar_ciclo_trabalho.py --ate 1600 \
         --saida pesquisas-paralelas/economia/evidencias/ciclo-trabalho/captura-ciclo-trabalho-exibicao.json.xz
 """
 import argparse
@@ -173,7 +174,13 @@ def escolher(estado):
         if c.k % 50 == 0:
             return True
         u = unidade(c, i)
-        return u['cell'] == u['dest'] and u['timer'] <= 1
+        perto = max(abs((u['cell'] & 0xff) - (u['dest'] & 0xff)), abs((u['cell'] >> 8) - (u['dest'] >> 8))) <= 3
+        if nome == 'CalculEntreBatiment':
+            return perto
+        temporizada = (u['type'], u['phase']) in ((5, 1), (5, 3), (7, 1), (7, 4))
+        if temporizada:
+            return u['timer'] <= 1
+        return perto or (u['type'], u['phase']) in ((7, 2), (7, 5))
     return f
 
 
