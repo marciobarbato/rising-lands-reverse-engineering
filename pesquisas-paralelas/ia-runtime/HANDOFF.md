@@ -383,3 +383,15 @@ Main `99c0e4e`. Details are in [M2_3_INCURSAO.md](M2_3_INCURSAO.md), round 2.
 - **Call order:** the composition's order is the original's. At 9700 the native dispatcher runs DeplaceEngin in the same frame as the re-order.
 - **Next stop, beyond the M2.3 window:** Core's CalculFatigue fatigue-threshold branch `0x452d61`, around counter 10880.
 - **Tool:** `sondar_incursao_ia.py N` (Python only, `.local/` output) runs the composition with the forcing-equivalent start.
+
+
+## M2.3 — 9,200-frame equality proof (2026-10-29)
+
+Main `5f4052c` (Missions' evidence `de154b5`). The report is [M2_3_PROVA_9200_QUADROS.md](M2_3_PROVA_9200_QUADROS.md); the data is in `validacao/m2-3-prova-9200-quadros.json`. It is Python only, from clean revision `8a5787d`.
+- **Reference:** Missions' 10 M2.3 parts (manifest SHA pinned; hash chain, every replayed summary/compared summary/masked hash, and the full states at 8999, 9000 and 9176 checked) and the cumulative 9,200-frame policy.
+- **Result:** all 18,401 phases equal, frames 0–9,200, through the raid spawn at 9000 and the first path search at 9176–9179.
+  - 16,022,275 compared bytes per phase; both RNGs; bindings and boundaries outside display; allocation counts; the 9,200 between-frames exit registers and 9,191 carried entry registers; HUD flag 9,200/9,200.
+  - Part 09's final 25,482 allocation records are equal.
+  - Zero crossings, measured per part (`comparar_parte` now reports them instead of a constant), and no Core provider stop.
+- **Tool:** `provar_quadros_9200_ia.py` — `parte N`, `agregar`, or `tudo --paralelo 4 --lease <heavy_lease.py>` (one command, about 24 min on the MacBook with four parts at a time).
+- **Next:** the coordinator's second-machine reproduction must match the ten `phase_chain_sha256` values listed in the report.
