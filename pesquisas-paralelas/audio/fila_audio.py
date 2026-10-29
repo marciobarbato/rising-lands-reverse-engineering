@@ -29,10 +29,13 @@ class _QueuePCMFiles:
     def posicionar(self,handle,offset,origin):
         return self.queue.call('_llseek',handle,(offset,origin),0x48c05e)['hresult']
     def ler(self,handle,size):
-        answer=self.queue.call('_hread',handle,(self.device.lock_pointer,size),0x48c042)
+        target=self.device.lock_pointer
+        if target is None:target=self.queue.memory.u32(0x52222c)
+        answer=self.queue.call('_hread',handle,(target,size),0x48c042)
         data=bytes.fromhex(answer['value'])
         if len(data)>size or answer['hresult']!=len(data):
             raise DependenciaSom(0x48c042,'Read answer outside captured explicit-byte domain')
+        self.queue.memory.write(target,data)
         return data
 
 
@@ -53,9 +56,9 @@ class _QueuePCMDevice:
             raise DependenciaSom(0x48c097,'Lock requires explicit pointer and byte-count writes')
         if any(type(outputs[key]) is not int or not 0<=outputs[key]<=0xffffffff for key in outputs):
             raise ValueError('Lock output pointer and size require u32 values')
-        if outputs['size']!=size or size!=self.created_size:
+        if outputs['size']!=size:
             raise DependenciaSom(0x48c097,'Wrapped/short Lock outputs outside captured PCM domain')
-        self.lock_pointer=outputs['pointer'];self.buffers[pointer]=self.queue.memory.view(self.lock_pointer,size)
+        self.lock_pointer=outputs['pointer'];self.buffers[pointer]=self.queue.memory.view(self.lock_pointer,max(size,self.created_size))
         return 0
     def destravar(self,pointer,offset,size,second,second_size):
         return self.queue.call('Unlock',pointer,(self.lock_pointer+offset,size,second,second_size),0x48c0b5)['hresult']
@@ -323,29 +326,33 @@ class AudioQueue:
         if self.call('SetVolume',pointer,(volume,),0x48bf45)['hresult']:return 0
         return int(self.call('Play',pointer,(0,0,int(m.u32(r+12)==1)),0x48bf62)['hresult']==0)
 
-    def create_pending_pcm(self,r):
-        m=self.memory;bank=BancoSom(m.view(m.u32(r+4),28),m.u32(r+4));header=m.read(m.u32(r+28),16)
-        if header[12]!=0 or bank.em_memoria!=0:
-            raise DependenciaSom(0x48aad4,'Queue bridge currently captures file-backed PCM only')
+    def create_physical(self,r):
+        m=self.memory;maximum=_i32(m.u32(0x498f60))
+        if not -1<=maximum<=9:raise DependenciaSom(0x48ac78,'Physical maximum outside -1..9')
+        if maximum==9:return 0
+        maximum+=1;m.w32(0x498f60,maximum)
+        bank=BancoSom(m.view(m.u32(r+4),28),m.u32(r+4));header=m.read(m.u32(r+28),16)
+        if bank.em_memoria==1:
+            bank.dados=m.view(bank.ponteiro_dados,bank.tamanho_dados)
         device=_QueuePCMDevice(self);files=_QueuePCMFiles(self,device)
         system=SimpleNamespace(directsound=device,arquivos=files)
-        globals_=SimpleNamespace(directsound=m.u32(0x522228))
+        globals_=SimpleNamespace(directsound=m.u32(0x522228),comprimido=m.u32(0x52222c))
         pointer,_=criar_superficie_som(system,globals_,bank,header)
-        slot=0x52211c+8*m.u32(0x498f60);m.w32(slot,pointer)
+        slot=0x52211c+8*maximum;m.w32(slot,pointer)
         if not pointer:return 0
-        m.w32(slot+4,r);m.w32(r+32,slot);m.w32(r+36,0)
-        result=self.start_buffer(r);self.transfer_to_playing((r-TABLE)//STRIDE);m.w32(0x521f84,1)
+        m.w32(slot+4,r);return slot
+
+    def create_pending_pcm(self,r):
+        # Historical single-request bridge retained; Manage now uses the leaves.
+        m=self.memory;slot=self.create_physical(r);m.w32(r+32,slot)
+        if not slot:return 0
+        m.w32(r+36,0);result=self.start_buffer(r)
+        self.transfer_to_playing((r-TABLE)//STRIDE);m.w32(0x521f84,1)
         return result
 
     def manage(self):
         m=self.memory
-        for base in (0x52216c,0x52211c):
-            for i in range(10):
-                slot=base+i*8;pointer=m.u32(slot)
-                if not pointer:continue
-                r=m.u32(slot+4)
-                if m.u8(r+8)==1 and self.status(pointer,'stopped'):self.stop_handle(m.u32(r+40))
-        if m.u32(0x521f90):raise DependenciaSom(0x48a0a1,'Dictator lifecycle not yet captured')
+        self.clear_list()
         if m.u32(0x521f88) or m.u32(0x498f5c):
             for i in range(20):
                 r=self.address(i)
@@ -357,12 +364,22 @@ class AudioQueue:
                 self.call('SetVolume',m.u32(slot),(value,),0x48a5d5);m.w32(r+20,0)
             m.w32(0x521f88,0)
         m.w32(0x498f5c,0)
-        if self.maximum()<=19:return 1
-        if self.maximum()!=20:
-            raise DependenciaSom(0x48a80c,'Multiple pending requests outside captured Manage domain')
-        r=self.address(self.maximum())
-        if m.u16(m.u32(r+24)+4)==256:raise DependenciaSom(0x48a702,'Dictator request creation not yet captured')
-        if _i32(m.u32(0x498f60))!=-1:
-            raise DependenciaSom(0x48acd3,'Loaded physical-slot lookup/lifecycle not yet captured')
-        m.w32(0x498f60,m.u32(0x498f60)+1)
-        return self.create_pending_pcm(r)
+        result=1
+        for index in range(self.maximum(),19,-1):
+            r=self.address(index);loaded=self.find_loaded(m.u32(r),m.u32(r+4))
+            if m.u16(m.u32(r+24)+4)==256:raise DependenciaSom(0x48a702,'Dictator request creation not yet captured')
+            if loaded:
+                if _i32(m.u32(0x498f64))>=9:
+                    if _i32(m.u32(0x498f60))>=9:break
+                    continue
+                slot=self.create_logical(m.u32(loaded),r);m.w32(r+32,slot)
+                if not slot:result=0;continue
+                m.w32(r+36,1)
+            else:
+                if _i32(m.u32(0x498f60))>=9:continue
+                slot=self.create_physical(r);m.w32(r+32,slot)
+                if not slot:result=0;continue
+                m.w32(r+36,0)
+            if not self.start_buffer(r):result=0
+            self.transfer_to_playing(index);m.w32(0x521f84,1)
+        return result
