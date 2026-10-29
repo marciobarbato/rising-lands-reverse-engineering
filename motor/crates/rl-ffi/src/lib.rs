@@ -10,7 +10,7 @@ use std::{
     sync::{Mutex, OnceLock},
 };
 
-pub const ABI_VERSION: u32 = 0x00010002;
+pub const ABI_VERSION: u32 = 0x00010003;
 const MAX_BLOCKS: u32 = 65536;
 const MAX_BYTES: usize = 64 * 1024 * 1024;
 #[repr(C)]
@@ -19,7 +19,9 @@ pub struct RlBloco {
     pub length: u32,
     pub data: *const u8,
 }
+mod render_abi;
 struct Registry {
+    renderers: BTreeMap<u64, render_abi::BoundRenderer>,
     next: u64,
     worlds: BTreeMap<u64, World>,
 }
@@ -37,11 +39,13 @@ enum AbiError {
     Poisoned,
     ResourceLimit,
     VersionMismatch,
+    StaleGeneration,
+    RenderInput(&'static str),
 }
 impl AbiError {
     fn code(&self) -> i32 {
         match self {
-            Self::InvalidArgument => 1,
+            Self::InvalidArgument | Self::RenderInput(_) => 1,
             Self::InvalidHandle => 2,
             Self::Memory(_) => 3,
             Self::UnknownRoutine => 4,
@@ -51,11 +55,13 @@ impl AbiError {
             Self::Poisoned => 8,
             Self::ResourceLimit => 9,
             Self::VersionMismatch => 10,
+            Self::StaleGeneration => 11,
         }
     }
     fn message(&self) -> String {
         match self {
             Self::Memory(e) | Self::UnsupportedPath(e) => e.to_string(),
+            Self::RenderInput(s) => (*s).to_owned(),
             _ => format!("{self:?}"),
         }
     }
@@ -94,6 +100,7 @@ fn with_registry<T>(f: impl FnOnce(&mut Registry) -> Result<T>) -> Result<T> {
             Mutex::new(Registry {
                 next: 1,
                 worlds: BTreeMap::new(),
+                renderers: BTreeMap::new(),
             })
         })
         .lock()
@@ -118,7 +125,7 @@ pub unsafe extern "C" fn rl_criar_mundo(
     output: *mut u64,
 ) -> i32 {
     status(|| {
-        if ![ABI_VERSION, 0x00010000, 0x00010001].contains(&version) {
+        if ![ABI_VERSION, 0x00010000, 0x00010001, 0x00010002].contains(&version) {
             return Err(AbiError::VersionMismatch);
         }
         if output.is_null() {
