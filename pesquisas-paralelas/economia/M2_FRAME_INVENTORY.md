@@ -108,3 +108,13 @@ So **every frame consumes eight RNG draws in unit order** (0, 1, 2, 11, 12, 13, 
 - **Missions / coordinator:** confirm the frame-1 counter value and the frame-1 entry state (this inventory assumes counter k at frame k).
 - **ai-runtime:** the dispatcher calls the economy state-7 body with EAX = u16 unit, EDI = the same unit as the original register (the body uses DI), and returns through `0x454ccd`. The type-2 branch is unchanged (`Producao.calcular_tropa`).
 - **Owner needed:** `MAJSympathie 0x475118` (sympathy; Economy proposes to own it with the player block), `InitGameZone 0x471830` (UI; graphics/macOS), `MessageBoxSet 0x46994b` (UI), `AnimBallonStatic 0x447b2f` (graphics), `InventionSetEffet 0x470f98` (Economy research, later stage). None is reached in MONDE01's first frames.
+
+## Erratum after Missions' first-frame capture (M2.1 round 2)
+
+Missions' original capture (`pesquisas-paralelas/missoes/QUADRO1_MONDE01.md`) shows that `CalculGame`'s load-state invocation already runs one frame body ("frame 0"), with counter 0, and that frame 1 runs with counter 1. The assumption above (counter k at frame k ≥ 1) is replaced by frame k at counter k for k ≥ 0. Consequences, confirmed by the isolated exact-frame capture:
+
+- `SetUpdateChamp` sets the flag in frame 0 (0 % 128 = 0). `UpdateChamp` then processes row 1 in frame 0 and row 2 in frame 1, with no RNG draw in these rows.
+- `PlayerAttaqueCalculSympa` runs its loop in frame 0. It calls `MAJSympathie(p, q, 0x13)` twelve times, and every call returns at the AI-context gate (`0x51a990 + 16p` = 1 for players 1–3). `MAJSympathie` is therefore reached, and Economy owns it (it writes only the player block, through `PlayerSetSympathie`).
+- `CalculMatiere` sets the digit bits in frame 0, and the presentation reaches 10 in frame 1.
+- `ResetTableauHangar 0x461e33` (market block, `0x4e296c`) runs at the start of `CalculBatimentNextEtape` every frame. In frame 0 it changes the 40 words from 0 to `0xffff`.
+- The unit prelude calls `BonusGetValEngin` 24 times per frame. The type-2 branch calls `BagContientTroupe`, then `CalculTroupe` (inactive), and the structure loop calls `BatimentGetCase` (= `0x0c0e`).
