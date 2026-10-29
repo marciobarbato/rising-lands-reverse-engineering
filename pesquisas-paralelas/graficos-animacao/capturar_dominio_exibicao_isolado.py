@@ -21,8 +21,12 @@ from emulador import x86
 from mapa_memoria_m1 import carregar_json
 
 SO_VISIVEL = '--so-visivel' in sys.argv
+ESTADOS = '--estados' in sys.argv
+FLIPS = '--flips' in sys.argv
 ORIGENS_EXATAS = ([tuple(int(v) for v in o.split(',')) for o in sys.argv[sys.argv.index('--origens')+1].split(';')]
                   if '--origens' in sys.argv else None)
+ENTRADAS_DESENHO = (0x41591f, 0x412390, 0x415acf, 0x46ff70, 0x478a04, 0x410085)   # AffEngin, AffDeplaceEngin, AffVeget, AffProjectile, AffEnginProjectile, AffVegetTerrain
+SITIOS_CURSOR = tuple(int(a, 16) for a, *_ in json.load(open(Path(__file__).resolve().parent/'evidencias/fechamento-escritas-affgame-modo12.json'))['escritas_absolutas']['0x4e1d18'])
 POOL, PASSO = 0x49a0c8, 276
 LARGURA, ALTURA = 0x497168, 0x49716a
 
@@ -65,8 +69,27 @@ class IsolamentoExibicao(oq.Isolamento):
         if ORIGENS_EXATAS:   # exact origins only: no grid, no structure or flag perturbations
             casos = [casos[0]]+[dict(case=f'origin_{x}_{y}', writes=[(0x508720, u16(x)), (0x508722, u16(y))], repeat=1)
                                 for x, y in ORIGENS_EXATAS]
-            if nome == 'AffGame':
+            if ESTADOS:   # every structure mode of the Santuario record at each exact origin
+                casos = [casos[0]]
+                for x, y in ORIGENS_EXATAS:
+                    for estado in range(8):
+                        casos.append(dict(case=f'visible_{x}_{y}_structure_{santuario}_state_{estado}',
+                                          writes=[(0x508720, u16(x)), (0x508722, u16(y)),
+                                                  (POOL+santuario*PASSO+5, bytes([estado]))], repeat=1))
+            elif nome == 'AffGame':
                 casos.append(dict(case='three_consecutive_calls', writes=[], repeat=3))
+        if FLIPS:   # shake path of DDFlipPage: [0x4dfb44] x frame-counter parity x flip-loop count [0x49a05b]
+            casos = [casos[0]]
+            for n in (1, 2, 5, 20):
+                for contador in (2, 3):
+                    casos.append(dict(case=f'dfb44_{n}_counter_{contador}', writes=[
+                        (0x4dfb44, bytes([n])), (0x508f7c, contador.to_bytes(4, 'little'))], repeat=1))
+            if nome == 'AffGame':
+                for paginas in (0, 2, 3):
+                    casos.append(dict(case=f'dfb44_5_counter_2_pages_{paginas}', writes=[
+                        (0x4dfb44, b'\x05'), (0x508f7c, (2).to_bytes(4, 'little')), (0x49a05b, bytes([paginas]))], repeat=1))
+                casos.append(dict(case='dfb44_5_counter_2_three_calls', writes=[
+                    (0x4dfb44, b'\x05'), (0x508f7c, (2).to_bytes(4, 'little'))], repeat=3))
         resultados = []
         cob = {}
 
@@ -77,7 +100,16 @@ class IsolamentoExibicao(oq.Isolamento):
                 cob['state_read'][str(est)] += 1
             else:
                 cob[hex(endereco)] = cob.get(hex(endereco), 0)+1
-        for a in (0x40816b, 0x408195, 0x4081ac):   # state read; state==3 branch; first cursor read site
+        leitores = {}
+
+        def vigiar(cpu, acesso, endereco, tamanho, valor, _):
+            k = b.nome(cpu.reg_read(x86.UC_X86_REG_EIP))
+            leitores[k] = leitores.get(k, 0)+1
+        b.cpu.hook_add(oq.unicorn.UC_HOOK_MEM_READ, vigiar, None, begin=POOL+santuario*PASSO, end=POOL+santuario*PASSO+0x13)
+        cob['readers_of_record_head'] = leitores
+        for a in (0x40816b, 0x408195, 0x4081ac):   # AffBatiments inline state read; state==3 branch; first cursor read site
+            b.cpu.hook_add(oq.unicorn.UC_HOOK_CODE, cobrir, None, begin=a, end=a)
+        for a in SITIOS_CURSOR+ENTRADAS_DESENHO:
             b.cpu.hook_add(oq.unicorn.UC_HOOK_CODE, cobrir, None, begin=a, end=a)
         self.ativo = False   # b.fase stays the real phase: declared boundaries (LoadPie...) keep their recorded skips
         pulos0, front0 = len(b.eventos_pulados), len(b.eventos_fronteira)
@@ -92,6 +124,8 @@ class IsolamentoExibicao(oq.Isolamento):
                 eventos = len(b.vinculos_declarados.eventos)
                 chamadas = []
                 cob.clear()
+                leitores.clear()
+                cob['readers_of_record_head'] = leitores
                 for k in range(caso['repeat']):
                     ant = self._salvar()[1]
                     b.cpu.mem_write(regs['ESP'], struct.pack('<I', retorno))
@@ -167,5 +201,7 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument('--saida', required=True)
     ap.add_argument('--so-visivel', action='store_true')
+    ap.add_argument('--flips', action='store_true', help='DDFlipPage shake-path cases at the captured origin')
+    ap.add_argument('--estados', action='store_true', help='with --origens: structure modes 0..7 at each origin')
     ap.add_argument('--origens', help='x,y;x,y exact view origins (replaces the grid and perturbations)')
     principal(ap.parse_args().saida)
