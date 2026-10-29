@@ -267,6 +267,18 @@ class BancadaQuadroMissaoOriginal(BancadaCargaMissaoOriginal):
             stack_words=[hex(v) for v in pilha], declared_eax=valor, stack_cleanup=limpeza,
             guards={hex(g): self.cpu.mem_read(g, 1)[0] for g in GUARDAS_FRONTEIRA.get(nome, ())}))
 
+    def _correr(self, rotulo, entrada, registradores, paradas, retomar=False):
+        iso = getattr(self, 'isolamento', None)
+        if iso is None or not iso.ativo or not retomar:
+            return super()._correr(rotulo, entrada, registradores, paradas, retomar)
+        while True:
+            regs = super()._correr(rotulo, entrada, registradores, tuple(paradas)+tuple(iso.entradas), True)
+            if regs['EIP'] not in iso.entradas or regs['EIP'] in paradas:
+                return regs
+            iso.executar(regs)
+            entrada = regs['EIP']
+            self._retomando = {entrada}
+
     # ------------------------------------------------------------ entry trace
     def _ganchar_quadros(self):
         enderecos = set(self.fronteiras) | {CALCUL_GAME, RETORNO_CALCUL_GAME, SAIDA_LACO}
@@ -325,11 +337,13 @@ class BancadaQuadroMissaoOriginal(BancadaCargaMissaoOriginal):
         return CALCUL_GAME <= retorno < 0x42d4f8
 
     def _bloco(self, cpu, endereco, tamanho, _):
+        if self.fase not in FASES_QUADRO:
+            return
         esp = cpu.reg_read(x86.UC_X86_REG_ESP)
         chave = (endereco, esp)
         repetido = chave == self._ultimo_bloco
         self._ultimo_bloco = chave
-        if endereco not in self._simbolos or repetido or self.fase not in FASES_QUADRO:
+        if endereco not in self._simbolos or repetido:
             return
         retorno = struct.unpack('<I', cpu.mem_read(esp, 4))[0]
         nome = self.nomes[endereco]
@@ -483,3 +497,113 @@ class BancadaQuadroMissaoOriginal(BancadaCargaMissaoOriginal):
                 vistos[chave] = eax_lido_pelo_chamador(ler, int(ev['caller_return'], 16))
         return [dict(routine=r, caller_return=c, caller=self.nome(int(c, 16)), declared_eax=self.fronteiras[self.sym[r]][1][0],
                      after_return=v[0], at=v[1], instruction=v[2]) for (r, c), v in sorted(vistos.items())]
+
+
+class Isolamento:
+    """Pause a phase at routine entries and run each call in isolation.
+
+    At a declared entry the bench saves the CPU context and every state block
+    (DGROUP+.bss, CRT thread page, active allocations, native stack), runs the
+    intact routine natively to its stack return address under local
+    read/write hooks, records AL/EAX, registers, written bytes and the bytes
+    read before written (with their entry values), restores the exact saved
+    state, and repeats for each declared perturbation.  The phase then resumes
+    from the restored entry and executes the routine as usual.  A binding or
+    boundary inside an isolated call stops the run.
+    """
+    def __init__(self, bancada, rotinas, perturbacoes=None):
+        self.b = bancada
+        self.entradas = {bancada.sym[n]: n for n in rotinas}
+        self.perturbacoes = perturbacoes or {}
+        self.registros = []
+        self.ativo = True
+
+    def instalar(self):
+        for a in self.entradas:
+            self.b.cpu.hook_add(unicorn.UC_HOOK_CODE, self.b._parar_se_pedido, begin=a, end=a)
+        self.b.cpu.ctl_flush_tb()
+        self.b.isolamento = self
+
+    def _salvar(self):
+        blocos = self.b.imagem()
+        blocos['native_stack'] = (PILHA, bytes(self.b.cpu.mem_read(PILHA, 0x10000)))
+        return self.b.cpu.context_save(), blocos
+
+    def _restaurar(self, contexto, blocos):
+        for base, dados in blocos.values():
+            self.b.cpu.mem_write(base, dados)
+        self.b.cpu.context_restore(contexto)
+
+    def _rastrear(self, blocos):
+        lidos, escritos = {}, set()
+        def ler(cpu, acesso, endereco, tamanho, valor, _):
+            for a in range(endereco, endereco+tamanho):
+                if a not in escritos and a not in lidos:
+                    lidos[a] = cpu.reg_read(x86.UC_X86_REG_EIP)
+        def escrever(cpu, acesso, endereco, tamanho, valor, _):
+            escritos.update(range(endereco, endereco+tamanho))
+        ganchos = []
+        for base, dados in blocos.values():
+            ganchos.append(self.b.cpu.hook_add(unicorn.UC_HOOK_MEM_READ, ler, None, begin=base, end=base+len(dados)-1))
+            ganchos.append(self.b.cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE, escrever, None, begin=base,
+                                               end=base+len(dados)-1))
+        self.b.cpu.ctl_flush_tb()
+        return lidos, escritos, ganchos
+
+    def _valor(self, blocos, endereco):
+        for base, dados in blocos.values():
+            if base <= endereco < base+len(dados):
+                return dados[endereco-base]
+        raise KeyError(hex(endereco))
+
+    def executar(self, regs):
+        b, entrada = self.b, regs['EIP']
+        nome, fase = self.entradas[entrada], b.fase
+        retorno = struct.unpack('<I', b.cpu.mem_read(regs['ESP'], 4))[0]
+        contexto, blocos = self._salvar()
+        casos = [dict(case='captured_inputs', writes=[], registers={})] + list(self.perturbacoes.get(nome, ()))
+        resultados = []
+        self.ativo = False
+        b.fase = 'isolated'
+        try:
+            for caso in casos:
+                self._restaurar(contexto, blocos)
+                for endereco, dados in caso['writes']:
+                    b.cpu.mem_write(endereco, bytes(dados))
+                for registro, valor in caso['registers'].items():
+                    b.cpu.reg_write(getattr(x86, 'UC_X86_REG_'+registro), valor)
+                antes = {k: v for k, v in self._salvar()[1].items()}
+                eventos, fronteiras = len(b.vinculos_declarados.eventos), len(b.eventos_fronteira)
+                lidos, escritos, ganchos = self._rastrear(blocos)
+                try:
+                    b._retomando = {entrada}
+                    saida = BancadaCargaMissaoOriginal._correr(b, 'isolated', entrada, {}, (retorno,), retomar=True)
+                finally:
+                    for g in ganchos:
+                        b.cpu.hook_del(g)
+                if len(b.vinculos_declarados.eventos) != eventos or len(b.eventos_fronteira) != fronteiras:
+                    b._interromper('binding_or_boundary_in_isolated_call', routine=nome, case=caso['case'])
+                depois = self._salvar()[1]
+                mudados = {}
+                for n, (base, dados) in depois.items():
+                    if n == 'native_stack':
+                        continue
+                    velho = antes[n][1]
+                    if dados != velho:
+                        mudados.update({base+i: (velho[i], dados[i]) for i in range(len(dados)) if dados[i] != velho[i]})
+                pilha_sp = saida['ESP']
+                leituras = sorted(a for a in lidos if not (PILHA <= a < pilha_sp))
+                resultados.append(dict(
+                    case=caso['case'], perturbation=dict(writes=[[hex(a), bytes(d).hex()] for a, d in caso['writes']],
+                                                         registers={k: hex(v) for k, v in caso['registers'].items()}),
+                    entry_registers={k: hex(v) for k, v in regs.items()},
+                    exit_registers={k: hex(v) for k, v in saida.items()}, al=saida['EAX'] & 0xff,
+                    reached_return=saida['EIP'] == retorno,
+                    changed_bytes=[[hex(a), v[0], v[1]] for a, v in sorted(mudados.items())],
+                    read_before_write=[[hex(a), self._valor(antes, a), b.nome(lidos[a])] for a in leituras]))
+        finally:
+            self._restaurar(contexto, blocos)
+            b.fase = fase
+            self.ativo = True
+        self.registros.append(dict(routine=nome, entry=hex(entrada), phase=fase, caller_return=hex(retorno),
+                                   caller=b.nome(retorno), cases=resultados))
