@@ -16,7 +16,12 @@ The path solver is an explicit argument; using the search without one raises ``E
 search result the world keeps per unit is the original's global pair: status u8 ``0x4e0f4c`` and
 alternative cell u16 ``0x4e0f4a``, which DeplaceEngin's state 4 reads. The navigation trace is a
 write-only Python list, a diagnostic that nothing in the game logic reads. ``memoria`` needs ``u8/u16/u32`` and either ``vista(addr, n)`` or
-``segmentos`` of ``(base, end, view)``.
+``segmentos`` of ``(base, end, view)``. Over Missions' map (``memoria.mapa``) the u16 grids that the map
+keeps as lists (tiles, regions, the structure-colour stack) are those lists by identity.
+
+Scalars live in the memory's bytes. Missions' map world keeps cached copies of some of them, so a
+composition that also uses ``prov.mundo`` pulls (``mapa.puxar()``) after these providers run, and pushes
+(``mapa.empurrar()``) before them.
 """
 import struct
 
@@ -60,6 +65,20 @@ def vista_de(m, endereco, tamanho):
         if base <= endereco and endereco + tamanho <= fim:
             return memoryview(view)[endereco - base:endereco - base + tamanho]
     raise ValueError(f'[0x{endereco:08x},+{tamanho}) is not inside one live segment')
+
+
+def grade_u16_viva(m, endereco, quantidade):
+    """A live u16 grid at ``endereco``: a ``GradeU16`` over the memory's bytes or, when the memory is Missions'
+    map (``m.mapa``, e.g. ai-runtime's ``MemoriaMapaM1``) and that grid is a list-backed segment, the
+    segment's own list by identity, the same object the map's world uses."""
+    mapa = getattr(m, 'mapa', None)
+    if mapa is not None:
+        s = mapa._segmento(endereco, 2 * quantidade)
+        if s.tipo != 'bytes':
+            if s.formato != 'H' or s.base != endereco or len(s.lista) != quantidade:
+                raise ValueError(f'{s.dono}: not a {quantidade}-entry u16 list at 0x{endereco:08x}')
+            return s.lista
+    return GradeU16(vista_de(m, endereco, 2 * quantidade), quantidade)
 
 
 class _Itens:
@@ -152,7 +171,7 @@ class CoresEstruturasVivas(CoresEstruturas):
         self.grade = vista_de(m, m.u32(GRADE_CORES), 65536)
         self.livres = vista_de(m, 0x4e1570, 256)
         self.liberadas = vista_de(m, 0x4e1670, 256)
-        self.pilha = GradeU16(vista_de(m, 0x4e0732, 2048), 1024)
+        self.pilha = grade_u16_viva(m, 0x4e0732, 1024)
 
 
 class MundoNavegacaoVivo(MundoNavegacao):
@@ -202,9 +221,10 @@ def mundo_vivo(memoria, solucionador=None):
     w.bolsas_tipos_unidades = [vista_de(m, P(P(BOLSAS) + 4 * i), 26 * 104) for i in range(4)]
     w.grupos = vista_de(m, 0x51a9e0, 100 * 32)
     w.objetos = vista_de(m, P(OBJETOS), 65536)
-    w.vincular_grades(tiles=vista_de(m, P(TILES), 131072), regioes=vista_de(m, P(REGIOES), 131072),
-                      atributos=vista_de(m, P(ATRIBUTOS), 65536), objetos=w.objetos,
+    w.vincular_grades(atributos=vista_de(m, P(ATRIBUTOS), 65536), objetos=w.objetos,
                       donos_objetos=vista_de(m, P(DONOS), 65536))
+    w.tiles, w.regioes = grade_u16_viva(m, P(TILES), 65536), grade_u16_viva(m, P(REGIOES), 65536)
+    w.grades_vivas = w.grades_vivas | {'tiles', 'regioes'}   # rebuilt in place: shared by identity
     for nome, base in (('descoberto', DESCOBERTO), ('luz_bordas', LUZ_BORDAS), ('contagem_luz', CONTAGEM_LUZ)):
         setattr(w, nome, [vista_de(m, P(base + 4 * i), 65536) for i in range(4)])
     largura_mm, altura_mm = w.tamanho_minimapa
