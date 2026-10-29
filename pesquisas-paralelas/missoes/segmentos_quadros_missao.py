@@ -43,10 +43,20 @@ COM_CPU = {'arena': ('cpu',), 'directdraw': ('_cpu',), 'vinculos_declarados': ('
 FORMATO = 'rising-lands/missions-segment-snapshot/1'
 
 
-def bancada_nova():
+def ticks_exibicao(n):
+    """The declared display clock extended by its own rule (0x123456 + 40*k, k = 1..n), as Core's long runs do."""
+    ticks = tuple(0x123456 + 40*k for k in range(1, n+1))
+    if n < len(cen.TICKS_EXIBICAO) or ticks[:len(cen.TICKS_EXIBICAO)] != cen.TICKS_EXIBICAO:
+        raise ValueError('The display clock may only be extended by its own rule')
+    return ticks
+
+
+def bancada_nova(ticks=None):
+    """The -v2 display bench (constructor only); ``ticks`` extends the declared display clock to k = 1..ticks."""
     cap = carregar_json(cen.caminho('exibicao', 'captura_m1'))
     ni = cap['named_inputs']
-    b, _, _ = cen.bancada('exibicao', ni['allocation_fill'], ni['clock_ms'][0])
+    kw = dict(ticks=ticks_exibicao(ticks)) if ticks else {}
+    b, _, _ = cen.bancada('exibicao', ni['allocation_fill'], ni['clock_ms'][0], entradas_kw=kw)
     return b
 
 
@@ -171,9 +181,9 @@ def passo_a(a):
     import capturar_quadros_exibicao_missao as cq
     pasta = ROOT/a.dir
     pasta.mkdir(parents=True, exist_ok=False)
-    checkpoints = tuple(k for k in cq.CHECKPOINTS if k <= a.quadros)
+    checkpoints = () if a.sem_checkpoints else tuple(k for k in cq.CHECKPOINTS if k <= a.quadros)
     t0 = time.monotonic()
-    b = bancada_nova()
+    b = bancada_nova(a.ticks)
     b.iniciar_relogio()
     b.executar_inicio()
     b.executar_mission_load(60)
@@ -184,7 +194,8 @@ def passo_a(a):
     inst = _correr(b, b.executar_quadros(a.quadros, a.segundos_quadro), saida, checkpoints, 0, a.quadros,
                    a.cada, pasta, leve=a.leve)
     inst = {0: zero, **inst}
-    manifesto = dict(frames=a.quadros, every=a.cada, light=a.leve, checkpoints=list(checkpoints), snapshots=inst,
+    manifesto = dict(frames=a.quadros, every=a.cada, light=a.leve, ticks=a.ticks, checkpoints=list(checkpoints),
+                     snapshots=inst,
                      records=saida.name, seconds=round(time.monotonic()-t0, 1))
     caminho = pasta/'passo-a.json'
     caminho.write_text(json.dumps(manifesto, indent=1)+'\n')
@@ -206,7 +217,7 @@ def segmento(a):
     pasta = ROOT/a.dir
     manifesto = json.loads((pasta/'passo-a.json').read_text())
     t0 = time.monotonic()
-    b = bancada_nova()
+    b = bancada_nova(manifesto.get('ticks'))
     k = restaurar(b, pasta/f'instantaneo-{a.de:05d}.pickle')
     if k != a.de:
         raise RuntimeError('Snapshot frame mismatch')
@@ -294,7 +305,7 @@ def politica_segmento(a):
     pasta = ROOT/a.dir
     passo1 = pickle.loads((pasta/'politica-passo1.pickle').read_bytes())
     t0 = time.monotonic()
-    b = bancada_nova()
+    b = bancada_nova(json.loads((pasta/'passo-a.json').read_text()).get('ticks'))
     restaurar(b, pasta/f'instantaneo-{a.de:05d}.pickle')
     acessos, superficie, coletar = pol.ganchos(b, passo1['alvos'])
     resumos = {}
@@ -346,6 +357,8 @@ def main():
     pa.add_argument('--cada', type=int, required=True)
     pa.add_argument('--dir', required=True)
     pa.add_argument('--leve', action='store_true', help='no phase records or images: snapshots only')
+    pa.add_argument('--ticks', type=int, default=None, help='extend the display clock to k = 1..TICKS (long runs)')
+    pa.add_argument('--sem-checkpoints', action='store_true', help='segment records carry no full states')
     pa.add_argument('--segundos-quadro', type=float, default=600.0)
     ps = sub.add_parser('segmento')
     ps.add_argument('--dir', required=True)
