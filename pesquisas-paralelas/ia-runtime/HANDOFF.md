@@ -349,3 +349,15 @@ Main `8564ca7`. The report is [M2_3_INCURSAO.md](M2_3_INCURSAO.md).
   - Core providers (GetFreeCell, CreerEngin, EnginSetPlayer, PlaceEngin, EnginGetCase, GetRandCaseChamps, GetRandCaseTypeBatPlayer, Chemin_Accessible).
   - SetDeplaceEngin and SetAttaqueEngin.
   - The 0x49 behaviour handler; iagUnitSendMessage's dispatch is static and has no native capture.
+
+
+## M2.2 — 128-frame equality proof (2026-10-29)
+
+Main `c7ed947`. The report is [M2_2_PROVA_128_QUADROS.md](M2_2_PROVA_128_QUADROS.md); the data is in `validacao/m2-2-prova-128-quadros.json`. It is Python only, from clean revision `8beb95a`.
+- **Reference:** Missions' 128-frame capture (raw SHA pinned, replay and 11 checkpoints checked).
+- **Policy:** cumulative 128-frame mask.
+- **Result:** all 257 phases equal, with zero crossings.
+  - Every phase has 16,022,275 compared bytes, and RNGs, bindings/boundaries outside display, allocation counts and registers equal.
+  - The final 25,482 records are equal, and the HUD flag matches 128/128.
+- **Mixed bytes:** the HUD flag (modeled) and the clip words (restored by display, equal).
+- **In progress, not pushed:** the M2.3 raid rules at counter 9000 sit on the local branch `wip/ai-raid-rules`. Their capture is waiting for the lease.

@@ -635,3 +635,10 @@ New this round, translated from captured executed blocks: InputGame (MouseZone, 
 - The remaining stops are Core's unit-creation and path routines.
 
 **Checkpoint start:** the N-frame chain can start from a full state after frame K (`--a-partir-de K`) for M2.3b.
+
+## M2.2 — 128-frame equality proof
+
+[M2_2_PROVA_128_QUADROS.md](../pesquisas-paralelas/ia-runtime/M2_2_PROVA_128_QUADROS.md). Against Missions' original 128-frame capture and the cumulative policy, the Python chain from the `-v2` MissionLoad state is equal in all 257 phases, with zero crossings:
+- every compared byte (16,022,275 per phase);
+- both RNGs, the bindings and boundaries outside display context, and the registers;
+- the allocation records and the HUD flag.
