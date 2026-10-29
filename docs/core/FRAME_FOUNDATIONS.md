@@ -67,3 +67,41 @@ The callers never consume the clobbered EAX/EDX of the Core/Graphics world routi
 ## Core implementation scope for M2 (Step 2)
 
 Core translates only what it owns and nobody has already implemented. That covers `GameNextFrame`, the world RNG seed family (`Randomize`/`SetRandomSeed`/`GetRandomSeed`, plus `Random` through the existing arithmetic), the three paths of `iaRandom`, the CRT `rand`/`LongRand` over the live thread block, the permutation-cursor read, the `ProgIteration` counter prefix and the load counter reset, over live buffers. `SetUpdateChamp`/`UpdateChamp` remain with Economy and `NextAnim*` with Graphics. The original captures for Step 2 start from the frozen M1 post-load state (Missions `captura-carga-missao-original-v2.json`, final blocks). They are labeled "M1 post-load input, not yet frame-1 input".
+
+## Step 2 delivery: live-buffer API and original-first validation
+
+**Order.** The static inventory came first (`a5830f6`). The original-only capture followed (`9a80499`, before any translation), then the implementation and its validation (`06ed6d9`).
+
+**Input.** All captures and differentials start from Missions' frozen capture v2 (`captura-carga-missao-original-v2.json`, SHA-256 `eb7d2303…3afc`, final-state SHA `58a5020e…1114`). They use its final `dgroup` and `crt_thread_data` blocks at the real return `0x42d22d`. **This is M1 post-load input, not yet frame-1 input.** The load case zeroes the counters and may run one frame body before frame 1's own inputs exist. `estado_m1_quadro.carregar_m1()` checks every hash, and the evidence is never edited. GlobalAlloc blocks are left unmapped, so any access would fault; none occurred. Cases named `derived_*` list their byte overrides explicitly.
+
+### API (`ferramentas/fundacoes_quadro.py`)
+
+Each buffer must be the live original global: a `bytearray` or a writable, one-dimensional, contiguous byte `memoryview` into DGROUP or the thread block. Shape and type checks run before the first store. Each function returns the EAX that callers consume. The other GPRs are preserved by the original. The return flags are not reproduced, because no caller reads them before overwriting them: all 74 `Random`, 14 `iaRandom` and 2 `LongRand` call sites were checked.
+
+| Function | Original | Live inputs | Effect / return |
+|---|---|---|---|
+| `avancar_quadro_jogo(contador)` | `GameNextFrame 0x45d015` | 4 bytes @`0x496d40` | u32+1 (wraps); no register output |
+| `aleatorio_mundo(semente)` | `Random 0x4704dc` | 4 @`0x497164` | stores and returns the new state (`candidatos_rota.aleatorio_caminhos`) |
+| `randomizar_mundo(semente, eax)` | `Randomize 0x470520` | 4 @`0x497164` | stores and returns EAX+1 |
+| `definir_semente_mundo(semente, eax)` | `SetRandomSeed 0x470527` | 4 @`0x497164` | 0 → stores 1 and returns 0; otherwise stores EAX mod 0x7fffffff and returns the quotient |
+| `obter_semente_mundo(semente)` | `GetRandomSeed 0x47054c` | 4 (read-only allowed) | returns the u32 |
+| `aleatorio_ia(semente, limite, relogio=None)` | `iaRandom 0x489728` | 4 @`0x498db4`; `relogio()` → declared u32 `timeGetTime` | limit>0: advances the state and returns state mod limit; limit<0: stores (−limit) srem 0x7fffffff and returns 0; limit=0: stores clock mod 0x7fffffff and returns 0. A missing clock raises `DependenciaRelogioIA` at `0x489789` and stores nothing |
+| `aleatorio_crt(dados_thread)` | `LongRand 0x45841b` → `rand 0x48c51d` | the thread block (`[0x522244]`, ≥16 bytes) | seed@+0xc ← seed·0x41c64e6d+0x3039; returns (seed>>16)&0x7fff |
+| `consumir_permutacao(tabela, cursor)` | the inline draw (CalculGame `0x42d2f9`, NextAnim*, Aff*) | 256 @`0x4e1c18` (read-only), 1 @`0x4e1d18` | returns `tabela[cursor]`; cursor ← cursor+1 (u8) |
+| `avancar_contadores_iteracao(contadores)` | `ProgIteration 0x475014..0x475041` | 12 @`0x508f7c` | ordered stores +0 always, +4 if the cycle is even, +8 if it is divisible by 3; returns the offsets stored |
+| `zerar_contadores_carga(contadores)` | CalculGame `0x42d2be..0x42d2ca` | 12 @`0x508f7c` | zeros at +0, +4, +8 in that order |
+
+The MenuInit arguments prepared around the load reset (EAX=player byte, EBX=0, ECX=1, EDX=0x12) are not part of this primitive; ai-runtime composes them, and the differential asserts them as observations. For the CD draw, the composer passes `2 + byte % 2` to `MCICD_Play`; the differential asserts EAX, EDX=0, ECX=2 and BL=the new cursor.
+
+### Validation (actual results)
+
+- **Capture** `evidencias/fundacoes-quadro/captura-original.json` (SHA-256 `a3746663…b638`): 62 cases / 195 steps / 202 bounded segments. The code-section hash is unchanged, and the only binding is WINMM.timeGetTime through IAT `0x5234a4`, answered with explicit per-case clock values. No translation ran.
+- **CPU-free replay** `testes/test_fundacoes_quadro.py`: all 195 steps match the whole DGROUP+thread byte difference, the ordered non-stack writes, the consumed EAX and the preserved registers. Each case's final SHA matches as well. Input-protection tests cover the clock dependency, malformed and read-only buffers, memoryviews and the agreement with `cadencia.proximo_aleatorio` on its domain.
+- **Fresh intact differential** `python3 -B ferramentas/validar_fundacoes_quadro.py --emular`, run under the heavy lease: 11 tests, 659 Python/native comparisons and 677 bounded segments, including 18 declared clock continuations. The maximum is 30 instructions per segment. There were zero failures, errors, skips, native faults, limits or patches, and the code section was unchanged ([report](../../relatorios/fundacoes-quadro-emulada.json)). Local mode runs 11 tests (8 executed, 3 optional x86 skips).
+
+### Gaps and dependency stops
+
+- The frame-1 re-validation waits for Missions' frame-1 capture and entry trace. It must be rerun at the exact frame-1 inputs and extended only to the branches the trace reaches.
+- `iaRandom(0)` needs a declared clock value from the frame oracle. Core supplies no default.
+- Not translated by Core: `InitRand` (startup producer of the table), CRT `srand`, and the owners' routines (`SetUpdateChamp`/`UpdateChamp`: Economy; `NextAnim*`: Graphics; `CalculNextReflect`/`PlayerAttaqueReset`: ai-runtime; `SetClipping`: Graphics; `InitGameZone`: UI).
+- The viewport size (0×0 in M1) and the rendering-side cursor consumption are frame-oracle inputs that Core cannot decide.
