@@ -558,3 +558,12 @@ Contract and measurements: [UNICORN_TEARDOWN](UNICORN_TEARDOWN.md). This is tool
 - the EnginNextEtape dispatcher.
 
 The contract is in [RAID_CORE](RAID_CORE.md#movement-and-pathfinding-after-the-spawn-counters-90009200).
+
+### M2.3 readiness: providers wired, live world, live path search on `feat/re-core`
+
+- **Raid providers:** `provedores_core` exports the raid routines with ai-runtime's keywords, and the task VM posts through the same `postar_tarefa` (`9f27899`).
+- **Live world:** `mundo_vivo` binds the navigation world live to flat memory. The movement providers run on it, with `deslocar` as the exact DeplaceEngin (`bc256c5`, `aa2e6b1`). SetDeplaceEngin and ResetOrdre return the record address, and EnginEstVivant returns the exact EAX.
+- **Path search:** `SolucionadorCaminhosVivo` keeps its work state at the original globals. Route updates are now in place.
+- **Full 9000–9200 native differential:** 0 mismatches, except 6 bytes of CheminCalcul's contour-engine scratch at the 9177 search (`0x4e0f40`, `0x4e0f50..52`, `0x4e0f68`, `0x4e1772`). The search result itself is equal.
+- **Native movement regressions:** 56 tests pass with `RISING_EMULAR=1` (needs `testes/` on `PYTHONPATH`).
+- See [RAID_CORE](RAID_CORE.md).

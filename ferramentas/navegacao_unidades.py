@@ -137,7 +137,10 @@ class MundoNavegacao(MundoFisico):
 
     def _aplicar_resultado(self, indice, resultado):
         self.resultados_busca[indice] = resultado
-        self.rotas[indice] = bytearray(resultado['buffer_rota'])
+        rota = resultado['buffer_rota']   # in place: a bound route buffer keeps its identity
+        if len(rota) != len(self.rotas[indice]):
+            raise ValueError('Search route and the unit route buffer differ in size')
+        self.rotas[indice][:] = rota
         self.semente_caminhos = resultado['semente']
         for nome, valor in resultado['contexto'].items():
             setattr(self.busca, nome, valor)

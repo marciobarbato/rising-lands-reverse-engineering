@@ -874,7 +874,8 @@ def _provedores_movimento(memoria):
     def w():
         if 'mundo' not in estado:
             from mundo_vivo import mundo_vivo
-            estado['mundo'] = mundo_vivo(memoria)
+            from solucionador_vivo import SolucionadorCaminhosVivo
+            estado['mundo'] = mundo_vivo(memoria, SolucionadorCaminhosVivo(memoria))
         return estado['mundo']
 
     def nada(f):

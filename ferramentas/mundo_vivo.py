@@ -11,9 +11,11 @@ mapping:
 - the route buffers ``[[0x4e1924] + 4i]``, the search context ``0x496304``/``0x4e0f36..``;
 - the per-player and per-type tables.
 
-World state with no original address (the Python path-solver hook, its result cache and trace,
-and ``mascaras_alianca[4]``) raises ``EstadoSemEndereco`` (a ``NotImplementedError``) when used,
-as Missions' guard does. ``memoria`` needs ``u8/u16/u32`` and either ``vista(addr, n)`` or
+The path solver is an explicit argument; using the search without one raises ``EstadoSemEndereco``
+(a ``NotImplementedError``), as does ``mascaras_alianca[4]``, which has no original address. The
+search result the world keeps per unit is the original's global pair: status u8 ``0x4e0f4c`` and
+alternative cell u16 ``0x4e0f4a``, which DeplaceEngin's state 4 reads. The navigation trace is a
+write-only Python list, a diagnostic that nothing in the game logic reads. ``memoria`` needs ``u8/u16/u32`` and either ``vista(addr, n)`` or
 ``segmentos`` of ``(base, end, view)``.
 """
 import struct
@@ -37,8 +39,7 @@ ESCALARES = dict(largura=(0x497168, 'H'), altura=(0x49716a, 'H'), jogador_local=
                  objeto_muro=(0x495bf8, 'B'), objeto_portao=(0x495bf9, 'B'))
 BUSCA = dict(unidade=(0x496304, 'H'), ocupada=(0x4e0f36, 'B'), sucesso=(0x4e0f37, 'B'),
              ponteiro_rota=(0x4e0f3c, 'I'), concluida=(0x496302, 'B'))
-SEM_ENDERECO = dict(solucionador='Python path-solver hook', resultados_busca='Python search-result cache',
-                    historico_navegacao='Python navigation trace')
+STATUS_BUSCA, DESTINO_ALTERNATIVO = 0x4e0f4c, 0x4e0f4a   # read by DeplaceEngin's state 4 (0x4493f9, 0x449402)
 
 
 class EstadoSemEndereco(NotImplementedError):
@@ -122,6 +123,19 @@ def _negada(nome, motivo):
     return property(falhar, falhar)
 
 
+class _ResultadosVivos:
+    """``resultados_busca[unit]``: the original keeps one global result pair, read back by DeplaceEngin."""
+    def __init__(self, m):
+        self._m = m
+
+    def __getitem__(self, indice):
+        return dict(status=self._m.u8(STATUS_BUSCA), destino_alternativo=self._m.u16(DESTINO_ALTERNATIVO))
+
+    def __setitem__(self, indice, resultado):
+        self._m.u8(STATUS_BUSCA, resultado['status'])
+        self._m.u16(DESTINO_ALTERNATIVO, resultado['destino_alternativo'])
+
+
 class BuscaViva(ContextoBusca):
     """The search context at its original scalars."""
     def __init__(self, m):
@@ -143,6 +157,12 @@ class CoresEstruturasVivas(CoresEstruturas):
 
 class MundoNavegacaoVivo(MundoNavegacao):
     @property
+    def solucionador(self):
+        if self._solucionador is None:
+            raise EstadoSemEndereco('solucionador', 'no path solver was given to mundo_vivo')
+        return self._solucionador
+
+    @property
     def tamanho_minimapa(self):
         return self._memoria.u16(0x496fe0), self._memoria.u16(0x496fe2)
 
@@ -156,16 +176,23 @@ for _n in BUSCA:
     setattr(BuscaViva, _n, _propriedade(BUSCA, _n))
 for _n in ESCALARES:
     setattr(MundoNavegacaoVivo, _n, _propriedade(ESCALARES, _n))
-for _n, _motivo in SEM_ENDERECO.items():
-    setattr(MundoNavegacaoVivo, _n, _negada(_n, _motivo))
 
 
-def mundo_vivo(memoria):
+def ponteiros_rotas(memoria):
+    """The 800 route buffer addresses ``[[0x4e1924] + 4i]`` (the solver's route identifiers)."""
+    tabela = memoria.u32(ROTAS)
+    return [memoria.u32(tabela + 4 * i) for i in range(800)]
+
+
+def mundo_vivo(memoria, solucionador=None):
     """A ``MundoNavegacao`` whose state is the caller's live original memory (see the module docstring)."""
     m = memoria
     P = m.u32
     w = MundoNavegacaoVivo.__new__(MundoNavegacaoVivo)
     w._memoria = m
+    w._solucionador = solucionador
+    w.resultados_busca = _ResultadosVivos(m)
+    w.historico_navegacao = []
     w.unidades = vista_de(m, P(UNIDADES), 800 * PASSO)
     w.estruturas = vista_de(m, 0x49a0c8, 1000 * PASSO)
     w.realizaveis_estruturas = vista_de(m, 0x49a070, 88)

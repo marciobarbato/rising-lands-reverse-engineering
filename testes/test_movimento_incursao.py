@@ -117,9 +117,9 @@ class ProvedoresMovimento(unittest.TestCase):
     def test_world_state_without_an_address_raises(self):
         from mundo_vivo import EstadoSemEndereco, MundoNavegacaoVivo
         w = MundoNavegacaoVivo.__new__(MundoNavegacaoVivo)
-        for nome in ('solucionador', 'resultados_busca', 'historico_navegacao'):
-            with self.assertRaises(EstadoSemEndereco):
-                getattr(w, nome)
+        w._solucionador = None
+        with self.assertRaises(EstadoSemEndereco):
+            w.solucionador
 
 
 @unittest.skipUnless(CAPTURA_MOVIMENTO.exists(), 'Movement capture not committed')

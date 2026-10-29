@@ -27,6 +27,8 @@ import time
 
 RAIZ = Path(__file__).resolve().parents[1]
 M32 = 0xffffffff
+LISTA = 2048   # changed bytes kept per mismatch
+JANELA_BUSCA = 9170   # every call is compared from this counter on (path search at 9176..9179)
 REGISTROS = ('EAX', 'EBX', 'ECX', 'EDX', 'ESI', 'EDI', 'EBP')
 
 
@@ -71,6 +73,7 @@ def main():
     from memoria_quadro_core import MemoriaQuadro
     from incursao_core import traducao_core
     from mundo_vivo import mundo_vivo
+    from solucionador_vivo import SolucionadorCaminhosVivo
     from integracao.providers import load_economy_bonus
     ap = argparse.ArgumentParser()
     ap.add_argument('--quadros', type=int, default=201)
@@ -117,7 +120,7 @@ def main():
         if mudancas != nativas or any(regs[k] & M32 != nativo[k] for k in REGISTROS):
             registro['mismatches'].append(dict(chave, python_registers={k: hex(regs[k] & M32) for k in REGISTROS},
                                                native_registers={k: hex(nativo[k]) for k in REGISTROS},
-                                               python_changed=mudancas[:24], native_changed=nativas[:24]))
+                                               python_changed=mudancas[:LISTA], native_changed=nativas[:LISTA]))
 
     def vivo(nome, caso, antes, resultado):
         """The world adapter on ``mundo_vivo`` over copies of the entry blocks (the live binding)."""
@@ -125,7 +128,16 @@ def main():
         chave = dict(routine=nome, entry=resultado['entry_registers'], kind='live')
         copias = {n: (b, bytearray(d)) for n, (b, d) in antes.items()}
         try:
-            partes = adaptadores[nome](mundo_vivo(MemoriaQuadro(copias.values())), entrada) or {}
+            m = MemoriaQuadro(copias.values())
+            solucionador = SolucionadorCaminhosVivo(m)
+            partes = adaptadores[nome](mundo_vivo(m, solucionador), entrada) or {}
+            if solucionador._resultado is not None:     # the search ran: keep the solver's own state
+                registro.setdefault('python_search_state', []).append(dict(
+                    entry=resultado['entry_registers'], buffers=[bytes(b).hex() for b in solucionador.buffers],
+                    regioes=bytes(solucionador.regioes).hex(), registros=[bytes(r).hex() for r in solucionador.registros],
+                    inicio=hex(solucionador.inicio_calculado), destino=hex(solucionador.destino_calculado),
+                    preparacoes=solucionador.preparacoes_python, escolhas=solucionador.escolhas_python,
+                    contornos=solucionador.contornos_python))
         except NotImplementedError as e:
             registro['dependencies'].append(dict(chave, reason=f'{type(e).__name__}: {e}'))
             return
@@ -145,17 +157,23 @@ def main():
         registro['live_by_routine'][nome] = registro['live_by_routine'].get(nome, 0) + 1
         if mudancas != nativas or not retorno_ok:
             registro['mismatches'].append(dict(chave, python_return={k: hex(v) for k, v in partes.items()},
-                                               native_eax=hex(saida_nativa), python_changed=mudancas[:24],
-                                               native_changed=nativas[:24]))
+                                               native_eax=hex(saida_nativa), python_changed=mudancas[:LISTA],
+                                               native_changed=nativas[:LISTA]))
+
+    def contador(antes):
+        base, dados = antes['dgroup']
+        return int.from_bytes(dados[0x508f7c - base:0x508f80 - base], 'little')
 
     def observador(nome, caso, antes, resultado):
         registro['isolated'][nome] = registro['isolated'].get(nome, 0) + 1
-        if traducao_core(nome) is not None and registro['flat_by_routine'].get(nome, 0) < a.por_rotina:
+        # Every call from counter JANELA_BUSCA on (the first path search is at 9176-9179); a sample before.
+        todas = contador(antes) >= JANELA_BUSCA
+        if traducao_core(nome) is not None and (todas or registro['flat_by_routine'].get(nome, 0) < a.por_rotina):
             plano(nome, caso, antes, resultado)
-        if nome in adaptadores and registro['live_by_routine'].get(nome, 0) < a.por_rotina:
+        if nome in adaptadores and (todas or registro['live_by_routine'].get(nome, 0) < a.por_rotina):
             vivo(nome, caso, antes, resultado)
-        if nome not in adaptadores or registro['by_routine'].get(nome, 0) + sum(
-                1 for d in registro['dependencies'] if d['routine'] == nome) >= a.por_rotina:
+        if nome not in adaptadores or (contador(antes) < JANELA_BUSCA and registro['by_routine'].get(nome, 0) + sum(
+                1 for d in registro['dependencies'] if d['routine'] == nome) >= a.por_rotina):
             return
         entrada = {k: int(v, 16) for k, v in resultado['entry_registers'].items()}
         chave = dict(routine=nome, entry=resultado['entry_registers'])
@@ -185,8 +203,8 @@ def main():
         registro['by_routine'][nome] = registro['by_routine'].get(nome, 0) + 1
         if mudancas != nativas or not retorno_ok or not resultado['reached_return']:
             registro['mismatches'].append(dict(chave, python_return={k: hex(v) for k, v in partes.items()},
-                                               native_eax=hex(saida_nativa), python_changed=mudancas[:24],
-                                               native_changed=nativas[:24]))
+                                               native_eax=hex(saida_nativa), python_changed=mudancas[:LISTA],
+                                               native_changed=nativas[:LISTA]))
 
     t0 = time.monotonic()
     b, cap, iso, quadro_de, resumo = cm.executar(a.quadros, observador)
