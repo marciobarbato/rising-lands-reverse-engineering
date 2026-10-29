@@ -72,7 +72,7 @@ def build():
     snap=ROOT/manifest['snapshot'];shutil.copytree(snap,preview/manifest['snapshot'],ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
     plist={'CFBundleExecutable':'RisingLands-Preview','CFBundleIdentifier':'local.risinglands.preview','CFBundleName':'Rising Lands Preview','CFBundleDisplayName':'Rising Lands Preview','CFBundlePackageType':'APPL','CFBundleShortVersionString':'0.1.0','CFBundleVersion':'1','RisingLandsSourceCommit':manifest['commit'],'LSMinimumSystemVersion':'13.0','LSArchitecturePriority':['arm64'],'NSHighResolutionCapable':True,'NSPrincipalClass':'NSApplication','CFBundleIconFile':'AppIcon'}
     (contents/'Info.plist').write_bytes(plistlib.dumps(plist))
-    run(['xcrun','swiftc','-swift-version','5','-O','-target','arm64-apple-macosx13.0','-module-cache-path',ROOT/'build/module-cache','-framework','AppKit','-framework','WebKit',ROOT/'src/native/main.swift','-o',macos/'RisingLands-Preview'],'swift-build.log')
+    run(['xcrun','swiftc','-swift-version','5','-O','-target','arm64-apple-macosx13.0','-module-cache-path',ROOT/'build/module-cache','-framework','AppKit','-framework','WebKit',ROOT/'src/native/SmokeReadiness.swift',ROOT/'src/native/main.swift','-o',macos/'RisingLands-Preview'],'swift-build.log')
     icons=ROOT/'build/icons';icons.mkdir(exist_ok=True);iconset=ROOT/'build/AppIcon.iconset';iconset.mkdir(exist_ok=True)
     run(['xcrun','swiftc','-swift-version','5','-module-cache-path',ROOT/'build/module-cache',ROOT/'scripts/icon.swift','-o',ROOT/'build/icon-generator'],'icon-build.log')
     run([ROOT/'build/icon-generator',icons])

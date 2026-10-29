@@ -81,7 +81,7 @@ def main():
     (contents / 'Info.plist').write_bytes(plistlib.dumps(plist))
     legacy.run(['xcrun', 'swiftc', '-swift-version', '5', '-O', '-target', 'arm64-apple-macosx13.0',
                 '-module-cache-path', base / 'build/module-cache', '-framework', 'AppKit', '-framework', 'WebKit',
-                app_source / 'src/native/main.swift', '-o', contents / 'MacOS/RisingLands-ptbr'], 'swift-build.log')
+                app_source / 'src/native/SmokeReadiness.swift', app_source / 'src/native/main.swift', '-o', contents / 'MacOS/RisingLands-ptbr'], 'swift-build.log')
     for path in sorted((resources / 'Python').rglob('*.so')):
         legacy.run(['codesign', '--force', '--sign', '-', '--timestamp=none', path])
     legacy.run(['codesign', '--force', '--sign', '-', '--timestamp=none', resources / 'Python/bin/python3'], 'sign-python.log')
@@ -104,25 +104,16 @@ def main():
     app.rename(final)
     verify(final)
     if not args.skip_ui_smoke:
-        smoke, screenshot = base / 'build/logs/native-smoke.json', base / 'build/logs/native-smoke.png'
-        smoke.unlink(missing_ok=True)
-        proc = subprocess.run(['open', '-W', '-n', str(final), '--args', '--smoke-test', str(smoke),
-                               '--screenshot', str(screenshot)], capture_output=True, text=True, timeout=60,
-                              env={k: v for k, v in os.environ.items() if k not in ('RISING_APP_ROOT', 'PYTHONPATH', 'PYTHONHOME')})
-        (base / 'build/logs/native-process.log').write_text('LaunchServices exit: ' + str(proc.returncode) + '\n' + proc.stdout + proc.stderr)
-        result = json.loads(smoke.read_text()) if smoke.exists() else {'passed': False, 'error': 'Smoke output missing'}
-        if proc.returncode or not result.get('passed') or not result.get('nativeWindowVisible') or result.get('commit') != revision:
-            raise SystemExit('Falha na validação da janela: ' + json.dumps(result, ensure_ascii=False))
-    if not args.skip_ui_smoke:
-        inspection = base / 'build/logs/native-inspection-smoke.json'
-        inspection.unlink(missing_ok=True)
-        proc = subprocess.run(['open', '-W', '-n', str(final), '--args', '--inspection',
-                               '--smoke-test', str(inspection)], capture_output=True, text=True, timeout=60,
-                              env={k: v for k, v in os.environ.items() if k not in ('RISING_APP_ROOT', 'PYTHONPATH', 'PYTHONHOME')})
-        (base / 'build/logs/native-inspection-process.log').write_text(proc.stdout + proc.stderr)
-        result = json.loads(inspection.read_text()) if inspection.exists() else {'passed': False}
-        if proc.returncode or not result.get('passed') or not result.get('nativeWindowVisible') or result.get('commit') != revision:
-            raise SystemExit('Native inspection smoke failed: ' + json.dumps(result))
+        from native_smoke import run_native_smoke
+        smoke_env = {k: v for k, v in os.environ.items() if k not in ('RISING_APP_ROOT', 'PYTHONPATH', 'PYTHONHOME')}
+        for inspection in (False, True):
+            stem = 'native-inspection-smoke' if inspection else 'native-smoke'
+            smoke = base / 'build/logs' / (stem + '.json')
+            screenshot = base / 'build/logs' / (stem + '.png')
+            code, result, log, previous = run_native_smoke(final, smoke, screenshot, smoke_env, inspection=inspection)
+            (base / 'build/logs' / (stem + '-process.log')).write_text(log + '\nPrevious evidence: ' + str(previous))
+            if code or not result.get('passed') or not result.get('nativeWindowVisible') or result.get('commit') != revision:
+                raise SystemExit('Native UI smoke failed: ' + json.dumps(result, ensure_ascii=False))
     report = {'commit': revision, 'mode': mode, 'features': manifest['features'], 'bundle': str(final),
               'uiSmoke': not args.skip_ui_smoke, 'logs': str(base / 'build/logs'),
               'inputsRoot': str(args.workspace), 'pythonRuntimeInput': os.environ.get('RISING_PYTHON_RUNTIME'),

@@ -1,6 +1,11 @@
 # Audio queue declared-platform contract
 
-Current original-only evidence is
+The prior delivery at `73196fc` uses the baseline original-only evidence below.
+The current extension is defined in [QUEUE_CONTINUATION.md](QUEUE_CONTINUATION.md);
+its original v3/fresh differential supersedes the former reuse/concurrency/data
+stops without changing these frozen baseline files.
+
+Baseline original-only evidence is
 [evidencias/captura-fila-audio-original-v9.json](evidencias/captura-fila-audio-original-v9.json):
 **244 original calls, 238 scenarios, 3 intentional dependency stops**. The
 [provider differential](validacao/fila-audio-three-way-v2.json) compares fresh
@@ -38,14 +43,14 @@ cleanup and bidirectional transfers use the exact input images in v9.
 the literal-RET WaitSnd_Trier 0x48b38f and clears the flag. The leaf itself does
 no sorting and owns no dirty-flag store; no sorting policy is invented.
 
-Manage supports empty state, the captured one-active-logical-slot cleanup or
-volume paths, and one new file-backed PCM request with no loaded physical
-slots (counter=-1). Multiple pending requests stop explicitly at 0x48a80c;
-loaded physical lookup/lifecycle at 0x48acd3, dictator lifecycle at 0x48a0a1,
-dictator request creation at 0x48a702, physical transfer at 0x48ac53 and
-physical/logical promotion at 0x489e6d remain outside. Unsupported queue
-resident/compressed data stops at 0x48aad4; Stage-1 decoding exists separately.
-All earlier validated stores/calls remain visible after a stop.
+The current provider additionally supports captured buffer reuse, promotion,
+two/three concurrent requests and resident/file PCM and mono ADPCM through
+Stage-1 APIs. The earlier missing implementation stops at 0x48a80c, 0x48acd3,
+0x48ac53, 0x489e6d and 0x48aad4 were preparation boundaries and are superseded
+for the newly captured domains. Remaining dictator, initialization, wrapped or
+short Lock, unwritten outputs and real asynchronous device behavior stay
+explicit. [The continuation contract](QUEUE_CONTINUATION.md) identifies the
+exact new protected domain and partial-effect limits.
 
 ## Exact declared external answers
 
