@@ -1,0 +1,12 @@
+{
+  "command": "python3 heavy_lease.py core -- python3 -B scripts/check.py --domain core",
+  "tree": "ae764e7",
+  "tests": 429,
+  "skips": 195,
+  "failures": 0,
+  "errors": 0,
+  "success": true,
+  "seconds": 15.672,
+  "documentation_links": "PASS",
+  "scope": "Required local Core gate on the final frame-foundations tree (docs included); optional native tests skipped here and run separately in fundacoes-quadro-emulada.json (11 tests, 659 comparisons, 677 segments, zero skips)"
+}
