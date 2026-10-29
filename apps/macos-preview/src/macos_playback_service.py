@@ -30,7 +30,7 @@ class PlaybackInspectionService:
     def handle(self, request):
         operation = request.get('operation', 'open')
         if operation == 'read' and self.live is not None:
-            return dict(read_hex=self.live.current.read(int(request['address'],0),int(request['size'])).hex())
+            return dict(read_hex=self.live.read(int(request['address'],0),int(request['size'])).hex())
         if operation == 'record-event':
             frame = max(129, (self.live.index+3)//2 if self.live else 129)
             self.recorder.event(frame,request['event'])

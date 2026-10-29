@@ -1,5 +1,7 @@
 """Bounded live proof and timing, without reloading later expected states."""
 import argparse
+import base64
+import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -31,6 +33,7 @@ def main():
     p.add_argument('--graphics-sources',type=Path)
     p.add_argument('--frames',type=int,default=128)
     p.add_argument('--logic-only',action='store_true')
+    p.add_argument('--png-output',type=Path)
     p.add_argument('--output',type=Path,required=True)
     a=p.parse_args()
     if a.output.exists(): p.error('Refusing to overwrite a live report')
@@ -39,6 +42,8 @@ def main():
     t0=time.perf_counter()
     try:
         presentation_seconds=0.0
+        transfer_bytes=0
+        transferred_surfaces_equal=0
         horizon_seconds=0.0
         horizon_frames=0
         horizon_last=None
@@ -60,12 +65,25 @@ def main():
             if live.stop: break
             if renderer and i>0 and i%2==0:
                 t=time.perf_counter()
-                renderer.present()
+                # Same raw indexed packet as the production worker. Exercise JSON
+                # and decoding too; native smoke measures actual JS/canvas handoff.
+                packet=renderer.present(raw=True)
+                wire=json.dumps(packet,separators=(',',':'))
+                decoded=json.loads(wire)['frame']
+                pixels=base64.b64decode(decoded['pixels'],validate=True)
+                palette=base64.b64decode(decoded['palette'],validate=True)
+                if len(pixels)!=480000 or len(palette)!=768 or hashlib.sha256(pixels).hexdigest()!=packet['pixels_sha256']:
+                    raise AssertionError('Raw frame transfer changed pixels/palette shape')
+                transferred_surfaces_equal+=int(packet['equals_native_phase_end'] is True)
+                transfer_bytes+=len(wire)
                 presentation_seconds+=time.perf_counter()-t
             if i%128==0: print(live.current.phase_name,flush=True)
         records=live.records
         frames=sum(r['phase'].startswith('frame') for r in records)
         totals={k:sum(r[k] for r in records) for k in ('rust_seconds','projection_seconds','render_seconds','total_seconds')}
+        if a.png_output:
+            if a.png_output.exists():p.error('Refusing to overwrite PNG evidence')
+            a.png_output.write_bytes(base64.b64decode(renderer.present()['image'].split(',',1)[1]))
         report=dict(schema='rising-lands/macos-live-proof/1',
                     source_revision=source_revision(a.source_root),
                     library_sha256=live.library_sha256,graphics_pins=RENDER_PINS,
@@ -75,20 +93,26 @@ def main():
                     phases_equal=sum(r['state_equal'] is True for r in records),
                     checkpoints_equal=sum(r['checkpoint'] for r in records),
                     full_surfaces_equal=sum(bool((r['render'] or {}).get('equals_native_full_surface')) for r in records),
+                    transfer=dict(format='indexed8-rgb24/1',bytes=transfer_bytes,accepted_surfaces_equal=transferred_surfaces_equal),
+                    projection=dict(path='persistent-graphics-regions' if renderer else 'full-diagnostic',
+                                    bulk_calls=sum(b.calls for b in live.bulks),bulk_buffer_allocations=sum(b.allocations for b in live.bulks),
+                                    region_buffer_allocations=sum(v.allocations for v in live.views),
+                                    retained_graphics_bytes=sum(len(b) for a,b,n in live.views[0].regions),
+                                    abi_limitation='ABI 1.1 bulk snapshot has no region filter'),
                     phase_surfaces_equal=sum(bool((r['render'] or {}).get('equals_native_phase_end')) for r in records),
-                    timing=dict(**totals,presentation_seconds=presentation_seconds,
+                    timing=dict(**totals,transfer_seconds=presentation_seconds,
                                 frames_per_second=frames/(totals['total_seconds']+presentation_seconds),
-                                rust_projection_render_png_fps=frames/(totals['rust_seconds']+totals['projection_seconds']+totals['render_seconds']+presentation_seconds),
+                                rust_projection_render_transfer_fps=frames/(totals['rust_seconds']+totals['projection_seconds']+totals['render_seconds']+presentation_seconds),
                                 rust_frames_per_second=frames/totals['rust_seconds'],
                                 render_frames_per_second=frames/totals['render_seconds'] if renderer else None,
                                 wall_seconds=time.perf_counter()-t0,
-                                scope='Phase calls + bulk projection/hash/oracle comparison + render + PNG presentation; initialization/IPC/native scaling excluded'),
+                                scope='Phase calls + bulk projection/hash/oracle comparison + render + raw indexed JSON encode/decode/hash; initialization/IPC/native canvas excluded'),
                     phases=records)
         a.output.parent.mkdir(parents=True,exist_ok=True)
         with a.output.open('x') as f: json.dump(report,f,indent=1); f.write('\n')
         print(json.dumps({k:v for k,v in report.items() if k not in ('phases','graphics_pins')},indent=1))
         if report['phases_equal'] != min(257,1+2*a.frames): return 2
-        if renderer and report['full_surfaces_equal'] != min(128,a.frames): return 2
+        if renderer and (report['full_surfaces_equal'] != min(128,a.frames) or transferred_surfaces_equal!=min(128,a.frames)): return 2
         return 0
     finally: live.close()
 
