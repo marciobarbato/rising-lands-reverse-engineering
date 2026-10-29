@@ -26,6 +26,15 @@ def replay(case):
         elif operation=='post':value=q.post(r['EAX'],r['EDX'],r['EBX'],r['ECX'],args[0])
         elif operation=='set_volume':value=q.set_volume(r['EAX'],r['EDX'])
         elif operation=='stop_handle':value=q.stop_handle(r['EAX'])
+        elif operation=='replace_physical':value=q.replace_slot(r['EAX'])
+        elif operation=='replace_logical':value=q.replace_slot(r['EAX'],True)
+        elif operation=='find_physical':value=q.find_loaded(r['EAX'],r['EDX'])
+        elif operation=='find_logical':value=q.find_loaded(r['EAX'],r['EDX'],True)
+        elif operation=='destroy_physical':q.destroy_physical(r['EAX']);value=None
+        elif operation=='destroy_only':q.destroy_only_sound(r['EAX']);value=None
+        elif operation=='duplicate':value=q.duplicate_buffer(r['EAX'])
+        elif operation=='create_logical':value=q.create_logical(r['EAX'],r['EDX'])
+        elif operation=='clear_list':value=q.clear_list()
         elif operation=='manage':value=q.manage()
         else:raise ValueError('Unknown replay operation')
     except DependenciaSom as exc:stop=str(exc);value=None

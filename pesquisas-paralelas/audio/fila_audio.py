@@ -166,6 +166,63 @@ class AudioQueue:
             m.w32(last,0);m.w32(last+4,0)
         m.w32(0x498f64,maximum-1)
 
+    def replace_slot(self,slot,logical=False):
+        m=self.memory;base,counter=(0x52216c,0x498f64) if logical else (0x52211c,0x498f60)
+        maximum=_i32(m.u32(counter))
+        if not -1<=maximum<=9:raise DependenciaSom(0x48ad3c if logical else 0x48abdc,'Slot maximum outside -1..9')
+        if maximum<0:return 0
+        if not base<=slot<=base+9*8 or (slot-base)%8:raise ValueError('Unaligned or undeclared sound slot')
+        last=base+maximum*8
+        if slot!=last:
+            m.w32(slot,m.u32(last));m.w32(slot+4,m.u32(last+4));m.w32(m.u32(slot+4)+32,slot)
+            m.w32(last,0);m.w32(last+4,0)
+        m.w32(counter,maximum-1);return 1
+
+    def find_loaded(self,sound_id,bank,logical=False):
+        m=self.memory;base,counter=(0x52216c,0x498f64) if logical else (0x52211c,0x498f60)
+        maximum=_i32(m.u32(counter))
+        if not -1<=maximum<=9:raise DependenciaSom(0x48aeb3 if logical else 0x48acd3,'Slot maximum outside -1..9')
+        for i in range(maximum+1):
+            slot=base+i*8;r=m.u32(slot+4)
+            if m.u32(r)==sound_id and m.u32(r+4)==bank:return r if logical else slot
+        return 0
+
+    def destroy_physical(self,slot):
+        m=self.memory
+        if self.status(m.u32(slot),'playing'):self.stop_buffer(m.u32(slot))
+        self.destroy_buffer(slot);m.w32(slot+4,0)
+
+    def duplicate_buffer(self,pointer):
+        device=self.memory.u32(0x522228)
+        if not device or not pointer:return 0
+        answer=self.call('DuplicateSoundBuffer',device,(pointer,),0x48bfe6)
+        if answer['hresult']:return 0
+        output=answer.get('value')
+        if type(output) is not int or not 0<=output<=0xffffffff:
+            raise DependenciaSom(0x48bfea,'DuplicateSoundBuffer requires explicit u32 output write')
+        if output:self.call('SetPosition',output,(0,),0x48bffd)
+        return output
+
+    def create_logical(self,pointer,record):
+        m=self.memory;maximum=_i32(m.u32(0x498f64))
+        if not -1<=maximum<=9:raise DependenciaSom(0x48ae5f,'Logical maximum outside -1..9')
+        if maximum==9:return 0
+        maximum+=1;m.w32(0x498f64,maximum)
+        output=self.duplicate_buffer(pointer);slot=0x52216c+maximum*8;m.w32(slot,output)
+        if not output:return 0
+        m.w32(slot+4,record);return slot
+
+    def clear_list(self):
+        m=self.memory
+        for base in (0x52216c,0x52211c):
+            for i in range(10):
+                slot=base+i*8;pointer=m.u32(slot)
+                if not pointer:continue
+                r=m.u32(slot+4)
+                if m.u8(r+8)==1 and self.status(pointer,'stopped'):self.stop_handle(m.u32(r+40))
+        if m.u32(0x521f90):raise DependenciaSom(0x48a0a1,'Dictator lifecycle not yet captured')
+        return 1
+
     def transfer_to_waiting(self,index):
         m=self.memory;source=self.address(index);new=self.reserve()
         if new==0xffffffff:return 0
@@ -174,7 +231,7 @@ class AudioQueue:
         m.w32(destination+32,0);m.w32(m.u32(destination+40),new)
         slot,kind=m.u32(source+32),m.u32(source+36);m.w8(source+8,0)
         if kind==1:self.destroy_logical(slot)
-        else:raise DependenciaSom(0x48ac53,'Physical-buffer transfer lifecycle not yet captured')
+        else:self.destroy_physical(slot)
         return 1
 
     def transfer_to_playing(self,index):
@@ -194,8 +251,14 @@ class AudioQueue:
         m=self.memory;slot=m.u32(r+32)
         if not slot:return
         if not self.status(m.u32(slot),'stopped'):self.stop_buffer(m.u32(slot))
-        if m.u32(r+36)!=1:raise DependenciaSom(0x489e6d,'Physical/logical promotion not yet captured')
-        self.destroy_logical(slot);m.w32(r+32,0)
+        if m.u32(r+36)==1:
+            self.destroy_logical(slot);m.w32(r+32,0);return
+        self.destroy_physical(slot)
+        promoted=self.find_loaded(m.u32(r),m.u32(r+4),True)
+        if not promoted:self.replace_slot(slot);return
+        logical=m.u32(promoted+32)
+        m.w32(slot,m.u32(logical));m.w32(slot+4,promoted);m.w32(logical,0);m.w32(logical+4,0)
+        m.w32(promoted+32,slot);self.replace_slot(logical,True);m.w32(promoted+36,0)
 
     def stop_handle(self,reference):
         m=self.memory;index=m.u32(reference)
