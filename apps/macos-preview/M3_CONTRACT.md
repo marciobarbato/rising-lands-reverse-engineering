@@ -206,3 +206,42 @@ Missions' `rising-lands/monde01-scripted-input/1` interchange remains a named
 export dependency until its owner module lands and is reviewed. Raw journals
 must not be relabeled as that schema. Test A/B original replay and order
 injection remain pending the engine/input providers and Missions capture.
+
+## Live performance path — `rising-lands/macos-live/2`
+
+The immutable accepted-state API remains consumer v6. The live image is now a
+serial read-only **lease**, valid until its alternating slot is reused two
+phases later. The UI receives independent JSON metadata and raw pixel bytes,
+not a retained Python view. One reusable ABI bulk buffer and one Graphics view
+slot are selected per phase; two of each isolate publication failures. Only the
+18 regions returned by `regioes_necessarias(..., hud=True)` are copied into the
+Graphics views. Pointer/extent changes are revalidated before any draw. Current
+arbitrary-address reads use the last successfully published full ABI buffer.
+A failed phase/render does not replace that buffer or the visible image.
+
+Full masked state checks still cover every declared byte outside the unchanged
+M2.2 mask, in original-name ordering. They stream over the bulk snapshot using
+the macOS-owned native byte codec v1 and compare with accepted expected hashes
+prepared before stepping. The same 257 states, 11 checkpoints and 128 surfaces
+are required. The native helper verifies layout/offsets and mask spans before
+reading and retains no pointers. Missing or incompatible helpers fail by name;
+no automatic implementation switch occurs in production. The explicit
+no-renderer diagnostic API and Python codec tests remain separately labeled.
+
+ABI 1.1 exports the entire world even when a caller needs fewer regions; this
+consumer does not claim server-side filtering. It avoids the former size-query
+projection, per-block byte copies, 25,197 Python memory-block objects and
+per-block SHA calls in each phase. The unchanged Economy read definitions and
+original palette are cached once per immutable archive.
+
+Live presentation is `indexed8-rgb24/1`: width 800, height 600, stride 800,
+480,000 indexed bytes and 768 RGB palette bytes (base64 only as transport
+framing), plus the exact phase generation and indexed SHA-256. The canvas
+reuses its palette lookup, ImageData and index buffers, then calls putImageData.
+Frame shape and palette length are checked before display. Native smoke reads
+back every RGBA byte and runs the real live play/pause loop; the full proof
+checks every decoded transferred surface against the native phase-end hash.
+No PNG compression occurs on this path. `--png-output PATH` exports a final
+Graphics PNG for evidence, refusing overwrite; the immutable evidence inspector
+retains its PNG presentation for compatibility. Unsupported orders, display
+effects, clock/RNG semantics and Graphics 1.5 pixels are unchanged.
