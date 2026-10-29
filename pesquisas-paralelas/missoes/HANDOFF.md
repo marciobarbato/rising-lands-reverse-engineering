@@ -596,3 +596,94 @@ Merged `origin/main` d94a59e. The coordinator decided the 146 freed menu-bank al
 | Audio | confirm that sound-library state is never read by logic |
 | AI/runtime | model AffGame's store to `0x4e05a2` from frame 2 on |
 | Missions | extend the display-clock named input beyond 4,096 answers before M2.3 |
+
+## Stage20 (M2.2): 128-frame original capture and comparison policy (Claude, Mac mini, 2026-10-29)
+
+Executed on the Mac mini (Apple M4, 16 GB, macOS 27.2, python 3.9.6, unicorn 2.1.4) from `feat/re-missions` merged with main `8564ca7`. Reference: the frozen `-v2` display scenario. Text/LoadPie (v3) is out of scope. Every artifact is original-only; no Python translation was imported.
+
+### Coordinator decisions recorded in the scenario
+
+- **CD audio:** no CD track plays. This is a declared input (`named_inputs.cd_audio`), and every phase checks `[0x4e2f28] == 0`. CalculGame therefore advances the shared cursor `0x4e1d18` every frame; a CD-playing run would be a different scenario.
+- **HUD flag `0x4e05a2`:** compared. The policy confirms a logic writer (`CalculMatiere+0x12c`).
+- **The 146 MenuInit bank records freed in load_tail:** compared.
+
+### Commits
+
+| Commit | Content |
+|---|---|
+| `e8bcec5` | delta-form N-frame capture tool and replay check |
+| `717bd46` | workspace-relative provenance path; shared per-phase record builder |
+| `ad50ab2` | original-only 128-frame capture (`evidencias/captura-quadros128-monde01-exibicao-v2.json.xz` + manifest) |
+| `1a01591` | 128-frame comparison policy (`validacao/m2-2-politica-comparacao-128-quadros.json`) |
+| later | segment-parallel tool (M2.3a), policy refactor, docs |
+
+### Capture (API inputs for AI/runtime)
+
+[capturar_quadros_exibicao_missao.py](capturar_quadros_exibicao_missao.py) writes 257 phases: `load_tail`, then `between_frames`/`frame1` and `between_frames{k}`/`frame{k}` up to 128. Each phase has the following fields:
+- the M2.1 fields: entry/exit registers, RNGs, counts, bindings, boundaries, Windows/clock answers, DirectDraw calls and display state;
+- `observed`: the CD flag, cursor `0x4e1d18`, HUD flag, cycle counter and view origin;
+- `state_delta`: `released`, then `allocated`, then `ranges`, applied in that order ([delta_estado_missao.py](delta_estado_missao.py));
+- `state_after.summary`;
+- `state_after.full_state` at frames 1, 31, 32, 45, 50–52, 64, 100, 101 and 128.
+
+The top level also has `state_s0` (the `-v2` MissionLoad final state), `named_inputs`, `decisions`, the final `allocations` and the `entry_trace`. Events carry no display-context flag.
+
+- xz SHA-256 `4c8f5c14a9623131dd019eafcdc49ea63054ee358f9defde58c12cb949f59ff3` (8,650,900 bytes).
+- Raw JSON SHA-256 `1ad031b96300e5c632fd5b6b7857ae30792f78e86531e4f17d1bf7124c6dd930` (165,916,863 bytes), kept in `.local/m2-2/`.
+
+### Validation
+
+| Check | Result |
+|---|---|
+| MissionLoad final state vs the `-v2` MissionLoad capture | equal |
+| load_tail / between_frames / frame1 vs the `-v2` frame-1 capture | equal: summary, bindings, boundaries, Windows/clock answers, DirectDraw, registers, RNGs |
+| Replay of s0 + deltas, read back from the written xz | 257/257 summaries and 11/11 checkpoint full states equal |
+| Determinism | two full runs (tools `e8bcec5`, `717bd46`) are identical apart from wall-clock fields, `source_revision` and the provenance path |
+| Policy `--quadros 128` | passed in 1,753 s; every phase state reproduced; pass-1 summaries equal the capture's |
+| Policy totals | 154,059 changed bytes; cumulative mask 153,060 display-only bytes, **999 compared logic bytes**, 0 without an observed writer, 0 logic-context surface accesses |
+
+223 logic bytes first change after frame 1:
+
+| Writer | Bytes |
+|---|---|
+| NextGouttes (rain-drop slots) | 197 |
+| UpdateChamp | 9 |
+| EnginNextEtape | 8 |
+| NextAnimVeget | 6 |
+| ScanNouvellePatate | 2 |
+| HUD flag (AffGame and CalculMatiere) | 1 |
+
+### Observed facts AI/runtime predicted
+
+- **View origin:** (3,5), (2,4), (1,3), (0,2) after frames 1–4, then (0,1) after frame 5 and (0,0) from frame 6 on.
+- **HUD flag:** 0 after `between_frames2`, and after every between-frames phase whose AffGame counter is not a multiple of 5.
+- **Cursor `0x4e1d18`:** 0x25 after frame 128.
+
+### Segment-parallel execution for M2.3a ([segmentos_quadros_missao.py](segmentos_quadros_missao.py), not evidence)
+
+**Pass A** runs the frames sequentially and saves exact snapshots: at the MissionLoad return and after every K-th frame.
+- **Memory:** every Unicorn region, with its bytes and protection.
+- **CPU:** the `context_save` CPU state.
+- **Python state:** the bench's Python state, pickled. The arena, DirectDraw backend and binding registry are saved without their Unicorn handles.
+
+**Pass B** resumes a segment from a snapshot:
+1. It builds a fresh bench (constructor only).
+2. It restores the snapshot in place, so the objects that bindings hold keep their identity.
+3. It reinstalls the frame hooks and runs.
+
+Proof on M2.2 (K = 32, segments on separate lease slots):
+
+| Check | Result |
+|---|---|
+| Pass A records vs the committed capture | 257/257 equal (wall-clock `seconds` excluded) |
+| Segments 32–64, 64–96, 96–128 vs pass A and the capture | 192/192 phase records byte-equal, about 40 s each |
+| Policy pass 2 by segment (0–32, 32–64, 64–96, 96–128, about 4–5 min each), merged | every report field equal to the sequential `--quadros 128` report (pass-1 data taken from the capture's exact deltas) |
+
+Measured costs: pass 2 runs at about 8–9 s per frame per slot; peak RSS is 1.0–1.3 GB per segment and 2.6 GB for the sequential capture.
+
+### Not run / gaps
+
+- **M2.3:** not started; it needs a new authorization.
+- **Display clock beyond 4,096 answers:** M2.3 needs it. The agreed definition is Core's: the same rule `0x123456 + 40·k`, extended.
+- **v3 (text/LoadPie):** still waits for Core's `ftell`.
+- **Python per-frame comparison:** AI/runtime runs it against these artifacts.

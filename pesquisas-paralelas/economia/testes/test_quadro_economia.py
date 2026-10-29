@@ -221,9 +221,16 @@ class ContratosQuadroEconomia(unittest.TestCase):
         m.escrever(q.IA_INATIVO, b'\x00')
         m.escrever(q.IA_INATIVO + 16, b'\x00')
         m.escrever(captura.CONTADOR, struct.pack('<I', 2000))
-        with self.assertRaises(q.DependenciaQuadro) as erro:
-            q.calcular_simpatia_ataques(m)
-        self.assertEqual((erro.exception.endereco, erro.exception.argumentos), (0x47515d, dict(EAX=0, EDX=1, EBX=0x13)))
+        # MAJSympathie's event-counter branch 0x47515d is translated since M2.3 prep and checked against
+        # captura-temporizadores-original.json (test_temporizadores); with AI context cleared it now runs.
+        # Event 0x13 (delta 1, mode 0, limit 1): only the AI-free pairs (0, 1) and (1, 0) gain 1.
+        registros = struct.unpack('<I', m.ler(q.JOGADORES, 4))[0]
+        simpatia = lambda i, j: struct.unpack('<h', m.ler(registros + 20 * i + 0xc + 2 * j, 2))[0]
+        antes = {(i, j): simpatia(i, j) for i in range(4) for j in range(4)}
+        q.calcular_simpatia_ataques(m)
+        depois = {(i, j): simpatia(i, j) for i in range(4) for j in range(4)}
+        self.assertEqual({k for k in antes if antes[k] != depois[k]}, {(0, 1), (1, 0)})
+        self.assertEqual((depois[0, 1] - antes[0, 1], depois[1, 0] - antes[1, 0]), (1, 1))
         chamadas = []
         m = Memoria()
         m.escrever(captura.CONTADOR, struct.pack('<I', 4000))

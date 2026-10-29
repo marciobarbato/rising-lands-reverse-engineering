@@ -7,7 +7,7 @@ sem alojamento. Não se executa nem se simula criação/movimento de unidades.
 from dataclasses import dataclass
 import struct
 
-from economia import Economia
+from economia import Economia, _buffer_vivo
 
 BASE_CAPACIDADES = 0x4dfb2c
 BASE_CONSTRUCOES = 0x49a0c8
@@ -90,7 +90,21 @@ class TerrenoSacolas:
     Ponteiros originais: 0x507d74 (tipo), 0x507dac (quantidade).
     O estado aleatório corresponde a 0x497164; não altera o gerador 0x498db4.
     """
+    @classmethod
+    def vivo(cls, tipos, quantidades, semente=1):
+        """Bind the live type [0x507d74] and quantity [0x507dac] grids (65,536 bytes each) by identity."""
+        tipos = _buffer_vivo(tipos, 65536, 'Live type grid ([0x507d74])')
+        quantidades = _buffer_vivo(quantidades, 65536, 'Live quantity grid ([0x507dac])')
+        if tipos is quantidades:
+            raise ValueError('The type and quantity grids are different allocations')
+        if not 0 <= semente <= 0x7fffffff:
+            raise ValueError('Semente deve estar em 0..0x7fffffff')
+        self = cls.__new__(cls)
+        self.tipos, self.quantidades, self.semente = tipos, quantidades, semente
+        return self
+
     def __init__(self, tipos=None, quantidades=None, semente=1):
+        # Legacy/fixture form: copies. Use TerrenoSacolas.vivo for the live grids.
         self.tipos = bytearray(65536 if tipos is None else tipos)
         self.quantidades = bytearray(65536 if quantidades is None else quantidades)
         if len(self.tipos) != 65536 or len(self.quantidades) != 65536:
