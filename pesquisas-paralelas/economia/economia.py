@@ -52,6 +52,18 @@ def _i32(valor):
     return valor - 0x100000000 if valor & 0x80000000 else valor
 
 
+def _buffer_vivo(buffer, tamanho, nome):
+    """Return ``buffer`` itself if it is a writable contiguous byte buffer of ``tamanho`` bytes."""
+    if isinstance(buffer, memoryview):
+        if buffer.readonly or buffer.ndim != 1 or buffer.format not in ('B', 'b') or not buffer.c_contiguous:
+            raise ValueError(f'{nome} view must be writable, one-dimensional and contiguous bytes')
+    elif not isinstance(buffer, bytearray):
+        raise ValueError(f'{nome} must be a writable bytearray or memoryview (live memory, not a copy)')
+    if len(buffer) != tamanho:
+        raise ValueError(f'{nome} must have {tamanho} bytes')
+    return buffer
+
+
 class Economia:
     """Cópia mutável dos 128 bytes salvos por SauveRessource (0x46ab33).
 
@@ -60,7 +72,21 @@ class Economia:
     seu significado no jogo ainda requer validação em partida.
     """
 
+    @classmethod
+    def vivo(cls, memoria):
+        """Bind the live resource table 0x4e2ea8 (128 bytes) by identity: no copy."""
+        memoria = _buffer_vivo(memoria, TAMANHO_TABELA, 'Live resource table (0x4e2ea8)')
+        self = cls.__new__(cls)
+        self.memoria = memoria
+        return self
+
+    @classmethod
+    def da_memoria(cls, m):
+        """``vivo`` over a live memory map: ``m.vista(0x4e2ea8, 128)``."""
+        return cls.vivo(m.vista(BASE_RECURSOS, TAMANHO_TABELA))
+
     def __init__(self, memoria=None):
+        # Legacy/fixture form: copies. Use Economia.vivo/da_memoria for the live original table.
         self.memoria = bytearray(TAMANHO_TABELA if memoria is None else memoria)
         if len(self.memoria) != TAMANHO_TABELA:
             raise ValueError('Tabela econômica deve ter 128 bytes')

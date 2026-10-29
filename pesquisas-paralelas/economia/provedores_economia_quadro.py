@@ -6,7 +6,11 @@ returns ``{original name: provider}`` in ai-runtime's convention
 consume EAX), like Core's ``provedores_core(memoria, bonus)``. Every routine
 covered by the 102 isolated native calls of frames 0/1
 (``evidencias/captura-quadro1-economia-original-v2.json``) is here, plus
-RechercheGetNbInvention for Missions' TestFinDeMission.
+RechercheGetNbInvention for Missions' TestFinDeMission. Round 4 adds the
+queries the display-scenario frames reach outside those calls
+(``evidencias/captura-consultas-economia-exibicao.json``): PlayerGetType,
+PlayerEstAllie, TestRessource, BatimentGetType, BatimentEstHabiter,
+IntToBCD, BCDToInt and BagVide.
 
 ``memoria`` is the declared live memory: either an object with
 ``ler(endereco, tamanho)`` and ``vista(endereco, tamanho)`` (Missions'
@@ -45,8 +49,10 @@ REGIOES_ECONOMIA_QUADRO = (
     (0x50817c, 0x50817c + 4 * 0x168, 'research table'), (0x50871c, 0x50871c + 256, 'invention counts (AL index)'),
     (0x508f7c, 0x508f80, 'frame counter'), (0x509952, 0x509953, 'field update flag'),
     (0x509954, 0x509954 + 80, 'mines'), (0x51a990, 0x51a990 + 64, 'AI contexts (+0 inactive byte)'),
-    (0x4e19a0, 0x4e19a4, 'unit pool pointer'),
+    (0x4e19a0, 0x4e19a4, 'unit pool pointer'), (0x5080a8, 0x5080ac, 'player records pointer'),
 )
+# Dynamic ranges besides the unit pool: the player records [0x5080a8] (PlayerGetType/PlayerEstAllie),
+# any Bag count word BagVide is given, and the IntToBCD/BCDToInt destinations and sources.
 BOLSAS_ESTRUTURAS = 0x49a0c8 + 0x0c
 
 
@@ -87,7 +93,7 @@ def memoria_economia(memoria):
 
 def provedores_economia_quadro(memoria, *, bonus, producao, recursos=None, calcular_tropa=None):
     from bonus_unidades import BonusUnidades
-    from construcoes_habitaveis import celula_central_estrutura
+    from construcoes_habitaveis import celula_central_estrutura, estrutura_habitada
     from extracao import RecursosTerreno
     from limpeza_saida import bag_contient_troupe
     m = memoria_economia(memoria)
@@ -133,6 +139,15 @@ def provedores_economia_quadro(memoria, *, bonus, producao, recursos=None, calcu
         'BonusGetValEngin': lambda sitio, jogador, tipo, seletor, ecx: bonus.consultar(jogador, tipo, seletor, ecx=ecx),
         'EnginNextEtape:estado7': lambda sitio, unidade: q.estado_parado_unidade(m, unidade),
         'RechercheGetNbInvention': lambda sitio, jogador: q.numero_invencoes(m, jogador),
+        'PlayerGetType': lambda sitio, jogador: q.tipo_jogador(m, jogador),
+        'PlayerEstAllie': lambda sitio, jogador, outro: q.aliado(m, jogador, outro),
+        'TestRessource': lambda sitio, jogador, comida, pedra, pecas: q.recursos_suficientes(m, jogador, comida,
+                                                                                             pedra, pecas),
+        'BatimentGetType': lambda sitio, estrutura: q.tipo_estrutura_viva(m, estrutura),
+        'BatimentEstHabiter': lambda sitio, estrutura: estrutura_habitada(producao, estrutura),
+        'IntToBCD': lambda sitio, destino, valor: q.escrever_bcd(m, destino, valor),
+        'BCDToInt': lambda sitio, destino, origem: q.ler_bcd(m, destino, origem),
+        'BagVide': lambda sitio, bolsa: q.bolsa_vazia(m, bolsa),
     }
     if recursos is not None:
         p['UpdateChamp'] = lambda sitio: q.atualizar_campos(m, recursos)

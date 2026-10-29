@@ -808,3 +808,40 @@ The exact-frame evidence is [captura-quadro1-economia-original-v2.json](../pesqu
 | `RechercheGetNbInvention` | `jogador` | AL |
 
 Without `calcular_tropa` (the world-joined producer), `CalculTroupe` raises `DependenciaQuadro` before any store for an active structure. Frames 0/1 never reach that case. Core's `provedores_core` also offers `BatimentGetCase`. Both translate the same routine, so the composer picks one.
+
+## Display-scenario revalidation (M2 round 4)
+
+The display scenario is the M2 reference ([QUADRO1_EXIBICAO.md](../pesquisas-paralelas/missoes/QUADRO1_EXIBICAO.md)): Missions' oracle runs the real window loop and executes the display path natively, so allocations moved and the viewport, cursor and CRT seed differ from v1. Every Economy routine reached in frames 0/1 was recaptured at those exact inputs, in isolation, before any Python ran.
+
+**Capture.** [`capturar_quadro1_economia_original.py`](../pesquisas-paralelas/economia/capturar_quadro1_economia_original.py) now takes `--cenario v1|exibicao` (Missions' `cenarios_oraculo.bancada`, named inputs checked against the frame capture) and `--conjunto quadro|consultas`. Each run must reproduce Missions' committed phase states, entry trace, boundaries and code hash. Routines that pop stack arguments (`RET n`) also record those entry bytes as `stack_arguments`, because the isolated read set excludes everything below the exit ESP; no `quadro` routine pops any, so both frozen `quadro` captures stay reproducible. The `consultas` set also records writes into the caller's frame (`caller_stack_changes`, `caller_stack_written_unchanged`): IntToBCD writes its digits into CalculMatiere's and AffCompteurMatiere's stack buffers. The first query capture lacked them (the isolation dropped every stack write); it is kept, and v2 must equal it without those fields.
+
+| Capture | Calls | Notes |
+|---|---|---|
+| [`captura-quadro1-economia-exibicao.json`](../pesquisas-paralelas/economia/evidencias/captura-quadro1-economia-exibicao.json) (`quadro`) | 104 | the v1 set of 102, plus 2 `BagContientTroupe` calls AffGame reaches through `BatimentEstHabiter` between frames |
+| [`captura-consultas-economia-exibicao-v2.json`](../pesquisas-paralelas/economia/evidencias/captura-consultas-economia-exibicao-v2.json) (`consultas`) | 77 | PlayerGetType 27, PlayerEstAllie 10 (7 from combat targeting, 3 from AffDrapeauAlliance), TestRessource 6, BatimentGetType 2, BatimentEstHabiter 2, IntToBCD 19, BCDToInt 8, BagVide 3 (AffDeplaceEngin, unit Bags) |
+
+**What changed from v1** ([`comparar_quadro1_economia_cenarios.py`](../pesquisas-paralelas/economia/comparar_quadro1_economia_cenarios.py), [report](../pesquisas-paralelas/economia/validacao-quadro1-economia-v1-vs-exibicao.json)). Calls are matched by phase, routine and order. v1 allocation addresses, pointer values and read dwords are relocated to their display partners with Missions' CPU-free allocation matching (`comparar_quadros_exibicao.emparelhar`), and native stack addresses are taken relative to the entry ESP. After that:
+- **No routine's behavior or reached branches changed.** Reads, changed bytes, untouched writes and results are identical for all 102 shared calls. The unit pool moved from `0x4140d000` to `0x474a8000` and the terrain grids moved too; both are relocations.
+- `PlayerAttaqueCalculSympa` receives different leftover EAX/EDX from its caller (frame 0: 3/0x500 → 0xe7/0x161c; frame 1: 2/0x400 → 0xe7/0x151b). It never reads them: EDX passes through, EAX is overwritten, and its reads and writes are the same.
+- **New call site:** AffGame (display, between frames) calls `BatimentEstHabiter` on structure 0, which calls `BagContientTroupe` (Bag `0x49a0d4`, AL=1, read-only) twice.
+
+**Python at the display inputs.** All 104 `quadro` calls are reproduced from the display post-MissionLoad state (Missions' delta capture expanded over its entry snapshot, checked against the frame capture's S0) overlaid with each call's native inputs, both directly and through `provedores_economia_quadro` over a `u8/u16/u32`-only memory. Exact read-before-write equality still holds for the `ler`/`vista` routines.
+
+**Queries.** The display frames reach eight economy queries outside the frame routines. Each now has a live-memory function in `quadro_economia` and a provider; the existing class forms gained identity-bound constructors, like the bonus table in round 3:
+- `Economia.vivo(tabela)` / `Economia.da_memoria(m)` bind the resource table `0x4e2ea8` (128 bytes); `Mercado.vivo(economia, *, jogadores, **buffers)` / `Mercado.da_memoria(m)` bind the player records `[0x5080a8]` (80 bytes) and every market buffer. The constructors still copy (fixture form). `_buffer_vivo` moved from `bonus_unidades` to `economia`.
+- `tipo_jogador` (PlayerGetType `0x46d817`), `aliado` (PlayerEstAllie `0x46d838`: AL==DL → 1; either > 4 → 0; index 4 is read, not rejected), `recursos_suficientes` (TestRessource `0x4676e5`: AX food, DX stone, BX parts, player as the RET-4 stack byte), `tipo_estrutura_viva` (BatimentGetType `0x41a4f4`), `escrever_bcd`/`ler_bcd` (IntToBCD `0x467cd1`: EAX destination, EDX value; BCDToInt `0x467d3a`: EAX destination word, EDX digits, word rewritten per digit) and `bolsa_vazia` (BagVide `0x4470b9`: EAX = (count & 0xff00) | (count == 0), new). `BatimentEstHabiter` is the existing `construcoes_habitaveis.estrutura_habitada`.
+- The class forms keep their API protection (players 0..3), which the original does not have; the live functions follow the original.
+- All 77 query calls are reproduced three ways from the display state: through the live class forms, through the live functions (exact read-before-write sets for all but BatimentEstHabiter), and through the providers over a `u8/u16/u32`-only memory. Caller stack buffers are a test block filled only from the recorded inputs. Five deliberate mutations (alliance equality, BCD digit order, TestRessource argument order, player index, BCDToInt sum) are each detected.
+- BagVide's 3 native calls are all on empty unit Bags, so its AH = high-count-byte path is only covered by the disassembly, not by a native call.
+
+| Provider | Keywords | Returns |
+|---|---|---|
+| `PlayerGetType` | `jogador` | AL |
+| `PlayerEstAllie` | `jogador`, `outro` | AL |
+| `TestRessource` | `jogador` (stack byte), `comida`, `pedra`, `pecas` (AX, DX, BX) | AL |
+| `BatimentGetType` / `BatimentEstHabiter` | `estrutura` | AL |
+| `IntToBCD` | `destino`, `valor` (EAX, EDX) | None |
+| `BCDToInt` | `destino`, `origem` (EAX, EDX) | None |
+| `BagVide` | `bolsa` (EAX) | EAX |
+
+**Field growth.** Untouched: it starts at frame counter 128 (M2.2). The economy fixtures already bind the tile grid by identity through the pointer at `0x507d70`; Core's live byte-addressable grid provider is not on main yet, and will be consumed once it is integrated.
