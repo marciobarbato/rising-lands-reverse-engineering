@@ -11,7 +11,9 @@ original-name providers (``provider(sitio=..., **arguments)``):
 - Core: GetBit, CalculFatigue, SetEnginCollision.
 - Combat: EnginTrouveCible.
 
-The 32-frame target scan (0x4546aa..0x4547e0) is translated from the static disassembly: the type
+State 2 (moving) follows ``evidencias/captura-proxima-etapa-incursao-ia.json``: the raid unit at counters
+9000..9011, forced input; still short of its target it calls DeplaceEngin (Core). The 32-frame target scan
+(0x4546aa..0x4547e0) is translated from the static disassembly: the type
 classifier, the owner-200 skip, the states 1/19 skip, the +0xda gate for entry types 14 and 16, and the
 hit handling (iagUnitSendMessage 0x49 for player type 2, SetAttaqueEngin(1) for state 7). The capture
 took only its no-scan path; frame 17 of the display reference is the first scan (Core's survey).
@@ -26,6 +28,7 @@ FADIGA, SAIDA = 0x454851, 0x454ccd
 # 0x4546d5..0x454711: unit types whose 32-frame step scans for a target (AL = 1).
 TIPOS_VARREDURA = frozenset({0, 1, 2, 3, 8, 0xb, 0xc, 0xf, 0x10, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19})
 ESTADO_PARADO, RAMO_PRODUCAO = 0x456966, 0x426918
+ESTADO_MOVENDO = 0x4563da          # state 2 (moving), the raid unit from counter 9000
 
 
 def _parar(descricao, endereco):
@@ -124,6 +127,12 @@ def _trocar_estado(m, provedores, unidade, r, tabelas):
     if alvo == ESTADO_PARADO:
         _chamar(provedores, 'EnginNextEtape:state7', ESTADO_PARADO, unidade=unidade)
         return SAIDA
+    if alvo == ESTADO_MOVENDO:
+        # 0x4563da: still short of the target cell +0x7e -> 0x4555a7 DeplaceEngin(AX = unit), exit.
+        if m.u16(r + 0x7e) != m.u16(r + 8):
+            _chamar(provedores, 'DeplaceEngin', 0x4555ac, unidade=unidade)
+            return SAIDA
+        _parar('EnginNextEtape state 2 at its target cell (EnginEnArret fork)', 0x4563e8)
     _parar(f'EnginNextEtape state {estado}', alvo)
 
 
