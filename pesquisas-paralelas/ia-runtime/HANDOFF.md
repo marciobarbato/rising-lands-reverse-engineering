@@ -171,3 +171,41 @@ Fresh [native report](validacao/stage2b-adapter-native.json), SHA-256 `19db7ddea
 [Attempt journal](validacao/stage2b-focused-attempt.json) records start 18:23:52.459 BRT, exit 18:23:56.763 BRT, exit code 0, a 60-second hard budget and the before-18:25 deadline. No timeout/failure/skip occurred in this focused validator. The heavy lease was explicitly released immediately on child exit. Four local guard tests had passed earlier; the **full AI suite, owning domain gate, helper integration and targeted committed-main adapter reproduction were not run** under this final grant. Do not infer their success from the focused proof.
 
 **Four statuses:** implementation prepared **yes** (bounded actual-delegate adapter); original-validated **yes for these 11 declared complete/stopped fixtures**; integrated on main **no**; tested in a real mission **no**. L9/complete MissionLoad remains open: actual original/current startup-control state, full load-tail composition and whole mission oracle are not established. Missing Core state/ownership bodies remain named, not substituted. The source WIP `1a455b037a3af8a290d988753e52c72d0deec2e2`, source merge `a5316d4` and this evidence checkpoint are preserved for Claude. Next authorized maintainer action is the pending full suite/domain/helper integration from the clean feature branch, preserving every prior report and the unchanged common integration lock; do not start dispatcher/kernels or a new stage before that gate. All new development stops at 18:25 BRT; handover operations alone may continue to 18:40.
+
+
+## M2 slice 1 — frame inventory, M1 post-load captures, skeleton and dispatcher loops (2026-10-28)
+
+Branch `feat/re-ai-runtime`, merged with main `81ebbf9` (fast-forward). The intact executable is SHA-256 `6c556520…43fb`. Input label: **"M1 post-load input"**, the frozen accepted final state `58a5020e…` of `captura-carga-missao-original-v2.json` (read-only), replayed natively and hash-checked each run.
+
+### Commits
+- `32dfb4a` static frame inventory: `inventario_quadro_m2.py` and `evidencias/inventario-quadro-m2.json`, plus the M2 section of `docs/AI_RUNTIME.md`.
+- `a2a4aad` CalculGame frame-body skeleton (`quadro_calcul_game.py`) with its replay test against the 8 Stage 1 frame captures.
+- `678c42c` capture script `capturar_quadro_m2.py`.
+- `66db4e4` **native captures, committed before any translation**: `evidencias/captura-quadro-m2-pos-carga.json`, 46/46 returned, 0 bindings, 0 skips, 0 faults.
+- `e24b0e1` dispatcher loops `laco_despachantes.py`, hybrid validator `validar_despachantes_m2.py` and local tests.
+- `1b8e2fb` native hybrid report `validacao/m2-despachantes-native.json`: **23/23 equal** (whole image SHA and provider order).
+
+### API (inputs, domain, mutation and callback order)
+- `calcular_quadro(memoria, provedores)`, CalculGame `0x42d2de..0x42d4f5`. `memoria` is a `MemoriaDeclarada` covering `REGIOES_QUADRO`; `provedores` maps original names to `f(sitio=…, **args)`. It returns `{saida, chamadas}`. Exits are `0x42d4e2` (clears `0x5099b0`), `0x42d4ea` and `0x42c92c` (the MenuInit tail). Call order and stores are as in the original body (doc table). It is single-player and network aware.
+- `Quadro.calcul_next_reflect(jogador, missao)`, CalculNextReflect/iaCalculPlayer through Core `ia.atualizar_ia`. It stores the counter `0x51a995+16p` for active players and the inactive byte only on the tenth empty cycle. Kernel sites are `0x47f939/45/9ad/9df/9ea/9f5/a02/a12`.
+- `calcular_proxima_etapa_unidades`, `calcular_proxima_etapa_estruturas`, `testar_utilidade` and `testar_mensagem_unidade` in `laco_despachantes.py`: domain and providers as documented in `docs/AI_RUNTIME.md` (M2 step 2).
+- Missing providers raise `DependenciaIA(name, original call site)`; partial stores are retained. The unreached iagMessTestSendMessageEngin group path raises at `0x483f5d`.
+
+### Native counts and validation
+- Capture run: about 34 s for the startup and MissionLoad replay; 46 captures in under 1 s. Trace sizes: unit loop 188 entries, structure loop 23, monster AI 5.
+- Hybrid validation: 23 cases in 36 s, all equal.
+- Local suite: 50 tests, 5 native opt-in skips (pre-existing).
+- Gate: see the report.
+
+### Gaps and next
+1. **AvanceMonstre `0x47b283` (player 4) and iaSolver** for frame 1. It stores `0x50a9cc` = 1, and the solver finds an empty task list. Next ai-runtime slice.
+2. ProcessInputGame (clear-only at frame 1) and MessageBoxCalcul (read-only), then the EnginNextEtape prelude for states 7/14.
+3. Re-validation at Missions' exact frame-1 input once it is published (the load-entry tail and the earlier frame steps differ from this input).
+
+### Cross-front contracts requested
+- **Missions**: the frame-1 oracle must bind `MCICD_Play` (byte `0x4e2f28` = 0 at MONDE01) or stop there under the audio owner. Please publish the per-routine entry trace with return sites, so this front can align its traces (same format: `callee@caller-site EAX EDX EBX ECX`).
+- **Economy**: PlayerGetType ≥ 4 → 2 is consumed by the frame; `Mercado.tipo_jogador` already provides it. BonusGetValEngin, state 7 (AnimBallonStatic/Random), BatimentNextEtape type 2 (BagContientTroupe, CalculTroupe) and ResetTableauHangar are reached at frame 1.
+- **Core**: GetBit, CalculFatigue, SetEnginCollision/SetCollision/Chemin_ModifieZone and Random are reached by every MONDE01 state-7 unit; BatimentGetCase, CaseEstDecouverte, BatimentEstDecouvert and BatimentContourEstIllumine by the structure loop. iaSolver over the actual task pool (`tarefas_ia`) is needed for player 4.
+- **Combat**: EnginTrouveCible (→ PlayerEstAllie) is reached for unit 0 at frame counter 0, and ProjectileCalcul is reached every frame.
+
+**Statuses:** implemented: loops, IATestUtilite and the frame skeleton. Original-validated: yes, at the M1 post-load input (23/23 hybrid, 17/17 local IATestUtilite, 8/8 Stage 1 frame captures). Integrated: no (the coordinator integrates). Tested at the exact frame-1 input: no (waits for Missions).

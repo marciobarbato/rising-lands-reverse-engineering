@@ -1,0 +1,223 @@
+{
+ "capture": "pesquisas-paralelas/ia-runtime/evidencias/captura-quadro-m2-pos-carga.json",
+ "capture_sha256": "c20fc158c00e1c6ef1f45d6a811d5596487f78b48cc5b8f4a13390a9b6c04697",
+ "cases": [
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "calcul_engin_next_etape",
+   "provider_calls": 32,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "calcul_batiment_next_etape",
+   "provider_calls": 12,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_unit0",
+   "provider_calls": 1,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_unit1",
+   "provider_calls": 1,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_unit2",
+   "provider_calls": 1,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_unit3",
+   "provider_calls": 1,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_unit4",
+   "provider_calls": 1,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_unit5",
+   "provider_calls": 1,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_unit6",
+   "provider_calls": 1,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_unit7",
+   "provider_calls": 1,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_unit8",
+   "provider_calls": 1,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_unit9",
+   "provider_calls": 1,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_unit10",
+   "provider_calls": 1,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_unit11",
+   "provider_calls": 1,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_unit12",
+   "provider_calls": 1,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_unit13",
+   "provider_calls": 1,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_unit14",
+   "provider_calls": 1,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_unit15",
+   "provider_calls": 1,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "ia_test_utilite_structure0",
+   "provider_calls": 0,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "calcul_next_reflect_p1",
+   "provider_calls": 0,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "calcul_next_reflect_p2",
+   "provider_calls": 0,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "calcul_next_reflect_p3",
+   "provider_calls": 0,
+   "result": "returned",
+   "state_equal": true
+  },
+  {
+   "call_order_equal": true,
+   "changes_equal": true,
+   "equal": true,
+   "label": "calcul_next_reflect_p4",
+   "provider_calls": 2,
+   "result": "returned",
+   "state_equal": true
+  }
+ ],
+ "label": "M1 post-load input",
+ "method": "Python loop over bench memory; providers execute the original natively; image and call order compared with the whole-routine native capture",
+ "schema": "rising-lands/ai-runtime-m2-dispatcher-validation/1",
+ "source_dirty_paths": [],
+ "source_revision": "e24b0e130f1959cb76cb5924d73bcf99430d02ab",
+ "summary": {
+  "cases": 23,
+  "equal": 23
+ },
+ "total_seconds": 35.829
+}
