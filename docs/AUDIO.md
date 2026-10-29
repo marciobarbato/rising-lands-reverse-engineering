@@ -384,3 +384,14 @@ read only; stereo decoding remains a separate Stage-1 API and is not newly
 proved as a queue composition. Arbitrary saturation, aliasing or long mission
 traces outside these captured images are not promoted to general acceptance.
 No game-side emitter, M2.3, M3 acceptance or app behavior is changed.
+
+
+Continuation validation: Audio gate **59 discovered / 56 passed / 3 unchanged
+optional native skips / 0 failures**; ten new tests have zero skips; fresh
+139-call/132-scenario differential has zero stops/failures. The exact required
+committed native build passed 71 consumer tests plus ARM64/signature checks,
+but its first UI smoke failed the baseline 45-second opening limit. First
+JSON/PNGs are preserved; no repeat, app change or timeout increase was made.
+The [Audio handoff](../pesquisas-paralelas/audio/HANDOFF.md#required-committed-native-bundle-build--first-attempt-preserved)
+records exact command/commit and the macOS-owned readiness dependency. Audio
+native proof is not substituted for the failed UI check or M3 acceptance.

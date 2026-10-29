@@ -427,3 +427,42 @@ and [the exact gate log](validacao/audio-continuation-check.log). The fresh
 139-call native differential is separate actual leased execution, despite the
 optional baseline skips. The coordinator's exact committed native bundle build
 is performed next; its actual outcome is recorded separately.
+
+
+### Required committed native bundle build — first attempt preserved
+
+The exact coordinator command was executed from committed Audio
+`588a7942e6a0923574e1a56047bda8213a2f8ed6` merged with main `8e90beb`:
+
+```sh
+RISING_PYTHON_RUNTIME='/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python' \
+  ./compilar-jogável --development-ref HEAD \
+  --inputs-root '/Users/marcio/git/Rising Lands' \
+  --data-root '/Users/marcio/git/Rising-Lands-Codex-Audio/repository/.local/macos-playable'
+```
+
+**Overall exit 1; native UI smoke failed.** The build compiled the ARM64 app,
+verified ARM64 Python and the local signature, and passed **71/71 consumer
+tests, zero skips**, 41.051 seconds. The first native window smoke then
+reported original player-visible error `Tempo limite de 45 segundos na abertura`,
+with nativeWindowVisible=true and empty Python stderr. Inspection smoke was
+not reached. Compilation/signing and consumer success do not imply UI success.
+No timeout was increased, app file modified or native build repeated.
+
+The first JSON is preserved byte-for-byte in
+[audio-continuation-native-smoke-first.json](validacao/audio-continuation-native-smoke-first.json).
+[The build report](validacao/audio-continuation-native-build.json) records the
+exact command, commit, original PNG paths/hashes and disposition. All three
+first-attempt PNGs remain under the clone-local build/logs directory. The
+[full launcher log](validacao/audio-continuation-native-build.log),
+[consumer log](validacao/audio-continuation-consumer-tests.log),
+[architecture](validacao/audio-continuation-architecture.log) and
+[codesign verification](validacao/audio-continuation-codesign-verify.log) are
+committed. Original inputs remain read-only; every output is inside this clone.
+
+The failure was reported immediately to the parent coordinator, after AppKit
+finished, allowing its independent macOS readiness fix/smoke to proceed without
+concurrent UI runs. The remaining UI-startup issue belongs to that front; this
+Audio delivery does not repair or suppress it. The successful Audio gate and
+139-call native differential remain separate results. Final build validation
+must be rerun by the coordinator with its integrated readiness fix.
