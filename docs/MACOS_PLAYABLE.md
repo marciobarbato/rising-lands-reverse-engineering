@@ -120,3 +120,12 @@ Actual validation results and integration identity are recorded in the
 [app handoff](../apps/macos-preview/HANDOFF.md). Historical x86 totals are not
 substitutes for these consumer/runtime checks. This app adds no recovered
 native algorithm and does not aggregate domain totals into a game-fidelity claim.
+
+## Independent M3 preparation boundary
+
+The [accepted-state contract](../apps/macos-preview/M3_CONTRACT.md) defines an
+app-owned read-only M1 inspector and an explicit pending-M2 update boundary.
+It loads the exact acceptance-pinned evidence with the existing Python block
+decoder. It does not switch the native app to MONDE01 or establish M3 acceptance.
+The [independent audit](../apps/macos-preview/M3_AUDIT.md) records isolation and
+provider dependencies.
