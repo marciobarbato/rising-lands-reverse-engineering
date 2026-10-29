@@ -282,3 +282,29 @@ Merged main `d94a59e`. The report is [M2_1_PROVA_QUADRO1.md](M2_1_PROVA_QUADRO1.
   - DDLock/DDUnlock bookkeeping `0x4e17a6..a8` is compared by the policy; the proof shows it restored.
   - The DeleteBank records are compared; they are now modeled.
 - **Process:** one development trial executed the native collection outside the lease. It crashed and produced no evidence.
+
+
+## M2.2 preparation — N-frame composition (2026-10-29)
+
+Merged main `5c0dac2`. The report is [M2_2_PREPARACAO.md](M2_2_PREPARACAO.md). No native run beyond frame 1 was made; the Mac mini captures and the cumulative mask are pending.
+
+- **API inputs:**
+  - `composicao_quadros_ia.ComposicaoQuadros(estado_s0, captura_quadro, entrada, captura_m1, planejamento=False).executar(n)` yields `dict(phase, registro, entry, exit)`.
+  - `affgame_hud_ia.affgame_hud(m, desenhar)` returns `EfeitoHud(desenhou, escritas, eax, leituras)`.
+  - `contexto_exibicao_ia.ContextoExibicao(imagem, raizes).vinculo(e)` and `.fronteira(e)`.
+  - `comparar_quadros_ia.py --captura --politica [--quadros] --saida`.
+  - `percorrer_quadros_ia.py --quadros N --saida [--planejamento]` (planning writes under `.local/` only).
+  - `fase_entre_quadros_exibicao(..., fase=)` and `fase_quadro(..., fase=)` take the phase name. In mode `prova`, AffGame's leftover EAX becomes the boundary EAX.
+- **Supported domain:**
+  - display scenario `-v2`, mode 0x12, no input, no event;
+  - AffGame within Graphics' proved domain;
+  - EnginNextEtape scan hits stop at `iagUnitSendMessage`/`SetAttaqueEngin` (not reached in 128 frames).
+- **Mutation order:** original order. AffGame stores the flag after Graphics' guards. UpdateChamp reads an immutable tile-grid snapshot taken at the call.
+- **Validation:**
+  - The comparator self-test on the `-v2` frame-1 data equals the M2.1 proof (16,097,242 bytes per phase, 597/2/13 bindings, registers, 25,482 records).
+  - The 128-frame planning probe equals Core's survey on every indicator and checkpoint call count; the HUD agrees 127/127.
+  - `testes/test_quadros_ia.py` has 10 tests.
+- **Gaps:**
+  - Graphics' origin domain: (3,5), (2,4), (1,3), (0,2), (0,1).
+  - The formal per-frame comparison.
+  - The display-context events, EFLAGS/EIP, and the MCICD_Play stale locals.

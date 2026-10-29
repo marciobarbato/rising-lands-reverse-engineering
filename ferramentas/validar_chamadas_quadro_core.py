@@ -273,8 +273,10 @@ def main():
     print(json.dumps({k: r[k] for k in ('comparisons', 'by_routine', 'path_reproduction', 'calls', 'seconds')}
                      | dict(mismatches=len(r['mismatches']), dependencies=len(r['dependencies']), output=str(saida)),
                      indent=1))
-    return 0 if ok else 2
+    return 0 if ok else 2, saida
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    # Durable fast exit: fsync the output, skip uc_close at shutdown (docs/core/UNICORN_TEARDOWN.md).
+    from encerramento_captura import encerrar_captura
+    encerrar_captura(*main())

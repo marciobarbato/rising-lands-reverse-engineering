@@ -89,8 +89,10 @@ def main():
     print(json.dumps(dict(output=str(saida), sha256=hashlib.sha256(saida.read_bytes()).hexdigest(),
                           reproduction=reproducao, entries=entradas, isolated=contagem,
                           not_reached=relatorio['not_reached'], seconds=relatorio['seconds']), indent=1))
-    return 0 if ok else 2
+    return 0 if ok else 2, saida
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    # Durable fast exit: fsync the output, skip uc_close at shutdown (docs/core/UNICORN_TEARDOWN.md).
+    from encerramento_captura import encerrar_captura
+    encerrar_captura(*main())

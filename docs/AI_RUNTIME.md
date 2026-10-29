@@ -616,3 +616,11 @@ New this round, translated from captured executed blocks: InputGame (MouseZone, 
 ## M2.1 round 5 — formal first-frame equality proof
 
 [M2_1_PROVA_QUADRO1.md](../pesquisas-paralelas/ia-runtime/M2_1_PROVA_QUADRO1.md); the data is in `validacao/m2-1-prova-quadro1.json`. Against Missions' display -v2 reference and comparison policy, the chained composition is equal in phases (a), (b) and (c) on every compared byte (16,097,242 outside the exclusion mask), both RNGs, the bindings and boundaries outside display context, the modeled registers, and the 25,482 allocation records. It uses **zero crossings**: Core's 25×17 NextAnim*, Graphics' `efeitos_logicos_exibicao`, and DeleteBank/MemFree on Missions' arena. MenuInit's display roots are not executed, and the proof shows their write sets are masked, outside the state, or restored lock bookkeeping.
+
+## M2.2 preparation — N-frame composition
+
+[M2_2_PREPARACAO.md](../pesquisas-paralelas/ia-runtime/M2_2_PREPARACAO.md): the M2.1 chain generalizes to load_tail plus N frames on one map, with no crossing.
+- **New translations:** AffGame's HUD flag `0x4e05a2` and leftover EAX, and EnginNextEtape's 32-frame target scan.
+- **Python-only probe:** it runs 128 frames. Against Core's native survey, all indicators, the checkpoint call counts and the HUD agree, once Graphics' drawing-domain guard is bypassed for planning at five view origins.
+- **Blocker:** that guard is the only one, and Graphics must extend it.
+- **Comparator:** it is ready for the Mac mini captures and the cumulative mask; a self-test on the frame-1 data reproduces the M2.1 proof.
