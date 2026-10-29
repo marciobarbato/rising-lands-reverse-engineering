@@ -1,0 +1,377 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "SelectionEngin",
+      "start": "0x4742dc",
+      "end_exclusive": "0x474610",
+      "sha256": "9a9f362b0346e9874b2a9478cfae37761627572c94fe7ec05cb1a908dbaccdb4",
+      "file": "004742dc.asm"
+    },
+    {
+      "name": "EnginAddSelection",
+      "start": "0x4741cd",
+      "end_exclusive": "0x4742dc",
+      "sha256": "1813f58427f5b5b9a109e31911ca829957c1e608b700b555d2520a12f06faaac",
+      "file": "004741cd.asm"
+    },
+    {
+      "name": "EnginSelectionnable",
+      "start": "0x474169",
+      "end_exclusive": "0x4741cd",
+      "sha256": "d0fd668b5a33a67afc760eaebca3b66d42eb56571b567df01c520c3fc650d99a",
+      "file": "00474169.asm"
+    },
+    {
+      "name": "SelectionAddEngin",
+      "start": "0x4725ee",
+      "end_exclusive": "0x472648",
+      "sha256": "04439370063f811b4536f0a3171a0a638e2de3a880500f305ab29af0d8b2ae4d",
+      "file": "004725ee.asm"
+    },
+    {
+      "name": "RetireSelectionEngin",
+      "start": "0x472576",
+      "end_exclusive": "0x4725ee",
+      "sha256": "457e22d2292f2742e6c166534aeae7eb6163641cfadd1ecf0083c3df7c7d0b4e",
+      "file": "00472576.asm"
+    },
+    {
+      "name": "DeselectionEngin",
+      "start": "0x472648",
+      "end_exclusive": "0x47268b",
+      "sha256": "0422c13ff6d7f2890337f2c27c62580d3f4fcb3e5b844769ea03e864dc177a37",
+      "file": "00472648.asm"
+    },
+    {
+      "name": "DeSelectionGroupe",
+      "start": "0x47268b",
+      "end_exclusive": "0x4726f7",
+      "sha256": "1857333c0fc1b856760a07c619fef0ce3ec9c1179c53b95d8d39a8f606546f3e",
+      "file": "0047268b.asm"
+    },
+    {
+      "name": "epilogue 0x472251 (DeSelectionGroupe)",
+      "start": "0x472251",
+      "end_exclusive": "0x472258",
+      "sha256": "eba6897b90b3fc708fdbdfd89e1e212c0fdd660bbd11d3ab91b27a9339a88d3a",
+      "file": "00472251.asm"
+    },
+    {
+      "name": "Deselection",
+      "start": "0x429180",
+      "end_exclusive": "0x4291bc",
+      "sha256": "e349438377df89f2cd5aa7bdf200d9f0e0808e189e52e8b4a36a9111836fe035",
+      "file": "00429180.asm"
+    },
+    {
+      "name": "BatimentSelection",
+      "start": "0x41b673",
+      "end_exclusive": "0x41b78f",
+      "sha256": "d4b1a0741f2ad688645f0eb17d056c0953e5ab7c27d6b2809472ff645ca71233",
+      "file": "0041b673.asm"
+    },
+    {
+      "name": "BatimentDeselectionner",
+      "start": "0x41b663",
+      "end_exclusive": "0x41b673",
+      "sha256": "eb60db8a52d804650687c8db374f0501f8afbcef359b7fbf5b51af12819afae2",
+      "file": "0041b663.asm"
+    },
+    {
+      "name": "BagContientTroupe",
+      "start": "0x44724a",
+      "end_exclusive": "0x4472d3",
+      "sha256": "1da9b4cab9146553320717a2aeebc8198415eeadde61b0f14046297dbdd6e362",
+      "file": "0044724a.asm"
+    },
+    {
+      "name": "BagContient",
+      "start": "0x4471b8",
+      "end_exclusive": "0x44724a",
+      "sha256": "50f55cdcda9fbac09d1cd2b486f7e3daac6e58d0468b3c5b5739c0f717922257",
+      "file": "004471b8.asm"
+    },
+    {
+      "name": "BatimentGetVolume",
+      "start": "0x41a0ab",
+      "end_exclusive": "0x41a18f",
+      "sha256": "c40493bcc66423cfb41cd303b530403696d59854612b918908b26419ab126948",
+      "file": "0041a0ab.asm"
+    },
+    {
+      "name": "epilogue 0x41db1e (BatimentGetVolume)",
+      "start": "0x41db1e",
+      "end_exclusive": "0x41db24",
+      "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "file": "0041db1e.asm"
+    },
+    {
+      "name": "SetDeplaceEnginSelect",
+      "start": "0x473e6e",
+      "end_exclusive": "0x473f4b",
+      "sha256": "6cce038278bf96242f080247d569f5627b57ff05d3643e1139de890f896e2143",
+      "file": "00473e6e.asm"
+    },
+    {
+      "name": "epilogue 0x472903 (Select setters)",
+      "start": "0x472903",
+      "end_exclusive": "0x47290b",
+      "sha256": "103a0bad9a9647fe48c2dc29b3d10723411a718f8d60aeb700f84cba8393b4cc",
+      "file": "00472903.asm"
+    },
+    {
+      "name": "SetAttaqueEnginSelect",
+      "start": "0x473dbf",
+      "end_exclusive": "0x473e6e",
+      "sha256": "b6c0891e9381af7f4875c5f7d78f41dddba9130b18336f815c1964912bff9ef2",
+      "file": "00473dbf.asm"
+    },
+    {
+      "name": "SetConstruitBatimentSelect",
+      "start": "0x473a07",
+      "end_exclusive": "0x473ac0",
+      "sha256": "febf0fcbb135c4c5afde369e1d00293810f5da388a56bc94ad9f01be0fbeddac",
+      "file": "00473a07.asm"
+    },
+    {
+      "name": "SetEnginConstruitBatiment",
+      "start": "0x4454ce",
+      "end_exclusive": "0x44564c",
+      "sha256": "fdb115a7e36016e3350827fd2983250dd4b77863c064879e0f26a905eacfe666",
+      "file": "004454ce.asm"
+    },
+    {
+      "name": "SetRecolteEnginSelect",
+      "start": "0x473290",
+      "end_exclusive": "0x473324",
+      "sha256": "40c1e224959378e1c4759252496cb0349b5175bed0c6f31245eee5d503c9ea74",
+      "file": "00473290.asm"
+    },
+    {
+      "name": "SetRecolteEngin",
+      "start": "0x444ebd",
+      "end_exclusive": "0x444f48",
+      "sha256": "25810c6870d178472e81b3b5e61d37c700a6a34ddc368ad2375310eb92f09e3d",
+      "file": "00444ebd.asm"
+    },
+    {
+      "name": "SetTransporteEnginSelect",
+      "start": "0x473212",
+      "end_exclusive": "0x473290",
+      "sha256": "88cfd22b6ea956d7d3cf76037c90edbe63a4c9322ddc6744505da2a3fd4d0ed4",
+      "file": "00473212.asm"
+    },
+    {
+      "name": "SetTransporteEngin",
+      "start": "0x444e7f",
+      "end_exclusive": "0x444ebd",
+      "sha256": "64927dca5906fb336c46544dcb3e730a938475275e3a46ca9a358cd3075f1a2f",
+      "file": "00444e7f.asm"
+    },
+    {
+      "name": "tail 0x443222 (SetTransporteEngin)",
+      "start": "0x443222",
+      "end_exclusive": "0x44325d",
+      "sha256": "7c419763319597a8e5b806afaa897295fa0f85fe6b99cc2fa7d9a68fda52ba9d",
+      "file": "00443222.asm"
+    },
+    {
+      "name": "EnginInZone",
+      "start": "0x4461f4",
+      "end_exclusive": "0x4463ef",
+      "sha256": "48f00b875958f1862a1569b35a582df72ee2ba727ca0c18385476bf8150a75c2",
+      "file": "004461f4.asm"
+    },
+    {
+      "name": "EnginVisible",
+      "start": "0x4465bf",
+      "end_exclusive": "0x4465df",
+      "sha256": "b05595404eb983f223ae34cb5966ef6e739c2aabcbeeb4f40bff7b8acf20c7a7",
+      "file": "004465bf.asm"
+    },
+    {
+      "name": "EnginGetEtat",
+      "start": "0x440e11",
+      "end_exclusive": "0x440e31",
+      "sha256": "2c698aaec94970e72b564f9d6f045191ff4b621b59558f32b128951dfc6a44ba",
+      "file": "00440e11.asm"
+    },
+    {
+      "name": "TypeEnginEstEnLoop",
+      "start": "0x440c44",
+      "end_exclusive": "0x440c5d",
+      "sha256": "c12adcb52b89b80043793745117f691f4a3cdb2bfbaea5a73d3ca256f3ae0fe0",
+      "file": "00440c44.asm"
+    },
+    {
+      "name": "TypeEnginEstVehicule",
+      "start": "0x442394",
+      "end_exclusive": "0x4423b0",
+      "sha256": "917940482dca796d304bb3d42a8cde64ec5656176198e5b2f48a11d815883010",
+      "file": "00442394.asm"
+    },
+    {
+      "name": "TypeEnginEstAerien",
+      "start": "0x4422cf",
+      "end_exclusive": "0x4422dd",
+      "sha256": "3f605d2f0c2eec347cce978aef29f0bf4d26a6450f2412aa04475f968840780a",
+      "file": "004422cf.asm"
+    },
+    {
+      "name": "shared AL=1 return 0x4422cc",
+      "start": "0x4422cc",
+      "end_exclusive": "0x4422cf",
+      "sha256": "e18aacce29affcdddaa5f641ac1ec12552e0fe9d066e6408941b1792818b8619",
+      "file": "004422cc.asm"
+    },
+    {
+      "name": "SwapWORD",
+      "start": "0x467cc0",
+      "end_exclusive": "0x467cd1",
+      "sha256": "4bb3991c0dfc66fc40115a0fbf333dc36f94518ef325b4582a34e6503914ce9b",
+      "file": "00467cc0.asm"
+    },
+    {
+      "name": "BatimentTailleGet",
+      "start": "0x41a996",
+      "end_exclusive": "0x41a9c3",
+      "sha256": "f4d87ec0cc185bec2bab1d6cb9363107acf04ddc9cb2fe03d6ee5719ad3eeaa9",
+      "file": "0041a996.asm"
+    },
+    {
+      "name": "BatimentGetDecalageConstruction",
+      "start": "0x41aea4",
+      "end_exclusive": "0x41aee2",
+      "sha256": "41eb0b671cabaff25da6c4c837a83e2f92584040fe7cbe7d4036719dd85b4756",
+      "file": "0041aea4.asm"
+    },
+    {
+      "name": "EnginAsk",
+      "start": "0x440d5e",
+      "end_exclusive": "0x440df0",
+      "sha256": "e1309ab26428e3888d69cdc19375ef6c206fd3dc7effb062f4ed05a3af05f673",
+      "file": "00440d5e.asm"
+    },
+    {
+      "name": "EnginGetVolume",
+      "start": "0x440c5d",
+      "end_exclusive": "0x440d5e",
+      "sha256": "bf4f0c8b29c1572aef82aef8b66e41b16f0ebebea79f0d588fcf882fb3fd1eac",
+      "file": "00440c5d.asm"
+    },
+    {
+      "name": "EnginEstSelectionne",
+      "start": "0x472174",
+      "end_exclusive": "0x4721a8",
+      "sha256": "b49e702a37459620b36232c74c9fbb525b9cffa1a786eee1d744435c5e00b78c",
+      "file": "00472174.asm"
+    },
+    {
+      "name": "Distance2d",
+      "start": "0x479555",
+      "end_exclusive": "0x4795af",
+      "sha256": "a07caad8cc2dc4cc7d8f19d86805ac79f1be2fcc4f3e2b1d5a4b13f01169f0da",
+      "file": "00479555.asm"
+    }
+  ],
+  "jump_tables": [
+    {
+      "name": "EnginInZone by unit type",
+      "address": "0x44618c",
+      "entries": [
+        "0x446238",
+        "0x446238",
+        "0x446238",
+        "0x4462b0",
+        "0x446238",
+        "0x446238",
+        "0x446238",
+        "0x446238",
+        "0x446238",
+        "0x446238",
+        "0x446238",
+        "0x4462b0",
+        "0x4462b0",
+        "0x4462b0",
+        "0x4462b0",
+        "0x4462b0",
+        "0x4462b0",
+        "0x446238",
+        "0x446238",
+        "0x446238",
+        "0x446238",
+        "0x446238",
+        "0x446238",
+        "0x446238",
+        "0x446238",
+        "0x4462b0"
+      ]
+    },
+    {
+      "name": "BagContient by mode-1",
+      "address": "0x44719c",
+      "entries": [
+        "0x4471d3",
+        "0x447212",
+        "0x447219",
+        "0x4471fb",
+        "0x4471fb",
+        "0x447219",
+        "0x447219"
+      ]
+    },
+    {
+      "name": "TypeEnginEstEnLoop by type-11",
+      "address": "0x440c2c",
+      "entries": [
+        "0x440c57",
+        "0x440c57",
+        "0x440c57",
+        "0x440c57",
+        "0x440c57",
+        "0x440c57"
+      ]
+    },
+    {
+      "name": "TypeEnginEstVehicule by type-11",
+      "address": "0x442380",
+      "entries": [
+        "0x4423a7",
+        "0x4423a7",
+        "0x4423a7",
+        "0x4423a7",
+        "0x4423a7"
+      ]
+    },
+    {
+      "name": "BatimentGetDecalageConstruction by structure type",
+      "address": "0x41ae4c",
+      "entries": [
+        "0x41aeb5",
+        "0x41aec7",
+        "0x41aebb",
+        "0x41aec1",
+        "0x41aecd",
+        "0x41aec1",
+        "0x41aecd",
+        "0x41aec7",
+        "0x41aec1",
+        "0x41aecd",
+        "0x41aedf",
+        "0x41aedf",
+        "0x41aecd",
+        "0x41aed3",
+        "0x41aec7",
+        "0x41aecd",
+        "0x41aecd",
+        "0x41aed9",
+        "0x41aeb5",
+        "0x41aecd",
+        "0x41aecd",
+        "0x41aecd"
+      ]
+    }
+  ]
+}

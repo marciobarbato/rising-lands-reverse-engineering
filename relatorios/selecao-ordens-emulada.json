@@ -1,0 +1,142 @@
+{
+ "boundary_requests_compared": 58,
+ "by_routine": {
+  "BatimentDeselectionner": {
+   "cases": 2,
+   "mismatches": 0
+  },
+  "BatimentSelection": {
+   "cases": 11,
+   "mismatches": 0
+  },
+  "DeSelectionGroupe": {
+   "cases": 4,
+   "mismatches": 0
+  },
+  "Deselection": {
+   "cases": 1,
+   "mismatches": 0
+  },
+  "DeselectionEngin": {
+   "cases": 3,
+   "mismatches": 0
+  },
+  "EnginAddSelection": {
+   "cases": 12,
+   "mismatches": 0
+  },
+  "EnginAsk": {
+   "cases": 9,
+   "mismatches": 0
+  },
+  "EnginInZone": {
+   "cases": 5,
+   "mismatches": 0
+  },
+  "EnginSelectionnable": {
+   "cases": 4,
+   "mismatches": 0
+  },
+  "ResetOrdre": {
+   "cases": 1,
+   "mismatches": 0
+  },
+  "RetireSelectionEngin": {
+   "cases": 7,
+   "mismatches": 0
+  },
+  "SelectionAddEngin": {
+   "cases": 5,
+   "mismatches": 0
+  },
+  "SelectionEngin": {
+   "cases": 16,
+   "mismatches": 0
+  },
+  "SetAttaqueEnginSelect": {
+   "cases": 7,
+   "mismatches": 0
+  },
+  "SetConstruitBatimentSelect": {
+   "cases": 18,
+   "mismatches": 0
+  },
+  "SetDeplaceEngin": {
+   "cases": 1,
+   "mismatches": 0
+  },
+  "SetDeplaceEnginSelect": {
+   "cases": 9,
+   "mismatches": 0
+  },
+  "SetEnginConstruitBatiment": {
+   "cases": 3,
+   "mismatches": 0
+  },
+  "SetRecolteEngin": {
+   "cases": 1,
+   "mismatches": 0
+  },
+  "SetRecolteEnginSelect": {
+   "cases": 5,
+   "mismatches": 0
+  },
+  "SetTransporteEngin": {
+   "cases": 1,
+   "mismatches": 0
+  },
+  "SetTransporteEnginSelect": {
+   "cases": 5,
+   "mismatches": 0
+  }
+ },
+ "capture": {
+  "path": "evidencias/selecao-ordens/captura-selecao-ordens-exibicao.json",
+  "sha256": "719d084b05f21a3ab49ae9fe9b7bdc9bac15d389c4deb9f9bb454a590a620264"
+ },
+ "changed_bytes_compared": 481,
+ "comparisons": 130,
+ "mismatches": [],
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "path_reproduction": {
+  "between_frames": true,
+  "code_unchanged": true,
+  "frame1": true,
+  "load_tail": true,
+  "paused": true
+ },
+ "pause": {
+  "caller": "CalculGame+0xb4d",
+  "caller_return": "0x42d3b5",
+  "registers": {
+   "EAX": "0x0",
+   "EBP": "0x0",
+   "EBX": "0x0",
+   "ECX": "0x5",
+   "EDI": "0x0",
+   "EDX": "0x1a1a000e",
+   "EIP": "0x45edc0",
+   "ESI": "0x0",
+   "ESP": "0x2007ebc"
+  },
+  "routine": "ProcessInputGame",
+  "state_sha256": {
+   "blocks": 25198,
+   "bytes": 16240871,
+   "sha256": "6e8620b99ac650d032d575570da2a28bbab6cf700b09d6ed1efae5bb085724ed"
+  }
+ },
+ "providers": {
+  "definir_ataque": "Combat ataque_vivo.definir_ataque with Core ResetOrdre",
+  "som": "returns the received EAX (the frame bench declaration for PlaySnd_*)"
+ },
+ "schema": "rising-lands/monde01-selection-orders-differential/1",
+ "seconds": 117.855,
+ "source_sha256": {
+  "ferramentas/bancada_selecao_ordens.py": "6a8a3010476e862624dc91421b153b995fca70fbf3fefd72d5f2bbcfa88146e1",
+  "ferramentas/capturar_selecao_ordens.py": "8272e3ee1ac57881fd07baf3ce223cb8e17706e3525c9c9f6058df768e15358b",
+  "ferramentas/casos_selecao_ordens.py": "9e0762020feae983b2753b16db043144491a1d6c1d43db152f8ab0ff5e6b3e42",
+  "ferramentas/selecao_ordens.py": "e8eb78134dd44adbbef88354ea3219c6513f2a2173cc68227fa9fecaf47ab67c",
+  "ferramentas/validar_selecao_ordens.py": "2d7d4e83e999db5d55b9030fc8ce39c2f5685e40fddac706c1f79cff8fb2c2f8"
+ }
+}
