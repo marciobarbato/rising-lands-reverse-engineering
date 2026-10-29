@@ -476,3 +476,27 @@ The branch merged `origin/main` `d94a59e`. ai-runtime reported no open Core gap:
 - frames beyond counter 128, so no first raid;
 - CalculFatigue's threshold branch and Chemin modes 0/1/3;
 - locked integration.
+
+### Unicorn teardown: durable fast exit and coalesced page mapping on `feat/re-core`
+
+Contract and measurements: [UNICORN_TEARDOWN](UNICORN_TEARDOWN.md). This is tooling only; no reconstructed behavior changed.
+
+- **Cause.** Unicorn 2.1.4's `uc_close` frees regions one at a time, and each free rebuilds the address-space view. Teardown is therefore superlinear in the region count. Measured on the Mac mini (`relatorios/encerramento-unicorn.json`, run branch `runs/core/teardown-timing` e0c106b, exclusive lease):
+  - 1,000 pages take 0.113 s to close, 2,000 take 0.79 s and 4,000 take 7.6 s;
+  - 8,000 exceed 120 s;
+  - mapping costs the same, and contiguous pages cost the same as disjoint ones.
+  - Missions' display bench has only 16 regions, and its `uc_close` takes 2 ms.
+  - Economy's capture bench maps the 25,343 display blocks as 26,262 single-page regions. They form 5 contiguous runs, and that is the bench that held the lease for more than 75 minutes after its output was written.
+- **API.**
+  - `emulador.mapear_paginas(cpu, paginas, permissoes=None)` maps the pages as one region per contiguous run and returns the runs. `paginas_em_execucoes(paginas)` gives the runs without mapping, and refuses an unaligned page.
+  - `encerramento_captura.encerrar_captura(codigo, *saidas)` fsyncs each output and its directory, flushes stdout/stderr (fsyncing them when they are files), then calls `os._exit(codigo)`.
+  - `sincronizar` and `descarregar_saidas_padrao` are its parts.
+  - A missing output raises before exiting.
+- **Adopted** by Core's display-bench scripts: `capturar_quadros_seguintes`, `capturar_exibicao_quadro1`, `levantar_quadros_exibicao` and `validar_chamadas_quadro_core`. Their `main()` now returns `(status, written path)`.
+- **Coalesced.** The 26,262 display-state pages coalesce into 5 regions, which map and close in 0.000 s.
+- **Validation.** `testes/test_encerramento_captura.py` covers durability and status, the missing-output refusal, coalesced mapping (identical bytes, the same faults outside the runs), and a time bound: a process holding 3,000 regions exits in under 1 s after writing.
+- **Requests.**
+  - **Economy:** map with `mapear_paginas` in `capturar_quadro_m2_original.Captura` and `CapturaExibicao`, and end captures with `encerrar_captura`.
+  - **Combat:** the same applies to `capturar_quadro_m1.py`.
+- **Gate.** Gate on the merged tree: see `relatorios/teardown-core-check.json`.
+- **NOT RUN:** the other fronts' scripts are unchanged. Applying `mapear_paginas` and `encerrar_captura` to them is their owners' change.
