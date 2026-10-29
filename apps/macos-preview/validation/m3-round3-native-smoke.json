@@ -1,0 +1,207 @@
+{
+  "architecture" : "arm64",
+  "bundlePath" : "\/Users\/marcio\/git\/Rising-Lands-Codex\/.local\/round3-workspace\/local-data\/macos-playable\/dist\/development\/RisingLands-ptbr.app",
+  "canvas" : [
+    1664,
+    840
+  ],
+  "clock" : {
+    "maxCatchupSeconds" : 1,
+    "maximumObservedInterval" : 1.0120284169679508,
+    "mode" : "elapsed",
+    "rate" : 20,
+    "recentIntervals" : [
+      0.10384354100096971,
+      0.10372612497303635,
+      0.1040834590094164,
+      0.10456083295866847,
+      0.10411054198630154,
+      0.10382399999070913,
+      0.10393433307763189,
+      0.10414099995978177,
+      0.10336412501055747,
+      0.10415987495798618,
+      0.10383295803330839,
+      0.023623166955076158,
+      0.10433474997989833,
+      0.10563716699834913,
+      0.10412350005935878,
+      0.10206258296966553
+    ]
+  },
+  "commit" : "12e534b03241ff64c6cf65fa2ae9f7c1d0bbdbe8",
+  "interaction" : "DOM selection\/form\/buttons with live setInterval pump",
+  "nativeWindowVisible" : true,
+  "passed" : true,
+  "python" : "3.12.14",
+  "pythonStderr" : "",
+  "renderCaptures" : [
+    {
+      "path" : "\/Users\/marcio\/git\/Rising-Lands-Codex\/.local\/round3-workspace\/local-data\/macos-playable\/build\/development\/12e534b03241ff64c6cf65fa2ae9f7c1d0bbdbe8\/build\/logs\/native-smoke.before.png",
+      "sha256" : "bb2e3c9e473d63789eb471e957b0f4970683c2be12dde9bf03928e5979a3982c"
+    },
+    {
+      "path" : "\/Users\/marcio\/git\/Rising-Lands-Codex\/.local\/round3-workspace\/local-data\/macos-playable\/build\/development\/12e534b03241ff64c6cf65fa2ae9f7c1d0bbdbe8\/build\/logs\/native-smoke.after.png",
+      "sha256" : "569f2d17e7f0d8793112b7c6f3db7dc471537f1eddb836eac38c6c0a6fc72408"
+    }
+  ],
+  "scenario" : "jogavel",
+  "session" : {
+    "boundary" : null,
+    "cargo" : {
+
+    },
+    "delivered" : 1,
+    "depot" : [
+      2,
+      12
+    ],
+    "hits" : 2,
+    "objective" : "Treino livre: leve sacolas ao depósito e pratique golpes com o soldado.",
+    "remaining" : 7,
+    "supply" : [
+      4,
+      9
+    ]
+  },
+  "tests" : [
+    {
+      "name" : "inicialização pausada e ARM64",
+      "passed" : true
+    },
+    {
+      "name" : "seleção de unidade",
+      "passed" : true
+    },
+    {
+      "name" : "ordem e rota calculada pelo motor Python",
+      "passed" : true
+    },
+    {
+      "name" : "pausa impede atualizações",
+      "passed" : true
+    },
+    {
+      "name" : "avanço unitário",
+      "passed" : true
+    },
+    {
+      "name" : "velocidade configurável",
+      "passed" : true
+    },
+    {
+      "name" : "chegada ao destino sem atravessar obstáculo",
+      "passed" : true
+    },
+    {
+      "name" : "colisões observadas",
+      "passed" : true
+    },
+    {
+      "name" : "busca Python contorna parede com passagem",
+      "passed" : true
+    },
+    {
+      "name" : "modo local bloqueia busca desativada sem simular sucesso",
+      "passed" : true
+    },
+    {
+      "name" : "missão original em inspeção",
+      "passed" : true
+    },
+    {
+      "name" : "procedência e recursos visíveis",
+      "passed" : true
+    },
+    {
+      "name" : "economia incorporada executa crédito real",
+      "passed" : true
+    },
+    {
+      "name" : "capacidade e excedentes geram sacolas",
+      "passed" : true
+    },
+    {
+      "name" : "combate consulta alcance e mira sem aplicar dano",
+      "passed" : true
+    },
+    {
+      "name" : "bancada de pesquisas visível",
+      "passed" : true
+    },
+    {
+      "name" : "alternância entre visão técnica e visão do jogo",
+      "passed" : true
+    },
+    {
+      "name" : "canvas e interface renderizados",
+      "passed" : true
+    },
+    {
+      "name" : "coleta após deslocamento no relógio vivo",
+      "passed" : true
+    },
+    {
+      "name" : "entrega muda saldo compartilhado",
+      "passed" : true
+    },
+    {
+      "name" : "soldado contorna parede em estado vivo",
+      "passed" : true
+    },
+    {
+      "name" : "combate contínuo reduz vida por dois golpes",
+      "passed" : true
+    },
+    {
+      "name" : "pausa mantém o estado do treino",
+      "passed" : true
+    },
+    {
+      "name" : "renderização acompanha interações",
+      "passed" : true
+    },
+    {
+      "name" : "relógio avança após intervalo real sem pedidos",
+      "passed" : true
+    },
+    {
+      "name" : "relógio vivo mede tempo decorrido entre respostas",
+      "passed" : true
+    },
+    {
+      "name" : "fontes de economia e combate vinculadas à mesma revisão",
+      "passed" : true
+    }
+  ],
+  "tick" : 581,
+  "units" : [
+    {
+      "health" : 100,
+      "id" : 0,
+      "pos" : [
+        9,
+        4
+      ],
+      "state" : 1
+    },
+    {
+      "health" : 100,
+      "id" : 1,
+      "pos" : [
+        2,
+        12
+      ],
+      "state" : 7
+    },
+    {
+      "health" : 60,
+      "id" : 2,
+      "pos" : [
+        10,
+        4
+      ],
+      "state" : 7
+    }
+  ]
+}

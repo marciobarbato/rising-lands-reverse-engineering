@@ -2,6 +2,8 @@
 from pathlib import Path
 import sys
 import unittest
+import tempfile
+from macos_test_inputs import graphics_inputs
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / 'apps/macos-preview/src'))
@@ -10,14 +12,18 @@ from macos_playback_client import MacOSPlaybackClient
 
 class PlaybackServiceTests(unittest.TestCase):
     def test_worker_open_step_read_reset_errors_and_close(self):
-        client = MacOSPlaybackClient(ROOT, ROOT/'apps/macos-preview/src', 'test-commit')
+        client = MacOSPlaybackClient(ROOT, ROOT/'apps/macos-preview/src', 'test-commit', graphics_inputs(self, ROOT))
         self.addCleanup(client.close)
-        initial = client.request(dict(id=1, operation='open'))['playback']
+        response = client.request(dict(id=1, operation='open'))
+        self.assertTrue(response.get('ok'), response)
+        initial = response['playback']
         self.assertEqual((initial['verified_phases'], initial['verified_checkpoints']), (257, 11))
         self.assertEqual(initial['commit'], 'test-commit')
         result = client.request(dict(id=2, operation='frame', frame=1))['playback']
         self.assertEqual(result['phase'], 'frame1')
-        self.assertEqual(result['render']['code'], 'missing_previous_surface')
+        self.assertEqual(result['render']['status'], 'undrawn')
+        self.assertEqual(result['render']['inherited_stop']['endereco'], '0x0041591f')
+        self.assertIn('image', result['render'])
         self.assertEqual(client.request(dict(id=3, operation='read', address='0x508f7c', size=4))['playback']['read_hex'], '01000000')
         self.assertFalse(client.request(dict(id=4, operation='unknown'))['ok'])
         self.assertFalse(client.request([])['ok'])
@@ -27,3 +33,16 @@ class PlaybackServiceTests(unittest.TestCase):
         process = client.process
         client.close()
         self.assertIsNotNone(process.poll())
+
+    def test_unsupported_api_returns_explicit_error_not_a_playback_key(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            folder=root/'pesquisas-paralelas/graficos-animacao';folder.mkdir(parents=True)
+            (folder/'render_quadro.py').write_text('VERSAO_RENDER_QUADRO = (1, 3)\n')
+            client=MacOSPlaybackClient(root, ROOT/'apps/macos-preview/src','test')
+            self.addCleanup(client.close)
+            response=client.request(dict(id=1,operation='open'))
+            self.assertFalse(response['ok'])
+            self.assertNotIn('playback',response)
+            self.assertEqual(response['error_type'],'GraphicsVersionError')
+            self.assertIn('expected (1, 2)',response['error'])

@@ -132,7 +132,7 @@ The [independent audit](../apps/macos-preview/M3_AUDIT.md) records isolation and
 provider dependencies.
 
 
-## Independent accepted-evidence playback (contract v2)
+## Independent accepted-evidence playback (contract v3)
 
 The app offers **Inspeção M2.2 · evidência aceita** separately from the synthetic
 training exercise. It loads the accepted display-v2 MissionLoad state and all
@@ -141,12 +141,18 @@ phase or frame, inspect original-address memory/observed words, or reset. This
 is read-only playback, not a running Python mission or M3 acceptance. M1
 original-v2 inspection remains a separately labeled API.
 
-The shell displays only images returned by Graphics API **1.0** and explicitly
-shows partial frames/named stops. Currently the required previous surface is
-not in the accepted capture: every phase stops at `missing_previous_surface`
-before the render API call. No blank image/fallback is drawn. Graphics' initial
-surface artifact and chaining contract (planned API 1.1) are pending; 1.1 will
-require an explicit tested consumer update.
+The shell pins Graphics API **1.2** and carries both the surface and terrain
+cache from the hash-verified initial artifacts through every drawing phase.
+Backward navigation replays from the start; there is no independent mid-sequence
+cache. frame(k) leaves the surface unchanged. The initial original surface
+represents RestoreAll/MenuInit; no blank surface or fallback renderer is used.
+
+All 12 published chained checkpoint hashes match. The API still reports its
+0x41591F stop for unsupported unit types 8/1, including after their visible
+footprints leave the playfield. The consumer preserves it: the 128-frame report
+contains 128 partial drawing phases and 129 undrawn phases, zero full results.
+HUD rows >=544 and cursor are not drawn; this limitation is shown in the view.
+Later frames have accepted memory but no new native pixel checkpoints beyond 12.
 
 Inputs and outputs are explicit. For the authorized local read-only inputs:
 
@@ -154,7 +160,7 @@ Inputs and outputs are explicit. For the authorized local read-only inputs:
 export RISING_PYTHON_RUNTIME="$HOME/.cache/codex-runtimes/codex-primary-runtime/dependencies/python"
 ./compilar-jogável --development-ref HEAD \
   --inputs-root '/Users/marcio/git/Rising Lands' \
-  --data-root '/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable'
+  --data-root '/Users/marcio/git/Rising-Lands-Codex/.local/round3-workspace/local-data/macos-playable'
 ```
 
 `--inputs-root` (or `RISING_INPUTS_ROOT`) must contain `source/cd`; it defaults
@@ -170,8 +176,8 @@ checks. Their reports are `native-smoke.json` and `native-inspection-smoke.json`
 under the build log directory. Native inspection can also be opened with:
 
 ```sh
-open -n .local/macos-playable/dist/development/RisingLands-ptbr.app --args --inspection
+open -n .local/round3-workspace/local-data/macos-playable/dist/development/RisingLands-ptbr.app --args --inspection
 ```
 
-The [v2 contract](../apps/macos-preview/M3_CONTRACT.md) documents exact API
+The [v3 contract](../apps/macos-preview/M3_CONTRACT.md) documents exact API
 semantics, evidence pins, ordering, publication and remaining dependencies.

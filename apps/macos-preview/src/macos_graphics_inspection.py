@@ -1,11 +1,11 @@
-"""Consume Graphics API 1.0 in an isolated inspection process. No drawing code."""
+"""Consume Graphics API 1.2 in an isolated inspection process. No drawing code."""
 import base64
 import importlib.util
 from pathlib import Path
 import sys
 from macos_state_consumer import StateValidationError, _sha
 
-EXPECTED_GRAPHICS_VERSION = (1, 0)
+EXPECTED_GRAPHICS_VERSION = (1, 2)
 
 
 class GraphicsVersionError(StateValidationError):
@@ -32,45 +32,110 @@ def load_graphics(root):
 
 def require_version(version):
     if version != EXPECTED_GRAPHICS_VERSION:
-        raise GraphicsVersionError('Graphics API version mismatch: expected (1, 0), got ' + repr(version))
+        raise GraphicsVersionError('Graphics API version mismatch: expected (1, 2), got ' + repr(version))
+
+
+GRAPHICS_EVIDENCE = 'pesquisas-paralelas/graficos-animacao/evidencias/'
+RENDER_PINS = {
+    'superficie-inicial-m22-v2.json': '4581aafab6685f5f118317c2b5debcb158ca85f7212e477bc0a6fe155e0c0ff7',
+    'cache-terreno-inicial-m22-v2.json': 'da8f2bf58bf5b6832a0b21c00356c76e7a8a027c3cfa56001757a8dec0da2962',
+    'verificacao-cadeia-m22-v2.json': '59a850174026569d3972cbceb640ff4559d002e1ad58752aba78064f8bc36acd',
+    'superficies-fase-m22-v2.json': 'ded5d695083877eb046334d9e931c2f4a91d70681966e2295a4be0fbc140160a',
+}
 
 
 class GraphicsInspectionRenderer:
-    def __init__(self, root, graphics_sources=None, surface_source=None):
-        self.api = load_graphics(root)
-        self.graphics_sources = graphics_sources
-        self.surface_source = surface_source
-        self.catalog = None
-        self.encode_png = sys.modules['graficos'].png
+    """Sequential cache/surface consumer; no independent mid-sequence start.
 
-    def render(self, playback):
+    Returned 'full' means the supported playfield passes completed. The HUD and
+    cursor remain explicitly absent. 'undrawn' carries the previous pixels.
+    """
+    def __init__(self, root, graphics_sources=None):
+        import json
+        self.root = Path(root)
+        self.api = load_graphics(root)
+        self.folder = self.root / GRAPHICS_EVIDENCE
+        for name, expected in RENDER_PINS.items():
+            if _sha((self.folder/name).read_bytes()) != expected:
+                raise StateValidationError('Unpinned Graphics artifact: ' + name)
+        self.catalog = self.api.Catalogo(fontes=graphics_sources)
+        self.encode_png = sys.modules['graficos'].png
+        self.references = {r['frame']: r for r in json.loads((self.folder/'verificacao-cadeia-m22-v2.json').read_bytes())['rows']}
+        self.phase_hashes = {r['phase']: r['offscreen'] for r in json.loads((self.folder/'superficies-fase-m22-v2.json').read_bytes())['phases']}
+        self.initial_pixels = self.api.carregar_superficie_inicial(self.folder/'superficie-inicial-m22-v2.json')
+        self.initial_cache = self.api.carregar_cache_inicial(self.folder/'cache-terreno-inicial-m22-v2.json', catalogo=self.catalog)
+        if _sha(self.initial_pixels) != self.phase_hashes['load_tail']:
+            raise StateValidationError('Initial surface does not match accepted load-tail hash')
+        self.reset()
+
+    def reset(self):
         require_version(self.api.VERSAO_RENDER_QUADRO)
-        image = playback.current
-        try:
-            previous = playback.previous_surface(self.surface_source(playback) if self.surface_source else None)
-        except StateValidationError as exc:
-            return dict(status='stop', stage='consumer-input', api_called=False,
-                        code='missing_previous_surface' if str(exc).startswith('Missing previous surface') else 'invalid_previous_surface', detail=str(exc), version=[1, 0])
-        called = False
-        try:
-            if self.catalog is None:
-                self.catalog = self.api.Catalogo(fontes=self.graphics_sources)
-            # Omit habitado deliberately: no fabricated Economy callback. The
-            # published Graphics API reports its named stop when it needs one.
-            called = True
-            result = self.api.renderizar_quadro(image, superficie_anterior=previous, catalogo=self.catalog)
+        self.pixels, self.cache = self.initial_pixels, self.initial_cache
+        self.index = -1
+        self.last = None
+        self.records = []
+
+    def consume(self, image, memory=None):
+        from macos_habitation_view import habitation_query
+        require_version(self.api.VERSAO_RENDER_QUADRO)
+        if image.phase_index != self.index + 1:
+            raise StateValidationError('Render sequence must advance from the initial artifacts in phase order')
+        name = image.phase_name
+        drawing = name.startswith('between_frames')
+        result = None
+        next_pixels, next_cache = self.pixels, self.cache
+        if drawing:
+            if memory is None: raise StateValidationError('Drawing phase requires captured AffGame-entry memory')
+            result = self.api.renderizar_quadro(memory, superficie_anterior=self.pixels,
+                         cache=self.cache, catalogo=self.catalog, habitado=habitation_query(self.root, memory))
             require_version(result.versao)
-            if (result.largura, result.altura) != (800, 600) or len(result.rgba) != 1920000 or len(result.pixels) != 480000:
-                raise StateValidationError('Graphics API returned an invalid image extent')
-            # PNG encoding is provided by Graphics too; the shell only displays it.
-            png = self.encode_png(result.largura, result.altura, result.rgba)
-            return dict(status='partial' if result.parada else 'full', stage='graphics', api_called=True,
-                        version=list(result.versao), stop=result.parada, width=result.largura,
-                        height=result.altura, pixels_sha256=_sha(result.pixels), rgba_sha256=_sha(result.rgba),
-                        image='data:image/png;base64,' + base64.b64encode(png).decode(),
-                        calls=len(result.chamadas), effects=list(result.efeitos))
-        except GraphicsVersionError:
-            raise
-        except (OSError, ValueError, KeyError) as exc:
-            return dict(status='stop', stage='graphics-input', api_called=called,
-                        code='graphics_input_unavailable', detail=str(exc), version=[1, 0])
+            if ((result.largura, result.altura) != (800, 600) or len(result.pixels) != 480000
+                    or len(result.rgba) != 1920000 or result.cache is None):
+                raise StateValidationError('Invalid Graphics 1.2 result shape/cache')
+            next_pixels, next_cache = result.pixels, result.cache
+        stop = result.parada if result else None
+        status = ('partial' if stop else 'full') if drawing else 'undrawn'
+        if result is not None and result.chamadas == (('CalculFrame',),): status = 'undrawn'
+        frame = (1 if name == 'between_frames' else int(name[len('between_frames'):])) if drawing else None
+        record = dict(status=status, phase=name, api_called=drawing, version=[1, 2], stop=stop,
+                      pixels_sha256=_sha(next_pixels), cache_keys_sha256=_sha(next_cache.registros),
+                      cache_payloads_sha256=_sha(next_cache.blocos_crus), cache_cursor=next_cache.proximo,
+                      limitations=['HUD rows >= 544 not drawn', 'cursor not drawn', 'no independent mid-sequence cache'],
+                      native_phase_end_sha256=self.phase_hashes[name],
+                      equals_native_phase_end=_sha(next_pixels) == self.phase_hashes[name])
+        if drawing:
+            record['memory_phase'] = memory.phase_name
+            record['memory_summary_sha256'] = memory.summary_sha256
+        if frame in self.references:
+            reference = self.references[frame]
+            record.update(checkpoint_reference_frame=frame,
+                          graphics_chain_sha256=reference['chained']['sha256'],
+                          graphics_chain_equal=_sha(next_pixels) == reference['chained']['sha256'],
+                          native_checkpoint_sha256=reference['native_checkpoint_sha256'],
+                          equals_native_checkpoint=_sha(next_pixels) == reference['native_checkpoint_sha256'],
+                          reference_first_differing_row=reference['chained']['first_row'])
+            if not record['graphics_chain_equal']:
+                raise StateValidationError('Graphics checkpoint chain mismatch at frame ' + str(frame))
+        # Publish only after version, shape and applicable reference checks pass.
+        self.pixels, self.cache, self.index = next_pixels, next_cache, image.phase_index
+        self.last = result if result is not None else self.last
+        self.records.append(record)
+        return record
+
+    def present(self):
+        if self.index < 0:
+            return dict(status='undrawn', api_called=False, version=[1, 2],
+                        detail='Initial surface is available only after the load tail; select a phase')
+        record = dict(self.records[-1])
+        # Use only Graphics' palette expansion and PNG encoder. No game drawing.
+        if self.last is None:
+            graphics = sys.modules['graficos']
+            rgba = graphics.rgba(graphics.Quadro(800, 600, self.pixels, b'\xff'*480000, 0, b''), self.catalog.paleta())
+        else:
+            rgba = self.last.rgba
+        png = self.encode_png(800, 600, rgba)
+        record['image'] = 'data:image/png;base64,' + base64.b64encode(png).decode()
+        record['detail'] = 'HUD (rows >= 544) and cursor are not drawn. Cache starts only at frame 1 entry.'
+        if record['status'] == 'undrawn' and self.last and self.last.parada:
+            record['inherited_stop'] = self.last.parada
+        return record

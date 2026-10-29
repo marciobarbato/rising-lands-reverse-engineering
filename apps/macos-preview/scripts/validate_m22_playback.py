@@ -15,12 +15,13 @@ def main():
     parser.add_argument('--graphics-sources', type=Path)
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
+    if args.output.exists(): parser.error('Refusing to overwrite a playback report')
     player = MacOSM22Playback.open(args.source_root)
     renderer = GraphicsInspectionRenderer(args.source_root, args.graphics_sources)
     phases = []
     for index, name in enumerate(PHASES):
         image = player.step_to_phase(index)
-        render = renderer.render(player)
+        render = renderer.consume(image, player.drawing_input() if name.startswith('between_frames') else None)
         render.pop('image', None)
         phases.append(dict(phase=name, summary_verified=True, checkpoint_verified=image.checkpoint,
                            state_sha256=image.summary_sha256, observed=image.observed_words(), render=render))
@@ -28,7 +29,8 @@ def main():
     result = dict(scenario=SCENARIO, inputs=PINS, phases_verified=len(phases),
                   checkpoints_verified=sum(p['checkpoint_verified'] for p in phases),
                   render_counts=dict(Counter(p['render']['status'] for p in phases)),
-                  graphics_api_calls=sum(p['render']['api_called'] for p in phases),
+                  graphics_api_version=[1,2], graphics_api_calls=sum(p['render']['api_called'] for p in phases),
+                  graphics_checkpoint_hashes_equal=sum(bool(p['render'].get('graphics_chain_equal')) for p in phases),
                   phases=phases)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2)+'\n')
