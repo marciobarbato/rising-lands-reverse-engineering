@@ -14,6 +14,9 @@ class PlaybackInspectionService:
         self.renderer = GraphicsInspectionRenderer(root, graphics_sources)
         self.playback = MacOSM22Playback.open(root)
         self.render_playback = self.playback.fork()
+        self.live = None
+        from macos_input_recorder import MacOSInputRecorder
+        self.recorder = MacOSInputRecorder()
 
     def _render_to(self, index):
         if index < self.renderer.index:
@@ -26,6 +29,30 @@ class PlaybackInspectionService:
 
     def handle(self, request):
         operation = request.get('operation', 'open')
+        if operation == 'record-event':
+            frame = max(129, (self.live.index+3)//2 if self.live else 129)
+            self.recorder.event(frame,request['event'])
+            return dict(recorded=True,frame=frame,policy='record-only')
+        if operation == 'export-input':
+            return dict(input_journal=self.recorder.journal(),script=self.recorder.export_script(self.playback.root))
+        if operation == 'export-journal':
+            return dict(input_journal=self.recorder.journal())
+        if operation in ('live-open','live-reset','live-step'):
+            if self.live is None:
+                from macos_live_session import MacOSLiveSession
+                payload = Path(__file__).resolve().parent
+                self.live = MacOSLiveSession(self.playback.root,payload/'librising_engine.dylib',
+                                            payload/'engine-inputs/RISING.EXE',self.renderer,self.playback.fork())
+            if operation in ('live-open','live-reset'): self.live.reset()
+            else:
+                # First load tail, then one pair per UI frame request.
+                count = 1 if self.live.index < 0 else 2
+                for _ in range(count): self.live.apply_frame()
+            return self.live.inspect()
+        if self.live is not None:
+            self.live.close(); self.live = None
+            self.renderer.reset(); self.render_playback.reset()
+
         p = self.playback
         previous = p._state, p._previous, p._index, p._current
         try:

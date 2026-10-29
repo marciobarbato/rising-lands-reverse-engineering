@@ -671,3 +671,78 @@ mid-sequence cache. Named unsupported stops remain visible. The reserved live
 apply_frame/native Rust frame ABI is unchanged. This is accepted-evidence
 inspection, not M3 acceptance. Review/integrate only this feature; no merge
 into or push to main was performed.
+
+## M3.3 groundwork — Rust live phases and Graphics 1.5 (2026-10-29)
+
+Feature `feat/macos-playable`, integrated base `c08e1fb96bf06392aec13ddde2bac29eb29a4ee0`.
+No `motor/`, owner evidence, frozen hash, shared helper or main branch is edited.
+Current consumer contract is v6; historical reports above remain unchanged.
+
+`MacOSLiveSession.apply_frame()` now executes ABI 1.1 phases from accepted
+**display-v2 S0**, using the Stage 2 initialization registers, cursor (0,0),
+no keys/messages and four immutable original jump tables. Inputs, exact hashes,
+copy ownership, mutation/publication order, reset/free and stop semantics are
+in [M3_CONTRACT.md](M3_CONTRACT.md). ctypes bridges the real signed Rust dylib
+in the isolated worker; no Python logic simulation is used. Swift owns the
+native shell and save panel. The accepted original-v2 M1 inspector stays
+separate. Legacy immutable playback guards still reject frame mutation.
+
+Graphics 1.5 is explicitly gated on module and result. The full-HUD 128 proof
+is pinned to SHA `d95618beff805b5e47c7be6ec922cdf9cda75c4063b0cd52c254a1a116e19c10`.
+A regression compares every 1.5/1.4 reference surface hash. Preflight also
+requires the new `[0x4e24bc]` 256-byte grayscale lookup. Rendering retains the
+preceding live AffGame-entry image, previous pixels/cache, real habitation
+callback and `hud=True`; no display effects are patched into engine memory.
+Original executable identity remains
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+Frame entry `CalculGame 0x42c868`, WndProc `0x4181a1` and the published phase
+contracts are unchanged. This is consumer wiring of already-proved behavior;
+no new reconstructed routine or x86 execution is claimed.
+
+The actual [live proof](validation/m3-live-graphics15.json) reports **257/257
+masked states, 11/11 checkpoints, 128/128 full native surfaces and 257/257
+phase-end surfaces equal**, zero stops. Raw memory hashes are not claimed equal
+inside the unchanged 153,060-byte display mask. Shared-host Python 3.9 timing:
+Rust 1.140 s (112.26 frames/s), projection/hash/oracle 65.875 s, Graphics 25.622 s
+(4.996 frames/s), PNG presentation 43.709 s, complete validated pipeline
+**0.939 frames/s**. Initialization, IPC and native scaling are excluded; this
+is not an exclusive-host peak or an M3.5 playable-speed pass. Per-phase timings
+are retained in the report.
+
+The [engine-only horizon](validation/m3-live-horizon.json) continues that S0
+chain beyond 128 without new loads: frame 8999 and between_frames9000 return;
+frame9000 stops honestly at **ABI status 5: ConstruitGroupeMonstre at
+0x0047a81d**. Beyond 128 this diagnostic uses ABI calls only, without
+snapshots/rendering/equality claims. It takes 85.474 s for the 8,871 additional
+completed frame bodies. Live UI rendering has no fabricated reference past
+128: verification fields become null, and either provider's named stop latches.
+
+The record-only mapper covers messages 0x200–0x205 and all requested vkeys.
+It preserves signed coordinates, scaled image position, message/modifier order,
+held/release timing, poll addresses and per-poll answers. Raw journal replay
+reconstructs the exact event/poll interleaving and rejects changed answers.
+No event or order enters Rust. The native save panel exports the distinctly
+named raw journal. At this stage Missions' scripted-input module has not landed
+on fetched `origin/feat/re-missions`; the interchange exporter returns
+`InputContractPending`, rather than inventing its schema. Test A/B original
+replay remains dependent on that schema, captures and engine order support.
+
+### Proposed next engine stage (proposal only)
+
+Port Graphics' separable renderer into Rust behind a versioned C ABI that
+accepts the engine's same-generation projected state and explicit asset catalog,
+previous indexed 800×600 surface and terrain cache. Preserve clipping, signed
+coordinates, wrapping widths, draw order, palette indices, real habitation
+queries, cache payloads/cursor and ordered display effects. Return copied
+indexed pixels/palette plus full/partial/named-stop metadata; define ownership,
+stride, lifetime and reset. Validate every 1.5 native leaf case, then all 128
+chained full surfaces and caches; preserve older no-input hashes. The engine
+already models display effects: give one side ownership to prevent double
+application. A native texture upload/palette conversion should replace per-frame
+Python RGBA/PNG encoding and base64 WebView transfer. Avoid the current bulk
+Python block/hash work on the production render path while retaining an
+optional diagnostic projection/comparison API. A Rust draw loop alone would
+leave two larger measured bridge/encoding costs. No renderer port is implemented
+by this front.
+
+Final committed build/common-check/native results will be appended below.
