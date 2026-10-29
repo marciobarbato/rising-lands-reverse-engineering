@@ -159,6 +159,31 @@ def native_pumps(destination):
     print(json.dumps(dict(output=str(path),coverage=result['coverage'],stops=sum(c['stop'] is not None for c in cases))))
 
 
+
+def memory_width_audit():
+    """Conservative static operand-width audit over the immutable original text.
+
+    REP strings are observed element-by-element by Unicorn. Legacy x87 80-bit
+    loads are wider than dwords; a 15-byte prefix conservatively covers them.
+    """
+    from analisar import dependencias
+    pefile,cs=dependencias()
+    raw=(CD/'INSTALHD/RISING.EXE').read_bytes()
+    if sha(raw)!=ORIGINAL_SHA256:raise ValueError('Intact PE identity mismatch')
+    text=pefile.PE(data=raw).get_data(0x1000,0x92c00)
+    md=cs.Cs(cs.CS_ARCH_X86,cs.CS_MODE_32);md.detail=True;md.skipdata=True
+    sizes=[];skipped=0
+    for instruction in md.disasm(text,0x401000):
+        if instruction.id==0:skipped+=instruction.size;continue
+        sizes.extend(o.size for o in instruction.operands if o.type==cs.x86.X86_OP_MEM)
+    maximum=max(sizes)
+    if maximum>16:raise ValueError('Original text contains a wider operand; enlarge hook prefix')
+    return dict(text_start='0x401000',text_bytes=len(text),text_sha256=sha(text),
+                max_explicit_memory_operand_bytes=maximum,hook_backward_prefix=15,
+                linear_skipdata_bytes=skipped,
+                scope='Static original-text disassembly, including legacy x87. REP accesses are per element.')
+
+
 def native_logic_reads(destination,frames,execute_pumps=False):
     """Run the original accepted scenario with sound/CD declared boundaries unchanged.
 
@@ -171,6 +196,7 @@ def native_logic_reads(destination,frames,execute_pumps=False):
     from emulador import unicorn,x86
     from mapa_memoria_m1 import carregar_blocos,expandir_captura
     capture=capture_input()
+    width=memory_width_audit()
     m1=json.loads((ROOT/'pesquisas-paralelas/missoes/evidencias/captura-carga-missao-exibicao-v2.json').read_bytes())
     ni=m1['named_inputs']
     t0=time.monotonic()
@@ -199,7 +225,11 @@ def native_logic_reads(destination,frames,execute_pumps=False):
             address=b.sym[name]
             b.pulos.pop(address,None);b.fronteiras.pop(address,None)
         b.cpu.ctl_flush_tb()
-    access=Counter();writes=Counter()
+    access=Counter();writes=Counter();executed=Counter()
+    code_before=b.sha256_codigo()
+    for name in ('PlaySnd_Manage','MCICD_Play','MCICD_Manage'):
+        def reached(cpu,address,size,label):executed[label]+=1
+        b.cpu.hook_add(unicorn.UC_HOOK_CODE,reached,name,begin=b.sym[name],end=b.sym[name])
     def hook(target):
         def capture_access(cpu,kind,a,n,value,_):
             for start,end,label in SOUND_RANGES+SHARED_RANGES:
@@ -208,29 +238,33 @@ def native_logic_reads(destination,frames,execute_pumps=False):
                     target[(b.fase,ip,a,n,label)]+=1
         return capture_access
     for a,z,_ in SOUND_RANGES+SHARED_RANGES:
-        b.cpu.hook_add(unicorn.UC_HOOK_MEM_READ,hook(access),None,begin=a-3,end=z-1)
-        b.cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE,hook(writes),None,begin=a-3,end=z-1)
+        b.cpu.hook_add(unicorn.UC_HOOK_MEM_READ,hook(access),None,begin=a-15,end=z-1)
+        b.cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE,hook(writes),None,begin=a-15,end=z-1)
     b.cpu.ctl_flush_tb()
     phases=[];expected={p['phase']:p for p in capture['phases']}
     references=iter(accepted_states(capture));next(references)
-    for phase,regs in b.executar_quadros(frames,segundos=180):
-        actual=b.imagem();summary=b.resumo_imagem(actual)
-        equal=summary==expected[phase]['state_after']['summary']
-        name,reference=next(references)
-        if name!=phase:raise ValueError('Reference order differs')
-        differences=[]
-        for block in sorted(set(actual)|set(reference)):
-            if block=='native_stack':continue
-            av,rv=actual.get(block),reference.get(block)
-            if av==rv:continue
-            if av is None or rv is None or av[0]!=rv[0] or len(av[1])!=len(rv[1]):
-                differences.append(dict(block=block,layout_differs=True));continue
-            differences.extend(dict(block=block,address=hex(av[0]+i),accepted=old,actual=new)
-                               for i,(new,old) in enumerate(zip(av[1],rv[1])) if new!=old)
-        phases.append(dict(phase=phase,summary_equal=equal,differences=differences))
-        if not equal and not execute_pumps: raise ValueError('Native phase differs from accepted capture: '+phase)
-        if execute_pumps and any(d.get('address')!='0x498f5c' for d in differences):
-            raise ValueError('Chained pumps changed bytes outside the original pump write set: '+phase)
+    stop=None;summary=capture['state_s0']['summary'];phase='state_s0'
+    try:
+        for phase,regs in b.executar_quadros(frames,segundos=180):
+            actual=b.imagem();summary=b.resumo_imagem(actual)
+            equal=summary==expected[phase]['state_after']['summary']
+            name,reference=next(references)
+            if name!=phase:raise ValueError('Reference order differs')
+            differences=[]
+            for block in sorted(set(actual)|set(reference)):
+                if block=='native_stack':continue
+                av,rv=actual.get(block),reference.get(block)
+                if av==rv:continue
+                if av is None or rv is None or av[0]!=rv[0] or len(av[1])!=len(rv[1]):
+                    differences.append(dict(block=block,layout_differs=True));continue
+                differences.extend(dict(block=block,address=hex(av[0]+i),accepted=old,actual=new)
+                                   for i,(new,old) in enumerate(zip(av[1],rv[1])) if new!=old)
+            phases.append(dict(phase=phase,summary_equal=equal,differences=differences))
+            if not equal and not execute_pumps: raise ValueError('Native phase differs from accepted capture: '+phase)
+            if execute_pumps and any(d.get('address')!='0x498f5c' for d in differences):
+                raise ValueError('Chained pumps changed bytes outside the original pump write set: '+phase)
+    except Exception as exc:
+        stop=dict(type=type(exc).__name__,reason=str(exc),phase=phase,completed_phases=len(phases))
     def rows(counter):
         return [dict(phase=phase,instruction=hex(ip),routine=b.nome(ip),address=hex(a),bytes=n,range=label,count=count,
                              code_owner='sound-library' if 0x489dac<=ip<0x48c204 else 'mci-cd' if 0x4679d0<=ip<0x467cbf else 'game-or-display')
@@ -241,6 +275,8 @@ def native_logic_reads(destination,frames,execute_pumps=False):
                 sound_boundaries_removed=['PlaySnd_Manage','MCICD_Play','MCICD_Manage'] if execute_pumps else [],
                 declared_cd_input='No CD track playing, flag 0x4e2f28 stays zero; MCICD_Init never executed',
                 frames=frames,phases=phases,reads=rows(access),writes=rows(writes),
+                stop=stop,complete=stop is None and len(phases)==1+2*frames,
+                memory_width_audit=width,original_pump_entries=dict(executed),code_sha256_before=code_before,
                 boundary_counts=dict(Counter(e['routine'] for e in b.eventos_fronteira if e.get('phase') in expected)),
                 declared_inputs_source='Exact named_inputs of the accepted display-v2 M1 capture; no new ISO-label inference',
                 source_revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
@@ -251,7 +287,7 @@ def native_logic_reads(destination,frames,execute_pumps=False):
     path=evidence_path(destination);path.write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(dict(output=str(path),frames=frames,phases=len(phases),seconds=result['seconds'])),flush=True)
     from encerramento_captura import encerrar_captura
-    encerrar_captura(0,path)
+    encerrar_captura(0 if stop is None else 1,path)
 
 
 def main():
