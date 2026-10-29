@@ -215,6 +215,23 @@ class AudioQueue:
         if not output:return 0
         m.w32(slot+4,record);return slot
 
+    def init_dictator(self):
+        m=self.memory;pointer=self.call('GlobalAlloc',0,(0,8),0x48c20c)['hresult']
+        if not pointer:raise DependenciaSom(0x48c227,'NULL dictator allocation requires undeclared MessageBoxA')
+        m.w32(0x522230,m.u32(0x522230)+1)
+        m.w32(0x521fc0,pointer);m.w32(0x521fb4,pointer);m.w32(pointer+4,0x521f94)
+        m.w32(0x521f90,0);m.w32(0x521f8c,1)
+
+    def clear_dictator(self):
+        m=self.memory
+        if not m.u32(0x521f90):return
+        m.w32(0x521f90,0);slot=m.u32(0x521fb4)
+        self.stop_buffer(m.u32(slot));self.destroy_buffer(slot);m.w32(m.u32(0x521fbc),0xffffffff)
+
+    def set_game_volume(self,value):
+        if type(value) is not int or not 0<=value<=0xffffffff:raise ValueError('Game volume requires a u32 input')
+        self.memory.w32(0x498f58,max(0,min(_i32(value),256)));self.memory.w32(0x498f5c,1)
+
     def clear_list(self):
         m=self.memory
         for base in (0x52216c,0x52211c):
@@ -223,7 +240,7 @@ class AudioQueue:
                 if not pointer:continue
                 r=m.u32(slot+4)
                 if m.u8(r+8)==1 and self.status(pointer,'stopped'):self.stop_handle(m.u32(r+40))
-        if m.u32(0x521f90):raise DependenciaSom(0x48a0a1,'Dictator lifecycle not yet captured')
+        if m.u32(0x521f90) and self.status(m.u32(m.u32(0x521fc0)),'stopped'):self.clear_dictator()
         return 1
 
     def transfer_to_waiting(self,index):
@@ -326,19 +343,21 @@ class AudioQueue:
         if self.call('SetVolume',pointer,(volume,),0x48bf45)['hresult']:return 0
         return int(self.call('Play',pointer,(0,0,int(m.u32(r+12)==1)),0x48bf62)['hresult']==0)
 
+    def create_sound(self,r):
+        m=self.memory;bank=BancoSom(m.view(m.u32(r+4),28),m.u32(r+4));header=m.read(m.u32(r+28),16)
+        if bank.em_memoria==1:bank.dados=m.view(bank.ponteiro_dados,bank.tamanho_dados)
+        device=_QueueBufferDevice(self);files=_QueueBufferFiles(self,device)
+        system=SimpleNamespace(directsound=device,arquivos=files)
+        globals_=SimpleNamespace(directsound=m.u32(0x522228),comprimido=m.u32(0x52222c))
+        pointer,_=criar_superficie_som(system,globals_,bank,header)
+        return pointer
+
     def create_physical(self,r):
         m=self.memory;maximum=_i32(m.u32(0x498f60))
         if not -1<=maximum<=9:raise DependenciaSom(0x48ac78,'Physical maximum outside -1..9')
         if maximum==9:return 0
         maximum+=1;m.w32(0x498f60,maximum)
-        bank=BancoSom(m.view(m.u32(r+4),28),m.u32(r+4));header=m.read(m.u32(r+28),16)
-        if bank.em_memoria==1:
-            bank.dados=m.view(bank.ponteiro_dados,bank.tamanho_dados)
-        device=_QueueBufferDevice(self);files=_QueueBufferFiles(self,device)
-        system=SimpleNamespace(directsound=device,arquivos=files)
-        globals_=SimpleNamespace(directsound=m.u32(0x522228),comprimido=m.u32(0x52222c))
-        pointer,_=criar_superficie_som(system,globals_,bank,header)
-        slot=0x52211c+8*maximum;m.w32(slot,pointer)
+        pointer=self.create_sound(r);slot=0x52211c+8*maximum;m.w32(slot,pointer)
         if not pointer:return 0
         m.w32(slot+4,r);return slot
 
@@ -362,12 +381,24 @@ class AudioQueue:
                 if m.u32(r+20)!=1 and not m.u32(0x498f5c):continue
                 value=self.volume_word(r)
                 self.call('SetVolume',m.u32(slot),(value,),0x48a5d5);m.w32(r+20,0)
+            if m.u32(0x521f90) and m.u32(0x498f5c):
+                value=self.volume_word(0x521f94)
+                self.call('SetVolume',m.u32(m.u32(0x521fb4)),(value,),0x48a64e)
             m.w32(0x521f88,0)
         m.w32(0x498f5c,0)
         result=1
         for index in range(self.maximum(),19,-1):
             r=self.address(index);loaded=self.find_loaded(m.u32(r),m.u32(r+4))
-            if m.u16(m.u32(r+24)+4)==256:raise DependenciaSom(0x48a702,'Dictator request creation not yet captured')
+            if m.u16(m.u32(r+24)+4)==256:
+                if m.u32(0x521f90):continue
+                d=0x521f94
+                for offset,value in ((12,0),(24,m.u32(r+24)),(4,m.u32(r+4)),(16,256),
+                                     (40,m.u32(r+40)),(0,m.u32(r)),(28,m.u32(r+28)),(20,1)):
+                    m.w32(d+offset,value)
+                m.w32(m.u32(0x521fb4),self.create_sound(d))
+                if not self.start_buffer(d):result=0
+                self.destroy_waiting(index);m.w32(0x521f90,1)
+                continue
             if loaded:
                 if _i32(m.u32(0x498f64))>=9:
                     if _i32(m.u32(0x498f60))>=9:break

@@ -27,6 +27,9 @@ def dispatch(q,operation,r,args):
     elif operation=='duplicate':return q.duplicate_buffer(r['EAX'])
     elif operation=='create_logical':return q.create_logical(r['EAX'],r['EDX'])
     elif operation=='clear_list':return q.clear_list()
+    elif operation=='init_dictator':q.init_dictator();return None
+    elif operation=='clear_dictator':q.clear_dictator();return None
+    elif operation=='game_volume':q.set_game_volume(r['EAX']);return None
     elif operation=='manage':return q.manage()
     else:raise ValueError('Unknown replay operation')
 
@@ -36,7 +39,7 @@ def replay(case):
     try:
         for request in fixture.get('sequence',[fixture]):
             value=dispatch(q,request['operation'],request['regs'],request['arguments'])
-            if 'sequence' in fixture:steps.append(dict(eax=hex(value),memory=memory.snapshot()))
+            if 'sequence' in fixture:steps.append(dict(eax=hex(value) if value is not None else None,memory=memory.snapshot()))
     except DependenciaSom as exc:stop=str(exc);value=None
     return dict(output=memory.snapshot(),value=value,steps=steps,stop=stop,com=plan.calls,unused_com=len(plan.responses))
 
@@ -44,7 +47,11 @@ def replay(case):
 def compare(case):
     actual=replay(case);failures=[]
     if actual['output']!=case['output']:failures.append('memory')
-    if actual['steps']!=case.get('steps',[]):failures.append('sequence steps')
+    expected_steps=case.get('steps',[])
+    if len(actual['steps'])!=len(expected_steps):failures.append('sequence length')
+    for i,(step,expected) in enumerate(zip(actual['steps'],expected_steps)):
+        if step['memory']!=expected['memory']:failures.append('sequence memory '+str(i))
+        if step['eax'] is not None and step['eax']!=expected['eax']:failures.append('sequence EAX '+str(i))
     if actual['com']!=case['com']:failures.append('external calls')
     if actual['unused_com']!=case['unused_com']:failures.append('unused external answers')
     if bool(actual['stop'])!=bool(case['stop']):failures.append('dependency stop')

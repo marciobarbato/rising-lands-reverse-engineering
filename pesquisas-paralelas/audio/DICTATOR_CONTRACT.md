@@ -51,7 +51,7 @@ callbacks. The new sound fixture is entry-word256, PCM mono/16bit/22050Hz,
   0/1/5 and success/error HRESULT. Stop/Release and caller invalidation occur
   only in their original branches. Explicit DestroyDictator `0x489f04` clears
   active before Stop/Release and invalidates its inherited caller reference.
-- PlaySnd_SetGameVolume `0x48aa45` uses signed clamp0..256 and writes dirty=1.
+- PlaySnd_SetGameVolume `0x48aa45` uses signed clamp 0..256 and writes dirty=1.
   The active dictator uses original volume-table words; the volume update's
   error HRESULT is ignored. Declared inputs cover0/128/256/257/0xffffffff.
 
@@ -64,16 +64,27 @@ long mission flow or acceptance milestone is established.
 
 ## Preserved diagnostic history and bounds
 
-v1 stops at the missing RET interval endpoint `0x48c240`; its native_calls140
-field counted planned sequence entries, while only35 entries were attempted.
-That frozen diagnostic is not counted as140 executed calls. v2 includes that
+v1 stops at the missing RET interval endpoint `0x48c240`; its native_calls 140
+field counted planned sequence entries, while only 35 entries were attempted.
+That frozen diagnostic is not counted as 140 executed calls. v2 includes that
 intact RET and records actual128/planned140 entries:12 declared Play mismatches
 exposed the original flags reset, plus the NULL allocation stop. v3 corrects
-only the declared Play inputs and executes all140 entries with one expected
+only the declared Play inputs and executes all 140 entries with one expected
 NULL-allocation boundary. Original code and earlier reports are unchanged.
 
-Every native job uses unchanged shared heavy_lease.py, SIGALRM600 after lease
-acquisition, a monotonic600-second deadline and50,000 instructions per call.
+Every native job uses unchanged shared heavy_lease.py, SIGALRM 600 after lease
+acquisition, a monotonic 600-second deadline and 50,000 instructions per call.
 Each new job took under one second. No Mac mini time is required. Original
 research commits precede implementation; current fresh differential, API tests
 and exact native app build are reported in the handoff after they run.
+
+
+The reference exposes `init_dictator()`, `clear_dictator()`,
+`set_game_volume(u32)` and `create_sound(record_address)`; Manage and ClearListe
+compose them. All memory/backend identities are retained. Void routines have
+no Python API result: their raw EAX metadata remains compared fresh-native to
+frozen-native, while Python compares every completed step's memory and only
+meaningful API EAX. This distinction is explicit, not a normalized game byte.
+The fresh three-way result covers140 actual entries/35 scenarios, one expected
+NULL-allocation boundary and zero failures, 0.423 seconds. Ten new API/replay
+tests have zero skips; earlier139-call continuation coverage is historical.

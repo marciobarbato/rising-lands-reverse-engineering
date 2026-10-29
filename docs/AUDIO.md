@@ -395,3 +395,46 @@ JSON/PNGs are preserved; no repeat, app change or timeout increase was made.
 The [Audio handoff](../pesquisas-paralelas/audio/HANDOFF.md#required-committed-native-bundle-build--first-attempt-preserved)
 records exact command/commit and the macOS-owned readiness dependency. Audio
 native proof is not substituted for the failed UI check or M3 acceptance.
+
+
+## Current entry-word256 lifecycle reference
+
+Starting from latest fetched main
+`a7427fd0e416d212f08af7f0df3d36a224d12f2d`, the Audio front now closes the
+previous dictator admission/cleanup boundary for the exact declared domain in
+[DICTATOR_CONTRACT.md](../pesquisas-paralelas/audio/DICTATOR_CONTRACT.md).
+Prior reuse/promotion/concurrency and resident/compressed results are integrated
+baseline and are not recounted as new native coverage.
+
+New original-only research precedes implementation. `init_dictator()` runs the
+captured allocation wrapper effects with explicit GlobalAlloc(flags0,size8)
+input/result; it retains the supplied slot's first word, writes its back-pointer
+and globals, and increments the original allocation counter. A NULL allocation
+stops at undeclared MessageBoxA0x48c227 before later initialization. No zeroed
+allocation, initialized sound device or default callback is invented.
+
+Manage consumes entry-word256 using the separate record and actual inherited
+slot, sets flags0 even for requested flags1, preserves exact original start-error
+mutations, and leaves a second request waiting while active. `clear_dictator()`
+and ClearListe preserve IsStopped0x48beb9 status-mask/HRESULT behavior and the
+original Stop/Release/reference invalidation order. `set_game_volume(u32)`
+uses the original signed clamp0..256 and dirty flag; active volume-update error
+HRESULT is ignored as captured. `create_sound(record_address)` reuses the
+Stage-1 buffer API without reserving a physical slot. These APIs remain Python
+reference/harness behavior for the future Rust library, not a live platform ABI.
+
+The new corpus has **140 actual original entries /35 scenarios**,34 returned
+scenarios and one expected NULL-allocation/UI stop. It includes an eight-call
+persistent pending/clear/relaunch sequence with every intermediate memory image.
+The [fresh differential](../pesquisas-paralelas/audio/validacao/dictador-audio-three-way-v1.json)
+passes with zero failures; void-routine raw EAX is observation metadata, compared
+between original runs rather than exposed as an invented Python API result.
+Diagnostics preserve an initial interval-end/counting mistake and twelve
+explicit Play mismatches that exposed the original flags reset. No original
+bytes or predecessor evidence were changed.
+
+Remaining scope: allocation-error UI continuation, actual device initialization,
+wrapped/short Lock and unwritten outputs, asynchronous lifetime, broader queue
+saturation/fault paths and unproved stereo queue composition. No original audio
+is played and no M2.3/M3 milestone status changes. Exact gates and the required
+native application build outcome are recorded in the handoff.
