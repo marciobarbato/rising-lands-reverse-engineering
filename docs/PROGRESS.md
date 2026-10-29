@@ -1,6 +1,6 @@
 # Consolidated progress — MONDE01
 
-Round: **CXR-20261029-M2R1 (M2 round 1 — first-frame original capture integrated; frame composition pending)**. Current fetched/ancestry-verified main: `ec931d22a9ca6a4187b801bfe763b5c1e26ee311`. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)). [Roadmap](ROADMAP_MONDE01.md), [snapshots](progress/README.md), [M2R1 main reproduction](../integracao/validacao/cxr-20261029-m2r1-main-reproduction.txt).
+Round: **CXR-20261029-M2R2 (M2 round 2 — frame-1 callees validated at exact inputs; chained composition and executed display path pending)**. Current fetched/ancestry-verified main: `e44021a4cd146d2af3ab96099157b965be8f1f23`. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)). [Roadmap](ROADMAP_MONDE01.md), [snapshots](progress/README.md), [M2R2 main reproduction](../integracao/validacao/cxr-20261029-m2r2-main-reproduction.txt).
 
 ## Resumo executivo
 
@@ -30,6 +30,22 @@ Nesta rodada a referência original foi integrada (`14c0122`) e a composição P
 | Frame economy routines (Economy) | Over the M1 post-load input | Yes | 6,692 native entries | `c44c600` integrated. Main 6/6 | No |
 | Projectile/attack frame calls (Combat) | Over the M1 post-load input | ProjectileCalcul +1 clear corrected | Full combat native suite 250/250, 0 skips, before integration | `1727e96` integrated. Main 4/4 | No |
 | Static M1 render (Graphics, non-blocking) | n/a | Existing passes only. The Santuário facade is absent (stop 0x407DEF) | n/a | `da9da92` integrated | n/a |
+
+**Round 2 (main `67fb81f`, loader `e44021a`).**
+
+Integrations:
+- **Core `8f0c6bc`.** 678 isolated calls captured at the exact frame-0/1 inputs before translation, then 1,918 native comparisons with 0 mismatches. Covers GetBit/SetBit, CaseEstDecouverte/Illuminee, BatimentCollision/GetCase/EstDecouvert/ContourEstIllumine, SetCollision/SetEnginCollision, Chemin_ModifieZone mode 2, CalculFatigue, Random and GameNextFrame.
+- **Economy `d2bb979`.** 102 frame-0/1 calls equal, plus RechercheGetNbInvention.
+- **Combat `dea3e45`.** Frame calls equal at the exact inputs; PlayerEstAllie API documented.
+- **Missions `94c5405`.** Influence-zone queries captured, translated and wired into fim_missao; register trace view.
+- **AI/runtime `75359c2`.**
+  - MessageBoxCalcul, the no-command ProcessInputGame path, and AvanceMonstre/iaSolver for the monster player: 22/24 cases.
+  - Python composition: phase (b) equals the original exactly. Phases (a) and (c) equal the original up to named stops at RestoreAll 0x42d27f and InputGame 0x42d33b.
+- **Graphics `a27c888`.** Proved the AffGame write set: the Random permutation cursor 0x4e1d18 is shared by AffGame and game logic. Decision: the oracle must execute the display path natively before M2.2.
+
+Validation:
+- Helpers: missions native 123/123 and ai-runtime 54/54 with 0 skips; all common gates passed.
+- Main reproduction: 6 suites, 48 tests OK.
 
 **Open M2.1 items:**
 1. Python composition of frames 0/1 compared phase by phase (AI/runtime).
