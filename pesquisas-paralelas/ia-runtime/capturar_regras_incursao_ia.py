@@ -18,6 +18,10 @@ counters, each rule call records:
     python3 -B pesquisas-paralelas/ia-runtime/capturar_regras_incursao_ia.py --quadros 3 --registrar 9000 \
         --saida pesquisas-paralelas/ia-runtime/evidencias/captura-regras-incursao-9000-ia.json
 
+``--rotina EnginNextEtape --unidades 16`` records instead every top-level EnginNextEtape call for those units,
+with the executed block addresses inside the routine (outside calls excluded) and the same footprint, writes
+and outside calls; there every routine but the recorded one counts as outside.
+
 The run through counter 11101 (--quadros 2103 --registrar 9000,9500,9700,11100,11101) is long native work for
 the Mac mini.
 """
@@ -68,7 +72,8 @@ class BancadaRegras(BancadaQuadroMissaoOriginal):
         return regs
 
 
-def executar(quadros, registrar):
+def executar(quadros, registrar, rotina=None, unidades=()):
+    """Rule calls, or with ``rotina`` the top-level calls of that routine whose AX is in ``unidades``."""
     cap = json.loads(CAPTURA.read_bytes())
     ni = cap['named_inputs']['m1']
     b = BancadaRegras(cq.entradas_quadro(ni['allocation_fill'], ni['clock_ms'][0]), segundos=120)
@@ -76,6 +81,9 @@ def executar(quadros, registrar):
     b.executar_inicio()
     b.executar_mission_load(60)
     simbolos = {b.sym[n]: n for n in b.sym}
+    inicios = sorted(simbolos)
+    alvo = b.sym[rotina] if rotina else None
+    fim_alvo = inicios[inicios.index(alvo) + 1] if rotina else None
     regioes = ((oq.DGROUP[0], oq.DGROUP[1]), (oq.DADOS_THREAD_CRT, oq.DADOS_THREAD_CRT + 0x1000),
                (b.arena.base, b.arena.proximo))
     estado = dict(ativo=False, regra=None, pilha=[], chamadas=[], ganchos=[], contador=None)
@@ -136,8 +144,10 @@ def executar(quadros, registrar):
             if endereco == r['ret'] and r_['ESP'] > r['esp']:
                 fechar_regra(cpu, r_)
                 return
+            if rotina and not pilha and alvo <= endereco < fim_alvo:
+                r['registro']['blocks'].append(hex(endereco))
             nome = simbolos.get(endereco)
-            if nome is None or pilha or PROPRIAS.match(nome):
+            if nome is None or pilha or (nome == rotina if rotina else PROPRIAS.match(nome)):
                 return
             palavras = struct.unpack('<7I', bytes(cpu.mem_read(r_['ESP'], 28)))
             registro = dict(routine=nome, caller=b.nome(palavras[0]), caller_return=hex(palavras[0]),
@@ -149,12 +159,20 @@ def executar(quadros, registrar):
         if nome is None:
             return
         retorno = struct.unpack('<I', bytes(cpu.mem_read(r_['ESP'], 4)))[0]
-        if retorno not in RETORNOS_REGRA:
-            return
-        bloco_args = struct.unpack('<9I', bytes(cpu.mem_read(r_['EAX'], 36)))
-        registro = dict(counter=estado['contador'], rule=nome, address=hex(endereco), caller_return=hex(retorno),
-                        arguments=[hex(v) for v in bloco_args[:7]], player=bloco_args[7], task=bloco_args[8],
-                        entry={k: hex(v) for k, v in r_.items()}, outside_calls=[])
+        if rotina:
+            if endereco != alvo or r_['EAX'] & 0xffff not in unidades:
+                return
+            registro = dict(counter=estado['contador'], rule=nome, address=hex(endereco), caller_return=hex(retorno),
+                            unit=r_['EAX'] & 0xffff, entry={k: hex(v) for k, v in r_.items()},
+                            stack_words=[hex(v) for v in struct.unpack('<6I', bytes(cpu.mem_read(r_['ESP'] + 4, 24)))],
+                            outside_calls=[], blocks=[hex(endereco)])
+        else:
+            if retorno not in RETORNOS_REGRA:
+                return
+            bloco_args = struct.unpack('<9I', bytes(cpu.mem_read(r_['EAX'], 36)))
+            registro = dict(counter=estado['contador'], rule=nome, address=hex(endereco), caller_return=hex(retorno),
+                            arguments=[hex(v) for v in bloco_args[:7]], player=bloco_args[7], task=bloco_args[8],
+                            entry={k: hex(v) for k, v in r_.items()}, outside_calls=[])
         estado['regra'] = dict(registro=registro, ret=retorno, esp=r_['ESP'], lidos={}, escritos=set(), antes={})
 
     b.cpu.hook_add(unicorn.UC_HOOK_BLOCK, bloco, begin=0x401000, end=0x493bff)
@@ -193,13 +211,15 @@ def main():
     ap.add_argument('--quadros', type=int, required=True, help='frames from the forced counter 9000')
     ap.add_argument('--registrar', required=True, help='comma-separated counters whose rule calls are recorded')
     ap.add_argument('--saida', required=True)
+    ap.add_argument('--rotina', help='record the top-level calls of this routine instead of the rule calls')
+    ap.add_argument('--unidades', default='', help='with --rotina: comma-separated AX values (unit indices) to record')
     a = ap.parse_args()
     saida = ROOT / a.saida
     if saida.exists():
         raise SystemExit(f'Refusing to overwrite existing evidence {saida}')
     registrar = {int(x) for x in a.registrar.split(',')}
     t0 = time.monotonic()
-    registros = executar(a.quadros, registrar)
+    registros = executar(a.quadros, registrar, a.rotina, {int(x) for x in a.unidades.split(',') if x})
     relatorio = dict(
         schema='rising-lands/ai-runtime-raid-rule-calls/1', original_sha256=HASH, translation_executed=False,
         label=f'forced input: v1 path, counter written to 9000 at frame 1\'s CalculGame entry, {a.quadros} frames',
@@ -207,7 +227,8 @@ def main():
         source_sha256={p: hashlib.sha256((ROOT / p).read_bytes()).hexdigest() for p in (
             'pesquisas-paralelas/ia-runtime/capturar_regras_incursao_ia.py',
             'pesquisas-paralelas/missoes/oraculo_quadro_missao.py')},
-        frames=a.quadros, recorded_counters=sorted(registrar), rule_calls=registros,
+        frames=a.quadros, recorded_counters=sorted(registrar), routine=a.rotina, units=a.unidades or None,
+        rule_calls=registros,
         rules=sorted({r['rule'] for r in registros}), seconds=round(time.monotonic() - t0, 3))
     saida.parent.mkdir(parents=True, exist_ok=True)
     with open(saida, 'x') as f:
