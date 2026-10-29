@@ -211,6 +211,23 @@ class IncursaoTest(unittest.TestCase):
         self.assertEqual(c.exception.sitio, 0x41591f)
 
 
+class UnidadeTest(unittest.TestCase):
+    def test_raid_unit_walk_and_visible_unit_cases_are_clean(self):
+        base = Path(__file__).resolve().parent/'evidencias'
+        d = json.loads((base/'dominio-exibicao-incursao-unidade.json').read_text())
+        self.assertEqual([r['phase'] for r in d['records']], ['between_frames300', 'between_frames450', 'between_frames620', 'between_frames700'])
+        for r in d['records']:
+            self.assertTrue(r['probe']['unit16']['cell'])
+            for c in r['cases']:
+                self.assertTrue(c['calls'][0]['returned'] and not c['calls'][0]['stopped'])
+        v = json.loads((base/'dominio-exibicao-incursao-unidade-visivel.json').read_text())
+        casos = [c for r in v['records'] for c in r['cases'] if c['case'].startswith('unit16_')]
+        self.assertEqual(len(casos), 2)
+        for c in casos:
+            self.assertEqual(c['coverage']['0x41591f'], 17)      # AffEngin drew the 16 M1 units plus unit 16
+            self.assertTrue(c['calls'][0]['returned'] and not c['calls'][0]['stopped'])
+
+
 class CamposTest(unittest.TestCase):
     def test_guards_are_in_verificacoes_and_never_in_liberacoes(self):
         for fn in (e.restaurar_tudo, e.desenhar_jogo):

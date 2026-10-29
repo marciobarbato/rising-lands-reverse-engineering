@@ -69,8 +69,12 @@ class Mercado:
     def da_memoria(cls, m):
         """``vivo`` over a live memory map; the player records are read through the pointer at 0x5080a8."""
         registros = struct.unpack('<I', bytes(m.ler(JOGADORES, 4)))[0]
-        return cls.vivo(Economia.da_memoria(m), jogadores=m.vista(registros, 80),
+        self = cls.vivo(Economia.da_memoria(m), jogadores=m.vista(registros, 80),
                         **{n: m.vista(a, t) for n, (a, t) in BUFFERS.items()})
+        # Bound this way, aliado runs the original PlayerEstAllie over m (quadro_economia.aliado): the
+        # allocation holds five records and the original reads record 4; no 0..3 protection.
+        self.memoria_viva = m
+        return self
 
     def __init__(self, economia=None, *, jogadores=None, **buffers):
         # Legacy/fixture form: copies. Use Mercado.vivo/da_memoria for the live original memory.
@@ -96,7 +100,11 @@ class Mercado:
         """PlayerEstAllie 0x46d838, domínio protegido 0..3, AL e DL.
 
         É direcional; igualdade retorna 1 sem consultar a máscara.
+        Bound by ``da_memoria``, it runs the original over live memory instead (any AL/DL).
         """
+        if getattr(self, 'memoria_viva', None) is not None:
+            from quadro_economia import aliado
+            return aliado(self.memoria_viva, jogador, outro)
         j, k = _jogador(jogador), _jogador(outro)
         return int(j == k or bool(self.jogadores[j * 20 + 6] & (1 << k)))
 
