@@ -1,0 +1,333 @@
+[lease] engine-stage2b-release-proof waiting
+[lease] engine-stage2b-release-proof granted slots [0, 1, 2, 3, 4, 5]
+   Compiling rl-core v0.1.0 (/Users/marcio/git/Rising-Lands-Codex-Engine/motor/crates/rl-core)
+   Compiling rl-ffi v0.1.0 (/Users/marcio/git/Rising-Lands-Codex-Engine/motor/crates/rl-ffi)
+    Finished `release` profile [optimized] target(s) in 1.86s
+load_tail equal
+between_frames equal
+frame1 equal
+between_frames2 equal
+frame2 equal
+between_frames3 equal
+frame3 equal
+between_frames4 equal
+frame4 equal
+between_frames5 equal
+frame5 equal
+between_frames6 equal
+frame6 equal
+between_frames7 equal
+frame7 equal
+between_frames8 equal
+frame8 equal
+between_frames9 equal
+frame9 equal
+between_frames10 equal
+frame10 equal
+between_frames11 equal
+frame11 equal
+between_frames12 equal
+frame12 equal
+between_frames13 equal
+frame13 equal
+between_frames14 equal
+frame14 equal
+between_frames15 equal
+frame15 equal
+between_frames16 equal
+frame16 equal
+between_frames17 equal
+frame17 equal
+between_frames18 equal
+frame18 equal
+between_frames19 equal
+frame19 equal
+between_frames20 equal
+frame20 equal
+between_frames21 equal
+frame21 equal
+between_frames22 equal
+frame22 equal
+between_frames23 equal
+frame23 equal
+between_frames24 equal
+frame24 equal
+between_frames25 equal
+frame25 equal
+between_frames26 equal
+frame26 equal
+between_frames27 equal
+frame27 equal
+between_frames28 equal
+frame28 equal
+between_frames29 equal
+frame29 equal
+between_frames30 equal
+frame30 equal
+between_frames31 equal
+frame31 equal
+between_frames32 equal
+frame32 equal
+between_frames33 equal
+frame33 equal
+between_frames34 equal
+frame34 equal
+between_frames35 equal
+frame35 equal
+between_frames36 equal
+frame36 equal
+between_frames37 equal
+frame37 equal
+between_frames38 equal
+frame38 equal
+between_frames39 equal
+frame39 equal
+between_frames40 equal
+frame40 equal
+between_frames41 equal
+frame41 equal
+between_frames42 equal
+frame42 equal
+between_frames43 equal
+frame43 equal
+between_frames44 equal
+frame44 equal
+between_frames45 equal
+frame45 equal
+between_frames46 equal
+frame46 equal
+between_frames47 equal
+frame47 equal
+between_frames48 equal
+frame48 equal
+between_frames49 equal
+frame49 equal
+between_frames50 equal
+frame50 equal
+between_frames51 equal
+frame51 equal
+between_frames52 equal
+frame52 equal
+between_frames53 equal
+frame53 equal
+between_frames54 equal
+frame54 equal
+between_frames55 equal
+frame55 equal
+between_frames56 equal
+frame56 equal
+between_frames57 equal
+frame57 equal
+between_frames58 equal
+frame58 equal
+between_frames59 equal
+frame59 equal
+between_frames60 equal
+frame60 equal
+between_frames61 equal
+frame61 equal
+between_frames62 equal
+frame62 equal
+between_frames63 equal
+frame63 equal
+between_frames64 equal
+frame64 equal
+between_frames65 equal
+frame65 equal
+between_frames66 equal
+frame66 equal
+between_frames67 equal
+frame67 equal
+between_frames68 equal
+frame68 equal
+between_frames69 equal
+frame69 equal
+between_frames70 equal
+frame70 equal
+between_frames71 equal
+frame71 equal
+between_frames72 equal
+frame72 equal
+between_frames73 equal
+frame73 equal
+between_frames74 equal
+frame74 equal
+between_frames75 equal
+frame75 equal
+between_frames76 equal
+frame76 equal
+between_frames77 equal
+frame77 equal
+between_frames78 equal
+frame78 equal
+between_frames79 equal
+frame79 equal
+between_frames80 equal
+frame80 equal
+between_frames81 equal
+frame81 equal
+between_frames82 equal
+frame82 equal
+between_frames83 equal
+frame83 equal
+between_frames84 equal
+frame84 equal
+between_frames85 equal
+frame85 equal
+between_frames86 equal
+frame86 equal
+between_frames87 equal
+frame87 equal
+between_frames88 equal
+frame88 equal
+between_frames89 equal
+frame89 equal
+between_frames90 equal
+frame90 equal
+between_frames91 equal
+frame91 equal
+between_frames92 equal
+frame92 equal
+between_frames93 equal
+frame93 equal
+between_frames94 equal
+frame94 equal
+between_frames95 equal
+frame95 equal
+between_frames96 equal
+frame96 equal
+between_frames97 equal
+frame97 equal
+between_frames98 equal
+frame98 equal
+between_frames99 equal
+frame99 equal
+between_frames100 equal
+frame100 equal
+between_frames101 equal
+frame101 equal
+between_frames102 equal
+frame102 equal
+between_frames103 equal
+frame103 equal
+between_frames104 equal
+frame104 equal
+between_frames105 equal
+frame105 equal
+between_frames106 equal
+frame106 equal
+between_frames107 equal
+frame107 equal
+between_frames108 equal
+frame108 equal
+between_frames109 equal
+frame109 equal
+between_frames110 equal
+frame110 equal
+between_frames111 equal
+frame111 equal
+between_frames112 equal
+frame112 equal
+between_frames113 equal
+frame113 equal
+between_frames114 equal
+frame114 equal
+between_frames115 equal
+frame115 equal
+between_frames116 equal
+frame116 equal
+between_frames117 equal
+frame117 equal
+between_frames118 equal
+frame118 equal
+between_frames119 equal
+frame119 equal
+between_frames120 equal
+frame120 equal
+between_frames121 equal
+frame121 equal
+between_frames122 equal
+frame122 equal
+between_frames123 equal
+frame123 equal
+between_frames124 equal
+frame124 equal
+between_frames125 equal
+frame125 equal
+between_frames126 equal
+frame126 equal
+between_frames127 equal
+frame127 equal
+between_frames128 equal
+frame128 equal
+{
+ "output": "/Users/marcio/git/Rising-Lands-Codex-Engine/motor/validation/stage2b-128-frame-proof.json",
+ "result": "equal",
+ "phases_equal": 257,
+ "phases_compared": 257,
+ "phases_requested": 257,
+ "complete_proof": true,
+ "timing": {
+  "rust_phase_seconds": 1.0682109550000085,
+  "frames_completed": 128,
+  "frames_per_second": 119.82651872354087,
+  "scope": "C ABI phase execution only; excludes corpus replay, projection and comparison"
+ }
+}
+{
+  "passed": true,
+  "comparisons": 75,
+  "by_routine": {
+    "Random": 24,
+    "LongRand": 12,
+    "rand": 12,
+    "IntToBCD": 19,
+    "BCDToInt": 8
+  },
+  "mismatches": 0,
+  "skipped": 0
+}
+test_active_task_is_named_atomic_dependency_stop (test_frame_ai_units.FrameAiUnitTests) ... ok
+test_frozen_original_inactive_ai_and_message_calls (test_frame_ai_units.FrameAiUnitTests) ... ok
+test_message_timer_and_no_command_perturbations_against_python (test_frame_ai_units.FrameAiUnitTests) ... ok
+test_monster_initialization_and_action_timers_against_python (test_frame_ai_units.FrameAiUnitTests) ... ok
+test_target_scan_and_occupancy_perturbations_against_python (test_frame_ai_units.FrameAiUnitTests) ... ok
+test_additive_creation_and_invalid_phase (test_frame_contract.FrameContract) ... ok
+test_bulk_snapshot_size_errors_copy_no_prefix (test_frame_contract.FrameContract) ... ok
+test_failed_phase_preserves_world_clock_input_and_events (test_frame_contract.FrameContract) ... ok
+test_original_core_capture_replay (test_frame_core_economy.FrameProviders) ... ok
+test_original_economy_capture_replay (test_frame_core_economy.FrameProviders) ... ok
+test_perturbed_animation_and_resource_values (test_frame_core_economy.FrameProviders) ... ok
+test_perturbed_field_growth (test_frame_core_economy.FrameProviders) ... ok
+test_actual_compared_byte_corruption_detected (test_frame_evidence.FrameHarnessTests) ... ok
+test_bulk_snapshot_strict (test_frame_evidence.FrameHarnessTests) ... ok
+test_copied_comparison_definitions_unchanged (test_frame_evidence.FrameHarnessTests) ... ok
+test_exact_frozen_reference_pins (test_frame_evidence.FrameHarnessTests) ... ok
+test_frame_abi_layout (test_frame_evidence.FrameHarnessTests) ... ok
+test_unknown_event_rejected (test_frame_evidence.FrameHarnessTests) ... ok
+test_original_input_captured_writes (test_frame_input_missions.InputMissionsProviders) ... ok
+test_original_mission_isolated_captures (test_frame_input_missions.InputMissionsProviders) ... ok
+test_randomized_affgame_effects_and_inactive_projectile_animation (test_frame_input_missions.InputMissionsProviders) ... ok
+test_randomized_mission_conditions_resources_and_latch (test_frame_input_missions.InputMissionsProviders) ... ok
+test_randomized_rain_scroll_and_input_help_timer (test_frame_input_missions.InputMissionsProviders) ... ok
+test_all_committed_calls_match_original_and_python (test_pilot.CaptureHarnessTests) ... ok
+test_bcd_alias_and_width_edges_match_unchanged_python (test_pilot.CaptureHarnessTests) ... ok
+test_harness_detects_a_real_rust_projected_byte_mutation (test_pilot.CaptureHarnessTests) ... ok
+test_harness_detects_a_real_rust_return_register_mutation (test_pilot.CaptureHarnessTests) ... ok
+test_sparse_input_refuses_unknown_conflicting_bytes (test_pilot.CaptureHarnessTests) ... ok
+test_tampered_reference_identity_is_refused (test_pilot.CaptureHarnessTests) ... ok
+test_clock_ticks_and_memory_load_are_separate (test_pilot.PilotAbiTests) ... ok
+test_error_message_query_is_repeatable_and_thread_local (test_pilot.PilotAbiTests) ... ok
+test_failed_bcd_writes_do_not_publish_prefix (test_pilot.PilotAbiTests) ... ok
+test_independent_worlds_repeat_under_concurrent_callers (test_pilot.PilotAbiTests) ... ok
+test_load_and_project_copy_sorted_owned_bytes (test_pilot.PilotAbiTests) ... ok
+test_malformed_load_is_atomic_with_named_errors (test_pilot.PilotAbiTests) ... ok
+test_projection_capacity_query_preserves_output_buffer (test_pilot.PilotAbiTests) ... ok
+test_stale_handles_double_free_and_nonreused_identity (test_pilot.PilotAbiTests) ... ok
+test_unknown_missing_and_unsupported_steps_preserve_registers_and_state (test_pilot.PilotAbiTests) ... ok
+test_version_rate_and_null_output_refuse_creation (test_pilot.PilotAbiTests) ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 0.894s
+
+OK

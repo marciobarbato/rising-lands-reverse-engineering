@@ -10,7 +10,7 @@ use std::{
     sync::{Mutex, OnceLock},
 };
 
-pub const ABI_VERSION: u32 = 0x00010000;
+pub const ABI_VERSION: u32 = 0x00010001;
 const MAX_BLOCKS: u32 = 65536;
 const MAX_BYTES: usize = 64 * 1024 * 1024;
 #[repr(C)]
@@ -64,8 +64,12 @@ impl From<EngineError> for AbiError {
     fn from(e: EngineError) -> Self {
         match e {
             EngineError::UnknownRoutine(_) => Self::UnknownRoutine,
-            EngineError::UnsupportedThreadGetter { .. } => Self::UnsupportedPath(e),
-            EngineError::InvalidTickRate => Self::InvalidArgument,
+            EngineError::UnsupportedThreadGetter { .. } | EngineError::UnportedCallee { .. } => {
+                Self::UnsupportedPath(e)
+            }
+            EngineError::InvalidTickRate | EngineError::InvalidFramePhase(_) => {
+                Self::InvalidArgument
+            }
             _ => Self::Memory(e),
         }
     }
@@ -114,7 +118,7 @@ pub unsafe extern "C" fn rl_criar_mundo(
     output: *mut u64,
 ) -> i32 {
     status(|| {
-        if version != ABI_VERSION {
+        if version != ABI_VERSION && version != 0x00010000 {
             return Err(AbiError::VersionMismatch);
         }
         if output.is_null() {
@@ -322,5 +326,177 @@ pub unsafe extern "C" fn rl_erro_mensagem(
             buffer.add(text.len()).write(0);
         }
         0
+    })
+}
+
+/// # Safety
+/// Input is an aligned, writable RlFrameInput. No foreign pointers are retained.
+/// On failure the complete world, clock, previous events and input remain unchanged.
+#[no_mangle]
+pub unsafe extern "C" fn rl_passo_quadro(
+    handle: u64,
+    phase: u32,
+    input: *mut rl_core::FrameInput,
+) -> i32 {
+    status(|| {
+        if input.is_null() {
+            return Err(AbiError::InvalidArgument);
+        }
+        let value = unsafe { input.read() };
+        let output = with_world(handle, |world| Ok(world.frame_step(phase, value)?))?;
+        unsafe { input.write(output) };
+        Ok(())
+    })
+}
+/// # Safety
+/// Output/required are writable, aligned, disjoint; capacity is a record count.
+/// NULL/zero queries required count. Buffers remain untouched on errors.
+#[no_mangle]
+pub unsafe extern "C" fn rl_eventos_quadro(
+    handle: u64,
+    buffer: *mut rl_core::FrameEvent,
+    capacity: u32,
+    required: *mut u32,
+) -> i32 {
+    status(|| {
+        if required.is_null() {
+            return Err(AbiError::InvalidArgument);
+        }
+        with_world(handle, |world| {
+            let count =
+                u32::try_from(world.frame_events.len()).map_err(|_| AbiError::ResourceLimit)?;
+            unsafe { required.write(count) };
+            if capacity < count {
+                return Err(AbiError::BufferTooSmall);
+            }
+            if count != 0 && buffer.is_null() {
+                return Err(AbiError::InvalidArgument);
+            }
+            if count != 0 {
+                unsafe {
+                    ptr::copy_nonoverlapping(world.frame_events.as_ptr(), buffer, count as usize)
+                }
+            }
+            Ok(())
+        })
+    })
+}
+fn pack(memory: &MemoriaJogo) -> Result<Vec<u8>> {
+    let blocks: Vec<_> = memory.blocks().collect();
+    let mut bytes = Vec::new();
+    bytes.extend(
+        u32::try_from(blocks.len())
+            .map_err(|_| AbiError::ResourceLimit)?
+            .to_le_bytes(),
+    );
+    for (base, data) in blocks {
+        bytes.extend(base.to_le_bytes());
+        bytes.extend(
+            u32::try_from(data.len())
+                .map_err(|_| AbiError::ResourceLimit)?
+                .to_le_bytes(),
+        );
+        bytes.extend(data);
+    }
+    Ok(bytes)
+}
+unsafe fn bulk(
+    handle: u64,
+    freed: bool,
+    buffer: *mut u8,
+    capacity: u32,
+    required: *mut u32,
+) -> i32 {
+    status(|| {
+        if required.is_null() {
+            return Err(AbiError::InvalidArgument);
+        }
+        let bytes = with_world(handle, |world| {
+            if freed {
+                pack(&world.frame_freed)
+            } else {
+                pack(&world.project()?)
+            }
+        })?;
+        let count = u32::try_from(bytes.len()).map_err(|_| AbiError::ResourceLimit)?;
+        unsafe { required.write(count) };
+        if capacity < count {
+            return Err(AbiError::BufferTooSmall);
+        }
+        if buffer.is_null() {
+            return Err(AbiError::InvalidArgument);
+        }
+        unsafe { ptr::copy_nonoverlapping(bytes.as_ptr(), buffer, bytes.len()) };
+        Ok(())
+    })
+}
+/// Copied little-endian count, then repeated address/length/data (no padding).
+/// # Safety
+/// buffer/required writable and disjoint; NULL/zero queries byte count.
+#[no_mangle]
+pub unsafe extern "C" fn rl_projetar_tudo(
+    handle: u64,
+    buffer: *mut u8,
+    capacity: u32,
+    required: *mut u32,
+) -> i32 {
+    unsafe { bulk(handle, false, buffer, capacity, required) }
+}
+/// Actual bytes at each free in the last successful phase, sorted by address.
+/// # Safety
+/// Same pointer and size-query contract as rl_projetar_tudo.
+#[no_mangle]
+pub unsafe extern "C" fn rl_projetar_liberados(
+    handle: u64,
+    buffer: *mut u8,
+    capacity: u32,
+    required: *mut u32,
+) -> i32 {
+    unsafe { bulk(handle, true, buffer, capacity, required) }
+}
+/// Isolated frame-provider effects for differential testing; does not tick.
+/// # Safety
+/// args contains count readable aligned u32s; output is writable, disjoint.
+#[no_mangle]
+pub unsafe extern "C" fn rl_executar_rotina_quadro(
+    handle: u64,
+    id: u32,
+    args: *const u32,
+    count: u32,
+    output: *mut u32,
+) -> i32 {
+    status(|| {
+        let (name, arity) = rl_core::frame_ai::isolated(id)
+            .or_else(|| rl_core::frame_units::isolated(id))
+            .or_else(|| rl_core::frame_core::isolated(id))
+            .or_else(|| rl_core::frame_economy::isolated(id))
+            .or_else(|| rl_core::frame::isolated(id))
+            .ok_or(AbiError::UnknownRoutine)?;
+        if count as usize != arity || output.is_null() || (count != 0 && args.is_null()) {
+            return Err(AbiError::InvalidArgument);
+        }
+        let values = if count == 0 {
+            &[]
+        } else {
+            unsafe { slice::from_raw_parts(args, count as usize) }
+        };
+        let result = with_world(handle, |world| {
+            let mut memory = world.project()?;
+            let result = if id < 150 {
+                rl_core::frame_ai::call(&mut memory, name, values)?
+            } else if id < 200 {
+                rl_core::frame_units::call(&mut memory, name, values)?
+            } else if id < 250 {
+                rl_core::frame_core::call(&mut memory, name, values)?
+            } else if id < 300 {
+                rl_core::frame_economy::call(&mut memory, name, values)?
+            } else {
+                rl_core::frame::call(&mut memory, name, values)?
+            };
+            world.replace_memory(memory)?;
+            Ok(result)
+        })?;
+        unsafe { output.write(result) };
+        Ok(())
     })
 }

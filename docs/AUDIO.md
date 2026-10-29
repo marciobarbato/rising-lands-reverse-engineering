@@ -1,5 +1,45 @@
 # Audio contract
 
+## M3 request provider and stream (2026-10-29)
+
+The current Core-facing API is documented in
+[`M3_REQUEST_CONTRACT.md`](../pesquisas-paralelas/audio/M3_REQUEST_CONTRACT.md).
+`provedor_pedidos_m3_audio.SoundRequestProvider` implements
+`som(nome, registradores, pilha) -> EAX` over live memory for PostSound,
+StopSound and Manage. Its unopened-display domain is the accepted private
+image with free caller handles. The initialized domain requires an exact
+committed queue fixture and its explicit ordered platform answers; all other
+states stop. Core wraps its memory in `LiveAudioMemory` and supplies this
+callable; this delivery does not modify Core's owned paths or boundary policy.
+
+Original-only evidence commit `37ad346` captures 58 Core requests against
+accepted frame-128 private bytes: all return **EAX 0**, with no final state
+changes. Therefore the frame bench's unchanged-EAX declaration must not be
+used as the real library's return contract. Manage returns 1 and clears the
+private dirty word at `0x498f5c`; its existing original M2.2 evidence remains
+unchanged. The accepted M2 path never initializes the sound library.
+
+`fluxo_pedidos_audio` defines `rising-lands/audio-request-stream/1`: sequence,
+frame, phase, routine, caller return address, full-width argument registers and
+pushed argument words, in exact call order. Manage has no arguments; unused
+registers and stack residue are excluded. The exact comparator validates both
+documents and reports missing, extra or changed events without masks or sorting.
+The trace-driven transport replay has zero mismatches for M2.2's 128 manager
+events and all 9,200 M2.3 events (210 in the raid window). Neither no-input
+capture contains PostSound/StopSound. Scripted-input/S1 emitter equality and
+app playback remain gaps. See the audio handoff for actual native audit and
+test results; earlier scopes below retain their historical meaning.
+
+The original raid audit (`2c8a0b9`) matches all 420 phase summaries and boundary
+argument logs, with zero private-library readers. Game-owned unit `+0x104` is
+read 3,561 times at `0x45446a`, always -1; that branch clears `+0xf9`. Busy
+handles instead take PostVolume, outside this adapter's mission domain.
+CalculGame also reads the shared CD-playing flag and permutation cursor;
+NextAnimVeget reads that cursor too. Unit `+0x10c` receives an AI group store
+and is not exclusively audio. Native suite: 79 passed / zero skips; initialized
+three-way refreshes: 139 and 140 entries / zero mismatches, with one expected
+NULL-allocation/UI stop in the latter. No integration or acceptance is claimed.
+
 Owner: the Audio front (`feat/re-audio`, `worktrees/re-audio`). Owned paths are `pesquisas-paralelas/audio/` and this manual. Audio is a second-wave domain of the [MONDE01 roadmap](ROADMAP_MONDE01.md#second-wave). On 2026-10-28 the human approved anticipating it in the macOS chat while that chat waits for its M1 trigger. No eighth executor was created. When the coordinator triggers M1, the chat returns to the `macos` front and audio pauses at its last integrated stage.
 
 Addresses apply to executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`. The normalized analysis PE (`26c4534b…64d0`) is analysis-only. The original sound banks are `INSTALHD/SOUND/{A,B,P}.HED` and `.SND` on the read-only CD copy (`../source/cd`); `TICKONE.WAV` sits at the CD root and is not part of the banks. `relatorios/fontes.json` does not list the sound files, so their sizes and SHA-256 are recorded in [`ambiente_audio.py`](../pesquisas-paralelas/audio/ambiente_audio.py) and the [audio manifest](../pesquisas-paralelas/audio/evidencias/som-manifesto.json). PT-BR voices and music are preserved byte-exactly. They are never re-recorded, translated or normalized, and no decoded audio is committed.

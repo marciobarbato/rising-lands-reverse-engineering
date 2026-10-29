@@ -6,3 +6,10 @@ _Static_assert(sizeof(RlRegisters)==28, "seven u32 data registers");
 _Static_assert(offsetof(RlRegisters,edx)==12, "EDX offset");
 _Static_assert(sizeof(RlBloco)==16, "64-bit host block descriptor");
 _Static_assert(offsetof(RlBloco,data)==8, "host pointer alignment");
+
+_Static_assert(sizeof(RlFrameRegisters)==32, "eight u32 phase registers");
+_Static_assert(sizeof(RlFrameInput)==72, "phase input layout");
+_Static_assert(offsetof(RlFrameInput,registers)==12, "phase register offset");
+_Static_assert(offsetof(RlFrameInput,saved)==44, "saved words offset");
+_Static_assert(sizeof(RlFrameEvent)==72, "phase event layout");
+_Static_assert(offsetof(RlFrameEvent,stack_mask)==68, "known stack mask offset");

@@ -596,3 +596,90 @@ Goal: let the frame render reproduce everything AffGame draws after the HUD chec
 **Native runs (shared lease, this MacBook).** Smoke runs of 2, 6 and 2 frames (78, 89 and 86 s, scratch output, discarded); evidence capture of 128 frames 325.5 s; 128-frame chain verification 441 s (a first attempt failed after its native run on a report-key collision and was rerun).
 
 **Gaps (named stops, waiting for the M3 scripted-input captures):** the selection drag box `0x417AC8`, structure selection frame/gauge `0x4022C8`/`0x4020EC`, non-empty action icons, the placement frame, the target marker, the market panel, AffChrono's recruitment gauge, cost counters, tooltips, message boxes (`AffText`), alliance flags, events, the second cursor bob, counters above 9999. After `0x417D30` AffGame unlocks and flips, runs `Cyclage` (palette only) and `ShowCursor`, and resets `0x4E05A2`; these change no offscreen pixel and are not part of the render result.
+
+## Render API 1.5: M3 input-time display (2026-10-29)
+
+Feature-only delivery for coordinator review; no main merge or milestone acceptance. Main was fast-forwarded to
+`d9f70ba` before research. Original-only evidence was committed first: `5b05e41` (71 native full AffGame draws), then
+`5405033` (43 fatigue/shift/sanctuary boundary cases). See [M3_INPUT_RENDER.md](M3_INPUT_RENDER.md), the two native
+captures and `entrada-m3-proveniencia.json` for exact cases, original bytes/hashes and method.
+
+**Original-first method and identity.** Intact RISING.EXE SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`. The display bench pauses at frame 1's first
+ProcessInputGame, restores CPU/mapped state/stack/DirectDraw/surfaces for each case, runs native EnginAddSelection or
+BatimentSelection and CalculIconeAction, applies declared writes, then runs original AffGame to `0x417D30`. Hooks
+only record. All 114 calls reach the endpoint; both runs reproduce load_tail/between_frames/frame1 and unchanged
+code after restoration. Native runtimes: 173.655 s and 135.315 s, MacBook heavy lease. Earlier 38-case smoke: 129.439 s;
+one expanded attempt was interrupted at startup to add the grayscale lookup buffer, with no result claimed.
+
+**Public API and inputs.** `render_quadro.VERSAO_RENDER_QUADRO = (1, 5)`; `renderizar_quadro` and its output fields are
+unchanged. `hud=False` gains playfield overlays/drag; `hud=True` also gains action/cost/target/cursor branches.
+`regioes_necessarias(memoria, hud=True)` additionally declares `[0x4E24BC]`, 256 grayscale lookup bytes. All other new
+inputs are already in DGROUP or the unit pool. The memory view remains read-only; the terrain cache is still carried
+explicitly. Economy's real `habitado(index)` callback is required in the same places. No new callback/default exists.
+
+**Supported domain and order.**
+- Normal owner-0/camera-0 units of types 0/1/5/7/8, states 2/7; initialized counts 8/8/8/8/10 and existing body
+  direction/phase bounds; no oscillation/effects, fatigue words `+4 = +0x76 = 4`, health `+0x9A` 0..100 with type maximum
+  100, unit bag capacity 0/1. Selection frame (`0x4124C4`, bob `0x2A1E`) precedes shadow/body. Selection `+0xBD`, hover
+  `0x496AC2` or nonzero mode `0x508F8F` invokes AffInfoSelection `0x410BE4` after the body instead of the ordinary tired
+  tail: background/fill health boxes, fatigue icon, builder experience, then the empty capacity-0/1 bag exit. Builder
+  XP levels 0..7 and `+0xBA` modulo-5 blink are supported; unselected XP follows the existing tired tail. Signed shifts
+  are retained. Selected `+0x82` order markers and non-builder nonzero XP remain named stops.
+- `0x4022C8`/`0x4020EC` are structure frame/gauge helpers. The inhabited owner-0 mode-5 type-2 sanctuary is supported,
+  with health 0..600/max600, `+6 = 0`, 16 bag slots (eight troops then eight empty), and zero recruitment word `+0x74`.
+  Only its facade trigger emits the overlay: four player-colored corners using clock `0x508F80 & 7`, then gauge and
+  contents. Hover invokes only the gauge. Nonzero `+6` reaches a visible stop at `0x4085CB` before the base facade;
+  the pinned facade provider is unchanged and the field is not silently passed as zero.
+- HUD: populated action slots of kind 1, disabled kind 0 percentage 0..100, numeric kind 2 value 0..999; both scroll
+  buttons and selection frames; all cost-counter priority branches with values 0..9999, including selected builder
+  and sanctuary. Native builder 12 shows structure types 1–4, CAVE in slot 2 (input rectangle (151,548)–(209,598)).
+- Drag Box `0x417AC8` preserves reversed endpoints and native clipping. Target `0x417BA2` increments animation first
+  on even counters, draws with the camera's player table, then resets after ID `0x1E0A`; effects preserve that order.
+  Marker input IDs `0x1E03..0x1E09` are supported. Second cursor `0x417CFC`: count 1..16, ID=cursor_base+16−count.
+
+**Proof.** `validar_entrada_m3.py` and `test_entrada_m3.py` replay the immutable native captures through the public
+renderer. A validator-only observer records every Python raster call, including existing bodies/facades, without
+changing the API's calls or pixels, and compares the entire blitter/Box/FilledBox sequence argument-for-argument.
+Complete cases compare all 480,000 indexed pixels and all DGROUP bytes after projecting exported effects and the
+returned cache cursor. GetTickCount uses the observed native answer per case. Only the two process-local DirectDraw
+pointer fields (`0x4E17A4`, `0x508F70`) are excluded from DGROUP comparison. The damaged-sanctuary case verifies the
+native argument prefix and dependency stop; no full-surface or final-state equality is claimed for it.
+
+**Remaining stops/gaps.** Tooltips `0x40F8C0`; selected-unit order markers; non-builder experience; nontrivial unit bag
+contents; other owners/types/effects/oscillation and work/build/attack/death bodies; sanctuary damage/fire input `0x4085CB` (native fire join `0x408AC1`); other
+structure modes 0/1/2/6/7 `0x408AC8`, uninhabited states `0x40892D`/`0x40863E`; placement frame `0x41729B`; recruitment
+`0x401D18`; market, events, messages, alliance/debug and out-of-domain values retain visible stops. No scripted-input
+capture is available: these are native leaf-created display states, not replay of WndProc or accepted M3 gameplay.
+No longer native run or Mac mini run is required for this bounded slice.
+
+**M3 comparison result.** `validacao/entrada-m3-api15.json`: 114 cases, 113 complete surface/state comparisons,
+1 declared fire dependency stop, 0 mismatches. All 54,240,000 complete-frame palette indices match, as do 12,417 raster
+arguments (including the native prefix of the stopped case). Whole DGROUP projection has zero differences in all
+113 complete cases after the documented DD pointer exclusions. Pure-Python replay runtime: 14.248 s. The report pins
+the hashes of every changed production source and of the validator. `test_entrada_m3.py` replays it afresh and checks
+unsupported-domain stops and read-only memory; it also binds the fresh 128-frame report to the unchanged 1.4 hashes.
+
+**128-frame regression.** `evidencias/verificacao-cadeia-m22-v2-api15-128.json`, fresh original-x86
+`capturar_serie_quadros.py --quadros 128 --hud`: 128/128 complete chained surfaces equal the original's full phase-end
+hashes, 128/128 renders over the native previous surface equal, 128/128 carried caches equal, no stop and no first
+difference. Lease execution runtime: 482.844 s (2026-10-29 19:58:09–20:06:12 UTC), below 20 minutes; queue time is
+excluded. Fresh initial surface/cache artifacts are under `validacao/`, and their payloads match the unchanged 1.4
+artifacts. The compatibility correction only preserves the old globals schema and pinned facade provider; the new
+drag coordinates use the existing live read view.
+
+**Validation history and dependencies.** A preliminary domain run (240 tests, 1 failure/2 errors, log preserved as
+`validacao/api15-graphics-tests-precheck.log`) exposed the old exact-globals fixture, the immutable predecessor source
+hash, and the not-yet-produced 128-frame report. The globals schema and pinned `construcoes.py` source were restored;
+no fixture, original capture or predecessor manifest was changed. The M3 comparison was rerun after those fixes.
+Historical unrelated x86 matrices were not rerun. Core/Missions must expose original initialized text/font state
+without AffText substitution before tooltip pixels can be captured; Missions' scripted-input/WndProc scenario is
+still needed for a chained M3 input proof. These gaps do not require a longer MacBook run for this delivered domain.
+
+**Final gates.** `python3 -B scripts/check.py --domain graphics`: **248 tests, 0 skips, PASS**, 54.524 s under the heavy
+lease; documentation links pass. The final replay is 14.248 s, 114 cases / 113 complete / 1 named dependency / 0
+mismatches. A second compatibility run (248 tests, 2 failures, preserved in
+`validacao/api15-graphics-tests-compatibility.log`) identified exact legacy stop expectations when the low-level
+compositor has no live read view; those stops are preserved and the final gate passes. The public 1.5 renderer supplies
+the read view explicitly. The legacy globals set, predecessor source hashes and every frozen native fixture remain
+unchanged. No historical native suite was silently substituted for the new M3 or 128-frame proofs.
