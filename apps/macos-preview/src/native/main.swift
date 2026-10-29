@@ -5,6 +5,7 @@ import CryptoKit
 final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler, WKNavigationDelegate, NSWindowDelegate {
     var window: NSWindow!
     var web: WKWebView!
+    var nativeLive: NativeLiveWindow?
     var engine: Process?
     var input: FileHandle?
     var outPipe: Pipe?
@@ -197,6 +198,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             }
             return
         }
+        if message.frameInfo.isMainFrame, let body=message.body as? [String:Any],body["action"] as? String == "playback",let operation=body["operation"] as? String {
+            if operation.hasPrefix("live-") {
+                do {
+                    if nativeLive == nil {
+                        nativeLive=try NativeLiveWindow(root:resourceRoot)
+                        nativeLive?.update={ [weak self] value in self?.nativeReply(nil,value:value) }
+                    }
+                    nativeLive?.window.makeKeyAndOrderFront(nil)
+                    nativeLive?.perform(operation == "live-open" ? "live-reset":operation) { [weak self] value in self?.nativeReply(body["id"],value:value) }
+                } catch { nativeReply(body["id"],error:"Falha nativa: \(error.localizedDescription)") }
+                return
+            }
+            if operation == "native-capture",let live=nativeLive,let shot=screenshotOutput {
+                live.capture(shot.deletingPathExtension().appendingPathExtension("metal.png")){[weak self] value in self?.nativeReply(body["id"],value:value)}
+                return
+            }
+            if operation == "read",let live=nativeLive,live.window.isVisible,
+               let address=body["address"] as? String,let raw=UInt32(address.replacingOccurrences(of:"0x",with:""),radix:16),let size=body["size"] as? Int,(1...256).contains(size) {
+                live.read(raw,size){[weak self] value in self?.nativeReply(body["id"],value:value)};return
+            }
+            if ["open","reset","phase","frame"].contains(operation),let live=nativeLive {live.perform("live-pause",completion:nil);live.window.orderOut(nil)}
+        }
         guard message.frameInfo.isMainFrame, let body = message.body as? [String:Any], let action = body["action"] as? String,
               ["init","reset","select","order","pause","play","speed","step","pump","state","economy","combat","interact","playback"].contains(action),
               let data = try? JSONSerialization.data(withJSONObject:body) else { return }
@@ -204,6 +227,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             do { try self?.input?.write(contentsOf:data + Data([10])) }
             catch { DispatchQueue.main.async { self?.fail("Falha na comunicação com o motor: \(error.localizedDescription)") } }
         }
+    }
+    func nativeReply(_ id:Any?,value:[String:Any]=[:],error:String?=nil) {
+        var value=value;value["commit"]=Bundle.main.object(forInfoDictionaryKey:"RisingLandsSourceCommit") as? String
+        var response:[String:Any]=["ok":error==nil,"playback":value]
+        if let id=id{response["id"]=id}else{response["nativeUpdate"]=true}
+        if let error=error{response["error"]=error}
+        if let data=try? JSONSerialization.data(withJSONObject:response),let json=String(data:data,encoding:.utf8){web.evaluateJavaScript("window.receive(\(json));",completionHandler:nil)}
     }
     func webView(_ webView:WKWebView,decidePolicyFor navigationAction:WKNavigationAction,decisionHandler:@escaping(WKNavigationActionPolicy)->Void) {
         guard let url = navigationAction.request.url else { decisionHandler(.cancel); return }

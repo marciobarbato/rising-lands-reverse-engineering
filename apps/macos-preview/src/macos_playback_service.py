@@ -39,18 +39,8 @@ class PlaybackInspectionService:
             return dict(input_journal=self.recorder.journal(),script=self.recorder.export_script(self.playback.root))
         if operation == 'export-journal':
             return dict(input_journal=self.recorder.journal())
-        if operation in ('live-open','live-reset','live-step'):
-            if self.live is None:
-                from macos_live_session import MacOSLiveSession
-                payload = Path(__file__).resolve().parent
-                self.live = MacOSLiveSession(self.playback.root,payload/'librising_engine.dylib',
-                                            payload/'engine-inputs/RISING.EXE',self.renderer,self.playback.fork())
-            if operation in ('live-open','live-reset'): self.live.reset()
-            else:
-                # First load tail, then one pair per UI frame request.
-                count = 1 if self.live.index < 0 else 2
-                for _ in range(count): self.live.apply_frame()
-            return self.live.inspect()
+        if operation in ('live-open','live-reset','live-step','live-play'):
+            raise RuntimeError('NativeLivePathRequired: ABI 1.3 live control belongs to Swift/Metal')
         if self.live is not None:
             self.live.close(); self.live = None
             self.renderer.reset(); self.render_playback.reset()
