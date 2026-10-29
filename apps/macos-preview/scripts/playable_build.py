@@ -2,6 +2,8 @@
 import argparse
 import datetime
 import hashlib
+import io
+import tarfile
 import importlib.util
 import json
 import os
@@ -55,9 +57,20 @@ def main():
     engine_revision=revision
     if engine_source!=(args.source/'motor').resolve():
         if mode!='development':raise ValueError('External engine source is development-only')
-        engine_revision=subprocess.check_output(['git','-C',str(engine_source.parent),'rev-parse','HEAD'],text=True).strip()
-        if engine_revision!='363faa9c252ffb00d62c81db0da2ee5d4a3d7615':raise ValueError('Unapproved development engine revision')
-        if subprocess.check_output(['git','-C',str(engine_source.parent),'status','--porcelain','--','motor'],text=True).strip():raise ValueError('Development engine source is dirty')
+        approved='363faa9c252ffb00d62c81db0da2ee5d4a3d7615'
+        engine_revision=subprocess.check_output(['git','-C',str(engine_source.parent),'rev-parse',approved+'^{commit}'],text=True).strip()
+        archive=subprocess.check_output(['git','-C',str(engine_source.parent),'archive','--format=tar',approved,'motor'])
+        pinned=base/'build/engine-source'
+        with tarfile.open(fileobj=io.BytesIO(archive)) as stream:
+            for member in stream:
+                path=Path(member.name)
+                if path.is_absolute() or '..' in path.parts or not path.parts or path.parts[0]!='motor':raise ValueError('Invalid pinned engine archive')
+                if member.isdir():continue
+                if not member.isfile():raise ValueError('Non-file pinned engine input')
+                content=stream.extractfile(member).read();target=pinned/path
+                if target.exists() and target.read_bytes()!=content:raise ValueError('Pinned engine source modified')
+                target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(content)
+        engine_source=pinned/'motor'
     if '#define RL_ABI_VERSION 0x00010003u' not in (engine_source/'include/rising_engine.h').read_text():
         raise RuntimeError('RustRendererABI1.3NotIntegrated: build requires the reviewed renderer contract')
     # Build into our ignored target; never mutate either engine source tree.
