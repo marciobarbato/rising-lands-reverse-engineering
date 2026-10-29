@@ -214,3 +214,21 @@ including projection transactions, excluding Python corpus parsing/comparison,
 rendering and app pacing. Stage2b full128-phase evidence/timing follows in its
 own delivery. No Mac mini run is needed for the offline Rust corpus; any fresh
 original emulation or long Python re-composition remains coordinator work.
+
+### Committed stage 2a reproduction
+
+Implementation commit `8a46430` was reproduced from a clean committed tree.
+[Full proof](validation/stage2a-frame-proof.json) records3/3 equal phases,
+16,097,242 bytes/phase,0 mismatches and no source changes during execution.
+[Summary](validation/stage2a-summary.json) links exact hashes and counts.
+The debug phase-only rate was4.23frames/s including initial load-tail overhead;
+release128-frame throughput is measured in stage2b.
+
+[Engine gate](validation/stage2a-engine-gates.log):21 Rust tests,39 Python tests,
+75/75 pilot records,923 selected frame-provider records and592 perturbed
+comparisons,0 engine failures/skips; fmt, strict Clippy, C layout and Swift1.1
+frame smoke pass. The requested common checker log is preserved losslessly as
+`validation/stage2a-common.log.gz`:1,574 tests run,64 errors,2 dependency-related
+fixture failures,651 optional skips; Graphics not run for missing linked
+inputs. A prepared coordinator checkout must rerun that gate. No main merge
+or acceptance was recorded.
