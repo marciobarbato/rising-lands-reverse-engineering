@@ -5,6 +5,7 @@ import copy
 import hashlib
 import json
 import lzma
+from pathlib import Path
 import signal
 import struct
 import sys
@@ -111,7 +112,11 @@ def audit(limit=None):
     from delta_estado_missao import _decodificar, aplicar, resumo
     from emulador import unicorn, x86
     from audio_m22_soundness import memory_width_audit
-    raw = lzma.decompress(PART.read_bytes()); part = json.loads(raw)
+    compressed=PART.read_bytes();raw = lzma.decompress(compressed); part = json.loads(raw)
+    manifest=json.loads(PART.with_name('captura-quadros9200-monde01-exibicao-v2.manifest.json').read_bytes())
+    identity=manifest['parts'][9]
+    if (sha(compressed),sha(raw))!=(identity['compressed_sha256'],identity['raw_sha256']):
+        raise ValueError('Accepted raid part identity mismatch')
     state = {n:(int(v['base'],16),_decodificar(v)) for n,v in part['opening_state']['full_state'].items()}
     if resumo(state) != part['opening_state']['summary']: raise ValueError('Opening state identity')
     b = display_bench(); b.iniciar_relogio(); b.executar_inicio(); b.executar_mission_load(60)
@@ -133,11 +138,31 @@ def audit(limit=None):
         def observe(cpu,kind,a,n,value,_):
             ip=cpu.reg_read(x86.UC_X86_REG_EIP)
             for start,end,label in ranges:
-                if a<end and start<a+n: counter[(b.fase,ip,a,n,label)]+=1
+                if a<end and start<a+n:
+                    data=bytes(cpu.mem_read(a,n)).hex() if kind==unicorn.UC_MEM_READ else (value&((1<<(n*8))-1)).to_bytes(n,'little').hex()
+                    counter[(b.fase,ip,a,n,label,data)]+=1
         return observe
     for a,z,_ in ranges:
         b.cpu.hook_add(unicorn.UC_HOOK_MEM_READ,hook(access),begin=a-15,end=z-1)
         b.cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE,hook(stores),begin=a-15,end=z-1)
+    # Caller handle words are game-owned and can gate voice emission. They
+    # must not be silently classified as the library's private tables.
+    pool=struct.unpack('<I',range_bytes(state,0x4e19a0,0x4e19a4))[0]
+    caller_layouts=((pool,800,(0x104,0x10c),'unit_sound_handle'),
+                    (0x49a0c8,1000,(0x100,),'structure_selection_sound_handle'))
+    def caller_hook(counter,base,count,offsets,label):
+        def observe(cpu,kind,a,n,value,_):
+            first=max(0,(a-base)//276);last=min(count-1,(a+n-1-base)//276)
+            for index in range(first,last+1):
+                for off in offsets:
+                    start=base+index*276+off
+                    if a<start+4 and start<a+n:
+                        data=bytes(cpu.mem_read(a,n)).hex() if kind==unicorn.UC_MEM_READ else (value&((1<<(n*8))-1)).to_bytes(n,'little').hex()
+                        counter[(b.fase,cpu.reg_read(x86.UC_X86_REG_EIP),a,n,label,data)]+=1
+        return observe
+    for base,count,offsets,label in caller_layouts:
+        b.cpu.hook_add(unicorn.UC_HOOK_MEM_READ,caller_hook(access,base,count,offsets,label),begin=base-15,end=base+count*276-1)
+        b.cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE,caller_hook(stores,base,count,offsets,label),begin=base-15,end=base+count*276-1)
     b.cpu.ctl_flush_tb()
     for phase in part['phases'][:limit]:
         name=phase['phase']; expected=aplicar(state,phase['state_delta'],name)
@@ -152,7 +177,8 @@ def audit(limit=None):
             b.cpu.mem_write(esp,struct.pack('<I',0x475063))
             b._fase(name.replace('frame','between_frames',1))
         else:
-            b.cpu.mem_write(esp+4,struct.pack('<4I',0x2007fe8,0,0,0x460212))
+            b.cpu.mem_write(esp+8,struct.pack('<4I',0,0,0,0x460212))
+            b.cpu.mem_write(esp+24,struct.pack('<4I',0x3000000,0,0,0))
         b.windows.ticks=[int(x[2]) for x in phase['windows_answers'] if x[0]=='display_clock']
         start=len(b.eventos_fronteira)
         if name.startswith('frame'):
@@ -168,21 +194,29 @@ def audit(limit=None):
                 if got is None or got[0]!=a or len(got[1])!=len(data): diffs.append([block,'layout'])
                 else: diffs.extend([hex(a+i),old,new] for i,(old,new) in enumerate(zip(data,got[1])) if old!=new)
         events=b.eventos_fronteira[start:]
-        equal_events=events==phase['boundaries']
+        # Compare real arguments, plus phase/callsite/order. The accepted
+        # boundary logs also retain four unused stack-residue words for the
+        # argumentless Manage and MCI calls; those are not phase checkpoint
+        # inputs and are not part of this proof's argument equality.
+        def arguments(events):
+            return [dict(phase=e['phase'],routine=e['routine'],caller_return=e['caller_return'],
+                         registers=e['registers'],stack_words=e['stack_words'][:1] if e['routine']=='PlaySnd_PostSound' else [])
+                    for e in events]
+        equal_events=arguments(events)==arguments(phase['boundaries'])
         rows.append(dict(phase=name,summary_equal=resumo(actual)==phase['state_after']['summary'],
                          differences=diffs[:100],difference_count=len(diffs),boundaries_equal=equal_events))
         if not rows[-1]['summary_equal'] or not equal_events: break
         state=expected
         if len(rows)%40==0: print(json.dumps(dict(completed=len(rows),phase=name)),flush=True)
     def encode(counter):
-        return [dict(phase=p,instruction=hex(ip),routine=b.nome(ip),address=hex(a),bytes=n,range=label,count=c)
-                for (p,ip,a,n,label),c in sorted(counter.items())]
+        return [dict(phase=p,instruction=hex(ip),routine=b.nome(ip),address=hex(a),bytes=n,range=label,value_hex=data,count=c)
+                for (p,ip,a,n,label,data),c in sorted(counter.items())]
     return dict(schema='rising-lands/audio-m3-original-raid-accesses/1',original_sha256=ORIGINAL_SHA256,
                 translation_executed=False,source_compressed_sha256=sha(PART.read_bytes()),source_raw_sha256=sha(raw),
                 scope='Independent native phase re-entry, frames 8991..9200, declared accepted display boundaries',
                 phases=rows,complete=len(rows)==len(part['phases']) and all(r['summary_equal'] and r['boundaries_equal'] for r in rows),
                 reads=encode(access),writes=encode(stores),memory_width_audit=memory_width_audit(),
-                code_sha256=b.sha256_codigo())
+                code_sha256=b.sha256_codigo(),script_sha256=sha(Path(__file__).read_bytes()))
 
 
 def main():
