@@ -521,9 +521,10 @@ class Isolamento:
     from the restored entry and executes the routine as usual.  A binding or
     boundary inside an isolated call stops the run.
     """
-    def __init__(self, bancada, rotinas, perturbacoes=None, observador=None):
+    def __init__(self, bancada, rotinas, perturbacoes=None, observador=None, injecoes=None):
         self.b = bancada
         self.observador = observador   # f(routine, case, blocks before the call, result) after each case
+        self.injecoes = injecoes or {}  # routine -> f(isolamento, phase, entry registers) at its pause
         self.entradas = {bancada.sym[n]: n for n in rotinas}
         self.perturbacoes = perturbacoes or {}
         self.registros = []
@@ -571,6 +572,40 @@ class Isolamento:
             if base <= endereco < base+len(dados):
                 return dados[endereco-base]
         return None   # freed or unallocated arena page: no declared block holds it
+
+    def chamar_folha(self, alvo, registradores, esp_pausa, limite=2000000):
+        """Native call of a leaf routine from the paused state: RET lands on the bench trampoline.
+
+        The return slot is placed 0x100 bytes below the paused ESP (free stack);
+        the call may not reach a binding, boundary or trap: it must return.
+        """
+        cpu = self.b.cpu
+        esp = esp_pausa - 0x100
+        cpu.mem_write(esp, struct.pack('<I', RETORNO))
+        for nome, valor in registradores.items():
+            cpu.reg_write(getattr(x86, 'UC_X86_REG_'+nome), valor & 0xffffffff)
+        cpu.reg_write(x86.UC_X86_REG_ESP, esp)
+        cpu.emu_start(alvo, RETORNO, count=limite)
+        regs = {n: cpu.reg_read(getattr(x86, 'UC_X86_REG_'+n))
+                for n in ('EAX', 'EBX', 'ECX', 'EDX', 'ESI', 'EDI', 'EBP', 'ESP', 'EIP')}
+        if regs['EIP'] != RETORNO or regs['ESP'] != esp+4:
+            self.b._interromper('injected_call_did_not_return', target=self.b.nome(alvo), eip=hex(regs['EIP']))
+        return regs
+
+    def verificar_puro(self, blocos, esp_pausa, escritas=()):
+        """Every state block equals the saved one plus ``escritas``; stack below the paused ESP is scratch."""
+        depois = self._salvar()[1]
+        for nome, (base, dados) in blocos.items():
+            atual = depois[nome][1]
+            for endereco, novo in escritas:
+                if base <= endereco < base+len(dados):
+                    o = endereco-base
+                    dados = dados[:o]+bytes(novo)+dados[o+len(novo):]
+            if nome == 'native_stack':
+                corte = esp_pausa-base
+                dados, atual = dados[corte:], atual[corte:]
+            if atual != dados:
+                self.b._interromper('injected_calls_changed_state', block=nome)
 
     def executar(self, regs):
         b, entrada = self.b, regs['EIP']
@@ -623,6 +658,10 @@ class Isolamento:
                     read_before_write=[[hex(a), self._valor(antes, a), b.nome(lidos[a])] for a in leituras]))
                 if self.observador is not None:
                     self.observador(nome, fase, caso, antes, resultados[-1])
+            if nome in self.injecoes:
+                self._restaurar(contexto, blocos)
+                self.injecoes[nome](self, fase, regs)
+                self.verificar_puro(blocos, regs['ESP'])
         finally:
             self._restaurar(contexto, blocos)
             b.fase = fase
