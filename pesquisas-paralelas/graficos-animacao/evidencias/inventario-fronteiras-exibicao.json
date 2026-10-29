@@ -1,0 +1,1108 @@
+{
+ "exe_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "wrappers": {
+  "DDInit": {
+   "address": "0x43f50b",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [
+    {
+     "site": "0x43f5ab",
+     "vtable_offset": "0x50"
+    },
+    {
+     "site": "0x43f5d5",
+     "vtable_offset": "0x54"
+    },
+    {
+     "site": "0x43f628",
+     "vtable_offset": "0x18"
+    },
+    {
+     "site": "0x43f671",
+     "vtable_offset": "0x18"
+    }
+   ],
+   "iat_calls": [],
+   "direct_callees": [
+    "memset",
+    "0x493a30"
+   ]
+  },
+  "DDExit": {
+   "address": "0x43f68c",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [],
+   "iat_calls": [],
+   "direct_callees": []
+  },
+  "DDSetPalette": {
+   "address": "0x43ee31",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [
+    {
+     "site": "0x43eea8",
+     "vtable_offset": "0x18"
+    },
+    {
+     "site": "0x43eec6",
+     "vtable_offset": "0x14"
+    },
+    {
+     "site": "0x43eed8",
+     "vtable_offset": "0x7c"
+    },
+    {
+     "site": "0x43eeea",
+     "vtable_offset": "0x6c"
+    },
+    {
+     "site": "0x43eefc",
+     "vtable_offset": "0x7c"
+    },
+    {
+     "site": "0x43ef0e",
+     "vtable_offset": "0x7c"
+    },
+    {
+     "site": "0x43ef20",
+     "vtable_offset": "0x6c"
+    },
+    {
+     "site": "0x43ef32",
+     "vtable_offset": "0x7c"
+    }
+   ],
+   "iat_calls": [],
+   "direct_callees": []
+  },
+  "DDLockSurface": {
+   "address": "0x43f3b4",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [
+    {
+     "site": "0x43f3d7",
+     "vtable_offset": "0x60"
+    },
+    {
+     "site": "0x43f3e4",
+     "vtable_offset": "0x6c"
+    },
+    {
+     "site": "0x43f40c",
+     "vtable_offset": "0x64"
+    }
+   ],
+   "iat_calls": [],
+   "direct_callees": [
+    "memset"
+   ]
+  },
+  "DDUnlockSurface": {
+   "address": "0x43f445",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [
+    {
+     "site": "0x43f47b",
+     "vtable_offset": "0x60"
+    },
+    {
+     "site": "0x43f488",
+     "vtable_offset": "0x6c"
+    },
+    {
+     "site": "0x43f48f",
+     "vtable_offset": "0x80"
+    }
+   ],
+   "iat_calls": [],
+   "direct_callees": []
+  },
+  "DDLockSurfaceVideo": {
+   "address": "0x43f31c",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [
+    {
+     "site": "0x43f32c",
+     "vtable_offset": "0x60"
+    },
+    {
+     "site": "0x43f339",
+     "vtable_offset": "0x6c"
+    },
+    {
+     "site": "0x43f361",
+     "vtable_offset": "0x64"
+    }
+   ],
+   "iat_calls": [],
+   "direct_callees": [
+    "memset"
+   ]
+  },
+  "DDUnlockSurfaceVideo": {
+   "address": "0x43f381",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [
+    {
+     "site": "0x43f390",
+     "vtable_offset": "0x60"
+    },
+    {
+     "site": "0x43f39d",
+     "vtable_offset": "0x6c"
+    },
+    {
+     "site": "0x43f3a4",
+     "vtable_offset": "0x80"
+    }
+   ],
+   "iat_calls": [],
+   "direct_callees": []
+  },
+  "DDFlipPage": {
+   "address": "0x43f14f",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [
+    {
+     "site": "0x43f244",
+     "vtable_offset": "0x1c"
+    },
+    {
+     "site": "0x43f25c",
+     "vtable_offset": "0x6c"
+    },
+    {
+     "site": "0x43f2e9",
+     "vtable_offset": "0x1c"
+    },
+    {
+     "site": "0x43f301",
+     "vtable_offset": "0x6c"
+    }
+   ],
+   "iat_calls": [],
+   "direct_callees": []
+  },
+  "DDFlipToGDISurface": {
+   "address": "0x43ee21",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [
+    {
+     "site": "0x43ee2b",
+     "vtable_offset": "0x28"
+    }
+   ],
+   "iat_calls": [],
+   "direct_callees": []
+  },
+  "DDRestoreAll": {
+   "address": "0x43ef73",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [
+    {
+     "site": "0x43ef7d",
+     "vtable_offset": "0x6c"
+    },
+    {
+     "site": "0x43ef88",
+     "vtable_offset": "0x6c"
+    }
+   ],
+   "iat_calls": [],
+   "direct_callees": []
+  },
+  "DDGetDC": {
+   "address": "0x43ef40",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [
+    {
+     "site": "0x43ef51",
+     "vtable_offset": "0x44"
+    }
+   ],
+   "iat_calls": [],
+   "direct_callees": []
+  },
+  "DDReleaseDC": {
+   "address": "0x43ef5e",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [
+    {
+     "site": "0x43ef6c",
+     "vtable_offset": "0x68"
+    }
+   ],
+   "iat_calls": [],
+   "direct_callees": []
+  },
+  "DDLockSurfaceTemp": {
+   "address": "0x43f4a5",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [
+    {
+     "site": "0x43f4b5",
+     "vtable_offset": "0x60"
+    },
+    {
+     "site": "0x43f4c2",
+     "vtable_offset": "0x6c"
+    },
+    {
+     "site": "0x43f4ea",
+     "vtable_offset": "0x64"
+    }
+   ],
+   "iat_calls": [],
+   "direct_callees": [
+    "memset"
+   ]
+  },
+  "DDUnlockSurfaceTemp": {
+   "address": "0x43f4fa",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [
+    {
+     "site": "0x43f390",
+     "vtable_offset": "0x60"
+    },
+    {
+     "site": "0x43f39d",
+     "vtable_offset": "0x6c"
+    },
+    {
+     "site": "0x43f3a4",
+     "vtable_offset": "0x80"
+    }
+   ],
+   "iat_calls": [],
+   "direct_callees": []
+  },
+  "DDUtil_TreatError": {
+   "address": "0x43f129",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [],
+   "iat_calls": [
+    {
+     "site": "0x43f145",
+     "slot": "0x5232ac",
+     "dll": "USER32.dll",
+     "symbol": "MessageBeep"
+    }
+   ],
+   "direct_callees": []
+  },
+  "ResetMode": {
+   "address": "0x40f645",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [],
+   "iat_calls": [],
+   "direct_callees": [
+    "DDSetPalette",
+    "DDFlipPage",
+    "DDLockSurfaceVideo",
+    "DDUnlockSurfaceVideo",
+    "DDLockSurface",
+    "DDUnlockSurface",
+    "DDInit",
+    "DDExit",
+    "FilledBox",
+    "InitGameZone",
+    "LoadPie"
+   ]
+  },
+  "AffInit": {
+   "address": "0x40f558",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [],
+   "iat_calls": [],
+   "direct_callees": [
+    "DDInit",
+    "MemAlloc"
+   ]
+  },
+  "AffExit": {
+   "address": "0x40f589",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [],
+   "iat_calls": [],
+   "direct_callees": [
+    "DDExit",
+    "MemFree"
+   ]
+  },
+  "RestoreAll": {
+   "address": "0x474b08",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [],
+   "iat_calls": [],
+   "direct_callees": [
+    "AffTerrain",
+    "DDSetPalette",
+    "DDFlipPage",
+    "DDLockSurface",
+    "DDUnlockSurface",
+    "LoadPie"
+   ]
+  },
+  "SetClipping": {
+   "address": "0x40f519",
+   "ret_operand": [
+    ""
+   ],
+   "com_calls": [],
+   "iat_calls": [],
+   "direct_callees": []
+  }
+ },
+ "alcance_por_raiz": {
+  "ProgInit": {
+   "routines": 205,
+   "iat_sites": {
+    "KERNEL32.dll.GetDriveTypeA@0x5231a8": 1,
+    "KERNEL32.dll.GetPrivateProfileIntA@0x5231ac": 62,
+    "KERNEL32.dll.GetPrivateProfileStringA@0x5231b0": 7,
+    "KERNEL32.dll.GetVolumeInformationA@0x5231bc": 1,
+    "KERNEL32.dll.GlobalAlloc@0x5231c0": 3,
+    "KERNEL32.dll.GlobalCompact@0x5231c4": 1,
+    "KERNEL32.dll.GlobalFree@0x5231c8": 5,
+    "KERNEL32.dll.GlobalHandle@0x5231cc": 10,
+    "KERNEL32.dll.GlobalLock@0x5231d0": 3,
+    "KERNEL32.dll.GlobalMemoryStatus@0x5231d4": 1,
+    "KERNEL32.dll.GlobalUnlock@0x5231d8": 5,
+    "KERNEL32.dll.SetErrorMode@0x5231e4": 2,
+    "USER32.dll.ShowCursor@0x5232d0": 1
+   },
+   "register_offset_indirect_sites": {
+    "0x14": 1,
+    "0x18": 3,
+    "0x1c": 2,
+    "0x44": 9,
+    "0x50": 1,
+    "0x54": 1,
+    "0x60": 2,
+    "0x64": 1,
+    "0x6c": 6,
+    "0x7c": 4,
+    "0x80": 1
+   }
+  },
+  "MenuInit": {
+   "routines": 199,
+   "iat_sites": {
+    "ADVAPI32.dll.GetUserNameA@0x52310c": 1,
+    "KERNEL32.dll.FindClose@0x523194": 1,
+    "KERNEL32.dll.FindFirstFileA@0x523198": 1,
+    "KERNEL32.dll.FindNextFileA@0x52319c": 1,
+    "KERNEL32.dll.GetComputerNameA@0x5231a4": 1,
+    "KERNEL32.dll.GetPrivateProfileStringA@0x5231b0": 2,
+    "KERNEL32.dll.GlobalAlloc@0x5231c0": 5,
+    "KERNEL32.dll.GlobalFree@0x5231c8": 6,
+    "KERNEL32.dll.GlobalHandle@0x5231cc": 12,
+    "KERNEL32.dll.GlobalLock@0x5231d0": 5,
+    "KERNEL32.dll.GlobalUnlock@0x5231d8": 6,
+    "USER32.dll.ShowCursor@0x5232d0": 6
+   },
+   "register_offset_indirect_sites": {
+    "0x10": 1,
+    "0x14": 1,
+    "0x18": 3,
+    "0x1c": 2,
+    "0x24": 1,
+    "0x30": 1,
+    "0x34": 1,
+    "0x44": 9,
+    "0x496cdc": 91,
+    "0x50": 1,
+    "0x54": 1,
+    "0x60": 4,
+    "0x64": 2,
+    "0x6c": 8,
+    "0x7c": 4,
+    "0x80": 2
+   }
+  },
+  "RestoreAll": {
+   "routines": 110,
+   "iat_sites": {
+    "KERNEL32.dll.GlobalAlloc@0x5231c0": 1,
+    "KERNEL32.dll.GlobalFree@0x5231c8": 1,
+    "KERNEL32.dll.GlobalHandle@0x5231cc": 2,
+    "KERNEL32.dll.GlobalLock@0x5231d0": 1,
+    "KERNEL32.dll.GlobalUnlock@0x5231d8": 1
+   },
+   "register_offset_indirect_sites": {
+    "0x14": 1,
+    "0x18": 1,
+    "0x1c": 2,
+    "0x60": 2,
+    "0x64": 1,
+    "0x6c": 6,
+    "0x7c": 4,
+    "0x80": 1
+   }
+  },
+  "CalculGame": {
+   "routines": 980,
+   "iat_sites": {
+    "ADVAPI32.dll.GetUserNameA@0x52310c": 1,
+    "KERNEL32.dll.FindClose@0x523194": 1,
+    "KERNEL32.dll.FindFirstFileA@0x523198": 1,
+    "KERNEL32.dll.FindNextFileA@0x52319c": 1,
+    "KERNEL32.dll.GetComputerNameA@0x5231a4": 1,
+    "KERNEL32.dll.GetPrivateProfileIntA@0x5231ac": 8,
+    "KERNEL32.dll.GetPrivateProfileStringA@0x5231b0": 3,
+    "KERNEL32.dll.GlobalAlloc@0x5231c0": 8,
+    "KERNEL32.dll.GlobalFree@0x5231c8": 9,
+    "KERNEL32.dll.GlobalHandle@0x5231cc": 16,
+    "KERNEL32.dll.GlobalLock@0x5231d0": 7,
+    "KERNEL32.dll.GlobalUnlock@0x5231d8": 8,
+    "KERNEL32.dll.OpenFile@0x5231e0": 1,
+    "KERNEL32.dll._hread@0x5231e8": 1,
+    "KERNEL32.dll._lclose@0x5231f0": 2,
+    "KERNEL32.dll._lopen@0x5231fc": 1,
+    "USER32.dll.DispatchMessageA@0x523284": 1,
+    "USER32.dll.GetAsyncKeyState@0x523290": 89,
+    "USER32.dll.MessageBoxA@0x5232b0": 4,
+    "USER32.dll.PeekMessageA@0x5232b8": 1,
+    "USER32.dll.PostQuitMessage@0x5232bc": 2,
+    "USER32.dll.SetCursorPos@0x5232c8": 1,
+    "USER32.dll.SetFocus@0x5232cc": 3,
+    "USER32.dll.ShowCursor@0x5232d0": 12,
+    "USER32.dll.ShowWindow@0x5232d4": 4,
+    "USER32.dll.TranslateMessage@0x5232d8": 1
+   },
+   "register_offset_indirect_sites": {
+    "0x10": 1,
+    "0x14": 1,
+    "0x18": 4,
+    "0x1c": 2,
+    "0x24": 4,
+    "0x28": 1,
+    "0x30": 2,
+    "0x34": 1,
+    "0x38": 1,
+    "0x44": 9,
+    "0x48": 1,
+    "0x496cdc": 91,
+    "0x50": 1,
+    "0x54": 4,
+    "0x60": 4,
+    "0x64": 3,
+    "0x68": 1,
+    "0x6c": 8,
+    "0x7c": 4,
+    "0x80": 2,
+    "0xc": 1
+   }
+  },
+  "AffGame": {
+   "routines": 379,
+   "iat_sites": {
+    "ADVAPI32.dll.GetUserNameA@0x52310c": 1,
+    "KERNEL32.dll.FindClose@0x523194": 1,
+    "KERNEL32.dll.FindFirstFileA@0x523198": 1,
+    "KERNEL32.dll.FindNextFileA@0x52319c": 1,
+    "KERNEL32.dll.GetComputerNameA@0x5231a4": 1,
+    "KERNEL32.dll.GetPrivateProfileStringA@0x5231b0": 2,
+    "KERNEL32.dll.GetTickCount@0x5231b8": 1,
+    "KERNEL32.dll.GlobalAlloc@0x5231c0": 6,
+    "KERNEL32.dll.GlobalFree@0x5231c8": 8,
+    "KERNEL32.dll.GlobalHandle@0x5231cc": 16,
+    "KERNEL32.dll.GlobalLock@0x5231d0": 6,
+    "KERNEL32.dll.GlobalUnlock@0x5231d8": 8,
+    "USER32.dll.ShowCursor@0x5232d0": 24
+   },
+   "register_offset_indirect_sites": {
+    "0x10": 1,
+    "0x14": 1,
+    "0x18": 3,
+    "0x1c": 2,
+    "0x24": 4,
+    "0x30": 1,
+    "0x34": 1,
+    "0x44": 9,
+    "0x459198": 1,
+    "0x4591b0": 1,
+    "0x48": 1,
+    "0x496cdc": 91,
+    "0x50": 1,
+    "0x54": 1,
+    "0x60": 4,
+    "0x64": 2,
+    "0x6c": 8,
+    "0x7c": 4,
+    "0x80": 2
+   }
+  },
+  "ResetMode": {
+   "routines": 113,
+   "iat_sites": {
+    "KERNEL32.dll.GlobalAlloc@0x5231c0": 1,
+    "KERNEL32.dll.GlobalFree@0x5231c8": 1,
+    "KERNEL32.dll.GlobalHandle@0x5231cc": 2,
+    "KERNEL32.dll.GlobalLock@0x5231d0": 1,
+    "KERNEL32.dll.GlobalUnlock@0x5231d8": 1
+   },
+   "register_offset_indirect_sites": {
+    "0x14": 1,
+    "0x18": 3,
+    "0x1c": 2,
+    "0x50": 1,
+    "0x54": 1,
+    "0x60": 4,
+    "0x64": 2,
+    "0x6c": 8,
+    "0x7c": 4,
+    "0x80": 2
+   }
+  }
+ },
+ "arquivos": [
+  {
+   "path": "\\Graphics\\Blocs.cmp",
+   "origin": "LoadSTRATBank name table 0x495bc8",
+   "media": {
+    "file": "INSTALHD/Graphics/Blocs.cmp",
+    "bytes": 1426660,
+    "sha256": "318069f1728621d98a4409b5a8809ea410d7b4adc94d6ba421d69b14c98a99db"
+   }
+  },
+  {
+   "path": "\\Graphics\\Troops.cmp",
+   "origin": "LoadSTRATBank name table 0x495bc8",
+   "media": {
+    "file": "INSTALHD/Graphics/Troops.cmp",
+    "bytes": 3171280,
+    "sha256": "b9012e0bc6119e1f4745ff6e25bf8ba912423e9c364513118a31b5355c87beac"
+   }
+  },
+  {
+   "path": "\\Graphics\\Vehicule.cmp",
+   "origin": "LoadSTRATBank name table 0x495bc8",
+   "media": {
+    "file": "INSTALHD/Graphics/Vehicule.cmp",
+    "bytes": 2027609,
+    "sha256": "f7ee4ce0ec957af609f0ae9ab845ac1bc08c2b598c749b9c3b78ec37f45324d8"
+   }
+  },
+  {
+   "path": "\\Graphics\\Creature.cmp",
+   "origin": "LoadSTRATBank name table 0x495bc8",
+   "media": {
+    "file": "INSTALHD/Graphics/Creature.cmp",
+    "bytes": 2585477,
+    "sha256": "4a1db7d2a92f421970d35f8a6402eb6489969257c54d07b5590186f011327e1d"
+   }
+  },
+  {
+   "path": "\\Graphics\\Building.cmp",
+   "origin": "LoadSTRATBank name table 0x495bc8",
+   "media": {
+    "file": "INSTALHD/Graphics/Building.cmp",
+    "bytes": 1272760,
+    "sha256": "af4f94ea996a65d36592bb6cefc407dc628b3d488c9c335b8f6015bbfcb6a3ae"
+   }
+  },
+  {
+   "path": "\\Graphics\\Others.cmp",
+   "origin": "LoadSTRATBank name table 0x495bc8",
+   "media": {
+    "file": "INSTALHD/Graphics/Others.cmp",
+    "bytes": 2927906,
+    "sha256": "0282fa4bc5241fb6905a0daa0c00f43e63fe63c0f00ff6beda01d3602141fd1d"
+   }
+  },
+  {
+   "path": "\\Graphics\\Invente.cmp",
+   "origin": "string 0x494a76",
+   "media": {
+    "file": "INSTALHD/Graphics/Invente.cmp",
+    "bytes": 637625,
+    "sha256": "a1c2e7155bec34c52d249d4c3aec7e3ce45759d806f880168dd8d8b4b05101aa"
+   }
+  },
+  {
+   "path": "\\Graphics\\menu.cmp",
+   "origin": "string 0x494ac5",
+   "media": {
+    "file": "INSTALHD/Graphics/menu.cmp",
+    "bytes": 1086250,
+    "sha256": "9a0a407e8eb2be4fc24f1f7ca57f1b0aad67e7e49e0ca09b667e2d0ea4d7e866"
+   }
+  },
+  {
+   "path": "\\titre.pie",
+   "origin": "string 0x494ad8",
+   "media": {
+    "file": "INSTALHD/titre.pie",
+    "bytes": 391263,
+    "sha256": "1afd5fc061a3da09e7731c776b3b86463bedcfcf546ea39114dbfb5eb2807ddc"
+   }
+  },
+  {
+   "path": "\\platgame.pie",
+   "origin": "string 0x494a4d",
+   "media": {
+    "file": "INSTALHD/platgame.pie",
+    "bytes": 50177,
+    "sha256": "da6a07c93a6a027cd81ce50e4dfc756848223bd951f4a60e70bab1e9bc3c20a7"
+   }
+  },
+  {
+   "path": "\\pagemis2.pie",
+   "origin": "string 0x494a5b",
+   "media": {
+    "file": "INSTALHD/pagemis2.pie",
+    "bytes": 380847,
+    "sha256": "e36bcf82b58d84a6be16f7fb4ff70c64449594ca5aa71a04579f32ca8de0ce88"
+   }
+  },
+  {
+   "path": "\\pagemis.pie",
+   "origin": "string 0x494a69",
+   "media": {
+    "file": "INSTALHD/pagemis.pie",
+    "bytes": 378945,
+    "sha256": "1fda4342af295ed41d91e4f95d29aa9619ae5bb7ced39e75d14c3efad1b8693c"
+   }
+  },
+  {
+   "path": "\\credits.pie",
+   "origin": "string 0x494a8e",
+   "media": {
+    "file": "INSTALHD/credits.pie",
+    "bytes": 439995,
+    "sha256": "f94c1ae033eeb6fd5a6e831b44d3d11eccf3d74eb3d202ebe1292e1d0b60b494"
+   }
+  },
+  {
+   "path": "\\pageres.pie",
+   "origin": "string 0x494a9b",
+   "media": {
+    "file": "INSTALHD/pageres.pie",
+    "bytes": 425571,
+    "sha256": "91488bef534d01826d90c6131f596994413e92083d23f3bc282daf5264a70925"
+   }
+  },
+  {
+   "path": "\\ecranfin.lzs",
+   "origin": "string 0x494ab7",
+   "media": {
+    "file": "INSTALHD/ecranfin.lzs",
+    "bytes": 343821,
+    "sha256": "278e7125cc04546c1eb989b424fa9623811c4a3765a15fe16975450f5b738a4f"
+   }
+  },
+  {
+   "path": "\\platgame.pie",
+   "origin": "string 0x494d44",
+   "media": {
+    "file": "INSTALHD/platgame.pie",
+    "bytes": 50177,
+    "sha256": "da6a07c93a6a027cd81ce50e4dfc756848223bd951f4a60e70bab1e9bc3c20a7"
+   }
+  },
+  {
+   "path": "\\platgame.pie",
+   "origin": "string 0x494d88",
+   "media": {
+    "file": "INSTALHD/platgame.pie",
+    "bytes": 50177,
+    "sha256": "da6a07c93a6a027cd81ce50e4dfc756848223bd951f4a60e70bab1e9bc3c20a7"
+   }
+  },
+  {
+   "path": "\\charge.lzs",
+   "origin": "string 0x494d96",
+   "media": {
+    "file": "INSTALHD/charge.lzs",
+    "bytes": 376866,
+    "sha256": "65ab44abf472e94bbc65737d8115f40ce96b3df44e10e30f0801ebbe60526546"
+   }
+  },
+  {
+   "path": "platgame.pie",
+   "origin": "string 0x4941b4",
+   "media": {
+    "file": "INSTALHD/platgame.pie",
+    "bytes": 50177,
+    "sha256": "da6a07c93a6a027cd81ce50e4dfc756848223bd951f4a60e70bab1e9bc3c20a7"
+   }
+  },
+  {
+   "path": "\\RISING.INI",
+   "origin": "string 0x494d52",
+   "media": {
+    "file": "INSTALHD/RISING.INI",
+    "bytes": 21759,
+    "sha256": "e4762aae51d8aa7bd56280af43a7408a19571ab6dbfcd170fb59cffbcdc8338b"
+   }
+  },
+  {
+   "path": "\\Ia.INI",
+   "origin": "string 0x494d67",
+   "media": null
+  },
+  {
+   "path": "\\Tableau.col",
+   "origin": "string 0x494d6f",
+   "media": {
+    "file": "INSTALHD/Tableau.col",
+    "bytes": 702,
+    "sha256": "3bd531d615ee98f51cfdbdad3275b848cf42cca88b6ab5762376dcbbbcdf3ae2"
+   }
+  },
+  {
+   "path": "\\EVENTS.INI",
+   "origin": "string 0x494d7c",
+   "media": {
+    "file": "INSTALHD/EVENTS.INI",
+    "bytes": 7066,
+    "sha256": "d31f2859a2445e0f9a0ba299369c4b556eee1ee07b7b8265b9d49b60a1b8496a"
+   }
+  },
+  {
+   "path": "\\Couleur.map",
+   "origin": "string 0x494daa",
+   "media": {
+    "file": "INSTALHD/Couleur.map",
+    "bytes": 609,
+    "sha256": "04f4c104be29f6a44d53b1fa0410604efb20fa0d4a5abc20c7e0da917aea9c5c"
+   }
+  },
+  {
+   "path": "textes.txt",
+   "origin": "string 0x494df8",
+   "media": {
+    "file": "INSTALHD/textes.txt",
+    "bytes": 1899,
+    "sha256": "3735d7184401d7a17bf713076ec73e02d2b276a1b01ed89a9a7d4dee0deb1d7d"
+   }
+  }
+ ],
+ "chamadas_de_banco": {
+  "ProgInit": [
+   [
+    "0x40f581",
+    "AffInit",
+    "DDInit"
+   ],
+   [
+    "0x474daa",
+    "ProgInit",
+    "PaletteAlloc"
+   ],
+   [
+    "0x474e01",
+    "ProgInit",
+    "AffInit"
+   ],
+   [
+    "0x474e82",
+    "ProgInit",
+    "LoadPie"
+   ],
+   [
+    "0x474e9b",
+    "ProgInit",
+    "LoadSTRATBank"
+   ],
+   [
+    "0x474eaa",
+    "ProgInit",
+    "SetBank"
+   ],
+   [
+    "0x474eaf",
+    "ProgInit",
+    "CacheAlloc"
+   ],
+   [
+    "0x479413",
+    "InitTextLangue",
+    "LoadFonteExterieur"
+   ]
+  ],
+  "MenuInit": [
+   [
+    "0x40f660",
+    "ResetMode",
+    "DDInit"
+   ],
+   [
+    "0x40f6f2",
+    "ResetMode",
+    "LoadPie"
+   ],
+   [
+    "0x4683ae",
+    "MenuInit",
+    "DeleteBank"
+   ],
+   [
+    "0x4683c7",
+    "MenuInit",
+    "DeleteBank"
+   ],
+   [
+    "0x468476",
+    "MenuInit",
+    "LoadPie"
+   ],
+   [
+    "0x468579",
+    "MenuInit",
+    "LoadPie"
+   ],
+   [
+    "0x46859a",
+    "MenuInit",
+    "DeleteBank"
+   ],
+   [
+    "0x4685fb",
+    "MenuInit",
+    "LoadBank"
+   ],
+   [
+    "0x46883d",
+    "MenuInit",
+    "DeleteBank"
+   ],
+   [
+    "0x46889a",
+    "MenuInit",
+    "LoadPie"
+   ],
+   [
+    "0x4688ce",
+    "MenuInit",
+    "DeleteBank"
+   ],
+   [
+    "0x46892b",
+    "MenuInit",
+    "LoadPie"
+   ],
+   [
+    "0x468b26",
+    "MenuInit",
+    "LoadPie"
+   ],
+   [
+    "0x468b74",
+    "MenuInit",
+    "DeleteBank"
+   ],
+   [
+    "0x468bd4",
+    "MenuInit",
+    "LoadBank"
+   ],
+   [
+    "0x468c56",
+    "MenuInit",
+    "LoadPie"
+   ]
+  ],
+  "RestoreAll": [
+   [
+    "0x474b6a",
+    "RestoreAll",
+    "LoadPie"
+   ],
+   [
+    "0x474bb1",
+    "RestoreAll",
+    "LoadPie"
+   ]
+  ],
+  "ResetMode": [
+   [
+    "0x40f660",
+    "ResetMode",
+    "DDInit"
+   ],
+   [
+    "0x40f6f2",
+    "ResetMode",
+    "LoadPie"
+   ]
+  ]
+ },
+ "restoreall": {
+  "rotinas": 110,
+  "chamadas_na_ordem": [
+   [
+    "0x474b5c",
+    "DDLockSurface"
+   ],
+   [
+    "0x474b6a",
+    "LoadPie"
+   ],
+   [
+    "0x474b80",
+    "AffTerrain"
+   ],
+   [
+    "0x474b8a",
+    "DDUnlockSurface"
+   ],
+   [
+    "0x474b94",
+    "DDFlipPage"
+   ],
+   [
+    "0x474b9e",
+    "DDSetPalette"
+   ],
+   [
+    "0x474ba3",
+    "DDLockSurface"
+   ],
+   [
+    "0x474bb1",
+    "LoadPie"
+   ],
+   [
+    "0x474bc7",
+    "AffTerrain"
+   ],
+   [
+    "0x474bd1",
+    "DDUnlockSurface"
+   ],
+   [
+    "0x474bdb",
+    "DDFlipPage"
+   ]
+  ],
+  "stores_dgroup_absolutos": {
+   "0x499080": [
+    "getch"
+   ],
+   "0x4990bc": [
+    "0x490447",
+    "0x491b8f"
+   ],
+   "0x4990c0": [
+    "0x491b31",
+    "malloc"
+   ],
+   "0x4990c4": [
+    "0x491b31",
+    "free",
+    "malloc"
+   ],
+   "0x49936c": [
+    "__NTGetFakeHandle"
+   ],
+   "0x499480": [
+    "0x491c71"
+   ],
+   "0x499484": [
+    "0x491c71"
+   ],
+   "0x499488": [
+    "0x491e18"
+   ],
+   "0x49a04e": [
+    "GetNumBob"
+   ],
+   "0x4dfb44": [
+    "DDFlipPage"
+   ],
+   "0x4e17a0": [
+    "DDLockSurface"
+   ],
+   "0x4e17a4": [
+    "DDLockSurface",
+    "DDUnlockSurface"
+   ],
+   "0x4e17a8": [
+    "DDLockSurface",
+    "DDUnlockSurface"
+   ],
+   "0x4e1d18": [
+    "DDFlipPage"
+   ],
+   "0x4e1d1c": [
+    "FileClose",
+    "FileOpen"
+   ],
+   "0x4e2f3c": [
+    "MemAlloc"
+   ],
+   "0x508f70": [
+    "RestoreAll"
+   ],
+   "0x52223c": [
+    "0x491b31",
+    "free"
+   ],
+   "0x522248": [
+    "__allocfp",
+    "__freefp"
+   ],
+   "0x52224c": [
+    "__allocfp"
+   ],
+   "0x522254": [
+    "__NTAtMaxFiles"
+   ],
+   "0x52225c": [
+    "free",
+    "malloc"
+   ],
+   "0x5223c8": [
+    "0x491e18"
+   ],
+   "0x5223cc": [
+    "0x491e18"
+   ],
+   "0x5223d0": [
+    "0x491e18"
+   ]
+  },
+  "indiretos_nao_resolvidos": 100
+ }
+}
