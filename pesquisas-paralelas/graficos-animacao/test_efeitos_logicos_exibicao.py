@@ -70,7 +70,7 @@ class DominioTest(unittest.TestCase):
 
 
 CHAMADAS = Path(__file__).resolve().parent/'evidencias/chamadas-menuinit-exibicao.json'
-ISOLADO = [Path(__file__).resolve().parent/'evidencias'/n for n in ('dominio-exibicao-isolado.json', 'dominio-exibicao-visivel.json')]
+ISOLADO = [Path(__file__).resolve().parent/'evidencias'/n for n in ('dominio-exibicao-isolado.json', 'dominio-exibicao-visivel.json', 'dominio-exibicao-origens-m22.json')]
 
 
 class Plana:
@@ -158,6 +158,11 @@ class DominioIsoladoTest(unittest.TestCase):
                         p = c['case'].split('_')
                         vistos.add((int(p[1]), int(p[2])))
         self.assertEqual(vistos | {(4, 6)}, set(e.ORIGENS_PROVADAS))
+
+    def test_m22_origins_accepted(self):
+        for o in ((3, 5), (2, 4), (1, 3), (0, 2), (0, 1)):
+            for fn in (e.desenhar_jogo, e.restaurar_tudo):
+                self.assertEqual(fn(estado(origem=o)).escritas, ())
 
     def test_origin_provider_domain(self):
         self.assertEqual(e.desenhar_jogo(estado(origem=(39, 47))).escritas, ())
