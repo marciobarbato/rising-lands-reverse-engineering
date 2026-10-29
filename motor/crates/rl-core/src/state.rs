@@ -202,8 +202,6 @@ impl GameState {
 }
 #[derive(Debug, Clone)]
 pub struct World {
-    pub generation: u64,
-    pub frame_phase: u32,
     pub state: GameState,
     projection: Projection,
     pub clock: TickClock,
@@ -217,8 +215,6 @@ impl World {
     pub fn load(memory: MemoriaJogo, clock: TickClock) -> Result<Self> {
         let (state, projection) = GameState::load(memory)?;
         Ok(Self {
-            generation: 0,
-            frame_phase: 0,
             state,
             projection,
             clock,
@@ -230,9 +226,7 @@ impl World {
         self.state.project(&self.projection)
     }
     pub fn replace_memory(&mut self, memory: MemoriaJogo) -> Result<()> {
-        let generation = self.generation.wrapping_add(1);
         *self = Self::load(memory, self.clock.clone())?;
-        self.generation = generation;
         Ok(())
     }
     /// Each successful CalculGame body advances one deterministic tick. Display phases do not.
@@ -244,7 +238,6 @@ impl World {
         let mut memory = self.project()?;
         let (output, events, freed) = crate::frame::phase(&mut memory, phase, input)?;
         self.replace_memory(memory)?;
-        self.frame_phase = phase;
         self.frame_events = events;
         self.frame_freed = freed;
         if phase == 1 || phase == 3 {
