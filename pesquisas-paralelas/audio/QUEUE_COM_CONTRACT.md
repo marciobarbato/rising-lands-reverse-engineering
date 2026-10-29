@@ -87,3 +87,19 @@ non-null output proceeds for either HRESULT and stops at undeclared Lock slot
 +0x2c (original caller0x48c097), after a second declared seek. No status or
 creation response is inferred from HRESULT alone. v8 has234 native calls in228
 scenarios, with the original missing-Create stop plus two missing-Lock stops.
+
+PCM extension (v9, original-only): after a nonnull creation output, Lock has
+8 stdcall arguments (this, offset, size, pointer1-out, bytes1-out,
+pointer2-out, bytes2-out, flags). These fixtures explicitly supply offset0,
+size64, no wrapped region, flags0, and writes(pointer=0x7004000, bytes=64).
+The _hread import at original IAT0x5231e8 supplies exactly the declared bytes
+(64,32 or0 bytes), without inventing a sample corpus. Unlock receives
+(this,0x7004000,64,0,0). Lock/Unlock HRESULT errors do not suppress those
+original effects. The subsequent status/position/volume/Play calls have ordered
+explicit answers; position, volume and Play errors return0 but the request is
+still moved to the playing record. A status already-playing answer bypasses
+position/volume/Play. These are declared external observations, not a real
+initialized DirectSound device. v9 has244 original calls in238 scenarios and
+3 intentional missing-Create/Lock stops. The failed first v9 setup used a wrong
+IAT and is retained in validacao/queue-create-run-history.json; the verified
+intact instruction and existing Stage-1 mapping determine the correction.

@@ -158,6 +158,25 @@ def scenarios():
             yield dict(name=f'manage-create-{created:x}-{hresult:x}',operation='manage',regs={},arguments=[],memory=m.snapshot(),com=plan)
 
 
+    for variant in ('pcm-good','create-error-nonnull','lock-error','unlock-error','short-read','empty-read','already-playing','position-error','volume-error','play-error'):
+        m=fixture_memory(original);m.w32(INDEX,20);record(m,20)
+        error=0x80004005
+        data=bytes((i*7+3)&255 for i in range({'short-read':32,'empty-read':0}.get(variant,64)))
+        plan=[response('_llseek',pointer=0x1234,args=(0,0)),
+              response('CreateSoundBuffer',pointer=COM_DEVICE,args=(descriptor,wave,0),value=COM_BUFFER,hresult=error if variant=='create-error-nonnull' else 0),
+              response('_llseek',pointer=0x1234,args=(0,0)),
+              response('Lock',args=(0,64,0),value=dict(pointer=EXTERNAL+0x4000,size=64),hresult=error if variant=='lock-error' else 0),
+              response('_hread',pointer=0x1234,args=(EXTERNAL+0x4000,64),value=data.hex(),hresult=len(data)),
+              response('Unlock',args=(EXTERNAL+0x4000,64,0,0),hresult=error if variant=='unlock-error' else 0),
+              response('GetStatus',value=1 if variant=='already-playing' else 0)]
+        if variant!='already-playing':
+            plan.append(response('SetPosition',args=(0,),hresult=error if variant=='position-error' else 0))
+            if variant!='position-error':
+                plan.append(response('SetVolume',args=(m.u32(GLOBAL_BASE+16*4),),hresult=error if variant=='volume-error' else 0))
+                if variant!='volume-error':plan.append(response('Play',args=(0,0,0),hresult=error if variant=='play-error' else 0))
+        yield dict(name='manage-'+variant,operation='manage',regs={},arguments=[],memory=m.snapshot(),com=plan)
+
+
 class QueueNativeBench(BancadaX86):
     def __init__(self,fixture):
         super().__init__();self.fixture=fixture;self.plan=ScriptedCOM(fixture['com']);self.raw_com=[]
@@ -195,6 +214,29 @@ class QueueNativeBench(BancadaX86):
                 call.escrever(output,struct.pack('<I',answer['value']))
                 return answer['hresult']
             self.declarar_vinculo(address,'AudioCOM.CreateSoundBuffer',(4,8,12,16),create,desempilhar=16,natureza='backend')
+        if any(answer['method']=='Lock' for answer in fixture['com']):
+            address=COM_BASE+0x402c
+            self.cpu.mem_write(COM_BASE+0x202c,struct.pack('<I',address))
+            def lock(call):
+                this,offset,size,pointer1,bytes1,pointer2,bytes2,flags=call.argumentos
+                if pointer2 or bytes2:raise ParadaVinculoDeclarado('Wrapped queue Lock not declared')
+                answer=self.plan.answer('Lock',this,[offset,size,flags])
+                self.raw_com.append(dict(method='Lock',args=list(call.argumentos),answer=answer))
+                call.escrever(pointer1,struct.pack('<I',answer['value']['pointer']))
+                call.escrever(bytes1,struct.pack('<I',answer['value']['size']))
+                return answer['hresult']
+            self.declarar_vinculo(address,'AudioCOM.Lock',tuple(range(4,33,4)),lock,desempilhar=32,natureza='backend')
+            address=COM_BASE+0x404c
+            self.cpu.mem_write(COM_BASE+0x204c,struct.pack('<I',address))
+            def unlock(call):
+                args=call.argumentos;answer=self.plan.answer('Unlock',args[0],list(args[1:]))
+                self.raw_com.append(dict(method='Unlock',args=list(args),answer=answer));return answer['hresult']
+            self.declarar_vinculo(address,'AudioCOM.Unlock',(4,8,12,16,20),unlock,desempilhar=20,natureza='backend')
+            def read(call):
+                handle,destination,size=call.argumentos;answer=self.plan.answer('_hread',handle,[destination,size])
+                self.raw_com.append(dict(method='_hread',args=list(call.argumentos),answer=answer))
+                call.escrever(destination,bytes.fromhex(answer['value']));return answer['hresult']
+            self.declarar_importacao(0x5231e8,'KERNEL32._hread',3,read)
         def seek(call):
             args=call.argumentos
             answer=self.plan.answer('_llseek',args[0],list(args[1:]))
