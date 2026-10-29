@@ -783,3 +783,28 @@ The memory contract now has two calls. `m.ler(endereco, tamanho)` returns the li
 `BatimentGetCase` stays `construcoes_habitaveis.celula_central_estrutura`, and `BonusGetValEngin` stays `BonusUnidades.consultar`. Missions' `TestFinDeMission` can use these two and `numero_invencoes`.
 
 The exact-frame evidence is [captura-quadro1-economia-original-v2.json](../pesquisas-paralelas/economia/evidencias/captura-quadro1-economia-original-v2.json). It holds 102 native calls isolated from the exact entry states of Missions' committed first-frame path, 57 in frame 0 and 45 in frame 1, including the state-7 and type-2 fragments. The resumed run reproduces every committed phase state, the entry trace, the boundaries and the code hash. Python reproduces every call's changed bytes and result register. For the memory-only routines, its bytes read before written equal the native set exactly. v1 lacks the entry value of bytes written without change and is kept. RechercheGetNbInvention has its own M1-state capture (1,024 entries).
+
+## Live bonus table and frame providers (M2.1 round 3)
+
+**Live unit-bonus table.** `BonusUnidades.vivo(memoria, *, tipos_unidades)` binds the live table at `0x4dfba0` (1,872 bytes) and the runtime unit types at `0x4965ae` (1,300 bytes) **by identity**. It takes writable `bytearray`s or writable 1-D contiguous byte `memoryview`s. `self.memoria` and `self.tipos_unidades` are the given objects, so every `consultar` reads live memory and every `definir`/`reiniciar` writes it.
+- `BonusUnidades.da_memoria(m)` does the same through `m.vista(...)` at the original addresses.
+- Rejected before binding: a read-only or immutable buffer, a wrong size, a strided or non-byte view, a list, or the same object for both ranges.
+- **The constructor still copies.** It is the legacy/fixture form only: the native benches and other fronts' fixtures pass `bytes`.
+- Core consumes the live form through `integracao.providers.load_economy_bonus()`, the loader the coordinator is publishing.
+
+**Frame providers.** [`provedores_economia_quadro.py`](../pesquisas-paralelas/economia/provedores_economia_quadro.py) has a unique module name. `provedores_economia_quadro(memoria, *, bonus, producao, recursos=None, calcular_tropa=None)` returns `{original name: provider(sitio=..., **keywords)}` in ai-runtime's convention. `memoria` may have `ler`/`vista` (`MapaMemoriaM1`) or only `u8/u16/u32` (`MemoriaDeclarada`); the latter is adapted byte by byte with no copy. `REGIOES_ECONOMIA_QUADRO` lists the fixed ranges the providers touch, for a region-checked memory; the unit pool `[0x4e19a0]` is the only dynamic one.
+
+| Provider | Keywords | Returns |
+|---|---|---|
+| `RechercheCalcul`, `PlayerInitAllianceCompteur`, `SetUpdateChamp`, `UpdateChamp` (only with `recursos`), `CalculMatiere`, `PlayerAttaqueCalculSympa`, `ResetTableauHangar` | — | None |
+| `CalculCompteurMarche` / `CalculCompteurProposition` | `jogador` / `jogador`, `edx` | None |
+| `MAJSympathie` | `jogador`, `outro`, `evento` (EAX, EDX, EBX) | None |
+| `BatimentNextEtape:tipo1_2_13_16` (branch `0x426918`) | `estrutura` | producer result |
+| `BagContientTroupe` | `bolsa` (EAX = structure Bag pointer) | AL |
+| `CalculTroupe` | `estrutura` | producer result |
+| `BatimentGetCase` | `estrutura` | AX cell |
+| `BonusGetValEngin` | `jogador`, `tipo`, `seletor`, `ecx` (AL, BL, DL, incoming ECX) | EAX |
+| `EnginNextEtape:estado7` (body `0x456966`) | `unidade` (DI) | None |
+| `RechercheGetNbInvention` | `jogador` | AL |
+
+Without `calcular_tropa` (the world-joined producer), `CalculTroupe` raises `DependenciaQuadro` before any store for an active structure. Frames 0/1 never reach that case. Core's `provedores_core` also offers `BatimentGetCase`. Both translate the same routine, so the composer picks one.
