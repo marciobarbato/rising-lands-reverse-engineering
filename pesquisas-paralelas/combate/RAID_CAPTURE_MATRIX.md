@@ -91,3 +91,13 @@ main `23dfd6e` was merged into the feature branch (merge `c671be0`). V4 executes
 PostSound natively, with no binding/skip; its unopened-bank path returns zero
 before the original VoixOffAsk entry stop. The live consumer can now use the
 owner's explicit `unopened-display` provider on the same inherited bytes.
+
+## Removal after the exact original lethal consumer (v5)
+
+[evidence](evidencias/captura-remocao-pos-dano-raid-original-v5.json) restores the
+exact v2 `camera1-lethal-hp1-16` output at each checkpoint: life word zero,
+state 4, and all original level/group/task/collision effects retained. Input
+setup and the v2 delta are both checked against their complete state hashes.
+Native RetireEngin then returns in both cases, with zero faults, limits or
+out-of-checkpoint stores. This closes the original-only kill-to-removal
+fixture; its Core-owned translation remains an explicit provider dependency.
