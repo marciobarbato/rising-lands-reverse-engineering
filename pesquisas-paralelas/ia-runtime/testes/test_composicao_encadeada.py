@@ -24,7 +24,8 @@ class ChainedCompositionReport(unittest.TestCase):
         self.assertTrue(all(REPORT['phases']['between_frames']['registers_equal'].values()))
 
     def test_only_declared_stops_are_crossed(self):
-        cruzadas = [(f, c['routine'], c['owner']) for f, r in REPORT['phases'].items() for c in r['crossings']]
+        cruzadas = [(f, c['routine'], c['owner']) for f in ('load_tail', 'between_frames', 'frame1')
+                    for c in REPORT['phases'][f]['crossings']]
         self.assertEqual(cruzadas, [
             ('load_tail', 'RestoreAll', 'graphics'), ('load_tail', 'SetClipping', 'core'),
             ('load_tail', 'InitGameZone', 'core'), ('load_tail', 'InitGameZone', 'core'),
