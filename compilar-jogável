@@ -13,19 +13,31 @@ import tarfile
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Compila RisingLands-ptbr.app a partir de origin/main.')
-    parser.add_argument('--offline', action='store_true', help='Usa o origin/main já buscado, sem rede.')
-    parser.add_argument('--development-ref', metavar='REF', help='Verificação separada de uma revisão de desenvolvimento commitada.')
-    parser.add_argument('--skip-ui-smoke', action='store_true', help='Compila sem abrir a janela de validação.')
+    parser = argparse.ArgumentParser(description='Build RisingLands-ptbr.app from origin/main.')
+    parser.add_argument('--offline', action='store_true', help='Use the fetched origin/main without network.')
+    parser.add_argument('--development-ref', metavar='REF', help='Build a separate committed development revision.')
+    parser.add_argument('--skip-ui-smoke', action='store_true', help='Build without the native UI smoke (incomplete validation).')
+    parser.add_argument('--inputs-root', type=Path, help='Root containing source/cd; defaults to RISING_INPUTS_ROOT or this clone.')
+    parser.add_argument('--data-root', type=Path, help='Build output root; defaults to this clone/.local/macos-playable.')
     args = parser.parse_args()
     repo = Path(__file__).resolve().parent
     def git(*params):
         return subprocess.check_output(['git', '-C', str(repo), *params])
-    common = Path(git('rev-parse', '--git-common-dir').decode().strip())
-    if not common.is_absolute():
-        common = (repo / common).resolve()
-    workspace = common.parent.parent
-    data = workspace / 'local-data/macos-playable'
+    workspace = (args.inputs_root or Path(os.environ.get('RISING_INPUTS_ROOT', str(repo)))).resolve()
+    data = (args.data_root or repo / '.local/macos-playable').resolve()
+    runtime = Path(os.environ['RISING_PYTHON_RUNTIME']).resolve() if os.environ.get('RISING_PYTHON_RUNTIME') else None
+    missing = []
+    if runtime is None:
+        missing.append('RISING_PYTHON_RUNTIME: declare a relocatable CPython 3.12 ARM64 root')
+    else:
+        for relative in ('bin/python3', 'lib/python3.12'):
+            if not (runtime / relative).exists(): missing.append(str(runtime / relative))
+    for relative in ('INSTALHD/PLATGAME.PIE', 'INSTALHD/GRAPHICS/BLOCS.CMP',
+                     'INSTALHD/GRAPHICS/TROOPS.CMP', 'WORLD/MONDE01.ETA'):
+        if not (workspace / 'source/cd' / relative).is_file():
+            missing.append(str(workspace / 'source/cd' / relative))
+    if missing:
+        raise SystemExit('Build inputs unavailable:\n' + '\n'.join(missing))
     data.mkdir(parents=True, exist_ok=True)
     build_lock = (data / 'build.lock').open('a')
     fcntl.flock(build_lock, fcntl.LOCK_EX)
@@ -44,14 +56,14 @@ def main():
             if not member.isfile():
                 if member.isdir():
                     continue
-                raise ValueError('Tipo de arquivo Git não suportado: ' + member.name)
+                raise ValueError('Unsupported Git file type: ' + member.name)
             path = Path(member.name)
             if path.is_absolute() or '..' in path.parts:
-                raise ValueError('Caminho Git inválido')
+                raise ValueError('Invalid Git path')
             content = stream.extractfile(member).read()
             target = source / path
             if target.is_symlink() or (target.exists() and target.read_bytes() != content):
-                raise ValueError('Fonte imutável foi alterada: ' + str(target))
+                raise ValueError('Immutable source was modified: ' + str(target))
             if not target.exists():
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_bytes(content)
@@ -59,7 +71,7 @@ def main():
             entries.append({'path': member.name, 'bytes': len(content), 'sha256': hashlib.sha256(content).hexdigest()})
     actual = {str(path.relative_to(source)) for path in source.rglob('*') if path.is_file() or path.is_symlink()}
     if actual != {entry['path'] for entry in entries}:
-        raise ValueError('A fonte imutável contém arquivos que não pertencem ao commit: ' + str(source))
+        raise ValueError('Immutable source contains files outside the commit: ' + str(source))
     manifest = {'commit': revision, 'tree': git('rev-parse', revision + '^{tree}').decode().strip(),
                 'requestedRef': ref, 'mode': mode, 'snapshot': 'source', 'files': entries,
                 'features': {name: git('log', '-1', '--format=%H', revision, '--', path).decode().strip()
@@ -71,7 +83,7 @@ def main():
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
     builder = source / 'apps/macos-preview/scripts/playable_build.py'
     if not builder.is_file():
-        raise SystemExit('Esta revisão ainda não inclui o build jogável. Integre a feature ou use --development-ref.')
+        raise SystemExit('This revision has no playable builder; use a revision containing it.')
     command = [sys.executable, '-B', str(builder), '--data', str(data), '--workspace', str(workspace),
                '--source', str(source), '--manifest', str(manifest_path)]
     if args.skip_ui_smoke:

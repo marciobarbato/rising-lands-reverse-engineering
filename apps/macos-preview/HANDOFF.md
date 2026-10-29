@@ -202,3 +202,194 @@ Preserved logs: [targeted tests](validation/m3-packaging-fix-tests.log),
 [full app discovery](validation/m3-packaging-fix-full-tests.log).
 These regressions verify the packaging omission and bundled source resolution;
 they do not constitute a native application build or UI smoke pass.
+
+## Round 2 — accepted M2.2 playback and independent native inspection
+
+Started only after fetched `origin/main` contained packaging correction
+`fac29d6d0be7ee9e0aed41c2e8f3dc339adaab19`; verified base:
+`c59781cdffafbd0f7120fd801293f9f7d589f39f`. The existing dedicated feature
+was advanced by fast-forward. Only app-owned paths, the launcher and the
+macOS manual are changed. No formal milestone is established.
+
+Contract v2 retains M1 original-v2 inspection and adds separately labeled,
+read-only M2.2 display-v2 playback. Inputs, widths, ordering, provenance pins,
+atomic publication and identity are specified in [M3_CONTRACT.md](M3_CONTRACT.md).
+No simulation provider is called or stubbed. The runtime comparator's unchanged
+pure reader definitions are loaded by path without its simulation imports;
+Missions' unchanged delta applier handles navigation. Images retain original
+names, addresses and immutable bytes. LIVE apply_frame remains reserved.
+
+The real capture verifies **257/257 summaries and 11/11 full checkpoints**.
+[Per-phase report](validation/m3-m22-playback.json) includes observed words,
+state identity and render status for every phase. All 257 render attempts stop
+before calling Graphics at `missing_previous_surface`. The coordinator confirmed
+that no previous-surface pixels exist in this capture and instructed this stop.
+Thus this report records **zero actual Graphics calls, zero full/partial images**;
+it must not be interpreted as rendered-phase validation.
+
+Graphics API (1, 0) is pinned on import and result. Only Graphics supplies image
+pixels and PNG encoding; its partial frame and named stop remain explicit.
+The adapter has an unset surface-source extension point. No alternate surface
+artifact, zero-filled fallback, habitation result or drawing code is invented.
+Graphics' original-first initial surface, chaining rule and per-phase surface
+hash verification (planned API 1.1) remain required. Version 1.1 is refused until
+an explicit tested consumer change. Other Graphics scene gaps and live runtime
+input/frame delivery remain external dependencies.
+
+The AppKit/WebView shell now exposes a separate inspection page and isolated
+worker, preserving the synthetic exercise. It supports phase/frame navigation,
+reset, memory reads, block filtering, observed words and verification status.
+Inspection pauses training. The existing game input commands are unchanged.
+Both views have native smoke paths; no engine or renderer is added.
+
+Build inputs are now explicit (`--inputs-root` / RISING_INPUTS_ROOT and
+RISING_PYTHON_RUNTIME), with clone-local default outputs `.local/macos-playable`
+and optional `--data-root`. CD/runtime inputs are read-only. The renderer's
+catalog assets are copied and hash-checked into the bundle. Source mirroring
+and the original bundle identity are preserved. See the manual for invocation.
+
+Independent checks before the native build: 34 targeted tests passed, zero
+skips, plus the separate real worker/bridge test passed (35 total). Tests cover
+all API paths, corrupt/missing pinned inputs, order/checkpoint failures, atomic
+failure, repeat/reset identity, reserved live delivery, Graphics API mismatch,
+explicit surface stop and launcher preflight. These tests use real M2.2 evidence;
+synthetic Graphics test outputs validate adapter branching only.
+Native build and UI results are recorded after the committed-revision run.
+
+
+### Round-2 committed native delivery
+
+Implementation: `b4444f8e3e3031f0fb97aef1cec785305f38d680`.
+Final native smoke/manifest change:
+`2314804cbfe30f3866338284cc8141abf6493a86`.
+The latter revision was built with the documented explicit input root and
+RISING_PYTHON_RUNTIME; every generated file stayed inside the independent clone.
+Original media and the source runtime were read-only.
+
+**65/65 packaged consumer tests pass, zero skips** under bundled CPython 3.12.14.
+Swift compilation, ARM64 checks, source/asset binding, relocated bundled runtime
+verification and strict ad hoc signature verification pass. Native LaunchServices
+runs passed **27 exercise checks and 8 inspection checks**, with visible windows
+and empty Python stderr. The inspection smoke uses actual phase/frame buttons,
+selector, memory form, block filter and reset; it checks the captured counter,
+initial identity and explicit missing-surface state with no image fallback.
+An earlier b4444f8 build also passed; the final smoke specifically strengthened
+DOM coverage and native window visibility checks.
+
+Bundle (local):
+`/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable/dist/development/RisingLands-ptbr.app`.
+Full source/runtime/build manifests and prior bundles remain under this clone's
+`.local/macos-playable/`. No native emulation was run by the macOS workstream.
+No Mac mini execution is requested for this consumer.
+
+Common checks were rerun and remain **FAILED**, independently of the successful
+app build: Core 490 / 7 errors / 226 skips; Combat 262 / 1 error / 147 skips;
+Economy 487 / 1 failure / 7 errors / 205 skips; Missions 104 / 1 failure /
+22 errors / 31 skips; AI/runtime 90 / 11 errors / 23 skips; Audio 20 /
+8 errors / 3 skips. Graphics was not run (its hash-checked fontes/cd absent).
+Workflow passed 8/8, and documentation links/diff whitespace checks pass.
+Those research suites use their own expected source/cd and optional
+capstone/unicorn/pefile inputs, not the app's explicit inputs-root; no other
+front was modified to suppress or repair those environment failures.
+
+Preserved round-2 evidence: [consumer tests](validation/m3-round2-consumer-tests.log),
+[exercise UI smoke](validation/m3-round2-native-smoke.json),
+[inspection UI smoke](validation/m3-round2-native-inspection-smoke.json),
+[build log](validation/m3-round2-build.log),
+[common checks](validation/m3-round2-common.log), and
+[structured validation](validation/m3-preparation.json).
+Graphics 1.1 remains the render dependency. Runtime live delivery/input remains
+reserved. The remote feature is delivered for Claude coordinator review;
+this work establishes no milestone and never merges or pushes main.
+
+## Round 3 — explicit Graphics 1.2 chained playback
+
+Round 2 was not integrated: its Graphics 1.0 gate correctly rejected 1.2 on the
+coordinator's candidate. Fetched main for this continuation:
+`a7405668e630650f67f6ff792bd07348ae7697f7`, merged safely into the existing
+feature at `7e771c4e9f46a22536a86f7d3331d1de74d9151d`. New implementation
+changes stay in app-owned paths and the macOS manual. Other-front changes
+arrived only through the main merge; no owner implementation is edited.
+
+Contract v3 explicitly accepts only Graphics (1,2), checks both module/result,
+and SHA-pins its initial surface, initial terrain cache and verification files.
+Both initial loaders are the unchanged Graphics APIs. The cache never starts
+cold, and navigation never loads an independent mid-sequence state: forward
+seeks process every phase; backward seeks reset and replay from the start.
+AffGame reads the preceding captured frame/load-tail state, not the ending
+between_frames counter. The surface AND cache are carried after each draw;
+frame(k) is undrawn and preserves both. RestoreAll/MenuInit output is supplied
+by the original initial-surface artifact, not reconstructed by this consumer.
+
+Read-only habitation is now supplied by the unchanged Economy predicates,
+loaded as pure AST definitions with their actual constants and read methods.
+They bind captured structure/unit bytes without constructing a synthetic world,
+adding defaults or replacing any Graphics/Economy module. The original native
+habitation reference is checked by consumer tests.
+
+The completed [per-phase render report](validation/m3-m22-render-v3.json) verifies
+257/257 memory summaries, 11/11 complete memory checkpoints, 128 Graphics calls,
+and **12/12 applicable chained surface hashes**. Actual provider statuses are
+**128 partial, 129 undrawn, zero full**. Every drawing phase preserves the
+0x41591F stop for type 8 (then type 1). Graphics' own frame 6..12 references
+still carry this stop although their first pixel difference is row 547; no
+consumer silently promotes them to full. The HUD (rows >=544) and cursor are
+not drawn, and no native pixel checkpoints beyond frame 12 are claimed.
+The initial load_tail surface equals its recorded full-surface hash. Later
+native phase-end/post-HUD hashes are reported for comparison, not treated as
+successful complete-render checks.
+
+The playback-service KeyError was confirmed as a secondary test failure: the
+worker returned a valid error without a playback key after rejecting Graphics.
+The service now checks Graphics before opening/publishing playback, returns an
+explicit error_type, and tests assert response success before indexing. A real
+isolated worker test with API (1,3) confirms the refusal response. Successful
+response shape is checked by the client. Renderer/version/reference errors do
+not publish a new inspection image. The native page shows actual PNG output,
+partial/inherited stops, undrawn phases and all limitations; its DOM smoke uses
+frame 12 while the separate report covers all 128 frames.
+
+Targeted version/cache/sequence/error tests pass. The full committed-revision
+consumer discovery, bundle build and both native smokes follow below after
+execution with the coordinator's explicit inputs-root/data-root/runtime flags.
+No live delivery, game input protocol, renderer or M2.3 work is added.
+
+
+### Round-3 native results and review identity
+
+Implementation/native-tested revision:
+`12e534b03241ff64c6cf65fa2ae9f7c1d0bbdbe8`.
+The full committed app discovery passed **71/71 tests, zero skips**. Strict
+source mirroring, source/asset binding, bundled CPython 3.12.14 isolation,
+Swift compilation, ARM64 architecture and ad hoc signature checks passed.
+Native LaunchServices passed **27 synthetic-exercise checks and 9 inspection
+checks**, with visible windows and empty Python stderr. The inspection test
+uses actual DOM controls, reaches frame 12, checks PNG presence and the explicit
+inherited stop/HUD limitation, reads original counter memory, filters blocks
+and resets to the same captured identity. It no longer expects a missing surface.
+
+Exact build command (from the independent macOS clone):
+
+```sh
+RISING_PYTHON_RUNTIME='/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python' \
+./compilar-jogável --development-ref HEAD \
+  --inputs-root '/Users/marcio/git/Rising Lands' \
+  --data-root '/Users/marcio/git/Rising-Lands-Codex/.local/round3-workspace/local-data/macos-playable'
+```
+
+The CD and runtime inputs are read-only; generated source archives, manifests,
+runtime copies, assets, bundles and logs stay inside this clone. Bundle name
+and identity remain unchanged. The normal launcher and explicit development
+arguments remain supported. The prior failed candidate was not touched.
+
+Saved [full discovery](validation/m3-round3-consumer-tests.log),
+[exercise smoke](validation/m3-round3-native-smoke.json),
+[inspection smoke](validation/m3-round3-native-inspection-smoke.json),
+[build log](validation/m3-round3-build.log) and
+[structured results](validation/m3-preparation.json) identify the real run.
+Documentation links and git diff --check pass. Cross-front common gates were
+not repeated in round 3; their prior environment failures remain historical,
+not represented as a current pass. No native x86 emulation or Mac mini job was
+needed by this consumer. Remaining dependencies are Graphics' unsupported
+bodies/HUD/cursor and new reference/cache artifacts for independent starts,
+plus the separately reserved live runtime/input contract. No milestone changes.

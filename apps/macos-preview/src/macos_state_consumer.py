@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 import re
 
-CONTRACT = 'rising-lands/macos-state-consumer/1'
+CONTRACT = 'rising-lands/macos-state-consumer/3'
 CAPTURE_SHA256 = 'eb7d2303e13e62d4f5692c9cb6ef302b573d138df6a8b51183a6d9b0bd703afc'
 EXECUTABLE_SHA256 = '6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb'
 CAPTURE = 'pesquisas-paralelas/missoes/evidencias/captura-carga-missao-original-v2.json'
@@ -59,7 +59,7 @@ class MacOSAcceptedImage:
 
     def inspect(self):
         return dict(contract=self.contract, source_sha256=self.source_sha256,
-                    mode='inspecao-m1', blocks=len(self.blocks),
+                    mode='inspecao-m1', scenario='MONDE01/original-v2/M1-accepted-inspection', blocks=len(self.blocks),
                     bytes=sum(len(b.data) for b in self.blocks),
                     memory=[dict(name=b.name, base=f'0x{b.base:08x}',
                                  bytes=len(b.data), sha256=b.sha256) for b in self.blocks])

@@ -1,99 +1,130 @@
-# macOS accepted-state consumption contract v1
+# macOS accepted-state consumption contract v3
 
-Contract identifier: `rising-lands/macos-state-consumer/1`.
-Implementation: [macos_state_consumer.py](src/macos_state_consumer.py).
-This is an app-owned inspection boundary, not a new engine/wire format or a
-runtime/Graphics contract. M3 is not accepted by this delivery.
+Identifier: `rising-lands/macos-state-consumer/3`. This version adds Graphics
+render API **1.2** chaining to read-only accepted-evidence playback. No live
+frame delivery, orders, game input protocol or milestone acceptance is added.
 
-## Inputs and inspection
+## Evidence and memory
 
-`load_accepted_m1(source_root)` reads the existing acceptance record and its
-exact SHA-256-pinned `captura-carga-missao-original-v2.json`. It checks acceptance,
-capture identity, original executable identity, capture schema, successful real
-MissionLoad return, block metadata and extent. It calls the unchanged
-`mapa_memoria_m1.carregar_blocos` decoder for zlib, sizes and per-block hashes.
-No ETA parsing, generated fixtures, reconstructed-state defaults, startup,
-Unicorn, CD reads or engine execution is involved. The captured bytes are the
-original reference which the accepted Python composition reproduced; this
-consumer does not independently re-execute that composition.
+The M1 loader retains `MONDE01/original-v2/M1-accepted-inspection` (881 blocks,
+2,659,375 bytes). M2.2 is separately labeled
+`MONDE01/display-v2/M2.2-accepted-evidence`. Its initial state is the accepted
+**display-v2** MissionLoad result; the original-v2 M1 image is never substituted.
 
-The pinned capture SHA-256 is
-`eb7d2303e13e62d4f5692c9cb6ef302b573d138df6a8b51183a6d9b0bd703afc`.
-The intact executable SHA-256 is
+`MacOSM22Playback.open(source_root=None)` verifies the acceptance, compression
+manifest, xz and raw-JSON hashes, display entry and MissionLoad artifacts. Pins
+remain in `macos_m22_playback.PINS`. Every one of the 257 ordered phase summaries
+and 11 full checkpoints is verified before opening. Missions' unchanged memory
+loader/delta applier and the runtime comparator's pure reader definitions are
+loaded by path. Only those unchanged AST definitions are compiled; simulation
+imports, constructors and emulator dependencies are not executed or stubbed.
+
+The xz identity is
+`4c8f5c14a9623131dd019eafcdc49ea63054ee358f9defde58c12cb949f59ff3`;
+raw JSON is
+`1ad031b96300e5c632fd5b6b7857ae30792f78e86531e4f17d1bf7124c6dd930`.
+The intact original executable is
 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
-Original entry: MissionLoad `0x46c2cf`; return: `0x42d22d`, AL=1.
-The accepted domain is only MONDE01, new campaign, original-v2 scenario,
-881 blocks / 2,659,375 bytes. Other capture versions require explicit review
-and a new consumer contract; v1 never silently selects the latest evidence.
 
-`MacOSAcceptedImage.blocks` is a tuple of immutable blocks, each containing its
-original name, 32-bit virtual base, exact bytes and SHA-256. Blocks are ordered
-by numeric base then name. Overlap/overflow is rejected. This ordering is for
-inspection only; it does not reorder provider calls, allocations or bindings.
-`identity` is `(contract, source_sha256)`, not a semantic frame hash. Source
-identity includes provenance and ordered effects; per-block hashes describe
-memory identity. No pointer is rebased or replaced by a unit/list index.
+Source roots are explicit or resolved from the adjacent bundle snapshot.json
+relative archive. Traversal, absolute archive paths and escaping symlinks are
+refused; no deployed consumer guesses an external repository. Images contain
+immutable bytes at original addresses, ordered by numeric base then name.
+Identity includes contract, source hash, phase and state summary. There is no
+pointer rebasing or fabricated state in gaps. Reads must fit one captured block.
 
-`read(address, size)` reads within one captured block and rejects gaps and
-cross-block reads. It interprets no game layout. `inspect()` returns metadata
-and hashes without duplicating raw game bytes in a JSON response.
+Existing navigation is preserved: `step_to_phase` takes exact names or indices
+0..256; `step_to_frame` takes 0..128 or frame names; reset returns to state_s0.
+Failed validation leaves the current image unchanged, and repeat navigation
+returns identical state. Observed words include the counter, viewport, both
+RNG words, shared permutation cursor and HUD flag. LIVE `apply_frame` remains
+reserved and always raises RuntimeContractPending.
 
-Developer command from the independent clone:
+`fork()` makes an independent cursor over verified evidence. `drawing_input()`
+returns the preceding captured image for an AffGame phase: load_tail before
+between_frames, and frame(k-1) before between_frames(k). This is essential:
+between_frames ends at the **next CalculGame entry**, after the window loop has
+incremented the counter. That ending image is not AffGame's entry memory. No
+bytes are patched to manufacture an entry image.
 
-```sh
-python3 -B apps/macos-preview/src/macos_state_consumer.py
-python3 -B -m unittest discover -s apps/macos-preview/testes -p test_macos_state_consumer.py -v
-```
+## Graphics 1.2 chain
 
-For an archived app source tree, `source_root` (or CLI `--source-root`) may
-select the root explicitly. Without that argument, a source checkout uses its
-repository root; a deployed module uses only the relative archive declared by
-`snapshot.json` beside it. Absolute paths, parent traversal and symlinks escaping
-the payload are rejected. A deployed module without a declaration fails with a
-clear English error instead of guessing a repository from ancestor directories.
-Legacy archives without accepted M1 evidence likewise fail rather than falling
-back to an external checkout. The existing playable packager archives the full
-committed source tree and declares `snapshot: source`. The native shell is not switched to
-this inspection module and its synthetic UI schema is unchanged. Both playable and legacy builders mirror the consumer module using the same
-source-copy helper. The playable verifier imports the bundled consumer and loads
-its declared M1 archive using the isolated bundled interpreter. A later shell
-integration must select inspection mode explicitly. Historical preview archives without accepted M1
-artifacts fail validation rather than falling back to synthetic state.
+The renderer is loaded in an isolated worker to keep Graphics and Economy's
+flat `construcoes` names separate. Exactly `(1, 2)` is accepted, on module load
+and returned result; every other version is refused clearly. The original
+service-test KeyError was secondary: a refused version returned `ok:false`
+without `playback`, and the test indexed that key. Tests now assert success
+before inspecting data, cover the explicit error response, and the client
+validates successful response shape.
 
-## State transitions and ownership
+Four Graphics artifacts are file-SHA pinned in `RENDER_PINS`:
 
-`MacOSStateConsumer` is called serially by one owner. `current` starts as None.
-`load_m1` fully validates a candidate before publishing it. Failure leaves the
-previous image untouched. Repeated successful loading of the same identity
-preserves the current image object. `reset` releases it; the next load creates
-a distinct object with the same captured identity and bytes. There are no
-callbacks, external effects, advancing clock or mutable engine aliases.
+- superficie-inicial-m22-v2.json
+- cache-terreno-inicial-m22-v2.json
+- verificacao-cadeia-m22-v2.json (12 reference renders)
+- superficies-fase-m22-v2.json (257 native phase-end surface hashes)
 
-`apply_frame(frame)` is a reserved local call site. It always raises
-`RuntimeContractPending` before reading the payload or changing state, even
-when no M1 is loaded. There is intentionally no fabricated payload schema,
-frame counter, delta application, partial retry, provider binding or input
-protocol. These semantics are tested. It does not mean an M2 transport exists.
+The initial surface/cache are loaded only through Graphics'
+`carregar_superficie_inicial` and `carregar_cache_inicial`, which verify their
+payloads and bank base. The surface matches the accepted load_tail hash. It
+represents original RestoreAll/MenuInit output before the first AffGame.
+No cold/empty cache, blank surface or independent mid-sequence start is used.
 
-The immutable inspection copy must never replace a live provider's bytearray,
-canonical grid list or cached scalar. Future live integration must honor the
-in-place binding/identity semantics documented by Missions' MapaMemoriaM1.
+For every between_frames(k), call Graphics `renderizar_quadro` with its captured
+entry memory, previous **pixels and cache**, and the hash-checked catalog.
+Carry both returned objects to the next drawing phase. frame(k) is **undrawn**
+and retains the surface/cache. load_tail publishes the initial original artifact
+without reimplementing RestoreAll. A cadence return, if observed, is also
+reported undrawn. Backward navigation resets/replays from the initial artifacts;
+forward navigation processes every intervening phase. No phase is skipped to
+start rendering with an invented cache.
 
-## Handoff requests to runtime and Graphics
+`macos_habitation_view` binds read-only captured structure/unit buffers to the
+unchanged Economy `estrutura_habitada`, `bag_contient_troupe`, `contar_unidades`
+and offset/word readers, compiled by path to avoid constructor defaults and
+module collisions. This supplies the real habitation query, never a constant
+true callback or synthetic economy. Its result is checked against the existing
+native Graphics habitation reference. Neither game state nor owner code changes.
 
-Runtime must publish a validated consumer API specifying scenario identity,
-initial state (M2 uses display initialization, unlike this M1 original-v2
-capture), frame/phase boundaries, completeness or delta base identity,
-sequence/replay/reset behavior, error/partial-effect policy and buffer lifetime.
-Acceptance of M2.1/M2.2 alone does not define those delivery semantics.
+Only Graphics supplies rendering, palette expansion and PNG encoding. The
+shell displays its image with an image element. Cache keys, payload hashes,
+cursor, entry-state identity, stop address and verification status are recorded.
+Applicable chained hashes must equal Graphics' frame 1..12 reference before
+publication. Native post-HUD surface hashes are reported as **different** where
+appropriate, never mislabeled as a complete-render success.
 
-Graphics must publish the app-facing frame composition API over that state:
-required bindings and viewport, mutations (including shared RNG/cache effects),
-callback order, supported scene domain, missing-provider stops, palette/indexed
-surface format and lifetime. No renderer is added here. No render pass is
-assumed to be pure, and no unsupported facade is substituted.
+## Visible limitations and actual results
 
-Input dispatch and UI timing remain later owner-defined dependencies. Do not
-feed accepted snapshots into the synthetic exercise, apply its 20 Hz policy to
-MONDE01, or interpret this inspection module as a validated live frame bridge.
-Formal milestone documents are unchanged.
+The first stop is frame 1, `0x41591F`, for type 8 (then type 1 without a body).
+Frames 1–5 are partial in the visible playfield. Graphics' own verification
+still returns that named stop for frames 6–12, even though the chained visible
+playfield matches and its first differing row is 547. Therefore the consumer
+preserves **partial** instead of silently upgrading those results to full.
+
+The complete 128-frame run records **128 partial drawing phases, 129 undrawn
+phases, zero full results, 128 Graphics calls**. All 12 applicable chained hashes
+match. The 257 memory summaries and 11 memory checkpoints remain equal. No
+native pixel checkpoint exists here beyond frame 12; later images are chained
+provider results over accepted memory, not newly oracle-validated pixels.
+
+HUD rows >=544 and cursor are **not drawn**. Their prior surface values persist.
+An undrawn phase also carries any preceding partial-image stop. Both limitations
+and the lack of independent mid-sequence cache are visible in the native page.
+See [per-phase report](validation/m3-m22-render-v3.json).
+
+## Native shell and builds
+
+Inspection remains separate from synthetic training; opening it pauses training.
+It exposes phase/frame navigation, reset, original-address reads, block filter,
+observed words, image/stops and verification. Requests may require replay from
+the start; the UI allows a bounded 180-second inspection response window. The
+native smoke uses actual controls through frame 12, reads memory, filters blocks,
+checks the image/stop/limitations and resets. Full 128-frame rendering is verified
+separately by the per-phase report, not by relaxing the window-open smoke.
+
+`compilar-jogável --development-ref HEAD` accepts explicit `--inputs-root` and
+`--data-root`, with RISING_PYTHON_RUNTIME for relocatable CPython 3.12 ARM64.
+All inputs remain read-only and outputs stay inside this independent clone.
+Bundle name and identity are unchanged. See [manual](../../docs/MACOS_PLAYABLE.md)
+and [handoff](HANDOFF.md) for actual commands and results. Live runtime delivery,
+orders, remaining Graphics passes and M2.3 stay outside this consumer's scope.
