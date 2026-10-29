@@ -548,3 +548,50 @@ All passed: backend equivalence (except the 10 backend-pointer bytes), the Stage
 | Missions | the oracle is held at frame 1 |
 
 The policy proof covers only the declared phases and must be re-derived for M2.2.
+
+## Stage19 (M2 round 5): N-frame tooling, M2.2 plan, v3 preparation (Claude, 2026-10-29)
+
+Merged `origin/main` d94a59e. The coordinator decided the 146 freed menu-bank allocation records stay **compared**. The `-v2` reference is unchanged and no capture beyond frame 1 is evidence. Plan: [PLANO_M2_2.md](PLANO_M2_2.md).
+
+### Commits
+
+| Commit | Content |
+|---|---|
+| `7962e46` | N-frame bench and policy |
+| `9af33f9` | v3 fixtures and scenario |
+| `628e473` | event probe |
+| later | budgets, summary fix, docs and tests |
+
+### API inputs
+
+- `oraculo_quadro_missao.eh_fase_quadro(fase)` and `nomes_fases(k)`
+- `BancadaExibicaoOriginal.executar_quadros(n, segundos)`
+- `politica_comparacao_quadros.py --quadros N --relatorio …`
+- `varrer_eventos_quadros.py --quadros N [--cenario exibicao_v3]`
+- `ArquivosCRT.fseek_crt` / `fgets_crt` (Core inventory ABI)
+- `BancadaExibicaoOriginal(..., v3=True)`, scenario `exibicao_v3`
+
+### Validation
+
+| Check | Where | Result |
+|---|---|---|
+| N=1 policy | `.local/m2r5-policy-n1.json` | identical mask and totals to the committed M2.1 policy |
+| N=3 policy | `.local/m2r5-policy-n3.json` | passed, 7/7 phases reproduced |
+| 130-frame probe | `.local/m2r5-eventos-130.json` | see the plan |
+| Light tests | `test_preparacao_m2_2.py` | 4 tests |
+
+### Not run
+
+- The full N-frame policy over 128 or more frames: it costs about 3 s per frame per pass with hooks.
+- Any v3 capture.
+- Integration.
+
+### Dependencies
+
+| Owner | Needed |
+|---|---|
+| Core | `ftell` `0x48cf11`, which text needs |
+| Audio and coordinator | the CD-audio availability input. It drives `0x4e1d18` every frame. |
+| Audio | confirm that sound-library state is never read by logic |
+| AI/runtime | model AffGame's store to `0x4e05a2` from frame 2 on |
+| Missions | extend the display-clock named input beyond 4,096 answers before M2.3 |

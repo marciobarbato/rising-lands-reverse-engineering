@@ -729,3 +729,38 @@ Stage17 is integrated at main `81e0a26`. The display scenario is the M2 referenc
 **Open points:**
 - The record lifecycle of the 146 menu banks freed in (a) is an open coordinator decision.
 - Text (`fgets`) and LoadPie (`fseek`) stay boundaries until Core inventories those CRT entries.
+
+## Stage19 (M2 round 5): N-frame tooling, M2.2 plan, v3 preparation
+
+Stage18 is integrated at main `d94a59e`. The `-v2` reference stays fixed, nothing beyond frame 1 is committed as evidence, and MissionLoad was not recaptured. Plan and findings: [PLANO_M2_2.md](../pesquisas-paralelas/missoes/PLANO_M2_2.md).
+
+**N-frame oracle.** `BancadaExibicaoOriginal.executar_quadros(n)` runs load_tail and then `between_frames{k}`/`frame{k}`. Frame 1 keeps its committed phase names.
+
+**N-frame policy.** [politica_comparacao_quadros.py](../pesquisas-paralelas/missoes/politica_comparacao_quadros.py) makes two native passes. The rule is unchanged: a byte is masked only when every writer and every reader is display. It produces masks per frame window and a cumulative mask.
+- With N=1 it reproduces the committed M2.1 policy exactly.
+- An N=3 trial (in `.local/`) passed. It found the first **mixed byte**, `0x4e05a2`, written by AffGame and by CalculMatiere and compared from frame 2 on.
+
+**Static timeline for MONDE01:**
+
+| Event | Frame(s) | Notes |
+|---|---|---|
+| Field sweep starts | 0 | the load-state frame resets the counter, and SetUpdateChamp runs at counter 0 |
+| Candidate field rows | 31–51 | |
+| First field event | 45 | confirmed by the probe |
+| Second sweep reaches candidate rows | 287–307 | |
+| First monster raid | **9000** | AvanceMonstre entry record 0 |
+| Second monster raid | **10800** | entry record 1 |
+
+The attack table is empty and the AI players are inactive, so there is no other scripted attack.
+
+**Proposed sequence:**
+- **M2.2:** 128 frames with checkpoints at frames 1, 31–32, 50–52, 64, 100–101 and 128.
+- **M2.3a:** up to frame 8,999, with per-frame hashes and full checkpoints.
+- **M2.3b:** frames 9,000–9,100 and frame 10,800.
+
+**New owner decisions:**
+- **Core:** CRT `ftell` `0x48cf11`. Text needs it through FileSize.
+- **Audio and coordinator:** the CD-availability input. While no CD track plays, CalculGame advances the shared cursor `0x4e1d18` every frame.
+- **Audio:** sound-library state.
+
+**v3 preparation (not committed as reference).** The CRT `fseek`/`fgets` fixtures and the `exibicao_v3` scenario run LoadPie natively, with explicit 3M segment and binding budgets.
