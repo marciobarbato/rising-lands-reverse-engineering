@@ -10,7 +10,7 @@ MenuInit (load tail), InputGame, InputSend, CalculIconeAction and EnginNextEtape
 - the entry and exit registers;
 - every byte changed between entry and return, with the before/after values;
 - the declared bindings and boundary events in between, with their fields;
-- the executed basic blocks inside the routine's SBL interval (the reached path).
+- every basic block executed while the call is open, nested callees included (the reached path).
 
 The run must reproduce every committed phase state, the entry trace and the
 boundaries. No Python translation is imported.
@@ -93,10 +93,9 @@ def main():
                              executed_blocks=sorted(hex(x) for x in executados.pop(nome))))
 
     def blocos(fase, endereco):
+        # Every block executed while a call is open (its own interval and its nested callees).
         for nome in executados:
-            inicio, fim = INTERVALOS[nome]
-            if inicio <= endereco < fim:
-                executados[nome].add(endereco)
+            executados[nome].add(endereco)
 
     t0 = time.monotonic()
     b, cap, reproducao = executar_caminho_pausas(enderecos, observador, blocos)
@@ -112,7 +111,7 @@ def main():
                   for n, (e, r) in ROTINAS.items()},
         path_reproduction=reproducao, unclosed=sorted(abertas), calls=chamadas,
         method='Pause at entry and at the call-return site on the uninterrupted original path; full-image diff, '
-               'declared binding/boundary log slices, executed basic blocks inside the SBL interval',
+               'declared binding/boundary log slices, every basic block executed while the call is open',
         seconds=round(time.monotonic() - t0, 3))
     resultado = 0 if reproducao['passed'] and not abertas else 2
     if resultado:
