@@ -213,3 +213,10 @@ late window, out-of-order document/ready events and an unchanged check deadline.
 Graphics stays pinned to its explicitly accepted 1.2 contract; other versions
 still fail. After this robustness delivery, workstream A awaits M2.3 and the
 Claude M3 plan; no new game/UI features are planned here.
+
+An occluded WebView can report a hidden document while its native window is
+visible. Native smoke repaint barriers therefore wait for a completed WebView
+snapshot through the existing15-second request deadline, rather than waiting
+for animation callbacks that WebKit suspends while hidden. This preserves
+paint verification and every interaction assertion. Timeout JSON also records
+the last assertion/stage and game/visibility diagnostics.

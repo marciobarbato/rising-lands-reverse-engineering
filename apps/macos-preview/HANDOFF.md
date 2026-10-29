@@ -430,3 +430,14 @@ The legacy preview opener uses the same bounded runner and evidence archive;
 its old outer60-second guard no longer contradicts the shared shell's separate
 readiness budget. This changes no legacy game behavior. The playable integration
 build remains the authoritative native validation for this delivery.
+
+
+The first readiness-aware run established actual readiness in0.53seconds,
+then failed at the unchanged45-second check limit. A diagnostic run retained
+`lastProgress=final_animation_frames`, `visibility=hidden`, `paused=true`: all
+interaction assertions and the after snapshot had completed. Occluded
+WKWebViews suspend requestAnimationFrame even when NSWindow.isVisible is true.
+The two smoke-only repaint barriers now await an actual native WebView
+snapshot through the existing15-second RPC deadline. Browser-only diagnostics
+keep their animation-frame barrier. No assertion, real clock exercise or
+check deadline changes. Both failed runs and their images remain preserved.

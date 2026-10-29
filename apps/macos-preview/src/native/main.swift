@@ -157,7 +157,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         if message.frameInfo.isMainFrame, let body = message.body as? [String:Any],
            body["action"] as? String == "capture", smokeOutput != nil,
            let shot = screenshotOutput, let label = body["label"] as? String,
-           ["before", "after"].contains(label), let requestID = body["id"] {
+           ["before", "after", "paint"].contains(label), let requestID = body["id"] {
             web.takeSnapshot(with:nil) { [weak self] image,error in
                 var response:[String:Any] = ["id":requestID,"ok":false,"error":"Falha na captura nativa"]
                 if let image = image, let tiff = image.tiffRepresentation,
