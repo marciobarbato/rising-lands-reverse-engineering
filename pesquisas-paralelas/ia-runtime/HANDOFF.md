@@ -395,3 +395,36 @@ Main `5f4052c` (Missions' evidence `de154b5`). The report is [M2_3_PROVA_9200_QU
   - Zero crossings, measured per part (`comparar_parte` now reports them instead of a constant), and no Core provider stop.
 - **Tool:** `provar_quadros_9200_ia.py` — `parte N`, `agregar`, or `tudo --paralelo 4 --lease <heavy_lease.py>` (one command, about 24 min on the MacBook with four parts at a time).
 - **Next:** the coordinator's second-machine reproduction must match the ten `phase_chain_sha256` values listed in the report.
+
+
+## M3.1 groundwork — input path, declared-input chain (2026-10-29)
+
+Main `ea62eb4` (after the M2.3 proof `ecaf853` was integrated). The details are in [docs/AI_RUNTIME.md](../../docs/AI_RUNTIME.md#m31-groundwork--the-input-path-inputgame--setplayerordre--processinputgame--setters).
+
+- **Capture first:**
+  - `9f08979`: the case matrix and capture script.
+  - `887b6c7`: `evidencias/captura-entrada-ordens-ia.json`, 124 native leaf calls at Core's frame-1 ProcessInputGame pause, all returned, with path and code reproduced.
+- **Translation:**
+  - `277891c`: `entrada_ordens_ia`, `provedores_entrada_ia`, `composicao_entrada_ia`, `provar_entrada_ia` and `validar_entrada_ordens_ia`.
+  - The follow-up commit records the orders of a stopped probe frame.
+- **Native differential:** 124 cases, 113 equal, **0 mismatches**, 11 named-dependency stops. Compared: registers, whole changed state, sound requests and key answers.
+- **Declared-input API:** `RoteiroEntrada(scripted-input file)` and `ComposicaoEntrada(..., roteiro, inicio=128, ...)`. `executar(n)` yields phases with `ordens` and `eventos`.
+- **Probe chain check** (Python, from the M2.2 frame-128 state, indicator level; reports `validacao/m3-1-sonda-*.json`):
+  - P1: 501/501 frames equal.
+  - P2: 601/601 frames equal.
+  - P3: 24 frames equal, then tag 4 equal at 153 and a stop at EnginNextEtape state 11.
+  - K1: 11 frames equal, then a stop at WM_KEYDOWN.
+- **Named dependencies:**
+  - Core: `construcao_core` (BatimentPosable) is on `feat/re-core` `63200b5`, not on main. The proofs used a read-only extraction (`--nucleo-ref .local/entrada/nucleo-ref`); without it, every page-3 hover stops there.
+  - Economy or the owner to decide: SetDechargeCaveEnginSelect (tag 19), InitRecruteTroupe (tag 17).
+  - Combat: BatimentInitAttaqueSelect (tag 14 with a structure selected).
+  - MiniMapSetPos/MiniMapRecentre.
+  - Missions: the text table `[0x5099a4]` is 0 in the display bench, so TextGetMessage over a field, mine or sack is a named stop. This blocks P4/P5 hovers.
+- **Next for this front:** EnginNextEtape state 11 (0x4564ef: the `+0x89`/BatimentEnDestruction test, then CalculConstruireBatiment and the tail 0x454ccd). Then WndProc key messages 0x100/0x101 and the help pages 2/7/8/9/0xb/0xc (Ctrl deposit tags 8/19).
+- **Captures needed:** pass-2 delta captures of the P1/P2/P3 windows (M2.2 form, with per-phase states) for the whole-state proof under the published mask. Also P4/P5 runs, and a text-loaded scenario or the text-table owner's answer.
+
+**Statuses:**
+- Implemented: the input path above and the declared-input chain.
+- Validated against the original: the leaf cases natively (0 mismatches), and P1/P2 at indicator level over every frame.
+- Integrated: no.
+- Tested in a real mission: no.

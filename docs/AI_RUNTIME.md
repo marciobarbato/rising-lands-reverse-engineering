@@ -651,3 +651,75 @@ New this round, translated from captured executed blocks: InputGame (MouseZone, 
 - the allocation-record count in every phase, part 09's final records, and the HUD flag.
 
 One command reproduces it (`provar_quadros_9200_ia.py tudo`), with a per-part mode so the parts run in parallel.
+
+## M3.1 groundwork — the input path (InputGame → SetPlayerOrdre → ProcessInputGame → setters)
+
+Original first: `capturar_entrada_ordens_ia.py` → `evidencias/captura-entrada-ordens-ia.json` (commit `887b6c7`, before any translation). It runs 124 native leaf calls at Core's accepted frame-1 ProcessInputGame pause (`bancada_selecao_ordens`). Each case declares its cursor, WndProc flags `0x5099ae..b2`, view, help page, action mode, drag state, selection, packet and GetAsyncKeyState answers. All 124 cases return, and the load_tail/between_frames/frame1 summaries and the code section reproduce. InitInputPlayer's allocations are rolled back on the bench arena after its case.
+
+**Translation** (`entrada_ordens_ia.py`, class `Entrada(m, Provedores)`):
+- InputGame 0x429278. Translated:
+  - the key block (arrows through ScrollTerrain, space);
+  - the zone selection, MouseZone and the right-button deselection;
+  - zone 0: the cell mapping 0x429800..0x42984a, the margins and the undiscovered-cell rule 0x4298d9 (troops selected and page 0 give tag 5);
+  - the information block (sack, field, mine, trap, structure and unit under the cursor);
+  - page 3, construction placement through BatimentPosable (tag 4), and page 1 (tag 5);
+  - drag start, the selection box and its release (tag 1; with no troops, the own structure, tag 2);
+  - own-unit hover and double click (tag 9), enemy-unit attack (tag 14), own-structure hover;
+  - terrain presses: field (tag 7 or 0x12), mine (tag 6 or 0x12), move (tag 5);
+  - the edges, the minimap (recentre through MiniMapGetCenterSelect, or tag 5 through MiniMapGetCase), and the HUD action icons (IconeGetZone, the single unit's order Bag, BagGetCode codes 2, 3 and 7). Code 3 is the CAVE icon: TestRessource, then page 3 and `0x496207` = type.
+
+  Every other branch is a named stop at its original address.
+- SetPlayerOrdre 0x45ecd4.
+- ProcessInputGame 0x45edc0: all 40 table targets of 0x45ed20, with the original argument registers, then the slot cleanup 0x45f2de.
+- CalculIconeAction 0x45e944 with IconeFillContenu 0x45dbd0 for a single selected unit.
+- WndProc mouse messages 0x200..0x205.
+- Leaves: MouseEstDeplacer, KeyPressed, KeyUnPressed, KeyTestRelease, IconeGetZone, BagGetCode, BagGetType, EnginGetBagOrdre, GrabAllInput, InitInputPlayer with MemAlloc's counter `0x4e2f3c` (GlobalAlloc/GlobalLock are bindings), MiniMapGetCase, MiniMapGetCenterSelect, MiniMapSetLock.
+
+**Owners consumed by import** (`provedores_entrada_ia.provedores_vivos`, never defaulted):
+- Core `selecao_ordens.SelecaoOrdens`: selection and Set*Select, EnginAsk with the sound boundary. Its SetAttaqueEngin goes through Combat's `ataque_vivo.definir_ataque`.
+- Core `construcao_core.ConstrucaoCore`: BatimentPosable, when importable.
+- Core `chamadas_quadro_core.iniciar_zonas_jogo`.
+- Economy `ordens_economia.OrdensEconomia`: EnginTravailSelectionne, TestRessource, SetMine/SetDepot/SetRamasseEnginSelect.
+- Economy `extracao.RecursosTerreno`: MineGetIndice/MineGetCapacite.
+- Combat `alvos_alcance.ocupa_celula`: EnginOccupeCase.
+- This front's `proximas_gotas`: NextGouttes.
+
+**Native differential** (`validar_entrada_ordens_ia.py`; report [validacao/entrada-ordens-native.json](../pesquisas-paralelas/ia-runtime/validacao/entrada-ordens-native.json)):
+- 124 comparisons: **113 equal, 0 mismatches, 11 named-dependency stops**.
+- Compared per case: registers EAX..EBP, the whole changed state (18,335 changed bytes), the sound requests and the key answers.
+- Excluded registers: InputGame's EAX and the single-unit CalculIconeAction's EAX. They are leftovers that CalculGame discards (0x42d340 reloads EAX; 0x42d3f0 does not read it).
+- The run used Core's `construcao_core` from `origin/feat/re-core` `63200b5` (read-only extraction, `--nucleo-ref`; its SHA-256 is in the report), because it is not on main yet.
+- The named stops:
+  - BatimentInitAttaqueSelect, InitRecruteTroupe and SetDechargeCaveEnginSelect (no owner translation yet);
+  - CalculIconeAction with a structure selected;
+  - MiniMapSetPos (MiniMapRecentre);
+  - TextGetMessage with the text-table pointer `0x5099a4` = 0. In the MONDE01 display bench no text file is loaded, so the original reads unmapped low memory. This is a gap, not a guessed 0.
+
+The CPU-free replay (`testes/test_entrada_ordens_ia.py`) reruns every case from `evidencias/leituras-entrada-ordens-ia.json.xz`.
+
+**Declared-input API** (`composicao_entrada_ia.py`):
+- `RoteiroEntrada(dados)` reads a `rising-lands/monde01-scripted-input/1` file:
+  - the cursor is held from frame to frame;
+  - the messages are queued per frame;
+  - keys are answered by vkey, 0 when absent;
+  - every consumed answer is logged in the harness's `entradas.jsonl` fields.
+- `ComposicaoEntrada(estado, captura_quadro, entrada, captura_m1, roteiro, inicio=128, alocacoes, regs_inicio)` extends the pinned `ComposicaoQuadros` without modifying it:
+  - `between_frames{k}` runs the `_WinMain@16` loop. Each message gets PeekMessageA = 1, GetMessageA, TranslateMessage = 0 and DispatchMessageA→WndProc, and then the PlaySnd_Manage/MCICD_Manage boundaries with the MSG words. AffGame's order-marker block 0x417b8f..0x417c3c (the `0x4e05ac`/`0x496204` stores) is added.
+  - `frame{k}` uses this front's InputGame, ProcessInputGame and CalculIconeAction.
+  - `executar(n)` yields per phase `phase, registro, entry, exit, ordens, eventos`.
+
+**Chain check against the Mac mini probes** (`provar_entrada_ia.py`). It runs Python only, from the accepted M2.2 frame-128 full state, on Missions' probes at `f058844`, which are read with `git show` and never merged. Compared per frame:
+- the consumed inputs;
+- the SetPlayerOrdre/ProcessInputGame events;
+- counter, game frame, both RNGs, the CRT seed and `0x4e1d18`;
+- view, selection head and objective block;
+- the whole 276-byte records of units 11..15.
+
+| Probe | Frames equal | Orders | End |
+|---|---|---|---|
+| P1 | 501 (129–629) | tag 1 (4113, 4113) at 133 | end of probe |
+| P2 | 601 (129–729) | tag 1 at 133, tag 5 (3347) at 143; the unit walks | end of probe |
+| P3 | 24 (129–152) | tag 1 at 133; CAVE mode at 143; tag 4 (3, 3093) and its ProcessInputGame jump at 153, equal | stop at 153: EnginNextEtape state 11 (this front's next slice; Economy's CalculConstruireBatiment is ready) |
+| K1 | 11 (129–139) | — | stop at 139: WndProc WM_KEYDOWN 0x100 (keys are coverage only) |
+
+This is an indicator-level check. The per-phase whole-state proof under the published mask needs the probes' pass-2 delta captures (M3_PLAN §2), which do not exist yet.

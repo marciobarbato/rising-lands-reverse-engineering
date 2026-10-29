@@ -1,0 +1,47 @@
+{
+ "compared": "per frame: inputs consumed, SetPlayerOrdre/ProcessInputGame, counter, game frame, RNGs, CRT seed, 0x4e1d18, view, selection head, objective block, units 11..15 whole-record SHA-256 prefix",
+ "core_construction_reference": null,
+ "first_difference": null,
+ "frames_equal": 11,
+ "frames_requested": 501,
+ "input_sha256": "92a69cdd087cdc644ef3b8d7abdbf3cfa176d7f564a914b17b2dfc901e4a0600",
+ "last_frame": 139,
+ "orders_python": [],
+ "probe": "K1",
+ "probe_files_sha256": {
+  "comandos.jsonl.xz": "81cb6fa8dcb0ff585db02fd397aecc5dfd8e7930b984df02f5c2dd162f6545bb",
+  "entradas.jsonl.xz": "8f22f25d6307b7b9a9d7b6b9733a8ebe8802e6a902e5503845fed317aad7891b",
+  "quadros.jsonl.xz": "2680b6b8b6fe8ac1b91edfd0c656f2f5f624a25d3699d9a3d0b9331408ed84da",
+  "replay.json": "168ab609ba0e61f62652c4af7d528447e5b2c61667e73faed28d2120eecbb9a8"
+ },
+ "probe_ref": {
+  "ref": "f058844",
+  "sha": "f0588447b6cea3cc10701233a55bbcd16551e5e5"
+ },
+ "schema": "rising-lands/m3-1-input-chain-check/1",
+ "seconds": 20.786,
+ "source_revision": "a8d1fb3ffb464848516617193bfc357e3a33a290",
+ "source_sha256": {
+  "pesquisas-paralelas/ia-runtime/affgame_hud_ia.py": "afdb24dacf4c58646b81e16e6826a106065a2e8b200e3013ed3f89bdb9332708",
+  "pesquisas-paralelas/ia-runtime/composicao_encadeada_ia.py": "4d4f45ce5fc2c2599884d876f7c189554c61b71852115a83d4c96a6f4efc873b",
+  "pesquisas-paralelas/ia-runtime/composicao_entrada_ia.py": "f0aa180ce239170154bd859a6f30cef18055a8b99dfbee5f38ecfbd62da2eaf8",
+  "pesquisas-paralelas/ia-runtime/composicao_quadros_ia.py": "afdc8a396b254f5e65167b215c9a785d18cba530169c683ad5c35d63ed786e43",
+  "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "9977d2e0abc4e14c49844c9ae039b212c78975aa97925bf397121ea32015054d",
+  "pesquisas-paralelas/ia-runtime/provar_entrada_ia.py": "4bb0d9f78168254118620c92efda191fa2501319ce08fc48dd20006db43cda89",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "8bf3f96ab91b391aed91231fc67b475c84bc96c4af6b18ee7ef1cfd14de44db5",
+  "pesquisas-paralelas/ia-runtime/proxima_etapa_quadro.py": "d9a3c39db33703c43d0cc16de2446b6cf860f894aa2d875a1828bbfda3f11f80"
+ },
+ "start": {
+  "frame": 128,
+  "source": "pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz",
+  "summary": {
+   "blocks": 25197,
+   "bytes": 16175335,
+   "sha256": "eb714f7d5a694ad91bab9b41c37a28860006c89be03f9170e3b312064a4b04b2"
+  }
+ },
+ "stop": {
+  "dependency": "WndProc message 0x100 required at 0x004181b5; earlier stores retained",
+  "frame": 139
+ }
+}

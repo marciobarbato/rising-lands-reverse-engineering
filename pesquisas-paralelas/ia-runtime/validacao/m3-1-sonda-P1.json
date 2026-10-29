@@ -1,0 +1,66 @@
+{
+ "compared": "per frame: inputs consumed, SetPlayerOrdre/ProcessInputGame, counter, game frame, RNGs, CRT seed, 0x4e1d18, view, selection head, objective block, units 11..15 whole-record SHA-256 prefix",
+ "core_construction_reference": {
+  "construcao_core_sha256": "7ccf640c5adda6e1a2c0e81bcce0307c0117eca862699af5fc7d34d5fe35a5fa",
+  "path": ".local/entrada/nucleo-ref"
+ },
+ "first_difference": null,
+ "frames_equal": 501,
+ "frames_requested": 501,
+ "input_sha256": "28f71d2cf55a9715214da06e42212d3e04bdb1919cd003754c1a290e26d1a20a",
+ "last_frame": 629,
+ "orders_python": [
+  {
+   "frame": 133,
+   "player": 0,
+   "site": "0x42ba20",
+   "tag": 1,
+   "word2": 4113,
+   "word4": 4113,
+   "word6": 0,
+   "word8": 0
+  },
+  {
+   "event": "ProcessInputGame",
+   "frame": 133,
+   "jump_target": "0x45ee46",
+   "packet": "01001110111000000000",
+   "player": 0,
+   "tag": 1
+  }
+ ],
+ "probe": "P1",
+ "probe_files_sha256": {
+  "comandos.jsonl.xz": "e5317d9fe5c12c6e5c6460af1eaa74c2fa2a0190a3a43e9f12488bfaaf856f23",
+  "entradas.jsonl.xz": "b114b35d127926692f493971b177a7e92d4ca22091e9b042dec4cfbce35f18f9",
+  "quadros.jsonl.xz": "c1b04f2284f01b2b3d6e108df47bb59677ccb4cf3653729d041831ecee5ea14e",
+  "replay.json": "3f0d4a712e69e7373883aaa9e9f661495d382b17e4c32bec44a85e895e3110df"
+ },
+ "probe_ref": {
+  "ref": "f058844",
+  "sha": "f0588447b6cea3cc10701233a55bbcd16551e5e5"
+ },
+ "schema": "rising-lands/m3-1-input-chain-check/1",
+ "seconds": 29.095,
+ "source_revision": "a8d1fb3ffb464848516617193bfc357e3a33a290",
+ "source_sha256": {
+  "pesquisas-paralelas/ia-runtime/affgame_hud_ia.py": "afdb24dacf4c58646b81e16e6826a106065a2e8b200e3013ed3f89bdb9332708",
+  "pesquisas-paralelas/ia-runtime/composicao_encadeada_ia.py": "4d4f45ce5fc2c2599884d876f7c189554c61b71852115a83d4c96a6f4efc873b",
+  "pesquisas-paralelas/ia-runtime/composicao_entrada_ia.py": "f0aa180ce239170154bd859a6f30cef18055a8b99dfbee5f38ecfbd62da2eaf8",
+  "pesquisas-paralelas/ia-runtime/composicao_quadros_ia.py": "afdc8a396b254f5e65167b215c9a785d18cba530169c683ad5c35d63ed786e43",
+  "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "9977d2e0abc4e14c49844c9ae039b212c78975aa97925bf397121ea32015054d",
+  "pesquisas-paralelas/ia-runtime/provar_entrada_ia.py": "4bb0d9f78168254118620c92efda191fa2501319ce08fc48dd20006db43cda89",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "8bf3f96ab91b391aed91231fc67b475c84bc96c4af6b18ee7ef1cfd14de44db5",
+  "pesquisas-paralelas/ia-runtime/proxima_etapa_quadro.py": "d9a3c39db33703c43d0cc16de2446b6cf860f894aa2d875a1828bbfda3f11f80"
+ },
+ "start": {
+  "frame": 128,
+  "source": "pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz",
+  "summary": {
+   "blocks": 25197,
+   "bytes": 16175335,
+   "sha256": "eb714f7d5a694ad91bab9b41c37a28860006c89be03f9170e3b312064a4b04b2"
+  }
+ },
+ "stop": null
+}
