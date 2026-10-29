@@ -36,6 +36,11 @@ Per phase this compares:
 It also tables the HUD flag 0x4e05a2 after every between-frames phase. AffGame's store to it is derived from the
 code (``affgame_hud_ia``) and checked against the capture here.
 
+``--parte`` compares one self-contained part of a long run (M2.3, Missions' ``pacotes_quadros_missao``).
+A part opens with a full state and carries complete deltas, and each phase adds ``compared_summary`` and
+``masked_sha256``. Python starts from the opening state, every phase hash and full state is checked by replay,
+and each part runs independently of the others.
+
 ``--a-partir-de K`` starts Python from the reference state after frame K (for example a full state at frame
 8,999 for M2.3b), with the capture's allocation records and the between_frames(K+1) entry registers as
 declared inputs. The full chain from load_tail stays the default.
@@ -118,6 +123,30 @@ def resumo_estado(blocos):
     return dict(blocks=len(blocos), bytes=sum(len(d) for _, d in blocos.values()), sha256=h.hexdigest())
 
 
+def resumos_mascarados(mascara, blocos):
+    """(compared_summary, masked_sha256) with the definitions of Missions' ``pacotes_quadros_missao``.
+
+    compared_summary is ``resumo_imagem`` with every masked byte set to 0. masked_sha256 is SHA-256 over, for
+    each block sorted by name and each mask range intersecting it in address order,
+    ``<II start, length>`` + those bytes. ``native_stack`` is never a block.
+    """
+    comparado, mascarado = {}, hashlib.sha256()
+    for nome in sorted(blocos):
+        if nome == 'native_stack':
+            continue
+        base, dados = blocos[nome]
+        faixas = list(mascara._sobrepostas(base, base + len(dados)))
+        if faixas:
+            buf = bytearray(dados)
+            for a, z in faixas:
+                mascarado.update(struct.pack('<II', a, z - a))
+                mascarado.update(dados[a - base:z - base])
+                buf[a - base:z - base] = bytes(z - a)
+            dados = bytes(buf)
+        comparado[nome] = (base, dados)
+    return resumo_estado(comparado), mascarado.hexdigest()
+
+
 def _dados(campo):
     if 'zlib_base64' in campo:
         return zlib.decompress(base64.b64decode(campo['zlib_base64']))
@@ -153,8 +182,10 @@ def aplicar_delta(estado, delta, fase):
     return novo
 
 
-def fases_referencia(cap, s0):
-    """Yield (phase capture, full block state after it, integrity record), replaying from ``s0``."""
+def fases_referencia(cap, s0, mascara=None):
+    """Yield (phase capture, full block state after it, integrity record), replaying from ``s0``.
+
+    With ``mascara``, a phase's ``compared_summary`` and ``masked_sha256`` (M2.3 parts) are checked too."""
     estado = dict(s0)
     for fase in cap['phases']:
         apos = fase['state_after']
@@ -173,6 +204,14 @@ def fases_referencia(cap, s0):
             integridade['summary_equal'] = resumo == apos['summary']
             if not integridade['summary_equal']:
                 raise IntegridadeCaptura(f"{fase['phase']}: replayed state {resumo} != summary {apos['summary']}")
+        if 'compared_summary' in apos or 'masked_sha256' in apos:
+            if mascara is None:
+                raise IntegridadeCaptura(f"{fase['phase']}: compared_summary present but no mask given")
+            comparado, mascarado = resumos_mascarados(mascara, estado)
+            integridade['compared_summary_equal'] = comparado == apos.get('compared_summary', comparado)
+            integridade['masked_sha256_equal'] = mascarado == apos.get('masked_sha256', mascarado)
+            if not (integridade['compared_summary_equal'] and integridade['masked_sha256_equal']):
+                raise IntegridadeCaptura(f"{fase['phase']}: replayed compared_summary/masked_sha256 differ")
         if 'full_state' in apos:
             completo = {n: (int(b['base'], 16), _dados(b)) for n, b in apos['full_state'].items()}
             atual = {n: v for n, v in estado.items() if n in completo or n != 'native_stack'}
@@ -298,59 +337,15 @@ def ler_estado(estado, endereco, largura):
     return None
 
 
-def comparar(captura, politica, n=None, sha256_bruto=None, inicio=0, continuar=False):
-    """Run the composition along the capture's phases and compare each one. Returns the report body.
+def comparar_sequencia(comp, nomes, quadros, referencia, mascara, contexto, continuar=False):
+    """Run ``comp`` for ``quadros`` frames and compare each phase with the next reference phase.
 
-    ``inicio = k > 0`` starts Python from the reference state after frame(k) instead of composing frames 1..k.
-    The capture either holds those phases (they are replayed and integrity-checked first) or begins at
-    between_frames(k+1), with ``state_s0`` the state after frame(k).
+    Returns (per-phase records, HUD table, result).
     """
-    from composicao_quadros_ia import carregar_cenario_exibicao
-    cap, sha_bruto = carregar_captura(captura, sha256_bruto)
-    pol, faixas, raizes = carregar_politica(politica)
-    mascara = MascaraEnderecos(faixas)
-    estados, cap_v2, entrada, m1 = carregar_cenario_exibicao()
-    nomes = [f['phase'] for f in cap['phases']]
-    comeca_no_ponto = bool(inicio) and nomes[0] == fases_quadros(1, inicio)[0]
-    if comeca_no_ponto:
-        s0 = {n_: (int(b['base'], 16), _dados(b)) for n_, b in cap['state_s0']['full_state'].items()}
-        if resumo_estado(s0) != cap['state_s0']['summary']:
-            raise SystemExit('The capture state_s0 full state does not match its summary')
-        anteriores = 0
-    else:
-        if cap['state_s0']['summary']['sha256'] != cap_v2['state_s0']['summary']['sha256']:
-            raise SystemExit('The capture S0 is not the -v2 MissionLoad final state')
-        s0 = estados['s0']
-        anteriores = len(fases_quadros(inicio)) if inicio else 0
-    quadros = n if n is not None else (len(nomes) - anteriores - (0 if inicio else 1)) // 2
-    esperado = (fases_quadros(inicio) if inicio and not comeca_no_ponto else []) + fases_quadros(quadros, inicio)
-    if nomes[:len(esperado)] != esperado:
-        raise SystemExit(f'Capture phases {nomes[:5]}... do not follow {esperado[:5]}...')
-    imagem = OriginalImage()
-    contexto = ContextoExibicao(imagem, raizes)
     fases, hud, resultado = {}, [], 'equal'
-    referencia = fases_referencia(cap, s0)
-    ponto = None
-    if inicio:
-        estado_ponto = s0
-        for _ in range(anteriores):
-            fase_cap, estado_ponto, _integridade = next(referencia)
-        seguintes = cap['phases'][anteriores:anteriores + 2 * quadros]
-        alocacoes, origem_alocacoes = alocacoes_no_ponto(cap, nomes[anteriores - 1] if anteriores else None,
-                                                         seguintes)
-        regs_inicio = seguintes[0]['entry']['registers']
-        comp = ComposicaoQuadros(estado_ponto, cap, entrada, m1, inicio=inicio, alocacoes=alocacoes,
-                                 regs_inicio=regs_inicio)
-        ponto = dict(frame=inicio, layout='capture begins after the checkpoint' if comeca_no_ponto else
-                     'replayed from state_s0 through the capture', replayed_phases=anteriores,
-                     state_summary=resumo_estado({k: v for k, v in estado_ponto.items() if k != 'native_stack'}),
-                     allocation_records=dict(count=len(alocacoes), source=origem_alocacoes),
-                     entry_registers=regs_inicio)
-    else:
-        comp = ComposicaoQuadros(estados['s0'], cap, entrada, m1)
     passos = comp.executar(quadros)
     primeira = True
-    for nome in fases_quadros(quadros, inicio):
+    for nome in nomes:
         try:
             fase_cap, estado_ref, integridade = next(referencia)
         except IntegridadeCaptura as erro:
@@ -370,6 +365,11 @@ def comparar(captura, politica, n=None, sha256_bruto=None, inicio=0, continuar=F
             if passo['phase'] != nome:
                 raise RuntimeError(f'Phase order: Python {passo["phase"]} vs capture {nome}')
             python = blocos_mapa(comp.mapa)
+            if 'compared_summary' in fase_cap['state_after']:
+                comparado, _ = resumos_mascarados(mascara, python)
+                r['compared_summary'] = dict(python=comparado['sha256'],
+                                             reference=fase_cap['state_after']['compared_summary']['sha256'],
+                                             equal=comparado == fase_cap['state_after']['compared_summary'])
             r['state'] = comparar_estado(mascara, python, estado_ref)
             rng = {a: hex(struct.unpack('<I', comp.mapa.ler(int(a, 16), 4))[0]) for a in ('0x497164', '0x498db4')}
             r['rng'] = dict(python=rng, reference=fase_cap['exit']['rng'], equal=rng == fase_cap['exit']['rng'])
@@ -401,7 +401,8 @@ def comparar(captura, politica, n=None, sha256_bruto=None, inicio=0, continuar=F
                                            reference=ler_estado(estado_ref, a, k)) for nome_, a, k in INDICADORES}
             for v in r['indicators'].values():
                 v['equal'] = v['python'] == v['reference']
-            r['equal'] = (r['state']['equal'] and r['rng']['equal'] and r['bindings']['equal'] and
+            r['equal'] = (r['state']['equal'] and r.get('compared_summary', {}).get('equal', True) and
+                          r['rng']['equal'] and r['bindings']['equal'] and
                           r['boundaries']['equal'] and r['allocation_count']['equal'] and
                           all(v['equal'] for v in r.get('registers', {}).values()) and
                           all(v['equal'] for v in r.get('carried_entry_registers', {}).values()))
@@ -415,6 +416,152 @@ def comparar(captura, politica, n=None, sha256_bruto=None, inicio=0, continuar=F
                 resultado = 'first_difference_' + nome
             if not continuar or r['result'] != 'returned':
                 break
+    return fases, hud, resultado
+
+
+def quadro_da_fase(fase):
+    if fase == 'load_tail':
+        return 0
+    if fase.startswith('between_frames'):
+        return int(fase[len('between_frames'):] or 1)
+    return int(fase[len('frame'):])
+
+
+def alocacoes_da_parte(parte, cap_v2, alocacoes_caminho=None):
+    """Allocation records live at a part's opening.
+
+    They come from ``opening_state.allocations`` or from a declared file (a list, or a part or capture with
+    ``allocations``). Otherwise the -v2 frame capture's final records are used, and only when every phase of the
+    part keeps that count and no block is allocated or released in the part.
+    """
+    if 'allocations' in parte['opening_state']:
+        return parte['opening_state']['allocations'], 'opening_state.allocations'
+    if alocacoes_caminho is not None:
+        dados, _ = carregar_captura(alocacoes_caminho)
+        return (dados if isinstance(dados, list) else dados['allocations']), str(alocacoes_caminho.relative_to(ROOT))
+    registros = cap_v2['allocations']
+    contagens = {f['exit']['allocations'] for f in parte['phases']}
+    mudancas = [f['phase'] for f in parte['phases'] if f['state_delta'].get('allocated') or
+                f['state_delta'].get('released')]
+    if contagens != {len(registros)} or mudancas:
+        raise SystemExit(f'Part {parte.get("part")}: no allocation records at its opening (counts {sorted(contagens)}, '
+                         f'block changes in {mudancas[:3]})')
+    return registros, '-v2 final records (the part keeps the count and allocates/releases nothing)'
+
+
+def comparar_parte(caminho, politica, sha256_bruto=None, alocacoes_caminho=None, continuar=False):
+    """Compare one self-contained part of a long run (Missions' ``pacotes_quadros_missao`` format).
+
+    The part's opening full state is checked against its summary, compared_summary and masked_sha256. Python
+    starts from it (with load_tail from the -v2 MissionLoad state in part 0), every phase is replayed and checked,
+    and Python is compared phase by phase. Parts are independent and can run in parallel.
+    """
+    from composicao_quadros_ia import carregar_cenario_exibicao
+    parte, sha_bruto = carregar_captura(caminho, sha256_bruto)
+    pol, faixas, raizes = carregar_politica(politica)
+    if parte['policy']['sha256'] != sha(politica):
+        raise SystemExit('The part was packaged with another policy file')
+    mascara = MascaraEnderecos(faixas)
+    estados, cap_v2, entrada, m1 = carregar_cenario_exibicao()
+    aberto = parte['opening_state']
+    s0 = {n: (int(b['base'], 16), _dados(b)) for n, b in aberto['full_state'].items()}
+    comparado, mascarado = resumos_mascarados(mascara, s0)
+    abertura = dict(summary_equal=resumo_estado(s0) == aberto['summary'],
+                    compared_summary_equal=comparado == aberto['compared_summary'],
+                    masked_sha256_equal=mascarado == aberto['masked_sha256'])
+    if not all(abertura.values()):
+        raise SystemExit(f'Part opening state does not match its own hashes: {abertura}')
+    nomes = [f['phase'] for f in parte['phases']]
+    named = parte.get('named_inputs') or cap_v2['named_inputs']
+    captura_quadro = dict(named_inputs=named, phases=parte['phases'])
+    if nomes[0] == 'load_tail':
+        if s0 != {n: v for n, v in estados['s0'].items() if n != 'native_stack'}:
+            raise SystemExit('Part 0 does not open with the -v2 MissionLoad final state')
+        inicio, quadros = 0, (len(nomes) - 1) // 2
+        comp = ComposicaoQuadros(estados['s0'], captura_quadro, entrada, m1)
+        alocacoes, origem = m1['allocations'], '-v2 MissionLoad records'
+    else:
+        inicio, quadros = quadro_da_fase(nomes[0]) - 1, len(nomes) // 2
+        alocacoes, origem = alocacoes_da_parte(parte, cap_v2, alocacoes_caminho)
+        comp = ComposicaoQuadros(s0, captura_quadro, entrada, m1, inicio=inicio, alocacoes=alocacoes,
+                                 regs_inicio=parte['phases'][0]['entry']['registers'])
+    if nomes != fases_quadros(quadros, inicio):
+        raise SystemExit(f'Part phases {nomes[:3]}... are not whole frames after frame {inicio}')
+    contexto = ContextoExibicao(OriginalImage(), raizes)
+    referencia = fases_referencia(dict(phases=parte['phases']), s0, mascara)
+    fases, hud, resultado = comparar_sequencia(comp, nomes, quadros, referencia, mascara, contexto, continuar)
+    registros = None
+    if resultado == 'equal' and 'allocations' in parte:
+        registros = comparar_alocacoes(comp.arena.registros, parte['allocations'])
+        if not registros['equal']:
+            resultado = 'allocation_records_differ'
+    return dict(
+        part=dict(path=str(caminho.relative_to(ROOT)), sha256=sha(caminho), raw_json_sha256=sha_bruto,
+                  raw_json_sha256_pinned=sha256_bruto, number=parte.get('part'), frames=parte.get('frames'),
+                  first_phase=nomes[0], last_phase=nomes[-1], previous_part_raw_sha256=parte.get(
+                      'previous_part_raw_sha256'), opening_state=dict(abertura, start_frame=inicio,
+                                                                       allocation_records=dict(count=len(alocacoes),
+                                                                                               source=origem)),
+                  named_inputs='part' if 'named_inputs' in parte else '-v2 frame capture (same declared answers)',
+                  full_states=[f for f, v in fases.items() if v.get('reference_integrity', {}).get(
+                      'checkpoint_full_state_equal')]),
+        policy=dict(path=str(politica.relative_to(ROOT)), sha256=sha(politica), masked_bytes=mascara.bytes),
+        crossings=dict(count=0, writing_compared_bytes=0), hud_flag=hud, phases=fases, allocation_records=registros,
+        summary=dict(result=resultado, phases_compared=len(fases),
+                     phases_equal=sum(1 for v in fases.values() if v['equal'])))
+
+
+def comparar(captura, politica, n=None, sha256_bruto=None, inicio=0, continuar=False):
+    """Run the composition along the capture's phases and compare each one. Returns the report body.
+
+    ``inicio = k > 0`` starts Python from the reference state after frame(k) instead of composing frames 1..k.
+    The capture either holds those phases (they are replayed and integrity-checked first) or begins at
+    between_frames(k+1), with ``state_s0`` the state after frame(k).
+    """
+    from composicao_quadros_ia import carregar_cenario_exibicao
+    cap, sha_bruto = carregar_captura(captura, sha256_bruto)
+    pol, faixas, raizes = carregar_politica(politica)
+    mascara = MascaraEnderecos(faixas)
+    estados, cap_v2, entrada, m1 = carregar_cenario_exibicao()
+    nomes = [f['phase'] for f in cap['phases']]
+    comeca_no_ponto = bool(inicio) and nomes[0] == fases_quadros(1, inicio)[0]
+    if comeca_no_ponto:
+        s0 = {n_: (int(b['base'], 16), _dados(b)) for n_, b in cap['state_s0']['full_state'].items()}
+        if resumo_estado(s0) != cap['state_s0']['summary']:
+            raise SystemExit('The capture state_s0 full state does not match its summary')
+        anteriores = 0
+    else:
+        if cap['state_s0']['summary']['sha256'] != cap_v2['state_s0']['summary']['sha256']:
+            raise SystemExit('The capture S0 is not the -v2 MissionLoad final state')
+        s0 = estados['s0']
+        anteriores = len(fases_quadros(inicio)) if inicio else 0
+    quadros = n if n is not None else (len(nomes) - anteriores - (0 if inicio else 1)) // 2
+    esperado = (fases_quadros(inicio) if inicio and not comeca_no_ponto else []) + fases_quadros(quadros, inicio)
+    if nomes[:len(esperado)] != esperado:
+        raise SystemExit(f'Capture phases {nomes[:5]}... do not follow {esperado[:5]}...')
+    imagem = OriginalImage()
+    contexto = ContextoExibicao(imagem, raizes)
+    referencia = fases_referencia(cap, s0, mascara)
+    ponto = None
+    if inicio:
+        estado_ponto = s0
+        for _ in range(anteriores):
+            fase_cap, estado_ponto, _integridade = next(referencia)
+        seguintes = cap['phases'][anteriores:anteriores + 2 * quadros]
+        alocacoes, origem_alocacoes = alocacoes_no_ponto(cap, nomes[anteriores - 1] if anteriores else None,
+                                                         seguintes)
+        regs_inicio = seguintes[0]['entry']['registers']
+        comp = ComposicaoQuadros(estado_ponto, cap, entrada, m1, inicio=inicio, alocacoes=alocacoes,
+                                 regs_inicio=regs_inicio)
+        ponto = dict(frame=inicio, layout='capture begins after the checkpoint' if comeca_no_ponto else
+                     'replayed from state_s0 through the capture', replayed_phases=anteriores,
+                     state_summary=resumo_estado({k: v for k, v in estado_ponto.items() if k != 'native_stack'}),
+                     allocation_records=dict(count=len(alocacoes), source=origem_alocacoes),
+                     entry_registers=regs_inicio)
+    else:
+        comp = ComposicaoQuadros(estados['s0'], cap, entrada, m1)
+    fases, hud, resultado = comparar_sequencia(comp, fases_quadros(quadros, inicio), quadros, referencia, mascara,
+                                               contexto, continuar)
     alocacoes = comparar_alocacoes(comp.arena.registros, cap['allocations']) if resultado == 'equal' else None
     if alocacoes and not alocacoes['equal']:
         resultado = 'allocation_records_differ'
@@ -435,7 +582,9 @@ def comparar(captura, politica, n=None, sha256_bruto=None, inicio=0, continuar=F
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--captura', required=True)
+    ap.add_argument('--captura', help='a whole N-frame capture')
+    ap.add_argument('--parte', help='one self-contained part of a long run (M2.3)')
+    ap.add_argument('--alocacoes', help='declared allocation records at the part opening (list, part or capture)')
     ap.add_argument('--politica', required=True)
     ap.add_argument('--quadros', type=int)
     ap.add_argument('--sha256', help='pinned SHA-256 of the raw (decompressed) capture JSON')
@@ -457,7 +606,13 @@ def main():
                source_dirty_paths=subprocess.run(['git', '-C', str(ROOT), 'status', '--porcelain', '--',
                                                   'pesquisas-paralelas/ia-runtime'], capture_output=True,
                                                  text=True).stdout.splitlines())
-    rel.update(comparar(ROOT / a.captura, ROOT / a.politica, a.quadros, a.sha256, a.a_partir_de, a.continuar))
+    if bool(a.captura) == bool(a.parte):
+        raise SystemExit('Give exactly one of --captura and --parte')
+    if a.parte:
+        rel.update(comparar_parte(ROOT / a.parte, ROOT / a.politica, a.sha256,
+                                  ROOT / a.alocacoes if a.alocacoes else None, a.continuar))
+    else:
+        rel.update(comparar(ROOT / a.captura, ROOT / a.politica, a.quadros, a.sha256, a.a_partir_de, a.continuar))
     rel['diagnostic_continued_after_difference'] = a.continuar
     rel['seconds'] = round(time.monotonic() - t0, 1)
     saida.parent.mkdir(parents=True, exist_ok=True)

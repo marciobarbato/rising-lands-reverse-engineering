@@ -361,3 +361,14 @@ Main `c7ed947`. The report is [M2_2_PROVA_128_QUADROS.md](M2_2_PROVA_128_QUADROS
   - The final 25,482 records are equal, and the HUD flag matches 128/128.
 - **Mixed bytes:** the HUD flag (modeled) and the clip words (restored by display, equal).
 - **In progress, not pushed:** the M2.3 raid rules at counter 9000 sit on the local branch `wip/ai-raid-rules`. Their capture is waiting for the lease.
+
+
+## M2.3 — raid rules at 9000, Core providers, segmented comparison (2026-10-29)
+
+Main `99c0e4e`. Details are in [M2_3_INCURSAO.md](M2_3_INCURSAO.md), round 2.
+- **Capture first:** `9fbc2bc` (rule calls at counter 9000, native, 38 s under the lease).
+- **Translations:** `regras_incursao_ia` with `REGRAS`, `operacoes_regras(m, p)` and `MundoRegras(m, p)`. Rule signature: `regra(m, p, argumentos, jogador, indice) -> EAX`.
+- **Validation:** `test_regras_incursao_ia` (6/6 calls equal) and `test_incursao_ia.RaidFrameWithCoreProviders`.
+- **Composition:** it uses Core's `incursao_core`; GetFreeCell is a named stop (native stack residue).
+- **Segments:** `comparar_quadros_ia.comparar_parte(caminho, politica, sha256_bruto, alocacoes_caminho)` and `resumos_mascarados(mascara, blocos)`. The CLI is `--parte`/`--alocacoes`.
+- **Gaps:** Core's GetFreeCell residue contract, EnginEstVivant and SetDeplaceEngin; the 9500/9700/11100 rules (their capture needs about 2,100 sequential frames, which goes to the Mac mini); `opening_state.allocations` in Missions' parts.

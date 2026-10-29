@@ -275,7 +275,9 @@ class MaquinaTarefasViva(MaquinaTarefas):
     records, list headers and the active count are read and written in place, so
     no load/store bridge is needed. Every VM method is the inherited one; only the
     storage differs, and nothing is initialized (the state is whatever iaProbReset
-    and the game left there).
+    and the game left there). Bound through a flat memory (``sobre_memoria``), ``nova``
+    and ``postar`` are the raid-validated original-equivalent ``incursao_core``
+    functions, so ai-runtime's chain and the VM post through one implementation.
     """
 
     def __init__(self, programa: ProgramaRegras, memoria, operacoes=None, missao=0, mundo=None):
@@ -291,6 +293,30 @@ class MaquinaTarefasViva(MaquinaTarefas):
         self.livres = _CabecaLista(view, LISTA_LIVRE - POOL_TAREFAS)
         self.contextos = [_CabecaLista(view, CONTEXTOS_TAREFAS - POOL_TAREFAS + 16 * k) for k in range(5)]
         self._vista = view
+        self._plana = None
+
+    def nova(self, tipo):
+        """iaProbNew 0x47d7ec. Bound through a flat memory (``sobre_memoria``), this is the raid-validated
+        ``incursao_core.tarefa_nova``: the program entry is read from u16 0x51a720 + 2*type and the free
+        list's own size/base fields are used, as the original does."""
+        if self._plana is None:
+            return super().nova(tipo)
+        from incursao_core import tarefa_nova
+        indice = tarefa_nova(self._plana, tipo)['EAX']
+        return -1 if indice == 0xffffffff else indice
+
+    def postar(self, jogador, tipo, argumentos=()):
+        """iaProbPost 0x47d920. Bound through a flat memory, this is ``incursao_core.postar_tarefa`` (the single
+        poster for ai-runtime's chain and the VM): EBX/ECX are the first two arguments, the four stack words
+        the rest."""
+        if self._plana is None:
+            return super().postar(jogador, tipo, argumentos)
+        if not 0 <= jogador < 5 or len(argumentos) > 6:
+            raise ValueError('Jogador ou quantidade de argumentos inválidos')
+        from incursao_core import postar_tarefa
+        a = tuple(argumentos) + (0,) * (6 - len(argumentos))
+        indice = postar_tarefa(self._plana, jogador, tipo, a[0], a[1], a[2:6])['EAX']
+        return -1 if indice == 0xffffffff else indice
 
     @classmethod
     def sobre_memoria(cls, programa, memoria, **argumentos):
@@ -298,7 +324,9 @@ class MaquinaTarefasViva(MaquinaTarefas):
         (``memoria_quadro_core.MemoriaQuadro`` or ai-runtime's ``MemoriaDeclarada``)."""
         for base, fim, view in memoria.segmentos:
             if base <= POOL_TAREFAS and FIM_TAREFAS <= fim:
-                return cls(programa, view[POOL_TAREFAS - base:FIM_TAREFAS - base], **argumentos)
+                vm = cls(programa, view[POOL_TAREFAS - base:FIM_TAREFAS - base], **argumentos)
+                vm._plana = memoria
+                return vm
         raise ValueError('No live segment holds the task memory 0x512320..0x514908')
 
     @property
