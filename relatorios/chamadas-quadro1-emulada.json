@@ -38,12 +38,64 @@
    "0": 16,
    "1": 32
   },
+  "ChercheContacteur": {
+   "0": 4,
+   "255": 14
+  },
   "GameNextFrame": {
    "0": 4
   },
   "GetBit": {
    "0": 174,
    "1": 26
+  },
+  "InitGameZone": {
+   "1": 20
+  },
+  "MessageBoxExiste": {
+   "0": 2,
+   "1": 2
+  },
+  "MiniMapGetPos": {
+   "0": 2,
+   "3": 2
+  },
+  "MiniMapGetTaille": {
+   "128": 2,
+   "7": 2
+  },
+  "MouseSetZone": {
+   "0": 4,
+   "112": 2,
+   "128": 2,
+   "144": 2,
+   "16": 2,
+   "160": 4,
+   "176": 4,
+   "192": 2,
+   "208": 2,
+   "224": 2,
+   "240": 2,
+   "32": 2,
+   "48": 2,
+   "64": 2,
+   "80": 6,
+   "96": 2
+  },
+  "MouseTestZone": {
+   "1": 2,
+   "120": 2
+  },
+  "NextAnimTerrain": {
+   "0": 4
+  },
+  "NextAnimVeget": {
+   "2": 3,
+   "3": 1
+  },
+  "PlayerEstContacterPourAlliance": {
+   "0": 6,
+   "1": 4
   },
   "Random": {
    "100": 1,
@@ -69,6 +121,10 @@
    "182": 10,
    "190": 10
   },
+  "SetClipping": {
+   "0": 1,
+   "120": 1
+  },
   "SetCollision": {
    "0": 40
   },
@@ -88,24 +144,39 @@
   "CaseEstDecouverte": 234,
   "CaseEstIlluminee": 204,
   "Chemin_ModifieZone": 48,
+  "ChercheContacteur": 18,
   "GameNextFrame": 4,
   "GetBit": 200,
+  "InitGameZone": 20,
+  "MessageBoxExiste": 4,
+  "MiniMapGetPos": 4,
+  "MiniMapGetTaille": 4,
+  "MouseSetZone": 42,
+  "MouseTestZone": 4,
+  "NextAnimTerrain": 4,
+  "NextAnimVeget": 4,
+  "PlayerEstContacterPourAlliance": 10,
   "Random": 32,
   "SetBit": 20,
+  "SetClipping": 2,
   "SetCollision": 40,
   "SetEnginCollision": 80
  },
- "calls": 678,
+ "calls": 739,
  "cases_with_stores": {
   "CalculFatigue": 40,
   "Chemin_ModifieZone": 32,
   "GameNextFrame": 4,
+  "InitGameZone": 19,
+  "MouseSetZone": 24,
+  "MouseTestZone": 3,
   "Random": 32,
   "SetBit": 6,
+  "SetClipping": 2,
   "SetCollision": 24,
   "SetEnginCollision": 48
  },
- "comparisons": 1918,
+ "comparisons": 2034,
  "dependencies": [],
  "mismatches": [],
  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
@@ -122,11 +193,11 @@
   }
  },
  "perturbation_limit_per_phase": 4,
- "seconds": 48.241,
+ "seconds": 52.918,
  "source_sha256": {
-  "ferramentas/chamadas_quadro_core.py": "05c0807446703ac596c9a3ee3ccebcb2c6921a1ab129e802627a00d9cf13bd2b",
+  "ferramentas/chamadas_quadro_core.py": "c0de0eb1e809ef839c0b831253cf83f883d92e409aa6c180a6162d4269bc8760",
   "ferramentas/memoria_quadro_core.py": "3bed22e2f2ee97f60fa295194789717a62ec01731c81bc56779ac27cfb2fc956",
-  "ferramentas/validar_chamadas_quadro_core.py": "74d436757731cd23132d6eb5165722b93ca9db31c0bbcb9bdb8aa3ac7bf8ec54"
+  "ferramentas/validar_chamadas_quadro_core.py": "e4a2f75491278e534374b1992b2bb81a58f6016ca23e9ffbf5ea38101c3b08ed"
  },
  "unit_pool_base": "0x4140d000"
 }

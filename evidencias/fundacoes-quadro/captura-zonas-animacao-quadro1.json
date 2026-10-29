@@ -1,0 +1,4289 @@
+{
+ "call_counts": {
+  "frame1:NextAnimTerrain": 1,
+  "frame1:NextAnimVeget": 1,
+  "load_tail:ChercheContacteur": 6,
+  "load_tail:InitGameZone": 2,
+  "load_tail:MessageBoxExiste": 2,
+  "load_tail:MiniMapGetPos": 2,
+  "load_tail:MiniMapGetTaille": 2,
+  "load_tail:MouseSetZone": 34,
+  "load_tail:MouseTestZone": 2,
+  "load_tail:NextAnimTerrain": 1,
+  "load_tail:NextAnimVeget": 1,
+  "load_tail:PlayerEstContacterPourAlliance": 6,
+  "load_tail:SetClipping": 1
+ },
+ "calls": [
+  {
+   "caller": "CalculGame+0xa43",
+   "caller_return": "0x42d2ab",
+   "changed_bytes": [
+    [
+     "0x49a01e",
+     0,
+     255
+    ],
+    [
+     "0x49a01f",
+     0,
+     255
+    ],
+    [
+     "0x49a022",
+     0,
+     255
+    ],
+    [
+     "0x49a023",
+     0,
+     255
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0xffff",
+    "ECX": "0xffff",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x40f519",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0xffff",
+    "ECX": "0xffff",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x42d2ab",
+    "ESI": "0x0",
+    "ESP": "0x2007edc"
+   },
+   "native_blocks": [
+    "0x40f519",
+    "0x42d2ab"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [],
+   "routine": "SetClipping"
+  },
+  {
+   "caller": "MenuInit+0x1ce",
+   "caller_return": "0x468489",
+   "changed_bytes": [
+    [
+     "0x5099c4",
+     146,
+     0
+    ],
+    [
+     "0x5099c5",
+     1,
+     0
+    ],
+    [
+     "0x5099c8",
+     230,
+     0
+    ],
+    [
+     "0x5099c9",
+     1,
+     0
+    ],
+    [
+     "0x5099cc",
+     224,
+     1
+    ],
+    [
+     "0x5099cd",
+     1,
+     0
+    ],
+    [
+     "0x5099d0",
+     35,
+     1
+    ],
+    [
+     "0x5099d1",
+     2,
+     0
+    ],
+    [
+     "0x5099d4",
+     250,
+     2
+    ],
+    [
+     "0x5099d5",
+     1,
+     0
+    ],
+    [
+     "0x5099d8",
+     217,
+     0
+    ],
+    [
+     "0x5099d9",
+     1,
+     0
+    ],
+    [
+     "0x5099dc",
+     67,
+     253
+    ],
+    [
+     "0x5099dd",
+     2,
+     255
+    ],
+    [
+     "0x5099e0",
+     43,
+     1
+    ],
+    [
+     "0x5099e1",
+     2,
+     0
+    ],
+    [
+     "0x5099e4",
+     108,
+     254
+    ],
+    [
+     "0x5099e5",
+     2,
+     255
+    ],
+    [
+     "0x5099e8",
+     215,
+     0
+    ],
+    [
+     "0x5099e9",
+     1,
+     0
+    ],
+    [
+     "0x5099ec",
+     179,
+     255
+    ],
+    [
+     "0x5099ed",
+     2,
+     255
+    ],
+    [
+     "0x5099f0",
+     52,
+     1
+    ],
+    [
+     "0x5099f1",
+     2,
+     0
+    ],
+    [
+     "0x5099f4",
+     0,
+     254
+    ],
+    [
+     "0x5099f5",
+     0,
+     255
+    ],
+    [
+     "0x5099f8",
+     0,
+     2
+    ],
+    [
+     "0x5099fc",
+     0,
+     255
+    ],
+    [
+     "0x5099fd",
+     0,
+     255
+    ],
+    [
+     "0x509a00",
+     1,
+     253
+    ],
+    [
+     "0x509a01",
+     0,
+     255
+    ],
+    [
+     "0x509a04",
+     34,
+     254
+    ],
+    [
+     "0x509a05",
+     1,
+     255
+    ],
+    [
+     "0x509a08",
+     0,
+     254
+    ],
+    [
+     "0x509a09",
+     2,
+     255
+    ],
+    [
+     "0x509a0c",
+     78,
+     255
+    ],
+    [
+     "0x509a0d",
+     1,
+     255
+    ],
+    [
+     "0x509a10",
+     28,
+     255
+    ],
+    [
+     "0x509a11",
+     2,
+     255
+    ],
+    [
+     "0x509a14",
+     14,
+     2
+    ],
+    [
+     "0x509a15",
+     1,
+     0
+    ],
+    [
+     "0x509a18",
+     162,
+     254
+    ],
+    [
+     "0x509a19",
+     0,
+     255
+    ],
+    [
+     "0x509a1c",
+     33,
+     253
+    ],
+    [
+     "0x509a1d",
+     1,
+     255
+    ],
+    [
+     "0x509a20",
+     182,
+     255
+    ],
+    [
+     "0x509a21",
+     0,
+     255
+    ],
+    [
+     "0x509a24",
+     43,
+     0
+    ],
+    [
+     "0x509a25",
+     1,
+     0
+    ],
+    [
+     "0x509a28",
+     162,
+     254
+    ],
+    [
+     "0x509a29",
+     0,
+     255
+    ],
+    [
+     "0x509a2c",
+     65,
+     1
+    ],
+    [
+     "0x509a2d",
+     1,
+     0
+    ],
+    [
+     "0x509a30",
+     182,
+     255
+    ],
+    [
+     "0x509a31",
+     0,
+     255
+    ],
+    [
+     "0x509a34",
+     66,
+     0
+    ],
+    [
+     "0x509a38",
+     45,
+     2
+    ],
+    [
+     "0x509a3c",
+     126,
+     2
+    ],
+    [
+     "0x509a40",
+     87,
+     253
+    ],
+    [
+     "0x509a41",
+     0,
+     255
+    ],
+    [
+     "0x509a5c",
+     0,
+     128
+    ],
+    [
+     "0x509a60",
+     0,
+     128
+    ],
+    [
+     "0x509b5c",
+     0,
+     1
+    ],
+    [
+     "0x509b60",
+     0,
+     1
+    ],
+    [
+     "0x509b6c",
+     0,
+     1
+    ],
+    [
+     "0x509b70",
+     0,
+     1
+    ],
+    [
+     "0x509b7c",
+     0,
+     1
+    ],
+    [
+     "0x509b80",
+     0,
+     1
+    ],
+    [
+     "0x509b8c",
+     0,
+     1
+    ],
+    [
+     "0x509b90",
+     0,
+     1
+    ],
+    [
+     "0x509b9c",
+     0,
+     1
+    ],
+    [
+     "0x509ba0",
+     0,
+     1
+    ],
+    [
+     "0x509bac",
+     0,
+     1
+    ],
+    [
+     "0x509bb0",
+     0,
+     1
+    ],
+    [
+     "0x50a9b6",
+     8,
+     31
+    ],
+    [
+     "0x50a9b8",
+     8,
+     31
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x1",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x0",
+    "EIP": "0x471830",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d88"
+   },
+   "exit_registers": {
+    "EAX": "0x1",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x1f",
+    "EIP": "0x468489",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d8c"
+   },
+   "native_blocks": [
+    "0x465818",
+    "0x46582d",
+    "0x468489",
+    "0x469c33",
+    "0x46a1f8",
+    "0x46a20e",
+    "0x46da1e",
+    "0x471830",
+    "0x471840",
+    "0x47193f",
+    "0x471949",
+    "0x471aa4",
+    "0x471ab6",
+    "0x471ad4",
+    "0x471afc",
+    "0x471b34",
+    "0x471b73",
+    "0x471bab",
+    "0x471bd7",
+    "0x471bf9",
+    "0x471c0b",
+    "0x471d74",
+    "0x471d7d",
+    "0x471d8a",
+    "0x471d95",
+    "0x471dd6",
+    "0x471ddb",
+    "0x471de7",
+    "0x471dfc",
+    "0x471e08",
+    "0x471e67",
+    "0x471e73",
+    "0x471ec7",
+    "0x471edc",
+    "0x471ee1",
+    "0x471f30",
+    "0x471f45",
+    "0x471f4d",
+    "0x471f51",
+    "0x471f60",
+    "0x471f6e",
+    "0x471f7b",
+    "0x471fea",
+    "0x471fef",
+    "0x471ff4",
+    "0x472011",
+    "0x47203d",
+    "0x479c50",
+    "0x479c93",
+    "0x479c9a",
+    "0x479c9e"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x496f8c",
+     255,
+     "ChercheContacteur+0x15"
+    ],
+    [
+     "0x496fe0",
+     128,
+     "MiniMapGetTaille+0x1"
+    ],
+    [
+     "0x496fe1",
+     0,
+     "MiniMapGetTaille+0x1"
+    ],
+    [
+     "0x496fe2",
+     128,
+     "MiniMapGetTaille+0xb"
+    ],
+    [
+     "0x496fe3",
+     0,
+     "MiniMapGetTaille+0xb"
+    ],
+    [
+     "0x497285",
+     1,
+     "InitGameZone+0x544"
+    ],
+    [
+     "0x49a018",
+     0,
+     "InitGameZone+0x28d"
+    ],
+    [
+     "0x49a019",
+     0,
+     "InitGameZone+0x28d"
+    ],
+    [
+     "0x49a01a",
+     0,
+     "InitGameZone+0x2cc"
+    ],
+    [
+     "0x49a01b",
+     0,
+     "InitGameZone+0x2cc"
+    ],
+    [
+     "0x4e2928",
+     0,
+     "ChercheContacteur+0xa"
+    ],
+    [
+     "0x4e2f7b",
+     0,
+     "InitGameZone+0x5bc"
+    ],
+    [
+     "0x507d54",
+     0,
+     "MessageBoxExiste+0x6"
+    ],
+    [
+     "0x507d55",
+     0,
+     "MessageBoxExiste+0x6"
+    ],
+    [
+     "0x507d56",
+     0,
+     "MessageBoxExiste"
+    ],
+    [
+     "0x507d57",
+     0,
+     "MessageBoxExiste"
+    ],
+    [
+     "0x507d68",
+     0,
+     "MiniMapGetPos+0x1"
+    ],
+    [
+     "0x507d69",
+     0,
+     "MiniMapGetPos+0x1"
+    ],
+    [
+     "0x507d6a",
+     0,
+     "MiniMapGetPos+0xb"
+    ],
+    [
+     "0x507d6b",
+     0,
+     "MiniMapGetPos+0xb"
+    ],
+    [
+     "0x508041",
+     0,
+     "InitGameZone+0x5ad"
+    ],
+    [
+     "0x5080b4",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b5",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b6",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b7",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b8",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b9",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080ba",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080bb",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080bc",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080bd",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080be",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080bf",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x508726",
+     0,
+     "InitGameZone+0x7ee"
+    ],
+    [
+     "0x508727",
+     0,
+     "InitGameZone+0x7ee"
+    ],
+    [
+     "0x50a9b8",
+     8,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "InitGameZone"
+  },
+  {
+   "caller": "InitGameZone+0x286",
+   "caller_return": "0x471ab6",
+   "changed_bytes": [
+    [
+     "0x5099c4",
+     146,
+     0
+    ],
+    [
+     "0x5099c5",
+     1,
+     0
+    ],
+    [
+     "0x5099c8",
+     230,
+     0
+    ],
+    [
+     "0x5099c9",
+     1,
+     0
+    ],
+    [
+     "0x5099cc",
+     224,
+     1
+    ],
+    [
+     "0x5099cd",
+     1,
+     0
+    ],
+    [
+     "0x5099d0",
+     35,
+     1
+    ],
+    [
+     "0x5099d1",
+     2,
+     0
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x1",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0x10",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x1",
+    "EIP": "0x471ab6",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471ab6",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     8,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x2a4",
+   "caller_return": "0x471ad4",
+   "changed_bytes": [
+    [
+     "0x5099d4",
+     250,
+     2
+    ],
+    [
+     "0x5099d5",
+     1,
+     0
+    ],
+    [
+     "0x5099d8",
+     217,
+     0
+    ],
+    [
+     "0x5099d9",
+     1,
+     0
+    ],
+    [
+     "0x5099dc",
+     67,
+     253
+    ],
+    [
+     "0x5099dd",
+     2,
+     255
+    ],
+    [
+     "0x5099e0",
+     43,
+     1
+    ],
+    [
+     "0x5099e1",
+     2,
+     0
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x2",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0xfffd",
+    "EDI": "0x2007d8c",
+    "EDX": "0x2",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0x20",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0xfffd",
+    "EDI": "0x2007d8c",
+    "EDX": "0x1",
+    "EIP": "0x471ad4",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471ad4",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     8,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x2cc",
+   "caller_return": "0x471afc",
+   "changed_bytes": [
+    [
+     "0x5099e4",
+     108,
+     254
+    ],
+    [
+     "0x5099e5",
+     2,
+     255
+    ],
+    [
+     "0x5099e8",
+     215,
+     0
+    ],
+    [
+     "0x5099e9",
+     1,
+     0
+    ],
+    [
+     "0x5099ec",
+     179,
+     255
+    ],
+    [
+     "0x5099ed",
+     2,
+     255
+    ],
+    [
+     "0x5099f0",
+     52,
+     1
+    ],
+    [
+     "0x5099f1",
+     2,
+     0
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x3",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0xffff",
+    "EDI": "0x2007d8c",
+    "EDX": "0xfffe",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0x30",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0xffff",
+    "EDI": "0x2007d8c",
+    "EDX": "0x1",
+    "EIP": "0x471afc",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471afc",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     8,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x304",
+   "caller_return": "0x471b34",
+   "changed_bytes": [
+    [
+     "0x5099f4",
+     0,
+     254
+    ],
+    [
+     "0x5099f5",
+     0,
+     255
+    ],
+    [
+     "0x5099f8",
+     0,
+     2
+    ],
+    [
+     "0x5099fc",
+     0,
+     255
+    ],
+    [
+     "0x5099fd",
+     0,
+     255
+    ],
+    [
+     "0x509a00",
+     1,
+     253
+    ],
+    [
+     "0x509a01",
+     0,
+     255
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x4",
+    "EBP": "0x0",
+    "EBX": "0x2",
+    "ECX": "0xffff",
+    "EDI": "0x2007d8c",
+    "EDX": "0xfffe",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0x40",
+    "EBP": "0x0",
+    "EBX": "0x2",
+    "ECX": "0xffff",
+    "EDI": "0x2007d8c",
+    "EDX": "0xfffd",
+    "EIP": "0x471b34",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471b34",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     8,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x343",
+   "caller_return": "0x471b73",
+   "changed_bytes": [
+    [
+     "0x509a04",
+     34,
+     254
+    ],
+    [
+     "0x509a05",
+     1,
+     255
+    ],
+    [
+     "0x509a08",
+     0,
+     254
+    ],
+    [
+     "0x509a09",
+     2,
+     255
+    ],
+    [
+     "0x509a0c",
+     78,
+     255
+    ],
+    [
+     "0x509a0d",
+     1,
+     255
+    ],
+    [
+     "0x509a10",
+     28,
+     255
+    ],
+    [
+     "0x509a11",
+     2,
+     255
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x5",
+    "EBP": "0x0",
+    "EBX": "0xfffe",
+    "ECX": "0xffff",
+    "EDI": "0x2007d8c",
+    "EDX": "0xfffe",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0x50",
+    "EBP": "0x0",
+    "EBX": "0xfffe",
+    "ECX": "0xffff",
+    "EDI": "0x2007d8c",
+    "EDX": "0xffff",
+    "EIP": "0x471b73",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471b73",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     8,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x37b",
+   "caller_return": "0x471bab",
+   "changed_bytes": [
+    [
+     "0x509a14",
+     14,
+     2
+    ],
+    [
+     "0x509a15",
+     1,
+     0
+    ],
+    [
+     "0x509a18",
+     162,
+     254
+    ],
+    [
+     "0x509a19",
+     0,
+     255
+    ],
+    [
+     "0x509a1c",
+     33,
+     253
+    ],
+    [
+     "0x509a1d",
+     1,
+     255
+    ],
+    [
+     "0x509a20",
+     182,
+     255
+    ],
+    [
+     "0x509a21",
+     0,
+     255
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x6",
+    "EBP": "0x0",
+    "EBX": "0xfffe",
+    "ECX": "0xfffd",
+    "EDI": "0x2007d8c",
+    "EDX": "0x2",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0x60",
+    "EBP": "0x0",
+    "EBX": "0xfffe",
+    "ECX": "0xfffd",
+    "EDI": "0x2007d8c",
+    "EDX": "0xffff",
+    "EIP": "0x471bab",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471bab",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     8,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x3a7",
+   "caller_return": "0x471bd7",
+   "changed_bytes": [
+    [
+     "0x509a24",
+     43,
+     0
+    ],
+    [
+     "0x509a25",
+     1,
+     0
+    ],
+    [
+     "0x509a28",
+     162,
+     254
+    ],
+    [
+     "0x509a29",
+     0,
+     255
+    ],
+    [
+     "0x509a2c",
+     65,
+     1
+    ],
+    [
+     "0x509a2d",
+     1,
+     0
+    ],
+    [
+     "0x509a30",
+     182,
+     255
+    ],
+    [
+     "0x509a31",
+     0,
+     255
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x7",
+    "EBP": "0x0",
+    "EBX": "0xfffe",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0x70",
+    "EBP": "0x0",
+    "EBX": "0xfffe",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0xffff",
+    "EIP": "0x471bd7",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471bd7",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     8,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x3c9",
+   "caller_return": "0x471bf9",
+   "changed_bytes": [
+    [
+     "0x509a34",
+     66,
+     0
+    ],
+    [
+     "0x509a38",
+     45,
+     2
+    ],
+    [
+     "0x509a3c",
+     126,
+     2
+    ],
+    [
+     "0x509a40",
+     87,
+     253
+    ],
+    [
+     "0x509a41",
+     0,
+     255
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x8",
+    "EBP": "0x0",
+    "EBX": "0x2",
+    "ECX": "0x2",
+    "EDI": "0x2007d8c",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0x80",
+    "EBP": "0x0",
+    "EBX": "0x2",
+    "ECX": "0x2",
+    "EDI": "0x2007d8c",
+    "EDX": "0xfffd",
+    "EIP": "0x471bf9",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471bf9",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     8,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x3db",
+   "caller_return": "0x471c0b",
+   "changed_bytes": [
+    [
+     "0x50a9b8",
+     8,
+     9
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x9",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0x90",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x0",
+    "EIP": "0x471c0b",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471c0b",
+    "0x479c50",
+    "0x479c93"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     8,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x55a",
+   "caller_return": "0x471d8a",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x2007d70",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x2007d74",
+    "EIP": "0x46a1f8",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d64"
+   },
+   "exit_registers": {
+    "EAX": "0x2000000",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x2007d74",
+    "EIP": "0x471d8a",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x46a1f8",
+    "0x471d8a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x507d68",
+     0,
+     "MiniMapGetPos+0x1"
+    ],
+    [
+     "0x507d69",
+     0,
+     "MiniMapGetPos+0x1"
+    ],
+    [
+     "0x507d6a",
+     0,
+     "MiniMapGetPos+0xb"
+    ],
+    [
+     "0x507d6b",
+     0,
+     "MiniMapGetPos+0xb"
+    ]
+   ],
+   "routine": "MiniMapGetPos"
+  },
+  {
+   "caller": "InitGameZone+0x565",
+   "caller_return": "0x471d95",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x2007d6c",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x2007d68",
+    "EIP": "0x46a20e",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d64"
+   },
+   "exit_registers": {
+    "EAX": "0x2000080",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x2007d68",
+    "EIP": "0x471d95",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x46a20e",
+    "0x471d95"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x496fe0",
+     128,
+     "MiniMapGetTaille+0x1"
+    ],
+    [
+     "0x496fe1",
+     0,
+     "MiniMapGetTaille+0x1"
+    ],
+    [
+     "0x496fe2",
+     128,
+     "MiniMapGetTaille+0xb"
+    ],
+    [
+     "0x496fe3",
+     0,
+     "MiniMapGetTaille+0xb"
+    ]
+   ],
+   "routine": "MiniMapGetTaille"
+  },
+  {
+   "caller": "InitGameZone+0x5ab",
+   "caller_return": "0x471ddb",
+   "changed_bytes": [
+    [
+     "0x509a5c",
+     0,
+     128
+    ],
+    [
+     "0x509a60",
+     0,
+     128
+    ],
+    [
+     "0x50a9b8",
+     9,
+     10
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0xa",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x80",
+    "EDI": "0x2007d8c",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0xa0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x80",
+    "EDI": "0x2007d8c",
+    "EDX": "0x80",
+    "EIP": "0x471ddb",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471ddb",
+    "0x479c50",
+    "0x479c93"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     9,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x5b7",
+   "caller_return": "0x471de7",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x80",
+    "EDI": "0x2007d8c",
+    "EDX": "0x80",
+    "EIP": "0x465818",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d64"
+   },
+   "exit_registers": {
+    "EAX": "0xff",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x80",
+    "EDI": "0x2007d8c",
+    "EDX": "0x80",
+    "EIP": "0x471de7",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x465818",
+    "0x46582d",
+    "0x471de7"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x496f8c",
+     255,
+     "ChercheContacteur+0x15"
+    ],
+    [
+     "0x4e2928",
+     0,
+     "ChercheContacteur+0xa"
+    ]
+   ],
+   "routine": "ChercheContacteur"
+  },
+  {
+   "caller": "InitGameZone+0x5d8",
+   "caller_return": "0x471e08",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x80",
+    "EDI": "0x2007d8c",
+    "EDX": "0x80",
+    "EIP": "0x465818",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d64"
+   },
+   "exit_registers": {
+    "EAX": "0xff",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x80",
+    "EDI": "0x2007d8c",
+    "EDX": "0x80",
+    "EIP": "0x471e08",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x465818",
+    "0x46582d",
+    "0x471e08"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x496f8c",
+     255,
+     "ChercheContacteur+0x15"
+    ],
+    [
+     "0x4e2928",
+     0,
+     "ChercheContacteur+0xa"
+    ]
+   ],
+   "routine": "ChercheContacteur"
+  },
+  {
+   "caller": "InitGameZone+0x643",
+   "caller_return": "0x471e73",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x80",
+    "EDI": "0x2007d8c",
+    "EDX": "0x80",
+    "EIP": "0x465818",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d64"
+   },
+   "exit_registers": {
+    "EAX": "0xff",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x80",
+    "EDI": "0x2007d8c",
+    "EDX": "0x80",
+    "EIP": "0x471e73",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x465818",
+    "0x46582d",
+    "0x471e73"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x496f8c",
+     255,
+     "ChercheContacteur+0x15"
+    ],
+    [
+     "0x4e2928",
+     0,
+     "ChercheContacteur+0xa"
+    ]
+   ],
+   "routine": "ChercheContacteur"
+  },
+  {
+   "caller": "InitGameZone+0x6ac",
+   "caller_return": "0x471edc",
+   "changed_bytes": [
+    [
+     "0x509b5c",
+     0,
+     1
+    ],
+    [
+     "0x509b60",
+     0,
+     1
+    ],
+    [
+     "0x50a9b8",
+     10,
+     26
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x1a",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0x1a0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x1",
+    "EIP": "0x471edc",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471edc",
+    "0x479c50",
+    "0x479c93"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     10,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x6b1",
+   "caller_return": "0x471ee1",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x1a0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x1",
+    "EIP": "0x469c33",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d64"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x1",
+    "EIP": "0x471ee1",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x469c33",
+    "0x471ee1"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x507d54",
+     0,
+     "MessageBoxExiste+0x6"
+    ],
+    [
+     "0x507d55",
+     0,
+     "MessageBoxExiste+0x6"
+    ],
+    [
+     "0x507d56",
+     0,
+     "MessageBoxExiste"
+    ],
+    [
+     "0x507d57",
+     0,
+     "MessageBoxExiste"
+    ]
+   ],
+   "routine": "MessageBoxExiste"
+  },
+  {
+   "caller": "InitGameZone+0x715",
+   "caller_return": "0x471f45",
+   "changed_bytes": [
+    [
+     "0x509b6c",
+     0,
+     1
+    ],
+    [
+     "0x509b70",
+     0,
+     1
+    ],
+    [
+     "0x50a9b8",
+     26,
+     27
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x1b",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0x1b0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x1",
+    "EIP": "0x471f45",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471f45",
+    "0x479c50",
+    "0x479c93"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     26,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x7bf",
+   "caller_return": "0x471fef",
+   "changed_bytes": [
+    [
+     "0x509b7c",
+     0,
+     1
+    ],
+    [
+     "0x509b80",
+     0,
+     1
+    ],
+    [
+     "0x50a9b8",
+     27,
+     28
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x1c",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0x1c0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x1",
+    "EIP": "0x471fef",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471fef",
+    "0x479c50",
+    "0x479c93"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     27,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x74b",
+   "caller_return": "0x471f7b",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x1",
+    "EIP": "0x46da1e",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d64"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x1",
+    "EIP": "0x471f7b",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x46da1e",
+    "0x471f7b"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x5080b4",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b5",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b6",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b7",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ]
+   ],
+   "routine": "PlayerEstContacterPourAlliance"
+  },
+  {
+   "caller": "InitGameZone+0x7bf",
+   "caller_return": "0x471fef",
+   "changed_bytes": [
+    [
+     "0x509b8c",
+     0,
+     1
+    ],
+    [
+     "0x509b90",
+     0,
+     1
+    ],
+    [
+     "0x50a9b8",
+     28,
+     29
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x1d",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0x1d0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x1",
+    "EIP": "0x471fef",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471fef",
+    "0x479c50",
+    "0x479c93"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     28,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x74b",
+   "caller_return": "0x471f7b",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x2",
+    "EIP": "0x46da1e",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d64"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x2",
+    "EIP": "0x471f7b",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x46da1e",
+    "0x471f7b"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x5080b8",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b9",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080ba",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080bb",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ]
+   ],
+   "routine": "PlayerEstContacterPourAlliance"
+  },
+  {
+   "caller": "InitGameZone+0x7bf",
+   "caller_return": "0x471fef",
+   "changed_bytes": [
+    [
+     "0x509b9c",
+     0,
+     1
+    ],
+    [
+     "0x509ba0",
+     0,
+     1
+    ],
+    [
+     "0x50a9b8",
+     29,
+     30
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x1e",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0x1e0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x1",
+    "EIP": "0x471fef",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471fef",
+    "0x479c50",
+    "0x479c93"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     29,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x74b",
+   "caller_return": "0x471f7b",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x3",
+    "EIP": "0x46da1e",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d64"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x3",
+    "EIP": "0x471f7b",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x46da1e",
+    "0x471f7b"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x5080bc",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080bd",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080be",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080bf",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ]
+   ],
+   "routine": "PlayerEstContacterPourAlliance"
+  },
+  {
+   "caller": "InitGameZone+0x7bf",
+   "caller_return": "0x471fef",
+   "changed_bytes": [
+    [
+     "0x509bac",
+     0,
+     1
+    ],
+    [
+     "0x509bb0",
+     0,
+     1
+    ],
+    [
+     "0x50a9b8",
+     30,
+     31
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x1f",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0x1f0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x2007d8c",
+    "EDX": "0x1",
+    "EIP": "0x471fef",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471fef",
+    "0x479c50",
+    "0x479c93"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     30,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x80d",
+   "caller_return": "0x47203d",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0xb",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d60"
+   },
+   "exit_registers": {
+    "EAX": "0xb0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x0",
+    "EIP": "0x47203d",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x47203d",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x119",
+   "caller_return": "0x471949",
+   "changed_bytes": [
+    [
+     "0x50a9b6",
+     8,
+     31
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x1",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x1f",
+    "EIP": "0x479c9e",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d64"
+   },
+   "exit_registers": {
+    "EAX": "0x1",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x2007d8c",
+    "EDX": "0x1f",
+    "EIP": "0x471949",
+    "ESI": "0x494a5b",
+    "ESP": "0x2007d68"
+   },
+   "native_blocks": [
+    "0x471949",
+    "0x479c9e"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [],
+   "routine": "MouseTestZone"
+  },
+  {
+   "caller": "CalculGame+0xa76",
+   "caller_return": "0x42d2de",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x1",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x471830",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "exit_registers": {
+    "EAX": "0x1",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x1f",
+    "EIP": "0x42d2de",
+    "ESI": "0x0",
+    "ESP": "0x2007edc"
+   },
+   "native_blocks": [
+    "0x42d2de",
+    "0x465818",
+    "0x46582d",
+    "0x469c33",
+    "0x46a1f8",
+    "0x46a20e",
+    "0x46da1e",
+    "0x471830",
+    "0x471840",
+    "0x47193f",
+    "0x471949",
+    "0x471aa4",
+    "0x471ab6",
+    "0x471ad4",
+    "0x471afc",
+    "0x471b34",
+    "0x471b73",
+    "0x471bab",
+    "0x471bd7",
+    "0x471bf9",
+    "0x471c0b",
+    "0x471d74",
+    "0x471d7d",
+    "0x471d8a",
+    "0x471d95",
+    "0x471dd6",
+    "0x471ddb",
+    "0x471de7",
+    "0x471dfc",
+    "0x471e08",
+    "0x471e67",
+    "0x471e73",
+    "0x471ec7",
+    "0x471edc",
+    "0x471ee1",
+    "0x471f30",
+    "0x471f45",
+    "0x471f4d",
+    "0x471f51",
+    "0x471f60",
+    "0x471f6e",
+    "0x471f7b",
+    "0x471fea",
+    "0x471fef",
+    "0x471ff4",
+    "0x472011",
+    "0x47203d",
+    "0x479c50",
+    "0x479c9a",
+    "0x479c9e"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x496f8c",
+     255,
+     "ChercheContacteur+0x15"
+    ],
+    [
+     "0x496fe0",
+     128,
+     "MiniMapGetTaille+0x1"
+    ],
+    [
+     "0x496fe1",
+     0,
+     "MiniMapGetTaille+0x1"
+    ],
+    [
+     "0x496fe2",
+     128,
+     "MiniMapGetTaille+0xb"
+    ],
+    [
+     "0x496fe3",
+     0,
+     "MiniMapGetTaille+0xb"
+    ],
+    [
+     "0x497285",
+     1,
+     "InitGameZone+0x544"
+    ],
+    [
+     "0x49a018",
+     0,
+     "InitGameZone+0x28d"
+    ],
+    [
+     "0x49a019",
+     0,
+     "InitGameZone+0x28d"
+    ],
+    [
+     "0x49a01a",
+     0,
+     "InitGameZone+0x2cc"
+    ],
+    [
+     "0x49a01b",
+     0,
+     "InitGameZone+0x2cc"
+    ],
+    [
+     "0x4e2928",
+     0,
+     "ChercheContacteur+0xa"
+    ],
+    [
+     "0x4e2f7b",
+     0,
+     "InitGameZone+0x5bc"
+    ],
+    [
+     "0x507d54",
+     0,
+     "MessageBoxExiste+0x6"
+    ],
+    [
+     "0x507d55",
+     0,
+     "MessageBoxExiste+0x6"
+    ],
+    [
+     "0x507d56",
+     0,
+     "MessageBoxExiste"
+    ],
+    [
+     "0x507d57",
+     0,
+     "MessageBoxExiste"
+    ],
+    [
+     "0x507d68",
+     0,
+     "MiniMapGetPos+0x1"
+    ],
+    [
+     "0x507d69",
+     0,
+     "MiniMapGetPos+0x1"
+    ],
+    [
+     "0x507d6a",
+     0,
+     "MiniMapGetPos+0xb"
+    ],
+    [
+     "0x507d6b",
+     0,
+     "MiniMapGetPos+0xb"
+    ],
+    [
+     "0x508041",
+     0,
+     "InitGameZone+0x5ad"
+    ],
+    [
+     "0x5080b4",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b5",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b6",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b7",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b8",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b9",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080ba",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080bb",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080bc",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080bd",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080be",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080bf",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x508726",
+     0,
+     "InitGameZone+0x7ee"
+    ],
+    [
+     "0x508727",
+     0,
+     "InitGameZone+0x7ee"
+    ],
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "InitGameZone"
+  },
+  {
+   "caller": "InitGameZone+0x286",
+   "caller_return": "0x471ab6",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x1",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0x10",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x471ab6",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471ab6",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x2a4",
+   "caller_return": "0x471ad4",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x2",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0xfffd",
+    "EDI": "0x0",
+    "EDX": "0x2",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0x20",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0xfffd",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x471ad4",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471ad4",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x2cc",
+   "caller_return": "0x471afc",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x3",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0xffff",
+    "EDI": "0x0",
+    "EDX": "0xfffe",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0x30",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0xffff",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x471afc",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471afc",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x304",
+   "caller_return": "0x471b34",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x4",
+    "EBP": "0x0",
+    "EBX": "0x2",
+    "ECX": "0xffff",
+    "EDI": "0x0",
+    "EDX": "0xfffe",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0x40",
+    "EBP": "0x0",
+    "EBX": "0x2",
+    "ECX": "0xffff",
+    "EDI": "0x0",
+    "EDX": "0xfffd",
+    "EIP": "0x471b34",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471b34",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x343",
+   "caller_return": "0x471b73",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x5",
+    "EBP": "0x0",
+    "EBX": "0xfffe",
+    "ECX": "0xffff",
+    "EDI": "0x0",
+    "EDX": "0xfffe",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0x50",
+    "EBP": "0x0",
+    "EBX": "0xfffe",
+    "ECX": "0xffff",
+    "EDI": "0x0",
+    "EDX": "0xffff",
+    "EIP": "0x471b73",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471b73",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x37b",
+   "caller_return": "0x471bab",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x6",
+    "EBP": "0x0",
+    "EBX": "0xfffe",
+    "ECX": "0xfffd",
+    "EDI": "0x0",
+    "EDX": "0x2",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0x60",
+    "EBP": "0x0",
+    "EBX": "0xfffe",
+    "ECX": "0xfffd",
+    "EDI": "0x0",
+    "EDX": "0xffff",
+    "EIP": "0x471bab",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471bab",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x3a7",
+   "caller_return": "0x471bd7",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x7",
+    "EBP": "0x0",
+    "EBX": "0xfffe",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0x70",
+    "EBP": "0x0",
+    "EBX": "0xfffe",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0xffff",
+    "EIP": "0x471bd7",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471bd7",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x3c9",
+   "caller_return": "0x471bf9",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x8",
+    "EBP": "0x0",
+    "EBX": "0x2",
+    "ECX": "0x2",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0x80",
+    "EBP": "0x0",
+    "EBX": "0x2",
+    "ECX": "0x2",
+    "EDI": "0x0",
+    "EDX": "0xfffd",
+    "EIP": "0x471bf9",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471bf9",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x3db",
+   "caller_return": "0x471c0b",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x9",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0x90",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x471c0b",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471c0b",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x55a",
+   "caller_return": "0x471d8a",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x2007ec0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x2007ec4",
+    "EIP": "0x46a1f8",
+    "ESI": "0x0",
+    "ESP": "0x2007eb4"
+   },
+   "exit_registers": {
+    "EAX": "0x2000000",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x2007ec4",
+    "EIP": "0x471d8a",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x46a1f8",
+    "0x471d8a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x507d68",
+     0,
+     "MiniMapGetPos+0x1"
+    ],
+    [
+     "0x507d69",
+     0,
+     "MiniMapGetPos+0x1"
+    ],
+    [
+     "0x507d6a",
+     0,
+     "MiniMapGetPos+0xb"
+    ],
+    [
+     "0x507d6b",
+     0,
+     "MiniMapGetPos+0xb"
+    ]
+   ],
+   "routine": "MiniMapGetPos"
+  },
+  {
+   "caller": "InitGameZone+0x565",
+   "caller_return": "0x471d95",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x2007ebc",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x2007eb8",
+    "EIP": "0x46a20e",
+    "ESI": "0x0",
+    "ESP": "0x2007eb4"
+   },
+   "exit_registers": {
+    "EAX": "0x2000080",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x2007eb8",
+    "EIP": "0x471d95",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x46a20e",
+    "0x471d95"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x496fe0",
+     128,
+     "MiniMapGetTaille+0x1"
+    ],
+    [
+     "0x496fe1",
+     0,
+     "MiniMapGetTaille+0x1"
+    ],
+    [
+     "0x496fe2",
+     128,
+     "MiniMapGetTaille+0xb"
+    ],
+    [
+     "0x496fe3",
+     0,
+     "MiniMapGetTaille+0xb"
+    ]
+   ],
+   "routine": "MiniMapGetTaille"
+  },
+  {
+   "caller": "InitGameZone+0x5ab",
+   "caller_return": "0x471ddb",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0xa",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x80",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0xa0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x80",
+    "EDI": "0x0",
+    "EDX": "0x80",
+    "EIP": "0x471ddb",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471ddb",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x5b7",
+   "caller_return": "0x471de7",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x80",
+    "EDI": "0x0",
+    "EDX": "0x80",
+    "EIP": "0x465818",
+    "ESI": "0x0",
+    "ESP": "0x2007eb4"
+   },
+   "exit_registers": {
+    "EAX": "0xff",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x80",
+    "EDI": "0x0",
+    "EDX": "0x80",
+    "EIP": "0x471de7",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x465818",
+    "0x46582d",
+    "0x471de7"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x496f8c",
+     255,
+     "ChercheContacteur+0x15"
+    ],
+    [
+     "0x4e2928",
+     0,
+     "ChercheContacteur+0xa"
+    ]
+   ],
+   "routine": "ChercheContacteur"
+  },
+  {
+   "caller": "InitGameZone+0x5d8",
+   "caller_return": "0x471e08",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x80",
+    "EDI": "0x0",
+    "EDX": "0x80",
+    "EIP": "0x465818",
+    "ESI": "0x0",
+    "ESP": "0x2007eb4"
+   },
+   "exit_registers": {
+    "EAX": "0xff",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x80",
+    "EDI": "0x0",
+    "EDX": "0x80",
+    "EIP": "0x471e08",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x465818",
+    "0x46582d",
+    "0x471e08"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x496f8c",
+     255,
+     "ChercheContacteur+0x15"
+    ],
+    [
+     "0x4e2928",
+     0,
+     "ChercheContacteur+0xa"
+    ]
+   ],
+   "routine": "ChercheContacteur"
+  },
+  {
+   "caller": "InitGameZone+0x643",
+   "caller_return": "0x471e73",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x80",
+    "EDI": "0x0",
+    "EDX": "0x80",
+    "EIP": "0x465818",
+    "ESI": "0x0",
+    "ESP": "0x2007eb4"
+   },
+   "exit_registers": {
+    "EAX": "0xff",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x80",
+    "EDI": "0x0",
+    "EDX": "0x80",
+    "EIP": "0x471e73",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x465818",
+    "0x46582d",
+    "0x471e73"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x496f8c",
+     255,
+     "ChercheContacteur+0x15"
+    ],
+    [
+     "0x4e2928",
+     0,
+     "ChercheContacteur+0xa"
+    ]
+   ],
+   "routine": "ChercheContacteur"
+  },
+  {
+   "caller": "InitGameZone+0x6ac",
+   "caller_return": "0x471edc",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x1a",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0x1a0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x471edc",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471edc",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x6b1",
+   "caller_return": "0x471ee1",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x1a0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x469c33",
+    "ESI": "0x0",
+    "ESP": "0x2007eb4"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x471ee1",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x469c33",
+    "0x471ee1"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x507d54",
+     0,
+     "MessageBoxExiste+0x6"
+    ],
+    [
+     "0x507d55",
+     0,
+     "MessageBoxExiste+0x6"
+    ],
+    [
+     "0x507d56",
+     0,
+     "MessageBoxExiste"
+    ],
+    [
+     "0x507d57",
+     0,
+     "MessageBoxExiste"
+    ]
+   ],
+   "routine": "MessageBoxExiste"
+  },
+  {
+   "caller": "InitGameZone+0x715",
+   "caller_return": "0x471f45",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x1b",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0x1b0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x471f45",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471f45",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x7bf",
+   "caller_return": "0x471fef",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x1c",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0x1c0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x471fef",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471fef",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x74b",
+   "caller_return": "0x471f7b",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x46da1e",
+    "ESI": "0x0",
+    "ESP": "0x2007eb4"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x471f7b",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x46da1e",
+    "0x471f7b"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x5080b4",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b5",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b6",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b7",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ]
+   ],
+   "routine": "PlayerEstContacterPourAlliance"
+  },
+  {
+   "caller": "InitGameZone+0x7bf",
+   "caller_return": "0x471fef",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x1d",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0x1d0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x471fef",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471fef",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x74b",
+   "caller_return": "0x471f7b",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x2",
+    "EIP": "0x46da1e",
+    "ESI": "0x0",
+    "ESP": "0x2007eb4"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x2",
+    "EIP": "0x471f7b",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x46da1e",
+    "0x471f7b"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x5080b8",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080b9",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080ba",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080bb",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ]
+   ],
+   "routine": "PlayerEstContacterPourAlliance"
+  },
+  {
+   "caller": "InitGameZone+0x7bf",
+   "caller_return": "0x471fef",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x1e",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0x1e0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x471fef",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471fef",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x74b",
+   "caller_return": "0x471f7b",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x3",
+    "EIP": "0x46da1e",
+    "ESI": "0x0",
+    "ESP": "0x2007eb4"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x3",
+    "EIP": "0x471f7b",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x46da1e",
+    "0x471f7b"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x5080bc",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080bd",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080be",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ],
+    [
+     "0x5080bf",
+     0,
+     "PlayerEstContacterPourAlliance+0x10"
+    ]
+   ],
+   "routine": "PlayerEstContacterPourAlliance"
+  },
+  {
+   "caller": "InitGameZone+0x7bf",
+   "caller_return": "0x471fef",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x1f",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0x1f0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x471fef",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471fef",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x80d",
+   "caller_return": "0x47203d",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0xb",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x479c50",
+    "ESI": "0x0",
+    "ESP": "0x2007eb0"
+   },
+   "exit_registers": {
+    "EAX": "0xb0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x47203d",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x47203d",
+    "0x479c50",
+    "0x479c9a"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x50a9b8",
+     31,
+     "MouseSetZone+0x3a"
+    ],
+    [
+     "0x50a9b9",
+     0,
+     "MouseSetZone+0x3a"
+    ]
+   ],
+   "routine": "MouseSetZone"
+  },
+  {
+   "caller": "InitGameZone+0x119",
+   "caller_return": "0x471949",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x1",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x1f",
+    "EIP": "0x479c9e",
+    "ESI": "0x0",
+    "ESP": "0x2007eb4"
+   },
+   "exit_registers": {
+    "EAX": "0x1",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x0",
+    "EDI": "0x0",
+    "EDX": "0x1f",
+    "EIP": "0x471949",
+    "ESI": "0x0",
+    "ESP": "0x2007eb8"
+   },
+   "native_blocks": [
+    "0x471949",
+    "0x479c9e"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [],
+   "routine": "MouseTestZone"
+  },
+  {
+   "caller": "CalculGame+0xbde",
+   "caller_return": "0x42d446",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x3",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x5",
+    "EIP": "0x477700",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x42d446",
+    "ESI": "0x0",
+    "ESP": "0x2007edc"
+   },
+   "native_blocks": [
+    "0x42d446",
+    "0x475bf8",
+    "0x4774f2",
+    "0x477700",
+    "0x477727"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x508726",
+     0,
+     "NextAnimTerrain+0x2a"
+    ],
+    [
+     "0x508727",
+     0,
+     "NextAnimTerrain+0x2a"
+    ]
+   ],
+   "routine": "NextAnimTerrain"
+  },
+  {
+   "caller": "CalculGame+0xc04",
+   "caller_return": "0x42d46c",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x3",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x5",
+    "EIP": "0x4772ec",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "exit_registers": {
+    "EAX": "0x3",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x500",
+    "EIP": "0x42d46c",
+    "ESI": "0x0",
+    "ESP": "0x2007edc"
+   },
+   "native_blocks": [
+    "0x42d46c",
+    "0x475bf8",
+    "0x4772ec",
+    "0x47730e",
+    "0x4774f2"
+   ],
+   "phase": "load_tail",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x508726",
+     0,
+     "NextAnimVeget+0x22"
+    ],
+    [
+     "0x508727",
+     0,
+     "NextAnimVeget+0x22"
+    ]
+   ],
+   "routine": "NextAnimVeget"
+  },
+  {
+   "caller": "CalculGame+0xbde",
+   "caller_return": "0x42d446",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x2",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x4",
+    "EIP": "0x477700",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "exit_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x0",
+    "EIP": "0x42d446",
+    "ESI": "0x0",
+    "ESP": "0x2007edc"
+   },
+   "native_blocks": [
+    "0x42d446",
+    "0x475bf8",
+    "0x4774f2",
+    "0x477700",
+    "0x477727"
+   ],
+   "phase": "frame1",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x508726",
+     0,
+     "NextAnimTerrain+0x2a"
+    ],
+    [
+     "0x508727",
+     0,
+     "NextAnimTerrain+0x2a"
+    ]
+   ],
+   "routine": "NextAnimTerrain"
+  },
+  {
+   "caller": "CalculGame+0xc04",
+   "caller_return": "0x42d46c",
+   "changed_bytes": [],
+   "entry_registers": {
+    "EAX": "0x2",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x4",
+    "EIP": "0x4772ec",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "exit_registers": {
+    "EAX": "0x2",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x400",
+    "EIP": "0x42d46c",
+    "ESI": "0x0",
+    "ESP": "0x2007edc"
+   },
+   "native_blocks": [
+    "0x42d46c",
+    "0x475bf8",
+    "0x4772ec",
+    "0x47730e",
+    "0x4774f2"
+   ],
+   "phase": "frame1",
+   "reached_return": true,
+   "read_before_write": [
+    [
+     "0x508726",
+     0,
+     "NextAnimVeget+0x22"
+    ],
+    [
+     "0x508727",
+     0,
+     "NextAnimVeget+0x22"
+    ]
+   ],
+   "routine": "NextAnimVeget"
+  }
+ ],
+ "input": "exact MONDE01 frame inputs: load_tail is frame 0, frame1 the second pass",
+ "method": "Native call from the exact saved entry state to its stack return (Missions Isolamento); read/write hooks and a basic-block hook, translation cache flushed after each hook_add; native_blocks are the block starts executed by that isolated call including nested routines",
+ "not_reached": [
+  "MarcheGetPos",
+  "MarcheGetTaille",
+  "NextAnimVegetFullMap"
+ ],
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "path_reproduction": {
+  "boundaries_equal": true,
+  "code_unchanged": true,
+  "entry_trace_equal": true,
+  "passed": true,
+  "phase_states_equal": {
+   "between_frames": true,
+   "frame1": true,
+   "load_tail": true
+  }
+ },
+ "routines": {
+  "ChercheContacteur": "0x465818",
+  "InitGameZone": "0x471830",
+  "MarcheGetPos": "0x4620dc",
+  "MarcheGetTaille": "0x4620f2",
+  "MessageBoxExiste": "0x469c33",
+  "MiniMapGetPos": "0x46a1f8",
+  "MiniMapGetTaille": "0x46a20e",
+  "MouseSetZone": "0x479c50",
+  "MouseTestZone": "0x479c9e",
+  "NextAnimTerrain": "0x477700",
+  "NextAnimVeget": "0x4772ec",
+  "NextAnimVegetFullMap": "0x4774fa",
+  "PlayerEstContacterPourAlliance": "0x46da1e",
+  "SetClipping": "0x40f519"
+ },
+ "schema": "rising-lands/monde01-frame1-isolated-core-zone-anim-calls/1",
+ "seconds": 35.189,
+ "source_revision": "67fb81f9532ee98659dbe700087ec23cf698511a",
+ "source_sha256": {
+  "ferramentas/capturar_zonas_animacao_quadro1.py": "81e7b0a8701912f0f6a75da7afc669f313be5609f25ad69c64404e7d375b4ae1",
+  "ferramentas/percurso_quadro1.py": "ebc31a5fc558a327205ee6288e61e8eb57025b1e678d56da883a8ddf64b04cf1",
+  "pesquisas-paralelas/missoes/oraculo_quadro_missao.py": "c01a55adfbb6abb996587fdfd9643e6286d32d551c896f4b369fecaba2ba90f8"
+ },
+ "translation_executed": false
+}

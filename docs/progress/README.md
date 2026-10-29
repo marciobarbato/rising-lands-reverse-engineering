@@ -22,4 +22,6 @@ The live consolidated report is [docs/PROGRESS.md](../PROGRESS.md). It separates
 
 - [Closed M2 round 1 CXR-20261029-M2R1](2026-10-29-M2R1-closed.md): six M2 fronts integrated, including the first-frame original capture at `ec931d2`; frame composition pending, M2 not accepted.
 
+- [Closed M2 round 2 CXR-20261029-M2R2](2026-10-29-M2R2-closed.md): frame-0/1 callees validated at exact inputs and integrated at `67fb81f`; display path to be executed in the oracle; M2 not accepted.
+
 At each actual execution-round closure, append a new `YYYY-MM-DD-CXR-NN-closed.md` snapshot copied from the verified live report and add it here. Keep a failed/pending round too, with its unchanged main SHA and reason. Never edit a prior snapshot to reflect later success. A repeated heartbeat without a changed round disposition does not require a duplicate snapshot.

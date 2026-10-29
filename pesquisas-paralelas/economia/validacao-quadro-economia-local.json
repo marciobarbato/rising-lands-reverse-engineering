@@ -1,7 +1,7 @@
 {
   "scope": "Economy routines reached by the MONDE01 M2 frames: isolated calls at the exact frame-0/1 inputs of the committed first-frame path, plus economy-only sequences and RechercheGetNbInvention over the frozen M1 post-load state; no whole-frame claim",
   "mode": "Python + frozen original capture only",
-  "tests": 10,
+  "tests": 12,
   "failures": 0,
   "errors": 0,
   "skips": [
