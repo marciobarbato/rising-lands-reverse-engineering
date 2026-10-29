@@ -147,6 +147,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         label.frame=NSRect(x:15,y:8,width:770,height:22);label.autoresizingMask = [.width]
         window.contentView?.addSubview(button);window.contentView?.addSubview(stepButton);window.contentView?.addSubview(resetButton);window.contentView?.addSubview(label)
         recordButton.target=self;recordButton.action=#selector(toggleRecording);recordButton.frame=NSRect(x:385,y:36,width:170,height:27)
+        recordButton.toolTip="Gravação de cliques e teclas; arrasto contínuo indisponível"
         let exportButton=NSButton(title:"Exportar entrada",target:self,action:#selector(exportRecording));exportButton.frame=NSRect(x:565,y:36,width:160,height:27)
         window.contentView?.addSubview(recordButton);window.contentView?.addSubview(exportButton)
         metal.inputEvent={ [weak self] event in
@@ -161,6 +162,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         let starting=active && !recording
         if starting{metal.synchronizeModifiers(NSEvent.modifierFlags)}
         recording=active;resetButton.isEnabled = !active;recordButton.title=active ? "● Gravando entrada":"Nova gravação";recordButton.contentTintColor=active ? .systemRed:nil
+        if starting{window.makeKeyAndOrderFront(nil);window.makeFirstResponder(metal)}
         if starting{for key in metal.heldKeys.sorted(){metal.inputEvent?(["kind":"key","vkey":key,"down":true])}}
     }
     func inputBarrier(_ completion:@escaping(Int)->Void){work.async{[weak self] in guard let self=self else{return};let frame=Int(self.status().frames)+1;DispatchQueue.main.async{completion(frame)}}}
