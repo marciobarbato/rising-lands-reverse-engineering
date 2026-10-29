@@ -614,3 +614,23 @@ See [NATIVE_POLICY_HOOKS](NATIVE_POLICY_HOOKS.md).
 - **Timing.** The pass-2 phase loop takes 8.291 s/frame with Python hooks and 1.285 s/frame with native hooks on the same machine and windows, a 6.45× speedup.
 - **Cause of the old cost.** Most of it was Unicorn walking the 10,600 per-range hooks on every access, not the Python callbacks. The native `agrupado` mode uses one spanning hook plus a per-address multiplicity table.
 - **Tests.** Native tests are opt-in (`RISING_EMULAR=1`). The non-native gate does not need the library.
+
+### M3 groundwork: player selection and order setters on `feat/re-core`
+
+See [SELECTION_ORDERS](SELECTION_ORDERS.md).
+- **Captured first.** `bancada_selecao_ordens` pauses the accepted display path at frame 1's first `ProcessInputGame` entry and runs 130 declared leaf calls natively. The phase summaries reproduce and the code is unchanged. The capture (`evidencias/selecao-ordens/`) was committed in `75ed19b`, before the translation.
+- **Translated.** `selecao_ordens.SelecaoOrdens` covers:
+  - SelectionEngin, EnginAddSelection, EnginSelectionnable, SelectionAddEngin, RetireSelectionEngin, DeselectionEngin, DeSelectionGroupe, Deselection, EnginInZone, BatimentSelection and BatimentDeselectionner;
+  - SetDeplaceEnginSelect, SetAttaqueEnginSelect, SetConstruitBatimentSelect, SetEnginConstruitBatiment, SetRecolteEngin(Select) and SetTransporteEngin(Select);
+  - EnginAsk with its volume, and the Bag and volume helpers BatimentSelection reaches.
+
+  `chamar(nome, regs, pilha)` returns EAX..EBP exactly.
+- **Native differential** (`validar_selecao_ordens.py` → `relatorios/selecao-ordens-emulada.json`): 130 comparisons, 0 mismatches. It compares registers, the whole changed state (481 bytes) and 58 sound requests, and the native run equals the committed capture. 94 cases also replay without a CPU (`testes/test_selecao_ordens.py`). The native test is `test_emulacao_selecao_ordens` (RISING_EMULAR=1, about 2 minutes).
+- **Named dependencies:**
+  - Audio: `som(nome, regs, pilha) -> EAX` for PlaySnd_PostSound/StopSound;
+  - Combat: `definir_ataque(unidade, modo, referencia) -> {EAX, EDX}` for SetAttaqueEngin 0x445a36. The validator wires Combat's `ataque_vivo.definir_ataque`.
+- **Deferred to the scripted-input captures:**
+  - the ProcessInputGame tag → setter → argument mapping;
+  - action mode `0x496207` and the HUD rectangles;
+  - the real PlaySnd return values;
+  - the type-6 SetDeplaceEngin branch and BagContient modes other than 1.
