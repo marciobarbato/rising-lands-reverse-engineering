@@ -18,7 +18,7 @@ The strongest positive finding is four absent shipped MONSTRE.INI keys with
 live monster-targeting consumers: HumanOnly=0 and ProbaCaveJoueur=5/ProbaCaveIA=2/
 ProbaEmbuscade=2. These are hidden configuration knobs, not an established
 player difficulty level. iaConfigGetValue 0x47fc54 returns its EBX default
-(bytes89d8c3), so named AI tuning hooks do not read an external configuration.
+(bytes 89d8c3), so named AI tuning hooks do not read an external configuration.
 All 38 ETA missions parse through the unchanged reader; 436 nonempty-cell monster
 records and 380 condition records show per-mission tuning. MONDE01's two timed
 entry periods are 300/360 on disk→9000/10800 logic-counter units; zero-period
@@ -69,8 +69,8 @@ and owned-path checks pass. Six trailing spaces on displayed RET rows were
 normalized; original address/opcode/interval identities remain unchanged.
 The prior research commit preserves the initial formatting.
 
-The two original-research artifacts total **307,720 bytes**:
-JSON 268,166 bytes and assembly 39,554 bytes. All files are below 50MB. Final
+The two original-research artifacts total **307,770 bytes**:
+JSON 268,191 bytes and assembly 39,579 bytes. All files are below 50MB. Final
 validation records output hashes/sizes in [results.json](validation/results.json),
 with [verifier output](validation/final-static-verify.log) and
 [test log](validation/final-tests.log). No emulation, heavy lease or Mac mini
