@@ -22,11 +22,12 @@ POLICY = ROOT / 'pesquisas-paralelas/missoes/validacao/m2-3-politica-comparacao-
 PINS = {MANIFEST: 'e88dc3fcaca11d03a774dad8bd9c768345f13c884cc2d8df493107ec9d180b09',
         POLICY: '384f985bea05137197ea22b3439f96db2f1e6b9a6d8b1a6c986f4955697fc21e'}
 PINS.update({p: FROZEN_PINS[p] for p in (M1_ENTRY, M1_CAPTURE, FIRST_CAPTURE)})
-# A new harness pins the reviewed reference revision independently. The frozen
-# stage2a/2b harness is never edited to accommodate later source changes.
+# Pins are reviewed independently. Main's formal M2.3 comparator update adds
+# measured crossing diagnostics only; every copied comparison definition is
+# unchanged (the AST identity test checks this). Native runtime code is unchanged.
 REFERENCE_PINS = {
     ROOT / 'pesquisas-paralelas/ia-runtime/comparar_quadro1_encadeado_ia.py': 'd1a268d35261c1f75afec9938c9c09b3bbc2bb371d9c81e17e3a8ff9374f82a6',
-    ROOT / 'pesquisas-paralelas/ia-runtime/comparar_quadros_ia.py': 'fd803036a33d6bab2859ae16adcd90023a4001feeb840bd7153aa0705c10ab60',
+    ROOT / 'pesquisas-paralelas/ia-runtime/comparar_quadros_ia.py': 'aa81ee3b1b8514f76fb57ec44841b05289422fb4c177620b6cf571f96a30ac63',
     ROOT / 'pesquisas-paralelas/ia-runtime/composicao_quadros_ia.py': 'afdc8a396b254f5e65167b215c9a785d18cba530169c683ad5c35d63ed786e43',
     ROOT / 'pesquisas-paralelas/ia-runtime/composicao_encadeada_ia.py': '4d4f45ce5fc2c2599884d876f7c189554c61b71852115a83d4c96a6f4efc873b',
     ROOT / 'pesquisas-paralelas/ia-runtime/quadro_calcul_game.py': '1634bed75de495041871540bf33176e3aad607e1cf2c843f96453df623c540d7',

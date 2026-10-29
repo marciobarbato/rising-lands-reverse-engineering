@@ -417,3 +417,25 @@ carries actual Rust state between jobs, without loading later original states.
 The serial benchmark runs S0 through frame 9,200 in one world, exports only
 outside timed execution and checks the complete masked endpoint; it does not
 replace the full phase proof.
+
+The completed [Stage 2c proof](../motor/validation/stage2c/proof.json) is
+**18,401/18,401 phases equal**, comparing **16,022,275 bytes per phase with
+zero mismatches**. It uses all ten declared original package openings and
+chains every subsequent phase within each package. RNGs, allocations,
+bindings, boundaries and compared registers all agree; there is no first
+divergence. The exact mask remains 153,060 display bytes, with all 1,560
+observed changing logic bytes compared. The separate uninterrupted S0-to-9,200
+run matches the complete masked endpoint and measures **101.87 frames/s**
+(90.3068 seconds, excluding exports/comparison/rendering). It supplements the
+phase proof with serial endpoint and timing evidence.
+
+The [delivery summary](../motor/validation/stage2c/summary.json) and
+[handoff](../motor/HANDOFF.md) record source/library hashes, reproduction
+commands and the precise proof scopes. Main's formal Python M2.3 proof was
+merged into this feature branch and reviewed; its diagnostics-only comparer
+update changes no native runtime sources. Both refreshed gates pass:
+`sh motor/validate.sh` (25 Rust tests, 56 Python tests, C/Swift ABI 1.2 smoke)
+and prepared `python3 -B scripts/check.py` (1,881 tests, 610 optional skips).
+The previous missing-input common-check stop is resolved. No Mac mini run is
+needed for the completed native evidence proof. Unreached branches retain
+named failures; project acceptance and integration remain with the coordinator.

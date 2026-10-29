@@ -351,3 +351,100 @@ Python packages, including Unicorn 2.1.4. Original inputs are read-only and no
 tracked reference was patched. The prepared `python3 -B scripts/check.py`
 passes all requested suites (1,860 tests run, 609 optional skips). This
 supersedes the stage 2a/2b environment stop; the earlier log stays preserved.
+
+## Stage 2c — completed evidence proof and delivery
+
+Engine implementation commit `e87b943f45e5744b873424294a323bce77552b26`
+proves **18,401/18,401 phases equal**, with **16,022,275 bytes compared per
+phase and zero mismatches** (294,825,882,275 byte comparisons). The exact
+153,060-byte display mask is unchanged; the 1,560 observed changing logic
+bytes are included. There is no first divergence or dependency stop.
+The [aggregate](validation/stage2c/proof.json), ten compressed per-phase
+reports and [delivery summary](validation/stage2c/summary.json) preserve the
+actual outputs. Every part ran from the same clean implementation commit and
+release library SHA-256
+`aa268176a7448fcae0f2f8de060ac8b0e6857a66bf2930a7327d971589ab3615`.
+
+The completed phase proof uses the ten declared full original openings,
+chaining every phase within each package. State/summary, RNG, bindings,
+boundaries and allocation counts match in all 18,401 phases; between-frame
+registers match 9,200 times and carried entry registers 9,191 times. There are
+138,597 compared bindings, 27,603 compared boundaries and 587 matched shared
+issuers. Display-context exclusions remain exactly the published policy.
+All 25,482 final allocation records match, including actual retained bytes
+for the 146 load-tail bank releases. Final world/AI RNG values are
+`0x128b8024` / `0x3212b7ce`.
+
+The separate [uninterrupted serial run](validation/stage2c/serial-benchmark.json)
+starts at accepted M1 S0 and reaches frame 9,200 without importing a later
+reference state. Its complete masked endpoint, RNGs, allocations and virtual
+clock match (tick 9,201; 460,050 ms). Under an exclusive heavy lease it measures
+**101.87 frames/s**, 90.3068 seconds of phase execution for 9,200 frames on the
+Apple M4 Pro MacBook, including C ABI/Python call overhead and private state
+projection/reload, excluding exported snapshots, comparison and rendering.
+This is an endpoint/timing supplement, not a serial per-phase proof. The
+task's Python timing baseline was not rerun. Each complete proof package ran
+under a heavy lease with a 19-minute inner cap; the longest took 397.35 seconds.
+No Mac mini run is needed for this native proof.
+
+Main `ea62eb4`, containing the formal Python M2.3 proof, was subsequently
+merged into the feature branch as `b3e72e0`. Its comparer change only adds
+measured crossing diagnostics; the comparison helper ASTs remain identical.
+The corresponding reference pin was refreshed. All native Rust/header hashes
+and the release library remain identical to the completed proof. The
+[formal-reference review](validation/stage2c/formal-reference-review.json)
+checks matching evidence/policy identities, phase counts, event counts and
+byte totals against the landed formal report. Original part reports retain
+their original clean source provenance rather than being relabeled.
+
+The refreshed [engine gate](validation/stage2c/engine-gate.log.gz) passes fmt,
+Clippy with warnings denied, 25 Rust tests, 56 Python tests, 75/75 pilot records,
+C layouts and Swift ABI 1.2 smoke, with no new engine skips. The frame-provider
+tests cover 1,106 selected original records and 1,534 perturbed reference cases
+in total. A new frame 0/1 regression remains 3/3 equal. The refreshed
+[common check](validation/stage2c/common-check.log.gz) passes all eight suites:
+1,881 tests run, 610 optional skips. Media, Graphics and Unicorn are available
+through ignored links prepared with the repository helper; no reference input
+was patched. Fresh original emulation and another full Python composition
+were not run by this workstream; the coordinator's formal Python report was
+reviewed instead.
+
+Outside this proven no-input window, normal-player AI, normal-owner sight,
+trap/crush/hunger/sound callbacks, further path continuation/unblocking,
+player-4 alliance-mask resolution and damage/spell effects retain bounded
+implementations or named original-address failures. Rendering, human input and
+playable-app integration remain separate work. No acceptance is recorded and
+no merge into main is performed.
+
+Reproduce from a clean committed checkout. Each native command below is a
+separate bounded job; package commands may run concurrently if the lease
+permits it. Outputs must be fresh paths.
+
+```sh
+lease='/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py'
+python3 "$lease" engine-stage2c-build -- \
+  cargo build --manifest-path motor/Cargo.toml --workspace --locked --release
+python3 -B motor/testes/frame_long_differential.py verify \
+  --output .local/engine-9200-plan-new.json
+for n in 0 1 2 3 4 5 6 7 8 9; do
+  python3 "$lease" "engine-stage2c-part-$n" -- \
+    python3 -B motor/testes/frame_long_differential.py part --part "$n" \
+    --library motor/target/release/librising_engine.dylib \
+    --output ".local/engine-9200-part-$n-new.json.xz" || break
+done
+python3 -B motor/testes/frame_long_differential.py aggregate \
+  --plan .local/engine-9200-plan-new.json \
+  --reports .local/engine-9200-part-{0,1,2,3,4,5,6,7,8,9}-new.json.xz \
+  --output .local/engine-9200-proof-new.json
+python3 "$lease" --exclusive engine-stage2c-serial-benchmark -- \
+  python3 -B motor/testes/frame_long_benchmark.py \
+  --library motor/target/release/librising_engine.dylib \
+  --output .local/engine-9200-benchmark-new.json
+```
+
+For a serial phase proof, add `--serial --checkpoint-out` with a fresh
+checkpoint path to each `part` command, and `--resume` with the preceding
+actual Rust checkpoint for parts 1–9; aggregate with `--serial`. This mode
+requires every continuation hash to match. It is implemented and covered by
+harness tests but was not the completed 18,401-phase run's scope. The serial
+benchmark above is the completed uninterrupted S0 endpoint run.

@@ -1,0 +1,125 @@
+{
+  "schema": "rising-lands/rust-engine-stage2c-delivery/1",
+  "branch": "feat/codex-rust-engine",
+  "engine_code_revision": "e87b943f45e5744b873424294a323bce77552b26",
+  "upstream_main_reviewed": "ea62eb4",
+  "main_refresh_merge": "b3e72e059a0fd9be6b077843baa307d85ce37103",
+  "native_runtime_unchanged_after_proof": true,
+  "reference_refresh": "Audited diagnostics-only comparer update; comparison helper AST identity tests pass. Original part reports retain their clean e87b943 provenance.",
+  "abi": {
+    "version": "1.2",
+    "hex": "0x00010002",
+    "additive": true,
+    "older_explicit_creation": [
+      "1.0",
+      "1.1"
+    ],
+    "frame_input_and_event_bytes": 72
+  },
+  "original_executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "library_sha256": "aa268176a7448fcae0f2f8de060ac8b0e6857a66bf2930a7327d971589ab3615",
+  "proof": {
+    "scope": "ten_declared_opening_checkpoints",
+    "frames": [
+      0,
+      9200
+    ],
+    "phases": 18401,
+    "phases_equal": 18401,
+    "compared_bytes_per_phase": 16022275,
+    "byte_phase_total": 294825882275,
+    "display_only_masked_bytes": 153060,
+    "observed_changed_logic_bytes": 1560,
+    "mismatched_bytes": 0,
+    "first_divergence": null,
+    "dependency_stop": null,
+    "counts_equal": {
+      "state": 18401,
+      "compared_summary": 18401,
+      "rng": 18401,
+      "bindings_outside_display": 18401,
+      "boundaries_outside_display": 18401,
+      "allocation_count": 18401,
+      "between_frames_exit_registers": 9200,
+      "carried_entry_registers": 9191
+    },
+    "events_equal": {
+      "bindings_compared": 138597,
+      "boundaries_compared": 27603,
+      "display_context_bindings_not_modeled": 58904,
+      "display_context_boundaries_not_modeled": 2,
+      "shared_issuers_matched": 587
+    },
+    "allocation_records": 25482,
+    "load_tail_releases": 146,
+    "final_rng": {
+      "0x497164": "0x128b8024",
+      "0x498db4": "0x3212b7ce"
+    }
+  },
+  "serial_supplement": {
+    "scope": "C ABI phase1 and9200 phase2/3pairs including Python call overhead; no timed exports/comparisons/rendering",
+    "no_reference_checkpoint_reload": true,
+    "complete_masked_endpoint_equal": true,
+    "frames_completed": 9200,
+    "frames_per_second": 101.87495126528644,
+    "rust_phase_seconds": 90.306791667,
+    "final_tick": 9201,
+    "virtual_milliseconds": 460050
+  },
+  "machine": "Apple M4 Pro MacBook; 24 GiB; macOS 27.0.1; 12 logical CPUs",
+  "leases": {
+    "all_native_jobs_wrapped": true,
+    "part_inner_timeout_seconds": 1140,
+    "maximum_part_wall_seconds": 397.34674862500003,
+    "mac_mini_needed_for_native_proof": false
+  },
+  "validation": {
+    "engine_gate": "passed",
+    "rust_tests": 25,
+    "python_tests": 56,
+    "pilot_original_records": 75,
+    "selected_frame_original_records": 1106,
+    "perturbed_reference_cases": 1534,
+    "fmt": true,
+    "clippy_deny_warnings": true,
+    "c_layout": true,
+    "swift_abi_smoke": "1.2 passed",
+    "common_check": "passed after workstream prepare/link setup and after latest main refresh",
+    "common_tests_run": 1881,
+    "common_optional_skips": 610,
+    "new_engine_test_skips": 0,
+    "fresh_original_emulation_run": false,
+    "full_python_composition_rerun_by_engine": false,
+    "formal_python_proof_reviewed": {
+      "path": "pesquisas-paralelas/ia-runtime/validacao/m2-3-prova-9200-quadros.json",
+      "sha256": "e96a691f7932792910ac7d5132702792b9a941b8365ef7290228e4a245559c98",
+      "source_revision": "8a5787d6a899dc80a07cc1cdbbbd754d1a138612"
+    }
+  },
+  "gaps": [
+    "Unreached movement/path continuation and world callbacks retain named original-address failures.",
+    "Normal-player AI, combat damage/spells and behavior outside the proven no-input window remain bounded or unsupported.",
+    "No renderer, playable-app integration or project acceptance is claimed.",
+    "Serial per-phase mode is implemented and tested at the harness level; the completed phase proof uses ten declared openings. The uninterrupted serial run validates the endpoint and timing."
+  ],
+  "artifacts": {
+    "common-check.log.gz": "019b4ce98ca519aa63e6354644ba852e12282efea38fab45c5a111ba1be9cc19",
+    "engine-gate.log.gz": "5fae3e8ce3f4ed05d05c766edce0338145230cfe5ca1d8deeaef3192137a74f1",
+    "formal-reference-review.json": "bfd507d8d14cdccd854c7e2c2d70568efe146caf7ffff85bdfd4f4b19e192cc5",
+    "frame1-regression.json": "58d326be6a5e140f56e1af2ff05fbb51da7db20522e566e9e071dc2e873e326b",
+    "package-plan.json": "0c185ea0789cf03b7d9e21f09b4ba8fdd89492ce3be591805d935fa9553672bb",
+    "part00.json.xz": "80049dd97101e53400db7ac240f5dc43f61313b0e2446830e07e610654841ea0",
+    "part01.json.xz": "cd616421c8e1a060a4b4f32ba054397b6fd0320edb0ae0872b7f48b463171fa6",
+    "part02.json.xz": "b1c165534c0c4cae836a7ae974924bcf622ca9801ea135c0f343d7621829c743",
+    "part03.json.xz": "bc7bcaf2c63ba5ab77bf26a21bf7a55f4e7b4f4daec1650c779b32f8f4129aa8",
+    "part04.json.xz": "29e481a42bf5bfe91f7f265e641d49aeb5010b47c02fd8ca95d05c7816d4be4e",
+    "part05.json.xz": "90476cb99671cd10d1032afddb7d134c606743199908cb2daf686695b32cb9ff",
+    "part06.json.xz": "b976e80843d0db7388b5a2a006c0f47c14ac221306091201e7b3aa4d56ae4f3a",
+    "part07.json.xz": "3b940109898b24d83d4ea58b11000acf3802b0827f5f4422e58c8482e026650b",
+    "part08.json.xz": "313dd916933311f116956cd1dd5ca7d7187a6c16ccfbf6b9a8cb366b260e722b",
+    "part09.json.xz": "5e3e76a36f6715e82df0a64337b44b8676fcca807cc882172d6c916fa743a410",
+    "proof.json": "7926fdde2639fc3ee645de6b9338fb36c95c658f960dd469c0161c210425637c",
+    "serial-benchmark.json": "95edaffe58acf5f922fd9ab40b6bf5e06f74a193ff2fe27f139622d9fffe368d"
+  }
+}
