@@ -169,11 +169,18 @@ provider is supplied. The implementation hash is in
 Exact fresh differential command (from the clone):
 
 ```sh
-python3 '/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py'   codex-audio-waiting-slot-differential --   /Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -B   pesquisas-paralelas/audio/validar_indices_fila_audio.py
+python3 '/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py' \
+  codex-audio-waiting-slot-differential -- \
+  /Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -B \
+  pesquisas-paralelas/audio/validar_indices_fila_audio.py \
+  --output .local/audio/waiting-slot-repeat-001.json
 ```
 
-The validator refuses to overwrite its committed result; use a new versioned
-output for another research delivery. The original-only capture command is the
+The validator requires an explicit --output path and refuses existing files
+(including symlinks) before any native capture starts. Relative paths use the
+current working directory; choose another fresh .local/audio/... name for each
+rerun. Final report creation is exclusive too, protecting against a later race.
+The committed original report remains untouched. The original-only capture command is the
 same lease wrapper with `capturar_indices_fila_audio.py` (also exclusive output).
 
 `python3 -B scripts/check.py --domain audio`: **30 discovered, 27 passed,
@@ -203,3 +210,20 @@ No new engine, rendering, mixer, audio device output, artificial callback or
 empty success stub is introduced. Full queue reconstruction and M3 sound
 remain incomplete; this delivery supplies a bounded soundness proof plus a
 small tested queue foundation.
+
+
+### Reproducibility follow-up
+
+The fresh helper validator now accepts required `--output` and checks refusal
+to overwrite before importing/starting native capture. The exact rerun command
+above uses a fresh ignored output. CLI regression tests cover help/required
+arguments, pre-capture overwrite refusal and report creation with a mocked
+capture; they do not rerun unchanged original algorithms or claim a new native
+result. The original 133/133 report and implementation hash remain unchanged.
+
+Latest non-native gate after this follow-up: **34 discovered, 31 passed,
+0 failures, 3 unchanged optional native skips**. The four new CLI tests pass
+without executing original instructions. The original native report is
+byte-identical; no unchanged native algorithm was rerun. See
+[validator-reproducibility.json](validacao/validator-reproducibility.json) and
+[the gate log](validacao/validator-reproducibility-check.log).
