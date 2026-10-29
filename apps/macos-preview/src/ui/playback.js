@@ -27,7 +27,7 @@ window.runSmokeTests=async()=>{
  $('frame').value='12';$('go-frame').click();await until(()=>image.phase==='frame12'&&!$('phase').disabled,'frame 12');
  check('DOM frame selection reaches frame12',image.observed.counter.value===12);
  check('Graphics image and explicit limitations shown',!$('render-image').hidden&&$('render-image').src.startsWith('data:image/png')&&$('render-status').textContent.includes('HUD'));
- check('frame phase is undrawn with inherited stop',image.render.status==='undrawn'&&image.render.inherited_stop.endereco==='0x0041591f');
+ check('frame phase is undrawn without an inherited unit stop',image.render.status==='undrawn'&&!image.render.stop&&!image.render.inherited_stop);
  $('filter').value='dgroup';$('filter').dispatchEvent(new Event('input'));
  check('DOM block filter', $('blocks').children.length===1&&$('blocks').textContent.includes('dgroup'));
  $('reset').click();await until(()=>image.phase==='state_s0'&&!$('phase').disabled,'reset');

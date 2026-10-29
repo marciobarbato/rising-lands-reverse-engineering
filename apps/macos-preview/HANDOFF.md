@@ -512,3 +512,25 @@ preserved. The separate Audio branch supplies a Python reference; its first
 old-watchdog native failure remains historical and the coordinator should
 rerun its merged candidate with this robustness fix. C requires no work.
 There is no milestone claim, live frame plumbing or new game feature.
+
+
+## Graphics 1.3 adoption — separate assets repository
+
+Base `cb3e3245d919eee47b9c05b07a296032fd19a3e9` was fetched and fast-forwarded
+into this dedicated macOS branch with a clean tree. The published additive
+Graphics1.3 contract retains all1.2 signatures/formats and cache/pixel chaining.
+Its normal bodies for types1/8 remove the previous M2.2 unit stop. The consumer
+now accepts exactly(1,3), refuses1.2/1.4/other versions, and pins the committed
+128-frame1.3 reference. Current consumer contract is v4; source snapshot bytes
+and accepted M1/M2 identities remain hash-pinned and unchanged.
+
+The native page labels1.3 and tests no inherited unit stop, retaining the
+explicit HUD/cursor limitation. Generic partial-result tests remain in place
+for records outside the provider domain. No renderer or live delivery was
+implemented. Python remains evidence inspection/reference; the native Rust C ABI
+is the future engine path, with the current apply_frame still reserved.
+
+The large asset payload branch is not merged here. Asset data moves to the
+separate public rising-lands-assets repository; this small app update uses the
+existing explicit read-only CD/runtime inputs. Current full playback and exact
+coordinator native-build results will follow after committed validation.

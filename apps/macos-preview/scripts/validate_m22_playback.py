@@ -6,7 +6,7 @@ import argparse
 import json
 from collections import Counter
 from macos_m22_playback import MacOSM22Playback, PHASES, PINS, SCENARIO
-from macos_graphics_inspection import GraphicsInspectionRenderer
+from macos_graphics_inspection import GraphicsInspectionRenderer, EXPECTED_GRAPHICS_VERSION, RENDER_PINS
 
 
 def main():
@@ -29,7 +29,7 @@ def main():
     result = dict(scenario=SCENARIO, inputs=PINS, phases_verified=len(phases),
                   checkpoints_verified=sum(p['checkpoint_verified'] for p in phases),
                   render_counts=dict(Counter(p['render']['status'] for p in phases)),
-                  graphics_api_version=[1,2], graphics_api_calls=sum(p['render']['api_called'] for p in phases),
+                  graphics_api_version=list(EXPECTED_GRAPHICS_VERSION), graphics_reference_pins=RENDER_PINS, graphics_api_calls=sum(p['render']['api_called'] for p in phases),
                   graphics_checkpoint_hashes_equal=sum(bool(p['render'].get('graphics_chain_equal')) for p in phases),
                   phases=phases)
     args.output.parent.mkdir(parents=True, exist_ok=True)

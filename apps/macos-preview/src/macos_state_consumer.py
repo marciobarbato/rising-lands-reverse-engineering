@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 import re
 
-CONTRACT = 'rising-lands/macos-state-consumer/3'
+CONTRACT = 'rising-lands/macos-state-consumer/4'
 CAPTURE_SHA256 = 'eb7d2303e13e62d4f5692c9cb6ef302b573d138df6a8b51183a6d9b0bd703afc'
 EXECUTABLE_SHA256 = '6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb'
 CAPTURE = 'pesquisas-paralelas/missoes/evidencias/captura-carga-missao-original-v2.json'

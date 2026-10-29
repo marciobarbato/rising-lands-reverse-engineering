@@ -1,7 +1,7 @@
-# macOS accepted-state consumption contract v3
+# macOS accepted-state consumption contract v4
 
-Identifier: `rising-lands/macos-state-consumer/3`. This version adds Graphics
-render API **1.2** chaining to read-only accepted-evidence playback. No live
+Identifier: `rising-lands/macos-state-consumer/4`. This version adds Graphics
+render API **1.3** chaining to read-only accepted-evidence playback. No live
 frame delivery, orders, game input protocol or milestone acceptance is added.
 
 ## Evidence and memory
@@ -47,10 +47,10 @@ between_frames ends at the **next CalculGame entry**, after the window loop has
 incremented the counter. That ending image is not AffGame's entry memory. No
 bytes are patched to manufacture an entry image.
 
-## Graphics 1.2 chain
+## Graphics 1.3 chain
 
 The renderer is loaded in an isolated worker to keep Graphics and Economy's
-flat `construcoes` names separate. Exactly `(1, 2)` is accepted, on module load
+flat `construcoes` names separate. Exactly `(1, 3)` is accepted, on module load
 and returned result; every other version is refused clearly. The original
 service-test KeyError was secondary: a refused version returned `ok:false`
 without `playback`, and the test indexed that key. Tests now assert success
@@ -61,7 +61,7 @@ Four Graphics artifacts are file-SHA pinned in `RENDER_PINS`:
 
 - superficie-inicial-m22-v2.json
 - cache-terreno-inicial-m22-v2.json
-- verificacao-cadeia-m22-v2.json (12 reference renders)
+- verificacao-cadeia-m22-v2-api13-128.json (128 reference renders)
 - superficies-fase-m22-v2.json (257 native phase-end surface hashes)
 
 The initial surface/cache are loaded only through Graphics'
@@ -89,28 +89,33 @@ native Graphics habitation reference. Neither game state nor owner code changes.
 Only Graphics supplies rendering, palette expansion and PNG encoding. The
 shell displays its image with an image element. Cache keys, payload hashes,
 cursor, entry-state identity, stop address and verification status are recorded.
-Applicable chained hashes must equal Graphics' frame 1..12 reference before
+Applicable chained hashes must equal Graphics' frame 1..128 reference before
 publication. Native post-HUD surface hashes are reported as **different** where
 appropriate, never mislabeled as a complete-render success.
 
-## Visible limitations and actual results
+## Visible limitations and Graphics 1.3 evidence
 
-The first stop is frame 1, `0x41591F`, for type 8 (then type 1 without a body).
-Frames 1–5 are partial in the visible playfield. Graphics' own verification
-still returns that named stop for frames 6–12, even though the chained visible
-playfield matches and its first differing row is 547. Therefore the consumer
-preserves **partial** instead of silently upgrading those results to full.
+Graphics 1.3 is additive over 1.2: the inputs, outputs, indexed format and
+cache/surface chaining stay unchanged. Its validated normal bodies for unit
+types1/8 remove the prior 0x41591F stop from accepted M2.2 playback. Other
+records outside Graphics' published domain retain their named stops; generic
+partial/stop handling and version refusal tests remain required.
 
-The complete 128-frame run records **128 partial drawing phases, 129 undrawn
-phases, zero full results, 128 Graphics calls**. All 12 applicable chained hashes
-match. The 257 memory summaries and 11 memory checkpoints remain equal. No
-native pixel checkpoint exists here beyond frame 12; later images are chained
-provider results over accepted memory, not newly oracle-validated pixels.
+The consumer pins Graphics' full128-frame reference, SHA-256
+`4f2d536fec21cde39f885f1e6cccbbda83c5130b8ba60cc557f38c27fc508407`.
+Every drawing phase must match the applicable chained-pixel hash before
+publication. This replaces the old12-frame1.2 reference for current validation;
+the historical reports remain unchanged. There are still257 memory phase
+summaries and11 full memory checkpoints.
 
-HUD rows >=544 and cursor are **not drawn**. Their prior surface values persist.
-An undrawn phase also carries any preceding partial-image stop. Both limitations
-and the lack of independent mid-sequence cache are visible in the native page.
-See [per-phase report](validation/m3-m22-render-v3.json).
+HUD rows >=544 and cursor remain **not drawn**. `full` means the supported
+playfield composition returned without a named stop, not a post-HUD full-frame
+equality claim. Graphics' chain differs from its native checkpoint only below
+the supported playfield (first differing row547, from frame2). Native phase-end
+hashes remain recorded honestly and are not substituted for checkpoint hashes.
+The initial cache/surface are still required; no independent mid-sequence
+start, fallback drawing, live delivery or game input is added. The current
+[per-phase report](validation/m3-m22-render-v4.json) records actual results.
 
 ## Native shell and builds
 
@@ -138,7 +143,7 @@ validated reference and test harness, including this accepted-evidence
 inspection/playback path. The bundled runtime remains for those uses for now;
 its inclusion in a later shipped game is undecided. No live-simulation delivery
 is to be built on the embedded Python worker. `apply_frame` remains reserved
-and raises RuntimeContractPending; contract v3 and its evidence APIs are unchanged.
+and raises RuntimeContractPending; contract v4 and its evidence APIs are unchanged.
 
 The eventual Swift native-library adapter is a separate dependency from the
 read-only evidence worker. Before any loading or calling implementation, the

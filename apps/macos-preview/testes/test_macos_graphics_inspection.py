@@ -1,4 +1,4 @@
-"""Graphics 1.2 consumer protocol; synthetic pixels only test adapter behavior."""
+"""Graphics 1.3 consumer protocol; synthetic pixels only test adapter behavior."""
 from pathlib import Path
 import subprocess
 import sys
@@ -17,10 +17,10 @@ class GraphicsInspectionTests(unittest.TestCase):
     def renderer(self, stop=None):
         cache = NS(registros=bytes(1024), blocos_crus=bytes(256*1056), proximo=76)
         next_cache = NS(registros=bytes(1024), blocos_crus=bytes(256*1056), proximo=77)
-        result = NS(versao=(1, 2), largura=800, altura=600, rgba=bytes(1920000),
+        result = NS(versao=(1, 3), largura=800, altura=600, rgba=bytes(1920000),
                     pixels=bytes(480000), parada=stop, chamadas=(('AffTerrain',),), efeitos=(), cache=next_cache)
         r = object.__new__(GraphicsInspectionRenderer)
-        r.api = NS(VERSAO_RENDER_QUADRO=(1, 2), renderizar_quadro=Mock(return_value=result))
+        r.api = NS(VERSAO_RENDER_QUADRO=(1, 3), renderizar_quadro=Mock(return_value=result))
         r.root, r.catalog, r.initial_pixels, r.initial_cache = ROOT, object(), bytes(480000), cache
         r.references = {}; r.phase_hashes = {n:'reference' for n in ('load_tail','between_frames','frame1','between_frames2')}
         r.encode_png = Mock(return_value=b'encoded-by-graphics')
@@ -44,7 +44,7 @@ class GraphicsInspectionTests(unittest.TestCase):
         self.assertEqual(r.api.renderizar_quadro.call_count,2)
 
     def test_partial_stop_is_retained_in_undrawn_phase(self):
-        stop=dict(endereco='0x0041591f',detalhe='type 8 unsupported')
+        stop=dict(endereco='0x0041591f',detalhe='type 8 outside the supported overlay domain')
         r=self.renderer(stop);self.consume(r,0,'load_tail')
         self.assertEqual(self.consume(r,1,'between_frames')['status'],'partial')
         self.consume(r,2,'frame1')
@@ -52,10 +52,10 @@ class GraphicsInspectionTests(unittest.TestCase):
         self.assertIn('HUD',r.present()['detail'])
 
     def test_every_other_api_version_refused_without_publication(self):
-        for version in ((1,0),(1,1),(1,3),(2,0),None):
+        for version in ((1,0),(1,1),(1,2),(1,4),(2,0),None):
             with self.assertRaises(GraphicsVersionError): require_version(version)
         r=self.renderer();self.consume(r,0,'load_tail')
-        r.api.renderizar_quadro.return_value.versao=(1,3)
+        r.api.renderizar_quadro.return_value.versao=(1,4)
         with self.assertRaises(GraphicsVersionError):self.consume(r,1,'between_frames')
         self.assertEqual(r.index,0)
 
@@ -80,18 +80,18 @@ class GraphicsInspectionTests(unittest.TestCase):
         self.assertIs(r.pixels,r.initial_pixels);self.assertIs(r.cache,r.initial_cache)
         self.assertEqual(r.index,-1)
 
-    def test_real_graphics_api_loads_in_isolated_process_at_version_1_2(self):
+    def test_real_graphics_api_loads_in_isolated_process_at_version_1_3(self):
         script=('import sys;sys.path.insert(0,sys.argv[1]);'
                 'from macos_graphics_inspection import load_graphics;'
                 'print(load_graphics(sys.argv[2]).VERSAO_RENDER_QUADRO)')
         result=subprocess.run([sys.executable,'-I','-B','-c',script,str(ROOT/'apps/macos-preview/src'),str(ROOT)],capture_output=True,text=True,timeout=20)
-        self.assertEqual(result.returncode,0,result.stderr);self.assertEqual(result.stdout.strip(),'(1, 2)')
+        self.assertEqual(result.returncode,0,result.stderr);self.assertEqual(result.stdout.strip(),'(1, 3)')
 
     def test_initial_artifact_modified_or_missing_is_refused_before_asset_load(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory)
             folder=root/'pesquisas-paralelas/graficos-animacao/evidencias';folder.mkdir(parents=True)
-            with patch('macos_graphics_inspection.load_graphics', return_value=NS(VERSAO_RENDER_QUADRO=(1,2))):
+            with patch('macos_graphics_inspection.load_graphics', return_value=NS(VERSAO_RENDER_QUADRO=(1,3))):
                 with self.assertRaises(FileNotFoundError): GraphicsInspectionRenderer(root)
                 (folder/'superficie-inicial-m22-v2.json').write_text('tampered')
                 with self.assertRaisesRegex(StateValidationError,'Unpinned Graphics artifact'): GraphicsInspectionRenderer(root)
