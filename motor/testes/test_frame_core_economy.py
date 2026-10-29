@@ -5,6 +5,9 @@ Every captured read and changed-byte entry is overlaid before both executions;
 all projected bytes must equal Python, and every original compared write/result
 must equal the capture. Rendering/unknown register effects are not asserted.
 """
+from pinned_reference import activate, reference_file, pinned_file
+SOURCE_ROOT = activate()
+
 import ctypes as C
 import hashlib
 import json
@@ -16,12 +19,12 @@ import unittest
 from frame_abi import Frames
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / 'ferramentas'))
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(SOURCE_ROOT / 'ferramentas'))
+sys.path.insert(0, str(SOURCE_ROOT))
 import chamadas_quadro_core as core
 from integracao.providers import load_economy_bonus
 load_economy_bonus()
-sys.path.insert(0, str(ROOT / 'pesquisas-paralelas/economia'))
+sys.path.insert(0, str(SOURCE_ROOT / 'pesquisas-paralelas/economia'))
 import quadro_economia as economy
 
 PINS = {'ferramentas/chamadas_quadro_core.py': 'd8b3568c3346422744868a2b7900e4afdbf84c85e840450f9da5ec863bbb626a', 'pesquisas-paralelas/economia/quadro_economia.py': '28342fb2e68f4e400e79ff321bc6eef5098628ac4941bff25fc48ff48bc38ea2', 'evidencias/fundacoes-quadro/captura-chamadas-quadro1.json': 'fd209b2fb85794a52f778cb757ef79b6a4c42495763407ff731f98a05b4a5a8a', 'evidencias/fundacoes-quadro/captura-zonas-animacao-quadro1.json': '277496ffb203b28e02120f202cd7430af757bedc777f4941b2eb752fba8f1adc', 'evidencias/fundacoes-quadro/captura-exibicao-quadro1.json': 'b4e6747324346ac1aacc1a36b5c31f4ae87b3a35551c6303b32265133385dee0', 'pesquisas-paralelas/economia/evidencias/captura-quadro1-economia-exibicao.json': '53c9d5db27d66483750e9a9df24f6de8538cead45621e81425cc89812fef4439', 'pesquisas-paralelas/economia/evidencias/captura-consultas-economia-exibicao-v2.json': 'fada576f61e00203097cb8c6b610650117416620011835fd9f55c86aea4559c0'}
@@ -118,7 +121,7 @@ class FrameProviders(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         for path,expected in PINS.items():
-            if hashlib.sha256((ROOT/path).read_bytes()).hexdigest()!=expected:
+            if hashlib.sha256(pinned_file(ROOT/path).read_bytes()).hexdigest()!=expected:
                 raise AssertionError(f'Reference identity changed: {path}')
         cls.abi=Frames()
         fn=cls.abi.lib.rl_executar_rotina_quadro
@@ -140,7 +143,7 @@ class FrameProviders(unittest.TestCase):
         for path in ('evidencias/fundacoes-quadro/captura-chamadas-quadro1.json',
                      'evidencias/fundacoes-quadro/captura-zonas-animacao-quadro1.json',
                      'evidencias/fundacoes-quadro/captura-exibicao-quadro1.json'):
-            for case in json.loads((ROOT/path).read_bytes())['calls']:
+            for case in json.loads(pinned_file(ROOT/path).read_bytes())['calls']:
                 name=case['routine']
                 if name not in CORE_IDS:continue
                 with self.subTest(source=path,routine=name,case=total):
@@ -169,7 +172,7 @@ class FrameProviders(unittest.TestCase):
                                'CalculTroupe','BatimentNextEtape:type1_2_13_16'}
         for path in ('pesquisas-paralelas/economia/evidencias/captura-quadro1-economia-exibicao.json',
                      'pesquisas-paralelas/economia/evidencias/captura-consultas-economia-exibicao-v2.json'):
-            for case in json.loads((ROOT/path).read_bytes())['calls']:
+            for case in json.loads(pinned_file(ROOT/path).read_bytes())['calls']:
                 name=case['routine']
                 if name not in supported:continue
                 with self.subTest(source=path,routine=name,case=total):

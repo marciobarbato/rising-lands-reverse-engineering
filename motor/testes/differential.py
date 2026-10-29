@@ -3,6 +3,9 @@
 Only captured bytes are declared. No entire mission snapshot, zero-filled heap,
 original media, optional emulation module, Python simulation or app is needed.
 """
+from pinned_reference import activate, reference_file, pinned_file
+SOURCE_ROOT = activate()
+
 import argparse
 from collections import Counter
 import hashlib
@@ -25,15 +28,15 @@ CAPTURES = {
 def verify_pins(pins=None):
     pins = pins if pins is not None else json.loads((ENGINE / 'testes/reference-pins.json').read_text())
     for path, expected in pins.items():
-        actual = hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
+        actual = hashlib.sha256(pinned_file(ROOT / path).read_bytes()).hexdigest()
         if actual != expected:
             raise ValueError('ReferenceIdentityMismatch: ' + path)
     return pins
 
 
 def references():
-    sys.path.insert(0, str(ROOT / 'ferramentas'))
-    sys.path.insert(0, str(ROOT / 'pesquisas-paralelas/economia'))
+    sys.path.insert(0, str(SOURCE_ROOT / 'ferramentas'))
+    sys.path.insert(0, str(SOURCE_ROOT / 'pesquisas-paralelas/economia'))
     core = importlib.import_module('chamadas_quadro_core')
     provider = importlib.import_module('provedores_economia_quadro')
     memory = importlib.import_module('memoria_quadro_core')

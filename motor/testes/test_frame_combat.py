@@ -1,4 +1,7 @@
 """Raid projectile native captures, plus full-pool perturbed Python comparisons."""
+from pinned_reference import activate, reference_file, pinned_file
+SOURCE_ROOT = activate()
+
 import base64
 import ctypes as C
 import hashlib
@@ -13,7 +16,7 @@ import zlib
 from frame_abi import Frames
 from test_frame_core_economy import Memory
 ROOT=Path(__file__).resolve().parents[2]
-sys.path.insert(0,str(ROOT/'pesquisas-paralelas/combate'))
+sys.path.insert(0,str(SOURCE_ROOT/'pesquisas-paralelas/combate'))
 from projeteis import PoolProjeteis
 import quadro_economia as economy
 
@@ -32,7 +35,7 @@ class RaidCombat(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         for path,wanted in PINS.items():
-            if hashlib.sha256((ROOT/path).read_bytes()).hexdigest()!=wanted:raise ValueError('ReferenceIdentityMismatch: '+path)
+            if hashlib.sha256(pinned_file(ROOT/path).read_bytes()).hexdigest()!=wanted:raise ValueError('ReferenceIdentityMismatch: '+path)
         cls.abi=Frames()
         fn=cls.abi.lib.rl_executar_rotina_quadro
         fn.argtypes=[C.c_uint64,C.c_uint32,C.POINTER(C.c_uint32),C.c_uint32,C.POINTER(C.c_uint32)]

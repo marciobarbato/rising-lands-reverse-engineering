@@ -4,6 +4,9 @@ Every callee runs real Rust/Python logic; native effects are never replayed as
 callbacks. Frozen calls without outside providers also compare directly with Python. V_DeplaceGroupe uses real Rust movement providers. Movement
 and whole-raid composition have their own original comparisons.
 """
+from pinned_reference import activate, reference_file, pinned_file
+SOURCE_ROOT = activate()
+
 import ctypes as C
 import hashlib
 import importlib
@@ -27,10 +30,10 @@ class RaidTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         for path, digest in PINS.items():
-            if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != digest:
+            if hashlib.sha256(pinned_file(ROOT / path).read_bytes()).hexdigest() != digest:
                 raise ValueError('RaidReferenceIdentityMismatch: ' + path)
         for folder in ('ferramentas', 'pesquisas-paralelas/ia-runtime'):
-            sys.path.insert(0, str(ROOT / folder))
+            sys.path.insert(0, str(SOURCE_ROOT / folder))
         cls.raid = importlib.import_module('incursao_ia')
         cls.rules = importlib.import_module('regras_incursao_ia')
         cls.tasks = importlib.import_module('tarefas_ia')
@@ -57,7 +60,7 @@ class RaidTests(unittest.TestCase):
         return self.Memory(buffers), buffers
 
     def test_twenty_five_frozen_original_rules_without_callback_replay(self):
-        captures = [json.loads((ROOT / path).read_bytes()) for path in (CAPTURE, LATER_CAPTURE)]
+        captures = [json.loads(pinned_file(ROOT / path).read_bytes()) for path in (CAPTURE, LATER_CAPTURE)]
         for capture in captures:
             self.assertEqual(capture['original_sha256'], ORIGINAL)
             self.assertFalse(capture['translation_executed'])
