@@ -1,0 +1,71 @@
+{
+  "schema": "rising-lands/static-difficulty-validation/1",
+  "validated_revision": "ec004fe77bb252910ba46222f2afe3c021cb9c8b",
+  "base_main": "a7427fd0e416d212f08af7f0df3d36a224d12f2d",
+  "latest_main_ancestry": true,
+  "tests": {
+    "discovered": 5,
+    "passed": 5,
+    "skipped": 0,
+    "failures": 0,
+    "seconds": 1.683
+  },
+  "static_verification": {
+    "passed": true,
+    "missions": 38,
+    "profile_keys_missing": [
+      "HumanOnly",
+      "ProbaCaveJoueur",
+      "ProbaCaveIA",
+      "ProbaEmbuscade"
+    ],
+    "absolute_profile_operands": 19,
+    "config_calls": 78,
+    "emulated_calls": 0
+  },
+  "documentation_links": "passed",
+  "full_branch_whitespace": "git diff --check origin/main...HEAD passed",
+  "ownership": "only pesquisas-paralelas/dificuldade/**",
+  "emulated_calls": 0,
+  "original_media_writes": 0,
+  "artifacts": [
+    {
+      "path": "pesquisas-paralelas/dificuldade/evidence/static-scan-v1.json",
+      "bytes": 268191,
+      "sha256": "0698dec9eb506f9dbf92e09ee784d02ed68ebf986c81623e0d61d35589f30fcd"
+    },
+    {
+      "path": "pesquisas-paralelas/dificuldade/evidence/reviewed-routines.asm",
+      "bytes": 39579,
+      "sha256": "657f6115a5f7e4e7cd519f4ff3ddbdffaabe0151c232cee63ebc0be27460997a"
+    },
+    {
+      "path": "pesquisas-paralelas/dificuldade/difficulty_scan.py",
+      "bytes": 10812,
+      "sha256": "6ca143b6cf1be3b97dea206aa9221b0fde9f93f8e905a39e227cfe6395ec2ac3"
+    },
+    {
+      "path": "pesquisas-paralelas/dificuldade/testes/test_difficulty_scan.py",
+      "bytes": 3183,
+      "sha256": "de8b09cff8980f4bb74a96baaf20135e42bf665fc53520fcbf58b0e7eb2e4fff"
+    },
+    {
+      "path": "pesquisas-paralelas/dificuldade/validation/final-static-verify.log",
+      "bytes": 232,
+      "sha256": "29db457f635f8ad528f37c55ad63efdab894caa7219d8cdd459b38592fa3bcd4"
+    },
+    {
+      "path": "pesquisas-paralelas/dificuldade/validation/final-tests.log",
+      "bytes": 640,
+      "sha256": "4bca65568a55a05767ae9c9f6f66af8663f1def0295f213094b6abcb743681a4"
+    }
+  ],
+  "original_evidence_bytes": 307770,
+  "formatting_correction": "Six no-operand RET diagnostic rows lost trailing spaces. Original addresses, opcode bytes and interval SHA256s are unchanged. Initial research preserved in commit4af3abc.",
+  "negative_scope": "No menu writer identified by bounded absolute/direct-reference scan; indirect calls, alias writes and full UI absence are not proved.",
+  "open_questions": [
+    "Full UI/indirect/alias reachability",
+    "Editor meaning of discarded16 bytes and unconsumed suffix",
+    "No general player difficulty selector established"
+  ]
+}
