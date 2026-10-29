@@ -1019,8 +1019,10 @@ API. This **does not expand Rust's Graphics 1.5 domain** or claim CAVE/glyph
 support in the native renderer. No Graphics owner file is edited.
 
 The builder defaults to integrated `motor/`. While ABI 1.3 is pending main,
-`RISING_MACOS_ENGINE_SOURCE` may explicitly select the clean, exactly pinned
-363faa9 engine source for a development build only. Native binaries and all
+`RISING_MACOS_ENGINE_SOURCE` may explicitly select the approved engine repository
+for a development build only. The builder archives the immutable 363faa9 Git
+object into its own build directory; the external checkout may advance without
+changing that input. Native binaries and all
 prepared inputs remain inside the declared ignored data root. No implicit
 library fallback or uncommitted source snapshot is accepted. Final integrated
 builds, GPU readbacks, real-window throughput and common gates follow below.

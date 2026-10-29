@@ -201,7 +201,7 @@ the last assertion/stage and game/visibility diagnostics.
 
 The 2026-10-29 architecture decision targets a Rust engine/render library with
 a C ABI called by Swift. Python stays as the validated reference and current
-inspection/playback runtime; whether it ships later remains undecided. Live frame logic now uses the published Rust ABI 1.1; Python supplies the current Graphics renderer and copied-buffer bridge. See the live session below.
+inspection/playback runtime; whether it ships later remains undecided. Live logic and rendering now use Rust ABI 1.3 with native Metal presentation. See the live session below.
 
 
 ## Live no-input Rust session and input recording
@@ -231,8 +231,10 @@ so existing hardened ad-hoc signing remains enabled without a library-validation
 exception. The shared library remains available to proof tooling and is hash-
 recorded separately. The builder compiles integrated `motor/` into its ignored
 target. While ABI 1.3 is pending main, an explicit development-only
-`RISING_MACOS_ENGINE_SOURCE` may select the clean approved engine checkout at
-363faa9; final integrated builds default to main's archived `motor/`.
+`RISING_MACOS_ENGINE_SOURCE` may select the approved engine repository. The
+builder reads the immutable 363faa9 Git object into its own ignored build
+directory, independently of that repository's current checkout. Final
+integrated builds default to main's archived `motor/`.
 
 Python evidence inspection explicitly accepts Graphics **1.7**, with its new
 required regions and strict absent-text-provider stops. Rust ABI 1.3 retains
