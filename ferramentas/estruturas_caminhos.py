@@ -97,15 +97,26 @@ class CoresEstruturas:
     def preencher(self, inicio, cor):
         """Remplit, 0x43e464: quatro vizinhos e pilha limitada a 1.023 itens.
 
-        Conserva a cauda da pilha e o término antecipado ao enchê-la. Trocar
-        uma cor por ela mesma é recusado: o x86 pode não terminar nesse caso.
+        Conserva a cauda da pilha e o término antecipado ao enchê-la. Com a
+        mesma cor o x86 revisita o componente: termina quando a pilha enche
+        (componente de 3+ células, captura nativa construcao-core) ou quando
+        esvazia (célula isolada); num par de células não termina, e isso é
+        recusado antes de qualquer escrita.
         """
         inicio, cor = inicio & 65535, cor & 255
         if not cor:
             return
         antiga = self.grade[inicio]
         if antiga == cor:
-            raise ValueError('Remplit requer uma cor diferente da cor de origem')
+            componente, borda = {inicio}, [inicio]
+            while borda and len(componente) < 3:
+                c = borda.pop()
+                for v in self._vizinhos(c):
+                    if v != 0xffff and v not in componente and self.grade[v] == antiga:
+                        componente.add(v)
+                        borda.append(v)
+            if len(componente) == 2:
+                raise ValueError('Remplit com a mesma cor num par de células não termina no original')
         topo = 1
         self.pilha[1] = inicio
         while topo:

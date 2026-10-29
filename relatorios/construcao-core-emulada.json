@@ -1,0 +1,106 @@
+{
+ "by_routine": {
+  "BatimentCollision": {
+   "cases": 7,
+   "mismatches": 0
+  },
+  "BatimentConstructible": {
+   "cases": 25,
+   "mismatches": 0
+  },
+  "BatimentPosable": {
+   "cases": 25,
+   "mismatches": 0
+  },
+  "ChercheMurCombinaisons": {
+   "cases": 3,
+   "mismatches": 0
+  },
+  "DeplaceEngin": {
+   "cases": 18,
+   "mismatches": 0
+  },
+  "EnginOccupeCase": {
+   "cases": 12,
+   "mismatches": 0
+  },
+  "PlaceBatiment": {
+   "cases": 45,
+   "mismatches": 0
+  },
+  "ResetCheminTerrainModify": {
+   "cases": 9,
+   "mismatches": 0
+  },
+  "TerrainEstHerbe": {
+   "cases": 6,
+   "mismatches": 0
+  },
+  "ValideHerse": {
+   "cases": 3,
+   "mismatches": 0
+  }
+ },
+ "capture": {
+  "path": "evidencias/construcao-core/captura-construcao-core-exibicao.json",
+  "sha256": "713004aa5177df0a6e6f489ff8d1e0c8af7b0581796d3e9c46c9e5d927896459"
+ },
+ "changed_bytes_compared": 7789,
+ "comparisons": 153,
+ "mismatches": [],
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "path_reproduction": {
+  "between_frames": true,
+  "code_unchanged": true,
+  "frame1": true,
+  "load_tail": true,
+  "paused": true
+ },
+ "pause": {
+  "caller": "CalculGame+0xb4d",
+  "caller_return": "0x42d3b5",
+  "registers": {
+   "EAX": "0x0",
+   "EBP": "0x0",
+   "EBX": "0x0",
+   "ECX": "0x5",
+   "EDI": "0x0",
+   "EDX": "0x1a1a000e",
+   "EIP": "0x45edc0",
+   "ESI": "0x0",
+   "ESP": "0x2007ebc"
+  },
+  "routine": "ProcessInputGame",
+  "state_sha256": {
+   "blocks": 25198,
+   "bytes": 16240871,
+   "sha256": "6e8620b99ac650d032d575570da2a28bbab6cf700b09d6ed1efae5bb085724ed"
+  }
+ },
+ "providers": {
+  "bonus": "Economy bonus_unidades.BonusUnidades over the live tables 0x4dfba0/0x4965ae"
+ },
+ "schema": "rising-lands/monde01-construction-core-differential/1",
+ "seconds": 135.474,
+ "source_sha256": {
+  "ferramentas/bancada_selecao_ordens.py": "6a8a3010476e862624dc91421b153b995fca70fbf3fefd72d5f2bbcfa88146e1",
+  "ferramentas/capturar_construcao_core.py": "2e70af472ab46415a9cdddba2e5da7d1e0238d3a8962284c0c4ed44e6fe780d7",
+  "ferramentas/casos_construcao_core.py": "3663c92411ce05b7e2a42175e8bebfc144d8c1880a44ef3953aaf6b5d2aa887e",
+  "ferramentas/construcao_core.py": "7ccf640c5adda6e1a2c0e81bcce0307c0117eca862699af5fc7d34d5fe35a5fa",
+  "ferramentas/validar_construcao_core.py": "5383bbb771f855a5eff88ff556b6910818beb3cf49df10a6147d7e532e93522f"
+ },
+ "uncertain": [
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "move_build_order_at_target"
+  },
+  {
+   "bits": {
+    "EAX": "0xffffffff"
+   },
+   "case": "move_state3_search"
+  }
+ ]
+}
