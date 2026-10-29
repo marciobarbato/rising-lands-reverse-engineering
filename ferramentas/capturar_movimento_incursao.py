@@ -50,7 +50,8 @@ def escolher(nome, regs, ordem):
     return True
 
 
-def executar(quadros):
+def executar(quadros, observador=None):
+    """``observador(nome, caso, antes, resultado)``, optional, after every isolated case (validators)."""
     sys.path.insert(0, str(RAIZ / 'pesquisas-paralelas/missoes'))
     sys.path.insert(0, str(RAIZ / 'pesquisas-paralelas/combate'))
     import ambiente_missoes  # noqa: F401  (Missions bootstrap)
@@ -76,8 +77,12 @@ def executar(quadros):
                 super().executar(regs)
 
     quadro_de = []
-    iso = IsolamentoMovimento(b, ROTINAS, {'(no routine)': []},
-                              lambda nome, fase, caso, antes, resultado: quadro_de.append(iso.quadro))
+    def observar(nome, fase, caso, antes, resultado):
+        quadro_de.append(iso.quadro)
+        if observador is not None:
+            observador(nome, caso, antes, resultado)
+
+    iso = IsolamentoMovimento(b, ROTINAS, {'(no routine)': []}, observar)
     iso.vistos, iso.quadro = {}, None
     iso.instalar()
     b.executar_cauda_carga(600)

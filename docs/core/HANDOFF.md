@@ -543,3 +543,18 @@ Contract and measurements: [UNICORN_TEARDOWN](UNICORN_TEARDOWN.md). This is tool
 - GetCaseIndiceBatiment, which MONDE01 never reaches (no cave);
 - PlaceEngin's discovery path for player owners in flat memory;
 - integration.
+
+### M2.3 movement stage (counters 9000–9200) on `feat/re-core`
+
+- **Capture script** `capturar_movimento_incursao.py` (`7a90689`): 27 Core routines, Combat's forced-counter method. The full run is Mac mini request #5.
+- **World-model differential** `validar_movimento_incursao.py`: Core's existing world model, bound over each isolated call's exact entry blocks through Missions' `montar_provedores`, compared with the native result. Flat translations are compared with full registers.
+- **Gap closed:** CalculNextCase's walk animation (`MundoNavegacao.animar_movimento`, `calcular_proxima_celula`, `atualizar_movimento(animacao=True)`). Type 17 and the local-player sound branch raise.
+- **New flat translations:** TerrainEnCollision, ResetCollision, CRT memset (`incursao_core`).
+- **Smoke (9000–9004):** 0 mismatches.
+
+**NOT RUN / open:**
+- the full 201-frame world differential (Mac mini);
+- the pathfinding internals, which need the solver's buffers bound to memory;
+- the EnginNextEtape dispatcher.
+
+The contract is in [RAID_CORE](RAID_CORE.md#movement-and-pathfinding-after-the-spawn-counters-90009200).

@@ -191,7 +191,63 @@ class MundoNavegacao(MundoFisico):
             u[p + 0x88], u[p + 0x8b] = atualizar_espera(u[p + 0x8b])
         return False
 
-    def atualizar_movimento(self, indice, maquina=None):
+    def animar_movimento(self, indice):
+        """CalculNextCase 0x448fc3..0x449048: the walk-animation tick of a unit with a pending step.
+
+        Every type but 16, 17 and those above 25 advances +0xa9; when it reaches the period +0xa7,
+        +0xa9 = 0 and frame +0xa4 = (+0xa4 + 1) % frames +0xa5. Type 17 calls AnimBallonStatic instead.
+        """
+        p = indice * 276
+        u = self.unidades
+        tipo = u[p + 1]
+        if tipo == 17:
+            raise NotImplementedError('AnimBallonStatic 0x447b2f (type 17) is not translated')
+        if tipo == 16 or tipo > 25:
+            return
+        u[p + 0xa9] = (u[p + 0xa9] + 1) & 255
+        if u[p + 0xa9] == u[p + 0xa7]:
+            if not u[p + 0xa5]:
+                raise ValueError('Zero animation frame count: the original faults on IDIV at 0x449039')
+            u[p + 0xa4] = (u[p + 0xa4] + 1) % u[p + 0xa5]
+            u[p + 0xa9] = 0
+
+    def _som_movimento(self, indice):
+        """CalculNextCase 0x449060..0x4490fd: a local player's unit of type 11..16 on a discovered cell
+        queries EnginGetVolume, sets +0xf9 and may post a sound; that branch is not translated."""
+        p = indice * 276
+        u = self.unidades
+        local = self.jogador_local
+        if u[p] == local and 11 <= u[p + 1] <= 16 and not self.descoberto[local][self.palavra(indice, 8)] & 0x1f:
+            raise NotImplementedError('CalculNextCase local-player volume/sound 0x4490c3 is not translated')
+
+    def calcular_proxima_celula(self, indice):
+        """CalculNextCase 0x448f50, the step DeplaceEngin runs for path states 0/5 and moving units.
+
+        With no pending offset (+0x86/+0x87), state 0 picks the direct step (EnginNextCase) and state
+        5 the route step (EnginNextCaseChemin). Then, unless the reserved cell +0x7c is the current
+        +8: the walk animation, RotateEngin when +0x91 != +0x90, the local-player sound test, and
+        AvanceEngin when the orientation allows it.
+        """
+        p = indice * 276
+        u = self.unidades
+        if not u[p + 0x86] and not u[p + 0x87]:
+            if u[p + 0x88] == 0:
+                self.escolher_direto(indice)
+            elif u[p + 0x88] == 5:
+                self.escolher_da_rota(indice)
+        if self.palavra(indice, 0x7c) == self.palavra(indice, 8):
+            return
+        self.animar_movimento(indice)
+        if u[p + 0x91] != u[p + 0x90]:
+            self.girar(indice)
+        self._som_movimento(indice)
+        if pode_avancar(u[p + 0x90], u[p + 0x91]):
+            self.avancar_passo(indice)
+
+    def atualizar_movimento(self, indice, maquina=None, animacao=False):
+        """DeplaceEngin's movement for state 2. With ``animacao=True`` it also runs CalculNextCase's walk
+        animation and the local-player sound test (0x448fc3..0x4490fd); the default keeps the declared
+        exclusion of continuous animation and sound used by the existing native pulse comparisons."""
         p = indice * 276
         u = self.unidades
         if self.viva(indice) and not self.concluir_movimento(indice) and u[p + 2] == 2:
@@ -200,8 +256,12 @@ class MundoNavegacao(MundoFisico):
                     self.girar(indice)
                 return notificar_estado(self, indice, maquina)
             if self.atualizar_estado_caminho(indice) and self.palavra(indice, 8) != self.palavra(indice, 0x7c):
+                if animacao:
+                    self.animar_movimento(indice)
                 if u[p + 0x90] != u[p + 0x91]:
                     self.girar(indice)
+                if animacao:
+                    self._som_movimento(indice)
                 if pode_avancar(u[p + 0x90], u[p + 0x91]):
                     self.avancar_passo(indice)
         return notificar_estado(self, indice, maquina)

@@ -94,3 +94,42 @@ GetCaseIndiceBatiment is translated but no capture reaches it, because MONDE01 h
 
 - **Without a CPU:** [`testes/test_incursao_core.py`](../../testes/test_incursao_core.py) replays every captured call of every scenario from its read-before-write bytes, with registers EAX..EBP and changed bytes exact. That includes the frame-1 Core routines the raid reaches.
 - **Native differential:** [`ferramentas/validar_incursao_core.py`](../../ferramentas/validar_incursao_core.py) reruns the forced cases. At every nested Core call it runs the translation over a copy-on-write view of the live memory at that entry, and compares its registers and changed bytes with the original's at the return. The results are in `relatorios/incursao-core-<scenario>-emulada.json`. For v1: **689 comparisons, 0 mismatches and 0 dependency stops**, every captured call of the 26 routines reached, with the phases and code reproduced (114 s). The display differential follows its capture.
+
+## Movement and pathfinding after the spawn (counters 9000–9200)
+
+The coordinator's coverage run (`runs/core/coverage-9200`) shows that no routine is first entered in frames 129–8999. Every new entry is at 9000 or later, and pathfinding starts at 9177.
+
+### Capture
+
+[`ferramentas/capturar_movimento_incursao.py`](../../ferramentas/capturar_movimento_incursao.py) uses Combat's forced-counter method: Missions' v1 path read-only, u32 `0x508f7c` = 9000 at frame 1's CalculGame entry, then 201 whole native frames. With Missions' Isolamento it pauses at the 27 Core routines of that window:
+- EnginNextEtape: the raid unit's calls and the first call of each frame;
+- the collision trio: the first call of each frame;
+- every other routine: every call.
+
+The output is `captura-movimento-incursao-v1.json` (Mac mini run #5).
+
+### Validation over the existing world model
+
+[`ferramentas/validar_movimento_incursao.py`](../../ferramentas/validar_movimento_incursao.py) reruns the same isolated calls. For each sampled call it binds Core's world model over the exact entry blocks, through Missions' `montar_provedores`/`MapaMemoriaM1` (the composition AI/runtime uses). It runs the matching method and compares the serialized changed bytes and the returned AL/AX/EAX with the original.
+
+| Routine | World-model code |
+|---|---|
+| EnginEstVivant, ResetOrdre, SetDeplaceEngin | `viva`, `redefinir_ordem`, `definir_movimento` |
+| RotateEngin, Set/ResetEnginCollision, AvanceEngin | `girar`, `ocupar`, `avancar_passo` |
+| EnginOccupeCase, EnginPeutPasser, ChercheIndiceEngin | `passagem_unidades.ocupa_celula` / `consultar_passagem` / `procurar_ocupante` |
+| CalculDirection, CalculDirCase, Distance2d | `movimento.direcao_entre_celulas` / `celula_vizinha` / `distancia_quadratica` |
+| EnginNextCase, EnginNextCaseChemin | `escolher_direto`, `escolher_da_rota` |
+| CalculNextCase (new), DeplaceEngin | `calcular_proxima_celula`, `atualizar_movimento(animacao=True)` |
+
+Routines with a flat translation (SetEnginCollision, SetCollision, Chemin_ModifieZone, and the new TerrainEnCollision, ResetCollision and CRT memset) are also compared, with full registers, over copies of the same blocks.
+
+**Gap found and closed.** CalculNextCase's walk animation was not modeled: +0xa9 ticks to the period +0xa7, then frame +0xa4 = (+0xa4 + 1) % +0xa5. The existing native pulse comparisons exclude continuous animation and sound by design.
+- `MundoNavegacao.animar_movimento` and `calcular_proxima_celula` model the animation. `atualizar_movimento(..., animacao=True)` runs it at the original point.
+- The default `animacao=False` keeps the declared exclusion for the existing comparisons.
+- Type 17 (AnimBallonStatic) and the local-player volume/sound branch (types 11..16 on a discovered cell) raise `NotImplementedError`.
+
+**Smoke over counters 9000–9004:** 0 mismatches and 0 dependency stops. That is 23 world-model comparisons and 11 flat ones.
+
+**Open gaps:**
+- The path-search internals (CheminCalcul, Chemin_Verouille, OptimiseChemin, TestLigneOptimise). The world model runs them through `SolucionadorCaminhosPython`, whose work buffers and route identifiers are not yet bound to the original globals: Missions' composition denies `solucionador`.
+- The EnginNextEtape dispatcher, which has no single world-model method.

@@ -8,7 +8,9 @@ RAIZ = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(RAIZ / 'ferramentas'))
 sys.path.insert(0, str(RAIZ / 'testes'))
 CAPTURAS = sorted((RAIZ / 'evidencias/fundacoes-quadro').glob('captura-incursao-core-*.json'))
-NAO_ALCANCADAS = {'GetCaseIndiceBatiment'}
+# GetCaseIndiceBatiment: MONDE01 has no cave. TerrainEnCollision, ResetCollision and memset run in the
+# movement window after the spawn (captura-movimento-incursao, validar_movimento_incursao), not in it.
+NAO_ALCANCADAS = {'GetCaseIndiceBatiment', 'TerrainEnCollision', 'ResetCollision', 'memset'}
 REGISTROS = ('EAX', 'EBX', 'ECX', 'EDX', 'ESI', 'EDI', 'EBP')
 
 
