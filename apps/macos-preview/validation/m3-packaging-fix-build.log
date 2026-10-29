@@ -1,0 +1,9 @@
+Runtime ausente. Defina RISING_PYTHON_RUNTIME para uma distribuição relocável ARM64 do CPython 3.12.
+Traceback (most recent call last):
+  File "/Users/marcio/git/Rising-Lands-Codex/.local/bundle-validation/workspace/checkout/./compilar-jogável", line 83, in <module>
+    main()
+  File "/Users/marcio/git/Rising-Lands-Codex/.local/bundle-validation/workspace/checkout/./compilar-jogável", line 79, in main
+    subprocess.run(command, check=True, env={**os.environ, 'PYTHONDONTWRITEBYTECODE': '1'})
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 528, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/Applications/Xcode.app/Contents/Developer/usr/bin/python3', '-B', '/Users/marcio/git/Rising-Lands-Codex/.local/bundle-validation/workspace/local-data/macos-playable/sources/38ed65b2565c15f031b59660d7271dcd59d30097/apps/macos-preview/scripts/playable_build.py', '--data', '/Users/marcio/git/Rising-Lands-Codex/.local/bundle-validation/workspace/local-data/macos-playable', '--workspace', '/Users/marcio/git/Rising-Lands-Codex/.local/bundle-validation/workspace', '--source', '/Users/marcio/git/Rising-Lands-Codex/.local/bundle-validation/workspace/local-data/macos-playable/sources/38ed65b2565c15f031b59660d7271dcd59d30097', '--manifest', '/Users/marcio/git/Rising-Lands-Codex/.local/bundle-validation/workspace/local-data/macos-playable/source-development.json']' returned non-zero exit status 1.

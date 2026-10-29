@@ -36,6 +36,24 @@ def prepare_runtime():
     (ROOT/'dependencies/runtime-manifest.json').write_text(json.dumps({'files':files,'python':'3.12','architecture':'arm64'},indent=2)+'\n')
     return target
 
+
+def copy_preview_sources(source, destination):
+    """Mirror Python modules and UI assets; native Swift is compiled separately.
+
+    Both builders use this inventory so new consumer modules ship alongside
+    engine.py and satisfy the byte-identical source verification.
+    """
+    for path in sorted(source.rglob('*')):
+        relative = path.relative_to(source)
+        if '__pycache__' in relative.parts or path.suffix == '.pyc':
+            continue
+        if path.is_file() and (path.suffix in ('.py', '.html', '.css', '.js')
+                               or relative.parts[0] == 'ui'):
+            target = destination / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(path, target)
+
+
 def build():
     for p in ('build/tmp','build/logs','build/module-cache','build/pycache','dist'): (ROOT/p).mkdir(parents=True,exist_ok=True)
     runtime=prepare_runtime();manifest=json.loads((ROOT/'snapshot.json').read_text())
@@ -44,9 +62,7 @@ def build():
     contents=app/'Contents';macos=contents/'MacOS';resources=contents/'Resources';preview=resources/'preview'
     macos.mkdir(parents=True);preview.mkdir(parents=True)
     shutil.copytree(runtime,resources/'Python')
-    for item in ('engine.py','research_adapter.py','ui'):
-        src=ROOT/'src'/item;dst=preview/item
-        shutil.copytree(src,dst) if src.is_dir() else shutil.copy2(src,dst)
+    copy_preview_sources(ROOT/'src', preview)
     shutil.copytree(ROOT/'assets',preview/'assets')
     shutil.copy2(ROOT/'research.json',preview/'research.json')
     for m in json.loads((ROOT/'research.json').read_text())['research'].values():

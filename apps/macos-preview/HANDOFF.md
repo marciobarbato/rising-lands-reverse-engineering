@@ -106,3 +106,99 @@ must not be called with an invented app domain. Final delivery requires a new
 normal build from verified fetched `origin/main`, recording its actual revision
 in the local build/source manifests. Integration/main-output evidence is sent
 after that build rather than predicting a future merge SHA here.
+
+## Independent M3 preparation (2026-10-29)
+
+The independent clone and dedicated `feat/codex-macos-m3-preparation` branch
+add an immutable M1 consumer and command-line inspector. See the
+[contract and runtime/Graphics dependency requests](M3_CONTRACT.md) and
+[audit](M3_AUDIT.md). This is a validated inspection boundary, with future
+frame application explicitly stopped before mutation. It introduces no
+recovered behavior, renderer, input protocol or formal milestone acceptance.
+The existing native shell continues to expose the synthetic exercise.
+
+The accepted capture is read in place using the existing Missions decoder;
+all 881 original-name/address blocks (2,659,375 bytes) match that decoder.
+Consumer tests cover deterministic ordering, immutable bytes, rejection of
+malformed payloads/metadata/hashes/ranges, atomic failure, idempotent load,
+reset/reload identity and the M2 dependency stop. No original-x86 run is
+needed or claimed for this read-only adapter.
+
+Actual independent validation on Apple Silicon, Python 3.9.6:
+
+* New consumer suite: **11/11 passed, zero skips**. Inspector CLI succeeds.
+* `git diff --check` and documentation link validation: passed.
+* Full app test discovery: 14 tests, 3 import errors (missing generated
+  `apps/macos-preview/snapshot.json`); the 11 new tests passed.
+* Common `scripts/check.py`: failed. Core 490 tests / 7 errors / 226 skips;
+  Combat 260 / 1 error / 147 skips; Economy 487 / 1 failure / 7 errors /
+  205 skips; Missions 104 / 1 failure / 22 errors / 31 skips; AI/runtime
+  82 / 7 errors / 23 skips; Audio 20 / 8 errors / 3 skips. Graphics did not
+  run (missing hash-checked CD files). Workflow **8/8 passed**.
+* Observed missing inputs include MONDE01.ETA, RISING.EXE, capstone, unicorn,
+  pefile and audio media. The two assertions also depend on missing media
+  (38-map inventory and opening the original CRT stream). These failures
+  are recorded, not changed or suppressed by this delivery.
+* No native bundle build/UI smoke was run. The existing launcher derives
+  shared `/Users/marcio/git/local-data` from the independent clone parent,
+  outside this task's isolation scope, and required local runtime/CD inputs
+  are absent from the clone. No existing bundle or Claude local data was used.
+
+Detailed results and log hashes: [M3 validation](validation/m3-preparation.json).
+This boundary is implemented and tested as an inspection consumer; common
+checks and native application delivery remain incomplete. Runtime/Graphics
+contracts remain the stop for further state/frame integration. The coordinator
+reviews and integrates the remote feature; this task never merges/pushes main.
+
+
+## Round-1 packaging correction
+
+Coordinator integration found that the playable verifier correctly required
+`src/macos_state_consumer.py` in the bundle, but both builders had fixed copy
+lists that omitted it. Both now use `build.copy_preview_sources` to mirror
+Python modules and UI assets, including the consumer and playable session.
+Source verification remains strict. The playable runtime check also imports
+the bundled consumer and loads all 881 accepted M1 blocks from its declared
+archive. The shell's behavior and bundle identity are unchanged.
+
+The deployed consumer resolves its default source root from its adjacent
+`snapshot.json` relative archive; it refuses missing/invalid declarations and
+paths escaping the payload. Explicit roots and checkout loading remain
+supported. Consumer errors and CLI help are now English. Contract version 1
+and the evidence identity are unchanged.
+
+18 consumer/packaging tests pass with zero skips. The seven new regressions
+exercise the actual source-copy helper and source verifier, reproduce the
+original omitted-module failure, retain tamper detection, and run a relocated
+consumer in isolated Python against the real M1 evidence. They cover valid
+bundle defaults, missing archives/declarations, malformed manifests, traversal,
+absolute paths, escaping symlinks and explicit roots.
+
+Real launcher attempt: `./compilar-jogável --development-ref HEAD` at
+`38ed65b2565c15f031b59660d7271dcd59d30097`, exit 1. To preserve isolation,
+a local validation clone of that commit was created under the independent
+clone's ignored `.local/bundle-validation/workspace/checkout`; its launcher
+writes only under that temporary workspace, not shared host local-data.
+No launcher or other domain files were modified.
+
+The first stop is missing relocatable CPython 3.12 ARM64 at
+`.local/bundle-validation/workspace/local-data/macos-preview/dependencies/python/bin/python3`
+(and `lib/python3.12`). `RISING_PYTHON_RUNTIME` can declare a compatible runtime.
+The temporary workspace also lacks the entire `source/cd` tree, including
+`INSTALHD/PLATGAME.PIE`, `INSTALHD/GRAPHICS/BLOCS.CMP`,
+`INSTALHD/GRAPHICS/TROOPS.CMP` and `WORLD/MONDE01.ETA`.
+Native compilation, signing, full bundle runtime verification and UI smoke
+were not reached. No existing Claude runtime, media, bundle or local data
+was read or modified. Integration must rerun the real build with these inputs.
+
+The full app discovery was rerun: 21 tests, 3 import errors due to missing
+generated snapshot.json; all 18 independent consumer/package tests passed.
+Documentation links and git diff --check pass. Unchanged cross-domain common
+checks were not repeated; their previous failed prerequisite results remain
+recorded above.
+
+Preserved logs: [targeted tests](validation/m3-packaging-fix-tests.log),
+[real build attempt](validation/m3-packaging-fix-build.log),
+[full app discovery](validation/m3-packaging-fix-full-tests.log).
+These regressions verify the packaging omission and bundled source resolution;
+they do not constitute a native application build or UI smoke pass.
