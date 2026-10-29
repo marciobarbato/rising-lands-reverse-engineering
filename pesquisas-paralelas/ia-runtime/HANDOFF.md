@@ -320,3 +320,32 @@ Merged main `5c0dac2`. The report is [M2_2_PREPARACAO.md](M2_2_PREPARACAO.md). N
 - The `-v2` path is unchanged and now also checks the summaries.
 
 **Validation:** the `-v2` frame-1 data and its delta-form conversion (in `.local/`) both reproduce the M2.1 proof. `test_quadros_ia.py` now has 12 tests, including replay, checkpoint and named-failure cases.
+
+
+## M2.3 preparation — first raid, checkpoint start (2026-10-29)
+
+Main `8564ca7`. The report is [M2_3_INCURSAO.md](M2_3_INCURSAO.md).
+
+- **Capture first:** `capturar_incursao_ia.py` → `evidencias/captura-incursao-ia.json`. It is Combat's forced counter-9000 input, with each outside call's arguments, exit registers and net writes, plus the own-routine writes; native, 40 s, under the lease.
+- **API inputs** (all in `incursao_ia`):
+  - `avancar_monstros(m, p)`, with `rotinas_quadro_ia.avancar_monstros` delegating to it;
+  - `construir_grupo_monstros(m, p, celula, grupo)`;
+  - `guardar_acao(m, p, acao, grupo, celula, origem)`;
+  - `novo_grupo(m, jogador, tipo)`, `adicionar_ao_grupo(m, grupo, unidade)`, `primeira_unidade(m, grupo)`;
+  - `enviar_mensagem_unidade(m, p, unidade, mensagem, alvo)`.
+
+  Provider contract: the table in the module docstring.
+- **Composition:** iaProbPost runs on `MaquinaTarefasViva.postar` and ProjectileInit on `PoolProjeteis.iniciar`. The EnginNextEtape scan hit passes `alvo`.
+- **Checkpoint start:**
+  - `ComposicaoQuadros(..., inicio, alocacoes, regs_inicio)`;
+  - `fases_quadros(n, inicio)`;
+  - `comparar_quadros_ia.py --a-partir-de K`, with `alocacoes_no_ponto`.
+- **Validation:**
+  - `test_incursao_ia` reproduces the forced AvanceMonstre call byte for byte, call for call.
+  - The checkpoint chain equals the full chain over frames 2–4.
+  - The strict 128-frame probe is unchanged (128/128).
+  - Both comparator self-tests are equal.
+- **Gaps:**
+  - Core providers (GetFreeCell, CreerEngin, EnginSetPlayer, PlaceEngin, EnginGetCase, GetRandCaseChamps, GetRandCaseTypeBatPlayer, Chemin_Accessible).
+  - SetDeplaceEngin and SetAttaqueEngin.
+  - The 0x49 behaviour handler; iagUnitSendMessage's dispatch is static and has no native capture.
