@@ -540,16 +540,21 @@ class BancadaCargaMissaoOriginal(BancadaX86):
                 i = j
         return faixas
 
+    def _nao_executados(self):
+        """(non-executed routines, extra static stores) watched for reads; scenario-specific."""
+        return NAO_EXECUTADOS, ESCRITAS_PROG_ITERATION
+
     def conjunto_vigiado(self):
         """Byte ranges written by non-executed original routines (see NAO_EXECUTADOS)."""
         ler = lambda a, n: bytes(self.cpu.mem_read(a, n))
         parar = {self.sym['MenuInit'], self.sym['CalculGame']}
         origem = {}
-        for nome in NAO_EXECUTADOS:
+        rotinas, extras = self._nao_executados()
+        for nome in rotinas:
             for endereco, tamanho, indexado, sitio in escritas_estaticas(
                     ler, self._ordenados, self.nomes, self.sym[nome], parar):
                 origem.setdefault((endereco, tamanho, indexado), set()).add(nome)
-        for endereco, tamanho in ESCRITAS_PROG_ITERATION:
+        for endereco, tamanho in extras:
             origem.setdefault((endereco, tamanho, False), set()).add('ProgIteration')
         return {k: sorted(v) for k, v in origem.items()}
 

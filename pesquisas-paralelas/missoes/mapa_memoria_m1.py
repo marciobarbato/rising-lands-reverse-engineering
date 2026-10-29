@@ -43,6 +43,26 @@ def carregar_blocos(blocos_json):
     return blocos
 
 
+def expandir_captura(captura, entrada):
+    """Full ``final_state.blocks`` of a delta-encoded MissionLoad capture (display scenario).
+
+    Blocks MissionLoad did not change are taken from the entry artifact; every
+    block must still match the capture's recorded size and SHA-256.
+    """
+    final = captura['oracle']['final_state']
+    if final.get('encoding') != 'delta_from_entry':
+        return captura
+    blocos = {}
+    for nome, h in final['block_hashes'].items():
+        bloco = final['blocks'].get(nome) or entrada['blocks'].get(nome)
+        if bloco is None or bloco['sha256'] != h['sha256'] or bloco['bytes'] != h['bytes'] or bloco['base'] != h['base']:
+            raise ValueError(f'Delta capture block {nome} is not reproduced by the entry artifact')
+        blocos[nome] = bloco
+    expandida = dict(captura)
+    expandida['oracle'] = dict(captura['oracle'], final_state=dict(final, blocks=blocos))
+    return expandida
+
+
 def carregar_json(caminho):
     with open(caminho, 'rb') as arquivo:
         return json.loads(arquivo.read())
