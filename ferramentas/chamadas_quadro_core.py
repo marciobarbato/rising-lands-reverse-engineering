@@ -448,23 +448,200 @@ def iniciar_zonas_jogo(memoria, eax, edx):
 
 
 # ------------------------------------------------------------------ per-frame terrain/vegetation animation
-def animar_terreno(memoria, eax, edx):
-    """NextAnimTerrain 0x477700 (AX, DX = viewport origin). Translated for a viewport with
-    zero rows (u16 0x508726 == 0, as in MONDE01 frames 0/1): the row test exits at once
-    through 0x4774f2 with EAX = EDX = 0. A non-empty viewport raises at 0x477737.
-    """
-    if memoria.u16(VISTA_ALTURA):
-        raise DependenciaRamoCore('NextAnimTerrain', 0x477737, 'viewport with rows: cell loop not translated')
-    return dict(EAX=0, EDX=0)
+GRADE_TILES, GRADE_OBJETOS, GRADE_ANIMACAO = 0x507d70, 0x507d74, 0x507dac   # u16 / u8 / u8 grid pointers
+TABELA_PERMUTACAO, CURSOR_PERMUTACAO = 0x4e1c18, 0x4e1d18
+CONTADOR_CICLO = 0x508f7c                    # ProgIteration cycle counter (low byte tested)
+OBTER_DADOS_THREAD, DADOS_THREAD = 0x4990cc, 0x522244
 
 
-def animar_vegetacao(memoria, eax, edx):
-    """NextAnimVeget 0x4772ec, same domain: zero viewport rows exit at once (EDX = EDX<<8,
-    EAX unchanged). A non-empty viewport raises at 0x47731b.
+def aleatorio_crt_memoria(memoria):
+    """CRT rand 0x48c51d (LongRand 0x45841b jumps to it) over memory; EAX out, EDX preserved.
+
+    The seed is the u32 at [0x522244]+0xc, reached through the thread-data getter
+    [0x4990cc], which must be the single-thread 0x48e7c7; a zero pointer returns 0
+    without a store. seed' = seed*0x41c64e6d + 0x3039; EAX = (seed' >> 16) & 0x7fff
+    (the arithmetic of fundacoes_quadro.aleatorio_crt).
     """
-    if memoria.u16(VISTA_ALTURA):
-        raise DependenciaRamoCore('NextAnimVeget', 0x47731b, 'viewport with rows: cell loop not translated')
-    return dict(EAX=eax & M32, EDX=(edx << 8) & M32)
+    if memoria.u32(OBTER_DADOS_THREAD) != 0x48e7c7:
+        raise DependenciaRamoCore('rand', 0x48c513, 'thread-data getter [0x4990cc] is not 0x48e7c7')
+    ponteiro = (memoria.u32(DADOS_THREAD) + 0xc) & M32
+    if ponteiro == 0:
+        return dict(EAX=0)
+    semente = (memoria.u32(ponteiro) * 0x41c64e6d + 0x3039) & M32
+    memoria.u32(ponteiro, semente)
+    return dict(EAX=semente >> 16 & 0x7fff)
+
+
+def animar_terreno(memoria, eax, edx, edi=None):
+    """NextAnimTerrain 0x477700 (AX, DX = viewport origin x, y) over the viewport cells.
+
+    Per cell (tile grid [0x507d70], u16): tiles 0x5d/0x94 draw the permutation byte
+    (cursor 0x4e1d18 +1) and become 0x95 when it is 0 mod 0x40; tiles 0x95..0x9c on
+    an even cycle counter become t+1, and at 0x9d draw again (0x5d if even, else
+    0x94); 0x251/0x252 add 4 when the animation byte [0x507dac] is nonzero;
+    0x255/0x256 subtract 4; every other tile calls LongRand, and when it is 0 mod
+    0x400 a tile in 0x8b..0x92 or 0x6d whose object byte [0x507d74] is 0 gets object
+    0x1b. Registers out: EAX = rows walked, EDX = the routine's last EDX (needs the
+    caller's ``edi`` only for a zero-width viewport with rows; None then), others kept.
+    """
+    m = memoria
+    edx = (edx << 8) & M32
+    celula = (eax + edx) & 0xffff
+    edx = 0
+    linha = 0
+    while (linha & 0xffff) < m.u16(VISTA_ALTURA):
+        coluna = 0
+        while True:
+            largura = m.u16(VISTA_LARGURA)
+            if edi is not None:
+                edi = (edi & 0xffff0000) | largura
+            if (coluna & 0xffff) >= largura:
+                break
+            edi = celula * 2
+            tiles = m.u32(GRADE_TILES)
+            t = m.u16((tiles + edi) & M32)
+            if t in (0x5d, 0x94):
+                c = m.u8(CURSOR_PERMUTACAO)
+                b = m.u8(TABELA_PERMUTACAO + c)
+                m.u8(CURSOR_PERMUTACAO, (c + 1) & 0xff)
+                edi, edx = 0x40, b % 0x40
+                if edx == 0:
+                    edx = m.u32(GRADE_TILES)
+                    m.u16((edx + celula * 2) & M32, 0x95)
+            elif 0x95 <= t <= 0x9c and not m.u8(CONTADOR_CICLO) & 1:
+                m.u16((tiles + edi) & M32, t + 1)
+                endereco = (m.u32(GRADE_TILES) + edi) & M32
+                edx = m.u16(endereco)
+                if edx == 0x9d:
+                    c = m.u8(CURSOR_PERMUTACAO)
+                    b = m.u8(TABELA_PERMUTACAO + c)
+                    edi, edx = 2, b % 2
+                    m.u8(CURSOR_PERMUTACAO, (c + 1) & 0xff)
+                    m.u16(endereco, 0x94 if edx else 0x5d)
+            else:
+                t = m.u16((m.u32(GRADE_TILES) + celula * 2) & M32)
+                if t in (0x251, 0x252):
+                    edx = celula
+                    if m.u8((m.u32(GRADE_ANIMACAO) + celula) & M32):
+                        endereco = (m.u32(GRADE_TILES) + celula * 2) & M32
+                        m.u16(endereco, m.u16(endereco) + 4)
+                elif t in (0x255, 0x256):
+                    edx = celula
+                    endereco = (m.u32(GRADE_TILES) + celula * 2) & M32
+                    m.u16(endereco, m.u16(endereco) - 4)
+                else:
+                    edi, edx = 0x400, aleatorio_crt_memoria(m)['EAX'] % 0x400
+                    if edx == 0:
+                        edx = m.u16((m.u32(GRADE_TILES) + celula * 2) & M32)
+                        if not 0x8b <= edx < 0x93:
+                            edx = m.u16((m.u32(GRADE_TILES) + celula * 2) & M32)
+                        if 0x8b <= edx < 0x93 or edx == 0x6d:
+                            edx = (m.u32(GRADE_OBJETOS) + celula) & M32
+                            if m.u8(edx) == 0:
+                                m.u8(edx, 0x1b)
+            celula = (celula + 1) & 0xffff
+            coluna += 1
+        edx = None if edi is None else (0x100 - edi) & M32
+        celula = (celula + 0x100 - largura) & 0xffff
+        linha += 1
+    return dict(EAX=linha & M32, EDX=edx)
+
+
+def animar_vegetacao(memoria, eax, edx, ecx=None):
+    """NextAnimVeget 0x4772ec (AX, DX = viewport origin) over the viewport cells.
+
+    Per cell with a nonzero object byte o ([0x507d74]) and animation byte a
+    ([0x507dac]): trees 1..0xb on a cycle counter divisible by 4 draw the
+    permutation byte (cursor +1) and when it is 0 mod 4 set a = (a+1)&3; 0x17..0x1a
+    on even counters set a = (a+1)&0xf; 0x1b and 0x37 (a+1 on even counters) are
+    removed (o = a = 0) at a == 0x10; 0x38..0x3d (a+1 on even counters) at a == 0x40
+    are removed when o is 0x38/0x3b and otherwise become o-1 with a = 0; 0x3e..0x41
+    (a+1 every frame) are removed at a == 0x20. Registers out: EAX/EDX as the routine
+    leaves them (EAX needs the caller's ``ecx`` upper word only when no clearing
+    branch ran in the last row; None then); ECX/EBX/ESI/EDI/EBP kept.
+    """
+    m = memoria
+    edx = (edx << 8) & M32
+    celula = (eax + edx) & 0xffff
+    alto = None if ecx is None else ecx & 0xffff0000          # ECX's upper word, as the routine keeps it
+    eax = eax & M32
+    baixa = lambda r, v: None if r is None else (r & 0xffffff00) | v
+    linha = 0
+    while (linha & 0xffff) < m.u16(VISTA_ALTURA):
+        coluna = 0
+        while True:
+            largura = m.u16(VISTA_LARGURA)
+            cx = largura
+            if (coluna & 0xffff) >= largura:
+                break
+            edx = celula
+            objetos = m.u32(GRADE_OBJETOS)
+            eax = (objetos + celula) & M32
+            o = m.u8(eax)
+            cx = (cx & 0xff00) | o
+            if o:
+                eax = baixa(eax, o)
+                contador = lambda: m.u8(CONTADOR_CICLO)       # read only where the original tests it
+                animacao = lambda: m.u32(GRADE_ANIMACAO)
+                if 1 <= o <= 0xb:
+                    if not contador() & 3:
+                        c = m.u8(CURSOR_PERMUTACAO)
+                        alto, cx = 0, c
+                        eax = baixa(eax, (c + 1) & 0xff)
+                        m.u8(CURSOR_PERMUTACAO, (c + 1) & 0xff)
+                        if not m.u8(TABELA_PERMUTACAO + c) & 3:
+                            edx = (celula + animacao()) & M32
+                            v = (m.u8(edx) + 1) & 3
+                            m.u8(edx, v)
+                            eax = (m.u32(GRADE_ANIMACAO) & 0xffffff00) | v
+                elif 0x17 <= o <= 0x1a:
+                    if not contador() & 1:
+                        edx = (celula + animacao()) & M32
+                        v = (m.u8(edx) + 1) & 0xf
+                        m.u8(edx, v)
+                        eax = (m.u32(GRADE_ANIMACAO) & 0xffffff00) | v
+                elif o in (0x1b, 0x37):
+                    if not contador() & 1:
+                        m.u8((animacao() + celula) & M32, m.u8((animacao() + celula) & M32) + 1)
+                    eax, edx = celula, m.u8((m.u32(GRADE_ANIMACAO) + celula) & M32)
+                    if edx == 0x10:
+                        m.u8((m.u32(GRADE_OBJETOS) + celula) & M32, 0)
+                        edx = m.u32(GRADE_ANIMACAO)
+                        m.u8((edx + celula) & M32, 0)
+                elif 0x38 <= o <= 0x3d:
+                    if not contador() & 1:
+                        m.u8((celula + animacao()) & M32, m.u8((celula + animacao()) & M32) + 1)
+                    eax, edx = celula, m.u8((m.u32(GRADE_ANIMACAO) + celula) & M32)
+                    if edx == 0x40:
+                        edx = (m.u32(GRADE_OBJETOS) + celula) & M32
+                        atual = m.u8(edx)
+                        alto, cx = 0, atual
+                        if atual in (0x3b, 0x38):
+                            m.u8(edx, 0)
+                        else:
+                            m.u8(edx, 0)
+                            m.u8((m.u32(GRADE_ANIMACAO) + celula) & M32, 0)
+                            edx = (m.u32(GRADE_OBJETOS) + celula) & M32
+                            cx = m.u8(edx)
+                            if cx == 0:
+                                cx = (atual - 1) & 0xff
+                                m.u8(edx, cx)
+                        edx = m.u32(GRADE_ANIMACAO)
+                        m.u8((edx + celula) & M32, 0)
+                elif 0x3e <= o <= 0x41:
+                    edx = celula
+                    m.u8((animacao() + celula) & M32, m.u8((animacao() + celula) & M32) + 1)
+                    eax = m.u8((m.u32(GRADE_ANIMACAO) + celula) & M32)
+                    if eax == 0x20:
+                        m.u8((m.u32(GRADE_OBJETOS) + celula) & M32, 0)
+                        eax = m.u32(GRADE_ANIMACAO)
+                        m.u8((eax + celula) & M32, 0)
+            celula = (celula + 1) & 0xffff
+            coluna += 1
+        eax = None if alto is None else (0x100 - (alto | largura)) & M32
+        celula = (celula + 0x100 - largura) & 0xffff
+        linha += 1
+    return dict(EAX=eax, EDX=edx)
 
 
 def animar_vegetacao_mapa(memoria):
@@ -500,8 +677,10 @@ ROTINAS = {
     'ChercheContacteur': (0x465818, lambda m, r, s, b: procurar_contato(m, r['EAX'])),
     'MessageBoxExiste': (0x469c33, lambda m, r, s, b: caixa_mensagem_existe(m, r['EAX'])),
     'PlayerEstContacterPourAlliance': (0x46da1e, lambda m, r, s, b: contatado_para_alianca(m, r['EAX'], r['EDX'])),
-    'NextAnimTerrain': (0x477700, lambda m, r, s, b: animar_terreno(m, r['EAX'], r['EDX'])),
-    'NextAnimVeget': (0x4772ec, lambda m, r, s, b: animar_vegetacao(m, r['EAX'], r['EDX'])),
+    'NextAnimTerrain': (0x477700, lambda m, r, s, b: animar_terreno(m, r['EAX'], r['EDX'], r['EDI'])),
+    'NextAnimVeget': (0x4772ec, lambda m, r, s, b: animar_vegetacao(m, r['EAX'], r['EDX'], r['ECX'])),
+    'LongRand': (0x45841b, lambda m, r, s, b: aleatorio_crt_memoria(m)),
+    'rand': (0x48c51d, lambda m, r, s, b: aleatorio_crt_memoria(m)),
     'NextAnimVegetFullMap': (0x4774fa, lambda m, r, s, b: animar_vegetacao_mapa(m)),
 }
 # Routines with a pushed argument (stack word 1 = u32 [ESP+4] at entry); the callee pops it.

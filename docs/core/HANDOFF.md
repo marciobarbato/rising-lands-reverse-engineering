@@ -425,3 +425,30 @@ There are no callbacks.
 - **ai-runtime:** bind the new providers at CALLs `0x42d2a6`, `0x42d2d9`, `0x42d441` and `0x42d467`, and replace the task bridge. MenuInit's own InitGameZone call (MenuInit+0x1ce) can use the same provider.
 
 **NOT RUN:** the NextAnim* cell loops (they need a non-empty viewport); RestoreAll and MenuInit (unassigned); locked integration.
+
+
+### M2 round 4: CRT I/O boundaries, display-scenario frames, live tile grid on `feat/re-core`
+
+The branch merged `origin/main` `81e0a26`, which includes Economy's live bonus table and Missions' display-scenario captures.
+
+1. **CRT `fseek` 0x48cda2 and `fgets` 0x48ce96** are inventoried I/O boundaries (`f02c930`). They are in `FRONTEIRAS_IO`, and [DECLARED_BINDINGS](DECLARED_BINDINGS.md) has the exact ABI and the byte-grounded owner review:
+   - They are Watcom CRT stdio routines that touch only the FILE object, the lock hooks, lseek/fgetc, the buffer and errno.
+   - Every call site's FILE* comes from the inventoried `fopen`.
+   - No caller reads EDX before overwriting it or branching on AL/EAX.
+
+   Tests cover the static bodies, call-site provenance and registration (CPU-free), plus the native FileReadLine/FileSeek over declared fgets/fseek fixtures. Under the lease, 18 native and protocol tests pass, including the existing remap/CRT-wrapper suite. `ftell` 0x48cf11, used by FileSize, still needs its own review.
+2. **Display-scenario frames.**
+   - **Capture before translation** (`80fd5ef`): 70 isolated calls; the path reproduction passed.
+   - **Translation** (`0b8f1ea`): the NextAnimTerrain/NextAnimVeget viewport loops and CRT `rand`/LongRand.
+   - **Validation:** the CPU-free replay of all 70 calls passes. The native differential in the display scenario made 194 comparisons with 0 mismatches. The v1 rerun made 2,034 with 0 mismatches.
+   - **Economy:** Core now uses `load_economy_bonus()` together with `BonusUnidades.da_memoria` (native) and `.vivo` (replay) (`d1a81d5`).
+
+   Details are in [FRAME_FOUNDATIONS](FRAME_FOUNDATIONS.md#round-4-the-display-scenario-is-the-m2-reference).
+3. **Live tile grid** (`c0fc446`, contract in [LIVE_TILE_GRID](LIVE_TILE_GRID.md)). `MundoFisico.vincular_tiles(buffer)` binds `[0x507d70]`'s 131,072 bytes by identity through `grade_u16.GradeU16`; after it, `mundo.tiles.buffer is buffer`. The default list world is unchanged. Identical results with a live grid and with the list:
+   - structure placement;
+   - region reconstruction;
+   - the eight original classification captures.
+   - **Economy:** pass `mundo.tiles.buffer` as `mosaicos`.
+   - **Missions:** replace `vincular_lista(P(TILES), …)` with `w.vincular_tiles(mapa.vista(P(TILES), 131072))`.
+
+**NOT RUN:** `ftell`; NextAnimVegetFullMap and InitGameZone modes 2–4 (not reached); locked integration.

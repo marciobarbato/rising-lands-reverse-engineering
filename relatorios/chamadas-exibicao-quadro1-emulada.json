@@ -1,0 +1,151 @@
+{
+ "al_by_routine": {
+  "ChercheContacteur": {
+   "0": 4,
+   "255": 14
+  },
+  "GameNextFrame": {
+   "0": 4
+  },
+  "InitGameZone": {
+   "1": 20
+  },
+  "LongRand": {
+   "0": 8,
+   "115": 1,
+   "121": 1,
+   "170": 1,
+   "186": 1,
+   "247": 1,
+   "252": 1,
+   "57": 8,
+   "59": 1,
+   "75": 1,
+   "87": 1,
+   "93": 1,
+   "96": 2
+  },
+  "MessageBoxExiste": {
+   "0": 2,
+   "1": 2
+  },
+  "MiniMapGetPos": {
+   "0": 2,
+   "3": 2
+  },
+  "MiniMapGetTaille": {
+   "128": 2,
+   "7": 2
+  },
+  "MouseSetZone": {
+   "0": 4,
+   "16": 1,
+   "32": 1,
+   "48": 1,
+   "64": 1,
+   "80": 5,
+   "96": 1
+  },
+  "MouseTestZone": {
+   "1": 2,
+   "120": 2
+  },
+  "NextAnimTerrain": {
+   "0": 2,
+   "17": 10
+  },
+  "NextAnimVeget": {
+   "0": 2,
+   "231": 10
+  },
+  "PlayerEstContacterPourAlliance": {
+   "0": 9,
+   "1": 7
+  },
+  "Random": {
+   "100": 1,
+   "110": 1,
+   "134": 1,
+   "15": 1,
+   "164": 1,
+   "167": 8,
+   "171": 1,
+   "255": 8,
+   "33": 1,
+   "56": 1
+  },
+  "SetClipping": {
+   "0": 1,
+   "120": 1
+  },
+  "rand": {
+   "0": 16,
+   "115": 1,
+   "121": 1,
+   "170": 1,
+   "186": 1,
+   "247": 1,
+   "252": 1,
+   "59": 1,
+   "75": 1,
+   "87": 1,
+   "93": 1,
+   "96": 2
+  }
+ },
+ "by_routine": {
+  "ChercheContacteur": 18,
+  "GameNextFrame": 4,
+  "InitGameZone": 20,
+  "LongRand": 28,
+  "MessageBoxExiste": 4,
+  "MiniMapGetPos": 4,
+  "MiniMapGetTaille": 4,
+  "MouseSetZone": 14,
+  "MouseTestZone": 4,
+  "NextAnimTerrain": 12,
+  "NextAnimVeget": 12,
+  "PlayerEstContacterPourAlliance": 16,
+  "Random": 24,
+  "SetClipping": 2,
+  "rand": 28
+ },
+ "calls": 70,
+ "cases_with_stores": {
+  "GameNextFrame": 4,
+  "InitGameZone": 19,
+  "LongRand": 28,
+  "MouseSetZone": 14,
+  "MouseTestZone": 3,
+  "NextAnimTerrain": 8,
+  "NextAnimVeget": 8,
+  "Random": 24,
+  "SetClipping": 2,
+  "rand": 20
+ },
+ "comparisons": 194,
+ "dependencies": [],
+ "mismatches": [],
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "owner0_discovery_grid": "0x417f6000",
+ "path_reproduction": {
+  "boundaries_equal": true,
+  "code_unchanged": true,
+  "entry_trace_equal": true,
+  "passed": true,
+  "phase_states_equal": {
+   "between_frames": true,
+   "frame1": true,
+   "load_tail": true
+  }
+ },
+ "perturbation_limit_per_phase": 4,
+ "scenario": "exibicao",
+ "seconds": 164.888,
+ "source_sha256": {
+  "ferramentas/chamadas_quadro_core.py": "35532d1159c3e763f45724c28761a9f5b4a36d2db85fcd776f1f90ff8e93b143",
+  "ferramentas/memoria_quadro_core.py": "346e60dbf08f64c0a8dd21b3f3442fa7b8241e90c02f3c0876500b742ffe7020",
+  "ferramentas/validar_chamadas_quadro_core.py": "2534d9d8344b8eae424310c18592de0e93a9e43287cda5a9085e96419211dc76"
+ },
+ "unit_pool_base": "0x4140d000"
+}

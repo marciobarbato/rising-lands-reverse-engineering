@@ -38,6 +38,18 @@ class MundoFisico(MundoUnidades, VisaoMovimento):
         self.bonus_fadiga = [[0] * 26 for _ in range(4)]
         self.rotas = [bytearray(b'\0\0') for _ in range(800)]
 
+    def vincular_tiles(self, buffer):
+        """Use the live tile grid [0x507d70] (131,072 bytes, 65,536 u16) by identity.
+
+        ``buffer`` is the caller's writable bytearray/memoryview of the original
+        allocation; afterwards ``self.tiles`` is a ``grade_u16.GradeU16`` whose
+        ``buffer`` is that same object, so every Core read/store of a tile is a
+        live u16 access. The default (unbound) world keeps its 65,536-int list.
+        """
+        from grade_u16 import GradeU16
+        self.tiles = GradeU16(buffer)
+        return self.tiles
+
     def iniciar_morte_unidade(self, indice):
         from morte_unidades import iniciar_morte_unidade
         return iniciar_morte_unidade(self, indice)

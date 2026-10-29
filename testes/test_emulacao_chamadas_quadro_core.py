@@ -25,6 +25,15 @@ class DiferencialChamadasQuadro1(unittest.TestCase):
         self.assertIn('1', r['al_by_routine']['Chemin_ModifieZone'])
         self.assertIn('SetEnginCollision', r['cases_with_stores'])
 
+    def test_display_scenario_exact_inputs_and_perturbations(self):
+        from validar_chamadas_quadro_core import diferencial
+        r = diferencial(cenario='exibicao')
+        self.assertTrue(r['path_reproduction']['passed'], r['path_reproduction'])
+        self.assertEqual((r['mismatches'], r['dependencies']), ([], []))
+        self.assertEqual(r['calls'], 70)
+        for nome in ('NextAnimTerrain', 'NextAnimVeget', 'rand', 'LongRand', 'InitGameZone'):
+            self.assertIn(nome, r['cases_with_stores'], nome)
+
 
 if __name__ == '__main__':
     unittest.main()
