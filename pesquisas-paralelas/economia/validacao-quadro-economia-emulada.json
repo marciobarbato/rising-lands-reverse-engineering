@@ -1,0 +1,19 @@
+{
+  "scope": "Economy routines reached by the MONDE01 M2 frame, over the frozen M1 post-load state (not a frame-1 input); economy-only call sequences, no whole-frame claim",
+  "mode": "fresh original x86 + Python + frozen capture",
+  "tests": 6,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "frozen_capture": {
+    "path": "evidencias/captura-quadro-m2-original-v2.json",
+    "scenarios": 52,
+    "original_entries": 6692,
+    "returns": 6674,
+    "dependency_stops": 18
+  },
+  "python_calls_compared": 6692,
+  "fresh_original_entries": 6692,
+  "module_sha256": "141b91d37335605bb3e6df7221627b308ade41d136dff52852192bd4101ba1cb",
+  "success": true
+}
