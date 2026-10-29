@@ -606,3 +606,7 @@ See `pesquisas-paralelas/graficos-animacao/RENDER_M1_ESTATICO.md`: terrain/veget
 ## AffGame write set between frames (M2 dependency)
 
 See `pesquisas-paralelas/graficos-animacao/ESCRITAS_AFFGAME_ENTRE_QUADROS.md`: static closure plus native M1 capture; verdict per address (the shared RNG cursor `0x4e1d18` is the only one with state-dependent writes).
+
+## Declared display backend (M2 round 3)
+
+See `pesquisas-paralelas/graficos-animacao/FRONTEIRAS_EXIBICAO.md`: `fronteiras_exibicao.py` (Core16 DirectDraw COM backend; original wrappers run natively), boundary table, bank/file inventory and RestoreAll's static DGROUP effects.
