@@ -811,3 +811,29 @@ The translation is unchanged from Stage 20; only its binding is new.
 - Missions' `fim_missao` composer uses `recursos.suficiente` over the copying `Economia(memoria=...)`, which rejects player 4. Contract: use `Economia.da_memoria(m)` or the `TestRessource` provider (Missions-owned file; not edited).
 - Native captures can spin in Unicorn teardown after writing their output. The round-5 runners exit with `os._exit(0)` right after the file is written; Core is investigating the teardown itself.
 - Still named dependencies from Stage 23: `InitGameZone`, the `MAJSympathie` counter branch `0x47515d`, the market state-3/4/5 branches, `AnimBallonStatic`, `InventionSetEffet`, and an active `CalculTroupe` without the world-joined producer.
+
+## Stage 25 (M2.3 prep): periodic branches before the first raid
+
+**Capture** (`5c8c9ac`, `evidencias/captura-temporizadores-original.json`, sha256 `58349e4f…fe01d`):
+- **Producer:** `capturar_temporizadores_original.py`, run under the lease with Core's `mapear_paginas` and `encerrar_captura`; it finished in seconds.
+- **Starting states:** the display post-load state, and the M2.2 frame-128 full-state checkpoint (Missions `ad50ab2`, raw sha256 `1ad031b9…dd930`, summary checked).
+- **Size:** 48 scenarios, 434 calls: 420 returns and 14 stops, at MessageBoxSet ×12 and InitGameZone ×2.
+- **Routines:** CalculCompteurMarche/Proposition (as loaded, and with declared states 3/4/5), PlayerAttaqueCalculSympa, MAJSympathie (with and without AI context), PlayerInitAllianceCompteur, BatimentNextEtape on every live structure, and GetMeteo.
+
+**API:**
+- `quadro_economia.calcular_meteo(m)` (GetMeteo `0x4290cf`) reads the counter `0x508f7c`, writes `0x496d2c` and `0x496d2e`, and draws the RNG `0x497164` once at counter % 100 = 0.
+- `atualizar_simpatia(m, a, b, evento)` now runs the event branch `0x47515d` over the record at `0x497288 + 16·evento` (u32 wrap) and over the sympathy words through `[0x5080a8]`. `EVENTOS_SIMPATIA` names the table.
+- The order of mutations is the original's: counter store, then (at the limit) counter zeroed, then the pairs in i-major order. Mode 1 covers i, j in 0..3 with i ≠ j; any other mode covers (a, b) only.
+
+**Validation:**
+- `testes/test_temporizadores.py` replays both states: GetMeteo, MAJSympathie, PlayerAttaqueCalculSympa, PlayerInitAllianceCompteur and the market gates. Writes and the whole-state hash are compared after every call; BatimentNextEtape's 15 calls per state write nothing natively.
+- Mutations detected: a skipped mode-1 pair, a `<= 3` roll threshold, a dropped counter reset.
+- The native rerun (`RISING_EMULAR=1`, under the lease) equals the frozen capture.
+- `test_quadro_economia`'s dependency test now asserts the translated event branch (pairs (0, 1)/(1, 0) +1 at counter 2000 with AI context cleared).
+- Gate: 487 tests, 205 optional skips, docs OK.
+- The frame-128 replay and the native rerun skip when Missions' frame-128 file is not on the checkout: it is on `feat/re-missions` until Missions integrates it; locally it is read from `.local/m2-3/`.
+
+**Gaps:**
+- The market state-3 (`0x466e01`) and state-4/5 (`0x466ed1`/`0x466fe1`) branches remain named dependencies; they need CalculValeur `0x466533` and ForgetMarche `0x4610a4`. Core's coverage run (frames 0..2,300 so far) reaches none of the market helpers.
+- Unreached and untranslated: InitNova, InventionSetEffet, AnimBallonStatic, and an actively producing CalculTroupe.
+- GetMeteo has no static caller and is not entered in that run.

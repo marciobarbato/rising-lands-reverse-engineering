@@ -880,3 +880,26 @@ All 218 edge calls match three ways: the live functions, the live-bound class fo
 **Contract for composers.** Bind resources with `Economia.da_memoria(m)`, or use the `TestRessource`/`PlayerEstAllie` providers. Missions' `diferencial_fim_missao` builds `Economia(memoria=fatia(...))`, the copying fixture form, so its `fim_missao` resource query rejects player 4.
 
 **Native teardown.** After writing its file, a capture process can spin in Unicorn's `uc_close` during interpreter finalization: the field capture ran for more than 75 minutes after its output was complete and was terminated (lease journal: exit −15). The edge capture and the native reruns in `test_campos_exibicao` therefore call `capturar()` and then `os._exit(0)`; the capture scripts themselves are unchanged.
+
+## Periodic branches before the first raid (M2.3 prep)
+
+Between frames 128 and 9,000 the economy's periodic gates fire many times. [`capturar_temporizadores_original.py`](../pesquisas-paralelas/economia/capturar_temporizadores_original.py) captured them natively in isolation, committed before any translation (`5c8c9ac`, [capture](../pesquisas-paralelas/economia/evidencias/captura-temporizadores-original.json)).
+- **Starting states:** two, each with its counter forced around every gate:
+  - the display post-load state;
+  - the full-state checkpoint after frame 128 of the Mac mini's M2.2 capture (Missions `ad50ab2`, raw JSON sha256 `1ad031b9…dd930`, summary checked).
+- **Size:** 48 scenarios, 434 calls: 420 returns and 14 stops, all at the declared UI callees (MessageBoxSet, InitGameZone).
+- **Bench:** it uses Core's `emulador.mapear_paginas`, which maps the display state's 26,262 pages as 5 regions, and `encerramento_captura.encerrar_captura`. The whole run takes seconds; the round-5 field capture took 45 minutes on single-page regions.
+
+**What the original does** (period addresses from [PLANO_M2_2.md](../pesquisas-paralelas/missoes/PLANO_M2_2.md)):
+- **GetMeteo `0x4290cf`.** At counter % 900 = 0 it stores (weather + 1) % 3 into `0x496d2c`, then stores 0 there on every call. At counter % 100 = 0, `Random % 5 < 3` increments the s16 drift `0x496d2e`, otherwise it decrements it; then −5 becomes −4 and 5 becomes 4. It has no direct call site in the code section.
+- **MAJSympathie `0x475118`, event branch `0x47515d`.** The event record is at `0x497288 + 16·event`: s32 delta, mode byte +4, u32 counter +8, u32 limit +0xc.
+  - The counter is incremented; below the limit (unsigned) nothing else happens.
+  - At the limit the counter is zeroed and the delta is added to sympathy, the s16 at `[0x5080a8] + 20i + 0xc + 2j` through PlayerGetSympathie `0x46dc6c` / PlayerSetSympathie `0x46dc90`, clamped to ±50.
+  - Mode 1 updates every ordered pair i ≠ j of players 0..3; any other mode updates only (a, b).
+  - The AI-context early return is unchanged.
+- **BatimentNextEtape `0x4268d4` on MONDE01's only structure** (structure 0, type 2) writes nothing at any forced counter (0, 1, 31..33, 49..51, 99..101, 999..1001, 2000) in either state.
+- **Market gates.** As loaded they are read-only at every forced counter. The declared states 3/4/5 enter their branches natively: state 3 writes 10 bytes; states 4/5 write 131 to 613 bytes through CalculValeur/ForgetMarche, then stop at MessageBoxSet.
+
+**Translated and verified.** `quadro_economia.calcular_meteo(m)` and the event branch of `quadro_economia.atualizar_simpatia(m, a, b, evento)`, which no longer raises at `0x47515d`. The replay ([test_temporizadores.py](../pesquisas-paralelas/economia/testes/test_temporizadores.py)) regenerates every scenario over its own copy of each state and covers GetMeteo, MAJSympathie, PlayerAttaqueCalculSympa, PlayerInitAllianceCompteur (InitGameZone stays a named dependency where the original stops) and the market gates. After every call the original's writes and the whole-state hash must match. Three deliberate mutations are each detected. The native rerun equals the frozen capture.
+
+**Not translated, deliberately.** The market state-3 branch (`0x466e01`) and the proposition state-4/5 branches (`0x466ed1`/`0x466fe1`) still raise named dependencies at those addresses, and the replay requires exactly that on the 9 declared scenarios per state. They need CalculValeur `0x466533` and ForgetMarche `0x4610a4`. Core's display coverage run (partial, frames 0..2,300) enters neither, nor EvalueCoutProposition, ResetMarche, MessageBoxSet, GetMeteo, InitNova, InventionSetEffet, AnimBallonStatic or PlayerGetSympathie; MAJSympathie is entered 24 times (frames 0 and 2,000), always taking the AI-context return. Everything the run does reach in Economy's periodic code is already translated. The same run puts the first ScanNouvellePatate at frame 45, as Missions estimated; this isolated sequence gave frame 37, a different RNG history.
