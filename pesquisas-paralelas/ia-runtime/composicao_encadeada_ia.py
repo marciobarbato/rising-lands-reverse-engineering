@@ -167,9 +167,12 @@ class MemoriaMapaRapida:
 class ContextoEncadeado:
     """``modo``: 'cruzamentos' (rounds 3/4: crossings allowed) or 'prova' (round 5: no crossing; Graphics'
     logic-effects provider for RestoreAll/AffGame, display roots not executed, DeleteBank on the arena)."""
-    def __init__(self, imagem, cenario, modo='cruzamentos', arena=None, superficie=None):
+    def __init__(self, imagem, cenario, modo='cruzamentos', arena=None, superficie=None, planejamento=False):
         self.cenario, self.modo, self.arena, self.superficie = cenario, modo, arena, superficie
         self.raizes_nao_executadas = []
+        # Coverage planning only (M2.2, output under .local/): a Graphics drawing-domain stop is recorded and
+        # the drawing is taken as writing nothing outside display. Never used for a comparison or a proof.
+        self.planejamento, self.paradas_planejamento = planejamento, []
         self.programa = ler_rul((CD / 'INSTALHD/RISING.RUL').read_bytes())
         self.comandos = imagem.table(TABELA_COMANDOS, 40)
         self.estados = imagem.table(0x42c804, 25)
@@ -245,7 +248,8 @@ class GradeRegioes:
 
 
 class MosaicosListados:
-    """[0x507d70] is Core's u16 list in the map; Economy's RecursosTerreno wants bytes. Any use is a named stop."""
+    """[0x507d70] is Core's u16 list in the map; Economy's RecursosTerreno wants bytes. Any use outside
+    UpdateChamp (which reads a per-call snapshot) is a named stop."""
     def __getattr__(self, nome):
         raise DependenciaIA('UpdateChamp tile grid [0x507d70]: Core list vs Economy bytes contract', 0x478806)
 
@@ -346,6 +350,15 @@ def provedores(mapa, prov, mm, ctx, registro, janelas, travessias, fase, regs):
 
     producao = prov.habitacao.producao
     recursos = recursos_terreno(mm)
+
+    def atualizar_campos():
+        """UpdateChamp: ScanNouvellePatate only READS the tile grid [0x507d70] (Core's u16 list). Economy gets an
+        immutable bytes snapshot taken at the call; any write to it would raise, never silently diverge."""
+        recursos.mosaicos = mm.ler(mm.u32(0x507d70), 131072)
+        try:
+            return economia_quadro.atualizar_campos(mm, recursos)
+        finally:
+            recursos.mosaicos = MosaicosListados()
     p.update({
         'EvenementEnCours': lambda sitio: evento_em_curso(mm.vista(0x4e1b0e, 1)),
         'MCICD_Play': mcicd_play,
@@ -376,7 +389,7 @@ def provedores(mapa, prov, mm, ctx, registro, janelas, travessias, fase, regs):
         'RechercheCalcul': lambda sitio: economia_quadro.calcular_pesquisa(mm),
         'PlayerInitAllianceCompteur': lambda sitio: economia_quadro.contar_aliancas(mm),
         'SetUpdateChamp': lambda sitio: economia_quadro.agendar_campos(mm, recursos),
-        'UpdateChamp': lambda sitio: economia_quadro.atualizar_campos(mm, recursos),
+        'UpdateChamp': lambda sitio: atualizar_campos(),
         'CalculMatiere': lambda sitio: economia_quadro.calcular_materia(mm),
         'CalculCompteurMarche': lambda sitio, jogador: economia_quadro.calcular_contador_mercado(mm, jogador),
         'CalculCompteurProposition': lambda sitio, jogador, edx: economia_quadro.calcular_contador_proposicao(
@@ -422,8 +435,32 @@ def provedores(mapa, prov, mm, ctx, registro, janelas, travessias, fase, regs):
             mm.reindexar()
             return 0
 
+        def affgame(sitio, **argumentos):
+            """Graphics' drawing domain plus this front's HUD flag store and leftover EAX (affgame_hud_ia)."""
+            from affgame_hud_ia import affgame_hud
+            travessias.comparar(fase, 'AffGame', sitio + 5, mapa)
+            guardas = []
+
+            def desenhar(m):
+                try:
+                    guardas.extend(graficos.desenhar_jogo(m).verificacoes)
+                except graficos.DependenciaExibicao as erro:
+                    if not ctx.planejamento:
+                        raise
+                    ctx.paradas_planejamento.append(dict(phase=fase, routine=erro.rotina, site=hex(erro.sitio),
+                                                         reason=erro.motivo, owner='graphics'))
+            efeito = affgame_hud(mm, desenhar)
+            for endereco, largura, valor in efeito.escritas:
+                {1: mm.u8, 2: mm.u16, 4: mm.u32}[largura](endereco, valor)
+            ctx.raizes_nao_executadas.append(dict(phase=fase, routine='AffGame', site=hex(sitio),
+                                                  provider='affgame_hud_ia + graficos efeitos_logicos_exibicao',
+                                                  drew=efeito.desenhou, writes=list(efeito.escritas),
+                                                  eax=hex(efeito.eax), reads=[list(x) for x in efeito.leituras],
+                                                  guards=[list(g) for g in guardas]))
+            return efeito.eax
+
         p['RestoreAll'] = efeitos('RestoreAll', graficos.restaurar_tudo)
-        p['AffGame'] = efeitos('AffGame', graficos.desenhar_jogo)
+        p['AffGame'] = affgame
         p['DDLockSurface'] = raiz('DDLockSurface', ctx.superficie)
         for nome in ('FilledBox', 'DDUnlockSurface', 'DDFlipPage'):
             p[nome] = raiz(nome)
@@ -464,17 +501,22 @@ def fase_cauda_carga(mapa, prov, ctx, registro, travessias, regs):
     return calcular_quadro(mm, p)
 
 
-def fase_entre_quadros_exibicao(mapa, prov, ctx, registro, travessias, regs, entradas):
-    """(b) on the display path: the real ProgIteration tail from 0x475063, AffGame (crossed), the
-    _WinMain@16 loop and a new ProgIteration up to the CalculGame entry. Returns the register file."""
+def fase_entre_quadros_exibicao(mapa, prov, ctx, registro, travessias, regs, entradas, fase='between_frames'):
+    """(b) on the display path: the real ProgIteration tail from 0x475063, AffGame, the _WinMain@16 loop and
+    a new ProgIteration up to the CalculGame entry. Returns the register file.
+
+    In mode 'prova', AffGame's leftover EAX (``affgame_hud_ia``) is the EAX of the PlaySnd_Manage/MCICD_Manage
+    boundaries: the ProgIteration tail touches only DH/CL before its pops. ``entradas['empilhadas']``, when
+    present, receives the (EDX, ECX, EBX) that the new ProgIteration pushes. Those are the next frame's
+    saved words, because bindings write EAX only and the boundaries are skipped."""
     from fundacoes_quadro import avancar_contadores_iteracao
     mm = MemoriaMapaRapida(mapa)
     r = dict(regs)
     if ctx.modo == 'prova':
-        p, _ = provedores(mapa, prov, mm, ctx, registro, JanelasDeclaradas(), travessias, 'between_frames', regs)
-        p['AffGame'](sitio=0x475063)
+        p, _ = provedores(mapa, prov, mm, ctx, registro, JanelasDeclaradas(), travessias, fase, regs)
+        r['EAX'] = p['AffGame'](sitio=0x475063)
     else:
-        travessias.atravessar('between_frames', 'AffGame', 0x475063, mapa, mm, registro, 'display routine (Graphics)')
+        travessias.atravessar(fase, 'AffGame', 0x475063, mapa, mm, registro, 'display routine (Graphics)')
     if mm.u8(0x5099af):
         mm.u8(0x5099af, 0)
         mm.u8(0x5099ae, 0)
@@ -499,6 +541,8 @@ def fase_entre_quadros_exibicao(mapa, prov, ctx, registro, travessias, regs, ent
         raise DependenciaIA('_WinMain@16 GetMessageA/DispatchMessageA path', 0x4601dc)
     if r['EBX'] & 0xff == mm.u8(0x49a058):
         raise DependenciaIA('_WinMain@16 WaitMessage path', 0x460214)
+    if 'empilhadas' in entradas:
+        entradas['empilhadas'] = (r['EDX'], r['ECX'], r['EBX'])
     r['ESP'] = msg - 4 - 12 - 8
     avancar_contadores_iteracao(mm.vista(0x508f7c, 12))
     r['EBX'] = 3
@@ -512,11 +556,11 @@ def fase_entre_quadros_exibicao(mapa, prov, ctx, registro, travessias, regs, ent
     return r
 
 
-def fase_quadro(mapa, prov, ctx, registro, travessias, regs):
+def fase_quadro(mapa, prov, ctx, registro, travessias, regs, fase='frame1'):
     """(c) CalculGame 0x42c868 entered from ProgIteration .. return 0x475063."""
     mm = MemoriaMapaRapida(mapa)
     janelas = JanelasDeclaradas()
-    p, _ = provedores(mapa, prov, mm, ctx, registro, janelas, travessias, 'frame1', regs)
+    p, _ = provedores(mapa, prov, mm, ctx, registro, janelas, travessias, fase, regs)
     estado = mm.u8(0x4e2f78)
     mm.u16(0x49a010, 0x1dd8)
     registro.vinculo('USER32.SetCursorPos', (mm.u16(0x5099a8), mm.u16(0x5099aa)), 0x42c8a5, 1)

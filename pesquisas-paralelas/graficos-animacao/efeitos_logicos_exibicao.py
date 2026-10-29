@@ -16,9 +16,9 @@ ESTRUTURAS, ESTRUTURA_PASSO, ESTRUTURA_ESTADO = 0x49a0c8, 276, 5
 ESTADOS_ESTRUTURA_PROVADOS = frozenset({0, 5})      # captured pool: 999 free + the Santuario (state 5)
 # view origins run natively for both routines (isolated captures, 64x64 map): the captured (4, 6) plus a sampled grid
 ORIGENS_PROVADAS = frozenset({
-    (0, 0), (0, 6), (0, 7), (0, 12), (0, 14), (0, 18), (0, 21), (0, 24),
+    (0, 0), (0, 1), (0, 2), (0, 6), (0, 7), (0, 12), (0, 14), (0, 18), (0, 21), (0, 24),
     (0, 28), (0, 30), (0, 35), (0, 36), (0, 42), (0, 47), (4, 6), (4, 30),
-    (4, 44), (6, 0), (6, 7), (6, 14), (6, 21), (6, 28), (6, 35), (6, 42),
+    (1, 3), (2, 4), (3, 5), (4, 44), (6, 0), (6, 7), (6, 14), (6, 21), (6, 28), (6, 35), (6, 42),
     (8, 0), (8, 6), (8, 12), (8, 18), (8, 24), (8, 30), (8, 36), (8, 42),
     (8, 47), (12, 0), (12, 7), (12, 14), (12, 21), (12, 28), (12, 35), (12, 40),
     (12, 42), (16, 0), (16, 6), (16, 12), (16, 18), (16, 24), (16, 30), (16, 36),
@@ -45,9 +45,9 @@ class DependenciaExibicao(Exception):
 class EfeitosExibicao:
     rotina: str
     escritas: tuple = ()          # (address, width, value): logic-state stores; empty for the proved domain
+    verificacoes: tuple = ()      # (name, observed) guard values read, in order
     liberacoes: tuple = ()        # allocator frees in call order (DeleteBank)
     eax: object = None            # EAX observed at the original return; None when it is a leftover register
-    verificacoes: tuple = ()      # (name, observed) guard values read, in order
 
 
 def _guardas(memoria, rotina):
@@ -75,12 +75,12 @@ def _guardas(memoria, rotina):
 
 def restaurar_tudo(memoria):
     """RestoreAll 0x474b08 in the captured domain: no logic-state write (the DGROUP stores are display bookkeeping)."""
-    return EfeitosExibicao('RestoreAll', (), _guardas(memoria, 'RestoreAll'))
+    return EfeitosExibicao('RestoreAll', verificacoes=_guardas(memoria, 'RestoreAll'))
 
 
 def desenhar_jogo(memoria):
     """AffGame 0x417698 (mode 0x12 body) in the captured domain: no logic-state write."""
-    return EfeitosExibicao('AffGame', (), _guardas(memoria, 'AffGame'))
+    return EfeitosExibicao('AffGame', verificacoes=_guardas(memoria, 'AffGame'))
 
 
 def inicializar_dimensoes(memoria, alta_resolucao=True):
@@ -88,7 +88,7 @@ def inicializar_dimensoes(memoria, alta_resolucao=True):
     if not alta_resolucao:
         raise DependenciaExibicao('DDInit', 0x43f50b, 'low-resolution path not captured')
     escritas = ((0x49a018, 2, TELA[0]), (0x49a01a, 2, TELA[1]), (0x508724, 2, VIEWPORT[0]), (0x508726, 2, VIEWPORT[1]))
-    return EfeitosExibicao('DDInit', escritas, ())
+    return EfeitosExibicao('DDInit', escritas)
 
 
 # ---- display calls MenuInit makes in phase (a): LockSurface, DeleteBank, FilledBox, UnlockSurface, FlipPage -----
@@ -140,4 +140,4 @@ def deletebank(memoria, banco):
             if sub:
                 ordem.append(sub)
             ordem.append(entrada)
-    return EfeitosExibicao('DeleteBank', ((banco, 2, 0),), tuple(ordem)+(tabela, banco), eax=0)
+    return EfeitosExibicao('DeleteBank', ((banco, 2, 0),), liberacoes=tuple(ordem)+(tabela, banco), eax=0)

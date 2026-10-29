@@ -10,6 +10,11 @@ original-name providers (``provider(sitio=..., **arguments)``):
 - Economy: BonusGetValEngin, the state-7 body, the type-2 structure branch.
 - Core: GetBit, CalculFatigue, SetEnginCollision.
 - Combat: EnginTrouveCible.
+
+The 32-frame target scan (0x4546aa..0x4547e0) is translated from the static disassembly: the type
+classifier, the owner-200 skip, the states 1/19 skip, the +0xda gate for entry types 14 and 16, and the
+hit handling (iagUnitSendMessage 0x49 for player type 2, SetAttaqueEngin(1) for state 7). The capture
+took only its no-scan path; frame 17 of the display reference is the first scan (Core's survey).
 """
 from reinicio_ia import DependenciaIA
 
@@ -18,6 +23,8 @@ TABELA_FADIGA = 0x454344          # 26 targets: 0x454851 = fatigue branch taken
 TABELA_ESTADOS = 0x4543c8         # 25 targets
 TABELA_TIPOS_ESTRUTURA = 0x426880  # 21 targets
 FADIGA, SAIDA = 0x454851, 0x454ccd
+# 0x4546d5..0x454711: unit types whose 32-frame step scans for a target (AL = 1).
+TIPOS_VARREDURA = frozenset({0, 1, 2, 3, 8, 0xb, 0xc, 0xf, 0x10, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19})
 ESTADO_PARADO, RAMO_PRODUCAO = 0x456966, 0x426918
 
 
@@ -63,23 +70,18 @@ def proxima_etapa_unidade(m, provedores, unidade, tabelas):
     if tipo == 0x10:
         _parar('EnginNextEtape type 16', 0x4545fe)
     if m.u8(r + 2) != 0xe and (m.u32(0x508f7c) + unidade) & 0x1f == 0:
-        if dono == 0xc8:
-            _parar('EnginNextEtape owner 200 scan', 0x4546b7)
-        t = m.u8(registro() + 1)
-        if t >= 0xf:
-            _parar('EnginNextEtape scan types >= 15', 0x4546dd)
-        if t >= 3:
-            _parar('EnginNextEtape scan types 3..14', 0x454701)
-        _chamar(provedores, 'PlayerGetType', 0x454721, jogador=dono)
-        e = m.u8(r + 2)
-        if e != 1:
-            if e == 0x13:
-                _parar('EnginNextEtape scan state 19', 0x45473d)
-            if tipo >= 0xe:
-                _parar('EnginNextEtape scan types >= 14', 0x45474f)
-            alvo = _chamar(provedores, 'EnginTrouveCible', 0x45479d, unidade=unidade) & 0xffff
-            if alvo != 0xffff:
-                _parar('EnginNextEtape target found', 0x4547ad)
+        # 0x4546aa: owner 200 skips the scan; 0x4546d5..0x454711 classify the current type.
+        if dono != 0xc8 and m.u8(registro() + 1) in TIPOS_VARREDURA:
+            tipo_jogador = _chamar(provedores, 'PlayerGetType', 0x454721, jogador=dono) & 0xff
+            if m.u8(r + 2) not in (1, 0x13):
+                # 0x454746..0x454792: entry types 14 and 16 scan only when +0xda is set.
+                if tipo not in (0xe, 0x10) or m.u8(registro() + 0xda):
+                    alvo = _chamar(provedores, 'EnginTrouveCible', 0x45479d, unidade=unidade) & 0xffff
+                    if alvo != 0xffff:
+                        if tipo_jogador == 2:
+                            _chamar(provedores, 'iagUnitSendMessage', 0x4547bf, unidade=unidade, mensagem=0x49)
+                        elif m.u8(r + 2) == 7:
+                            _chamar(provedores, 'SetAttaqueEngin', 0x4547db, unidade=unidade, edx=1)
     if _chamar(provedores, 'GetBit', 0x454808, valor=m.u8(registro() + 0xdc), bit=2) & 0xff:
         _parar('EnginNextEtape spell timer', 0x454811)
     tipo_r = m.u8(r + 1)

@@ -32,6 +32,37 @@ FRONTEIRAS_IO = frozenset((0x458420, 0x45844c, 0x458461, 0x45848b, 0x48c71f, 0x4
                            0x48cda2, 0x48ce96, 0x48cf11))
 
 
+def paginas_em_execucoes(paginas):
+    """Page-aligned addresses -> sorted [(start, size)] runs of contiguous pages."""
+    execucoes = []
+    for p in sorted(set(paginas)):
+        if p & 0xfff:
+            raise ValueError(f'Page address 0x{p:x} is not 4 KiB aligned')
+        if execucoes and execucoes[-1][0] + execucoes[-1][1] == p:
+            execucoes[-1][1] += 0x1000
+        else:
+            execucoes.append([p, 0x1000])
+    return [tuple(e) for e in execucoes]
+
+
+def mapear_paginas(cpu, paginas, permissoes=None):
+    """Map a set of 4 KiB pages as one Unicorn region per contiguous run.
+
+    One region per page makes Unicorn 2.1.4's teardown superlinear: 26,262
+    single-page regions (Economy's display-state bench) kept ``uc_close``
+    running for more than 75 minutes after the capture finished. The bytes,
+    addresses and access rights are identical either way
+    (docs/core/UNICORN_TEARDOWN.md). Returns the mapped runs.
+    """
+    execucoes = paginas_em_execucoes(paginas)
+    for inicio, tamanho in execucoes:
+        if permissoes is None:
+            cpu.mem_map(inicio, tamanho)
+        else:
+            cpu.mem_map(inicio, tamanho, permissoes)
+    return execucoes
+
+
 class BancadaX86:
     def __init__(self, arquivo=None):
         arquivo = arquivo or RAIZ.parent / 'source/cd/INSTALHD/RISING.EXE'

@@ -1,0 +1,200 @@
+{
+ "bound_s": 120,
+ "display": [
+  {
+   "close_s": 0.0,
+   "map_s": 0.0,
+   "outcome": "returned",
+   "regions": 2,
+   "requested": 2,
+   "wall_s": 0.06
+  },
+  {
+   "close_s": 0.0,
+   "map_s": 0.0,
+   "outcome": "returned",
+   "regions": 4,
+   "requested": 4,
+   "wall_s": 0.043
+  },
+  {
+   "close_s": 0.0,
+   "map_s": 0.0,
+   "outcome": "returned",
+   "regions": 8,
+   "requested": 8,
+   "wall_s": 0.043
+  },
+  {
+   "close_s": 0.0,
+   "map_s": 0.0,
+   "outcome": "returned",
+   "regions": 16,
+   "requested": 16,
+   "wall_s": 0.043
+  }
+ ],
+ "display_bench": {
+  "lines": [
+   {
+    "build_s": 71.103,
+    "regions": 16,
+    "stage": "built"
+   },
+   {
+    "close_s": 0.002,
+    "stage": "closed"
+   }
+  ],
+  "outcome": "returned",
+  "wall_s": 71.155
+ },
+ "display_coalesced": {
+  "close_s": 0.0,
+  "map_s": 0.0,
+  "outcome": "returned",
+  "regions": 16,
+  "requested": 16,
+  "wall_s": 0.043
+ },
+ "display_layout": {
+  "bytes": 273043456,
+  "coalesced_regions": 16,
+  "commonest_sizes": [
+   [
+    4096,
+    6
+   ],
+   [
+    602112,
+    1
+   ],
+   [
+    589824,
+    1
+   ],
+   [
+    40960,
+    1
+   ],
+   [
+    860160,
+    1
+   ],
+   [
+    262144,
+    1
+   ]
+  ],
+  "contiguous_same_permission_pairs": 0,
+  "path": ".local/teardown/display-layout-20261029T071038.json",
+  "regions": 16
+ },
+ "display_pages": [
+  {
+   "close_s": 0.113,
+   "map_s": 0.117,
+   "outcome": "returned",
+   "regions": 1000,
+   "requested": 1000,
+   "wall_s": 0.275
+  },
+  {
+   "close_s": 0.79,
+   "map_s": 0.798,
+   "outcome": "returned",
+   "regions": 2000,
+   "requested": 2000,
+   "wall_s": 1.634
+  },
+  {
+   "close_s": 7.583,
+   "map_s": 7.754,
+   "outcome": "returned",
+   "regions": 4000,
+   "requested": 4000,
+   "wall_s": 15.387
+  },
+  {
+   "outcome": "exceeded",
+   "requested": 8000,
+   "wall_s": 120.005
+  }
+ ],
+ "display_pages_coalesced": {
+  "close_s": 0.0,
+  "map_s": 0.0,
+  "outcome": "returned",
+  "regions": 5,
+  "requested": 5,
+  "wall_s": 0.044
+ },
+ "display_pages_layout": {
+  "blocks": 25343,
+  "bytes": 107569152,
+  "coalesced_regions": 5,
+  "commonest_sizes": [
+   [
+    4096,
+    26262
+   ]
+  ],
+  "contiguous_same_permission_pairs": 26257,
+  "regions": 26262
+ },
+ "machine": "arm64",
+ "method": "each case runs in a child interpreter; close_s times the binding finalizer (Uc.release_handle -> uc_close), the call interpreter shutdown makes; children leave with os._exit",
+ "python": "3.9.6",
+ "schema": "rising-lands/unicorn-teardown-measurement/1",
+ "synthetic": [
+  {
+   "close_s": 0.004,
+   "map_s": 0.004,
+   "outcome": "returned",
+   "regions": 250,
+   "requested": 250,
+   "wall_s": 0.07
+  },
+  {
+   "close_s": 0.018,
+   "map_s": 0.02,
+   "outcome": "returned",
+   "regions": 500,
+   "requested": 500,
+   "wall_s": 0.086
+  },
+  {
+   "close_s": 0.113,
+   "map_s": 0.117,
+   "outcome": "returned",
+   "regions": 1000,
+   "requested": 1000,
+   "wall_s": 0.274
+  },
+  {
+   "close_s": 0.793,
+   "map_s": 0.808,
+   "outcome": "returned",
+   "regions": 2000,
+   "requested": 2000,
+   "wall_s": 1.647
+  },
+  {
+   "close_s": 2.87,
+   "map_s": 2.905,
+   "outcome": "returned",
+   "regions": 3000,
+   "requested": 3000,
+   "wall_s": 5.822
+  },
+  {
+   "close_s": 7.698,
+   "map_s": 7.701,
+   "outcome": "returned",
+   "regions": 4000,
+   "requested": 4000,
+   "wall_s": 15.45
+  }
+ ],
+ "unicorn": "2.1.4"
+}
