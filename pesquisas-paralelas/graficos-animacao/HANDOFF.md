@@ -569,6 +569,8 @@ Goal: move the render API past its first stop `0x41591F` ("unit body outside its
 - M1 / M2.2 frame 1 fixture: no stop, all 480,000 pixels equal the native checkpoint (1.2: first stop at unit 15, differences below row 279).
 - Fresh native sequence rerun, `capturar_serie_quadros.py --quadros 12` → `evidencias/verificacao-cadeia-m22-v2-api13.json`: no stop in frames 1–12; over the native previous surface every frame equals the original checkpoint (0 pixels); the chained render differs only in rows ≥ 547 (HUD after `0x417B1C`, out of contract); initial surface and cache artifacts reproduced byte for byte. The 1.2 report stays unchanged.
 
-**Native runs (shared lease, this MacBook).** Smoke capture of one frame 98.6 s (scratch output, discarded); evidence capture of six frames 110.8 s; 12-frame verification 111.0 s.
+- Fresh native rerun over the whole accepted M2.2 playback, `--quadros 128` → `evidencias/verificacao-cadeia-m22-v2-api13-128.json`: no stop in 128 frames; 128/128 phase-end hashes equal the recorded ones, 128/128 carried caches equal the native cache, 128/128 frames equal the original checkpoint over the native previous surface; chained differences only from row 547 (HUD). No first stop remains in the M2.2 playback.
+
+**Native runs (shared lease, this MacBook).** Smoke capture of one frame 98.6 s (scratch output, discarded); evidence capture of six frames 110.8 s; 12-frame verification 111.0 s; 128-frame verification 441.1 s.
 
 **Gaps.** Types 1/8 outside the domain above (other owners/cameras, oscillation and its RNG, effects, overlays, attack/work/construction/death routes, other counts/directions/phases) still stop at `0x41591F`. Types other than 0, 1, 5, 6, 7, 8, 9 have no frame body. The HUD tail after `0x417B1C` is still not composed.

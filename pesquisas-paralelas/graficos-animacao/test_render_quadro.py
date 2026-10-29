@@ -198,6 +198,15 @@ class SequenciaTest(unittest.TestCase):
             self.assertIsNone(r['chained']['stop'])
             if r['chained']['pixels']: self.assertGreaterEqual(r['chained']['first_row'], 544)
 
+    def test_chain_verification_report_api_1_3_whole_playback(self):
+        d = json.loads((EVID/'verificacao-cadeia-m22-v2-api13-128.json').read_text())
+        self.assertEqual((d['frames'], d['render_api_version'], d['first_stop'], len(d['rows'])), (128, [1, 3], None, 128))
+        for r in d['rows']:
+            self.assertTrue(r['end_hash_equals_recorded'] and r['chain_cache_equals_native_entry_cache'])
+            self.assertTrue(r['over_native_previous']['equals_native_checkpoint'])
+            self.assertIsNone(r['chained']['stop'])
+            if r['chained']['pixels']: self.assertGreaterEqual(r['chained']['first_row'], 544)
+
     def test_cache_state_is_carried(self):
         fx = Fixture(FIXTURE)
         q1 = Q.renderizar_quadro(Memoria(fx), superficie_anterior=fx.antes, habitado=lambda i: True)
