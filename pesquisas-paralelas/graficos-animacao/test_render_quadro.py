@@ -74,7 +74,7 @@ class QuadroTest(unittest.TestCase):
     def test_contract_shape(self):
         q, _ = self.renderizar()
         self.assertEqual((q.versao, q.largura, q.altura), (Q.VERSAO_RENDER_QUADRO, 800, 600))
-        self.assertEqual(Q.VERSAO_RENDER_QUADRO, (1, 5))
+        self.assertEqual(Q.VERSAO_RENDER_QUADRO, (1, 7))
         pal = Q.Catalogo().paleta()
         self.assertEqual(len(pal), 768)
         for i in (0, 4000, 123456, 479999):    # rgba = palette[index] expanded to RGB, alpha 255, row-major, origin top-left
@@ -148,10 +148,11 @@ class QuadroTest(unittest.TestCase):
         self.assertEqual(len(set(crops.values())), 1)
         self.assertNotEqual(next(iter(crops.values())), self.modos['cases']['santuario_mode_5']['crop_sha256'])
 
-    def test_uninhabited_structure_stops(self):
+    def test_uninhabited_structure_requires_its_new_gray_input_region(self):
         mem = Memoria(self.fx)
-        q = Q.renderizar_quadro(mem, superficie_anterior=self.fx.antes, habitado=lambda i: False)
-        self.assertEqual(q.parada['endereco'], '0x0040892d')
+        # The historical prefix fixture does not include the newly consumed [0x4E24C4] heap table.
+        with self.assertRaises(KeyError):
+            Q.renderizar_quadro(mem, superficie_anterior=self.fx.antes, habitado=lambda i: False)
 
     def test_missing_habitation_provider_stops(self):
         q = Q.renderizar_quadro(Memoria(self.fx), superficie_anterior=self.fx.antes)

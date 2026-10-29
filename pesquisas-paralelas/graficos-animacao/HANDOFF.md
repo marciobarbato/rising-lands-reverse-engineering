@@ -1,5 +1,9 @@
 # Graphics handoff
 
+Latest dispatch: render API **1.7**, scripted CAVE display, 2026-10-29. The explicit 1.7 goal supersedes the dispatch's
+1.6 heading/report label. See the final section below and [M3_CAVE_RENDER.md](M3_CAVE_RENDER.md).
+Delivery is feature-branch push only; the coordinator owns review, main integration and acceptance.
+
 Research round: 2026-10-28. Chat `01a18262-cdd5-7b13-84af-0d6eca1a43eb`.
 Worktree: `/Users/marcio/git/Rising Lands/worktrees/re-graphics`.
 Feature branch: `feat/re-graphics`, based on organization revision `6634be3af2d255846a847d8aa21ad4edf1cdb589`. The feature commit is the commit carrying this handoff; final commit and remote-main merge identities are reported to the coordinator after the authorized integration helper finishes.
@@ -683,3 +687,80 @@ mismatches. A second compatibility run (248 tests, 2 failures, preserved in
 compositor has no live read view; those stops are preserved and the final gate passes. The public 1.5 renderer supplies
 the read view explicitly. The legacy globals set, predecessor source hashes and every frozen native fixture remain
 unchanged. No historical native suite was silently substituted for the new M3 or 128-frame proofs.
+
+## Render API 1.7 — scripted CAVE display (2026-10-29)
+
+**Original first.** Main was fetched/merged before research (`ea62eb4`, descendant of accepted 1.5). The Missions
+probe ref `f0588447b6cea3cc10701233a55bbcd16551e5e5` was read with git-show and never merged. Native evidence commits
+are `9a05e69` (initial recordings and declared 160-case matrix), `9a1f846` (recorded AffText boundaries, gray/shadow
+tables and saved backgrounds), and `51fc02e` (600-case matrix including every CAVE construction health value).
+The translation commit is the commit carrying this section. The executable identity is unchanged:
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+Native WndProc replay independently reproduces 1,274 published phase surfaces and whole-state hashes; hooks only
+record original display execution. AffText remains the Missions bench's explicit non-executed boundary.
+
+**API and domain.** `VERSAO_RENDER_QUADRO = (1,7)`. Existing positional/result/cache contracts and 1.5 outputs remain
+unchanged. `renderizar_quadro` gains optional `texto(request, indexed_surface) -> bytes`; without it, the native
+tooltip frame is returned with a visible `0x459454` dependency. Request keys are original text bytes, x/y/right/bottom,
+font and flags. `regioes_necessarias` adds the gray table `[0x4E24C4]`, the pending raw background `[0x49A03C]`
+(width `[0x49A04A]` × height `[0x49A04C]`), and, with HUD, tooltip shadow `[0x4E24B4]`. No input memory is written.
+
+`cave_scriptada_m3.py` handles uninhabited type-2/3 facade triggers (`0x2ED`/`0x30D`, `0x40F23B` family), modes
+0/1/2/6/7 across full health 0..maximum, and uninhabited modes 3/4/5. Mode 3 consumes three permutation bytes and
+exports each RNG-cursor write before drawing; clipping is restored by AffBatiments before its existing tail. Full
+CAVE uses seven plain and seven destination-gray layers, including the native three-pixel difference on layer 7119.
+Inhabited sanctuary continues through the frozen predecessor provider. Inhabited CAVE remains `0x40958E`.
+
+Selected owner-0 builder construction uses the existing verified fixed-stride formula for tasks 0/1, states 11/15
+and no queue/effects/oscillation, with selection frame then shadow/body then AffInfoSelection/fatigue/experience tail.
+P3 contributes selected state-11 walk/work bodies. Selected cell orders (`+0x82=1`) add their viewport-clipped two
+markers before the normal walk body; mode 2 remains `0x412923`. Existing input-overlay bag/health/fatigue/type guards
+remain visible. Other body routes, owners, queued builder, damage/fire and structure-selection domains are unchanged.
+
+`hud_scriptado_m3.py` composes the type-3 5×5 CAVE placement gray grid/invalid-cell outlines (`0x41729B`), expired
+CONSTRUTOR/ARMAZÉM tooltip layout/frame/shadow, background save and following-frame PasteBob restore (`0x4179E1`).
+Only the captured single-byte font mode, suffix 0xFFFF and screen coordinates are accepted. Unknown tooltip strings/
+font/suffix remain `0x40F8C0`. Glyph rendering is a `0x459454` dependency. GetBob exports `saved_background_pixels`
+as a write-only effect (empty old hex, complete new raw pixels); carry it with display globals, cache and surface.
+Callback order is save background → Box → FilledBoxOmbre → text provider → cursor. Default absence never skips text.
+
+**Comparison qualification and results.** The validation-only `FronteiraTextoGravada` accepts the declared native
+AffText non-execution only after exact text/font/rectangle/flags and whole partial-surface verification. It is never
+a production default. Under that explicit probe contract, full chained surface equality is P1 501/501, P2 601/601,
+P3 172/172 (129–300), with zero drawing-argument and projected-DGROUP differences (only the two existing DD binding
+pointer fields excluded). The chain carries the Python-produced background, surface and cache and checks them at
+native entries. Normal rendering without text provider stops first at P1 170, P2 219, P3 141, after 41/90/12 complete
+prefix frames. Native partial pixels and argument prefixes match exactly at all three stops.
+The combined current-source report is `validacao/sondas-api17-final.json`: 139,876 drawing calls and 1,037 attested
+text boundaries. The inhabited sanctuary retains the 1.5 habitation-provider call order; its already queried false
+result is passed explicitly to the new uninhabited provider, without a repeated economy callback.
+
+`validacao/matriz-cave-toda-vida-api17.json`: 600/600 original leaf cases, 0 pixel/argument/effect mismatches. This
+includes all 101 CAVE health values in each construction mode plus sanctuary threshold and RNG cases. It does not
+claim completion of the actual P3 chain through frame 1812. The native calls use exact restored frame-220 state and
+declared writes; previous captures, hashes and predecessor sources are unchanged.
+
+Fresh `capturar_serie_quadros.py --quadros 128 --hud`: **128/128** full surfaces equal the original and unchanged
+1.4/1.5 phase hashes, both chained and over the native previous surface; all carried caches equal, no stop or first
+difference. The final source rerun's log wall interval is 450 s including lease startup; its report is byte-identical
+to the first 482-second 1.7 run. The same 114 API-1.5 cases remain in the graphics gate;
+the historical source report is pinned to its actual `06ef8f1` source revision, rather than requiring new additions
+to have old source hashes. Frozen report bytes remain untouched.
+
+**Remaining work.** P3 301–3129 needs native capture on the Mac mini (exact bounded commands in M3_CAVE_RENDER.md),
+including completed CAVE at 1812 and later builder behavior. P4/P5 were not consumed. Full glyph drawing needs a
+native text-enabled oracle capture; current probes deliberately do not execute it. Other facades/fire, inhabited
+CAVE, nontrivial contents, other unit body routes and prior market/recruitment/event/message/alliance/debug stops
+remain. No M3 acceptance or integration is recorded by this front. All native runs used the MacBook heavy lease and
+stayed below 20 minutes; no multi-thousand-frame run was started here.
+
+**Validation history.** The preserved `validacao/api17-graphics-tests-precheck.log` reports 248 tests with one
+failure/two errors: an obsolete uninhabited-stop test lacked the newly required gray buffer, a sparse invalid-tooltip
+test attempted an undeclared read, and the inhabited construction stop address needed compatibility preservation.
+The fixture remains unchanged; missing regions now remain explicit read errors, invalid pointers stop before use,
+and the historical inhabited stop address is preserved. The first complete 1.7 gate passed 254 tests with zero skips
+in 86.892 s. After callback-order review, the combined source-pinned probe comparison again passes in 296.810 s,
+and the final leased domain gate passes **254 tests, zero skips**, in **87.702 s**; documentation links also pass.
+The final gate log is `validacao/api17-graphics-tests-final.log`.
+Historical native matrices were consumed by the graphics suite; they were not recaptured. Full P3, P4/P5 and glyph
+execution are skipped for the concrete evidence/runtime gaps above.

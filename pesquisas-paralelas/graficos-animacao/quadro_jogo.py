@@ -8,6 +8,7 @@ DependenciaQuadro at their original call site with the partial surface.
 """
 import struct
 import sobreposicoes_entrada_m3 as entrada_m3
+import cave_scriptada_m3 as cave_m3
 from cache_terreno import resolver_bloco_terreno
 from passe_terreno import planejar_passe_terreno, executar_passe_terreno, pixels_bloco_terreno, compor_bloco_terreno
 from passe_sprites import planejar_passe_sprites
@@ -227,6 +228,8 @@ class _Composicao:
             self.parar(0x40F23B, f'building facade for terrain word 0x{palavra:x} at cell {celula}')
         if palavra == GATILHO_SANTUARIO:
             self._fachada_santuario(x, y, celula, indice)
+        elif palavra == 0x30d and self.mundo.estruturas is not None:
+            cave_m3.facade(self,x,y,celula,indice)
         elif palavra in GATILHOS_FACHADA: self.parar(0x40F23B, f'building facade for terrain word 0x{palavra:x} at cell {celula}')
         if palavra == OFICINA: self.parar(0x40288B, f'workshop facade at cell {celula}')
         salvo = struct.unpack('<4H', self.tela.bruto('recorte_salvo'))  # RestaureClipping 0x40F4E8
@@ -238,11 +241,12 @@ class _Composicao:
         if indice == 0xffff: return   # 0x4085C5 -> 0x40F491: no structure at the trigger, nothing drawn
         r = self._estrutura(indice, 0x4085CB)
         modo = r[5]
-        if modo not in (3, 4, 5): self.parar(0x408AC8, f'structure mode {modo}: the construction/other body is not reconstructed')
         if r[8] != 2: self.parar(0x408606, f'structure type {r[8]}: only the type-2 facade is reconstructed')
+        if modo not in (3,4,5):
+            cave_m3.facade(self,x,y,celula,indice);return
         habitado = self._consulta_habitada(indice, 0x4087AA)
-        if modo == 3 and not habitado: self.parar(0x40863E, 'mode 3 without habitation advances the RNG cursor and draws the construction body')
-        if not habitado: self.parar(0x40892D, 'uninhabited facade needs the gray effect')
+        if not habitado:
+            cave_m3.facade(self,x,y,celula,indice,habitacao=False);return
         auxiliar = struct.unpack_from('<H', r, 6)[0]
         if auxiliar: self.parar(0x4085cb, 'sanctuary damage/fire (+0x06 nonzero): facade provider stops before drawing')
         if self.relogios_extra is None: self.parar(0x4087E3, 'frame clocks 0x508F80/0x508F84 are not supplied')
@@ -282,6 +286,9 @@ class _Composicao:
             if self.leitura_entrada is None: self.parar(0x41591f, 'AffEngin input overlays require the live type-table read view')
             entrada_m3.validar_unidade(self, r)
             entrada_m3.quadro_selecao_unidade(self, r, px, py)
+            if estado in (2,7):cave_m3.order_markers(self,r)
+        if tipo == 7 and estado in (11,15):
+            cave_m3.construction_builder(self,r,x,y,indice);return
         if tipo in CORPOS_TIPOS1_8:   # render API 1.3: AffDeplaceEngin branches 0x412D4C / 0x412962 (native capture)
             try:
                 self.saida, _ = compor_corpo_tipos1_8(self.catalogo, self.saida, self.largura, self.altura, r, x=x, y=y,
@@ -367,7 +374,7 @@ def compor_quadro(mundo, tela, *, ciclo_cache, catalogo, tabela_sombra, tabela_e
     ponteiro = travar_superficie(tela, directdraw); tela.gravar('superficie_u32', ponteiro)
     if ponteiro == 0:
         raise DependenciaQuadro(0x4179D4, 'DDLockSurface returned NULL; drawing would fault', efeitos=tela.efeitos)
-    if tela.u('restaurar_fundo_u8'):
+    if tela.u('restaurar_fundo_u8') and leitura_entrada is None:
         raise DependenciaQuadro(0x4179E1, 'saved-background restore (PasteBob) is not composed', efeitos=tela.efeitos)
     largura, altura = tela.u('pitch_u32'), tela.u('altura_tela_u16')
     if len(superficie) != largura*altura: raise ValueError('Surface must be pitch x screen height bytes')
@@ -376,6 +383,9 @@ def compor_quadro(mundo, tela, *, ciclo_cache, catalogo, tabela_sombra, tabela_e
     c.habitado, c.relogios_extra, c.selecao_estruturas = habitado, relogios_extra, selecao_estruturas
     c.tabelas_jogador = tabelas_jogador if tabelas_jogador is not None else _tabelas_jogador()
     c.chamadas += [['CalculFrame'], ['DDLockSurface']]
+    if tela.u('restaurar_fundo_u8'):
+        from hud_scriptado_m3 import restore_background
+        restore_background(c)
     origem = list(tela.palavras('origem')); janela = list(tela.palavras('janela')); margem = tela.u('margem_i8')
     margem = margem-256 if margem > 127 else margem
     if tela.u('largura_tela_u16') != largura or janela[0]*32 != largura:

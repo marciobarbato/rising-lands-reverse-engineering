@@ -1,0 +1,50 @@
+{
+  "schema": "rising-lands/m3-default-render-prefixes/1",
+  "probes": [
+    {
+      "probe": "P1",
+      "captured_frames": [
+        129,
+        629
+      ],
+      "chained_equal_prefix": 41,
+      "first_stop_frame": 170,
+      "stop": {
+        "endereco": "0x00459454",
+        "detalhe": "AffText glyph renderer is not supplied (probes declare this boundary non-executed)"
+      },
+      "native_partial_surface_equal": true,
+      "native_partial_arguments_equal": true
+    },
+    {
+      "probe": "P2",
+      "captured_frames": [
+        129,
+        729
+      ],
+      "chained_equal_prefix": 90,
+      "first_stop_frame": 219,
+      "stop": {
+        "endereco": "0x00459454",
+        "detalhe": "AffText glyph renderer is not supplied (probes declare this boundary non-executed)"
+      },
+      "native_partial_surface_equal": true,
+      "native_partial_arguments_equal": true
+    },
+    {
+      "probe": "P3",
+      "captured_frames": [
+        129,
+        300
+      ],
+      "chained_equal_prefix": 12,
+      "first_stop_frame": 141,
+      "stop": {
+        "endereco": "0x00459454",
+        "detalhe": "AffText glyph renderer is not supplied (probes declare this boundary non-executed)"
+      },
+      "native_partial_surface_equal": true,
+      "native_partial_arguments_equal": true
+    }
+  ]
+}
