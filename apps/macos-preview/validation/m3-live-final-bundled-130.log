@@ -1,0 +1,38 @@
+[lease] macos-final-bundled-live-130 waiting
+[lease] macos-final-bundled-live-130 granted slots [3]
+load_tail
+frame64
+frame128
+{
+ "schema": "rising-lands/macos-live-proof/1",
+ "source_revision": "901b95cdae284a01d35752bc58dc288fa081a2fa",
+ "library_sha256": "839ce4b7978a0fc0ab1aaed6752ed079e84805374e97339e3f0facaf93b2de53",
+ "logic_only": false,
+ "frames_requested": 130,
+ "frames_completed": 130,
+ "last_phase": "frame130",
+ "first_stop": null,
+ "engine_only_extension": {
+  "frames": 0,
+  "seconds": 0.0,
+  "last_phase": null,
+  "scope": "ABI only beyond 128; no snapshots/render/equality claim"
+ },
+ "phases_equal": 257,
+ "checkpoints_equal": 11,
+ "full_surfaces_equal": 128,
+ "phase_surfaces_equal": 257,
+ "timing": {
+  "rust_seconds": 1.1801885470049456,
+  "projection_seconds": 51.16980888333637,
+  "render_seconds": 15.815886797499843,
+  "total_seconds": 68.18099771987181,
+  "presentation_seconds": 44.377515867585316,
+  "frames_per_second": 1.1549548395465525,
+  "rust_projection_render_png_fps": 1.1551099388304595,
+  "rust_frames_per_second": 110.15189083973989,
+  "render_frames_per_second": 8.219583363517135,
+  "wall_seconds": 113.23793020797893,
+  "scope": "Phase calls + bulk projection/hash/oracle comparison + render + PNG presentation; initialization/IPC/native scaling excluded"
+ }
+}
