@@ -603,3 +603,14 @@ The contract is in [RAID_CORE](RAID_CORE.md#movement-and-pathfinding-after-the-s
   - Every Core call in 9500–9703 matches the original (0 mismatches over 1,823 live and 5,404 flat comparisons).
 - **Validator tools:** `--janelas` (isolate and compare only inside counter windows), `--ordem` (native call order, with unit 16's key fields and changes), `--rotinas-extra`.
 - **Open:** the flat `Chemin_ModifieZone` mode 0 (removal) is not translated. These windows reach it through ResetEnginCollision; the chain uses the world model's `ocupar` instead.
+
+### Native pass-2 hooks for the comparison policy (tooling only)
+
+See [NATIVE_POLICY_HOOKS](NATIVE_POLICY_HOOKS.md).
+- **What changed.** Pass 2 of Missions' comparison policy can now use a C library (`ferramentas/nativo/ganchos_memoria.c`). It is built deterministically by `ferramentas/compilar_ganchos_nativos.py` into ignored `.local/nativo/` and registered with Unicorn 2.1.4's C `uc_hook_add` through ctypes. It holds the display-root tracker and the access aggregates natively; Python drains them once per phase.
+- **Interface.** `ganchos_nativos.ganchos_politica(b, alvos)` is a drop-in for `politica_comparacao_quadros.ganchos`. `politica_ganchos_nativos.py` injects it at runtime. Missions' files are untouched, and no Missions adapter is needed.
+- **Failure handling.** A missing or stale library fails loudly. There is no fallback to Python hooks.
+- **Result.** M2.2, 128 frames: the native policy body is JSON-identical to the committed report, sequentially and joined from four segments: mask, 999 game-logic bytes with writers/readers, 153,060/999 totals, windows and surface verdict.
+- **Timing.** The pass-2 phase loop takes 8.291 s/frame with Python hooks and 1.285 s/frame with native hooks on the same machine and windows, a 6.45× speedup.
+- **Cause of the old cost.** Most of it was Unicorn walking the 10,600 per-range hooks on every access, not the Python callbacks. The native `agrupado` mode uses one spanning hook plus a per-address multiplicity table.
+- **Tests.** Native tests are opt-in (`RISING_EMULAR=1`). The non-native gate does not need the library.
