@@ -4,7 +4,7 @@ Owner: the AI and Runtime front (`feat/re-ai-runtime`, `worktrees/re-ai-runtime`
 
 Every address applies to the intact executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`, the only execution oracle. The normalized analysis PE `26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0` is a different identity and was not read for any interval below. Routine names are the original SBL names decoded by core's `simbolos_ia`.
 
-**Current scope:** Stage 1 established the original-byte contract. Stage 2 recovers the `IaReset`, `IaAlloc` and uncalled `IAResetAttaque` table providers, with the bounded evidence described below. No frame/unit/structure dispatcher, AI kernel or world operation is implemented yet.
+**Current scope:** Stage 1 established the original-byte contract. Stage 2 recovers the `IaReset`, `IaAlloc` and uncalled `IAResetAttaque` table providers, with the bounded evidence described below. M2 adds the frame inventory at the M1 post-load state, 46 native captures at that input, the CalculGame frame-body skeleton, and the two dispatcher loops with IATestUtilite (sections at the end). EnginNextEtape/BatimentNextEtape bodies, AI kernels (AvanceMonstre first) and world operations are not implemented yet.
 
 ## Evidence
 
@@ -523,4 +523,62 @@ One live structure: index 0, owner 0, state 5, type 2. Its branch is `0x426918` 
 
 - Audio: frame 1 reaches `MCICD_Play` (`0x4e2f28` = 0). Missions' frame-1 oracle needs a declared MCI binding or an audio-owned stop.
 - Missions: the frame-1 input differs from the M1 post-load state at least in `0x4e2f78` (0 → 0x12 by MenuInit) and in the writes of RestoreAll, SetClipping and InitGameZone. Re-validation at the exact frame-1 input waits for Missions' capture.
-- Economy: PlayerGetType's constant 2 for player 4 is part of the economy-owned player API. Any Python `PlayerGetType` must reproduce it, because the frame and IaReset consume it.
+- Economy: PlayerGetType's constant 2 for player 4 is part of the economy-owned player API. The committed `mercado.Mercado.tipo_jogador` already returns 2 for an index ≥ 4. The frame skeleton consumes it.
+
+## M2 — original captures at the M1 post-load input and the first reconstruction (step 2)
+
+### Native captures (`capturar_quadro_m2.py` → `evidencias/captura-quadro-m2-pos-carga.json`)
+
+The script replays the original new-campaign startup and MissionLoad on Missions' committed bench (`oraculo_carga_missao.BancadaCargaMissaoOriginal`, the same declared inputs as the accepted v2 capture: fill 0xA7, clock 0x123456). It requires the resulting image to equal the frozen accepted final state `58a5020e…` (881 blocks, AL = 1 at `0x42d22d`), and that replay takes about 34 s. For each capture it restores every block, enters one original routine with the registers of its CalculGame call site, and runs every callee natively; no callee is stubbed. Each capture records:
+- the SBL entry trace: callee, return site, EAX/EDX/EBX/ECX;
+- the read-before-write footprint over DGROUP+.bss and the arena;
+- every changed byte;
+- the registers out.
+
+Every capture carries the label **"M1 post-load input"**. The capture was committed (`66db4e4`) before any translation. A trial run in `.local/` produced identical effects.
+
+Result: **46/46 captures return; no declared binding, display skip, undeclared import or fault is reached.**
+
+| Capture | Original behavior at the M1 post-load input |
+|---|---|
+| `calcul_next_reflect_p1..p3` | `iaCalculPlayer` reads only the inactive byte `0x51a990 + 16p` (= 1) and returns 0. No call, no store |
+| `calcul_next_reflect_p4` | `AvanceMonstre(4)` → `MissionGetNum`; it reads the monster tables (`0x50a9cc`, count `0x50a9ce`, five 12-byte records, `0x50ae80`, `0x50b134`) and u32 `0x508f7c`, and **stores byte `0x50a9cc` = 1**. `iaSolver(0x5148f0)` reads `0x5148f0`/`0x514904` and finds no task. EAX = 0x1a1a0001 (CalculGame ignores it) |
+| `process_input_game_p0..p3` | It reads the queue pointer `[0x4e2458 + 4p]` (queues at `0x418e4000 + 0x1000p`) and the command word, which still holds the 0xA7 allocation fill. 0xA7A7 > 0x27 takes the same path as command 0 (table `0x45ed20[0]` = `0x45f2de`): it clears the 10-byte record and dispatches nothing |
+| `message_box_calcul` | Reads u32 `0x507d54`; no store |
+| `game_next_frame` | u32 `0x496d40`: 1 → 2 |
+| `calcul_engin_next_etape` | 188 entries. 16 × (IATestUtilite → iagMessTestSendMessageEngin → PlayerGetType, then EnginNextEtape). Units 0–2 and 11–15 (state 7) reach BonusGetValEngin, GetBit, CalculFatigue (→ BonusGetValEngin), SetEnginCollision (→ SetCollision, Chemin_ModifieZone), GetBit and Random. Unit 0 also reaches PlayerGetType, EnginTrouveCible (→ PlayerEstAllie) and the frame-0 scan. Units 3–10 (state 14) reach BonusGetValEngin, GetBit, CalculFatigue and GetBit. Stores: unit `+0x10a` = state for all 16 units; `+0x74` = 1 for the state-7 units; the Random state `0x497164` advances 8 times; `0x4e1a38`/`0x4e1a3a` = 0/16; `0x4e1928[0]` = 14; the owner-0 type counters |
+| `calcul_batiment_next_etape` | ResetTableauHangar (stores 0xff over 80 bytes at `0x4e296c`), IATestUtilite(3, 0), BatimentNextEtape(0) → BagContientTroupe → CalculTroupe, BatimentGetCase (→ BatimentCollision), then players 1–3: CaseEstDecouverte, BatimentEstDecouvert (false, so no BatimentDecouvre), BatimentContourEstIllumine (false; the flags are already 0, so no BatimentIllumine). Stores `0x4dfaa8[0]` = 1 |
+| `ia_test_utilite_unit*`, `engin_next_etape_unit*`, `ia_test_utilite_structure0`, `batiment_next_etape_structure0` | The same per-index effects, each from a fresh M1 state |
+
+### Reconstruction (`laco_despachantes.py`, `quadro_calcul_game.py`)
+
+| Entry | Original | Domain and gaps |
+|---|---|---|
+| `calcular_proxima_etapa_unidades(memoria, provedores)` | CalculEnginNextEtape `0x456db5` | Full loop and counters. `EnginNextEtape` is a provider (eax = u16 unit, site `0x456ead`) |
+| `calcular_proxima_etapa_estruturas(memoria, provedores)` | CalculBatimentNextEtape `0x4281c7` | Full loop. Providers: ResetTableauHangar, DemonteBatiment, BatimentNextEtape, BatimentGetCase, CaseEstDecouverte(cell u16, player), BatimentEstDecouvert, BatimentDecouvre, BatimentContourEstIllumine and BatimentIllumine(structure, player, ebx = 1/0). A zero period u16 `0x495c02` raises, as the original `div` faults |
+| `testar_utilidade(memoria, provedores, tipo, indice)` | IATestUtilite `0x47fbfd` | Only type 1 acts. `iabTestEngin 0x4897a4` is a `ret` |
+| `testar_mensagem_unidade(memoria, provedores, unidade)` | iagMessTestSendMessageEngin `0x483ed7` | Stores `+0x10a/+0x10b` on change, then returns for owner ≥ 4, a non-AI owner or no group. **The group-descriptor path (`0x483f5d` onward: table `0x498b38`, iaProbReturnTo, iagUnit/VilleSendMessage) raises `DependenciaIA` at `0x483f5d`**; MONDE01 does not reach it |
+| `calcular_quadro(memoria, provedores)` and `Quadro.calcul_next_reflect` | CalculGame frame body, CalculNextReflect | See the skeleton below |
+
+Providers receive keyword arguments at original widths plus `sitio`. A missing provider raises `DependenciaIA(name, call site)`, and every earlier store is retained.
+
+**Frame skeleton** (`quadro_calcul_game.calcular_quadro`, commit `a2a4aad`) runs `0x42d2de..0x42d4f5` in original order: gates 2/3, the MCICD_Play track arithmetic, the player loop (0..4, or 0..3 in network games), ProcessInputGame 0..3, and the end-condition counter (signed `jl`) with the `MenuInit(local, 0x13, ecx = counter)` tail at `0x42c931`. Three bodies are inline: PlayerAttaqueReset (`ret`), GameNextFrame (`inc dword [0x496d40]`) and CalculNextReflect (Core `ia.atualizar_ia`, with the counter/inactive stores in original order). Every other callee is a named provider. The skeleton reproduces the eight Stage 1 CalculGame captures: call order, sites, argument registers, exits, stores and state/counter/flag results (`test_quadro_calcul_game.py`).
+
+### Validation
+
+- **Native hybrid comparison** (`validar_despachantes_m2.py` → `validacao/m2-despachantes-native.json`, clean source revision). It replays the startup and MissionLoad, restores the M1 post-load state for each case, and runs the Python code over the bench memory through `MemoriaBancada`, which keeps the declared-region policy. Every provider executes the original natively on that memory. **23/23 cases are equal to the original native capture, both in the whole image (SHA-256) and in the provider call order:** CalculEnginNextEtape, CalculBatimentNextEtape, IATestUtilite for the 16 units and the structure, and CalculNextReflect for players 1–4.
+- **Local, no emulation** (`test_laco_despachantes.py`). It uses the frozen M1 blocks, with Economy's `Mercado.tipo_jogador` as PlayerGetType. IATestUtilite matches all 17 captures byte for byte. The unit loop's owned bytes (`0x4e1928..`, `0x4e1a38..`, `+0x10a/+0x10b`) and its dispatch order match the loop capture, with EnginNextEtape as a declared recording stub. Inactive players 1–3 match. Player 4 stops at `DependenciaIA('AvanceMonstre', 0x47f939)`.
+
+### Named dependency stops for a Python frame 1 at MONDE01
+
+In frame order, the providers that do not exist yet in Python:
+1. `EvenementEnCours` (missions; one byte read) and `MCICD_Play` (audio, second wave).
+2. Player 0: `InputGame`, `InputSend` (input, second wave).
+3. **`AvanceMonstre` `0x47f939` and `iaSolver` `0x47f945` for player 4: ai-runtime, next.** Core's `tarefas_ia` must supply iaSolver over the actual task lists.
+4. `ProcessInputGame` (ai-runtime; for MONDE01 frame 1 it is clear-only, next), `MessageBoxCalcul` (ai-runtime; read-only, next), `CalculIconeAction` (interface).
+5. `ProjectileCalcul` (combat).
+6. `EnginNextEtape` prelude (ai-runtime) with BonusGetValEngin (economy), EnginTrouveCible/PlayerEstAllie (combat/economy), GetBit, CalculFatigue, SetEnginCollision, Random (core), and state 7 (economy) and state 14 (direct exit).
+7. ResetTableauHangar, BatimentNextEtape type 2 (economy), BatimentGetCase, CaseEstDecouverte, BatimentEstDecouvert, BatimentContourEstIllumine (core/structures).
+8. RechercheCalcul … PlayerAttaqueCalculSympa (economy/core), and `TestFinDeMission` (missions).
+
+The exact frame-1 input differs from the M1 post-load state: the load-entry tail and the earlier frame steps run first. Everything above is re-validated at Missions' first-frame capture when it is published.
