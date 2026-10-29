@@ -1,0 +1,80 @@
+{
+ "description": "Select unit 12, then a left click on the free discovered cell (19,13): a move order.",
+ "frames": [
+  {
+   "cursor": [
+    560,
+    528
+   ],
+   "frame": 130,
+   "messages": [
+    [
+     512,
+     0,
+     34603568
+    ]
+   ]
+  },
+  {
+   "frame": 131,
+   "messages": [
+    [
+     513,
+     1,
+     34603568
+    ]
+   ]
+  },
+  {
+   "frame": 133,
+   "messages": [
+    [
+     514,
+     0,
+     34603568
+    ]
+   ]
+  },
+  {
+   "cursor": [
+    624,
+    432
+   ],
+   "frame": 140,
+   "messages": [
+    [
+     512,
+     0,
+     28312176
+    ]
+   ]
+  },
+  {
+   "frame": 141,
+   "messages": [
+    [
+     513,
+     1,
+     28312176
+    ]
+   ]
+  },
+  {
+   "frame": 143,
+   "messages": [
+    [
+     514,
+     0,
+     28312176
+    ]
+   ]
+  }
+ ],
+ "name": "P2",
+ "schema": "rising-lands/monde01-scripted-input/1",
+ "start": {
+  "checkpoint": "M2.2 frame128",
+  "frame": 128
+ },
+ "stop_frame": 729
+}
