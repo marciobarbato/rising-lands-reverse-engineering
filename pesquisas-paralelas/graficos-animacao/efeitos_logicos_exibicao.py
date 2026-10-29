@@ -45,9 +45,9 @@ class DependenciaExibicao(Exception):
 class EfeitosExibicao:
     rotina: str
     escritas: tuple = ()          # (address, width, value): logic-state stores; empty for the proved domain
+    verificacoes: tuple = ()      # (name, observed) guard values read, in order
     liberacoes: tuple = ()        # allocator frees in call order (DeleteBank)
     eax: object = None            # EAX observed at the original return; None when it is a leftover register
-    verificacoes: tuple = ()      # (name, observed) guard values read, in order
 
 
 def _guardas(memoria, rotina):
@@ -75,12 +75,12 @@ def _guardas(memoria, rotina):
 
 def restaurar_tudo(memoria):
     """RestoreAll 0x474b08 in the captured domain: no logic-state write (the DGROUP stores are display bookkeeping)."""
-    return EfeitosExibicao('RestoreAll', (), _guardas(memoria, 'RestoreAll'))
+    return EfeitosExibicao('RestoreAll', verificacoes=_guardas(memoria, 'RestoreAll'))
 
 
 def desenhar_jogo(memoria):
     """AffGame 0x417698 (mode 0x12 body) in the captured domain: no logic-state write."""
-    return EfeitosExibicao('AffGame', (), _guardas(memoria, 'AffGame'))
+    return EfeitosExibicao('AffGame', verificacoes=_guardas(memoria, 'AffGame'))
 
 
 def inicializar_dimensoes(memoria, alta_resolucao=True):
@@ -88,7 +88,7 @@ def inicializar_dimensoes(memoria, alta_resolucao=True):
     if not alta_resolucao:
         raise DependenciaExibicao('DDInit', 0x43f50b, 'low-resolution path not captured')
     escritas = ((0x49a018, 2, TELA[0]), (0x49a01a, 2, TELA[1]), (0x508724, 2, VIEWPORT[0]), (0x508726, 2, VIEWPORT[1]))
-    return EfeitosExibicao('DDInit', escritas, ())
+    return EfeitosExibicao('DDInit', escritas)
 
 
 # ---- display calls MenuInit makes in phase (a): LockSurface, DeleteBank, FilledBox, UnlockSurface, FlipPage -----
@@ -140,4 +140,4 @@ def deletebank(memoria, banco):
             if sub:
                 ordem.append(sub)
             ordem.append(entrada)
-    return EfeitosExibicao('DeleteBank', ((banco, 2, 0),), tuple(ordem)+(tabela, banco), eax=0)
+    return EfeitosExibicao('DeleteBank', ((banco, 2, 0),), liberacoes=tuple(ordem)+(tabela, banco), eax=0)
