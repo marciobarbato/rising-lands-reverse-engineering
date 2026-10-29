@@ -100,3 +100,20 @@ Until Core's providers land, the composition at frame 9000 stops at GetFreeCell 
 - Optionally `named_inputs` in every part. A later part uses the `-v2` frame inputs, which are the same declared answers.
 
 The writer's parts carry complete deltas, so the logic-only delta form in the brief is not needed.
+
+**Against the real writer (`eb08940`):**
+- **Writer check:** a synthetic two-part pack, cut from the M2.2 capture in the writer's exact format (`seconds` removed, `frames`/`last_phase`/`policy` fields), passes the writer's own `verificar()`. It was extracted read-only from `eb08940` and gave `equal`, 257/257 phases equal to the M2.2 capture, with the chain checked.
+- **Comparator:** `--parte` finds both parts equal (129/129 and 128/128), run in parallel.
+- **Policy:** the aggregated schema (`5a14cea`) keeps `cumulative.exclusion_mask`, `display_roots` and the per-byte `writers`/`readers`, so the comparator reads it unchanged.
+
+**Manifest workflow** ([partes_quadros_ia.py](partes_quadros_ia.py)):
+1. `verificar --manifesto … --plano …`
+   - checks every part's compressed and raw hash and the policy pin;
+   - checks the chain from hashes alone: `previous_part_raw_sha256`, each opening's summary, compared_summary and masked_sha256 against the previous part's last phase, and contiguous frames;
+   - writes one independent `--parte` command per part.
+2. The parts run in any order or in parallel.
+3. `agregar --plano … --saida …`
+   - requires every report to be equal, made from a clean tree, for the planned part, with the same policy and covering the whole part;
+   - requires the final allocation records to be equal in the last part.
+
+On the synthetic pack the result is `equal`, 257/257.
