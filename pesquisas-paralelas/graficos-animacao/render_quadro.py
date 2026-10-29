@@ -21,7 +21,7 @@ from graficos import RAIZ
 import json
 
 # Contract version: bump the major number for any change of an input, output field, format or stop semantics.
-VERSAO_RENDER_QUADRO = (1, 2)
+VERSAO_RENDER_QUADRO = (1, 3)
 LARGURA, ALTURA = 800, 600
 DGROUP, DGROUP_FIM = 0x494000, 0x523000
 ESTRUTURAS, PASSO_ESTRUTURA = 0x49a0c8, 276
