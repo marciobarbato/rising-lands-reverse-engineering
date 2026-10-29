@@ -1,0 +1,26 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 11,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_fundacoes_quadro.DiferencialFundacoesQuadro.test_all_captured_cases_fresh",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_fundacoes_quadro.DiferencialFundacoesQuadro.test_fresh_counters_frame_counter_and_cursor",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_fundacoes_quadro.DiferencialFundacoesQuadro.test_fresh_random_seeds_limits_and_clocks",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "seconds": 4.505,
+  "input": "M1 post-load input, not yet frame-1 input",
+  "scope": "GameNextFrame, Random/Randomize/SetRandomSeed/GetRandomSeed, iaRandom (all paths), LongRand->CRT rand, ProgIteration counter prefix, CalculGame load counter reset and CD permutation draw: frozen original replay, input protection and fresh intact differential."
+}

@@ -1,0 +1,665 @@
+{
+  "status": "STATIC INVENTORY ONLY; no runtime capture or translation",
+  "sha256_original": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "sha256_normalized_analysis_only": "26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0",
+  "original_execution_oracle": "intact EXE only; no execution in this stage yet",
+  "ranges": {
+    "InfligeDegat_building_branch": {
+      "start": "0x450874",
+      "end_exclusive": "0x450a9d",
+      "sha256_bytes": "a2427cd3f9e2dd53b77481f9492af45138341d7ed74ab6a75d8962f48a83b8cd",
+      "direct_calls": [
+        {
+          "call": "0x450892",
+          "target": "0x41b54a",
+          "symbol": "ChercheIndiceBatiment+0x0"
+        },
+        {
+          "call": "0x450903",
+          "target": "0x428cc0",
+          "symbol": "BonusGetValEngin+0x0"
+        },
+        {
+          "call": "0x45091b",
+          "target": "0x484808",
+          "symbol": "iagVilleSendMessage+0x0"
+        },
+        {
+          "call": "0x45092e",
+          "target": "0x41a4f4",
+          "symbol": "BatimentGetType+0x0"
+        },
+        {
+          "call": "0x45093d",
+          "target": "0x41a4f4",
+          "symbol": "BatimentGetType+0x0"
+        },
+        {
+          "call": "0x45094c",
+          "target": "0x418b8a",
+          "symbol": "TypeBatimentGetDegat+0x0"
+        },
+        {
+          "call": "0x450955",
+          "target": "0x41a08c",
+          "symbol": "BatimentGetPlayer+0x0"
+        },
+        {
+          "call": "0x4509c2",
+          "target": "0x41a2c1",
+          "symbol": "BatimentInfligeDegat+0x0"
+        },
+        {
+          "call": "0x4509cc",
+          "target": "0x4704dc",
+          "symbol": "Random+0x0"
+        },
+        {
+          "call": "0x450a00",
+          "target": "0x46e44c",
+          "symbol": "ProjectileInit+0x0"
+        },
+        {
+          "call": "0x450a13",
+          "target": "0x41a08c",
+          "symbol": "BatimentGetPlayer+0x0"
+        },
+        {
+          "call": "0x450a1c",
+          "target": "0x46d838",
+          "symbol": "PlayerEstAllie+0x0"
+        },
+        {
+          "call": "0x450a2c",
+          "target": "0x41a08c",
+          "symbol": "BatimentGetPlayer+0x0"
+        },
+        {
+          "call": "0x450a3d",
+          "target": "0x475118",
+          "symbol": "MAJSympathie+0x0"
+        },
+        {
+          "call": "0x450a44",
+          "target": "0x41a08c",
+          "symbol": "BatimentGetPlayer+0x0"
+        },
+        {
+          "call": "0x450a55",
+          "target": "0x475118",
+          "symbol": "MAJSympathie+0x0"
+        },
+        {
+          "call": "0x450a5e",
+          "target": "0x41a08c",
+          "symbol": "BatimentGetPlayer+0x0"
+        },
+        {
+          "call": "0x450a67",
+          "target": "0x46d8cb",
+          "symbol": "PlayerResetAllie+0x0"
+        },
+        {
+          "call": "0x450a6e",
+          "target": "0x41a08c",
+          "symbol": "BatimentGetPlayer+0x0"
+        },
+        {
+          "call": "0x450a7a",
+          "target": "0x46d8cb",
+          "symbol": "PlayerResetAllie+0x0"
+        },
+        {
+          "call": "0x450a86",
+          "target": "0x41a08c",
+          "symbol": "BatimentGetPlayer+0x0"
+        },
+        {
+          "call": "0x450a93",
+          "target": "0x46d600",
+          "symbol": "PlayerAAttaqueSet+0x0"
+        }
+      ]
+    },
+    "InfligeDegat_return": {
+      "start": "0x4510d5",
+      "end_exclusive": "0x4510dd",
+      "sha256_bytes": "7abaa1ab49aba23cf1b5a994da50a557226f8254966bf712e3fce4f6176557c3",
+      "direct_calls": []
+    },
+    "BatimentInfligeDegat": {
+      "start": "0x41a2c1",
+      "end_exclusive": "0x41a4b6",
+      "sha256_bytes": "b788e823f30da7361cef92058d891313fe2e41322a72af6a55939036a6e1d591",
+      "direct_calls": [
+        {
+          "call": "0x41a308",
+          "target": "0x41a0ab",
+          "symbol": "BatimentGetVolume+0x0"
+        },
+        {
+          "call": "0x41a331",
+          "target": "0x48aa79",
+          "symbol": "PlaySnd_PostSound+0x0"
+        },
+        {
+          "call": "0x41a36f",
+          "target": "0x41a1ac",
+          "symbol": "VoixOffAsk+0x0"
+        },
+        {
+          "call": "0x41a411",
+          "target": "0x484808",
+          "symbol": "iagVilleSendMessage+0x0"
+        },
+        {
+          "call": "0x41a45a",
+          "target": "0x475118",
+          "symbol": "MAJSympathie+0x0"
+        },
+        {
+          "call": "0x41a4a9",
+          "target": "0x41a1ac",
+          "symbol": "VoixOffAsk+0x0"
+        }
+      ]
+    },
+    "TypeBatimentGetDegat_shared_bodies": {
+      "start": "0x418b42",
+      "end_exclusive": "0x418b97",
+      "sha256_bytes": "a7bece3fb77cf2a1bd94cd29cffb13fcb0b566eaf8039755f0f889f9dad0d578",
+      "direct_calls": []
+    },
+    "BatimentGetVolume": {
+      "start": "0x41a0ab",
+      "end_exclusive": "0x41a18f",
+      "sha256_bytes": "c40493bcc66423cfb41cd303b530403696d59854612b918908b26419ab126948",
+      "direct_calls": [
+        {
+          "call": "0x41a13c",
+          "target": "0x479555",
+          "symbol": "Distance2d+0x0"
+        }
+      ]
+    },
+    "Batiment_shared_return": {
+      "start": "0x41db1e",
+      "end_exclusive": "0x41db24",
+      "sha256_bytes": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "direct_calls": []
+    },
+    "VoixOffAsk": {
+      "start": "0x41a1ac",
+      "end_exclusive": "0x41a255",
+      "sha256_bytes": "8051a3fa95784681d5eaa473eeea5b067c33af5f51a43891532fa5d74c6ea0de",
+      "direct_calls": [
+        {
+          "call": "0x41a1d3",
+          "target": "0x48aac0",
+          "symbol": "PlaySnd_StopSound+0x0"
+        },
+        {
+          "call": "0x41a221",
+          "target": "0x48aa79",
+          "symbol": "PlaySnd_PostSound+0x0"
+        }
+      ]
+    },
+    "CibleTourelleValide": {
+      "start": "0x424624",
+      "end_exclusive": "0x42484b",
+      "sha256_bytes": "e691cf0cee51873af72530f8629e7eef261cf502a24d2afc13df7d9e081afff9",
+      "direct_calls": [
+        {
+          "call": "0x4246db",
+          "target": "0x443dad",
+          "symbol": "EnginEstVivant+0x0"
+        },
+        {
+          "call": "0x4246f1",
+          "target": "0x442045",
+          "symbol": "EnginGetPlayer+0x0"
+        },
+        {
+          "call": "0x42470f",
+          "target": "0x440e11",
+          "symbol": "EnginGetEtat+0x0"
+        },
+        {
+          "call": "0x42472d",
+          "target": "0x44113e",
+          "symbol": "EnginGetCase+0x0"
+        },
+        {
+          "call": "0x42474f",
+          "target": "0x44113e",
+          "symbol": "EnginGetCase+0x0"
+        },
+        {
+          "call": "0x42477f",
+          "target": "0x479555",
+          "symbol": "Distance2d+0x0"
+        },
+        {
+          "call": "0x4247d9",
+          "target": "0x41aee2",
+          "symbol": "BatimentGetCase+0x0"
+        },
+        {
+          "call": "0x4247fb",
+          "target": "0x41aee2",
+          "symbol": "BatimentGetCase+0x0"
+        },
+        {
+          "call": "0x42481f",
+          "target": "0x479555",
+          "symbol": "Distance2d+0x0"
+        }
+      ]
+    },
+    "RechercheDecalageProjectile": {
+      "start": "0x425100",
+      "end_exclusive": "0x425516",
+      "sha256_bytes": "27871ab7579f5ada4c9a7a61fc5ce309f8aea14ca44b623b2ec7bea1cad0d7a5",
+      "direct_calls": [
+        {
+          "call": "0x42530d",
+          "target": "0x442025",
+          "symbol": "EnginGetType+0x0"
+        },
+        {
+          "call": "0x425317",
+          "target": "0x4422cf",
+          "symbol": "TypeEnginEstAerien+0x0"
+        },
+        {
+          "call": "0x42550c",
+          "target": "0x46e44c",
+          "symbol": "ProjectileInit+0x0"
+        }
+      ]
+    },
+    "BatimentNextEtape_type10": {
+      "start": "0x426e43",
+      "end_exclusive": "0x427549",
+      "sha256_bytes": "27937f097353f56e3cc992cba3d34113cbbfe1e356aed4f4b8384491867e10b0",
+      "direct_calls": [
+        {
+          "call": "0x426e8b",
+          "target": "0x44724a",
+          "symbol": "BagContientTroupe+0x0"
+        },
+        {
+          "call": "0x426ebf",
+          "target": "0x44724a",
+          "symbol": "BagContientTroupe+0x0"
+        },
+        {
+          "call": "0x426ed5",
+          "target": "0x4471b8",
+          "symbol": "BagContient+0x0"
+        },
+        {
+          "call": "0x426ef0",
+          "target": "0x424624",
+          "symbol": "CibleTourelleValide+0x0"
+        },
+        {
+          "call": "0x426f42",
+          "target": "0x423fb9",
+          "symbol": "TourelleTrouveEngin+0x0"
+        },
+        {
+          "call": "0x426f67",
+          "target": "0x424123",
+          "symbol": "TourelleTrouveBatiment+0x0"
+        },
+        {
+          "call": "0x426fc5",
+          "target": "0x440df0",
+          "symbol": "EnginGetStart+0x0"
+        },
+        {
+          "call": "0x426fea",
+          "target": "0x440df0",
+          "symbol": "EnginGetStart+0x0"
+        },
+        {
+          "call": "0x42719a",
+          "target": "0x4796cb",
+          "symbol": "AngleCalcul+0x0"
+        },
+        {
+          "call": "0x42721a",
+          "target": "0x44113e",
+          "symbol": "EnginGetCase+0x0"
+        },
+        {
+          "call": "0x427231",
+          "target": "0x425100",
+          "symbol": "RechercheDecalageProjectile+0x0"
+        },
+        {
+          "call": "0x427241",
+          "target": "0x442045",
+          "symbol": "EnginGetPlayer+0x0"
+        },
+        {
+          "call": "0x42724a",
+          "target": "0x419d54",
+          "symbol": "BatimentDecouvre+0x0"
+        },
+        {
+          "call": "0x427276",
+          "target": "0x41a0ab",
+          "symbol": "BatimentGetVolume+0x0"
+        },
+        {
+          "call": "0x4272a3",
+          "target": "0x48aa79",
+          "symbol": "PlaySnd_PostSound+0x0"
+        },
+        {
+          "call": "0x4272fa",
+          "target": "0x41aee2",
+          "symbol": "BatimentGetCase+0x0"
+        },
+        {
+          "call": "0x427311",
+          "target": "0x425100",
+          "symbol": "RechercheDecalageProjectile+0x0"
+        },
+        {
+          "call": "0x42733f",
+          "target": "0x419d54",
+          "symbol": "BatimentDecouvre+0x0"
+        },
+        {
+          "call": "0x42736b",
+          "target": "0x41a0ab",
+          "symbol": "BatimentGetVolume+0x0"
+        },
+        {
+          "call": "0x4273f3",
+          "target": "0x443dad",
+          "symbol": "EnginEstVivant+0x0"
+        },
+        {
+          "call": "0x42747a",
+          "target": "0x4704dc",
+          "symbol": "Random+0x0"
+        },
+        {
+          "call": "0x427498",
+          "target": "0x4704dc",
+          "symbol": "Random+0x0"
+        }
+      ]
+    },
+    "BatimentNextEtape_type11": {
+      "start": "0x427549",
+      "end_exclusive": "0x427bb7",
+      "sha256_bytes": "eb4d0d6c23027da3ae2f915d466052b84380bab6d444ecf5219545549c7ef77f",
+      "direct_calls": [
+        {
+          "call": "0x427593",
+          "target": "0x44724a",
+          "symbol": "BagContientTroupe+0x0"
+        },
+        {
+          "call": "0x4275c7",
+          "target": "0x44724a",
+          "symbol": "BagContientTroupe+0x0"
+        },
+        {
+          "call": "0x4275dd",
+          "target": "0x4471b8",
+          "symbol": "BagContient+0x0"
+        },
+        {
+          "call": "0x4275f8",
+          "target": "0x424624",
+          "symbol": "CibleTourelleValide+0x0"
+        },
+        {
+          "call": "0x42764a",
+          "target": "0x423fb9",
+          "symbol": "TourelleTrouveEngin+0x0"
+        },
+        {
+          "call": "0x42766f",
+          "target": "0x424123",
+          "symbol": "TourelleTrouveBatiment+0x0"
+        },
+        {
+          "call": "0x4276cd",
+          "target": "0x440df0",
+          "symbol": "EnginGetStart+0x0"
+        },
+        {
+          "call": "0x4276f2",
+          "target": "0x440df0",
+          "symbol": "EnginGetStart+0x0"
+        },
+        {
+          "call": "0x427893",
+          "target": "0x4796cb",
+          "symbol": "AngleCalcul+0x0"
+        },
+        {
+          "call": "0x427915",
+          "target": "0x44113e",
+          "symbol": "EnginGetCase+0x0"
+        },
+        {
+          "call": "0x42792c",
+          "target": "0x425100",
+          "symbol": "RechercheDecalageProjectile+0x0"
+        },
+        {
+          "call": "0x42793c",
+          "target": "0x442045",
+          "symbol": "EnginGetPlayer+0x0"
+        },
+        {
+          "call": "0x427945",
+          "target": "0x419d54",
+          "symbol": "BatimentDecouvre+0x0"
+        },
+        {
+          "call": "0x427971",
+          "target": "0x41a0ab",
+          "symbol": "BatimentGetVolume+0x0"
+        },
+        {
+          "call": "0x42799e",
+          "target": "0x48aa79",
+          "symbol": "PlaySnd_PostSound+0x0"
+        },
+        {
+          "call": "0x4279f5",
+          "target": "0x41aee2",
+          "symbol": "BatimentGetCase+0x0"
+        },
+        {
+          "call": "0x427a0c",
+          "target": "0x425100",
+          "symbol": "RechercheDecalageProjectile+0x0"
+        },
+        {
+          "call": "0x427a3a",
+          "target": "0x419d54",
+          "symbol": "BatimentDecouvre+0x0"
+        },
+        {
+          "call": "0x427a97",
+          "target": "0x443dad",
+          "symbol": "EnginEstVivant+0x0"
+        },
+        {
+          "call": "0x427aef",
+          "target": "0x4704dc",
+          "symbol": "Random+0x0"
+        },
+        {
+          "call": "0x427b0d",
+          "target": "0x4704dc",
+          "symbol": "Random+0x0"
+        }
+      ]
+    }
+  },
+  "instruction_assertions": {
+    "0x4508f1": "add eax, 0x1a",
+    "0x45090c": "add ecx, eax",
+    "0x450919": "mov eax, ebp",
+    "0x45094c": "call 0x418b8a",
+    "0x450990": "mov dx, word ptr [0x49716c]",
+    "0x4509a0": "mov dx, word ptr [0x49716e]",
+    "0x4509c2": "call 0x41a2c1",
+    "0x41a2fa": "mov word ptr [esi + 6], bx",
+    "0x41a3ce": "idiv ebx",
+    "0x41a3ee": "idiv ebx",
+    "0x41a3f0": "cmp ax, word ptr [esp + 4]",
+    "0x41a3f5": "jae 0x41a4ae",
+    "0x41a411": "call 0x484808",
+    "0x41a422": "mov byte ptr [ecx + 5], 3",
+    "0x41a45a": "call 0x475118"
+  },
+  "structure_dispatch": {
+    "address": "0x426880",
+    "index": "structure type minus 1; NOT state +5",
+    "sha256_bytes": "8179b83c32f16aa958c12c873735c80d58a5765528068c5dfb5bfe882d47720d",
+    "entries": [
+      {
+        "type": 1,
+        "target": "0x426918"
+      },
+      {
+        "type": 2,
+        "target": "0x426918"
+      },
+      {
+        "type": 3,
+        "target": "0x426aff"
+      },
+      {
+        "type": 4,
+        "target": "0x426c10"
+      },
+      {
+        "type": 5,
+        "target": "0x42698d"
+      },
+      {
+        "type": 6,
+        "target": "0x428095"
+      },
+      {
+        "type": 7,
+        "target": "0x426d61"
+      },
+      {
+        "type": 8,
+        "target": "0x426a08"
+      },
+      {
+        "type": 9,
+        "target": "0x4281c0"
+      },
+      {
+        "type": 10,
+        "target": "0x426e43"
+      },
+      {
+        "type": 11,
+        "target": "0x427549"
+      },
+      {
+        "type": 12,
+        "target": "0x427bb7"
+      },
+      {
+        "type": 13,
+        "target": "0x426918"
+      },
+      {
+        "type": 14,
+        "target": "0x42698d"
+      },
+      {
+        "type": 15,
+        "target": "0x427d5d"
+      },
+      {
+        "type": 16,
+        "target": "0x426918"
+      },
+      {
+        "type": 17,
+        "target": "0x427ed9"
+      },
+      {
+        "type": 18,
+        "target": "0x427eec"
+      },
+      {
+        "type": 19,
+        "target": "0x42803c"
+      },
+      {
+        "type": 20,
+        "target": "0x427da4"
+      },
+      {
+        "type": 21,
+        "target": "0x4281c0"
+      }
+    ]
+  },
+  "initial_pe_characteristics": {
+    "address": "0x495d8c",
+    "stride": 52,
+    "types": 22,
+    "sha256_bytes": "d4662af52ab3603b13be7f526f1fe040c38b87b1cbb399f25d27614aa20841ee",
+    "maximum_life_words": [
+      200,
+      400,
+      600,
+      100,
+      100,
+      300,
+      500,
+      400,
+      500,
+      30,
+      50,
+      100,
+      70,
+      350,
+      350,
+      400,
+      300,
+      300,
+      300,
+      300,
+      400,
+      300
+    ],
+    "warning": "Initial PE words only. Runtime loaded characteristics must be explicit inputs."
+  },
+  "dependency_boundaries": {
+    "wrapper": "iagVilleSendMessage(mode1), damage consumer, Random(0x21), ProjectileInit, alliance/diplomacy/statistics",
+    "consumer": "damage accumulator store precedes volume/audio/voice; city message precedes destruction stores; sympathy precedes final voice",
+    "turret": "types10/11 inventoried for future dispatcher contract; neither branch translated here"
+  },
+  "validation": {
+    "static_identity_and_instruction_assertions": "passed",
+    "native_captures": "not run",
+    "python_translation": "not implemented",
+    "native_comparison": "not run",
+    "heavy_domain_checks": "not run; coordinator heavy lease required",
+    "main_integration": "not delivered",
+    "real_mission": "not run"
+  }
+}
