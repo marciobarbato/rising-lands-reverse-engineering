@@ -255,3 +255,49 @@ failure, repeat/reset identity, reserved live delivery, Graphics API mismatch,
 explicit surface stop and launcher preflight. These tests use real M2.2 evidence;
 synthetic Graphics test outputs validate adapter branching only.
 Native build and UI results are recorded after the committed-revision run.
+
+
+### Round-2 committed native delivery
+
+Implementation: `b4444f8e3e3031f0fb97aef1cec785305f38d680`.
+Final native smoke/manifest change:
+`2314804cbfe30f3866338284cc8141abf6493a86`.
+The latter revision was built with the documented explicit input root and
+RISING_PYTHON_RUNTIME; every generated file stayed inside the independent clone.
+Original media and the source runtime were read-only.
+
+**65/65 packaged consumer tests pass, zero skips** under bundled CPython 3.12.14.
+Swift compilation, ARM64 checks, source/asset binding, relocated bundled runtime
+verification and strict ad hoc signature verification pass. Native LaunchServices
+runs passed **27 exercise checks and 8 inspection checks**, with visible windows
+and empty Python stderr. The inspection smoke uses actual phase/frame buttons,
+selector, memory form, block filter and reset; it checks the captured counter,
+initial identity and explicit missing-surface state with no image fallback.
+An earlier b4444f8 build also passed; the final smoke specifically strengthened
+DOM coverage and native window visibility checks.
+
+Bundle (local):
+`/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable/dist/development/RisingLands-ptbr.app`.
+Full source/runtime/build manifests and prior bundles remain under this clone's
+`.local/macos-playable/`. No native emulation was run by the macOS workstream.
+No Mac mini execution is requested for this consumer.
+
+Common checks were rerun and remain **FAILED**, independently of the successful
+app build: Core 490 / 7 errors / 226 skips; Combat 262 / 1 error / 147 skips;
+Economy 487 / 1 failure / 7 errors / 205 skips; Missions 104 / 1 failure /
+22 errors / 31 skips; AI/runtime 90 / 11 errors / 23 skips; Audio 20 /
+8 errors / 3 skips. Graphics was not run (its hash-checked fontes/cd absent).
+Workflow passed 8/8, and documentation links/diff whitespace checks pass.
+Those research suites use their own expected source/cd and optional
+capstone/unicorn/pefile inputs, not the app's explicit inputs-root; no other
+front was modified to suppress or repair those environment failures.
+
+Preserved round-2 evidence: [consumer tests](validation/m3-round2-consumer-tests.log),
+[exercise UI smoke](validation/m3-round2-native-smoke.json),
+[inspection UI smoke](validation/m3-round2-native-inspection-smoke.json),
+[build log](validation/m3-round2-build.log),
+[common checks](validation/m3-round2-common.log), and
+[structured validation](validation/m3-preparation.json).
+Graphics 1.1 remains the render dependency. Runtime live delivery/input remains
+reserved. The remote feature is delivered for Claude coordinator review;
+this work establishes no milestone and never merges or pushes main.
