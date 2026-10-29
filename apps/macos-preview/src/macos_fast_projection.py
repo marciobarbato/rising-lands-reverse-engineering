@@ -8,6 +8,7 @@ import bisect
 import ctypes as C
 import hashlib
 import struct
+from macos_projection_codec import Entry, Span
 from macos_state_consumer import StateValidationError, _sha
 from macos_m22_playback import MacOSPlaybackImage, WORDS
 
@@ -15,8 +16,11 @@ MAX_BULK = 64*1024*1024 + 8*65536 + 4
 
 
 class MacOSBulkProjection:
-    def __init__(self, abi, capacity):
+    def __init__(self, abi, capacity, codec=None):
         self.abi = abi
+        self.codec = codec
+        self.native_entries = None
+        self.native_spans = None
         self.buffer = bytearray(capacity)
         self.foreign = (C.c_uint8*capacity).from_buffer(self.buffer)
         self.entries = ()
@@ -43,6 +47,7 @@ class MacOSBulkProjection:
         if not 4<=required.value<=len(self.buffer):
             raise StateValidationError('Invalid bulk projection size')
         self.view = memoryview(self.buffer)[:required.value]
+        if self.entries and self.codec is not None and self.codec.validate(self):return self
         count, = struct.unpack_from('<I',self.view)
         if count>65536: raise StateValidationError('Bulk block limit exceeded')
         entries=[]
@@ -63,6 +68,8 @@ class MacOSBulkProjection:
             self.entries=entries
             self.starts=tuple(a for a,n,o in entries)
             self._plan=None
+            self.native_spans=None
+            self.native_entries=(Entry*len(entries))(*(Entry(a,n,o) for a,n,o in entries))
         return self
 
     def read(self,address,size):
@@ -84,6 +91,7 @@ class MacOSBulkProjection:
         if self._plan is None:
             starts=[a for a,z in ranges]
             plan=[]
+            native=[]
             for base,size,offset in sorted(self.entries,key=lambda e:names.get(e[0],f'rust_extra_{e[0]:08x}')):
                 if base in static: continue
                 chunks=[]
@@ -98,7 +106,11 @@ class MacOSBulkProjection:
                     cursor=hi
                 if cursor<base+size:chunks.append((offset+cursor-base,offset+size,None))
                 plan.append((struct.pack('<II',base,size),chunks))
+                native.append(Span(offset-8,8,0))
+                native.extend(Span(a,z-a,0) if zeros is None else Span(0,len(zeros),1) for a,z,zeros in chunks)
             self._plan=plan
+            self.native_spans=(Span*len(native))(*native)
+        if self.codec is not None:return self.codec.summary(self)
         h=hashlib.sha256()
         for header,chunks in self._plan:
             h.update(header)

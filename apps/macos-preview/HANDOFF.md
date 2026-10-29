@@ -877,3 +877,13 @@ exactly equals the preceding f508a52 proof. Preliminary rate: 7.623 fps vs
 raw native-canvas checks, phase/transfer timings and common maintenance gate
 will be recorded below. This preliminary run used one bulk buffer; the final
 implementation deliberately uses two to preserve failed-publication isolation.
+
+A further app-owned C byte codec validates stable bulk descriptors and streams
+SHA-256 over the same original-name ordering and mask spans using system
+CommonCrypto. It has no game state, drawing, allocations or retained foreign
+pointers. The reference Python codec remains the unit-test oracle; production
+rendered sessions require the explicitly versioned helper, with a visible load
+failure rather than an automatic fallback. The builder compiles and signs it
+inside the normal app packaging path. Native smoke exercises the actual live
+play/pause loop through at least frame 33, raw canvas readback and generation
+matching, without changing the existing readiness/check deadlines.

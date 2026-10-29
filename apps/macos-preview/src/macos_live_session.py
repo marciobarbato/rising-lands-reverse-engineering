@@ -11,6 +11,7 @@ from pathlib import Path
 import struct
 import time
 from macos_rust_abi import Frames, FrameInput, FrameRegisters
+from macos_projection_codec import ProjectionCodec
 from macos_fast_projection import MacOSBulkProjection, MacOSGraphicsView
 from macos_m22_playback import MacOSM22Playback, MacOSPlaybackImage, CHECKPOINTS, PHASES
 from macos_state_consumer import MacOSMemoryBlock, StateValidationError, EXECUTABLE_SHA256, _sha
@@ -93,6 +94,7 @@ class MacOSLiveSession:
         # The accepted reader still checks every summary and full checkpoint.
         self.expected = tuple(masked_summary(state,self.ranges)
             for _,state,_ in self.oracle._reader.fases_referencia(self.oracle._capture,self.s0))
+        self.codec=ProjectionCodec() if self.renderer is not None else None
         self.handle = None
         self.reset()
 
@@ -107,7 +109,7 @@ class MacOSLiveSession:
         except Exception: self.close(); raise
         self.oracle.reset()
         capacity=4+sum(8+len(b) for a,b in list(self.s0.values())+list(self.static.items()))
-        self.bulks=[MacOSBulkProjection(self.abi,capacity),MacOSBulkProjection(self.abi,capacity)]
+        self.bulks=[MacOSBulkProjection(self.abi,capacity,self.codec),MacOSBulkProjection(self.abi,capacity,self.codec)]
         self.bulk=self.bulks[0]
         self.views=[MacOSGraphicsView(self.library_sha256),MacOSGraphicsView(self.library_sha256)]
         self.index = -1

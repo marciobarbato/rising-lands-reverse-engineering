@@ -54,8 +54,13 @@ def main():
     legacy.run(['cargo','build','--release','--locked','--manifest-path',args.source/'motor/Cargo.toml',
                 '--target-dir',base/'build/engine-target'], 'rust-engine-build.log')
     library = base/'build/engine-target/release/librising_engine.dylib'
+    projection_library=base/'build/librising_macos_projection.dylib'
+    legacy.run(['xcrun','clang','-O3','-dynamiclib','-arch','arm64','-mmacosx-version-min=13.0',
+                '-Wno-deprecated-declarations',app_source/'src/native/macos_projection_codec.c',
+                '-o',projection_library], 'macos-projection-build.log')
     environment = {**os.environ, 'RISING_APP_ROOT': str(base), 'PYTHONDONTWRITEBYTECODE': '1',
                    'RL_MACOS_ENGINE_LIBRARY': str(library),
+                   'RL_MACOS_PROJECTION_LIBRARY': str(projection_library),
                    'RL_ORIGINAL_EXE': str(args.workspace/'source/cd/INSTALHD/RISING.EXE')}
     check = subprocess.run([str(runtime / 'bin/python3'), '-B', '-m', 'unittest', 'discover',
                             '-s', str(app_source / 'testes'), '-v'], env=environment,
@@ -77,6 +82,8 @@ def main():
     shutil.copytree(base / 'assets', payload / 'assets')
     prepare_render_inputs(args.source, args.workspace / 'source/cd', payload / 'graphics-inputs')
     shutil.copy2(library,payload/'librising_engine.dylib')
+    shutil.copy2(projection_library,payload/'librising_macos_projection.dylib')
+    legacy.run(['codesign','--force','--sign','-','--timestamp=none',payload/'librising_macos_projection.dylib'],'sign-projection.log')
     engine_inputs = payload/'engine-inputs'
     engine_inputs.mkdir()
     original = args.workspace/'source/cd/INSTALHD/RISING.EXE'
@@ -101,7 +108,7 @@ def main():
     legacy.run(['codesign', '--force', '--sign', '-', '--timestamp=none', resources / 'Python/bin/python3'], 'sign-python.log')
     legacy.run(['codesign', '--force', '--sign', '-', '--options', 'runtime', '--timestamp=none', app], 'sign-app.log')
     legacy.run(['codesign', '--verify', '--deep', '--strict', '--verbose=2', app], 'codesign-verify.log')
-    legacy.run(['file', contents / 'MacOS/RisingLands-ptbr', resources / 'Python/bin/python3',payload/'librising_engine.dylib'], 'architecture.log')
+    legacy.run(['file', contents / 'MacOS/RisingLands-ptbr', resources / 'Python/bin/python3',payload/'librising_engine.dylib',payload/'librising_macos_projection.dylib'], 'architecture.log')
     # Verify binding and relocatability using the bundled interpreter and sources.
     from playable_verify import verify
     verify(app)

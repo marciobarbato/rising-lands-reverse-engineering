@@ -1,5 +1,6 @@
 """Persistent-buffer proof guards: no copied blocks, stale aliases or masked logic."""
 import ctypes as C
+import os
 from pathlib import Path
 import struct
 import sys
@@ -64,3 +65,26 @@ class BulkTests(unittest.TestCase):
         for bad in (b'bad',packed([(100,b'abc'),(101,b'z')]),packed([(2**32-1,b'ab')]),packed([(1,b'a')])+b'x'):
             payload[0]=bad
             with self.assertRaises(StateValidationError):bulk.update(1)
+
+    def test_native_codec_preserves_python_digest_and_rejects_corruption(self):
+        from macos_projection_codec import ProjectionCodec,Span
+        path=Path(os.environ.get('RL_MACOS_PROJECTION_LIBRARY',ROOT/'apps/macos-preview/build/librising_macos_projection.dylib'))
+        if not path.is_file():self.skipTest('App-owned native byte codec not built')
+        codec=ProjectionCodec(path)
+        state={'z':(100,b'abcdefgh'),'a':(10,b'xyz')}
+        bulk,payload=self.bulk(sorted(state.values()));bulk.codec=codec
+        bulk.update(1)
+        mask=[(101,103),(105,106)]
+        expected=masked_summary(state,mask)
+        self.assertEqual(bulk.masked_summary({100:'z',10:'a'},{},mask),expected)
+        descriptor=bulk.native_entries;spans=bulk.native_spans
+        payload[0]=packed([(10,b'xyz'),(100,b'aXXdeYgh')]);bulk.update(1)
+        self.assertIs(bulk.native_entries,descriptor)
+        self.assertIs(bulk.native_spans,spans)
+        self.assertEqual(bulk.masked_summary({100:'z',10:'a'},{},mask),expected)
+        payload[0]=packed([(10,b'xyZ'),(100,b'aXXdeYgh')]);bulk.update(1)
+        self.assertNotEqual(bulk.masked_summary({100:'z',10:'a'},{},mask),expected)
+        bulk.native_spans=(Span*1)(Span(2**32-1,2,0))
+        with self.assertRaises(RuntimeError):codec.summary(bulk)
+        payload[0]=packed([(10,b'x'),(9,b'overlap')])
+        with self.assertRaises(StateValidationError):bulk.update(1)

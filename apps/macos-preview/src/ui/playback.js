@@ -41,13 +41,14 @@ window.runSmokeTests=async()=>{
  const actual=rawContext.getImageData(0,0,800,600).data;
  check('native canvas readback equals every raw RGBA byte',actual.every((v,i)=>v===rawImage.data[i]));
  const liveStarted=performance.now();
- for(let n=2;n<=16;n++){
-  $('live-step').click();await until(()=>image.phase==='frame'+n&&!$('live-step').disabled,'live frame '+n);
- }
- check('raw live UI chain reaches frame16',image.verified_phases===33&&image.render.equals_native_phase_end===true&&rawSequence===32&&!image.live_stop);
- const liveSeconds=(performance.now()-liveStarted)/1000;
+ $('live-play').click();
+ await until(()=>image.phase_index>=66&&!image.live_stop,'live play reaches frame33');
+ $('live-play').click();
+ await until(()=>pending.size===0&&!playing,'live pause drains its last request');
+ const liveSeconds=(performance.now()-liveStarted)/1000,liveFrames=(image.phase_index-2)/2;
+ check('raw live interval play reaches frame33 then pauses',liveFrames>=32&&image.render.equals_native_phase_end===true&&rawSequence===image.phase_index&&!image.live_stop&&!playing);
 
- return {passed:true,tests,commit:image.commit,scenario:image.scenario,render:image.render.status,liveFramesPerSecond:15/liveSeconds,rawTransferMilliseconds:rawTransferTimes};
+ return {passed:true,tests,commit:image.commit,scenario:image.scenario,render:image.render.status,liveFramesPerSecond:liveFrames/liveSeconds,liveFramesMeasured:liveFrames,rawTransferMilliseconds:rawTransferTimes};
 };
 window.playbackReady=run('open').then(()=>{
  if(!image||image.verified_phases!==257||image.verified_checkpoints!==11){window.signalAppInitializationFailure('Playback worker did not initialize');return;}
