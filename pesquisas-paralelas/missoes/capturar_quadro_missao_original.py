@@ -117,8 +117,8 @@ def main():
         named = dict(m1=q.base.manifesto(), frame=q.manifesto())
     else:
         b, _, named = cenarios_oraculo.bancada(a.cenario, fill, clock, segundos=300)
-    fontes = FONTES + (() if a.cenario == 'v1' else ('oraculo_exibicao_missao.py', 'exibicao_declarada.py',
-                                                       'cenarios_oraculo.py', 'mapa_memoria_m1.py'))
+    fontes = FONTES + (() if a.cenario == 'v1' else ('oraculo_exibicao_missao.py', 'cenarios_oraculo.py',
+                                                       'mapa_memoria_m1.py', '../graficos-animacao/fronteiras_exibicao.py'))
     relatorio = dict(
         schema='rising-lands/monde01-frame1-original-capture/1', original_sha256=HASH_ORIGINAL, scenario=a.cenario,
         translation_executed=False, python_composition=False, m2_accepted=False,
@@ -158,7 +158,7 @@ def main():
         relatorio['state_s0'] = dict(summary=b.resumo_imagem(s0), equals=f'{caminho_m1.name} oracle.final_state',
                                      native_stack_sha256=hashlib.sha256(bytes(b.cpu.mem_read(PILHA, 0x10000))).hexdigest())
         anterior, fases = s0, []
-        ddcalls = len(b.directdraw.chamadas) if hasattr(b, 'directdraw') else 0
+        ddcalls = len(b.chamadas_exibicao()) if hasattr(b, 'chamadas_exibicao') else 0
         etapas = (('load_tail', lambda: b.executar_cauda_carga(a.segundos_quadro)),
                   ('between_frames', lambda: b.executar_entre_quadros(120)),
                   ('frame1', lambda: b.executar_quadro(a.segundos_quadro)))
@@ -187,8 +187,8 @@ def main():
                 fases[-1]['declared_caller_frame'] = b.declaracao_chamador
             if hasattr(b, 'estado_exibicao'):
                 fases[-1]['display_state'] = b.estado_exibicao()
-                fases[-1]['directdraw_calls'] = b.directdraw.chamadas[ddcalls:]
-                ddcalls = len(b.directdraw.chamadas)
+                fases[-1]['directdraw_calls'] = b.chamadas_exibicao()[ddcalls:]
+                ddcalls = len(b.chamadas_exibicao())
             anterior = imagem
             relatorio['phases'] = fases
         relatorio['frame1_return'] = dict(reached=regs['EIP'] == RETORNO_CALCUL_GAME, eip=hex(regs['EIP']),

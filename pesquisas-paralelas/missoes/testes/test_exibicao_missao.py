@@ -32,6 +32,32 @@ class TestEvidenciaExibicao(unittest.TestCase):
             self.assertNotIn(nome, PULOS_EXIBICAO)
             self.assertNotIn(nome, FRONTEIRAS_EXIBICAO)
 
+    @unittest.skipUnless((V/'m2-exibicao-v2-vs-interino.json').exists(), 'Backend equivalence not committed')
+    def test_graphics_backend_reference_differs_from_stage17_only_in_backend_addresses(self):
+        r = carregar('m2-exibicao-v2-vs-interino.json')
+        self.assertTrue(r['equal_except_backend_addresses'])
+        for estado in r['states'].values():
+            self.assertEqual(estado['unexplained'], [])
+            self.assertLessEqual({d['address'] for d in estado['differing']},
+                                 {hex(a) for a in (*range(0x4e1788, 0x4e1794), *range(0x4e179c, 0x4e17a0),
+                                                   *range(0x508f70, 0x508f74))})
+
+    @unittest.skipUnless((V/'m2-politica-comparacao-quadro1.json').exists(), 'Comparison policy not committed')
+    def test_comparison_policy_masks_only_display_bytes_with_proof(self):
+        r = carregar('m2-politica-comparacao-quadro1.json')
+        self.assertTrue(r['passed'])
+        self.assertTrue(r['surfaces']['excluded_with_proof'])
+        self.assertEqual(r['bytes_without_observed_writer'], [])
+        for faixas in r['blocks'].values():
+            for f in faixas:
+                contextos = {x['context'] for x in f['writers']+f['readers']}
+                if f['cls'] == 'display_only':
+                    self.assertLessEqual(contextos, {'display', 'backend'})
+                else:
+                    self.assertIn('logic', contextos)
+        logica = {f['start'] for f in r['blocks']['dgroup'] if f['cls'] == 'game_logic'}
+        self.assertIn('0x4e1d18', logica)
+
     @unittest.skipUnless((V/'m2r3-frame1-v1-vs-exibicao.json').exists(), 'Comparison not committed')
     def test_reports_passed_and_logic_tables_did_not_diverge(self):
         for nome in ('m2r3-missionload-exibicao-x86.json', 'm2r3-frame1-exibicao-x86.json',
