@@ -393,3 +393,122 @@ not represented as a current pass. No native x86 emulation or Mac mini job was
 needed by this consumer. Remaining dependencies are Graphics' unsupported
 bodies/HUD/cursor and new reference/cache artifacts for independent starts,
 plus the separately reserved live runtime/input contract. No milestone changes.
+
+
+## Round 4 — native smoke readiness only
+
+Fetched integrated base `8e90beb412a63d5f00965c381d21bc9a800257bc` includes
+macOS f20d38a and Audio b4e8dae. The macOS feature advanced by fast-forward;
+only app-owned robustness code/docs change. The Graphics gate remains (1,2),
+with its existing refusal tests. No renderer/game/input feature is added.
+
+The old native watchdog applied 45 seconds to window opening, asset/worker
+initialization AND all interaction checks, and called tests immediately on
+navigation completion. The new shell requires a validated explicit readiness
+signal after actual dependencies load, plus native document/window readiness.
+Window and checks each keep 45-second budgets; initialization has a distinct
+90-second total-from-launch budget. Monotonic progress never renews a deadline.
+Failure diagnostics distinguish window, initialization and check timeout. All
+interaction assertions, local waits, before/after screenshots and failure JSON
+are retained. Both UI modes now have paired native captures. Retries archive
+previous evidence; the outer 165-second guard cannot replace a specific native
+failure. Missing screenshots cannot result in a passing build.
+
+The exact pure Swift lifecycle compiled into both native builders is tested
+with a controlled monotonic clock, including readiness after the old 45-second
+mixed deadline, missing ready/late ready, missing/late window and document/ready
+ordering. Python tests cover retry preservation, outer failures and missing
+captures. A smoke-only bounded delayed-ready flag permits an actual native
+50-second initialization regression without stressing the workstation or
+accepting an uninitialized app. Actual results for the committed revision follow below.
+
+After this bounded robustness change, A waits for Claude's M2.3 publication and
+M3 plan. C remains complete. No milestone or main integration is performed.
+
+The legacy preview opener uses the same bounded runner and evidence archive;
+its old outer 60-second guard no longer contradicts the shared shell's separate
+readiness budget. This changes no legacy game behavior. The playable integration
+build remains the authoritative native validation for this delivery.
+
+
+The first readiness-aware run established actual readiness in 0.53 seconds,
+then failed at the unchanged 45-second check limit. A diagnostic run retained
+`lastProgress=final_animation_frames`, `visibility=hidden`, `paused=true`: all
+interaction assertions and the after snapshot had completed. Occluded
+WKWebViews suspend requestAnimationFrame even when NSWindow.isVisible is true.
+The two smoke-only repaint barriers now await an actual native WebView
+snapshot through the existing 15-second RPC deadline. Browser-only diagnostics
+keep their animation-frame barrier. No assertion, real clock exercise or
+check deadline changes. Both failed runs and their images remain preserved.
+
+
+### Architecture handoff
+
+The user's 2026-10-29 decision assigns real-time engine logic/rendering to Rust
+through a C ABI and keeps Swift as the shell. Python remains the validated
+reference, test harness and present inspection/playback dependency. No live
+Python simulation plumbing was added. `apply_frame` remains reserved. See
+[the pending native-engine boundary](M3_CONTRACT.md#native-engine-dependency--architecture-decision-2026-10-29).
+Until the coordinator publishes the C ABI with the M3 plan after M2.3, there
+are design notes only: no speculative loading, signatures or calls. Audio's
+Python reference and captures are intended to support a later validated Rust
+port, with device behavior still a declared boundary.
+
+
+### Round 4 validation and review instructions
+
+Built code revision: `7980efc3d4bb4e8f4417bf61441b41d3594ebf28`.
+It contains latest fetched main `8e90beb412a63d5f00965c381d21bc9a800257bc`;
+ancestry was checked again after the build. Earlier commits are
+`1f5929c75b3695201a16a22c1f803186f703d8c5` (readiness and evidence),
+`9464ea1` (legacy runner) and `9b648daf772522b79f8c70ddb9d0dc5b53b74652`
+(last-assertion diagnostics). The final documentation/evidence commit records
+these results without changing executable code. Review/integrate the feature
+branch only; the independent writer did not merge or push main.
+
+The coordinator's exact command passed, exit 0:
+
+```sh
+RISING_PYTHON_RUNTIME='/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python' \
+  ./compilar-jogável --development-ref HEAD \
+  --inputs-root '/Users/marcio/git/Rising Lands' \
+  --data-root '/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable'
+```
+
+Full app discovery: **80/80, zero skips**, 46.702 seconds, including 9 new
+readiness/evidence tests and existing Graphics version refusals. ARM64 app and
+CPython 3.12.14, strict deep signature and relocated bundle verification passed.
+Native exercise: **27/27**, ready 0.472 seconds, checks 9.488 seconds. Native
+inspection: **9/9**, ready 5.978 seconds, checks 9.331 seconds. The unchanged
+M2.2 suite/inspection verifies 257/257 phases and 11/11 checkpoints. Both native
+smokes have empty Python stderr and paired before/after plus final PNGs.
+
+A separate real native exercise held the valid ready signal for 50 seconds:
+**27/27 passed**, initialization 50.884 seconds, checks 22.846 seconds, total
+73.730 seconds, with the document still `hidden`. Thus initialization beyond
+the old global45-second limit passes without extending the 45-second check
+budget or bypassing any assertion. Missing/hung/late readiness remains a
+bounded failure in the controlled-clock tests.
+
+The two earlier check-timeout attempts are preserved, not reclassified as
+passes. The second identifies `final_animation_frames` while the document
+was hidden. That stage label remains stable in diagnostics; it now uses the
+native paint capture barrier. All first/final images remain in clone-local
+logs, with paths/hashes recorded in
+[structured validation](validation/m3-preparation.json). Committed
+[full discovery](validation/m3-round4-consumer-tests.log),
+[exercise](validation/m3-round4-native-smoke.json),
+[inspection](validation/m3-round4-native-inspection-smoke.json),
+[delayed-ready](validation/m3-round4-native-ready-delay50.json),
+[first failure](validation/m3-round4-failure-1.json),
+[diagnostic failure](validation/m3-round4-failure-2.json) and
+[exact build](validation/m3-round4-build.log) make the result reviewable.
+No x86 emulation job was needed by A. Documentation links/diff checks pass;
+other-front research gates were not represented as new A results.
+
+A now waits for the coordinator's M2.3 publication, M3 plan and Rust C ABI.
+Graphics stays exactly 1.2 with all prior stops/HUD/cursor/cache limitations
+preserved. The separate Audio branch supplies a Python reference; its first
+old-watchdog native failure remains historical and the coordinator should
+rerun its merged candidate with this robustness fix. C requires no work.
+There is no milestone claim, live frame plumbing or new game feature.

@@ -34,4 +34,7 @@ window.runSmokeTests=async()=>{
  check('DOM reset preserves initial state identity',image.summary_sha256===initial);
  return {passed:true,tests,commit:image.commit,scenario:image.scenario,render:image.render.status};
 };
-window.playbackReady=run('open');
+window.playbackReady=run('open').then(()=>{
+ if(!image||image.verified_phases!==257||image.verified_checkpoints!==11){window.signalAppInitializationFailure('Playback worker did not initialize');return;}
+ window.signalAppReady({mode:'inspection',worker:true,assets:true,commit:image.commit});
+});
