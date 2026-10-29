@@ -1,0 +1,11 @@
+{
+  "schema": "rising-lands/audio-waiting-slot-three-way/1",
+  "passed": true,
+  "native_calls": 133,
+  "original_capture_equal": true,
+  "python_equal": true,
+  "seconds": 0.014,
+  "capture_commit": "679bd00",
+  "implementation": "indices_fila_audio.py",
+  "implementation_sha256": "01f3816b5f127d7a660738f790489d9cfbd7942e17889606593a624422167946"
+}

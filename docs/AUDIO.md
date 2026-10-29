@@ -4,7 +4,7 @@ Owner: the Audio front (`feat/re-audio`, `worktrees/re-audio`). Owned paths are 
 
 Addresses apply to executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`. The normalized analysis PE (`26c4534b…64d0`) is analysis-only. The original sound banks are `INSTALHD/SOUND/{A,B,P}.HED` and `.SND` on the read-only CD copy (`../source/cd`); `TICKONE.WAV` sits at the CD root and is not part of the banks. `relatorios/fontes.json` does not list the sound files, so their sizes and SHA-256 are recorded in [`ambiente_audio.py`](../pesquisas-paralelas/audio/ambiente_audio.py) and the [audio manifest](../pesquisas-paralelas/audio/evidencias/som-manifesto.json). PT-BR voices and music are preserved byte-exactly. They are never re-recorded, translated or normalized, and no decoded audio is committed.
 
-Each stage replaces its planned section with original-byte evidence. Stage 1 is complete; stages 2 and 3 are planned.
+Stage 1 is the integrated baseline. The independent 2026-10-29 continuation adds a bounded M2.2 soundness audit and the first original-first queue-index slice; full stages 2 and 3 remain incomplete.
 
 ## Original subsystem inventory (symbols from the original SBL)
 
@@ -209,3 +209,61 @@ implemented, new original execution not run, stage2 not integrated, real
 mission/complete audio flow not tested**. The macOS front remains idle until
 the coordinator's M1 trigger. No synthetic training build is relabeled as a
 running original mission.
+
+
+## Independent M2.2 soundness and queue foundation — 2026-10-29
+
+The independent `feat/re-audio` workstream merged origin/main before research;
+its clone is `/Users/marcio/git/Rising-Lands-Codex-Audio/repository`. Maintained
+changes remain inside Audio ownership. It never integrates or pushes main.
+
+[Audio/M2.2 soundness](../pesquisas-paralelas/audio/M22_SOUNDNESS.md) gives the
+original-byte inventory, native commands, all watch ranges and limitations.
+The accepted declared-boundary replay equals all 257 phase summaries. A second
+128-frame original replay executes PlaySnd_Manage/MCICD_Play/MCICD_Manage and
+observes zero game/display readers of the watched private sound neighborhoods.
+It is **not whole-state equal**: 256 phases have the private byte 0x498f5c
+changed from accepted 1 to actual 0. All other captured bytes equal. The
+manager also writes an already-zero u32 at 0x521f88. Accepted evidence and
+masks remain unchanged. The no-playing-CD input and shared cursor 0x4e1d18
+remain explicit game-state dependencies; initialized audio and M2.3 are outside.
+
+### Waiting-slot index API (first stage-2 slice)
+
+`indices_fila_audio.WaitingSlotIndex(index_word, playing_table)` requires an
+inherited writable contiguous 4-byte index at 0x498f68 and the inherited first
+20×44-byte playing records at 0x52137c. It retains both caller objects by
+identity and writes in place. It creates no defaults, records or callbacks.
+
+| Method | Original | Domain and effect |
+|---|---|---|
+| maximum | WaitSnd_GetMaxIndice 0x48afe9 | Raw u32 read; no mutation |
+| reserve | WaitSnd_GetFirstFreePlace 0x48aef8 | Inherited index 19..70; 70 returns u32 0xffffffff unchanged, otherwise increments the word and returns it |
+| give_back | WaitSnd_SorryGiveBackOnePlace 0x48afd0 | Index 19..70; 19 unchanged, otherwise decrements the word; no API result (original EAX preserved) |
+| find_place | WaitSnd_FindPlace 0x48afef | Reads +8 status bytes in slots 0..19; returns the first zero slot or u32 0xffffffff; no mutation |
+
+Malformed/readonly/noncontiguous buffers raise ValueError before any store.
+Unsupported reserve/give_back index values raise DependenciaSom at original
+0x48aefa/0x48afd2 before mutation. A maximum index is not a general queue count;
+no full-table capacity or unexamined record meaning is inferred from it.
+
+Original-only capture commit `679bd00` precedes the provider translation.
+[133 native cases](../pesquisas-paralelas/audio/evidencias/captura-indices-fila-audio-original.json)
+cover every reserve/give-back index 19..70, getter bounds and all 20 first-free
+positions/full tables. The fresh native/Python/committed comparison passes
+[133/133](../pesquisas-paralelas/audio/validacao/indices-fila-audio-native.json).
+The native helper capture/comparison installs a five-minute SIGALRM and runs
+through the shared lease. No DirectSound callback is involved.
+
+**Next validated boundary:** PlaySnd_PostSound selects a bank and reaches
+HandlSnd_Insert 0x48a218 (call 0x48aa9e). That routine reads the inherited handle
+at [EBX] (0x48a225), creates/updates 44-byte records and calls the reservation
+helper, for example at 0x48a351. Manage consumes GetMaxIndice at 0x48a80c.
+The new provider covers those index helpers only. Record population/compaction,
+transfer/sorting, logical/physical ownership and the DirectSound status/position,
+volume, play/stop lifecycle remain unimplemented. Initialized ClearListe reaches
+DSB_IsThisSoundPlaying 0x48beb9 (call 0x489fd9), requiring an explicit COM status
+fixture. This is a declared dependency boundary, not a completed queue or a
+successful sound request. Stage-3 emitters remain with their game-side owners
+until that request contract is integrated; original bank/decoder work is baseline,
+not new validation claimed by this round.

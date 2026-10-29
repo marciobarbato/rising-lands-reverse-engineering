@@ -15,6 +15,38 @@
       "result": "failed_before_startup",
       "reason": "Convenience factory required source/RISING_LANDS_BR_.BIN, outside authorized CD-only inputs",
       "resolution": "Reused accepted named Windows inputs through committed input dataclasses; no ISO file was guessed or read"
+    },
+    {
+      "mode": "logic",
+      "lease_tag": "codex-audio-m22-accesses-v2",
+      "result": "passed",
+      "frames": 128,
+      "phases": 257,
+      "seconds": 186.752,
+      "artifact": "evidencias/m22-sound-original-accesses.json"
+    },
+    {
+      "mode": "logic-real-pumps",
+      "lease_tag": "codex-audio-m22-chained-pumps",
+      "result": "passed_with_explicit_private_state_difference",
+      "frames": 128,
+      "phases": 257,
+      "seconds": 189.97,
+      "artifact": "evidencias/m22-sound-original-chained-pumps.json"
+    },
+    {
+      "mode": "waiting-slot-original-capture",
+      "lease_tag": "codex-audio-waiting-slot-capture",
+      "result": "passed",
+      "native_calls": 133,
+      "seconds": 0.013
+    },
+    {
+      "mode": "waiting-slot-three-way",
+      "lease_tag": "codex-audio-waiting-slot-differential",
+      "result": "passed",
+      "native_calls": 133,
+      "seconds": 0.014
     }
   ]
 }
