@@ -66,17 +66,35 @@ def rodar(cenario, enderecos):
             a = endereco+k
             if a in enderecos:
                 escritas.setdefault(a, []).append((b.fase, b.nome(eip), (valor >> (8*k)) & 0xff))
+    # A write is reported only when its start address lies in the hooked
+    # range: widen each range by 3 bytes to the left and filter per byte.
     for inicio, fim in faixas(enderecos):
-        b.cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE, escrever, None, begin=inicio, end=fim-1)
+        b.cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE, escrever, None, begin=inicio-3, end=fim-1)
     b.cpu.ctl_flush_tb()
+    vistos = [0]
+
+    def vinculos(fase):
+        # Binding handlers (DirectDrawCreate, GetCursorPos, fread...) write from the host, not the CPU.
+        eventos = b.vinculos_declarados.eventos
+        for ev in eventos[vistos[0]:]:
+            for w in ev['memory_writes']:
+                a, dados = int(w['address'], 16), bytes.fromhex(w['bytes']) if 'bytes' in w else None
+                for k in range(w['size']):
+                    if a+k in enderecos:
+                        valor = dados[k] if dados is not None else -1
+                        escritas.setdefault(a+k, []).append((fase, 'binding '+ev['name'], valor))
+        vistos[0] = len(eventos)
     b.iniciar_relogio()
     b.executar_inicio()
+    vinculos('startup')
     b.executar_mission_load(60)
+    vinculos('oracle')
     resumos = {}
     for nome, correr in (('load_tail', lambda: b.executar_cauda_carga(600)),
                          ('between_frames', lambda: b.executar_entre_quadros(300)),
                          ('frame1', lambda: b.executar_quadro(600))):
         correr()
+        vinculos(nome)
         resumos[nome] = b.resumo_imagem(b.imagem())
     reproduz = {p['phase']: resumos[p['phase']] == p['state_after']['summary'] for p in cap['phases']}
     return escritas, reproduz
@@ -95,7 +113,8 @@ def resumir(escritas, enderecos):
                 fases[-1][2] = valor
             else:
                 fases.append([rotina, 1, valor])
-        saida[hex(a)] = {f: [dict(writer=r, writes=n, last_value=hex(v)) for r, n, v in w] for f, w in por_fase.items()}
+        saida[hex(a)] = {f: [dict(writer=r, writes=n, last_value=(hex(v) if v >= 0 else 'see binding log'))
+                             for r, n, v in w] for f, w in por_fase.items()}
     return saida
 
 
