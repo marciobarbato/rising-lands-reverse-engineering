@@ -71,3 +71,23 @@ including the native AI group/task updates; RetireEngin subsequently returns
 at both checkpoints. The declared hidden camera-1 cases complete both lethal
 and overkill original unit consumers. These Core-owned bodies are evidence
 and provider requests, not new Combat translations.
+
+## Solid-footprint and audio supplements v3/v4
+
+The v1/v2 `sanctuary-impact` leaf hit the serialized origin (cell 2828), which
+is not solid; it correctly returned without damage. The supplements select an
+actual building-0 region-grid cell and preserve the whole footprint:
+[v3](evidencias/captura-batiment-raid-original-v3.json) and
+[v4 with original sound bodies](evidencias/captura-batiment-raid-original-v4-som.json).
+Each has 36 calls: 26 returns, eight named stops (PostSound in v3, VoixOffAsk in
+v4), two explicit first-InfligeDegat checkpoints inside ProjectileAvance, and
+zero faults/limits/unmapped writes. Both include player sources 0/1/2, raid
+source 16, camera 0/1, mode-4 directions 29/30 and exact sanctuary threshold
+599/600/601. Native type-30 initialization plus declared arrival-ready inputs
+prove the live presentation store occurs before its first impact request.
+
+Audio's committed `SoundRequestProvider` arrived while the work was running;
+main `23dfd6e` was merged into the feature branch (merge `c671be0`). V4 executes
+PostSound natively, with no binding/skip; its unopened-bank path returns zero
+before the original VoixOffAsk entry stop. The live consumer can now use the
+owner's explicit `unopened-display` provider on the same inherited bytes.

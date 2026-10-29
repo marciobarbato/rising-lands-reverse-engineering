@@ -150,6 +150,7 @@ class BancadaCombateRaid:
                       stop=stops.get(result['EIP']) if hasattr(stops, 'get') else None,
                       fault=fault, limit=not fault and result['EIP'] != self.return_address and self.stopped is None,
                       state_before=resumo(before), state_after=resumo(after), delta=delta(before, after),
+                      stop_stack_words=list(struct.unpack('<4I', self.read(result['ESP']+4,16))),
                       stores=self.stores, entries=self.entries, writes_outside_checkpoint=self.outside,
                       seconds=round(time.monotonic() - t0, 4))
         return record, before, after
