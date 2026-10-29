@@ -1,0 +1,2199 @@
+{
+ "by_routine": {
+  "AvanceEngin": 42,
+  "CalculDirCase": 4,
+  "CalculDirection": 6,
+  "CalculNextCase": 45,
+  "DeplaceEngin": 45,
+  "Distance2d": 4,
+  "EnginEstVivant": 2,
+  "EnginNextCase": 4,
+  "EnginNextCaseChemin": 2,
+  "EnginOccupeCase": 6,
+  "EnginPeutPasser": 6,
+  "ResetEnginCollision": 8,
+  "ResetOrdre": 2,
+  "RotateEngin": 6,
+  "SetDeplaceEngin": 2,
+  "SetEnginCollision": 469
+ },
+ "call_order": [
+  [
+   9699,
+   "CalculEnginNextEtape",
+   "0x1e"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0x0"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0x0"
+  ],
+  [
+   9699,
+   "SetEnginCollision",
+   "0x0"
+  ],
+  [
+   9699,
+   "SetCollision",
+   "0xf07"
+  ],
+  [
+   9699,
+   "Chemin_ModifieZone",
+   "0xf07"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0x1"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0x1"
+  ],
+  [
+   9699,
+   "SetEnginCollision",
+   "0x1"
+  ],
+  [
+   9699,
+   "SetCollision",
+   "0x1009"
+  ],
+  [
+   9699,
+   "Chemin_ModifieZone",
+   "0x1009"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0x2"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0x2"
+  ],
+  [
+   9699,
+   "SetEnginCollision",
+   "0x2"
+  ],
+  [
+   9699,
+   "SetCollision",
+   "0x1208"
+  ],
+  [
+   9699,
+   "Chemin_ModifieZone",
+   "0x1208"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0x3"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0x3"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0x4"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0x4"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0x5"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0x5"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0x6"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0x6"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0x7"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0x7"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0x8"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0x8"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0x9"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0x9"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0xa"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0xa"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0xb"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0xb"
+  ],
+  [
+   9699,
+   "SetEnginCollision",
+   "0xb"
+  ],
+  [
+   9699,
+   "SetCollision",
+   "0x150b"
+  ],
+  [
+   9699,
+   "Chemin_ModifieZone",
+   "0x150b"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0xc"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0xc"
+  ],
+  [
+   9699,
+   "SetEnginCollision",
+   "0xc"
+  ],
+  [
+   9699,
+   "SetCollision",
+   "0x1011"
+  ],
+  [
+   9699,
+   "Chemin_ModifieZone",
+   "0x1011"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0xd"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0xd"
+  ],
+  [
+   9699,
+   "SetEnginCollision",
+   "0xd"
+  ],
+  [
+   9699,
+   "SetCollision",
+   "0x100e"
+  ],
+  [
+   9699,
+   "Chemin_ModifieZone",
+   "0x100e"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0xe"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0xe"
+  ],
+  [
+   9699,
+   "SetEnginCollision",
+   "0xe"
+  ],
+  [
+   9699,
+   "SetCollision",
+   "0x100c"
+  ],
+  [
+   9699,
+   "Chemin_ModifieZone",
+   "0x100c"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0xf"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0xf"
+  ],
+  [
+   9699,
+   "SetEnginCollision",
+   "0xf"
+  ],
+  [
+   9699,
+   "SetCollision",
+   "0x130d"
+  ],
+  [
+   9699,
+   "Chemin_ModifieZone",
+   "0x130d"
+  ],
+  [
+   9699,
+   "EnginNextEtape",
+   "0x10"
+  ],
+  [
+   9699,
+   "CalculFatigue",
+   "0x10"
+  ],
+  [
+   9699,
+   "SetEnginCollision",
+   "0x10"
+  ],
+  [
+   9699,
+   "SetCollision",
+   "0x2820"
+  ],
+  [
+   9699,
+   "Chemin_ModifieZone",
+   "0x2820"
+  ],
+  [
+   9700,
+   "V_DeplaceGroupe",
+   "0x2007e6c"
+  ],
+  [
+   9700,
+   "EnginEstVivant",
+   "0x10"
+  ],
+  [
+   9700,
+   "SetDeplaceEngin",
+   "0x10"
+  ],
+  [
+   9700,
+   "ResetOrdre",
+   "0x10"
+  ],
+  [
+   9700,
+   "CalculEnginNextEtape",
+   "0x1e"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0x0"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0x0"
+  ],
+  [
+   9700,
+   "SetEnginCollision",
+   "0x0"
+  ],
+  [
+   9700,
+   "SetCollision",
+   "0xf07"
+  ],
+  [
+   9700,
+   "Chemin_ModifieZone",
+   "0xf07"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0x1"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0x1"
+  ],
+  [
+   9700,
+   "SetEnginCollision",
+   "0x1"
+  ],
+  [
+   9700,
+   "SetCollision",
+   "0x1009"
+  ],
+  [
+   9700,
+   "Chemin_ModifieZone",
+   "0x1009"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0x2"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0x2"
+  ],
+  [
+   9700,
+   "SetEnginCollision",
+   "0x2"
+  ],
+  [
+   9700,
+   "SetCollision",
+   "0x1208"
+  ],
+  [
+   9700,
+   "Chemin_ModifieZone",
+   "0x1208"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0x3"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0x3"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0x4"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0x4"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0x5"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0x5"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0x6"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0x6"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0x7"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0x7"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0x8"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0x8"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0x9"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0x9"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0xa"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0xa"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0xb"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0xb"
+  ],
+  [
+   9700,
+   "SetEnginCollision",
+   "0xb"
+  ],
+  [
+   9700,
+   "SetCollision",
+   "0x150b"
+  ],
+  [
+   9700,
+   "Chemin_ModifieZone",
+   "0x150b"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0xc"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0xc"
+  ],
+  [
+   9700,
+   "SetEnginCollision",
+   "0xc"
+  ],
+  [
+   9700,
+   "SetCollision",
+   "0x1011"
+  ],
+  [
+   9700,
+   "Chemin_ModifieZone",
+   "0x1011"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0xd"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0xd"
+  ],
+  [
+   9700,
+   "SetEnginCollision",
+   "0xd"
+  ],
+  [
+   9700,
+   "SetCollision",
+   "0x100e"
+  ],
+  [
+   9700,
+   "Chemin_ModifieZone",
+   "0x100e"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0xe"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0xe"
+  ],
+  [
+   9700,
+   "SetEnginCollision",
+   "0xe"
+  ],
+  [
+   9700,
+   "SetCollision",
+   "0x100c"
+  ],
+  [
+   9700,
+   "Chemin_ModifieZone",
+   "0x100c"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0xf"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0xf"
+  ],
+  [
+   9700,
+   "SetEnginCollision",
+   "0xf"
+  ],
+  [
+   9700,
+   "SetCollision",
+   "0x130d"
+  ],
+  [
+   9700,
+   "Chemin_ModifieZone",
+   "0x130d"
+  ],
+  [
+   9700,
+   "EnginNextEtape",
+   "0x10"
+  ],
+  [
+   9700,
+   "CalculFatigue",
+   "0x10"
+  ],
+  [
+   9700,
+   "SetEnginCollision",
+   "0x10"
+  ],
+  [
+   9700,
+   "SetCollision",
+   "0x2820"
+  ],
+  [
+   9700,
+   "Chemin_ModifieZone",
+   "0x2820"
+  ],
+  [
+   9700,
+   "DeplaceEngin",
+   "0x10"
+  ],
+  [
+   9700,
+   "CalculNextCase",
+   "0x10"
+  ],
+  [
+   9700,
+   "EnginNextCase",
+   "0x10"
+  ],
+  [
+   9700,
+   "CalculDirection",
+   "0x2820"
+  ],
+  [
+   9700,
+   "CalculDirCase",
+   "0x2820"
+  ],
+  [
+   9700,
+   "EnginPeutPasser",
+   "0x10"
+  ],
+  [
+   9700,
+   "EnginOccupeCase",
+   "0x10"
+  ],
+  [
+   9700,
+   "TerrainEnCollision",
+   "0x291f"
+  ],
+  [
+   9700,
+   "ResetEnginCollision",
+   "0x10"
+  ],
+  [
+   9700,
+   "ResetCollision",
+   "0x2820"
+  ],
+  [
+   9700,
+   "Chemin_ModifieZone",
+   "0x2820"
+  ],
+  [
+   9700,
+   "SetEnginCollision",
+   "0x10"
+  ],
+  [
+   9700,
+   "SetCollision",
+   "0x2820"
+  ],
+  [
+   9700,
+   "Chemin_ModifieZone",
+   "0x2820"
+  ],
+  [
+   9700,
+   "SetEnginCollision",
+   "0x10"
+  ],
+  [
+   9700,
+   "SetCollision",
+   "0x291f"
+  ],
+  [
+   9700,
+   "Chemin_ModifieZone",
+   "0x291f"
+  ],
+  [
+   9700,
+   "RotateEngin",
+   "0x10"
+  ],
+  [
+   9701,
+   "CalculEnginNextEtape",
+   "0x1e"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0x0"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0x0"
+  ],
+  [
+   9701,
+   "SetEnginCollision",
+   "0x0"
+  ],
+  [
+   9701,
+   "SetCollision",
+   "0xf07"
+  ],
+  [
+   9701,
+   "Chemin_ModifieZone",
+   "0xf07"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0x1"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0x1"
+  ],
+  [
+   9701,
+   "SetEnginCollision",
+   "0x1"
+  ],
+  [
+   9701,
+   "SetCollision",
+   "0x1009"
+  ],
+  [
+   9701,
+   "Chemin_ModifieZone",
+   "0x1009"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0x2"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0x2"
+  ],
+  [
+   9701,
+   "SetEnginCollision",
+   "0x2"
+  ],
+  [
+   9701,
+   "SetCollision",
+   "0x1208"
+  ],
+  [
+   9701,
+   "Chemin_ModifieZone",
+   "0x1208"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0x3"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0x3"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0x4"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0x4"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0x5"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0x5"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0x6"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0x6"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0x7"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0x7"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0x8"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0x8"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0x9"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0x9"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0xa"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0xa"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0xb"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0xb"
+  ],
+  [
+   9701,
+   "SetEnginCollision",
+   "0xb"
+  ],
+  [
+   9701,
+   "SetCollision",
+   "0x150b"
+  ],
+  [
+   9701,
+   "Chemin_ModifieZone",
+   "0x150b"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0xc"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0xc"
+  ],
+  [
+   9701,
+   "SetEnginCollision",
+   "0xc"
+  ],
+  [
+   9701,
+   "SetCollision",
+   "0x1011"
+  ],
+  [
+   9701,
+   "Chemin_ModifieZone",
+   "0x1011"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0xd"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0xd"
+  ],
+  [
+   9701,
+   "SetEnginCollision",
+   "0xd"
+  ],
+  [
+   9701,
+   "SetCollision",
+   "0x100e"
+  ],
+  [
+   9701,
+   "Chemin_ModifieZone",
+   "0x100e"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0xe"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0xe"
+  ],
+  [
+   9701,
+   "SetEnginCollision",
+   "0xe"
+  ],
+  [
+   9701,
+   "SetCollision",
+   "0x100c"
+  ],
+  [
+   9701,
+   "Chemin_ModifieZone",
+   "0x100c"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0xf"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0xf"
+  ],
+  [
+   9701,
+   "SetEnginCollision",
+   "0xf"
+  ],
+  [
+   9701,
+   "SetCollision",
+   "0x130d"
+  ],
+  [
+   9701,
+   "Chemin_ModifieZone",
+   "0x130d"
+  ],
+  [
+   9701,
+   "EnginNextEtape",
+   "0x10"
+  ],
+  [
+   9701,
+   "CalculFatigue",
+   "0x10"
+  ],
+  [
+   9701,
+   "SetEnginCollision",
+   "0x10"
+  ],
+  [
+   9701,
+   "SetCollision",
+   "0x2820"
+  ],
+  [
+   9701,
+   "Chemin_ModifieZone",
+   "0x2820"
+  ],
+  [
+   9701,
+   "DeplaceEngin",
+   "0x10"
+  ],
+  [
+   9701,
+   "CalculNextCase",
+   "0x10"
+  ],
+  [
+   9701,
+   "EnginNextCase",
+   "0x10"
+  ],
+  [
+   9701,
+   "CalculDirection",
+   "0x2820"
+  ],
+  [
+   9701,
+   "CalculDirCase",
+   "0x2820"
+  ],
+  [
+   9701,
+   "EnginPeutPasser",
+   "0x10"
+  ],
+  [
+   9701,
+   "EnginOccupeCase",
+   "0x10"
+  ],
+  [
+   9701,
+   "ResetEnginCollision",
+   "0x10"
+  ],
+  [
+   9701,
+   "ResetCollision",
+   "0x291f"
+  ],
+  [
+   9701,
+   "Chemin_ModifieZone",
+   "0x291f"
+  ],
+  [
+   9701,
+   "SetEnginCollision",
+   "0x10"
+  ],
+  [
+   9701,
+   "SetCollision",
+   "0x2820"
+  ],
+  [
+   9701,
+   "Chemin_ModifieZone",
+   "0x2820"
+  ],
+  [
+   9701,
+   "SetEnginCollision",
+   "0x10"
+  ],
+  [
+   9701,
+   "SetCollision",
+   "0x291f"
+  ],
+  [
+   9701,
+   "Chemin_ModifieZone",
+   "0x291f"
+  ],
+  [
+   9701,
+   "RotateEngin",
+   "0x10"
+  ],
+  [
+   9702,
+   "CalculEnginNextEtape",
+   "0x1e"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0x0"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0x0"
+  ],
+  [
+   9702,
+   "SetEnginCollision",
+   "0x0"
+  ],
+  [
+   9702,
+   "SetCollision",
+   "0xf07"
+  ],
+  [
+   9702,
+   "Chemin_ModifieZone",
+   "0xf07"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0x1"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0x1"
+  ],
+  [
+   9702,
+   "SetEnginCollision",
+   "0x1"
+  ],
+  [
+   9702,
+   "SetCollision",
+   "0x1009"
+  ],
+  [
+   9702,
+   "Chemin_ModifieZone",
+   "0x1009"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0x2"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0x2"
+  ],
+  [
+   9702,
+   "SetEnginCollision",
+   "0x2"
+  ],
+  [
+   9702,
+   "SetCollision",
+   "0x1208"
+  ],
+  [
+   9702,
+   "Chemin_ModifieZone",
+   "0x1208"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0x3"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0x3"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0x4"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0x4"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0x5"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0x5"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0x6"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0x6"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0x7"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0x7"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0x8"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0x8"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0x9"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0x9"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0xa"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0xa"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0xb"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0xb"
+  ],
+  [
+   9702,
+   "SetEnginCollision",
+   "0xb"
+  ],
+  [
+   9702,
+   "SetCollision",
+   "0x150b"
+  ],
+  [
+   9702,
+   "Chemin_ModifieZone",
+   "0x150b"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0xc"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0xc"
+  ],
+  [
+   9702,
+   "SetEnginCollision",
+   "0xc"
+  ],
+  [
+   9702,
+   "SetCollision",
+   "0x1011"
+  ],
+  [
+   9702,
+   "Chemin_ModifieZone",
+   "0x1011"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0xd"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0xd"
+  ],
+  [
+   9702,
+   "SetEnginCollision",
+   "0xd"
+  ],
+  [
+   9702,
+   "SetCollision",
+   "0x100e"
+  ],
+  [
+   9702,
+   "Chemin_ModifieZone",
+   "0x100e"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0xe"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0xe"
+  ],
+  [
+   9702,
+   "SetEnginCollision",
+   "0xe"
+  ],
+  [
+   9702,
+   "SetCollision",
+   "0x100c"
+  ],
+  [
+   9702,
+   "Chemin_ModifieZone",
+   "0x100c"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0xf"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0xf"
+  ],
+  [
+   9702,
+   "SetEnginCollision",
+   "0xf"
+  ],
+  [
+   9702,
+   "SetCollision",
+   "0x130d"
+  ],
+  [
+   9702,
+   "Chemin_ModifieZone",
+   "0x130d"
+  ],
+  [
+   9702,
+   "EnginNextEtape",
+   "0x10"
+  ],
+  [
+   9702,
+   "CalculFatigue",
+   "0x10"
+  ],
+  [
+   9702,
+   "SetEnginCollision",
+   "0x10"
+  ],
+  [
+   9702,
+   "SetCollision",
+   "0x2820"
+  ],
+  [
+   9702,
+   "Chemin_ModifieZone",
+   "0x2820"
+  ],
+  [
+   9702,
+   "DeplaceEngin",
+   "0x10"
+  ],
+  [
+   9702,
+   "CalculNextCase",
+   "0x10"
+  ],
+  [
+   9702,
+   "EnginNextCase",
+   "0x10"
+  ],
+  [
+   9702,
+   "CalculDirection",
+   "0x2820"
+  ],
+  [
+   9702,
+   "CalculDirCase",
+   "0x2820"
+  ],
+  [
+   9702,
+   "EnginPeutPasser",
+   "0x10"
+  ],
+  [
+   9702,
+   "EnginOccupeCase",
+   "0x10"
+  ],
+  [
+   9702,
+   "ResetEnginCollision",
+   "0x10"
+  ],
+  [
+   9702,
+   "ResetCollision",
+   "0x291f"
+  ],
+  [
+   9702,
+   "Chemin_ModifieZone",
+   "0x291f"
+  ],
+  [
+   9702,
+   "SetEnginCollision",
+   "0x10"
+  ],
+  [
+   9702,
+   "SetCollision",
+   "0x2820"
+  ],
+  [
+   9702,
+   "Chemin_ModifieZone",
+   "0x2820"
+  ],
+  [
+   9702,
+   "SetEnginCollision",
+   "0x10"
+  ],
+  [
+   9702,
+   "SetCollision",
+   "0x291f"
+  ],
+  [
+   9702,
+   "Chemin_ModifieZone",
+   "0x291f"
+  ],
+  [
+   9702,
+   "RotateEngin",
+   "0x10"
+  ],
+  [
+   9703,
+   "CalculEnginNextEtape",
+   "0x1e"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0x0"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0x0"
+  ],
+  [
+   9703,
+   "SetEnginCollision",
+   "0x0"
+  ],
+  [
+   9703,
+   "SetCollision",
+   "0xf07"
+  ],
+  [
+   9703,
+   "Chemin_ModifieZone",
+   "0xf07"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0x1"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0x1"
+  ],
+  [
+   9703,
+   "SetEnginCollision",
+   "0x1"
+  ],
+  [
+   9703,
+   "SetCollision",
+   "0x1009"
+  ],
+  [
+   9703,
+   "Chemin_ModifieZone",
+   "0x1009"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0x2"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0x2"
+  ],
+  [
+   9703,
+   "SetEnginCollision",
+   "0x2"
+  ],
+  [
+   9703,
+   "SetCollision",
+   "0x1208"
+  ],
+  [
+   9703,
+   "Chemin_ModifieZone",
+   "0x1208"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0x3"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0x3"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0x4"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0x4"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0x5"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0x5"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0x6"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0x6"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0x7"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0x7"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0x8"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0x8"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0x9"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0x9"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0xa"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0xa"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0xb"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0xb"
+  ],
+  [
+   9703,
+   "SetEnginCollision",
+   "0xb"
+  ],
+  [
+   9703,
+   "SetCollision",
+   "0x150b"
+  ],
+  [
+   9703,
+   "Chemin_ModifieZone",
+   "0x150b"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0xc"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0xc"
+  ],
+  [
+   9703,
+   "SetEnginCollision",
+   "0xc"
+  ],
+  [
+   9703,
+   "SetCollision",
+   "0x1011"
+  ],
+  [
+   9703,
+   "Chemin_ModifieZone",
+   "0x1011"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0xd"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0xd"
+  ],
+  [
+   9703,
+   "SetEnginCollision",
+   "0xd"
+  ],
+  [
+   9703,
+   "SetCollision",
+   "0x100e"
+  ],
+  [
+   9703,
+   "Chemin_ModifieZone",
+   "0x100e"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0xe"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0xe"
+  ],
+  [
+   9703,
+   "SetEnginCollision",
+   "0xe"
+  ],
+  [
+   9703,
+   "SetCollision",
+   "0x100c"
+  ],
+  [
+   9703,
+   "Chemin_ModifieZone",
+   "0x100c"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0xf"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0xf"
+  ],
+  [
+   9703,
+   "SetEnginCollision",
+   "0xf"
+  ],
+  [
+   9703,
+   "SetCollision",
+   "0x130d"
+  ],
+  [
+   9703,
+   "Chemin_ModifieZone",
+   "0x130d"
+  ],
+  [
+   9703,
+   "EnginNextEtape",
+   "0x10"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0x10"
+  ],
+  [
+   9703,
+   "SetEnginCollision",
+   "0x10"
+  ],
+  [
+   9703,
+   "SetCollision",
+   "0x2820"
+  ],
+  [
+   9703,
+   "Chemin_ModifieZone",
+   "0x2820"
+  ],
+  [
+   9703,
+   "DeplaceEngin",
+   "0x10"
+  ],
+  [
+   9703,
+   "CalculNextCase",
+   "0x10"
+  ],
+  [
+   9703,
+   "EnginNextCase",
+   "0x10"
+  ],
+  [
+   9703,
+   "CalculDirection",
+   "0x2820"
+  ],
+  [
+   9703,
+   "CalculDirCase",
+   "0x2820"
+  ],
+  [
+   9703,
+   "EnginPeutPasser",
+   "0x10"
+  ],
+  [
+   9703,
+   "EnginOccupeCase",
+   "0x10"
+  ],
+  [
+   9703,
+   "ResetEnginCollision",
+   "0x10"
+  ],
+  [
+   9703,
+   "ResetCollision",
+   "0x291f"
+  ],
+  [
+   9703,
+   "Chemin_ModifieZone",
+   "0x291f"
+  ],
+  [
+   9703,
+   "SetEnginCollision",
+   "0x10"
+  ],
+  [
+   9703,
+   "SetCollision",
+   "0x2820"
+  ],
+  [
+   9703,
+   "Chemin_ModifieZone",
+   "0x2820"
+  ],
+  [
+   9703,
+   "SetEnginCollision",
+   "0x10"
+  ],
+  [
+   9703,
+   "SetCollision",
+   "0x291f"
+  ],
+  [
+   9703,
+   "Chemin_ModifieZone",
+   "0x291f"
+  ],
+  [
+   9703,
+   "RotateEngin",
+   "0x10"
+  ],
+  [
+   9703,
+   "AvanceEngin",
+   "0x10"
+  ],
+  [
+   9703,
+   "CalculFatigue",
+   "0x10"
+  ]
+ ],
+ "code_unchanged": true,
+ "comparisons": 653,
+ "dependencies": [
+  {
+   "entry": {
+    "EAX": "0x2820",
+    "EBP": "0x4140e23a",
+    "EBX": "0x0",
+    "ECX": "0x4140e23a",
+    "EDI": "0x10",
+    "EDX": "0x10",
+    "EIP": "0x43e138",
+    "ESI": "0x2820",
+    "ESP": "0x2007dc4"
+   },
+   "kind": "flat",
+   "reason": "DependenciaRamoCore: Chemin_ModifieZone: mode 0 not translated (0x43e153); no store was made",
+   "routine": "Chemin_ModifieZone"
+  },
+  {
+   "entry": {
+    "EAX": "0x291f",
+    "EBP": "0x4140e23a",
+    "EBX": "0x0",
+    "ECX": "0x4140e23a",
+    "EDI": "0x10",
+    "EDX": "0x10",
+    "EIP": "0x43e138",
+    "ESI": "0x291f",
+    "ESP": "0x2007dc4"
+   },
+   "kind": "flat",
+   "reason": "DependenciaRamoCore: Chemin_ModifieZone: mode 0 not translated (0x43e153); no store was made",
+   "routine": "Chemin_ModifieZone"
+  },
+  {
+   "entry": {
+    "EAX": "0x291f",
+    "EBP": "0x4140e23a",
+    "EBX": "0x0",
+    "ECX": "0x4140e23a",
+    "EDI": "0x10",
+    "EDX": "0x10",
+    "EIP": "0x43e138",
+    "ESI": "0x291f",
+    "ESP": "0x2007dc4"
+   },
+   "kind": "flat",
+   "reason": "DependenciaRamoCore: Chemin_ModifieZone: mode 0 not translated (0x43e153); no store was made",
+   "routine": "Chemin_ModifieZone"
+  },
+  {
+   "entry": {
+    "EAX": "0x291f",
+    "EBP": "0x4140e23a",
+    "EBX": "0x0",
+    "ECX": "0x4140e23a",
+    "EDI": "0x10",
+    "EDX": "0x10",
+    "EIP": "0x43e138",
+    "ESI": "0x291f",
+    "ESP": "0x2007dc4"
+   },
+   "kind": "flat",
+   "reason": "DependenciaRamoCore: Chemin_ModifieZone: mode 0 not translated (0x43e153); no store was made",
+   "routine": "Chemin_ModifieZone"
+  },
+  {
+   "entry": {
+    "EAX": "0x3b01",
+    "EBP": "0x4140e34e",
+    "EBX": "0x0",
+    "ECX": "0x4140e34e",
+    "EDI": "0x11",
+    "EDX": "0x11",
+    "EIP": "0x43e138",
+    "ESI": "0x3b01",
+    "ESP": "0x2007dd4"
+   },
+   "kind": "flat",
+   "reason": "DependenciaRamoCore: Chemin_ModifieZone: mode 0 not translated (0x43e153); no store was made",
+   "routine": "Chemin_ModifieZone"
+  },
+  {
+   "entry": {
+    "EAX": "0x3c02",
+    "EBP": "0x4140e34e",
+    "EBX": "0x0",
+    "ECX": "0x4140e34e",
+    "EDI": "0x11",
+    "EDX": "0x11",
+    "EIP": "0x43e138",
+    "ESI": "0x3c02",
+    "ESP": "0x2007dc8"
+   },
+   "kind": "flat",
+   "reason": "DependenciaRamoCore: Chemin_ModifieZone: mode 0 not translated (0x43e153); no store was made",
+   "routine": "Chemin_ModifieZone"
+  },
+  {
+   "entry": {
+    "EAX": "0x3c02",
+    "EBP": "0x4140e34e",
+    "EBX": "0x0",
+    "ECX": "0x4140e34e",
+    "EDI": "0x11",
+    "EDX": "0x11",
+    "EIP": "0x43e138",
+    "ESI": "0x3c02",
+    "ESP": "0x2007dd4"
+   },
+   "kind": "flat",
+   "reason": "DependenciaRamoCore: Chemin_ModifieZone: mode 0 not translated (0x43e153); no store was made",
+   "routine": "Chemin_ModifieZone"
+  },
+  {
+   "entry": {
+    "EAX": "0x3c03",
+    "EBP": "0x4140e34e",
+    "EBX": "0x0",
+    "ECX": "0x4140e34e",
+    "EDI": "0x11",
+    "EDX": "0x11",
+    "EIP": "0x43e138",
+    "ESI": "0x3c03",
+    "ESP": "0x2007dc8"
+   },
+   "kind": "flat",
+   "reason": "DependenciaRamoCore: Chemin_ModifieZone: mode 0 not translated (0x43e153); no store was made",
+   "routine": "Chemin_ModifieZone"
+  }
+ ],
+ "fatigue_beyond_counter": [
+  {
+   "changed": [
+    [
+     "0x4140e144",
+     4,
+     3
+    ],
+    [
+     "0x4140e1b4",
+     183,
+     0
+    ],
+    [
+     "0x4140e1b5",
+     11,
+     0
+    ]
+   ],
+   "counter": 10879,
+   "entry": "0x10",
+   "exit": "0x4"
+  }
+ ],
+ "flat_by_routine": {
+  "CalculFatigue": 865,
+  "Chemin_ModifieZone": 469,
+  "ResetCollision": 8,
+  "SetCollision": 469,
+  "SetEnginCollision": 469,
+  "TerrainEnCollision": 3
+ },
+ "flat_comparisons": 2283,
+ "frames": 1901,
+ "gaps": [
+  "EnginNextEtape"
+ ],
+ "isolated": {
+  "AvanceEngin": 42,
+  "CalculDirCase": 4,
+  "CalculDirection": 6,
+  "CalculEnginNextEtape": 46,
+  "CalculFatigue": 865,
+  "CalculNextCase": 45,
+  "Chemin_ModifieZone": 477,
+  "DeplaceEngin": 45,
+  "Distance2d": 4,
+  "EnginEstVivant": 2,
+  "EnginNextCase": 4,
+  "EnginNextCaseChemin": 2,
+  "EnginNextEtape": 823,
+  "EnginOccupeCase": 6,
+  "EnginPeutPasser": 6,
+  "ResetCollision": 8,
+  "ResetEnginCollision": 8,
+  "ResetOrdre": 2,
+  "RotateEngin": 6,
+  "SetCollision": 469,
+  "SetDeplaceEngin": 2,
+  "SetEnginCollision": 469,
+  "TerrainEnCollision": 3,
+  "V_DeplaceGroupe": 2
+ },
+ "live_by_routine": {
+  "AvanceEngin": 42,
+  "CalculDirCase": 4,
+  "CalculDirection": 6,
+  "CalculNextCase": 45,
+  "DeplaceEngin": 45,
+  "Distance2d": 4,
+  "EnginEstVivant": 2,
+  "EnginNextCase": 4,
+  "EnginNextCaseChemin": 2,
+  "EnginOccupeCase": 6,
+  "EnginPeutPasser": 6,
+  "ResetEnginCollision": 8,
+  "ResetOrdre": 2,
+  "RotateEngin": 6,
+  "SetDeplaceEngin": 2,
+  "SetEnginCollision": 469
+ },
+ "live_comparisons": 653,
+ "mapping": {
+  "AvanceEngin": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "CalculDirCase": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "CalculDirection": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "CalculNextCase": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "CheminCalcul": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "Chemin_Verouille": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "ChercheIndiceEngin": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "DeplaceEngin": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "Distance2d": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "EnginEstVivant": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "EnginNextCase": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "EnginNextCaseChemin": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "EnginOccupeCase": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "EnginPeutPasser": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "OptimiseChemin": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "ResetEnginCollision": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "ResetOrdre": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "RotateEngin": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "SetDeplaceEngin": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "SetEnginCollision": "see ferramentas/validar_movimento_incursao.py:_adaptadores",
+  "TestLigneOptimise": "see ferramentas/validar_movimento_incursao.py:_adaptadores"
+ },
+ "mismatches": [],
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "per_routine_limit": 6,
+ "schema": "rising-lands/monde01-raid-movement-world-differential/1",
+ "seconds": 267.574,
+ "source_sha256": {
+  "ferramentas/avanco_unidades.py": "b0592c2101f26f59d927be5dcb64010b7d4849f9502fc130ad85c7e36ecf8276",
+  "ferramentas/capturar_movimento_incursao.py": "e9c8f22251a9bc94aaa072e98fb209b629dcb9ac7fb21f97d39549e9d6cb8cca",
+  "ferramentas/movimento.py": "1b814260ad8ec47a7c53e3e649655789ddb7db6ff704e9f329766a68a6e0cfed",
+  "ferramentas/navegacao_unidades.py": "bb122c74953d43eb97cde4076fe1f53bd811087f87e575810bce90240930aedf",
+  "ferramentas/ordens_unidades.py": "95b282cca6c29ff5fdbb3bb3c9cd25a25bec0202670a6dc78784ea6677cfefaf",
+  "ferramentas/passagem_unidades.py": "c7e74e05a86fb3789238c5fc89964d095cf90586c1e80ed4cb0b9dd320b13d1a",
+  "ferramentas/validar_movimento_incursao.py": "b6c56f458aaf8b088673ee2caf5bd7ad9452b5e25b45b01e0427f00092cee887"
+ },
+ "windows": "9699-9703,10860-10900"
+}

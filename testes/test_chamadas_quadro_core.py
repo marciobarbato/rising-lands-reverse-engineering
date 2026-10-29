@@ -194,6 +194,21 @@ class DominioEDependencias(unittest.TestCase):
         self.assertEqual(definir_bit(m, 0x1001, 1, 2), dict(EAX=0x1001))
         self.assertEqual(m.ler(0x1000, 2), bytes([0xf7, 0]))
 
+    def test_fatigue_threshold_consumes_a_provision_or_raises_on_hunger(self):
+        unidades = bytearray(PASSO)
+        unidades[0x72], unidades[1], unidades[0x74:0x76] = 1, 0, (0xbb7).to_bytes(2, 'little')
+        dgroup = bytearray(0x523000 - 0x494000)
+        dgroup[PONTEIRO_UNIDADES - 0x494000:PONTEIRO_UNIDADES - 0x494000 + 4] = (0x1000).to_bytes(4, 'little')
+        dgroup[0x4965dc - 0x494000:0x4965dc - 0x494000 + 2] = (0xbb8).to_bytes(2, 'little')
+        m = MemoriaQuadro([(0x494000, dgroup), (0x1000, unidades)])
+        with self.assertRaises(DependenciaRamoCore) as e:          # no provisions: hunger branch
+            calcular_fadiga(m, 0, lambda j, t, s: 0)
+        self.assertEqual(e.exception.endereco, 0x452d6f)
+        self.assertEqual(unidades[0x74:0x76], (0xbb8).to_bytes(2, 'little'))   # stored before the comparison
+        unidades[0x74:0x76], unidades[4:6] = (0xbb7).to_bytes(2, 'little'), (3).to_bytes(2, 'little')
+        self.assertEqual(calcular_fadiga(m, 0, lambda j, t, s: 0), dict(EAX=3))
+        self.assertEqual((unidades[0x74:0x76], unidades[4:6]), (bytes(2), (2).to_bytes(2, 'little')))
+
     def test_unreached_branches_raise_before_any_store(self):
         unidades = bytearray(PASSO)
         unidades[0x72], unidades[1], unidades[0x74:0x76] = 1, 0, (0xbb7).to_bytes(2, 'little')
@@ -202,9 +217,6 @@ class DominioEDependencias(unittest.TestCase):
         dgroup[0x4965dc - 0x494000:0x4965dc - 0x494000 + 2] = (0xbb8).to_bytes(2, 'little')
         m = MemoriaQuadro([(0x494000, dgroup), (0x1000, unidades)])
         antes = (bytes(dgroup), bytes(unidades))
-        with self.assertRaises(DependenciaRamoCore) as e:
-            calcular_fadiga(m, 0, lambda j, t, s: 0)
-        self.assertEqual(e.exception.endereco, 0x452d61)
         with self.assertRaises(DependenciaRamoCore) as e:
             calcular_fadiga(m, 0, None)
         self.assertEqual(e.exception.endereco, 0x452d48)
