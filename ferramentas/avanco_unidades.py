@@ -38,17 +38,40 @@ class MundoFisico(MundoUnidades, VisaoMovimento):
         self.bonus_fadiga = [[0] * 26 for _ in range(4)]
         self.rotas = [bytearray(b'\0\0') for _ in range(800)]
 
+    def vincular_grades(self, *, tiles=None, regioes=None, atributos=None, objetos=None, donos_objetos=None):
+        """Use live original grids by identity instead of the world's own containers.
+
+        ``tiles`` [0x507d70] and ``regioes`` [0x4e0f38] are 131,072-byte u16 grids
+        (they become ``grade_u16.GradeU16`` views whose ``buffer`` is the given
+        object); ``atributos`` [0x507da8], ``objetos`` [0x507d74] and
+        ``donos_objetos`` [0x507dac] are 65,536-byte grids adopted as the given
+        object itself. Each must be a writable bytearray or one-dimensional
+        contiguous byte memoryview. Everything is checked before anything is
+        bound; unnamed grids keep their current containers.
+        """
+        from grade_u16 import GradeU16
+        novos = {}
+        for nome, buffer in (('atributos', atributos), ('objetos', objetos), ('donos_objetos', donos_objetos)):
+            if buffer is not None:
+                v = memoryview(buffer)
+                if v.readonly or v.ndim != 1 or not v.c_contiguous or v.itemsize != 1 or v.nbytes != 65536:
+                    raise ValueError(f'Live {nome} grid must be a writable contiguous 65536-byte buffer')
+                novos[nome] = buffer
+        for nome, buffer in (('tiles', tiles), ('regioes', regioes)):
+            if buffer is not None:
+                novos[nome] = GradeU16(buffer)
+        for nome, grade in novos.items():
+            setattr(self, nome, grade)
+        self.grades_vivas = getattr(self, 'grades_vivas', frozenset()) | frozenset(novos)
+        return novos
+
     def vincular_tiles(self, buffer):
         """Use the live tile grid [0x507d70] (131,072 bytes, 65,536 u16) by identity.
 
-        ``buffer`` is the caller's writable bytearray/memoryview of the original
-        allocation; afterwards ``self.tiles`` is a ``grade_u16.GradeU16`` whose
-        ``buffer`` is that same object, so every Core read/store of a tile is a
-        live u16 access. The default (unbound) world keeps its 65,536-int list.
+        After it ``self.tiles`` is a ``grade_u16.GradeU16`` whose ``buffer`` is
+        ``buffer`` itself; the default (unbound) world keeps its 65,536-int list.
         """
-        from grade_u16 import GradeU16
-        self.tiles = GradeU16(buffer)
-        return self.tiles
+        return self.vincular_grades(tiles=buffer)['tiles']
 
     def iniciar_morte_unidade(self, indice):
         from morte_unidades import iniciar_morte_unidade
