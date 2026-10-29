@@ -119,12 +119,14 @@ impl TryFrom<u32> for Routine {
 pub struct GameState {
     pub world_rng: Option<WorldRng>,
     pub crt_rng: Option<CrtRng>,
+    pub frame: Option<crate::FrameState>,
 }
 /// Address bindings and opaque, declared bytes belong to projection, not logic.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Projection {
     template: MemoriaJogo,
     crt_seed_address: Option<u32>,
+    frame_bound: bool,
 }
 impl GameState {
     pub fn load(memory: MemoriaJogo) -> Result<(Self, Projection)> {
@@ -144,11 +146,18 @@ impl GameState {
             Some(address) => memory.optional_u32(address)?.map(|seed| CrtRng { seed }),
             None => None,
         };
+        let frame = crate::FrameState::load(&memory)?;
+        let frame_bound = frame.is_some();
         Ok((
-            Self { world_rng, crt_rng },
+            Self {
+                world_rng,
+                crt_rng,
+                frame,
+            },
             Projection {
                 template: memory,
                 crt_seed_address,
+                frame_bound,
             },
         ))
     }
@@ -170,7 +179,13 @@ impl GameState {
                 address: layout.crt_seed_address.unwrap_or(THREAD_DATA),
             });
         }
+        if self.frame.is_some() != layout.frame_bound {
+            return Err(EngineError::ProjectionFieldMismatch { address: 0x4e19a0 });
+        }
         let mut memory = layout.template.clone();
+        if let Some(frame) = &self.frame {
+            frame.project(&mut memory)?;
+        }
         if let Some(rng) = self.world_rng {
             memory.set_u32(WORLD_SEED, rng.seed)?;
         }
@@ -190,6 +205,8 @@ pub struct World {
     pub state: GameState,
     projection: Projection,
     pub clock: TickClock,
+    pub frame_events: Vec<crate::FrameEvent>,
+    pub frame_freed: MemoriaJogo,
 }
 impl World {
     pub fn new(rate: u32, epoch: u32) -> Result<Self> {
@@ -201,6 +218,8 @@ impl World {
             state,
             projection,
             clock,
+            frame_events: Vec::new(),
+            frame_freed: MemoriaJogo::default(),
         })
     }
     pub fn project(&self) -> Result<MemoriaJogo> {
@@ -209,6 +228,22 @@ impl World {
     pub fn replace_memory(&mut self, memory: MemoriaJogo) -> Result<()> {
         *self = Self::load(memory, self.clock.clone())?;
         Ok(())
+    }
+    /// Each successful CalculGame body advances one deterministic tick. Display phases do not.
+    pub fn frame_step(
+        &mut self,
+        phase: u32,
+        input: crate::FrameInput,
+    ) -> Result<crate::FrameInput> {
+        let mut memory = self.project()?;
+        let (output, events, freed) = crate::frame::phase(&mut memory, phase, input)?;
+        self.replace_memory(memory)?;
+        self.frame_events = events;
+        self.frame_freed = freed;
+        if phase == 1 || phase == 3 {
+            self.clock.advance(1);
+        }
+        Ok(output)
     }
     /// An isolated routine call, NOT a game frame. Errors publish no state/register change.
     pub fn step(&mut self, routine: Routine, input: Registers) -> Result<Registers> {
