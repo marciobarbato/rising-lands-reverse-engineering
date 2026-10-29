@@ -449,6 +449,17 @@ def alocacoes_da_parte(parte, cap_v2, alocacoes_caminho=None):
     return registros, '-v2 final records (the part keeps the count and allocates/releases nothing)'
 
 
+def travessias_medidas(comp, mascara):
+    """Crossings the composition actually made (mode 'prova' has no crossing data, so any crossing stops the run),
+    with the compared bytes they wrote, and Core provider stops."""
+    escritos = 0
+    for t in comp.travessias.feitas:
+        enderecos = [int(e, 16) for e in t.get('changed_bytes', {}) if isinstance(e, str) and e.startswith('0x')]
+        escritos += sum(not mascara.mascarado(e) for e in enderecos) if enderecos else len(t['changed_blocks'])
+    return dict(count=len(comp.travessias.feitas), writing_compared_bytes=escritos,
+                core_provider_stops=len(comp.travessias.paradas_nucleo), mode=comp.ctx.modo)
+
+
 def comparar_parte(caminho, politica, sha256_bruto=None, alocacoes_caminho=None, continuar=False):
     """Compare one self-contained part of a long run (Missions' ``pacotes_quadros_missao`` format).
 
@@ -506,7 +517,7 @@ def comparar_parte(caminho, politica, sha256_bruto=None, alocacoes_caminho=None,
                   full_states=[f for f, v in fases.items() if v.get('reference_integrity', {}).get(
                       'checkpoint_full_state_equal')]),
         policy=dict(path=str(politica.relative_to(ROOT)), sha256=sha(politica), masked_bytes=mascara.bytes),
-        crossings=dict(count=0, writing_compared_bytes=0), hud_flag=hud, phases=fases, allocation_records=registros,
+        crossings=travessias_medidas(comp, mascara), hud_flag=hud, phases=fases, allocation_records=registros,
         summary=dict(result=resultado, phases_compared=len(fases),
                      phases_equal=sum(1 for v in fases.values() if v['equal'])))
 
