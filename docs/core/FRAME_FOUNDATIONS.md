@@ -230,3 +230,85 @@ Each raises `DependenciaRamoCore` before any store:
   - BL>3 (`0x43e29c`).
 
 Not translated: GetBit's callers' bodies (ai-runtime/Economy) and the AffGame cursor consumption (Graphics).
+
+## Frame 0/frame 1, round 3: clipping, mouse zones, NextAnim* and the live task memory
+
+The coordinator assigned `SetClipping`, `InitGameZone` and `NextAnim*` to Core for the frame-0/frame-1 domain, which supersedes the ownership classification of the first inventory. The ai-runtime composition stopped before them at RestoreAll/InputGame.
+
+**Capture first** (`58a0440`): `ferramentas/capturar_zonas_animacao_quadro1.py` writes `evidencias/fundacoes-quadro/captura-zonas-animacao-quadro1.json` (SHA-256 `277496ff…1adc`). It runs on the shared runner `percurso_quadro1.py`, which is Missions' committed path plus `Isolamento`, with an optional native basic-block recorder added after start-up and followed by a translation-cache flush.
+- **Calls:** 61 isolated calls at the exact frame inputs, each with its executed native blocks. The path reproduction passed.
+- **Not reached:** MarcheGetPos/MarcheGetTaille and NextAnimVegetFullMap (network only).
+
+| Call | Frame 0 (`load_tail`) | Frame 1 |
+|---|---|---|
+| SetClipping | 1 (CalculGame+0xa43; EBX=ECX=0xffff because the viewport is 0×0) | — |
+| InitGameZone(1, 0) | 2: MenuInit+0x1ce (stores 76 bytes), CalculGame+0xa76 (stores nothing new). Nested: MouseSetZone ×17 each, MiniMapGetPos/Taille, ChercheContacteur ×3, MessageBoxExiste, PlayerEstContacterPourAlliance ×3, MouseTestZone | — |
+| NextAnimTerrain / NextAnimVeget | 1 each, at the viewport origin | 1 each |
+
+Branches reached by InitGameZone in both calls:
+- mode 1 (jump table `0x471820` → `0x471aa4`);
+- the screen width u16 `0x49a018` is 0, so not 640 (`0x471d74`);
+- the minimap rectangle is used (`0x497285`=1);
+- the contact type is not 1/2/3 (ChercheContacteur → 0xff), giving the default zone 0x1a;
+- no message box;
+- no alliance.
+
+NextAnimTerrain and NextAnimVeget exit at their first row test, because the viewport height is 0.
+
+**API** (`chamadas_quadro_core.py`; `provedores_core` keywords follow ai-runtime's composition):
+
+| Function | Original | Domain | Registers out |
+|---|---|---|---|
+| `definir_recorte(m, eax, edx, ebx, ecx)` | SetClipping 0x40f519 | complete: u16 `0x49a020`=AX, `0x49a022`=BX, `0x49a01c`=DX, `0x49a01e`=CX in that order | none |
+| `definir_zona_mouse(m, eax, edx, ebx, ecx, y1)` | MouseSetZone 0x479c50 (RET 4) | complete: four zero-extended u16 dwords at `0x5099b4+16·AX`, then u16 max `0x50a9b8`. Index 256 aliases `0x50a9b4..` and is validated | EAX=AX<<4, EDX=y1 |
+| `testar_zona_mouse(m, eax, edx)` | MouseTestZone 0x479c9e | complete | none |
+| `posicao_minimapa`, `tamanho_minimapa`, `posicao_mercado`, `tamanho_mercado` | MiniMapGetPos/Taille, MarcheGetPos/Taille | complete: u16 [EAX], [EDX] | EAX low word = second value |
+| `procurar_contato(m, eax)` | ChercheContacteur 0x465818 | complete | EAX |
+| `caixa_mensagem_existe(m, eax)` | MessageBoxExiste 0x469c33 | complete | EAX=(EAX&0xffff0000)\|(AX'&0xff00)\|flag |
+| `contatado_para_alianca(m, eax, edx)` | PlayerEstContacterPourAlliance 0x46da1e | complete | EAX=flag |
+| `iniciar_zonas_jogo(m, eax, edx)` | InitGameZone 0x471830 | mode 1 complete (see below) | EAX=1, EDX=0x1f, EBX=(H<<5)&0xffff, ECX=screen width |
+| `animar_terreno(m, eax, edx)` | NextAnimTerrain 0x477700 | zero viewport rows | EAX=EDX=0 |
+| `animar_vegetacao(m, eax, edx)` | NextAnimVeget 0x4772ec | zero viewport rows | EDX=EDX<<8 |
+
+Mode 1 covers:
+- zones 1–9 from the screen size;
+- the minimap or default zone 0xa;
+- contact zone 0x1a: panel corner (screen 640 or panel offset s8 `0x508f90`), market rectangle, or default;
+- message-box zone 0x1b;
+- alliance zones 0x1c–0x1f;
+- zone 0xb;
+- MouseTestZone(1, 0x1f).
+
+Every coordinate is 16-bit. `0x508f90` and the viewport width are read only on the branches that use them.
+
+**Stops.** Each raises `DependenciaRamoCore` before any store:
+- InitGameZone modes 2/3/4/other: `0x4719be`/`0x47194f`/`0x47184d`/`0x471949`;
+- NextAnimTerrain with viewport rows: `0x477737`;
+- NextAnimVeget with viewport rows: `0x47731b`;
+- NextAnimVegetFullMap: `0x4774fa`.
+
+The per-cell animation loops, and their cursor and `LongRand` draws, are not translated. They need a non-empty viewport, which the oracle does not reach.
+
+**Validation.**
+- **CPU-free replay:** all 61 calls replay from the bytes the original read. MouseSetZone's pushed word is recovered from its EDX; the native run reads the stack. Every captured change is reproduced, and no known byte changes otherwise. Stores to bytes the original never read, with unchanged values, are compared by the native run.
+- **Fresh native differential** over both captures in one run (739 isolated calls), with perturbations at the exact entries:
+  - **InitGameZone:** screen 640×480; minimap off; contact types 1, 2 and 3 (market); contact self; message box with a negative panel offset; alliances; local player 2.
+  - **MouseSetZone:** index 256 and high bits.
+  - **Queries and SetClipping/NextAnim\*:** high bits and table values.
+
+  **2,034 comparisons, 0 mismatches, 0 dependency stops**, path reproduction passed. InitGameZone stored new zone records in 19 cases.
+
+### Task VM over live memory (`tarefas_ia.MaquinaTarefasViva`)
+
+`MaquinaTarefasViva(programa, memoria)` binds the unchanged `MaquinaTarefas` VM to the caller's own buffer of `0x512320..0x514908`, so iaSolver runs over live memory without a load/store bridge. `sobre_memoria` does the same through a flat memory's segments. The buffer holds:
+- the 100×0x60 records;
+- the free-list header `0x5148a0`;
+- the five context headers `0x5148b0+16k` (s32 head, u32 count; listInit's +8 stride and +12 base are left untouched);
+- the u32 active count `0x514904`.
+
+Every method is inherited and nothing is initialized. Count stores wrap to u32, as the bridge's store does.
+
+`testes/test_tarefas_ia_viva.py` checks equality with the bridge:
+- `atualizar(0..4)` at S0 and after each Missions frame phase (all contexts are empty there; return `0x1a1a000e`);
+- `postar(4, t)` followed by `atualizar(4)` for all 42 rule entries, which covers completion, sleep, subtasks and named world-operation stops with partial effects retained;
+- writes landing in the caller's buffer.

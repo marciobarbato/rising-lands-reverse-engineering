@@ -33,10 +33,9 @@ def captura():
 
 
 def bonus_economia():
-    """Economy's BonusGetValEngin translation, loaded through the integration loader."""
-    from integracao.providers import ECONOMY, _load_providers
-    return _load_providers((('economia', ECONOMY / 'economia.py'),
-                            ('bonus_unidades', ECONOMY / 'bonus_unidades.py'))).BonusUnidades
+    """Economy's BonusGetValEngin translation, through the public integration loader."""
+    from integracao.providers import load_economy_bonus
+    return load_economy_bonus().BonusUnidades
 
 
 class MemoriaEsparsa:

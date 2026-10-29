@@ -193,11 +193,11 @@
   }
  },
  "perturbation_limit_per_phase": 4,
- "seconds": 52.418,
+ "seconds": 52.918,
  "source_sha256": {
   "ferramentas/chamadas_quadro_core.py": "c0de0eb1e809ef839c0b831253cf83f883d92e409aa6c180a6162d4269bc8760",
   "ferramentas/memoria_quadro_core.py": "3bed22e2f2ee97f60fa295194789717a62ec01731c81bc56779ac27cfb2fc956",
-  "ferramentas/validar_chamadas_quadro_core.py": "1827e4fdfc3ece6c2389faf1257c61fe0e37fa25347cc8d732d2dd5fa4cf6227"
+  "ferramentas/validar_chamadas_quadro_core.py": "e4a2f75491278e534374b1992b2bb81a58f6016ca23e9ffbf5ea38101c3b08ed"
  },
  "unit_pool_base": "0x4140d000"
 }

@@ -133,9 +133,8 @@ def executar_python(nome, antes, entrada, classe_bonus):
 
 
 def diferencial(limite=LIMITE_POR_FASE):
-    from integracao.providers import ECONOMY, _load_providers
-    classe_bonus = _load_providers((('economia', ECONOMY / 'economia.py'),
-                                    ('bonus_unidades', ECONOMY / 'bonus_unidades.py'))).BonusUnidades
+    from integracao.providers import load_economy_bonus
+    classe_bonus = load_economy_bonus().BonusUnidades
     registro = dict(comparisons=0, by_routine={}, mismatches=[], dependencies=[], al_by_routine={})
     caixa = {}
 

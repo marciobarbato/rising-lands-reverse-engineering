@@ -387,3 +387,41 @@ The viewport size stays 0×0, so NextAnim* visit no cell. The per-frame cursor s
 - **Graphics:** in frame 1 the cursor `0x4e1d18` moves only through Core's CD draw. AffGame's own cursor draws remain the open frame-oracle input.
 
 **NOT RUN:** CalculFatigue's threshold branch and Chemin modes 0/1/3 natively in Python; AffGame; locked integration and exact-main reproduction, which the coordinator performs.
+
+
+### M2.1 round 3: SetClipping, InitGameZone, NextAnim* and the live task VM on `feat/re-core`
+
+The branch merged `origin/main` `738cc17`. Details are in [FRAME_FOUNDATIONS](FRAME_FOUNDATIONS.md#frame-0frame-1-round-3-clipping-mouse-zones-nextanim-and-the-live-task-memory).
+
+**Capture before translation** (`58a0440`): 61 isolated native calls at the exact frame inputs, each with its executed native blocks, and the path reproduction passed. Reached: SetClipping, InitGameZone(1, 0) from MenuInit and from CalculGame with its nested queries and zone setters, and NextAnimTerrain/NextAnimVeget in both frames. Not reached: MarcheGetPos/Taille and NextAnimVegetFullMap.
+
+**API** (`7f2005e`), in `chamadas_quadro_core.py` and through `provedores_core`. The provider calls are:
+- `SetClipping(eax, edx, ebx, ecx)`;
+- `InitGameZone(eax, edx)`;
+- `NextAnimTerrain(x, y)` / `NextAnimVeget(x, y)`;
+- `NextAnimVegetFullMap()`.
+
+All of these are void and return None.
+
+**Inputs and order.** Inputs are register values plus live memory. MouseSetZone's pushed word is an argument. Mutation order equals the original:
+- SetClipping stores AX, BX, DX, CX.
+- InitGameZone stores zones 1–9, 0xa, 0x1a, 0x1b, 0x1c–0x1f and 0xb in that order. Each zone stores four dwords and then the maximum index.
+- MouseTestZone runs last.
+
+There are no callbacks.
+
+**Validation.** The CPU-free replay of all 61 calls passes. The fresh native differential over both captures (739 calls) made **2,034 comparisons with 0 mismatches**.
+
+**Stops.**
+- InitGameZone modes 2/3/4/other: `0x4719be`/`0x47194f`/`0x47184d`/`0x471949`;
+- NextAnimTerrain/NextAnimVeget with viewport rows: `0x477737`/`0x47731b`;
+- NextAnimVegetFullMap: `0x4774fa`.
+
+**Task VM** (`4c486ba`). `tarefas_ia.MaquinaTarefasViva(programa, memoria)` and `.sobre_memoria(programa, flat_memory)` run the unchanged VM in place over `0x512320..0x514908`. This covers the records, the free list, the context headers (s32 head, u32 count) and the active count `0x514904`. ai-runtime can replace `PonteTarefas` with it. It equals the bridge at every frame state and for all 42 posted task types, and the writes land in the caller's buffer.
+
+**Contracts.**
+- **Coordinator:** Core now uses `integracao.providers.load_economy_bonus()`.
+- **Economy:** the live-table BonusUnidades constructor is not on main yet. Core still builds a fresh instance from the live bytes for each query, and will switch when it lands.
+- **ai-runtime:** bind the new providers at CALLs `0x42d2a6`, `0x42d2d9`, `0x42d441` and `0x42d467`, and replace the task bridge. MenuInit's own InitGameZone call (MenuInit+0x1ce) can use the same provider.
+
+**NOT RUN:** the NextAnim* cell loops (they need a non-empty viewport); RestoreAll and MenuInit (unassigned); locked integration.
