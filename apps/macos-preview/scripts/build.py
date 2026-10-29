@@ -2,7 +2,7 @@
 from pathlib import Path
 import argparse,datetime,hashlib,json,os,plistlib,shutil,struct,subprocess,sys
 ROOT=Path(__file__).resolve().parents[1]
-RUNTIME=Path('/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python')
+RUNTIME=Path.home()/'.cache/codex-runtimes/codex-primary-runtime/dependencies/python'
 
 
 def env():

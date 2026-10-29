@@ -126,6 +126,25 @@ class MenuInitTest(unittest.TestCase):
         self.assertEqual(e.deletebank(m, 0).liberacoes, ())
 
 
+class CamposTest(unittest.TestCase):
+    def test_guards_are_in_verificacoes_and_never_in_liberacoes(self):
+        for fn in (e.restaurar_tudo, e.desenhar_jogo):
+            r = fn(estado())
+            self.assertEqual(len(r.verificacoes), 6)
+            self.assertEqual([n for n, _ in r.verificacoes][:2], ['[0x4dfb44]', '[0x508724]'])
+            self.assertEqual(r.liberacoes, ())
+        efeitos = [e.inicializar_dimensoes(None), e.ddunlocksurface(Plana({0x4e17a8: 1})), e.ddlocksurface(Plana(), 1),
+                   e.ddflippage(Plana()), e.filledbox(None), e.deletebank(Plana(), 0)]
+        for r in efeitos:
+            self.assertEqual((r.liberacoes, r.verificacoes), ((), ()))
+
+    def test_deletebank_frees_are_in_liberacoes(self):
+        m = Plana({0x1004: 0x2000, 0x2000: 0x3000, 0x3008: 0x4000}, {0x1000: 1})
+        r = e.deletebank(m, 0x1000)
+        self.assertEqual(r.liberacoes, (0x4000, 0x3000, 0x2000, 0x1000))
+        self.assertEqual(r.verificacoes, ())
+
+
 class DominioIsoladoTest(unittest.TestCase):
     def test_every_proved_origin_has_a_native_clean_case(self):
         vistos = set()

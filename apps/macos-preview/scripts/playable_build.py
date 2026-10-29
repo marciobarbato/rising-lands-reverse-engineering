@@ -38,7 +38,7 @@ def main():
     runtime = legacy.prepare_runtime()
     source_link = base / 'source'
     if not source_link.exists():
-        source_link.symlink_to(args.source, target_is_directory=True)
+        source_link.symlink_to(os.path.relpath(Path(args.source).resolve(), source_link.parent.resolve()), target_is_directory=True)
     shutil.copy2(args.manifest, base / 'snapshot.json')
     assets = load(app_source / 'scripts/preparar_assets.py', 'asset_builder')
     assets.ROOT = base
