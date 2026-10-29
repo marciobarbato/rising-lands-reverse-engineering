@@ -18,8 +18,9 @@ segmented into between_frames(k) and frame(k):
    joins window 1) and cumulatively over all phases; only the cumulative mask
    may be used to exclude bytes from a comparison of the whole run.
 
-Writes a report (default under .local/: captures beyond frame 1 are not
-evidence until the coordinator asks for them).
+Writes a report.  A report under .local/ is a trial (``evidence: false``);
+any other path is committed evidence (M2.2: ``--quadros 128``).  The process
+ends with ``encerramento_captura.encerrar_captura`` (fsync, ``os._exit``).
 
     python3 -B pesquisas-paralelas/missoes/politica_comparacao_quadros.py --quadros 3 \
         --relatorio .local/m2-politica-3-quadros.json
@@ -199,7 +200,8 @@ def main():
                                    readers=sorted({f'{c}:{r}' for (t, c, f, r) in acs if t == 'read'}))
     sup_logica = {f'{t}:{c}:{f}:{r}': n for (t, c, f, r), n in superficie.items() if c == 'logic'}
     rel = dict(schema='rising-lands/monde01-n-frame-comparison-policy/1', source_revision=revisao,
-               translation_executed=False, evidence=False, frames=args.quadros, phases=fases,
+               translation_executed=False, evidence='.local' not in saida.relative_to(ambiente_missoes.ROOT).parts,
+               frames=args.quadros, phases=fases,
                display_roots=list(RAIZES_EXIBICAO),
                phase_states_reproduced={f: resumos1[f] == resumos2.get(f) for f in fases},
                phase_state_summaries=resumos1, changed_bytes=len(alvos),
@@ -222,7 +224,8 @@ def main():
                      | dict(cumulative=rel['cumulative']['totals'],
                             windows={w: v['totals'] for w, v in rel['windows'].items()},
                             without_writer=sem_escritor[:10], surface_logic=sup_logica), indent=1))
-    return 0 if rel['passed'] else 1
+    from encerramento_captura import encerrar_captura
+    encerrar_captura(0 if rel['passed'] else 1, saida)
 
 
 if __name__ == '__main__':
