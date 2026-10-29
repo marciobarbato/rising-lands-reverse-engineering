@@ -1,0 +1,15 @@
+[lease] graphics waiting
+[lease] graphics granted slots [0]
+load_tail 2 (0, 0, 0, 0, 0, 0, 0, 0)
+between_frames 2 (1, 0, 0, 16, 0, 0, 0, 0)
+between_frames3 5 (9001, 1, 18, 16, 0, 0, 1, 1)
+between_frames25 24 (9023, 1, 18, 16, 0, 0, 1, 1)
+between_frames50 45 (9048, 1, 18, 16, 0, 0, 1, 1)
+between_frames75 66 (9073, 1, 18, 16, 0, 0, 1, 1)
+between_frames100 87 (9098, 1, 18, 16, 0, 0, 1, 1)
+between_frames125 108 (9123, 1, 18, 16, 0, 0, 1, 1)
+between_frames150 129 (9148, 1, 18, 16, 0, 0, 1, 1)
+between_frames175 150 (9173, 1, 18, 16, 0, 0, 1, 1)
+between_frames200 171 (9198, 1, 18, 16, 0, 0, 1, 1)
+between_frames225 193 (9223, 1, 18, 16, 0, 0, 1, 1)
+between_frames250 214 (9248, 1, 18, 16, 0, 0, 1, 1)
