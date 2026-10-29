@@ -172,3 +172,10 @@ These two captures ran on the MacBook under the new lease (3 work-hour slots; na
 **Ambush re-post:** `evidencias/captura-avance-monstre-emboscada-ia.json` (AvanceMonstre at 11100 and 11101, 208 s). `test_incursao_ia.AmbushRepost` finds both equal.
 - At 11101 the translation takes the ambush branch: the Random % 100 threshold, the cyclic ambush cursor walk, `Chemin_Accessible`, then `StockeAction(0x2e, 0x12, 0x320e)` with Core's `postar_tarefa`.
 - It writes only bytes the original writes, and reproduces every changed byte.
+
+## Readiness probe after Core's live movement (main `34ebf44`, round 5)
+
+[sondar_incursao_ia.py](sondar_incursao_ia.py) is Python only, writes to `.local/`, and is not evidence. It starts from the `-v2` state after frame 1 with the counter forced to 8999, so the next frame runs at 9000. It runs the composition through the raid frames and reports the first stop.
+- **Wiring:** with Core's exported providers in place (GetFreeCell, EnginEnArret, SetDeplaceEngin, DeplaceEngin, EnginEstVivant), the 128-frame probe and every owned test are unchanged.
+- **First stop:** frame 9000, the first EnginEstVivant call from V_DeplaceGroupe. Core's `provedores_core` builds `mundo_vivo` over memory, and its `vincular_grades` needs byte views of the tile and region grids (`GradeU16`). The chain's map binds those grids as the Core world's u16 lists (Missions' `ligacao_provedores_m1.py:177`), so they have no byte view.
+- **Owner:** Core (with Missions for the map binding). Sent to Core with two options: reuse the chain's own world, or bind the grids as bytes with `vincular_grades`, which means rerunning the M1/M2 proofs.
