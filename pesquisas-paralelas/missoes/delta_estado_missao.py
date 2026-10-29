@@ -33,6 +33,53 @@ class ReplayDivergente(RuntimeError):
     """The capture's deltas do not rebuild its own summaries or checkpoint states."""
 
 
+class EventosCompactos:
+    """The binding-event log with logical indices kept and written events dropped (long runs).
+
+    ``len``, ``append``, integer and slice indexing use the original logical
+    indices; ``descartar_ate(n)`` drops events below index n.  Reading a
+    dropped event by an explicit index raises, so no record can silently lose
+    events; a tail slice ``[-n:]`` returns the retained part."""
+    def __init__(self, eventos=()):
+        self.base, self.itens = 0, list(eventos)
+
+    def __len__(self):
+        return self.base + len(self.itens)
+
+    def append(self, evento):
+        self.itens.append(evento)
+
+    def __getitem__(self, i):
+        if isinstance(i, slice):
+            inicio, fim, passo = i.indices(len(self))
+            # An explicit start below the retained events is an error; a tail slice ([-n:]) is clamped.
+            explicito = i.start is not None and i.start >= 0
+            if passo != 1 or (explicito and inicio < self.base and inicio < fim):
+                raise IndexError(f'events below {self.base} were dropped')
+            return self.itens[max(inicio, self.base)-self.base:max(fim, self.base)-self.base]
+        if i < 0:
+            i += len(self)
+        if i < self.base:
+            raise IndexError(f'event {i} was dropped')
+        return self.itens[i-self.base]
+
+    def __iter__(self):
+        raise TypeError('iterate a slice of the retained events')
+
+    def descartar_ate(self, n):
+        if n > self.base:
+            del self.itens[:n-self.base]
+            self.base = n
+
+
+def compactar_eventos(b):
+    """Swap the bench's binding-event log for an EventosCompactos holding the same events."""
+    registro = b.vinculos_declarados
+    if not isinstance(registro.eventos, EventosCompactos):
+        registro.eventos = EventosCompactos(registro.eventos)
+    return registro.eventos
+
+
 def resumo(blocos):
     """``oraculo_carga_missao.resumo_imagem`` without ``native_stack``."""
     h = hashlib.sha256()

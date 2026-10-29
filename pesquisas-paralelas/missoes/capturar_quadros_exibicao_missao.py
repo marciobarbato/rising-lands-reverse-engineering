@@ -199,6 +199,7 @@ def main():
                                      native_stack_sha256=hashlib.sha256(bytes(b.cpu.mem_read(PILHA, 0x10000))).hexdigest())
         if not relatorio['m1_path']['final_equal_capture_v2']:
             raise RuntimeError('MissionLoad final state differs from the committed -v2 capture')
+        eventos = delta.compactar_eventos(b)
         anterior, fases, m21 = s0, [], {}
         relatorio['phases'] = fases
         ddcalls = len(b.chamadas_exibicao())
@@ -220,6 +221,7 @@ def main():
                         for k in m21[nome] if '.' not in k}
                     raise RuntimeError(f'{nome} differs from the committed -v2 frame-1 capture in {m21[nome]}')
             fases.append(registro)
+            eventos.descartar_ate(depois['bindings'])
             anterior, antes, t = imagem, depois, time.monotonic()
         relatorio['m21_reference'] = dict(
             phases={k: 'equal' for k in m21},

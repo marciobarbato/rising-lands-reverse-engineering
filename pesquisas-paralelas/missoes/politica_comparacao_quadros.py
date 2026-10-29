@@ -78,8 +78,13 @@ def passo1(n):
     return fases, alterados, resumos, liberados
 
 
-def ganchos(b, alvos):
-    """Pass-2 hooks on ``b``: (accesses, surface accesses, collect(phase) for the phase's binding writes)."""
+def ganchos(b, alvos, chave_fase=None):
+    """Pass-2 hooks on ``b``: (accesses, surface accesses, collect(phase) for the phase's binding writes).
+
+    Access keys are (type, context, phase, routine).  ``chave_fase`` maps the phase name to the key's
+    phase field: long runs aggregate phases into windows so the tables stay bounded.  The context of
+    every access is decided exactly as without it."""
+    chave_fase = chave_fase or (lambda fase: fase)
     raizes = {b.sym[r] for r in RAIZES_EXIBICAO if r in b.sym}
     pilha, acessos, superficie = [], {}, {}
 
@@ -104,7 +109,7 @@ def ganchos(b, alvos):
             for k in range(tamanho):
                 a = endereco+k
                 if a in alvos:
-                    chave = chave or (tipo, contexto(cpu), b.fase, b.nome(cpu.reg_read(x86.UC_X86_REG_EIP)))
+                    chave = chave or (tipo, contexto(cpu), chave_fase(b.fase), b.nome(cpu.reg_read(x86.UC_X86_REG_EIP)))
                     d = acessos.setdefault(a, {})
                     d[chave] = d.get(chave, 0)+1
         return gancho
@@ -112,7 +117,7 @@ def ganchos(b, alvos):
     def gancho_superficie(tipo):
         def gancho(cpu, _a, endereco, tamanho, valor, _):
             ctx = contexto(cpu)
-            chave = (tipo, ctx, b.fase, b.nome(cpu.reg_read(x86.UC_X86_REG_EIP)) if ctx == 'logic' else '*')
+            chave = (tipo, ctx, chave_fase(b.fase), b.nome(cpu.reg_read(x86.UC_X86_REG_EIP)) if ctx == 'logic' else '*')
             superficie[chave] = superficie.get(chave, 0)+1
         return gancho
 
@@ -134,10 +139,10 @@ def ganchos(b, alvos):
                 for k in range(w['size']):
                     if a0+k in alvos:
                         d = acessos.setdefault(a0+k, {})
-                        chave = ('write', ctx, fase, 'binding '+ev['name'])
+                        chave = ('write', ctx, chave_fase(fase), 'binding '+ev['name'])
                         d[chave] = d.get(chave, 0)+1
                 if BASE_SUPERFICIES <= a0 < BASE_SUPERFICIES+TAMANHO_SUPERFICIES:
-                    chave = ('write', ctx, fase, 'binding '+ev['name'] if ctx == 'logic' else '*')
+                    chave = ('write', ctx, chave_fase(fase), 'binding '+ev['name'] if ctx == 'logic' else '*')
                     superficie[chave] = superficie.get(chave, 0)+1
         visto[0] = len(b.vinculos_declarados.eventos)
     return acessos, superficie, coletar

@@ -61,5 +61,19 @@ class TestDelta(unittest.TestCase):
             d.verificar_replay(captura, s0)
 
 
+class TestEventosCompactos(unittest.TestCase):
+    def test_logical_indices_survive_dropping_written_events(self):
+        e = d.EventosCompactos([0, 1, 2])
+        e.append(3)
+        e.descartar_ate(2)
+        self.assertEqual((len(e), e[2:4], e[-1], e[-5:], e[4:4]), (4, [2, 3], 3, [2, 3], []))
+        with self.assertRaises(IndexError):
+            e[1:3]
+        with self.assertRaises(IndexError):
+            e[1]
+        with self.assertRaises(TypeError):
+            list(e)
+
+
 if __name__ == '__main__':
     unittest.main()

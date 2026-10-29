@@ -43,10 +43,20 @@ COM_CPU = {'arena': ('cpu',), 'directdraw': ('_cpu',), 'vinculos_declarados': ('
 FORMATO = 'rising-lands/missions-segment-snapshot/1'
 
 
-def bancada_nova():
+def ticks_exibicao(n):
+    """The declared display clock extended by its own rule (0x123456 + 40*k, k = 1..n), as Core's long runs do."""
+    ticks = tuple(0x123456 + 40*k for k in range(1, n+1))
+    if n < len(cen.TICKS_EXIBICAO) or ticks[:len(cen.TICKS_EXIBICAO)] != cen.TICKS_EXIBICAO:
+        raise ValueError('The display clock may only be extended by its own rule')
+    return ticks
+
+
+def bancada_nova(ticks=None):
+    """The -v2 display bench (constructor only); ``ticks`` extends the declared display clock to k = 1..ticks."""
     cap = carregar_json(cen.caminho('exibicao', 'captura_m1'))
     ni = cap['named_inputs']
-    b, _, _ = cen.bancada('exibicao', ni['allocation_fill'], ni['clock_ms'][0])
+    kw = dict(ticks=ticks_exibicao(ticks)) if ticks else {}
+    b, _, _ = cen.bancada('exibicao', ni['allocation_fill'], ni['clock_ms'][0], entradas_kw=kw)
     return b
 
 
@@ -136,19 +146,29 @@ def _linha(registro):
     return json.dumps(registro, sort_keys=True)
 
 
-def _correr(b, fases, saida, checkpoints, de, ate, cada=None, pasta=None):
-    """Run ``fases`` (an iterator of (phase, regs)), writing one record line per phase."""
+def _correr(b, fases, saida, checkpoints, de, ate, cada=None, pasta=None, leve=False):
+    """Run ``fases`` (an iterator of (phase, regs)), writing one record line per phase.
+
+    The binding-event log is compacted: events are dropped once their phase is written.  ``leve``
+    (pass A of a long run) writes only each phase's exit counters and builds no state images."""
     import capturar_quadros_exibicao_missao as cq
-    anterior, antes = b.imagem(), b._estado_fase()
+    import delta_estado_missao as delta
+    eventos = delta.compactar_eventos(b)
+    anterior, antes = (None if leve else b.imagem()), b._estado_fase()
     ddcalls = len(b.chamadas_exibicao())
     instantaneos = {}
     with open(saida, 'x') as f:
         for nome, regs in fases:
-            depois, imagem = b._estado_fase(), b.imagem()
-            registro = cq.registrar_fase(b, nome, regs, antes, depois, anterior, imagem, ddcalls, checkpoints, 0)
-            f.write(_linha(registro)+'\n')
-            ddcalls = len(b.chamadas_exibicao())
-            anterior, antes = imagem, depois
+            depois = b._estado_fase()
+            if not leve:
+                imagem = b.imagem()
+                registro = cq.registrar_fase(b, nome, regs, antes, depois, anterior, imagem, ddcalls, checkpoints, 0)
+                f.write(_linha(registro)+'\n')
+                anterior = imagem
+            else:
+                f.write(json.dumps(dict(phase=nome, exit=depois), sort_keys=True)+'\n')
+            eventos.descartar_ate(depois['bindings'])
+            ddcalls, antes = len(b.chamadas_exibicao()), depois
             if cada and nome.startswith('frame') and int(nome[5:]) % cada == 0 and int(nome[5:]) < ate:
                 k = int(nome[5:])
                 instantaneos[k] = salvar(b, pasta/f'instantaneo-{k:05d}.pickle', k)
@@ -161,18 +181,21 @@ def passo_a(a):
     import capturar_quadros_exibicao_missao as cq
     pasta = ROOT/a.dir
     pasta.mkdir(parents=True, exist_ok=False)
-    checkpoints = tuple(k for k in cq.CHECKPOINTS if k <= a.quadros)
+    checkpoints = () if a.sem_checkpoints else tuple(k for k in cq.CHECKPOINTS if k <= a.quadros)
     t0 = time.monotonic()
-    b = bancada_nova()
+    b = bancada_nova(a.ticks)
     b.iniciar_relogio()
     b.executar_inicio()
     b.executar_mission_load(60)
+    import delta_estado_missao as delta
+    delta.compactar_eventos(b).descartar_ate(len(b.vinculos_declarados.eventos))
     zero = salvar(b, pasta/'instantaneo-00000.pickle', 0)
     saida = pasta/f'fases-00000-{a.quadros:05d}.jsonl'
     inst = _correr(b, b.executar_quadros(a.quadros, a.segundos_quadro), saida, checkpoints, 0, a.quadros,
-                   a.cada, pasta)
-    inst = dict({0: zero}, **inst)
-    manifesto = dict(frames=a.quadros, every=a.cada, checkpoints=list(checkpoints), snapshots=inst,
+                   a.cada, pasta, leve=a.leve)
+    inst = {0: zero, **inst}
+    manifesto = dict(frames=a.quadros, every=a.cada, light=a.leve, ticks=a.ticks, checkpoints=list(checkpoints),
+                     snapshots=inst,
                      records=saida.name, seconds=round(time.monotonic()-t0, 1))
     caminho = pasta/'passo-a.json'
     caminho.write_text(json.dumps(manifesto, indent=1)+'\n')
@@ -194,15 +217,23 @@ def segmento(a):
     pasta = ROOT/a.dir
     manifesto = json.loads((pasta/'passo-a.json').read_text())
     t0 = time.monotonic()
-    b = bancada_nova()
+    b = bancada_nova(manifesto.get('ticks'))
     k = restaurar(b, pasta/f'instantaneo-{a.de:05d}.pickle')
     if k != a.de:
         raise RuntimeError('Snapshot frame mismatch')
     saida = pasta/f'fases-{a.de:05d}-{a.ate:05d}.jsonl'
     _correr(b, _fases_segmento(b, a.de, a.ate, a.segundos_quadro), saida, tuple(manifesto['checkpoints']),
             a.de, a.ate)
+    # Run-level records at the segment end (cumulative: the bench state was restored from pass A).
+    final = pasta/f'final-{a.de:05d}-{a.ate:05d}.json'
+    with open(final, 'x') as f:
+        json.dump(dict(frame=a.ate, allocations=b.arena.manifesto(), entry_trace=b.rastro_json(),
+                       declared_windows_answers=[list(x) for x in b.windows.consumidos],
+                       import_resolutions=b.importacoes_declaradas,
+                       code_integrity=dict(exe_code_sha256=b.sha256_codigo_exe, before=b.sha256_codigo_inicial,
+                                           after=b.sha256_codigo())), f, sort_keys=True)
     print(json.dumps(dict(segment=[a.de, a.ate], records=saida.name, seconds=round(time.monotonic()-t0, 1))))
-    return [saida]
+    return [saida, final]
 
 
 def comparar(a):
@@ -212,18 +243,21 @@ def comparar(a):
     if a.captura:
         captura, _ = delta.carregar(ROOT/a.captura)
         referencia = {f['phase']: _linha(f) for f in captura['phases']}
-    sequencial = {json.loads(l)['phase']: l.rstrip('\n')
-                  for l in (pasta/json.loads((pasta/'passo-a.json').read_text())['records']).open()}
-    resultado = dict(pass_a=dict(phases=len(sequencial), equal_capture=None if referencia is None else
-                                 sum(1 for n, l in sequencial.items() if referencia.get(n) == l)))
-    segmentos = sorted(p for p in pasta.glob('fases-*.jsonl') if p.name != json.loads((pasta/'passo-a.json').read_text())['records'])
+    manifesto = json.loads((pasta/'passo-a.json').read_text())
+    leve = manifesto.get('light', False)
+    if leve and referencia is None:
+        raise SystemExit('A light pass A has no records: compare its segments with a capture')
+    sequencial = {json.loads(l)['phase']: l.rstrip('\n') for l in (pasta/manifesto['records']).open()}
+    resultado = dict(pass_a=dict(phases=len(sequencial), light=leve, equal_capture=None if referencia is None or leve
+                                 else sum(1 for n, l in sequencial.items() if referencia.get(n) == l)))
+    segmentos = sorted(p for p in pasta.glob('fases-*.jsonl') if p.name != manifesto['records'])
     por_segmento, diferentes = [], []
     for p in segmentos:
         linhas = [l.rstrip('\n') for l in p.open()]
         iguais = 0
         for l in linhas:
             nome = json.loads(l)['phase']
-            if sequencial.get(nome) == l and (referencia is None or referencia.get(nome) == l):
+            if (leve or sequencial.get(nome) == l) and (referencia is None or referencia.get(nome) == l):
                 iguais += 1
             else:
                 diferentes.append(nome)
@@ -277,14 +311,20 @@ def preparar_politica(a):
 def politica_segmento(a):
     import politica_comparacao_quadros as pol
     pasta = ROOT/a.dir
-    passo1 = pickle.loads((pasta/'politica-passo1.pickle').read_bytes())
+    if a.agregar:
+        alvos = set(pickle.loads((pasta/'politica-passo1-longo.pickle').read_bytes())['enderecos'])
+    else:
+        alvos = pickle.loads((pasta/'politica-passo1.pickle').read_bytes())['alvos']
     t0 = time.monotonic()
-    b = bancada_nova()
+    b = bancada_nova(json.loads((pasta/'passo-a.json').read_text()).get('ticks'))
     restaurar(b, pasta/f'instantaneo-{a.de:05d}.pickle')
-    acessos, superficie, coletar = pol.ganchos(b, passo1['alvos'])
+    import delta_estado_missao as delta
+    eventos = delta.compactar_eventos(b)
+    acessos, superficie, coletar = pol.ganchos(b, alvos, janela_longa if a.agregar else None)
     resumos = {}
     for fase, _ in _fases_segmento(b, a.de, a.ate, a.segundos_quadro):
         coletar(fase)
+        eventos.descartar_ate(len(eventos))
         resumos[fase] = b.resumo_imagem(b.imagem())
     saida = pasta/f'politica-{a.de:05d}-{a.ate:05d}.pickle'
     with open(saida, 'xb') as f:
@@ -323,6 +363,137 @@ def comparar_politica(a):
     return resultado
 
 
+# ---------------------------------------------------------------- long runs (M2.3): bounded pass 1 / pass 2 tables
+JANELA_QUADROS = 1000
+
+
+def janela_longa(fase):
+    """Aggregation window of a phase in long runs: load_tail and frames 1..1000 are 'w00000', then every 1000 frames."""
+    if fase == 'load_tail':
+        return 'w00000'
+    k = int(fase[len('between_frames'):] or 1) if fase.startswith('between_frames') else int(fase[len('frame'):])
+    return f'w{(k-1)//JANELA_QUADROS*JANELA_QUADROS:05d}'
+
+
+def arquivos_registros(pasta):
+    """Segment record files in frame order (pass A's own file excluded)."""
+    proprio = json.loads((pasta/'passo-a.json').read_text())['records']
+    return sorted((p for p in pasta.glob('fases-*.jsonl') if p.name != proprio),
+                  key=lambda p: int(p.name.split('-')[1]))
+
+
+def passo1_registros(a):
+    """Exact changed bytes from the segment records, replayed from s0; per address only first/last/count."""
+    import delta_estado_missao as delta
+    pasta = ROOT/a.dir
+    estado = delta.s0_exibicao()
+    fases, por_fase, liberados, resumos, enderecos = [], [], {}, [], {}
+    for arquivo in arquivos_registros(pasta):
+        for linha in arquivo.open():
+            f = json.loads(linha)
+            nome, i = f['phase'], len(fases)
+            novo = delta.aplicar(estado, f['state_delta'], nome)
+            if delta.resumo(novo) != f['state_after']['summary']:
+                raise RuntimeError(f'{nome}: replayed records do not match their own summary')
+            n = 0
+            for bloco, (base, dados) in novo.items():
+                velho = estado.get(bloco)
+                if velho is not None and velho[0] == base and len(velho[1]) == len(dados):
+                    if velho[1] == dados:
+                        continue
+                    v = velho[1]
+                    offs = [o for x, z in delta.faixas_diferentes(v, dados) for o in range(x, z) if v[o] != dados[o]]
+                else:
+                    offs = range(len(dados))
+                for o in offs:
+                    e = enderecos.get(base+o)
+                    if e is None:
+                        enderecos[base+o] = [bloco, base, i, i, 1]
+                    else:
+                        e[3], e[4] = i, e[4]+1
+                n += len(offs)
+            fases.append(nome)
+            por_fase.append(n)
+            resumos.append(f['state_after']['summary'])
+            if set(estado)-set(novo):
+                liberados[nome] = sorted(set(estado)-set(novo))
+            estado = novo
+    with open(pasta/'politica-passo1-longo.pickle', 'xb') as f:
+        pickle.dump(dict(fases=fases, por_fase=por_fase, liberados=liberados, resumos=resumos,
+                         enderecos=enderecos), f, protocol=4)
+    print(json.dumps(dict(phases=len(fases), changed_bytes=len(enderecos))))
+
+
+def relatorio_longo(a):
+    """Merge aggregated pass-2 segments into the long-run policy report (cumulative mask is the comparison mask)."""
+    import politica_comparacao_quadros as pol
+    pasta = ROOT/a.dir
+    p1 = pickle.loads((pasta/'politica-passo1-longo.pickle').read_bytes())
+    acessos, superficie, resumos2, partes = {}, {}, {}, []
+    for p in sorted(pasta.glob('politica-0*.pickle')):
+        parte = pickle.loads(p.read_bytes())
+        partes.append(p.name)
+        for endereco, chaves in parte['acessos'].items():
+            d = acessos.setdefault(endereco, {})
+            for k, n in chaves.items():
+                d[k] = d.get(k, 0)+n
+        for k, n in parte['superficie'].items():
+            superficie[k] = superficie.get(k, 0)+n
+        resumos2.update(parte['resumos'])
+    fases, enderecos = p1['fases'], p1['enderecos']
+    janelas = sorted({janela_longa(f) for f in fases})
+    cumulativo, por_janela, sem_escritor = {}, {w: {} for w in janelas}, []
+    for a_ in sorted(enderecos):
+        acs = acessos.get(a_, {})
+        classe = pol.classificar(acs)
+        if classe in (None, 'read_only_in_window'):
+            sem_escritor.append(hex(a_))
+        cumulativo[a_] = classe
+        for w in janelas:
+            c = pol.classificar(acs, lambda f, w=w: f == w)
+            if c is not None:
+                por_janela[w][a_] = c
+    contagem = lambda classes: {c: sum(1 for v in classes.values() if v == c)
+                                for c in ('display_only', 'game_logic', 'read_only_in_window')}
+    detalhe = {}
+    for a_ in sorted(enderecos):
+        if cumulativo[a_] == 'game_logic':
+            acs = acessos.get(a_, {})
+            bloco, base, primeira, ultima, vezes = enderecos[a_]
+            detalhe[hex(a_)] = dict(block=bloco, first_changed=fases[primeira], last_changed=fases[ultima],
+                                    phases_changed=vezes,
+                                    writers=sorted({f'{c}:{r}' for (t, c, f, r) in acs if t == 'write'}),
+                                    readers=sorted({f'{c}:{r}' for (t, c, f, r) in acs if t == 'read'}))
+    sup_logica = {f'{t}:{c}:{f}:{r}': n for (t, c, f, r), n in superficie.items() if c == 'logic'}
+    divergentes = [f for f, r in zip(fases, p1['resumos']) if resumos2.get(f) != r]
+    rel = dict(schema='rising-lands/monde01-long-run-comparison-policy/1', translation_executed=False,
+               frames=sum(1 for f in fases if f.startswith('frame')), phases=len(fases), parts=partes,
+               aggregation=dict(window_frames=JANELA_QUADROS, key='(type, context, window, routine)',
+                                note='accesses are classified exactly as in politica_comparacao_quadros; '
+                                     'only the per-phase key is aggregated into windows'),
+               display_roots=list(pol.RAIZES_EXIBICAO),
+               phase_states_reproduced=dict(phases=len(fases), equal=len(fases)-len(divergentes),
+                                            first_differing=divergentes[:10]),
+               changed_bytes=len(enderecos), changed_bytes_by_phase=dict(zip(fases, p1['por_fase'])),
+               freed_blocks=p1['liberados'],
+               cumulative=dict(totals=contagem(cumulativo), exclusion_mask=[[hex(x), hex(z)] for x, z in pol.faixas(
+                   [x for x, c in cumulativo.items() if c == 'display_only'])]),
+               windows={w: dict(totals=contagem(c)) for w, c in por_janela.items()},
+               bytes_without_observed_writer=sem_escritor, game_logic_bytes=detalhe,
+               surfaces=dict(accesses_by_context={c: sum(n for k, n in superficie.items() if k[1] == c)
+                                                  for c in ('display', 'backend', 'logic')},
+                             logic_context_accesses=sup_logica, excluded_with_proof=not sup_logica))
+    rel['passed'] = not divergentes and not sem_escritor and not sup_logica
+    saida = ROOT/a.relatorio
+    with open(saida, 'x') as f:
+        json.dump(rel, f, indent=1)
+        f.write('\n')
+    print(json.dumps({k: rel[k] for k in ('passed', 'frames', 'phases', 'changed_bytes', 'phase_states_reproduced')}
+                     | dict(cumulative=rel['cumulative']['totals'], without_writer=sem_escritor[:5],
+                            surface_logic=sup_logica), indent=1))
+    return rel
+
+
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest='modo', required=True)
@@ -330,6 +501,9 @@ def main():
     pa.add_argument('--quadros', type=int, required=True)
     pa.add_argument('--cada', type=int, required=True)
     pa.add_argument('--dir', required=True)
+    pa.add_argument('--leve', action='store_true', help='no phase records or images: snapshots only')
+    pa.add_argument('--ticks', type=int, default=None, help='extend the display clock to k = 1..TICKS (long runs)')
+    pa.add_argument('--sem-checkpoints', action='store_true', help='segment records carry no full states')
     pa.add_argument('--segundos-quadro', type=float, default=600.0)
     ps = sub.add_parser('segmento')
     ps.add_argument('--dir', required=True)
@@ -347,12 +521,22 @@ def main():
     pg.add_argument('--de', type=int, required=True)
     pg.add_argument('--ate', type=int, required=True)
     pg.add_argument('--segundos-quadro', type=float, default=600.0)
+    pg.add_argument('--agregar', action='store_true', help='long runs: phase keys aggregated into windows')
+    pl = sub.add_parser('passo1-registros')
+    pl.add_argument('--dir', required=True)
+    pr = sub.add_parser('relatorio-longo')
+    pr.add_argument('--dir', required=True)
+    pr.add_argument('--relatorio', required=True)
     pk = sub.add_parser('comparar-politica')
     pk.add_argument('--dir', required=True)
     pk.add_argument('--relatorio', required=True, help='the sequential politica_comparacao_quadros report')
     a = ap.parse_args()
     if a.modo == 'preparar-politica':
         return preparar_politica(a)
+    if a.modo == 'passo1-registros':
+        return passo1_registros(a)
+    if a.modo == 'relatorio-longo':
+        return 0 if relatorio_longo(a)['passed'] else 1
     if a.modo == 'comparar-politica':
         return 0 if comparar_politica(a)['result'] == 'equal' else 1
     if a.modo == 'politica':
