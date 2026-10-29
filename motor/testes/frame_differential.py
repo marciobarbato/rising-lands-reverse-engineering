@@ -57,9 +57,7 @@ PINS.update({
 })
 # Superseded pins still accepted while the coordinator integrates a reviewed
 # reference change in two steps (the repin lands before the research front).
-PREVIOUS_PINS = {
-    ROOT / 'pesquisas-paralelas/ia-runtime/comparar_quadros_ia.py': 'fd803036a33d6bab2859ae16adcd90023a4001feeb840bd7153aa0705c10ab60',
-}
+PREVIOUS_PINS = {}
 LONG_RAW_SHA = '1ad031b96300e5c632fd5b6b7857ae30792f78e86531e4f17d1bf7124c6dd930'
 BINDINGS = {1: ('USER32.ShowCursor', 1), 2: ('USER32.GetAsyncKeyState', 1),
             3: ('KERNEL32.GlobalHandle', 1), 4: ('KERNEL32.GlobalUnlock', 1),

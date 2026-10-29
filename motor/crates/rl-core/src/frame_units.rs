@@ -283,7 +283,25 @@ fn switch_state(m: &mut MemoriaJogo, unit: u16, r: u32) -> Result<u32> {
             economy(m, "EnginNextEtape:state7", &[u32::from(unit)])?;
             Ok(0x454ccd)
         }
-        0x4563da => Err(stop("EnginNextEtape state 2", target)),
+        0x4563da => {
+            if m.u16(r + 0x7e)? != m.u16(r + 8)? {
+                core(m, "DeplaceEngin", &[u32::from(unit)])?;
+                return Ok(0x454ccd);
+            }
+            if m.u8(r + 0x91)? != m.u8(r + 0x90)? {
+                return Err(stop("EnginNextEtape facing at arrival", 0x455a6f));
+            }
+            if core(m, "EnginEnArret", &[u32::from(unit)])? as u8 == 0 {
+                return Err(stop("EnginNextEtape arrival animation", 0x456408));
+            }
+            if ![0, 4].contains(&m.u8(r + 2)?) {
+                m.set_u8(r + 2, 7)?;
+                if unit == m.u16(0x496304)? {
+                    return Err(stop("EnginNextEtape path-search arrival", 0x4564c8));
+                }
+            }
+            Ok(0x454ccd)
+        }
         _ => Err(stop("EnginNextEtape state switch", target)),
     }
 }

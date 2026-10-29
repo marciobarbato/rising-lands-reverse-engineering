@@ -45,6 +45,20 @@ pub struct UnitState {
     pub observed_state: u8,
     pub observed_order: u8,
     pub group: u32,
+    pub path_mode: u8,
+    pub path_wait_ticks: u8,
+    pub turn_ticks: u8,
+    pub turn_period: u8,
+    pub step_progress: u8,
+    pub step_speed: u8,
+    pub walk_frame: u8,
+    pub walk_frame_count: u8,
+    pub walk_frame_period: u8,
+    pub walk_frame_ticks: u8,
+    pub order_cell: u16,
+    pub attack_kind: u8,
+    pub attack_reference: u16,
+    pub work_structure: u16,
 }
 impl UnitState {
     fn load(m: &MemoriaJogo, base: u32) -> Result<Self> {
@@ -81,6 +95,20 @@ impl UnitState {
             observed_state: m.u8(base.wrapping_add(0x10a))?,
             observed_order: m.u8(base.wrapping_add(0x10b))?,
             group: m.u32(base.wrapping_add(0x10c))?,
+            path_mode: m.u8(base.wrapping_add(0x88))?,
+            path_wait_ticks: m.u8(base.wrapping_add(0x8b))?,
+            turn_ticks: m.u8(base.wrapping_add(0x92))?,
+            turn_period: m.u8(base.wrapping_add(0x93))?,
+            step_progress: m.u8(base.wrapping_add(0x97))?,
+            step_speed: m.u8(base.wrapping_add(0x98))?,
+            walk_frame: m.u8(base.wrapping_add(0xa4))?,
+            walk_frame_count: m.u8(base.wrapping_add(0xa5))?,
+            walk_frame_period: m.u8(base.wrapping_add(0xa7))?,
+            walk_frame_ticks: m.u8(base.wrapping_add(0xa9))?,
+            order_cell: m.u16(base.wrapping_add(0xb2))?,
+            attack_kind: m.u8(base.wrapping_add(0xb7))?,
+            attack_reference: m.u16(base.wrapping_add(0xb8))?,
+            work_structure: m.u16(base.wrapping_add(0xc0))?,
         })
     }
     fn project(&self, m: &mut MemoriaJogo, base: u32) -> Result<()> {
@@ -116,6 +144,21 @@ impl UnitState {
         m.set_u8(base.wrapping_add(0x10a), self.observed_state)?;
         m.set_u8(base.wrapping_add(0x10b), self.observed_order)?;
         m.set_u32(base.wrapping_add(0x10c), self.group)?;
+        m.set_u8(base.wrapping_add(0x88), self.path_mode)?;
+        m.set_u8(base.wrapping_add(0x8b), self.path_wait_ticks)?;
+        m.set_u8(base.wrapping_add(0x92), self.turn_ticks)?;
+        m.set_u8(base.wrapping_add(0x93), self.turn_period)?;
+        m.set_u8(base.wrapping_add(0x97), self.step_progress)?;
+        m.set_u8(base.wrapping_add(0x98), self.step_speed)?;
+        m.set_u8(base.wrapping_add(0xa4), self.walk_frame)?;
+        m.set_u8(base.wrapping_add(0xa5), self.walk_frame_count)?;
+        m.set_u8(base.wrapping_add(0xa7), self.walk_frame_period)?;
+        m.set_u8(base.wrapping_add(0xa9), self.walk_frame_ticks)?;
+        m.set_u16(base.wrapping_add(0xb2), self.order_cell)?;
+        m.set_u8(base.wrapping_add(0xb7), self.attack_kind)?;
+        m.set_u16(base.wrapping_add(0xb8), self.attack_reference)?;
+        m.set_u16(base.wrapping_add(0xc0), self.work_structure)?;
+
         Ok(())
     }
 }
@@ -287,6 +330,8 @@ pub struct FrameState {
     pub units: Vec<UnitState>,
     pub structures: Vec<StructureState>,
     pub globals: FrameGlobals,
+    pub runtime: Option<crate::RuntimeState>,
+    runtime_bound: bool,
     unit_pool_base: u32,
 }
 
@@ -360,7 +405,11 @@ impl FrameState {
         let structures = (0..STRUCTURE_COUNT)
             .map(|i| StructureState::load(m, STRUCTURE_POOL + i as u32 * STRIDE))
             .collect::<Result<Vec<_>>>()?;
+        let runtime = crate::RuntimeState::load(m)?;
+        let runtime_bound = runtime.is_some();
         Ok(Some(Self {
+            runtime,
+            runtime_bound,
             units,
             structures,
             globals: FrameGlobals::load(m)?,
@@ -369,6 +418,9 @@ impl FrameState {
     }
 
     pub fn project(&self, m: &mut MemoriaJogo) -> Result<()> {
+        if self.runtime.is_some() != self.runtime_bound {
+            return Err(EngineError::ProjectionFieldMismatch { address: 0x512320 });
+        }
         if self.units.len() != UNIT_COUNT
             || self.structures.len() != STRUCTURE_COUNT
             || Self::layout(m)? != Some(self.unit_pool_base)
@@ -383,6 +435,10 @@ impl FrameState {
         for (i, structure) in self.structures.iter().enumerate() {
             structure.project(m, STRUCTURE_POOL + i as u32 * STRIDE)?;
         }
-        self.globals.project(m)
+        self.globals.project(m)?;
+        if let Some(runtime) = &self.runtime {
+            runtime.project(m)?;
+        }
+        Ok(())
     }
 }

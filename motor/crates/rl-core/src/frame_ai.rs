@@ -40,18 +40,7 @@ pub fn call(m: &mut MemoriaJogo, name: &str, args: &[u32]) -> Result<u32> {
             m.u32(pointer)
         }
         "AvanceMonstre" => advance_monsters(m),
-        "iaSolver" => {
-            let context = args[0];
-            if !(0x5148b0..=0x5148f0).contains(&context) || !(context - 0x5148b0).is_multiple_of(16)
-            {
-                return Err(stop("iaSolver invalid context", 0x47d314));
-            }
-            // The exact empty linked-list path. No task instruction is silently skipped.
-            if m.u32(context)? != u32::MAX {
-                return Err(stop("iaSolver active task", 0x47d314));
-            }
-            Ok(if m.u32(0x514904)? != 0 { 0 } else { 0x1a1a000e })
-        }
+        "iaSolver" => crate::frame_tasks::solve(m, args[0]),
         "CalculNextReflect" => {
             update_player(m, args[0] as u8, args[1] as u8)?;
             Ok(1)
@@ -62,6 +51,15 @@ pub fn call(m: &mut MemoriaJogo, name: &str, args: &[u32]) -> Result<u32> {
         "iagRessNoyau" => Err(stop("iagRessNoyau", 0x485183)),
         "iagWarNoyau" => Err(stop("iagWarNoyau", 0x4866d7)),
         "iagUnitDeleteAllGroups" => Err(stop("iagUnitDeleteAllGroups", 0x483d95)),
+        "iaProbNew" | "iaProbPost" | "iaProbSleep" | "RaidRule" => {
+            crate::frame_tasks::call(m, name, args)
+        }
+        "iaGroupNew"
+        | "iagUnitAddToGroup"
+        | "iagUnitGetFirstUnitInGroup"
+        | "iagUnitGetNextUnitInGroup"
+        | "StockeAction"
+        | "ConstruitGroupeMonstre" => crate::frame_raid::call(m, name, args),
         _ => Err(stop("unknown AI frame provider", 0x42c868)),
     }
 }
@@ -112,66 +110,7 @@ fn update_player(m: &mut MemoriaJogo, player: u8, mission: u8) -> Result<u32> {
 }
 
 fn advance_monsters(m: &mut MemoriaJogo) -> Result<u32> {
-    if m.u8(0x50a9cc)? == 0 {
-        m.set_u8(0x50a9cc, 1)?;
-        for i in 0..u32::from(m.u16(0x50a9ce)?) {
-            m.set_u32(0x50a9d0 + 12 * i + 8, m.u32(0x508f7c)?)?;
-        }
-    }
-    if m.u8(0x496fe4)? == 0x17 {
-        if m.u8(0x50b134)? != 0 {
-            return Err(stop(
-                "AvanceMonstre mission-0x17 pending group post",
-                0x47b2d3,
-            ));
-        }
-        return Ok(0);
-    }
-    let now = m.u32(0x508f7c)?;
-    for i in 0..u32::from(m.u16(0x50a9ce)?) {
-        let record = 0x50a9d0 + 12 * i;
-        let period = m.u16(record + 4)?;
-        if period == 0 || (now.wrapping_sub(m.u32(record + 8)?) as i32) < i32::from(period) {
-            continue;
-        }
-        let mask = m.u16(record + 2)?;
-        let mut bit = m.u8(record + 6)?;
-        let mut found = false;
-        for _ in 0..16 {
-            bit = bit.wrapping_add(1) & 15;
-            if mask & (1u16 << bit) != 0 {
-                found = true;
-                break;
-            }
-        }
-        if !found {
-            bit = 0xff;
-        }
-        m.set_u8(record + 6, bit)?;
-        m.set_u32(record + 8, now)?;
-        // ConstruitGroupeMonstre's three original early-return guards are complete.
-        let group = m.u8(record + 6)?;
-        if group == 0xff || (m.u32(0x50b178)? as i32) >= 0x32 || m.u8(0x50b134)? >= 0x10 {
-            continue;
-        }
-        return Err(stop("ConstruitGroupeMonstre", 0x47a81d));
-    }
-    let mut i = 0u32;
-    while (i as i32) < (m.u32(0x50ae80)? as i32) {
-        let entry = 0x50ae84u32.wrapping_add(16u32.wrapping_mul(i));
-        if m.u16(entry + 0xe)? == 0x31 {
-            let timer = m.u32(entry + 8)?.wrapping_sub(1);
-            m.set_u32(entry + 8, timer)?;
-            if (timer as i32) <= 0 {
-                return Err(stop("AvanceMonstre expired ambush action", 0x47b3d1));
-            }
-        }
-        i = i.wrapping_add(1);
-    }
-    if m.u8(0x50b134)? != 0 {
-        return Err(stop("AvanceMonstre pending attack", 0x47b44c));
-    }
-    Ok(0)
+    crate::frame_raid::advance(m)
 }
 
 fn send_message(m: &mut MemoriaJogo, unit: u16, message: u8) -> Result<u32> {
@@ -215,6 +154,16 @@ pub fn isolated(id: u32) -> Option<(&'static str, usize)> {
         103 => Some(("iaSolver", 1)),
         104 => Some(("CalculNextReflect", 2)),
         105 => Some(("iagUnitSendMessage", 3)),
+        400 => Some(("iaGroupNew", 2)),
+        401 => Some(("iagUnitAddToGroup", 2)),
+        402 => Some(("iagUnitGetFirstUnitInGroup", 1)),
+        403 => Some(("iagUnitGetNextUnitInGroup", 0)),
+        404 => Some(("StockeAction", 4)),
+        405 => Some(("ConstruitGroupeMonstre", 2)),
+        406 => Some(("iaProbNew", 1)),
+        407 => Some(("iaProbPost", 8)),
+        408 => Some(("iaProbSleep", 2)),
+        409 => Some(("RaidRule", 10)),
         _ => None,
     }
 }
