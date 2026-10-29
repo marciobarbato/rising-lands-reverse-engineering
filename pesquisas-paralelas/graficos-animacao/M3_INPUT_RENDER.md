@@ -27,3 +27,5 @@ The final native run took 173.655 s through the MacBook heavy lease. All 71 call
 After restoration the accepted load-tail, between-frame and frame-1 summaries all reproduce, and code is unchanged.
 An initial 38-case smoke run took 129.439 s. An expanded attempt was interrupted during startup to add the grayscale
 buffer to the recorded inputs; it supplies no result. No translated renderer was imported by the evidence producer.
+
+A second original-only capture, `captura-entrada-m3-suplementar.json` (SHA-256 `6ecab5a4cafdef5dcd738baaaa75aadad97b08d0afe1620074e71f7c04c0ba43`), adds 43 cases before their translation: selected units 0/11/12/13/15 in states 2/7 with fatigue life 5/128; builder life 0/99/100/101 and three shifts; sanctuary clock phases 1–7, health/malus boundaries, hover and costs. All 43 reach the drawing endpoint; the three accepted phase summaries reproduce and code remains unchanged. Native runtime: 135.315 s under the heavy lease. Combined evidence: 114 complete draws.

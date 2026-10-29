@@ -72,7 +72,33 @@ def casos(base, read):
     return out
 
 
-def capturar(saida):
+def casos_suplementares(base, read):
+    w=lambda a,v,n=2:(a,int(v).to_bytes(n,'little'))
+    out=[]
+    for unit in (0,11,12,13,15):
+        for state in (2,7):
+            for life in (5,128):
+                out.append(dict(name=f'selected_unit{unit}_state{state}_life{life}',
+                                setup=[('EnginAddSelection',dict(EAX=unit,EDX=0)),('CalculIconeAction',{})],
+                                writes=[w(base+unit*276+2,state,1),w(base+unit*276+0x74,life)]))
+    builder=[('EnginAddSelection',dict(EAX=12,EDX=0)),('CalculIconeAction',{})]
+    for life in (0,99,100,101):
+        out.append(dict(name=f'selected_builder_life{life}',setup=builder,writes=[w(base+12*276+0x74,life)]))
+    for dx,dy in ((-6,4),(5,-3),(12,9)):
+        out.append(dict(name=f'selected_builder_shift{dx}_{dy}',setup=builder,
+                        writes=[w(base+12*276+0x86,dx&255,1),w(base+12*276+0x87,dy&255,1)]))
+    sanctuary=[('BatimentSelection',dict(EAX=0)),('CalculIconeAction',{})]
+    for clock in range(1,8):
+        out.append(dict(name=f'sanctuary_clock{clock}',setup=sanctuary,writes=[w(0x508f80,clock,4)]))
+    for hp,malus in ((0,0),(1,0),(200,0),(201,0),(400,0),(401,0),(600,100)):
+        out.append(dict(name=f'sanctuary_health{hp}_malus{malus}',setup=sanctuary,
+                        writes=[w(0x49a0c8+0xa,hp),w(0x49a0c8+6,malus)]))
+    out.append(dict(name='hover_sanctuary',setup=[],writes=[w(0x496ac4,0)]))
+    out.append(dict(name='sanctuary_cost',setup=sanctuary,writes=[w(0x4e0612,10),w(0x4e0614,6)]))
+    return out
+
+
+def capturar(saida, suplementar=False):
     t0=time.monotonic(); b, cap=pq._bancada('exibicao'); dd=b.directdraw
     rows=[]; reproduction={}; pause={}
     class Pausa(Isolamento):
@@ -97,7 +123,7 @@ def capturar(saida):
             finish=0x417d30
             stophook=cpu.hook_add(unicorn.UC_HOOK_CODE,b._parar_se_pedido,begin=finish,end=finish)
             try:
-                for case in casos(u(0x4e19a0,4),read):
+                for case in (casos_suplementares if suplementar else casos)(u(0x4e19a0,4),read):
                     restore(); setup=[]
                     for name,r in case['setup']:
                         result=call(name,r); assert result['EIP']==RETORNO,(name,result)
@@ -148,10 +174,10 @@ def capturar(saida):
                (0x4180d8,0x418186),(0x417ac8,0x417d30)]
     exe=EXE.read_bytes()
     out=dict(schema='rising-lands/m3-input-render-native/1',executable_sha256=sha(exe),producing_revision=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
-             command='python3 -B pesquisas-paralelas/graficos-animacao/capturar_entrada_m3.py --saida ' + str(saida),pause=pause,reproduction=reproduction,
+             command='python3 -B pesquisas-paralelas/graficos-animacao/capturar_entrada_m3.py --saida ' + str(saida) + (' --suplementar' if suplementar else ''),pause=pause,reproduction=reproduction,
              method=__doc__,elapsed_seconds=round(time.monotonic()-t0,3),cases=rows,blobs=BLOBS,
              intervals=[dict(start=hex(a),end=hex(z),sha256=sha(ler(exe,a,z))) for a,z in intervals])
     Path(saida).write_text(json.dumps(out));print(json.dumps(dict(cases=len(rows),reproduction=reproduction,seconds=out['elapsed_seconds'])))
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--saida',required=True);capturar(p.parse_args().saida)
+    p=argparse.ArgumentParser();p.add_argument('--saida',required=True);p.add_argument('--suplementar',action='store_true');a=p.parse_args();capturar(a.saida,a.suplementar)
