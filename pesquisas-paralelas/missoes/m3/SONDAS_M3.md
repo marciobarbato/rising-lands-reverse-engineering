@@ -63,7 +63,8 @@ Frames are absolute: F0 = 129. "Beyond no-input" counts routines entered here th
 | P3 | P1 + CAVE icon (180,573) + site (688,400) | 153: tag 4, 3, 3093 | 86 | about 1,560 s each |
 | P4 | unit 13, minimap move, recentre, field (27,32) | 141–143: tag 5, 8218; 443: tag 7, 8219 | 63 | 1,638 s, 1,651 s |
 | P5 | builder, minimap move, recentre, mine (43,8) | 141–143: tag 5, 2091; 593: tag 6, 2091 | 65 | 1,581 s, 1,553 s |
-| P6 | P3 + sanctuary select, double click, colonist, cave | 2018: tag 2; 2030: tag 33; 2063: tag 1, 3598; 2073: tag 16, 3, 1 | see report | see `replay.json` |
+| P6 | P3 + sanctuary select, double click, colonist, cave | 2018: tag 2; 2030: tag 33; 2063: tag 1, 3598; 2073: tag 16, 3, 1 | 127 | 1,269 s, 1,248 s |
+| P7 | P6 + unit 13 harvest + Ctrl depot order to the cave | P6 orders; 2413: tag 1; 2421–2423: tag 5, 8218; 2773: tag 1; 2783: tag 7, 8219; 3228: tag 7, 8220, 2, 1, 1 | 151 | 1,958 s, 1,942 s |
 | K1 | cursor at the centre; arrows, digit 1, Space, X | 200: tag 12, 1 | 6 | 270 s, 268 s |
 
 ### Findings
@@ -106,11 +107,24 @@ Frames are absolute: F0 = 129. "Beyond no-input" counts routines entered here th
   - `InitBatimentPlayer` and `GetRessourceStock`;
   - the cave owner goes 0xc8 → **0**;
   - mark **0x4e1d88 = 1** (record 0).
+- Recruitment costs [B, development runs resumed from the P3/P6 snapshots]. The sanctuary has a single pending request: a second press while one is pending runs InitRecruteTroupe/TestRessource but charges nothing (frame 2038, state +5 = 4).
+  - slot 2 (type 7, builder) charges **6 food, 0 stone** at frame 2423 with nothing pending;
+  - after the P6 lodging 7 colonists remain in the sanctuary, and each recruit consumes one.
 - The sanctuary icons are tag 17 recruitment, not colonist release:
   - slot 0 → type 5, 4 food;
   - slot 1 → type 6, 6 food;
   - slot 2 → type 7.
   - The recruit leaves as its new type (`EnginSetType` at frame 2277).
+
+**Delivery and credit (P7)** [B]. This settles the "credit path" row:
+- A plain tag 6/7 leaves the worker idle holding its cargo; nothing reaches 0x4e2ea8 (P4, P5, and P7 to frame 3210 with the cave owned).
+- Delivery needs a Ctrl depot order:
+  1. With Ctrl held (`GetAsyncKeyState(0x11)` < 0, InputGame 0x4295f3) and transport-capable units selected (`EnginSelectPeuventTransporter`), the mode is 0x4e05ae = 8 (frame 3210).
+  2. A field press stores the source (0x4e05b0 = 1, 0x4e05b2 = cell) and sets mode 9 (frame 3214).
+  3. The mode-9 table 0x42923c then turns a press on a depot (`BatimentEstDepot`, `EnginSelectPeutDeposer`) into **tag 7, word2 8220 (field), word4 2 (structure), word6 1 (the cave), word8 1** (frame 3228).
+- Releasing Ctrl while in mode 8 or 9 resets the mode to 0 (0x42965a). Ctrl is therefore held from the source press to the depot press. The view is scrolled between them with a held arrow key, because the field (28,32) and the cave (20,10) do not fit in one view.
+- The unit walks to the cave. At **frame 3604** `BatimentAjouteMatiere`, `AjouteMatiere` and `BagRetire` credit food 20 → **21**.
+- The unit is back at the field at 3979, and `TerrainRecolte` runs at 4228. One food per worker cycle takes about **1,000 frames** on this route (each trip carries 1).
 
 **Keys (K1)** [B].
 - With the cursor off the edges, held arrows scroll the view one cell per frame (view x 1..19, then y).
@@ -128,5 +142,45 @@ Frames are absolute: F0 = 129. "Beyond no-input" counts routines entered here th
 | A cave under construction or built passes record 0 | **settled [B]: no**; it passes once a colonist lodges (owner 0xc8 → 0) |
 | Which unit mines stone; colonists | **settled [B]**: the builder mines (tag 6); a colonist must leave the sanctuary (double click) and enter the cave |
 | Tag-8 producer | unchanged (Ctrl mode 8, not used) |
-| Gathered goods reaching 0x4e2ea8 | see the S1 draft below |
-| Victory before frame 9000 | see the S1 draft below |
+| Gathered goods reaching 0x4e2ea8 | **settled [B]**: only through a depot order (Ctrl mode 8 → 9) into a cave the player owns; first credit at frame 3604 in P7 |
+| Victory before frame 9000 | **no with the starting units [S, rates B]**; see the S1 draft |
+
+## S1 draft (not launched)
+
+These rates are measured on one route each:
+- food: about 1 per 1,000 frames per type-5 worker (P7);
+- stone: about 1 per 900–1,000 frames for the builder [S, from P5's mine time of 593 → 760 plus a walk of about 23 cells each way];
+- Economy's figures agree: about 880 frames per food and about 1,000 per stone.
+
+After paying for the cave, food/stone are 20/24, so the run needs +30 food and +26 stone. Only builders (type 7) mine stone.
+
+**S1-a: starting units only.** Everything in it is proven by the probes. Frames are planned; the frames marked † must be read from the deterministic prefix while the script is written.
+
+| Step | Frames | Input | Proven by |
+|---|---|---|---|
+| 1 | 130–153 | select builder 12, CAVE icon, site (688,400) | P3 |
+| 2 | 160–450 | select unit 13 and minimap-move it to the field; the same for unit 14 (a second field cell)†. Plain tag-7 harvest, so each holds one cargo | P4 |
+| 3 | 1815–1990† | right click; sanctuary select; double click; select the colonist; press the cave → owned | P6 (at 2005–2178) |
+| 4 | after owned† | for 13 and 14: select, then the Ctrl depot order field → cave, scrolling between them | P7 |
+| 5 | after owned† | builder: minimap move to mine (43,8); at view (19,0) both the mine (784,272) and the cave cell (48,336) are visible; Ctrl depot order mine → cave (mine source 0x4e05b0 = 0 → tag 6) | P5 + P7 rule [S for the mine source] |
+| 6 | wait | food ≥ 50 and stone ≥ 50 → `TestFinDeMission` AL = 1 → 0x4e061c 1..100 → `MenuInit(0x13)` | encoding [B], not yet run |
+| 7 | after `MenuInit(0x13)` | confirmation click; stop at the `MissionNext` return | not yet run |
+
+The estimate is stone-bound: 26 stone at about 950 frames with one builder is about 24,700 frames after the builder's first deposit (around frame 2,600). **Victory falls around frame 27,000–28,000 [S].** Food (two workers, 15 cycles each) completes around frame 17,000.
+
+S1-a therefore crosses the raids at 9000 and 10800. Combat and AI raid behaviour join the victory path, and a raid that kills the builder would stop stone. Run cost: about 27,500 frames × 0.5 s ≈ **3.8 h per run**; the replay check needs a second run, so about 4 h of wall clock on two lease slots.
+
+**S1-b: recruit more workers [S, costs and rates B].**
+- The sanctuary (tag 17) recruits one at a time: type 5 for 4 food and type 7 for 6 food, each in about 250 frames (2028 → 2277). Seven colonists remain after the lodging.
+- Recruits are paid in food, which must then be gathered again:
+
+  | Recruits | Food to gather | Food time | Stone time | Victory |
+  |---|---|---|---|---|
+  | 2 builders + 4 type 5 | 30 + 12 + 16 = 58 with 6 workers | about 9,700 frames | 26 with 3 builders, about 8,200 frames | **around frame 12,500–14,000** |
+
+  The recruits must be staggered, because food never covers 28 at once.
+- A second cave nearer the fields (zone 0 reaches y = 25) would roughly halve the food round trip, but it costs 10 food / 6 stone.
+- **Victory before frame 9000 does not fit** with these rates in any mix found [S]. The first raid (frame 9000) is on the victory path, and S1 must keep the builders and the cave alive through it.
+- Run cost: about 1.8–2 h per run.
+
+**Writing the script** is iterative, because unit positions after each move must be read from the run: about 8–12 segments of 5–15 minutes each from snapshots, so about 2–3 h before the first full S1 run. Under `--instantaneo-cada 1000` every full run also leaves the segment-parallel snapshots that pass 2 needs.

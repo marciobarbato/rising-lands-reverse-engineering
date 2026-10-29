@@ -26,6 +26,7 @@ DESTINO_MOVE = (624, 432)      # cell (19,13), free and discovered at frame 128
 CENTRO = (400, 272)            # playfield centre, cell (12,8)
 SANTUARIO = (528, 400)         # sanctuary grid cell (16,12)
 CELULA_CAVE = (656, 336)       # cave grid cell (20,10)
+SETA_CIMA = 1 | 0x48 << 16 | 1 << 24   # VK_UP key-message lParam: repeat 1, scan code 0x48, extended
 
 
 def sonda(nome, descricao, cliques, ate, extra=None):
@@ -65,6 +66,17 @@ def sondas():
                     [clique(F0 + 1, *UNIDADE_12), clique(F0 + 11, *ICONE_CAVE), clique(F0 + 21, *SITIO_CAVE),
                      clique(2005, *CENTRO, 'right'), clique(2015, *SANTUARIO), duplo, clique(2060, 464, 464),
                      clique(2070, *CELULA_CAVE)], 2400)
+    # P7 continues P6 with the food delivery cycle: unit 13 to the field (P4 rule, view (10,16)), then a Ctrl
+    # depot order (mode 8 -> field press -> mode 9; arrow up scrolls the view to (10,10); cave press).
+    ctrl = tecla(0x11, 0x1d, 0, 3210, 3240)
+    seta = [dict(frame=k, keys={'0x26': -0x8000}) for k in range(3216, 3222)] + [
+        dict(frame=3216, messages=[[0x100, 0x26, SETA_CIMA]]), dict(frame=3222, messages=[[0x101, 0x26, SETA_CIMA | 0xc0000000]])]
+    p['P7'] = sonda('P7', 'P6, then: select unit 13; minimap move to the field; deselect; minimap recentre (10,16); '
+                          'select unit 13; harvest (27,32); then hold Ctrl, press field (28,32), arrow up 6 frames, '
+                          'press the cave (20,10): a tag-7 order with the cave as depot; first credit to 0x4e2ea8.',
+                    [p['P6']['frames'], clique(2410, *UNIDADE_13), clique(2420, 53, 64), clique(2750, *CENTRO, 'right'),
+                     clique(2760, 46, 49), clique(2770, 528, 528), clique(2780, 560, 528), clique(3211, 592, 528),
+                     clique(3225, 336, 16), ctrl, seta], 3700)
     teclas = [dict(frame=F0 + 1, cursor=list(CENTRO))]   # off every edge: no edge scroll fights the keys
     for vk, sc, ext, de, ate in ((0x27, 0x4d, 1, F0 + 11, F0 + 30), (0x28, 0x50, 1, F0 + 41, F0 + 60),
                                  (0x20, 0x39, 0, F0 + 81, F0 + 83), (0x58, 0x2d, 0, F0 + 91, F0 + 93)):
