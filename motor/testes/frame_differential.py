@@ -48,13 +48,18 @@ PINS = {
 }
 PINS.update({
     ROOT / 'pesquisas-paralelas/ia-runtime/comparar_quadro1_encadeado_ia.py': 'd1a268d35261c1f75afec9938c9c09b3bbc2bb371d9c81e17e3a8ff9374f82a6',
-    ROOT / 'pesquisas-paralelas/ia-runtime/comparar_quadros_ia.py': 'fd803036a33d6bab2859ae16adcd90023a4001feeb840bd7153aa0705c10ab60',
+    ROOT / 'pesquisas-paralelas/ia-runtime/comparar_quadros_ia.py': 'aa81ee3b1b8514f76fb57ec44841b05289422fb4c177620b6cf571f96a30ac63',
     ROOT / 'pesquisas-paralelas/ia-runtime/composicao_quadros_ia.py': 'afdc8a396b254f5e65167b215c9a785d18cba530169c683ad5c35d63ed786e43',
     ROOT / 'pesquisas-paralelas/ia-runtime/composicao_encadeada_ia.py': '4d4f45ce5fc2c2599884d876f7c189554c61b71852115a83d4c96a6f4efc873b',
     ROOT / 'pesquisas-paralelas/ia-runtime/quadro_calcul_game.py': '1634bed75de495041871540bf33176e3aad607e1cf2c843f96453df623c540d7',
     ROOT / 'pesquisas-paralelas/ia-runtime/contexto_exibicao_ia.py': 'e8ba0fbbba0d0b8dd39511b3cca3df0a3a6737411992f488400e3e3b24b70d87',
     ROOT / 'pesquisas-paralelas/missoes/mapa_memoria_m1.py': '7507e065c20ff0c05d6d86972d0a11919cc59e484a6b4f306c122c309a2d74c9',
 })
+# Superseded pins still accepted while the coordinator integrates a reviewed
+# reference change in two steps (the repin lands before the research front).
+PREVIOUS_PINS = {
+    ROOT / 'pesquisas-paralelas/ia-runtime/comparar_quadros_ia.py': 'fd803036a33d6bab2859ae16adcd90023a4001feeb840bd7153aa0705c10ab60',
+}
 LONG_RAW_SHA = '1ad031b96300e5c632fd5b6b7857ae30792f78e86531e4f17d1bf7124c6dd930'
 BINDINGS = {1: ('USER32.ShowCursor', 1), 2: ('USER32.GetAsyncKeyState', 1),
             3: ('KERNEL32.GlobalHandle', 1), 4: ('KERNEL32.GlobalUnlock', 1),
@@ -74,7 +79,7 @@ def sha(path):
 
 def assert_pins(paths):
     for path in paths:
-        if sha(path) != PINS[path]:
+        if sha(path) not in (PINS[path], PREVIOUS_PINS.get(path)):
             raise ValueError('Frozen reference SHA mismatch: ' + str(path.relative_to(ROOT)))
 
 
