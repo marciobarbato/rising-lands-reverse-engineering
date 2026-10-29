@@ -440,3 +440,60 @@ Neither query performs a store. Both preserve EBX/ECX/EDX, which the native capt
 - **Graphics:** the AffGame inter-frame write set is pending, and the boundary policy may change when it arrives.
 - **AI/runtime:** no extension of `mapa_memoria_m1` / `ligacao_provedores_m1` has been requested yet; I will implement one if asked. The register trace view it requested is published.
 - **Frame limit:** the original oracle is held at frame 1 until the frame-1 comparison passes.
+
+## Stage17 (M2 round 3): display path executed (Claude, 2026-10-29)
+
+Merged `origin/main` 67fb81f. Contract: [docs/MISSIONS.md — Stage17](../../docs/MISSIONS.md#stage17-m2-round-3-oracle-with-the-display-path-executed). Summary: [QUADRO1_EXIBICAO.md](QUADRO1_EXIBICAO.md).
+
+### Commits
+
+| Commit | Content |
+|---|---|
+| `3ff4b21` | scenario source |
+| `46a4d46` | display M1 entry and capture |
+| `8c7c47a` | display frames 0/1 capture and trace |
+| `9017f11` | comparison script |
+| `6934a0c` and later | validator fix and writer attribution |
+| report commit (below) | reports |
+
+### API inputs
+
+- `cenarios_oraculo.bancada(cenario, fill, clock, ...)`
+- `oraculo_exibicao_missao.BancadaExibicaoOriginal(EntradasExibicao(quadro, ticks, preenchimento_superficie))`, with the same phase methods as the frame bench.
+- `exibicao_declarada.DirectDrawDeclarado(bench)`: declared DirectDraw COM objects.
+
+### Supported domain
+
+The display scenario covers MONDE01 startup, MissionLoad and frames 0/1.
+
+### Order of mutations and callbacks
+
+The real loop runs in the original's order. Every DirectDraw call is recorded in order (`directdraw_calls` per phase).
+
+### Validation
+
+All passed:
+
+| Check | Report |
+|---|---|
+| Composition regression | `m2r3-m1-composition-strict-exibicao.json` |
+| MissionLoad validation | `m2r3-missionload-exibicao-x86.json` |
+| Frame validation | `m2r3-frame1-exibicao-x86.json` |
+| Comparison and attribution | `m2r3-frame1-v1-vs-exibicao.json`, `m2r3-v1-vs-exibicao-writers.json` (both scenarios reproduced) |
+
+### Attempts preserved under `.local/`
+
+- **M1 validation** crashed on the 4-field footprint tuples (`m2r3-m1-validation-attempt1-unpack.log`).
+- **Writer attribution** missed unaligned stores and host binding writes (`m2r3-writers-attempt1-missed-unaligned.json`).
+- **Exploration logs:** `m2r3-explore-*.log`.
+
+### Gaps and dependencies
+
+| Owner | Gap |
+|---|---|
+| Graphics | final display backend, still to wire in when it lands |
+| Core | inventory CRT `fgets` `0x48ce96` (TEXTES.TXT via FileReadLine) and `fseek` `0x48cda2` (ReadLZSImage), so text and LoadPie can run |
+| AI/runtime | the frame composition should use the display artifacts and model viewport NextAnimTerrain/NextAnimVeget (CRT rand, `0x4e1d18`), MouseInit/MouseSetZone geometry and the startup ProgIteration counters |
+| Missions | the oracle is still held at frame 1 |
+
+**Size.** The display entry and captures total about 60 MB (25k bank allocation records and per-block hashes).
