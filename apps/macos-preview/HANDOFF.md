@@ -972,3 +972,55 @@ semantics and a 40-ms total budget. Input/order support is unchanged by this
 performance follow-up. Final evidence/docs commits change no executable app
 code after the validated 604046b build. Only the feature branch is pushed;
 main integration and acceptance remain with the coordinator.
+
+## Rust renderer integration — ABI 1.3
+
+This stage replaces live Python drawing and per-frame JSON pixels with an
+app-owned native frame driver and a Swift/Metal game window. The same C driver
+is called by the production window and by the proof harness. It owns the Rust
+world and renderer, copies accepted S0 plus the four original jump tables once,
+and invokes phase 1, then render at the exact entry generation, phase 2 and
+phase 3. Rendering never applies display effects; phase 2 remains their sole
+owner. Initial surface/cache and nine assets are explicit, hash-verified inputs.
+Caller-owned indexed/palette buffers and Metal textures persist across frames.
+No captured state after S0 is ever loaded into the world.
+
+The driver audits all 257 M2.2 states and 11 checkpoints on live startup and
+all reached surfaces through frame 9200. Full M2.3 state auditing is a proof
+mode over the identical stepping/render calls, without a different simulation
+path. It exports the actual engine world/renderer handles only to proof tools;
+Python rendering, cache and observation comparisons are test oracles, never
+part of live drawing. ABI/status/generation and host buffer layouts are gated
+explicitly. Missing ABI 1.3 or Metal produces a named visible error. Reset
+creates a new valid world/renderer before replacing the old one. Errors latch
+the first named stop; the app never fills unknown state or synthesizes frames.
+
+Development is explicitly authorized against read-only engine revision
+`363faa9c252ffb00d62c81db0da2ee5d4a3d7615`. Its release library was built into
+this front's ignored target directory, not the engine worktree. Tested library
+SHA-256: `fe1aa558cbb1d597a8ba79cce40ee1cbb576a3b6b40139076e1b5b79a8b1c5e1`.
+The [development serial proof](validation/m3-abi13-development-proof.json)
+passes **18,401/18,401 masked states, 11/11 M2.2 checkpoints, 9,200/9,200
+surfaces and 128/128 Python surfaces**. It carries one actual world from S0
+through frame 10,800. Its first stop is phase 2 of frame **10,801**:
+`ABI 5: Display monster count at 0x0041591f`. Total leased execution is 406.969 s,
+including full-state exports/comparison. No state reset or package opening is
+used during that run. The native UI displays the same latched driver error.
+
+Main's concurrent Graphics integration is **API 1.7**, not 1.6. Its reviewed
+additive contract changes optional text and construction/tooltip branches;
+normal rendering retains named glyph stops without installing the probe-only
+text adapter. The evidence inspector/oracle now explicitly accepts 1.7 and
+pins its native 128-frame report SHA
+`4448aeb44920d89b271e9af276477ee545fe797164b5b654e26c18a545d1a16c`.
+A regression compares all 1.7/1.5 no-input chained/full-surface hashes. New
+required gray/tooltip/background regions are preflighted through the published
+API. This **does not expand Rust's Graphics 1.5 domain** or claim CAVE/glyph
+support in the native renderer. No Graphics owner file is edited.
+
+The builder defaults to integrated `motor/`. While ABI 1.3 is pending main,
+`RISING_MACOS_ENGINE_SOURCE` may explicitly select the clean, exactly pinned
+363faa9 engine source for a development build only. Native binaries and all
+prepared inputs remain inside the declared ignored data root. No implicit
+library fallback or uncommitted source snapshot is accepted. Final integrated
+builds, GPU readbacks, real-window throughput and common gates follow below.
