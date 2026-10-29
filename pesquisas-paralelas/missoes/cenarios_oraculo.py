@@ -8,7 +8,9 @@ from AppInit on, with AffInit/DDInit, the bank loaders, RestoreAll, menu and
 game AffGame run natively over Graphics' declared DirectDraw backend; text,
 LoadPie pictures, video, credits and audio stay declared boundaries.  Its
 artifacts never replace v1 files.  ``exibicao_interino`` names the Stage17
-artifacts made with the retired interim backend.  Importing this module executes nothing.
+artifacts made with the retired interim backend.  ``exibicao_v3`` (prepared,
+no reference artifacts until M2.1 is accepted) additionally binds Core's CRT
+fseek/fgets and executes LoadPie; text still waits for CRT ftell.  Importing this module executes nothing.
 """
 import ambiente_missoes
 
@@ -70,9 +72,10 @@ def bancada(cenario, preenchimento=0xa7, relogio=0x00123456, *, pulos=None, fron
         b = BancadaQuadroMissaoOriginal(q, segundos=segundos, pulos=pulos or PULOS_INICIO,
                                         fronteiras=fronteiras or FRONTEIRAS_QUADRO)
         return b, q.base, dict(m1=q.base.manifesto(), frame=q.manifesto())
-    if cenario == 'exibicao':
+    if cenario in ('exibicao', 'exibicao_v3'):
         from oraculo_exibicao_missao import BancadaExibicaoOriginal
         e = entradas_exibicao(preenchimento, relogio, **entradas_kw)
-        b = BancadaExibicaoOriginal(e, segundos=segundos, pulos=pulos, fronteiras=fronteiras)
+        b = BancadaExibicaoOriginal(e, segundos=segundos, pulos=pulos, fronteiras=fronteiras,
+                                    v3=cenario == 'exibicao_v3')
         return b, e.quadro.base, dict(m1=e.quadro.base.manifesto(), frame=e.quadro.manifesto(), display=e.manifesto())
     raise ValueError(f'Unknown oracle scenario {cenario!r}')

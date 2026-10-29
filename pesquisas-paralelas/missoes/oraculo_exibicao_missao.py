@@ -64,6 +64,9 @@ FRONTEIRAS_EXIBICAO = {
 
 
 BASE_COM, BASE_SUPERFICIES, TAMANHO_SUPERFICIES = 0x3600000, 0x60000000, 0x200000
+# v3 (prepared, not a reference): LoadPie runs over CRT fseek. Text still needs
+# CRT ftell 0x48cf11 (FileSize from LoadFonteExterieur), not inventoried yet.
+EXECUTADOS_V3 = ('LoadPie',)
 NUNCA_EXECUTADOS = ('AppWindowInit', 'DisableIME', 'PlaySnd_InitSoundLib', 'MCICD_Init', 'WndProc')
 
 
@@ -109,8 +112,12 @@ class WindowsExibicao(WindowsQuadro):
 
 
 class BancadaExibicaoOriginal(BancadaQuadroMissaoOriginal):
-    def __init__(self, entradas_exibicao, *, pulos=None, fronteiras=None, **kw):
-        self.entradas_exibicao = entradas_exibicao
+    def __init__(self, entradas_exibicao, *, pulos=None, fronteiras=None, v3=False, **kw):
+        """``v3``: bind Core's CRT fseek/fgets boundaries and execute LoadPie (branch-local preparation)."""
+        self.entradas_exibicao, self.v3 = entradas_exibicao, v3
+        if v3:
+            pulos = pulos or {k: v for k, v in PULOS_EXIBICAO.items() if k not in EXECUTADOS_V3}
+            fronteiras = fronteiras or {k: v for k, v in FRONTEIRAS_EXIBICAO.items() if k not in EXECUTADOS_V3}
         super().__init__(entradas_exibicao.quadro, pulos=pulos or PULOS_EXIBICAO,
                          fronteiras=fronteiras or FRONTEIRAS_EXIBICAO, **kw)
         # Base protection makes every high region RW without execute; the COM
@@ -132,6 +139,9 @@ class BancadaExibicaoOriginal(BancadaQuadroMissaoOriginal):
 
     def _declarar(self):
         super()._declarar()
+        if self.v3:
+            self.declarar_vinculo(0x48cda2, 'CRT.fseek', ('EAX', 'EDX', 'EBX'), self.arquivos.fseek_crt, natureza='io')
+            self.declarar_vinculo(0x48ce96, 'CRT.fgets', ('EAX', 'EDX', 'EBX'), self.arquivos.fgets_crt, natureza='io')
         # After every bench import: earlier trampolines keep their addresses.
         self.directdraw = ExibicaoDeclarada(base=BASE_COM, base_superficies=BASE_SUPERFICIES,
                                             tamanho_superficies=TAMANHO_SUPERFICIES).instalar(self)
