@@ -605,3 +605,10 @@ Running on one M1 map, chained from Python and wired to every integrated Core, E
 All 81 checkpoints are equal. Declared stops crossed (state equal at entry): RestoreAll (graphics), and SetClipping, InitGameZone ×2 and NextAnimTerrain/NextAnimVeget (core, pending).
 
 New this round, translated from captured executed blocks: InputGame (MouseZone, ScrollTerrain edge scroll, NextGouttes), InputSend, CalculIconeAction, MenuInit, the EnginNextEtape prelude and switch, and the BatimentNextEtape switch.
+
+## M2.1 round 4 — display reference
+
+[FRAME1_DISPLAY_COMPARISON.md](../pesquisas-paralelas/ia-runtime/FRAME1_DISPLAY_COMPARISON.md): on Missions' display scenario, the chained composition (a)→(b)→(c) equals the original in every phase and at all 96 checkpoints. The v1 regression with the same code is also equal.
+- **Core providers:** SetClipping, InitGameZone and the live task VM replace the earlier crossings and the bridge. Core's NextAnim* stop on the 25×17 viewport (`0x477737`/`0x47731b`) and are crossed. They are the only logic crossings: the CRT seed and `0x4e1d18`.
+- **Graphics' display routines:** RestoreAll, AffGame, and DD*/FilledBox/DeleteBank inside MenuInit are crossed and write no logic byte.
+- **New translations:** the MouseZone no-zone tail, the InputGame map hover, and MenuInit's DeleteBank branch.

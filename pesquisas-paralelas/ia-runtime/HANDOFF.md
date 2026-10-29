@@ -249,3 +249,21 @@ Merged main `67fb81f`. The report is [FRAME1_CHAINED_COMPARISON.md](FRAME1_CHAIN
   - `memoria_composicao_ia.MemoriaMapaM1`.
 - **Mutation and callback order:** original order throughout. The providers receive `sitio` and original-width arguments. Untaken branches raise `DependenciaIA` at their addresses.
 - **Gaps:** the stack words of stale locals in four boundaries; the tile-grid list/bytes contract between Economy and Core; iaSolver beyond the empty context; the crossings, until Graphics/Core land their routines.
+
+
+## M2.1 round 4 — display reference (2026-10-29)
+
+Merged main `81e0a26`. The report is [FRAME1_DISPLAY_COMPARISON.md](FRAME1_DISPLAY_COMPARISON.md).
+
+- **Result:** display (a)/(b)/(c) all equal, chained from Python, with 96/96 checkpoints. The v1 regression is equal.
+- **Crossings:** Graphics' display routines (no logic bytes), and Core's NextAnim* provider stops at `0x477737`/`0x47731b` (logic: the CRT seed and `0x4e1d18`).
+- **Commits:** `ad27649` (display captures, before translation), `fc864d4` (translations + composition), then the report commit.
+- **API changes:**
+  - `entrada_jogo(..., provedores)` serves the zone-0 hover; it needs CaseEstDecouverte, CaseEstIlluminee and EnginOccupeCase.
+  - `iniciar_menu` takes display-call providers (`provider(sitio, registros, palavras, limpeza)`) and uses the register dict returned by InitGameZone.
+  - The composition is scenario-aware (`ContextoEncadeado(imagem, cenario)`). `Travessias` keys are (phase, routine, call-return site, occurrence), and crossings carry allocated/released blocks.
+- **Gaps:**
+  - Core's NextAnim* cell loops.
+  - Graphics' display routines.
+  - The Missions mask.
+  - Unmodeled stale-local stack words in the frame-body MCICD_Play boundary.

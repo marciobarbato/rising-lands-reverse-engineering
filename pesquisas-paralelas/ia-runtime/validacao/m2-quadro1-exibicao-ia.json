@@ -1,0 +1,1798 @@
+{
+ "frame_capture": {
+  "path": "pesquisas-paralelas/missoes",
+  "source_revision": "46a4d46f2cf5d369f3f02c9f7e169f28b0688502"
+ },
+ "original_checkpoints": 96,
+ "original_crossings": 23,
+ "path_reproduction": {
+  "boundaries_equal": true,
+  "code_unchanged": true,
+  "entry_trace_equal": true,
+  "passed": true,
+  "phase_states_equal": {
+   "between_frames": true,
+   "frame1": true,
+   "load_tail": true
+  }
+ },
+ "phases": {
+  "between_frames": {
+   "bindings": {
+    "equal": true,
+    "not_modeled": [],
+    "original": 10,
+    "python": 10
+   },
+   "boundaries": {
+    "equal": true,
+    "not_modeled": [],
+    "original": 2,
+    "python": 2
+   },
+   "checkpoints": [
+    {
+     "caller_return": "0x475068",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "between_frames",
+     "routine": "AffGame"
+    }
+   ],
+   "core_provider_stops": [],
+   "crossings": [
+    {
+     "allocated": [],
+     "bindings": 8,
+     "boundaries": 0,
+     "changed_blocks": [
+      "alloc00002",
+      "dgroup"
+     ],
+     "changed_bytes": {
+      "alloc00002": {
+       "base": "0x41401000",
+       "bytes": 25,
+       "first": "0x41401009",
+       "last": "0x4140102f"
+      },
+      "dgroup": [
+       [
+        "0x496394",
+        120,
+        48
+       ],
+       [
+        "0x496395",
+        120,
+        49
+       ],
+       [
+        "0x496396",
+        120,
+        0
+       ],
+       [
+        "0x4963b5",
+        48,
+        0
+       ],
+       [
+        "0x49a02e",
+        0,
+        31
+       ],
+       [
+        "0x49a02f",
+        0,
+        3
+       ],
+       [
+        "0x49a032",
+        0,
+        31
+       ],
+       [
+        "0x49a033",
+        0,
+        2
+       ],
+       [
+        "0x49a042",
+        0,
+        144
+       ],
+       [
+        "0x49a043",
+        0,
+        1
+       ],
+       [
+        "0x49a044",
+        0,
+        44
+       ],
+       [
+        "0x49a045",
+        0,
+        1
+       ],
+       [
+        "0x4e17b0",
+        0,
+        126
+       ],
+       [
+        "0x4e17b1",
+        0,
+        52
+       ],
+       [
+        "0x4e17b2",
+        0,
+        18
+       ],
+       [
+        "0x4e17b4",
+        0,
+        126
+       ],
+       [
+        "0x4e17b5",
+        0,
+        52
+       ],
+       [
+        "0x4e17b6",
+        0,
+        18
+       ]
+      ]
+     },
+     "eax": "0x0",
+     "occurrence": 0,
+     "owner": "graphics",
+     "phase": "between_frames",
+     "reason": "display routine (Graphics)",
+     "released": 0,
+     "routine": "AffGame",
+     "site": "0x475063",
+     "state_equal_at_entry": true
+    }
+   ],
+   "declared_inputs": {
+    "cursor": [
+     0,
+     0
+    ],
+    "msg": [
+     "0x3000000",
+     "0x0",
+     "0x0",
+     "0x0"
+    ],
+    "peek_message": 0,
+    "salvo_ebx": 0,
+    "salvo_ecx": 0,
+    "salvo_edx": 0
+   },
+   "differing_blocks": [],
+   "equal": true,
+   "registers_equal": {
+    "EAX": true,
+    "EBP": true,
+    "EBX": true,
+    "ECX": true,
+    "EDI": true,
+    "EDX": true,
+    "ESI": true,
+    "ESP": true
+   },
+   "result": "returned",
+   "rng": {
+    "0x497164": "0x1c019f87",
+    "0x498db4": "0x3212b7ce"
+   },
+   "rng_equal": true,
+   "state_equal": true
+  },
+  "frame1": {
+   "bindings": {
+    "equal": true,
+    "not_modeled": [],
+    "original": 13,
+    "python": 13
+   },
+   "boundaries": {
+    "equal": true,
+    "not_modeled": [
+     {
+      "index": 0,
+      "routine": "MCICD_Play",
+      "words": [
+       0,
+       1,
+       2,
+       3
+      ]
+     }
+    ],
+    "original": 1,
+    "python": 1
+   },
+   "checkpoints": [
+    {
+     "caller_return": "0x42d340",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "InputGame"
+    },
+    {
+     "caller_return": "0x42d347",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "InputSend"
+    },
+    {
+     "caller_return": "0x42d3b5",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "caller_return": "0x42d3b5",
+     "equal": true,
+     "occurrence": 1,
+     "phase": "frame1",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "caller_return": "0x42d3b5",
+     "equal": true,
+     "occurrence": 2,
+     "phase": "frame1",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "caller_return": "0x42d3b5",
+     "equal": true,
+     "occurrence": 3,
+     "phase": "frame1",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "caller_return": "0x42d3e6",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "MessageBoxCalcul"
+    },
+    {
+     "caller_return": "0x42d3f0",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculIconeAction"
+    },
+    {
+     "caller_return": "0x42d3f5",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "ProjectileCalcul"
+    },
+    {
+     "caller_return": "0x42d3fa",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculEnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 1,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 2,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 3,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 4,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 5,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 6,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 7,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 8,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 9,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 10,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 11,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 12,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 13,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 14,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 15,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x42d3ff",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculBatimentNextEtape"
+    },
+    {
+     "caller_return": "0x42d404",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "RechercheCalcul"
+    },
+    {
+     "caller_return": "0x42d409",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "PlayerInitAllianceCompteur"
+    },
+    {
+     "caller_return": "0x42d40e",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "SetUpdateChamp"
+    },
+    {
+     "caller_return": "0x42d413",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "UpdateChamp"
+    },
+    {
+     "caller_return": "0x42d418",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculMatiere"
+    },
+    {
+     "caller_return": "0x42d424",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculCompteurMarche"
+    },
+    {
+     "caller_return": "0x42d432",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculCompteurProposition"
+    },
+    {
+     "caller_return": "0x42d446",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "NextAnimTerrain"
+    },
+    {
+     "caller_return": "0x42d46c",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "NextAnimVeget"
+    },
+    {
+     "caller_return": "0x42d471",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "PlayerAttaqueCalculSympa"
+    },
+    {
+     "caller_return": "0x42d486",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "TestFinDeMission"
+    }
+   ],
+   "core_provider_stops": [
+    {
+     "core_address": "0x477737",
+     "message": "NextAnimTerrain: viewport with rows: cell loop not translated (0x477737); no store was made",
+     "phase": "frame1",
+     "routine": "NextAnimTerrain",
+     "site": "0x42d441"
+    },
+    {
+     "core_address": "0x47731b",
+     "message": "NextAnimVeget: viewport with rows: cell loop not translated (0x47731b); no store was made",
+     "phase": "frame1",
+     "routine": "NextAnimVeget",
+     "site": "0x42d467"
+    }
+   ],
+   "crossings": [
+    {
+     "allocated": [],
+     "bindings": 0,
+     "boundaries": 0,
+     "changed_blocks": [
+      "crt_thread_data"
+     ],
+     "changed_bytes": {
+      "crt_thread_data": {
+       "base": "0x3400000",
+       "bytes": 4,
+       "first": "0x340000c",
+       "last": "0x340000f"
+      }
+     },
+     "eax": "0x11",
+     "occurrence": 0,
+     "owner": "core",
+     "phase": "frame1",
+     "reason": "Core provider stop at 0x477737",
+     "released": 0,
+     "routine": "NextAnimTerrain",
+     "site": "0x42d441",
+     "state_equal_at_entry": true
+    },
+    {
+     "allocated": [],
+     "bindings": 0,
+     "boundaries": 0,
+     "changed_blocks": [],
+     "changed_bytes": {},
+     "eax": "0xe7",
+     "occurrence": 0,
+     "owner": "core",
+     "phase": "frame1",
+     "reason": "Core provider stop at 0x47731b",
+     "released": 0,
+     "routine": "NextAnimVeget",
+     "site": "0x42d467",
+     "state_equal_at_entry": true
+    }
+   ],
+   "differing_blocks": [],
+   "equal": true,
+   "result": "returned",
+   "rng": {
+    "0x497164": "0x78fe3b37",
+    "0x498db4": "0x3212b7ce"
+   },
+   "rng_equal": true,
+   "state_equal": true
+  },
+  "load_tail": {
+   "bindings": {
+    "equal": true,
+    "not_modeled": [],
+    "original": 616,
+    "python": 616
+   },
+   "boundaries": {
+    "equal": true,
+    "not_modeled": [
+     {
+      "index": 4,
+      "routine": "MCICD_Play",
+      "words": [
+       0,
+       1,
+       2,
+       3
+      ]
+     }
+    ],
+    "original": 5,
+    "python": 5
+   },
+   "checkpoints": [
+    {
+     "caller_return": "0x42d284",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "RestoreAll"
+    },
+    {
+     "caller_return": "0x42d2ab",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "SetClipping"
+    },
+    {
+     "caller_return": "0x42d2d5",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "MenuInit"
+    },
+    {
+     "caller_return": "0x46837f",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "DDLockSurface"
+    },
+    {
+     "caller_return": "0x4683b3",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "DeleteBank"
+    },
+    {
+     "caller_return": "0x468405",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "FilledBox"
+    },
+    {
+     "caller_return": "0x468489",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "InitGameZone"
+    },
+    {
+     "caller_return": "0x468c96",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "DDUnlockSurface"
+    },
+    {
+     "caller_return": "0x468ca7",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "DDFlipPage"
+    },
+    {
+     "caller_return": "0x42d2de",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "InitGameZone"
+    },
+    {
+     "caller_return": "0x42d340",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "InputGame"
+    },
+    {
+     "caller_return": "0x42d347",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "InputSend"
+    },
+    {
+     "caller_return": "0x42d3b5",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "caller_return": "0x42d3b5",
+     "equal": true,
+     "occurrence": 1,
+     "phase": "load_tail",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "caller_return": "0x42d3b5",
+     "equal": true,
+     "occurrence": 2,
+     "phase": "load_tail",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "caller_return": "0x42d3b5",
+     "equal": true,
+     "occurrence": 3,
+     "phase": "load_tail",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "caller_return": "0x42d3e6",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "MessageBoxCalcul"
+    },
+    {
+     "caller_return": "0x42d3f0",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculIconeAction"
+    },
+    {
+     "caller_return": "0x42d3f5",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "ProjectileCalcul"
+    },
+    {
+     "caller_return": "0x42d3fa",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculEnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 1,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 2,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 3,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 4,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 5,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 6,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 7,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 8,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 9,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 10,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 11,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 12,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 13,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 14,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 15,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x42d3ff",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculBatimentNextEtape"
+    },
+    {
+     "caller_return": "0x42d404",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "RechercheCalcul"
+    },
+    {
+     "caller_return": "0x42d409",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "PlayerInitAllianceCompteur"
+    },
+    {
+     "caller_return": "0x42d40e",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "SetUpdateChamp"
+    },
+    {
+     "caller_return": "0x42d413",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "UpdateChamp"
+    },
+    {
+     "caller_return": "0x42d418",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculMatiere"
+    },
+    {
+     "caller_return": "0x42d424",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculCompteurMarche"
+    },
+    {
+     "caller_return": "0x42d432",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculCompteurProposition"
+    },
+    {
+     "caller_return": "0x42d446",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "NextAnimTerrain"
+    },
+    {
+     "caller_return": "0x42d46c",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "NextAnimVeget"
+    },
+    {
+     "caller_return": "0x42d471",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "PlayerAttaqueCalculSympa"
+    },
+    {
+     "caller_return": "0x42d486",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "TestFinDeMission"
+    }
+   ],
+   "core_provider_stops": [
+    {
+     "core_address": "0x477737",
+     "message": "NextAnimTerrain: viewport with rows: cell loop not translated (0x477737); no store was made",
+     "phase": "load_tail",
+     "routine": "NextAnimTerrain",
+     "site": "0x42d441"
+    },
+    {
+     "core_address": "0x47731b",
+     "message": "NextAnimVeget: viewport with rows: cell loop not translated (0x47731b); no store was made",
+     "phase": "load_tail",
+     "routine": "NextAnimVeget",
+     "site": "0x42d467"
+    }
+   ],
+   "crossings": [
+    {
+     "allocated": [],
+     "bindings": 13,
+     "boundaries": 2,
+     "changed_blocks": [
+      "alloc02196",
+      "alloc02198",
+      "alloc02200",
+      "alloc02202",
+      "alloc02204",
+      "alloc02206",
+      "alloc02208",
+      "alloc02210",
+      "alloc02212",
+      "alloc02214",
+      "alloc02216",
+      "alloc02218",
+      "alloc02220",
+      "alloc02222",
+      "alloc02224",
+      "alloc02226",
+      "alloc02228",
+      "alloc02230",
+      "alloc02232",
+      "alloc02234",
+      "alloc02236",
+      "alloc02238",
+      "alloc02240",
+      "alloc02242",
+      "alloc02244",
+      "alloc02246",
+      "alloc02248",
+      "alloc02250",
+      "alloc02252",
+      "alloc02254",
+      "alloc02256",
+      "alloc02258",
+      "alloc02260",
+      "alloc02262",
+      "alloc02264",
+      "alloc02266",
+      "alloc02268",
+      "alloc02270",
+      "alloc02272",
+      "alloc02274",
+      "alloc02276",
+      "alloc02278",
+      "alloc02280",
+      "alloc02282",
+      "alloc02284",
+      "alloc02286",
+      "alloc02288",
+      "alloc02290",
+      "alloc02292",
+      "alloc02294",
+      "alloc02296",
+      "alloc02298",
+      "alloc02300",
+      "alloc02302",
+      "alloc02304",
+      "alloc02306",
+      "alloc02308",
+      "alloc02310",
+      "alloc02312",
+      "alloc02314",
+      "alloc02316",
+      "alloc02318",
+      "alloc02320",
+      "alloc02322",
+      "alloc02324",
+      "alloc02326",
+      "alloc02328",
+      "alloc02330",
+      "alloc02332",
+      "alloc02334",
+      "alloc02336",
+      "alloc02338",
+      "alloc02340",
+      "alloc02342",
+      "alloc02344",
+      "alloc02346",
+      "alloc24329",
+      "dgroup"
+     ],
+     "changed_bytes": {
+      "alloc02196": {
+       "base": "0x41c9f000",
+       "bytes": 1024,
+       "first": "0x41c9f001",
+       "last": "0x41c9f41f"
+      },
+      "alloc02198": {
+       "base": "0x41ca1000",
+       "bytes": 1023,
+       "first": "0x41ca1001",
+       "last": "0x41ca141f"
+      },
+      "alloc02200": {
+       "base": "0x41ca3000",
+       "bytes": 1023,
+       "first": "0x41ca3001",
+       "last": "0x41ca341f"
+      },
+      "alloc02202": {
+       "base": "0x41ca5000",
+       "bytes": 1024,
+       "first": "0x41ca5001",
+       "last": "0x41ca541f"
+      },
+      "alloc02204": {
+       "base": "0x41ca7000",
+       "bytes": 1024,
+       "first": "0x41ca7001",
+       "last": "0x41ca741f"
+      },
+      "alloc02206": {
+       "base": "0x41ca9000",
+       "bytes": 1024,
+       "first": "0x41ca9001",
+       "last": "0x41ca941f"
+      },
+      "alloc02208": {
+       "base": "0x41cab000",
+       "bytes": 1023,
+       "first": "0x41cab001",
+       "last": "0x41cab41f"
+      },
+      "alloc02210": {
+       "base": "0x41cad000",
+       "bytes": 1024,
+       "first": "0x41cad001",
+       "last": "0x41cad41f"
+      },
+      "alloc02212": {
+       "base": "0x41caf000",
+       "bytes": 1024,
+       "first": "0x41caf001",
+       "last": "0x41caf41f"
+      },
+      "alloc02214": {
+       "base": "0x41cb1000",
+       "bytes": 1024,
+       "first": "0x41cb1001",
+       "last": "0x41cb141f"
+      },
+      "alloc02216": {
+       "base": "0x41cb3000",
+       "bytes": 1024,
+       "first": "0x41cb3001",
+       "last": "0x41cb341f"
+      },
+      "alloc02218": {
+       "base": "0x41cb5000",
+       "bytes": 1024,
+       "first": "0x41cb5001",
+       "last": "0x41cb541f"
+      },
+      "alloc02220": {
+       "base": "0x41cb7000",
+       "bytes": 1024,
+       "first": "0x41cb7001",
+       "last": "0x41cb741f"
+      },
+      "alloc02222": {
+       "base": "0x41cb9000",
+       "bytes": 1024,
+       "first": "0x41cb9001",
+       "last": "0x41cb941f"
+      },
+      "alloc02224": {
+       "base": "0x41cbb000",
+       "bytes": 1023,
+       "first": "0x41cbb001",
+       "last": "0x41cbb41f"
+      },
+      "alloc02226": {
+       "base": "0x41cbd000",
+       "bytes": 1024,
+       "first": "0x41cbd001",
+       "last": "0x41cbd41f"
+      },
+      "alloc02228": {
+       "base": "0x41cbf000",
+       "bytes": 1024,
+       "first": "0x41cbf001",
+       "last": "0x41cbf41f"
+      },
+      "alloc02230": {
+       "base": "0x41cc1000",
+       "bytes": 1024,
+       "first": "0x41cc1001",
+       "last": "0x41cc141f"
+      },
+      "alloc02232": {
+       "base": "0x41cc3000",
+       "bytes": 1024,
+       "first": "0x41cc3001",
+       "last": "0x41cc341f"
+      },
+      "alloc02234": {
+       "base": "0x41cc5000",
+       "bytes": 1024,
+       "first": "0x41cc5001",
+       "last": "0x41cc541f"
+      },
+      "alloc02236": {
+       "base": "0x41cc7000",
+       "bytes": 1024,
+       "first": "0x41cc7001",
+       "last": "0x41cc741f"
+      },
+      "alloc02238": {
+       "base": "0x41cc9000",
+       "bytes": 1024,
+       "first": "0x41cc9001",
+       "last": "0x41cc941f"
+      },
+      "alloc02240": {
+       "base": "0x41ccb000",
+       "bytes": 1024,
+       "first": "0x41ccb001",
+       "last": "0x41ccb41f"
+      },
+      "alloc02242": {
+       "base": "0x41ccd000",
+       "bytes": 1024,
+       "first": "0x41ccd001",
+       "last": "0x41ccd41f"
+      },
+      "alloc02244": {
+       "base": "0x41ccf000",
+       "bytes": 1024,
+       "first": "0x41ccf001",
+       "last": "0x41ccf41f"
+      },
+      "alloc02246": {
+       "base": "0x41cd1000",
+       "bytes": 1024,
+       "first": "0x41cd1001",
+       "last": "0x41cd141f"
+      },
+      "alloc02248": {
+       "base": "0x41cd3000",
+       "bytes": 1024,
+       "first": "0x41cd3001",
+       "last": "0x41cd341f"
+      },
+      "alloc02250": {
+       "base": "0x41cd5000",
+       "bytes": 1024,
+       "first": "0x41cd5001",
+       "last": "0x41cd541f"
+      },
+      "alloc02252": {
+       "base": "0x41cd7000",
+       "bytes": 1024,
+       "first": "0x41cd7001",
+       "last": "0x41cd741f"
+      },
+      "alloc02254": {
+       "base": "0x41cd9000",
+       "bytes": 1024,
+       "first": "0x41cd9001",
+       "last": "0x41cd941f"
+      },
+      "alloc02256": {
+       "base": "0x41cdb000",
+       "bytes": 1024,
+       "first": "0x41cdb001",
+       "last": "0x41cdb41f"
+      },
+      "alloc02258": {
+       "base": "0x41cdd000",
+       "bytes": 1024,
+       "first": "0x41cdd001",
+       "last": "0x41cdd41f"
+      },
+      "alloc02260": {
+       "base": "0x41cdf000",
+       "bytes": 1024,
+       "first": "0x41cdf001",
+       "last": "0x41cdf41f"
+      },
+      "alloc02262": {
+       "base": "0x41ce1000",
+       "bytes": 1024,
+       "first": "0x41ce1001",
+       "last": "0x41ce141f"
+      },
+      "alloc02264": {
+       "base": "0x41ce3000",
+       "bytes": 1024,
+       "first": "0x41ce3001",
+       "last": "0x41ce341f"
+      },
+      "alloc02266": {
+       "base": "0x41ce5000",
+       "bytes": 1024,
+       "first": "0x41ce5001",
+       "last": "0x41ce541f"
+      },
+      "alloc02268": {
+       "base": "0x41ce7000",
+       "bytes": 1024,
+       "first": "0x41ce7001",
+       "last": "0x41ce741f"
+      },
+      "alloc02270": {
+       "base": "0x41ce9000",
+       "bytes": 1024,
+       "first": "0x41ce9001",
+       "last": "0x41ce941f"
+      },
+      "alloc02272": {
+       "base": "0x41ceb000",
+       "bytes": 1024,
+       "first": "0x41ceb001",
+       "last": "0x41ceb41f"
+      },
+      "alloc02274": {
+       "base": "0x41ced000",
+       "bytes": 1024,
+       "first": "0x41ced001",
+       "last": "0x41ced41f"
+      },
+      "alloc02276": {
+       "base": "0x41cef000",
+       "bytes": 1024,
+       "first": "0x41cef001",
+       "last": "0x41cef41f"
+      },
+      "alloc02278": {
+       "base": "0x41cf1000",
+       "bytes": 1024,
+       "first": "0x41cf1001",
+       "last": "0x41cf141f"
+      },
+      "alloc02280": {
+       "base": "0x41cf3000",
+       "bytes": 1024,
+       "first": "0x41cf3001",
+       "last": "0x41cf341f"
+      },
+      "alloc02282": {
+       "base": "0x41cf5000",
+       "bytes": 1024,
+       "first": "0x41cf5001",
+       "last": "0x41cf541f"
+      },
+      "alloc02284": {
+       "base": "0x41cf7000",
+       "bytes": 1024,
+       "first": "0x41cf7001",
+       "last": "0x41cf741f"
+      },
+      "alloc02286": {
+       "base": "0x41cf9000",
+       "bytes": 1021,
+       "first": "0x41cf9001",
+       "last": "0x41cf941f"
+      },
+      "alloc02288": {
+       "base": "0x41cfb000",
+       "bytes": 1023,
+       "first": "0x41cfb001",
+       "last": "0x41cfb41f"
+      },
+      "alloc02290": {
+       "base": "0x41cfd000",
+       "bytes": 1024,
+       "first": "0x41cfd001",
+       "last": "0x41cfd41f"
+      },
+      "alloc02292": {
+       "base": "0x41cff000",
+       "bytes": 1024,
+       "first": "0x41cff001",
+       "last": "0x41cff41f"
+      },
+      "alloc02294": {
+       "base": "0x41d01000",
+       "bytes": 1024,
+       "first": "0x41d01001",
+       "last": "0x41d0141f"
+      },
+      "alloc02296": {
+       "base": "0x41d03000",
+       "bytes": 1024,
+       "first": "0x41d03001",
+       "last": "0x41d0341f"
+      },
+      "alloc02298": {
+       "base": "0x41d05000",
+       "bytes": 1024,
+       "first": "0x41d05001",
+       "last": "0x41d0541f"
+      },
+      "alloc02300": {
+       "base": "0x41d07000",
+       "bytes": 1024,
+       "first": "0x41d07001",
+       "last": "0x41d0741f"
+      },
+      "alloc02302": {
+       "base": "0x41d09000",
+       "bytes": 1024,
+       "first": "0x41d09001",
+       "last": "0x41d0941f"
+      },
+      "alloc02304": {
+       "base": "0x41d0b000",
+       "bytes": 1024,
+       "first": "0x41d0b001",
+       "last": "0x41d0b41f"
+      },
+      "alloc02306": {
+       "base": "0x41d0d000",
+       "bytes": 1024,
+       "first": "0x41d0d001",
+       "last": "0x41d0d41f"
+      },
+      "alloc02308": {
+       "base": "0x41d0f000",
+       "bytes": 1024,
+       "first": "0x41d0f001",
+       "last": "0x41d0f41f"
+      },
+      "alloc02310": {
+       "base": "0x41d11000",
+       "bytes": 1024,
+       "first": "0x41d11001",
+       "last": "0x41d1141f"
+      },
+      "alloc02312": {
+       "base": "0x41d13000",
+       "bytes": 1024,
+       "first": "0x41d13001",
+       "last": "0x41d1341f"
+      },
+      "alloc02314": {
+       "base": "0x41d15000",
+       "bytes": 1024,
+       "first": "0x41d15001",
+       "last": "0x41d1541f"
+      },
+      "alloc02316": {
+       "base": "0x41d17000",
+       "bytes": 1024,
+       "first": "0x41d17001",
+       "last": "0x41d1741f"
+      },
+      "alloc02318": {
+       "base": "0x41d19000",
+       "bytes": 1024,
+       "first": "0x41d19001",
+       "last": "0x41d1941f"
+      },
+      "alloc02320": {
+       "base": "0x41d1b000",
+       "bytes": 1024,
+       "first": "0x41d1b001",
+       "last": "0x41d1b41f"
+      },
+      "alloc02322": {
+       "base": "0x41d1d000",
+       "bytes": 1024,
+       "first": "0x41d1d001",
+       "last": "0x41d1d41f"
+      },
+      "alloc02324": {
+       "base": "0x41d1f000",
+       "bytes": 1024,
+       "first": "0x41d1f001",
+       "last": "0x41d1f41f"
+      },
+      "alloc02326": {
+       "base": "0x41d21000",
+       "bytes": 1024,
+       "first": "0x41d21001",
+       "last": "0x41d2141f"
+      },
+      "alloc02328": {
+       "base": "0x41d23000",
+       "bytes": 1024,
+       "first": "0x41d23001",
+       "last": "0x41d2341f"
+      },
+      "alloc02330": {
+       "base": "0x41d25000",
+       "bytes": 1024,
+       "first": "0x41d25001",
+       "last": "0x41d2541f"
+      },
+      "alloc02332": {
+       "base": "0x41d27000",
+       "bytes": 1024,
+       "first": "0x41d27001",
+       "last": "0x41d2741f"
+      },
+      "alloc02334": {
+       "base": "0x41d29000",
+       "bytes": 1024,
+       "first": "0x41d29001",
+       "last": "0x41d2941f"
+      },
+      "alloc02336": {
+       "base": "0x41d2b000",
+       "bytes": 1024,
+       "first": "0x41d2b001",
+       "last": "0x41d2b41f"
+      },
+      "alloc02338": {
+       "base": "0x41d2d000",
+       "bytes": 1024,
+       "first": "0x41d2d001",
+       "last": "0x41d2d41f"
+      },
+      "alloc02340": {
+       "base": "0x41d2f000",
+       "bytes": 1024,
+       "first": "0x41d2f001",
+       "last": "0x41d2f41f"
+      },
+      "alloc02342": {
+       "base": "0x41d31000",
+       "bytes": 1024,
+       "first": "0x41d31001",
+       "last": "0x41d3141f"
+      },
+      "alloc02344": {
+       "base": "0x41d33000",
+       "bytes": 1024,
+       "first": "0x41d33001",
+       "last": "0x41d3341f"
+      },
+      "alloc02346": {
+       "base": "0x41d35000",
+       "bytes": 1024,
+       "first": "0x41d35001",
+       "last": "0x41d3541f"
+      },
+      "alloc24329": {
+       "base": "0x474a7000",
+       "bytes": 233,
+       "first": "0x474a7000",
+       "last": "0x474a712f"
+      },
+      "dgroup": [
+       [
+        "0x49a04e",
+        0,
+        76
+       ]
+      ]
+     },
+     "eax": "0x0",
+     "occurrence": 0,
+     "owner": "graphics",
+     "phase": "load_tail",
+     "reason": "display routine (Graphics)",
+     "released": 0,
+     "routine": "RestoreAll",
+     "site": "0x42d27f",
+     "state_equal_at_entry": true
+    },
+    {
+     "allocated": [],
+     "bindings": 2,
+     "boundaries": 0,
+     "changed_blocks": [
+      "dgroup"
+     ],
+     "changed_bytes": {
+      "dgroup": [
+       [
+        "0x4e17a6",
+        0,
+        8
+       ],
+       [
+        "0x4e17a7",
+        0,
+        96
+       ],
+       [
+        "0x4e17a8",
+        0,
+        1
+       ]
+      ]
+     },
+     "eax": "0x60080000",
+     "occurrence": 0,
+     "owner": "graphics",
+     "phase": "load_tail",
+     "reason": "display routine (Graphics)",
+     "released": 0,
+     "routine": "DDLockSurface",
+     "site": "0x46837a",
+     "state_equal_at_entry": true
+    },
+    {
+     "allocated": [],
+     "bindings": 584,
+     "boundaries": 0,
+     "changed_blocks": [],
+     "changed_bytes": {},
+     "eax": "0x0",
+     "occurrence": 0,
+     "owner": "graphics",
+     "phase": "load_tail",
+     "reason": "display routine (Graphics)",
+     "released": 146,
+     "routine": "DeleteBank",
+     "site": "0x4683ae",
+     "state_equal_at_entry": true
+    },
+    {
+     "allocated": [],
+     "bindings": 0,
+     "boundaries": 0,
+     "changed_blocks": [],
+     "changed_bytes": {},
+     "eax": "0x600f4fe0",
+     "occurrence": 0,
+     "owner": "graphics",
+     "phase": "load_tail",
+     "reason": "display routine (Graphics)",
+     "released": 0,
+     "routine": "FilledBox",
+     "site": "0x468400",
+     "state_equal_at_entry": true
+    },
+    {
+     "allocated": [],
+     "bindings": 2,
+     "boundaries": 0,
+     "changed_blocks": [
+      "dgroup"
+     ],
+     "changed_bytes": {
+      "dgroup": [
+       [
+        "0x4e17a6",
+        8,
+        0
+       ],
+       [
+        "0x4e17a7",
+        96,
+        0
+       ],
+       [
+        "0x4e17a8",
+        1,
+        0
+       ]
+      ]
+     },
+     "eax": "0x1",
+     "occurrence": 0,
+     "owner": "graphics",
+     "phase": "load_tail",
+     "reason": "display routine (Graphics)",
+     "released": 0,
+     "routine": "DDUnlockSurface",
+     "site": "0x468c91",
+     "state_equal_at_entry": true
+    },
+    {
+     "allocated": [],
+     "bindings": 2,
+     "boundaries": 0,
+     "changed_blocks": [],
+     "changed_bytes": {},
+     "eax": "0x0",
+     "occurrence": 0,
+     "owner": "graphics",
+     "phase": "load_tail",
+     "reason": "display routine (Graphics)",
+     "released": 0,
+     "routine": "DDFlipPage",
+     "site": "0x468ca2",
+     "state_equal_at_entry": true
+    },
+    {
+     "allocated": [],
+     "bindings": 0,
+     "boundaries": 0,
+     "changed_blocks": [
+      "crt_thread_data"
+     ],
+     "changed_bytes": {
+      "crt_thread_data": {
+       "base": "0x3400000",
+       "bytes": 4,
+       "first": "0x340000c",
+       "last": "0x340000f"
+      }
+     },
+     "eax": "0x11",
+     "occurrence": 0,
+     "owner": "core",
+     "phase": "load_tail",
+     "reason": "Core provider stop at 0x477737",
+     "released": 0,
+     "routine": "NextAnimTerrain",
+     "site": "0x42d441",
+     "state_equal_at_entry": true
+    },
+    {
+     "allocated": [],
+     "bindings": 0,
+     "boundaries": 0,
+     "changed_blocks": [
+      "dgroup"
+     ],
+     "changed_bytes": {
+      "dgroup": [
+       [
+        "0x4e1d18",
+        2,
+        4
+       ]
+      ]
+     },
+     "eax": "0xe7",
+     "occurrence": 0,
+     "owner": "core",
+     "phase": "load_tail",
+     "reason": "Core provider stop at 0x47731b",
+     "released": 0,
+     "routine": "NextAnimVeget",
+     "site": "0x42d467",
+     "state_equal_at_entry": true
+    }
+   ],
+   "differing_blocks": [],
+   "equal": true,
+   "result": "returned",
+   "rng": {
+    "0x497164": "0x1c019f87",
+    "0x498db4": "0x3212b7ce"
+   },
+   "rng_equal": true,
+   "state_equal": true
+  }
+ },
+ "scenario": "exibicao",
+ "schema": "rising-lands/ai-runtime-m2-frame1-chained-composition/2",
+ "seconds": 102.089,
+ "source_dirty_paths": [],
+ "source_revision": "fc864d4feb67fe7bb66813a5fa7b601d5f342709",
+ "summary": {
+  "phases": {
+   "between_frames": {
+    "at": null,
+    "core_provider_stops": [],
+    "crossings": [
+     [
+      "AffGame",
+      "graphics",
+      "display routine (Graphics)"
+     ]
+    ],
+    "equal": true,
+    "result": "returned",
+    "stop": null
+   },
+   "frame1": {
+    "at": null,
+    "core_provider_stops": [
+     [
+      "NextAnimTerrain",
+      "0x477737"
+     ],
+     [
+      "NextAnimVeget",
+      "0x47731b"
+     ]
+    ],
+    "crossings": [
+     [
+      "NextAnimTerrain",
+      "core",
+      "Core provider stop at 0x477737"
+     ],
+     [
+      "NextAnimVeget",
+      "core",
+      "Core provider stop at 0x47731b"
+     ]
+    ],
+    "equal": true,
+    "result": "returned",
+    "stop": null
+   },
+   "load_tail": {
+    "at": null,
+    "core_provider_stops": [
+     [
+      "NextAnimTerrain",
+      "0x477737"
+     ],
+     [
+      "NextAnimVeget",
+      "0x47731b"
+     ]
+    ],
+    "crossings": [
+     [
+      "RestoreAll",
+      "graphics",
+      "display routine (Graphics)"
+     ],
+     [
+      "DDLockSurface",
+      "graphics",
+      "display routine (Graphics)"
+     ],
+     [
+      "DeleteBank",
+      "graphics",
+      "display routine (Graphics)"
+     ],
+     [
+      "FilledBox",
+      "graphics",
+      "display routine (Graphics)"
+     ],
+     [
+      "DDUnlockSurface",
+      "graphics",
+      "display routine (Graphics)"
+     ],
+     [
+      "DDFlipPage",
+      "graphics",
+      "display routine (Graphics)"
+     ],
+     [
+      "NextAnimTerrain",
+      "core",
+      "Core provider stop at 0x477737"
+     ],
+     [
+      "NextAnimVeget",
+      "core",
+      "Core provider stop at 0x47731b"
+     ]
+    ],
+    "equal": true,
+    "result": "returned",
+    "stop": null
+   }
+  },
+  "result": "complete"
+ },
+ "unclosed_original_crossings": []
+}

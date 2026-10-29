@@ -1,0 +1,778 @@
+{
+ "frame_capture": {
+  "path": "pesquisas-paralelas/missoes",
+  "source_revision": "e6aa30515bd80777259cd8ceae7cba71c2266c60"
+ },
+ "original_checkpoints": 81,
+ "original_crossings": 8,
+ "path_reproduction": {
+  "boundaries_equal": true,
+  "code_unchanged": true,
+  "entry_trace_equal": true,
+  "passed": true,
+  "phase_states_equal": {
+   "between_frames": true,
+   "frame1": true,
+   "load_tail": true
+  }
+ },
+ "phases": {
+  "between_frames": {
+   "bindings": {
+    "equal": true,
+    "not_modeled": [],
+    "original": 2,
+    "python": 2
+   },
+   "boundaries": {
+    "equal": true,
+    "not_modeled": [],
+    "original": 3,
+    "python": 3
+   },
+   "checkpoints": [],
+   "core_provider_stops": [],
+   "crossings": [],
+   "differing_blocks": [],
+   "equal": true,
+   "registers_equal": {
+    "EAX": true,
+    "EBP": true,
+    "EBX": true,
+    "ECX": true,
+    "EDI": true,
+    "EDX": true,
+    "ESI": true,
+    "ESP": true
+   },
+   "result": "returned",
+   "rng": {
+    "0x497164": "0x1c019f87",
+    "0x498db4": "0x3212b7ce"
+   },
+   "rng_equal": true,
+   "state_equal": true
+  },
+  "frame1": {
+   "bindings": {
+    "equal": true,
+    "not_modeled": [],
+    "original": 13,
+    "python": 13
+   },
+   "boundaries": {
+    "equal": true,
+    "not_modeled": [
+     {
+      "index": 0,
+      "routine": "MCICD_Play",
+      "words": [
+       0,
+       1,
+       2,
+       3
+      ]
+     }
+    ],
+    "original": 1,
+    "python": 1
+   },
+   "checkpoints": [
+    {
+     "caller_return": "0x42d340",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "InputGame"
+    },
+    {
+     "caller_return": "0x42d347",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "InputSend"
+    },
+    {
+     "caller_return": "0x42d3b5",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "caller_return": "0x42d3b5",
+     "equal": true,
+     "occurrence": 1,
+     "phase": "frame1",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "caller_return": "0x42d3b5",
+     "equal": true,
+     "occurrence": 2,
+     "phase": "frame1",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "caller_return": "0x42d3b5",
+     "equal": true,
+     "occurrence": 3,
+     "phase": "frame1",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "caller_return": "0x42d3e6",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "MessageBoxCalcul"
+    },
+    {
+     "caller_return": "0x42d3f0",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculIconeAction"
+    },
+    {
+     "caller_return": "0x42d3f5",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "ProjectileCalcul"
+    },
+    {
+     "caller_return": "0x42d3fa",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculEnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 1,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 2,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 3,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 4,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 5,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 6,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 7,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 8,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 9,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 10,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 11,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 12,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 13,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 14,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 15,
+     "phase": "frame1",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x42d3ff",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculBatimentNextEtape"
+    },
+    {
+     "caller_return": "0x42d404",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "RechercheCalcul"
+    },
+    {
+     "caller_return": "0x42d409",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "PlayerInitAllianceCompteur"
+    },
+    {
+     "caller_return": "0x42d40e",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "SetUpdateChamp"
+    },
+    {
+     "caller_return": "0x42d413",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "UpdateChamp"
+    },
+    {
+     "caller_return": "0x42d418",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculMatiere"
+    },
+    {
+     "caller_return": "0x42d424",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculCompteurMarche"
+    },
+    {
+     "caller_return": "0x42d432",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "CalculCompteurProposition"
+    },
+    {
+     "caller_return": "0x42d446",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "NextAnimTerrain"
+    },
+    {
+     "caller_return": "0x42d46c",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "NextAnimVeget"
+    },
+    {
+     "caller_return": "0x42d471",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "PlayerAttaqueCalculSympa"
+    },
+    {
+     "caller_return": "0x42d486",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "frame1",
+     "routine": "TestFinDeMission"
+    }
+   ],
+   "core_provider_stops": [],
+   "crossings": [],
+   "differing_blocks": [],
+   "equal": true,
+   "result": "returned",
+   "rng": {
+    "0x497164": "0x78fe3b37",
+    "0x498db4": "0x3212b7ce"
+   },
+   "rng_equal": true,
+   "state_equal": true
+  },
+  "load_tail": {
+   "bindings": {
+    "equal": true,
+    "not_modeled": [],
+    "original": 13,
+    "python": 13
+   },
+   "boundaries": {
+    "equal": true,
+    "not_modeled": [
+     {
+      "index": 9,
+      "routine": "DDLockSurface",
+      "words": [
+       0,
+       1,
+       2,
+       3
+      ]
+     },
+     {
+      "index": 10,
+      "routine": "FilledBox",
+      "words": [
+       2,
+       3
+      ]
+     },
+     {
+      "index": 15,
+      "routine": "MCICD_Play",
+      "words": [
+       0,
+       1,
+       2,
+       3
+      ]
+     }
+    ],
+    "original": 16,
+    "python": 16
+   },
+   "checkpoints": [
+    {
+     "caller_return": "0x42d284",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "RestoreAll"
+    },
+    {
+     "caller_return": "0x42d2ab",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "SetClipping"
+    },
+    {
+     "caller_return": "0x42d2d5",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "MenuInit"
+    },
+    {
+     "caller_return": "0x468489",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "InitGameZone"
+    },
+    {
+     "caller_return": "0x42d2de",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "InitGameZone"
+    },
+    {
+     "caller_return": "0x42d340",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "InputGame"
+    },
+    {
+     "caller_return": "0x42d347",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "InputSend"
+    },
+    {
+     "caller_return": "0x42d3b5",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "caller_return": "0x42d3b5",
+     "equal": true,
+     "occurrence": 1,
+     "phase": "load_tail",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "caller_return": "0x42d3b5",
+     "equal": true,
+     "occurrence": 2,
+     "phase": "load_tail",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "caller_return": "0x42d3b5",
+     "equal": true,
+     "occurrence": 3,
+     "phase": "load_tail",
+     "routine": "ProcessInputGame"
+    },
+    {
+     "caller_return": "0x42d3e6",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "MessageBoxCalcul"
+    },
+    {
+     "caller_return": "0x42d3f0",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculIconeAction"
+    },
+    {
+     "caller_return": "0x42d3f5",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "ProjectileCalcul"
+    },
+    {
+     "caller_return": "0x42d3fa",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculEnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 1,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 2,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 3,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 4,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 5,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 6,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 7,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 8,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 9,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 10,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 11,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 12,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 13,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 14,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x456eb2",
+     "equal": true,
+     "occurrence": 15,
+     "phase": "load_tail",
+     "routine": "EnginNextEtape"
+    },
+    {
+     "caller_return": "0x42d3ff",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculBatimentNextEtape"
+    },
+    {
+     "caller_return": "0x42d404",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "RechercheCalcul"
+    },
+    {
+     "caller_return": "0x42d409",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "PlayerInitAllianceCompteur"
+    },
+    {
+     "caller_return": "0x42d40e",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "SetUpdateChamp"
+    },
+    {
+     "caller_return": "0x42d413",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "UpdateChamp"
+    },
+    {
+     "caller_return": "0x42d418",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculMatiere"
+    },
+    {
+     "caller_return": "0x42d424",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculCompteurMarche"
+    },
+    {
+     "caller_return": "0x42d432",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "CalculCompteurProposition"
+    },
+    {
+     "caller_return": "0x42d446",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "NextAnimTerrain"
+    },
+    {
+     "caller_return": "0x42d46c",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "NextAnimVeget"
+    },
+    {
+     "caller_return": "0x42d471",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "PlayerAttaqueCalculSympa"
+    },
+    {
+     "caller_return": "0x42d486",
+     "equal": true,
+     "occurrence": 0,
+     "phase": "load_tail",
+     "routine": "TestFinDeMission"
+    }
+   ],
+   "core_provider_stops": [],
+   "crossings": [
+    {
+     "allocated": [],
+     "bindings": 0,
+     "boundaries": 9,
+     "changed_blocks": [],
+     "changed_bytes": {},
+     "eax": "0x1",
+     "occurrence": 0,
+     "owner": "graphics",
+     "phase": "load_tail",
+     "reason": "display routine (Graphics)",
+     "released": 0,
+     "routine": "RestoreAll",
+     "site": "0x42d27f",
+     "state_equal_at_entry": true
+    }
+   ],
+   "differing_blocks": [],
+   "equal": true,
+   "result": "returned",
+   "rng": {
+    "0x497164": "0x1c019f87",
+    "0x498db4": "0x3212b7ce"
+   },
+   "rng_equal": true,
+   "state_equal": true
+  }
+ },
+ "scenario": "v1",
+ "schema": "rising-lands/ai-runtime-m2-frame1-chained-composition/2",
+ "seconds": 35.407,
+ "source_dirty_paths": [
+  "?? pesquisas-paralelas/ia-runtime/validacao/m2-quadro1-exibicao-ia.json"
+ ],
+ "source_revision": "fc864d4feb67fe7bb66813a5fa7b601d5f342709",
+ "summary": {
+  "phases": {
+   "between_frames": {
+    "at": null,
+    "core_provider_stops": [],
+    "crossings": [],
+    "equal": true,
+    "result": "returned",
+    "stop": null
+   },
+   "frame1": {
+    "at": null,
+    "core_provider_stops": [],
+    "crossings": [],
+    "equal": true,
+    "result": "returned",
+    "stop": null
+   },
+   "load_tail": {
+    "at": null,
+    "core_provider_stops": [],
+    "crossings": [
+     [
+      "RestoreAll",
+      "graphics",
+      "display routine (Graphics)"
+     ]
+    ],
+    "equal": true,
+    "result": "returned",
+    "stop": null
+   }
+  },
+  "result": "complete"
+ },
+ "unclosed_original_crossings": []
+}
