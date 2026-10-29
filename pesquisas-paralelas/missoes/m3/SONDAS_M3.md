@@ -184,3 +184,27 @@ S1-a therefore crosses the raids at 9000 and 10800. Combat and AI raid behaviour
 - Run cost: about 1.8–2 h per run.
 
 **Writing the script** is iterative, because unit positions after each move must be read from the run: about 8–12 segments of 5–15 minutes each from snapshots, so about 2–3 h before the first full S1 run. Under `--instantaneo-cada 1000` every full run also leaves the segment-parallel snapshots that pass 2 needs.
+
+## Pass-2 whole-state captures of the probe windows
+
+[passo2_sondas.py](passo2_sondas.py) runs the M2.3 pipeline on the scripted-input oracle from the frame-128 state:
+- sequential records (`registrar_fase`, complete deltas) with the scripted answers per phase;
+- pass 1 replayed from the opening state;
+- pass-2 segments from snapshots every 250 frames, with keys aggregated into 1,000-frame windows;
+- the policy report (`segmentos_quadros_missao.relatorio_longo`);
+- self-checking xz parts.
+
+| Window | Phases | Changed bytes | Logic bytes | Display-only added to the M2.3 mask | Conflicts | Parts |
+|---|---|---|---|---|---|---|
+| P1, 129–629 | 1,002 | 3,278 | 707 | 2,527 | 0 | 1 (8.9 MB) |
+| P2, 129–729 | 1,202 | 8,587 | 881 | 7,661 | 0 | 1 (9.2 MB) |
+| P6, 129–2400 | 4,544 | 22,478 | 2,445 | 19,986 | 0 | 3 (28.9 MB) |
+
+All three policies pass:
+- every phase state is reproduced in pass 2;
+- every changed byte has an observed writer;
+- no surface access happens in logic context.
+
+The window mask (`sondas/<P>/mascara-janela.json`) is the published M2.3 mask, plus the display-only bytes the window proves, minus any byte the window classifies as game logic (none). P6 contains P3's window, because their inputs are equal through frame 2004.
+
+Pass 2 ran at about 2–3 s/frame per job on the Mac mini.
