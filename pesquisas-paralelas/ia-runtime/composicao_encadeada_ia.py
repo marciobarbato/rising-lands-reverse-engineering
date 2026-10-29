@@ -165,8 +165,11 @@ class MemoriaMapaRapida:
 
 
 class ContextoEncadeado:
-    def __init__(self, imagem, cenario):
-        self.cenario = cenario
+    """``modo``: 'cruzamentos' (rounds 3/4: crossings allowed) or 'prova' (round 5: no crossing; Graphics'
+    logic-effects provider for RestoreAll/AffGame, display roots not executed, DeleteBank on the arena)."""
+    def __init__(self, imagem, cenario, modo='cruzamentos', arena=None, superficie=None):
+        self.cenario, self.modo, self.arena, self.superficie = cenario, modo, arena, superficie
+        self.raizes_nao_executadas = []
         self.programa = ler_rul((CD / 'INSTALHD/RISING.RUL').read_bytes())
         self.comandos = imagem.table(TABELA_COMANDOS, 40)
         self.estados = imagem.table(0x42c804, 25)
@@ -291,6 +294,8 @@ def provedores(mapa, prov, mm, ctx, registro, janelas, travessias, fase, regs):
             try:
                 resultado = chamada(**argumentos)
             except core.DependenciaRamoCore as erro:
+                if ctx.modo == 'prova':
+                    raise DependenciaIA(f'{nome} (Core): {erro}', erro.endereco) from erro
                 travessias.paradas_nucleo.append(dict(phase=fase, routine=nome, site=hex(sitio),
                                                       core_address=hex(erro.endereco), message=str(erro)))
                 return travessias.atravessar(fase, nome, sitio, mapa, mm, registro,
@@ -386,7 +391,46 @@ def provedores(mapa, prov, mm, ctx, registro, janelas, travessias, fase, regs):
     for nome in PONTOS:
         if nome in p and nome not in NUCLEO:
             p[nome] = ponto(nome, p[nome])
-    if ctx.cenario == 'exibicao':
+    if ctx.modo == 'prova':
+        import efeitos_logicos_exibicao as graficos
+        from bancos_quadro_ia import liberar_banco
+
+        def efeitos(nome, funcao):
+            def chamar(sitio, **argumentos):
+                travessias.comparar(fase, nome, sitio + 5, mapa)
+                resultado = funcao(mm)
+                for endereco, largura, valor in resultado.escritas:
+                    {1: mm.u8, 2: mm.u16, 4: mm.u32}[largura](endereco, valor)
+                ctx.raizes_nao_executadas.append(dict(phase=fase, routine=nome, site=hex(sitio),
+                                                      provider='graficos efeitos_logicos_exibicao',
+                                                      writes=list(resultado.escritas),
+                                                      guards=[list(g) for g in resultado.verificacoes]))
+                return 0
+            return chamar
+
+        def raiz(nome, eax=None):
+            def chamar(sitio, registros, palavras, limpeza):
+                travessias.comparar(fase, nome, sitio + 5, mapa)
+                ctx.raizes_nao_executadas.append(dict(phase=fase, routine=nome, site=hex(sitio), provider=None,
+                                                      eax=None if eax is None else hex(eax)))
+                return registros['EAX'] if eax is None else eax
+            return chamar
+
+        def banco(sitio, registros, palavras, limpeza):
+            travessias.comparar(fase, 'DeleteBank', sitio + 5, mapa)
+            liberar_banco(mm, ctx.arena, registro, registros['EAX'])
+            mm.reindexar()
+            return 0
+
+        p['RestoreAll'] = efeitos('RestoreAll', graficos.restaurar_tudo)
+        p['AffGame'] = efeitos('AffGame', graficos.desenhar_jogo)
+        p['DDLockSurface'] = raiz('DDLockSurface', ctx.superficie)
+        for nome in ('FilledBox', 'DDUnlockSurface', 'DDFlipPage'):
+            p[nome] = raiz(nome)
+        p['DeleteBank'] = banco
+        p['LoadPie'] = fronteira_menu('LoadPie')
+        p['MCICD_Play:menu'] = fronteira_menu('MCICD_Play')
+    elif ctx.cenario == 'exibicao':
         for nome in GRAFICOS_EXIBICAO:
             p[nome] = cruzar(nome)
         p['LoadPie'] = fronteira_menu('LoadPie')
@@ -426,7 +470,11 @@ def fase_entre_quadros_exibicao(mapa, prov, ctx, registro, travessias, regs, ent
     from fundacoes_quadro import avancar_contadores_iteracao
     mm = MemoriaMapaRapida(mapa)
     r = dict(regs)
-    travessias.atravessar('between_frames', 'AffGame', 0x475063, mapa, mm, registro, 'display routine (Graphics)')
+    if ctx.modo == 'prova':
+        p, _ = provedores(mapa, prov, mm, ctx, registro, JanelasDeclaradas(), travessias, 'between_frames', regs)
+        p['AffGame'](sitio=0x475063)
+    else:
+        travessias.atravessar('between_frames', 'AffGame', 0x475063, mapa, mm, registro, 'display routine (Graphics)')
     if mm.u8(0x5099af):
         mm.u8(0x5099af, 0)
         mm.u8(0x5099ae, 0)
