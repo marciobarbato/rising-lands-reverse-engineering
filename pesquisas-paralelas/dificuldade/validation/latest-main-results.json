@@ -1,0 +1,66 @@
+{
+  "schema": "rising-lands/static-difficulty-validation/1",
+  "phase": "latest-main bounded refresh only",
+  "validated_revision": "5eb91e29217bd8f647ec123f25aa8da4a564db19",
+  "base_main": "3579c40ad455564f2a9b32c9a01b815b24d68f87",
+  "latest_main_ancestry": true,
+  "original_research_preserved": true,
+  "tests": {
+    "discovered": 5,
+    "passed": 5,
+    "skipped": 0,
+    "failures": 0
+  },
+  "static_verification": {
+    "passed": true,
+    "missions": 38,
+    "profile_keys_missing": [
+      "HumanOnly",
+      "ProbaCaveJoueur",
+      "ProbaCaveIA",
+      "ProbaEmbuscade"
+    ],
+    "absolute_profile_operands": 19,
+    "config_calls": 78,
+    "emulated_calls": 0
+  },
+  "documentation_links": "passed",
+  "full_branch_whitespace": "passed",
+  "ownership": "only pesquisas-paralelas/dificuldade/** versus latestmain",
+  "emulated_calls": 0,
+  "original_media_writes": 0,
+  "artifacts": [
+    {
+      "path": "pesquisas-paralelas/dificuldade/evidence/static-scan-v1.json",
+      "bytes": 268191,
+      "sha256": "0698dec9eb506f9dbf92e09ee784d02ed68ebf986c81623e0d61d35589f30fcd"
+    },
+    {
+      "path": "pesquisas-paralelas/dificuldade/evidence/reviewed-routines.asm",
+      "bytes": 39579,
+      "sha256": "657f6115a5f7e4e7cd519f4ff3ddbdffaabe0151c232cee63ebc0be27460997a"
+    },
+    {
+      "path": "pesquisas-paralelas/dificuldade/difficulty_scan.py",
+      "bytes": 10812,
+      "sha256": "6ca143b6cf1be3b97dea206aa9221b0fde9f93f8e905a39e227cfe6395ec2ac3"
+    },
+    {
+      "path": "pesquisas-paralelas/dificuldade/testes/test_difficulty_scan.py",
+      "bytes": 3183,
+      "sha256": "de8b09cff8980f4bb74a96baaf20135e42bf665fc53520fcbf58b0e7eb2e4fff"
+    },
+    {
+      "path": "pesquisas-paralelas/dificuldade/validation/latest-main-static-verify.log",
+      "bytes": 232,
+      "sha256": "29db457f635f8ad528f37c55ad63efdab894caa7219d8cdd459b38592fa3bcd4"
+    },
+    {
+      "path": "pesquisas-paralelas/dificuldade/validation/latest-main-tests.log",
+      "bytes": 640,
+      "sha256": "6e45a4c6a56702ebc768d23d8aa23ec9d1ab76216f3386b4ab879fef61d258cf"
+    }
+  ],
+  "original_evidence_bytes": 307770,
+  "research_scope_changed": false
+}

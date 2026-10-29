@@ -80,3 +80,23 @@ this clone's ignored .local/preliminary-static-validation.
 Only the dedicated remote feature branch is pushed. The final full remote
 SHA and exact tracked-delivery byte total are reported with the delivery,
 without amending a completed commit to insert its own future identity.
+
+
+## Latest-main bounded refresh
+
+Fetched/merged current main
+`3579c40ad455564f2a9b32c9a01b815b24d68f87` (Core native hooks).
+Merge and validated revision: `5eb91e29217bd8f647ec123f25aa8da4a564db19`.
+No selected reader changed. Both static artifacts reproduce exactly; all five
+tests pass, zero skips/failures, 1.631 seconds. Documentation links, latest-main
+ancestry, full-branch whitespace and owned-path checks pass. This refresh adds
+no new research or native execution. Original evidence remains 307,770 bytes.
+
+Current results: [latest-main-results.json](validation/latest-main-results.json),
+[verifier output](validation/latest-main-static-verify.log),
+[test log](validation/latest-main-tests.log). Earlier validation is retained
+as historical evidence for its recorded source revision.
+
+Final tracked delivery: 13 files, 343,447 bytes, largest
+file 268,191 bytes; every output remains below 50MB. The metadata commit following
+this tested merge adds only this bounded refresh handoff and its new logs.
