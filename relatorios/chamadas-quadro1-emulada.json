@@ -1,0 +1,132 @@
+{
+ "al_by_routine": {
+  "BatimentCollision": {
+   "0": 36,
+   "1": 56,
+   "78": 8
+  },
+  "BatimentContourEstIllumine": {
+   "0": 186,
+   "1": 186
+  },
+  "BatimentEstDecouvert": {
+   "0": 366,
+   "1": 6
+  },
+  "BatimentGetCase": {
+   "0": 40,
+   "1": 16,
+   "128": 18,
+   "129": 8,
+   "14": 2,
+   "254": 16,
+   "255": 24
+  },
+  "CalculFatigue": {
+   "0": 64,
+   "1": 24
+  },
+  "CaseEstDecouverte": {
+   "0": 210,
+   "1": 24
+  },
+  "CaseEstIlluminee": {
+   "0": 164,
+   "1": 40
+  },
+  "Chemin_ModifieZone": {
+   "0": 16,
+   "1": 32
+  },
+  "GameNextFrame": {
+   "0": 4
+  },
+  "GetBit": {
+   "0": 174,
+   "1": 26
+  },
+  "Random": {
+   "100": 1,
+   "110": 1,
+   "134": 1,
+   "135": 1,
+   "15": 1,
+   "164": 1,
+   "167": 8,
+   "171": 1,
+   "179": 1,
+   "19": 1,
+   "247": 1,
+   "255": 8,
+   "33": 1,
+   "36": 1,
+   "55": 1,
+   "56": 1,
+   "79": 1,
+   "88": 1
+  },
+  "SetBit": {
+   "182": 10,
+   "190": 10
+  },
+  "SetCollision": {
+   "0": 40
+  },
+  "SetEnginCollision": {
+   "0": 32,
+   "1": 32,
+   "255": 8,
+   "26": 8
+  }
+ },
+ "by_routine": {
+  "BatimentCollision": 100,
+  "BatimentContourEstIllumine": 372,
+  "BatimentEstDecouvert": 372,
+  "BatimentGetCase": 124,
+  "CalculFatigue": 88,
+  "CaseEstDecouverte": 234,
+  "CaseEstIlluminee": 204,
+  "Chemin_ModifieZone": 48,
+  "GameNextFrame": 4,
+  "GetBit": 200,
+  "Random": 32,
+  "SetBit": 20,
+  "SetCollision": 40,
+  "SetEnginCollision": 80
+ },
+ "calls": 678,
+ "cases_with_stores": {
+  "CalculFatigue": 40,
+  "Chemin_ModifieZone": 32,
+  "GameNextFrame": 4,
+  "Random": 32,
+  "SetBit": 6,
+  "SetCollision": 24,
+  "SetEnginCollision": 48
+ },
+ "comparisons": 1918,
+ "dependencies": [],
+ "mismatches": [],
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "owner0_discovery_grid": "0x417f6000",
+ "path_reproduction": {
+  "boundaries_equal": true,
+  "code_unchanged": true,
+  "entry_trace_equal": true,
+  "passed": true,
+  "phase_states_equal": {
+   "between_frames": true,
+   "frame1": true,
+   "load_tail": true
+  }
+ },
+ "perturbation_limit_per_phase": 4,
+ "seconds": 48.241,
+ "source_sha256": {
+  "ferramentas/chamadas_quadro_core.py": "05c0807446703ac596c9a3ee3ccebcb2c6921a1ab129e802627a00d9cf13bd2b",
+  "ferramentas/memoria_quadro_core.py": "3bed22e2f2ee97f60fa295194789717a62ec01731c81bc56779ac27cfb2fc956",
+  "ferramentas/validar_chamadas_quadro_core.py": "74d436757731cd23132d6eb5165722b93ca9db31c0bbcb9bdb8aa3ac7bf8ec54"
+ },
+ "unit_pool_base": "0x4140d000"
+}
