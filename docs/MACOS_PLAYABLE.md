@@ -132,7 +132,7 @@ The [independent audit](../apps/macos-preview/M3_AUDIT.md) records isolation and
 provider dependencies.
 
 
-## Independent accepted-evidence playback (contract v3)
+## Independent accepted-evidence playback (contract v5)
 
 The app offers **Inspeção M2.2 · evidência aceita** separately from the synthetic
 training exercise. It loads the accepted display-v2 MissionLoad state and all
@@ -141,47 +141,24 @@ phase or frame, inspect original-address memory/observed words, or reset. This
 is read-only playback, not a running Python mission or M3 acceptance. M1
 original-v2 inspection remains a separately labeled API.
 
-The shell pins Graphics API **1.2** and carries both the surface and terrain
-cache from the hash-verified initial artifacts through every drawing phase.
-Backward navigation replays from the start; there is no independent mid-sequence
-cache. frame(k) leaves the surface unchanged. The initial original surface
-represents RestoreAll/MenuInit; no blank surface or fallback renderer is used.
+The shell pins Graphics API **1.4** and calls it with `hud=True`. HUD and
+captured cursor are included within the published domain. Every required region
+is checked against captured memory before rendering, including the minimap and
+player table. Other versions are refused until explicitly reviewed and tested.
+All rendering continues to come exclusively from Graphics.
 
-All 12 published chained checkpoint hashes match. The API still reports its
-0x41591F stop for unsupported unit types 8/1, including after their visible
-footprints leave the playfield. The consumer preserves it: the 128-frame report
-contains 128 partial drawing phases and 129 undrawn phases, zero full results.
-HUD rows >=544 and cursor are not drawn; this limitation is shown in the view.
-Later frames have accepted memory but no new native pixel checkpoints beyond 12.
+All 128 drawing phases are checked against the pinned 1.4 full 800×600 native
+phase-end reference before publication. Undrawn phases preserve the same
+verified surface. Generic named HUD/body stops remain visible outside the
+provider's supported domain. The palette is static; palette cycling is not
+applied. Memory playback verifies 257 phases and 11 checkpoints. The inspector
+uses phase/frame navigation, original-address reads, filter and reset, without
+live orders. See the [v5 contract](../apps/macos-preview/M3_CONTRACT.md) and
+[handoff](../apps/macos-preview/HANDOFF.md) for exact evidence and test results.
 
-Inputs and outputs are explicit. For the authorized local read-only inputs:
-
-```sh
-export RISING_PYTHON_RUNTIME="$HOME/.cache/codex-runtimes/codex-primary-runtime/dependencies/python"
-./compilar-jogável --development-ref HEAD \
-  --inputs-root '/Users/marcio/git/Rising Lands' \
-  --data-root '/Users/marcio/git/Rising-Lands-Codex/.local/round3-workspace/local-data/macos-playable'
-```
-
-`--inputs-root` (or `RISING_INPUTS_ROOT`) must contain `source/cd`; it defaults
-to the current clone. `RISING_PYTHON_RUNTIME` is required and points to a
-relocatable CPython 3.12 ARM64 root (`bin/python3`, `lib/python3.12`). Preflight
-reports missing inputs before creating outputs. The output default is this
-clone's `.local/macos-playable`; it no longer derives a shared directory from
-Git's parent. Original CD/runtime inputs are never modified. The bundle name
-and identity remain RisingLands-ptbr / local.risinglands.ptbr.
-
-Both the existing exercise and the new inspection view have native UI smoke
-checks. Their reports are `native-smoke.json` and `native-inspection-smoke.json`
-under the build log directory. Native inspection can also be opened with:
-
-```sh
-open -n .local/round3-workspace/local-data/macos-playable/dist/development/RisingLands-ptbr.app --args --inspection
-```
-
-The [v3 contract](../apps/macos-preview/M3_CONTRACT.md) documents exact API
-semantics, evidence pins, ordering, publication and remaining dependencies.
-
+The full asset pack is being published in the separate rising-lands-assets
+repository. This app update continues to use an explicit read-only CD inputs
+root and does not add that pack or its commits to the code repository.
 
 ## Bounded native smoke readiness
 
@@ -210,7 +187,7 @@ signal after real initialization to reproduce a slow startup without inventing
 worker/asset success or generating CPU load. It is ignored outside smoke mode
 and bounded to 0..80000 ms. Native state-machine tests exercise missing ready,
 late window, out-of-order document/ready events and an unchanged check deadline.
-Graphics stays pinned to its explicitly accepted 1.2 contract; other versions
+Graphics stays pinned to its explicitly accepted 1.4 contract; other versions
 still fail. After this robustness delivery, workstream A awaits M2.3 and the
 Claude M3 plan; no new game/UI features are planned here.
 

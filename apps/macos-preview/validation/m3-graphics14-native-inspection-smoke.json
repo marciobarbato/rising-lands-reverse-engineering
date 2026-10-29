@@ -1,0 +1,41 @@
+{
+  "bundlePath" : "\/Users\/marcio\/git\/Rising-Lands-Codex\/.local\/macos-playable\/dist\/development\/RisingLands-ptbr.app",
+  "commit" : "b4e3b6266e21d64ce3a9c87961cae0702ce0e85c",
+  "diagnosticReadyDelayMs" : 0,
+  "nativeWindowVisible" : true,
+  "passed" : true,
+  "pythonStderr" : "",
+  "readiness" : {
+    "appReady" : true,
+    "checksBudgetSeconds" : 45,
+    "checksSeconds" : 6.5973052916815504,
+    "documentLoaded" : true,
+    "elapsedSeconds" : 12.708901333389804,
+    "initializationBudgetSeconds" : 90,
+    "initializationSeconds" : 6.1115960417082533,
+    "phase" : "checks",
+    "windowBudgetSeconds" : 45,
+    "windowVisibleSignal" : true
+  },
+  "readySignal" : {
+    "action" : "appReady",
+    "assets" : true,
+    "commit" : "b4e3b6266e21d64ce3a9c87961cae0702ce0e85c",
+    "mode" : "inspection",
+    "protocol" : 1,
+    "worker" : true
+  },
+  "render" : "undrawn",
+  "scenario" : "MONDE01\/display-v2\/M2.2-accepted-evidence",
+  "tests" : [
+    "257 summaries and 11 checkpoints shown",
+    "captured blocks listed",
+    "DOM next phase reaches frame1",
+    "DOM memory read returns captured counter",
+    "DOM frame selection reaches frame12",
+    "Graphics full image with HUD and cursor shown",
+    "undrawn frame preserves the full native phase-end surface",
+    "DOM block filter",
+    "DOM reset preserves initial state identity"
+  ]
+}

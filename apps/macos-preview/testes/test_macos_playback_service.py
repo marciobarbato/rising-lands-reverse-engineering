@@ -22,8 +22,18 @@ class PlaybackServiceTests(unittest.TestCase):
         result = client.request(dict(id=2, operation='frame', frame=1))['playback']
         self.assertEqual(result['phase'], 'frame1')
         self.assertEqual(result['render']['status'], 'undrawn')
-        self.assertEqual(result['render']['inherited_stop']['endereco'], '0x0041591f')
+        self.assertIsNone(result['render']['stop'])
+        self.assertNotIn('inherited_stop', result['render'])
+        self.assertEqual(result['render']['version'], [1, 4])
         self.assertIn('image', result['render'])
+        self.assertTrue(result['render']['hud'])
+        self.assertTrue(result['render']['equals_native_phase_end'])
+        drawing=client.request(dict(id=20,operation='phase',phase='between_frames'))['playback']['render']
+        regions={v['name']:v for v in drawing['required_regions']}
+        self.assertEqual(regions['minimapa']['bytes'],128*128)
+        self.assertEqual(regions['jogadores']['bytes'],100)
+        self.assertTrue(drawing['equals_native_full_surface'])
+        self.assertTrue(drawing['equals_native_phase_end'])
         self.assertEqual(client.request(dict(id=3, operation='read', address='0x508f7c', size=4))['playback']['read_hex'], '01000000')
         self.assertFalse(client.request(dict(id=4, operation='unknown'))['ok'])
         self.assertFalse(client.request([])['ok'])
@@ -38,11 +48,11 @@ class PlaybackServiceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory)
             folder=root/'pesquisas-paralelas/graficos-animacao';folder.mkdir(parents=True)
-            (folder/'render_quadro.py').write_text('VERSAO_RENDER_QUADRO = (1, 3)\n')
+            (folder/'render_quadro.py').write_text('VERSAO_RENDER_QUADRO = (1, 5)\n')
             client=MacOSPlaybackClient(root, ROOT/'apps/macos-preview/src','test')
             self.addCleanup(client.close)
             response=client.request(dict(id=1,operation='open'))
             self.assertFalse(response['ok'])
             self.assertNotIn('playback',response)
             self.assertEqual(response['error_type'],'GraphicsVersionError')
-            self.assertIn('expected (1, 2)',response['error'])
+            self.assertIn('expected (1, 4)',response['error'])

@@ -783,3 +783,17 @@ The M2.2 reference extends the frozen `-v2` display scenario from frame 1 to fra
 **Segment-parallel execution** ([segmentos_quadros_missao.py](../pesquisas-paralelas/missoes/segmentos_quadros_missao.py)) restores exact snapshots (memory, CPU context, bench state) in fresh benches. On M2.2, its segmented capture records and its segmented policy both equal the sequential results byte for byte. It is the planned tool for M2.3a.
 
 Details: [missions handoff](../pesquisas-paralelas/missoes/HANDOFF.md), Stage20.
+
+## Stage21 (M2.3): 9,200-frame original capture and long-run comparison policy
+
+M2.3 extends the frozen `-v2` display reference to frame 9,200, original only, with the same declared inputs and decisions as M2.2.
+
+- **Capture:** 10 xz parts in [evidencias/m2-3/](../pesquisas-paralelas/missoes/evidencias/m2-3/), 93,012,400 bytes in all, with a manifest that pins each part's raw and compressed SHA-256. There are 18,401 phases in complete delta form. Every part opens with a full state, and full states also follow frames 8999, 9000 and 9176.
+- **Per-phase hashes:** `summary` covers the full state. `compared_summary` covers the state with the cumulative mask zeroed. `masked_sha256` covers only the masked bytes. The manifest defines all three.
+- **Policy:** [m2-3-politica-comparacao-9200-quadros.json](../pesquisas-paralelas/missoes/validacao/m2-3-politica-comparacao-9200-quadros.json). 154,620 bytes change. The cumulative mask has 153,060 display-only bytes, and 1,560 logic bytes are compared: the 999 of M2.2 plus 561 later ones, 413 of them in the first raid window from frame 9,000.
+- **Checks:**
+  - Every phase state is reproduced.
+  - The written parts replay to every summary, compared summary, masked hash and full state.
+  - The first 128 frames equal the M2.2 capture.
+
+Details: [missions handoff](../pesquisas-paralelas/missoes/HANDOFF.md), Stage21.
