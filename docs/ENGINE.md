@@ -1,0 +1,247 @@
+# Native Rust engine pilot
+
+This is a method/foundation pilot, not a playable engine, M2.3 work or M3
+acceptance. The game engine and rendering will be Rust; Swift owns the macOS
+shell, C only small tooling, and Python remains the original-validated reference
+and test harness. This work owns only `motor/` and this document. The existing
+app, references, captures and other fronts are unchanged.
+
+## Reproduce
+
+Install [rustup stable](https://rust-lang.org/tools/install/) for
+`aarch64-apple-darwin`. Add the rustfmt and clippy components:
+
+```sh
+rustup toolchain install stable --profile minimal
+rustup component add rustfmt clippy --toolchain stable
+./motor/validate.sh
+```
+
+The workspace pins the stable channel and has no external Cargo dependencies.
+`Cargo.lock` is committed. The validation script runs formatting, strict Clippy,
+`cargo test`, `cargo build`, Python unittest discovery, the ctypes capture
+harness, C header layout checks and a Swift CLI client. Python3 standard-library
+modules suffice; no original media, emulator, assets, pip packages or app bundle
+are needed to reproduce. Capstone was used only for the separate static audit.
+
+The essential engine validation can also be run manually:
+
+```sh
+cd motor
+cargo test --workspace --locked
+cargo build --workspace --locked
+python3 -B -m unittest discover -s testes -v
+python3 -B testes/differential.py \
+  --library target/debug/librising_engine.dylib \
+  --output ../.local/engine-validation-new.json
+```
+
+The optional output path must not already exist: the harness refuses to replace
+evidence. All generated libraries, executables and caches stay in ignored
+`motor/target/`; choose clone-local `.local/` for local reports. `RL_LIBRARY`
+selects another built library (for example release) for Python tests. The
+supported native delivery host is 64-bit aarch64 macOS; no Linux/Windows or
+cross-compilation validation is claimed. See [handoff](../motor/HANDOFF.md) for
+actual toolchain, baseline, SHAs and results.
+
+## State and original-memory projection
+
+`rl-core` has no FFI or host APIs. `GameState` owns optional semantic `WorldRng`
+and `CrtRng` values. A missing capture field stays absent, never a default seed.
+`BcdDigits` is four unpacked bytes, units first; its thousands byte is allowed
+to exceed 9. It is loaded/projected per call because BCD buffers are caller-owned
+scratch objects rather than a fixed game-global pool. No projectile state is
+ported in this pilot; the optional ProjectileInit/Set scope is deferred.
+
+`MemoriaJogo` is an explicit sparse `BTreeMap<u32, Vec<u8>>` of owned declared
+regions. Addresses are original 32-bit addresses, never host pointers. Regions
+are nonempty, nonoverlapping, ordered numerically and cannot extend past 2^32.
+Accessors read/write u8/u16/u32 little-endian only when the entire access fits
+one declared region. Adjacent regions are not implicitly coalesced. Missing
+access names its address/width; no gap is zero-filled. Partly captured modeled
+u32 fields raise IncompleteField instead of appearing absent.
+
+`GameState::load(memory)` returns semantic state and a `Projection` layout.
+The layout retains all uninterpreted declared bytes and explicit original
+address bindings. `GameState::project(layout)` clones that declared template
+and writes semantic fields into their bound addresses. Tests prove identity
+for memory→state→memory and for modified typed state→memory→state, while opaque
+bytes remain unchanged. This is an incremental port: uninterpreted bytes do
+not acquire invented Rust game semantics. The state is not a packed original
+struct or an address-indexed simulation.
+
+`World::step` projects current state to a private transaction, executes the
+selected typed operation and reloads semantic bindings after the result. This
+also preserves BCD buffers aliasing an RNG/global. Only successful calls publish
+new world state and output registers. A failed call publishes no prefix. The
+pilot's transactional error semantics are not a claim that arbitrary failing
+original routines roll back their earlier writes.
+
+BCDToInt reproduces aliasing explicitly: zero the destination word, then each
+digit read overlapping that word sees the current typed accumulator bytes.
+The final word is projected back. The register adapter preserves the original
+scratch effects established by the [static review](../motor/research/bcd-register-review.asm).
+Unknown later engine paths must receive named dependency errors, never empty
+callbacks or fallback success.
+
+## Pilot C ABI 1.0
+
+`rl-ffi` builds `librising_engine.dylib` as a `cdylib`; the contract is
+[motor/include/rising_engine.h](../motor/include/rising_engine.h).
+A Clang module map supports `import RisingEngine` in Swift. The
+[Swift CLI test](../motor/testes/abi_smoke.swift) calls the actual dylib; it does
+not integrate live simulation into the macOS app.
+
+`rl_versao()` returns `0x00010000` (major in high 16, minor in low 16). Creation
+requires that exact version, and Python/Swift clients gate it explicitly.
+Changes to layouts, widths, semantics or existing signatures require a major
+bump. Additive functions require an explicit minor bump, documentation and
+client tests; consumers do not silently accept a new version. Crate version
+0.1.0 describes pilot maturity and is distinct from ABI 1.0.
+
+| Function | Contract |
+| --- | --- |
+| rl_criar_mundo | Version, explicit ticks/second, epoch_ms → opaque u64 handle; zero rate refused |
+| rl_liberar_mundo | Releases the handle; stale/zero/double-free refused; tokens are never reused |
+| rl_carregar_blocos | Copies all input blocks atomically; replaces the whole projection; preserves virtual clock |
+| rl_executar_rotina | Isolated routine identifier and seven data GPRs → updated registers/world; **not a frame step** |
+| rl_quantidade_blocos | Number of projected blocks |
+| rl_projetar_bloco | Indexed block in numeric-address order; size query, then copy into caller buffer |
+| rl_avancar_ticks | Advances virtual clock only; executes no game logic |
+| rl_relogio | Tick u64 and virtual milliseconds u32 |
+| rl_erro_mensagem | Thread-local UTF8+NUL error text, query/copy; querying does not clear it |
+
+`RlBloco` has u32 address/length and a host pointer to readable input bytes.
+`RlRegisters` has u32 EAX, EBX, ECX, EDX, ESI, EDI, EBP, in that order.
+No x86 EIP/ESP/EFLAGS or stack execution is exposed. All seven data registers
+are compared to original returns. Python's BCD providers return None and model
+memory only; the harness explicitly adds their statically proved scratch
+register effects, rather than claiming Python returns them. IntToBCD returns
+EAX=0, EDX=1; BCDToInt preserves EAX, sets EDX=10000. Other data GPRs are kept.
+
+No Rust-owned pointers escape. Input storage may be released after the call;
+projected buffers belong to the caller. Nonnull foreign pointers must be valid,
+aligned, sized as declared and disjoint from output storage. Arbitrary dangling
+pointers cannot be validated by Rust and violate the C caller preconditions.
+The ABI supports 64-bit hosts. Load limits are 65,536 blocks and 64MiB total;
+zero blocks are allowed, zero-length individual blocks are refused. The pilot
+copies data for correctness and makes no real-time throughput claim.
+
+All calls use an internal registry mutex, with per-thread error messages. Use
+one caller/serialization discipline per world, including free and a complete
+multi-call projection enumeration: different calls are atomic individually,
+not one combined snapshot under concurrent mutation. Independent worlds are
+isolated and tested under concurrent callers. No callback crosses the ABI.
+Rust panics in stateful entry points are caught and returned; a poisoned mutex
+fails explicitly. Process-level allocation aborts/foreign-pointer violations
+are not recoverable status errors.
+
+| Status | Name |
+| ---: | --- |
+|0|OK|
+|1|InvalidArgument|
+|2|InvalidHandle|
+|3|MemoryError (including undeclared, incomplete, overlap, overflow)|
+|4|UnknownRoutine|
+|5|UnsupportedPath (including thread getter at 0x48c513)|
+|6|BufferTooSmall|
+|7|Panic|
+|8|Poisoned|
+|9|ResourceLimit|
+|10|VersionMismatch|
+
+Success clears the calling thread's previous error. Errors leave the world and
+register outputs unchanged. The explicit projection-query exception writes
+address/required-size metadata on BufferTooSmall and leaves the byte buffer
+untouched. Null/zero is the size-query form. Output storage on other failures
+must not be consumed. The header documents exact pointer preconditions.
+
+## Deterministic ticks and clock
+
+One future simulation tick is one logic frame. Host pacing and speed controls
+schedule ticks; they never change per-tick arithmetic or supply wall-clock
+deltas. This pilot introduces the integer `TickClock`, not a frame dispatcher.
+Its tick is wrapping u64; `rl_avancar_ticks` explicitly advances that counter.
+A routine call does not implicitly tick. A future frame orchestration must
+advance once per validated logic frame in its published contract.
+
+Virtual time is `epoch_ms + floor(tick *1000 /ticks_per_second)`, reduced to
+u32 with explicit wrapping for Win32 timer width. The intermediate is u128, so
+u64 ticks times1000 cannot overflow. There are no wall-clock reads or sleeps in
+Rust logic. A future GetTickCount/timeGetTime consumer must use this virtual
+clock; timer/seed initialization is not ported here. Tests cover batching,
+rate fractions, u32 clock wrap, u64 tick wrap and identical RNG results under
+different pacing/rates. Rate is fixed at world creation, nonzero and explicit.
+`TickClock::DEFAULT_RATE` is 20Hz (50ms nominal period), a configurable pilot
+pacing policy, **not proof of an original fixed MONDE01 FPS**: Core's cadencia
+module explicitly establishes no fixed FPS. Historical timing calibration
+remains a coordinator decision.
+
+## Arithmetic and rendering boundaries
+
+All original-width overflow uses wrapping_add/sub/mul/shifts. Narrowing casts
+are documented at their width boundary (DX→u16, a digit→u8, virtual time→u32).
+Host lengths/indices use checked conversions/addition or bounded structural
+invariants; projection address validation rejects ranges beyond2^32. Debug
+and release both keep overflow checks enabled, so forgotten unchecked arithmetic
+fails tests instead of inheriting build-mode-dependent behavior. No floating
+point, host RNG or nondeterministic collection iteration enters pilot logic.
+
+Rendering remains separable from logic. The future output contract must carry
+the original 800×600 8-bit indexed surface and palette, scaled by the app. A
+separate renderer can later be replaced by an HD implementation. This pilot
+contains no renderer, palette, frame output function, asset extraction or blank
+placeholder frame. Original assets will be committed/bundled by their later
+owner; the projection/oracle harness requires none.
+
+## Original-first porting and validation procedure
+
+1. Select a fully proved Python routine and original-only capture from its
+   owner's HANDOFF. Pin capture and relevant reference identities. Keep both
+   read-only. Record original executable identity and coverage limits first.
+2. Audit addresses, widths, aliases, mutation order, register effects and
+   dependency exits. Commit original research separately from implementation.
+3. Define semantic Rust types, then explicit load/project bindings. Unknown
+   fields remain opaque; absent bytes are errors, not invented initial state.
+4. Port wrapping arithmetic and pure logic. Keep renderer and host effects
+   outside logic. Unsupported paths get named errors before publication.
+5. Through ctypes, load each captured input into Rust, run the routine, project
+   every declared byte and compare with both the original and unchanged Python.
+   Compare changed-byte triples, seven data GPRs and captured RNG seeds. Include
+   caller-stack writes and unchanged writes when reconstructing input regions.
+6. Prove load/project identity, aliasing, errors, atomic publication and repeat
+   behavior. Mutate an actual Rust return and actual projected byte in the
+   harness and require the oracle to detect each. Test deterministic timing
+   separately from original captures, clearly labeling reference-only cases.
+7. Fetch/merge latest main into the feature, rerun validation, record toolchain,
+   case counts, errors/skips/dependencies and SHAs, then push the feature only.
+
+The frozen pilot corpus is 75 selected records: Random 24, LongRand 12, rand 12,
+IntToBCD 19, BCDToInt 8. LongRand/rand include nested captures of the same original
+call and are counted separately. This is not 75 independent game scenarios.
+All are required; no optional oracle skips. The corpus has only 19 captured
+BCD encodes and 8 decodes; exhaustive u16 encoding/round-trip and overlap tests
+extend comparison with Python, not the claim of original-native coverage.
+See [audit](../motor/research/PILOT_AUDIT.md), [pins](../motor/testes/reference-pins.json)
+and [differential harness](../motor/testes/differential.py).
+
+## Open contracts for macOS/M3
+
+The pilot ABI is available for isolated interoperability. Before live app
+integration the coordinator still needs to publish:
+
+- full world initialization, complete deterministic frame-step and input/order
+  semantics, dependency stops and lifetime/reset rules;
+- immutable memory/render snapshots with generation identity and buffer
+  ownership/lifetime, including whether multi-call copies remain acceptable;
+- indexed 800×600 surface stride/orientation, palette format/updates and explicit
+  full/partial/stop status, while keeping rendering replaceable;
+- native library location, architecture/version gate, loading/linking and
+  signing/bundling policy for Swift, and thread/error-reporting policy;
+- tick rate/epoch calibration and exact virtual-clock use at original timer
+  calls, plus the later asset packaging contract;
+- whether a shipped app retains Python. It remains the reference/harness and
+  present evidence inspector; this pilot changes no app runtime.
+
+Until then, the macOS consumer's LIVE apply_frame stays RuntimeContractPending.
+No engine frame ABI, input protocol, milestone or acceptance is invented here.

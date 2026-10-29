@@ -23,7 +23,7 @@ The harness will import these unchanged from this clone, never another checkout.
 World RNG uses unsigned division with explicit wrapping intermediate arithmetic.
 CRT RNG accepts the proved single-thread getter only, preserving the original
 (thread pointer +12) wrapping/null behavior. Unsupported getters are named stops.
-BCD is four unpacked bytes, units first; the thousands byte is not clamped to9.
+BCD is four unpacked bytes, units first; the thousands byte is not clamped to 9.
 BCDToInt must preserve destination/source overlap: zero the word first, then
 read each source digit against the updated value. Captures include caller-stack
 changes and unchanged written bytes; do not zero-fill their unobserved neighbors.
@@ -42,6 +42,6 @@ A checked sparse projection retains uninterpreted declared bytes and binds the
 few modeled fields explicitly. Per-call BCD buffers are typed scratch values,
 with aliasing handled in their load/project boundary. No projectile pool,
 frame engine, rendering, assets, orders or live Swift integration is claimed.
-The clock foundation uses integer tick arithmetic only. A configurable20Hz
+The clock foundation uses integer tick arithmetic only. A configurable 20Hz
 pilot default is pacing policy, not an inferred historical MONDE01 fixed FPS;
 Core's cadencia explicitly does not establish a fixed FPS.
