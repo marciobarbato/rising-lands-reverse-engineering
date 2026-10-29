@@ -63,6 +63,27 @@ class WrappersSobreFronteirasCRT(unittest.TestCase):
         self.assertEqual(saidas, [(RETORNO, 0, 0x5555, 0x6666), (RETORNO, 0, 0x5555, 0x6666),
                                   (RETORNO, 0xffffffff, 0x5555, 0x6666)])
 
+    def test_file_size_over_fseek_and_ftell(self):
+        from emulador import RETORNO
+        posicao, chamadas = [0], []
+
+        def fseek(c):
+            fluxo, deslocamento, origem = c.argumentos
+            chamadas.append(('fseek', fluxo, deslocamento, origem))
+            posicao[0] = {0: deslocamento, 2: 0x1234 + deslocamento}[origem]
+            return 0
+
+        def ftell(c):
+            chamadas.append(('ftell', c.argumentos[0]))
+            return posicao[0]
+
+        self.b.declarar_vinculo(0x48cda2, 'CRT.fseek', ('EAX', 'EDX', 'EBX'), fseek, natureza='io')
+        self.b.declarar_vinculo(0x48cf11, 'CRT.ftell', ('EAX',), ftell, natureza='io')
+        r = self.b.executar(0x4584bc, ((0x4584bc, 0x4584f0),), dict(EAX=0x99, EBX=0x1111, ECX=0x2222, EDX=0x3333))
+        # FileSize: fseek(end), ftell, fseek(set 0); EAX = size; EBX/ECX/EDX restored.
+        self.assertEqual((r['EIP'], r['EAX'], r['EBX'], r['ECX'], r['EDX']), (RETORNO, 0x1234, 0x1111, 0x2222, 0x3333))
+        self.assertEqual(chamadas, [('fseek', self.handle, 0, 2), ('ftell', self.handle), ('fseek', self.handle, 0, 0)])
+
 
 if __name__ == '__main__':
     unittest.main()

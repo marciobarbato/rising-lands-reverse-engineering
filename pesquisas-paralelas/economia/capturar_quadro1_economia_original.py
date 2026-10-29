@@ -129,6 +129,18 @@ class IsolamentoEconomia(oq.Isolamento):
             self.ativo = True
 
 
+# Oracle sources each scenario actually runs (v1 does not touch the display backend).
+FONTES = {'v1': ('pesquisas-paralelas/missoes/oraculo_quadro_missao.py',),
+          'exibicao': ('pesquisas-paralelas/missoes/oraculo_quadro_missao.py',
+                       'pesquisas-paralelas/missoes/oraculo_exibicao_missao.py',
+                       'pesquisas-paralelas/missoes/cenarios_oraculo.py',
+                       'pesquisas-paralelas/graficos-animacao/fronteiras_exibicao.py')}
+
+
+def fontes(cenario):
+    return (Path(__file__),) + tuple(RAIZ / f for f in FONTES[cenario])
+
+
 def captura_quadro(cenario):
     return cenarios_oraculo.caminho(cenario, 'captura_quadro')
 
@@ -168,7 +180,8 @@ def executar(cenario='v1', conjunto='quadro'):
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--saida', required=True)
-    ap.add_argument('--cenario', default='v1', choices=tuple(cenarios_oraculo.ARTEFATOS))
+    # exibicao_interino (Stage17, retired interim backend) is historical and not rerunnable.
+    ap.add_argument('--cenario', default='v1', choices=tuple(FONTES))
     ap.add_argument('--conjunto', default='quadro', choices=tuple(CONJUNTOS))
     a = ap.parse_args()
     saida = RAIZ / a.saida
@@ -185,10 +198,7 @@ def main():
         schema='rising-lands/monde01-frame1-isolated-economy-calls/2', original_sha256=HASH_ORIGINAL,
         translation_executed=False, source_revision=revisao, scenario=a.cenario, named_inputs=cap['named_inputs'],
         source_sha256={str(p.relative_to(RAIZ)): hashlib.sha256(p.read_bytes()).hexdigest()
-                       for p in (Path(__file__), RAIZ / 'pesquisas-paralelas/missoes/oraculo_quadro_missao.py',
-                                 RAIZ / 'pesquisas-paralelas/missoes/oraculo_exibicao_missao.py',
-                                 RAIZ / 'pesquisas-paralelas/missoes/exibicao_declarada.py',
-                                 RAIZ / 'pesquisas-paralelas/missoes/cenarios_oraculo.py')},
+                       for p in fontes(a.cenario)},
         frame_capture=dict(path=str(captura_quadro(a.cenario).relative_to(RAIZ)),
                            sha256=hashlib.sha256(captura_quadro(a.cenario).read_bytes()).hexdigest()),
         phases_label='load_tail = frame 0 (counter 0), frame1 = frame 1 (counter 1)',

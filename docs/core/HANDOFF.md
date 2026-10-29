@@ -452,3 +452,27 @@ The branch merged `origin/main` `81e0a26`, which includes Economy's live bonus t
    - **Missions:** replace `vincular_lista(P(TILES), …)` with `w.vincular_tiles(mapa.vista(P(TILES), 131072))`.
 
 **NOT RUN:** `ftell`; NextAnimVegetFullMap and InitGameZone modes 2–4 (not reached); locked integration.
+
+
+### M2 round 5: ftell, frames to counter 128, unreachable modes, field-growth grids on `feat/re-core`
+
+The branch merged `origin/main` `d94a59e`. ai-runtime reported no open Core gap: EnginOccupeCase goes through Combat's `ocupa_celula`, and its NextAnim* gap was closed by round 4.
+
+1. **CRT `ftell` 0x48cf11** (`01216d2`). It is in `FRONTEIRAS_IO`, and [DECLARED_BINDINGS](DECLARED_BINDINGS.md) has the ABI and review: EAX FILE* → EAX s32 position or −1, every other GPR preserved. Its callers are FileSize and `__doclose`, inside the bound fclose. The original FileSize runs natively over fseek/ftell fixtures. Under the lease, 19 native and protocol tests pass.
+2. **Frames up to counter 128.**
+   - **Survey** (`f426e30`): no new Core routine in frame logic, and no raid by counter 128. The first new entries are Combat's EnginTrouveCibleScan (frame 17) and Economy's ScanNouvellePatate (frame 45).
+   - **Capture before translation** (`ca5a7f3`): later-frame NextAnim*, InitGameZone modes 2/3/4/invalid, FullMap as a foreign entry, and the display-path queries.
+   - **Translations:** InitGameZone modes 2/3/4 and the invalid modes; NextAnimVegetFullMap; TerrainEstDecouvert/Illumine, ExisteEngin, EnginGetType/Player, EnginEstArmure/Miroir/Terreur, TypeEnginSeFatigue; and the getters MissionGetNum and MenuGetNbItem.
+   - **Validation:** the CPU-free replay of every case is exact. Native differentials: display 484 comparisons and v1 2,048, all with 0 mismatches.
+   - Details are in [FRAME_FOUNDATIONS](FRAME_FOUNDATIONS.md#round-5-frames-up-to-cycle-counter-128-unreachable-modes-display-path-queries).
+3. **Field-growth grids** (`f5c788c`, [LIVE_TILE_GRID](LIVE_TILE_GRID.md)). `MundoFisico.vincular_grades(tiles, regioes, atributos, objetos, donos_objetos)` binds every grid UpdateChamp/ScanNouvellePatate touch, by identity. It validates everything before binding, and region rebuilds and the remap reset keep the identity. Economy's actual `propagar_planta` plants into Core's live object grid.
+   - **Request to Economy:** `RecursosTerreno.vivo(...)`, since the constructor copies.
+
+**For Missions:**
+- The survey and the capture name frames by the cycle counter.
+- If your frame-sequence mapping uses other inputs or reaches a raid, Core will capture at those states.
+
+**NOT RUN:**
+- frames beyond counter 128, so no first raid;
+- CalculFatigue's threshold branch and Chemin modes 0/1/3;
+- locked integration.

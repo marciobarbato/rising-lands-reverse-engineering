@@ -21,12 +21,27 @@ CODIGO = (0x401000, 0x493bff)
 
 
 class Cobertura:
-    """Basic blocks executed while the bench is in an isolated call; drained per case."""
-    def __init__(self, bancada):
+    """Basic blocks executed while the bench is in an isolated call; drained per case.
+
+    ``sob_demanda=True`` does not hook at construction: ``ligar``/``desligar`` add and
+    remove the block hook around each isolated call (the phases then run unhooked).
+    """
+    def __init__(self, bancada, sob_demanda=False):
+        self.b, self.blocos, self._gancho = bancada, set(), None
+        if not sob_demanda:
+            self.ligar()
+
+    def ligar(self):
         import unicorn
-        self.b, self.blocos = bancada, set()
-        bancada.cpu.hook_add(unicorn.UC_HOOK_BLOCK, self._bloco, begin=CODIGO[0], end=CODIGO[1])
-        bancada.cpu.ctl_flush_tb()
+        if self._gancho is None:
+            self._gancho = self.b.cpu.hook_add(unicorn.UC_HOOK_BLOCK, self._bloco, begin=CODIGO[0], end=CODIGO[1])
+            self.b.cpu.ctl_flush_tb()
+
+    def desligar(self):
+        if self._gancho is not None:
+            self.b.cpu.hook_del(self._gancho)
+            self._gancho = None
+            self.b.cpu.ctl_flush_tb()
 
     def _bloco(self, cpu, endereco, tamanho, _):
         if self.b.fase == 'isolated':
@@ -37,24 +52,43 @@ class Cobertura:
         return blocos
 
 
-def _isolamento_limitado(bancada, rotinas, casos, observador, limites):
-    """Isolamento that isolates only the first ``limites[name]`` calls of a routine per phase.
+def _isolamento_limitado(bancada, rotinas, casos, observador, limites, estrangeiras=None, cobertura=None):
+    """Isolamento that isolates only the first ``limites[name]`` calls of a routine per phase
+    (and per ``iso.quadro``, the frame index a multi-frame runner sets; None otherwise).
 
     Later calls are not paused: the phase resumes and executes them natively as usual.
+    ``cobertura``: an on-demand ``Cobertura`` hooked only around isolated calls.
+    ``estrangeiras``: {paused routine: (other routine, predicate(iso))}: after the paused
+    call's own cases, the other routine is also run natively from the same exact saved
+    entry state (a foreign entry, for routines the game flow does not reach from there);
+    the state is restored afterwards and the phase continues unchanged.
     """
     from oraculo_quadro_missao import Isolamento
+    estrangeiras = estrangeiras or {}
 
     class IsolamentoLimitado(Isolamento):
         def executar(self, regs):
             nome = self.entradas[regs['EIP']]
-            chave = (nome, self.b.fase)
+            chave = (nome, self.b.fase, self.quadro)
             self.vistos[chave] = self.vistos.get(chave, 0) + 1
             if nome in limites and self.vistos[chave] > limites[nome]:
                 return
-            super().executar(regs)
+            if cobertura is not None:
+                cobertura.ligar()
+            try:
+                super().executar(regs)
+                if nome in estrangeiras:
+                    outra, predicado = estrangeiras[nome]
+                    if predicado(self):
+                        super().executar(dict(regs, EIP=self.b.sym[outra]))
+            finally:
+                if cobertura is not None:
+                    cobertura.desligar()
 
     iso = IsolamentoLimitado(bancada, rotinas, casos, observador)
-    iso.vistos = {}
+    iso.vistos, iso.quadro = {}, None
+    for outra, _ in estrangeiras.values():
+        iso.entradas[bancada.sym[outra]] = outra
     return iso
 
 
@@ -81,7 +115,7 @@ def _bancada(cenario):
 
 
 def executar(rotinas, perturbacoes=None, observador=None, cobertura=None, limite=3600, cenario='v1',
-             limites=None):
+             limites=None, estrangeiras=None):
     """Returns (bench, isolation, frame capture, reproduction, coverage or None).
 
     ``cobertura``: a dict to receive the ``Cobertura`` recorder (key 'recorder')
@@ -95,7 +129,7 @@ def executar(rotinas, perturbacoes=None, observador=None, cobertura=None, limite
     if cob is not None:
         cobertura['recorder'] = cob
     casos = perturbacoes(b) if callable(perturbacoes) else perturbacoes
-    iso = _isolamento_limitado(b, rotinas, casos, observador, limites or {})
+    iso = _isolamento_limitado(b, rotinas, casos, observador, limites or {}, estrangeiras)
     iso.instalar()
     resumos = {}
     for nome, correr in (('load_tail', lambda: b.executar_cauda_carga(limite)),

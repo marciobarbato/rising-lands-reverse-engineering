@@ -36,8 +36,9 @@ def relocacao():
         from mapa_memoria_m1 import carregar_json
     finally:
         sys.path[:] = caminho
-    aloc = {c: carregar_json(cen.caminho(c, 'captura_m1'))['allocations'] for c in ('v1', 'exibicao')}
-    return Relocacao(aloc['v1'], emparelhar(aloc['v1'], aloc['exibicao']))
+    # The frozen display captures were recorded on Missions' Stage17 artifacts (``exibicao_interino``).
+    aloc = {c: carregar_json(cen.caminho(c, 'captura_m1'))['allocations'] for c in ('v1', 'exibicao_interino')}
+    return Relocacao(aloc['v1'], emparelhar(aloc['v1'], aloc['exibicao_interino']))
 
 
 class Normalizador:
