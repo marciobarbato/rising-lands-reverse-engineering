@@ -1,0 +1,23 @@
+{
+ "start_utc": "2026-10-28T21:23:52.459092+00:00",
+ "budget_seconds": 60,
+ "command": [
+  "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+  "-B",
+  "pesquisas-paralelas/ia-runtime/validar_adaptador_reinicio_ia.py",
+  "--emular",
+  "--relatorio",
+  "/Users/marcio/git/Rising Lands/worktrees/re-ai-runtime/pesquisas-paralelas/ia-runtime/validacao/stage2b-adapter-native.json"
+ ],
+ "provider_sha256": "c81239ae0b7527c01242ef3f95b0c11cfa35cbae6333e7c0068ef6a67e1ec268",
+ "log": "/Users/marcio/git/Rising Lands/worktrees/re-ai-runtime/.local/stage2b-focused-native.log",
+ "report": "/Users/marcio/git/Rising Lands/worktrees/re-ai-runtime/pesquisas-paralelas/ia-runtime/validacao/stage2b-adapter-native.json",
+ "successful": true,
+ "exit_code": 0,
+ "end_utc": "2026-10-28T21:23:56.762950+00:00",
+ "report_sha256": "19db7ddeab0b5f660022c2f1683b05f4abc8d3a31f571a6fe7a1bc256e050e64",
+ "cases": 11,
+ "complete": 2,
+ "named_stops": 9,
+ "all_native_images_equal": true
+}

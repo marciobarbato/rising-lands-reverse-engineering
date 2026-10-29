@@ -1,0 +1,149 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "TerrainReset",
+      "start": "0x46b315",
+      "end_exclusive": "0x46b38f",
+      "sha256": "543a4936c56fe8d58eaad5dd3d71dc5123bcbe9db7671dbae60e50db92e996eb",
+      "file": "0046b315.asm"
+    },
+    {
+      "name": "Random",
+      "start": "0x4704dc",
+      "end_exclusive": "0x470520",
+      "sha256": "14a68ad1377bfab0397ed5570d166095375d9fcf633da6524d28f118e80917c2",
+      "file": "004704dc.asm"
+    },
+    {
+      "name": "MiniMapReset",
+      "start": "0x469f00",
+      "end_exclusive": "0x469f68",
+      "sha256": "640dd84288531a1b03d80f9fcceaa78358229297edd989061257d5d3c5b2ff22",
+      "file": "00469f00.asm"
+    },
+    {
+      "name": "memset",
+      "start": "0x48c3b0",
+      "end_exclusive": "0x48c3c8",
+      "sha256": "b473e3315e7881b7c91100eef6d9f373e9ba34e184a57f83c5b443c730886228",
+      "file": "0048c3b0.asm"
+    },
+    {
+      "name": "memset_fill_leaf",
+      "start": "0x48d890",
+      "end_exclusive": "0x48d933",
+      "sha256": "0d817cb2566a6e1c69d28ad408e2c64dbe30f5718e5c9e2a0126d2bc4d8ebc03",
+      "file": "0048d890.asm"
+    },
+    {
+      "name": "BatimentModifyMap",
+      "start": "0x419e97",
+      "end_exclusive": "0x419fc8",
+      "sha256": "371687db86ff92c521313db7ada8ecbce04348bf5c24c4bdea17f3d9ebfe4b9e",
+      "file": "00419e97.asm"
+    },
+    {
+      "name": "BatimentModifyMap_shared_epilogue",
+      "start": "0x42399a",
+      "end_exclusive": "0x4239a0",
+      "sha256": "9651d68480e9031dd95d190ca598519a163040c3b73f617ef4b3a789f33597ef",
+      "file": "0042399a.asm"
+    },
+    {
+      "name": "SetMiniMap",
+      "start": "0x46a388",
+      "end_exclusive": "0x46a70c",
+      "sha256": "f8b2951d05ca23f6fa0893d6c3a0180f2fd8c010985ef624e9ea69c598049e34",
+      "file": "0046a388.asm"
+    }
+  ],
+  "setminimap_jump_table": {
+    "address": "0x46a36c",
+    "index": "mode-1 (u8; >6 skips)",
+    "targets": [
+      "0x46a49f",
+      "0x46a4d9",
+      "0x46a528",
+      "0x46a55a",
+      "0x46a5a6",
+      "0x46a647",
+      "0x46a69d"
+    ]
+  },
+  "batimentmodifymap_calls": [
+    {
+      "call": "0x41d021",
+      "routine": "BatimentConstruction",
+      "dl_load": "0x41d019",
+      "dl_bytes": "ba01000000",
+      "dl": 1,
+      "minimap_mode": 6
+    },
+    {
+      "call": "0x41e12c",
+      "routine": "BatimentRetireColon",
+      "dl_load": "0x41e121",
+      "dl_bytes": "ba01000000",
+      "dl": 1,
+      "minimap_mode": 6
+    },
+    {
+      "call": "0x41f26b",
+      "routine": "DemonteBatiment",
+      "dl_load": "0x41f267",
+      "dl_bytes": "31d2",
+      "dl": 0,
+      "minimap_mode": 7
+    },
+    {
+      "call": "0x41fa88",
+      "routine": "BatimentLogeEngin",
+      "dl_load": "0x41fa7c",
+      "dl_bytes": "ba01000000",
+      "dl": 1,
+      "minimap_mode": 6
+    },
+    {
+      "call": "0x42114e",
+      "routine": "SortieTroupe",
+      "dl_load": "0x421141",
+      "dl_bytes": "ba01000000",
+      "dl": 1,
+      "minimap_mode": 6
+    },
+    {
+      "call": "0x422cc3",
+      "routine": "CalculTrajectoire",
+      "dl_load": "0x422cb7",
+      "dl_bytes": "ba01000000",
+      "dl": 1,
+      "minimap_mode": 6
+    },
+    {
+      "call": "0x46c1b1",
+      "routine": "MissionPlaceTerrain",
+      "dl_load": "0x46c1a9",
+      "dl_bytes": "ba01000000",
+      "dl": 1,
+      "minimap_mode": 6
+    }
+  ],
+  "globals": {
+    "objects": "[0x507d74]",
+    "object_aux": "[0x507dac]",
+    "attributes": "[0x507da8]",
+    "light_counts": "[0x507d98+4p]",
+    "light_edges": "[0x507d88+4p]",
+    "discovered": "[0x507d78+4p]",
+    "mines": "0x509954 (20 x (origin u16, reserve u16))",
+    "random_state": "0x497164 u32",
+    "minimap_size": "u16 0x496fe0/0x496fe2",
+    "minimap_layers": "[0x507d5c] final, [0x507d60] units, [0x507d64] structures",
+    "structure_pool": "0x49a0c8 + index*276 (+2 origin, +4 owner, +8 type)",
+    "structure_geometry": "u16 0x495d8c/0x495d8e + type*52 (width, height)",
+    "player_colors": "0x4e24dc[owner]; owner 200 -> 0x1e"
+  },
+  "scope": "Bodies and caller variants only; MissionLoad/MissionLoadName orchestration, BatimentHabitable and the structure scan belong to missions/economy."
+}

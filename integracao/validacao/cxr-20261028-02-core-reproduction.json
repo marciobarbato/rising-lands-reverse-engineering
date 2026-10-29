@@ -1,0 +1,106 @@
+{
+  "implementation": "9bf13ae01364b9b12c0b90b3debfabfddcc6eedd",
+  "feature": "830e6390b57e62155a1c433041e871f62f61a79a",
+  "main": "b4c5a1072a2b2e494b3a6bf374bd978fc6e67b9a",
+  "all_commits_ancestors_of_fetched_main": true,
+  "provider_trees": {
+    "ferramentas": {
+      "implementation": "d362d2d21c85b65ddf5e7b57c6643eb17a6f005e",
+      "integrated_feature": "d362d2d21c85b65ddf5e7b57c6643eb17a6f005e",
+      "main": "d362d2d21c85b65ddf5e7b57c6643eb17a6f005e"
+    },
+    "testes": {
+      "implementation": "bf41ac10b61295910283cfa2d97f5a9a39266233",
+      "integrated_feature": "bf41ac10b61295910283cfa2d97f5a9a39266233",
+      "main": "bf41ac10b61295910283cfa2d97f5a9a39266233"
+    },
+    "integracao": {
+      "implementation": "0f471e0d25500ac6c232419389d057da1dd1c2bb",
+      "integrated_feature": "ce41c14ebe1aad8c189a51ce2900b92bca2d0def",
+      "main": "ce41c14ebe1aad8c189a51ce2900b92bca2d0def"
+    },
+    "scripts": {
+      "implementation": "1639aed9f12a72a4f4b95fdde666aa785410118c",
+      "integrated_feature": "1639aed9f12a72a4f4b95fdde666aa785410118c",
+      "main": "1639aed9f12a72a4f4b95fdde666aa785410118c"
+    },
+    "pesquisas-paralelas/missoes": {
+      "implementation": "45c3ffb0fe20a1baa09278b7c7b4691df0ab6a3a",
+      "integrated_feature": "45c3ffb0fe20a1baa09278b7c7b4691df0ab6a3a",
+      "main": "45c3ffb0fe20a1baa09278b7c7b4691df0ab6a3a"
+    },
+    "pesquisas-paralelas/economia": {
+      "implementation": "c9abb87706e08ecada4a0eaaa7e79c36f55f3666",
+      "integrated_feature": "c9abb87706e08ecada4a0eaaa7e79c36f55f3666",
+      "main": "c9abb87706e08ecada4a0eaaa7e79c36f55f3666"
+    },
+    "pesquisas-paralelas/combate": {
+      "implementation": "02442d15f4561b5f2097f96da31b1c38af3cd170",
+      "integrated_feature": "02442d15f4561b5f2097f96da31b1c38af3cd170",
+      "main": "02442d15f4561b5f2097f96da31b1c38af3cd170"
+    }
+  },
+  "all_feature_main_provider_trees_equal": true,
+  "implementation_main_code_identity_equal": true,
+  "integration_tree_delta_is_only_coordinator_validation_artifacts": [
+    "integracao/validacao/cxr-20261028-01-ai-reproduction.json",
+    "integracao/validacao/cxr-20261028-01-core-reproduction.json"
+  ],
+  "initial_metadata_audit": "First temporary assertion compared entire integracao tree and failed because two coordinator-owned validation JSONs were added; inspected the exact delta, no code/fixture change and no native test failure. No rerun needed.",
+  "original_captures_unchanged": true,
+  "native_report_identical_to_tested_stage": true,
+  "native": {
+    "python": "3.9.6",
+    "x86_enabled": true,
+    "tests": 19,
+    "failures": 0,
+    "errors": 0,
+    "skips": [],
+    "bounded_x86_executions": 1073,
+    "success": true,
+    "scope": "Declared boundaries, remap allocation/classification and readonly initialization queries; no labeling/full remap or full MissionLoad",
+    "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+    "unicorn": "2.1.4",
+    "original_remap_calls": {
+      "0x42ee1c": 9
+    },
+    "binding_resumptions": 16,
+    "preserved_loop_resumptions": 276,
+    "remap_bounded_segments": 301,
+    "remap_reached_stops": {
+      "0x3200000": 9,
+      "0x3200010": 9,
+      "0x3000000": 2,
+      "0x42eee1": 70,
+      "0x42ef22": 206,
+      "0x42ef8b": 5
+    },
+    "maximum_remap_segment_instructions": 88074,
+    "failed_native_segment": null,
+    "intentional_lock_fixture_stops": 1,
+    "intentional_binding_budget_failures": 1,
+    "readonly_query_entries": 768,
+    "io_wrapper_entries": [
+      "0x458420",
+      "0x458461"
+    ],
+    "io_bounded_segments": 4,
+    "expected_native_instruction_or_wall_limits": 0,
+    "expected_native_faults": 0,
+    "full_flow_status": "NOT RUN: no final Chemin_Remap return or MissionLoad composition"
+  },
+  "full_flow_status": "NOT RUN: no completed Chemin_Remap or MissionLoad",
+  "focused_ai_no_binding_regression": {
+    "report": ".local/stage16-ai-legacy-main.json",
+    "tests": 11,
+    "skips": [],
+    "success": true,
+    "shared_registries_empty": true,
+    "benches_created": 48,
+    "bounded_segments": 331246,
+    "fresh_original_cases": 19,
+    "fresh_differential_cases": 19,
+    "intentional_cycle_checkpoint": "0x0047b1f4",
+    "native_fault_or_timeout_observed": false
+  }
+}

@@ -1,0 +1,891 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "translation_executed": false,
+  "original_calls": {
+    "0x42ee1c": 8
+  },
+  "bounded_segments": 299,
+  "binding_resumptions": 15,
+  "preserved_loop_resumptions": 276,
+  "import_resolutions": [
+    {
+      "iat": "0x5231c0",
+      "original_target": "0x123646",
+      "target": "0x3200000",
+      "name": "GlobalAlloc",
+      "arguments": 2,
+      "original_import": {
+        "dll": "KERNEL32.dll",
+        "symbol": "GlobalAlloc"
+      }
+    },
+    {
+      "iat": "0x5231d0",
+      "original_target": "0x123682",
+      "target": "0x3200010",
+      "name": "GlobalLock",
+      "arguments": 1,
+      "original_import": {
+        "dll": "KERNEL32.dll",
+        "symbol": "GlobalLock"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "name": "null",
+      "source": {
+        "kind": "synthetic declared layers and markers"
+      },
+      "checkpoint": "0x3000000",
+      "output": {
+        "search": {
+          "unidade": 65535,
+          "ocupada": 0,
+          "sucesso": 0,
+          "ponteiro_rota": 0,
+          "concluida": 165
+        },
+        "colors_sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+        "regions_sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+        "free_hex": "ff0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fafbfcfdfeff",
+        "released_hex": "01010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101",
+        "units_sha256": "f0a3c2b3fc882a1ff7af176122e51f059918208e289434b3f8c4b4b9e27cb840",
+        "attributes_sha256": "76592c33aef292cd9b3f488c70c45ae3777ccfeff308e0ead0e5c51606b3ba89",
+        "native_fill_calls": [
+          [
+            "colors",
+            0,
+            65536
+          ],
+          [
+            "released",
+            1,
+            256
+          ],
+          [
+            "regions",
+            0,
+            131072
+          ]
+        ],
+        "classes_sha256": "77007cd74a06dc54e5114d01a41d2721679d5668a0c20022fe102c87ad4d65b8",
+        "class_counts": {
+          "165": 65536
+        },
+        "natural_query_count": 0,
+        "natural_query_order_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "bindings": [
+        {
+          "name": "GlobalAlloc",
+          "address": "0x3200000",
+          "kind": "importacao",
+          "arguments": [
+            0,
+            65536
+          ],
+          "caller_return": "0x42eec4",
+          "esp_before": "0x2007fbc",
+          "stack_pop": 8,
+          "registers_before": {
+            "EAX": 21037056,
+            "EBX": 131072,
+            "ECX": 256,
+            "EDX": 0,
+            "ESI": 0,
+            "EDI": 0,
+            "EBP": 0,
+            "ESP": 33587132,
+            "EIP": 52428800,
+            "EFLAGS": 70
+          },
+          "memory_writes": [],
+          "status": "returned",
+          "results": {
+            "EAX": 0
+          },
+          "esp_after": "0x2007fc8"
+        },
+        {
+          "name": "GlobalLock",
+          "address": "0x3200010",
+          "kind": "importacao",
+          "arguments": [
+            0
+          ],
+          "caller_return": "0x42eecc",
+          "esp_before": "0x2007fc0",
+          "stack_pop": 4,
+          "registers_before": {
+            "EAX": 0,
+            "EBX": 131072,
+            "ECX": 256,
+            "EDX": 0,
+            "ESI": 0,
+            "EDI": 0,
+            "EBP": 0,
+            "ESP": 33587136,
+            "EIP": 52428816,
+            "EFLAGS": 70
+          },
+          "memory_writes": [],
+          "status": "returned",
+          "results": {
+            "EAX": 0
+          },
+          "esp_after": "0x2007fc8"
+        }
+      ]
+    },
+    {
+      "name": "unsupported_lock",
+      "source": {
+        "kind": "synthetic declared layers and markers"
+      },
+      "checkpoint": "declared_lock_stop",
+      "output": {
+        "search": {
+          "unidade": 65535,
+          "ocupada": 0,
+          "sucesso": 0,
+          "ponteiro_rota": 0,
+          "concluida": 165
+        },
+        "colors_sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+        "regions_sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+        "free_hex": "ff0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fafbfcfdfeff",
+        "released_hex": "01010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101",
+        "units_sha256": "f0a3c2b3fc882a1ff7af176122e51f059918208e289434b3f8c4b4b9e27cb840",
+        "attributes_sha256": "76592c33aef292cd9b3f488c70c45ae3777ccfeff308e0ead0e5c51606b3ba89",
+        "native_fill_calls": [
+          [
+            "colors",
+            0,
+            65536
+          ],
+          [
+            "released",
+            1,
+            256
+          ],
+          [
+            "regions",
+            0,
+            131072
+          ]
+        ],
+        "classes_sha256": "77007cd74a06dc54e5114d01a41d2721679d5668a0c20022fe102c87ad4d65b8",
+        "class_counts": {
+          "165": 65536
+        },
+        "natural_query_count": 0,
+        "natural_query_order_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "bindings": [
+        {
+          "name": "GlobalAlloc",
+          "address": "0x3200000",
+          "kind": "importacao",
+          "arguments": [
+            0,
+            65536
+          ],
+          "caller_return": "0x42eec4",
+          "esp_before": "0x2007fbc",
+          "stack_pop": 8,
+          "registers_before": {
+            "EAX": 21037056,
+            "EBX": 131072,
+            "ECX": 256,
+            "EDX": 0,
+            "ESI": 0,
+            "EDI": 0,
+            "EBP": 0,
+            "ESP": 33587132,
+            "EIP": 52428800,
+            "EFLAGS": 70
+          },
+          "memory_writes": [],
+          "status": "returned",
+          "results": {
+            "EAX": 26214400
+          },
+          "esp_after": "0x2007fc8"
+        },
+        {
+          "name": "GlobalLock",
+          "address": "0x3200010",
+          "kind": "importacao",
+          "arguments": [
+            26214400
+          ],
+          "caller_return": "0x42eecc",
+          "esp_before": "0x2007fc0",
+          "stack_pop": 4,
+          "registers_before": {
+            "EAX": 26214400,
+            "EBX": 131072,
+            "ECX": 256,
+            "EDX": 0,
+            "ESI": 0,
+            "EDI": 0,
+            "EBP": 0,
+            "ESP": 33587136,
+            "EIP": 52428816,
+            "EFLAGS": 70
+          },
+          "memory_writes": [],
+          "status": "stopped",
+          "error_type": "ParadaVinculoDeclarado",
+          "reason": "Lock fixture deliberately unavailable; allocation retained"
+        }
+      ]
+    },
+    {
+      "name": "zero",
+      "source": {
+        "kind": "synthetic declared layers and markers"
+      },
+      "checkpoint": "0x42ef8b",
+      "output": {
+        "search": {
+          "unidade": 65535,
+          "ocupada": 0,
+          "sucesso": 0,
+          "ponteiro_rota": 0,
+          "concluida": 165
+        },
+        "colors_sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+        "regions_sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+        "free_hex": "ff0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fafbfcfdfeff",
+        "released_hex": "01010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101",
+        "units_sha256": "f0a3c2b3fc882a1ff7af176122e51f059918208e289434b3f8c4b4b9e27cb840",
+        "attributes_sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+        "native_fill_calls": [
+          [
+            "colors",
+            0,
+            65536
+          ],
+          [
+            "released",
+            1,
+            256
+          ],
+          [
+            "regions",
+            0,
+            131072
+          ]
+        ],
+        "classes_sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+        "class_counts": {
+          "0": 65536
+        },
+        "natural_query_count": 65536,
+        "natural_query_order_sha256": "68e419472d25e0b85e9917ccf692fd58245c5e95e9a46f07d1df81d2e9da246b"
+      },
+      "bindings": [
+        {
+          "name": "GlobalAlloc",
+          "address": "0x3200000",
+          "kind": "importacao",
+          "arguments": [
+            0,
+            65536
+          ],
+          "caller_return": "0x42eec4",
+          "esp_before": "0x2007fbc",
+          "stack_pop": 8,
+          "registers_before": {
+            "EAX": 21037056,
+            "EBX": 131072,
+            "ECX": 256,
+            "EDX": 0,
+            "ESI": 0,
+            "EDI": 0,
+            "EBP": 0,
+            "ESP": 33587132,
+            "EIP": 52428800,
+            "EFLAGS": 70
+          },
+          "memory_writes": [],
+          "status": "returned",
+          "results": {
+            "EAX": 26214400
+          },
+          "esp_after": "0x2007fc8"
+        },
+        {
+          "name": "GlobalLock",
+          "address": "0x3200010",
+          "kind": "importacao",
+          "arguments": [
+            26214400
+          ],
+          "caller_return": "0x42eecc",
+          "esp_before": "0x2007fc0",
+          "stack_pop": 4,
+          "registers_before": {
+            "EAX": 26214400,
+            "EBX": 131072,
+            "ECX": 256,
+            "EDX": 0,
+            "ESI": 0,
+            "EDI": 0,
+            "EBP": 0,
+            "ESP": 33587136,
+            "EIP": 52428816,
+            "EFLAGS": 70
+          },
+          "memory_writes": [],
+          "status": "returned",
+          "results": {
+            "EAX": 26214400
+          },
+          "esp_after": "0x2007fc8"
+        }
+      ]
+    },
+    {
+      "name": "tiles",
+      "source": {
+        "kind": "synthetic declared layers and markers"
+      },
+      "checkpoint": "0x42ef8b",
+      "output": {
+        "search": {
+          "unidade": 65535,
+          "ocupada": 0,
+          "sucesso": 0,
+          "ponteiro_rota": 0,
+          "concluida": 165
+        },
+        "colors_sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+        "regions_sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+        "free_hex": "ff0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fafbfcfdfeff",
+        "released_hex": "01010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101",
+        "units_sha256": "f0a3c2b3fc882a1ff7af176122e51f059918208e289434b3f8c4b4b9e27cb840",
+        "attributes_sha256": "76592c33aef292cd9b3f488c70c45ae3777ccfeff308e0ead0e5c51606b3ba89",
+        "native_fill_calls": [
+          [
+            "colors",
+            0,
+            65536
+          ],
+          [
+            "released",
+            1,
+            256
+          ],
+          [
+            "regions",
+            0,
+            131072
+          ]
+        ],
+        "classes_sha256": "7baf5c23368ca32e47917ae8c24f358ffecd54cab6c9502b81ca1d30dc9ec7b3",
+        "class_counts": {
+          "0": 33141,
+          "1": 32395
+        },
+        "natural_query_count": 65536,
+        "natural_query_order_sha256": "68e419472d25e0b85e9917ccf692fd58245c5e95e9a46f07d1df81d2e9da246b"
+      },
+      "bindings": [
+        {
+          "name": "GlobalAlloc",
+          "address": "0x3200000",
+          "kind": "importacao",
+          "arguments": [
+            0,
+            65536
+          ],
+          "caller_return": "0x42eec4",
+          "esp_before": "0x2007fbc",
+          "stack_pop": 8,
+          "registers_before": {
+            "EAX": 21037056,
+            "EBX": 131072,
+            "ECX": 256,
+            "EDX": 0,
+            "ESI": 0,
+            "EDI": 0,
+            "EBP": 0,
+            "ESP": 33587132,
+            "EIP": 52428800,
+            "EFLAGS": 70
+          },
+          "memory_writes": [],
+          "status": "returned",
+          "results": {
+            "EAX": 26214400
+          },
+          "esp_after": "0x2007fc8"
+        },
+        {
+          "name": "GlobalLock",
+          "address": "0x3200010",
+          "kind": "importacao",
+          "arguments": [
+            26214400
+          ],
+          "caller_return": "0x42eecc",
+          "esp_before": "0x2007fc0",
+          "stack_pop": 4,
+          "registers_before": {
+            "EAX": 26214400,
+            "EBX": 131072,
+            "ECX": 256,
+            "EDX": 0,
+            "ESI": 0,
+            "EDI": 0,
+            "EBP": 0,
+            "ESP": 33587136,
+            "EIP": 52428816,
+            "EFLAGS": 70
+          },
+          "memory_writes": [],
+          "status": "returned",
+          "results": {
+            "EAX": 26214400
+          },
+          "esp_after": "0x2007fc8"
+        }
+      ]
+    },
+    {
+      "name": "objects",
+      "source": {
+        "kind": "synthetic declared layers and markers"
+      },
+      "checkpoint": "0x42ef8b",
+      "output": {
+        "search": {
+          "unidade": 65535,
+          "ocupada": 0,
+          "sucesso": 0,
+          "ponteiro_rota": 0,
+          "concluida": 165
+        },
+        "colors_sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+        "regions_sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+        "free_hex": "ff0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fafbfcfdfeff",
+        "released_hex": "01010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101",
+        "units_sha256": "f0a3c2b3fc882a1ff7af176122e51f059918208e289434b3f8c4b4b9e27cb840",
+        "attributes_sha256": "76592c33aef292cd9b3f488c70c45ae3777ccfeff308e0ead0e5c51606b3ba89",
+        "native_fill_calls": [
+          [
+            "colors",
+            0,
+            65536
+          ],
+          [
+            "released",
+            1,
+            256
+          ],
+          [
+            "regions",
+            0,
+            131072
+          ]
+        ],
+        "classes_sha256": "9a76585cb599028895de77791613f127c07d7978ce4f3dda2a1ba8fbcb1e80a7",
+        "class_counts": {
+          "0": 54613,
+          "1": 10923
+        },
+        "natural_query_count": 65536,
+        "natural_query_order_sha256": "68e419472d25e0b85e9917ccf692fd58245c5e95e9a46f07d1df81d2e9da246b"
+      },
+      "bindings": [
+        {
+          "name": "GlobalAlloc",
+          "address": "0x3200000",
+          "kind": "importacao",
+          "arguments": [
+            0,
+            65536
+          ],
+          "caller_return": "0x42eec4",
+          "esp_before": "0x2007fbc",
+          "stack_pop": 8,
+          "registers_before": {
+            "EAX": 21037056,
+            "EBX": 131072,
+            "ECX": 256,
+            "EDX": 0,
+            "ESI": 0,
+            "EDI": 0,
+            "EBP": 0,
+            "ESP": 33587132,
+            "EIP": 52428800,
+            "EFLAGS": 70
+          },
+          "memory_writes": [],
+          "status": "returned",
+          "results": {
+            "EAX": 26214400
+          },
+          "esp_after": "0x2007fc8"
+        },
+        {
+          "name": "GlobalLock",
+          "address": "0x3200010",
+          "kind": "importacao",
+          "arguments": [
+            26214400
+          ],
+          "caller_return": "0x42eecc",
+          "esp_before": "0x2007fc0",
+          "stack_pop": 4,
+          "registers_before": {
+            "EAX": 26214400,
+            "EBX": 131072,
+            "ECX": 256,
+            "EDX": 0,
+            "ESI": 0,
+            "EDI": 0,
+            "EBP": 0,
+            "ESP": 33587136,
+            "EIP": 52428816,
+            "EFLAGS": 70
+          },
+          "memory_writes": [],
+          "status": "returned",
+          "results": {
+            "EAX": 26214400
+          },
+          "esp_after": "0x2007fc8"
+        }
+      ]
+    },
+    {
+      "name": "mixed",
+      "source": {
+        "kind": "synthetic declared layers and markers"
+      },
+      "checkpoint": "0x42ef8b",
+      "output": {
+        "search": {
+          "unidade": 65535,
+          "ocupada": 0,
+          "sucesso": 0,
+          "ponteiro_rota": 0,
+          "concluida": 165
+        },
+        "colors_sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+        "regions_sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+        "free_hex": "ff0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fafbfcfdfeff",
+        "released_hex": "01010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101",
+        "units_sha256": "f0a3c2b3fc882a1ff7af176122e51f059918208e289434b3f8c4b4b9e27cb840",
+        "attributes_sha256": "76592c33aef292cd9b3f488c70c45ae3777ccfeff308e0ead0e5c51606b3ba89",
+        "native_fill_calls": [
+          [
+            "colors",
+            0,
+            65536
+          ],
+          [
+            "released",
+            1,
+            256
+          ],
+          [
+            "regions",
+            0,
+            131072
+          ]
+        ],
+        "classes_sha256": "4bd9118214b47bcb7c682edeb3c91213a113f434f3f3c2037e61a4e46632e024",
+        "class_counts": {
+          "0": 40141,
+          "1": 25395
+        },
+        "natural_query_count": 65536,
+        "natural_query_order_sha256": "68e419472d25e0b85e9917ccf692fd58245c5e95e9a46f07d1df81d2e9da246b"
+      },
+      "bindings": [
+        {
+          "name": "GlobalAlloc",
+          "address": "0x3200000",
+          "kind": "importacao",
+          "arguments": [
+            0,
+            65536
+          ],
+          "caller_return": "0x42eec4",
+          "esp_before": "0x2007fbc",
+          "stack_pop": 8,
+          "registers_before": {
+            "EAX": 21037056,
+            "EBX": 131072,
+            "ECX": 256,
+            "EDX": 0,
+            "ESI": 0,
+            "EDI": 0,
+            "EBP": 0,
+            "ESP": 33587132,
+            "EIP": 52428800,
+            "EFLAGS": 70
+          },
+          "memory_writes": [],
+          "status": "returned",
+          "results": {
+            "EAX": 26214400
+          },
+          "esp_after": "0x2007fc8"
+        },
+        {
+          "name": "GlobalLock",
+          "address": "0x3200010",
+          "kind": "importacao",
+          "arguments": [
+            26214400
+          ],
+          "caller_return": "0x42eecc",
+          "esp_before": "0x2007fc0",
+          "stack_pop": 4,
+          "registers_before": {
+            "EAX": 26214400,
+            "EBX": 131072,
+            "ECX": 256,
+            "EDX": 0,
+            "ESI": 0,
+            "EDI": 0,
+            "EBP": 0,
+            "ESP": 33587136,
+            "EIP": 52428816,
+            "EFLAGS": 70
+          },
+          "memory_writes": [],
+          "status": "returned",
+          "results": {
+            "EAX": 26214400
+          },
+          "esp_after": "0x2007fc8"
+        }
+      ]
+    },
+    {
+      "name": "MONDE01",
+      "source": {
+        "kind": "Actual MONDE01 normalized header layers and shipped TABLEAU.COL; other inherited state synthetic",
+        "mission_sha256": "19237b8c3f3c0c76022276da229bec727b17603440823c43561aba159dd47015",
+        "markers_sha256": "3bd531d615ee98f51cfdbdad3275b848cf42cca88b6ab5762376dcbbbcdf3ae2"
+      },
+      "checkpoint": "0x42ef8b",
+      "output": {
+        "search": {
+          "unidade": 65535,
+          "ocupada": 0,
+          "sucesso": 0,
+          "ponteiro_rota": 0,
+          "concluida": 77
+        },
+        "colors_sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+        "regions_sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+        "free_hex": "ff0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fafbfcfdfeff",
+        "released_hex": "01010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101",
+        "units_sha256": "6abd2633689bbcd634c8273a8ed5e482384b5e708fe223df632019330a4080c5",
+        "attributes_sha256": "680172d05f4cecf24995a0e23af2f990c0b654a6e92621e19fb9cd75551962df",
+        "native_fill_calls": [
+          [
+            "colors",
+            0,
+            65536
+          ],
+          [
+            "released",
+            1,
+            256
+          ],
+          [
+            "regions",
+            0,
+            131072
+          ]
+        ],
+        "classes_sha256": "680172d05f4cecf24995a0e23af2f990c0b654a6e92621e19fb9cd75551962df",
+        "class_counts": {
+          "0": 65030,
+          "1": 506
+        },
+        "natural_query_count": 65536,
+        "natural_query_order_sha256": "68e419472d25e0b85e9917ccf692fd58245c5e95e9a46f07d1df81d2e9da246b"
+      },
+      "bindings": [
+        {
+          "name": "GlobalAlloc",
+          "address": "0x3200000",
+          "kind": "importacao",
+          "arguments": [
+            0,
+            65536
+          ],
+          "caller_return": "0x42eec4",
+          "esp_before": "0x2007fbc",
+          "stack_pop": 8,
+          "registers_before": {
+            "EAX": 21037056,
+            "EBX": 131072,
+            "ECX": 256,
+            "EDX": 0,
+            "ESI": 0,
+            "EDI": 0,
+            "EBP": 0,
+            "ESP": 33587132,
+            "EIP": 52428800,
+            "EFLAGS": 70
+          },
+          "memory_writes": [],
+          "status": "returned",
+          "results": {
+            "EAX": 26214400
+          },
+          "esp_after": "0x2007fc8"
+        },
+        {
+          "name": "GlobalLock",
+          "address": "0x3200010",
+          "kind": "importacao",
+          "arguments": [
+            26214400
+          ],
+          "caller_return": "0x42eecc",
+          "esp_before": "0x2007fc0",
+          "stack_pop": 4,
+          "registers_before": {
+            "EAX": 26214400,
+            "EBX": 131072,
+            "ECX": 256,
+            "EDX": 0,
+            "ESI": 0,
+            "EDI": 0,
+            "EBP": 0,
+            "ESP": 33587136,
+            "EIP": 52428816,
+            "EFLAGS": 70
+          },
+          "memory_writes": [],
+          "status": "returned",
+          "results": {
+            "EAX": 26214400
+          },
+          "esp_after": "0x2007fc8"
+        }
+      ]
+    },
+    {
+      "name": "MONDE01_null",
+      "source": {
+        "kind": "Actual MONDE01 normalized header layers and shipped TABLEAU.COL; other inherited state synthetic",
+        "mission_sha256": "19237b8c3f3c0c76022276da229bec727b17603440823c43561aba159dd47015",
+        "markers_sha256": "3bd531d615ee98f51cfdbdad3275b848cf42cca88b6ab5762376dcbbbcdf3ae2"
+      },
+      "checkpoint": "0x3000000",
+      "output": {
+        "search": {
+          "unidade": 65535,
+          "ocupada": 0,
+          "sucesso": 0,
+          "ponteiro_rota": 0,
+          "concluida": 77
+        },
+        "colors_sha256": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+        "regions_sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+        "free_hex": "ff0102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fafbfcfdfeff",
+        "released_hex": "01010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101",
+        "units_sha256": "6abd2633689bbcd634c8273a8ed5e482384b5e708fe223df632019330a4080c5",
+        "attributes_sha256": "680172d05f4cecf24995a0e23af2f990c0b654a6e92621e19fb9cd75551962df",
+        "native_fill_calls": [
+          [
+            "colors",
+            0,
+            65536
+          ],
+          [
+            "released",
+            1,
+            256
+          ],
+          [
+            "regions",
+            0,
+            131072
+          ]
+        ],
+        "classes_sha256": "77007cd74a06dc54e5114d01a41d2721679d5668a0c20022fe102c87ad4d65b8",
+        "class_counts": {
+          "165": 65536
+        },
+        "natural_query_count": 0,
+        "natural_query_order_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "bindings": [
+        {
+          "name": "GlobalAlloc",
+          "address": "0x3200000",
+          "kind": "importacao",
+          "arguments": [
+            0,
+            65536
+          ],
+          "caller_return": "0x42eec4",
+          "esp_before": "0x2007fbc",
+          "stack_pop": 8,
+          "registers_before": {
+            "EAX": 21037056,
+            "EBX": 131072,
+            "ECX": 256,
+            "EDX": 0,
+            "ESI": 0,
+            "EDI": 0,
+            "EBP": 0,
+            "ESP": 33587132,
+            "EIP": 52428800,
+            "EFLAGS": 70
+          },
+          "memory_writes": [],
+          "status": "returned",
+          "results": {
+            "EAX": 0
+          },
+          "esp_after": "0x2007fc8"
+        },
+        {
+          "name": "GlobalLock",
+          "address": "0x3200010",
+          "kind": "importacao",
+          "arguments": [
+            0
+          ],
+          "caller_return": "0x42eecc",
+          "esp_before": "0x2007fc0",
+          "stack_pop": 4,
+          "registers_before": {
+            "EAX": 0,
+            "EBX": 131072,
+            "ECX": 256,
+            "EDX": 0,
+            "ESI": 0,
+            "EDI": 0,
+            "EBP": 0,
+            "ESP": 33587136,
+            "EIP": 52428816,
+            "EFLAGS": 70
+          },
+          "memory_writes": [],
+          "status": "returned",
+          "results": {
+            "EAX": 0
+          },
+          "esp_after": "0x2007fc8"
+        }
+      ]
+    }
+  ],
+  "scope": "Two declared resource imports; intact reset/fill/obstacle/classification bodies; no labeling/cleanup or full MissionLoad"
+}

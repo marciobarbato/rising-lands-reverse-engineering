@@ -8,7 +8,7 @@ from aprendizagem import BASE_INVENCOES
 from producao import CONTROLE_X87_INICIAL
 from proprietarios import (BASE_BIBLIOTECAS, BASE_BALOES, BASE_NUMEROS_UNIDADES,
                            BASE_PENDENCIAS, BASE_SORTILEGIOS, BASE_JOGADOR_DEPOSITO,
-                           PASSO_ORDENS_JOGADOR)
+                           PASSO_ORDENS_JOGADOR, juntar_ordens)
 
 TRECHOS_APRENDIZAGEM = TRECHOS_PRODUCAO + [
     (0x4259e6, 0x425a4b), (0x425e99, 0x4260aa), (0x4263e5, 0x426401),
@@ -43,7 +43,8 @@ class BancadaAprendizagem(BancadaProducao):
             self.cpu.mem_write(base, bytes(bloco))
         # Pendências começam imediatamente depois dos 1000 registros de construção.
         self.cpu.mem_write(BASE_PENDENCIAS + 9152, b'\xb2' * 8)
-        self.cpu.mem_write(ORDENS - 8, b'\xf1' * 8 + bytes(p.ordens) + b'\x1f' * 8)
+        # Native layout kept contiguous (owner stride 2,704); Python owns four pools.
+        self.cpu.mem_write(ORDENS - 8, b'\xf1' * 8 + juntar_ordens(p.ordens) + b'\x1f' * 8)
         # A segunda tabela é dado vivo; não é a antiga guarda de sortilégios.
         self.cpu.mem_write(BASE_SORTILEGIOS - 8,
                            b'\xd3' * 8 + bytes(p.sortilegios) + bytes(a.inventados) + b'\x3d' * 8)

@@ -10,7 +10,15 @@ PASTA = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PASTA))
 from construcoes import BASE_CONSTRUCOES, EconomiaConstrucoes
 from proprietarios import (DependenciaBalaoPendente, PASSO_ORDENS_JOGADOR,
-                           PropriedadeConstrucoes, inicializar_bag)
+                           PropriedadeConstrucoes, inicializar_bag, juntar_ordens,
+                           ordens_contiguas)
+
+
+def preencher_ordens(ordens, dados):
+    """Write 10,816 fixture bytes into the four per-owner pools in owner order."""
+    assert len(dados) == 4 * PASSO_ORDENS_JOGADOR
+    for j, bolsa in enumerate(ordens):
+        bolsa[:] = dados[j * PASSO_ORDENS_JOGADOR:(j + 1) * PASSO_ORDENS_JOGADOR]
 
 
 def word(mem, o):
@@ -79,13 +87,14 @@ class ExemplosProprietarios(unittest.TestCase):
         p = preparar(6)
         p.bibliotecas[0] = 1
         p.sortilegios[:] = b'\xa5' * 20
-        p.ordens[:] = b'\x83' * len(p.ordens)
+        preencher_ordens(p.ordens, b'\x83' * 10816)
         p.inicializar_neutro(0, 0)
         o = 4 * 104
         self.assertEqual(p.sortilegios[:5], bytes(5))
         self.assertEqual(p.sortilegios[5:], b'\xa5' * 15)
-        self.assertEqual(word(p.ordens, o + 2), 5)
-        self.assertEqual(p.ordens[o + 0x60:o + 0x66], b'\x83' * 6)
+        self.assertEqual(word(p.ordens[0], o + 2), 5)
+        self.assertEqual(p.ordens[0][o + 0x60:o + 0x66], b'\x83' * 6)
+        self.assertEqual(juntar_ordens(p.ordens)[PASSO_ORDENS_JOGADOR:], b'\x83' * 3 * PASSO_ORDENS_JOGADOR)
 
     def test_biblioteca_wrap_nao_aciona_limpeza_no_ganho_ou_underflow(self):
         p = preparar(6)
@@ -141,6 +150,102 @@ class ExemplosProprietarios(unittest.TestCase):
             p.inicializar_jogador(0, 4)
 
 
+class ContratoOrdensPorJogador(unittest.TestCase):
+    """[0x4e19b8] points to four separate owner allocations; economy uses them by identity."""
+
+    def construir(self, ordens, tipo=6):
+        m = EconomiaConstrucoes(estruturas=bytes(1000 * 276))
+        m.estruturas[5], m.estruturas[8] = 3, tipo
+        return PropriedadeConstrucoes(m, ordens=ordens)
+
+    def test_four_live_pools_are_kept_by_identity_and_receive_the_writes(self):
+        bolsas = [bytearray(b'\x83' * PASSO_ORDENS_JOGADOR) for _ in range(4)]
+        p = self.construir(bolsas)
+        self.assertTrue(all(a is b for a, b in zip(p.ordens, bolsas)))
+        for j in range(4):
+            p.bibliotecas[j] = 1
+            p.inicializar_neutro(0, j)
+            self.assertIs(p.ordens[j], bolsas[j])
+            self.assertEqual(word(bolsas[j], 4 * 104 + 2), 5, j)
+            self.assertEqual(bolsas[j][4 * 104 + 0x60:4 * 104 + 0x66], b'\x83' * 6)
+            for k in range(j + 1, 4):
+                self.assertEqual(bolsas[k], b'\x83' * PASSO_ORDENS_JOGADOR, (j, k))
+
+    def test_core_unit_bag_pools_are_accepted_as_is(self):
+        sys.path.insert(0, str(PASTA.parents[1] / 'ferramentas'))
+        from ordens_unidades import MundoUnidades
+        mundo = MundoUnidades()
+        p = self.construir(mundo.bolsas_tipos_unidades)
+        self.assertTrue(all(a is b for a, b in zip(p.ordens, mundo.bolsas_tipos_unidades)))
+        p.bibliotecas[2] = 1
+        p.inicializar_neutro(0, 2)
+        self.assertEqual(word(mundo.bolsas_tipos_unidades[2], 4 * 104 + 2), 5)
+
+    def test_invalid_pools_are_rejected_before_any_effect(self):
+        bom = lambda: [bytearray(PASSO_ORDENS_JOGADOR) for _ in range(4)]
+        vista = memoryview(bytearray(2 * PASSO_ORDENS_JOGADOR))
+        invalidos = {
+            'single contiguous bytearray': bytearray(4 * PASSO_ORDENS_JOGADOR),
+            'single bytes': bytes(4 * PASSO_ORDENS_JOGADOR),
+            'three pools': bom()[:3],
+            'five pools': bom() + [bytearray(PASSO_ORDENS_JOGADOR)],
+            'generator': (b for b in bom()),
+            'short pool': bom()[:3] + [bytearray(PASSO_ORDENS_JOGADOR - 1)],
+            'long pool': bom()[:3] + [bytearray(PASSO_ORDENS_JOGADOR + 1)],
+            'read-only bytes pool': bom()[:3] + [bytes(PASSO_ORDENS_JOGADOR)],
+            'read-only view': bom()[:3] + [memoryview(bytes(PASSO_ORDENS_JOGADOR))],
+            'strided view': bom()[:3] + [vista[::2]],
+            'wide view': bom()[:3] + [memoryview(bytearray(PASSO_ORDENS_JOGADOR)).cast('H')],
+            'list pool': bom()[:3] + [[0] * PASSO_ORDENS_JOGADOR],
+        }
+        duplicado = bom()
+        duplicado[3] = duplicado[1]
+        invalidos['duplicate pool'] = duplicado
+        invalidos['overlapping views'] = bom()[:2] + [vista[:PASSO_ORDENS_JOGADOR], vista[1:PASSO_ORDENS_JOGADOR + 1]]
+        invalidos['identical views'] = bom()[:2] + [vista[:PASSO_ORDENS_JOGADOR], vista[:PASSO_ORDENS_JOGADOR]]
+        for nome, ordens in invalidos.items():
+            antes = [bytes(b) for b in ordens] if isinstance(ordens, list) else None
+            with self.subTest(nome), self.assertRaises(ValueError):
+                PropriedadeConstrucoes(EconomiaConstrucoes(estruturas=bytes(1000 * 276)), ordens=ordens)
+            if antes is not None:
+                self.assertEqual([bytes(b) for b in ordens], antes, nome)
+        self.assertEqual(bytes(vista), bytes(2 * PASSO_ORDENS_JOGADOR))
+        livres = bom()
+        self.construir(livres)
+        for bolsa in livres:  # validation left no buffer export pinned (a resize would raise BufferError)
+            bolsa.append(0)
+            del bolsa[-1]
+        for nome, memoria in (('bytes', bytes(10816)), ('short', bytearray(10815)), ('read-only', memoryview(bytes(10816)))):
+            with self.subTest(nome), self.assertRaises(ValueError):
+                ordens_contiguas(memoria)
+        with self.assertRaises(ValueError):
+            juntar_ordens(bytearray(10816))
+
+    def test_distinct_views_and_exact_slices_of_one_arena_are_accepted(self):
+        arena = bytearray(0x1000 * 4)
+        vistas = [memoryview(arena)[j * 0x1000:j * 0x1000 + PASSO_ORDENS_JOGADOR] for j in range(4)]
+        p = self.construir(vistas)
+        p.bibliotecas[3] = 1
+        p.inicializar_neutro(0, 3)
+        self.assertEqual(word(arena, 3 * 0x1000 + 4 * 104 + 2), 5)
+        self.assertEqual(arena[:3 * 0x1000], bytes(3 * 0x1000))
+
+    def test_legacy_contiguous_form_is_equivalent_to_four_pools(self):
+        rng = random.Random(0x4e19b8)
+        for n in range(64):
+            dados = rng.randbytes(4 * PASSO_ORDENS_JOGADOR)
+            arena = bytearray(dados)
+            bolsas = [bytearray(dados[j * PASSO_ORDENS_JOGADOR:(j + 1) * PASSO_ORDENS_JOGADOR]) for j in range(4)]
+            legado, separado = self.construir(ordens_contiguas(arena)), self.construir(bolsas)
+            for p in (legado, separado):
+                p.bibliotecas[n % 4] = 1
+                p.inicializar_neutro(0, n % 4)
+            self.assertEqual(bytes(arena), b''.join(bolsas))
+            self.assertEqual(juntar_ordens(legado.ordens), bytes(arena))
+            self.assertEqual(juntar_ordens(separado.ordens), bytes(arena))
+            self.assertNotEqual(bytes(arena), dados)
+
+
 @unittest.skipUnless(os.environ.get('RISING_EMULAR') == '1', 'Emulação opcional: RISING_EMULAR=1')
 class DiferencialProprietarios(unittest.TestCase):
     @classmethod
@@ -158,7 +263,7 @@ class DiferencialProprietarios(unittest.TestCase):
                      estruturas=bytes(m.estruturas), tipos=bytes(m.terreno.tipos),
                      quantidades=bytes(m.terreno.quantidades), semente=m.terreno.semente,
                      contagens_por_tipo=bytes(m.contagens_por_tipo), contagens_tipo18=bytes(m.contagens_tipo18))
-        esperado = dict(mundo=mundo, **{n:bytes(getattr(p,n)) for n in ('bibliotecas','baloes','numeros_unidades','pendencias','ordens','sortilegios')},
+        esperado = dict(mundo=mundo, ordens=juntar_ordens(p.ordens), **{n:bytes(getattr(p,n)) for n in ('bibliotecas','baloes','numeros_unidades','pendencias','sortilegios')},
                         jogador_deposito=p.jogador_deposito)
         atual = self.b.estado_propriedade()
         for campo in esperado:
@@ -210,7 +315,7 @@ class DiferencialProprietarios(unittest.TestCase):
                 p.bibliotecas[:]=self.rng.randbytes(4)
                 p.bibliotecas[j]=(0,1,2,255)[n%4]
                 p.sortilegios[:]=self.rng.randbytes(20)
-                p.ordens[:]=self.rng.randbytes(len(p.ordens))
+                preencher_ordens(p.ordens,self.rng.randbytes(10816))
                 self.comparar(p,ganho,jogador=j)
 
     def test_heliportos_baloes_existentes_e_listas_256_chamadas(self):

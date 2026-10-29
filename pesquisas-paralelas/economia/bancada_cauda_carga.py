@@ -31,7 +31,7 @@ class BancadaCaudaCarga(BancadaHabitaveis):
         self.cpu.mem_write(TABELA_ORDENS, struct.pack('<4I', *(ORDENS+j*2704 for j in range(4))))
         self.cpu.mem_write(0x5080ac, struct.pack('<I', GUARDADOS))
         self.entradas.update(tecnologia_cavernas=0, tecnologia_cavernas_nome=0, jogadores=0, mercado=0,
-                             tecnologia_unidades=0, realizavel=0)
+                             tecnologia_unidades=0, realizavel=0, inicializar_tecnologia_unidades=0)
 
     def carregar(self, caso):
         super().carregar(caso)
@@ -85,6 +85,18 @@ class BancadaCaudaCarga(BancadaHabitaveis):
     def cauda_mercado(self):
         """MissionLoad 0x46c5d1..0x46c5d6: MarcheResetAll."""
         return self._fragmento('mercado', 0x46c5d1, 0x46c5d6)
+
+    def inicializar_tecnologia_unidades(self):
+        """EnginInitTechnologie 0x441459 entered directly (owners 0..3 through [0x4e19b8])."""
+        self.entradas['inicializar_tecnologia_unidades'] += 1
+        return self._resultado('inicializar_tecnologia_unidades', self.executar(
+            0x441459, self.intervalos, dict(EAX=0x5a5a5a5a), limite_instrucoes=1000000))
+
+    def apontar_ordens(self, enderecos):
+        """Rewrite the pointer table [0x4e19b8] to four owner pools; returns the old table."""
+        antigo = bytes(self.cpu.mem_read(TABELA_ORDENS, 16))
+        self.cpu.mem_write(TABELA_ORDENS, struct.pack('<4I', *enderecos))
+        return antigo
 
     def tecnologia_unidades(self, jogador):
         self.entradas['tecnologia_unidades'] += 1

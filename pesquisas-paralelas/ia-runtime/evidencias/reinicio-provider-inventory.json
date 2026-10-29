@@ -1,0 +1,243 @@
+{
+ "base_main": "5d24c91104e8b7f66b774e5b46969508708cc01f",
+ "scope": "LIGHT source/ABI audit only; no native adapter validation or production binding implemented",
+ "callbacks": [
+  {
+   "callback": "PlayerGetType",
+   "entry": "0x0046d817",
+   "sites": [
+    "0x0047f576",
+    "0x004827e0",
+    "0x004864fe"
+   ],
+   "status": "existing production delegate",
+   "provider": {
+    "path": "pesquisas-paralelas/economia/mercado.py",
+    "symbol": "Mercado.tipo_jogador",
+    "sha256": "69178c8480d40b93d9605986ec667307812514e56674f1e6520c7d6ed406614e"
+   },
+   "memory": "[0x5080a8] -> live 80-byte player table, same actual range as Mercado.jogadores",
+   "owner_contract": "Confirmed by Economy: lowu8 player;0..3 reads raw +1,4..255 returns original2; sitio is adapter trace metadata and is not passed to Mercado.tipo_jogador"
+  },
+  {
+   "callback": "EnginEstVivant",
+   "entry": "0x00443dad",
+   "sites": [
+    "0x0047f4e7",
+    "0x0048283f",
+    "0x0047aff1"
+   ],
+   "status": "existing production delegate",
+   "provider": {
+    "path": "ferramentas/ordens_unidades.py",
+    "symbol": "MundoUnidades.viva",
+    "sha256": "ba960424f6228daf83ffd69a28a71d9cbbec03e0a5b756b379dab290dd8cf2d4"
+   },
+   "memory": "[0x4e19a0] -> same live 220800-byte world.unidades allocation"
+  },
+  {
+   "callback": "EnginGetType",
+   "entry": "0x00442025",
+   "sites": [
+    "0x0047affc"
+   ],
+   "status": "committed owner delegate now available for Stage2b preparation",
+   "memory": "same live world.unidades; no VM/task body copied",
+   "existing_related_operation": {
+    "path": "ferramentas/ordens_unidades.py",
+    "symbol": "MundoUnidades.executar_operacao('I_DonneTypeUnite',[index])",
+    "sha256": "ba960424f6228daf83ffd69a28a71d9cbbec03e0a5b756b379dab290dd8cf2d4"
+   },
+   "note": "No fake VM/world object will be constructed merely to obtain a getter",
+   "provider": {
+    "path": "ferramentas/consultas_unidades.py",
+    "symbol": "tipo_unidade",
+    "sha256": "b0e8788b2424104accc28ca160befc8d494bc33808d996bc70c0cd4a9f27f851"
+   }
+  },
+  {
+   "callback": "GetRessource",
+   "entry": "0x00467670",
+   "sites": [
+    "0x004850b3"
+   ],
+   "status": "existing production delegate",
+   "provider": {
+    "path": "pesquisas-paralelas/economia/economia.py",
+    "symbol": "Economia.consultar",
+    "sha256": "1f89ab9252fab13b25bc35b8e52aada6c9ea19b1dce51fc1036ee5d515ce5849"
+   },
+   "memory": "0x4e2ea8..0x4e2f28 exactly aliases Economia.memoria; constructor copies must not masquerade as aliases",
+   "owner_contract": "Confirmed by Economy: lowu8 player protected0..3, totalsu16(food,stone,parts,0); Mercado.economia must be the same Economia object; sitio is trace metadata"
+  },
+  {
+   "callback": "MissionGetNum",
+   "entry": "0x0046c11a",
+   "sites": [
+    "0x0047f4b0",
+    "0x0047b02c"
+   ],
+   "status": "committed owner delegate now available for Stage2b preparation",
+   "memory": "original xor AH,AH; read AL from exact live one-byte 0x496fe4; adjacent byte is irrelevant",
+   "provider": {
+    "path": "pesquisas-paralelas/missoes/consultas_missao.py",
+    "symbol": "numero_missao",
+    "sha256": "23a4e6bbc8bbdf9f1ad1f7855aacca8f181f44f10eabf8d748a5a768942604eb"
+   }
+  },
+  {
+   "callback": "TypeEnginEstMonstre",
+   "entry": "0x004422dd",
+   "sites": [
+    "0x0047b006"
+   ],
+   "status": "committed owner delegate now available for Stage2b preparation",
+   "memory": "AL input type, AL output; original true tail0x4422da must be included in owner evidence",
+   "provider": {
+    "path": "ferramentas/consultas_unidades.py",
+    "symbol": "tipo_unidade_monstro",
+    "sha256": "b0e8788b2424104accc28ca160befc8d494bc33808d996bc70c0cd4a9f27f851"
+   }
+  },
+  {
+   "callback": "EnginGetEtat",
+   "entry": "0x00440e11",
+   "sites": [
+    "0x004843ea",
+    "0x00484407"
+   ],
+   "status": "missing standalone core getter; requested",
+   "memory": "live unit record state byte +2"
+  },
+  {
+   "callback": "EnginSetPlayer",
+   "entry": "0x00443108",
+   "sites": [
+    "0x0047b01f"
+   ],
+   "status": "missing standalone core mutator; requested",
+   "memory": "live unit ownership, including original passenger-owner propagation for selected vehicle types; not a generic byte store"
+  },
+  {
+   "callback": "RechercheGetNiveau",
+   "entry": "0x004717c2",
+   "sites": [
+    "0x0047f43f"
+   ],
+   "status": "missing standalone economy getter",
+   "memory": "0x5080f4 + player*16 + (branch & 0xffff), protected branch to be owner-declared",
+   "owner_contract": "Missing leaf. Proposed protected player0..3,branch0..3; reads ONE BYTE and zero-extendsAX from explicit inherited64-byte0x5080f4..0x508134; no spell/default table"
+  },
+  {
+   "callback": "RechercheSetBranche",
+   "entry": "0x00470b37",
+   "sites": [
+    "0x0047f4ca"
+   ],
+   "status": "missing standalone economy setter",
+   "memory": "byte0x5080f8 + player*16, original DL branch store",
+   "owner_contract": "Missing leaf. lowu8 player protected0..3, DLvalue0..255 stores ONLY byte0x5080f8+16*player; no technology or progress effects"
+  },
+  {
+   "callback": "BatimentExiste",
+   "entry": "0x0041a735",
+   "sites": [
+    "0x00484348"
+   ],
+   "status": "committed owner delegate now available for Stage2b preparation",
+   "memory": "world.estruturas at0x49a0c8; state+5 !=0; active state4/5 not excluded",
+   "owner_contract": "Missing leaf. lowAX0..999 returns0/1 for rawstate+5 !=0 including3/4/5; read only,EDX retained",
+   "provider": {
+    "path": "pesquisas-paralelas/missoes/consultas_missao.py",
+    "symbol": "existe_estrutura",
+    "sha256": "23a4e6bbc8bbdf9f1ad1f7855aacca8f181f44f10eabf8d748a5a768942604eb"
+   }
+  },
+  {
+   "callback": "BatimentGetPlayer",
+   "entry": "0x0041a08c",
+   "sites": [
+    "0x00484353"
+   ],
+   "status": "existing genuine combat delegate confirmed by economy owner; reuse without duplicate getter",
+   "provider": {
+    "path": "pesquisas-paralelas/combate/ataque_vivo.py",
+    "symbol": "batiment_get_player",
+    "sha256": "21d3f0c9e2a307b82874c6634730a62b301751ec76c51e9ff7d151429fb7c86c"
+   },
+   "memory": "same live world.estruturas, raw +4",
+   "owner_contract": "lowAX0..999, raw+4 including200/255, no state filter/stores; EDX retained, upperEAX outside consumedAL contract"
+  },
+  {
+   "callback": "BatimentGetType",
+   "entry": "0x0041a4f4",
+   "sites": [
+    "0x00484363",
+    "0x0048437a"
+   ],
+   "status": "inline within economy transport query; standalone delegate absent",
+   "memory": "same live world.estruturas, raw +8",
+   "owner_contract": "Missing standalone leaf. lowAX0..999 reads raw+8, no alive/type filter; read only,EDX retained"
+  }
+ ],
+ "aliasing": [
+  "AI groups0x51a9e0..0x51b660 must be the same actual range as world.grupos",
+  "AI iterator pointer0x51b844/u16 unit0x51b848 are scalar core-world attributes; bridge must preserve both raw slots and existing core attribute values",
+  "All pointer and inline input mappings are explicit; no constructor-zero state or copied resource/player arrays"
+ ],
+ "nearest_monde01_stop": {
+  "callback": "TypeEnginEstMonstre",
+  "site": "0x0047b006",
+  "reason": "first live unit after unit/group reset; do not replay from entry to continue",
+  "fixture_boundary": "Applies only to the historical declared(1,0,0,0) player-control fixture, not an assumption about real M1 state"
+ },
+ "statuses": {
+  "implemented": false,
+  "validated_against_original": false,
+  "integrated": false,
+  "real_mission_tested": false
+ },
+ "player_control_boundary": "Player-control types are inherited live bytes, never adapter defaults. Historical MONDE01 fixtures declare(1,0,0,0) or(1,2,2,2); neither establishes actual menu/program initialization. A reached type2 player requires real economy research/structure/resource delegates.",
+ "type2_first_stop": {
+  "callback": "RechercheGetNiveau",
+  "site": "0x0047f43f",
+  "entry": "0x004717c2",
+  "input": "AI playeru8, branchu16; actual raw research state0x5080f4, not a fabricated level"
+ },
+ "economy_owner_contract_audit": {
+  "base_main": "e9f5dbd33972344e37db3a93be1aec9c115a88bf",
+  "source_sha256_verified": true,
+  "kind": "owner-confirmed LIGHT contract; missing leaves not implemented or original-validated",
+  "missing_leaves": [
+   "RechercheGetNiveau",
+   "RechercheSetBranche",
+   "BatimentExiste",
+   "BatimentGetType"
+  ]
+ },
+ "latest_adapter_preparation": {
+  "time_brt": "2026-10-28 18:23:56",
+  "owner_query_main": "2456848e57c1fbb63f3590023e424012c0916d3e",
+  "implementation_prepared": true,
+  "fresh_native_validated": true,
+  "integrated": false,
+  "real_mission_tested": false,
+  "local_frozen_inputs": 11,
+  "local_complete_inputs": 1,
+  "local_named_stops": 10,
+  "guard_tests_passed": 4,
+  "native_test_not_run": 1,
+  "missing_current_economy_module": "pesquisas-paralelas/economia/consultas_reinicio_economia.py",
+  "unresolved_core_primitives": [
+   "EnginGetEtat",
+   "EnginSetPlayer"
+  ],
+  "validated_source_revision": "a5316d4b8b22265eaeb29afd4909c39314f52044",
+  "native_cases": 11,
+  "native_complete_inputs": 2,
+  "native_named_stops": 9,
+  "native_segments": 75967,
+  "owning_domain_gate_run": false,
+  "full_suite_run": false
+ }
+}

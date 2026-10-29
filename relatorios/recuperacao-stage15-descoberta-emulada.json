@@ -1,0 +1,90 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": true,
+  "tests": 32,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "bounded_x86_executions": 10503,
+  "success": true,
+  "scope": "DecouvreTerrain/IllumineTerrain/SetMiniMap for insertion sums 9..11 and direct radii 0..23/0..20, stops above the domain, and the existing 0..8 PlaceEngin/SetSortEngin regression; no mission scan, structure caller or Windows runtime.",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "unicorn": "2.1.4",
+  "benches": {
+    "discovery": {
+      "original_entries": {
+        "0x476851": 480,
+        "0x476cb3": 420,
+        "0x456fa6": 267,
+        "0x445fbc": 266
+      },
+      "reached_stops": {
+        "0x3000000": 1423,
+        "0x46a623": 2784,
+        "0x46a388": 1310,
+        "0x457019": 5,
+        "0x446146": 5
+      },
+      "bounded_segments": 5527,
+      "preserved_minimap_resumptions": 1310,
+      "preserved_loop_head_resumptions": 2784,
+      "maximum_native_instructions_per_segment": 164737,
+      "failed_native_segment": null
+    },
+    "mission_regression": {
+      "original_entries": {
+        "0x445fbc": 318,
+        "0x456fa6": 672,
+        "0x441fff": 512,
+        "0x4465bf": 512
+      },
+      "reached_stops": {
+        "0x46a388": 1924,
+        "0x3000000": 2002,
+        "0x457019": 6,
+        "0x446146": 6
+      },
+      "bounded_segments": 3938,
+      "preserved_minimap_resumptions": 1924,
+      "preserved_loop_head_resumptions": 0,
+      "maximum_native_instructions_per_segment": 54778,
+      "failed_native_segment": null
+    },
+    "exit_regression": {
+      "original_entries": {
+        "0x445fbc": 672,
+        "0x420f5a": 104,
+        "0x420f8a": 52
+      },
+      "reached_stops": {
+        "0x3000000": 666,
+        "0x420f9e": 156,
+        "0x446146": 6
+      },
+      "bounded_segments": 828,
+      "preserved_minimap_resumptions": 0,
+      "preserved_loop_head_resumptions": 0,
+      "maximum_native_instructions_per_segment": 929654,
+      "failed_native_segment": null
+    },
+    "exit_regression_segmented": {
+      "original_entries": {
+        "0x445fbc": 18
+      },
+      "reached_stops": {
+        "0x46a388": 192,
+        "0x3000000": 18
+      },
+      "bounded_segments": 210,
+      "preserved_minimap_resumptions": 192,
+      "preserved_loop_head_resumptions": 0,
+      "maximum_native_instructions_per_segment": 55454,
+      "failed_native_segment": null
+    }
+  },
+  "expected_native_exceptions": 0,
+  "expected_execution_limits": 0,
+  "native_instruction_cap": 1000000,
+  "native_segment_timeout_us": 1000000,
+  "native_subcalls": "Unpatched collision/discovery/light/minimap; same instruction/CPU/stack at each SetMiniMap-entry or pixel-loop-head resume"
+}

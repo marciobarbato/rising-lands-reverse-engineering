@@ -1,0 +1,56 @@
+{
+ "milestone": "M1 \u2014 MONDE01 loaded",
+ "decision": "ACCEPTED",
+ "decided_at": "2026-10-28 (BRT evening)",
+ "decided_by": "coordinator (Claude) on committed-main reproduction",
+ "main": "927c7e57e555eb0f55d509db35aa36fb70454e85",
+ "intact_executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "integrations_this_round": {
+  "missions_stage13": "eb2f1c20003af76947d911150c6e4805094609fd",
+  "missions_compat": "fdf487b26776f35ba8e9b02ebb5167bd9adba6f8",
+  "economy_per_owner_ordens": "ff2f5cf73451e9ce790295cedc86c268a2e1ddb8",
+  "missions_stage14": "927c7e57e555eb0f55d509db35aa36fb70454e85"
+ },
+ "original_reference": {
+  "capture_v2": "pesquisas-paralelas/missoes/evidencias/captura-carga-missao-original-v2.json",
+  "capture_v2_sha256": "eb7d2303e13e62d4f5692c9cb6ef302b573d138df6a8b51183a6d9b0bd703afc",
+  "entry": "pesquisas-paralelas/missoes/evidencias/entrada-carga-missao-original.json",
+  "entry_sha256": "0692dea1a4797a05785245a2c5bdbbbf24408e5efeb0b4e82e895075a7c52ddf",
+  "fresh_native_rerun_on_927c7e5": "entry image, final image (881 blocks), 1,400 binding events and AL=1 identical to frozen v2; entry artifact identical except source_revision and absolute BIN path",
+  "fresh_report_sha256": "3daea786eef2a31d4cba827b3b5591c4a867c6a0345b1d826eb04b32e7c8eb00"
+ },
+ "python_composition": {
+  "report": "pesquisas-paralelas/missoes/validacao/stage14-m1-composition-strict.json",
+  "report_sha256": "54e84572a2d3071beb79227cc991a7a579efd3c8809ab1a0641edafe3fc60592",
+  "criteria": {
+   "real_return": true,
+   "al": 1,
+   "whole_state": "881/881 blocks, 2,659,375 bytes, 0 differing",
+   "allocation_records": "938/938",
+   "binding_requests": "1,400/1,400",
+   "bridges": "none",
+   "excess_change": "none",
+   "determinism": "two runs identical state SHA da9ce107\u2026"
+  },
+  "main_reproduction": "tests 11/11 OK; regenerated report identical except timings and source_revision",
+  "main_report_sha256": "73dd7747c95c7d30c6319040ad3d4966fad6e505c061a6e5676d20deb3b17c9e"
+ },
+ "gates": {
+  "missions_full_native": "104/104, 0 skips (helper, 230.6 s)",
+  "common": "core 418/192, combat 246/149, economy 441/198, graphics 192/0, missions 104/32, ai-runtime 41/5, audio 20/3, workflow 8/0 \u2014 optional skips, 0 failures"
+ },
+ "acceptance_criteria_user": [
+  "MissionLoad executes to its real return \u2014 original and Python composition, AL=1",
+  "All required providers integrated \u2014 Core resets/remap/placement/XP, Economy tails+per-owner ordens, Combat ProjectileReset, AI IaReset adapter, Missions loaders; no bridge",
+  "Declared memory states equal the original \u2014 full DGROUP+.bss and every allocation",
+  "Returns, external effects and call sequence validated \u2014 AL, 1,400 ordered binding requests, 938 allocation records",
+  "No artificial stops or hidden dependencies on the accepted path \u2014 input footprint: 0 skip-derived bytes read; listed exclusions are observation metadata only",
+  "Tests reproduced on integrated main \u2014 yes at 927c7e5"
+ ],
+ "scope_and_limits": [
+  "Single scenario: MONDE01, new campaign, declared Windows inputs (clock 0x123456, fill 0xA7, C:\\RISING, CD D:, key script).",
+  "Inherited entry state produced by original startup code in emulation; 47 display/audio/text startup calls skipped, proven not read by MissionLoad.",
+  "Comparison exclusions: 16 GROUPE%02d profile key strings (stack frame not captured; all other fields compared), allocation caller-return/stack metadata, native stack block.",
+  "M1 is loading only: no mission frame (M2), app play (M3) or objective (M4) is implied. macOS app remains synthetic training."
+ ]
+}

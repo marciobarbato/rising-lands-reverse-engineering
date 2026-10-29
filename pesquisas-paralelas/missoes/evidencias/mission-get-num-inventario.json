@@ -1,0 +1,12 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "inspected_core_main": "b610bfad77ffadaa0ee5f6af02160d786ccfdc7b",
+  "start": "0x46c11a",
+  "end_exclusive": "0x46c122",
+  "file": "mission-get-num-0046c11a.asm",
+  "sha256": "d7f04a28a4d01d8fb09eefc005ed13df4c5762237660e759d06a45e6240aa92a",
+  "status": "Static query inventory; original execution and translation pending heavy grant",
+  "input": "one live byte at0x496fe4, as MemoriaReinicio.missao",
+  "return_width": "AX zero-extended u8; upper EAX16 retained; adjacent byte not read",
+  "consumer": "IaReset/InitMissionMonstre; smallest Missions-owned M1 identity getter requested by AI"
+}

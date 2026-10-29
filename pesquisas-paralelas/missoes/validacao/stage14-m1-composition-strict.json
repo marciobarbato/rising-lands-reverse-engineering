@@ -1,0 +1,316 @@
+{
+ "schema": "rising-lands/missionload-m1-composition-strict/1",
+ "source_revision": "ea1aac5f97a3673aca6a1df9928af6174a0012bc",
+ "source_dirty_paths": [],
+ "source_sha256": {
+  "mapa_memoria_m1.py": "e1cbb10b773ec02ce5c0183d2a17f8f64a8b8e6a56fbbf4a824b6388b71f9796",
+  "arena_composicao_m1.py": "106e05116b4140e737d52596c19c0b949f633c68148c9f004521ccd26d955eba",
+  "ligacao_provedores_m1.py": "da56698f5098c8a94e45618f8cb0a98f730aabb52a211400c70c8115251576a1",
+  "composicao_carga_missao.py": "e82c67b5705cdc5c984741082dfa5e74c4ebd504f466a15c0ef7039e7cf75b5f",
+  "comparacao_carga_missao.py": "5683dee8780545b8c14d6a951c3b250ad7d1936808966004275c35f4f39a23e4",
+  "validar_composicao_carga_missao.py": "e64e7a783168c709b1619263b9f819990290c5b72a786fa0deb4eeb68a986646",
+  "carregador_cabecalho.py": "0944f8201eaec27e678b07d6a311fad89bd62df471eefa8f91e8509a230af941",
+  "carregador_unidades.py": "0fe492057915ed0b7cc389adc799f3ba3a60c91c2fb15e02f1df8979eecd85ba"
+ },
+ "economy_provider_sha256": {
+  "pesquisas-paralelas/economia/proprietarios.py": "5c216b4acf320215a6f48a62f35652ec32eb9049d9f37812b9be0d0ecd70da9a"
+ },
+ "entry_snapshot": {
+  "path": "evidencias/entrada-carga-missao-original.json",
+  "sha256": "0692dea1a4797a05785245a2c5bdbbbf24408e5efeb0b4e82e895075a7c52ddf"
+ },
+ "original_capture": {
+  "path": "evidencias/captura-carga-missao-original-v2.json",
+  "sha256": "eb7d2303e13e62d4f5692c9cb6ef302b573d138df6a8b51183a6d9b0bd703afc"
+ },
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "cpu_free": true,
+ "native_executed": false,
+ "bridges": [],
+ "criteria": {
+  "reached_return_0x42d22d_semantics": true,
+  "al_equals_1": true,
+  "whole_state_equal_881_blocks_2659375_bytes": true,
+  "allocation_records_equal_938": true,
+  "binding_requests_equal_1400": true,
+  "no_bridge": true,
+  "no_excess_change": true
+ },
+ "deterministic": true,
+ "m1_candidate": true,
+ "m1_accepted": false,
+ "acceptance_note": "M1 candidate only; acceptance happens after integration and committed-main reproduction by the coordinator",
+ "comparison_exclusions": [
+  {
+   "item": "16 GetPrivateProfileStringA key arguments (GROUPE00..GROUPE15)",
+   "reason": "the original builds each key string in its own native stack frame (0x2007d38); the capture keeps no final native stack, so the string itself cannot be read. At those 16 positions the section, default, buffer size, file, result length and written-bytes SHA-256 are compared."
+  },
+  {
+   "item": "allocation-record fields caller_return, freed_caller_return, stack",
+   "reason": "native observation metadata of the oracle (caller return addresses and eight caller-stack dwords at GlobalAlloc), not memory state; the Python resource-callback contract carries no call site. Pointer, size, flags, index, initial byte, events, locks, active and freed-bytes SHA-256 are compared for all 938 records."
+  },
+  {
+   "item": "native stack block",
+   "reason": "the original final capture contains no native stack (881 final blocks); the composition models no stack locals. It is not mission state (M1 snapshot contract)."
+  }
+ ],
+ "strict": {
+  "reached_return": true,
+  "al": 1,
+  "stop": null,
+  "completed_steps": [
+   {
+    "step": "MakeMissionName",
+    "name_bytes": "\\World\\Monde01.ETA"
+   },
+   {
+    "step": "MissionPathBuild",
+    "path": "D:\\World\\Monde01.ETA"
+   },
+   {
+    "step": "ResetCounters"
+   },
+   {
+    "step": "IconeReset"
+   },
+   {
+    "step": "TerrainReset"
+   },
+   {
+    "step": "MiniMapReset"
+   },
+   {
+    "step": "BatimentResetAll"
+   },
+   {
+    "step": "EnginResetAll"
+   },
+   {
+    "step": "ProjectileReset"
+   },
+   {
+    "step": "MessageBoxInit"
+   },
+   {
+    "step": "BallonInit"
+   },
+   {
+    "step": "FileOpen"
+   },
+   {
+    "step": "HeaderPrelude",
+    "width": 64,
+    "height": 64,
+    "viewer": 0,
+    "cursor": 327728
+   },
+   {
+    "step": "Chemin_Remap",
+    "al": 1
+   },
+   {
+    "step": "StructureCopy",
+    "count": 1,
+    "indices": [
+     0
+    ]
+   },
+   {
+    "step": "LoadEngin",
+    "count": 16,
+    "indices": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15
+    ]
+   },
+   {
+    "step": "LoadMine"
+   },
+   {
+    "step": "IALoadAttaqueIni"
+   },
+   {
+    "step": "LoadBatimentGhost"
+   },
+   {
+    "step": "LoadCadreInfluence"
+   },
+   {
+    "step": "LoadFinMission"
+   },
+   {
+    "step": "LoadCalculMissionDivers"
+   },
+   {
+    "step": "LoadObjectif"
+   },
+   {
+    "step": "LoadEntrerMonstre"
+   },
+   {
+    "step": "FileClose",
+    "cursor": 342472
+   },
+   {
+    "step": "MissionPlaceTerrain",
+    "units_placed": [
+     0,
+     1,
+     2,
+     11,
+     12,
+     13,
+     14,
+     15
+    ],
+    "structures_placed": [
+     0
+    ],
+    "structures_inhabited": [
+     0
+    ]
+   },
+   {
+    "step": "EnginInitTechnologie"
+   },
+   {
+    "step": "BatimentInitCave"
+   },
+   {
+    "step": "Engin_RetrieveExperimente"
+   },
+   {
+    "step": "PlayerRetrieve"
+   },
+   {
+    "step": "IaReset",
+    "al_argument_unused": 1,
+    "eax": 0,
+    "provider_calls": 8667
+   },
+   {
+    "step": "MarcheResetAll"
+   }
+  ],
+  "seconds": 2.979,
+  "state_sha256": "da9ce107773331dc8fb985476419df2c6f3bc52ddacedc832122308d4d526ea4",
+  "binding_requests_sha256": "bcbcff687ac9bb3bab070dd0866ca113d08a38639ef4829d75f88598e50930ed",
+  "details": {
+   "excess_changed": [],
+   "live_arena_allocations": 0,
+   "next_free": "0x450f9000",
+   "identity_sharing": [
+    "EconomiaConstrucoes.estruturas",
+    "EconomiaConstrucoes.contagens_por_tipo",
+    "TerrenoSacolas.tipos",
+    "TerrenoSacolas.quantidades",
+    "Recrutamento.selecoes",
+    "Recrutamento.unidades",
+    "Recrutamento.tipos_unidades",
+    "PropriedadeConstrucoes.ordens"
+   ],
+   "denied_attributes": {
+    "core:MundoNavegacao": [
+     "historico_navegacao",
+     "resultados_busca",
+     "solucionador"
+    ],
+    "economy:PropriedadeConstrucoes": [
+     "bibliotecas",
+     "jogador_deposito",
+     "numeros_unidades"
+    ]
+   }
+  },
+  "state_comparison": {
+   "blocks_compared": 881,
+   "bytes_compared": 2659375,
+   "differing_bytes_or_blocks": 0,
+   "blocks_with_differences": [],
+   "blocks": {},
+   "allocation_records": {
+    "original": 938,
+    "composed": 938,
+    "differing": 0,
+    "first_differences": [],
+    "compared_fields": [
+     "active",
+     "events",
+     "flags",
+     "index",
+     "initial_byte",
+     "locks",
+     "pointer",
+     "size",
+     "freed_sha256",
+     "kind"
+    ],
+    "not_compared_native_metadata": [
+     "caller_return",
+     "freed_caller_return",
+     "stack"
+    ]
+   },
+   "al": {
+    "original": 1,
+    "composed": 1,
+    "equal": true
+   },
+   "native_stack": "not in the original final capture; the composition models no stack locals",
+   "equal": true
+  },
+  "binding_comparison": {
+   "original_events": 1400,
+   "composed_requests": 1400,
+   "mismatching_positions": 0,
+   "equal": true,
+   "original_arguments_not_captured": {
+    "count": 16,
+    "values": [
+     "<native stack 0x02007d38: not captured>"
+    ],
+    "reason": "string built by the original in its own stack frame (e.g. the GROUPE%02d key of GetPrivateProfileStringA); the capture keeps no final native stack, so only the other fields (section, default, size, file, result, written-bytes SHA-256) are compared at those positions"
+   },
+   "first_mismatches": []
+  }
+ },
+ "determinism": {
+  "second_run_state_sha256": "da9ce107773331dc8fb985476419df2c6f3bc52ddacedc832122308d4d526ea4",
+  "second_run_binding_requests_sha256": "bcbcff687ac9bb3bab070dd0866ca113d08a38639ef4829d75f88598e50930ed",
+  "second_run_seconds": 2.972,
+  "identical": true
+ },
+ "supersedes_blocker": {
+  "stage13_report": "validacao/stage13-m1-composition.json",
+  "stage13_stop": "EnginInitTechnologie 0x441459 at CALL 0x46c5af (Economy ordens)",
+  "resolved_by": "Economy per-owner [0x4e19b8] Bag contract on main ff2f5cf"
+ },
+ "recommended_non_blocking_changes": [
+  {
+   "owner": "core",
+   "file": "ferramentas/reset_terreno.py resetar_minimapa; avanco_unidades.MundoFisico mini_*",
+   "needed": "Accept the exact 16,384-byte (128x128) minimap allocations of [0x507d5c]/[0x507d60]/[0x507d64] (length >= w*h) instead of requiring 65,536-byte layers.",
+   "status": "non-blocking: the map exposes the first 16,384 bytes of Core's own layers as the allocations; the 49,152 provider-private bytes are poisoned 0x5c and verified unchanged at the end"
+  },
+  {
+   "owner": "core",
+   "file": "ferramentas/avanco_unidades.py MundoFisico.tiles/.regioes; estruturas_caminhos.CoresEstruturas.pilha",
+   "needed": "Optionally keep these u16 grids as u16 views of their allocations instead of Python lists.",
+   "status": "non-blocking: the lists are canonical, filled in place from the snapshot and packed for comparison; the header loader writes the tile layer through one staged byte image"
+  }
+ ]
+}
