@@ -454,7 +454,7 @@ Merged `origin/main` 67fb81f. Contract: [docs/MISSIONS.md — Stage17](../../doc
 | `8c7c47a` | display frames 0/1 capture and trace |
 | `9017f11` | comparison script |
 | `6934a0c` and later | validator fix and writer attribution |
-| report commit (below) | reports |
+| `1980950` | reports |
 
 ### API inputs
 
