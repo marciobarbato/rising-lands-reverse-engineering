@@ -49,37 +49,52 @@ class QuadroTest(unittest.TestCase):
         return Q.renderizar_quadro(mem, superficie_anterior=self.fx.antes, habitado=lambda i: bool(self.fx.bruto['habitation'][str(i)])), mem
 
     def test_api_matches_the_native_reference_up_to_the_first_unreconstructed_pass(self):
+        # Render API 1.3: types 1 and 8 are composed, so the frame-1 checkpoint is complete and equal pixel for pixel.
         q, _ = self.renderizar()
-        self.assertEqual(q.parada['endereco'], '0x0041591f')            # first unit type without a committed body
+        self.assertIsNone(q.parada)
+        self.assertEqual(q.pixels, self.fx.referencia)
+        self.assertEqual(len(q.rgba), 800*600*4)
+        self.assertEqual(self.fx.bruto['habitation'], {'0': 1})
+
+    def test_api_1_2_domain_stopped_at_unit_15(self):
+        # Historical 1.2 behaviour, kept as a regression: without the type-1/8 bodies the first stop is unit 15 (type 8).
+        import quadro_jogo as QJ
+        tipos = dict(QJ.CORPOS_TIPOS1_8)
+        QJ.CORPOS_TIPOS1_8.clear()
+        try:
+            q, _ = self.renderizar()
+        finally:
+            QJ.CORPOS_TIPOS1_8.update(tipos)
+        self.assertEqual(q.parada['endereco'], '0x0041591f')
         self.assertIn('unit 15 type 8', q.parada['detalhe'])
         ref = self.fx.referencia
         dif = [i for i in range(len(ref)) if ref[i] != q.pixels[i]]
         self.assertTrue(dif and min(dif)//800 >= 279, (len(dif), min(dif)//800))   # terrain, vegetation and the facade equal
-        self.assertEqual(len(q.rgba), 800*600*4)
-        self.assertEqual(self.fx.bruto['habitation'], {'0': 1})
 
     def test_contract_shape(self):
         q, _ = self.renderizar()
         self.assertEqual((q.versao, q.largura, q.altura), (Q.VERSAO_RENDER_QUADRO, 800, 600))
-        self.assertEqual(Q.VERSAO_RENDER_QUADRO, (1, 2))
+        self.assertEqual(Q.VERSAO_RENDER_QUADRO, (1, 3))
         pal = Q.Catalogo().paleta()
         self.assertEqual(len(pal), 768)
         for i in (0, 4000, 123456, 479999):    # rgba = palette[index] expanded to RGB, alpha 255, row-major, origin top-left
             p = q.pixels[i]
             self.assertEqual(q.rgba[i*4:i*4+4], pal[p*3:p*3+3]+b'\xff')
-        self.assertEqual(sorted(q.parada), ['detalhe', 'endereco'])
+        self.assertIsNone(q.parada)
+        mem = Memoria(self.fx); mem.definir(0x49a0c8+5, 0)      # a structure mode outside the domain: parada is a dict
+        self.assertEqual(sorted(Q.renderizar_quadro(mem, superficie_anterior=self.fx.antes, habitado=lambda i: True).parada), ['detalhe', 'endereco'])
         with self.assertRaises(ValueError):
             Q.renderizar_quadro(Memoria(self.fx), superficie_anterior=b'\0'*10)
 
     def test_units_with_the_tired_icon_equal_the_original_pixels(self):
-        # Types 1 and 8 have no committed body (skipped here); every other unit, with its low-life icon, must match.
+        # Types 1 and 8 skipped here (API 1.1 view): every other unit, with its low-life icon, must match.
         import quadro_jogo as QJ
         original = QJ._Composicao.engin
         faltando = []
 
         def engin(c, x, y, indice):
             tipo = c.mundo.unidades[indice*276+1]
-            if tipo not in QJ.TIPOS:
+            if tipo in (1, 8):
                 faltando.append((indice, tipo, x, y)); return
             return original(c, x, y, indice)
         QJ._Composicao.engin = engin
@@ -170,6 +185,27 @@ class SequenciaTest(unittest.TestCase):
         for r in d['rows'][5:]:                                     # view scrolled out: only the bottom strip differs
             self.assertEqual(r['over_native_previous']['pixels'], 0)
             self.assertGreaterEqual(r['chained']['first_row'], 544)
+
+    def test_chain_verification_report_api_1_3(self):
+        # Native rerun after the type-1/8 bodies: no stop, every frame equals the original checkpoint over the native surface.
+        d = json.loads((EVID/'verificacao-cadeia-m22-v2-api13.json').read_text())
+        self.assertEqual((d['frames'], d['render_api_version'], d['first_stop']), (12, [1, 3], None))
+        self.assertEqual(d['first_chained_difference_frame'], 2)    # the HUD strip (rows >= 547) of frame 1 onwards
+        for r in d['rows']:
+            self.assertTrue(r['end_hash_equals_recorded'] and r['chain_cache_equals_native_entry_cache'])
+            self.assertTrue(r['over_native_previous']['equals_native_checkpoint'])
+            self.assertIsNone(r['over_native_previous']['stop'])
+            self.assertIsNone(r['chained']['stop'])
+            if r['chained']['pixels']: self.assertGreaterEqual(r['chained']['first_row'], 544)
+
+    def test_chain_verification_report_api_1_3_whole_playback(self):
+        d = json.loads((EVID/'verificacao-cadeia-m22-v2-api13-128.json').read_text())
+        self.assertEqual((d['frames'], d['render_api_version'], d['first_stop'], len(d['rows'])), (128, [1, 3], None, 128))
+        for r in d['rows']:
+            self.assertTrue(r['end_hash_equals_recorded'] and r['chain_cache_equals_native_entry_cache'])
+            self.assertTrue(r['over_native_previous']['equals_native_checkpoint'])
+            self.assertIsNone(r['chained']['stop'])
+            if r['chained']['pixels']: self.assertGreaterEqual(r['chained']['first_row'], 544)
 
     def test_cache_state_is_carried(self):
         fx = Fixture(FIXTURE)

@@ -1,0 +1,15 @@
+{
+  "schema": "rising-lands/audio-continuation-three-way/1",
+  "passed": true,
+  "original_capture_equal": true,
+  "original_native_calls": 139,
+  "scenarios": 132,
+  "dependency_stops": 0,
+  "failures": [],
+  "seconds": 0.681,
+  "source_sha256": {
+    "fila_audio.py": "6bb8c0888d11962b45046b5b3fae206a7ea664fbb311c06e7ea10de251e53a55",
+    "reproduzir_fila_audio.py": "db1446ad18cadd01d3dfc60a57770e4409e7cc2dd78d32c1de4961a68b73eee5",
+    "capturar_continuacao_audio.py": "0afc0d260d587195869c590669c18fc5deb44af6755b8b1b00924a6152967444"
+  }
+}

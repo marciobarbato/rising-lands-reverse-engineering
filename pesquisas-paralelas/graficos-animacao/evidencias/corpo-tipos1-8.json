@@ -1,0 +1,99 @@
+{
+ "schema": "rising-lands/unit-body-types1-8-provenance/1",
+ "executable": "RISING.EXE (intact, ../source/cd/INSTALHD)",
+ "executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "note": "Original byte intervals the type-1/type-8 body translation (corpo_tipos1_8.py, render API 1.3) relies on; read from the intact executable, raw-offset mapping of BEGTEXT. The behaviour itself is established by the native capture below, committed before the translation.",
+ "intervals": [
+  {
+   "name": "AffEngin",
+   "start": "0x41591f",
+   "end_exclusive": "0x415a57",
+   "sha256": "1958c262f114683d9d8542ed7efac7fe5c56a3eeea8ced54a0b5d58e6b03ed5e"
+  },
+  {
+   "name": "AffDeplaceEngin prefix to type dispatch",
+   "start": "0x412390",
+   "end_exclusive": "0x412637",
+   "sha256": "3436f5b9edf8d7e0fdb3331a911b749e4d75390d1fa2e936201dc5f116cdbf07"
+  },
+  {
+   "name": "type-8 branch",
+   "start": "0x412962",
+   "end_exclusive": "0x4129b6",
+   "sha256": "0827b175e99aa5b2c28dfc953bb0c144a16d9d4a098929f85696a39a47555800"
+  },
+  {
+   "name": "type-1 branch",
+   "start": "0x412d4c",
+   "end_exclusive": "0x412d99",
+   "sha256": "0cfc5d31c684a8bace0f5a983be00c29c45a71401011812edbdb9e2d69792162"
+  },
+  {
+   "name": "join to AffCorpsEngin and tail entry",
+   "start": "0x412cb2",
+   "end_exclusive": "0x412cfe",
+   "sha256": "cdc052debc21ba1a6e9e42297dfc86f87cf8c4d79ee86f50e9c9e39448b1a78c"
+  },
+  {
+   "name": "common tail selection guard",
+   "start": "0x412a53",
+   "end_exclusive": "0x412a9f",
+   "sha256": "6c0faf8eef6ee356a1c23c6e76892e689f1093bc7769245cd29838db7317fee2"
+  },
+  {
+   "name": "body jump table 0x412328 (26 slots)",
+   "start": "0x412328",
+   "end_exclusive": "0x412390",
+   "sha256": "c9d9303bd62455ca401be24166e69bcaf41f0742ed3b6c5a0c06bcd60a1f790a"
+  },
+  {
+   "name": "AffCorpsEnginDecalage with anchor table 0x410F64",
+   "start": "0x410f64",
+   "end_exclusive": "0x4110bf",
+   "sha256": "df6f83f279643b2c287d671aa7edc5faa2c38bccdecdf341e0140c0b5b485a4c"
+  },
+  {
+   "name": "AffCorpsEngin",
+   "start": "0x411147",
+   "end_exclusive": "0x41209d",
+   "sha256": "5915424b7ee38d0a728b92a67ea1a3f8a8d93b4918a3258ad721cdf15d0af4a7"
+  },
+  {
+   "name": "tired-icon tail",
+   "start": "0x413568",
+   "end_exclusive": "0x4136dc",
+   "sha256": "d8fa7f9abe59741129b74b63e72940f6e12595ee1c7d4ebabc3d99f4c3aaef05"
+  }
+ ],
+ "constants": {
+  "type1": {
+   "french_key": "GARDIEN DU FEU",
+   "jump_slot": "0x412328+4*1 -> 0x412d4c",
+   "body_base": "0x8f2 (2290)",
+   "anchor_slot": "0x410f64+4*1 -> 0x411001",
+   "anchor": [
+    23,
+    9
+   ],
+   "initialized_count_observed": 8
+  },
+  "type8": {
+   "french_key": "VOLEUR",
+   "jump_slot": "0x412328+4*8 -> 0x412962",
+   "body_base": "0x992 (2450)",
+   "anchor_slot": "0x410f64+4*8 -> 0x410fdd",
+   "anchor": [
+    32,
+    30
+   ],
+   "initialized_count_observed": 10
+  },
+  "shadow_id": "0x2a20 (10784) at (x+2, y+26)",
+  "join": "0x412cb8: id = base + (floor((dir+1)/2)-1)*[+0xA5] + [+0xA4]; AffCorpsEngin(EAX=x-ax, EDX=y-ay, BX=id, CX=index)"
+ },
+ "native_capture": {
+  "file": "evidencias/captura-corpos-tipos1-8-m22-v2.json",
+  "sha256": "fd425b4405391020f6189ceab3263f0b81e4c559c6eaf484eb0b0d0ccc7c466c",
+  "evidence_commit": "a5011bb"
+ }
+}

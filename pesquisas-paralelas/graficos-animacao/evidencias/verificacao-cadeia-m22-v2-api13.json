@@ -1,0 +1,1681 @@
+{
+ "schema": "rising-lands/m22-chain-render-check/1",
+ "frames": 12,
+ "render_api_version": [
+  1,
+  3
+ ],
+ "initial_surface_sha256": "e8cb862ddcfb2b3de6845b5838581aea130d743baa0cdffab34439332eb2db76",
+ "first_stop": null,
+ "first_chained_difference_frame": 2,
+ "rows": [
+  {
+   "frame": 1,
+   "phase": "between_frames",
+   "counter": 0,
+   "native_end_of_phase_sha256": "92d06bceea820927f4cc613e587ad0316bdad518ff83987a12c7b972c44e30d0",
+   "recorded_sha256": "92d06bceea820927f4cc613e587ad0316bdad518ff83987a12c7b972c44e30d0",
+   "end_hash_equals_recorded": true,
+   "native_checkpoint_sha256": "3bf17c3b611d4414be70c74eae0d124023b5377fa715b353e6c844379d75eb65",
+   "over_native_previous": {
+    "stop": null,
+    "pixels": 0,
+    "first_row": null,
+    "sha256": "3bf17c3b611d4414be70c74eae0d124023b5377fa715b353e6c844379d75eb65",
+    "equals_native_checkpoint": true
+   },
+   "chained": {
+    "stop": null,
+    "pixels": 0,
+    "first_row": null,
+    "sha256": "3bf17c3b611d4414be70c74eae0d124023b5377fa715b353e6c844379d75eb65",
+    "equals_native_checkpoint": true
+   },
+   "chain_input_equals_native_previous": true,
+   "chain_cache_equals_native_entry_cache": true,
+   "units_called": [
+    [
+     3,
+     9,
+     14,
+     320,
+     192
+    ],
+    [
+     4,
+     9,
+     14,
+     320,
+     192
+    ],
+    [
+     5,
+     9,
+     14,
+     320,
+     192
+    ],
+    [
+     6,
+     9,
+     14,
+     320,
+     192
+    ],
+    [
+     7,
+     9,
+     14,
+     320,
+     192
+    ],
+    [
+     8,
+     9,
+     14,
+     320,
+     192
+    ],
+    [
+     9,
+     9,
+     14,
+     320,
+     192
+    ],
+    [
+     10,
+     9,
+     14,
+     320,
+     192
+    ],
+    [
+     0,
+     0,
+     7,
+     96,
+     288
+    ],
+    [
+     1,
+     0,
+     7,
+     160,
+     320
+    ],
+    [
+     14,
+     5,
+     7,
+     256,
+     320
+    ],
+    [
+     13,
+     5,
+     7,
+     320,
+     320
+    ],
+    [
+     12,
+     7,
+     7,
+     416,
+     320
+    ],
+    [
+     2,
+     0,
+     7,
+     128,
+     384
+    ],
+    [
+     15,
+     8,
+     7,
+     288,
+     416
+    ],
+    [
+     11,
+     1,
+     7,
+     224,
+     480
+    ]
+   ]
+  },
+  {
+   "frame": 2,
+   "phase": "between_frames2",
+   "counter": 1,
+   "native_end_of_phase_sha256": "ca86bb14c8961d8e89892339a8e3c1c47b758ab2ebf109ddd810a1e4da277aa0",
+   "recorded_sha256": "ca86bb14c8961d8e89892339a8e3c1c47b758ab2ebf109ddd810a1e4da277aa0",
+   "end_hash_equals_recorded": true,
+   "native_checkpoint_sha256": "a4233b88a4481df3b678b71928db84604c2ad36655efc4744a3e184ca386714b",
+   "over_native_previous": {
+    "stop": null,
+    "pixels": 0,
+    "first_row": null,
+    "sha256": "a4233b88a4481df3b678b71928db84604c2ad36655efc4744a3e184ca386714b",
+    "equals_native_checkpoint": true
+   },
+   "chained": {
+    "stop": null,
+    "pixels": 18850,
+    "first_row": 547,
+    "sha256": "5eeac3b954bc0f5e99c748dcb56e18adae1a177f98da35a9e7a25647ad43eb9e",
+    "equals_native_checkpoint": false
+   },
+   "chain_input_equals_native_previous": false,
+   "chain_cache_equals_native_entry_cache": true,
+   "units_called": [
+    [
+     3,
+     9,
+     14,
+     352,
+     224
+    ],
+    [
+     4,
+     9,
+     14,
+     352,
+     224
+    ],
+    [
+     5,
+     9,
+     14,
+     352,
+     224
+    ],
+    [
+     6,
+     9,
+     14,
+     352,
+     224
+    ],
+    [
+     7,
+     9,
+     14,
+     352,
+     224
+    ],
+    [
+     8,
+     9,
+     14,
+     352,
+     224
+    ],
+    [
+     9,
+     9,
+     14,
+     352,
+     224
+    ],
+    [
+     10,
+     9,
+     14,
+     352,
+     224
+    ],
+    [
+     0,
+     0,
+     7,
+     128,
+     320
+    ],
+    [
+     1,
+     0,
+     7,
+     192,
+     352
+    ],
+    [
+     14,
+     5,
+     7,
+     288,
+     352
+    ],
+    [
+     13,
+     5,
+     7,
+     352,
+     352
+    ],
+    [
+     12,
+     7,
+     7,
+     448,
+     352
+    ],
+    [
+     2,
+     0,
+     7,
+     160,
+     416
+    ],
+    [
+     15,
+     8,
+     7,
+     320,
+     448
+    ],
+    [
+     11,
+     1,
+     7,
+     256,
+     512
+    ]
+   ]
+  },
+  {
+   "frame": 3,
+   "phase": "between_frames3",
+   "counter": 2,
+   "native_end_of_phase_sha256": "6daf6af2b0291a705b3649f1965e30d5441e2b0e81e8b383d73295641505ed06",
+   "recorded_sha256": "6daf6af2b0291a705b3649f1965e30d5441e2b0e81e8b383d73295641505ed06",
+   "end_hash_equals_recorded": true,
+   "native_checkpoint_sha256": "c8b6076325295bfcc15ecb240b827e8a458f8b2bee67debfb4a1749ec00d9b0d",
+   "over_native_previous": {
+    "stop": null,
+    "pixels": 0,
+    "first_row": null,
+    "sha256": "c8b6076325295bfcc15ecb240b827e8a458f8b2bee67debfb4a1749ec00d9b0d",
+    "equals_native_checkpoint": true
+   },
+   "chained": {
+    "stop": null,
+    "pixels": 18850,
+    "first_row": 547,
+    "sha256": "61b55128a800ba4c2eebd7e85f300ecd671b1f39f0e36e91383f0a183b88641c",
+    "equals_native_checkpoint": false
+   },
+   "chain_input_equals_native_previous": false,
+   "chain_cache_equals_native_entry_cache": true,
+   "units_called": [
+    [
+     3,
+     9,
+     14,
+     384,
+     256
+    ],
+    [
+     4,
+     9,
+     14,
+     384,
+     256
+    ],
+    [
+     5,
+     9,
+     14,
+     384,
+     256
+    ],
+    [
+     6,
+     9,
+     14,
+     384,
+     256
+    ],
+    [
+     7,
+     9,
+     14,
+     384,
+     256
+    ],
+    [
+     8,
+     9,
+     14,
+     384,
+     256
+    ],
+    [
+     9,
+     9,
+     14,
+     384,
+     256
+    ],
+    [
+     10,
+     9,
+     14,
+     384,
+     256
+    ],
+    [
+     0,
+     0,
+     7,
+     160,
+     352
+    ],
+    [
+     1,
+     0,
+     7,
+     224,
+     384
+    ],
+    [
+     14,
+     5,
+     7,
+     320,
+     384
+    ],
+    [
+     13,
+     5,
+     7,
+     384,
+     384
+    ],
+    [
+     12,
+     7,
+     7,
+     480,
+     384
+    ],
+    [
+     2,
+     0,
+     7,
+     192,
+     448
+    ],
+    [
+     15,
+     8,
+     7,
+     352,
+     480
+    ],
+    [
+     11,
+     1,
+     7,
+     288,
+     544
+    ]
+   ]
+  },
+  {
+   "frame": 4,
+   "phase": "between_frames4",
+   "counter": 3,
+   "native_end_of_phase_sha256": "429d76c256778c03d39167d54922bd8a3486f24e05fe6254b6a1c2c52ddc076a",
+   "recorded_sha256": "429d76c256778c03d39167d54922bd8a3486f24e05fe6254b6a1c2c52ddc076a",
+   "end_hash_equals_recorded": true,
+   "native_checkpoint_sha256": "43b77c5bdcfa698a49f6aa30fb970e2f4b5dd97552deb2b9bd4938d941ec42d6",
+   "over_native_previous": {
+    "stop": null,
+    "pixels": 0,
+    "first_row": null,
+    "sha256": "43b77c5bdcfa698a49f6aa30fb970e2f4b5dd97552deb2b9bd4938d941ec42d6",
+    "equals_native_checkpoint": true
+   },
+   "chained": {
+    "stop": null,
+    "pixels": 18850,
+    "first_row": 547,
+    "sha256": "f700c9beaeef1195aadaba9884e3eaa64c787acbe9e1618df5d056137d277995",
+    "equals_native_checkpoint": false
+   },
+   "chain_input_equals_native_previous": false,
+   "chain_cache_equals_native_entry_cache": true,
+   "units_called": [
+    [
+     3,
+     9,
+     14,
+     416,
+     288
+    ],
+    [
+     4,
+     9,
+     14,
+     416,
+     288
+    ],
+    [
+     5,
+     9,
+     14,
+     416,
+     288
+    ],
+    [
+     6,
+     9,
+     14,
+     416,
+     288
+    ],
+    [
+     7,
+     9,
+     14,
+     416,
+     288
+    ],
+    [
+     8,
+     9,
+     14,
+     416,
+     288
+    ],
+    [
+     9,
+     9,
+     14,
+     416,
+     288
+    ],
+    [
+     10,
+     9,
+     14,
+     416,
+     288
+    ],
+    [
+     0,
+     0,
+     7,
+     192,
+     384
+    ],
+    [
+     1,
+     0,
+     7,
+     256,
+     416
+    ],
+    [
+     14,
+     5,
+     7,
+     352,
+     416
+    ],
+    [
+     13,
+     5,
+     7,
+     416,
+     416
+    ],
+    [
+     12,
+     7,
+     7,
+     512,
+     416
+    ],
+    [
+     2,
+     0,
+     7,
+     224,
+     480
+    ],
+    [
+     15,
+     8,
+     7,
+     384,
+     512
+    ],
+    [
+     11,
+     1,
+     7,
+     320,
+     576
+    ]
+   ]
+  },
+  {
+   "frame": 5,
+   "phase": "between_frames5",
+   "counter": 4,
+   "native_end_of_phase_sha256": "3f77930f264486c1e93432d65f165c1f114bb588a574766a5aa7cfc89fd8ebea",
+   "recorded_sha256": "3f77930f264486c1e93432d65f165c1f114bb588a574766a5aa7cfc89fd8ebea",
+   "end_hash_equals_recorded": true,
+   "native_checkpoint_sha256": "e449b48b6c39925f4b15c7ca048f7c0a25e9ff609ff502a98990c5bc22ec796b",
+   "over_native_previous": {
+    "stop": null,
+    "pixels": 0,
+    "first_row": null,
+    "sha256": "e449b48b6c39925f4b15c7ca048f7c0a25e9ff609ff502a98990c5bc22ec796b",
+    "equals_native_checkpoint": true
+   },
+   "chained": {
+    "stop": null,
+    "pixels": 18850,
+    "first_row": 547,
+    "sha256": "7cfdae2dc78271cebdf4ae0c0cce192b9510130429327835df071d818bf0bd5d",
+    "equals_native_checkpoint": false
+   },
+   "chain_input_equals_native_previous": false,
+   "chain_cache_equals_native_entry_cache": true,
+   "units_called": [
+    [
+     3,
+     9,
+     14,
+     448,
+     320
+    ],
+    [
+     4,
+     9,
+     14,
+     448,
+     320
+    ],
+    [
+     5,
+     9,
+     14,
+     448,
+     320
+    ],
+    [
+     6,
+     9,
+     14,
+     448,
+     320
+    ],
+    [
+     7,
+     9,
+     14,
+     448,
+     320
+    ],
+    [
+     8,
+     9,
+     14,
+     448,
+     320
+    ],
+    [
+     9,
+     9,
+     14,
+     448,
+     320
+    ],
+    [
+     10,
+     9,
+     14,
+     448,
+     320
+    ],
+    [
+     0,
+     0,
+     7,
+     224,
+     416
+    ],
+    [
+     1,
+     0,
+     7,
+     288,
+     448
+    ],
+    [
+     14,
+     5,
+     7,
+     384,
+     448
+    ],
+    [
+     13,
+     5,
+     7,
+     448,
+     448
+    ],
+    [
+     12,
+     7,
+     7,
+     544,
+     448
+    ],
+    [
+     2,
+     0,
+     7,
+     256,
+     512
+    ],
+    [
+     15,
+     8,
+     7,
+     416,
+     544
+    ],
+    [
+     11,
+     1,
+     7,
+     352,
+     608
+    ]
+   ]
+  },
+  {
+   "frame": 6,
+   "phase": "between_frames6",
+   "counter": 5,
+   "native_end_of_phase_sha256": "4e8d3a847426c7f75a5780682d7d5aa8b726765e7adc97d30c7360407974c0f4",
+   "recorded_sha256": "4e8d3a847426c7f75a5780682d7d5aa8b726765e7adc97d30c7360407974c0f4",
+   "end_hash_equals_recorded": true,
+   "native_checkpoint_sha256": "28b3e04d41481428bff9415293ffee896cac63baae2887ece78553529ca3dac2",
+   "over_native_previous": {
+    "stop": null,
+    "pixels": 0,
+    "first_row": null,
+    "sha256": "28b3e04d41481428bff9415293ffee896cac63baae2887ece78553529ca3dac2",
+    "equals_native_checkpoint": true
+   },
+   "chained": {
+    "stop": null,
+    "pixels": 18850,
+    "first_row": 547,
+    "sha256": "025611e9c3757bfa1b290e2c7bcd49e7364fb746aa2a733dc69e16e9dfe04a2d",
+    "equals_native_checkpoint": false
+   },
+   "chain_input_equals_native_previous": false,
+   "chain_cache_equals_native_entry_cache": true,
+   "units_called": [
+    [
+     3,
+     9,
+     14,
+     448,
+     352
+    ],
+    [
+     4,
+     9,
+     14,
+     448,
+     352
+    ],
+    [
+     5,
+     9,
+     14,
+     448,
+     352
+    ],
+    [
+     6,
+     9,
+     14,
+     448,
+     352
+    ],
+    [
+     7,
+     9,
+     14,
+     448,
+     352
+    ],
+    [
+     8,
+     9,
+     14,
+     448,
+     352
+    ],
+    [
+     9,
+     9,
+     14,
+     448,
+     352
+    ],
+    [
+     10,
+     9,
+     14,
+     448,
+     352
+    ],
+    [
+     0,
+     0,
+     7,
+     224,
+     448
+    ],
+    [
+     1,
+     0,
+     7,
+     288,
+     480
+    ],
+    [
+     14,
+     5,
+     7,
+     384,
+     480
+    ],
+    [
+     13,
+     5,
+     7,
+     448,
+     480
+    ],
+    [
+     12,
+     7,
+     7,
+     544,
+     480
+    ],
+    [
+     2,
+     0,
+     7,
+     256,
+     544
+    ],
+    [
+     15,
+     8,
+     7,
+     416,
+     576
+    ],
+    [
+     11,
+     1,
+     7,
+     352,
+     640
+    ]
+   ]
+  },
+  {
+   "frame": 7,
+   "phase": "between_frames7",
+   "counter": 6,
+   "native_end_of_phase_sha256": "b4efb20dc0b0b28acfe0676a715b8f88b9e6ba6ff9a5add3c105aaba6c7ac271",
+   "recorded_sha256": "b4efb20dc0b0b28acfe0676a715b8f88b9e6ba6ff9a5add3c105aaba6c7ac271",
+   "end_hash_equals_recorded": true,
+   "native_checkpoint_sha256": "693ed5c7c39be9a96df78f889f24f3a2b64ed7c65b1cc4ecbad24d1f305fda5f",
+   "over_native_previous": {
+    "stop": null,
+    "pixels": 0,
+    "first_row": null,
+    "sha256": "693ed5c7c39be9a96df78f889f24f3a2b64ed7c65b1cc4ecbad24d1f305fda5f",
+    "equals_native_checkpoint": true
+   },
+   "chained": {
+    "stop": null,
+    "pixels": 18850,
+    "first_row": 547,
+    "sha256": "dd5c7363584e33ad9db7c047b5f140f7914333adf81f5a4309a01b533711db77",
+    "equals_native_checkpoint": false
+   },
+   "chain_input_equals_native_previous": false,
+   "chain_cache_equals_native_entry_cache": true,
+   "units_called": [
+    [
+     3,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     4,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     5,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     6,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     7,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     8,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     9,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     10,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     0,
+     0,
+     7,
+     224,
+     480
+    ],
+    [
+     1,
+     0,
+     7,
+     288,
+     512
+    ],
+    [
+     14,
+     5,
+     7,
+     384,
+     512
+    ],
+    [
+     13,
+     5,
+     7,
+     448,
+     512
+    ],
+    [
+     12,
+     7,
+     7,
+     544,
+     512
+    ],
+    [
+     2,
+     0,
+     7,
+     256,
+     576
+    ],
+    [
+     15,
+     8,
+     7,
+     416,
+     608
+    ],
+    [
+     11,
+     1,
+     7,
+     352,
+     672
+    ]
+   ]
+  },
+  {
+   "frame": 8,
+   "phase": "between_frames8",
+   "counter": 7,
+   "native_end_of_phase_sha256": "0ddc82875eb82e4c5549dea0f4288e68cabb12161583905e3b83d1d0f5d40b09",
+   "recorded_sha256": "0ddc82875eb82e4c5549dea0f4288e68cabb12161583905e3b83d1d0f5d40b09",
+   "end_hash_equals_recorded": true,
+   "native_checkpoint_sha256": "f79c5c7e03946ec6e5e6bf28dcc8c8dc18f9939221b94cc010af0bbb126d344b",
+   "over_native_previous": {
+    "stop": null,
+    "pixels": 0,
+    "first_row": null,
+    "sha256": "f79c5c7e03946ec6e5e6bf28dcc8c8dc18f9939221b94cc010af0bbb126d344b",
+    "equals_native_checkpoint": true
+   },
+   "chained": {
+    "stop": null,
+    "pixels": 18850,
+    "first_row": 547,
+    "sha256": "9c308ca02d2452519db3f5b89277075f0f2f70db3c39eb26a4d9427e10f6caff",
+    "equals_native_checkpoint": false
+   },
+   "chain_input_equals_native_previous": false,
+   "chain_cache_equals_native_entry_cache": true,
+   "units_called": [
+    [
+     3,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     4,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     5,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     6,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     7,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     8,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     9,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     10,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     0,
+     0,
+     7,
+     224,
+     480
+    ],
+    [
+     1,
+     0,
+     7,
+     288,
+     512
+    ],
+    [
+     14,
+     5,
+     7,
+     384,
+     512
+    ],
+    [
+     13,
+     5,
+     7,
+     448,
+     512
+    ],
+    [
+     12,
+     7,
+     7,
+     544,
+     512
+    ],
+    [
+     2,
+     0,
+     7,
+     256,
+     576
+    ],
+    [
+     15,
+     8,
+     7,
+     416,
+     608
+    ],
+    [
+     11,
+     1,
+     7,
+     352,
+     672
+    ]
+   ]
+  },
+  {
+   "frame": 9,
+   "phase": "between_frames9",
+   "counter": 8,
+   "native_end_of_phase_sha256": "63f9e442f46f9d42d9325a27730ca7ab6f911bf25d3c8d374f376f195df63dff",
+   "recorded_sha256": "63f9e442f46f9d42d9325a27730ca7ab6f911bf25d3c8d374f376f195df63dff",
+   "end_hash_equals_recorded": true,
+   "native_checkpoint_sha256": "f6a9a2fb67b6737f1bd2863bd70cf49fd2eb8b06400824d043143b7e235902c4",
+   "over_native_previous": {
+    "stop": null,
+    "pixels": 0,
+    "first_row": null,
+    "sha256": "f6a9a2fb67b6737f1bd2863bd70cf49fd2eb8b06400824d043143b7e235902c4",
+    "equals_native_checkpoint": true
+   },
+   "chained": {
+    "stop": null,
+    "pixels": 18850,
+    "first_row": 547,
+    "sha256": "de82e03ccf524ecf3331b63d950921ac8920d110917fde4b2cca24b7c39c021a",
+    "equals_native_checkpoint": false
+   },
+   "chain_input_equals_native_previous": false,
+   "chain_cache_equals_native_entry_cache": true,
+   "units_called": [
+    [
+     3,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     4,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     5,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     6,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     7,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     8,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     9,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     10,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     0,
+     0,
+     7,
+     224,
+     480
+    ],
+    [
+     1,
+     0,
+     7,
+     288,
+     512
+    ],
+    [
+     14,
+     5,
+     7,
+     384,
+     512
+    ],
+    [
+     13,
+     5,
+     7,
+     448,
+     512
+    ],
+    [
+     12,
+     7,
+     7,
+     544,
+     512
+    ],
+    [
+     2,
+     0,
+     7,
+     256,
+     576
+    ],
+    [
+     15,
+     8,
+     7,
+     416,
+     608
+    ],
+    [
+     11,
+     1,
+     7,
+     352,
+     672
+    ]
+   ]
+  },
+  {
+   "frame": 10,
+   "phase": "between_frames10",
+   "counter": 9,
+   "native_end_of_phase_sha256": "d3a80f2b301b7255094800aaa48cb18f14a4d2fbf14c01e2c8e25c9b62be9e87",
+   "recorded_sha256": "d3a80f2b301b7255094800aaa48cb18f14a4d2fbf14c01e2c8e25c9b62be9e87",
+   "end_hash_equals_recorded": true,
+   "native_checkpoint_sha256": "7794b4aee959ba70165db4df9f7dc2abd3efb81edc624392af4c66d3c22b1f8f",
+   "over_native_previous": {
+    "stop": null,
+    "pixels": 0,
+    "first_row": null,
+    "sha256": "7794b4aee959ba70165db4df9f7dc2abd3efb81edc624392af4c66d3c22b1f8f",
+    "equals_native_checkpoint": true
+   },
+   "chained": {
+    "stop": null,
+    "pixels": 18850,
+    "first_row": 547,
+    "sha256": "4c3e1640e52e71e2bfa8f612689cde2e7654bcdd4b9e89f95e914296f3edb9e1",
+    "equals_native_checkpoint": false
+   },
+   "chain_input_equals_native_previous": false,
+   "chain_cache_equals_native_entry_cache": true,
+   "units_called": [
+    [
+     3,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     4,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     5,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     6,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     7,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     8,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     9,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     10,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     0,
+     0,
+     7,
+     224,
+     480
+    ],
+    [
+     1,
+     0,
+     7,
+     288,
+     512
+    ],
+    [
+     14,
+     5,
+     7,
+     384,
+     512
+    ],
+    [
+     13,
+     5,
+     7,
+     448,
+     512
+    ],
+    [
+     12,
+     7,
+     7,
+     544,
+     512
+    ],
+    [
+     2,
+     0,
+     7,
+     256,
+     576
+    ],
+    [
+     15,
+     8,
+     7,
+     416,
+     608
+    ],
+    [
+     11,
+     1,
+     7,
+     352,
+     672
+    ]
+   ]
+  },
+  {
+   "frame": 11,
+   "phase": "between_frames11",
+   "counter": 10,
+   "native_end_of_phase_sha256": "a24d98ad2e143b8f5515ae9ac88464299b9eddfb36e18041392f89291c8ac6ab",
+   "recorded_sha256": "a24d98ad2e143b8f5515ae9ac88464299b9eddfb36e18041392f89291c8ac6ab",
+   "end_hash_equals_recorded": true,
+   "native_checkpoint_sha256": "e11ef895827dfe90ffda1e4832d72e76eb859b22f62af42afc33184a1da2b838",
+   "over_native_previous": {
+    "stop": null,
+    "pixels": 0,
+    "first_row": null,
+    "sha256": "e11ef895827dfe90ffda1e4832d72e76eb859b22f62af42afc33184a1da2b838",
+    "equals_native_checkpoint": true
+   },
+   "chained": {
+    "stop": null,
+    "pixels": 18850,
+    "first_row": 547,
+    "sha256": "9668cbcf84c89e14bd9dded0585ab1af85c27ba41d3912ad0875428aac9a2312",
+    "equals_native_checkpoint": false
+   },
+   "chain_input_equals_native_previous": false,
+   "chain_cache_equals_native_entry_cache": true,
+   "units_called": [
+    [
+     3,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     4,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     5,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     6,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     7,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     8,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     9,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     10,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     0,
+     0,
+     7,
+     224,
+     480
+    ],
+    [
+     1,
+     0,
+     7,
+     288,
+     512
+    ],
+    [
+     14,
+     5,
+     7,
+     384,
+     512
+    ],
+    [
+     13,
+     5,
+     7,
+     448,
+     512
+    ],
+    [
+     12,
+     7,
+     7,
+     544,
+     512
+    ],
+    [
+     2,
+     0,
+     7,
+     256,
+     576
+    ],
+    [
+     15,
+     8,
+     7,
+     416,
+     608
+    ],
+    [
+     11,
+     1,
+     7,
+     352,
+     672
+    ]
+   ]
+  },
+  {
+   "frame": 12,
+   "phase": "between_frames12",
+   "counter": 11,
+   "native_end_of_phase_sha256": "cf467b1253da727873a3323b8ddefa3ab41d51f74bc1dd5b1674978ad6c9aee8",
+   "recorded_sha256": "cf467b1253da727873a3323b8ddefa3ab41d51f74bc1dd5b1674978ad6c9aee8",
+   "end_hash_equals_recorded": true,
+   "native_checkpoint_sha256": "6547784adcd57bb7e3fa1afb5ef543fcb9da59e6a3e6986e47e6a4393d2e96dc",
+   "over_native_previous": {
+    "stop": null,
+    "pixels": 0,
+    "first_row": null,
+    "sha256": "6547784adcd57bb7e3fa1afb5ef543fcb9da59e6a3e6986e47e6a4393d2e96dc",
+    "equals_native_checkpoint": true
+   },
+   "chained": {
+    "stop": null,
+    "pixels": 18850,
+    "first_row": 547,
+    "sha256": "d33afc6e1c832e2c307856741ce4e789334c074c63a9481ac803ef9018f0dd7b",
+    "equals_native_checkpoint": false
+   },
+   "chain_input_equals_native_previous": false,
+   "chain_cache_equals_native_entry_cache": true,
+   "units_called": [
+    [
+     3,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     4,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     5,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     6,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     7,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     8,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     9,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     10,
+     9,
+     14,
+     448,
+     384
+    ],
+    [
+     0,
+     0,
+     7,
+     224,
+     480
+    ],
+    [
+     1,
+     0,
+     7,
+     288,
+     512
+    ],
+    [
+     14,
+     5,
+     7,
+     384,
+     512
+    ],
+    [
+     13,
+     5,
+     7,
+     448,
+     512
+    ],
+    [
+     12,
+     7,
+     7,
+     544,
+     512
+    ],
+    [
+     2,
+     0,
+     7,
+     256,
+     576
+    ],
+    [
+     15,
+     8,
+     7,
+     416,
+     608
+    ],
+    [
+     11,
+     1,
+     7,
+     352,
+     672
+    ]
+   ]
+  }
+ ]
+}

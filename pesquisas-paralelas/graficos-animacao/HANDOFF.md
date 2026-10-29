@@ -552,3 +552,25 @@ missing/present structure lookup plus the proven Santuário body/caller boundary
 overlays for unit+74=0 and types1/8 follow only in a later scheduled round.
 No model difficulty or unresolved auto-review rejection was observed. Stop after
 preserving this inventory and reporting readiness; do not poll for another task.
+
+## Render API 1.3: unit types 1 and 8 (2026-10-29)
+
+Goal: move the render API past its first stop `0x41591F` ("unit body outside its validated domain"), which hit MONDE01's unit 15 (type 8, `VOLEUR`) and unit 11 (type 1, `GARDIEN DU FEU`) in every M2.2 frame. Worktree merged `origin/main` (`8e90beb`) first.
+
+**Order kept (original first).**
+1. Evidence commit `a5011bb`: `capturar_corpos_tipos1_8.py` and `evidencias/captura-corpos-tipos1-8-m22-v2.json`, original only, before any translation. Missions' -v2 display bench runs to the real AffGame entry of `between_frames(1..6)`; AffGame runs natively to `0x417B1C` with a stop at each AffEngin entry. Each type-1/8 call is rerun as a native leaf call from the paused state, with hooks that only record (blitter arguments, routine entries, body-routine block path, RNG cursor, ±96-pixel surface crops). A 592-call matrix rewrites record bytes from the same restored state: states 2/7 × directions 1–16 × all phases below the count, three shifts with life 100, five life words. 12 real-state calls and 592 matrix calls, all returned, record and RNG unchanged, surface difference inside the crop. Phase-end hashes of the six frames equal Missions' recorded hashes.
+2. Translation: `corpo_tipos1_8.py` (shadow 10784 at `(x+dx+2, y+dy+26)`, then body `base + (floor((dir+1)/2)−1)·[+A5] + [+A4]` at `(x+dx−ax, y+dy−ay)`; type 1 base 2290, anchor (23, 9); type 8 base 2450, anchor (32, 30)), wired into `quadro_jogo._Composicao.engin` followed by the existing tired-icon tail. `render_quadro.VERSAO_RENDER_QUADRO = (1, 3)`.
+3. Static byte provenance `evidencias/corpo-tipos1-8.json` (intervals and constants, pinned capture hash).
+
+**API inputs and domain.** `consultar_corpo_tipos1_8(registro276, *, x, y, indice_u16, camera_u8, indice_selecionado_u16, modo_selecao_u8)`; `compor_corpo_tipos1_8(catalogo, destino, largura, altura, registro276, *, ..., tabela_sombra, recorte=None) -> (bytes, plan)`. The domain is only what the capture covers: owner 0 under camera 0, states 2/7, `+0x99 = +0xBA = +0xBD = +0xDC = 0`, not selected, selection mode 0, count 8 (type 1) or 10 (type 8), direction 1–16, phase < count, any i8 shift. Everything else is `NotImplementedError`, which the frame reports as the named stop `0x41591F`. No callbacks, no writes; inputs are unchanged.
+
+**Validation.**
+- `test_corpo_tipos1_8.py` (7 tests): the 12 real-state crops equal pixel for pixel; all 592 matrix crops equal the native SHA-256; layer arguments equal the native blitter arguments; out-of-domain bytes stop; the capture hash is pinned.
+- M1 / M2.2 frame 1 fixture: no stop, all 480,000 pixels equal the native checkpoint (1.2: first stop at unit 15, differences below row 279).
+- Fresh native sequence rerun, `capturar_serie_quadros.py --quadros 12` → `evidencias/verificacao-cadeia-m22-v2-api13.json`: no stop in frames 1–12; over the native previous surface every frame equals the original checkpoint (0 pixels); the chained render differs only in rows ≥ 547 (HUD after `0x417B1C`, out of contract); initial surface and cache artifacts reproduced byte for byte. The 1.2 report stays unchanged.
+
+- Fresh native rerun over the whole accepted M2.2 playback, `--quadros 128` → `evidencias/verificacao-cadeia-m22-v2-api13-128.json`: no stop in 128 frames; 128/128 phase-end hashes equal the recorded ones, 128/128 carried caches equal the native cache, 128/128 frames equal the original checkpoint over the native previous surface; chained differences only from row 547 (HUD). No first stop remains in the M2.2 playback.
+
+**Native runs (shared lease, this MacBook).** Smoke capture of one frame 98.6 s (scratch output, discarded); evidence capture of six frames 110.8 s; 12-frame verification 111.0 s; 128-frame verification 441.1 s.
+
+**Gaps.** Types 1/8 outside the domain above (other owners/cameras, oscillation and its RNG, effects, overlays, attack/work/construction/death routes, other counts/directions/phases) still stop at `0x41591F`. Types other than 0, 1, 5, 6, 7, 8, 9 have no frame body. The HUD tail after `0x417B1C` is still not composed.

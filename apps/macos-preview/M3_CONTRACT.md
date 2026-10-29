@@ -128,3 +128,24 @@ All inputs remain read-only and outputs stay inside this independent clone.
 Bundle name and identity are unchanged. See [manual](../../docs/MACOS_PLAYABLE.md)
 and [handoff](HANDOFF.md) for actual commands and results. Live runtime delivery,
 orders, remaining Graphics passes and M2.3 stay outside this consumer's scope.
+
+
+## Native engine dependency — architecture decision, 2026-10-29
+
+The future playable engine and rendering are a native Rust library exposed
+through a C ABI. Swift remains the macOS shell. Python remains the original-
+validated reference and test harness, including this accepted-evidence
+inspection/playback path. The bundled runtime remains for those uses for now;
+its inclusion in a later shipped game is undecided. No live-simulation delivery
+is to be built on the embedded Python worker. `apply_frame` remains reserved
+and raises RuntimeContractPending; contract v3 and its evidence APIs are unchanged.
+
+The eventual Swift native-library adapter is a separate dependency from the
+read-only evidence worker. Before any loading or calling implementation, the
+coordinator must publish the C ABI for engine lifetime, frame stepping, memory
+views and render output, together with version/compatibility checks, ownership
+and buffer lifetimes, thread requirements and failure semantics. Library
+location and loading policy also require that contract. This document defines
+no speculative symbols, layouts, signatures or executable stubs. No simulation
+or fallback behavior is provided while that dependency is pending. Existing
+Graphics 1.2 evidence rendering remains pinned independently.

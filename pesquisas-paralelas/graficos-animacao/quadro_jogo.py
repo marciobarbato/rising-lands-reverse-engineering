@@ -16,6 +16,7 @@ from composicao import encaminhamento, compor_unidade
 from graficos import TIPOS, localizar, Quadro, compor_indices
 from projeteis_graficos import compor_projetil
 from construcoes import consultar_santuario, compor_fachada, tabelas_jogador as _tabelas_jogador
+from corpo_tipos1_8 import CORPOS as CORPOS_TIPOS1_8, compor_corpo_tipos1_8
 
 CHECKPOINT_HUD = 0x417B1C
 MODO_JOGO = 0x12
@@ -269,6 +270,16 @@ class _Composicao:
 
     def engin(self, x, y, indice):
         r = self.mundo.unidades[indice*276:(indice+1)*276]; tipo, estado = r[1], r[2]
+        if tipo in CORPOS_TIPOS1_8:   # render API 1.3: AffDeplaceEngin branches 0x412D4C / 0x412962 (native capture)
+            try:
+                self.saida, _ = compor_corpo_tipos1_8(self.catalogo, self.saida, self.largura, self.altura, r, x=x, y=y,
+                    indice_u16=indice, camera_u8=self.camera, indice_selecionado_u16=self.tela.u('selecionada_unidade_u16'),
+                    modo_selecao_u8=self.tela.u('modo_selecao_u8'), tabela_sombra=self.sombra, recorte=self.recorte())
+            except NotImplementedError as erro:
+                self.parar(0x41591F, f'AffEngin unit {indice} type {tipo} state {estado}: {erro}')
+            i8 = lambda v: v-256 if v > 127 else v
+            self._icone_fadiga(r, x, y, indice, i8(r[0x86]), i8(r[0x87]))
+            return
         if tipo not in TIPOS: self.parar(0x41591F, f'AffEngin unit {indice} type {tipo} has no committed body')
         rota = encaminhamento(tipo, estado, auxiliar_8a=r[0x8a])
         if rota['rota'] == 'sem_desenho': return

@@ -1,21 +1,21 @@
-"""Abre o .app via LaunchServices e testa a interface real, sem automação externa."""
+"""Launch the legacy preview with the shared bounded readiness smoke runner."""
 from pathlib import Path
-import json,subprocess,sys,time
+import json
+import os
+import sys
+from native_smoke import run_native_smoke
+
 ROOT=Path(__file__).resolve().parents[1]
 
+
 def main():
-    log=ROOT/'build/logs/abertura.json';shot=ROOT/'build/logs/abertura.png'
-    for p in (log,shot):
-        if p.exists():p.unlink()
+    report=ROOT/'build/logs/abertura.json'
+    screenshot=ROOT/'build/logs/abertura.png'
     app=ROOT/'dist/RisingLands-Preview.app'
-    command=['open','-W','-n',str(app),'--args','--smoke-test',str(log),'--screenshot',str(shot)]
-    print('Abrindo janela nativa e exercitando a interface…',flush=True)
-    p=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=60)
-    (ROOT/'build/logs/launchservices.log').write_text(p.stdout+p.stderr)
-    if p.returncode or not log.exists():
-        print('Teste de abertura falhou:',p.returncode,p.stdout,p.stderr);return 1
-    report=json.loads(log.read_text())
-    print(json.dumps(report,ensure_ascii=False,indent=2))
-    if not report.get('passed') or not report.get('nativeWindowVisible') or not shot.exists():return 1
-    return 0
+    code,result,log,previous=run_native_smoke(app,report,screenshot,os.environ.copy())
+    (ROOT/'build/logs/launchservices.log').write_text(log+'\nPrevious evidence: '+str(previous))
+    print(json.dumps(result,ensure_ascii=False,indent=2))
+    return 0 if not code and result.get('passed') and result.get('nativeWindowVisible') else 1
+
+
 if __name__=='__main__':sys.exit(main())

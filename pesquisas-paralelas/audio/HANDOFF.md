@@ -351,3 +351,118 @@ source hashes, command, actual skips, CLI results and the fresh native report.
 The 244-call fresh comparison ran under the lease despite the optional baseline
 native skips; those are separate results. No unchanged 551-sound native corpus
 was rerun or claimed anew.
+
+
+## Current continuation: reuse, promotion, concurrency and sample-data bridge
+
+This independent round resumes the clean Audio clone and fast-forwards
+`feat/re-audio` to fetched main `8e90beb412a63d5f00965c381d21bc9a800257bc`.
+Both remote Audio history and `73196fc` ancestry were verified. No other-front
+checkout, main branch, accepted capture or milestone file is modified. The
+preceding delivery sections remain historical; this section and
+[QUEUE_CONTINUATION.md](QUEUE_CONTINUATION.md) define the new current scope.
+
+Original-only leaves (`0a28d14`) precede their translation (`01dd333`). Original
+concurrency/data research (`e410c3e`) precedes composition (`c1e54a2`). Original
+persistent-sequence evidence (`67f3bdb`) precedes its multi-operation replay.
+All earlier original queue v1–v9 diagnostics remain unchanged.
+
+The provider covers captured physical/logical ID+bank lookups, slot replacement,
+physical destruction/promotion, explicit duplication, logical reservation,
+physical playing→waiting transfer and ClearListe's real IsStopped guards.
+Manage composes two/three simultaneous same-bank or distinct-bank requests,
+with explicit capacity guards. Stage-1 handles resident/file PCM and mono ADPCM;
+no competing decoder or device model was written. The 256-created/64-Locked
+ADPCM write extent, inherited tail and all status/HRESULT differences match the
+original. The complete API, widths, callback order and protected domains are in
+[docs/AUDIO.md](../../docs/AUDIO.md#current-buffer-reuse-and-concurrent-data-bridge--continuation).
+
+Original v3: **139 intact calls / 132 scenarios, zero stops**, 0.685 seconds.
+The eight-call persistent sequence begins from one declared input, then uses
+only earlier original outputs: three PostSound calls, Manage, physical-owner
+cancellation/logical promotion, a different-bank repost, Manage and logical
+volume-zero cancellation. Every intermediate memory image and EAX is captured;
+no state is rewritten between calls. Physical/duplicate object identities and
+external-reference words are preserved. These are declared platform fixtures,
+not real initialized audio or audible playback.
+
+Fresh [native/frozen/Python differential](validacao/continuacao-audio-three-way-v1.json):
+**139 calls / 132 scenarios equal, zero stops/failures**, 0.681 seconds. Ten new
+continuation replay/API tests pass without skips. Prior baseline queue evidence
+and the full 551-sound bank/decoder achievements are preserved, not rerun or
+added to these native totals.
+
+Fresh native reproduction, from the independent clone (choose a new filename):
+
+```sh
+python3 '/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py' \
+  codex-audio-continuation-repeat-001 -- \
+  /Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -B \
+  pesquisas-paralelas/audio/validar_continuacao_audio.py \
+  --output .local/audio/continuation-repeat-001.json
+```
+
+Existing outputs/symlinks are refused before importing native capture; creation
+is exclusive too. Fresh original differences and comparison errors are saved
+before failure exits. `capturar_continuacao_audio.py` under the same wrapper
+performs original-only capture. Each call has a 50,000-instruction limit; the
+job has a 600-second alarm/deadline after acquiring the unchanged shared lease.
+All continuation native jobs took under one second; no Mac mini run is needed.
+
+Remaining work is original-first dictator lifecycle/creation, broader saturation
+and unsupported fault continuations, device initialization, wrapped/short Lock
+regions, unwritten output/status words and asynchronous buffer lifetime. The
+new queue data proof is mono ADPCM/full read; stereo remains separately decoded
+in Stage-1. Missing scratch/short compressed reads stop at 0x48c14f/0x48c15f
+with earlier effects retained, rather than returning fake success. No broad
+mission playback, M2.3 or M3 milestone acceptance is claimed.
+
+
+The required Audio gate passes: **59 discovered, 56 passed, zero failures,
+three unchanged optional Stage-1 native skips**, 11.300 seconds. All **10 new
+continuation tests pass with zero skips**. CLI checks confirm help, required
+output and refusal before native capture for an existing report. See
+[audio-continuation-validation.json](validacao/audio-continuation-validation.json)
+and [the exact gate log](validacao/audio-continuation-check.log). The fresh
+139-call native differential is separate actual leased execution, despite the
+optional baseline skips. The coordinator's exact committed native bundle build
+is performed next; its actual outcome is recorded separately.
+
+
+### Required committed native bundle build — first attempt preserved
+
+The exact coordinator command was executed from committed Audio
+`588a7942e6a0923574e1a56047bda8213a2f8ed6` merged with main `8e90beb`:
+
+```sh
+RISING_PYTHON_RUNTIME='/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python' \
+  ./compilar-jogável --development-ref HEAD \
+  --inputs-root '/Users/marcio/git/Rising Lands' \
+  --data-root '/Users/marcio/git/Rising-Lands-Codex-Audio/repository/.local/macos-playable'
+```
+
+**Overall exit 1; native UI smoke failed.** The build compiled the ARM64 app,
+verified ARM64 Python and the local signature, and passed **71/71 consumer
+tests, zero skips**, 41.051 seconds. The first native window smoke then
+reported original player-visible error `Tempo limite de 45 segundos na abertura`,
+with nativeWindowVisible=true and empty Python stderr. Inspection smoke was
+not reached. Compilation/signing and consumer success do not imply UI success.
+No timeout was increased, app file modified or native build repeated.
+
+The first JSON is preserved byte-for-byte in
+[audio-continuation-native-smoke-first.json](validacao/audio-continuation-native-smoke-first.json).
+[The build report](validacao/audio-continuation-native-build.json) records the
+exact command, commit, original PNG paths/hashes and disposition. All three
+first-attempt PNGs remain under the clone-local build/logs directory. The
+[full launcher log](validacao/audio-continuation-native-build.log),
+[consumer log](validacao/audio-continuation-consumer-tests.log),
+[architecture](validacao/audio-continuation-architecture.log) and
+[codesign verification](validacao/audio-continuation-codesign-verify.log) are
+committed. Original inputs remain read-only; every output is inside this clone.
+
+The failure was reported immediately to the parent coordinator, after AppKit
+finished, allowing its independent macOS readiness fix/smoke to proceed without
+concurrent UI runs. The remaining UI-startup issue belongs to that front; this
+Audio delivery does not repair or suppress it. The successful Audio gate and
+139-call native differential remain separate results. Final build validation
+must be rerun by the coordinator with its integrated readiness fix.
