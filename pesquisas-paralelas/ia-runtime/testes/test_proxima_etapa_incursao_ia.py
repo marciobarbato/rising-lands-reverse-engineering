@@ -21,6 +21,7 @@ from test_incursao_ia import MemoriaEsparsa, em_pilha  # noqa: E402
 
 CAPTURA = json.loads((OWNED / 'evidencias/captura-proxima-etapa-incursao-ia.json').read_bytes())
 CHEGADA = json.loads((OWNED / 'evidencias/captura-proxima-etapa-chegada-ia.json').read_bytes())
+FADIGA = json.loads((OWNED / 'evidencias/captura-proxima-etapa-fadiga-ia.json').read_bytes())
 H = lambda v: int(v, 16)  # noqa: E731
 ARGUMENTOS = {
     'BonusGetValEngin': dict(jogador=('EAX', 0xff), seletor=('EDX', 0xff), tipo=('EBX', 0xff),
@@ -48,6 +49,11 @@ class RaidUnitNextStep(unittest.TestCase):
     def test_arrival_and_state_7(self):
         """10523..10527 moving, 10528 arrival (EnginEnArret, state 7), 10529..10531 Economy's state-7 body."""
         self.verificar(CHEGADA['rule_calls'])
+
+    def test_fatigue_threshold(self):
+        """10877..10882: CalculFatigue's threshold at 10879 leaves provisions +4 = 3 (the 0x4548e3 branch)."""
+        self.assertEqual([c['counter'] for c in FADIGA['rule_calls']], list(range(10877, 10883)))
+        self.verificar(FADIGA['rule_calls'])
 
     def verificar(self, chamadas):
         from inventario_ia_runtime import OriginalImage

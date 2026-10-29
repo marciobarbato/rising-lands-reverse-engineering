@@ -372,3 +372,14 @@ Main `99c0e4e`. Details are in [M2_3_INCURSAO.md](M2_3_INCURSAO.md), round 2.
 - **Composition:** it uses Core's `incursao_core`; GetFreeCell is a named stop (native stack residue).
 - **Segments:** `comparar_quadros_ia.comparar_parte(caminho, politica, sha256_bruto, alocacoes_caminho)` and `resumos_mascarados(mascara, blocos)`. The CLI is `--parte`/`--alocacoes`.
 - **Gaps:** Core's GetFreeCell residue contract, EnginEstVivant and SetDeplaceEngin; the 9500/9700/11100 rules (their capture needs about 2,100 sequential frames, which goes to the Mac mini); `opening_state.allocations` in Missions' parts.
+
+
+## M2.3 — raid probe beyond the window (2026-10-29)
+
+- **No known divergence.** The "one step ahead after counter 9716" report came from the probe's start point (after frame 1 with counter 8999, one extra frame of draws). It is withdrawn.
+- **Equivalent start:** the native forcing is counter 9000 at frame 1's CalculGame entry. From that start, with Core's `6e12550`, Python equals the original:
+  - world RNG, and unit 16's state, facing and cell: every counter 8999–9705, native probe;
+  - unit 16's cell: every counter 9000–10878, Combat's course.
+- **Call order:** the composition's order is the original's. At 9700 the native dispatcher runs DeplaceEngin in the same frame as the re-order.
+- **Next stop, beyond the M2.3 window:** Core's CalculFatigue fatigue-threshold branch `0x452d61`, around counter 10880.
+- **Tool:** `sondar_incursao_ia.py N` (Python only, `.local/` output) runs the composition with the forcing-equivalent start.
