@@ -327,7 +327,9 @@ class ContratosQuadro1Economia(unittest.TestCase):
                       'BatimentNextEtape:type1_2_13_16': 'BatimentNextEtape:tipo1_2_13_16'}
         capturados = {renomeados.get(c['routine'], c['routine'])
                       for cap in ('v1', 'exibicao', 'consultas') for c in evidencia(cap)['calls']}
-        self.assertEqual(nomes - capturados, {'RechercheGetNbInvention'})
+        # Validated by their own captures: RechercheGetNbInvention (captura-invencoes-original), GetMeteo
+        # (captura-temporizadores-original) and PlayerGetColor (captura-cor-jogador-original).
+        self.assertEqual(nomes - capturados, {'RechercheGetNbInvention', 'GetMeteo', 'PlayerGetColor'})
         self.assertEqual(capturados - nomes, set())
 
 
