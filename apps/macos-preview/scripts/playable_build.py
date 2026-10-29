@@ -121,10 +121,12 @@ def main():
                               env={k: v for k, v in os.environ.items() if k not in ('RISING_APP_ROOT', 'PYTHONPATH', 'PYTHONHOME')})
         (base / 'build/logs/native-inspection-process.log').write_text(proc.stdout + proc.stderr)
         result = json.loads(inspection.read_text()) if inspection.exists() else {'passed': False}
-        if proc.returncode or not result.get('passed') or result.get('commit') != revision:
+        if proc.returncode or not result.get('passed') or not result.get('nativeWindowVisible') or result.get('commit') != revision:
             raise SystemExit('Native inspection smoke failed: ' + json.dumps(result))
     report = {'commit': revision, 'mode': mode, 'features': manifest['features'], 'bundle': str(final),
               'uiSmoke': not args.skip_ui_smoke, 'logs': str(base / 'build/logs'),
+              'inputsRoot': str(args.workspace), 'pythonRuntimeInput': os.environ.get('RISING_PYTHON_RUNTIME'),
+              'inspectionSmoke': not args.skip_ui_smoke,
               'builtAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
               'files': [{'path': str(p.relative_to(final)), 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}
                         for p in sorted(final.rglob('*')) if p.is_file()]}
