@@ -119,8 +119,8 @@ def executar_python(nome, antes, entrada, classe_bonus):
     buffers = {n: (base, bytearray(dados)) for n, (base, dados) in antes.items()}
     m = MemoriaQuadro(buffers.values())
     sub = m.u32(entrada['ESP'] + 4) if nome in ARGUMENTO_PILHA else None
-    bonus = lambda jogador, tipo, seletor: classe_bonus(m.ler(TABELA_BONUS, TAMANHO_BONUS)).consultar(jogador, tipo,
-                                                                                                    seletor)
+    tabela = classe_bonus.da_memoria(m)          # Economy's live bonus table and runtime types (no copy)
+    bonus = lambda jogador, tipo, seletor: tabela.consultar(jogador, tipo, seletor)
     saida = ROTINAS[nome][1](m, entrada, sub, bonus)
     mudancas = []
     for n, (base, dados) in buffers.items():

@@ -99,9 +99,13 @@ def regs(d):
 
 
 def bonus_de(memoria, classe):
-    """Economy query over the live table bytes (unknown table bytes take the memory's fill)."""
-    return lambda jogador, tipo, seletor: classe(memoria.ler(TABELA_BONUS, TAMANHO_BONUS)).consultar(jogador, tipo,
-                                                                                                    seletor)
+    """Economy's live-bound query (BonusUnidades.vivo) over the replay bytes; table and
+    runtime-type bytes the original did not read take the memory's declared fill."""
+    if classe is None:
+        return None
+    return lambda jogador, tipo, seletor: classe.vivo(
+        bytearray(memoria.ler(TABELA_BONUS, TAMANHO_BONUS)),
+        tipos_unidades=bytearray(memoria.ler(0x4965ae, 1300))).consultar(jogador, tipo, seletor)
 
 
 def sub_chemin(memoria, entrada):

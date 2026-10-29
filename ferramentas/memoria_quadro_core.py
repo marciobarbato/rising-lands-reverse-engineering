@@ -57,6 +57,11 @@ class MemoriaQuadro:
     def u32(self, endereco, valor=None):
         return self._acesso(4, endereco, valor)
 
+    def vista(self, endereco, tamanho):
+        """Writable live memoryview of ``tamanho`` bytes at ``endereco`` (no copy)."""
+        view, o = self._local(endereco, tamanho)
+        return view[o:o + tamanho]
+
     def ler(self, endereco, tamanho):
         view, o = self._local(endereco, tamanho)
         return bytes(view[o:o + tamanho])
