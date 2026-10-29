@@ -11,6 +11,35 @@ final class NativeMetalGameView: NSView {
     let palette: MTLBuffer
     var presentedFrames=0
     var lastTexture: MTLTexture?
+    var inputEvent: (([String:Any])->Void)?
+    var tracking: NSTrackingArea?
+    var heldKeys=Set<Int>()
+    override var acceptsFirstResponder: Bool { true }
+    override func updateTrackingAreas() {
+        super.updateTrackingAreas();if let area=tracking{removeTrackingArea(area)}
+        let area=NSTrackingArea(rect:.zero,options:[.mouseMoved,.activeInKeyWindow,.inVisibleRect],owner:self,userInfo:nil)
+        tracking=area;addTrackingArea(area)
+    }
+    func mouse(_ event:NSEvent,_ message:Int) {
+        let p=convert(event.locationInWindow,from:nil)
+        guard bounds.contains(p),bounds.width>0,bounds.height>0 else{return}
+        if message != 0x200{window?.makeFirstResponder(self)}
+        let w=(event.modifierFlags.contains(.shift) ? 4:0)|(event.modifierFlags.contains(.control) ? 8:0)
+        inputEvent?(["kind":"mouse","msg":message,"x":Int(p.x*800/bounds.width),"y":min(599,Int((bounds.height-p.y)*600/bounds.height)),"wParam":w])
+    }
+    override func mouseMoved(with event:NSEvent){mouse(event,0x200)}
+    override func mouseDragged(with event:NSEvent){mouse(event,0x200)}
+    override func rightMouseDragged(with event:NSEvent){mouse(event,0x200)}
+    override func mouseDown(with event:NSEvent){mouse(event,event.clickCount>1 && event.clickCount%2==0 ? 0x203:0x201)}
+    override func mouseUp(with event:NSEvent){mouse(event,0x202)}
+    override func rightMouseDown(with event:NSEvent){mouse(event,event.buttonNumber==0 ? 0x201:0x204)}
+    override func rightMouseUp(with event:NSEvent){mouse(event,event.buttonNumber==0 ? 0x202:0x205)}
+    func key(_ key:Int,_ down:Bool){if down{heldKeys.insert(key)}else{heldKeys.remove(key)};inputEvent?(["kind":"key","vkey":key,"down":down])}
+    override func keyDown(with event:NSEvent){if let k=[36:13,76:13,53:27,49:32,123:37,126:38,124:39,125:40,117:46,7:88][Int(event.keyCode)]{key(k,true)}}
+    override func keyUp(with event:NSEvent){if let k=[36:13,76:13,53:27,49:32,123:37,126:38,124:39,125:40,117:46,7:88][Int(event.keyCode)]{key(k,false)}}
+    func synchronizeModifiers(_ flags:NSEvent.ModifierFlags){for (flag,k) in [(NSEvent.ModifierFlags.shift,16),(.control,17),(.option,18)]{let down=flags.contains(flag);if down != heldKeys.contains(k){key(k,down)}}}
+    override func flagsChanged(with event:NSEvent){synchronizeModifiers(event.modifierFlags)}
+    func releaseKeys(){for k in heldKeys.sorted(){key(k,false)}}
     override var wantsUpdateLayer: Bool { true }
     override func makeBackingLayer() -> CALayer { CAMetalLayer() }
     init(nativeFrame:NSRect) throws {
@@ -98,6 +127,12 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
     var startMetal=0.0
     var lastNotify=0.0
     var update:(([String:Any])->Void)?
+    var recordedEvent:(([String:Any])->Void)?
+    var recordingAction:(()->Void)?
+    var exportAction:(()->Void)?
+    var recording=false
+    let recordButton=NSButton(title:"Nova gravação",target:nil,action:nil)
+    let resetButton=NSButton(title:"Reiniciar",target:nil,action:nil)
     let label=NSTextField(labelWithString:"MONDE01 · Rust ABI 1.3 · sem entrada aplicada")
     let button=NSButton(title:"Executar",target:nil,action:nil)
     init(root:URL) throws {
@@ -108,11 +143,28 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         window.title="MONDE01 · Rust e Metal";window.minSize=NSSize(width:640,height:550);window.contentView=NativeGameLayout(metal);window.delegate=self
         button.target=self;button.action=#selector(toggle);button.frame=NSRect(x:15,y:36,width:100,height:27)
         let stepButton=NSButton(title:"Avançar quadro",target:self,action:#selector(step));stepButton.frame=NSRect(x:125,y:36,width:140,height:27)
-        let resetButton=NSButton(title:"Reiniciar",target:self,action:#selector(reset));resetButton.frame=NSRect(x:275,y:36,width:100,height:27)
+        resetButton.target=self;resetButton.action=#selector(reset);resetButton.frame=NSRect(x:275,y:36,width:100,height:27)
         label.frame=NSRect(x:15,y:8,width:770,height:22);label.autoresizingMask = [.width]
         window.contentView?.addSubview(button);window.contentView?.addSubview(stepButton);window.contentView?.addSubview(resetButton);window.contentView?.addSubview(label)
+        recordButton.target=self;recordButton.action=#selector(toggleRecording);recordButton.frame=NSRect(x:385,y:36,width:170,height:27)
+        let exportButton=NSButton(title:"Exportar entrada",target:self,action:#selector(exportRecording));exportButton.frame=NSRect(x:565,y:36,width:160,height:27)
+        window.contentView?.addSubview(recordButton);window.contentView?.addSubview(exportButton)
+        metal.inputEvent={ [weak self] event in
+            guard let self=self,self.recording else{return}
+            self.work.async{[weak self] in guard let self=self else{return};let frame=Int(self.status().frames)+1;DispatchQueue.main.async{self.recordedEvent?(["frame":frame,"event":event])}}
+        }
         window.center();window.makeKeyAndOrderFront(nil)
     }
+    @objc func toggleRecording(){inputBarrier{[weak self] frame in guard let self=self else{return};if frame<129 && !self.recording{self.label.stringValue="Gravação disponível após o quadro 128"}else{self.recordingAction?()}}}
+    @objc func exportRecording(){exportAction?()}
+    func setRecording(_ active:Bool){
+        let starting=active && !recording
+        if starting{metal.synchronizeModifiers(NSEvent.modifierFlags)}
+        recording=active;resetButton.isEnabled = !active;recordButton.title=active ? "● Gravando entrada":"Nova gravação";recordButton.contentTintColor=active ? .systemRed:nil
+        if starting{for key in metal.heldKeys.sorted(){metal.inputEvent?(["kind":"key","vkey":key,"down":true])}}
+    }
+    func inputBarrier(_ completion:@escaping(Int)->Void){work.async{[weak self] in guard let self=self else{return};let frame=Int(self.status().frames)+1;DispatchQueue.main.async{completion(frame)}}}
+    func windowDidResignKey(_ notification:Notification){metal.releaseKeys()}
     func create() throws {
         guard macos_live_abi_version()==1,macos_live_status_size()==MemoryLayout<MacOSLiveStatus>.size else { throw NSError(domain:"NativeDriverVersionMismatch",code:1) }
         let directory=root.appendingPathComponent("native-inputs")

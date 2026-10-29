@@ -183,25 +183,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             }
             return
         }
+        if message.frameInfo.isMainFrame,let body=message.body as? [String:Any],body["action"] as? String == "recordingIndicator",let active=body["active"] as? Bool {
+            nativeLive?.setRecording(active);return
+        }
         if message.frameInfo.isMainFrame, let body = message.body as? [String:Any],
            body["action"] as? String == "saveInput", let requestID = body["id"],
            let content = body["content"] as? [String:Any],
-           let data = try? JSONSerialization.data(withJSONObject:content,options:[.prettyPrinted,.sortedKeys]),
-           data.count <= 64*1024*1024 {
+           let encoded = try? JSONSerialization.data(withJSONObject:content,options:[.prettyPrinted,.sortedKeys]),
+           encoded.count <= 64*1024*1024 {
+            let data=(body["text"] as? String).map{Data($0.utf8)} ?? (encoded + Data([10]))
+            guard data.count<=64*1024*1024,(try? JSONSerialization.jsonObject(with:data)) is [String:Any] else{nativeReply(requestID,error:"Entrada exportada inválida");return}
+            func save(_ url:URL) {
+                do{try data.write(to:url,options:.atomic);self.nativeReply(requestID,value:["saved":true,"path":url.path,"sha256":SHA256.hash(data:data).map{String(format:"%02x",$0)}.joined()])}
+                catch{self.nativeReply(requestID,error:error.localizedDescription)}
+            }
+            // Automated smoke uses its explicitly declared evidence directory;
+            // production always asks for a destination with NSSavePanel.
+            if body["smokeEvidence"] as? Bool == true,let shot=smokeOutput{save(shot.deletingPathExtension().appendingPathExtension("input.json"));return}
             let panel = NSSavePanel()
             panel.title = "Exportar entrada gravada"
             panel.nameFieldStringValue = body["script"] as? Bool == true ? "monde01-input.json" : "monde01-macos-journal.json"
-            panel.beginSheetModal(for:window) { [weak self] answer in
-                var result:[String:Any] = ["id":requestID,"ok":true,"playback":["saved":false]]
-                if answer == .OK, let url = panel.url {
-                    do {
-                        try (data + Data([10])).write(to:url,options:.atomic)
-                        result["playback"] = ["saved":true,"path":url.path]
-                    } catch { result = ["id":requestID,"ok":false,"error":error.localizedDescription] }
-                }
-                if let encoded = try? JSONSerialization.data(withJSONObject:result), let json = String(data:encoded,encoding:.utf8) {
-                    self?.web.evaluateJavaScript("window.receive(\(json));",completionHandler:nil)
-                }
+            panel.beginSheetModal(for:nativeLive?.window.isVisible == true ? nativeLive!.window:window) { [weak self] answer in
+                if answer == .OK,let url=panel.url{save(url)}else{self?.nativeReply(requestID,value:["saved":false])}
             }
             return
         }
@@ -211,11 +214,30 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
                     if nativeLive == nil {
                         nativeLive=try NativeLiveWindow(root:resourceRoot)
                         nativeLive?.update={ [weak self] value in self?.nativeReply(nil,value:value) }
+                        nativeLive?.recordedEvent={ [weak self] value in
+                            if let data=try? JSONSerialization.data(withJSONObject:value),let json=String(data:data,encoding:.utf8){self?.web.evaluateJavaScript("window.recordNativeInput(\(json));",completionHandler:nil)}
+                        }
+                        nativeLive?.recordingAction={ [weak self] in self?.web.evaluateJavaScript("window.toggleRecording();",completionHandler:nil) }
+                        nativeLive?.exportAction={ [weak self] in self?.web.evaluateJavaScript("window.exportRecording();",completionHandler:nil) }
+                        web.evaluateJavaScript("window.syncRecordingIndicator();",completionHandler:nil)
                     }
                     nativeLive?.window.makeKeyAndOrderFront(nil)
                     nativeLive?.perform(operation == "live-open" ? "live-reset":operation) { [weak self] value in self?.nativeReply(body["id"],value:value) }
                 } catch { nativeReply(body["id"],error:"Falha nativa: \(error.localizedDescription)") }
                 return
+            }
+            if operation == "record-barrier" {
+                if let live=nativeLive{live.inputBarrier{[weak self] frame in self?.nativeReply(body["id"],value:["frame":frame])}}
+                else{nativeReply(body["id"],value:["frame":129])};return
+            }
+            if operation == "record-native-smoke",smokeOutput != nil,let live=nativeLive {
+                let down=body["stage"] as? String == "press"
+                if let event=NSEvent.keyEvent(with:.flagsChanged,location:.zero,modifierFlags:down ? .control:[],timestamp:0,windowNumber:live.window.windowNumber,context:nil,characters:"",charactersIgnoringModifiers:"",isARepeat:false,keyCode:59){live.metal.flagsChanged(with:event)}
+                if down {
+                    let p=live.metal.convert(NSPoint(x:live.metal.bounds.width/2,y:live.metal.bounds.height*(1-272.0/600.0)),to:nil)
+                    for type in [NSEvent.EventType.leftMouseDown,.leftMouseUp]{if let event=NSEvent.mouseEvent(with:type,location:p,modifierFlags:.control,timestamp:0,windowNumber:live.window.windowNumber,context:nil,eventNumber:1,clickCount:1,pressure:1){if type == .leftMouseDown{live.metal.mouseDown(with:event)}else{live.metal.mouseUp(with:event)}}}
+                }
+                live.inputBarrier{[weak self] frame in self?.nativeReply(body["id"],value:["frame":frame,"recordingIndicator":live.recordButton.title])};return
             }
             if operation == "native-capture",let live=nativeLive,let shot=screenshotOutput {
                 live.capture(shot.deletingPathExtension().appendingPathExtension("metal.png")){[weak self] value in self?.nativeReply(body["id"],value:value)}

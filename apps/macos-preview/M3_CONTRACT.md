@@ -283,3 +283,74 @@ artifacts are built from the same pinned sources and recorded separately.
 All world/renderer/host-buffer access is serialized. Reset prepares a valid
 replacement before freeing the old handles. Native-window input orders remain
 unsupported; existing record/replay inspection scaffolding is separate.
+
+## M3.3 Test A — frame input interchange and answer stream
+
+The current recorder is `MacOSSessionRecorder` in `macos_scripted_input.py`.
+The former `MacOSInputRecorder` remains a separately versioned legacy poll
+journal; its pressed-since-last-poll model is not the Missions script contract.
+A legacy journal containing polls cannot be silently exported as a frame file.
+
+`ScriptedInput(root, dict_or_json)` imports Missions schema
+`rising-lands/monde01-scripted-input/1`. The adapter executes only the owner's
+unchanged pure validator AST (`carregar_entrada`, `_inteiro` and its constants),
+avoiding emulator imports/provider namespace changes. Missing definitions or a
+schema/start mismatch fail explicitly. Tests also import the complete actual
+Missions harness in a separate process and validate a human export unchanged.
+`export()` returns independent JSON data; `export_bytes()` emits canonical UTF-8
+JSON with sorted keys, one-space indentation and one final newline. All frame
+messages, literal signed key answers and metadata survive normalization.
+Export → import → export is byte-identical; original evidence is never rewritten.
+
+`FrameAnswerMapper(script, hwnd=explicit_u32)` consumes `begin_frame(k)` and
+`poll(kind, phase=..., site=..., vk=...)`. It implements cursor, key, peek, get,
+translate and dispatch answers. Sites are the original call return addresses,
+not routine entry addresses: e.g. GetCursorPos at `0x475044` records `0x47504b`,
+the loop PeekMessageA records `0x4601d8`, GetMessageA `0x4601eb`, TranslateMessage
+`0x4601f9` and DispatchMessageA `0x460203`. A cursor holds its last declared
+position, initially the owner's explicit `(0,0)`. Messages queue in file order;
+peek does not remove, get removes, translate returns zero, and dispatch targets
+WndProc `0x4181a1`. No WndProc/game flag is written or simulated by this layer.
+Keys reset to zero on every new frame and each poll repeats the frame's literal
+i16 value. This includes zero for native polls of unlisted vkey `0x45`.
+Poll phase/site validation and unconsumed/skipped message frames fail by name.
+
+`MacOSSessionRecorder(root).event(frame, event)` takes monotonic integer game
+frames >=129. Mouse dictionaries contain `kind='mouse', msg, x, y, wParam`;
+key dictionaries contain `kind='key', vkey, down`. Coordinates must fit 800×600.
+The human key set is Enter, Shift, Control, Option/Alt, Escape, Space, arrows,
+Delete and X (the prescribed 12 vkeys). Key messages use explicit normalized
+Windows scan/extended/previous/transition bits; held keys export `-32768` on
+every frame until release, including all of a depot-mode Control hold. Imported
+scripts additionally preserve arbitrary owner-accepted key messages/answers,
+including K1's digit-1 message, without inventing a human hotkey mapping.
+
+A human press schedules mouse move at k, button down at k+1 and release at k+3.
+The physical release remains in the raw journal but does not add a second
+scripted release. Right and double clicks use 0x204/0x205 and 0x203 respectively.
+Moves received during the gesture wait until k+4; consecutive clicks serialize.
+This stage records fixed clicks, not continuous drag gestures. Cursor holding,
+message ordering, signed key values and literal poll repetition are under test.
+`export_script(stop_frame=...)` rejects truncation of scheduled events and
+returns a validated `ScriptedInput`; `journal()` is separately named
+`rising-lands/macos-frame-input-recording/1`. Invalid events leave it unchanged.
+
+In the native window, NSEvents are assigned to the next frame on the same
+serial queue that owns the engine. No wall clock enters the file. Recording
+starts only after completed frame128; reset is disabled while recording.
+Control/Shift/Option changes, initial observed held modifiers and focus-loss
+releases are recorded. Native events never enter Rust's input structure.
+The visible **Gravando entrada** indicator and **Exportar entrada** action use
+the isolated worker for file preparation only. Stop/export drains native event
+work and the worker request chain. Export preserves canonical bytes through a
+native save panel; recording errors latch and prohibit partial-success export.
+**Ordens ao vivo indisponíveis** remains visible.
+
+Test A reads only request frame/phase/site/kind/vkey from each native poll log.
+Every answer is computed from the imported/exported script. Scenario HWND=0 is
+an explicit declaration, checked against every native dispatch. Comparisons
+include all 155,597 records from P1/P2/P3/P6/P7/K1. The sole excluded field is
+`wndproc_flags_after`, an original-game output: its 102 records belong to the
+deferred state half. No expected message/key/cursor/flag answer feeds the mapper.
+State hashes, WndProc effects and human Test B await engine order support;
+this stage does not inject orders or claim their state equivalence.

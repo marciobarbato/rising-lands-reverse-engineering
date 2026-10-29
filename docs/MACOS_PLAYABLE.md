@@ -335,3 +335,31 @@ compares each against the indexed output and palette. PNG export runs only
 after pausing, outside the rate measurement. The
 [handoff](../apps/macos-preview/HANDOFF.md#rust-renderer-integration--abi-13)
 records complete-window proofs, the first engine stop and build provenance.
+
+## Frame input recording and Test A answers
+
+After the native session completes frame128, choose **Nova gravação** in the
+inspection page or native game window. **● Gravando entrada** is visible while
+recording. The native view captures mouse events and the declared keys; macOS
+Control maps to Windows Ctrl, Option to Alt. The next game-frame poll receives
+each event's frame stamp. Wall-clock timestamps never enter the script.
+**Parar gravação** ends capture; **Exportar entrada** writes a file accepted
+unchanged by Missions' scripted-input harness. The save panel preserves the
+canonical bytes. A new recording replaces the preceding recording explicitly.
+
+Clicks use the declared k/k+1/k+3 cadence and hold the cursor through release.
+Ctrl remains held per frame until release/focus loss, supporting recorded depot
+mode. Moves during a click wait until its end; this first half does not record
+continuous drags. Reset is disabled while recording. Orders remain unavailable
+and no recorded answer enters the Rust world. Record/export failures are visible
+and block exporting an incomplete session as success.
+
+The [input contract](../apps/macos-preview/M3_CONTRACT.md#m33-test-a--frame-input-interchange-and-answer-stream)
+describes `ScriptedInput`, `FrameAnswerMapper` and `MacOSSessionRecorder`.
+The [Test A answer report](../apps/macos-preview/validation/m3-test-a-answers.json)
+compares every declared answer against P1/P2/P3/P6/P7/K1, using the native logs
+only as poll requests. All **155,597 answers** match, with no first difference;
+all six export/import/export byte round trips match. Native WndProc flag stores
+and whole-state hashes belong to Test A's deferred state half. It requires
+engine order support. The 3,000-frame human original replay (Test B) is also
+pending; no M3 acceptance is claimed.
