@@ -20,7 +20,7 @@ from oraculo_carga_missao import DGROUP
 
 ISOLADA = ambiente_missoes.OWNED/'evidencias/captura-isolada-missoes-quadro1.json'
 DIFERENCIAL = ambiente_missoes.OWNED/'validacao/m2-fim-missao-differential-x86.json'
-ESTRUTURAS, RECURSOS, MISSAO = 0x49a0c8, 0x4e2ea8, 0x496fe4
+ESTRUTURAS, RECURSOS, MISSAO, INFLUENCIA = 0x49a0c8, 0x4e2ea8, 0x496fe4, 0x50c614
 
 
 def memoria_lida(caso, veneno):
@@ -36,7 +36,8 @@ def executar(d, jogador):
     f = lambda a, n: bytearray(d[a-DGROUP[0]:a-DGROUP[0]+n])
     estado = f(ESTADO, 14)
     antes = bytes(estado)
-    q = consultas_publicadas(memoryview(bytes(f(ESTRUTURAS, 276000))), Economia(memoria=f(RECURSOS, 128)), f(MISSAO, 1))
+    q = consultas_publicadas(memoryview(bytes(f(ESTRUTURAS, 276000))), Economia(memoria=f(RECURSOS, 128)), f(MISSAO, 1),
+                             f(INFLUENCIA, 4000))
     al = testar_fim_missao(jogador, f(CONDICOES, 100), estado, f(CONTAGEM_INICIAL, 2), f(EXERCITOS, 8),
                            f(EXERCITOS_IA, 16), q)
     return al, [[hex(ESTADO+i), antes[i], estado[i]] for i in range(14) if estado[i] != antes[i]]
