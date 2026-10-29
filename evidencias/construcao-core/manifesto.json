@@ -1,0 +1,288 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "PlaceBatiment",
+      "start": "0x41c4ac",
+      "end_exclusive": "0x41c652",
+      "sha256": "b2476d0792e3276a0479549d83786f4042c794ccb566202817c1c7ef89e8ac5a",
+      "file": "0041c4ac.asm"
+    },
+    {
+      "name": "BatimentModifyTerrain",
+      "start": "0x41ba49",
+      "end_exclusive": "0x41bb8a",
+      "sha256": "7bde63f640b8cb7b3d0a2912912aec4b023806fcc484159415d30ad278d56dcc",
+      "file": "0041ba49.asm"
+    },
+    {
+      "name": "ResetCheminTerrainModify",
+      "start": "0x41b78f",
+      "end_exclusive": "0x41b888",
+      "sha256": "aef8375595c87bff0601100b571325bbac9e84abda07633b9cfc01d5ad66d01c",
+      "file": "0041b78f.asm"
+    },
+    {
+      "name": "BatimentCollision",
+      "start": "0x41ab5c",
+      "end_exclusive": "0x41ac8b",
+      "sha256": "5b3d3484d48fe0e3bde39cb69224113789d583f301074ec252dfbd3be2c2bdf0",
+      "file": "0041ab5c.asm"
+    },
+    {
+      "name": "ValideHerse",
+      "start": "0x41ac8b",
+      "end_exclusive": "0x41ad78",
+      "sha256": "21db74b530a69b5f85e674516f31f71f5219dea373b9c89b0e8797e06ac7f52e",
+      "file": "0041ac8b.asm"
+    },
+    {
+      "name": "ChercheMurCombinaisons",
+      "start": "0x41c18a",
+      "end_exclusive": "0x41c251",
+      "sha256": "a0181d260d81bbf4747d15fe69317433871ab6f8e5156a8182e21ccf354ba2d1",
+      "file": "0041c18a.asm"
+    },
+    {
+      "name": "BatimentConstructible",
+      "start": "0x41fb12",
+      "end_exclusive": "0x41fc40",
+      "sha256": "48c12c20e2a75144fb59499aa8864d6d6ef23ae242ce5781efd67a73427b567e",
+      "file": "0041fb12.asm"
+    },
+    {
+      "name": "BatimentPosable",
+      "start": "0x41fc40",
+      "end_exclusive": "0x41fea2",
+      "sha256": "e60c908f8c843c883ede6f7c329d9bf9be121b178d82c5cbdefd56dcdfd6555a",
+      "file": "0041fc40.asm"
+    },
+    {
+      "name": "epilogue 0x41db1d (PlaceBatiment, ResetCheminTerrainModify)",
+      "start": "0x41db1d",
+      "end_exclusive": "0x41db24",
+      "sha256": "7227c48dab9cf58cef6ab93b965ca6429bd0f282cc829c7d338a55a23a93f08d",
+      "file": "0041db1d.asm"
+    },
+    {
+      "name": "epilogue 0x41a4ae (BatimentConstructible)",
+      "start": "0x41a4ae",
+      "end_exclusive": "0x41a4b6",
+      "sha256": "7401fe2fa529b21e85586c694f13c705d5ac0279a30c8e20260b73e14d5cd50b",
+      "file": "0041a4ae.asm"
+    },
+    {
+      "name": "Chemin_ModifieZone",
+      "start": "0x43e138",
+      "end_exclusive": "0x43e2a3",
+      "sha256": "c72f4e20e1f5c2be3c0ccc92d1aeae22ef2c913ced95f12f14e192ae882142d1",
+      "file": "0043e138.asm"
+    },
+    {
+      "name": "AlloueCouleur",
+      "start": "0x43e5a0",
+      "end_exclusive": "0x43e5d5",
+      "sha256": "b191a5908de06fcfc8b072fb1d81a3c7b2c2ce507aba6947965e342c94bea820",
+      "file": "0043e5a0.asm"
+    },
+    {
+      "name": "LibereCouleur",
+      "start": "0x43e5d5",
+      "end_exclusive": "0x43e616",
+      "sha256": "1e962bdacdd32ac28f5e1bb0d873bf2b803e67825266b6bff5220c85d563fb91",
+      "file": "0043e5d5.asm"
+    },
+    {
+      "name": "MurAjoute",
+      "start": "0x43e616",
+      "end_exclusive": "0x43e8b7",
+      "sha256": "f26fe7f8be0ed3c9dabca77254739dff531b24e17f1f403c175db455360481e6",
+      "file": "0043e616.asm"
+    },
+    {
+      "name": "MurRetire",
+      "start": "0x43e8b7",
+      "end_exclusive": "0x43eb64",
+      "sha256": "cf744248054838921bef7b18e53ee2ab64a1e1f6f4d39322fab17824badc771d",
+      "file": "0043e8b7.asm"
+    },
+    {
+      "name": "Remplit",
+      "start": "0x43e464",
+      "end_exclusive": "0x43e5a0",
+      "sha256": "de3f20652e4ec10a49953e7942d9d3b51ed5befab56b80dc024c0225851c2c65",
+      "file": "0043e464.asm"
+    },
+    {
+      "name": "epilogue 0x42f1da (MurAjoute, MurRetire)",
+      "start": "0x42f1da",
+      "end_exclusive": "0x42f1e1",
+      "sha256": "7227c48dab9cf58cef6ab93b965ca6429bd0f282cc829c7d338a55a23a93f08d",
+      "file": "0042f1da.asm"
+    },
+    {
+      "name": "SetTerrain",
+      "start": "0x476251",
+      "end_exclusive": "0x476263",
+      "sha256": "1df0706024b369148a0566fddc1e0c3194ba7c623a77a124c033b4751932c257",
+      "file": "00476251.asm"
+    },
+    {
+      "name": "SetCollision",
+      "start": "0x47622e",
+      "end_exclusive": "0x47623e",
+      "sha256": "6782e75a6bd70bcc5f78f5647334c0acc7d8f358492018b6e8d31649457d9a13",
+      "file": "0047622e.asm"
+    },
+    {
+      "name": "TerrainEnCollision",
+      "start": "0x4761d4",
+      "end_exclusive": "0x4761f1",
+      "sha256": "5a4df51651db84b2b01819a672e0ad7c0253524d5ee65192abfde4bffdf41b3a",
+      "file": "004761d4.asm"
+    },
+    {
+      "name": "TerrainEstHerbe",
+      "start": "0x47636a",
+      "end_exclusive": "0x4763c0",
+      "sha256": "7c2d8f0eb66baa5c4d38f0c2fedc64b2ecdb1fa2f2acc0a834b307e7dc7de78e",
+      "file": "0047636a.asm"
+    },
+    {
+      "name": "TerrainEstDecouvert",
+      "start": "0x4766f0",
+      "end_exclusive": "0x47670a",
+      "sha256": "c7d7973f063848a5fbb332c9d87310bfea7ce416069d880fc6c7cfb2f0a58262",
+      "file": "004766f0.asm"
+    },
+    {
+      "name": "EnginGetPlayer",
+      "start": "0x442045",
+      "end_exclusive": "0x442064",
+      "sha256": "51a88e03cba6292ad8cbbe0ddf8859022a4d1c53308d94c8346f5532c59b4a98",
+      "file": "00442045.asm"
+    },
+    {
+      "name": "EnginOccupeCase",
+      "start": "0x44246e",
+      "end_exclusive": "0x442586",
+      "sha256": "706a11b792b0bc8cb765fa482b781fba45c23cf1acb3bdf0fd1b794a3ce1b4e4",
+      "file": "0044246e.asm"
+    },
+    {
+      "name": "DeplaceEngin",
+      "start": "0x44930c",
+      "end_exclusive": "0x449526",
+      "sha256": "a091480c29ef3dfe10403782a23f1e90cb66f02cbc04246dc79fd9b403393f0c",
+      "file": "0044930c.asm"
+    },
+    {
+      "name": "epilogue 0x440d58 (DeplaceEngin, CalculNextCase)",
+      "start": "0x440d58",
+      "end_exclusive": "0x440d5e",
+      "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "file": "00440d58.asm"
+    },
+    {
+      "name": "CalculNextCase",
+      "start": "0x448f50",
+      "end_exclusive": "0x449176",
+      "sha256": "da39e03d33665c468b54494e7ca93c7d5da29805fada97e25de63fb12d68e34a",
+      "file": "00448f50.asm"
+    }
+  ],
+  "jump_tables": [
+    {
+      "name": "PlaceBatiment first tile by structure type",
+      "address": "0x41c454",
+      "entries": [
+        "0x41c4fb",
+        "0x41c4f1",
+        "0x41c4e7",
+        "0x41c505",
+        "0x41c54a",
+        "0x41c519",
+        "0x41c574",
+        "0x41c55f",
+        "0x41c551",
+        "0x41c579",
+        "0x41c56d",
+        "0x41c566",
+        "0x41c579",
+        "0x41c50f",
+        "0x41c520",
+        "0x41c558",
+        "0x41c535",
+        "0x41c543",
+        "0x41c53c",
+        "0x41c527",
+        "0x41c558",
+        "0x41c52e"
+      ]
+    },
+    {
+      "name": "BatimentCollision mask by structure type",
+      "address": "0x41ab04",
+      "entries": [
+        "0x41ab76",
+        "0x41ab83",
+        "0x41ab90",
+        "0x41ab9d",
+        "0x41abaa",
+        "0x41abb7",
+        "0x41abc4",
+        "0x41abd1",
+        "0x41abde",
+        "0x41abeb",
+        "0x41abf8",
+        "0x41ac05",
+        "0x41ac12",
+        "0x41ac1f",
+        "0x41ac2c",
+        "0x41ac39",
+        "0x41ac46",
+        "0x41ac53",
+        "0x41ac60",
+        "0x41ac6d",
+        "0x41ac39",
+        "0x41ac7a"
+      ]
+    },
+    {
+      "name": "Chemin_ModifieZone by mode",
+      "address": "0x43e128",
+      "entries": [
+        "0x43e153",
+        "0x43e1b4",
+        "0x43e1ee",
+        "0x43e256"
+      ]
+    },
+    {
+      "name": "DeplaceEngin by path state +0x88",
+      "address": "0x4492f0",
+      "entries": [
+        "0x4493ce",
+        "0x44934c",
+        "0x440d58",
+        "0x449358",
+        "0x4493d8",
+        "0x4493ce",
+        "0x4494fc"
+      ]
+    },
+    {
+      "name": "CalculNextCase local sound by unit type - 11",
+      "address": "0x448f38",
+      "entries": [
+        "0x44906f",
+        "0x44906f",
+        "0x44906f",
+        "0x44906f",
+        "0x44906f",
+        "0x44906f"
+      ]
+    }
+  ]
+}
