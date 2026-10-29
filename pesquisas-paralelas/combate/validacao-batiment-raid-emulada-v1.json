@@ -1,0 +1,852 @@
+{
+ "schema": "rising-lands/combat-real-raid-differential/1",
+ "capture": "pesquisas-paralelas/combate/evidencias/captura-batiment-raid-original-v3.json",
+ "capture_sha256": "22b30558c6272740613828ae2e3ca8c7dc2b297ce65f752e7551b3a51089dc89",
+ "provenance": {
+  "manifest": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.manifest.json",
+  "manifest_sha256": "e88dc3fcaca11d03a774dad8bd9c768345f13c884cc2d8df493107ec9d180b09",
+  "artifact": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.parte09.json.xz",
+  "compressed_sha256": "6c385670a501389efbf2465f7d45468b00926911732916840d33ab13394e6b9a",
+  "raw_sha256": "f70e893eb74aa7a399c803f6aa28c7916e6182a6e8bd37ffe84bece5eb92c39b",
+  "checkpoints": {
+   "9000": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "711e8d75a325c1e08c6094be3463ae8d1722078b772fb4e6bbf0b72a9e5d3f61"
+   },
+   "9176": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "e52f04d848a34bae235ed5dbca068c67fb30a1460084665246cf42685d8e7066"
+   }
+  }
+ },
+ "native": true,
+ "audio_domain": null,
+ "cases": [
+  {
+   "case": "f9000-solid-impact-source0-camera0",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagVilleSendMessage",
+    "address": 4737032,
+    "arguments": [
+     0,
+     4,
+     0
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-solid-impact-source0-camera1",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagVilleSendMessage",
+    "address": 4737032,
+    "arguments": [
+     0,
+     4,
+     0
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-solid-impact-source1-camera0",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagVilleSendMessage",
+    "address": 4737032,
+    "arguments": [
+     0,
+     4,
+     1
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-solid-impact-source1-camera1",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagVilleSendMessage",
+    "address": 4737032,
+    "arguments": [
+     0,
+     4,
+     1
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-solid-impact-source2-camera0",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagVilleSendMessage",
+    "address": 4737032,
+    "arguments": [
+     0,
+     4,
+     2
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-solid-impact-source2-camera1",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagVilleSendMessage",
+    "address": 4737032,
+    "arguments": [
+     0,
+     4,
+     2
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-solid-impact-source16-camera0",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagVilleSendMessage",
+    "address": 4737032,
+    "arguments": [
+     0,
+     4,
+     16
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-solid-impact-source16-camera1",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagVilleSendMessage",
+    "address": 4737032,
+    "arguments": [
+     0,
+     4,
+     16
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-solid-impact-mode4-dir29",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "MAJSympathie",
+    "address": 4673816,
+    "arguments": [
+     0,
+     4,
+     10
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-solid-impact-mode4-dir30",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "MAJSympathie",
+    "address": 4673816,
+    "arguments": [
+     0,
+     4,
+     10
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-solid-threshold-599",
+   "routine": "BatimentInfligeDegat",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": true,
+   "result": "equal",
+   "capture_reproduced": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-solid-threshold-600",
+   "routine": "BatimentInfligeDegat",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": true,
+   "result": "equal",
+   "capture_reproduced": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-solid-threshold-601",
+   "routine": "BatimentInfligeDegat",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": true,
+   "result": "equal",
+   "capture_reproduced": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-solid-threshold-599",
+   "routine": "BatimentInfligeDegat",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": true,
+   "result": "equal",
+   "capture_reproduced": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-solid-threshold-600",
+   "routine": "BatimentInfligeDegat",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": true,
+   "result": "equal",
+   "capture_reproduced": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-solid-threshold-601",
+   "routine": "BatimentInfligeDegat",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": true,
+   "result": "equal",
+   "capture_reproduced": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-type30-init",
+   "routine": "ProjectileInit",
+   "dependency": null,
+   "register_scope": [
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": true,
+   "result": "equal",
+   "capture_reproduced": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9000-type30-first-impact",
+   "routine": "ProjectileAvance",
+   "dependency": {
+    "name": "InfligeDegat",
+    "address": 4524148,
+    "arguments": [
+     13885,
+     4,
+     0,
+     30,
+     0
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-solid-impact-source0-camera0",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagVilleSendMessage",
+    "address": 4737032,
+    "arguments": [
+     0,
+     4,
+     0
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-solid-impact-source0-camera1",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagVilleSendMessage",
+    "address": 4737032,
+    "arguments": [
+     0,
+     4,
+     0
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-solid-impact-source1-camera0",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagVilleSendMessage",
+    "address": 4737032,
+    "arguments": [
+     0,
+     4,
+     1
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-solid-impact-source1-camera1",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagVilleSendMessage",
+    "address": 4737032,
+    "arguments": [
+     0,
+     4,
+     1
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-solid-impact-source2-camera0",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagVilleSendMessage",
+    "address": 4737032,
+    "arguments": [
+     0,
+     4,
+     2
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-solid-impact-source2-camera1",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagVilleSendMessage",
+    "address": 4737032,
+    "arguments": [
+     0,
+     4,
+     2
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-solid-impact-source16-camera0",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagVilleSendMessage",
+    "address": 4737032,
+    "arguments": [
+     0,
+     4,
+     16
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-solid-impact-source16-camera1",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "iagVilleSendMessage",
+    "address": 4737032,
+    "arguments": [
+     0,
+     4,
+     16
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-solid-impact-mode4-dir29",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "MAJSympathie",
+    "address": 4673816,
+    "arguments": [
+     0,
+     4,
+     10
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-solid-impact-mode4-dir30",
+   "routine": "InfligeDegat",
+   "dependency": {
+    "name": "MAJSympathie",
+    "address": 4673816,
+    "arguments": [
+     0,
+     4,
+     10
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-solid-threshold-599",
+   "routine": "BatimentInfligeDegat",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": true,
+   "result": "equal",
+   "capture_reproduced": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-solid-threshold-600",
+   "routine": "BatimentInfligeDegat",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": true,
+   "result": "equal",
+   "capture_reproduced": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-solid-threshold-601",
+   "routine": "BatimentInfligeDegat",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": true,
+   "result": "equal",
+   "capture_reproduced": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-solid-threshold-599",
+   "routine": "BatimentInfligeDegat",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": true,
+   "result": "equal",
+   "capture_reproduced": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-solid-threshold-600",
+   "routine": "BatimentInfligeDegat",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": true,
+   "result": "equal",
+   "capture_reproduced": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-solid-threshold-601",
+   "routine": "BatimentInfligeDegat",
+   "dependency": null,
+   "register_scope": [
+    "EAX",
+    "EBX",
+    "ECX",
+    "EDX",
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": true,
+   "result": "equal",
+   "capture_reproduced": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-type30-init",
+   "routine": "ProjectileInit",
+   "dependency": null,
+   "register_scope": [
+    "ESI",
+    "EDI",
+    "EBP"
+   ],
+   "native": true,
+   "result": "equal",
+   "capture_reproduced": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  },
+  {
+   "case": "f9176-type30-first-impact",
+   "routine": "ProjectileAvance",
+   "dependency": {
+    "name": "InfligeDegat",
+    "address": 4524148,
+    "arguments": [
+     11315,
+     4,
+     0,
+     30,
+     0
+    ]
+   },
+   "register_scope": [],
+   "native": true,
+   "result": "equal",
+   "stop_equal": true,
+   "dependency_arguments_equal": true,
+   "state_equal": true,
+   "registers_equal": true,
+   "native_fault": null,
+   "native_limit": false,
+   "unmodeled_native_writes": []
+  }
+ ],
+ "seconds": 17.218,
+ "summary": {
+  "cases": 36,
+  "equal": 36,
+  "mismatches": 0,
+  "dependency_not_compared": 0,
+  "dependency_stops": 22
+ },
+ "source_sha256": {
+  "combate_raid_vivo.py": "fbc33ad6020890d4f22c1c0ee4d161330b186584a2fc047a0a679c7e373fe3fe",
+  "dano_estrutura_raid.py": "ac482c9f4c338d79a21b4e134ecd8580cf52f9bc9ad5b68c16d6e07195bac32b",
+  "validar_combate_raid.py": "c864feeb017e382036c8c4230d1a46d64025eac6563cc4af34d3a0f7559e5b5c",
+  "bancada_combate_raid.py": "7bdb51398692579cec872ba8c179a246c3e6e18664bb3e50e2ba96df73775dee"
+ }
+}
