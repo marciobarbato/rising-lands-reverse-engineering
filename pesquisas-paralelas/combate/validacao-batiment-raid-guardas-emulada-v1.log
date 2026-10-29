@@ -1,0 +1,39 @@
+[lease] combat-solid-guarded-native waiting
+[lease] combat-solid-guarded-native granted slots [2]
+{"case": "f9000-solid-impact-source0-camera0", "result": "equal", "dependency": {"name": "VoixOffAsk", "address": 4301228, "arguments": [1, 3, 0]}}
+{"case": "f9000-solid-impact-source0-camera1", "result": "equal", "dependency": {"name": "PlayerResetAllie", "address": 4643019, "arguments": [0, 0]}}
+{"case": "f9000-solid-impact-source1-camera0", "result": "equal", "dependency": {"name": "VoixOffAsk", "address": 4301228, "arguments": [1, 3, 0]}}
+{"case": "f9000-solid-impact-source1-camera1", "result": "equal", "dependency": {"name": "PlayerResetAllie", "address": 4643019, "arguments": [0, 0]}}
+{"case": "f9000-solid-impact-source2-camera0", "result": "equal", "dependency": {"name": "VoixOffAsk", "address": 4301228, "arguments": [1, 3, 0]}}
+{"case": "f9000-solid-impact-source2-camera1", "result": "equal", "dependency": {"name": "PlayerResetAllie", "address": 4643019, "arguments": [0, 0]}}
+{"case": "f9000-solid-impact-source16-camera0", "result": "equal", "dependency": {"name": "VoixOffAsk", "address": 4301228, "arguments": [1, 3, 0]}}
+{"case": "f9000-solid-impact-source16-camera1", "result": "equal", "dependency": {"name": "PlayerResetAllie", "address": 4643019, "arguments": [4, 0]}}
+{"case": "f9000-solid-impact-mode4-dir29", "result": "equal", "dependency": {"name": "PlayerResetAllie", "address": 4643019, "arguments": [4, 0]}}
+{"case": "f9000-solid-impact-mode4-dir30", "result": "equal", "dependency": {"name": "PlayerResetAllie", "address": 4643019, "arguments": [4, 0]}}
+{"case": "f9000-solid-threshold-599", "result": "equal", "dependency": null}
+{"case": "f9000-solid-threshold-600", "result": "equal", "dependency": null}
+{"case": "f9000-solid-threshold-601", "result": "equal", "dependency": null}
+{"case": "f9000-solid-threshold-599", "result": "equal", "dependency": null}
+{"case": "f9000-solid-threshold-600", "result": "equal", "dependency": null}
+{"case": "f9000-solid-threshold-601", "result": "equal", "dependency": null}
+{"case": "f9000-type30-init", "result": "equal", "dependency": null}
+{"case": "f9000-type30-first-impact", "result": "equal", "dependency": {"name": "InfligeDegat", "address": 4524148, "arguments": [13885, 4, 0, 30, 0]}}
+{"case": "f9176-solid-impact-source0-camera0", "result": "equal", "dependency": {"name": "VoixOffAsk", "address": 4301228, "arguments": [1, 3, 0]}}
+{"case": "f9176-solid-impact-source0-camera1", "result": "equal", "dependency": {"name": "PlayerResetAllie", "address": 4643019, "arguments": [0, 0]}}
+{"case": "f9176-solid-impact-source1-camera0", "result": "equal", "dependency": {"name": "VoixOffAsk", "address": 4301228, "arguments": [1, 3, 0]}}
+{"case": "f9176-solid-impact-source1-camera1", "result": "equal", "dependency": {"name": "PlayerResetAllie", "address": 4643019, "arguments": [0, 0]}}
+{"case": "f9176-solid-impact-source2-camera0", "result": "equal", "dependency": {"name": "VoixOffAsk", "address": 4301228, "arguments": [1, 3, 0]}}
+{"case": "f9176-solid-impact-source2-camera1", "result": "equal", "dependency": {"name": "PlayerResetAllie", "address": 4643019, "arguments": [0, 0]}}
+{"case": "f9176-solid-impact-source16-camera0", "result": "equal", "dependency": {"name": "VoixOffAsk", "address": 4301228, "arguments": [1, 3, 0]}}
+{"case": "f9176-solid-impact-source16-camera1", "result": "equal", "dependency": {"name": "PlayerResetAllie", "address": 4643019, "arguments": [4, 0]}}
+{"case": "f9176-solid-impact-mode4-dir29", "result": "equal", "dependency": {"name": "PlayerResetAllie", "address": 4643019, "arguments": [4, 0]}}
+{"case": "f9176-solid-impact-mode4-dir30", "result": "equal", "dependency": {"name": "PlayerResetAllie", "address": 4643019, "arguments": [4, 0]}}
+{"case": "f9176-solid-threshold-599", "result": "equal", "dependency": null}
+{"case": "f9176-solid-threshold-600", "result": "equal", "dependency": null}
+{"case": "f9176-solid-threshold-601", "result": "equal", "dependency": null}
+{"case": "f9176-solid-threshold-599", "result": "equal", "dependency": null}
+{"case": "f9176-solid-threshold-600", "result": "equal", "dependency": null}
+{"case": "f9176-solid-threshold-601", "result": "equal", "dependency": null}
+{"case": "f9176-type30-init", "result": "equal", "dependency": null}
+{"case": "f9176-type30-first-impact", "result": "equal", "dependency": {"name": "InfligeDegat", "address": 4524148, "arguments": [11315, 4, 0, 30, 0]}}
+{"cases": 36, "equal": 36, "mismatches": 0, "dependency_not_compared": 0, "dependency_stops": 22}

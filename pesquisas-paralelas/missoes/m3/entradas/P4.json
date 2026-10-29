@@ -1,0 +1,216 @@
+{
+ "description": "Select unit 13 (14,16); minimap press (53,64) with it selected (move to field (26,32)); right click deselects; minimap press (46,49) sets view (10,16); select unit 13 at (26,32); press field (27,32): harvest order. No cave exists.",
+ "frames": [
+  {
+   "cursor": [
+    464,
+    528
+   ],
+   "frame": 130,
+   "messages": [
+    [
+     512,
+     0,
+     34603472
+    ]
+   ]
+  },
+  {
+   "frame": 131,
+   "messages": [
+    [
+     513,
+     1,
+     34603472
+    ]
+   ]
+  },
+  {
+   "frame": 133,
+   "messages": [
+    [
+     514,
+     0,
+     34603472
+    ]
+   ]
+  },
+  {
+   "cursor": [
+    53,
+    64
+   ],
+   "frame": 140,
+   "messages": [
+    [
+     512,
+     0,
+     4194357
+    ]
+   ]
+  },
+  {
+   "frame": 141,
+   "messages": [
+    [
+     513,
+     1,
+     4194357
+    ]
+   ]
+  },
+  {
+   "frame": 143,
+   "messages": [
+    [
+     514,
+     0,
+     4194357
+    ]
+   ]
+  },
+  {
+   "cursor": [
+    400,
+    272
+   ],
+   "frame": 410,
+   "messages": [
+    [
+     512,
+     0,
+     17826192
+    ]
+   ]
+  },
+  {
+   "frame": 411,
+   "messages": [
+    [
+     516,
+     2,
+     17826192
+    ]
+   ]
+  },
+  {
+   "frame": 413,
+   "messages": [
+    [
+     517,
+     0,
+     17826192
+    ]
+   ]
+  },
+  {
+   "cursor": [
+    46,
+    49
+   ],
+   "frame": 420,
+   "messages": [
+    [
+     512,
+     0,
+     3211310
+    ]
+   ]
+  },
+  {
+   "frame": 421,
+   "messages": [
+    [
+     513,
+     1,
+     3211310
+    ]
+   ]
+  },
+  {
+   "frame": 423,
+   "messages": [
+    [
+     514,
+     0,
+     3211310
+    ]
+   ]
+  },
+  {
+   "cursor": [
+    528,
+    528
+   ],
+   "frame": 430,
+   "messages": [
+    [
+     512,
+     0,
+     34603536
+    ]
+   ]
+  },
+  {
+   "frame": 431,
+   "messages": [
+    [
+     513,
+     1,
+     34603536
+    ]
+   ]
+  },
+  {
+   "frame": 433,
+   "messages": [
+    [
+     514,
+     0,
+     34603536
+    ]
+   ]
+  },
+  {
+   "cursor": [
+    560,
+    528
+   ],
+   "frame": 440,
+   "messages": [
+    [
+     512,
+     0,
+     34603568
+    ]
+   ]
+  },
+  {
+   "frame": 441,
+   "messages": [
+    [
+     513,
+     1,
+     34603568
+    ]
+   ]
+  },
+  {
+   "frame": 443,
+   "messages": [
+    [
+     514,
+     0,
+     34603568
+    ]
+   ]
+  }
+ ],
+ "name": "P4",
+ "schema": "rising-lands/monde01-scripted-input/1",
+ "start": {
+  "checkpoint": "M2.2 frame128",
+  "frame": 128
+ },
+ "stop_frame": 3129
+}

@@ -634,3 +634,15 @@ See [SELECTION_ORDERS](SELECTION_ORDERS.md).
   - action mode `0x496207` and the HUD rectangles;
   - the real PlaySnd return values;
   - the type-6 SetDeplaceEngin branch and BagContient modes other than 1.
+
+### M3: construction routines for Economy's build path on `feat/re-core`
+
+See [CONSTRUCTION](CONSTRUCTION.md).
+- **Captured first.** 153 declared leaf calls at the same frame-1 `ProcessInputGame` pause as SELECTION_ORDERS (`bancada_selecao_ordens`). The capture (`evidencias/construcao-core/`) was committed before the translation (`0a0ff90`, 149 cases); four DeplaceEngin advance cases were added and captured natively before their comparison (`8869dbe`). All return; the path reproduces; the code is unchanged.
+- **Translated.** `construcao_core.ConstrucaoCore` covers PlaceBatiment (with BatimentModifyTerrain, Chemin_ModifieZone modes 3/1, MurAjoute/MurRetire through Core's `CoresEstruturas` at the original addresses), ResetCheminTerrainModify, BatimentCollision, BatimentConstructible, BatimentPosable, EnginOccupeCase, TerrainEstHerbe, ValideHerse, ChercheMurCombinaisons, and DeplaceEngin's register exit over M2.3's live world.
+- **CAVE target.** Click (21,12) → reference (23,14) → record origin (19,10); PlaceBatiment writes tiles 0x306.., 7 collision cells, tags 0x8020..0x8026 and colour 0xfd. PlaceBatiment reaches neither BatimentModifyMap, BatimentAlloc nor discovery.
+- **Native differential** (`validar_construcao_core.py` → `relatorios/construcao-core-emulada.json`): **153 comparisons, 0 mismatches**, registers EAX..EBP and 7,789 changed bytes. Two DeplaceEngin cases carry declared uncertain EAX bits (`_incertos`: at the target after EnginNextCase, upper half; after CheminCalcul, all). 135 cases replay without a CPU; four mutations are detected.
+- **Economy adapter.** `provedor_construcao(core, outros=None)` is Economy's `externo` for PlaceBatiment, BatimentConstructible, BatimentCollision, ResetCheminTerrainModify and DeplaceEngin; chain it behind `provedor_core(SelecaoOrdens(...), ...)`. A CPU-free test replays Economy's own native capture (CreerBatiment, CalculConstruireBatiment outside ResetOrdre/DeplaceEngin) through `OrdensEconomia` with it: registers and every final stored byte equal, food/stone 20/24 and origin (19,10) for `build_tick_arrived_cave`.
+- **World-model correction.** Remplit with the same colour now follows the original (terminates on a full stack or an empty one); only the non-terminating two-cell case is refused.
+- **Named dependencies:** Economy's BonusGetValEngin value (`bonus`) after a DeplaceEngin step; Audio for CalculNextCase's local sound (types 11..16, unchanged from M2.3).
+- **Deferred to the scripted-input captures:** the real walk over frames, BatimentConstructible with the builder actually on the footprint, the construction progress (BatimentConstruction → BatimentModifyMap and discovery), the CAVE cursor's pixel/view into BatimentPosable, and walls/gates actually built.

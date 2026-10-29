@@ -1,0 +1,51 @@
+[lease] macos-speed-final-proof waiting
+[lease] macos-speed-final-proof granted slots [1]
+load_tail
+frame64
+frame128
+{
+ "schema": "rising-lands/macos-live-proof/1",
+ "source_revision": "604046b2b6602cc73d6acea3fd78661465bf39c5",
+ "library_sha256": "cd074e202c83ee9324d2364b868ba066f9df31f16c4bd7f8f64ee98be99d29f0",
+ "logic_only": false,
+ "frames_requested": 128,
+ "frames_completed": 128,
+ "last_phase": "frame128",
+ "first_stop": null,
+ "engine_only_extension": {
+  "frames": 0,
+  "seconds": 0.0,
+  "last_phase": null,
+  "scope": "ABI only beyond 128; no snapshots/render/equality claim"
+ },
+ "phases_equal": 257,
+ "checkpoints_equal": 11,
+ "full_surfaces_equal": 128,
+ "transfer": {
+  "format": "indexed8-rgb24/1",
+  "bytes": 82164573,
+  "accepted_surfaces_equal": 128
+ },
+ "projection": {
+  "path": "persistent-graphics-regions",
+  "bulk_calls": 257,
+  "bulk_buffer_allocations": 2,
+  "region_buffer_allocations": 36,
+  "retained_graphics_bytes": 1746372,
+  "abi_limitation": "ABI 1.1 bulk snapshot has no region filter"
+ },
+ "phase_surfaces_equal": 257,
+ "timing": {
+  "rust_seconds": 1.1355041740462184,
+  "projection_seconds": 3.2665075858822092,
+  "render_seconds": 8.246009920607321,
+  "total_seconds": 12.66042471327819,
+  "transfer_seconds": 0.2718249602476135,
+  "frames_per_second": 9.897736529324408,
+  "rust_projection_render_transfer_fps": 9.907238341045746,
+  "rust_frames_per_second": 112.72525713744318,
+  "render_frames_per_second": 15.522658986877955,
+  "wall_seconds": 13.272361500072293,
+  "scope": "Phase calls + bulk projection/hash/oracle comparison + render + raw indexed JSON encode/decode/hash; initialization/IPC/native canvas excluded"
+ }
+}

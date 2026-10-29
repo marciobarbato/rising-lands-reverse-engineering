@@ -66,6 +66,7 @@ class GraphicsInspectionRenderer:
         self.initial_cache = self.api.carregar_cache_inicial(self.folder/'cache-terreno-inicial-m22-v2.json', catalogo=self.catalog)
         if _sha(self.initial_pixels) != self.phase_hashes['load_tail']:
             raise StateValidationError('Initial surface does not match accepted load-tail hash')
+        self.palette=self.catalog.paleta()
         self.reset()
 
     def reset(self):
@@ -93,7 +94,7 @@ class GraphicsInspectionRenderer:
                     raise StateValidationError('Incomplete Graphics region: ' + label)
                 regions.append(dict(name=label, base=hex(start), bytes=end - start))
             result = self.api.renderizar_quadro(memory, superficie_anterior=self.pixels,
-                         cache=self.cache, catalogo=self.catalog, habitado=habitation_query(self.root, memory), hud=True)
+                         cache=self.cache, catalogo=self.catalog, paleta=getattr(self,'palette',None), habitado=habitation_query(self.root, memory), hud=True)
             require_version(result.versao)
             if ((result.largura, result.altura) != (800, 600) or len(result.pixels) != 480000
                     or len(result.rgba) != 1920000 or result.cache is None):
@@ -132,11 +133,19 @@ class GraphicsInspectionRenderer:
         self.records.append(record)
         return record
 
-    def present(self):
+    def present(self, raw=False):
         if self.index < 0:
             return dict(status='undrawn', api_called=False, version=[1, 5], hud=True,
                         detail='Initial surface is available only after the load tail; select a phase')
         record = dict(self.records[-1])
+        if raw:
+            record['frame']=dict(format='indexed8-rgb24/1',width=800,height=600,stride=800,
+                                 pixels=base64.b64encode(self.pixels).decode('ascii'),
+                                 palette=base64.b64encode(self.palette).decode('ascii'),
+                                 pixels_sha256=record['pixels_sha256'],generation=self.index)
+            if record['status']=='undrawn' and self.last and self.last.parada:
+                record['inherited_stop']=self.last.parada
+            return record
         # Use only Graphics' palette expansion and PNG encoder. No game drawing.
         if self.last is None:
             graphics = sys.modules['graficos']

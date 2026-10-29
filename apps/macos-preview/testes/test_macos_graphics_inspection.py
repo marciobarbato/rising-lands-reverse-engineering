@@ -45,6 +45,17 @@ class GraphicsInspectionTests(unittest.TestCase):
             return r.consume(NS(phase_index=index, phase_name=name), memory=NS(phase_name='captured-entry',summary_sha256='captured-summary',
                     ler_mundo=Mock(side_effect=lambda address,size: bytes(size))))
 
+    def test_raw_indexed_transfer_keeps_exact_pixels_palette_without_png(self):
+        import base64
+        r=self.renderer();r.palette=bytes(range(256))*3
+        self.consume(r,0,'load_tail');self.consume(r,1,'between_frames')
+        wire=r.present(raw=True)
+        self.assertNotIn('image',wire)
+        self.assertEqual(base64.b64decode(wire['frame']['pixels']),r.pixels)
+        self.assertEqual(base64.b64decode(wire['frame']['palette']),r.palette)
+        self.assertEqual(wire['frame']['pixels_sha256'],_sha(r.pixels))
+        r.encode_png.assert_not_called()
+
     def test_pixels_and_cache_chain_with_undrawn_frame(self):
         r=self.renderer(); self.consume(r,0,'load_tail')
         self.assertEqual(self.consume(r,1,'between_frames')['status'],'full')
