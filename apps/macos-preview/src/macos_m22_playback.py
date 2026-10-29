@@ -10,7 +10,7 @@ import types
 from macos_state_consumer import (MacOSAcceptedImage, MacOSMemoryBlock, StateValidationError,
                                   RuntimeContractPending, _source_root, _sha)
 
-CONTRACT = 'rising-lands/macos-state-consumer/3'
+CONTRACT = 'rising-lands/macos-state-consumer/5'
 SCENARIO = 'MONDE01/display-v2/M2.2-accepted-evidence'
 MISSIONS = 'pesquisas-paralelas/missoes/'
 EVIDENCE = MISSIONS + 'evidencias/'

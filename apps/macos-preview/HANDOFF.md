@@ -512,3 +512,162 @@ preserved. The separate Audio branch supplies a Python reference; its first
 old-watchdog native failure remains historical and the coordinator should
 rerun its merged candidate with this robustness fix. C requires no work.
 There is no milestone claim, live frame plumbing or new game feature.
+
+
+## Graphics 1.3 adoption — separate assets repository
+
+Base `cb3e3245d919eee47b9c05b07a296032fd19a3e9` was fetched and fast-forwarded
+into this dedicated macOS branch with a clean tree. The published additive
+Graphics 1.3 contract retains all 1.2 signatures/formats and cache/pixel chaining.
+Its normal bodies for types 1/8 remove the previous M2.2 unit stop. The consumer
+now accepts exactly (1,3), refuses 1.2/1.4/other versions, and pins the committed
+128-frame 1.3 reference. Current consumer contract is v4; source snapshot bytes
+and accepted M1/M2 identities remain hash-pinned and unchanged.
+
+The native page labels 1.3 and tests no inherited unit stop, retaining the
+explicit HUD/cursor limitation. Generic partial-result tests remain in place
+for records outside the provider domain. No renderer or live delivery was
+implemented. Python remains evidence inspection/reference; the native Rust C ABI
+is the future engine path, with the current apply_frame still reserved.
+
+The large asset payload branch is not merged here. Asset data moves to the
+separate public rising-lands-assets repository; this small app update uses the
+existing explicit read-only CD/runtime inputs. Current full playback and exact
+coordinator native-build results will follow after committed validation.
+
+The full real-capture validation passed on implementation `0e10276`: 257/257
+phase summaries, 11/11 memory checkpoints, 128/128 Graphics 1.3 chained hashes,
+128 supported-playfield full results, 129 undrawn phases, zero partial results
+and no named unit stops. HUD/cursor remain absent. See the new
+[per-phase v4 report](validation/m3-m22-render-v4.json); older 1.2 reports remain
+historical and unchanged. The exact committed native build follows separately.
+
+
+### Graphics 1.3 native validation and integration handoff
+
+The exact coordinator build passed on committed revision
+`6d03502ba7140ce0f01c0243b1b3e6900b0d445b`, containing latest fetched main
+`ea3175b2e903413d8d8bcde796d0910ff524af9f`. Implementation is `0e10276`;
+subsequent commits record evidence/docs without changing executable code.
+
+```sh
+RISING_PYTHON_RUNTIME='/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python' \
+  ./compilar-jogável --development-ref HEAD \
+  --inputs-root '/Users/marcio/git/Rising Lands' \
+  --data-root '/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable'
+```
+
+First attempt exit 0: **80/80 app tests, zero skips**, 47.870 seconds; ARM64
+compile, bundled CPython 3.12.14 and strict deep signature/relocation checks
+passed. Exercise smoke **27/27**, checks 21.514 seconds; inspection **9/9**,
+checks 9.639 seconds. Both have visible native windows, validated ready signals,
+empty Python stderr and retained before/after/final screenshots. Existing
+readiness/check budgets were not changed. No new original emulation was needed.
+
+The current [structured validation](validation/m3-preparation.json) includes
+artifact hashes and screenshot paths/hashes. Saved
+[full discovery](validation/m3-graphics13-consumer-tests.log),
+[exercise](validation/m3-graphics13-native-smoke.json),
+[inspection](validation/m3-graphics13-native-inspection-smoke.json) and
+[exact build](validation/m3-graphics13-build.log) make the result reproducible.
+No older report/capture was regenerated to adopt the new API. Full Graphics 1.3
+chain verification covers all 128 drawing phases; complete post-HUD surfaces,
+cursor, unsupported provider states and independent mid-sequence cache remain
+outside this inspection boundary. Live delivery still awaits the native Rust
+frame ABI; the published pilot routine ABI is not a live-frame implementation.
+
+Review/integrate only feat/codex-macos-m3-preparation. The separate assets DATA
+release and clean tooling branch are delivered independently. This app branch
+does not include the old asset payload commits and claims no milestone.
+
+
+### Final latest-main native refresh
+
+Main advanced to `5fbef8252f5f63afcdbdaba56425da479073cec8` with a coordinator
+common Rust-validation hook only. It was merged into this feature and the exact
+coordinator build ran again on `585684fef34ecedeb904b97681421a7b2e85c63a`.
+Consumer, Graphics and reference sources did not change. **80/80 tests, zero
+skips**, 47.279 seconds; ARM64 compile/signature/relocation and native exercise
+**27/27** plus inspection **9/9** all passed. No readiness budget or assertion
+was relaxed. Earlier passing results remain preserved. Current
+[full discovery](validation/m3-graphics13-latest-consumer-tests.log),
+[exercise](validation/m3-graphics13-latest-native-smoke.json),
+[inspection](validation/m3-graphics13-latest-native-inspection-smoke.json) and
+[exact build](validation/m3-graphics13-latest-build.log) identify this final
+merged checkout. Structured validation records all hashes and screenshot paths.
+The final report-only commit changes no executable code. No merge into or push
+to the code repository's main was performed.
+
+
+## Graphics 1.4 full HUD/cursor adoption
+
+Latest main `ccbdcf0b1e6c35881fdd150ac7d3cc4ddc57fc38` was merged into this
+feature after checking ownership and the clean tree. Graphics 1.4 is additive:
+default hud=False keeps 1.3 pixels; this consumer explicitly opts into hud=True.
+No Graphics implementation or other front is edited. Consumer contract v5
+updates the render verification reference from pre-HUD to full 800×600 phase-end.
+
+Before rendering, the adapter reads every region from Graphics' own
+regioes_necessarias(memory,hud=True), including minimap and five-player table.
+It refuses missing/short regions, incompatible module/result versions and
+chain/full-phase-end mismatches before publishing state. Unsupported HUD states
+retain their named stops and can remain explicitly partial. Both pixels and
+cache are carried in phase order; no independent start or fallback is added.
+
+The 1.4 full 128 reference is hash-pinned. Tests cover HUD opt-in, both additional
+regions, failed preflight without render/publication, full phase-end mismatch
+even if the chain hash matches, future/older version refusal and HUD partial
+stop inheritance. The real worker confirms the complete native frame 1 surface
+and original minimap/player regions. No original snapshot is patched or copied
+to invent state. Full playback/native build results follow after validation.
+
+The real full-sequence check passed on implementation cf8c15a: 257/257 phase
+summaries, 11/11 memory checkpoints, 128/128 chained/full-native surface hashes,
+and 257/257 phase-end surface hashes. Results are 128 full and 129 undrawn, zero
+partial/named stops in accepted M2.2. HUD/cursor pixels are included. Every
+drawing record declares the required minimap/player buffers from captured
+state. See [per-phase v5 proof](validation/m3-m22-render-v5.json); old 1.3
+reports are retained as historical. The exact committed native build follows.
+
+
+### Graphics 1.4 delivery validation
+
+The exact coordinator build passed on committed checkout
+`b4e3b6266e21d64ce3a9c87961cae0702ce0e85c`, containing latest fetched main
+`b3ebdfb93200cc8ac3563eb10128cf98dd07fa6b`. The latest-main merge added
+Core selection/orders and the small separate-assets tooling only; Graphics
+providers, reference hashes and this consumer did not change after the full
+sequence proof. Implementation is cf8c15a; final evidence/docs commits change
+no executable code.
+
+```sh
+RISING_PYTHON_RUNTIME='/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python' \
+  ./compilar-jogável --development-ref HEAD \
+  --inputs-root '/Users/marcio/git/Rising Lands' \
+  --data-root '/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable'
+```
+
+First attempt exit 0. **82/82 app tests, zero skips**, 46.108 seconds; ARM64
+app/bundled CPython 3.12.14, strict deep signature and relocated source/runtime
+verification passed. Exercise smoke **27/27** (checks 11.907 seconds); native
+inspection **9/9** (checks 6.597 seconds), including the full native phase-end
+surface and enabled HUD/cursor. Both windows were visible, readiness signals
+were validated, stderr was empty, and before/after/final PNGs remain preserved
+with hashes. Existing smoke deadlines/assertions were not relaxed.
+
+Saved [full discovery](validation/m3-graphics14-consumer-tests.log),
+[exercise](validation/m3-graphics14-native-smoke.json),
+[inspection](validation/m3-graphics14-native-inspection-smoke.json),
+[exact build](validation/m3-graphics14-build.log) and
+[structured results](validation/m3-preparation.json) identify the actual run.
+The [complete phase proof](validation/m3-m22-render-v5.json) shows 128 native
+full 800×600 matches and 257 phase-end matches. All 17 required Graphics regions
+per draw are read from captured blocks, including 16384 minimap bytes and 100
+player-table bytes. No live inputs or game state are synthesized.
+
+The former HUD/cursor absence is removed; remaining limits are the published
+HUD/body domain, static palette (not live palette cycling), and no independent
+mid-sequence cache. Named unsupported stops remain visible. The reserved live
+apply_frame/native Rust frame ABI is unchanged. This is accepted-evidence
+inspection, not M3 acceptance. Review/integrate only this feature; no merge
+into or push to main was performed.
