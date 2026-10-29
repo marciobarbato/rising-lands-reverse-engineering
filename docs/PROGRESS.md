@@ -1,6 +1,6 @@
 # Consolidated progress — MONDE01
 
-Round: **CXR-20261028-08 (M1 ACCEPTED — strict Python MissionLoad composition equals the original)**. Reconciled at **28 October 2026, ~20:55 BRT**. Previous round main: `14c01228218b51d2e7d42a3c35cbd4119efa6b5b` (report publication `3df2d2e`). Current fetched/ancestry-verified main: `927c7e57e555eb0f55d509db35aa36fb70454e85`. [Roadmap](ROADMAP_MONDE01.md), [status](STATUS.md), [snapshots](progress/README.md), [M1 oracle review](M1_ORACLE_REVIEW.md), [M1 acceptance record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json).
+Round: **CXR-20261029-M2R1 (M2 round 1 — first-frame original capture integrated; frame composition pending)**. Current fetched/ancestry-verified main: `ec931d22a9ca6a4187b801bfe763b5c1e26ee311`. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)). [Roadmap](ROADMAP_MONDE01.md), [snapshots](progress/README.md), [M2R1 main reproduction](../integracao/validacao/cxr-20261029-m2r1-main-reproduction.txt).
 
 ## Resumo executivo
 
@@ -16,6 +16,27 @@ Nesta rodada a referência original foi integrada (`14c0122`) e a composição P
 **O que M1 não significa:** não há quadros da missão (M2), jogo interativo (M3) nem objetivo (M4). O app macOS continua no treino sintético. A estimativa global permanece em ~50% (40–60%): o carregamento era a menor incerteza, e o runtime de missão (eventos, IA em execução, despachantes, condições de fim) segue sendo o maior desconhecido.
 
 **Próximo resultado concreto (M2):** um oracle de quadros a partir do estado M1 aceito. São N quadros de `CalculGame 0x42c868` sem entrada humana, com comparação de estado completo por quadro. A mesma técnica do oracle de M1 deve servir aqui.
+
+## M2 status (live)
+
+**M2 is not accepted.** M2.1, the first frame, has an original reference. Its Python comparison is in progress.
+
+| Item | Original capture | Implementation | Native differential | Integrated / main reproduction | Whole-frame flow |
+|---|---|---|---|---|---|
+| Frame 0/1 original oracle (Missions) | Yes. It runs from the accepted M1 path through the load-state tail (frame 0), the ProgIteration window loop and frame 1, which returns at 0x475063. Integrity, segmentation, fill, boundary-return and Windows-input sensitivity checks all passed. | n/a | n/a | `bd1ec6a` integrated at `ec931d2`. Full missions native suite 117/117, 0 skips. Replay on main 7/7. | Reference only |
+| EvenementEnCours / TestFinDeMission (Missions) | Isolated, at frame 0/1 inputs | `fim_missao.py` | 38/38 cases. 10 named provider stops remain: influence, cave case, ally, research, illumination | Yes. Main 6/6 | No |
+| Frame foundations (Core) | Over the M1 post-load input | Live buffers | Passed | `89818f2` integrated. Main 11/11 | No |
+| Dispatcher loops, skeleton, IATestUtilite (AI/runtime) | 46 captures over the M1 post-load input | Yes | 23/23 hybrid cases | `3ad42cc` integrated. Main 5+4 | No |
+| Frame economy routines (Economy) | Over the M1 post-load input | Yes | 6,692 native entries | `c44c600` integrated. Main 6/6 | No |
+| Projectile/attack frame calls (Combat) | Over the M1 post-load input | ProjectileCalcul +1 clear corrected | Full combat native suite 250/250, 0 skips, before integration | `1727e96` integrated. Main 4/4 | No |
+| Static M1 render (Graphics, non-blocking) | n/a | Existing passes only. The Santuário facade is absent (stop 0x407DEF) | n/a | `da9da92` integrated | n/a |
+
+**Open M2.1 items:**
+1. Python composition of frames 0/1 compared phase by phase (AI/runtime).
+2. Reached providers still missing: Core GetBit/CalculFatigue/SetEnginCollision/Random/illumination; Economy BonusGetValEngin/state-7/type-2/ResetTableauHangar/BatimentGetCase/RechercheGetNbInvention; Combat EnginTrouveCible/PlayerEstAllie; Missions influence queries.
+3. **AffGame write set between frames.** The oracle does not execute AffGame, and frame 1 re-reads eight bytes it might write, including the game-state byte 0x4e2f78. Graphics is proving this from bytes. Until that is resolved, M2 acceptance is blocked.
+
+Missions also found that the M1 read footprint was under-counted by translation-block caching. The corrected value is 9,585 bytes instead of 1,757, with the same conclusion: 0 skip-derived reads. It is recorded as a new report; the M1 acceptance stands.
 
 ## Comparison windows and round boundaries
 

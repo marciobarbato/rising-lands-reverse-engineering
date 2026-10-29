@@ -74,6 +74,8 @@ class Captura:
         self.codigo = list(self.b.vinculos_declarados.codigo_protegido)
         self.escritas = []
         self.b.cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE, self._observar)
+        # Unicorn instruments hooks at translation time; flush so no cached block can miss this hook.
+        self.b.cpu.ctl_flush_tb()
 
     def _observar(self, cpu, acesso, endereco, tamanho, valor, dados):
         if not self.PILHA <= endereco < self.PILHA + 0x10000:
