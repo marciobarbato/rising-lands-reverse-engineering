@@ -747,3 +747,28 @@ These queries were validated earlier against synthetic captures, not at the exac
 - `validar_bonus_compartilhados --emular`: 11 tests, 454 calls.
 - All three reports are byte-identical to the committed ones.
 - `validar_quadro_economia --emular`: 12 tests, 0 skips. Fresh captures of 102 exact-frame calls and 6,692 M1-state entries equal the frozen ones.
+
+## Stage 23 (M2 round 4): display-scenario revalidation
+
+**Reference.** Missions' display scenario `exibicao` (real window loop, display path executed; [QUADRO1_EXIBICAO.md](../missoes/QUADRO1_EXIBICAO.md)) at main `81e0a26`. Original-first: both captures below were committed before any translation ran against them.
+
+**Captures** (intact RISING.EXE `6c556520…43fb`; Missions' `Isolamento` plus the two economy fragments; each run reproduces the committed display phase states, entry trace, boundaries and code hash):
+- `evidencias/captura-quadro1-economia-exibicao.json` (`--cenario exibicao`, `quadro` set): 104 calls = the v1 set of 102 plus 2 `BagContientTroupe` calls from AffGame → `BatimentEstHabiter` between frames. Committed in `3f972f5` with the exact producing script.
+- `evidencias/captura-consultas-economia-exibicao-v2.json` (`--conjunto consultas`, commit `a1b8e65`): 77 calls of PlayerGetType, PlayerEstAllie, TestRessource, BatimentGetType, BatimentEstHabiter, IntToBCD, BCDToInt and BagVide (PlayerGetType 27, PlayerEstAllie 10 (7 from combat targeting, 3 from AffDrapeauAlliance), TestRessource 6, BatimentGetType 2, BatimentEstHabiter 2, IntToBCD 19, BCDToInt 8, BagVide 3 (AffDeplaceEngin, unit Bags)). New record fields: `stack_arguments`, the callee-popped stack bytes (TestRessource's player), and `caller_stack_changes`/`caller_stack_written_unchanged`, writes at or above the exit ESP (IntToBCD's caller buffer). The first query capture (`captura-consultas-economia-exibicao.json`, `882c20c`) lacked the caller-frame writes because the isolation dropped every stack write; it is kept and equals v2 without those fields.
+
+**Behavior and branches vs v1** (`comparar_quadro1_economia_cenarios.py` → `validacao-quadro1-economia-v1-vs-exibicao.json`; CPU-free, Missions' allocation matching for relocation, stack relative to entry ESP): no routine changed. All 102 shared calls have identical reads, changed bytes, untouched writes and results after relocation (unit pool `0x4140d000` → `0x474a8000`, terrain grids moved). Only `PlayerAttaqueCalculSympa`'s unread incoming EAX/EDX differ. The new site is AffGame's `BatimentEstHabiter(0)` → `BagContientTroupe(0x49a0d4)` = 1, read-only.
+
+**API added:**
+- `quadro_economia`: `tipo_jogador(m, AL)`, `aliado(m, AL, DL)`, `recursos_suficientes(m, jogador, AX, DX, BX)`, `tipo_estrutura_viva(m, AX)`, `escrever_bcd(m, EAX, EDX)`, `ler_bcd(m, EAX, EDX)`, `bolsa_vazia(m, EAX)`. They read through `m.ler`, write through `m.vista`, and follow the original's index handling (no 0..3 protection).
+- `provedores_economia_quadro`: providers `PlayerGetType`, `PlayerEstAllie`, `TestRessource`, `BatimentGetType`, `BatimentEstHabiter`, `IntToBCD`, `BCDToInt`, `BagVide` (keywords in docs/ECONOMY.md); region `0x5080a8` added.
+- `Economia.vivo`/`da_memoria` (0x4e2ea8, 128 bytes) and `Mercado.vivo`/`da_memoria` (player records via `[0x5080a8]`, all market buffers) bind by identity; the constructors stay the copying fixture form. `_buffer_vivo` now lives in `economia` (re-exported by `bonus_unidades`).
+
+**Validation:**
+- Python: 104 display `quadro` calls direct and through providers over a `u8/u16/u32`-only memory; exact read sets for the `ler`/`vista` routines. Query calls through the live class forms, through the live functions (exact read sets for all but BatimentEstHabiter) and through providers over the word memory.
+- Native (under the lease): `validar_quadro_economia --emular` 23 tests, 0 skips; fresh reruns equal the frozen captures for 6,692 M1-state entries and 283 isolated calls (102 v1, 104 display `quadro`, 77 display `consultas`); 7,999 Python comparisons. Five deliberate query mutations are each detected.
+- Gate (under the lease): `scripts/check.py --domain economy` 474 tests, 202 optional skips, 0 failures, docs OK.
+
+**Gaps:**
+- `BagVide` is new; its only evidence is the display-frame calls (3 calls, all on empty unit Bags, so the AH = high-count-byte path is unexercised natively). The class forms of PlayerEstAllie/TestRessource still reject player 4, which the original reads.
+- Field growth (counter 128, M2.2) not started; Core's live tile-grid provider for `[0x507d70]` is not on main yet.
+- Still named dependencies, unreached in frames 0/1: `InitGameZone` (Core translates it), the `MAJSympathie` counter branch `0x47515d`, the market state-3/4/5 branches, `AnimBallonStatic`, `InventionSetEffet`, and an active `CalculTroupe` without the world-joined producer.

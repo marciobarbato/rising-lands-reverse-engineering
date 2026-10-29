@@ -7,6 +7,7 @@ The interface (``u8/u16/u32(endereco, valor=None)``) is the one ai-runtime's
 outside every segment raises ``AcessoForaDosSegmentos`` naming the address
 instead of reading or writing invented bytes.
 """
+from bisect import bisect_right
 import struct
 
 MASCARA = 0xffffffff
@@ -32,11 +33,14 @@ class MemoriaQuadro:
         for (_, fim, _), (base, _, _) in zip(self.segmentos, self.segmentos[1:]):
             if base < fim:
                 raise ValueError(f'Segments overlap at 0x{base:08x}')
+        self._bases = [base for base, _, _ in self.segmentos]
 
     def _local(self, endereco, largura):
         endereco &= MASCARA
-        for base, fim, view in self.segmentos:
-            if base <= endereco and endereco + largura <= fim:
+        i = bisect_right(self._bases, endereco) - 1
+        if i >= 0:
+            base, fim, view = self.segmentos[i]
+            if endereco + largura <= fim:
                 return view, endereco - base
         raise AcessoForaDosSegmentos(endereco, largura)
 
@@ -56,6 +60,11 @@ class MemoriaQuadro:
 
     def u32(self, endereco, valor=None):
         return self._acesso(4, endereco, valor)
+
+    def vista(self, endereco, tamanho):
+        """Writable live memoryview of ``tamanho`` bytes at ``endereco`` (no copy)."""
+        view, o = self._local(endereco, tamanho)
+        return view[o:o + tamanho]
 
     def ler(self, endereco, tamanho):
         view, o = self._local(endereco, tamanho)

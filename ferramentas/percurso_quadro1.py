@@ -1,7 +1,8 @@
 """Shared runner: the committed MONDE01 first-frame path with isolated Core callees.
 
-Reruns Missions' committed path (accepted M1 startup and MissionLoad, then
-load_tail = frame 0, between_frames, frame1) on the intact executable with
+Reruns one of Missions' committed paths ('v1': display skipped; 'exibicao':
+display executed, the M2 reference) - startup, MissionLoad, then load_tail =
+frame 0, between_frames, frame1 - on the intact executable with
 ``oraculo_quadro_missao.Isolamento`` pausing at the given routine entries. An
 optional native block-coverage recorder lists the basic blocks each isolated
 case executed (hook added, then the translation cache flushed). The run must
@@ -36,27 +37,65 @@ class Cobertura:
         return blocos
 
 
-def executar(rotinas, perturbacoes=None, observador=None, cobertura=None, limite=3600):
+def _isolamento_limitado(bancada, rotinas, casos, observador, limites):
+    """Isolamento that isolates only the first ``limites[name]`` calls of a routine per phase.
+
+    Later calls are not paused: the phase resumes and executes them natively as usual.
+    """
+    from oraculo_quadro_missao import Isolamento
+
+    class IsolamentoLimitado(Isolamento):
+        def executar(self, regs):
+            nome = self.entradas[regs['EIP']]
+            chave = (nome, self.b.fase)
+            self.vistos[chave] = self.vistos.get(chave, 0) + 1
+            if nome in limites and self.vistos[chave] > limites[nome]:
+                return
+            super().executar(regs)
+
+    iso = IsolamentoLimitado(bancada, rotinas, casos, observador)
+    iso.vistos = {}
+    return iso
+
+
+def _bancada(cenario):
+    """(bench after MissionLoad, committed frame capture) for the 'v1' or 'exibicao' scenario."""
+    import capturar_isolados_quadro1 as ci
+    import capturar_quadro_missao_original as cq
+    if cenario == 'v1':
+        from oraculo_quadro_missao import BancadaQuadroMissaoOriginal
+        cap = json.loads(ci.CAPTURA.read_bytes())
+        ni = cap['named_inputs']['m1']
+        b = BancadaQuadroMissaoOriginal(cq.entradas_quadro(ni['allocation_fill'], ni['clock_ms'][0]), segundos=120)
+    elif cenario == 'exibicao':
+        import cenarios_oraculo
+        cap = json.loads(cenarios_oraculo.caminho('exibicao', 'captura_quadro').read_bytes())
+        ni = cap['named_inputs']['m1']
+        b, _, _ = cenarios_oraculo.bancada('exibicao', ni['allocation_fill'], ni['clock_ms'][0], segundos=300)
+    else:
+        raise ValueError(f'Unknown scenario {cenario!r}')
+    b.iniciar_relogio()
+    b.executar_inicio()
+    b.executar_mission_load(60)
+    return b, cap
+
+
+def executar(rotinas, perturbacoes=None, observador=None, cobertura=None, limite=3600, cenario='v1',
+             limites=None):
     """Returns (bench, isolation, frame capture, reproduction, coverage or None).
 
     ``cobertura``: a dict to receive the ``Cobertura`` recorder (key 'recorder')
     before the phases run, so an observer can drain it per case.
     ``perturbacoes``: a dict, or a callable(bench) returning one.
+    ``cenario``: 'v1' (display skipped) or 'exibicao' (display executed, the M2 reference).
+    ``limites``: {routine: n} isolates only the first n calls of that routine in each phase.
     """
-    import capturar_isolados_quadro1 as ci
-    import capturar_quadro_missao_original as cq
-    from oraculo_quadro_missao import BancadaQuadroMissaoOriginal, Isolamento
-    cap = json.loads(ci.CAPTURA.read_bytes())
-    ni = cap['named_inputs']['m1']
-    b = BancadaQuadroMissaoOriginal(cq.entradas_quadro(ni['allocation_fill'], ni['clock_ms'][0]), segundos=120)
-    b.iniciar_relogio()
-    b.executar_inicio()
-    b.executar_mission_load(60)
+    b, cap = _bancada(cenario)
     cob = Cobertura(b) if cobertura is not None else None
     if cob is not None:
         cobertura['recorder'] = cob
     casos = perturbacoes(b) if callable(perturbacoes) else perturbacoes
-    iso = Isolamento(b, rotinas, casos, observador)
+    iso = _isolamento_limitado(b, rotinas, casos, observador, limites or {})
     iso.instalar()
     resumos = {}
     for nome, correr in (('load_tail', lambda: b.executar_cauda_carga(limite)),

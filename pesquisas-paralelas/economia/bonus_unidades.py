@@ -6,7 +6,7 @@ conversion effects are performed by these queries.
 """
 import struct
 
-from economia import _i32
+from economia import _buffer_vivo, _i32
 
 BASE_BONUS_UNIDADES = 0x4dfba0
 TAMANHO_BONUS_UNIDADES = 4 * 26 * 18
@@ -49,18 +49,6 @@ def _dividir_assinado(n, d):
     if not d:
         raise ZeroDivisionError('BonusSetEngin signed integer division by zero')
     return -(abs(n) // d) if n < 0 else n // d
-
-
-def _buffer_vivo(buffer, tamanho, nome):
-    """Return ``buffer`` itself if it is a writable contiguous byte buffer of ``tamanho`` bytes."""
-    if isinstance(buffer, memoryview):
-        if buffer.readonly or buffer.ndim != 1 or buffer.format not in ('B', 'b') or not buffer.c_contiguous:
-            raise ValueError(f'{nome} view must be writable, one-dimensional and contiguous bytes')
-    elif not isinstance(buffer, bytearray):
-        raise ValueError(f'{nome} must be a writable bytearray or memoryview (live memory, not a copy)')
-    if len(buffer) != tamanho:
-        raise ValueError(f'{nome} must have {tamanho} bytes')
-    return buffer
 
 
 class BonusUnidades:

@@ -2,6 +2,8 @@
 
 Original-only. The intact executable (SHA-256 `6c556520…43fb`) runs the display code instead of skipping it, and the result is compared with the v1 frame capture. Nothing in the accepted M1 or v1 evidence was modified.
 
+**Superseded as the reference (Stage18):** the M2 reference is now the `-exibicao-v2` artifacts over Graphics' backend. They are equal to these except for 10 backend-pointer bytes; see [POLITICA_COMPARACAO_M2_1.md](POLITICA_COMPARACAO_M2_1.md).
+
 ## Scenario `exibicao`
 
 Bench: [oraculo_exibicao_missao.py](oraculo_exibicao_missao.py), scenario definitions in [cenarios_oraculo.py](cenarios_oraculo.py).
@@ -16,7 +18,7 @@ Bench: [oraculo_exibicao_missao.py](oraculo_exibicao_missao.py), scenario defini
 - RestoreAll;
 - menu and game AffGame.
 
-**DirectDraw** is the declared interim backend [exibicao_declarada.py](exibicao_declarada.py):
+**DirectDraw** is the declared interim backend `exibicao_declarada.py` (retired in Stage18; source at commit `3ff4b21`):
 - the `DirectDrawCreate` import plus COM vtables;
 - every call recorded, with traps on undeclared methods;
 - surfaces as declared regions;

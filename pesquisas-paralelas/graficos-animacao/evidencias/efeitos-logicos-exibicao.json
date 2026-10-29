@@ -1,0 +1,1109 @@
+{
+ "schema": "rising-lands/display-logic-effects/1",
+ "reproduced": [
+  {
+   "load_tail": true,
+   "between_frames": true,
+   "frame1": true
+  },
+  {
+   "load_tail": true,
+   "between_frames": true,
+   "frame1": true
+  }
+ ],
+ "value_changing_bytes_by_class": {
+  "bench_stack": 1619,
+  "dgroup": 33,
+  "heap/474": 245,
+  "heap/41c": 51744,
+  "declared_surface": 453300,
+  "heap/41d": 28512,
+  "heap/414": 25
+ },
+ "logic_read_bytes_by_class": {
+  "bench_stack": 264,
+  "dgroup": 8,
+  "heap/474": 0,
+  "heap/41c": 0,
+  "declared_surface": 14160,
+  "heap/41d": 0,
+  "heap/414": 0
+ },
+ "dgroup_and_logic_read_bytes": {
+  "0x4e17a4": {
+   "writes": [
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDLockSurface+0x72",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDUnlockSurface+0x54",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDLockSurface+0x72",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDUnlockSurface+0x54",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "DDLockSurface+0x72",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "DDUnlockSurface+0x54",
+     "old": 0,
+     "new": 0
+    }
+   ],
+   "write_count": 6,
+   "logic_readers": [
+    [
+     "load_tail",
+     "DDLockSurface"
+    ],
+    [
+     "load_tail",
+     "DDUnlockSurface"
+    ]
+   ]
+  },
+  "0x4e17a5": {
+   "writes": [
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDLockSurface+0x72",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDUnlockSurface+0x54",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDLockSurface+0x72",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDUnlockSurface+0x54",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "DDLockSurface+0x72",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "DDUnlockSurface+0x54",
+     "old": 0,
+     "new": 0
+    }
+   ],
+   "write_count": 6,
+   "logic_readers": [
+    [
+     "load_tail",
+     "DDLockSurface"
+    ],
+    [
+     "load_tail",
+     "DDUnlockSurface"
+    ]
+   ]
+  },
+  "0x4e17a6": {
+   "writes": [
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDLockSurface+0x72",
+     "old": 0,
+     "new": 8
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDUnlockSurface+0x54",
+     "old": 8,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDLockSurface+0x72",
+     "old": 0,
+     "new": 8
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDUnlockSurface+0x54",
+     "old": 8,
+     "new": 0
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "DDLockSurface+0x72",
+     "old": 0,
+     "new": 8
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "DDUnlockSurface+0x54",
+     "old": 8,
+     "new": 0
+    }
+   ],
+   "write_count": 6,
+   "logic_readers": [
+    [
+     "load_tail",
+     "DDLockSurface"
+    ],
+    [
+     "load_tail",
+     "DDUnlockSurface"
+    ]
+   ]
+  },
+  "0x4e17a7": {
+   "writes": [
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDLockSurface+0x72",
+     "old": 0,
+     "new": 96
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDUnlockSurface+0x54",
+     "old": 96,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDLockSurface+0x72",
+     "old": 0,
+     "new": 96
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDUnlockSurface+0x54",
+     "old": 96,
+     "new": 0
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "DDLockSurface+0x72",
+     "old": 0,
+     "new": 96
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "DDUnlockSurface+0x54",
+     "old": 96,
+     "new": 0
+    }
+   ],
+   "write_count": 6,
+   "logic_readers": [
+    [
+     "load_tail",
+     "DDLockSurface"
+    ],
+    [
+     "load_tail",
+     "DDUnlockSurface"
+    ]
+   ]
+  },
+  "0x4e17a8": {
+   "writes": [
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDLockSurface+0x83",
+     "old": 0,
+     "new": 1
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDUnlockSurface+0x23",
+     "old": 1,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDLockSurface+0x83",
+     "old": 0,
+     "new": 1
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDUnlockSurface+0x23",
+     "old": 1,
+     "new": 0
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "DDLockSurface+0x83",
+     "old": 0,
+     "new": 1
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "DDUnlockSurface+0x23",
+     "old": 1,
+     "new": 0
+    }
+   ],
+   "write_count": 6,
+   "logic_readers": [
+    [
+     "load_tail",
+     "DDLockSurface"
+    ],
+    [
+     "load_tail",
+     "DDUnlockSurface"
+    ]
+   ]
+  },
+  "0x4e17a9": {
+   "writes": [
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDLockSurface+0x83",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDUnlockSurface+0x23",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDLockSurface+0x83",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDUnlockSurface+0x23",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "DDLockSurface+0x83",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "DDUnlockSurface+0x23",
+     "old": 0,
+     "new": 0
+    }
+   ],
+   "write_count": 6,
+   "logic_readers": [
+    [
+     "load_tail",
+     "DDLockSurface"
+    ],
+    [
+     "load_tail",
+     "DDUnlockSurface"
+    ]
+   ]
+  },
+  "0x4e17aa": {
+   "writes": [
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDLockSurface+0x83",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDUnlockSurface+0x23",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDLockSurface+0x83",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDUnlockSurface+0x23",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "DDLockSurface+0x83",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "DDUnlockSurface+0x23",
+     "old": 0,
+     "new": 0
+    }
+   ],
+   "write_count": 6,
+   "logic_readers": [
+    [
+     "load_tail",
+     "DDLockSurface"
+    ],
+    [
+     "load_tail",
+     "DDUnlockSurface"
+    ]
+   ]
+  },
+  "0x4e17ab": {
+   "writes": [
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDLockSurface+0x83",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDUnlockSurface+0x23",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDLockSurface+0x83",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "DDUnlockSurface+0x23",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "DDLockSurface+0x83",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "DDUnlockSurface+0x23",
+     "old": 0,
+     "new": 0
+    }
+   ],
+   "write_count": 6,
+   "logic_readers": [
+    [
+     "load_tail",
+     "DDLockSurface"
+    ],
+    [
+     "load_tail",
+     "DDUnlockSurface"
+    ]
+   ]
+  },
+  "0x49a04e": {
+   "writes": [
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "GetNumBob+0x1ac",
+     "old": 0,
+     "new": 1
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "GetNumBob+0x1ac",
+     "old": 1,
+     "new": 2
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "GetNumBob+0x1ac",
+     "old": 2,
+     "new": 3
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "GetNumBob+0x1ac",
+     "old": 3,
+     "new": 4
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "GetNumBob+0x1ac",
+     "old": 4,
+     "new": 5
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "GetNumBob+0x1ac",
+     "old": 5,
+     "new": 6
+    }
+   ],
+   "write_count": 76,
+   "logic_readers": []
+  },
+  "0x49a04f": {
+   "writes": [
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "GetNumBob+0x1ac",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "GetNumBob+0x1ac",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "GetNumBob+0x1ac",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "GetNumBob+0x1ac",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "GetNumBob+0x1ac",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "load_tail",
+     "root": "RestoreAll",
+     "writer": "GetNumBob+0x1ac",
+     "old": 0,
+     "new": 0
+    }
+   ],
+   "write_count": 76,
+   "logic_readers": []
+  },
+  "0x4e17ae": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "CalculFrame+0x3",
+     "old": 0,
+     "new": 1
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "CalculFrame+0x7e",
+     "old": 1,
+     "new": 0
+    }
+   ],
+   "write_count": 2,
+   "logic_readers": []
+  },
+  "0x4e17af": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "CalculFrame+0x3",
+     "old": 0,
+     "new": 0
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "CalculFrame+0x7e",
+     "old": 0,
+     "new": 0
+    }
+   ],
+   "write_count": 2,
+   "logic_readers": []
+  },
+  "0x4e17b4": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "CalculFrame+0x1b",
+     "old": 0,
+     "new": 126
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x4e17b5": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "CalculFrame+0x1b",
+     "old": 0,
+     "new": 52
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x4e17b6": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "CalculFrame+0x1b",
+     "old": 0,
+     "new": 18
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x4e17b7": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "CalculFrame+0x1b",
+     "old": 0,
+     "new": 0
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x4e17b0": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "CalculFrame+0x28",
+     "old": 0,
+     "new": 126
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x4e17b1": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "CalculFrame+0x28",
+     "old": 0,
+     "new": 52
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x4e17b2": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "CalculFrame+0x28",
+     "old": 0,
+     "new": 18
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x4e17b3": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "CalculFrame+0x28",
+     "old": 0,
+     "new": 0
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x496394": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "CalculFrame+0x5f",
+     "old": 120,
+     "new": 48
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x496395": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "CalculFrame+0x72",
+     "old": 120,
+     "new": 49
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x496396": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "CalculFrame+0x78",
+     "old": 120,
+     "new": 0
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x4963b5": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "utoa+0x39",
+     "old": 48,
+     "new": 0
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x49a02e": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "SaveCurrentClipping+0x12",
+     "old": 0,
+     "new": 31
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x49a02f": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "SaveCurrentClipping+0x12",
+     "old": 0,
+     "new": 3
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x49a032": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "SaveCurrentClipping+0x2a",
+     "old": 0,
+     "new": 31
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x49a033": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "SaveCurrentClipping+0x2a",
+     "old": 0,
+     "new": 2
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x49a042": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "AffGame+0x60e",
+     "old": 0,
+     "new": 144
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x49a043": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "AffGame+0x60e",
+     "old": 0,
+     "new": 1
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x49a044": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "AffGame+0x61a",
+     "old": 0,
+     "new": 44
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x49a045": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "AffGame+0x61a",
+     "old": 0,
+     "new": 1
+    }
+   ],
+   "write_count": 1,
+   "logic_readers": []
+  },
+  "0x4e05a2": {
+   "writes": [
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "AffGame+0x7f2",
+     "old": 1,
+     "new": 0
+    },
+    {
+     "phase": "between_frames",
+     "root": "AffGame",
+     "writer": "AffGame+0x81c",
+     "old": 0,
+     "new": 1
+    }
+   ],
+   "write_count": 2,
+   "logic_readers": []
+  }
+ },
+ "heap_buffers": [
+  {
+   "region": "heap/414",
+   "root": "AffGame",
+   "writer": "Cyclage",
+   "bytes": 25
+  },
+  {
+   "region": "heap/41c",
+   "root": "RestoreAll",
+   "writer": "CopyBitmap32x32",
+   "bytes": 51744
+  },
+  {
+   "region": "heap/41d",
+   "root": "RestoreAll",
+   "writer": "CopyBitmap32x32",
+   "bytes": 28512
+  },
+  {
+   "region": "heap/474",
+   "root": "RestoreAll",
+   "writer": "GetNumBob",
+   "bytes": 245
+  }
+ ],
+ "guards_at_root_entry": [
+  {
+   "phase": "startup",
+   "root": "AffGame",
+   "dfb44": 0,
+   "cursor_4e1d18": 0,
+   "view_origin": [
+    0,
+    0
+   ],
+   "viewport": [
+    25,
+    17
+   ],
+   "screen": [
+    800,
+    600
+   ],
+   "mode_4e2f78": 2,
+   "structure_states": {
+    "0": 1000,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0,
+    "7": 0
+   }
+  },
+  {
+   "phase": "startup",
+   "root": "AffGame",
+   "dfb44": 0,
+   "cursor_4e1d18": 0,
+   "view_origin": [
+    0,
+    0
+   ],
+   "viewport": [
+    25,
+    17
+   ],
+   "screen": [
+    800,
+    600
+   ],
+   "mode_4e2f78": 3,
+   "structure_states": {
+    "0": 1000,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0,
+    "7": 0
+   }
+  },
+  {
+   "phase": "startup",
+   "root": "AffGame",
+   "dfb44": 0,
+   "cursor_4e1d18": 0,
+   "view_origin": [
+    0,
+    0
+   ],
+   "viewport": [
+    25,
+    17
+   ],
+   "screen": [
+    800,
+    600
+   ],
+   "mode_4e2f78": 17,
+   "structure_states": {
+    "0": 1000,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0,
+    "7": 0
+   }
+  },
+  {
+   "phase": "startup",
+   "root": "AffGame",
+   "dfb44": 0,
+   "cursor_4e1d18": 0,
+   "view_origin": [
+    0,
+    0
+   ],
+   "viewport": [
+    25,
+    17
+   ],
+   "screen": [
+    800,
+    600
+   ],
+   "mode_4e2f78": 0,
+   "structure_states": {
+    "0": 1000,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0,
+    "7": 0
+   }
+  },
+  {
+   "phase": "load_tail",
+   "root": "RestoreAll",
+   "dfb44": 0,
+   "cursor_4e1d18": 0,
+   "view_origin": [
+    4,
+    6
+   ],
+   "viewport": [
+    25,
+    17
+   ],
+   "screen": [
+    800,
+    600
+   ],
+   "mode_4e2f78": 0,
+   "structure_states": {
+    "0": 999,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 1,
+    "6": 0,
+    "7": 0
+   }
+  },
+  {
+   "phase": "between_frames",
+   "root": "AffGame",
+   "dfb44": 0,
+   "cursor_4e1d18": 4,
+   "view_origin": [
+    4,
+    6
+   ],
+   "viewport": [
+    25,
+    17
+   ],
+   "screen": [
+    800,
+    600
+   ],
+   "mode_4e2f78": 18,
+   "structure_states": {
+    "0": 999,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 1,
+    "6": 0,
+    "7": 0
+   }
+  }
+ ]
+}

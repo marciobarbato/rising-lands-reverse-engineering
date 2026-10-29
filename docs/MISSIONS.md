@@ -682,7 +682,7 @@ Stage16 was integrated at main `67fb81f`. Graphics' report [ESCRITAS_AFFGAME_ENT
 - AffInit/DDInit, LoadPalette and the bank loaders;
 - RestoreAll, DDFlipPage, and menu and game AffGame.
 
-The declared interim DirectDraw backend ([exibicao_declarada.py](../pesquisas-paralelas/missoes/exibicao_declarada.py)) stands in for Graphics' backend until it lands.
+The declared interim DirectDraw backend (`exibicao_declarada.py` (retired in Stage18; source at commit `3ff4b21`)) stands in for Graphics' backend until it lands.
 
 **Remaining boundaries:**
 - Text needs CRT `fgets` `0x48ce96` and LoadPie needs CRT `fseek` `0x48cda2`, which Core has not inventoried.
@@ -706,3 +706,26 @@ Three real logic differences come from display **initialization**:
 - the view origin, because MouseInit centres the cursor variables on the real screen and frame 0 no longer edge-scrolls.
 
 AffGame between frames writes only display state for frame 1.
+
+## Stage18 (M2 round 4): frozen display reference and comparison policy
+
+Stage17 is integrated at main `81e0a26`. The display scenario is the M2 reference; v1 is historical evidence. Full write-up: [POLITICA_COMPARACAO_M2_1.md](../pesquisas-paralelas/missoes/POLITICA_COMPARACAO_M2_1.md).
+
+**Backend.** Graphics' declared backend `fronteiras_exibicao.ExibicaoDeclarada` (d8b1af9) replaces the retired interim `exibicao_declarada`. It is installed after the bench's own imports, and its surfaces live at `0x60000000`.
+
+**New reference artifacts** (`*-exibicao-v2.json`, all original-only and committed before any translation): the entry snapshot, the MissionLoad capture (from `af1ccbe`) and the frames 0/1 capture with its trace (from `ac6b5f3`).
+
+**Equivalence with Stage17** ([report](../pesquisas-paralelas/missoes/validacao/m2-exibicao-v2-vs-interino.json)). The v2 artifacts are not byte-for-byte equal to the Stage17 ones. In every state the same 10 DGROUP bytes differ: the program stores four backend object pointers (`0x4e1788`, `0x4e178c`, `0x4e1790`, `0x4e179c`) and the offscreen pixel pointer (`0x508f70`), and each backend chooses different addresses. Everything else is identical.
+
+**Checks on v2, all passed:**
+- the Stage14 strict composition regression, whole state equal;
+- the MissionLoad and frame original-only validations.
+
+**Comparison policy** ([m2-politica-comparacao-quadro1.json](../pesquisas-paralelas/missoes/validacao/m2-politica-comparacao-quadro1.json)). The policy assigns every one of the 78,869 bytes that change in (a)–(c) to its native writers and readers, then classifies it by call context:
+- **Masked, 78,093 display-only bytes:** 19 DGROUP bytes and 78 terrain-cache/palette blocks.
+- **Surfaces:** proven untouched by logic.
+- **Compared, 776 game-logic bytes:** these include `0x4e1d18`, the CRT rand seed and the view origin.
+
+**Open points:**
+- The record lifecycle of the 146 menu banks freed in (a) is an open coordinator decision.
+- Text (`fgets`) and LoadPie (`fseek`) stay boundaries until Core inventories those CRT entries.
