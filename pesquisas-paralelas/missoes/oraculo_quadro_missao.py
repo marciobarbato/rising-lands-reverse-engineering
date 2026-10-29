@@ -44,8 +44,8 @@ import ambiente_missoes
 from emulador import PILHA, RETORNO, unicorn, x86
 from vinculos_declarados import ParadaVinculoDeclarado
 from fronteiras_carga_missao import WindowsDeclarado
-from oraculo_carga_missao import (BancadaCargaMissaoOriginal, PULOS_INICIO, RETORNO_MISSION_LOAD,
-                                  escritas_estaticas)
+from oraculo_carga_missao import (BancadaCargaMissaoOriginal, DADOS_THREAD_CRT, DGROUP, PULOS_INICIO,
+                                  RETORNO_MISSION_LOAD, escritas_estaticas)
 
 CALCUL_GAME = 0x42c868
 RETORNO_CALCUL_GAME = 0x475063     # ProgIteration, after CALL CalculGame 0x47505e
@@ -231,6 +231,7 @@ class BancadaQuadroMissaoOriginal(BancadaCargaMissaoOriginal):
         self.rastrear = rastrear
         self.rastro = {}
         self.fases = []
+        self._passar_uma_vez = set()
 
     # ------------------------------------------------------------ extension points
     def _criar_windows(self, entradas):
@@ -278,6 +279,15 @@ class BancadaQuadroMissaoOriginal(BancadaCargaMissaoOriginal):
             iso.executar(regs)
             entrada = regs['EIP']
             self._retomando = {entrada}
+            # The entry stays a stop address: let its hook pass once so the
+            # resumed phase executes the routine instead of stopping again.
+            self._passar_uma_vez.add(entrada)
+
+    def _parar_se_pedido(self, cpu, endereco, tamanho, _):
+        if endereco in self._passar_uma_vez:
+            self._passar_uma_vez.discard(endereco)
+            return
+        super()._parar_se_pedido(cpu, endereco, tamanho, _)
 
     # ------------------------------------------------------------ entry trace
     def _ganchar_quadros(self):
@@ -542,11 +552,16 @@ class Isolamento:
                     lidos[a] = cpu.reg_read(x86.UC_X86_REG_EIP)
         def escrever(cpu, acesso, endereco, tamanho, valor, _):
             escritos.update(range(endereco, endereco+tamanho))
+        # Four merged regions (one hook pair per allocation would make every
+        # access scan ~1,800 hooks): DGROUP+.bss, CRT thread page, the arena
+        # up to its next free page, the native stack.
+        a = self.b.arena
+        regioes = ((DGROUP[0], DGROUP[1]), (DADOS_THREAD_CRT, DADOS_THREAD_CRT+0x1000), (a.base, a.proximo),
+                   (PILHA, PILHA+0x10000))
         ganchos = []
-        for base, dados in blocos.values():
-            ganchos.append(self.b.cpu.hook_add(unicorn.UC_HOOK_MEM_READ, ler, None, begin=base, end=base+len(dados)-1))
-            ganchos.append(self.b.cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE, escrever, None, begin=base,
-                                               end=base+len(dados)-1))
+        for inicio, fim in regioes:
+            ganchos.append(self.b.cpu.hook_add(unicorn.UC_HOOK_MEM_READ, ler, None, begin=inicio, end=fim-1))
+            ganchos.append(self.b.cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE, escrever, None, begin=inicio, end=fim-1))
         self.b.cpu.ctl_flush_tb()
         return lidos, escritos, ganchos
 
@@ -554,7 +569,7 @@ class Isolamento:
         for base, dados in blocos.values():
             if base <= endereco < base+len(dados):
                 return dados[endereco-base]
-        raise KeyError(hex(endereco))
+        return None   # freed or unallocated arena page: no declared block holds it
 
     def executar(self, regs):
         b, entrada = self.b, regs['EIP']
@@ -584,6 +599,7 @@ class Isolamento:
                 finally:
                     for g in ganchos:
                         b.cpu.hook_del(g)
+                    b.cpu.ctl_flush_tb()
                 if len(b.vinculos_declarados.eventos) != eventos or len(b.eventos_fronteira) != fronteiras:
                     b._interromper('binding_or_boundary_in_isolated_call', routine=nome, case=caso['case'])
                 depois = self._salvar()[1]
