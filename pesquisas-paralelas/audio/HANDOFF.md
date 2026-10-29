@@ -542,3 +542,38 @@ new evidence file/byte sizes are in
 [audio-dictator-validation.json](validacao/audio-dictator-validation.json) and
 [the gate log](validacao/audio-dictator-check.log). The required exact application
 build is run from the committed implementation next and recorded separately.
+
+
+### Exact tested build and final structured delivery
+
+The exact coordinator build was run once from committed implementation
+`f328a5f751850f2eb45af2844225aeac18bd051d` with latest main `a7427fd` merged.
+A post-build fetch confirmed origin/main still at
+`a7427fd0e416d212f08af7f0df3d36a224d12f2d`, reachable from the feature.
+
+```sh
+RISING_PYTHON_RUNTIME='/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python' \
+  ./compilar-jogável --development-ref HEAD \
+  --inputs-root '/Users/marcio/git/Rising Lands' \
+  --data-root '/Users/marcio/git/Rising-Lands-Codex-Audio/repository/.local/macos-playable'
+```
+
+**Overall exit1 before compilation/AppKit.** Consumer suite: **80 discovered,
+78 passed,2 failed,0 skips**,40.256 seconds. Both failures report exactly
+`Graphics API version mismatch: expected (1, 2), got (1, 3)`:
+`test_real_graphics_api_loads_in_isolated_process_at_version_1_2` and
+`test_worker_open_step_read_reset_errors_and_close`. This is the known
+coordinator/macOS dependency, not an Audio bypass opportunity. No app source,
+API pin or timeout was changed, and no repeat was attempted. No new bundle,
+signature result, UI smoke JSON or screenshots were produced in this attempt;
+earlier build artifacts remain preserved. The GUI slot stayed unused.
+
+The [structured build report](validacao/audio-dictator-native-build.json),
+[first launcher log](validacao/audio-dictator-native-build.log) and
+[consumer log](validacao/audio-dictator-consumer-tests.log) preserve the exact
+first outcome. The [delivery manifest](validacao/audio-dictator-delivery.json)
+records every delivered file's byte size/hash (excluding that manifest itself),
+new versus historical counts, tested code commit and open dependencies.
+Original v1/v2/v3 evidence sizes are387036/1011135/1113571 bytes respectively;
+v1/v2 are diagnostics and v3 is the valid140-entry corpus. No Mac mini request,
+main merge/push, milestone change, device output or Rust implementation occurs.

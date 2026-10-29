@@ -438,3 +438,12 @@ wrapped/short Lock and unwritten outputs, asynchronous lifetime, broader queue
 saturation/fault paths and unproved stereo queue composition. No original audio
 is played and no M2.3/M3 milestone status changes. Exact gates and the required
 native application build outcome are recorded in the handoff.
+
+
+Latest exact build at `f328a5f` over main `a7427fd` ran80 consumer tests:
+78 passed and2 failed with the explicit Graphics1.2/1.3 mismatch, before
+compilation or AppKit. First logs are preserved; no app change/retry occurred.
+Audio gate remains69 discovered/66 passed/3 optional baseline skips/0 failures;
+new140-entry/35-scenario differential has one expected allocation/UI boundary
+and zero comparison failures. The handoff's structured manifest contains exact
+SHAs, output file/byte sizes and pending coordinator/device dependencies.
