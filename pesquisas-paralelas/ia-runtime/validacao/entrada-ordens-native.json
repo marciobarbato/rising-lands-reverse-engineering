@@ -1,0 +1,215 @@
+{
+ "boundary_requests_compared": 13,
+ "by_routine": {
+  "BagGetCode": {
+   "cases": 1,
+   "dependency_stops": 0,
+   "equal": 1,
+   "mismatches": 0
+  },
+  "BagGetType": {
+   "cases": 1,
+   "dependency_stops": 0,
+   "equal": 1,
+   "mismatches": 0
+  },
+  "CalculIconeAction": {
+   "cases": 5,
+   "dependency_stops": 1,
+   "equal": 4,
+   "mismatches": 0
+  },
+  "EnginGetBagOrdre": {
+   "cases": 2,
+   "dependency_stops": 0,
+   "equal": 2,
+   "mismatches": 0
+  },
+  "GrabAllInput": {
+   "cases": 1,
+   "dependency_stops": 0,
+   "equal": 1,
+   "mismatches": 0
+  },
+  "IconeGetZone": {
+   "cases": 9,
+   "dependency_stops": 0,
+   "equal": 9,
+   "mismatches": 0
+  },
+  "InitInputPlayer": {
+   "cases": 1,
+   "dependency_stops": 0,
+   "equal": 1,
+   "mismatches": 0
+  },
+  "InputGame": {
+   "cases": 54,
+   "dependency_stops": 7,
+   "equal": 47,
+   "mismatches": 0
+  },
+  "KeyPressed": {
+   "cases": 3,
+   "dependency_stops": 0,
+   "equal": 3,
+   "mismatches": 0
+  },
+  "KeyTestRelease": {
+   "cases": 1,
+   "dependency_stops": 0,
+   "equal": 1,
+   "mismatches": 0
+  },
+  "KeyUnPressed": {
+   "cases": 3,
+   "dependency_stops": 0,
+   "equal": 3,
+   "mismatches": 0
+  },
+  "MiniMapGetCase": {
+   "cases": 1,
+   "dependency_stops": 0,
+   "equal": 1,
+   "mismatches": 0
+  },
+  "MiniMapGetCenterSelect": {
+   "cases": 2,
+   "dependency_stops": 0,
+   "equal": 2,
+   "mismatches": 0
+  },
+  "MouseEstDeplacer": {
+   "cases": 5,
+   "dependency_stops": 0,
+   "equal": 5,
+   "mismatches": 0
+  },
+  "MouseZone": {
+   "cases": 7,
+   "dependency_stops": 0,
+   "equal": 7,
+   "mismatches": 0
+  },
+  "ProcessInputGame": {
+   "cases": 18,
+   "dependency_stops": 3,
+   "equal": 15,
+   "mismatches": 0
+  },
+  "SetPlayerOrdre": {
+   "cases": 3,
+   "dependency_stops": 0,
+   "equal": 3,
+   "mismatches": 0
+  },
+  "WndProc": {
+   "cases": 7,
+   "dependency_stops": 0,
+   "equal": 7,
+   "mismatches": 0
+  }
+ },
+ "capture": {
+  "path": "pesquisas-paralelas/ia-runtime/evidencias/captura-entrada-ordens-ia.json",
+  "sha256": "5a0ef0d7cecf1daa3dbefef0711d94c89fb37228bade5fef923b06e7a664168e"
+ },
+ "changed_bytes_compared": 18335,
+ "comparisons": 124,
+ "core_construction_reference": {
+  "construcao_core_sha256": "7ccf640c5adda6e1a2c0e81bcce0307c0117eca862699af5fc7d34d5fe35a5fa",
+  "path": ".local/entrada/nucleo-ref"
+ },
+ "dependency_stops": [
+  {
+   "case": "process_tag14_structure_selected",
+   "dependency": "BatimentInitAttaqueSelect required at 0x0045f13f; earlier stores retained"
+  },
+  {
+   "case": "process_tag17_recruit",
+   "dependency": "InitRecruteTroupe required at 0x0045f1a9; earlier stores retained"
+  },
+  {
+   "case": "process_tag19_unload",
+   "dependency": "SetDechargeCaveEnginSelect required at 0x0045f085; earlier stores retained"
+  },
+  {
+   "case": "icon_action_structure",
+   "dependency": "CalculIconeAction structure selected required at 0x0045e9bf; earlier stores retained"
+  },
+  {
+   "case": "p2_minimap_right_held",
+   "dependency": "MiniMapSetPos required at 0x0042bb5d; earlier stores retained"
+  },
+  {
+   "case": "p4_release_field_u13",
+   "dependency": "TextGetMessage with the text table pointer 0x5099a4 = 0 (texts not loaded) required at 0x00478a47; earlier stores retained"
+  },
+  {
+   "case": "p4_hover_field_u13",
+   "dependency": "TextGetMessage with the text table pointer 0x5099a4 = 0 (texts not loaded) required at 0x00478a47; earlier stores retained"
+  },
+  {
+   "case": "p4_release_field_builder",
+   "dependency": "TextGetMessage with the text table pointer 0x5099a4 = 0 (texts not loaded) required at 0x00478a47; earlier stores retained"
+  },
+  {
+   "case": "p5_release_mine_u12",
+   "dependency": "TextGetMessage with the text table pointer 0x5099a4 = 0 (texts not loaded) required at 0x00478a47; earlier stores retained"
+  },
+  {
+   "case": "p5_hover_mine_u12",
+   "dependency": "TextGetMessage with the text table pointer 0x5099a4 = 0 (texts not loaded) required at 0x00478a47; earlier stores retained"
+  },
+  {
+   "case": "p5_release_mine_u13",
+   "dependency": "TextGetMessage with the text table pointer 0x5099a4 = 0 (texts not loaded) required at 0x00478a47; earlier stores retained"
+  }
+ ],
+ "equal": 113,
+ "mismatches": [],
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "path_reproduction": {
+  "between_frames": true,
+  "code_unchanged": true,
+  "frame1": true,
+  "load_tail": true,
+  "paused": true
+ },
+ "pause": {
+  "caller": "CalculGame+0xb4d",
+  "caller_return": "0x42d3b5",
+  "registers": {
+   "EAX": "0x0",
+   "EBP": "0x0",
+   "EBX": "0x0",
+   "ECX": "0x5",
+   "EDI": "0x0",
+   "EDX": "0x1a1a000e",
+   "EIP": "0x45edc0",
+   "ESI": "0x0",
+   "ESP": "0x2007ebc"
+  },
+  "routine": "ProcessInputGame",
+  "state_sha256": {
+   "blocks": 25198,
+   "bytes": 16240871,
+   "sha256": "6e8620b99ac650d032d575570da2a28bbab6cf700b09d6ed1efae5bb085724ed"
+  }
+ },
+ "providers": "provedores_entrada_ia.provedores_vivos (committed Core/Economy/Combat owners); sound requests return the EAX they receive (the frame bench declaration for PlaySnd_*)",
+ "schema": "rising-lands/monde01-input-orders-differential/1",
+ "seconds": 128.615,
+ "source_sha256": {
+  "ferramentas/selecao_ordens.py": "e8eb78134dd44adbbef88354ea3219c6513f2a2173cc68227fa9fecaf47ab67c",
+  "pesquisas-paralelas/combate/alvos_alcance.py": "b0006a64869041997ab85d51f2758c7bd4c1d602e0f7bc6de3bb7ba75878dc17",
+  "pesquisas-paralelas/combate/ataque_vivo.py": "21d3f0c9e2a307b82874c6634730a62b301751ec76c51e9ff7d151429fb7c86c",
+  "pesquisas-paralelas/economia/extracao.py": "797d8092d8e9bc2679d7a18ec2833871bbeada67d0a281f6bba4d3d883952e29",
+  "pesquisas-paralelas/economia/ordens_economia.py": "48c8fd6d63b7acdf7883e1a6a5b913435c3e35ab8e5eae2925f9f4ee84d46e69",
+  "pesquisas-paralelas/ia-runtime/capturar_entrada_ordens_ia.py": "79c33f81f219c99562e788e85b4ef1f4d990fba6c346e260e65d5a5263a6e36c",
+  "pesquisas-paralelas/ia-runtime/casos_entrada_ordens_ia.py": "026041d6ff4129fa4668e89d41291b89b5b9da8dccf7b9d97308a997298524cb",
+  "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "186a61d6153f8e6b0e3cd7a78dcddd4ffa417fc62af50b2fac7d068405875937",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "9bb28f2c40a5855f012033c4076874c187e9ad84866a7170173fbd393584ff7f",
+  "pesquisas-paralelas/ia-runtime/validar_entrada_ordens_ia.py": "ec6d68907d731a4cc85cd1ef1f387e97595216622d057c9f9528aede589d5f1b"
+ }
+}
