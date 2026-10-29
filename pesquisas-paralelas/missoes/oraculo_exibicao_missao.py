@@ -31,7 +31,7 @@ from vinculos_declarados import ParadaVinculoDeclarado
 from fronteiras_exibicao import ExibicaoDeclarada
 from oraculo_carga_missao import MISSION_LOAD, RETORNO_MISSION_LOAD
 from oraculo_quadro_missao import (BancadaQuadroMissaoOriginal, CALCUL_GAME, RETORNO_CALCUL_GAME, SAIDA_LACO,
-                                   WindowsQuadro)
+                                   WindowsQuadro, nomes_fases)
 
 RELOGIO_IA = 0x48978e   # return of the timeGetTime call in iaRandom(0) from IaAlloc
 LACO = 0x4601c0         # _WinMain@16 message-loop head (quit-flag test)
@@ -177,17 +177,31 @@ class BancadaExibicaoOriginal(BancadaQuadroMissaoOriginal):
         self.iniciar_relogio()
         return self._correr('load_tail', RETORNO_MISSION_LOAD, {}, (RETORNO_CALCUL_GAME,), retomar=True)
 
-    def executar_entre_quadros(self, segundos):
-        """(b) The real ProgIteration tail and window loop to the next CalculGame entry (no declared frame)."""
+    def executar_entre_quadros(self, segundos, k=1):
+        """(b) The real ProgIteration tail and window loop to the CalculGame entry of frame k."""
         if self.cpu.reg_read(x86.UC_X86_REG_EIP) != RETORNO_CALCUL_GAME:
             raise RuntimeError('between_frames starts at ProgIteration 0x475063')
+        entre, _ = nomes_fases(k)
         self.declaracao_chamador = None
-        self._fase('between_frames')
+        self._fase(entre)
         self.limite_segundos = segundos
         self.iniciar_relogio()
         self._retomando = {RETORNO_CALCUL_GAME}
         self._passar_uma_vez.add(RETORNO_CALCUL_GAME)
-        regs = self._correr('between_frames', RETORNO_CALCUL_GAME, {}, (CALCUL_GAME, SAIDA_LACO), retomar=True)
+        regs = self._correr(entre, RETORNO_CALCUL_GAME, {}, (CALCUL_GAME, SAIDA_LACO), retomar=True)
         if regs['EIP'] != CALCUL_GAME:
             self._interromper('window_loop_exit', eip=hex(regs['EIP']))
         return regs
+
+    def executar_quadros(self, n, segundos=600):
+        """Phases of N consecutive frames after MissionLoad: yields (phase, registers) in order.
+
+        load_tail, then for k = 1..n: between_frames(k) and frame(k); each
+        phase ends at its real stop (the next CalculGame entry, the frame's
+        RET into ProgIteration 0x475063).
+        """
+        yield 'load_tail', self.executar_cauda_carga(segundos)
+        for k in range(1, n+1):
+            entre, quadro = nomes_fases(k)
+            yield entre, self.executar_entre_quadros(segundos, k)
+            yield quadro, self.executar_quadro(segundos, k)
