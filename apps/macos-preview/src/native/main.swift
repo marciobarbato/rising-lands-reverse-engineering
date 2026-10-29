@@ -222,8 +222,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
                 return
             }
             if operation == "read",let live=nativeLive,live.window.isVisible,
-               let address=body["address"] as? String,let raw=UInt32(address.replacingOccurrences(of:"0x",with:""),radix:16),let size=body["size"] as? Int,(1...256).contains(size) {
-                live.read(raw,size){[weak self] value in self?.nativeReply(body["id"],value:value)};return
+               let address=body["address"] as? String,let raw=(address.lowercased().hasPrefix("0x") ? UInt32(address.dropFirst(2),radix:16):UInt32(address,radix:10)),let size=body["size"] as? Int,(1...256).contains(size) {
+                live.read(raw,size){[weak self] value in if let error=value["error"] as? String{self?.nativeReply(body["id"],error:error)}else{self?.nativeReply(body["id"],value:value)}};return
             }
             if operation == "read",let live=nativeLive,live.window.isVisible {nativeReply(body["id"],error:"Endereço ou tamanho de leitura nativa inválido.");return}
             if ["open","reset","phase","frame"].contains(operation),let live=nativeLive {live.perform("live-pause",completion:nil);live.window.orderOut(nil)}

@@ -103,7 +103,9 @@ int32_t macos_live_advance(MacOSLiveDriver*d,MacOSPhaseObserver observer,void*ct
  if(d->status.phase_index==UINT32_MAX){t=now();c=d->rl_passo_quadro(d->world,1,&d->input);d->status.logic_ns+=now()-t;if(c)return fail(d,c,"load_tail");d->input.registers=d->phase2.registers;return proof(d,0,1,observer,ctx);}
  uint64_t gen=0;uint32_t phase=0,counter=0;t=now();c=d->rl_render_geracao(d->world,&gen,&phase,&counter);if(c)return fail(d,c,"render generation");
  RlRenderResult out={0};c=d->rl_render_quadro(d->renderer,gen,1,d->pixels,sizeof(d->pixels),d->palette,sizeof(d->palette),&out);d->status.render_ns+=now()-t;
- if(c)return fail(d,c,"Rust render");d->status.generation=gen;d->status.disposition=out.disposition;
+ if(c)return fail(d,c,"Rust render");
+ if(out.abi_status||out.generation!=gen||out.width!=800||out.height!=600||out.stride!=800||out.required_pixels!=480000||out.required_palette!=768||out.palette_generation!=1||out.disposition>2){d->status.stopped=1;snprintf(d->status.message,sizeof(d->status.message),"NativeRenderResultContractMismatch");return 5;}
+ d->status.generation=gen;d->status.disposition=out.disposition;
  if(out.disposition==2){d->status.stopped=1;snprintf(d->status.message,sizeof(d->status.message),"%s at 0x%08x: %s",out.stop_callee,out.stop_address,out.stop_reason);return 5;}
  t=now();CC_SHA256(d->pixels,sizeof(d->pixels),d->status.surface_sha);
  if(d->status.frames<d->surface_count){if(memcmp(d->status.surface_sha,d->surface_hashes+32*d->status.frames,32)){d->status.stopped=1;snprintf(d->status.message,sizeof(d->status.message),"SurfaceProofMismatch no quadro %llu",(unsigned long long)(d->status.frames+1));return 5;}d->status.surfaces_equal++;}
