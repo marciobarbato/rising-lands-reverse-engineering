@@ -1,5 +1,66 @@
 # Combat handoff — 2026-10-28
 
+## M2.3 acceleration: the raid unit's life after spawn (counters 9000–12000)
+
+Base: main `8564ca7`, merged by fast-forward. Each capture was committed before any comparison: `3e0f3da` (frames 9000–9100, isolated) and `a1f589a` (course 9000–12000).
+
+**Forced input (both captures).**
+- Missions' v1 bench (`BancadaQuadroMissaoOriginal`) reruns the committed path read-only: startup, MissionLoad, load_tail (frame 0) and between_frames.
+- At frame 1's CalculGame entry the counter is 1. u32 `0x508f7c` is written to **9000** there; every other byte is the original's own state.
+- Whole frames then run natively, with the real ProgIteration tail and window loop between them (`sondar_vida_incursao.BancadaVida.executar_entre_quadros_k`), so frame k runs with counter 8999+k.
+- The no-input answers (cursor (0,0), no keys, no messages) and the boundaries (AffGame, PlaySnd_Manage, MCICD_*) are Missions' v1 declarations.
+- Unlike the earlier isolated raid case, every periodic gate at 9000 also runs (structure step %1000, market %100, …). The raid's draws are unchanged: field `0x2e03`, effect type 0x20.
+
+**What the raid reaches** (from `evidencias/percurso-incursao-m2-3-original.json`, 3001 frames, 278.6 s, no stop):
+
+| Counter | Event (native) |
+|---|---|
+| 9000 | Spawn: `ConstruitGroupeMonstre(0x3f3f, 0)` → unit 16 at `0x3e3e`, effect `ProjectileInit(0x20, 0x3e3e, 0x3e3e, 0, …)`. `StockeAction(0x2f, group 0x12, 0x2e03)`. iaSolver runs the same frame: `B_TestGroupeVide`, `I_DetermineTempsTrajet`, `V_DeplaceGroupe` → `SetDeplaceEngin(16, 0x2e03)`, `iagWarNewBattleToPos`, `iagWarSetWait`/`iaProbSleep(0x1f4)`. The first step is `DeplaceEngin` from `EnginNextEtape`. |
+| 9008, then every 32 frames | Unit 16's `EnginTrouveCible` (type 0: grid query only, no `EnginTrouveCibleScan`) → `0xffff`. Player unit 15 (type 2/8) scans at 9009 + 32k → `0xffff`. |
+| 9031 | The type-32 effect leaves the pool (32-frame life). |
+| 9015 / 9032 | First `TerrainEstDecouvert`, first `ScanNouvellePatate` (field sweep, not raid). |
+| 9176–9179 | First real path search: `ChercheIndiceEngin`, `CheminCalcul`/`Chemin_Verouille`/`OptimiseChemin`/`TestLigneOptimise`, then `EnginNextCaseChemin`. The unit moves about one cell per 16 frames. |
+| 9500, 9700, 10200, 10400, … | AI re-posts group moves (`I_DonnePositionGroupe`, `B_Egalite`/`I_Soustraction`, `SetDeplaceEngin` to `0x2820`/`0x2e0b`/`0x2e03`). |
+| 10000, 12000 | `PlayerAttaqueCalculSympa` → `MAJSympathie` ×12 (counter % 2000). |
+| 10527 | Unit 16 reaches `0x2e03`. |
+| 10800 | Second raid (record 1): unit 17 at `0x3e00`, effect projectile, `StockeAction(0x2f, group 0x13, 0x3b22)`. |
+| 11100–11101 | `V_FreeConflit` → `iagWarDeleteBattle`, `V_iaMonstreAttendLaReponse…`; then `StockeAction(0x2e, 0x12, 0x320e)` (ambush cell, `AvanceMonstre+0x3aa`). |
+| 11280 / 11580 | Unit 16 idles (state 7) at `0x320e`; unit 17 idles at `0x3b22`. |
+
+**Never entered through 12000:** `SetAttaqueEngin`, `CalculAttaqueEngin`, `InfligeDegat`, `EnginInfligeDegat`, `ProjectileInfligeDegat`, `BatimentInfligeDegat`, `CreerExplosion`, `SetDyingEngin`, `DetruireEngin`, `DetruireBatiment` and `iagUnitSendMessage`. All 601 `EnginTrouveCible` calls and 94 scans run, and none returns a target: the player's units stay around rows `0x0f`–`0x15`, and the raid routes never come within the scan radius. So the AI-runtime request for `SetAttaqueEngin` has no MONDE01 no-input consumer by counter 12000. `ataque_vivo.definir_ataque` remains the API for the `StockeAction` 0x30 merge, and for player orders once inputs exist.
+
+**Isolated Combat calls, 9000–9100** (`capturar_vida_incursao_m2_3.py` → `evidencias/captura-vida-incursao-m2-3-original.json`, 51.9 s).
+- Missions' `Isolamento` pauses at `PlayerAttaqueReset`, `ProjectileCalcul`, `EnginTrouveCible`, `PlayerEstAllie` and `PlayerAttaqueCalculSympa`. Each call runs natively from its exact saved state, which is then restored.
+- The observer stores the Python inputs: pool, unit table, occupancy grid, masks, attack matrix, counter. A block hook records every routine entry inside the isolated calls.
+- Calls: 102 each of reset, projectiles and sympathy (frame 0 plus 101 frames), 19 `EnginTrouveCible` and 124 `PlayerEstAllie`. All of them return.
+
+**Differential (`test_vida_incursao_m2_3.py`, local; the native side is the capture).**
+- `MaquinaProjeteis.calcular(counter & 255)` matches the changed pool bytes and the `ProjectileAvance` slot order on all 102 passes, including the effect's expiry.
+- `encontrar_alvo` matches the result (`0xffff`) and the exact `PlayerEstAllie` query order on all 19 target queries.
+- The `PlayerEstAllie` register contract holds on all 124 calls.
+- Reset and sympathy store nothing in this window.
+- No Combat gap was found, so nothing was translated.
+- `test_percurso_incursao_m2_3.py` pins the course facts above.
+
+**Probe (not evidence).** `sondar_vida_incursao.py` writes only under `.local/` (runs `combat-raid-life-probe-*.json` for 3, 301 and 3001 frames). It was used to choose the routines; its 3001-frame result equals the committed course.
+
+**Providers other fronts owe for a Python run of the raid frames**, in first-entry order. Each front should check its own inventory; names are original routines.
+- **AI-runtime.**
+  - The `AvanceMonstre` branches `0x47b349` (stamp/fire) and `0x47b44c` (pending order), `ConstruitGroupeMonstre`, `iaGroupNew`, `iagUnitAddToGroup`, `iagUnitGetFirst/NextUnitInGroup`, `StockeAction`, `iaProbNew`/`iaProbPost`/`iaProbSleep`, `listNewElem`/`listLinkElemToTail`.
+  - iaSolver rules: `B_TestGroupeVide`, `B_AttenteConflit`, `B_NewConflit`, `B_Superieur`, `I_DetermineTempsTrajet`, `V_DeplaceGroupe`, `iagWarNewBattleToPos`, `iagWarSearchBattleFromPos`, `iagWarSetWait`.
+  - Later rules: `I_DonnePositionGroupe` (9500), `B_Egalite`/`I_Soustraction` (9700), `V_FreeConflit`, `V_iaMonstreAttendLaReponse…`, `iagWarDeleteBattle`, `listDeleteElem`/`listUnlinkElem` (11100).
+  - Combat supplies `PoolProjeteis.iniciar` for the spawn effect.
+- **Core.**
+  - Spawn and placement: `GetFreeCell`, `CreerEngin`, `EnginSetType`/`EnginSetTypeCaract`/`EnginTypeGetCapacite`, `EnginEnArret`, `EnginSetPlayer`, `PlaceEngin` with `SetEnginCollision`/`ResetEnginCollision`/`ResetCollision`/`Chemin_ModifieZone`/`TerrainEnCollision` and `SetMiniMap`/`PlayerGetColor`/`TerrainEstIllumine`.
+  - Orders and movement: `GetRandCaseChamps`, `Chemin_Accessible`, `SetDeplaceEngin`/`ResetOrdre`, `DeplaceEngin`, `AvanceEngin`, `CalculNextCase`, `CalculDirCase`, `CalculDirection`, `RotateEngin`, `EnginNextCase`, `EnginOccupeCase`, `EnginPeutPasser`, `EnginEstVivant`, `EnginGetCase`/`EnginGetType`.
+  - `TerrainEstDecouvert` (9015).
+  - Pathfinding: `ChercheIndiceEngin`, `CheminCalcul`, `Chemin_Verouille`, `OptimiseChemin`, `TestLigneOptimise`, CRT `memset` (9176–9177) and `EnginNextCaseChemin` (9179).
+  - The unit dispatcher `EnginNextEtape`, with its state-7 body.
+- **Economy.** `ScanNouvellePatate` (9032, field sweep). `PlayerAttaqueCalculSympa` → `MAJSympathie(p, q, 0x13)` ×12 at 10000/12000, in the branch MONDE01 reaches (`calcular_simpatia_ataques`/`atualizar_simpatia`).
+- **Combat (supplied).** `PoolProjeteis.iniciar` (ProjectileInit/Set), `MaquinaProjeteis.calcular` (ProjectileCalcul/Anim/Avance), `encontrar_alvo` (EnginTrouveCible/Scan), `aliados` plus the register contract (PlayerEstAllie). `PlayerAttaqueReset` has no stores here.
+
+Gaps: a raid that reaches the player (with input, or other missions) is not captured. Attack, damage and death on that path stay covered only by the earlier fixture-based Combat validations.
+
 ## M2.3 preparation: MONDE01's first scripted monster raid
 
 Base: main `d94a59e` (fast-forward). The capture was committed before any comparison (`1e9f28e`).
