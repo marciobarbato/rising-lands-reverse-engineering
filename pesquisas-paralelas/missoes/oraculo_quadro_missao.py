@@ -575,6 +575,9 @@ class Isolamento:
                 antes = {k: v for k, v in self._salvar()[1].items()}
                 eventos, fronteiras = len(b.vinculos_declarados.eventos), len(b.eventos_fronteira)
                 lidos, escritos, ganchos = self._rastrear(blocos)
+                # Stops are address-scoped hooks: the return address needs its own.
+                ganchos.append(b.cpu.hook_add(unicorn.UC_HOOK_CODE, b._parar_se_pedido, begin=retorno, end=retorno))
+                b.cpu.ctl_flush_tb()
                 try:
                     b._retomando = {entrada}
                     saida = BancadaCargaMissaoOriginal._correr(b, 'isolated', entrada, {}, (retorno,), retomar=True)
