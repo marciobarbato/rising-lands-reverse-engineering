@@ -13,7 +13,7 @@ state-7 body and the BatimentNextEtape type-1/2/13/16 branch) have no return
 address and run to their declared exits. No Python translation is imported.
 
     python3 -B pesquisas-paralelas/economia/capturar_quadro1_economia_original.py \
-        --saida pesquisas-paralelas/economia/evidencias/captura-quadro1-economia-original.json
+        --saida pesquisas-paralelas/economia/evidencias/captura-quadro1-economia-original-v2.json
 """
 import argparse
 import hashlib
@@ -89,6 +89,9 @@ class IsolamentoEconomia(oq.Isolamento):
                 exit_registers={k: hex(v) for k, v in saida.items()},
                 reached_exit=saida['EIP'] == retorno,
                 changed_bytes=[[hex(a), v[0], v[1]] for a, v in sorted(mudados.items())],
+                # Bytes written to the value they already held: their entry value, needed when not read first.
+                written_unchanged=[[hex(a), self._valor(depois, a)] for a in sorted(escritos)
+                                   if a not in mudados and not oq.PILHA <= a < oq.PILHA + 0x10000],
                 read_before_write=[[hex(a), self._valor(antes, a), b.nome(lidos[a])] for a in leituras]))
         finally:
             self._restaurar(contexto, blocos)
@@ -136,7 +139,7 @@ def main():
         contagem.setdefault(f"{r['phase']}:{r['routine']}", 0)
         contagem[f"{r['phase']}:{r['routine']}"] += 1
     relatorio = dict(
-        schema='rising-lands/monde01-frame1-isolated-economy-calls/1', original_sha256=HASH_ORIGINAL,
+        schema='rising-lands/monde01-frame1-isolated-economy-calls/2', original_sha256=HASH_ORIGINAL,
         translation_executed=False, source_revision=revisao,
         source_sha256={str(p.relative_to(RAIZ)): hashlib.sha256(p.read_bytes()).hexdigest()
                        for p in (Path(__file__), RAIZ / 'pesquisas-paralelas/missoes/oraculo_quadro_missao.py')},
