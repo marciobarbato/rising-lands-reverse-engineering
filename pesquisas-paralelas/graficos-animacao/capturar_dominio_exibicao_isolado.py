@@ -21,6 +21,8 @@ from emulador import x86
 from mapa_memoria_m1 import carregar_json
 
 SO_VISIVEL = '--so-visivel' in sys.argv
+ORIGENS_EXATAS = ([tuple(int(v) for v in o.split(',')) for o in sys.argv[sys.argv.index('--origens')+1].split(';')]
+                  if '--origens' in sys.argv else None)
 POOL, PASSO = 0x49a0c8, 276
 LARGURA, ALTURA = 0x497168, 0x49716a
 
@@ -60,6 +62,11 @@ class IsolamentoExibicao(oq.Isolamento):
         casos.append(dict(case='dfb44_1', writes=[(0x4dfb44, b'\x01')], repeat=1))
         if nome == 'AffGame':
             casos.append(dict(case='three_consecutive_calls', writes=[], repeat=3))
+        if ORIGENS_EXATAS:   # exact origins only: no grid, no structure or flag perturbations
+            casos = [casos[0]]+[dict(case=f'origin_{x}_{y}', writes=[(0x508720, u16(x)), (0x508722, u16(y))], repeat=1)
+                                for x, y in ORIGENS_EXATAS]
+            if nome == 'AffGame':
+                casos.append(dict(case='three_consecutive_calls', writes=[], repeat=3))
         resultados = []
         cob = {}
 
@@ -160,4 +167,5 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument('--saida', required=True)
     ap.add_argument('--so-visivel', action='store_true')
+    ap.add_argument('--origens', help='x,y;x,y exact view origins (replaces the grid and perturbations)')
     principal(ap.parse_args().saida)

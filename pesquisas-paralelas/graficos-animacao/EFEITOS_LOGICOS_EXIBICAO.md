@@ -76,3 +76,7 @@ At the real entry of RestoreAll (load tail) and AffGame (between frames) the sav
 ## Open dependencies
 - Structure state 3 (and 1/2/4/6/7), which needs a captured state where AffBatiments actually reads the state.
 - DDFlipPage shake path; LoadPie inside RestoreAll; nested locks; low-resolution DDInit.
+
+## Round 6: M2.2 origins
+
+[dominio-exibicao-origens-m22.json](evidencias/dominio-exibicao-origens-m22.json) (committed before the provider change; `capturar_dominio_exibicao_isolado.py --origens "3,5;2,4;1,3;0,2;0,1"`, about 100 s on the MacBook): RestoreAll and AffGame run natively at (3,5), (2,4), (1,3), (0,2) and (0,1), plus the captured inputs and three consecutive AffGame calls. No DGROUP or CRT byte outside the display set changes and every call returns. `ORIGENS_PROVADAS` now includes these five; core's survey of the cursor is corroborated, not replaced, by these captures.
