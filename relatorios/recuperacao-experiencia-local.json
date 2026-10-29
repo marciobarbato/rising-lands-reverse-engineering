@@ -1,0 +1,29 @@
+{
+  "python": "3.9.6",
+  "x86_enabled": false,
+  "tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_recuperacao_experiencia.DiferencialRecuperacaoExperiencia.test_all_captured_inputs_fresh",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_recuperacao_experiencia.DiferencialRecuperacaoExperiencia.test_fresh_original_producer_chains",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_recuperacao_experiencia.DiferencialRecuperacaoExperiencia.test_fresh_random_queues_registers_and_flags",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_recuperacao_experiencia.DiferencialRecuperacaoExperiencia.test_fresh_single_word_differences_at_every_position",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "bounded_x86_executions": 0,
+  "success": true,
+  "seconds": 0.013,
+  "scope": "Engin_RetrieveExperimente 0x441623 only: frozen original replay, input protection and fresh intact differential. Producers (Reset/Store) run natively only as provenance."
+}

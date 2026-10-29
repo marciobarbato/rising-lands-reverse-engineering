@@ -1,0 +1,95 @@
+{
+ "round": "CXR-20261028-01",
+ "committed_main": "5d24c91104e8b7f66b774e5b46969508708cc01f",
+ "successful": true,
+ "source_provider_hashes_unchanged": true,
+ "original_capture_sha256": "f038dd159363940f894489a0c333805d0ff97d7be0458e67640ab2c757f0cd9d",
+ "fresh_targeted_cases": [
+  {
+   "case": "ia_reset_monde01",
+   "eax": 0,
+   "image_hashes": {
+    "dados": "d14221b458b80b11f319d702415c6f3b05760848672c599f50c19995e3e13dfc",
+    "unidades": "c85a916f143fd90a111f2ce2172e27b2e73d6f2c7c7963a9255f327753669857",
+    "jogadores": "6e790f3a8a28b6e736b72c33e5f1f168611eeed6259ca256c83dcd583e3dd79a"
+   },
+   "whole_images_equal": true,
+   "original_return_equal": true,
+   "provider_calls_equal": true,
+   "provider_calls": 846,
+   "original_segments": 1693
+  },
+  {
+   "case": "ia_reset_monde01_ai_players",
+   "eax": 0,
+   "image_hashes": {
+    "dados": "957299e96a139f229faf2637acfdf642728ddd1bc9290e31dbedbb845196a9eb",
+    "unidades": "c85a916f143fd90a111f2ce2172e27b2e73d6f2c7c7963a9255f327753669857",
+    "jogadores": "64eeb47829291143d7e7fa2c50c74af01ac32e6abb2d05696be97b0dc1ba3f33"
+   },
+   "whole_images_equal": true,
+   "original_return_equal": true,
+   "provider_calls_equal": true,
+   "provider_calls": 8667,
+   "original_segments": 17335
+  },
+  {
+   "case": "ia_alloc_rule_load_failure",
+   "eax": 437911555,
+   "image_hashes": {
+    "dados": "b981970e9e34ccaf742f3c3b39046bc4f724505034dd7437a19c35cad832a994",
+    "unidades": "b1edad8728dc6bce781da01d55827492cc206231084860d75dfbb1a04fae1342",
+    "jogadores": "5b6fb58e61fa475939767d68a446f97f1bff02c0e5935a3ea8bb51e6515783d8"
+   },
+   "whole_images_equal": true,
+   "original_return_equal": true,
+   "provider_calls_equal": true,
+   "provider_calls": 3,
+   "original_segments": 4
+  }
+ ],
+ "intentional_native_cycle": {
+  "checkpoint": "0x0047b1f4",
+  "target": "0x0047b137",
+  "visits": 4,
+  "equal_cpu_stack_and_images": true,
+  "registers": {
+   "EAX": 384,
+   "EBX": 104,
+   "ECX": 18,
+   "EDX": 18,
+   "ESI": 0,
+   "EDI": 26,
+   "EBP": 19,
+   "ESP": 33587072,
+   "EIP": 4698612,
+   "EFLAGS": 2,
+   "CS": 8,
+   "DS": 16,
+   "ES": 16,
+   "SS": 16,
+   "FS": 0,
+   "GS": 0
+  },
+  "sha256": {
+   "4800512": "a8d6a456f9de9498e1819e07454ab510fc2f01890e94cfe978256641572e10a2",
+   "16777216": "ef8182d4241e363032d3a014eee9ae72ab9905a762aaa9ee072a5f6c9e9cf496",
+   "17825792": "64eeb47829291143d7e7fa2c50c74af01ac32e6abb2d05696be97b0dc1ba3f33",
+   "stack": "7c22c99747a34259ada9b0cc062a61ba6b318c5b23292c822532ec1d12bf8f06"
+  },
+  "resumed_segments": 6,
+  "identical_visits": [
+   2,
+   3,
+   4
+  ],
+  "initial_visit_is_transient": true,
+  "external_calls_during_cycle": 0,
+  "bindings_during_cycle": [],
+  "inputs": "Inherited image/pools/stack only; no external input call reached",
+  "retained_python_image_equal": true
+ },
+ "production_provider_adapters": false,
+ "full_mission_load": false,
+ "mission_runtime": false
+}

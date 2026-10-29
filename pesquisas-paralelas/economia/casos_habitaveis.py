@@ -164,8 +164,11 @@ def caso_sintetico(nome, tipo, dono, origem, *, largura=256, altura=256, unidade
                          bytearray(rng.randbytes(9152)), so, inv, ur, er, rng.randrange(256))
 
 
-def montar_habitacao(caso):
-    """Compose existing economy classes over the case buffers, by identity."""
+def montar_habitacao(caso, *, ordens=None):
+    """Compose existing economy classes over the case buffers, by identity.
+
+    ``ordens``: the four per-owner unit-order pools for PropriedadeConstrucoes
+    (None keeps its four fresh zero pools)."""
     from construcoes import EconomiaConstrucoes
     from recrutamento import Recrutamento
     from producao import Producao
@@ -177,7 +180,7 @@ def montar_habitacao(caso):
     construcoes.estruturas = m.estruturas
     recrutamento = Recrutamento(construcoes)
     recrutamento.unidades = m.unidades
-    propriedade = PropriedadeConstrucoes(construcoes)
+    propriedade = PropriedadeConstrucoes(construcoes, ordens=ordens)
     propriedade.pendencias, propriedade.sortilegios = caso.pendencias, caso.sortilegios
     aprendizagem = Aprendizagem(Producao(recrutamento), propriedade)
     aprendizagem.inventados = caso.inventados

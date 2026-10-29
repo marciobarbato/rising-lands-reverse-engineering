@@ -1,0 +1,490 @@
+{
+  "schema_version": 1,
+  "scope": "Light committed-source and intact-byte audit of economy dependencies for IaReset; no runtime implementation",
+  "audited_at_utc": "2026-10-28T19:55:29.139783+00:00",
+  "base_main": "e9f5dbd33972344e37db3a93be1aec9c115a88bf",
+  "original_exe_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "original_intervals": [
+    {
+      "symbol": "RechercheGetNiveau",
+      "start": "0x4717c2",
+      "end_exclusive": "0x4717de",
+      "bytes_hex": "5325ff000000bbf4805000c1e00401c331c06689d08a040330e45bc3",
+      "sha256": "5f1238094d75c3968e50d18c350cb58757948fbd06e59dfe0b5bc0806582b841",
+      "instructions": [
+        {
+          "address": "0x4717c2",
+          "bytes": "53",
+          "mnemonic": "push",
+          "operands": "ebx"
+        },
+        {
+          "address": "0x4717c3",
+          "bytes": "25ff000000",
+          "mnemonic": "and",
+          "operands": "eax, 0xff"
+        },
+        {
+          "address": "0x4717c8",
+          "bytes": "bbf4805000",
+          "mnemonic": "mov",
+          "operands": "ebx, 0x5080f4"
+        },
+        {
+          "address": "0x4717cd",
+          "bytes": "c1e004",
+          "mnemonic": "shl",
+          "operands": "eax, 4"
+        },
+        {
+          "address": "0x4717d0",
+          "bytes": "01c3",
+          "mnemonic": "add",
+          "operands": "ebx, eax"
+        },
+        {
+          "address": "0x4717d2",
+          "bytes": "31c0",
+          "mnemonic": "xor",
+          "operands": "eax, eax"
+        },
+        {
+          "address": "0x4717d4",
+          "bytes": "6689d0",
+          "mnemonic": "mov",
+          "operands": "ax, dx"
+        },
+        {
+          "address": "0x4717d7",
+          "bytes": "8a0403",
+          "mnemonic": "mov",
+          "operands": "al, byte ptr [ebx + eax]"
+        },
+        {
+          "address": "0x4717da",
+          "bytes": "30e4",
+          "mnemonic": "xor",
+          "operands": "ah, ah"
+        },
+        {
+          "address": "0x4717dc",
+          "bytes": "5b",
+          "mnemonic": "pop",
+          "operands": "ebx"
+        },
+        {
+          "address": "0x4717dd",
+          "bytes": "c3",
+          "mnemonic": "ret",
+          "operands": ""
+        }
+      ]
+    },
+    {
+      "symbol": "RechercheSetBranche",
+      "start": "0x470b37",
+      "end_exclusive": "0x470b46",
+      "bytes_hex": "25ff000000c1e0048890f8805000c3",
+      "sha256": "16d8fa8378de85c83f19137911843951ba724f8c5df6304fb6f31991fbf31b34",
+      "instructions": [
+        {
+          "address": "0x470b37",
+          "bytes": "25ff000000",
+          "mnemonic": "and",
+          "operands": "eax, 0xff"
+        },
+        {
+          "address": "0x470b3c",
+          "bytes": "c1e004",
+          "mnemonic": "shl",
+          "operands": "eax, 4"
+        },
+        {
+          "address": "0x470b3f",
+          "bytes": "8890f8805000",
+          "mnemonic": "mov",
+          "operands": "byte ptr [eax + 0x5080f8], dl"
+        },
+        {
+          "address": "0x470b45",
+          "bytes": "c3",
+          "mnemonic": "ret",
+          "operands": ""
+        }
+      ]
+    },
+    {
+      "symbol": "BatimentExiste",
+      "start": "0x41a735",
+      "end_exclusive": "0x41a75c",
+      "bytes_hex": "5231d26689c289d0c1e00401d0c1e00201d0c1e00205c8a049008a400525ff0000000f95c05ac3",
+      "sha256": "eb15902f5896b293e28f8b17690f75d78ef2e5f7ff81facd6d89dc82ef5b1afc",
+      "instructions": [
+        {
+          "address": "0x41a735",
+          "bytes": "52",
+          "mnemonic": "push",
+          "operands": "edx"
+        },
+        {
+          "address": "0x41a736",
+          "bytes": "31d2",
+          "mnemonic": "xor",
+          "operands": "edx, edx"
+        },
+        {
+          "address": "0x41a738",
+          "bytes": "6689c2",
+          "mnemonic": "mov",
+          "operands": "dx, ax"
+        },
+        {
+          "address": "0x41a73b",
+          "bytes": "89d0",
+          "mnemonic": "mov",
+          "operands": "eax, edx"
+        },
+        {
+          "address": "0x41a73d",
+          "bytes": "c1e004",
+          "mnemonic": "shl",
+          "operands": "eax, 4"
+        },
+        {
+          "address": "0x41a740",
+          "bytes": "01d0",
+          "mnemonic": "add",
+          "operands": "eax, edx"
+        },
+        {
+          "address": "0x41a742",
+          "bytes": "c1e002",
+          "mnemonic": "shl",
+          "operands": "eax, 2"
+        },
+        {
+          "address": "0x41a745",
+          "bytes": "01d0",
+          "mnemonic": "add",
+          "operands": "eax, edx"
+        },
+        {
+          "address": "0x41a747",
+          "bytes": "c1e002",
+          "mnemonic": "shl",
+          "operands": "eax, 2"
+        },
+        {
+          "address": "0x41a74a",
+          "bytes": "05c8a04900",
+          "mnemonic": "add",
+          "operands": "eax, 0x49a0c8"
+        },
+        {
+          "address": "0x41a74f",
+          "bytes": "8a4005",
+          "mnemonic": "mov",
+          "operands": "al, byte ptr [eax + 5]"
+        },
+        {
+          "address": "0x41a752",
+          "bytes": "25ff000000",
+          "mnemonic": "and",
+          "operands": "eax, 0xff"
+        },
+        {
+          "address": "0x41a757",
+          "bytes": "0f95c0",
+          "mnemonic": "setne",
+          "operands": "al"
+        },
+        {
+          "address": "0x41a75a",
+          "bytes": "5a",
+          "mnemonic": "pop",
+          "operands": "edx"
+        },
+        {
+          "address": "0x41a75b",
+          "bytes": "c3",
+          "mnemonic": "ret",
+          "operands": ""
+        }
+      ]
+    },
+    {
+      "symbol": "BatimentGetPlayer",
+      "start": "0x41a08c",
+      "end_exclusive": "0x41a0ab",
+      "bytes_hex": "5231d26689c289d0c1e00401d0c1e00201d0c1e00205c8a049008a40045ac3",
+      "sha256": "73c7960bdd0b83a8016cc9f7097a635079ae215bfcd10f91c37badd7e6c90932",
+      "instructions": [
+        {
+          "address": "0x41a08c",
+          "bytes": "52",
+          "mnemonic": "push",
+          "operands": "edx"
+        },
+        {
+          "address": "0x41a08d",
+          "bytes": "31d2",
+          "mnemonic": "xor",
+          "operands": "edx, edx"
+        },
+        {
+          "address": "0x41a08f",
+          "bytes": "6689c2",
+          "mnemonic": "mov",
+          "operands": "dx, ax"
+        },
+        {
+          "address": "0x41a092",
+          "bytes": "89d0",
+          "mnemonic": "mov",
+          "operands": "eax, edx"
+        },
+        {
+          "address": "0x41a094",
+          "bytes": "c1e004",
+          "mnemonic": "shl",
+          "operands": "eax, 4"
+        },
+        {
+          "address": "0x41a097",
+          "bytes": "01d0",
+          "mnemonic": "add",
+          "operands": "eax, edx"
+        },
+        {
+          "address": "0x41a099",
+          "bytes": "c1e002",
+          "mnemonic": "shl",
+          "operands": "eax, 2"
+        },
+        {
+          "address": "0x41a09c",
+          "bytes": "01d0",
+          "mnemonic": "add",
+          "operands": "eax, edx"
+        },
+        {
+          "address": "0x41a09e",
+          "bytes": "c1e002",
+          "mnemonic": "shl",
+          "operands": "eax, 2"
+        },
+        {
+          "address": "0x41a0a1",
+          "bytes": "05c8a04900",
+          "mnemonic": "add",
+          "operands": "eax, 0x49a0c8"
+        },
+        {
+          "address": "0x41a0a6",
+          "bytes": "8a4004",
+          "mnemonic": "mov",
+          "operands": "al, byte ptr [eax + 4]"
+        },
+        {
+          "address": "0x41a0a9",
+          "bytes": "5a",
+          "mnemonic": "pop",
+          "operands": "edx"
+        },
+        {
+          "address": "0x41a0aa",
+          "bytes": "c3",
+          "mnemonic": "ret",
+          "operands": ""
+        }
+      ]
+    },
+    {
+      "symbol": "BatimentGetType",
+      "start": "0x41a4f4",
+      "end_exclusive": "0x41a513",
+      "bytes_hex": "5231d26689c289d0c1e00401d0c1e00201d0c1e00205c8a049008a40085ac3",
+      "sha256": "b3f55e7d1ddbe9eb0c88c8042cc80aa415dd5b8f280b6c018978cbe182cf7584",
+      "instructions": [
+        {
+          "address": "0x41a4f4",
+          "bytes": "52",
+          "mnemonic": "push",
+          "operands": "edx"
+        },
+        {
+          "address": "0x41a4f5",
+          "bytes": "31d2",
+          "mnemonic": "xor",
+          "operands": "edx, edx"
+        },
+        {
+          "address": "0x41a4f7",
+          "bytes": "6689c2",
+          "mnemonic": "mov",
+          "operands": "dx, ax"
+        },
+        {
+          "address": "0x41a4fa",
+          "bytes": "89d0",
+          "mnemonic": "mov",
+          "operands": "eax, edx"
+        },
+        {
+          "address": "0x41a4fc",
+          "bytes": "c1e004",
+          "mnemonic": "shl",
+          "operands": "eax, 4"
+        },
+        {
+          "address": "0x41a4ff",
+          "bytes": "01d0",
+          "mnemonic": "add",
+          "operands": "eax, edx"
+        },
+        {
+          "address": "0x41a501",
+          "bytes": "c1e002",
+          "mnemonic": "shl",
+          "operands": "eax, 2"
+        },
+        {
+          "address": "0x41a504",
+          "bytes": "01d0",
+          "mnemonic": "add",
+          "operands": "eax, edx"
+        },
+        {
+          "address": "0x41a506",
+          "bytes": "c1e002",
+          "mnemonic": "shl",
+          "operands": "eax, 2"
+        },
+        {
+          "address": "0x41a509",
+          "bytes": "05c8a04900",
+          "mnemonic": "add",
+          "operands": "eax, 0x49a0c8"
+        },
+        {
+          "address": "0x41a50e",
+          "bytes": "8a4008",
+          "mnemonic": "mov",
+          "operands": "al, byte ptr [eax + 8]"
+        },
+        {
+          "address": "0x41a511",
+          "bytes": "5a",
+          "mnemonic": "pop",
+          "operands": "edx"
+        },
+        {
+          "address": "0x41a512",
+          "bytes": "c3",
+          "mnemonic": "ret",
+          "operands": ""
+        }
+      ]
+    }
+  ],
+  "committed_sources": [
+    {
+      "commit": "e9f5dbd33972344e37db3a93be1aec9c115a88bf",
+      "path": "pesquisas-paralelas/economia/mercado.py",
+      "sha256": "69178c8480d40b93d9605986ec667307812514e56674f1e6520c7d6ed406614e"
+    },
+    {
+      "commit": "e9f5dbd33972344e37db3a93be1aec9c115a88bf",
+      "path": "pesquisas-paralelas/economia/economia.py",
+      "sha256": "1f89ab9252fab13b25bc35b8e52aada6c9ea19b1dce51fc1036ee5d515ce5849"
+    },
+    {
+      "commit": "e9f5dbd33972344e37db3a93be1aec9c115a88bf",
+      "path": "pesquisas-paralelas/combate/ataque_vivo.py",
+      "sha256": "21d3f0c9e2a307b82874c6634730a62b301751ec76c51e9ff7d151429fb7c86c"
+    },
+    {
+      "commit": "e9f5dbd33972344e37db3a93be1aec9c115a88bf",
+      "path": "pesquisas-paralelas/ia-runtime/memoria_ia_runtime.py",
+      "sha256": "8e8d780dc5c240b627e784cc478de9f6ea0534a916122bb97c3959797ba426ae"
+    },
+    {
+      "commit": "e9f5dbd33972344e37db3a93be1aec9c115a88bf",
+      "path": "pesquisas-paralelas/ia-runtime/reinicio_ia.py",
+      "sha256": "a8c62e6a3a109e1edfefe975818458f485bfd5b72a28d93b01082cf34be7c9ac"
+    }
+  ],
+  "existing_delegates": [
+    {
+      "original": "PlayerGetType",
+      "provider": "Mercado.tipo_jogador",
+      "input": "player lowu8; values4..255 return2",
+      "output": "consumedAL byte",
+      "alias": "live80-byte [0x5080a8] pointee is Mercado.jogadores"
+    },
+    {
+      "original": "GetRessource",
+      "provider": "Economia.consultar",
+      "input": "player lowu8, protected0..3",
+      "output": "four u16 values: food,stone,parts,0",
+      "alias": "exact128-byte range0x4e2ea8..0x4e2f28 is Economia.memoria"
+    },
+    {
+      "original": "BatimentGetPlayer",
+      "provider": "ataque_vivo.batiment_get_player",
+      "input": "structure lowu16, protected0..999; complete flat276000-byte pool",
+      "output": "consumedAL rawownerbyte+4; no full-EAX claim",
+      "alias": "same live world.estruturas"
+    }
+  ],
+  "missing_owner_delegates": [
+    {
+      "original": "RechercheGetNiveau",
+      "player_width": "ALu8, protected0..3",
+      "branch_width": "DXu16, proposed IaReset scope0..3",
+      "read": "u8 at0x5080f4+16*player+branch",
+      "return_width": "u8 zero-extended inAX; not a16-bit field",
+      "stores": []
+    },
+    {
+      "original": "RechercheSetBranche",
+      "player_width": "ALu8, protected0..3",
+      "branch_width": "DLu8, all0..255 values",
+      "read": "none",
+      "return_width": "game adapter ignores it; native EAX becomes(player&255)*16",
+      "stores": [
+        "u8 at0x5080f8+16*player; every other research byte retained"
+      ]
+    },
+    {
+      "original": "BatimentExiste",
+      "index_width": "AXu16, protected0..999",
+      "read": "structure+5",
+      "return_width": "EAX0/1 for nonzero state",
+      "stores": []
+    },
+    {
+      "original": "BatimentGetType",
+      "index_width": "AXu16, protected0..999",
+      "read": "structure+8",
+      "return_width": "consumedAL rawtypebyte; no full-EAX claim",
+      "stores": []
+    }
+  ],
+  "alias_rules": [
+    "Economia and Mercado constructors copy incoming arrays; they are not live alias binders.",
+    "Map existing mission-owned backing buffers directly; byte equality alone is insufficient.",
+    "Research is a distinct inherited64-byte table at0x5080f4..0x508134, not spell availability or invention flags.",
+    "Read queries never mutate; the real branch setter writes through once before IaReset continues.",
+    "Callback sitio metadata belongs to the AI adapter and must not be passed to an existing owner method that does not accept it."
+  ],
+  "validation": {
+    "kind": "static only",
+    "native_entries": 0,
+    "domain_checks": false,
+    "common_checks": false,
+    "ghidra": false,
+    "old_evidence_modified": false,
+    "production_adapter_validated": false
+  }
+}

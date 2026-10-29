@@ -1,0 +1,19 @@
+{
+  "tests": 7,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_emulacao_conclusao_remapeamento.DiferencialConclusaoRemapeamento.test_final_tail_reads_low_u16_and_restores_original_saved_register_frame",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    },
+    {
+      "test": "test_emulacao_conclusao_remapeamento.DiferencialConclusaoRemapeamento.test_fresh_seven_cases_equal_frozen_whole_images_and_translation",
+      "reason": "Optional x86: RISING_EMULAR=1"
+    }
+  ],
+  "success": true,
+  "bounded_segments": 0,
+  "x86_enabled": false,
+  "scope": "Complete natural Chemin_Remap over explicit inherited fixtures/resources, plus separate low-u16 final-tail test; no MissionLoad"
+}

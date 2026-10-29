@@ -6,7 +6,7 @@ Engin_RetrieveExperimente 0x441623 and ai-runtime's iaReset 0x47f36e sit
 between them; missions composes the whole tail and enters neither here.
 """
 from construcoes_habitaveis import bag_prend
-from proprietarios import PASSO_BAG, PASSO_ORDENS_JOGADOR, inicializar_bag
+from proprietarios import PASSO_BAG, inicializar_bag, validar_ordens
 
 
 def estrutura_realizavel(estruturas_realizaveis, rede, jogador, tipo):
@@ -26,8 +26,10 @@ def estrutura_realizavel(estruturas_realizaveis, rede, jogador, tipo):
 class CaudaCargaEconomia:
     """Shared-state tail provider; every buffer is used by identity.
 
-    habitacao: Stage 15 HabitacaoConstrucoes (economy world, unit-order Bags
-    propriedade.ordens at [0x4e19b8], structure realizability 0x4dfad4).
+    habitacao: Stage 15 HabitacaoConstrucoes (economy world, structure
+    realizability 0x4dfad4, and propriedade.ordens: the four live per-owner
+    2,704-byte unit-order pools [[0x4e19b8]+4*owner], e.g. core's
+    MundoUnidades.bolsas_tipos_unidades, passed by identity).
     ciclo_mercado: CicloMercado over the loaded market and the live player
     table [0x5080a8]. rede: one byte at 0x4e0730. jogadores_guardados: the
     80-byte source table [0x5080ac] written by InitPlayer/LoadPlayer/PlayerStore.
@@ -38,7 +40,8 @@ class CaudaCargaEconomia:
         self.ciclo = ciclo_mercado
         self.rede = rede
         self.jogadores_guardados = jogadores_guardados
-        for bloco, tamanho in ((habitacao.propriedade.ordens, 4*PASSO_ORDENS_JOGADOR), (rede, 1),
+        validar_ordens(habitacao.propriedade.ordens)
+        for bloco, tamanho in ((rede, 1),
                                (jogadores_guardados, 80), (ciclo_mercado.mercado.jogadores, 80),
                                (self.construcoes.contagens_por_tipo, 88), (self.construcoes.contagens_tipo18, 4)):
             if len(bloco) != tamanho:
@@ -57,17 +60,17 @@ class CaudaCargaEconomia:
         jogador &= 255
         if jogador >= 4:
             raise ValueError('EnginSetTechnologie protected owner is 0..3')
-        ordens = self.habitacao.propriedade.ordens
-        base = jogador*PASSO_ORDENS_JOGADOR
-        construtor = base+7*PASSO_BAG
+        # The original loads [[0x4e19b8]+4*owner]: one separate pool per owner.
+        ordens = validar_ordens(self.habitacao.propriedade.ordens)[jogador]
+        construtor = 7*PASSO_BAG
         inicializar_bag(ordens, construtor, 22)
         for tipo in range(22):
             if estrutura_realizavel(self.habitacao.estruturas_realizaveis, self.rede, jogador, tipo) and tipo != 20:
                 bag_prend(ordens, construtor, 3, tipo)
-        bag = base+14*PASSO_BAG
+        bag = 14*PASSO_BAG
         inicializar_bag(ordens, bag, 1)
         bag_prend(ordens, bag, 7, 6)
-        bag = base+8*PASSO_BAG
+        bag = 8*PASSO_BAG
         inicializar_bag(ordens, bag, 4)
         for valor in range(4):
             bag_prend(ordens, bag, 2, valor)

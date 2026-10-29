@@ -6,7 +6,7 @@ from construcoes import BASE_CAPACIDADES
 from emulador import RETORNO, x86
 from proprietarios import (BASE_BALOES, BASE_BIBLIOTECAS, BASE_JOGADOR_DEPOSITO,
                            BASE_NUMEROS_UNIDADES, BASE_PENDENCIAS, BASE_SORTILEGIOS,
-                           PASSO_ORDENS_JOGADOR)
+                           PASSO_ORDENS_JOGADOR, juntar_ordens)
 
 TABELA_ORDENS = 0x1400000
 ORDENS = 0x1401000
@@ -39,7 +39,8 @@ class BancadaProprietarios(BancadaInitCave):
         self.cpu.mem_write(BASE_BALOES, bytes(estado.baloes))
         self.cpu.mem_write(BASE_NUMEROS_UNIDADES, bytes(estado.numeros_unidades))
         self.cpu.mem_write(BASE_PENDENCIAS, bytes(estado.pendencias) + b'\xb2' * 8)
-        self.cpu.mem_write(ORDENS - 8, b'\xf1' * 8 + bytes(estado.ordens) + b'\x1f' * 8)
+        # Native layout kept contiguous (owner stride 2,704); Python owns four pools.
+        self.cpu.mem_write(ORDENS - 8, b'\xf1' * 8 + juntar_ordens(estado.ordens) + b'\x1f' * 8)
         self.cpu.mem_write(BASE_SORTILEGIOS - 8, b'\xd3' * 8 + bytes(estado.sortilegios) + b'\x3d' * 8)
         self.cpu.mem_write(BASE_JOGADOR_DEPOSITO, bytes([estado.jogador_deposito]))
 

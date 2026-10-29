@@ -13,7 +13,8 @@ sys.path.insert(0, str(PASTA))
 sys.path.insert(0, str(PASTA.parents[1]/'ferramentas'))
 import casos_cauda_carga as casos
 from casos_cauda_carga import MERCADO
-from cauda_carga import estrutura_realizavel
+from cauda_carga import CaudaCargaEconomia, estrutura_realizavel
+from proprietarios import PASSO_ORDENS_JOGADOR, juntar_ordens
 
 CAPTURAS = json.loads((PASTA/'evidencias/captura-cauda-carga-original.json').read_text())
 
@@ -31,8 +32,8 @@ def hashes_python(caso):
     return r
 
 
-def cauda_python(caso, modo='tail'):
-    h, t = casos.montar_cauda(caso)
+def cauda_python(caso, modo='tail', *, bolsas=None):
+    h, t = casos.montar_cauda(caso, bolsas=bolsas)
     if modo == 'habitation+tail':
         if h.estrutura_habitada(0):
             h.tornar_habitavel(caso.mundo, 0)
@@ -101,6 +102,36 @@ class ExemplosCaudaCarga(unittest.TestCase):
             for k in range(20):
                 origem = guardados if k == 6 or 12 <= k < 20 else vivos
                 self.assertEqual(caso.jogadores[j*20+k], origem[j*20+k], (j, k))
+
+    def test_separate_owner_pools_match_the_legacy_contiguous_fixture(self):
+        for semente, rede in ((60, 0), (61, 1), (62, 0x80)):
+            legado = casos.caso_pool(f'legacy {semente}', semente=semente, rede=rede)
+            separado = casos.caso_pool(f'legacy {semente}', semente=semente, rede=rede)
+            bolsas = [bytearray(separado.ordens[j*2704:(j+1)*2704]) for j in range(4)]
+            antes_fixture = bytes(separado.ordens)
+            t = cauda_python(separado, bolsas=bolsas)
+            self.assertTrue(all(a is b for a, b in zip(t.habitacao.propriedade.ordens, bolsas)))
+            cauda_python(legado)
+            esperado = hashes_python(legado)
+            obtido = hashes_python(separado)
+            self.assertEqual(obtido.pop('ordens'), hashlib.sha256(antes_fixture).hexdigest())
+            self.assertEqual(b''.join(bolsas), bytes(legado.ordens))
+            esperado.pop('ordens')
+            self.assertEqual(obtido, esperado)
+
+    def test_load_tail_rejects_a_rebound_single_buffer_before_any_store(self):
+        caso = next(casos.casos_monde01())
+        h, t = casos.montar_cauda(caso)
+        originais = h.propriedade.ordens
+        antes = hashes_python(caso), [bytes(x) for x in originais]
+        for invalido in (bytearray(10816), list(h.propriedade.ordens[:3]),
+                         [bytearray(2704), bytearray(2704), bytearray(2704), bytearray(2703)]):
+            h.propriedade.ordens = invalido
+            with self.assertRaises(ValueError):
+                CaudaCargaEconomia(h, t.ciclo, rede=caso.rede_bytes, jogadores_guardados=caso.jogadores_guardados)
+            with self.assertRaises(ValueError):
+                t.definir_tecnologia_unidades(0)
+        self.assertEqual((hashes_python(caso), [bytes(x) for x in originais]), antes)
 
     def test_protected_domains_and_shared_identity(self):
         caso = next(casos.casos_monde01())
@@ -203,6 +234,38 @@ class DiferencialCaudaCarga(unittest.TestCase):
                     self.assertEqual(regs['EAX'] & 255,
                                      estrutura_realizavel(caso.estruturas_realizaveis, bytes([rede]), jogador, tipo))
                     self.assertEqual(regs['EBX'], 0x13572468)
+
+    def test_engin_init_technologie_through_four_page_aligned_owner_allocations(self):
+        """The original shape: [0x4e19b8] -> four separate pages with gaps (MONDE01 0x41781000..)."""
+        from bancada_cauda_carga import TABELA_ORDENS
+        b = self.b
+        base, passo = TABELA_ORDENS + 0x5000, 0x1000
+        enderecos = [base + j*passo for j in range(4)]
+        antigo = bytes(b.cpu.mem_read(TABELA_ORDENS, 16))
+        self.addCleanup(b.cpu.mem_write, TABELA_ORDENS, antigo)
+        casos_teste = list(casos.casos_monde01()) + [casos.caso_pool(f'paged {s}', semente=70+s, rede=s % 3)
+                                                     for s in range(3)]
+        for caso in casos_teste:
+            b.carregar(caso)
+            rng = random.Random(f'paged:{caso.nome}')
+            lacunas = bytes(rng.randbytes(4*passo))
+            b.cpu.mem_write(base, lacunas)
+            bolsas = [bytearray(rng.randbytes(PASSO_ORDENS_JOGADOR)) for _ in range(4)]
+            for endereco, bolsa in zip(enderecos, bolsas):
+                b.cpu.mem_write(endereco, bytes(bolsa))
+            b.apontar_ordens(enderecos)
+            self.assertEqual(b.inicializar_tecnologia_unidades()['EIP'], 0x3000000)
+            _, t = casos.montar_cauda(caso, bolsas=bolsas)
+            antes = [bytes(x) for x in bolsas]
+            t.inicializar_tecnologia_unidades()
+            self.assertNotEqual([bytes(x) for x in bolsas], antes, caso.nome)
+            for j, (endereco, bolsa) in enumerate(zip(enderecos, bolsas)):
+                self.assertEqual(bytes(b.cpu.mem_read(endereco, PASSO_ORDENS_JOGADOR)), bytes(bolsa), (caso.nome, j))
+                fim = endereco + PASSO_ORDENS_JOGADOR
+                self.assertEqual(bytes(b.cpu.mem_read(fim, passo - PASSO_ORDENS_JOGADOR)),
+                                 lacunas[fim-base:(j+1)*passo], (caso.nome, 'gap', j))
+            self.conferir(caso)  # contiguous fixture region and all other state untouched on both sides
+            b.apontar_ordens(struct.unpack('<4I', antigo))
 
     def test_direct_engin_set_technologie_with_high_register_bits(self):
         b = self.b

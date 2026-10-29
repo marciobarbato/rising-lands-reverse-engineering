@@ -1,0 +1,196 @@
+{
+  "captured_at_utc": "2026-10-28T21:28:03.285070+00:00",
+  "verified_research_main": "85dc8130cf45966f8cde6001b6ccb860d32d4db1",
+  "remote_fetched": true,
+  "canonical_clean": true,
+  "integration_lock": "/Users/marcio/git/Rising Lands/engenharia-reversa/.git/rising-integration.lock",
+  "integration_lock_free": true,
+  "research_native_git_ghidra_children": [],
+  "all_seven_execution_chats": "idle, independently inspected via list_threads",
+  "automation": "coordenar-rising-lands PAUSED at18:25BRT",
+  "note": "Pre-publication handover freeze. Maintenance documentation gate is the only later permitted heavy operation; publication receipt records its resulting main.",
+  "worktrees": [
+    {
+      "path": "/Users/marcio/git/Rising Lands/engenharia-reversa",
+      "branch": "main",
+      "head": "85dc8130cf45966f8cde6001b6ccb860d32d4db1",
+      "remote_branch_head": "85dc8130cf45966f8cde6001b6ccb860d32d4db1",
+      "changes": [],
+      "commits_not_in_verified_main": []
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/archive/retired-worktrees/core",
+      "branch": "codex/nucleo-construcoes",
+      "head": "813af24ebea41a8dd58e1ba107604b8c0cfeb3ff",
+      "remote_branch_head": "813af24ebea41a8dd58e1ba107604b8c0cfeb3ff",
+      "changes": [],
+      "commits_not_in_verified_main": []
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/archive/retired-worktrees/economy",
+      "branch": "codex/economia-mercado",
+      "head": "bcd8ce34f8212143b3c27b384a709dbbfd5acbfb",
+      "remote_branch_head": "bcd8ce34f8212143b3c27b384a709dbbfd5acbfb",
+      "changes": [],
+      "commits_not_in_verified_main": []
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/archive/retired-worktrees/graphics",
+      "branch": "codex/graficos-animacao",
+      "head": "da60cb99633da1764d420c59366e83aebcb70dd6",
+      "remote_branch_head": "da60cb99633da1764d420c59366e83aebcb70dd6",
+      "changes": [],
+      "commits_not_in_verified_main": []
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/worktrees/integration-graphics-a0f20f22",
+      "branch": "(detached)",
+      "head": "6f41a9c79a8eca762a346dfe768e3705473b120a",
+      "remote_branch_head": null,
+      "changes": [],
+      "commits_not_in_verified_main": [
+        "6f41a9c79a8eca762a346dfe768e3705473b120a Merge branch 'feat/re-graphics' into HEAD"
+      ]
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/worktrees/integration-macos-56537e42",
+      "branch": "(detached)",
+      "head": "67f97a6408498929ede841bd07f2a6f511e91d79",
+      "remote_branch_head": null,
+      "changes": [],
+      "commits_not_in_verified_main": [
+        "67f97a6408498929ede841bd07f2a6f511e91d79 Merge macos implementation after reviewed integration"
+      ]
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+      "branch": "feat/macos-playable",
+      "head": "2ada5835927e1560a5efc246c7a60cb9aa0f6eee",
+      "remote_branch_head": "2ada5835927e1560a5efc246c7a60cb9aa0f6eee",
+      "changes": [],
+      "commits_not_in_verified_main": []
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/worktrees/maintenance",
+      "branch": "coordinator/maintenance",
+      "head": "85dc8130cf45966f8cde6001b6ccb860d32d4db1",
+      "remote_branch_head": "477a00cef5be4a653eb3849a440830b7509eaaaf",
+      "changes": [
+        "M docs/HANDOVER_CLAUDE_20261028.md",
+        " M docs/PROGRESS.md",
+        " M docs/ROADMAP_MONDE01.md",
+        " M docs/STATUS.md",
+        " M docs/progress/README.md",
+        "?? docs/progress/2026-10-28-CXR-02-closed.md",
+        "?? docs/progress/2026-10-28-CXR-03-closed.md",
+        "?? docs/progress/2026-10-28-CXR-04-closed.md",
+        "?? docs/progress/2026-10-28-CXR-05-closed.md",
+        "?? docs/progress/2026-10-28-CXR-06-checkpoint.md",
+        "?? integracao/validacao/cxr-20261028-02-ai-legacy.json",
+        "?? integracao/validacao/cxr-20261028-02-core-native.json",
+        "?? integracao/validacao/cxr-20261028-02-core-reproduction.json",
+        "?? integracao/validacao/cxr-20261028-03-missions-reproduction.json",
+        "?? integracao/validacao/cxr-20261028-04-core-reproduction.json",
+        "?? integracao/validacao/cxr-20261028-05-economy-main.txt",
+        "?? integracao/validacao/cxr-20261028-06-ai-adapter-attempt.json",
+        "?? integracao/validacao/cxr-20261028-06-ai-adapter-native.json"
+      ],
+      "commits_not_in_verified_main": []
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/worktrees/provider-imports",
+      "branch": "coordinator/provider-imports",
+      "head": "c2aeda140218ba0bc6e67eb786c21b478dc16467",
+      "remote_branch_head": "c2aeda140218ba0bc6e67eb786c21b478dc16467",
+      "changes": [],
+      "commits_not_in_verified_main": []
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/worktrees/re-ai-runtime",
+      "branch": "feat/re-ai-runtime",
+      "head": "16e5ada1b21e100c4f06ef2c4aa20299ca82ae44",
+      "remote_branch_head": "16e5ada1b21e100c4f06ef2c4aa20299ca82ae44",
+      "changes": [],
+      "commits_not_in_verified_main": [
+        "16e5ada1b21e100c4f06ef2c4aa20299ca82ae44 Record focused native proof for the shared AI reset WIP",
+        "a5316d4b8b22265eaeb29afd4909c39314f52044 Merge remote-tracking branch 'origin/main' into feat/re-ai-runtime",
+        "1a455b037a3af8a290d988753e52c72d0deec2e2 WIP: prepare shared-state AI reset production delegates",
+        "c3cf003b8922c32312de7bd24abb01b49aaf2bfc Merge remote-tracking branch 'origin/main' into feat/re-ai-runtime",
+        "1b49d0420177d6a12e4ec818ea9fd763c5a40adf Clarify economy delegates and missing AI reset leaves",
+        "428f54cc075cb94ab0ffba5595dfed42f09f7d38 Record concrete M1 AI reset adapter dependencies"
+      ]
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/worktrees/re-audio",
+      "branch": "feat/re-audio",
+      "head": "c464dcd745a0397dbc64e943c2070df6fb4105fe",
+      "remote_branch_head": "85d54ac651eb578afa528d167b229619258995e6",
+      "changes": [],
+      "commits_not_in_verified_main": [
+        "c464dcd745a0397dbc64e943c2070df6fb4105fe Inventory intact audio queue bytes before original captures"
+      ]
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/worktrees/re-combat",
+      "branch": "feat/re-combat",
+      "head": "8810b3730a0fb788af3eac2b447dea65372f597f",
+      "remote_branch_head": "d24b09c1ff4e6a81356fbfecbb24bf3140309af3",
+      "changes": [
+        "M docs/COMBAT.md",
+        " M pesquisas-paralelas/combate/HANDOFF.md",
+        "?? pesquisas-paralelas/combate/CONTRACT_BUILDING_DAMAGE.md",
+        "?? pesquisas-paralelas/combate/evidencias/dano-batiment-stage19.asm",
+        "?? pesquisas-paralelas/combate/evidencias/dano-batiment-stage19.json",
+        "?? pesquisas-paralelas/combate/rastrear_dano_batiment.py"
+      ],
+      "commits_not_in_verified_main": []
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/worktrees/re-core",
+      "branch": "feat/re-core",
+      "head": "b2291c8e1978e45dda7569da3ddd75d232bb13a4",
+      "remote_branch_head": "e5f0b69573688418430524171058e3df124a4904",
+      "changes": [],
+      "commits_not_in_verified_main": [
+        "b2291c8e1978e45dda7569da3ddd75d232bb13a4 Record verified remap delivery and deferred experience-copy handoff"
+      ]
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/worktrees/re-economy",
+      "branch": "feat/re-economy",
+      "head": "85dc8130cf45966f8cde6001b6ccb860d32d4db1",
+      "remote_branch_head": "ad796c777ca4a60e8e6f59be72208539f8f585bd",
+      "changes": [],
+      "commits_not_in_verified_main": []
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/worktrees/re-graphics",
+      "branch": "feat/re-graphics",
+      "head": "2921122cd3cfd3aaaf54a935bbbeee4ccf66603b",
+      "remote_branch_head": "4d542f4dd1f92190c28b1d1c96f78b7fb38ceba4",
+      "changes": [],
+      "commits_not_in_verified_main": [
+        "2921122cd3cfd3aaaf54a935bbbeee4ccf66603b Record light MONDE01 facade and lookup readiness inventory"
+      ]
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/worktrees/re-missions",
+      "branch": "feat/re-missions",
+      "head": "33a09a1d59f825639d6e7b4d3a2a03f042c045f1",
+      "remote_branch_head": "33a09a1d59f825639d6e7b4d3a2a03f042c045f1",
+      "changes": [],
+      "commits_not_in_verified_main": [
+        "33a09a1d59f825639d6e7b4d3a2a03f042c045f1 Record published remap contract for mission oracle handover",
+        "e7ea60ffc8d922979e06841939ddda349ed3a622 Prepare explicit-state whole MissionLoad oracle scaffold"
+      ]
+    }
+  ],
+  "additional_preserved_documentation_candidate": {
+    "path": "/Users/marcio/git/Rising Lands/worktrees/integration-maintenance-bf616e24",
+    "head": "fc8d2329dc145fe09f7edd0bcf7ab90a582534b8",
+    "changes": [],
+    "failure": "broken relative Markdown links in nested round snapshots; source/captures untouched",
+    "log": "integracao/validacao/cxr-20261028-documentation-first-attempt.txt",
+    "recorded_at_utc": "2026-10-28T21:30:10.674223+00:00"
+  }
+}

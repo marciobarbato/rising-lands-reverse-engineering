@@ -1,0 +1,862 @@
+{
+  "source_commit": "ff02f8accddff16934155d5c65dd3bdd8814e42e",
+  "source_files": [
+    {
+      "path": "pesquisas-paralelas/economia/capturar_consultas_reinicio_economia_original.py",
+      "sha256": "6dc2075908c454bd5517be61cbf8ba9befc4e5a8cf6b9a3c63d4b1b93bc09020"
+    },
+    {
+      "path": "pesquisas-paralelas/economia/casos_consultas_reinicio_economia.py",
+      "sha256": "8e24d51b202f8996ea75673ce177c7af01d60af129f7aa6d88303cfcafe9f0ba"
+    },
+    {
+      "path": "ferramentas/emulador.py",
+      "sha256": "689972762424f203e5d28b67f5ecc77212c9da5da45b488daa0d2c9069f4ca5f"
+    },
+    {
+      "path": "pesquisas-paralelas/economia/evidencias/contratos-economia-iareset-auditoria.json",
+      "sha256": "6bbe8e307a7d46e54a207611750bd2769e8dcaa8d6966f716469f9540fd49e68"
+    }
+  ],
+  "captured_at_utc": "2026-10-28T20:59:25.963634+00:00",
+  "allowed_original_intervals": [
+    [
+      "0x4717c2",
+      "0x4717de"
+    ],
+    [
+      "0x470b37",
+      "0x470b46"
+    ],
+    [
+      "0x41a08c",
+      "0x41a0ab"
+    ],
+    [
+      "0x41a4f4",
+      "0x41a513"
+    ]
+  ],
+  "scope": "Original-only owner-leaf captures; no translation executed",
+  "translation_executed": false,
+  "sha256_exe": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "scenarios": 14,
+  "original_entries": 20,
+  "bounded_segments": 20,
+  "captures": [
+    {
+      "nome": "research-read-owner-0",
+      "inicial": {
+        "pesquisa": "0024415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+        "estruturas_sha256": "c8bdbda7063cdc6a27724b5e9079e106b5d0c358990b4e5a5d9719180be0ac47",
+        "guardas": [
+          "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+          "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+          "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+          "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+        ]
+      },
+      "chamadas": [
+        {
+          "entrada": "0x4717c2",
+          "entrada_regs": {
+            "EAX": 2901217792,
+            "EDX": 3203334144
+          },
+          "saida_regs": {
+            "EAX": 0,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203334144,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [],
+          "estado": {
+            "pesquisa": "0024415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "c8bdbda7063cdc6a27724b5e9079e106b5d0c358990b4e5a5d9719180be0ac47",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "nome": "research-read-owner-1",
+      "inicial": {
+        "pesquisa": "0724415e7b98b5d2ef0c294663809dbad701112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+        "estruturas_sha256": "c8bdbda7063cdc6a27724b5e9079e106b5d0c358990b4e5a5d9719180be0ac47",
+        "guardas": [
+          "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+          "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+          "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+          "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+        ]
+      },
+      "chamadas": [
+        {
+          "entrada": "0x4717c2",
+          "entrada_regs": {
+            "EAX": 2901217793,
+            "EDX": 3203334145
+          },
+          "saida_regs": {
+            "EAX": 1,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203334145,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad701112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "c8bdbda7063cdc6a27724b5e9079e106b5d0c358990b4e5a5d9719180be0ac47",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "nome": "research-read-owner-2",
+      "inicial": {
+        "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c480fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+        "estruturas_sha256": "c8bdbda7063cdc6a27724b5e9079e106b5d0c358990b4e5a5d9719180be0ac47",
+        "guardas": [
+          "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+          "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+          "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+          "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+        ]
+      },
+      "chamadas": [
+        {
+          "entrada": "0x4717c2",
+          "entrada_regs": {
+            "EAX": 2901217794,
+            "EDX": 3203334146
+          },
+          "saida_regs": {
+            "EAX": 128,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203334146,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c480fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "c8bdbda7063cdc6a27724b5e9079e106b5d0c358990b4e5a5d9719180be0ac47",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "nome": "research-read-owner-3",
+      "inicial": {
+        "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ffeb0825425f7c99b6d3f00d2a",
+        "estruturas_sha256": "c8bdbda7063cdc6a27724b5e9079e106b5d0c358990b4e5a5d9719180be0ac47",
+        "guardas": [
+          "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+          "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+          "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+          "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+        ]
+      },
+      "chamadas": [
+        {
+          "entrada": "0x4717c2",
+          "entrada_regs": {
+            "EAX": 2901217795,
+            "EDX": 3203334147
+          },
+          "saida_regs": {
+            "EAX": 255,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203334147,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ffeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "c8bdbda7063cdc6a27724b5e9079e106b5d0c358990b4e5a5d9719180be0ac47",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "nome": "research-write-owner-0",
+      "inicial": {
+        "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+        "estruturas_sha256": "c8bdbda7063cdc6a27724b5e9079e106b5d0c358990b4e5a5d9719180be0ac47",
+        "guardas": [
+          "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+          "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+          "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+          "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+        ]
+      },
+      "chamadas": [
+        {
+          "entrada": "0x470b37",
+          "entrada_regs": {
+            "EAX": 2901217792,
+            "EDX": 3203338752
+          },
+          "saida_regs": {
+            "EAX": 0,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203338752,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [
+            {
+              "endereco": "0x5080f8",
+              "tamanho": 1,
+              "valor": 3203338752
+            }
+          ],
+          "estado": {
+            "pesquisa": "0724415e0098b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "c8bdbda7063cdc6a27724b5e9079e106b5d0c358990b4e5a5d9719180be0ac47",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "nome": "research-write-owner-1",
+      "inicial": {
+        "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+        "estruturas_sha256": "c8bdbda7063cdc6a27724b5e9079e106b5d0c358990b4e5a5d9719180be0ac47",
+        "guardas": [
+          "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+          "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+          "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+          "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+        ]
+      },
+      "chamadas": [
+        {
+          "entrada": "0x470b37",
+          "entrada_regs": {
+            "EAX": 2901217793,
+            "EDX": 3203338755
+          },
+          "saida_regs": {
+            "EAX": 16,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203338755,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [
+            {
+              "endereco": "0x508108",
+              "tamanho": 1,
+              "valor": 3203338755
+            }
+          ],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e036885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "c8bdbda7063cdc6a27724b5e9079e106b5d0c358990b4e5a5d9719180be0ac47",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "nome": "research-write-owner-2",
+      "inicial": {
+        "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+        "estruturas_sha256": "c8bdbda7063cdc6a27724b5e9079e106b5d0c358990b4e5a5d9719180be0ac47",
+        "guardas": [
+          "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+          "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+          "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+          "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+        ]
+      },
+      "chamadas": [
+        {
+          "entrada": "0x470b37",
+          "entrada_regs": {
+            "EAX": 2901217794,
+            "EDX": 3203338880
+          },
+          "saida_regs": {
+            "EAX": 32,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203338880,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [
+            {
+              "endereco": "0x508118",
+              "tamanho": 1,
+              "valor": 3203338880
+            }
+          ],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe803855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "c8bdbda7063cdc6a27724b5e9079e106b5d0c358990b4e5a5d9719180be0ac47",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "nome": "research-write-owner-3",
+      "inicial": {
+        "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+        "estruturas_sha256": "c8bdbda7063cdc6a27724b5e9079e106b5d0c358990b4e5a5d9719180be0ac47",
+        "guardas": [
+          "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+          "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+          "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+          "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+        ]
+      },
+      "chamadas": [
+        {
+          "entrada": "0x470b37",
+          "entrada_regs": {
+            "EAX": 2901217795,
+            "EDX": 3203339007
+          },
+          "saida_regs": {
+            "EAX": 48,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203339007,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [
+            {
+              "endereco": "0x508128",
+              "tamanho": 1,
+              "valor": 3203339007
+            }
+          ],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceff0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "c8bdbda7063cdc6a27724b5e9079e106b5d0c358990b4e5a5d9719180be0ac47",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "nome": "structure-0-state-0",
+      "inicial": {
+        "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+        "estruturas_sha256": "17299707bfec6282f0f3372f9aa1eb726119e5f31bcf346ecb257923efa9061b",
+        "guardas": [
+          "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+          "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+          "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+          "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+        ]
+      },
+      "chamadas": [
+        {
+          "entrada": "0x41a08c",
+          "entrada_regs": {
+            "EAX": 2774138880,
+            "EDX": 3203386110
+          },
+          "saida_regs": {
+            "EAX": 4825088,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203386110,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "17299707bfec6282f0f3372f9aa1eb726119e5f31bcf346ecb257923efa9061b",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        },
+        {
+          "entrada": "0x41a4f4",
+          "entrada_regs": {
+            "EAX": 2774138880,
+            "EDX": 3203386110
+          },
+          "saida_regs": {
+            "EAX": 4825090,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203386110,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "17299707bfec6282f0f3372f9aa1eb726119e5f31bcf346ecb257923efa9061b",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "nome": "structure-0-state-3",
+      "inicial": {
+        "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+        "estruturas_sha256": "d718c24bfdf9162d2a9d5a9e12440226fc7483e1200972275f5d7666e253f825",
+        "guardas": [
+          "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+          "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+          "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+          "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+        ]
+      },
+      "chamadas": [
+        {
+          "entrada": "0x41a08c",
+          "entrada_regs": {
+            "EAX": 2774138880,
+            "EDX": 3203386110
+          },
+          "saida_regs": {
+            "EAX": 4825288,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203386110,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "d718c24bfdf9162d2a9d5a9e12440226fc7483e1200972275f5d7666e253f825",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        },
+        {
+          "entrada": "0x41a4f4",
+          "entrada_regs": {
+            "EAX": 2774138880,
+            "EDX": 3203386110
+          },
+          "saida_regs": {
+            "EAX": 4825091,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203386110,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "d718c24bfdf9162d2a9d5a9e12440226fc7483e1200972275f5d7666e253f825",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "nome": "structure-0-state-5",
+      "inicial": {
+        "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+        "estruturas_sha256": "05276e086fae8f568831c5ad58f2f048d0dc56740023f6d9259f16d392a78e63",
+        "guardas": [
+          "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+          "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+          "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+          "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+        ]
+      },
+      "chamadas": [
+        {
+          "entrada": "0x41a08c",
+          "entrada_regs": {
+            "EAX": 2774138880,
+            "EDX": 3203386110
+          },
+          "saida_regs": {
+            "EAX": 4825343,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203386110,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "05276e086fae8f568831c5ad58f2f048d0dc56740023f6d9259f16d392a78e63",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        },
+        {
+          "entrada": "0x41a4f4",
+          "entrada_regs": {
+            "EAX": 2774138880,
+            "EDX": 3203386110
+          },
+          "saida_regs": {
+            "EAX": 4825343,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203386110,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "05276e086fae8f568831c5ad58f2f048d0dc56740023f6d9259f16d392a78e63",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "nome": "structure-999-state-0",
+      "inicial": {
+        "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+        "estruturas_sha256": "04327537d0180aaebc702a611cda0315e18201329b50ec09fd2e7bfadcecbbbe",
+        "guardas": [
+          "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+          "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+          "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+          "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+        ]
+      },
+      "chamadas": [
+        {
+          "entrada": "0x41a08c",
+          "entrada_regs": {
+            "EAX": 2774139879,
+            "EDX": 3203386110
+          },
+          "saida_regs": {
+            "EAX": 5100800,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203386110,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "04327537d0180aaebc702a611cda0315e18201329b50ec09fd2e7bfadcecbbbe",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        },
+        {
+          "entrada": "0x41a4f4",
+          "entrada_regs": {
+            "EAX": 2774139879,
+            "EDX": 3203386110
+          },
+          "saida_regs": {
+            "EAX": 5100802,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203386110,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "04327537d0180aaebc702a611cda0315e18201329b50ec09fd2e7bfadcecbbbe",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "nome": "structure-999-state-3",
+      "inicial": {
+        "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+        "estruturas_sha256": "0ffc42de50859e9a84a6e81cf45b7a59198c1f6ac5533c26b6e019ed4b8a80c8",
+        "guardas": [
+          "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+          "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+          "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+          "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+        ]
+      },
+      "chamadas": [
+        {
+          "entrada": "0x41a08c",
+          "entrada_regs": {
+            "EAX": 2774139879,
+            "EDX": 3203386110
+          },
+          "saida_regs": {
+            "EAX": 5101000,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203386110,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "0ffc42de50859e9a84a6e81cf45b7a59198c1f6ac5533c26b6e019ed4b8a80c8",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        },
+        {
+          "entrada": "0x41a4f4",
+          "entrada_regs": {
+            "EAX": 2774139879,
+            "EDX": 3203386110
+          },
+          "saida_regs": {
+            "EAX": 5100803,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203386110,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "0ffc42de50859e9a84a6e81cf45b7a59198c1f6ac5533c26b6e019ed4b8a80c8",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "nome": "structure-999-state-5",
+      "inicial": {
+        "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+        "estruturas_sha256": "2123be741b3291def2c1a7ba21126516c11d3c3e37f4441855688b5708ec4783",
+        "guardas": [
+          "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+          "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+          "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+          "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+        ]
+      },
+      "chamadas": [
+        {
+          "entrada": "0x41a08c",
+          "entrada_regs": {
+            "EAX": 2774139879,
+            "EDX": 3203386110
+          },
+          "saida_regs": {
+            "EAX": 5101055,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203386110,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "2123be741b3291def2c1a7ba21126516c11d3c3e37f4441855688b5708ec4783",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        },
+        {
+          "entrada": "0x41a4f4",
+          "entrada_regs": {
+            "EAX": 2774139879,
+            "EDX": 3203386110
+          },
+          "saida_regs": {
+            "EAX": 5101055,
+            "EBX": 324508639,
+            "ECX": 610839776,
+            "EDX": 3203386110,
+            "ESI": 2712847316,
+            "EDI": 2441245540,
+            "EBP": 422065990,
+            "ESP": 33587204,
+            "EIP": 50331648
+          },
+          "escritas": [],
+          "estado": {
+            "pesquisa": "0724415e7b98b5d2ef0c294663809dbad7f4112e4b6885a2bfdcf91633506d8aa7c4e1fe1b3855728facc9e603203d5a7794b1ceeb0825425f7c99b6d3f00d2a",
+            "estruturas_sha256": "2123be741b3291def2c1a7ba21126516c11d3c3e37f4441855688b5708ec4783",
+            "guardas": [
+              "a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6",
+              "6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a6a",
+              "c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7",
+              "7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

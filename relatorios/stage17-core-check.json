@@ -1,0 +1,11 @@
+{
+  "command": "python3 -B scripts/check.py --domain core",
+  "tests": 408,
+  "skips": 188,
+  "failures": 0,
+  "errors": 0,
+  "success": true,
+  "seconds": 10.35,
+  "documentation_links": "PASS",
+  "scope": "Required local Core gate; optional native tests skipped here and separately run in stage17 reports"
+}

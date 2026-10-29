@@ -1,0 +1,19 @@
+{
+  "scope": "Three economy IaReset leaves; exact live buffers, no whole mission claim",
+  "mode": "Python + frozen original capture only",
+  "tests": 8,
+  "failures": 0,
+  "errors": 0,
+  "skips": [
+    {
+      "test": "test_fresh_twenty_original_returns_match_frozen_observations_and_python (test_consultas_reinicio_economia.DiferencialConsultasReinicioEconomia)",
+      "reason": "Optional original x86: RISING_EMULAR=1"
+    }
+  ],
+  "fresh_original_entries": 0,
+  "fresh_real_returns": 0,
+  "recorded_translated_leaf_calls": 14,
+  "existing_get_player_observations": 6,
+  "module_sha256": "c81239ae0b7527c01242ef3f95b0c11cfa35cbae6333e7c0068ef6a67e1ec268",
+  "success": true
+}

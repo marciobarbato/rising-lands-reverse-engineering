@@ -1,0 +1,49 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capture_commit": "2d541308c6652eeeb39867fd80d7252491afd465",
+  "capture_source_commit": "8cab80578cf744d7b407fd17f55f721565d10831",
+  "original_capture_hashes": {
+    "relatorios/stage17-original-MONDE01.json": "857bb98f39ec451c8c4d9fe005c051954b1037082d028ecd54a8abbfa32eebe6",
+    "relatorios/stage17-original-discriminating.json": "6285a34753bdbbe58a58dfbedacfb7e0db3ff275233898fcbc96dbf226cba4a7"
+  },
+  "intact_intervals": [
+    {
+      "name": "Chemin_Remap",
+      "start": "0x42ee1c",
+      "end_exclusive": "0x42f1e1",
+      "sha256": "c33e422865e5265030189389bf72f3ad75d7952546c35f737a53565e811aafd2",
+      "file": "0042ee1c.asm"
+    },
+    {
+      "name": "TerrainEstObstacleNaturel",
+      "start": "0x4752b8",
+      "end_exclusive": "0x475302",
+      "sha256": "9f7d893c6d2d71d21846af2fb6e2b97748866594e0a54ea7c2fc1ab27cbdff1b",
+      "file": "004752b8.asm"
+    }
+  ],
+  "actual_imports": {
+    "0x5231c0": {
+      "dll": "KERNEL32.dll",
+      "symbol": "GlobalAlloc"
+    },
+    "0x5231d0": {
+      "dll": "KERNEL32.dll",
+      "symbol": "GlobalLock"
+    },
+    "0x5231cc": {
+      "dll": "KERNEL32.dll",
+      "symbol": "GlobalHandle"
+    },
+    "0x5231d8": {
+      "dll": "KERNEL32.dll",
+      "symbol": "GlobalUnlock"
+    },
+    "0x5231c8": {
+      "dll": "KERNEL32.dll",
+      "symbol": "GlobalFree"
+    }
+  },
+  "unmodified_since_original_commit": true,
+  "scope": "Static original-byte/import/capture provenance audit; no native execution"
+}
