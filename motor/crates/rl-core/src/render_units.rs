@@ -1,4 +1,4 @@
-//! Normal bodies and Graphics 1.5 input overlays; unsupported branches stop.
+//! Normal bodies and Graphics 1.7 input overlays; unsupported branches stop.
 use crate::render::{i16, w, Context, Result};
 impl Context<'_> {
     pub fn unit(&mut self, x: i32, y: i32, index: u32, r: &[u8]) -> Result<()> {
@@ -31,7 +31,7 @@ impl Context<'_> {
             if !matches!(kind, 0 | 1 | 5 | 7 | 8)
                 || r[0] != 0
                 || self.camera != 0
-                || !matches!(state, 2 | 7)
+                || !(matches!(state, 2 | 7) || kind == 7 && matches!(state, 11 | 15))
                 || r[0x99] != 0
                 || r[0xdc] != 0
             {
@@ -49,8 +49,11 @@ impl Context<'_> {
             if w(r, 4) != 4 || w(r, 0x76) != 4 {
                 return self.stop(0x410be4, "fatigue words outside captured +4 = +0x76 = 4");
             }
-            if r[0xbd] != 0 && r[0x82] != 0 {
-                return self.stop(0x412923, "selected unit order marker +0x82 is not captured");
+            if r[0xbd] != 0 && r[0x82] > 1 {
+                return self.stop(
+                    0x412923,
+                    "selected unit order marker outside captured cell-target mode 1",
+                );
             }
             if r[0xaf] >> 5 != 0 && kind != 7 {
                 return self.stop(
@@ -61,6 +64,12 @@ impl Context<'_> {
             if r[0xbd] != 0 && r[0] as u32 == self.camera {
                 self.bob(i16(px), i16(py), 0x2a1e, true, None)?;
             }
+            if matches!(state, 2 | 7) {
+                self.order_markers(r)?;
+            }
+        }
+        if kind == 7 && matches!(state, 11 | 15) {
+            return self.construction_builder(r, x, y, index);
         }
         if matches!(kind, 1 | 8) {
             let count = if kind == 1 { 8 } else { 10 };
@@ -122,6 +131,20 @@ impl Context<'_> {
                 None,
             )?;
         }
+        self.unit_tail(r, x, y, index, overlay)
+    }
+    pub(crate) fn unit_tail(
+        &mut self,
+        r: &[u8],
+        x: i32,
+        y: i32,
+        index: u32,
+        overlay: bool,
+    ) -> Result<()> {
+        let dx = r[0x86] as i8 as i32;
+        let dy = r[0x87] as i8 as i32;
+        let (px, py) = (x + dx, y + dy);
+        let kind = r[1];
         let info = overlay
             && ((r[0] as u32 == self.camera && r[0xbd] != 0)
                 || self.u16(0x496ac2)? == index

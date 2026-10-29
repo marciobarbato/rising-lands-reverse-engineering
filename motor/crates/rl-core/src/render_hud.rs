@@ -13,7 +13,7 @@ impl Context<'_> {
             && my <= self.u16(0x508726)? * 32
             && self.u16(0x4e05ae)? == 3
         {
-            return self.stop(0x41729b, "AffTrame placement frame mode 3");
+            self.placement()?;
         }
         let cell = self.u16(0x496204)?;
         if cell != 65535 {
@@ -63,7 +63,7 @@ impl Context<'_> {
         }
         self.info_zone()?;
         if self.u32(0x4e060c)? != 0 {
-            return self.stop(0x40f8c0, "AffInfoAide tooltip text pointer set");
+            self.tooltip()?;
         }
         if self.u8(0x4e17ac)? != 0 {
             return self.stop(0x417c7f, "AffDebug enabled");

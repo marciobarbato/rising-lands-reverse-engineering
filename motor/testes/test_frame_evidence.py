@@ -1,3 +1,4 @@
+from pinned_reference import reference_file
 """Fast tests of frame ABI layout and the offline evidence comparator (no game run)."""
 import ast
 import ctypes as C
@@ -58,7 +59,7 @@ class FrameHarnessTests(unittest.TestCase):
                     if isinstance(n, (ast.FunctionDef, ast.ClassDef))}
         copied = definitions(Path(__file__).with_name('frame_evidence.py'))
         for path, names in sources.items():
-            original = definitions(ROOT / path)
+            original = definitions(reference_file(ROOT / path))
             for name in names:
                 with self.subTest(definition=name):
                     self.assertEqual(copied[name], original[name])

@@ -85,6 +85,9 @@ fn result(r: &Renderer, generation: u64, frame: u32) -> RlRenderResult {
 fn stop_callee(address: u32) -> &'static str {
     match address {
         0x41591f => "AffEngin",
+        0x459454 => "AffText",
+        0x414495 => "AffConstruireBatiment",
+        0x4099a6 | 0x40958e => "AffBatiments",
         0x4085cb | 0x408ac8 | 0x408606 | 0x40863e | 0x40892d | 0x40f23b | 0x407e1e => {
             "AffBatiments"
         }
@@ -396,4 +399,127 @@ pub unsafe extern "C" fn rl_render_cache(
             Ok(())
         })
     })
+}
+
+/// Graphics render contract, independent of the additive host ABI minor version.
+#[no_mangle]
+pub extern "C" fn rl_render_contrato() -> u32 {
+    0x00010007
+}
+/// # Safety
+/// Copied last saved-background bytes. Metadata outputs must be aligned/writable
+/// and disjoint from buffer. A query never advances the renderer/cache.
+#[no_mangle]
+pub unsafe extern "C" fn rl_render_fundo_salvo(
+    handle: u64,
+    buffer: *mut u8,
+    capacity: u32,
+    required: *mut u32,
+    address: *mut u32,
+    generation: *mut u64,
+) -> i32 {
+    status(|| {
+        if required.is_null() || address.is_null() || generation.is_null() {
+            return Err(AbiError::InvalidArgument);
+        }
+        with_registry(|r| {
+            let bound = r.renderers.get(&handle).ok_or(AbiError::InvalidHandle)?;
+            if !r.worlds.contains_key(&bound.world) {
+                return Err(AbiError::InvalidHandle);
+            }
+            let background = bound.renderer.saved_background.as_ref();
+            let count = background.map_or(0, |b| b.pixels.len() as u32);
+            unsafe {
+                required.write(count);
+                address.write(background.map_or(0, |b| b.address));
+                generation.write(bound.renderer.cache_generation);
+            }
+            if capacity < count {
+                return Err(AbiError::BufferTooSmall);
+            }
+            if let Some(bg) = background {
+                if !bg.pixels.is_empty() {
+                    if buffer.is_null() {
+                        return Err(AbiError::InvalidArgument);
+                    }
+                    unsafe {
+                        ptr::copy_nonoverlapping(bg.pixels.as_ptr(), buffer, bg.pixels.len());
+                    }
+                }
+            }
+            Ok(())
+        })
+    })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn saved_background_query_copies_only_after_capacity_and_reset_is_explicit() {
+        // Synthetic ABI allocation fixture; no original rendering behavior is inferred.
+        let assets = Arc::new(rl_core::render_assets::Assets {
+            sprites: vec![],
+            palette: [0; 768],
+            shadow: [0; 256],
+            light: [0; 256],
+        });
+        let mut renderer = Renderer::new(
+            assets,
+            &vec![87; 480000],
+            Cache {
+                keys: vec![0; 1024],
+                raw: vec![0; 270336],
+                cursor: 0,
+            },
+        )
+        .unwrap();
+        renderer.saved_background = Some(rl_core::render::SavedBackground {
+            address: 0x900000,
+            pixels: vec![0, 5, 255, 7],
+        });
+        renderer.cache_generation = 42;
+        let (world, handle) = with_registry(|r| {
+            let world = r.next;
+            let handle = world + 1;
+            r.next += 2;
+            r.worlds.insert(world, World::new(20, 0)?);
+            r.renderers
+                .insert(handle, BoundRenderer { world, renderer });
+            Ok((world, handle))
+        })
+        .unwrap();
+        let (mut required, mut address, mut generation) = (0, 0, 0);
+        let mut bytes = [0x77; 4];
+        unsafe {
+            assert_eq!(
+                rl_render_fundo_salvo(
+                    handle,
+                    bytes.as_mut_ptr(),
+                    3,
+                    &mut required,
+                    &mut address,
+                    &mut generation
+                ),
+                6
+            );
+            assert_eq!((required, address, generation), (4, 0x900000, 42));
+            assert_eq!(bytes, [0x77; 4]);
+            assert_eq!(
+                rl_render_fundo_salvo(
+                    handle,
+                    bytes.as_mut_ptr(),
+                    4,
+                    &mut required,
+                    &mut address,
+                    &mut generation
+                ),
+                0
+            );
+            assert_eq!(bytes, [0, 5, 255, 7]);
+        }
+        assert_eq!(rl_render_contrato(), 0x00010007);
+        assert_eq!(rl_render_liberar(handle), 0);
+        assert_eq!(rl_liberar_mundo(world), 0);
+    }
 }

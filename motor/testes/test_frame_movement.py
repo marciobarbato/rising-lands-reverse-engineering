@@ -4,6 +4,9 @@ Frozen call read sets and old changed bytes are overlaid on the committed M1
 state to make standalone fixtures. Extra fields preserve that declared fixture;
 this does not claim the complete original call-entry image was captured.
 """
+from pinned_reference import activate, reference_file, pinned_file
+SOURCE_ROOT = activate()
+
 import base64
 import bisect
 import ctypes as C
@@ -20,7 +23,7 @@ from test_frame_core_economy import Memory
 
 ROOT=Path(__file__).resolve().parents[2]
 for f in ('ferramentas','pesquisas-paralelas/combate','pesquisas-paralelas/economia'):
-    if str(ROOT/f) not in sys.path:sys.path.append(str(ROOT/f))
+    if str(SOURCE_ROOT/f) not in sys.path:sys.path.append(str(SOURCE_ROOT/f))
 import incursao_core
 from compactar_captura_isolada import expandir
 from mundo_vivo import mundo_vivo
@@ -83,7 +86,7 @@ class MovementProviders(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         for p,h in PINS.items():
-            if hashlib.sha256((ROOT/p).read_bytes()).hexdigest()!=h:raise AssertionError(f'Reference identity changed: {p}')
+            if hashlib.sha256(pinned_file(ROOT/p).read_bytes()).hexdigest()!=h:raise AssertionError(f'Reference identity changed: {p}')
         cls.abi=Frames();fn=cls.abi.lib.rl_executar_rotina_quadro
         fn.argtypes=[C.c_uint64,C.c_uint32,C.POINTER(C.c_uint32),C.c_uint32,C.POINTER(C.c_uint32)];fn.restype=C.c_int32
         raw=json.loads((ROOT/M1).read_bytes())['oracle']['final_state']['blocks']

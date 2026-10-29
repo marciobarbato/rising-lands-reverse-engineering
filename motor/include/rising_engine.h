@@ -4,7 +4,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* ABI1.3. Frame logic and native indexed rendering are additive.
+/* ABI1.4. Frame logic and native indexed rendering are additive.
  * Addresses are original u32 values, NOT host pointers. Handles are opaque
  * integer tokens, never dereferenceable; zero/stale/double-free are rejected.
  * Calls are serialized inside the library. Caller must synchronize handle use
@@ -16,7 +16,7 @@ extern "C" {
  * Load replaces ALL blocks atomically, preserving the explicit virtual clock.
  * Count<=65536 and total<=64MiB. Empty load is allowed; empty regions are not.
  */
-#define RL_ABI_VERSION 0x00010003u
+#define RL_ABI_VERSION 0x00010004u
 enum { RL_OK=0, RL_INVALID_ARGUMENT=1, RL_INVALID_HANDLE=2, RL_MEMORY_ERROR=3,
  RL_UNKNOWN_ROUTINE=4, RL_UNSUPPORTED_PATH=5, RL_BUFFER_TOO_SMALL=6,
  RL_PANIC=7, RL_POISONED=8, RL_RESOURCE_LIMIT=9, RL_VERSION_MISMATCH=10, RL_STALE_GENERATION=11 };
@@ -129,6 +129,20 @@ int32_t rl_render_liberar(RlRenderer renderer);
 int32_t rl_render_observacoes(RlRenderer renderer,RlRenderObservation *buffer,uint32_t capacity,uint32_t *required);
 int32_t rl_render_cache(RlRenderer renderer,uint8_t *keys,uint32_t key_capacity,
  uint8_t *payloads,uint32_t payload_capacity,uint32_t *key_required,uint32_t *payload_required,uint32_t *cursor);
+/* ABI 1.4: Graphics contract 1.7. Existing 1.3 structs/signatures remain.
+ * Observation kind3: write-only saved_background_pixels; count is byte length,
+ * full payload comes from rl_render_fundo_salvo (before/after are not old bytes).
+ * kind4: AffText request at the named glyph dependency; args hold x,y,right,
+ * bottom,font,flags0,flags1,text-length; before+after hold the single-byte text.
+ * The production C ABI never substitutes text. AffText returns a partial frame
+ * at 0x459454, with actual tooltip background and saved bytes available.
+ * Reset clears saved background; a pending initial restore reads the explicitly
+ * declared world buffer. Future restores use actual renderer-produced bytes.
+ * Phase 2 still owns display logic mutations; renderer observations are read-only.
+ */
+uint32_t rl_render_contrato(void);
+int32_t rl_render_fundo_salvo(RlRenderer renderer,uint8_t *buffer,uint32_t capacity,
+ uint32_t *required,uint32_t *address,uint64_t *generation);
 #ifdef __cplusplus
 }
 #endif

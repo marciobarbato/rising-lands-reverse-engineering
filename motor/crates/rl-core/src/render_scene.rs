@@ -57,12 +57,6 @@ impl Context<'_> {
             self.u32(0x4e17a8)?.wrapping_add(1),
         )?;
         self.put32("superficie_u32", 0x508f70, self.u32(0x4e17a4)?)?;
-        if self.u8(0x49a041)? != 0 {
-            return self.stop(
-                0x4179e1,
-                "saved-background restore (PasteBob) is not composed",
-            );
-        }
         self.camera = self.u8(0x508041)?;
         if self.camera > 3 {
             return Err(Error::Invalid("camera must be 0..3"));
@@ -73,6 +67,9 @@ impl Context<'_> {
             self.u16(0x49a022)? as i32,
             self.u16(0x49a01e)? as i32,
         ];
+        if self.u8(0x49a041)? != 0 {
+            self.restore_background()?;
+        }
         let ox = self.u16(0x508720)?;
         let oy = self.u16(0x508722)?;
         let width = self.u16(0x508724)?;
@@ -458,7 +455,7 @@ impl Context<'_> {
         }
         Ok(kind != 21 && colonist)
     }
-    fn building(
+    pub(crate) fn building(
         &mut self,
         x: i32,
         y: i32,
@@ -503,45 +500,44 @@ impl Context<'_> {
         }
         if tile == 0x2ed {
             if let Some(r) = &record {
-                if !matches!(r[5], 3..=5) {
-                    return self.stop(0x408ac8, "structure construction/other mode");
-                }
                 if r[8] != 2 {
                     return self.stop(0x408606, "only type-2 facade is reconstructed");
                 }
                 let inhabited = self.inhabited(index)?;
-                if r[5] == 3 && !inhabited {
-                    return self.stop(0x40863e, "mode 3 uninhabited construction body");
+                if !matches!(r[5], 3..=5) || !inhabited {
+                    self.construction_facade(x, y, cell, index, r)?;
+                } else {
+                    if w(r, 6) != 0 {
+                        return self.stop(0x4085cb, "sanctuary damage/fire (+0x06 nonzero)");
+                    }
+                    if r[4] > 4 {
+                        return Err(Error::Invalid("facade owner"));
+                    }
+                    let a = self.u32(0x508f7c)?;
+                    let b = self.u32(0x508f80)?;
+                    let c = self.u32(0x508f84)?;
+                    for (id, dx, dy, owner) in [
+                        (7032, 0, 0, true),
+                        (7049 + ((c.wrapping_add(cell)) & 7), 74, 5, true),
+                        (7033 + ((a.wrapping_add(cell)) & 7), 89, 95, false),
+                        (7041 + ((b.wrapping_add(cell)) & 7), 151, 131, false),
+                        (7059 + (a & 7), 48, 64, true),
+                        (7067 + (a & 7), 144, 74, true),
+                        (7057 + ((a.wrapping_add(cell)) & 1), 18, 63, false),
+                    ] {
+                        self.bob(
+                            x + dx - 150,
+                            y + dy - 93,
+                            id,
+                            true,
+                            if owner { Some(r[4] as u32) } else { None },
+                        )?;
+                    }
                 }
-                if !inhabited {
-                    return self.stop(0x40892d, "uninhabited facade requires gray effect");
-                }
-                if w(r, 6) != 0 {
-                    return self.stop(0x4085cb, "sanctuary damage/fire (+0x06 nonzero)");
-                }
-                if r[4] > 4 {
-                    return Err(Error::Invalid("facade owner"));
-                }
-                let a = self.u32(0x508f7c)?;
-                let b = self.u32(0x508f80)?;
-                let c = self.u32(0x508f84)?;
-                for (id, dx, dy, owner) in [
-                    (7032, 0, 0, true),
-                    (7049 + ((c.wrapping_add(cell)) & 7), 74, 5, true),
-                    (7033 + ((a.wrapping_add(cell)) & 7), 89, 95, false),
-                    (7041 + ((b.wrapping_add(cell)) & 7), 151, 131, false),
-                    (7059 + (a & 7), 48, 64, true),
-                    (7067 + (a & 7), 144, 74, true),
-                    (7057 + ((a.wrapping_add(cell)) & 1), 18, 63, false),
-                ] {
-                    self.bob(
-                        x + dx - 150,
-                        y + dy - 93,
-                        id,
-                        true,
-                        if owner { Some(r[4] as u32) } else { None },
-                    )?;
-                }
+            }
+        } else if tile == 0x30d {
+            if let Some(record) = &record {
+                self.construction_facade(x, y, cell, index, record)?;
             }
         } else if FACADES.contains(&tile) {
             return self.stop(0x40f23b, format!("building facade terrain word 0x{tile:x}"));

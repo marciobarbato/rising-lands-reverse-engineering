@@ -1,10 +1,12 @@
+from pinned_reference import activate, reference_file
+SOURCE_ROOT = activate()
 """Copied ABI 1.3 render buffers. Assets are original catalog inputs, never test outputs."""
 import ctypes as C
 from pathlib import Path
 import sys
 from frame_abi import Frames
 ROOT=Path(__file__).resolve().parents[2]
-sys.path.insert(0,str(ROOT/'pesquisas-paralelas/graficos-animacao'))
+sys.path.insert(0,str(SOURCE_ROOT/'pesquisas-paralelas/graficos-animacao'))
 from graficos import Catalogo, ORDEM, RAIZ
 from test_quadro_jogo import tabelas
 from render_quadro import carregar_superficie_inicial,carregar_cache_inicial,EstadoCache
@@ -28,6 +30,8 @@ def initial(catalog=None):
 class Render:
     def __init__(self,frames):
         self.f=frames;self.lib=frames.lib;L=self.lib
+        L.rl_render_contrato.restype=U32
+        L.rl_render_fundo_salvo.argtypes=[U64,C.POINTER(U8),U32,C.POINTER(U32),C.POINTER(U32),C.POINTER(U64)]
         L.rl_render_criar.argtypes=[U64,C.POINTER(Bytes),U32,C.POINTER(Bytes),C.POINTER(Cache),C.POINTER(U64)]
         L.rl_render_geracao.argtypes=[U64,C.POINTER(U64),C.POINTER(U32),C.POINTER(U32)]
         L.rl_render_quadro.argtypes=[U64,U64,U32,C.POINTER(U8),U32,C.POINTER(U8),U32,C.POINTER(Result)]
@@ -54,4 +58,9 @@ class Render:
         count=U32();code=self.lib.rl_render_observacoes(handle,None,0,C.byref(count))
         if code not in (0,6):self.f.check(code)
         data=(Observation*count.value)();self.f.check(self.lib.rl_render_observacoes(handle,data,len(data),C.byref(count)));return list(data)
+    def saved(self,handle):
+        n=U32();address=U32();generation=U64();code=self.lib.rl_render_fundo_salvo(handle,None,0,C.byref(n),C.byref(address),C.byref(generation))
+        if code not in (0,6):self.f.check(code)
+        data=(U8*n.value)();self.f.check(self.lib.rl_render_fundo_salvo(handle,data,len(data),C.byref(n),C.byref(address),C.byref(generation)))
+        return address.value,bytes(data),generation.value
     def free(self,handle):self.f.check(self.lib.rl_render_liberar(handle))
