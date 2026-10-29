@@ -175,6 +175,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             }
             return
         }
+        if message.frameInfo.isMainFrame, let body = message.body as? [String:Any],
+           body["action"] as? String == "saveInput", let requestID = body["id"],
+           let content = body["content"] as? [String:Any],
+           let data = try? JSONSerialization.data(withJSONObject:content,options:[.prettyPrinted,.sortedKeys]),
+           data.count <= 64*1024*1024 {
+            let panel = NSSavePanel()
+            panel.title = "Exportar entrada gravada"
+            panel.nameFieldStringValue = body["script"] as? Bool == true ? "monde01-input.json" : "monde01-macos-journal.json"
+            panel.beginSheetModal(for:window) { [weak self] answer in
+                var result:[String:Any] = ["id":requestID,"ok":true,"playback":["saved":false]]
+                if answer == .OK, let url = panel.url {
+                    do {
+                        try (data + Data([10])).write(to:url,options:.atomic)
+                        result["playback"] = ["saved":true,"path":url.path]
+                    } catch { result = ["id":requestID,"ok":false,"error":error.localizedDescription] }
+                }
+                if let encoded = try? JSONSerialization.data(withJSONObject:result), let json = String(data:encoded,encoding:.utf8) {
+                    self?.web.evaluateJavaScript("window.receive(\(json));",completionHandler:nil)
+                }
+            }
+            return
+        }
         guard message.frameInfo.isMainFrame, let body = message.body as? [String:Any], let action = body["action"] as? String,
               ["init","reset","select","order","pause","play","speed","step","pump","state","economy","combat","interact","playback"].contains(action),
               let data = try? JSONSerialization.data(withJSONObject:body) else { return }

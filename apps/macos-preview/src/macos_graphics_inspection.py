@@ -1,11 +1,11 @@
-"""Consume Graphics API 1.4 in an isolated inspection process. No drawing code."""
+"""Consume Graphics API 1.5 in an isolated inspection process. No drawing code."""
 import base64
 import importlib.util
 from pathlib import Path
 import sys
 from macos_state_consumer import StateValidationError, _sha
 
-EXPECTED_GRAPHICS_VERSION = (1, 4)
+EXPECTED_GRAPHICS_VERSION = (1, 5)
 
 
 class GraphicsVersionError(StateValidationError):
@@ -32,14 +32,14 @@ def load_graphics(root):
 
 def require_version(version):
     if version != EXPECTED_GRAPHICS_VERSION:
-        raise GraphicsVersionError('Graphics API version mismatch: expected (1, 4), got ' + repr(version))
+        raise GraphicsVersionError('Graphics API version mismatch: expected (1, 5), got ' + repr(version))
 
 
 GRAPHICS_EVIDENCE = 'pesquisas-paralelas/graficos-animacao/evidencias/'
 RENDER_PINS = {
     'superficie-inicial-m22-v2.json': '4581aafab6685f5f118317c2b5debcb158ca85f7212e477bc0a6fe155e0c0ff7',
     'cache-terreno-inicial-m22-v2.json': 'da8f2bf58bf5b6832a0b21c00356c76e7a8a027c3cfa56001757a8dec0da2962',
-    'verificacao-cadeia-m22-v2-api14-128.json': '49ba8881dd657bc29a1fde3193777735113d196b6688c0c5d95b9ee5cf615ac0',
+    'verificacao-cadeia-m22-v2-api15-128.json': 'd95618beff805b5e47c7be6ec922cdf9cda75c4063b0cd52c254a1a116e19c10',
     'superficies-fase-m22-v2.json': 'ded5d695083877eb046334d9e931c2f4a91d70681966e2295a4be0fbc140160a',
 }
 
@@ -60,7 +60,7 @@ class GraphicsInspectionRenderer:
                 raise StateValidationError('Unpinned Graphics artifact: ' + name)
         self.catalog = self.api.Catalogo(fontes=graphics_sources)
         self.encode_png = sys.modules['graficos'].png
-        self.references = {r['frame']: r for r in json.loads((self.folder/'verificacao-cadeia-m22-v2-api14-128.json').read_bytes())['rows']}
+        self.references = {r['frame']: r for r in json.loads((self.folder/'verificacao-cadeia-m22-v2-api15-128.json').read_bytes())['rows']}
         self.phase_hashes = {r['phase']: r['offscreen'] for r in json.loads((self.folder/'superficies-fase-m22-v2.json').read_bytes())['phases']}
         self.initial_pixels = self.api.carregar_superficie_inicial(self.folder/'superficie-inicial-m22-v2.json')
         self.initial_cache = self.api.carregar_cache_inicial(self.folder/'cache-terreno-inicial-m22-v2.json', catalogo=self.catalog)
@@ -97,19 +97,19 @@ class GraphicsInspectionRenderer:
             require_version(result.versao)
             if ((result.largura, result.altura) != (800, 600) or len(result.pixels) != 480000
                     or len(result.rgba) != 1920000 or result.cache is None):
-                raise StateValidationError('Invalid Graphics 1.4 result shape/cache')
+                raise StateValidationError('Invalid Graphics 1.5 result shape/cache')
             next_pixels, next_cache = result.pixels, result.cache
         stop = result.parada if result else None
         status = ('partial' if stop else 'full') if drawing else 'undrawn'
         if result is not None and result.chamadas == (('CalculFrame',),): status = 'undrawn'
         frame = (1 if name == 'between_frames' else int(name[len('between_frames'):])) if drawing else None
-        record = dict(status=status, phase=name, api_called=drawing, version=[1, 4], hud=True, stop=stop,
+        record = dict(status=status, phase=name, api_called=drawing, version=[1, 5], hud=True, stop=stop,
                       required_regions=regions,
                       pixels_sha256=_sha(next_pixels), cache_keys_sha256=_sha(next_cache.registros),
                       cache_payloads_sha256=_sha(next_cache.blocos_crus), cache_cursor=next_cache.proximo,
                       limitations=['Graphics HUD domain only; unsupported states return named stops', 'no independent mid-sequence cache', 'static palette; palette cycling not applied'],
-                      native_phase_end_sha256=self.phase_hashes[name],
-                      equals_native_phase_end=_sha(next_pixels) == self.phase_hashes[name])
+                      native_phase_end_sha256=self.phase_hashes.get(name),
+                      equals_native_phase_end=(_sha(next_pixels) == self.phase_hashes[name] if name in self.phase_hashes else None))
         if drawing:
             record['memory_phase'] = memory.phase_name
             record['memory_summary_sha256'] = memory.summary_sha256
@@ -124,7 +124,7 @@ class GraphicsInspectionRenderer:
             if not record['graphics_chain_equal']:
                 raise StateValidationError('Graphics checkpoint chain mismatch at frame ' + str(frame))
         effective_stop = stop if result else (self.last.parada if self.last else None)
-        if effective_stop is None and not record['equals_native_phase_end']:
+        if effective_stop is None and record['equals_native_phase_end'] is False:
             raise StateValidationError('Native phase-end surface mismatch at phase ' + name)
         # Publish only after version, region, shape and full-surface checks pass.
         self.pixels, self.cache, self.index = next_pixels, next_cache, image.phase_index
@@ -134,7 +134,7 @@ class GraphicsInspectionRenderer:
 
     def present(self):
         if self.index < 0:
-            return dict(status='undrawn', api_called=False, version=[1, 4], hud=True,
+            return dict(status='undrawn', api_called=False, version=[1, 5], hud=True,
                         detail='Initial surface is available only after the load tail; select a phase')
         record = dict(self.records[-1])
         # Use only Graphics' palette expansion and PNG encoder. No game drawing.

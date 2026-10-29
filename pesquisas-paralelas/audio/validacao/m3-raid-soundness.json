@@ -1,0 +1,92 @@
+{
+ "schema": "rising-lands/audio-m3-raid-soundness/1",
+ "passed": true,
+ "original_capture": "pesquisas-paralelas/audio/evidencias/m3-raid-leituras-original-v2.json",
+ "original_capture_sha256": "b51027318c6b5353be7498191d8ab91bd5ddcf8919a84fd432e24cda0ff1f86e",
+ "frames": [
+  8991,
+  9200
+ ],
+ "phases": 420,
+ "state_summary_mismatches": 0,
+ "boundary_argument_mismatches": 0,
+ "method": "Independent original phase re-entry with accepted memory and registers plus explicit caller stack words; all state summaries and ordered boundary arguments equal",
+ "private_library_reads": 0,
+ "private_library_writes": 0,
+ "reads": [
+  {
+   "range": "game_cd_playing_and_mci_initialized_flags",
+   "instruction": "0x42d2f0",
+   "routine": "CalculGame+0xa88",
+   "bytes": 1,
+   "count": 210
+  },
+  {
+   "range": "shared_random_permutation_cursor",
+   "instruction": "0x42d2f9",
+   "routine": "CalculGame+0xa91",
+   "bytes": 1,
+   "count": 210
+  },
+  {
+   "range": "unit_sound_handle",
+   "instruction": "0x45446a",
+   "routine": "EnginNextEtape+0x3e",
+   "bytes": 4,
+   "count": 3561
+  },
+  {
+   "range": "shared_random_permutation_cursor",
+   "instruction": "0x47732f",
+   "routine": "NextAnimVeget+0x43",
+   "bytes": 1,
+   "count": 265
+  }
+ ],
+ "unit_voice_handle_values": [
+  "0xffffffff"
+ ],
+ "structure_handle_reads": 0,
+ "caller_word_writes": [
+  {
+   "phase": "frame9000",
+   "instruction": "0x457f67",
+   "routine": "CreerEngin+0xfb",
+   "address": "0x474a9244",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "value_hex": "ffffffff",
+   "count": 1
+  },
+  {
+   "phase": "frame9000",
+   "instruction": "0x457f71",
+   "routine": "CreerEngin+0x105",
+   "address": "0x474a924c",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "value_hex": "ffffffff",
+   "count": 1
+  },
+  {
+   "phase": "frame9000",
+   "instruction": "0x48297a",
+   "routine": "iagUnitAddToGroup+0x41",
+   "address": "0x474a924c",
+   "bytes": 4,
+   "range": "unit_sound_handle",
+   "value_hex": "12000000",
+   "count": 1
+  }
+ ],
+ "alias_caution": "unit +0x10c is initialized to -1 at 0x457f71, then iagUnitAddToGroup writes 0x12 at 0x48297a; it is not classified as exclusively audio",
+ "code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+ "capture_script_sha256": "c1b315c96e62bdae6118279fc58af3382854de1e0bd4cdd5d4e6998a2c90cc2c",
+ "seconds": 274.484,
+ "m22_existing_proof": "pesquisas-paralelas/audio/evidencias/m22-sound-original-chained-pumps.json",
+ "limitations": [
+  "Sound/MCI boundaries remain as declared by the accepted raid capture; no initialized mission or DirectSound heap proof",
+  "Native stack is not in the committed full-state format; this is phase re-entry with checked output, not a resumable CPU checkpoint",
+  "Frames 129..8990 are stream-checked from committed data, not freshly run by this audit"
+ ]
+}
