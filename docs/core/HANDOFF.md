@@ -646,3 +646,16 @@ See [CONSTRUCTION](CONSTRUCTION.md).
 - **World-model correction.** Remplit with the same colour now follows the original (terminates on a full stack or an empty one); only the non-terminating two-cell case is refused.
 - **Named dependencies:** Economy's BonusGetValEngin value (`bonus`) after a DeplaceEngin step; Audio for CalculNextCase's local sound (types 11..16, unchanged from M2.3).
 - **Deferred to the scripted-input captures:** the real walk over frames, BatimentConstructible with the builder actually on the footprint, the construction progress (BatimentConstruction → BatimentModifyMap and discovery), the CAVE cursor's pixel/view into BatimentPosable, and walls/gates actually built.
+
+### M3/M4: structure entry, lodging and Bag routines on `feat/re-core`
+
+Contract and counts: [STRUCTURE_ENTRY](STRUCTURE_ENTRY.md). Commits: `e13ed5d` (bench, cases, capture script), `ebea7e6` (original-only capture, before translation), then the translation/validation commit.
+- **Translated** (`entrada_estruturas.EntradaEstruturas`): Bag primitives (BagContient every tag, BagContientTroupe, BagRetire, BagPrend, EnginGetBag, BagAccepte, BagGetNbContenu/Code/Type), PlaceLibre, BatimentAdjacent, GetCaseCentrale, BatimentGetCaseEntrer, RetireEngin, AnimWorkEngin, EnginResetType, SetEnginRentreBatiment, SetEnginSelectRentreBatiment, EnginSelectPeutEntrer (modes 1/3), CalculEntreBatiment (unit types 0..10, 25), unit state 13's body 0x4558e4, BatimentRetireColon (colonist path incl. BatimentEnleveUnColon, RechercheDecalageSortie and the abandon of an emptied structure); adapters over existing Core translations for EnginPeutPasser, SetEnginCollision, DecouvreTerrain, IllumineTerrain, TerrainEstDecouvert, BatimentModifyMap, SetDeplaceEngin, DeplaceEngin, EnginGetVolume/Type/Player, BatimentGetVolume/GetCase.
+- **Validated natively**: 505 comparisons, 0 mismatches (384 cases, two windows: colonist lodges in the 0xc8 cave → owner 0 after 87 state-13 bodies; worker 13 lodges in the sanctuary and becomes a colonist). Gates: `scripts/check.py`; the new native test is optional (`RISING_EMULAR=1`).
+- **Economy adapter**: `provedor_entrada(entrada, outros=None)` (see the contract).
+- **Next steps (resumable)**:
+  1. CPU-free replay test `testes/test_entrada_estruturas.py` from `leituras-entrada-estruturas-exibicao.json.xz` (pure routines: Bags, PlaceLibre, geometry, setters, EnginSelectPeutEntrer); the world-backed steps stay native.
+  2. Once Economy's `ciclo_trabalho` is on main: replay its capture through `CicloTrabalho(externo=provedor_entrada(EntradaEstruturas(m, ...), outros=provedor_construcao(...)))` and report.
+  3. Reduce `_incertos`: derive IllumineTerrain/EteintTerrain/BatimentModifyMap/EnginPeutPasser exit registers from their loop bounds (as done for DecouvreTerrain), with new native cases.
+  4. Translate the remaining branches: CalculEntreBatiment vehicles/type 16 (RotateEngin, BatimentPorte, BatimentRepareEngin), CalculEntreEngin and state 13's vehicle entry, BatimentRetireColon for types 5/8/0xe/0x13/0x15.
+  5. Scripted-input captures (Mac mini, Missions' probes): the tag 0x10/0x21 UI presses that reach SetEnginSelectRentreBatiment/BatimentRetireColon from ProcessInputGame, and multi-frame entry with other units moving (real frames instead of consecutive bodies of one unit).
