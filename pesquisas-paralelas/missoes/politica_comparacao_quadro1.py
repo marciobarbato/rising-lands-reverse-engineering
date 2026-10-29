@@ -26,6 +26,7 @@ proof is that no logic-context access reaches the surface region.
 import argparse
 import hashlib
 import json
+import struct
 import subprocess
 import sys
 
@@ -80,23 +81,26 @@ def rodar(alvos):
     ni = cap['named_inputs']['m1']
     b, _, _ = cen.bancada('exibicao', ni['allocation_fill'], ni['clock_ms'][0])
     raizes = {b.sym[n] for n in RAIZES_EXIBICAO if n in b.sym}
-    pilha = []                       # entry ESPs of active display roots
+    pilha = []                       # (entry ESP, return address) of active display roots
     acessos = {}                     # address -> {(kind, context, phase, routine): count}
     superficie = {}                  # (kind, context, phase, routine) -> count
 
     def contexto(cpu):
         esp = cpu.reg_read(x86.UC_X86_REG_ESP)
-        while pilha and esp > pilha[-1]:
+        while pilha and esp > pilha[-1][0]:
             pilha.pop()
         return 'display' if pilha else 'logic'
 
     def bloco(cpu, endereco, tamanho, _):
+        # A root ends exactly when its RET lands on the return address with
+        # ESP = entry+4; a sibling call at the same depth is then outside it.
+        esp = cpu.reg_read(x86.UC_X86_REG_ESP)
+        while pilha and (esp > pilha[-1][0] or (endereco == pilha[-1][1] and esp == pilha[-1][0]+4)):
+            pilha.pop()
         if endereco in raizes:
-            esp = cpu.reg_read(x86.UC_X86_REG_ESP)
-            while pilha and esp > pilha[-1]:
-                pilha.pop()
-            if not pilha or pilha[-1] != esp:
-                pilha.append(esp)
+            retorno = struct.unpack('<I', cpu.mem_read(esp, 4))[0]
+            if not pilha or pilha[-1] != (esp, retorno):
+                pilha.append((esp, retorno))
 
     def acesso(tipo):
         def gancho(cpu, _acesso, endereco, tamanho, valor, _):
