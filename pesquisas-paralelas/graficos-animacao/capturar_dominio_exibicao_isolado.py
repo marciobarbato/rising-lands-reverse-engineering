@@ -88,6 +88,17 @@ class IsolamentoExibicao(oq.Isolamento):
         if INCURSAO is not None:
             casos = [casos[0]]+[dict(case=f'origin_{x}_{y}', writes=[(0x508720, u16(x)), (0x508722, u16(y))], repeat=1)
                                 for x, y in ORIGENS_INCURSAO[1:]]
+            ub = int.from_bytes(m(0x4e19a0, 4), 'little')
+            ux, uy = m(ub+16*276+8, 1)[0], m(ub+16*276+9, 1)[0]   # raid unit 16 cell (x low byte, y high byte)
+            sonda['unit16'] = dict(cell=[ux, uy], record_head=bytes(m(ub+16*276, 24)).hex())
+            for dx, dy in ((0, 0), (-10, -6), (10, 6), (-20, -12), (-4, -2)):   # origins that put the unit in or near the view
+                ox, oy = max(0, min(39, ux-12+dx)), max(0, min(47, uy-8+dy))
+                if (ox, oy) not in ORIGENS_INCURSAO and f'origin_{ox}_{oy}' not in [c['case'] for c in casos]:
+                    casos.append(dict(case=f'origin_{ox}_{oy}', writes=[(0x508720, u16(ox)), (0x508722, u16(oy))], repeat=1))
+            r15, r16 = bytes(m(ub+15*276, 276)), bytes(m(ub+16*276, 276))
+            for nome_, modelo in (('position_fields_of_unit15', r15[6:0x40]), ('all_but_state_of_unit15', r15[3:])):
+                destino = 6 if nome_.startswith('position') else 3
+                casos.append(dict(case=f'unit16_{nome_}', writes=[(ub+16*276+destino, modelo)], repeat=1))
             proj = int.from_bytes(m(0x5080f0, 4), 'little')
             if m(proj+2, 1)[0]:   # slot 0 holds the raid's effect projectile: move it onto visible cells (pixel = cell*32)
                 for cx, cy in ((14, 12), (5, 7), (27, 21)):

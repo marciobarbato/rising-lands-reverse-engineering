@@ -75,8 +75,8 @@ def _guardas(memoria, rotina):
                                   'modes 0..7 (AffBatiments has 69 0x4e1d18 sites, none reached there)')
     monstros = memoria.u8(MONSTROS)
     if monstros > 1:
-        raise DependenciaExibicao(rotina, 0x41591f, f'monster count {monstros}: only 0 and 1 (group pending, no unit '
-                                  'created in 250 forced frames) captured; a monster unit on screen is not proved')
+        raise DependenciaExibicao(rotina, 0x41591f, f'monster count {monstros}: only 0 and 1 (raid unit 16, '
+                                  'on screen or not) captured; a second monster is not proved')
     pool = memoria.u32(POOL_PROJETEIS)
     ativos = [i for i in range(100) if memoria.u8(pool + 56*i + 2)]
     if len(ativos) > 1 or any(memoria.u8(pool + 56*i) not in TIPOS_PROJETIL_PROVADOS for i in ativos):
