@@ -1,8 +1,8 @@
-# macOS accepted-state consumption contract v4
+# macOS accepted-state consumption contract v5
 
-Identifier: `rising-lands/macos-state-consumer/4`. This version explicitly accepts Graphics
-render API **1.3** and its full128-frame reference while preserving the existing
-read-only playback and pixel/cache chaining. No live
+Identifier: `rising-lands/macos-state-consumer/5`. This version explicitly accepts Graphics
+render API **1.4**, enables its HUD/cursor option, and checks the original full
+800×600 phase-end surface while preserving read-only playback and cache chaining. No live
 frame delivery, orders, game input protocol or milestone acceptance is added.
 
 ## Evidence and memory
@@ -48,10 +48,10 @@ between_frames ends at the **next CalculGame entry**, after the window loop has
 incremented the counter. That ending image is not AffGame's entry memory. No
 bytes are patched to manufacture an entry image.
 
-## Graphics 1.3 chain
+## Graphics 1.4 chain
 
 The renderer is loaded in an isolated worker to keep Graphics and Economy's
-flat `construcoes` names separate. Exactly `(1, 3)` is accepted, on module load
+flat `construcoes` names separate. Exactly `(1, 4)` is accepted, on module load
 and returned result; every other version is refused clearly. The original
 service-test KeyError was secondary: a refused version returned `ok:false`
 without `playback`, and the test indexed that key. Tests now assert success
@@ -62,7 +62,7 @@ Four Graphics artifacts are file-SHA pinned in `RENDER_PINS`:
 
 - superficie-inicial-m22-v2.json
 - cache-terreno-inicial-m22-v2.json
-- verificacao-cadeia-m22-v2-api13-128.json (128 reference renders)
+- verificacao-cadeia-m22-v2-api14-128.json (128 reference renders)
 - superficies-fase-m22-v2.json (257 native phase-end surface hashes)
 
 The initial surface/cache are loaded only through Graphics'
@@ -72,7 +72,12 @@ represents original RestoreAll/MenuInit output before the first AffGame.
 No cold/empty cache, blank surface or independent mid-sequence start is used.
 
 For every between_frames(k), call Graphics `renderizar_quadro` with its captured
-entry memory, previous **pixels and cache**, and the hash-checked catalog.
+entry memory, previous **pixels and cache**, the hash-checked catalog and
+`hud=True`. Before calling it, read every region returned by
+`regioes_necessarias(memory, hud=True)` through the immutable captured image.
+This includes minimap `[0x507D5C]` (width×height at `0x496FE0/E2`) and player
+table `[0x5080A8]` (5×20 bytes). Missing/short regions fail before rendering,
+without allocation, defaults or state publication.
 Carry both returned objects to the next drawing phase. frame(k) is **undrawn**
 and retains the surface/cache. load_tail publishes the initial original artifact
 without reimplementing RestoreAll. A cadence return, if observed, is also
@@ -91,32 +96,34 @@ Only Graphics supplies rendering, palette expansion and PNG encoding. The
 shell displays its image with an image element. Cache keys, payload hashes,
 cursor, entry-state identity, stop address and verification status are recorded.
 Applicable chained hashes must equal Graphics' frame 1..128 reference before
-publication. Native post-HUD surface hashes are reported as **different** where
-appropriate, never mislabeled as a complete-render success.
+publication. With HUD enabled, the returned surface must also equal the
+original phase-end hash before publication when no stop is returned. Undrawn
+phases retain that same verified full surface. The reference is no longer a
+pre-HUD checkpoint.
 
-## Visible limitations and Graphics 1.3 evidence
+## Full-surface Graphics 1.4 evidence and limits
 
-Graphics 1.3 is additive over 1.2: the inputs, outputs, indexed format and
-cache/surface chaining stay unchanged. Its validated normal bodies for unit
-types 1/8 remove the prior 0x41591F stop from accepted M2.2 playback. Other
-records outside Graphics' published domain retain their named stops; generic
-partial/stop handling and version refusal tests remain required.
+Graphics 1.4 is additive: `hud=False` preserves the former 1.3 pixels, while
+this consumer explicitly uses `hud=True`. Resource counters, action strip,
+info panel, minimap and captured cursor are provided by Graphics. The former
+HUD/cursor-not-drawn limitation is removed. No drawing is implemented here.
 
-The consumer pins Graphics' full 128-frame reference, SHA-256
-`4f2d536fec21cde39f885f1e6cccbbda83c5130b8ba60cc557f38c27fc508407`.
-Every drawing phase must match the applicable chained-pixel hash before
-publication. This replaces the old 12-frame 1.2 reference for current validation;
-the historical reports remain unchanged. There are still 257 memory phase
-summaries and 11 full memory checkpoints.
+The consumer pins `verificacao-cadeia-m22-v2-api14-128.json`, SHA-256
+`49ba8881dd657bc29a1fde3193777735113d196b6688c0c5d95b9ee5cf615ac0`.
+Its reference is the original full 800×600 end-of-phase indexed surface. Every
+drawing phase checks both that chain reference and the accepted phase-end
+hash. There are still 257 memory summaries and 11 full memory checkpoints.
+The current [per-phase report](validation/m3-m22-render-v5.json) records actual
+results; older 1.2/1.3 reports remain historical and unchanged.
 
-HUD rows >=544 and cursor remain **not drawn**. `full` means the supported
-playfield composition returned without a named stop, not a post-HUD full-frame
-equality claim. Graphics' chain differs from its native checkpoint only below
-the supported playfield (first differing row 547, from frame 2). Native phase-end
-hashes remain recorded honestly and are not substituted for checkpoint hashes.
-The initial cache/surface are still required; no independent mid-sequence
-start, fallback drawing, live delivery or game input is added. The current
-[per-phase report](validation/m3-m22-render-v4.json) records actual results.
+Named stops remain explicit outside Graphics' proved HUD domain: nonempty
+action slots, counters above 9999, placement/selection/tooltip/event/debug/market
+branches and other unsupported states. A partial result and inherited stop
+remain visible; no fallback draws or fabricated memory are used. No independent
+mid-sequence cache is available. Palette indices match the native surface;
+RGBA uses the static published palette and does not apply palette cycling.
+Full-surface equality over accepted evidence is not live input/gameplay or
+milestone acceptance.
 
 ## Native shell and builds
 
@@ -144,7 +151,7 @@ validated reference and test harness, including this accepted-evidence
 inspection/playback path. The bundled runtime remains for those uses for now;
 its inclusion in a later shipped game is undecided. No live-simulation delivery
 is to be built on the embedded Python worker. `apply_frame` remains reserved
-and raises RuntimeContractPending; contract v4 and its evidence APIs are unchanged.
+and raises RuntimeContractPending; contract v5 and its evidence APIs are unchanged.
 
 The eventual Swift native-library adapter is a separate dependency from the
 read-only evidence worker. Before any loading or calling implementation, the
@@ -154,7 +161,7 @@ and buffer lifetimes, thread requirements and failure semantics. Library
 location and loading policy also require that contract. This document defines
 no speculative symbols, layouts, signatures or executable stubs. No simulation
 or fallback behavior is provided while that dependency is pending. Existing
-Graphics 1.3 evidence rendering remains pinned independently.
+Graphics 1.4 evidence rendering remains pinned independently.
 
 The published Rust pilot ABI handles isolated routines, not full live frames.
 This inspector does not bind it; production frame-step/memory/render output

@@ -597,3 +597,26 @@ was relaxed. Earlier passing results remain preserved. Current
 merged checkout. Structured validation records all hashes and screenshot paths.
 The final report-only commit changes no executable code. No merge into or push
 to the code repository's main was performed.
+
+
+## Graphics1.4 full HUD/cursor adoption
+
+Latest main `ccbdcf0b1e6c35881fdd150ac7d3cc4ddc57fc38` was merged into this
+feature after checking ownership and the clean tree. Graphics1.4 is additive:
+default hud=False keeps1.3 pixels; this consumer explicitly opts into hud=True.
+No Graphics implementation or other front is edited. Consumer contract v5
+updates the render verification reference from pre-HUD to full800×600 phase-end.
+
+Before rendering, the adapter reads every region from Graphics' own
+regioes_necessarias(memory,hud=True), including minimap and five-player table.
+It refuses missing/short regions, incompatible module/result versions and
+chain/full-phase-end mismatches before publishing state. Unsupported HUD states
+retain their named stops and can remain explicitly partial. Both pixels and
+cache are carried in phase order; no independent start or fallback is added.
+
+The1.4 full128 reference is hash-pinned. Tests cover HUD opt-in, both additional
+regions, failed preflight without render/publication, full phase-end mismatch
+even if the chain hash matches, future/older version refusal and HUD partial
+stop inheritance. The real worker confirms the complete native frame1 surface
+and original minimap/player regions. No original snapshot is patched or copied
+to invent state. Full playback/native build results follow after validation.

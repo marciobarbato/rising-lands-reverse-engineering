@@ -132,7 +132,7 @@ The [independent audit](../apps/macos-preview/M3_AUDIT.md) records isolation and
 provider dependencies.
 
 
-## Independent accepted-evidence playback (contract v4)
+## Independent accepted-evidence playback (contract v5)
 
 The app offers **Inspeção M2.2 · evidência aceita** separately from the synthetic
 training exercise. It loads the accepted display-v2 MissionLoad state and all
@@ -141,19 +141,19 @@ phase or frame, inspect original-address memory/observed words, or reset. This
 is read-only playback, not a running Python mission or M3 acceptance. M1
 original-v2 inspection remains a separately labeled API.
 
-The shell pins Graphics API **1.3** and carries both the surface and terrain
-cache from the original initial artifacts. This additive contract composes
-normal unit types 1/8 and removes their stop from accepted M2.2 playback. Other
-versions are refused until explicitly reviewed and tested. Rendering still
-comes exclusively from Graphics.
+The shell pins Graphics API **1.4** and calls it with `hud=True`. HUD and
+captured cursor are included within the published domain. Every required region
+is checked against captured memory before rendering, including the minimap and
+player table. Other versions are refused until explicitly reviewed and tested.
+All rendering continues to come exclusively from Graphics.
 
-All 128 drawing phases are checked against the pinned Graphics 1.3 chain
-reference before publication. `full` in the inspector means its supported
-playfield passes completed; HUD rows>=544 and cursor remain absent. The page
-shows those limits. Generic named stops remain visible for unsupported states.
-Memory playback still verifies 257 phases and 11 checkpoints. The inspector
-uses DOM phase/frame navigation, reads, filter and reset; it does not emit live
-orders. See the [v4 contract](../apps/macos-preview/M3_CONTRACT.md) and
+All 128 drawing phases are checked against the pinned 1.4 full 800×600 native
+phase-end reference before publication. Undrawn phases preserve the same
+verified surface. Generic named HUD/body stops remain visible outside the
+provider's supported domain. The palette is static; palette cycling is not
+applied. Memory playback verifies 257 phases and 11 checkpoints. The inspector
+uses phase/frame navigation, original-address reads, filter and reset, without
+live orders. See the [v5 contract](../apps/macos-preview/M3_CONTRACT.md) and
 [handoff](../apps/macos-preview/HANDOFF.md) for exact evidence and test results.
 
 The full asset pack is being published in the separate rising-lands-assets
@@ -187,7 +187,7 @@ signal after real initialization to reproduce a slow startup without inventing
 worker/asset success or generating CPU load. It is ignored outside smoke mode
 and bounded to 0..80000 ms. Native state-machine tests exercise missing ready,
 late window, out-of-order document/ready events and an unchanged check deadline.
-Graphics stays pinned to its explicitly accepted 1.3 contract; other versions
+Graphics stays pinned to its explicitly accepted 1.4 contract; other versions
 still fail. After this robustness delivery, workstream A awaits M2.3 and the
 Claude M3 plan; no new game/UI features are planned here.
 
