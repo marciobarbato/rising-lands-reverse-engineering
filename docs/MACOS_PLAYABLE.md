@@ -132,7 +132,7 @@ The [independent audit](../apps/macos-preview/M3_AUDIT.md) records isolation and
 provider dependencies.
 
 
-## Independent accepted-evidence playback (contract v3)
+## Independent accepted-evidence playback (contract v4)
 
 The app offers **Inspeção M2.2 · evidência aceita** separately from the synthetic
 training exercise. It loads the accepted display-v2 MissionLoad state and all

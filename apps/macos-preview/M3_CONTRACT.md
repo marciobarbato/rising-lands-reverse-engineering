@@ -1,7 +1,8 @@
 # macOS accepted-state consumption contract v4
 
-Identifier: `rising-lands/macos-state-consumer/4`. This version adds Graphics
-render API **1.3** chaining to read-only accepted-evidence playback. No live
+Identifier: `rising-lands/macos-state-consumer/4`. This version explicitly accepts Graphics
+render API **1.3** and its full128-frame reference while preserving the existing
+read-only playback and pixel/cache chaining. No live
 frame delivery, orders, game input protocol or milestone acceptance is added.
 
 ## Evidence and memory
@@ -153,4 +154,8 @@ and buffer lifetimes, thread requirements and failure semantics. Library
 location and loading policy also require that contract. This document defines
 no speculative symbols, layouts, signatures or executable stubs. No simulation
 or fallback behavior is provided while that dependency is pending. Existing
-Graphics 1.2 evidence rendering remains pinned independently.
+Graphics 1.3 evidence rendering remains pinned independently.
+
+The published Rust pilot ABI handles isolated routines, not full live frames.
+This inspector does not bind it; production frame-step/memory/render output
+and native loading policy remain coordinator dependencies.

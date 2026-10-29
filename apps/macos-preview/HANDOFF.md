@@ -535,9 +535,47 @@ separate public rising-lands-assets repository; this small app update uses the
 existing explicit read-only CD/runtime inputs. Current full playback and exact
 coordinator native-build results will follow after committed validation.
 
-The full real-capture validation passed on implementation `0e10276`:257/257
-phase summaries,11/11 memory checkpoints,128/128 Graphics1.3 chained hashes,
-128 supported-playfield full results,129 undrawn phases, zero partial results
+The full real-capture validation passed on implementation `0e10276`: 257/257
+phase summaries, 11/11 memory checkpoints, 128/128 Graphics 1.3 chained hashes,
+128 supported-playfield full results, 129 undrawn phases, zero partial results
 and no named unit stops. HUD/cursor remain absent. See the new
-[per-phase v4 report](validation/m3-m22-render-v4.json); older1.2 reports remain
+[per-phase v4 report](validation/m3-m22-render-v4.json); older 1.2 reports remain
 historical and unchanged. The exact committed native build follows separately.
+
+
+### Graphics 1.3 native validation and integration handoff
+
+The exact coordinator build passed on committed revision
+`6d03502ba7140ce0f01c0243b1b3e6900b0d445b`, containing latest fetched main
+`ea3175b2e903413d8d8bcde796d0910ff524af9f`. Implementation is `0e10276`;
+subsequent commits record evidence/docs without changing executable code.
+
+```sh
+RISING_PYTHON_RUNTIME='/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python' \
+  ./compilar-jogável --development-ref HEAD \
+  --inputs-root '/Users/marcio/git/Rising Lands' \
+  --data-root '/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable'
+```
+
+First attempt exit 0: **80/80 app tests, zero skips**, 47.870 seconds; ARM64
+compile, bundled CPython 3.12.14 and strict deep signature/relocation checks
+passed. Exercise smoke **27/27**, checks 21.514 seconds; inspection **9/9**,
+checks 9.639 seconds. Both have visible native windows, validated ready signals,
+empty Python stderr and retained before/after/final screenshots. Existing
+readiness/check budgets were not changed. No new original emulation was needed.
+
+The current [structured validation](validation/m3-preparation.json) includes
+artifact hashes and screenshot paths/hashes. Saved
+[full discovery](validation/m3-graphics13-consumer-tests.log),
+[exercise](validation/m3-graphics13-native-smoke.json),
+[inspection](validation/m3-graphics13-native-inspection-smoke.json) and
+[exact build](validation/m3-graphics13-build.log) make the result reproducible.
+No older report/capture was regenerated to adopt the new API. Full Graphics 1.3
+chain verification covers all 128 drawing phases; complete post-HUD surfaces,
+cursor, unsupported provider states and independent mid-sequence cache remain
+outside this inspection boundary. Live delivery still awaits the native Rust
+frame ABI; the published pilot routine ABI is not a live-frame implementation.
+
+Review/integrate only feat/codex-macos-m3-preparation. The separate assets DATA
+release and clean tooling branch are delivered independently. This app branch
+does not include the old asset payload commits and claims no milestone.

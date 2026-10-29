@@ -1,0 +1,311 @@
+{
+  "architecture" : "arm64",
+  "bundlePath" : "\/Users\/marcio\/git\/Rising-Lands-Codex\/.local\/macos-playable\/dist\/development\/RisingLands-ptbr.app",
+  "canvas" : [
+    1664,
+    840
+  ],
+  "clock" : {
+    "maxCatchupSeconds" : 1,
+    "maximumObservedInterval" : 1.6440687499707565,
+    "mode" : "elapsed",
+    "rate" : 20,
+    "recentIntervals" : [
+      1.6440687499707565,
+      1.0000378750264645,
+      0.99996725004166365,
+      0.99979587504640222,
+      0.99988983303774148,
+      1.0000138749601319,
+      0.99978241708595306,
+      0.9995904159732163,
+      1.0001849590335041
+    ]
+  },
+  "commit" : "6d03502ba7140ce0f01c0243b1b3e6900b0d445b",
+  "diagnosticReadyDelayMs" : 0,
+  "interaction" : "DOM selection\/form\/buttons with live setInterval pump",
+  "lastProgress" : {
+    "action" : "smokeProgress",
+    "diagnostics" : {
+      "clock" : {
+        "maxCatchupSeconds" : 1,
+        "maximumObservedInterval" : 1.6440687499707565,
+        "mode" : "elapsed",
+        "rate" : 20,
+        "recentIntervals" : [
+          1.6440687499707565,
+          1.0000378750264645,
+          0.99996725004166365,
+          0.99979587504640222,
+          0.99988983303774148,
+          1.0000138749601319,
+          0.99978241708595306,
+          0.9995904159732163,
+          1.0001849590335041
+        ]
+      },
+      "commit" : "6d03502ba7140ce0f01c0243b1b3e6900b0d445b",
+      "focused" : false,
+      "paused" : true,
+      "pumping" : false,
+      "selected" : 0,
+      "session" : {
+        "boundary" : "Morte da unidade ainda depende de rotinas externas; o golpe final não foi aplicado.",
+        "cargo" : {
+
+        },
+        "delivered" : 1,
+        "depot" : [
+          2,
+          12
+        ],
+        "hits" : 4,
+        "objective" : "Treino livre: leve sacolas ao depósito e pratique golpes com o soldado.",
+        "remaining" : 7,
+        "supply" : [
+          4,
+          9
+        ]
+      },
+      "speed" : 8,
+      "tick" : 1439,
+      "units" : [
+        {
+          "blocked" : null,
+          "id" : 0,
+          "pos" : [
+            9,
+            4
+          ],
+          "progress" : 0,
+          "requested" : [
+            9,
+            4
+          ],
+          "state" : 1
+        },
+        {
+          "blocked" : null,
+          "id" : 1,
+          "pos" : [
+            2,
+            12
+          ],
+          "progress" : 0,
+          "requested" : [
+            2,
+            12
+          ],
+          "state" : 7
+        },
+        {
+          "blocked" : null,
+          "id" : 2,
+          "pos" : [
+            10,
+            4
+          ],
+          "progress" : 0,
+          "requested" : null,
+          "state" : 7
+        }
+      ],
+      "visibility" : "hidden"
+    },
+    "stage" : "final_animation_frames"
+  },
+  "nativeWindowVisible" : true,
+  "passed" : true,
+  "python" : "3.12.14",
+  "pythonStderr" : "",
+  "readiness" : {
+    "appReady" : true,
+    "checksBudgetSeconds" : 45,
+    "checksSeconds" : 21.513842583401129,
+    "documentLoaded" : true,
+    "elapsedSeconds" : 22.237925125053152,
+    "initializationBudgetSeconds" : 90,
+    "initializationSeconds" : 0.72408254165202379,
+    "phase" : "checks",
+    "windowBudgetSeconds" : 45,
+    "windowVisibleSignal" : true
+  },
+  "readySignal" : {
+    "action" : "appReady",
+    "assets" : true,
+    "commit" : "6d03502ba7140ce0f01c0243b1b3e6900b0d445b",
+    "mode" : "exercise",
+    "protocol" : 1,
+    "worker" : true
+  },
+  "renderCaptures" : [
+    {
+      "path" : "\/Users\/marcio\/git\/Rising-Lands-Codex\/.local\/macos-playable\/build\/development\/6d03502ba7140ce0f01c0243b1b3e6900b0d445b\/build\/logs\/native-smoke.before.png",
+      "sha256" : "897a0b1dd7c3a023e3ab5a157505031bfc6155e625ee62ec29aa4ec44d1a7ec0"
+    },
+    {
+      "path" : "\/Users\/marcio\/git\/Rising-Lands-Codex\/.local\/macos-playable\/build\/development\/6d03502ba7140ce0f01c0243b1b3e6900b0d445b\/build\/logs\/native-smoke.after.png",
+      "sha256" : "f4826d890839927cc047d0cf22359805e1eaece7c08a13a651e6195754345fd0"
+    }
+  ],
+  "scenario" : "jogavel",
+  "session" : {
+    "boundary" : "Morte da unidade ainda depende de rotinas externas; o golpe final não foi aplicado.",
+    "cargo" : {
+
+    },
+    "delivered" : 1,
+    "depot" : [
+      2,
+      12
+    ],
+    "hits" : 4,
+    "objective" : "Treino livre: leve sacolas ao depósito e pratique golpes com o soldado.",
+    "remaining" : 7,
+    "supply" : [
+      4,
+      9
+    ]
+  },
+  "tests" : [
+    {
+      "name" : "inicialização pausada e ARM64",
+      "passed" : true
+    },
+    {
+      "name" : "seleção de unidade",
+      "passed" : true
+    },
+    {
+      "name" : "ordem e rota calculada pelo motor Python",
+      "passed" : true
+    },
+    {
+      "name" : "pausa impede atualizações",
+      "passed" : true
+    },
+    {
+      "name" : "avanço unitário",
+      "passed" : true
+    },
+    {
+      "name" : "velocidade configurável",
+      "passed" : true
+    },
+    {
+      "name" : "chegada ao destino sem atravessar obstáculo",
+      "passed" : true
+    },
+    {
+      "name" : "colisões observadas",
+      "passed" : true
+    },
+    {
+      "name" : "busca Python contorna parede com passagem",
+      "passed" : true
+    },
+    {
+      "name" : "modo local bloqueia busca desativada sem simular sucesso",
+      "passed" : true
+    },
+    {
+      "name" : "missão original em inspeção",
+      "passed" : true
+    },
+    {
+      "name" : "procedência e recursos visíveis",
+      "passed" : true
+    },
+    {
+      "name" : "economia incorporada executa crédito real",
+      "passed" : true
+    },
+    {
+      "name" : "capacidade e excedentes geram sacolas",
+      "passed" : true
+    },
+    {
+      "name" : "combate consulta alcance e mira sem aplicar dano",
+      "passed" : true
+    },
+    {
+      "name" : "bancada de pesquisas visível",
+      "passed" : true
+    },
+    {
+      "name" : "alternância entre visão técnica e visão do jogo",
+      "passed" : true
+    },
+    {
+      "name" : "canvas e interface renderizados",
+      "passed" : true
+    },
+    {
+      "name" : "coleta após deslocamento no relógio vivo",
+      "passed" : true
+    },
+    {
+      "name" : "entrega muda saldo compartilhado",
+      "passed" : true
+    },
+    {
+      "name" : "soldado contorna parede em estado vivo",
+      "passed" : true
+    },
+    {
+      "name" : "combate contínuo reduz vida por dois golpes",
+      "passed" : true
+    },
+    {
+      "name" : "pausa mantém o estado do treino",
+      "passed" : true
+    },
+    {
+      "name" : "renderização acompanha interações",
+      "passed" : true
+    },
+    {
+      "name" : "relógio avança após intervalo real sem pedidos",
+      "passed" : true
+    },
+    {
+      "name" : "relógio vivo mede tempo decorrido entre respostas",
+      "passed" : true
+    },
+    {
+      "name" : "fontes de economia e combate vinculadas à mesma revisão",
+      "passed" : true
+    }
+  ],
+  "tick" : 1439,
+  "units" : [
+    {
+      "health" : 100,
+      "id" : 0,
+      "pos" : [
+        9,
+        4
+      ],
+      "state" : 1
+    },
+    {
+      "health" : 100,
+      "id" : 1,
+      "pos" : [
+        2,
+        12
+      ],
+      "state" : 7
+    },
+    {
+      "health" : 20,
+      "id" : 2,
+      "pos" : [
+        10,
+        4
+      ],
+      "state" : 7
+    }
+  ]
+}
