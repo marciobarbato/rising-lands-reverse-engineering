@@ -1,0 +1,11 @@
+{
+  "extractor_commit": "4eb88f23b7b6c03bf1fcfcfee85ee5d53a5f548e",
+  "extractor_file_sha256": "145197a10d2b75e1d0f4d667d606d0068c964e079c172cbcb532499f6db4dc93",
+  "manifest_sha256": "2a25904128ece9c0cc8113c3820bef6b65ee7ab9f97cc215030187afa44de63e",
+  "release_commit": "c21ae6579cd0e229f718e866adc14bad25799cf9",
+  "release_tag": "v1-4eb88f2",
+  "repository": "https://github.com/marciobarbato/rising-lands-assets.git",
+  "schema": "rising-lands/assets-origin/1",
+  "source_inventory_sha256": "d5057f3fae7f24d87e423856040962fdd09fbe4e80b9a0905726e9bbc7340211",
+  "tag_object": "9846e53d7a9cc9af709c3fc90c6aac7f02fb295c"
+}
