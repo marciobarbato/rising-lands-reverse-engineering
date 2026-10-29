@@ -73,6 +73,28 @@ class MemoriaEsparsa:
     def ler(self, a, n):
         return bytes(self._ler(a + i) for i in range(n))
 
+    def vista(self, a, n):
+        """Write-through view of n bytes (index or slice assignment), for helpers that write via ``vista``."""
+        memoria = self
+
+        class Vista:
+            def __len__(self):
+                return n
+
+            def __getitem__(self, k):
+                if isinstance(k, slice):
+                    return bytes(memoria._ler(a + i) for i in range(n)[k])
+                return memoria._ler(a + range(n)[k])
+
+            def __setitem__(self, k, v):
+                indices = range(n)[k] if isinstance(k, slice) else [range(n)[k]]
+                valores = bytes(v) if isinstance(k, slice) else bytes([v])
+                if len(valores) != len(indices):
+                    raise ValueError('view assignment changes the size')
+                for i, b in zip(indices, valores):
+                    memoria._acesso(1, a + i, b)
+        return Vista()
+
     def u8(self, a, v=None):
         return self._acesso(1, a, v)
 
