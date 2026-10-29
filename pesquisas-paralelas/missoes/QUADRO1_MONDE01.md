@@ -6,7 +6,7 @@ Original-only capture made with the intact executable (SHA-256 `6c556520…43fb`
 - [rastro-quadro1-monde01.json](evidencias/rastro-quadro1-monde01.json): the readable entry trace, SHA-256 `4585933089b12af2c8c9fcf14c6ae4f7e96c2c9ea4cba9c34b4efaa69a43fb0e`.
 - [validacao/m2-frame1-original-x86.json](validacao/m2-frame1-original-x86.json): the checks below.
 
-Bench: [oraculo_quadro_missao.py](oraculo_quadro_missao.py). This is M2.1 evidence only. M2 is **not** accepted.
+Bench: [oraculo_quadro_missao.py](oraculo_quadro_missao.py). The register view (every entry as `callee@caller+off EAX EDX EBX ECX`) is [rastro-registradores-quadro1-monde01.json](evidencias/rastro-registradores-quadro1-monde01.json). This is M2.1 evidence only. M2 is **not** accepted.
 
 ## Timeline
 

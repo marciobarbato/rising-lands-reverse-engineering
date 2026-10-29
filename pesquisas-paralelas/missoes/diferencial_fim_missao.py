@@ -26,7 +26,7 @@ from fim_missao import (CONDICOES, CONTAGEM_INICIAL, DependenciaFimMissao, ESTAD
                         EXERCITOS_IA, consultas_publicadas, evento_em_curso, testar_fim_missao)
 from oraculo_carga_missao import DGROUP
 
-ESTRUTURAS, RECURSOS, MISSAO = 0x49a0c8, 0x4e2ea8, 0x496fe4
+ESTRUTURAS, RECURSOS, MISSAO, INFLUENCIA = 0x49a0c8, 0x4e2ea8, 0x496fe4, 0x50c614
 
 
 def u16(v):
@@ -88,7 +88,8 @@ class Comparador:
                 estado = fatia(ESTADO, 14)
                 anterior = bytes(estado)
                 consultas = consultas_publicadas(memoryview(bytes(d[ESTRUTURAS-base:ESTRUTURAS-base+276000])),
-                                                 Economia(memoria=fatia(RECURSOS, 128)), fatia(MISSAO, 1))
+                                                 Economia(memoria=fatia(RECURSOS, 128)), fatia(MISSAO, 1),
+                                                 fatia(INFLUENCIA, 4000))
                 al = testar_fim_missao(c['registers'].get('EAX', int(nativo['entry_registers']['EAX'], 16)),
                                        fatia(CONDICOES, 100), estado,
                                        fatia(CONTAGEM_INICIAL, 2), fatia(EXERCITOS, 8), fatia(EXERCITOS_IA, 16),

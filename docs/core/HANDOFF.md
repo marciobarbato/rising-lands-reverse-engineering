@@ -339,3 +339,51 @@ The branch merged `origin/main` `81ebbf9` (fast-forward). The [frame-foundations
 Logs are in `.local/frame/`. No failed attempt occurred.
 
 **NOT RUN:** re-validation at frame-1 inputs, which waits for Missions' capture and entry trace; any frame-oracle composition; locked integration and exact-main reproduction, which the coordinator performs.
+
+
+### M2.1 frame 0/frame 1 — re-validation and reached Core callees on `feat/re-core`
+
+The branch merged `origin/main` `ec931d2`, which includes Missions' first-frame capture and entry trace. The [frame-foundations contract](FRAME_FOUNDATIONS.md#frame-0frame-1-re-validation-and-the-reached-core-callees-m21) holds the details. All inputs are the exact frame inputs: frame 0 is the load-state CalculGame body, and frame 1 is the second pass.
+
+**Foundations re-validated** against the Missions phase snapshots, with no CPU:
+- the load counter reset;
+- the `ProgIteration` prefix, which is the only DGROUP change between frames;
+- `GameNextFrame` (1 per frame);
+- `Random` (8 per frame, one per state-7 unit), with `iaRandom` untouched;
+- the permutation draw: MenuInit plus the CD branch in frame 0, the CD branch only in frame 1, with the MCICD_Play EAX/EDX/BL matched.
+
+The viewport size stays 0×0, so NextAnim* visit no cell. The per-frame cursor step is Core's CD-branch draw.
+
+**Reached Core callees.** The capture was committed before translation (`2e5cc6d`): 678 isolated native calls with Missions' `Isolamento`, the translation cache flushed after each hook_add, and the path reproduction passed. `chamadas_quadro_core.py` translates them over `memoria_quadro_core.MemoriaQuadro`, whose interface matches ai-runtime's `MemoriaDeclarada`:
+- GetBit and SetBit;
+- CaseEstDecouverte and CaseEstIlluminee;
+- BatimentCollision, BatimentGetCase, BatimentEstDecouvert and BatimentContourEstIllumine;
+- SetCollision, SetEnginCollision and Chemin_ModifieZone mode 2;
+- CalculFatigue, up to its threshold;
+- Random and GameNextFrame over memory.
+
+**Inputs and order.** Inputs are register values plus live memory. Chemin's pushed `sub` and CalculFatigue's `bonus(jogador, tipo, seletor)` are explicit arguments. The bonus is Economy's BonusGetValEngin and is called with AL=owner, BL=type, DL=0. Mutation order equals the original: SetEnginCollision runs SetCollision and then Chemin for each cell in footprint order, and Chemin writes the slot word before the region word. Callbacks happen only through `bonus`.
+
+**Validation.**
+1. The static manifest has 16 intervals, 4 jump tables and 4 data tables. It records that all 20 captured call sites overwrite flags before reading them.
+2. The CPU-free replay of all 678 calls from exactly the original's read-before-write bytes matches every store and all seven GPRs: 15 tests, which also cover the snapshot re-validation and the static regeneration.
+3. The fresh native differential, under the lease, made **1,918 comparisons with 0 mismatches and 0 stops**. These are the 678 exact calls plus perturbations of registers, types and origins, owners 0–7, a discovered cell, free region cells, counter wrap, owner bonus and seed edges. The positive visibility exits and the Chemin insert were reached.
+4. Three failed validator attempts (perturbation domain or a base computation) are kept in `.local/frame/`.
+
+**Stops.** Each raises `DependenciaRamoCore` before any store:
+- CalculFatigue: the threshold branch `0x452d61` and a missing bonus provider `0x452d48`;
+- Chemin_ModifieZone: modes 0 `0x43e153`, 1 `0x43e1b4`, 3 `0x43e256` and BL>3 `0x43e29c`.
+
+**Cross-front contracts** (requests, not edits):
+- **ai-runtime:** bind `provedores_core(memoria, bonus)` at the original CALLs, with keywords `caso`, `jogador`, `estrutura`, `unidade` and `valor`/`bit`. The Core providers touch these regions, which `MemoriaDeclarada` must declare:
+  - `0x4e19a0` and the unit pool;
+  - the structure pool `0x49a0c8`;
+  - the data tables `0x495c04..0x4962d4`, `0x4962c8` and `0x4965dc`;
+  - the grid pointers `0x507d78..0x507d98` and `0x507da8`, plus the region pointer `0x4e0f38` and the grids they point to;
+  - `0x497164`, `0x496d40` and the bonus table `0x4dfba0`.
+- **Economy:** `BonusUnidades` copies its table at construction, so Core's differential builds a fresh one from the live bytes for each query. A live-view constructor is requested. CalculMatiere can bind Core's GetBit/SetBit.
+- **Missions:** TestFinDeMission can bind `celula=lambda i: caso_estrutura(m, i)['EAX']` and `iluminada=lambda c, p: caso_esta_iluminada(m, c, p)['EAX']`. CaseGetZoneInfluence and GetTopLeftCaseZoneInfluence are not reached in frame 0/1 and are not implemented. BatimentExiste stays with Missions.
+- **Coordinator:** Core loads Economy's `bonus_unidades` through the private `integracao.providers._load_providers`. A public loader is requested.
+- **Graphics:** in frame 1 the cursor `0x4e1d18` moves only through Core's CD draw. AffGame's own cursor draws remain the open frame-oracle input.
+
+**NOT RUN:** CalculFatigue's threshold branch and Chemin modes 0/1/3 natively in Python; AffGame; locked integration and exact-main reproduction, which the coordinator performs.

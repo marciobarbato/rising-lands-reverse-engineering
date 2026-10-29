@@ -1,0 +1,517 @@
+{
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "capstone": "5.0.7",
+ "scope": "static only; no execution",
+ "capture_sha256": "fd209b2fb85794a52f778cb757ef79b6a4c42495763407ff731f98a05b4a5a8a",
+ "intervals": [
+  {
+   "role": "routine",
+   "name": "GetBit",
+   "start": "0x467d97",
+   "end_exclusive": "0x467da6",
+   "bytes": 15,
+   "sha256": "5ad94644e5a4950ec556cde4a48ab0e2a827235472d9c33dd7112adb595e098e",
+   "instructions": 7,
+   "asm": "00467d97.asm",
+   "calls": []
+  },
+  {
+   "role": "routine",
+   "name": "SetBit",
+   "start": "0x467d71",
+   "end_exclusive": "0x467d97",
+   "bytes": 38,
+   "sha256": "a89cba60a92f028ec0af4251b2481b38f2e7ae5037d9c49bd2615889930d9a98",
+   "instructions": 22,
+   "asm": "00467d71.asm",
+   "calls": []
+  },
+  {
+   "role": "routine",
+   "name": "CaseEstDecouverte",
+   "start": "0x4766d6",
+   "end_exclusive": "0x4766f0",
+   "bytes": 26,
+   "sha256": "2e3c150188cd700809900fd0e8561f2dc67c915400e3deb4e739a86cca1e613a",
+   "instructions": 6,
+   "asm": "004766d6.asm",
+   "calls": []
+  },
+  {
+   "role": "routine",
+   "name": "CaseEstIlluminee",
+   "start": "0x47693a",
+   "end_exclusive": "0x476951",
+   "bytes": 23,
+   "sha256": "b46acc48550bd8b0d1fb2db1c993546676f0b6188076cb7aaab0d4c138157362",
+   "instructions": 4,
+   "asm": "0047693a.asm",
+   "calls": []
+  },
+  {
+   "role": "routine",
+   "name": "BatimentCollision",
+   "start": "0x41ab5c",
+   "end_exclusive": "0x41ac8b",
+   "bytes": 303,
+   "sha256": "5b3d3484d48fe0e3bde39cb69224113789d583f301074ec252dfbd3be2c2bdf0",
+   "instructions": 95,
+   "asm": "0041ab5c.asm",
+   "calls": []
+  },
+  {
+   "role": "routine",
+   "name": "BatimentGetCase",
+   "start": "0x41aee2",
+   "end_exclusive": "0x41aff8",
+   "bytes": 278,
+   "sha256": "00757b16af936eb460e2a4195e9ac487cf76c972b908ae3270f5221e76e20f2e",
+   "instructions": 101,
+   "asm": "0041aee2.asm",
+   "calls": [
+    "41af78 0x41ab5c"
+   ]
+  },
+  {
+   "role": "shared_epilogue",
+   "name": "BatimentGetCase_epilogue_0x41db1e",
+   "start": "0x41db1e",
+   "end_exclusive": "0x41db24",
+   "bytes": 6,
+   "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+   "instructions": 6,
+   "asm": "0041db1e.asm",
+   "calls": []
+  },
+  {
+   "role": "routine",
+   "name": "BatimentEstDecouvert",
+   "start": "0x419c4f",
+   "end_exclusive": "0x419d54",
+   "bytes": 261,
+   "sha256": "8a352ffbc1e9a6e0a26272c7c38bee429d7d15ced3565c00aa0f2b5346f09d70",
+   "instructions": 89,
+   "asm": "00419c4f.asm",
+   "calls": [
+    "419d46 0x4766d6"
+   ]
+  },
+  {
+   "role": "shared_tail",
+   "name": "BatimentEstDecouvert_tail_0x419c3f",
+   "start": "0x419c3f",
+   "end_exclusive": "0x419c4f",
+   "bytes": 16,
+   "sha256": "574d6dc66e2279fb45055646266d553b5aa991d4638cea4a953be5956c5be46d",
+   "instructions": 10,
+   "asm": "00419c3f.asm",
+   "calls": []
+  },
+  {
+   "role": "routine",
+   "name": "BatimentContourEstIllumine",
+   "start": "0x4199f9",
+   "end_exclusive": "0x419b3f",
+   "bytes": 326,
+   "sha256": "bd169773b16300bbd3c0d14031433847800e7eddc33defe8d425cb7432ed3025",
+   "instructions": 117,
+   "asm": "004199f9.asm",
+   "calls": [
+    "419b28 0x47693a"
+   ]
+  },
+  {
+   "role": "routine",
+   "name": "SetCollision",
+   "start": "0x47622e",
+   "end_exclusive": "0x47623e",
+   "bytes": 16,
+   "sha256": "6782e75a6bd70bcc5f78f5647334c0acc7d8f358492018b6e8d31649457d9a13",
+   "instructions": 7,
+   "asm": "0047622e.asm",
+   "calls": []
+  },
+  {
+   "role": "routine",
+   "name": "Chemin_ModifieZone",
+   "start": "0x43e138",
+   "end_exclusive": "0x43e2a3",
+   "bytes": 363,
+   "sha256": "c72f4e20e1f5c2be3c0ccc92d1aeae22ef2c913ced95f12f14e192ae882142d1",
+   "instructions": 118,
+   "asm": "0043e138.asm",
+   "calls": [
+    "43e1e7 0x43e8b7",
+    "43e292 0x43e616"
+   ]
+  },
+  {
+   "role": "routine",
+   "name": "SetEnginCollision",
+   "start": "0x442cb4",
+   "end_exclusive": "0x442e41",
+   "bytes": 397,
+   "sha256": "ddd702b29ecbde31c7eb3e4de952d527fd9df5b5fcbb88c4624efc6acfa1cd7a",
+   "instructions": 108,
+   "asm": "00442cb4.asm",
+   "calls": [
+    "442d07 0x47622e",
+    "442d1a 0x43e138",
+    "442d31 0x47622e",
+    "442d55 0x47622e",
+    "442d62 0x43e138",
+    "442d82 0x47622e",
+    "442d8f 0x43e138",
+    "442db4 0x47622e",
+    "442dc7 0x43e138",
+    "442de4 0x47622e",
+    "442dfe 0x47622e",
+    "442e10 0x47622e",
+    "442e27 0x47622e"
+   ]
+  },
+  {
+   "role": "shared_epilogue",
+   "name": "SetEnginCollision_epilogue_0x445f27",
+   "start": "0x445f27",
+   "end_exclusive": "0x445f2d",
+   "bytes": 6,
+   "sha256": "9651d68480e9031dd95d190ca598519a163040c3b73f617ef4b3a789f33597ef",
+   "instructions": 6,
+   "asm": "00445f27.asm",
+   "calls": []
+  },
+  {
+   "role": "routine",
+   "name": "CalculFatigue",
+   "start": "0x452cc8",
+   "end_exclusive": "0x452ef7",
+   "bytes": 559,
+   "sha256": "8ccad7ec1c2d0b7b7c3b996fd4a229a000c25538052fbcc217b77241542a4eff",
+   "instructions": 177,
+   "asm": "00452cc8.asm",
+   "calls": [
+    "452d48 0x428cc0",
+    "452ded 0x4766f0",
+    "452df8 0x440c5d",
+    "452e2a 0x48aa79",
+    "452e5b 0x4471b8",
+    "452e71 0x4472ea",
+    "452ea2 0x444938"
+   ]
+  },
+  {
+   "role": "shared_epilogue",
+   "name": "CalculFatigue_epilogue_0x440d58",
+   "start": "0x440d58",
+   "end_exclusive": "0x440d5e",
+   "bytes": 6,
+   "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+   "instructions": 6,
+   "asm": "00440d58.asm",
+   "calls": []
+  }
+ ],
+ "jump_tables": [
+  {
+   "routine": "BatimentCollision",
+   "address": "0x41ab04",
+   "targets": [
+    "0x41ab76",
+    "0x41ab83",
+    "0x41ab90",
+    "0x41ab9d",
+    "0x41abaa",
+    "0x41abb7",
+    "0x41abc4",
+    "0x41abd1",
+    "0x41abde",
+    "0x41abeb",
+    "0x41abf8",
+    "0x41ac05",
+    "0x41ac12",
+    "0x41ac1f",
+    "0x41ac2c",
+    "0x41ac39",
+    "0x41ac46",
+    "0x41ac53",
+    "0x41ac60",
+    "0x41ac6d",
+    "0x41ac39",
+    "0x41ac7a"
+   ]
+  },
+  {
+   "routine": "Chemin_ModifieZone",
+   "address": "0x43e128",
+   "targets": [
+    "0x43e153",
+    "0x43e1b4",
+    "0x43e1ee",
+    "0x43e256"
+   ]
+  },
+  {
+   "routine": "SetEnginCollision",
+   "address": "0x442c4c",
+   "targets": [
+    "0x442cf4",
+    "0x442cf4",
+    "0x442cf4",
+    "0x442d38",
+    "0x442cf4",
+    "0x442cf4",
+    "0x442cf4",
+    "0x442cf4",
+    "0x442cf4",
+    "0x442cf4",
+    "0x442cf4",
+    "0x442d38",
+    "0x442d38",
+    "0x442d38",
+    "0x442d38",
+    "0x442d38",
+    "0x442df4",
+    "0x442d27",
+    "0x442cf4",
+    "0x442cf4",
+    "0x442cf4",
+    "0x442cf4",
+    "0x442cf4",
+    "0x442cf4",
+    "0x442cf4",
+    "0x442d38"
+   ]
+  },
+  {
+   "routine": "CalculFatigue",
+   "address": "0x452cac",
+   "targets": [
+    "0x452cf7",
+    "0x452cf7",
+    "0x452cf7",
+    "0x452cf7",
+    "0x452cf7",
+    "0x452cf7",
+    "0x452cf7"
+   ]
+  }
+ ],
+ "initialized_data": [
+  {
+   "name": "structure mask tables 0x495c04..0x495d8c",
+   "start": "0x495c04",
+   "end_exclusive": "0x495d8c",
+   "sha256": "b07a778ca2d86232da2d04161186e6ca514566e2701224cc69eb3fbb243c3157"
+  },
+  {
+   "name": "structure width/height per type, stride 52",
+   "start": "0x495d8c",
+   "end_exclusive": "0x4962d4",
+   "sha256": "84d91a876fe90de1b6ea6b70427b0d5522558be5faccaa2da5a89ce34e6922ee"
+  },
+  {
+   "name": "unit occupation class per type",
+   "start": "0x4962c8",
+   "end_exclusive": "0x4962e2",
+   "sha256": "03088ba22eabf764cb1b6e80b703350305daa2901c534cd35fa781954691e2b3"
+  },
+  {
+   "name": "unit fatigue threshold u16 per type, stride 50",
+   "start": "0x4965dc",
+   "end_exclusive": "0x496af0",
+   "sha256": "b4bcc0ca58d8cd31882e81a600a5f105c552d3ef6793156048080e041f13f217"
+  }
+ ],
+ "caller_flag_use": [
+  {
+   "routine": "BatimentCollision",
+   "caller": "BatimentGetCase+0x9b",
+   "caller_return": "0x41af7d",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "41af7d test al, al"
+   ]
+  },
+  {
+   "routine": "BatimentContourEstIllumine",
+   "caller": "CalculBatimentNextEtape+0x1ea",
+   "caller_return": "0x4283b1",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "4283b1 test al, al"
+   ]
+  },
+  {
+   "routine": "BatimentEstDecouvert",
+   "caller": "CalculBatimentNextEtape+0x176",
+   "caller_return": "0x42833d",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "42833d test al, al"
+   ]
+  },
+  {
+   "routine": "BatimentGetCase",
+   "caller": "CalculBatimentNextEtape+0x11f",
+   "caller_return": "0x4282e6",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "4282e6 xor ebx, ebx"
+   ]
+  },
+  {
+   "routine": "CalculFatigue",
+   "caller": "EnginNextEtape+0x485",
+   "caller_return": "0x4548b1",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "4548b1 mov eax, dword ptr [0x4e19a0]",
+    "4548b6 add ecx, eax"
+   ]
+  },
+  {
+   "routine": "CaseEstDecouverte",
+   "caller": "BatimentEstDecouvert+0xfc",
+   "caller_return": "0x419d4b",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "419d4b test al, al"
+   ]
+  },
+  {
+   "routine": "CaseEstDecouverte",
+   "caller": "CalculBatimentNextEtape+0x169",
+   "caller_return": "0x428330",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "428330 test al, al"
+   ]
+  },
+  {
+   "routine": "CaseEstIlluminee",
+   "caller": "BatimentContourEstIllumine+0x134",
+   "caller_return": "0x419b2d",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "419b2d test al, al"
+   ]
+  },
+  {
+   "routine": "Chemin_ModifieZone",
+   "caller": "SetEnginCollision+0x6b",
+   "caller_return": "0x442d1f",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "442d1f add esp, 4"
+   ]
+  },
+  {
+   "routine": "GameNextFrame",
+   "caller": "CalculGame+0xb83",
+   "caller_return": "0x42d3eb",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "42d3eb call 0x45e944",
+    "45e944 push ebx",
+    "45e945 push ecx",
+    "45e946 push edx",
+    "45e947 push esi",
+    "45e948 push edi",
+    "45e949 sub esp, 4"
+   ]
+  },
+  {
+   "routine": "GetBit",
+   "caller": "CalculMatiere+0x145",
+   "caller_return": "0x46785d",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "46785d and eax, 0xff"
+   ]
+  },
+  {
+   "routine": "GetBit",
+   "caller": "CalculMatiere+0x197",
+   "caller_return": "0x4678af",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "4678af and eax, 0xff"
+   ]
+  },
+  {
+   "routine": "GetBit",
+   "caller": "EnginNextEtape+0x3e1",
+   "caller_return": "0x45480d",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "45480d test al, al"
+   ]
+  },
+  {
+   "routine": "GetBit",
+   "caller": "EnginNextEtape+0x476",
+   "caller_return": "0x4548a2",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "4548a2 test al, al"
+   ]
+  },
+  {
+   "routine": "GetBit",
+   "caller": "EnginNextEtape+0x775",
+   "caller_return": "0x454ba1",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "454ba1 test al, al"
+   ]
+  },
+  {
+   "routine": "GetBit",
+   "caller": "EnginNextEtape+0x7de",
+   "caller_return": "0x454c0a",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "454c0a test al, al"
+   ]
+  },
+  {
+   "routine": "Random",
+   "caller": "EnginNextEtape+0x2596",
+   "caller_return": "0x4569c2",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "4569c2 div ecx"
+   ]
+  },
+  {
+   "routine": "SetBit",
+   "caller": "CalculMatiere+0xfa",
+   "caller_return": "0x467812",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "467812 inc byte ptr [esp + 8]",
+    "467816 xor ecx, ecx"
+   ]
+  },
+  {
+   "routine": "SetCollision",
+   "caller": "SetEnginCollision+0x58",
+   "caller_return": "0x442d0c",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "442d0c push 0",
+    "442d0e xor edx, edx"
+   ]
+  },
+  {
+   "routine": "SetEnginCollision",
+   "caller": "EnginNextEtape+0x746",
+   "caller_return": "0x454b72",
+   "result": "overwritten_before_read",
+   "instructions": [
+    "454b72 xor edx, edx"
+   ]
+  }
+ ]
+}

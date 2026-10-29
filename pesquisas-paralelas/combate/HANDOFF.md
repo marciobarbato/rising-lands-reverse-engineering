@@ -1,5 +1,40 @@
 # Combat handoff — 2026-10-28
 
+## M2.1 round 2: exact frame-0/frame-1 inputs and the PlayerEstAllie API
+
+Base: main `ec931d2` (fast-forward merge), which includes Missions' first-frame capture (`pesquisas-paralelas/missoes/QUADRO1_MONDE01.md`). The load-state `CalculGame` call is already a game frame (**frame 0**, counter 0); frame 1 is the second pass (counter 1).
+
+**Capture first.** [`capturar_isolados_combate_quadro1.py`](capturar_isolados_combate_quadro1.py) → [`evidencias/captura-isolada-combate-quadro1.json`](evidencias/captura-isolada-combate-quadro1.json), committed in `54e0000` before any comparison. It reruns Missions' committed path and uses their `oraculo_quadro_missao.Isolamento` bench read-only: each listed routine runs natively from its exact saved entry state, the state is restored, and the phase continues. The run reproduced every committed phase state, the entry trace, the boundaries and the code hash (`path_reproduction.passed`; 34.9 s). An observer saves the exact Python-entry inputs from each entry state. No translation is imported.
+
+**What the trace reaches in Combat, in order.**
+
+| Frame | Call (caller) | Native result at the exact input | Python comparison |
+|---|---|---|---|
+| 0 | `PlayerAttaqueReset` (CalculGame+0xa7b) | `ret`; no reads or writes | — |
+| 0 | `ProjectileCalcul` (+0xb8d), counter 0 | pool input = M1 pool (SHA `7594c2d5…`, same as slice 1); 100 changed bytes, `+1: 0xa7→0`; EAX `0x1e` | `MaquinaProjeteis.calcular(0)`: same 100 bytes and 100 stores, no effects |
+| 0 | `EnginTrouveCible 0x453f74` (EnginNextEtape+0x376), unit 0 (AX = 0) | AX = `0xffff` (no target); no writes; 7 nested `PlayerEstAllie` calls | `alvos_alcance.encontrar_alvo(units, 0, grid, masks)` = `0xffff`, with the same 7 `aliados` queries in the same order |
+| 0 | `PlayerEstAllie 0x46d838` ×7 (EnginTrouveCible+0x1bc) | AL = 0, DL = 0 (owner 0 vs owner 0) → AL = 1; EDX unchanged | `aliados` and the register contract below |
+| 0 | `PlayerAttaqueCalculSympa` (+0xc09), counter 0 | periodic branch taken: 12 nested `MAJSympathie` calls (Economy/diplomacy), **0 changed bytes** | not Combat-owned |
+| 1 | `PlayerAttaqueReset` | `ret` | — |
+| 1 | `ProjectileCalcul`, counter 1 | pool input = frame-0 output (SHA `68ae4d5d…`, slice 1's output); 0 changed bytes, 0 stores | `calcular(1)`: 0 stores |
+| 1 | `PlayerAttaqueCalculSympa`, counter 1 | early return, no writes | — |
+
+The task note that frame 1 reaches `EnginTrouveCible` is not borne out by the committed trace: it is reached in **frame 0** (unit 0, `(0 + 0) & 0x1f = 0`), and frame 1 reaches no combat routine beyond the empty projectile pass. Frame 0's `ProjectileCalcul` reads 304 bytes before writing them: the pool pointer `0x5080f0`, `+2 = 0` in each slot (written by `ProjectileReset`), and the never-written allocation fill at `+0`/`+1` (200 bytes, value `0xa7`). Missions' three-fill run shows the fill does not change behavior: types `0xa7`/`0x5a`/`0x00` are all `ProjectileAnim` no-ops, and `+1` is only cleared.
+
+**PlayerEstAllie API (`0x46d838`): this is `alvos_alcance.aliados`.**
+- Python: `aliados(origem, destino, mascaras) -> bool`. `origem` = AL, `destino` = DL (both u8). `mascaras[p]` = byte `[[0x5080a8] + 20·p + 6]` for p = 0..4. Result = AL (1/0).
+- Semantics: `origem == destino` → 1 (any value, including 200). Otherwise, if either is above 4 → 0. Otherwise bit `destino` of `mascaras[origem]`. The relation is directional.
+- Register contract (native, `test_quadro1_combate.PlayerEstAllieNativo`): ECX preserved. Equal path: EAX = caller EAX with AL = 1, EDX unchanged. Out of range: EAX = 0, EDX unchanged. In range: EAX = 0/1 and **DL = `1 << destino`** (upper EDX kept). No memory writes.
+- `TestFinDeMission` call site `0x458903`: AL = local player (byte `[esp+0xc]`, zero-extended), DL = candidate player `cl` (0..3, skipping the local player). Only AL is tested; DL is overwritten before any read. So for Missions: `aliados(local, candidate, mascaras)`, and the DL clobber needs no model there.
+- At MONDE01 the masks are `01 02 04 08 a7`: players 0–3 are allied only with themselves, and player 4's byte is still the allocation fill `0xa7`. That byte is not read in frames 0/1 (no owner-4 query). A future query with origin 4 depends on it, so it stays an open input until a writer is found.
+
+**Validation (heavy lease).**
+- Capture: one full path rerun, 14 isolated native calls.
+- `RISING_EMULAR=1 python3 -B -m unittest test_quadro1_combate test_quadro_m1 test_alvos_alcance`: 32 tests OK, 0 skips. This includes 486 direct `PlayerEstAllie` executions (6 mask sets × 9×9 AL/DL values with random upper register bits) and the existing target-selection differentials.
+- No validated behavior changed in this round (tests and evidence only), so the full native suite was not rerun. `scripts/check.py --domain combat`: links passed, 256 tests OK, 151 skipped. The skips are the native differentials, which this gate runs without `RISING_EMULAR`; the affected ones were run natively above.
+
+**Contracts.** Missions: use `alvos_alcance.aliados` for `PlayerEstAllie` with the mapping above. AI-runtime: frame 0's target scan for unit 0 routes to `encontrar_alvo(unidades, indice, grade, mascaras)`, with the grid from `[0x4e0f38]` as u16 cells and the returned AX; validated at that input. Economy: frame 0 enters `MAJSympathie` ×12 under `PlayerAttaqueCalculSympa` with no byte change; that routine is theirs.
+
 ## M2 slice 1: first-frame combat calls over the M1 post-load input
 
 Branch `feat/re-combat` after preserving the inherited Codex Stage 19 WIP unchanged (`42078d4`) and merging main `81ebbf9` (`00e4153`). Native captures were committed before any comparison (`11e9721`).
