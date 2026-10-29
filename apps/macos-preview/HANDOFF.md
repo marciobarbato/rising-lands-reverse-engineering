@@ -393,3 +393,35 @@ not represented as a current pass. No native x86 emulation or Mac mini job was
 needed by this consumer. Remaining dependencies are Graphics' unsupported
 bodies/HUD/cursor and new reference/cache artifacts for independent starts,
 plus the separately reserved live runtime/input contract. No milestone changes.
+
+
+## Round 4 — native smoke readiness only
+
+Fetched integrated base `8e90beb412a63d5f00965c381d21bc9a800257bc` includes
+macOS f20d38a and Audio b4e8dae. The macOS feature advanced by fast-forward;
+only app-owned robustness code/docs change. The Graphics gate remains (1,2),
+with its existing refusal tests. No renderer/game/input feature is added.
+
+The old native watchdog applied 45 seconds to window opening, asset/worker
+initialization AND all interaction checks, and called tests immediately on
+navigation completion. The new shell requires a validated explicit readiness
+signal after actual dependencies load, plus native document/window readiness.
+Window and checks each keep 45-second budgets; initialization has a distinct
+90-second total-from-launch budget. Monotonic progress never renews a deadline.
+Failure diagnostics distinguish window, initialization and check timeout. All
+interaction assertions, local waits, before/after screenshots and failure JSON
+are retained. Both UI modes now have paired native captures. Retries archive
+previous evidence; the outer165-second guard cannot replace a specific native
+failure. Missing screenshots cannot result in a passing build.
+
+The exact pure Swift lifecycle compiled into both native builders is tested
+with a controlled monotonic clock, including readiness after the old45-second
+mixed deadline, missing ready/late ready, missing/late window and document/ready
+ordering. Python tests cover retry preservation, outer failures and missing
+captures. A smoke-only bounded delayed-ready flag permits an actual native
+50-second initialization regression without stressing the workstation or
+accepting an uninitialized app. The final exact integration build and delayed
+native result will be recorded after running the committed revision.
+
+After this bounded robustness change, A waits for Claude's M2.3 publication and
+M3 plan. C remains complete. No milestone or main integration is performed.
