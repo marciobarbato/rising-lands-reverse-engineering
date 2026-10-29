@@ -20,8 +20,10 @@ from regras_incursao_ia import REGRAS  # noqa: E402
 from test_incursao_ia import MemoriaEsparsa, em_pilha  # noqa: E402
 
 CAPTURA = json.loads((OWNED / 'evidencias/captura-regras-incursao-9000-ia.json').read_bytes())
+POSTERIOR = json.loads((OWNED / 'evidencias/captura-regras-incursao-ia.json').read_bytes())
+DO_VM = ('B_Superieur', 'B_Egalite', 'I_Soustraction')     # Core's MaquinaTarefas operations
 H = lambda v: int(v, 16)  # noqa: E731
-ARGUMENTOS = {'EnginEstVivant': dict(unidade=('EAX', 0xffff)),
+ARGUMENTOS = {'EnginEstVivant': dict(unidade=('EAX', 0xffff)), 'EnginGetCase': dict(unidade=('EAX', 0xffff)),
               'SetDeplaceEngin': dict(unidade=('EAX', 0xffff), destino=('EDX', 0xffff))}
 
 
@@ -50,11 +52,20 @@ class RaidRules9000(unittest.TestCase):
                                             'I_DetermineTempsTrajet', 'V_DeplaceGroupe'])
 
     def test_each_rule_call(self):
-        for chamada in CAPTURA['rule_calls']:
+        self.verificar(CAPTURA['rule_calls'])
+
+    def test_later_rule_calls(self):
+        """Counters 9500 (group position, re-post), 9700, 10200, 11100 (battle freed, group re-queued), 11101."""
+        self.assertEqual(POSTERIOR['recorded_counters'], [9500, 9700, 10200, 11100, 11101])
+        self.assertEqual(len(POSTERIOR['rule_calls']), 19)
+        self.verificar(POSTERIOR['rule_calls'])
+
+    def verificar(self, chamadas):
+        for chamada in chamadas:
             nome = chamada['rule']
-            with self.subTest(nome):
+            with self.subTest(nome, contador=chamada['counter']):
                 argumentos = [H(v) for v in chamada['arguments']]
-                if nome == 'B_Superieur':
+                if nome in DO_VM:
                     from tarefas_ia import MaquinaTarefas
                     eax = MaquinaTarefas.executar_operacao(object.__new__(MaquinaTarefas), nome, argumentos, 0, 0)
                     self.assertEqual(eax, H(chamada['exit']['EAX']))
