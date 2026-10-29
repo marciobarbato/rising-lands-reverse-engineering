@@ -41,6 +41,7 @@ from ambiente_ia_runtime import CD, ROOT
 from composicao_quadro1_ia import Registro as RegistroBase
 from entrada_quadro_ia import calcular_icone_acao, entrada_jogo, enviar_entrada, iniciar_menu
 from incursao_ia import enviar_mensagem_unidade
+from regras_incursao_ia import MundoRegras, operacoes_regras
 from laco_despachantes import calcular_proxima_etapa_estruturas, calcular_proxima_etapa_unidades
 from proxima_etapa_quadro import proxima_etapa_estrutura, proxima_etapa_unidade, tabelas_imagem
 from quadro_calcul_game import calcular_quadro
@@ -279,7 +280,8 @@ def provedores(mapa, prov, mm, ctx, registro, janelas, travessias, fase, regs):
     p = {}
     bonus = lambda jogador, tipo, seletor: prov.bonus.consultar(jogador, tipo, seletor)  # noqa: E731
     p.update(core.provedores_core(mm, bonus))
-    maquina = MaquinaTarefasViva(ctx.programa, mm.vista(0x512320, 0x25e8))
+    maquina = MaquinaTarefasViva(ctx.programa, mm.vista(0x512320, 0x25e8), operacoes=operacoes_regras(mm, p),
+                                 missao=mm.u8(0x496fe4), mundo=MundoRegras(mm, p))
     estado_regs = dict(EBX=regs['EBX'])
 
     def ponto(nome, funcao):
