@@ -1,0 +1,109 @@
+{
+ "boundary_requests_compared": 14,
+ "by_routine": {
+  "CalculConstruireBatiment": {
+   "cases": 21,
+   "mismatches": 0
+  },
+  "CreerBatiment": {
+   "cases": 18,
+   "mismatches": 0
+  },
+  "EnginTravailSelectionne": {
+   "cases": 19,
+   "mismatches": 0
+  },
+  "EnleveMatiere": {
+   "cases": 10,
+   "mismatches": 0
+  },
+  "GetRessourceStock": {
+   "cases": 6,
+   "mismatches": 0
+  },
+  "SetDepotEngin": {
+   "cases": 3,
+   "mismatches": 0
+  },
+  "SetDepotEnginSelect": {
+   "cases": 7,
+   "mismatches": 0
+  },
+  "SetMineEngin": {
+   "cases": 4,
+   "mismatches": 0
+  },
+  "SetMineEnginSelect": {
+   "cases": 13,
+   "mismatches": 0
+  },
+  "SetRamasseEngin": {
+   "cases": 3,
+   "mismatches": 0
+  },
+  "SetRamasseEnginSelect": {
+   "cases": 10,
+   "mismatches": 0
+  },
+  "TestRessource": {
+   "cases": 7,
+   "mismatches": 0
+  }
+ },
+ "capture": {
+  "path": "pesquisas-paralelas/economia/evidencias/ordens-economia/captura-ordens-economia-exibicao.json",
+  "sha256": "074e79a63a5b87821239ddf01d90274af593ffa6a5c64e813031337f1da47e31"
+ },
+ "changed_bytes_compared": 1593,
+ "comparisons": 121,
+ "mismatches": [],
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "other_front_calls_compared": 142,
+ "outside_domain": [
+  "build_tick_gate_type9",
+  "build_tick_progress_byte1",
+  "build_tick_state15"
+ ],
+ "path_reproduction": {
+  "between_frames": true,
+  "code_unchanged": true,
+  "frame1": true,
+  "load_tail": true,
+  "paused": true
+ },
+ "pause": {
+  "caller": "CalculGame+0xb4d",
+  "caller_return": "0x42d3b5",
+  "registers": {
+   "EAX": "0x0",
+   "EBP": "0x0",
+   "EBX": "0x0",
+   "ECX": "0x5",
+   "EDI": "0x0",
+   "EDX": "0x1a1a000e",
+   "EIP": "0x45edc0",
+   "ESI": "0x0",
+   "ESP": "0x2007ebc"
+  },
+  "routine": "ProcessInputGame",
+  "state_sha256": {
+   "blocks": 25198,
+   "bytes": 16240871,
+   "sha256": "6e8620b99ac650d032d575570da2a28bbab6cf700b09d6ed1efae5bb085724ed"
+  }
+ },
+ "providers": {
+  "core": "selecao_ordens.SelecaoOrdens via ordens_economia.provedor_core (EnginEstVivant, ResetOrdre, EnginAsk, BatimentGetDecalageConstruction); som returns the received EAX",
+  "other_fronts": "the original call replayed (its stores and exit registers) after checking its name and EAX/EDX/EBX/ECX: BatimentCollision, BatimentConstructible, DeplaceEngin, PlaceBatiment, ResetCheminTerrainModify"
+ },
+ "schema": "rising-lands/monde01-economy-orders-differential/1",
+ "seconds": 116.947,
+ "source_sha256": {
+  "ferramentas/selecao_ordens.py": "e8eb78134dd44adbbef88354ea3219c6513f2a2173cc68227fa9fecaf47ab67c",
+  "pesquisas-paralelas/economia/bancada_ordens_economia.py": "f018a0d648bafb5d3770a7894c893b9bb94a3cf6a806142f028fc89ead3094f8",
+  "pesquisas-paralelas/economia/capturar_ordens_economia.py": "e85cab5058ab67b275cc00239635c831533e0e4f32e9d46a2eb7599783eeff72",
+  "pesquisas-paralelas/economia/casos_ordens_economia.py": "7c786fe40e1123875426c117a713f2b4bec7e0c05e397bc404e23f2a8e0ce279",
+  "pesquisas-paralelas/economia/ordens_economia.py": "48c8fd6d63b7acdf7883e1a6a5b913435c3e35ab8e5eae2925f9f4ee84d46e69",
+  "pesquisas-paralelas/economia/validar_ordens_economia.py": "9a9a2207f1b880f21040cc0610d8066d1dbabe8ecaf99583906a36870d72f7be"
+ }
+}

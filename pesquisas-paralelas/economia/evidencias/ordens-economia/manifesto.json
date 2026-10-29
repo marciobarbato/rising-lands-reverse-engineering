@@ -1,0 +1,208 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "EnginTravailSelectionne",
+      "start": "0x47248f",
+      "end_exclusive": "0x47253d",
+      "sha256": "f9c4b5503f8a597ff0d2dc348137cedde78df046e046c32b504562775a58fbfa",
+      "file": "0047248f.asm"
+    },
+    {
+      "name": "epilogue 0x47234f (EnginTravailSelectionne)",
+      "start": "0x47234f",
+      "end_exclusive": "0x472355",
+      "sha256": "54d0d9b647d9791f7ca742b1b98b1d975e05bca359ed853c821ab056357d5dfc",
+      "file": "0047234f.asm"
+    },
+    {
+      "name": "SetMineEnginSelect",
+      "start": "0x473324",
+      "end_exclusive": "0x4733b8",
+      "sha256": "d6eb5b147f00f2bb2c695dc016f4e62faf9173df4431620b19edfccb8d4292ef",
+      "file": "00473324.asm"
+    },
+    {
+      "name": "epilogue 0x472903 (Select setters)",
+      "start": "0x472903",
+      "end_exclusive": "0x47290b",
+      "sha256": "103a0bad9a9647fe48c2dc29b3d10723411a718f8d60aeb700f84cba8393b4cc",
+      "file": "00472903.asm"
+    },
+    {
+      "name": "SetMineEngin",
+      "start": "0x444f48",
+      "end_exclusive": "0x444fdb",
+      "sha256": "dfe7dad2b619b90937bb793c5297befa61a32890225a6b79d05c2a5694de5002",
+      "file": "00444f48.asm"
+    },
+    {
+      "name": "SetDepotEnginSelect",
+      "start": "0x47312c",
+      "end_exclusive": "0x473194",
+      "sha256": "b3468e4feda57d7c36fd9140420f70fbd7cbf7b68ba9be3790cb55c774d1e81e",
+      "file": "0047312c.asm"
+    },
+    {
+      "name": "SetDepotEngin",
+      "start": "0x444dad",
+      "end_exclusive": "0x444dee",
+      "sha256": "7294538f1ea6b2c06d000b2c31ece9f65e4a29a46c841e0f460a0a261c30ccdb",
+      "file": "00444dad.asm"
+    },
+    {
+      "name": "SetRamasseEnginSelect",
+      "start": "0x473d2c",
+      "end_exclusive": "0x473dbf",
+      "sha256": "b68373452f6bcb6b0b30990f4c8acd33a6ce03fc5b104b39989c5bf91f2483be",
+      "file": "00473d2c.asm"
+    },
+    {
+      "name": "SetRamasseEngin",
+      "start": "0x445947",
+      "end_exclusive": "0x4459c4",
+      "sha256": "d2d86293a54665aa297b5a6b1836111f35f9702a4b9c8471c382b294a4a407da",
+      "file": "00445947.asm"
+    },
+    {
+      "name": "tail 0x444f3c (SetRamasseEngin)",
+      "start": "0x444f3c",
+      "end_exclusive": "0x444f48",
+      "sha256": "2bfe33c3041500f511aefbb0fc6a6c425ec9e6a9b540d78491dc893f921a5dfb",
+      "file": "00444f3c.asm"
+    },
+    {
+      "name": "GetRessourceStock",
+      "start": "0x46769d",
+      "end_exclusive": "0x4676e5",
+      "sha256": "d58a63c1d9858eb5b063c10dec0317e206d8151eb5763debc9c48f9aa8ee2a36",
+      "file": "0046769d.asm"
+    },
+    {
+      "name": "tail 0x467666 (GetRessourceStock)",
+      "start": "0x467666",
+      "end_exclusive": "0x467670",
+      "sha256": "69fac7caf3b6fa547331e210de43e6455841780f809bf9ae6522cb8bd82da345",
+      "file": "00467666.asm"
+    },
+    {
+      "name": "TestRessource",
+      "start": "0x4676e5",
+      "end_exclusive": "0x467718",
+      "sha256": "e36bd212078b4516f4132bdd36bc6d8d5d393aea5cc58401af613ecdee840c26",
+      "file": "004676e5.asm"
+    },
+    {
+      "name": "EnleveMatiere",
+      "start": "0x46792c",
+      "end_exclusive": "0x46799c",
+      "sha256": "b971a0eb7331086ca4f7dda9c7592b09efa949942701736f47cf983e7fde011a",
+      "file": "0046792c.asm"
+    },
+    {
+      "name": "CreerBatiment",
+      "start": "0x41fea2",
+      "end_exclusive": "0x4202ce",
+      "sha256": "73064d19967425415199c4a6ce7159703ec7bfad27401e8a8bae4400cbdd7c98",
+      "file": "0041fea2.asm"
+    },
+    {
+      "name": "BagReset",
+      "start": "0x44710b",
+      "end_exclusive": "0x447148",
+      "sha256": "6c7a5c54773b14a534485bc9427c52bb9c3ef911def9b98545e2b4e35802b149",
+      "file": "0044710b.asm"
+    },
+    {
+      "name": "BagInit",
+      "start": "0x447148",
+      "end_exclusive": "0x447197",
+      "sha256": "b407efade7ed0ea802ec0e9108e94f308772082856e01c01ca3bb9e9ad456310",
+      "file": "00447148.asm"
+    },
+    {
+      "name": "CalculConstruireBatiment",
+      "start": "0x44ab60",
+      "end_exclusive": "0x44b595",
+      "sha256": "78e4ac233c6c3afe934d79ebf9476baa0d64534408e04a3c34bc06a54791a72c",
+      "file": "0044ab60.asm"
+    },
+    {
+      "name": "epilogue 0x44f29d (CalculConstruireBatiment)",
+      "start": "0x44f29d",
+      "end_exclusive": "0x44f2a3",
+      "sha256": "b080fef966146bceefcbdf9abf2b8f63e9e525b0ea53261f613e71703b86964f",
+      "file": "0044f29d.asm"
+    },
+    {
+      "name": "epilogue 0x440d58 (CalculConstruireBatiment)",
+      "start": "0x440d58",
+      "end_exclusive": "0x440d5e",
+      "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "file": "00440d58.asm"
+    },
+    {
+      "name": "call site 0x45efe2..0x45f041 (ProcessInputGame tag 6)",
+      "start": "0x45efe2",
+      "end_exclusive": "0x45f041",
+      "sha256": "9ca91797f350ee3064d0ae71006599f70db1e8807b1a682884f465cfc40150e4",
+      "file": "0045efe2.asm"
+    },
+    {
+      "name": "call site 0x45f20f..0x45f221 (ProcessInputGame tag 0x12)",
+      "start": "0x45f20f",
+      "end_exclusive": "0x45f221",
+      "sha256": "0f7569c1bad422701107ed670da1ab2d2dc671fd58e6970b55c6c1c8bd1eed7a",
+      "file": "0045f20f.asm"
+    }
+  ],
+  "jump_tables": [
+    {
+      "name": "ProcessInputGame by packet tag",
+      "address": "0x45ed20",
+      "entries": [
+        "0x45f2de",
+        "0x45ee46",
+        "0x45eeaf",
+        "0x45ee2d",
+        "0x45ef73",
+        "0x45efc1",
+        "0x45efe2",
+        "0x45f041",
+        "0x45f05f",
+        "0x45f1b3",
+        "0x45f0a4",
+        "0x45eee2",
+        "0x45ef02",
+        "0x45ee0a",
+        "0x45f0c7",
+        "0x45f149",
+        "0x45f167",
+        "0x45f19f",
+        "0x45f20f",
+        "0x45f07d",
+        "0x45ef42",
+        "0x45f155",
+        "0x45efa5",
+        "0x45f27e",
+        "0x45f269",
+        "0x45f28c",
+        "0x45f295",
+        "0x45f2a8",
+        "0x45f2b6",
+        "0x45f2c4",
+        "0x45f275",
+        "0x45f2d2",
+        "0x45f234",
+        "0x45f221",
+        "0x45ef58",
+        "0x45f246",
+        "0x45ee8d",
+        "0x45ef36",
+        "0x45edf3",
+        "0x45f257"
+      ]
+    }
+  ]
+}
