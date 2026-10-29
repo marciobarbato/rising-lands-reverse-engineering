@@ -574,3 +574,13 @@ The contract is in [RAID_CORE](RAID_CORE.md#movement-and-pathfinding-after-the-s
 - **Per-routine comparison:** Chemin_Verouille (`verrouiller`), CheminCalcul (`calcular`), TestLigneOptimise and OptimiseChemin (EAX = compacted cells + 1).
 - **Full 9000–9200 native differential:** 0 mismatches. Every call from 9170 is compared, including the 9177 search; memory after the search is byte-exact. The only stops are Missions' snapshot binding denying the solver, which AI/runtime's chain does not use.
 - See [RAID_CORE](RAID_CORE.md).
+
+### M2.3 display-scenario spawn/order differential (Mac mini run #7)
+
+`ferramentas/validar_incursao_core.py --cenario exibicao` at `201e208` ran on the Mac mini (exit 0, 1,821 s, report-only, nothing committed). Over the 21 forced cases it made **689 comparisons, with 0 mismatches, 0 dependency stops and nothing untranslated**. The load_tail/between_frames/frame1 path reproduced, and the code was unchanged. It is the display-scenario counterpart of the v1 run (`relatorios/incursao-core-v1-emulada.json`, 689/0). Per routine:
+- Chemin_Accessible 20, Chemin_ModifieZone 21;
+- CreerEngin 21, EnginEnArret 21, EnginGetCase 20, EnginGetType 20, EnginSetPlayer 21, EnginSetType 21, EnginSetTypeCaract 21, EnginTypeGetCapacite 21;
+- GetFreeCell 23, GetNumIndiceTypeBatiment 1, GetRandCaseChamps 20, GetRandCaseTypeBatPlayer 1;
+- MissionGetNum 22, PlaceEngin 21, PlayerGetColor 84, Random 83;
+- SetCollision 21, SetEnginCollision 21, SetMiniMap 21, TerrainEstIllumine 84;
+- iaProbNew 20, iaProbPost 20, listLinkElemToTail 20, listNewElem 20.

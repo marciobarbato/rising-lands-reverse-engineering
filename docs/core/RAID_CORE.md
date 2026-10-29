@@ -101,7 +101,7 @@ GetCaseIndiceBatiment is translated but no capture reaches it, because MONDE01 h
 ## Validation
 
 - **Without a CPU:** [`testes/test_incursao_core.py`](../../testes/test_incursao_core.py) replays every captured call of every scenario from its read-before-write bytes, with registers EAX..EBP and changed bytes exact. That includes the frame-1 Core routines the raid reaches.
-- **Native differential:** [`ferramentas/validar_incursao_core.py`](../../ferramentas/validar_incursao_core.py) reruns the forced cases. At every nested Core call it runs the translation over a copy-on-write view of the live memory at that entry, and compares its registers and changed bytes with the original's at the return. The results are in `relatorios/incursao-core-<scenario>-emulada.json`. For v1: **689 comparisons, 0 mismatches and 0 dependency stops**, every captured call of the 26 routines reached, with the phases and code reproduced (114 s). The display differential follows its capture.
+- **Native differential:** [`ferramentas/validar_incursao_core.py`](../../ferramentas/validar_incursao_core.py) reruns the forced cases. At every nested Core call it runs the translation over a copy-on-write view of the live memory at that entry, and compares its registers and changed bytes with the original's at the return. The results are in `relatorios/incursao-core-<scenario>-emulada.json`. For v1: **689 comparisons, 0 mismatches and 0 dependency stops**, every captured call of the 26 routines reached, with the phases and code reproduced (114 s). The display-scenario differential (Mac mini run #7 at `201e208`, report-only) is also 689 comparisons with 0 mismatches and 0 dependency stops; see the HANDOFF.
 
 ## Movement and pathfinding after the spawn (counters 9000–9200)
 
