@@ -422,3 +422,364 @@ Recorded as planned; not implemented. The result of `carregar_missao(numero, ...
   - the projectile pool, AI tables after IaReset (no iaInit, which has no caller), message-box/balloon/icon state, and the unit-type and bonus rule inputs with provenance.
 - **A field-layout table, or a read-only `descrever_missao(resultado)`**, for every displayed field. Conditions and objectives are shown raw only, and TestFinDeMission is not evaluated.
 - **Briefing.** MissionLoad does not read `WORLD/MONDE01.TXT`, and the routine that selects or displays it has not been traced. Until it is, the app shows the raw CP1252→UTF-8 CD text with its SHA-256, labeled as source text.
+
+The resumed Codex round refines this proposal in [M1_SNAPSHOT_CONTRACT.md](../pesquisas-paralelas/missoes/M1_SNAPSHOT_CONTRACT.md): identity/source revision, acceptance gates, exact block layouts/aliasing and per-range inherited-versus-loaded provenance. It includes the whole static image and a closed declared-allocation registry so unnamed AI/runtime bytes are not dropped. It remains a planned interface; no accepted M1 snapshot or running mission is claimed.
+
+## Stage 11 readiness: original structure traversal
+
+The new human authorization of 2026-10-28 supersedes the historical Stage8 STOP. The existing worktree and Stages9/10 were preserved and fast-forwarded to the coordinator's inspected main `8810b3730a0fb788af3eac2b447dea65372f597f`. Core Stage14 already resolves MONDE01 unit15; the earlier Stage8 dependency descriptions remain historical evidence, not a current blocker.
+
+[Readiness and capture plan](../pesquisas-paralelas/missoes/STAGE11_READINESS.md) and [static original inventory](../pesquisas-paralelas/missoes/evidencias/terreno-estruturas-missao-inventario.json) cover `MissionPlaceTerrain 0x46c16d..0x46c1b8`, `BatimentExiste 0x41a735..0x41a75c`, and shared epilogue `0x46b6f5..0x46b6f8`. The loop visits1000 indices in ascending order: existence lowAL → actual placement → habitation lowAL → conditional habitation effects → actual map modification(index,1). The predicate reads state byte+5; the final map call applies to every existing structure.
+
+This is light original-byte/contract work only. No native observations, heavy checks or reconstructed traversal have been added yet. Core15 main `b610bfad77ffadaa0ee5f6af02160d786ccfdc7b` is now merged and its [reset/minimap contract](core/RESET_MINIMAP.md) audited. The prepared capture harness composes committed native harnesses and preserves all state/aliases; it has not executed. Await the coordinator's heavy grant before original whole-state capture, caller translation and the required Missions integration helper. Original-only observations precede translation; prior captures/manifests remain unchanged. Whole MissionLoad, natural remap completion, Core experience retrieval, production adoption of AI reset, objectives/events and real runtime remain separate dependencies.
+
+The coordinator also approved four tiny original-only `MissionGetNum 0x46c11a` observations inside this same Stage11 to unblock the M1 identity query. Its [exact bytes](../pesquisas-paralelas/missoes/evidencias/mission-get-num-inventario.json) read only byte `0x496fe4`, clear AH, retain highEAX16 and return. Planned API `consultas_missao.numero_missao(missao_u8)` reads an explicit live one-byte buffer/view and returns semantic AX0..255, with no neighbor read, replacement state or literal mission default. No query translation exists yet; AI/runtime retains its named dependency until original-backed integration.
+
+The first [original-only Stage11 capture](../pesquisas-paralelas/missoes/evidencias/captura-terreno-estruturas-missao-original.json) now completes the approved eight scans plus four query observations, before either Python translation. Capture SHA-256:`52232213ef3585a8523a04d24d5bcc9d472c90ff137769fb0cea48f9a41b777e`, source `24ca5a794ff4c6979a8f5ed7c23621d75adcdf32`. Seven tail entries and one joined entry yield six returns and two exact pre-CALL stops (`0x46c1b1`, `0x41cdb9`) in56 scan segments (18 minimap/30 pixel-loop resumes, max156,130 instructions). Six full mapped-state blocks cover5,263,360 bytes per snapshot, plus ordered call/effect traces. Four separately counted getter entries confirm one-byte AX semantics and unchanged whole global image. The short heavy lease was released immediately; no Python equality, heavy domain gate, integration or full-load acceptance is claimed by these observations.
+
+### Stage11 translation and light capture replay
+
+The original observations were independently committed at `ed0172a364310b28584824b3e49dc63db371ed93` **before** the following source was written. Fresh native validation/integration remain pending at this checkpoint.
+
+[consultas_missao.py](../pesquisas-paralelas/missoes/consultas_missao.py) publishes two read-only explicit-buffer queries:
+
+- `numero_missao(missao_u8)` consumes exactly one contiguous B/b byte, accepting read-only views. It reads the actual live field on every call, returns semantic AX0..255 and never reads the adjacent byte. Native highEAX16 preservation is a CPU-register fact, outside this scalar API.
+- `existe_estrutura(estruturas, indice)` consumes the actual276,000-byte pool/view, truncates the index to low16 then protects0..999, and returns AL1 iff state byte+5 is nonzero. It includes raw states1/4/5/255. No copy, constructor defaults or generic alive filter is supplied.
+
+The coordinator resolved existence-query ownership from economy's existing Stage15 handoff: **Missions provides the single BatimentExiste implementation**, reusable by AI/economy. The temporary proposal to wait for an economic duplicate was canceled before adding either body elsewhere.
+
+[terreno_estruturas_missao.py](../pesquisas-paralelas/missoes/terreno_estruturas_missao.py) supplies `ProvedoresTerrenoEstruturas(existe,colocar,habitada,habitar,modificar_mapa)` and `preparar_estruturas_no_terreno(provedores)`. It performs the exact live1000-slot ascending scan, consuming lowAL from both queries. For each existing structure, place first, query habitation, conditionally make habitable, then call map modification(index,1). Return completed placed/habitable index tuples and the shared original RET address `0x46b6f7`; this describes L8, not a loaded world.
+
+`provedores_terreno_estruturas_core(world, *, habitacao=None, mascara_tipo20=None)` binds the actual Missions existence query, Core placement/minimap provider and supplied Economy habitation methods. Habitation and Core must share the identical live unit/structure pools. A missing habitation provider raises only when its query is reached, after completed placement; no successful fallback is installed. Type20 retains Core's explicit mutable20-byte mask requirement. The combined `preparar_terreno_missao(unit_providers,structure_providers)` composes unchanged Stage8 unit/capacity orchestration followed by this scan, matching the whole MissionPlaceTerrain caller. Failures retain every previous effect; entry replay is not continuation.
+
+Missing callbacks raise `DependenciaTerrenoEstruturas` with callee, CALL site and exact arguments. Actual lower-provider errors propagate unchanged. Local checks cover lowAL poison, live post-placement queries, selective callback order, alias rejection, query widths/protection and all eight frozen observations. Every replay matches all six full mapped-state hashes and complete ordered traces; actual MONDE01's joined fixture completes8unit placements and its one sanctuary placement. Inherited grids/allocations remain explicitly synthetic, so **this does not establish whole MissionLoad or M1**.
+
+The first memory-only replay attempt hit sandbox SIGILL during Unicorn initialization, before any original instruction. The ordinary-context replay passed; local replay now uses a pure byte-ledger backend solely for fixture serialization, with execution/resume forbidden. It hashes the same frozen memory blocks and does not model any engine operation. Nine focused tests are discovered: five light tests pass and four optional fresh-native methods are skipped. Failure/success logs remain in ignored `.local`; no capture or expected byte was altered.
+
+```sh
+python3 -B pesquisas-paralelas/missoes/validar_terreno_estruturas_missao.py
+# Only after the coordinator grants the serialized validation window:
+python3 -B pesquisas-paralelas/missoes/validar_terreno_estruturas_missao.py --emular
+python3 -B scripts/check.py --domain missions
+python3 scripts/workstream.py integrate missions
+```
+
+### Stage11 fresh validation before integration
+
+After merging verified Core16 main `b4c5a1072a2b2e494b3a6bf374bd978fc6e67b9a` into the feature as `13619b6e36deda8cbb7f289b8404d8371e57fe96`, the first [focused native run](../pesquisas-paralelas/missoes/validacao/stage11-focused-x86.json) passes all9tests with zero skips/errors/failures/native faults. Actual new scan coverage is63entries (62structure continuations,1joined MissionPlaceTerrain):56returns and7expected pre-CALL dependencies in161segments,49minimap-entry plus49pixel-loop resumes, maximum156,130instructions per segment. Every scan compares all six mapped blocks byte for byte and the full call/physical trace; this includes the actual MONDE01 joined input.
+
+Separately,512original BatimentExiste entries cover all256state bytes at indices0/999 with poisoned high index bits and preserved EDX;256MissionGetNum entries cover every byte with poisoned neighbors/highEAX16. All768query segments match the public APIs and preserve the entire global image. The independent8+4pretranslation captures remain unchanged and are not counted as this new differential run. The CPU-free local capture replay is separate evidence, not native execution.
+
+The required domain command passes80tests with31declared optional native skips and valid documentation links. Logs `.local/stage11-native-attempt1.log` and `.local/stage11-domain.log` are preserved. Integration and committed-main reproduction are still pending at this source checkpoint; no whole MissionLoad, natural remap completion, objective execution or real mission is claimed. No additional stage starts before the checked helper merge and remote ancestry verification.
+
+Stage11 is now integrated/pushed at main `7f617fab29ce382f96b690ea70da25a33fab8bae`, feature `c0f0a873c3657e72a3e478cf6fd7ea73c84dd58a`. The complete locked candidate passed all80native mission tests and the common gates; fetched ancestry of capture/implementation/feature/merge was verified. The changed9native tests reproduced on committed main with exactly the versioned focused report's results; worktree clean and heavy lease released. This supersedes the pending status at the preceding source checkpoint.
+
+## Stage12 light preparation: original whole-load oracle
+
+[STAGE12_ORACLE_PLAN.md](../pesquisas-paralelas/missoes/STAGE12_ORACLE_PLAN.md) records the explicit inherited memory/alias registry, committed Core16 external-boundary ABI and finite resource identity/budget plan. The new source is an **unexecuted native scaffold**, with two CPU-free registry guard tests; it supplies no default game state, player controls, file results, profile absence or allocator success. Raw inherited input closure and actual external handlers are still required. No whole-MissionLoad capture, Python load composition, new native validation or M1 acceptance has occurred.
+
+### Stage12 result: original-only whole MissionLoad from the program start
+
+The Stage12 oracle is now runnable ([result section](../pesquisas-paralelas/missoes/STAGE12_ORACLE_PLAN.md#stage12-result-runnable-program-start-oracle-and-original-only-missionload-capture-2026-10-28-claude)). The original new-campaign path (CRT thread data, `AppInit`/`ProgInit`, five native `CalculGame` frames driven by a declared Enter-key script) produces the inherited state; display/text/bitmap-bank startup calls are skipped and shown not to be read. The intact `MissionLoad 0x46c2cf` then ran for MONDE01 to its **real return 0x42d22d with AL=1** through declared CRT/KERNEL32 boundaries only. Live player controls at entry are (1,2,2,2) from original `InitPlayer`/`SetPlayerType`. Captures, the frozen entry state and the validation report (replay, code integrity, segmentation invariance, fill independence, classified read-before-write footprint) are committed before any translation. No Python composition or M1 acceptance exists yet.
+
+## Stage13: whole MissionLoad composed in Python vs the original capture
+
+The composition starts from the frozen entry snapshot and runs `MissionLoad 0x46c2cf` for MONDE01 over the integrated providers. It uses one non-overlapping memory map in which provider buffers are filled in place, plus a deterministic arena and the original call order. It then compares the result with the frozen original capture: the whole state, the allocation records, AL and the ordered binding requests. Details are in [STAGE12_ORACLE_PLAN.md — Stage13](../pesquisas-paralelas/missoes/STAGE12_ORACLE_PLAN.md#stage13-m1-composition-and-comparison-2026-10-28-claude) and the report is [stage13-m1-composition.json](../pesquisas-paralelas/missoes/validacao/stage13-m1-composition.json).
+
+- **NOT M1.** The strict run stops at `EnginInitTechnologie 0x441459`, CALL `0x46c5af`. The cause is Economy: `PropriedadeConstrucoes.ordens` is one 10,816-byte copy, but the original keeps four separate Bag allocations behind `[0x4e19b8]`.
+- **Up to the stop:**
+  - all 1,400 binding requests match the original;
+  - all 938 allocation records match, including the native remap pointers and the SHA-256 of freed bytes;
+  - the only state differences are the 3,966 bytes that the six tails write.
+- **Diagnostic bridge (not M1 evidence).** A declared copy-in/copy-out of `ordens` gets past the stop. With it, the run reaches AL=1 and the whole 2,659,375-byte final state matches byte for byte.
+- **Needed:** Economy must accept the four live Bag pools by identity. After that, rerun `validar_composicao_carga_missao.py`.
+
+## Stage14: strict whole-MissionLoad composition — M1 candidate
+
+Economy's per-owner `[0x4e19b8]` Bag contract is now on main, and the composition requires it. No bridge remains. The strict Python `MissionLoad` for MONDE01, starting from the frozen entry snapshot, reaches **AL=1**, and the full comparison with the original capture is equal:
+- 881 blocks, 2,659,375 bytes;
+- 938 allocation records;
+- 1,400 ordered binding requests.
+
+Two runs are identical. The exclusions are listed in the report: 16 profile key strings that exist only on the native stack, plus native call-site and stack metadata. Details: [STAGE12_ORACLE_PLAN.md — Stage14](../pesquisas-paralelas/missoes/STAGE12_ORACLE_PLAN.md#stage14-strict-m1-composition-on-integrated-code-2026-10-28-claude) and [stage14-m1-composition-strict.json](../pesquisas-paralelas/missoes/validacao/stage14-m1-composition-strict.json). This is an M1 **candidate**. Acceptance follows integration and committed-main reproduction.
+
+**Update:** M1 was accepted at main `927c7e5` (CXR-20261028-08).
+
+## Stage15 (M2.1): MONDE01 first frame, original first
+
+### Original-only capture (Deliverable 1)
+
+[oraculo_quadro_missao.py](../pesquisas-paralelas/missoes/oraculo_quadro_missao.py) extends the accepted M1 bench; it does not rewrite it. After the original MissionLoad returns at `0x42d22d`, the intact executable runs three phases:
+- **(a)** the rest of the load-state CalculGame invocation, to its RET;
+- **(b)** the window-loop bytes between two frames: ProgIteration `0x475063`, `_WinMain@16` `0x460212..0x460225`, PeekMessageA, a new ProgIteration with its frame counters and GetCursorPos, up to the CalculGame entry `0x42c868`;
+- **(c)** the first game-state CalculGame frame, to its real return `0x475063`.
+
+Readable result: [QUADRO1_MONDE01.md](../pesquisas-paralelas/missoes/QUADRO1_MONDE01.md), with the per-routine entry trace in [rastro-quadro1-monde01.json](../pesquisas-paralelas/missoes/evidencias/rastro-quadro1-monde01.json). The capture is [captura-quadro1-monde01-original.json](../pesquisas-paralelas/missoes/evidencias/captura-quadro1-monde01-original.json) (SHA-256 `c06f78ea…`, source `e6aa305`, commit `ca35221`), and it was committed before any translation.
+
+**Key facts:**
+- The load-state invocation already runs one complete frame body ("frame 0"), because MenuInit(…, 0x12) passes the `0x42d3c0` gate.
+- Frame 1 reaches the end-condition test but none of the AI kernels.
+- No phase performs file I/O, allocates memory or reads the clock.
+- RNG `0x497164` advances in (a) and (c); `0x498db4` does not change.
+
+**Declared boundary policy:**
+- Display, sound-library and MCI CD routines are not executed. Each call is recorded with its registers, stack words and guard bytes.
+- Each declared stack cleanup equals the RET immediates reachable in the intact bytes, found by following shared epilogues, thunks and switch tables.
+
+**Named inputs:** GetAsyncKeyState answers 0, PeekMessageA reports no message, the cursor is (0,0), and the caller frame is declared.
+
+**Validation:** [m2-frame1-original-x86.json](../pesquisas-paralelas/missoes/validacao/m2-frame1-original-x86.json) passed:
+- replay, code integrity and segmentation invariance;
+- fills 0x5A and 0x00 are state-independent;
+- boundary-EAX markers propagate 0 bytes;
+- the M1 Windows inputs propagate 0 bytes;
+- the cursor matters: (0,0) edge-scrolls the view in frame 1.
+
+The footprint holds 4,932 read-before-write bytes, classified by provenance.
+
+**Open graphics dependency:** frame 1 reads AffGame's possible stores, listed in QUADRO1_MONDE01.md.
+
+**Bench fix with M1 impact:**
+- Unicorn instruments hooks at translation time, so hooks added after startup missed reads from code translated earlier.
+- The bench now flushes the translation cache after adding hooks.
+- Rerunning the M1 original-only validation with the fix ([stage12-missionload-original-x86-tbflush.json](../pesquisas-paralelas/missoes/validacao/stage12-missionload-original-x86-tbflush.json)) passes again: 9,585 read-before-write bytes instead of 1,757, still with 0 skip-derived and 0 skipped-store bytes. The extra bytes are memset touches on allocation fill.
+
+### EvenementEnCours and TestFinDeMission (Deliverable 2)
+
+**Isolated captures (original only).** [captura-isolada-missoes-quadro1.json](../pesquisas-paralelas/missoes/evidencias/captura-isolada-missoes-quadro1.json), source `46dc93d`, records each routine at its exact frame-0 and frame-1 entry: AL, registers, changed bytes, and the bytes read before written. Both calls of each routine return AL=0 and change nothing. TestFinDeMission reads 1,031 bytes. After every isolation the paused path still reproduces the committed phase states and trace.
+
+**API** ([fim_missao.py](../pesquisas-paralelas/missoes/fim_missao.py)):
+
+`evento_em_curso(evenement_u8)` returns AL = byte `0x4e1b0e`.
+
+`testar_fim_missao(jogador, condicoes, estado, contagem_inicial, exercitos, exercitos_ia, consultas)` takes these live views:
+
+| Argument | Address | Size | Access |
+|---|---|---|---|
+| `condicoes` | `0x4e1d20` | 100 | read |
+| `estado` | `0x4e1d84` | 14: latch +0, owner count +1, marks +4..+13 | written |
+| `contagem_inicial` | `0x4e1a3a` | 2 | read |
+| `exercitos` | `0x4e1928` | 8 | read |
+| `exercitos_ia` | `0x4dfaa8` | 16 | read |
+
+`ConsultasFimMissao` supplies the callees. `consultas_publicadas(estruturas, recursos, missao_u8)` binds the committed ones:
+
+| Callee | Address | Owner |
+|---|---|---|
+| BatimentExiste | `0x41a735` | Missions |
+| BatimentGetPlayer | `0x41a08c` | Combat |
+| BatimentGetType | `0x41a4f4` | Economy |
+| TestRessource | `0x4676e5` | Economy (`Economia.suficiente`) |
+| MissionGetNum | `0x46c11a` | Missions |
+
+**Mutation order**, as in the original:
+1. Records 0–9 are processed in order. Each record's mark is set or cleared as its test runs.
+2. The result accumulates across records.
+3. The MissionGetNum==6 override runs.
+4. Latch: set to 1 if the result is non-zero, then cleared and the result forced to 1 when `[0x4e1a3a]`==0.
+5. When the result and the latch are both non-zero and the mission is 8 or 13, the owner count at `[0x4e1d85]` is written.
+
+**Supported domain:**
+
+| Record type | Test |
+|---|---|
+| 0, 1, 2 | resource |
+| 3 | inventions |
+| 4 | structure of a type in up to three influence zones (`0x00ff` = wildcard) |
+| 5 | no non-allied opponent forces |
+| `0xff` | blocks only when it is the first record |
+| any other | ignored |
+
+**Named dependencies** (`DependenciaFimMissao`, raised at the original CALL):
+
+| Missing callee or state | CALL |
+|---|---|
+| BatimentGetCase | `0x45883f` / `0x458a44` |
+| CaseGetZoneInfluence | `0x45884b` / `0x458a50` |
+| RechercheGetNbInvention | `0x45879c` |
+| PlayerEstAllie | `0x458903` |
+| GetTopLeftCaseZoneInfluence | `0x45870e` |
+| CaseEstIlluminee | `0x45871c` |
+| uninitialized stack local `[esp+8]` in the mission 8/13 scan when no type-4 match stored it | `0x4589dc` |
+| a structure owner ≥4 in that scan (the original writes the caller stack) | `0x458aa8` |
+
+**MONDE01 conditions:**
+- record 0 is type 4: a **type-3 CAVE structure** of the player in influence zone 0;
+- records 1 and 2 require 50 food and 50 stone;
+- record 9 repeats the 50-stone test;
+- records 3–8 are `0xff`.
+
+So **the objective requires building a cave**, which answers the roadmap's open question.
+
+**Validation:**
+- CPU-free ([test_fim_missao.py](../pesquisas-paralelas/missoes/testes/test_fim_missao.py)): each captured call is rebuilt from only the bytes the original read, under two poisons.
+- Native differential ([m2-fim-missao-differential-x86.json](../pesquisas-paralelas/missoes/validacao/m2-fim-missao-differential-x86.json), source `b25e8d6`): of 48 native cases at both frame entries, 38 compared cases are equal in AL and every changed byte. The other 10 stop at the named dependencies above.
+
+No whole-frame composition is built. The AI/runtime front owns the frame pipeline.
+
+## Stage16 (M2): influence-zone queries and the register trace view
+
+M2.1 was integrated at main `ec931d2`.
+
+### Ownership
+
+Every reference in the intact code to the influence table `0x50c614` (400 records × 10 bytes: x0 at +0, y0 at +2, x1 at +4, y1 at +6) lies in the cluster `0x47bf2c..0x47c138`:
+- InfluenceReset;
+- CaseGetZoneInfluence `0x47bf66`;
+- CaseInZoneInfluence `0x47bfdd`;
+- LoadCadreInfluence `0x47c04a`, the Missions loader already composed in M1;
+- SaveCadreInfluence;
+- GetTopLeftCaseZoneInfluence `0x47c114`.
+
+The cluster is therefore Missions-owned. MONDE01 has a single zone: zone 0 covers cells (0,0)–(28,25).
+
+### Original-only capture
+
+[captura-influencia-quadro1.json](../pesquisas-paralelas/missoes/evidencias/captura-influencia-quadro1.json) was generated from source `c1bb6b2` and committed in `60f00c2`.
+
+MONDE01 frames 0–1 never enter either query. Instead, `Isolamento` pauses at the frame-1 TestFinDeMission entry and injects native leaf calls from that exact state:
+
+| Query | Arguments | Result |
+|---|---|---|
+| CaseGetZoneInfluence | all 65,536 cells | 754 cells in zone 0, all others `0xff` |
+| CaseGetZoneInfluence | 256 calls with non-zero upper EAX bits | results unaffected |
+| GetTopLeftCaseZoneInfluence | zones 0..399 | — |
+
+Sampled footprints show that each call reads only zone-record words and writes nothing. Registers are preserved, and the whole state equals the paused state afterwards. The phases then continue and reproduce every committed state.
+
+### API ([influencia_missao.py](../pesquisas-paralelas/missoes/influencia_missao.py))
+
+Both functions take the live 4,000-byte table view.
+
+**`zona_influencia(influencia, celula)`** reads AX only: x = AX & 0xff, y = AX >> 8. It returns the first zone 0..399 whose inclusive unsigned-16 rectangle contains the cell, skipping record 255. If no zone matches, it returns `0xff`.
+
+**`canto_zona_influencia(influencia, zona)`** returns EAX = x0 + (y0 << 8) as a u32 including the carry, so an empty record gives `0x0100feff`. The zone index is protected to 0..399.
+
+**Wiring.** `fim_missao.consultas_publicadas(estruturas, recursos, missao_u8, influencia)` now requires the table view and binds both queries.
+
+### MONDE01 consequences
+
+- **Cave condition (type 4):** it now passes the zone test. It still stops at BatimentGetCase `0x41aee2`, which is Economy's to publish.
+- **Mission-6 path:** it now stops at CaseEstIlluminee `0x47693a`, which is Core's to publish.
+
+### Validation
+
+- **CPU-free** ([test_influencia_missao.py](../pesquisas-paralelas/missoes/testes/test_influencia_missao.py)): replaying the captured table reproduces every native EAX.
+- **Native differential** ([m2-influencia-differential-x86.json](../pesquisas-paralelas/missoes/validacao/m2-influencia-differential-x86.json)): Python equals the native result on 5 tables × 66,192 calls. The tables are the captured table, overlaps with record 255 skipped and an inverted rectangle and a point, the whole map, upper-word bounds, and 400 seeded random records.
+- **Re-wired `fim_missao`** ([m2-fim-missao-differential-x86-v2.json](../pesquisas-paralelas/missoes/validacao/m2-fim-missao-differential-x86-v2.json)): 38/38 compared cases are equal.
+
+### Register trace view
+
+[rastro-registradores-quadro1-monde01.json](../pesquisas-paralelas/missoes/evidencias/rastro-registradores-quadro1-monde01.json) was generated from source `0002794`. It lists every routine entry of the three phases in order (1,718 / 5 / 1,605), one line each in the AI/runtime format `callee@caller+off EAX EDX EBX ECX`.
+
+The rerun's phase states equal the committed capture, and its per-routine counts equal the committed trace. The original oracle was **not** extended beyond frame 1.
+
+## Stage17 (M2 round 3): oracle with the display path executed
+
+Stage16 was integrated at main `67fb81f`. Graphics' report [ESCRITAS_AFFGAME_ENTRE_QUADROS.md](../pesquisas-paralelas/graficos-animacao/ESCRITAS_AFFGAME_ENTRE_QUADROS.md) motivated executing the display path. Full summary: [QUADRO1_EXIBICAO.md](../pesquisas-paralelas/missoes/QUADRO1_EXIBICAO.md).
+
+**Scenario.** The new scenario `exibicao` ([oraculo_exibicao_missao.py](../pesquisas-paralelas/missoes/oraculo_exibicao_missao.py), [cenarios_oraculo.py](../pesquisas-paralelas/missoes/cenarios_oraculo.py)) runs AppInit and then the real `_WinMain@16` loop up to the original `CALL MissionLoad`. Along the way it executes:
+- AffInit/DDInit, LoadPalette and the bank loaders;
+- RestoreAll, DDFlipPage, and menu and game AffGame.
+
+The declared interim DirectDraw backend (`exibicao_declarada.py` (retired in Stage18; source at commit `3ff4b21`)) stands in for Graphics' backend until it lands.
+
+**Remaining boundaries:**
+- Text needs CRT `fgets` `0x48ce96` and LoadPie needs CRT `fseek` `0x48cda2`, which Core has not inventoried.
+- Video and credits.
+- Audio.
+
+**Scenario switch.** The M1 and frame capture and validation scripts take `--cenario`, and v1 behavior is unchanged. The composition validator takes `--entrada`/`--captura`. Display M1 captures are delta-encoded against their entry artifact (`mapa_memoria_m1.expandir_captura`).
+
+**Evidence.** The new entry snapshot, the whole MissionLoad capture (AL=1, the same 1,400 binding requests as v1) and the frames 0/1 capture with its trace were all committed before any translation. v1, v2, Stage14 and the frame-1 v1 evidence are untouched.
+
+**Checks (all passed):**
+- **Stage14 strict composition regression:** whole state equal over 25,343 blocks and 25,482 records.
+- **MissionLoad validation:** replay, integrity, segmentation, fill, markers, inputs and the flushed footprint.
+- **Frame validation:** the same checks, plus display-input sensitivity.
+
+**Logic-state comparison with v1.** The comparison ([m2r3-frame1-v1-vs-exibicao.json](../pesquisas-paralelas/missoes/validacao/m2r3-frame1-v1-vs-exibicao.json)) has native writer attribution ([m2r3-v1-vs-exibicao-writers.json](../pesquisas-paralelas/missoes/validacao/m2r3-v1-vs-exibicao-writers.json)). No unit, structure, player, resource, AI, condition or market byte differs, and RNG `0x497164` is equal throughout.
+
+Three real logic differences come from display **initialization**:
+- the CRT rand seed, because NextAnimTerrain now calls LongRand 425 times per frame over the 25×17 viewport DDInit sets;
+- the permutation cursor `0x4e1d18`, advanced by NextAnimVeget;
+- the view origin, because MouseInit centres the cursor variables on the real screen and frame 0 no longer edge-scrolls.
+
+AffGame between frames writes only display state for frame 1.
+
+## Stage18 (M2 round 4): frozen display reference and comparison policy
+
+Stage17 is integrated at main `81e0a26`. The display scenario is the M2 reference; v1 is historical evidence. Full write-up: [POLITICA_COMPARACAO_M2_1.md](../pesquisas-paralelas/missoes/POLITICA_COMPARACAO_M2_1.md).
+
+**Backend.** Graphics' declared backend `fronteiras_exibicao.ExibicaoDeclarada` (d8b1af9) replaces the retired interim `exibicao_declarada`. It is installed after the bench's own imports, and its surfaces live at `0x60000000`.
+
+**New reference artifacts** (`*-exibicao-v2.json`, all original-only and committed before any translation): the entry snapshot, the MissionLoad capture (from `af1ccbe`) and the frames 0/1 capture with its trace (from `ac6b5f3`).
+
+**Equivalence with Stage17** ([report](../pesquisas-paralelas/missoes/validacao/m2-exibicao-v2-vs-interino.json)). The v2 artifacts are not byte-for-byte equal to the Stage17 ones. In every state the same 10 DGROUP bytes differ: the program stores four backend object pointers (`0x4e1788`, `0x4e178c`, `0x4e1790`, `0x4e179c`) and the offscreen pixel pointer (`0x508f70`), and each backend chooses different addresses. Everything else is identical.
+
+**Checks on v2, all passed:**
+- the Stage14 strict composition regression, whole state equal;
+- the MissionLoad and frame original-only validations.
+
+**Comparison policy** ([m2-politica-comparacao-quadro1.json](../pesquisas-paralelas/missoes/validacao/m2-politica-comparacao-quadro1.json)). The policy assigns every one of the 78,869 bytes that change in (a)–(c) to its native writers and readers, then classifies it by call context:
+- **Masked, 78,093 display-only bytes:** 19 DGROUP bytes and 78 terrain-cache/palette blocks.
+- **Surfaces:** proven untouched by logic.
+- **Compared, 776 game-logic bytes:** these include `0x4e1d18`, the CRT rand seed and the view origin.
+
+**Open points:**
+- The record lifecycle of the 146 menu banks freed in (a) is an open coordinator decision.
+- Text (`fgets`) and LoadPie (`fseek`) stay boundaries until Core inventories those CRT entries.
+
+## Stage19 (M2 round 5): N-frame tooling, M2.2 plan, v3 preparation
+
+Stage18 is integrated at main `d94a59e`. The `-v2` reference stays fixed, nothing beyond frame 1 is committed as evidence, and MissionLoad was not recaptured. Plan and findings: [PLANO_M2_2.md](../pesquisas-paralelas/missoes/PLANO_M2_2.md).
+
+**N-frame oracle.** `BancadaExibicaoOriginal.executar_quadros(n)` runs load_tail and then `between_frames{k}`/`frame{k}`. Frame 1 keeps its committed phase names.
+
+**N-frame policy.** [politica_comparacao_quadros.py](../pesquisas-paralelas/missoes/politica_comparacao_quadros.py) makes two native passes. The rule is unchanged: a byte is masked only when every writer and every reader is display. It produces masks per frame window and a cumulative mask.
+- With N=1 it reproduces the committed M2.1 policy exactly.
+- An N=3 trial (in `.local/`) passed. It found the first **mixed byte**, `0x4e05a2`, written by AffGame and by CalculMatiere and compared from frame 2 on.
+
+**Static timeline for MONDE01:**
+
+| Event | Frame(s) | Notes |
+|---|---|---|
+| Field sweep starts | 0 | the load-state frame resets the counter, and SetUpdateChamp runs at counter 0 |
+| Candidate field rows | 31–51 | |
+| First field event | 45 | confirmed by the probe |
+| Second sweep reaches candidate rows | 287–307 | |
+| First monster raid | **9000** | AvanceMonstre entry record 0 |
+| Second monster raid | **10800** | entry record 1 |
+
+The attack table is empty and the AI players are inactive, so there is no other scripted attack.
+
+**Proposed sequence:**
+- **M2.2:** 128 frames with checkpoints at frames 1, 31–32, 50–52, 64, 100–101 and 128.
+- **M2.3a:** up to frame 8,999, with per-frame hashes and full checkpoints.
+- **M2.3b:** frames 9,000–9,100 and frame 10,800.
+
+**New owner decisions:**
+- **Core:** CRT `ftell` `0x48cf11`. Text needs it through FileSize.
+- **Audio and coordinator:** the CD-availability input. While no CD track plays, CalculGame advances the shared cursor `0x4e1d18` every frame.
+- **Audio:** sound-library state.
+
+**v3 preparation (not committed as reference).** The CRT `fseek`/`fgets` fixtures and the `exibicao_v3` scenario run LoadPie natively, with explicit budgets of 3M segments and 1M bindings (the Core bench cap).
+
+## Stage20 (M2.2): 128-frame original capture and comparison policy
+
+The M2.2 reference extends the frozen `-v2` display scenario from frame 1 to frame 128, original only.
+
+- **Capture:** [captura-quadros128-monde01-exibicao-v2.json.xz](../pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz), with its [manifest](../pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.manifest.json). It has 257 phases in delta form, a state summary in every phase and full states at frames 1, 31, 32, 45, 50–52, 64, 100, 101 and 128. The raw JSON SHA-256 is pinned in the manifest.
+- **Policy:** [m2-2-politica-comparacao-128-quadros.json](../pesquisas-paralelas/missoes/validacao/m2-2-politica-comparacao-128-quadros.json). Its cumulative mask has 153,060 display-only bytes; 999 logic bytes are compared. Only the cumulative mask may exclude bytes from a whole-run comparison.
+- **Declared inputs and decisions:**
+  - No CD track plays: `[0x4e2f28] = 0` is checked in every phase.
+  - The HUD flag `0x4e05a2` is compared.
+  - The 146 freed MenuInit bank records are compared.
+- **Checks:**
+  - The first three phases equal the M2.1 frame-1 capture.
+  - Replaying s0 plus the deltas reproduces every summary and checkpoint.
+  - Two full runs are identical apart from wall-clock fields.
+
+**Segment-parallel execution** ([segmentos_quadros_missao.py](../pesquisas-paralelas/missoes/segmentos_quadros_missao.py)) restores exact snapshots (memory, CPU context, bench state) in fresh benches. On M2.2, its segmented capture records and its segmented policy both equal the sequential results byte for byte. It is the planned tool for M2.3a.
+
+Details: [missions handoff](../pesquisas-paralelas/missoes/HANDOFF.md), Stage20.

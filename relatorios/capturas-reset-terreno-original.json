@@ -1,0 +1,620 @@
+{
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "translation_executed": false,
+ "original_entries": {
+  "0x46b315": 3,
+  "0x469f00": 2,
+  "0x419e97": 3
+ },
+ "bounded_segments": 303,
+ "preserved_loop_head_resumptions": 295,
+ "preserved_minimap_resumptions": 0,
+ "maximum_native_instructions_per_segment": 50041,
+ "cases": [
+  {
+   "input": {
+    "entry": "terrain",
+    "width": 64,
+    "height": 64,
+    "minimap": [
+     128,
+     128
+    ],
+    "seed": 305419896,
+    "structure": null,
+    "dl": 0,
+    "camera": 0,
+    "pattern": 1
+   },
+   "returned_eip": "0x3000000",
+   "output": {
+    "buffers_sha256": {
+     "unidades": "08cdcc94aa723557e6e72d980209a73d0ed6b6514d763fb410cb683372f2cc4d",
+     "estruturas": "e1bad9852a9b8cd3a4c89fad391957493187baf5c79d31c2345ccc7b8cb3a9ab",
+     "objetos": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+     "donos_objetos": "b2526cf99a69631448b226e5251d75e4de6b38a6b52977eb4656b2435f79307b",
+     "atributos": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+     "mini_final": "a5b9ba03d3313ece602370cd2fb7dde2fbfc03ccf4d3a702a8e84603756a6c51",
+     "mini_unidades": "5ccfcfbc736e00c88b3da0c58d43302ac9ac1f5cc4fa40718533289f8d753422",
+     "mini_estruturas": "77107163fab30f48f50bd85247ce23f038b06bfd883377b1e81d3a080da401d7",
+     "sombra": "7e602cfc80969d977feec29f9278555cffd91308224040fdbb773d5f307f4d45",
+     "regioes": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+     "tiles": "76046359ea5a81c3049851f9ffe4eaaba6c0d1a665e3b8966831778f125501ff",
+     "descoberto": "d18c435bdf875bfd113080cd9827e77aecdd58cf4b871b3336fd21e4174197c4",
+     "luz_bordas": "d18c435bdf875bfd113080cd9827e77aecdd58cf4b871b3336fd21e4174197c4",
+     "contagem_luz": "8a39d2abd3999ab73c34db2476849cddf303ce389b35826850f9a700589b4a90"
+    },
+    "mines_hex": "00002a4f0000c0bf0000942a000021920000476100009a290000f20b0000e58400003b4d00005d8c000088ce000007f70000ba46000025210000d7f00000eb7f0000e322000006ee0000558b00007294",
+    "random_state_hex": "4a9e0859",
+    "random_calls": 65536,
+    "memsets": [],
+    "minimap_trace": []
+   }
+  },
+  {
+   "input": {
+    "entry": "terrain",
+    "width": 256,
+    "height": 256,
+    "minimap": [
+     128,
+     128
+    ],
+    "seed": 0,
+    "structure": null,
+    "dl": 0,
+    "camera": 0,
+    "pattern": 2
+   },
+   "returned_eip": "0x3000000",
+   "output": {
+    "buffers_sha256": {
+     "unidades": "08cdcc94aa723557e6e72d980209a73d0ed6b6514d763fb410cb683372f2cc4d",
+     "estruturas": "99faed9d02e0ce3818c20522d7710c61600a0b1b538699467d0aa6bc895e80bb",
+     "objetos": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+     "donos_objetos": "3af3f1d870212fe8fcfe6eb321fd14d009bccc953fce3f59f698f0c446a1a39a",
+     "atributos": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+     "mini_final": "8ff13b8d7f74af7fee1f4e3ab08739e9edd5de7c1061726fa478913dccd49ecb",
+     "mini_unidades": "15b4843e1ca2c1f6dfc57c49b6c920368df94fe4b797ad1ab88d373b7a3c8957",
+     "mini_estruturas": "02d8f44736f393df6e5d96241ec972c2db46ddb0af644d8432b13659cfca3263",
+     "sombra": "bc521f18a87690e93ed974eec73804a7952bf299bbda699d39c48d57ef5ac4de",
+     "regioes": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+     "tiles": "ed02cae67718b33d07819e0069cfe33647e7512476784e2dc83aacffe470ab48",
+     "descoberto": "d18c435bdf875bfd113080cd9827e77aecdd58cf4b871b3336fd21e4174197c4",
+     "luz_bordas": "d18c435bdf875bfd113080cd9827e77aecdd58cf4b871b3336fd21e4174197c4",
+     "contagem_luz": "8a39d2abd3999ab73c34db2476849cddf303ce389b35826850f9a700589b4a90"
+    },
+    "mines_hex": "000018680000372400001b2900004200000052e300000a3d0000c0840000e2c2000063990000dae300002b5a0000545e0000ea740000874c0000cb6100003a9d0000393f0000559f00001f240000e90d",
+    "random_state_hex": "ffffff7f",
+    "random_calls": 65536,
+    "memsets": [],
+    "minimap_trace": []
+   }
+  },
+  {
+   "input": {
+    "entry": "terrain",
+    "width": 16,
+    "height": 16,
+    "minimap": [
+     128,
+     128
+    ],
+    "seed": 4294967295,
+    "structure": null,
+    "dl": 0,
+    "camera": 0,
+    "pattern": 3
+   },
+   "returned_eip": "0x3000000",
+   "output": {
+    "buffers_sha256": {
+     "unidades": "08cdcc94aa723557e6e72d980209a73d0ed6b6514d763fb410cb683372f2cc4d",
+     "estruturas": "bf8273401f87e4119fa73fa316cbbf2f9c85399ff58853fa67445cccc76026ef",
+     "objetos": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+     "donos_objetos": "ff7e12dba8af7557c9986c8bd9f8491b87c926b51ccf2ae5fa4431a06ad36611",
+     "atributos": "de2f256064a0af797747c2b97505dc0b9f3df0de4f489eac731c23ae9ca9cc31",
+     "mini_final": "64fc718f7c6cd78a5e0bc99425f4543a1eadcb2f39c128739b0e17416b4ea7b1",
+     "mini_unidades": "32146f73144e358e290ed6b53b38c7941965acf393939f68c3d91ddf36680e1a",
+     "mini_estruturas": "4f8a561a350e297d778fa942fbc6743e9475697a8a071b543a4e73b0233b76f6",
+     "sombra": "67d4307aa8b66b15ed52e30b0a95c86473edaf933c0ab4f0e6b194b7e0fc7c5d",
+     "regioes": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+     "tiles": "0efeabd88c2ce7c022306a27e60eda7aa398f27b5390979d20c51d3766f4fd8b",
+     "descoberto": "d18c435bdf875bfd113080cd9827e77aecdd58cf4b871b3336fd21e4174197c4",
+     "luz_bordas": "d18c435bdf875bfd113080cd9827e77aecdd58cf4b871b3336fd21e4174197c4",
+     "contagem_luz": "8a39d2abd3999ab73c34db2476849cddf303ce389b35826850f9a700589b4a90"
+    },
+    "mines_hex": "0000cbe00000e00f0000fdbf0000ed6c000041ce00006feb0000611f000094e900004b7800003a220000cb2d0000f064000094770000bc8000001c2c000050d5000025ad0000b0a900001c2f00000158",
+    "random_state_hex": "c55a4d64",
+    "random_calls": 65536,
+    "memsets": [],
+    "minimap_trace": []
+   }
+  },
+  {
+   "input": {
+    "entry": "minimap",
+    "width": 64,
+    "height": 64,
+    "minimap": [
+     128,
+     128
+    ],
+    "seed": 1,
+    "structure": null,
+    "dl": 0,
+    "camera": 0,
+    "pattern": 4
+   },
+   "returned_eip": "0x3000000",
+   "output": {
+    "buffers_sha256": {
+     "unidades": "08cdcc94aa723557e6e72d980209a73d0ed6b6514d763fb410cb683372f2cc4d",
+     "estruturas": "f71ba6cbc823b080432ce7ef0d4b20bbd8fe5413f2b8e794d27d45b73b5b8d0e",
+     "objetos": "a41c804cf7ec4130be22461f5aa57ea3bbf412574a398a18a1fb96823226867a",
+     "donos_objetos": "38227f5ed91c486f87c31e44a5f508f121a64dab4b381010b2ddb432780fe356",
+     "atributos": "b8967c5c59bbc5773ddb5d9bd0b8af7c11fbe936ddcc3db4f4d3d6aacba3ed28",
+     "mini_final": "e1f413cce52180290e761dcc25309bf98ac0e8d84a2ae9503664f1394012e0d9",
+     "mini_unidades": "9184c5f339214f6411ba8d43551fab9fbd66b578831aa9033f85a71489c79192",
+     "mini_estruturas": "881d5edd358642ca9734e70782759ce1ecc8eaaedd4114897ea39265ed940b55",
+     "sombra": "e2931caf24985cce881cabccea2ca77433db9bb604adb926de8f39652b67bc92",
+     "regioes": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+     "tiles": "7037d3abd72a34bbf1ff375983a428e735e00a978fcce313b938ae23993f2f8d",
+     "descoberto": "d80afe386fe0de75d96403d190a6087ade890c20b57d612646f0d0569d9c3e38",
+     "luz_bordas": "0009a9f057b3267d03009d351e3d9c86032e5ee9f1f4ee8c2ca597922673f85a",
+     "contagem_luz": "8bf07d412a5be04e9b037c4369e85b3b8a43a6ee34015c3f73614b8bf5730c81"
+    },
+    "mines_hex": "546675fc00eb50a385e3f4e1a3f0807cdb9140cd5bb8ec2697867006c8a86b4ab16dc8247f0ffdc3b199658b4e86fadb3745a2ae692fcdfc029a23c3e57f4e3c0be519c12c4ed513071629997eccd15b",
+    "random_state_hex": "01000000",
+    "random_calls": 0,
+    "memsets": [
+     [
+      "mini_final",
+      2,
+      16384
+     ],
+     [
+      "mini_unidades",
+      0,
+      16384
+     ],
+     [
+      "mini_estruturas",
+      0,
+      16384
+     ]
+    ],
+    "minimap_trace": []
+   }
+  },
+  {
+   "input": {
+    "entry": "minimap",
+    "width": 64,
+    "height": 64,
+    "minimap": [
+     64,
+     32
+    ],
+    "seed": 1,
+    "structure": null,
+    "dl": 0,
+    "camera": 0,
+    "pattern": 5
+   },
+   "returned_eip": "0x3000000",
+   "output": {
+    "buffers_sha256": {
+     "unidades": "08cdcc94aa723557e6e72d980209a73d0ed6b6514d763fb410cb683372f2cc4d",
+     "estruturas": "b88acaa26b18787f1f0e125f8c88aacbcff975ad2b3884e0bc19963b51dd0cc1",
+     "objetos": "324d0f7c10d4ca21d20df0f77d5021b7f6d57f4cf7b79d604d3ceaee84e6ee59",
+     "donos_objetos": "d8f379ac197184692e60e48e1ef958c6c22cdc1dac22bc52e9508b383b4231cd",
+     "atributos": "92ddd35191fd7c95e15d383390aec9bf28e5ec3bec1fd3af5619ea560a944a5b",
+     "mini_final": "5990618f7ee0d1f405723c238fbfa8f949ca6eac371e195723f447890b4ee869",
+     "mini_unidades": "5bf3861dc4c0fb4ff26fabec33c4cc306db666f13886042f654758fe99592937",
+     "mini_estruturas": "d709b39a0d5d086e937ab8d4f2a4a6b8f375ec38aff15260b98f50092c8c3b18",
+     "sombra": "f37e5332f6aafb3fd64b5ec24750efa040c119c577feae747dad8350b6cf6c02",
+     "regioes": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+     "tiles": "91b75a9d5a700ac63aeb0f9b12d877317cd31d868b58311715fa6d573d39602e",
+     "descoberto": "3c29edfd65dfb627f454df66084a12f4062f9c00df7c64069a9a52025239ae60",
+     "luz_bordas": "b456f890a002e74d070f99ffa67792d923c64be6c9cb3148397828e07234ae4d",
+     "contagem_luz": "9c91b62f9eeeba8a3e53e79f6fca018d010f8781d1d8ce4e80eb99ced588c315"
+    },
+    "mines_hex": "248c6bf42dc56e5d1eefbff3df8f60e6d99dbaa48bc55a3cafa8d65ba16eca239e691ee6f2e59250e3605a015287154eae339026bfcf4623e5097f2c8a58eac9972041b4340e71396729d1a55251fe22",
+    "random_state_hex": "01000000",
+    "random_calls": 0,
+    "memsets": [
+     [
+      "mini_final",
+      2,
+      2048
+     ],
+     [
+      "mini_unidades",
+      0,
+      2048
+     ],
+     [
+      "mini_estruturas",
+      0,
+      2048
+     ]
+    ],
+    "minimap_trace": []
+   }
+  },
+  {
+   "input": {
+    "entry": "structure",
+    "width": 64,
+    "height": 64,
+    "minimap": [
+     128,
+     128
+    ],
+    "seed": 1,
+    "structure": [
+     7,
+     2828,
+     0,
+     2
+    ],
+    "dl": 1,
+    "camera": 0,
+    "pattern": 6
+   },
+   "returned_eip": "0x3000000",
+   "output": {
+    "buffers_sha256": {
+     "unidades": "08cdcc94aa723557e6e72d980209a73d0ed6b6514d763fb410cb683372f2cc4d",
+     "estruturas": "0427f7737ff8b01138000791cfa2952f90656d7cb593819583c1a42c6dcb9390",
+     "objetos": "723719a61914e76c00504170dda50cc764a987e044d3c6443bf7a453e4248fb2",
+     "donos_objetos": "7f36c49b0898ef4ed76254a6f266bed8174ab1626849110a7935a9318362dcb3",
+     "atributos": "3646621cc300b2b64f7aea8b796e5bd2aeddbf53dd14a6d45c1602e6a45219a7",
+     "mini_final": "d648690af763c52a6ab7ea702b905868b0c6a3cd0678381dd89e8ca352e8fe2d",
+     "mini_unidades": "b4f2d6ad54bf57b057836ba5c098581288f28ce58d3e8886be9982390900fcd1",
+     "mini_estruturas": "eff6b68b2fc21954d59e54854b0f9b4531c635305ad650fec688c1bdbf55d6a1",
+     "sombra": "7bd55b77181a6a7497e4cc38c767ac428526d7390da62cfaebdee02ff1808aa7",
+     "regioes": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+     "tiles": "136cf727e7950d85423a56df9368e56c9f71c5702e5609214b8bb28118e5c4ba",
+     "descoberto": "eafe9062b6c02584a145d255e16a0e57098c64d8db077c8e157d8c2abde0629e",
+     "luz_bordas": "1dd2d32fdb028916f9bd874d3c65bffd89f3b9e7091fb1898ee27491afecd28a",
+     "contagem_luz": "fad6732d5dd70dcb065a21a3601aab5dbc90a6c24cfeedb260e0b605ff802627"
+    },
+    "mines_hex": "ac19ac7e87d6e30615e49b04733dc89a2f4b7d13e785de8c020921bf882a11201f8dc96d12dc6f5bb432f3433d1a7e2f1e6456ac1654e2930a19bc108c393db222ca391b31aad2fc61433e5f3afc2a8b",
+    "random_state_hex": "01000000",
+    "random_calls": 0,
+    "memsets": [],
+    "minimap_trace": [
+     [
+      "minimap",
+      0,
+      2828,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      2829,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      2830,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      2831,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      2832,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      2833,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3084,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3085,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3086,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3087,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3088,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3089,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3340,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3341,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3342,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3343,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3344,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3345,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3596,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3597,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3598,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3599,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3600,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3601,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3852,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3853,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3854,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3855,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3856,
+      6
+     ],
+     [
+      "minimap",
+      0,
+      3857,
+      6
+     ]
+    ]
+   }
+  },
+  {
+   "input": {
+    "entry": "structure",
+    "width": 256,
+    "height": 256,
+    "minimap": [
+     128,
+     128
+    ],
+    "seed": 1,
+    "structure": [
+     999,
+     65277,
+     200,
+     5
+    ],
+    "dl": 0,
+    "camera": 1,
+    "pattern": 7
+   },
+   "returned_eip": "0x3000000",
+   "output": {
+    "buffers_sha256": {
+     "unidades": "08cdcc94aa723557e6e72d980209a73d0ed6b6514d763fb410cb683372f2cc4d",
+     "estruturas": "9a96dd428b8b252cec8f6f9ac91f876e3a56816ac14a350cc11b6e8693281014",
+     "objetos": "71e4d6615241b861142eeeadf7877283c0a712ff2317107617f771fd6a99a18a",
+     "donos_objetos": "0b2f80075d00e2f198a32bd9fef6beaba78e36f06151c0d3f7f5ca6aa4187efd",
+     "atributos": "97f6424b361040bf5227d213bc896eb20475daf6f56ca69904bc44bb2e7336a3",
+     "mini_final": "0eb7be6b800be2345d8489a5b18be1ec8541b706b5756458e7ac0829bb4f7c4d",
+     "mini_unidades": "2974b87eeeda81544dc4c50b71fff1ffaa2e49686726aaba9ed784e5833463b4",
+     "mini_estruturas": "2e88887d41dca69843ed402c973ae0cd59e79b3e02f6c73964e49e5b4f60c0b4",
+     "sombra": "442e71784d756ea21f569681b582145fb162fe60bcd6998ba1b96dd143090f2b",
+     "regioes": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+     "tiles": "310915b8e77dbb2ca156c9641a428a96b64e7b3fbe2ba5ba13b8fd162b5a0b2c",
+     "descoberto": "bb239a81b5539f9316d0c9b1dce065c89bd4736eaf7820a5e5bce971cb1e2fe7",
+     "luz_bordas": "14f422cff861bc5120c98b797a914957d14ca3be1a5c6401dfcaceced4f541cb",
+     "contagem_luz": "d89c3e783610e91a6a0802660952d1a5c22f912d003bb819e76e154c65b7122b"
+    },
+    "mines_hex": "f62b798b7655712930e9e209fa4811cab336ab9f22a256709a96bd04ffdf3ef2893ecf06c1036f77579b29d016b1d480638ea626c8892dc5dd39018f4af7309736d8c6fe50259362f6ffcbf2c089ba4a",
+    "random_state_hex": "01000000",
+    "random_calls": 0,
+    "memsets": [],
+    "minimap_trace": [
+     [
+      "minimap",
+      200,
+      65277,
+      7
+     ],
+     [
+      "minimap",
+      200,
+      65278,
+      7
+     ],
+     [
+      "minimap",
+      200,
+      65279,
+      7
+     ],
+     [
+      "minimap",
+      200,
+      65533,
+      7
+     ],
+     [
+      "minimap",
+      200,
+      65534,
+      7
+     ],
+     [
+      "minimap",
+      200,
+      65535,
+      7
+     ]
+    ]
+   }
+  },
+  {
+   "input": {
+    "entry": "structure",
+    "width": 256,
+    "height": 256,
+    "minimap": [
+     128,
+     128
+    ],
+    "seed": 1,
+    "structure": [
+     0,
+     65280,
+     3,
+     0
+    ],
+    "dl": 128,
+    "camera": 3,
+    "pattern": 8
+   },
+   "returned_eip": "0x3000000",
+   "output": {
+    "buffers_sha256": {
+     "unidades": "08cdcc94aa723557e6e72d980209a73d0ed6b6514d763fb410cb683372f2cc4d",
+     "estruturas": "b44c6f01b3cdb16f449c9e8c602a3ea1367d0fedd0da77d27966201244f47934",
+     "objetos": "eeefb66c3f9b7f45c073b050e4f12db36e5dedd9d57f907156a41570fcd1ee29",
+     "donos_objetos": "bb1a2ee9c7673b7c25606c18dc00445b1984ac7cc6442894ea561468e23966d5",
+     "atributos": "5952bd6808c4d43a4c2041756ca104e92643e144d90a1429d82ab20374e14c8d",
+     "mini_final": "beaecc460292a8784d03a395f772e95adc631b42d54612417cab3328ee13d7df",
+     "mini_unidades": "8c1135e90eb3c40f14c36ad413c49fc6461bc54ba83426333df80f7a39e161cf",
+     "mini_estruturas": "0295962d5bf64768bafd5dffb27849f8f8f917055bbad054fbec1b04fc530884",
+     "sombra": "233a7eae4c894e7961d727d0681471f1426569b7a501a3332e4e3b101e979068",
+     "regioes": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+     "tiles": "8589035145344187791827d75b807929e0c09cd04bb6df26d4218e22b1d74432",
+     "descoberto": "1b9c9a10fd813bf741b4afd368d3c7a0dc3d52ceedc483809642e3d62b42856b",
+     "luz_bordas": "16ff4d088ae323bdcfe1a678321c3dab44c41e63989edf2147f0e01f1ea285d2",
+     "contagem_luz": "a068be9606551c30c0905e3f6695ee9c72c15c08b13a5dc238cf55accac3d73b"
+    },
+    "mines_hex": "5a6cb038f836c2e251e4bbf0f87473991c52f0f505e993106b3059fb0f4a43a4974a9227aecfb66a93d72ef00a51c3573b94f9cb8f426221e8aac2b8228954751ddb39d00c1624f29ae0ce4c839c0721",
+    "random_state_hex": "01000000",
+    "random_calls": 0,
+    "memsets": [],
+    "minimap_trace": [
+     [
+      "minimap",
+      3,
+      65280,
+      6
+     ],
+     [
+      "minimap",
+      3,
+      65281,
+      6
+     ],
+     [
+      "minimap",
+      3,
+      65282,
+      6
+     ]
+    ]
+   }
+  }
+ ],
+ "scope": "Original-only TerrainReset, MiniMapReset and BatimentModifyMap (DL 1, 0, 0x80) over deterministic synthetic inherited layers; no mission data, no caller orchestration, no Windows runtime."
+}

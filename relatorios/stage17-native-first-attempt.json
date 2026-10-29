@@ -1,0 +1,10 @@
+{
+  "status": "INTERRUPTED with exit130; failed test-harness dictionary-key comparison before whole-remap execution",
+  "reason": "Native snapshot keys are hexadecimal strings; decompressed capture keys are integers. unittest attempted a multi-megabyte difflib assertion rendering instead of a concise failure.",
+  "diagnostic": "Fresh input bytes equal immutable capture in clean process and after pure tests; only key representation differed",
+  "change": "Normalize actual block keys to integers, retain exact whole-byte equality and bounded per-block diagnostics; no game/oracle/capture/native-limit changes",
+  "original_whole_remap_entries": 0,
+  "final_tail_entries": 4,
+  "log": ".local/stage17-native-first-interrupted.log",
+  "diagnostic_log": ".local/stage17-input-diagnostic.log"
+}

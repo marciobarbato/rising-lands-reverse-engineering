@@ -1,0 +1,43 @@
+{
+ "milestone": "M2.2 — MONDE01 128 consecutive frames after MissionLoad, equal to the original frame by frame",
+ "decision": "ACCEPTED",
+ "decided_at": "2026-10-29 BRT",
+ "decided_by": "coordinator (Claude) on committed-main reproduction on two machines (MacBook and Mac mini)",
+ "main": "b9f4b5d (merge of feat/re-core after the AI/runtime proof)",
+ "intact_executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "scope": "Display scenario -v2, MONDE01 new campaign, declared Windows inputs and display clock, no player input, no CD track playing; load tail, between-frames and frame phases for frames 1-128 (257 phases). Includes the field-growth sweep rows 31-51, ScanNouvellePatate at 45, the 32/50/100-frame timers and the HUD flag cycle.",
+ "original_reference": {
+  "capture": "pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz",
+  "xz_sha256": "4c8f5c14a9623131dd019eafcdc49ea63054ee358f9defde58c12cb949f59ff3",
+  "raw_json_sha256": "1ad031b96300e5c632fd5b6b7857ae30792f78e86531e4f17d1bf7124c6dd930",
+  "captured_on": "Mac mini (Missions front), two deterministic runs identical; replay 257/257 summaries and 11/11 checkpoint full states; frame-1 phases equal the accepted M2.1 -v2 capture"
+ },
+ "comparison_policy": {
+  "path": "pesquisas-paralelas/missoes/validacao/m2-2-politica-comparacao-128-quadros.json",
+  "sha256": "bf36e6e8f6a38202fa3248256d3de9f768497caa835a563a3ef119be994127f0",
+  "rule": "a byte is display-only only if every writer and every reader is display code; only the cumulative mask excludes bytes",
+  "masked_display_only_bytes": 153060,
+  "compared_logic_bytes": 999,
+  "notes": "HUD flag 0x4e05a2 is logic (AffGame and CalculMatiere write it); 223 logic bytes first change after frame 1 (NextGouttes 197, UpdateChamp 9, EnginNextEtape 8, NextAnimVeget 6, ScanNouvellePatate 2, HUD 1); segment-parallel pass 2 proven field-for-field equal to the sequential report"
+ },
+ "proof": {
+  "path": "pesquisas-paralelas/ia-runtime/validacao/m2-2-prova-128-quadros.json",
+  "sha256": "4dfa25b388a21501ea8deea16eafba1d2791abc15a07e3c746a0abd5a6ce0001",
+  "source_revision": "8beb95a110bfe7728e756525a660cd2eddf22166",
+  "result": "equal in 257/257 phases: every compared byte, 25,482 allocation records, RNGs, bindings and boundaries outside display roots, carried registers, HUD flag per frame",
+  "crossings_writing_compared_bytes": 0
+ },
+ "unmodeled_declared": "MCICD_Play caller stack locals, EFLAGS/EIP, bindings/boundaries issued inside display roots (counted per phase), masked display state and surfaces, allocation call-site metadata (as in M1/M2.1)",
+ "reproductions": {
+  "macbook_main_b9f4b5d": {
+   "artifact": "integracao/validacao/cxr-20261029-m2r6-m2-2-proof-main-b9f4b5d.json",
+   "result": "equal 257/257, crossings 0; identical to the committed proof except seconds and source_revision",
+   "seconds": 59
+  },
+  "mac_mini_main_b9f4b5d": {
+   "result": "equal 257/257, crossings 0, hud_flag_equal true; identical to the committed proof except seconds and source_revision",
+   "wall_s": 54.8
+  }
+ },
+ "next": "M2.3 — first scripted raid (frames 0-9,200) running on the Mac mini; M2 acceptance needs M2.3"
+}

@@ -7,8 +7,8 @@ import struct
 
 from producao import Producao
 from economia import Saldos
-from proprietarios import (PropriedadeConstrucoes, PASSO_BAG, PASSO_ORDENS_JOGADOR,
-                           PASSO_PENDENCIAS_JOGADOR, inicializar_bag)
+from proprietarios import (PropriedadeConstrucoes, PASSO_BAG, PASSO_PENDENCIAS_JOGADOR,
+                           inicializar_bag, validar_ordens)
 
 BASE_INVENCOES = 0x508f44
 
@@ -75,10 +75,13 @@ class Aprendizagem:
         self.inventados[:] = bytes(20)
 
     def atualizar_ordens(self, jogador):
-        """SortilegeSetTechnologie 0x474a38: refaz a Bag de ordens do tipo de unidade 4."""
+        """SortilegeSetTechnologie 0x474a38: refaz a Bag de ordens do tipo de unidade 4.
+
+        A Bag fica no pool próprio do jogador, [[0x4e19b8]+4*jogador] + 4*104.
+        """
         j = self._jogador(jogador)
         tipos = (t for t in range(5) if self.propriedade.sortilegios[j * 5 + t] != 0)
-        _lista_sortilegios(self.propriedade.ordens, j * PASSO_ORDENS_JOGADOR + 4 * PASSO_BAG, tipos)
+        _lista_sortilegios(validar_ordens(self.propriedade.ordens)[j], 4 * PASSO_BAG, tipos)
 
     def inicializar_ordens(self):
         """SortilegeInitTechnologie 0x474a95: refaz as quatro Bags, sem zerar flags."""

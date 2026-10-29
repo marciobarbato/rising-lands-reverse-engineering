@@ -1,0 +1,12 @@
+{
+  "command": "python3 heavy_lease.py core -- python3 -B scripts/check.py --domain core",
+  "tree": "d58109f",
+  "tests": 486,
+  "skips": 200,
+  "failures": 0,
+  "errors": 0,
+  "success": true,
+  "seconds": 22.694,
+  "documentation_links": "PASS",
+  "scope": "Required local Core gate on the Unicorn-teardown tree merged with origin/main 4dea271 and the Mac mini run branch runs/core/teardown-timing e0c106b; includes test_encerramento_captura (7 OK: durable fast exit, missing-output refusal, coalesced page mapping, exit within 1 s holding 3,000 regions). Timing measurement relatorios/encerramento-unicorn.json ran on the Mac mini under the exclusive lease (232.5 s)"
+}

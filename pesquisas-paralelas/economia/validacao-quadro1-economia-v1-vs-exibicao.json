@@ -1,0 +1,392 @@
+{
+ "scenarios": [
+  "v1",
+  "exibicao"
+ ],
+ "captures": {
+  "v1": {
+   "path": "pesquisas-paralelas/economia/evidencias/captura-quadro1-economia-original-v2.json",
+   "sha256": "747bca33fd2d5c5b2e6f20cc01ec65ab9e0949f725e54717fab29a70ef25b42b"
+  },
+  "exibicao": {
+   "path": "pesquisas-paralelas/economia/evidencias/captura-quadro1-economia-exibicao.json",
+   "sha256": "53c9d5db27d66483750e9a9df24f6de8538cead45621e81425cc89812fef4439"
+  }
+ },
+ "calls": [
+  102,
+  104
+ ],
+ "method": "calls matched by (phase, routine, order); v1 addresses, register values and read dwords inside matched MissionLoad allocations relocated to their display partners (Missions' matching); native stack addresses relative to the entry ESP; everything else raw",
+ "changed": [
+  "between_frames:BagContientTroupe",
+  "frame1:PlayerAttaqueCalculSympa",
+  "load_tail:PlayerAttaqueCalculSympa"
+ ],
+ "routines": [
+  {
+   "phase": "between_frames",
+   "routine": "BagContientTroupe",
+   "calls": [
+    0,
+    2
+   ],
+   "identical_after_pool_normalization": false,
+   "differing_calls": []
+  },
+  {
+   "phase": "frame1",
+   "routine": "BagContientTroupe",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "frame1",
+   "routine": "BatimentGetCase",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "frame1",
+   "routine": "BatimentNextEtape:type1_2_13_16",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "frame1",
+   "routine": "BonusGetValEngin",
+   "calls": [
+    24,
+    24
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "frame1",
+   "routine": "CalculCompteurMarche",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "frame1",
+   "routine": "CalculCompteurProposition",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "frame1",
+   "routine": "CalculMatiere",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "frame1",
+   "routine": "CalculTroupe",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "frame1",
+   "routine": "EnginNextEtape:state7",
+   "calls": [
+    8,
+    8
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "frame1",
+   "routine": "PlayerAttaqueCalculSympa",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": false,
+   "differing_calls": [
+    {
+     "index": 0,
+     "differences": {
+      "entry_registers": {
+       "EAX": [
+        2,
+        231
+       ],
+       "EDX": [
+        1024,
+        5403
+       ]
+      },
+      "exit_registers": {
+       "EDX": [
+        1024,
+        5403
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "phase": "frame1",
+   "routine": "PlayerInitAllianceCompteur",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "frame1",
+   "routine": "RechercheCalcul",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "frame1",
+   "routine": "ResetTableauHangar",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "frame1",
+   "routine": "SetUpdateChamp",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "frame1",
+   "routine": "UpdateChamp",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "load_tail",
+   "routine": "BagContientTroupe",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "load_tail",
+   "routine": "BatimentGetCase",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "load_tail",
+   "routine": "BatimentNextEtape:type1_2_13_16",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "load_tail",
+   "routine": "BonusGetValEngin",
+   "calls": [
+    24,
+    24
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "load_tail",
+   "routine": "CalculCompteurMarche",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "load_tail",
+   "routine": "CalculCompteurProposition",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "load_tail",
+   "routine": "CalculMatiere",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "load_tail",
+   "routine": "CalculTroupe",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "load_tail",
+   "routine": "EnginNextEtape:state7",
+   "calls": [
+    8,
+    8
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "load_tail",
+   "routine": "MAJSympathie",
+   "calls": [
+    12,
+    12
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "load_tail",
+   "routine": "PlayerAttaqueCalculSympa",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": false,
+   "differing_calls": [
+    {
+     "index": 0,
+     "differences": {
+      "entry_registers": {
+       "EAX": [
+        3,
+        231
+       ],
+       "EDX": [
+        1280,
+        5660
+       ]
+      },
+      "exit_registers": {
+       "EDX": [
+        1280,
+        5660
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "phase": "load_tail",
+   "routine": "PlayerInitAllianceCompteur",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "load_tail",
+   "routine": "RechercheCalcul",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "load_tail",
+   "routine": "ResetTableauHangar",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "load_tail",
+   "routine": "SetUpdateChamp",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  },
+  {
+   "phase": "load_tail",
+   "routine": "UpdateChamp",
+   "calls": [
+    1,
+    1
+   ],
+   "identical_after_pool_normalization": true,
+   "differing_calls": []
+  }
+ ]
+}

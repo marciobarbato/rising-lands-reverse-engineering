@@ -9,11 +9,11 @@ def main():
     # Os testes originais usam RAIZ.parent/source. Este link só permite leituras;
     # a suíte foi inspecionada e não escreve no corpus.
     source=ROOT.parents[2]/'source';link=ROOT/'snapshots/source'
-    if source.is_dir() and not link.exists():link.symlink_to(source,target_is_directory=True)
+    if source.is_dir() and not link.exists():link.symlink_to(os.path.relpath(source.resolve(),link.parent.resolve()),target_is_directory=True)
     # Caminhos relativos dos testes de pesquisa apontam para cópias commitadas e CD somente leitura.
     for alias,target in [(ROOT/'research/relatorios',snap/'relatorios'),(ROOT/'research/ferramentas',snap/'ferramentas'),(ROOT/'source',source),((ROOT/'research').resolve().parent/'source',source)]:
         if alias.is_symlink() and alias.resolve()!=target.resolve():alias.unlink()
-        if not alias.exists():alias.symlink_to(target,target_is_directory=True)
+        if not alias.exists():alias.symlink_to(os.path.relpath(target.resolve(),alias.parent.resolve()),target_is_directory=True)
     environment=dict(os.environ);environment.pop('RISING_EMULAR',None)
     environment.update({'PYTHONDONTWRITEBYTECODE':'1','PYTHONPYCACHEPREFIX':str(ROOT/'build/pycache'),'TMPDIR':str(ROOT/'build/tmp')+'/'})
     suites=[]

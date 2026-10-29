@@ -519,3 +519,36 @@ Not composed:
 - wrapped or negative viewports.
 
 Stage 18 (wrapped and negative viewports, and the MONDE01 building facades) is next, after coordinator confirmation.
+
+## Codex recovery — light facade inventory only, 2026-10-28
+
+The new human authorization superseded the old STOP. Before writes, the existing
+graphics branch was clean with no local commits outside fetched main. Resumed
+through `python3 scripts/workstream.py start graphics`, then fast-forwarded
+without resetting to `b610bfad77ffadaa0ee5f6af02160d786ccfdc7b`. Existing Claude
+research and failed candidates were preserved. The coordinator later restricted
+this recovery round to the already-started light inventory; no further graphics
+implementation or heavy work is authorized in this round.
+
+The [reviewable readiness inventory](INVENTORY_MONDE01_FACADE.md) records exact
+original intervals, inherited inputs, order and failure boundaries. Fresh
+read-only checks verified the intact executable identity, eight interval hashes,
+all pinned MONDE01 buffer hashes, and stage-17 implementation/correction/merge
+ancestry. At the first terrain trigger (cell3345, word0x2ED), the pinned occupancy
+word is0x0001, so the original inline lookup returns0xFFFF and branches directly
+to the caller epilogue. The pinned scene is not proof of a drawn structure.
+A placed type-2 facade must use a new explicit snapshot; predecessors stay fixed.
+
+| Scope | Implementation | Original validation | Main integration | Full flow |
+|---|---|---|---|---|
+| Existing stages16/17 | Bounded providers already exist | Historical native captures/comparisons; not rerun in this recovery | Already on main; stage17 merge0756062 freshly ancestry-checked | Pinned pre-structure checkpoint, no accepted complete M1/frame runtime |
+| Facade/lookup continuation | No new code | Fresh static review only; no new x86 capture/comparison | Inventory only; no integration in this turn | Not run |
+
+Historical graphics domain192/0skips remains historical. New native validation,
+Ghidra, domain/common gates and integration were **not run**, rather than marked
+passed or skipped. Only lightweight static/hash/Git/whitespace checks ran.
+No app rebuild or follow-up dispatch was made. The next valuable slice is exact
+missing/present structure lookup plus the proven Santuário body/caller boundary;
+overlays for unit+74=0 and types1/8 follow only in a later scheduled round.
+No model difficulty or unresolved auto-review rejection was observed. Stop after
+preserving this inventory and reporting readiness; do not poll for another task.

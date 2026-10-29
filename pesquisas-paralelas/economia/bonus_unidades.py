@@ -6,10 +6,12 @@ conversion effects are performed by these queries.
 """
 import struct
 
-from economia import _i32
+from economia import _buffer_vivo, _i32
 
 BASE_BONUS_UNIDADES = 0x4dfba0
 TAMANHO_BONUS_UNIDADES = 4 * 26 * 18
+BASE_TIPOS_UNIDADES = 0x4965ae
+TAMANHO_TIPOS_UNIDADES = 26 * 50
 
 # Original selector dispatch 0x428c8c: (record offset, load width).
 # None is a direct return of the caller's incoming ECX, not a table read.
@@ -50,7 +52,37 @@ def _dividir_assinado(n, d):
 
 
 class BonusUnidades:
+    """Unit bonus table 0x4dfba0 (1,872 bytes) and runtime unit types 0x4965ae (1,300 bytes).
+
+    ``BonusUnidades.vivo``/``da_memoria`` bind the live original ranges by
+    identity: every query reads and every setter writes the caller's buffers.
+    The constructor COPIES its arguments; it is the legacy/fixture form only.
+    """
+    @classmethod
+    def vivo(cls, memoria, *, tipos_unidades):
+        """Bind the live table and runtime types by identity (no copy).
+
+        Both are writable ``bytearray``s or writable 1-D contiguous byte
+        ``memoryview``s of exactly 1,872 and 1,300 bytes. Rejection happens
+        before any binding; ``self.memoria``/``self.tipos_unidades`` are the
+        given objects.
+        """
+        memoria = _buffer_vivo(memoria, TAMANHO_BONUS_UNIDADES, 'Live unit bonus table (0x4dfba0)')
+        tipos_unidades = _buffer_vivo(tipos_unidades, TAMANHO_TIPOS_UNIDADES, 'Live runtime unit types (0x4965ae)')
+        if memoria is tipos_unidades:
+            raise ValueError('The bonus table and the runtime unit types are different original ranges')
+        self = cls.__new__(cls)
+        self.memoria, self.tipos_unidades = memoria, tipos_unidades
+        return self
+
+    @classmethod
+    def da_memoria(cls, m):
+        """``vivo`` over a live memory map: ``m.vista(0x4dfba0, 1872)`` and ``m.vista(0x4965ae, 1300)``."""
+        return cls.vivo(m.vista(BASE_BONUS_UNIDADES, TAMANHO_BONUS_UNIDADES),
+                        tipos_unidades=m.vista(BASE_TIPOS_UNIDADES, TAMANHO_TIPOS_UNIDADES))
+
     def __init__(self, memoria=None, *, tipos_unidades=None):
+        # Legacy/fixture form: copies. Use BonusUnidades.vivo for the live original table.
         self.memoria = bytearray(TAMANHO_BONUS_UNIDADES if memoria is None else memoria)
         if len(self.memoria) != TAMANHO_BONUS_UNIDADES:
             raise ValueError('Unit bonus table must contain four x 26 x 18 bytes')

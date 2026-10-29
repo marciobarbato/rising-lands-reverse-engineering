@@ -1,0 +1,340 @@
+{
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "capstone": "5.0.7",
+ "intervals": [
+  {
+   "role": "translated",
+   "name": "Engin_RetrieveExperimente",
+   "start": "0x441623",
+   "end_exclusive": "0x441659",
+   "sha256": "9e9298121bdb5c12a6d8912f5430b3cdcbcb5cb7831c466a672b320f8c7d4522",
+   "file": "00441623.asm"
+  },
+  {
+   "role": "translated",
+   "name": "retrieve_shared_epilogue",
+   "start": "0x440d59",
+   "end_exclusive": "0x440d5e",
+   "sha256": "c70b099133a170ddd772c96ac18c8da37f2e3656fb63fc1ce635782f3483d656",
+   "file": "00440d59.asm"
+  },
+  {
+   "role": "provenance",
+   "name": "Engin_ResetExperience",
+   "start": "0x441470",
+   "end_exclusive": "0x4414ad",
+   "sha256": "31ca4aa77fbd2c5d22fb9a3d2a96fcaad530de926a222f6cfcde07e392e0a35c",
+   "file": "00441470.asm"
+  },
+  {
+   "role": "provenance",
+   "name": "reset_shared_epilogue",
+   "start": "0x440d5a",
+   "end_exclusive": "0x440d5e",
+   "sha256": "4c99dc188090e18f2ee3ef2858a148c43520ac9c81069f7156b6fb1bbb7a6ad6",
+   "file": "00440d5a.asm"
+  },
+  {
+   "role": "provenance",
+   "name": "Engin_LoadExperimente",
+   "start": "0x4414ad",
+   "end_exclusive": "0x4414d7",
+   "sha256": "68e8c70002d4c038c9cdb494d6296c32b289c60361e4c57963d33861f7b44b9c",
+   "file": "004414ad.asm"
+  },
+  {
+   "role": "provenance",
+   "name": "Engin_SaveExperimente",
+   "start": "0x4414d7",
+   "end_exclusive": "0x4414f8",
+   "sha256": "15e0883c5e7bc5740d58f9620b8aeb372fb935814ecc6501bc20ba92295ad15f",
+   "file": "004414d7.asm"
+  },
+  {
+   "role": "provenance",
+   "name": "Engin_StoreExperimente",
+   "start": "0x4414f8",
+   "end_exclusive": "0x441623",
+   "sha256": "2cbe6eba6e25cff07e4007bbf6e7f5f8c80fe80823b97efaf4eeba883ee195aa",
+   "file": "004414f8.asm"
+  },
+  {
+   "role": "provenance",
+   "name": "store_shared_epilogue",
+   "start": "0x440d55",
+   "end_exclusive": "0x440d5e",
+   "sha256": "3b66c24827ac0817daa5b6638e8a3e6c06427a247d9b72a5cb413da48baeea64",
+   "file": "00440d55.asm"
+  },
+  {
+   "role": "caller",
+   "name": "MissionLoad_tail_call_site",
+   "start": "0x46c5af",
+   "end_exclusive": "0x46c5c3",
+   "sha256": "124c44c143669ffde44bde2fbaf9cfe2bca0300f9588c9f11964349683de9e0d",
+   "file": "0046c5af.asm"
+  },
+  {
+   "role": "caller",
+   "name": "PlayerRetrieve_entry_consumes_no_EAX",
+   "start": "0x46df41",
+   "end_exclusive": "0x46df4d",
+   "sha256": "194b84abfccb4bc5f060d3c722409cc39c2f98e03d339d65ff10855544533cf9",
+   "file": "0046df41.asm"
+  },
+  {
+   "role": "caller",
+   "name": "CalculGame_mission_end_store_site",
+   "start": "0x42ca6e",
+   "end_exclusive": "0x42ca91",
+   "sha256": "ae288b752338cac79b5489ba6558c44d5c0e92e2568c1922ff3b0c1a7b906d3e",
+   "file": "0042ca6e.asm"
+  },
+  {
+   "role": "caller",
+   "name": "MenuInit_reset_site",
+   "start": "0x468e28",
+   "end_exclusive": "0x468e37",
+   "sha256": "357933984c04fa38f68f2de0aa13bcd37447ff53484afa046d98de9271ee8691",
+   "file": "00468e28.asm"
+  },
+  {
+   "role": "caller",
+   "name": "MissionLoadName_reset_site",
+   "start": "0x46c687",
+   "end_exclusive": "0x46c696",
+   "sha256": "49df0987633f2067d0a4c5ddf6e28bba60c48447b035b08127bc272a90a3c79a",
+   "file": "0046c687.asm"
+  },
+  {
+   "role": "caller",
+   "name": "GameLoad_load_site",
+   "start": "0x46bae9",
+   "end_exclusive": "0x46baf5",
+   "sha256": "3e6649be03aeea1145c6f76359faf20fa34447673e371dc8fcf6f2107cb1ad9c",
+   "file": "0046bae9.asm"
+  },
+  {
+   "role": "caller",
+   "name": "GameSave_save_site",
+   "start": "0x46c070",
+   "end_exclusive": "0x46c075",
+   "sha256": "2bec897e22e4b1eaafc60706880e6d2f623a0fae146172eaa3d0db044355db8a",
+   "file": "0046c070.asm"
+  }
+ ],
+ "current_queue": {
+  "start": "0x4e19c4",
+  "end_exclusive": "0x4e19ec"
+ },
+ "saved_queue": {
+  "start": "0x4e19ec",
+  "end_exclusive": "0x4e1a14",
+  "section": ".bss",
+  "section_start": "0x49a000",
+  "section_end_exclusive": "0x522400",
+  "file_backed": false
+ },
+ "buffer_references": [
+  {
+   "address": "0x44147f",
+   "function": "Engin_ResetExperience+0xf",
+   "value": "0x4e19ed",
+   "text": "mov byte ptr [ebx + eax*2 + 0x4e19ed], 0",
+   "bytes": "c68443ed194e0000"
+  },
+  {
+   "address": "0x441488",
+   "function": "Engin_ResetExperience+0x18",
+   "value": "0x4e19ec",
+   "text": "mov byte ptr [ebx + eax*2 + 0x4e19ec], 0xff",
+   "bytes": "c68443ec194e00ff"
+  },
+  {
+   "address": "0x4414b6",
+   "function": "Engin_LoadExperimente+0x9",
+   "value": "0x4e19c4",
+   "text": "mov eax, 0x4e19c4",
+   "bytes": "b8c4194e00"
+  },
+  {
+   "address": "0x4414ca",
+   "function": "Engin_LoadExperimente+0x1d",
+   "value": "0x4e19ec",
+   "text": "mov eax, 0x4e19ec",
+   "bytes": "b8ec194e00"
+  },
+  {
+   "address": "0x4414dd",
+   "function": "Engin_SaveExperimente+0x6",
+   "value": "0x4e19c4",
+   "text": "mov eax, 0x4e19c4",
+   "bytes": "b8c4194e00"
+  },
+  {
+   "address": "0x4414ec",
+   "function": "Engin_SaveExperimente+0x15",
+   "value": "0x4e19ec",
+   "text": "mov eax, 0x4e19ec",
+   "bytes": "b8ec194e00"
+  },
+  {
+   "address": "0x44150e",
+   "function": "Engin_StoreExperimente+0x16",
+   "value": "0x4e19ec",
+   "text": "mov byte ptr [ebx + eax*2 + 0x4e19ec], 0xff",
+   "bytes": "c68443ec194e00ff"
+  },
+  {
+   "address": "0x441517",
+   "function": "Engin_StoreExperimente+0x1f",
+   "value": "0x4e19ed",
+   "text": "mov byte ptr [ebx + eax*2 + 0x4e19ed], cl",
+   "bytes": "888c43ed194e00"
+  },
+  {
+   "address": "0x44156c",
+   "function": "Engin_StoreExperimente+0x74",
+   "value": "0x4e19ed",
+   "text": "mov cl, byte ptr [ecx + 0x4e19ed]",
+   "bytes": "8a89ed194e00"
+  },
+  {
+   "address": "0x441589",
+   "function": "Engin_StoreExperimente+0x91",
+   "value": "0x4e19ed",
+   "text": "mov ch, byte ptr [eax + 0x4e19ed]",
+   "bytes": "8aa8ed194e00"
+  },
+  {
+   "address": "0x4415b0",
+   "function": "Engin_StoreExperimente+0xb8",
+   "value": "0x4e19ed",
+   "text": "mov byte ptr [ecx + eax*2 + 0x4e19ed], dl",
+   "bytes": "889441ed194e00"
+  },
+  {
+   "address": "0x4415c1",
+   "function": "Engin_StoreExperimente+0xc9",
+   "value": "0x4e19ec",
+   "text": "mov byte ptr [ecx + eax*2 + 0x4e19ec], dl",
+   "bytes": "889441ec194e00"
+  },
+  {
+   "address": "0x441645",
+   "function": "Engin_RetrieveExperimente+0x22",
+   "value": "0x4e19ea",
+   "text": "mov dx, word ptr [eax + 0x4e19ea]",
+   "bytes": "668b90ea194e00"
+  },
+  {
+   "address": "0x44164c",
+   "function": "Engin_RetrieveExperimente+0x29",
+   "value": "0x4e19c2",
+   "text": "mov word ptr [eax + 0x4e19c2], dx",
+   "bytes": "668990c2194e00"
+  },
+  {
+   "address": "0x44fe6f",
+   "function": "EnginSetExperimente+0x2d",
+   "value": "0x4e19c5",
+   "text": "cmp byte ptr [eax + 0x4e19c5], 0",
+   "bytes": "80b8c5194e0000"
+  },
+  {
+   "address": "0x44fe7c",
+   "function": "EnginSetExperimente+0x3a",
+   "value": "0x4e19c4",
+   "text": "mov dl, byte ptr [eax + 0x4e19c4]",
+   "bytes": "8a90c4194e00"
+  },
+  {
+   "address": "0x44fe8b",
+   "function": "EnginSetExperimente+0x49",
+   "value": "0x4e19c5",
+   "text": "mov al, byte ptr [eax + 0x4e19c5]",
+   "bytes": "8a80c5194e00"
+  },
+  {
+   "address": "0x44fec1",
+   "function": "EnginSetExperimente+0x7f",
+   "value": "0x4e19c7",
+   "text": "mov cl, byte ptr [eax + 0x4e19c7]",
+   "bytes": "8a88c7194e00"
+  },
+  {
+   "address": "0x44fec7",
+   "function": "EnginSetExperimente+0x85",
+   "value": "0x4e19c5",
+   "text": "mov byte ptr [eax + 0x4e19c5], cl",
+   "bytes": "8888c5194e00"
+  },
+  {
+   "address": "0x44fed4",
+   "function": "EnginSetExperimente+0x92",
+   "value": "0x4e19c6",
+   "text": "mov cl, byte ptr [esi + eax + 0x4e19c6]",
+   "bytes": "8a8c06c6194e00"
+  },
+  {
+   "address": "0x44fedc",
+   "function": "EnginSetExperimente+0x9a",
+   "value": "0x4e19c4",
+   "text": "mov byte ptr [esi + eax + 0x4e19c4], cl",
+   "bytes": "888c06c4194e00"
+  },
+  {
+   "address": "0x44fefa",
+   "function": "EnginSetExperimente+0xb8",
+   "value": "0x4e19cd",
+   "text": "mov byte ptr [eax*2 + 0x4e19cd], cl",
+   "bytes": "880c45cd194e00"
+  },
+  {
+   "address": "0x44ff10",
+   "function": "EnginSetExperimente+0xce",
+   "value": "0x4e19cc",
+   "text": "mov byte ptr [eax*2 + 0x4e19cc], 0xff",
+   "bytes": "c60445cc194e00ff"
+  }
+ ],
+ "direct_calls": [
+  {
+   "target": "0x441623",
+   "target_symbol": "Engin_RetrieveExperimente+0x0",
+   "call": "0x46c5b9",
+   "caller": "MissionLoad+0x2ea"
+  },
+  {
+   "target": "0x441470",
+   "target_symbol": "Engin_ResetExperience+0x0",
+   "call": "0x468e32",
+   "caller": "MenuInit+0xb77"
+  },
+  {
+   "target": "0x441470",
+   "target_symbol": "Engin_ResetExperience+0x0",
+   "call": "0x46c691",
+   "caller": "MissionLoadName+0xae"
+  },
+  {
+   "target": "0x4414ad",
+   "target_symbol": "Engin_LoadExperimente+0x0",
+   "call": "0x46baf0",
+   "caller": "GameLoad+0x263"
+  },
+  {
+   "target": "0x4414d7",
+   "target_symbol": "Engin_SaveExperimente+0x0",
+   "call": "0x46c070",
+   "caller": "GameSave+0x32b"
+  },
+  {
+   "target": "0x4414f8",
+   "target_symbol": "Engin_StoreExperimente+0x0",
+   "call": "0x42ca82",
+   "caller": "CalculGame+0x21a"
+  }
+ ],
+ "scope": "Static byte export. Only Engin_RetrieveExperimente and its 5-byte shared epilogue are translated by Core; reset/load/save/store routines and call sites are provenance evidence."
+}

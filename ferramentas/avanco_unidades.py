@@ -38,6 +38,41 @@ class MundoFisico(MundoUnidades, VisaoMovimento):
         self.bonus_fadiga = [[0] * 26 for _ in range(4)]
         self.rotas = [bytearray(b'\0\0') for _ in range(800)]
 
+    def vincular_grades(self, *, tiles=None, regioes=None, atributos=None, objetos=None, donos_objetos=None):
+        """Use live original grids by identity instead of the world's own containers.
+
+        ``tiles`` [0x507d70] and ``regioes`` [0x4e0f38] are 131,072-byte u16 grids
+        (they become ``grade_u16.GradeU16`` views whose ``buffer`` is the given
+        object); ``atributos`` [0x507da8], ``objetos`` [0x507d74] and
+        ``donos_objetos`` [0x507dac] are 65,536-byte grids adopted as the given
+        object itself. Each must be a writable bytearray or one-dimensional
+        contiguous byte memoryview. Everything is checked before anything is
+        bound; unnamed grids keep their current containers.
+        """
+        from grade_u16 import GradeU16
+        novos = {}
+        for nome, buffer in (('atributos', atributos), ('objetos', objetos), ('donos_objetos', donos_objetos)):
+            if buffer is not None:
+                v = memoryview(buffer)
+                if v.readonly or v.ndim != 1 or not v.c_contiguous or v.itemsize != 1 or v.nbytes != 65536:
+                    raise ValueError(f'Live {nome} grid must be a writable contiguous 65536-byte buffer')
+                novos[nome] = buffer
+        for nome, buffer in (('tiles', tiles), ('regioes', regioes)):
+            if buffer is not None:
+                novos[nome] = GradeU16(buffer)
+        for nome, grade in novos.items():
+            setattr(self, nome, grade)
+        self.grades_vivas = getattr(self, 'grades_vivas', frozenset()) | frozenset(novos)
+        return novos
+
+    def vincular_tiles(self, buffer):
+        """Use the live tile grid [0x507d70] (131,072 bytes, 65,536 u16) by identity.
+
+        After it ``self.tiles`` is a ``grade_u16.GradeU16`` whose ``buffer`` is
+        ``buffer`` itself; the default (unbound) world keeps its 65,536-int list.
+        """
+        return self.vincular_grades(tiles=buffer)['tiles']
+
     def iniciar_morte_unidade(self, indice):
         from morte_unidades import iniciar_morte_unidade
         return iniciar_morte_unidade(self, indice)
@@ -49,6 +84,18 @@ class MundoFisico(MundoUnidades, VisaoMovimento):
     def colocar_unidade_missao(self,indice):
         from colocacao_missao import colocar_unidade_missao
         return colocar_unidade_missao(self,indice)
+
+    def resetar_terreno(self, minas, aleatorio):
+        from reset_terreno import resetar_terreno
+        return resetar_terreno(self, minas, aleatorio)
+
+    def resetar_minimapa(self):
+        from reset_terreno import resetar_minimapa
+        return resetar_minimapa(self)
+
+    def modificar_minimapa_estrutura(self, indice, ativo):
+        from minimapa_estruturas import modificar_minimapa_estrutura
+        return modificar_minimapa_estrutura(self, indice, ativo)
 
     def consultar_volume_unidade(self, indice, janela):
         from voz_unidades import consultar_volume_unidade

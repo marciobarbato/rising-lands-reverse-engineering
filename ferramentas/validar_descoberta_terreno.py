@@ -24,6 +24,7 @@ def _bancada(b):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--emular', action='store_true')
+    p.add_argument('--relatorio', type=Path, help='Write a separate report without replacing historical results')
     args = p.parse_args()
     os.environ['RISING_EMULAR'] = '1' if args.emular else '0'
     from validar import Resultado
@@ -54,7 +55,10 @@ def main():
                       native_subcalls='Unpatched collision/discovery/light/minimap; same instruction/CPU/stack '
                                       'at each SetMiniMap-entry or pixel-loop-head resume')
     nome = 'descoberta-terreno-emulada.json' if args.emular else 'descoberta-terreno-local.json'
-    (RAIZ/'relatorios'/nome).write_text(json.dumps(report, indent=2)+'\n')
+    destino = args.relatorio or Path('relatorios')/nome
+    if not destino.is_absolute():
+        destino = RAIZ/destino
+    destino.write_text(json.dumps(report, indent=2)+'\n')
     print(json.dumps({k: v for k, v in report.items() if k not in ('skips', 'benches')}, indent=2))
     return 0 if r.wasSuccessful() else 1
 

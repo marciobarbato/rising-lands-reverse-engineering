@@ -1,0 +1,160 @@
+{
+ "tabelas_blit": {
+  "0x496cdc": [
+   "0x0",
+   "0x0",
+   "0x0",
+   "0x0",
+   "0x0",
+   "0x0",
+   "0x47cd76",
+   "0x0",
+   "0x0",
+   "0x47cebe"
+  ],
+  "0x496d04": [
+   "0x0",
+   "0x0",
+   "0x0",
+   "0x0",
+   "0x0",
+   "0x0",
+   "0x47cd5a",
+   "0x0",
+   "0x0",
+   "0x47cea2"
+  ]
+ },
+ "fechamento_alvos_blit": {
+  "0x47cd5a": {
+   "rotinas": 2,
+   "indiretos": 0,
+   "stores_dgroup_abs": []
+  },
+  "0x47cd76": {
+   "rotinas": 2,
+   "indiretos": 0,
+   "stores_dgroup_abs": []
+  },
+  "0x47cea2": {
+   "rotinas": 2,
+   "indiretos": 0,
+   "stores_dgroup_abs": []
+  },
+  "0x47cebe": {
+   "rotinas": 2,
+   "indiretos": 0,
+   "stores_dgroup_abs": []
+  }
+ },
+ "input_sha256": "eb7d2303e13e62d4f5692c9cb6ef302b573d138df6a8b51183a6d9b0bd703afc",
+ "parada": "0x417b1c",
+ "instrucoes": 2320149,
+ "rastro": {
+  "eventos": 2796,
+  "por_funcao": {
+   "AffBatimentOmbre": 726,
+   "AffBatiments": 726,
+   "AffBloc": 425,
+   "AffEngin": 16,
+   "AffSprite": 1,
+   "AffTerrain": 1,
+   "AffVeget": 49,
+   "AffVegetTerrain": 425,
+   "CalculFrame": 1,
+   "DDLockSurface": 1,
+   "GetNumBob": 425
+  },
+  "sha256": "193be718610fc7e40c64ec5134a760728119f83c68c604ff00e4e31c4bb96e64"
+ },
+ "vinculos_n": 3,
+ "alvos": {
+  "0x4e2f78": {
+   "m1": "00",
+   "antes": "12",
+   "depois": "12",
+   "escrito": []
+  },
+  "0x4e1b0e": {
+   "m1": "00",
+   "antes": "00",
+   "depois": "00",
+   "escrito": []
+  },
+  "0x4e060c": {
+   "m1": "00000000",
+   "antes": "00000000",
+   "depois": "00000000",
+   "escrito": []
+  },
+  "0x4e0610": {
+   "m1": "0000",
+   "antes": "0000",
+   "depois": "0000",
+   "escrito": []
+  },
+  "0x507d54": {
+   "m1": "0000",
+   "antes": "0000",
+   "depois": "0000",
+   "escrito": []
+  },
+  "0x50a9b4": {
+   "m1": "0100",
+   "antes": "0100",
+   "depois": "0100",
+   "escrito": []
+  },
+  "0x50a9b6": {
+   "m1": "0800",
+   "antes": "0800",
+   "depois": "0800",
+   "escrito": []
+  },
+  "0x4e1d18": {
+   "m1": "00",
+   "antes": "00",
+   "depois": "00",
+   "escrito": []
+  }
+ },
+ "dgroup_runs": [
+  {
+   "endereco": "0x49a02e",
+   "antes": "0000",
+   "depois": "1f03"
+  },
+  {
+   "endereco": "0x49a032",
+   "antes": "0000",
+   "depois": "1f02"
+  },
+  {
+   "endereco": "0x49a04e",
+   "antes": "00",
+   "depois": "4c"
+  },
+  {
+   "endereco": "0x4e17a7",
+   "antes": "0000",
+   "depois": "0801"
+  },
+  {
+   "endereco": "0x4e17ae",
+   "antes": "07",
+   "depois": "08"
+  },
+  {
+   "endereco": "0x4e17b4",
+   "antes": "e803",
+   "depois": "dc05"
+  },
+  {
+   "endereco": "0x508f73",
+   "antes": "00",
+   "depois": "08"
+  }
+ ],
+ "segundos": 4.8,
+ "mudou_unidades": false
+}

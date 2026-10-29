@@ -264,7 +264,7 @@ python3 -B pesquisas-paralelas/combate/validar.py --emular
 
 The saved emulated result records 113 tests and 234,245 bounded original-x86 executions. Local-only execution explicitly skips optional differential cases. Harnesses, original-byte extracts, dispatch tables, field/cadence audits, and data tables stay in this domain's `evidencias/`. Use a worktree because the validation entry point writes its own report.
 
-The next slice traces missing attack-phase producers and original damage/world consumers, then publishes adapters with explicit effects and one bounded end-to-end supported scenario. It does not silently replace callbacks, import the preview as an oracle, or claim a complete battle from independent routine tests. Publish outstanding core/economy/graphics requests in the combat handoff before integration.
+The current Stage 19 [building-target inventory](../pesquisas-paralelas/combate/CONTRACT_BUILDING_DAMAGE.md) is static readiness only: original damage arithmetic, destruction stores and explicit dependency boundaries, plus the future type-10/11 turret contract. Its new byte exports are not runtime validation or a public provider. The bounded Stage 18 attack chain is already integrated. The human's later steering ends this recovery turn after the light inventory; native captures, translation, heavy gates and integration were not run. Unknown AI/audio/diplomacy effects and real mission behavior remain open.
 
 The occupied-unit consumer has its own bounded validator, so it does not overwrite the historical 234,245-execution report:
 
@@ -298,4 +298,22 @@ python3 -B pesquisas-paralelas/combate/validar_ataque_vivo.py --emular
 python3 -B scripts/check.py --domain combat
 ```
 
-The slices' actual results and expected dependency stops are recorded in [the combat handoff](../pesquisas-paralelas/combate/HANDOFF.md) and their dedicated reports. General AI message, audio, level and diplomacy bodies remain external. The shared-world adapter delegates supported physical death to Core; special/vehicle effects remain explicit stops. Further work can add other damage modes and lethal effects, and trace `+0x8A=2/3` producers.
+The slices' actual results and expected dependency stops are recorded in [the combat handoff](../pesquisas-paralelas/combate/HANDOFF.md) and their dedicated reports. General AI message, audio, level and diplomacy bodies remain external. The shared-world adapter delegates supported physical death to Core; special/vehicle effects remain explicit stops. The Stage 18 field audit above supersedes the older open producer inventory. Building-target behavior and natural MONDE01 runtime remain separate unimplemented work.
+
+M2 slice 1 captures the frame body's combat-relevant calls natively from the accepted M1 post-load state. `PlayerAttaqueReset 0x46d628` is a single `ret`. `PlayerAttaqueCalculSympa 0x46d629` is diplomacy, a periodic (`counter % 2000`) attack-matrix consumer owned outside Combat. `ProjectileCalcul` over the empty M1 pool clears the 100 stale `+1` fill bytes in its first pass; `MaquinaProjeteis.calcular` now matches that store trace. Run:
+
+```bash
+python3 -B pesquisas-paralelas/combate/capturar_quadro_m1.py
+RISING_EMULAR=1 python3 -B -m unittest discover -s pesquisas-paralelas/combate -p test_quadro_m1.py
+```
+
+M2.1 round 2 revalidates those calls at the exact frame-0 and frame-1 inputs of Missions' first-frame path. It uses isolated native calls, `captura-isolada-combate-quadro1.json`. Frame 0 (the load-state pass) reaches `ProjectileCalcul` (the 100 `+1` clears), `EnginTrouveCible` for unit 0 (no target) and 7 `PlayerEstAllie` calls. Frame 1 reaches only an empty projectile pass. `PlayerEstAllie 0x46d838` is `alvos_alcance.aliados(AL origin, DL target, masks)`, where `masks[p]` is byte `[[0x5080a8] + 20·p + 6]`. Its native register contract (ECX preserved, DL = `1 << target` on the in-range path) is in `test_quadro1_combate.py`.
+
+M2.3 preparation locates MONDE01's first scripted raid statically. `AvanceMonstre 0x47b283`'s EntrerMonstre record 0 (cell `0x3f3f`, group 0, period 9000) fires at counter 9000 and calls `ConstruitGroupeMonstre`. A forced-counter native capture (`captura-incursao-m2-3-original.json`) shows that the raid frame's Combat calls are only the spawn effect (`ProjectileInit` type 31/32) and the following projectile pass. Both match the existing Python (`test_incursao_m2_3.py`). The order is a posted AI task, so no attack or damage is reached in that frame. Details and cross-front contracts are in the combat handoff.
+
+M2.3 raid life (counters 9000–12000). Two forced-counter native runs follow the raid after spawn: [`capturar_vida_incursao_m2_3.py`](../pesquisas-paralelas/combate/capturar_vida_incursao_m2_3.py) isolates every Combat call of frames 9000–9100, and [`capturar_percurso_incursao_m2_3.py`](../pesquisas-paralelas/combate/capturar_percurso_incursao_m2_3.py) runs frames 9000–12000 without isolation.
+- Without player input the raid never fights. The group walks to its field target `0x2e03`. At 11101 its battle is deleted and it moves to ambush cell `0x320e`. The second raid (10800) walks to `0x3b22`.
+- Every `EnginTrouveCible` returns no target. `SetAttaqueEngin`, `CalculAttaqueEngin`, damage, death and destruction routines are never entered.
+- The Combat calls that are reached (projectile passes, target queries, `PlayerEstAllie`, attack reset/sympathy) match the existing Python on every isolated call (`test_vida_incursao_m2_3.py`), so nothing was translated. The providers other fronts owe for these frames are listed in the combat handoff.
+
+M2.3 readiness. [`M2_3_PRONTIDAO.md`](../pesquisas-paralelas/combate/M2_3_PRONTIDAO.md) maps all 215 routines of frames 0–9200 to an owner, a chained provider, the validating captures and the M2.3 exposure. Combat's providers are validated at the raid states they reach, now including `ProjectileSet` at the raid entry (`test_projectile_set_m2_3.py`). The open gaps belong to Core and AI-runtime: movement, the iaSolver battle kernels and the spawn wiring.

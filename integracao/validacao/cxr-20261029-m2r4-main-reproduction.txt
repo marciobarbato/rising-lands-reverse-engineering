@@ -1,0 +1,29 @@
+[lease] coordinator-m2r4-main waiting
+[lease] coordinator-m2r4-main granted
+### testes test*chamadas_quadro_core.py
+Ran 24 tests in 217.390s
+OK
+### testes test*fronteiras_io_crt.py
+Ran 6 tests in 0.054s
+OK
+### testes test_grade_u16.py
+Ran 7 tests in 0.670s
+OK
+### pesquisas-paralelas/economia/testes test_mercado_vivo.py
+Ran 5 tests in 0.000s
+OK
+### pesquisas-paralelas/economia/testes test_quadro*_economia.py
+ERROR: test_fresh_isolated_capture_equals_frozen (test_quadro1_economia.DiferencialQuadro1Economia)
+ERROR: test_fresh_isolated_display_capture_equals_frozen (test_quadro1_economia.DiferencialQuadro1Economia)
+ERROR: test_fresh_isolated_display_query_capture_equals_frozen (test_quadro1_economia.DiferencialQuadro1Economia)
+Ran 23 tests in 266.683s
+FAILED (errors=3)
+### pesquisas-paralelas/graficos-animacao test_efeitos_logicos_exibicao.py
+Ran 4 tests in 0.002s
+OK
+### pesquisas-paralelas/ia-runtime/testes test_composicao_exibicao.py
+Ran 3 tests in 0.000s
+OK
+### pesquisas-paralelas/missoes/testes test_exibicao_missao.py
+Ran 5 tests in 0.163s
+OK

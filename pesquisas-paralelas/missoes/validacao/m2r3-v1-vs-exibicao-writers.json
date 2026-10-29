@@ -1,0 +1,9633 @@
+{
+ "schema": "rising-lands/monde01-v1-vs-display-writers/1",
+ "source_revision": "5baa450073c8abe1ece15849e1c1de1f33ed1248",
+ "translation_executed": false,
+ "captures": {
+  "v1": {
+   "path": "pesquisas-paralelas/missoes/evidencias/captura-quadro1-monde01-original.json",
+   "sha256": "c06f78ea2f611d668b4a2fc7bde712b07c21ed8eb0a929668d4d70e56d47fed8"
+  },
+  "exibicao": {
+   "path": "pesquisas-paralelas/missoes/evidencias/captura-quadro1-monde01-exibicao.json",
+   "sha256": "b7e55bb2e00672fa0941682eb797f6678bdf29ca5ed2e0dc25b3790665aaaad1"
+  }
+ },
+ "scenarios": {
+  "v1": {
+   "bytes": 377,
+   "phase_states_reproduced": {
+    "load_tail": true,
+    "between_frames": true,
+    "frame1": true
+   },
+   "writers": {
+    "0x496394": {},
+    "0x496395": {},
+    "0x496396": {},
+    "0x4963b5": {},
+    "0x49a018": {},
+    "0x49a019": {},
+    "0x49a01a": {},
+    "0x49a01b": {},
+    "0x49a01e": {
+     "load_tail": [
+      {
+       "writer": "SetClipping+0x14",
+       "writes": 1,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x49a01f": {
+     "load_tail": [
+      {
+       "writer": "SetClipping+0x14",
+       "writes": 1,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x49a022": {
+     "load_tail": [
+      {
+       "writer": "SetClipping+0x6",
+       "writes": 1,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x49a023": {
+     "load_tail": [
+      {
+       "writer": "SetClipping+0x6",
+       "writes": 1,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x49a02e": {},
+    "0x49a02f": {},
+    "0x49a032": {},
+    "0x49a033": {},
+    "0x49a039": {},
+    "0x49a03a": {},
+    "0x49a03b": {},
+    "0x49a03d": {},
+    "0x49a03e": {},
+    "0x49a03f": {},
+    "0x49a042": {},
+    "0x49a043": {},
+    "0x49a044": {},
+    "0x49a045": {},
+    "0x49a04e": {},
+    "0x4e1789": {},
+    "0x4e178a": {},
+    "0x4e178b": {},
+    "0x4e178c": {},
+    "0x4e178d": {},
+    "0x4e178e": {},
+    "0x4e178f": {},
+    "0x4e1790": {},
+    "0x4e1791": {},
+    "0x4e1792": {},
+    "0x4e1793": {},
+    "0x4e179c": {},
+    "0x4e179d": {},
+    "0x4e179e": {},
+    "0x4e179f": {},
+    "0x4e17a0": {},
+    "0x4e17a1": {},
+    "0x4e17b0": {},
+    "0x4e17b1": {},
+    "0x4e17b2": {},
+    "0x4e17b4": {},
+    "0x4e17b5": {},
+    "0x4e17b6": {},
+    "0x4e1d18": {
+     "startup": [
+      {
+       "writer": "InitRand+0x1c",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "InitRand+0x4b",
+       "writes": 256,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MenuInit+0x1f7",
+       "writes": 1,
+       "last_value": "0x1"
+      },
+      {
+       "writer": "CalculGame+0xaba",
+       "writes": 1,
+       "last_value": "0x2"
+      }
+     ],
+     "frame1": [
+      {
+       "writer": "CalculGame+0xaba",
+       "writes": 1,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x4e2f3c": {
+     "startup": [
+      {
+       "writer": "MemInit+0x65",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "MemAlloc+0xd",
+       "writes": 877,
+       "last_value": "0x4b"
+      }
+     ]
+    },
+    "0x4e2f3d": {
+     "startup": [
+      {
+       "writer": "MemInit+0x65",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "MemAlloc+0xd",
+       "writes": 877,
+       "last_value": "0xc3"
+      }
+     ]
+    },
+    "0x4e2f3e": {
+     "startup": [
+      {
+       "writer": "MemInit+0x65",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "MemAlloc+0xd",
+       "writes": 877,
+       "last_value": "0x1e"
+      }
+     ]
+    },
+    "0x4e2f3f": {
+     "startup": [
+      {
+       "writer": "MemInit+0x65",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "MemAlloc+0xd",
+       "writes": 877,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x508720": {
+     "oracle": [
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "ScrollTerrain+0x1e",
+       "writes": 2,
+       "last_value": "0x3"
+      }
+     ],
+     "frame1": [
+      {
+       "writer": "ScrollTerrain+0x1e",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x508722": {
+     "oracle": [
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "ScrollTerrain+0x2f",
+       "writes": 2,
+       "last_value": "0x5"
+      }
+     ],
+     "frame1": [
+      {
+       "writer": "ScrollTerrain+0x2f",
+       "writes": 2,
+       "last_value": "0x4"
+      }
+     ]
+    },
+    "0x508724": {},
+    "0x508726": {},
+    "0x508f5d": {
+     "startup": [
+      {
+       "writer": "ProgInit+0x2ba",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x508f5e": {
+     "startup": [
+      {
+       "writer": "ProgInit+0x2ba",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x508f5f": {
+     "startup": [
+      {
+       "writer": "ProgInit+0x2ba",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x508f65": {
+     "startup": [
+      {
+       "writer": "MenuInit+0x345",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x508f66": {
+     "startup": [
+      {
+       "writer": "MenuInit+0x345",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x508f67": {
+     "startup": [
+      {
+       "writer": "MenuInit+0x345",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x508f6e": {},
+    "0x508f6f": {},
+    "0x508f72": {
+     "startup": [
+      {
+       "writer": "ProgInit+0x23d",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "MenuInit+0xcb",
+       "writes": 3,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "RestoreAll+0x59",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "RestoreAll+0xa0",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "MenuInit+0xcb",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x508f73": {
+     "startup": [
+      {
+       "writer": "ProgInit+0x23d",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "MenuInit+0xcb",
+       "writes": 3,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "RestoreAll+0x59",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "RestoreAll+0xa0",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "MenuInit+0xcb",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x508f7c": {
+     "load_tail": [
+      {
+       "writer": "CalculGame+0xa56",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "ProgIteration+0x6",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x508f80": {
+     "load_tail": [
+      {
+       "writer": "CalculGame+0xa5c",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x508f84": {
+     "load_tail": [
+      {
+       "writer": "CalculGame+0xa62",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x5099a8": {
+     "startup": [
+      {
+       "writer": "MouseInit+0x24",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "ProgIteration+0x40",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x5099a9": {
+     "startup": [
+      {
+       "writer": "MouseInit+0x24",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "ProgIteration+0x40",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x5099aa": {
+     "startup": [
+      {
+       "writer": "MouseInit+0x33",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "ProgIteration+0x4a",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x5099ab": {
+     "startup": [
+      {
+       "writer": "MouseInit+0x33",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "ProgIteration+0x4a",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x5099ac": {
+     "startup": [
+      {
+       "writer": "CalculGame+0x8a9",
+       "writes": 2,
+       "last_value": "0x4"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "InputGame+0x153",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ],
+     "frame1": [
+      {
+       "writer": "InputGame+0x153",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x5099dc": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 3,
+       "last_value": "0x43"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0xfd"
+      }
+     ]
+    },
+    "0x5099dd": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 3,
+       "last_value": "0x2"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x5099e4": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x6c"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0xfe"
+      }
+     ]
+    },
+    "0x5099e5": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x5099ec": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0xb3"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x5099ed": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x5099f4": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0xfe"
+      }
+     ]
+    },
+    "0x5099f5": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x5099fc": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x5099fd": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x509a00": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x1"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0xfd"
+      }
+     ]
+    },
+    "0x509a01": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x509a04": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x22"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0xfe"
+      }
+     ]
+    },
+    "0x509a05": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x1"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x509a08": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0xfe"
+      }
+     ]
+    },
+    "0x509a09": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x509a0c": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x4e"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x509a0d": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x1"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x509a10": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x1c"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x509a11": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x509a18": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 1,
+       "last_value": "0xa2"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0xfe"
+      }
+     ]
+    },
+    "0x509a19": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x509a1c": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 1,
+       "last_value": "0x21"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0xfd"
+      }
+     ]
+    },
+    "0x509a1d": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x509a20": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 1,
+       "last_value": "0xb6"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x509a21": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x509a28": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 1,
+       "last_value": "0xa2"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0xfe"
+      }
+     ]
+    },
+    "0x509a29": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x509a30": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 1,
+       "last_value": "0xb6"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x509a31": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x509a40": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 1,
+       "last_value": "0x57"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0xfd"
+      }
+     ]
+    },
+    "0x509a41": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0xff"
+      }
+     ]
+    },
+    "0x509a68": {
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x509a69": {
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x509a6c": {
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x509a6d": {
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x509a70": {
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x509a71": {
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x340000c": {
+     "startup": [
+      {
+       "writer": "__InitThreadData+0x27",
+       "writes": 1,
+       "last_value": "0x1"
+      },
+      {
+       "writer": "rand+0x16",
+       "writes": 256,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x340000d": {
+     "startup": [
+      {
+       "writer": "__InitThreadData+0x27",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "rand+0x16",
+       "writes": 256,
+       "last_value": "0xd7"
+      }
+     ]
+    },
+    "0x340000e": {
+     "startup": [
+      {
+       "writer": "__InitThreadData+0x27",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "rand+0x16",
+       "writes": 256,
+       "last_value": "0x5e"
+      }
+     ]
+    },
+    "0x340000f": {
+     "startup": [
+      {
+       "writer": "__InitThreadData+0x27",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "rand+0x16",
+       "writes": 256,
+       "last_value": "0xdd"
+      }
+     ]
+    },
+    "0x41401009": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 2,
+       "last_value": "0x44"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4140100c": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 2,
+       "last_value": "0x60"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4140100f": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 1,
+       "last_value": "0x2c"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x41401010": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xb0",
+       "writes": 1,
+       "last_value": "0x50"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x41401011": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xbd",
+       "writes": 1,
+       "last_value": "0x68"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x41401012": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 1,
+       "last_value": "0x30"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x41401013": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xb0",
+       "writes": 1,
+       "last_value": "0x54"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x41401014": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xbd",
+       "writes": 1,
+       "last_value": "0x5c"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x41401015": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 1,
+       "last_value": "0x54"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x41401016": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xb0",
+       "writes": 1,
+       "last_value": "0x5c"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x41401017": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xbd",
+       "writes": 2,
+       "last_value": "0x54"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x41401018": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 2,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4140101a": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xbd",
+       "writes": 1,
+       "last_value": "0x74"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4140101e": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 1,
+       "last_value": "0x4"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4140101f": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xb0",
+       "writes": 1,
+       "last_value": "0x44"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x41401020": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xbd",
+       "writes": 1,
+       "last_value": "0x70"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x41401021": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 2,
+       "last_value": "0xc"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x41401024": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 2,
+       "last_value": "0x10"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x41401026": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xbd",
+       "writes": 1,
+       "last_value": "0x6c"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x41401027": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 2,
+       "last_value": "0x14"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4140102a": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 2,
+       "last_value": "0x1c"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4140102b": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xb0",
+       "writes": 2,
+       "last_value": "0x48"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4140102d": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 1,
+       "last_value": "0x20"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4140102e": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xb0",
+       "writes": 1,
+       "last_value": "0x4c"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4140102f": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xbd",
+       "writes": 1,
+       "last_value": "0x68"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4140c000": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c001": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c002": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c004": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c005": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c006": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c008": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c009": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c00a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c00c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c00d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c00e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c010": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c011": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c012": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c014": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c015": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c016": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c018": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c019": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c01a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c01c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c01d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c01e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c01f": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c020": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c021": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c022": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c024": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c025": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c026": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c028": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c029": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c02a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c02c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c02d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c02e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c030": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c031": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c032": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c034": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c035": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c036": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c038": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c039": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c03a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c03c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c03e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c040": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c042": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c043": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c044": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c045": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c046": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c048": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c049": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c04a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c04c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c04d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c04e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c050": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c051": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c052": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c054": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c055": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c056": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c058": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c05a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c05c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c05e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c05f": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c060": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c062": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c064": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c065": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c066": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c068": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c069": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c06a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c06c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c06d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c06e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c070": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c071": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c072": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c074": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c076": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c077": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c078": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c079": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c07a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c07c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c07d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c07e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c080": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c081": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c082": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c084": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c085": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c086": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c088": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c08a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c08b": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c08c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c08d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c08e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c090": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c091": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c092": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c094": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c095": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c096": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c098": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c099": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c09a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c09c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c09e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c09f": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0a0": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0a1": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0a2": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0a4": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0a5": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0a6": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0a8": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0a9": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0aa": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0ac": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0ad": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0ae": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0b0": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0b1": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0b2": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0b3": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0b4": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0b5": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0b6": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0b8": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0b9": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0ba": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0bc": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0bd": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0be": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0c0": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0c1": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0c2": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0c4": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0c6": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0c7": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0c8": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0c9": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0ca": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0cc": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0cd": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0ce": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0d0": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0d1": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0d2": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0d3": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0d4": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0d5": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0d6": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0d8": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0d9": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0da": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0dc": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0dd": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0de": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0df": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0e0": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0e1": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0e2": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0e4": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0e5": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0e6": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0e8": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0e9": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0ea": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0eb": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0ec": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0ed": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0ee": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0f0": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0f1": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0f2": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0f4": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0f5": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0f6": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0f7": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0f8": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0f9": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0fa": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0fc": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0fe": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c0ff": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c100": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c101": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c102": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c104": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c105": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c106": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c108": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c10a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c10c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c10d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c10e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c10f": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c110": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c111": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c112": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c114": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c116": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c118": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c119": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c11a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c11b": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c11c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c11d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c11e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c120": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c121": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c122": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c124": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c125": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c126": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c127": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c128": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c129": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c12a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c12c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c12d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c12e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140c12f": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    }
+   }
+  },
+  "exibicao": {
+   "bytes": 377,
+   "phase_states_reproduced": {
+    "load_tail": true,
+    "between_frames": true,
+    "frame1": true
+   },
+   "writers": {
+    "0x496394": {
+     "between_frames": [
+      {
+       "writer": "CalculFrame+0x5f",
+       "writes": 1,
+       "last_value": "0x30"
+      }
+     ]
+    },
+    "0x496395": {
+     "between_frames": [
+      {
+       "writer": "CalculFrame+0x72",
+       "writes": 1,
+       "last_value": "0x31"
+      }
+     ]
+    },
+    "0x496396": {
+     "between_frames": [
+      {
+       "writer": "CalculFrame+0x78",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4963b5": {
+     "between_frames": [
+      {
+       "writer": "utoa+0x39",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x49a018": {
+     "startup": [
+      {
+       "writer": "DDInit+0x1d",
+       "writes": 1,
+       "last_value": "0x20"
+      }
+     ]
+    },
+    "0x49a019": {
+     "startup": [
+      {
+       "writer": "DDInit+0x1d",
+       "writes": 1,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x49a01a": {
+     "startup": [
+      {
+       "writer": "DDInit+0x24",
+       "writes": 1,
+       "last_value": "0x58"
+      }
+     ]
+    },
+    "0x49a01b": {
+     "startup": [
+      {
+       "writer": "DDInit+0x24",
+       "writes": 1,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x49a01e": {
+     "startup": [
+      {
+       "writer": "SetClipping+0x14",
+       "writes": 1,
+       "last_value": "0xe6"
+      },
+      {
+       "writer": "RestaureClipping+0x2a",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "SetClipping+0x14",
+       "writes": 1,
+       "last_value": "0x1f"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "RestaureClipping+0x2a",
+       "writes": 509,
+       "last_value": "0x1f"
+      }
+     ]
+    },
+    "0x49a01f": {
+     "startup": [
+      {
+       "writer": "SetClipping+0x14",
+       "writes": 1,
+       "last_value": "0x1"
+      },
+      {
+       "writer": "RestaureClipping+0x2a",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "SetClipping+0x14",
+       "writes": 1,
+       "last_value": "0x2"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "RestaureClipping+0x2a",
+       "writes": 509,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x49a022": {
+     "startup": [
+      {
+       "writer": "SetClipping+0x6",
+       "writes": 1,
+       "last_value": "0x36"
+      },
+      {
+       "writer": "RestaureClipping+0x12",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "SetClipping+0x6",
+       "writes": 1,
+       "last_value": "0x1f"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "RestaureClipping+0x12",
+       "writes": 509,
+       "last_value": "0x1f"
+      }
+     ]
+    },
+    "0x49a023": {
+     "startup": [
+      {
+       "writer": "SetClipping+0x6",
+       "writes": 1,
+       "last_value": "0x1"
+      },
+      {
+       "writer": "RestaureClipping+0x12",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "SetClipping+0x6",
+       "writes": 1,
+       "last_value": "0x3"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "RestaureClipping+0x12",
+       "writes": 509,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x49a02e": {
+     "startup": [
+      {
+       "writer": "SaveCurrentClipping+0x12",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "SaveCurrentClipping+0x12",
+       "writes": 509,
+       "last_value": "0x1f"
+      }
+     ]
+    },
+    "0x49a02f": {
+     "startup": [
+      {
+       "writer": "SaveCurrentClipping+0x12",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "SaveCurrentClipping+0x12",
+       "writes": 509,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x49a032": {
+     "startup": [
+      {
+       "writer": "SaveCurrentClipping+0x2a",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "SaveCurrentClipping+0x2a",
+       "writes": 509,
+       "last_value": "0x1f"
+      }
+     ]
+    },
+    "0x49a033": {
+     "startup": [
+      {
+       "writer": "SaveCurrentClipping+0x2a",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "SaveCurrentClipping+0x2a",
+       "writes": 509,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x49a039": {
+     "startup": [
+      {
+       "writer": "AffInit+0xe",
+       "writes": 1,
+       "last_value": "0xc0"
+      }
+     ]
+    },
+    "0x49a03a": {
+     "startup": [
+      {
+       "writer": "AffInit+0xe",
+       "writes": 1,
+       "last_value": "0x40"
+      }
+     ]
+    },
+    "0x49a03b": {
+     "startup": [
+      {
+       "writer": "AffInit+0xe",
+       "writes": 1,
+       "last_value": "0x41"
+      }
+     ]
+    },
+    "0x49a03d": {
+     "startup": [
+      {
+       "writer": "AffInit+0x22",
+       "writes": 1,
+       "last_value": "0xd0"
+      }
+     ]
+    },
+    "0x49a03e": {
+     "startup": [
+      {
+       "writer": "AffInit+0x22",
+       "writes": 1,
+       "last_value": "0x40"
+      }
+     ]
+    },
+    "0x49a03f": {
+     "startup": [
+      {
+       "writer": "AffInit+0x22",
+       "writes": 1,
+       "last_value": "0x41"
+      }
+     ]
+    },
+    "0x49a042": {
+     "between_frames": [
+      {
+       "writer": "AffGame+0x60e",
+       "writes": 1,
+       "last_value": "0x90"
+      }
+     ]
+    },
+    "0x49a043": {
+     "between_frames": [
+      {
+       "writer": "AffGame+0x60e",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x49a044": {
+     "between_frames": [
+      {
+       "writer": "AffGame+0x61a",
+       "writes": 1,
+       "last_value": "0x2c"
+      }
+     ]
+    },
+    "0x49a045": {
+     "between_frames": [
+      {
+       "writer": "AffGame+0x61a",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x49a04e": {
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x1ac",
+       "writes": 76,
+       "last_value": "0x4c"
+      }
+     ]
+    },
+    "0x4e1789": {
+     "startup": [
+      {
+       "writer": "binding DDRAW.DirectDrawCreate",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4e178a": {
+     "startup": [
+      {
+       "writer": "binding DDRAW.DirectDrawCreate",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4e178b": {
+     "startup": [
+      {
+       "writer": "binding DDRAW.DirectDrawCreate",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4e178c": {
+     "startup": [
+      {
+       "writer": "binding IDirectDraw::CreateSurface",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4e178d": {
+     "startup": [
+      {
+       "writer": "binding IDirectDraw::CreateSurface",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4e178e": {
+     "startup": [
+      {
+       "writer": "binding IDirectDraw::CreateSurface",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4e178f": {
+     "startup": [
+      {
+       "writer": "binding IDirectDraw::CreateSurface",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4e1790": {
+     "startup": [
+      {
+       "writer": "binding IDirectDraw::CreateSurface",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4e1791": {
+     "startup": [
+      {
+       "writer": "binding IDirectDraw::CreateSurface",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4e1792": {
+     "startup": [
+      {
+       "writer": "binding IDirectDraw::CreateSurface",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4e1793": {
+     "startup": [
+      {
+       "writer": "binding IDirectDraw::CreateSurface",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4e179c": {
+     "startup": [
+      {
+       "writer": "DDInit+0x16d",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "binding IDirectDraw::CreatePalette",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4e179d": {
+     "startup": [
+      {
+       "writer": "DDInit+0x16d",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "binding IDirectDraw::CreatePalette",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4e179e": {
+     "startup": [
+      {
+       "writer": "DDInit+0x16d",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "binding IDirectDraw::CreatePalette",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4e179f": {
+     "startup": [
+      {
+       "writer": "DDInit+0x16d",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "binding IDirectDraw::CreatePalette",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ]
+    },
+    "0x4e17a0": {
+     "startup": [
+      {
+       "writer": "DDInit+0x81",
+       "writes": 1,
+       "last_value": "0x20"
+      },
+      {
+       "writer": "DDLockSurface+0x6c",
+       "writes": 7,
+       "last_value": "0x20"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "DDLockSurface+0x6c",
+       "writes": 3,
+       "last_value": "0x20"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "DDLockSurface+0x6c",
+       "writes": 1,
+       "last_value": "0x20"
+      }
+     ]
+    },
+    "0x4e17a1": {
+     "startup": [
+      {
+       "writer": "DDInit+0x81",
+       "writes": 1,
+       "last_value": "0x3"
+      },
+      {
+       "writer": "DDLockSurface+0x6c",
+       "writes": 7,
+       "last_value": "0x3"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "DDLockSurface+0x6c",
+       "writes": 3,
+       "last_value": "0x3"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "DDLockSurface+0x6c",
+       "writes": 1,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x4e17b0": {
+     "between_frames": [
+      {
+       "writer": "CalculFrame+0x28",
+       "writes": 1,
+       "last_value": "0x7e"
+      }
+     ]
+    },
+    "0x4e17b1": {
+     "between_frames": [
+      {
+       "writer": "CalculFrame+0x28",
+       "writes": 1,
+       "last_value": "0x34"
+      }
+     ]
+    },
+    "0x4e17b2": {
+     "between_frames": [
+      {
+       "writer": "CalculFrame+0x28",
+       "writes": 1,
+       "last_value": "0x12"
+      }
+     ]
+    },
+    "0x4e17b4": {
+     "between_frames": [
+      {
+       "writer": "CalculFrame+0x1b",
+       "writes": 1,
+       "last_value": "0x7e"
+      }
+     ]
+    },
+    "0x4e17b5": {
+     "between_frames": [
+      {
+       "writer": "CalculFrame+0x1b",
+       "writes": 1,
+       "last_value": "0x34"
+      }
+     ]
+    },
+    "0x4e17b6": {
+     "between_frames": [
+      {
+       "writer": "CalculFrame+0x1b",
+       "writes": 1,
+       "last_value": "0x12"
+      }
+     ]
+    },
+    "0x4e1d18": {
+     "startup": [
+      {
+       "writer": "InitRand+0x1c",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "InitRand+0x4b",
+       "writes": 256,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MenuInit+0x1f7",
+       "writes": 1,
+       "last_value": "0x1"
+      },
+      {
+       "writer": "CalculGame+0xaba",
+       "writes": 1,
+       "last_value": "0x2"
+      },
+      {
+       "writer": "NextAnimVeget+0x4e",
+       "writes": 2,
+       "last_value": "0x4"
+      }
+     ],
+     "frame1": [
+      {
+       "writer": "CalculGame+0xaba",
+       "writes": 1,
+       "last_value": "0x5"
+      }
+     ]
+    },
+    "0x4e2f3c": {
+     "startup": [
+      {
+       "writer": "MemInit+0x65",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "MemAlloc+0xd",
+       "writes": 25421,
+       "last_value": "0x72"
+      }
+     ]
+    },
+    "0x4e2f3d": {
+     "startup": [
+      {
+       "writer": "MemInit+0x65",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "MemAlloc+0xd",
+       "writes": 25421,
+       "last_value": "0x51"
+      }
+     ]
+    },
+    "0x4e2f3e": {
+     "startup": [
+      {
+       "writer": "MemInit+0x65",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "MemAlloc+0xd",
+       "writes": 25421,
+       "last_value": "0x7"
+      }
+     ]
+    },
+    "0x4e2f3f": {
+     "startup": [
+      {
+       "writer": "MemInit+0x65",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "MemAlloc+0xd",
+       "writes": 25421,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x508720": {
+     "oracle": [
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "frame1": [
+      {
+       "writer": "ScrollTerrain+0x1e",
+       "writes": 2,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x508722": {
+     "oracle": [
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "frame1": [
+      {
+       "writer": "ScrollTerrain+0x2f",
+       "writes": 2,
+       "last_value": "0x5"
+      }
+     ]
+    },
+    "0x508724": {
+     "startup": [
+      {
+       "writer": "DDInit+0x7b",
+       "writes": 2,
+       "last_value": "0x19"
+      }
+     ]
+    },
+    "0x508726": {
+     "startup": [
+      {
+       "writer": "DDInit+0x2a",
+       "writes": 1,
+       "last_value": "0x11"
+      }
+     ]
+    },
+    "0x508f5d": {
+     "startup": [
+      {
+       "writer": "ProgInit+0x2ba",
+       "writes": 1,
+       "last_value": "0xf0"
+      }
+     ]
+    },
+    "0x508f5e": {
+     "startup": [
+      {
+       "writer": "ProgInit+0x2ba",
+       "writes": 1,
+       "last_value": "0x40"
+      }
+     ]
+    },
+    "0x508f5f": {
+     "startup": [
+      {
+       "writer": "ProgInit+0x2ba",
+       "writes": 1,
+       "last_value": "0x41"
+      }
+     ]
+    },
+    "0x508f65": {
+     "startup": [
+      {
+       "writer": "MenuInit+0x345",
+       "writes": 1,
+       "last_value": "0x60"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MenuInit+0xf8",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x508f66": {
+     "startup": [
+      {
+       "writer": "MenuInit+0x345",
+       "writes": 1,
+       "last_value": "0xac"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MenuInit+0xf8",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x508f67": {
+     "startup": [
+      {
+       "writer": "MenuInit+0x345",
+       "writes": 1,
+       "last_value": "0x47"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MenuInit+0xf8",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x508f6e": {
+     "startup": [
+      {
+       "writer": "SetBank+0x3",
+       "writes": 7,
+       "last_value": "0x41"
+      }
+     ]
+    },
+    "0x508f6f": {
+     "startup": [
+      {
+       "writer": "SetBank+0x3",
+       "writes": 7,
+       "last_value": "0x41"
+      }
+     ]
+    },
+    "0x508f72": {
+     "startup": [
+      {
+       "writer": "ProgInit+0x23d",
+       "writes": 1,
+       "last_value": "0x8"
+      },
+      {
+       "writer": "MenuInit+0xcb",
+       "writes": 1,
+       "last_value": "0x8"
+      },
+      {
+       "writer": "AffGame+0x46",
+       "writes": 1,
+       "last_value": "0x8"
+      },
+      {
+       "writer": "MenuInit+0xcb",
+       "writes": 1,
+       "last_value": "0x8"
+      },
+      {
+       "writer": "AffGame+0x46",
+       "writes": 1,
+       "last_value": "0x8"
+      },
+      {
+       "writer": "MenuInit+0xcb",
+       "writes": 1,
+       "last_value": "0x8"
+      },
+      {
+       "writer": "AffGame+0x18e",
+       "writes": 1,
+       "last_value": "0x8"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "RestoreAll+0x59",
+       "writes": 1,
+       "last_value": "0x8"
+      },
+      {
+       "writer": "RestoreAll+0xa0",
+       "writes": 1,
+       "last_value": "0x8"
+      },
+      {
+       "writer": "MenuInit+0xcb",
+       "writes": 1,
+       "last_value": "0x8"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "AffGame+0x33c",
+       "writes": 1,
+       "last_value": "0x8"
+      }
+     ]
+    },
+    "0x508f73": {
+     "startup": [
+      {
+       "writer": "ProgInit+0x23d",
+       "writes": 1,
+       "last_value": "0x60"
+      },
+      {
+       "writer": "MenuInit+0xcb",
+       "writes": 1,
+       "last_value": "0x60"
+      },
+      {
+       "writer": "AffGame+0x46",
+       "writes": 1,
+       "last_value": "0x60"
+      },
+      {
+       "writer": "MenuInit+0xcb",
+       "writes": 1,
+       "last_value": "0x60"
+      },
+      {
+       "writer": "AffGame+0x46",
+       "writes": 1,
+       "last_value": "0x60"
+      },
+      {
+       "writer": "MenuInit+0xcb",
+       "writes": 1,
+       "last_value": "0x60"
+      },
+      {
+       "writer": "AffGame+0x18e",
+       "writes": 1,
+       "last_value": "0x60"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "RestoreAll+0x59",
+       "writes": 1,
+       "last_value": "0x60"
+      },
+      {
+       "writer": "RestoreAll+0xa0",
+       "writes": 1,
+       "last_value": "0x60"
+      },
+      {
+       "writer": "MenuInit+0xcb",
+       "writes": 1,
+       "last_value": "0x60"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "AffGame+0x33c",
+       "writes": 1,
+       "last_value": "0x60"
+      }
+     ]
+    },
+    "0x508f7c": {
+     "startup": [
+      {
+       "writer": "ProgIteration+0x6",
+       "writes": 5,
+       "last_value": "0x5"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "CalculGame+0xa56",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "ProgIteration+0x6",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x508f80": {
+     "startup": [
+      {
+       "writer": "ProgIteration+0x15",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "CalculGame+0xa5c",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x508f84": {
+     "startup": [
+      {
+       "writer": "ProgIteration+0x2d",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "CalculGame+0xa62",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x5099a8": {
+     "startup": [
+      {
+       "writer": "ProgIteration+0x40",
+       "writes": 5,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "MouseInit+0x24",
+       "writes": 1,
+       "last_value": "0x90"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "ProgIteration+0x40",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x5099a9": {
+     "startup": [
+      {
+       "writer": "ProgIteration+0x40",
+       "writes": 5,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "MouseInit+0x24",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "ProgIteration+0x40",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x5099aa": {
+     "startup": [
+      {
+       "writer": "ProgIteration+0x4a",
+       "writes": 5,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "MouseInit+0x33",
+       "writes": 1,
+       "last_value": "0x2c"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "ProgIteration+0x4a",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x5099ab": {
+     "startup": [
+      {
+       "writer": "ProgIteration+0x4a",
+       "writes": 5,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "MouseInit+0x33",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "ProgIteration+0x4a",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x5099ac": {
+     "startup": [
+      {
+       "writer": "CalculGame+0x8a9",
+       "writes": 2,
+       "last_value": "0x4"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "InputGame+0x153",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "frame1": [
+      {
+       "writer": "InputGame+0x153",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x5099dc": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 3,
+       "last_value": "0x43"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x1d"
+      }
+     ]
+    },
+    "0x5099dd": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 3,
+       "last_value": "0x2"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x5099e4": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x6c"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x1e"
+      }
+     ]
+    },
+    "0x5099e5": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x5099ec": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0xb3"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x1f"
+      }
+     ]
+    },
+    "0x5099ed": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x5099f4": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x1e"
+      }
+     ]
+    },
+    "0x5099f5": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x5099fc": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x1f"
+      }
+     ]
+    },
+    "0x5099fd": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x509a00": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x1"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x55"
+      }
+     ]
+    },
+    "0x509a01": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x509a04": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x22"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x1e"
+      }
+     ]
+    },
+    "0x509a05": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x1"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x11",
+       "writes": 2,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x509a08": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0x56"
+      }
+     ]
+    },
+    "0x509a09": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x509a0c": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x4e"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x1f"
+      }
+     ]
+    },
+    "0x509a0d": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x1"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x509a10": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x1c"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x57"
+      }
+     ]
+    },
+    "0x509a11": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x509a18": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 1,
+       "last_value": "0xa2"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0x56"
+      }
+     ]
+    },
+    "0x509a19": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x509a1c": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 1,
+       "last_value": "0x21"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x1d"
+      }
+     ]
+    },
+    "0x509a1d": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x509a20": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 1,
+       "last_value": "0xb6"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x57"
+      }
+     ]
+    },
+    "0x509a21": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x509a28": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 1,
+       "last_value": "0xa2"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0x56"
+      }
+     ]
+    },
+    "0x509a29": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x509a30": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 1,
+       "last_value": "0xb6"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x57"
+      }
+     ]
+    },
+    "0x509a31": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x509a40": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 1,
+       "last_value": "0x57"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x55"
+      }
+     ]
+    },
+    "0x509a41": {
+     "startup": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x509a68": {
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0x20"
+      }
+     ]
+    },
+    "0x509a69": {
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x1c",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x509a6c": {
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x20"
+      }
+     ]
+    },
+    "0x509a6d": {
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x27",
+       "writes": 2,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x509a70": {
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x58"
+      }
+     ]
+    },
+    "0x509a71": {
+     "load_tail": [
+      {
+       "writer": "MouseSetZone+0x34",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x340000c": {
+     "startup": [
+      {
+       "writer": "__InitThreadData+0x27",
+       "writes": 1,
+       "last_value": "0x1"
+      },
+      {
+       "writer": "rand+0x16",
+       "writes": 256,
+       "last_value": "0x1"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "rand+0x16",
+       "writes": 425,
+       "last_value": "0x5e"
+      }
+     ],
+     "frame1": [
+      {
+       "writer": "rand+0x16",
+       "writes": 425,
+       "last_value": "0x97"
+      }
+     ]
+    },
+    "0x340000d": {
+     "startup": [
+      {
+       "writer": "__InitThreadData+0x27",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "rand+0x16",
+       "writes": 256,
+       "last_value": "0xd7"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "rand+0x16",
+       "writes": 425,
+       "last_value": "0x5d"
+      }
+     ],
+     "frame1": [
+      {
+       "writer": "rand+0x16",
+       "writes": 425,
+       "last_value": "0x39"
+      }
+     ]
+    },
+    "0x340000e": {
+     "startup": [
+      {
+       "writer": "__InitThreadData+0x27",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "rand+0x16",
+       "writes": 256,
+       "last_value": "0x5e"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "rand+0x16",
+       "writes": 425,
+       "last_value": "0xf7"
+      }
+     ],
+     "frame1": [
+      {
+       "writer": "rand+0x16",
+       "writes": 425,
+       "last_value": "0xb2"
+      }
+     ]
+    },
+    "0x340000f": {
+     "startup": [
+      {
+       "writer": "__InitThreadData+0x27",
+       "writes": 1,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "rand+0x16",
+       "writes": 256,
+       "last_value": "0xdd"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "rand+0x16",
+       "writes": 425,
+       "last_value": "0xde"
+      }
+     ],
+     "frame1": [
+      {
+       "writer": "rand+0x16",
+       "writes": 425,
+       "last_value": "0x90"
+      }
+     ]
+    },
+    "0x41401009": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 2,
+       "last_value": "0x44"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x14",
+       "writes": 2,
+       "last_value": "0x60"
+      }
+     ]
+    },
+    "0x4140100c": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 2,
+       "last_value": "0x60"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x54",
+       "writes": 2,
+       "last_value": "0x44"
+      }
+     ]
+    },
+    "0x4140100f": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 1,
+       "last_value": "0x2c"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x14",
+       "writes": 1,
+       "last_value": "0x30"
+      }
+     ]
+    },
+    "0x41401010": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xb0",
+       "writes": 1,
+       "last_value": "0x50"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x20",
+       "writes": 1,
+       "last_value": "0x54"
+      }
+     ]
+    },
+    "0x41401011": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xbd",
+       "writes": 1,
+       "last_value": "0x68"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x2f",
+       "writes": 1,
+       "last_value": "0x5c"
+      }
+     ]
+    },
+    "0x41401012": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 1,
+       "last_value": "0x30"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x14",
+       "writes": 1,
+       "last_value": "0x54"
+      }
+     ]
+    },
+    "0x41401013": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xb0",
+       "writes": 1,
+       "last_value": "0x54"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x20",
+       "writes": 1,
+       "last_value": "0x5c"
+      }
+     ]
+    },
+    "0x41401014": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xbd",
+       "writes": 1,
+       "last_value": "0x5c"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x2f",
+       "writes": 1,
+       "last_value": "0x54"
+      }
+     ]
+    },
+    "0x41401015": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 1,
+       "last_value": "0x54"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x54",
+       "writes": 1,
+       "last_value": "0x2c"
+      }
+     ]
+    },
+    "0x41401016": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xb0",
+       "writes": 1,
+       "last_value": "0x5c"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x60",
+       "writes": 1,
+       "last_value": "0x50"
+      }
+     ]
+    },
+    "0x41401017": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xbd",
+       "writes": 2,
+       "last_value": "0x54"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x70",
+       "writes": 2,
+       "last_value": "0x68"
+      }
+     ]
+    },
+    "0x41401018": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 2,
+       "last_value": "0x0"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x14",
+       "writes": 2,
+       "last_value": "0x4"
+      }
+     ]
+    },
+    "0x4140101a": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xbd",
+       "writes": 1,
+       "last_value": "0x74"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x2f",
+       "writes": 1,
+       "last_value": "0x70"
+      }
+     ]
+    },
+    "0x4140101e": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 1,
+       "last_value": "0x4"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x14",
+       "writes": 1,
+       "last_value": "0xc"
+      }
+     ]
+    },
+    "0x4140101f": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xb0",
+       "writes": 1,
+       "last_value": "0x44"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x20",
+       "writes": 1,
+       "last_value": "0x48"
+      }
+     ]
+    },
+    "0x41401020": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xbd",
+       "writes": 1,
+       "last_value": "0x70"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x2f",
+       "writes": 1,
+       "last_value": "0x6c"
+      }
+     ]
+    },
+    "0x41401021": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 2,
+       "last_value": "0xc"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x14",
+       "writes": 2,
+       "last_value": "0x10"
+      }
+     ]
+    },
+    "0x41401024": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 2,
+       "last_value": "0x10"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x14",
+       "writes": 2,
+       "last_value": "0x14"
+      }
+     ]
+    },
+    "0x41401026": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xbd",
+       "writes": 1,
+       "last_value": "0x6c"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x2f",
+       "writes": 1,
+       "last_value": "0x68"
+      }
+     ]
+    },
+    "0x41401027": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 2,
+       "last_value": "0x14"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x14",
+       "writes": 2,
+       "last_value": "0x1c"
+      }
+     ]
+    },
+    "0x4140102a": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 2,
+       "last_value": "0x1c"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x14",
+       "writes": 2,
+       "last_value": "0x20"
+      }
+     ]
+    },
+    "0x4140102b": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xb0",
+       "writes": 2,
+       "last_value": "0x48"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x20",
+       "writes": 2,
+       "last_value": "0x4c"
+      }
+     ]
+    },
+    "0x4140102d": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xac",
+       "writes": 1,
+       "last_value": "0x20"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x54",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ]
+    },
+    "0x4140102e": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xb0",
+       "writes": 1,
+       "last_value": "0x4c"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x60",
+       "writes": 1,
+       "last_value": "0x44"
+      }
+     ]
+    },
+    "0x4140102f": {
+     "startup": [
+      {
+       "writer": "LoadPalette+0xbd",
+       "writes": 1,
+       "last_value": "0x68"
+      },
+      {
+       "writer": "binding CRT.fread",
+       "writes": 1,
+       "last_value": "see binding log"
+      }
+     ],
+     "between_frames": [
+      {
+       "writer": "Cyclage+0x70",
+       "writes": 1,
+       "last_value": "0x74"
+      }
+     ]
+    },
+    "0x474a7000": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x91"
+      }
+     ]
+    },
+    "0x474a7001": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7002": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7004": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x92"
+      }
+     ]
+    },
+    "0x474a7005": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7006": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7008": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x93"
+      }
+     ]
+    },
+    "0x474a7009": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a700a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xc"
+      }
+     ]
+    },
+    "0x474a700c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x93"
+      }
+     ]
+    },
+    "0x474a700d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a700e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x6"
+      }
+     ]
+    },
+    "0x474a7010": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x94"
+      }
+     ]
+    },
+    "0x474a7011": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7012": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7014": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x8d"
+      }
+     ]
+    },
+    "0x474a7015": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7016": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7018": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x8e"
+      }
+     ]
+    },
+    "0x474a7019": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a701a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a701c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x8f"
+      }
+     ]
+    },
+    "0x474a701d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a701e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a701f": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 1,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a7020": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x99"
+      }
+     ]
+    },
+    "0x474a7021": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7022": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7024": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x9a"
+      }
+     ]
+    },
+    "0x474a7025": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7026": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7028": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x9b"
+      }
+     ]
+    },
+    "0x474a7029": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a702a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x8"
+      }
+     ]
+    },
+    "0x474a702c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x9b"
+      }
+     ]
+    },
+    "0x474a702d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a702e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a7030": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x9c"
+      }
+     ]
+    },
+    "0x474a7031": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7032": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7034": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x95"
+      }
+     ]
+    },
+    "0x474a7035": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7036": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7038": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x96"
+      }
+     ]
+    },
+    "0x474a7039": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a703a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a703c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 2,
+       "last_value": "0x14"
+      }
+     ]
+    },
+    "0x474a703e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7040": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 2,
+       "last_value": "0x1e"
+      }
+     ]
+    },
+    "0x474a7042": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7043": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 1,
+       "last_value": "0x6"
+      }
+     ]
+    },
+    "0x474a7044": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x61"
+      }
+     ]
+    },
+    "0x474a7045": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7046": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7048": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x62"
+      }
+     ]
+    },
+    "0x474a7049": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a704a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xc"
+      }
+     ]
+    },
+    "0x474a704c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x64"
+      }
+     ]
+    },
+    "0x474a704d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a704e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x6"
+      }
+     ]
+    },
+    "0x474a7050": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x5d"
+      }
+     ]
+    },
+    "0x474a7051": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7052": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7054": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x5e"
+      }
+     ]
+    },
+    "0x474a7055": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7056": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7058": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 2,
+       "last_value": "0x12"
+      }
+     ]
+    },
+    "0x474a705a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a705c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 2,
+       "last_value": "0x17"
+      }
+     ]
+    },
+    "0x474a705e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a705f": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a7060": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 2,
+       "last_value": "0x18"
+      }
+     ]
+    },
+    "0x474a7062": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xc"
+      }
+     ]
+    },
+    "0x474a7064": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x6c"
+      }
+     ]
+    },
+    "0x474a7065": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7066": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a7068": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x65"
+      }
+     ]
+    },
+    "0x474a7069": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a706a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a706c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x66"
+      }
+     ]
+    },
+    "0x474a706d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a706e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7070": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x67"
+      }
+     ]
+    },
+    "0x474a7071": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7072": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7074": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 2,
+       "last_value": "0x16"
+      }
+     ]
+    },
+    "0x474a7076": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7077": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 1,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a7078": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x74"
+      }
+     ]
+    },
+    "0x474a7079": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a707a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a707c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x6d"
+      }
+     ]
+    },
+    "0x474a707d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a707e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7080": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x6e"
+      }
+     ]
+    },
+    "0x474a7081": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7082": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7084": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x6f"
+      }
+     ]
+    },
+    "0x474a7085": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7086": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7088": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 2,
+       "last_value": "0x12"
+      }
+     ]
+    },
+    "0x474a708a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a708b": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 1,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a708c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x75"
+      }
+     ]
+    },
+    "0x474a708d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a708e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x6"
+      }
+     ]
+    },
+    "0x474a7090": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x76"
+      }
+     ]
+    },
+    "0x474a7091": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7092": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7094": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x77"
+      }
+     ]
+    },
+    "0x474a7095": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7096": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7098": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x78"
+      }
+     ]
+    },
+    "0x474a7099": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a709a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a709c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 2,
+       "last_value": "0x12"
+      }
+     ]
+    },
+    "0x474a709e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a709f": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 1,
+       "last_value": "0x6"
+      }
+     ]
+    },
+    "0x474a70a0": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x7d"
+      }
+     ]
+    },
+    "0x474a70a1": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70a2": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a70a4": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x7e"
+      }
+     ]
+    },
+    "0x474a70a5": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70a6": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70a8": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x7f"
+      }
+     ]
+    },
+    "0x474a70a9": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70aa": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70ac": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x80"
+      }
+     ]
+    },
+    "0x474a70ad": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70ae": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70b0": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x81"
+      }
+     ]
+    },
+    "0x474a70b1": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70b2": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70b3": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 1,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a70b4": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x85"
+      }
+     ]
+    },
+    "0x474a70b5": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70b6": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x474a70b8": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x86"
+      }
+     ]
+    },
+    "0x474a70b9": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70ba": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70bc": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x87"
+      }
+     ]
+    },
+    "0x474a70bd": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70be": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70c0": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x88"
+      }
+     ]
+    },
+    "0x474a70c1": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70c2": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70c4": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 2,
+       "last_value": "0x14"
+      }
+     ]
+    },
+    "0x474a70c6": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70c7": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 1,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x474a70c8": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x94"
+      }
+     ]
+    },
+    "0x474a70c9": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70ca": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a70cc": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x8f"
+      }
+     ]
+    },
+    "0x474a70cd": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70ce": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70d0": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x90"
+      }
+     ]
+    },
+    "0x474a70d1": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70d2": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70d3": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 1,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a70d4": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x9c"
+      }
+     ]
+    },
+    "0x474a70d5": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70d6": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a70d8": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x97"
+      }
+     ]
+    },
+    "0x474a70d9": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70da": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70dc": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x98"
+      }
+     ]
+    },
+    "0x474a70dd": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70de": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70df": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 1,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a70e0": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x64"
+      }
+     ]
+    },
+    "0x474a70e1": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70e2": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x474a70e4": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x5f"
+      }
+     ]
+    },
+    "0x474a70e5": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70e6": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70e8": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x60"
+      }
+     ]
+    },
+    "0x474a70e9": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70ea": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70eb": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 1,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a70ec": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x6b"
+      }
+     ]
+    },
+    "0x474a70ed": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70ee": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a70f0": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x6c"
+      }
+     ]
+    },
+    "0x474a70f1": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70f2": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70f4": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x68"
+      }
+     ]
+    },
+    "0x474a70f5": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70f6": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70f7": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 1,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x474a70f8": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x74"
+      }
+     ]
+    },
+    "0x474a70f9": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a70fa": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x6"
+      }
+     ]
+    },
+    "0x474a70fc": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 2,
+       "last_value": "0x1c"
+      }
+     ]
+    },
+    "0x474a70fe": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a70ff": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 1,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a7100": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x7c"
+      }
+     ]
+    },
+    "0x474a7101": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7102": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a7104": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x75"
+      }
+     ]
+    },
+    "0x474a7105": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7106": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7108": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 2,
+       "last_value": "0x16"
+      }
+     ]
+    },
+    "0x474a710a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a710c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x37"
+      }
+     ]
+    },
+    "0x474a710d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a710e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a710f": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 1,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a7110": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x84"
+      }
+     ]
+    },
+    "0x474a7111": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7112": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x474a7114": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 2,
+       "last_value": "0x1e"
+      }
+     ]
+    },
+    "0x474a7116": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7118": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x3f"
+      }
+     ]
+    },
+    "0x474a7119": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a711a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a711b": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 1,
+       "last_value": "0x3"
+      }
+     ]
+    },
+    "0x474a711c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x8b"
+      }
+     ]
+    },
+    "0x474a711d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a711e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a7120": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x8c"
+      }
+     ]
+    },
+    "0x474a7121": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7122": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7124": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x46"
+      }
+     ]
+    },
+    "0x474a7125": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a7126": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a7127": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 1,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a7128": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x93"
+      }
+     ]
+    },
+    "0x474a7129": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a712a": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 2,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 2,
+       "last_value": "0x2"
+      }
+     ]
+    },
+    "0x474a712c": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x4e"
+      }
+     ]
+    },
+    "0x474a712d": {
+     "startup": [
+      {
+       "writer": "InitCache+0x11",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x156",
+       "writes": 1,
+       "last_value": "0x1"
+      }
+     ]
+    },
+    "0x474a712e": {
+     "startup": [
+      {
+       "writer": "InitCache+0x1d",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x171",
+       "writes": 1,
+       "last_value": "0xf"
+      }
+     ]
+    },
+    "0x474a712f": {
+     "startup": [
+      {
+       "writer": "InitCache+0x29",
+       "writes": 1,
+       "last_value": "0x0"
+      }
+     ],
+     "load_tail": [
+      {
+       "writer": "GetNumBob+0x182",
+       "writes": 1,
+       "last_value": "0x2"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "passed": true
+}

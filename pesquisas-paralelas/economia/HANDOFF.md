@@ -479,7 +479,7 @@ Delivered in `cauda_carga.py`; the full contract is in [ECONOMY.md](../../docs/E
 
 **API for missions' tail composition.**
 - `CaudaCargaEconomia(habitacao, ciclo_mercado, *, rede, jogadores_guardados)`:
-  - `habitacao` is the Stage 15 `HabitacaoConstrucoes`. Its economy world's `contagens_por_tipo` must be the same object as core's `mundo.realizaveis_estruturas` (`0x49a070`), and its `propriedade.ordens` is the `[0x4e19b8]` unit-order Bags (10,816 bytes).
+  - `habitacao` is the Stage 15 `HabitacaoConstrucoes`. Its economy world's `contagens_por_tipo` must be the same object as core's `mundo.realizaveis_estruturas` (`0x49a070`), and its `propriedade.ordens` holds the four per-owner `[0x4e19b8]` unit-order pools (2,704 bytes each, by identity; see Stage 19 below — the earlier single 10,816-byte buffer is now only the `ordens_contiguas` fixture form).
   - `ciclo_mercado` is a `CicloMercado` over the loaded market buffers and the live player table `Mercado.jogadores` (`[0x5080a8]`); it must share the `Economia`.
   - `rede` is the byte at `0x4e0730`.
   - `jogadores_guardados` is the 80-byte source table `[0x5080ac]`.
@@ -504,3 +504,336 @@ Delivered in `cauda_carga.py`; the full contract is in [ECONOMY.md](../../docs/E
 - `DemonteBatiment` refund query.
 - Natural production start (next sequence item 2) and the transport/work cycle (item 3).
 - Note for core: `0x49a070` holds per-owner, per-type counts of active structures (`BatimentInitCave`), not realizability flags. Only the name is misleading; no change is requested.
+
+## Stage 17 in progress: natural production start (not integrated)
+
+Authorized by the coordinator after Stage 16 was accepted. Only the original-byte inventory is done and committed: `capturar_producao_natural.py` and `evidencias/producao-natural.json`, with 10 intervals and 3 jump tables. Facts established from bytes:
+- **Starting production:** `InitRecruteTroupe 0x4283e2` is reached only from `ProcessInputGame 0x45f1a9` (player input) and `V_BatimentRecruteUnite 0x480749` (AI operation). Its only missing piece is `RechercheDecalageSortie 0x41d1d0`: core `CalculPosition`, then the radius-1 ring (cells 0..255) taking the first cell where `TerrainEnCollision(cell, 1)` is false (`(atributos[cell] & 1) != 0`), else the base cell.
+- **Dispatcher branch:** `0x426918` (structure types 1/2/13/16) is an inline copy of `BatimentEstHabiter`, then `CalculTroupe(AX)`. Entry contract: AI/runtime's (u16 index, return ignored).
+- **Empty-Bag cleanup after `0x42110c`, in order:**
+  1. `BatimentGetCase`.
+  2. Core `EteintTerrain 0x476e82(cell, R, owner)`, with R from table `0x420df4` (same mapping as `RAIOS`).
+  3. Deselection at `0x495be0`.
+  4. Owner byte `+4 = 200`.
+  5. Core `BatimentModifyMap 0x419e97(AX, 1)`.
+  6. Inline reset.
+  7. `iagUnitSendMessage(unit, 0x46)`, then `iagVilleSendMessage(building, 3)`.
+- **Structure-type table:** `BatimentLoadCaract 0x418c70` loads from INI only `+4`, `+0x0c`, `+0x0e` and the `NAME` at `+0x13` (`SANCTUAIRE`→`SANTUÁRIO`, `CAVE`→`ARMAZÉM`) and `[DIVERS]` globals. Production consumes the static `+0/+2/+0x12`.
+- **MONDE01 inputs:** player 0 has food 30 / stone 30. Type 5 costs 4 food with time 500. Every colonist's sound handle `+0x104` is `ffffffff`, so with camera 0 the first completed unit ends at the explicit pending-sound boundary.
+
+**Pending questions to core** (sent, no reply yet): a validated direct-call radius for `EteintTerrain`; a `BatimentModifyMap` provider; and whether economy may read `atributos & 1` for `TerrainEnCollision` inside `RechercheDecalageSortie`.
+
+**Next steps:**
+- Fixtures over MONDE01 post-load state, with declared synthetic selection, bonus, experience queue and viewport.
+- Native bench extending `BancadaProducaoLimpa` (entries `0x4283e2`, `0x41d1d0`, `0x4268d4`).
+- Original-only captures before translation.
+- `producao_natural.py` (`recherche_decalage_sortie`, `iniciar_recrutamento_no_mundo`, `ramo_producao_estrutura`, cleanup continuation gated on core).
+- Native comparisons, documentation, check and integration.
+
+## Stage 17 recovery audit and readiness (light wave)
+
+The new human request supersedes the former STOP. Coordinator is now `01a183e4-456e-77d0-9c6a-81b1c72ae887`; old `local_` Claude session identifiers remain historical. The resumed economy worktree/branch was clean at `3868ce5d6f3cfd82c577595e528d8e803fe81e19`, with two local commits ahead of its remote feature. The inventory commit is absent from observed fetched main `8810b3730a0fb788af3eac2b447dea65372f597f`. The helper resumed this exact checkout after inspection; no pending work/history, worktree or integration candidate was removed. Core currently holds the heavy slot; this wave performed only light static inspection and owned documentation.
+
+New `evidencias/producao-natural-auditoria-retomada.json` independently verifies original EXE/SBL/INI hashes, all 10 intervals (2,048 bytes /588 decoded instructions), 3 jump tables (65 entries), the structure-type table and all 5 predecessor identities. The audit compares fresh disassembly and complete listing coverage with original bytes. Every check passes. Prior manifests/listings/exporters are unchanged. Zero native entries, Ghidra sessions, domain checks or integrations ran in this audit. No Stage 17 independent native captures or new reconstructed game body exists yet.
+
+Corrections/precision to the predecessor's next-step wording:
+
+1. Recruitment initiation accepts eight types 1/2/5/13/15/16/18/20; the selected advancement branch handles four types 1/2/13/16. Do not automatically initiate requests from that advancement branch. The two direct CALL fragments are proved; absence of every possible indirect caller is not.
+2. Search is over global 0..255 coordinates, dy then dx, excluding the centre, with the raw 0x507da8 attribute mask 0x01. Use actual core CalculPosition with the runtime dimensions. Do not clip to playable map width/height or read the different 0x507d74 object pointer.
+3. At 0x41d24a a word local is written; at 0x41d2a6 a dword is read. Upper inherited stack bits can affect full EAX, while InitRecruteTroupe consumes AX at0x428640. Native captures must vary this seed and preserve original registers, with the consumed u16 cell distinguished from full EAX.
+4. Existing Stage 15 `celula_central_estrutura` and `estrutura_habitada` already supply the centre and predicate. No duplicate implementation is needed. Core's existing light removal needs fresh caller validation at radii8/10. `BatimentModifyMap` is in immutable pending Core commit a572e8c, not yet in the observed main; consume only after integration. Message0x46/town3 and sound insertion remain distinct owner dependencies.
+5. The 0x495be0 selection table must be shared by identity between recruitment and the physical world, alongside the earlier unit/structure/raw-terrain aliases. Tables, queues, viewport and inherited memory remain explicit. Existing MONDE01-derived fixtures contain declared synthetic inherited state and must not be described as a full post-load world.
+
+### Small original-only batch proposed before translation
+
+- **14 RechercheDecalageSortie entries:** one first-free case per eight eligible start types; blocked first candidate; all blocked fallback; global corners0/0 and255/255; a free candidate outside the smaller playable extent but inside the global grid; one alternate upper-stack seed paired with an initial case.
+- **4 InitRecruteTroupe scenarios:** accepted MONDE01-derived start; insufficient balances; already-active building; ineligible building type. The accepted case additionally performs one original BatimentNextEtape update using the same inherited buffers.
+- **6 dispatcher entries:** inhabited types1/2/13/16 and empty type1/type2. The complete original prologue/shared epilogue run, without simulating an internal native CALL or RET.
+- **4 empty cleanup fragments:** types1/2/13/16 through GetCase, actual EteintTerrain, deselection and owner200 stores, stopping before BatimentModifyMap at0x42114e. This does not claim later map/reset/messages.
+
+Total budget:28 scenarios /29 original entry calls before minimap resumptions. Original-only fixture construction must not invoke the future translated search/caller. Capture whole physical/economic/selection/queue/tables and guards, exact registers, ordered effects, dependency stop and per-segment counts. Cases are deterministic inherited inputs, not a claim of M1 runtime. No x86 run is scheduled until the coordinator grants it; no fabricated sound handle, no empty callback, no limit increase.
+
+### Current-stage completion after heavy grant
+
+Integrate the reviewed **inventory stage** before any game translation: run `python3 -B scripts/check.py --domain economy`; inspect the complete owned diff, commit the audit/docs; run `python3 scripts/workstream.py integrate economy` from the clean feature with the common lock; fetch/verify delivered, final feature and merge ancestry; replay the same read-only byte audit at committed main. Full integration gate is heavy and must be serialized by the coordinator. The proposed original-only batch is a separately scheduled next step before translation, not something already executed or proof needed to claim an inventory-only byte audit.
+
+Readiness: light audit complete, no heavy work running or slot held by economy. Waiting for coordinator scheduling. Natural production completion, transport/work, AI/audio and full mission behavior remain unsupported at their existing exact boundaries. No competing global estimate is introduced.
+
+## Light M1 IaReset dependency audit (no new implementation)
+
+Coordinator reassigned this light slot to concrete economy delegates for IaReset, with Core holding exclusive heavy work. Natural production/transport and the 28-scenario natural-production capture plan remain deferred. All earlier local Stage 17 inventory/audit work is preserved; no prior evidence was regenerated. The audit uses committed main e9f5dbd33972344e37db3a93be1aec9c115a88bf and AI feature-only inventory428f54cc075cb94ab0ffba5595dfed42f09f7d38, not another owner's live worktree. New `evidencias/contratos-economia-iareset-auditoria.json` records exact intact bytes and source hashes. Full contracts are in [ECONOMY.md](../../docs/ECONOMY.md#light-m1-audit-economy-delegates-required-by-iareset).
+
+Reusable genuine delegates:
+- `Mercado.tipo_jogador(player)`: AL u8; raw player byte +1 for0..3, returns2 for4..255; no stores. Preserve the neutral/context player4 behavior. Native caller consumes AL.
+- `Economia.consultar(player)`: player low u8 protected0..3; unsigned totals `(food,stone,parts,0)` (resource IDs1/2/0, record+2), not RMI/stock; no stores.
+- Existing committed combat bridge `ataque_vivo.batiment_get_player(structures,index)`: low u16 index0..999, raw flat pool byte+4, no state/owner filtering or stores. This already matches the requested consumed-AL owner query; do not duplicate it in AI. Upper EAX is not the bridge contract.
+
+Four minimal missing owner leaves:
+1. `RechercheGetNiveau`: AL player u8, DX branch u16; read unsigned byte `0x5080f4+16*player+branch`, return zero-extended AX. Proposed protected IaReset scope player0..3/branch0..3; no stores, EBX/EDX preserved. It is not a word field. Actual RET ends4717de; padding before4717e0 is not another executed instruction.
+2. `RechercheSetBranche`: AL player u8 protected0..3, DL byte value0..255; one store to `0x5080f8+16*player`, preserving all other64-byte research data and every other subsystem. Native result is player*16 in EAX; AI ignores it. Do not invent technology/bonus/progress effects.
+3. `BatimentExiste`: AX structure u16 protected0..999; state+5 !=0 returns EAX0/1. States3/4/5 are true; not habitation/destruction.
+4. `BatimentGetType`: AX structure u16 protected0..999; raw byte+8 returned in consumed AL, including unknown bytes. Existing transport type comparison is not a standalone getter. No stores/full-EAX normalization. All three structure queries preserve EDX and use the same276000-byte live world pool.
+
+Aliasing is mandatory. Constructors for Mercado/Economia copy their incoming arrays. Reuse mission-owned providers and directly map the actual Mercado.jogadores80-byte pointee and Economia.memoria128-byte inline region into AI memory; sharing bytes by value is insufficient. Mercado must use the same Economia object. MemoriaDeclarada keeps memoryviews over the actual supplied allocations. The new research provider must share an explicitly inherited64-byte0x5080f4..0x508134 range, not Aprendizagem spell flags or synthetic defaults. A branch store becomes visible immediately through that range, with no replay/copy-back. AI's `sitio` keyword is adapter tracing metadata; existing owner methods do not accept it.
+
+IaReset's actual type2 path first reads research at47f43f and writes branch at47f4ca; do not supply all-human controls to evade it. AI must preserve every earlier store when a genuine dependency is unresolved.
+
+Proposed bounded original-first work AFTER pending inventory integration:14 original-only scenarios /26 leaf entries (4 research reads,4 research writes,6 structure cases executing all3 getters). Then direct differentials over the protected research domain,4×256 setter bytes,state0/1/3/4/5/255, raw owner/type values, high register bits, guards and whole buffers, plus local bidirectional alias checks. AI owns a fresh actual-type2 IaReset adapter comparison; all missing callbacks remain exact stops until available. This is not a production binding, native comparison, integration or mission proof.
+
+Readiness: light audit/docs complete; zero x86/Ghidra/domain/common/integration checks and no heavy slot held. Pending gate before any implementation remains: review/commit existing owned inventory/audits, economy check, shared-lock integrate economy, fresh delivered/feature/merge ancestry and relevant main replay, scheduled by coordinator. No source/provider implementation was added or changed.
+
+### Reviewed local checkpoint ready for the inventory gate
+
+The preserved Stage 17 inventory and both additive light audits are ready for a local documentation/evidence checkpoint. No reconstructed Python behavior was changed. Domain/common/native checks and integration are explicitly pending the coordinator's heavy grant; committing this reviewed checkpoint is not a claim they passed.
+
+Ignored scratch is preserved at `.local/economia-iareset-primeiro-original/`: two draft fixture/oracle modules and a README. Only AST parsing and fixture input-shape construction ran (14 scenarios /26 planned calls, exact 64-byte and 276,000-byte input lengths). The emulator module was neither imported nor constructed. No capture output exists. These drafts remain outside tracked research until the inventory is integrated and the next original-first stage is scheduled/reviewed.
+
+Requested scheduling: reserve about 3–5 minutes for the economy domain gate, locked full-common integration, remote ancestry and committed-main byte replay (dependent on actual gate duration and remote races). A later exclusive original-only leaf capture window should need about 1–2 minutes including startup and evidence review; the leaf bodies contain no engine calls. Allow a separate light translation/review period and another roughly 3–5 minute narrow-validation/integration window after evidence is committed. These are planning estimates, not measured run times. No natural-production or transport implementation is included.
+
+### Ownership correction after coordinator review
+
+The preserved original-byte audit remains unchanged. The earlier phrase "four missing owner leaves" was a dependency list, not authority to implement all four in economy. The existing Stage 15 contract in this handoff (structure habitation) explicitly leaves `BatimentExiste` with **Missions**. Coordinator confirmed that Missions will expose its single validated reusable getter in Stage 11, based on original scan captures committed as `ed0172a`; wait for its integrated callable contract. Economy must not implement or duplicate it.
+
+The separate next economy stage therefore contains only **three new leaves**: `RechercheGetNiveau`, `RechercheSetBranche` and `BatimentGetType`. It reuses the committed combat `BatimentGetPlayer`, while AI consumes the Missions existence getter after publication. The ignored scratch was adjusted without running x86: its 14 scenarios now contain **20 original calls** (four research reads, four writes, six structure cases executing only GetPlayer/GetType). Original byte provenance for all five inspected functions stays frozen; there is no new or altered runtime behavior.
+
+This correction and the prior checkpoint remain subject to the pending economy domain/common integration gate. No capture, domain test, integration or new game implementation has run in this light slot. Coordination goes through the coordinator while the active executor slots are full; no idle AI executor is awakened for this correction.
+
+## Stage 17 inventory/audits integrated; Stage 18 original-only source
+
+Preserved inventory3868ce5 and recovery checkpoints1f82338/cbb0728 integrated with final feature `60653bee1a0eca99c0e1dfd8e16d4e6ed4d879b4` and main merge `2456848e57c1fbb63f3590023e424012c0916d3e`. Fresh fetch confirms every delivered checkpoint, feature and merge reachable from main. New committed-main static replay verifies10 inventory intervals/3 jump tables/5 callback bodies against the intact executable. Economy gate424/196 optional skips; locked common gate core401/186,combat246/149,economy424/196,graphics192/0,missions80/31,ai-runtime36/4,audio20/3,workflow8/0:1,407 discovered/569 optional skips. Feature/main pushes succeeded without force; no candidate/evidence was discarded.
+
+Only after that integration, the coordinator granted the short original-first three-leaf capture phase. `casos_consultas_reinicio_economia.py` and `capturar_consultas_reinicio_economia_original.py` promote the reviewed ignored draft. They contain inherited inputs and unpatched original harness calls only, not research/type translations. The source is committed BEFORE running its14 scenarios/20 calls. Calls are four RechercheGetNiveau, four RechercheSetBranche, six each of BatimentGetPlayer/GetType. Missions owns BatimentExiste, which is excluded. Inputs are exact64-byte research and276000-byte structure buffers with guards; all real RETs, registers, full buffer hashes, research bytes and actual world stores are captured. No engine result or callback is replaced. Output refuses overwrite and records the source commit and source hashes.
+
+This is an original-only capture stage in progress, not a query implementation or fresh differential result. Heavy grant ends immediately after successful immutable capture commitment and explicit release to Core; query translation is a later light task and its native/domain/integration requires a renewed grant. Natural production/transport remains deferred.
+
+## Stage 18 original-only leaf observations (before translation)
+
+Capture source was committed first as `ff02f8accddff16934155d5c65dd3bdd8814e42e`. The explicitly granted native command was `python3 -B pesquisas-paralelas/economia/capturar_consultas_reinicio_economia_original.py --output pesquisas-paralelas/economia/evidencias/captura-consultas-reinicio-economia-original.json`. Its immutable original-only output records14 scenarios/20 entries/20 bounded segments, all at real returns, with no native failure, limit or dependency substitution. No translated research/type body existed or executed. The capture SHA-256 is `367acf6ff363f5f490409960f0db562eac78d4886e3d977c14e101170a938af2`.
+
+Observed entries:4 RechercheGetNiveau,4 RechercheSetBranche,6 BatimentGetPlayer and6 BatimentGetType. Every input/output records complete registers, the64-byte research state, full276000-byte structure-pool hash, guard bytes and actual world stores. Exactly4 one-byte branch stores occur; query calls preserve every captured buffer. Source commit/hashes match the committed harness, fixture builder, core emulator and original audit. This proves these bounded original observations, not the future translation or whole M1 image. Research branches outside0..3, full u8/record matrices, game-side setters other than the single branch byte, raw state provenance for complete MissionLoad and whole IaReset production binding are not established here.
+
+Heavy inventory/capture window began17:55:45BRT; original work and verification finished17:59:45BRT (4 minutes before the capture commitment). Logs remain in `/private/tmp/rising-economy-inventory-domain-20261028.log`, `rising-economy-inventory-integration-20261028.log` and `rising-economy-consultas-original-20261028.log`. The next action after committing this evidence is explicit heavy RELEASE to Core; no further x86/domain/common/integration runs belong to this grant. Only the three leaf functions may be translated/replayed lightly afterward if time permits; their fresh native validation/integration requires a separate coordinator grant. No natural production or transport work is resumed.
+
+## Stage 18 light translation and targeted replay
+
+Only `consultas_reinicio_economia.{nivel_pesquisa,definir_ramo_pesquisa,tipo_estrutura}` was added after original evidence was committed. Public inputs are exact contiguous B/b research64/pool276000 views, without copies/defaults/cache. Level: AL player/DX branch protected0..3, unsigned byte at16*j+branch. Setter: AL player protected0..3, all DL values, sole byte store16*j+4, None result. Type: lowAX0..999, raw+8 byte without alive/owner/type filtering. Read-only getters are accepted; setter writability and every protected guard precede its sole store. Sliced arenas/signed-byte views retain live allocation identity. No BatimentExiste or GetPlayer body is duplicated.
+
+Targeted LIGHT command `python3 -B pesquisas-paralelas/economia/validar_consultas_reinicio_economia.py` passes8 discovered tests/1 optional native skip (7 executed):14 translated calls replay exact frozen values and full buffers/guards. Source provenance, high bits/domain guards, buffer layout and signed/read-only cases, exact single-byte write and bidirectional live observation pass. The dedicated fresh native method will execute only the same20 original calls; it has not run. A real benchmark counter is registered for any future explicit aggregate, without rerunning historical suites.
+
+Runtime body SHA-256 is recorded in `validacao-consultas-reinicio-economia-local.json`. Fresh native/domain/common/integration remain PENDING a separate coordinator grant, with Core17 first priority. No heavy operation occurred after release18:00:35BRT, no natural production/transport was resumed and no whole-M1/adapter success is claimed. The module/API contract was sent early to coordinator for relay without waking idle AI.
+
+### Stage 18 fresh focused validation (exclusive final lease)
+
+Coordinator renewed the exclusive lease after Core17 release. Actual start18:20:22BRT. Frozen implementation41817582430d327b20754bb768a28f559cc0e8ed was unchanged. `python3 -B pesquisas-paralelas/economia/validar_consultas_reinicio_economia.py --emular` passes8 tests without skips/failures/errors:20 fresh original entries/20 real returns match all frozen registers, world-store traces, research bytes, whole structure-pool hashes and guards. Fourteen translated leaf calls match the consumed original results and state; six GetPlayer observations remain the reused provider context. No broad matrix, substitution, native fault or limit occurred. The original-only capture hash is unchanged. Runtime body SHA remainsc81239ae0b7527c01242ef3f95b0c11cfa35cbae6333e7c0068ef6a67e1ec268.
+
+`python3 -B scripts/check.py --domain economy` passes432 discovered tests/197 declared optional skips and documentation links. New report `validacao-consultas-reinicio-economia-emulada.json` records only this fresh narrow run, separate from the prior original-only capture and Python replay. Logs: `/private/tmp/rising-economy-consultas-native-final-20261028.log` and `/private/tmp/rising-economy-consultas-domain-final-20261028.log`. No .py change was made in this lease. After reviewed result commitment, the required unchanged locked helper must integrate, then delivered/source/capture/feature/main ancestry and exact committed-main20-call reproduction must pass before release/handover. No new research is scheduled.
+
+## Stage 19: per-owner unit-order pools `[0x4e19b8]` (last known M1 blocker)
+
+**Why.** Missions Stage13 composes the whole MONDE01 `MissionLoad`. Its strict run stopped at `EnginInitTechnologie 0x441459` (MissionLoad call `0x46c5af`). The cause was Economy's memory contract: `PropriedadeConstrucoes.ordens` was one 10,816-byte buffer with a 2,704-byte owner stride. In the original, `[0x4e19b8]` points to a table of four owner pointers (MONDE01 table `0x41780000`). These point to four **separate page-aligned `GlobalAlloc` allocations of 2,704 bytes** (`0x41781000`, `0x41782000`, `0x41783000`, `0x41784000`) with gaps between them, and one contiguous buffer cannot alias them. Core already owns the four live pools as `MundoUnidades.bolsas_tipos_unidades`.
+
+**New contract** (full table in [ECONOMY.md](../../docs/ECONOMY.md#per-owner-unit-order-pools-0x4e19b8)):
+- `PropriedadeConstrucoes(mundo, *, ordens=<four pools>)` takes a list or tuple of four distinct, writable, non-overlapping 2,704-byte buffers (`bytearray`, or a writable 1-D contiguous byte `memoryview`) **by identity**. `propriedade.ordens` is a tuple of those same four objects. Owner *j*'s unit type *t* Bag is `ordens[j]` at `t*104`. `None` allocates four fresh zero pools.
+- `validar_ordens` runs before any effect and raises `ValueError` for: a wrong count, a non-sequence, a single 10,816-byte buffer, a short/long/read-only/strided/non-byte pool, a duplicate object or overlapping views.
+- Legacy/fixture form only: `ordens_contiguas(buffer10816)` gives four views of one buffer, and `juntar_ordens(ordens)` gives the owner-ordered bytes. The native benches (`bancada_proprietarios`, `bancada_aprendizagem`, `bancada_cauda_carga`) keep their captured contiguous layout exactly; only Python-side addressing changed.
+- Consumers revalidate before their first store and address `ordens[j]`: `CaudaCargaEconomia.__init__`/`definir_tecnologia_unidades`, `Aprendizagem.atualizar_ordens`/`inicializar_ordens`, and `PropriedadeConstrucoes.inicializar_neutro` (Bag 4). `casos_habitaveis.montar_habitacao(caso, *, ordens=None)` and `casos_cauda_carga.montar_cauda(caso, *, bolsas=None)` pass pools at construction; the old post-construction rebinding was removed. `pendencias` (`0x4dd6e8`, 9,152 contiguous DGROUP bytes) is unchanged.
+
+**Call for Missions** (a separate Missions step; Economy did not edit Missions files): in `ligacao_provedores_m1.py`, construct `PropriedadeConstrucoes(construcoes, ordens=w.bolsas_tipos_unidades)`. Then move `ordens` from the denied reasons to the permitted attributes of the `economy:PropriedadeConstrucoes` guard. The `PONTES['ordens']` copy bridge is then unnecessary. That bridge reads `vars(propriedade)['ordens']` as one buffer, so it no longer applies to the tuple form.
+
+**Tests added.** Identity: writes land in the caller's four buffers, including Core's `MundoUnidades` pools and views of one arena at page stride. Rejection before effects: 15 invalid shapes, with input bytes unchanged and no pinned buffer export. Rebinding a single buffer is rejected by the load-tail constructor and by `definir_tecnologia_unidades` before any store. Equivalence: the legacy contiguous form against four pools, for 64 library-loss cases and for three whole load tails (all hashes equal). Native: the new `test_engin_init_technologie_through_four_page_aligned_owner_allocations` enters the original `EnginInitTechnologie 0x441459` directly. The `[0x4e19b8]` table points to four page-aligned pools with filled gaps (stride `0x1000`, as in MONDE01), over four MONDE01 configurations and three random pools. Every pool byte matches Python's four separate `bytearray`s, the gaps and the old contiguous region stay untouched, and all other tail state is equal.
+
+**Validation** (exclusive lease; logs under `.local/ordens-por-jogador/`):
+- `validar_cauda_carga.py --emular`: 14 tests, 0 skips/failures/errors. **458 bounded executions**, i.e. the previous 451 unchanged plus 7 new direct `EnginInitTechnologie` entries, all at their declared checkpoints; 16 minimap resumptions, 0 faults/limits.
+- Native `DiferencialProprietarios`/`DiferencialAprendizagem`/`DiferencialInicioAprendizagem` (22 tests, 0 skips): 1,864 / 3,732 / 1,849 bounded executions, each **identical** to the committed aggregate report, with the same 16+16 expected exceptions and 32 dependency stops.
+- `validar_habitaveis.py --emular`: 20 tests, 1,967 executions; the report is byte-identical to the committed one.
+- `python3 -B scripts/check.py --domain economy`: 441 discovered tests, 198 optional skips, 0 failures/errors; documentation links pass (previously 432/197).
+
+**Missions after merging main `eb2f1c2` (Stage13), run read-only.** Reports and logs are under `.local/ordens-por-jogador/`. No Missions file was edited.
+- `validar_composicao_carga_missao.py --relatorio .local/...` with the committed (unadopted) Missions binding: the strict run is unchanged. It reproduces the 1,400 binding requests and stops at `EnginInitTechnologie 0x441459`/`0x46c5af` with `AtributoNaoMapeadoM1` on `ordens`, because Missions still denies the attribute. The diagnostic `PONTES['ordens']` run now stops there instead, with `TypeError: 'tuple' object does not support item assignment`: the copy bridge assumes the old single buffer.
+- Consequently, Missions' `test_composicao_carga_missao` has 1 failure and 1 error (`test_bridged_diagnostic_reaches_return_with_whole_state_equal`, `test_ia_reset_receives_stack_copy_and_controls`) until Missions adopts the contract. Its other 8 tests pass, including the strict-stop test.
+- Scratch preview, **not M1 evidence**: `.local/ordens-por-jogador/previa_adocao_missoes.py` loads an in-memory copy of `ligacao_provedores_m1.py` with exactly two edits. It passes `ordens=w.bolsas_tipos_unidades` and permits `ordens` in the guard. The **strict** run (no bridges) then reaches **AL=1** through `MarcheResetAll`, with the whole state equal: 881 blocks; 938/938 allocation records; 1,400/1,400 bindings; no changed excess bytes. `propriedade.ordens` is identical to Core's four pools.
+
+## Stage 20 (M2 slice 1): economy frame routines over the M1 state
+
+**Inventory first.** [M2_FRAME_INVENTORY.md](M2_FRAME_INVENTORY.md) is a static inventory of the economy calls in `CalculGame`'s in-game path (`0x42d3ff..0x42d46c`), the type-2 structure branch and the unit state-7 body. It gives intervals, hashes, ABI, globals and callees. Read against the frozen M1 post-load state, only `CalculMatiere` and the state-7 body change bytes in MONDE01's first frames. `RechercheCalcul` rewrites zeros. `PlayerInitAllianceCompteur`, `CalculCompteurMarche`/`Proposition`, `SetUpdateChamp`/`UpdateChamp` (until counter 128) and `PlayerAttaqueCalculSympa` (until counter 2000) are gated read-only. Structure 0 is inhabited (`BagContientTroupe` = 1 on unit 3, type 9), so `CalculTroupe(0)` is called each frame and returns inactive (progress `+0x8c` = 0, activity `+0x74` = 0). Production starts only from `InitRecruteTroupe` (human input or the AI's `V_BatimentRecruteUnite`), and player 0 is human. Work/transport/harvest/unload/market unit states need orders. None of these is reachable without input, so `CalculWorkEngin`/`CalculTransporteEngin` are not part of this slice.
+
+**API.** [`quadro_economia.py`](quadro_economia.py); full contract in [ECONOMY.md](../../docs/ECONOMY.md#m2-frame-routines-over-live-memory-stage-20). Each entry takes `m.vista(endereco, tamanho)` live views at original addresses and copies nothing:
+- `calcular_pesquisa`
+- `contar_aliancas`
+- `agendar_campos`/`atualizar_campos` (adapters that bind the validated `extracao.RecursosTerreno` scalars to their addresses)
+- `calcular_materia`
+- `calcular_contador_mercado(m, AL)`
+- `calcular_contador_proposicao(m, AL, EDX)`
+- `calcular_simpatia_ataques`
+- `ramo_producao_estrutura(producao, AX, calcular_tropa)`
+- `estado_parado_unidade(m, DI)`
+
+Calls the MONDE01 frames do not reach raise `DependenciaQuadro` at their original address after the earlier writes, unless an exact callback is supplied: `InventionSetEffet 0x470f98`, `InitGameZone 0x471830`, `MAJSympathie 0x475118`, `AnimBallonStatic 0x447b2f`, and market branches `0x466e01`/`0x466ed1`/`0x466fe1`. The order of mutations and callbacks follows the original. No guards are added, and out-of-table reads go through `m`.
+
+**Original-first evidence.** [`capturar_quadro_m2_original.py`](capturar_quadro_m2_original.py) maps the whole frozen M1 post-load state (881 blocks, SHA-256 `58a5020e…1a7a1114`) into the bounded bench. It enters the reached routines unpatched over the whole code section. Unreached callees are stops, never stubs. The x87 control word is the economy benches' `0x127f`, and the frame counter is a declared input. The capture is labelled "M1 post-load state; NOT a frame-1 input". It was committed (`017fa76`, `95ce831`) before any translation ran.
+- **v1 (`captura-quadro-m2-original.json`) is the preserved failed attempt.** It built the scenario addresses before loading the M1 memory, so its two state-7 override scenarios wrote to the bench's placeholder pool `0x1000000`. The fix is `c12e0d4`. The v2 file is identical to v1 except for those two scenarios, which now apply to pool `0x4140d000`: the type-17 unit stops at `AnimBallonStatic`, and facings vary.
+- v2: 52 scenarios, **6,692 native entries = 6,674 returns + 18 dependency stops**, 0 limits/faults. Two runs gave identical captures.
+
+**Python differential** ([test](testes/test_quadro_economia.py), [`validar_quadro_economia.py`](validar_quadro_economia.py)). Python runs the same sequences over its own copy of the M1 memory, with the existing providers bound by identity. All 6,692 calls match the outcome, the stop address and arguments, every natively written byte and every Python-accessed range. Every scenario's whole-state hash matches. Mutation checks (one wrong facing byte, a clamped thousands digit, a 1e-9 change of the research constant) are each caught at the exact byte. Local report: 6 tests, 1 optional native skip, 0 failures.
+
+**Native validation** (exclusive lease): `validar_quadro_economia.py --emular` ran 6 tests, 0 skips/failures/errors. It made a fresh original capture of **6,692 entries (6,674 returns, 18 dependency stops), equal to the frozen v2**, and the Python comparison above passed in the same run. The report is in `validacao-quadro-economia-emulada.json`.
+- `python3 -B scripts/check.py --domain economy` (under the lease): **447 tests, 199 optional skips, 0 failures/errors**, documentation links pass (previously 441/198). Log: `.local/economia-m2/check-economy.log`.
+
+**Gaps and contracts.**
+- **Frame-1 inputs.** These scenarios start from the M1 snapshot (`0x42d22d`), with the frame counter as a declared input (k at frame k, from `CalculGame 0x42d2be` zeroing and the `ProgIteration 0x475014` increment). Other fronts' frame routines are not run between economy calls. When Missions publishes the frame-1 capture and the per-routine entry trace, rerun at the exact frame-1 inputs.
+- **ai-runtime.** Call `estado_parado_unidade(m, unit)` as the state-7 body (DI = u16 unit), and `ramo_producao_estrutura(producao, AX, calcular_tropa)` for structure types 1/2/13/16, with `calcular_tropa` = `producao_limpa.calcular_tropa_com_limpeza_no_mundo` bound to the live world. The shared state-7 prelude draws (target scan, fatigue) are the dispatcher's. Only the body's single `Random` is here.
+- **Composer (Missions/ai-runtime).** Pass `m` = the live memory map. The RNG 0x497164 and the local-player byte 0x508041 are cached scalars of core/economy providers in the M1 map, so pull before and push after each economy call. `atualizar_campos` needs `RecursosTerreno` bound to `[0x507d74]`, `[0x507dac]`, `[0x507da8]` and `0x509954`, and to `[0x507d70]` as bytes. Core keeps that grid as a u16 list, so a byte view must be agreed before counter 128.
+- **Owners still needed** (not reached in MONDE01's first frames): `MAJSympathie 0x475118`, which Economy proposes to own with the player block; `InitGameZone 0x471830` and `MessageBoxSet 0x46994b` (UI); `AnimBallonStatic 0x447b2f` (graphics); `InventionSetEffet 0x470f98` (Economy, later stage).
+- Not implemented: market counter/proposition branches (states 3/4/5), `CalculWorkEngin`, `CalculTransporteEngin`, unit states 11/15/19/20/21/23. MONDE01 cannot reach any of them without input.
+
+## Stage 21 (M2.1 round 2): exact frame-0/1 revalidation
+
+Main `ec931d2` was merged; it includes Missions' original first-frame capture. That capture shows that the load-state `CalculGame` call already runs frame 0 at counter 0, so the M1-state assumption is corrected in the [inventory erratum](M2_FRAME_INVENTORY.md#erratum-after-missions-first-frame-capture-m21-round-2).
+
+**Capture first.** [`capturar_quadro1_economia_original.py`](capturar_quadro1_economia_original.py) reruns Missions' committed path with their `Isolamento`, extended to the two fragments, which run to declared exits (`0x456966→0x454ccd`, `0x426918→0x4281c0`). Every economy call is executed natively in isolation at its exact entry state, then the state is restored. The resumed path reproduces all three committed phase states, the entry trace, the boundaries and the code hash.
+- v1: `2174934`. v2 (`19545cd`) adds `written_unchanged`. Both have 102 calls, deterministic across 3 runs.
+- Frame 0 (57 calls): `BonusGetValEngin` ×24, state 7 ×8, `ResetTableauHangar`, the type-2 branch, `BagContientTroupe`, `CalculTroupe`, `BatimentGetCase`, the eight frame routines, `MAJSympathie` ×12.
+- Frame 1 (45 calls): the same without `MAJSympathie`.
+- `RechercheGetNbInvention` is not reached in frames 0/1; it has an M1-state capture (`captura-invencoes-original.json`, 1,024 entries).
+
+**Translated.**
+- `atualizar_simpatia` (`MAJSympathie` gates; the counter branch is a named dependency at `0x47515d`), now the default sympathy callback.
+- `resetar_tabela_hangar`.
+- `numero_invencoes`.
+- Reads go through `m.ler` and writes through `m.vista`; the M1 map provides both.
+
+Ownership from the bytes: `ResetTableauHangar` writes the market block `0x4e296c`. `MAJSympathie` reads the AI context flags and writes only the player block. `RechercheGetNbInvention` reads research counts. All three are Economy's.
+
+**Differential** ([test](testes/test_quadro1_economia.py)). Python starts from the M1 memory overlaid with each call's captured read-before-write, changed-old and written-unchanged bytes. All 102 calls match the native changed-byte set and the result register. For the nine memory-only routines, the bytes read before written equal the native set exactly. Mutation checks are caught: a wrong hangar word, an extra unit read, and a skipped sympathy-gate read.
+
+**Translation-block flush.** Every Economy bench installs its hooks in the constructor before any execution, so none could miss cached blocks. The M1-state capture now flushes explicitly after installing its hook. Its fresh rerun still equals frozen v2.
+
+**Validation** (under the lease):
+- `validar_quadro_economia.py --emular`: 10 tests, 0 skips/failures/errors. Fresh 102 isolated frame calls equal v2, and fresh 6,692 M1-state entries equal the frozen v2. Python compared 7,818 calls in total.
+- `scripts/check.py --domain economy`: **451 tests, 200 optional skips**, 0 failures, docs pass.
+
+**Gaps.**
+- AffGame is not executed (graphics question, per Missions).
+- `InitGameZone`, the `MAJSympathie` counter branch, the market state-3/4/5 branches, `AnimBallonStatic` and `InventionSetEffet` are still named dependencies; none is reached in frames 0/1.
+- No whole-frame claim: ai-runtime composes the frame.
+
+## Stage 22 (M2.1 round 3): live bonus table and frame providers
+
+Main `67fb81f` was merged.
+
+**1. Live bonus table (Core's request).** The new `BonusUnidades.vivo(memoria, *, tipos_unidades)` and `BonusUnidades.da_memoria(m)` bind `0x4dfba0` (1,872 bytes) and `0x4965ae` (1,300 bytes) by identity, with no copy. The copying constructor stays as the explicit legacy/fixture form; its callers in other fronts pass `bytes`. [Identity tests](testes/test_bonus_vivo.py) cover:
+- the caller's objects are kept, a later external store is seen, and setter/reset writes land in the caller's buffer;
+- a memory map's writes stay inside `0x4dfba0..+1872`;
+- all owner × type × selector queries equal the fixture form;
+- the constructor still copies;
+- nine invalid shapes plus same-object aliasing are rejected before binding.
+
+The exact-frame differential now builds its bonus with `da_memoria`.
+
+**2. Frame providers for ai-runtime.** The new module [`provedores_economia_quadro.py`](provedores_economia_quadro.py) exposes every routine of the 102 validated exact-frame calls, plus `RechercheGetNbInvention`, as `provider(sitio=..., **keywords)`. It works over `ler`/`vista` or `u8/u16/u32` memory; the API is in the [manual](../../docs/ECONOMY.md#live-bonus-table-and-frame-providers-m21-round-3). A new test runs all 102 exact-frame calls **through the providers over a u8/u16/u32-only memory** and matches every changed byte and result. A coverage test proves the provider names equal the captured routine set plus `RechercheGetNbInvention`.
+
+**Reached but not translated here: none** among the 102 frame-0/1 calls. Reached elsewhere in frames 0/1, already implemented, and not in this provider set:
+- `PlayerGetType` (`Mercado.tipo_jogador`; ai-runtime already uses it) and `PlayerEstAllie` ×7 in frame 0 under combat's `EnginTrouveCible` (`Mercado.aliado`).
+- `TestRessource` ×3 (`Economia.suficiente`) and `BatimentGetType` (`consultas_reinicio_economia.tipo_estrutura`), inside Missions' `TestFinDeMission`.
+- `BatimentGetPlayer`, which is combat's bridge.
+
+These queries were validated earlier against synthetic captures, not at the exact frame inputs. `GetBit`/`SetBit`/`IntToBCD`/`BCDToInt` are inside `calcular_materia`; the unit prelude's `GetBit` is Core's. Still named dependencies, all unreached in frames 0/1: `InitGameZone`, the `MAJSympathie` counter branch `0x47515d`, the market state-3/4/5 branches, `AnimBallonStatic`, `InventionSetEffet`, and an active `CalculTroupe` without the world-joined producer.
+
+**Gate** (under the lease): `scripts/check.py --domain economy` passes 458 tests with 200 optional skips, 0 failures, docs OK.
+
+**Native differentials rerun unchanged** (under the lease):
+- `validar_bonus_unidades --emular`: 10 tests, 4,060 calls.
+- `validar_mutacoes_bonus --emular`: 11 tests, 2,094 calls.
+- `validar_bonus_compartilhados --emular`: 11 tests, 454 calls.
+- All three reports are byte-identical to the committed ones.
+- `validar_quadro_economia --emular`: 12 tests, 0 skips. Fresh captures of 102 exact-frame calls and 6,692 M1-state entries equal the frozen ones.
+
+## Stage 23 (M2 round 4): display-scenario revalidation
+
+**Reference.** Missions' display scenario `exibicao` (real window loop, display path executed; [QUADRO1_EXIBICAO.md](../missoes/QUADRO1_EXIBICAO.md)) at main `81e0a26`. Original-first: both captures below were committed before any translation ran against them.
+
+**Captures** (intact RISING.EXE `6c556520…43fb`; Missions' `Isolamento` plus the two economy fragments; each run reproduces the committed display phase states, entry trace, boundaries and code hash):
+- `evidencias/captura-quadro1-economia-exibicao.json` (`--cenario exibicao`, `quadro` set): 104 calls = the v1 set of 102 plus 2 `BagContientTroupe` calls from AffGame → `BatimentEstHabiter` between frames. Committed in `3f972f5` with the exact producing script.
+- `evidencias/captura-consultas-economia-exibicao-v2.json` (`--conjunto consultas`, commit `a1b8e65`): 77 calls of PlayerGetType, PlayerEstAllie, TestRessource, BatimentGetType, BatimentEstHabiter, IntToBCD, BCDToInt and BagVide (PlayerGetType 27, PlayerEstAllie 10 (7 from combat targeting, 3 from AffDrapeauAlliance), TestRessource 6, BatimentGetType 2, BatimentEstHabiter 2, IntToBCD 19, BCDToInt 8, BagVide 3 (AffDeplaceEngin, unit Bags)). New record fields: `stack_arguments`, the callee-popped stack bytes (TestRessource's player), and `caller_stack_changes`/`caller_stack_written_unchanged`, writes at or above the exit ESP (IntToBCD's caller buffer). The first query capture (`captura-consultas-economia-exibicao.json`, `882c20c`) lacked the caller-frame writes because the isolation dropped every stack write; it is kept and equals v2 without those fields.
+
+**Behavior and branches vs v1** (`comparar_quadro1_economia_cenarios.py` → `validacao-quadro1-economia-v1-vs-exibicao.json`; CPU-free, Missions' allocation matching for relocation, stack relative to entry ESP): no routine changed. All 102 shared calls have identical reads, changed bytes, untouched writes and results after relocation (unit pool `0x4140d000` → `0x474a8000`, terrain grids moved). Only `PlayerAttaqueCalculSympa`'s unread incoming EAX/EDX differ. The new site is AffGame's `BatimentEstHabiter(0)` → `BagContientTroupe(0x49a0d4)` = 1, read-only.
+
+**API added:**
+- `quadro_economia`: `tipo_jogador(m, AL)`, `aliado(m, AL, DL)`, `recursos_suficientes(m, jogador, AX, DX, BX)`, `tipo_estrutura_viva(m, AX)`, `escrever_bcd(m, EAX, EDX)`, `ler_bcd(m, EAX, EDX)`, `bolsa_vazia(m, EAX)`. They read through `m.ler`, write through `m.vista`, and follow the original's index handling (no 0..3 protection).
+- `provedores_economia_quadro`: providers `PlayerGetType`, `PlayerEstAllie`, `TestRessource`, `BatimentGetType`, `BatimentEstHabiter`, `IntToBCD`, `BCDToInt`, `BagVide` (keywords in docs/ECONOMY.md); region `0x5080a8` added.
+- `Economia.vivo`/`da_memoria` (0x4e2ea8, 128 bytes) and `Mercado.vivo`/`da_memoria` (player records via `[0x5080a8]`, all market buffers) bind by identity; the constructors stay the copying fixture form. `_buffer_vivo` now lives in `economia` (re-exported by `bonus_unidades`).
+
+**Validation:**
+- Python: 104 display `quadro` calls direct and through providers over a `u8/u16/u32`-only memory; exact read sets for the `ler`/`vista` routines. Query calls through the live class forms, through the live functions (exact read sets for all but BatimentEstHabiter) and through providers over the word memory.
+- Native (under the lease): `validar_quadro_economia --emular` 23 tests, 0 skips; fresh reruns equal the frozen captures for 6,692 M1-state entries and 283 isolated calls (102 v1, 104 display `quadro`, 77 display `consultas`); 7,999 Python comparisons. Five deliberate query mutations are each detected.
+- Gate (under the lease): `scripts/check.py --domain economy` 474 tests, 202 optional skips, 0 failures, docs OK.
+
+**Gaps:**
+- `BagVide` is new; its only evidence is the display-frame calls (3 calls, all on empty unit Bags, so the AH = high-count-byte path is unexercised natively). The class forms of PlayerEstAllie/TestRessource still reject player 4, which the original reads.
+- Field growth (counter 128, M2.2) not started; Core's live tile-grid provider for `[0x507d70]` is not on main yet.
+- Still named dependencies, unreached in frames 0/1: `InitGameZone` (Core translates it), the `MAJSympathie` counter branch `0x47515d`, the market state-3/4/5 branches, `AnimBallonStatic`, `InventionSetEffet`, and an active `CalculTroupe` without the world-joined producer.
+
+## Stage 24 (M2 round 5): field growth, BagVide and edge players
+
+**Reference.** Missions' display scenario `exibicao` (`-v2` artifacts) at main `1a82ae6`, after Core's `MundoFisico.vincular_grades` (`30528b5`). Original-first: each capture was committed with its exact producing script before any translation ran against it.
+
+**Captures** (intact RISING.EXE `6c556520…43fb`, whole code section unpatched, `capturar_quadro_m2_original.Captura` hooks over the display post-load block list; input hashes of the three Missions artifacts recorded):
+- `evidencias/captura-campos-exibicao-original.json` (`9703754`, sha256 `11569b72…cecb`): 45 scenarios, 770 calls, 770 returns, 0 dependency stops. SetUpdateChamp `0x475328`, UpdateChamp `0x478806` and BagVide `0x4470b9`; scenarios are listed in docs/ECONOMY.md.
+- `evidencias/captura-consultas-bordas-exibicao-original.json` (`af4d59d`, sha256 `47333cc9…79cc`): 2 scenarios, 218 calls, 218 returns. PlayerEstAllie `0x46d838` and TestRessource `0x4676e5` with edge players.
+
+**API inputs and supported domain:**
+- `RecursosTerreno.vivo(terreno, *, minas, mosaicos, atributos)`, where `terreno` must be `TerrenoSacolas.vivo(tipos, quantidades)`. The buffers are writable contiguous bytes: types `[0x507d74]` and quantities `[0x507dac]` 65,536 bytes each, mines `0x509954` 80 bytes, tiles `[0x507d70]` 131,072 bytes, attributes `[0x507da8]` 65,536 bytes. All are bound by identity and rejected before binding otherwise.
+- `RecursosTerreno.do_mundo(mundo, *, minas)` requires that `tiles`, `atributos`, `objetos` and `donos_objetos` are in `mundo.grades_vivas`, and raises `ValueError` naming the missing ones.
+- `RecursosTerreno.da_memoria(m, *, mosaicos=None)` resolves the four grids through their DGROUP pointers.
+- The live forms carry no scalars: `quadro_economia.agendar_campos`/`atualizar_campos(m, recursos)` pull the counter `0x508f7c`, period `0x4973ea`, flag `0x509952`, row `0x4973e8` and RNG `0x497164` from `m`, run, and push them back.
+- Rows outside 0..255 and period 0 keep their named rejections (`ValueError`, `ZeroDivisionError`), as before.
+- `Economia.da_memoria(m)` and `Mercado.da_memoria(m)` now keep `memoria_viva = m`. Through it, `suficiente` and `aliado` run the original's index handling (any player byte, record 4 read). `Economia.vivo(tabela)` without a map and the copying constructors keep the 0..3 rejection.
+
+**Mutation and callback order.** UpdateChamp per row, columns 1..254:
+1. On a bush (0x1c), Random % 5 == 0 runs ScanNouvellePatate.
+2. On a field cell, Random % 10 must be 0 to continue.
+3. A non-growable stage (0x28, 0x34) is cleared, then ScanNouvellePatate runs.
+4. Stages 0x24..0x27 and 0x30..0x33 advance on Random % 5 == 0, and run ScanNouvellePatate otherwise.
+5. Every other stage advances.
+6. ScanNouvellePatate tries the neighbours −1, +1, −256, +256 (u16-wrapped) on tiles 0x84..0x86 or 0x9d..0xdc. NouvellePatate plants 0x29 or 0x1d by Random parity when the cell is empty and attribute bit 0 is clear.
+7. After row 255, the row returns to 1 and the flag is cleared.
+
+The translation is unchanged from Stage 20; only its binding is new.
+
+**Validation:**
+- Python (`testes/test_campos_exibicao.py`): all 770 field/BagVide calls are reproduced directly and through the providers over a `u8/u16/u32`-only memory, with Core's `vincular_grades` world and `RecursosTerreno.do_mundo`. After every call, the scalars and all four grids equal a mirror of the native writes; every scenario's initial and final whole-state hashes match. All 218 edge calls are reproduced through the live functions, the live-bound class forms and the providers.
+- Mutations, each detected: skipping UpdateChamp; flipping BagVide's AL at count 0x100; an unbound `Mercado` (rejects player 4); a 0..3-protected `aliado` in the functions and in the providers; a 0..3-protected TestRessource in the functions and in the providers.
+- Native rerun (`RISING_EMULAR=1`, under the lease): `test_campos_exibicao` 9 tests, 0 skips, 5,545 s. Fresh reruns of both scripts equal the frozen captures (770 + 218 calls); both runs exit right after writing, with lease exit 0.
+
+**Gaps:**
+- Missions' PLANO_M2_2 places the 124 candidate cells in rows 32..52 (frames 31..51). The grid and the native capture put them in rows 32..41, 45..47 and 55..62 (frames up to 61); reported to Missions through the coordinator.
+- The natural-pass frames that plant or grow depend on the shared RNG `0x497164`, which other frame code also draws. The isolated sequence is evidence for the routines, not a game timeline.
+- Missions' `fim_missao` composer uses `recursos.suficiente` over the copying `Economia(memoria=...)`, which rejects player 4. Contract: use `Economia.da_memoria(m)` or the `TestRessource` provider (Missions-owned file; not edited).
+- Native captures can spin in Unicorn teardown after writing their output. The round-5 runners exit with `os._exit(0)` right after the file is written; Core is investigating the teardown itself.
+- Still named dependencies from Stage 23: `InitGameZone`, the `MAJSympathie` counter branch `0x47515d`, the market state-3/4/5 branches, `AnimBallonStatic`, `InventionSetEffet`, and an active `CalculTroupe` without the world-joined producer.
+
+## Stage 25 (M2.3 prep): periodic branches before the first raid
+
+**Capture** (`5c8c9ac`, `evidencias/captura-temporizadores-original.json`, sha256 `58349e4f…fe01d`):
+- **Producer:** `capturar_temporizadores_original.py`, run under the lease with Core's `mapear_paginas` and `encerrar_captura`; it finished in seconds.
+- **Starting states:** the display post-load state, and the M2.2 frame-128 full-state checkpoint (Missions `ad50ab2`, raw sha256 `1ad031b9…dd930`, summary checked).
+- **Size:** 48 scenarios, 434 calls: 420 returns and 14 stops, at MessageBoxSet ×12 and InitGameZone ×2.
+- **Routines:** CalculCompteurMarche/Proposition (as loaded, and with declared states 3/4/5), PlayerAttaqueCalculSympa, MAJSympathie (with and without AI context), PlayerInitAllianceCompteur, BatimentNextEtape on every live structure, and GetMeteo.
+
+**API:**
+- `quadro_economia.calcular_meteo(m)` (GetMeteo `0x4290cf`) reads the counter `0x508f7c`, writes `0x496d2c` and `0x496d2e`, and draws the RNG `0x497164` once at counter % 100 = 0.
+- `atualizar_simpatia(m, a, b, evento)` now runs the event branch `0x47515d` over the record at `0x497288 + 16·evento` (u32 wrap) and over the sympathy words through `[0x5080a8]`. `EVENTOS_SIMPATIA` names the table.
+- The order of mutations is the original's: counter store, then (at the limit) counter zeroed, then the pairs in i-major order. Mode 1 covers i, j in 0..3 with i ≠ j; any other mode covers (a, b) only.
+
+**Validation:**
+- `testes/test_temporizadores.py` replays both states: GetMeteo, MAJSympathie, PlayerAttaqueCalculSympa, PlayerInitAllianceCompteur and the market gates. Writes and the whole-state hash are compared after every call; BatimentNextEtape's 15 calls per state write nothing natively.
+- Mutations detected: a skipped mode-1 pair, a `<= 3` roll threshold, a dropped counter reset.
+- The native rerun (`RISING_EMULAR=1`, under the lease) equals the frozen capture.
+- `test_quadro_economia`'s dependency test now asserts the translated event branch (pairs (0, 1)/(1, 0) +1 at counter 2000 with AI context cleared).
+- Gate: 487 tests, 205 optional skips, docs OK.
+- The frame-128 replay and the native rerun skip when Missions' frame-128 file is not on the checkout: it is on `feat/re-missions` until Missions integrates it; locally it is read from `.local/m2-3/`.
+
+**Gaps:**
+- The market state-3 (`0x466e01`) and state-4/5 (`0x466ed1`/`0x466fe1`) branches remain named dependencies; they need CalculValeur `0x466533` and ForgetMarche `0x4610a4`. Core's coverage run (frames 0..2,300 so far) reaches none of the market helpers.
+- Unreached and untranslated: InitNova, InventionSetEffet, AnimBallonStatic, and an actively producing CalculTroupe.
+- GetMeteo has no static caller and is not entered in that run.

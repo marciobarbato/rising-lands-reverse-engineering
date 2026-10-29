@@ -1,0 +1,11 @@
+{
+  "command": "python3 -B scripts/check.py --domain core",
+  "tests": 418,
+  "skips": 192,
+  "failures": 0,
+  "errors": 0,
+  "success": true,
+  "seconds": 10.552,
+  "documentation_links": "PASS",
+  "scope": "Required local Core gate on the final Engin_RetrieveExperimente tree (docs included); optional native tests skipped here and run separately in recuperacao-experiencia-emulada.json (10 tests, 74 comparisons, zero skips)"
+}

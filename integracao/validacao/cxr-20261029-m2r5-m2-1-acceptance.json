@@ -1,0 +1,51 @@
+{
+ "milestone": "M2.1 — MONDE01 first frame (load tail, between frames, frame 1) equal to the original",
+ "decision": "ACCEPTED",
+ "decided_at": "2026-10-29 BRT morning",
+ "decided_by": "coordinator (Claude) on committed-main reproduction on two machines (MacBook and Mac mini) at 32bb391",
+ "main": "32bb39131931ba615c78e13c60b5d0740d6ccfd7",
+ "proof_integrated_at": "82f6859f0de9cd1491315e031d941842a83e0eaa",
+ "intact_executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "scope": "Display scenario -v2 (display path executed natively in the oracle), MONDE01 new campaign, declared Windows inputs, no input during frames, no CD track playing. Frames beyond frame 1 are M2.2.",
+ "original_reference": "Missions Stage18 -v2 captures (MissionLoad and frames 0/1) on Graphics' ExibicaoDeclarada backend; hashes listed in the proof's references block",
+ "comparison_policy": {
+  "path": "pesquisas-paralelas/missoes/validacao/m2-politica-comparacao-quadro1.json",
+  "sha256": "64c7fa739c76fc1f9a12bc4678181d0d8fa97c5887f5d8ced1b964d9e6cae73c",
+  "rule": "a byte is display-only only if every writer and every reader is display code",
+  "masked_display_only_bytes": 78093,
+  "compared_logic_bytes": 776,
+  "decision": "the 146 MenuInit bank-allocation records stay compared"
+ },
+ "proof": {
+  "path": "pesquisas-paralelas/ia-runtime/validacao/m2-1-prova-quadro1.json",
+  "sha256": "07e35e46bd66f9af8b2aa8294bfcb6309d17e350dc96d1ec7d263c6315e9e4fa",
+  "source_revision": "0bf72ce813e0f0180761ebc0e6d0e34faaed4cea",
+  "result": "equal in load_tail, between_frames and frame1: every compared byte, allocation records, RNGs, bindings and boundaries outside display roots, modeled registers; 103 native checkpoints",
+  "crossings_writing_compared_bytes": 0,
+  "display_roots_not_executed": "RestoreAll/AffGame writes all inside the mask; FilledBox/DDFlipPage write no compared byte; DDLock/UnlockSurface lock bookkeeping 0x4e17a5..a8 restored before phase end"
+ },
+ "unmodeled_declared": "MCICD_Play caller stack locals, EFLAGS/EIP, bindings/boundaries issued inside display roots, masked display state and surfaces, ProgIteration stack words, allocation call-site metadata (as in M1)",
+ "reproductions": {
+  "macbook_main_32bb391": {
+   "artifact": "integracao/validacao/cxr-20261029-m2r5-m2-1-proof-main-32bb391.json",
+   "result": "equal in all three phases, crossings 0; identical to the committed proof except seconds and source_revision"
+  },
+  "macbook_and_mac_mini_main_0114eee_superseded": {
+   "artifact": "integracao/validacao/cxr-20261029-m2r5-m2-1-proof-main-0114eee.json",
+   "result": "verdict equal, but display_roots_python[0].guards empty in load_tail and between_frames",
+   "root_cause": "Graphics b22b36a inserted EfeitosExibicao fields liberacoes/eax before verificacoes while RestoreAll/AffGame still constructed it positionally, so guard tuples landed in the allocator-frees field (found by the Mac mini session)",
+   "fix": "Graphics 19bb87f (keyword construction, field order restored, tests), integrated at 32bb391"
+  },
+  "mac_mini_0bf72ce": {
+   "host": "Mac mini Mac16,10, Apple M4, macOS 27.2, python 3.9.6, unicorn 2.1.4",
+   "result": "equal, crossings 0; identical to the committed proof except seconds",
+   "also": "missions native suite 132/132 at main 5c0dac2; N=1 policy regenerated with an identical exclusion mask; ai-runtime native suite 64/64 at 0114eee"
+  },
+  "mac_mini_main_32bb391": {
+   "result": "equal in all three phases, crossings 0; identical to the committed proof except seconds and source_revision (hash without those lines faf79974…dba1f, same as the committed proof); ai-runtime native suite 64/64, 0 skips",
+   "wall_s": 111.8
+  }
+ },
+ "gates": "ai-runtime helper integration passed (common checks plus ai-runtime suite); missions native suite 132/132 on the Mac mini",
+ "next": "M2.2 — 128 consecutive frames with per-frame equality, original captures on the Mac mini"
+}

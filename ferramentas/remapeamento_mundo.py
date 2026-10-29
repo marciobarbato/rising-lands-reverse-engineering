@@ -1,6 +1,7 @@
 """Ordered Chemin_Remap reset up to the first external allocation request."""
 from dataclasses import dataclass
 
+from grade_u16 import GradeU16
 from ordens_unidades import ContextoBusca
 
 
@@ -20,7 +21,7 @@ def iniciar_remapeamento(mundo):
     """
     cores = mundo.cores_estruturas
     if (not isinstance(mundo.busca,ContextoBusca)
-            or not isinstance(mundo.regioes,list) or len(mundo.regioes) != 65536
+            or not isinstance(mundo.regioes,(list,GradeU16)) or len(mundo.regioes) != 65536
             or not isinstance(cores.grade,bytearray) or len(cores.grade) != 65536
             or not isinstance(cores.livres,bytearray) or len(cores.livres) != 256
             or not isinstance(cores.liberadas,bytearray) or len(cores.liberadas) != 256

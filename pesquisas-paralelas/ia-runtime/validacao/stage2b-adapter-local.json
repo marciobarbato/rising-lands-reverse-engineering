@@ -1,0 +1,310 @@
+{
+ "native": false,
+ "cases": [
+  {
+   "case": "ia_reset_monde01",
+   "production_delegates": true,
+   "callback_replay": false,
+   "complete": true,
+   "dependency": null,
+   "provider_calls": 846,
+   "inherited_player_controls": [
+    1,
+    0,
+    0,
+    0
+   ],
+   "iterator_aliases_equal": true,
+   "original_provider_sequence_equal": true,
+   "final_image": {
+    "dados": "d14221b458b80b11f319d702415c6f3b05760848672c599f50c19995e3e13dfc",
+    "unidades": "c85a916f143fd90a111f2ce2172e27b2e73d6f2c7c7963a9255f327753669857",
+    "jogadores": "6e790f3a8a28b6e736b72c33e5f1f168611eeed6259ca256c83dcd583e3dd79a"
+   },
+   "fresh_native_image_equal": null,
+   "segments": null
+  },
+  {
+   "case": "ia_reset_monde01_ai_players",
+   "production_delegates": true,
+   "callback_replay": false,
+   "complete": false,
+   "dependency": {
+    "name": "RechercheGetNiveau",
+    "site": "0x0047f43f"
+   },
+   "provider_calls": 3,
+   "inherited_player_controls": [
+    1,
+    2,
+    2,
+    2
+   ],
+   "iterator_aliases_equal": true,
+   "original_provider_sequence_equal": true,
+   "final_image": {
+    "dados": "6db1ac44c531e3344562fa9b10b9065aebb3772249a77b4a00300281a84da53e",
+    "unidades": "c85a916f143fd90a111f2ce2172e27b2e73d6f2c7c7963a9255f327753669857",
+    "jogadores": "64eeb47829291143d7e7fa2c50c74af01ac32e6abb2d05696be97b0dc1ba3f33"
+   },
+   "fresh_native_image_equal": null,
+   "segments": null
+  },
+  {
+   "case": "ia_reset_synthetic_world",
+   "production_delegates": true,
+   "callback_replay": false,
+   "complete": false,
+   "dependency": {
+    "name": "RechercheGetNiveau",
+    "site": "0x0047f43f"
+   },
+   "provider_calls": 3,
+   "inherited_player_controls": [
+    1,
+    2,
+    2,
+    2
+   ],
+   "iterator_aliases_equal": true,
+   "original_provider_sequence_equal": true,
+   "final_image": {
+    "dados": "7f3a0850ce2738c2923495048455f3c59b5ace9e95062912c0a553ab0426e57f",
+    "unidades": "d741e7fcf274ca6529e4d6d913ce3f38ac90a136237ce3921e06ad8cea298f85",
+    "jogadores": "64eeb47829291143d7e7fa2c50c74af01ac32e6abb2d05696be97b0dc1ba3f33"
+   },
+   "fresh_native_image_equal": null,
+   "segments": null
+  },
+  {
+   "case": "ia_reset_synthetic_monsters",
+   "production_delegates": true,
+   "callback_replay": false,
+   "complete": false,
+   "dependency": {
+    "name": "RechercheGetNiveau",
+    "site": "0x0047f43f"
+   },
+   "provider_calls": 3,
+   "inherited_player_controls": [
+    1,
+    2,
+    2,
+    2
+   ],
+   "iterator_aliases_equal": true,
+   "original_provider_sequence_equal": true,
+   "final_image": {
+    "dados": "54aed82d4f4830dedce92b5fdc5ff65ec57d1f925bdb0a5d597233ce7847be6d",
+    "unidades": "66d3e5c87ffe1660b39d1887e37af6bb5c26adba2effaa8ff1ba12bbc3c49ee6",
+    "jogadores": "64eeb47829291143d7e7fa2c50c74af01ac32e6abb2d05696be97b0dc1ba3f33"
+   },
+   "fresh_native_image_equal": null,
+   "segments": null
+  },
+  {
+   "case": "ia_reset_dirty_tables_monster_cap",
+   "production_delegates": true,
+   "callback_replay": false,
+   "complete": false,
+   "dependency": {
+    "name": "RechercheGetNiveau",
+    "site": "0x0047f43f"
+   },
+   "provider_calls": 3,
+   "inherited_player_controls": [
+    1,
+    2,
+    2,
+    2
+   ],
+   "iterator_aliases_equal": true,
+   "original_provider_sequence_equal": true,
+   "final_image": {
+    "dados": "0071f4d4a47beea21817c2b5803c92cb72737e03d16a6716feb0da58c87604b5",
+    "unidades": "256a843a4b0658f8abbafdf970e57f631084da8708078825c3c671611ae1c4f1",
+    "jogadores": "64eeb47829291143d7e7fa2c50c74af01ac32e6abb2d05696be97b0dc1ba3f33"
+   },
+   "fresh_native_image_equal": null,
+   "segments": null
+  },
+  {
+   "case": "ia_reset_dirty_contexts_mission9",
+   "production_delegates": true,
+   "callback_replay": false,
+   "complete": false,
+   "dependency": {
+    "name": "RechercheGetNiveau",
+    "site": "0x0047f43f"
+   },
+   "provider_calls": 3,
+   "inherited_player_controls": [
+    1,
+    2,
+    2,
+    2
+   ],
+   "iterator_aliases_equal": true,
+   "original_provider_sequence_equal": true,
+   "final_image": {
+    "dados": "e09ba57123f1870924e06acd8d7535a21ecfe1b4b6d9274dd6f6254c677abf07",
+    "unidades": "67a4f07d8d98ff9843789739ef6495d2119457286eecb01e52b78d8b8c16094c",
+    "jogadores": "64eeb47829291143d7e7fa2c50c74af01ac32e6abb2d05696be97b0dc1ba3f33"
+   },
+   "fresh_native_image_equal": null,
+   "segments": null
+  },
+  {
+   "case": "ia_reset_mission23_single_monster_group",
+   "production_delegates": true,
+   "callback_replay": false,
+   "complete": false,
+   "dependency": {
+    "name": "RechercheGetNiveau",
+    "site": "0x0047f43f"
+   },
+   "provider_calls": 3,
+   "inherited_player_controls": [
+    1,
+    2,
+    2,
+    2
+   ],
+   "iterator_aliases_equal": true,
+   "original_provider_sequence_equal": true,
+   "final_image": {
+    "dados": "b73c363ae08b9d3f114680f02aed6a9c4175f2411a1f2249af1a9f0b3a7a6bfa",
+    "unidades": "080825955d40e33931b03f627187942d0a9021f14cf37252b42d15d1bdf3dca2",
+    "jogadores": "64eeb47829291143d7e7fa2c50c74af01ac32e6abb2d05696be97b0dc1ba3f33"
+   },
+   "fresh_native_image_equal": null,
+   "segments": null
+  },
+  {
+   "case": "ia_reset_researched_branches",
+   "production_delegates": true,
+   "callback_replay": false,
+   "complete": false,
+   "dependency": {
+    "name": "RechercheGetNiveau",
+    "site": "0x0047f43f"
+   },
+   "provider_calls": 3,
+   "inherited_player_controls": [
+    1,
+    2,
+    2,
+    2
+   ],
+   "iterator_aliases_equal": true,
+   "original_provider_sequence_equal": true,
+   "final_image": {
+    "dados": "88d4245cd88e8e591463e7168bc7fa12f14afd119dab22e19ff44906027df567",
+    "unidades": "c9b5b9f268df0201b2252d63dab5031f1a1295a951c3121bd99ca4d9dea57e07",
+    "jogadores": "64eeb47829291143d7e7fa2c50c74af01ac32e6abb2d05696be97b0dc1ba3f33"
+   },
+   "fresh_native_image_equal": null,
+   "segments": null
+  },
+  {
+   "case": "ia_reset_no_ai_players",
+   "production_delegates": true,
+   "callback_replay": false,
+   "complete": false,
+   "dependency": {
+    "name": "EnginSetPlayer",
+    "site": "0x0047b01f"
+   },
+   "provider_calls": 29,
+   "inherited_player_controls": [
+    1,
+    1,
+    0,
+    0
+   ],
+   "iterator_aliases_equal": true,
+   "original_provider_sequence_equal": true,
+   "final_image": {
+    "dados": "81981b09dac4d6e867b504b7c11aa3b5b24dc541cde6ddba3a96f002a34b7dcd",
+    "unidades": "3281f12b3a853906a60f24c2becc0228b006a63b87c6b60281c7b8c8795c1e43",
+    "jogadores": "f7b24276f37330e8d8f6d4b0406cd1a17c8b7f82fe7e5682c45af97856544454"
+   },
+   "fresh_native_image_equal": null,
+   "segments": null
+  },
+  {
+   "case": "ia_reset_monster_group_cap16",
+   "production_delegates": true,
+   "callback_replay": false,
+   "complete": false,
+   "dependency": {
+    "name": "RechercheGetNiveau",
+    "site": "0x0047f43f"
+   },
+   "provider_calls": 3,
+   "inherited_player_controls": [
+    1,
+    2,
+    2,
+    2
+   ],
+   "iterator_aliases_equal": true,
+   "original_provider_sequence_equal": true,
+   "final_image": {
+    "dados": "c07b4563893057723faea217eb159739635493710580b48b47dd5cfd211e9985",
+    "unidades": "f2cdeaba15a3d6cf6ef9b9ca970ba58252833f50937e81cf6505a99072692a00",
+    "jogadores": "64eeb47829291143d7e7fa2c50c74af01ac32e6abb2d05696be97b0dc1ba3f33"
+   },
+   "fresh_native_image_equal": null,
+   "segments": null
+  },
+  {
+   "case": "ia_reset_monster_reserve_emptied",
+   "production_delegates": true,
+   "callback_replay": false,
+   "complete": false,
+   "dependency": {
+    "name": "RechercheGetNiveau",
+    "site": "0x0047f43f"
+   },
+   "provider_calls": 3,
+   "inherited_player_controls": [
+    1,
+    2,
+    2,
+    2
+   ],
+   "iterator_aliases_equal": true,
+   "original_provider_sequence_equal": true,
+   "final_image": {
+    "dados": "42e8d6ada71337c716d7645dbd97014b3ff5c8ff10a6d91aeebaabc315186303",
+    "unidades": "88d324dec9e17e31920e00fcca72c26d461fe6bc2d4338a1a62d0b354c3f283a",
+    "jogadores": "64eeb47829291143d7e7fa2c50c74af01ac32e6abb2d05696be97b0dc1ba3f33"
+   },
+   "fresh_native_image_equal": null,
+   "segments": null
+  }
+ ],
+ "whole_mission_load": false,
+ "actual_program_player_controls": false,
+ "base_revision": "c3cf003b8922c32312de7bd24abb01b49aaf2bfc",
+ "source_sha256": {
+  "pesquisas-paralelas/ia-runtime/reinicio_ia_compartilhado.py": "8b4ab4157a746c4634581f9dda63b54f72c6e7d96f58bcf051d1fe634b3338b7",
+  "pesquisas-paralelas/ia-runtime/reinicio_ia.py": "a8c62e6a3a109e1edfefe975818458f485bfd5b72a28d93b01082cf34be7c9ac",
+  "pesquisas-paralelas/ia-runtime/memoria_ia_runtime.py": "8e8d780dc5c240b627e784cc478de9f6ea0534a916122bb97c3959797ba426ae",
+  "ferramentas/ordens_unidades.py": "95b282cca6c29ff5fdbb3bb3c9cd25a25bec0202670a6dc78784ea6677cfefaf",
+  "ferramentas/consultas_unidades.py": "b0e8788b2424104accc28ca160befc8d494bc33808d996bc70c0cd4a9f27f851",
+  "ferramentas/emulador.py": "689972762424f203e5d28b67f5ecc77212c9da5da45b488daa0d2c9069f4ca5f",
+  "pesquisas-paralelas/missoes/consultas_missao.py": "23a4e6bbc8bbdf9f1ad1f7855aacca8f181f44f10eabf8d748a5a768942604eb",
+  "pesquisas-paralelas/economia/economia.py": "1f89ab9252fab13b25bc35b8e52aada6c9ea19b1dce51fc1036ee5d515ce5849",
+  "pesquisas-paralelas/economia/mercado.py": "69178c8480d40b93d9605986ec667307812514e56674f1e6520c7d6ed406614e",
+  "pesquisas-paralelas/combate/ataque_vivo.py": "21d3f0c9e2a307b82874c6634730a62b301751ec76c51e9ff7d151429fb7c86c",
+  "pesquisas-paralelas/economia/consultas_reinicio_economia.py": null
+ },
+ "original_capture_sha256": "f038dd159363940f894489a0c333805d0ff97d7be0458e67640ab2c757f0cd9d",
+ "scope": "Same frozen original inputs; real Core/Economy/Missions delegates and exact host aliases. Inherited fixture controls, no startup defaults.",
+ "unresolved_owner_primitives": [
+  "EnginGetEtat",
+  "EnginSetPlayer"
+ ]
+}

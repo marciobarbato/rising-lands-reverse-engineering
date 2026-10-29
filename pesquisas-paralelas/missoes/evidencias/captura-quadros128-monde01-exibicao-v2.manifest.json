@@ -1,0 +1,56 @@
+{
+ "schema": "rising-lands/compressed-evidence-manifest/1",
+ "artifact": "pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz",
+ "encoding": {
+  "format": "xz",
+  "check": "crc64",
+  "filter": "lzma2",
+  "preset": "9e"
+ },
+ "compressed": {
+  "sha256": "4c8f5c14a9623131dd019eafcdc49ea63054ee358f9defde58c12cb949f59ff3",
+  "bytes": 8650900
+ },
+ "raw_json": {
+  "sha256": "1ad031b96300e5c632fd5b6b7857ae30792f78e86531e4f17d1bf7124c6dd930",
+  "bytes": 165916863,
+  "local_copy": ".local/m2-2/captura-quadros128-monde01-exibicao-v2.json",
+  "decompressed_sha256_equal": true
+ },
+ "capture_schema": "rising-lands/monde01-n-frame-original-capture-delta/1",
+ "frames": 128,
+ "phases": 257,
+ "checkpoint_frames": [
+  1,
+  31,
+  32,
+  45,
+  50,
+  51,
+  52,
+  64,
+  100,
+  101,
+  128
+ ],
+ "source_revision": "717bd46b0635bb2675042317bdb604fdaae92d7b",
+ "source_dirty_paths": [],
+ "replay_check": {
+  "result": "equal",
+  "phases": 257,
+  "checkpoints": [
+   "frame1",
+   "frame31",
+   "frame32",
+   "frame45",
+   "frame50",
+   "frame51",
+   "frame52",
+   "frame64",
+   "frame100",
+   "frame101",
+   "frame128"
+  ]
+ },
+ "command": "python3 -B pesquisas-paralelas/missoes/capturar_quadros_exibicao_missao.py --quadros 128 --saida pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz"
+}

@@ -1,0 +1,1532 @@
+{
+ "schema": "rising-lands/missionload-m1-composition/1",
+ "source_revision": "b114fa7f5bae409e8ea2884aa74fba5ef395c4a6",
+ "source_dirty_paths": [],
+ "source_sha256": {
+  "mapa_memoria_m1.py": "e1cbb10b773ec02ce5c0183d2a17f8f64a8b8e6a56fbbf4a824b6388b71f9796",
+  "arena_composicao_m1.py": "106e05116b4140e737d52596c19c0b949f633c68148c9f004521ccd26d955eba",
+  "ligacao_provedores_m1.py": "09c1c864293207499f685aa88e7733df3e36478a00ec76aed5776128982cf937",
+  "composicao_carga_missao.py": "c96891a1e331f48e88fd946178fb12bcfc20cda7c0f9ed38343dfdec666457d3",
+  "comparacao_carga_missao.py": "5683dee8780545b8c14d6a951c3b250ad7d1936808966004275c35f4f39a23e4",
+  "validar_composicao_carga_missao.py": "0f2bd48975117b3c81bbbef58d804321372e991310ca38d127bf69aa1b74290c",
+  "carregador_cabecalho.py": "0944f8201eaec27e678b07d6a311fad89bd62df471eefa8f91e8509a230af941",
+  "carregador_unidades.py": "0fe492057915ed0b7cc389adc799f3ba3a60c91c2fb15e02f1df8979eecd85ba"
+ },
+ "entry_snapshot": {
+  "path": "evidencias/entrada-carga-missao-original.json",
+  "sha256": "0692dea1a4797a05785245a2c5bdbbbf24408e5efeb0b4e82e895075a7c52ddf"
+ },
+ "original_capture": {
+  "path": "evidencias/captura-carga-missao-original-v2.json",
+  "sha256": "eb7d2303e13e62d4f5692c9cb6ef302b573d138df6a8b51183a6d9b0bd703afc"
+ },
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "cpu_free": true,
+ "native_executed": false,
+ "m1_accepted": false,
+ "verdict": "NOT M1: strict composition stopped at a named provider contract; see strict.stop",
+ "strict": {
+  "bridges": [],
+  "reached_return": false,
+  "al": null,
+  "stop": {
+   "step": "EnginInitTechnologie",
+   "routine": "0x441459",
+   "call_site": "0x46c5af",
+   "owner": "economy",
+   "exception": "AtributoNaoMapeadoM1",
+   "message": "economy:PropriedadeConstrucoes.ordens read: single 10,816-byte buffer (4 x 2,704 owner stride); the original and Core keep four distinct 2,704-byte allocations through the pointer table [0x4e19b8], so it cannot alias them",
+   "unmapped_attribute": {
+    "owner": "economy:PropriedadeConstrucoes",
+    "attribute": "ordens",
+    "reason": "single 10,816-byte buffer (4 x 2,704 owner stride); the original and Core keep four distinct 2,704-byte allocations through the pointer table [0x4e19b8], so it cannot alias them",
+    "write": false
+   },
+   "traceback": [
+    "composicao_carga_missao.py:227 _passo",
+    "composicao_carga_missao.py:219 chamada",
+    "cauda_carga.py:78 inicializar_tecnologia_unidades",
+    "cauda_carga.py:60 definir_tecnologia_unidades",
+    "ligacao_provedores_m1.py:79 __getattribute__"
+   ],
+   "completed_steps": [
+    "MakeMissionName",
+    "MissionPathBuild",
+    "ResetCounters",
+    "IconeReset",
+    "TerrainReset",
+    "MiniMapReset",
+    "BatimentResetAll",
+    "EnginResetAll",
+    "ProjectileReset",
+    "MessageBoxInit",
+    "BallonInit",
+    "FileOpen",
+    "HeaderPrelude",
+    "Chemin_Remap",
+    "StructureCopy",
+    "LoadEngin",
+    "LoadMine",
+    "IALoadAttaqueIni",
+    "LoadBatimentGhost",
+    "LoadCadreInfluence",
+    "LoadFinMission",
+    "LoadCalculMissionDivers",
+    "LoadObjectif",
+    "LoadEntrerMonstre",
+    "FileClose",
+    "MissionPlaceTerrain"
+   ]
+  },
+  "completed_steps": [
+   {
+    "step": "MakeMissionName",
+    "name_bytes": "\\World\\Monde01.ETA"
+   },
+   {
+    "step": "MissionPathBuild",
+    "path": "D:\\World\\Monde01.ETA"
+   },
+   {
+    "step": "ResetCounters"
+   },
+   {
+    "step": "IconeReset"
+   },
+   {
+    "step": "TerrainReset"
+   },
+   {
+    "step": "MiniMapReset"
+   },
+   {
+    "step": "BatimentResetAll"
+   },
+   {
+    "step": "EnginResetAll"
+   },
+   {
+    "step": "ProjectileReset"
+   },
+   {
+    "step": "MessageBoxInit"
+   },
+   {
+    "step": "BallonInit"
+   },
+   {
+    "step": "FileOpen"
+   },
+   {
+    "step": "HeaderPrelude",
+    "width": 64,
+    "height": 64,
+    "viewer": 0,
+    "cursor": 327728
+   },
+   {
+    "step": "Chemin_Remap",
+    "al": 1
+   },
+   {
+    "step": "StructureCopy",
+    "count": 1,
+    "indices": [
+     0
+    ]
+   },
+   {
+    "step": "LoadEngin",
+    "count": 16,
+    "indices": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15
+    ]
+   },
+   {
+    "step": "LoadMine"
+   },
+   {
+    "step": "IALoadAttaqueIni"
+   },
+   {
+    "step": "LoadBatimentGhost"
+   },
+   {
+    "step": "LoadCadreInfluence"
+   },
+   {
+    "step": "LoadFinMission"
+   },
+   {
+    "step": "LoadCalculMissionDivers"
+   },
+   {
+    "step": "LoadObjectif"
+   },
+   {
+    "step": "LoadEntrerMonstre"
+   },
+   {
+    "step": "FileClose",
+    "cursor": 342472
+   },
+   {
+    "step": "MissionPlaceTerrain",
+    "units_placed": [
+     0,
+     1,
+     2,
+     11,
+     12,
+     13,
+     14,
+     15
+    ],
+    "structures_placed": [
+     0
+    ],
+    "structures_inhabited": [
+     0
+    ]
+   }
+  ],
+  "seconds": 2.877,
+  "state_sha256": "45343214de7d29e8b22f296b6d1fa8ad1049ed21b6568854741e2362332d6dee",
+  "details": {
+   "diagnostic_bridges": [],
+   "excess_changed": [],
+   "live_arena_allocations": 0,
+   "next_free": "0x450f9000",
+   "identity_sharing": [
+    "EconomiaConstrucoes.estruturas",
+    "EconomiaConstrucoes.contagens_por_tipo",
+    "TerrenoSacolas.tipos",
+    "TerrenoSacolas.quantidades",
+    "Recrutamento.selecoes",
+    "Recrutamento.unidades",
+    "Recrutamento.tipos_unidades"
+   ],
+   "denied_attributes": {
+    "core:MundoNavegacao": [
+     "historico_navegacao",
+     "resultados_busca",
+     "solucionador"
+    ],
+    "economy:PropriedadeConstrucoes": [
+     "bibliotecas",
+     "jogador_deposito",
+     "numeros_unidades",
+     "ordens"
+    ]
+   }
+  },
+  "state_comparison": {
+   "blocks_compared": 881,
+   "bytes_compared": 2659375,
+   "differing_bytes_or_blocks": 3966,
+   "blocks_with_differences": [
+    "alloc00845",
+    "alloc00846",
+    "alloc00847",
+    "alloc00848",
+    "alloc00866",
+    "dgroup"
+   ],
+   "blocks": {
+    "alloc00845": {
+     "base": "0x41781000",
+     "bytes": 2704,
+     "differing_bytes": 26,
+     "first_mismatches": [
+      {
+       "address": "0x417812d8",
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]",
+       "owner_offset": 728,
+       "original": 4,
+       "composed": 0,
+       "entry": 4
+      },
+      {
+       "address": "0x417812da",
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]",
+       "owner_offset": 730,
+       "original": 22,
+       "composed": 0,
+       "entry": 22
+      },
+      {
+       "address": "0x417812de",
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]",
+       "owner_offset": 734,
+       "original": 1,
+       "composed": 0,
+       "entry": 1
+      },
+      {
+       "address": "0x417812e0",
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]",
+       "owner_offset": 736,
+       "original": 2,
+       "composed": 0,
+       "entry": 2
+      },
+      {
+       "address": "0x417812e2",
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]",
+       "owner_offset": 738,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x417812e4",
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]",
+       "owner_offset": 740,
+       "original": 4,
+       "composed": 0,
+       "entry": 4
+      },
+      {
+       "address": "0x4178131a",
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]",
+       "owner_offset": 794,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x4178131b",
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]",
+       "owner_offset": 795,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x4178131c",
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]",
+       "owner_offset": 796,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x4178131d",
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]",
+       "owner_offset": 797,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x4178133e",
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]",
+       "owner_offset": 830,
+       "original": 4,
+       "composed": 0,
+       "entry": 4
+      },
+      {
+       "address": "0x41781340",
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]",
+       "owner_offset": 832,
+       "original": 4,
+       "composed": 0,
+       "entry": 4
+      }
+     ],
+     "runs": 20,
+     "first_runs": [
+      {
+       "start": "0x417812d8",
+       "end": "0x417812d9",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]"
+      },
+      {
+       "start": "0x417812da",
+       "end": "0x417812db",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]"
+      },
+      {
+       "start": "0x417812de",
+       "end": "0x417812df",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]"
+      },
+      {
+       "start": "0x417812e0",
+       "end": "0x417812e1",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]"
+      },
+      {
+       "start": "0x417812e2",
+       "end": "0x417812e3",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]"
+      },
+      {
+       "start": "0x417812e4",
+       "end": "0x417812e5",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]"
+      },
+      {
+       "start": "0x4178131a",
+       "end": "0x4178131e",
+       "bytes": 4,
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]"
+      },
+      {
+       "start": "0x4178133e",
+       "end": "0x4178133f",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]"
+      },
+      {
+       "start": "0x41781340",
+       "end": "0x41781341",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]"
+      },
+      {
+       "start": "0x41781342",
+       "end": "0x41781343",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]"
+      },
+      {
+       "start": "0x41781348",
+       "end": "0x41781349",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]"
+      },
+      {
+       "start": "0x4178134a",
+       "end": "0x4178134b",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[0] [[0x4e19b8]+0]"
+      }
+     ]
+    },
+    "alloc00846": {
+     "base": "0x41782000",
+     "bytes": 2704,
+     "differing_bytes": 26,
+     "first_mismatches": [
+      {
+       "address": "0x417822d8",
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]",
+       "owner_offset": 728,
+       "original": 4,
+       "composed": 0,
+       "entry": 4
+      },
+      {
+       "address": "0x417822da",
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]",
+       "owner_offset": 730,
+       "original": 22,
+       "composed": 0,
+       "entry": 22
+      },
+      {
+       "address": "0x417822de",
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]",
+       "owner_offset": 734,
+       "original": 1,
+       "composed": 0,
+       "entry": 1
+      },
+      {
+       "address": "0x417822e0",
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]",
+       "owner_offset": 736,
+       "original": 2,
+       "composed": 0,
+       "entry": 2
+      },
+      {
+       "address": "0x417822e2",
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]",
+       "owner_offset": 738,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x417822e4",
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]",
+       "owner_offset": 740,
+       "original": 4,
+       "composed": 0,
+       "entry": 4
+      },
+      {
+       "address": "0x4178231a",
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]",
+       "owner_offset": 794,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x4178231b",
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]",
+       "owner_offset": 795,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x4178231c",
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]",
+       "owner_offset": 796,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x4178231d",
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]",
+       "owner_offset": 797,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x4178233e",
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]",
+       "owner_offset": 830,
+       "original": 4,
+       "composed": 0,
+       "entry": 4
+      },
+      {
+       "address": "0x41782340",
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]",
+       "owner_offset": 832,
+       "original": 4,
+       "composed": 0,
+       "entry": 4
+      }
+     ],
+     "runs": 20,
+     "first_runs": [
+      {
+       "start": "0x417822d8",
+       "end": "0x417822d9",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]"
+      },
+      {
+       "start": "0x417822da",
+       "end": "0x417822db",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]"
+      },
+      {
+       "start": "0x417822de",
+       "end": "0x417822df",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]"
+      },
+      {
+       "start": "0x417822e0",
+       "end": "0x417822e1",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]"
+      },
+      {
+       "start": "0x417822e2",
+       "end": "0x417822e3",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]"
+      },
+      {
+       "start": "0x417822e4",
+       "end": "0x417822e5",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]"
+      },
+      {
+       "start": "0x4178231a",
+       "end": "0x4178231e",
+       "bytes": 4,
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]"
+      },
+      {
+       "start": "0x4178233e",
+       "end": "0x4178233f",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]"
+      },
+      {
+       "start": "0x41782340",
+       "end": "0x41782341",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]"
+      },
+      {
+       "start": "0x41782342",
+       "end": "0x41782343",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]"
+      },
+      {
+       "start": "0x41782348",
+       "end": "0x41782349",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]"
+      },
+      {
+       "start": "0x4178234a",
+       "end": "0x4178234b",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[1] [[0x4e19b8]+4]"
+      }
+     ]
+    },
+    "alloc00847": {
+     "base": "0x41783000",
+     "bytes": 2704,
+     "differing_bytes": 26,
+     "first_mismatches": [
+      {
+       "address": "0x417832d8",
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]",
+       "owner_offset": 728,
+       "original": 4,
+       "composed": 0,
+       "entry": 4
+      },
+      {
+       "address": "0x417832da",
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]",
+       "owner_offset": 730,
+       "original": 22,
+       "composed": 0,
+       "entry": 22
+      },
+      {
+       "address": "0x417832de",
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]",
+       "owner_offset": 734,
+       "original": 1,
+       "composed": 0,
+       "entry": 1
+      },
+      {
+       "address": "0x417832e0",
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]",
+       "owner_offset": 736,
+       "original": 2,
+       "composed": 0,
+       "entry": 2
+      },
+      {
+       "address": "0x417832e2",
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]",
+       "owner_offset": 738,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x417832e4",
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]",
+       "owner_offset": 740,
+       "original": 4,
+       "composed": 0,
+       "entry": 4
+      },
+      {
+       "address": "0x4178331a",
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]",
+       "owner_offset": 794,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x4178331b",
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]",
+       "owner_offset": 795,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x4178331c",
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]",
+       "owner_offset": 796,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x4178331d",
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]",
+       "owner_offset": 797,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x4178333e",
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]",
+       "owner_offset": 830,
+       "original": 4,
+       "composed": 0,
+       "entry": 4
+      },
+      {
+       "address": "0x41783340",
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]",
+       "owner_offset": 832,
+       "original": 4,
+       "composed": 0,
+       "entry": 4
+      }
+     ],
+     "runs": 20,
+     "first_runs": [
+      {
+       "start": "0x417832d8",
+       "end": "0x417832d9",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]"
+      },
+      {
+       "start": "0x417832da",
+       "end": "0x417832db",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]"
+      },
+      {
+       "start": "0x417832de",
+       "end": "0x417832df",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]"
+      },
+      {
+       "start": "0x417832e0",
+       "end": "0x417832e1",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]"
+      },
+      {
+       "start": "0x417832e2",
+       "end": "0x417832e3",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]"
+      },
+      {
+       "start": "0x417832e4",
+       "end": "0x417832e5",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]"
+      },
+      {
+       "start": "0x4178331a",
+       "end": "0x4178331e",
+       "bytes": 4,
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]"
+      },
+      {
+       "start": "0x4178333e",
+       "end": "0x4178333f",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]"
+      },
+      {
+       "start": "0x41783340",
+       "end": "0x41783341",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]"
+      },
+      {
+       "start": "0x41783342",
+       "end": "0x41783343",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]"
+      },
+      {
+       "start": "0x41783348",
+       "end": "0x41783349",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]"
+      },
+      {
+       "start": "0x4178334a",
+       "end": "0x4178334b",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[2] [[0x4e19b8]+8]"
+      }
+     ]
+    },
+    "alloc00848": {
+     "base": "0x41784000",
+     "bytes": 2704,
+     "differing_bytes": 26,
+     "first_mismatches": [
+      {
+       "address": "0x417842d8",
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]",
+       "owner_offset": 728,
+       "original": 4,
+       "composed": 0,
+       "entry": 4
+      },
+      {
+       "address": "0x417842da",
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]",
+       "owner_offset": 730,
+       "original": 22,
+       "composed": 0,
+       "entry": 22
+      },
+      {
+       "address": "0x417842de",
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]",
+       "owner_offset": 734,
+       "original": 1,
+       "composed": 0,
+       "entry": 1
+      },
+      {
+       "address": "0x417842e0",
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]",
+       "owner_offset": 736,
+       "original": 2,
+       "composed": 0,
+       "entry": 2
+      },
+      {
+       "address": "0x417842e2",
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]",
+       "owner_offset": 738,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x417842e4",
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]",
+       "owner_offset": 740,
+       "original": 4,
+       "composed": 0,
+       "entry": 4
+      },
+      {
+       "address": "0x4178431a",
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]",
+       "owner_offset": 794,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x4178431b",
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]",
+       "owner_offset": 795,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x4178431c",
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]",
+       "owner_offset": 796,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x4178431d",
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]",
+       "owner_offset": 797,
+       "original": 3,
+       "composed": 0,
+       "entry": 3
+      },
+      {
+       "address": "0x4178433e",
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]",
+       "owner_offset": 830,
+       "original": 4,
+       "composed": 0,
+       "entry": 4
+      },
+      {
+       "address": "0x41784340",
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]",
+       "owner_offset": 832,
+       "original": 4,
+       "composed": 0,
+       "entry": 4
+      }
+     ],
+     "runs": 20,
+     "first_runs": [
+      {
+       "start": "0x417842d8",
+       "end": "0x417842d9",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]"
+      },
+      {
+       "start": "0x417842da",
+       "end": "0x417842db",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]"
+      },
+      {
+       "start": "0x417842de",
+       "end": "0x417842df",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]"
+      },
+      {
+       "start": "0x417842e0",
+       "end": "0x417842e1",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]"
+      },
+      {
+       "start": "0x417842e2",
+       "end": "0x417842e3",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]"
+      },
+      {
+       "start": "0x417842e4",
+       "end": "0x417842e5",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]"
+      },
+      {
+       "start": "0x4178431a",
+       "end": "0x4178431e",
+       "bytes": 4,
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]"
+      },
+      {
+       "start": "0x4178433e",
+       "end": "0x4178433f",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]"
+      },
+      {
+       "start": "0x41784340",
+       "end": "0x41784341",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]"
+      },
+      {
+       "start": "0x41784342",
+       "end": "0x41784343",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]"
+      },
+      {
+       "start": "0x41784348",
+       "end": "0x41784349",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]"
+      },
+      {
+       "start": "0x4178434a",
+       "end": "0x4178434b",
+       "bytes": 1,
+       "owner": "core:bolsas_tipos_unidades[3] [[0x4e19b8]+12]"
+      }
+     ]
+    },
+    "alloc00866": {
+     "base": "0x41896000",
+     "bytes": 100,
+     "differing_bytes": 4,
+     "first_mismatches": [
+      {
+       "address": "0x41896006",
+       "owner": "economy:Mercado.jogadores [0x5080a8]",
+       "owner_offset": 6,
+       "original": 1,
+       "composed": 0,
+       "entry": 0
+      },
+      {
+       "address": "0x4189601a",
+       "owner": "economy:Mercado.jogadores [0x5080a8]",
+       "owner_offset": 26,
+       "original": 2,
+       "composed": 0,
+       "entry": 0
+      },
+      {
+       "address": "0x4189602e",
+       "owner": "economy:Mercado.jogadores [0x5080a8]",
+       "owner_offset": 46,
+       "original": 4,
+       "composed": 0,
+       "entry": 0
+      },
+      {
+       "address": "0x41896042",
+       "owner": "economy:Mercado.jogadores [0x5080a8]",
+       "owner_offset": 66,
+       "original": 8,
+       "composed": 0,
+       "entry": 0
+      }
+     ],
+     "runs": 4,
+     "first_runs": [
+      {
+       "start": "0x41896006",
+       "end": "0x41896007",
+       "bytes": 1,
+       "owner": "economy:Mercado.jogadores [0x5080a8]"
+      },
+      {
+       "start": "0x4189601a",
+       "end": "0x4189601b",
+       "bytes": 1,
+       "owner": "economy:Mercado.jogadores [0x5080a8]"
+      },
+      {
+       "start": "0x4189602e",
+       "end": "0x4189602f",
+       "bytes": 1,
+       "owner": "economy:Mercado.jogadores [0x5080a8]"
+      },
+      {
+       "start": "0x41896042",
+       "end": "0x41896043",
+       "bytes": 1,
+       "owner": "economy:Mercado.jogadores [0x5080a8]"
+      }
+     ]
+    },
+    "dgroup": {
+     "base": "0x494000",
+     "bytes": 585728,
+     "differing_bytes": 3858,
+     "first_mismatches": [
+      {
+       "address": "0x498db4",
+       "owner": "gap:dgroup",
+       "owner_offset": 7002,
+       "original": 206,
+       "composed": 86,
+       "entry": 86
+      },
+      {
+       "address": "0x498db5",
+       "owner": "gap:dgroup",
+       "owner_offset": 7003,
+       "original": 183,
+       "composed": 52,
+       "entry": 52
+      },
+      {
+       "address": "0x498db7",
+       "owner": "gap:dgroup",
+       "owner_offset": 7005,
+       "original": 50,
+       "composed": 0,
+       "entry": 0
+      },
+      {
+       "address": "0x49a072",
+       "owner": "core:realizaveis_estruturas 0x49a070",
+       "owner_offset": 2,
+       "original": 1,
+       "composed": 0,
+       "entry": 0
+      },
+      {
+       "address": "0x4e19c4",
+       "owner": "core:experiencias_unidades 0x4e19c4",
+       "owner_offset": 0,
+       "original": 255,
+       "composed": 0,
+       "entry": 0
+      },
+      {
+       "address": "0x4e19c6",
+       "owner": "core:experiencias_unidades 0x4e19c4",
+       "owner_offset": 2,
+       "original": 255,
+       "composed": 0,
+       "entry": 0
+      },
+      {
+       "address": "0x4e19c8",
+       "owner": "core:experiencias_unidades 0x4e19c4",
+       "owner_offset": 4,
+       "original": 255,
+       "composed": 0,
+       "entry": 0
+      },
+      {
+       "address": "0x4e19ca",
+       "owner": "core:experiencias_unidades 0x4e19c4",
+       "owner_offset": 6,
+       "original": 255,
+       "composed": 0,
+       "entry": 0
+      },
+      {
+       "address": "0x4e19cc",
+       "owner": "core:experiencias_unidades 0x4e19c4",
+       "owner_offset": 8,
+       "original": 255,
+       "composed": 0,
+       "entry": 0
+      },
+      {
+       "address": "0x4e19ce",
+       "owner": "core:experiencias_unidades 0x4e19c4",
+       "owner_offset": 10,
+       "original": 255,
+       "composed": 0,
+       "entry": 0
+      },
+      {
+       "address": "0x4e19d0",
+       "owner": "core:experiencias_unidades 0x4e19c4",
+       "owner_offset": 12,
+       "original": 255,
+       "composed": 0,
+       "entry": 0
+      },
+      {
+       "address": "0x4e19d2",
+       "owner": "core:experiencias_unidades 0x4e19c4",
+       "owner_offset": 14,
+       "original": 255,
+       "composed": 0,
+       "entry": 0
+      }
+     ],
+     "runs": 553,
+     "first_runs": [
+      {
+       "start": "0x498db4",
+       "end": "0x498db6",
+       "bytes": 2,
+       "owner": "gap:dgroup"
+      },
+      {
+       "start": "0x498db7",
+       "end": "0x498db8",
+       "bytes": 1,
+       "owner": "gap:dgroup"
+      },
+      {
+       "start": "0x49a072",
+       "end": "0x49a073",
+       "bytes": 1,
+       "owner": "core:realizaveis_estruturas 0x49a070"
+      },
+      {
+       "start": "0x4e19c4",
+       "end": "0x4e19c5",
+       "bytes": 1,
+       "owner": "core:experiencias_unidades 0x4e19c4"
+      },
+      {
+       "start": "0x4e19c6",
+       "end": "0x4e19c7",
+       "bytes": 1,
+       "owner": "core:experiencias_unidades 0x4e19c4"
+      },
+      {
+       "start": "0x4e19c8",
+       "end": "0x4e19c9",
+       "bytes": 1,
+       "owner": "core:experiencias_unidades 0x4e19c4"
+      },
+      {
+       "start": "0x4e19ca",
+       "end": "0x4e19cb",
+       "bytes": 1,
+       "owner": "core:experiencias_unidades 0x4e19c4"
+      },
+      {
+       "start": "0x4e19cc",
+       "end": "0x4e19cd",
+       "bytes": 1,
+       "owner": "core:experiencias_unidades 0x4e19c4"
+      },
+      {
+       "start": "0x4e19ce",
+       "end": "0x4e19cf",
+       "bytes": 1,
+       "owner": "core:experiencias_unidades 0x4e19c4"
+      },
+      {
+       "start": "0x4e19d0",
+       "end": "0x4e19d1",
+       "bytes": 1,
+       "owner": "core:experiencias_unidades 0x4e19c4"
+      },
+      {
+       "start": "0x4e19d2",
+       "end": "0x4e19d3",
+       "bytes": 1,
+       "owner": "core:experiencias_unidades 0x4e19c4"
+      },
+      {
+       "start": "0x4e19d4",
+       "end": "0x4e19d5",
+       "bytes": 1,
+       "owner": "core:experiencias_unidades 0x4e19c4"
+      }
+     ]
+    }
+   },
+   "allocation_records": {
+    "original": 938,
+    "composed": 938,
+    "differing": 0,
+    "first_differences": [],
+    "compared_fields": [
+     "active",
+     "events",
+     "flags",
+     "index",
+     "initial_byte",
+     "locks",
+     "pointer",
+     "size",
+     "freed_sha256",
+     "kind"
+    ],
+    "not_compared_native_metadata": [
+     "caller_return",
+     "freed_caller_return",
+     "stack"
+    ]
+   },
+   "al": {
+    "original": 1,
+    "composed": null,
+    "equal": false
+   },
+   "native_stack": "not in the original final capture; the composition models no stack locals",
+   "equal": false
+  },
+  "binding_comparison": {
+   "original_events": 1400,
+   "composed_requests": 1400,
+   "mismatching_positions": 0,
+   "equal": true,
+   "original_arguments_not_captured": {
+    "count": 16,
+    "values": [
+     "<native stack 0x02007d38: not captured>"
+    ],
+    "reason": "string built by the original in its own stack frame (e.g. the GROUPE%02d key of GetPrivateProfileStringA); the capture keeps no final native stack, so only the other fields (section, default, size, file, result, written-bytes SHA-256) are compared at those positions"
+   },
+   "first_mismatches": []
+  },
+  "whole_state_equal": false
+ },
+ "strict_determinism": {
+  "repeated_state_sha256": "45343214de7d29e8b22f296b6d1fa8ad1049ed21b6568854741e2362332d6dee",
+  "identical": true
+ },
+ "diagnostic_bridged": {
+  "not_m1_evidence": true,
+  "purpose": "Show what lies beyond the strict stop; every bridge is a declared copy-in/copy-out",
+  "bridge_descriptions": {
+   "ordens": "DIAGNOSTIC ONLY, not M1 evidence: around EnginInitTechnologie 0x46c5af, copy the four live Core Bag allocations [[0x4e19b8]+4j] into Economy PropriedadeConstrucoes.ordens (its own 10,816-byte buffer), call the provider, then copy the 4 x 2,704 bytes back. Needed only because Economy cannot alias the four distinct allocations."
+  },
+  "bridges": [
+   "ordens"
+  ],
+  "reached_return": true,
+  "al": 1,
+  "stop": null,
+  "completed_steps": [
+   {
+    "step": "MakeMissionName",
+    "name_bytes": "\\World\\Monde01.ETA"
+   },
+   {
+    "step": "MissionPathBuild",
+    "path": "D:\\World\\Monde01.ETA"
+   },
+   {
+    "step": "ResetCounters"
+   },
+   {
+    "step": "IconeReset"
+   },
+   {
+    "step": "TerrainReset"
+   },
+   {
+    "step": "MiniMapReset"
+   },
+   {
+    "step": "BatimentResetAll"
+   },
+   {
+    "step": "EnginResetAll"
+   },
+   {
+    "step": "ProjectileReset"
+   },
+   {
+    "step": "MessageBoxInit"
+   },
+   {
+    "step": "BallonInit"
+   },
+   {
+    "step": "FileOpen"
+   },
+   {
+    "step": "HeaderPrelude",
+    "width": 64,
+    "height": 64,
+    "viewer": 0,
+    "cursor": 327728
+   },
+   {
+    "step": "Chemin_Remap",
+    "al": 1
+   },
+   {
+    "step": "StructureCopy",
+    "count": 1,
+    "indices": [
+     0
+    ]
+   },
+   {
+    "step": "LoadEngin",
+    "count": 16,
+    "indices": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15
+    ]
+   },
+   {
+    "step": "LoadMine"
+   },
+   {
+    "step": "IALoadAttaqueIni"
+   },
+   {
+    "step": "LoadBatimentGhost"
+   },
+   {
+    "step": "LoadCadreInfluence"
+   },
+   {
+    "step": "LoadFinMission"
+   },
+   {
+    "step": "LoadCalculMissionDivers"
+   },
+   {
+    "step": "LoadObjectif"
+   },
+   {
+    "step": "LoadEntrerMonstre"
+   },
+   {
+    "step": "FileClose",
+    "cursor": 342472
+   },
+   {
+    "step": "MissionPlaceTerrain",
+    "units_placed": [
+     0,
+     1,
+     2,
+     11,
+     12,
+     13,
+     14,
+     15
+    ],
+    "structures_placed": [
+     0
+    ],
+    "structures_inhabited": [
+     0
+    ]
+   },
+   {
+    "step": "EnginInitTechnologie"
+   },
+   {
+    "step": "BatimentInitCave"
+   },
+   {
+    "step": "Engin_RetrieveExperimente"
+   },
+   {
+    "step": "PlayerRetrieve"
+   },
+   {
+    "step": "IaReset",
+    "al_argument_unused": 1,
+    "eax": 0,
+    "provider_calls": 8667
+   },
+   {
+    "step": "MarcheResetAll"
+   }
+  ],
+  "seconds": 2.947,
+  "state_sha256": "da9ce107773331dc8fb985476419df2c6f3bc52ddacedc832122308d4d526ea4",
+  "details": {
+   "diagnostic_bridges": [
+    {
+     "bridge": "ordens",
+     "step": "EnginInitTechnologie",
+     "description": "DIAGNOSTIC ONLY, not M1 evidence: around EnginInitTechnologie 0x46c5af, copy the four live Core Bag allocations [[0x4e19b8]+4j] into Economy PropriedadeConstrucoes.ordens (its own 10,816-byte buffer), call the provider, then copy the 4 x 2,704 bytes back. Needed only because Economy cannot alias the four distinct allocations."
+    }
+   ],
+   "excess_changed": [],
+   "live_arena_allocations": 0,
+   "next_free": "0x450f9000",
+   "identity_sharing": [
+    "EconomiaConstrucoes.estruturas",
+    "EconomiaConstrucoes.contagens_por_tipo",
+    "TerrenoSacolas.tipos",
+    "TerrenoSacolas.quantidades",
+    "Recrutamento.selecoes",
+    "Recrutamento.unidades",
+    "Recrutamento.tipos_unidades"
+   ],
+   "denied_attributes": {
+    "core:MundoNavegacao": [
+     "historico_navegacao",
+     "resultados_busca",
+     "solucionador"
+    ],
+    "economy:PropriedadeConstrucoes": [
+     "bibliotecas",
+     "jogador_deposito",
+     "numeros_unidades",
+     "ordens"
+    ]
+   }
+  },
+  "state_comparison": {
+   "blocks_compared": 881,
+   "bytes_compared": 2659375,
+   "differing_bytes_or_blocks": 0,
+   "blocks_with_differences": [],
+   "blocks": {},
+   "allocation_records": {
+    "original": 938,
+    "composed": 938,
+    "differing": 0,
+    "first_differences": [],
+    "compared_fields": [
+     "active",
+     "events",
+     "flags",
+     "index",
+     "initial_byte",
+     "locks",
+     "pointer",
+     "size",
+     "freed_sha256",
+     "kind"
+    ],
+    "not_compared_native_metadata": [
+     "caller_return",
+     "freed_caller_return",
+     "stack"
+    ]
+   },
+   "al": {
+    "original": 1,
+    "composed": 1,
+    "equal": true
+   },
+   "native_stack": "not in the original final capture; the composition models no stack locals",
+   "equal": true
+  },
+  "binding_comparison": {
+   "original_events": 1400,
+   "composed_requests": 1400,
+   "mismatching_positions": 0,
+   "equal": true,
+   "original_arguments_not_captured": {
+    "count": 16,
+    "values": [
+     "<native stack 0x02007d38: not captured>"
+    ],
+    "reason": "string built by the original in its own stack frame (e.g. the GROUPE%02d key of GetPrivateProfileStringA); the capture keeps no final native stack, so only the other fields (section, default, size, file, result, written-bytes SHA-256) are compared at those positions"
+   },
+   "first_mismatches": []
+  },
+  "whole_state_equal": true
+ },
+ "provider_contract_changes_needed": [
+  {
+   "owner": "economy",
+   "file": "pesquisas-paralelas/economia/proprietarios.py (PropriedadeConstrucoes.__init__ / .ordens) and its consumers cauda_carga.CaudaCargaEconomia.definir_tecnologia_unidades, aprendizagem.Aprendizagem.atualizar_ordens and proprietarios.py line ~166",
+   "function": "PropriedadeConstrucoes(ordens=...) / CaudaCargaEconomia.inicializar_tecnologia_unidades (EnginInitTechnologie 0x441459, MissionLoad CALL 0x46c5af)",
+   "needed": "Accept the four live per-owner Bag pools by identity (the Core world's bolsas_tipos_unidades: four distinct 2,704-byte bytearrays, 26 x 104-byte Bags each) and address owner j as ordens[j] + type*104, instead of copying into one 10,816-byte buffer with a 2,704-byte owner stride.",
+   "why": "The constructor copies (bytearray(ordens)) into a single contiguous buffer. The original reaches the Bags through the pointer table [0x4e19b8], whose four entries point at four separate page-aligned allocations; Core already owns them as four bytearrays (ciclo_unidades.resetar_todas_unidades requires exactly that). One buffer cannot alias four non-contiguous allocations, so no shared memory map can include Economy's copy without a shadow.",
+   "evidence": "entry snapshot: [0x4e19b8]=0x41780000 -> 0x41781000, 0x41782000, 0x41783000, 0x41784000 (alloc00845..alloc00848, 2,704 bytes each); strict stop traceback cauda_carga.py:60 definir_tecnologia_unidades; the diagnostic copy-in/copy-out bridge then reaches AL=1 with the whole state equal, so this is the only blocking contract on the MONDE01 path."
+  }
+ ],
+ "recommended_non_blocking_changes": [
+  {
+   "owner": "core",
+   "file": "ferramentas/reset_terreno.py resetar_minimapa; avanco_unidades.MundoFisico mini_*",
+   "needed": "Accept the exact 16,384-byte (128x128) minimap allocations of [0x507d5c]/[0x507d60]/[0x507d64] (length >= w*h) instead of requiring 65,536-byte layers.",
+   "status": "non-blocking: the map exposes the first 16,384 bytes of Core's own layers as the allocations; the 49,152 provider-private bytes are poisoned 0x5c and verified unchanged at the end"
+  },
+  {
+   "owner": "core",
+   "file": "ferramentas/avanco_unidades.py MundoFisico.tiles/.regioes; estruturas_caminhos.CoresEstruturas.pilha",
+   "needed": "Optionally keep these u16 grids as u16 views of their allocations instead of Python lists.",
+   "status": "non-blocking: the lists are canonical, filled in place from the snapshot and packed for comparison; the header loader writes the tile layer through one staged byte image"
+  }
+ ]
+}

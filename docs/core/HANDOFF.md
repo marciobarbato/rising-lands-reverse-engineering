@@ -145,7 +145,7 @@ Stage 13 evidence/checks: four audited intact-original intervals cover complete 
 
 Stage 13 closes the precise pre-allocation reset prerequisite and is ready for required integration. Continue next with the original first allocation/lock return and terrain classification, using explicit resource effects and raw obstacle-marker input. Normal components and their allocation/cleanup/failure behavior remain open until independently compared. No mission/runtime or global completion claim follows from these counts.
 
-Completed Stage 13: implementation `dac71c04900fcac6f7a67bb07e24c52a30dbd69e`, final feature `6754df4052637a3c2de2a73ff9506c520b3a803a`, remote-main merge `8fcf1d35e9945d98eac07da8975ff933e4b9fe0b`. The seven-front round then resumed this worktree at main `8a499a9`, committed the untracked Stage 15 inventory [REMAP_CLASSIFICATION.md](REMAP_CLASSIFICATION.md) (inventory only, `a4a67efd52faefdddd173719faf732df35a62c22`) and merged main `f18b5a0` before Stage 14 implementation.
+Completed Stage 13: implementation `dac71c04900fcac6f7a67bb07e24c52a30dbd69e`, final feature `6754df4052637a3c2de2a73ff9506c520b3a803a`, remote-main merge `8fcf1d35e9945d98eac07da8975ff933e4b9fe0b`. The seven-front round then resumed this worktree at main `8a499a9`, committed the untracked remap inventory [REMAP_CLASSIFICATION.md](REMAP_CLASSIFICATION.md) (then labeled Stage 15, Stage 16 after the reorder) (inventory only, `a4a67efd52faefdddd173719faf732df35a62c22`) and merged main `f18b5a0` before Stage 14 implementation.
 
 Stage 14: [discovery domain contract](DISCOVERY_DOMAIN.md).
 
@@ -177,7 +177,44 @@ Remaining:
 - radius domains of the other 46 call sites (including AvanceEngin and the BatimentDecouvre/BatimentIllumine loops);
 - loaded-mission readiness.
 
-Next stage after coordinator confirmation: Stage 15 (remap allocation/classification with the declared-binding facility).
+Completed Stage 14: implementation `f8d93718625eb8eaae954d4426651cac4506324d`, final feature `5ba1190ad547594458996126a6aa11b3742ed1a9`, remote-main merge `7b7b96960cee0ec7868914e811f51b851fc27dba`.
+- The helper's candidate passed core 368/175 optional skips, combat 236/145, economy 413/190, graphics 184/0, missions 65/24, ai-runtime 25/1, audio 2/0 and workflow 8/0.
+- Reproduced on that main: the full 32-test native suite (10,503 segments, reports byte-identical) and the MONDE01 check.
+- Missions independently reproduced 6/6 natively.
+
+The coordinator then pre-authorized a reorder:
+- Stage 15: BatimentModifyMap, TerrainReset and MiniMapReset.
+- Stage 16: remap allocation/classification plus the declared-binding facility, per [REMAP_CLASSIFICATION.md](REMAP_CLASSIFICATION.md).
+- Stage 17: region labeling, cleanup and the final Chemin_Remap return.
+- Stage 18: Engin_RetrieveExperimente, then unit state 13 and DemonteBatiment.
+
+Stage 15: [reset and structure-minimap contract](RESET_MINIMAP.md).
+- APIs: `reset_terreno.resetar_terreno(mundo, minas, aleatorio)`, `reset_terreno.resetar_minimapa(mundo)` and `minimapa_estruturas.modificar_minimapa_estrutura(mundo, indice, ativo)`, plus `MundoFisico` methods. `SetMiniMap` modes 6/7 were added to `minimapa`.
+- Validation: eight original-only captures (303 segments) preceded translation and match. Native: 11 tests, 755 entries / 1,939 segments, every entry at its real return, zero failures.
+- Historical interruption status: committed locally, NOT yet integrated. The Stage 14 regression rerun after the `minimapa` change was still running when the session's usage limit was reached. The recovery below completes that validation without replacing its earlier reports.
+
+### Stage 15 recovery — 2026-10-28
+
+The new human request superseded the old stop. Preserved implementation `a572e8c0320ff929a6c3dd2e75907bc121f7dea6` was inspected on its clean existing worktree, then current main `8810b3730a0fb788af3eac2b447dea65372f597f` was merged as `cc95c0af6bb785f8e448e59b6d5c3f82073b5e39`. The original eight captures / 303 segments and historical 755 entries / 1,939 segments are unchanged. No REA session, source regeneration or extra worker was used. The coordinator granted this stage the exclusive heavy lease through integration and committed-main reproduction; native runs and checks are serialized.
+
+The audit independently matched eight full exported byte intervals, seven minimap jump targets and seven caller/DL instructions to the intact oracle, in `relatorios/recuperacao-stage15-source-audit.json`. A local input audit found two real protected-buffer defects: signed byte views could fail at bulk assignment after the aux writes; multidimensional views could fail after the first minimap layer had changed. The reproduction is retained in `relatorios/recuperacao-stage15-initial-buffer-audit.json`. The recovery requires one-dimensional contiguous byte views, normalizes admitted B/b access without copying/replacing caller views, and adds local/native view checks. Existing bytearray behavior, original instructions, captures and native limits remain unchanged. `--relatorio` was added to the two validators solely to retain separate fresh reports.
+
+Actual fresh commands, each run to completion before the next heavy command:
+
+```sh
+python3 -B ferramentas/validar_reset_terreno.py --relatorio relatorios/recuperacao-stage15-reset-local.json
+python3 -B ferramentas/validar_reset_terreno.py --emular --relatorio relatorios/recuperacao-stage15-reset-emulada.json
+python3 -B ferramentas/validar_descoberta_terreno.py --emular --relatorio relatorios/recuperacao-stage15-descoberta-emulada.json
+python3 -B scripts/check.py --domain core
+```
+
+Fresh outcomes:
+- **Reset/map PASS:** 14 tests / 759 original returns (13 terrain, 12 minimap, 734 structure), 2,139 bounded segments and 1,380 preserved loop resumptions. Maximum segment 86,186 instructions. Whole mapped world buffers, mine reserves, seed/draw count, minimap fill/call order and B/b views match. Zero failures, errors, skips, native faults or limits. Report above; full log `.local/recuperacao-stage15-reset.log` (187.147 seconds).
+- **Required discovery regression PASS:** 32 tests / 4,293 original entries / 10,503 bounded segments. Direct radii 0..23/0..20, insertion sums 0..11, domain stops, all mission-placement predicates and production-exit regressions pass with unchanged real subcalls and limits. Declared pre-discovery/caller stops remain explicit; zero failures, errors, skips, native faults or limits. Report above; log `.local/recuperacao-stage15-descoberta.log` (530.032 seconds).
+- **Local reset PASS:** eight executed tests / six explicit optional native skips; no x86. **Core check PASS:** 382 discovered / 181 optional skips, documentation links valid; log `.local/recuperacao-stage15-core-check.log`.
+- **Full flow NOT RUN:** this stage does not validate end-to-end `MissionLoad` or `MissionPlaceTerrain`, a whole post-load mission image, frames, AI/events or a playable mission. Its MONDE01 case is a standalone fixture using the actual dimensions and type-2 sanctuary record. Synthetic constructors or zero marker tables are not loaded-state evidence.
+
+The recovered stage is ready for the required owned commit and locked integration. Consumer contracts are in [RESET_MINIMAP.md](RESET_MINIMAP.md); mines/RNG must be the same live allocations used by the later mission loaders. Full remap allocation/classification, labeling, cleanup/final return and `Engin_RetrieveExperimente` remain open. After integration, only lightweight next-stage inventory is authorized until the coordinator schedules another implementation/heavy lease. Final feature/main hashes and committed-main reproduction are reported to the coordinator without amending a commit merely to add its own future merge hash.
 
 ## Agreed ownership with ai-runtime (seven-front round, 2026-10-28)
 
@@ -187,9 +224,9 @@ Proposed by ai-runtime from intact bytes and confirmed by core by message:
 - **Owned elsewhere:** the prelude's sound, HP regeneration through `BonusGetValEngin` (economy query), `EnginTrouveCible`/`SetAttaqueEngin` (combat) and state-4 `CreerSac` (economy). Core bodies raise named dependencies at those call sites. ai-runtime sequences the 32-frame target scan, spell timer and fatigue branches; core supplies primitives only. The fatigue bonus read at 0x4dfba0 and the provisions/Bag consumption are economy dependencies.
 - **Requested core API (not yet scheduled):** the committed `MundoNavegacao.atualizar_movimento(indice, maquina=None)` is a coordination over `girar` (RotateEngin 0x448599), `avancar_passo` (AvanceEngin prefix 0x448704) and `concluir_movimento` (state-2 tail 0x4563da), not the exact branch bodies. Proposed exact entries, each `(mundo, indice)` with a u16 index, returning None (the dispatcher ignores the value) and raising named dependencies at original call sites: `executar_estado_movimento` (state 2), `executar_estado_rotacao` (state 3), `executar_estado_retirada` (state 4) and `executar_estado_saco` (states 16/17). The coordinator schedules them; they are outside Stages 15–17.
 - **Also accepted by core, not yet scheduled:** `DemonteBatiment` 0x41effd, called by `CalculBatimentNextEtape` with a u16 structure index when state byte +5 is 3. It is the physical structure removal; economy supplies refund arithmetic as a callable query. Unit state 13 (0x4558e4, entering a structure or vehicle) is the physical entry body. `BatimentGetPlayer`/`BatimentGetType`/`BatimentEnDestruction` (economy queries) and `CalculEntreBatiment`'s `iagUnitSendMessage` 0x47 (ai-runtime) remain named dependencies at their call sites.
-- The declared-binding facility in `ferramentas/emulador.py` is Stage 15. A binding declared at an import thunk or game wrapper stops before entry, records the exact stack/register arguments, obtains the fixture result, applies the stdcall return and resumes at the caller. A fixture that cannot honor Windows semantics raises, and the run is reported as a stop.
+- The declared-binding facility in `ferramentas/emulador.py` is Stage 16 after the coordinator's reorder. A binding declared at an import thunk or game wrapper stops before entry, records the exact stack/register arguments, obtains the fixture result, applies the stdcall return and resumes at the caller. A fixture that cannot honor Windows semantics raises, and the run is reported as a stop.
 
-## Stage 15 binding requests received (inputs, not implemented)
+## Stage 16 binding requests received (inputs, not implemented)
 
 - **ai-runtime:** a frame oracle on the declared-binding facility (shape agreed above).
 - **missions:** a whole-`MissionLoad` oracle; real ETA bytes through the file wrappers and a deterministic allocation arena.
@@ -199,3 +236,310 @@ Proposed by ai-runtime from intact bytes and confirmed by core by message:
   - Each call is logged as [name, exact arguments, return].
   - These requests become stops: non-GMEM_FIXED flags, zero sizes, exhaustion, stale handles, non-"rb" modes and short reads.
   - Graphics offers its natively validated `ciclo_cache_terreno.MemoriaMotor` model of MemAlloc 0x467EA6 / MemFree 0x467ECB as a shared provider. MemAlloc adds to counter 0x4E2F3C before GlobalAlloc; MemFree never subtracts and falls into MemClose's RET at 0x467EF3.
+
+
+### Stage15 completed boundary and Stage16 continuation — 2026-10-28
+
+The Stage15 recovery above was delivered as `2f9d0df8a9f894673a1ce5737bb2f3bbbe4644ac`, merged/pushed to main as `b610bfad77ffadaa0ee5f6af02160d786ccfdc7b`, and reproduced there: four focused tests, 16 original returns / 212 segments, eight historical captures replayed, no failures/errors/skips. Tested provider trees matched main. This closes its earlier integration-pending wording without rewriting the historical records.
+
+Stage16 provides the opt-in [declared-boundary API](DECLARED_BINDINGS.md) in `emulador.py` / `vinculos_declarados.py` and [remap allocation/classification](REMAP_CLASSIFICATION.md) in `classificacao_remapeamento.py`. No consumer may replace unknown engine bodies with this transport. Imports must be actual PE IAT slots; original-image direct bindings are restricted to the inventoried I/O allowlist. Handlers consume explicit register/stack widths, return explicit EAX/optional GPRs, and log writes/results/stops. Native code sections are write-protected by the protocol; data/DGROUP/stack/arena writes are supported. Finite per-top-level binding budgets retain partial effects and report failure. No Windows/file/allocation/clock defaults are supplied.
+
+`retomar_classificacao_remapeamento(world,pending,alocar=...,fixar=...)` consumes Stage13's exact pre-GlobalAlloc handoff without resetting again. It calls allocation(0,65536), then lock(handle), including handle0. A missing provider stops at its exact original call with earlier effects retained; a null lock returns False before terrain reads or cleanup. Supported live class memory receives the complete ascending attrs-bit0 pass, then the complete ascending natural-obstacle pass using explicit 702-byte markers. Returned `ClassificacaoRemapeamento` retains live memory/u32 handle at 0x42ef8b. Tiles are 65536 explicit u16 values; class/read sources are exact contiguous byte buffers, with protected overlap checks. No unit insertion, component labels, edge correction, second allocation, cleanup or final remap success is implied.
+
+Coordinator-approved tiny readonly delegates: `consultas_unidades.tipo_unidade(world,index)` / world method reads raw +1 (u16 index0..799, consumed AL); `tipo_unidade_monstro(type)` masks to u8 and returns 20..24 inclusive. They add no activity/type filter, VM object or rule-domain behavior. EnginGetEtat/EnginSetPlayer remain dependencies.
+
+Original-first observations were made under the exclusive lease before translation: eight remap calls /299segments (five classification checkpoints, two null returns, one declared unsupported lock) plus 768 query entries. Actual MONDE01 normalized disk layers with shipped TABLEAU.COL produce 506 temporary class-one cells, not labeled loaded regions. Fresh validation: 19tests/1073segments, zero failures/errors/skips/native faults/limits; one unsupported-lock fixture and one binding-budget failure are intentional and distinct. Focused no-binding legacy: seven tests /45 original entries /241segments, all passing. A first temporary report-export AttributeError after passing tests is preserved; the repeat succeeds. Static audit independently matches eight original intervals and actual import metadata. See the contract for all report paths and order/input limits. Original EXE SHA remains6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb; normalized-analysis SHA remains26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0. No REA/Ghidra session was used.
+
+Core gate passes 401 discovered tests /186 explicit optional native skips, with documentation links valid. The owned commit and locked integration follow this validation; final delivery/main/reproduction hashes are reported separately, without amending solely for a future merge hash. Full MissionLoad/MissionPlaceTerrain and whole loaded mission comparison remain NOT RUN by this Core stage. Stage17 region labeling/cleanup/final Chemin_Remap return remains the next scheduled bounded slice; Engin_RetrieveExperimente follows. The coordinator owns global progress and the18:25 development/18:40absolute cutoff. Do not begin a further round without its scheduling grant.
+
+
+### Stage17 complete natural remap lifecycle — preparation and original-first evidence
+
+The original-only harness was committed asf0365f5, adopted Missions Stage11 main, and captured seven cases in immutable commit `2d541308c6652eeeb39867fd80d7252491afd465` before translation. [Whole-remap contract](REMAP_COMPLETION.md) records all byte ranges, resource ABI, image/store acceptance, file hashes and actual outcomes. The batch took148.947seconds /2,263segments: four real returns including actual MONDE01 (AL1,56components), two exact declared resource stops, and the original unchecked-null write fault at0x42efd9. All eight mapped blocks /5,246,976bytes per case, live/freed resources and temporary-memory tails are retained. No prior artifact/media or original instruction was modified.
+
+`conclusao_remapeamento.remapear_mundo` now composes reset→classification→component LIFO labels→edge correction→class cleanup→final AL. The continuation accepts the Stage16 live class handoff or an explicit retained phase. Missing providers name the original CALL/IAT and preserve a resumable state; buffer-identity GlobalHandle queries avoid conflating locked pointers and allocation handles. Callbacks remain owner-supplied. Python replay matches every captured mapped byte and ordered stack/region/edge/resource effect; fresh native differential and required gates/publication are pending. Full MissionLoad/MissionPlaceTerrain and the loaded-mission comparison remain NOT RUN by this Core stage. Engin_RetrieveExperimente remains the next Core P2 dependency, without claiming it was implemented here.
+
+
+Stage16's completed boundary is main `b4c5a1072a2b2e494b3a6bf374bd978fc6e67b9a`, implementation `9bf13ae01364b9b12c0b90b3debfabfddcc6eedd`, feature `830e6390b57e62155a1c433041e871f62f61a79a`. Normal pushes and fetched ancestry were verified. Exact-main19test/1,073segment reproduction matches the tested report; the seven-test no-binding Core regression passes. The coordinator-requested focused AI initialization module then passed11tests with19fresh original captures and19fresh translation comparisons; all48shared binding registries remained empty. Those post-main reports are preserved in `.local/stage16-repro-main.json` and `.local/stage16-ai-legacy-main.json`. This closes earlier publication-pending wording; whole MissionLoad remained untested.
+
+
+Stage17 fresh native comparison now PASSES seven tests /2,267segments in157.394seconds, zero failures/errors/skips. This includes all seven complete original entries and four separate final-tail entries; complete mapped bytes, exact resource generations/call results, ordered LIFO/label/edge stores and returns equal frozen observations and Python. Two declared resource stops and one original unchecked-null write fault remain explicit; no unexpected fault or limit. The first attempt's key-format/assertion-rendering failure before full-remap execution is preserved in `relatorios/stage17-native-first-attempt.json`; only test diagnostics/key normalization changed. Native instruction limits, game code and captures were unchanged. Focused legacy regression, Core/common gates and exact-main reproduction follow this result; final hashes are reported without amending solely for a future merge hash.
+
+Focused Stage16 regression also passes19tests /1,073segments with zero failures/errors/skips; `relatorios/stage17-classificacao-regressao.json` preserves its separate fresh result. The legacy report scope describes its own checkpoint-only tests; Stage17's separate report above establishes full remap returns.
+
+Required Core gate PASS:408discovered /188explicit optional native skips, documentation links valid,10.350seconds; `relatorios/stage17-core-check.json`. Stage17 and focused legacy original comparisons above ran without skips. The owned commit is ready for the unchanged locked integration helper and focused committed-main reproduction.
+
+
+### Stage17 delivered boundary and cutoff handover
+
+Implementation `93620d34a7a1cf722764a690fb3b945920d9531e`, final feature `e5f0b69573688418430524171058e3df124a4904`, main merge `09d3953c6dda02ba6e4f6ca9ac61e51ca48782e6`. The unchanged helper held the common lock through fetch, semantic merge, common checks and normal feature/main pushes; all delivery/capture/feature/merge ancestry was verified on fetched main. Common suites all pass: Core408/188optional skips, combat246/149, economy424/196, graphics192/0, missions80/31, AI36/4, audio20/3 and workflow8/0. Fresh Stage17 and focused legacy native comparisons have no optional skips.
+
+Focused reproduction on that exact main passes: all seven frozen whole-state/Python cases, four native final-tail entries, and a fresh complete original MONDE01 return AL1 with56components. All5,246,976mapped bytes, resource generations/results, ordered LIFO/label/edge writes and registers equal immutable evidence. Total735native segments (731whole MONDE01 plus four tail),342binding resumptions,388preserved loop resumptions, maximum88,074instructions; no unexpected fault or limit. Relevant Core/mission-fixture source identities match the tested implementation; captures remain unchanged. Reports/logs: `.local/stage17-main-repro.json`, `.local/stage17-main-repro.log`, `.local/stage17-integration.log`. Main reproduction was complete and the exclusive heavy lease explicitly released at approximately18:19 BRT on2026-10-28. No child remains. Full MissionLoad and a whole loaded-mission snapshot remain NOT RUN by this Core stage.
+
+The remaining note is LIGHT handover documentation, added after that verified main boundary. The coordinator canceled queued P2 development at18:16 to preserve the remaining validation window for Economy. No P2 capture, implementation, native comparison or integration was started.
+
+### Next window: static Engin_RetrieveExperimente lead only
+
+Coordinator's independent intact-EXE static read:54bytes at0x441623..0x441659, SHA256 `9e9298121bdb5c12a6d8912f5430b3cdcbcb5cb7831c466a672b320f8c7d4522`. The observed shape appears to copy20u16 words in ascending order, grouped as five words per owner across four owners. Actual source40bytes are0x4e19ec..0x4e1a14 exclusive; destination40bytes are0x4e19c4..0x4e19ec exclusive. The source must be the live saved experience buffer, and destination the existing live current queue; neither zero state nor a copied/default queue is justified. The shared epilogue at0x440d59 still needs its own byte/ABI audit. This paragraph preserves the coordinator's static finding; Core has not independently executed or validated the routine.
+
+Future bounded work starts with an independent original-only copy/guard/word-order capture and committed immutable evidence before translation, then focused fresh comparisons, required gates, locked integration and committed-main reproduction. Schedule it under a new coordinator grant. Unit-state13, DemonteBatiment, other dispatch primitives, full MissionLoad, frames and loaded gameplay remain separate gaps. Development stops at18:25 BRT;18:25–18:40 is handover only. No new development round is authorized by this note.
+
+
+### Engin_RetrieveExperimente 0x441623 — original-first delivery on `feat/re-core`
+
+This entry follows the static lead above, under a new coordinator grant. The branch first merged `origin/main` `9bf217d` normally (merge `f291638`). The [retrieval contract](EXPERIENCE_RETRIEVAL.md) holds the ABI, the API, the domain and the saved-buffer provenance.
+
+**Static findings.** An independent byte audit confirms the coordinator's static lead: 54 bytes, SHA `9e9298…4522`.
+- The routine is an unguarded ascending copy of 20 u16 words from `0x4e19ec..0x4e1a14` to `0x4e19c4..0x4e19ec`.
+- It consumes no register. EBX, ECX, EDX and ESI are pushed and popped; EDI and EBP are untouched.
+- The shared epilogue `0x440d59..0x440d5e` is POP ESI, EDX, ECX, EBX and then RET, with no stack arguments.
+- On exit EAX=`0x28`, ZF=PF=1 and CF=AF=SF=OF=0, with DF kept. The caller ignores all of these: `PlayerRetrieve` begins with XOR EAX,EAX.
+
+**Saved-buffer provenance.** The buffer is in `.bss`, and 23 code references cover it.
+- `Engin_ResetExperience 0x441470`, called from MenuInit and MissionLoadName, fills it with (`FF`,0) pairs.
+- `Engin_StoreExperimente 0x4414f8`, called from `CalculGame+0x21a` after `MissionNext`=1, stores the top five AF values per owner.
+- `Engin_LoadExperimente 0x4414ad`, called from GameLoad, reads it when the save version is ≥4. `Engin_SaveExperimente` writes it out.
+
+These producers are recorded and run natively as provenance only; they are not translated.
+
+**Evidence and validation.**
+1. Static export, bench and capture were committed in `ff92691` before translation. Capture SHA `5c734542…20d3`: 20 cases, 22 segments, including native Reset and Store chains. The image changes only in the current queue. The capture regenerated byte-identically later in the same session.
+2. Implementation commit `5b82b99` adds `recuperacao_experiencia.recuperar_experiencias(atuais, guardadas)` and `recuperar_experiencia_missao(mundo, guardadas)`. Both work on the live buffers, raise `DependenciaExperienciaGuardada` at `0x441645` for a missing saved queue, and fail protected inputs before any store.
+3. The CPU-free replay of all 20 frozen cases passes.
+4. The fresh native differential PASSES: 10 tests, 74 Python/native comparisons, 78 segments, with zero failures, errors, skips, faults or limits, and no binding or patch.
+5. Local mode runs 10 tests, 6 executed and 4 optional skips.
+6. The Core gate result is recorded in `relatorios/recuperacao-experiencia-core-check.json`.
+
+No failed attempt occurred in this slice. Logs are in `.local/xp/`.
+
+**NOT RUN:** complete MissionLoad or six-tail composition; a real MONDE01 queue snapshot; translation of the producers; locked integration and exact-main reproduction, which the coordinator performs. Missions should call `recuperar_experiencia_missao(mundo, guardadas)` with the session's actual live saved buffer, and never with a constructed default.
+
+
+### M2 frame foundations — original-first delivery on `feat/re-core`
+
+The branch merged `origin/main` `81ebbf9` (fast-forward). The [frame-foundations contract](FRAME_FOUNDATIONS.md) holds the inventory, ownership, API and validation.
+
+**Inventory.** `extrair_fundacoes_quadro.py` exports 29 hash-checked intervals into `evidencias/fundacoes-quadro/` (commit `a5830f6`, static only). For each it records the operand-derived reads and writes, the grids, the callees and whole-code reference lists.
+- **Core-owned:** the `ProgIteration` counters, the load counter reset, `GameNextFrame`, the `Random` family, `iaRandom`, `LongRand`/CRT `rand` and the permutation draw.
+- **Other owners:** `SetUpdateChamp`/`UpdateChamp`/`ScanNouvellePatate` belong to Economy, which has committed them. `NextAnim*` belongs to Graphics under the agreed contract. `CalculNextReflect` and `PlayerAttaqueReset` (a single RET) belong to ai-runtime, `SetClipping` to Graphics, and `InitGameZone` (mouse zones) to UI.
+
+**Cross-front findings** (requested contracts, not edits):
+1. The permutation cursor `0x4e1d18` is advanced by rendering (`AffBatiments`, `AffCorpsEngin`, `AffDeplaceEngin`, `AffVeget`, `DDFlipPage`) and also consumed by the world stores of `NextAnim*`. The frame oracle therefore needs AffGame's cursor consumption, which depends on the draw divisor.
+2. Single-player `NextAnimTerrain`/`NextAnimVeget` visit only the viewport. The viewport size `0x508724`/`0x508726` is **0×0 in the frozen M1 state**, so the frame oracle must declare its source.
+3. The load case zeroes the counters and falls through into a frame body in the same CalculGame call, provided `MenuInit` leaves state `0x12`. Missions' trace decides this.
+4. `iaRandom(0)` needs a declared clock.
+
+**Evidence and validation.** These are M1 post-load inputs, not yet frame-1 inputs.
+1. The capture is committed before translation (`9a80499`): 62 cases, 195 steps, 202 segments, with the code hash unchanged and timeGetTime as the only binding.
+2. Implementation commit `06ed6d9`: `fundacoes_quadro.py` plus the CPU-free M1 loader `estado_m1_quadro.py`. The loader reuses `cadencia.avancar_contadores` and `candidatos_rota.aleatorio_caminhos`.
+3. The CPU-free replay of all 195 steps matches the whole state, the ordered writes and the registers.
+4. The fresh native differential PASSES: 11 tests, 659 comparisons and 677 segments, with zero failures, errors, skips, faults or limits.
+5. Local mode runs 11 tests: 8 executed and 3 optional skips.
+
+Logs are in `.local/frame/`. No failed attempt occurred.
+
+**NOT RUN:** re-validation at frame-1 inputs, which waits for Missions' capture and entry trace; any frame-oracle composition; locked integration and exact-main reproduction, which the coordinator performs.
+
+
+### M2.1 frame 0/frame 1 — re-validation and reached Core callees on `feat/re-core`
+
+The branch merged `origin/main` `ec931d2`, which includes Missions' first-frame capture and entry trace. The [frame-foundations contract](FRAME_FOUNDATIONS.md#frame-0frame-1-re-validation-and-the-reached-core-callees-m21) holds the details. All inputs are the exact frame inputs: frame 0 is the load-state CalculGame body, and frame 1 is the second pass.
+
+**Foundations re-validated** against the Missions phase snapshots, with no CPU:
+- the load counter reset;
+- the `ProgIteration` prefix, which is the only DGROUP change between frames;
+- `GameNextFrame` (1 per frame);
+- `Random` (8 per frame, one per state-7 unit), with `iaRandom` untouched;
+- the permutation draw: MenuInit plus the CD branch in frame 0, the CD branch only in frame 1, with the MCICD_Play EAX/EDX/BL matched.
+
+The viewport size stays 0×0, so NextAnim* visit no cell. The per-frame cursor step is Core's CD-branch draw.
+
+**Reached Core callees.** The capture was committed before translation (`2e5cc6d`): 678 isolated native calls with Missions' `Isolamento`, the translation cache flushed after each hook_add, and the path reproduction passed. `chamadas_quadro_core.py` translates them over `memoria_quadro_core.MemoriaQuadro`, whose interface matches ai-runtime's `MemoriaDeclarada`:
+- GetBit and SetBit;
+- CaseEstDecouverte and CaseEstIlluminee;
+- BatimentCollision, BatimentGetCase, BatimentEstDecouvert and BatimentContourEstIllumine;
+- SetCollision, SetEnginCollision and Chemin_ModifieZone mode 2;
+- CalculFatigue, up to its threshold;
+- Random and GameNextFrame over memory.
+
+**Inputs and order.** Inputs are register values plus live memory. Chemin's pushed `sub` and CalculFatigue's `bonus(jogador, tipo, seletor)` are explicit arguments. The bonus is Economy's BonusGetValEngin and is called with AL=owner, BL=type, DL=0. Mutation order equals the original: SetEnginCollision runs SetCollision and then Chemin for each cell in footprint order, and Chemin writes the slot word before the region word. Callbacks happen only through `bonus`.
+
+**Validation.**
+1. The static manifest has 16 intervals, 4 jump tables and 4 data tables. It records that all 20 captured call sites overwrite flags before reading them.
+2. The CPU-free replay of all 678 calls from exactly the original's read-before-write bytes matches every store and all seven GPRs: 15 tests, which also cover the snapshot re-validation and the static regeneration.
+3. The fresh native differential, under the lease, made **1,918 comparisons with 0 mismatches and 0 stops**. These are the 678 exact calls plus perturbations of registers, types and origins, owners 0–7, a discovered cell, free region cells, counter wrap, owner bonus and seed edges. The positive visibility exits and the Chemin insert were reached.
+4. Three failed validator attempts (perturbation domain or a base computation) are kept in `.local/frame/`.
+
+**Stops.** Each raises `DependenciaRamoCore` before any store:
+- CalculFatigue: the threshold branch `0x452d61` and a missing bonus provider `0x452d48`;
+- Chemin_ModifieZone: modes 0 `0x43e153`, 1 `0x43e1b4`, 3 `0x43e256` and BL>3 `0x43e29c`.
+
+**Cross-front contracts** (requests, not edits):
+- **ai-runtime:** bind `provedores_core(memoria, bonus)` at the original CALLs, with keywords `caso`, `jogador`, `estrutura`, `unidade` and `valor`/`bit`. The Core providers touch these regions, which `MemoriaDeclarada` must declare:
+  - `0x4e19a0` and the unit pool;
+  - the structure pool `0x49a0c8`;
+  - the data tables `0x495c04..0x4962d4`, `0x4962c8` and `0x4965dc`;
+  - the grid pointers `0x507d78..0x507d98` and `0x507da8`, plus the region pointer `0x4e0f38` and the grids they point to;
+  - `0x497164`, `0x496d40` and the bonus table `0x4dfba0`.
+- **Economy:** `BonusUnidades` copies its table at construction, so Core's differential builds a fresh one from the live bytes for each query. A live-view constructor is requested. CalculMatiere can bind Core's GetBit/SetBit.
+- **Missions:** TestFinDeMission can bind `celula=lambda i: caso_estrutura(m, i)['EAX']` and `iluminada=lambda c, p: caso_esta_iluminada(m, c, p)['EAX']`. CaseGetZoneInfluence and GetTopLeftCaseZoneInfluence are not reached in frame 0/1 and are not implemented. BatimentExiste stays with Missions.
+- **Coordinator:** Core loads Economy's `bonus_unidades` through the private `integracao.providers._load_providers`. A public loader is requested.
+- **Graphics:** in frame 1 the cursor `0x4e1d18` moves only through Core's CD draw. AffGame's own cursor draws remain the open frame-oracle input.
+
+**NOT RUN:** CalculFatigue's threshold branch and Chemin modes 0/1/3 natively in Python; AffGame; locked integration and exact-main reproduction, which the coordinator performs.
+
+
+### M2.1 round 3: SetClipping, InitGameZone, NextAnim* and the live task VM on `feat/re-core`
+
+The branch merged `origin/main` `738cc17`. Details are in [FRAME_FOUNDATIONS](FRAME_FOUNDATIONS.md#frame-0frame-1-round-3-clipping-mouse-zones-nextanim-and-the-live-task-memory).
+
+**Capture before translation** (`58a0440`): 61 isolated native calls at the exact frame inputs, each with its executed native blocks, and the path reproduction passed. Reached: SetClipping, InitGameZone(1, 0) from MenuInit and from CalculGame with its nested queries and zone setters, and NextAnimTerrain/NextAnimVeget in both frames. Not reached: MarcheGetPos/Taille and NextAnimVegetFullMap.
+
+**API** (`7f2005e`), in `chamadas_quadro_core.py` and through `provedores_core`. The provider calls are:
+- `SetClipping(eax, edx, ebx, ecx)`;
+- `InitGameZone(eax, edx)`;
+- `NextAnimTerrain(x, y)` / `NextAnimVeget(x, y)`;
+- `NextAnimVegetFullMap()`.
+
+All of these are void and return None.
+
+**Inputs and order.** Inputs are register values plus live memory. MouseSetZone's pushed word is an argument. Mutation order equals the original:
+- SetClipping stores AX, BX, DX, CX.
+- InitGameZone stores zones 1–9, 0xa, 0x1a, 0x1b, 0x1c–0x1f and 0xb in that order. Each zone stores four dwords and then the maximum index.
+- MouseTestZone runs last.
+
+There are no callbacks.
+
+**Validation.** The CPU-free replay of all 61 calls passes. The fresh native differential over both captures (739 calls) made **2,034 comparisons with 0 mismatches**.
+
+**Stops.**
+- InitGameZone modes 2/3/4/other: `0x4719be`/`0x47194f`/`0x47184d`/`0x471949`;
+- NextAnimTerrain/NextAnimVeget with viewport rows: `0x477737`/`0x47731b`;
+- NextAnimVegetFullMap: `0x4774fa`.
+
+**Task VM** (`4c486ba`). `tarefas_ia.MaquinaTarefasViva(programa, memoria)` and `.sobre_memoria(programa, flat_memory)` run the unchanged VM in place over `0x512320..0x514908`. This covers the records, the free list, the context headers (s32 head, u32 count) and the active count `0x514904`. ai-runtime can replace `PonteTarefas` with it. It equals the bridge at every frame state and for all 42 posted task types, and the writes land in the caller's buffer.
+
+**Contracts.**
+- **Coordinator:** Core now uses `integracao.providers.load_economy_bonus()`.
+- **Economy:** the live-table BonusUnidades constructor is not on main yet. Core still builds a fresh instance from the live bytes for each query, and will switch when it lands.
+- **ai-runtime:** bind the new providers at CALLs `0x42d2a6`, `0x42d2d9`, `0x42d441` and `0x42d467`, and replace the task bridge. MenuInit's own InitGameZone call (MenuInit+0x1ce) can use the same provider.
+
+**NOT RUN:** the NextAnim* cell loops (they need a non-empty viewport); RestoreAll and MenuInit (unassigned); locked integration.
+
+
+### M2 round 4: CRT I/O boundaries, display-scenario frames, live tile grid on `feat/re-core`
+
+The branch merged `origin/main` `81e0a26`, which includes Economy's live bonus table and Missions' display-scenario captures.
+
+1. **CRT `fseek` 0x48cda2 and `fgets` 0x48ce96** are inventoried I/O boundaries (`f02c930`). They are in `FRONTEIRAS_IO`, and [DECLARED_BINDINGS](DECLARED_BINDINGS.md) has the exact ABI and the byte-grounded owner review:
+   - They are Watcom CRT stdio routines that touch only the FILE object, the lock hooks, lseek/fgetc, the buffer and errno.
+   - Every call site's FILE* comes from the inventoried `fopen`.
+   - No caller reads EDX before overwriting it or branching on AL/EAX.
+
+   Tests cover the static bodies, call-site provenance and registration (CPU-free), plus the native FileReadLine/FileSeek over declared fgets/fseek fixtures. Under the lease, 18 native and protocol tests pass, including the existing remap/CRT-wrapper suite. `ftell` 0x48cf11, used by FileSize, still needs its own review.
+2. **Display-scenario frames.**
+   - **Capture before translation** (`80fd5ef`): 70 isolated calls; the path reproduction passed.
+   - **Translation** (`0b8f1ea`): the NextAnimTerrain/NextAnimVeget viewport loops and CRT `rand`/LongRand.
+   - **Validation:** the CPU-free replay of all 70 calls passes. The native differential in the display scenario made 194 comparisons with 0 mismatches. The v1 rerun made 2,034 with 0 mismatches.
+   - **Economy:** Core now uses `load_economy_bonus()` together with `BonusUnidades.da_memoria` (native) and `.vivo` (replay) (`d1a81d5`).
+
+   Details are in [FRAME_FOUNDATIONS](FRAME_FOUNDATIONS.md#round-4-the-display-scenario-is-the-m2-reference).
+3. **Live tile grid** (`c0fc446`, contract in [LIVE_TILE_GRID](LIVE_TILE_GRID.md)). `MundoFisico.vincular_tiles(buffer)` binds `[0x507d70]`'s 131,072 bytes by identity through `grade_u16.GradeU16`; after it, `mundo.tiles.buffer is buffer`. The default list world is unchanged. Identical results with a live grid and with the list:
+   - structure placement;
+   - region reconstruction;
+   - the eight original classification captures.
+   - **Economy:** pass `mundo.tiles.buffer` as `mosaicos`.
+   - **Missions:** replace `vincular_lista(P(TILES), …)` with `w.vincular_tiles(mapa.vista(P(TILES), 131072))`.
+
+**NOT RUN:** `ftell`; NextAnimVegetFullMap and InitGameZone modes 2–4 (not reached); locked integration.
+
+
+### M2 round 5: ftell, frames to counter 128, unreachable modes, field-growth grids on `feat/re-core`
+
+The branch merged `origin/main` `d94a59e`. ai-runtime reported no open Core gap: EnginOccupeCase goes through Combat's `ocupa_celula`, and its NextAnim* gap was closed by round 4.
+
+1. **CRT `ftell` 0x48cf11** (`01216d2`). It is in `FRONTEIRAS_IO`, and [DECLARED_BINDINGS](DECLARED_BINDINGS.md) has the ABI and review: EAX FILE* → EAX s32 position or −1, every other GPR preserved. Its callers are FileSize and `__doclose`, inside the bound fclose. The original FileSize runs natively over fseek/ftell fixtures. Under the lease, 19 native and protocol tests pass.
+2. **Frames up to counter 128.**
+   - **Survey** (`f426e30`): no new Core routine in frame logic, and no raid by counter 128. The first new entries are Combat's EnginTrouveCibleScan (frame 17) and Economy's ScanNouvellePatate (frame 45).
+   - **Capture before translation** (`ca5a7f3`): later-frame NextAnim*, InitGameZone modes 2/3/4/invalid, FullMap as a foreign entry, and the display-path queries.
+   - **Translations:** InitGameZone modes 2/3/4 and the invalid modes; NextAnimVegetFullMap; TerrainEstDecouvert/Illumine, ExisteEngin, EnginGetType/Player, EnginEstArmure/Miroir/Terreur, TypeEnginSeFatigue; and the getters MissionGetNum and MenuGetNbItem.
+   - **Validation:** the CPU-free replay of every case is exact. Native differentials: display 484 comparisons and v1 2,048, all with 0 mismatches.
+   - Details are in [FRAME_FOUNDATIONS](FRAME_FOUNDATIONS.md#round-5-frames-up-to-cycle-counter-128-unreachable-modes-display-path-queries).
+3. **Field-growth grids** (`f5c788c`, [LIVE_TILE_GRID](LIVE_TILE_GRID.md)). `MundoFisico.vincular_grades(tiles, regioes, atributos, objetos, donos_objetos)` binds every grid UpdateChamp/ScanNouvellePatate touch, by identity. It validates everything before binding, and region rebuilds and the remap reset keep the identity. Economy's actual `propagar_planta` plants into Core's live object grid.
+   - **Request to Economy:** `RecursosTerreno.vivo(...)`, since the constructor copies.
+
+**For Missions:**
+- The survey and the capture name frames by the cycle counter.
+- If your frame-sequence mapping uses other inputs or reaches a raid, Core will capture at those states.
+
+**NOT RUN:**
+- frames beyond counter 128, so no first raid;
+- CalculFatigue's threshold branch and Chemin modes 0/1/3;
+- locked integration.
+
+### Unicorn teardown: durable fast exit and coalesced page mapping on `feat/re-core`
+
+Contract and measurements: [UNICORN_TEARDOWN](UNICORN_TEARDOWN.md). This is tooling only; no reconstructed behavior changed.
+
+- **Cause.** Unicorn 2.1.4's `uc_close` frees regions one at a time, and each free rebuilds the address-space view. Teardown is therefore superlinear in the region count. Measured on the Mac mini (`relatorios/encerramento-unicorn.json`, run branch `runs/core/teardown-timing` e0c106b, exclusive lease):
+  - 1,000 pages take 0.113 s to close, 2,000 take 0.79 s and 4,000 take 7.6 s;
+  - 8,000 exceed 120 s;
+  - mapping costs the same, and contiguous pages cost the same as disjoint ones.
+  - Missions' display bench has only 16 regions, and its `uc_close` takes 2 ms.
+  - Economy's capture bench maps the 25,343 display blocks as 26,262 single-page regions. They form 5 contiguous runs, and that is the bench that held the lease for more than 75 minutes after its output was written.
+- **API.**
+  - `emulador.mapear_paginas(cpu, paginas, permissoes=None)` maps the pages as one region per contiguous run and returns the runs. `paginas_em_execucoes(paginas)` gives the runs without mapping, and refuses an unaligned page.
+  - `encerramento_captura.encerrar_captura(codigo, *saidas)` fsyncs each output and its directory, flushes stdout/stderr (fsyncing them when they are files), then calls `os._exit(codigo)`.
+  - `sincronizar` and `descarregar_saidas_padrao` are its parts.
+  - A missing output raises before exiting.
+- **Adopted** by Core's display-bench scripts: `capturar_quadros_seguintes`, `capturar_exibicao_quadro1`, `levantar_quadros_exibicao` and `validar_chamadas_quadro_core`. Their `main()` now returns `(status, written path)`.
+- **Coalesced.** The 26,262 display-state pages coalesce into 5 regions, which map and close in 0.000 s.
+- **Validation.** `testes/test_encerramento_captura.py` covers durability and status, the missing-output refusal, coalesced mapping (identical bytes, the same faults outside the runs), and a time bound: a process holding 3,000 regions exits in under 1 s after writing.
+- **Requests.**
+  - **Economy:** map with `mapear_paginas` in `capturar_quadro_m2_original.Captura` and `CapturaExibicao`, and end captures with `encerrar_captura`.
+  - **Combat:** the same applies to `capturar_quadro_m1.py`.
+- **Gate.** Gate on the merged tree: see `relatorios/teardown-core-check.json`.
+- **NOT RUN:** the other fronts' scripts are unchanged. Applying `mapear_paginas` and `encerrar_captura` to them is their owners' change.
+
+### M2.3 acceleration: coverage run, and the raid's spawn/order Core routines on `feat/re-core`
+
+1. **Coverage-only long run** (`287be9d`): `ferramentas/cobrir_quadros_exibicao.py --ate N --saida PATH`. It runs the display reference past frames 0/1 to cycle counter N, and records:
+   - each routine's first and last entry frame and total entries;
+   - per frame: the counter, RNGs, CRT seed, cursor, view origin, the DGROUP hash (every frame), the whole-state hash (every `--hash-cada` frames), boundaries and display ticks.
+
+   It uses one code-range block hook that counts every symbol entry inside each executed block, fall-through included. At about 0.4 s per frame, this is roughly 9× lighter than 1,952 per-entry code hooks, and the counts are equal apart from the 20 declared boundaries, which are listed. Frames are written to a JSONL file fsynced at checkpoints, with an atomic summary; a stop is recorded and exits 2; the run ends with `encerrar_captura`. The display clock is extended by its own rule. Frames 0–12 equal the committed 0–128 survey. The 9,200-counter run was requested from the Mac mini. Its output is coverage, not evidence.
+2. **Capture first.** `ferramentas/capturar_incursao_core.py` captures the Core calls inside 21 declared forced cases at frame 1's AvanceMonstre entry: counter 9000, plus 16 RNG seeds; counter 10800; four spawn cells. It uses Missions' read-only Isolamento, the same technique as Combat's.
+   - **v1** (`99432d3`): `evidencias/fundacoes-quadro/captura-incursao-core-v1.json`, 689 calls, all returned. It reproduces the phases and the code.
+   - **Display:** requested from the Mac mini at `2798a11`. Run #3 at `99432d3` hit the shared 600 s frame budget; the budget is now 600 s + 150 s per case, and exceptions go to `.local/raid/`.
+3. **Translations** (`ferramentas/incursao_core.py`, contract in [RAID_CORE](RAID_CORE.md)):
+   - GetFreeCell;
+   - CreerEngin → EnginSetType/EnginSetTypeCaract (Combat's committed provider over a record copy, plus the flat search release), EnginTypeGetCapacite, EnginEnArret;
+   - EnginSetPlayer;
+   - PlaceEngin for owners 4/200, with SetMiniMap mode 4;
+   - EnginGetCase, PlayerGetColor;
+   - GetRandCaseChamps, GetRandCaseTypeBatPlayer, GetNumIndiceTypeBatiment, GetCaseIndiceBatiment;
+   - Chemin_Accessible;
+   - iaProbPost, iaProbNew, listNewElem, listLinkElemToTail.
+
+   All return exact output registers.
+
+   **Faithful quirks kept:**
+   - GetFreeCell's stack-residue upper words, mixed axes and lagging column cell;
+   - GetRandCaseChamps's 201st entry, returned + 1;
+   - EnginSetType's exit EBX 0x1d and EDX 0x1e.
+
+   **Dependency stops:** PlaceEngin for other owners (`0x457019`), the other SetMiniMap modes, and GetRandCaseTypeBatPlayer with more than 200 matches.
+4. **Validation:**
+   - `testes/test_incursao_core.py` replays every captured call without a CPU, including the frame-1 Core routines the raid reaches.
+   - `ferramentas/validar_incursao_core.py` is the native differential: at each nested Core call of each forced case, the translation runs over a copy-on-write view of the live entry state and is compared at the native return.
+   - **v1 native differential:** `relatorios/incursao-core-v1-emulada.json` has **689 comparisons, 0 mismatches and 0 dependency stops** over 26 routines; the phases and code reproduce; 114 s.
+
+**For AI/runtime:** `incursao_core.ROTINAS` / `traducao_core(name)` provide everything ConstruitGroupeMonstre and the pending-order branch call in Core, over the same flat memory as `provedores_core`. The bonus provider is Economy's `BonusUnidades.consultar`.
+
+**Next stage:** Combat's course capture lists the routines the raid reaches after the spawn, from 9000 to about 9200. These are the movement routines, the first path search at 9176–9179, and the unit dispatcher EnginNextEtape. Most already exist in Core's world model (`ordens_unidades`, `navegacao_unidades`, `otimizacao_caminhos`, `passagem_unidades`). The next stage captures them in isolation at those frames and validates them natively.
+
+**NOT RUN:**
+- the display differential, until its capture lands;
+- GetCaseIndiceBatiment, which MONDE01 never reaches (no cave);
+- PlaceEngin's discovery path for player owners in flat memory;
+- integration.

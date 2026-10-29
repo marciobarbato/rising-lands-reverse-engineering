@@ -1,0 +1,50 @@
+{
+ "round": "CXR-20261028-01",
+ "utc": "2026-10-28T19:33:34.780307+00:00",
+ "git_head_before_report": "a62231635351a6f745b105154cfef137dce0fee4",
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "native": false,
+ "successful": true,
+ "tests": 36,
+ "skips": [
+  {
+   "test": "test_capturas_contrato.FreshNativeReplay.test_fresh_native_captures_equal_the_committed_document",
+   "reason": "native replay runs only with RISING_EMULAR=1"
+  },
+  {
+   "test": "test_reinicio_ia.FreshNativeWholeImages.test_fresh_native_capture_equals_the_committed_document",
+   "reason": "native comparison runs only with RISING_EMULAR=1"
+  },
+  {
+   "test": "test_reinicio_ia.FreshNativeWholeImages.test_fresh_native_runs_equal_the_python_translation",
+   "reason": "native comparison runs only with RISING_EMULAR=1"
+  },
+  {
+   "test": "test_reinicio_ia.FreshNativeWholeImages.test_original_loops_forever_on_a_spec_without_types",
+   "reason": "native comparison runs only with RISING_EMULAR=1"
+  }
+ ],
+ "failures": [],
+ "errors": [],
+ "source_sha256": {
+  "pesquisas-paralelas/ia-runtime/reinicio_ia.py": "a8c62e6a3a109e1edfefe975818458f485bfd5b72a28d93b01082cf34be7c9ac",
+  "pesquisas-paralelas/ia-runtime/memoria_ia_runtime.py": "8e8d780dc5c240b627e784cc478de9f6ea0534a916122bb97c3959797ba426ae",
+  "pesquisas-paralelas/ia-runtime/oraculo_reinicio_ia.py": "e810dabfdddc9736d1725b1acce796edab067302425bf337ea9e3c0b353e46c7",
+  "pesquisas-paralelas/ia-runtime/capturar_reinicio_ia.py": "7c62fdd591e56500f941376581abbf68b332b8b2aeed48f3d834e0885af15723",
+  "pesquisas-paralelas/ia-runtime/auditar_reinicio_ia.py": "7439c090edc6e830b4aab2e7f646aa57495c54c661bcb949b2c834d426dd3af3",
+  "pesquisas-paralelas/ia-runtime/testes/test_reinicio_ia.py": "d037a33586d90f3dcb850e405cd81d6d6ca79c1e588333a5c9c8008c4f831486",
+  "pesquisas-paralelas/ia-runtime/validar_reinicio_ia.py": "4ea2d10f143713edf8d5b107de108d826a5cb379528f1c3237afb64147590b35",
+  "ferramentas/cadencia.py": "7ba882f7691d77e4be0eabea501576b134428f2be865517947aedb6e56b858ac",
+  "ferramentas/emulador.py": "8cacfe447122e3051134a63c9c6797d6573c0fe4816728554b402ae2dff66f37",
+  "ferramentas/simbolos_ia.py": "4f2525c345a21f3a89c4cfc10e1e82a31b1bc9ef84e5dc5bca3a4be3b2aabf7f",
+  "pesquisas-paralelas/missoes/carregador_unidades.py": "07e20e8e2e3244d28cae2edd18c3b4eeaad15a2ccda48d6c29441583f0935c3e",
+  "pesquisas-paralelas/missoes/carregador_estruturas.py": "711749895126541ec48354b13ce1e5a8af47038d3950350bda0b8f7377257ea4",
+  "pesquisas-paralelas/missoes/carregador_cadeia_auxiliar.py": "df6d7e1d4da92550da2c0d3f2df27a624e86d174b1a1bfe26f67f28fcc2ddb7e"
+ },
+ "original_capture_sha256": "f038dd159363940f894489a0c333805d0ff97d7be0458e67640ab2c757f0cd9d",
+ "static_audit_sha256": "065ea974c64c962d73d74aaa7ab1b7f52f15b757f7f58bd03ccaf594ac12d333",
+ "fresh_capture": null,
+ "fresh_differential": null,
+ "intentional_native_cycle": null,
+ "scope": "Initialization providers and fixture comparisons only; no production provider adapter, full MissionLoad or frame runtime"
+}

@@ -1,0 +1,14 @@
+{
+  "scope": "Three economy IaReset leaves; exact live buffers, no whole mission claim",
+  "mode": "fresh original x86 + Python + frozen capture",
+  "tests": 8,
+  "failures": 0,
+  "errors": 0,
+  "skips": [],
+  "fresh_original_entries": 20,
+  "fresh_real_returns": 20,
+  "recorded_translated_leaf_calls": 14,
+  "existing_get_player_observations": 6,
+  "module_sha256": "c81239ae0b7527c01242ef3f95b0c11cfa35cbae6333e7c0068ef6a67e1ec268",
+  "success": true
+}
