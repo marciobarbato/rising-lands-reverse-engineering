@@ -4,7 +4,7 @@ This is a deterministic test input contract, not DirectSound reconstruction,
 playback, mixing or a statement about hardware timing. The intact code is
 RISING.EXE SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
 Original body bytes and hashes are already frozen in the M2.2 sound inventory.
-The new original-only v1/v2 captures precede any record/COM translation.
+The new original-only v1/v2/v3 captures precede any record/COM translation.
 
 The fixtures explicitly supply every inherited global/table/reference word,
 bank-header byte and ordered external answer. `QueueFixtureMemory` is only a
@@ -47,12 +47,24 @@ needed, and returns whether its HRESULT is zero. Null returns 1.
 
 Capture v1 preserves five diagnostic stops: three missing status answers and
 two intentionally unresolved/inconsistent physical-slot fixture inputs. Capture
-v2 declares empty slots and explicit transfer answers. It covers 198 native
-calls; its one remaining declared stop is pending Manage at the undeclared
-DirectSound CreateSoundBuffer slot +0x0c. The PSB index increment before that
+v2 declares empty slots and explicit transfer answers but preserves a pending
+Manage fault at the unresolved original _llseek IAT. Capture v3 additionally
+binds that real Windows import through Core's declared import facility with the
+explicit answer `(handle=0x1234, offset=0, origin=0) -> 0`. It supplies no data
+or buffer ownership. All 198 v3 native calls run to return except one named
+pending-Manage stop at undeclared DirectSound CreateSoundBuffer slot +0x0c. The PSB index increment before that
 stop must remain visible. Stage-1 buffer/data providers exist, but their
 initialization/file/buffer ownership is not substituted by this queue fixture.
 
 The translated slice must stop before unresolved buffer creation/initialization,
 DS position/volume/play branches or caller memory outside the declared image.
 No initialized sound state or asynchronous response is created by a constructor.
+
+Capture v4 adds six original Manage cases with a declared active logical slot:
+stopped, playing and playing+looped statuses, each with success/error HRESULT.
+The fixture supplies the exact expected volume word from the original table,
+not a synthesized mixer curve. Stopped state calls the actual cleanup chain;
+playing states update volume and clear dirty fields, even on the declared
+SetVolume error HRESULT. All 204 v4 calls return except the one explicit
+CreateSoundBuffer dependency stop; the original physical-index increment and
+seek call before that stop are retained. v1/v2 diagnostics and v3 remain frozen.

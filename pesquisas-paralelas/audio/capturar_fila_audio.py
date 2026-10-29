@@ -102,10 +102,22 @@ def scenarios():
         m=fixture_memory(original);m.w32(INDEX,maximum)
         for i in range(20,maximum+1):record(m,i)
         yield dict(name=f'stop-handle-{maximum}',operation='stop_handle',regs=dict(EAX=REFS+20*4),arguments=[],memory=m.snapshot(),com=[])
+    for status in (0,1,5):
+        for hresult in (0,0x80004005):
+            m=fixture_memory(original)
+            record(m,0,state=1,slot=0x52216c,kind=1)
+            m.w32(0x52216c,COM_BUFFER);m.w32(0x522170,TABLE);m.w32(0x498f64,0)
+            plan=[response('GetStatus',value=status,hresult=hresult)]
+            if status&5:
+                plan.append(response('SetVolume',args=(m.u32(GLOBAL_BASE+16*4),),hresult=hresult))
+            else:
+                plan += [response('GetStatus',value=0),response('GetStatus',value=0),response('Release')]
+            yield dict(name=f'manage-active-{status}-{hresult:x}',operation='manage',regs={},arguments=[],memory=m.snapshot(),com=plan)
     m=fixture_memory(original)
     yield dict(name='manage-empty',operation='manage',regs={},arguments=[],memory=m.snapshot(),com=[])
     m=fixture_memory(original);m.w32(INDEX,20);record(m,20)
-    yield dict(name='manage-pending-provider',operation='manage',regs={},arguments=[],memory=m.snapshot(),com=[])
+    yield dict(name='manage-pending-provider',operation='manage',regs={},arguments=[],memory=m.snapshot(),
+               com=[response('_llseek',pointer=0x1234,args=(0,0))])
 
 
 class QueueNativeBench(BancadaX86):
@@ -132,6 +144,12 @@ class QueueNativeBench(BancadaX86):
                     call.escrever(args[1],struct.pack('<I',answer['value']))
                 return answer['hresult']
             self.declarar_vinculo(address,'AudioCOM.'+method,tuple(range(4,4*(nargs+1),4)),handler,desempilhar=4*nargs,natureza='backend')
+        def seek(call):
+            args=call.argumentos
+            answer=self.plan.answer('_llseek',args[0],list(args[1:]))
+            self.raw_com.append(dict(method='_llseek',args=list(args),answer=answer))
+            return answer['hresult']
+        self.declarar_importacao(0x5231f8,'KERNEL32._llseek',3,seek)
         self.calls=0
 
     def snapshot(self):
