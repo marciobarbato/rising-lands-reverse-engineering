@@ -86,6 +86,8 @@ def executar(quadros, registrar):
 
     def ler_mem(cpu, _a, endereco, tamanho, _v, _):
         r = estado['regra']
+        if r is None:
+            return
         for k in range(tamanho):
             a = endereco + k
             if a not in r['escritos'] and a not in r['lidos']:
@@ -93,6 +95,8 @@ def executar(quadros, registrar):
 
     def escrever_mem(cpu, _a, endereco, tamanho, _v, _):
         r = estado['regra']
+        if r is None:
+            return
         aberta = estado['pilha'][-1] if estado['pilha'] else None
         for k in range(tamanho):
             a = endereco + k
@@ -104,9 +108,6 @@ def executar(quadros, registrar):
 
     def fechar_regra(cpu, r_):
         r = estado['regra']
-        for g in estado['ganchos']:
-            cpu.hook_del(g)
-        estado['ganchos'] = []
         r['registro'].update(
             exit={k: hex(v) for k, v in r_.items()},
             read_before_write=[[hex(a), v] for a, v in sorted(r['lidos'].items())],
@@ -155,10 +156,6 @@ def executar(quadros, registrar):
                         arguments=[hex(v) for v in bloco_args[:7]], player=bloco_args[7], task=bloco_args[8],
                         entry={k: hex(v) for k, v in r_.items()}, outside_calls=[])
         estado['regra'] = dict(registro=registro, ret=retorno, esp=r_['ESP'], lidos={}, escritos=set(), antes={})
-        for inicio, fim in regioes:
-            estado['ganchos'].append(cpu.hook_add(unicorn.UC_HOOK_MEM_READ, ler_mem, None, begin=inicio, end=fim - 1))
-            estado['ganchos'].append(cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE, escrever_mem, None, begin=inicio,
-                                                  end=fim - 1))
 
     b.cpu.hook_add(unicorn.UC_HOOK_BLOCK, bloco, begin=0x401000, end=0x493bff)
     b.cpu.ctl_flush_tb()
@@ -170,10 +167,23 @@ def executar(quadros, registrar):
             b.executar_entre_quadros_k(120, k)
         contador = struct.unpack('<I', bytes(b.cpu.mem_read(CONTADOR, 4)))[0]
         estado.update(ativo=contador in registrar, contador=contador)
+        if estado['ativo']:
+            # Memory hooks only apply to blocks translated after they are added: install them before the frame
+            # and flush the translation cache outside execution. The callbacks act only inside a rule call.
+            for inicio, fim in regioes:
+                estado['ganchos'].append(b.cpu.hook_add(unicorn.UC_HOOK_MEM_READ, ler_mem, None, begin=inicio,
+                                                        end=fim - 1))
+                estado['ganchos'].append(b.cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE, escrever_mem, None, begin=inicio,
+                                                        end=fim - 1))
+            b.cpu.ctl_flush_tb()
         b.executar_quadro(300, k)
         if estado['regra'] is not None:
             raise RuntimeError(f'Rule call {estado["regra"]["registro"]["rule"]} still open at the frame end')
-        estado['ativo'] = False
+        for g in estado['ganchos']:
+            b.cpu.hook_del(g)
+        if estado['ganchos']:
+            b.cpu.ctl_flush_tb()
+        estado.update(ativo=False, ganchos=[])
         print(k, contador, sum(1 for r in registros if r['counter'] == contador), flush=True)
     return registros
 
