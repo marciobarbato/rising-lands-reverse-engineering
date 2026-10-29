@@ -291,6 +291,187 @@ def aleatorio_mundo_memoria(memoria):
     return dict(EAX=novo)
 
 
+# ------------------------------------------------------------------ load-tail clipping and mouse zones
+RECORTE = (0x49a020, 0x49a022, 0x49a01c, 0x49a01e)   # SetClipping store order: AX, BX, DX, CX
+ZONAS_MOUSE, ZONA_MAXIMA, ZONA_TESTE = 0x5099b4, 0x50a9b8, 0x50a9b4
+TELA_LARGURA, TELA_ALTURA = 0x49a018, 0x49a01a        # u16 screen size used by InitGameZone mode 1
+VISTA_LARGURA, VISTA_ALTURA = 0x508724, 0x508726      # u16 viewport size in cells
+DESLOCAMENTO_PAINEL = 0x508f90                        # s8, sign-extended to 16 bits
+JOGADOR_LOCAL = 0x508041
+TIPO_CONTATO = 0x4e2e7c                               # u8 per contact id
+MINIMAPA_VISIVEL = 0x497285
+
+
+def definir_recorte(memoria, eax, edx, ebx, ecx):
+    """SetClipping 0x40f519: u16 stores [0x49a020]=AX, [0x49a022]=BX, [0x49a01c]=DX, [0x49a01e]=CX."""
+    for endereco, valor in zip(RECORTE, (eax, ebx, edx, ecx)):
+        memoria.u16(endereco, valor)
+    return {}
+
+
+def definir_zona_mouse(memoria, eax, edx, ebx, ecx, y1):
+    """MouseSetZone 0x479c50 (RET 4; ``y1`` is the pushed word): zone AX gets four zero-extended
+    u16 dwords (DX, BX, CX, y1) at 0x5099b4+16*AX; u16 0x50a9b8 = AX when AX is larger."""
+    indice = eax & 0xffff
+    base = ZONAS_MOUSE + indice * 16
+    for o, valor in enumerate((edx, ebx, ecx, y1)):
+        memoria.u32(base + 4 * o, valor & 0xffff)
+    if indice > memoria.u16(ZONA_MAXIMA):
+        memoria.u16(ZONA_MAXIMA, indice)
+    return dict(EAX=indice << 4, EDX=y1 & 0xffff)
+
+
+def testar_zona_mouse(memoria, eax, edx):
+    """MouseTestZone 0x479c9e: u16 [0x50a9b4]=AX, [0x50a9b6]=DX."""
+    memoria.u16(ZONA_TESTE, eax)
+    memoria.u16(ZONA_TESTE + 2, edx)
+    return {}
+
+
+def _par_u16(memoria, eax, edx, origem):
+    """MiniMapGetPos/MiniMapGetTaille/MarcheGetPos/MarcheGetTaille: u16 [EAX], [EDX] from two globals."""
+    primeiro, segundo = memoria.u16(origem[0]), memoria.u16(origem[1])
+    memoria.u16(eax, primeiro)
+    memoria.u16(edx, segundo)
+    return dict(EAX=(eax & 0xffff0000) | segundo)
+
+
+def posicao_minimapa(memoria, eax, edx):
+    """MiniMapGetPos 0x46a1f8: [EAX] = u16 0x507d68, [EDX] = u16 0x507d6a."""
+    return _par_u16(memoria, eax, edx, (0x507d68, 0x507d6a))
+
+
+def tamanho_minimapa(memoria, eax, edx):
+    """MiniMapGetTaille 0x46a20e: [EAX] = u16 0x496fe0, [EDX] = u16 0x496fe2."""
+    return _par_u16(memoria, eax, edx, (0x496fe0, 0x496fe2))
+
+
+def posicao_mercado(memoria, eax, edx):
+    """MarcheGetPos 0x4620dc: [EAX] = u16 0x4e2906, [EDX] = u16 0x496f80."""
+    return _par_u16(memoria, eax, edx, (0x4e2906, 0x496f80))
+
+
+def tamanho_mercado(memoria, eax, edx):
+    """MarcheGetTaille 0x4620f2: [EAX] = u16 0x496f7c, [EDX] = u16 0x496f7e."""
+    return _par_u16(memoria, eax, edx, (0x496f7c, 0x496f7e))
+
+
+def procurar_contato(memoria, eax):
+    """ChercheContacteur 0x465818: AL = owner byte when 0x4e2928[owner] == 1, else 0x496f8c[owner]."""
+    jogador = eax & 0xff
+    if memoria.u8(0x4e2928 + jogador) == 1:
+        return dict(EAX=jogador)
+    return dict(EAX=memoria.u8(0x496f8c + jogador))
+
+
+def caixa_mensagem_existe(memoria, eax):
+    """MessageBoxExiste 0x469c33: AX = u16 0x507d56, then AL = (AX != u16 0x507d54)."""
+    atual = memoria.u16(0x507d56)
+    return dict(EAX=(eax & 0xffff0000) | (atual & 0xff00) | (atual != memoria.u16(0x507d54)))
+
+
+def contatado_para_alianca(memoria, eax, edx):
+    """PlayerEstContacterPourAlliance 0x46da1e: AL = u32 [0x5080b0 + 16*AL + 4*DL] != 0."""
+    return dict(EAX=int(memoria.u32(0x5080b0 + 16 * (eax & 0xff) + 4 * (edx & 0xff)) != 0))
+
+
+def iniciar_zonas_jogo(memoria, eax, edx):
+    """InitGameZone 0x471830, mode AX=1 (jump table 0x471820 -> 0x471aa4): the game mouse zones.
+
+    Zones 1..9 come from the screen size u16 0x49a018/0x49a01a; zone 0xa is the
+    minimap rectangle when u8 0x497285 is set; zone 0x1a depends on the local
+    player's contact type (0x4e2e7c[ChercheContacteur], asked up to three times:
+    1 or 2 -> panel corner, 3 -> market rectangle); zone 0x1b on MessageBoxExiste;
+    zones 0x1c..0x1f on PlayerEstContacterPourAlliance(local, p); zone 0xb on the
+    screen and viewport sizes; then MouseTestZone(1, 0x1f). The panel corner uses
+    the s8 0x508f90 only when the screen width is not 640. Every coordinate is
+    16-bit. Registers out: EAX=1, EDX=0x1f, EBX=(H<<5)&0xffff, ECX=screen width;
+    ESI/EDI preserved. Other modes raise DependenciaRamoCore before any store.
+    """
+    modo = (eax - 1) & 0xffff
+    if modo != 0:
+        alvo = {1: 0x4719be, 2: 0x47194f, 3: 0x47184d}.get(modo, 0x471949)
+        raise DependenciaRamoCore('InitGameZone', alvo, f'mode {eax & 0xffff} not translated')
+    m, u16 = memoria, lambda v: v & 0xffff
+    zona = lambda i, x0, y0, x1, y1: definir_zona_mouse(m, i, u16(x0), u16(y0), u16(x1), u16(y1))
+    largura, altura_tela = m.u16(TELA_LARGURA), m.u16(TELA_ALTURA)
+    zona(1, 0, 0, 1, 1)
+    zona(2, 2, 0, largura - 3, 1)
+    zona(3, largura - 2, 0, largura - 1, 1)
+    zona(4, largura - 2, 2, largura - 1, altura_tela - 3)
+    zona(5, largura - 2, altura_tela - 2, largura - 1, altura_tela - 1)
+    zona(6, 2, altura_tela - 2, largura - 3, altura_tela - 1)
+    zona(7, 0, altura_tela - 2, 1, altura_tela - 1)
+    zona(8, 0, 2, 2, altura_tela - 3)
+    zona(9, 0, 0, 0, 0)
+
+    def retangulo(i, posicao, tamanho):
+        # MiniMapGet*/MarcheGet* fill u16 stack locals of this routine; only their values matter.
+        px, py, tx, ty = (m.u16(a) for a in posicao + tamanho)
+        zona(i, px, py, px + tx, py + ty)
+
+    if m.u8(MINIMAPA_VISIVEL):
+        retangulo(0xa, (0x507d68, 0x507d6a), (0x496fe0, 0x496fe2))
+    else:
+        zona(0xa, 0, 0, 1, 1)
+    altura = m.u16(VISTA_ALTURA)
+    def painel():                     # movsx ax, byte [0x508f90]; shl 5 (read only on the branches using it)
+        b = m.u8(DESLOCAMENTO_PAINEL)
+        return (b | (0xff00 if b & 0x80 else 0)) << 5
+    local = m.u8(JOGADOR_LOCAL)
+    tipo = lambda: m.u8(TIPO_CONTATO + procurar_contato(m, local)['EAX'])
+    if tipo() == 1 or tipo() == 2:
+        if largura == 0x280:
+            zona(0x1a, 0x2d, (altura - 1) << 5, 0x4c, (altura << 5) - 1)
+        else:
+            d = painel()
+            zona(0x1a, d + 0x2d, ((altura - 1) << 5) - d, d + 0x4c, (altura << 5) - 1 - d)
+    elif tipo() == 3:
+        retangulo(0x1a, (0x4e2906, 0x496f80), (0x496f7c, 0x496f7e))
+    else:
+        zona(0x1a, 0, 0, 1, 1)
+    if caixa_mensagem_existe(m, 0)['EAX'] & 0xff:
+        d = painel()
+        zona(0x1b, d, ((altura - 1) << 5) - d, d + 0x2d, (altura << 5) - d)
+    else:
+        zona(0x1b, 0, 0, 1, 1)
+    for p in range(4):
+        if p != local and contatado_para_alianca(m, local, p)['EAX']:
+            d = painel()
+            base = ((m.u16(VISTA_LARGURA) - 1) << 5) - 0x50 + 20 * p - d
+            zona(0x1c + p, base, ((altura - 1) << 5) - d, base + 0x13, (altura << 5) - 1 - d)
+        else:
+            zona(0x1c + p, 0, 0, 1, 1)
+    zona(0xb, 0, altura << 5, largura, altura_tela)
+    testar_zona_mouse(m, 1, 0x1f)
+    return dict(EAX=1, EDX=0x1f, EBX=u16(altura << 5), ECX=largura)
+
+
+# ------------------------------------------------------------------ per-frame terrain/vegetation animation
+def animar_terreno(memoria, eax, edx):
+    """NextAnimTerrain 0x477700 (AX, DX = viewport origin). Translated for a viewport with
+    zero rows (u16 0x508726 == 0, as in MONDE01 frames 0/1): the row test exits at once
+    through 0x4774f2 with EAX = EDX = 0. A non-empty viewport raises at 0x477737.
+    """
+    if memoria.u16(VISTA_ALTURA):
+        raise DependenciaRamoCore('NextAnimTerrain', 0x477737, 'viewport with rows: cell loop not translated')
+    return dict(EAX=0, EDX=0)
+
+
+def animar_vegetacao(memoria, eax, edx):
+    """NextAnimVeget 0x4772ec, same domain: zero viewport rows exit at once (EDX = EDX<<8,
+    EAX unchanged). A non-empty viewport raises at 0x47731b.
+    """
+    if memoria.u16(VISTA_ALTURA):
+        raise DependenciaRamoCore('NextAnimVeget', 0x47731b, 'viewport with rows: cell loop not translated')
+    return dict(EAX=eax & M32, EDX=(edx << 8) & M32)
+
+
+def animar_vegetacao_mapa(memoria):
+    """NextAnimVegetFullMap 0x4774fa: network games only; not reached by MONDE01."""
+    raise DependenciaRamoCore('NextAnimVegetFullMap', 0x4774fa, 'network-only full-map pass not translated')
+
+
 # Original name -> (entry, translation(memoria, registers in, stack word 1, bonus) -> registers out)
 ROTINAS = {
     'GameNextFrame': (0x45d015, lambda m, r, s, b: avancar_quadro_jogo_memoria(m)),
@@ -308,7 +489,23 @@ ROTINAS = {
                                                                                 r['ECX'], s)),
     'SetEnginCollision': (0x442cb4, lambda m, r, s, b: definir_colisao_unidade(m, r['EAX'], r['EDX'])),
     'CalculFatigue': (0x452cc8, lambda m, r, s, b: calcular_fadiga(m, r['EAX'], b)),
+    'SetClipping': (0x40f519, lambda m, r, s, b: definir_recorte(m, r['EAX'], r['EDX'], r['EBX'], r['ECX'])),
+    'InitGameZone': (0x471830, lambda m, r, s, b: iniciar_zonas_jogo(m, r['EAX'], r['EDX'])),
+    'MouseSetZone': (0x479c50, lambda m, r, s, b: definir_zona_mouse(m, r['EAX'], r['EDX'], r['EBX'], r['ECX'], s)),
+    'MouseTestZone': (0x479c9e, lambda m, r, s, b: testar_zona_mouse(m, r['EAX'], r['EDX'])),
+    'MiniMapGetPos': (0x46a1f8, lambda m, r, s, b: posicao_minimapa(m, r['EAX'], r['EDX'])),
+    'MiniMapGetTaille': (0x46a20e, lambda m, r, s, b: tamanho_minimapa(m, r['EAX'], r['EDX'])),
+    'MarcheGetPos': (0x4620dc, lambda m, r, s, b: posicao_mercado(m, r['EAX'], r['EDX'])),
+    'MarcheGetTaille': (0x4620f2, lambda m, r, s, b: tamanho_mercado(m, r['EAX'], r['EDX'])),
+    'ChercheContacteur': (0x465818, lambda m, r, s, b: procurar_contato(m, r['EAX'])),
+    'MessageBoxExiste': (0x469c33, lambda m, r, s, b: caixa_mensagem_existe(m, r['EAX'])),
+    'PlayerEstContacterPourAlliance': (0x46da1e, lambda m, r, s, b: contatado_para_alianca(m, r['EAX'], r['EDX'])),
+    'NextAnimTerrain': (0x477700, lambda m, r, s, b: animar_terreno(m, r['EAX'], r['EDX'])),
+    'NextAnimVeget': (0x4772ec, lambda m, r, s, b: animar_vegetacao(m, r['EAX'], r['EDX'])),
+    'NextAnimVegetFullMap': (0x4774fa, lambda m, r, s, b: animar_vegetacao_mapa(m)),
 }
+# Routines with a pushed argument (stack word 1 = u32 [ESP+4] at entry); the callee pops it.
+ARGUMENTO_PILHA = ('Chemin_ModifieZone', 'MouseSetZone')
 
 
 def provedores_core(memoria, bonus=None):
@@ -318,6 +515,11 @@ def provedores_core(memoria, bonus=None):
     """
     def quadro_jogo(sitio):
         avancar_quadro_jogo_memoria(memoria)   # void: EAX unchanged, nothing to return
+
+    def vazio(funcao):
+        def provedor(sitio, **argumentos):     # void routine: nothing to return
+            funcao(**argumentos)
+        return provedor
 
     return {
         'GameNextFrame': quadro_jogo,
@@ -333,4 +535,9 @@ def provedores_core(memoria, bonus=None):
             memoria, estrutura, jogador)['EAX'],
         'SetEnginCollision': lambda sitio, unidade, caso: definir_colisao_unidade(memoria, unidade, caso)['EAX'],
         'CalculFatigue': lambda sitio, unidade: calcular_fadiga(memoria, unidade, bonus)['EAX'],
+        'SetClipping': vazio(lambda eax, edx, ebx, ecx: definir_recorte(memoria, eax, edx, ebx, ecx)),
+        'InitGameZone': vazio(lambda eax, edx: iniciar_zonas_jogo(memoria, eax, edx)),
+        'NextAnimTerrain': vazio(lambda x, y: animar_terreno(memoria, x, y)),
+        'NextAnimVeget': vazio(lambda x, y: animar_vegetacao(memoria, x, y)),
+        'NextAnimVegetFullMap': vazio(lambda: animar_vegetacao_mapa(memoria)),
     }

@@ -716,3 +716,34 @@ Ownership from the bytes: `ResetTableauHangar` writes the market block `0x4e296c
 - AffGame is not executed (graphics question, per Missions).
 - `InitGameZone`, the `MAJSympathie` counter branch, the market state-3/4/5 branches, `AnimBallonStatic` and `InventionSetEffet` are still named dependencies; none is reached in frames 0/1.
 - No whole-frame claim: ai-runtime composes the frame.
+
+## Stage 22 (M2.1 round 3): live bonus table and frame providers
+
+Main `67fb81f` was merged.
+
+**1. Live bonus table (Core's request).** The new `BonusUnidades.vivo(memoria, *, tipos_unidades)` and `BonusUnidades.da_memoria(m)` bind `0x4dfba0` (1,872 bytes) and `0x4965ae` (1,300 bytes) by identity, with no copy. The copying constructor stays as the explicit legacy/fixture form; its callers in other fronts pass `bytes`. [Identity tests](testes/test_bonus_vivo.py) cover:
+- the caller's objects are kept, a later external store is seen, and setter/reset writes land in the caller's buffer;
+- a memory map's writes stay inside `0x4dfba0..+1872`;
+- all owner × type × selector queries equal the fixture form;
+- the constructor still copies;
+- nine invalid shapes plus same-object aliasing are rejected before binding.
+
+The exact-frame differential now builds its bonus with `da_memoria`.
+
+**2. Frame providers for ai-runtime.** The new module [`provedores_economia_quadro.py`](provedores_economia_quadro.py) exposes every routine of the 102 validated exact-frame calls, plus `RechercheGetNbInvention`, as `provider(sitio=..., **keywords)`. It works over `ler`/`vista` or `u8/u16/u32` memory; the API is in the [manual](../../docs/ECONOMY.md#live-bonus-table-and-frame-providers-m21-round-3). A new test runs all 102 exact-frame calls **through the providers over a u8/u16/u32-only memory** and matches every changed byte and result. A coverage test proves the provider names equal the captured routine set plus `RechercheGetNbInvention`.
+
+**Reached but not translated here: none** among the 102 frame-0/1 calls. Reached elsewhere in frames 0/1, already implemented, and not in this provider set:
+- `PlayerGetType` (`Mercado.tipo_jogador`; ai-runtime already uses it) and `PlayerEstAllie` ×7 in frame 0 under combat's `EnginTrouveCible` (`Mercado.aliado`).
+- `TestRessource` ×3 (`Economia.suficiente`) and `BatimentGetType` (`consultas_reinicio_economia.tipo_estrutura`), inside Missions' `TestFinDeMission`.
+- `BatimentGetPlayer`, which is combat's bridge.
+
+These queries were validated earlier against synthetic captures, not at the exact frame inputs. `GetBit`/`SetBit`/`IntToBCD`/`BCDToInt` are inside `calcular_materia`; the unit prelude's `GetBit` is Core's. Still named dependencies, all unreached in frames 0/1: `InitGameZone`, the `MAJSympathie` counter branch `0x47515d`, the market state-3/4/5 branches, `AnimBallonStatic`, `InventionSetEffet`, and an active `CalculTroupe` without the world-joined producer.
+
+**Gate** (under the lease): `scripts/check.py --domain economy` passes 458 tests with 200 optional skips, 0 failures, docs OK.
+
+**Native differentials rerun unchanged** (under the lease):
+- `validar_bonus_unidades --emular`: 10 tests, 4,060 calls.
+- `validar_mutacoes_bonus --emular`: 11 tests, 2,094 calls.
+- `validar_bonus_compartilhados --emular`: 11 tests, 454 calls.
+- All three reports are byte-identical to the committed ones.
+- `validar_quadro_economia --emular`: 12 tests, 0 skips. Fresh captures of 102 exact-frame calls and 6,692 M1-state entries equal the frozen ones.

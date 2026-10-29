@@ -468,12 +468,15 @@ class BancadaQuadroMissaoOriginal(BancadaCargaMissaoOriginal):
         return self._correr('frame1', CALCUL_GAME, {}, (RETORNO_CALCUL_GAME,), retomar=True)
 
     # ------------------------------------------------------------ evidence helpers
+    def _nao_executados_quadro(self):
+        return NAO_EXECUTADOS_QUADRO
+
     def conjunto_vigiado_quadro(self):
         """Static absolute DGROUP stores of every frame-phase non-executed routine."""
         ler = lambda a, n: bytes(self.cpu.mem_read(a, n))
         parar = {self.sym['MenuInit'], self.sym['CalculGame']}
         origem = {}
-        for nome in NAO_EXECUTADOS_QUADRO:
+        for nome in self._nao_executados_quadro():
             for endereco, tamanho, indexado, _ in escritas_estaticas(ler, self._ordenados, self.nomes,
                                                                      self.sym[nome], parar):
                 origem.setdefault((endereco, tamanho, indexado), set()).add(nome)
@@ -484,7 +487,7 @@ class BancadaQuadroMissaoOriginal(BancadaCargaMissaoOriginal):
         ler = lambda a, n: bytes(self.cpu.mem_read(a, n))
         parar = {self.sym['MenuInit'], self.sym['CalculGame']}
         saida = {}
-        for nome in NAO_EXECUTADOS_QUADRO:
+        for nome in self._nao_executados_quadro():
             for endereco, tamanho, indexado, sitio in escritas_estaticas(ler, self._ordenados, self.nomes,
                                                                          self.sym[nome], parar):
                 for a, n in lidos:

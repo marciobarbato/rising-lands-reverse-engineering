@@ -18,7 +18,7 @@ import subprocess
 import time
 
 import ambiente_missoes
-from mapa_memoria_m1 import carregar_blocos, carregar_json
+from mapa_memoria_m1 import carregar_blocos, carregar_json, expandir_captura
 from composicao_carga_missao import ComposicaoCargaMissaoM1
 from comparacao_carga_missao import CAMPOS_NATIVOS_NAO_COMPARADOS, comparar_estado, comparar_vinculos
 
@@ -104,15 +104,43 @@ def criterios(r):
     }
 
 
+def criterios_cenario(r, captura):
+    """Same criteria as ``criterios`` with counts taken from a non-default capture."""
+    e, v = r['state_comparison'], r['binding_comparison']
+    rec = e['allocation_records']
+    blocos = captura['oracle']['final_state']['blocks']
+    n_blocos, n_bytes = len(blocos), sum(b['bytes'] for b in blocos.values())
+    n_vinculos = len(captura['oracle']['binding_events'])
+    return {
+        'reached_return_0x42d22d_semantics': r['reached_return'] and r['stop'] is None,
+        'al_equals_1': r['al'] == 1 and e['al']['equal'],
+        f'whole_state_equal_{n_blocos}_blocks_{n_bytes}_bytes': (e['equal'] and e['blocks_compared'] == n_blocos
+                                                                and e['bytes_compared'] == n_bytes
+                                                                and e['differing_bytes_or_blocks'] == 0),
+        f'allocation_records_equal_{len(captura["allocations"])}': (
+            rec['original'] == rec['composed'] == len(captura['allocations']) and rec['differing'] == 0),
+        f'binding_requests_equal_{n_vinculos}': (v['equal'] and v['original_events'] == v['composed_requests']
+                                                 == n_vinculos),
+        'no_bridge': True,
+        'no_excess_change': r['details']['excess_changed'] == [],
+    }
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     ap.add_argument('--relatorio', required=True)
+    ap.add_argument('--entrada', help='entry artifact (default: the accepted M1 entry)')
+    ap.add_argument('--captura', help='MissionLoad capture (default: the accepted M1 capture v2)')
     args = ap.parse_args()
-    entrada, captura = carregar_json(ENTRADA), carregar_json(CAPTURA)
+    caminho_entrada = Path(args.entrada).resolve() if args.entrada else ENTRADA
+    caminho_captura = Path(args.captura).resolve() if args.captura else CAPTURA
+    entrada = carregar_json(caminho_entrada)
+    captura = expandir_captura(carregar_json(caminho_captura), entrada)
     entrada_blocos = carregar_blocos(entrada['blocks'])
     primeira = executar(entrada, captura, entrada_blocos)
     segunda = executar(entrada, captura, entrada_blocos)
-    c = criterios(primeira)
+    padrao = caminho_entrada == ENTRADA and caminho_captura == CAPTURA
+    c = criterios(primeira) if padrao else criterios_cenario(primeira, captura)
     deterministico = (primeira['state_sha256'] == segunda['state_sha256']
                       and primeira['binding_requests_sha256'] == segunda['binding_requests_sha256']
                       and primeira['stop'] == segunda['stop'] and primeira['al'] == segunda['al'])
@@ -123,8 +151,11 @@ def main():
         source_dirty_paths=[l[3:] for l in _git('status', '--porcelain').splitlines()],
         source_sha256={f: _sha_arquivo(ambiente_missoes.OWNED / f) for f in FONTES},
         economy_provider_sha256={PROVEDOR_ECONOMIA: _sha_arquivo(ambiente_missoes.ROOT / PROVEDOR_ECONOMIA)},
-        entry_snapshot=dict(path='evidencias/entrada-carga-missao-original.json', sha256=_sha_arquivo(ENTRADA)),
-        original_capture=dict(path='evidencias/captura-carga-missao-original-v2.json', sha256=_sha_arquivo(CAPTURA)),
+        entry_snapshot=dict(path=str(caminho_entrada.relative_to(ambiente_missoes.ROOT)),
+                            sha256=_sha_arquivo(caminho_entrada)),
+        original_capture=dict(path=str(caminho_captura.relative_to(ambiente_missoes.ROOT)),
+                              sha256=_sha_arquivo(caminho_captura)),
+        scenario=captura.get('scenario', 'v1'),
         original_sha256=entrada['original_sha256'],
         cpu_free=True, native_executed=False, bridges=[],
         criteria=c, deterministic=deterministico,

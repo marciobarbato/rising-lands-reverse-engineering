@@ -673,3 +673,36 @@ Both functions take the live 4,000-byte table view.
 [rastro-registradores-quadro1-monde01.json](../pesquisas-paralelas/missoes/evidencias/rastro-registradores-quadro1-monde01.json) was generated from source `0002794`. It lists every routine entry of the three phases in order (1,718 / 5 / 1,605), one line each in the AI/runtime format `callee@caller+off EAX EDX EBX ECX`.
 
 The rerun's phase states equal the committed capture, and its per-routine counts equal the committed trace. The original oracle was **not** extended beyond frame 1.
+
+## Stage17 (M2 round 3): oracle with the display path executed
+
+Stage16 was integrated at main `67fb81f`. Graphics' report [ESCRITAS_AFFGAME_ENTRE_QUADROS.md](../pesquisas-paralelas/graficos-animacao/ESCRITAS_AFFGAME_ENTRE_QUADROS.md) motivated executing the display path. Full summary: [QUADRO1_EXIBICAO.md](../pesquisas-paralelas/missoes/QUADRO1_EXIBICAO.md).
+
+**Scenario.** The new scenario `exibicao` ([oraculo_exibicao_missao.py](../pesquisas-paralelas/missoes/oraculo_exibicao_missao.py), [cenarios_oraculo.py](../pesquisas-paralelas/missoes/cenarios_oraculo.py)) runs AppInit and then the real `_WinMain@16` loop up to the original `CALL MissionLoad`. Along the way it executes:
+- AffInit/DDInit, LoadPalette and the bank loaders;
+- RestoreAll, DDFlipPage, and menu and game AffGame.
+
+The declared interim DirectDraw backend ([exibicao_declarada.py](../pesquisas-paralelas/missoes/exibicao_declarada.py)) stands in for Graphics' backend until it lands.
+
+**Remaining boundaries:**
+- Text needs CRT `fgets` `0x48ce96` and LoadPie needs CRT `fseek` `0x48cda2`, which Core has not inventoried.
+- Video and credits.
+- Audio.
+
+**Scenario switch.** The M1 and frame capture and validation scripts take `--cenario`, and v1 behavior is unchanged. The composition validator takes `--entrada`/`--captura`. Display M1 captures are delta-encoded against their entry artifact (`mapa_memoria_m1.expandir_captura`).
+
+**Evidence.** The new entry snapshot, the whole MissionLoad capture (AL=1, the same 1,400 binding requests as v1) and the frames 0/1 capture with its trace were all committed before any translation. v1, v2, Stage14 and the frame-1 v1 evidence are untouched.
+
+**Checks (all passed):**
+- **Stage14 strict composition regression:** whole state equal over 25,343 blocks and 25,482 records.
+- **MissionLoad validation:** replay, integrity, segmentation, fill, markers, inputs and the flushed footprint.
+- **Frame validation:** the same checks, plus display-input sensitivity.
+
+**Logic-state comparison with v1.** The comparison ([m2r3-frame1-v1-vs-exibicao.json](../pesquisas-paralelas/missoes/validacao/m2r3-frame1-v1-vs-exibicao.json)) has native writer attribution ([m2r3-v1-vs-exibicao-writers.json](../pesquisas-paralelas/missoes/validacao/m2r3-v1-vs-exibicao-writers.json)). No unit, structure, player, resource, AI, condition or market byte differs, and RNG `0x497164` is equal throughout.
+
+Three real logic differences come from display **initialization**:
+- the CRT rand seed, because NextAnimTerrain now calls LongRand 425 times per frame over the 25×17 viewport DDInit sets;
+- the permutation cursor `0x4e1d18`, advanced by NextAnimVeget;
+- the view origin, because MouseInit centres the cursor variables on the real screen and frame 0 no longer edge-scrolls.
+
+AffGame between frames writes only display state for frame 1.

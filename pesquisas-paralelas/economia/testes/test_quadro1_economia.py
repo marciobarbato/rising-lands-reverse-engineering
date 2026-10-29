@@ -69,8 +69,7 @@ def executar(nome, m, p, regs):
     elif nome == 'CalculTroupe':
         p.producao.calcular_tropa(regs['EAX'])
     elif nome == 'BonusGetValEngin':
-        b = BonusUnidades()
-        b.memoria, b.tipos_unidades = m.vista(0x4dfba0, 1872), m.vista(0x4965ae, 1300)
+        b = BonusUnidades.da_memoria(m)
         return 0xffff, b.consultar(regs['EAX'], regs['EBX'], regs['EDX'], ecx=regs['ECX'])
     elif nome == 'BagContientTroupe':
         indice, resto = divmod(regs['EAX'] - 0x49a0d4, 276)
@@ -83,7 +82,53 @@ def executar(nome, m, p, regs):
     return None
 
 
-def comparar(teste):
+class MemoriaPalavras:
+    """Only u8/u16/u32(endereco, valor=None), like ai-runtime's MemoriaDeclarada."""
+    def __init__(self, m):
+        self.m = m
+
+    def _acesso(self, largura, endereco, valor):
+        v = self.m.vista(endereco, largura)
+        if valor is None:
+            return int.from_bytes(v, 'little')
+        v[:] = (valor & ((1 << 8 * largura) - 1)).to_bytes(largura, 'little')
+        return valor
+
+    def u8(self, endereco, valor=None):
+        return self._acesso(1, endereco, valor)
+
+    def u16(self, endereco, valor=None):
+        return self._acesso(2, endereco, valor)
+
+    def u32(self, endereco, valor=None):
+        return self._acesso(4, endereco, valor)
+
+
+def via_provedores(nome, m, p, regs):
+    """The same case through provedores_economia_quadro over a u8-only memory."""
+    from bonus_unidades import BonusUnidades
+    from provedores_economia_quadro import provedores_economia_quadro
+    prov = provedores_economia_quadro(MemoriaPalavras(m), bonus=BonusUnidades.da_memoria(m), producao=p.producao,
+                                      recursos=p.recursos, calcular_tropa=p.calcular_tropa)
+    chamadas = {
+        'EnginNextEtape:state7': ('EnginNextEtape:estado7', dict(unidade=regs['EDI']), None),
+        'BatimentNextEtape:type1_2_13_16': ('BatimentNextEtape:tipo1_2_13_16', dict(estrutura=regs['EDI']), None),
+        'BagContientTroupe': (nome, dict(bolsa=regs['EAX']), 0xff),
+        'CalculTroupe': (nome, dict(estrutura=regs['EAX']), None),
+        'BatimentGetCase': (nome, dict(estrutura=regs['EAX']), 0xffff),
+        'BonusGetValEngin': (nome, dict(jogador=regs['EAX'], tipo=regs['EBX'], seletor=regs['EDX'], ecx=regs['ECX']),
+                             0xffff),
+        'MAJSympathie': (nome, dict(jogador=regs['EAX'], outro=regs['EDX'], evento=regs['EBX']), None),
+        'CalculCompteurMarche': (nome, dict(jogador=regs['EAX']), None),
+        'CalculCompteurProposition': (nome, dict(jogador=regs['EAX'], edx=regs['EDX']), None),
+    }
+    rotina, argumentos, mascara = chamadas.get(nome, (nome, {}, None))
+    resultado = prov[rotina](sitio=0, **argumentos)
+    return None if mascara is None else (mascara, resultado)
+
+
+def comparar(teste, executor=None):
+    executor = executor or executar
     total = 0
     for r in evidencia()['calls']:
         nome = r['routine']
@@ -104,7 +149,7 @@ def comparar(teste):
         regs = {k: int(v, 16) for k, v in r['entry_registers'].items()}
         m.leituras.clear()
         m.ordem_acessos.clear()
-        resultado = executar(nome, m, p, regs)
+        resultado = executor(nome, m, p, regs)
         mudados = {}
         for (_, base, raw), velho in zip(m.blocos, antes):
             if raw != velho:
@@ -113,7 +158,7 @@ def comparar(teste):
         if resultado is not None:
             mascara, valor = resultado
             teste.assertEqual(valor & mascara, int(r['exit_registers']['EAX'], 16) & mascara, rotulo)
-        if nome in SO_VISTA:
+        if nome in SO_VISTA and executor is executar:
             # These routines read only through ler and write only through vista: their bytes read
             # before written must be exactly the native ones.
             lidos, escritos = set(), set()
@@ -145,6 +190,22 @@ class ContratosQuadro1Economia(unittest.TestCase):
 
     def test_python_reproduces_every_exact_frame_call(self):
         self.assertEqual(comparar(self), 102)
+
+    def test_providers_over_word_memory_reproduce_every_exact_frame_call(self):
+        self.assertEqual(comparar(self, via_provedores), 102)
+
+    def test_providers_cover_every_validated_routine(self):
+        from provedores_economia_quadro import provedores_economia_quadro
+        from bonus_unidades import BonusUnidades
+        m = Memoria()
+        p = Provedores(m)
+        nomes = set(provedores_economia_quadro(m, bonus=BonusUnidades.da_memoria(m), producao=p.producao,
+                                               recursos=p.recursos))
+        renomeados = {'EnginNextEtape:state7': 'EnginNextEtape:estado7',
+                      'BatimentNextEtape:type1_2_13_16': 'BatimentNextEtape:tipo1_2_13_16'}
+        capturados = {renomeados.get(c['routine'], c['routine']) for c in evidencia()['calls']}
+        self.assertEqual(nomes - capturados, {'RechercheGetNbInvention'})
+        self.assertEqual(capturados - nomes, set())
 
 
 SHA_CAPTURA = '747bca33fd2d5c5b2e6f20cc01ec65ab9e0949f725e54717fab29a70ef25b42b'

@@ -38,9 +38,25 @@ FASES = ('s0',) + FASES_QUADRO
 QUADRO_CHAMADOR = (PILHA+0x8004, PILHA+0x8040)
 
 
-def rodar(q, *, pulos=PULOS_INICIO, fronteiras=FRONTEIRAS_QUADRO, segmento=None, pegada=False):
+CENARIO = 'v1'
+
+
+def entradas(fill, clock, **kw):
+    """Scenario inputs: EntradasQuadro (v1) or EntradasExibicao (display executed)."""
+    if CENARIO == 'v1':
+        return cq.entradas_quadro(fill, clock, **kw)
+    import cenarios_oraculo
+    return cenarios_oraculo.entradas_exibicao(fill, clock, **kw)
+
+
+def rodar(q, *, pulos=None, fronteiras=None, segmento=None, pegada=False):
     t = time.monotonic()
-    b = BancadaQuadroMissaoOriginal(q, segundos=120, pulos=pulos, fronteiras=fronteiras)
+    if CENARIO == 'v1':
+        b = BancadaQuadroMissaoOriginal(q, segundos=120, pulos=pulos or PULOS_INICIO,
+                                        fronteiras=fronteiras or FRONTEIRAS_QUADRO)
+    else:
+        from oraculo_exibicao_missao import BancadaExibicaoOriginal
+        b = BancadaExibicaoOriginal(q, segundos=300, pulos=pulos, fronteiras=fronteiras)
     b.iniciar_relogio()
     b.executar_inicio()
     b.executar_mission_load(300, instrucoes_segmento=segmento)
@@ -110,7 +126,16 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--captura', required=True)
     ap.add_argument('--relatorio', required=True)
+    ap.add_argument('--cenario', default='v1', choices=('v1', 'exibicao'))
     a = ap.parse_args()
+    global CENARIO
+    CENARIO = a.cenario
+    global QUADRO_CHAMADOR
+    if CENARIO == 'v1':
+        pulos_base, fronteiras_base = PULOS_INICIO, FRONTEIRAS_QUADRO
+    else:
+        from oraculo_exibicao_missao import PULOS_EXIBICAO as pulos_base, FRONTEIRAS_EXIBICAO as fronteiras_base
+        QUADRO_CHAMADOR = (PILHA+0x8000, PILHA+0x8020)   # _WinMain@16 MSG buffer and saved EBX
     saida = ambiente_missoes.ROOT/a.relatorio
     if saida.exists():
         raise SystemExit(f'Refusing to overwrite {saida}')
@@ -118,7 +143,7 @@ def main():
     cap = json.loads(bruto)
     ni = cap['named_inputs']['m1']
     fill, clock = ni['allocation_fill'], ni['clock_ms'][0]
-    q = cq.entradas_quadro(fill, clock)
+    q = entradas(fill, clock)
 
     A = rodar(q, pegada=True)
     bA = A['bench']
@@ -152,7 +177,7 @@ def main():
 
     sensibilidade = {}
     for alternativo in [x for x in (0x5a, 0x00, 0x3c) if x != fill][:2]:
-        C = rodar(cq.entradas_quadro(alternativo, clock))
+        C = rodar(entradas(alternativo, clock))
         fases = {}
         for f in FASES_QUADRO:
             preench, outros = 0, set()
@@ -177,21 +202,24 @@ def main():
     sensibilidade = dict(capture_fill=hex(fill), runs=sensibilidade,
                          independent=all(v['independent'] for v in sensibilidade.values()))
 
-    marcadores = {n: (0x7d000000+0x1000*i, l) for i, (n, (_, l)) in enumerate(sorted(PULOS_INICIO.items()))}
-    marcadores_quadro = {n: (0x7e000000+0x1000*i, l, r) for i, (n, (_, l, r)) in enumerate(sorted(FRONTEIRAS_QUADRO.items()))}
+    marcadores = {n: (0x7d000000+0x1000*i, l) for i, (n, (_, l)) in enumerate(sorted(pulos_base.items()))}
+    marcadores_quadro = {n: (0x7e000000+0x1000*i, l, r) for i, (n, (_, l, r)) in enumerate(sorted(fronteiras_base.items()))}
     D = rodar(q, pulos=marcadores, fronteiras=marcadores_quadro)
-    E = rodar(cq.entradas_quadro(fill, clock ^ 0x00777777, diretorio=b'C:\\JOGOS\\RISINGBR', unidade=b'E',
-                                 id_thread=7, estado_memoria=bytes(range(32))))
-    F = rodar(cq.entradas_quadro(fill, clock, cursor=(320, 240),
-                                 registradores=dict(ECX=0x11111111, EDX=0x22222222, ESI=0x33333333,
-                                                    EDI=0x44444444, EBP=0x55555555)))
+    E = rodar(entradas(fill, clock ^ 0x00777777, diretorio=b'C:\\JOGOS\\RISINGBR', unidade=b'E',
+                       id_thread=7, estado_memoria=bytes(range(32))))
+    F = rodar(entradas(fill, clock, cursor=(320, 240),
+                       registradores=dict(ECX=0x11111111, EDX=0x22222222, ESI=0x33333333,
+                                          EDI=0x44444444, EBP=0x55555555)))
+    G = None
+    if CENARIO != 'v1':
+        G = rodar(entradas(fill, clock, ticks=tuple(0x00500000+17*k for k in range(1, 4097)), superficie=0x5a))
     mascaras = {'untouched_allocation_fill': mascara(A['images']['s0'], C['images']['s0']),
                 'skip_derived_value': mascara(A['images']['s0'], D['images']['s0']),
                 'declared_windows_input': mascara(A['images']['s0'], E['images']['s0'])}
     propagacao = {}
     for rotulo, R, chave in (('D_boundary_markers', D, 'skip_derived_value'),
                              ('E_m1_windows_inputs', E, 'declared_windows_input'),
-                             ('F_frame_inputs', F, None)):
+                             ('F_frame_inputs', F, None)) + ((('G_display_inputs', G, None),) if G else ()):
         base_mask = mascaras[chave] if chave else set()
         propagacao[rotulo] = dict(
             frame1_return=R['reached'], seconds=R['seconds'],
@@ -222,7 +250,7 @@ def main():
                 if endereco in m1_estaticos:
                     rot.append('m1_unexecuted_routine_static_store')
                 if QUADRO_CHAMADOR[0] <= endereco < QUADRO_CHAMADOR[1]:
-                    rot.append('declared_caller_frame')
+                    rot.append('declared_caller_frame' if CENARIO == 'v1' else 'declared_window_loop_frame')
                 elif PILHA <= endereco < PILHA+0x10000:
                     rot.append('native_stack_bench_or_stale')
                 rot = tuple(rot) or ('executed_original_code_or_pe_image',)
@@ -268,6 +296,7 @@ def main():
     revisao = subprocess.run(['git', '-C', str(ambiente_missoes.ROOT), 'rev-parse', 'HEAD'],
                              capture_output=True, text=True).stdout.strip()
     relatorio = dict(schema='rising-lands/monde01-frame1-original-validation/1', source_revision=revisao,
+                     scenario=CENARIO,
                      capture=a.captura, capture_sha256=hashlib.sha256(bruto).hexdigest(),
                      translation_executed=False, m2_accepted=False, replay=replay, code_integrity=codigo,
                      segmentation_invariance=segmentacao, allocation_fill_sensitivity=sensibilidade,

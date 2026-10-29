@@ -67,6 +67,8 @@ def main():
     ap.add_argument('--relogio', type=lambda x: int(x, 0), default=0x00123456)
     ap.add_argument('--segundos-inicio', type=float, default=120.0)
     ap.add_argument('--segundos-oraculo', type=float, default=60.0)
+    ap.add_argument('--cenario', default='v1', choices=('v1', 'exibicao'),
+                    help='v1: accepted M1 bench; exibicao: display path executed (cenarios_oraculo)')
     a = ap.parse_args()
     saida = ROOT/a.saida if not a.saida.startswith('/') else __import__('pathlib').Path(a.saida)
     if saida.exists():
@@ -75,16 +77,25 @@ def main():
                              text=True).stdout.strip()
     sujo = subprocess.run(['git', '-C', str(ROOT), 'status', '--porcelain', '--',
                            'pesquisas-paralelas/missoes'], capture_output=True, text=True).stdout
-    fontes = {n: hashlib.sha256((ambiente_missoes.OWNED/n).read_bytes()).hexdigest()
-              for n in ('oraculo_carga_missao.py', 'fronteiras_carga_missao.py',
-                        'capturar_carga_missao_original.py')}
-    e = entradas(a.preenchimento, a.relogio)
-    b = BancadaCargaMissaoOriginal(e, segundos=a.segundos_inicio)
+    nomes = ('oraculo_carga_missao.py', 'fronteiras_carga_missao.py', 'capturar_carga_missao_original.py')
+    if a.cenario != 'v1':
+        nomes += ('oraculo_quadro_missao.py', 'oraculo_exibicao_missao.py', 'exibicao_declarada.py',
+                  'cenarios_oraculo.py')
+    fontes = {n: hashlib.sha256((ambiente_missoes.OWNED/n).read_bytes()).hexdigest() for n in nomes}
+    if a.cenario == 'v1':
+        e = entradas(a.preenchimento, a.relogio)
+        b = BancadaCargaMissaoOriginal(e, segundos=a.segundos_inicio)
+        manifesto = e.manifesto()
+    else:
+        import cenarios_oraculo
+        b, e, extra = cenarios_oraculo.bancada(a.cenario, a.preenchimento, a.relogio, segundos=a.segundos_inicio)
+        manifesto = dict(e.manifesto(), frame=extra['frame'], display=extra['display'])
     relatorio = dict(schema='rising-lands/missionload-original-capture/1', original_sha256=HASH_ORIGINAL,
+                     scenario=a.cenario,
                      translation_executed=False, python_composition=False, m1_accepted=False,
                      mission='MONDE01 (new campaign, mission byte 1)', source_revision=revisao,
                      source_dirty_paths=sujo.splitlines(), source_sha256=fontes,
-                     named_inputs=e.manifesto(), limits=dict(startup_seconds=a.segundos_inicio,
+                     named_inputs=manifesto, limits=dict(startup_seconds=a.segundos_inicio,
                      oracle_seconds=a.segundos_oraculo, instructions_per_segment=b.instrucoes_segmento,
                      segments=b.limite_segmentos, bindings=b.limite_vinculos_total,
                      allocations=b.arena.maximo))
@@ -102,14 +113,15 @@ def main():
                                     allocations=len(b.arena.ordem))
         vigiado = b.conjunto_vigiado()
         b.vigiar_leituras(vigiado)
+        rotinas, extras = b._nao_executados()
         relatorio['watched_unexecuted_writes'] = dict(
-            routines=list(NAO_EXECUTADOS)+['ProgIteration'],
+            routines=list(rotinas)+(['ProgIteration'] if extras else []),
             ranges=[[hex(x), hex(z)] for x, z in b.intervalos_vigiados],
             sources=[dict(address=hex(k[0]), size=k[1], indexed=k[2], writers=v) for k, v in sorted(vigiado.items())])
         if a.entrada:
             entrada_snap = b.snapshot_entrada()
             entrada_doc = dict(schema='rising-lands/missionload-entry-state/1', original_sha256=HASH_ORIGINAL,
-                               source_revision=revisao, named_inputs=e.manifesto(),
+                               scenario=a.cenario, source_revision=revisao, named_inputs=manifesto,
                                summary=b.resumo_imagem(entrada_snap['blocks']),
                                blocks=b.serializar(entrada_snap['blocks']),
                                registers={k: hex(v) for k, v in entrada_snap['registers'].items()},
@@ -119,9 +131,17 @@ def main():
                                allocations=b.arena.manifesto(), skipped_startup_calls=b.eventos_pulados,
                                note='Python M1 composition starts from exactly these bytes; the startup '
                                     'emulation is provenance only')
+            if hasattr(b, 'estado_exibicao'):
+                entrada_doc['display_state'] = b.estado_exibicao()
         pre = b.imagem()
-        relatorio['inherited_state'] = dict(summary=b.resumo_imagem(pre), blocks=b.serializar(pre),
-                                            registers_at_entry={k: hex(v) for k, v in b._registros().items()})
+        if a.cenario == 'v1':
+            relatorio['inherited_state'] = dict(summary=b.resumo_imagem(pre), blocks=b.serializar(pre),
+                                                registers_at_entry={k: hex(v) for k, v in b._registros().items()})
+        else:
+            # The entry artifact holds every inherited byte; here only per-block hashes.
+            relatorio['inherited_state'] = dict(summary=b.resumo_imagem(pre), encoding='hashes_only_see_entry',
+                                                block_hashes=_hashes(pre),
+                                                registers_at_entry={k: hex(v) for k, v in b._registros().items()})
         fase = 'oracle'
         regs = b.executar_mission_load(a.segundos_oraculo)
         post = b.imagem()
@@ -133,7 +153,12 @@ def main():
             binding_events=eventos_json(b.vinculos_declarados.eventos[b.evento_inicio_oraculo:]),
             watched_reads=[dict(address=hex(k[0]), size=k[1], reader=k[2], count=v)
                            for k, v in sorted(b.leituras_vigiadas.items())],
-            final_state=dict(summary=b.resumo_imagem(post), blocks=b.serializar(post)))
+            final_state=(dict(summary=b.resumo_imagem(post), blocks=b.serializar(post)) if a.cenario == 'v1' else
+                         dict(summary=b.resumo_imagem(post), encoding='delta_from_entry', block_hashes=_hashes(post),
+                              blocks=b.serializar({n: v for n, v in post.items() if pre.get(n) != v}))))
+        if hasattr(b, 'estado_exibicao'):
+            relatorio['display_state'] = b.estado_exibicao()
+            relatorio['directdraw_calls'] = b.directdraw.chamadas
         relatorio['code_integrity'] = dict(exe_code_sha256=b.sha256_codigo_exe, before=b.sha256_codigo_inicial,
                                            after=b.sha256_codigo(), protection='BEGTEXT R|X; headers/.reloc/.rsrc R; '
                                            'DGROUP/.bss/.idata RW; 0x52e000..0x600000 no access; stack/arena RW no exec')
@@ -158,7 +183,7 @@ def main():
     relatorio['import_resolutions'] = b.importacoes_declaradas
     relatorio['total_seconds'] = round(time.monotonic()-t0, 3)
     if resultado:
-        saida = ROOT/'.local'/('stage12-missionload-failed-'+time.strftime('%Y%m%dT%H%M%S')+'.json')
+        saida = ROOT/'.local'/(f'{a.cenario}-missionload-failed-'+time.strftime('%Y%m%dT%H%M%S')+'.json')
     saida.parent.mkdir(parents=True, exist_ok=True)
     with open(saida, 'x') as f:
         json.dump(relatorio, f, indent=1, sort_keys=True)
@@ -177,6 +202,10 @@ def main():
                           stop=relatorio.get('stop', {}).get('reason'),
                           total_seconds=relatorio['total_seconds']), indent=1))
     return resultado
+
+
+def _hashes(blocos):
+    return {n: dict(base=hex(base), bytes=len(d), sha256=hashlib.sha256(d).hexdigest()) for n, (base, d) in blocos.items()}
 
 
 def _contar(eventos):
