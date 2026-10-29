@@ -70,6 +70,14 @@ All functions are in [`ferramentas/incursao_core.py`](../../ferramentas/incursao
 | iaProbPost `0x47d920` | `postar_tarefa(m, eax, edx, ebx, ecx, pilha)` | player, type, args EBX/ECX/4 stack words → EAX task |
 | iaProbNew `0x47d7ec`, listNewElem `0x47d012`, listLinkElemToTail `0x47d07a` | `tarefa_nova`, `lista_novo_elemento`, `lista_ligar_ao_fim` | the live lists at `0x5148a0`/`0x5148b0` |
 
+## Live-memory providers for ai-runtime's chain
+
+`chamadas_quadro_core.provedores_core(memoria, bonus)` exports the raid routines with `incursao_ia`'s keyword names: GetFreeCell (`celula`, `tipo`), CreerEngin (`celula`, `edx`, `tipo`, `jogador`), EnginSetType, EnginSetTypeCaract, EnginTypeGetCapacite, EnginEnArret, EnginSetPlayer (`unidade`, `jogador`), PlaceEngin (`unidade`), SetMiniMap (`jogador`, `modo`, `caso`), PlayerGetColor, EnginGetCase, GetRandCaseChamps, GetRandCaseTypeBatPlayer (`jogador`, `tipo`), Chemin_Accessible (`origem`, `destino`), TerrainEnCollision/ResetCollision (`caso`, `mascara`), iaProbPost (`jogador`, `tipo`, `ebx`, `ecx`, `pilha`), iaProbNew, listNewElem and listLinkElemToTail. Each returns the original EAX.
+
+GetFreeCell without a native stack returns AX: the cells tested, the order and AX do not depend on the stack residue, only EAX's upper word does. `testes/test_incursao_core.py::ProvedoresIncursao` calls every provider by keyword on every captured call, of both scenarios.
+
+**One task poster.** `MaquinaTarefasViva.sobre_memoria(...)` posts through the same original-equivalent `incursao_core.tarefa_nova`/`postar_tarefa`: the program entry comes from u16 `0x51a720`, and the lists use their own size/base fields. The chain's iaProbPost provider and the VM therefore share one implementation. The legacy buffer-only VM keeps its own `nova`/`postar`.
+
 ## Original details kept
 
 - **GetFreeCell** searches rings 1..29. In each ring it tests the row y−k, then the row y+k, then the columns x−k and x+k.
@@ -94,3 +102,80 @@ GetCaseIndiceBatiment is translated but no capture reaches it, because MONDE01 h
 
 - **Without a CPU:** [`testes/test_incursao_core.py`](../../testes/test_incursao_core.py) replays every captured call of every scenario from its read-before-write bytes, with registers EAX..EBP and changed bytes exact. That includes the frame-1 Core routines the raid reaches.
 - **Native differential:** [`ferramentas/validar_incursao_core.py`](../../ferramentas/validar_incursao_core.py) reruns the forced cases. At every nested Core call it runs the translation over a copy-on-write view of the live memory at that entry, and compares its registers and changed bytes with the original's at the return. The results are in `relatorios/incursao-core-<scenario>-emulada.json`. For v1: **689 comparisons, 0 mismatches and 0 dependency stops**, every captured call of the 26 routines reached, with the phases and code reproduced (114 s). The display differential follows its capture.
+
+## Movement and pathfinding after the spawn (counters 9000–9200)
+
+The coordinator's coverage run (`runs/core/coverage-9200`) shows that no routine is first entered in frames 129–8999. Every new entry is at 9000 or later, and pathfinding starts at 9177.
+
+### Capture
+
+[`ferramentas/capturar_movimento_incursao.py`](../../ferramentas/capturar_movimento_incursao.py) uses Combat's forced-counter method: Missions' v1 path read-only, u32 `0x508f7c` = 9000 at frame 1's CalculGame entry, then 201 whole native frames. With Missions' Isolamento it pauses at the 27 Core routines of that window:
+- EnginNextEtape: the raid unit's calls and the first call of each frame;
+- the collision trio: the first call of each frame;
+- every other routine: every call.
+
+The output is `captura-movimento-incursao-v1.json` (Mac mini run #5).
+
+### Validation over the existing world model
+
+[`ferramentas/validar_movimento_incursao.py`](../../ferramentas/validar_movimento_incursao.py) reruns the same isolated calls. For each sampled call it binds Core's world model over the exact entry blocks, through Missions' `montar_provedores`/`MapaMemoriaM1` (the composition AI/runtime uses). It runs the matching method and compares the serialized changed bytes and the returned AL/AX/EAX with the original.
+
+| Routine | World-model code |
+|---|---|
+| EnginEstVivant, ResetOrdre, SetDeplaceEngin | `viva`, `redefinir_ordem`, `definir_movimento` |
+| RotateEngin, Set/ResetEnginCollision, AvanceEngin | `girar`, `ocupar`, `avancar_passo` |
+| EnginOccupeCase, EnginPeutPasser, ChercheIndiceEngin | `passagem_unidades.ocupa_celula` / `consultar_passagem` / `procurar_ocupante` |
+| CalculDirection, CalculDirCase, Distance2d | `movimento.direcao_entre_celulas` / `celula_vizinha` / `distancia_quadratica` |
+| EnginNextCase, EnginNextCaseChemin | `escolher_direto`, `escolher_da_rota` |
+| CalculNextCase (new), DeplaceEngin | `calcular_proxima_celula`, `atualizar_movimento(animacao=True)` |
+
+Routines with a flat translation (SetEnginCollision, SetCollision, Chemin_ModifieZone, and the new TerrainEnCollision, ResetCollision and CRT memset) are also compared, with full registers, over copies of the same blocks.
+
+**Gap found and closed.** CalculNextCase's walk animation was not modeled: +0xa9 ticks to the period +0xa7, then frame +0xa4 = (+0xa4 + 1) % +0xa5. The existing native pulse comparisons exclude continuous animation and sound by design.
+- `MundoNavegacao.animar_movimento` and `calcular_proxima_celula` model the animation. `atualizar_movimento(..., animacao=True)` runs it at the original point.
+- The default `animacao=False` keeps the declared exclusion for the existing comparisons.
+- Type 17 (AnimBallonStatic) and the local-player volume/sound branch (types 11..16 on a discovered cell) raise `NotImplementedError`.
+
+**Smoke over counters 9000–9004:** 0 mismatches and 0 dependency stops. That is 23 world-model comparisons and 11 flat ones.
+
+**Live world (`ferramentas/mundo_vivo.py`).** `mundo_vivo(memoria)` returns a `MundoNavegacao` whose buffers are live views of the flat memory, and whose scalars are properties at their original addresses. It uses the same addresses as Missions' `montar_provedores`, with no copy and no pull/push. World state with no original address raises `EstadoSemEndereco`: the Python solver hook, its result cache and trace, and `mascaras_alianca[4]`.
+- The validator also runs every world adapter on it and compares with the native result.
+- `MundoNavegacao.deslocar` is DeplaceEngin exactly: the +0x88 switch of table `0x4492f0`.
+
+**Live movement providers** (`provedores_core`, built on `mundo_vivo` at first use):
+- SetDeplaceEngin(`unidade`, `destino`) and ResetOrdre(`unidade`) → EAX = the unit record address (every path ends there; the captured calls agree);
+- DeplaceEngin, CalculNextCase, AvanceEngin, RotateEngin, EnginNextCase, EnginNextCaseChemin (`unidade`);
+- ResetEnginCollision(`unidade`, `caso`);
+- EnginEstVivant(`unidade`) → EAX (0 or 1, the original zero-extends);
+- EnginOccupeCase / EnginPeutPasser(`unidade`, `caso`, `mascara`) → AL;
+- ChercheIndiceEngin(`caso`) → AX;
+- CalculDirection(`origem`, `destino`) → AL;
+- CalculDirCase(`caso`, `direcao`) → AX;
+- Distance2d(`x1`=AX, `y1`=DX, `x2`=BX, `y2`=CX) → EAX.
+
+The other void routines return None: their EAX is path-dependent and not modeled (DeplaceEngin's EAX is 0, 0x3333 or a pointer in the capture), and their callers do not use it.
+
+**Path search at 9177 (live).** `solucionador_vivo.SolucionadorCaminhosVivo(memoria)` is Core's Python solver with its work state at the original globals. It loads that state before each search and stores it back afterwards:
+- Chemin_Verouille's flags `0x4e0f34/35`, owner `0x4e0f41`, mask `0x4e0f42`, class `0x4e0f48` and start/destination `0x4e0f44/46`;
+- CheminCalcul's candidate buffers `0x4e116a/0x4e136a`, its region table `0x4e0f6a` and its records `0x4e0f54/0x4e0f5e`.
+
+The live world keeps the search result at the original pair: status `0x4e0f4c` and alternative cell `0x4e0f4a`. Route updates are now written in place, in `avancar_passo` and `_aplicar_resultado`. That fixed the route count lost on arrival through Missions' snapshot binding.
+
+**Contour state, byte-exact.** CheminCalcul's contour engine keeps four more globals, and `SolucionadorCaminhosVivo` writes all of them from the Python contour result:
+- u16 `0x4e1772`: the unit's region backup +0xfa at entry (`0x42f26c`);
+- u8 `0x4e0f40`: the last traced side's step count (`fase`);
+- u8 `0x4e0f68`: the region-list count (`quantidade_regioes`; each add stores `0x4e0f6a + 2·count`, `0x42fd9b`);
+- u32 `0x4e0f50`: the current record. It is `0x4e0f54`, then `0x4e0f5e` once the second side starts (`0x4355e1`), unless every start was blocked.
+
+**Per routine.** The validator also compares the path-search routines one by one on the live world:
+- Chemin_Verouille: `SolucionadorCaminhosVivo.verrouiller`, the search context at the original globals;
+- CheminCalcul: `calcular`;
+- TestLigneOptimise: `otimizacao_caminhos.testar_linha`, AL = allowed, cells written at EBX;
+- OptimiseChemin: `otimizar_rota`. EAX = compacted cells + 1, because the loop exits when its 1-based cursor passes the compacted count (`0x42ea6e`).
+
+**Full run over 9000–9200** (`relatorios/movimento-incursao-mundo-emulada.json`, every call compared from counter 9170): **0 mismatches**.
+- Comparisons: 251 snapshot-world, 261 live-world and 135 flat.
+- The live comparisons include the first search: Chemin_Verouille 1, CheminCalcul 1, OptimiseChemin 1, TestLigneOptimise 5, and 37 DeplaceEngin calls. The memory after the search is byte-exact.
+- **The 2 dependency stops** are the same search through Missions' snapshot binding (`montar_provedores`), which denies the solver hook. AI/runtime's chain never reaches them: its DeplaceEngin/SetDeplaceEngin come from `provedores_core`, which runs on `mundo_vivo` with `SolucionadorCaminhosVivo`.
+
+**Open gaps:** the EnginNextEtape dispatcher, which is AI/runtime's (`proxima_etapa_quadro`). Core has no adapter for it.
