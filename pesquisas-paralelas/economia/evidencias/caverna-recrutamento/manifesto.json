@@ -1,0 +1,284 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "BatimentNextEtape prelude 0x4268d4..0x426918",
+      "start": "0x4268d4",
+      "end_exclusive": "0x426918",
+      "sha256": "6a724d30775ad7366d6d8c1e4e1a29d9a289d586238da9af5391cdd5b2aff72b",
+      "file": "004268d4.asm"
+    },
+    {
+      "name": "BatimentNextEtape type-3 (CAVE) body 0x426aff..0x426c10",
+      "start": "0x426aff",
+      "end_exclusive": "0x426c10",
+      "sha256": "7d941f0d19949f7c1bbaf54e3fb78e3a034088aec1980a72ef2ee045eea43c01",
+      "file": "00426aff.asm"
+    },
+    {
+      "name": "BatimentNextEtape exit 0x4281c0..0x4281c7",
+      "start": "0x4281c0",
+      "end_exclusive": "0x4281c7",
+      "sha256": "bdf58c0ddb45652182825bb0b5175c4a6c313845097300472b566887ee516e08",
+      "file": "004281c0.asm"
+    },
+    {
+      "name": "shared tail 0x41db1d",
+      "start": "0x41db1d",
+      "end_exclusive": "0x41db24",
+      "sha256": "7227c48dab9cf58cef6ab93b965ca6429bd0f282cc829c7d338a55a23a93f08d",
+      "file": "0041db1d.asm"
+    },
+    {
+      "name": "BatimentHabitable",
+      "start": "0x41cc70",
+      "end_exclusive": "0x41cde0",
+      "sha256": "03d1c554a29a638f8af3893fca25b3d8f29156bfdf329c63a63804e574ecc581",
+      "file": "0041cc70.asm"
+    },
+    {
+      "name": "BatimentSetTechnologie",
+      "start": "0x41c76c",
+      "end_exclusive": "0x41cb9a",
+      "sha256": "caba9328e3ef756f5624b02ec8b26da0d91b6c9c6c487c1e541ccef8a17b17c3",
+      "file": "0041c76c.asm"
+    },
+    {
+      "name": "InitBatimentPlayer",
+      "start": "0x41be88",
+      "end_exclusive": "0x41bfe6",
+      "sha256": "98368a83f63b800976c6a9efa6f15ea2b519c8732d5ccc3534e08e23959140c5",
+      "file": "0041be88.asm"
+    },
+    {
+      "name": "InitBatimentNeutre",
+      "start": "0x41c017",
+      "end_exclusive": "0x41c18a",
+      "sha256": "b1cc3e3b69768cce81559f54bdc1f04b8416c747e9dd54e3a23a19923e5395c9",
+      "file": "0041c017.asm"
+    },
+    {
+      "name": "InitRecruteTroupe",
+      "start": "0x4283e2",
+      "end_exclusive": "0x428691",
+      "sha256": "bb73355fba6bf21141ebe4ec996f9e4c184cfe5976c990a081d4ebd27962e47f",
+      "file": "004283e2.asm"
+    },
+    {
+      "name": "CalculTroupe types 1/2 0x4259e6..0x425b5e",
+      "start": "0x4259e6",
+      "end_exclusive": "0x425b5e",
+      "sha256": "8b06eaab53941f242ca2cd153563c72c9d007c9c05dbb1e02b4dd90663a670fd",
+      "file": "004259e6.asm"
+    },
+    {
+      "name": "CalculTroupe dispatch and exit 0x4263e5..0x426418",
+      "start": "0x4263e5",
+      "end_exclusive": "0x426418",
+      "sha256": "1564c5edf2a507199c2b7230748746ce79eb9a83cb188446bb2168c7468ee408",
+      "file": "004263e5.asm"
+    },
+    {
+      "name": "SortieTroupe",
+      "start": "0x420e4c",
+      "end_exclusive": "0x421250",
+      "sha256": "264bbbce8b263980f8c9e1d87593eab5518bf49e6f1787625a5c50b291beb063",
+      "file": "00420e4c.asm"
+    },
+    {
+      "name": "epilogue 0x42399a (SortieTroupe)",
+      "start": "0x42399a",
+      "end_exclusive": "0x4239a0",
+      "sha256": "9651d68480e9031dd95d190ca598519a163040c3b73f617ef4b3a789f33597ef",
+      "file": "0042399a.asm"
+    },
+    {
+      "name": "EnginGetTimeRecrute",
+      "start": "0x4410b7",
+      "end_exclusive": "0x4410d2",
+      "sha256": "2b69e5c70f795a83ddc98ad5c0e8251dee59f53b1a728a859bbc56e45348ccf9",
+      "file": "004410b7.asm"
+    },
+    {
+      "name": "EnginGetRessource",
+      "start": "0x4410d2",
+      "end_exclusive": "0x441108",
+      "sha256": "f2bc4e9f18145507e6cf790ae53d71eadfab7a3a1094f53b50a7b92b6d428768",
+      "file": "004410d2.asm"
+    },
+    {
+      "name": "TypeEnginEstRealisable",
+      "start": "0x44228e",
+      "end_exclusive": "0x4422b0",
+      "sha256": "af7c5938cb9ab84b176424412ec5d89dd02d90ef948c73a9c9ef7af3fe710a64",
+      "file": "0044228e.asm"
+    },
+    {
+      "name": "BatimentGetColons",
+      "start": "0x41a4c4",
+      "end_exclusive": "0x41a4f4",
+      "sha256": "031b5b8f7a5047ba4c3289c093b11bd817ed0b13987f69af319416fe2393fc04",
+      "file": "0041a4c4.asm"
+    },
+    {
+      "name": "BatimentGetCapacite",
+      "start": "0x41f3ed",
+      "end_exclusive": "0x41f46e",
+      "sha256": "b9a2029a7bf7f5f1b185e59d75da417a6d087e00d63350f76f523d1c6189055b",
+      "file": "0041f3ed.asm"
+    },
+    {
+      "name": "BatimentSelection",
+      "start": "0x41b673",
+      "end_exclusive": "0x41b78f",
+      "sha256": "d4b1a0741f2ad688645f0eb17d056c0953e5ab7c27d6b2809472ff645ca71233",
+      "file": "0041b673.asm"
+    },
+    {
+      "name": "ProcessInputGame tag 17 0x45f19f..0x45f1b3",
+      "start": "0x45f19f",
+      "end_exclusive": "0x45f1b3",
+      "sha256": "5c0d8bcf6f922825d0cc5c27d5026c8dd8d41d4c5c3830166bd588b233fbc213",
+      "file": "0045f19f.asm"
+    },
+    {
+      "name": "BatimentTuyauCave / BatimentPorteCave (the +0x75 writers)",
+      "start": "0x41a65c",
+      "end_exclusive": "0x41a6a7",
+      "sha256": "6cbfbff89d3ef0f230251ffab1a66ee54e7309b735e211d6e79d8301cd46e989",
+      "file": "0041a65c.asm"
+    }
+  ],
+  "jump_tables": [
+    {
+      "name": "BatimentNextEtape by structure type - 1",
+      "address": "0x426880",
+      "entries": [
+        "0x426918",
+        "0x426918",
+        "0x426aff",
+        "0x426c10",
+        "0x42698d",
+        "0x428095",
+        "0x426d61",
+        "0x426a08",
+        "0x4281c0",
+        "0x426e43",
+        "0x427549",
+        "0x427bb7",
+        "0x426918",
+        "0x42698d",
+        "0x427d5d",
+        "0x426918",
+        "0x427ed9",
+        "0x427eec",
+        "0x42803c",
+        "0x427da4",
+        "0x4281c0"
+      ]
+    },
+    {
+      "name": "BatimentHabitable radius by structure type",
+      "address": "0x41cc18",
+      "entries": [
+        "0x41cd71",
+        "0x41cd7f",
+        "0x41cd78",
+        "0x41cd7f",
+        "0x41cd8d",
+        "0x41cd7f",
+        "0x41cd7f",
+        "0x41cd7f",
+        "0x41cd7f",
+        "0x41cd99",
+        "0x41cd94",
+        "0x41cd94",
+        "0x41cd99",
+        "0x41cd7f",
+        "0x41cd7f",
+        "0x41cd7f",
+        "0x41cd7f",
+        "0x41cd86",
+        "0x41cd7f",
+        "0x41cd86",
+        "0x41cd7f",
+        "0x41cd86"
+      ]
+    },
+    {
+      "name": "SortieTroupe abandonment radius by structure type",
+      "address": "0x420df4",
+      "entries": [
+        "0x4210f7",
+        "0x4211ff",
+        "0x4211f2",
+        "0x4211ff",
+        "0x421219",
+        "0x4211ff",
+        "0x4211ff",
+        "0x4211ff",
+        "0x4211ff",
+        "0x4210ff",
+        "0x421226",
+        "0x421226",
+        "0x4210ff",
+        "0x4211ff",
+        "0x4211ff",
+        "0x4211ff",
+        "0x4211ff",
+        "0x42120c",
+        "0x4211ff",
+        "0x42120c",
+        "0x4211ff",
+        "0x42120c"
+      ]
+    },
+    {
+      "name": "ProcessInputGame by packet tag",
+      "address": "0x45ed20",
+      "entries": [
+        "0x45f2de",
+        "0x45ee46",
+        "0x45eeaf",
+        "0x45ee2d",
+        "0x45ef73",
+        "0x45efc1",
+        "0x45efe2",
+        "0x45f041",
+        "0x45f05f",
+        "0x45f1b3",
+        "0x45f0a4",
+        "0x45eee2",
+        "0x45ef02",
+        "0x45ee0a",
+        "0x45f0c7",
+        "0x45f149",
+        "0x45f167",
+        "0x45f19f",
+        "0x45f20f",
+        "0x45f07d",
+        "0x45ef42",
+        "0x45f155",
+        "0x45efa5",
+        "0x45f27e",
+        "0x45f269",
+        "0x45f28c",
+        "0x45f295",
+        "0x45f2a8",
+        "0x45f2b6",
+        "0x45f2c4",
+        "0x45f275",
+        "0x45f2d2",
+        "0x45f234",
+        "0x45f221",
+        "0x45ef58",
+        "0x45f246",
+        "0x45ee8d",
+        "0x45ef36",
+        "0x45edf3",
+        "0x45f257"
+      ]
+    }
+  ]
+}
