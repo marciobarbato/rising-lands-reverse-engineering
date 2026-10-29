@@ -642,3 +642,12 @@ New this round, translated from captured executed blocks: InputGame (MouseZone, 
 - every compared byte (16,022,275 per phase);
 - both RNGs, the bindings and boundaries outside display context, and the registers;
 - the allocation records and the HUD flag.
+
+## M2.3 — 9,200-frame equality proof
+
+[M2_3_PROVA_9200_QUADROS.md](../pesquisas-paralelas/ia-runtime/M2_3_PROVA_9200_QUADROS.md). Against Missions' original 9,200-frame capture (10 self-contained parts) and the cumulative 9,200-frame policy, the Python composition is equal in all 18,401 phases. The window runs through the first raid: the spawn at frame 9000 and the first path search at 9176–9179. It uses zero crossings, measured per part:
+- every compared byte (16,022,275 per phase);
+- both RNGs, the bindings and boundaries outside display context, and the registers;
+- the allocation-record count in every phase, part 09's final records, and the HUD flag.
+
+One command reproduces it (`provar_quadros_9200_ia.py tudo`), with a per-part mode so the parts run in parallel.

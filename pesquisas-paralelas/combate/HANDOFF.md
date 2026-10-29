@@ -1,4 +1,178 @@
-# Combat handoff — 2026-10-28
+# Combat handoff — 2026-10-29
+
+## Live raid attack, damage and lifecycle contract (current task)
+
+Branch `feat/re-combat`; initial sync `c08e1fb`. Evidence-first commits:
+`58c8516` (30 real-state probe leaves), `4d4e2f4` (2,024 original calls and
+192 native unit/projectile ticks), `a26d5ac` (184 supplemental lethal/overkill
+and Core removal calls), `f5246d8` (solid-footprint and native audio supplements),
+`b096e82` (removal from exact original zero-life post-kill states).
+Audio arrived on main `23dfd6e` during the run and was merged into this feature
+branch as `c671be0`. No main push or milestone acceptance is part of this delivery.
+
+The [case matrix](RAID_CAPTURE_MATRIX.md) records every input distinction,
+original return, named stop and capture chronology. The actual full M2.3 states
+after frames 9000/9176 are loaded from Missions part 09, with compressed/raw
+manifest pins and full checkpoint summaries checked by the existing readers.
+The raid soldier is unit 16, owner 4, type 0. Positions/occupancy are never
+relocated for these cases. Separate camera-1 and 0/1-life inputs are explicit
+variations, not no-input game-flow claims. Original callbacks are never
+substituted in captures; hooks record or stop before entries.
+
+Only intact RISING.EXE SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`
+is executed. The code-section hash remains
+`02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4`.
+The normalized PE and historical evidence are unchanged.
+
+### Published inputs and mutation order
+
+See [the live-memory API](../../docs/COMBAT.md#real-m23-raid-memory-api-2026-10-29).
+`CombateRaidVivo(memoria, *, consulta, efeito, mundo, som)` retains actual buffers
+and initializes no game bytes. Pass Core `MemoriaQuadro` or an equivalent
+`u8/u16/u32` plus `vista` interface. Core live navigation/pathfinding and Economy
+loaded modifiers are composed; unresolved foreign calls raise
+`DependenciaCombateRaid(nome, argumentos)` with the original entry address.
+
+- AI/runtime states 1/24 call `.ramo(unit:u16)`; `.calcular_ataque(unit)` is the
+  direct `0x451914` leaf. Prelude, reload advance and frame order remain AI/Core.
+- Core selection uses `.ordem_core(unit, mode, reference) -> {'EAX','EDX'}`;
+  `.set_attaque_engin(regs)` and `.engin_trouve_cible(regs)` expose full general
+  register results for `0x445a36` and `0x453f74`.
+- `.infligir(cell:u16, mode:u8, source:u16, direction:u8, flag:u8)` covers the
+  initialized unit/building branches of `0x450874`. `.infligir_unidade` delegates
+  damage arithmetic and requests level/death effects at their original points.
+- `.infligir_estrutura(target:u16, damage:u32, source_owner:u8)` is the separate
+  accumulated-damage consumer. Its register form gives exact nonlethal results;
+  foreign destruction-return registers are required explicitly for a raw return.
+- `.calcular_projeteis()` reads the live counter. Type-30 presentation writes
+  occur immediately in byte `0x4dfb44`, including before a dependency stop.
+- `.iniciar_morte`/`.retirar` request Core providers at `0x444938`/`0x457058`.
+
+Attack target mode `+b7=3` and damage-source mode 3 are distinct. Unit targets
+use the predecessor reaction/damage order. Building mode-1 impact uses column
+26 plus full modifier 5, snapshots the source owner, and requests city message
+4 before damage. The building consumer writes accumulated u16 `+6` before
+volume/sound/voice; tests the original scaled low-u16 quotients strictly; then
+requests city message 2 before destruction markers/presentation/timer stores,
+sympathy and final voice. The hit RNG/allocation and repeated-owner diplomacy
+follow consumer return. A zero maximum-life denominator raises after the
+preceding writes/effects. Callback failure retains earlier effects; a fresh
+entry repeats them. Camera, counter, bonus and alert words stay live throughout.
+
+Rust consumers use these typed widths and ordering over their tested projection
+onto the original layout. No Rust implementation or runtime dispatcher is edited.
+Void attack/unit-damage/projectile APIs do not reconstruct path-dependent
+unconsumed EAX or EFLAGS. The proof explicitly reports register scope: all
+seven general registers for getter/setter/nonlethal building returns, preserved
+registers for attack, and consumed argument registers at named stops. Full
+register reconstruction remains a gap against the requested all-register gate.
+
+### Named cross-front contracts
+
+- **Core:** provide live `SetDyingEngin(memory, unit, providers)` and
+  `RetireEngin(memory, unit, providers)`, plus the state-4 dispatcher tail and
+  `EnginSetLevelExperience 0x44fb20`. The requested all-register gate also needs
+  Core's path-dependent `DeplaceEngin` return EAX, which its void adapter does not
+  currently expose. Current physical dying accepts a bytearray
+  fixture and excludes grouped/visible/selected paths; it is not silently used
+  over a memoryview or substituted by a no-op. V2 has exact real grouped raid
+  deaths, camera-1 player deaths, level awards and subsequent removal returns
+  to serve as owner fixtures. The additive
+  [v5 removal capture](evidencias/captura-remocao-pos-dano-raid-original-v5.json)
+  starts from the exact original lethal-consumer output (life 0, state 4) and
+  completes RetireEngin at both checkpoints, with no faults/limits. Native Core
+  removal is captured, not reimplemented.
+- **AI/runtime:** actual `iagUnitSendMessage 0x4829c8` (0x48 hit, 0x44 dying,
+  0x4a invalid target) and `iagVilleSendMessage 0x484808` (4 hit, 2 destruction).
+  Raid-unit messages mutate task/group/unit memory in the original; they cannot
+  be empty callbacks. Native unit windows are evidence, not a second dispatcher.
+- **Core/Economy:** `BatimentAdjacent 0x42381f`,
+  `BatimentGetCaseAdjacent 0x4239a0`, diplomacy/sympathy, structure-source damage
+  queries and `VoixOffAsk 0x41a1ac`. The original voice first argument is 1.
+  Existing Core cell/volume, movement and RNG and Economy modifiers are reused.
+- **Audio:** pass the committed `SoundRequestProvider` through `som`; the captured
+  checkpoints support its explicit `unopened-display` domain. Combat converts
+  requests to EAX selector, EDX code, EBX real caller reference, ECX flags and
+  one volume word. Audio-domain failures propagate; no initialization is inferred.
+  Initialized/busy-handle playback still requires the owner's supported domain.
+
+The validator's optional `--guarded` fixture admits only original **known
+read-only returns**: city messages 2/4 and unit message 0x48 for non-AI owners,
+and owner-range/equality sympathy/statistic guards. These guards are backed by
+complete original captures. They are test-only, not production AI/diplomacy
+providers; every other call raises. This permits suffix checks without a fake
+general message implementation.
+
+### Fresh validation and exact scope
+
+[Machine-readable delivery summary](validacao-raid-delivery.json) pins the evidence,
+per-routine counts, final source hashes, commands, skips and remaining gaps.
+
+[Strict final differential](validacao-raid-final-emulada.json): **174/174 equal**,
+zero mismatches, faults, limits or writes outside the complete checkpoint.
+There are 121 full returns and 53 exact named stops. Every stop compares consumed
+argument registers as well as every state block. Source hashes match the
+published implementation and remained unchanged during the run.
+
+| Routine | Cases | Full returns | Named stops | Mismatches |
+|---|---:|---:|---:|---:|
+| SetAttaqueEngin | 10 | 10 | 0 | 0 |
+| EnginTrouveCible | 10 | 10 | 0 | 0 |
+| CalculAttaqueEngin | 10 | 9 | 1 | 0 |
+| InfligeDegat | 84 | 72 | 12 | 0 |
+| EnginInfligeDegat | 16 | 0 | 16 | 0 |
+| BatimentInfligeDegat | 36 | 20 | 16 | 0 |
+| SetDyingEngin provider entry | 6 | 0 | 6 | 0 |
+| RetireEngin provider entry | 2 | 0 | 2 | 0 |
+
+[Guarded suffix differential with the actual Audio provider](validacao-raid-guardas-emulada-v1.json):
+**174/174 equal**, 125 full returns and 49 exact stops. It adds four complete
+sanctuary destruction returns, including all seven general registers, using
+only the explicitly described original read-only foreign guards. It does not
+claim general AI/physical death translation. Solid-footprint supplements each
+compare 36/36 cases; the final native unit suite reruns the Audio/guarded solid
+matrix and its two type-30 internal checkpoints against the current source.
+
+Actual gates:
+
+- `python3 -B scripts/check.py --domain combat` through the lease:
+  **279 tests passed, 153 optional native skips**, valid documentation links
+  ([final domain log](domain-raid-final.log)).
+- `RISING_EMULAR=1 python3 -B -m unittest discover -s pesquisas-paralelas/combate -p 'test_*.py' -v`
+  through the lease: **279 tests passed, zero skips**, 674.865 seconds
+  ([full native log](test-raid-all-native-v1.log)).
+- Focused local live-memory suite: **8 tests passed, two optional native skips**
+  ([log](test-raid-local-v2.log)); the two native tests pass in the full native run.
+- `git diff --check` and the new-module basename inventory pass. No other
+  owner's research source was edited. No Ghidra, app build, main integration,
+  initialized playback or full scripted-input battle was run.
+
+All earlier diagnostics remain preserved with separate filenames. Two early
+local harness runs ended at an unfinished method and a relative-path reporting
+error; neither is counted as a pass. Subsequent focused/domain/native runs are
+the results above. Intermediate reports predate final source-hash recording;
+the strict final and guarded-suffix reports are the pinned implementation proofs.
+
+### Remaining scripted-input / Mac mini work
+
+The 32-tick windows contain real orders and native unit/projectile dispatch,
+but not the complete CalculGame/AI/input/display phases and not a naturally
+reached battle. S1/tag-14 inputs through WndProc/ProcessInputGame, fight onset,
+AI callback composition, visible/selected deaths and mission defeat remain
+coordinator/owner work. No M3/M4 acceptance is claimed.
+
+For a longer **bounded unit-window inventory**, the coordinator may route this
+exact command to the Mac mini (it is deliberately not run on the MacBook):
+
+```sh
+python3 "/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py" combat-raid-long-window -- python3 -B pesquisas-paralelas/combate/capturar_combate_raid.py --window 1200 --output pesquisas-paralelas/combate/evidencias/captura-combate-raid-long-original.json
+```
+
+It retains all case deltas/entries and can be expensive; it still excludes the
+other frame phases. Full scripted-input capture must use Missions' S1 harness,
+not treat this inventory driver as a gameplay replay. All jobs actually run
+here are bounded native leaves/windows or tests, each below twenty minutes.
 
 ## M2.3 readiness: provider matrix and ProjectileSet at the raid entry
 

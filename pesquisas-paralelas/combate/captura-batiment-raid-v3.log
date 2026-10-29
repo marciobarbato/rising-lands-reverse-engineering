@@ -1,0 +1,76 @@
+[lease] combat-solid-footprint-capture waiting
+[lease] combat-solid-footprint-capture granted slots [2]
+{"case": "f9000-solid-impact-source0-camera0", "returned": false, "stop": "PlaySnd_PostSound", "fault": null}
+{"case": "f9000-solid-impact-source0-camera1", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-impact-source1-camera0", "returned": false, "stop": "PlaySnd_PostSound", "fault": null}
+{"case": "f9000-solid-impact-source1-camera1", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-impact-source2-camera0", "returned": false, "stop": "PlaySnd_PostSound", "fault": null}
+{"case": "f9000-solid-impact-source2-camera1", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-impact-source16-camera0", "returned": false, "stop": "PlaySnd_PostSound", "fault": null}
+{"case": "f9000-solid-impact-source16-camera1", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-impact-mode4-dir29", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-impact-mode4-dir30", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-threshold-599", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-threshold-600", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-threshold-601", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-threshold-599", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-threshold-600", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-threshold-601", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-type30-init", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-type30-first-impact", "returned": false, "stop": "InfligeDegat checkpoint", "fault": null}
+{"case": "f9176-solid-impact-source0-camera0", "returned": false, "stop": "PlaySnd_PostSound", "fault": null}
+{"case": "f9176-solid-impact-source0-camera1", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-impact-source1-camera0", "returned": false, "stop": "PlaySnd_PostSound", "fault": null}
+{"case": "f9176-solid-impact-source1-camera1", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-impact-source2-camera0", "returned": false, "stop": "PlaySnd_PostSound", "fault": null}
+{"case": "f9176-solid-impact-source2-camera1", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-impact-source16-camera0", "returned": false, "stop": "PlaySnd_PostSound", "fault": null}
+{"case": "f9176-solid-impact-source16-camera1", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-impact-mode4-dir29", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-impact-mode4-dir30", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-threshold-599", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-threshold-600", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-threshold-601", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-threshold-599", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-threshold-600", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-threshold-601", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-type30-init", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-type30-first-impact", "returned": false, "stop": "InfligeDegat checkpoint", "fault": null}
+{"cases": 36, "returns": 26, "faults": 0, "limits": 0}
+{"case": "f9000-solid-impact-source0-camera0", "returned": false, "stop": "VoixOffAsk", "fault": null}
+{"case": "f9000-solid-impact-source0-camera1", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-impact-source1-camera0", "returned": false, "stop": "VoixOffAsk", "fault": null}
+{"case": "f9000-solid-impact-source1-camera1", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-impact-source2-camera0", "returned": false, "stop": "VoixOffAsk", "fault": null}
+{"case": "f9000-solid-impact-source2-camera1", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-impact-source16-camera0", "returned": false, "stop": "VoixOffAsk", "fault": null}
+{"case": "f9000-solid-impact-source16-camera1", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-impact-mode4-dir29", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-impact-mode4-dir30", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-threshold-599", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-threshold-600", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-threshold-601", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-threshold-599", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-threshold-600", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-solid-threshold-601", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-type30-init", "returned": true, "stop": null, "fault": null}
+{"case": "f9000-type30-first-impact", "returned": false, "stop": "InfligeDegat checkpoint", "fault": null}
+{"case": "f9176-solid-impact-source0-camera0", "returned": false, "stop": "VoixOffAsk", "fault": null}
+{"case": "f9176-solid-impact-source0-camera1", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-impact-source1-camera0", "returned": false, "stop": "VoixOffAsk", "fault": null}
+{"case": "f9176-solid-impact-source1-camera1", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-impact-source2-camera0", "returned": false, "stop": "VoixOffAsk", "fault": null}
+{"case": "f9176-solid-impact-source2-camera1", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-impact-source16-camera0", "returned": false, "stop": "VoixOffAsk", "fault": null}
+{"case": "f9176-solid-impact-source16-camera1", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-impact-mode4-dir29", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-impact-mode4-dir30", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-threshold-599", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-threshold-600", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-threshold-601", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-threshold-599", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-threshold-600", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-solid-threshold-601", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-type30-init", "returned": true, "stop": null, "fault": null}
+{"case": "f9176-type30-first-impact", "returned": false, "stop": "InfligeDegat checkpoint", "fault": null}
+{"cases": 36, "returns": 26, "faults": 0, "limits": 0}

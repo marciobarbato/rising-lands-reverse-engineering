@@ -1,0 +1,12 @@
+test_constructor_preserves_all_inherited_bytes (test_combate_raid_vivo.RealRaidMemory) ... ok
+test_core_lifecycle_is_a_named_provider (test_combate_raid_vivo.RealRaidMemory) ... ok
+test_core_three_argument_order_callback (test_combate_raid_vivo.RealRaidMemory) ... ok
+test_local_sanctuary_sound_stops_after_accumulator_store (test_combate_raid_vivo.RealRaidMemory) ... ok
+test_original_evidence_integrity (test_combate_raid_vivo.RealRaidMemory) ... ok
+test_original_returned_entries_over_whole_checkpoint (test_combate_raid_vivo.RealRaidMemory) ... ok
+test_full_checkpoint_and_consumed_register_differential (test_combate_raid_vivo.RealRaidNative) ... skipped 'RISING_EMULAR=1 runs the real-raid original leaves'
+
+----------------------------------------------------------------------
+Ran 7 tests in 11.769s
+
+OK (skipped=1)

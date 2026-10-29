@@ -1,0 +1,272 @@
+{
+ "schema": "rising-lands/combat-live-raid-delivery/1",
+ "branch": "feat/re-combat",
+ "base_main": "c08e1fb",
+ "synced_main": "23dfd6e",
+ "evidence_commits": [
+  "58c8516",
+  "4d4e2f4",
+  "a26d5ac",
+  "f5246d8",
+  "b096e82"
+ ],
+ "evidence": [
+  {
+   "path": "evidencias/probe-combate-raid-original-v1.json",
+   "sha256": "d19c00c2bc1252ff04b0ab882feb63422f16c493b800f2f420af0cdd445080c0",
+   "cases": 30,
+   "returns": 22,
+   "stops": {
+    "PlaySnd_StopSound": 4,
+    "PlaySnd_PostSound": 4
+   },
+   "faults": 0,
+   "limits": 0,
+   "outside_writes": 0
+  },
+  {
+   "path": "evidencias/captura-combate-raid-original-v1.json",
+   "sha256": "ae3aa77e894b3e1ebf47bc79f3f8edaec60f2a3e8bd4e4294dd82ab5a4b37233",
+   "cases": 2024,
+   "returns": 1994,
+   "stops": {
+    "PlaySnd_StopSound": 12,
+    "PlaySnd_PostSound": 18
+   },
+   "faults": 0,
+   "limits": 0,
+   "outside_writes": 0
+  },
+  {
+   "path": "evidencias/captura-combate-raid-original-v2.json",
+   "sha256": "83fbf5e78cd35496f43c15e49c425dd9f57c9d2720fb6b0d105d8679b2369cdc",
+   "cases": 184,
+   "returns": 164,
+   "stops": {
+    "PlaySnd_PostSound": 20
+   },
+   "faults": 0,
+   "limits": 0,
+   "outside_writes": 0
+  },
+  {
+   "path": "evidencias/captura-batiment-raid-original-v3.json",
+   "sha256": "22b30558c6272740613828ae2e3ca8c7dc2b297ce65f752e7551b3a51089dc89",
+   "cases": 36,
+   "returns": 26,
+   "stops": {
+    "PlaySnd_PostSound": 8,
+    "InfligeDegat checkpoint": 2
+   },
+   "faults": 0,
+   "limits": 0,
+   "outside_writes": 0
+  },
+  {
+   "path": "evidencias/captura-batiment-raid-original-v4-som.json",
+   "sha256": "73aadf6f0c339ef08f980801358f327984f5ffb802aba1d5ee2d80a440c6b1fe",
+   "cases": 36,
+   "returns": 26,
+   "stops": {
+    "VoixOffAsk": 8,
+    "InfligeDegat checkpoint": 2
+   },
+   "faults": 0,
+   "limits": 0,
+   "outside_writes": 0
+  },
+  {
+   "path": "evidencias/captura-remocao-pos-dano-raid-original-v5.json",
+   "sha256": "55a689bd83c7ab0ed05b1d7d5dc7adadc0096f1169296761d082dd31b10f26e2",
+   "cases": 2,
+   "returns": 2,
+   "stops": {},
+   "faults": 0,
+   "limits": 0,
+   "outside_writes": 0
+  }
+ ],
+ "proofs": [
+  {
+   "path": "validacao-raid-final-emulada.json",
+   "sha256": "3571e4d1f5bf3eaa17fe420f73ed728a4f2f78c59d7fab9aa6cdcfd04d19e214",
+   "summary": {
+    "cases": 174,
+    "equal": 174,
+    "mismatches": 0,
+    "dependency_not_compared": 0,
+    "dependency_stops": 53
+   },
+   "by_routine": [
+    {
+     "routine": "BatimentInfligeDegat",
+     "cases": 36,
+     "returns": 20,
+     "dependency_stops": 16,
+     "mismatches": 0
+    },
+    {
+     "routine": "CalculAttaqueEngin",
+     "cases": 10,
+     "returns": 9,
+     "dependency_stops": 1,
+     "mismatches": 0
+    },
+    {
+     "routine": "EnginInfligeDegat",
+     "cases": 16,
+     "returns": 0,
+     "dependency_stops": 16,
+     "mismatches": 0
+    },
+    {
+     "routine": "EnginTrouveCible",
+     "cases": 10,
+     "returns": 10,
+     "dependency_stops": 0,
+     "mismatches": 0
+    },
+    {
+     "routine": "InfligeDegat",
+     "cases": 84,
+     "returns": 72,
+     "dependency_stops": 12,
+     "mismatches": 0
+    },
+    {
+     "routine": "RetireEngin",
+     "cases": 2,
+     "returns": 0,
+     "dependency_stops": 2,
+     "mismatches": 0
+    },
+    {
+     "routine": "SetAttaqueEngin",
+     "cases": 10,
+     "returns": 10,
+     "dependency_stops": 0,
+     "mismatches": 0
+    },
+    {
+     "routine": "SetDyingEngin",
+     "cases": 6,
+     "returns": 0,
+     "dependency_stops": 6,
+     "mismatches": 0
+    }
+   ],
+   "source_sha256": {
+    "combate_raid_vivo.py": "fbc33ad6020890d4f22c1c0ee4d161330b186584a2fc047a0a679c7e373fe3fe",
+    "dano_estrutura_raid.py": "ac482c9f4c338d79a21b4e134ecd8580cf52f9bc9ad5b68c16d6e07195bac32b",
+    "validar_combate_raid.py": "ad55899564d92111342d56878d1050cc2f1a41ee4a38ddbe022ca82eb5b3b0ce",
+    "bancada_combate_raid.py": "7bdb51398692579cec872ba8c179a246c3e6e18664bb3e50e2ba96df73775dee"
+   }
+  },
+  {
+   "path": "validacao-raid-guardas-emulada-v1.json",
+   "sha256": "4bd56c72263312321bab5f31b0aafbbe33bfd5fedb26473361ee55b9ade8e0f7",
+   "summary": {
+    "cases": 174,
+    "equal": 174,
+    "mismatches": 0,
+    "dependency_not_compared": 0,
+    "dependency_stops": 49
+   },
+   "by_routine": [
+    {
+     "routine": "BatimentInfligeDegat",
+     "cases": 36,
+     "returns": 24,
+     "dependency_stops": 12,
+     "mismatches": 0
+    },
+    {
+     "routine": "CalculAttaqueEngin",
+     "cases": 10,
+     "returns": 9,
+     "dependency_stops": 1,
+     "mismatches": 0
+    },
+    {
+     "routine": "EnginInfligeDegat",
+     "cases": 16,
+     "returns": 0,
+     "dependency_stops": 16,
+     "mismatches": 0
+    },
+    {
+     "routine": "EnginTrouveCible",
+     "cases": 10,
+     "returns": 10,
+     "dependency_stops": 0,
+     "mismatches": 0
+    },
+    {
+     "routine": "InfligeDegat",
+     "cases": 84,
+     "returns": 72,
+     "dependency_stops": 12,
+     "mismatches": 0
+    },
+    {
+     "routine": "RetireEngin",
+     "cases": 2,
+     "returns": 0,
+     "dependency_stops": 2,
+     "mismatches": 0
+    },
+    {
+     "routine": "SetAttaqueEngin",
+     "cases": 10,
+     "returns": 10,
+     "dependency_stops": 0,
+     "mismatches": 0
+    },
+    {
+     "routine": "SetDyingEngin",
+     "cases": 6,
+     "returns": 0,
+     "dependency_stops": 6,
+     "mismatches": 0
+    }
+   ],
+   "source_sha256": {
+    "combate_raid_vivo.py": "fbc33ad6020890d4f22c1c0ee4d161330b186584a2fc047a0a679c7e373fe3fe",
+    "dano_estrutura_raid.py": "ac482c9f4c338d79a21b4e134ecd8580cf52f9bc9ad5b68c16d6e07195bac32b",
+    "validar_combate_raid.py": "ad55899564d92111342d56878d1050cc2f1a41ee4a38ddbe022ca82eb5b3b0ce",
+    "bancada_combate_raid.py": "7bdb51398692579cec872ba8c179a246c3e6e18664bb3e50e2ba96df73775dee"
+   }
+  }
+ ],
+ "tests": [
+  {
+   "command": "python3 -B scripts/check.py --domain combat",
+   "log": "domain-raid-final.log",
+   "tests": 279,
+   "skipped": 153
+  },
+  {
+   "command": "RISING_EMULAR=1 python3 -B -m unittest discover -s pesquisas-paralelas/combate -p 'test_*.py' -v",
+   "log": "test-raid-all-native-v1.log",
+   "tests": 279,
+   "skipped": 0,
+   "seconds": 674.865
+  },
+  {
+   "command": "python3 -B -m unittest discover -s pesquisas-paralelas/combate -p test_combate_raid_vivo.py -v",
+   "log": "test-raid-local-v2.log",
+   "tests": 8,
+   "skipped": 2
+  }
+ ],
+ "gaps": [
+  "Core live physical death/removal/state4 and level provider",
+  "AI hit/death/city messages",
+  "Structure adjacency, diplomacy and VoixOffAsk providers",
+  "Unconsumed EAX/EFLAGS for void APIs",
+  "Full scripted-input S1 contact/fighting and complete CalculGame chain",
+  "Initialized audio/playback"
+ ],
+ "main_integration": false,
+ "milestone_acceptance": false
+}
