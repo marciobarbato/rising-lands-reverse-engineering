@@ -56,6 +56,8 @@ CORE = ('GetFreeCell', 'CreerEngin', 'EnginSetType', 'EnginSetTypeCaract', 'Engi
 SEMENTES = (0x00000001, 0x00000002, 0x00000003, 0x12345678, 0x2b5e0c3a, 0x3c6ef372, 0x5d1f00c7, 0x6a09e667,
             0x7ffffffe, 0x9e3779b9, 0xa54ff53a, 0xbb67ae85, 0xdeadbeef, 0xfffffffe, 0x00010001, 0x0badf00d)
 CELULAS = (0x3e3e, 0x8080, 0x2e03, 0x4a20)
+# Wall budgets: the isolated cases share frame 1's budget (the display bench takes ~91 s per case).
+QUADRO_S, CASO_S = 600, 150
 REGS = ('EAX', 'EBX', 'ECX', 'EDX', 'ESI', 'EDI', 'EBP', 'ESP', 'EIP')
 
 
@@ -192,7 +194,7 @@ def executar(cenario, limite=None):
     reproducao = {}
     for nome, correr in (('load_tail', lambda: b.executar_cauda_carga(600)),
                          ('between_frames', lambda: b.executar_entre_quadros(300)),
-                         ('frame1', lambda: b.executar_quadro(600))):
+                         ('frame1', lambda: b.executar_quadro(QUADRO_S + CASO_S * len(casos_forcados(limite))))):
         if nome == 'frame1':
             iso.perturbacoes['AvanceMonstre'] = casos_forcados(limite)
         estado['caso'] = 'captured_inputs'
@@ -219,7 +221,18 @@ def main():
         raise SystemExit(f'Refusing to overwrite existing evidence {saida}')
     revisao = subprocess.run(['git', '-C', str(RAIZ), 'rev-parse', 'HEAD'], capture_output=True, text=True).stdout.strip()
     t0 = time.monotonic()
-    b, iso, gravador, reproducao = executar(a.cenario, a.casos)
+    try:
+        b, iso, gravador, reproducao = executar(a.cenario, a.casos)
+    except Exception as erro:          # recorded under .local/raid with its traceback, exit 2
+        import traceback
+        falha = RAIZ / '.local/raid' / ('incursao-core-failed-' + time.strftime('%Y%m%dT%H%M%S') + '.json')
+        falha.parent.mkdir(parents=True, exist_ok=True)
+        with open(falha, 'x') as f:
+            json.dump(dict(scenario=a.cenario, forced_cases=len(casos_forcados(a.casos)), error=repr(erro),
+                           traceback=traceback.format_exc(), seconds=round(time.monotonic() - t0, 3),
+                           source_revision=revisao), f, indent=1)
+        print(f'FAILED: {erro!r} -> {falha}', file=sys.stderr)
+        encerrar_captura(2, falha)
     avance = [dict(phase=r['phase'], case=c['case'], reached_return=c['reached_return'],
                    changed=len(c['changed_bytes']), exit_eax=c['exit_registers']['EAX'])
               for r in iso.registros for c in r['cases']]
