@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "scope": "static/provenance validation only; no native emulation",
+  "intact_executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "routines": 67,
+  "instruction_bytes_checked": 21496,
+  "candidate_call_encodings_checked": 1282,
+  "type_records_checked": 5,
+  "nodes": 94,
+  "edges": 235,
+  "commands": 40,
+  "actions": 6
+}
