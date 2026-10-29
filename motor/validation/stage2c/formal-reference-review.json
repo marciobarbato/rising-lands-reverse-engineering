@@ -1,0 +1,39 @@
+{
+  "schema": "rising-lands/rust-engine-stage2c-formal-reference-review/1",
+  "formal_python_proof": {
+    "path": "pesquisas-paralelas/ia-runtime/validacao/m2-3-prova-9200-quadros.json",
+    "sha256": "e96a691f7932792910ac7d5132702792b9a941b8365ef7290228e4a245559c98",
+    "source_revision": "8a5787d6a899dc80a07cc1cdbbbd754d1a138612"
+  },
+  "same_manifest_and_policy": true,
+  "phase_counts_equal": {
+    "state": 18401,
+    "compared_summary": 18401,
+    "rng": 18401,
+    "bindings_outside_display": 18401,
+    "boundaries_outside_display": 18401,
+    "allocation_count": 18401,
+    "between_frames_exit_registers": 9200,
+    "carried_entry_registers": 9191
+  },
+  "events_equal": {
+    "bindings_compared": 138597,
+    "boundaries_compared": 27603,
+    "display_context_bindings_not_modeled": 58904,
+    "display_context_boundaries_not_modeled": 2,
+    "shared_issuers_matched": 587
+  },
+  "byte_phase_total": 294825882275,
+  "native_runtime_sources_unchanged_after_main_refresh": true,
+  "comparer_refresh": {
+    "old_sha256": "fd803036a33d6bab2859ae16adcd90023a4001feeb840bd7153aa0705c10ab60",
+    "new_sha256": "aa81ee3b1b8514f76fb57ec44841b05289422fb4c177620b6cf571f96a30ac63",
+    "change": "travessias_medidas and its report field; copied comparison functions unchanged, checked by AST identity tests",
+    "game_behavior_changed": false
+  },
+  "crossings": {
+    "native_execution": 0,
+    "reason": "Native runtime and runner have no original-x86 execution or original-effect replay mechanism; declared openings remain explicit inputs."
+  },
+  "allocator_note": "Allocation-record count stays 25,482; load_tail actually frees 146 bank blocks and those actual bytes/bindings are checked. Later phases have no heap activity."
+}

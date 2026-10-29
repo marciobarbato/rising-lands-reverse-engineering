@@ -544,7 +544,7 @@ pub fn call(m: &mut MemoriaJogo, name: &str, a: &[u32]) -> Result<u32> {
             })
         }
         "MissionGetNum" => Ok((a[0] & 0xffff0000) | u32::from(m.u8(0x496fe4)?)),
-        _ => Err(stop("Core frame provider", 0x42c868)),
+        _ => crate::frame_movement::call(m, name, a),
     }
 }
 

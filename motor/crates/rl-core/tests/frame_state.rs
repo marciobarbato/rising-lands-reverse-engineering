@@ -36,6 +36,9 @@ fn semantic_mutations_project_at_original_widths_and_reload() {
     state.units[17].fatigue_ticks = 0xffff;
     state.units[17].facing = 0xab;
     state.units[17].group = 0x87654321;
+    state.units[17].path_mode = 5;
+    state.units[17].step_progress = 31;
+    state.units[17].walk_frame = 7;
     state.structures[9].origin_cell = 0x4321;
     state.structures[9].production_progress = 0xdeadbeef;
     state.globals.game_frame = u32::MAX;
@@ -53,6 +56,9 @@ fn semantic_mutations_project_at_original_widths_and_reload() {
     expected
         .set_u32(0x60000000 + 17 * 276 + 0x10c, 0x87654321)
         .unwrap();
+    expected.set_u8(0x60000000 + 17 * 276 + 0x88, 5).unwrap();
+    expected.set_u8(0x60000000 + 17 * 276 + 0x97, 31).unwrap();
+    expected.set_u8(0x60000000 + 17 * 276 + 0xa4, 7).unwrap();
     expected.set_u16(0x49a0c8 + 9 * 276 + 2, 0x4321).unwrap();
     expected
         .set_u32(0x49a0c8 + 9 * 276 + 0x8c, 0xdeadbeef)

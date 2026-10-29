@@ -375,3 +375,67 @@ Full validation and remaining common-check prerequisites are in the
 [stage handoff](../motor/HANDOFF.md) and
 [summary](../motor/validation/stage2b-summary.json). App/rendering contracts and
 support beyond the bounded window remain open.
+
+## Stage 2c — raid-window extension, ABI 1.2
+
+The raid-window implementation extends the same fixed-step engine with the
+resolved original task VM, monster group/action rules, spawn and orders, live
+movement, class 1–3 path search and contour/optimization scratch, and the
+reached projectile creation/lifetime calls. `GetMeteo` and `MAJSympathie`
+retain their complete bounded timer implementations and now have additional
+perturbed-state comparisons. Python providers remain read-only references.
+The full comparison window is frames 0–9,200: 18,401 phases under Missions'
+unchanged cumulative mask (153,060 display bytes; 1,560 observed changing
+logic bytes). Implementation and proof status are separate; the committed
+stage report records actual complete results.
+
+`rl_versao` returns `0x00010002`. Creation accepts explicit ABI 1.0, 1.1 or
+1.2. All existing C signatures/layouts/status values remain unchanged; new
+isolated provider IDs add raid/tasks (400–409), movement/path/spawn (450–487)
+and projectile initialization/set/line preparation (550–552). Existing frame
+inputs/events remain 72 bytes. Unknown rules and unsupported original branches
+still return a named address error, atomically. No host callback, Python
+runtime, wall clock, fabricated task program or captured-effect replay enters
+Rust execution. Instructions come from the loaded original resolved RULE table
+at `0x514910`, with entries at `0x51a720`.
+
+The canonical semantic state adds fourteen movement/order/animation fields per
+unit, plus 100 task values, 100 group values, list heads, counters, iterators
+and pending group state. Explicit load/project tests retain opaque padding,
+original list bindings and sentinel meanings. Action-record bytes remain
+opaque because the original indexed action span overlaps other globals;
+independent duplicate semantic bindings would lose alias behavior. Shared
+terrain/region/route grids use the same declared original-address bindings;
+movement and path search never create a separate grid copy as live state.
+
+[Long-window audit](../motor/research/FRAME_LONG_AUDIT.md) distinguishes complete
+proof from declared package openings, an actual-Rust serial continuation chain,
+and a serial endpoint/throughput supplement. Each package validates its full
+opening, all delta/full checkpoints and policy hashes before comparing Rust.
+Independent proofs can run under separate bounded heavy leases. `--serial`
+carries actual Rust state between jobs, without loading later original states.
+The serial benchmark runs S0 through frame 9,200 in one world, exports only
+outside timed execution and checks the complete masked endpoint; it does not
+replace the full phase proof.
+
+The completed [Stage 2c proof](../motor/validation/stage2c/proof.json) is
+**18,401/18,401 phases equal**, comparing **16,022,275 bytes per phase with
+zero mismatches**. It uses all ten declared original package openings and
+chains every subsequent phase within each package. RNGs, allocations,
+bindings, boundaries and compared registers all agree; there is no first
+divergence. The exact mask remains 153,060 display bytes, with all 1,560
+observed changing logic bytes compared. The separate uninterrupted S0-to-9,200
+run matches the complete masked endpoint and measures **101.87 frames/s**
+(90.3068 seconds, excluding exports/comparison/rendering). It supplements the
+phase proof with serial endpoint and timing evidence.
+
+The [delivery summary](../motor/validation/stage2c/summary.json) and
+[handoff](../motor/HANDOFF.md) record source/library hashes, reproduction
+commands and the precise proof scopes. Main's formal Python M2.3 proof was
+merged into this feature branch and reviewed; its diagnostics-only comparer
+update changes no native runtime sources. Both refreshed gates pass:
+`sh motor/validate.sh` (25 Rust tests, 56 Python tests, C/Swift ABI 1.2 smoke)
+and prepared `python3 -B scripts/check.py` (1,881 tests, 610 optional skips).
+The previous missing-input common-check stop is resolved. No Mac mini run is
+needed for the completed native evidence proof. Unreached branches retain
+named failures; project acceptance and integration remain with the coordinator.
