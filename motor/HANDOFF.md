@@ -77,4 +77,3 @@ No projectile port, rendering, full-frame delivery, performance claim or new
 original emulation is included. The existing macOS apply_frame remains
 RuntimeContractPending. The coordinator reviews/integrates the feature branch;
 no merge into or push to main was performed.
-
