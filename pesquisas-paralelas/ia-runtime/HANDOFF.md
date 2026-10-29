@@ -428,3 +428,41 @@ Main `ea62eb4` (after the M2.3 proof `ecaf853` was integrated). The details are 
 - Validated against the original: the leaf cases natively (0 mismatches), and P1/P2 at indicator level over every frame.
 - Integrated: no.
 - Tested in a real mission: no.
+
+## M3.1 round 2 — state 11, construction progress, keys, text boundary (2026-10-29)
+
+Branch `feat/re-ai-runtime` after `298095b` (round 1, not yet on main). Details: [docs/AI_RUNTIME.md](../../docs/AI_RUNTIME.md#m31-round-2--state-11-builder-construction-progress-structure-entry-dispatch-keys).
+
+- **Capture first:** `51a7f46` adds `evidencias/captura-construcao-teclas-ia.json`. It holds 90 native leaf calls, all returned, with path and code reproduced.
+- **Translation:** `58bdd81`.
+  - `construcao_entrada_ia`: state 11, the progress branch and completion, and six structure/animation leaves.
+  - The state-13 dispatch.
+  - WndProc 0x100/0x101, the group-number and GoLastAttaque keys, and ProcessInputGame tags 0xb/0xc/0x10/0x21.
+- **Native differential:** 90 cases, 79 equal, **0 mismatches**, 11 named stops. Round 1 was rerun: 124 cases, 113 equal, 0 mismatches.
+- **Text:** `c23352a` binds TextGetMessage in the chain as Missions' declared boundary (EAX 0, logged).
+- **Chain check** (probes `b1cd5bd`):
+  - P1: 501/501.
+  - P2: 601/601.
+  - P3/P6/P7: 91 frames equal, then a stop in frame 220 at the type-3 cave body.
+  - P4: 293 frames equal, then a Graphics view-origin stop at 422.
+  - P5: 443 frames equal, then a Graphics view-origin stop at 572.
+  - K1: 12 frames equal, then a Graphics view-origin stop at 141.
+- **Read-only extraction:** Core's `construcao_core` is on main `2ad381a` but not yet on this branch. The runs used `--nucleo-ref .local/entrada/nucleo-ref`; the file is identical to main's (SHA-256 `7ccf640c…`).
+- **Named dependencies:**
+  - Economy: the type-3 body `0x426aff`, BatimentRetireColon, BatimentHabitable.
+  - Core: BatimentIllumine/BatimentDecouvre, the state-13 body (CalculEntreBatiment), Sauve/RestaureSelectionGroupe, SetEnginSelectRentreBatiment/Engin, EnginGetCentreGroupe, MiniMapRecentre.
+  - SetMurAllentour.
+  - Graphics: AffGame vegetation/terrain handlers at unsampled view origins. This blocks K1, P4 and P5.
+- **Not done (next for this front):**
+  - InputGame help pages 9/0xc/0xb/2/7 and the Ctrl deposit mode: `0x429601`, page 9 at `0x429b90` with the depot table `0x42923c` → tags 6/7/8/0x13, and pages 8 over a field or mine at `0x42b393`/`0x42b525`.
+  - The tag-16 producer: the structure under the cursor with troops selected, `0x42ac32`.
+  - P7's depot press at 3228 needs these.
+- **Captures needed:**
+  - Graphics: native samples of the AffGame view origins that K1 (1..19, 0..), P4 (10, 16) and P5 (31, 0) reach.
+  - The probes' pass-2 delta windows, for the whole-state proof.
+
+**Statuses:**
+- Implemented: the above.
+- Validated against the original: the leaf differential, and the chains at indicator level.
+- Integrated: no.
+- Tested in a real mission: no.

@@ -723,3 +723,42 @@ The CPU-free replay (`testes/test_entrada_ordens_ia.py`) reruns every case from 
 | K1 | 11 (129–139) | — | stop at 139: WndProc WM_KEYDOWN 0x100 (keys are coverage only) |
 
 This is an indicator-level check. The per-phase whole-state proof under the published mask needs the probes' pass-2 delta captures (M3_PLAN §2), which do not exist yet.
+
+## M3.1 round 2 — state 11 (builder), construction progress, structure entry dispatch, keys
+
+Original first: `capturar_construcao_teclas_ia.py` → `evidencias/captura-construcao-teclas-ia.json` (commit `51a7f46`, before any translation). It runs 90 native leaf calls at the same frame-1 ProcessInputGame pause as round 1 (`casos_construcao_teclas_ia`). All 90 return, and the load_tail/between_frames/frame1 summaries and the code section reproduce. The builder cases start from the committed native result of `process_tag4_build_cave` (P3's cave order at 3093) and a declared structure record 1 (a cave under construction at P3's origin 2579); the type limits are read at the pause (type 3: 100, type 9: 15, type 0x11: 300).
+
+**Translation** (`construcao_entrada_ia.py`, class `ConstrucaoEntrada`; owners wired by `provedores_entrada_ia.construcao_viva`):
+- EnginNextEtape state 11 `0x4564ef`: with `+0x89` set and BatimentEnDestruction(`+0xc0`), SetDeplaceEngin(unit, `+0x7e`) (Core); otherwise CalculConstruireBatiment; both end at the epilogue `0x454ccd`. `proxima_etapa_entrada` runs the pinned prelude and switch (`proxima_etapa_quadro`, unchanged) and continues at the state's target, where the pinned switch stops before the body's first store. State 13 `0x4558e4` (Core's physical entry) goes to a provider `EnginNextEtape:state13` when bound; none exists yet.
+- CalculConstruireBatiment `0x44ab60` is Economy's `ordens_economia` (walk, creation, abandonment) with Core's `selecao_ordens` and `construcao_core` callees (`provedor_core(..., provedor_construcao(...))`). Its out-of-domain stop at `0x44b1c1` (`+0x89 = 1`, no store made) continues in `progresso`: RotateEngin when the facing differs; AnimConstruireBatiment; the completion block `0x44b34a` when BatimentConstruit holds with no damage (wall queue `+0xd8` for order type 9, else the finish sound 0x50/0x12, `+0xbe = 0xff`, state 7, `+0x7e = +0x7c`, path-search release); otherwise the countdown `+0x8b` and, at 0 with animation frame `+0xa4 = 2`, the dust projectile (CalculDirCase, Random, ProjectileInit 0xf/0x10), BatimentRepare or BatimentConstruction, `+0x8b = 0x14` and the work sound 0x50/0x25 for the local player's builder on a discovered cell.
+- Leaves: BatimentEnDestruction `0x41a70b`, BatimentConstruit `0x41c652`, BatimentGetDegatEffectif `0x41a976`, BatimentRepare `0x41cec4`, BatimentConstruction `0x41cf59` (at the type limit: `+5 = 5`, then BatimentModifyMap(structure, 1) through Core's `minimapa_estruturas` over the live world), AnimConstruireBatiment `0x447e12`.
+- Input (`entrada_ordens_ia.py`): WndProc WM_KEYDOWN (digits 1–9 → `0x49a05a`, F1–F4 → `0x497284`; VK_ADD/VK_SUBTRACT zoom and F11 are named stops past their gates) and WM_KEYUP (F5 → ReseauActif and `0x49a05b` mod 4; Tab → `0x497285` and Core's InitGameZone); InputGame's group-number path `0x4293e0` (Ctrl: tag 0xb; else tag 0xc; Shift: EnginGetCentreGroupe, then the view clamp); GoLastAttaque `0x440b63` on Enter/X; ProcessInputGame tags 0xb (SauveSelectionGroupe), 0xc (BatimentDeselectionner, DeSelectionGroupe, RestaureSelectionGroupe), 0x10 sub 1/3 (SetEnginSelectRentreEngin/Batiment) and 0x21 (BatimentRetireColon).
+
+**Native differential** (`validar_construcao_teclas_ia.py`, run with Core's `construcao_core` from `origin/main` `2ad381a` as a read-only extraction, SHA-256 in the report): see [validacao/construcao-teclas-native.json](../pesquisas-paralelas/ia-runtime/validacao/construcao-teclas-native.json). The CPU-free replay is `testes/test_construcao_teclas_ia.py` (`evidencias/leituras-construcao-teclas-ia.json.xz`). Round 1's differential was rerun after the `entrada_ordens_ia` changes ([validacao/entrada-ordens-native.json](../pesquisas-paralelas/ia-runtime/validacao/entrada-ordens-native.json)).
+
+Excluded registers (a value left by a callee that is not reconstructed): EnginNextEtape's EAX (its only caller discards it at `0x456eb3`), InputGame's EAX (as in round 1), CalculConstruireBatiment's EAX after RotateEngin, and BatimentConstruction's EAX after BatimentModifyMap.
+
+**Named dependencies** (stops at their original call):
+- Core: the state-13 body (`CalculEntreBatiment`), SauveSelectionGroupe, RestaureSelectionGroupe, SetEnginSelectRentreBatiment/Engin, EnginGetCentreGroupe, MiniMapRecentre (VK_SUBTRACT), `BatimentIllumine`/`BatimentDecouvre`.
+- Economy: the type-3 structure body `0x426aff` (cave: BagContient colonist test, smoke counter `+0x76`), BatimentRetireColon, BatimentHabitable (type 0x11 completion); SetMurAllentour (type 9 completion).
+- Text: TextGetMessage. In the display scenario InitTextLangue never runs (TEXTES.TXT needs CRT fgets/ftell), so `[0x5099a4]` is 0. The chain binds it as Missions' declared boundary (`oraculo_exibicao_missao.FRONTEIRAS_EXIBICAO`: EAX 0, no cleanup), logged per call site. The leaf bench keeps the pointer-0 read as a named gap.
+- Graphics: AffGame's vegetation/terrain handlers for view origins outside `efeitos_logicos_exibicao.ORIGENS_PROVADAS` (raised as `DependenciaExibicao`).
+- Not yet translated here: InputGame's help pages 2/7/9/0xb/0xc and the Ctrl deposit mode (pages 8/9, tags 8 and 19 producers, `0x429601`, `0x429b90..0x429f46`), the structure-under-cursor path with troops selected (`0x42ac32`, the tag-16 producer).
+
+**Chain check** (`provar_entrada_ia.py`, Python only, from the M2.2 frame-128 state; probes read from `origin/feat/re-missions` with `git show`):
+
+| Probe | Frames equal | Orders | End |
+|---|---|---|---|
+| P1 | 501 (129–629) | tag 1 at 133 | end of probe |
+| P2 | 601 (129–729) | tag 1 at 133, tag 5 at 143 | end of probe |
+| P3 | 91 (129–219) | tag 4 (3, 3093) at 153; the builder walks (state 11, Economy's CalculConstruireBatiment through Core's DeplaceEngin) and creates structure 1 at 220 (CreerBatiment, PlaceBatiment) | stop in frame 220: BatimentNextEtape type 3 `0x426aff` (Economy's cave body); BatimentIllumine (Core) follows in the same frame |
+| P4 | 293 (129–421) | tag 5 at 141–143 | stop in between_frames422: Graphics, AffGame view origin (10, 16) not proved |
+| P5 | 443 (129–571) | tag 5 at 141–143 | stop in between_frames572: Graphics, view origin (31, 0) |
+| P6 | 91 (129–219) | as P3 | stop in frame 220, as P3 |
+| P7 | 91 (129–219) | as P3 | stop in frame 220, as P3 |
+| K1 | 12 (129–140) | — (the arrows scroll the view in frame 140, equal) | stop in between_frames141: Graphics, view origin (1, 0) |
+
+Probes at `origin/feat/re-missions` `b1cd5bd` (P7 from `01fa7d8`). The TextGetMessage binding is not exercised yet: P4's first call (frame 430) lies past its Graphics stop. The frame-phase count is reported per frame against the probe's entry count, which also counts display-phase calls.
+
+The state-11 walk, the creation at 220 and the WndProc/key paths are now checked at indicator level against the probes. The construction-progress branch, the completion and the state-13/tag-16/tag-33 dispatches are checked by the native leaf differential only, because every probe stops at frame 220.
+
