@@ -87,7 +87,11 @@ def perturbacoes(unidades, descoberta0):
             w('message_box_panel_negative', [(0x507d56, [5, 0]), (0x508f90, [0xf0]), (0x508726, [12, 0])]),
             w('alliances', [(0x5080b0 + 4, [1, 0, 0, 0]), (0x5080b0 + 12, [0, 1, 0, 0]), (0x508724, [20, 0]),
                             (0x508726, [15, 0]), (0x508f90, [3])]),
-            w('local_player2_alliances', [(0x508041, [2]), (0x5080b0 + 32, [1, 0, 0, 0]), (0x508724, [9, 0])])],
+            w('local_player2_alliances', [(0x508041, [2]), (0x5080b0 + 32, [1, 0, 0, 0]), (0x508724, [9, 0])]),
+            r('mode2_mission1', EAX=2), w('mode2_mission7', [(0x496fe4, [7])], EAX=2),
+            w('mode3_five_items', [(0x4e2f40, [5, 0])], EAX=3),
+            w('mode3_no_items', [(0x4e2f40, [0, 0])], EAX=3, EBX=0x12345678, ECX=0x9abcdef0),
+            r('mode4', EAX=4), r('mode0_invalid', EAX=0), r('mode5_invalid', EAX=0xabcd0005)],
         'MouseSetZone': [r('index256_aliases_test_and_max', EAX=0x100), r('high_bits', EAX=0x10005, EDX=0xffff1234,
                                                                             EBX=0xabcd0001, ECX=0x8000ffff)],
         'MouseTestZone': [r('high_bits', EAX=0x12345678, EDX=0x9abcdef0)],
@@ -112,7 +116,7 @@ def perturbacoes_exibicao(bancada, base):
     """
     import struct
     u32 = lambda a: struct.unpack('<I', bancada.cpu.mem_read(a, 4))[0]
-    tiles, objetos, animacao = u32(0x507d70), u32(0x507d74), u32(0x507dac)
+    tiles, objetos, animacao, unidades0 = u32(0x507d70), u32(0x507d74), u32(0x507dac), u32(0x4e19a0)
     semente = u32(0x522244) + 0xc
     r = lambda nome, **regs: dict(case=nome, writes=[], registers=regs)
     w = lambda nome, escritas, **regs: dict(case=nome, writes=escritas, registers=regs)
@@ -142,7 +146,20 @@ def perturbacoes_exibicao(bancada, base):
         'LongRand': [w('seed_zero', [(semente, [0, 0, 0, 0])]), w('seed_max', [(semente, [0xff] * 4)])],
         'rand': [w('seed_drop', [(semente, list(struct.pack('<I', 0x72d)))]),
                  w('zero_seed_pointer', [(0x522244, [0xf4, 0xff, 0xff, 0xff])])],
+        'NextAnimVegetFullMap': [w('objects_counter0', vegetacao + [(0x508f7c, [0])]),
+                                 w('objects_counter2', vegetacao + [(0x508f7c, [2])]),
+                                 w('objects_counter1', vegetacao + [(0x508f7c, [1])])],
+        'MissionGetNum': [w('mission7_high_eax', [(0x496fe4, [7])], EAX=0xabcd1234)],
     })
+    grade = [r('owner0', EDX=0), r('owner4_alias', EDX=4), r('owner7', EDX=0x307), r('cell_ffff', EAX=0xffff),
+             r('high_bits_owner6', EAX=0x12340806, EDX=0x5506)]
+    unidade = [r('unit799', EAX=799), r('high_index_unit3', EAX=0x10003), w('unit0_bytes', [(unidades0, [2, 25, 7])], EAX=0)]
+    flags = [w(f'unit0_flags_{v:02x}', [(unidades0 + 0xdc, [v])], EAX=0) for v in (0x0e, 0x02, 0x04, 0x08, 0xf1)]
+    casos.update({'TerrainEstDecouvert': grade, 'TerrainEstIllumine': grade, 'ExisteEngin': unidade,
+                  'EnginGetType': unidade, 'EnginGetPlayer': unidade, 'EnginEstTerreur': flags,
+                  'EnginEstMiroir': flags, 'EnginEstArmure': flags,
+                  'TypeEnginSeFatigue': [r(f'type{t:02x}', EAX=t) for t in (0, 10, 11, 24, 25, 0x1a)]
+                  + [r('high_type_ff', EAX=0xabcd00ff), r('high_type_05', EAX=0xabcd0005)]})
     return casos
 
 
@@ -221,9 +238,13 @@ def diferencial(limite=LIMITE_POR_FASE, cenario='v1'):
         construir = lambda b: PerturbacoesLimitadas(b, casos, limite)
     else:
         import capturar_exibicao_quadro1 as ce
-        rotinas, limites = ce.ROTINAS, ce.LIMITES
+        import capturar_quadros_seguintes as cs
+        rotinas = ce.ROTINAS + tuple(n for n in cs.CONSULTAS + ('MissionGetNum',) if n not in ce.ROTINAS)
+        limites = dict(ce.LIMITES, MissionGetNum=4, **{n: 4 for n in cs.CONSULTAS})
         construir = lambda b: PerturbacoesLimitadas(b, perturbacoes_exibicao(b, casos), limite)
-    b, iso, cap, reproducao, _ = pq.executar(rotinas, construir, observador, cenario=cenario, limites=limites)
+        estrangeiras = {'NextAnimVeget': ('NextAnimVegetFullMap', lambda iso: True)}
+    b, iso, cap, reproducao, _ = pq.executar(rotinas, construir, observador, cenario=cenario, limites=limites,
+                                             estrangeiras=estrangeiras if cenario != 'v1' else None)
     registro.update(scenario=cenario, path_reproduction=reproducao, calls=len(iso.registros), cases_with_stores=caixa,
                     unit_pool_base=hex(unidades), owner0_discovery_grid=hex(descoberta0),
                     perturbation_limit_per_phase=limite)
