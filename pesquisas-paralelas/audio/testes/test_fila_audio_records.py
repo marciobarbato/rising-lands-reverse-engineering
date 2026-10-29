@@ -98,9 +98,10 @@ class AudioQueueRecordTests(unittest.TestCase):
             self.assertEqual(result['value'],0);self.assertEqual(memory.u8(TABLE+8),1)
             self.assertEqual(memory.u32(INDEX),19);self.assertIsNone(result['stop'])
 
-    def test_multiple_pending_requests_are_a_named_boundary(self):
-        memory=QueueFixtureMemory.restore(self.cases['manage-empty']['input']['memory']);memory.w32(INDEX,21)
-        with self.assertRaisesRegex(DependenciaSom,'Multiple pending'):AudioQueue(memory,None).manage()
+    def test_unsupported_loaded_slot_counter_is_a_named_boundary(self):
+        memory=QueueFixtureMemory.restore(self.cases['manage-empty']['input']['memory'])
+        memory.w32(INDEX,20);memory.w32(0x498f60,10)
+        with self.assertRaisesRegex(DependenciaSom,'Slot maximum'):AudioQueue(memory,None).manage()
 
     def test_external_hresult_requires_an_explicit_u32(self):
         plan=ScriptedCOM([dict(method='GetStatus',object=0x1234,args=[],hresult=0x100000000,value=0)])
