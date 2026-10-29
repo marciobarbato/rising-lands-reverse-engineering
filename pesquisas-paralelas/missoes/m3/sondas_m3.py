@@ -12,7 +12,7 @@ import sys
 
 AQUI = Path(__file__).resolve().parent
 sys.path.insert(0, str(AQUI))
-from entrada_roteirizada import ESQUEMA, clique, juntar_quadros  # noqa: E402
+from entrada_roteirizada import ESQUEMA, clique, juntar_quadros, lparam  # noqa: E402
 
 ENTRADAS = AQUI / 'entradas'
 F0 = 129
@@ -24,6 +24,8 @@ ICONE_CAVE = (180, 573)        # bag slot 2
 SITIO_CAVE = (688, 400)        # cell (21,12), BatimentGetCase (20,10)
 DESTINO_MOVE = (624, 432)      # cell (19,13), free and discovered at frame 128
 CENTRO = (400, 272)            # playfield centre, cell (12,8)
+SANTUARIO = (528, 400)         # sanctuary grid cell (16,12)
+CELULA_CAVE = (656, 336)       # cave grid cell (20,10)
 
 
 def sonda(nome, descricao, cliques, ate, extra=None):
@@ -53,6 +55,16 @@ def sondas():
                           '(43,8): mine order. No cave exists.',
                     [clique(F0 + 1, *UNIDADE_12), clique(F0 + 11, 86, 17), clique(560, *CENTRO, 'right'),
                      clique(570, 87, 18), clique(580, 368, 304), clique(590, 400, 272)], F0 + 3000)
+    # P6 continues P3 once the cave is complete (frame 1812): read from P3 and from development runs resumed
+    # from its frame-2000 snapshot. The sanctuary's grid cells include (16,12); the cave's are (19..21, 10..11).
+    duplo = [dict(frame=2030, messages=[[0x203, 1, lparam(*SANTUARIO)]]),
+             dict(frame=2032, messages=[[0x202, 0, lparam(*SANTUARIO)]])]
+    p['P6'] = sonda('P6', 'P3, then: right click deselects; click the sanctuary (16,12) (structure selection); '
+                          'double click it (WM_LBUTTONDBLCLK: one colonist leaves); select that colonist at (14,14); '
+                          'click the cave cell (20,10): the colonist enters and lodges.',
+                    [clique(F0 + 1, *UNIDADE_12), clique(F0 + 11, *ICONE_CAVE), clique(F0 + 21, *SITIO_CAVE),
+                     clique(2005, *CENTRO, 'right'), clique(2015, *SANTUARIO), duplo, clique(2060, 464, 464),
+                     clique(2070, *CELULA_CAVE)], 2400)
     teclas = [dict(frame=F0 + 1, cursor=list(CENTRO))]   # off every edge: no edge scroll fights the keys
     for vk, sc, ext, de, ate in ((0x27, 0x4d, 1, F0 + 11, F0 + 30), (0x28, 0x50, 1, F0 + 41, F0 + 60),
                                  (0x20, 0x39, 0, F0 + 81, F0 + 83), (0x58, 0x2d, 0, F0 + 91, F0 + 93)):
