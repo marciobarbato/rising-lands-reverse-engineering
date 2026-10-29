@@ -7,7 +7,7 @@ state used below (probed natively at the pause, then checked by the capture):
   3..10 colonists (type 9, state 14), 11 type 1, 12 the builder (type 7, cell (17,16)),
   13/14 type 5 at (14,16)/(12,16), 15 type 8; units from 16 on are free (state 0);
 - every selection list is empty; the local player is 0; the search owner 0x496304 is 0xffff;
-- player 0 holds food 30 and stone 30 (records 1 and 2, +2 total, +0 RMI = 0); players 1..3 hold 0;
+- player 0 holds food 30 and stone 30 (records 1 and 2: +2 total 30, +0 RMI 30); players 1..3 hold 0;
 - the per-player stock indicator words at 0x4dfb2c + 6p are (0, 100) for players 0..3, so
   CreerBatiment's indicator recalculation is skipped unless a case declares the first word;
 - structure 0 is the sanctuary (type 2, 6x5, origin (12,11)); records 1.. are free;
