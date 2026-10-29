@@ -1,0 +1,46 @@
+{
+ "description": "Select builder unit 12: one left click on its cell (17,16).",
+ "frames": [
+  {
+   "cursor": [
+    560,
+    528
+   ],
+   "frame": 130,
+   "messages": [
+    [
+     512,
+     0,
+     34603568
+    ]
+   ]
+  },
+  {
+   "frame": 131,
+   "messages": [
+    [
+     513,
+     1,
+     34603568
+    ]
+   ]
+  },
+  {
+   "frame": 133,
+   "messages": [
+    [
+     514,
+     0,
+     34603568
+    ]
+   ]
+  }
+ ],
+ "name": "P1",
+ "schema": "rising-lands/monde01-scripted-input/1",
+ "start": {
+  "checkpoint": "M2.2 frame128",
+  "frame": 128
+ },
+ "stop_frame": 629
+}

@@ -6,7 +6,7 @@ Status: static extraction, no emulation. It implements Step 0 of [M3_PLAN §2](.
 
 - Machine-readable output: [alvos-m3-monde01.json](alvos-m3-monde01.json), schema `rising-lands/monde01-m3-static-targets/1`.
 - Generator: [extrair_alvos_m3.py](extrair_alvos_m3.py), run as `python3 -B pesquisas-paralelas/missoes/m3/extrair_alvos_m3.py`.
-- Tests: [test_alvos_m3.py](test_alvos_m3.py), run as `python3 -B -m unittest discover -s pesquisas-paralelas/missoes/m3 -p 'test_*.py'`.
+- Tests: [test_alvos_m3.py](../testes/test_alvos_m3.py), part of the missions suite (`python3 -B scripts/check.py --domain missions`).
 
 ## Inputs
 
