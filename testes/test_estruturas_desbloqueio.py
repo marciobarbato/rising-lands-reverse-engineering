@@ -94,7 +94,14 @@ print(json.dumps([executar_integracao(n) for n in ('muros','aliados_bloqueadores
         for c in (0x505, 0x506, 0x607): cores.grade[c] = 4
         cores.preencher(0x505, 7)
         self.assertEqual([cores.grade[c] for c in (0x505, 0x506, 0x607)], [7, 7, 4])
-        with self.assertRaises(ValueError): cores.preencher(0x505, 7)
+        with self.assertRaises(ValueError): cores.preencher(0x505, 7)   # same colour on a pair: no termination
+        for c in (0x605, 0x705): cores.grade[c] = 9                         # a 3-cell column, refilled with its colour
+        cores.grade[0x505] = 9
+        cores.preencher(0x505, 9)                                           # terminates with a full stack
+        self.assertEqual([cores.grade[c] for c in (0x505, 0x605, 0x705)], [9, 9, 9])
+        self.assertTrue(all(c in (0x505, 0x605, 0x705) for c in cores.pilha[1:1024]))
+        cores.grade[0x909] = 5
+        cores.preencher(0x909, 5)                                           # an isolated cell: the stack empties
 
     def test_ordem_sai_da_frente_e_limpa_referencias(self):
         m = preparar(); inserir_bloqueador(m)

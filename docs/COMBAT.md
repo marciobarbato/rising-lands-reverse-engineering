@@ -2,10 +2,108 @@
 
 Owner: combat. Source and tests live in `pesquisas-paralelas/combate/`. Shared damage, reload, movement, and task primitives remain in `ferramentas/`; changes there belong to core and require a contract handoff.
 
+## Real M2.3 raid memory API (2026-10-29)
+
+`combate_raid_vivo.CombateRaidVivo(memoria, *, consulta=None, efeito=None, mundo=None, som=None)`
+binds the caller's live original address space. Bootstrap through
+`ambiente_combate_raid`; `memoria` implements Core's `MemoriaQuadro`
+(`u8/u16/u32`, `vista`). Construction initializes no game bytes. The default
+world is Core's `mundo_vivo` with `SolucionadorCaminhosVivo`; loaded Economy
+`BonusUnidades.da_memoria` supplies modifiers. The unit, structure, damage-row,
+type, projectile, grid, clock, camera, bonus and alert inputs remain live.
+Do not replace allocation bases or resize buffers during a call.
+
+| API | Original entry / inputs | Result |
+|---|---|---|
+| `definir_ataque(unit, mode, reference)` | `SetAttaqueEngin 0x445a36`; u16/u8/u16 | Existing bool convenience result; live order stores |
+| `set_attaque_engin(regs)` | Same routine; AX/DL/BX | General-register dict; exact EAX/EDX, other general registers preserved |
+| `ordem_core(unit, mode, reference)` | Core `SelecaoOrdens(..., definir_ataque=live.ordem_core)` callback | Exact `{'EAX', 'EDX'}` |
+| `encontrar_alvo(unit)` / `engin_trouve_cible(regs)` | `EnginTrouveCible 0x453f74`; AX unit | u16 target/FFFF; register form returns full EAX and preserves other general registers |
+| `calcular_ataque(unit)` | `CalculAttaqueEngin 0x451914`; AX unit | Void; one attack step |
+| `ramo(unit)` | AI/runtime states 1/24, `0x456886..0x4568ad` | Void; original validity branch then attack step |
+| `calcular_projeteis()` | `ProjectileCalcul 0x46fc0f` | Void; low byte of live `0x508f7c` |
+| `infligir(cell, mode, source, direction, flag)` | `InfligeDegat 0x450874`; AX/DL/BX/CL, pushed byte | Void; structure-before-unit selection, reaction, damage and presentation |
+| `infligir_unidade(victim, mode, source, direction=0)` | `EnginInfligeDegat 0x4502f0` | Void; live damage and named lethal requests |
+| `infligir_estrutura(target, damage, source_owner)` | `BatimentInfligeDegat 0x41a2c1`; AX, full EDX, BL | Void; accumulated damage and destruction marking |
+| `infligir_estrutura_registradores(regs)` | Same consumer | Exact nonlethal EAX/EBX/EDX, ECX/ESI/EDI/EBP preserved; foreign destruction-return registers must be supplied explicitly |
+| `iniciar_morte(unit)` / `retirar(unit)` | Core `SetDyingEngin 0x444938` / `RetireEngin 0x457058` | Explicit named Core effect; no duplicate lifecycle implementation |
+
+Protected IDs are units 0..799 and structures 0..999 after u16 truncation;
+unit types are 0..25 and interpreted structure characteristics 0..21. Attack
+modes are 1/3/5. Initialized damage modes are 1/3 and 4 with direction 29/30.
+Building-source unit impacts retain the predecessor wrapper's source-ID
+0..799 restriction. The mode-1 building branch reads the explicit 27th byte of
+the loaded DEGAT row. `+0xb7=3` means a **structure target**; damage mode 3
+means a **structure source**, a separate encoding.
+
+The sanctuary's serialized origin is not necessarily a solid footprint cell.
+Impact selection uses the original region grid; callers must use the intended
+impact cell, not assume structure `+2` is hittable.
+
+Mutation/callback order is the preceding Stage-18 attack contract plus the
+[building damage contract](../pesquisas-paralelas/combate/CONTRACT_BUILDING_DAMAGE.md):
+mode-1 building damage snapshots row column 26 plus full modifier 5, saves the
+source owner, requests city message 4, then supplies low-u16 damage. The
+consumer adds to u16 `+6` before local volume/sound/voice; compares the low-u16
+scaled quotients strictly; requests city message 2 before `+0x90=1`, `+5=3`,
+presentation/type-20 timer stores; then sympathy and voice. Zero maximum life
+raises after the earlier accumulator/audio effects. The wrapper then requests
+RNG even if the projectile pool is full, allocates the hit, and rereads the
+owner for each diplomacy request. Death is a marker here, not structure removal.
+Camera, counter, bonus and alert globals are read at their original uses; alert
+stores and projectile type-30 presentation stores go directly to live memory.
+
+`consulta(name, args) -> integer` and `efeito(name, args)` are synchronous and
+may mutate the same records/globals. Foreign requests without a provider raise
+`DependenciaCombateRaid` with `.nome`, `.argumentos`, `.endereco` at the original
+callee entry. Earlier effects survive; retry is not continuation. Audio
+`PlaySnd_PostSound` arguments are `(selector, code, flags, volume, reference_address)`;
+its original ABI is EAX/EDX/ECX, pushed volume, EBX reference. References are real
+addresses (unit `+0x104`, structure `+0x100`, or alert `0x496ac8`). `VoixOffAsk`
+keeps the original constant first argument 1. Pass Audio's committed
+`SoundRequestProvider(LiveAudioMemory(memoria), domain='unopened-display')` as
+`som` only for that explicitly declared inherited sound image. It returns the
+original admission EAX and mutates actual queue/handle bytes; it initializes
+nothing and raises outside its domain. General AI messages, city messages,
+unsupplied audio, diplomacy/sympathy, level/experience, physical death/removal,
+structure adjacency and spells remain named providers. Committed Core volume/cell,
+movement and RNG plus Economy modifiers are composed directly.
+
+Evidence chronology and case matrices are in
+[RAID_CAPTURE_MATRIX](../pesquisas-paralelas/combate/RAID_CAPTURE_MATRIX.md).
+The intact executable hash is
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`;
+code-section hash after native execution is
+`02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4`.
+All checkpoint blocks, including display bytes, are compared without an exclusion
+mask; native-only leaf stack scratch is separately declared. Void attack,
+unit-damage and projectile APIs do **not** claim path-dependent unconsumed EAX
+or arithmetic flags. The differential checks preserved registers for attack,
+all general registers for getter/setter/nonlethal building return, and consumed
+argument registers at each dependency stop. This is a remaining gap against an
+all-register reconstruction, not a zero-mismatch claim for unmodeled registers.
+
+The Rust port should consume these typed entry contracts over its tested original
+memory projection, preserving u8/u16/u32 wrapping, live iteration and callback
+order. No Rust engine files are changed here. Full scripted-input fighting,
+selected/visible/grouped Core death completion and complete CalculGame attack
+windows remain separate from the bounded native evidence and dependency proofs.
+
+Fresh delivery validation: [strict whole-memory comparison](../pesquisas-paralelas/combate/validacao-raid-final-emulada.json)
+is 174/174 equal (121 returns, 53 named stops). The
+[guarded suffix comparison](../pesquisas-paralelas/combate/validacao-raid-guardas-emulada-v1.json)
+is 174/174 equal (125 returns, 49 stops), including four complete sanctuary
+destruction returns with full general registers. The complete combat suite
+passes 279 tests with `RISING_EMULAR=1`, zero skips; the domain gate passes 279
+with 153 optional native skips. These bounded results do not close the foreign
+providers, full EAX/flags, or scripted-input battle gaps above.
+
 ## Supported pipeline
 
 | Module | Responsibility |
 |---|---|
+| `combate_raid_vivo.py` | Live original-memory attack/order/target/projectile/damage adapter with named foreign providers |
+| `dano_estrutura_raid.py` | Live accumulated structure damage and destruction-marker sequencing |
 | `alvos_alcance.py` | Alliances/enemies, scan/grid target selection, adjacency, range, line of fire, weapon readiness, local order/maintenance effects |
 | `mira_angular.py` | Target-cell resolution, `AngleCalcul`, `EnginViseCible`, and 8/32-sector quantization |
 | `animacao_disparo.py` | Attack substates 0/1/2/3, animation advance, orientation, firing requests |

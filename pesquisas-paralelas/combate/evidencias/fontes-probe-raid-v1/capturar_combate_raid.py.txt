@@ -1,0 +1,135 @@
+"""Original-first real M2.3 raid leaves and bounded native unit windows.
+
+Run via the workspace heavy_lease.py. Refuses to overwrite evidence.
+The only case setup mutations are declared orders, register arguments and
+explicit health/accumulator boundary variations. No positions/grids/owners
+are changed, and every nested game routine executes original x86 or stops.
+"""
+import argparse
+import hashlib
+import json
+import struct
+import subprocess
+from pathlib import Path
+
+from bancada_combate_raid import BancadaCombateRaid, checkpoints, DEPENDENCIES
+from ambiente_combate_raid import ROOT
+
+HERE = Path(__file__).resolve().parent
+OUTPUT = HERE / 'evidencias/captura-combate-raid-original-v1.json'
+
+
+def execute(probe=False, window=32):
+    states, provenance = checkpoints()
+    b = BancadaCombateRaid(states[9000][0])
+    records = []
+    def call(label, routine, registers, words=(), declared_writes=(), stops=DEPENDENCIES):
+        for address, data in declared_writes:
+            b.cpu.mem_write(address, data)
+        record, before, after = b.call(routine, registers, words=words, stops=stops)
+        record.update(case=label, checkpoint=frame,
+                      declared_writes=[[hex(a), data.hex()] for a, data in declared_writes])
+        records.append(record)
+        print(json.dumps(dict(case=label, routine=routine, returned=record['reached_return'],
+                              stop=record['stop'], fault=record['fault'], limit=record['limit'],
+                              entries=len(record['entries']), stores=len(record['stores']))), flush=True)
+        return record
+    for frame, (state, _) in states.items():
+        b.restore(state)
+        if not probe:
+            for unit in (0, 1, 2, 15, 16):
+                call(f'f{frame}-scan-{unit}', 'EnginTrouveCible', dict(EAX=unit))
+        for unit, mode, target in ((0, 1, 16), (1, 1, 16), (2, 1, 16), (16, 1, 0), (16, 3, 0)):
+            b.restore(state)
+            call(f'f{frame}-order-{unit}-{mode}-{target}', 'SetAttaqueEngin', dict(EAX=unit, EDX=mode, EBX=target))
+            call(f'f{frame}-attack-{unit}-{mode}-{target}', 'CalculAttaqueEngin', dict(EAX=unit))
+        for unit in (0, 16):
+            b.restore(state)
+            call(f'f{frame}-dying-{unit}', 'SetDyingEngin', dict(EAX=unit))
+        if probe:
+            for target, source in ((16, 0), (0, 16)):
+                b.restore(state)
+                call(f'f{frame}-damage-{target}', 'InfligeDegat', dict(EAX=b.u16(b.record(target)+0x7c), EDX=1,
+                                                                    EBX=source, ECX=0), (0,))
+            b.restore(state)
+            call(f'f{frame}-sanctuary-damage', 'BatimentInfligeDegat', dict(EAX=0, EDX=1, EBX=4))
+            continue
+        # Repeated real-source hits; no health writes. Stop on first dependency.
+        for target, source in ((16, 0), (0, 16)):
+            b.restore(state)
+            for hit in range(1, 41):
+                r = call(f'f{frame}-hits-{target}-{hit}', 'InfligeDegat', dict(EAX=b.u16(b.record(target)+0x7c),
+                            EDX=1, EBX=source, ECX=0), (0,))
+                if not r['reached_return']:
+                    break
+        for target, source in ((16, 0), (0, 16)):
+            for hp in (0, 1):
+                b.restore(state)
+                call(f'f{frame}-lethal-hp{hp}-{target}', 'EnginInfligeDegat',
+                     dict(EAX=target, EDX=1, EBX=source, ECX=0),
+                     declared_writes=((b.record(target)+0x9a, struct.pack('<H', hp)),))
+        # Core death/removal is captured but remains its owner's API.
+        b.restore(state)
+        r = call(f'f{frame}-dying-to-removal-16', 'SetDyingEngin', dict(EAX=16))
+        if r['reached_return']:
+            call(f'f{frame}-retire-16', 'RetireEngin', dict(EAX=16))
+        # Actual sanctuary cell and accumulated damage, full u32 callee width.
+        for damage in (0, 1, 50, 65535, 65536, 0xffffffff):
+            b.restore(state)
+            call(f'f{frame}-sanctuary-{damage}', 'BatimentInfligeDegat', dict(EAX=0, EDX=damage, EBX=4))
+        b.restore(state)
+        call(f'f{frame}-sanctuary-impact', 'InfligeDegat', dict(EAX=b.u16(0x49a0ca), EDX=1, EBX=16, ECX=0), (0,))
+        # Window driver: declared counter, native dispatcher in live index order,
+        # then native projectile pool. No AI/input/display/frame acceptance claim.
+        for scenario, orders in (('soldiers', ((0,1,16),(1,1,16),(2,1,16))),
+                                 ('raid-unit', ((16,1,0),)), ('raid-sanctuary', ((16,3,0),))):
+            b.restore(state)
+            for u, mode, target in orders:
+                call(f'f{frame}-window-{scenario}-order-{u}', 'SetAttaqueEngin', dict(EAX=u, EDX=mode, EBX=target))
+            stop = False
+            for tick in range(1, window+1):
+                b.cpu.mem_write(0x508f7c, struct.pack('<I', frame+tick))
+                for unit in (*range(16), 16):
+                    if b.read(b.record(unit)+2,1)[0] in (0,14):
+                        continue
+                    r = call(f'f{frame}-window-{scenario}-t{tick}-u{unit}', 'EnginNextEtape', dict(EAX=unit))
+                    if not r['reached_return']:
+                        stop = True
+                        break
+                if stop:
+                    break
+                r = call(f'f{frame}-window-{scenario}-t{tick}-projectiles', 'ProjectileCalcul', {})
+                if not r['reached_return']:
+                    break
+    return dict(schema='rising-lands/combat-real-raid-original/1', translation_executed=False,
+                original_sha256='6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb',
+                source_revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
+                source_sha256={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in
+                               (Path(__file__),HERE/'bancada_combate_raid.py',HERE/'ambiente_combate_raid.py')},
+                provenance=provenance, native_code_sha256=hashlib.sha256(b.read(0x401000,0x92c00)).hexdigest(),
+                method='Full checkpoint blocks, no exclusion mask. Declared leaf stack. Hooks record or halt; no game callee is replaced.',
+                dependencies={hex(a):n for a,n in DEPENDENCIES.items()},
+                window_driver='counter=checkpoint+tick; EnginNextEtape active units0..16 ascending; ProjectileCalcul; no other frame phase',
+                cases=records)
+
+
+def main():
+    ap=argparse.ArgumentParser()
+    ap.add_argument('--probe',action='store_true')
+    ap.add_argument('--window',type=int,default=32)
+    ap.add_argument('--output',type=Path,default=OUTPUT)
+    args=ap.parse_args()
+    if args.output.exists():
+        raise SystemExit(f'Refusing to overwrite {args.output}')
+    result=execute(args.probe,args.window)
+    args.output.parent.mkdir(parents=True,exist_ok=True)
+    with args.output.open('x') as stream:
+        json.dump(result,stream,indent=1);stream.write('\n')
+    print(json.dumps(dict(output=str(args.output),cases=len(result['cases']),
+                         returned=sum(c['reached_return'] for c in result['cases']),
+                         faults=sum(bool(c['fault']) for c in result['cases']),
+                         limits=sum(c['limit'] for c in result['cases']))),flush=True)
+
+
+if __name__=='__main__':
+    main()

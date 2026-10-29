@@ -11,6 +11,17 @@ from macos_playback_client import MacOSPlaybackClient
 
 
 class PlaybackServiceTests(unittest.TestCase):
+    def test_live_memory_read_never_reads_or_closes_evidence_cursor(self):
+        from types import SimpleNamespace
+        from unittest.mock import Mock
+        from macos_playback_service import PlaybackInspectionService
+        service=object.__new__(PlaybackInspectionService)
+        service.live=SimpleNamespace(read=Mock(return_value=b'live'))
+        service.playback=Mock()
+        self.assertEqual(service.handle(dict(operation='read',address='0x508f7c',size=4)),dict(read_hex=b'live'.hex()))
+        service.live.read.assert_called_once_with(0x508f7c,4)
+        service.playback.assert_not_called()
+
     def test_worker_open_step_read_reset_errors_and_close(self):
         client = MacOSPlaybackClient(ROOT, ROOT/'apps/macos-preview/src', 'test-commit', graphics_inputs(self, ROOT))
         self.addCleanup(client.close)
@@ -24,7 +35,7 @@ class PlaybackServiceTests(unittest.TestCase):
         self.assertEqual(result['render']['status'], 'undrawn')
         self.assertIsNone(result['render']['stop'])
         self.assertNotIn('inherited_stop', result['render'])
-        self.assertEqual(result['render']['version'], [1, 4])
+        self.assertEqual(result['render']['version'], [1, 5])
         self.assertIn('image', result['render'])
         self.assertTrue(result['render']['hud'])
         self.assertTrue(result['render']['equals_native_phase_end'])
@@ -32,6 +43,7 @@ class PlaybackServiceTests(unittest.TestCase):
         regions={v['name']:v for v in drawing['required_regions']}
         self.assertEqual(regions['minimapa']['bytes'],128*128)
         self.assertEqual(regions['jogadores']['bytes'],100)
+        self.assertEqual(regions['noir_blanc']['bytes'],256)
         self.assertTrue(drawing['equals_native_full_surface'])
         self.assertTrue(drawing['equals_native_phase_end'])
         self.assertEqual(client.request(dict(id=3, operation='read', address='0x508f7c', size=4))['playback']['read_hex'], '01000000')
@@ -48,11 +60,11 @@ class PlaybackServiceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory)
             folder=root/'pesquisas-paralelas/graficos-animacao';folder.mkdir(parents=True)
-            (folder/'render_quadro.py').write_text('VERSAO_RENDER_QUADRO = (1, 5)\n')
+            (folder/'render_quadro.py').write_text('VERSAO_RENDER_QUADRO = (1, 6)\n')
             client=MacOSPlaybackClient(root, ROOT/'apps/macos-preview/src','test')
             self.addCleanup(client.close)
             response=client.request(dict(id=1,operation='open'))
             self.assertFalse(response['ok'])
             self.assertNotIn('playback',response)
             self.assertEqual(response['error_type'],'GraphicsVersionError')
-            self.assertIn('expected (1, 4)',response['error'])
+            self.assertIn('expected (1, 5)',response['error'])

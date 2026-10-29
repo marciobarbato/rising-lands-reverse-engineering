@@ -71,6 +71,8 @@ Neighbor reads use the linear 65,536-cell object grid. Column 255 can read the n
 
 `voz_unidades.py` supplies original read-only volume and bounded unit request behavior, with owner/flag selection query in `selecao_unidades.py`. `retomar_solicitacao_saida` advances supported physical-output handoffs to economy's `0x420fb7` cleanup boundary. Active/hidden sound returns are complete; an inactive visible handle exposes the exact pending original sound insertion with earlier +f9 stored. The [request contract](core/UNIT_REQUEST.md) records explicit viewport data, signed distance thresholds, full EAX volume, native payloads, inherited handle retention and 5,196 original entries in 5,532 bounded segments. Actual audio insertion/playback remains a dependency.
 
+`construcao_core.py` supplies the construction routines Economy's build path calls, over live original memory with exact registers: PlaceBatiment, ResetCheminTerrainModify, BatimentCollision, BatimentConstructible, BatimentPosable, EnginOccupeCase, TerrainEstHerbe, ValideHerse, ChercheMurCombinaisons, and DeplaceEngin's register exit over M2.3's live world. `provedor_construcao` is the adapter for Economy's `externo`. The [construction contract](core/CONSTRUCTION.md) records 153 native leaf calls captured first and 0 mismatches, the CAVE target (record origin (19,10)), and the scripted-input gaps.
+
 ## Physical gate simulation
 
 `portoes.py` reconstructs `HerseEnAnimation` (`0x4191FD`), phase/orientation queries (`0x41934F`, `0x419379`, `0x4193AC`), release/block commands (`0x4193D4`, `0x4195CA`), toggle (`0x419917`), and the type-12 `BatimentNextEtape` branch (`0x427BB7..0x427D5D`).

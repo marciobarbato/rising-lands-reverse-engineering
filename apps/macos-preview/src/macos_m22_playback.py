@@ -10,7 +10,7 @@ import types
 from macos_state_consumer import (MacOSAcceptedImage, MacOSMemoryBlock, StateValidationError,
                                   RuntimeContractPending, _source_root, _sha)
 
-CONTRACT = 'rising-lands/macos-state-consumer/5'
+CONTRACT = 'rising-lands/macos-state-consumer/6'
 SCENARIO = 'MONDE01/display-v2/M2.2-accepted-evidence'
 MISSIONS = 'pesquisas-paralelas/missoes/'
 EVIDENCE = MISSIONS + 'evidencias/'
@@ -208,7 +208,7 @@ class MacOSM22Playback:
     def read(self, address, size): return self.current.read(address, size)
     def inspect(self): return self.current.inspect()
     def apply_frame(self, frame):
-        raise RuntimeContractPending('Live frame delivery remains reserved; use accepted-evidence playback')
+        raise RuntimeContractPending('Evidence playback is immutable; use MacOSLiveSession.apply_frame for live ABI 1.1')
 
     def fork(self):
         """Independent cursor over the same verified immutable evidence inputs."""

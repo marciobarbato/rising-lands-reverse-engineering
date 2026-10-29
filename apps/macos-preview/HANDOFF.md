@@ -671,3 +671,304 @@ mid-sequence cache. Named unsupported stops remain visible. The reserved live
 apply_frame/native Rust frame ABI is unchanged. This is accepted-evidence
 inspection, not M3 acceptance. Review/integrate only this feature; no merge
 into or push to main was performed.
+
+## M3.3 groundwork — Rust live phases and Graphics 1.5 (2026-10-29)
+
+Feature `feat/macos-playable`, integrated base `c08e1fb96bf06392aec13ddde2bac29eb29a4ee0`.
+No `motor/`, owner evidence, frozen hash, shared helper or main branch is edited.
+Current consumer contract is v6; historical reports above remain unchanged.
+
+`MacOSLiveSession.apply_frame()` now executes ABI 1.1 phases from accepted
+**display-v2 S0**, using the Stage 2 initialization registers, cursor (0,0),
+no keys/messages and four immutable original jump tables. Inputs, exact hashes,
+copy ownership, mutation/publication order, reset/free and stop semantics are
+in [M3_CONTRACT.md](M3_CONTRACT.md). ctypes bridges the real signed Rust dylib
+in the isolated worker; no Python logic simulation is used. Swift owns the
+native shell and save panel. The accepted original-v2 M1 inspector stays
+separate. Legacy immutable playback guards still reject frame mutation.
+
+Graphics 1.5 is explicitly gated on module and result. The full-HUD 128 proof
+is pinned to SHA `d95618beff805b5e47c7be6ec922cdf9cda75c4063b0cd52c254a1a116e19c10`.
+A regression compares every 1.5/1.4 reference surface hash. Preflight also
+requires the new `[0x4e24bc]` 256-byte grayscale lookup. Rendering retains the
+preceding live AffGame-entry image, previous pixels/cache, real habitation
+callback and `hud=True`; no display effects are patched into engine memory.
+Original executable identity remains
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+Frame entry `CalculGame 0x42c868`, WndProc `0x4181a1` and the published phase
+contracts are unchanged. This is consumer wiring of already-proved behavior;
+no new reconstructed routine or x86 execution is claimed.
+
+The actual [live proof](validation/m3-live-graphics15.json) reports **257/257
+masked states, 11/11 checkpoints, 128/128 full native surfaces and 257/257
+phase-end surfaces equal**, zero stops. Raw memory hashes are not claimed equal
+inside the unchanged 153,060-byte display mask. Shared-host Python 3.9 timing:
+Rust 1.140 s (112.26 frames/s), projection/hash/oracle 65.875 s, Graphics 25.622 s
+(4.996 frames/s), PNG presentation 43.709 s, complete validated pipeline
+**0.939 frames/s**. Initialization, IPC and native scaling are excluded; this
+is not an exclusive-host peak or an M3.5 playable-speed pass. Per-phase timings
+are retained in the report.
+
+The [engine-only horizon](validation/m3-live-horizon.json) continues that S0
+chain beyond 128 without new loads: frame 8999 and between_frames9000 return;
+frame9000 stops honestly at **ABI status 5: ConstruitGroupeMonstre at
+0x0047a81d**. Beyond 128 this diagnostic uses ABI calls only, without
+snapshots/rendering/equality claims. It takes 85.474 s for the 8,871 additional
+completed frame bodies. Live UI rendering has no fabricated reference past
+128: verification fields become null, and either provider's named stop latches.
+
+The record-only mapper covers messages 0x200–0x205 and all requested vkeys.
+It preserves signed coordinates, scaled image position, message/modifier order,
+held/release timing, poll addresses and per-poll answers. Raw journal replay
+reconstructs the exact event/poll interleaving and rejects changed answers.
+No event or order enters Rust. The native save panel exports the distinctly
+named raw journal. At this stage Missions' scripted-input module has not landed
+on fetched `origin/feat/re-missions`; the interchange exporter returns
+`InputContractPending`, rather than inventing its schema. Test A/B original
+replay remains dependent on that schema, captures and engine order support.
+
+### Proposed next engine stage (proposal only)
+
+Port Graphics' separable renderer into Rust behind a versioned C ABI that
+accepts the engine's same-generation projected state and explicit asset catalog,
+previous indexed 800×600 surface and terrain cache. Preserve clipping, signed
+coordinates, wrapping widths, draw order, palette indices, real habitation
+queries, cache payloads/cursor and ordered display effects. Return copied
+indexed pixels/palette plus full/partial/named-stop metadata; define ownership,
+stride, lifetime and reset. Validate every 1.5 native leaf case, then all 128
+chained full surfaces and caches; preserve older no-input hashes. The engine
+already models display effects: give one side ownership to prevent double
+application. A native texture upload/palette conversion should replace per-frame
+Python RGBA/PNG encoding and base64 WebView transfer. Avoid the current bulk
+Python block/hash work on the production render path while retaining an
+optional diagnostic projection/comparison API. A Rust draw loop alone would
+leave two larger measured bridge/encoding costs. No renderer port is implemented
+by this front.
+
+Final committed build/common-check/native results will be appended below.
+
+### Final committed native build and gates
+
+Implementation `1ca070a7b3b096839a24a86da1eb16dca85d9e86` is followed by
+`054f29a` (live memory reads retain the active Rust projection) and
+`901b95cdae284a01d35752bc58dc288fa081a2fa` (validation resolves bundle source
+identity from its adjacent manifest). The exact coordinator command passed at
+**901b95c**, with `RISING_PYTHON_RUNTIME` declaring the existing relocatable
+CPython root `/Users/marcio/git/Rising Lands/local-data/macos-preview/dependencies/python`:
+
+```sh
+python3 -B compilar-jogável --development-ref HEAD \
+  --inputs-root '/Users/marcio/git/Rising Lands' \
+  --data-root '/Users/marcio/git/Rising Lands/local-data/macos-playable'
+```
+
+The command ran through the required shared heavy lease. **93/93 consumer
+tests pass, zero skips** (60.106 s). Native exercise **27/27** and inspection/
+live **11/11** pass, with visible ARM64 windows, verified readiness, empty
+Python stderr and unchanged budgets. The live smoke opens S0 and actually
+runs the signed dylib through frame 1, verifying three masked states and the
+full native surface. Native checks take 5.165 s and 9.698 s respectively.
+Paired before/after/final images remain in the build logs; the final live
+screenshot was visually inspected. Source binding, relocated Python/library
+loading, architecture and strict deep signing all pass.
+
+Bundle: `/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app`.
+Logs: `/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/901b95cdae284a01d35752bc58dc288fa081a2fa/build/logs/`.
+Committed copies: [build](validation/m3-live-final-build.log),
+[consumers](validation/m3-live-final-consumer-tests.log),
+[exercise](validation/m3-live-final-native-smoke.json),
+[live inspection](validation/m3-live-final-native-inspection-smoke.json),
+[architecture](validation/m3-live-final-architecture.log),
+[signing](validation/m3-live-final-codesign-verify.log), and
+[Rust release build](validation/m3-live-final-rust-engine-build.log).
+
+Common `python3 -B scripts/check.py` **fails prerequisites**, retained in
+[full compressed log](validation/m3-live-common.log.gz): Core 532 tests /
+5 errors / 214 skips; Combat 271 / 0 errors / 151 skips; Economy 503 / 2 errors /
+207 skips; Missions 113 / 6 errors / 30 skips; AI/runtime 95 / 7 errors / 5 skips;
+Audio 69 / 0 errors / 3 skips; workflow 9 / 0 errors / 0 skips. All 20 errors
+are missing Unicorn imports; Graphics does not start because its worktree
+`fontes/cd` copies are absent. Documentation links pass. No other front's paths
+are changed to conceal these stops. Optional original-x86 recaptures remain
+skipped; this consumer changes no reconstructed routine and uses the immutable
+owner proofs instead. A preliminary targeted run also failed for missing
+`RISING_INPUTS_ROOT`; declaring the actual input root then passed 61 tests.
+
+The first bundled 130-frame diagnostic reached its final metadata step but
+failed by querying Git in an archive; no result JSON was published. Its
+[failure log](validation/m3-live-initial-bundled-validation-failure.log) is
+preserved. The manifest-based source-identity correction above replaces that
+assumption. The final bundled proof is recorded separately, never by editing
+the failed run or a frozen reference. No original evidence is regenerated.
+
+Remaining delivery gaps: Missions scripted-input schema/export adapter and
+original Test A/B replay, engine order support/raid branch, Graphics' other
+named stops, palette cycling and real-time performance. The 1.5 provider's
+114 input-time display cases are accepted as its published domain, not claimed
+as newly replayed M3 gameplay by this app. No main merge/push or milestone
+acceptance is authorized or performed by this front.
+
+Missions dependency request: publish the scripted-input module's exact field
+names, frame/poll-site ordering, cursor coordinate convention, vkey result
+width/sign rules and validation/import/export entry points. The last fetched
+`origin/feat/re-missions` is `de154b5f22b7d30f7b1610e2c54cf684751e214b`;
+`m3/entrada_roteirizada.py` is absent. The app must review that contract before
+exporting a file labeled `rising-lands/monde01-scripted-input/1`. It currently
+exports and deterministically replays its distinct raw journal only.
+
+### Bundled runtime continuation and final rate
+
+The final [bundled proof](validation/m3-live-bundled-130.json) uses the exact
+901b95c archive, signed dylib SHA
+`839ce4b7978a0fc0ab1aaed6752ed079e84805374e97339e3f0facaf93b2de53`,
+and bundled **CPython 3.12.14**. It reaches **frame130**, with no stop:
+257 accepted masked phases, 11 checkpoints, 128 full native surfaces and all
+257 native phase-end surfaces remain equal. Frames 129–130 render completely
+but have **null** state/surface equality fields because no reference is pinned
+there. This validates actual continuation without fabricating verification.
+The separate engine-only horizon remains the frame9000 dependency result above.
+
+Measured 130-frame pipeline: **1.155 frames/s** (112.559 s), split into Rust
+**1.180 s / 110.15 frames/s**, projection/hash/oracle **51.170 s**, Graphics
+**15.816 s / 8.22 frames/s**, and PNG presentation **44.378 s**. Initialization,
+IPC and native scaling remain excluded; the machine was shared under the heavy
+lease. The earlier Python 3.9 measurement remains preserved as a separate run.
+The production renderer port must address projection and image transfer as well
+as draw speed; the measured rate still fails the M3.5 playability target.
+
+The final evidence/docs commit changes no executable app code after the 901b95c
+build. Its [structured delivery](validation/m3-live-delivery.json) records
+artifact and screenshot hashes. Feature push only; no main integration or
+formal acceptance is recorded.
+
+## Live pipeline performance follow-up (macOS-owned paths)
+
+The accepted f508a52 delivery is preserved. This stage starts from integrated
+`23dfd6e` and changes only the macOS front; the engine/Graphics reconstruction
+is unchanged. The proposed C renderer interface is in
+[Renderer port input](../../docs/MACOS_PLAYABLE.md#renderer-port-input).
+
+ABI 1.1 `rl_projetar_tudo` has no region filter and always packs the entire
+world. The adapter now calls it once per phase into alternating reusable caller
+buffers (the second buffer preserves the last published state if later
+projection/verification/rendering fails). Only Graphics' 18 declared regions,
+1,746,372 bytes, are copied into two reusable read-only views. The 25,197 full
+memory blocks are not copied into Python objects or rehashed individually.
+Full masked state verification streams directly over the bulk projection;
+expected hashes are prepared once from accepted evidence before stepping.
+Views are serial leases until reuse, not immutable snapshots retained forever;
+accepted M1/M2 playback remains immutable. Arbitrary current-address inspection
+reads the last successfully published full bulk buffer. Layout/pointer changes
+are revalidated, and missing ranges fail before render publication.
+
+The same fast path runs in the UI and rendered proof. Raw presentation carries
+800×600 indexed bytes and the original RGB24 palette in a versioned packet;
+JavaScript reuses ImageData/palette/index buffers and calls putImageData.
+PNG compression is absent from live transfer. It remains available through
+explicit `validate_live_macos.py --png-output PATH` evidence export and the
+unchanged immutable playback inspector. Economy's unchanged read definitions
+and the hash-checked palette are cached per archive, not reparsed/reread for
+every frame. No drawing algorithm or engine behavior is replaced here.
+
+The initial 128-frame fast-path run passed 257 states, 11 checkpoints, 128 full
+surfaces and 128 decoded raw-transfer surfaces. Every masked state hash also
+exactly equals the preceding f508a52 proof. Preliminary rate: 7.623 fps vs
+1.155 fps (bundled CPython 3.12, shared heavy lease). Final committed build,
+raw native-canvas checks, phase/transfer timings and common maintenance gate
+will be recorded below. This preliminary run used one bulk buffer; the final
+implementation deliberately uses two to preserve failed-publication isolation.
+
+A further app-owned C byte codec validates stable bulk descriptors and streams
+SHA-256 over the same original-name ordering and mask spans using system
+CommonCrypto. It has no game state, drawing, allocations or retained foreign
+pointers. The reference Python codec remains the unit-test oracle; production
+rendered sessions require the explicitly versioned helper, with a visible load
+failure rather than an automatic fallback. The builder compiles and signs it
+inside the normal app packaging path. Native smoke exercises the actual live
+play/pause loop through at least frame 33, raw canvas readback and generation
+matching, without changing the existing readiness/check deadlines.
+
+### Final performance validation
+
+Executable app implementation: `6e2f1a5` (persistent/raw path), `481407f`
+(native byte codec) and `604046b2b6602cc73d6acea3fd78661465bf39c5` (failed
+publication regression). The exact coordinator build passed on **604046b**:
+
+```sh
+RISING_PYTHON_RUNTIME='/Users/marcio/git/Rising Lands/local-data/macos-preview/dependencies/python' \
+python3 -B compilar-jogável --development-ref HEAD \
+  --inputs-root '/Users/marcio/git/Rising Lands' \
+  --data-root '/Users/marcio/git/Rising Lands/local-data/macos-playable'
+```
+
+The existing heavy-lease wrapper covered the whole build. **99/99 consumer
+tests pass, zero skips**, including the native codec against the independent
+Python digest, raw roundtrip, malformed layout/spans, immutable view reads,
+buffer reuse and failed-publication isolation. Compilation/signing/relocation
+and source binding pass for Swift, CPython 3.12.14, Rust and the app-owned C
+helper. The helper performs byte validation/SHA-256 only, not game logic or
+rendering. No `motor/` source or Graphics owner source changed.
+
+Native exercise **27/27** and inspection/live **14/14** pass. The latter uses
+the actual play/pause loop from frame 1 to frame 33, checks every canvas RGBA
+byte, confirms raw indexed transfer with no PNG and verifies phase generations.
+It measures **8.470 fps including worker IPC, WebKit and UI updates** over 32
+frames. Canvas decode/palette expansion/upload averages **1.176 ms**, maximum
+3 ms over 34 presentations. Both visible windows have empty Python stderr;
+existing readiness and 45-second check budgets are unchanged. The inspection
+checks take 24.464 s, including one-time expected-hash preparation. Before,
+after and final screenshots remain under the build logs; final PNG and native
+canvas screenshots were visually inspected.
+
+The final [128-frame proof](validation/m3-speed-fast-128.json) runs the archived
+604046b sources with the signed bundled helpers and CPython, under the shared
+heavy lease. A shared build-directory lock protects the bundle from replacement
+during the run. **257/257 masked states, 11/11 checkpoints, 128/128 complete
+surfaces, 257/257 phase-end surfaces and 128/128 decoded raw-transfer surfaces
+match**, with no stop. All 257 actual masked state hashes also match the
+preceding f508a52 proof exactly; no mask or historical artifact was altered.
+Two ABI buffers and 36 region buffers are allocated once and reused across all
+257 phase calls. Each view retains only **18 regions / 1,746,372 bytes**.
+ABI 1.1 still exports the complete 16,175,335-byte world; server-side filtering
+requires an engine API change and is explicitly requested by the renderer spec.
+
+| Component | Previous bundled run, ms/frame | Fast bundled run, ms/frame |
+| --- | ---: | ---: |
+| Rust phase execution | 9.078 | 8.871 |
+| Projection, full-state proof and region views | 393.614 | 25.520 |
+| Graphics rendering | 121.661 | 64.422 |
+| Transfer preparation/roundtrip (PNG → raw indexed) | 341.366 | 2.124 |
+
+Worker pipeline throughput is **1.155 → 9.898 fps (8.57×)**. The preceding
+bundled run has 130 frames, the new run 128; table values are normalized per
+frame. Both use CPython 3.12.14 on the shared machine and exclude initialization,
+IPC and native canvas presentation. The new transfer timer includes raw JSON
+encoding/decoding and SHA-256 verification; the actual UI result above includes
+the complete transport. The unchanged Python renderer now dominates; this is
+below 25 fps, not a claimed real-time completion. PNG compression remains an
+explicit evidence export outside the measured live transfer.
+
+Common checks now **pass**: `/usr/bin/python3 -B scripts/check.py`, run read-only
+from `/Users/marcio/git/Rising Lands/worktrees/maintenance`, using that repo's
+`.local/python`. Maintenance revision observed before/after was
+`4279ad8fe237a679253e4dfde976b4694b4fd1ee`. Suites: Core 532/210 skips,
+Combat 271/151, Economy 503/207, Graphics 248/0, Missions 137/33,
+AI/runtime 95/5, Audio 79/4, workflow 9/0: **1,874 tests, 610 optional skips,
+zero errors/failures**. Documentation links pass. No new original-x86 capture
+is needed or claimed: only consumer transport/byte-codec behavior changes.
+
+Saved [build](validation/m3-speed-build.log),
+[consumer tests](validation/m3-speed-consumer-tests.log),
+[native exercise](validation/m3-speed-native-smoke.json),
+[native raw live loop](validation/m3-speed-native-inspection-smoke.json),
+[common maintenance log](validation/m3-speed-common-maintenance.log.gz),
+[architecture](validation/m3-speed-architecture.log),
+[signing](validation/m3-speed-codesign-verify.log),
+[byte-codec compilation](validation/m3-speed-macos-projection-build.log), and
+[structured delivery](validation/m3-speed-delivery.json) pin actual outputs.
+The [renderer spec](../../docs/MACOS_PLAYABLE.md#renderer-port-input) requests a
+native, generation-checked indexed-buffer call with explicit palette/HUD/stop
+semantics and a 40-ms total budget. Input/order support is unchanged by this
+performance follow-up. Final evidence/docs commits change no executable app
+code after the validated 604046b build. Only the feature branch is pushed;
+main integration and acceptance remain with the coordinator.

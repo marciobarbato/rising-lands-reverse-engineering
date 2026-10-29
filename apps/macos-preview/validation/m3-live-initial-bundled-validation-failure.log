@@ -1,0 +1,19 @@
+[lease] macos-bundled-live-130 waiting
+[lease] macos-bundled-live-130 granted slots [2]
+load_tail
+frame64
+frame128
+fatal: not a git repository (or any of the parent directories): .git
+Traceback (most recent call last):
+  File "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_live_macos.py", line 82, in <module>
+    rust_frames_per_second=frames/totals['rust_seconds'],
+      ^^^^^^
+  File "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_live_macos.py", line 57, in main
+    if i%2000==0:print(name,flush=True)
+                        ^^^^^^^^^^^^^^^^
+  File "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/source', 'rev-parse', 'HEAD']' returned non-zero exit status 128.

@@ -1,7 +1,7 @@
-"""AffGame tail after the HUD checkpoint: the bottom strip and the cursor (0x417B1C..0x417D30), render API 1.4.
+"""AffGame tail after the HUD checkpoint: the bottom strip and the cursor (0x417B1C..0x417D30), render API 1.5.
 
 Reconstructed from the intact executable and the native capture ``evidencias/captura-hud-m22-v2.json`` (committed
-before this module).  The order is AffGame's own: three AffCompteurMatiere counters, AffZoneIconeAction, AffTrame,
+before this module); the additive M3 branches use captures committed as 5b05e41/5405033.  The order is AffGame's own: three AffCompteurMatiere counters, AffZoneIconeAction, AffTrame,
 the blinking target marker, AffMarche, AffMiniMap, AffChrono, AffZoneInfo, AffInfoAide, AffDebug, EvenementAffiche,
 MessageBoxAffiche, AffDrapeauAlliance, the mouse-position copy and the cursor bob.  It ends at 0x417D30, the
 DDUnlockSurface call after which AffGame no longer writes the offscreen surface.
@@ -11,7 +11,9 @@ original address (``ENDERECOS_PARADA``); nothing is defaulted.  Reads go through
 AffGame prefix's own writes overlaid); the only writes, the mouse-position copy 0x49A042/44, are returned as effects.
 """
 import struct
-from graficos import compor_indices
+from graficos import compor_indices, Quadro
+from composicao import compor_sombra
+from construcoes import tabelas_jogador
 from quadro_jogo import DependenciaQuadro
 
 FIM_HUD = 0x417D30
@@ -24,22 +26,20 @@ BOB_MILHAR = 0x2a3c              # one icon per thousand, at y - 9 (0x417F91)
 VAZIO_ICONE = 0x29b1             # empty action slot word (AffZoneIconeAction)
 ENDERECOS_PARADA = {
     0x417f6e: 'AffCompteurMatiere: counter value above 9999 (outside the captured domain)',
-    0x416f64: 'AffZoneIconeAction: first slot word 0x4E2440 is not the empty icon 0x29B1',
-    0x417086: 'AffZoneIconeAction: action slot holds an icon (digits, PasteNoirBlancCmp, selection frame)',
-    0x4171be: 'AffZoneIconeAction: last slot word 0x4E2446 is not the empty icon 0x29B1',
+    0x417086: 'AffZoneIconeAction: slot kind/value outside 1.5 (kind 0 percent 0..100, 1, 2 value 0..999)',
     0x41729b: 'AffTrame: placement frame mode 0x4E05AE = 3 (BatimentTailleGet, Box, FilledBoxGris)',
-    0x417ba2: 'target marker 0x496204 set (PastePlayerCmp blink, writes 0x4E05AC)',
+    0x417ba2: 'target marker outside the captured animation IDs 0x1E03..0x1E09',
     0x4667a7: 'AffMarche: market state 1..4 for the camera player (InitGameZone, market icons)',
     0x46a70c: 'AffMiniMap outside the captured geometry',
     0x401d18: 'AffChrono: a selected structure (recruitment/time gauge)',
-    0x40f77b: 'AffZoneInfo: cost counters 0x4E0612..0x4E0618 nonzero (AffCompteurCoutMatiere)',
+    0x40f77b: 'AffZoneInfo: cost counter exceeds 9999',
     0x40f8c0: 'AffInfoAide: tooltip text pointer 0x4E060C set (AffTextEncadre)',
     0x417c7f: 'AffDebug enabled (0x4E17AC)',
     0x417c8a: 'EvenementAffiche: an event is in progress',
     0x469c5f: 'MessageBoxAffiche: message queue not empty (AffText)',
     0x417604: 'AffDrapeauAlliance: allied player flag (PastePlayerCmp)',
     0x4175f2: 'AffDrapeauAlliance: player contacting for an alliance (blinking flag)',
-    0x417cfc: 'second cursor bob 0x4E062C nonzero',
+    0x417cfc: 'second cursor count outside 0..16',
 }
 
 
@@ -128,13 +128,70 @@ class _Hud:
         """AffZoneIconeAction 0x416F29: redrawn only while the force flag 0x4E05A2 is set."""
         if not self.m.u8(0x4e05a2): return
         self.chamadas.append(['AffZoneIconeAction'])
-        if self.m.u16(0x4e2440) != VAZIO_ICONE: self.parar(0x416f64)
-        self.bob(8, 0x223, 0x29b5, False)
+        selected = None
+        def selection():
+            nonlocal selected
+            if selected is None: selected = self.m.u16(0x496d4a)
+            return selected
+        left = self.m.u16(0x4e2440)
+        self.bob(8, 547, 0x29b5 if left == VAZIO_ICONE else (0x2a39 if selection() == 8 else 0x2a37), False)
         for i in range(4):
-            if self.m.u16(0x4e2410+6*i) != VAZIO_ICONE: self.parar(0x417086, f'slot {i}')
-            self.bob(0x1f+0x3c*i, 0x223, VAZIO_ICONE+i, False)
-        if self.m.u16(0x4e2446) != VAZIO_ICONE: self.parar(0x4171be)
-        self.bob(0x110, 0x223, 0x29b6, False)
+            slot, x = 0x4e2410+6*i, 31+60*i
+            ident = self.m.u16(slot)
+            if ident == VAZIO_ICONE:
+                self.bob(x, 547, VAZIO_ICONE+i, False)
+                continue
+            self.bob(x, 547, 0x29b7, False)
+            self.bob(x+2, 549, ident, False)
+            kind = self.m.u16(slot+2)
+            if kind == 0:
+                value = self.m.u16(slot+4)
+                if value > 100: self.parar(0x417086, f'slot {i} percent {value}')
+                mask = 0x2a1d-value*42//100
+                self.chamadas.append(['PasteNoirBlancCmp', x+2, 549, mask, 0])
+                table = self.m.ler(self.m.u32(0x4e24bc), 256)
+                self.saida[:] = compor_sombra(bytes(self.saida), self.largura, self.altura,
+                                              self.catalogo.quadro(mask), x+2, 549, table)
+            elif kind == 2:
+                value = self.m.u16(slot+4)
+                if value > 999: self.parar(0x417086, f'slot {i} counter {value}')
+                leading = True
+                for j, digit in enumerate((value//100, value//10 % 10, value % 10)):
+                    if leading and not digit and j < 2: continue
+                    self.bob(x+22+12*j, 582, 0x2a22+2*digit, False)
+                    leading = False
+            elif kind != 1: self.parar(0x417086, f'slot {i} kind {kind}')
+            if selection() == i: self.bob(x+2, 549, 0x2a36, False)
+        right = self.m.u16(0x4e2446)
+        self.bob(272, 547, 0x29b6 if right == VAZIO_ICONE else (0x2a3a if selection() == 9 else 0x2a38), False)
+
+    def player(self, x, y, ident, owner):
+        self.chamadas.append(['PastePlayerCmp', x, y, ident, 1, owner])
+        q = self.catalogo.quadro(ident)
+        q = Quadro(q.largura, q.altura, q.pixels.translate(tabelas_jogador()[owner]), q.opacidade, 0, b'')
+        clip = (self.m.u16(0x49a020), self.m.u16(0x49a01c), self.m.u16(0x49a022), self.m.u16(0x49a01e))
+        self.saida[:] = compor_indices(bytes(self.saida), self.largura, self.altura, q, x, y, clip)
+
+    def gravar(self, name, address, value):
+        old, new = self.m.ler(address, 2), struct.pack('<H', value)
+        if old != new: self.efeitos.append((name, address, old.hex(), new.hex()))
+        self.m.sobrepostos.update({address+i:v for i,v in enumerate(new)})
+
+    def alvo(self):
+        cell = self.m.u16(0x496204)
+        if cell == 0xffff: return
+        ident = self.m.u16(0x4e05ac)
+        if not 0x1e03 <= ident <= 0x1e09: self.parar(0x417ba2)
+        if not self.m.u8(0x508f7c) & 1:
+            ident += 1
+            self.gravar('alvo_animacao_u16', 0x4e05ac, ident)
+        x = (cell % 256-self.m.u16(0x508720))*32+12
+        y = (cell//256-self.m.u16(0x508722))*32+12
+        i16 = lambda v: (v+32768) % 65536-32768
+        self.player(i16(x), i16(y), ident, self.camera)
+        if ident == 0x1e0a:
+            self.gravar('alvo_animacao_u16', 0x4e05ac, 0x1e03)
+            self.gravar('alvo_celula_u16', 0x496204, 0xffff)
 
     def trama(self):
         """AffTrame 0x41721F (EBX = 0): returns unless the mouse is inside the view and mode 0x4E05AE is 3."""
@@ -165,13 +222,42 @@ class _Hud:
         self.caixa(ox*w//cw+mx+1, oy*h//ch+my+1, (ox+jx)*w//cw+mx+1, (oy+jy)*h//ch+my+1, 1, True)
 
     def cronometro(self):
-        """AffChrono 0x401CC6: only the no-selection exit (selected structure 0x496AC4 and 0x495BE0[camera] = 0xFFFF)."""
-        if self.m.u16(0x496ac4) != 0xffff or self.m.u16(0x495be0+2*self.camera) != 0xffff: self.parar(0x401d18)
+        """AffChrono 0x401CC6: no selection, or the captured sanctuary with no recruitment underway."""
+        selected = self.m.u16(0x496ac4)
+        if selected == 0xffff: selected = self.m.u16(0x495be0+2*self.camera)
+        if selected == 0xffff: return
+        if selected >= 1000: self.parar(0x401d18)
+        record = 0x49a0c8+276*selected
+        if (self.m.u8(record+4) == self.camera == 0 and self.m.u8(record+8) == 2
+                and self.m.u8(record+5) == 5 and self.m.u16(record+0x74) == 0): return
+        self.parar(0x401d18)
 
     def zona_info(self):
-        """AffZoneInfo 0x40F758: the info panel bob, then cost counters (only all-zero is composed)."""
+        """AffZoneInfo 0x40F758: panel, then the prioritized cost-counter rows (values 0..9999)."""
         self.bob(0x12a, 0x223, 0x29b8, False)
-        if any(self.m.u16(a) for a in (0x4e0618, 0x4e0612, 0x4e0614, 0x4e0616)): self.parar(0x40f77b)
+        def counter(value, y):
+            if value > 9999: self.parar(0x40f77b, str(value))
+            x, leading = 328, True
+            for i, digit in enumerate((value//1000, value//100 % 10, value//10 % 10, value % 10)):
+                if leading and not digit and i < 3:
+                    if i == 2: self.bob(x, y, 0x2a21, False); x += 12
+                    continue
+                self.bob(x, y, 0x2a22+2*digit, False)
+                x += 12; leading = False
+        def row(value, ident, top):
+            self.bob(299, top, ident, False)
+            self.bob(327, top+4, 0x2a45, False)
+            counter(value, top+5)
+        value = self.m.u16(0x4e0618)
+        if value:
+            row(value, 0x2a46, 548); return
+        value = self.m.u16(0x4e0612)
+        if value: row(value, 0x2a43, 548)
+        value = self.m.u16(0x4e0614)
+        if value: row(value, 0x2a44, 574)
+        else:
+            value = self.m.u16(0x4e0616)
+            if value: row(value, 0x2a42, 574)
 
     def info_ajuda(self):
         """AffInfoAide 0x40F8AA: returns while the tooltip text pointer 0x4E060C is NULL."""
@@ -191,7 +277,7 @@ class _Hud:
         for k, (x, y) in enumerate(CONTADORES): self.contador(k, x, y)
         self.zona_icone_acao()
         self.trama()
-        if self.m.u16(0x496204) != 0xffff: self.parar(0x417ba2)
+        self.alvo()
         self.marcha()
         if self.m.u8(0x497285): self.minimapa()
         self.cronometro()
@@ -207,7 +293,10 @@ class _Hud:
             if novo != antigo: self.efeitos.append((nome, endereco, antigo.hex(), novo.hex()))
         if self.m.u8(0x49a054) == 0:
             self.bob(self.m.i16(0x5099a8), self.m.i16(0x5099aa), (self.m.u16(0x49a010)+self.m.u16(0x49a014)) & 0xffff, True)
-            if self.m.u16(0x4e062c): self.parar(0x417cfc)
+            second = self.m.u16(0x4e062c)
+            if second:
+                if second > 16: self.parar(0x417cfc)
+                self.bob(self.m.i16(0x5099a8), self.m.i16(0x5099aa), (self.m.u16(0x49a010)+16-second) & 0xffff, True)
         return bytes(self.saida)
 
 

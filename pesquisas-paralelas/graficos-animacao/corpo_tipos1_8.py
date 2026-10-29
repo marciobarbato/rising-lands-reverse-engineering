@@ -38,8 +38,11 @@ def _inteiro(v, nome, minimo, maximo):
     return v
 
 
-def consultar_corpo_tipos1_8(registro276, *, x, y, indice_u16, camera_u8, indice_selecionado_u16, modo_selecao_u8):
-    """Ordered layers of AffEngin's body for one type-1/type-8 record (the tired-icon tail is not included)."""
+def consultar_corpo_tipos1_8(registro276, *, x, y, indice_u16, camera_u8, indice_selecionado_u16, modo_selecao_u8, sobreposicoes_compostas=False):
+    """Ordered body layers. ``sobreposicoes_compostas=True`` delegates overlay validation/drawing to the 1.5 frame.
+
+    The standalone default retains the 1.3 strict domain; the body arithmetic and pixels are unchanged.
+    """
     if not isinstance(registro276, (bytes, bytearray)) or len(registro276) != 276:
         raise ValueError('registro276 must be 276 bytes')
     _inteiro(x, 'x', -32768, 32767); _inteiro(y, 'y', -32768, 32767)
@@ -52,7 +55,7 @@ def consultar_corpo_tipos1_8(registro276, *, x, y, indice_u16, camera_u8, indice
     falhas = []
     if dono != 0 or camera_u8 != 0: falhas.append(f'owner {dono} / camera {camera_u8} (captured: owner 0 under camera 0)')
     if estado not in ESTADOS: falhas.append(f'state {estado} (captured: 2, 7)')
-    if r[0xba] or r[0xbd] or indice_selecionado_u16 == indice_u16 or modo_selecao_u8:
+    if not sobreposicoes_compostas and (r[0xba] or r[0xbd] or indice_selecionado_u16 == indice_u16 or modo_selecao_u8):
         falhas.append('selection/experience overlay (+0xBA, +0xBD, selected unit or selection mode)')
     if r[0x99]: falhas.append('oscillation +0x99 (random displacement, RNG cursor)')
     if r[0xdc]: falhas.append('effects byte +0xDC (mirror/terror/armour)')
@@ -71,12 +74,13 @@ def consultar_corpo_tipos1_8(registro276, *, x, y, indice_u16, camera_u8, indice
 
 
 def compor_corpo_tipos1_8(catalogo, destino, largura, altura, registro276, *, x, y, indice_u16, camera_u8,
-                          indice_selecionado_u16, modo_selecao_u8, tabela_sombra, recorte=None):
+                          indice_selecionado_u16, modo_selecao_u8, tabela_sombra, recorte=None, sobreposicoes_compostas=False):
     """(new indexed bytes, plan): shadow remap under the 10784 mask, then the opaque body copy."""
     if len(destino) != largura*altura: raise ValueError('Surface size does not match its dimensions')
     if len(tabela_sombra) != 256: raise ValueError('tabela_sombra must be 256 bytes')
     plano = consultar_corpo_tipos1_8(registro276, x=x, y=y, indice_u16=indice_u16, camera_u8=camera_u8,
-                                     indice_selecionado_u16=indice_selecionado_u16, modo_selecao_u8=modo_selecao_u8)
+                                     indice_selecionado_u16=indice_selecionado_u16, modo_selecao_u8=modo_selecao_u8,
+                                     sobreposicoes_compostas=sobreposicoes_compostas)
     sombra, corpo = plano['camadas']
     saida = compor_sombra(bytes(destino), largura, altura, catalogo.quadro(SOMBRA_ID), sombra['x'], sombra['y'], bytes(tabela_sombra), recorte)
     saida = compor_indices(saida, largura, altura, catalogo.quadro(corpo['id_motor']), corpo['x'], corpo['y'], recorte)
