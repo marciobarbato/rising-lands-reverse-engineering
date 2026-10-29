@@ -89,6 +89,15 @@ class PausaEnderecos(Isolamento):
     def executar(self, regs):
         self.observador(self.entradas[regs['EIP']], self.b.fase, regs, self.b)
 
+    def pausar_em(self, endereco, rotulo):
+        """Add a pause address during the run (for example a call-return site read at an entry)."""
+        if endereco in self.entradas:
+            return
+        from emulador import unicorn
+        self.entradas[endereco] = rotulo
+        self.b.cpu.hook_add(unicorn.UC_HOOK_CODE, self.b._parar_se_pedido, begin=endereco, end=endereco)
+        self.b.cpu.ctl_flush_tb()
+
 
 def executar_caminho_pausas(enderecos, observador, blocos=None, cenario='v1'):
     """Replay Missions' committed path (scenario ``v1`` or ``exibicao``) with ``PausaEnderecos``;
@@ -108,6 +117,7 @@ def executar_caminho_pausas(enderecos, observador, blocos=None, cenario='v1'):
     b.executar_mission_load(60)
     pausa = PausaEnderecos(b, enderecos, observador)
     pausa.instalar()
+    b.pausa_enderecos = pausa
     if blocos is not None:
         from emulador import unicorn
         b.cpu.hook_add(unicorn.UC_HOOK_BLOCK, lambda cpu, a, n, _: blocos(b.fase, a), begin=0x401000, end=0x493bff)
