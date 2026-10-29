@@ -628,3 +628,46 @@ partial/named stops in accepted M2.2. HUD/cursor pixels are included. Every
 drawing record declares the required minimap/player buffers from captured
 state. See [per-phase v5 proof](validation/m3-m22-render-v5.json); old 1.3
 reports are retained as historical. The exact committed native build follows.
+
+
+### Graphics 1.4 delivery validation
+
+The exact coordinator build passed on committed checkout
+`b4e3b6266e21d64ce3a9c87961cae0702ce0e85c`, containing latest fetched main
+`b3ebdfb93200cc8ac3563eb10128cf98dd07fa6b`. The latest-main merge added
+Core selection/orders and the small separate-assets tooling only; Graphics
+providers, reference hashes and this consumer did not change after the full
+sequence proof. Implementation is cf8c15a; final evidence/docs commits change
+no executable code.
+
+```sh
+RISING_PYTHON_RUNTIME='/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python' \
+  ./compilar-jogável --development-ref HEAD \
+  --inputs-root '/Users/marcio/git/Rising Lands' \
+  --data-root '/Users/marcio/git/Rising-Lands-Codex/.local/macos-playable'
+```
+
+First attempt exit 0. **82/82 app tests, zero skips**, 46.108 seconds; ARM64
+app/bundled CPython 3.12.14, strict deep signature and relocated source/runtime
+verification passed. Exercise smoke **27/27** (checks 11.907 seconds); native
+inspection **9/9** (checks 6.597 seconds), including the full native phase-end
+surface and enabled HUD/cursor. Both windows were visible, readiness signals
+were validated, stderr was empty, and before/after/final PNGs remain preserved
+with hashes. Existing smoke deadlines/assertions were not relaxed.
+
+Saved [full discovery](validation/m3-graphics14-consumer-tests.log),
+[exercise](validation/m3-graphics14-native-smoke.json),
+[inspection](validation/m3-graphics14-native-inspection-smoke.json),
+[exact build](validation/m3-graphics14-build.log) and
+[structured results](validation/m3-preparation.json) identify the actual run.
+The [complete phase proof](validation/m3-m22-render-v5.json) shows 128 native
+full 800×600 matches and 257 phase-end matches. All 17 required Graphics regions
+per draw are read from captured blocks, including 16384 minimap bytes and 100
+player-table bytes. No live inputs or game state are synthesized.
+
+The former HUD/cursor absence is removed; remaining limits are the published
+HUD/body domain, static palette (not live palette cycling), and no independent
+mid-sequence cache. Named unsupported stops remain visible. The reserved live
+apply_frame/native Rust frame ABI is unchanged. This is accepted-evidence
+inspection, not M3 acceptance. Review/integrate only this feature; no merge
+into or push to main was performed.
