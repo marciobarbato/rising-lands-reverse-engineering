@@ -1,0 +1,1712 @@
+{
+ "schema": "rising-lands/monde01-frame1-entry-trace/1",
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "capture": "pesquisas-paralelas/missoes/evidencias/captura-quadro1-monde01-original.json",
+ "capture_sha256": "c06f78ea2f611d668b4a2fc7bde712b07c21ed8eb0a929668d4d70e56d47fed8",
+ "complete": true,
+ "method": "Unicorn block hook over BEGTEXT: a routine is entered when a basic block starts at its symbol address (relatorios/simbolos-originais.tsv); a top-level callee is a routine whose stack return address lies in CalculGame (load_tail, frame1) or in ProgIteration/_WinMain@16 (between_frames). Non-executed boundaries are listed under boundaries.",
+ "phases": {
+  "load_tail": {
+   "routines_in_first_entry_order": [
+    {
+     "routine": "RestoreAll",
+     "entries": 1
+    },
+    {
+     "routine": "DDLockSurface",
+     "entries": 3,
+     "not_executed_boundary": true
+    },
+    {
+     "routine": "LoadPie",
+     "entries": 3,
+     "not_executed_boundary": true
+    },
+    {
+     "routine": "AffTerrain",
+     "entries": 2
+    },
+    {
+     "routine": "DDUnlockSurface",
+     "entries": 3,
+     "not_executed_boundary": true
+    },
+    {
+     "routine": "DDFlipPage",
+     "entries": 3,
+     "not_executed_boundary": true
+    },
+    {
+     "routine": "DDSetPalette",
+     "entries": 1,
+     "not_executed_boundary": true
+    },
+    {
+     "routine": "SetClipping",
+     "entries": 1
+    },
+    {
+     "routine": "MenuInit",
+     "entries": 1
+    },
+    {
+     "routine": "FilledBox",
+     "entries": 1,
+     "not_executed_boundary": true
+    },
+    {
+     "routine": "InitGameZone",
+     "entries": 2
+    },
+    {
+     "routine": "MouseSetZone",
+     "entries": 34
+    },
+    {
+     "routine": "MiniMapGetPos",
+     "entries": 2
+    },
+    {
+     "routine": "MiniMapGetTaille",
+     "entries": 2
+    },
+    {
+     "routine": "ChercheContacteur",
+     "entries": 6
+    },
+    {
+     "routine": "MessageBoxExiste",
+     "entries": 2
+    },
+    {
+     "routine": "PlayerEstContacterPourAlliance",
+     "entries": 6
+    },
+    {
+     "routine": "MouseTestZone",
+     "entries": 2
+    },
+    {
+     "routine": "MCICD_Play",
+     "entries": 2,
+     "not_executed_boundary": true
+    },
+    {
+     "routine": "PlayerAttaqueReset",
+     "entries": 1
+    },
+    {
+     "routine": "EvenementEnCours",
+     "entries": 1
+    },
+    {
+     "routine": "PlayerGetType",
+     "entries": 22
+    },
+    {
+     "routine": "InputGame",
+     "entries": 1
+    },
+    {
+     "routine": "MouseZone",
+     "entries": 1
+    },
+    {
+     "routine": "ScrollTerrain",
+     "entries": 1
+    },
+    {
+     "routine": "NextGouttes",
+     "entries": 1
+    },
+    {
+     "routine": "InputSend",
+     "entries": 1
+    },
+    {
+     "routine": "ReseauActif",
+     "entries": 1
+    },
+    {
+     "routine": "MissionGetNum",
+     "entries": 10
+    },
+    {
+     "routine": "CalculNextReflect",
+     "entries": 4
+    },
+    {
+     "routine": "iaCalculPlayer",
+     "entries": 4
+    },
+    {
+     "routine": "AvanceMonstre",
+     "entries": 1
+    },
+    {
+     "routine": "iaSolver",
+     "entries": 1
+    },
+    {
+     "routine": "ProcessInputGame",
+     "entries": 4
+    },
+    {
+     "routine": "MessageBoxCalcul",
+     "entries": 1
+    },
+    {
+     "routine": "GameNextFrame",
+     "entries": 1
+    },
+    {
+     "routine": "CalculIconeAction",
+     "entries": 1
+    },
+    {
+     "routine": "EnginGetNbSelection",
+     "entries": 1
+    },
+    {
+     "routine": "BatimentGetSelection",
+     "entries": 1
+    },
+    {
+     "routine": "ProjectileCalcul",
+     "entries": 1
+    },
+    {
+     "routine": "ProjectileAnim",
+     "entries": 100
+    },
+    {
+     "routine": "CalculEnginNextEtape",
+     "entries": 1
+    },
+    {
+     "routine": "IATestUtilite",
+     "entries": 17
+    },
+    {
+     "routine": "iagMessTestSendMessageEngin",
+     "entries": 16
+    },
+    {
+     "routine": "iabTestEngin",
+     "entries": 16
+    },
+    {
+     "routine": "EnginNextEtape",
+     "entries": 16
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "entries": 24
+    },
+    {
+     "routine": "EnginTrouveCible",
+     "entries": 1
+    },
+    {
+     "routine": "PlayerEstAllie",
+     "entries": 7
+    },
+    {
+     "routine": "GetBit",
+     "entries": 80
+    },
+    {
+     "routine": "CalculFatigue",
+     "entries": 16
+    },
+    {
+     "routine": "SetEnginCollision",
+     "entries": 8
+    },
+    {
+     "routine": "SetCollision",
+     "entries": 8
+    },
+    {
+     "routine": "Chemin_ModifieZone",
+     "entries": 8
+    },
+    {
+     "routine": "Random",
+     "entries": 8
+    },
+    {
+     "routine": "CalculBatimentNextEtape",
+     "entries": 1
+    },
+    {
+     "routine": "ResetTableauHangar",
+     "entries": 1
+    },
+    {
+     "routine": "BatimentNextEtape",
+     "entries": 1
+    },
+    {
+     "routine": "BagContientTroupe",
+     "entries": 1
+    },
+    {
+     "routine": "CalculTroupe",
+     "entries": 1
+    },
+    {
+     "routine": "BatimentGetCase",
+     "entries": 1
+    },
+    {
+     "routine": "BatimentCollision",
+     "entries": 30
+    },
+    {
+     "routine": "CaseEstDecouverte",
+     "entries": 93
+    },
+    {
+     "routine": "BatimentEstDecouvert",
+     "entries": 3
+    },
+    {
+     "routine": "BatimentContourEstIllumine",
+     "entries": 3
+    },
+    {
+     "routine": "CaseEstIlluminee",
+     "entries": 78
+    },
+    {
+     "routine": "RechercheCalcul",
+     "entries": 1
+    },
+    {
+     "routine": "PlayerInitAllianceCompteur",
+     "entries": 1
+    },
+    {
+     "routine": "SetUpdateChamp",
+     "entries": 1
+    },
+    {
+     "routine": "UpdateChamp",
+     "entries": 1
+    },
+    {
+     "routine": "CalculMatiere",
+     "entries": 1
+    },
+    {
+     "routine": "IntToBCD",
+     "entries": 8
+    },
+    {
+     "routine": "BCDToInt",
+     "entries": 4
+    },
+    {
+     "routine": "SetBit",
+     "entries": 2
+    },
+    {
+     "routine": "CalculCompteurMarche",
+     "entries": 1
+    },
+    {
+     "routine": "CalculCompteurProposition",
+     "entries": 1
+    },
+    {
+     "routine": "NextAnimTerrain",
+     "entries": 1
+    },
+    {
+     "routine": "NextAnimVeget",
+     "entries": 1
+    },
+    {
+     "routine": "PlayerAttaqueCalculSympa",
+     "entries": 1
+    },
+    {
+     "routine": "MAJSympathie",
+     "entries": 12
+    },
+    {
+     "routine": "TestFinDeMission",
+     "entries": 1
+    },
+    {
+     "routine": "BatimentExiste",
+     "entries": 1000
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "entries": 1
+    },
+    {
+     "routine": "BatimentGetType",
+     "entries": 1
+    },
+    {
+     "routine": "TestRessource",
+     "entries": 3
+    }
+   ],
+   "top_level": [
+    {
+     "routine": "RestoreAll",
+     "entries": 1,
+     "call_return": "0x42d284",
+     "caller": "CalculGame+0xa1c",
+     "nested_first_entry_order": [
+      {
+       "routine": "DDLockSurface",
+       "entries": 2,
+       "not_executed_boundary": true
+      },
+      {
+       "routine": "LoadPie",
+       "entries": 2,
+       "not_executed_boundary": true
+      },
+      {
+       "routine": "AffTerrain",
+       "entries": 2
+      },
+      {
+       "routine": "DDUnlockSurface",
+       "entries": 2,
+       "not_executed_boundary": true
+      },
+      {
+       "routine": "DDFlipPage",
+       "entries": 2,
+       "not_executed_boundary": true
+      },
+      {
+       "routine": "DDSetPalette",
+       "entries": 1,
+       "not_executed_boundary": true
+      }
+     ]
+    },
+    {
+     "routine": "SetClipping",
+     "entries": 1,
+     "call_return": "0x42d2ab",
+     "caller": "CalculGame+0xa43",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "MenuInit",
+     "entries": 1,
+     "call_return": "0x42d2d5",
+     "caller": "CalculGame+0xa6d",
+     "nested_first_entry_order": [
+      {
+       "routine": "DDLockSurface",
+       "entries": 1,
+       "not_executed_boundary": true
+      },
+      {
+       "routine": "FilledBox",
+       "entries": 1,
+       "not_executed_boundary": true
+      },
+      {
+       "routine": "LoadPie",
+       "entries": 1,
+       "not_executed_boundary": true
+      },
+      {
+       "routine": "InitGameZone",
+       "entries": 1
+      },
+      {
+       "routine": "MouseSetZone",
+       "entries": 17
+      },
+      {
+       "routine": "MiniMapGetPos",
+       "entries": 1
+      },
+      {
+       "routine": "MiniMapGetTaille",
+       "entries": 1
+      },
+      {
+       "routine": "ChercheContacteur",
+       "entries": 3
+      },
+      {
+       "routine": "MessageBoxExiste",
+       "entries": 1
+      },
+      {
+       "routine": "PlayerEstContacterPourAlliance",
+       "entries": 3
+      },
+      {
+       "routine": "MouseTestZone",
+       "entries": 1
+      },
+      {
+       "routine": "MCICD_Play",
+       "entries": 1,
+       "not_executed_boundary": true
+      },
+      {
+       "routine": "DDUnlockSurface",
+       "entries": 1,
+       "not_executed_boundary": true
+      },
+      {
+       "routine": "DDFlipPage",
+       "entries": 1,
+       "not_executed_boundary": true
+      }
+     ]
+    },
+    {
+     "routine": "InitGameZone",
+     "entries": 1,
+     "call_return": "0x42d2de",
+     "caller": "CalculGame+0xa76",
+     "nested_first_entry_order": [
+      {
+       "routine": "MouseSetZone",
+       "entries": 17
+      },
+      {
+       "routine": "MiniMapGetPos",
+       "entries": 1
+      },
+      {
+       "routine": "MiniMapGetTaille",
+       "entries": 1
+      },
+      {
+       "routine": "ChercheContacteur",
+       "entries": 3
+      },
+      {
+       "routine": "MessageBoxExiste",
+       "entries": 1
+      },
+      {
+       "routine": "PlayerEstContacterPourAlliance",
+       "entries": 3
+      },
+      {
+       "routine": "MouseTestZone",
+       "entries": 1
+      }
+     ]
+    },
+    {
+     "routine": "PlayerAttaqueReset",
+     "entries": 1,
+     "call_return": "0x42d2e3",
+     "caller": "CalculGame+0xa7b",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "EvenementEnCours",
+     "entries": 1,
+     "call_return": "0x42d2e8",
+     "caller": "CalculGame+0xa80",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "MCICD_Play",
+     "entries": 1,
+     "not_executed_boundary": true,
+     "call_return": "0x42d32d",
+     "caller": "CalculGame+0xac5",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "PlayerGetType",
+     "entries": 5,
+     "call_return": "0x42d37e",
+     "caller": "CalculGame+0xb16",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "InputGame",
+     "entries": 1,
+     "call_return": "0x42d340",
+     "caller": "CalculGame+0xad8",
+     "nested_first_entry_order": [
+      {
+       "routine": "MouseZone",
+       "entries": 1
+      },
+      {
+       "routine": "ScrollTerrain",
+       "entries": 1
+      },
+      {
+       "routine": "NextGouttes",
+       "entries": 1
+      }
+     ]
+    },
+    {
+     "routine": "InputSend",
+     "entries": 1,
+     "call_return": "0x42d347",
+     "caller": "CalculGame+0xadf",
+     "nested_first_entry_order": [
+      {
+       "routine": "ReseauActif",
+       "entries": 1
+      }
+     ]
+    },
+    {
+     "routine": "MissionGetNum",
+     "entries": 4,
+     "call_return": "0x42d359",
+     "caller": "CalculGame+0xaf1",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "CalculNextReflect",
+     "entries": 4,
+     "call_return": "0x42d362",
+     "caller": "CalculGame+0xafa",
+     "nested_first_entry_order": [
+      {
+       "routine": "iaCalculPlayer",
+       "entries": 4
+      },
+      {
+       "routine": "AvanceMonstre",
+       "entries": 1
+      },
+      {
+       "routine": "MissionGetNum",
+       "entries": 1
+      },
+      {
+       "routine": "iaSolver",
+       "entries": 1
+      }
+     ]
+    },
+    {
+     "routine": "ProcessInputGame",
+     "entries": 4,
+     "call_return": "0x42d3b5",
+     "caller": "CalculGame+0xb4d",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "MessageBoxCalcul",
+     "entries": 1,
+     "call_return": "0x42d3e6",
+     "caller": "CalculGame+0xb7e",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "GameNextFrame",
+     "entries": 1,
+     "call_return": "0x42d3eb",
+     "caller": "CalculGame+0xb83",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "CalculIconeAction",
+     "entries": 1,
+     "call_return": "0x42d3f0",
+     "caller": "CalculGame+0xb88",
+     "nested_first_entry_order": [
+      {
+       "routine": "EnginGetNbSelection",
+       "entries": 1
+      },
+      {
+       "routine": "BatimentGetSelection",
+       "entries": 1
+      }
+     ]
+    },
+    {
+     "routine": "ProjectileCalcul",
+     "entries": 1,
+     "call_return": "0x42d3f5",
+     "caller": "CalculGame+0xb8d",
+     "nested_first_entry_order": [
+      {
+       "routine": "ProjectileAnim",
+       "entries": 100
+      }
+     ]
+    },
+    {
+     "routine": "CalculEnginNextEtape",
+     "entries": 1,
+     "call_return": "0x42d3fa",
+     "caller": "CalculGame+0xb92",
+     "nested_first_entry_order": [
+      {
+       "routine": "IATestUtilite",
+       "entries": 16
+      },
+      {
+       "routine": "iagMessTestSendMessageEngin",
+       "entries": 16
+      },
+      {
+       "routine": "PlayerGetType",
+       "entries": 17
+      },
+      {
+       "routine": "iabTestEngin",
+       "entries": 16
+      },
+      {
+       "routine": "EnginNextEtape",
+       "entries": 16
+      },
+      {
+       "routine": "BonusGetValEngin",
+       "entries": 24
+      },
+      {
+       "routine": "EnginTrouveCible",
+       "entries": 1
+      },
+      {
+       "routine": "PlayerEstAllie",
+       "entries": 7
+      },
+      {
+       "routine": "GetBit",
+       "entries": 64
+      },
+      {
+       "routine": "CalculFatigue",
+       "entries": 16
+      },
+      {
+       "routine": "SetEnginCollision",
+       "entries": 8
+      },
+      {
+       "routine": "SetCollision",
+       "entries": 8
+      },
+      {
+       "routine": "Chemin_ModifieZone",
+       "entries": 8
+      },
+      {
+       "routine": "Random",
+       "entries": 8
+      }
+     ]
+    },
+    {
+     "routine": "CalculBatimentNextEtape",
+     "entries": 1,
+     "call_return": "0x42d3ff",
+     "caller": "CalculGame+0xb97",
+     "nested_first_entry_order": [
+      {
+       "routine": "ResetTableauHangar",
+       "entries": 1
+      },
+      {
+       "routine": "IATestUtilite",
+       "entries": 1
+      },
+      {
+       "routine": "BatimentNextEtape",
+       "entries": 1
+      },
+      {
+       "routine": "BagContientTroupe",
+       "entries": 1
+      },
+      {
+       "routine": "CalculTroupe",
+       "entries": 1
+      },
+      {
+       "routine": "BatimentGetCase",
+       "entries": 1
+      },
+      {
+       "routine": "BatimentCollision",
+       "entries": 30
+      },
+      {
+       "routine": "CaseEstDecouverte",
+       "entries": 93
+      },
+      {
+       "routine": "BatimentEstDecouvert",
+       "entries": 3
+      },
+      {
+       "routine": "BatimentContourEstIllumine",
+       "entries": 3
+      },
+      {
+       "routine": "CaseEstIlluminee",
+       "entries": 78
+      }
+     ]
+    },
+    {
+     "routine": "RechercheCalcul",
+     "entries": 1,
+     "call_return": "0x42d404",
+     "caller": "CalculGame+0xb9c",
+     "nested_first_entry_order": [
+      {
+       "routine": "MissionGetNum",
+       "entries": 4
+      }
+     ]
+    },
+    {
+     "routine": "PlayerInitAllianceCompteur",
+     "entries": 1,
+     "call_return": "0x42d409",
+     "caller": "CalculGame+0xba1",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "SetUpdateChamp",
+     "entries": 1,
+     "call_return": "0x42d40e",
+     "caller": "CalculGame+0xba6",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "UpdateChamp",
+     "entries": 1,
+     "call_return": "0x42d413",
+     "caller": "CalculGame+0xbab",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "CalculMatiere",
+     "entries": 1,
+     "call_return": "0x42d418",
+     "caller": "CalculGame+0xbb0",
+     "nested_first_entry_order": [
+      {
+       "routine": "IntToBCD",
+       "entries": 8
+      },
+      {
+       "routine": "GetBit",
+       "entries": 16
+      },
+      {
+       "routine": "BCDToInt",
+       "entries": 4
+      },
+      {
+       "routine": "SetBit",
+       "entries": 2
+      }
+     ]
+    },
+    {
+     "routine": "CalculCompteurMarche",
+     "entries": 1,
+     "call_return": "0x42d424",
+     "caller": "CalculGame+0xbbc",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "CalculCompteurProposition",
+     "entries": 1,
+     "call_return": "0x42d432",
+     "caller": "CalculGame+0xbca",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "NextAnimTerrain",
+     "entries": 1,
+     "call_return": "0x42d446",
+     "caller": "CalculGame+0xbde",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "NextAnimVeget",
+     "entries": 1,
+     "call_return": "0x42d46c",
+     "caller": "CalculGame+0xc04",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "PlayerAttaqueCalculSympa",
+     "entries": 1,
+     "call_return": "0x42d471",
+     "caller": "CalculGame+0xc09",
+     "nested_first_entry_order": [
+      {
+       "routine": "MAJSympathie",
+       "entries": 12
+      }
+     ]
+    },
+    {
+     "routine": "TestFinDeMission",
+     "entries": 1,
+     "call_return": "0x42d486",
+     "caller": "CalculGame+0xc1e",
+     "nested_first_entry_order": [
+      {
+       "routine": "BatimentExiste",
+       "entries": 1000
+      },
+      {
+       "routine": "BatimentGetPlayer",
+       "entries": 1
+      },
+      {
+       "routine": "BatimentGetType",
+       "entries": 1
+      },
+      {
+       "routine": "TestRessource",
+       "entries": 3
+      },
+      {
+       "routine": "MissionGetNum",
+       "entries": 1
+      }
+     ]
+    }
+   ]
+  },
+  "between_frames": {
+   "routines_in_first_entry_order": [
+    {
+     "routine": "AffGame",
+     "entries": 1,
+     "not_executed_boundary": true
+    },
+    {
+     "routine": "PlaySnd_Manage",
+     "entries": 1,
+     "not_executed_boundary": true
+    },
+    {
+     "routine": "MCICD_Manage",
+     "entries": 1,
+     "not_executed_boundary": true
+    },
+    {
+     "routine": "ProgIteration",
+     "entries": 1
+    },
+    {
+     "routine": "CalculGame",
+     "entries": 1
+    }
+   ],
+   "top_level": [
+    {
+     "routine": "AffGame",
+     "entries": 1,
+     "not_executed_boundary": true,
+     "call_return": "0x475068",
+     "caller": "ProgIteration+0x5a",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "PlaySnd_Manage",
+     "entries": 1,
+     "not_executed_boundary": true,
+     "call_return": "0x460220",
+     "caller": "_WinMain@16+0xb0",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "MCICD_Manage",
+     "entries": 1,
+     "not_executed_boundary": true,
+     "call_return": "0x460225",
+     "caller": "_WinMain@16+0xb5",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "ProgIteration",
+     "entries": 1,
+     "call_return": "0x460212",
+     "caller": "_WinMain@16+0xa2",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "CalculGame",
+     "entries": 1,
+     "call_return": "0x475063",
+     "caller": "ProgIteration+0x55",
+     "nested_first_entry_order": []
+    }
+   ]
+  },
+  "frame1": {
+   "routines_in_first_entry_order": [
+    {
+     "routine": "PlayerAttaqueReset",
+     "entries": 1
+    },
+    {
+     "routine": "EvenementEnCours",
+     "entries": 1
+    },
+    {
+     "routine": "MCICD_Play",
+     "entries": 1,
+     "not_executed_boundary": true
+    },
+    {
+     "routine": "PlayerGetType",
+     "entries": 5
+    },
+    {
+     "routine": "InputGame",
+     "entries": 1
+    },
+    {
+     "routine": "MouseZone",
+     "entries": 1
+    },
+    {
+     "routine": "ScrollTerrain",
+     "entries": 1
+    },
+    {
+     "routine": "NextGouttes",
+     "entries": 1
+    },
+    {
+     "routine": "InputSend",
+     "entries": 1
+    },
+    {
+     "routine": "ReseauActif",
+     "entries": 1
+    },
+    {
+     "routine": "MissionGetNum",
+     "entries": 10
+    },
+    {
+     "routine": "CalculNextReflect",
+     "entries": 4
+    },
+    {
+     "routine": "iaCalculPlayer",
+     "entries": 4
+    },
+    {
+     "routine": "AvanceMonstre",
+     "entries": 1
+    },
+    {
+     "routine": "iaSolver",
+     "entries": 1
+    },
+    {
+     "routine": "ProcessInputGame",
+     "entries": 4
+    },
+    {
+     "routine": "MessageBoxCalcul",
+     "entries": 1
+    },
+    {
+     "routine": "GameNextFrame",
+     "entries": 1
+    },
+    {
+     "routine": "CalculIconeAction",
+     "entries": 1
+    },
+    {
+     "routine": "EnginGetNbSelection",
+     "entries": 1
+    },
+    {
+     "routine": "BatimentGetSelection",
+     "entries": 1
+    },
+    {
+     "routine": "ProjectileCalcul",
+     "entries": 1
+    },
+    {
+     "routine": "ProjectileAnim",
+     "entries": 100
+    },
+    {
+     "routine": "CalculEnginNextEtape",
+     "entries": 1
+    },
+    {
+     "routine": "IATestUtilite",
+     "entries": 17
+    },
+    {
+     "routine": "iagMessTestSendMessageEngin",
+     "entries": 16
+    },
+    {
+     "routine": "iabTestEngin",
+     "entries": 16
+    },
+    {
+     "routine": "EnginNextEtape",
+     "entries": 16
+    },
+    {
+     "routine": "BonusGetValEngin",
+     "entries": 24
+    },
+    {
+     "routine": "GetBit",
+     "entries": 80
+    },
+    {
+     "routine": "CalculFatigue",
+     "entries": 16
+    },
+    {
+     "routine": "SetEnginCollision",
+     "entries": 8
+    },
+    {
+     "routine": "SetCollision",
+     "entries": 8
+    },
+    {
+     "routine": "Chemin_ModifieZone",
+     "entries": 8
+    },
+    {
+     "routine": "Random",
+     "entries": 8
+    },
+    {
+     "routine": "CalculBatimentNextEtape",
+     "entries": 1
+    },
+    {
+     "routine": "ResetTableauHangar",
+     "entries": 1
+    },
+    {
+     "routine": "BatimentNextEtape",
+     "entries": 1
+    },
+    {
+     "routine": "BagContientTroupe",
+     "entries": 1
+    },
+    {
+     "routine": "CalculTroupe",
+     "entries": 1
+    },
+    {
+     "routine": "BatimentGetCase",
+     "entries": 1
+    },
+    {
+     "routine": "BatimentCollision",
+     "entries": 30
+    },
+    {
+     "routine": "CaseEstDecouverte",
+     "entries": 93
+    },
+    {
+     "routine": "BatimentEstDecouvert",
+     "entries": 3
+    },
+    {
+     "routine": "BatimentContourEstIllumine",
+     "entries": 3
+    },
+    {
+     "routine": "CaseEstIlluminee",
+     "entries": 78
+    },
+    {
+     "routine": "RechercheCalcul",
+     "entries": 1
+    },
+    {
+     "routine": "PlayerInitAllianceCompteur",
+     "entries": 1
+    },
+    {
+     "routine": "SetUpdateChamp",
+     "entries": 1
+    },
+    {
+     "routine": "UpdateChamp",
+     "entries": 1
+    },
+    {
+     "routine": "CalculMatiere",
+     "entries": 1
+    },
+    {
+     "routine": "IntToBCD",
+     "entries": 8
+    },
+    {
+     "routine": "BCDToInt",
+     "entries": 4
+    },
+    {
+     "routine": "SetBit",
+     "entries": 2
+    },
+    {
+     "routine": "CalculCompteurMarche",
+     "entries": 1
+    },
+    {
+     "routine": "CalculCompteurProposition",
+     "entries": 1
+    },
+    {
+     "routine": "NextAnimTerrain",
+     "entries": 1
+    },
+    {
+     "routine": "NextAnimVeget",
+     "entries": 1
+    },
+    {
+     "routine": "PlayerAttaqueCalculSympa",
+     "entries": 1
+    },
+    {
+     "routine": "TestFinDeMission",
+     "entries": 1
+    },
+    {
+     "routine": "BatimentExiste",
+     "entries": 1000
+    },
+    {
+     "routine": "BatimentGetPlayer",
+     "entries": 1
+    },
+    {
+     "routine": "BatimentGetType",
+     "entries": 1
+    },
+    {
+     "routine": "TestRessource",
+     "entries": 3
+    }
+   ],
+   "top_level": [
+    {
+     "routine": "PlayerAttaqueReset",
+     "entries": 1,
+     "call_return": "0x42d2e3",
+     "caller": "CalculGame+0xa7b",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "EvenementEnCours",
+     "entries": 1,
+     "call_return": "0x42d2e8",
+     "caller": "CalculGame+0xa80",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "MCICD_Play",
+     "entries": 1,
+     "not_executed_boundary": true,
+     "call_return": "0x42d32d",
+     "caller": "CalculGame+0xac5",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "PlayerGetType",
+     "entries": 5,
+     "call_return": "0x42d37e",
+     "caller": "CalculGame+0xb16",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "InputGame",
+     "entries": 1,
+     "call_return": "0x42d340",
+     "caller": "CalculGame+0xad8",
+     "nested_first_entry_order": [
+      {
+       "routine": "MouseZone",
+       "entries": 1
+      },
+      {
+       "routine": "ScrollTerrain",
+       "entries": 1
+      },
+      {
+       "routine": "NextGouttes",
+       "entries": 1
+      }
+     ]
+    },
+    {
+     "routine": "InputSend",
+     "entries": 1,
+     "call_return": "0x42d347",
+     "caller": "CalculGame+0xadf",
+     "nested_first_entry_order": [
+      {
+       "routine": "ReseauActif",
+       "entries": 1
+      }
+     ]
+    },
+    {
+     "routine": "MissionGetNum",
+     "entries": 4,
+     "call_return": "0x42d359",
+     "caller": "CalculGame+0xaf1",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "CalculNextReflect",
+     "entries": 4,
+     "call_return": "0x42d362",
+     "caller": "CalculGame+0xafa",
+     "nested_first_entry_order": [
+      {
+       "routine": "iaCalculPlayer",
+       "entries": 4
+      },
+      {
+       "routine": "AvanceMonstre",
+       "entries": 1
+      },
+      {
+       "routine": "MissionGetNum",
+       "entries": 1
+      },
+      {
+       "routine": "iaSolver",
+       "entries": 1
+      }
+     ]
+    },
+    {
+     "routine": "ProcessInputGame",
+     "entries": 4,
+     "call_return": "0x42d3b5",
+     "caller": "CalculGame+0xb4d",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "MessageBoxCalcul",
+     "entries": 1,
+     "call_return": "0x42d3e6",
+     "caller": "CalculGame+0xb7e",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "GameNextFrame",
+     "entries": 1,
+     "call_return": "0x42d3eb",
+     "caller": "CalculGame+0xb83",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "CalculIconeAction",
+     "entries": 1,
+     "call_return": "0x42d3f0",
+     "caller": "CalculGame+0xb88",
+     "nested_first_entry_order": [
+      {
+       "routine": "EnginGetNbSelection",
+       "entries": 1
+      },
+      {
+       "routine": "BatimentGetSelection",
+       "entries": 1
+      }
+     ]
+    },
+    {
+     "routine": "ProjectileCalcul",
+     "entries": 1,
+     "call_return": "0x42d3f5",
+     "caller": "CalculGame+0xb8d",
+     "nested_first_entry_order": [
+      {
+       "routine": "ProjectileAnim",
+       "entries": 100
+      }
+     ]
+    },
+    {
+     "routine": "CalculEnginNextEtape",
+     "entries": 1,
+     "call_return": "0x42d3fa",
+     "caller": "CalculGame+0xb92",
+     "nested_first_entry_order": [
+      {
+       "routine": "IATestUtilite",
+       "entries": 16
+      },
+      {
+       "routine": "iagMessTestSendMessageEngin",
+       "entries": 16
+      },
+      {
+       "routine": "iabTestEngin",
+       "entries": 16
+      },
+      {
+       "routine": "EnginNextEtape",
+       "entries": 16
+      },
+      {
+       "routine": "BonusGetValEngin",
+       "entries": 24
+      },
+      {
+       "routine": "GetBit",
+       "entries": 64
+      },
+      {
+       "routine": "CalculFatigue",
+       "entries": 16
+      },
+      {
+       "routine": "SetEnginCollision",
+       "entries": 8
+      },
+      {
+       "routine": "SetCollision",
+       "entries": 8
+      },
+      {
+       "routine": "Chemin_ModifieZone",
+       "entries": 8
+      },
+      {
+       "routine": "Random",
+       "entries": 8
+      }
+     ]
+    },
+    {
+     "routine": "CalculBatimentNextEtape",
+     "entries": 1,
+     "call_return": "0x42d3ff",
+     "caller": "CalculGame+0xb97",
+     "nested_first_entry_order": [
+      {
+       "routine": "ResetTableauHangar",
+       "entries": 1
+      },
+      {
+       "routine": "IATestUtilite",
+       "entries": 1
+      },
+      {
+       "routine": "BatimentNextEtape",
+       "entries": 1
+      },
+      {
+       "routine": "BagContientTroupe",
+       "entries": 1
+      },
+      {
+       "routine": "CalculTroupe",
+       "entries": 1
+      },
+      {
+       "routine": "BatimentGetCase",
+       "entries": 1
+      },
+      {
+       "routine": "BatimentCollision",
+       "entries": 30
+      },
+      {
+       "routine": "CaseEstDecouverte",
+       "entries": 93
+      },
+      {
+       "routine": "BatimentEstDecouvert",
+       "entries": 3
+      },
+      {
+       "routine": "BatimentContourEstIllumine",
+       "entries": 3
+      },
+      {
+       "routine": "CaseEstIlluminee",
+       "entries": 78
+      }
+     ]
+    },
+    {
+     "routine": "RechercheCalcul",
+     "entries": 1,
+     "call_return": "0x42d404",
+     "caller": "CalculGame+0xb9c",
+     "nested_first_entry_order": [
+      {
+       "routine": "MissionGetNum",
+       "entries": 4
+      }
+     ]
+    },
+    {
+     "routine": "PlayerInitAllianceCompteur",
+     "entries": 1,
+     "call_return": "0x42d409",
+     "caller": "CalculGame+0xba1",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "SetUpdateChamp",
+     "entries": 1,
+     "call_return": "0x42d40e",
+     "caller": "CalculGame+0xba6",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "UpdateChamp",
+     "entries": 1,
+     "call_return": "0x42d413",
+     "caller": "CalculGame+0xbab",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "CalculMatiere",
+     "entries": 1,
+     "call_return": "0x42d418",
+     "caller": "CalculGame+0xbb0",
+     "nested_first_entry_order": [
+      {
+       "routine": "IntToBCD",
+       "entries": 8
+      },
+      {
+       "routine": "GetBit",
+       "entries": 16
+      },
+      {
+       "routine": "BCDToInt",
+       "entries": 4
+      },
+      {
+       "routine": "SetBit",
+       "entries": 2
+      }
+     ]
+    },
+    {
+     "routine": "CalculCompteurMarche",
+     "entries": 1,
+     "call_return": "0x42d424",
+     "caller": "CalculGame+0xbbc",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "CalculCompteurProposition",
+     "entries": 1,
+     "call_return": "0x42d432",
+     "caller": "CalculGame+0xbca",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "NextAnimTerrain",
+     "entries": 1,
+     "call_return": "0x42d446",
+     "caller": "CalculGame+0xbde",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "NextAnimVeget",
+     "entries": 1,
+     "call_return": "0x42d46c",
+     "caller": "CalculGame+0xc04",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "PlayerAttaqueCalculSympa",
+     "entries": 1,
+     "call_return": "0x42d471",
+     "caller": "CalculGame+0xc09",
+     "nested_first_entry_order": []
+    },
+    {
+     "routine": "TestFinDeMission",
+     "entries": 1,
+     "call_return": "0x42d486",
+     "caller": "CalculGame+0xc1e",
+     "nested_first_entry_order": [
+      {
+       "routine": "BatimentExiste",
+       "entries": 1000
+      },
+      {
+       "routine": "BatimentGetPlayer",
+       "entries": 1
+      },
+      {
+       "routine": "BatimentGetType",
+       "entries": 1
+      },
+      {
+       "routine": "TestRessource",
+       "entries": 3
+      },
+      {
+       "routine": "MissionGetNum",
+       "entries": 1
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "boundaries": [
+  {
+   "phase": "load_tail",
+   "routine": "DDLockSurface",
+   "caller": "RestoreAll+0x59",
+   "top_callee": "RestoreAll"
+  },
+  {
+   "phase": "load_tail",
+   "routine": "LoadPie",
+   "caller": "RestoreAll+0x67",
+   "top_callee": "RestoreAll"
+  },
+  {
+   "phase": "load_tail",
+   "routine": "DDUnlockSurface",
+   "caller": "RestoreAll+0x87",
+   "top_callee": "RestoreAll"
+  },
+  {
+   "phase": "load_tail",
+   "routine": "DDFlipPage",
+   "caller": "RestoreAll+0x91",
+   "top_callee": "RestoreAll"
+  },
+  {
+   "phase": "load_tail",
+   "routine": "DDSetPalette",
+   "caller": "RestoreAll+0x9b",
+   "top_callee": "RestoreAll"
+  },
+  {
+   "phase": "load_tail",
+   "routine": "DDLockSurface",
+   "caller": "RestoreAll+0xa0",
+   "top_callee": "RestoreAll"
+  },
+  {
+   "phase": "load_tail",
+   "routine": "LoadPie",
+   "caller": "RestoreAll+0xae",
+   "top_callee": "RestoreAll"
+  },
+  {
+   "phase": "load_tail",
+   "routine": "DDUnlockSurface",
+   "caller": "RestoreAll+0xce",
+   "top_callee": "RestoreAll"
+  },
+  {
+   "phase": "load_tail",
+   "routine": "DDFlipPage",
+   "caller": "RestoreAll+0xd8",
+   "top_callee": "RestoreAll"
+  },
+  {
+   "phase": "load_tail",
+   "routine": "DDLockSurface",
+   "caller": "MenuInit+0xc4",
+   "top_callee": "MenuInit"
+  },
+  {
+   "phase": "load_tail",
+   "routine": "FilledBox",
+   "caller": "MenuInit+0x14a",
+   "top_callee": "MenuInit"
+  },
+  {
+   "phase": "load_tail",
+   "routine": "LoadPie",
+   "caller": "MenuInit+0x1c0",
+   "top_callee": "MenuInit"
+  },
+  {
+   "phase": "load_tail",
+   "routine": "MCICD_Play",
+   "caller": "MenuInit+0x202",
+   "top_callee": "MenuInit"
+  },
+  {
+   "phase": "load_tail",
+   "routine": "DDUnlockSurface",
+   "caller": "MenuInit+0x9db",
+   "top_callee": "MenuInit"
+  },
+  {
+   "phase": "load_tail",
+   "routine": "DDFlipPage",
+   "caller": "MenuInit+0x9ec",
+   "top_callee": "MenuInit"
+  },
+  {
+   "phase": "load_tail",
+   "routine": "MCICD_Play",
+   "caller": "CalculGame+0xac5",
+   "top_callee": "MCICD_Play"
+  },
+  {
+   "phase": "between_frames",
+   "routine": "AffGame",
+   "caller": "ProgIteration+0x5a",
+   "top_callee": "AffGame"
+  },
+  {
+   "phase": "between_frames",
+   "routine": "PlaySnd_Manage",
+   "caller": "_WinMain@16+0xb0",
+   "top_callee": "PlaySnd_Manage"
+  },
+  {
+   "phase": "between_frames",
+   "routine": "MCICD_Manage",
+   "caller": "_WinMain@16+0xb5",
+   "top_callee": "MCICD_Manage"
+  },
+  {
+   "phase": "frame1",
+   "routine": "MCICD_Play",
+   "caller": "CalculGame+0xac5",
+   "top_callee": "MCICD_Play"
+  }
+ ]
+}
