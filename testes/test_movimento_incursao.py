@@ -69,3 +69,35 @@ class RotinasPlanas(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+CAPTURA_MOVIMENTO = RAIZ / 'evidencias/fundacoes-quadro/captura-movimento-incursao-v1.json'
+
+
+@unittest.skipUnless(CAPTURA_MOVIMENTO.exists(), 'Movement capture not committed')
+class ReplayMovimento(unittest.TestCase):
+    """Every isolated call of a routine with a flat translation replays exactly from its read-before-write bytes."""
+    def test_flat_routines_replay_exactly(self):
+        import json
+        from compactar_captura_isolada import expandir
+        from incursao_core import traducao_core
+        from test_chamadas_quadro_core import MemoriaEsparsa, regs, sub_chemin
+        registros = ('EAX', 'EBX', 'ECX', 'EDX', 'ESI', 'EDI', 'EBP')
+        vistos = {}
+        for c in json.loads(CAPTURA_MOVIMENTO.read_bytes())['calls']:
+            traduzir = traducao_core(c['routine'])
+            if traduzir is None:
+                continue
+            c = expandir(c)
+            with self.subTest(routine=c['routine'], frame=c['frame'], entry=c['entry_registers']['EAX']):
+                m = MemoriaEsparsa({int(a, 16): v for a, v, _ in c['read_before_write']}, 0)
+                entrada = regs(c['entry_registers'])
+                pilha = [sub_chemin(m, entrada)] if c['routine'] == 'Chemin_ModifieZone' else []
+                saida = dict(entrada, **traduzir(m, entrada, pilha, None))
+                nativo = regs(c['exit_registers'])
+                self.assertEqual({k: hex(saida[k] & 0xffffffff) for k in registros},
+                                 {k: hex(nativo[k]) for k in registros})
+                m.conferir(self, c['changed_bytes'])
+                vistos[c['routine']] = vistos.get(c['routine'], 0) + 1
+        self.assertEqual(set(vistos), {'SetEnginCollision', 'SetCollision', 'Chemin_ModifieZone', 'TerrainEnCollision',
+                                       'ResetCollision', 'memset'})
