@@ -13,7 +13,9 @@ from dataclasses import dataclass
 
 ROTINAS = {'RestoreAll': 0x474b08, 'AffGame': 0x417698, 'DDInit': 0x43f50b}
 ESTRUTURAS, ESTRUTURA_PASSO, ESTRUTURA_ESTADO = 0x49a0c8, 276, 5
-ESTADOS_ESTRUTURA_PROVADOS = frozenset({0, 5})      # captured pool: 999 free + the Santuario (state 5)
+# captured pool: 999 free records + the Santuario (type 2); its mode was run natively at 0..7 on five origins
+ESTADOS_ESTRUTURA_PROVADOS = frozenset(range(8))
+TIPO_ESTRUTURA_PROVADO = 2
 # view origins run natively for both routines (isolated captures, 64x64 map): the captured (4, 6) plus a sampled grid
 ORIGENS_PROVADAS = frozenset({
     (0, 0), (0, 1), (0, 2), (0, 6), (0, 7), (0, 12), (0, 14), (0, 18), (0, 21), (0, 24),
@@ -55,9 +57,7 @@ def _guardas(memoria, rotina):
     def ler(nome, valor):
         lidas.append((nome, valor))
         return valor
-    if ler('[0x4dfb44]', memoria.u8(0x4dfb44)) != 0:
-        raise DependenciaExibicao(rotina, 0x43f191, 'DDFlipPage shake path would advance the RNG cursor 0x4e1d18 '
-                                  'and 0x4dfb44; not captured')
+    ler('[0x4dfb44]', memoria.u8(0x4dfb44))      # shake counter: modelled by _voltas below
     viewport = (ler('[0x508724]', memoria.u16(0x508724)), ler('[0x508726]', memoria.u16(0x508726)))
     if viewport != VIEWPORT:
         raise DependenciaExibicao(rotina, 0x4178f7, f'viewport {viewport} is not the captured {VIEWPORT}')
@@ -67,20 +67,54 @@ def _guardas(memoria, rotina):
                                   '(0x411147, 0x412392, 0x415b77/0x415c19) only proved native on the sampled origins')
     estados = {memoria.u8(ESTRUTURAS + i*ESTRUTURA_PASSO + ESTRUTURA_ESTADO) for i in range(1000)}
     lidas.append(('structure states', tuple(sorted(estados))))
-    if not estados <= ESTADOS_ESTRUTURA_PROVADOS:
-        raise DependenciaExibicao(rotina, CURSOR_RNG_SITIOS[0], f'structure states {sorted(estados)}: AffBatiments '
-                                  'advances 0x4e1d18 for state 3 (69 sites); only states {0,5} captured')
+    ocupadas = [i for i in range(1000) if memoria.u8(ESTRUTURAS + i*ESTRUTURA_PASSO + ESTRUTURA_ESTADO)]
+    if not estados <= ESTADOS_ESTRUTURA_PROVADOS or len(ocupadas) > 1 or any(
+            memoria.u8(ESTRUTURAS + i*ESTRUTURA_PASSO + 8) != TIPO_ESTRUTURA_PROVADO for i in ocupadas):
+        raise DependenciaExibicao(rotina, CURSOR_RNG_SITIOS[0], f'structure states {sorted(estados)}, occupied '
+                                  f'records {ocupadas}: captured only for one type-{TIPO_ESTRUTURA_PROVADO} structure in '
+                                  'modes 0..7 (AffBatiments has 69 0x4e1d18 sites, none reached there)')
+    monstros = memoria.u8(MONSTROS)
+    if monstros > 1:
+        raise DependenciaExibicao(rotina, 0x41591f, f'monster count {monstros}: only 0 and 1 (raid unit 16, '
+                                  'on screen or not) captured; a second monster is not proved')
+    pool = memoria.u32(POOL_PROJETEIS)
+    ativos = [i for i in range(100) if memoria.u8(pool + 56*i + 2)]
+    if len(ativos) > 1 or any(memoria.u8(pool + 56*i) not in TIPOS_PROJETIL_PROVADOS for i in ativos):
+        raise DependenciaExibicao(rotina, 0x46ff70, f'projectile slots {ativos}: captured only one raid effect '
+                                  f'projectile of type {sorted(TIPOS_PROJETIL_PROVADOS)}')
     return tuple(lidas)
 
 
+MONSTROS, POOL_PROJETEIS, TIPOS_PROJETIL_PROVADOS = 0x50b178, 0x5080f0, frozenset({31, 32})
+CURSOR, TREMOR, CONTADOR_QUADROS, PAGINAS = 0x4e1d18, 0x4dfb44, 0x508f7c, 0x49a05b
+
+
+def _voltas(memoria, voltas):
+    """DDFlipPage 0x43f14f shake path, ``voltas`` consecutive calls: the logic-state stores.
+
+    While [0x4dfb44] (n) is nonzero a call reads table[cursor], advances the cursor (u8) and, when the low byte of the
+    frame counter [0x508f7c] is even, decrements n.  The table value only picks the BltFast offset (display).
+    """
+    cursor, n, par = memoria.u8(CURSOR), memoria.u8(TREMOR), memoria.u8(CONTADOR_QUADROS) & 1 == 0
+    cursor0, n0 = cursor, n
+    for _ in range(voltas):
+        if n:
+            cursor = (cursor+1) & 0xff
+            if par:
+                n -= 1
+    return (((CURSOR, 1, cursor),) if cursor != cursor0 else ()) + (((TREMOR, 1, n),) if n != n0 else ())
+
+
 def restaurar_tudo(memoria):
-    """RestoreAll 0x474b08 in the captured domain: no logic-state write (the DGROUP stores are display bookkeeping)."""
-    return EfeitosExibicao('RestoreAll', verificacoes=_guardas(memoria, 'RestoreAll'))
+    """RestoreAll 0x474b08 in the captured domain: only the shake path of its two DDFlipPage calls writes logic state."""
+    guardas = _guardas(memoria, 'RestoreAll')
+    return EfeitosExibicao('RestoreAll', _voltas(memoria, 2), guardas)
 
 
 def desenhar_jogo(memoria):
-    """AffGame 0x417698 (mode 0x12 body) in the captured domain: no logic-state write."""
-    return EfeitosExibicao('AffGame', verificacoes=_guardas(memoria, 'AffGame'))
+    """AffGame 0x417698 (mode 0x12 body): the flip loop runs [0x49a05b] + 1 DDFlipPage calls (shake path only)."""
+    guardas = _guardas(memoria, 'AffGame')
+    return EfeitosExibicao('AffGame', _voltas(memoria, memoria.u8(PAGINAS)+1), guardas)
 
 
 def inicializar_dimensoes(memoria, alta_resolucao=True):
@@ -111,11 +145,8 @@ def ddunlocksurface(memoria):
 
 
 def ddflippage(memoria, copiar=1):
-    """DDFlipPage 0x43f14f(1): BltFast pair only; no DGROUP write while [0x4dfb44] == 0; EAX = 0."""
-    if memoria.u8(0x4dfb44) != 0:
-        raise DependenciaExibicao('DDFlipPage', 0x43f191, 'shake path (cursor 0x4e1d18 advance) not modelled; native '
-                                  'AffGame: cursor +1, [0x4dfb44] -1; RestoreAll: cursor +2')
-    return EfeitosExibicao('DDFlipPage', (), eax=0)
+    """DDFlipPage 0x43f14f(1): BltFast pair; DGROUP writes only through the shake path (see _voltas); EAX = 0."""
+    return EfeitosExibicao('DDFlipPage', _voltas(memoria, 1), eax=0)
 
 
 def filledbox(memoria):

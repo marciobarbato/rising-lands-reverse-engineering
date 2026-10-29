@@ -82,8 +82,14 @@ class Economia:
 
     @classmethod
     def da_memoria(cls, m):
-        """``vivo`` over a live memory map: ``m.vista(0x4e2ea8, 128)``."""
-        return cls.vivo(m.vista(BASE_RECURSOS, TAMANHO_TABELA))
+        """``vivo`` over a live memory map: ``m.vista(0x4e2ea8, 128)``.
+
+        Bound this way, ``suficiente`` runs the original TestRessource over ``m``
+        (``quadro_economia.recursos_suficientes``): any player byte, as the original.
+        """
+        self = cls.vivo(m.vista(BASE_RECURSOS, TAMANHO_TABELA))
+        self.memoria_viva = m
+        return self
 
     def __init__(self, memoria=None):
         # Legacy/fixture form: copies. Use Economia.vivo/da_memoria for the live original table.
@@ -159,6 +165,9 @@ class Economia:
 
     def suficiente(self, jogador, comida, pedra, pecas):
         """TestRessource 0x4676e5: comparações unsigned, aceita igualdade."""
+        if getattr(self, 'memoria_viva', None) is not None:
+            from quadro_economia import recursos_suficientes
+            return bool(recursos_suficientes(self.memoria_viva, jogador, comida, pedra, pecas))
         return all((custo & 0xffff) <= saldo
                    for custo, saldo in zip((comida, pedra, pecas), self.consultar(jogador)))
 

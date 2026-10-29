@@ -67,7 +67,9 @@ def base_cenario(cenario):
             import cenarios_oraculo
             from mapa_memoria_m1 import carregar_blocos, carregar_json, expandir_captura
         finally:
-            sys.path[:] = caminho
+            # Keep economia's priority but keep the folders the imports added: cached modules such as
+            # ambiente_missoes will not add them again (Missions' carregador_cabecalho needs graficos' sequenciais).
+            sys.path[:] = caminho + [p for p in sys.path if p not in caminho]
         captura = expandir_captura(carregar_json(cenarios_oraculo.caminho(cenario, 'captura_m1')),
                                    carregar_json(cenarios_oraculo.caminho(cenario, 'entrada')))
         final = captura['oracle']['final_state']

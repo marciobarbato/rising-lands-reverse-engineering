@@ -40,6 +40,7 @@ import sys
 from ambiente_ia_runtime import CD, ROOT
 from composicao_quadro1_ia import Registro as RegistroBase
 from entrada_quadro_ia import calcular_icone_acao, entrada_jogo, enviar_entrada, iniciar_menu
+from incursao_ia import enviar_mensagem_unidade
 from laco_despachantes import calcular_proxima_etapa_estruturas, calcular_proxima_etapa_unidades
 from proxima_etapa_quadro import proxima_etapa_estrutura, proxima_etapa_unidade, tabelas_imagem
 from quadro_calcul_game import calcular_quadro
@@ -369,6 +370,12 @@ def provedores(mapa, prov, mm, ctx, registro, janelas, travessias, fase, regs):
         'EnginOccupeCase': lambda sitio, unidade, celula, filtro: int(ocupa_celula(
             mm.ler(mm.u32(0x4e19a0) + 276 * unidade, 276), celula, filtro)),
         'AvanceMonstre': lambda sitio, jogador: avancar_monstros(mm, p),
+        'iaProbPost': lambda sitio, jogador, tipo, ebx, ecx, pilha: maquina.postar(
+            jogador, tipo, (ebx, ecx) + tuple(pilha)) & 0xffffffff,
+        'ProjectileInit': lambda sitio, tipo, origem, alvo, modo, pilha: PoolProjeteis(
+            memoria=mm.vista(mm.u32(0x5080f0), 5600)).iniciar(tipo, origem, alvo, modo, *pilha),
+        'iagUnitSendMessage': lambda sitio, unidade, mensagem, alvo: enviar_mensagem_unidade(
+            mm, p, unidade, mensagem, alvo),
         'iaSolver': lambda sitio, contexto: maquina.atualizar((contexto - 0x5148b0) // 16) & 0xffffffff,
         'ProcessInputGame': lambda sitio, jogador: processar_entrada(mm, jogador, ctx.comandos),
         'MessageBoxCalcul': lambda sitio: calcular_caixa_mensagens(mm),
