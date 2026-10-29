@@ -2,6 +2,7 @@
 import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
 import shutil
 
@@ -17,7 +18,7 @@ def prepare_units(source, cd, output):
     inputs.mkdir(exist_ok=True)
     shutil.copy2(module_path.parent / 'fontes/manifesto.json', inputs / 'manifesto.json')
     if not (inputs / 'cd').exists():
-        (inputs / 'cd').symlink_to(cd, target_is_directory=True)
+        (inputs / 'cd').symlink_to(os.path.relpath(Path(cd).resolve(), inputs.resolve()), target_is_directory=True)
     catalog = graphics.Catalogo(inputs)
     palette = catalog.paleta()
     metadata = {}
