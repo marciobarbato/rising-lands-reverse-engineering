@@ -275,6 +275,45 @@ class ArquivosCRT:
         f['cursor'] = alvo
         return 0
 
+    def fseek_crt(self, chamada):
+        """CRT fseek 0x48cda2 (Core inventory): EAX FILE*, EDX s32 offset, EBX whence; EAX 0."""
+        fluxo, deslocamento, origem = chamada.argumentos
+        f = self._fluxo(fluxo)
+        if origem not in SEEK:
+            raise ParadaVinculoDeclarado(f'fseek whence {origem} (errno path) is outside the fixture')
+        base = (0, f['cursor'], len(f['data']))[origem]
+        alvo = base+(deslocamento if deslocamento < 0x80000000 else deslocamento-0x100000000)
+        if alvo < 0:
+            raise ParadaVinculoDeclarado('fseek before file start is outside the fixture')
+        f['cursor'] = alvo
+        return 0
+
+    def fgets_crt(self, chamada):
+        """CRT fgets 0x48ce96 (Core inventory): EAX buf, EDX n, EBX FILE*; EAX buf, or 0 at EOF.
+
+        Stores at most n-1 bytes up to and including LF, then a NUL. Only binary
+        streams are declared: a text-mode stream reaching a CR would need the CRT
+        CR/LF translation, which this fixture does not model, so it stops.
+        """
+        destino, n, fluxo = chamada.argumentos
+        f = self._fluxo(fluxo)
+        n = n if n < 0x80000000 else n-0x100000000
+        if n <= 1:
+            if n == 1:
+                chamada.escrever(destino, b'\0')
+            return destino
+        dados, c = f['data'], f['cursor']
+        if c >= len(dados):
+            return 0
+        fim = dados.find(b'\n', c, c+n-1)
+        linha = dados[c:(fim+1 if fim >= 0 else min(c+n-1, len(dados)))]
+        if f['record']['mode'] == 'r' and b'\r' in linha:
+            raise ParadaVinculoDeclarado('fgets on a text-mode stream with CR: CRT CR/LF translation not declared')
+        chamada.escrever(destino, linha+b'\0')
+        f['cursor'] = c+len(linha)
+        f['reads'] += 1
+        return destino
+
 
 class ArquivosWin32:
     """KERNEL32 file-handle fixture reached only through original CRT bodies.
