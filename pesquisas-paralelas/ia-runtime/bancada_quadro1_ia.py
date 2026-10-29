@@ -90,13 +90,21 @@ class PausaEnderecos(Isolamento):
         self.observador(self.entradas[regs['EIP']], self.b.fase, regs, self.b)
 
 
-def executar_caminho_pausas(enderecos, observador, blocos=None):
-    """Replay Missions' committed path with ``PausaEnderecos``; ``blocos(fase, endereco)`` sees every executed block."""
-    cap = json.loads(CAPTURA_QUADRO.read_bytes())
+def executar_caminho_pausas(enderecos, observador, blocos=None, cenario='v1'):
+    """Replay Missions' committed path (scenario ``v1`` or ``exibicao``) with ``PausaEnderecos``;
+    ``blocos(fase, endereco)`` sees every executed block."""
+    import cenarios_oraculo
+    captura = cenarios_oraculo.caminho(cenario, 'captura_quadro')
+    cap = json.loads(captura.read_bytes())
     ni = cap['named_inputs']['m1']
-    b = BancadaQuadroMissaoOriginal(cq.entradas_quadro(ni['allocation_fill'], ni['clock_ms'][0]), segundos=120)
-    b.iniciar_relogio()
-    b.executar_inicio()
+    if cenario == 'v1':
+        b = BancadaQuadroMissaoOriginal(cq.entradas_quadro(ni['allocation_fill'], ni['clock_ms'][0]), segundos=120)
+        b.iniciar_relogio()
+        b.executar_inicio()
+    else:
+        b = cenarios_oraculo.bancada(cenario, ni['allocation_fill'], ni['clock_ms'][0], segundos=300)[0]
+        b.iniciar_relogio()
+        b.executar_inicio()
     b.executar_mission_load(60)
     pausa = PausaEnderecos(b, enderecos, observador)
     pausa.instalar()
