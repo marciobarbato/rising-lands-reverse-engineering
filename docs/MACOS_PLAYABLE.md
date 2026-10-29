@@ -124,15 +124,16 @@ native algorithm and does not aggregate domain totals into a game-fidelity claim
 
 ## Independent M3 preparation boundary
 
-The [accepted-state contract](../apps/macos-preview/M3_CONTRACT.md) defines an
-app-owned read-only M1 inspector and an explicit pending-M2 update boundary.
+The original preparation added an app-owned read-only M1 inspector with a
+pending-M2 update boundary. That evidence interface remains immutable; the
+[current contract](../apps/macos-preview/M3_CONTRACT.md) separately defines M2.2 playback and live Rust execution.
 It loads the exact acceptance-pinned evidence with the existing Python block
 decoder. It does not switch the native app to MONDE01 or establish M3 acceptance.
 The [independent audit](../apps/macos-preview/M3_AUDIT.md) records isolation and
 provider dependencies.
 
 
-## Independent accepted-evidence playback (contract v5)
+## Independent accepted-evidence playback (contract v6)
 
 The app offers **Inspeção M2.2 · evidência aceita** separately from the synthetic
 training exercise. It loads the accepted display-v2 MissionLoad state and all
@@ -141,19 +142,19 @@ phase or frame, inspect original-address memory/observed words, or reset. This
 is read-only playback, not a running Python mission or M3 acceptance. M1
 original-v2 inspection remains a separately labeled API.
 
-The shell pins Graphics API **1.4** and calls it with `hud=True`. HUD and
+The shell pins Graphics API **1.5** and calls it with `hud=True`. HUD and
 captured cursor are included within the published domain. Every required region
 is checked against captured memory before rendering, including the minimap and
 player table. Other versions are refused until explicitly reviewed and tested.
 All rendering continues to come exclusively from Graphics.
 
-All 128 drawing phases are checked against the pinned 1.4 full 800×600 native
+All 128 drawing phases are checked against the pinned 1.5 full 800×600 native
 phase-end reference before publication. Undrawn phases preserve the same
 verified surface. Generic named HUD/body stops remain visible outside the
 provider's supported domain. The palette is static; palette cycling is not
 applied. Memory playback verifies 257 phases and 11 checkpoints. The inspector
 uses phase/frame navigation, original-address reads, filter and reset, without
-live orders. See the [v5 contract](../apps/macos-preview/M3_CONTRACT.md) and
+live orders. See the [v6 contract](../apps/macos-preview/M3_CONTRACT.md) and
 [handoff](../apps/macos-preview/HANDOFF.md) for exact evidence and test results.
 
 The full asset pack is being published in the separate rising-lands-assets
@@ -187,9 +188,8 @@ signal after real initialization to reproduce a slow startup without inventing
 worker/asset success or generating CPU load. It is ignored outside smoke mode
 and bounded to 0..80000 ms. Native state-machine tests exercise missing ready,
 late window, out-of-order document/ready events and an unchanged check deadline.
-Graphics stays pinned to its explicitly accepted 1.4 contract; other versions
-still fail. After this robustness delivery, workstream A awaits M2.3 and the
-Claude M3 plan; no new game/UI features are planned here.
+Graphics stays pinned to its explicitly accepted 1.5 contract; other versions
+still fail. That robustness delivery preserved the inspection boundary. Current live no-input work follows the published M3 plan and is described below.
 
 An occluded WebView can report a hidden document while its native window is
 visible. Native smoke repaint barriers therefore wait for a completed WebView
@@ -201,6 +201,27 @@ the last assertion/stage and game/visibility diagnostics.
 
 The 2026-10-29 architecture decision targets a Rust engine/render library with
 a C ABI called by Swift. Python stays as the validated reference and current
-inspection/playback runtime; whether it ships later remains undecided. Live
-frame delivery awaits the coordinator's published C ABI/M3 plan after M2.3.
-No live Python delivery, guessed C symbols or loader behavior is implemented.
+inspection/playback runtime; whether it ships later remains undecided. Live frame logic now uses the published Rust ABI 1.1; Python supplies the current Graphics renderer and copied-buffer bridge. See the live session below.
+
+
+## Live no-input Rust session and input recording
+
+Open the inspection page, select **Abrir Rust ao vivo**, then advance the load
+tail and frames or select **Executar Rust**. Each frame runs Rust ABI 1.1,
+exports original-address memory and renders through Graphics 1.5 with HUD.
+Through frame 128, masked state and full surface hashes must match accepted
+M2.2 before publication. Later frames carry explicit unverified-reference status.
+A named engine/Graphics stop pauses execution and remains visible. Reopening
+Rust resets to S0. The legacy evidence selectors still navigate immutable
+playback. The UI and all player-facing labels remain Brazilian Portuguese.
+
+Image mouse/key events are **record-only** and start no earlier than frame 129.
+The native save panel exports the raw event/poll journal. The Missions scripted
+export is an explicit dependency until its schema lands; unsupported orders
+are never sent to the engine. See [contract v6](../apps/macos-preview/M3_CONTRACT.md)
+for exact ownership, copying, ordering, mask, recorder and stop semantics.
+
+Builds require the hash-checked intact `INSTALHD/RISING.EXE` for four static
+jump tables, the relocatable Python runtime, assets and installed Rust toolchain.
+Cargo output goes to the ignored build target; `motor/` sources are untouched.
+The dylib is copied/signature-checked with the existing app packaging path.
