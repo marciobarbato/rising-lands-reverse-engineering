@@ -45,7 +45,8 @@ def source_hashes():
 
 
 def metadata():
-    return dict(source_revision=subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], text=True).strip(),
+    from pinned_reference import provenance
+    return dict(reference_snapshot=provenance(),source_revision=subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], text=True).strip(),
                 source_dirty_paths=subprocess.check_output(['git', '-C', str(ROOT), 'status', '--porcelain'], text=True).splitlines())
 
 

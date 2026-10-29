@@ -628,3 +628,48 @@ python3 "$lease" --exclusive engine-render-swift-timing -- \
   --library motor/target/release/librising_engine.dylib \
   --output .local/render-swift-timing-new.json
 ```
+
+## Graphics 1.7 follow-up — implementation and reference contract
+
+Current main `ce441852bcada750a8f91da8ed3302f1668c4405` was merged into the
+feature branch as `ea40b31` before changes. No merge into main is performed.
+References are exact Git-object snapshots: logic `7ceeff909b52b7d4f59723f35dfe43a9deda41ff`,
+Graphics `ce441852bcada750a8f91da8ed3302f1668c4405`. `pinned_reference.py`
+materializes selected reference/data roots into the ignored local cache, checks
+all files against their Git blob IDs, marks files read-only and links only the
+existing original media/dependencies. The combined reference manifest SHA-256
+is `0ce0849537f2d45b396ba0efd088ac1f089eefebb07c11561f2995fa5851abb1`.
+No working-tree source-file SHA gates another front's integration. Source pins,
+AST comparison definitions and imports all use the frozen tree. Original
+captures/policies still have exact SHA-256 checks against the checkout. Tests
+simulate legitimate live-source changes and reject changed evidence or frozen
+source. This includes all pilot, AI/runtime, movement, Economy, Combat and long
+phase comparer references, not just Graphics. A shallow clone must fetch the
+pinned commits before validation. The cache contains no Git repository and is
+never committed; no Python reference or original evidence is patched.
+
+ABI 1.4 is additive. All prior layouts/signatures/status codes remain; creation
+accepts 1.0–1.4. New `rl_render_contrato()` returns `0x00010007` (Graphics 1.7),
+and `rl_render_fundo_salvo()` copies actual persistent background pixels with
+address/cache-generation metadata and transactional size-query behavior.
+Observation kind 3 is a write-only saved-background effect with its byte count;
+kind 4 carries the AffText rectangle/font/flags and single-byte text. Existing
+108-byte observations, 304-byte results and 72-byte frame structs stay unchanged.
+The default glyph path stops at `0x459454`, publishing the actual drawn prefix,
+cache and saved background. No production text callback or empty fallback is
+installed. The offline stream fixture's exact recorded-text adapter verifies
+all arguments and the entire partial-surface SHA before honoring the published
+Missions display-v2 non-execution. Bad request/pixel attestations fail. This is
+not glyph reconstruction; production prefix proofs remain separate.
+
+New families: uninhabited type-2/type-3 facades in modes 0..7, scaffold progress
+and temporary clipping, three ordered permutation-cursor draws for mode 3,
+CAVE gray layering (bob 7119 is three pixels above its plain layer), selected
+builder states 11/15 and task 0/1 bodies, blinking selected cell-order markers,
+5×5 placement shading/invalid-cell outlines, CONSTRUTOR/ARMAZÉM tooltip layout,
+font measurement, background save and clipped next-frame restoration. Fire,
+inhabited CAVE, nonzero completed-construction variants (`0x4099A6`), queued/
+foreign/effect bodies, unknown tooltip modes and all other 1.7 boundaries retain
+named original-address stops. Shared assets, cache behavior, layer plans and
+saved-background state allow bounded extensions without changing old ABI layouts.
+Phase 2 remains the sole owner of world/display logic effects.

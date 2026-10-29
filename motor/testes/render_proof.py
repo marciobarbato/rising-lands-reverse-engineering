@@ -2,6 +2,7 @@
 import argparse,ctypes as C,hashlib,json,struct,sys,time
 from pathlib import Path
 from render_abi import *
+from pinned_reference import reference_file,provenance
 from frame_long_evidence import mission_inputs,load_manifest,load_part
 from frame_long_differential import source_hashes,metadata,write_json
 from frame_differential import OriginalImage,static_inputs,FrameInput,FrameRegisters
@@ -22,8 +23,9 @@ def live(library=None):
 def renderer_pins():
     path=ROOT/'motor/testes/render-reference-pins.json';pins=json.loads(path.read_text())
     for name,digest in pins['sources'].items():
-        if sha((ROOT/name).read_bytes())!=digest:raise ValueError('Graphics 1.5 reference hash mismatch: '+name)
-    return pins
+        if sha(reference_file(ROOT/name).read_bytes())!=digest:raise ValueError('Pinned Graphics reference hash mismatch: '+name)
+        if '/evidencias/' in name and sha((ROOT/name).read_bytes())!=digest:raise ValueError('Immutable Graphics evidence changed: '+name)
+    return {**pins,'snapshot':provenance()}
 
 def surface_hashes(frames):
     if frames<=128:

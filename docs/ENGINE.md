@@ -503,3 +503,39 @@ tests plus seven isolated renderer checks, C/Swift/Metal interoperability;
 prepared common check 1,881 tests with 610 optional skips. Detailed proof scopes,
 unchanged native source identities, exact commands and remaining 1.5 boundaries
 are in the [handoff](../motor/HANDOFF.md).
+
+## Reference isolation and Graphics 1.7 — ABI 1.4
+
+Engine tests consume exact Git revisions, independently of the integrated
+working-tree Python. `motor/testes/pinned_reference.py` materializes a read-only,
+ignored reference tree from logic revision `7ceeff9` (the version ported) with
+only Graphics overlaid from `ce441852bcada750a8f91da8ed3302f1668c4405` (1.7).
+Both sources and fixtures come from Git objects, including transitive imports;
+every cached tracked file is checked against its immutable Git blob identity.
+The frozen catalog still verifies the linked original asset payloads. Python
+source pins and copied-definition AST tests read this revision tree. Original
+capture/policy pins continue checking the actual immutable checkout evidence.
+A legitimate upstream Python update therefore needs no engine pin refresh.
+Tests demonstrate live-source independence and rejection of evidence/snapshot
+corruption. Missing pinned commits require fetching them; no cache, reference
+payload or commercial media is committed in motor/.
+
+The renderer now ports Graphics 1.7 construction progress/full/gray facades,
+selected builder construction bodies, order markers, CAVE placement shading,
+tooltip measurement/frame/background save and next-frame restoration. ABI 1.4
+keeps all 1.3 signatures and layouts; explicit creation at 1.0–1.3 remains valid.
+`rl_render_contrato()` identifies Graphics 1.7 separately. The additive
+`rl_render_fundo_salvo()` copies actual saved background bytes; observation
+kinds 3/4 describe write-only background output and the exact text request.
+Reset clears carried background; creation/restoration can read an explicitly
+declared original background buffer. Rendering still leaves world state
+unchanged and never applies display effects on top of phase 2.
+
+Graphics 1.7 does not reconstruct glyphs: default rendering retains the named
+`AffText 0x459454` stop after drawing the native tooltip background. The P1/P2/P3
+full-window evidence declares that original routine non-executed. The offline
+Rust fixture runner supports only that explicitly recorded contract, verifying
+every text/font/rectangle/flags argument and the entire pre-text surface hash.
+The production C ABI cannot install this adapter. Qualified full-window results
+and normal production-prefix results are reported separately. Graphics 1.8
+windows and glyph reconstruction remain outside this port.

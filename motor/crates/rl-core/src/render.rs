@@ -1,4 +1,4 @@
-//! Graphics render API 1.5: read-only live state, persistent indexed surface/cache.
+//! Graphics render API 1.7: read-only live state, persistent indexed surface/cache.
 use crate::render_assets::{Assets, Sprite};
 use crate::{EngineError, MemoriaJogo};
 use std::{collections::BTreeMap, sync::Arc};
@@ -40,14 +40,32 @@ pub struct Observation {
     pub before: [u8; 8],
     pub after: [u8; 8],
 }
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct SavedBackground {
+    pub address: u32,
+    pub pixels: Vec<u8>,
+}
+/// Fixture-only attestation of the original probe's non-executed AffText boundary.
+/// The C ABI never installs these; production rendering always reports glyph stops.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct RecordedTextBoundary {
+    pub text: Vec<u8>,
+    pub rectangle: [i32; 4],
+    pub font: u32,
+    pub flags: [u32; 2],
+    pub surface_sha256: [u8; 32],
+}
 #[derive(Clone, Debug)]
 pub struct Outcome {
+    pub text_boundaries_checked: u32,
     pub disposition: u32,
     pub stop: Option<(u32, String)>,
     pub observations: Vec<Observation>,
 }
 #[derive(Clone)]
 pub struct Renderer {
+    pub saved_background: Option<SavedBackground>,
+    pub recorded_text_boundaries: Option<std::collections::VecDeque<RecordedTextBoundary>>,
     pub tick: Option<u32>,
     pub assets: Arc<Assets>,
     pub surface: Vec<u8>,
@@ -62,6 +80,8 @@ impl Renderer {
             return Err(Error::Invalid("initial surface must have 480000 indices"));
         }
         Ok(Self {
+            saved_background: None,
+            recorded_text_boundaries: None,
             tick: None,
             assets,
             surface: surface.to_vec(),
@@ -79,11 +99,60 @@ impl Renderer {
         self.cache = cache;
         self.cache_generation = self.cache_generation.wrapping_add(1);
         self.last = None;
+        self.saved_background = None;
+        self.recorded_text_boundaries = None;
         Ok(())
+    }
+    #[doc(hidden)]
+    pub fn render_building_fixture(
+        &mut self,
+        m: &MemoriaJogo,
+        x: i32,
+        y: i32,
+        cell: u32,
+    ) -> Result<Outcome> {
+        let assets = Arc::clone(&self.assets);
+        let mut c = Context {
+            background: &mut self.saved_background,
+            text_boundaries: &mut self.recorded_text_boundaries,
+            text_checked: 0,
+            tick: self.tick,
+            m,
+            overrides: BTreeMap::new(),
+            surface: &mut self.surface,
+            cache: &mut self.cache,
+            assets: &assets,
+            observations: Vec::new(),
+            clip: [
+                m.u16(0x49a020)? as i32,
+                m.u16(0x49a01c)? as i32,
+                m.u16(0x49a022)? as i32,
+                m.u16(0x49a01e)? as i32,
+            ],
+            camera: m.u8(0x508041)? as u32,
+        };
+        let tile = m.u16(m.u32(0x507d70)? + cell * 2)? as u32;
+        let code = m.u8(m.u32(0x507d74)? + cell)?;
+        let discovery = m.u8(m.u32(0x507d78 + 4 * c.camera)? + cell)?;
+        let result = c.building(x, y, cell, tile, code, discovery);
+        let stop = match result {
+            Ok(()) => None,
+            Err(Error::Stop(a, s)) => Some((a, s)),
+            Err(e) => return Err(e),
+        };
+        Ok(Outcome {
+            disposition: if stop.is_some() { 2 } else { 0 },
+            stop,
+            observations: c.observations,
+            text_boundaries_checked: 0,
+        })
     }
     pub fn render(&mut self, m: &MemoriaJogo, hud: bool) -> Result<Outcome> {
         let assets = Arc::clone(&self.assets);
         let mut c = Context {
+            background: &mut self.saved_background,
+            text_boundaries: &mut self.recorded_text_boundaries,
+            text_checked: 0,
             tick: self.tick,
             m,
             overrides: BTreeMap::new(),
@@ -95,6 +164,11 @@ impl Renderer {
             camera: 0,
         };
         let result = c.compose(hud);
+        if result.as_ref().is_ok_and(|d| *d == 0)
+            && c.text_boundaries.as_ref().is_some_and(|b| !b.is_empty())
+        {
+            return Err(Error::Invalid("Unconsumed AffText probe boundary"));
+        }
         let (disposition, stop) = match result {
             Ok(d) => (d, None),
             Err(Error::Stop(a, s)) => (2, Some((a, s))),
@@ -104,6 +178,7 @@ impl Renderer {
             self.cache_generation = self.cache_generation.wrapping_add(1);
         }
         Ok(Outcome {
+            text_boundaries_checked: c.text_checked,
             disposition,
             stop,
             observations: c.observations,
@@ -111,6 +186,9 @@ impl Renderer {
     }
 }
 pub(crate) struct Context<'a> {
+    pub background: &'a mut Option<SavedBackground>,
+    pub text_boundaries: &'a mut Option<std::collections::VecDeque<RecordedTextBoundary>>,
+    pub text_checked: u32,
     pub tick: Option<u32>,
     pub m: &'a MemoriaJogo,
     pub overrides: BTreeMap<u32, u8>,
@@ -134,6 +212,12 @@ impl Context<'_> {
     pub fn u8(&self, a: u32) -> Result<u32> {
         Ok(if let Some(v) = self.overrides.get(&a) {
             *v
+        } else if let Some(background) = self
+            .background
+            .as_ref()
+            .filter(|b| a >= b.address && (a - b.address) < b.pixels.len() as u32)
+        {
+            background.pixels[(a - background.address) as usize]
         } else {
             self.m.u8(a)?
         } as u32)
@@ -385,7 +469,12 @@ mod tests {
             raw: vec![0; 270336],
             cursor: 0,
         };
+        let mut background = None;
+        let mut text_boundaries = None;
         let mut c = Context {
+            background: &mut background,
+            text_boundaries: &mut text_boundaries,
+            text_checked: 0,
             tick: None,
             m: &m,
             overrides: BTreeMap::new(),

@@ -8,6 +8,7 @@ pub mod render;
 pub mod render_assets;
 mod render_hud;
 mod render_scene;
+mod render_scripted;
 mod render_units;
 pub use frame_runtime_state::RuntimeState;
 pub mod frame_ai;

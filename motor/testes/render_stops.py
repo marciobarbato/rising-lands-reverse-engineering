@@ -14,7 +14,7 @@ def stop_cases():
     name,blocks,surface,cache,tick,*_=original;m=MemoriaEntradaM3(blocks);unit=m.u32(0x4e19a0)+12*276;players=m.u32(0x5080a8)
     word=lambda x:struct.pack('<H',x)
     probes=[
-      ('order_marker',[(unit+0x82,b'\1')],0x412923),
+      ('order_marker_mode2',[(unit+0x82,b'\2')],0x412923),
       ('capacity',[(unit+12,word(2))],0x410a2c),
       ('health',[(unit+0x9a,word(101))],0x410be4),
       ('fatigue',[(unit+4,word(5))],0x410be4),

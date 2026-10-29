@@ -10,7 +10,7 @@ use std::{
     sync::{Mutex, OnceLock},
 };
 
-pub const ABI_VERSION: u32 = 0x00010003;
+pub const ABI_VERSION: u32 = 0x00010004;
 const MAX_BLOCKS: u32 = 65536;
 const MAX_BYTES: usize = 64 * 1024 * 1024;
 #[repr(C)]
@@ -125,7 +125,7 @@ pub unsafe extern "C" fn rl_criar_mundo(
     output: *mut u64,
 ) -> i32 {
     status(|| {
-        if ![ABI_VERSION, 0x00010000, 0x00010001, 0x00010002].contains(&version) {
+        if ![ABI_VERSION, 0x00010000, 0x00010001, 0x00010002, 0x00010003].contains(&version) {
             return Err(AbiError::VersionMismatch);
         }
         if output.is_null() {

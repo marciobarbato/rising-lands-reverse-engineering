@@ -67,7 +67,7 @@ fn main() {
             let name = name.trim_end_matches('\0');
             if o.kind == 2 {
                 writeln!(obs, "{} {:?}", name, &o.args[..o.count as usize]).unwrap();
-            } else {
+            } else if o.kind == 1 {
                 writeln!(
                     obs,
                     "effect {} {} {:?} {:?}",
