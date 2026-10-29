@@ -621,16 +621,32 @@ See `pesquisas-paralelas/graficos-animacao/FRONTEIRAS_EXIBICAO.md`: `fronteiras_
 
 **Named stops (visible, not guessed).** `0x41591F`: the 16 M1 units have life word `+0x74` = 1 (< 100), which enables the tired/overlay branch of the unit body (`0x414320..0x414409`, `TypeEnginSeFatigue`) that no committed unit module covers; this is the first stop and all later sprite cells are absent. `0x408AC8`: modes 0, 1, 2, 6, 7, for which the original draws one common image different from the facade (identical across those five modes; captured natively, not reconstructed). `0x40892D`: uninhabited facade (gray effect). `0x40863E`: mode 3 uninhabited (advances the RNG cursor). `0x4022C8` / `0x4020EC`: selection frame / gauge of a selected structure. The raid unit (unit 16) on screen and the effect projectiles 31/32 were captured as logic-state-clean (see EFEITOS_LOGICOS_EXIBICAO.md) but their **pixel** composition is not reconstructed; the composition stops at the unit overlay before reaching them.
 
-**Render API** ([render_quadro.py](../pesquisas-paralelas/graficos-animacao/render_quadro.py)).
+**Render API, contract version 1.0** ([render_quadro.py](../pesquisas-paralelas/graficos-animacao/render_quadro.py)). This is the contract the macOS integration layer consumes. A change of any input, output field, format or stop semantics bumps `VERSAO_RENDER_QUADRO` (major for breaking changes, minor for additions); the version is returned in every result.
 
 ```python
+VERSAO_RENDER_QUADRO = (1, 0)
 renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=None, habitado=None, relogio=None) -> QuadroRenderizado
 regioes_necessarias(memoria) -> [(start, end_exclusive, name)]
-QuadroRenderizado(pixels, rgba, parada, chamadas, efeitos)
+QuadroRenderizado(versao, largura, altura, pixels, rgba, parada, chamadas, efeitos)
 ```
 
-- `memoria`: the `MemoriaDeclarada` read contract: `u8/u16/u32(address)` and `ler_mundo(address, n)`. It is never written. Declare `regioes_necessarias(memoria)`: DGROUP+.bss `0x494000..0x523000` and the buffers addressed by the slots `0x507D70, 0x507D74, 0x507DAC, 0x4E0F38, 0x4E19A0, 0x5080F0, 0x507D78+4c, 0x507D88+4c`.
-- `superficie_anterior`: 800×600 palette indices the game draws over (AffGame does not clear the surface).
-- `habitado(indice) -> bool`: BatimentEstHabiter (economy's result), required once a structure is occupied; `relogio()`: GetTickCount (default: the tick copy at `0x4E17B4`).
-- Result: `pixels` (800×600 indices), `rgba` (through the PLATGAME palette, or `paleta`), `parada` (`None`, or the first unreconstructed original address and reason — the frame is then partial), the ordered original calls and the writes to the frame globals. The palette is the static PLATGAME one; the live palette cycling (`Cyclage`) is not applied. Pure function: no files, no emulation, about 0.3 s per frame.
-- Domain: the mode-0x12 in-game view of an 800×600 session as captured; other modes, sub-views and the HUD (from `0x417B1C`) are not rendered.
+*Inputs.*
+- `memoria` (required): the `MemoriaDeclarada` read contract, `u8/u16/u32(address)` and `ler_mundo(address, n) -> bytes`, over the live game memory (original addresses). It is never written. Declare the regions of `regioes_necessarias(memoria)`: DGROUP+.bss `0x494000..0x523000` (includes the 1000×276 structure pool at `0x49A0C8` and the frame globals) and the buffers addressed by the slots `0x507D70, 0x507D74, 0x507DAC, 0x4E0F38, 0x4E19A0, 0x5080F0, 0x507D78+4c, 0x507D88+4c` (c = 0..3). An undeclared read raises the memory's own error.
+- `superficie_anterior` (required): exactly 800×600 bytes of palette indices, row-major, the surface the game draws over (AffGame does not clear it); anything else raises `ValueError`.
+- `habitado(indice) -> bool` (optional, required once a structure is occupied): BatimentEstHabiter, economy's result for structure `indice`. Without it the frame stops at `0x40F378`.
+- `relogio() -> int` (optional): GetTickCount; default the tick copy at `0x4E17B4`. `catalogo`/`paleta` (optional): asset catalog and a 768-byte palette; defaults are the local PLATGAME assets.
+
+*Outputs* (`QuadroRenderizado`, frozen).
+- `versao`: `(1, 0)`. `largura`, `altura`: 800, 600.
+- `pixels`: 480,000 bytes, palette indices, row-major, origin top-left, pitch 800. The surface after the composed passes; pixels the composition did not reach keep `superficie_anterior`.
+- `rgba`: 1,920,000 bytes, 4 bytes per pixel (R, G, B, 255), same order as `pixels`; `rgba[4i:4i+3] = palette[3*pixels[i]:3*pixels[i]+3]`.
+- `parada`: `None` for a complete composition, otherwise `{'endereco': '0x........', 'detalhe': str}`: the first original branch the reconstruction does not cover. The frame is then **partial** (everything drawn before the stop is exact, everything after is absent); the consumer must show or log it, never treat it as complete.
+- `chamadas`: ordered tuple of the original calls the composition made (`('AffTerrain', ...)`, `('AffBatiments', x, y, cell)`, ...). `efeitos`: tuple of `(name, address, old_hex, new_hex)` writes the original would make to the frame globals (informational; the memory is not modified).
+
+*Palette.* PLATGAME.PIE: 256 entries × 3 bytes, 8-bit RGB (the 6-bit VGA values expanded ×4, so the maximum component is 252), no gamma. It is the static palette: the live palette cycling (`Cyclage`) and any palette change after load are not applied. Pass `paleta` to override.
+
+*Supported domain.* Mode `[0x4E2F78] = 0x12` (in-game), 800×600 session (`[0x49A018] = 800`, window 25×17 cells), camera 0..3, terrain/vegetation/structure passes as captured. Frame cadence gates (`[0x4E05A2]`, divisor) can return an undrawn frame (`pixels == superficie_anterior`, stop at the cadence return). The HUD (from `0x417B1C`), the selection drag box, other game modes and the video-surface clear path are outside; they stop at their original address.
+
+*Named stops* (address → meaning). `0x4176A8` mode ≠ 0x12; `0x41794B` video-surface clear; `0x4179D4` lock returned NULL; `0x4179E1` saved-background restore; `0x41068E`/`0x416864` viewport outside the reconstructed terrain/sprite domain; `0x417AC8` selection drag box; `0x41591F` unit body outside its validated domain (including the life < 100 overlay); `0x46FF70` projectile outside its domain; `0x40863E`/`0x40892D`/`0x408AC8` structure mode 3 uninhabited / uninhabited facade / modes 0, 1, 2, 6, 7; `0x4087AA`/`0x40F378` habitation provider missing; `0x4022C8`/`0x4020EC` selection frame / gauge; `0x407EA7`/`0x407FB8`/`0x40288B`/`0x40F23B` wall, gate, workshop and other structure facades; `0x410085`/`0x415ACF`/`0x40FD95`/`0x45C72A` terrain object, vegetation, block and engine-ID outside the committed domain. The full list grows only by reconstructing a pass, never silently.
+
+*Properties.* Pure function, no files after the catalog loads, no emulation, about 0.3 s per frame, deterministic. Verified against the original: [fixture and native pixels](../pesquisas-paralelas/graficos-animacao/evidencias/quadro-original-pixels-m1.json); all pixels above row 279 equal at the M1 post-load frame (terrain, vegetation, Santuário facade), first stop `0x41591F`.

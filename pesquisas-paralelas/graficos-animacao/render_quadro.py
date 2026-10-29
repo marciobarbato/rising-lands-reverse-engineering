@@ -19,6 +19,9 @@ from test_quadro_jogo import DD, tabelas
 from graficos import RAIZ
 import json
 
+# Contract version: bump the major number for any change of an input, output field, format or stop semantics.
+VERSAO_RENDER_QUADRO = (1, 0)
+LARGURA, ALTURA = 800, 600
 DGROUP, DGROUP_FIM = 0x494000, 0x523000
 ESTRUTURAS, PASSO_ESTRUTURA = 0x49a0c8, 276
 # (name, pointer slot, size): world buffers addressed through DGROUP slots
@@ -32,6 +35,9 @@ RELOGIOS = (0x508f80, 0x508f84)   # with 0x508f7c (quadro_u32 in the frame globa
 
 @dataclass(frozen=True)
 class QuadroRenderizado:
+    versao: tuple        # VERSAO_RENDER_QUADRO of the producer
+    largura: int         # 800
+    altura: int          # 600
     pixels: bytes        # 800 x 600 palette indices (the offscreen surface after the composed passes)
     rgba: bytes          # pixels through the palette (800 x 600 x 4)
     parada: object       # None, or dict(endereco, detalhe): the first unreconstructed original branch
@@ -54,7 +60,7 @@ def renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=Non
     habitado(indice) -> bool is BatimentEstHabiter (economy's result); required as soon as a structure is occupied.
     relogio() -> GetTickCount; defaults to the tick copy at 0x4E17B4 in memory.
     """
-    if len(superficie_anterior) != 800*600: raise ValueError('The previous surface must be 800 x 600 bytes')
+    if len(superficie_anterior) != LARGURA*ALTURA: raise ValueError('The previous surface must be 800 x 600 bytes')
     lido = lambda a, n: bytes(memoria.ler_mundo(a, n))
     globais = {n: lido(a, w) for n, a, w in GLOBAIS_QUADRO}
     blocos = {n: lido(memoria.u32(slot), tam) for n, slot, tam in BLOCOS}
@@ -80,4 +86,4 @@ def renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=Non
         pixels, chamadas, efeitos = e.superficie, e.chamadas, e.efeitos
     pal = paleta or catalogo.paleta()
     rgba = b''.join(pal[p*3:p*3+3]+b'\xff' for p in pixels)
-    return QuadroRenderizado(bytes(pixels), rgba, parada, tuple(map(tuple, chamadas)), tuple(efeitos))
+    return QuadroRenderizado(VERSAO_RENDER_QUADRO, LARGURA, ALTURA, bytes(pixels), rgba, parada, tuple(map(tuple, chamadas)), tuple(efeitos))

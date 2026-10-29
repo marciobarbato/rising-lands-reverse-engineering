@@ -57,6 +57,19 @@ class QuadroTest(unittest.TestCase):
         self.assertEqual(len(q.rgba), 800*600*4)
         self.assertEqual(self.fx.bruto['habitation'], {'0': 1})
 
+    def test_contract_shape(self):
+        q, _ = self.renderizar()
+        self.assertEqual((q.versao, q.largura, q.altura), (Q.VERSAO_RENDER_QUADRO, 800, 600))
+        self.assertEqual(Q.VERSAO_RENDER_QUADRO, (1, 0))
+        pal = Q.Catalogo().paleta()
+        self.assertEqual(len(pal), 768)
+        for i in (0, 4000, 123456, 479999):    # rgba = palette[index] expanded to RGB, alpha 255, row-major, origin top-left
+            p = q.pixels[i]
+            self.assertEqual(q.rgba[i*4:i*4+4], pal[p*3:p*3+3]+b'\xff')
+        self.assertEqual(sorted(q.parada), ['detalhe', 'endereco'])
+        with self.assertRaises(ValueError):
+            Q.renderizar_quadro(Memoria(self.fx), superficie_anterior=b'\0'*10)
+
     def test_api_reads_only(self):
         mem = Memoria(self.fx)
         antes = [bytes(d) for _, d in mem.segmentos]
