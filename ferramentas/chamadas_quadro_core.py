@@ -375,7 +375,47 @@ def contatado_para_alianca(memoria, eax, edx):
     return dict(EAX=int(memoria.u32(0x5080b0 + 16 * (eax & 0xff) + 4 * (edx & 0xff)) != 0))
 
 
-def iniciar_zonas_jogo(memoria, eax, edx):
+ZONAS_MENU = ((0x192, 0x1e6, 0x1e0, 0x223), (0x1fa, 0x1d9, 0x243, 0x22b), (0x26c, 0x1d7, 0x2b3, 0x234),
+              (0x2d7, 0x1d4, 0x308, 0x221))           # zones 1..4 of modes 4 and 2 (x0, y0, x1, y1)
+
+
+def _zonas_menu(memoria, eax, ebx, ecx):
+    """InitGameZone modes 2, 3, 4 (jump table 0x471820 -> 0x4719be / 0x47194f / 0x47184d)."""
+    m = memoria
+    zona = lambda i, x0, y0, x1, y1: definir_zona_mouse(m, i, x0 & 0xffff, y0 & 0xffff, x1 & 0xffff, y1 & 0xffff)
+    modo = eax & 0xffff
+    if modo == 3:                                          # one zone per menu item, 0x19 apart from y 0x11e
+        n = itens_menu(m, eax)['EAX'] & 0xffff
+        if n > 0xff:
+            raise DependenciaRamoCore('InitGameZone', 0x4719ba, f'mode 3 with {n} menu items (byte index never reaches it)')
+        y = 0x11e
+        for i in range(n):
+            zona(i + 1, 0, y, m.u16(TELA_LARGURA), y + 0x14)
+            ebx, ecx = (y & 0xff) | ((i + 1) & 0xff) << 8, m.u16(TELA_LARGURA)
+            y += 0x19
+        testar_zona_mouse(m, 1, n)
+        return dict(EAX=1, EDX=n, EBX=ebx & M32, ECX=ecx & M32)
+    for i, (x0, y0, x1, y1) in enumerate(ZONAS_MENU[:3], 1):
+        zona(i, x0, y0, x1, y1)
+    if modo == 4:
+        zona(4, *ZONAS_MENU[3])
+        zona(5, 0x121, 0x15b, 0x14f, 0x178)
+        zona(6, 0x10e, 0xdf, 0x121, 0xf5)
+        zona(7, 0x12b, 0xdf, 0x141, 0xf5)
+    else:                                                  # mode 2: zone 4 only from mission 7 on
+        if numero_missao(m, 0)['EAX'] & 0xffff >= 7:
+            zona(4, *ZONAS_MENU[3])
+        else:
+            zona(4, 0, 0, 0, 1)
+        zona(5, 0x122, 0x200, 0x14e, 0x21c)
+        zona(6, 0x10e, 0xa2, 0x121, 0xb6)
+        zona(7, 0x12b, 0xa2, 0x141, 0xb6)
+    zona(8, 0x42, 0x2d, 0x7e, 0x57)
+    testar_zona_mouse(m, 1, 8)
+    return dict(EAX=1, EDX=8, EBX=0x2d, ECX=0x7e)
+
+
+def iniciar_zonas_jogo(memoria, eax, edx, ebx=None, ecx=None):
     """InitGameZone 0x471830, mode AX=1 (jump table 0x471820 -> 0x471aa4): the game mouse zones.
 
     Zones 1..9 come from the screen size u16 0x49a018/0x49a01a; zone 0xa is the
@@ -386,12 +426,16 @@ def iniciar_zonas_jogo(memoria, eax, edx):
     screen and viewport sizes; then MouseTestZone(1, 0x1f). The panel corner uses
     the s8 0x508f90 only when the screen width is not 640. Every coordinate is
     16-bit. Registers out: EAX=1, EDX=0x1f, EBX=(H<<5)&0xffff, ECX=screen width;
-    ESI/EDI preserved. Other modes raise DependenciaRamoCore before any store.
+    ESI/EDI preserved. Modes 2/3/4 are the menu layouts (``_zonas_menu``); any other
+    mode (AX-1 > 3 unsigned) stores nothing and returns EAX-1.
     """
     modo = (eax - 1) & 0xffff
+    if modo > 3:                                           # 'dec eax; cmp ax, 3; ja': nothing stored
+        return dict(EAX=(eax - 1) & M32)
     if modo != 0:
-        alvo = {1: 0x4719be, 2: 0x47194f, 3: 0x47184d}.get(modo, 0x471949)
-        raise DependenciaRamoCore('InitGameZone', alvo, f'mode {eax & 0xffff} not translated')
+        if modo == 2 and None in (ebx, ecx) and memoria.u16(0x4e2f40) == 0:
+            raise ValueError('InitGameZone mode 3 with no menu item returns the caller EBX/ECX: pass them')
+        return _zonas_menu(memoria, modo + 1, ebx, ecx)
     m, u16 = memoria, lambda v: v & 0xffff
     zona = lambda i, x0, y0, x1, y1: definir_zona_mouse(m, i, u16(x0), u16(y0), u16(x1), u16(y1))
     largura, altura_tela = m.u16(TELA_LARGURA), m.u16(TELA_ALTURA)
@@ -547,6 +591,74 @@ def animar_terreno(memoria, eax, edx, edi=None):
     return dict(EAX=linha & M32, EDX=edx)
 
 
+def _vegetacao_celula(m, celula, r):
+    """Per-cell body shared by NextAnimVeget 0x47731b.. and NextAnimVegetFullMap 0x47751f..
+    (byte-identical apart from the column test). ``r`` holds the register state the
+    routine carries (eax, edx, alto = ECX's upper word or None, cx = ECX's low word)."""
+    baixa = lambda v, b: None if v is None else (v & 0xffffff00) | b
+    r['edx'] = celula
+    r['eax'] = (m.u32(GRADE_OBJETOS) + celula) & M32
+    o = m.u8(r['eax'])
+    r['cx'] = (r['cx'] & 0xff00) | o
+    if not o:
+        return
+    r['eax'] = baixa(r['eax'], o)
+    contador = lambda: m.u8(CONTADOR_CICLO)       # read only where the original tests it
+    animacao = lambda: m.u32(GRADE_ANIMACAO)
+    if 1 <= o <= 0xb:
+        if not contador() & 3:
+            c = m.u8(CURSOR_PERMUTACAO)
+            r['alto'], r['cx'] = 0, c
+            r['eax'] = baixa(r['eax'], (c + 1) & 0xff)
+            m.u8(CURSOR_PERMUTACAO, (c + 1) & 0xff)
+            if not m.u8(TABELA_PERMUTACAO + c) & 3:
+                r['edx'] = (celula + animacao()) & M32
+                v = (m.u8(r['edx']) + 1) & 3
+                m.u8(r['edx'], v)
+                r['eax'] = (m.u32(GRADE_ANIMACAO) & 0xffffff00) | v
+    elif 0x17 <= o <= 0x1a:
+        if not contador() & 1:
+            r['edx'] = (celula + animacao()) & M32
+            v = (m.u8(r['edx']) + 1) & 0xf
+            m.u8(r['edx'], v)
+            r['eax'] = (m.u32(GRADE_ANIMACAO) & 0xffffff00) | v
+    elif o in (0x1b, 0x37):
+        if not contador() & 1:
+            m.u8((animacao() + celula) & M32, m.u8((animacao() + celula) & M32) + 1)
+        r['eax'], r['edx'] = celula, m.u8((m.u32(GRADE_ANIMACAO) + celula) & M32)
+        if r['edx'] == 0x10:
+            m.u8((m.u32(GRADE_OBJETOS) + celula) & M32, 0)
+            r['edx'] = m.u32(GRADE_ANIMACAO)
+            m.u8((r['edx'] + celula) & M32, 0)
+    elif 0x38 <= o <= 0x3d:
+        if not contador() & 1:
+            m.u8((celula + animacao()) & M32, m.u8((celula + animacao()) & M32) + 1)
+        r['eax'], r['edx'] = celula, m.u8((m.u32(GRADE_ANIMACAO) + celula) & M32)
+        if r['edx'] == 0x40:
+            r['edx'] = (m.u32(GRADE_OBJETOS) + celula) & M32
+            atual = m.u8(r['edx'])
+            r['alto'], r['cx'] = 0, atual
+            if atual in (0x3b, 0x38):
+                m.u8(r['edx'], 0)
+            else:
+                m.u8(r['edx'], 0)
+                m.u8((m.u32(GRADE_ANIMACAO) + celula) & M32, 0)
+                r['edx'] = (m.u32(GRADE_OBJETOS) + celula) & M32
+                r['cx'] = m.u8(r['edx'])
+                if r['cx'] == 0:
+                    r['cx'] = (atual - 1) & 0xff
+                    m.u8(r['edx'], r['cx'])
+            r['edx'] = m.u32(GRADE_ANIMACAO)
+            m.u8((r['edx'] + celula) & M32, 0)
+    elif 0x3e <= o <= 0x41:
+        m.u8((animacao() + celula) & M32, m.u8((animacao() + celula) & M32) + 1)
+        r['eax'] = m.u8((m.u32(GRADE_ANIMACAO) + celula) & M32)
+        if r['eax'] == 0x20:
+            m.u8((m.u32(GRADE_OBJETOS) + celula) & M32, 0)
+            r['eax'] = m.u32(GRADE_ANIMACAO)
+            m.u8((r['eax'] + celula) & M32, 0)
+
+
 def animar_vegetacao(memoria, eax, edx, ecx=None):
     """NextAnimVeget 0x4772ec (AX, DX = viewport origin) over the viewport cells.
 
@@ -563,90 +675,105 @@ def animar_vegetacao(memoria, eax, edx, ecx=None):
     m = memoria
     edx = (edx << 8) & M32
     celula = (eax + edx) & 0xffff
-    alto = None if ecx is None else ecx & 0xffff0000          # ECX's upper word, as the routine keeps it
-    eax = eax & M32
-    baixa = lambda r, v: None if r is None else (r & 0xffffff00) | v
+    r = dict(eax=eax & M32, edx=edx, alto=None if ecx is None else ecx & 0xffff0000, cx=0)
     linha = 0
     while (linha & 0xffff) < m.u16(VISTA_ALTURA):
         coluna = 0
         while True:
             largura = m.u16(VISTA_LARGURA)
-            cx = largura
+            r['cx'] = largura
             if (coluna & 0xffff) >= largura:
                 break
-            edx = celula
-            objetos = m.u32(GRADE_OBJETOS)
-            eax = (objetos + celula) & M32
-            o = m.u8(eax)
-            cx = (cx & 0xff00) | o
-            if o:
-                eax = baixa(eax, o)
-                contador = lambda: m.u8(CONTADOR_CICLO)       # read only where the original tests it
-                animacao = lambda: m.u32(GRADE_ANIMACAO)
-                if 1 <= o <= 0xb:
-                    if not contador() & 3:
-                        c = m.u8(CURSOR_PERMUTACAO)
-                        alto, cx = 0, c
-                        eax = baixa(eax, (c + 1) & 0xff)
-                        m.u8(CURSOR_PERMUTACAO, (c + 1) & 0xff)
-                        if not m.u8(TABELA_PERMUTACAO + c) & 3:
-                            edx = (celula + animacao()) & M32
-                            v = (m.u8(edx) + 1) & 3
-                            m.u8(edx, v)
-                            eax = (m.u32(GRADE_ANIMACAO) & 0xffffff00) | v
-                elif 0x17 <= o <= 0x1a:
-                    if not contador() & 1:
-                        edx = (celula + animacao()) & M32
-                        v = (m.u8(edx) + 1) & 0xf
-                        m.u8(edx, v)
-                        eax = (m.u32(GRADE_ANIMACAO) & 0xffffff00) | v
-                elif o in (0x1b, 0x37):
-                    if not contador() & 1:
-                        m.u8((animacao() + celula) & M32, m.u8((animacao() + celula) & M32) + 1)
-                    eax, edx = celula, m.u8((m.u32(GRADE_ANIMACAO) + celula) & M32)
-                    if edx == 0x10:
-                        m.u8((m.u32(GRADE_OBJETOS) + celula) & M32, 0)
-                        edx = m.u32(GRADE_ANIMACAO)
-                        m.u8((edx + celula) & M32, 0)
-                elif 0x38 <= o <= 0x3d:
-                    if not contador() & 1:
-                        m.u8((celula + animacao()) & M32, m.u8((celula + animacao()) & M32) + 1)
-                    eax, edx = celula, m.u8((m.u32(GRADE_ANIMACAO) + celula) & M32)
-                    if edx == 0x40:
-                        edx = (m.u32(GRADE_OBJETOS) + celula) & M32
-                        atual = m.u8(edx)
-                        alto, cx = 0, atual
-                        if atual in (0x3b, 0x38):
-                            m.u8(edx, 0)
-                        else:
-                            m.u8(edx, 0)
-                            m.u8((m.u32(GRADE_ANIMACAO) + celula) & M32, 0)
-                            edx = (m.u32(GRADE_OBJETOS) + celula) & M32
-                            cx = m.u8(edx)
-                            if cx == 0:
-                                cx = (atual - 1) & 0xff
-                                m.u8(edx, cx)
-                        edx = m.u32(GRADE_ANIMACAO)
-                        m.u8((edx + celula) & M32, 0)
-                elif 0x3e <= o <= 0x41:
-                    edx = celula
-                    m.u8((animacao() + celula) & M32, m.u8((animacao() + celula) & M32) + 1)
-                    eax = m.u8((m.u32(GRADE_ANIMACAO) + celula) & M32)
-                    if eax == 0x20:
-                        m.u8((m.u32(GRADE_OBJETOS) + celula) & M32, 0)
-                        eax = m.u32(GRADE_ANIMACAO)
-                        m.u8((eax + celula) & M32, 0)
+            _vegetacao_celula(m, celula, r)
             celula = (celula + 1) & 0xffff
             coluna += 1
-        eax = None if alto is None else (0x100 - (alto | largura)) & M32
+        r['eax'] = None if r['alto'] is None else (0x100 - (r['alto'] | largura)) & M32
         celula = (celula + 0x100 - largura) & 0xffff
         linha += 1
-    return dict(EAX=eax, EDX=edx)
+    return dict(EAX=r['eax'], EDX=r['edx'])
 
 
 def animar_vegetacao_mapa(memoria):
-    """NextAnimVegetFullMap 0x4774fa: network games only; not reached by MONDE01."""
-    raise DependenciaRamoCore('NextAnimVegetFullMap', 0x4774fa, 'network-only full-map pass not translated')
+    """NextAnimVegetFullMap 0x4774fa: the NextAnimVeget cell body over all 65,536 cells,
+    rows 0..255 x columns 0..255 from cell 0 (network games call it at 0x42d44f instead
+    of NextAnimVeget; single player never does). EAX = 0x100; every other register kept.
+    """
+    r = dict(eax=0, edx=0, alto=0, cx=0)
+    for celula in range(65536):
+        _vegetacao_celula(memoria, celula, r)
+    return dict(EAX=0x100)
+
+
+# ------------------------------------------------------------------ Core queries the display path calls
+def _registro_unidade(memoria, eax):
+    return (memoria.u32(PONTEIRO_UNIDADES) + (eax & 0xffff) * PASSO) & M32
+
+
+def terreno_esta_descoberto(memoria, eax, edx):
+    """TerrainEstDecouvert 0x4766f0: AL = (discovery[DL][AX] & 0x1f) == 0; EDX = grid pointer."""
+    ponteiro = memoria.u32(GRADES_DESCOBERTA + 4 * (edx & 0xff))
+    return dict(EAX=(eax & 0xff00) | (not memoria.u8((ponteiro + (eax & 0xffff)) & M32) & 0x1f), EDX=ponteiro)
+
+
+def terreno_esta_iluminado(memoria, eax, edx):
+    """TerrainEstIllumine 0x476951: the same 0x1f test on the light grid [0x507d88 + 4*DL]."""
+    ponteiro = memoria.u32(GRADES_LUZ + 4 * (edx & 0xff))
+    return dict(EAX=(eax & 0xff00) | (not memoria.u8((ponteiro + (eax & 0xffff)) & M32) & 0x1f), EDX=ponteiro)
+
+
+def unidade_existe(memoria, eax):
+    """ExisteEngin 0x441fff: AL = unit +2 != 0 (EAX = 0/1); EDX kept."""
+    return dict(EAX=int(memoria.u8(_registro_unidade(memoria, eax) + 2) != 0))
+
+
+def tipo_da_unidade(memoria, eax):
+    """EnginGetType 0x442025: AL = unit +1 over the unit-pool pointer in EAX; EDX kept."""
+    ponteiro = memoria.u32(PONTEIRO_UNIDADES)
+    return dict(EAX=(ponteiro & 0xffffff00) | memoria.u8((ponteiro + (eax & 0xffff) * PASSO + 1) & M32))
+
+
+def dono_da_unidade(memoria, eax):
+    """EnginGetPlayer 0x442045: AL = unit +0 over the unit-pool pointer in EAX; EDX kept."""
+    ponteiro = memoria.u32(PONTEIRO_UNIDADES)
+    return dict(EAX=(ponteiro & 0xffffff00) | memoria.u8((ponteiro + (eax & 0xffff) * PASSO) & M32))
+
+
+def _bit_unidade(memoria, eax, bit):
+    return dict(EAX=memoria.u8(_registro_unidade(memoria, eax) + 0xdc) >> bit & 1)
+
+
+def unidade_terror(memoria, eax):
+    """EnginEstTerreur 0x45002e: GetBit(unit +0xdc, 1); EDX kept."""
+    return _bit_unidade(memoria, eax, 1)
+
+
+def unidade_espelho(memoria, eax):
+    """EnginEstMiroir 0x44fffe: GetBit(unit +0xdc, 2); EDX kept."""
+    return _bit_unidade(memoria, eax, 2)
+
+
+def unidade_armadura(memoria, eax):
+    """EnginEstArmure 0x450054: GetBit(unit +0xdc, 3); EDX kept."""
+    return _bit_unidade(memoria, eax, 3)
+
+
+def tipo_cansa(eax):
+    """TypeEnginSeFatigue 0x442c34 (AL = unit type; table 0x442bcc): types 0..10 and 25 give
+    AL 1, 11..24 give 0 (EAX = AL); types above 0x19 return AL 0 with EAX's upper bytes kept."""
+    tipo = eax & 0xff
+    if tipo > 0x19:
+        return dict(EAX=eax & 0xffffff00)
+    return dict(EAX=int(tipo <= 10 or tipo == 25))
+
+
+def numero_missao(memoria, eax):
+    """MissionGetNum 0x46c11a (Missions' getter, used by InitGameZone mode 2): AX = u8 0x496fe4."""
+    return dict(EAX=(eax & 0xffff0000) | memoria.u8(0x496fe4))
+
+
+def itens_menu(memoria, eax):
+    """MenuGetNbItem 0x46936d (UI getter, used by InitGameZone mode 3): AX = u16 0x4e2f40."""
+    return dict(EAX=(eax & 0xffff0000) | memoria.u16(0x4e2f40))
 
 
 # Original name -> (entry, translation(memoria, registers in, stack word 1, bonus) -> registers out)
@@ -667,7 +794,7 @@ ROTINAS = {
     'SetEnginCollision': (0x442cb4, lambda m, r, s, b: definir_colisao_unidade(m, r['EAX'], r['EDX'])),
     'CalculFatigue': (0x452cc8, lambda m, r, s, b: calcular_fadiga(m, r['EAX'], b)),
     'SetClipping': (0x40f519, lambda m, r, s, b: definir_recorte(m, r['EAX'], r['EDX'], r['EBX'], r['ECX'])),
-    'InitGameZone': (0x471830, lambda m, r, s, b: iniciar_zonas_jogo(m, r['EAX'], r['EDX'])),
+    'InitGameZone': (0x471830, lambda m, r, s, b: iniciar_zonas_jogo(m, r['EAX'], r['EDX'], r['EBX'], r['ECX'])),
     'MouseSetZone': (0x479c50, lambda m, r, s, b: definir_zona_mouse(m, r['EAX'], r['EDX'], r['EBX'], r['ECX'], s)),
     'MouseTestZone': (0x479c9e, lambda m, r, s, b: testar_zona_mouse(m, r['EAX'], r['EDX'])),
     'MiniMapGetPos': (0x46a1f8, lambda m, r, s, b: posicao_minimapa(m, r['EAX'], r['EDX'])),
@@ -682,6 +809,17 @@ ROTINAS = {
     'LongRand': (0x45841b, lambda m, r, s, b: aleatorio_crt_memoria(m)),
     'rand': (0x48c51d, lambda m, r, s, b: aleatorio_crt_memoria(m)),
     'NextAnimVegetFullMap': (0x4774fa, lambda m, r, s, b: animar_vegetacao_mapa(m)),
+    'TerrainEstDecouvert': (0x4766f0, lambda m, r, s, b: terreno_esta_descoberto(m, r['EAX'], r['EDX'])),
+    'TerrainEstIllumine': (0x476951, lambda m, r, s, b: terreno_esta_iluminado(m, r['EAX'], r['EDX'])),
+    'ExisteEngin': (0x441fff, lambda m, r, s, b: unidade_existe(m, r['EAX'])),
+    'EnginGetType': (0x442025, lambda m, r, s, b: tipo_da_unidade(m, r['EAX'])),
+    'EnginGetPlayer': (0x442045, lambda m, r, s, b: dono_da_unidade(m, r['EAX'])),
+    'EnginEstTerreur': (0x45002e, lambda m, r, s, b: unidade_terror(m, r['EAX'])),
+    'EnginEstMiroir': (0x44fffe, lambda m, r, s, b: unidade_espelho(m, r['EAX'])),
+    'EnginEstArmure': (0x450054, lambda m, r, s, b: unidade_armadura(m, r['EAX'])),
+    'TypeEnginSeFatigue': (0x442c34, lambda m, r, s, b: tipo_cansa(r['EAX'])),
+    'MissionGetNum': (0x46c11a, lambda m, r, s, b: numero_missao(m, r['EAX'])),
+    'MenuGetNbItem': (0x46936d, lambda m, r, s, b: itens_menu(m, r['EAX'])),
 }
 # Routines with a pushed argument (stack word 1 = u32 [ESP+4] at entry); the callee pops it.
 ARGUMENTO_PILHA = ('Chemin_ModifieZone', 'MouseSetZone')
@@ -719,4 +857,13 @@ def provedores_core(memoria, bonus=None):
         'NextAnimTerrain': vazio(lambda x, y: animar_terreno(memoria, x, y)),
         'NextAnimVeget': vazio(lambda x, y: animar_vegetacao(memoria, x, y)),
         'NextAnimVegetFullMap': vazio(lambda: animar_vegetacao_mapa(memoria)),
+        'TerrainEstDecouvert': lambda sitio, caso, jogador: terreno_esta_descoberto(memoria, caso, jogador)['EAX'],
+        'TerrainEstIllumine': lambda sitio, caso, jogador: terreno_esta_iluminado(memoria, caso, jogador)['EAX'],
+        'ExisteEngin': lambda sitio, unidade: unidade_existe(memoria, unidade)['EAX'],
+        'EnginGetType': lambda sitio, unidade: tipo_da_unidade(memoria, unidade)['EAX'],
+        'EnginGetPlayer': lambda sitio, unidade: dono_da_unidade(memoria, unidade)['EAX'],
+        'EnginEstTerreur': lambda sitio, unidade: unidade_terror(memoria, unidade)['EAX'],
+        'EnginEstMiroir': lambda sitio, unidade: unidade_espelho(memoria, unidade)['EAX'],
+        'EnginEstArmure': lambda sitio, unidade: unidade_armadura(memoria, unidade)['EAX'],
+        'TypeEnginSeFatigue': lambda sitio, tipo: tipo_cansa(tipo)['EAX'],
     }

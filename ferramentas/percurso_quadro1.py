@@ -115,7 +115,7 @@ def _bancada(cenario):
 
 
 def executar(rotinas, perturbacoes=None, observador=None, cobertura=None, limite=3600, cenario='v1',
-             limites=None):
+             limites=None, estrangeiras=None):
     """Returns (bench, isolation, frame capture, reproduction, coverage or None).
 
     ``cobertura``: a dict to receive the ``Cobertura`` recorder (key 'recorder')
@@ -129,7 +129,7 @@ def executar(rotinas, perturbacoes=None, observador=None, cobertura=None, limite
     if cob is not None:
         cobertura['recorder'] = cob
     casos = perturbacoes(b) if callable(perturbacoes) else perturbacoes
-    iso = _isolamento_limitado(b, rotinas, casos, observador, limites or {})
+    iso = _isolamento_limitado(b, rotinas, casos, observador, limites or {}, estrangeiras)
     iso.instalar()
     resumos = {}
     for nome, correr in (('load_tail', lambda: b.executar_cauda_carga(limite)),
