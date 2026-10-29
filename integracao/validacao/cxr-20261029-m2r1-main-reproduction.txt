@@ -1,0 +1,23 @@
+[lease] coordinator-m2r1-main waiting
+[lease] coordinator-m2r1-main granted
+### testes test*fundacoes_quadro.py
+Ran 11 tests in 15.265s
+OK
+### pesquisas-paralelas/combate test_quadro_m1.py
+Ran 4 tests in 1.249s
+OK
+### pesquisas-paralelas/economia/testes test_quadro_economia.py
+Ran 6 tests in 1.983s
+OK
+### pesquisas-paralelas/ia-runtime/testes test_laco_despachantes.py
+Ran 5 tests in 0.040s
+OK
+### pesquisas-paralelas/ia-runtime/testes test_quadro_calcul_game.py
+Ran 4 tests in 0.002s
+OK
+### pesquisas-paralelas/missoes/testes test_fim_missao.py
+Ran 6 tests in 0.019s
+OK
+### pesquisas-paralelas/missoes/testes test_quadro_missao_original.py
+Ran 7 tests in 34.974s
+OK
