@@ -42,3 +42,19 @@ must distinguish that deliberate stop from actual physical death completion.
 The maintained contract and final validation report will separate full original
 returns, translated whole-state comparisons and named dependency stops. A native
 case or native window alone is not a translated-chain proof.
+
+## Full bounded capture v1 (before sanctuary translation)
+
+[evidence](evidencias/captura-combate-raid-original-v1.json): 2,024 original calls,
+1,994 returns, 30 named audio stops (12 StopSound, 18 PostSound), zero faults,
+limits or writes outside the complete checkpoint blocks. Source hashes match
+commit `58c8516`. The run contains 192 unit/projectile ticks (six 32-tick windows),
+1,728 native unit dispatcher calls and 192 native projectile passes.
+
+Leaf totals: target query 10; attack setter 20 (including window setup);
+CalculAttaqueEngin 10; InfligeDegat 14; EnginInfligeDegat 8; SetDyingEngin 6;
+BatimentInfligeDegat 36. The raid dies on repeated hit 5 only up to the explicit
+StopSound boundary; physical removal is not claimed by v1. Camera-1 sanctuary
+variants include four complete destruction returns (damage 65535/FFFFFFFF at
+each checkpoint); damage 65536 wraps the accumulated word to its starting value.
+The original local-player camera-0 consumer stops at PostSound after adding damage.
