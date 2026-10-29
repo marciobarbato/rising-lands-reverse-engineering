@@ -136,19 +136,29 @@ def _linha(registro):
     return json.dumps(registro, sort_keys=True)
 
 
-def _correr(b, fases, saida, checkpoints, de, ate, cada=None, pasta=None):
-    """Run ``fases`` (an iterator of (phase, regs)), writing one record line per phase."""
+def _correr(b, fases, saida, checkpoints, de, ate, cada=None, pasta=None, leve=False):
+    """Run ``fases`` (an iterator of (phase, regs)), writing one record line per phase.
+
+    The binding-event log is compacted: events are dropped once their phase is written.  ``leve``
+    (pass A of a long run) writes only each phase's exit counters and builds no state images."""
     import capturar_quadros_exibicao_missao as cq
-    anterior, antes = b.imagem(), b._estado_fase()
+    import delta_estado_missao as delta
+    eventos = delta.compactar_eventos(b)
+    anterior, antes = (None if leve else b.imagem()), b._estado_fase()
     ddcalls = len(b.chamadas_exibicao())
     instantaneos = {}
     with open(saida, 'x') as f:
         for nome, regs in fases:
-            depois, imagem = b._estado_fase(), b.imagem()
-            registro = cq.registrar_fase(b, nome, regs, antes, depois, anterior, imagem, ddcalls, checkpoints, 0)
-            f.write(_linha(registro)+'\n')
-            ddcalls = len(b.chamadas_exibicao())
-            anterior, antes = imagem, depois
+            depois = b._estado_fase()
+            if not leve:
+                imagem = b.imagem()
+                registro = cq.registrar_fase(b, nome, regs, antes, depois, anterior, imagem, ddcalls, checkpoints, 0)
+                f.write(_linha(registro)+'\n')
+                anterior = imagem
+            else:
+                f.write(json.dumps(dict(phase=nome, exit=depois), sort_keys=True)+'\n')
+            eventos.descartar_ate(depois['bindings'])
+            ddcalls, antes = len(b.chamadas_exibicao()), depois
             if cada and nome.startswith('frame') and int(nome[5:]) % cada == 0 and int(nome[5:]) < ate:
                 k = int(nome[5:])
                 instantaneos[k] = salvar(b, pasta/f'instantaneo-{k:05d}.pickle', k)
@@ -167,12 +177,14 @@ def passo_a(a):
     b.iniciar_relogio()
     b.executar_inicio()
     b.executar_mission_load(60)
+    import delta_estado_missao as delta
+    delta.compactar_eventos(b).descartar_ate(len(b.vinculos_declarados.eventos))
     zero = salvar(b, pasta/'instantaneo-00000.pickle', 0)
     saida = pasta/f'fases-00000-{a.quadros:05d}.jsonl'
     inst = _correr(b, b.executar_quadros(a.quadros, a.segundos_quadro), saida, checkpoints, 0, a.quadros,
-                   a.cada, pasta)
-    inst = dict({0: zero}, **inst)
-    manifesto = dict(frames=a.quadros, every=a.cada, checkpoints=list(checkpoints), snapshots=inst,
+                   a.cada, pasta, leve=a.leve)
+    inst = {0: zero, **inst}
+    manifesto = dict(frames=a.quadros, every=a.cada, light=a.leve, checkpoints=list(checkpoints), snapshots=inst,
                      records=saida.name, seconds=round(time.monotonic()-t0, 1))
     caminho = pasta/'passo-a.json'
     caminho.write_text(json.dumps(manifesto, indent=1)+'\n')
@@ -212,18 +224,21 @@ def comparar(a):
     if a.captura:
         captura, _ = delta.carregar(ROOT/a.captura)
         referencia = {f['phase']: _linha(f) for f in captura['phases']}
-    sequencial = {json.loads(l)['phase']: l.rstrip('\n')
-                  for l in (pasta/json.loads((pasta/'passo-a.json').read_text())['records']).open()}
-    resultado = dict(pass_a=dict(phases=len(sequencial), equal_capture=None if referencia is None else
-                                 sum(1 for n, l in sequencial.items() if referencia.get(n) == l)))
-    segmentos = sorted(p for p in pasta.glob('fases-*.jsonl') if p.name != json.loads((pasta/'passo-a.json').read_text())['records'])
+    manifesto = json.loads((pasta/'passo-a.json').read_text())
+    leve = manifesto.get('light', False)
+    if leve and referencia is None:
+        raise SystemExit('A light pass A has no records: compare its segments with a capture')
+    sequencial = {json.loads(l)['phase']: l.rstrip('\n') for l in (pasta/manifesto['records']).open()}
+    resultado = dict(pass_a=dict(phases=len(sequencial), light=leve, equal_capture=None if referencia is None or leve
+                                 else sum(1 for n, l in sequencial.items() if referencia.get(n) == l)))
+    segmentos = sorted(p for p in pasta.glob('fases-*.jsonl') if p.name != manifesto['records'])
     por_segmento, diferentes = [], []
     for p in segmentos:
         linhas = [l.rstrip('\n') for l in p.open()]
         iguais = 0
         for l in linhas:
             nome = json.loads(l)['phase']
-            if sequencial.get(nome) == l and (referencia is None or referencia.get(nome) == l):
+            if (leve or sequencial.get(nome) == l) and (referencia is None or referencia.get(nome) == l):
                 iguais += 1
             else:
                 diferentes.append(nome)
@@ -330,6 +345,7 @@ def main():
     pa.add_argument('--quadros', type=int, required=True)
     pa.add_argument('--cada', type=int, required=True)
     pa.add_argument('--dir', required=True)
+    pa.add_argument('--leve', action='store_true', help='no phase records or images: snapshots only')
     pa.add_argument('--segundos-quadro', type=float, default=600.0)
     ps = sub.add_parser('segmento')
     ps.add_argument('--dir', required=True)
