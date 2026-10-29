@@ -18,7 +18,7 @@ Bench: [oraculo_exibicao_missao.py](oraculo_exibicao_missao.py), scenario defini
 - RestoreAll;
 - menu and game AffGame.
 
-**DirectDraw** is the declared interim backend [exibicao_declarada.py](exibicao_declarada.py):
+**DirectDraw** is the declared interim backend `exibicao_declarada.py` (retired in Stage18; source at commit `3ff4b21`):
 - the `DirectDrawCreate` import plus COM vtables;
 - every call recorded, with traps on undeclared methods;
 - surfaces as declared regions;

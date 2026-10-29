@@ -682,7 +682,7 @@ Stage16 was integrated at main `67fb81f`. Graphics' report [ESCRITAS_AFFGAME_ENT
 - AffInit/DDInit, LoadPalette and the bank loaders;
 - RestoreAll, DDFlipPage, and menu and game AffGame.
 
-The declared interim DirectDraw backend ([exibicao_declarada.py](../pesquisas-paralelas/missoes/exibicao_declarada.py)) stands in for Graphics' backend until it lands.
+The declared interim DirectDraw backend (`exibicao_declarada.py` (retired in Stage18; source at commit `3ff4b21`)) stands in for Graphics' backend until it lands.
 
 **Remaining boundaries:**
 - Text needs CRT `fgets` `0x48ce96` and LoadPie needs CRT `fseek` `0x48cda2`, which Core has not inventoried.
