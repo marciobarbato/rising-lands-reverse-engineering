@@ -54,6 +54,7 @@ for _pasta in ('pesquisas-paralelas/combate', 'pesquisas-paralelas/economia'):
     if str(ROOT / _pasta) not in sys.path:
         sys.path.append(str(ROOT / _pasta))
 import chamadas_quadro_core as core  # noqa: E402
+import incursao_core  # noqa: E402
 from fundacoes_quadro import zerar_contadores_carga  # noqa: E402
 from fim_missao import consultas_publicadas, evento_em_curso, testar_fim_missao  # noqa: E402
 import quadro_economia as economia_quadro  # noqa: E402
@@ -275,6 +276,13 @@ def recursos_terreno(mm):
     return recursos
 
 
+def _parar_pilha_nativa(sitio):
+    """Core's GetFreeCell (``incursao_core.celula_livre``) reads the upper words of four 16-bit locals as native
+    stack residue (ESP - 0x32, -0x1a, -0x3a, -0x2e). The composition has no native stack, so the residue
+    contract is Core's to state before this call can run here."""
+    raise DependenciaIA('GetFreeCell (Core): native stack residue at ESP-0x32/-0x1a/-0x3a/-0x2e not modeled', sitio)
+
+
 def provedores(mapa, prov, mm, ctx, registro, janelas, travessias, fase, regs):
     """Original-name providers for every routine the three phases reach."""
     p = {}
@@ -372,8 +380,18 @@ def provedores(mapa, prov, mm, ctx, registro, janelas, travessias, fase, regs):
         'EnginOccupeCase': lambda sitio, unidade, celula, filtro: int(ocupa_celula(
             mm.ler(mm.u32(0x4e19a0) + 276 * unidade, 276), celula, filtro)),
         'AvanceMonstre': lambda sitio, jogador: avancar_monstros(mm, p),
-        'iaProbPost': lambda sitio, jogador, tipo, ebx, ecx, pilha: maquina.postar(
-            jogador, tipo, (ebx, ecx) + tuple(pilha)) & 0xffffffff,
+        'iaProbPost': lambda sitio, jogador, tipo, ebx, ecx, pilha: incursao_core.postar_tarefa(
+            mm, jogador, tipo, ebx, ecx, tuple(pilha))['EAX'],
+        'GetFreeCell': lambda sitio, celula, tipo: _parar_pilha_nativa(sitio),
+        'CreerEngin': lambda sitio, celula, edx, tipo, jogador: incursao_core.criar_unidade(
+            mm, celula, edx, tipo, jogador, bonus)['EAX'],
+        'EnginSetPlayer': lambda sitio, unidade, jogador: incursao_core.definir_dono_unidade(mm, unidade, jogador),
+        'PlaceEngin': lambda sitio, unidade: incursao_core.colocar_unidade(mm, unidade),
+        'EnginGetCase': lambda sitio, unidade: incursao_core.caso_unidade(mm, unidade)['EAX'],
+        'GetRandCaseChamps': lambda sitio: incursao_core.caso_campo_aleatoria(mm)['EAX'],
+        'GetRandCaseTypeBatPlayer': lambda sitio, jogador, tipo: incursao_core.caso_estrutura_tipo_jogador(
+            mm, jogador, tipo)['EAX'],
+        'Chemin_Accessible': lambda sitio, origem, destino: incursao_core.acessivel(mm, origem, destino)['EAX'],
         'ProjectileInit': lambda sitio, tipo, origem, alvo, modo, pilha: PoolProjeteis(
             memoria=mm.vista(mm.u32(0x5080f0), 5600)).iniciar(tipo, origem, alvo, modo, *pilha),
         'iagUnitSendMessage': lambda sitio, unidade, mensagem, alvo: enviar_mensagem_unidade(

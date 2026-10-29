@@ -14,6 +14,7 @@ import unittest
 
 OWNED = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(OWNED))
+sys.path.insert(0, str(OWNED / 'testes'))
 import ambiente_ia_runtime  # noqa: E402,F401
 from regras_incursao_ia import REGRAS  # noqa: E402
 from test_incursao_ia import MemoriaEsparsa, em_pilha  # noqa: E402
