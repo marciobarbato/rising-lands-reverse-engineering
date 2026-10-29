@@ -1,5 +1,48 @@
 # Combat handoff — 2026-10-28
 
+## M2.3 preparation: MONDE01's first scripted monster raid
+
+Base: main `d94a59e` (fast-forward). The capture was committed before any comparison (`1e9f28e`).
+
+**Trigger (static, intact bytes).** The raid is the monster player's periodic entry. It is not an AI war table: players 1–3 are inactive.
+- `AvanceMonstre 0x47b283` runs every frame for player 4 (`CalculNextReflect(4)` → `iaCalculPlayer`).
+- On its first call (frame 0, counter 0) it sets byte `0x50a9cc` = 1 and stamps u32 `+8` of every EntrerMonstre record (`0x50a9d0 + 12k`) with u32 `0x508f7c`.
+- Each frame, for each record with a non-zero u16 period `+4` (disk value × 30) and `counter − stamp ≥ period` (signed, at `0x47b345`), it:
+  - advances the cyclic group bit `+6` within the u16 mask `+2` (`0x47b349`);
+  - re-stamps the record;
+  - calls `ConstruitGroupeMonstre 0x47a81d(ax = cell +0, dl = group)`.
+
+MONDE01 records (5): #0 cell `0x3f3f` mask 1 period **9000**; #1 cell `0x3f00` mask 1 period 10800; #2–#4 (`0x320e`, `0x2d36`, `0x273d`) have period 0 and are the ambush points. **The first raid fires at counter 9000** (frame 9000, since frame 0 is counter 0; real time depends on the frame cadence, which is not fixed here). The second record fires at 10800, and each repeats every period. Group 0 (`MONSTRE.INI GROUPE00=0` → map `0x498400` → unit type 0) is one unit. Guards: monster count `0x50b178` < 50 and pending groups `0x50b134` < 16.
+
+**Routines the raid frame reaches (forced native capture, in order).**
+1. **Spawn (`ConstruitGroupeMonstre`).**
+   - `iaGroupNew(4, 0x10)` → group 0x12.
+   - `GetFreeCell(0x3f3f, type 0)` → `0x3e3e`.
+   - `CreerEngin(cell 0x3e3e, 1, type 0, 4)` → unit 16, through `EnginSetType`/`EnginSetTypeCaract`/`EnginTypeGetCapacite`/`BonusGetValEngin`/`EnginEnArret`.
+   - `EnginSetPlayer(16, 4)`, then `PlaceEngin`, which goes through `SetEnginCollision`/`SetCollision`/`Chemin_ModifieZone` and `SetMiniMap`/`PlayerGetColor`/`TerrainEstIllumine`.
+   - `Random`: an even value gives **`ProjectileInit(0x20, 0x3e3e, 0x3e3e, 0, 0,0,0,0,0)`**, an odd value type 0x1f. It goes through `ProjectileSet` into pool slot 0.
+   - `iagUnitAddToGroup`, then the group is queued at `0x50b138` with `0x50b134` += 1.
+2. **Order (pending-attack branch `0x47b44c`).**
+   - `Random`: target player (Random & 3) + 1, where 4 maps to 0, retried while `HumanOnly` and the player is AI. Then `iagUnitGetFirstUnitInGroup`, `EnginGetCase`, `Random % 100`, `EnginGetType`.
+   - Thresholds `ProbaCaveJoueur` 5 / `ProbaCaveIA` 2 / `ProbaEmbuscade` 2 select cave → `GetRandCaseTypeBatPlayer(p, 3)` (action 0x30), ambush record cell (0x2e), or field → `GetRandCaseChamps` (0x2f). A cave miss falls through to field.
+   - Captured: field `0x2e03`, `Chemin_Accessible(0x3e3e, 0x2e03)`, `StockeAction(0x2f, 0x12, 0x2e03)` → `iaProbPost`/`iaProbNew`/`listNewElem`/`listLinkElemToTail`. The task is posted to player 4's context `0x5148f0`.
+3. **Projectiles (same frame).** `ProjectileCalcul` animates the type-32 effect (`+0x18` 0→1), clears `+1`, and calls `ProjectileAvance` 29 times as a no-op. A type 31/32 effect is freed at frame 32 of its life (`maquina_projeteis.avancar`, limit 32).
+
+Not reached in the raid frame: `SetAttaqueEngin`, `CalculAttaqueEngin`, `InfligeDegat`, death. `StockeAction` calls `SetAttaqueEngin(unit, mode 3, structure from grid cell bit 0x8000)` only when action 0x30 (cave) merges into an existing action, and MONDE01 starts with no type-3 cave. Unit movement towards `0x2e03` and any later attack come from the posted task (iaSolver, Core/AI-runtime) and from the dispatcher's target scan. For owner 4 (AI type 2) that scan sends `iagUnitSendMessage(0x49)` instead of `SetAttaqueEngin`. The spawned unit's first scan is at `(counter + 16) & 0x1f = 0`, so counter 9008 at the earliest. These later frames are not captured here.
+
+**Capture.** [`capturar_incursao_m2_3.py`](capturar_incursao_m2_3.py) → [`evidencias/captura-incursao-m2-3-original.json`](evidencias/captura-incursao-m2-3-original.json). It reruns Missions' committed path with their `Isolamento` read-only. Frame 1's `AvanceMonstre` gets a forced case with u32 `0x508f7c` = 9000; every other byte is the exact frame-1 input, including the stamps written in frame 0. The same frame's `ProjectileCalcul` gets a case that replays all 185 bytes the forced call changed. The intervening iaSolver/MessageBoxCalcul/GameNextFrame/CalculIconeAction are not applied (declared composition). Every routine entry in the forced cases is recorded with EAX/EDX/EBX/ECX and six stack words. The committed phase states, boundaries and code hash still reproduce (38.7 s). A first attempt ran no forced case because `Isolamento` replaces an empty perturbation dict (`perturbacoes or {}`); it is kept at `.local/combat-raid-unforced-attempt-1.json`, and the script now seeds the dict and refuses output without both forced cases.
+
+**Differential (`test_incursao_m2_3.py`, local; the native side is the capture).**
+- `PoolProjeteis.iniciar(0x20, 0x3e3e, 0x3e3e, 0, 0,0,0,0,0)` on the forced entry pool picks slot 0 and produces exactly the 33 pool bytes `ProjectileInit` changed, with no effects.
+- `MaquinaProjeteis.calcular(9000 & 255)` on the post-spawn pool gives the same 2 bytes and the same 29 `ProjectileAvance` slot indices.
+- No Combat gap was found, so nothing new was translated.
+- Gate `scripts/check.py --domain combat` (lease): links passed, 260 tests OK, 151 skipped. The skips are native differentials, which this gate runs without `RISING_EMULAR`. No validated behavior changed, so the full native suite was not rerun.
+
+**Contracts for other fronts.**
+- AI-runtime: `avancar_monstros` must implement `0x47b349` (group bit, re-stamp, `ConstruitGroupeMonstre`) and the pending-attack branch `0x47b44c` for frame 9000. Combat supplies `PoolProjeteis.iniciar` for the spawn effect, with the mapping EAX type, EDX origin, EBX target, ECX mode, stack attacker/direction/dx/dy/flag. Combat also supplies `ataque_vivo.definir_ataque` for the `StockeAction` 0x30 merge (mode 3).
+- Core: `GetFreeCell`, `CreerEngin`, `EnginSetType`, `EnginSetPlayer`, `PlaceEngin` with collision/minimap, `Chemin_Accessible`, the field picks and the task list.
+- Missions: the raid is frame 9000; no new harness was added here, and the frame oracle was not touched.
+
 ## M2.1 round 2: exact frame-0/frame-1 inputs and the PlayerEstAllie API
 
 Base: main `ec931d2` (fast-forward merge), which includes Missions' first-frame capture (`pesquisas-paralelas/missoes/QUADRO1_MONDE01.md`). The load-state `CalculGame` call is already a game frame (**frame 0**, counter 0); frame 1 is the second pass (counter 1).
