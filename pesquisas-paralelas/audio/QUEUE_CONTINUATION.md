@@ -73,3 +73,13 @@ separate objects, even when IDs match. The explicit third object address is
 file byte sequence and start answer is independently declared, with raw ABI
 logs retained. Native success here means only that exact original branch
 returned under those declared inputs; it is not hardware playback acceptance.
+
+Original v3 adds one persistent eight-call sequence to v2: three PostSound
+requests, Manage, physical-owner StopHandle (promoting a logical duplicate),
+a different-bank repost, another Manage, and logical volume-zero cancellation.
+Every intermediate image and EAX is frozen. All 139 calls / 132 scenarios
+returned in 0.685 seconds. A fourth object is explicitly supplied at 0x7101400;
+no creation or lifetime response is implicit. The initial state and platform
+answers precede the whole sequence; later state is produced by original calls,
+not rewritten between requests. This connects admission, simultaneous reuse,
+promotion, slot compaction and cancellation across actual caller boundaries.

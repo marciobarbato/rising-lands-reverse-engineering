@@ -148,10 +148,28 @@ def request_scenarios(original):
         yield case(f'manage-capacity-{counter}-9','manage',m,com=plan)
 
 
+    m=fixture_memory(original)
+    sequence=[dict(operation='post',regs=dict(EAX=0x41,EDX=ID1,EBX=REFS+i*4,ECX=0),arguments=[256]) for i in (72,73,74)]
+    sequence += [dict(operation='manage',regs={},arguments=[]),
+                 dict(operation='stop_handle',regs=dict(EAX=REFS+74*4),arguments=[]),
+                 dict(operation='post',regs=dict(EAX=0x42,EDX=ID1,EBX=REFS+74*4,ECX=0),arguments=[256]),
+                 dict(operation='manage',regs={},arguments=[]),
+                 dict(operation='set_volume',regs=dict(EAX=REFS+72*4,EDX=0),arguments=[])]
+    for i in (72,73,74):m.w32(REFS+i*4,0xffffffff)
+    plan=fill_plan(m)+start_plan()
+    for pointer in (COM_DUPLICATE,COM_BASE+0x1300):
+        plan += [response('DuplicateSoundBuffer',pointer=COM_DEVICE,args=(COM_BUFFER,),value=pointer),response('SetPosition',pointer=pointer,args=(0,))]+start_plan(pointer)
+    plan += [response('GetStatus',value=1),response('GetStatus',value=1),response('Stop'),response('GetStatus',value=0),response('Release',hresult=7)]
+    plan += [response('GetStatus',pointer=COM_BASE+0x1300,value=1),response('GetStatus',pointer=COM_DUPLICATE,value=1)]
+    plan += fill_plan(m,pointer=COM_BASE+0x1400,output=EXTERNAL+0x4800)+start_plan(COM_BASE+0x1400)
+    plan += [response('GetStatus',pointer=COM_BASE+0x1300,value=0),response('GetStatus',pointer=COM_BASE+0x1300,value=0),response('Release',pointer=COM_BASE+0x1300,hresult=7)]
+    yield case('post-manage-promotion-repost-cancel-sequence','post',m,regs=sequence[0]['regs'],args=sequence[0]['arguments'],com=plan,sequence=sequence)
+
+
 class ContinuationBench(QueueNativeBench):
     def __init__(self,fixture):
         super().__init__(fixture)
-        self.cpu.mem_write(COM_BASE+0x1300,struct.pack('<I',COM_BASE+0x2000))
+        for offset in (0x1300,0x1400):self.cpu.mem_write(COM_BASE+offset,struct.pack('<I',COM_BASE+0x2000))
         if any(a['method']=='DuplicateSoundBuffer' for a in fixture['com']):
             address=COM_BASE+0x4014;self.cpu.mem_write(COM_BASE+0x2014,struct.pack('<I',address))
             def duplicate(call):
