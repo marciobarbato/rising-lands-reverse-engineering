@@ -2,6 +2,21 @@
 
 Chat: `01a18262-c6d5-7cd3-80fa-8431bf5f2657` (Economy and Production). Worktree: `/Users/marcio/git/Rising Lands/worktrees/re-economy`. Branch: `feat/re-economy`. Organization base: `6634be3af2d255846a847d8aa21ad4edf1cdb589`. Implementation commit: `f5a5e9b` (`Reconstruct troop completion preparation and cargo credits`); the following handoff commit and serialized integration result are identified in the completion chat. Only economy-owned paths changed.
 
+## Work cycle, deposit and lodging credit (2026-10-29)
+
+Branch `feat/re-economy`; not integrated. Full contract: [ECONOMY.md](../../docs/ECONOMY.md#work-cycle-deposit-and-lodging-credit-m3m4).
+
+- **Answer.** Goods reach the totals only through `BatimentAjouteMatiere` → `AjouteMatiere`, which adds to the total and only while the player's cave count `0x4dfb2c + 6p` is nonzero; otherwise they become sacks. The count rises when a unit lodges in a 0xc8 structure (`BatimentLogeEngin` → `InitBatimentPlayer`). Through the UI only colonists may enter a 0xc8 structure; troops (types 5/7) get a tag-5 move on the cave. Delivery is either the unit's own unload with a Ctrl depot order (mode 2), or lodging an idle carrier in the own sanctuary (tag 0x10). Either way it credits 1 per entry; the Bag capacity is 1.
+- **Original first.** Capture `63e8d2e`, widened in `ca8594b` (`bancada_ciclo_trabalho.py`, `capturar_ciclo_trabalho.py`): 1,600 real frames, 449 recorded calls. Natively: the colonist owns the cave at frame 125, then food 20 → 21 (lodging, 803) → 22 (Ctrl unload, 885), and stone 24 → 25 (Ctrl unload, 1026).
+- **Translation** `ciclo_trabalho.CicloTrabalho`:
+  - CalculWorkEngin types 5/7, all phases;
+  - BatimentLogeEngin (all types but 10) and BatimentAjouteMatiere;
+  - AjouteMatiere, TerrainRecolte and the mine leaves.
+- **Validation.**
+  - CPU-free replay of 407 recorded calls: 0 mismatches.
+  - Native differential (`validacao-ciclo-trabalho-emulada.json`): 407 compared, 0 mismatches, rerun equal to the capture.
+- **Open:** CalculTransporteEngin (state 18) and CalculDechargeCaveEngin (state 20), which need Ctrl orders; TerrainRetireMatiere; depot mode 1; unit types 6/13; depleted mines.
+
 ## M3 groundwork: order setters and construction gates (2026-10-29)
 
 Branch `feat/re-economy`; not integrated. Full contract: [ECONOMY.md](../../docs/ECONOMY.md#order-setters-and-construction-gates-m3-groundwork).
