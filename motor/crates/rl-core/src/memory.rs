@@ -44,6 +44,14 @@ impl MemoriaJogo {
         self.blocks.insert(base, bytes);
         Ok(())
     }
+    pub fn remove(&mut self, base: u32) -> Result<Vec<u8>> {
+        self.blocks
+            .remove(&base)
+            .ok_or(EngineError::UndeclaredAccess {
+                address: base,
+                size: 1,
+            })
+    }
     fn location(&self, address: u32, size: usize) -> Result<(u32, usize)> {
         if let Some((&base, data)) = self.blocks.range(..=address).next_back() {
             let offset =
