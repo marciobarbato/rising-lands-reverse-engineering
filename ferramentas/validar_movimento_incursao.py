@@ -56,7 +56,44 @@ def _adaptadores():
         'AvanceEngin': lambda w, r: w.avancar_passo(u16(r, 'EAX')) and {},
         'CalculNextCase': lambda w, r: w.calcular_proxima_celula(u16(r, 'EAX')) or {},
         'DeplaceEngin': lambda w, r: w.deslocar(u16(r, 'EAX')) or {},
+        # Path search, live world only (Missions' snapshot binding denies the solver).
+        'Chemin_Verouille': lambda w, r: w.solucionador.verrouiller(
+            w, u16(r, 'EBX'), u16(r, 'EAX'), u16(r, 'EDX'), r['ECX'] & 0xff, r['pilha'][0], r['pilha'][1] & 0xff,
+            r['pilha'][2] & 0xff) and {},
+        'CheminCalcul': lambda w, r: w.solucionador.calcular(w) and {},
+        'TestLigneOptimise': _testar_linha,
+        'OptimiseChemin': _otimizar,
     }
+
+
+SO_VIVO = frozenset(('Chemin_Verouille', 'CheminCalcul', 'TestLigneOptimise', 'OptimiseChemin'))
+
+
+def _contexto_busca(w):
+    from otimizacao_caminhos import ContextoLinha
+    return ContextoLinha.da_unidade(w, w._memoria.u16(0x496304))
+
+
+def _testar_linha(w, r):
+    """TestLigneOptimise 0x42d674: AX origin, DX destination, EBX cell slots, ECX counter (stack): AL = allowed."""
+    from otimizacao_caminhos import testar_linha
+    t = testar_linha(_contexto_busca(w), r['EAX'], r['EDX'])
+    for i, celula in enumerate(t.celulas):
+        w._memoria.u16(r['EBX'] + 2 * i, celula)
+    return dict(AL=int(t.permitido))
+
+
+def _otimizar(w, r):
+    """OptimiseChemin 0x42e890 over the 512-byte buffer at EAX. It exits when its 1-based cursor passes the
+    compacted cell count (0x42ea6e..0x42ea7b): EAX = compacted cells + 1."""
+    import struct
+    from mundo_vivo import vista_de
+    from otimizacao_caminhos import compactar_lacos, otimizar_rota
+    buffer = vista_de(w._memoria, r['EAX'], 512)
+    quantidade = struct.unpack_from('<H', buffer)[0]
+    compactas = compactar_lacos(list(struct.unpack_from('<' + 'H' * quantidade, buffer, 2)))
+    buffer[:] = otimizar_rota(_contexto_busca(w), bytes(buffer))
+    return dict(EAX=len(compactas) + 1)
 
 
 PARTES = dict(AL=(0xff, 0), AX=(0xffff, 0), EAX=(M32, 0))
@@ -129,6 +166,7 @@ def main():
         copias = {n: (b, bytearray(d)) for n, (b, d) in antes.items()}
         try:
             m = MemoriaQuadro(copias.values())
+            entrada = dict(entrada, pilha=[m.u32(entrada['ESP'] + 4 + 4 * k) for k in range(4)])
             solucionador = SolucionadorCaminhosVivo(m)
             partes = adaptadores[nome](mundo_vivo(m, solucionador), entrada) or {}
             if solucionador._resultado is not None:     # the search ran: keep the solver's own state
@@ -172,7 +210,7 @@ def main():
             plano(nome, caso, antes, resultado)
         if nome in adaptadores and (todas or registro['live_by_routine'].get(nome, 0) < a.por_rotina):
             vivo(nome, caso, antes, resultado)
-        if nome not in adaptadores or (contador(antes) < JANELA_BUSCA and registro['by_routine'].get(nome, 0) + sum(
+        if nome not in adaptadores or nome in SO_VIVO or (contador(antes) < JANELA_BUSCA and registro['by_routine'].get(nome, 0) + sum(
                 1 for d in registro['dependencies'] if d['routine'] == nome) >= a.por_rotina):
             return
         entrada = {k: int(v, 16) for k, v in resultado['entry_registers'].items()}

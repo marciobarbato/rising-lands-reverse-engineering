@@ -11,9 +11,14 @@ sees the original layout. The original layout:
 - CheminCalcul 0x42f214: the two 512-byte candidate buffers 0x4e116a/0x4e136a, the 510-byte region
   table 0x4e0f6a, the two 10-byte records 0x4e0f54/0x4e0f5e.
 
-Not modeled: CheminCalcul's contour-engine scratch, which the Python solver has no field for. These
-are u8 0x4e0f40, the record pointer u32 0x4e0f50, the contour state u8 0x4e0f68 and u16 0x4e1772.
-The native differential reports them as remaining differences.
+- CheminCalcul's contour state, when it traces contours (the search was not already concluded):
+  - u16 0x4e1772: the unit's region backup +0xfa at entry (0x42f26c);
+  - u8 0x4e0f40: the step count of the last traced side (reset per side, 0x42f332/0x4355c3, +1 per
+    step, 0x432658/0x4355a5), the contour result's ``fase``;
+  - u8 0x4e0f68: the region-list count (each add stores 0x4e0f6a + 2*count, 0x42fd9b), the
+    contour result's ``quantidade_regioes``;
+  - u32 0x4e0f50: the current record, 0x4e0f54, then 0x4e0f5e from the second side (0x4355e1),
+    unless every start was blocked.
 """
 from mundo_vivo import ponteiros_rotas, vista_de
 from solucionador_python import SolucionadorCaminhosPython
@@ -22,7 +27,7 @@ BUFFERS = (0x4e116a, 0x4e136a)
 REGIOES, REGISTROS = 0x4e0f6a, (0x4e0f54, 0x4e0f5e)
 INICIO, DESTINO = 0x4e0f44, 0x4e0f46
 FLAGS, DONO, MASCARA, CLASSE = (0x4e0f34, 0x4e0f35), 0x4e0f41, 0x4e0f42, 0x4e0f48
-NAO_MODELADOS = (0x4e0f40, 0x4e0f50, 0x4e0f68, 0x4e1772)
+PASSOS, REGISTRO_ATUAL, QUANTIDADE_REGIOES, REGIAO_ORIGEM = 0x4e0f40, 0x4e0f50, 0x4e0f68, 0x4e1772
 
 
 class SolucionadorCaminhosVivo(SolucionadorCaminhosPython):
@@ -48,6 +53,12 @@ class SolucionadorCaminhosVivo(SolucionadorCaminhosPython):
         if not p['concluida']:
             m.u16(INICIO, self.inicio_calculado)
             m.u16(DESTINO, self.destino_calculado)
+        if self.ultimo_contorno is not None:
+            c = self.ultimo_contorno
+            m.u16(REGIAO_ORIGEM, self.ultima_regiao_origem)
+            m.u8(PASSOS, c.fase)
+            m.u8(QUANTIDADE_REGIOES, c.quantidade_regioes)
+            m.u32(REGISTRO_ATUAL, REGISTROS[0] if c.status_falha == 8 and not c.passos else REGISTROS[1])
         u = mundo.unidades
         m.u8(DONO, u[indice * 276])
         m.u8(CLASSE, m.u8(0x4962c8 + u[indice * 276 + 1]))
@@ -57,7 +68,43 @@ class SolucionadorCaminhosVivo(SolucionadorCaminhosPython):
             m.u8(f, 0)
 
     def iniciar(self, mundo, indice):
+        self.ultimo_contorno = None
         self._carregar()
         resultado = super().iniciar(mundo, indice)
         self._guardar(mundo, indice)
+        return resultado
+
+    def verrouiller(self, mundo, indice, inicio, destino, mascara, rota, flag1, flag2):
+        """Chemin_Verouille 0x43b30b (AX start, DX destination, BX unit, CL mask; stack: route pointer and
+        two flags): prepares the search context at the original globals (``preparar_destino``)."""
+        from preparacao_destino import preparar_destino
+        m, u = self._m, mundo.unidades
+        p = preparar_destino(mundo, indice, inicio, destino, mascara, flag1, flag2)
+        m.u8(FLAGS[0], flag1)
+        m.u8(FLAGS[1], flag2)
+        m.u8(0x4e0f36, 1)
+        m.u8(0x4e0f37, p.sucesso)
+        m.u8(0x496302, p.concluida)
+        m.u32(0x4e0f3c, rota)
+        m.u16(0x496304, indice)
+        m.u8(MASCARA, mascara)
+        m.u8(CLASSE, m.u8(0x4962c8 + u[indice * 276 + 1]))
+        m.u8(DONO, u[indice * 276])
+        m.u16(rota, 0)
+        m.u16(0x4e0f4a, p.alternativa)
+        m.u8(0x4e0f4c, p.status)
+        if p.registrar_extremos:
+            m.u16(INICIO, p.inicio)
+            m.u16(DESTINO, p.destino)
+        return p
+
+    def calcular(self, mundo):
+        """CheminCalcul 0x42f214 on the prepared context: nothing unless a search is open (0x4e0f36 set,
+        0x4e0f37 and 0x496302 clear); else the contours, choice and optimization, applied to the world."""
+        m = self._m
+        if not m.u8(0x4e0f36) or m.u8(0x4e0f37) or m.u8(0x496302):
+            return None
+        indice = m.u16(0x496304)
+        resultado = self.iniciar(mundo, indice)
+        mundo._aplicar_resultado(indice, resultado)
         return resultado

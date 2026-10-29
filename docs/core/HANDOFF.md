@@ -567,3 +567,10 @@ The contract is in [RAID_CORE](RAID_CORE.md#movement-and-pathfinding-after-the-s
 - **Full 9000–9200 native differential:** 0 mismatches, except 6 bytes of CheminCalcul's contour-engine scratch at the 9177 search (`0x4e0f40`, `0x4e0f50..52`, `0x4e0f68`, `0x4e1772`). The search result itself is equal.
 - **Native movement regressions:** 56 tests pass with `RISING_EMULAR=1` (needs `testes/` on `PYTHONPATH`).
 - See [RAID_CORE](RAID_CORE.md).
+
+### M2.3: byte-exact path search on `feat/re-core`
+
+- **Contour state written:** `SolucionadorCaminhosVivo` now also writes CheminCalcul's contour state: `0x4e1772` (the unit's +0xfa), `0x4e0f40` (the step count, `fase`), `0x4e0f68` (the region count) and `0x4e0f50` (the record pointer). The Python solver keeps its last contour result (`ultimo_contorno`).
+- **Per-routine comparison:** Chemin_Verouille (`verrouiller`), CheminCalcul (`calcular`), TestLigneOptimise and OptimiseChemin (EAX = compacted cells + 1).
+- **Full 9000–9200 native differential:** 0 mismatches. Every call from 9170 is compared, including the 9177 search; memory after the search is byte-exact. The only stops are Missions' snapshot binding denying the solver, which AI/runtime's chain does not use.
+- See [RAID_CORE](RAID_CORE.md).
