@@ -29,6 +29,8 @@ class PlaybackInspectionService:
 
     def handle(self, request):
         operation = request.get('operation', 'open')
+        if operation == 'read' and self.live is not None:
+            return dict(read_hex=self.live.current.read(int(request['address'],0),int(request['size'])).hex())
         if operation == 'record-event':
             frame = max(129, (self.live.index+3)//2 if self.live else 129)
             self.recorder.event(frame,request['event'])
@@ -92,6 +94,8 @@ def main():
         except Exception as exc:
             response = dict(id=request.get('id') if isinstance(request, dict) else None, ok=False, error=str(exc), error_type=type(exc).__name__)
         print(json.dumps(response, separators=(',', ':')), flush=True)
+    if service is not None and service.live is not None:
+        service.live.close()
 
 
 if __name__ == '__main__': main()

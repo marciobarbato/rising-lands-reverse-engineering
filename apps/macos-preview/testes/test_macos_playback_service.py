@@ -11,6 +11,17 @@ from macos_playback_client import MacOSPlaybackClient
 
 
 class PlaybackServiceTests(unittest.TestCase):
+    def test_live_memory_read_never_reads_or_closes_evidence_cursor(self):
+        from types import SimpleNamespace
+        from unittest.mock import Mock
+        from macos_playback_service import PlaybackInspectionService
+        service=object.__new__(PlaybackInspectionService)
+        service.live=SimpleNamespace(current=SimpleNamespace(read=Mock(return_value=b'live')))
+        service.playback=Mock()
+        self.assertEqual(service.handle(dict(operation='read',address='0x508f7c',size=4)),dict(read_hex=b'live'.hex()))
+        service.live.current.read.assert_called_once_with(0x508f7c,4)
+        service.playback.assert_not_called()
+
     def test_worker_open_step_read_reset_errors_and_close(self):
         client = MacOSPlaybackClient(ROOT, ROOT/'apps/macos-preview/src', 'test-commit', graphics_inputs(self, ROOT))
         self.addCleanup(client.close)

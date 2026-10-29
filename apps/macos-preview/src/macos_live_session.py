@@ -11,7 +11,7 @@ from pathlib import Path
 import struct
 import time
 from macos_rust_abi import Frames, FrameInput, FrameRegisters
-from macos_m22_playback import MacOSM22Playback, MacOSPlaybackImage, CHECKPOINTS
+from macos_m22_playback import MacOSM22Playback, MacOSPlaybackImage, CHECKPOINTS, PHASES
 from macos_state_consumer import MacOSMemoryBlock, StateValidationError, EXECUTABLE_SHA256, _sha
 
 POLICY = 'pesquisas-paralelas/missoes/validacao/m2-2-politica-comparacao-128-quadros.json'
@@ -162,6 +162,6 @@ class MacOSLiveSession:
                       summary_verified=self.index>=0 and self.index<=256,
                       verified_phases=sum(r['state_equal'] is True for r in self.records),
                       verified_checkpoints=sum(r['checkpoint'] for r in self.records),
-                      live_stop=self.stop,input_policy='record-only',phases=[])
+                      live_stop=self.stop,input_policy='record-only',phases=list(PHASES)+( [] if self.index<=256 else [self.current.phase_name]))
         if self.renderer: result['render'] = self.renderer.present()
         return result
