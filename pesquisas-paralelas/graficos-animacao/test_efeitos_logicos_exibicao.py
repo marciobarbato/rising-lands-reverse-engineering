@@ -58,7 +58,7 @@ class CapturaTest(unittest.TestCase):
 
 class DominioTest(unittest.TestCase):
     def test_named_stops(self):
-        for m, sitio in ((estado(d=1), 0x43f191), (estado(origem=(0, 0)), 0x415b77), (estado(pool={3: 3}), 0x407dd3)):
+        for m, sitio in ((estado(d=1), 0x43f191), (estado(origem=(5, 5)), 0x415b77), (estado(pool={3: 3}), 0x407dd3)):
             with self.assertRaises(e.DependenciaExibicao) as c:
                 e.desenhar_jogo(m)
             self.assertEqual(c.exception.sitio, sitio)
@@ -67,6 +67,83 @@ class DominioTest(unittest.TestCase):
         self.assertEqual(e.inicializar_dimensoes(None).escritas[-1], (0x508726, 2, 17))
         with self.assertRaises(e.DependenciaExibicao):
             e.inicializar_dimensoes(None, False)
+
+
+CHAMADAS = Path(__file__).resolve().parent/'evidencias/chamadas-menuinit-exibicao.json'
+ISOLADO = [Path(__file__).resolve().parent/'evidencias'/n for n in ('dominio-exibicao-isolado.json', 'dominio-exibicao-visivel.json')]
+
+
+class Plana:
+    def __init__(self, u32=None, u16=None):
+        self._u32, self._u16 = u32 or {}, u16 or {}
+    u32 = lambda self, a: self._u32.get(a, 0)
+    u16 = lambda self, a: self._u16.get(a, 0)
+    u8 = lambda self, a: self._u32.get(a, 0)
+
+
+class MenuInitTest(unittest.TestCase):
+    def chamadas(self):
+        return {c['root']: c for c in json.loads(CHAMADAS.read_text())['calls']
+                if c['phase'] == 'load_tail' and c['caller'].startswith('MenuInit')}
+
+    def test_lock_unlock_match_the_native_bytes(self):
+        c = self.chamadas()
+        ponteiro = int(c['DDLockSurface']['eax_out'], 16)
+        r = e.ddlocksurface(Plana(), ponteiro)
+        final = {}
+        for a, n, v in r.escritas:
+            for k in range(n):
+                final[a+k] = (v >> 8*k) & 0xff
+        obs = {int(a, 16): v['final_writes'][1] for a, v in c['DDLockSurface']['dgroup_writes'].items()}
+        self.assertEqual(final, obs)
+        self.assertEqual(r.eax, ponteiro)
+        u = e.ddunlocksurface(Plana({0x4e17a8: 1}))
+        obs = {int(a, 16): v['final_writes'][1] for a, v in c['DDUnlockSurface']['dgroup_writes'].items()}
+        self.assertEqual({a+k: 0 for a, n, _ in u.escritas for k in range(n)}, obs)
+        self.assertEqual(int(c['DDUnlockSurface']['eax_out'], 16), u.eax)
+        with self.assertRaises(e.DependenciaExibicao):
+            e.ddlocksurface(Plana({0x4e17a8: 1}), 1)
+
+    def test_calls_without_dgroup_effect(self):
+        c = self.chamadas()
+        for nome in ('DeleteBank', 'FilledBox', 'DDFlipPage'):
+            self.assertEqual(c[nome]['dgroup_writes'], {})
+        self.assertEqual(e.ddflippage(Plana()).eax, int(c['DDFlipPage']['eax_out'], 16))
+        self.assertEqual(e.filledbox(None).escritas, ())
+        with self.assertRaises(e.DependenciaExibicao):
+            e.ddflippage(Plana({0x4dfb44: 1}))
+
+    def test_deletebank_order_and_native_free_sequence(self):
+        d = self.chamadas()['DeleteBank']
+        self.assertEqual(d['bank_walk']['free_order'], d['freed_pointers'])      # native GlobalHandle sequence
+        self.assertEqual(d['other_memory_writes'][0][:3], ['0x47ac6000', 72, 0])  # the zeroed count
+        m = Plana({0x1004: 0x2000, 0x2000: 0x3000, 0x2004: 0, 0x2008: 0x3100, 0x3008: 0x4000, 0x3108: 0},
+                  {0x1000: 3})
+        m._u32.update({0x2000: 0x3000, 0x2004: 0, 0x2008: 0x3100})
+        r = e.deletebank(m, 0x1000)
+        self.assertEqual(r.liberacoes, (0x4000, 0x3000, 0x3100, 0x2000, 0x1000))
+        self.assertEqual(r.escritas, ((0x1000, 2, 0),))
+        self.assertEqual(e.deletebank(m, 0).liberacoes, ())
+
+
+class DominioIsoladoTest(unittest.TestCase):
+    def test_every_proved_origin_has_a_native_clean_case(self):
+        vistos = set()
+        for f in ISOLADO:
+            for r in json.loads(f.read_text())['records']:
+                for c in r['cases']:
+                    if c['case'].startswith('origin_'):
+                        _, x, y = c['case'].split('_')
+                        vistos.add((int(x), int(y)))
+                    elif c['case'].startswith('visible') and c['case'].endswith('_state_5'):
+                        p = c['case'].split('_')
+                        vistos.add((int(p[1]), int(p[2])))
+        self.assertEqual(vistos | {(4, 6)}, set(e.ORIGENS_PROVADAS))
+
+    def test_origin_provider_domain(self):
+        self.assertEqual(e.desenhar_jogo(estado(origem=(39, 47))).escritas, ())
+        with self.assertRaises(e.DependenciaExibicao):
+            e.desenhar_jogo(estado(origem=(5, 5)))
 
 
 if __name__ == '__main__':

@@ -51,6 +51,8 @@ class Observador:
         return self.b.cpu.reg_read(x86.UC_X86_REG_ESP)
 
     def entrada(self, cpu, endereco, tamanho, _):
+        while self.pilha and self.esp() > self.pilha[-1][1]:   # root left without its matched return site
+            self.pilha.pop()
         self.pilha.append((RAIZES[endereco], self.esp()+4, self.b.fase))
         m = self.b.cpu.mem_read
         u = lambda a, n: int.from_bytes(m(a, n), 'little')
@@ -62,7 +64,7 @@ class Observador:
             structure_states={str(k): sum(1 for i in range(1000) if pool[i*276+5] == k) for k in range(8)}))
 
     def saida(self, cpu, endereco, tamanho, _):
-        if self.pilha and self.esp() == self.pilha[-1][1]:
+        if self.pilha and self.esp() >= self.pilha[-1][1]:   # >=: ret N routines pop their arguments
             self.pilha.pop()
 
     @property
