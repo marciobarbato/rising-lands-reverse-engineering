@@ -155,6 +155,13 @@ def run_validation(domain, target):
     runtime = Path(workspace) / 'local-data/macos-preview/dependencies/python'
     if runtime.is_dir():
         environment.setdefault('RISING_PYTHON_RUNTIME', str(runtime))
+    # The Rust engine diffs against every front's captures and Python providers,
+    # so it is a common gate; rustup installs cargo outside the default PATH.
+    if (target / 'motor/validate.sh').is_file():
+        cargo = Path.home() / '.cargo/bin'
+        environment['PATH'] = os.pathsep.join([str(cargo), environment.get('PATH', '')])
+        print('Common validation: sh motor/validate.sh', flush=True)
+        subprocess.check_call(['sh', 'motor/validate.sh'], cwd=target, env=environment)
     for command in FRONTS[domain].validation:
         argv = [sys.executable if part == '{python}' else part.replace('{workspace}', workspace)
                 for part in command]
