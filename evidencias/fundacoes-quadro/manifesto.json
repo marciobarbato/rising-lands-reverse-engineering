@@ -1,0 +1,1962 @@
+{
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "capstone": "5.0.7",
+ "scope": "static only; no execution",
+ "intervals": [
+  {
+   "owner": "core",
+   "role": "counter",
+   "name": "ProgIteration_counter_prefix",
+   "start": "0x475014",
+   "end_exclusive": "0x475041",
+   "bytes": 45,
+   "sha256": "0bca7d8049c294db3812b50a0a112a08c8c4f18dac390bdfac188f709a9231a0",
+   "instructions": 11,
+   "reads": [
+    "0x508f7c/1",
+    "0x508f7c/4",
+    "0x508f80/4",
+    "0x508f84/4"
+   ],
+   "writes": [
+    "0x508f7c/4",
+    "0x508f80/4",
+    "0x508f84/4"
+   ],
+   "grids": [],
+   "calls": [],
+   "external_jumps": [
+    "ProgIteration+0x33 (0x475041)"
+   ],
+   "asm": "00475014.asm"
+  },
+  {
+   "owner": "core",
+   "role": "caller",
+   "name": "ProgIteration",
+   "start": "0x47500e",
+   "end_exclusive": "0x47509d",
+   "bytes": 143,
+   "sha256": "4e0b8e1449e16cf7d855ab9bf92cd6b8ec32443e92cf6e17134ef64329c09789",
+   "instructions": 39,
+   "reads": [
+    "0x508f7c/1",
+    "0x508f7c/4",
+    "0x508f80/4",
+    "0x508f84/4",
+    "0x5099af/1",
+    "0x5099b2/1",
+    "0x523294/4"
+   ],
+   "writes": [
+    "0x508f7c/4",
+    "0x508f80/4",
+    "0x508f84/4",
+    "0x5099a8/2",
+    "0x5099aa/2",
+    "0x5099ae/1",
+    "0x5099af/1",
+    "0x5099b1/1",
+    "0x5099b2/1"
+   ],
+   "grids": [],
+   "calls": [
+    {
+     "site": "0x475044",
+     "target": "dword ptr cs:[0x523294]"
+    },
+    {
+     "site": "0x47505e",
+     "target": "CalculGame"
+    },
+    {
+     "site": "0x475063",
+     "target": "AffGame"
+    }
+   ],
+   "external_jumps": [],
+   "asm": "0047500e.asm"
+  },
+  {
+   "owner": "core",
+   "role": "counter",
+   "name": "GameNextFrame",
+   "start": "0x45d015",
+   "end_exclusive": "0x45d01c",
+   "bytes": 7,
+   "sha256": "a9e9abc6aa5e3a8171c47631c0530c44755094adfe04ce4518a7dd8b633cc869",
+   "instructions": 2,
+   "reads": [
+    "0x496d40/4"
+   ],
+   "writes": [
+    "0x496d40/4"
+   ],
+   "grids": [],
+   "calls": [],
+   "external_jumps": [],
+   "asm": "0045d015.asm"
+  },
+  {
+   "owner": "core",
+   "role": "rng",
+   "name": "Random",
+   "start": "0x4704dc",
+   "end_exclusive": "0x470520",
+   "bytes": 68,
+   "sha256": "14a68ad1377bfab0397ed5570d166095375d9fcf633da6524d28f118e80917c2",
+   "instructions": 23,
+   "reads": [
+    "0x497164/4"
+   ],
+   "writes": [
+    "0x497164/4"
+   ],
+   "grids": [],
+   "calls": [],
+   "external_jumps": [],
+   "asm": "004704dc.asm"
+  },
+  {
+   "owner": "core",
+   "role": "rng",
+   "name": "Randomize",
+   "start": "0x470520",
+   "end_exclusive": "0x470527",
+   "bytes": 7,
+   "sha256": "f6c1969e704a5e0810469e53948e883a8888b4fdbe89c3e02b1270594ee0b7ba",
+   "instructions": 3,
+   "reads": [],
+   "writes": [
+    "0x497164/4"
+   ],
+   "grids": [],
+   "calls": [],
+   "external_jumps": [],
+   "asm": "00470520.asm"
+  },
+  {
+   "owner": "core",
+   "role": "rng",
+   "name": "SetRandomSeed",
+   "start": "0x470527",
+   "end_exclusive": "0x47054c",
+   "bytes": 37,
+   "sha256": "3242ad122aceb13bac533240797df6e084dfa6df9a5d9794208d51f0cae8a9f5",
+   "instructions": 15,
+   "reads": [],
+   "writes": [
+    "0x497164/4"
+   ],
+   "grids": [],
+   "calls": [],
+   "external_jumps": [],
+   "asm": "00470527.asm"
+  },
+  {
+   "owner": "core",
+   "role": "rng",
+   "name": "GetRandomSeed",
+   "start": "0x47054c",
+   "end_exclusive": "0x470552",
+   "bytes": 6,
+   "sha256": "18fd214c36ab44eea4683f01cdd4fb0a05b1fb39d5adceffb16eec339b655b25",
+   "instructions": 2,
+   "reads": [
+    "0x497164/4"
+   ],
+   "writes": [],
+   "grids": [],
+   "calls": [],
+   "external_jumps": [],
+   "asm": "0047054c.asm"
+  },
+  {
+   "owner": "core",
+   "role": "rng",
+   "name": "iaRandom",
+   "start": "0x489728",
+   "end_exclusive": "0x4897a4",
+   "bytes": 124,
+   "sha256": "3b27a04438d4b6d09504fcdcb2248071470f42fe27d0e100c949394210fe9228",
+   "instructions": 49,
+   "reads": [
+    "0x498db4/4"
+   ],
+   "writes": [
+    "0x498db4/4"
+   ],
+   "grids": [],
+   "calls": [
+    {
+     "site": "0x489789",
+     "target": "matherr+0x27f"
+    }
+   ],
+   "external_jumps": [],
+   "asm": "00489728.asm"
+  },
+  {
+   "owner": "core",
+   "role": "rng_clock_thunk",
+   "name": "timeGetTime_thunk",
+   "start": "0x493a24",
+   "end_exclusive": "0x493a2a",
+   "bytes": 6,
+   "sha256": "8125a991d9ccf943001fd2f4d95b6bfb1b4f379cc083350cc94294d51a577706",
+   "instructions": 1,
+   "reads": [
+    "0x5234a4/4"
+   ],
+   "writes": [],
+   "grids": [],
+   "calls": [],
+   "external_jumps": [],
+   "asm": "00493a24.asm"
+  },
+  {
+   "owner": "core",
+   "role": "rng_provenance",
+   "name": "InitRand",
+   "start": "0x4583bc",
+   "end_exclusive": "0x45841b",
+   "bytes": 95,
+   "sha256": "44a7b43a2c84e48c9642cecea3cfc5cd35fd5393ea33a5f97a00b008c91ee149",
+   "instructions": 32,
+   "reads": [
+    "0x4e1d18/1"
+   ],
+   "writes": [
+    "0x4e1d18/1"
+   ],
+   "grids": [],
+   "calls": [
+    {
+     "site": "0x4583d1",
+     "target": "memset"
+    },
+    {
+     "site": "0x4583e0",
+     "target": "rand"
+    }
+   ],
+   "external_jumps": [],
+   "asm": "004583bc.asm"
+  },
+  {
+   "owner": "core",
+   "role": "rng",
+   "name": "LongRand",
+   "start": "0x45841b",
+   "end_exclusive": "0x458420",
+   "bytes": 5,
+   "sha256": "d9d2fa6ce5ac74038c3538ddcd3a332b97820a6d14b41ed9fb080b8491357c2d",
+   "instructions": 1,
+   "reads": [],
+   "writes": [],
+   "grids": [],
+   "calls": [],
+   "external_jumps": [
+    "rand (0x48c51d)"
+   ],
+   "asm": "0045841b.asm"
+  },
+  {
+   "owner": "core",
+   "role": "rng",
+   "name": "CRT_rand",
+   "start": "0x48c51d",
+   "end_exclusive": "0x48c541",
+   "bytes": 36,
+   "sha256": "9a1282e3f522ae0b52226aeb9b9bddfaa01b0bf16822663eb7a43bdd573c3aaa",
+   "instructions": 12,
+   "reads": [],
+   "writes": [],
+   "grids": [],
+   "calls": [
+    {
+     "site": "0x48c51e",
+     "target": "chdir+0x19"
+    }
+   ],
+   "external_jumps": [],
+   "asm": "0048c51d.asm"
+  },
+  {
+   "owner": "core",
+   "role": "rng",
+   "name": "CRT_srand",
+   "start": "0x48c541",
+   "end_exclusive": "0x48c551",
+   "bytes": 16,
+   "sha256": "f2ff2e6696f2756f1ce77c8c22ed0b5e4ffe7df52d9b02b11681f7f3c7c0115d",
+   "instructions": 8,
+   "reads": [],
+   "writes": [],
+   "grids": [],
+   "calls": [
+    {
+     "site": "0x48c544",
+     "target": "chdir+0x19"
+    }
+   ],
+   "external_jumps": [],
+   "asm": "0048c541.asm"
+  },
+  {
+   "owner": "core",
+   "role": "rng",
+   "name": "CRT_thread_seed_pointer",
+   "start": "0x48c513",
+   "end_exclusive": "0x48c51d",
+   "bytes": 10,
+   "sha256": "fdc75d585485c60a3a9dc74efc2cdfe54c9cd4e4e14b9ea9276f8d84bb4b2bba",
+   "instructions": 3,
+   "reads": [
+    "0x4990cc/4"
+   ],
+   "writes": [],
+   "grids": [],
+   "calls": [
+    {
+     "site": "0x48c513",
+     "target": "dword ptr [0x4990cc]"
+    }
+   ],
+   "external_jumps": [],
+   "asm": "0048c513.asm"
+  },
+  {
+   "owner": "core",
+   "role": "rng",
+   "name": "CRT_thread_data_getter",
+   "start": "0x48e7c7",
+   "end_exclusive": "0x48e7cd",
+   "bytes": 6,
+   "sha256": "3f654a6a5dcffef64c6c406e68e4ba8cb1d153b1a9ea16472c5e233c98ae6f6b",
+   "instructions": 2,
+   "reads": [
+    "0x522244/4"
+   ],
+   "writes": [],
+   "grids": [],
+   "calls": [],
+   "external_jumps": [],
+   "asm": "0048e7c7.asm"
+  },
+  {
+   "owner": "core",
+   "role": "world",
+   "name": "SetUpdateChamp",
+   "start": "0x475328",
+   "end_exclusive": "0x47534a",
+   "bytes": 34,
+   "sha256": "4125ba373847a207f0a591820d4323cdc74827b823e0df39ee50bbcb86e1a1a5",
+   "instructions": 13,
+   "reads": [
+    "0x4973ea/2",
+    "0x508f7c/4"
+   ],
+   "writes": [
+    "0x509952/1"
+   ],
+   "grids": [],
+   "calls": [],
+   "external_jumps": [],
+   "asm": "00475328.asm"
+  },
+  {
+   "owner": "core",
+   "role": "world",
+   "name": "UpdateChamp",
+   "start": "0x478806",
+   "end_exclusive": "0x478a01",
+   "bytes": 507,
+   "sha256": "f2c9eb789669e9d2931fb73bcd5411ca3eaf3ece5e5edc4271a60ce19baa4c63",
+   "instructions": 146,
+   "reads": [
+    "0x4973e8/2",
+    "0x507d74/4",
+    "0x509952/1"
+   ],
+   "writes": [
+    "0x4973e8/2",
+    "0x509952/1"
+   ],
+   "grids": [
+    "object_grid_u8"
+   ],
+   "calls": [
+    {
+     "site": "0x478844",
+     "target": "Random"
+    },
+    {
+     "site": "0x4788f1",
+     "target": "Random"
+    },
+    {
+     "site": "0x478911",
+     "target": "ScanNouvellePatate"
+    },
+    {
+     "site": "0x478954",
+     "target": "Random"
+    },
+    {
+     "site": "0x47896f",
+     "target": "ScanNouvellePatate"
+    }
+   ],
+   "external_jumps": [],
+   "asm": "00478806.asm"
+  },
+  {
+   "owner": "core",
+   "role": "world",
+   "name": "ScanNouvellePatate",
+   "start": "0x478319",
+   "end_exclusive": "0x478806",
+   "bytes": 1261,
+   "sha256": "d5ab38beaae488a437e51b479e8f4ec88038e6dbb9ffa989a993727285ce53cd",
+   "instructions": 382,
+   "reads": [
+    "0x507d70/4",
+    "0x507d74/4",
+    "0x507da8/4"
+   ],
+   "writes": [],
+   "grids": [
+    "attribute_grid_u8",
+    "object_grid_u8",
+    "tile_grid_u16"
+   ],
+   "calls": [
+    {
+     "site": "0x4783e3",
+     "target": "Random"
+    },
+    {
+     "site": "0x478536",
+     "target": "Random"
+    },
+    {
+     "site": "0x478699",
+     "target": "Random"
+    },
+    {
+     "site": "0x4787d5",
+     "target": "Random"
+    }
+   ],
+   "external_jumps": [],
+   "asm": "00478319.asm"
+  },
+  {
+   "owner": "core",
+   "role": "world",
+   "name": "NextAnimVeget",
+   "start": "0x4772ec",
+   "end_exclusive": "0x4774fa",
+   "bytes": 526,
+   "sha256": "76891268bb76b2282b7867a9f5ff5079b029225d601512acfa97deb0babf21b8",
+   "instructions": 147,
+   "reads": [
+    "0x4e1d18/1",
+    "0x507d74/4",
+    "0x507dac/4",
+    "0x508724/2",
+    "0x508726/2",
+    "0x508f7c/1"
+   ],
+   "writes": [
+    "0x4e1d18/1"
+   ],
+   "grids": [
+    "animation_grid_u8",
+    "object_grid_u8"
+   ],
+   "calls": [],
+   "external_jumps": [
+    "SacCherchePlace+0x449 (0x475bf8)"
+   ],
+   "asm": "004772ec.asm"
+  },
+  {
+   "owner": "core",
+   "role": "world",
+   "name": "NextAnimVegetFullMap",
+   "start": "0x4774fa",
+   "end_exclusive": "0x477700",
+   "bytes": 518,
+   "sha256": "1b48f09aeed10c7f46369be4ece3f67700f34c8aed9806ac50eeb1c36f293320",
+   "instructions": 152,
+   "reads": [
+    "0x4e1d18/1",
+    "0x507d74/4",
+    "0x507dac/4",
+    "0x508f7c/1"
+   ],
+   "writes": [
+    "0x4e1d18/1"
+   ],
+   "grids": [
+    "animation_grid_u8",
+    "object_grid_u8"
+   ],
+   "calls": [],
+   "external_jumps": [],
+   "asm": "004774fa.asm"
+  },
+  {
+   "owner": "core",
+   "role": "world",
+   "name": "NextAnimTerrain",
+   "start": "0x477700",
+   "end_exclusive": "0x47790d",
+   "bytes": 525,
+   "sha256": "367d82ac5eccb7aa1dd1120f3613a8e5b6015a5c0684731b531dc0896b1e99ad",
+   "instructions": 148,
+   "reads": [
+    "0x4e1d18/1",
+    "0x507d70/4",
+    "0x507d74/4",
+    "0x507dac/4",
+    "0x508724/2",
+    "0x508726/2",
+    "0x508f7c/1"
+   ],
+   "writes": [
+    "0x4e1d18/1"
+   ],
+   "grids": [
+    "animation_grid_u8",
+    "object_grid_u8",
+    "tile_grid_u16"
+   ],
+   "calls": [
+    {
+     "site": "0x47782e",
+     "target": "LongRand"
+    }
+   ],
+   "external_jumps": [
+    "NextAnimVeget+0x206 (0x4774f2)"
+   ],
+   "asm": "00477700.asm"
+  },
+  {
+   "owner": "core",
+   "role": "shared_epilogue",
+   "name": "SacCherchePlace_epilogue_0x475bf8",
+   "start": "0x475bf8",
+   "end_exclusive": "0x475bfe",
+   "bytes": 6,
+   "sha256": "9651d68480e9031dd95d190ca598519a163040c3b73f617ef4b3a789f33597ef",
+   "instructions": 6,
+   "reads": [],
+   "writes": [],
+   "grids": [],
+   "calls": [],
+   "external_jumps": [],
+   "asm": "00475bf8.asm"
+  },
+  {
+   "owner": "ai-runtime",
+   "role": "wrapper",
+   "name": "CalculNextReflect",
+   "start": "0x47fbea",
+   "end_exclusive": "0x47fbfd",
+   "bytes": 19,
+   "sha256": "1c1e95b10fdc6a66fac25202cadc32613d0012a95f8144a997787b8a25d8bb79",
+   "instructions": 5,
+   "reads": [],
+   "writes": [],
+   "grids": [],
+   "calls": [
+    {
+     "site": "0x47fbf5",
+     "target": "iaCalculPlayer"
+    }
+   ],
+   "external_jumps": [],
+   "asm": "0047fbea.asm"
+  },
+  {
+   "owner": "graphics",
+   "role": "display",
+   "name": "SetClipping",
+   "start": "0x40f519",
+   "end_exclusive": "0x40f535",
+   "bytes": 28,
+   "sha256": "73755c55474b2b2de9eba104f42911b01436a2a78dd37025904bb4aabd9bf870",
+   "instructions": 5,
+   "reads": [],
+   "writes": [
+    "0x49a01c/2",
+    "0x49a01e/2",
+    "0x49a020/2",
+    "0x49a022/2"
+   ],
+   "grids": [],
+   "calls": [],
+   "external_jumps": [],
+   "asm": "0040f519.asm"
+  },
+  {
+   "owner": "macos",
+   "role": "ui_input",
+   "name": "InitGameZone",
+   "start": "0x471830",
+   "end_exclusive": "0x472047",
+   "bytes": 2071,
+   "sha256": "415f52629e7a3cc5e692623a8b44e8b36ebafbf03206619ed1e69b172ce9f5e7",
+   "instructions": 550,
+   "reads": [
+    "0x471820+index/4",
+    "0x497285/1",
+    "0x49a018/2",
+    "0x49a01a/2",
+    "0x508041/1",
+    "0x508724/2",
+    "0x508726/2",
+    "0x508f90/1"
+   ],
+   "writes": [],
+   "grids": [],
+   "calls": [
+    {
+     "site": "0x471866",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471884",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x4718a2",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x4718c0",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x4718de",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x4718fc",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x47191a",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471935",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471944",
+     "target": "MouseTestZone"
+    },
+    {
+     "site": "0x471957",
+     "target": "MenuGetNbItem"
+    },
+    {
+     "site": "0x471993",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x4719d7",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x4719f5",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471a13",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471a18",
+     "target": "MissionGetNum"
+    },
+    {
+     "site": "0x471a4f",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471a6d",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471a8b",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471ab1",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471acf",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471af7",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471b2f",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471b6e",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471ba6",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471bd2",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471bf4",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471c06",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471c2f",
+     "target": "MiniMapGetPos"
+    },
+    {
+     "site": "0x471c3a",
+     "target": "MiniMapGetTaille"
+    },
+    {
+     "site": "0x471c80",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471c8c",
+     "target": "ChercheContacteur"
+    },
+    {
+     "site": "0x471cad",
+     "target": "ChercheContacteur"
+    },
+    {
+     "site": "0x471cf9",
+     "target": "ChercheContacteur"
+    },
+    {
+     "site": "0x471d1b",
+     "target": "MarcheGetPos"
+    },
+    {
+     "site": "0x471d26",
+     "target": "MarcheGetTaille"
+    },
+    {
+     "site": "0x471d85",
+     "target": "MiniMapGetPos"
+    },
+    {
+     "site": "0x471d90",
+     "target": "MiniMapGetTaille"
+    },
+    {
+     "site": "0x471dd6",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471de2",
+     "target": "ChercheContacteur"
+    },
+    {
+     "site": "0x471e03",
+     "target": "ChercheContacteur"
+    },
+    {
+     "site": "0x471e6e",
+     "target": "ChercheContacteur"
+    },
+    {
+     "site": "0x471e90",
+     "target": "MarcheGetPos"
+    },
+    {
+     "site": "0x471e9b",
+     "target": "MarcheGetTaille"
+    },
+    {
+     "site": "0x471ed7",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471edc",
+     "target": "MessageBoxExiste"
+    },
+    {
+     "site": "0x471f40",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x471f76",
+     "target": "PlayerEstContacterPourAlliance"
+    },
+    {
+     "site": "0x471fea",
+     "target": "MouseSetZone"
+    },
+    {
+     "site": "0x472038",
+     "target": "MouseSetZone"
+    }
+   ],
+   "external_jumps": [],
+   "asm": "00471830.asm"
+  },
+  {
+   "owner": "macos",
+   "role": "ui_input",
+   "name": "MouseSetZone",
+   "start": "0x479c50",
+   "end_exclusive": "0x479c9e",
+   "bytes": 78,
+   "sha256": "ec9719c573d1a689412a8e1ab91a58a0e1d5ae1521484354eb018bdc0371a63f",
+   "instructions": 21,
+   "reads": [
+    "0x50a9b8/2"
+   ],
+   "writes": [
+    "0x50a9b8/2"
+   ],
+   "grids": [],
+   "calls": [],
+   "external_jumps": [],
+   "asm": "00479c50.asm"
+  },
+  {
+   "owner": "macos",
+   "role": "ui_input",
+   "name": "MouseTestZone",
+   "start": "0x479c9e",
+   "end_exclusive": "0x479cac",
+   "bytes": 14,
+   "sha256": "42f1ad52b7117a7ed4936b87f43f71ee204c3a431ff926abbfc9248591783725",
+   "instructions": 3,
+   "reads": [],
+   "writes": [
+    "0x50a9b4/2",
+    "0x50a9b6/2"
+   ],
+   "grids": [],
+   "calls": [],
+   "external_jumps": [],
+   "asm": "00479c9e.asm"
+  },
+  {
+   "owner": "ai-runtime",
+   "role": "empty",
+   "name": "PlayerAttaqueReset",
+   "start": "0x46d628",
+   "end_exclusive": "0x46d629",
+   "bytes": 1,
+   "sha256": "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e",
+   "instructions": 1,
+   "reads": [],
+   "writes": [],
+   "grids": [],
+   "calls": [],
+   "external_jumps": [],
+   "asm": "0046d628.asm"
+  },
+  {
+   "owner": "ai-runtime",
+   "role": "caller",
+   "name": "CalculGame_load_and_frame_body",
+   "start": "0x42d1da",
+   "end_exclusive": "0x42d4f5",
+   "bytes": 795,
+   "sha256": "2b6f615d46c0580d6e81f103ded3ece6c2a62d625a7347ad79c61e22894fbfd4",
+   "instructions": 213,
+   "reads": [
+    "0x4e061c/4",
+    "0x4e0730/1",
+    "0x4e1d18/1",
+    "0x4e2f28/1",
+    "0x4e2f78/1",
+    "0x508041/1",
+    "0x508720/2",
+    "0x508722/2",
+    "0x508724/2",
+    "0x508726/2",
+    "0x5232bc/4",
+    "0x5232d0/4"
+   ],
+   "writes": [
+    "0x496d2c/1",
+    "0x496fd8/1",
+    "0x497285/1",
+    "0x4e05a0/1",
+    "0x4e061c/4",
+    "0x4e1d18/1",
+    "0x4e2480/1",
+    "0x508f7c/4",
+    "0x508f80/4",
+    "0x508f84/4",
+    "0x5099ae/1",
+    "0x5099af/1",
+    "0x5099b0/1"
+   ],
+   "grids": [],
+   "calls": [
+    {
+     "site": "0x42d1da",
+     "target": "MouseInit"
+    },
+    {
+     "site": "0x42d1ef",
+     "target": "InitCache"
+    },
+    {
+     "site": "0x42d1f4",
+     "target": "InitGouttes"
+    },
+    {
+     "site": "0x42d228",
+     "target": "MissionLoad"
+    },
+    {
+     "site": "0x42d234",
+     "target": "MissionLoadName"
+    },
+    {
+     "site": "0x42d242",
+     "target": "dword ptr cs:[0x5232d0]"
+    },
+    {
+     "site": "0x42d249",
+     "target": "OpenNewFile"
+    },
+    {
+     "site": "0x42d252",
+     "target": "RestoreAll"
+    },
+    {
+     "site": "0x42d263",
+     "target": "MenuInit"
+    },
+    {
+     "site": "0x42d26a",
+     "target": "dword ptr cs:[0x5232d0]"
+    },
+    {
+     "site": "0x42d278",
+     "target": "dword ptr cs:[0x5232d0]"
+    },
+    {
+     "site": "0x42d27f",
+     "target": "RestoreAll"
+    },
+    {
+     "site": "0x42d2a6",
+     "target": "SetClipping"
+    },
+    {
+     "site": "0x42d2d0",
+     "target": "MenuInit"
+    },
+    {
+     "site": "0x42d2d9",
+     "target": "InitGameZone"
+    },
+    {
+     "site": "0x42d2de",
+     "target": "PlayerAttaqueReset"
+    },
+    {
+     "site": "0x42d2e3",
+     "target": "EvenementEnCours"
+    },
+    {
+     "site": "0x42d328",
+     "target": "MCICD_Play"
+    },
+    {
+     "site": "0x42d33b",
+     "target": "InputGame"
+    },
+    {
+     "site": "0x42d342",
+     "target": "InputSend"
+    },
+    {
+     "site": "0x42d34b",
+     "target": "InputReceive"
+    },
+    {
+     "site": "0x42d354",
+     "target": "MissionGetNum"
+    },
+    {
+     "site": "0x42d35d",
+     "target": "CalculNextReflect"
+    },
+    {
+     "site": "0x42d36c",
+     "target": "InputGame"
+    },
+    {
+     "site": "0x42d379",
+     "target": "PlayerGetType"
+    },
+    {
+     "site": "0x42d3b0",
+     "target": "ProcessInputGame"
+    },
+    {
+     "site": "0x42d3e1",
+     "target": "MessageBoxCalcul"
+    },
+    {
+     "site": "0x42d3e6",
+     "target": "GameNextFrame"
+    },
+    {
+     "site": "0x42d3eb",
+     "target": "CalculIconeAction"
+    },
+    {
+     "site": "0x42d3f0",
+     "target": "ProjectileCalcul"
+    },
+    {
+     "site": "0x42d3f5",
+     "target": "CalculEnginNextEtape"
+    },
+    {
+     "site": "0x42d3fa",
+     "target": "CalculBatimentNextEtape"
+    },
+    {
+     "site": "0x42d3ff",
+     "target": "RechercheCalcul"
+    },
+    {
+     "site": "0x42d404",
+     "target": "PlayerInitAllianceCompteur"
+    },
+    {
+     "site": "0x42d409",
+     "target": "SetUpdateChamp"
+    },
+    {
+     "site": "0x42d40e",
+     "target": "UpdateChamp"
+    },
+    {
+     "site": "0x42d413",
+     "target": "CalculMatiere"
+    },
+    {
+     "site": "0x42d41f",
+     "target": "CalculCompteurMarche"
+    },
+    {
+     "site": "0x42d42d",
+     "target": "CalculCompteurProposition"
+    },
+    {
+     "site": "0x42d441",
+     "target": "NextAnimTerrain"
+    },
+    {
+     "site": "0x42d44f",
+     "target": "NextAnimVegetFullMap"
+    },
+    {
+     "site": "0x42d467",
+     "target": "NextAnimVeget"
+    },
+    {
+     "site": "0x42d46c",
+     "target": "PlayerAttaqueCalculSympa"
+    },
+    {
+     "site": "0x42d481",
+     "target": "TestFinDeMission"
+    },
+    {
+     "site": "0x42d48f",
+     "target": "MissionGetNum"
+    },
+    {
+     "site": "0x42d4b1",
+     "target": "MessageBoxSet"
+    },
+    {
+     "site": "0x42d4c8",
+     "target": "PlaySnd_StopAllSound"
+    },
+    {
+     "site": "0x42d4db",
+     "target": "dword ptr cs:[0x5232bc]"
+    }
+   ],
+   "external_jumps": [
+    "CalculGame+0xc4 (0x42c92c)",
+    "InputGame+0x309c (0x42c314)"
+   ],
+   "asm": "0042d1da.asm"
+  }
+ ],
+ "grid_pointers": {
+  "0x507d70": "tile_grid_u16",
+  "0x507d74": "object_grid_u8",
+  "0x507da8": "attribute_grid_u8",
+  "0x507dac": "animation_grid_u8"
+ },
+ "code_references": {
+  "0x496d2c": [
+   "AffGouttes",
+   "CalculGame",
+   "GetMeteo",
+   "InputGame",
+   "MenuNewSelect",
+   "NextGouttes"
+  ],
+  "0x496d40": [
+   "GameNextFrame"
+  ],
+  "0x496fd8": [
+   "CalculGame",
+   "CalculMarche",
+   "CalculMarcheProposition",
+   "ChargeMarche",
+   "InputGame",
+   "MarcheActif",
+   "MenuNewSelect",
+   "SauveMarche"
+  ],
+  "0x497164": [
+   "GetRandomSeed",
+   "Random",
+   "Randomize",
+   "SetRandomSeed"
+  ],
+  "0x497285": [
+   "AffChrono",
+   "AffGame",
+   "CalculGame",
+   "InitGameZone",
+   "MenuNewSelect",
+   "WndProc"
+  ],
+  "0x4973e8": [
+   "UpdateChamp"
+  ],
+  "0x4973ea": [
+   "BatimentLoadCaract",
+   "SetUpdateChamp"
+  ],
+  "0x498db4": [
+   "iaRandom"
+  ],
+  "0x49a01c": [
+   "Box",
+   "FilledBox",
+   "FilledBoxGris",
+   "FilledBoxOmbre",
+   "PasteBobCmp",
+   "PasteEclairCmp",
+   "PasteGrisCmp",
+   "PasteMaskCmp",
+   "PasteNegatifCmp",
+   "PasteNoirBlancCmp",
+   "PasteOmbreCmp",
+   "PastePlayerCmp",
+   "ResetMode",
+   "RestaureClipping",
+   "SaveCurrentClipping",
+   "SetClipping"
+  ],
+  "0x49a01e": [
+   "AffBatimentOmbre",
+   "Box",
+   "FilledBox",
+   "FilledBoxGris",
+   "FilledBoxOmbre",
+   "PasteBobCmp",
+   "PasteEclairCmp",
+   "PasteGrisCmp",
+   "PasteMaskCmp",
+   "PasteNegatifCmp",
+   "PasteNoirBlancCmp",
+   "PasteOmbreCmp",
+   "PastePlayerCmp",
+   "ResetMode",
+   "RestaureClipping",
+   "SaveCurrentClipping",
+   "SetClipping"
+  ],
+  "0x49a020": [
+   "Box",
+   "FilledBox",
+   "FilledBoxGris",
+   "FilledBoxOmbre",
+   "PasteBobCmp",
+   "PasteEclairCmp",
+   "PasteGrisCmp",
+   "PasteMaskCmp",
+   "PasteNegatifCmp",
+   "PasteNoirBlancCmp",
+   "PasteOmbreCmp",
+   "PastePlayerCmp",
+   "ResetMode",
+   "RestaureClipping",
+   "SaveCurrentClipping",
+   "SetClipping"
+  ],
+  "0x49a022": [
+   "AffBatimentOmbre",
+   "AffGame",
+   "AffZoneJeu",
+   "Box",
+   "FilledBox",
+   "FilledBoxGris",
+   "FilledBoxOmbre",
+   "PasteBobCmp",
+   "PasteEclairCmp",
+   "PasteGrisCmp",
+   "PasteMaskCmp",
+   "PasteNegatifCmp",
+   "PasteNoirBlancCmp",
+   "PasteOmbreCmp",
+   "PastePlayerCmp",
+   "ResetMode",
+   "RestaureClipping",
+   "SaveCurrentClipping",
+   "SetClipping"
+  ],
+  "0x4e05a0": [
+   "CalculGame"
+  ],
+  "0x4e061c": [
+   "CalculGame",
+   "MenuNewSelect"
+  ],
+  "0x4e0730": [
+   "CalculGame",
+   "MenuNewSelect",
+   "ReseauActif",
+   "ReseauSetActif"
+  ],
+  "0x4e1c18": [
+   "AffBatiments",
+   "AffCorpsEngin",
+   "AffDeplaceEngin",
+   "AffVeget",
+   "CalculGame",
+   "DDFlipPage",
+   "InitRand",
+   "MenuInit",
+   "NextAnimTerrain",
+   "NextAnimVeget",
+   "NextAnimVegetFullMap"
+  ],
+  "0x4e1d18": [
+   "AffBatiments",
+   "AffCorpsEngin",
+   "AffDeplaceEngin",
+   "AffVeget",
+   "CalculGame",
+   "DDFlipPage",
+   "InitRand",
+   "MenuInit",
+   "NextAnimTerrain",
+   "NextAnimVeget",
+   "NextAnimVegetFullMap"
+  ],
+  "0x4e2480": [
+   "CalculGame"
+  ],
+  "0x4e2f28": [
+   "CalculGame",
+   "MCICD_Free",
+   "MCICD_Init",
+   "MCICD_Manage",
+   "MCICD_Play",
+   "MCICD_Stop"
+  ],
+  "0x507d70": [
+   "AffBatiments",
+   "AffTerrain",
+   "AffVehiculeAtelier",
+   "AffVehiculeAtelier2",
+   "CarteCharger",
+   "CarteSauver",
+   "DemonteBatiment",
+   "EstConstructionTerrain",
+   "MineDetruire",
+   "MineEstSurTerrain",
+   "MineRecolte",
+   "MineRetire",
+   "MissionAlloc",
+   "MissionFree",
+   "MissionLoad",
+   "MissionLoadName",
+   "NextAnimTerrain",
+   "RechercheEmplacementBatiment",
+   "ResetBatimentTerrainModify",
+   "ScanNouvellePatate",
+   "SetTerrain",
+   "TerrainEstArride",
+   "TerrainEstCailloux",
+   "TerrainEstCharbon",
+   "TerrainEstEau",
+   "TerrainEstFrontiereArride",
+   "TerrainEstFrontiereCailloux",
+   "TerrainEstFrontiereCharbon",
+   "TerrainEstFrontiereEau",
+   "TerrainEstFrontiereHerbe",
+   "TerrainEstFrontiereMagma",
+   "TerrainEstHautMontagne",
+   "TerrainEstHerbe",
+   "TerrainEstMagma",
+   "TerrainEstMine",
+   "TerrainEstMontagne",
+   "TerrainEstObstacleNaturel",
+   "TerrainEstSable",
+   "TerrainGetColor"
+  ],
+  "0x507d74": [
+   "AffBatiments",
+   "AffSprite",
+   "AffVeget",
+   "AffVegetTerrain",
+   "AvanceEngin",
+   "BaisseTouteHerse",
+   "BatimentConstructible",
+   "BatimentGenereFumee",
+   "BatimentModifyTerrain",
+   "BatimentPlaceLibre",
+   "BatimentPosable",
+   "CarteCharger",
+   "CarteSauver",
+   "CheminCalcul",
+   "Chemin_Verouille",
+   "ChercheGcLibre",
+   "ChercheMurCombinaisons",
+   "ChercheVeget",
+   "ChercheVegetLibre",
+   "CreerCaisse",
+   "CreerExplosion",
+   "CreerFumeeCase",
+   "CreerSac",
+   "DemonteBatiment",
+   "GetCaseBatPlaceOccupeLibreInTypeBat",
+   "GetNbrPatatesRayon",
+   "GetRandCaseChamps",
+   "HerseSousCurseur",
+   "I_ChercheChampNonExploite",
+   "LocalTerrainEnCollision",
+   "MissionAlloc",
+   "MissionFree",
+   "MissionLoad",
+   "MissionLoadName",
+   "NextAnimTerrain",
+   "NextAnimVeget",
+   "NextAnimVegetFullMap",
+   "NouvellePatate",
+   "PatateAugmentable",
+   "PlaceBatiment",
+   "RemonteTouteHerse",
+   "RetireCaisse",
+   "SacCherchePlace",
+   "SacCherchePlaceLibre",
+   "SacGetCapacite",
+   "ScanNouvellePatate",
+   "SetMurAllentour",
+   "TerrainAccepteCaisse",
+   "TerrainAccepteSac",
+   "TerrainEstCaisse",
+   "TerrainEstChampi",
+   "TerrainEstDrapeau",
+   "TerrainEstGc",
+   "TerrainEstObstacleNaturel",
+   "TerrainEstPiege",
+   "TerrainEstSac",
+   "TerrainGetColor",
+   "TerrainGetSacType",
+   "TerrainPoseMine",
+   "TerrainRecolte",
+   "TerrainReset",
+   "TerrainRetireMatiere",
+   "TestLigneOptimise",
+   "TestMurAutourHerse",
+   "UpdateChamp",
+   "ValideHerse"
+  ],
+  "0x507da8": [
+   "CarteCharger",
+   "CarteSauver",
+   "CheminCalcul",
+   "Chemin_Remap",
+   "Chemin_Verouille",
+   "GetFreeCell",
+   "LocalTerrainEnCollision",
+   "MissionAlloc",
+   "MissionFree",
+   "MissionLoad",
+   "MissionLoadName",
+   "NouvellePatate",
+   "ResetCollision",
+   "ScanNouvellePatate",
+   "SetCollision",
+   "TerrainEnCollision",
+   "TerrainEstObstacle",
+   "TerrainReset",
+   "TestLigneOptimise"
+  ],
+  "0x507dac": [
+   "AffVeget",
+   "AffVegetTerrain",
+   "AvanceEngin",
+   "CarteCharger",
+   "CarteSauver",
+   "CreerCaisse",
+   "CreerExplosion",
+   "CreerFumeeCase",
+   "CreerSac",
+   "MineEndWork",
+   "MineSetWork",
+   "MissionAlloc",
+   "MissionFree",
+   "MissionLoad",
+   "MissionLoadName",
+   "NextAnimTerrain",
+   "NextAnimVeget",
+   "NextAnimVegetFullMap",
+   "SacCherchePlace",
+   "SacCherchePlaceLibre",
+   "SacGetCapacite",
+   "TerrainAccepteSac",
+   "TerrainEstPiege",
+   "TerrainPoseMine",
+   "TerrainReset",
+   "TerrainRetireMatiere"
+  ],
+  "0x508720": [
+   "AffAttaqueEngin",
+   "AffConstruireBatiment",
+   "AffDeplaceEngin",
+   "AffDestInfo",
+   "AffGame",
+   "AffJaugeBatiment",
+   "AffMiniMap",
+   "AffProjectile",
+   "AffRentrerHangar",
+   "AffWorkEngin",
+   "AffZoneJeu",
+   "BatimentGetVolume",
+   "BatimentRecentreSurCase",
+   "CalculGame",
+   "EnginGetVolume",
+   "GameLoad",
+   "GameSave",
+   "HerseSousCurseur",
+   "InputGame",
+   "LoadTailleMap",
+   "LoadVar",
+   "MarcheRecentre",
+   "MiniMapRecentre",
+   "MissionLoad",
+   "MissionLoadName",
+   "NextGouttes",
+   "ProjectileTrierAffichage",
+   "RestoreAll",
+   "SauveVar"
+  ],
+  "0x508722": [
+   "AffAttaqueEngin",
+   "AffConstruireBatiment",
+   "AffDeplaceEngin",
+   "AffDestInfo",
+   "AffGame",
+   "AffMiniMap",
+   "AffProjectile",
+   "AffRentrerHangar",
+   "AffWorkEngin",
+   "AffZoneJeu",
+   "BatimentGetVolume",
+   "BatimentRecentreSurCase",
+   "CalculGame",
+   "EnginGetVolume",
+   "GameLoad",
+   "GameSave",
+   "HerseSousCurseur",
+   "InputGame",
+   "LoadTailleMap",
+   "LoadVar",
+   "MarcheRecentre",
+   "MiniMapRecentre",
+   "MissionLoad",
+   "MissionLoadName",
+   "ProjectileTrierAffichage",
+   "RestoreAll",
+   "SauveVar"
+  ],
+  "0x508724": [
+   "AffAttaqueEngin",
+   "AffBatiments",
+   "AffConstruireBatiment",
+   "AffDeplaceEngin",
+   "AffDrapeauAlliance",
+   "AffGame",
+   "AffMiniMap",
+   "AffRentrerHangar",
+   "AffSprite",
+   "AffTerrain",
+   "AffTrame",
+   "AffUpgradeMonastere",
+   "AffVehiculeAtelier",
+   "AffVehiculeAtelier2",
+   "AffVehiculeReparer",
+   "AffWorkEngin",
+   "AffZoneJeu",
+   "BatimentGetVolume",
+   "BatimentRecentreSurCase",
+   "CalculGame",
+   "DDFlipPage",
+   "DDInit",
+   "EnginGetCentreGroupe",
+   "EnginGetVolume",
+   "GoLastAttaque",
+   "InitGameZone",
+   "InputGame",
+   "MarcheGetCenterSelect",
+   "MarcheRecentre",
+   "MenuNewSelect",
+   "MessageBoxAffiche",
+   "MiniMapGetCenterSelect",
+   "MiniMapRecentre",
+   "NextAnimTerrain",
+   "NextAnimVeget",
+   "ProjectileTrierAffichage",
+   "ResetMode",
+   "ScrollTerrain",
+   "WndProc"
+  ],
+  "0x508726": [
+   "AffAttaqueEngin",
+   "AffBatiments",
+   "AffConstruireBatiment",
+   "AffDeplaceEngin",
+   "AffDrapeauAlliance",
+   "AffGame",
+   "AffInfoAide",
+   "AffMarche",
+   "AffMiniMap",
+   "AffRentrerHangar",
+   "AffSprite",
+   "AffTerrain",
+   "AffTrame",
+   "AffUpgradeMonastere",
+   "AffVehiculeAtelier",
+   "AffVehiculeAtelier2",
+   "AffVehiculeReparer",
+   "AffWorkEngin",
+   "AffZoneJeu",
+   "BatimentGetVolume",
+   "BatimentRecentreSurCase",
+   "CalculGame",
+   "DDFlipPage",
+   "DDInit",
+   "EnginGetCentreGroupe",
+   "EnginGetVolume",
+   "GoLastAttaque",
+   "InitGameZone",
+   "InputGame",
+   "MarcheGetCenterSelect",
+   "MarcheRecentre",
+   "MenuNewSelect",
+   "MessageBoxAffiche",
+   "MiniMapGetCenterSelect",
+   "MiniMapRecentre",
+   "NextAnimTerrain",
+   "NextAnimVeget",
+   "ProjectileTrierAffichage",
+   "ResetMode",
+   "ScrollTerrain",
+   "WndProc"
+  ],
+  "0x508f7c": [
+   "AffAttaqueEngin",
+   "AffBallon",
+   "AffBatiments",
+   "AffConstruireBatiment",
+   "AffCorpsEngin",
+   "AffDeplaceEngin",
+   "AffDestInfo",
+   "AffDrapeauAlliance",
+   "AffGame",
+   "AffInfoSelection",
+   "AffMarche",
+   "AffUpgradeMonastere",
+   "AffVegetTerrain",
+   "AffWorkEngin",
+   "AvanceMonstre",
+   "BatimentNextEtape",
+   "BatimentSoignePerso",
+   "CalculBatimentNextEtape",
+   "CalculCompteurMarche",
+   "CalculCompteurProposition",
+   "CalculEntreBatiment",
+   "CalculGame",
+   "CalculReparation",
+   "CalculWorkEngin",
+   "ChargeMonstre",
+   "CristalCherchePretre",
+   "DDFlipPage",
+   "EnginNextEtape",
+   "GameLoad",
+   "GameSave",
+   "GetMeteo",
+   "GoLastAttaque",
+   "InfligeDegat",
+   "InitNova",
+   "InputGame",
+   "LezardRun",
+   "LoadVar",
+   "MenuNewSelect",
+   "NextAnimTerrain",
+   "NextAnimVeget",
+   "NextAnimVegetFullMap",
+   "PlayerAttaqueCalculSympa",
+   "ProgIteration",
+   "ProjectileAnim",
+   "SauveMonstre",
+   "SauveVar",
+   "SetAttaqueEnginSelect",
+   "SetDeplaceEnginSelect",
+   "SetUpdateChamp",
+   "TourelleChercheCible",
+   "TryLanceAttaqueSound",
+   "iagRessNoyau",
+   "iagVilleNoyau",
+   "iagWarNoyau"
+  ],
+  "0x508f80": [
+   "AffAlliance",
+   "AffBatiments",
+   "AffContact",
+   "AffDrapeauAlliance",
+   "AffFlamme",
+   "AffMarcheProposition",
+   "AfficheSpriteVehicule",
+   "AnimPorteBatiment",
+   "AnimTuyauCave",
+   "BatimentNextEtape",
+   "BatimentPoseCadre",
+   "CalculGame",
+   "GameLoad",
+   "GameSave",
+   "InputGame",
+   "LoadVar",
+   "MenuNewSelect",
+   "MessageBoxAffiche",
+   "ProgIteration",
+   "SauveVar"
+  ],
+  "0x508f84": [
+   "AffBatiments",
+   "AffGame",
+   "CalculGame",
+   "GameLoad",
+   "GameSave",
+   "InputGame",
+   "LoadVar",
+   "MenuNewSelect",
+   "ProgIteration",
+   "SauveVar"
+  ],
+  "0x509952": [
+   "SetUpdateChamp",
+   "UpdateChamp"
+  ],
+  "0x5099a8": [
+   "AffGame",
+   "AffMiniEmplacementsDonne",
+   "AffMiniEmplacementsVeut",
+   "AffPersonnage",
+   "AffPersonnageContact",
+   "AffProposition",
+   "AffTrame",
+   "CalculGame",
+   "GrabAllInput",
+   "HerseSousCurseur",
+   "InputGame",
+   "MesEngins",
+   "MesEnginsContact",
+   "MesMatiere",
+   "MesMatiereContact",
+   "MouseEstDeplacer",
+   "MouseInit",
+   "MouseZone",
+   "ProgIteration",
+   "WndProc"
+  ],
+  "0x5099aa": [
+   "AffGame",
+   "AffMiniEmplacementsDonne",
+   "AffMiniEmplacementsVeut",
+   "AffPersonnage",
+   "AffPersonnageContact",
+   "AffProposition",
+   "AffTrame",
+   "CalculGame",
+   "CalculMarcheProposition",
+   "GrabAllInput",
+   "HerseSousCurseur",
+   "InputGame",
+   "MesEngins",
+   "MesEnginsContact",
+   "MesMatiere",
+   "MesMatiereContact",
+   "MouseEstDeplacer",
+   "MouseInit",
+   "MouseZone",
+   "ProgIteration",
+   "WndProc"
+  ],
+  "0x5099ae": [
+   "CalculGame",
+   "InputGame",
+   "MenuNewSelect",
+   "MouseInit",
+   "ProgIteration",
+   "WndProc"
+  ],
+  "0x5099af": [
+   "BatimentNextEtape",
+   "CalculGame",
+   "CalculMarche",
+   "CalculMarcheProposition",
+   "InputGame",
+   "MenuNewSelect",
+   "MesEngins",
+   "MesEnginsContact",
+   "MesMatiere",
+   "MesMatiereContact",
+   "ProgIteration",
+   "WndProc"
+  ],
+  "0x5099b0": [
+   "CalculGame",
+   "InputGame",
+   "WndProc"
+  ],
+  "0x5099b1": [
+   "InputGame",
+   "ProgIteration",
+   "WndProc"
+  ],
+  "0x5099b2": [
+   "ProgIteration",
+   "WndProc"
+  ],
+  "0x50a9b4": [
+   "MouseTestZone",
+   "MouseZone"
+  ],
+  "0x50a9b6": [
+   "MouseTestZone",
+   "MouseZone"
+  ],
+  "0x50a9b8": [
+   "MouseSetZone"
+  ],
+  "0x522244": [
+   "__InitMultipleThread",
+   "__NTInit",
+   "__threadid"
+  ]
+ },
+ "calculgame_state_table": {
+  "address": "0x42c804",
+  "entries": [
+   {
+    "state": 0,
+    "target": "CalculGame+0x972"
+   },
+   {
+    "state": 1,
+    "target": "CalculGame+0x57"
+   },
+   {
+    "state": 2,
+    "target": "CalculGame+0x77b"
+   },
+   {
+    "state": 3,
+    "target": "CalculGame+0x77b"
+   },
+   {
+    "state": 4,
+    "target": "CalculGame+0x77b"
+   },
+   {
+    "state": 5,
+    "target": "CalculGame+0x77b"
+   },
+   {
+    "state": 6,
+    "target": "CalculGame+0x53c"
+   },
+   {
+    "state": 7,
+    "target": "CalculGame+0x515"
+   },
+   {
+    "state": 8,
+    "target": "CalculGame+0xc7a"
+   },
+   {
+    "state": 9,
+    "target": "CalculGame+0xc7a"
+   },
+   {
+    "state": 10,
+    "target": "CalculGame+0x111"
+   },
+   {
+    "state": 11,
+    "target": "CalculGame+0xc7a"
+   },
+   {
+    "state": 12,
+    "target": "CalculGame+0x77b"
+   },
+   {
+    "state": 13,
+    "target": "CalculGame+0x77b"
+   },
+   {
+    "state": 14,
+    "target": "CalculGame+0x77b"
+   },
+   {
+    "state": 15,
+    "target": "CalculGame+0x972"
+   },
+   {
+    "state": 16,
+    "target": "CalculGame+0x77b"
+   },
+   {
+    "state": 17,
+    "target": "CalculGame+0x241"
+   },
+   {
+    "state": 18,
+    "target": "CalculGame+0xa76"
+   },
+   {
+    "state": 19,
+    "target": "CalculGame+0x15d"
+   },
+   {
+    "state": 20,
+    "target": "CalculGame+0x4f7"
+   },
+   {
+    "state": 21,
+    "target": "CalculGame+0xc71"
+   },
+   {
+    "state": 22,
+    "target": "CalculGame+0x92f"
+   },
+   {
+    "state": 23,
+    "target": "CalculGame+0x395"
+   },
+   {
+    "state": 24,
+    "target": "CalculGame+0xdf"
+   }
+  ]
+ },
+ "next_callee_entries": [
+  {
+   "name": "CalculIconeAction",
+   "entry": "0x45e944",
+   "sha256_first_24": "80d2ab77c044a2c4f8774ebffe119fe21d15af562e3ec2a0c01cfc2ee432cdfa",
+   "first": [
+    "push ebx",
+    "push ecx",
+    "push edx",
+    "push esi",
+    "push edi",
+    "sub esp, 4",
+    "xor eax, eax",
+    "mov al, byte ptr [0x508041]"
+   ]
+  },
+  {
+   "name": "CalculMatiere",
+   "entry": "0x467718",
+   "sha256_first_24": "9839d811ec9ee899530afe8d0eace492f197e98f053e7b80388f487a25d3269d",
+   "first": [
+    "push ebx",
+    "push ecx",
+    "push edx",
+    "push esi",
+    "push edi",
+    "push ebp",
+    "sub esp, 0x10",
+    "xor ah, ah"
+   ]
+  },
+  {
+   "name": "PlayerAttaqueCalculSympa",
+   "entry": "0x46d629",
+   "sha256_first_24": "4079592f5b43e97e663693f05c9d6b81fe527549962e49800b775f242604fa36",
+   "first": [
+    "push ebx",
+    "push ecx",
+    "push edx",
+    "push esi",
+    "push ebp",
+    "mov ebx, 0x7d0",
+    "mov eax, dword ptr [0x508f7c]",
+    "xor edx, edx"
+   ]
+  },
+  {
+   "name": "NextAnimVegetFullMap",
+   "entry": "0x4774fa",
+   "sha256_first_24": "8d96bb3fdd180e2e15b5818aa26fd18d1449102efaadbf678f7280cd5c3ed572",
+   "first": [
+    "push ebx",
+    "push ecx",
+    "push edx",
+    "push esi",
+    "push edi",
+    "push ebp",
+    "sub esp, 8",
+    "xor ebx, ebx"
+   ]
+  }
+ ]
+}
