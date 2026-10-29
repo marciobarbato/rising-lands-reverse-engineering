@@ -208,7 +208,7 @@ inspection/playback runtime; whether it ships later remains undecided. Live fram
 
 Open the inspection page, select **Abrir Rust ao vivo**, then advance the load
 tail and frames or select **Executar Rust**. Each frame runs Rust ABI 1.1,
-exports original-address memory and renders through Graphics 1.5 with HUD.
+projects original-address memory into persistent Graphics views and renders through Graphics 1.5 with HUD. Live output uses a raw indexed canvas; PNG is retained for explicit evidence export and immutable playback.
 Through frame 128, masked state and full surface hashes must match accepted
 M2.2 before publication. Later frames carry explicit unverified-reference status.
 A named engine/Graphics stop pauses execution and remains visible. Reopening
