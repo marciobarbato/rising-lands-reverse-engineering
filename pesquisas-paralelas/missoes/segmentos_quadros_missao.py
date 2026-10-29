@@ -224,8 +224,16 @@ def segmento(a):
     saida = pasta/f'fases-{a.de:05d}-{a.ate:05d}.jsonl'
     _correr(b, _fases_segmento(b, a.de, a.ate, a.segundos_quadro), saida, tuple(manifesto['checkpoints']),
             a.de, a.ate)
+    # Run-level records at the segment end (cumulative: the bench state was restored from pass A).
+    final = pasta/f'final-{a.de:05d}-{a.ate:05d}.json'
+    with open(final, 'x') as f:
+        json.dump(dict(frame=a.ate, allocations=b.arena.manifesto(), entry_trace=b.rastro_json(),
+                       declared_windows_answers=[list(x) for x in b.windows.consumidos],
+                       import_resolutions=b.importacoes_declaradas,
+                       code_integrity=dict(exe_code_sha256=b.sha256_codigo_exe, before=b.sha256_codigo_inicial,
+                                           after=b.sha256_codigo())), f, sort_keys=True)
     print(json.dumps(dict(segment=[a.de, a.ate], records=saida.name, seconds=round(time.monotonic()-t0, 1))))
-    return [saida]
+    return [saida, final]
 
 
 def comparar(a):
