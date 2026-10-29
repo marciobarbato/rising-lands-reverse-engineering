@@ -46,3 +46,30 @@ not real sharing, device allocation or asynchronous buffer lifetime.
 Further request/concurrency and resident/compressed captures must precede their
 translation. The earlier v1–v9 queue captures and validation reports remain
 unchanged. No main push, acceptance record or milestone change occurs here.
+
+## Concurrent requests and resident/compressed bridge (original v2)
+
+The second original-only capture includes all 118 leaves plus 13 request cases:
+131 calls, all returned, 0.646 seconds. No provider translation is imported.
+New cases cover file/resident PCM and mono IMA ADPCM, two/three waiting requests
+with distinct banks or shared ID/bank reuse, duplicate success/null/error,
+and explicit full-LSB/physical-capacity guard images. The capacity fixture is
+an explicitly aliased synthetic input whose ownership cleanup is not reached;
+it does not prove a naturally initialized 20-device-buffer configuration.
+
+Resident bytes live in caller memory at 0x7008000; file/compressed bytes are
+fully declared _hread answers. The compressed scratch pointer 0x52222c is
+explicitly inherited as 0x7006000. The 64-byte ADPCM input starts with predictor
+1000, index0 and 60 bytes0x11, with block alignment64. The original creates256
+bytes but Locks64 and decodes beyond that reported region into the created
+buffer: this Stage-1 quirk must remain visible. Declared inherited output
+memory includes that entire region; no pixels, audio samples from a game
+capture, asynchronous device state or compressed scratch allocation are invented.
+
+Each request is visited in descending original waiting-index order. Shared
+bank/ID requests duplicate an existing physical buffer; distinct banks create
+separate objects, even when IDs match. The explicit third object address is
+0x7101300. Every Create/Duplicate output and Lock pointer/size, HRESULT, status,
+file byte sequence and start answer is independently declared, with raw ABI
+logs retained. Native success here means only that exact original branch
+returned under those declared inputs; it is not hardware playback acceptance.

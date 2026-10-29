@@ -82,9 +82,76 @@ def scenarios():
             yield case(f'clear-list-{int(logical)}-{status}','clear_list',m,com=plan)
 
 
+    yield from request_scenarios(original)
+
+
+def start_plan(pointer=COM_BUFFER,volume=0):
+    return [response('GetStatus',pointer=pointer,value=0),response('SetPosition',pointer=pointer,args=(0,)),
+            response('SetVolume',pointer=pointer,args=(volume,)),response('Play',pointer=pointer,args=(0,0,0))]
+
+
+def fill_plan(m,*,resident=False,compressed=False,pointer=COM_BUFFER,output=EXTERNAL+0x4000,data=None):
+    data=data if data is not None else bytes((i*7+3)&255 for i in range(64))
+    descriptor=struct.pack('<IIIII',20,0xe0,256 if compressed else 64,0,0).hex()
+    wave=struct.pack('<HHIIHH',1,1,22050,44100,2,16).hex()
+    plan=[] if resident else [response('_llseek',pointer=0x1234,args=(0,0))]
+    plan.append(response('CreateSoundBuffer',pointer=COM_DEVICE,args=(descriptor,wave,0),value=pointer))
+    lock=response('Lock',pointer=pointer,args=(0,64,0),value=dict(pointer=output,size=64))
+    if not resident:
+        plan.append(response('_llseek',pointer=0x1234,args=(0,0)))
+        read=response('_hread',pointer=0x1234,args=(EXTERNAL+0x6000 if compressed else output,64),value=data.hex(),hresult=len(data))
+        if compressed:plan.extend([read,lock])
+        else:plan.extend([lock,read])
+    else:plan.append(lock)
+    plan.append(response('Unlock',pointer=pointer,args=(output,64,0,0)))
+    return plan
+
+
+def request_scenarios(original):
+    for resident in (False,True):
+        for compressed in (False,True):
+            m=fixture_memory(original);m.w32(INDEX,20);record(m,20)
+            data=(struct.pack('<hBB',1000,0,0)+bytes([0x11])*60) if compressed else bytes((i*7+3)&255 for i in range(64))
+            m.w8(DATA1+12,4 if compressed else 0);m.w16(DATA1+14,64)
+            m.w32(0x52222c,EXTERNAL+0x6000)
+            if resident:
+                m.w32(BANK_A+16,1);m.w32(BANK_A+20,EXTERNAL+0x8000);m.write(EXTERNAL+0x8000,data)
+            plan=fill_plan(m,resident=resident,compressed=compressed,data=data)+start_plan()
+            yield case(f'manage-data-{int(resident)}-{int(compressed)}','manage',m,com=plan)
+    for duplicate_hresult,duplicate_output in ((0,COM_DUPLICATE),(0,0),(0x80004005,COM_DUPLICATE)):
+        m=fixture_memory(original);table(m,0x52211c,0x498f60,0);m.w32(0x498f5c,0);m.w32(TABLE+20,0)
+        m.w32(INDEX,20);record(m,20)
+        plan=[response('GetStatus',value=1),response('DuplicateSoundBuffer',pointer=COM_DEVICE,args=(COM_BUFFER,),value=duplicate_output,hresult=duplicate_hresult)]
+        if not duplicate_hresult and duplicate_output:
+            plan.append(response('SetPosition',pointer=COM_DUPLICATE,args=(0,)))
+            plan+=start_plan(COM_DUPLICATE)
+        yield case(f'manage-reuse-{duplicate_hresult:x}-{duplicate_output:x}','manage',m,com=plan)
+    for same_bank in (False,True):
+        for count in (2,3):
+            m=fixture_memory(original);m.w32(INDEX,19+count)
+            for i in range(count):record(m,20+i,bank=BANK_A if same_bank else (BANK_A,BANK_B,BANK_P)[i])
+            plan=fill_plan(m)+start_plan()
+            for i in range(1,count):
+                pointer=COM_DUPLICATE if i==1 else COM_BASE+0x1300
+                if same_bank:
+                    plan += [response('DuplicateSoundBuffer',pointer=COM_DEVICE,args=(COM_BUFFER,),value=pointer),response('SetPosition',pointer=pointer,args=(0,))]
+                else:plan+=fill_plan(m,pointer=pointer,output=EXTERNAL+0x4000+0x400*i)
+                plan+=start_plan(pointer)
+            yield case(f'manage-concurrent-{count}-{int(same_bank)}','manage',m,com=plan)
+    for counter in (0,9):
+        m=fixture_memory(original);table(m,0x52211c,0x498f60,counter);table(m,0x52216c,0x498f64,9)
+        m.w32(0x498f5c,0)
+        for i in range(20):m.w32(TABLE+i*44+20,0)
+        m.w32(INDEX,20);record(m,20)
+        # Both tables contain live records: each guard query is an explicit answer.
+        plan=[response('GetStatus',value=1) for _ in range(10+counter+1)]
+        yield case(f'manage-capacity-{counter}-9','manage',m,com=plan)
+
+
 class ContinuationBench(QueueNativeBench):
     def __init__(self,fixture):
         super().__init__(fixture)
+        self.cpu.mem_write(COM_BASE+0x1300,struct.pack('<I',COM_BASE+0x2000))
         if any(a['method']=='DuplicateSoundBuffer' for a in fixture['com']):
             address=COM_BASE+0x4014;self.cpu.mem_write(COM_BASE+0x2014,struct.pack('<I',address))
             def duplicate(call):
