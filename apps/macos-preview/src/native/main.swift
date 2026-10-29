@@ -218,6 +218,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
                let address=body["address"] as? String,let raw=UInt32(address.replacingOccurrences(of:"0x",with:""),radix:16),let size=body["size"] as? Int,(1...256).contains(size) {
                 live.read(raw,size){[weak self] value in self?.nativeReply(body["id"],value:value)};return
             }
+            if operation == "read",let live=nativeLive,live.window.isVisible {nativeReply(body["id"],error:"Endereço ou tamanho de leitura nativa inválido.");return}
             if ["open","reset","phase","frame"].contains(operation),let live=nativeLive {live.perform("live-pause",completion:nil);live.window.orderOut(nil)}
         }
         guard message.frameInfo.isMainFrame, let body = message.body as? [String:Any], let action = body["action"] as? String,
