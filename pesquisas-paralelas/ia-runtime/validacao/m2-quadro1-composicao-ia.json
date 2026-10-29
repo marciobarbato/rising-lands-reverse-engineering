@@ -1,0 +1,781 @@
+{
+ "frame_capture": "e6aa30515bd80777259cd8ceae7cba71c2266c60",
+ "isolated_differential": [
+  {
+   "changes": {
+    "original": 0,
+    "python": 0
+   },
+   "changes_equal": true,
+   "eax_equal": true,
+   "entry_registers": {
+    "EAX": "0x1",
+    "EBP": "0x0",
+    "EBX": "0x1",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x47fbea",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "load_tail",
+   "result": "returned",
+   "routine": "CalculNextReflect"
+  },
+  {
+   "changes": {
+    "original": 0,
+    "python": 0
+   },
+   "changes_equal": true,
+   "eax_equal": true,
+   "entry_registers": {
+    "EAX": "0x2",
+    "EBP": "0x0",
+    "EBX": "0x2",
+    "ECX": "0x2",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x47fbea",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "load_tail",
+   "result": "returned",
+   "routine": "CalculNextReflect"
+  },
+  {
+   "changes": {
+    "original": 0,
+    "python": 0
+   },
+   "changes_equal": true,
+   "eax_equal": true,
+   "entry_registers": {
+    "EAX": "0x3",
+    "EBP": "0x0",
+    "EBX": "0x3",
+    "ECX": "0x3",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x47fbea",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "load_tail",
+   "result": "returned",
+   "routine": "CalculNextReflect"
+  },
+  {
+   "changes": {
+    "original": 1,
+    "python": 1
+   },
+   "changes_equal": true,
+   "eax_equal": true,
+   "entry_registers": {
+    "EAX": "0x4",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x4",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x47fbea",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "load_tail",
+   "result": "returned",
+   "routine": "CalculNextReflect"
+  },
+  {
+   "changes": {
+    "original": 10,
+    "python": 10
+   },
+   "changes_equal": true,
+   "eax_equal": true,
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x1a1a000e",
+    "EIP": "0x45edc0",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "load_tail",
+   "result": "returned",
+   "routine": "ProcessInputGame"
+  },
+  {
+   "changes": {
+    "original": 10,
+    "python": 10
+   },
+   "changes_equal": true,
+   "eax_equal": true,
+   "entry_registers": {
+    "EAX": "0x1",
+    "EBP": "0x0",
+    "EBX": "0x1",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x1a1a000e",
+    "EIP": "0x45edc0",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "load_tail",
+   "result": "returned",
+   "routine": "ProcessInputGame"
+  },
+  {
+   "changes": {
+    "original": 10,
+    "python": 10
+   },
+   "changes_equal": true,
+   "eax_equal": true,
+   "entry_registers": {
+    "EAX": "0x2",
+    "EBP": "0x0",
+    "EBX": "0x2",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x1a1a000e",
+    "EIP": "0x45edc0",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "load_tail",
+   "result": "returned",
+   "routine": "ProcessInputGame"
+  },
+  {
+   "changes": {
+    "original": 10,
+    "python": 10
+   },
+   "changes_equal": true,
+   "eax_equal": true,
+   "entry_registers": {
+    "EAX": "0x3",
+    "EBP": "0x0",
+    "EBX": "0x3",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x1a1a000e",
+    "EIP": "0x45edc0",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "load_tail",
+   "result": "returned",
+   "routine": "ProcessInputGame"
+  },
+  {
+   "changes": {
+    "original": 0,
+    "python": 0
+   },
+   "changes_equal": true,
+   "entry_registers": {
+    "EAX": "0x1204",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x1a1a000e",
+    "EIP": "0x469dce",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "load_tail",
+   "result": "returned",
+   "routine": "MessageBoxCalcul"
+  },
+  {
+   "changes": {
+    "original": 1,
+    "python": 1
+   },
+   "changes_equal": true,
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x1a1a000e",
+    "EIP": "0x45d015",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "load_tail",
+   "result": "returned",
+   "routine": "GameNextFrame"
+  },
+  {
+   "changes": {
+    "original": 27,
+    "python": 27
+   },
+   "changes_equal": true,
+   "dispatched": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "entry_registers": {
+    "EAX": "0x1e",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x1a1a000e",
+    "EIP": "0x456db5",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "load_tail",
+   "result": "returned",
+   "routine": "CalculEnginNextEtape",
+   "scope": "loop-owned bytes (counters, unit +0x10a/+0x10b); EnginNextEtape declared stub"
+  },
+  {
+   "changes": {
+    "original": 81,
+    "python": 0
+   },
+   "changes_equal": false,
+   "entry_registers": {
+    "EAX": "0x320",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x1a1a000e",
+    "EIP": "0x4281c7",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "first_differences": {
+    "original": [
+     [
+      "0x4dfaa8",
+      0,
+      1
+     ],
+     [
+      "0x4e296c",
+      0,
+      255
+     ],
+     [
+      "0x4e296d",
+      0,
+      255
+     ],
+     [
+      "0x4e296e",
+      0,
+      255
+     ],
+     [
+      "0x4e296f",
+      0,
+      255
+     ],
+     [
+      "0x4e2970",
+      0,
+      255
+     ],
+     [
+      "0x4e2971",
+      0,
+      255
+     ],
+     [
+      "0x4e2972",
+      0,
+      255
+     ]
+    ],
+    "python": []
+   },
+   "phase": "load_tail",
+   "result": "stopped",
+   "routine": "CalculBatimentNextEtape",
+   "stop": {
+    "routine": "CalculBatimentNextEtape: per-structure providers (ResetTableauHangar, BatimentNextEtape, discover/illuminate) are owned by Economy/Core",
+    "site": "0x4281d0"
+   }
+  },
+  {
+   "changes": {
+    "original": 0,
+    "python": 0
+   },
+   "changes_equal": true,
+   "eax_equal": true,
+   "entry_registers": {
+    "EAX": "0x1",
+    "EBP": "0x0",
+    "EBX": "0x1",
+    "ECX": "0x1",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x47fbea",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "frame1",
+   "result": "returned",
+   "routine": "CalculNextReflect"
+  },
+  {
+   "changes": {
+    "original": 0,
+    "python": 0
+   },
+   "changes_equal": true,
+   "eax_equal": true,
+   "entry_registers": {
+    "EAX": "0x2",
+    "EBP": "0x0",
+    "EBX": "0x2",
+    "ECX": "0x2",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x47fbea",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "frame1",
+   "result": "returned",
+   "routine": "CalculNextReflect"
+  },
+  {
+   "changes": {
+    "original": 0,
+    "python": 0
+   },
+   "changes_equal": true,
+   "eax_equal": true,
+   "entry_registers": {
+    "EAX": "0x3",
+    "EBP": "0x0",
+    "EBX": "0x3",
+    "ECX": "0x3",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x47fbea",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "frame1",
+   "result": "returned",
+   "routine": "CalculNextReflect"
+  },
+  {
+   "changes": {
+    "original": 0,
+    "python": 0
+   },
+   "changes_equal": true,
+   "eax_equal": true,
+   "entry_registers": {
+    "EAX": "0x4",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x4",
+    "EDI": "0x0",
+    "EDX": "0x1",
+    "EIP": "0x47fbea",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "frame1",
+   "result": "returned",
+   "routine": "CalculNextReflect"
+  },
+  {
+   "changes": {
+    "original": 0,
+    "python": 0
+   },
+   "changes_equal": true,
+   "eax_equal": true,
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x0",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x1a1a000e",
+    "EIP": "0x45edc0",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "frame1",
+   "result": "returned",
+   "routine": "ProcessInputGame"
+  },
+  {
+   "changes": {
+    "original": 0,
+    "python": 0
+   },
+   "changes_equal": true,
+   "eax_equal": true,
+   "entry_registers": {
+    "EAX": "0x1",
+    "EBP": "0x0",
+    "EBX": "0x1",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x1a1a000e",
+    "EIP": "0x45edc0",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "frame1",
+   "result": "returned",
+   "routine": "ProcessInputGame"
+  },
+  {
+   "changes": {
+    "original": 0,
+    "python": 0
+   },
+   "changes_equal": true,
+   "eax_equal": true,
+   "entry_registers": {
+    "EAX": "0x2",
+    "EBP": "0x0",
+    "EBX": "0x2",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x1a1a000e",
+    "EIP": "0x45edc0",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "frame1",
+   "result": "returned",
+   "routine": "ProcessInputGame"
+  },
+  {
+   "changes": {
+    "original": 0,
+    "python": 0
+   },
+   "changes_equal": true,
+   "eax_equal": true,
+   "entry_registers": {
+    "EAX": "0x3",
+    "EBP": "0x0",
+    "EBX": "0x3",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x1a1a000e",
+    "EIP": "0x45edc0",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "frame1",
+   "result": "returned",
+   "routine": "ProcessInputGame"
+  },
+  {
+   "changes": {
+    "original": 0,
+    "python": 0
+   },
+   "changes_equal": true,
+   "entry_registers": {
+    "EAX": "0x1204",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x1a1a000e",
+    "EIP": "0x469dce",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "frame1",
+   "result": "returned",
+   "routine": "MessageBoxCalcul"
+  },
+  {
+   "changes": {
+    "original": 1,
+    "python": 1
+   },
+   "changes_equal": true,
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x1a1a000e",
+    "EIP": "0x45d015",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "frame1",
+   "result": "returned",
+   "routine": "GameNextFrame"
+  },
+  {
+   "changes": {
+    "original": 0,
+    "python": 0
+   },
+   "changes_equal": true,
+   "dispatched": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "entry_registers": {
+    "EAX": "0x1e",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x1a1a000e",
+    "EIP": "0x456db5",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "frame1",
+   "result": "returned",
+   "routine": "CalculEnginNextEtape",
+   "scope": "loop-owned bytes (counters, unit +0x10a/+0x10b); EnginNextEtape declared stub"
+  },
+  {
+   "changes": {
+    "original": 0,
+    "python": 0
+   },
+   "changes_equal": true,
+   "entry_registers": {
+    "EAX": "0x320",
+    "EBP": "0x0",
+    "EBX": "0x4",
+    "ECX": "0x5",
+    "EDI": "0x0",
+    "EDX": "0x1a1a000e",
+    "EIP": "0x4281c7",
+    "ESI": "0x0",
+    "ESP": "0x2007ed8"
+   },
+   "phase": "frame1",
+   "result": "stopped",
+   "routine": "CalculBatimentNextEtape",
+   "stop": {
+    "routine": "CalculBatimentNextEtape: per-structure providers (ResetTableauHangar, BatimentNextEtape, discover/illuminate) are owned by Economy/Core",
+    "site": "0x4281d0"
+   }
+  }
+ ],
+ "path_reproduction": {
+  "boundaries_equal": true,
+  "code_unchanged": true,
+  "entry_trace_equal": true,
+  "passed": true,
+  "phase_states_equal": {
+   "between_frames": true,
+   "frame1": true,
+   "load_tail": true
+  }
+ },
+ "phases": {
+  "between_frames": {
+   "bindings": {
+    "equal": true,
+    "fields_not_modeled": [],
+    "original": 2,
+    "python": 2
+   },
+   "boundaries": {
+    "equal": true,
+    "fields_not_modeled": [],
+    "original": 3,
+    "python": 3
+   },
+   "differing_blocks": [],
+   "inputs": {
+    "cursor": [
+     0,
+     0
+    ],
+    "peek_message": 0,
+    "point_and_msg_stack_bytes": "0: BancadaX86.executar zero-fills PILHA before the load-state call, and nothing above that frame is written",
+    "salvo_ebx": 0,
+    "salvo_ecx": 0,
+    "salvo_edx": 0
+   },
+   "registers_equal": {
+    "EAX": true,
+    "EBP": true,
+    "EBX": true,
+    "ECX": true,
+    "EDI": true,
+    "EDX": true,
+    "ESI": true,
+    "ESP": true
+   },
+   "registers_not_modeled": [
+    "EFLAGS",
+    "EIP (the composition ends at the CalculGame entry 0x42c868)"
+   ],
+   "result": "returned",
+   "rng": {
+    "0x497164": "0x1c019f87",
+    "0x498db4": "0x3212b7ce"
+   },
+   "rng_equal": true,
+   "start": "captured state after load_tail; declared caller frame of the capture",
+   "state_equal": true
+  },
+  "frame1": {
+   "at_stop": {
+    "at": "InputGame",
+    "bindings_prefix": {
+     "equal": true,
+     "fields_not_modeled": [],
+     "original": 1,
+     "python": 1
+    },
+    "boundaries_prefix": {
+     "equal": true,
+     "fields_not_modeled": [
+      {
+       "field": "stack_words",
+       "index": 0,
+       "original": [
+        "0x0",
+        "0x0",
+        "0x0",
+        "0x0"
+       ]
+      }
+     ],
+     "original": 1,
+     "python": 1
+    },
+    "caller_return": "0x42d340",
+    "differing_blocks": [],
+    "state_equal": true
+   },
+   "result": "stopped",
+   "start": "captured state after between_frames",
+   "stop": {
+    "routine": "InputGame",
+    "site": "0x42d33b"
+   }
+  },
+  "load_tail": {
+   "at_stop": {
+    "at": "RestoreAll",
+    "bindings_prefix": {
+     "equal": true,
+     "fields_not_modeled": [],
+     "original": 0,
+     "python": 0
+    },
+    "boundaries_prefix": {
+     "equal": true,
+     "fields_not_modeled": [],
+     "original": 0,
+     "python": 0
+    },
+    "caller_return": "0x42d284",
+    "differing_blocks": [],
+    "state_equal": true
+   },
+   "result": "stopped",
+   "start": "S0 (accepted M1 post-load state)",
+   "stop": {
+    "routine": "RestoreAll",
+    "site": "0x42d27f"
+   }
+  }
+ },
+ "schema": "rising-lands/ai-runtime-m2-frame1-composition/1",
+ "seconds": 37.07,
+ "source_dirty_paths": [],
+ "source_revision": "f52f0e079ebfa5adac4ea6c98e9c345024c55e39",
+ "summary": {
+  "between_frames_equal": true,
+  "frame1": {
+   "routine": "InputGame",
+   "site": "0x42d33b"
+  },
+  "isolated": {
+   "cases": 24,
+   "equal": 22,
+   "stopped": [
+    [
+     "CalculBatimentNextEtape",
+     "load_tail",
+     {
+      "routine": "CalculBatimentNextEtape: per-structure providers (ResetTableauHangar, BatimentNextEtape, discover/illuminate) are owned by Economy/Core",
+      "site": "0x4281d0"
+     }
+    ],
+    [
+     "CalculBatimentNextEtape",
+     "frame1",
+     {
+      "routine": "CalculBatimentNextEtape: per-structure providers (ResetTableauHangar, BatimentNextEtape, discover/illuminate) are owned by Economy/Core",
+      "site": "0x4281d0"
+     }
+    ]
+   ]
+  },
+  "load_tail": {
+   "routine": "RestoreAll",
+   "site": "0x42d27f"
+  },
+  "stops_equal_original_prefix": {
+   "frame1": true,
+   "load_tail": true
+  }
+ }
+}

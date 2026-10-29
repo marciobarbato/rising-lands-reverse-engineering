@@ -209,19 +209,24 @@ def testar_fim_missao(jogador, condicoes, estado, contagem_inicial, exercitos, e
     return resultado
 
 
-def consultas_publicadas(estruturas, recursos, missao_u8, **opcionais):
-    """Bind the committed providers over live views; optional ones stay None unless supplied.
+def consultas_publicadas(estruturas, recursos, missao_u8, influencia, **opcionais):
+    """Bind the committed providers over live views; other ones stay None unless supplied.
 
     ``estruturas`` is the live 276,000-byte pool at 0x49a0c8, ``recursos`` an
     Economy ``Economia`` whose ``memoria`` is the live 128-byte table at
-    0x4e2ea8, ``missao_u8`` the live byte at 0x496fe4.
+    0x4e2ea8, ``missao_u8`` the live byte at 0x496fe4 and ``influencia`` the
+    live 4,000-byte influence table at 0x50c614 (CaseGetZoneInfluence and
+    GetTopLeftCaseZoneInfluence, Missions).
     """
     from consultas_missao import existe_estrutura, numero_missao
     from ataque_vivo import batiment_get_player
     from consultas_reinicio_economia import tipo_estrutura
+    from influencia_missao import canto_zona_influencia, zona_influencia
     return ConsultasFimMissao(
         existe=lambda j: existe_estrutura(estruturas, j),
         dono=lambda j: batiment_get_player(estruturas, j),
         tipo=lambda j: tipo_estrutura(estruturas, j),
         recursos=lambda jogador, comida, pedra, pecas: recursos.suficiente(jogador, comida, pedra, pecas),
-        numero_missao=lambda: numero_missao(missao_u8), **opcionais)
+        numero_missao=lambda: numero_missao(missao_u8),
+        zona=lambda celula: zona_influencia(influencia, celula),
+        canto_zona=lambda z: canto_zona_influencia(influencia, z), **opcionais)

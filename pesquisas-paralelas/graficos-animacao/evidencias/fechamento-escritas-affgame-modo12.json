@@ -1,0 +1,2811 @@
+{
+ "entrada": "0x4178f7",
+ "rotinas": [
+  "0x401729",
+  "0x40186c",
+  "0x401a70",
+  "0x401cc6",
+  "0x4020ec",
+  "0x4022c8",
+  "0x4024ac",
+  "0x402864",
+  "0x4029d0",
+  "0x402da2",
+  "0x402ee9",
+  "0x40323c",
+  "0x407dd3",
+  "0x40f49b",
+  "0x40f4b7",
+  "0x40f4e8",
+  "0x40f519",
+  "0x40f758",
+  "0x40f8aa",
+  "0x40fd95",
+  "0x410085",
+  "0x41068e",
+  "0x41087e",
+  "0x410a2c",
+  "0x410be4",
+  "0x410fcc",
+  "0x411147",
+  "0x41209d",
+  "0x412390",
+  "0x41374c",
+  "0x414495",
+  "0x414a8a",
+  "0x415496",
+  "0x41559a",
+  "0x41591f",
+  "0x415acf",
+  "0x416864",
+  "0x416f29",
+  "0x41721f",
+  "0x417581",
+  "0x417f38",
+  "0x4180d8",
+  "0x418a74",
+  "0x41a08c",
+  "0x41a4f4",
+  "0x41a5b8",
+  "0x41a6ec",
+  "0x41a8e5",
+  "0x41a940",
+  "0x41a996",
+  "0x41ab5c",
+  "0x41aee2",
+  "0x41b489",
+  "0x41b54a",
+  "0x41d057",
+  "0x41f3ed",
+  "0x420c19",
+  "0x420c7c",
+  "0x42302d",
+  "0x423e65",
+  "0x423f9d",
+  "0x428cc0",
+  "0x428ef1",
+  "0x43ee31",
+  "0x43f14f",
+  "0x43f31c",
+  "0x43f381",
+  "0x43f3b4",
+  "0x43f445",
+  "0x43f710",
+  "0x4408b7",
+  "0x440e11",
+  "0x440e31",
+  "0x440e78",
+  "0x44106c",
+  "0x4410b7",
+  "0x441108",
+  "0x44113e",
+  "0x441775",
+  "0x441fff",
+  "0x442025",
+  "0x442045",
+  "0x4422b0",
+  "0x4422eb",
+  "0x442434",
+  "0x442c34",
+  "0x4470b9",
+  "0x447107",
+  "0x4471b8",
+  "0x44724a",
+  "0x4472d3",
+  "0x4472de",
+  "0x4474a6",
+  "0x448270",
+  "0x44828b",
+  "0x44f9a6",
+  "0x44fffe",
+  "0x45002e",
+  "0x450054",
+  "0x45718a",
+  "0x4581b6",
+  "0x4581bc",
+  "0x45841b",
+  "0x458c10",
+  "0x458f5c",
+  "0x4591c8",
+  "0x459454",
+  "0x45a218",
+  "0x45a73b",
+  "0x45aaeb",
+  "0x45abb1",
+  "0x45add4",
+  "0x45adf3",
+  "0x45aec2",
+  "0x45b074",
+  "0x45b164",
+  "0x45b247",
+  "0x45b4fd",
+  "0x45b796",
+  "0x45ba23",
+  "0x45bcb0",
+  "0x45bf3d",
+  "0x45c455",
+  "0x45c72a",
+  "0x45c779",
+  "0x45c7ff",
+  "0x45c8a2",
+  "0x45c912",
+  "0x45cacd",
+  "0x45cc35",
+  "0x45cd91",
+  "0x45f618",
+  "0x45f7ba",
+  "0x45f7d8",
+  "0x45f7f6",
+  "0x45f832",
+  "0x45f850",
+  "0x4620dc",
+  "0x4620f2",
+  "0x463abb",
+  "0x463f96",
+  "0x46447d",
+  "0x464710",
+  "0x464f44",
+  "0x465569",
+  "0x4656c8",
+  "0x465818",
+  "0x46590f",
+  "0x465a34",
+  "0x465b8c",
+  "0x46677d",
+  "0x467cd1",
+  "0x467d97",
+  "0x46936d",
+  "0x469b85",
+  "0x469c33",
+  "0x469c44",
+  "0x46a1f8",
+  "0x46a20e",
+  "0x46a70c",
+  "0x46c11a",
+  "0x46d838",
+  "0x46da1e",
+  "0x46fc8b",
+  "0x46fe9a",
+  "0x46ff70",
+  "0x471830",
+  "0x47476a",
+  "0x4766d6",
+  "0x4766f0",
+  "0x47693a",
+  "0x476951",
+  "0x478a18",
+  "0x478a3b",
+  "0x479c50",
+  "0x479c9e",
+  "0x479cac",
+  "0x489e35",
+  "0x48a0f4",
+  "0x48a14a",
+  "0x48a218",
+  "0x48aa79",
+  "0x48aac5",
+  "0x48abdc",
+  "0x48ac53",
+  "0x48ad0c",
+  "0x48ad3c",
+  "0x48adb3",
+  "0x48aeb3",
+  "0x48aef8",
+  "0x48af1b",
+  "0x48afd0",
+  "0x48b390",
+  "0x48b3b3",
+  "0x48b794",
+  "0x48be90",
+  "0x48beb9",
+  "0x48bf74",
+  "0x48c341",
+  "0x48c38b",
+  "0x48c3b0",
+  "0x48c513",
+  "0x48d1c6",
+  "0x48d33d",
+  "0x48d377",
+  "0x48d890",
+  "0x48d8c7",
+  "0x48e634",
+  "0x48e685",
+  "0x48e788",
+  "0x48e7ad",
+  "0x48eb82",
+  "0x48fd54",
+  "0x48fd95",
+  "0x48fdea",
+  "0x493994",
+  "0x4939ac",
+  "0x4939dc",
+  "0x4939e2",
+  "0x4939e8",
+  "0x493a24"
+ ],
+ "chamadas_diretas_corpo": [
+  "0x401cc6",
+  "0x40f758",
+  "0x40f8aa",
+  "0x41068e",
+  "0x416864",
+  "0x416f29",
+  "0x41721f",
+  "0x417581",
+  "0x417f38",
+  "0x43f14f",
+  "0x43f31c",
+  "0x43f381",
+  "0x43f3b4",
+  "0x43f445",
+  "0x43f710",
+  "0x4408b7",
+  "0x4581b6",
+  "0x4581bc",
+  "0x45adf3",
+  "0x45b247",
+  "0x45c455",
+  "0x45c912",
+  "0x45cacd",
+  "0x45cd91",
+  "0x45f618",
+  "0x46677d",
+  "0x469c44",
+  "0x46a70c"
+ ],
+ "indiretos_nao_resolvidos": 910,
+ "escritas_absolutas": {
+  "0x496204": [
+   [
+    "0x417c35",
+    "0x417698",
+    "mov word ptr [0x496204], si"
+   ]
+  ],
+  "0x49620c": [
+   [
+    "0x428f38",
+    "0x428ef1",
+    "mov word ptr [0x49620c], bx"
+   ]
+  ],
+  "0x496394": [
+   [
+    "0x43f76f",
+    "0x43f710",
+    "mov byte ptr [0x496394], al"
+   ]
+  ],
+  "0x496395": [
+   [
+    "0x43f782",
+    "0x43f710",
+    "mov byte ptr [0x496395], dl"
+   ]
+  ],
+  "0x496396": [
+   [
+    "0x43f788",
+    "0x43f710",
+    "mov byte ptr [0x496396], ah"
+   ]
+  ],
+  "0x496ed4": [
+   [
+    "0x465c27",
+    "0x465b8c",
+    "mov byte ptr [0x496ed4], al"
+   ],
+   [
+    "0x465cbf",
+    "0x465b8c",
+    "mov byte ptr [0x496ed4], al"
+   ]
+  ],
+  "0x496eec": [
+   [
+    "0x465c2c",
+    "0x465b8c",
+    "mov byte ptr [0x496eec], al"
+   ],
+   [
+    "0x465cc4",
+    "0x465b8c",
+    "mov byte ptr [0x496eec], al"
+   ]
+  ],
+  "0x496f04": [
+   [
+    "0x465c33",
+    "0x465b8c",
+    "mov byte ptr [0x496f04], al"
+   ],
+   [
+    "0x465ccb",
+    "0x465b8c",
+    "mov byte ptr [0x496f04], al"
+   ]
+  ],
+  "0x496f1c": [
+   [
+    "0x465c38",
+    "0x465b8c",
+    "mov byte ptr [0x496f1c], al"
+   ],
+   [
+    "0x465cd0",
+    "0x465b8c",
+    "mov byte ptr [0x496f1c], al"
+   ]
+  ],
+  "0x496f82": [
+   [
+    "0x463b26",
+    "0x463abb",
+    "mov byte ptr [0x496f82], bl"
+   ],
+   [
+    "0x463daa",
+    "0x463abb",
+    "mov byte ptr [0x496f82], dl"
+   ],
+   [
+    "0x464004",
+    "0x463f96",
+    "mov byte ptr [0x496f82], bl"
+   ],
+   [
+    "0x464290",
+    "0x463f96",
+    "mov byte ptr [0x496f82], dl"
+   ],
+   [
+    "0x465d99",
+    "0x465b8c",
+    "mov byte ptr [0x496f82], bl"
+   ]
+  ],
+  "0x496f83": [
+   [
+    "0x463b2c",
+    "0x463abb",
+    "mov byte ptr [0x496f83], bl"
+   ],
+   [
+    "0x463db0",
+    "0x463abb",
+    "mov byte ptr [0x496f83], dl"
+   ],
+   [
+    "0x46400a",
+    "0x463f96",
+    "mov byte ptr [0x496f83], bl"
+   ],
+   [
+    "0x464296",
+    "0x463f96",
+    "mov byte ptr [0x496f83], dl"
+   ],
+   [
+    "0x465d9f",
+    "0x465b8c",
+    "mov byte ptr [0x496f83], bl"
+   ]
+  ],
+  "0x498f60": [
+   [
+    "0x48ac02",
+    "0x48abdc",
+    "sub dword ptr [0x498f60], eax"
+   ],
+   [
+    "0x48ac49",
+    "0x48abdc",
+    "mov dword ptr [0x498f60], esi"
+   ]
+  ],
+  "0x498f64": [
+   [
+    "0x48ad62",
+    "0x48ad3c",
+    "sub dword ptr [0x498f64], eax"
+   ],
+   [
+    "0x48ada9",
+    "0x48ad3c",
+    "mov dword ptr [0x498f64], esi"
+   ],
+   [
+    "0x48adf3",
+    "0x48adb3",
+    "dec dword ptr [0x498f64]"
+   ],
+   [
+    "0x48ae31",
+    "0x48adb3",
+    "mov dword ptr [0x498f64], edi"
+   ]
+  ],
+  "0x498f68": [
+   [
+    "0x48af10",
+    "0x48aef8",
+    "mov dword ptr [0x498f68], ebx"
+   ],
+   [
+    "0x48af78",
+    "0x48af1b",
+    "mov dword ptr [0x498f68], edi"
+   ],
+   [
+    "0x48afc4",
+    "0x48af1b",
+    "mov dword ptr [0x498f68], esi"
+   ],
+   [
+    "0x48afe0",
+    "0x48afd0",
+    "mov dword ptr [0x498f68], ebx"
+   ]
+  ],
+  "0x49a018": [
+   [
+    "0x40f9c3",
+    "0x40f8aa",
+    "mov word ptr [0x49a018], cx"
+   ],
+   [
+    "0x40fa02",
+    "0x40f8aa",
+    "mov word ptr [0x49a018], si"
+   ],
+   [
+    "0x417a08",
+    "0x417698",
+    "mov word ptr [0x49a018], dx"
+   ],
+   [
+    "0x417a48",
+    "0x417698",
+    "mov word ptr [0x49a018], cx"
+   ],
+   [
+    "0x465948",
+    "0x46590f",
+    "mov word ptr [0x49a018], dx"
+   ]
+  ],
+  "0x49a01a": [
+   [
+    "0x40f9cc",
+    "0x40f8aa",
+    "mov word ptr [0x49a01a], dx"
+   ],
+   [
+    "0x40fa09",
+    "0x40f8aa",
+    "mov word ptr [0x49a01a], di"
+   ],
+   [
+    "0x417a0f",
+    "0x417698",
+    "mov word ptr [0x49a01a], bx"
+   ],
+   [
+    "0x417a41",
+    "0x417698",
+    "mov word ptr [0x49a01a], si"
+   ]
+  ],
+  "0x49a01c": [
+   [
+    "0x40f506",
+    "0x40f4e8",
+    "mov word ptr [0x49a01c], ax"
+   ],
+   [
+    "0x40f526",
+    "0x40f519",
+    "mov word ptr [0x49a01c], dx"
+   ]
+  ],
+  "0x49a01e": [
+   [
+    "0x40f512",
+    "0x40f4e8",
+    "mov word ptr [0x49a01e], ax"
+   ],
+   [
+    "0x40f52d",
+    "0x40f519",
+    "mov word ptr [0x49a01e], cx"
+   ]
+  ],
+  "0x49a020": [
+   [
+    "0x40f4ee",
+    "0x40f4e8",
+    "mov word ptr [0x49a020], ax"
+   ],
+   [
+    "0x40f519",
+    "0x40f519",
+    "mov word ptr [0x49a020], ax"
+   ]
+  ],
+  "0x49a022": [
+   [
+    "0x40f4fa",
+    "0x40f4e8",
+    "mov word ptr [0x49a022], ax"
+   ],
+   [
+    "0x40f51f",
+    "0x40f519",
+    "mov word ptr [0x49a022], bx"
+   ]
+  ],
+  "0x49a02c": [
+   [
+    "0x40f4bd",
+    "0x40f4b7",
+    "mov word ptr [0x49a02c], ax"
+   ]
+  ],
+  "0x49a02e": [
+   [
+    "0x40f4c9",
+    "0x40f4b7",
+    "mov word ptr [0x49a02e], ax"
+   ]
+  ],
+  "0x49a030": [
+   [
+    "0x40f4d5",
+    "0x40f4b7",
+    "mov word ptr [0x49a030], ax"
+   ]
+  ],
+  "0x49a032": [
+   [
+    "0x40f4e1",
+    "0x40f4b7",
+    "mov word ptr [0x49a032], ax"
+   ]
+  ],
+  "0x49a040": [
+   [
+    "0x417a8e",
+    "0x417698",
+    "mov byte ptr [0x49a040], al"
+   ]
+  ],
+  "0x49a041": [
+   [
+    "0x40f8db",
+    "0x40f8aa",
+    "mov byte ptr [0x49a041], ah"
+   ],
+   [
+    "0x417a82",
+    "0x417698",
+    "mov byte ptr [0x49a041], al"
+   ]
+  ],
+  "0x49a042": [
+   [
+    "0x417ca6",
+    "0x417698",
+    "mov word ptr [0x49a042], ax"
+   ]
+  ],
+  "0x49a044": [
+   [
+    "0x417cb2",
+    "0x417698",
+    "mov word ptr [0x49a044], ax"
+   ]
+  ],
+  "0x49a046": [
+   [
+    "0x45a387",
+    "0x45a218",
+    "mov word ptr [0x49a046], si"
+   ]
+  ],
+  "0x49a048": [
+   [
+    "0x45a38e",
+    "0x45a218",
+    "mov word ptr [0x49a048], di"
+   ]
+  ],
+  "0x49a04a": [
+   [
+    "0x45a3c0",
+    "0x45a218",
+    "mov word ptr [0x49a04a], ax"
+   ]
+  ],
+  "0x49a04c": [
+   [
+    "0x45a39f",
+    "0x45a218",
+    "mov word ptr [0x49a04c], bx"
+   ]
+  ],
+  "0x49a04e": [
+   [
+    "0x40ff41",
+    "0x40fd95",
+    "mov word ptr [0x49a04e], dx"
+   ]
+  ],
+  "0x49a054": [
+   [
+    "0x417e0f",
+    "0x417698",
+    "mov byte ptr [0x49a054], 1"
+   ],
+   [
+    "0x417e78",
+    "0x417698",
+    "mov byte ptr [0x49a054], ah"
+   ]
+  ],
+  "0x4dfb44": [
+   [
+    "0x43f1a0",
+    "0x43f14f",
+    "mov byte ptr [0x4dfb44], dl"
+   ]
+  ],
+  "0x4e05a2": [
+   [
+    "0x417a87",
+    "0x417698",
+    "mov byte ptr [0x4e05a2], 1"
+   ],
+   [
+    "0x417e8a",
+    "0x417698",
+    "mov byte ptr [0x4e05a2], dh"
+   ],
+   [
+    "0x417eb4",
+    "0x417698",
+    "mov byte ptr [0x4e05a2], cl"
+   ],
+   [
+    "0x458369",
+    "0x4581bc",
+    "mov byte ptr [0x4e05a2], bh"
+   ]
+  ],
+  "0x4e05ac": [
+   [
+    "0x417be2",
+    "0x417698",
+    "inc word ptr [0x4e05ac]"
+   ],
+   [
+    "0x417c2e",
+    "0x417698",
+    "mov word ptr [0x4e05ac], cx"
+   ]
+  ],
+  "0x4e060c": [
+   [
+    "0x428f33",
+    "0x428ef1",
+    "mov dword ptr [0x4e060c], eax"
+   ]
+  ],
+  "0x4e0610": [
+   [
+    "0x428efe",
+    "0x428ef1",
+    "mov word ptr [0x4e0610], 1"
+   ],
+   [
+    "0x428f10",
+    "0x428ef1",
+    "mov word ptr [0x4e0610], dx"
+   ],
+   [
+    "0x428f2c",
+    "0x428ef1",
+    "mov word ptr [0x4e0610], si"
+   ]
+  ],
+  "0x4e17a0": [
+   [
+    "0x43f376",
+    "0x43f31c",
+    "mov dword ptr [0x4e17a0], eax"
+   ],
+   [
+    "0x43f420",
+    "0x43f3b4",
+    "mov dword ptr [0x4e17a0], esi"
+   ]
+  ],
+  "0x4e17a4": [
+   [
+    "0x43f426",
+    "0x43f3b4",
+    "mov dword ptr [0x4e17a4], eax"
+   ],
+   [
+    "0x43f499",
+    "0x43f445",
+    "mov dword ptr [0x4e17a4], eax"
+   ]
+  ],
+  "0x4e17a8": [
+   [
+    "0x43f437",
+    "0x43f3b4",
+    "mov dword ptr [0x4e17a8], edi"
+   ],
+   [
+    "0x43f468",
+    "0x43f445",
+    "mov dword ptr [0x4e17a8], ecx"
+   ]
+  ],
+  "0x4e17ae": [
+   [
+    "0x43f713",
+    "0x43f710",
+    "inc word ptr [0x4e17ae]"
+   ],
+   [
+    "0x43f74a",
+    "0x43f710",
+    "mov word ptr [0x4e17ae], 0x63"
+   ],
+   [
+    "0x43f78e",
+    "0x43f710",
+    "mov word ptr [0x4e17ae], cx"
+   ]
+  ],
+  "0x4e17b0": [
+   [
+    "0x43f738",
+    "0x43f710",
+    "mov dword ptr [0x4e17b0], eax"
+   ]
+  ],
+  "0x4e17b4": [
+   [
+    "0x43f72b",
+    "0x43f710",
+    "mov dword ptr [0x4e17b4], eax"
+   ]
+  ],
+  "0x4e1b0c": [
+   [
+    "0x45824c",
+    "0x4581bc",
+    "mov word ptr [0x4e1b0c], dx"
+   ]
+  ],
+  "0x4e1b0e": [
+   [
+    "0x45835f",
+    "0x4581bc",
+    "mov byte ptr [0x4e1b0e], bl"
+   ]
+  ],
+  "0x4e1b14": [
+   [
+    "0x45830c",
+    "0x4581bc",
+    "mov byte ptr [0x4e1b14], 1"
+   ],
+   [
+    "0x45832e",
+    "0x4581bc",
+    "mov byte ptr [0x4e1b14], dh"
+   ],
+   [
+    "0x45836f",
+    "0x4581bc",
+    "mov byte ptr [0x4e1b14], bl"
+   ]
+  ],
+  "0x4e1d18": [
+   [
+    "0x4081e7",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x408207",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x4082a3",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x408679",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x408699",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x408732",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x408ef6",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x408f16",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x408faf",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x409459",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x409479",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x409514",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x409e66",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x409e8e",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x409f27",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40a46d",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40a48d",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40a528",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40a68a",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40aca3",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40acc3",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40ad5d",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40b399",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40b3b9",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40b456",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40b8e7",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x40b907",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x40b9a2",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40bee4",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x40bf04",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x40bf9f",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40c29a",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40c2ba",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40c353",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40c69e",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x40c6c6",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x40c75f",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40cd51",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40cd71",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40ce0d",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40d2ce",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x40d2ee",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x40d38b",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40d403",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40d482",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40d97a",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40d9a6",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40da2f",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40de66",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40de8c",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40df15",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40e2da",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40e306",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40e38f",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40ea61",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40ea81",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40eb1c",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x40eedb",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x40ef19",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], al"
+   ],
+   [
+    "0x40ef9f",
+    "0x407dd3",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x4111db",
+    "0x411147",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x411370",
+    "0x411147",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x41173d",
+    "0x411147",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x411c5f",
+    "0x411147",
+    "mov byte ptr [0x4e1d18], bl"
+   ],
+   [
+    "0x412463",
+    "0x412390",
+    "mov byte ptr [0x4e1d18], al"
+   ],
+   [
+    "0x412495",
+    "0x412390",
+    "mov byte ptr [0x4e1d18], al"
+   ],
+   [
+    "0x415b77",
+    "0x415acf",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x415c19",
+    "0x415acf",
+    "mov byte ptr [0x4e1d18], cl"
+   ],
+   [
+    "0x43f191",
+    "0x43f14f",
+    "mov byte ptr [0x4e1d18], cl"
+   ]
+  ],
+  "0x4e2910": [
+   [
+    "0x463bfa",
+    "0x463abb",
+    "mov byte ptr [0x4e2910], dh"
+   ],
+   [
+    "0x463e7d",
+    "0x463abb",
+    "mov byte ptr [0x4e2910], al"
+   ],
+   [
+    "0x4640dd",
+    "0x463f96",
+    "mov byte ptr [0x4e2910], dh"
+   ],
+   [
+    "0x464368",
+    "0x463f96",
+    "mov byte ptr [0x4e2910], al"
+   ]
+  ],
+  "0x4e2911": [
+   [
+    "0x463c12",
+    "0x463abb",
+    "mov byte ptr [0x4e2911], dh"
+   ],
+   [
+    "0x463e96",
+    "0x463abb",
+    "mov byte ptr [0x4e2911], ah"
+   ],
+   [
+    "0x4640f5",
+    "0x463f96",
+    "mov byte ptr [0x4e2911], dh"
+   ],
+   [
+    "0x464381",
+    "0x463f96",
+    "mov byte ptr [0x4e2911], ah"
+   ]
+  ],
+  "0x4e2913": [
+   [
+    "0x463c00",
+    "0x463abb",
+    "mov byte ptr [0x4e2913], dh"
+   ],
+   [
+    "0x463e84",
+    "0x463abb",
+    "mov byte ptr [0x4e2913], ah"
+   ],
+   [
+    "0x4640e3",
+    "0x463f96",
+    "mov byte ptr [0x4e2913], dh"
+   ],
+   [
+    "0x46436f",
+    "0x463f96",
+    "mov byte ptr [0x4e2913], ah"
+   ]
+  ],
+  "0x4e2914": [
+   [
+    "0x463bed",
+    "0x463abb",
+    "mov byte ptr [0x4e2914], dl"
+   ],
+   [
+    "0x463c0c",
+    "0x463abb",
+    "mov byte ptr [0x4e2914], dh"
+   ],
+   [
+    "0x463e70",
+    "0x463abb",
+    "mov byte ptr [0x4e2914], ch"
+   ],
+   [
+    "0x463e90",
+    "0x463abb",
+    "mov byte ptr [0x4e2914], ah"
+   ],
+   [
+    "0x4640d0",
+    "0x463f96",
+    "mov byte ptr [0x4e2914], dl"
+   ],
+   [
+    "0x4640ef",
+    "0x463f96",
+    "mov byte ptr [0x4e2914], dh"
+   ],
+   [
+    "0x46435b",
+    "0x463f96",
+    "mov byte ptr [0x4e2914], ch"
+   ],
+   [
+    "0x46437b",
+    "0x463f96",
+    "mov byte ptr [0x4e2914], ah"
+   ]
+  ],
+  "0x4e2915": [
+   [
+    "0x463c06",
+    "0x463abb",
+    "mov byte ptr [0x4e2915], dh"
+   ],
+   [
+    "0x463e8a",
+    "0x463abb",
+    "mov byte ptr [0x4e2915], ah"
+   ],
+   [
+    "0x4640e9",
+    "0x463f96",
+    "mov byte ptr [0x4e2915], dh"
+   ],
+   [
+    "0x464375",
+    "0x463f96",
+    "mov byte ptr [0x4e2915], ah"
+   ]
+  ],
+  "0x4e2f78": [
+   [
+    "0x417ec7",
+    "0x417698",
+    "mov byte ptr [0x4e2f78], 0x16"
+   ]
+  ],
+  "0x507d54": [
+   [
+    "0x469b9f",
+    "0x469b85",
+    "mov word ptr [0x507d54], dx"
+   ]
+  ],
+  "0x507d58": [
+   [
+    "0x469ba6",
+    "0x469b85",
+    "mov byte ptr [0x507d58], ah"
+   ]
+  ],
+  "0x508f70": [
+   [
+    "0x417958",
+    "0x417698",
+    "mov dword ptr [0x508f70], eax"
+   ],
+   [
+    "0x417993",
+    "0x417698",
+    "mov dword ptr [0x508f70], eax"
+   ],
+   [
+    "0x4179d4",
+    "0x417698",
+    "mov dword ptr [0x508f70], eax"
+   ],
+   [
+    "0x417d7a",
+    "0x417698",
+    "mov dword ptr [0x508f70], eax"
+   ]
+  ],
+  "0x508f92": [
+   [
+    "0x41794d",
+    "0x417698",
+    "mov byte ptr [0x508f92], cl"
+   ]
+  ],
+  "0x50a9b4": [
+   [
+    "0x479c9e",
+    "0x479c9e",
+    "mov word ptr [0x50a9b4], ax"
+   ]
+  ],
+  "0x50a9b6": [
+   [
+    "0x479ca4",
+    "0x479c9e",
+    "mov word ptr [0x50a9b6], dx"
+   ]
+  ],
+  "0x50a9b8": [
+   [
+    "0x479c93",
+    "0x479c50",
+    "mov word ptr [0x50a9b8], si"
+   ]
+  ],
+  "0x521f84": [
+   [
+    "0x48a364",
+    "0x48a218",
+    "mov dword ptr [0x521f84], 1"
+   ],
+   [
+    "0x48a42a",
+    "0x48a218",
+    "mov dword ptr [0x521f84], eax"
+   ]
+  ],
+  "0x521f88": [
+   [
+    "0x48a204",
+    "0x48a14a",
+    "mov dword ptr [0x521f88], edx"
+   ]
+  ],
+  "0x5221bc": [
+   [
+    "0x48b3b6",
+    "0x48b3b3",
+    "inc dword ptr [0x5221bc]"
+   ]
+  ]
+ },
+ "escritas_por_ponteiro_nao_pilha": [
+  [
+   "0x40f8fc",
+   "0x40f8aa",
+   "movsd dword ptr es:[edi], dword ptr [esi]"
+  ],
+  [
+   "0x40f903",
+   "0x40f8aa",
+   "repne movsb byte ptr es:[edi], byte ptr [esi]"
+  ],
+  [
+   "0x40f951",
+   "0x40f8aa",
+   "movsd dword ptr es:[edi], dword ptr [esi]"
+  ],
+  [
+   "0x40f958",
+   "0x40f8aa",
+   "repne movsb byte ptr es:[edi], byte ptr [esi]"
+  ],
+  [
+   "0x40feeb",
+   "0x40fd95",
+   "mov word ptr [edx + eax*4], di"
+  ],
+  [
+   "0x40ff06",
+   "0x40fd95",
+   "mov byte ptr [eax + 2], bl"
+  ],
+  [
+   "0x40ff17",
+   "0x40fd95",
+   "mov byte ptr [edx + eax*4 + 3], cl"
+  ],
+  [
+   "0x410fdd",
+   "0x410fcc",
+   "sub word ptr [edx], 0x20"
+  ],
+  [
+   "0x410fe1",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x1e"
+  ],
+  [
+   "0x410fe6",
+   "0x410fcc",
+   "sub word ptr [edx], 0x28"
+  ],
+  [
+   "0x410fea",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x16"
+  ],
+  [
+   "0x410fef",
+   "0x410fcc",
+   "sub word ptr [edx], 0x28"
+  ],
+  [
+   "0x410ff3",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x20"
+  ],
+  [
+   "0x410ff8",
+   "0x410fcc",
+   "sub word ptr [edx], 0x20"
+  ],
+  [
+   "0x410ffc",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x10"
+  ],
+  [
+   "0x411001",
+   "0x410fcc",
+   "sub word ptr [edx], 0x17"
+  ],
+  [
+   "0x411005",
+   "0x410fcc",
+   "sub word ptr [ebx], 9"
+  ],
+  [
+   "0x41100a",
+   "0x410fcc",
+   "sub word ptr [edx], 0x10"
+  ],
+  [
+   "0x41100e",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x14"
+  ],
+  [
+   "0x411013",
+   "0x410fcc",
+   "sub word ptr [edx], 0x1a"
+  ],
+  [
+   "0x411017",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x1a"
+  ],
+  [
+   "0x41101c",
+   "0x410fcc",
+   "sub word ptr [edx], 0xb"
+  ],
+  [
+   "0x411020",
+   "0x410fcc",
+   "sub word ptr [ebx], 0xb"
+  ],
+  [
+   "0x411025",
+   "0x410fcc",
+   "sub word ptr [edx], 0x13"
+  ],
+  [
+   "0x411029",
+   "0x410fcc",
+   "sub word ptr [ebx], 0xe"
+  ],
+  [
+   "0x41102e",
+   "0x410fcc",
+   "sub word ptr [edx], 0x18"
+  ],
+  [
+   "0x411032",
+   "0x410fcc",
+   "sub word ptr [ebx], 0xc"
+  ],
+  [
+   "0x411037",
+   "0x410fcc",
+   "sub word ptr [edx], 0x2d"
+  ],
+  [
+   "0x41103b",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x38"
+  ],
+  [
+   "0x411040",
+   "0x410fcc",
+   "sub word ptr [edx], 0x2a"
+  ],
+  [
+   "0x411044",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x2d"
+  ],
+  [
+   "0x411049",
+   "0x410fcc",
+   "sub word ptr [edx], 0x29"
+  ],
+  [
+   "0x41104d",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x34"
+  ],
+  [
+   "0x411052",
+   "0x410fcc",
+   "sub word ptr [edx], 0x37"
+  ],
+  [
+   "0x411056",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x38"
+  ],
+  [
+   "0x41105b",
+   "0x410fcc",
+   "sub word ptr [edx], 0x4e"
+  ],
+  [
+   "0x41105f",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x36"
+  ],
+  [
+   "0x411064",
+   "0x410fcc",
+   "sub word ptr [edx], 0x4f"
+  ],
+  [
+   "0x411068",
+   "0x410fcc",
+   "sub word ptr [ebx], 0xd4"
+  ],
+  [
+   "0x41106e",
+   "0x410fcc",
+   "sub word ptr [edx], 0x34"
+  ],
+  [
+   "0x411072",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x30"
+  ],
+  [
+   "0x411077",
+   "0x410fcc",
+   "sub word ptr [edx], 0x31"
+  ],
+  [
+   "0x41107b",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x42"
+  ],
+  [
+   "0x411080",
+   "0x410fcc",
+   "sub word ptr [edx], 0x24"
+  ],
+  [
+   "0x411084",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x30"
+  ],
+  [
+   "0x411089",
+   "0x410fcc",
+   "sub word ptr [edx], 0x20"
+  ],
+  [
+   "0x41108d",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x20"
+  ],
+  [
+   "0x411092",
+   "0x410fcc",
+   "sub word ptr [edx], 0x16"
+  ],
+  [
+   "0x411096",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x10"
+  ],
+  [
+   "0x41109b",
+   "0x410fcc",
+   "sub word ptr [edx], 0x10"
+  ],
+  [
+   "0x41109f",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x10"
+  ],
+  [
+   "0x4110a4",
+   "0x410fcc",
+   "sub word ptr [edx], 0x2e"
+  ],
+  [
+   "0x4110a8",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x36"
+  ],
+  [
+   "0x4110ad",
+   "0x410fcc",
+   "sub word ptr [edx], 0x17"
+  ],
+  [
+   "0x4110b1",
+   "0x410fcc",
+   "sub word ptr [ebx], 0xf"
+  ],
+  [
+   "0x4110b6",
+   "0x410fcc",
+   "sub word ptr [edx], 0x36"
+  ],
+  [
+   "0x4110ba",
+   "0x410fcc",
+   "sub word ptr [ebx], 0x36"
+  ],
+  [
+   "0x41a9b3",
+   "0x41a996",
+   "mov word ptr [ecx], bx"
+  ],
+  [
+   "0x41a9be",
+   "0x41a996",
+   "mov word ptr [edx], ax"
+  ],
+  [
+   "0x44109f",
+   "0x44106c",
+   "mov word ptr [edx], 1"
+  ],
+  [
+   "0x4410a4",
+   "0x44106c",
+   "mov word ptr [ebx], 1"
+  ],
+  [
+   "0x4410ab",
+   "0x44106c",
+   "mov word ptr [edx], 2"
+  ],
+  [
+   "0x4410b0",
+   "0x44106c",
+   "mov word ptr [ebx], 2"
+  ],
+  [
+   "0x4582c7",
+   "0x4581bc",
+   "movsd dword ptr es:[edi], dword ptr [esi]"
+  ],
+  [
+   "0x4582ce",
+   "0x4581bc",
+   "repne movsb byte ptr es:[edi], byte ptr [esi]"
+  ],
+  [
+   "0x458c51",
+   "0x458c10",
+   "and byte ptr [ebx + 0x8c], 0xfe"
+  ],
+  [
+   "0x459520",
+   "0x459454",
+   "mov word ptr [edx], ax"
+  ],
+  [
+   "0x45984e",
+   "0x459454",
+   "mov word ptr [ecx], ax"
+  ],
+  [
+   "0x45a82c",
+   "0x45a73b",
+   "mov word ptr [ecx], si"
+  ],
+  [
+   "0x45a847",
+   "0x45a73b",
+   "mov word ptr [ecx], dx"
+  ],
+  [
+   "0x45a85c",
+   "0x45a73b",
+   "mov dword ptr [ecx], esi"
+  ],
+  [
+   "0x45a876",
+   "0x45a73b",
+   "mov byte ptr [ecx - 1], bl"
+  ],
+  [
+   "0x45a8fa",
+   "0x45a73b",
+   "movsd dword ptr es:[edi], dword ptr [esi]"
+  ],
+  [
+   "0x45a901",
+   "0x45a73b",
+   "repne movsb byte ptr es:[edi], byte ptr [esi]"
+  ],
+  [
+   "0x45a91a",
+   "0x45a73b",
+   "or byte ptr [eax + 0x8c], 1"
+  ],
+  [
+   "0x45a960",
+   "0x45a73b",
+   "mov byte ptr [ecx], al"
+  ],
+  [
+   "0x45a97a",
+   "0x45a73b",
+   "mov dword ptr [ecx], eax"
+  ],
+  [
+   "0x45a998",
+   "0x45a73b",
+   "mov byte ptr [ecx], al"
+  ],
+  [
+   "0x45a9d8",
+   "0x45a73b",
+   "mov byte ptr [eax], bl"
+  ],
+  [
+   "0x45a9ff",
+   "0x45a73b",
+   "mov dword ptr [eax], ebx"
+  ],
+  [
+   "0x45aac9",
+   "0x45a73b",
+   "inc dword ptr [eax + 0x88]"
+  ],
+  [
+   "0x45aad7",
+   "0x45a73b",
+   "mov dword ptr [edx + 0x90], eax"
+  ],
+  [
+   "0x45ade7",
+   "0x45add4",
+   "mov word ptr [edx], cx"
+  ],
+  [
+   "0x45adee",
+   "0x45add4",
+   "mov word ptr [ebx], ax"
+  ],
+  [
+   "0x45aeb5",
+   "0x45adf3",
+   "mov byte ptr [edi + esi], cl"
+  ],
+  [
+   "0x45af88",
+   "0x45aec2",
+   "mov byte ptr [edi + esi], cl"
+  ],
+  [
+   "0x45b0f9",
+   "0x45b074",
+   "mov byte ptr [ecx], dl"
+  ],
+  [
+   "0x45b1e1",
+   "0x45b164",
+   "mov byte ptr [ecx], dl"
+  ],
+  [
+   "0x45b477",
+   "0x45b247",
+   "movsd dword ptr es:[edi], dword ptr [esi]"
+  ],
+  [
+   "0x45b47e",
+   "0x45b247",
+   "repne movsb byte ptr es:[edi], byte ptr [esi]"
+  ],
+  [
+   "0x45b4db",
+   "0x45b247",
+   "mov byte ptr [ebx], ah"
+  ],
+  [
+   "0x45b78c",
+   "0x45b4fd",
+   "mov byte ptr [ecx], dl"
+  ],
+  [
+   "0x45ba10",
+   "0x45b796",
+   "mov byte ptr [ebx], ah"
+  ],
+  [
+   "0x45bc9d",
+   "0x45ba23",
+   "mov byte ptr [ebx], ah"
+  ],
+  [
+   "0x45bf2a",
+   "0x45bcb0",
+   "mov byte ptr [ebx], ah"
+  ],
+  [
+   "0x45c1b5",
+   "0x45bf3d",
+   "mov byte ptr [ebx], ah"
+  ],
+  [
+   "0x45c711",
+   "0x45c455",
+   "mov byte ptr [edi], bl"
+  ],
+  [
+   "0x45c74a",
+   "0x45c72a",
+   "movsd dword ptr es:[edi], dword ptr [esi]"
+  ],
+  [
+   "0x45c751",
+   "0x45c72a",
+   "repne movsb byte ptr es:[edi], byte ptr [esi]"
+  ],
+  [
+   "0x45c875",
+   "0x45c7ff",
+   "movsd dword ptr es:[edi], dword ptr [esi]"
+  ],
+  [
+   "0x45c87c",
+   "0x45c7ff",
+   "repne movsb byte ptr es:[edi], byte ptr [esi]"
+  ],
+  [
+   "0x45c8d1",
+   "0x45c8a2",
+   "movsd dword ptr es:[edi], dword ptr [esi]"
+  ],
+  [
+   "0x45c8d8",
+   "0x45c8a2",
+   "repne movsb byte ptr es:[edi], byte ptr [esi]"
+  ],
+  [
+   "0x45caa4",
+   "0x45c912",
+   "mov byte ptr [ecx], dl"
+  ],
+  [
+   "0x45cab4",
+   "0x45c912",
+   "mov byte ptr [edx], bl"
+  ],
+  [
+   "0x45f62c",
+   "0x45f618",
+   "mov byte ptr [edx + eax], cl"
+  ],
+  [
+   "0x45f638",
+   "0x45f618",
+   "mov byte ptr [edx + eax + 1], cl"
+  ],
+  [
+   "0x45f647",
+   "0x45f618",
+   "mov byte ptr [eax + 2], dl"
+  ],
+  [
+   "0x45f66c",
+   "0x45f618",
+   "mov byte ptr [edx + eax], bl"
+  ],
+  [
+   "0x45f678",
+   "0x45f618",
+   "mov byte ptr [edx + eax + 1], bl"
+  ],
+  [
+   "0x45f688",
+   "0x45f618",
+   "mov byte ptr [edx + 2], al"
+  ],
+  [
+   "0x45f7d3",
+   "0x45f7ba",
+   "mov byte ptr [eax], bl"
+  ],
+  [
+   "0x45f7f1",
+   "0x45f7d8",
+   "mov byte ptr [eax], bl"
+  ],
+  [
+   "0x45f80f",
+   "0x45f7f6",
+   "mov byte ptr [eax], bl"
+  ],
+  [
+   "0x45f84b",
+   "0x45f832",
+   "mov byte ptr [eax], bl"
+  ],
+  [
+   "0x45f869",
+   "0x45f850",
+   "mov byte ptr [eax], cl"
+  ],
+  [
+   "0x4620e4",
+   "0x4620dc",
+   "mov word ptr [eax], bx"
+  ],
+  [
+   "0x4620ed",
+   "0x4620dc",
+   "mov word ptr [edx], ax"
+  ],
+  [
+   "0x4620fa",
+   "0x4620f2",
+   "mov word ptr [eax], bx"
+  ],
+  [
+   "0x462103",
+   "0x4620f2",
+   "mov word ptr [edx], ax"
+  ],
+  [
+   "0x467d16",
+   "0x467cd1",
+   "mov byte ptr [edx], al"
+  ],
+  [
+   "0x46a200",
+   "0x46a1f8",
+   "mov word ptr [eax], bx"
+  ],
+  [
+   "0x46a209",
+   "0x46a1f8",
+   "mov word ptr [edx], ax"
+  ],
+  [
+   "0x46a216",
+   "0x46a20e",
+   "mov word ptr [eax], bx"
+  ],
+  [
+   "0x46a21f",
+   "0x46a20e",
+   "mov word ptr [edx], ax"
+  ],
+  [
+   "0x46a7b2",
+   "0x46a70c",
+   "movsd dword ptr es:[edi], dword ptr [esi]"
+  ],
+  [
+   "0x46a7b9",
+   "0x46a70c",
+   "repne movsb byte ptr es:[edi], byte ptr [esi]"
+  ],
+  [
+   "0x479c61",
+   "0x479c50",
+   "mov dword ptr [eax + 0x5099b4], edx"
+  ],
+  [
+   "0x479c6c",
+   "0x479c50",
+   "mov dword ptr [eax + 0x5099b8], edx"
+  ],
+  [
+   "0x479c77",
+   "0x479c50",
+   "mov dword ptr [eax + 0x5099bc], edx"
+  ],
+  [
+   "0x479c84",
+   "0x479c50",
+   "mov dword ptr [eax + 0x5099c0], edx"
+  ],
+  [
+   "0x489e61",
+   "0x489e35",
+   "mov dword ptr [edx + 0x20], 0"
+  ],
+  [
+   "0x489e94",
+   "0x489e35",
+   "mov dword ptr [ecx + 0x20], eax"
+  ],
+  [
+   "0x489e9e",
+   "0x489e35",
+   "mov dword ptr [ecx + 0x24], 0"
+  ],
+  [
+   "0x48a103",
+   "0x48a0f4",
+   "mov dword ptr [esi + 0x18], eax"
+  ],
+  [
+   "0x48a10a",
+   "0x48a0f4",
+   "mov dword ptr [esi], edi"
+  ],
+  [
+   "0x48a111",
+   "0x48a0f4",
+   "mov dword ptr [esi + 4], ebx"
+  ],
+  [
+   "0x48a119",
+   "0x48a0f4",
+   "mov dword ptr [esi + 0x1c], eax"
+  ],
+  [
+   "0x48a11f",
+   "0x48a0f4",
+   "mov dword ptr [esi + 0xc], ecx"
+  ],
+  [
+   "0x48a136",
+   "0x48a0f4",
+   "mov dword ptr [esi + 0x10], eax"
+  ],
+  [
+   "0x48a13e",
+   "0x48a0f4",
+   "mov dword ptr [esi + 0x14], 0"
+  ],
+  [
+   "0x48a179",
+   "0x48a14a",
+   "mov dword ptr [eax + 0x52138c], edx"
+  ],
+  [
+   "0x48a1e4",
+   "0x48a14a",
+   "mov dword ptr [eax], 0xffffffff"
+  ],
+  [
+   "0x48a1ea",
+   "0x48a14a",
+   "mov byte ptr [ebx + 8], 0"
+  ],
+  [
+   "0x48a1ee",
+   "0x48a14a",
+   "mov dword ptr [ebx + 0x20], 0"
+  ],
+  [
+   "0x48a20a",
+   "0x48a14a",
+   "mov dword ptr [eax + 0x521390], edx"
+  ],
+  [
+   "0x48a29e",
+   "0x48a218",
+   "mov dword ptr [eax], 0xffffffff"
+  ],
+  [
+   "0x48a2a4",
+   "0x48a218",
+   "mov byte ptr [esi + 8], 0"
+  ],
+  [
+   "0x48a2a8",
+   "0x48a218",
+   "mov dword ptr [esi + 0x20], 0"
+  ],
+  [
+   "0x48a340",
+   "0x48a218",
+   "mov dword ptr [eax], 0xffffffff"
+  ],
+  [
+   "0x48a346",
+   "0x48a218",
+   "mov byte ptr [ebx + 8], 0"
+  ],
+  [
+   "0x48a34a",
+   "0x48a218",
+   "mov dword ptr [ebx + 0x20], 0"
+  ],
+  [
+   "0x48a356",
+   "0x48a218",
+   "mov dword ptr [esi], eax"
+  ],
+  [
+   "0x48a3a2",
+   "0x48a218",
+   "mov dword ptr [eax*4 + 0x5213a4], esi"
+  ],
+  [
+   "0x48a3b7",
+   "0x48a218",
+   "mov byte ptr [eax*4 + 0x521384], 2"
+  ],
+  [
+   "0x48a40d",
+   "0x48a218",
+   "mov dword ptr [esi], eax"
+  ],
+  [
+   "0x48a411",
+   "0x48a218",
+   "mov dword ptr [edi + 0x5213a4], esi"
+  ],
+  [
+   "0x48a419",
+   "0x48a218",
+   "mov byte ptr [edi + 0x521384], ah"
+  ],
+  [
+   "0x48a424",
+   "0x48a218",
+   "mov dword ptr [edi + 0x521390], ebp"
+  ],
+  [
+   "0x48a4af",
+   "0x48aac5",
+   "mov dword ptr [eax], 0xffffffff"
+  ],
+  [
+   "0x48a4b5",
+   "0x48aac5",
+   "mov byte ptr [ebx + 8], 0"
+  ],
+  [
+   "0x48a4b9",
+   "0x48aac5",
+   "mov dword ptr [ebx + 0x20], 0"
+  ],
+  [
+   "0x48ac12",
+   "0x48abdc",
+   "mov dword ptr [eax], edx"
+  ],
+  [
+   "0x48ac21",
+   "0x48abdc",
+   "mov dword ptr [eax + 4], edx"
+  ],
+  [
+   "0x48ac24",
+   "0x48abdc",
+   "mov dword ptr [edx + 0x20], eax"
+  ],
+  [
+   "0x48ac2e",
+   "0x48abdc",
+   "mov dword ptr [eax*8 + 0x52211c], ebx"
+  ],
+  [
+   "0x48ac3b",
+   "0x48abdc",
+   "mov dword ptr [eax*8 + 0x522120], ebx"
+  ],
+  [
+   "0x48ac6f",
+   "0x48ac53",
+   "mov dword ptr [edx + 4], 0"
+  ],
+  [
+   "0x48ad15",
+   "0x48ad0c",
+   "mov dword ptr [eax], ecx"
+  ],
+  [
+   "0x48ad17",
+   "0x48ad0c",
+   "mov dword ptr [eax + 4], ebx"
+  ],
+  [
+   "0x48ad1a",
+   "0x48ad0c",
+   "mov dword ptr [edx], 0"
+  ],
+  [
+   "0x48ad20",
+   "0x48ad0c",
+   "mov dword ptr [edx + 4], 0"
+  ],
+  [
+   "0x48ad72",
+   "0x48ad3c",
+   "mov dword ptr [eax], edx"
+  ],
+  [
+   "0x48ad81",
+   "0x48ad3c",
+   "mov dword ptr [eax + 4], edx"
+  ],
+  [
+   "0x48ad84",
+   "0x48ad3c",
+   "mov dword ptr [edx + 0x20], eax"
+  ],
+  [
+   "0x48ad8e",
+   "0x48ad3c",
+   "mov dword ptr [eax*8 + 0x52216c], ebx"
+  ],
+  [
+   "0x48ad9b",
+   "0x48ad3c",
+   "mov dword ptr [eax*8 + 0x522170], ebx"
+  ],
+  [
+   "0x48add2",
+   "0x48adb3",
+   "mov dword ptr [edx + 4], 0"
+  ],
+  [
+   "0x48ae04",
+   "0x48adb3",
+   "mov dword ptr [edx], eax"
+  ],
+  [
+   "0x48ae12",
+   "0x48adb3",
+   "mov dword ptr [edx + 4], eax"
+  ],
+  [
+   "0x48ae15",
+   "0x48adb3",
+   "mov dword ptr [eax + 0x20], edx"
+  ],
+  [
+   "0x48ae20",
+   "0x48adb3",
+   "mov dword ptr [edx*8 + 0x52216c], ecx"
+  ],
+  [
+   "0x48ae2a",
+   "0x48adb3",
+   "mov dword ptr [edx*8 + 0x522170], ecx"
+  ],
+  [
+   "0x48af3d",
+   "0x48af1b",
+   "mov dword ptr [eax], 0xffffffff"
+  ],
+  [
+   "0x48af6b",
+   "0x48af1b",
+   "mov byte ptr [eax + 0x521384], dh"
+  ],
+  [
+   "0x48af8d",
+   "0x48af1b",
+   "movsd dword ptr es:[edi], dword ptr [esi]"
+  ],
+  [
+   "0x48af94",
+   "0x48af1b",
+   "repne movsb byte ptr es:[edi], byte ptr [esi]"
+  ],
+  [
+   "0x48af9a",
+   "0x48af1b",
+   "mov dword ptr [eax], ebp"
+  ],
+  [
+   "0x48afb6",
+   "0x48af1b",
+   "mov byte ptr [eax*4 + 0x521384], dl"
+  ],
+  [
+   "0x48b7a7",
+   "0x48b794",
+   "mov dword ptr [ebx], 0"
+  ],
+  [
+   "0x48c363",
+   "0x48c341",
+   "mov dword ptr [ebx], eax"
+  ],
+  [
+   "0x48c36c",
+   "0x48c341",
+   "mov byte ptr [ecx], al"
+  ],
+  [
+   "0x48c37a",
+   "0x48c341",
+   "mov byte ptr [esi], al"
+  ],
+  [
+   "0x48c399",
+   "0x48c38b",
+   "mov byte ptr [edx], 0x2d"
+  ],
+  [
+   "0x48c533",
+   "0x45841b",
+   "mov dword ptr [eax], edx"
+  ],
+  [
+   "0x48d302",
+   "0x48d1c6",
+   "mov byte ptr [esi + ebp], cl"
+  ],
+  [
+   "0x48d89a",
+   "0x48d890",
+   "mov byte ptr [eax], dl"
+  ],
+  [
+   "0x48d8b2",
+   "0x48d890",
+   "mov byte ptr [eax], dl"
+  ],
+  [
+   "0x48d8b7",
+   "0x48d890",
+   "mov byte ptr [eax + 1], dh"
+  ],
+  [
+   "0x48d8bd",
+   "0x48d890",
+   "mov byte ptr [eax + 2], dl"
+  ],
+  [
+   "0x48d8cf",
+   "0x48d8c7",
+   "mov dword ptr [eax], edx"
+  ],
+  [
+   "0x48d8e0",
+   "0x48d8c7",
+   "mov dword ptr [eax], edx"
+  ],
+  [
+   "0x48d8e2",
+   "0x48d8c7",
+   "mov dword ptr [eax + 4], edx"
+  ],
+  [
+   "0x48d8e6",
+   "0x48d8c7",
+   "mov dword ptr [eax + 8], edx"
+  ],
+  [
+   "0x48d8e9",
+   "0x48d8c7",
+   "mov dword ptr [eax + 0xc], edx"
+  ],
+  [
+   "0x48d8f1",
+   "0x48d8c7",
+   "mov dword ptr [eax + 0x10], edx"
+  ],
+  [
+   "0x48d8f4",
+   "0x48d8c7",
+   "mov dword ptr [eax + 0x14], edx"
+  ],
+  [
+   "0x48d8f8",
+   "0x48d8c7",
+   "mov dword ptr [eax + 0x18], edx"
+  ],
+  [
+   "0x48d8fb",
+   "0x48d8c7",
+   "mov dword ptr [eax + 0x1c], edx"
+  ],
+  [
+   "0x48d909",
+   "0x48d8c7",
+   "mov dword ptr [eax], edx"
+  ],
+  [
+   "0x48d90b",
+   "0x48d8c7",
+   "mov dword ptr [eax + 4], edx"
+  ],
+  [
+   "0x48d90e",
+   "0x48d8c7",
+   "mov dword ptr [eax + 8], edx"
+  ],
+  [
+   "0x48d911",
+   "0x48d8c7",
+   "mov dword ptr [eax + 0xc], edx"
+  ],
+  [
+   "0x48d91d",
+   "0x48d8c7",
+   "mov dword ptr [eax], edx"
+  ],
+  [
+   "0x48d925",
+   "0x48d8c7",
+   "mov dword ptr [eax], edx"
+  ],
+  [
+   "0x48d92d",
+   "0x48d8c7",
+   "mov dword ptr [eax], edx"
+  ],
+  [
+   "0x48e791",
+   "0x48e788",
+   "mov dword ptr [eax + 4], edx"
+  ],
+  [
+   "0x48e7b6",
+   "0x48e7ad",
+   "mov dword ptr [eax + 8], edx"
+  ],
+  [
+   "0x48fdc6",
+   "0x48fd95",
+   "mov byte ptr [eax + 1], ch"
+  ],
+  [
+   "0x48fdd9",
+   "0x48fd95",
+   "or byte ptr [ebx + eax + 1], 0x20"
+  ],
+  [
+   "0x48fdfa",
+   "0x48fdea",
+   "mov dword ptr [edx + eax], ebx"
+  ]
+ ],
+ "interseccao_com_leitores_da_logica": {
+  "0x496ed4": {
+   "stores": [
+    "0x465c27",
+    "0x465cbf"
+   ],
+   "leitores_logica": [
+    "0x46731b"
+   ]
+  },
+  "0x496eec": {
+   "stores": [
+    "0x465c2c",
+    "0x465cc4"
+   ],
+   "leitores_logica": [
+    "0x46735b"
+   ]
+  },
+  "0x496f04": {
+   "stores": [
+    "0x465c33",
+    "0x465ccb"
+   ],
+   "leitores_logica": [
+    "0x4673e6"
+   ]
+  },
+  "0x496f1c": {
+   "stores": [
+    "0x465c38",
+    "0x465cd0"
+   ],
+   "leitores_logica": [
+    "0x46741a"
+   ]
+  },
+  "0x49a018": {
+   "stores": [
+    "0x40f9c3",
+    "0x40fa02",
+    "0x417a08",
+    "0x417a48",
+    "0x465948"
+   ],
+   "leitores_logica": [
+    "0x4683f0",
+    "0x468ab0",
+    "0x468be0",
+    "0x40f69a",
+    "0x43f564",
+    "0x43f5c4",
+    "0x4717e9",
+    "0x45da59"
+   ]
+  },
+  "0x49a01a": {
+   "stores": [
+    "0x40f9cc",
+    "0x40fa09",
+    "0x417a0f",
+    "0x417a41"
+   ],
+   "leitores_logica": [
+    "0x4683e4",
+    "0x43f5ba",
+    "0x471801"
+   ]
+  },
+  "0x49a054": {
+   "stores": [
+    "0x417e0f",
+    "0x417e78"
+   ],
+   "leitores_logica": [
+    "0x46835f",
+    "0x4683d2"
+   ]
+  },
+  "0x4e060c": {
+   "stores": [
+    "0x428f33"
+   ],
+   "leitores_logica": [
+    "0x42c2b1"
+   ]
+  },
+  "0x4e0610": {
+   "stores": [
+    "0x428efe",
+    "0x428f10",
+    "0x428f2c"
+   ],
+   "leitores_logica": [
+    "0x42c2dc"
+   ]
+  },
+  "0x4e17a0": {
+   "stores": [
+    "0x43f376",
+    "0x43f420"
+   ],
+   "leitores_logica": [
+    "0x479b92",
+    "0x479ba8"
+   ]
+  },
+  "0x4e1b0e": {
+   "stores": [
+    "0x45835f"
+   ],
+   "leitores_logica": [
+    "0x4580da"
+   ]
+  },
+  "0x4e1d18": {
+   "stores": [
+    "0x4081e7",
+    "0x408207",
+    "0x4082a3",
+    "0x408679",
+    "0x408699",
+    "0x408732",
+    "0x408ef6",
+    "0x408f16",
+    "0x408faf",
+    "0x409459",
+    "0x409479",
+    "0x409514",
+    "0x409e66",
+    "0x409e8e",
+    "0x409f27",
+    "0x40a46d",
+    "0x40a48d",
+    "0x40a528",
+    "0x40a68a",
+    "0x40aca3",
+    "0x40acc3",
+    "0x40ad5d",
+    "0x40b399",
+    "0x40b3b9",
+    "0x40b456",
+    "0x40b8e7",
+    "0x40b907",
+    "0x40b9a2",
+    "0x40bee4",
+    "0x40bf04",
+    "0x40bf9f",
+    "0x40c29a",
+    "0x40c2ba",
+    "0x40c353",
+    "0x40c69e",
+    "0x40c6c6",
+    "0x40c75f",
+    "0x40cd51",
+    "0x40cd71",
+    "0x40ce0d",
+    "0x40d2ce",
+    "0x40d2ee",
+    "0x40d38b",
+    "0x40d403",
+    "0x40d482",
+    "0x40d97a",
+    "0x40d9a6",
+    "0x40da2f",
+    "0x40de66",
+    "0x40de8c",
+    "0x40df15",
+    "0x40e2da",
+    "0x40e306",
+    "0x40e38f",
+    "0x40ea61",
+    "0x40ea81",
+    "0x40eb1c",
+    "0x40eedb",
+    "0x40ef19",
+    "0x40ef9f",
+    "0x4111db",
+    "0x411370",
+    "0x41173d",
+    "0x411c5f",
+    "0x412463",
+    "0x412495",
+    "0x415b77",
+    "0x415c19",
+    "0x43f191"
+   ],
+   "leitores_logica": [
+    "0x42d2f9",
+    "0x477533",
+    "0x47732f",
+    "0x468489",
+    "0x4778cc",
+    "0x477778"
+   ]
+  },
+  "0x4e2f78": {
+   "stores": [
+    "0x417ec7"
+   ],
+   "leitores_logica": [
+    "0x42c874",
+    "0x42c8a5",
+    "0x42d20d",
+    "0x42d3c0",
+    "0x42cfff",
+    "0x42d13c",
+    "0x42d167",
+    "0x42d0ae"
+   ]
+  },
+  "0x507d54": {
+   "stores": [
+    "0x469b9f"
+   ],
+   "leitores_logica": [
+    "0x469b63",
+    "0x469dd7",
+    "0x469bb2"
+   ]
+  },
+  "0x507d58": {
+   "stores": [
+    "0x469ba6"
+   ],
+   "leitores_logica": [
+    "0x469956"
+   ]
+  },
+  "0x508f70": {
+   "stores": [
+    "0x417958",
+    "0x417993",
+    "0x4179d4",
+    "0x417d7a"
+   ],
+   "leitores_logica": [
+    "0x46846e",
+    "0x468c8c",
+    "0x468573",
+    "0x468894",
+    "0x468925",
+    "0x468b20",
+    "0x468c50",
+    "0x40f6bc"
+   ]
+  }
+ },
+ "alvos": {
+  "0x4e2f78": [
+   [
+    "0x417ec7",
+    "0x417698",
+    "mov byte ptr [0x4e2f78], 0x16"
+   ]
+  ],
+  "0x4e1b0e": [
+   [
+    "0x45835f",
+    "0x4581bc",
+    "mov byte ptr [0x4e1b0e], bl"
+   ]
+  ],
+  "0x4e060c": [
+   [
+    "0x428f33",
+    "0x428ef1",
+    "mov dword ptr [0x4e060c], eax"
+   ]
+  ],
+  "0x4e0610": [
+   [
+    "0x428efe",
+    "0x428ef1",
+    "mov word ptr [0x4e0610], 1"
+   ],
+   [
+    "0x428f10",
+    "0x428ef1",
+    "mov word ptr [0x4e0610], dx"
+   ],
+   [
+    "0x428f2c",
+    "0x428ef1",
+    "mov word ptr [0x4e0610], si"
+   ]
+  ],
+  "0x507d54": [
+   [
+    "0x469b9f",
+    "0x469b85",
+    "mov word ptr [0x507d54], dx"
+   ]
+  ],
+  "0x50a9b4": [
+   [
+    "0x479c9e",
+    "0x479c9e",
+    "mov word ptr [0x50a9b4], ax"
+   ]
+  ],
+  "0x50a9b6": [
+   [
+    "0x479ca4",
+    "0x479c9e",
+    "mov word ptr [0x50a9b6], dx"
+   ]
+  ],
+  "0x4e1d18": 69
+ }
+}
