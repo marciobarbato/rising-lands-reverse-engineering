@@ -6,7 +6,7 @@ import sys
 
 ENGINE = Path(__file__).resolve().parents[1]
 ROOT = ENGINE.parent
-VERSION = 0x00010001
+VERSION = 0x00010002
 NAMES = ('eax', 'ebx', 'ecx', 'edx', 'esi', 'edi', 'ebp')
 ROUTINES = {'Random': 1, 'LongRand': 2, 'rand': 3, 'IntToBCD': 4, 'BCDToInt': 5}
 

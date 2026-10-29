@@ -162,7 +162,7 @@ No callbacks cross the ABI; unported paths fail by name and original address.
 Original executable SHA-256:
 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
 Principal addresses: CalculGame0x42c868, unit dispatcher0x456db5,
-structure dispatcher0x4281c7, iaCalculPlayer0x47f927, iaSolver0x47d314,
+structure dispatcher0x4281c7, iaCalculPlayer0x47f927, iaSolver 0x47d314,
 MenuInit0x4682bb, AffGame0x417698, DeleteBank0x418a12, TestFinDeMission0x458606.
 Capture/mask/source identities are pinned in `testes/frame_differential.py` and
 provider tests. See `research/FRAME_AUDIT.md` for exclusion and observation scope.
@@ -283,3 +283,71 @@ python3 -B motor/testes/frame_differential.py --m22 --frames 128 \
   --executable '/path/to/cd/INSTALHD/RISING.EXE' \
   --output .local/engine-128-new.json
 ```
+
+## Stage 2c — implementation and proof contract
+
+Baseline main `406823a` was merged into this feature branch. This stage owns
+only motor/ and docs/ENGINE.md. No merge into main or acceptance decision is
+performed. Original executable identity remains
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+
+ABI 1.2 is additive: explicit creation at 1.0/1.1/1.2 is supported, previous
+signatures/layouts/status values and the 72-byte phase/event structures remain.
+New isolated testing IDs cover task/rules, Core movement/spawn/path, and
+Combat projectile creation. The frame entry, clock, register and transactional
+publication contracts are unchanged. Existing no-human-input host answers
+remain explicit inputs from the same display scenario. No renderer is added.
+
+The original resolved RULE instructions at 0x514910 and entry table 0x51a720
+are read from captured state. The native VM implements task/free/context lists,
+child/wait/result control flow and reached rule operations. Monster groups,
+battle/arrival rules, creation/placement/type/owner initialization, minimap,
+orders, physical step/turn/animation, occupancy/region changes, route selection,
+contour candidates, optimization and exact shared search scratch are ported.
+Primary addresses: AvanceMonstre 0x47b283, ConstruitGroupeMonstre 0x47a81d,
+iaSolver 0x47d314, DeplaceEngin 0x44930c, CheminCalcul 0x42f214,
+Chemin_Verouille 0x43b30b, ProjectileInit 0x46e44c and ProjectileSet 0x46e208.
+The owned audit/source pins and tests distinguish defined semantic returns
+from unmodeled caller GPR leftovers.
+
+Order remains the accepted phase chain: player AI executes before the game
+counter and unit dispatcher; the first raid posts real tasks, creates its
+unit/group and projectile, gives real orders, then the unit/projectile frame
+families observe that state. Movement shares terrain/region grids and route
+storage; path preparation, contours, candidate selection, optimization and
+scratch stores follow the reference order. Buffers are original bindings,
+not independently cached world copies. Every unsupported world callback or
+rule raises a named original-address error; no no-op fallback is installed.
+
+Semantic state now contains 46 unit fields, typed task/group pools, list heads,
+counters, iterators and pending groups. Action records retain opaque backing
+because their indexed span overlaps other globals. Sparse fixtures never gain
+an invented runtime; bound presence/cardinality/list bindings are tested.
+
+Missions Stage21 supplies ten original-only xz packages. Manifest SHA-256:
+`e88dc3fcaca11d03a774dad8bd9c768345f13c884cc2d8df493107ec9d180b09`.
+Policy SHA-256:
+`384f985bea05137197ea22b3439f96db2f1e6b9a6d8b1a6c986f4955697fc21e`.
+The cumulative mask has 153,060 display-only bytes; all unmasked bytes are
+compared in each of 18,401 phases (1,560 observed changing logic bytes).
+Each part starts from a declared full original opening and chains all its
+phases. The aggregate rejects gaps, partial diagnostics, changed sources,
+different libraries/policies or dirty source trees. Serial mode instead loads
+hashed actual-Rust continuation checkpoints, never later reference openings.
+The separate serial benchmark checks the final complete masked state and
+records after an uninterrupted S0-to-9,200 native run; it is not a phase proof.
+
+New isolated comparisons include 155 selected original Core records across
+37 families (all available 9175–9180 records, plus the first four per family),
+25 original raid-rule calls, three original Combat call records, and 942
+additional perturbed/reference checks (176 movement/path, 320 groups/tasks,
+446 projectile/timer cases). These counts are selected records,
+not independent missions. Original callback effects are never replayed to
+produce the Rust results. Final gate/proof results follow after committed runs.
+
+Common-check preparation now uses workstream.py's ignored-link logic from the
+prepared maintenance checkout to link media/Graphics inputs and missing local
+Python packages, including Unicorn 2.1.4. Original inputs are read-only and no
+tracked reference was patched. The prepared `python3 -B scripts/check.py`
+passes all requested suites (1,860 tests run, 609 optional skips). This
+supersedes the stage 2a/2b environment stop; the earlier log stays preserved.

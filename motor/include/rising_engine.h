@@ -4,7 +4,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* ABI1.1. Frame logic phases are additive; rendering/assets are separate.
+/* ABI1.2. Frame logic phases are additive; rendering/assets are separate.
  * Addresses are original u32 values, NOT host pointers. Handles are opaque
  * integer tokens, never dereferenceable; zero/stale/double-free are rejected.
  * Calls are serialized inside the library. Caller must synchronize handle use
@@ -16,7 +16,7 @@ extern "C" {
  * Load replaces ALL blocks atomically, preserving the explicit virtual clock.
  * Count<=65536 and total<=64MiB. Empty load is allowed; empty regions are not.
  */
-#define RL_ABI_VERSION 0x00010001u
+#define RL_ABI_VERSION 0x00010002u
 enum { RL_OK=0, RL_INVALID_ARGUMENT=1, RL_INVALID_HANDLE=2, RL_MEMORY_ERROR=3,
  RL_UNKNOWN_ROUTINE=4, RL_UNSUPPORTED_PATH=5, RL_BUFFER_TOO_SMALL=6,
  RL_PANIC=7, RL_POISONED=8, RL_RESOURCE_LIMIT=9, RL_VERSION_MISMATCH=10 };
@@ -42,7 +42,7 @@ int32_t rl_avancar_ticks(RlMundo world, uint64_t ticks);
 int32_t rl_relogio(RlMundo world, uint64_t *tick, uint32_t *milliseconds);
 /* Thread-local error, UTF8+NUL. Does not clear error. NULL/zero size query. */
 int32_t rl_erro_mensagem(uint8_t *buffer, uint32_t capacity, uint32_t *required);
-/* ABI1.1 additions. Creation also accepts1.0; existing layouts/signatures retain
+/* ABI1.1 additions. Creation also accepts1.0/1.1; existing layouts/signatures retain
  * their1.0 semantics. One caller must serialize a phase plus snapshot/events.
  * Input states are explicitly declared memory blocks, including original tables.
  * Supported scenario: MONDE01 no-key display path. Unported branches fail with
@@ -81,7 +81,7 @@ int32_t rl_eventos_quadro(RlMundo world,RlFrameEvent *buffer,uint32_t capacity,u
 int32_t rl_projetar_tudo(RlMundo world,uint8_t *buffer,uint32_t capacity,uint32_t *required);
 int32_t rl_projetar_liberados(RlMundo world,uint8_t *buffer,uint32_t capacity,uint32_t *required);
 /* Isolated provider effects, no tick. Id table: frame_{ai,units,core,economy}
- * ::isolated in rl-core. Argument counts are exact. Returns only the published
+ * ::isolated in rl-core. ABI1.2 adds raid/movement/Combat IDs400..599. Argument counts are exact. Returns only the published
  * semantic EAX/provider value; void adapters return0, no GPR claim. */
 int32_t rl_executar_rotina_quadro(RlMundo world,uint32_t routine,const uint32_t *args,uint32_t count,uint32_t *output);
 #ifdef __cplusplus
