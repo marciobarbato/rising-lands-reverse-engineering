@@ -95,6 +95,28 @@ def scenarios():
                 for i in range(20,maximum+1):record(m,i)
                 yield dict(name=f'insert-existing-{maximum}-{volume}-{identity:x}',operation='insert',
                   regs=dict(EAX=identity,EDX=BANK_A,EBX=REFS+20*4,ECX=3),arguments=[volume],memory=m.snapshot(),com=[])
+    for maximum in (19,69,70):
+        for volume in (0,128):
+            for identity in (ID1,ID2):
+                m=fixture_memory(original);m.w32(INDEX,maximum)
+                record(m,0,state=1,slot=0x52216c,kind=1)
+                m.w32(0x52216c,COM_BUFFER);m.w32(0x522170,TABLE);m.w32(0x498f64,0)
+                plan=[] if identity==ID1 and volume else [response('GetStatus',value=0),response('GetStatus',value=0),response('Release')]
+                yield dict(name=f'insert-playing-{maximum}-{volume}-{identity:x}',operation='insert',
+                  regs=dict(EAX=identity,EDX=BANK_A,EBX=REFS,ECX=3),arguments=[volume],memory=m.snapshot(),com=plan)
+    for identity in (ID1,ID2):
+        for volume in (0,128):
+            m=fixture_memory(original);r=record(m,0,state=1,slot=0x52216c,kind=1)
+            if identity==ID2:m.w32(r+24,ENTRY2);m.w32(r+28,DATA2)
+            m.w32(0x52216c,COM_BUFFER);m.w32(0x522170,TABLE);m.w32(0x498f64,0)
+            plan=[response('GetStatus',value=0),response('GetStatus',value=0),response('Release')] if identity==ID1 and not volume else []
+            yield dict(name=f'volume-playing-{identity:x}-{volume}',operation='set_volume',regs=dict(EAX=REFS,EDX=volume),arguments=[],memory=m.snapshot(),com=plan)
+    for hole in (0,1,19):
+        m=fixture_memory(original);m.w32(INDEX,20)
+        for i in range(20):record(m,i,state=1)
+        m.w8(TABLE+hole*44+8,0);r=record(m,20,slot=0x52211c)
+        m.w32(0x52211c,COM_BUFFER)
+        yield dict(name=f'playing-hole-{hole}',operation='transfer_to_playing',regs=dict(EAX=20),arguments=[],memory=m.snapshot(),com=[])
     for volume in (0,64,256,0xffffffff):
         m=fixture_memory(original);record(m,20)
         yield dict(name=f'set-volume-{volume}',operation='set_volume',regs=dict(EAX=REFS+20*4,EDX=volume),arguments=[],memory=m.snapshot(),com=[])
@@ -113,6 +135,11 @@ def scenarios():
             else:
                 plan += [response('GetStatus',value=0),response('GetStatus',value=0),response('Release')]
             yield dict(name=f'manage-active-{status}-{hresult:x}',operation='manage',regs={},arguments=[],memory=m.snapshot(),com=plan)
+    m=fixture_memory(original)
+    sequence=[dict(operation='post',regs=dict(EAX=0x41,EDX=sound_id,EBX=REFS+72*4,ECX=3),arguments=[volume])
+              for sound_id,volume in ((ID1,256),(ID1,128),(ID2,64),(ID2,0),(ID1,256),(ID1,0),(ID2,256))]
+    yield dict(name='post-natural-sequence',operation='post',regs=sequence[0]['regs'],arguments=sequence[0]['arguments'],
+               memory=m.snapshot(),com=[],sequence=sequence)
     m=fixture_memory(original)
     yield dict(name='manage-empty',operation='manage',regs={},arguments=[],memory=m.snapshot(),com=[])
     m=fixture_memory(original);m.w32(INDEX,20);record(m,20)
@@ -159,12 +186,15 @@ class QueueNativeBench(BancadaX86):
 
 def run_case(fixture):
     b=QueueNativeBench(fixture);stop=None;regs={}
+    steps=[]
     try:
-        regs=b.executar(ENTRIES[fixture['operation']],[(0x489dac,0x48c204),(0x48c3b0,0x48c3c8),(0x48d890,0x48d942)],fixture['regs'],
-                       pilha={4+4*i:struct.pack('<I',v) for i,v in enumerate(fixture['arguments'])},limite_instrucoes=20000)
+        for request in fixture.get('sequence',[fixture]):
+            regs=b.executar(ENTRIES[request['operation']],[(0x489dac,0x48c204),(0x48c3b0,0x48c3c8),(0x48d890,0x48d942)],request['regs'],
+                           pilha={4+4*i:struct.pack('<I',v) for i,v in enumerate(request['arguments'])},limite_instrucoes=20000)
+            if 'sequence' in fixture:steps.append(dict(eax=hex(regs['EAX']),memory=b.snapshot()))
     except Exception as exc:stop=dict(type=type(exc).__name__,detail=str(exc),eip=hex(b.cpu.reg_read(x86.UC_X86_REG_EIP)))
     return dict(name=fixture['name'],operation=fixture['operation'],input=fixture,output=b.snapshot(),
-                eax=hex(regs['EAX']) if regs else None,stop=stop,com=b.plan.calls,raw_com=b.raw_com,unused_com=len(b.plan.responses))
+                eax=hex(regs['EAX']) if regs else None,steps=steps,stop=stop,com=b.plan.calls,raw_com=b.raw_com,unused_com=len(b.plan.responses))
 
 
 def capture():
@@ -172,7 +202,7 @@ def capture():
     start=time.monotonic();cases=[run_case(f) for f in scenarios()]
     return dict(schema='rising-lands/audio-queue-original-capture/1',original_sha256=ORIGINAL_SHA256,
                 translation_executed=False,declared_com='Exact ordered HRESULT/status answers; no hardware/default status semantics',
-                cases=cases,native_calls=len(cases),seconds=round(time.monotonic()-start,3))
+                cases=cases,scenario_count=len(cases),native_calls=sum(len(c['input'].get('sequence',[None])) for c in cases),seconds=round(time.monotonic()-start,3))
 
 
 if __name__=='__main__':
