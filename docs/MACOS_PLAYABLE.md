@@ -181,3 +181,49 @@ open -n .local/round3-workspace/local-data/macos-playable/dist/development/Risin
 
 The [v3 contract](../apps/macos-preview/M3_CONTRACT.md) documents exact API
 semantics, evidence pins, ordering, publication and remaining dependencies.
+
+
+## Bounded native smoke readiness
+
+The shell waits for an explicit, source-commit/mode-validated readiness message
+from the UI after its worker and assets finish loading. Merely showing a window
+or finishing document navigation is not readiness. The original interaction
+assertions and per-action waits remain unchanged.
+
+Monotonic budgets are separate: window visibility within 45 seconds;
+initialization/readiness within 90 seconds total from launch (including the
+window); then at most 45 seconds for checks. Progress does not reset any budget.
+A before snapshot must finish before checks begin. A final screenshot has a
+10-second exit guard; LaunchServices has a 165-second outer process guard
+(90 + 45 + 10 + 20 launch allowance). This does not turn an unready window into
+success or extend the 45-second check budget.
+
+Failure JSON includes phase, document/window/ready signals, elapsed times,
+readiness payload and Python stderr. It is written before screenshots, so a
+stuck WebView cannot erase the reason. Both UI smokes preserve paired before/
+after images plus the final snapshot; missing captures fail the delivery.
+Retries archive prior JSON, images and process logs under `previous-smoke/`.
+An outer-process failure preserves any more specific app failure JSON.
+
+`--smoke-ready-delay-ms 50000` is a smoke-only diagnostic: it holds the readiness
+signal after real initialization to reproduce a slow startup without inventing
+worker/asset success or generating CPU load. It is ignored outside smoke mode
+and bounded to 0..80000 ms. Native state-machine tests exercise missing ready,
+late window, out-of-order document/ready events and an unchanged check deadline.
+Graphics stays pinned to its explicitly accepted 1.2 contract; other versions
+still fail. After this robustness delivery, workstream A awaits M2.3 and the
+Claude M3 plan; no new game/UI features are planned here.
+
+An occluded WebView can report a hidden document while its native window is
+visible. Native smoke repaint barriers therefore wait for a completed WebView
+snapshot through the existing 15-second request deadline, rather than waiting
+for animation callbacks that WebKit suspends while hidden. This preserves
+paint verification and every interaction assertion. Timeout JSON also records
+the last assertion/stage and game/visibility diagnostics.
+
+
+The 2026-10-29 architecture decision targets a Rust engine/render library with
+a C ABI called by Swift. Python stays as the validated reference and current
+inspection/playback runtime; whether it ships later remains undecided. Live
+frame delivery awaits the coordinator's published C ABI/M3 plan after M2.3.
+No live Python delivery, guessed C symbols or loader behavior is implemented.

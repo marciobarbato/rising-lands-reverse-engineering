@@ -15,16 +15,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
     var smokeOutput: URL?
     var screenshotOutput: URL?
     var finishedSmoke = false
+    var smokeLifecycle = SmokeReadiness(launched: ProcessInfo.processInfo.systemUptime)
+    var smokeTimer: Timer?
+    var preparingSmoke = false
+    var smokeMode = "exercise"
+    var readySignal: [String:Any]?
+    var readyDelayMs = 0
+    var smokeProgress: [String:Any]?
     let resourceRoot = Bundle.main.resourceURL!.appendingPathComponent("preview", isDirectory: true)
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         let args = CommandLine.arguments
         if let i = args.firstIndex(of: "--smoke-test"), args.count > i + 1 { smokeOutput = URL(fileURLWithPath: args[i+1]) }
         if let i = args.firstIndex(of: "--screenshot"), args.count > i + 1 { screenshotOutput = URL(fileURLWithPath: args[i+1]) }
+        smokeMode = args.contains("--inspection") ? "inspection" : "exercise"
+        if smokeOutput != nil, let i = args.firstIndex(of: "--smoke-ready-delay-ms"), args.count > i+1,
+           let delay = Int(args[i+1]), (0...80000).contains(delay) { readyDelayMs = delay }
         makeMenu()
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .nonPersistent()
         config.userContentController.add(self, name: "engine")
+        let smokeConfiguration = "window.nativeSmoke={enabled:\(smokeOutput != nil),readyDelayMs:\(readyDelayMs)};"
+        config.userContentController.addUserScript(WKUserScript(source:smokeConfiguration,injectionTime:.atDocumentStart,forMainFrameOnly:true))
         web = WKWebView(frame: .zero, configuration: config)
         web.navigationDelegate = self
         web.setValue(false, forKey: "drawsBackground")
@@ -37,17 +49,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         window.center()
         window.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps:true)
+        if window.isVisible { smokeLifecycle.windowVisible(ProcessInfo.processInfo.systemUptime) }
         do { try launchEngine() }
         catch { fail("Não foi possível iniciar o Python incluído: \(error.localizedDescription)"); return }
         let page = resourceRoot.appendingPathComponent(args.contains("--inspection") ? "ui/playback.html" : "ui/index.html")
         web.loadFileURL(page, allowingReadAccessTo:resourceRoot)
         if smokeOutput != nil {
-            DispatchQueue.main.asyncAfter(deadline:.now()+45) { [weak self] in
+            smokeTimer = Timer.scheduledTimer(withTimeInterval:0.5,repeats:true) { [weak self] _ in
                 guard let self = self, !self.finishedSmoke else { return }
-                self.finishSmoke(["passed":false,"error":"Tempo limite de 45 segundos na abertura", "pythonStderr":self.errorText])
+                let now = ProcessInfo.processInfo.systemUptime
+                if self.window.isVisible { self.smokeLifecycle.windowVisible(now) }
+                if let reason = self.smokeLifecycle.timeout(now) {
+                    self.finishSmoke(["passed":false,"error":reason])
+                }
             }
         }
     }
+
     func makeMenu() {
         let main = NSMenu()
         let appItem = NSMenuItem(); main.addItem(appItem)
@@ -114,10 +132,32 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         }
     }
     func userContentController(_ userContentController:WKUserContentController,didReceive message:WKScriptMessage) {
+        if message.frameInfo.isMainFrame, smokeOutput != nil, let body = message.body as? [String:Any] {
+            if body["action"] as? String == "smokeProgress" {
+                smokeProgress = body
+                return
+            }
+            if body["action"] as? String == "appInitializationFailed" {
+                finishSmoke(["passed":false,"error":body["error"] as? String ?? "Initialization failed"])
+                return
+            }
+            if body["action"] as? String == "appReady" {
+                let expected = Bundle.main.object(forInfoDictionaryKey:"RisingLandsSourceCommit") as? String
+                guard body["protocol"] as? Int == 1, body["mode"] as? String == smokeMode,
+                      body["worker"] as? Bool == true, body["assets"] as? Bool == true,
+                      body["commit"] as? String == expected, expected != nil else {
+                    finishSmoke(["passed":false,"error":"Invalid app readiness signal"]); return
+                }
+                readySignal = body
+                smokeLifecycle.ready(ProcessInfo.processInfo.systemUptime)
+                startSmokeIfReady()
+                return
+            }
+        }
         if message.frameInfo.isMainFrame, let body = message.body as? [String:Any],
            body["action"] as? String == "capture", smokeOutput != nil,
            let shot = screenshotOutput, let label = body["label"] as? String,
-           ["before", "after"].contains(label), let requestID = body["id"] {
+           ["before", "after", "paint"].contains(label), let requestID = body["id"] {
             web.takeSnapshot(with:nil) { [weak self] image,error in
                 var response:[String:Any] = ["id":requestID,"ok":false,"error":"Falha na captura nativa"]
                 if let image = image, let tiff = image.tiffRepresentation,
@@ -149,26 +189,65 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
     }
     func webView(_ webView:WKWebView,didFinish navigation:WKNavigation!) {
         guard smokeOutput != nil else { return }
-        webView.callAsyncJavaScript("return await window.runSmokeTests().catch(e=>({passed:false,error:String(e),stack:e.stack,diagnostics:window.smokeDiagnostics?window.smokeDiagnostics():{}}));",arguments:[:],in:nil,in:.page) { [weak self] result in
-            switch result {
-            case .success(let value):self?.finishSmoke(value as? [String:Any] ?? ["passed":false,"error":"Resposta inválida"])
-            case .failure(let error):self?.finishSmoke(["passed":false,"error":error.localizedDescription,"pythonStderr":self?.errorText ?? ""])
+        smokeLifecycle.documentLoaded(ProcessInfo.processInfo.systemUptime)
+        startSmokeIfReady()
+    }
+    func webViewWebContentProcessDidTerminate(_ webView:WKWebView) {
+        fail("Web content process terminated")
+    }
+    func captureSmokeFrame(_ label:String, completion:@escaping()->Void) {
+        guard let shot = screenshotOutput else { completion(); return }
+        let url = label == "final" ? shot : shot.deletingPathExtension().appendingPathExtension(label + ".png")
+        if label != "final" && FileManager.default.fileExists(atPath:url.path) { completion(); return }
+        web.takeSnapshot(with:nil) { image,error in
+            if let image = image, let tiff = image.tiffRepresentation,
+               let bitmap = NSBitmapImageRep(data:tiff), let png = bitmap.representation(using:.png,properties:[:]) {
+                try? png.write(to:url,options:.atomic)
+            }
+            completion()
+        }
+    }
+    func startSmokeIfReady() {
+        guard smokeOutput != nil, !finishedSmoke, !preparingSmoke,
+              smokeLifecycle.readyAt != nil, smokeLifecycle.documentLoadedAt != nil else { return }
+        preparingSmoke = true
+        captureSmokeFrame("before") { [weak self] in
+            guard let self = self, !self.finishedSmoke else { return }
+            let now = ProcessInfo.processInfo.systemUptime
+            guard self.smokeLifecycle.startChecks(now) else {
+                self.finishSmoke(["passed":false,"error":self.smokeLifecycle.timeout(now) ?? "Smoke readiness incomplete"]); return
+            }
+            self.web.callAsyncJavaScript("return await window.runSmokeTests().catch(e=>({passed:false,error:String(e),stack:e.stack,diagnostics:window.smokeDiagnostics?window.smokeDiagnostics():{}}));",arguments:[:],in:nil,in:.page) { [weak self] result in
+                switch result {
+                case .success(let value):self?.finishSmoke(value as? [String:Any] ?? ["passed":false,"error":"Invalid smoke response"])
+                case .failure(let error):self?.finishSmoke(["passed":false,"error":error.localizedDescription])
+                }
             }
         }
     }
     func finishSmoke(_ result:[String:Any]) {
         guard !finishedSmoke else { return }; finishedSmoke = true
+        smokeTimer?.invalidate()
+        let now = ProcessInfo.processInfo.systemUptime
         var final = result
+        if result["passed"] as? Bool == true {
+            if let reason = smokeLifecycle.timeout(now) { final["passed"] = false; final["error"] = reason }
+            if smokeLifecycle.checksStartedAt == nil { final["passed"] = false; final["error"] = "Checks started without readiness" }
+        }
+        final["readiness"] = smokeLifecycle.diagnostics(now)
+        final["readySignal"] = readySignal
+        final["lastProgress"] = smokeProgress
+        final["diagnosticReadyDelayMs"] = readyDelayMs
         final["nativeWindowVisible"] = window.isVisible
         final["bundlePath"] = Bundle.main.bundlePath
         final["pythonStderr"] = errorText
+        // Commit the result before attempting screenshots: even a hung WebView
+        // cannot erase the phase-specific failure JSON.
         if let url = smokeOutput, let data = try? JSONSerialization.data(withJSONObject:final,options:[.prettyPrinted,.sortedKeys]) { try? data.write(to:url,options:.atomic) }
-        if let url = screenshotOutput {
-            web.takeSnapshot(with:nil) { image,error in
-                if let image = image, let tiff = image.tiffRepresentation, let bitmap = NSBitmapImageRep(data:tiff), let png = bitmap.representation(using:.png,properties:[:]) { try? png.write(to:url) }
-                NSApp.terminate(nil)
-            }
-        } else { NSApp.terminate(nil) }
+        DispatchQueue.main.asyncAfter(deadline:.now()+10) { NSApp.terminate(nil) }
+        captureSmokeFrame("after") { [weak self] in
+            self?.captureSmokeFrame("final") { NSApp.terminate(nil) }
+        }
     }
     func fail(_ message:String) {
         if smokeOutput != nil { finishSmoke(["passed":false,"error":message]); return }
