@@ -178,7 +178,8 @@ class MundoFisico(MundoUnidades, VisaoMovimento):
             self.descobrir_area(destino, raio + 2, dono)
             self.iluminar_area(destino, raio, dono)
         self.minimapa(dono, destino, 4)
-        self.rotas[indice] = bytearray(consumir_passo_concluido(self.rotas[indice]))
+        # In place: a bound route buffer (original allocation) keeps its identity.
+        self.rotas[indice][:] = consumir_passo_concluido(self.rotas[indice])
         self._aplicar_fadiga(indice, fatiga, contador, limite)
         return True
 

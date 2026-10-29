@@ -447,6 +447,15 @@ def bolsa_vazia(m, bolsa):
     return (contagem & 0xff00) | int(contagem == 0)
 
 
+CORES_JOGADORES = 0x4e24dc
+
+
+def cor_jogador(m, jogador):
+    """PlayerGetColor 0x46003b: EAX = 0x1e when AL = 0xc8, else the byte at 0x4e24dc + AL (upper bits cleared)."""
+    jogador &= 0xff
+    return 0x1e if jogador == 0xc8 else _u8(m, CORES_JOGADORES + jogador)
+
+
 def calcular_contador_mercado(m, jogador):
     """CalculCompteurMarche 0x466dd1 (AL=player): read-only unless market state is 3.
 

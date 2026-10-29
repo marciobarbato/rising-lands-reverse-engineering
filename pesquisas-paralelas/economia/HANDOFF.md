@@ -837,3 +837,30 @@ The translation is unchanged from Stage 20; only its binding is new.
 - The market state-3 (`0x466e01`) and state-4/5 (`0x466ed1`/`0x466fe1`) branches remain named dependencies; they need CalculValeur `0x466533` and ForgetMarche `0x4610a4`. Core's coverage run (frames 0..2,300 so far) reaches none of the market helpers.
 - Unreached and untranslated: InitNova, InventionSetEffet, AnimBallonStatic, and an actively producing CalculTroupe.
 - GetMeteo has no static caller and is not entered in that run.
+
+## Stage 26 (M2.3 readiness): frames 129..9,000 from the real states
+
+**Inputs:**
+- Core's coverage (`runs/core/coverage-9200`).
+- Economy's gate probe: `sondar_temporizadores_exibicao.py` at `574082d`, run on the Mac mini (`runs/economy/gate-probe-9000`, `9c242d6`, merged). Output `evidencias/sondagem-temporizadores-exibicao-9000.json.xz`, sha256 `35dd6b01…7618`: 9,000 frames; frames 0/1 reproduce the reference; code unchanged; 14 CalculGame-entry states saved as deltas against the display post-load state. `sondar_temporizadores_exibicao.estado_da_sondagem(base, registro)` rebuilds a state and checks its summary.
+
+**Captures**, each committed before its replay:
+- `evidencias/captura-cor-jogador-original.json` (`748d745`, sha256 `de089fd4…aa3b`): PlayerGetColor for every AL (upper bits 0 / `0xabcd12`), from the display and frame-128 states at counter 9000. 1,024 returns, no writes.
+- `evidencias/captura-temporizadores-sondagem-original.json` (`260181c`, sha256 `9cc0e7ba…8b27`): from all 14 probe states. 136 scenarios, 2,179 calls: 2,144 returns and 35 stops, all in declared overrides (MessageBoxSet 30, InitGameZone 5).
+
+**API:**
+- `quadro_economia.cor_jogador(m, AL)` and the `PlayerGetColor` provider; the `GetMeteo` provider.
+- Provider regions added: the color table `0x4e24dc` (256 bytes), weather `0x496d2c` (4 bytes) and the sympathy event records `0x497288` (events 0..0x15).
+- `test_temporizadores.reproduzir(teste, blocos, roteiro, original)` replays any timer scenario list.
+
+**Validation:**
+- `test_temporizadores_sondagem` asserts the probe's facts: only the field row/flag and the frames 1..5 resource presentation change in frames 1..9000. It replays all 14 states, comparing 1,849 calls (2,179 minus those after the 45 market-branch dependency points).
+- `test_cor_jogador` replays 1,024 calls directly and through the providers.
+- Native rerun (`RISING_EMULAR=1`, under the lease, MacBook, 48 s): the fresh capture equals the frozen one.
+- Gate, outside the lease: 494 tests, 206 optional skips, docs OK.
+
+**Findings for Combat's readiness matrix:**
+- PlayerAttaqueCalculSympa at 2000/4000/6000/8000 rewrites the 16 attack flags (all already 0); every MAJSympathie call takes the AI-context return; nothing else changes.
+- The alliance counters stay 0 through frame 9000.
+
+**Gaps:** the market state-3/4/5 branches (CalculValeur `0x466533`, ForgetMarche `0x4610a4`), InitNova, InventionSetEffet, AnimBallonStatic and an actively producing CalculTroupe stay untranslated. None of them can run in MONDE01 before the raid, because their gate inputs never change.

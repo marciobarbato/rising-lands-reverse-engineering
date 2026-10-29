@@ -11,6 +11,7 @@ by the slots in ``BLOCOS`` (``regioes_necessarias``).  The previous surface is a
 """
 import struct
 from dataclasses import dataclass
+from pathlib import Path
 from graficos import Catalogo
 from ciclo_cache_terreno import CicloCacheTerreno, MemoriaMotor
 from vinculos_graficos import ArenaGlobalFixa, RegistroVinculos
@@ -20,7 +21,7 @@ from graficos import RAIZ
 import json
 
 # Contract version: bump the major number for any change of an input, output field, format or stop semantics.
-VERSAO_RENDER_QUADRO = (1, 1)
+VERSAO_RENDER_QUADRO = (1, 2)
 LARGURA, ALTURA = 800, 600
 DGROUP, DGROUP_FIM = 0x494000, 0x523000
 ESTRUTURAS, PASSO_ESTRUTURA = 0x49a0c8, 276
@@ -34,6 +35,18 @@ RELOGIOS = (0x508f80, 0x508f84)   # with 0x508f7c (quadro_u32 in the frame globa
 
 
 @dataclass(frozen=True)
+class EstadoCache:
+    """GetNumBob's terrain cache (original: keys at [0x49A050], cursor 0x49A04E, bank payloads 1090..1345).
+
+    A cache hit reuses the stored pixels (lighting/discovery changes do not invalidate it), so a frame sequence is
+    exact only when the cache is carried from frame to frame: pass ``resultado.cache`` into the next call.
+    """
+    registros: bytes     # 256 keys x 4 bytes
+    blocos_crus: bytes   # 256 raw 1056-byte payloads
+    proximo: int         # replacement cursor 0..255
+
+
+@dataclass(frozen=True)
 class QuadroRenderizado:
     versao: tuple        # VERSAO_RENDER_QUADRO of the producer
     largura: int         # 800
@@ -43,6 +56,35 @@ class QuadroRenderizado:
     parada: object       # None, or dict(endereco, detalhe): the first unreconstructed original branch
     chamadas: tuple      # ordered original calls the composition made
     efeitos: tuple       # (name, address, old hex, new hex) writes to the frame globals
+    cache: object = None # EstadoCache after the frame: feed it to the next frame's call
+
+
+def _ler_comprimido(entrada_b64, sha256_esperado):
+    import base64, zlib, hashlib
+    dados = zlib.decompress(base64.b64decode(entrada_b64))
+    if hashlib.sha256(dados).hexdigest() != sha256_esperado: raise ValueError('Artifact hash mismatch')
+    return dados
+
+
+def carregar_superficie_inicial(caminho):
+    """The M2.2 initial surface artifact -> 800*600 palette indices (hash-verified)."""
+    d = json.loads(Path(caminho).read_text())
+    return _ler_comprimido(d['pixels_zlib_base64'], d['sha256'])
+
+
+def carregar_cache_inicial(caminho, catalogo=None):
+    """The M2.2 initial terrain-cache artifact -> EstadoCache (keys, cursor and payloads, hash-verified)."""
+    from ciclo_cache_terreno import blocos_banco_cache
+    d = json.loads(Path(caminho).read_text())
+    chaves = _ler_comprimido(d['keys_zlib_base64'], d['keys_sha256'])
+    base = bytearray(blocos_banco_cache(catalogo or Catalogo()))
+    import hashlib
+    if hashlib.sha256(bytes(base)).hexdigest() != d['base_payloads_sha256']: raise ValueError('Bank payloads differ from the artifact base')
+    for i, b64 in d['modified_slots_zlib_base64'].items():
+        import base64, zlib
+        base[int(i)*1056:(int(i)+1)*1056] = zlib.decompress(base64.b64decode(b64))
+    if hashlib.sha256(bytes(base)).hexdigest() != d['full_payloads_sha256']: raise ValueError('Cache payloads hash mismatch')
+    return EstadoCache(chaves, bytes(base), d['cursor'])
 
 
 def regioes_necessarias(memoria):
@@ -54,11 +96,13 @@ def regioes_necessarias(memoria):
     return regioes
 
 
-def renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=None, habitado=None, relogio=None):
+def renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=None, habitado=None, relogio=None, cache=None):
     """Compose the frame.  ``superficie_anterior``: 800*600 bytes (the surface the game draws over).
 
     habitado(indice) -> bool is BatimentEstHabiter (economy's result); required as soon as a structure is occupied.
     relogio() -> GetTickCount; defaults to the tick copy at 0x4E17B4 in memory.
+    cache: EstadoCache carried from the previous frame (None = the cold cache of the first InitCache: zero keys, cursor 0,
+    original bank payloads); the state after this frame is returned in ``QuadroRenderizado.cache``.
     """
     if len(superficie_anterior) != LARGURA*ALTURA: raise ValueError('The previous surface must be 800 x 600 bytes')
     lido = lambda a, n: bytes(memoria.ler_mundo(a, n))
@@ -73,7 +117,14 @@ def renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=Non
     f = json.loads((RAIZ/'validacao/x86-quadro-jogo.json').read_text())['cache_alloc_fixture']
     mem = MemoriaMotor(contador_u32=f['counter_u32'], vinculos=ArenaGlobalFixa(inicio_u32=f['arena_next'],
         tamanho_u32=f['arena_end']-f['arena_next'], registro=RegistroVinculos()))
-    ciclo = CicloCacheTerreno.apos_carregar_banco(catalogo); ciclo.alocar(mem); ciclo.iniciar()
+    if cache is None:
+        ciclo = CicloCacheTerreno.apos_carregar_banco(catalogo)
+    else:
+        if len(cache.registros) != 1024 or len(cache.blocos_crus) != 256*1056 or not 0 <= cache.proximo < 256:
+            raise ValueError('Invalid EstadoCache')
+        ciclo = CicloCacheTerreno(cache.blocos_crus, proximo_u16=cache.proximo)
+    ciclo.alocar(mem); ciclo.iniciar()
+    if cache is not None: ciclo.cache.registros[:] = cache.registros
     parada = None
     try:
         q = compor_quadro(mundo, tela, ciclo_cache=ciclo, catalogo=catalogo, tabela_sombra=sombra, tabela_eclairage=ecl,
@@ -86,4 +137,5 @@ def renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=Non
         pixels, chamadas, efeitos = e.superficie, e.chamadas, e.efeitos
     pal = paleta or catalogo.paleta()
     rgba = b''.join(pal[p*3:p*3+3]+b'\xff' for p in pixels)
-    return QuadroRenderizado(VERSAO_RENDER_QUADRO, LARGURA, ALTURA, bytes(pixels), rgba, parada, tuple(map(tuple, chamadas)), tuple(efeitos))
+    novo = EstadoCache(bytes(ciclo.registros), bytes(ciclo.blocos_crus), ciclo.proximo_u16)
+    return QuadroRenderizado(VERSAO_RENDER_QUADRO, LARGURA, ALTURA, bytes(pixels), rgba, parada, tuple(map(tuple, chamadas)), tuple(efeitos), novo)
