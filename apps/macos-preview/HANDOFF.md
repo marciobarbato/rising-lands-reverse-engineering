@@ -599,13 +599,13 @@ The final report-only commit changes no executable code. No merge into or push
 to the code repository's main was performed.
 
 
-## Graphics1.4 full HUD/cursor adoption
+## Graphics 1.4 full HUD/cursor adoption
 
 Latest main `ccbdcf0b1e6c35881fdd150ac7d3cc4ddc57fc38` was merged into this
-feature after checking ownership and the clean tree. Graphics1.4 is additive:
-default hud=False keeps1.3 pixels; this consumer explicitly opts into hud=True.
+feature after checking ownership and the clean tree. Graphics 1.4 is additive:
+default hud=False keeps 1.3 pixels; this consumer explicitly opts into hud=True.
 No Graphics implementation or other front is edited. Consumer contract v5
-updates the render verification reference from pre-HUD to full800×600 phase-end.
+updates the render verification reference from pre-HUD to full 800×600 phase-end.
 
 Before rendering, the adapter reads every region from Graphics' own
 regioes_necessarias(memory,hud=True), including minimap and five-player table.
@@ -614,9 +614,17 @@ chain/full-phase-end mismatches before publishing state. Unsupported HUD states
 retain their named stops and can remain explicitly partial. Both pixels and
 cache are carried in phase order; no independent start or fallback is added.
 
-The1.4 full128 reference is hash-pinned. Tests cover HUD opt-in, both additional
+The 1.4 full 128 reference is hash-pinned. Tests cover HUD opt-in, both additional
 regions, failed preflight without render/publication, full phase-end mismatch
 even if the chain hash matches, future/older version refusal and HUD partial
-stop inheritance. The real worker confirms the complete native frame1 surface
+stop inheritance. The real worker confirms the complete native frame 1 surface
 and original minimap/player regions. No original snapshot is patched or copied
 to invent state. Full playback/native build results follow after validation.
+
+The real full-sequence check passed on implementation cf8c15a: 257/257 phase
+summaries, 11/11 memory checkpoints, 128/128 chained/full-native surface hashes,
+and 257/257 phase-end surface hashes. Results are 128 full and 129 undrawn, zero
+partial/named stops in accepted M2.2. HUD/cursor pixels are included. Every
+drawing record declares the required minimap/player buffers from captured
+state. See [per-phase v5 proof](validation/m3-m22-render-v5.json); old 1.3
+reports are retained as historical. The exact committed native build follows.

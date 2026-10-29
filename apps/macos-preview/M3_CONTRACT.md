@@ -101,6 +101,13 @@ original phase-end hash before publication when no stop is returned. Undrawn
 phases retain that same verified full surface. The reference is no longer a
 pre-HUD checkpoint.
 
+The render record includes `hud:true` and `required_regions` for drawing
+phases. Their `native_full_surface_sha256` / `equals_native_full_surface`
+fields refer to the full post-HUD surface. Every phase also reports
+`native_phase_end_sha256` / `equals_native_phase_end`; no-stop mismatches are
+refused before publication, including undrawn phases. The former pre-HUD
+`native_checkpoint_sha256` fields are replaced in consumer contract v5.
+
 ## Full-surface Graphics 1.4 evidence and limits
 
 Graphics 1.4 is additive: `hud=False` preserves the former 1.3 pixels, while
