@@ -1,0 +1,10 @@
+{
+  "evidencias/fundacoes-quadro/captura-chamadas-quadro1.json": "fd209b2fb85794a52f778cb757ef79b6a4c42495763407ff731f98a05b4a5a8a",
+  "evidencias/fundacoes-quadro/captura-exibicao-quadro1.json": "b4e6747324346ac1aacc1a36b5c31f4ae87b3a35551c6303b32265133385dee0",
+  "pesquisas-paralelas/economia/evidencias/captura-consultas-economia-exibicao-v2.json": "fada576f61e00203097cb8c6b610650117416620011835fd9f55c86aea4559c0",
+  "ferramentas/chamadas_quadro_core.py": "d8b3568c3346422744868a2b7900e4afdbf84c85e840450f9da5ec863bbb626a",
+  "ferramentas/candidatos_rota.py": "35968ce6e78cc2bddca1dbafc4f2ecf38f0ff4e85178f5bfd03ca1ee7e118eec",
+  "ferramentas/memoria_quadro_core.py": "346e60dbf08f64c0a8dd21b3f3442fa7b8241e90c02f3c0876500b742ffe7020",
+  "pesquisas-paralelas/economia/quadro_economia.py": "28342fb2e68f4e400e79ff321bc6eef5098628ac4941bff25fc48ff48bc38ea2",
+  "pesquisas-paralelas/economia/provedores_economia_quadro.py": "9f7f825fd3d1f7cfd1d6de5c88dc4e9d54c66cf531da1a6296894b1a6492397d"
+}

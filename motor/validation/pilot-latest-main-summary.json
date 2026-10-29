@@ -1,0 +1,113 @@
+{
+  "schema": "rising-lands/rust-engine-pilot-validation/1",
+  "baseline_main": "3579c40ad455564f2a9b32c9a01b815b24d68f87",
+  "tested_code_commit": "668571f9b065ac4fa579ef53ed0384261e89a723",
+  "research_commit": "b7dfcdd1ad9a72cd6816c3c4ac34efd981028d0e",
+  "branch": "feat/codex-rust-engine",
+  "latest_main_ancestry_verified": true,
+  "command": "./motor/validate.sh",
+  "rust_toolchain": "rustc1.99.1 (58cf8f9c3 2026-10-13), cargo1.99.1",
+  "target": "aarch64-apple-darwin",
+  "rustfmt": "passed",
+  "clippy": "passed, -D warnings",
+  "cargo_test": {
+    "passed": 16,
+    "failed": 0,
+    "ignored": 0
+  },
+  "python_unittest": {
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0
+  },
+  "original_capture_differential": {
+    "records": 75,
+    "by_routine": {
+      "Random": 24,
+      "LongRand": 12,
+      "rand": 12,
+      "IntToBCD": 19,
+      "BCDToInt": 8
+    },
+    "mismatches": 0,
+    "skipped": 0,
+    "rng_comparisons": 48,
+    "nested_records_counted_separately": true
+  },
+  "c_header_layout": "passed via clang C11",
+  "swift_client": "passed via Swift6.4, actual dylib create/load/Random/project/clock/free",
+  "native_original_emulation": "not run or needed; existing original-only captures are oracle",
+  "cd_runtime_assets_required_for_reproduction": false,
+  "abi_version": "1.0 (0x00010000)",
+  "game_frame_engine_implemented": false,
+  "renderer_assets_projectiles_implemented": false,
+  "milestone_status_modified": false,
+  "outputs": {
+    "library": "/Users/marcio/git/Rising-Lands-Codex-Engine/motor/target/debug/librising_engine.dylib",
+    "library_bytes": 906248,
+    "library_sha256": "a0d36a2d78e9fb92c160f3d169ad48622815ff6f2b0588ae62a038195258fc7c",
+    "swift_executable_bytes": 57144
+  },
+  "open_contracts": [
+    "Complete frame-step/input/order ABI and initial-world creation",
+    "Generation-stable memory/render snapshots and ownership/lifetimes",
+    "800x600 indexed output/palette layout and partial/stop reporting",
+    "Swift native loading/linking/signing/bundling and thread policy",
+    "Virtual-clock calibration at actual original clock-consuming call sites",
+    "Later asset packaging and shipped Python decision"
+  ],
+  "logs": {
+    "pilot-v2-differential.json": {
+      "sha256": "6aef99ef49a13dfeb0d564fab095367ee2862d78ea6830e8238daf406dc46d00",
+      "bytes": 25429
+    },
+    "pilot-differential.json": {
+      "sha256": "e56666cdc0d5b1b5134ddb31bdf02887e0156848fcd3bef277fabe9da0ae3623",
+      "bytes": 25429
+    },
+    "pilot-validation.log": {
+      "sha256": "9ca0892824155cba1429d9a51e0288236aa8a63b5a47364ab110b7905695a0a0",
+      "bytes": 3740
+    },
+    "pilot-latest-main-differential-summary.log": {
+      "sha256": "74326d629b010523675e999cc19752cdad48de9a58a30d04435a49134f78b661",
+      "bytes": 192
+    },
+    "pilot-v2-summary.json": {
+      "sha256": "1160cb39da78b7186ed6a879800d79db370c0ec5b0a9db920f129bbab4557767",
+      "bytes": 3573
+    },
+    "pilot-differential-summary.log": {
+      "sha256": "74326d629b010523675e999cc19752cdad48de9a58a30d04435a49134f78b661",
+      "bytes": 192
+    },
+    "pilot-latest-main-differential.json": {
+      "sha256": "1e19934c68a9699be02e9d18d08f9ca5f77ebb0e3ccb98baf57202f084d98ff5",
+      "bytes": 25429
+    },
+    "pilot-v2-validation.log": {
+      "sha256": "95c847c1e6c5bbcdc7b3d719e80f31e8d1befd781601680abdd19967a7afbcdf",
+      "bytes": 4182
+    },
+    "pilot-latest-main-validation.log": {
+      "sha256": "fbd68c4eee670dcfdfea84f7fdd8d94ec45b1d28c9f7102baa7916fe2c948314",
+      "bytes": 3806
+    },
+    "pilot-summary.json": {
+      "sha256": "a5f76dadedeee79d44e14919d90ca9583fe81f73b780416c2cfdfd62c3713ba1",
+      "bytes": 2766
+    },
+    "toolchain.log": {
+      "sha256": "10155254ca98c5f3720a8672a1dd73d1b150eb9ea62cbd89844b667f5ff07717",
+      "bytes": 326
+    },
+    "pilot-v2-differential-summary.log": {
+      "sha256": "74326d629b010523675e999cc19752cdad48de9a58a30d04435a49134f78b661",
+      "bytes": 192
+    }
+  },
+  "prior_tested_code_commit": "347383f22ad27709476c1ea5c29063eaaf8351eb",
+  "projection_presence_guard": "passed: removed world/CRT fields and added unbound CRT state are explicitly refused, no stale template publication",
+  "engine_source_commit": "550b4f26d3c087e10d8258ed00ec95ec96cf982e",
+  "refresh_scope": "Latest-main merge only (Core native hooks); engine sources/reference pins unchanged; full validation rerun successfully"
+}
