@@ -493,8 +493,9 @@ def correr(a):
     inicio = ROOT / a.inicio
     t0 = time.monotonic()
     b, at, k0 = abrir(inicio, ROOT / a.retomar if a.retomar else None)
-    if a.retomar and b.roteiro.quadros != quadros:
-        raise RuntimeError('The resumed snapshot was taken under another input file')
+    if a.retomar and {k: v for k, v in b.roteiro.quadros.items() if k <= k0} != {k: v for k, v in quadros.items()
+                                                                               if k <= k0}:
+        raise RuntimeError('The resumed snapshot was taken under another input prefix')
     b.roteiro.quadros = quadros
     cobertura = Cobertura(b)
     comandos = Comandos(b)
