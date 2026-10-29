@@ -1,0 +1,11 @@
+test_executable_identity_is_strict (test_mapa_acoes_jogador.PlayerActionStaticMapTests) ... ok
+test_modified_edge_and_dangling_node_are_rejected (test_mapa_acoes_jogador.PlayerActionStaticMapTests) ... ok
+test_reachability_and_success_overclaims_are_rejected (test_mapa_acoes_jogador.PlayerActionStaticMapTests) ... ok
+test_real_graph_and_evidence_match_intact_bytes (test_mapa_acoes_jogador.PlayerActionStaticMapTests) ... ok
+test_transition_target_and_packet_candidates_remain_byte_bound (test_mapa_acoes_jogador.PlayerActionStaticMapTests) ... ok
+test_wrong_command_order_or_table_target_is_rejected (test_mapa_acoes_jogador.PlayerActionStaticMapTests) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.072s
+
+OK

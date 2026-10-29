@@ -1,7 +1,7 @@
-"""iaSolver rules of MONDE01's first raid task at counter 9000 (M2.3), with the war kernels they call.
+"""iaSolver rules of MONDE01's first raid task (M2.3), with the war kernels they call.
 
-Translated after the native capture ``evidencias/captura-regras-incursao-9000-ia.json`` (forced counter 9000,
-Combat's course input). The capture gives each rule call's argument block, footprint, written bytes and outside
+Translated after the native captures ``evidencias/captura-regras-incursao-9000-ia.json`` (counter 9000) and
+``captura-regras-incursao-ia.json`` (9500, 9700, 10200, 11100, 11101), forced counter 9000, Combat's course input. The capture gives each rule call's argument block, footprint, written bytes and outside
 calls, and ``testes/test_regras_incursao_ia.py`` replays it.
 
 iaSolver calls a rule with EAX pointing to an argument block: seven argument words, the player at +0x1c and the
@@ -12,6 +12,7 @@ routines are providers, ``provider(sitio=<CALL address>, **arguments)``:
 | Provider | Owner | Arguments | Result used |
 |---|---|---|---|
 | EnginEstVivant | Core | unidade (AX) | AL |
+| EnginGetCase | Core | unidade (AX) | AX |
 | SetDeplaceEngin | Core | unidade (AX), destino (DX) | — |
 
 War table: per player, 16 battle records of 0x110 bytes at ``0x51bcfc + 0x1144 * player + 0x28``:
@@ -21,7 +22,8 @@ War table: per player, 16 battle records of 0x110 bytes at ``0x51bcfc + 0x1144 *
 - +0xc u16 radius;
 - +0xe u16.
 """
-from incursao_ia import GRUPOS, PASSO_UNIDADE, UNIDADE_ATUAL, UNIDADES, primeira_unidade
+from incursao_ia import (ACOES, ACOES_ENTRADAS, GRUPOS, MONSTROS_VIVOS, PASSO_UNIDADE, PENDENTES, UNIDADE_ATUAL,
+                         UNIDADES, primeira_unidade)
 from reinicio_ia import DependenciaIA
 
 TAREFAS, PASSO_TAREFA = 0x512320, 0x60
@@ -171,9 +173,68 @@ def v_desloca_grupo(m, p, a, jogador, indice):
     return 1
 
 
+def apagar_batalha(m, jogador, posicao):
+    """iagWarDeleteBattle 0x48772f (EAX player, EDX position): free the battle at that position."""
+    for k in range(BATALHAS_POR_JOGADOR):
+        b = _batalha(jogador, k)
+        if m.u32(b + 4) != posicao & 0xffffffff:
+            continue
+        m.u32(b + 4, 0xffffffff)
+        m.u32(b + 8, 0xffffffff)
+        m.u16(b + 0xe, 0)
+        grupo = m.u32(b)
+        m.u16(b + 0xc, 0)
+        if grupo != 0xffffffff and _grupo(grupo):
+            m.u32(_grupo(grupo) + 0xc, 0xffffffff)
+        return
+
+
+def i_posicao_grupo(m, p, a, jogador, indice):
+    """I_DonnePositionGroupe 0x482550: the cell of the group's first unit, or -1."""
+    unidade = primeira_unidade(m, a[0]) & 0xffff
+    if unidade == 0xffff:
+        return 0xffffffff
+    return _chamar(p, 'EnginGetCase', 0x48256e, unidade=unidade) & 0xffff
+
+
+def v_libera_conflito(m, p, a, jogador, indice):
+    """V_FreeConflit 0x47ff22: iagWarDeleteBattle(player, position); 1."""
+    apagar_batalha(m, jogador, a[0])
+    return 1
+
+
+def v_monstro_espera_resposta(m, p, a, jogador, indice):
+    """V_iaMonstreAttendLaReponseVachementCoolMemeQueJeLaVeux 0x47b6db (argument 0 mode, 1 group).
+
+    Mode 1 queues the group again as pending (16 at most). The group's action entry is then removed (the last
+    entry moves into its slot); mode 0 also subtracts its unit count from the live monster count.
+    """
+    modo, grupo = a[0] & 0xffffffff, a[1] & 0xffffffff
+    if modo == 1:
+        n = m.u8(PENDENTES)
+        if n < 0x10:
+            m.u32(PENDENTES + 4 + 4 * n, grupo)
+            m.u8(PENDENTES, n + 1)
+    contagem = m.u32(ACOES)
+    k = 0
+    while s32(16 * k) < s32(contagem << 4) and m.u32(ACOES_ENTRADAS + 4 + 16 * k) != grupo:
+        k += 1
+    if s32(k) < s32(m.u32(ACOES)) and modo == 0:
+        m.u32(MONSTROS_VIVOS, m.u32(MONSTROS_VIVOS) - m.u32(ACOES_ENTRADAS + 16 * k))
+    if s32(k) < s32(m.u32(ACOES) - 1):
+        origem = ACOES_ENTRADAS + 16 * (m.u32(ACOES) - 1)
+        for o in range(0, 16, 4):
+            m.u32(ACOES_ENTRADAS + 16 * k + o, m.u32(origem + o))
+    if s32(k) < s32(m.u32(ACOES)):
+        m.u32(ACOES, m.u32(ACOES) - 1)
+    return 1
+
+
 REGRAS = {'B_TestGroupeVide': b_testa_grupo_vazio, 'B_NewConflit': b_novo_conflito,
           'B_AttenteConflit': b_espera_conflito, 'I_DetermineTempsTrajet': i_tempo_trajeto,
-          'V_DeplaceGroupe': v_desloca_grupo}
+          'V_DeplaceGroupe': v_desloca_grupo, 'I_DonnePositionGroupe': i_posicao_grupo,
+          'V_FreeConflit': v_libera_conflito,
+          'V_iaMonstreAttendLaReponseVachementCoolMemeQueJeLaVeux': v_monstro_espera_resposta}
 
 
 def operacoes_regras(m, p):

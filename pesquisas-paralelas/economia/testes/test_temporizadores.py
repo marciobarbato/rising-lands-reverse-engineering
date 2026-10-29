@@ -39,6 +39,7 @@ from test_quadro_economia import Memoria  # noqa: E402
 from test_quadro1_economia import base_cenario  # noqa: E402
 
 CAPTURA = PASTA / 'evidencias/captura-temporizadores-original.json'
+COR_JOGADOR = 0x46003b
 SHA_CAPTURA = '58349e4fae3892b48474a0eda735b348ac9932fe8ab1e5176b83481014bfe01d'
 QUADROS128 = (RAIZ / t.ORIGEM_QUADROS128[1], RAIZ / '.local/m2-3' / Path(t.ORIGEM_QUADROS128[1]).name)
 
@@ -77,7 +78,11 @@ def executar(m, c):
 
 def comparar(teste, prefixo, blocos):
     original = [c for c in evidencia()['captures'] if c['name'].startswith(prefixo + '_')]
-    roteiro = t.cenarios(Roteiro(Memoria(blocos)), prefixo)
+    return reproduzir(teste, blocos, t.cenarios(Roteiro(Memoria(blocos)), prefixo), original)
+
+
+def reproduzir(teste, blocos, roteiro, original):
+    """Replay ``roteiro`` (scenarios) over copies of ``blocos`` against the native ``original`` captures."""
     teste.assertEqual([r[0] for r in roteiro], [c['name'] for c in original])
     total = lacunas = 0
     for (nome, _, overrides, passos), obs in zip(roteiro, original):
@@ -96,6 +101,11 @@ def comparar(teste, prefixo, blocos):
                 continue
             c = next(chamadas)
             rotulo = f'{nome}/{c["call"]}'
+            if int(c['entry'], 16) == COR_JOGADOR:
+                teste.assertEqual((c['outcome'], c['writes']), ('return', []), rotulo)
+                teste.assertEqual(q.cor_jogador(m, int(c['regs_in']['EAX'], 16)), int(c['regs_out']['EAX'], 16), rotulo)
+                total += 1
+                continue
             if int(c['entry'], 16) == t.BATIMENT:
                 teste.assertEqual((c['outcome'], c['writes']), ('return', []), rotulo)
                 total += 1

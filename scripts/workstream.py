@@ -120,7 +120,9 @@ def changed_paths(repo, base, head):
 
 
 def changed_statuses(repo, base, head):
-    lines = git(repo, 'diff', '--name-status', '--no-renames', base + '...' + head).splitlines()
+    # Unquoted names: git otherwise quotes non-ASCII paths such as compilar-jogável.
+    lines = git(repo, '-c', 'core.quotepath=off', 'diff', '--name-status', '--no-renames',
+                base + '...' + head).splitlines()
     return [(line.split('\t')[0][:1], line.split('\t', 1)[1]) for line in lines if line]
 
 

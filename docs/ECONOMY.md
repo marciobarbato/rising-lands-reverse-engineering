@@ -903,3 +903,33 @@ Between frames 128 and 9,000 the economy's periodic gates fire many times. [`cap
 **Translated and verified.** `quadro_economia.calcular_meteo(m)` and the event branch of `quadro_economia.atualizar_simpatia(m, a, b, evento)`, which no longer raises at `0x47515d`. The replay ([test_temporizadores.py](../pesquisas-paralelas/economia/testes/test_temporizadores.py)) regenerates every scenario over its own copy of each state and covers GetMeteo, MAJSympathie, PlayerAttaqueCalculSympa, PlayerInitAllianceCompteur (InitGameZone stays a named dependency where the original stops) and the market gates. After every call the original's writes and the whole-state hash must match. Three deliberate mutations are each detected. The native rerun equals the frozen capture.
 
 **Not translated, deliberately.** The market state-3 branch (`0x466e01`) and the proposition state-4/5 branches (`0x466ed1`/`0x466fe1`) still raise named dependencies at those addresses, and the replay requires exactly that on the 9 declared scenarios per state. They need CalculValeur `0x466533` and ForgetMarche `0x4610a4`. Core's display coverage run (partial, frames 0..2,300) enters neither, nor EvalueCoutProposition, ResetMarche, MessageBoxSet, GetMeteo, InitNova, InventionSetEffet, AnimBallonStatic or PlayerGetSympathie; MAJSympathie is entered 24 times (frames 0 and 2,000), always taking the AI-context return. Everything the run does reach in Economy's periodic code is already translated. The same run puts the first ScanNouvellePatate at frame 45, as Missions estimated; this isolated sequence gave frame 37, a different RNG history.
+
+## Readiness for frames 129..9,000 (M2.3)
+
+**Which routines run.** Core's coverage of the display reference to frame 9,200 (`runs/core/coverage-9200`) enters no routine for the first time between frames 129 and 8,999. In Economy:
+- MAJSympathie is entered only at frames 0, 2000, 4000, 6000 and 8000 (60 entries), and never reaches PlayerGetSympathie.
+- InitGameZone is entered only at frame 0.
+- None of the market helpers, GetMeteo, InitNova, InventionSetEffet or AnimBallonStatic is entered.
+- CreerEngin is first entered at frame 9000 (the raid), so CalculTroupe never produces a unit before it.
+- PlayerGetColor is new at frame 9000.
+
+Entry counts cannot show branches that call nothing (for example market state 3 without its flag), so Economy probed the inputs.
+
+**Gate-input probe** ([`sondar_temporizadores_exibicao.py`](../pesquisas-paralelas/economia/sondar_temporizadores_exibicao.py); Mac mini run `gate-probe-9000`, 2,247 s; [output](../pesquisas-paralelas/economia/evidencias/sondagem-temporizadores-exibicao-9000.json.xz)). It runs the same display reference to counter 9000 and checks frames 0/1 against it. Every frame it records the changes in Economy's gate inputs:
+- market contact, flags, words, partners and states (including the `0xff` byte the original reads);
+- hangar, structure counts, structure-step byte and structure 0;
+- attack flags, alliance counters, AI contexts, sympathy event records and the player records;
+- weather, player colors, resources, research, inventions, the local player, the field row/flag and the live-structure list.
+
+It also saves 14 CalculGame-entry states (counters 50, 100, 200, 800, 900, 1000, 1600, 2000, 2700, 4000, 6000, 8000, 8999, 9000) as deltas against the display post-load state. Each one rebuilds exactly to its summary.
+
+**What it shows.** From frame 1 to 9000 none of these inputs changes, except the field sweep's row/flag (every frame; the flag at every 256-frame restart) and the resource presentation in frames 1..5. The market stays in state 0 with partners `0xff`, the attack flags and alliance counters stay 0, and the AI context bytes stay set. The weather bytes (`01 00 fc ff`), the color table `0x4e24dc` and structure 0 never change either. So before the raid no market state-3/4/5 branch, alliance countdown, sympathy event branch or weather update can run, and the structure step only ever sees structure 0.
+
+**Captured from the real states** ([script](../pesquisas-paralelas/economia/capturar_temporizadores_sondagem_original.py), `260181c`, [capture](../pesquisas-paralelas/economia/evidencias/captura-temporizadores-sondagem-original.json); 136 scenarios, 2,179 calls, 27 s on the MacBook). Three sets of calls:
+- **Every state, at its own counter:** BatimentNextEtape(0), PlayerInitAllianceCompteur, CalculCompteurMarche, CalculCompteurProposition and PlayerAttaqueCalculSympa, in CalculGame order. All return. Nothing is written, except at 2000/4000/6000/8000, where PlayerAttaqueCalculSympa rewrites its 16 zero attack flags (MAJSympathie takes the AI-context return).
+- **States 2000/4000/6000/8000/9000:** the full forced-counter timer set of the M2.3 prep capture.
+- **States 8999/9000:** PlayerGetColor for every AL, identical to the post-load capture.
+
+Python reproduces every call ([test_temporizadores_sondagem.py](../pesquisas-paralelas/economia/testes/test_temporizadores_sondagem.py)): writes and the whole-state hash after every call, and PlayerGetColor's EAX. The 45 declared market-state overrides still stop at their named branches. The native rerun equals the frozen capture.
+
+**PlayerGetColor `0x46003b`** ([capture](../pesquisas-paralelas/economia/evidencias/captura-cor-jogador-original.json), `748d745`). It returns 0x1e for AL 0xc8, otherwise the byte at `0x4e24dc + AL`; the upper EAX bits are cleared. Players 0..4 are 0xa0, 0x90, 0x88, 0x30 and 0x2f. It is `quadro_economia.cor_jogador` and the `PlayerGetColor` provider; its callers are `0x468646`, `0x469864`, `0x46a567`, `0x46a592` and `0x46a64f`.

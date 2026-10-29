@@ -15,9 +15,12 @@ OWNED = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(OWNED))
 sys.path.insert(0, str(OWNED / 'testes'))
 import ambiente_ia_runtime  # noqa: E402,F401
+if str(ambiente_ia_runtime.ROOT / 'pesquisas-paralelas/economia') not in sys.path:   # as composicao_encadeada_ia
+    sys.path.append(str(ambiente_ia_runtime.ROOT / 'pesquisas-paralelas/economia'))
 from test_incursao_ia import MemoriaEsparsa, em_pilha  # noqa: E402
 
 CAPTURA = json.loads((OWNED / 'evidencias/captura-proxima-etapa-incursao-ia.json').read_bytes())
+CHEGADA = json.loads((OWNED / 'evidencias/captura-proxima-etapa-chegada-ia.json').read_bytes())
 H = lambda v: int(v, 16)  # noqa: E731
 ARGUMENTOS = {
     'BonusGetValEngin': dict(jogador=('EAX', 0xff), seletor=('EDX', 0xff), tipo=('EBX', 0xff),
@@ -27,7 +30,8 @@ ARGUMENTOS = {
     'SetEnginCollision': dict(unidade=('EAX', 0xffff), caso=('EDX', 0xffff)),
     'DeplaceEngin': dict(unidade=('EAX', 0xffff)),
     'PlayerGetType': dict(jogador=('EAX', 0xff)),
-    'EnginTrouveCible': dict(unidade=('EAX', 0xffff))}
+    'EnginTrouveCible': dict(unidade=('EAX', 0xffff)),
+    'EnginEnArret': dict(unidade=('EAX', 0xffff))}
 
 
 class RaidUnitNextStep(unittest.TestCase):
@@ -35,11 +39,22 @@ class RaidUnitNextStep(unittest.TestCase):
         self.assertEqual(CAPTURA['routine'], 'EnginNextEtape')
         self.assertEqual([c['counter'] for c in CAPTURA['rule_calls']], list(range(9000, 9012)))
 
+    def test_arrival_capture(self):
+        self.assertEqual([c['counter'] for c in CHEGADA['rule_calls']], list(range(10523, 10532)))
+
     def test_each_call(self):
+        self.verificar(CAPTURA['rule_calls'])
+
+    def test_arrival_and_state_7(self):
+        """10523..10527 moving, 10528 arrival (EnginEnArret, state 7), 10529..10531 Economy's state-7 body."""
+        self.verificar(CHEGADA['rule_calls'])
+
+    def verificar(self, chamadas):
         from inventario_ia_runtime import OriginalImage
         from proxima_etapa_quadro import proxima_etapa_unidade, tabelas_imagem
+        import quadro_economia
         tabelas = tabelas_imagem(OriginalImage())
-        for chamada in CAPTURA['rule_calls']:
+        for chamada in chamadas:
             with self.subTest(contador=chamada['counter']):
                 memoria = MemoriaEsparsa({H(a): v for a, v in chamada['read_before_write']})
                 feitas, fora = [], chamada['outside_calls']
@@ -57,7 +72,16 @@ class RaidUnitNextStep(unittest.TestCase):
                                 memoria._acesso(1, H(a), depois, propria=False)
                         return H(esperado['exit']['EAX'])
                     return chamar
-                proxima_etapa_unidade(memoria, {n: provedor(n) for n in ARGUMENTOS}, chamada['unit'], tabelas)
+                provedores = {n: provedor(n) for n in ARGUMENTOS}
+
+                def estado7(sitio, unidade):
+                    # Economy's committed state-7 body draws Random internally; the native draw is the next
+                    # outside call, so it is consumed here and its bytes come from Economy's own draw.
+                    self.assertEqual(fora[len(feitas)]['routine'], 'Random')
+                    feitas.append('Random')
+                    return quadro_economia.estado_parado_unidade(memoria, unidade)
+                provedores['EnginNextEtape:state7'] = estado7
+                proxima_etapa_unidade(memoria, provedores, chamada['unit'], tabelas)
                 self.assertEqual(feitas, [c['routine'] for c in fora])
                 escritos = {H(a): depois for a, _antes, depois in chamada['written_bytes']}
                 for a in memoria.proprias:

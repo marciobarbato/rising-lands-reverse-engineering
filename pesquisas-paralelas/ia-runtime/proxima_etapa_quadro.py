@@ -11,8 +11,9 @@ original-name providers (``provider(sitio=..., **arguments)``):
 - Core: GetBit, CalculFatigue, SetEnginCollision.
 - Combat: EnginTrouveCible.
 
-State 2 (moving) follows ``evidencias/captura-proxima-etapa-incursao-ia.json``: the raid unit at counters
-9000..9011, forced input; still short of its target it calls DeplaceEngin (Core). The 32-frame target scan
+State 2 (moving) follows ``evidencias/captura-proxima-etapa-incursao-ia.json`` (the raid unit at counters
+9000..9011, forced input) and ``captura-proxima-etapa-chegada-ia.json`` (counters 10523..10531, around its
+arrival). Short of its target it calls DeplaceEngin (Core); at the target, EnginEnArret (Core) and state 7. The 32-frame target scan
 (0x4546aa..0x4547e0) is translated from the static disassembly: the type
 classifier, the owner-200 skip, the states 1/19 skip, the +0xda gate for entry types 14 and 16, and the
 hit handling (iagUnitSendMessage 0x49 for player type 2, SetAttaqueEngin(1) for state 7). The capture
@@ -132,7 +133,17 @@ def _trocar_estado(m, provedores, unidade, r, tabelas):
         if m.u16(r + 0x7e) != m.u16(r + 8):
             _chamar(provedores, 'DeplaceEngin', 0x4555ac, unidade=unidade)
             return SAIDA
-        _parar('EnginNextEtape state 2 at its target cell (EnginEnArret fork)', 0x4563e8)
+        # 0x4563e8: at the target cell. Facing +0x91 == +0x90, EnginEnArret != 0 -> 0x456447: a state other
+        # than 0 and 4 becomes 7 (0x4564b7); the path-search unit [0x496304] has a further reset.
+        if m.u8(r + 0x91) != m.u8(r + 0x90):
+            _parar('EnginNextEtape state 2 facing change at the target cell', 0x455a6f)
+        if not _chamar(provedores, 'EnginEnArret', 0x4563ff, unidade=unidade) & 0xff:
+            _parar('EnginNextEtape state 2 animation step (EnginEnArret returned 0)', 0x456408)
+        if m.u8(r + 2) not in (0, 4):
+            m.u8(r + 2, 7)
+            if unidade == m.u16(0x496304):
+                _parar('EnginNextEtape arrival of the path-search unit [0x496304]', 0x4564c8)
+        return SAIDA
     _parar(f'EnginNextEtape state {estado}', alvo)
 
 

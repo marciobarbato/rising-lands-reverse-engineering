@@ -1,0 +1,808 @@
+{
+ "schema": "rising-lands/engin-tail-capture/1",
+ "stop": "0x417b1c",
+ "phase": "between_frames",
+ "events": [
+  {
+   "at": "tail_entry",
+   "unit_ptr": "0x474a8000",
+   "regs": {
+    "EAX": 96,
+    "EBX": 1611357696,
+    "ECX": 1111891968,
+    "EDX": 0,
+    "EDI": 0
+   },
+   "unit": {
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "fatigue_call",
+   "unit_ptr": "0x474a8000",
+   "regs": {
+    "EAX": 0,
+    "EBX": 2,
+    "ECX": 1111891968,
+    "EDX": 1196064768,
+    "EDI": 0
+   },
+   "unit": {
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "fatigue_result",
+   "unit_ptr": "0x474a8000",
+   "regs": {
+    "EAX": 1,
+    "EBX": 2,
+    "ECX": 1111891968,
+    "EDX": 1196064768,
+    "EDI": 0
+   },
+   "unit": {
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "player_draw",
+   "unit_ptr": "0x474a8000",
+   "regs": {
+    "EAX": 88,
+    "EBX": 7727,
+    "ECX": 1,
+    "EDX": 277,
+    "EDI": 0
+   },
+   "unit": {
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "xp_gate",
+   "unit_ptr": "0x474a8000",
+   "regs": {
+    "EAX": 19,
+    "EBX": 1159184384,
+    "ECX": 781,
+    "EDX": 19,
+    "EDI": 0
+   },
+   "unit": {
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "tail_entry",
+   "unit_ptr": "0x474a8114",
+   "regs": {
+    "EAX": 160,
+    "EBX": 1611383296,
+    "ECX": 1111891968,
+    "EDX": 1,
+    "EDI": 1
+   },
+   "unit": {
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "fatigue_call",
+   "unit_ptr": "0x474a8114",
+   "regs": {
+    "EAX": 0,
+    "EBX": 2,
+    "ECX": 1111891968,
+    "EDX": 1196065044,
+    "EDI": 1
+   },
+   "unit": {
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "fatigue_result",
+   "unit_ptr": "0x474a8114",
+   "regs": {
+    "EAX": 1,
+    "EBX": 2,
+    "ECX": 1111891968,
+    "EDX": 1196065044,
+    "EDI": 1
+   },
+   "unit": {
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "player_draw",
+   "unit_ptr": "0x474a8114",
+   "regs": {
+    "EAX": 152,
+    "EBX": 7727,
+    "ECX": 1,
+    "EDX": 309,
+    "EDI": 1
+   },
+   "unit": {
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "xp_gate",
+   "unit_ptr": "0x474a8114",
+   "regs": {
+    "EAX": 19,
+    "EBX": 1159184384,
+    "ECX": 781,
+    "EDX": 19,
+    "EDI": 1
+   },
+   "unit": {
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "tail_entry",
+   "unit_ptr": "0x474a8f18",
+   "regs": {
+    "EAX": 256,
+    "EBX": 1611385856,
+    "ECX": 1107984384,
+    "EDX": 14,
+    "EDI": 14
+   },
+   "unit": {
+    "owner": 0,
+    "type": 5,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "fatigue_call",
+   "unit_ptr": "0x474a8f18",
+   "regs": {
+    "EAX": 5,
+    "EBX": 2,
+    "ECX": 1107984384,
+    "EDX": 1196068632,
+    "EDI": 14
+   },
+   "unit": {
+    "owner": 0,
+    "type": 5,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "fatigue_result",
+   "unit_ptr": "0x474a8f18",
+   "regs": {
+    "EAX": 1,
+    "EBX": 2,
+    "ECX": 1107984384,
+    "EDX": 1196068632,
+    "EDI": 14
+   },
+   "unit": {
+    "owner": 0,
+    "type": 5,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "player_draw",
+   "unit_ptr": "0x474a8f18",
+   "regs": {
+    "EAX": 248,
+    "EBX": 7727,
+    "ECX": 1,
+    "EDX": 309,
+    "EDI": 14
+   },
+   "unit": {
+    "owner": 0,
+    "type": 5,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "xp_gate",
+   "unit_ptr": "0x474a8f18",
+   "regs": {
+    "EAX": 19,
+    "EBX": 1159184384,
+    "ECX": 781,
+    "EDX": 19,
+    "EDI": 14
+   },
+   "unit": {
+    "owner": 0,
+    "type": 5,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "tail_entry",
+   "unit_ptr": "0x474a8e04",
+   "regs": {
+    "EAX": 320,
+    "EBX": 1611385856,
+    "ECX": 1107984384,
+    "EDX": 13,
+    "EDI": 13
+   },
+   "unit": {
+    "owner": 0,
+    "type": 5,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "fatigue_call",
+   "unit_ptr": "0x474a8e04",
+   "regs": {
+    "EAX": 5,
+    "EBX": 2,
+    "ECX": 1107984384,
+    "EDX": 1196068356,
+    "EDI": 13
+   },
+   "unit": {
+    "owner": 0,
+    "type": 5,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "fatigue_result",
+   "unit_ptr": "0x474a8e04",
+   "regs": {
+    "EAX": 1,
+    "EBX": 2,
+    "ECX": 1107984384,
+    "EDX": 1196068356,
+    "EDI": 13
+   },
+   "unit": {
+    "owner": 0,
+    "type": 5,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "player_draw",
+   "unit_ptr": "0x474a8e04",
+   "regs": {
+    "EAX": 312,
+    "EBX": 7727,
+    "ECX": 1,
+    "EDX": 309,
+    "EDI": 13
+   },
+   "unit": {
+    "owner": 0,
+    "type": 5,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "xp_gate",
+   "unit_ptr": "0x474a8e04",
+   "regs": {
+    "EAX": 19,
+    "EBX": 1159184384,
+    "ECX": 781,
+    "EDX": 19,
+    "EDI": 13
+   },
+   "unit": {
+    "owner": 0,
+    "type": 5,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "tail_entry",
+   "unit_ptr": "0x474a8cf0",
+   "regs": {
+    "EAX": 416,
+    "EBX": 1611382016,
+    "ECX": 1105870848,
+    "EDX": 12,
+    "EDI": 12
+   },
+   "unit": {
+    "owner": 0,
+    "type": 7,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "fatigue_call",
+   "unit_ptr": "0x474a8cf0",
+   "regs": {
+    "EAX": 7,
+    "EBX": 2,
+    "ECX": 1105870848,
+    "EDX": 1196068080,
+    "EDI": 12
+   },
+   "unit": {
+    "owner": 0,
+    "type": 7,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "fatigue_result",
+   "unit_ptr": "0x474a8cf0",
+   "regs": {
+    "EAX": 1,
+    "EBX": 2,
+    "ECX": 1105870848,
+    "EDX": 1196068080,
+    "EDI": 12
+   },
+   "unit": {
+    "owner": 0,
+    "type": 7,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "player_draw",
+   "unit_ptr": "0x474a8cf0",
+   "regs": {
+    "EAX": 408,
+    "EBX": 7727,
+    "ECX": 1,
+    "EDX": 309,
+    "EDI": 12
+   },
+   "unit": {
+    "owner": 0,
+    "type": 7,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "xp_gate",
+   "unit_ptr": "0x474a8cf0",
+   "regs": {
+    "EAX": 19,
+    "EBX": 1159184384,
+    "ECX": 781,
+    "EDX": 19,
+    "EDI": 12
+   },
+   "unit": {
+    "owner": 0,
+    "type": 7,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "tail_entry",
+   "unit_ptr": "0x474a8228",
+   "regs": {
+    "EAX": 128,
+    "EBX": 1611434496,
+    "ECX": 1111891968,
+    "EDX": 2,
+    "EDI": 2
+   },
+   "unit": {
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "fatigue_call",
+   "unit_ptr": "0x474a8228",
+   "regs": {
+    "EAX": 0,
+    "EBX": 2,
+    "ECX": 1111891968,
+    "EDX": 1196065320,
+    "EDI": 2
+   },
+   "unit": {
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "fatigue_result",
+   "unit_ptr": "0x474a8228",
+   "regs": {
+    "EAX": 1,
+    "EBX": 2,
+    "ECX": 1111891968,
+    "EDX": 1196065320,
+    "EDI": 2
+   },
+   "unit": {
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "player_draw",
+   "unit_ptr": "0x474a8228",
+   "regs": {
+    "EAX": 120,
+    "EBX": 7727,
+    "ECX": 1,
+    "EDX": 373,
+    "EDI": 2
+   },
+   "unit": {
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "xp_gate",
+   "unit_ptr": "0x474a8228",
+   "regs": {
+    "EAX": 19,
+    "EBX": 1159184384,
+    "ECX": 781,
+    "EDX": 19,
+    "EDI": 2
+   },
+   "unit": {
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "tail_entry",
+   "unit_ptr": "0x474a902c",
+   "regs": {
+    "EAX": 288,
+    "EBX": 1611461888,
+    "ECX": 1114890240,
+    "EDX": 15,
+    "EDI": 15
+   },
+   "unit": {
+    "owner": 0,
+    "type": 8,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "fatigue_call",
+   "unit_ptr": "0x474a902c",
+   "regs": {
+    "EAX": 8,
+    "EBX": 2,
+    "ECX": 1114890240,
+    "EDX": 1196068908,
+    "EDI": 15
+   },
+   "unit": {
+    "owner": 0,
+    "type": 8,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "fatigue_result",
+   "unit_ptr": "0x474a902c",
+   "regs": {
+    "EAX": 1,
+    "EBX": 2,
+    "ECX": 1114890240,
+    "EDX": 1196068908,
+    "EDI": 15
+   },
+   "unit": {
+    "owner": 0,
+    "type": 8,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "player_draw",
+   "unit_ptr": "0x474a902c",
+   "regs": {
+    "EAX": 280,
+    "EBX": 7727,
+    "ECX": 1,
+    "EDX": 405,
+    "EDI": 15
+   },
+   "unit": {
+    "owner": 0,
+    "type": 8,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "xp_gate",
+   "unit_ptr": "0x474a902c",
+   "regs": {
+    "EAX": 19,
+    "EBX": 1159184384,
+    "ECX": 781,
+    "EDX": 19,
+    "EDI": 15
+   },
+   "unit": {
+    "owner": 0,
+    "type": 8,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "tail_entry",
+   "unit_ptr": "0x474a8bdc",
+   "regs": {
+    "EAX": 224,
+    "EBX": 1611512832,
+    "ECX": 1113604096,
+    "EDX": 11,
+    "EDI": 11
+   },
+   "unit": {
+    "owner": 0,
+    "type": 1,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "fatigue_call",
+   "unit_ptr": "0x474a8bdc",
+   "regs": {
+    "EAX": 1,
+    "EBX": 2,
+    "ECX": 1113604096,
+    "EDX": 1196067804,
+    "EDI": 11
+   },
+   "unit": {
+    "owner": 0,
+    "type": 1,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "fatigue_result",
+   "unit_ptr": "0x474a8bdc",
+   "regs": {
+    "EAX": 1,
+    "EBX": 2,
+    "ECX": 1113604096,
+    "EDX": 1196067804,
+    "EDI": 11
+   },
+   "unit": {
+    "owner": 0,
+    "type": 1,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "player_draw",
+   "unit_ptr": "0x474a8bdc",
+   "regs": {
+    "EAX": 216,
+    "EBX": 7727,
+    "ECX": 1,
+    "EDX": 469,
+    "EDI": 11
+   },
+   "unit": {
+    "owner": 0,
+    "type": 1,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  },
+  {
+   "at": "xp_gate",
+   "unit_ptr": "0x474a8bdc",
+   "regs": {
+    "EAX": 19,
+    "EBX": 1159184384,
+    "ECX": 781,
+    "EDX": 19,
+    "EDI": 11
+   },
+   "unit": {
+    "owner": 0,
+    "type": 1,
+    "state": 7,
+    "w4": 4,
+    "life74": 1,
+    "w76": 4,
+    "ba": 0
+   }
+  }
+ ],
+ "surface_at_checkpoint_sha256": "3bf17c3b611d4414be70c74eae0d124023b5377fa715b353e6c844379d75eb65"
+}

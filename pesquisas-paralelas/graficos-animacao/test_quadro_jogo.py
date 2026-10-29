@@ -153,7 +153,7 @@ class FrameTest(unittest.TestCase):
         alvo = next(r for r in self.resultados if r[0]['nome'] == 'unidades_e_projeteis')[2]
         indice = next(c[3] for c in alvo['chamadas'] if c[0] == 'AffEngin')
         self.assertIn(unidades[indice*276+1], (0, 5, 6, 7, 9))
-        struct.pack_into('<H', unidades, indice*276+0x74, 99)
+        unidades[indice*276+0xba] = 1   # life < 100 is now composed (tired icon); the experience-icon indicator is not
         mundo = mundo_modelo(dict(cena, mundo=dict(cena['mundo'], unidades=bytes(unidades))))
         ciclo = CicloCacheTerreno.apos_carregar_banco(self.catalogo)
         ciclo.alocar(MemoriaMotor(contador_u32=0, vinculos=ArenaGlobalFixa(inicio_u32=0x1000, tamanho_u32=0x1000, registro=RegistroVinculos())))

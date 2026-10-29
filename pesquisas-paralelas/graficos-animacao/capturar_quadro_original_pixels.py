@@ -29,7 +29,7 @@ sha = lambda d: hashlib.sha256(bytes(d)).hexdigest()
 codificar = lambda d: base64.b64encode(zlib.compress(bytes(d), 9)).decode()
 
 
-def capturar(quadro, casos=None, recorte=None):
+def capturar(quadro, casos=None, recorte=None, observador=None):
     """Fixtures for AffGame in ``between_frames{quadro}``: the entry state once, then one result per case.
 
     ``casos``: [(name, [(address, bytes)])] byte perturbations applied to the saved entry state (default: the captured
@@ -81,6 +81,8 @@ def capturar(quadro, casos=None, recorte=None):
                     habitacao[i] = r['EAX'] & 0xff
                     self._restaurar(contexto2, imagem2)
             ganchos = [b.cpu.hook_add(oq.unicorn.UC_HOOK_CODE, b._parar_se_pedido, begin=CHECKPOINT, end=CHECKPOINT)]
+            obs = observador(b) if observador else None
+            if obs: ganchos += obs.ganchos
             b.cpu.ctl_flush_tb()
             b._retomando = {entrada}
             try:
@@ -93,7 +95,8 @@ def capturar(quadro, casos=None, recorte=None):
             depois = bytes(dd.pixels('offscreen'))
             resultados.append(dict(nome=nome, escritas=[(hex(a), bytes(d).hex()) for a, d in escritas], parou_em=parou,
                                    blocos=blocos, estruturas=pool, pixels_antes=antes, pixels_depois=depois,
-                                   habitacao=habitacao, contador=u(0x508f7c, 4), fase=b.fase))
+                                   habitacao=habitacao, contador=u(0x508f7c, 4), fase=b.fase,
+                                   observado=obs.resultado() if obs else None))
         self._restaurar(contexto, imagem)
         raise StopIteration
     iso.executar = lambda regs: executar(iso, regs)
