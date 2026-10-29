@@ -392,3 +392,51 @@ MONDE01 needs BatimentGetCase and CaseGetZoneInfluence as soon as a type-3 cave 
 - The common gates
 - Integration
 - Committed-main reproduction
+
+## Stage16 (M2): influence queries and register trace view (Claude, 2026-10-28)
+
+Merged `origin/main` ec931d2, which contains M2.1. Contract: [docs/MISSIONS.md — Stage16](../../docs/MISSIONS.md#stage16-m2-influence-zone-queries-and-the-register-trace-view).
+
+### Commits
+
+| Commit | Content |
+|---|---|
+| `c1bb6b2` | injection source |
+| `60f00c2` | original influence capture |
+| `72dd272` | translation and `fim_missao` wiring |
+| `3cb9173` | register-view source |
+| `0002794` | both differential reports |
+| `1594ae7` | register view |
+
+### API inputs
+
+- `influencia_missao.zona_influencia(table 0x50c614/4000, AX cell)`
+- `influencia_missao.canto_zona_influencia(table, AX zone 0..399)`
+- `fim_missao.consultas_publicadas(..., influencia)`: the table argument is now required.
+- `Isolamento(..., injecoes={routine: f(iso, phase, regs)})`, with `chamar_folha` and `verificar_puro`, for native leaf calls injected at a pause.
+
+### Domain
+
+- The two influence queries cover the complete original domain, except that GetTopLeftCaseZoneInfluence is protected for AX ≥ 400, where the original reads beyond the table.
+- CaseInZoneInfluence `0x47bfdd` is not translated. It is not reached.
+
+### Mutation and callback order
+
+Neither query performs a store. Both preserve EBX/ECX/EDX, which the native capture and the differential checked.
+
+### Validation
+
+| Check | Result |
+|---|---|
+| Influence native differential | 5 tables × 66,192 calls, all equal |
+| `fim_missao` native differential v2 | 38/38 equal |
+| CPU-free tests | full sweep replay |
+
+### Gaps and dependencies
+
+- **Economy:** BatimentGetCase is the next stop of the MONDE01 cave condition. RechercheGetNbInvention is also Economy's.
+- **Core:** CaseEstIlluminee.
+- **Combat:** PlayerEstAllie register mapping still needs confirmation.
+- **Graphics:** the AffGame inter-frame write set is pending, and the boundary policy may change when it arrives.
+- **AI/runtime:** no extension of `mapa_memoria_m1` / `ligacao_provedores_m1` has been requested yet; I will implement one if asked. The register trace view it requested is published.
+- **Frame limit:** the original oracle is held at frame 1 until the frame-1 comparison passes.

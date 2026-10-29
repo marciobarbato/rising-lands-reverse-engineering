@@ -616,3 +616,60 @@ So **the objective requires building a cave**, which answers the roadmap's open 
 - Native differential ([m2-fim-missao-differential-x86.json](../pesquisas-paralelas/missoes/validacao/m2-fim-missao-differential-x86.json), source `b25e8d6`): of 48 native cases at both frame entries, 38 compared cases are equal in AL and every changed byte. The other 10 stop at the named dependencies above.
 
 No whole-frame composition is built. The AI/runtime front owns the frame pipeline.
+
+## Stage16 (M2): influence-zone queries and the register trace view
+
+M2.1 was integrated at main `ec931d2`.
+
+### Ownership
+
+Every reference in the intact code to the influence table `0x50c614` (400 records × 10 bytes: x0 at +0, y0 at +2, x1 at +4, y1 at +6) lies in the cluster `0x47bf2c..0x47c138`:
+- InfluenceReset;
+- CaseGetZoneInfluence `0x47bf66`;
+- CaseInZoneInfluence `0x47bfdd`;
+- LoadCadreInfluence `0x47c04a`, the Missions loader already composed in M1;
+- SaveCadreInfluence;
+- GetTopLeftCaseZoneInfluence `0x47c114`.
+
+The cluster is therefore Missions-owned. MONDE01 has a single zone: zone 0 covers cells (0,0)–(28,25).
+
+### Original-only capture
+
+[captura-influencia-quadro1.json](../pesquisas-paralelas/missoes/evidencias/captura-influencia-quadro1.json) was generated from source `c1bb6b2` and committed in `60f00c2`.
+
+MONDE01 frames 0–1 never enter either query. Instead, `Isolamento` pauses at the frame-1 TestFinDeMission entry and injects native leaf calls from that exact state:
+
+| Query | Arguments | Result |
+|---|---|---|
+| CaseGetZoneInfluence | all 65,536 cells | 754 cells in zone 0, all others `0xff` |
+| CaseGetZoneInfluence | 256 calls with non-zero upper EAX bits | results unaffected |
+| GetTopLeftCaseZoneInfluence | zones 0..399 | — |
+
+Sampled footprints show that each call reads only zone-record words and writes nothing. Registers are preserved, and the whole state equals the paused state afterwards. The phases then continue and reproduce every committed state.
+
+### API ([influencia_missao.py](../pesquisas-paralelas/missoes/influencia_missao.py))
+
+Both functions take the live 4,000-byte table view.
+
+**`zona_influencia(influencia, celula)`** reads AX only: x = AX & 0xff, y = AX >> 8. It returns the first zone 0..399 whose inclusive unsigned-16 rectangle contains the cell, skipping record 255. If no zone matches, it returns `0xff`.
+
+**`canto_zona_influencia(influencia, zona)`** returns EAX = x0 + (y0 << 8) as a u32 including the carry, so an empty record gives `0x0100feff`. The zone index is protected to 0..399.
+
+**Wiring.** `fim_missao.consultas_publicadas(estruturas, recursos, missao_u8, influencia)` now requires the table view and binds both queries.
+
+### MONDE01 consequences
+
+- **Cave condition (type 4):** it now passes the zone test. It still stops at BatimentGetCase `0x41aee2`, which is Economy's to publish.
+- **Mission-6 path:** it now stops at CaseEstIlluminee `0x47693a`, which is Core's to publish.
+
+### Validation
+
+- **CPU-free** ([test_influencia_missao.py](../pesquisas-paralelas/missoes/testes/test_influencia_missao.py)): replaying the captured table reproduces every native EAX.
+- **Native differential** ([m2-influencia-differential-x86.json](../pesquisas-paralelas/missoes/validacao/m2-influencia-differential-x86.json)): Python equals the native result on 5 tables × 66,192 calls. The tables are the captured table, overlaps with record 255 skipped and an inverted rectangle and a point, the whole map, upper-word bounds, and 400 seeded random records.
+- **Re-wired `fim_missao`** ([m2-fim-missao-differential-x86-v2.json](../pesquisas-paralelas/missoes/validacao/m2-fim-missao-differential-x86-v2.json)): 38/38 compared cases are equal.
+
+### Register trace view
+
+[rastro-registradores-quadro1-monde01.json](../pesquisas-paralelas/missoes/evidencias/rastro-registradores-quadro1-monde01.json) was generated from source `0002794`. It lists every routine entry of the three phases in order (1,718 / 5 / 1,605), one line each in the AI/runtime format `callee@caller+off EAX EDX EBX ECX`.
+
+The rerun's phase states equal the committed capture, and its per-routine counts equal the committed trace. The original oracle was **not** extended beyond frame 1.
