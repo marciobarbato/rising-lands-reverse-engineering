@@ -16,6 +16,8 @@ class FrameContract(unittest.TestCase):
         old=C.c_uint64()
         self.abi.check(self.abi.lib.rl_criar_mundo(0x00010000,20,0,C.byref(old)))
         self.abi.free(old.value)
+        self.abi.check(self.abi.lib.rl_criar_mundo(0x00010001,20,0,C.byref(old)))
+        self.abi.free(old.value)
         inp=FrameInput()
         inp.registers.eax=0xdeadbeef
         before=bytes(inp)

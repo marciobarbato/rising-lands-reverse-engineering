@@ -1,0 +1,470 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "capstone": "5.0.7",
+  "intervals": [
+    {
+      "name": "BagVide",
+      "start": "0x4470b9",
+      "end_exclusive": "0x4470c5",
+      "sha256": "a4b23a2dfd610b631864b3ffd40674fc62f9bc18fec11a6d3b824a770aa937af",
+      "file": "004470b9.asm"
+    },
+    {
+      "name": "BagPlein",
+      "start": "0x4470c5",
+      "end_exclusive": "0x4470d2",
+      "sha256": "778b65ee2473b2944a6e680f920b3583ea59e38dd8a23cafcf5b8d9ec393fd1c",
+      "file": "004470c5.asm"
+    },
+    {
+      "name": "BagAccepte",
+      "start": "0x4470d2",
+      "end_exclusive": "0x447107",
+      "sha256": "c8185af6a11e70c6d1022d866358f655ecaf90cfc4cab60b57b53ac0410b2fdc",
+      "file": "004470d2.asm"
+    },
+    {
+      "name": "BagGetNbContenu",
+      "start": "0x447107",
+      "end_exclusive": "0x44710b",
+      "sha256": "357e0d832513e2a5f4ebf9ea32ad4a0f462cb8586e9b30aba6f3f2785344762d",
+      "file": "00447107.asm"
+    },
+    {
+      "name": "BagContient",
+      "start": "0x4471b8",
+      "end_exclusive": "0x44724a",
+      "sha256": "50f55cdcda9fbac09d1cd2b486f7e3daac6e58d0468b3c5b5739c0f717922257",
+      "file": "004471b8.asm"
+    },
+    {
+      "name": "BagContientTroupe",
+      "start": "0x44724a",
+      "end_exclusive": "0x4472d3",
+      "sha256": "1da9b4cab9146553320717a2aeebc8198415eeadde61b0f14046297dbdd6e362",
+      "file": "0044724a.asm"
+    },
+    {
+      "name": "BagGetCode",
+      "start": "0x4472d3",
+      "end_exclusive": "0x4472de",
+      "sha256": "a828d5e530b8327851b601fda7b6fd3c8249c18f7f23e4fc8ed6e8220c00be66",
+      "file": "004472d3.asm"
+    },
+    {
+      "name": "BagGetType",
+      "start": "0x4472de",
+      "end_exclusive": "0x4472ea",
+      "sha256": "a49248d253edffabd65c4ab18750e935e02f9dde4ebcdcfdced0caa4ed680203",
+      "file": "004472de.asm"
+    },
+    {
+      "name": "BagRetire",
+      "start": "0x4472ea",
+      "end_exclusive": "0x4473cf",
+      "sha256": "2426302f5ad4cda1db07d4616c8745f91d8da0a932c9db082c2dc2f8f764290a",
+      "file": "004472ea.asm"
+    },
+    {
+      "name": "BagPrend",
+      "start": "0x447483",
+      "end_exclusive": "0x4474a6",
+      "sha256": "f4ee661016d452b9e06a3c92cca41abf4ceea9304de807123c9321940e62c5f1",
+      "file": "00447483.asm"
+    },
+    {
+      "name": "EnginGetBag",
+      "start": "0x4474a6",
+      "end_exclusive": "0x4474c7",
+      "sha256": "70bca63b13e2b77b4c28f933848fdc5e0c6d49143b24ae2b2b5d55f19c5c152b",
+      "file": "004474a6.asm"
+    },
+    {
+      "name": "PlaceLibre",
+      "start": "0x41f552",
+      "end_exclusive": "0x41f76e",
+      "sha256": "f35da67f19ce76c163e85b91e92d1aacb901aec92fc1f2c4962229267a8b46a9",
+      "file": "0041f552.asm"
+    },
+    {
+      "name": "BatimentAdjacent",
+      "start": "0x42381f",
+      "end_exclusive": "0x4239a0",
+      "sha256": "5a4ed19ece3dc69f0523ca4fccce8519b93edc5cad691761359029cd950ee9b0",
+      "file": "0042381f.asm"
+    },
+    {
+      "name": "GetCaseCentrale",
+      "start": "0x423b27",
+      "end_exclusive": "0x423b9b",
+      "sha256": "6f4084e5149ab337ff4962365f53d3ca116437913f04f1c42d51a694e8cbe738",
+      "file": "00423b27.asm"
+    },
+    {
+      "name": "BatimentGetCaseEntrer",
+      "start": "0x41d057",
+      "end_exclusive": "0x41d0d3",
+      "sha256": "2d3772b02c1ec681dd2ec7f6dae1e6f533f94a9505d5d44327ba0688d03123c8",
+      "file": "0041d057.asm"
+    },
+    {
+      "name": "BatimentGetModeEtat",
+      "start": "0x41a6ec",
+      "end_exclusive": "0x41a70b",
+      "sha256": "da82a8d7ffb2264176d7e72f841e2029a493b8940bfbbdd3e1103103563966ae",
+      "file": "0041a6ec.asm"
+    },
+    {
+      "name": "BatimentGetType",
+      "start": "0x41a4f4",
+      "end_exclusive": "0x41a513",
+      "sha256": "b3f55e7d1ddbe9eb0c88c8042cc80aa415dd5b8f280b6c018978cbe182cf7584",
+      "file": "0041a4f4.asm"
+    },
+    {
+      "name": "BatimentGetPlayer",
+      "start": "0x41a08c",
+      "end_exclusive": "0x41a0ab",
+      "sha256": "73c7960bdd0b83a8016cc9f7097a635079ae215bfcd10f91c37badd7e6c90932",
+      "file": "0041a08c.asm"
+    },
+    {
+      "name": "BatimentGetVolume",
+      "start": "0x41a0ab",
+      "end_exclusive": "0x41a1ac",
+      "sha256": "a8340081f70f71cc5c36592e75296ba1e7577fcc371df2b2b2acfc20b0054ef0",
+      "file": "0041a0ab.asm"
+    },
+    {
+      "name": "BatimentEnDestruction",
+      "start": "0x41a70b",
+      "end_exclusive": "0x41a735",
+      "sha256": "099d2e023090c04cf678abe5cea2efdd6e8653c53a3a52ce14844fa7619d000c",
+      "file": "0041a70b.asm"
+    },
+    {
+      "name": "BatimentGetCase",
+      "start": "0x41aee2",
+      "end_exclusive": "0x41aff8",
+      "sha256": "00757b16af936eb460e2a4195e9ac487cf76c972b908ae3270f5221e76e20f2e",
+      "file": "0041aee2.asm"
+    },
+    {
+      "name": "RetireEngin",
+      "start": "0x457058",
+      "end_exclusive": "0x4570f4",
+      "sha256": "fbbcab131a0e35c72fccb71310f77846b31161e47cdbf1f8d357e951b99564b5",
+      "file": "00457058.asm"
+    },
+    {
+      "name": "AnimWorkEngin",
+      "start": "0x447f58",
+      "end_exclusive": "0x448088",
+      "sha256": "ce6f3225a0f93e611fa7103921e0af22f21d27b77532a2382e340e2413d0aaaf",
+      "file": "00447f58.asm"
+    },
+    {
+      "name": "CalculEntreBatiment",
+      "start": "0x449716",
+      "end_exclusive": "0x44a2ed",
+      "sha256": "7fa7edbfcc2df438048667929275e9a0a44d90763a9e3693f234c30aa1e41a5b",
+      "file": "00449716.asm"
+    },
+    {
+      "name": "SetEnginRentreBatiment",
+      "start": "0x445b10",
+      "end_exclusive": "0x445f2d",
+      "sha256": "fd5616e49e3020547d980544db119b959cc09fecac1a58ebf18e2369add57a68",
+      "file": "00445b10.asm"
+    },
+    {
+      "name": "SetEnginSelectRentreBatiment",
+      "start": "0x473f4b",
+      "end_exclusive": "0x474067",
+      "sha256": "ddce287cc6036225103d2fc18bf43a0d306230bc9dd7a5f17d9554ec6501cf7e",
+      "file": "00473f4b.asm"
+    },
+    {
+      "name": "EnginSelectPeutEntrer",
+      "start": "0x472b6c",
+      "end_exclusive": "0x4730ae",
+      "sha256": "ee8596e6e310e72e666dffc6cf7f81a585f6e444ba27ea5e959c77fef61932e7",
+      "file": "00472b6c.asm"
+    },
+    {
+      "name": "BatimentRetireColon",
+      "start": "0x41dde0",
+      "end_exclusive": "0x41e260",
+      "sha256": "4ccb1707600fc5ed84fa8af29cb209a9498673a7aa3f577da676689c90407fbe",
+      "file": "0041dde0.asm"
+    },
+    {
+      "name": "EnginResetType",
+      "start": "0x4571d4",
+      "end_exclusive": "0x4572ce",
+      "sha256": "6c52847841b2ab0eeedbbcf75c74b6a8d70472e42cea3d56c963a3e4f5b52102",
+      "file": "004571d4.asm"
+    },
+    {
+      "name": "EnginGetVie",
+      "start": "0x45718a",
+      "end_exclusive": "0x4571ae",
+      "sha256": "b8b7b181ec7455fb82e230c5fc55f344da476d5d228ecd01e04ca09ad91c80dd",
+      "file": "0045718a.asm"
+    },
+    {
+      "name": "EnginGetVieMax",
+      "start": "0x441108",
+      "end_exclusive": "0x44113e",
+      "sha256": "ba409297e5553eae9127ac85e03aae9f8546c679bedbe265c839ec8f6cc2735e",
+      "file": "00441108.asm"
+    },
+    {
+      "name": "EnginEstVivant",
+      "start": "0x443dad",
+      "end_exclusive": "0x443dfc",
+      "sha256": "3b5046ab5fb0637e5674c1059b1569e82f7c00c57f9061d20716484e69fd785d",
+      "file": "00443dad.asm"
+    },
+    {
+      "name": "EnginEstMiroir",
+      "start": "0x44fffe",
+      "end_exclusive": "0x45002e",
+      "sha256": "0b7b019a4caddb86c56305bbfad19bfe91012301eeb68c46f3e0bbead8e87228",
+      "file": "0044fffe.asm"
+    },
+    {
+      "name": "EnginEstBlesse",
+      "start": "0x4420a6",
+      "end_exclusive": "0x4420ef",
+      "sha256": "a956cd8b627e51951df6780a3b8c18fd01fb1cacf43ddf85e8ffef6aed15ed20",
+      "file": "004420a6.asm"
+    },
+    {
+      "name": "EnginBombeEstMax",
+      "start": "0x44841b",
+      "end_exclusive": "0x448447",
+      "sha256": "099adcfc28e4db786171c866a743384eb343f65bf0ddc5490990a0bf0d5e3294",
+      "file": "0044841b.asm"
+    },
+    {
+      "name": "TypeEnginEstTroupe",
+      "start": "0x442347",
+      "end_exclusive": "0x442394",
+      "sha256": "2097b0bd0bc76b8c5c1d2c821c07b6ba8cb854b7b17ca9aa5e282d6499165dbb",
+      "file": "00442347.asm"
+    },
+    {
+      "name": "TypeEnginEstAPied",
+      "start": "0x4423b0",
+      "end_exclusive": "0x4423d5",
+      "sha256": "f12e9c691c4639532badf44c80cf1c99f59bc1e3c81c90594522f06d1a09ada6",
+      "file": "004423b0.asm"
+    },
+    {
+      "name": "TypeEnginEstEngin",
+      "start": "0x442434",
+      "end_exclusive": "0x44244d",
+      "sha256": "1b3d849211692e62dd3404ad08577202c086ee92b22ac48d3d5de2c0e2393b57",
+      "file": "00442434.asm"
+    },
+    {
+      "name": "EnginGetType",
+      "start": "0x442025",
+      "end_exclusive": "0x442045",
+      "sha256": "c9b68df49797eb19c9c9e3fa5cc823a9e5f142a7d05ee7ddbee4044eeeb35036",
+      "file": "00442025.asm"
+    },
+    {
+      "name": "EnginGetPlayer",
+      "start": "0x442045",
+      "end_exclusive": "0x442064",
+      "sha256": "51a88e03cba6292ad8cbbe0ddf8859022a4d1c53308d94c8346f5532c59b4a98",
+      "file": "00442045.asm"
+    },
+    {
+      "name": "EnginNextEtape state 13 body",
+      "start": "0x4558e4",
+      "end_exclusive": "0x455a61",
+      "sha256": "e230af7e61d9a27f36eeac5fe3a116d3cc36196fe7c690dcefa51b363926728a",
+      "file": "004558e4.asm"
+    },
+    {
+      "name": "EnginNextEtape state-13 refusal 0x454d97 (SetDeplaceEngin, +0xc0 = 0xffff)",
+      "start": "0x454d97",
+      "end_exclusive": "0x454db5",
+      "sha256": "264b9ad401a00a611cad73c80e70e315dd04d421a77045a4d18b124374cc42be",
+      "file": "00454d97.asm"
+    },
+    {
+      "name": "EnginNextEtape continuation 0x454ccd",
+      "start": "0x454ccd",
+      "end_exclusive": "0x454cd5",
+      "sha256": "e391d16ca06b41408721b5ff2e4ba8c57635ceb1168b40abc9b2c1fa1de84cf6",
+      "file": "00454ccd.asm"
+    },
+    {
+      "name": "epilogue 0x44f29d / 0x440d58 (CalculEntreBatiment)",
+      "start": "0x44f29d",
+      "end_exclusive": "0x44f2a3",
+      "sha256": "b080fef966146bceefcbdf9abf2b8f63e9e525b0ea53261f613e71703b86964f",
+      "file": "0044f29d.asm"
+    },
+    {
+      "name": "epilogue 0x440d58",
+      "start": "0x440d58",
+      "end_exclusive": "0x440d5e",
+      "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "file": "00440d58.asm"
+    },
+    {
+      "name": "epilogue 0x41a054 (PlaceLibre)",
+      "start": "0x41a054",
+      "end_exclusive": "0x41a05c",
+      "sha256": "132a52e7074fc3dacce0ededf94998dfcc15c5e41882f8f72b760870713f3e36",
+      "file": "0041a054.asm"
+    },
+    {
+      "name": "epilogue 0x41b31f (BatimentRetireColon)",
+      "start": "0x41b31f",
+      "end_exclusive": "0x41b328",
+      "sha256": "6ceb96b50dbe7e9e143e49f8244a16c38583625e0ce3db6f281248b62ef33872",
+      "file": "0041b31f.asm"
+    },
+    {
+      "name": "epilogue 0x41db1e (BatimentGetCase, BatimentGetVolume)",
+      "start": "0x41db1e",
+      "end_exclusive": "0x41db24",
+      "sha256": "2cf27f6ddcd494187645482c8e32915ce469ba9abe28cbdc5cfb5b5cf6862e6b",
+      "file": "0041db1e.asm"
+    },
+    {
+      "name": "epilogue 0x44507b (BagRetireInd)",
+      "start": "0x44507b",
+      "end_exclusive": "0x445082",
+      "sha256": "e152a114193fa36e2a10da33c89a86a5bea29660668852840a758f6ccde9af66",
+      "file": "0044507b.asm"
+    }
+  ],
+  "jump_tables": [
+    {
+      "name": "BagContient by tag - 1",
+      "address": "0x44719c",
+      "entries": [
+        "0x4471d3",
+        "0x447212",
+        "0x447219",
+        "0x4471fb",
+        "0x4471fb",
+        "0x447219",
+        "0x447219"
+      ]
+    },
+    {
+      "name": "SetEnginRentreBatiment type-14 unit types 0xb..0x11",
+      "address": "0x445af4",
+      "entries": [
+        "0x445c61",
+        "0x445c61",
+        "0x445c61",
+        "0x445c61",
+        "0x445c61",
+        "0x445c61",
+        "0x445c61"
+      ]
+    },
+    {
+      "name": "AnimWorkEngin type 13 by phase",
+      "address": "0x447f34",
+      "entries": [
+        "0x448084",
+        "0x447f98",
+        "0x448084",
+        "0x448084",
+        "0x447fda"
+      ]
+    },
+    {
+      "name": "AnimWorkEngin type 5 by phase",
+      "address": "0x447f48",
+      "entries": [
+        "0x448084",
+        "0x44800c",
+        "0x448084",
+        "0x448084"
+      ]
+    },
+    {
+      "name": "TypeEnginEstEngin 0xb..0x11",
+      "address": "0x442418",
+      "entries": [
+        "0x442447",
+        "0x442447",
+        "0x442447",
+        "0x442447",
+        "0x442447",
+        "0x442447",
+        "0x442447"
+      ]
+    },
+    {
+      "name": "BatimentRetireColon light radius by type",
+      "address": "0x41dd88",
+      "entries": [
+        "0x41e059",
+        "0x41e06d",
+        "0x41e063",
+        "0x41e06d",
+        "0x41e081",
+        "0x41e06d",
+        "0x41e06d",
+        "0x41e06d",
+        "0x41e06d",
+        "0x41e0ae",
+        "0x41e08b",
+        "0x41e08b",
+        "0x41e0ae",
+        "0x41e06d",
+        "0x41e06d",
+        "0x41e06d",
+        "0x41e06d",
+        "0x41e077",
+        "0x41e06d",
+        "0x41e077",
+        "0x41e06d",
+        "0x41e077"
+      ]
+    },
+    {
+      "name": "EnginNextEtape by unit state",
+      "address": "0x4543c8",
+      "entries": [
+        "0x454ccd",
+        "0x456886",
+        "0x4563da",
+        "0x455a61",
+        "0x456ae5",
+        "0x456600",
+        "0x4568ad",
+        "0x456966",
+        "0x454ccd",
+        "0x454ccd",
+        "0x454ccd",
+        "0x4564ef",
+        "0x454ccd",
+        "0x4558e4",
+        "0x454ccd",
+        "0x45652f",
+        "0x455e32",
+        "0x455e32",
+        "0x455d26",
+        "0x4554db",
+        "0x455b28",
+        "0x4558b4",
+        "0x456520",
+        "0x455fe2",
+        "0x456886"
+      ]
+    }
+  ]
+}
