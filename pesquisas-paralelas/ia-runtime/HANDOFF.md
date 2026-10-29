@@ -267,3 +267,18 @@ Merged main `81e0a26`. The report is [FRAME1_DISPLAY_COMPARISON.md](FRAME1_DISPL
   - Graphics' display routines.
   - The Missions mask.
   - Unmodeled stale-local stack words in the frame-body MCICD_Play boundary.
+
+
+## M2.1 round 5 — first-frame equality proof (2026-10-29)
+
+Merged main `d94a59e`. The report is [M2_1_PROVA_QUADRO1.md](M2_1_PROVA_QUADRO1.md); the data is in `validacao/m2-1-prova-quadro1.json` (fresh native run from a clean tree, under the lease).
+
+- **Result:** all three phases equal, with zero crossings.
+- **New code:**
+  - `bancos_quadro_ia` (DeleteBank/MemFree on `ArenaQuadro`).
+  - Mode `prova` in `composicao_encadeada_ia`.
+  - `provar_quadro1_ia`.
+- **Disagreements with my round-4 classification:**
+  - DDLock/DDUnlock bookkeeping `0x4e17a6..a8` is compared by the policy; the proof shows it restored.
+  - The DeleteBank records are compared; they are now modeled.
+- **Process:** one development trial executed the native collection outside the lease. It crashed and produced no evidence.

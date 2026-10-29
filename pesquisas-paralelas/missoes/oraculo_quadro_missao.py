@@ -54,6 +54,17 @@ SAIDA_LACO = 0x460227              # _WinMain@16 loop exit (quit flag 0x49a059 s
 RNG = (0x497164, 0x498db4)
 FASES_QUADRO = ('load_tail', 'between_frames', 'frame1')
 
+
+def eh_fase_quadro(fase):
+    """load_tail, and between_frames/frame1 or between_frames{k}/frame{k} (k >= 2) of an N-frame run."""
+    return fase == 'load_tail' or bool(fase) and (fase.startswith('between_frames') or
+                                                  (fase.startswith('frame') and fase[5:].isdigit()))
+
+
+def nomes_fases(k):
+    """(between-frames phase, frame phase) names of frame k: frame 1 keeps the committed names."""
+    return ('between_frames', 'frame1') if k == 1 else (f'between_frames{k}', f'frame{k}')
+
 # Frame-phase non-executed routines: name -> (declared EAX or None=unchanged,
 # callee stack cleanup from the routine's own RET imm16, reason).  The startup
 # display/text/bank set (PULOS_INICIO) keeps its M1 declarations: MenuInit
@@ -110,14 +121,14 @@ class WindowsQuadro(WindowsDeclarado):
         self.fase = None
 
     def tecla(self, chamada):
-        if self.teclas or self.fase not in FASES_QUADRO:
+        if self.teclas or not eh_fase_quadro(self.fase):
             return super().tecla(chamada)
         vk, = chamada.argumentos
         self.consumidos.append(('key', hex(chamada.retorno), vk, 0, self.fase))
         return 0
 
     def cursor(self, chamada):
-        if self.fase not in FASES_QUADRO:
+        if not eh_fase_quadro(self.fase):
             raise ParadaVinculoDeclarado('GetCursorPos outside the declared frame phases')
         x, y = self.quadro.cursor
         chamada.escrever(chamada.argumentos[0], struct.pack('<ii', x, y))
@@ -125,7 +136,7 @@ class WindowsQuadro(WindowsDeclarado):
         return 1
 
     def mensagem(self, chamada):
-        if self.fase not in FASES_QUADRO:
+        if not eh_fase_quadro(self.fase):
             raise ParadaVinculoDeclarado('PeekMessageA outside the declared frame phases')
         _, hwnd, minimo, maximo, remover = chamada.argumentos
         if (hwnd, minimo, maximo) != (0, 0, 0):
@@ -244,12 +255,12 @@ class BancadaQuadroMissaoOriginal(BancadaCargaMissaoOriginal):
                 (0x5232b8, 'USER32.PeekMessageA', 5, w.mensagem))
 
     def _enderecos_pulo(self):
-        if self.fase in FASES_QUADRO:
+        if eh_fase_quadro(self.fase):
             return set(self.pulos) | set(self.fronteiras)
         return set(self.pulos)
 
     def _pulo(self, eip):
-        if self.fase not in FASES_QUADRO:
+        if not eh_fase_quadro(self.fase):
             return super()._pulo(eip)
         if eip in self.fronteiras:
             return self.fronteiras[eip]
@@ -258,7 +269,7 @@ class BancadaQuadroMissaoOriginal(BancadaCargaMissaoOriginal):
         return None
 
     def _registrar_pulo(self, nome, retorno, valor, limpeza):
-        if self.fase not in FASES_QUADRO:
+        if not eh_fase_quadro(self.fase):
             return super()._registrar_pulo(nome, retorno, valor, limpeza)
         regs = self._registros()
         pilha = struct.unpack('<4I', self.cpu.mem_read(regs['ESP']+4, 16))
@@ -338,17 +349,17 @@ class BancadaQuadroMissaoOriginal(BancadaCargaMissaoOriginal):
         self.escritas_por_fase[self.fase] = {hex(base): escrito.count(1) for base, escrito, _, _ in self._pegada}
 
     def _leitura_vigiada(self, cpu, acesso, endereco, tamanho, valor, _):
-        if self.fase in FASES_QUADRO:
+        if eh_fase_quadro(self.fase):
             eip = cpu.reg_read(x86.UC_X86_REG_EIP)
             self.leituras_vigiadas[(endereco, tamanho, self.nome(eip), self.fase)] += 1
 
     def _raiz(self, retorno):
-        if self.fase == 'between_frames':
+        if self.fase.startswith('between_frames'):
             return self.sym['ProgIteration'] <= retorno < 0x47509d or 0x460170 <= retorno < 0x46027c
         return CALCUL_GAME <= retorno < 0x42d4f8
 
     def _bloco(self, cpu, endereco, tamanho, _):
-        if self.fase not in FASES_QUADRO:
+        if not eh_fase_quadro(self.fase):
             return
         esp = cpu.reg_read(x86.UC_X86_REG_ESP)
         chave = (endereco, esp)
@@ -457,15 +468,16 @@ class BancadaQuadroMissaoOriginal(BancadaCargaMissaoOriginal):
             self._interromper('calculgame_not_entered_from_progiteration', stack_return=hex(retorno))
         return regs
 
-    def executar_quadro(self, segundos):
-        """(c) The first game-state CalculGame frame to its real return 0x475063."""
-        if self.cpu.reg_read(x86.UC_X86_REG_EIP) != CALCUL_GAME or self.fase != 'between_frames':
-            raise RuntimeError('Frame 1 starts only at the CalculGame entry reached from ProgIteration')
-        self._fase('frame1')
+    def executar_quadro(self, segundos, k=1):
+        """(c) Game-state CalculGame frame k to its real return 0x475063."""
+        entre, quadro = nomes_fases(k)
+        if self.cpu.reg_read(x86.UC_X86_REG_EIP) != CALCUL_GAME or self.fase != entre:
+            raise RuntimeError(f'Frame {k} starts only at the CalculGame entry reached from ProgIteration')
+        self._fase(quadro)
         self.limite_segundos = segundos
         self.iniciar_relogio()
         self._retomando = {CALCUL_GAME}
-        return self._correr('frame1', CALCUL_GAME, {}, (RETORNO_CALCUL_GAME,), retomar=True)
+        return self._correr(quadro, CALCUL_GAME, {}, (RETORNO_CALCUL_GAME,), retomar=True)
 
     # ------------------------------------------------------------ evidence helpers
     def _nao_executados_quadro(self):
