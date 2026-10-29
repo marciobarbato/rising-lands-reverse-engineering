@@ -1,0 +1,2997 @@
+{
+ "schema": "rising-lands/monde01-m3-static-targets/1",
+ "scope": "MONDE01 M3 Step 0 (docs/M3_PLAN.md section 2): static targets for P1-P5 and S1. No emulation; nothing here claims that a branch runs.",
+ "labels": {
+  "B": "read from accepted state bytes (frame-128 checkpoint / M1) or an instruction encoding of the intact executable",
+  "S": "inferred: a translation run over those bytes, a reachability/ordering claim, or a preference"
+ },
+ "sources": {
+  "frame128": {
+   "path": "pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz",
+   "xz_sha256": "4c8f5c14a9623131dd019eafcdc49ea63054ee358f9defde58c12cb949f59ff3",
+   "phase": "frame128",
+   "summary": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "eb714f7d5a694ad91bab9b41c37a28860006c89be03f9170e3b312064a4b04b2"
+   },
+   "summary_reproduced": true,
+   "label": "B"
+  },
+  "m1": {
+   "path": "pesquisas-paralelas/missoes/evidencias/captura-carga-missao-original-v2.json",
+   "sha256": "eb7d2303e13e62d4f5692c9cb6ef302b573d138df6a8b51183a6d9b0bd703afc",
+   "summary": {
+    "blocks": 881,
+    "bytes": 2659375,
+    "sha256": "58a5020e79f812e741991410bde0ebc847c927ce141176975a82c0a51a7a1114"
+   },
+   "block_hashes_verified": true,
+   "label": "B"
+  },
+  "executable": {
+   "sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+   "anchors": [
+    {
+     "name": "WndProc message dispatch",
+     "start": "0x4181b5",
+     "end_exclusive": "0x4181f4",
+     "sha256": "c24d4d2f5c3c0e5088a514d1fc403623d479ac41c069c6e2f509be573193fe9d",
+     "verified": true
+    },
+    {
+     "name": "WndProc mouse stores",
+     "start": "0x418207",
+     "end_exclusive": "0x418272",
+     "sha256": "eba103cc87841a29c6f225d82708d0b28797dfa6b0814daa1a0edd989e3001d8",
+     "verified": true
+    },
+    {
+     "name": "WndProc 0x200/0x201 dispatch",
+     "start": "0x41852b",
+     "end_exclusive": "0x41853d",
+     "sha256": "17ee9d22e68475cbee2beaca8a42dc35c53d25afcba9e8b20fb62519982c113c",
+     "verified": true
+    },
+    {
+     "name": "ProgIteration click-flag clear",
+     "start": "0x475068",
+     "end_exclusive": "0x47507f",
+     "sha256": "06ec03b38130629fb9486b8f11f055dd2f88dbcc5452a24d4fe7b5e0c2763658",
+     "verified": true
+    },
+    {
+     "name": "MouseZone",
+     "start": "0x479cac",
+     "end_exclusive": "0x479d0d",
+     "sha256": "4cc877b957873ac6f76cd9586e66ceac82cf9048ffb7626c73fcc3444a38bf1e",
+     "verified": true
+    },
+    {
+     "name": "InputGame zone dispatch",
+     "start": "0x4297c1",
+     "end_exclusive": "0x429800",
+     "sha256": "3126a37f19aaa08bc484c7b53d43652af09b82f791f3ea4bbd4ed46ddf80c5ca",
+     "verified": true
+    },
+    {
+     "name": "InputGame zone dispatch tail",
+     "start": "0x42c287",
+     "end_exclusive": "0x42c2ae",
+     "sha256": "38b4d788d51fb25b47ea5baa0f108f7c984dda33b3facd2a5117e978261e3b25",
+     "verified": true
+    },
+    {
+     "name": "InputGame playfield cell mapping and guard",
+     "start": "0x429800",
+     "end_exclusive": "0x4298cc",
+     "sha256": "ec8f587ab5ff8fb8da83d790228183235353f9b56e7a46f196aabc112c0821f3",
+     "verified": true
+    },
+    {
+     "name": "InputGame HUD icon branch",
+     "start": "0x42bcd9",
+     "end_exclusive": "0x42bdf1",
+     "sha256": "579cb711b6d8d8f7652a5677409be01a038bc63db7e5767c942f020ce7dc8523",
+     "verified": true
+    },
+    {
+     "name": "InputGame bag-code dispatch",
+     "start": "0x42c25e",
+     "end_exclusive": "0x42c287",
+     "sha256": "4a1481b524020c8252396337072b1d06c0b0281f2bc8e2e4b6f3775a4d8e6d3a",
+     "verified": true
+    },
+    {
+     "name": "InputGame bag-code jump table",
+     "start": "0x429260",
+     "end_exclusive": "0x429278",
+     "sha256": "ec92cffc84fdc2f800632303e4afe6258da88d6998f8c5e272008a09efe78238",
+     "verified": true
+    },
+    {
+     "name": "InputGame structure icon (code 3)",
+     "start": "0x42c116",
+     "end_exclusive": "0x42c1ff",
+     "sha256": "b023dd838405bbd80d40b5742f8c30076d981b19bce1cc3b91c3ef5a27d4bb0f",
+     "verified": true
+    },
+    {
+     "name": "InputGame build-site click (mode 3)",
+     "start": "0x429f46",
+     "end_exclusive": "0x42a077",
+     "sha256": "b12c6db103c0e151e5cee09398da0cfe5e41f5c926e778308d600d0736160d1e",
+     "verified": true
+    },
+    {
+     "name": "InputGame food/stone click",
+     "start": "0x42b311",
+     "end_exclusive": "0x42b64d",
+     "sha256": "7a1fba67e3487318288f6621ce1315e4d21cc3f5b25a0f97cf44ca256fdbddde",
+     "verified": true
+    },
+    {
+     "name": "InputGame mode-9 dispatch",
+     "start": "0x429c32",
+     "end_exclusive": "0x429da1",
+     "sha256": "fabe8925ad6a3cd7e16585eb0a9f9ab31d46a2264ec309a6c5703e45649ff3b6",
+     "verified": true
+    },
+    {
+     "name": "InputGame mode-9 jump table",
+     "start": "0x42923c",
+     "end_exclusive": "0x42924c",
+     "sha256": "bd4bc395500385f2fb784f10899e8705154c4cb27cde9361900b319941171ae2",
+     "verified": true
+    },
+    {
+     "name": "InputGame Ctrl transport mode",
+     "start": "0x4295f3",
+     "end_exclusive": "0x429634",
+     "sha256": "0476ec2a8143eae8e2c21f0cef81d689b69a89ef98a1eaabc34503c3cf72fdcc",
+     "verified": true
+    },
+    {
+     "name": "IconeGetZone",
+     "start": "0x45da4e",
+     "end_exclusive": "0x45db1f",
+     "sha256": "c00e2b001065ce79221efcd4967a6d235c2e99f8984c1cb0983803d05a753cef",
+     "verified": true
+    },
+    {
+     "name": "BagGetCode/BagGetType",
+     "start": "0x4472d3",
+     "end_exclusive": "0x4472ea",
+     "sha256": "7a22b6740a41459a768627b354721423533418f648c46e5b7407c01ea509bf78",
+     "verified": true
+    },
+    {
+     "name": "EnginGetBagOrdre",
+     "start": "0x4474f3",
+     "end_exclusive": "0x447543",
+     "sha256": "46ea374a731f4a679de84498e45122f2bdcbabea2033529fe009681ddb0e344c",
+     "verified": true
+    },
+    {
+     "name": "EnginTravailSelectionne",
+     "start": "0x47248f",
+     "end_exclusive": "0x47253d",
+     "sha256": "f9c4b5503f8a597ff0d2dc348137cedde78df046e046c32b504562775a58fbfa",
+     "verified": true
+    },
+    {
+     "name": "BatimentGetRessource",
+     "start": "0x41aace",
+     "end_exclusive": "0x41ab04",
+     "sha256": "f876ad480c0a9a881c49c8aea29a94ca8b39576067d1d6b372dfb602f9cc927c",
+     "verified": true
+    },
+    {
+     "name": "TestRessource",
+     "start": "0x4676e5",
+     "end_exclusive": "0x467718",
+     "sha256": "e36bd212078b4516f4132bdd36bc6d8d5d393aea5cc58401af613ecdee840c26",
+     "verified": true
+    },
+    {
+     "name": "CreerBatiment",
+     "start": "0x41fea2",
+     "end_exclusive": "0x4202ce",
+     "sha256": "73064d19967425415199c4a6ce7159703ec7bfad27401e8a8bae4400cbdd7c98",
+     "verified": true
+    },
+    {
+     "name": "BatimentGetDecalageConstruction",
+     "start": "0x41aea4",
+     "end_exclusive": "0x41aee2",
+     "sha256": "41eb0b671cabaff25da6c4c837a83e2f92584040fe7cbe7d4036719dd85b4756",
+     "verified": true
+    },
+    {
+     "name": "BatimentGetDecalageConstruction table",
+     "start": "0x41ae4c",
+     "end_exclusive": "0x41aea4",
+     "sha256": "040e1af18b93888fe6e3ef7a274dc5f275edd724377af7f325686f36297876de",
+     "verified": true
+    },
+    {
+     "name": "BatimentConstructible",
+     "start": "0x41fb12",
+     "end_exclusive": "0x41fc40",
+     "sha256": "48c12c20e2a75144fb59499aa8864d6d6ef23ae242ce5781efd67a73427b567e",
+     "verified": true
+    },
+    {
+     "name": "BatimentPosable",
+     "start": "0x41fc40",
+     "end_exclusive": "0x41fea2",
+     "sha256": "e60c908f8c843c883ede6f7c329d9bf9be121b178d82c5cbdefd56dcdfd6555a",
+     "verified": true
+    },
+    {
+     "name": "CalculConstruireBatiment build step",
+     "start": "0x44ad13",
+     "end_exclusive": "0x44ad8e",
+     "sha256": "17e1eaa9e08cf8dacfa230f09c2b3ca7727cd9f9faef579e57eb221bbe3d8065",
+     "verified": true
+    },
+    {
+     "name": "BatimentLogeEngin owner store",
+     "start": "0x41fa53",
+     "end_exclusive": "0x41fa8d",
+     "sha256": "7bb187523aebc97a75a6219644fc57c6b64adfa570be5cf18c0a907052e1c8dd",
+     "verified": true
+    },
+    {
+     "name": "BatimentGetPlayer",
+     "start": "0x41a08c",
+     "end_exclusive": "0x41a0ab",
+     "sha256": "73c7960bdd0b83a8016cc9f7097a635079ae215bfcd10f91c37badd7e6c90932",
+     "verified": true
+    },
+    {
+     "name": "TerrainEstSac",
+     "start": "0x4766b1",
+     "end_exclusive": "0x4766d6",
+     "sha256": "0a70f7139b964d20c3c44927595f2bda3e164264471fe41ecd346dda4fd96b51",
+     "verified": true
+    },
+    {
+     "name": "TerrainEstDecouvert",
+     "start": "0x4766f0",
+     "end_exclusive": "0x47670a",
+     "sha256": "c7d7973f063848a5fbb332c9d87310bfea7ce416069d880fc6c7cfb2f0a58262",
+     "verified": true
+    },
+    {
+     "name": "TerrainEstMine",
+     "start": "0x476263",
+     "end_exclusive": "0x4762b9",
+     "sha256": "1934a68fa555d506d65dafc944a289236f2cbed75caf5c0bbc45e084732d5ab2",
+     "verified": true
+    },
+    {
+     "name": "TerrainEstGc",
+     "start": "0x4762b9",
+     "end_exclusive": "0x4762de",
+     "sha256": "4f523a14bd0d0338368b49566cd8b203840756e80549e0bb53ed7d95ecd90ea1",
+     "verified": true
+    },
+    {
+     "name": "TerrainEstHerbe",
+     "start": "0x47636a",
+     "end_exclusive": "0x4763c0",
+     "sha256": "7c2d8f0eb66baa5c4d38f0c2fedc64b2ecdb1fa2f2acc0a834b307e7dc7de78e",
+     "verified": true
+    },
+    {
+     "name": "TerrainGetSacType",
+     "start": "0x476038",
+     "end_exclusive": "0x47605d",
+     "sha256": "5b95493c9fa209925cd47688ab4a0400a6f939ca433f0cb18dafa5a07b1191ad",
+     "verified": true
+    },
+    {
+     "name": "TerrainEnCollision",
+     "start": "0x4761d4",
+     "end_exclusive": "0x4761f1",
+     "sha256": "5a4df51651db84b2b01819a672e0ad7c0253524d5ee65192abfde4bffdf41b3a",
+     "verified": true
+    },
+    {
+     "name": "EnginGetCase",
+     "start": "0x44113e",
+     "end_exclusive": "0x44115f",
+     "sha256": "43c2b33fd2e3a5d6941ebe6d8dda3a737e1c3f254486eac0414c2b7d6734eea3",
+     "verified": true
+    },
+    {
+     "name": "CaseEstDecouverte",
+     "start": "0x4766d6",
+     "end_exclusive": "0x4766f0",
+     "sha256": "2e3c150188cd700809900fd0e8561f2dc67c915400e3deb4e739a86cca1e613a",
+     "verified": true
+    },
+    {
+     "name": "InputGame undiscovered-cell gate",
+     "start": "0x4298cc",
+     "end_exclusive": "0x4299ad",
+     "sha256": "aded738f0c0034288e06a5db4f136eb645430512c862b5e9a57788dd68b2ba17",
+     "verified": true
+    },
+    {
+     "name": "InputGame minimap branch",
+     "start": "0x42bade",
+     "end_exclusive": "0x42bbff",
+     "sha256": "ad5a7fc438e7522abc4ad1990c85f2cff5064b3a177ca2d10c8b179db7fa3c8b",
+     "verified": true
+    },
+    {
+     "name": "MiniMapGetCase",
+     "start": "0x46a224",
+     "end_exclusive": "0x46a273",
+     "sha256": "76ac30d678406bb4f8b9b74377d0c97d842c18f635667f61b541ffbdaf47101e",
+     "verified": true
+    },
+    {
+     "name": "MiniMapGetCenterSelect",
+     "start": "0x46a273",
+     "end_exclusive": "0x46a369",
+     "sha256": "aa866c6361c0b7fc34c53ebea82a0f9c5ed0fb1b7e02fe3feacbf158d7ff2a85",
+     "verified": true
+    }
+   ],
+   "anchors_status": "verified"
+  }
+ },
+ "view": {
+  "state_label": "B",
+  "origin": [
+   0,
+   0
+  ],
+  "viewport_cells": [
+   25,
+   17
+  ],
+  "screen": [
+   800,
+   600
+  ],
+  "panel_offset": 0,
+  "local_player": 0,
+  "mapping": "cell (x,y) = (cell mod 256, cell div 256); screen pixel = (32(x-vx)+16, 32(y-vy)+16); with view origin (0,0): (32x+16, 32y+16)",
+  "mapping_label": "S",
+  "mapping_byte_evidence": "InputGame 0x429800..0x42984a encodes cell = ((Y>>5)+[0x508722])<<8 + (X>>5)+[0x508720] for MouseZone result 0 (dispatch 0x42c2a5), guard 0x42984c..0x4298c6 d*32 <= X < (vw-d)*32, d*32 <= Y < (vh-d)*32 with d = s8 [0x508f90]. Encoding B; that a click reaches it is S.",
+  "playfield_pixels": [
+   0,
+   0,
+   799,
+   543
+  ]
+ },
+ "mouse_zones": {
+  "label": "B (frame-128 table bytes; MouseSetZone writers are InitGameZone, InitZoneMarche, MarcheRestoreZone, AffIconeSousCurseur, CalculMarcheProposition only)",
+  "table": "0x5099b4",
+  "tested_range": [
+   1,
+   31
+  ],
+  "zones": [
+   {
+    "zone": 1,
+    "rect_inclusive": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "name": "edge top-left"
+   },
+   {
+    "zone": 2,
+    "rect_inclusive": [
+     2,
+     0,
+     797,
+     1
+    ],
+    "name": "edge top"
+   },
+   {
+    "zone": 3,
+    "rect_inclusive": [
+     798,
+     0,
+     799,
+     1
+    ],
+    "name": "edge top-right"
+   },
+   {
+    "zone": 4,
+    "rect_inclusive": [
+     798,
+     2,
+     799,
+     597
+    ],
+    "name": "edge right"
+   },
+   {
+    "zone": 5,
+    "rect_inclusive": [
+     798,
+     598,
+     799,
+     599
+    ],
+    "name": "edge bottom-right"
+   },
+   {
+    "zone": 6,
+    "rect_inclusive": [
+     2,
+     598,
+     797,
+     599
+    ],
+    "name": "edge bottom"
+   },
+   {
+    "zone": 7,
+    "rect_inclusive": [
+     0,
+     598,
+     1,
+     599
+    ],
+    "name": "edge bottom-left"
+   },
+   {
+    "zone": 8,
+    "rect_inclusive": [
+     0,
+     2,
+     2,
+     597
+    ],
+    "name": "edge left"
+   },
+   {
+    "zone": 9,
+    "rect_inclusive": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "empty (0,0,0,0)"
+   },
+   {
+    "zone": 10,
+    "rect_inclusive": [
+     0,
+     0,
+     128,
+     128
+    ],
+    "name": "minimap"
+   },
+   {
+    "zone": 11,
+    "rect_inclusive": [
+     0,
+     544,
+     800,
+     600
+    ],
+    "name": "HUD panel (IconeGetZone inside)"
+   },
+   {
+    "zone": 12,
+    "rect_inclusive": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "unused (12..25 never set by InitGameZone mode 1)"
+   },
+   {
+    "zone": 13,
+    "rect_inclusive": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "unused (12..25 never set by InitGameZone mode 1)"
+   },
+   {
+    "zone": 14,
+    "rect_inclusive": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "unused (12..25 never set by InitGameZone mode 1)"
+   },
+   {
+    "zone": 15,
+    "rect_inclusive": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "unused (12..25 never set by InitGameZone mode 1)"
+   },
+   {
+    "zone": 16,
+    "rect_inclusive": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "unused (12..25 never set by InitGameZone mode 1)"
+   },
+   {
+    "zone": 17,
+    "rect_inclusive": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "unused (12..25 never set by InitGameZone mode 1)"
+   },
+   {
+    "zone": 18,
+    "rect_inclusive": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "unused (12..25 never set by InitGameZone mode 1)"
+   },
+   {
+    "zone": 19,
+    "rect_inclusive": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "unused (12..25 never set by InitGameZone mode 1)"
+   },
+   {
+    "zone": 20,
+    "rect_inclusive": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "unused (12..25 never set by InitGameZone mode 1)"
+   },
+   {
+    "zone": 21,
+    "rect_inclusive": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "unused (12..25 never set by InitGameZone mode 1)"
+   },
+   {
+    "zone": 22,
+    "rect_inclusive": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "unused (12..25 never set by InitGameZone mode 1)"
+   },
+   {
+    "zone": 23,
+    "rect_inclusive": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "unused (12..25 never set by InitGameZone mode 1)"
+   },
+   {
+    "zone": 24,
+    "rect_inclusive": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "unused (12..25 never set by InitGameZone mode 1)"
+   },
+   {
+    "zone": 25,
+    "rect_inclusive": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "name": "unused (12..25 never set by InitGameZone mode 1)"
+   },
+   {
+    "zone": 26,
+    "rect_inclusive": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "name": "contact panel"
+   },
+   {
+    "zone": 27,
+    "rect_inclusive": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "name": "message box"
+   },
+   {
+    "zone": 28,
+    "rect_inclusive": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "name": "alliance 0"
+   },
+   {
+    "zone": 29,
+    "rect_inclusive": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "name": "alliance 1"
+   },
+   {
+    "zone": 30,
+    "rect_inclusive": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "name": "alliance 2"
+   },
+   {
+    "zone": 31,
+    "rect_inclusive": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "name": "alliance 3"
+   }
+  ],
+  "builder_selection_effect": "S: InitGameZone mode 1 (the in-game layout) reads screen size, minimap flag/position, viewport, panel offset, contact/message-box/alliance state; not the selection. Selecting the builder therefore adds no MouseSetZone rectangle; the action icons are hit-tested by IconeGetZone inside zone 11.",
+  "action_icons": {
+   "label": "B (IconeGetZone 0x45da4e constants; screen width 800 -> y0 = 0x224)",
+   "rects_inclusive": {
+    "0": [
+     31,
+     548,
+     89,
+     598
+    ],
+    "1": [
+     91,
+     548,
+     149,
+     598
+    ],
+    "2": [
+     151,
+     548,
+     209,
+     598
+    ],
+    "3": [
+     211,
+     548,
+     269,
+     598
+    ],
+    "8": [
+     8,
+     548,
+     30,
+     600
+    ],
+    "9": [
+     272,
+     548,
+     294,
+     600
+    ]
+   },
+   "selection_rule": "InputGame 0x42bcd9: icons index the bag of the selected structure (BatimentGetSelection) or, when exactly one unit is selected (EnginGetNbSelection == 1), that unit's EnginGetBagOrdre; icon slot s reads bag entry bag[+4] + s (BagGetCode +0x42, BagGetType +6)."
+  },
+  "unavailable_minimap_cells": "S: centre pixels of cells with x-vx <= 3 and y-vy <= 3 fall in zone 10 (minimap)"
+ },
+ "units": {
+  "targets": [
+   {
+    "unit": 12,
+    "owner": 0,
+    "type": 7,
+    "state": 7,
+    "fields_label": "B",
+    "enginGetCase": 4113,
+    "cell_plus8": 4113,
+    "cell": 4113,
+    "xy": [
+     17,
+     16
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     560,
+     528
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 4113
+   },
+   {
+    "unit": 13,
+    "owner": 0,
+    "type": 5,
+    "state": 7,
+    "fields_label": "B",
+    "enginGetCase": 4110,
+    "cell_plus8": 4110,
+    "cell": 4110,
+    "xy": [
+     14,
+     16
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     464,
+     528
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 4110
+   },
+   {
+    "unit": 14,
+    "owner": 0,
+    "type": 5,
+    "state": 7,
+    "fields_label": "B",
+    "enginGetCase": 4108,
+    "cell_plus8": 4108,
+    "cell": 4108,
+    "xy": [
+     12,
+     16
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     400,
+     528
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 4108
+   },
+   {
+    "unit": 11,
+    "owner": 0,
+    "type": 1,
+    "state": 7,
+    "fields_label": "B",
+    "enginGetCase": 5387,
+    "cell_plus8": 5387,
+    "cell": 5387,
+    "xy": [
+     11,
+     21
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false
+   },
+   {
+    "unit": 15,
+    "owner": 0,
+    "type": 8,
+    "state": 7,
+    "fields_label": "B",
+    "enginGetCase": 4877,
+    "cell_plus8": 4877,
+    "cell": 4877,
+    "xy": [
+     13,
+     19
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false
+   }
+  ],
+  "all": [
+   {
+    "unit": 0,
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "fields_label": "B",
+    "enginGetCase": 3847,
+    "cell_plus8": 3847,
+    "cell": 3847,
+    "xy": [
+     7,
+     15
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     240,
+     496
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 3847
+   },
+   {
+    "unit": 1,
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "fields_label": "B",
+    "enginGetCase": 4105,
+    "cell_plus8": 4105,
+    "cell": 4105,
+    "xy": [
+     9,
+     16
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     304,
+     528
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 4105
+   },
+   {
+    "unit": 2,
+    "owner": 0,
+    "type": 0,
+    "state": 7,
+    "fields_label": "B",
+    "enginGetCase": 4616,
+    "cell_plus8": 4616,
+    "cell": 4616,
+    "xy": [
+     8,
+     18
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false
+   },
+   {
+    "unit": 3,
+    "owner": 0,
+    "type": 9,
+    "state": 14,
+    "fields_label": "B",
+    "enginGetCase": 3086,
+    "cell_plus8": 3086,
+    "cell": 3086,
+    "xy": [
+     14,
+     12
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     464,
+     400
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 3086
+   },
+   {
+    "unit": 4,
+    "owner": 0,
+    "type": 9,
+    "state": 14,
+    "fields_label": "B",
+    "enginGetCase": 3086,
+    "cell_plus8": 3086,
+    "cell": 3086,
+    "xy": [
+     14,
+     12
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     464,
+     400
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 3086
+   },
+   {
+    "unit": 5,
+    "owner": 0,
+    "type": 9,
+    "state": 14,
+    "fields_label": "B",
+    "enginGetCase": 3086,
+    "cell_plus8": 3086,
+    "cell": 3086,
+    "xy": [
+     14,
+     12
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     464,
+     400
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 3086
+   },
+   {
+    "unit": 6,
+    "owner": 0,
+    "type": 9,
+    "state": 14,
+    "fields_label": "B",
+    "enginGetCase": 3086,
+    "cell_plus8": 3086,
+    "cell": 3086,
+    "xy": [
+     14,
+     12
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     464,
+     400
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 3086
+   },
+   {
+    "unit": 7,
+    "owner": 0,
+    "type": 9,
+    "state": 14,
+    "fields_label": "B",
+    "enginGetCase": 3086,
+    "cell_plus8": 3086,
+    "cell": 3086,
+    "xy": [
+     14,
+     12
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     464,
+     400
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 3086
+   },
+   {
+    "unit": 8,
+    "owner": 0,
+    "type": 9,
+    "state": 14,
+    "fields_label": "B",
+    "enginGetCase": 3086,
+    "cell_plus8": 3086,
+    "cell": 3086,
+    "xy": [
+     14,
+     12
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     464,
+     400
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 3086
+   },
+   {
+    "unit": 9,
+    "owner": 0,
+    "type": 9,
+    "state": 14,
+    "fields_label": "B",
+    "enginGetCase": 3086,
+    "cell_plus8": 3086,
+    "cell": 3086,
+    "xy": [
+     14,
+     12
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     464,
+     400
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 3086
+   },
+   {
+    "unit": 10,
+    "owner": 0,
+    "type": 9,
+    "state": 14,
+    "fields_label": "B",
+    "enginGetCase": 3086,
+    "cell_plus8": 3086,
+    "cell": 3086,
+    "xy": [
+     14,
+     12
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     464,
+     400
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 3086
+   },
+   {
+    "unit": 11,
+    "owner": 0,
+    "type": 1,
+    "state": 7,
+    "fields_label": "B",
+    "enginGetCase": 5387,
+    "cell_plus8": 5387,
+    "cell": 5387,
+    "xy": [
+     11,
+     21
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false
+   },
+   {
+    "unit": 12,
+    "owner": 0,
+    "type": 7,
+    "state": 7,
+    "fields_label": "B",
+    "enginGetCase": 4113,
+    "cell_plus8": 4113,
+    "cell": 4113,
+    "xy": [
+     17,
+     16
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     560,
+     528
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 4113
+   },
+   {
+    "unit": 13,
+    "owner": 0,
+    "type": 5,
+    "state": 7,
+    "fields_label": "B",
+    "enginGetCase": 4110,
+    "cell_plus8": 4110,
+    "cell": 4110,
+    "xy": [
+     14,
+     16
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     464,
+     528
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 4110
+   },
+   {
+    "unit": 14,
+    "owner": 0,
+    "type": 5,
+    "state": 7,
+    "fields_label": "B",
+    "enginGetCase": 4108,
+    "cell_plus8": 4108,
+    "cell": 4108,
+    "xy": [
+     12,
+     16
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     400,
+     528
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 4108
+   },
+   {
+    "unit": 15,
+    "owner": 0,
+    "type": 8,
+    "state": 7,
+    "fields_label": "B",
+    "enginGetCase": 4877,
+    "cell_plus8": 4877,
+    "cell": 4877,
+    "xy": [
+     13,
+     19
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false
+   }
+  ],
+  "hit_test": "B encoding: InputGame 0x429ae3 hovers the unit ChercheIndiceEngin(cell) at the clicked cell; the selection producers 0x42b9aa/0x42ba20 were not traced here (open)"
+ },
+ "builder_bag": {
+  "unit": 12,
+  "label": "B (frame-128 bag bytes)",
+  "address": "0x4781c2d8",
+  "count": 4,
+  "scroll": 0,
+  "entries": [
+   {
+    "index": 0,
+    "type": 1,
+    "code": 3
+   },
+   {
+    "index": 1,
+    "type": 2,
+    "code": 3
+   },
+   {
+    "index": 2,
+    "type": 3,
+    "code": 3
+   },
+   {
+    "index": 3,
+    "type": 4,
+    "code": 3
+   }
+  ]
+ },
+ "cave_icon": {
+  "bag_index": 2,
+  "slot": 2,
+  "rect_inclusive": [
+   151,
+   548,
+   209,
+   598
+  ],
+  "center_pixel": [
+   180,
+   573
+  ],
+  "mouse_zone_at_center": 11,
+  "iconeGetZone_at_center": 2,
+  "label": "B (rect, bag bytes); S (that a click reaches it)"
+ },
+ "cave_icon_click": {
+  "label": "B encoding, S reachability",
+  "effect": "code 3 entry -> BatimentGetRessource(type) then TestRessource(player, food, stone, 0); on success with type != 0x14: u16 0x4e05ae := 3, u8 0x496207 := type (0x42c1e6..0x42c1f5)",
+  "requires": "u8 0x5099ae and u8 0x5099af both nonzero in the same InputGame pass",
+  "predicted_0x496207": 3,
+  "test_ressource_passes": true
+ },
+ "cave": {
+  "type": 3,
+  "dims": [
+   5,
+   5
+  ],
+  "dims_label": "B",
+  "cost": {
+   "food": 10,
+   "stone": 6,
+   "parts": 0
+  },
+  "cost_label": "B (table 0x495d98 + 52*type, read by BatimentGetRessource and CreerBatiment)",
+  "construction_offset": "0x202",
+  "construction_offset_label": "B (BatimentGetDecalageConstruction table entry 3 -> 0x41aec1)",
+  "placement": "S: CalculConstruireBatiment builds when unit +8 == +0xb2 (the clicked cell), at cell +8 + 0x202 (CreerBatiment reference = bottom-right); origin = reference - (w-1) - (h-1)*256, i.e. the 5x5 footprint centred on the clicked cell, the same footprint BatimentPosable tests at the click.",
+  "owner_after_creation": "B: CreerBatiment stores owner +4 = 0xc8 (0x4200b5); only types 0x11 (0x4200c8) and 9/0xc (0x420295) get the player byte there. The only store found that turns a 0xc8 owner into a player is BatimentLogeEngin 0x41fa77 (symbol-bounded linear scan, not exhaustive)."
+ },
+ "stock": {
+  "player": 0,
+  "label": "B",
+  "parts": 0,
+  "food": 30,
+  "stone": 30,
+  "victory_needs": {
+   "food": 50,
+   "stone": 50,
+   "label": "B (records 1, 2, 9 at 0x4e1d20)"
+  },
+  "after_cave_cost": {
+   "food": 20,
+   "stone": 24,
+   "label": "S"
+  },
+  "to_gather_after_cave": {
+   "food": 30,
+   "stone": 26,
+   "label": "S (assumes no other expense or income before victory)"
+  }
+ },
+ "zone0": {
+  "record": [
+   0,
+   0,
+   28,
+   25
+  ],
+  "record_label": "B",
+  "cells": 754,
+  "rect_xy": [
+   [
+    0,
+    0
+   ],
+   [
+    28,
+    25
+   ]
+  ],
+  "sanctuary": {
+   "structure": 0,
+   "origin": 2828,
+   "origin_xy": [
+    12,
+    11
+   ],
+   "dims": [
+    6,
+    5
+   ],
+   "batimentGetCase": 3086,
+   "batimentGetCase_xy": [
+    14,
+    12
+   ],
+   "zone": 0,
+   "label": "B state, S zone query"
+  }
+ },
+ "cave_sites": {
+  "rule": "S: BatimentPosable 0x41fc40 (type 3, player 0) without EnginOccupeCase; footprint free of collision bit 0, every cell TerrainEstHerbe and TerrainEstDecouvert; Core BatimentGetCase of the resulting record in zone 0; candidates also on screen, MouseZone 0 and with no object in the footprint (preference, keeps fields/sacks); sorted by Chebyshev distance to unit 12.",
+  "counts_over_map": {
+   "valid": 112,
+   "invalid": 3897,
+   "needs_EnginOccupeCase": 87
+  },
+  "valid_in_zone0": 112,
+  "valid_on_screen_no_objects": 25,
+  "candidates": [
+   {
+    "cell": 3093,
+    "xy": [
+     21,
+     12
+    ],
+    "cell_label": "S",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     688,
+     400
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 3093,
+    "posable": "valid",
+    "posable_label": "S",
+    "footprint_origin": 2579,
+    "footprint_origin_xy": [
+     19,
+     10
+    ],
+    "footprint_xy": [
+     [
+      19,
+      10
+     ],
+     [
+      23,
+      14
+     ]
+    ],
+    "batimentGetCase": 2580,
+    "batimentGetCase_xy": [
+     20,
+     10
+    ],
+    "zone": 0,
+    "placement_label": "S",
+    "footprint_objects": [],
+    "chebyshev_to_builder": 4
+   },
+   {
+    "cell": 2837,
+    "xy": [
+     21,
+     11
+    ],
+    "cell_label": "S",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     688,
+     368
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 2837,
+    "posable": "valid",
+    "posable_label": "S",
+    "footprint_origin": 2323,
+    "footprint_origin_xy": [
+     19,
+     9
+    ],
+    "footprint_xy": [
+     [
+      19,
+      9
+     ],
+     [
+      23,
+      13
+     ]
+    ],
+    "batimentGetCase": 2324,
+    "batimentGetCase_xy": [
+     20,
+     9
+    ],
+    "zone": 0,
+    "placement_label": "S",
+    "footprint_objects": [],
+    "chebyshev_to_builder": 5
+   },
+   {
+    "cell": 2581,
+    "xy": [
+     21,
+     10
+    ],
+    "cell_label": "S",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     688,
+     336
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 2581,
+    "posable": "valid",
+    "posable_label": "S",
+    "footprint_origin": 2067,
+    "footprint_origin_xy": [
+     19,
+     8
+    ],
+    "footprint_xy": [
+     [
+      19,
+      8
+     ],
+     [
+      23,
+      12
+     ]
+    ],
+    "batimentGetCase": 2068,
+    "batimentGetCase_xy": [
+     20,
+     8
+    ],
+    "zone": 0,
+    "placement_label": "S",
+    "footprint_objects": [],
+    "chebyshev_to_builder": 6
+   },
+   {
+    "cell": 2582,
+    "xy": [
+     22,
+     10
+    ],
+    "cell_label": "S",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     720,
+     336
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 2582,
+    "posable": "valid",
+    "posable_label": "S",
+    "footprint_origin": 2068,
+    "footprint_origin_xy": [
+     20,
+     8
+    ],
+    "footprint_xy": [
+     [
+      20,
+      8
+     ],
+     [
+      24,
+      12
+     ]
+    ],
+    "batimentGetCase": 2069,
+    "batimentGetCase_xy": [
+     21,
+     8
+    ],
+    "zone": 0,
+    "placement_label": "S",
+    "footprint_objects": [],
+    "chebyshev_to_builder": 6
+   },
+   {
+    "cell": 2583,
+    "xy": [
+     23,
+     10
+    ],
+    "cell_label": "S",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     752,
+     336
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 2583,
+    "posable": "valid",
+    "posable_label": "S",
+    "footprint_origin": 2069,
+    "footprint_origin_xy": [
+     21,
+     8
+    ],
+    "footprint_xy": [
+     [
+      21,
+      8
+     ],
+     [
+      25,
+      12
+     ]
+    ],
+    "batimentGetCase": 2070,
+    "batimentGetCase_xy": [
+     22,
+     8
+    ],
+    "zone": 0,
+    "placement_label": "S",
+    "footprint_objects": [],
+    "chebyshev_to_builder": 6
+   },
+   {
+    "cell": 2325,
+    "xy": [
+     21,
+     9
+    ],
+    "cell_label": "S",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     688,
+     304
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 2325,
+    "posable": "valid",
+    "posable_label": "S",
+    "footprint_origin": 1811,
+    "footprint_origin_xy": [
+     19,
+     7
+    ],
+    "footprint_xy": [
+     [
+      19,
+      7
+     ],
+     [
+      23,
+      11
+     ]
+    ],
+    "batimentGetCase": 1812,
+    "batimentGetCase_xy": [
+     20,
+     7
+    ],
+    "zone": 0,
+    "placement_label": "S",
+    "footprint_objects": [],
+    "chebyshev_to_builder": 7
+   },
+   {
+    "cell": 2326,
+    "xy": [
+     22,
+     9
+    ],
+    "cell_label": "S",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     720,
+     304
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 2326,
+    "posable": "valid",
+    "posable_label": "S",
+    "footprint_origin": 1812,
+    "footprint_origin_xy": [
+     20,
+     7
+    ],
+    "footprint_xy": [
+     [
+      20,
+      7
+     ],
+     [
+      24,
+      11
+     ]
+    ],
+    "batimentGetCase": 1813,
+    "batimentGetCase_xy": [
+     21,
+     7
+    ],
+    "zone": 0,
+    "placement_label": "S",
+    "footprint_objects": [],
+    "chebyshev_to_builder": 7
+   },
+   {
+    "cell": 2327,
+    "xy": [
+     23,
+     9
+    ],
+    "cell_label": "S",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     752,
+     304
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 2327,
+    "posable": "valid",
+    "posable_label": "S",
+    "footprint_origin": 1813,
+    "footprint_origin_xy": [
+     21,
+     7
+    ],
+    "footprint_xy": [
+     [
+      21,
+      7
+     ],
+     [
+      25,
+      11
+     ]
+    ],
+    "batimentGetCase": 1814,
+    "batimentGetCase_xy": [
+     22,
+     7
+    ],
+    "zone": 0,
+    "placement_label": "S",
+    "footprint_objects": [],
+    "chebyshev_to_builder": 7
+   },
+   {
+    "cell": 2061,
+    "xy": [
+     13,
+     8
+    ],
+    "cell_label": "S",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     432,
+     272
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 2061,
+    "posable": "valid",
+    "posable_label": "S",
+    "footprint_origin": 1547,
+    "footprint_origin_xy": [
+     11,
+     6
+    ],
+    "footprint_xy": [
+     [
+      11,
+      6
+     ],
+     [
+      15,
+      10
+     ]
+    ],
+    "batimentGetCase": 1548,
+    "batimentGetCase_xy": [
+     12,
+     6
+    ],
+    "zone": 0,
+    "placement_label": "S",
+    "footprint_objects": [],
+    "chebyshev_to_builder": 8
+   },
+   {
+    "cell": 2062,
+    "xy": [
+     14,
+     8
+    ],
+    "cell_label": "S",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     464,
+     272
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 2062,
+    "posable": "valid",
+    "posable_label": "S",
+    "footprint_origin": 1548,
+    "footprint_origin_xy": [
+     12,
+     6
+    ],
+    "footprint_xy": [
+     [
+      12,
+      6
+     ],
+     [
+      16,
+      10
+     ]
+    ],
+    "batimentGetCase": 1549,
+    "batimentGetCase_xy": [
+     13,
+     6
+    ],
+    "zone": 0,
+    "placement_label": "S",
+    "footprint_objects": [],
+    "chebyshev_to_builder": 8
+   },
+   {
+    "cell": 2069,
+    "xy": [
+     21,
+     8
+    ],
+    "cell_label": "S",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     688,
+     272
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 2069,
+    "posable": "valid",
+    "posable_label": "S",
+    "footprint_origin": 1555,
+    "footprint_origin_xy": [
+     19,
+     6
+    ],
+    "footprint_xy": [
+     [
+      19,
+      6
+     ],
+     [
+      23,
+      10
+     ]
+    ],
+    "batimentGetCase": 1556,
+    "batimentGetCase_xy": [
+     20,
+     6
+    ],
+    "zone": 0,
+    "placement_label": "S",
+    "footprint_objects": [],
+    "chebyshev_to_builder": 8
+   },
+   {
+    "cell": 2070,
+    "xy": [
+     22,
+     8
+    ],
+    "cell_label": "S",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": [
+     720,
+     272
+    ],
+    "pixel_label": "S",
+    "on_screen": true,
+    "mouse_zone": 0,
+    "mouse_zone_label": "S",
+    "inputgame_cell": 2070,
+    "posable": "valid",
+    "posable_label": "S",
+    "footprint_origin": 1556,
+    "footprint_origin_xy": [
+     20,
+     6
+    ],
+    "footprint_xy": [
+     [
+      20,
+      6
+     ],
+     [
+      24,
+      10
+     ]
+    ],
+    "batimentGetCase": 1557,
+    "batimentGetCase_xy": [
+     21,
+     6
+    ],
+    "zone": 0,
+    "placement_label": "S",
+    "footprint_objects": [],
+    "chebyshev_to_builder": 8
+   }
+  ],
+  "proposed": {
+   "cell": 3093,
+   "xy": [
+    21,
+    12
+   ],
+   "cell_label": "S",
+   "discovery_byte_player0": 0,
+   "caseEstDecouverte": true,
+   "pixel": [
+    688,
+    400
+   ],
+   "pixel_label": "S",
+   "on_screen": true,
+   "mouse_zone": 0,
+   "mouse_zone_label": "S",
+   "inputgame_cell": 3093,
+   "posable": "valid",
+   "posable_label": "S",
+   "footprint_origin": 2579,
+   "footprint_origin_xy": [
+    19,
+    10
+   ],
+   "footprint_xy": [
+    [
+     19,
+     10
+    ],
+    [
+     23,
+     14
+    ]
+   ],
+   "batimentGetCase": 2580,
+   "batimentGetCase_xy": [
+    20,
+    10
+   ],
+   "zone": 0,
+   "placement_label": "S",
+   "footprint_objects": [],
+   "chebyshev_to_builder": 4
+  }
+ },
+ "food": {
+  "rule": "B encoding: InputGame 0x42b311: with troops selected, a TerrainEstGc cell (object 0x1d..0x34), a food sack (TerrainGetSacType 1) or a hovered CAVE, and EnginTravailSelectionne(player, 1) (every selected live unit of type 5 or 13); click: TerrainEstGc -> tag 7 at 0x42b486 (BX = cell), otherwise tag 0x12.",
+  "view_for_nearest_field": {
+   "view_origin": [
+    10,
+    16
+   ],
+   "target_pixel": [
+    528,
+    528
+   ],
+   "minimap_move_press_pixel": [
+    53,
+    64
+   ],
+   "companion_also_on_screen": true,
+   "companion_pixel": [
+    144,
+    16
+   ],
+   "minimap_press_pixel": [
+    46,
+    49
+   ],
+   "label": "S"
+  },
+  "field_cells": 122,
+  "field_cells_on_screen": 0,
+  "field_cells_discovered": 0,
+  "nearest_fields": [
+   {
+    "cell": 8218,
+    "xy": [
+     26,
+     32
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 31,
+    "stage_label": "B",
+    "chebyshev_to_reference": 16
+   },
+   {
+    "cell": 8219,
+    "xy": [
+     27,
+     32
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 33,
+    "stage_label": "B",
+    "chebyshev_to_reference": 16
+   },
+   {
+    "cell": 8220,
+    "xy": [
+     28,
+     32
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 30,
+    "stage_label": "B",
+    "chebyshev_to_reference": 16
+   },
+   {
+    "cell": 8467,
+    "xy": [
+     19,
+     33
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 35,
+    "stage_label": "B",
+    "chebyshev_to_reference": 17
+   },
+   {
+    "cell": 8469,
+    "xy": [
+     21,
+     33
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 44,
+    "stage_label": "B",
+    "chebyshev_to_reference": 17
+   },
+   {
+    "cell": 8471,
+    "xy": [
+     23,
+     33
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 34,
+    "stage_label": "B",
+    "chebyshev_to_reference": 17
+   },
+   {
+    "cell": 8472,
+    "xy": [
+     24,
+     33
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 29,
+    "stage_label": "B",
+    "chebyshev_to_reference": 17
+   },
+   {
+    "cell": 8473,
+    "xy": [
+     25,
+     33
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 30,
+    "stage_label": "B",
+    "chebyshev_to_reference": 17
+   },
+   {
+    "cell": 8474,
+    "xy": [
+     26,
+     33
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 36,
+    "stage_label": "B",
+    "chebyshev_to_reference": 17
+   },
+   {
+    "cell": 8475,
+    "xy": [
+     27,
+     33
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 41,
+    "stage_label": "B",
+    "chebyshev_to_reference": 17
+   },
+   {
+    "cell": 8722,
+    "xy": [
+     18,
+     34
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 35,
+    "stage_label": "B",
+    "chebyshev_to_reference": 18
+   },
+   {
+    "cell": 8723,
+    "xy": [
+     19,
+     34
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 37,
+    "stage_label": "B",
+    "chebyshev_to_reference": 18
+   }
+  ],
+  "sacks": [
+   {
+    "cell": 1078,
+    "xy": [
+     54,
+     4
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 66,
+    "sac_type": 0,
+    "quantity": 5,
+    "chebyshev_to_reference": 40
+   },
+   {
+    "cell": 2076,
+    "xy": [
+     28,
+     8
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 23,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 66,
+    "sac_type": 0,
+    "quantity": 5,
+    "chebyshev_to_reference": 14
+   },
+   {
+    "cell": 3370,
+    "xy": [
+     42,
+     13
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 67,
+    "sac_type": 1,
+    "quantity": 6,
+    "chebyshev_to_reference": 28
+   },
+   {
+    "cell": 5385,
+    "xy": [
+     9,
+     21
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 67,
+    "sac_type": 1,
+    "quantity": 13,
+    "chebyshev_to_reference": 5
+   },
+   {
+    "cell": 5641,
+    "xy": [
+     9,
+     22
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 67,
+    "sac_type": 1,
+    "quantity": 2,
+    "chebyshev_to_reference": 6
+   },
+   {
+    "cell": 5642,
+    "xy": [
+     10,
+     22
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 0,
+    "caseEstDecouverte": true,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 67,
+    "sac_type": 1,
+    "quantity": 14,
+    "chebyshev_to_reference": 6
+   },
+   {
+    "cell": 7960,
+    "xy": [
+     24,
+     31
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 67,
+    "sac_type": 1,
+    "quantity": 4,
+    "chebyshev_to_reference": 15
+   },
+   {
+    "cell": 8215,
+    "xy": [
+     23,
+     32
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 67,
+    "sac_type": 1,
+    "quantity": 12,
+    "chebyshev_to_reference": 16
+   },
+   {
+    "cell": 11039,
+    "xy": [
+     31,
+     43
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 66,
+    "sac_type": 0,
+    "quantity": 3,
+    "chebyshev_to_reference": 27
+   },
+   {
+    "cell": 11575,
+    "xy": [
+     55,
+     45
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 66,
+    "sac_type": 0,
+    "quantity": 3,
+    "chebyshev_to_reference": 41
+   },
+   {
+    "cell": 12304,
+    "xy": [
+     16,
+     48
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 67,
+    "sac_type": 1,
+    "quantity": 14,
+    "chebyshev_to_reference": 32
+   },
+   {
+    "cell": 14376,
+    "xy": [
+     40,
+     56
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 67,
+    "sac_type": 1,
+    "quantity": 12,
+    "chebyshev_to_reference": 40
+   },
+   {
+    "cell": 14903,
+    "xy": [
+     55,
+     58
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 66,
+    "sac_type": 0,
+    "quantity": 4,
+    "chebyshev_to_reference": 42
+   },
+   {
+    "cell": 15638,
+    "xy": [
+     22,
+     61
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 66,
+    "sac_type": 0,
+    "quantity": 3,
+    "chebyshev_to_reference": 45
+   },
+   {
+    "cell": 15873,
+    "xy": [
+     1,
+     62
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 66,
+    "sac_type": 0,
+    "quantity": 1,
+    "chebyshev_to_reference": 46
+   },
+   {
+    "cell": 15882,
+    "xy": [
+     10,
+     62
+    ],
+    "cell_label": "B",
+    "discovery_byte_player0": 31,
+    "caseEstDecouverte": false,
+    "pixel": null,
+    "pixel_label": "S",
+    "on_screen": false,
+    "object": 67,
+    "sac_type": 1,
+    "quantity": 4,
+    "chebyshev_to_reference": 46
+   }
+  ],
+  "bush_cells": [
+   9238,
+   11779,
+   15138
+  ]
+ },
+ "stone": {
+  "rule": "B encoding: InputGame 0x42b4b5: TerrainEstMine (tile 0x251/0x252/0x255/0x256), a stone sack (TerrainGetSacType 2) or a hovered CAVE, and EnginTravailSelectionne(player, 2) (every selected live unit of type 7); click: TerrainEstSac -> tag 0x12, otherwise tag 6 via 0x42ad8e.",
+  "view_for_first_mine_cell": {
+   "view_origin": [
+    31,
+    0
+   ],
+   "target_pixel": [
+    400,
+    272
+   ],
+   "minimap_move_press_pixel": [
+    86,
+    17
+   ],
+   "companion_also_on_screen": false,
+   "companion_pixel": null,
+   "minimap_press_pixel": [
+    87,
+    18
+   ],
+   "label": "S"
+  },
+  "mines": [
+   {
+    "index": 0,
+    "origin": 2091,
+    "origin_xy": [
+     43,
+     8
+    ],
+    "reserve": 50,
+    "label": "B",
+    "cells_mineGetIndice": [
+     2091,
+     2092,
+     2347,
+     2348
+    ],
+    "clickable_cells_terrainEstMine": [
+     {
+      "cell": 2091,
+      "xy": [
+       43,
+       8
+      ],
+      "cell_label": "B",
+      "discovery_byte_player0": 31,
+      "caseEstDecouverte": false,
+      "pixel": null,
+      "pixel_label": "S",
+      "on_screen": false,
+      "tile": "0x251"
+     },
+     {
+      "cell": 2092,
+      "xy": [
+       44,
+       8
+      ],
+      "cell_label": "B",
+      "discovery_byte_player0": 31,
+      "caseEstDecouverte": false,
+      "pixel": null,
+      "pixel_label": "S",
+      "on_screen": false,
+      "tile": "0x252"
+     }
+    ]
+   },
+   {
+    "index": 1,
+    "origin": 15110,
+    "origin_xy": [
+     6,
+     59
+    ],
+    "reserve": 200,
+    "label": "B",
+    "cells_mineGetIndice": [
+     15110,
+     15111,
+     15366,
+     15367
+    ],
+    "clickable_cells_terrainEstMine": [
+     {
+      "cell": 15110,
+      "xy": [
+       6,
+       59
+      ],
+      "cell_label": "B",
+      "discovery_byte_player0": 31,
+      "caseEstDecouverte": false,
+      "pixel": null,
+      "pixel_label": "S",
+      "on_screen": false,
+      "tile": "0x251"
+     },
+     {
+      "cell": 15111,
+      "xy": [
+       7,
+       59
+      ],
+      "cell_label": "B",
+      "discovery_byte_player0": 31,
+      "caseEstDecouverte": false,
+      "pixel": null,
+      "pixel_label": "S",
+      "on_screen": false,
+      "tile": "0x252"
+     }
+    ]
+   }
+  ],
+  "terrainEstMine_cells": [
+   2091,
+   2092,
+   15110,
+   15111
+  ],
+  "stone_sacks": []
+ },
+ "undiscovered_cell_gate": {
+  "label": "B encoding and frame-128 bytes; S reachability",
+  "rule": "InputGame 0x4298d9: a playfield click on a cell with CaseEstDecouverte(cell, local) == 0 (discovery & 0x10 set) skips the sack/field/mine classification unless 0x4e05ae is 5 or 0xd or u8 0x496208 is 0; with troops selected and 0x4e05ae == 0 it issues tag 5 (move) to that cell (0x429973 -> 0x42aecf).",
+  "frame128_0x496208": 255,
+  "frame128_0x4e05ae": 0,
+  "consequence": "S: every field cell and both mine cells are undiscovered for player 0 at frame 128, so a click on them moves the selected units instead of ordering a harvest or a mine; the units must first reveal the target cell."
+ },
+ "minimap": {
+  "label": "B encoding (InputGame 0x42bade, MiniMapGetCenterSelect 0x46a273, MiniMapGetCase 0x46a224), S use",
+  "rect": [
+   0,
+   0,
+   128,
+   128
+  ],
+  "press_rule": "u8 0x5099ae set (a WM_LBUTTONDOWN; no release needed) with MouseZone 10: troops selected -> tag 5 move to MiniMapGetCase(X-mmx, Y-mmy); nothing selected -> view origin := MiniMapGetCenterSelect(X-mmx, Y-mmy). Right button (0x5099b1) locks/drags the minimap.",
+  "center_formula": "vx = (mx - (vw*mmw/mapw)/2) * mapw / mmw, vy likewise (C division), clamped to [0, map - viewport]; with 128x128 minimap, 64x64 map, 25x17 view: vx = (mx-25)/2, vy = (my-17)/2"
+ },
+ "input_semantics": {
+  "label": "B encoding, S ordering within a frame",
+  "wndproc": "0x200 -> u16 0x5099a8 = LOWORD(lParam), 0x5099aa = HIWORD; 0x201 -> 0x5099ae = 1; 0x202 -> 0x5099af = 1; 0x203 (double click) -> 0x5099b0 = 1 if Y < vh*32 else 0x5099ae = 1; 0x204 -> 0x5099b1 = 1; 0x205 -> 0x5099b2 = 1",
+  "clear": "ProgIteration 0x475068: after AffGame, if 0x5099af then 0x5099af = 0x5099ae = 0",
+  "click_test": "the icon, build-site, harvest and mine clicks test 0x5099ae && 0x5099af in one InputGame pass; with DOWN at k+1 and UP at k+3 both are set from k+3 until the clear",
+  "cursor": "ProgIteration stores u16 0x5099aa before CalculGame (0x475058), so the GetCursorPos answer must hold the point while the click is tested",
+  "deselect": "InputGame 0x4295a1: u8 0x5099b1 (WM_RBUTTONDOWN) with MouseZone != 11 -> DeSelectionGroupe, BatimentDeselectionner, 0x4e05ae := 0, 0x496207 := 0xff"
+ },
+ "m1_vs_frame128": [
+  {
+   "item": "view",
+   "m1": {
+    "origin": [
+     4,
+     6
+    ],
+    "size": [
+     0,
+     0
+    ],
+    "screen": [
+     0,
+     0
+    ],
+    "panel_offset": 0
+   },
+   "frame128": {
+    "origin": [
+     0,
+     0
+    ],
+    "size": [
+     25,
+     17
+    ],
+    "screen": [
+     800,
+     600
+    ],
+    "panel_offset": 0
+   }
+  },
+  {
+   "item": "mouse_zones",
+   "m1": {
+    "0": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "1": [
+     402,
+     486,
+     480,
+     547
+    ],
+    "2": [
+     506,
+     473,
+     579,
+     555
+    ],
+    "3": [
+     620,
+     471,
+     691,
+     564
+    ],
+    "4": [
+     0,
+     0,
+     0,
+     1
+    ],
+    "5": [
+     290,
+     512,
+     334,
+     540
+    ],
+    "6": [
+     270,
+     162,
+     289,
+     182
+    ],
+    "7": [
+     299,
+     162,
+     321,
+     182
+    ],
+    "8": [
+     66,
+     45,
+     126,
+     87
+    ]
+   },
+   "frame128": {
+    "0": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "1": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "2": [
+     2,
+     0,
+     797,
+     1
+    ],
+    "3": [
+     798,
+     0,
+     799,
+     1
+    ],
+    "4": [
+     798,
+     2,
+     799,
+     597
+    ],
+    "5": [
+     798,
+     598,
+     799,
+     599
+    ],
+    "6": [
+     2,
+     598,
+     797,
+     599
+    ],
+    "7": [
+     0,
+     598,
+     1,
+     599
+    ],
+    "8": [
+     0,
+     2,
+     2,
+     597
+    ],
+    "9": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "10": [
+     0,
+     0,
+     128,
+     128
+    ],
+    "11": [
+     0,
+     544,
+     800,
+     600
+    ],
+    "12": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "13": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "14": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "15": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "16": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "17": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "18": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "19": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "20": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "21": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "22": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "23": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "24": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "25": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "26": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "27": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "28": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "29": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "30": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "31": [
+     0,
+     0,
+     1,
+     1
+    ]
+   }
+  },
+  {
+   "item": "object grid cells changed",
+   "cells": [
+    8722,
+    8727,
+    8729,
+    9232,
+    9489,
+    9497,
+    11777,
+    12033,
+    12034,
+    14880,
+    15390
+   ]
+  }
+ ],
+ "open_questions": [
+  {
+   "question": "whether the CAVE icon sets 0x496207 to 3, and its screen rectangle",
+   "status": "narrowed",
+   "static": "unit 12 bag at frame 128: [(1, 3), (2, 3), (3, 3), (4, 3)] (type, code), scroll 0; CAVE = slot 2, rect [151, 548, 209, 598], centre [180, 573] [B]. Code-3 click stores 0x4e05ae = 3 and 0x496207 = BagGetType = 3 after TestRessource(10, 6, 0) [B encoding], which passes at 30/30 [S].",
+   "remains": "that the press reaches 0x42c1f5 with exactly one unit selected and 0x5099ae/0x5099af both set (P3)"
+  },
+  {
+   "question": "the cave cost, and therefore the real food/stone targets",
+   "status": "narrowed",
+   "static": "cost food 10, stone 6, parts 0 [B]; CreerBatiment tests the same words and charges EnleveMatiere(1, food), EnleveMatiere(2, stone) [B encoding]; after paying 20/24, so 30 food and 26 stone to gather [S].",
+   "remains": "any other expense or income before victory"
+  },
+  {
+   "question": "placement validity and zone 0's extent",
+   "status": "zone settled from bytes; placement narrowed",
+   "static": "zone 0 = record [0, 0, 28, 25] (754 cells) [B]; sanctuary BatimentGetCase [14, 12] is in zone 0 [S]. BatimentPosable without EnginOccupeCase: {'valid': 112, 'invalid': 3897, 'needs_EnginOccupeCase': 87} over the map; 112 valid with the cave's BatimentGetCase in zone 0; proposed click [21, 12] -> footprint [[19, 10], [23, 14]], BatimentGetCase [20, 10] [S].",
+   "remains": "the builder reaching the cell, BatimentConstructible at build time (its own cell needs EnginOccupeCase), and any discovery/collision change before the click"
+  },
+  {
+   "question": "whether a cave under construction already passes record 0 (BatimentExiste + type)",
+   "status": "narrowed",
+   "static": "CreerBatiment stores state +5 = 2 and type +8 at once but owner +4 = 0xc8 for type 3 [B encoding]; record 0 requires owner == player 0 [B, fim_missao]; the only store found that turns a 0xc8 owner into a player is BatimentLogeEngin 0x41fa77, followed by BatimentHabitable [B encoding, scan not exhaustive]. So a freshly created cave should fail record 0 until a unit lodges in it [S].",
+   "remains": "which event lodges a unit in the new cave, and when (P3/S1)"
+  },
+  {
+   "question": "which unit type mines stone, and whether colonists must leave the sanctuary",
+   "status": "narrowed",
+   "static": "EnginTravailSelectionne 0x47248f requires every selected live unit to be type 7 for resource 2 (stone), type 5 or 13 for resource 1 (food), type 6 for resource 0 [B encoding]. MONDE01 has one type 7 (unit 12, the builder); units 13/14 are type 5; units 11 (type 1), 15 (type 8) and the colonists (type 9) cannot take these orders through this UI path [S].",
+   "remains": "that the mine cycle credits stone to the player totals (P5)"
+  },
+  {
+   "question": "the tag-8 producer",
+   "status": "narrowed",
+   "static": "InputGame 0x429d61/0x429d7a (mode-9 table 0x42923c, entry 0x4e05b0 == 2: the first resource press was a sack). Mode 9 is stored only on branches that test mode 8 (0x42ad08, 0x42b3d5, 0x42b55d, 0x42b6f1), and the only store of 8 to 0x4e05ae found is 0x429629, reached while GetAsyncKeyState(VK_CONTROL) < 0 [B encoding]. Without keys S1 issues tag 7 (field) or tag 6 (mine) directly [S].",
+   "remains": "whether a deposit order is needed at all (CalculWorkEngin/CalculTransporteEngin behaviour)"
+  },
+  {
+   "question": "whether TestRessource reads player totals only",
+   "status": "settled as an encoding",
+   "static": "TestRessource 0x4676e5 compares AX <= u16 [0x4e2eb2+32p], DX <= [0x4e2eba+32p], BX <= [0x4e2eaa+32p] (player record 0x4e2ea8+32p: +0xa food, +0x12 stone, +2 parts) and reads nothing else [B].",
+   "remains": "how harvested goods reach those totals"
+  },
+  {
+   "question": "whether victory comes before frame 9000",
+   "status": "open",
+   "static": "targets are far: the nearest field [26, 32] is 16 cells from unit 13, mine 0 at [43, 8] (reserve 50) is outside the start view, and every field and mine cell is undiscovered for player 0 at frame 128 [B]; no timing follows statically.",
+   "remains": "S1"
+  }
+ ]
+}

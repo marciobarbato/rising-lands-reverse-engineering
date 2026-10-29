@@ -1,0 +1,49 @@
+{
+ "comandos.jsonl": {
+  "equal": true,
+  "lines": [
+   26,
+   26
+  ],
+  "sha256": "04709cd7db4632af93427c81cf8f1247f53d4b088f1b8c360e23aa7a8173b584"
+ },
+ "entradas.jsonl": {
+  "equal": true,
+  "lines": [
+   53099,
+   53099
+  ],
+  "sha256": "1552e1a31240da394b073a875fc7e968947e6ae3e0aae6c5a39d55d74392f60f"
+ },
+ "equal": true,
+ "fronteiras.jsonl": {
+  "equal": true,
+  "lines": [
+   10886,
+   10886
+  ],
+  "sha256": "8e7032247e7f2b60ef9ceaade378a8963ae58157bc15e2459a71de847d2c3b0d"
+ },
+ "quadros.jsonl": {
+  "equal": true,
+  "lines": [
+   3572,
+   3572
+  ],
+  "sha256": "1999329afa34bf661cd9e26fe60d6fd55bcad36da4964eb729cf740af50a9ff7"
+ },
+ "runs": [
+  {
+   "frames": 3572,
+   "input_sha256": "914758b0446d561ec590bc5ab854adb95692e58626709ed2d56ac6107aa51590",
+   "seconds": 1957.9,
+   "status": "completed"
+  },
+  {
+   "frames": 3572,
+   "input_sha256": "914758b0446d561ec590bc5ab854adb95692e58626709ed2d56ac6107aa51590",
+   "seconds": 1942.2,
+   "status": "completed"
+  }
+ ]
+}
