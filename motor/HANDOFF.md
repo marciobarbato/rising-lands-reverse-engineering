@@ -85,3 +85,22 @@ now raise ProjectionFieldMismatch instead of silently publishing stale template
 bytes. All 16 Rust and 16 Python tests, 75 original-call comparisons, formatting,
 strict lint, header layout and Swift client pass again from latest main plus
 that committed fix. Earlier v1 reports remain historical and unchanged.
+
+## Final latest-main refresh
+
+The coordinator advanced main to `3579c40ad455564f2a9b32c9a01b815b24d68f87`
+with Core native-hook tooling. It was merged cleanly into the engine feature
+at `668571f9b065ac4fa579ef53ed0384261e89a723`. Engine sources remain exactly
+`550b4f26d3c087e10d8258ed00ec95ec96cf982e`; the eight reference/capture pins
+and generated dylib hash are unchanged. This carries upstream Core commits
+without editing any Core file in this workstream.
+
+The full `./motor/validate.sh` was rerun from that committed merged checkout:
+**16 Rust tests, 16 Python tests, 75 original captured records, zero failures/
+skips/mismatches**, plus rustfmt, strict Clippy, C header layout and the actual
+Swift client. The clock/projection/source scopes remain unchanged. Current
+[summary](validation/pilot-latest-main-summary.json),
+[75-record comparison](validation/pilot-latest-main-differential.json) and
+[full log](validation/pilot-latest-main-validation.log) supersede the earlier
+reports only for delivery-baseline identification; historical results remain
+preserved. The final metadata commit does not modify executable code.
