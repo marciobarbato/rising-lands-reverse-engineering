@@ -354,3 +354,24 @@ byte and defined return, and compares the entire fixture against Python.
 Only the full-phase proof establishes whole original mission-state equality.
 See [frame audit](../motor/research/FRAME_AUDIT.md) and the current stage
 [handoff](../motor/HANDOFF.md) for actual results, limits and evidence.
+
+### Proven migration window and performance
+
+[Stage 2a](../motor/validation/stage2a-frame-proof.json) proves frame 0/1 in all
+three phases: 16,097,242 compared bytes each, zero mismatches.
+[Stage 2b](../motor/validation/stage2b-128-frame-proof.json) extends the same
+engine code to 128 frames and **257/257 equal phases**, each comparing
+**16,022,275 bytes with zero mismatches** under the unchanged cumulative mask
+(153,060 display bytes). RNGs, external observations, registers and all 25,482
+allocation records are equal. These are native-port evidence results; project
+acceptance remains the coordinator's decision.
+
+The release phase chain runs at **119.83 frames/s** on this Apple M4 Pro
+MacBook (24 GiB), under an exclusive heavy lease: 1.0682 seconds of Rust
+execution for 128 frames. This includes private state projection/reload and
+between-frame effects; it excludes exported snapshots, Python comparison and
+rendering. The task's ~0.5 s/frame Python baseline was not freshly rerun.
+Full validation and remaining common-check prerequisites are in the
+[stage handoff](../motor/HANDOFF.md) and
+[summary](../motor/validation/stage2b-summary.json). App/rendering contracts and
+support beyond the bounded window remain open.

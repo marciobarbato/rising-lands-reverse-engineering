@@ -232,3 +232,54 @@ frame smoke pass. The requested common checker log is preserved losslessly as
 fixture failures,651 optional skips; Graphics not run for missing linked
 inputs. A prepared coordinator checkout must rerun that gate. No main merge
 or acceptance was recorded.
+
+## Stage 2b — 128-frame release proof (2026-10-29)
+
+Stage 2a was pushed at `9ff8aef` before this run began. No engine code changed
+for stage 2b: implementation remains `8a46430`. From clean committed `9ff8aef`,
+the release library passes [all 257 phases](validation/stage2b-128-frame-proof.json)
+(load_tail plus 128 between/frame pairs), with **16,022,275 compared bytes per
+phase and zero mismatches**. The exact cumulative policy masks 153,060 display
+bytes in 4,948 ranges; its 999 observed logic-changing bytes stay compared.
+There is no first divergence, dependency stop or crossing. All 257 replay
+summaries and recorded full-state checkpoints, immutable original tables,
+RNGs, bindings/boundaries outside display, eight between-frame registers,
+carried registers, virtual clock increments and event corruption rejection
+checks pass. All 25,482 allocation records equal the accepted reference,
+including 146 actual freed-byte hashes. Original identities are unchanged.
+
+**Performance:** Apple M4 Pro, 24 GiB, 12 logical CPUs, macOS 27.0.1; aarch64
+Rust release with overflow checks, exclusive heavy lease over slots 0–5.
+Native phase execution totals **1.068210955 seconds for 128 frames:
+119.83 frames/s**, about 8.35 ms/frame. This includes startup/frame 0,
+between-frame effects, private projection transactions and semantic reload.
+It excludes exported snapshots, Python replay/comparison, rendering and app
+pacing. The full proof takes 36.71 seconds including oracle checks. The task's
+Python baseline (~0.5 s/frame, ~2 fps) was not rerun; the native phase rate is
+approximately 60 times that reported baseline, with different measurement scope.
+
+[Release validation log](validation/stage2b-release-validation.log) records
+39/39 Python tests against the release dylib and
+[75/75 pilot capture records](validation/stage2b-release-pilot.json), with zero
+mismatches/skips. The earlier 21 Rust tests, fmt/strict Clippy, C layouts and
+Swift 1.1 frame smoke remain valid because engine sources are unchanged.
+[Stage 2b summary](validation/stage2b-summary.json) records source/library/report
+hashes and timing scope.
+
+The common checker still requires the prepared media/Graphics/Unicorn setup
+described in stage 2a. No fresh original emulation or full 128-frame Python
+composition was run. No Mac mini run is needed to finish the Rust evidence
+proof; coordinator common-gate reproduction in a prepared checkout remains,
+and any fresh long Python/original run should use the Mac mini. All named
+unported branches listed above remain explicit stops. This is logic-only
+workstream delivery; project acceptance and playable-app integration are separate.
+
+Reproduce under the heavy lease (use exclusive mode for comparable timing):
+
+```sh
+cargo build --manifest-path motor/Cargo.toml --workspace --locked --release
+python3 -B motor/testes/frame_differential.py --m22 --frames 128 \
+  --library motor/target/release/librising_engine.dylib \
+  --executable '/path/to/cd/INSTALHD/RISING.EXE' \
+  --output .local/engine-128-new.json
+```
