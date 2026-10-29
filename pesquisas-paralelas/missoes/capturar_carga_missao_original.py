@@ -79,8 +79,8 @@ def main():
                            'pesquisas-paralelas/missoes'], capture_output=True, text=True).stdout
     nomes = ('oraculo_carga_missao.py', 'fronteiras_carga_missao.py', 'capturar_carga_missao_original.py')
     if a.cenario != 'v1':
-        nomes += ('oraculo_quadro_missao.py', 'oraculo_exibicao_missao.py', 'exibicao_declarada.py',
-                  'cenarios_oraculo.py')
+        nomes += ('oraculo_quadro_missao.py', 'oraculo_exibicao_missao.py', 'cenarios_oraculo.py',
+                  '../graficos-animacao/fronteiras_exibicao.py')
     fontes = {n: hashlib.sha256((ambiente_missoes.OWNED/n).read_bytes()).hexdigest() for n in nomes}
     if a.cenario == 'v1':
         e = entradas(a.preenchimento, a.relogio)
@@ -158,7 +158,7 @@ def main():
                               blocks=b.serializar({n: v for n, v in post.items() if pre.get(n) != v}))))
         if hasattr(b, 'estado_exibicao'):
             relatorio['display_state'] = b.estado_exibicao()
-            relatorio['directdraw_calls'] = b.directdraw.chamadas
+            relatorio['directdraw_calls'] = b.chamadas_exibicao()
         relatorio['code_integrity'] = dict(exe_code_sha256=b.sha256_codigo_exe, before=b.sha256_codigo_inicial,
                                            after=b.sha256_codigo(), protection='BEGTEXT R|X; headers/.reloc/.rsrc R; '
                                            'DGROUP/.bss/.idata RW; 0x52e000..0x600000 no access; stack/arena RW no exec')

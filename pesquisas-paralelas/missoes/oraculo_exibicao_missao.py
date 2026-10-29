@@ -4,9 +4,11 @@ Same phases and checks as ``oraculo_quadro_missao``, but the original display
 code is *executed* instead of skipped: AffInit/DDInit, LoadPalette,
 DDSetPalette, DDLockSurface/DDUnlockSurface, DDFlipPage, FilledBox,
 ResetMode, the bank loaders (LoadSTRATBank, SetBank, LoadBank, DeleteBank),
-RestoreAll and AffGame.  DirectDraw is the declared backend of
-``exibicao_declarada`` (DirectDrawCreate import plus COM vtables).  Still not
-executed, each a declared boundary with recorded arguments:
+RestoreAll and AffGame.  DirectDraw is Graphics' integrated declared backend
+``fronteiras_exibicao.ExibicaoDeclarada`` (DirectDrawCreate and MessageBeep
+imports plus COM vtables), installed after the bench's own imports so every
+earlier trampoline keeps its address; its surfaces live at 0x60000000.  Still
+not executed, each a declared boundary with recorded arguments:
 
 * text resources (InitTextLangue, TextGetMessage, AffText): TEXTES.TXT is read
   with CRT ``fgets`` 0x48ce96, which is not an inventoried I/O boundary;
@@ -26,7 +28,7 @@ import struct
 import ambiente_missoes
 from emulador import unicorn, x86
 from vinculos_declarados import ParadaVinculoDeclarado
-from exibicao_declarada import DirectDrawDeclarado, REGIAO_COM
+from fronteiras_exibicao import ExibicaoDeclarada
 from oraculo_carga_missao import MISSION_LOAD, RETORNO_MISSION_LOAD
 from oraculo_quadro_missao import (BancadaQuadroMissaoOriginal, CALCUL_GAME, RETORNO_CALCUL_GAME, SAIDA_LACO,
                                    WindowsQuadro)
@@ -61,6 +63,7 @@ FRONTEIRAS_EXIBICAO = {
 }
 
 
+BASE_COM, BASE_SUPERFICIES, TAMANHO_SUPERFICIES = 0x3600000, 0x60000000, 0x200000
 NUNCA_EXECUTADOS = ('AppWindowInit', 'DisableIME', 'PlaySnd_InitSoundLib', 'MCICD_Init', 'WndProc')
 
 
@@ -112,7 +115,8 @@ class BancadaExibicaoOriginal(BancadaQuadroMissaoOriginal):
                          fronteiras=fronteiras or FRONTEIRAS_EXIBICAO, **kw)
         # Base protection makes every high region RW without execute; the COM
         # trampolines must stay fetchable (they stop at their hooks).
-        self.cpu.mem_protect(REGIAO_COM, 0x10000, unicorn.UC_PROT_READ | unicorn.UC_PROT_EXEC)
+        inicio, fim = self.directdraw.regiao_executavel
+        self.cpu.mem_protect(inicio, fim-inicio, unicorn.UC_PROT_READ | unicorn.UC_PROT_EXEC)
         self.cpu.hook_add(unicorn.UC_HOOK_CODE, self._parar_se_pedido, begin=SAIDA_LACO, end=SAIDA_LACO)
 
     def _nao_executados(self):
@@ -126,22 +130,24 @@ class BancadaExibicaoOriginal(BancadaQuadroMissaoOriginal):
     def _criar_windows(self, entradas):
         return WindowsExibicao(entradas, self.entradas_quadro, self.entradas_exibicao.ticks)
 
-    def _importacoes_extras(self):
-        self.directdraw = DirectDrawDeclarado(self, preenchimento_superficie=
-                                              self.entradas_exibicao.preenchimento_superficie)
-        return tuple(super()._importacoes_extras()) + (
-            (0x5234c4, 'DDRAW.DirectDrawCreate', 3, self.directdraw.criar),)
+    def _declarar(self):
+        super()._declarar()
+        # After every bench import: earlier trampolines keep their addresses.
+        self.directdraw = ExibicaoDeclarada(base=BASE_COM, base_superficies=BASE_SUPERFICIES,
+                                            tamanho_superficies=TAMANHO_SUPERFICIES).instalar(self)
+        # Declared initial surface bytes (DirectDraw leaves them undefined).
+        self.cpu.mem_write(BASE_SUPERFICIES, bytes([self.entradas_exibicao.preenchimento_superficie])*TAMANHO_SUPERFICIES)
+
+    def chamadas_exibicao(self):
+        return self.directdraw.eventos
 
     def estado_exibicao(self):
         """Declared display state (surfaces, COM objects): output, not game state."""
         import hashlib
-        saida = {}
-        for p, o in self.directdraw.objetos.items():
-            if o['interface'] == 'IDirectDrawSurface':
-                pixels = bytes(self.cpu.mem_read(o['pixels'], o['largura']*o['altura']))
-                saida[o['papel']] = dict(object=hex(p), pixels=hex(o['pixels']), width=o['largura'],
-                                         height=o['altura'], sha256=hashlib.sha256(pixels).hexdigest())
-        return dict(surfaces=saida, directdraw=self.directdraw.resumo())
+        m = self.directdraw.manifesto()
+        for s in m['surfaces']:
+            s['sha256'] = hashlib.sha256(self.directdraw.pixels(s['role'])).hexdigest()
+        return m
 
     # ------------------------------------------------------------ phases
     def executar_inicio(self):

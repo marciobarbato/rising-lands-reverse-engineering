@@ -3,11 +3,12 @@
 ``v1``: the accepted M1/frame-1 bench (display, text, audio and video skipped;
 frames 0/1 with a declared ProgIteration caller frame).
 
-``exibicao`` (display executed): the real _WinMain@16 loop from AppInit on,
-with AffInit/DDInit, the bank loaders, RestoreAll, menu and game AffGame run
-natively over the declared DirectDraw backend; text, LoadPie pictures, video,
-credits and audio stay declared boundaries.  Its artifacts never replace v1
-files.  Importing this module executes nothing.
+``exibicao`` (display executed, the M2 reference): the real _WinMain@16 loop
+from AppInit on, with AffInit/DDInit, the bank loaders, RestoreAll, menu and
+game AffGame run natively over Graphics' declared DirectDraw backend; text,
+LoadPie pictures, video, credits and audio stay declared boundaries.  Its
+artifacts never replace v1 files.  ``exibicao_interino`` names the Stage17
+artifacts made with the retired interim backend.  Importing this module executes nothing.
 """
 import ambiente_missoes
 
@@ -21,7 +22,8 @@ PROVENIENCIA_EXIBICAO = dict(
     ia_random_clock='the IaAlloc iaRandom(0) call keeps the accepted M1 clock value, so the game RNG seed '
                     'equals the v1 scenario',
     surface_fill='declared initial byte 0 of DirectDraw surfaces (contents undefined by DirectDraw)',
-    directdraw='declared backend exibicao_declarada (interim, Graphics owns the final one)',
+    directdraw='Graphics declared backend fronteiras_exibicao.ExibicaoDeclarada (objects at 0x3600000, surfaces at '
+               '0x60000000), installed after the bench imports',
     window='no window was created (AppWindowInit is not executed): hwnd arguments are the values the '
            'program holds (0)')
 
@@ -30,10 +32,16 @@ ARTEFATOS = {
                captura_m1='evidencias/captura-carga-missao-original-v2.json',
                captura_quadro='evidencias/captura-quadro1-monde01-original.json',
                rastro_quadro='evidencias/rastro-quadro1-monde01.json'),
-    'exibicao': dict(entrada='evidencias/entrada-carga-missao-exibicao.json',
-                     captura_m1='evidencias/captura-carga-missao-exibicao.json',
-                     captura_quadro='evidencias/captura-quadro1-monde01-exibicao.json',
-                     rastro_quadro='evidencias/rastro-quadro1-monde01-exibicao.json'),
+    # Stage17 display artifacts, made with the retired interim backend (historical, not rerunnable here).
+    'exibicao_interino': dict(entrada='evidencias/entrada-carga-missao-exibicao.json',
+                              captura_m1='evidencias/captura-carga-missao-exibicao.json',
+                              captura_quadro='evidencias/captura-quadro1-monde01-exibicao.json',
+                              rastro_quadro='evidencias/rastro-quadro1-monde01-exibicao.json'),
+    # M2 reference: display scenario over Graphics' declared backend.
+    'exibicao': dict(entrada='evidencias/entrada-carga-missao-exibicao-v2.json',
+                     captura_m1='evidencias/captura-carga-missao-exibicao-v2.json',
+                     captura_quadro='evidencias/captura-quadro1-monde01-exibicao-v2.json',
+                     rastro_quadro='evidencias/rastro-quadro1-monde01-exibicao-v2.json'),
 }
 
 
