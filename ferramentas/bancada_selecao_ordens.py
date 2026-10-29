@@ -38,18 +38,21 @@ FASE_FOLHA = 'frame1'
 
 class Folhas:
     """Recorder of one native leaf call; hooks exist only while a case runs."""
-    def __init__(self, b, regioes, pilha):
-        self.b, self.regioes, self.pilha = b, regioes, pilha
+    def __init__(self, b, regioes, pilha, leituras=False):
+        self.b, self.regioes, self.pilha, self.ler = b, regioes, pilha, leituras
         self.simbolos = set(b.nomes)
 
     def armar(self, esp_inicial):
         import unicorn
         cpu = self.b.cpu
         self.escritas, self.chamadas, self.abertas, self.ultimo = [], [], [], None
+        self.lidos, self.escritos = {}, set()
         self.esp_inicial = esp_inicial
         g = [cpu.hook_add(unicorn.UC_HOOK_BLOCK, self._bloco, begin=CODIGO[0], end=CODIGO[1] - 1)]
         for inicio, fim in self.regioes:
             g.append(cpu.hook_add(unicorn.UC_HOOK_MEM_WRITE, self._escrever, begin=inicio, end=fim - 1))
+            if self.ler:
+                g.append(cpu.hook_add(unicorn.UC_HOOK_MEM_READ, self._ler, begin=inicio, end=fim - 1))
         cpu.ctl_flush_tb()
         return g
 
@@ -73,9 +76,29 @@ class Folhas:
         self.chamadas.append([len(self.abertas) - 1, self.b.nomes[endereco],
                               {k: hex(r[k]) for k in ('EAX', 'EDX', 'EBX', 'ECX')}, self.b.nome(retorno), None])
 
+    def _ler(self, cpu, acesso, endereco, tamanho, valor, _):
+        if self.pilha[0] <= endereco < self.pilha[1]:
+            return
+        dados = bytes(cpu.mem_read(endereco, tamanho))
+        for i in range(tamanho):
+            a = endereco + i
+            if a not in self.escritos and a not in self.lidos:
+                self.lidos[a] = dados[i]
+
+    def leituras_em_runs(self):
+        """Bytes read before written (stack excluded) as [[start, hex bytes], ...] runs of consecutive addresses."""
+        runs = []
+        for a in sorted(self.lidos):
+            if runs and runs[-1][0] + len(runs[-1][1]) // 2 == a:
+                runs[-1][1] += f'{self.lidos[a]:02x}'
+            else:
+                runs.append([a, f'{self.lidos[a]:02x}'])
+        return [[hex(a), v] for a, v in runs]
+
     def _escrever(self, cpu, acesso, endereco, tamanho, valor, _):
         if self.pilha[0] <= endereco < self.pilha[1]:
             return
+        self.escritos.update(range(endereco, endereco + tamanho))
         from unicorn import x86_const as x86
         self.escritas.append([self.b.nome(cpu.reg_read(x86.UC_X86_REG_EIP)), hex(cpu.reg_read(x86.UC_X86_REG_EIP)),
                               hex(endereco), tamanho, hex(valor & ((1 << 8 * tamanho) - 1))])
@@ -92,13 +115,14 @@ def _mudancas(antes, depois):
     return sorted(saida, key=lambda x: int(x[0], 16))
 
 
-def executar(cenario, casos, observador=None, quadro_s=1800):
+def executar(cenario, casos, observador=None, quadro_s=1800, leituras=False):
     """Run the declared ``casos`` at frame 1's first ProcessInputGame entry of ``cenario``.
 
     Returns (bench, cases, results, reproduction, pause, seconds). ``casos``: a list, or a
     callable(bench) evaluated at the pause, of dicts with ``case``, ``routine``,
     ``registers`` {name: value}, optional ``writes`` [(address, bytes)], ``stack`` [u32 words
-    pushed above the return slot] and ``ret_imm`` (bytes the routine's RET pops)."""
+    pushed above the return slot] and ``ret_imm`` (bytes the routine's RET pops). ``leituras`` also records
+    the bytes each case reads before writing (``read_before_write`` runs, stack excluded)."""
     import percurso_quadro1 as pq
     from oraculo_carga_missao import BancadaCargaMissaoOriginal, DADOS_THREAD_CRT, DGROUP
     from oraculo_quadro_missao import Isolamento
@@ -120,7 +144,7 @@ def executar(cenario, casos, observador=None, quadro_s=1800):
             a = b.arena
             regioes = ((DGROUP[0], DGROUP[1]), (DADOS_THREAD_CRT, DADOS_THREAD_CRT + 0x1000), (a.base, a.proximo),
                        (PILHA, PILHA + 0x10000))
-            gravador = Folhas(b, regioes, (PILHA, PILHA + 0x10000))
+            gravador = Folhas(b, regioes, (PILHA, PILHA + 0x10000), leituras)
             retorno_pausa = struct.unpack('<I', b.cpu.mem_read(regs['ESP'], 4))[0]
             estado['pausa'] = dict(routine=self.entradas[regs['EIP']], caller_return=hex(retorno_pausa),
                                    caller=b.nome(retorno_pausa), registers={k: hex(v) for k, v in regs.items()},
@@ -167,6 +191,8 @@ def executar(cenario, casos, observador=None, quadro_s=1800):
                         boundaries=[dict(routine=e['routine'], caller=e['caller'], registers=e['registers'],
                                          stack_words=e['stack_words'], declared_eax=e['declared_eax'],
                                          stack_cleanup=e['stack_cleanup']) for e in eventos])
+                    if leituras:
+                        resultado['read_before_write'] = gravador.leituras_em_runs()
                     resultados.append(resultado)
                     if observador is not None:
                         observador(caso, antes, resultado)

@@ -41,10 +41,10 @@ def casos_da_bancada(b):
     return cso.casos(grade)
 
 
-def executar(cenario, observador=None, limite=None):
+def executar(cenario, observador=None, limite=None, leituras=False):
     """(bench, cases, results, reproduction, pause, seconds) of the declared matrix (first ``limite`` cases)."""
     import bancada_selecao_ordens as bso
-    return bso.executar(cenario, lambda b: casos_da_bancada(b)[:limite], observador)
+    return bso.executar(cenario, lambda b: casos_da_bancada(b)[:limite], observador, leituras=leituras)
 
 
 def main():
