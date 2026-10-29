@@ -466,3 +466,149 @@ concurrent UI runs. The remaining UI-startup issue belongs to that front; this
 Audio delivery does not repair or suppress it. The successful Audio gate and
 139-call native differential remain separate results. Final build validation
 must be rerun by the coordinator with its integrated readiness fix.
+
+
+## Current independent round: entry-word256 lifecycle
+
+The clone was clean and latest main was fetched/merged by fast-forward to
+`a7427fd0e416d212f08af7f0df3d36a224d12f2d`. Prior Audio `a711ff9`, remote feature
+history and latest-main ancestry were verified. Work remains in this independent
+clone on `feat/re-audio`, with only Audio-owned writes and no main push or merge.
+Read-only CD/runtime paths and clone-local outputs remain unchanged. Python is
+the validated reference/harness for the coordinator's future Rust+C ABI engine;
+this round introduces no live device implementation or new ABI/protocol.
+
+[DICTATOR_CONTRACT.md](DICTATOR_CONTRACT.md) defines the original hashes,
+addresses, allocation/COM declarations, API widths, supported domain and gaps.
+Original research `69d57aa` precedes its translation. The new API is
+`init_dictator()`, `clear_dictator()`, `set_game_volume(u32)` and
+`create_sound(record_address)`, composed by Manage/ClearListe. Entry-word256
+admission now reaches the captured separate record/slot lifecycle. Initial
+allocation contents, object/reference identity, forced flags0, partial stores,
+status/HRESULT branches and exact callback order are preserved.
+
+Original-only v3 has **140 actual original entries /35 scenarios**,0.432 seconds:
+34 returned scenarios and one expected NULL-allocation MessageBoxA dependency.
+The fresh [original/frozen/Python comparison](validacao/dictador-audio-three-way-v1.json)
+passes those 140 entries/35 scenarios with **zero failures**,0.423 seconds.
+Ten new tests pass without skips, including an eight-call persistent
+pending/clear/relaunch sequence. Every completed step's memory and meaningful
+API results match. Void EAX remains raw native observation metadata: it is
+compared fresh-native to frozen-native, not invented as a Python API result.
+Earlier 139-call and 244-call queue corpora and 551-sound decoder results remain
+historical baseline; none is counted as fresh native coverage in this round.
+
+Preserved diagnostic v1 allowed OurAlloc only through 0x48c23f, missing its intact
+RET 0x48c240. Its field native_calls 140 counted planned steps, although35 were
+attempted. This report is retained as diagnostic and is not claimed as 140
+executed calls. V2 fixes the interval/count accounting and records128 actual /
+140 planned:12 explicit Play mismatches reveal that the dictator clears the
+requested loop flag, plus the NULL-allocation boundary. V3 changes only the
+declared answer list and executes all 140 entries. No original instruction or
+predecessor evidence was patched.
+
+Exact fresh reproduction (choose a new ignored output name):
+
+```sh
+python3 '/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py' \
+  codex-audio-dictator-repeat-001 -- \
+  /Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -B \
+  pesquisas-paralelas/audio/validar_dictador_audio.py \
+  --output .local/audio/dictator-repeat-001.json
+```
+
+Existing files/symlinks are refused before native capture; final report creation
+is exclusive. Fresh differences are retained before failure exits. The same
+wrapper with `capturar_dictador_audio.py --output <fresh-path>` runs original-only
+capture. All native jobs use unchanged shared heavy_lease.py, SIGALRM 600 plus a
+monotonic 600-second deadline and 50,000 instructions/call. Each took under one
+second; no Mac mini request is needed. Original media/runtime remain read-only.
+
+Remaining boundaries are MessageBoxA allocation failure 0x48c227, actual device
+initialization, unwritten outputs/status, wrapped/short Lock, asynchronous
+lifetime and broader saturation/fault/stereo queue composition. No game emitter,
+M2.3, rendering, milestone or app implementation is changed. The preceding
+45-second B smoke is historical unknown timeout evidence; it did not prove slow
+initialization. The coordinator later diagnosed an occluded final animation
+barrier in its own reproductions. This round uses the integrated readiness fix;
+Graphics1.3/macOS1.2 compatibility is separately coordinator-owned.
+
+
+The required Audio gate passes **69 discovered,66 passed,zero failures,three
+unchanged optional Stage-1 native skips**,12.011 seconds. All **ten new tests
+pass without skips**. CLI checks pass for help,required output and refusal of
+an existing report before native capture. Exact gate/source identities and
+new evidence file/byte sizes are in
+[audio-dictator-validation.json](validacao/audio-dictator-validation.json) and
+[the gate log](validacao/audio-dictator-check.log). The required exact application
+build is run from the committed implementation next and recorded separately.
+
+
+### Exact tested build and final structured delivery
+
+The exact coordinator build was run once from committed implementation
+`f328a5f751850f2eb45af2844225aeac18bd051d` with latest main `a7427fd` merged.
+A post-build fetch confirmed origin/main still at
+`a7427fd0e416d212f08af7f0df3d36a224d12f2d`, reachable from the feature.
+
+```sh
+RISING_PYTHON_RUNTIME='/Users/marcio/.cache/codex-runtimes/codex-primary-runtime/dependencies/python' \
+  ./compilar-jogável --development-ref HEAD \
+  --inputs-root '/Users/marcio/git/Rising Lands' \
+  --data-root '/Users/marcio/git/Rising-Lands-Codex-Audio/repository/.local/macos-playable'
+```
+
+**Overall exit1 before compilation/AppKit.** Consumer suite: **80 discovered,
+78 passed,2 failed,0 skips**,40.256 seconds. Both failures report exactly
+`Graphics API version mismatch: expected (1, 2), got (1, 3)`:
+`test_real_graphics_api_loads_in_isolated_process_at_version_1_2` and
+`test_worker_open_step_read_reset_errors_and_close`. This is the known
+coordinator/macOS dependency, not an Audio bypass opportunity. No app source,
+API pin or timeout was changed, and no repeat was attempted. No new bundle,
+signature result, UI smoke JSON or screenshots were produced in this attempt;
+earlier build artifacts remain preserved. The GUI slot stayed unused.
+
+The [structured build report](validacao/audio-dictator-native-build.json),
+[first launcher log](validacao/audio-dictator-native-build.log) and
+[consumer log](validacao/audio-dictator-consumer-tests.log) preserve the exact
+first outcome. The [delivery manifest](validacao/audio-dictator-delivery.json)
+records every delivered file's byte size/hash (excluding that manifest itself),
+new versus historical counts, tested code commit and open dependencies.
+Original v1/v2/v3 evidence sizes are387036/1011135/1113571 bytes respectively;
+v1/v2 are diagnostics and v3 is the valid140-entry corpus. No Mac mini request,
+main merge/push, milestone change, device output or Rust implementation occurs.
+
+
+## Bounded integration refresh over main3579c40
+
+No new research, API or reconstructed behavior was added. The clean feature
+retained delivery `383b143` and safely merged fetched latest main
+`3579c40ad455564f2a9b32c9a01b815b24d68f87` at committed merge
+`a9c151085b7623bdf813d9afca0deb26c8ff98d5`. Latest-main ancestry was verified.
+All Audio provider/probe/replay hashes remain identical to the preceding
+140-entry report. Original captures and first build evidence remain untouched.
+
+Repeated Audio gate: **69 discovered,66 passed,zero failures,three unchanged
+optional native skips**,11.467 seconds. Repeated fresh native differential:
+**140 actual entries /35 scenarios,34 returned scenarios plus one expected
+NULL-allocation/UI boundary,zero failures**,0.428 seconds under the unchanged
+shared lease and existing600-second/50,000-instruction bounds. This repeats
+existing coverage; it is **zero new unique original coverage**, not another
+140 independent cases. Ten dictator API tests continue to pass without skips.
+
+The exact coordinator build command above was run once from merge commit
+`a9c151085b7623bdf813d9afca0deb26c8ff98d5`, preserving the first outcome:
+**exit1,80 consumer tests,78 passed,2 failures,0 skips**,36.829 seconds. The same
+two tests fail the explicit Graphics1.2/1.3 mismatch. Compilation, signing and
+AppKit were not reached; no new bundle/UI JSON/PNG was produced. No app edit,
+version bypass or retry occurred. This remains coordinator/macOS-owned.
+
+[Refresh report and payload sizes](validacao/audio-dictator-integration-refresh.json),
+[Audio gate](validacao/audio-dictator-refresh-check.log),
+[fresh native result](validacao/dictador-audio-three-way-refresh-v1.json),
+[first refreshed launcher log](validacao/audio-dictator-refresh-native-build.log)
+and [consumer log](validacao/audio-dictator-refresh-consumer-tests.log) contain
+exact tested commit, results and bytes/hashes. The prior delivery manifest is a
+historical snapshot of commit383b143; the refresh report describes the current
+payload. No milestone status, main push, device behavior or Rust implementation
+changes are included.
