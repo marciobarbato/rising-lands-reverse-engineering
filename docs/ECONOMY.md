@@ -845,3 +845,38 @@ The display scenario is the M2 reference ([QUADRO1_EXIBICAO.md](../pesquisas-par
 | `BagVide` | `bolsa` (EAX) | EAX |
 
 **Field growth.** Untouched: it starts at frame counter 128 (M2.2). The economy fixtures already bind the tile grid by identity through the pointer at `0x507d70`; Core's live byte-addressable grid provider is not on main yet, and will be consumed once it is integrated.
+
+## Field growth, BagVide and edge players over the display state (M2 round 5)
+
+The frame oracle stops at frame 1, so these routines were captured natively in isolation from the display post-load state: Missions' `exibicao` MissionLoad capture (`-v2`), expanded over its entry snapshot and checked against the frame capture's S0. The frame counter, the field scalars, the RNG and every grid, Bag or player-record override are declared inputs. Both captures were committed before any Python ran against them.
+
+| Capture | Commit | Calls | Content |
+|---|---|---|---|
+| [`captura-campos-exibicao-original.json`](../pesquisas-paralelas/economia/evidencias/captura-campos-exibicao-original.json) ([script](../pesquisas-paralelas/economia/capturar_campos_exibicao_original.py)) | `9703754` | 770 | SetUpdateChamp `0x475328` + UpdateChamp `0x478806` per frame for counters 0..63 and 128..385 over MONDE01 as loaded; SetUpdateChamp over periods 128/1/3/0x8000/0xffff × edge counters; UpdateChamp at idle, in-progress, end-of-pass and row-0 states; 37 declared edge rows (rows 0, 1, 2, 100, 254, 255 × 6 RNG seeds, plus row 100 three times) covering every field stage, tiles around 0x84..0x86 / 0x9d..0xdc, attribute bit 0 and u16-wrapped neighbours; BagVide `0x4470b9` on the three AffGame unit Bags and structure 0's Bag with counts 0, 1, 2, 0xff, 0x100, 0x101, 0x8000, 0xffff |
+| [`captura-consultas-bordas-exibicao-original.json`](../pesquisas-paralelas/economia/evidencias/captura-consultas-bordas-exibicao-original.json) ([script](../pesquisas-paralelas/economia/capturar_consultas_bordas_exibicao_original.py)) | `af4d59d` | 218 | PlayerEstAllie `0x46d838` for AL, DL in {0..5, 0x7f, 0x80, 0xff}, with upper bits 0 and 0xabcd1200, over declared alliance bytes for records 0..4; TestRessource `0x4676e5` for players 0..5 and 0xff with edge costs over declared totals |
+
+**Field growth, original facts.**
+- SetUpdateChamp sets flag `0x509952` when the u32 counter `0x508f7c` is a multiple of the u16 period `0x4973ea` (128 in MONDE01) and never clears it. Counter 0 qualifies, so the first pass starts at frame 0, not 128.
+- UpdateChamp processes one row (`0x4973e8`, row 1 at the display state) per call, so frame k processes row k + 1. It calls Random `0x4704dc` (RNG `0x497164`) only on bush (0x1c) and field (0x1d..0x34) cells. In MONDE01 those rows are 32..41, 45..47 and 55..62, reached at frames 31..40, 44..46 and 54..61, and again 128 frames later. This follows from the map, not the RNG.
+- In the isolated sequence, the type grid changes at frames 32, 35, 46, 56 and 59 (7 cells), and the first ScanNouvellePatate `0x478319` is at frame 37 (row 38). Both depend on the shared RNG, which other frame code also draws in a real game, so they are not a game timeline. Missions' [PLANO_M2_2.md](../pesquisas-paralelas/missoes/PLANO_M2_2.md) counts the same 124 candidate cells (object bytes 0x1c..0x34, columns 1..254) but places them in rows 32..52 (frames 31..51). The display-state grid has them in rows 32..41, 45..47 and 55..62 (3, 7, 7, 10, 12, 10, 8, 6, 4, 1 | 3, 3, 3 | 1, 5, 6, 9, 7, 8, 7, 4), which is where the native capture draws Random, so the sweep's last candidate frame is 61. Its first ScanNouvellePatate at frame 45 is a different RNG history from this isolated one.
+
+**Translation over live memory.** The existing `extracao.RecursosTerreno` translation reproduces all 770 calls without behavioral changes. What is new is how it is bound:
+- `RecursosTerreno.vivo(terreno, *, minas, mosaicos, atributos)` and `TerrenoSacolas.vivo(tipos, quantidades)` bind by identity.
+- `RecursosTerreno.do_mundo(mundo, *, minas)` takes Core's `MundoFisico` after `vincular_grades(tiles=, atributos=, objetos=, donos_objetos=)` and uses `mundo.tiles.buffer`, `mundo.atributos`, `mundo.objetos` and `mundo.donos_objetos` (the quantity grid `[0x507dac]`) as the same objects. This is the live constructor Core asked for ([LIVE_TILE_GRID.md](core/LIVE_TILE_GRID.md)).
+- `RecursosTerreno.da_memoria(m, *, mosaicos=None)` finds the grids through their DGROUP pointers.
+- The scalars (row, flag, period, counter, RNG) are never defaulted on the live forms; `quadro_economia.agendar_campos`/`atualizar_campos` pull them from memory before each call and push them back after.
+- The constructors still copy (fixture form).
+
+The test builds the world with `vincular_grades` over views of the display memory, runs every call directly and through `provedores_economia_quadro` over a `u8/u16/u32`-only memory, and compares the scalars and all four grids with the native writes after every call, then the whole-state hash after every scenario.
+
+**BagVide's non-empty path.** The 32 native calls confirm EAX = (count & 0xff00) | (count == 0) on all four Bags: for example count 0x100 returns 0x100 (AL = 0, AH = 1) and 0xffff returns 0xff00.
+
+**Edge players.** The original has no 0..3 protection: `PlayerEstAllie(4, 0)` reads record 4's alliance byte (the player-record allocation holds five records), and TestRessource reads player 4's totals at `0x4e2f28`. The providers already used the live functions in round 4. In round 5, the class forms follow them when they are live-bound:
+- `Economia.da_memoria(m).suficiente` runs `quadro_economia.recursos_suficientes` over `m`;
+- `Mercado.da_memoria(m).aliado` runs `quadro_economia.aliado` over `m`.
+
+All 218 edge calls match three ways: the live functions, the live-bound class forms and the providers. The copying constructors and `Economia.vivo(tabela)` alone still reject players outside 0..3, because the 128-byte table does not contain player 4's totals.
+
+**Contract for composers.** Bind resources with `Economia.da_memoria(m)`, or use the `TestRessource`/`PlayerEstAllie` providers. Missions' `diferencial_fim_missao` builds `Economia(memoria=fatia(...))`, the copying fixture form, so its `fim_missao` resource query rejects player 4.
+
+**Native teardown.** After writing its file, a capture process can spin in Unicorn's `uc_close` during interpreter finalization: the field capture ran for more than 75 minutes after its output was complete and was terminated (lease journal: exit −15). The edge capture and the native reruns in `test_campos_exibicao` therefore call `capturar()` and then `os._exit(0)`; the capture scripts themselves are unchanged.
