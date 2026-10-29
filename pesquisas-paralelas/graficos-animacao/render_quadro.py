@@ -22,7 +22,7 @@ from graficos import RAIZ
 import json
 
 # Contract version: bump the major number for any change of an input, output field, format or stop semantics.
-VERSAO_RENDER_QUADRO = (1, 4)
+VERSAO_RENDER_QUADRO = (1, 5)
 LARGURA, ALTURA = 800, 600
 DGROUP, DGROUP_FIM = 0x494000, 0x523000
 ESTRUTURAS, PASSO_ESTRUTURA = 0x49a0c8, 276
@@ -32,7 +32,7 @@ BLOCOS = (('terreno', 0x507d70, 131072), ('objetos', 0x507d74, 65536), ('auxilia
           *((f'descoberta{i}', 0x507d78+4*i, 65536) for i in range(4)),
           *((f'iluminacao{i}', 0x507d88+4*i, 65536) for i in range(4)))
 SELECAO_ESTRUTURAS = 0x495be0     # five u16: per-owner selected structure
-# HUD tail (hud=True, contract 1.4): buffers outside DGROUP read by AffMiniMap and AffDrapeauAlliance
+# HUD tail: minimap/player buffers (1.4); grayscale lookup for disabled action icons (1.5).
 MINIMAPA = (0x507d5c, 0x496fe0, 0x496fe2)   # buffer pointer, width word, height word
 JOGADORES, PASSO_JOGADOR = 0x5080a8, 20     # player table pointer; 5 records of 20 bytes
 RELOGIOS = (0x508f80, 0x508f84)   # with 0x508f7c (quadro_u32 in the frame globals)
@@ -94,7 +94,7 @@ def carregar_cache_inicial(caminho, catalogo=None):
 def regioes_necessarias(memoria, hud=False):
     """(start, end_exclusive, name) regions a MemoriaDeclarada must declare to render from its current pointers.
 
-    hud=True (contract 1.4) adds the minimap buffer and the player table the HUD tail reads.
+    hud=True adds the minimap, player table and (1.5) 256-byte grayscale lookup read by disabled action icons.
     """
     regioes = [(DGROUP, DGROUP_FIM, 'dgroup')]
     for nome, slot, tamanho in BLOCOS:
@@ -105,6 +105,8 @@ def regioes_necessarias(memoria, hud=False):
         regioes.append((base, base+memoria.u16(MINIMAPA[1])*memoria.u16(MINIMAPA[2]), 'minimapa'))
         base = memoria.u32(JOGADORES)
         regioes.append((base, base+5*PASSO_JOGADOR, 'jogadores'))
+        base = memoria.u32(0x4e24bc)
+        regioes.append((base, base+256, 'noir_blanc'))
     return regioes
 
 
@@ -112,7 +114,7 @@ def renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=Non
     """Compose the frame.  ``superficie_anterior``: 800*600 bytes (the surface the game draws over).
 
     hud=False (default, contract 1.3 behaviour): the composition ends at the HUD checkpoint 0x417B1C.
-    hud=True (1.4): a complete playfield is followed by AffGame's tail through 0x417D30 (bottom strip and cursor,
+    hud=True (1.4+, expanded by 1.5): a complete playfield is followed by AffGame's tail through 0x417D30 (bottom strip and cursor,
     ``hud_quadro``); the pixels are then the whole offscreen surface AffGame leaves for the flip.
 
     habitado(indice) -> bool is BatimentEstHabiter (economy's result); required as soon as a structure is occupied.
@@ -146,7 +148,7 @@ def renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=Non
         q = compor_quadro(mundo, tela, ciclo_cache=ciclo, catalogo=catalogo, tabela_sombra=sombra, tabela_eclairage=ecl,
             superficie=bytes(superficie_anterior), relogio=relogio or (lambda: memoria.u32(0x4e17b4) or 1500), directdraw=DD(),
             habitado=habitado, relogios_extra=tuple(memoria.u32(a) for a in RELOGIOS),
-            selecao_estruturas=struct.unpack('<5H', lido(SELECAO_ESTRUTURAS, 10)))
+            selecao_estruturas=struct.unpack('<5H', lido(SELECAO_ESTRUTURAS, 10)), leitura_entrada=LeituraHud(memoria))
         pixels, chamadas, efeitos = q['superficie'], q['chamadas'], q['efeitos']
         if hud and q['desenhado']:
             sobrepostos = {}
