@@ -1,0 +1,92 @@
+test_bundle_cannot_select_external_or_malformed_archive (test_macos_bundle.MacOSBundleTests) ... ok
+test_bundled_default_reads_declared_archive (test_macos_bundle.MacOSBundleTests) ... ok
+test_declared_archive_missing_evidence_does_not_fall_back (test_macos_bundle.MacOSBundleTests) ... ok
+test_deployed_module_without_manifest_refuses_ancestor_guess (test_macos_bundle.MacOSBundleTests) ... ok
+test_real_verifier_detects_original_missing_consumer_regression (test_macos_bundle.MacOSBundleTests) ... ok
+test_real_verifier_still_detects_modified_mirrored_source (test_macos_bundle.MacOSBundleTests) ... ok
+test_shared_packager_satisfies_real_verifier (test_macos_bundle.MacOSBundleTests) ... ok
+test_accepted_evidence_matches_existing_python_decoder (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_bad_payload_size_hash_and_compression (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_canonical_order_independent_of_json_order (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_empty_and_wrong_shape (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_failed_load_preserves_previous_image (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_frames_stop_before_mutation_both_empty_and_loaded (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_load_idempotent_reset_reload (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_malformed_block_metadata (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_missing_malformed_unaccepted_and_tampered_capture (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_overlap_and_address_overflow (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_read_bounds_and_immutable_image (test_macos_state_consumer.MacOSStateConsumerTests) ... ok
+test_playable (unittest.loader._FailedTest) ... ERROR
+test_preview (unittest.loader._FailedTest) ... ERROR
+test_research (unittest.loader._FailedTest) ... ERROR
+
+======================================================================
+ERROR: test_playable (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_playable
+Traceback (most recent call last):
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/loader.py", line 436, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/loader.py", line 377, in _get_module_from_name
+    __import__(name)
+  File "/Users/marcio/git/Rising-Lands-Codex/apps/macos-preview/testes/test_playable.py", line 11, in <module>
+    from engine import Preview, MANIFEST, SNAP
+  File "/Users/marcio/git/Rising-Lands-Codex/apps/macos-preview/src/engine.py", line 15, in <module>
+    MANIFEST=json.loads((ROOT/'snapshot.json').read_text())
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1256, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1242, in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1110, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/marcio/git/Rising-Lands-Codex/apps/macos-preview/snapshot.json'
+
+
+======================================================================
+ERROR: test_preview (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_preview
+Traceback (most recent call last):
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/loader.py", line 436, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/loader.py", line 377, in _get_module_from_name
+    __import__(name)
+  File "/Users/marcio/git/Rising-Lands-Codex/apps/macos-preview/testes/test_preview.py", line 6, in <module>
+    from engine import Preview,MANIFEST
+  File "/Users/marcio/git/Rising-Lands-Codex/apps/macos-preview/src/engine.py", line 15, in <module>
+    MANIFEST=json.loads((ROOT/'snapshot.json').read_text())
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1256, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1242, in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1110, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/marcio/git/Rising-Lands-Codex/apps/macos-preview/snapshot.json'
+
+
+======================================================================
+ERROR: test_research (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_research
+Traceback (most recent call last):
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/loader.py", line 436, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/unittest/loader.py", line 377, in _get_module_from_name
+    __import__(name)
+  File "/Users/marcio/git/Rising-Lands-Codex/apps/macos-preview/testes/test_research.py", line 4, in <module>
+    from engine import Preview
+  File "/Users/marcio/git/Rising-Lands-Codex/apps/macos-preview/src/engine.py", line 15, in <module>
+    MANIFEST=json.loads((ROOT/'snapshot.json').read_text())
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1256, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1242, in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1110, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/marcio/git/Rising-Lands-Codex/apps/macos-preview/snapshot.json'
+
+
+----------------------------------------------------------------------
+Ran 21 tests in 1.360s
+
+FAILED (errors=3)
