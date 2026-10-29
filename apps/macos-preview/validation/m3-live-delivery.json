@@ -1,0 +1,139 @@
+{
+  "schema": "rising-lands/macos-live-delivery/1",
+  "branch": "feat/macos-playable",
+  "implementation_commit": "1ca070a7b3b096839a24a86da1eb16dca85d9e86",
+  "validated_build_commit": "901b95cdae284a01d35752bc58dc288fa081a2fa",
+  "integrated_base": "c08e1fb96bf06392aec13ddde2bac29eb29a4ee0",
+  "graphics_api": [
+    1,
+    5
+  ],
+  "engine_abi": "0x00010001",
+  "consumer_tests": {
+    "passed": 93,
+    "skipped": 0
+  },
+  "native_exercise": {
+    "passed": 27,
+    "stderr": ""
+  },
+  "native_live_inspection": {
+    "passed": 11,
+    "stderr": ""
+  },
+  "common": {
+    "result": "failed_prerequisites",
+    "errors": 20,
+    "skips": 610,
+    "tests_run": 1592,
+    "missing": [
+      "Unicorn in Core/Economy/Missions/AI-runtime",
+      "Graphics fontes/cd copies"
+    ]
+  },
+  "scripted_input": {
+    "result": "InputContractPending",
+    "missions_branch_sha": "de154b5f22b7d30f7b1610e2c54cf684751e214b",
+    "raw_record_replay": "implemented",
+    "engine_injection": false
+  },
+  "screenshots": [
+    {
+      "path": "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/901b95cdae284a01d35752bc58dc288fa081a2fa/build/logs/native-smoke.before.png",
+      "bytes": 1654006,
+      "sha256": "03ee8b903cb3be5d19c9eb345ab0f4327ec7ea741407516b1f952688e92eb36c"
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/901b95cdae284a01d35752bc58dc288fa081a2fa/build/logs/native-smoke.after.png",
+      "bytes": 1620171,
+      "sha256": "7c53039c530c615f69bc9d34a67c075e34c5a34cb7e9272b3bbbc9e54913efda"
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/901b95cdae284a01d35752bc58dc288fa081a2fa/build/logs/native-smoke.png",
+      "bytes": 1620171,
+      "sha256": "7c53039c530c615f69bc9d34a67c075e34c5a34cb7e9272b3bbbc9e54913efda"
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/901b95cdae284a01d35752bc58dc288fa081a2fa/build/logs/native-inspection-smoke.before.png",
+      "bytes": 640851,
+      "sha256": "709962f16dec0cfe69e8ce1cbe3f05023970277960e582a4c4a886d2c5a6d1f2"
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/901b95cdae284a01d35752bc58dc288fa081a2fa/build/logs/native-inspection-smoke.after.png",
+      "bytes": 881214,
+      "sha256": "0041fa70fdb0f192a02c6ba77edd84b1574a9790ad231161949566f363fd37af"
+    },
+    {
+      "path": "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/901b95cdae284a01d35752bc58dc288fa081a2fa/build/logs/native-inspection-smoke.png",
+      "bytes": 881214,
+      "sha256": "0041fa70fdb0f192a02c6ba77edd84b1574a9790ad231161949566f363fd37af"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "apps/macos-preview/validation/m3-live-bundled-130.json",
+      "bytes": 1078403,
+      "sha256": "eec6eea12ccd6948006ca345b455d587f4f470612f7ddb98bd4a9b15204656e0"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-live-common.log.gz",
+      "bytes": 38212,
+      "sha256": "ace7f33f3ed1e9892ad747e494746d9ed2f964586d7831b2e0bc2d0ec2084569"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-live-final-architecture.log",
+      "bytes": 680,
+      "sha256": "79fb37d6c783113db9221b4856655268ff7f6e7f6c8515343344067f1ef62dc8"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-live-final-build.log",
+      "bytes": 3490,
+      "sha256": "2d7b0baf061ece381e38d93d82e769a69944d52f9e5b1419e9ec660d9515c303"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-live-final-bundled-130.log",
+      "bytes": 1306,
+      "sha256": "ed470f9324ffa885d45506bef6f743ce30c013e02c559b21ab4ad5aa7367bcbd"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-live-final-codesign-verify.log",
+      "bytes": 327,
+      "sha256": "2e60258e3ccf934a45e297b7a338928ade39cac9f7e6c315329fe00ad420530e"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-live-final-consumer-tests.log",
+      "bytes": 13839,
+      "sha256": "5a4b2f755fd99c70d9a8bbf8bf13e28c541d58461b2cf2d5ac3eb4f9d9742671"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-live-final-native-inspection-smoke.json",
+      "bytes": 1467,
+      "sha256": "6747ca9dd9ecee8856e3361fdc48279fedf311379db8be1fa5a11a3e83ab46fd"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-live-final-native-smoke.json",
+      "bytes": 7548,
+      "sha256": "4075f9cc9c70e210eccf01aa77e08a88058e80e2b0fc6582b78bebf5560aeee7"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-live-final-rust-engine-build.log",
+      "bytes": 374,
+      "sha256": "d15d439d9be9f3137ddb75130f552b42f5f5e28ab549b4552cc5fc964e95a5fd"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-live-graphics15.json",
+      "bytes": 1064549,
+      "sha256": "844ffa0f42b11a97200ba647a8cb82342c14b0fd491333c05d1bd8a49da05f61"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-live-horizon.json",
+      "bytes": 583489,
+      "sha256": "cca34f31d0fb77b9516d77d8b6719bf0bb0858fd001a93dc11aac179d1e0a4be"
+    },
+    {
+      "path": "apps/macos-preview/validation/m3-live-initial-bundled-validation-failure.log",
+      "bytes": 1437,
+      "sha256": "37131e4e816a18828864a0baa4c342d733995baa91aceef6c34accab19122651"
+    }
+  ]
+}
