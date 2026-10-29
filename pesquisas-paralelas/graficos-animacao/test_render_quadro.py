@@ -61,7 +61,7 @@ class QuadroTest(unittest.TestCase):
     def test_contract_shape(self):
         q, _ = self.renderizar()
         self.assertEqual((q.versao, q.largura, q.altura), (Q.VERSAO_RENDER_QUADRO, 800, 600))
-        self.assertEqual(Q.VERSAO_RENDER_QUADRO, (1, 1))
+        self.assertEqual(Q.VERSAO_RENDER_QUADRO, (1, 2))
         pal = Q.Catalogo().paleta()
         self.assertEqual(len(pal), 768)
         for i in (0, 4000, 123456, 479999):    # rgba = palette[index] expanded to RGB, alpha 255, row-major, origin top-left
@@ -141,6 +141,44 @@ class QuadroTest(unittest.TestCase):
     def test_missing_habitation_provider_stops(self):
         q = Q.renderizar_quadro(Memoria(self.fx), superficie_anterior=self.fx.antes)
         self.assertEqual(q.parada['endereco'], '0x0040f378')   # first footprint cell reaches the tail query
+
+
+class SequenciaTest(unittest.TestCase):
+    def test_initial_artifacts_are_bound_to_missions_capture(self):
+        sup = json.loads((EVID/'superficie-inicial-m22-v2.json').read_text())
+        tabela = json.loads((EVID/'superficies-fase-m22-v2.json').read_text())
+        gravado = {p['phase']: p['offscreen'] for p in tabela['phases']}
+        pixels = Q.carregar_superficie_inicial(EVID/'superficie-inicial-m22-v2.json')
+        self.assertEqual(len(pixels), 480000)
+        self.assertEqual(sup['sha256'], gravado['load_tail'])          # equals the capture's recorded load-tail surface hash
+        self.assertEqual(sup['source_capture_sha256'], tabela['source_xz_sha256'])
+        cache = Q.carregar_cache_inicial(EVID/'cache-terreno-inicial-m22-v2.json')
+        self.assertEqual((len(cache.registros), len(cache.blocos_crus), cache.proximo), (1024, 256*1056, 76))
+
+    def test_fixture_frame1_entry_surface_is_the_initial_artifact(self):
+        fx = Fixture(FIXTURE)
+        self.assertEqual(fx.antes, Q.carregar_superficie_inicial(EVID/'superficie-inicial-m22-v2.json'))
+
+    def test_chain_verification_report(self):
+        d = json.loads((EVID/'verificacao-cadeia-m22-v2.json').read_text())
+        self.assertEqual(d['frames'], 12)
+        self.assertEqual(d['first_stop']['endereco'], '0x0041591f')
+        self.assertEqual(d['first_chained_difference_frame'], 1)
+        for r in d['rows']:
+            self.assertTrue(r['end_hash_equals_recorded'])          # native phase-end surface == Missions' recorded hash
+            self.assertTrue(r['chain_cache_equals_native_entry_cache'])   # the carried cache equals the native cache at every frame
+        for r in d['rows'][5:]:                                     # view scrolled out: only the bottom strip differs
+            self.assertEqual(r['over_native_previous']['pixels'], 0)
+            self.assertGreaterEqual(r['chained']['first_row'], 544)
+
+    def test_cache_state_is_carried(self):
+        fx = Fixture(FIXTURE)
+        q1 = Q.renderizar_quadro(Memoria(fx), superficie_anterior=fx.antes, habitado=lambda i: True)
+        self.assertEqual(len(q1.cache.registros), 1024)
+        q2 = Q.renderizar_quadro(Memoria(fx), superficie_anterior=q1.pixels, habitado=lambda i: True, cache=q1.cache)
+        self.assertEqual(q2.cache.proximo, q1.cache.proximo)       # same viewport: every block hits
+        with self.assertRaises(ValueError):
+            Q.renderizar_quadro(Memoria(fx), superficie_anterior=fx.antes, cache=Q.EstadoCache(b'', b'', 0))
 
 
 if __name__ == '__main__':

@@ -1,0 +1,5901 @@
+{
+  "schema": "rising-lands/audio-m22-original-native-accesses/1",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "translation_executed": false,
+  "accepted_capture_sha256": "4c8f5c14a9623131dd019eafcdc49ea63054ee358f9defde58c12cb949f59ff3",
+  "accepted_policy_sha256": "bf36e6e8f6a38202fa3248256d3de9f768497caa835a563a3ef119be994127f0",
+  "scope": "Original native accesses in the M2.2 scenario",
+  "execute_original_pumps": false,
+  "sound_boundaries_removed": [],
+  "declared_cd_input": "No CD track playing, flag 0x4e2f28 stays zero; MCICD_Init never executed",
+  "frames": 128,
+  "phases": [
+    {
+      "phase": "load_tail",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame1",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames2",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame2",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames3",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame3",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames4",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame4",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames5",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame5",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames6",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame6",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames7",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame7",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames8",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame8",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames9",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame9",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames10",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame10",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames11",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame11",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames12",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame12",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames13",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame13",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames14",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame14",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames15",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame15",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames16",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame16",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames17",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame17",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames18",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame18",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames19",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame19",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames20",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame20",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames21",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame21",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames22",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame22",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames23",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame23",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames24",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame24",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames25",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame25",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames26",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame26",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames27",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame27",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames28",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame28",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames29",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame29",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames30",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame30",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames31",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame31",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames32",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame32",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames33",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame33",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames34",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame34",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames35",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame35",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames36",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame36",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames37",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame37",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames38",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame38",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames39",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame39",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames40",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame40",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames41",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame41",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames42",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame42",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames43",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame43",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames44",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame44",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames45",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame45",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames46",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame46",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames47",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame47",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames48",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame48",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames49",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame49",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames50",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame50",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames51",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame51",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames52",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame52",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames53",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame53",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames54",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame54",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames55",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame55",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames56",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame56",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames57",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame57",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames58",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame58",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames59",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame59",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames60",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame60",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames61",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame61",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames62",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame62",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames63",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame63",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames64",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame64",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames65",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame65",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames66",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame66",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames67",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame67",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames68",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame68",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames69",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame69",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames70",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame70",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames71",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame71",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames72",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame72",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames73",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame73",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames74",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame74",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames75",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame75",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames76",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame76",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames77",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame77",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames78",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame78",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames79",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame79",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames80",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame80",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames81",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame81",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames82",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame82",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames83",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame83",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames84",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame84",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames85",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame85",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames86",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame86",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames87",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame87",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames88",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame88",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames89",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame89",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames90",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame90",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames91",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame91",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames92",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame92",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames93",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame93",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames94",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame94",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames95",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame95",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames96",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame96",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames97",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame97",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames98",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame98",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames99",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame99",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames100",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame100",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames101",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame101",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames102",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame102",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames103",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame103",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames104",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame104",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames105",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame105",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames106",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame106",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames107",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame107",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames108",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame108",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames109",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame109",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames110",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame110",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames111",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame111",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames112",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame112",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames113",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame113",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames114",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame114",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames115",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame115",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames116",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame116",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames117",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame117",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames118",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame118",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames119",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame119",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames120",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame120",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames121",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame121",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames122",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame122",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames123",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame123",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames124",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame124",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames125",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame125",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames126",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame126",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames127",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame127",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "between_frames128",
+      "summary_equal": true,
+      "differences": []
+    },
+    {
+      "phase": "frame128",
+      "summary_equal": true,
+      "differences": []
+    }
+  ],
+  "reads": [
+    {
+      "phase": "frame1",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame1",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame10",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame10",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame100",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame100",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame100",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame101",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame101",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame102",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame102",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame103",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame103",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame104",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame104",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame104",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame105",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame105",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame106",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame106",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame107",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame107",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame108",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame108",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame108",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame109",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame109",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame11",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame11",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame110",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame110",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame111",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame111",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame112",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame112",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame112",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame113",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame113",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame114",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame114",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame115",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame115",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame116",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame116",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame116",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame117",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame117",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame118",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame118",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame119",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame119",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame12",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame12",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame12",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame120",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame120",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame120",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame121",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame121",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame122",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame122",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame123",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame123",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame124",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame124",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame124",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame125",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame125",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame126",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame126",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame127",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame127",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame128",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame128",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame128",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame13",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame13",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame14",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame14",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame15",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame15",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame16",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame16",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame16",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame17",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame17",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame18",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame18",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame19",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame19",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame2",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame2",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame20",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame20",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame20",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame21",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame21",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame22",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame22",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame23",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame23",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame24",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame24",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame24",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame25",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame25",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame26",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame26",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame27",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame27",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame28",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame28",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame28",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame29",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame29",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame3",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame3",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame30",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame30",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame31",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame31",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame32",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame32",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame32",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame33",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame33",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame34",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame34",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame35",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame35",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame36",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame36",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame36",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame37",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame37",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame38",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame38",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame39",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame39",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame4",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame4",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame4",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 6,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame40",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame40",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame40",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame41",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame41",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame42",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame42",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame43",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame43",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame44",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame44",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame44",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame45",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame45",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame46",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame46",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame47",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame47",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame48",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame48",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame48",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame49",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame49",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame5",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame5",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame50",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame50",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame51",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame51",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame52",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame52",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame52",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame53",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame53",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame54",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame54",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame55",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame55",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame56",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame56",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame56",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame57",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame57",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame58",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame58",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame59",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame59",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame6",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame6",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame60",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame60",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame60",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame61",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame61",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame62",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame62",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame63",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame63",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame64",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame64",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame64",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame65",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame65",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame66",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame66",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame67",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame67",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame68",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame68",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame68",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame69",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame69",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame7",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame7",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame70",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame70",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame71",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame71",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame72",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame72",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame72",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame73",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame73",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame74",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame74",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame75",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame75",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame76",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame76",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame76",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame77",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame77",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame78",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame78",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame79",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame79",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame8",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame8",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame8",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame80",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame80",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame80",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame81",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame81",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame82",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame82",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame83",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame83",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame84",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame84",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame84",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame85",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame85",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame86",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame86",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame87",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame87",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame88",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame88",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame88",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame89",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame89",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame9",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame9",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame90",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame90",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame91",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame91",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame92",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame92",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame92",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame93",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame93",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame94",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame94",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame95",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame95",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame96",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame96",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame96",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame97",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame97",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame98",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame98",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame99",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame99",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "load_tail",
+      "instruction": "0x42d2f0",
+      "routine": "CalculGame+0xa88",
+      "address": "0x4e2f28",
+      "bytes": 1,
+      "range": "game_cd_playing_and_mci_initialized_flags",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "load_tail",
+      "instruction": "0x42d2f9",
+      "routine": "CalculGame+0xa91",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "load_tail",
+      "instruction": "0x468489",
+      "routine": "MenuInit+0x1ce",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "load_tail",
+      "instruction": "0x47732f",
+      "routine": "NextAnimVeget+0x43",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 2,
+      "code_owner": "game-or-display"
+    }
+  ],
+  "writes": [
+    {
+      "phase": "frame1",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame10",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame100",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame100",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame101",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame102",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame103",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame104",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame104",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame105",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame106",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame107",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame108",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame108",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame109",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame11",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame110",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame111",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame112",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame112",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame113",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame114",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame115",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame116",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame116",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame117",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame118",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame119",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame12",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame12",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame120",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame120",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame121",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame122",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame123",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame124",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame124",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame125",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame126",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame127",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame128",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame128",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame13",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame14",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame15",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame16",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame16",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame17",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame18",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame19",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame2",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame20",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame20",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame21",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame22",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame23",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame24",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame24",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame25",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame26",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame27",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame28",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame28",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame29",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame3",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame30",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame31",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame32",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame32",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame33",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame34",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame35",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame36",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame36",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame37",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame38",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame39",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame4",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame4",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 6,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame40",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame40",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame41",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame42",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame43",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame44",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame44",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame45",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame46",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame47",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame48",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame48",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame49",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame5",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame50",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame51",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame52",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame52",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame53",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame54",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame55",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame56",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame56",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame57",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame58",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame59",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame6",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame60",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame60",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame61",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame62",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame63",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame64",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame64",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame65",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame66",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame67",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame68",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame68",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame69",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame7",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame70",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame71",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame72",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame72",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame73",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame74",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame75",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame76",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame76",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame77",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame78",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame79",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame8",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame8",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame80",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame80",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame81",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame82",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame83",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame84",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame84",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame85",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame86",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame87",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame88",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame88",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame89",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame9",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame90",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame91",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame92",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame92",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame93",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame94",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame95",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame96",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame96",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 5,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame97",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame98",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "frame99",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "load_tail",
+      "instruction": "0x42d322",
+      "routine": "CalculGame+0xaba",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "load_tail",
+      "instruction": "0x4684b2",
+      "routine": "MenuInit+0x1f7",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 1,
+      "code_owner": "game-or-display"
+    },
+    {
+      "phase": "load_tail",
+      "instruction": "0x47733a",
+      "routine": "NextAnimVeget+0x4e",
+      "address": "0x4e1d18",
+      "bytes": 1,
+      "range": "shared_random_permutation_cursor",
+      "count": 2,
+      "code_owner": "game-or-display"
+    }
+  ],
+  "boundary_counts": {
+    "LoadPie": 3,
+    "MCICD_Play": 130,
+    "PlaySnd_Manage": 128,
+    "MCICD_Manage": 128
+  },
+  "declared_inputs_source": "Exact named_inputs of the accepted display-v2 M1 capture; no new ISO-label inference",
+  "source_revision": "4b470289eafacd61c5b7e826ddc0c95b948c9970",
+  "script_sha256": "0d0024957a7202c7ec3af5ad962c739d883f8924b54f5a9e1f2e303d9c7f4c5b",
+  "watched_ranges": [
+    {
+      "start": "0x498f14",
+      "end": "0x498f6c",
+      "name": "initialized_sound_scalars"
+    },
+    {
+      "start": "0x521358",
+      "end": "0x522234",
+      "name": "request_waiting_logical_physical_bank_state"
+    },
+    {
+      "start": "0x496fdc",
+      "end": "0x496fe0",
+      "name": "mci_clock_copy"
+    },
+    {
+      "start": "0x4e2f28",
+      "end": "0x4e2f34",
+      "name": "game_cd_playing_and_mci_initialized_flags"
+    },
+    {
+      "start": "0x4e1d18",
+      "end": "0x4e1d1c",
+      "name": "shared_random_permutation_cursor"
+    }
+  ],
+  "start_summary": {
+    "blocks": 25343,
+    "bytes": 16813542,
+    "sha256": "d059af1fcb496ceb322964f1c6b571e475136ec96c31aa67419757dd05690b54"
+  },
+  "end_summary": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "eb714f7d5a694ad91bab9b41c37a28860006c89be03f9170e3b312064a4b04b2"
+  },
+  "code_sha256_after": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+  "seconds": 186.752
+}

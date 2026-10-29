@@ -1,0 +1,41 @@
+{
+  "branch": "feat/re-audio",
+  "domain_gate": {
+    "discovered": 30,
+    "passed": 27,
+    "failed": 0,
+    "optional_native_skips": 3
+  },
+  "new_tests": {
+    "passed": 10,
+    "skipped": 0
+  },
+  "new_native_queue": {
+    "original_calls": 133,
+    "fresh_three_way_calls": 133,
+    "passed": true
+  },
+  "native_original_window_runs": [
+    {
+      "frames": 128,
+      "phases": 257,
+      "seconds": 186.752,
+      "strict_state_equal": true
+    },
+    {
+      "frames": 128,
+      "phases": 257,
+      "seconds": 189.97,
+      "strict_state_equal": false,
+      "sole_private_differing_byte": "0x498f5c",
+      "differing_phases": 256
+    }
+  ],
+  "log": {
+    "path": "pesquisas-paralelas/audio/validacao/independent-audio-check.log",
+    "sha256": "7949ec56da6c2b34338907e7cb055914f8b2511d6c65f5c318d255dda6fb8722"
+  },
+  "full_PostSound_Manage_queue_complete": false,
+  "audio_device_playback": false,
+  "milestone_status_changed": false
+}
