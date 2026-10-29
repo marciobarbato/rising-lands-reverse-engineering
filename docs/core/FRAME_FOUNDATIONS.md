@@ -312,3 +312,45 @@ Every method is inherited and nothing is initialized. Count stores wrap to u32, 
 - `atualizar(0..4)` at S0 and after each Missions frame phase (all contexts are empty there; return `0x1a1a000e`);
 - `postar(4, t)` followed by `atualizar(4)` for all 42 rule entries, which covers completion, sleep, subtasks and named world-operation stops with partial effects retained;
 - writes landing in the caller's buffer.
+
+## Round 4: the display scenario is the M2 reference
+
+Missions' display-executing scenario (`pesquisas-paralelas/missoes/QUADRO1_EXIBICAO.md`) is now the reference. DDInit gives a 25×17 viewport and an 800×600 screen. NextAnimTerrain therefore calls LongRand→CRT `rand` 425 times per frame, and NextAnimVeget walks real cells. This **supersedes** the round-3 "zero viewport rows" domain and its NextAnim* stops.
+
+**Capture first** (`80fd5ef`). `ferramentas/capturar_exibicao_quadro1.py` writes `evidencias/fundacoes-quadro/captura-exibicao-quadro1.json`. It uses `percurso_quadro1.executar(cenario='exibicao', limites=...)`, with isolation limited per phase for the 425-per-frame rand calls. It holds 70 isolated calls at the exact display frame-0/1 inputs, each with its native blocks:
+- SetClipping;
+- InitGameZone ×2 with its helpers (PlayerEstContacterPourAlliance is also entered from AffGame between frames);
+- NextAnimTerrain and NextAnimVeget whole in both frames;
+- GameNextFrame;
+- the first Random, LongRand and rand calls of each phase.
+
+The path reproduction passed.
+
+What the records show:
+- NextAnimTerrain changes only the CRT seed `0x340000c` (425 draws, no drop), and returns EAX=0x11 (rows) and EDX=0xe7.
+- In frame 0 (counter 0), NextAnimVeget advances the cursor `0x4e1d18` 2→4 through two tree draws. In frame 1 (counter 1) it stores nothing.
+
+**API changes** (`0b8f1ea`):
+
+| Function | Original | Domain | Registers out |
+|---|---|---|---|
+| `aleatorio_crt_memoria(m)` | CRT rand 0x48c51d / LongRand 0x45841b | complete. The getter `[0x4990cc]` must be `0x48e7c7`, otherwise it raises at `0x48c513`. A zero seed pointer returns 0 | EAX=(seed'>>16)&0x7fff; EDX kept |
+| `animar_terreno(m, eax, edx, edi=None)` | NextAnimTerrain 0x477700 | complete viewport walk (all tile classes, cursor and LongRand draws, object drop) | EAX=rows; EDX exact, or None when a zero-width viewport needs the caller's EDI |
+| `animar_vegetacao(m, eax, edx, ecx=None)` | NextAnimVeget 0x4772ec | complete viewport walk (all object classes) | EAX/EDX exact (EAX is None only if ECX's high word is needed and not given); ECX kept |
+
+The providers `NextAnimTerrain(x, y)` and `NextAnimVeget(x, y)` are unchanged; both are void. Per cell, the grid pointers `[0x507d70/74/ac]` and the cycle counter are read only on the branches the original reads them.
+
+**Validation.**
+- **CPU-free replay:** all 70 display-scenario calls replay exactly, stores and seven GPRs. `rand` agrees with `fundacoes_quadro.aleatorio_crt` at every captured draw.
+- **Fresh native differential** in the display scenario (`validar_chamadas_quadro_core.py --cenario exibicao`, 165 s under the lease): **194 comparisons, 0 mismatches, 0 stops**, and the path reproduction passed ([report](../../relatorios/chamadas-exibicao-quadro1-emulada.json)). The perturbations, all built from the live bench:
+  - **Tiles:** the tile classes 0x5d/0x94/0x95/0x9c/0x251/0x252/0x255/0x256, with even and odd counters.
+  - **Object drop:** a forced drop on 0x8b and 0x6d, using seed 0x72d.
+  - **Degenerate viewports:** zero width with a high EDI or high ECX; zero rows.
+  - **Object classes:** 1/0x17/0x1b/0x37/0x38/0x3a/0x3e/0xb, with counters 0, 2 and 1.
+  - **rand seeds:** seed edge values and a zero seed pointer.
+  - **Shared routines:** the v1 cases for InitGameZone and the other shared routines.
+
+  The v1 rerun is unchanged: 2,034 comparisons, 0 mismatches.
+- The remaining stops are InitGameZone modes 2–4 and NextAnimVegetFullMap (network only, not reached).
+
+The task VM's live binding (round 3), the CRT I/O boundaries ([DECLARED_BINDINGS](DECLARED_BINDINGS.md)) and the [live tile grid](LIVE_TILE_GRID.md) complete this round.
