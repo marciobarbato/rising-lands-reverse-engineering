@@ -299,3 +299,10 @@ python3 -B scripts/check.py --domain combat
 ```
 
 The slices' actual results and expected dependency stops are recorded in [the combat handoff](../pesquisas-paralelas/combate/HANDOFF.md) and their dedicated reports. General AI message, audio, level and diplomacy bodies remain external. The shared-world adapter delegates supported physical death to Core; special/vehicle effects remain explicit stops. The Stage 18 field audit above supersedes the older open producer inventory. Building-target behavior and natural MONDE01 runtime remain separate unimplemented work.
+
+M2 slice 1 captures the frame body's combat-relevant calls natively from the accepted M1 post-load state. `PlayerAttaqueReset 0x46d628` is a single `ret`. `PlayerAttaqueCalculSympa 0x46d629` is diplomacy, a periodic (`counter % 2000`) attack-matrix consumer owned outside Combat. `ProjectileCalcul` over the empty M1 pool clears the 100 stale `+1` fill bytes in its first pass; `MaquinaProjeteis.calcular` now matches that store trace. Run:
+
+```bash
+python3 -B pesquisas-paralelas/combate/capturar_quadro_m1.py
+RISING_EMULAR=1 python3 -B -m unittest discover -s pesquisas-paralelas/combate -p test_quadro_m1.py
+```

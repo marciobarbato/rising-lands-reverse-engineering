@@ -104,7 +104,8 @@ se faltarem. A máquina principal filtra atividade antes de chamar esta rotina.
 O argumento é o byte baixo do contador acumulado 0x508f7c, não um delta.
 O pool é consultado ao vivo: filhos em IDs posteriores podem ser processados
 na mesma passagem se Set deixar +01=0. +01 é limpo após cada varredura,
-inclusive em slots inativos. Isso não fixa uma duração de frame/tick.
+inclusive em slots inativos, mas só é escrito quando não nulo (0x46fc7f).
+Isso não fixa uma duração de frame/tick.
 """
         for i in range(100):
             animar_projetil(self.pool.registro(i), incremento_animacao)
@@ -114,4 +115,6 @@ inclusive em slots inativos. Isso não fixa uma duração de frame/tick.
                 if p[2] and not p[1]:
                     self.avancar(i)
             for i in range(100):
-                self.pool.registro(i)[1] = 0
+                p = self.pool.registro(i)
+                if p[1]:
+                    p[1] = 0

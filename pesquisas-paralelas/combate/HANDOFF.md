@@ -1,6 +1,33 @@
 # Combat handoff — 2026-10-28
 
-## Current resumption: Stage 19 light inventory only
+## M2 slice 1: first-frame combat calls over the M1 post-load input
+
+Branch `feat/re-combat` after preserving the inherited Codex Stage 19 WIP unchanged (`42078d4`) and merging main `81ebbf9` (`00e4153`). Native captures were committed before any comparison (`11e9721`).
+
+**Input.** The frozen accepted M1 oracle state `pesquisas-paralelas/missoes/evidencias/captura-carga-missao-original-v2.json` (SHA-256 `eb7d2303…3afc`), `oracle.final_state.blocks`: 881 blocks / 2,659,375 bytes, each restored at its original address before every case. Only u32 `0x508f7c` is declared per case. Label: "M1 post-load input". Capture: [`capturar_quadro_m1.py`](capturar_quadro_m1.py) → [`evidencias/captura-quadro-m1-original.json`](evidencias/captura-quadro-m1-original.json), original-only (no reconstruction imported).
+
+**Classification from intact bytes (RISING.EXE `6c556520…3fb`).**
+
+| Frame call (`0x42d2de` body) | Bytes | Owner | Frame-1 behavior |
+|---|---|---|---|
+| `PlayerAttaqueReset 0x46d628` | single `ret` | none (empty) | no effect; 1 instruction |
+| `ProjectileCalcul 0x46fc0f` | 100× `ProjectileAnim 0x46e52c`, then 30 passes: `ProjectileAvance 0x46eaf8` for `+2≠0 && +1=0`, then store `+1=0` only where nonzero (`0x46fc7f`) | **combat** | see below |
+| `PlayerAttaqueCalculSympa 0x46d629` | when `[0x508f7c] % 2000 = 0`: for attacker `ch`, victim `cl` in 0..3, clears the u32 attack matrix `0x508044 + ch·20 + cl·4`; pairs with no recorded attack and `ch≠cl` call `MAJSympathie 0x475118(al=ch, dl=cl, ebx=0x13)` | **diplomacy** (Economy's confirmed frame call). Combat only produces the matrix through the existing `PlayerAAttaqueSet 0x46d600` impact effect | no-op at counter 1 (17 instructions, no stores) |
+
+**ProjectileCalcul at M1.** The M1 pool (`[0x5080f0]` = `0x418e2000`, block `alloc00875`) is empty (`+2 = 0` in all 100 slots) but keeps the allocator fill: type `+0`, `+1` and `+0x18` all `0xa7`. Type `0xa7` is a `ProjectileAnim` no-op (returns at `0x46e578`), so the counter value is irrelevant here. Native result for counter 0 and 1 is identical: 67,329 instructions, 100 `ProjectileAnim` calls, 0 `ProjectileAvance`, no other callee, and exactly 100 ordered u8 stores `[pool + 56·i + 1] = 0` (i = 0..99) during the first pass. No other byte of the 881 blocks changes. It returns EAX = `0x1e`; the frame caller ignores it. So this is not an empty pass: frame 1 normalizes the stale `+1` bytes.
+
+**Python change.** `maquina_projeteis.MaquinaProjeteis.calcular` already produced the same bytes, but it wrote `+1 = 0` 3,000 times. It now stores only nonzero bytes, as `0x46fc7f` does, and reproduces the original's ordered 100-store trace. The signature is unchanged: `calcular(low byte of u32 0x508f7c)`. There are no callbacks or effects at the M1 input; any effect would raise through `PoolProjeteis._efeito`.
+
+**Validation (all under the heavy lease).**
+- Capture: 5 bounded original executions. `MAJSympathie` was reached only in the declared counter-2000 case, as a named stop (one prior u32 store of 0 to `0x508044`).
+- `RISING_EMULAR=1 python3 -B -m unittest test_quadro_m1 test_maquina_projeteis test_ataque_vivo`: 26 tests, OK, 0 skips. This includes the native rerun equal to the committed fixture and the existing projectile-machine and live-attack differentials after the change.
+- `python3 -B scripts/check.py --domain combat`: documentation links passed, 250 tests OK, 150 skipped. The skips are the native differentials, which this gate runs without `RISING_EMULAR`; the affected ones were run natively above. The full emulated suite (`validar.py --emular`) was not rerun.
+
+**What frame 1 reaches in Combat.** Only `ProjectileCalcul`. The 16 M1 units have states 7 or 14, so none is in state 1/24 and `CalculAttaqueEngin` is not reached. The dispatcher's target scan (`EnginTrouveCible 0x453f74`, combat-owned, AI-owned gate) needs `([0x508f7c] + unit) & 0x1f = 0`, state ∉ {1, 14, 19} and a qualifying type. At M1 that first holds for unit 15 (type 8) at counter 17, then units 11/2/1/0 at counters 21/30/31/32. This is static, from the M1 bytes and `docs/AI_RUNTIME.md`; it is not captured and not pre-implemented.
+
+**Gaps and next step.** The frame-1 counter value of 1 is declared from `GameNextFrame`'s documented increment. Re-validate at the exact frame-1 inputs once Missions publishes the frame-1 capture and per-routine entry trace. AI-runtime/Missions must route the first `EnginTrouveCible` call (expected near frame 17) to the existing `alvos_alcance.encontrar_alvo` for re-validation at that frame. No cross-front contract changed.
+
+## Previous resumption: Stage 19 light inventory only
 
 The new human authorization supersedes the previous stop while preserving every prior Codex/Claude commit and capture. The later coordinator steering limits this recovery round to the **already-started static combat inventory**, prioritizing Core/AI recovery for M1. This turn ends after the reviewable notes; no implementation, native capture, Ghidra, heavy gate, integration, rebuild or automatic next round is authorized here.
 
