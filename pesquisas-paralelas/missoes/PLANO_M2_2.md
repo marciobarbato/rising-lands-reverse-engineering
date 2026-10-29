@@ -117,7 +117,10 @@ The market and proposition gates at frame 100 produced no message box with inact
 
 ### v3 probe
 
-The first attempt stopped at the declared 200,000-segment budget inside MenuInit → LoadPie, because the menu pictures make that many FileRead resumptions. The log is in `.local/`. The v3 scenario now declares a 3,000,000-segment budget and a 1,000,000-binding budget, the cap of Core's bench. A second attempt that requested 3,000,000 bindings was refused by that cap; its log is in `.local/`. The result of the rerun is in the HANDOFF.
+The first attempt stopped at the declared 200,000-segment budget inside MenuInit → LoadPie, because the menu pictures make that many FileRead resumptions. The log is in `.local/`. The v3 scenario now declares a 3,000,000-segment budget and a 1,000,000-binding budget, the cap of Core's bench. A second attempt that requested 3,000,000 bindings was refused by that cap; its log is in `.local/`. **v3 rerun** (`.local/m2r5-eventos-v3-2.json`, 2 frames, 111 s): startup, MissionLoad, load_tail and frames 1–2 complete with LoadPie executed natively over the CRT fseek fixture.
+- The LoadPie boundaries disappear; only `MCICD_*` and `PlaySnd_Manage` remain.
+- In every phase the RNG, the CRT seed, the shared cursor `0x4e1d18`, the counters and the DirectDraw call counts **equal the `-v2` probe**.
+- This is a probe, not a state comparison. A v3 recapture plus a byte comparison against `-v2` waits for M2.1 acceptance and for Core's `ftell`.
 
 ## 5. Expected boundaries per frame, and new boundaries that need an owner
 

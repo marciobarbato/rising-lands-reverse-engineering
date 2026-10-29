@@ -578,6 +578,7 @@ Merged `origin/main` d94a59e. The coordinator decided the 146 freed menu-bank al
 | N=1 policy | `.local/m2r5-policy-n1.json` | identical mask and totals to the committed M2.1 policy |
 | N=3 policy | `.local/m2r5-policy-n3.json` | passed, 7/7 phases reproduced |
 | 130-frame probe | `.local/m2r5-eventos-130.json` | see the plan |
+| v3 probe (2 frames) | `.local/m2r5-eventos-v3-2.json` | LoadPie executed; the per-phase logic indicators equal `-v2`. Two earlier attempts stopped at budget guards; their logs are preserved. |
 | Light tests | `test_preparacao_m2_2.py` | 4 tests |
 
 ### Not run
