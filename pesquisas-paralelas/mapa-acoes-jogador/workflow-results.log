@@ -14,11 +14,11 @@ HEAD is now at 6da9462 Initial fixture
 Preparing worktree (new branch 'feat/re-economy')
 branch 'feat/re-economy' set up to track 'origin/main'.
 HEAD is now at 6da9462 Initial fixture
-Worktree: /private/var/folders/yy/ylsnbtxn23qbz3f9wffb_2n80000gn/T/rising-workflow-gmdnp5cq/worktrees/re-missions 
+Worktree: /private/var/folders/yy/ylsnbtxn23qbz3f9wffb_2n80000gn/T/rising-workflow-gmdnp5cq/worktrees/re-missions
 Branch: feat/re-missions
-Worktree: /private/var/folders/yy/ylsnbtxn23qbz3f9wffb_2n80000gn/T/rising-workflow-z5b5vl_z/worktrees/re-core 
+Worktree: /private/var/folders/yy/ylsnbtxn23qbz3f9wffb_2n80000gn/T/rising-workflow-z5b5vl_z/worktrees/re-core
 Branch: feat/re-core
-Worktree: /private/var/folders/yy/ylsnbtxn23qbz3f9wffb_2n80000gn/T/rising-workflow-z5b5vl_z/worktrees/re-economy 
+Worktree: /private/var/folders/yy/ylsnbtxn23qbz3f9wffb_2n80000gn/T/rising-workflow-z5b5vl_z/worktrees/re-economy
 Branch: feat/re-economy
 Waiting for the repository integration lock...
 ok

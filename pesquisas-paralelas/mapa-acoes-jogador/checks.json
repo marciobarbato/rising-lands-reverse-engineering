@@ -23,6 +23,8 @@
   "lease": "not used",
   "logs_sha256": {
     "test-results.log": "49c3a1dc0efad09cfa7929dd532d6f46936d688a9230fcd0622a5e1eb6a38218",
-    "workflow-results.log": "a2a5f42e0ad89e7662c091b6f50c6bc479a2bb02f6bbbee6ddcfdb71ed6ff8a1"
-  }
+    "workflow-results.log": "d21a2033f8a6a5ce205434ae5893268f731dc360cdcdec21fb06a547690e4b8a"
+  },
+  "raw_workflow_log_sha256": "a2a5f42e0ad89e7662c091b6f50c6bc479a2bb02f6bbbee6ddcfdb71ed6ff8a1",
+  "log_formatting": "Persisted workflow log removes trailing whitespace only; the original tool-output hash is retained."
 }
