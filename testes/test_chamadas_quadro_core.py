@@ -279,7 +279,7 @@ class ReplayZonasAnimacaoQuadro1(unittest.TestCase):
                                  {int(b, 16) for b in c['native_blocks']})
 
     def test_unreached_modes_raise_before_any_store(self):
-        from chamadas_quadro_core import iniciar_zonas_jogo, animar_terreno, animar_vegetacao, animar_vegetacao_mapa
+        from chamadas_quadro_core import iniciar_zonas_jogo, animar_vegetacao_mapa
         dgroup = bytearray(0x523000 - 0x494000)
         dgroup[0x508726 - 0x494000] = 3
         m = MemoriaQuadro([(0x494000, dgroup)])
@@ -288,13 +288,49 @@ class ReplayZonasAnimacaoQuadro1(unittest.TestCase):
             with self.assertRaises(DependenciaRamoCore) as e:
                 iniciar_zonas_jogo(m, modo, 0)
             self.assertEqual(e.exception.endereco, alvo)
-        for funcao, alvo in ((animar_terreno, 0x477737), (animar_vegetacao, 0x47731b)):
-            with self.assertRaises(DependenciaRamoCore) as e:
-                funcao(m, 3, 5)
-            self.assertEqual(e.exception.endereco, alvo)
         with self.assertRaises(DependenciaRamoCore):
             animar_vegetacao_mapa(m)
         self.assertEqual(bytes(dgroup), antes)
+
+
+EXIBICAO = RAIZ / 'evidencias/fundacoes-quadro/captura-exibicao-quadro1.json'
+EXIBICAO_SHA256 = 'b4e6747324346ac1aacc1a36b5c31f4ae87b3a35551c6303b32265133385dee0'
+
+
+class ReplayExibicaoQuadro1(unittest.TestCase):
+    """Display scenario (M2 reference): 25x17 viewport, NextAnim* loops and the CRT rand stream."""
+    @classmethod
+    def setUpClass(cls):
+        dados = EXIBICAO.read_bytes()
+        if hashlib.sha256(dados).hexdigest() != EXIBICAO_SHA256:
+            raise AssertionError('Committed display-scenario capture changed')
+        cls.captura = json.loads(dados)
+
+    def test_capture_scope(self):
+        c = self.captura
+        self.assertEqual((c['scenario'], c['translation_executed'], c['path_reproduction']['passed']),
+                         ('exibicao', False, True))
+        self.assertEqual(len(c["calls"]), 70)
+        self.assertEqual(c['routine_entries']['rand:frame1'], 425)
+        self.assertEqual(c['not_reached'], ['MarcheGetPos', 'MarcheGetTaille', 'NextAnimVegetFullMap'])
+
+    def test_every_captured_call_replays_exactly(self):
+        sem_leitura = 0
+        for i, chamada in enumerate(self.captura['calls']):
+            with self.subTest(i=i, routine=chamada['routine'], phase=chamada['phase']):
+                m, entrada, saida = replay(chamada, None)
+                sem_leitura += m.conferir(self, chamada['changed_bytes'])
+                esperado, nativo = dict(entrada, **saida), regs(chamada['exit_registers'])
+                self.assertEqual({k: esperado[k] for k in REGISTROS}, {k: nativo[k] for k in REGISTROS})
+
+    def test_crt_rand_matches_the_frame_foundation_arithmetic(self):
+        from fundacoes_quadro import aleatorio_crt
+        for chamada in self.captura['calls']:
+            if chamada['routine'] == 'rand':
+                lidos = {int(a, 16): v for a, v, _ in chamada['read_before_write']}
+                bloco = bytearray(16)
+                bloco[12:16] = bytes(lidos[0x340000c + i] for i in range(4))
+                self.assertEqual(aleatorio_crt(bloco), int(chamada['exit_registers']['EAX'], 16))
 
 
 QUADRO1 = RAIZ / 'pesquisas-paralelas/missoes/evidencias/captura-quadro1-monde01-original.json'

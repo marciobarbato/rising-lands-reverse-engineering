@@ -103,6 +103,49 @@ def perturbacoes(unidades, descoberta0):
     }
 
 
+def perturbacoes_exibicao(bancada, base):
+    """Display-scenario cases, built from the live bench after MissionLoad (grid pointers, CRT seed).
+
+    ``base``: the v1 cases for the routines both scenarios share (static addresses only).
+    Viewport cells 0x806..0x80d (row 8, columns 6..13) lie inside the 25x17 viewport at the
+    frame-0 origin (4, 6) and the frame-1 origin (3, 5); 0x604/0x503 are those origins.
+    """
+    import struct
+    u32 = lambda a: struct.unpack('<I', bancada.cpu.mem_read(a, 4))[0]
+    tiles, objetos, animacao = u32(0x507d70), u32(0x507d74), u32(0x507dac)
+    semente = u32(0x522244) + 0xc
+    r = lambda nome, **regs: dict(case=nome, writes=[], registers=regs)
+    w = lambda nome, escritas, **regs: dict(case=nome, writes=escritas, registers=regs)
+    celulas = range(0x806, 0x80e)
+    agua = [(tiles + 2 * c, list(struct.pack('<H', t)))
+            for c, t in zip(celulas, (0x5d, 0x94, 0x95, 0x9c, 0x251, 0x252, 0x255, 0x256))]
+    agua += [(animacao + 0x80a, [1]), (animacao + 0x80b, [0]), (0x4e1d18, [155])]   # perm[155] % 64 == 0
+    queda = [(tiles + 2 * 0x604, [0x8b, 0]), (objetos + 0x604, [0]), (tiles + 2 * 0x503, [0x6d, 0]),
+             (objetos + 0x503, [0]), (semente, list(struct.pack('<I', 0x72d)))]      # next rand % 0x400 == 0
+    vegetacao = ([(objetos + c, [o]) for c, o in zip(celulas, (1, 0x17, 0x1b, 0x37, 0x38, 0x3a, 0x3e, 0xb))]
+                 + [(animacao + c, [a]) for c, a in zip(celulas, (0, 0xe, 0xf, 0xf, 0x3f, 0x3f, 0x1f, 3))]
+                 + [(0x4e1d18, [7])])                                                 # perm[7], perm[8] % 4 == 0
+    casos = {n: base[n] for n in ('SetClipping', 'InitGameZone', 'MouseSetZone', 'MouseTestZone', 'ChercheContacteur',
+                                  'MessageBoxExiste', 'PlayerEstContacterPourAlliance', 'MiniMapGetPos',
+                                  'MiniMapGetTaille', 'GameNextFrame', 'Random')}
+    casos.update({
+        'NextAnimTerrain': [w('tiles_even_counter', agua + [(0x508f7c, [2])]),
+                            w('tiles_odd_counter', agua + [(0x508f7c, [3])]),
+                            w('object_drop_0x8b_and_0x6d', queda),
+                            w('zero_width_high_edi', [(0x508724, [0, 0])], EDI=0xabcd1234),
+                            w('zero_rows', [(0x508726, [0, 0])], EDX=0x01000005)],
+        'NextAnimVeget': [w('objects_counter0', vegetacao + [(0x508f7c, [0])]),
+                          w('objects_counter2', vegetacao + [(0x508f7c, [2])]),
+                          w('objects_counter1', vegetacao + [(0x508f7c, [1])]),
+                          r('high_ecx', ECX=0xabcd0005),
+                          w('zero_width_high_ecx', [(0x508724, [0, 0])], ECX=0x12340005)],
+        'LongRand': [w('seed_zero', [(semente, [0, 0, 0, 0])]), w('seed_max', [(semente, [0xff] * 4)])],
+        'rand': [w('seed_drop', [(semente, list(struct.pack('<I', 0x72d)))]),
+                 w('zero_seed_pointer', [(0x522244, [0xf4, 0xff, 0xff, 0xff])])],
+    })
+    return casos
+
+
 class PerturbacoesLimitadas:
     """Hand the declared cases only to the first ``limite`` calls of a routine in each phase."""
     def __init__(self, bancada, casos, limite):
@@ -132,7 +175,7 @@ def executar_python(nome, antes, entrada, classe_bonus):
     return sorted(mudancas, key=lambda x: int(x[0], 16)), dict(entrada, **saida)
 
 
-def diferencial(limite=LIMITE_POR_FASE):
+def diferencial(limite=LIMITE_POR_FASE, cenario='v1'):
     from integracao.providers import load_economy_bonus
     classe_bonus = load_economy_bonus().BonusUnidades
     registro = dict(comparisons=0, by_routine={}, mismatches=[], dependencies=[], al_by_routine={})
@@ -173,9 +216,15 @@ def diferencial(limite=LIMITE_POR_FASE):
     descoberta0 = int.from_bytes(carregar_m1()[0][0x507d78 - 0x494000:0x507d7c - 0x494000], 'little')
     import percurso_quadro1 as pq
     casos = perturbacoes(unidades, descoberta0)
-    rotinas = cc.ROTINAS + tuple(n for n in cz.ROTINAS if n not in cc.ROTINAS)
-    b, iso, cap, reproducao, _ = pq.executar(rotinas, lambda b: PerturbacoesLimitadas(b, casos, limite), observador)
-    registro.update(path_reproduction=reproducao, calls=len(iso.registros), cases_with_stores=caixa,
+    if cenario == 'v1':
+        rotinas, limites = cc.ROTINAS + tuple(n for n in cz.ROTINAS if n not in cc.ROTINAS), None
+        construir = lambda b: PerturbacoesLimitadas(b, casos, limite)
+    else:
+        import capturar_exibicao_quadro1 as ce
+        rotinas, limites = ce.ROTINAS, ce.LIMITES
+        construir = lambda b: PerturbacoesLimitadas(b, perturbacoes_exibicao(b, casos), limite)
+    b, iso, cap, reproducao, _ = pq.executar(rotinas, construir, observador, cenario=cenario, limites=limites)
+    registro.update(scenario=cenario, path_reproduction=reproducao, calls=len(iso.registros), cases_with_stores=caixa,
                     unit_pool_base=hex(unidades), owner0_discovery_grid=hex(descoberta0),
                     perturbation_limit_per_phase=limite)
     return registro
@@ -184,10 +233,13 @@ def diferencial(limite=LIMITE_POR_FASE):
 def main():
     from emulador import HASH_ORIGINAL
     ap = argparse.ArgumentParser()
-    ap.add_argument('--saida', default='relatorios/chamadas-quadro1-emulada.json')
+    ap.add_argument('--cenario', default='v1', choices=('v1', 'exibicao'))
+    ap.add_argument('--saida')
     a = ap.parse_args()
+    a.saida = a.saida or ('relatorios/chamadas-quadro1-emulada.json' if a.cenario == 'v1'
+                          else 'relatorios/chamadas-exibicao-quadro1-emulada.json')
     t0 = time.monotonic()
-    r = diferencial()
+    r = diferencial(cenario=a.cenario)
     r.update(original_sha256=HASH_ORIGINAL, seconds=round(time.monotonic() - t0, 3),
              source_sha256={p: hashlib.sha256((RAIZ / p).read_bytes()).hexdigest() for p in (
                  'ferramentas/chamadas_quadro_core.py', 'ferramentas/memoria_quadro_core.py',
