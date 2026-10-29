@@ -28,9 +28,23 @@ import capturar_carga_missao_original as c
 from oraculo_carga_missao import (BancadaCargaMissaoOriginal, PULOS_INICIO, PILHA, RETORNO_MISSION_LOAD)
 
 
-def rodar(entradas, *, pulos=PULOS_INICIO, segmento=None, pegada=False):
+CENARIO = 'v1'
+
+
+def entradas_cenario(fill, clock, **kw):
+    if CENARIO == 'v1':
+        return c.entradas(fill, clock, **kw)
+    import cenarios_oraculo
+    return cenarios_oraculo.entradas_exibicao(fill, clock, **kw)
+
+
+def rodar(entradas, *, pulos=None, segmento=None, pegada=False):
     t = time.monotonic()
-    b = BancadaCargaMissaoOriginal(entradas, segundos=120, pulos=pulos)
+    if CENARIO == 'v1':
+        b = BancadaCargaMissaoOriginal(entradas, segundos=120, pulos=pulos or PULOS_INICIO)
+    else:
+        from oraculo_exibicao_missao import BancadaExibicaoOriginal
+        b = BancadaExibicaoOriginal(entradas, segundos=300, pulos=pulos)
     b.iniciar_relogio()
     b.executar_inicio()
     pre = b.snapshot_entrada()['blocks']
@@ -58,7 +72,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--captura', required=True)
     ap.add_argument('--relatorio', required=True)
+    ap.add_argument('--cenario', default='v1', choices=('v1', 'exibicao'))
     a = ap.parse_args()
+    global CENARIO
+    CENARIO = a.cenario
+    if CENARIO == 'v1':
+        pulos_base = PULOS_INICIO
+    else:
+        from oraculo_exibicao_missao import PULOS_EXIBICAO as pulos_base
     saida = ambiente_missoes.ROOT/a.relatorio
     if saida.exists():
         raise SystemExit(f'Refusing to overwrite {saida}')
@@ -68,7 +89,7 @@ def main():
     ni = cap['named_inputs']
     fill, clock = ni['allocation_fill'], ni['clock_ms'][0]
 
-    A = rodar(c.entradas(fill, clock), pegada=True)
+    A = rodar(entradas_cenario(fill, clock), pegada=True)
     bA = A['bench']
     replay = dict(seconds=A['seconds'], real_return=A['regs']['EIP'] == RETORNO_MISSION_LOAD,
                   al=A['regs']['EAX'] & 0xff,
@@ -82,7 +103,7 @@ def main():
                   unchanged=len({bA.sha256_codigo_exe, bA.sha256_codigo_inicial, A['code_after'],
                                  cap['code_integrity']['before'], cap['code_integrity']['after']}) == 1)
 
-    B = rodar(c.entradas(fill, clock), segmento=77777)
+    B = rodar(entradas_cenario(fill, clock), segmento=77777)
     segmentacao = dict(oracle_instructions_per_segment=[cap['limits']['instructions_per_segment'], 77777],
                        oracle_segments=[cap['oracle']['segments'], B['bench'].execucoes-B['bench'].segmentos_inicio_oraculo],
                        entry_equal=B['pre'] == A['pre'], final_equal=B['post'] == A['post'],
@@ -90,7 +111,7 @@ def main():
                        al_equal=(B['regs']['EAX'] & 0xff) == (A['regs']['EAX'] & 0xff),
                        real_return=B['regs']['EIP'] == RETORNO_MISSION_LOAD, seconds=B['seconds'])
 
-    C = rodar(c.entradas(0x5a if fill != 0x5a else 0x3c, clock))
+    C = rodar(entradas_cenario(0x5a if fill != 0x5a else 0x3c, clock))
     preench, outros, copiados = 0, 0, 0
     for n, (base, x) in A['post'].items():
         y = C['post'][n][1]
@@ -107,9 +128,9 @@ def main():
                          fill_bytes_copied_by_missionload=copiados, binding_log_equal=C['events'] == A['events'],
                          real_return=C['regs']['EIP'] == RETORNO_MISSION_LOAD, seconds=C['seconds'])
 
-    marcadores = {n: (0x7d000000+0x1000*i, limpeza) for i, (n, (_, limpeza)) in enumerate(sorted(PULOS_INICIO.items()))}
-    D = rodar(c.entradas(fill, clock), pulos=marcadores)
-    E = rodar(c.entradas(fill, clock ^ 0x00777777, diretorio=b'C:\\JOGOS\\RISINGBR', unidade=b'E', id_thread=7,
+    marcadores = {n: (0x7d000000+0x1000*i, limpeza) for i, (n, (_, limpeza)) in enumerate(sorted(pulos_base.items()))}
+    D = rodar(entradas_cenario(fill, clock), pulos=marcadores)
+    E = rodar(entradas_cenario(fill, clock ^ 0x00777777, diretorio=b'C:\\JOGOS\\RISINGBR', unidade=b'E', id_thread=7,
                          estado_memoria=bytes(range(32))))
     mascaras = {'untouched_allocation_fill': mascara(A['pre'], C['pre']),
                 'skip_derived_value': mascara(A['pre'], D['pre']),
@@ -119,7 +140,7 @@ def main():
         estaticos.update(range(ad, ad+tam))
 
     classes, faixas = {}, []
-    for inicio, fim, leitor in A['pegada']:
+    for inicio, fim, leitor, *_ in A['pegada']:
         atual = None
         for endereco in range(inicio, fim+1):
             if endereco < fim:
@@ -178,6 +199,7 @@ def main():
     revisao = subprocess.run(['git', '-C', str(ambiente_missoes.ROOT), 'rev-parse', 'HEAD'],
                              capture_output=True, text=True).stdout.strip()
     relatorio = dict(schema='rising-lands/missionload-original-validation/1', source_revision=revisao,
+                     scenario=CENARIO,
                      capture=a.captura, capture_sha256=hashlib.sha256(bruto).hexdigest(),
                      translation_executed=False, m1_accepted=False, replay=replay, code_integrity=codigo,
                      segmentation_invariance=segmentacao, allocation_fill_sensitivity=sensibilidade,

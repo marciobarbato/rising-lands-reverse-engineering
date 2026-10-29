@@ -95,6 +95,7 @@ def main():
     ap.add_argument('--saida', required=True)
     ap.add_argument('--rastro', required=True)
     ap.add_argument('--segundos-quadro', type=float, default=600.0)
+    ap.add_argument('--cenario', default='v1', choices=('v1', 'exibicao'))
     a = ap.parse_args()
     saida, caminho_rastro = ROOT/a.saida, ROOT/a.rastro
     for p in (saida, caminho_rastro):
@@ -103,21 +104,32 @@ def main():
     revisao = subprocess.run(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], capture_output=True, text=True).stdout.strip()
     sujo = subprocess.run(['git', '-C', str(ROOT), 'status', '--porcelain', '--', 'pesquisas-paralelas/missoes'],
                           capture_output=True, text=True).stdout
-    m1 = json.loads(CAPTURA_M1.read_bytes())
-    entrada_m1 = json.loads(ENTRADA_M1.read_bytes())
-    q = entradas_quadro(m1['named_inputs']['allocation_fill'], m1['named_inputs']['clock_ms'][0])
-    b = BancadaQuadroMissaoOriginal(q, segundos=120)
+    import cenarios_oraculo
+    from mapa_memoria_m1 import expandir_captura
+    caminho_m1, caminho_entrada = (cenarios_oraculo.caminho(a.cenario, 'captura_m1'),
+                                   cenarios_oraculo.caminho(a.cenario, 'entrada'))
+    entrada_m1 = json.loads(caminho_entrada.read_bytes())
+    m1 = expandir_captura(json.loads(caminho_m1.read_bytes()), entrada_m1)
+    fill, clock = m1['named_inputs']['allocation_fill'], m1['named_inputs']['clock_ms'][0]
+    if a.cenario == 'v1':
+        q = entradas_quadro(fill, clock)
+        b = BancadaQuadroMissaoOriginal(q, segundos=120)
+        named = dict(m1=q.base.manifesto(), frame=q.manifesto())
+    else:
+        b, _, named = cenarios_oraculo.bancada(a.cenario, fill, clock, segundos=300)
+    fontes = FONTES + (() if a.cenario == 'v1' else ('oraculo_exibicao_missao.py', 'exibicao_declarada.py',
+                                                       'cenarios_oraculo.py', 'mapa_memoria_m1.py'))
     relatorio = dict(
-        schema='rising-lands/monde01-frame1-original-capture/1', original_sha256=HASH_ORIGINAL,
+        schema='rising-lands/monde01-frame1-original-capture/1', original_sha256=HASH_ORIGINAL, scenario=a.cenario,
         translation_executed=False, python_composition=False, m2_accepted=False,
         mission='MONDE01 (new campaign, mission byte 1)', source_revision=revisao,
         source_dirty_paths=sujo.splitlines(),
-        source_sha256={n: hashlib.sha256((OWNED/n).read_bytes()).hexdigest() for n in FONTES},
-        m1_references=dict(capture_v2=dict(path=str(CAPTURA_M1.relative_to(ROOT)),
-                                           sha256=hashlib.sha256(CAPTURA_M1.read_bytes()).hexdigest()),
-                           entry=dict(path=str(ENTRADA_M1.relative_to(ROOT)),
-                                      sha256=hashlib.sha256(ENTRADA_M1.read_bytes()).hexdigest())),
-        named_inputs=dict(m1=q.base.manifesto(), frame=q.manifesto()),
+        source_sha256={n: hashlib.sha256((OWNED/n).read_bytes()).hexdigest() for n in fontes},
+        m1_references=dict(capture=dict(path=str(caminho_m1.relative_to(ROOT)),
+                                        sha256=hashlib.sha256(caminho_m1.read_bytes()).hexdigest()),
+                           entry=dict(path=str(caminho_entrada.relative_to(ROOT)),
+                                      sha256=hashlib.sha256(caminho_entrada.read_bytes()).hexdigest())),
+        named_inputs=named,
         limits=dict(frame_seconds=a.segundos_quadro, instructions_per_segment=b.instrucoes_segmento,
                     segments=b.limite_segmentos, bindings=b.limite_vinculos_total, allocations=b.arena.maximo),
         boundary_policy=b.politica_fronteiras())
@@ -143,9 +155,10 @@ def main():
         relatorio['watched_unexecuted_writes'] = dict(
             routines=list(NAO_EXECUTADOS_QUADRO), ranges=[[hex(x), hex(z)] for x, z in b.intervalos_vigiados],
             sources=[dict(address=hex(k[0]), size=k[1], indexed=k[2], writers=v) for k, v in sorted(vigiado.items())])
-        relatorio['state_s0'] = dict(summary=b.resumo_imagem(s0), equals='capture v2 oracle.final_state',
+        relatorio['state_s0'] = dict(summary=b.resumo_imagem(s0), equals=f'{caminho_m1.name} oracle.final_state',
                                      native_stack_sha256=hashlib.sha256(bytes(b.cpu.mem_read(PILHA, 0x10000))).hexdigest())
         anterior, fases = s0, []
+        ddcalls = len(b.directdraw.chamadas) if hasattr(b, 'directdraw') else 0
         etapas = (('load_tail', lambda: b.executar_cauda_carga(a.segundos_quadro)),
                   ('between_frames', lambda: b.executar_entre_quadros(120)),
                   ('frame1', lambda: b.executar_quadro(a.segundos_quadro)))
@@ -172,6 +185,10 @@ def main():
                 state_after=instantaneo(b, imagem, anterior)))
             if nome == 'between_frames':
                 fases[-1]['declared_caller_frame'] = b.declaracao_chamador
+            if hasattr(b, 'estado_exibicao'):
+                fases[-1]['display_state'] = b.estado_exibicao()
+                fases[-1]['directdraw_calls'] = b.directdraw.chamadas[ddcalls:]
+                ddcalls = len(b.directdraw.chamadas)
             anterior = imagem
             relatorio['phases'] = fases
         relatorio['frame1_return'] = dict(reached=regs['EIP'] == RETORNO_CALCUL_GAME, eip=hex(regs['EIP']),
@@ -199,7 +216,7 @@ def main():
     relatorio['import_resolutions'] = b.importacoes_declaradas
     relatorio['total_seconds'] = round(time.monotonic()-t0, 3)
     if resultado:
-        saida = ROOT/'.local'/('m2-frame1-failed-'+time.strftime('%Y%m%dT%H%M%S')+'.json')
+        saida = ROOT/'.local'/(f'm2-frame1-{a.cenario}-failed-'+time.strftime('%Y%m%dT%H%M%S')+'.json')
         caminho_rastro = saida.with_suffix('.trace.json')
     saida.parent.mkdir(parents=True, exist_ok=True)
     with open(saida, 'x') as f:
