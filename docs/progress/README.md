@@ -30,4 +30,6 @@ The live consolidated report is [docs/PROGRESS.md](../PROGRESS.md). It separates
 
 - [Closed M2 round 5 CXR-20261029-M2R5](2026-10-29-M2R5-closed.md): **M2.1 accepted** at `32bb391` (reproduced on MacBook and Mac mini); M2.2 moves to the Mac mini; M2 not accepted.
 
+- [Closed M2 round 6 CXR-20261029-M2R6](2026-10-29-M2R6-closed.md): **M2.2 accepted** at `b9f4b5d` (128 frames, reproduced on MacBook and Mac mini); M2.3 running on the Mac mini; M2 not accepted.
+
 At each actual execution-round closure, append a new `YYYY-MM-DD-CXR-NN-closed.md` snapshot copied from the verified live report and add it here. Keep a failed/pending round too, with its unchanged main SHA and reason. Never edit a prior snapshot to reflect later success. A repeated heartbeat without a changed round disposition does not require a duplicate snapshot.
