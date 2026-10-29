@@ -1,0 +1,262 @@
+{
+ "schema": "rising-lands/audio-m3-validation/1",
+ "provider": {
+  "display_calls": 58,
+  "initialized_calls": 111,
+  "initialized_scenarios": 99,
+  "mismatches": 0,
+  "failures": []
+ },
+ "windows": {
+  "method": "Trace-driven raw Missions boundaries -> provider recorder -> exact semantic stream comparator",
+  "m22": {
+   "artifact": "pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz",
+   "compressed_sha256": "4c8f5c14a9623131dd019eafcdc49ea63054ee358f9defde58c12cb949f59ff3",
+   "raw_sha256": "1ad031b96300e5c632fd5b6b7857ae30792f78e86531e4f17d1bf7124c6dd930",
+   "phases": 257,
+   "comparison": {
+    "equal": true,
+    "expected_events": 128,
+    "actual_events": 128,
+    "mismatches": 0
+   },
+   "provider_return_counts": {
+    "1": 128
+   },
+   "routine_counts": {
+    "PlaySnd_Manage": 128
+   }
+  },
+  "m23_parts": [
+   {
+    "artifact": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.parte00.json.xz",
+    "compressed_sha256": "fb67e9f73fbef944fec8ccfe689be6e713e9f972631ec710f14152f7dae5a12e",
+    "raw_sha256": "a0d63986b3a17d8d1d61498db1982ada4efb65a1a4bfc0f3e2490c02ae0014a2",
+    "phases": 2001,
+    "comparison": {
+     "equal": true,
+     "expected_events": 1000,
+     "actual_events": 1000,
+     "mismatches": 0
+    },
+    "provider_return_counts": {
+     "1": 1000
+    },
+    "routine_counts": {
+     "PlaySnd_Manage": 1000
+    }
+   },
+   {
+    "artifact": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.parte01.json.xz",
+    "compressed_sha256": "558f145ef19cf134a6f01b902252602349c6837aca0153a30506c36461fc344a",
+    "raw_sha256": "de17339b4e05a4f6b836b73d31a7278a182579390645855e63d28967df8a917c",
+    "phases": 2000,
+    "comparison": {
+     "equal": true,
+     "expected_events": 1000,
+     "actual_events": 1000,
+     "mismatches": 0
+    },
+    "provider_return_counts": {
+     "1": 1000
+    },
+    "routine_counts": {
+     "PlaySnd_Manage": 1000
+    }
+   },
+   {
+    "artifact": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.parte02.json.xz",
+    "compressed_sha256": "74f4c5ac49f1c21358a48ab866c767a82d537bc1a186b1cc675ba334ca62640f",
+    "raw_sha256": "062acde27a9a6bdc32077b5de65cf1ab26d321116027404ca691f698646ce630",
+    "phases": 2000,
+    "comparison": {
+     "equal": true,
+     "expected_events": 1000,
+     "actual_events": 1000,
+     "mismatches": 0
+    },
+    "provider_return_counts": {
+     "1": 1000
+    },
+    "routine_counts": {
+     "PlaySnd_Manage": 1000
+    }
+   },
+   {
+    "artifact": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.parte03.json.xz",
+    "compressed_sha256": "4e07303b78c60bc545ae98d41da1e1b9661936b19ea009edf10ed713d572ae96",
+    "raw_sha256": "62dc0f26c386fa9123960ab445805d6e79540b64838b200223e81f452b78d885",
+    "phases": 2000,
+    "comparison": {
+     "equal": true,
+     "expected_events": 1000,
+     "actual_events": 1000,
+     "mismatches": 0
+    },
+    "provider_return_counts": {
+     "1": 1000
+    },
+    "routine_counts": {
+     "PlaySnd_Manage": 1000
+    }
+   },
+   {
+    "artifact": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.parte04.json.xz",
+    "compressed_sha256": "ac55a870fcc78274e9e2f0e4c8b3984502b35b0317bf3fcddcf153e17254d28a",
+    "raw_sha256": "42a38a1b7acd6166eceb246164f9db10f5a796ba305a99f048b0004b404d7ca2",
+    "phases": 2000,
+    "comparison": {
+     "equal": true,
+     "expected_events": 1000,
+     "actual_events": 1000,
+     "mismatches": 0
+    },
+    "provider_return_counts": {
+     "1": 1000
+    },
+    "routine_counts": {
+     "PlaySnd_Manage": 1000
+    }
+   },
+   {
+    "artifact": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.parte05.json.xz",
+    "compressed_sha256": "ad494a803d517d13133474803b3ec892df9aec35c8cc69308213dfb8f3e38960",
+    "raw_sha256": "6519f763b2f0c65cc3ef5b1eabee3550f1987aa01724c2bc646568647cc35e8e",
+    "phases": 2000,
+    "comparison": {
+     "equal": true,
+     "expected_events": 1000,
+     "actual_events": 1000,
+     "mismatches": 0
+    },
+    "provider_return_counts": {
+     "1": 1000
+    },
+    "routine_counts": {
+     "PlaySnd_Manage": 1000
+    }
+   },
+   {
+    "artifact": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.parte06.json.xz",
+    "compressed_sha256": "1306a6ce8f70b05d91b31c113460c1a68517154fa6cbfbeda158b5fe6d00fde2",
+    "raw_sha256": "580b32cb3a26d3ee444fe6458a61868865bfe48382f838706580e325e124a616",
+    "phases": 2000,
+    "comparison": {
+     "equal": true,
+     "expected_events": 1000,
+     "actual_events": 1000,
+     "mismatches": 0
+    },
+    "provider_return_counts": {
+     "1": 1000
+    },
+    "routine_counts": {
+     "PlaySnd_Manage": 1000
+    }
+   },
+   {
+    "artifact": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.parte07.json.xz",
+    "compressed_sha256": "f6f1bbdb9552a64ad88e0acb7c9d350c94d5cc5c9ff2e26f9ee1e4c15335bd61",
+    "raw_sha256": "8dd18c512afeba734ef6f5c78919c20c760629cb213df5e6d7d6e89ad94b62ee",
+    "phases": 2000,
+    "comparison": {
+     "equal": true,
+     "expected_events": 1000,
+     "actual_events": 1000,
+     "mismatches": 0
+    },
+    "provider_return_counts": {
+     "1": 1000
+    },
+    "routine_counts": {
+     "PlaySnd_Manage": 1000
+    }
+   },
+   {
+    "artifact": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.parte08.json.xz",
+    "compressed_sha256": "1db04c296ebfe5b9dd698c15eb8867c35e0637d0e7b4c9dd25bbb5f10d2c67e7",
+    "raw_sha256": "582c38c820e1d012c28bcd0a7bd7abfd039c1c4986abbb28e1d1aa50bd0b90a0",
+    "phases": 1980,
+    "comparison": {
+     "equal": true,
+     "expected_events": 990,
+     "actual_events": 990,
+     "mismatches": 0
+    },
+    "provider_return_counts": {
+     "1": 990
+    },
+    "routine_counts": {
+     "PlaySnd_Manage": 990
+    }
+   },
+   {
+    "artifact": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.parte09.json.xz",
+    "compressed_sha256": "6c385670a501389efbf2465f7d45468b00926911732916840d33ab13394e6b9a",
+    "raw_sha256": "f70e893eb74aa7a399c803f6aa28c7916e6182a6e8bd37ffe84bece5eb92c39b",
+    "phases": 420,
+    "comparison": {
+     "equal": true,
+     "expected_events": 210,
+     "actual_events": 210,
+     "mismatches": 0
+    },
+    "provider_return_counts": {
+     "1": 210
+    },
+    "routine_counts": {
+     "PlaySnd_Manage": 210
+    }
+   }
+  ],
+  "m23_events": 9200,
+  "m22_prefix_comparison": {
+   "equal": true,
+   "expected_events": 128,
+   "actual_events": 128,
+   "mismatches": 0,
+   "differences": []
+  },
+  "committed_stream_comparisons": [
+   {
+    "equal": true,
+    "expected_events": 128,
+    "actual_events": 128,
+    "mismatches": 0,
+    "differences": []
+   },
+   {
+    "equal": true,
+    "expected_events": 9200,
+    "actual_events": 9200,
+    "mismatches": 0,
+    "differences": []
+   }
+  ],
+  "raid_window": {
+   "artifact": "pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde01-exibicao-v2.parte09.json.xz",
+   "compressed_sha256": "6c385670a501389efbf2465f7d45468b00926911732916840d33ab13394e6b9a",
+   "raw_sha256": "f70e893eb74aa7a399c803f6aa28c7916e6182a6e8bd37ffe84bece5eb92c39b",
+   "phases": 420,
+   "comparison": {
+    "equal": true,
+    "expected_events": 210,
+    "actual_events": 210,
+    "mismatches": 0
+   },
+   "provider_return_counts": {
+    "1": 210
+   },
+   "routine_counts": {
+    "PlaySnd_Manage": 210
+   }
+  },
+  "limitation": "No PostSound occurs in either accepted no-input window. Emitter logic is not rerun by this transport test."
+ },
+ "source_sha256": {
+  "fila_audio.py": "60e73a53190701993d3d98180040ea382087df321e9f4f274ff39f6e9278ff42",
+  "provedor_pedidos_m3_audio.py": "84320ebb4a6a3f4e7016e90e1502df7e6fd10ae9ed0a6ca965a36ed55af0200e",
+  "fluxo_pedidos_audio.py": "153a1c8f6707ea149b30ff923746f7d70bea6a36b402311f2f80b486aea4740f",
+  "validar_pedidos_m3_audio.py": "8667d63b54b7c42ab977245d314ca736d6677218760c5b6e3b3e55bc90d3d1b7"
+ }
+}

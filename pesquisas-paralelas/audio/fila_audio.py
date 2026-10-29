@@ -264,7 +264,9 @@ class AudioQueue:
 
     def load_info(self,record,sound_id,bank,flags,volume):
         m=self.memory;b=BancoSom(m.view(bank,28),bank)
-        b.cabecalho=m.view(b.ponteiro_cabecalho,b.quantidade*12)
+        # FindIdInBanque does not dereference the header when count is zero.
+        # In the accepted display state the inherited header pointer is NULL.
+        b.cabecalho=memoryview(b'') if b.quantidade==0 else m.view(b.ponteiro_cabecalho,b.quantidade*12)
         return carregar_info_som(_LiveVariantCounter(m),m.view(record,44),sound_id,b,flags,volume)
 
     def destroy_only_sound(self,r):
