@@ -610,3 +610,5 @@ See `pesquisas-paralelas/graficos-animacao/ESCRITAS_AFFGAME_ENTRE_QUADROS.md`: s
 ## Declared display backend (M2 round 3)
 
 See `pesquisas-paralelas/graficos-animacao/FRONTEIRAS_EXIBICAO.md`: `fronteiras_exibicao.py` (Core16 DirectDraw COM backend; original wrappers run natively), boundary table, bank/file inventory and RestoreAll's static DGROUP effects.
+
+- [Logic-state effects of RestoreAll/AffGame](../pesquisas-paralelas/graficos-animacao/EFEITOS_LOGICOS_EXIBICAO.md): native capture shows no logic-read byte written in the captured domain; `efeitos_logicos_exibicao.py` provider with named stops.
