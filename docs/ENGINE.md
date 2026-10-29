@@ -480,3 +480,26 @@ the world. BatimentEstHabiter reads the actual structure bag and live unit
 kinds internally. The default display tick follows the published Python read
 contract, not a host wall clock. Native renderer validation and throughput
 results are recorded in the stage handoff after the measured runs.
+
+The completed [Stage 3 proof](../motor/validation/stage3/summary.json) establishes
+**128/128** chained own-world surfaces equal to Python and the original full
+surface hashes, with carried cache, palette and effect equality and no world
+mutation. The input-time matrix has **113/113** complete native surfaces equal;
+the damaged-sanctuary case retains its expected **0x4085CB** stop. All 26
+perturbed stop/prefix cases match Python. The uninterrupted M2.3 run renders
+**9,200/9,200** complete surfaces with hashes equal to the original, with no
+stop or first difference. The ABI 1.3 logic regression stays 257/257 equal.
+
+The exclusive release [Swift/Metal client](../motor/validation/stage3/swift-metal.json)
+measures **248.64 render fps** and **61.22 engine+render+Metal fps** (16.33 ms
+per frame), including copied output buffers, GPU upload/conversion and GPU
+completion, excluding initialization, proof work and app UI/display pacing.
+It verifies 128 native indexed hashes and complete first/last RGBA readbacks.
+The supplied native path exceeds the 25 fps target; app UI integration remains
+with the macOS owner. No app source or acceptance record is changed.
+
+Both gates pass: engine fmt/strict Clippy, 27 Rust tests, 57 Python discovery
+tests plus seven isolated renderer checks, C/Swift/Metal interoperability;
+prepared common check 1,881 tests with 610 optional skips. Detailed proof scopes,
+unchanged native source identities, exact commands and remaining 1.5 boundaries
+are in the [handoff](../motor/HANDOFF.md).
