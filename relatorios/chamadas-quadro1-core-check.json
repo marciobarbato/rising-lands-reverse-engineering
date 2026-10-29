@@ -1,0 +1,12 @@
+{
+  "command": "python3 heavy_lease.py core -- python3 -B scripts/check.py --domain core",
+  "tree": "b3e6c9f",
+  "tests": 445,
+  "skips": 196,
+  "failures": 0,
+  "errors": 0,
+  "success": true,
+  "seconds": 15.018,
+  "documentation_links": "PASS",
+  "scope": "Required local Core gate on the M2.1 frame-0/frame-1 tree (docs included); the optional native test is skipped here and run separately under the lease: RISING_EMULAR=1 test_emulacao_chamadas_quadro_core + test_chamadas_quadro_core (16 tests OK, 48.9 s) and validar_chamadas_quadro_core.py (1,918 comparisons, 0 mismatches, 0 stops, relatorios/chamadas-quadro1-emulada.json)"
+}
