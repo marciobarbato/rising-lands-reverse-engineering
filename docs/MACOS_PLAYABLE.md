@@ -216,7 +216,14 @@ Claude M3 plan; no new game/UI features are planned here.
 
 An occluded WebView can report a hidden document while its native window is
 visible. Native smoke repaint barriers therefore wait for a completed WebView
-snapshot through the existing15-second request deadline, rather than waiting
+snapshot through the existing 15-second request deadline, rather than waiting
 for animation callbacks that WebKit suspends while hidden. This preserves
 paint verification and every interaction assertion. Timeout JSON also records
 the last assertion/stage and game/visibility diagnostics.
+
+
+The 2026-10-29 architecture decision targets a Rust engine/render library with
+a C ABI called by Swift. Python stays as the validated reference and current
+inspection/playback runtime; whether it ships later remains undecided. Live
+frame delivery awaits the coordinator's published C ABI/M3 plan after M2.3.
+No live Python delivery, guessed C symbols or loader behavior is implemented.
