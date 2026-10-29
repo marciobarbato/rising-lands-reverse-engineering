@@ -16,7 +16,7 @@ from bancada_combate_raid import BancadaCombateRaid, checkpoints, DEPENDENCIES
 from ambiente_combate_raid import ROOT
 
 HERE = Path(__file__).resolve().parent
-OUTPUT = HERE / 'evidencias/captura-combate-raid-original-v1.json'
+OUTPUT = HERE / 'evidencias/captura-combate-raid-original-v2.json'
 
 
 def execute(probe=False, window=32):
@@ -68,6 +68,14 @@ def execute(probe=False, window=32):
                 call(f'f{frame}-lethal-hp{hp}-{target}', 'EnginInfligeDegat',
                      dict(EAX=target, EDX=1, EBX=source, ECX=0),
                      declared_writes=((b.record(target)+0x9a, struct.pack('<H', hp)),))
+        # Camera-1 is a separate declared input: player units become hidden
+        # without changing unit coordinates or any occupancy/discovery grid.
+        for target, source in ((16, 0), (0, 16)):
+            for hp in (0, 1):
+                b.restore(state)
+                call(f'f{frame}-camera1-lethal-hp{hp}-{target}', 'EnginInfligeDegat',
+                     dict(EAX=target, EDX=1, EBX=source, ECX=0),
+                     declared_writes=((b.record(target)+0x9a, struct.pack('<H', hp)), (0x508041, b'\x01')))
         # Core death/removal is captured but remains its owner's API.
         b.restore(state)
         r = call(f'f{frame}-dying-to-removal-16', 'SetDyingEngin', dict(EAX=16))

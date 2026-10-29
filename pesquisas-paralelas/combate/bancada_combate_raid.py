@@ -18,7 +18,7 @@ PREFIX = 'pesquisas-paralelas/missoes/evidencias/m2-3/captura-quadros9200-monde0
 REGS = ('EAX', 'EBX', 'ECX', 'EDX', 'ESI', 'EDI', 'EBP', 'ESP', 'EIP', 'EFLAGS')
 # These are stops, never callbacks pretending the original callee returned.
 DEPENDENCIES = {
-    0x48aa79: 'PlaySnd_PostSound', 0x48aac0: 'PlaySnd_StopSound',
+    0x48aa79: 'PlaySnd_PostSound',
     0x48aacf: 'PlaySnd_PostVolume', 0x41a1ac: 'VoixOffAsk',
 }
 

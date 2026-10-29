@@ -58,3 +58,16 @@ StopSound boundary; physical removal is not claimed by v1. Camera-1 sanctuary
 variants include four complete destruction returns (damage 65535/FFFFFFFF at
 each checkpoint); damage 65536 wraps the accumulated word to its starting value.
 The original local-player camera-0 consumer stops at PostSound after adding damage.
+
+## Supplemental original lethal capture v2
+
+[evidence](evidencias/captura-combate-raid-original-v2.json) removes only the
+StopSound entry stop: the original StopSound/HandleSnd_StopHandle guards now
+execute. It adds explicit camera-1 lethal/overkill inputs and runs no unit
+windows (`--window 0`). This is an additive capture; v1 remains unchanged.
+There are 184 calls, 164 returns, 20 named PostSound stops, zero faults/limits
+or writes outside checkpoint blocks. Both real raid SetDyingEngin calls return,
+including the native AI group/task updates; RetireEngin subsequently returns
+at both checkpoints. The declared hidden camera-1 cases complete both lethal
+and overkill original unit consumers. These Core-owned bodies are evidence
+and provider requests, not new Combat translations.
