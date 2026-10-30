@@ -8,6 +8,7 @@ surfaces when available, and must reproduce each other for every frame (includin
 import argparse,collections,hashlib,json,lzma,struct,time
 from pathlib import Path
 import capturar_sondas_graficos_m3 as original
+from oraculo_carga_missao import DADOS_THREAD_CRT
 
 AQUI=original.AQUI
 REF='fd56f69'
@@ -64,7 +65,7 @@ class EscritasBatiments:
             for a in range(address,address+size):
                 if a not in self.targets:continue
                 key=(a,pc,self.b.fase,bytes(cpu.mem_read(a,1))[0]);self.readers[key]=self.readers.get(key,0)+1
-        for lo,hi in ((0x494000,0x523000),(0x60000000,0x60001000),(self.b.arena.base,self.b.arena.proximo)):
+        for lo,hi in ((0x494000,0x523000),(DADOS_THREAD_CRT,DADOS_THREAD_CRT+0x1000),(self.b.arena.base,self.b.arena.proximo)):
             self.memhooks.append(self.b.cpu.hook_add(original.unicorn.UC_HOOK_MEM_WRITE,write,begin=lo,end=hi-1))
             if self.targets is not None:self.memhooks.append(self.b.cpu.hook_add(original.unicorn.UC_HOOK_MEM_READ,read,begin=lo,end=hi-1))
         self.b.cpu.ctl_flush_tb()
@@ -110,7 +111,7 @@ def main(a):
     assert first['checks']==second['checks'];assert first['observation']['changing_bytes']==second['observation']['changing_bytes']
     result=dict(schema='rising-lands/cave-display-writer-reader/1',method=__doc__,probe_ref=REF,probe=a.probe,observed_frames=a.observe,
         executable_sha256=__import__('emulador').HASH_ORIGINAL,snapshot_sha256=sha(Path(a.snapshot).read_bytes()),
-        source_sha256=sha(Path(__file__).read_bytes()),passes=[first,second],passes_equal=True)
+        source_sha256=sha(Path(__file__).read_bytes()),watched_regions=['DGROUP',hex(DADOS_THREAD_CRT), 'native arena'],passes=[first,second],passes_equal=True)
     raw=json.dumps(result).encode();z=lzma.compress(raw);Path(a.output).write_bytes(z)
     Path(a.output+'.manifest.json').write_text(json.dumps(dict(raw_sha256=sha(raw),compressed_sha256=sha(z),probe=a.probe,
         observed_frames=a.observe,passes_equal=True,elapsed_seconds=[p['elapsed_seconds'] for p in result['passes']]),indent=1)+'\n')
