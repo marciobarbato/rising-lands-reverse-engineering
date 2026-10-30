@@ -1747,3 +1747,143 @@ against `8808d54`; it is not applied to the delivered app. The
 remain preserved. No parked run output is reused. Docs/evidence after `c5f1734`
 change no executable input. Only `feat/macos-playable` is pushed; no main merge,
 acceptance, new engine domain, ordered-UI claim or Test B work.
+
+## Main 6cdbc5a consumer rerun and selected-actor fatigue (2026-10-30)
+
+Runtime implementation/build: **afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0**,
+after a fast-forward merge of `origin/main` **6cdbc5a**. The app-owned C driver
+now explicitly accepts Rust Graphics **1.9** (`0x00010009`); ABI 1.6, copied
+buffers, generations, serial phase order, masks, inputs and failure publication
+remain unchanged. Swift/inspection version labels and the native ABI assertion
+follow that reviewed contract. No engine or research-front file is edited.
+
+Original identity remains intact RISING.EXE SHA256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+Test A still starts every world at S0 with the four immutable original tables,
+runs the real 128-frame prefix, and uses the app mapper and production C phase
+entry with audited persistent policy 2. Phase 2 consumes declared messages,
+cursor and signed key answers; phase 3 receives the same keys and no messages.
+The carried state/context is never replaced by a later oracle state. Frames require equal hashes of the owner's exact indicator fields and separately
+equal consumed inputs, orders and WndProc output flags; whole-state phases use
+the owner's published cumulative
+mask/block/register policy. Rendering after the prefix is excluded from Test A.
+A failed engine phase is a named dependency stop, not an equal phase.
+
+### Former frame 2,952 fatigue stop
+
+The new app-driver [bounded diagnostic](validation/m3-chain8-fatigue-diagnostic.json)
+reaches **4,500 completed frames**, including attempted render 2,952, without a
+stop. Its exact declared mouse events occur at 481/493/511; this is not a replay
+claim about the historical UI arrival times. It uses play policy 1 and the real
+advancing renderer, with no per-frame projection, proof observer or equality
+counter. Only boundary/stop projections are read for diagnosis.
+
+At completed frame 2,951, unit **12**, type **7**, owner **0**, state **7** stays
+selected (`+0xbd=1`) at original record address **0x474a8cf0**. The boundary has
+`u16(+4)=3`, `u16(+0x76)=4`, `u16(+0x74)=0`; frame 2,952 completes and the last
+word becomes 1. Both original-address 276-byte records and their SHA256 values
+are retained in the diagnostic. No consumer word is coerced, no draw is skipped,
+and no deselection or substitute image hides the boundary.
+
+This is the new renderer's explicit **type 5/7, word pair 3/4** extension in
+`motor/crates/rl-core/src/render_units.rs`, matching Graphics 1.9's committed
+`camadas_m3_api18.json` / `sobreposicoes_entrada_m3.validar_unidade`. It resolves
+this selected-builder boundary; it does not establish every fatigue pair or unit
+type. Other unsupported pairs keep the actual `AffInfoSelection 0x410be4` stop.
+The supported domain is owned by the engine/Graphics fronts, not broadened here.
+
+The app adds the separate `--orders-selected` benchmark option: the historical
+real AppKit selection/movement clicks at 8/8.2 seconds and pointer motion at
+8.5 seconds, keeping the actor selected. This workload does not use the newer
+benchmark's right-click/deselection gesture. The existing right-event fixture
+issue and other workloads are outside this task. Production input is unchanged.
+
+### Gates and preserved evidence
+
+Exact [APP_BUILD](validation/m3-chain8-app-build.log), run with
+`--development-ref HEAD --inputs-root "/Users/marcio/git/Rising Lands"
+--data-root "/Users/marcio/git/Rising Lands/local-data/macos-playable"`, passes
+**112 consumer tests / zero skips**, **27 native exercise checks**, and **21
+inspection/live checks**. The source/runtime/assets checks, ARM64 binaries and
+strict deep signing pass. Static Swift and the dynamically bound proof driver
+consume the same archived engine sources. No external engine override is used.
+
+The fresh [engine gate](validation/m3-chain8-engine-gate.log.gz) passes **30 Rust
+tests, 63 Python tests plus 10 renderer children**, **75 original-x86 comparisons /
+zero mismatches / zero skips**, C/Swift ABI checks and **128/128 Swift/Metal
+surfaces**. The player leaf subtest asserts **666/666 completed state comparisons**,
+zero mismatches/stops and **two declared adapter skips** (KeyTestRelease with a changing key stream and
+InitInputPlayer allocator setup, outside the fixed-key/already-loaded contract;
+separate from the
+75 fresh x86 comparisons, which have zero skips). The complete common gate
+passes **2,108 tests / 624 optional skips / zero failures or errors**. There is
+no `macos` selector in `scripts/check.py`; the requested selector's explicit
+usage error is preserved, and the supported complete suite supplies that gate.
+APP_BUILD separately supplies the app consumer/native UI gate.
+
+Fresh [prefix](validation/m3-chain8-prefix.json) and
+[uninterrupted long-chain](validation/m3-chain8-long.json) proofs retain
+**257/257 states, 11/11 checkpoints, 128/128 original and Python surfaces**, and
+**18,401/18,401 states / 9,200/9,200 original surfaces**, respectively. Both have
+null first stops and no observer failures. Proof wall times include auditing
+and are not play throughput.
+
+The first queued proof launch referenced the staging `.app`, which the successful
+builder moves into `dist/development/`. Those launch failures executed no state
+comparison; their logs and commands are preserved separately. The reruns use the
+delivered bundle. Two queued exclusive timing wrappers were stopped before grant
+so the remaining deterministic jobs could start, then requeued unchanged; the
+queue record distinguishes waiting from execution. All executed jobs use the
+unchanged shared lease helper and locks, with bounded native proof entry points.
+No other front's process or lease is modified.
+
+### Selected-actor UI result
+
+The actual [75-second ordered UI run](validation/m3-chain8-selected60.json)
+passes **4,501 completed frames**, with tags **1 and 5**, **five native human
+events**, observed next-frame gestures **482/494/512**, and null live/first stops.
+It sustains **60.009 game frames/s**, **59.942 displayed fps**, minimum full-second
+**58**, on the current **60 Hz** display. The actor stays selected; the
+[actual GPU readback](validation/m3-chain8-selected60.png) retains that visible
+selection. Play policy 1 has zero audit counts/time and zero publication drops;
+1,920,000 RGBA channel bytes are checked. This directly resolves the earlier
+2,952 failure for the historical selected-builder workload on the new engine.
+It does not claim a broader fatigue domain or fidelity beyond published original
+windows. All second bins and raw rates remain in the report.
+
+The separate [65-second no-order run](validation/m3-chain8-play60.json) also
+passes: **3,901 frames**, **60.013 game / 59.936 displayed fps**, minimum full
+second **57**, on the same 60 Hz monitor. Audits/time and publication drops are
+zero; GPU readback checks the same complete RGBA extent. This preserves the
+previous no-order play target. Neither display measurement is labeled 120 Hz.
+
+### Test A state half — new engine results
+
+| Probe | Frame hashes equal / compared | Whole-state phases equal / compared | First engine stop |
+|---|---:|---:|---|
+| [P1](validation/m3-chain8-state-P1.json.xz) | 501/501 | 1,002/1,002 | None in published window |
+| [P2](validation/m3-chain8-state-P2.json.xz) | 601/601 | 1,202/1,202 | None in published window |
+| [P3](validation/m3-chain8-state-P3.json.xz) | 3,001/3,001 | No published window | None in published window |
+| [P6](validation/m3-chain8-state-P6.json.xz) | 2,272/2,272 | 4,544/4,544 | None in published window |
+| [P7](validation/m3-chain8-state-P7.json.xz) | 3,572/3,572 | No published window | None in published window |
+| [K1](validation/m3-chain8-state-K1.json.xz) | 501/501 | No published window | None in published window |
+
+Every first difference and first engine stop is null. P3/P6/P7 now complete
+the original windows 129–3,129 / 129–2,400 / 129–3,700. K1 also completes all
+501 frames through 629; the former frame-141 viewport stop is resolved. No
+whole-state claim is added for P3/P7/K1 without a published window.
+
+Fresh [answers](validation/m3-chain8-answers.json) retain **155,597/155,597**
+with six canonical round trips. The [regression record](validation/m3-chain8-regression.json)
+checks every prior reached indicator hash and whole-state phase, both prefix
+row sequences, every answer/provenance field, and all **21 native binary inputs**:
+all are unchanged. The [correctness summary](validation/m3-chain8-correctness.json)
+keeps original evidence identities, requested/reached counts and actual stops.
+
+The [delivery manifest](validation/m3-chain8-delivery.json) binds the runtime,
+engine tree, reports, compressed raw hashes, commands and lease journal. Final
+docs/evidence/diagnostic-tool additions change no production runtime input after
+the validated build afbc0f0. Only `feat/macos-playable` is committed/pushed.
+No merge to main, acceptance, Test B or unrelated work is performed. Remaining
+dependencies include the broader renderer domain and human Test B replay on
+the original; full mission/campaign/audio are not claimed.

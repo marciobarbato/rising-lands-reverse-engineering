@@ -8,7 +8,64 @@ evidence inspector and the older synthetic **Treino livre** exercise (described
 in the historical sections below) remain available. It is a bounded
 reconstruction, not a complete original mission or campaign.
 
-## Current state (2026-10-30 07:15)
+## Current state — main 6cdbc5a rerun (2026-10-30)
+
+This feature delivery consumes the new engine from main **6cdbc5a** and updates
+the native consumer's explicit renderer gate to **Graphics 1.9**. Runtime/build:
+**afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0**. Engine ABI **1.6** and execution
+policies 0/1/2 are unchanged. The following historical sections preserve earlier
+validation; this summary supersedes their pending CAVE/fatigue results.
+
+The fresh app **Test A state half**, from S0 through the real 128-frame prefix,
+uses the same mapper/C phase entry as play and no later oracle-state reload:
+
+| Probe | Frame hashes equal / compared | Whole-state phases equal / compared | First engine stop |
+|---|---:|---:|---|
+| [P1](../apps/macos-preview/validation/m3-chain8-state-P1.json.xz) | 501/501 | 1,002/1,002 | None in published window |
+| [P2](../apps/macos-preview/validation/m3-chain8-state-P2.json.xz) | 601/601 | 1,202/1,202 | None in published window |
+| [P3](../apps/macos-preview/validation/m3-chain8-state-P3.json.xz) | 3,001/3,001 | No published window | None in published window |
+| [P6](../apps/macos-preview/validation/m3-chain8-state-P6.json.xz) | 2,272/2,272 | 4,544/4,544 | None in published window |
+| [P7](../apps/macos-preview/validation/m3-chain8-state-P7.json.xz) | 3,572/3,572 | No published window | None in published window |
+| [K1](../apps/macos-preview/validation/m3-chain8-state-K1.json.xz) | 501/501 | No published window | None in published window |
+
+Every first difference and engine stop is null in these requested windows.
+K1 now completes all 501 frames through 629, resolving the old viewport stop.
+Frame rows require equal indicator hashes plus separately equal inputs/orders
+and WndProc output flags; whole-state phases are separately compared under the
+published masks. Test A omits rendering after the prefix. P3/P7 have no published
+whole-state window in this proof.
+
+The former **frame 2,952 fatigue stop is resolved for the selected builder**.
+A bounded advancing-world diagnostic retains unit 12/type 7 selected with
+`u16(+4)=3`, `u16(+0x76)=4` and passes frame 2,952 through frame 4,500. The new
+Rust renderer explicitly supports that type-5/7 pair, matching Graphics 1.9;
+other unsupported pairs still stop. The app adds no renderer provider or state
+patch. The actual **75-second selected-actor AppKit/Metal run** reaches **4,501
+frames**, tags **1/5**, no stop, **60.009 game frames/s**, **59.942 displayed fps**
+(minimum full second **58**) on the current **60 Hz** monitor. It keeps the actor
+selected, with zero audits/time and publication drops. A separate 65-second
+no-order run sustains **60.013 game / 59.936 displayed fps**, minimum **57**.
+
+Fresh gates: **APP_BUILD 112 consumer tests / zero skips, 27 exercise checks,
+21 inspection/live checks**; `sh motor/validate.sh` passes (30 Rust/63 Python
+plus 10 renderer children, 75 fresh x86 comparisons / zero mismatches/skips,
+128/128 Swift/Metal surfaces; input leaves 666/666 with two declared adapter
+skips). The supported complete common suite passes **2,108 tests / 624 optional
+skips**. `scripts/check.py` has no macos domain selector; APP_BUILD supplies the
+app gate. Prefix **257/257 states, 11/11 checkpoints, 128/128 original and Python
+surfaces**; uninterrupted no-input chain **18,401/18,401 states / 9,200/9,200
+original surfaces**; answers **155,597/155,597**, six canonical round trips.
+Every prior reached frame/whole-state result and all 21 prepared native binary
+inputs remain unchanged.
+
+See the [handoff](../apps/macos-preview/HANDOFF.md#main-6cdbc5a-consumer-rerun-and-selected-actor-fatigue-2026-10-30)
+and [delivery manifest](../apps/macos-preview/validation/m3-chain8-delivery.json)
+for exact domains, raw timings, original identities, proof commands and skips.
+Only the feature branch is pushed; the coordinator owns integration/acceptance.
+Broader renderer/mission support remains bounded by the engine contracts;
+Test B/human original replay, full mission/campaign and audio remain open.
+
+## Historical state (2026-10-30 07:15)
 
 This summary supersedes older "pending" or "not implemented" remarks in the
 chronological sections below, which are kept as the validation record.
