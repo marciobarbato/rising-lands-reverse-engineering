@@ -828,3 +828,9 @@ Rust's additional frames through10800 are compared against the original.
 [Per-frame results and first-stop contracts](../motor/validation/chain11/piece3/summary.json)
 also record the passing exact-source `validate.sh` rerun. Prior-window and
 exclusive timing results are appended after their completion.
+
+[Prior-window regressions](../motor/validation/chain11/piece4/summary.json) pass
+again on the same implementation: K1/P3/P6/P7 indicators and surfaces remain
+501/3,001/2,272/3,572 exact frames, with all paired play/audit phases equal.
+P6 retains4,544/4,544 whole-state phases under the unchanged published mask.
+Fresh query and technology leaf runs retain675/675 and520/520 exact cases.

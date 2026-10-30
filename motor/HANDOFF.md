@@ -1874,3 +1874,22 @@ entries, C layout, actual Swift ABI1.6 and Metal render smoke. Native and harnes
 hashes remain stable throughout every completed run. No foreign source/evidence
 was changed and no main integration or acceptance was performed. Prior-window
 regressions and exclusive play timing follow below after those runs complete.
+
+## Prior equalities preserved — chain11
+
+The exact frozen implementation preserves every prior window: K1 **501/501**
+state indicators and surfaces through629; P3 **3,001/3,001** through3129;
+P6 **2,272/2,272** through2400; P7 **3,572/3,572** through3700. No addressed stop
+or difference occurs inside any window. All four also pass their paired
+play/audit checks:1,002/6,002/4,544/7,144 phases respectively. The advancing
+surfaces retain the previously qualified original AffText non-execution domain.
+
+P6 additionally passes **4,544/4,544 whole-state phases**, comparing16,002,289
+bytes per phase under the unchanged173,046-byte published mask, and the same
+4,544 paired phases. The final query and technology leaf reruns remain675/675
+and520/520 exact. All results share the frozen native/harness source hashes;
+the library and renderer hashes are checked explicitly. Per-frame reports,
+full original whole-state observations and source/binary identities are in
+`validation/chain11/piece4/`. Exclusive play timing is recorded separately after
+the coordinated measurement completes; this functional piece adds no new
+performance claim. The existing exact-source native gate remains passing.
