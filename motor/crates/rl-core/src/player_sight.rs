@@ -24,6 +24,18 @@ fn visible(m: &MemoriaJogo, c: u32, lit: bool) -> Result<bool> {
     let local = m.b(0x508041)?;
     Ok(m.b(m.d((if lit { 0x507d88 } else { 0x507d78 }) + 4 * local)? + c)? & 31 == 0)
 }
+fn terrain_color(m: &MemoriaJogo, c: u32) -> Result<u32> {
+    let object = m.b(m.d(0x507d74)? + c)?;
+    if (0x1d..0x35).contains(&object) {
+        return Ok(30);
+    }
+    let tile = m.w(m.d(0x507d70)? + 2 * c)?;
+    if tile >= 702 {
+        Ok(30)
+    } else {
+        m.b(0x509694 + tile)
+    }
+}
 pub fn minimap(m: &mut MemoriaJogo, owner: u8, cell: u16, mode: u8) -> Result<u32> {
     let (w, h, mw, mh) = (
         m.w(0x497168)?,
@@ -40,20 +52,9 @@ pub fn minimap(m: &mut MemoriaJogo, owner: u8, cell: u16, mode: u8) -> Result<u3
     for y in 0..sy {
         for x in 0..sx {
             let p = (start + y * 128 + x) & 65535;
-            let o = m.b(m.d(0x507d74)? + c)?;
-            let terrain = if (0x1d..0x35).contains(&o) {
-                30
-            } else {
-                let t = m.w(m.d(0x507d70)? + 2 * c)?;
-                if t >= 702 {
-                    30
-                } else {
-                    m.b(0x509694 + t)?
-                }
-            };
             match mode {
                 1 | 3 if u32::from(owner) == m.b(0x508041)? => {
-                    let color = m.b(m.d(0x4e24b4)? + terrain)?;
+                    let color = m.b(m.d(0x4e24b4)? + terrain_color(m, c)?)?;
                     m.sb(m.d(0x507d5c)? + p, color)?;
                 }
                 2 if u32::from(owner) == m.b(0x508041)? => {
@@ -65,7 +66,7 @@ pub fn minimap(m: &mut MemoriaJogo, owner: u8, cell: u16, mode: u8) -> Result<u3
                         if b != 0 {
                             b
                         } else {
-                            terrain
+                            terrain_color(m, c)?
                         }
                     };
                     m.sb(m.d(0x507d5c)? + p, color)?;
@@ -96,10 +97,10 @@ pub fn minimap(m: &mut MemoriaJogo, owner: u8, cell: u16, mode: u8) -> Result<u3
                             if a != 0 {
                                 a
                             } else {
-                                terrain
+                                terrain_color(m, c)?
                             }
                         } else {
-                            m.b(m.d(0x4e24b4)? + terrain)?
+                            m.b(m.d(0x4e24b4)? + terrain_color(m, c)?)?
                         };
                         m.sb(m.d(0x507d5c)? + p, color)?;
                     }

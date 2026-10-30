@@ -379,6 +379,17 @@ fn attack(m: &mut MemoriaJogo, u: u32, mode: u32, target: u32) -> Result<u32> {
 pub fn call(m: &mut MemoriaJogo, name: &'static str, r: [u32; 4], site: u32) -> Result<u32> {
     let [a, d, b, c] = r;
     match name {
+        "EnginGetCentreGroupe" => Ok(crate::chain_groups::centre(
+            m,
+            crate::FrameRegisters {
+                eax: a,
+                edx: d,
+                ebx: b,
+                ecx: c,
+                ..Default::default()
+            },
+        )?
+        .eax),
         "SelectionAddEngin" => {
             append(m, a & 65535, d & 255, false)?;
             Ok(0)
@@ -643,11 +654,29 @@ pub fn process(m: &mut MemoriaJogo, p: u32) -> Result<u32> {
             m.sw(0x495be0 + 2 * p, 65535)?;
             append(m, w[1], p, true)?;
         }
-        11 => return stop("SauveSelectionGroupe", 0x45eef8),
+        11 => {
+            crate::chain_groups::entry(
+                m,
+                "SauveSelectionGroupe",
+                crate::FrameRegisters {
+                    eax: p,
+                    edx: w[1] & 255,
+                    ..Default::default()
+                },
+            )?;
+        }
         12 => {
             m.sw(0x495be0 + 2 * p, 65535)?;
             deselect(m, p)?;
-            return stop("RestaureSelectionGroupe", 0x45ef2c);
+            crate::chain_groups::entry(
+                m,
+                "RestaureSelectionGroupe",
+                crate::FrameRegisters {
+                    eax: p,
+                    edx: w[1] & 255,
+                    ..Default::default()
+                },
+            )?;
         }
         16 => {
             if w[1] == 1 {

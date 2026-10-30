@@ -71,3 +71,7 @@ mod play;
 pub mod chain_stage5;
 mod chain_vision;
 mod player_cave;
+
+mod chain_groups;
+
+mod render_chain;

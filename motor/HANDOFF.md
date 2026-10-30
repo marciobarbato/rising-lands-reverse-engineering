@@ -1165,3 +1165,149 @@ is the M2 9,200-frame play window, not a claim about later work/hunger frames.
 The exclusive measurement reservation was queued, never granted, and cancelled;
 these numbers are not an exclusive-baseline speed comparison. The full raw
 percentile/max distributions and terminal hashes remain in the linked report.
+
+## Chain continuation — Graphics 1.9 and remaining vision/group queries
+
+The next additive test profile is `chain6`: logic remains the immutable
+`54d148d931cc3420fe256e6fec71462087597293`; only Graphics is overlaid from
+`24f0ec85714dbbfa4645212ca81f8f4145a76143`. The `logic`, `input` and first-piece
+`chain5` profiles and their evidence digests are unchanged. The Git-blob
+snapshot check covers every transitive module/capture; additional source/table
+pins are in `testes/chain6-reference-pins.json`. Original executable identity
+remains `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+
+Core additions are SauveSelectionGroupe `0x4726f7`, RestaureSelectionGroupe
+`0x472769`, EnginGetCentreGroupe `0x442139`, MiniMapRecentre `0x46a01b`,
+MiniMapSetPos `0x46a19e`, CalculPosition `0x420698` and RechercheDecalageSortie
+`0x41d1d0`. Inputs/returns preserve the pinned register conventions. Saving
+scans unit indices in order, removes prior group membership before assigning
+selected members. Restoring removes current selection, appends eligible group
+members up to255, then issues at most the first eligible local voice, including
+the builder sound-stop prefix. Audio is the existing unopened provider or the
+caller's explicitly declared Missions sound boundary, never an empty callback.
+Group centre uses only the first live matching member, as the original does;
+without one it uses the view rectangle. Minimap queries preserve signed-word
+clamps, caller upper-register halves and store order. The exit search checks
+rows then columns, excluding the centre, with the original collision bit.
+
+`exit_cell` returns **u16 AX**, the value its game callers consume. No value is
+invented for the original's uninitialized upper EAX word. The full register
+fixture entry requires the actual stack-residue input; the semantic `:AX`
+fixture explicitly compares only AX, all other returned registers and all
+supplied memory. This uncertainty is declared in each result's register masks.
+The committed read footprints do not capture that stack-residue word. The
+17 group fixtures containing non-executed sound bodies are explicit sparse-
+fixture skips, with the original boundary requests retained; they do not supply
+Audio's actual private image. Production does not install this fixture skip.
+
+Graphics adds the exact35 AffGame origins and the original sanctuary/CAVE pair
+and construction-projectile15/16 guards from the pinned follow-ups. RestoreAll
+retains the previous108-origin, single-sanctuary/projectile domain. Other
+origins/owners/states still stop by original address. Added pixel paths are the
+inhabited owner0 mode5 CAVE layer plan (level0, bounded flags/variant), native
+structure bag/gauge slices, type9 state13, farmer work tasks0–3, builder work
+with task1/2's return before overlays, depot markers for the proved type3 centre,
+and the SANTUÁRIO/FAZENDEIRO tooltip strings. Rendering order, raw animation
+counts, palette and cache format follow Graphics' tables. The production AffText
+`0x459454` stop and the fixture's exact request/pre-text-surface check remain.
+`rl_render_contrato` advances independently to1.9; ABI1.6, layouts, buffers,
+previous creation versions and all signatures remain unchanged.
+
+The extended surface reader carries one Rust world and renderer through the
+whole requested window. It verifies shared P3→P6→P7 prefixes against the
+published native state and both phase-surface hashes before reusing only their
+**reference comparisons**. Rust state, pixels, cache, background and display
+metadata are never replaced by a later capture. Each row records its immutable
+capture identity. Original raster-call equality is now a strict gate as well
+as original/Python pixels, Python cache and native text-boundary attestation.
+
+Preliminary original comparisons: **310/310** Core vision/group/query cases at
+the declared register widths,17 explicit sound-fixture skips; **200/200** P3
+own-world surfaces (129–328), including both construction-projectile cycles,
+with no pixel/cache/raster/text difference. Longer probes and the full engine
+gate must finish before this piece is described as delivered.
+
+Additional completed checks before the minimap-drag fix: K1 **501/501** state
+frames against pinned Python/original and **501/501** own-world full surfaces,
+with no stop; P3 **1,683 frames (129–1811)** at indicator level, then the Rust
+provider stop BatimentModifyMap `0x41d021` in frame1812 (Python continues).
+P6/P7 prefixes **200 frames through328** agree with Python/original; P6 additionally
+compares all400 whole-state phases and paired play/audit execution. The
+inhabited-facade/gauge matrix passes **515/515** native original entries, and the
+isolated farmer raster window passes **600/600** original full surfaces/calls.
+These isolated renderer inputs are separate original openings, not an advancing
+Rust simulation. The passing-scope report must retain that distinction.
+
+The first full engine gate for this piece found the missing caller continuation
+`InitGameZone(1,0)` after MiniMapSetPos `0x42bb5d` (call `0x42bb66`): four mouse-zone
+bytes diverged in `p2_minimap_right_held`. The actual call is now included. The
+older `input` Python profile's provider stop is retained in the leaf report as a
+resolved dependency only if the native call completes with **all original bytes
+and declared text requests exact**. No source/evidence pin, expected byte, input
+or comparison mask was changed to accept the completion. A corrected gate rerun
+is required; the initial failure is retained with the new report package.
+
+The pending second piece also adds the immediate construction continuation:
+`BatimentModifyMap` `0x419e97`, called at `0x41d021`. Its typed API takes the
+structure u16 and active byte and returns only effects. Footprint rows precede
+columns, dimensions come from the live original type table, cells skip only at
+256, and each original owner byte selects SetMiniMap mode6 or7. No structure
+record is written by this provider. The builder then executes its common timer20
+and sound tail; it does not return early after completion. The owner's Python
+contract leaves EAX/EDX unspecified, so the separate `:effects` fixture compares
+all original supplied bytes and the six preserved register values including ESP,
+with EAX/EDX comparison masks explicitly0. No scratch-register value is exposed
+by the production typed API. Original assembly and the two original entry cases
+plus read footprints are additional `chain6` pins, never edited evidence.
+
+SetMiniMap now reads terrain/object colour only on branches that consume it;
+mode6's owner-colour write requires no invented terrain input. This is a sparse
+input dependency correction, with the same ordered writes. The new routine and
+all affected regressions are pending the consolidated `engine-chain6-delivery4`
+shared lease; preliminary earlier frame1812-stop reports predate this addition.
+
+### Second continuation piece — measured delivery
+
+The final [report package](validation/chain6/piece2/summary.json) replaces the
+preliminary frame1812 limitation with **3,001/3,001 P3 original indicator frames,
+129–3129**, no difference or stop. This longer P3 run does not claim Python or
+whole-state equality. K1 is **501/501** Python/original indicator/input/order
+frames (129–629) and **501/501** advancing full surfaces. P6/P7 retain **200/200**
+frames each (129–328) against Python/original; P6 additionally compares **all400
+whole-state phases** under the unchanged published mask. K1/P6/P7 compare paired
+play/audit execution over **1,802/1,802** phase attempts, with every projected byte,
+register, retained event and clock exact.
+
+The advancing P3 surface prefix is **200/200** (129–328). Both final surface
+runs now additionally require carried original entry cache/background, the
+native cache cursor and Python display-effect equality, besides original/Python
+pixels and raster calls and the exact recorded text boundary. No later capture
+is a Rust input. The separate native renderer matrix is **515/515** CAVE
+facade/gauge entries, **600/600** farmer and **600/600** builder entries; these
+are independent original openings, not advancing simulations.
+
+Final owner comparisons are **310/310** vision/group/query entries (33 AX-only
+exit queries and17 explicitly skipped Audio fixtures, as qualified above) and
+**2/2** BatimentModifyMap effect entries. The final gate passes fmt, strict
+Clippy, **30 Rust /63 Python tests** (including10 isolated renderer tests),
+**75/75** pilot original comparisons and C/Swift/Metal checks, in **248.558s**
+after lease grant. The old minimap-drag divergence and stale-count gate failure
+are retained with their logs; the corrected gate independently checks all666
+input cases:660 completed equal,6 exact stops,2 declared skips. Negative tests
+also retain their expected rejection diagnostics for corrupt text requests.
+
+The release library `4fca8b7b0c5f75bd5d063aa9b39dac06ef2eaec42fce135c1880aecb43fe5f1d`
+completes9,200 play frames with **0.2591ms/frame logic**, p990.2987, maximum1.3025;
+rendering0.3875, logic+render0.6466, full ABI loop0.6492. Terminal full-state and
+surface hashes, generation and virtual clock equal the prior play60 run. This
+is a **shared-lease M2-window** measurement, excluding initialization,
+audit/export/hash work and presentation; later work/hunger frames and an
+exclusive performance comparison are not covered. The lease execution is
+bounded; preceding queue time is not benchmark time.
+
+Remaining work: the Core structure-entry/state13/tag0x10/tag0x21 bodies; Economy
+habitation/lodging/recruitment/abandonment, state5 work, state19 hunger and saved
+state restoration; Combat turret providers; longer P6 whole-state and P3/P6/P7
+surface windows; S1/D1 endpoints. These are dependencies to port, not successful
+mission-completion claims. The macOS consumer separately updates its explicit
+render-contract acceptance to1.9; ABI1.6 and its copied layouts are unchanged.

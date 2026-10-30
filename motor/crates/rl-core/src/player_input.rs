@@ -396,7 +396,17 @@ impl Input {
                 m.sw(0x507d6c, m.w(0x507d68)?.wrapping_sub(m.w(X)?))?;
                 m.sw(0x507d6e, m.w(0x507d6a)?.wrapping_sub(m.w(Y)?))?
             } else {
-                return stop("MiniMapSetPos", 0x42bb5d);
+                crate::chain_vision::extra(
+                    m,
+                    "MiniMapSetPos",
+                    crate::FrameRegisters {
+                        eax: m.w(X)?,
+                        edx: m.w(Y)?,
+                        ecx: 1,
+                        ..Default::default()
+                    },
+                )?;
+                crate::frame_core::init_zone(m, 1)?;
             }
         } else {
             m.sb(0x4e05a8, 0)?

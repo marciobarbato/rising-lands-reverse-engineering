@@ -581,7 +581,7 @@ fn progress_tick(m: &mut MemoriaJogo, u: u32) -> Result<()> {
         if t == 9 {
             return stop("SetMurAllentour", 0x41d012);
         }
-        return stop("BatimentModifyMap", 0x41d021);
+        crate::chain_vision::structure_minimap(m, s as u16, 1)?;
     }
     m.sb(r + 0x8b, 20)?;
     if m.b(r)? == m.b(0x508041)? {

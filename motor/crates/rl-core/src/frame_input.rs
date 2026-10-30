@@ -447,11 +447,52 @@ const ORIGINS: &[(u16, u16)] = &[
     (39, 42),
     (39, 47),
 ];
+const AFFGAME_ORIGINS: &[(u16, u16)] = &[
+    (1, 0),
+    (2, 0),
+    (3, 0),
+    (4, 0),
+    (5, 0),
+    (7, 0),
+    (9, 0),
+    (10, 0),
+    (10, 16),
+    (11, 0),
+    (13, 0),
+    (14, 0),
+    (15, 0),
+    (17, 0),
+    (19, 0),
+    (19, 1),
+    (19, 2),
+    (19, 3),
+    (19, 4),
+    (19, 5),
+    (19, 6),
+    (19, 7),
+    (19, 8),
+    (19, 9),
+    (19, 10),
+    (19, 11),
+    (19, 12),
+    (19, 13),
+    (19, 14),
+    (19, 15),
+    (19, 16),
+    (19, 17),
+    (19, 18),
+    (19, 19),
+    (31, 0),
+];
 pub fn display_effects(m: &mut MemoriaJogo, flips: u32) -> Result<()> {
+    display_effects_for(m, flips, false)
+}
+fn display_effects_for(m: &mut MemoriaJogo, flips: u32, affgame: bool) -> Result<()> {
     if (m.u16(0x508724)?, m.u16(0x508726)?) != (25, 17) {
         return stop("Display effect viewport", 0x4178f7);
     }
-    if !ORIGINS.contains(&(m.u16(0x508720)?, m.u16(0x508722)?)) {
+    let origin = (m.u16(0x508720)?, m.u16(0x508722)?);
+    if !(ORIGINS.contains(&origin) || affgame && AFFGAME_ORIGINS.contains(&origin)) {
         return stop(
             if m.player.is_some() {
                 "AffGame"
@@ -462,35 +503,42 @@ pub fn display_effects(m: &mut MemoriaJogo, flips: u32) -> Result<()> {
         );
     }
     let mut occupied = 0;
+    let mut single = true;
+    let mut pair_indices = true;
     for i in 0..1000 {
         let r = 0x49a0c8 + 276 * i;
         let state = m.u8(r + 5)?;
         if state > 7 {
-            return stop(
-                if m.player.is_some() {
-                    "AffGame"
-                } else {
-                    "Display structure state"
-                },
-                0x407dd3,
-            );
+            return stop("AffGame", 0x407dd3);
         }
-        if state != 0 {
-            occupied += 1;
-            if occupied > 1 || m.u8(r + 8)? != 2 {
-                return stop(
-                    if m.player.is_some() {
-                        "AffGame"
-                    } else {
-                        "Display structure domain"
-                    },
-                    0x407dd3,
-                );
-            }
-            if state == 3 {
-                return stop("BatimentEstHabiter display mode3", 0x40863e);
-            }
+        if state == 0 {
+            continue;
         }
+        occupied += 1;
+        single &= m.u8(r + 8)? == 2;
+        pair_indices &= i < 2;
+        if state == 3 {
+            return stop("BatimentEstHabiter display mode3", 0x40863e);
+        }
+    }
+    let cave = 0x49a0c8 + 276;
+    let pair = affgame
+        && occupied == 2
+        && pair_indices
+        && m.u8(0x508041)? == 0
+        && m.u8(0x49a0c8 + 8)? == 2
+        && matches!(m.u8(0x49a0c8 + 5)?, 4 | 5)
+        && m.u8(0x49a0c8 + 4)? == 0
+        && m.u16(0x49a0c8 + 6)? == 0
+        && m.u16(0x49a0c8 + 10)? == 600
+        && m.u8(cave + 8)? == 3
+        && m.u16(cave + 6)? == 0
+        && ((m.u8(cave + 5)? == 2 && m.u8(cave + 4)? == 200 && m.u16(cave + 10)? <= 100)
+            || (m.u8(cave + 5)? == 5
+                && matches!(m.u8(cave + 4)?, 0 | 200)
+                && m.u16(cave + 10)? == 100));
+    if !(occupied <= 1 && single || pair) {
+        return stop("AffGame", 0x407dd3);
     }
     if m.u8(0x50b178)? > 1 {
         return stop("Display monster count", 0x41591f);
@@ -501,8 +549,22 @@ pub fn display_effects(m: &mut MemoriaJogo, flips: u32) -> Result<()> {
         let p = pool.wrapping_add(56 * i);
         if m.u8(p + 2)? != 0 {
             active += 1;
-            if active > 1 || ![31, 32].contains(&m.u8(p)?) {
-                return stop("Display projectile domain", 0x46ff70);
+            if active > 1
+                || !([31, 32].contains(&m.u8(p)?)
+                    || affgame
+                        && i == 0
+                        && matches!(m.u8(p)?, 15 | 16)
+                        && m.u8(p + 2)? == 1
+                        && m.u8(p + 0x18)? < 16)
+            {
+                return stop(
+                    if m.player.is_some() {
+                        "AffGame"
+                    } else {
+                        "Display projectile domain"
+                    },
+                    0x46ff70,
+                );
             }
         }
     }
@@ -537,7 +599,7 @@ pub fn affgame(m: &mut MemoriaJogo) -> Result<u32> {
     if m.u16(0x496204)? != 65535 {
         return stop("AffGame marker animation", 0x417ba2);
     }
-    display_effects(m, u32::from(m.u8(0x49a05b)?) + 1)?;
+    display_effects_for(m, u32::from(m.u8(0x49a05b)?) + 1, true)?;
     if m.player.is_some() {
         // AffGame's post-flip cursor handoff, 0x417db2..0x417e78.
         // The software cursor uses this flag on the *following* draw. ShowCursor

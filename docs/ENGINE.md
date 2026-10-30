@@ -721,3 +721,22 @@ The original-address guards still stop unsupported display and economic paths.
 ABI 1.6 and persistent play execution are unchanged. Exact validation scope,
 remaining boundaries and subsequent profile extensions are recorded in the
 [engine handoff](../motor/HANDOFF.md).
+
+The second continuation uses the separate `chain6` profile, retaining logic
+`54d148d` and overlaying Graphics `24f0ec8`. The native renderer's additive
+contract identifier is1.9, independently of the unchanged C ABI1.6. It covers
+the pinned inhabited CAVE/work/selection layers and exact additional AffGame
+origins while preserving the production AffText boundary. Core group and
+minimap/exit queries consume the same live memory. AX-only exit-position callers
+do not receive fabricated upper-register bits; full-register fixtures require
+the actual original stack residue. Detailed scope and measured delivery remain
+in the [handoff](../motor/HANDOFF.md).
+
+This continuation now includes construction's BatimentModifyMap effect call and
+its timer/sound continuation. The final second-piece package proves P3's full
+3,001-frame original indicator window through3129; K1's501 state/surface frames
+through629;200-frame P6/P7 prefixes through328, including400 P6 whole-state
+phases; and the stronger carried-cache/effect surface gates. Final play logic
+averages0.2591ms/frame over9,200 frames under a shared lease, with terminal hashes
+unchanged. Full contracts, qualifications, reports and remaining S1/D1 work are
+in the [handoff](../motor/HANDOFF.md#second-continuation-piece--measured-delivery).

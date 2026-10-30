@@ -51,7 +51,7 @@ impl Context<'_> {
             if selected >= 1000
                 || self.u8(a + 4)? != 0
                 || self.camera != 0
-                || self.u8(a + 8)? != 2
+                || !matches!(self.u8(a + 8)?, 2 | 3)
                 || self.u8(a + 5)? != 5
                 || self.u16(a + 0x74)? != 0
             {
