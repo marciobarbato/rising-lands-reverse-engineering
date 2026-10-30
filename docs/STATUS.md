@@ -35,6 +35,6 @@ Development on the MacBook paused at 07:00 on 2026-10-30; the user stopped every
 
 ## Estimate
 
-The coarse full-game estimate stays at about **50% (40–60%)**. It is reviewed only from the [roadmap inventory](ROADMAP_MONDE01.md#inventory-for-the-completion-estimate), never from counts of tests, files or runs. M3 (input and orders) and M4 (objectives, transport, combat on the victory path) remain the main uncertainty; save/load, menus and campaign progression are beyond MONDE01.
+The coarse MONDE01 estimate is about **60% (50–70%)** (raised 2026-10-30 13:50); measured indicators — criteria accepted, the Python chain's S1 frame reach, Rust reach, Test A — are at the top of [PROGRESS](PROGRESS.md). It is reviewed only from the [roadmap inventory](ROADMAP_MONDE01.md#inventory-for-the-completion-estimate), never from counts of tests, files or runs. M3 (input and orders) and M4 (objectives, transport, combat on the victory path) remain the main uncertainty; save/load, menus and campaign progression are beyond MONDE01.
 
 MONDE01 starts with a type-2 Santuário, not a type-3 CAVE. The objective is established by `TestFinDeMission`, not by the briefing prose.
