@@ -8,7 +8,7 @@ oracle: intact RISING.EXE SHA-256
 | Equal through / stop frame | Stop | Owner | Contract / status |
 |---|---|---|---|
 | 2546 / 2547 (previous run) | SetSortEngin `0x445fbc`, CALL `0x420f8c` | Economy | AX unit, DX exit cell; native S1 AX=4, DX=`0x0e0f`. Forwarding supplied by `dfb87bd`; fresh strict run now passes this frame. |
-| 3276 / 3277 (fresh strict/planning) | MineGetCapacite `0x475541`, CALL `0x44ca17` in CalculWorkEngin | AI/runtime binding; Economy query | AX=u16 mine index; native S1 AX=0, EAX out=`0x31` (49), other six data registers preserved. Economy's live `RecursosTerreno.capacidade_mina` exists. Missing cross-provider route; original capture complete, binding/differential pending. |
+| 3276 / 3277 (fresh strict/planning) | MineGetCapacite `0x475541`, CALL `0x44ca17` in CalculWorkEngin | AI/runtime binding; Economy query | AX=u16 mine index; native S1 AX=0, EAX out=`0x31` (49), other six data registers preserved. Live Economy query now bound: 101 native comparisons, zero mismatches. Chain rerun pending. |
 
 Strict and `--diagnostico-planejamento` indicator checks use replay-checked
 Missions S1 `bab6c7c`, starting after frame 128 and requesting 16,922 frames.
@@ -29,3 +29,13 @@ return ESP=`0x2007db8`. The only native read is u16 `[0x509956]`=`0x31`.
 Snapshot 3250 was copied to ignored `.local/m3/` from Core's read-only native
 inputs and hash-checked: `169488a6e34ce20586a087bf846682cdcba8cc2905efbc27f12f43125ae4a884`.
 All 28 states, 3250–3277, equal the committed original trajectory; code unchanged.
+
+Binding: `provedores_entrada_ia.consulta_capacidade_mina(m, regs, chamada)`
+routes through `DonosM3.externo`, requires known AX in 0..19, returns exact
+seven data registers and optional ESP+4, preserves explicit unknown bits and
+rejects pushed words. It reads Economy's `RecursosTerreno.capacidade_mina`
+on the live 80-byte table; no synthetic constructor or table copy. No mutations
+or callbacks; earlier caller effects remain. Evidence was committed at `bb99dac`
+before binding. [Native differential](validacao/consulta-mina-native.json)
+freshly reproduces all 101 original cases and compares complete and partial
+register routes; the real S1 ESP also agrees. Three focused tests pass.

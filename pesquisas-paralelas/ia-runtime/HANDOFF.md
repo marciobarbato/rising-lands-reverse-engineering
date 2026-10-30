@@ -899,3 +899,21 @@ The Economy query already exists; this checkpoint supplies original evidence
 only. Consumer binding and native differential follow. The owning domain gate
 is running. No foreign source, evidence or hash pin is changed; no main merge
 or acceptance. S1 pass-2 is still absent from main and Missions `7eeb395`.
+
+### Mine-query consumer binding
+
+Original evidence is pushed at `bb99dac`, before this route was added.
+`provedores_entrada_ia.consulta_capacidade_mina(m, regs, chamada)` binds
+MineGetCapacite through `DonosM3.externo` to Economy's live
+`RecursosTerreno.capacidade_mina`. Known AX in 0..19 is required before access;
+no pushed arguments. EAX is zero-extended reserve; the six preserved registers
+keep their actual values and unknown masks; optional ESP advances by four.
+No writes or callbacks; no copied table, fabricated inputs or rollback.
+
+Fresh leased `capturar_consulta_mina_ia.py --comparar`: **101/101 equal,
+zero mismatches**, complete original evidence reproduced, all seven registers
+and real S1 ESP equal. Both complete and partial-register routes agree;
+the 101 native cases are counted once. All 28 S1 original states and unchanged
+code reproduce again. Report: `validacao/consulta-mina-native.json`. Three
+focused tests pass (native replay, missing/uncertain/invalid AX, live-table
+mutation between queries and preserved uncertainty). Chain rerun follows.

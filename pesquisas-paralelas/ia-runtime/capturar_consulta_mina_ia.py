@@ -52,7 +52,6 @@ def capture():
     b = BancadaX86()
     uc = b.cpu
     reads_v = Leituras(uc)
-    from unicorn import x86_const as X
     regs_seed = {k: int(v, 16) for k, v in seed['entry_registers'].items()}
     for index in range(20):
         for reserve in (0, 1, 0x7fff, 0x8000, 0xffff):
@@ -86,8 +85,11 @@ def compare(case):
     m = MemoriaQuadro([(MINES, mines)])
     d = DonosM3(m, som=None)
     regs = {k: int(v, 16) for k, v in case['entry_registers'].items()}
+    if 'esp' in case:
+        regs['ESP'] = int(case['esp'], 16)
     out = d.externo('MineGetCapacite', CALL, regs)
-    dif = {k: [hex(out[k]), case['exit_registers'][k]] for k in REG7
+    checked = REG7 + (('ESP',) if 'esp' in case else ())
+    dif = {k: [hex(out[k]), case['exit_registers'][k]] for k in checked
            if out[k] != int(case['exit_registers'][k], 16)}
     partial = d.externo('MineGetCapacite', CALL, dict(EAX=regs['EAX'], _incertos={'EAX': 0xffff0000}))
     partial_ok = (partial['EAX'] == int(case['exit_registers']['EAX'], 16)
