@@ -1,4 +1,4 @@
-/* App orchestration/transport only. Actual logic and pixels come from Rust ABI1.3. */
+/* App orchestration/transport only. Actual logic and pixels come from Rust ABI1.4. */
 #include "MacOSLiveDriver.h"
 #include "rising_engine.h"
 #include <CommonCrypto/CommonDigest.h>
@@ -16,7 +16,7 @@ struct MacOSLiveDriver {
  void *library;
  FN(rl_versao); FN(rl_criar_mundo); FN(rl_carregar_blocos); FN(rl_passo_quadro);
  FN(rl_liberar_mundo); FN(rl_projetar_tudo); FN(rl_erro_mensagem);
- FN(rl_render_criar); FN(rl_render_geracao); FN(rl_render_quadro); FN(rl_render_liberar);
+ FN(rl_render_contrato); FN(rl_render_criar); FN(rl_render_geracao); FN(rl_render_quadro); FN(rl_render_liberar);
  RlMundo world; RlRenderer renderer; RlFrameInput input,phase2;
  MacOSLiveStatus status;
  uint8_t pixels[480000],palette[768];
@@ -72,13 +72,13 @@ MacOSLiveDriver *macos_live_create(const char*library,const char*root,char*error
  d->library=dlopen(library,RTLD_NOW|RTLD_LOCAL);if(!d->library){snprintf(error,capacity,"%s",dlerror());goto bad;}
 #endif
  LOAD(rl_versao);LOAD(rl_criar_mundo);LOAD(rl_carregar_blocos);LOAD(rl_passo_quadro);LOAD(rl_liberar_mundo);LOAD(rl_projetar_tudo);LOAD(rl_erro_mensagem);
- LOAD(rl_render_criar);LOAD(rl_render_geracao);LOAD(rl_render_quadro);LOAD(rl_render_liberar);
- if(d->rl_versao()!=0x10003){snprintf(error,capacity,"ABI1.3 required");goto bad;}
+ LOAD(rl_render_contrato);LOAD(rl_render_criar);LOAD(rl_render_geracao);LOAD(rl_render_quadro);LOAD(rl_render_liberar);
+ if(d->rl_versao()!=0x10004||d->rl_render_contrato()!=0x10007){snprintf(error,capacity,"ABI1.4 / Graphics1.7 required");goto bad;}
  uint32_t n=0;uint8_t*s0=file(root,"s0.bin",&n);if(!s0){snprintf(error,capacity,"Missing S0");goto bad;}
  d->bulk_capacity=n;d->bulk=malloc(n);uint32_t count=n>=4?le(s0):0,off=4;if(!count||count>65536){free(s0);goto bad;}RlBloco*blocks=calloc(count,sizeof(*blocks));
  if(!d->bulk||!blocks||count>65536){free(s0);free(blocks);goto bad;}
  for(uint32_t i=0;i<count;i++){if((uint64_t)off+8>n){free(s0);free(blocks);goto bad;}blocks[i].address=le(s0+off);blocks[i].length=le(s0+off+4);off+=8;if((uint64_t)off+blocks[i].length>n){free(s0);free(blocks);goto bad;}blocks[i].data=s0+off;off+=blocks[i].length;}
- int c=d->rl_criar_mundo(0x10003,20,0,&d->world);if(!c)c=d->rl_carregar_blocos(d->world,blocks,count);free(blocks);free(s0);if(c){fail(d,c,"S0");snprintf(error,capacity,"%s",d->status.message);goto bad;}
+ int c=d->rl_criar_mundo(0x10004,20,0,&d->world);if(!c)c=d->rl_carregar_blocos(d->world,blocks,count);free(blocks);free(s0);if(c){fail(d,c,"S0");snprintf(error,capacity,"%s",d->status.message);goto bad;}
  uint8_t*in=file(root,"input1.bin",&n);if(!in||n!=sizeof(d->input)){free(in);goto bad;}memcpy(&d->input,in,n);free(in);
  in=file(root,"input2.bin",&n);if(!in||n!=sizeof(d->phase2)){free(in);goto bad;}memcpy(&d->phase2,in,n);free(in);
  RlRenderBytes assets[9]={0};uint8_t*back[9]={0};char name[40];

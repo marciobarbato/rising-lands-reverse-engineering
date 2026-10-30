@@ -2,8 +2,6 @@
 import argparse
 import datetime
 import hashlib
-import io
-import tarfile
 import importlib.util
 import json
 import os
@@ -52,27 +50,13 @@ def main():
         sys.argv = original_argv
     from playable_assets import prepare_units, prepare_render_inputs
     prepare_units(args.source, args.workspace / 'source/cd', base / 'assets')
-    # Explicit development override while ABI1.3 is awaiting coordinator integration.
-    engine_source=Path(os.environ.get('RISING_MACOS_ENGINE_SOURCE',str(args.source/'motor'))).resolve()
+    # Build the integrated engine from the same immutable app source archive.
+    engine_source=(args.source/'motor').resolve()
     engine_revision=revision
-    if engine_source!=(args.source/'motor').resolve():
-        if mode!='development':raise ValueError('External engine source is development-only')
-        approved='363faa9c252ffb00d62c81db0da2ee5d4a3d7615'
-        engine_revision=subprocess.check_output(['git','-C',str(engine_source.parent),'rev-parse',approved+'^{commit}'],text=True).strip()
-        archive=subprocess.check_output(['git','-C',str(engine_source.parent),'archive','--format=tar',approved,'motor'])
-        pinned=base/'build/engine-source'
-        with tarfile.open(fileobj=io.BytesIO(archive)) as stream:
-            for member in stream:
-                path=Path(member.name)
-                if path.is_absolute() or '..' in path.parts or not path.parts or path.parts[0]!='motor':raise ValueError('Invalid pinned engine archive')
-                if member.isdir():continue
-                if not member.isfile():raise ValueError('Non-file pinned engine input')
-                content=stream.extractfile(member).read();target=pinned/path
-                if target.exists() and target.read_bytes()!=content:raise ValueError('Pinned engine source modified')
-                target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(content)
-        engine_source=pinned/'motor'
-    if '#define RL_ABI_VERSION 0x00010003u' not in (engine_source/'include/rising_engine.h').read_text():
-        raise RuntimeError('RustRendererABI1.3NotIntegrated: build requires the reviewed renderer contract')
+    if os.environ.get('RISING_MACOS_ENGINE_SOURCE'):
+        raise ValueError('ExternalEngineOverrideRetired: build uses integrated motor ABI1.4')
+    if '#define RL_ABI_VERSION 0x00010004u' not in (engine_source/'include/rising_engine.h').read_text():
+        raise RuntimeError('RustRendererABIVersionMismatch: app requires reviewed ABI1.4')
     # Build into our ignored target; never mutate either engine source tree.
     legacy.run(['cargo','build','--release','--locked','--manifest-path',engine_source/'Cargo.toml',
                 '--target-dir',base/'build/engine-target'], 'rust-engine-build.log')
@@ -183,7 +167,7 @@ def main():
                 raise SystemExit('Native UI smoke failed: ' + json.dumps(result, ensure_ascii=False))
     report = {'commit': revision, 'mode': mode, 'features': manifest['features'], 'bundle': str(final),
               'uiSmoke': not args.skip_ui_smoke, 'logs': str(base / 'build/logs'),
-              'inputsRoot': str(args.workspace), 'engineSourceRevision':engine_revision, 'engineSourceRoot':str(engine_source), 'engineStaticArchiveSHA256':hashlib.sha256(static_library.read_bytes()).hexdigest(), 'nativeEngineBinding':'static-abi13', 'pythonRuntimeInput': os.environ.get('RISING_PYTHON_RUNTIME'),
+              'inputsRoot': str(args.workspace), 'engineSourceRevision':engine_revision, 'engineSourceRoot':str(engine_source), 'engineStaticArchiveSHA256':hashlib.sha256(static_library.read_bytes()).hexdigest(), 'nativeEngineBinding':'static-abi14', 'pythonRuntimeInput': os.environ.get('RISING_PYTHON_RUNTIME'),
               'inspectionSmoke': not args.skip_ui_smoke,
               'builtAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
               'files': [{'path': str(p.relative_to(final)), 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}
