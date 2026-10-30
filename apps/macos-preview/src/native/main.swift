@@ -270,8 +270,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             let rate=Double(argument("--game-fps","20")) ?? -1
             guard ["play","test"].contains(mode),duration>=60,duration<=180,rate>=0,rate<=120 else{throw NSError(domain:"InvalidNativeBenchmarkArguments",code:1)}
             let live=try NativeLiveWindow(root:resourceRoot,validationMode:mode=="test");nativeLive=live
-            live.gameFPS=rate;live.update={_ in}
+            live.gameFPS=rate;live.update={_ in};live.benchmarkInput=args.contains("--benchmark-orders")
+            if let index=[15.0,20.0,30.0,60.0,0.0].firstIndex(of:rate){live.rateControl.selectItem(at:index)}
             live.perform("live-reset"){_ in live.perform("live-step"){_ in live.perform("live-play"){_ in
+                if live.benchmarkInput{
+                    DispatchQueue.main.asyncAfter(deadline:.now()+8){live.benchmarkClick(560,528)}
+                    DispatchQueue.main.asyncAfter(deadline:.now()+9){live.benchmarkClick(624,432)}
+                }
                 var lastPulse=ProcessInfo.processInfo.systemUptime,maxPulseGap=0.0,pulses=0
                 let pulse=Timer.scheduledTimer(withTimeInterval:0.05,repeats:true){_ in let now=ProcessInfo.processInfo.systemUptime;maxPulseGap=max(maxPulseGap,now-lastPulse);lastPulse=now;pulses+=1}
                 DispatchQueue.main.asyncAfter(deadline:.now()+duration){

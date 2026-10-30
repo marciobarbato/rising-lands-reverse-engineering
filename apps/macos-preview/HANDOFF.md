@@ -1373,3 +1373,34 @@ Graphics 261/0, Missions 154/33, AI/runtime 112/8, Audio 79/4, workflow 9/0 —
 The [delivery manifest](validation/m3-play-delivery.json) pins source, library,
 benchmark and validation artifacts. Only `feat/macos-playable` is pushed without
 force; no main merge or milestone acceptance is performed.
+
+## Stage 4 consumer — ABI 1.5 input and orders
+
+Resumed by fast-forwarding the feature and merging fetched main **2eadf69**.
+Only app-owned sources/manuals change. The consumer accepts ABI1.5 explicitly;
+Python Graphics1.9 acceptance is separately pinned, while Rust retains its own
+Graphics1.7 domain. Original evidence, window policies and engine reference pins
+remain unchanged.
+
+Play now routes native mouse and keyboard events to the worker's bounded,
+frame-addressed mapper and then `rl_passo_quadro_entrada`, after the real 128-frame
+startup prefix. The existing recorder observes those events without applying a
+second order. Input/file replay expands literal per-frame declarations through
+`FrameAnswerMapper.declared_answers`; consumed engine poll sites check those
+answers independently. Validation mode and old no-input tools retain their
+previous hashes/observer/callback ordering. The new native mapper regression
+compares human-event and scripted-descriptor worlds and frame registers after
+every phase, including Ctrl hold/release and k/k+1/k+3 click scheduling.
+
+The Test A state tool starts each world from S0, runs the real prefix and compares
+P1/P2/P6 whole-state phases with the owner's pinned window reader and exact mask.
+All six probes also compare the owner's declared indicator fields/unit-record
+hashes, input answers including WndProc flag bytes, and order packets. It does
+not claim whole-state coverage where no full-state window exists. Simulation
+proof deliberately omits rendering so that an earlier Graphics dependency cannot
+masquerade as the engine's frame-220/frame-141 stop.
+
+Rendering, CAVE body execution, initialized audio and glyph dependencies retain
+explicit named stops; wiring an order does not claim those providers are ported.
+Human Test B and complete-mission playability remain outside this bounded proof.
+Measured results, exact gates and artifacts follow after validation.

@@ -251,9 +251,12 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
     var recordingAction:(()->Void)?
     var exportAction:(()->Void)?
     var recording=false
+    var benchmarkInput=false
+    var benchmarkOrderTags=[UInt32]()
+    var orderBuffer=[UInt32](repeating:0,count:32)
     let recordButton=NSButton(title:"Nova gravação",target:nil,action:nil)
     let resetButton=NSButton(title:"Reiniciar",target:nil,action:nil)
-    let label=NSTextField(labelWithString:"MONDE01 · Rust ABI 1.4 · sem entrada aplicada")
+    let label=NSTextField(labelWithString:"MONDE01 · Rust ABI 1.5 · sem entrada aplicada")
     let button=NSButton(title:"Executar",target:nil,action:nil)
     init(root:URL,validationMode:Bool=false) throws {
         self.validationMode=validationMode;self.root=root;metal=try NativeMetalGameView(nativeFrame:NSRect(x:0,y:105,width:800,height:600))
@@ -270,8 +273,17 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         let exportButton=NSButton(title:"Exportar entrada",target:self,action:#selector(exportRecording));exportButton.frame=NSRect(x:565,y:36,width:160,height:27)
         window.contentView?.addSubview(recordButton);window.contentView?.addSubview(exportButton)
         metal.inputEvent={ [weak self] event in
-            guard let self=self,self.recording else{return}
-            self.work.async{[weak self] in guard let self=self else{return};let frame=Int(self.status().frames)+1;DispatchQueue.main.async{self.recordedEvent?(["frame":frame,"event":event])}}
+            guard let self=self else{return};let shouldRecord=self.recording
+            // Worker stamps the next game frame; presentation rate never enters mapping.
+            self.work.async{[weak self] in
+                guard let self=self else{return};let frame=max(129,Int(self.status().frames)+1)
+                if !self.validationMode {
+                    let kind=event["kind"] as? String
+                    let code=macos_live_event(self.driver,kind=="mouse" ? 1:2,UInt32(event["msg"] as? Int ?? 0),Int32(event["x"] as? Int ?? 0),Int32(event["y"] as? Int ?? 0),UInt32(event["wParam"] as? Int ?? 0),UInt32(event["vkey"] as? Int ?? 0),(event["down"] as? Bool ?? false) ? 1:0)
+                    if code != 0{self.running=false;self.stoppedReason="Entrada recusada: \(self.message(self.status()))";self.deliver()}
+                }
+                DispatchQueue.main.async{if shouldRecord{self.recordedEvent?(["frame":frame,"event":event])}}
+            }
         }
         modeControl.target=self;modeControl.action=#selector(changeMode);modeControl.selectedSegment=validationMode ? 1:0
         modeControl.frame=NSRect(x:15,y:66,width:190,height:25)
@@ -280,6 +292,11 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         rateControl.isEnabled = !validationMode;window.contentView?.addSubview(modeControl);window.contentView?.addSubview(rateControl)
         presenter=try metal.makePlayPresenter()
         window.center();window.makeKeyAndOrderFront(nil)
+    }
+    func benchmarkClick(_ x:Double,_ y:Double){
+        window.makeKeyAndOrderFront(nil);window.makeFirstResponder(metal)
+        let point=metal.convert(NSPoint(x:metal.bounds.width*x/800,y:metal.bounds.height*(1-y/600)),to:nil)
+        for type in [NSEvent.EventType.leftMouseDown,.leftMouseUp]{if let event=NSEvent.mouseEvent(with:type,location:point,modifierFlags:[],timestamp:ProcessInfo.processInfo.systemUptime,windowNumber:window.windowNumber,context:nil,eventNumber:1,clickCount:1,pressure:1){window.sendEvent(event)}}
     }
     @objc func changeMode(){let selected=modeControl.selectedSegment==1;rateControl.isEnabled = !selected;work.async{[weak self] in guard let self=self else{return};self.running=false;self.presenter?.stop();self.validationMode=selected;self.perform("live-reset",completion:nil)}}
     @objc func changeRate(){let rate=[15.0,20.0,30.0,60.0,0.0][rateControl.indexOfSelectedItem];work.async{[weak self] in self?.gameFPS=rate;self?.nextGameTime=ProcessInfo.processInfo.systemUptime}}
@@ -290,7 +307,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         if starting{metal.synchronizeModifiers(NSEvent.modifierFlags)}
         recording=active;modeControl.isEnabled = !active;resetButton.isEnabled = !active;recordButton.title=active ? "● Gravando entrada":"Nova gravação";recordButton.contentTintColor=active ? .systemRed:nil
         if starting{window.makeKeyAndOrderFront(nil);window.makeFirstResponder(metal)}
-        if starting{for key in metal.heldKeys.sorted(){metal.inputEvent?(["kind":"key","vkey":key,"down":true])}}
+        if starting{let held=metal.heldKeys.sorted();inputBarrier{[weak self] frame in for key in held{self?.recordedEvent?(["frame":frame,"event":["kind":"key","vkey":key,"down":true]])}}}
     }
     func inputBarrier(_ completion:@escaping(Int)->Void){work.async{[weak self] in guard let self=self else{return};let frame=Int(self.status().frames)+1;DispatchQueue.main.async{completion(frame)}}}
     func windowDidResignKey(_ notification:Notification){metal.releaseKeys()}
@@ -316,6 +333,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         let elapsed=max(0.000001,(running ? ProcessInfo.processInfo.systemUptime:playEnded)-playStarted)
         let frames=s.frames>=startFrames ? s.frames-startFrames:0
         var timing:[String:Any]=["frames":frames,"seconds":elapsed,"fps":playStarted>0 ? Double(frames)/elapsed:0,"rustSeconds":Double(s.logic_ns-startLogic)/1e9,"renderSeconds":Double(s.render_ns-startRender)/1e9,"proofSeconds":Double(s.proof_ns-startProof)/1e9,"metalSeconds":metalSeconds-startMetal]
+        timing["humanEvents"]=macos_live_human_events(driver);timing["declaredFrames"]=macos_live_declared_frames(driver)
         timing["gameFPS"]=validationMode ? 0:gameFPS;timing["executionMode"]=validationMode ? "test":"play"
         let end=running ? ProcessInfo.processInfo.systemUptime:playEnded
         if !validationMode,let presenter=presenter{timing.merge(presenter.metrics(start:playStarted,end:end,detailed:!running)){_,new in new}}
@@ -326,16 +344,16 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         var phases=validationMode ? ["load_tail","between_frames","frame1"]:[String]()
         if validationMode{for i in 2...128{phases += ["between_frames\(i)","frame\(i)"]}}
         if s.frames>128{phases.append(name)}
-        return ["mode":"live-rust-no-input","scenario":"MONDE01 · Rust e Metal · sem ordens","phase":name,"phase_index":index,"phases":phases,
+        return ["mode":"live-rust-no-input","scenario":validationMode ? "MONDE01 · validação sem entrada":"MONDE01 · ordens ao vivo","phase":name,"phase_index":index,"phases":phases,
                 "summary_sha256":index>=0 && index<=256 ? sha:"", "summary_verified":validationMode && s.stopped==0 && index>=0 && index<=256,
                 "checkpoint_verified":false,"verified_phases":s.phases_equal,"verified_checkpoints":s.checkpoints_equal,"verified_surfaces":s.surfaces_equal,
-                "observed":["counter":["address":"0x508f7c","bytes":4,"value":s.counter]],"blocks":0,"bytes":0,"memory":[],"input_policy":"record-only","live_stop":stop,
-                "execution_mode":validationMode ? "test":"play","native_metal":true,"native_engine_binding":macos_live_engine_binding()==1 ? "static-abi14":"dynamic-abi14","native_running":running,"native_metrics":timing,
-                "render":["status":s.disposition==2 ? "partial":s.frames==0 ? "undrawn":"full","hud":true,"version":[1,7],"backend":"Rust ABI 1.4 + Metal","equals_native_phase_end":equal,"native_phase_end_sha256":NSNull()]]
+                "observed":["counter":["address":"0x508f7c","bytes":4,"value":s.counter]],"blocks":0,"bytes":0,"memory":[],"input_policy":validationMode ? "record-only":"live-orders","live_stop":stop,
+                "benchmark_order_tags":benchmarkOrderTags,"execution_mode":validationMode ? "test":"play","native_metal":true,"native_engine_binding":macos_live_engine_binding()==1 ? "static-abi15":"dynamic-abi15","native_running":running,"native_metrics":timing,
+                "render":["status":s.disposition==2 ? "partial":s.frames==0 ? "undrawn":"full","hud":true,"version":[1,7],"backend":"Rust ABI 1.5 + Metal","equals_native_phase_end":equal,"native_phase_end_sha256":NSNull()]]
     }
     func deliver(_ completion:(([String:Any])->Void)?=nil){
         let value=snapshot(),s=status(),isRunning=running
-        let caption="\(validationMode ? "Validar":"Jogar · \(gameFPS==0 ? "sem limite":String(format:"%.0f q/s",gameFPS))") · Quadro \(s.frames) · \(running ? "executando":"pausado")" + (stoppedReason != nil || s.stopped != 0 ? " · Parada: \(stoppedReason ?? message(s))":" · sem entrada aplicada")
+        let caption="\(validationMode ? "Validar":"Jogar · \(gameFPS==0 ? "sem limite":String(format:"%.0f q/s",gameFPS))") · Quadro \(s.frames) · \(running ? "executando":"pausado")" + (stoppedReason != nil || s.stopped != 0 ? " · Parada: \(stoppedReason ?? message(s))":validationMode ? " · sem entrada aplicada":" · ordens após q128 · áudio/texto: limites declarados")
         DispatchQueue.main.async { [weak self] in
             guard let self=self else{return};var value=value;value["native_window_visible"]=self.window.isVisible
             self.button.title=isRunning ? "Pausar":"Executar"
@@ -346,6 +364,11 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
     }
     func advance(){
         let code=macos_live_advance(driver,nil,nil),s=status()
+        if benchmarkInput && code==0 && s.frames>128 {
+            let count=macos_live_order_tags(driver,&orderBuffer,32)
+            if count==UInt32.max{stoppedReason="Diagnóstico de entrada: \(message(status()))";running=false}
+            else if count>0{benchmarkOrderTags.append(contentsOf:orderBuffer.prefix(Int(count)))}
+        }
         if code != 0 {running=false;playEnded=ProcessInfo.processInfo.systemUptime}
         if s.phase_index != UInt32.max,let pixels=macos_live_pixels(driver),let palette=macos_live_palette(driver) {
             if !validationMode {

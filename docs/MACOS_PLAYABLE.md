@@ -500,3 +500,22 @@ this feature worktree with `/usr/bin/python3 -B scripts/check.py` and `.local/py
 [delivery manifest](../apps/macos-preview/validation/m3-play-delivery.json) pins
 all evidence and the tested static/shared libraries. Final evidence/documentation
 commits do not change the validated executable source.
+
+## ABI 1.5 live orders
+
+The native Jogar window applies mouse/keyboard input after its 128 real startup
+frames. Select a unit, then click its target; clicks are declared as move/down/up
+at k/k+1/k+3. Ctrl remains held until release or focus loss, including depot-mode
+selection. Engine-supported construction/recruitment/help-page controls now reach
+the same input/order path. Unsupported engine or renderer branches stop visibly
+with the original name/address and actual partial surface. Rust Graphics remains
+1.7; Python inspection/oracles now pin Graphics1.9. No glyph or audio substitute
+is installed. Text/sound non-execution boundaries are explicitly declared as in
+Missions' probe contract. Validar retains the no-input equality proofs.
+
+The current engine completes P1/P2's order scenarios, but its CAVE body still
+stops at frame220 in P3/P6/P7, and K1 at frame141. Those are simulation bounds;
+Rust's independently bounded renderer may stop earlier on an input-time text or
+panel state. The app does not hide that limit. Recording still exports the owner
+schema unchanged; a recording begun after earlier unrecorded orders does not
+establish a full-session replay from frame128. Test B remains pending.

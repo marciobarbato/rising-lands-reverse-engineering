@@ -87,6 +87,15 @@ class FrameAnswerMapper:
         if any(self.script.frames[k][1] for k in self.script.frames if self.frame<k<frame):raise ValueError('Skipped frame with messages')
         self.frame=frame;self.queue=list(messages);self.keys=dict(keys)
 
+    def declared_answers(self):
+        """The ABI consumes these declarations; its emitted poll sites verify them.
+
+        Only an explicit cursor change is sent. Omitted cursor holds in the engine,
+        and key answers are the full literal table for this frame (no key carry).
+        """
+        cursor=self.script.frames.get(self.frame,(None,(),{}))[0]
+        return dict(cursor=cursor,messages=list(self.queue),keys=dict(self.keys))
+
     def poll(self,kind,*,phase,site,vk=None):
         if phase not in (f'between_frames{self.frame}',f'frame{self.frame}'):raise ValueError('Poll phase/frame mismatch')
         address=int(site,0) if isinstance(site,str) else site
