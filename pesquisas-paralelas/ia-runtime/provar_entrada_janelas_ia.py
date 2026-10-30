@@ -33,8 +33,29 @@ Step by step:
     selection areas 0x508728+512p, and the order fields +2, +0xb2, +0xb7/+0xb8, +0xbe and +0x110 of every unit
     slot of the pool [0x4e19a0], with the count of those bytes the mask would hide (must be 0).
   The first difference stops the window.
-- **Reports:** one JSON per window under ``.local/m3-1/prova-<revision>/``; ``agregar`` requires reports from the
-  current clean revision, equal and covering the whole window. A proof that is not accepted goes under ``.local/``.
+- **Reports:** one JSON per window part under ``.local/m3-1/prova-<revision>/``; ``agregar`` requires reports from
+  the current clean revision, equal and covering the whole window. A proof that is not accepted goes under
+  ``.local/``; it still lists, per window, how far it goes (``reach``: the parts equal from the start, the first
+  stop with its routine and site, every part's own result and ``phase_chain_sha256``).
+
+Multi-part windows (P6, S1). Each part starts from its own checkpoint (the part's opening full state, checked
+against the previous part's final reference summary by ``agregar``) with the declared entry registers, message
+words, cursor and saved frame words, so the parts run in parallel, one process and one heavy-lease slot each. The
+frame-128 allocation records apply up to the first phase that allocates or releases a block: a part stops at the
+last whole frame before it (``allocation_stop``) and ``agregar`` refuses every later part.
+
+S1 (pass-2 capture on feat/re-missions, unpinned until it lands):
+
+    python3 -B pesquisas-paralelas/ia-runtime/provar_entrada_janelas_ia.py fixar S1 --ref origin/feat/re-missions
+    git commit pesquisas-paralelas/ia-runtime/provar_entrada_janelas_ia.py     # the pinned SHA-256 and commit
+    python3 -B pesquisas-paralelas/ia-runtime/provar_entrada_janelas_ia.py tudo --janelas S1 \
+        --lease <path>/heavy_lease.py --saida pesquisas-paralelas/ia-runtime/validacao/m3-1-prova-s1.json
+
+``fixar`` checks every part, the mask, the policy and the logs in that commit and rewrites the S1 entry; the files
+are then read from that commit (``git show``, cached under .local/m3-1/ref/) until they are on the checkout.
+Second machine: ``reproduzir <proof.json> --janela S1 [--partes N ...] --lease <heavy_lease.py>`` reruns parts and
+compares each part's ``phase_chain_sha256`` and result with the proof's. ``tudo --diagnostico-planejamento``
+runs the same parts in the Graphics planning diagnostic (.local only).
 """
 import argparse
 import bisect
@@ -78,6 +99,13 @@ JANELAS = {
                sha_comandos='88e4fe171e9563189aa95b44c5e59abb460125a28085ba332fa8c0e98f278ed3',
                entradas=f'{SONDAS}/P6/entradas.jsonl.xz', sha_entradas='a9de5b5771a869d404ae25b51e6784dc146345f4cc6ba8e08226efe7ef268e0b',
                ref='d18add9e'),
+    # S1 (frames 129-17050, ~17 parts): the Mac mini's pass-2 capture on feat/re-missions. Unpinned until it lands:
+    # `fixar S1 --ref origin/feat/re-missions` rewrites this entry with the landed files' SHA-256 and the commit.
+    # S1-BEGIN
+    'S1': dict(manifesto=f'{SONDAS}/S1/captura-janela.manifest.json', sha=None,
+               comandos=f'{SONDAS}/S1/comandos.jsonl.xz', sha_comandos=None,
+               entradas=f'{SONDAS}/S1/entradas.jsonl.xz', sha_entradas=None, ref=None),
+    # S1-END
 }
 INICIO = 128
 JOGADORES = 4                      # packet pointers and selection areas compared (players 0..3)
@@ -108,15 +136,16 @@ def pasta_relatorios(rev=None):
     return f'.local/m3-1/prova-{(rev or revisao())[:12]}'
 
 
-def arquivo(nome, caminho):
-    """The file at repository path ``caminho`` of window ``nome``: the checkout's, or, for a window pinned to a
-    Missions commit not yet merged (``ref``), that commit's blob read once into .local/m3-1/ref/<window>/. Every
-    caller checks the pinned hash."""
+def arquivo(nome, caminho, esperado=None):
+    """The file at repository path ``caminho`` of window ``nome``: the checkout's when it exists and has the
+    expected SHA-256 ``esperado`` (when given), otherwise, for a window pinned to a Missions commit not yet merged
+    (``ref``), that commit's blob read once into .local/m3-1/ref/<window>/<commit>/. Every caller checks the pinned
+    hash."""
     local = ROOT / caminho
     ref = JANELAS[nome].get('ref')
-    if local.exists() or not ref:
+    if not ref or (local.exists() and (esperado is None or sha(local) == esperado)):
         return local
-    copia = ROOT / '.local/m3-1/ref' / nome / Path(caminho).name
+    copia = ROOT / '.local/m3-1/ref' / nome / ref[:12] / Path(caminho).name
     if not copia.exists():
         copia.parent.mkdir(parents=True, exist_ok=True)
         dados = subprocess.run(['git', '-C', str(ROOT), 'show', f'{ref}:{caminho}'], capture_output=True,
@@ -127,15 +156,18 @@ def arquivo(nome, caminho):
 
 def manifesto(nome):
     j = JANELAS[nome]
-    if sha(arquivo(nome, j['manifesto'])) != j['sha']:
+    if j['sha'] is None:
+        raise SystemExit(f'{nome} is not pinned yet: run `{SCRIPT} fixar {nome} --ref <Missions commit>` once its '
+                         'capture has landed, and commit the pinned script')
+    if sha(arquivo(nome, j['manifesto'], j['sha'])) != j['sha']:
         raise SystemExit(f'{nome}: the window manifest is not the pinned one')
-    m = json.loads(arquivo(nome, j['manifesto']).read_bytes())
+    m = json.loads(arquivo(nome, j['manifesto'], j['sha']).read_bytes())
     if [p['part'] for p in m['parts']] != list(range(len(m['parts']))):
         raise SystemExit(f'{nome}: the manifest parts are not 0..n-1')
-    if sha(arquivo(nome, m['mask']['path'])) != m['mask']['sha256']:
+    if sha(arquivo(nome, m['mask']['path'], m['mask']['sha256'])) != m['mask']['sha256']:
         raise SystemExit(f'{nome}: the mask file differs from the manifest')
-    if sha(arquivo(nome, j['comandos'])) != j['sha_comandos'] or \
-            sha(arquivo(nome, j['entradas'])) != j['sha_entradas']:
+    if sha(arquivo(nome, j['comandos'], j['sha_comandos'])) != j['sha_comandos'] or \
+            sha(arquivo(nome, j['entradas'], j['sha_entradas'])) != j['sha_entradas']:
         raise SystemExit(f'{nome}: comandos.jsonl or entradas.jsonl differs from the pinned file')
     return m
 
@@ -259,7 +291,7 @@ def comparar_janela(nome, quadros=None, n_parte=0, planejamento=False):
     from inventario_ia_runtime import OriginalImage
     m = manifesto(nome)
     entrada_m = m['parts'][n_parte]
-    artefato = arquivo(nome, entrada_m['artifact'])
+    artefato = arquivo(nome, entrada_m['artifact'], entrada_m['compressed_sha256'])
     if sha(artefato) != entrada_m['compressed_sha256']:
         raise SystemExit(f'{nome}: the xz part differs from the manifest')
     parte, sha_bruto = carregar_captura(artefato, entrada_m['raw_sha256'])
@@ -268,17 +300,17 @@ def comparar_janela(nome, quadros=None, n_parte=0, planejamento=False):
     anterior = m['parts'][n_parte - 1]['raw_sha256'] if n_parte else None
     if parte.get('previous_part_raw_sha256') != anterior:
         raise SystemExit(f'{nome}: part {n_parte} does not chain to the previous manifest part')
-    mascara_doc = json.loads(arquivo(nome, m['mask']['path']).read_bytes())
+    mascara_doc = json.loads(arquivo(nome, m['mask']['path'], m['mask']['sha256']).read_bytes())
     pol = mascara_doc['window_policy']
-    if sha(arquivo(nome, pol['path'])) != pol['sha256'] or not pol['passed']:
+    if sha(arquivo(nome, pol['path'], pol['sha256'])) != pol['sha256'] or not pol['passed']:
         raise SystemExit(f'{nome}: the window policy differs from the mask file or did not pass')
-    politica = json.loads(arquivo(nome, pol['path']).read_bytes())
+    politica = json.loads(arquivo(nome, pol['path'], pol['sha256']).read_bytes())
     mascara = MascaraEnderecos(mascara_doc['cumulative']['exclusion_mask'])
     if mascara.bytes != mascara_doc['cumulative']['bytes']:
         raise SystemExit(f'{nome}: mask byte count differs from the mask file')
-    if sha(arquivo(nome, parte['input']['path'])) != parte['input']['sha256']:
+    if sha(arquivo(nome, parte['input']['path'], parte['input']['sha256'])) != parte['input']['sha256']:
         raise SystemExit(f'{nome}: the scripted-input file differs from the part')
-    dados_entrada = json.loads(arquivo(nome, parte['input']['path']).read_bytes())
+    dados_entrada = json.loads(arquivo(nome, parte['input']['path'], parte['input']['sha256']).read_bytes())
 
     aberto = parte['opening_state']
     s0 = {n: (int(b['base'], 16), _dados(b)) for n, b in aberto['full_state'].items()}
@@ -302,11 +334,25 @@ def comparar_janela(nome, quadros=None, n_parte=0, planejamento=False):
     nomes = nomes[:2 * n]
     _, cap_v2, entrada, m1 = carregar_cenario_exibicao()
     alocacoes = cap128['allocations']
-    contagens = {f['exit']['allocations'] for f in parte['phases'][:2 * n]} | {f['entry']['allocations']
-                                                                               for f in parte['phases'][:1]}
-    if contagens != {len(alocacoes)} or any(f['state_delta'].get('allocated') or f['state_delta'].get('released')
-                                            for f in parte['phases'][:2 * n]):
-        raise SystemExit(f'{nome}: the window changes the allocation records; the frame-128 records do not apply')
+    # The frame-128 allocation records are a declared input. They apply to this part only when no earlier part
+    # allocates or releases (checked by ``agregar`` over every part's ``allocation_events``) and up to this part's
+    # first allocation event: the comparison stops at the last whole frame before it.
+    if parte['phases'][0]['entry']['allocations'] != len(alocacoes):
+        raise SystemExit(f'{nome}: part {n_parte} opens with {parte["phases"][0]["entry"]["allocations"]} allocation '
+                         f'records; the frame-128 records ({len(alocacoes)}) do not apply')
+    eventos_alocacao = [f['phase'] for f in parte['phases'] if f['state_delta'].get('allocated') or
+                        f['state_delta'].get('released') or f['exit']['allocations'] != len(alocacoes)]
+    parada_alocacao = None
+    if eventos_alocacao:
+        primeira_alocacao = [f['phase'] for f in parte['phases']].index(eventos_alocacao[0])
+        if primeira_alocacao // 2 < n:
+            n = primeira_alocacao // 2
+            parada_alocacao = dict(phase=eventos_alocacao[0], frames_compared=n,
+                                   reason='the original allocates or releases a block here; the frame-128 '
+                                          'allocation records end their validity at this phase')
+            if n == 0:
+                raise SystemExit(f'{nome}: part {n_parte} allocates in its first frame ({eventos_alocacao[0]})')
+            nomes = nomes[:2 * n]
     regs = {k: v for k, v in parte['phases'][0]['entry']['registers'].items() if k in REGISTRADORES}
     roteiro = RoteiroEntrada(dados_entrada, inicio=INICIO)
     roteiro.posicionar(inicio)
@@ -317,9 +363,11 @@ def comparar_janela(nome, quadros=None, n_parte=0, planejamento=False):
         comp.palavras_inicio = roteiro.palavras_salvas(inicio)
     contexto = ContextoExibicao(OriginalImage(), politica['display_roots'])
 
-    comandos = [json.loads(x) for x in lzma.decompress(arquivo(nome, JANELAS[nome]['comandos']).read_bytes())
+    comandos = [json.loads(x) for x in lzma.decompress(arquivo(nome, JANELAS[nome]['comandos'],
+                                                               JANELAS[nome]['sha_comandos']).read_bytes())
                 .decode().splitlines() if x.strip()]
-    entradas_p1 = [json.loads(x) for x in lzma.decompress(arquivo(nome, JANELAS[nome]['entradas']).read_bytes())
+    entradas_p1 = [json.loads(x) for x in lzma.decompress(arquivo(nome, JANELAS[nome]['entradas'],
+                                                                  JANELAS[nome]['sha_entradas']).read_bytes())
                    .decode().splitlines() if x.strip()]
     lado_py, lado_ref = [], []
     # The window harness (entrada_roteirizada) records top_callee = null on every boundary, where the M2.3 oracle
@@ -356,6 +404,8 @@ def comparar_janela(nome, quadros=None, n_parte=0, planejamento=False):
 
     referencia = referencia_m31(fases_referencia(dict(phases=parte['phases'][:2 * n]), s0, mascara))
     fases, hud, resultado = comparar_sequencia(Proxy(comp), nomes, n, referencia, mascara, contexto)
+    if parada_alocacao and resultado == 'equal':
+        resultado = 'stopped_allocation_' + parada_alocacao['phase']
 
     # The M3.1 extras, phase by phase (the base comparison stopped at its own first difference, if any).
     escondidos = None
@@ -391,6 +441,8 @@ def comparar_janela(nome, quadros=None, n_parte=0, planejamento=False):
         fases = dict(list(fases.items())[:corte])
         resultado = 'first_difference_' + primeira if fases[primeira].get('result') == 'returned' else \
             f'stopped_{primeira}'
+    elif parada_alocacao:
+        resultado = 'stopped_allocation_' + parada_alocacao['phase']
     ordens_py = [dict(o, phase=p['phase']) for p in lado_py for o in p['orders']]
     return dict(
         window=nome, manifest=dict(path=JANELAS[nome]['manifesto'], sha256=JANELAS[nome]['sha']),
@@ -399,7 +451,7 @@ def comparar_janela(nome, quadros=None, n_parte=0, planejamento=False):
                   phases_requested=len(nomes), number=n_parte, parts=len(m['parts']),
                   previous_part_raw_sha256=parte.get('previous_part_raw_sha256'),
                   opening_summary=aberto['summary'],
-                  final_reference_summary=parte['phases'][2 * n - 1]['state_after']['summary'],
+                  final_reference_summary=parte['phases'][-1]['state_after']['summary'],
                   opening_state=dict(abertura, start_frame=inicio,
                                      allocation_records=dict(
                                          count=len(alocacoes),
@@ -421,6 +473,7 @@ def comparar_janela(nome, quadros=None, n_parte=0, planejamento=False):
                        use='WndProc flag bytes after each DispatchMessageA (the window part does not carry them)'),
         m22_frame128=dict(path=M22, sha256=SHA_M22),
         m31_fields_hidden_by_mask=escondidos,
+        allocation_events=eventos_alocacao, allocation_stop=parada_alocacao,
         boundary_top_callee=dict(
             compared=not topo_nulo, reference='null on every boundary of the window' if topo_nulo else 'recorded',
             python_values_not_compared=topos_python),
@@ -471,23 +524,75 @@ def rodar_janela(nome, relatorios, quadros=None, n_parte=0, planejamento=False):
 
 # ---------------------------------------------------------------------------------------------------- aggregation
 
-def agregar(relatorios, janelas):
+def partes_manifesto(nome):
+    return [dict(path=mp['artifact'], sha256=mp['compressed_sha256']) for mp in manifesto(nome)['parts']]
+
+
+def resumo_parte(r):
+    """One part report in a line: its range, result, first unequal phase (with its stop) and chain."""
+    primeira = next(((f, v) for f, v in r['phases'].items() if not v['equal']), None)
+    return dict(part=r['part'].get('number', 0), frames=r['part']['frames'], result=r['summary']['result'],
+                phases_equal=r['summary']['phases_equal'], phases=r['part']['phases'],
+                first_unequal=primeira and dict(phase=primeira[0], result=primeira[1].get('result'),
+                                                stop=primeira[1].get('stop')),
+                allocation_stop=r.get('allocation_stop'), crossings=r['crossings'],
+                phase_chain_sha256=r['phase_chain_sha256'], source_revision=r['source_revision'],
+                diagnostic_graphics_planning=r.get('diagnostic_graphics_planning'))
+
+
+def alcance_janela(m, partes_rel):
+    """How far the window goes: the parts equal over every phase from the start (each part starts from its own
+    checkpoint, so a later part can be equal after an earlier stop), the first phase that is not, and every
+    part's own line."""
+    linhas = [None if r is None else resumo_parte(r) for r in partes_rel]
+    prefixo = 0
+    for mp, linha in zip(m['parts'], linhas):
+        if linha is None or linha['result'] != 'equal' or linha['phases_equal'] != mp['phases']:
+            break
+        prefixo += 1
+    corte = linhas[prefixo] if prefixo < len(linhas) else None
+    return dict(parts=len(m['parts']), equal_parts_from_start=prefixo,
+                equal_through_frame=m['parts'][prefixo - 1]['frames'][1] if prefixo else None,
+                first_stop=None if prefixo == len(linhas) else (
+                    dict(part=prefixo, report=None) if corte is None else
+                    dict(part=prefixo, phase=(corte['first_unequal'] or {}).get('phase'),
+                         result=corte['result'], stop=(corte['first_unequal'] or {}).get('stop'),
+                         allocation_stop=corte['allocation_stop'])),
+                equal_parts=[linha['part'] for mp, linha in zip(m['parts'], linhas) if linha and
+                             linha['result'] == 'equal' and linha['phases_equal'] == mp['phases']])
+
+
+def agregar(relatorios, janelas, planejamento=False):
     from provar_quadros_9200_ia import tabela_rle
+    prefixo_rel = 'diagnostico-planejamento-' if planejamento else ''
     rev, sujo = revisao(), sujos()
     saida_janelas, problemas, codigo = [], [], {}
     for nome in janelas:
         m = manifesto(nome)
         erros, partes_rel, caminhos = [], [], []
+        alocou_antes = None                     # first earlier part with an allocation event
         for mp in m['parts']:
-            caminho = ROOT / relatorios / nome_relatorio(nome, mp['part'], len(m['parts']))
+            caminho = ROOT / relatorios / (prefixo_rel + nome_relatorio(nome, mp['part'], len(m['parts'])))
+            rotulo = f"part {mp['part']}: "
+            if not caminho.exists():
+                erros.append(rotulo + 'no report (the run exited before writing one; see its log)')
+                partes_rel.append(None)
+                caminhos.append(caminho)
+                continue
             r = json.loads(caminho.read_bytes())
             caminhos.append(caminho)
             partes_rel.append(r)
-            rotulo = f"part {mp['part']}: "
+            if alocou_antes is not None:
+                erros.append(rotulo + f'part {alocou_antes} allocates or releases a block, so the frame-128 '
+                             'allocation records do not apply to this part')
+            if r.get('allocation_events') and alocou_antes is None:
+                alocou_antes = mp['part']
             if r['part']['raw_json_sha256'] != mp['raw_sha256']:
                 erros.append(rotulo + 'report is not for the manifest part')
             if r['summary']['result'] != 'equal' or r['summary']['phases_equal'] != mp['phases']:
                 erros.append(rotulo + f"result {r['summary']['result']} ({r['summary']['phases_equal']}/{mp['phases']})")
+            if bool(r.get('diagnostic_graphics_planning')) != planejamento:
+                erros.append(rotulo + 'diagnostic report mixed with proof reports')
             if r['source_revision'] != rev or r['source_dirty_paths']:
                 erros.append(rotulo + f"report from revision {r['source_revision'][:12]} "
                              f"(dirty: {bool(r['source_dirty_paths'])})")
@@ -495,7 +600,8 @@ def agregar(relatorios, janelas):
                 erros.append(rotulo + f"crossings {r['crossings']}")
             if r['m31_fields_hidden_by_mask']:
                 erros.append(rotulo + f"{r['m31_fields_hidden_by_mask']} M3.1 field bytes are masked")
-            if mp['part'] and r['part'].get('opening_summary') != partes_rel[-2]['part'].get('final_reference_summary'):
+            if mp['part'] and partes_rel[-2] is not None and \
+                    r['part'].get('opening_summary') != partes_rel[-2]['part'].get('final_reference_summary'):
                 erros.append(rotulo + 'opening state is not the previous part\'s final reference state')
             conflitos = sorted(f for f, h in r['code_sha256'].items() if codigo.get(f, h) != h)
             if conflitos:
@@ -503,6 +609,11 @@ def agregar(relatorios, janelas):
             codigo.update(r['code_sha256'])
         if erros:
             problemas.append(dict(window=nome, problems=erros))
+        alcance = alcance_janela(m, partes_rel)
+        if any(r is None for r in partes_rel):
+            saida_janelas.append(dict(window=nome, result='incomplete', reach=alcance,
+                                      parts=[None if r is None else resumo_parte(r) for r in partes_rel]))
+            continue
         rel = dict(partes_rel[0])
         if len(partes_rel) > 1:
             rel.update(
@@ -587,12 +698,15 @@ def agregar(relatorios, janelas):
             report_sha256=sha(caminho),
             final_indicators=dict(phase=list(fases)[-1], rng=fases[list(fases)[-1]].get('rng'),
                                   indicators=fases[list(fases)[-1]].get('indicators')),
-            phase_table=tabela_rle(fases, huds), order_phases={f: fases[f] for f in detalhe if f in fases}))
+            phase_table=tabela_rle(fases, huds), order_phases={f: fases[f] for f in detalhe if f in fases},
+            reach=alcance))
     resultado = 'equal' if not problemas and all(j['result'] == 'equal' for j in saida_janelas) else 'not_accepted'
+    completas = [w for w in saida_janelas if w['result'] != 'incomplete']
     tempos = json.loads((ROOT / relatorios / 'tempo.json').read_bytes()) \
         if (ROOT / relatorios / 'tempo.json').exists() else None
     return dict(
         schema='rising-lands/ai-runtime-m3.1-window-proof/1', source_revision=rev, source_dirty_paths=sujo,
+        diagnostic_graphics_planning=planejamento,
         reproduction=dict(
             one_command=f'python3 -B {SCRIPT} tudo --janelas {" ".join(janelas)} [--lease <heavy_lease.py>] '
                         '--saida <proof.json>',
@@ -600,18 +714,18 @@ def agregar(relatorios, janelas):
                                                                     f'{" ".join(janelas)} --saida <proof.json>',
             reports=relatorios),
         evidence_sha256={**{JANELAS[j]['manifesto']: JANELAS[j]['sha'] for j in janelas},
-                         **{w['part']['path']: w['part']['sha256'] for w in saida_janelas},
-                         **{w['mask']['path']: w['mask']['sha256'] for w in saida_janelas},
-                         **{w['policy']['path']: w['policy']['sha256'] for w in saida_janelas},
-                         **{w['input']['path']: w['input']['sha256'] for w in saida_janelas},
-                         **{w['commands']['path']: w['commands']['sha256'] for w in saida_janelas},
+                         **{p['path']: p['sha256'] for j in janelas for p in partes_manifesto(j)},
+                         **{w['mask']['path']: w['mask']['sha256'] for w in completas},
+                         **{w['policy']['path']: w['policy']['sha256'] for w in completas},
+                         **{w['input']['path']: w['input']['sha256'] for w in completas},
+                         **{w['commands']['path']: w['commands']['sha256'] for w in completas},
                          M22: SHA_M22,
                          str(EXE.relative_to(ROOT)) if EXE.is_relative_to(ROOT) else 'RISING.EXE': ORIGINAL_SHA256,
                          'RISING.SBL': sha(SBL)},
         code_sha256=dict(sorted(codigo.items())),
-        crossings=dict(count=sum(w['crossings']['count'] for w in saida_janelas),
-                       writing_compared_bytes=sum(w['crossings']['writing_compared_bytes'] for w in saida_janelas),
-                       core_provider_stops=sum(w['crossings']['core_provider_stops'] for w in saida_janelas),
+        crossings=dict(count=sum(w['crossings']['count'] for w in completas),
+                       writing_compared_bytes=sum(w['crossings']['writing_compared_bytes'] for w in completas),
+                       core_provider_stops=sum(w['crossings']['core_provider_stops'] for w in completas),
                        note='measured: mode \'prova\' carries no crossing data, so any crossing would stop the window'),
         m31_fields=dict(
             packets=f'u32 [0x{PACOTES:x}+4p] and its {TAM_PACOTE}-byte packet, p = 0..{JOGADORES - 1}',
@@ -619,7 +733,7 @@ def agregar(relatorios, janelas):
             unit_order_fields=f'+2 (u8), +0xb2 (u16), +0xb7, +0xb8, +0xbe (u8), +0x110 (u32) of each of the '
                               f'{UNIDADES} slots of the pool [0x{POOL:x}] ({PASSO}-byte records)'),
         windows=saida_janelas, problems=problemas,
-        timing=dict(per_window_seconds={w['window']: w['seconds'] for w in saida_janelas}, run=tempos),
+        timing=dict(per_window_seconds={w['window']: w['seconds'] for w in completas}, run=tempos),
         unmodeled=[
             'stack words of MCICD_Play in the CalculGame frame bodies (uninitialized caller locals), EFLAGS and EIP',
             'bindings and boundaries issued inside policy display roots, counted per phase in phase_table',
@@ -630,46 +744,45 @@ def agregar(relatorios, janelas):
             'block and every phase keeps the count',
             'the between_frames129 entry registers are a declared input from the window capture'],
         summary=dict(result=resultado, windows={w['window']: f"{w['phases_equal']}/{w['phases']}"
-                                                for w in saida_janelas},
-                     phases=sum(w['phases'] for w in saida_janelas),
-                     phases_equal=sum(w['phases_equal'] for w in saida_janelas),
-                     crossings=sum(w['crossings']['count'] for w in saida_janelas)))
+                                                for w in completas},
+                     reach={w['window']: w['reach'] for w in saida_janelas},
+                     phases=sum(w['phases'] for w in completas),
+                     phases_equal=sum(w['phases_equal'] for w in completas),
+                     crossings=sum(w['crossings']['count'] for w in completas)))
 
 
-def escrever_prova(relatorios, janelas, saida_nome):
+def escrever_prova(relatorios, janelas, saida_nome, planejamento=False):
     saida = ROOT / saida_nome
     if saida.exists():
         raise SystemExit(f'Refusing to overwrite existing evidence {saida}')
-    prova = agregar(relatorios, janelas)
-    ok = prova['summary']['result'] == 'equal' and not prova['source_dirty_paths']
+    prova = agregar(relatorios, janelas, planejamento)
+    ok = prova['summary']['result'] == 'equal' and not prova['source_dirty_paths'] and not planejamento
     if not ok:
-        saida = ROOT / '.local' / ('m3-1-proof-not-accepted-' + time.strftime('%Y%m%dT%H%M%S') + '.json')
+        rotulo = 'm3-1-diagnostic-planning-' if planejamento else 'm3-1-proof-not-accepted-'
+        saida = ROOT / '.local' / (rotulo + '-'.join(janelas) + '-' + time.strftime('%Y%m%dT%H%M%S') + '.json')
     saida.parent.mkdir(parents=True, exist_ok=True)
     with open(saida, 'x') as f:
         json.dump(prova, f, indent=1, sort_keys=True, default=str)
         f.write('\n')
     print(json.dumps(dict(output=str(saida), summary=prova['summary'], problems=prova['problems'],
-                          timing=prova['timing']), indent=1))
+                          timing=prova['timing'], part_chains={w['window']: [
+                              p and dict(part=p['part'], result=p['result'], chain=p['phase_chain_sha256'])
+                              for p in w['parts']] for w in prova['windows']}), indent=1, default=str))
     return 0 if ok else 2
 
 
-def tudo(janelas, lease, relatorios, saida, paralelo=None):
-    if sujos():
-        raise SystemExit('The one-command proof runs on a clean tree only')
-    for j in janelas:
-        manifesto(j)
-    t0 = time.monotonic()
+def rodar_partes(tarefas, lease, relatorios, paralelo=None, planejamento=False):
+    """Run each (window, part, parts) as its own ``janela`` process (under the heavy lease when given: each part
+    takes one slot, so the lease bounds the machine's load). Returns (label, exit code, wall seconds) per part."""
     logs = ROOT / relatorios
     logs.mkdir(parents=True, exist_ok=True)
 
-    tarefas = [(nome, mp['part'], len(manifesto(nome)['parts'])) for nome in janelas
-               for mp in manifesto(nome)['parts']]
-
     def uma(tarefa):
         nome, n_parte, partes = tarefa
-        rotulo = nome_relatorio(nome, n_parte, partes)[:-len('.json')]
+        rotulo = ('diagnostico-planejamento-' if planejamento else '') + \
+            nome_relatorio(nome, n_parte, partes)[:-len('.json')]
         cmd = [sys.executable, '-B', str(ROOT / SCRIPT), 'janela', nome, '--parte', str(n_parte),
-               '--relatorios', relatorios]
+               '--relatorios', relatorios] + (['--diagnostico-planejamento'] if planejamento else [])
         if lease:
             cmd = [sys.executable, lease, f'ai-m31-{rotulo}', '--'] + cmd
         inicio = time.monotonic()
@@ -678,14 +791,102 @@ def tudo(janelas, lease, relatorios, saida, paralelo=None):
         return rotulo, codigo, round(time.monotonic() - inicio, 1)
 
     with ThreadPoolExecutor(max_workers=paralelo or len(tarefas)) as ex:
-        resultados = list(ex.map(uma, tarefas))
-    for nome, codigo, segundos in resultados:
-        print(f'{nome}: exit {codigo}, {segundos} s wall', flush=True)
-    with open(logs / 'tempo.json', 'x') as f:
-        json.dump(dict(parallel=len(janelas), lease=bool(lease), wall_seconds=round(time.monotonic() - t0, 1),
+        resultados = []
+        for r in ex.map(uma, tarefas):
+            print(f'{r[0]}: exit {r[1]}, {r[2]} s wall', flush=True)
+            resultados.append(r)
+    return resultados
+
+
+def tudo(janelas, lease, relatorios, saida, paralelo=None, partes=None, planejamento=False):
+    if sujos() and not planejamento:
+        raise SystemExit('The one-command proof runs on a clean tree only')
+    t0 = time.monotonic()
+    tarefas = [(nome, mp['part'], len(manifesto(nome)['parts'])) for nome in janelas
+               for mp in manifesto(nome)['parts'] if partes is None or mp['part'] in partes]
+    resultados = rodar_partes(tarefas, lease, relatorios, paralelo, planejamento)
+    with open(ROOT / relatorios / ('tempo-planejamento.json' if planejamento else 'tempo.json'), 'x') as f:
+        json.dump(dict(parallel=paralelo or len(tarefas), lease=bool(lease),
+                       wall_seconds=round(time.monotonic() - t0, 1),
                        window_wall_seconds={n: s for n, _, s in resultados},
                        window_exit_codes={n: c for n, c, _ in resultados}), f, indent=1)
-    return escrever_prova(relatorios, janelas, saida)
+    return escrever_prova(relatorios, janelas, saida, planejamento)
+
+
+def fixar(nome, ref):
+    """Pin window ``nome`` to the Missions commit ``ref`` resolves to: read its manifest, pass-1 command and input
+    logs from that commit (git show), check that every part, the mask, the policy and the scripted-input file the
+    manifest and parts name are in that commit with the stated SHA-256 (parts: the manifest's compressed hash),
+    then rewrite the window's entry between ``# <P>-BEGIN``/``# <P>-END`` in this script. Commit the script."""
+    commit = subprocess.run(['git', '-C', str(ROOT), 'rev-parse', '--verify', f'{ref}^{{commit}}'],
+                            capture_output=True, text=True, check=True).stdout.strip()
+
+    def blob(caminho):
+        r = subprocess.run(['git', '-C', str(ROOT), 'show', f'{commit}:{caminho}'], capture_output=True)
+        if r.returncode:
+            raise SystemExit(f'{nome}: {caminho} is not in {commit[:12]}')
+        return r.stdout
+    j = JANELAS[nome]
+    bruto = blob(j['manifesto'])
+    m = json.loads(bruto)
+    if m.get('probe') != nome or [p['part'] for p in m['parts']] != list(range(len(m['parts']))):
+        raise SystemExit(f'{nome}: the manifest names probe {m.get("probe")} or its parts are not 0..n-1')
+    for mp in m['parts']:
+        if hashlib.sha256(blob(mp['artifact'])).hexdigest() != mp['compressed_sha256']:
+            raise SystemExit(f'{nome}: part {mp["part"]} differs from the manifest')
+    mascara = blob(m['mask']['path'])
+    if hashlib.sha256(mascara).hexdigest() != m['mask']['sha256']:
+        raise SystemExit(f'{nome}: the mask differs from the manifest')
+    pol = json.loads(mascara)['window_policy']
+    if hashlib.sha256(blob(pol['path'])).hexdigest() != pol['sha256'] or not pol['passed']:
+        raise SystemExit(f'{nome}: the window policy differs from the mask or did not pass')
+    comandos, entradas = blob(j['comandos']), blob(j['entradas'])
+    entrada = f'{SONDAS.rsplit("/", 1)[0]}/entradas/{nome}.json'
+    novo = (f"    '{nome}': dict(manifesto=f'{{SONDAS}}/{nome}/captura-janela.manifest.json',\n"
+            f"               sha='{hashlib.sha256(bruto).hexdigest()}',\n"
+            f"               comandos=f'{{SONDAS}}/{nome}/comandos.jsonl.xz',\n"
+            f"               sha_comandos='{hashlib.sha256(comandos).hexdigest()}',\n"
+            f"               entradas=f'{{SONDAS}}/{nome}/entradas.jsonl.xz',\n"
+            f"               sha_entradas='{hashlib.sha256(entradas).hexdigest()}',\n"
+            f"               ref='{commit}'),\n")
+    fonte = Path(__file__).read_text()
+    inicio, fim = f'    # {nome}-BEGIN\n', f'    # {nome}-END\n'
+    a, b = fonte.index(inicio) + len(inicio), fonte.index(fim)
+    Path(__file__).write_text(fonte[:a] + novo + fonte[b:])
+    print(json.dumps(dict(window=nome, commit=commit, parts=len(m['parts']),
+                          frames=[m['parts'][0]['frames'][0], m['parts'][-1]['frames'][1]],
+                          phases=sum(p['phases'] for p in m['parts']), manifest_sha256=hashlib.sha256(bruto).hexdigest(),
+                          scripted_input=entrada, next=f'commit {SCRIPT}, then `{SCRIPT} tudo --janelas {nome} '
+                                                       '--lease <heavy_lease.py> --saida <proof.json>`'), indent=1))
+    return 0
+
+
+def reproduzir(prova_caminho, nome, partes, lease, relatorios, paralelo=None):
+    """Second-machine reproduction: run parts of window ``nome`` (all when ``partes`` is None) on this machine and
+    compare each part's ``phase_chain_sha256`` and result with the proof (or not-accepted proof) file."""
+    prova = json.loads(Path(prova_caminho).read_bytes())
+    janela = next(w for w in prova['windows'] if w['window'] == nome)
+    esperado = {p['part']: p for p in janela['parts'] if p}
+    m = manifesto(nome)
+    tarefas = [(nome, mp['part'], len(m['parts'])) for mp in m['parts']
+               if (partes is None or mp['part'] in partes) and mp['part'] in esperado]
+    planejamento = bool(prova.get('diagnostic_graphics_planning'))
+    rodar_partes(tarefas, lease, relatorios, paralelo, planejamento)
+    linhas, iguais = [], 0
+    for _, n_parte, total in tarefas:
+        caminho = ROOT / relatorios / (('diagnostico-planejamento-' if planejamento else '') +
+                                       nome_relatorio(nome, n_parte, total))
+        r = json.loads(caminho.read_bytes()) if caminho.exists() else None
+        e = esperado[n_parte]
+        cadeia = r and r['phase_chain_sha256']
+        ok = r is not None and cadeia == e['phase_chain_sha256'] and r['summary']['result'] == e['result']
+        iguais += ok
+        linhas.append(dict(part=n_parte, equal=ok, chain=cadeia, expected_chain=e['phase_chain_sha256'],
+                           result=r and r['summary']['result'], expected_result=e['result'],
+                           revision=r and r['source_revision'], expected_revision=e.get('source_revision')))
+    print(json.dumps(dict(window=nome, proof=str(prova_caminho), proof_revision=prova['source_revision'],
+                          parts_reproduced=f'{iguais}/{len(linhas)}', parts=linhas), indent=1))
+    return 0 if iguais == len(linhas) else 2
 
 
 def main():
@@ -702,20 +903,41 @@ def main():
     g = sub.add_parser('agregar', help='the proof from the window reports')
     g.add_argument('--janelas', nargs='+', choices=sorted(JANELAS), required=True)
     g.add_argument('--relatorios')
+    g.add_argument('--diagnostico-planejamento', action='store_true', help='aggregate diagnostic reports (.local)')
     g.add_argument('--saida', required=True)
-    t = sub.add_parser('tudo', help='every window in parallel, then the proof')
+    t = sub.add_parser('tudo', help='every part of every window in parallel, then the proof')
     t.add_argument('--janelas', nargs='+', choices=sorted(JANELAS), required=True)
-    t.add_argument('--lease', help="path of the machine's heavy_lease.py (each window takes one slot)")
+    t.add_argument('--lease', help="path of the machine's heavy_lease.py (each part takes one slot)")
     t.add_argument('--relatorios')
-    t.add_argument('--paralelo', type=int, help='parts run at a time (default: all)')
+    t.add_argument('--paralelo', type=int, help='parts started at a time (default: all; the lease bounds the load)')
+    t.add_argument('--partes', type=int, nargs='+', help='only these part numbers (the proof then lists the rest '
+                                                          'as missing)')
+    t.add_argument('--diagnostico-planejamento', action='store_true',
+                   help='diagnostic only (.local; a dirty tree is allowed): see `janela`')
     t.add_argument('--saida', required=True)
+    f = sub.add_parser('fixar', help='pin a window that is not pinned yet (S1) to the Missions commit holding it')
+    f.add_argument('nome', choices=sorted(JANELAS))
+    f.add_argument('--ref', required=True, help='e.g. origin/feat/re-missions (resolved to its commit)')
+    r = sub.add_parser('reproduzir', help='rerun parts here and compare their phase chains with a proof file')
+    r.add_argument('prova')
+    r.add_argument('--janela', required=True, choices=sorted(JANELAS))
+    r.add_argument('--partes', type=int, nargs='+')
+    r.add_argument('--lease')
+    r.add_argument('--relatorios')
+    r.add_argument('--paralelo', type=int)
     a = ap.parse_args()
+    if a.comando == 'fixar':
+        return fixar(a.nome, a.ref)
     relatorios = a.relatorios or pasta_relatorios()
     if a.comando == 'janela':
         return rodar_janela(a.nome, relatorios, a.quadros, a.parte, a.diagnostico_planejamento)
     if a.comando == 'agregar':
-        return escrever_prova(relatorios, a.janelas, a.saida)
-    return tudo(a.janelas, os.path.abspath(a.lease) if a.lease else None, relatorios, a.saida, a.paralelo)
+        return escrever_prova(relatorios, a.janelas, a.saida, a.diagnostico_planejamento)
+    lease = os.path.abspath(a.lease) if a.lease else None
+    if a.comando == 'reproduzir':
+        return reproduzir(a.prova, a.janela, a.partes, lease, a.relatorios or pasta_relatorios() + '-reproducao',
+                          a.paralelo)
+    return tudo(a.janelas, lease, relatorios, a.saida, a.paralelo, a.partes, a.diagnostico_planejamento)
 
 
 if __name__ == '__main__':
