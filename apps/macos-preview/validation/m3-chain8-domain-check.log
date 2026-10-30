@@ -1,0 +1,3 @@
+usage: check.py [-h]
+                [--domain {core,combat,economy,graphics,missions,ai-runtime,audio}]
+check.py: error: argument --domain: invalid choice: 'macos' (choose from 'core', 'combat', 'economy', 'graphics', 'missions', 'ai-runtime', 'audio')

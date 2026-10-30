@@ -18,7 +18,7 @@ class NativeDriverTests(unittest.TestCase):
     def test_real_phase_order_surface_proof_and_recreate_identity(self):
         d,e,i=self.paths();native=NativeDriver(d,e,i);self.addCleanup(native.close)
         engine=C.CDLL(str(e));engine.rl_versao.restype=C.c_uint32;engine.rl_render_contrato.restype=C.c_uint32
-        self.assertEqual(engine.rl_versao(),0x10006);self.assertEqual(engine.rl_render_contrato(),0x10007)
+        self.assertEqual(engine.rl_versao(),0x10006);self.assertEqual(engine.rl_render_contrato(),0x10009)
         observed=[]
         callback=lambda ctx,world,index,phase:(observed.append((index,phase)) or 0)
         self.assertEqual(native.advance(callback),0);self.assertEqual(native.status().phases_equal,1)

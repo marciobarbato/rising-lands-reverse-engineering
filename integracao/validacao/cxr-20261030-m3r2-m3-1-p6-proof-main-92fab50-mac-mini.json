@@ -1,0 +1,6418 @@
+{
+ "code_sha256": {
+  "ferramentas/analisar.py": "931af6bc055de6f0e79e37e1c006f0448b36e92c66c178e5296872c426c09983",
+  "ferramentas/avanco_unidades.py": "b0592c2101f26f59d927be5dcb64010b7d4849f9502fc130ad85c7e36ecf8276",
+  "ferramentas/buscas_bloqueios.py": "cd0814e15468a192ee2fccc9ea2039591c59d1c9bfed2cad2822e87b7e996e91",
+  "ferramentas/cadencia.py": "7ba882f7691d77e4be0eabea501576b134428f2be865517947aedb6e56b858ac",
+  "ferramentas/caminhos.py": "37756835bc3ea010d2b3771d2d6ea8ebb9f400646becb4c35129b39df5173573",
+  "ferramentas/candidatos_rota.py": "35968ce6e78cc2bddca1dbafc4f2ecf38f0ff4e85178f5bfd03ca1ee7e118eec",
+  "ferramentas/chamadas_quadro_core.py": "67de7367d75a5e50176c43fe2c01cd48e281e56cd0d9eae22b22f74a44b70428",
+  "ferramentas/colocacao_estruturas.py": "bfc0c6df3cc634e363f5834ca4a76122811b15d092a95948240715ed7124c60f",
+  "ferramentas/combate.py": "7dfd02aeea1589288fedd8271d22bef87c51ff089cec7781726b2ded6f8e4d70",
+  "ferramentas/construcao_core.py": "7ccf640c5adda6e1a2c0e81bcce0307c0117eca862699af5fc7d34d5fe35a5fa",
+  "ferramentas/consultas_estado_core.py": "09de268cc917e6e5c5970652819d01d92c22344b7d9f61c8e311016930765fba",
+  "ferramentas/consultas_luta.py": "d545edacd327744cf4296671a5f5cfa09f875c3e6fac12eb27c7377439d51aac",
+  "ferramentas/contornos_caminhos.py": "d671d4ff0347d02485d72362da6725986cbf779185cdc088bd4226e1278ca30b",
+  "ferramentas/desbloqueio_unidades.py": "41a50c2942e3820b02835ad523c22981c61485794e84908fd1a659e626da52e3",
+  "ferramentas/emulador.py": "e36af0cf515be0716a923a5363e51537fb9e08edf5eec169fa2f4cd70ea2a390",
+  "ferramentas/entrada_estruturas.py": "c673d9b066b873e1a172be9d30432c5ba3824e47ccff715217a8fd2d17fa48b5",
+  "ferramentas/estruturas_caminhos.py": "2051800644f6bf9385e0072929897539e14265c86262252f38d6bf7293d8da3d",
+  "ferramentas/fadiga_vegetacao.py": "fe7506392fc335ce39aaa97d1cbd2fa2474b9386e49dfcb59d8b82ec7bed531b",
+  "ferramentas/formatos.py": "c60506832e3e5ab6863a8e62d94fdd75843fb87d396423d3fd8cb050bd70b968",
+  "ferramentas/fundacoes_quadro.py": "706eeceb203ed60d55da8f290da2378e4e964aa0e0d2616f2085139ce9611976",
+  "ferramentas/grade_u16.py": "669d8ac6cb3bb6955aa73d98adda08d63a9675fb31946219b0b2a24c108a7bb4",
+  "ferramentas/ia.py": "6df1848a0c372d239bb1430040f4c42c8bd402dde0a77855222469c1f66decff",
+  "ferramentas/incursao_core.py": "1ad2df51b5273a405769d6f51c373a21d27e9b7cf439079ad212d41023cc8867",
+  "ferramentas/insercao_unidades.py": "950672c5d2b41231c7187a59420c14b49feb21a50850af11d56c4d2cc4583adb",
+  "ferramentas/mensagens_chegada.py": "698e30c6ff860592b43feb4fbf23b94f19519ecfaf12355ca85ea88537136105",
+  "ferramentas/minimapa_estruturas.py": "9907d894d5bd4e9ce22d41b8f72aa9dc7ca54fbcc606c504a4f4fb763a6c6adc",
+  "ferramentas/movimento.py": "1b814260ad8ec47a7c53e3e649655789ddb7db6ff704e9f329766a68a6e0cfed",
+  "ferramentas/mundo_vivo.py": "a4c5c2e5f73d09ce6f7bcbd6a15dbbcc5d264cff1c880bc7602ebf317dc3df5c",
+  "ferramentas/navegacao_unidades.py": "bb122c74953d43eb97cde4076fe1f53bd811087f87e575810bce90240930aedf",
+  "ferramentas/ordens_unidades.py": "95b282cca6c29ff5fdbb3bb3c9cd25a25bec0202670a6dc78784ea6677cfefaf",
+  "ferramentas/otimizacao_caminhos.py": "1c5d3a83cf8c6f8af8ea7e80fbe5411e28decad5aeb5fab9c90ca21b234b235a",
+  "ferramentas/passagem_unidades.py": "c7e74e05a86fb3789238c5fc89964d095cf90586c1e80ed4cb0b9dd320b13d1a",
+  "ferramentas/pegadas_estruturas.py": "2f876851691648a1969abd38557feec71d44b72ab9f04f5b6f48c5ff54a655f2",
+  "ferramentas/posicao_saida.py": "8b39ee6d98a3ed51ee46fce444185477ea3bb871987dfdda7c64bcad0288a643",
+  "ferramentas/preparacao_destino.py": "4a760d637c9e1f0421cba08931c0a416e5e3a01b6e62eb51b9a9d259478fbc80",
+  "ferramentas/provedores_lacunas_core.py": "9bf99c2782b96f92ba595de95e151497115925cf0d8c219f2b1446585b73e241",
+  "ferramentas/regioes_mapa.py": "5da4e547fd74834ed36ddec78111af4774262e833fae30f78d7ef96b2ed1f997",
+  "ferramentas/regras.py": "f9a14309dd0994d442f90a67037fe744fd78918437b71c7d8f6c5bedd02ee45c",
+  "ferramentas/selecao_ordens.py": "acf5ebde927f1c5a0275ddffa191d03bdb78a810dd5179cb1f7088b46eba17e8",
+  "ferramentas/simbolos_ia.py": "4f2525c345a21f3a89c4cfc10e1e82a31b1bc9ef84e5dc5bca3a4be3b2aabf7f",
+  "ferramentas/solucionador_python.py": "67bddc7c5cc197ddd8dc1608457b2155f33554999502ddcdacec4add943465eb",
+  "ferramentas/solucionador_vivo.py": "4a39571f29e5106c1d79411948e001a6972b5013975da6664d01f6f8c3344b73",
+  "ferramentas/tarefas_ia.py": "c246e594c72307e3d2e726005bbe13e16c376fa81c82e4878d8cc066a6b4865d",
+  "ferramentas/unidades.py": "00ce73b9eb8abd817f3760db570addefcb4187a3a4066f0cdaa802c6c3cef140",
+  "ferramentas/vinculos_declarados.py": "b74ddcca8965948e1ca7966c103968044fbf281286ff161ceecff61a8b0b79d0",
+  "ferramentas/visao_grupos.py": "dcefb04aed8fcc35d1aadaa44dd4b560b246b7238c46a0fb5c6ab9df979fa595",
+  "ferramentas/visao_movimento.py": "cd61354c6afcd0bc26eb9e7a8db93f5a3cf056d95e58606476783d3e4695255c",
+  "integracao/__init__.py": "404467290a1e505ffae6da2fcb670cc8983d0ac38b4c30620da27b82ff09b4fb",
+  "integracao/providers.py": "dcad0b92a211e9bf15f4ab8614da2c502cfa0badae67dbfc92143281639fe8ea",
+  "pesquisas-paralelas/combate/alvos_alcance.py": "b0006a64869041997ab85d51f2758c7bd4c1d602e0f7bc6de3bb7ba75878dc17",
+  "pesquisas-paralelas/combate/alvos_impacto.py": "436429926f425164aa73f001aa2dbb9443b1123aba8c8d6cc6b5b70bf3f173ea",
+  "pesquisas-paralelas/combate/ambiente_combate_raid.py": "1cd95426da1512df20de0616b089178a53cb40abe7a4563ac5e93ba2c24a6ed4",
+  "pesquisas-paralelas/combate/animacao_disparo.py": "afd402e5b18135c0d78f51b760f41d1ae16137a2532991c5a3bda67275daa514",
+  "pesquisas-paralelas/combate/ataque_vivo.py": "21d3f0c9e2a307b82874c6634730a62b301751ec76c51e9ff7d151429fb7c86c",
+  "pesquisas-paralelas/combate/avanco_projeteis.py": "02a50742ad595d1ed73ed5d9ae725ce0734f4afd4ff27e51fb16dee969d9be3f",
+  "pesquisas-paralelas/combate/bonus_combate.py": "32cec7ae0040734626c3b990fd9e586b2e8f70ac128087d2499e83a73fb04cf1",
+  "pesquisas-paralelas/combate/consumo_dano.py": "25c563f6c8d9aaa8acc67dbad647a9641ae648b702f094f25eec84bae1acfa27",
+  "pesquisas-paralelas/combate/consumo_fisico.py": "2a64288430e84a38b7695539b408adf1f397a08a56e8f32f2db2e5388f28e9fe",
+  "pesquisas-paralelas/combate/grade_impacto.py": "70dffdbcf9b5e4402c12e64a5bc3c19550b5873fc632bf413ddc9df891db461a",
+  "pesquisas-paralelas/combate/impacto_unidades.py": "2cbf69b0bb99a80e1483d6cae594008a11af46e4adec844617c04842a87b6d48",
+  "pesquisas-paralelas/combate/maquina_projeteis.py": "4e2ba7a57edddbc57f7980d1ed8bdad5c100f037c269e54a9e7b4c224651e7d9",
+  "pesquisas-paralelas/combate/mira_angular.py": "96bca2daecd7566012c5e4b2a1178a8fbd701066e4475c228d9d5dbba0aa3a3d",
+  "pesquisas-paralelas/combate/morte_dano.py": "2a043f49b596f28f323d7db9b97e83286952c5db8b99bc473665c0cfcba47e5b",
+  "pesquisas-paralelas/combate/ordens_torres_combate.py": "9a818ac4f7c91b22e30db58e04988a89a3ee92b24a5692a0bb9c820ab3b90a92",
+  "pesquisas-paralelas/combate/projeteis.py": "a25e6f4c386410e09b96d3b94d5e787f0ed44984264312af350ccb5f44f3ce89",
+  "pesquisas-paralelas/combate/proximidade_ataque.py": "5b3f9b3721b5ea954aa70c01df3db370258b0ec8d112b2330e47cc77db2d3eb6",
+  "pesquisas-paralelas/combate/reinicio_projeteis.py": "277b485d49eb9cfa0fc26de4529afb90794cb578b6bee59f0f62e439e1e8cef5",
+  "pesquisas-paralelas/economia/aprendizagem.py": "c8254cbc1526b0f71cd3d24b5eba26dcbcb0ffb8f18c808d0964ddd0dd3166f2",
+  "pesquisas-paralelas/economia/bonus_unidades.py": "b871634a6616fbbb4e1dce4587f588a29cbbe98f5677c0d0f8b332537dc9841c",
+  "pesquisas-paralelas/economia/cauda_carga.py": "ddfbe7b767d4f21e220bf6f545a67b40175f76d0f8e4313d9517c89ce213d642",
+  "pesquisas-paralelas/economia/ciclo_mercado.py": "346579df9df79a3ec805e438b960c9e1f2fec6e0195cb7a521af82a76802c15c",
+  "pesquisas-paralelas/economia/construcoes.py": "da089f78445fc2d2c3be7e2053987faa75eab166276dd727048970322039ae2f",
+  "pesquisas-paralelas/economia/construcoes_habitaveis.py": "f993edfa78a8b35207f2867d55a0736487971b7032c1a68884bb1abf1dd8168d",
+  "pesquisas-paralelas/economia/consultas_reinicio_economia.py": "c81239ae0b7527c01242ef3f95b0c11cfa35cbae6333e7c0068ef6a67e1ec268",
+  "pesquisas-paralelas/economia/economia.py": "4f4bd7093b2dd71f16636bdc2ecfd9d3243c2ce01f978c5ed1af1ab3535b27a4",
+  "pesquisas-paralelas/economia/extracao.py": "797d8092d8e9bc2679d7a18ec2833871bbeada67d0a281f6bba4d3d883952e29",
+  "pesquisas-paralelas/economia/limpeza_saida.py": "0196d1e4c8170be9e1a98101b81f81f2a0ddbe24f1e2948c69a715dec0a6ecf1",
+  "pesquisas-paralelas/economia/mercado.py": "e85524d60e68b6cfd149561418631986bdd786688153d2d0ad096321b07a0008",
+  "pesquisas-paralelas/economia/ordens_economia.py": "48c8fd6d63b7acdf7883e1a6a5b913435c3e35ab8e5eae2925f9f4ee84d46e69",
+  "pesquisas-paralelas/economia/producao.py": "a6cf5741b8cfe67a22d98aae0beeafed4d53dfae60111a089a8d228fd85e338e",
+  "pesquisas-paralelas/economia/proprietarios.py": "5c216b4acf320215a6f48a62f35652ec32eb9049d9f37812b9be0d0ecd70da9a",
+  "pesquisas-paralelas/economia/quadro_economia.py": "28342fb2e68f4e400e79ff321bc6eef5098628ac4941bff25fc48ff48bc38ea2",
+  "pesquisas-paralelas/economia/recrutamento.py": "fab7181cfa3bed7faa38beffa8486cd3f508f46a0e0658aa95f69cadab8f7d45",
+  "pesquisas-paralelas/graficos-animacao/efeitos_logicos_exibicao.py": "2006e1fba23d01ca77c21200edb0179813c5c10a1570b0162dd66e8709d31573",
+  "pesquisas-paralelas/ia-runtime/affgame_hud_ia.py": "afdb24dacf4c58646b81e16e6826a106065a2e8b200e3013ed3f89bdb9332708",
+  "pesquisas-paralelas/ia-runtime/ambiente_ia_runtime.py": "5d600dca346402403959201631213b264d77fb2c150758f6a77b3cd03badab03",
+  "pesquisas-paralelas/ia-runtime/bancada_quadro1_ia.py": "10ca19cee5b87d12500cd7ac9ab8747a3d12e4a4f7dfad62bb14e2358a871427",
+  "pesquisas-paralelas/ia-runtime/bancos_quadro_ia.py": "b6566e985e4296002ee47578521c267e821e105ee68a17a04bb8e7ce9494077f",
+  "pesquisas-paralelas/ia-runtime/comparar_quadro1_encadeado_ia.py": "d1a268d35261c1f75afec9938c9c09b3bbc2bb371d9c81e17e3a8ff9374f82a6",
+  "pesquisas-paralelas/ia-runtime/comparar_quadros_ia.py": "aa81ee3b1b8514f76fb57ec44841b05289422fb4c177620b6cf571f96a30ac63",
+  "pesquisas-paralelas/ia-runtime/composicao_encadeada_ia.py": "4d4f45ce5fc2c2599884d876f7c189554c61b71852115a83d4c96a6f4efc873b",
+  "pesquisas-paralelas/ia-runtime/composicao_entrada_ia.py": "4dff2595d83ba90bfa88a2710fc009bd9a78657177ba09129f644d661f90e754",
+  "pesquisas-paralelas/ia-runtime/composicao_quadro1_ia.py": "cf8ad45208434900ff01c5e15b410f5a15dcdc5fe6b90062492c80b56dcb64a9",
+  "pesquisas-paralelas/ia-runtime/composicao_quadros_ia.py": "afdc8a396b254f5e65167b215c9a785d18cba530169c683ad5c35d63ed786e43",
+  "pesquisas-paralelas/ia-runtime/construcao_entrada_ia.py": "14d8519f20e7fc4c6e0fefaef3258e5745a79af33aebcf443c10904efedfba08",
+  "pesquisas-paralelas/ia-runtime/contexto_exibicao_ia.py": "e8ba0fbbba0d0b8dd39511b3cca3df0a3a6737411992f488400e3e3b24b70d87",
+  "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "0d3c50f9c07dcd4badb4d37217e3d6e8407c9146de968258addff2a2de982928",
+  "pesquisas-paralelas/ia-runtime/entrada_quadro_ia.py": "4ed3a6fed2ccbe0f2b5e57eb84d5c94ec70bf76ca4ebaa849b2b847cc62f3327",
+  "pesquisas-paralelas/ia-runtime/incursao_ia.py": "2e6bc1cce71dcf589ce162902795e6dfd05ae99c607cf8e92840abcebb1cbffc",
+  "pesquisas-paralelas/ia-runtime/inventario_ia_runtime.py": "9e02a2b3534c0a36b4dfd19e0bbeba15658e10f3cc26aa0880bcbc2e2e872546",
+  "pesquisas-paralelas/ia-runtime/laco_despachantes.py": "709fd162a21fe0b5c76a617fe5ed353fbf513a9a3ac241c49fc82ae9eddebcf9",
+  "pesquisas-paralelas/ia-runtime/memoria_ia_runtime.py": "8e8d780dc5c240b627e784cc478de9f6ea0534a916122bb97c3959797ba426ae",
+  "pesquisas-paralelas/ia-runtime/provar_entrada_janelas_ia.py": "9fecb8e365d70a80b7cd69fc0ffa8fbc168e07c9d7da94d94a7f7bfc8745e4f8",
+  "pesquisas-paralelas/ia-runtime/provar_quadros_9200_ia.py": "c46d27fee222a9431324f5c65a53a71f366739ccda257bb5edfd07698d646e65",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "3aa706f689b76482d106f926cec60c9c884c838028cc8d83756197599b07bdae",
+  "pesquisas-paralelas/ia-runtime/proxima_etapa_quadro.py": "d9a3c39db33703c43d0cc16de2446b6cf860f894aa2d875a1828bbfda3f11f80",
+  "pesquisas-paralelas/ia-runtime/quadro_calcul_game.py": "1634bed75de495041871540bf33176e3aad607e1cf2c843f96453df623c540d7",
+  "pesquisas-paralelas/ia-runtime/regras_incursao_ia.py": "35b14728659d305d792600106637fd0ed351e92ec70175b568d24f7851992a4c",
+  "pesquisas-paralelas/ia-runtime/reinicio_ia.py": "a8c62e6a3a109e1edfefe975818458f485bfd5b72a28d93b01082cf34be7c9ac",
+  "pesquisas-paralelas/ia-runtime/rotinas_quadro_ia.py": "d07cd44cc6844138d8e084e3d35f347be95101642114e5acc594d1be4398ca05",
+  "pesquisas-paralelas/missoes/ambiente_missoes.py": "1bcdb321f8c22922721d209bda26832275efd259b4b5cb6feda49c0b8a48386d",
+  "pesquisas-paralelas/missoes/arena_composicao_m1.py": "106e05116b4140e737d52596c19c0b949f633c68148c9f004521ccd26d955eba",
+  "pesquisas-paralelas/missoes/capturar_carga_missao_original.py": "c10da08fdd043df4ac4468acbe0a21b87c45799ff6692ade95d3277b15f1d2f8",
+  "pesquisas-paralelas/missoes/capturar_quadro_missao_original.py": "a061606d388280c0ddcafd93201f1987d71ba33a9720a18c7d6789978b19136f",
+  "pesquisas-paralelas/missoes/cenarios_oraculo.py": "377b5f785c4925b3a2acf6717bba887cba8c37287fa72ba7eb5bb4d59a6519f9",
+  "pesquisas-paralelas/missoes/consultas_missao.py": "23a4e6bbc8bbdf9f1ad1f7855aacca8f181f44f10eabf8d748a5a768942604eb",
+  "pesquisas-paralelas/missoes/fim_missao.py": "d4fd4ba3db45952f7f31c83a5e80b0481c58f99257b84f2bf68888b0862697da",
+  "pesquisas-paralelas/missoes/fronteiras_carga_missao.py": "8d31204ecad3ae3fa7abb8539f3a19441d4adf1861dd638b44f00cf460ae0b0f",
+  "pesquisas-paralelas/missoes/influencia_missao.py": "5a601f8bbd7cb3c4396b1f8c72e01b25dec394625cab5cbf195d06f6e01ecaaa",
+  "pesquisas-paralelas/missoes/ligacao_provedores_m1.py": "da56698f5098c8a94e45618f8cb0a98f730aabb52a211400c70c8115251576a1",
+  "pesquisas-paralelas/missoes/mapa_memoria_m1.py": "7507e065c20ff0c05d6d86972d0a11919cc59e484a6b4f306c122c309a2d74c9",
+  "pesquisas-paralelas/missoes/oraculo_carga_missao.py": "b19c3937a5246e092b7eec90ba2ecc6dd50f8a4afe80f40046a830bcda451ebb",
+  "pesquisas-paralelas/missoes/oraculo_quadro_missao.py": "3d60ae363ebf6b9ba3a966d2da5683da61626dfa1129f484fd1d56328fd4ae88"
+ },
+ "crossings": {
+  "core_provider_stops": 0,
+  "count": 0,
+  "note": "measured: mode 'prova' carries no crossing data, so any crossing would stop the window",
+  "writing_compared_bytes": 0
+ },
+ "diagnostic_graphics_planning": false,
+ "evidence_sha256": {
+  "RISING.EXE": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "RISING.SBL": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+  "pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz": "4c8f5c14a9623131dd019eafcdc49ea63054ee358f9defde58c12cb949f59ff3",
+  "pesquisas-paralelas/missoes/m3/entradas/P6.json": "914043ef277ec9c6507e155c61b450ef07c0fc9bd27a972da8489ca97af9195b",
+  "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.manifest.json": "9e66bb4fd23dae0777a983820b54952bedb11f3b4ab0b84a6481340945de754f",
+  "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte00.json.xz": "0d630ac6c154f98b853691e13c1b8974a1bdef7e63097c387b5949c6c49369bf",
+  "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte01.json.xz": "03976fb9ce9c539d1231fa130c0b8c875dceb26284e9e0eec5c8e1b05a7bb17c",
+  "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte02.json.xz": "ee60b91ceae622134e5342f5311b67600490647664864adafed2df4d260288e6",
+  "pesquisas-paralelas/missoes/m3/sondas/P6/comandos.jsonl.xz": "88e4fe171e9563189aa95b44c5e59abb460125a28085ba332fa8c0e98f278ed3",
+  "pesquisas-paralelas/missoes/m3/sondas/P6/mascara-janela.json": "56cf9039a04d32bfbea4a4098a1111f4d7f59669028d633fadb41e06e3c05dbb",
+  "pesquisas-paralelas/missoes/m3/sondas/P6/politica-janela.json": "55e0906fccb4f41340b8bee780c56ed0d4ee72cb3a47bf5c2a55553c5c5f0275"
+ },
+ "m31_fields": {
+  "packets": "u32 [0x4e2458+4p] and its 10-byte packet, p = 0..3",
+  "selection": "0x508728+512p, 512 bytes, p = 0..3",
+  "unit_order_fields": "+2 (u8), +0xb2 (u16), +0xb7, +0xb8, +0xbe (u8), +0x110 (u32) of each of the 800 slots of the pool [0x4e19a0] (276-byte records)"
+ },
+ "problems": [],
+ "reproduction": {
+  "aggregate": "python3 -B pesquisas-paralelas/ia-runtime/provar_entrada_janelas_ia.py agregar --janelas P6 --saida <proof.json>",
+  "one_command": "python3 -B pesquisas-paralelas/ia-runtime/provar_entrada_janelas_ia.py tudo --janelas P6 [--lease <heavy_lease.py>] --saida <proof.json>",
+  "per_window": "python3 -B pesquisas-paralelas/ia-runtime/provar_entrada_janelas_ia.py janela <P>",
+  "reports": ".local/rel"
+ },
+ "schema": "rising-lands/ai-runtime-m3.1-window-proof/1",
+ "source_dirty_paths": [],
+ "source_revision": "92fab50ccfa14271f6657fc0f6032b6b4b68dd4b",
+ "summary": {
+  "crossings": 0,
+  "phases": 4544,
+  "phases_equal": 4544,
+  "reach": {
+   "P6": {
+    "equal_parts": [
+     0,
+     1,
+     2
+    ],
+    "equal_parts_from_start": 3,
+    "equal_through_frame": 2400,
+    "first_stop": null,
+    "parts": 3
+   }
+  },
+  "result": "equal",
+  "windows": {
+   "P6": "4544/4544"
+  }
+ },
+ "timing": {
+  "per_window_seconds": {
+   "P6": 1181.8
+  },
+  "run": {
+   "lease": true,
+   "parallel": 3,
+   "wall_seconds": 5467.3,
+   "window_exit_codes": {
+    "P6-parte00": 0,
+    "P6-parte01": 0,
+    "P6-parte02": 0
+   },
+   "window_wall_seconds": {
+    "P6-parte00": 4955.7,
+    "P6-parte01": 5467.3,
+    "P6-parte02": 4518.6
+   }
+  }
+ },
+ "unmodeled": [
+  "stack words of MCICD_Play in the CalculGame frame bodies (uninitialized caller locals), EFLAGS and EIP",
+  "bindings and boundaries issued inside policy display roots, counted per phase in phase_table",
+  "masked display-only state (the window's cumulative exclusion_mask) and the surfaces",
+  "TextGetMessage: Missions' declared display-scenario boundary (EAX 0, no cleanup), compared as a boundary event",
+  "the frame-128 allocation records (M2.2 capture) are a declared input; no phase allocates or releases a block and every phase keeps the count",
+  "the between_frames129 entry registers are a declared input from the window capture"
+ ],
+ "windows": [
+  {
+   "bindings_boundaries": {
+    "bindings_compared": 36145,
+    "boundaries_compared": 6921,
+    "display_context_bindings_not_modeled": 16205,
+    "display_context_boundaries_not_modeled": 2068
+   },
+   "commands": {
+    "path": "pesquisas-paralelas/missoes/m3/sondas/P6/comandos.jsonl.xz",
+    "records": 12,
+    "sha256": "88e4fe171e9563189aa95b44c5e59abb460125a28085ba332fa8c0e98f278ed3"
+   },
+   "crossings": {
+    "core_provider_stops": 0,
+    "count": 0,
+    "writing_compared_bytes": 0
+   },
+   "equality": {
+    "allocation_count": 4544,
+    "between_frames_exit_registers": {
+     "checked": 2272,
+     "equal": 2272
+    },
+    "bindings_outside_display": 4544,
+    "boundaries_outside_display": 4544,
+    "carried_entry_registers": {
+     "checked": 2269,
+     "equal": 2269
+    },
+    "compared_byte_phase_total": 72714401216,
+    "compared_bytes_per_phase": [
+     16002289
+    ],
+    "compared_summary": 4544,
+    "hud_flag": {
+     "checked": 2272,
+     "equal": 2272
+    },
+    "m31_fields": 4544,
+    "m31_fields_hidden_by_mask": 0,
+    "orders_frame_phases": {
+     "checked": 2272,
+     "equal": 2272
+    },
+    "reference_integrity": {
+     "compared_summary": 4544,
+     "full_states": [
+      "frame250",
+      "frame500",
+      "frame750",
+      "frame1000",
+      "frame1250",
+      "frame1500",
+      "frame1750",
+      "frame2000",
+      "frame2250",
+      "frame2400"
+     ],
+     "masked_sha256": 4544,
+     "summary": 4544
+    },
+    "rng": 4544,
+    "scripted_inputs": 4544,
+    "state": 4544
+   },
+   "final_indicators": {
+    "indicators": {
+     "ai_rng": {
+      "equal": true,
+      "python": 840087502,
+      "reference": 840087502
+     },
+     "counter": {
+      "equal": true,
+      "python": 2400,
+      "reference": 2400
+     },
+     "cursor_4e1d18": {
+      "equal": true,
+      "python": 29,
+      "reference": 29
+     },
+     "hud_4e05a2": {
+      "equal": true,
+      "python": 0,
+      "reference": 0
+     },
+     "view_x": {
+      "equal": true,
+      "python": 0,
+      "reference": 0
+     },
+     "view_y": {
+      "equal": true,
+      "python": 0,
+      "reference": 0
+     },
+     "world_rng": {
+      "equal": true,
+      "python": 739796803,
+      "reference": 739796803
+     }
+    },
+    "phase": "frame2400",
+    "rng": {
+     "equal": true,
+     "python": {
+      "0x497164": "0x2c186743",
+      "0x498db4": "0x3212b7ce"
+     },
+     "reference": {
+      "0x497164": "0x2c186743",
+      "0x498db4": "0x3212b7ce"
+     }
+    }
+   },
+   "frames": [
+    129,
+    2400
+   ],
+   "input": {
+    "path": "pesquisas-paralelas/missoes/m3/entradas/P6.json",
+    "sha256": "914043ef277ec9c6507e155c61b450ef07c0fc9bd27a972da8489ca97af9195b"
+   },
+   "m22_frame128": {
+    "path": "pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz",
+    "sha256": "4c8f5c14a9623131dd019eafcdc49ea63054ee358f9defde58c12cb949f59ff3"
+   },
+   "machine": {
+    "machine": "arm64",
+    "processor": "arm",
+    "python": "3.9.6",
+    "release": "27.2.0",
+    "system": "Darwin"
+   },
+   "manifest": {
+    "path": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.manifest.json",
+    "sha256": "9e66bb4fd23dae0777a983820b54952bedb11f3b4ab0b84a6481340945de754f"
+   },
+   "mask": {
+    "added_display_only": [
+     [
+      "0x49a041",
+      "0x49a042"
+     ],
+     [
+      "0x49a046",
+      "0x49a04b"
+     ],
+     [
+      "0x49a04c",
+      "0x49a04d"
+     ],
+     [
+      "0x49a054",
+      "0x49a055"
+     ],
+     [
+      "0x4140d000",
+      "0x4140d9d8"
+     ],
+     [
+      "0x41dc9001",
+      "0x41dc9021"
+     ],
+     [
+      "0x41dc9022",
+      "0x41dc9042"
+     ],
+     [
+      "0x41dc9043",
+      "0x41dc9063"
+     ],
+     [
+      "0x41dc9064",
+      "0x41dc9084"
+     ],
+     [
+      "0x41dc9085",
+      "0x41dc90a5"
+     ],
+     [
+      "0x41dc90a6",
+      "0x41dc90c6"
+     ],
+     [
+      "0x41dc90c7",
+      "0x41dc90e7"
+     ],
+     [
+      "0x41dc90e8",
+      "0x41dc9108"
+     ],
+     [
+      "0x41dc9109",
+      "0x41dc9129"
+     ],
+     [
+      "0x41dc912a",
+      "0x41dc914a"
+     ],
+     [
+      "0x41dc914b",
+      "0x41dc916b"
+     ],
+     [
+      "0x41dc916c",
+      "0x41dc918c"
+     ],
+     [
+      "0x41dc918d",
+      "0x41dc91ad"
+     ],
+     [
+      "0x41dc91ae",
+      "0x41dc91ce"
+     ],
+     [
+      "0x41dc91cf",
+      "0x41dc91ef"
+     ],
+     [
+      "0x41dc91f0",
+      "0x41dc9210"
+     ],
+     [
+      "0x41dc9211",
+      "0x41dc9231"
+     ],
+     [
+      "0x41dc9232",
+      "0x41dc9252"
+     ],
+     [
+      "0x41dc9253",
+      "0x41dc9273"
+     ],
+     [
+      "0x41dc9274",
+      "0x41dc9294"
+     ],
+     [
+      "0x41dc9295",
+      "0x41dc92b5"
+     ],
+     [
+      "0x41dc92b6",
+      "0x41dc92d6"
+     ],
+     [
+      "0x41dc92d7",
+      "0x41dc92f7"
+     ],
+     [
+      "0x41dc92f8",
+      "0x41dc9312"
+     ],
+     [
+      "0x41dc9313",
+      "0x41dc9318"
+     ],
+     [
+      "0x41dc9319",
+      "0x41dc9339"
+     ],
+     [
+      "0x41dc933a",
+      "0x41dc935a"
+     ],
+     [
+      "0x41dc935b",
+      "0x41dc937b"
+     ],
+     [
+      "0x41dc937c",
+      "0x41dc939c"
+     ],
+     [
+      "0x41dc939d",
+      "0x41dc93bd"
+     ],
+     [
+      "0x41dc93be",
+      "0x41dc93de"
+     ],
+     [
+      "0x41dc93df",
+      "0x41dc93ff"
+     ],
+     [
+      "0x41dc9400",
+      "0x41dc9420"
+     ],
+     [
+      "0x41dcb001",
+      "0x41dcb021"
+     ],
+     [
+      "0x41dcb022",
+      "0x41dcb042"
+     ],
+     [
+      "0x41dcb043",
+      "0x41dcb063"
+     ],
+     [
+      "0x41dcb064",
+      "0x41dcb084"
+     ],
+     [
+      "0x41dcb085",
+      "0x41dcb0a5"
+     ],
+     [
+      "0x41dcb0a6",
+      "0x41dcb0c6"
+     ],
+     [
+      "0x41dcb0c7",
+      "0x41dcb0e7"
+     ],
+     [
+      "0x41dcb0e8",
+      "0x41dcb108"
+     ],
+     [
+      "0x41dcb109",
+      "0x41dcb129"
+     ],
+     [
+      "0x41dcb12a",
+      "0x41dcb14a"
+     ],
+     [
+      "0x41dcb14b",
+      "0x41dcb16b"
+     ],
+     [
+      "0x41dcb16c",
+      "0x41dcb18c"
+     ],
+     [
+      "0x41dcb18d",
+      "0x41dcb1ad"
+     ],
+     [
+      "0x41dcb1ae",
+      "0x41dcb1ce"
+     ],
+     [
+      "0x41dcb1cf",
+      "0x41dcb1ef"
+     ],
+     [
+      "0x41dcb1f0",
+      "0x41dcb210"
+     ],
+     [
+      "0x41dcb211",
+      "0x41dcb231"
+     ],
+     [
+      "0x41dcb232",
+      "0x41dcb252"
+     ],
+     [
+      "0x41dcb253",
+      "0x41dcb273"
+     ],
+     [
+      "0x41dcb274",
+      "0x41dcb294"
+     ],
+     [
+      "0x41dcb295",
+      "0x41dcb2b5"
+     ],
+     [
+      "0x41dcb2b6",
+      "0x41dcb2d6"
+     ],
+     [
+      "0x41dcb2d7",
+      "0x41dcb2f7"
+     ],
+     [
+      "0x41dcb2f8",
+      "0x41dcb318"
+     ],
+     [
+      "0x41dcb319",
+      "0x41dcb339"
+     ],
+     [
+      "0x41dcb33a",
+      "0x41dcb35a"
+     ],
+     [
+      "0x41dcb35b",
+      "0x41dcb37b"
+     ],
+     [
+      "0x41dcb37c",
+      "0x41dcb39c"
+     ],
+     [
+      "0x41dcb39d",
+      "0x41dcb3bd"
+     ],
+     [
+      "0x41dcb3be",
+      "0x41dcb3de"
+     ],
+     [
+      "0x41dcb3df",
+      "0x41dcb3ff"
+     ],
+     [
+      "0x41dcb400",
+      "0x41dcb420"
+     ],
+     [
+      "0x41dcd001",
+      "0x41dcd021"
+     ],
+     [
+      "0x41dcd022",
+      "0x41dcd042"
+     ],
+     [
+      "0x41dcd043",
+      "0x41dcd063"
+     ],
+     [
+      "0x41dcd064",
+      "0x41dcd084"
+     ],
+     [
+      "0x41dcd085",
+      "0x41dcd0a5"
+     ],
+     [
+      "0x41dcd0a6",
+      "0x41dcd0c6"
+     ],
+     [
+      "0x41dcd0c7",
+      "0x41dcd0e7"
+     ],
+     [
+      "0x41dcd0e8",
+      "0x41dcd108"
+     ],
+     [
+      "0x41dcd109",
+      "0x41dcd129"
+     ],
+     [
+      "0x41dcd12a",
+      "0x41dcd14a"
+     ],
+     [
+      "0x41dcd14b",
+      "0x41dcd16b"
+     ],
+     [
+      "0x41dcd16c",
+      "0x41dcd18c"
+     ],
+     [
+      "0x41dcd18d",
+      "0x41dcd1ad"
+     ],
+     [
+      "0x41dcd1ae",
+      "0x41dcd1ce"
+     ],
+     [
+      "0x41dcd1cf",
+      "0x41dcd1ef"
+     ],
+     [
+      "0x41dcd1f0",
+      "0x41dcd210"
+     ],
+     [
+      "0x41dcd211",
+      "0x41dcd231"
+     ],
+     [
+      "0x41dcd232",
+      "0x41dcd252"
+     ],
+     [
+      "0x41dcd253",
+      "0x41dcd273"
+     ],
+     [
+      "0x41dcd274",
+      "0x41dcd294"
+     ],
+     [
+      "0x41dcd295",
+      "0x41dcd2b5"
+     ],
+     [
+      "0x41dcd2b6",
+      "0x41dcd2d6"
+     ],
+     [
+      "0x41dcd2d7",
+      "0x41dcd2f7"
+     ],
+     [
+      "0x41dcd2f8",
+      "0x41dcd318"
+     ],
+     [
+      "0x41dcd319",
+      "0x41dcd339"
+     ],
+     [
+      "0x41dcd33a",
+      "0x41dcd35a"
+     ],
+     [
+      "0x41dcd35b",
+      "0x41dcd37b"
+     ],
+     [
+      "0x41dcd37c",
+      "0x41dcd39c"
+     ],
+     [
+      "0x41dcd39d",
+      "0x41dcd3bd"
+     ],
+     [
+      "0x41dcd3be",
+      "0x41dcd3de"
+     ],
+     [
+      "0x41dcd3df",
+      "0x41dcd3ff"
+     ],
+     [
+      "0x41dcd400",
+      "0x41dcd420"
+     ],
+     [
+      "0x41dcf001",
+      "0x41dcf021"
+     ],
+     [
+      "0x41dcf022",
+      "0x41dcf042"
+     ],
+     [
+      "0x41dcf043",
+      "0x41dcf063"
+     ],
+     [
+      "0x41dcf064",
+      "0x41dcf084"
+     ],
+     [
+      "0x41dcf085",
+      "0x41dcf0a5"
+     ],
+     [
+      "0x41dcf0a6",
+      "0x41dcf0c6"
+     ],
+     [
+      "0x41dcf0c7",
+      "0x41dcf0e7"
+     ],
+     [
+      "0x41dcf0e8",
+      "0x41dcf108"
+     ],
+     [
+      "0x41dcf109",
+      "0x41dcf129"
+     ],
+     [
+      "0x41dcf12a",
+      "0x41dcf14a"
+     ],
+     [
+      "0x41dcf14b",
+      "0x41dcf16b"
+     ],
+     [
+      "0x41dcf16c",
+      "0x41dcf18c"
+     ],
+     [
+      "0x41dcf18d",
+      "0x41dcf1ad"
+     ],
+     [
+      "0x41dcf1ae",
+      "0x41dcf1ce"
+     ],
+     [
+      "0x41dcf1cf",
+      "0x41dcf1ef"
+     ],
+     [
+      "0x41dcf1f0",
+      "0x41dcf210"
+     ],
+     [
+      "0x41dcf211",
+      "0x41dcf231"
+     ],
+     [
+      "0x41dcf232",
+      "0x41dcf252"
+     ],
+     [
+      "0x41dcf253",
+      "0x41dcf273"
+     ],
+     [
+      "0x41dcf274",
+      "0x41dcf294"
+     ],
+     [
+      "0x41dcf295",
+      "0x41dcf2b5"
+     ],
+     [
+      "0x41dcf2b6",
+      "0x41dcf2d6"
+     ],
+     [
+      "0x41dcf2d7",
+      "0x41dcf2f7"
+     ],
+     [
+      "0x41dcf2f8",
+      "0x41dcf318"
+     ],
+     [
+      "0x41dcf319",
+      "0x41dcf339"
+     ],
+     [
+      "0x41dcf33a",
+      "0x41dcf35a"
+     ],
+     [
+      "0x41dcf35b",
+      "0x41dcf37b"
+     ],
+     [
+      "0x41dcf37c",
+      "0x41dcf39c"
+     ],
+     [
+      "0x41dcf39d",
+      "0x41dcf3bd"
+     ],
+     [
+      "0x41dcf3be",
+      "0x41dcf3de"
+     ],
+     [
+      "0x41dcf3df",
+      "0x41dcf3ff"
+     ],
+     [
+      "0x41dcf400",
+      "0x41dcf420"
+     ],
+     [
+      "0x41dd1001",
+      "0x41dd1021"
+     ],
+     [
+      "0x41dd1022",
+      "0x41dd1042"
+     ],
+     [
+      "0x41dd1043",
+      "0x41dd1063"
+     ],
+     [
+      "0x41dd1064",
+      "0x41dd1084"
+     ],
+     [
+      "0x41dd1085",
+      "0x41dd10a5"
+     ],
+     [
+      "0x41dd10a6",
+      "0x41dd10c6"
+     ],
+     [
+      "0x41dd10c7",
+      "0x41dd10e7"
+     ],
+     [
+      "0x41dd10e8",
+      "0x41dd1108"
+     ],
+     [
+      "0x41dd1109",
+      "0x41dd1129"
+     ],
+     [
+      "0x41dd112a",
+      "0x41dd114a"
+     ],
+     [
+      "0x41dd114b",
+      "0x41dd116b"
+     ],
+     [
+      "0x41dd116c",
+      "0x41dd118c"
+     ],
+     [
+      "0x41dd118d",
+      "0x41dd11ad"
+     ],
+     [
+      "0x41dd11ae",
+      "0x41dd11ce"
+     ],
+     [
+      "0x41dd11cf",
+      "0x41dd11ef"
+     ],
+     [
+      "0x41dd11f0",
+      "0x41dd1210"
+     ],
+     [
+      "0x41dd1211",
+      "0x41dd1231"
+     ],
+     [
+      "0x41dd1232",
+      "0x41dd1252"
+     ],
+     [
+      "0x41dd1253",
+      "0x41dd1273"
+     ],
+     [
+      "0x41dd1274",
+      "0x41dd1294"
+     ],
+     [
+      "0x41dd1295",
+      "0x41dd12b5"
+     ],
+     [
+      "0x41dd12b6",
+      "0x41dd12d6"
+     ],
+     [
+      "0x41dd12d7",
+      "0x41dd12f7"
+     ],
+     [
+      "0x41dd12f8",
+      "0x41dd1318"
+     ],
+     [
+      "0x41dd1319",
+      "0x41dd1339"
+     ],
+     [
+      "0x41dd133a",
+      "0x41dd135a"
+     ],
+     [
+      "0x41dd135b",
+      "0x41dd137b"
+     ],
+     [
+      "0x41dd137c",
+      "0x41dd139c"
+     ],
+     [
+      "0x41dd139d",
+      "0x41dd13bd"
+     ],
+     [
+      "0x41dd13be",
+      "0x41dd13de"
+     ],
+     [
+      "0x41dd13df",
+      "0x41dd13ff"
+     ],
+     [
+      "0x41dd1400",
+      "0x41dd1420"
+     ],
+     [
+      "0x41dd3001",
+      "0x41dd3021"
+     ],
+     [
+      "0x41dd3022",
+      "0x41dd3042"
+     ],
+     [
+      "0x41dd3043",
+      "0x41dd3063"
+     ],
+     [
+      "0x41dd3064",
+      "0x41dd3084"
+     ],
+     [
+      "0x41dd3085",
+      "0x41dd30a5"
+     ],
+     [
+      "0x41dd30a6",
+      "0x41dd30c6"
+     ],
+     [
+      "0x41dd30c7",
+      "0x41dd30e7"
+     ],
+     [
+      "0x41dd30e8",
+      "0x41dd3108"
+     ],
+     [
+      "0x41dd3109",
+      "0x41dd3129"
+     ],
+     [
+      "0x41dd312a",
+      "0x41dd314a"
+     ],
+     [
+      "0x41dd314b",
+      "0x41dd316b"
+     ],
+     [
+      "0x41dd316c",
+      "0x41dd318c"
+     ],
+     [
+      "0x41dd318d",
+      "0x41dd31ad"
+     ],
+     [
+      "0x41dd31ae",
+      "0x41dd31ce"
+     ],
+     [
+      "0x41dd31cf",
+      "0x41dd31ef"
+     ],
+     [
+      "0x41dd31f0",
+      "0x41dd3210"
+     ],
+     [
+      "0x41dd3211",
+      "0x41dd3231"
+     ],
+     [
+      "0x41dd3232",
+      "0x41dd3252"
+     ],
+     [
+      "0x41dd3253",
+      "0x41dd3273"
+     ],
+     [
+      "0x41dd3274",
+      "0x41dd3294"
+     ],
+     [
+      "0x41dd3295",
+      "0x41dd32b5"
+     ],
+     [
+      "0x41dd32b6",
+      "0x41dd32d6"
+     ],
+     [
+      "0x41dd32d7",
+      "0x41dd32f7"
+     ],
+     [
+      "0x41dd32f8",
+      "0x41dd3318"
+     ],
+     [
+      "0x41dd3319",
+      "0x41dd3339"
+     ],
+     [
+      "0x41dd333a",
+      "0x41dd335a"
+     ],
+     [
+      "0x41dd335b",
+      "0x41dd337b"
+     ],
+     [
+      "0x41dd337c",
+      "0x41dd339c"
+     ],
+     [
+      "0x41dd339d",
+      "0x41dd33bd"
+     ],
+     [
+      "0x41dd33be",
+      "0x41dd33de"
+     ],
+     [
+      "0x41dd33df",
+      "0x41dd33ff"
+     ],
+     [
+      "0x41dd3400",
+      "0x41dd3420"
+     ],
+     [
+      "0x41dd5001",
+      "0x41dd5021"
+     ],
+     [
+      "0x41dd5022",
+      "0x41dd5042"
+     ],
+     [
+      "0x41dd5043",
+      "0x41dd5063"
+     ],
+     [
+      "0x41dd5064",
+      "0x41dd5084"
+     ],
+     [
+      "0x41dd5085",
+      "0x41dd50a5"
+     ],
+     [
+      "0x41dd50a6",
+      "0x41dd50c6"
+     ],
+     [
+      "0x41dd50c7",
+      "0x41dd50e7"
+     ],
+     [
+      "0x41dd50e8",
+      "0x41dd5108"
+     ],
+     [
+      "0x41dd5109",
+      "0x41dd5129"
+     ],
+     [
+      "0x41dd512a",
+      "0x41dd514a"
+     ],
+     [
+      "0x41dd514b",
+      "0x41dd516b"
+     ],
+     [
+      "0x41dd516c",
+      "0x41dd518c"
+     ],
+     [
+      "0x41dd518d",
+      "0x41dd51ad"
+     ],
+     [
+      "0x41dd51ae",
+      "0x41dd51ce"
+     ],
+     [
+      "0x41dd51cf",
+      "0x41dd51ef"
+     ],
+     [
+      "0x41dd51f0",
+      "0x41dd5210"
+     ],
+     [
+      "0x41dd5211",
+      "0x41dd5231"
+     ],
+     [
+      "0x41dd5232",
+      "0x41dd5252"
+     ],
+     [
+      "0x41dd5253",
+      "0x41dd5273"
+     ],
+     [
+      "0x41dd5274",
+      "0x41dd5294"
+     ],
+     [
+      "0x41dd5295",
+      "0x41dd52b5"
+     ],
+     [
+      "0x41dd52b6",
+      "0x41dd52d6"
+     ],
+     [
+      "0x41dd52d7",
+      "0x41dd52f7"
+     ],
+     [
+      "0x41dd52f8",
+      "0x41dd5318"
+     ],
+     [
+      "0x41dd5319",
+      "0x41dd5339"
+     ],
+     [
+      "0x41dd533a",
+      "0x41dd535a"
+     ],
+     [
+      "0x41dd535b",
+      "0x41dd537b"
+     ],
+     [
+      "0x41dd537c",
+      "0x41dd539c"
+     ],
+     [
+      "0x41dd539d",
+      "0x41dd53bd"
+     ],
+     [
+      "0x41dd53be",
+      "0x41dd53de"
+     ],
+     [
+      "0x41dd53df",
+      "0x41dd53ff"
+     ],
+     [
+      "0x41dd5400",
+      "0x41dd5420"
+     ],
+     [
+      "0x41dd7001",
+      "0x41dd7021"
+     ],
+     [
+      "0x41dd7022",
+      "0x41dd7042"
+     ],
+     [
+      "0x41dd7043",
+      "0x41dd7063"
+     ],
+     [
+      "0x41dd7064",
+      "0x41dd7084"
+     ],
+     [
+      "0x41dd7085",
+      "0x41dd70a5"
+     ],
+     [
+      "0x41dd70a6",
+      "0x41dd70c6"
+     ],
+     [
+      "0x41dd70c7",
+      "0x41dd70e7"
+     ],
+     [
+      "0x41dd70e8",
+      "0x41dd7108"
+     ],
+     [
+      "0x41dd7109",
+      "0x41dd7129"
+     ],
+     [
+      "0x41dd712a",
+      "0x41dd714a"
+     ],
+     [
+      "0x41dd714b",
+      "0x41dd716b"
+     ],
+     [
+      "0x41dd716c",
+      "0x41dd718c"
+     ],
+     [
+      "0x41dd718d",
+      "0x41dd71ad"
+     ],
+     [
+      "0x41dd71ae",
+      "0x41dd71ce"
+     ],
+     [
+      "0x41dd71cf",
+      "0x41dd71ef"
+     ],
+     [
+      "0x41dd71f0",
+      "0x41dd7210"
+     ],
+     [
+      "0x41dd7211",
+      "0x41dd7231"
+     ],
+     [
+      "0x41dd7232",
+      "0x41dd7252"
+     ],
+     [
+      "0x41dd7253",
+      "0x41dd7273"
+     ],
+     [
+      "0x41dd7274",
+      "0x41dd7294"
+     ],
+     [
+      "0x41dd7295",
+      "0x41dd72b5"
+     ],
+     [
+      "0x41dd72b6",
+      "0x41dd72d6"
+     ],
+     [
+      "0x41dd72d7",
+      "0x41dd72f7"
+     ],
+     [
+      "0x41dd72f8",
+      "0x41dd7318"
+     ],
+     [
+      "0x41dd7319",
+      "0x41dd7339"
+     ],
+     [
+      "0x41dd733a",
+      "0x41dd735a"
+     ],
+     [
+      "0x41dd735b",
+      "0x41dd737b"
+     ],
+     [
+      "0x41dd737c",
+      "0x41dd739c"
+     ],
+     [
+      "0x41dd739d",
+      "0x41dd73bd"
+     ],
+     [
+      "0x41dd73be",
+      "0x41dd73de"
+     ],
+     [
+      "0x41dd73df",
+      "0x41dd73ff"
+     ],
+     [
+      "0x41dd7400",
+      "0x41dd7420"
+     ],
+     [
+      "0x41dd9001",
+      "0x41dd9021"
+     ],
+     [
+      "0x41dd9022",
+      "0x41dd9042"
+     ],
+     [
+      "0x41dd9043",
+      "0x41dd9063"
+     ],
+     [
+      "0x41dd9064",
+      "0x41dd9084"
+     ],
+     [
+      "0x41dd9085",
+      "0x41dd90a5"
+     ],
+     [
+      "0x41dd90a6",
+      "0x41dd90c6"
+     ],
+     [
+      "0x41dd90c7",
+      "0x41dd90e7"
+     ],
+     [
+      "0x41dd90e8",
+      "0x41dd9108"
+     ],
+     [
+      "0x41dd9109",
+      "0x41dd9129"
+     ],
+     [
+      "0x41dd912a",
+      "0x41dd914a"
+     ],
+     [
+      "0x41dd914b",
+      "0x41dd916b"
+     ],
+     [
+      "0x41dd916c",
+      "0x41dd918c"
+     ],
+     [
+      "0x41dd918d",
+      "0x41dd91ad"
+     ],
+     [
+      "0x41dd91ae",
+      "0x41dd91ce"
+     ],
+     [
+      "0x41dd91cf",
+      "0x41dd91ef"
+     ],
+     [
+      "0x41dd91f0",
+      "0x41dd9210"
+     ],
+     [
+      "0x41dd9211",
+      "0x41dd9231"
+     ],
+     [
+      "0x41dd9232",
+      "0x41dd9252"
+     ],
+     [
+      "0x41dd9253",
+      "0x41dd9273"
+     ],
+     [
+      "0x41dd9274",
+      "0x41dd9294"
+     ],
+     [
+      "0x41dd9295",
+      "0x41dd92b5"
+     ],
+     [
+      "0x41dd92b6",
+      "0x41dd92d6"
+     ],
+     [
+      "0x41dd92d7",
+      "0x41dd92f7"
+     ],
+     [
+      "0x41dd92f8",
+      "0x41dd9318"
+     ],
+     [
+      "0x41dd9319",
+      "0x41dd9339"
+     ],
+     [
+      "0x41dd933a",
+      "0x41dd935a"
+     ],
+     [
+      "0x41dd935b",
+      "0x41dd937b"
+     ],
+     [
+      "0x41dd937c",
+      "0x41dd939c"
+     ],
+     [
+      "0x41dd939d",
+      "0x41dd93bd"
+     ],
+     [
+      "0x41dd93be",
+      "0x41dd93de"
+     ],
+     [
+      "0x41dd93df",
+      "0x41dd93ff"
+     ],
+     [
+      "0x41dd9400",
+      "0x41dd9420"
+     ],
+     [
+      "0x41ddb001",
+      "0x41ddb021"
+     ],
+     [
+      "0x41ddb022",
+      "0x41ddb042"
+     ],
+     [
+      "0x41ddb043",
+      "0x41ddb063"
+     ],
+     [
+      "0x41ddb064",
+      "0x41ddb084"
+     ],
+     [
+      "0x41ddb085",
+      "0x41ddb0a5"
+     ],
+     [
+      "0x41ddb0a6",
+      "0x41ddb0c6"
+     ],
+     [
+      "0x41ddb0c7",
+      "0x41ddb0e7"
+     ],
+     [
+      "0x41ddb0e8",
+      "0x41ddb108"
+     ],
+     [
+      "0x41ddb109",
+      "0x41ddb129"
+     ],
+     [
+      "0x41ddb12a",
+      "0x41ddb14a"
+     ],
+     [
+      "0x41ddb14b",
+      "0x41ddb16b"
+     ],
+     [
+      "0x41ddb16c",
+      "0x41ddb18c"
+     ],
+     [
+      "0x41ddb18d",
+      "0x41ddb1ad"
+     ],
+     [
+      "0x41ddb1ae",
+      "0x41ddb1ce"
+     ],
+     [
+      "0x41ddb1cf",
+      "0x41ddb1ef"
+     ],
+     [
+      "0x41ddb1f0",
+      "0x41ddb210"
+     ],
+     [
+      "0x41ddb211",
+      "0x41ddb231"
+     ],
+     [
+      "0x41ddb232",
+      "0x41ddb252"
+     ],
+     [
+      "0x41ddb253",
+      "0x41ddb273"
+     ],
+     [
+      "0x41ddb274",
+      "0x41ddb294"
+     ],
+     [
+      "0x41ddb295",
+      "0x41ddb2b5"
+     ],
+     [
+      "0x41ddb2b6",
+      "0x41ddb2d6"
+     ],
+     [
+      "0x41ddb2d7",
+      "0x41ddb2f7"
+     ],
+     [
+      "0x41ddb2f8",
+      "0x41ddb318"
+     ],
+     [
+      "0x41ddb319",
+      "0x41ddb339"
+     ],
+     [
+      "0x41ddb33a",
+      "0x41ddb35a"
+     ],
+     [
+      "0x41ddb35b",
+      "0x41ddb37b"
+     ],
+     [
+      "0x41ddb37c",
+      "0x41ddb39c"
+     ],
+     [
+      "0x41ddb39d",
+      "0x41ddb3bd"
+     ],
+     [
+      "0x41ddb3be",
+      "0x41ddb3de"
+     ],
+     [
+      "0x41ddb3df",
+      "0x41ddb3ff"
+     ],
+     [
+      "0x41ddb400",
+      "0x41ddb420"
+     ],
+     [
+      "0x41ddd001",
+      "0x41ddd021"
+     ],
+     [
+      "0x41ddd022",
+      "0x41ddd042"
+     ],
+     [
+      "0x41ddd043",
+      "0x41ddd063"
+     ],
+     [
+      "0x41ddd064",
+      "0x41ddd084"
+     ],
+     [
+      "0x41ddd085",
+      "0x41ddd0a5"
+     ],
+     [
+      "0x41ddd0a6",
+      "0x41ddd0c6"
+     ],
+     [
+      "0x41ddd0c7",
+      "0x41ddd0e7"
+     ],
+     [
+      "0x41ddd0e8",
+      "0x41ddd108"
+     ],
+     [
+      "0x41ddd109",
+      "0x41ddd129"
+     ],
+     [
+      "0x41ddd12a",
+      "0x41ddd14a"
+     ],
+     [
+      "0x41ddd14b",
+      "0x41ddd16b"
+     ],
+     [
+      "0x41ddd16c",
+      "0x41ddd18c"
+     ],
+     [
+      "0x41ddd18d",
+      "0x41ddd1ad"
+     ],
+     [
+      "0x41ddd1ae",
+      "0x41ddd1ce"
+     ],
+     [
+      "0x41ddd1cf",
+      "0x41ddd1ef"
+     ],
+     [
+      "0x41ddd1f0",
+      "0x41ddd210"
+     ],
+     [
+      "0x41ddd211",
+      "0x41ddd231"
+     ],
+     [
+      "0x41ddd232",
+      "0x41ddd252"
+     ],
+     [
+      "0x41ddd253",
+      "0x41ddd273"
+     ],
+     [
+      "0x41ddd274",
+      "0x41ddd294"
+     ],
+     [
+      "0x41ddd295",
+      "0x41ddd2b5"
+     ],
+     [
+      "0x41ddd2b6",
+      "0x41ddd2d6"
+     ],
+     [
+      "0x41ddd2d7",
+      "0x41ddd2f7"
+     ],
+     [
+      "0x41ddd2f8",
+      "0x41ddd318"
+     ],
+     [
+      "0x41ddd319",
+      "0x41ddd339"
+     ],
+     [
+      "0x41ddd33a",
+      "0x41ddd35a"
+     ],
+     [
+      "0x41ddd35b",
+      "0x41ddd37b"
+     ],
+     [
+      "0x41ddd37c",
+      "0x41ddd39c"
+     ],
+     [
+      "0x41ddd39d",
+      "0x41ddd3bd"
+     ],
+     [
+      "0x41ddd3be",
+      "0x41ddd3de"
+     ],
+     [
+      "0x41ddd3df",
+      "0x41ddd3ff"
+     ],
+     [
+      "0x41ddd400",
+      "0x41ddd420"
+     ],
+     [
+      "0x41ddf001",
+      "0x41ddf021"
+     ],
+     [
+      "0x41ddf022",
+      "0x41ddf042"
+     ],
+     [
+      "0x41ddf043",
+      "0x41ddf063"
+     ],
+     [
+      "0x41ddf064",
+      "0x41ddf084"
+     ],
+     [
+      "0x41ddf085",
+      "0x41ddf0a5"
+     ],
+     [
+      "0x41ddf0a6",
+      "0x41ddf0c6"
+     ],
+     [
+      "0x41ddf0c7",
+      "0x41ddf0e7"
+     ],
+     [
+      "0x41ddf0e8",
+      "0x41ddf108"
+     ],
+     [
+      "0x41ddf109",
+      "0x41ddf129"
+     ],
+     [
+      "0x41ddf12a",
+      "0x41ddf14a"
+     ],
+     [
+      "0x41ddf14b",
+      "0x41ddf16b"
+     ],
+     [
+      "0x41ddf16c",
+      "0x41ddf18c"
+     ],
+     [
+      "0x41ddf18d",
+      "0x41ddf1ad"
+     ],
+     [
+      "0x41ddf1ae",
+      "0x41ddf1ce"
+     ],
+     [
+      "0x41ddf1cf",
+      "0x41ddf1ef"
+     ],
+     [
+      "0x41ddf1f0",
+      "0x41ddf210"
+     ],
+     [
+      "0x41ddf211",
+      "0x41ddf231"
+     ],
+     [
+      "0x41ddf232",
+      "0x41ddf252"
+     ],
+     [
+      "0x41ddf253",
+      "0x41ddf273"
+     ],
+     [
+      "0x41ddf274",
+      "0x41ddf294"
+     ],
+     [
+      "0x41ddf295",
+      "0x41ddf2b5"
+     ],
+     [
+      "0x41ddf2b6",
+      "0x41ddf2d6"
+     ],
+     [
+      "0x41ddf2d7",
+      "0x41ddf2f7"
+     ],
+     [
+      "0x41ddf2f8",
+      "0x41ddf318"
+     ],
+     [
+      "0x41ddf319",
+      "0x41ddf339"
+     ],
+     [
+      "0x41ddf33a",
+      "0x41ddf35a"
+     ],
+     [
+      "0x41ddf35b",
+      "0x41ddf37b"
+     ],
+     [
+      "0x41ddf37c",
+      "0x41ddf39c"
+     ],
+     [
+      "0x41ddf39d",
+      "0x41ddf3bd"
+     ],
+     [
+      "0x41ddf3be",
+      "0x41ddf3de"
+     ],
+     [
+      "0x41ddf3df",
+      "0x41ddf3ff"
+     ],
+     [
+      "0x41ddf400",
+      "0x41ddf420"
+     ],
+     [
+      "0x41de1001",
+      "0x41de1021"
+     ],
+     [
+      "0x41de1022",
+      "0x41de1042"
+     ],
+     [
+      "0x41de1043",
+      "0x41de1063"
+     ],
+     [
+      "0x41de1064",
+      "0x41de1084"
+     ],
+     [
+      "0x41de1085",
+      "0x41de10a5"
+     ],
+     [
+      "0x41de10a6",
+      "0x41de10c6"
+     ],
+     [
+      "0x41de10c7",
+      "0x41de10e7"
+     ],
+     [
+      "0x41de10e8",
+      "0x41de1108"
+     ],
+     [
+      "0x41de1109",
+      "0x41de1129"
+     ],
+     [
+      "0x41de112a",
+      "0x41de114a"
+     ],
+     [
+      "0x41de114b",
+      "0x41de116b"
+     ],
+     [
+      "0x41de116c",
+      "0x41de118c"
+     ],
+     [
+      "0x41de118d",
+      "0x41de11ad"
+     ],
+     [
+      "0x41de11ae",
+      "0x41de11ce"
+     ],
+     [
+      "0x41de11cf",
+      "0x41de11ef"
+     ],
+     [
+      "0x41de11f0",
+      "0x41de1210"
+     ],
+     [
+      "0x41de1211",
+      "0x41de1231"
+     ],
+     [
+      "0x41de1232",
+      "0x41de1252"
+     ],
+     [
+      "0x41de1253",
+      "0x41de1273"
+     ],
+     [
+      "0x41de1274",
+      "0x41de1294"
+     ],
+     [
+      "0x41de1295",
+      "0x41de12b5"
+     ],
+     [
+      "0x41de12b6",
+      "0x41de12d6"
+     ],
+     [
+      "0x41de12d7",
+      "0x41de12f7"
+     ],
+     [
+      "0x41de12f8",
+      "0x41de1318"
+     ],
+     [
+      "0x41de1319",
+      "0x41de1339"
+     ],
+     [
+      "0x41de133a",
+      "0x41de135a"
+     ],
+     [
+      "0x41de135b",
+      "0x41de137b"
+     ],
+     [
+      "0x41de137c",
+      "0x41de139c"
+     ],
+     [
+      "0x41de139d",
+      "0x41de13bd"
+     ],
+     [
+      "0x41de13be",
+      "0x41de13de"
+     ],
+     [
+      "0x41de13df",
+      "0x41de13ff"
+     ],
+     [
+      "0x41de1400",
+      "0x41de1420"
+     ],
+     [
+      "0x41de3001",
+      "0x41de3021"
+     ],
+     [
+      "0x41de3022",
+      "0x41de3042"
+     ],
+     [
+      "0x41de3043",
+      "0x41de3063"
+     ],
+     [
+      "0x41de3064",
+      "0x41de3084"
+     ],
+     [
+      "0x41de3085",
+      "0x41de30a5"
+     ],
+     [
+      "0x41de30a6",
+      "0x41de30c6"
+     ],
+     [
+      "0x41de30c7",
+      "0x41de30e7"
+     ],
+     [
+      "0x41de30e8",
+      "0x41de3108"
+     ],
+     [
+      "0x41de3109",
+      "0x41de3129"
+     ],
+     [
+      "0x41de312a",
+      "0x41de314a"
+     ],
+     [
+      "0x41de314b",
+      "0x41de316b"
+     ],
+     [
+      "0x41de316c",
+      "0x41de318c"
+     ],
+     [
+      "0x41de318d",
+      "0x41de31ad"
+     ],
+     [
+      "0x41de31ae",
+      "0x41de31ce"
+     ],
+     [
+      "0x41de31cf",
+      "0x41de31ef"
+     ],
+     [
+      "0x41de31f0",
+      "0x41de3210"
+     ],
+     [
+      "0x41de3211",
+      "0x41de3231"
+     ],
+     [
+      "0x41de3232",
+      "0x41de3252"
+     ],
+     [
+      "0x41de3253",
+      "0x41de3273"
+     ],
+     [
+      "0x41de3274",
+      "0x41de3294"
+     ],
+     [
+      "0x41de3295",
+      "0x41de32b5"
+     ],
+     [
+      "0x41de32b6",
+      "0x41de32d6"
+     ],
+     [
+      "0x41de32d7",
+      "0x41de32f7"
+     ],
+     [
+      "0x41de32f8",
+      "0x41de3318"
+     ],
+     [
+      "0x41de3319",
+      "0x41de3339"
+     ],
+     [
+      "0x41de333a",
+      "0x41de335a"
+     ],
+     [
+      "0x41de335b",
+      "0x41de337b"
+     ],
+     [
+      "0x41de337c",
+      "0x41de339c"
+     ],
+     [
+      "0x41de339d",
+      "0x41de33bd"
+     ],
+     [
+      "0x41de33be",
+      "0x41de33de"
+     ],
+     [
+      "0x41de33df",
+      "0x41de33ff"
+     ],
+     [
+      "0x41de3400",
+      "0x41de3420"
+     ],
+     [
+      "0x41de5001",
+      "0x41de5021"
+     ],
+     [
+      "0x41de5022",
+      "0x41de5042"
+     ],
+     [
+      "0x41de5043",
+      "0x41de5063"
+     ],
+     [
+      "0x41de5064",
+      "0x41de5084"
+     ],
+     [
+      "0x41de5085",
+      "0x41de50a5"
+     ],
+     [
+      "0x41de50a6",
+      "0x41de50c6"
+     ],
+     [
+      "0x41de50c7",
+      "0x41de50e7"
+     ],
+     [
+      "0x41de50e8",
+      "0x41de5108"
+     ],
+     [
+      "0x41de5109",
+      "0x41de5129"
+     ],
+     [
+      "0x41de512a",
+      "0x41de514a"
+     ],
+     [
+      "0x41de514b",
+      "0x41de516b"
+     ],
+     [
+      "0x41de516c",
+      "0x41de518c"
+     ],
+     [
+      "0x41de518d",
+      "0x41de51ad"
+     ],
+     [
+      "0x41de51ae",
+      "0x41de51ce"
+     ],
+     [
+      "0x41de51cf",
+      "0x41de51ef"
+     ],
+     [
+      "0x41de51f0",
+      "0x41de5210"
+     ],
+     [
+      "0x41de5211",
+      "0x41de5231"
+     ],
+     [
+      "0x41de5232",
+      "0x41de5252"
+     ],
+     [
+      "0x41de5253",
+      "0x41de5273"
+     ],
+     [
+      "0x41de5274",
+      "0x41de5294"
+     ],
+     [
+      "0x41de5295",
+      "0x41de52b5"
+     ],
+     [
+      "0x41de52b6",
+      "0x41de52d6"
+     ],
+     [
+      "0x41de52d7",
+      "0x41de52f7"
+     ],
+     [
+      "0x41de52f8",
+      "0x41de5318"
+     ],
+     [
+      "0x41de5319",
+      "0x41de5339"
+     ],
+     [
+      "0x41de533a",
+      "0x41de535a"
+     ],
+     [
+      "0x41de535b",
+      "0x41de537b"
+     ],
+     [
+      "0x41de537c",
+      "0x41de539c"
+     ],
+     [
+      "0x41de539d",
+      "0x41de53bd"
+     ],
+     [
+      "0x41de53be",
+      "0x41de53de"
+     ],
+     [
+      "0x41de53df",
+      "0x41de53ff"
+     ],
+     [
+      "0x41de5400",
+      "0x41de5420"
+     ],
+     [
+      "0x41de7001",
+      "0x41de7021"
+     ],
+     [
+      "0x41de7022",
+      "0x41de7042"
+     ],
+     [
+      "0x41de7043",
+      "0x41de7063"
+     ],
+     [
+      "0x41de7064",
+      "0x41de7084"
+     ],
+     [
+      "0x41de7085",
+      "0x41de70a5"
+     ],
+     [
+      "0x41de70a6",
+      "0x41de70c6"
+     ],
+     [
+      "0x41de70c7",
+      "0x41de70e7"
+     ],
+     [
+      "0x41de70e8",
+      "0x41de7108"
+     ],
+     [
+      "0x41de7109",
+      "0x41de7129"
+     ],
+     [
+      "0x41de712a",
+      "0x41de714a"
+     ],
+     [
+      "0x41de714b",
+      "0x41de716b"
+     ],
+     [
+      "0x41de716c",
+      "0x41de718c"
+     ],
+     [
+      "0x41de718d",
+      "0x41de71ad"
+     ],
+     [
+      "0x41de71ae",
+      "0x41de71ce"
+     ],
+     [
+      "0x41de71cf",
+      "0x41de71ef"
+     ],
+     [
+      "0x41de71f0",
+      "0x41de7210"
+     ],
+     [
+      "0x41de7211",
+      "0x41de7231"
+     ],
+     [
+      "0x41de7232",
+      "0x41de7252"
+     ],
+     [
+      "0x41de7253",
+      "0x41de7273"
+     ],
+     [
+      "0x41de7274",
+      "0x41de7294"
+     ],
+     [
+      "0x41de7295",
+      "0x41de72b5"
+     ],
+     [
+      "0x41de72b6",
+      "0x41de72d6"
+     ],
+     [
+      "0x41de72d7",
+      "0x41de72f7"
+     ],
+     [
+      "0x41de72f8",
+      "0x41de7318"
+     ],
+     [
+      "0x41de7319",
+      "0x41de7339"
+     ],
+     [
+      "0x41de733a",
+      "0x41de735a"
+     ],
+     [
+      "0x41de735b",
+      "0x41de737b"
+     ],
+     [
+      "0x41de737c",
+      "0x41de739c"
+     ],
+     [
+      "0x41de739d",
+      "0x41de73bd"
+     ],
+     [
+      "0x41de73be",
+      "0x41de73de"
+     ],
+     [
+      "0x41de73df",
+      "0x41de73ff"
+     ],
+     [
+      "0x41de7400",
+      "0x41de7420"
+     ],
+     [
+      "0x41de9001",
+      "0x41de9021"
+     ],
+     [
+      "0x41de9022",
+      "0x41de9042"
+     ],
+     [
+      "0x41de9043",
+      "0x41de9063"
+     ],
+     [
+      "0x41de9064",
+      "0x41de9084"
+     ],
+     [
+      "0x41de9085",
+      "0x41de90a5"
+     ],
+     [
+      "0x41de90a6",
+      "0x41de90c6"
+     ],
+     [
+      "0x41de90c7",
+      "0x41de90e7"
+     ],
+     [
+      "0x41de90e8",
+      "0x41de9108"
+     ],
+     [
+      "0x41de9109",
+      "0x41de9129"
+     ],
+     [
+      "0x41de912a",
+      "0x41de914a"
+     ],
+     [
+      "0x41de914b",
+      "0x41de916b"
+     ],
+     [
+      "0x41de916c",
+      "0x41de918c"
+     ],
+     [
+      "0x41de918d",
+      "0x41de91ad"
+     ],
+     [
+      "0x41de91ae",
+      "0x41de91ce"
+     ],
+     [
+      "0x41de91cf",
+      "0x41de91ef"
+     ],
+     [
+      "0x41de91f0",
+      "0x41de9210"
+     ],
+     [
+      "0x41de9211",
+      "0x41de9231"
+     ],
+     [
+      "0x41de9232",
+      "0x41de9252"
+     ],
+     [
+      "0x41de9253",
+      "0x41de9273"
+     ],
+     [
+      "0x41de9274",
+      "0x41de9294"
+     ],
+     [
+      "0x41de9295",
+      "0x41de92b5"
+     ],
+     [
+      "0x41de92b6",
+      "0x41de92d6"
+     ],
+     [
+      "0x41de92d7",
+      "0x41de92f7"
+     ],
+     [
+      "0x41de92f8",
+      "0x41de9318"
+     ],
+     [
+      "0x41de9319",
+      "0x41de9339"
+     ],
+     [
+      "0x41de933a",
+      "0x41de935a"
+     ],
+     [
+      "0x41de935b",
+      "0x41de937b"
+     ],
+     [
+      "0x41de937c",
+      "0x41de939c"
+     ],
+     [
+      "0x41de939d",
+      "0x41de93bd"
+     ],
+     [
+      "0x41de93be",
+      "0x41de93de"
+     ],
+     [
+      "0x41de93df",
+      "0x41de93ff"
+     ],
+     [
+      "0x41de9400",
+      "0x41de9420"
+     ],
+     [
+      "0x474a7254",
+      "0x474a7257"
+     ],
+     [
+      "0x474a7258",
+      "0x474a725b"
+     ],
+     [
+      "0x474a725c",
+      "0x474a725f"
+     ],
+     [
+      "0x474a7260",
+      "0x474a7263"
+     ],
+     [
+      "0x474a7264",
+      "0x474a7267"
+     ],
+     [
+      "0x474a7268",
+      "0x474a726b"
+     ],
+     [
+      "0x474a726c",
+      "0x474a726f"
+     ],
+     [
+      "0x474a7270",
+      "0x474a7273"
+     ],
+     [
+      "0x474a7274",
+      "0x474a7277"
+     ],
+     [
+      "0x474a7278",
+      "0x474a727b"
+     ],
+     [
+      "0x474a727c",
+      "0x474a727f"
+     ],
+     [
+      "0x474a7280",
+      "0x474a7283"
+     ],
+     [
+      "0x474a7284",
+      "0x474a7287"
+     ],
+     [
+      "0x474a7288",
+      "0x474a728b"
+     ],
+     [
+      "0x474a728c",
+      "0x474a728f"
+     ],
+     [
+      "0x474a7290",
+      "0x474a7293"
+     ],
+     [
+      "0x474a7294",
+      "0x474a7297"
+     ]
+    ],
+    "masked_bytes": 173046,
+    "path": "pesquisas-paralelas/missoes/m3/sondas/P6/mascara-janela.json",
+    "ranges": 5512,
+    "removed_game_logic_conflicts": [],
+    "sha256": "56cf9039a04d32bfbea4a4098a1111f4d7f59669028d633fadb41e06e3c05dbb"
+   },
+   "order_phases": {
+    "between_frames133": {
+     "allocation_count": {
+      "equal": true,
+      "python": 25482,
+      "reference": 25482
+     },
+     "bindings": {
+      "display_context_not_modeled": 6,
+      "equal": true,
+      "not_modeled": [],
+      "original": 6,
+      "python": 6,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "boundaries": {
+      "display_context_not_modeled": [],
+      "equal": true,
+      "not_modeled": [],
+      "original": 4,
+      "python": 4,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "carried_entry_registers": {
+      "EBP": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EBX": {
+       "equal": true,
+       "python": "0x3",
+       "reference": "0x3"
+      },
+      "ECX": {
+       "equal": true,
+       "python": "0x2100230",
+       "reference": "0x2100230"
+      },
+      "EDI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EDX": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      },
+      "ESI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "ESP": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      }
+     },
+     "compared_summary": {
+      "equal": true,
+      "python": "698fb0790a6b0e37613d87bbde92ea83f9665bf085357d3e3224bdb130874d0f",
+      "reference": "698fb0790a6b0e37613d87bbde92ea83f9665bf085357d3e3224bdb130874d0f"
+     },
+     "equal": true,
+     "equal_base": true,
+     "indicators": {
+      "ai_rng": {
+       "equal": true,
+       "python": 840087502,
+       "reference": 840087502
+      },
+      "counter": {
+       "equal": true,
+       "python": 133,
+       "reference": 133
+      },
+      "cursor_4e1d18": {
+       "equal": true,
+       "python": 46,
+       "reference": 46
+      },
+      "hud_4e05a2": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_x": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_y": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "world_rng": {
+       "equal": true,
+       "python": 1043011585,
+       "reference": 1043011585
+      }
+     },
+     "m31_fields": {
+      "equal": true,
+      "packets": {
+       "equal": true,
+       "python": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ],
+       "reference": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ]
+      },
+      "selection": {
+       "equal": true,
+       "player0_head": [
+        "0000000000000000",
+        "0000000000000000"
+       ],
+       "python_sha256": "1d05a1711752d58cd7b1a0fc3b865510186533adc6b73b84fba762884acfa52d",
+       "reference_sha256": "1d05a1711752d58cd7b1a0fc3b865510186533adc6b73b84fba762884acfa52d"
+      },
+      "unit_order_fields": {
+       "differing_units": [],
+       "equal": true,
+       "python_sha256": "2955131514508d53fb002e5ec35435a3d129558b0bbf18366c9cd411c71e382d",
+       "reference_sha256": "2955131514508d53fb002e5ec35435a3d129558b0bbf18366c9cd411c71e382d"
+      }
+     },
+     "reference_integrity": {
+      "compared_summary_equal": true,
+      "form": "delta",
+      "masked_sha256_equal": true,
+      "summary_equal": true
+     },
+     "registers": {
+      "EAX": {
+       "equal": true,
+       "python": "0x210",
+       "reference": "0x210"
+      },
+      "EBP": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EBX": {
+       "equal": true,
+       "python": "0x3",
+       "reference": "0x3"
+      },
+      "ECX": {
+       "equal": true,
+       "python": "0x2100230",
+       "reference": "0x2100230"
+      },
+      "EDI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EDX": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      },
+      "ESI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "ESP": {
+       "equal": true,
+       "python": "0x2007fe4",
+       "reference": "0x2007fe4"
+      }
+     },
+     "result": "returned",
+     "rng": {
+      "equal": true,
+      "python": {
+       "0x497164": "0x3e2b1801",
+       "0x498db4": "0x3212b7ce"
+      },
+      "reference": {
+       "0x497164": "0x3e2b1801",
+       "0x498db4": "0x3212b7ce"
+      }
+     },
+     "scripted_inputs": {
+      "equal": true,
+      "python": 6,
+      "reference": 6,
+      "wndproc_flags": {
+       "python": [
+        "2902090200000101000000"
+       ],
+       "reference": [
+        "2902090200000101000000"
+       ]
+      }
+     },
+     "state": {
+      "blocks": 25197,
+      "compared_bytes": 16002289,
+      "differing_blocks": [],
+      "equal": true,
+      "first_differences": {}
+     }
+    },
+    "between_frames153": {
+     "allocation_count": {
+      "equal": true,
+      "python": 25482,
+      "reference": 25482
+     },
+     "bindings": {
+      "display_context_not_modeled": 6,
+      "equal": true,
+      "not_modeled": [],
+      "original": 6,
+      "python": 6,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "boundaries": {
+      "display_context_not_modeled": [],
+      "equal": true,
+      "not_modeled": [],
+      "original": 4,
+      "python": 4,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "carried_entry_registers": {
+      "EBP": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EBX": {
+       "equal": true,
+       "python": "0x3",
+       "reference": "0x3"
+      },
+      "ECX": {
+       "equal": true,
+       "python": "0x19002b0",
+       "reference": "0x19002b0"
+      },
+      "EDI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EDX": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      },
+      "ESI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "ESP": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      }
+     },
+     "compared_summary": {
+      "equal": true,
+      "python": "0c6e682d1da5b30ef32795490cc60f4db8bac276265ec57867a2dbef762250b9",
+      "reference": "0c6e682d1da5b30ef32795490cc60f4db8bac276265ec57867a2dbef762250b9"
+     },
+     "equal": true,
+     "equal_base": true,
+     "indicators": {
+      "ai_rng": {
+       "equal": true,
+       "python": 840087502,
+       "reference": 840087502
+      },
+      "counter": {
+       "equal": true,
+       "python": 153,
+       "reference": 153
+      },
+      "cursor_4e1d18": {
+       "equal": true,
+       "python": 91,
+       "reference": 91
+      },
+      "hud_4e05a2": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_x": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_y": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "world_rng": {
+       "equal": true,
+       "python": 652174324,
+       "reference": 652174324
+      }
+     },
+     "m31_fields": {
+      "equal": true,
+      "packets": {
+       "equal": true,
+       "python": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ],
+       "reference": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ]
+      },
+      "selection": {
+       "equal": true,
+       "player0_head": [
+        "01000c0000000000",
+        "01000c0000000000"
+       ],
+       "python_sha256": "96f1cce1c98d8cb9723e0b93b91063f2605e3e3448f7a70b7a41c0cb32e33699",
+       "reference_sha256": "96f1cce1c98d8cb9723e0b93b91063f2605e3e3448f7a70b7a41c0cb32e33699"
+      },
+      "unit_order_fields": {
+       "differing_units": [],
+       "equal": true,
+       "python_sha256": "2955131514508d53fb002e5ec35435a3d129558b0bbf18366c9cd411c71e382d",
+       "reference_sha256": "2955131514508d53fb002e5ec35435a3d129558b0bbf18366c9cd411c71e382d"
+      }
+     },
+     "reference_integrity": {
+      "compared_summary_equal": true,
+      "form": "delta",
+      "masked_sha256_equal": true,
+      "summary_equal": true
+     },
+     "registers": {
+      "EAX": {
+       "equal": true,
+       "python": "0x190",
+       "reference": "0x190"
+      },
+      "EBP": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EBX": {
+       "equal": true,
+       "python": "0x3",
+       "reference": "0x3"
+      },
+      "ECX": {
+       "equal": true,
+       "python": "0x19002b0",
+       "reference": "0x19002b0"
+      },
+      "EDI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EDX": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      },
+      "ESI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "ESP": {
+       "equal": true,
+       "python": "0x2007fe4",
+       "reference": "0x2007fe4"
+      }
+     },
+     "result": "returned",
+     "rng": {
+      "equal": true,
+      "python": {
+       "0x497164": "0x26df63f4",
+       "0x498db4": "0x3212b7ce"
+      },
+      "reference": {
+       "0x497164": "0x26df63f4",
+       "0x498db4": "0x3212b7ce"
+      }
+     },
+     "scripted_inputs": {
+      "equal": true,
+      "python": 6,
+      "reference": 6,
+      "wndproc_flags": {
+       "python": [
+        "b002900100000101000000"
+       ],
+       "reference": [
+        "b002900100000101000000"
+       ]
+      }
+     },
+     "state": {
+      "blocks": 25197,
+      "compared_bytes": 16002289,
+      "differing_blocks": [],
+      "equal": true,
+      "first_differences": {}
+     }
+    },
+    "between_frames2018": {
+     "allocation_count": {
+      "equal": true,
+      "python": 25482,
+      "reference": 25482
+     },
+     "bindings": {
+      "display_context_not_modeled": 6,
+      "equal": true,
+      "not_modeled": [],
+      "original": 6,
+      "python": 6,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "boundaries": {
+      "display_context_not_modeled": [],
+      "equal": true,
+      "not_modeled": [],
+      "original": 4,
+      "python": 4,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "carried_entry_registers": {
+      "EBP": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EBX": {
+       "equal": true,
+       "python": "0x3",
+       "reference": "0x3"
+      },
+      "ECX": {
+       "equal": true,
+       "python": "0x1900210",
+       "reference": "0x1900210"
+      },
+      "EDI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EDX": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      },
+      "ESI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "ESP": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      }
+     },
+     "compared_summary": {
+      "equal": true,
+      "python": "5801b3dece382b483ee43929685c5ec7fb5875b5ab54f219e49c664675059d52",
+      "reference": "5801b3dece382b483ee43929685c5ec7fb5875b5ab54f219e49c664675059d52"
+     },
+     "equal": true,
+     "equal_base": true,
+     "indicators": {
+      "ai_rng": {
+       "equal": true,
+       "python": 840087502,
+       "reference": 840087502
+      },
+      "counter": {
+       "equal": true,
+       "python": 2018,
+       "reference": 2018
+      },
+      "cursor_4e1d18": {
+       "equal": true,
+       "python": 190,
+       "reference": 190
+      },
+      "hud_4e05a2": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_x": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_y": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "world_rng": {
+       "equal": true,
+       "python": 1424727238,
+       "reference": 1424727238
+      }
+     },
+     "m31_fields": {
+      "equal": true,
+      "packets": {
+       "equal": true,
+       "python": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ],
+       "reference": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ]
+      },
+      "selection": {
+       "equal": true,
+       "player0_head": [
+        "00000c0000000000",
+        "00000c0000000000"
+       ],
+       "python_sha256": "61226c18b7cbebcffa9f7b0b3d41bf931477a633491a9400ab5634c359569765",
+       "reference_sha256": "61226c18b7cbebcffa9f7b0b3d41bf931477a633491a9400ab5634c359569765"
+      },
+      "unit_order_fields": {
+       "differing_units": [],
+       "equal": true,
+       "python_sha256": "2955131514508d53fb002e5ec35435a3d129558b0bbf18366c9cd411c71e382d",
+       "reference_sha256": "2955131514508d53fb002e5ec35435a3d129558b0bbf18366c9cd411c71e382d"
+      }
+     },
+     "reference_integrity": {
+      "compared_summary_equal": true,
+      "form": "delta",
+      "masked_sha256_equal": true,
+      "summary_equal": true
+     },
+     "registers": {
+      "EAX": {
+       "equal": true,
+       "python": "0x190",
+       "reference": "0x190"
+      },
+      "EBP": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EBX": {
+       "equal": true,
+       "python": "0x3",
+       "reference": "0x3"
+      },
+      "ECX": {
+       "equal": true,
+       "python": "0x1900210",
+       "reference": "0x1900210"
+      },
+      "EDI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EDX": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      },
+      "ESI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "ESP": {
+       "equal": true,
+       "python": "0x2007fe4",
+       "reference": "0x2007fe4"
+      }
+     },
+     "result": "returned",
+     "rng": {
+      "equal": true,
+      "python": {
+       "0x497164": "0x54eb9cc6",
+       "0x498db4": "0x3212b7ce"
+      },
+      "reference": {
+       "0x497164": "0x54eb9cc6",
+       "0x498db4": "0x3212b7ce"
+      }
+     },
+     "scripted_inputs": {
+      "equal": true,
+      "python": 6,
+      "reference": 6,
+      "wndproc_flags": {
+       "python": [
+        "0902890100000101000000"
+       ],
+       "reference": [
+        "0902890100000101000000"
+       ]
+      }
+     },
+     "state": {
+      "blocks": 25197,
+      "compared_bytes": 16002289,
+      "differing_blocks": [],
+      "equal": true,
+      "first_differences": {}
+     }
+    },
+    "between_frames2030": {
+     "allocation_count": {
+      "equal": true,
+      "python": 25482,
+      "reference": 25482
+     },
+     "bindings": {
+      "display_context_not_modeled": 6,
+      "equal": true,
+      "not_modeled": [],
+      "original": 6,
+      "python": 6,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "boundaries": {
+      "display_context_not_modeled": [],
+      "equal": true,
+      "not_modeled": [],
+      "original": 4,
+      "python": 4,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "carried_entry_registers": {
+      "EBP": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EBX": {
+       "equal": true,
+       "python": "0x3",
+       "reference": "0x3"
+      },
+      "ECX": {
+       "equal": true,
+       "python": "0x1900210",
+       "reference": "0x1900210"
+      },
+      "EDI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EDX": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      },
+      "ESI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "ESP": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      }
+     },
+     "compared_summary": {
+      "equal": true,
+      "python": "b66afe7d62613ea8405c3eff77c32153e199ac3e3eef7e5f194c8540aad430e6",
+      "reference": "b66afe7d62613ea8405c3eff77c32153e199ac3e3eef7e5f194c8540aad430e6"
+     },
+     "equal": true,
+     "equal_base": true,
+     "indicators": {
+      "ai_rng": {
+       "equal": true,
+       "python": 840087502,
+       "reference": 840087502
+      },
+      "counter": {
+       "equal": true,
+       "python": 2030,
+       "reference": 2030
+      },
+      "cursor_4e1d18": {
+       "equal": true,
+       "python": 217,
+       "reference": 217
+      },
+      "hud_4e05a2": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_x": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_y": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "world_rng": {
+       "equal": true,
+       "python": 1148049471,
+       "reference": 1148049471
+      }
+     },
+     "m31_fields": {
+      "equal": true,
+      "packets": {
+       "equal": true,
+       "python": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ],
+       "reference": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ]
+      },
+      "selection": {
+       "equal": true,
+       "player0_head": [
+        "00000c0000000000",
+        "00000c0000000000"
+       ],
+       "python_sha256": "61226c18b7cbebcffa9f7b0b3d41bf931477a633491a9400ab5634c359569765",
+       "reference_sha256": "61226c18b7cbebcffa9f7b0b3d41bf931477a633491a9400ab5634c359569765"
+      },
+      "unit_order_fields": {
+       "differing_units": [],
+       "equal": true,
+       "python_sha256": "2955131514508d53fb002e5ec35435a3d129558b0bbf18366c9cd411c71e382d",
+       "reference_sha256": "2955131514508d53fb002e5ec35435a3d129558b0bbf18366c9cd411c71e382d"
+      }
+     },
+     "reference_integrity": {
+      "compared_summary_equal": true,
+      "form": "delta",
+      "masked_sha256_equal": true,
+      "summary_equal": true
+     },
+     "registers": {
+      "EAX": {
+       "equal": true,
+       "python": "0x190",
+       "reference": "0x190"
+      },
+      "EBP": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EBX": {
+       "equal": true,
+       "python": "0x3",
+       "reference": "0x3"
+      },
+      "ECX": {
+       "equal": true,
+       "python": "0x1900210",
+       "reference": "0x1900210"
+      },
+      "EDI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EDX": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      },
+      "ESI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "ESP": {
+       "equal": true,
+       "python": "0x2007fe4",
+       "reference": "0x2007fe4"
+      }
+     },
+     "result": "returned",
+     "rng": {
+      "equal": true,
+      "python": {
+       "0x497164": "0x446dd83f",
+       "0x498db4": "0x3212b7ce"
+      },
+      "reference": {
+       "0x497164": "0x446dd83f",
+       "0x498db4": "0x3212b7ce"
+      }
+     },
+     "scripted_inputs": {
+      "equal": true,
+      "python": 6,
+      "reference": 6,
+      "wndproc_flags": {
+       "python": [
+        "1002900100000000010000"
+       ],
+       "reference": [
+        "1002900100000000010000"
+       ]
+      }
+     },
+     "state": {
+      "blocks": 25197,
+      "compared_bytes": 16002289,
+      "differing_blocks": [],
+      "equal": true,
+      "first_differences": {}
+     }
+    },
+    "between_frames2063": {
+     "allocation_count": {
+      "equal": true,
+      "python": 25482,
+      "reference": 25482
+     },
+     "bindings": {
+      "display_context_not_modeled": 6,
+      "equal": true,
+      "not_modeled": [],
+      "original": 6,
+      "python": 6,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "boundaries": {
+      "display_context_not_modeled": [],
+      "equal": true,
+      "not_modeled": [],
+      "original": 4,
+      "python": 4,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "carried_entry_registers": {
+      "EBP": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EBX": {
+       "equal": true,
+       "python": "0x3",
+       "reference": "0x3"
+      },
+      "ECX": {
+       "equal": true,
+       "python": "0x1d001d0",
+       "reference": "0x1d001d0"
+      },
+      "EDI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EDX": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      },
+      "ESI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "ESP": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      }
+     },
+     "compared_summary": {
+      "equal": true,
+      "python": "483af05fbbbc819d98ec36a27c97fd54735b0095efb17d58633d9e705e7ca5a3",
+      "reference": "483af05fbbbc819d98ec36a27c97fd54735b0095efb17d58633d9e705e7ca5a3"
+     },
+     "equal": true,
+     "equal_base": true,
+     "indicators": {
+      "ai_rng": {
+       "equal": true,
+       "python": 840087502,
+       "reference": 840087502
+      },
+      "counter": {
+       "equal": true,
+       "python": 2063,
+       "reference": 2063
+      },
+      "cursor_4e1d18": {
+       "equal": true,
+       "python": 34,
+       "reference": 34
+      },
+      "hud_4e05a2": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_x": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_y": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "world_rng": {
+       "equal": true,
+       "python": 463187860,
+       "reference": 463187860
+      }
+     },
+     "m31_fields": {
+      "equal": true,
+      "packets": {
+       "equal": true,
+       "python": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ],
+       "reference": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ]
+      },
+      "selection": {
+       "equal": true,
+       "player0_head": [
+        "00000c0000000000",
+        "00000c0000000000"
+       ],
+       "python_sha256": "61226c18b7cbebcffa9f7b0b3d41bf931477a633491a9400ab5634c359569765",
+       "reference_sha256": "61226c18b7cbebcffa9f7b0b3d41bf931477a633491a9400ab5634c359569765"
+      },
+      "unit_order_fields": {
+       "differing_units": [],
+       "equal": true,
+       "python_sha256": "0269be1752518ccdb4a90808dd2b366bdbebc5bf9b9509755c9972f99f6d7460",
+       "reference_sha256": "0269be1752518ccdb4a90808dd2b366bdbebc5bf9b9509755c9972f99f6d7460"
+      }
+     },
+     "reference_integrity": {
+      "compared_summary_equal": true,
+      "form": "delta",
+      "masked_sha256_equal": true,
+      "summary_equal": true
+     },
+     "registers": {
+      "EAX": {
+       "equal": true,
+       "python": "0x1d0",
+       "reference": "0x1d0"
+      },
+      "EBP": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EBX": {
+       "equal": true,
+       "python": "0x3",
+       "reference": "0x3"
+      },
+      "ECX": {
+       "equal": true,
+       "python": "0x1d001d0",
+       "reference": "0x1d001d0"
+      },
+      "EDI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EDX": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      },
+      "ESI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "ESP": {
+       "equal": true,
+       "python": "0x2007fe4",
+       "reference": "0x2007fe4"
+      }
+     },
+     "result": "returned",
+     "rng": {
+      "equal": true,
+      "python": {
+       "0x497164": "0x1b9baf94",
+       "0x498db4": "0x3212b7ce"
+      },
+      "reference": {
+       "0x497164": "0x1b9baf94",
+       "0x498db4": "0x3212b7ce"
+      }
+     },
+     "scripted_inputs": {
+      "equal": true,
+      "python": 6,
+      "reference": 6,
+      "wndproc_flags": {
+       "python": [
+        "c901c90100000101000000"
+       ],
+       "reference": [
+        "c901c90100000101000000"
+       ]
+      }
+     },
+     "state": {
+      "blocks": 25197,
+      "compared_bytes": 16002289,
+      "differing_blocks": [],
+      "equal": true,
+      "first_differences": {}
+     }
+    },
+    "between_frames2073": {
+     "allocation_count": {
+      "equal": true,
+      "python": 25482,
+      "reference": 25482
+     },
+     "bindings": {
+      "display_context_not_modeled": 6,
+      "equal": true,
+      "not_modeled": [],
+      "original": 6,
+      "python": 6,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "boundaries": {
+      "display_context_not_modeled": [],
+      "equal": true,
+      "not_modeled": [],
+      "original": 4,
+      "python": 4,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "carried_entry_registers": {
+      "EBP": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EBX": {
+       "equal": true,
+       "python": "0x3",
+       "reference": "0x3"
+      },
+      "ECX": {
+       "equal": true,
+       "python": "0x1500290",
+       "reference": "0x1500290"
+      },
+      "EDI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EDX": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      },
+      "ESI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "ESP": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      }
+     },
+     "compared_summary": {
+      "equal": true,
+      "python": "4b6e82f90180971c8f75913bbefba890ee3e49fca2737e938492565ade441eb1",
+      "reference": "4b6e82f90180971c8f75913bbefba890ee3e49fca2737e938492565ade441eb1"
+     },
+     "equal": true,
+     "equal_base": true,
+     "indicators": {
+      "ai_rng": {
+       "equal": true,
+       "python": 840087502,
+       "reference": 840087502
+      },
+      "counter": {
+       "equal": true,
+       "python": 2073,
+       "reference": 2073
+      },
+      "cursor_4e1d18": {
+       "equal": true,
+       "python": 59,
+       "reference": 59
+      },
+      "hud_4e05a2": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_x": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_y": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "world_rng": {
+       "equal": true,
+       "python": 209893566,
+       "reference": 209893566
+      }
+     },
+     "m31_fields": {
+      "equal": true,
+      "packets": {
+       "equal": true,
+       "python": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ],
+       "reference": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ]
+      },
+      "selection": {
+       "equal": true,
+       "player0_head": [
+        "0100030000000000",
+        "0100030000000000"
+       ],
+       "python_sha256": "2c1e4b44b290b31ceb1ad3c9649bb2b671713377fe456f7a53a08bf7837c66c6",
+       "reference_sha256": "2c1e4b44b290b31ceb1ad3c9649bb2b671713377fe456f7a53a08bf7837c66c6"
+      },
+      "unit_order_fields": {
+       "differing_units": [],
+       "equal": true,
+       "python_sha256": "0269be1752518ccdb4a90808dd2b366bdbebc5bf9b9509755c9972f99f6d7460",
+       "reference_sha256": "0269be1752518ccdb4a90808dd2b366bdbebc5bf9b9509755c9972f99f6d7460"
+      }
+     },
+     "reference_integrity": {
+      "compared_summary_equal": true,
+      "form": "delta",
+      "masked_sha256_equal": true,
+      "summary_equal": true
+     },
+     "registers": {
+      "EAX": {
+       "equal": true,
+       "python": "0x150",
+       "reference": "0x150"
+      },
+      "EBP": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EBX": {
+       "equal": true,
+       "python": "0x3",
+       "reference": "0x3"
+      },
+      "ECX": {
+       "equal": true,
+       "python": "0x1500290",
+       "reference": "0x1500290"
+      },
+      "EDI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "EDX": {
+       "equal": true,
+       "python": "0x2007fe8",
+       "reference": "0x2007fe8"
+      },
+      "ESI": {
+       "equal": true,
+       "python": "0x0",
+       "reference": "0x0"
+      },
+      "ESP": {
+       "equal": true,
+       "python": "0x2007fe4",
+       "reference": "0x2007fe4"
+      }
+     },
+     "result": "returned",
+     "rng": {
+      "equal": true,
+      "python": {
+       "0x497164": "0xc82b8be",
+       "0x498db4": "0x3212b7ce"
+      },
+      "reference": {
+       "0x497164": "0xc82b8be",
+       "0x498db4": "0x3212b7ce"
+      }
+     },
+     "scripted_inputs": {
+      "equal": true,
+      "python": 6,
+      "reference": 6,
+      "wndproc_flags": {
+       "python": [
+        "9002500100000101000000"
+       ],
+       "reference": [
+        "9002500100000101000000"
+       ]
+      }
+     },
+     "state": {
+      "blocks": 25197,
+      "compared_bytes": 16002289,
+      "differing_blocks": [],
+      "equal": true,
+      "first_differences": {}
+     }
+    },
+    "frame133": {
+     "allocation_count": {
+      "equal": true,
+      "python": 25482,
+      "reference": 25482
+     },
+     "bindings": {
+      "display_context_not_modeled": 0,
+      "equal": true,
+      "not_modeled": [],
+      "original": 13,
+      "python": 13,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "boundaries": {
+      "display_context_not_modeled": [],
+      "equal": true,
+      "not_modeled": [
+       {
+        "index": 0,
+        "routine": "MCICD_Play",
+        "words": [
+         0,
+         1,
+         2,
+         3
+        ]
+       },
+       {
+        "index": 1,
+        "routine": "PlaySnd_PostSound",
+        "words": [
+         1,
+         2,
+         3
+        ]
+       },
+       {
+        "index": 2,
+        "routine": "PlaySnd_PostSound",
+        "words": [
+         1,
+         2,
+         3
+        ]
+       }
+      ],
+      "original": 3,
+      "python": 3,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "compared_summary": {
+      "equal": true,
+      "python": "81811cff67027e53c0b291c6abe19de344af223e41057ff81c668f67101ce9ae",
+      "reference": "81811cff67027e53c0b291c6abe19de344af223e41057ff81c668f67101ce9ae"
+     },
+     "equal": true,
+     "equal_base": true,
+     "indicators": {
+      "ai_rng": {
+       "equal": true,
+       "python": 840087502,
+       "reference": 840087502
+      },
+      "counter": {
+       "equal": true,
+       "python": 133,
+       "reference": 133
+      },
+      "cursor_4e1d18": {
+       "equal": true,
+       "python": 47,
+       "reference": 47
+      },
+      "hud_4e05a2": {
+       "equal": true,
+       "python": 1,
+       "reference": 1
+      },
+      "view_x": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_y": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "world_rng": {
+       "equal": true,
+       "python": 733154322,
+       "reference": 733154322
+      }
+     },
+     "m31_fields": {
+      "equal": true,
+      "packets": {
+       "equal": true,
+       "python": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ],
+       "reference": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ]
+      },
+      "selection": {
+       "equal": true,
+       "player0_head": [
+        "01000c0000000000",
+        "01000c0000000000"
+       ],
+       "python_sha256": "96f1cce1c98d8cb9723e0b93b91063f2605e3e3448f7a70b7a41c0cb32e33699",
+       "reference_sha256": "96f1cce1c98d8cb9723e0b93b91063f2605e3e3448f7a70b7a41c0cb32e33699"
+      },
+      "unit_order_fields": {
+       "differing_units": [],
+       "equal": true,
+       "python_sha256": "2955131514508d53fb002e5ec35435a3d129558b0bbf18366c9cd411c71e382d",
+       "reference_sha256": "2955131514508d53fb002e5ec35435a3d129558b0bbf18366c9cd411c71e382d"
+      }
+     },
+     "orders": {
+      "equal": true,
+      "python": [
+       [
+        "SetPlayerOrdre",
+        0,
+        1,
+        4113,
+        4113,
+        0,
+        0,
+        null,
+        null
+       ],
+       [
+        "ProcessInputGame",
+        0,
+        1,
+        null,
+        null,
+        null,
+        null,
+        "01001110111000000000",
+        "0x45ee46"
+       ]
+      ],
+      "reference": [
+       [
+        "SetPlayerOrdre",
+        0,
+        1,
+        4113,
+        4113,
+        0,
+        0,
+        null,
+        null
+       ],
+       [
+        "ProcessInputGame",
+        0,
+        1,
+        null,
+        null,
+        null,
+        null,
+        "01001110111000000000",
+        "0x45ee46"
+       ]
+      ]
+     },
+     "reference_integrity": {
+      "compared_summary_equal": true,
+      "form": "delta",
+      "masked_sha256_equal": true,
+      "summary_equal": true
+     },
+     "result": "returned",
+     "rng": {
+      "equal": true,
+      "python": {
+       "0x497164": "0x2bb30c12",
+       "0x498db4": "0x3212b7ce"
+      },
+      "reference": {
+       "0x497164": "0x2bb30c12",
+       "0x498db4": "0x3212b7ce"
+      }
+     },
+     "scripted_inputs": {
+      "equal": true,
+      "python": 12,
+      "reference": 12,
+      "wndproc_flags": {
+       "python": [],
+       "reference": []
+      }
+     },
+     "state": {
+      "blocks": 25197,
+      "compared_bytes": 16002289,
+      "differing_blocks": [],
+      "equal": true,
+      "first_differences": {}
+     }
+    },
+    "frame153": {
+     "allocation_count": {
+      "equal": true,
+      "python": 25482,
+      "reference": 25482
+     },
+     "bindings": {
+      "display_context_not_modeled": 0,
+      "equal": true,
+      "not_modeled": [],
+      "original": 13,
+      "python": 13,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "boundaries": {
+      "display_context_not_modeled": [],
+      "equal": true,
+      "not_modeled": [
+       {
+        "index": 0,
+        "routine": "MCICD_Play",
+        "words": [
+         0,
+         1,
+         2,
+         3
+        ]
+       },
+       {
+        "index": 1,
+        "routine": "PlaySnd_PostSound",
+        "words": [
+         1,
+         2,
+         3
+        ]
+       }
+      ],
+      "original": 2,
+      "python": 2,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "compared_summary": {
+      "equal": true,
+      "python": "cb0b3ecaab4e219dc4ace9fad9cadb19f35934415c3bc65d8e02f42ca5dabadb",
+      "reference": "cb0b3ecaab4e219dc4ace9fad9cadb19f35934415c3bc65d8e02f42ca5dabadb"
+     },
+     "equal": true,
+     "equal_base": true,
+     "indicators": {
+      "ai_rng": {
+       "equal": true,
+       "python": 840087502,
+       "reference": 840087502
+      },
+      "counter": {
+       "equal": true,
+       "python": 153,
+       "reference": 153
+      },
+      "cursor_4e1d18": {
+       "equal": true,
+       "python": 92,
+       "reference": 92
+      },
+      "hud_4e05a2": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_x": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_y": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "world_rng": {
+       "equal": true,
+       "python": 1669715626,
+       "reference": 1669715626
+      }
+     },
+     "m31_fields": {
+      "equal": true,
+      "packets": {
+       "equal": true,
+       "python": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ],
+       "reference": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ]
+      },
+      "selection": {
+       "equal": true,
+       "player0_head": [
+        "01000c0000000000",
+        "01000c0000000000"
+       ],
+       "python_sha256": "96f1cce1c98d8cb9723e0b93b91063f2605e3e3448f7a70b7a41c0cb32e33699",
+       "reference_sha256": "96f1cce1c98d8cb9723e0b93b91063f2605e3e3448f7a70b7a41c0cb32e33699"
+      },
+      "unit_order_fields": {
+       "differing_units": [],
+       "equal": true,
+       "python_sha256": "65d31331a310c83211ddb45c27034373791c2874afb4f4271296543cf63aa8c2",
+       "reference_sha256": "65d31331a310c83211ddb45c27034373791c2874afb4f4271296543cf63aa8c2"
+      }
+     },
+     "orders": {
+      "equal": true,
+      "python": [
+       [
+        "SetPlayerOrdre",
+        0,
+        4,
+        3,
+        3093,
+        0,
+        0,
+        null,
+        null
+       ],
+       [
+        "ProcessInputGame",
+        0,
+        4,
+        null,
+        null,
+        null,
+        null,
+        "04000300150c00000000",
+        "0x45ef73"
+       ]
+      ],
+      "reference": [
+       [
+        "SetPlayerOrdre",
+        0,
+        4,
+        3,
+        3093,
+        0,
+        0,
+        null,
+        null
+       ],
+       [
+        "ProcessInputGame",
+        0,
+        4,
+        null,
+        null,
+        null,
+        null,
+        "04000300150c00000000",
+        "0x45ef73"
+       ]
+      ]
+     },
+     "reference_integrity": {
+      "compared_summary_equal": true,
+      "form": "delta",
+      "masked_sha256_equal": true,
+      "summary_equal": true
+     },
+     "result": "returned",
+     "rng": {
+      "equal": true,
+      "python": {
+       "0x497164": "0x6385d6aa",
+       "0x498db4": "0x3212b7ce"
+      },
+      "reference": {
+       "0x497164": "0x6385d6aa",
+       "0x498db4": "0x3212b7ce"
+      }
+     },
+     "scripted_inputs": {
+      "equal": true,
+      "python": 12,
+      "reference": 12,
+      "wndproc_flags": {
+       "python": [],
+       "reference": []
+      }
+     },
+     "state": {
+      "blocks": 25197,
+      "compared_bytes": 16002289,
+      "differing_blocks": [],
+      "equal": true,
+      "first_differences": {}
+     }
+    },
+    "frame2018": {
+     "allocation_count": {
+      "equal": true,
+      "python": 25482,
+      "reference": 25482
+     },
+     "bindings": {
+      "display_context_not_modeled": 0,
+      "equal": true,
+      "not_modeled": [],
+      "original": 13,
+      "python": 13,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "boundaries": {
+      "display_context_not_modeled": [],
+      "equal": true,
+      "not_modeled": [
+       {
+        "index": 0,
+        "routine": "MCICD_Play",
+        "words": [
+         0,
+         1,
+         2,
+         3
+        ]
+       },
+       {
+        "index": 1,
+        "routine": "PlaySnd_PostSound",
+        "words": [
+         1,
+         2,
+         3
+        ]
+       },
+       {
+        "index": 2,
+        "routine": "PlaySnd_PostSound",
+        "words": [
+         1,
+         2,
+         3
+        ]
+       }
+      ],
+      "original": 3,
+      "python": 3,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "compared_summary": {
+      "equal": true,
+      "python": "ec3604359938f0cc93e37fe3a8f1b25a00cb7c4d1440ea76fac2f59901ba6792",
+      "reference": "ec3604359938f0cc93e37fe3a8f1b25a00cb7c4d1440ea76fac2f59901ba6792"
+     },
+     "equal": true,
+     "equal_base": true,
+     "indicators": {
+      "ai_rng": {
+       "equal": true,
+       "python": 840087502,
+       "reference": 840087502
+      },
+      "counter": {
+       "equal": true,
+       "python": 2018,
+       "reference": 2018
+      },
+      "cursor_4e1d18": {
+       "equal": true,
+       "python": 191,
+       "reference": 191
+      },
+      "hud_4e05a2": {
+       "equal": true,
+       "python": 1,
+       "reference": 1
+      },
+      "view_x": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_y": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "world_rng": {
+       "equal": true,
+       "python": 84722673,
+       "reference": 84722673
+      }
+     },
+     "m31_fields": {
+      "equal": true,
+      "packets": {
+       "equal": true,
+       "python": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ],
+       "reference": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ]
+      },
+      "selection": {
+       "equal": true,
+       "player0_head": [
+        "00000c0000000000",
+        "00000c0000000000"
+       ],
+       "python_sha256": "61226c18b7cbebcffa9f7b0b3d41bf931477a633491a9400ab5634c359569765",
+       "reference_sha256": "61226c18b7cbebcffa9f7b0b3d41bf931477a633491a9400ab5634c359569765"
+      },
+      "unit_order_fields": {
+       "differing_units": [],
+       "equal": true,
+       "python_sha256": "2955131514508d53fb002e5ec35435a3d129558b0bbf18366c9cd411c71e382d",
+       "reference_sha256": "2955131514508d53fb002e5ec35435a3d129558b0bbf18366c9cd411c71e382d"
+      }
+     },
+     "orders": {
+      "equal": true,
+      "python": [
+       [
+        "SetPlayerOrdre",
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null
+       ],
+       [
+        "ProcessInputGame",
+        0,
+        2,
+        null,
+        null,
+        null,
+        null,
+        "02000000000000000000",
+        "0x45eeaf"
+       ]
+      ],
+      "reference": [
+       [
+        "SetPlayerOrdre",
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null
+       ],
+       [
+        "ProcessInputGame",
+        0,
+        2,
+        null,
+        null,
+        null,
+        null,
+        "02000000000000000000",
+        "0x45eeaf"
+       ]
+      ]
+     },
+     "reference_integrity": {
+      "compared_summary_equal": true,
+      "form": "delta",
+      "masked_sha256_equal": true,
+      "summary_equal": true
+     },
+     "result": "returned",
+     "rng": {
+      "equal": true,
+      "python": {
+       "0x497164": "0x50cc3f1",
+       "0x498db4": "0x3212b7ce"
+      },
+      "reference": {
+       "0x497164": "0x50cc3f1",
+       "0x498db4": "0x3212b7ce"
+      }
+     },
+     "scripted_inputs": {
+      "equal": true,
+      "python": 12,
+      "reference": 12,
+      "wndproc_flags": {
+       "python": [],
+       "reference": []
+      }
+     },
+     "state": {
+      "blocks": 25197,
+      "compared_bytes": 16002289,
+      "differing_blocks": [],
+      "equal": true,
+      "first_differences": {}
+     }
+    },
+    "frame2030": {
+     "allocation_count": {
+      "equal": true,
+      "python": 25482,
+      "reference": 25482
+     },
+     "bindings": {
+      "display_context_not_modeled": 0,
+      "equal": true,
+      "not_modeled": [],
+      "original": 13,
+      "python": 13,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "boundaries": {
+      "display_context_not_modeled": [],
+      "equal": true,
+      "not_modeled": [
+       {
+        "index": 0,
+        "routine": "MCICD_Play",
+        "words": [
+         0,
+         1,
+         2,
+         3
+        ]
+       }
+      ],
+      "original": 1,
+      "python": 1,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "compared_summary": {
+      "equal": true,
+      "python": "e37c6fdb78d57e07be781fac0e9ac1585eba2212ce9b120b3b88cfb447c4c502",
+      "reference": "e37c6fdb78d57e07be781fac0e9ac1585eba2212ce9b120b3b88cfb447c4c502"
+     },
+     "equal": true,
+     "equal_base": true,
+     "indicators": {
+      "ai_rng": {
+       "equal": true,
+       "python": 840087502,
+       "reference": 840087502
+      },
+      "counter": {
+       "equal": true,
+       "python": 2030,
+       "reference": 2030
+      },
+      "cursor_4e1d18": {
+       "equal": true,
+       "python": 218,
+       "reference": 218
+      },
+      "hud_4e05a2": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_x": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_y": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "world_rng": {
+       "equal": true,
+       "python": 174458025,
+       "reference": 174458025
+      }
+     },
+     "m31_fields": {
+      "equal": true,
+      "packets": {
+       "equal": true,
+       "python": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ],
+       "reference": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ]
+      },
+      "selection": {
+       "equal": true,
+       "player0_head": [
+        "00000c0000000000",
+        "00000c0000000000"
+       ],
+       "python_sha256": "61226c18b7cbebcffa9f7b0b3d41bf931477a633491a9400ab5634c359569765",
+       "reference_sha256": "61226c18b7cbebcffa9f7b0b3d41bf931477a633491a9400ab5634c359569765"
+      },
+      "unit_order_fields": {
+       "differing_units": [],
+       "equal": true,
+       "python_sha256": "345b6495cdad89b735a83c7a33f8f0ce1a820350ba4263178207fcdbdf49bed0",
+       "reference_sha256": "345b6495cdad89b735a83c7a33f8f0ce1a820350ba4263178207fcdbdf49bed0"
+      }
+     },
+     "orders": {
+      "equal": true,
+      "python": [
+       [
+        "SetPlayerOrdre",
+        0,
+        33,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null
+       ],
+       [
+        "ProcessInputGame",
+        0,
+        33,
+        null,
+        null,
+        null,
+        null,
+        "21000000000000000000",
+        "0x45f221"
+       ]
+      ],
+      "reference": [
+       [
+        "SetPlayerOrdre",
+        0,
+        33,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null
+       ],
+       [
+        "ProcessInputGame",
+        0,
+        33,
+        null,
+        null,
+        null,
+        null,
+        "21000000000000000000",
+        "0x45f221"
+       ]
+      ]
+     },
+     "reference_integrity": {
+      "compared_summary_equal": true,
+      "form": "delta",
+      "masked_sha256_equal": true,
+      "summary_equal": true
+     },
+     "result": "returned",
+     "rng": {
+      "equal": true,
+      "python": {
+       "0x497164": "0xa6604a9",
+       "0x498db4": "0x3212b7ce"
+      },
+      "reference": {
+       "0x497164": "0xa6604a9",
+       "0x498db4": "0x3212b7ce"
+      }
+     },
+     "scripted_inputs": {
+      "equal": true,
+      "python": 12,
+      "reference": 12,
+      "wndproc_flags": {
+       "python": [],
+       "reference": []
+      }
+     },
+     "state": {
+      "blocks": 25197,
+      "compared_bytes": 16002289,
+      "differing_blocks": [],
+      "equal": true,
+      "first_differences": {}
+     }
+    },
+    "frame2063": {
+     "allocation_count": {
+      "equal": true,
+      "python": 25482,
+      "reference": 25482
+     },
+     "bindings": {
+      "display_context_not_modeled": 0,
+      "equal": true,
+      "not_modeled": [],
+      "original": 13,
+      "python": 13,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "boundaries": {
+      "display_context_not_modeled": [],
+      "equal": true,
+      "not_modeled": [
+       {
+        "index": 0,
+        "routine": "MCICD_Play",
+        "words": [
+         0,
+         1,
+         2,
+         3
+        ]
+       },
+       {
+        "index": 1,
+        "routine": "PlaySnd_PostSound",
+        "words": [
+         1,
+         2,
+         3
+        ]
+       },
+       {
+        "index": 2,
+        "routine": "PlaySnd_PostSound",
+        "words": [
+         1,
+         2,
+         3
+        ]
+       }
+      ],
+      "original": 3,
+      "python": 3,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "compared_summary": {
+      "equal": true,
+      "python": "6339b4ca9ac932587009a215ed886a9686e3605a96caa32b1ee2cf7c01787f23",
+      "reference": "6339b4ca9ac932587009a215ed886a9686e3605a96caa32b1ee2cf7c01787f23"
+     },
+     "equal": true,
+     "equal_base": true,
+     "indicators": {
+      "ai_rng": {
+       "equal": true,
+       "python": 840087502,
+       "reference": 840087502
+      },
+      "counter": {
+       "equal": true,
+       "python": 2063,
+       "reference": 2063
+      },
+      "cursor_4e1d18": {
+       "equal": true,
+       "python": 35,
+       "reference": 35
+      },
+      "hud_4e05a2": {
+       "equal": true,
+       "python": 1,
+       "reference": 1
+      },
+      "view_x": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_y": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "world_rng": {
+       "equal": true,
+       "python": 1127755124,
+       "reference": 1127755124
+      }
+     },
+     "m31_fields": {
+      "equal": true,
+      "packets": {
+       "equal": true,
+       "python": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ],
+       "reference": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ]
+      },
+      "selection": {
+       "equal": true,
+       "player0_head": [
+        "0100030000000000",
+        "0100030000000000"
+       ],
+       "python_sha256": "2c1e4b44b290b31ceb1ad3c9649bb2b671713377fe456f7a53a08bf7837c66c6",
+       "reference_sha256": "2c1e4b44b290b31ceb1ad3c9649bb2b671713377fe456f7a53a08bf7837c66c6"
+      },
+      "unit_order_fields": {
+       "differing_units": [],
+       "equal": true,
+       "python_sha256": "0269be1752518ccdb4a90808dd2b366bdbebc5bf9b9509755c9972f99f6d7460",
+       "reference_sha256": "0269be1752518ccdb4a90808dd2b366bdbebc5bf9b9509755c9972f99f6d7460"
+      }
+     },
+     "orders": {
+      "equal": true,
+      "python": [
+       [
+        "SetPlayerOrdre",
+        0,
+        1,
+        3598,
+        3598,
+        0,
+        0,
+        null,
+        null
+       ],
+       [
+        "ProcessInputGame",
+        0,
+        1,
+        null,
+        null,
+        null,
+        null,
+        "01000e0e0e0e00000000",
+        "0x45ee46"
+       ]
+      ],
+      "reference": [
+       [
+        "SetPlayerOrdre",
+        0,
+        1,
+        3598,
+        3598,
+        0,
+        0,
+        null,
+        null
+       ],
+       [
+        "ProcessInputGame",
+        0,
+        1,
+        null,
+        null,
+        null,
+        null,
+        "01000e0e0e0e00000000",
+        "0x45ee46"
+       ]
+      ]
+     },
+     "reference_integrity": {
+      "compared_summary_equal": true,
+      "form": "delta",
+      "masked_sha256_equal": true,
+      "summary_equal": true
+     },
+     "result": "returned",
+     "rng": {
+      "equal": true,
+      "python": {
+       "0x497164": "0x43382d74",
+       "0x498db4": "0x3212b7ce"
+      },
+      "reference": {
+       "0x497164": "0x43382d74",
+       "0x498db4": "0x3212b7ce"
+      }
+     },
+     "scripted_inputs": {
+      "equal": true,
+      "python": 12,
+      "reference": 12,
+      "wndproc_flags": {
+       "python": [],
+       "reference": []
+      }
+     },
+     "state": {
+      "blocks": 25197,
+      "compared_bytes": 16002289,
+      "differing_blocks": [],
+      "equal": true,
+      "first_differences": {}
+     }
+    },
+    "frame2073": {
+     "allocation_count": {
+      "equal": true,
+      "python": 25482,
+      "reference": 25482
+     },
+     "bindings": {
+      "display_context_not_modeled": 0,
+      "equal": true,
+      "not_modeled": [],
+      "original": 14,
+      "python": 14,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "boundaries": {
+      "display_context_not_modeled": [],
+      "equal": true,
+      "not_modeled": [
+       {
+        "index": 0,
+        "routine": "MCICD_Play",
+        "words": [
+         0,
+         1,
+         2,
+         3
+        ]
+       }
+      ],
+      "original": 1,
+      "python": 1,
+      "shared_issuers_matched": [],
+      "shared_issuers_unmatched": []
+     },
+     "compared_summary": {
+      "equal": true,
+      "python": "e1f0e7469e2ef0244d91b96cdc257182dfc67254518c1be74b1930a1a358a672",
+      "reference": "e1f0e7469e2ef0244d91b96cdc257182dfc67254518c1be74b1930a1a358a672"
+     },
+     "equal": true,
+     "equal_base": true,
+     "indicators": {
+      "ai_rng": {
+       "equal": true,
+       "python": 840087502,
+       "reference": 840087502
+      },
+      "counter": {
+       "equal": true,
+       "python": 2073,
+       "reference": 2073
+      },
+      "cursor_4e1d18": {
+       "equal": true,
+       "python": 60,
+       "reference": 60
+      },
+      "hud_4e05a2": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_x": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "view_y": {
+       "equal": true,
+       "python": 0,
+       "reference": 0
+      },
+      "world_rng": {
+       "equal": true,
+       "python": 547762556,
+       "reference": 547762556
+      }
+     },
+     "m31_fields": {
+      "equal": true,
+      "packets": {
+       "equal": true,
+       "python": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ],
+       "reference": [
+        [
+         "0x4797f000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47980000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47981000",
+         "00000000000000000000"
+        ],
+        [
+         "0x47982000",
+         "00000000000000000000"
+        ]
+       ]
+      },
+      "selection": {
+       "equal": true,
+       "player0_head": [
+        "0100030000000000",
+        "0100030000000000"
+       ],
+       "python_sha256": "2c1e4b44b290b31ceb1ad3c9649bb2b671713377fe456f7a53a08bf7837c66c6",
+       "reference_sha256": "2c1e4b44b290b31ceb1ad3c9649bb2b671713377fe456f7a53a08bf7837c66c6"
+      },
+      "unit_order_fields": {
+       "differing_units": [],
+       "equal": true,
+       "python_sha256": "b45716dafe422ff9c69a6b4f36de69fb87c134f143162b9f56cc0364b732a4da",
+       "reference_sha256": "b45716dafe422ff9c69a6b4f36de69fb87c134f143162b9f56cc0364b732a4da"
+      }
+     },
+     "orders": {
+      "equal": true,
+      "python": [
+       [
+        "SetPlayerOrdre",
+        0,
+        16,
+        3,
+        1,
+        0,
+        0,
+        null,
+        null
+       ],
+       [
+        "ProcessInputGame",
+        0,
+        16,
+        null,
+        null,
+        null,
+        null,
+        "10000300010000000000",
+        "0x45f167"
+       ]
+      ],
+      "reference": [
+       [
+        "SetPlayerOrdre",
+        0,
+        16,
+        3,
+        1,
+        0,
+        0,
+        null,
+        null
+       ],
+       [
+        "ProcessInputGame",
+        0,
+        16,
+        null,
+        null,
+        null,
+        null,
+        "10000300010000000000",
+        "0x45f167"
+       ]
+      ]
+     },
+     "reference_integrity": {
+      "compared_summary_equal": true,
+      "form": "delta",
+      "masked_sha256_equal": true,
+      "summary_equal": true
+     },
+     "result": "returned",
+     "rng": {
+      "equal": true,
+      "python": {
+       "0x497164": "0x20a6317c",
+       "0x498db4": "0x3212b7ce"
+      },
+      "reference": {
+       "0x497164": "0x20a6317c",
+       "0x498db4": "0x3212b7ce"
+      }
+     },
+     "scripted_inputs": {
+      "equal": true,
+      "python": 13,
+      "reference": 13,
+      "wndproc_flags": {
+       "python": [],
+       "reference": []
+      }
+     },
+     "state": {
+      "blocks": 25197,
+      "compared_bytes": 16002289,
+      "differing_blocks": [],
+      "equal": true,
+      "first_differences": {}
+     }
+    }
+   },
+   "orders": [
+    {
+     "phase": "frame133",
+     "player": 0,
+     "site": "0x42ba20",
+     "tag": 1,
+     "word2": 4113,
+     "word4": 4113,
+     "word6": 0,
+     "word8": 0
+    },
+    {
+     "event": "ProcessInputGame",
+     "jump_target": "0x45ee46",
+     "packet": "01001110111000000000",
+     "phase": "frame133",
+     "player": 0,
+     "tag": 1
+    },
+    {
+     "phase": "frame153",
+     "player": 0,
+     "site": "0x42a03c",
+     "tag": 4,
+     "word2": 3,
+     "word4": 3093,
+     "word6": 0,
+     "word8": 0
+    },
+    {
+     "event": "ProcessInputGame",
+     "jump_target": "0x45ef73",
+     "packet": "04000300150c00000000",
+     "phase": "frame153",
+     "player": 0,
+     "tag": 4
+    },
+    {
+     "phase": "frame2018",
+     "player": 0,
+     "site": "0x42b9aa",
+     "tag": 2,
+     "word2": 0,
+     "word4": 0,
+     "word6": 0,
+     "word8": 0
+    },
+    {
+     "event": "ProcessInputGame",
+     "jump_target": "0x45eeaf",
+     "packet": "02000000000000000000",
+     "phase": "frame2018",
+     "player": 0,
+     "tag": 2
+    },
+    {
+     "phase": "frame2030",
+     "player": 0,
+     "site": "0x42aecf",
+     "tag": 33,
+     "word2": 0,
+     "word4": 0,
+     "word6": 0,
+     "word8": 0
+    },
+    {
+     "event": "ProcessInputGame",
+     "jump_target": "0x45f221",
+     "packet": "21000000000000000000",
+     "phase": "frame2030",
+     "player": 0,
+     "tag": 33
+    },
+    {
+     "phase": "frame2063",
+     "player": 0,
+     "site": "0x42ba20",
+     "tag": 1,
+     "word2": 3598,
+     "word4": 3598,
+     "word6": 0,
+     "word8": 0
+    },
+    {
+     "event": "ProcessInputGame",
+     "jump_target": "0x45ee46",
+     "packet": "01000e0e0e0e00000000",
+     "phase": "frame2063",
+     "player": 0,
+     "tag": 1
+    },
+    {
+     "phase": "frame2073",
+     "player": 0,
+     "site": "0x42aecf",
+     "tag": 16,
+     "word2": 3,
+     "word4": 1,
+     "word6": 0,
+     "word8": 0
+    },
+    {
+     "event": "ProcessInputGame",
+     "jump_target": "0x45f167",
+     "packet": "10000300010000000000",
+     "phase": "frame2073",
+     "player": 0,
+     "tag": 16
+    }
+   ],
+   "part": {
+    "final_reference_summary": {
+     "blocks": 25197,
+     "bytes": 16175335,
+     "sha256": "eb41618b74d543994a071740ab07deac466303b71c4a9e7adaeea201fbb31f10"
+    },
+    "first_phase": "between_frames129",
+    "frames": [
+     129,
+     2400
+    ],
+    "full_states": [
+     "frame250",
+     "frame500",
+     "frame750",
+     "frame1000",
+     "frame1250",
+     "frame1500",
+     "frame1750",
+     "frame2000",
+     "frame2250",
+     "frame2400"
+    ],
+    "last_phase": "frame2400",
+    "number": 0,
+    "opening_state": {
+     "allocation_records": {
+      "count": 25482,
+      "source": "pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz allocations (frame 128; the window allocates/releases nothing and keeps the count)"
+     },
+     "compared_summary_equal": true,
+     "declared": null,
+     "equals_m22_frame128_full_state": true,
+     "masked_sha256_equal": true,
+     "start_frame": 128,
+     "summary_equal": true
+    },
+    "opening_summary": {
+     "blocks": 25197,
+     "bytes": 16175335,
+     "sha256": "eb714f7d5a694ad91bab9b41c37a28860006c89be03f9170e3b312064a4b04b2"
+    },
+    "parts": 3,
+    "path": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte00.json.xz",
+    "phases": 2000,
+    "phases_requested": 2000,
+    "previous_part_raw_sha256": null,
+    "raw_json_sha256": "129302bc0ba9c88f0ef258a20d89865cdccb45ff8327ac40d879429c5b8f2480",
+    "sha256": "0d630ac6c154f98b853691e13c1b8974a1bdef7e63097c387b5949c6c49369bf"
+   },
+   "parts": [
+    {
+     "crossings": {
+      "core_provider_stops": 0,
+      "count": 0,
+      "mode": "prova",
+      "writing_compared_bytes": 0
+     },
+     "first_phase": "between_frames129",
+     "frames": [
+      129,
+      1128
+     ],
+     "last_phase": "frame1128",
+     "opening_state": {
+      "allocation_records": {
+       "count": 25482,
+       "source": "pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz allocations (frame 128; the window allocates/releases nothing and keeps the count)"
+      },
+      "compared_summary_equal": true,
+      "declared": null,
+      "equals_m22_frame128_full_state": true,
+      "masked_sha256_equal": true,
+      "start_frame": 128,
+      "summary_equal": true
+     },
+     "part": 0,
+     "phase_chain_sha256": "a3f35dfc7701065f135f5b50046f1ce9d416f7190d2a0d1e65186cda3086df98",
+     "phases": 2000,
+     "phases_equal": 2000,
+     "report_sha256": "6ee8e412ccec5ad9fac77d38cfad5466cf4c5883ae5478a28c8ca2d2ecc71174",
+     "result": "equal",
+     "seconds": 513.9
+    },
+    {
+     "crossings": {
+      "core_provider_stops": 0,
+      "count": 0,
+      "mode": "prova",
+      "writing_compared_bytes": 0
+     },
+     "first_phase": "between_frames1129",
+     "frames": [
+      1129,
+      2128
+     ],
+     "last_phase": "frame2128",
+     "opening_state": {
+      "allocation_records": {
+       "count": 25482,
+       "source": "pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz allocations (frame 128; the window allocates/releases nothing and keeps the count)"
+      },
+      "compared_summary_equal": true,
+      "declared": {
+       "cursor": [
+        656,
+        336
+       ],
+       "entry_registers": {
+        "EAX": "0x0",
+        "EBP": "0x0",
+        "EBX": "0x3",
+        "ECX": "0x19002b0",
+        "EDI": "0x0",
+        "EDX": "0x2007fe8",
+        "ESI": "0x0",
+        "ESP": "0x2007fe8"
+       },
+       "msg_words": [
+        "0x0",
+        "0x202",
+        "0x0",
+        "0x1500290"
+       ],
+       "saved_frame_words": [
+        "0x0",
+        "0x19002b0",
+        "0x0"
+       ]
+      },
+      "masked_sha256_equal": true,
+      "start_frame": 1128,
+      "summary_equal": true
+     },
+     "part": 1,
+     "phase_chain_sha256": "5da71fab9ac33cb3ed067a9c962bea9e6612a7a57ee1fdfe01b99b34122924f6",
+     "phases": 2000,
+     "phases_equal": 2000,
+     "report_sha256": "71dbf57780c660ea576a467451aa5fea746bd36fd9425394843a5e7592bb019f",
+     "result": "equal",
+     "seconds": 510.7
+    },
+    {
+     "crossings": {
+      "core_provider_stops": 0,
+      "count": 0,
+      "mode": "prova",
+      "writing_compared_bytes": 0
+     },
+     "first_phase": "between_frames2129",
+     "frames": [
+      2129,
+      2400
+     ],
+     "last_phase": "frame2400",
+     "opening_state": {
+      "allocation_records": {
+       "count": 25482,
+       "source": "pesquisas-paralelas/missoes/evidencias/captura-quadros128-monde01-exibicao-v2.json.xz allocations (frame 128; the window allocates/releases nothing and keeps the count)"
+      },
+      "compared_summary_equal": true,
+      "declared": {
+       "cursor": [
+        656,
+        336
+       ],
+       "entry_registers": {
+        "EAX": "0x0",
+        "EBP": "0x0",
+        "EBX": "0x3",
+        "ECX": "0x1500290",
+        "EDI": "0x0",
+        "EDX": "0x2007fe8",
+        "ESI": "0x0",
+        "ESP": "0x2007fe8"
+       },
+       "msg_words": [
+        "0x0",
+        "0x202",
+        "0x0",
+        "0x1500290"
+       ],
+       "saved_frame_words": [
+        "0x0",
+        "0x1500290",
+        "0x0"
+       ]
+      },
+      "masked_sha256_equal": true,
+      "start_frame": 2128,
+      "summary_equal": true
+     },
+     "part": 2,
+     "phase_chain_sha256": "c557167f801fbdc01f4b733880f016cf65d42e59df5b66c5fc58d2abe2c10f0c",
+     "phases": 544,
+     "phases_equal": 544,
+     "report_sha256": "4f9f775b47c907c7bc8ea035c0ddc0e0e3c074b3e67b5f081daea73f3759948c",
+     "result": "equal",
+     "seconds": 157.2
+    }
+   ],
+   "peak_rss_mb": 1872,
+   "phase_chain_sha256": "cc1307d9de6494d28cb82d7afc4f759a1b229d76203d9835023942131f618213",
+   "phase_table": {
+    "columns": [
+     "equal",
+     "compared_bytes",
+     "compared_summary",
+     "rng",
+     "bindings",
+     "boundaries",
+     "allocation_count",
+     "registers",
+     "carried_registers",
+     "hud_flag",
+     "display_context_bindings_not_modeled",
+     "display_context_boundaries_not_modeled",
+     "shared_issuers_matched",
+     "reference_integrity"
+    ],
+    "runs": [
+     [
+      1000,
+      1000,
+      1,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       true,
+       true,
+       true,
+       7,
+       1,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ],
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "checkpoint_full_state_equal+compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      1001,
+      1128,
+      128,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      129,
+      249,
+      121,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      250,
+      250,
+      1,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "checkpoint_full_state_equal+compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      251,
+      499,
+      249,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      500,
+      500,
+      1,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "checkpoint_full_state_equal+compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      501,
+      749,
+      249,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      750,
+      750,
+      1,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "checkpoint_full_state_equal+compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      751,
+      999,
+      249,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      1129,
+      1129,
+      1,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       true,
+       true,
+       true,
+       7,
+       1,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ],
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      1130,
+      1249,
+      120,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      1250,
+      1250,
+      1,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "checkpoint_full_state_equal+compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      1251,
+      1499,
+      249,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      1500,
+      1500,
+      1,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "checkpoint_full_state_equal+compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      1501,
+      1749,
+      249,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      1750,
+      1750,
+      1,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "checkpoint_full_state_equal+compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      1751,
+      1999,
+      249,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      2000,
+      2000,
+      1,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "checkpoint_full_state_equal+compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      2001,
+      2128,
+      128,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      2129,
+      2129,
+      1,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       true,
+       true,
+       true,
+       7,
+       1,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ],
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      2130,
+      2249,
+      120,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      2250,
+      2250,
+      1,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "checkpoint_full_state_equal+compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      2251,
+      2399,
+      149,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ],
+     [
+      2400,
+      2400,
+      1,
+      null,
+      [
+       true,
+       16002289,
+       true,
+       true,
+       true,
+       true,
+       true,
+       null,
+       null,
+       null,
+       0,
+       0,
+       0,
+       "checkpoint_full_state_equal+compared_summary_equal+masked_sha256_equal+summary_equal/delta"
+      ]
+     ]
+    ]
+   },
+   "phases": 4544,
+   "phases_equal": 4544,
+   "policy": {
+    "display_roots": 18,
+    "path": "pesquisas-paralelas/missoes/m3/sondas/P6/politica-janela.json",
+    "sha256": "55e0906fccb4f41340b8bee780c56ed0d4ee72cb3a47bf5c2a55553c5c5f0275"
+   },
+   "reach": {
+    "equal_parts": [
+     0,
+     1,
+     2
+    ],
+    "equal_parts_from_start": 3,
+    "equal_through_frame": 2400,
+    "first_stop": null,
+    "parts": 3
+   },
+   "report_sha256": "6ee8e412ccec5ad9fac77d38cfad5466cf4c5883ae5478a28c8ca2d2ecc71174",
+   "result": "equal",
+   "seconds": 1181.8,
+   "text_boundary": {
+    "events": 0,
+    "frames": []
+   },
+   "window": "P6"
+  }
+ ]
+}

@@ -1,0 +1,185 @@
+{
+ "runtime_revision": "afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0",
+ "main_base": "6cdbc5a",
+ "engine_tree": "49a05a03ff273b66344d9618f0b78f87fc070a6a",
+ "probes": {
+  "P1": {
+   "frames_equal": 501,
+   "frames_compared": 501,
+   "frames_requested": 501,
+   "first_difference": null,
+   "first_engine_stop": null,
+   "seconds": 113.02682250000362,
+   "whole_state": {
+    "allocation_domain": "No allocation/free or binding changes in the published windows; all block identities and byte lengths compared.",
+    "compared_bytes_per_phase": [
+     16019748
+    ],
+    "evidence_revision": "a7f5d4939e7826e02a8b348995edb9c793657f4c",
+    "mask_bytes": 155587,
+    "part_compressed_sha256": "83dba2ce27feecbdd4983716f583c7e530c57d1cb6f70793e37d3ccfdcf5d75b",
+    "part_raw_sha256": "dd82202e1f0338b9ddcad0a8a7f41de756ae91e98b0fad16f626f9bd27699e7f",
+    "parts": [
+     {
+      "artifact": "pesquisas-paralelas/missoes/m3/sondas/P1/captura-janela.parte00.json.xz",
+      "compressed_sha256": "83dba2ce27feecbdd4983716f583c7e530c57d1cb6f70793e37d3ccfdcf5d75b",
+      "phases": 1002,
+      "raw_integrity_verified": true,
+      "raw_sha256": "dd82202e1f0338b9ddcad0a8a7f41de756ae91e98b0fad16f626f9bd27699e7f"
+     }
+    ],
+    "phases_compared": 1002,
+    "phases_equal": 1002,
+    "phases_requested": 1002,
+    "schema": "rising-lands/rust-m3-whole-state-proof/1"
+   }
+  },
+  "P2": {
+   "frames_equal": 601,
+   "frames_compared": 601,
+   "frames_requested": 601,
+   "first_difference": null,
+   "first_engine_stop": null,
+   "seconds": 130.6631747499996,
+   "whole_state": {
+    "allocation_domain": "No allocation/free or binding changes in the published windows; all block identities and byte lengths compared.",
+    "compared_bytes_per_phase": [
+     16014614
+    ],
+    "evidence_revision": "a7f5d4939e7826e02a8b348995edb9c793657f4c",
+    "mask_bytes": 160721,
+    "part_compressed_sha256": "f6ec02882d359ef6f8deddd261d3622ce671d06cfc11a20db9a3ea55f3d64ea1",
+    "part_raw_sha256": "74218a46fbee02677eb75f2f7bd41c845bd9a510211b6ccac913a1268d3c0f76",
+    "parts": [
+     {
+      "artifact": "pesquisas-paralelas/missoes/m3/sondas/P2/captura-janela.parte00.json.xz",
+      "compressed_sha256": "f6ec02882d359ef6f8deddd261d3622ce671d06cfc11a20db9a3ea55f3d64ea1",
+      "phases": 1202,
+      "raw_integrity_verified": true,
+      "raw_sha256": "74218a46fbee02677eb75f2f7bd41c845bd9a510211b6ccac913a1268d3c0f76"
+     }
+    ],
+    "phases_compared": 1202,
+    "phases_equal": 1202,
+    "phases_requested": 1202,
+    "schema": "rising-lands/rust-m3-whole-state-proof/1"
+   }
+  },
+  "P3": {
+   "frames_equal": 3001,
+   "frames_compared": 3001,
+   "frames_requested": 3001,
+   "first_difference": null,
+   "first_engine_stop": null,
+   "seconds": 65.35917154200433,
+   "whole_state": null
+  },
+  "P6": {
+   "frames_equal": 2272,
+   "frames_compared": 2272,
+   "frames_requested": 2272,
+   "first_difference": null,
+   "first_engine_stop": null,
+   "seconds": 520.5407367500011,
+   "whole_state": {
+    "allocation_domain": "No allocation/free or binding changes in the published windows; all block identities and byte lengths compared.",
+    "compared_bytes_per_phase": [
+     16002289
+    ],
+    "evidence_revision": "16b63ac39b377cf4e86a5728475634e8f2e9f33e",
+    "mask_bytes": 173046,
+    "part_compressed_sha256": "0d630ac6c154f98b853691e13c1b8974a1bdef7e63097c387b5949c6c49369bf",
+    "part_raw_sha256": "129302bc0ba9c88f0ef258a20d89865cdccb45ff8327ac40d879429c5b8f2480",
+    "parts": [
+     {
+      "artifact": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte00.json.xz",
+      "compressed_sha256": "0d630ac6c154f98b853691e13c1b8974a1bdef7e63097c387b5949c6c49369bf",
+      "phases": 2000,
+      "raw_integrity_verified": true,
+      "raw_sha256": "129302bc0ba9c88f0ef258a20d89865cdccb45ff8327ac40d879429c5b8f2480"
+     },
+     {
+      "artifact": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte01.json.xz",
+      "compressed_sha256": "03976fb9ce9c539d1231fa130c0b8c875dceb26284e9e0eec5c8e1b05a7bb17c",
+      "phases": 2000,
+      "raw_integrity_verified": true,
+      "raw_sha256": "832bb4d18331ee666a79438177b36251b483a055631ff2eaaaba93a9d8ea9a15"
+     },
+     {
+      "artifact": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte02.json.xz",
+      "compressed_sha256": "ee60b91ceae622134e5342f5311b67600490647664864adafed2df4d260288e6",
+      "phases": 544,
+      "raw_integrity_verified": true,
+      "raw_sha256": "c587fa29136e7bb9ecc05f9e64f2317786efa7825ba45ef2a4596266fba517c6"
+     }
+    ],
+    "phases_compared": 4544,
+    "phases_equal": 4544,
+    "phases_requested": 4544,
+    "schema": "rising-lands/rust-m3-whole-state-proof/1"
+   }
+  },
+  "P7": {
+   "frames_equal": 3572,
+   "frames_compared": 3572,
+   "frames_requested": 3572,
+   "first_difference": null,
+   "first_engine_stop": null,
+   "seconds": 85.48961637500179,
+   "whole_state": null
+  },
+  "K1": {
+   "frames_equal": 501,
+   "frames_compared": 501,
+   "frames_requested": 501,
+   "first_difference": null,
+   "first_engine_stop": null,
+   "seconds": 11.054814082999656,
+   "whole_state": null
+  }
+ },
+ "answer_count": 155597,
+ "answer_equal": true,
+ "prefix": {
+  "schema": "rising-lands/macos-native-render-proof/1",
+  "engine_sha256": "50c87f129c2ae52a7553eb749ae73d5d762b6359eeda6c3638427f3a0ef8139c",
+  "driver_sha256": "59b3f37271ce6d0613041cca0d66d62f440d562ee946dacc5b08a11816b38e7e",
+  "inputs_manifest_sha256": "80b84b89c9f7ac060092bc118aac1e78dc9bfdd3567fbe08aaa929060be0e8d6",
+  "frames_requested": 128,
+  "frames_completed": 128,
+  "states_equal": 257,
+  "checkpoints_equal": 11,
+  "surfaces_equal": 128,
+  "python_surfaces_equal": 128,
+  "first_named_stop": null,
+  "observer_failures": [],
+  "horizon_pending": false,
+  "timing": {
+   "logic_seconds": 0.834666,
+   "render_seconds": 0.43951,
+   "proof_seconds": 12.039594,
+   "wall_seconds": 13.316853500000434
+  }
+ },
+ "long": {
+  "schema": "rising-lands/macos-native-render-proof/1",
+  "engine_sha256": "50c87f129c2ae52a7553eb749ae73d5d762b6359eeda6c3638427f3a0ef8139c",
+  "driver_sha256": "59b3f37271ce6d0613041cca0d66d62f440d562ee946dacc5b08a11816b38e7e",
+  "inputs_manifest_sha256": "80b84b89c9f7ac060092bc118aac1e78dc9bfdd3567fbe08aaa929060be0e8d6",
+  "frames_requested": 9200,
+  "frames_completed": 9200,
+  "states_equal": 18401,
+  "checkpoints_equal": 11,
+  "surfaces_equal": 9200,
+  "python_surfaces_equal": 0,
+  "first_named_stop": null,
+  "observer_failures": [],
+  "horizon_pending": false,
+  "timing": {
+   "logic_seconds": 64.347886,
+   "render_seconds": 34.852079,
+   "proof_seconds": 216.652767,
+   "wall_seconds": 316.0549327080007
+  }
+ }
+}

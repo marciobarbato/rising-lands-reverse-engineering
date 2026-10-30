@@ -1,0 +1,19 @@
+[lease] macos-chain8-fatigue-diagnostic waiting
+[lease] macos-chain8-fatigue-diagnostic granted slots [1]
+{
+ "schema": "rising-lands/macos-selected-fatigue-diagnostic/1",
+ "original_executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "world_source": "S0 and four original immutable tables; real prefix and advancing play world",
+ "scope": "Declared-frame reproduction, not a replay of the historical UI arrival times; no original equality claim",
+ "engine_sha256": "50c87f129c2ae52a7553eb749ae73d5d762b6359eeda6c3638427f3a0ef8139c",
+ "driver_sha256": "59b3f37271ce6d0613041cca0d66d62f440d562ee946dacc5b08a11816b38e7e",
+ "requested_frames": 4500,
+ "completed_frames": 4500,
+ "first_stop": null,
+ "audits": {
+  "phases": 0,
+  "surfaces": 0,
+  "checkpoints": 0,
+  "proof_ns": 0
+ }
+}
