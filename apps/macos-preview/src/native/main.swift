@@ -62,6 +62,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             horizonOutput=URL(fileURLWithPath:args[index+1])
             DispatchQueue.main.asyncAfter(deadline:.now()+1){[weak self] in self?.startNativeHorizon()}
         }
+        if let index=args.firstIndex(of:"--native-benchmark"),args.count>index+1 {
+            let output=URL(fileURLWithPath:args[index+1])
+            DispatchQueue.main.asyncAfter(deadline:.now()+1){[weak self] in self?.startNativeBenchmark(output,args:args)}
+        }
         if smokeOutput != nil {
             smokeTimer = Timer.scheduledTimer(withTimeInterval:0.5,repeats:true) { [weak self] _ in
                 guard let self = self, !self.finishedSmoke else { return }
@@ -212,7 +216,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             if operation.hasPrefix("live-") {
                 do {
                     if nativeLive == nil {
-                        nativeLive=try NativeLiveWindow(root:resourceRoot)
+                        nativeLive=try NativeLiveWindow(root:resourceRoot,validationMode:smokeOutput != nil)
                         nativeLive?.update={ [weak self] value in self?.nativeReply(nil,value:value) }
                         nativeLive?.recordedEvent={ [weak self] value in
                             if let data=try? JSONSerialization.data(withJSONObject:value),let json=String(data:data,encoding:.utf8){self?.web.evaluateJavaScript("window.recordNativeInput(\(json));",completionHandler:nil)}
@@ -258,9 +262,41 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             catch { DispatchQueue.main.async { self?.fail("Falha na comunicação com o motor: \(error.localizedDescription)") } }
         }
     }
+    // Runs the production native window, worker, Metal pipeline and visible drawables.
+    func startNativeBenchmark(_ output:URL,args:[String]) {
+        do {
+            func argument(_ key:String,_ fallback:String)->String{if let index=args.firstIndex(of:key),args.count>index+1{return args[index+1]};return fallback}
+            let mode=argument("--benchmark-mode","play"),duration=Double(argument("--benchmark-seconds","65")) ?? 0
+            let rate=Double(argument("--game-fps","20")) ?? -1
+            guard ["play","test"].contains(mode),duration>=60,duration<=180,rate>=0,rate<=120 else{throw NSError(domain:"InvalidNativeBenchmarkArguments",code:1)}
+            let live=try NativeLiveWindow(root:resourceRoot,validationMode:mode=="test");nativeLive=live
+            live.gameFPS=rate;live.update={_ in}
+            live.perform("live-reset"){_ in live.perform("live-step"){_ in live.perform("live-play"){_ in
+                DispatchQueue.main.asyncAfter(deadline:.now()+duration){
+                    live.perform("live-pause"){value in
+                        var result=value;result["commit"]=Bundle.main.object(forInfoDictionaryKey:"RisingLandsSourceCommit") as? String
+                        result["native_window_visible"]=live.window.isVisible
+                        result["requestedSeconds"]=duration
+                        result["screenMaximumFPS"]=live.window.screen?.maximumFramesPerSecond ?? 0
+                        result["native_window_unoccluded"]=live.window.occlusionState.contains(.visible)
+                        result["passed"]=live.window.isVisible && value["live_stop"] is NSNull
+                        live.capture(output.deletingPathExtension().appendingPathExtension("png")){readback in
+                            result["metal_readback"]=readback
+                            if readback["error"] != nil{result["passed"]=false}
+                            do{let data=try JSONSerialization.data(withJSONObject:result,options:[.sortedKeys,.prettyPrinted]);try data.write(to:output,options:.atomic)}catch{fputs("NativeBenchmarkWriteFailed: \(error)\n",stderr)}
+                            self.engine?.terminate();NSApp.terminate(nil)
+                        }
+                    }
+                }
+            }}}
+        }catch{
+            if let data=try? JSONSerialization.data(withJSONObject:["passed":false,"error":error.localizedDescription]){try? data.write(to:output,options:.atomic)}
+            NSApp.terminate(nil)
+        }
+    }
     func startNativeHorizon() {
         do {
-            nativeLive=try NativeLiveWindow(root:resourceRoot)
+            nativeLive=try NativeLiveWindow(root:resourceRoot,validationMode:true)
             nativeLive?.update={ [weak self] value in
                 guard let self=self,!self.horizonFinished else{return}
                 if value["live_stop"] is [String:Any] {self.finishNativeHorizon(value);return}
@@ -269,8 +305,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
                     self.horizonLastProgress=now;try? data.write(to:path.appendingPathExtension("progress.json"),options:.atomic)
                 }
             }
-            nativeLive?.work.async{[weak self] in guard let live=self?.nativeLive else{return};macos_live_audit_window(live.driver,18401)}
-            nativeLive?.perform("live-step"){[weak self] _ in self?.nativeLive?.perform("live-play",completion:nil)}
+            nativeLive?.perform("live-reset"){[weak self] _ in
+                self?.nativeLive?.work.async{[weak self] in guard let live=self?.nativeLive else{return};macos_live_audit_window(live.driver,18401)}
+                self?.nativeLive?.perform("live-step"){[weak self] _ in self?.nativeLive?.perform("live-play",completion:nil)}
+            }
             DispatchQueue.main.asyncAfter(deadline:.now()+1100){[weak self] in
                 guard let self=self,!self.horizonFinished else{return}
                 self.nativeLive?.perform("live-pause"){value in var value=value;value["horizon_pending"]=true;self.finishNativeHorizon(value)}

@@ -392,3 +392,44 @@ all six export/import/export byte round trips match. Native WndProc flag stores
 and whole-state hashes belong to Test A's deferred state half. It requires
 engine order support. The 3,000-frame human original replay (Test B) is also
 pending; no M3 acceptance is claimed.
+
+## Native play mode and independent clocks
+
+The native window defaults to **Jogar**. **Validar** resets to the accepted S0
+and retains the original audited frame driver: 257 prefix states, 11 checkpoints
+and every reached reference surface. APP_BUILD's native smoke explicitly selects
+Validar. The proof tools still default to validation, including observer callbacks.
+Switching modes resets the world; it cannot disable validation halfway through a
+proof. Memory inspection is available only in Validar. Orders remain record-only.
+
+Jogar calls the same Rust phase1/render/phase2/phase3 sequence, with no projection,
+state/surface hashing, equality counters or observer callbacks. Contract checks,
+partial render results and named engine stops remain active. Game speed selects
+15, 20, 30, 60 game frames/s or unlimited. The default **20 frames/s** is the
+engine's published nominal TickClock rate, not a claim that the original's real
+machine-dependent pacing has been measured. That original timing probe remains
+an external dependency. Host scheduling never changes the engine's virtual clock,
+frame arithmetic, frame-indexed recording or order. Slow frames catch up without
+skipping simulation steps; pause and resume reset the host deadline.
+
+Engine work and initialization run on a serial worker. A separate display queue
+presents the latest complete indexed frame at up to 120 Hz, with no interpolation.
+A 20 Hz game frame can therefore be displayed several times; display fps and
+completed game frames/s are reported separately. Three persistent shared Metal
+textures and palette buffers prevent CPU writes from racing GPU readers. The
+producer copies directly from the Rust caller buffer to a free texture slot;
+there is no Swift pixel array, PNG, RGBA conversion or allocation of new pixel
+storage per frame. GPU completion releases slots asynchronously. The display
+queue owns drawable acquisition and command submission; steady play has no
+main-thread synchronization or GPU wait. Pause/reset/evidence capture drain the
+queue. Validation keeps its synchronous presentation/readback checks.
+
+For an actual visible-window measurement of at least 60 seconds, run the owned
+`apps/macos-preview/scripts/benchmark_native_macos.py` through the exclusive heavy
+lease, specifying `--app`, a new `--output`, `--mode play|test`, `--seconds 65`
+and `--game-fps 20|60|0`. The app counts actual CAMetalDrawable presentation
+timestamps, emits complete one-second bins and their minimum, and separates Rust
+logic, rendering, proof, upload, submission and GPU timings. Each run ends with
+GPU readback against the latest real Rust surface. It never claims repeated
+presentations are distinct simulated frames. Measured results follow after the
+committed build and validation runs.

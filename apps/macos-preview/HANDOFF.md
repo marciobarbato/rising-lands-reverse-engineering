@@ -1280,3 +1280,27 @@ families. The 9,200-frame/first-stop horizon was **not rerun on ABI 1.4**; prior
 ABI 1.3 results remain historical. Requested APP_BUILD, engine gate and bounded
 live/Test A proofs pass. Final evidence/docs commits change no executable code
 after e760756. Only the feature branch is pushed without force.
+
+## Play mode and independent display scheduling
+
+Work resumed after fast-forwarding the front and merging fetched main 8138e6e.
+The integrated ABI1.4 / Rust Graphics1.7 / Python Graphics1.8 pins are unchanged.
+Only macOS-owned paths are changed; no engine optimization is included.
+
+The native driver defaults to validation for existing proof consumers. New
+`macos_live_validation(driver,0)` must be selected before phase1, and removes
+projection/hash/equality/observer work while retaining the real phase ordering,
+caller buffers, renderer metadata checks and named stops. Input files, masks,
+original hashes/addresses and evidence are unchanged. A new actual-driver
+regression compares all 128 play-mode output surfaces/palettes and the final
+whole projection to validation mode, while asserting zero callbacks/proof time
+and rejecting mode changes after phase1.
+
+The UI's Jogar mode uses a fixed host game cadence (20 Hz nominal default,
+configurable independently) and asynchronous Metal presentation of the latest
+complete frame. See the [manual](../../docs/MACOS_PLAYABLE.md#native-play-mode-and-independent-clocks)
+for buffer ownership, scheduling and the original-rate dependency. A three-slot
+pool releases textures only after GPU completion. Main thread handles AppKit
+and resizing; engine initialization, frame work and display acquisition run on
+background queues. Validar and APP_BUILD's validation smoke keep their audits.
+Sustained real-UI measurements and gate outputs will be appended after validation.
