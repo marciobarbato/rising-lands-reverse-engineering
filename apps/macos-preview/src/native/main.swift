@@ -5,6 +5,10 @@ import CryptoKit
 final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler, WKNavigationDelegate, NSWindowDelegate {
     var window: NSWindow!
     var web: WKWebView!
+    var nativeLive: NativeLiveWindow?
+    var horizonOutput: URL?
+    var horizonFinished=false
+    var horizonLastProgress=0.0
     var engine: Process?
     var input: FileHandle?
     var outPipe: Pipe?
@@ -54,6 +58,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         catch { fail("Não foi possível iniciar o Python incluído: \(error.localizedDescription)"); return }
         let page = resourceRoot.appendingPathComponent(args.contains("--inspection") ? "ui/playback.html" : "ui/index.html")
         web.loadFileURL(page, allowingReadAccessTo:resourceRoot)
+        if let index=args.firstIndex(of:"--native-horizon"),args.count>index+1 {
+            horizonOutput=URL(fileURLWithPath:args[index+1])
+            DispatchQueue.main.asyncAfter(deadline:.now()+1){[weak self] in self?.startNativeHorizon()}
+        }
         if smokeOutput != nil {
             smokeTimer = Timer.scheduledTimer(withTimeInterval:0.5,repeats:true) { [weak self] _ in
                 guard let self = self, !self.finishedSmoke else { return }
@@ -175,27 +183,72 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             }
             return
         }
+        if message.frameInfo.isMainFrame,let body=message.body as? [String:Any],body["action"] as? String == "recordingIndicator",let active=body["active"] as? Bool {
+            nativeLive?.setRecording(active);return
+        }
         if message.frameInfo.isMainFrame, let body = message.body as? [String:Any],
            body["action"] as? String == "saveInput", let requestID = body["id"],
            let content = body["content"] as? [String:Any],
-           let data = try? JSONSerialization.data(withJSONObject:content,options:[.prettyPrinted,.sortedKeys]),
-           data.count <= 64*1024*1024 {
+           let encoded = try? JSONSerialization.data(withJSONObject:content,options:[.prettyPrinted,.sortedKeys]),
+           encoded.count <= 64*1024*1024 {
+            let data=(body["text"] as? String).map{Data($0.utf8)} ?? (encoded + Data([10]))
+            guard data.count<=64*1024*1024,(try? JSONSerialization.jsonObject(with:data)) is [String:Any] else{nativeReply(requestID,error:"Entrada exportada inválida");return}
+            func save(_ url:URL) {
+                do{try data.write(to:url,options:.atomic);self.nativeReply(requestID,value:["saved":true,"path":url.path,"sha256":SHA256.hash(data:data).map{String(format:"%02x",$0)}.joined()])}
+                catch{self.nativeReply(requestID,error:error.localizedDescription)}
+            }
+            // Automated smoke uses its explicitly declared evidence directory;
+            // production always asks for a destination with NSSavePanel.
+            if body["smokeEvidence"] as? Bool == true,let shot=smokeOutput{save(shot.deletingPathExtension().appendingPathExtension("input.json"));return}
             let panel = NSSavePanel()
             panel.title = "Exportar entrada gravada"
             panel.nameFieldStringValue = body["script"] as? Bool == true ? "monde01-input.json" : "monde01-macos-journal.json"
-            panel.beginSheetModal(for:window) { [weak self] answer in
-                var result:[String:Any] = ["id":requestID,"ok":true,"playback":["saved":false]]
-                if answer == .OK, let url = panel.url {
-                    do {
-                        try (data + Data([10])).write(to:url,options:.atomic)
-                        result["playback"] = ["saved":true,"path":url.path]
-                    } catch { result = ["id":requestID,"ok":false,"error":error.localizedDescription] }
-                }
-                if let encoded = try? JSONSerialization.data(withJSONObject:result), let json = String(data:encoded,encoding:.utf8) {
-                    self?.web.evaluateJavaScript("window.receive(\(json));",completionHandler:nil)
-                }
+            panel.beginSheetModal(for:nativeLive?.window.isVisible == true ? nativeLive!.window:window) { [weak self] answer in
+                if answer == .OK,let url=panel.url{save(url)}else{self?.nativeReply(requestID,value:["saved":false])}
             }
             return
+        }
+        if message.frameInfo.isMainFrame, let body=message.body as? [String:Any],body["action"] as? String == "playback",let operation=body["operation"] as? String {
+            if operation.hasPrefix("live-") {
+                do {
+                    if nativeLive == nil {
+                        nativeLive=try NativeLiveWindow(root:resourceRoot)
+                        nativeLive?.update={ [weak self] value in self?.nativeReply(nil,value:value) }
+                        nativeLive?.recordedEvent={ [weak self] value in
+                            if let data=try? JSONSerialization.data(withJSONObject:value),let json=String(data:data,encoding:.utf8){self?.web.evaluateJavaScript("window.recordNativeInput(\(json));",completionHandler:nil)}
+                        }
+                        nativeLive?.recordingAction={ [weak self] in self?.web.evaluateJavaScript("window.toggleRecording();",completionHandler:nil) }
+                        nativeLive?.exportAction={ [weak self] in self?.web.evaluateJavaScript("window.exportRecording();",completionHandler:nil) }
+                        web.evaluateJavaScript("window.syncRecordingIndicator();",completionHandler:nil)
+                    }
+                    nativeLive?.window.makeKeyAndOrderFront(nil)
+                    nativeLive?.perform(operation == "live-open" ? "live-reset":operation) { [weak self] value in self?.nativeReply(body["id"],value:value) }
+                } catch { nativeReply(body["id"],error:"Falha nativa: \(error.localizedDescription)") }
+                return
+            }
+            if operation == "record-barrier" {
+                if let live=nativeLive{live.inputBarrier{[weak self] frame in self?.nativeReply(body["id"],value:["frame":frame])}}
+                else{nativeReply(body["id"],value:["frame":129])};return
+            }
+            if operation == "record-native-smoke",smokeOutput != nil,let live=nativeLive {
+                let down=body["stage"] as? String == "press"
+                if let event=NSEvent.keyEvent(with:.flagsChanged,location:.zero,modifierFlags:down ? .control:[],timestamp:0,windowNumber:live.window.windowNumber,context:nil,characters:"",charactersIgnoringModifiers:"",isARepeat:false,keyCode:59){live.window.sendEvent(event)}
+                if down {
+                    let p=live.metal.convert(NSPoint(x:live.metal.bounds.width/2,y:live.metal.bounds.height*(1-272.0/600.0)),to:nil)
+                    for type in [NSEvent.EventType.leftMouseDown,.leftMouseUp]{if let event=NSEvent.mouseEvent(with:type,location:p,modifierFlags:.control,timestamp:0,windowNumber:live.window.windowNumber,context:nil,eventNumber:1,clickCount:1,pressure:1){live.window.sendEvent(event)}}
+                }
+                live.inputBarrier{[weak self] frame in self?.nativeReply(body["id"],value:["frame":frame,"recordingIndicator":live.recordButton.title])};return
+            }
+            if operation == "native-capture",let live=nativeLive,let shot=screenshotOutput {
+                live.capture(shot.deletingPathExtension().appendingPathExtension("metal.png")){[weak self] value in self?.nativeReply(body["id"],value:value)}
+                return
+            }
+            if operation == "read",let live=nativeLive,live.window.isVisible,
+               let address=body["address"] as? String,let raw=(address.lowercased().hasPrefix("0x") ? UInt32(address.dropFirst(2),radix:16):UInt32(address,radix:10)),let size=body["size"] as? Int,(1...256).contains(size) {
+                live.read(raw,size){[weak self] value in if let error=value["error"] as? String{self?.nativeReply(body["id"],error:error)}else{self?.nativeReply(body["id"],value:value)}};return
+            }
+            if operation == "read",let live=nativeLive,live.window.isVisible {nativeReply(body["id"],error:"Endereço ou tamanho de leitura nativa inválido.");return}
+            if ["open","reset","phase","frame"].contains(operation),let live=nativeLive {live.perform("live-pause",completion:nil);live.window.orderOut(nil)}
         }
         guard message.frameInfo.isMainFrame, let body = message.body as? [String:Any], let action = body["action"] as? String,
               ["init","reset","select","order","pause","play","speed","step","pump","state","economy","combat","interact","playback"].contains(action),
@@ -204,6 +257,46 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             do { try self?.input?.write(contentsOf:data + Data([10])) }
             catch { DispatchQueue.main.async { self?.fail("Falha na comunicação com o motor: \(error.localizedDescription)") } }
         }
+    }
+    func startNativeHorizon() {
+        do {
+            nativeLive=try NativeLiveWindow(root:resourceRoot)
+            nativeLive?.update={ [weak self] value in
+                guard let self=self,!self.horizonFinished else{return}
+                if value["live_stop"] is [String:Any] {self.finishNativeHorizon(value);return}
+                let now=ProcessInfo.processInfo.systemUptime
+                if now-self.horizonLastProgress>2,let path=self.horizonOutput,let data=try? JSONSerialization.data(withJSONObject:value,options:[.sortedKeys]) {
+                    self.horizonLastProgress=now;try? data.write(to:path.appendingPathExtension("progress.json"),options:.atomic)
+                }
+            }
+            nativeLive?.work.async{[weak self] in guard let live=self?.nativeLive else{return};macos_live_audit_window(live.driver,18401)}
+            nativeLive?.perform("live-step"){[weak self] _ in self?.nativeLive?.perform("live-play",completion:nil)}
+            DispatchQueue.main.asyncAfter(deadline:.now()+1100){[weak self] in
+                guard let self=self,!self.horizonFinished else{return}
+                self.nativeLive?.perform("live-pause"){value in var value=value;value["horizon_pending"]=true;self.finishNativeHorizon(value)}
+            }
+        } catch {
+            if let path=horizonOutput,let data=try? JSONSerialization.data(withJSONObject:["passed":false,"error":error.localizedDescription]){try? data.write(to:path,options:.atomic)}
+            NSApp.terminate(nil)
+        }
+    }
+    func finishNativeHorizon(_ value:[String:Any]) {
+        guard !horizonFinished,let path=horizonOutput,let live=nativeLive else{return};horizonFinished=true
+        live.capture(path.deletingPathExtension().appendingPathExtension("metal.png")){[weak self] readback in
+            guard let self=self else{return};var result=value
+            result["commit"]=Bundle.main.object(forInfoDictionaryKey:"RisingLandsSourceCommit") as? String
+            result["native_window_visible"]=live.window.isVisible;result["metal_readback"]=readback
+            result["passed"]=(value["verified_phases"] as? UInt64 ?? 0)>=18401 && (value["verified_surfaces"] as? UInt64 ?? 0)>=9200 && value["live_stop"] is [String:Any] && readback["error"]==nil && live.window.isVisible
+            if let data=try? JSONSerialization.data(withJSONObject:result,options:[.prettyPrinted,.sortedKeys]){try? data.write(to:path,options:.atomic)}
+            NSApp.terminate(nil)
+        }
+    }
+    func nativeReply(_ id:Any?,value:[String:Any]=[:],error:String?=nil) {
+        var value=value;value["commit"]=Bundle.main.object(forInfoDictionaryKey:"RisingLandsSourceCommit") as? String
+        var response:[String:Any]=["ok":error==nil,"playback":value]
+        if let id=id{response["id"]=id}else{response["nativeUpdate"]=true}
+        if let error=error{response["error"]=error}
+        if let data=try? JSONSerialization.data(withJSONObject:response),let json=String(data:data,encoding:.utf8){web.evaluateJavaScript("window.receive(\(json));",completionHandler:nil)}
     }
     func webView(_ webView:WKWebView,decidePolicyFor navigationAction:WKNavigationAction,decisionHandler:@escaping(WKNavigationActionPolicy)->Void) {
         guard let url = navigationAction.request.url else { decisionHandler(.cancel); return }

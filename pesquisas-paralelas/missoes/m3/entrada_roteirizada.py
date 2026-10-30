@@ -479,6 +479,7 @@ def _fsync(f):
 
 
 def correr(a):
+    import delta_estado_missao as delta
     import segmentos_quadros_missao as seg
     from encerramento_captura import encerrar_captura
     from emulador import HASH_ORIGINAL
@@ -519,7 +520,10 @@ def correr(a):
         stop_frame=ate, status='running', snapshots={}, outputs=list(SAIDAS))
     arquivos = {n: open(pasta / n, 'x') for n in SAIDAS}
     rotinas, gatilhos_vistos, estado = {}, set(), None
-    ev_fronteira = len(b.eventos_fronteira)
+    # The binding-event and boundary logs only feed the per-frame records: drop them once written, so that
+    # snapshots stay the size of the state (the binding log alone otherwise grows by about 34 MB per 500 frames).
+    eventos = delta.compactar_eventos(b)
+    del b.eventos_fronteira[:]
     # The checkpoint's routine set is not known (Missions' trace is off): first entries count from F0.
     codigo, k = 0, k0
     al_visto = False
@@ -561,11 +565,12 @@ def correr(a):
             comandos.eventos.clear()
             for e in ordens:
                 escrever('comandos.jsonl', dict(frame=k, **e))
-            for e in b.eventos_fronteira[ev_fronteira:]:
+            for e in b.eventos_fronteira:
                 if e['routine'].startswith(('PlaySnd_', 'MCICD_')):
                     escrever('fronteiras.jsonl', dict(frame=k, **{c: e[c] for c in (
                         'phase', 'routine', 'caller_return', 'caller', 'registers', 'stack_words')}))
-            ev_fronteira = len(b.eventos_fronteira)
+            del b.eventos_fronteira[:]
+            eventos.descartar_ate(len(eventos))
             obj = objetivo(b)
             estado = dict(frame=k, seconds=round(time.monotonic() - t, 3), new_routines=primeiras,
                           entries=dict(sorted(contagens.items())), surfaces_between=sup_entre,

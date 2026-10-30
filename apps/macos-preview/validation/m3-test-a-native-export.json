@@ -1,0 +1,89 @@
+{
+ "canonical_roundtrip_equal": true,
+ "commit": "ebacca229f5fa72cdb3ab26d368e434c9c8e5979",
+ "file": "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/ebacca229f5fa72cdb3ab26d368e434c9c8e5979/build/logs/native-inspection-smoke.input.json",
+ "input_schedule_frames_equal_to_owner": 283,
+ "orders_injected": false,
+ "owner_accepted_unchanged": true,
+ "owner_validator": "Complete actual Missions harness module",
+ "save_panel_destination_selection": "Not automated: smoke selects its explicit CLI evidence directory; the production action uses NSSavePanel",
+ "schema": "rising-lands/macos-native-input-export-proof/1",
+ "script": {
+  "frames": [
+   {
+    "cursor": [
+     400,
+     272
+    ],
+    "frame": 407,
+    "keys": {
+     "0x11": -32768
+    },
+    "messages": [
+     [
+      256,
+      17,
+      1900545
+     ],
+     [
+      512,
+      8,
+      17826192
+     ]
+    ]
+   },
+   {
+    "frame": 408,
+    "keys": {
+     "0x11": -32768
+    },
+    "messages": [
+     [
+      513,
+      9,
+      17826192
+     ]
+    ]
+   },
+   {
+    "frame": 409,
+    "keys": {
+     "0x11": -32768
+    }
+   },
+   {
+    "frame": 410,
+    "keys": {
+     "0x11": -32768
+    },
+    "messages": [
+     [
+      514,
+      8,
+      17826192
+     ]
+    ]
+   },
+   {
+    "frame": 411,
+    "messages": [
+     [
+      257,
+      17,
+      3223126017
+     ]
+    ]
+   }
+  ],
+  "name": "macOS recording",
+  "schema": "rising-lands/monde01-scripted-input/1",
+  "start": {
+   "checkpoint": "M2.2 frame128",
+   "frame": 128
+  },
+  "stop_frame": 411
+ },
+ "sha256": "39e9e1cce2c0455d12a0c637f24ff77053f4967ecf64ded9e2ab072c3bef4820",
+ "state_hash_comparison": "Not run: engine order support is a dependency",
+ "stop_frame": 411
+}

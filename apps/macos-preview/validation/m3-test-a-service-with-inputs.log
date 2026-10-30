@@ -1,0 +1,10 @@
+[lease] macos-m33-service-inputs waiting
+[lease] macos-m33-service-inputs granted slots [3]
+test_live_memory_read_never_reads_or_closes_evidence_cursor (test_macos_playback_service.PlaybackServiceTests) ... ok
+test_unsupported_api_returns_explicit_error_not_a_playback_key (test_macos_playback_service.PlaybackServiceTests) ... ok
+test_worker_open_step_read_reset_errors_and_close (test_macos_playback_service.PlaybackServiceTests) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 12.024s
+
+OK

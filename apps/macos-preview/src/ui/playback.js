@@ -2,10 +2,10 @@
 const $=id=>document.getElementById(id);
 let image=null,seq=0,pending=new Map(),live=false,playing=false;
 function request(operation,extra={}){return new Promise((resolve,reject)=>{const id=++seq;const timer=setTimeout(()=>{pending.delete(id);reject(Error('Tempo limite na inspeção.'));},180000);pending.set(id,{resolve,reject,timer});window.webkit.messageHandlers.engine.postMessage({id,action:'playback',operation,...extra});});}
-window.receive=response=>{const p=pending.get(response.id);if(!p)return;clearTimeout(p.timer);pending.delete(response.id);response.ok?p.resolve(response.playback):p.reject(Error(response.error));};
+window.receive=response=>{if(response.nativeUpdate){if(live)apply(response.playback);return;}const p=pending.get(response.id);if(!p)return;clearTimeout(p.timer);pending.delete(response.id);response.ok?p.resolve(response.playback):p.reject(Error(response.error));};
 function row(values){const tr=document.createElement('tr');for(const v of values){const td=document.createElement('td');td.textContent=String(v);tr.append(td);}return tr;}
 function blocks(){if(!image)return;const filter=$('filter').value.toLowerCase();const found=image.memory.filter(b=>`${b.name} ${b.base}`.toLowerCase().includes(filter));$('blocks').replaceChildren(...found.slice(0,100).map(b=>row([b.name,b.base,b.bytes,b.sha256])));$('block-count').textContent=`${image.blocks} blocos · ${image.bytes} bytes · ${found.length} resultados`}
-function apply(value){image=value;$('phase').replaceChildren(...['state_s0',...value.phases].map(name=>{const o=document.createElement('option');o.value=name;o.textContent=name;return o;}));$('phase').value=value.phase;$('status').textContent=`${value.scenario}\n${value.phase} · resumo verificado · ${value.checkpoint_verified?'checkpoint igual':'sem checkpoint nesta fase'}\n${value.verified_phases}/257 fases e ${value.verified_checkpoints}/11 checkpoints verificados\nEstado: ${value.summary_sha256}`;if(value.live_stop){playing=false;$('status').textContent+='\nParada explícita: '+value.live_stop.type+' · '+value.live_stop.phase+' · '+JSON.stringify(value.live_stop.detail);}$('live-step').disabled=!live||!!value.live_stop;$('live-play').disabled=!live||!!value.live_stop;if(live){$('status').textContent=value.scenario+'\n'+value.phase+' · '+value.verified_phases+' fases iguais na janela aceita'+(value.live_stop?'\nParada explícita: '+JSON.stringify(value.live_stop):'');}$('words').replaceChildren(...Object.entries(value.observed).map(([name,w])=>row([name,w.address,w.value,`0x${w.value.toString(16)}`])));const r=value.render;$('render-status').textContent=(r.status==='full'?'Quadro completo · HUD e cursor incluídos':r.status==='partial'?'Imagem parcial · parada explícita':r.status==='undrawn'?'Fase sem desenho · superfície preservada':'Render interrompido')+'\n'+((r.stop||r.inherited_stop)?`${(r.stop||r.inherited_stop).endereco}: ${(r.stop||r.inherited_stop).detalhe}`:'')+'\n'+(r.native_phase_end_sha256===null?'Sem referência aceita de superfície nesta fase.':'HUD e cursor incluídos no domínio Graphics; cache encadeado desde a entrada do quadro 1.');if(r.frame){drawRawFrame(r.frame);$('render-image').hidden=true;}else{$('render-canvas').hidden=true;$('render-image').hidden=!r.image;if(r.image)$('render-image').src=r.image;else $('render-image').removeAttribute('src');}for(const id of ['phase','previous','next','go-frame','reset'])$(id).disabled=false;$('previous').disabled=value.phase_index<0;$('next').disabled=value.phase_index>=256;blocks();}
+function apply(value){image=value;if(value.native_metal){playing=value.native_running;$('live-play').textContent=playing?'Pausar Rust':'Executar Rust';}$('phase').replaceChildren(...['state_s0',...value.phases].map(name=>{const o=document.createElement('option');o.value=name;o.textContent=name;return o;}));$('phase').value=value.phase;$('status').textContent=`${value.scenario}\n${value.phase} · resumo verificado · ${value.checkpoint_verified?'checkpoint igual':'sem checkpoint nesta fase'}\n${value.verified_phases}/257 fases e ${value.verified_checkpoints}/11 checkpoints verificados\nEstado: ${value.summary_sha256}`;if(value.live_stop){playing=false;$('status').textContent+='\nParada explícita: '+value.live_stop.type+' · '+value.live_stop.phase+' · '+JSON.stringify(value.live_stop.detail);}$('live-step').disabled=!live||!!value.live_stop;$('live-play').disabled=!live||!!value.live_stop;if(live){$('status').textContent=value.scenario+'\n'+value.phase+' · '+value.verified_phases+' fases iguais na janela aceita'+(value.live_stop?'\nParada explícita: '+JSON.stringify(value.live_stop):'');}$('words').replaceChildren(...Object.entries(value.observed).map(([name,w])=>row([name,w.address,w.value,`0x${w.value.toString(16)}`])));const r=value.render;$('render-status').textContent=(r.status==='full'?'Quadro completo · HUD e cursor incluídos':r.status==='partial'?'Imagem parcial · parada explícita':r.status==='undrawn'?'Fase sem desenho · superfície preservada':'Render interrompido')+'\n'+((r.stop||r.inherited_stop)?`${(r.stop||r.inherited_stop).endereco}: ${(r.stop||r.inherited_stop).detalhe}`:'')+'\n'+(r.native_phase_end_sha256===null?'Sem referência aceita de superfície nesta fase.':'HUD e cursor incluídos no domínio Graphics; cache encadeado desde a entrada do quadro 1.');if(value.native_metal){$('render-image').hidden=true;$('render-canvas').hidden=true;$('render-status').textContent='Rust ABI 1.4 · janela Metal nativa · '+value.verified_surfaces+' superfícies iguais'+(value.live_stop?'\nParada: '+JSON.stringify(value.live_stop):'');}else if(r.frame){drawRawFrame(r.frame);$('render-image').hidden=true;}else{$('render-canvas').hidden=true;$('render-image').hidden=!r.image;if(r.image)$('render-image').src=r.image;else $('render-image').removeAttribute('src');}for(const id of ['phase','previous','next','go-frame','reset'])$(id).disabled=false;$('previous').disabled=value.phase_index<0;$('next').disabled=value.phase_index>=256;blocks();}
 async function run(operation,extra={}){try{for(const id of ['phase','previous','next','go-frame','reset'])$(id).disabled=true;apply(await request(operation,extra));return true;}catch(e){if(image)apply(image);playing=false;$('live-step').disabled=true;$('live-play').disabled=true;$('status').textContent='Falha na inspeção: '+e.message;return false;}}
 $('phase').onchange=()=>{live=false;playing=false;return run('phase',{phase:$('phase').value});};$('previous').onclick=()=>run('phase',{phase:image.phase_index===0?'state_s0':image.phase_index-1});$('next').onclick=()=>run('phase',{phase:image.phase_index+1});$('go-frame').onclick=()=>run('frame',{frame:Number($('frame').value)});$('reset').onclick=()=>run('reset');$('filter').oninput=blocks;$('read-form').onsubmit=async event=>{event.preventDefault();try{const r=await request('read',{address:$('address').value,size:Number($('size').value)});$('read-result').textContent=r.read_hex;}catch(e){$('read-result').textContent=e.message;}};
 window.runSmokeTests=async()=>{
@@ -36,19 +36,35 @@ window.runSmokeTests=async()=>{
  check('DOM opens real Rust S0 with record-only inputs',image.input_policy==='record-only');
  $('live-step').click();await until(()=>image.phase==='load_tail'&&!$('live-step').disabled,'live load tail');
  $('live-step').click();await until(()=>image.phase==='frame1'&&!$('live-step').disabled,'live frame1');
- check('Rust live frame1 state and full native surface equal',image.verified_phases===3&&image.render.equals_native_phase_end===true&&!image.live_stop);
- check('live uses raw indexed canvas and no PNG',!rawCanvas.hidden&&$('render-image').hidden&&!!image.render.frame&&!image.render.image&&rawSequence===image.phase_index);
- const actual=rawContext.getImageData(0,0,800,600).data;
- check('native canvas readback equals every raw RGBA byte',actual.every((v,i)=>v===rawImage.data[i]));
- const liveStarted=performance.now();
+ check('Rust native frame1 state and full native surface equal',image.verified_phases===3&&image.render.equals_native_phase_end===true&&!image.live_stop);
+ check('Rust ABI 1.4 native Metal window shown',image.native_metal===true&&image.native_engine_binding==='static-abi14'&&image.native_window_visible===true&&!image.render.frame&&!image.render.image);
  $('live-play').click();
- await until(()=>image.phase_index>=66&&!image.live_stop,'live play reaches frame33');
+ await until(()=>image.phase_index>=800&&!image.live_stop,'native play reaches frame400');
  $('live-play').click();
- await until(()=>pending.size===0&&!playing,'live pause drains its last request');
- const liveSeconds=(performance.now()-liveStarted)/1000,liveFrames=(image.phase_index-2)/2;
- check('raw live interval play reaches frame33 then pauses',liveFrames>=32&&image.render.equals_native_phase_end===true&&rawSequence===image.phase_index&&!image.live_stop&&!playing);
+ await until(()=>pending.size===0&&!playing,'native pause');
+ check('native live prefix proves 257 states and 11 checkpoints',image.verified_phases===257&&image.verified_checkpoints===11);
+ check('native Metal live rate is at least 25 fps',image.native_metrics.fps>=25);
+ const metrics=image.native_metrics,metal=await request('native-capture');
+ check('actual Metal GPU readback matches indexed palette',metal.pixelsChecked>=480000&&!metal.error);
+ check('native current memory read matches the live counter',!!(await request('read',{address:'0x508f7c',size:4})).read_hex);
+ $('record-input').click();await until(()=>recording&&!recordToggleBusy,'recording enabled');
+ check('visible recording indicator and disabled order policy',$('input-status').textContent.includes('Gravando entrada')&&$('input-status').textContent.includes('indisponíveis'));
+ const nativeInput=await request('record-native-smoke',{stage:'press'});await recordChain;
+ check('actual NSEvent path and native recording indicator',nativeInput.recordingIndicator.includes('Gravando entrada'));
+ for(let i=0;i<4;i++)await run('live-step');
+ await request('record-native-smoke',{stage:'release'});await recordChain;
+ $('record-input').click();await until(()=>!recording&&!recordToggleBusy,'recording stopped');
+ $('export-input').click();await until(()=>window.lastInputExport?.saved===true,'scripted input exported');
+ const exported=window.lastInputExport,rows=exported.script.frames;
+ const down=rows.find(r=>r.messages?.some(m=>m[0]===0x201));
+ const moved=rows.find(r=>r.messages?.some(m=>m[0]===0x200));
+ const up=rows.find(r=>r.messages?.some(m=>m[0]===0x202));
+ check('native save action exports Missions schema and k/k+1/k+3 click',exported.script.schema==='rising-lands/monde01-scripted-input/1'&&down.frame===moved.frame+1&&up.frame===moved.frame+3&&!!exported.sha256);
+ check('recorded Ctrl stays held through click and never enters engine',rows.filter(r=>r.frame>=moved.frame&&r.frame<=up.frame).every(r=>r.keys?.['0x11']===-32768)&&!image.live_stop&&image.input_policy==='record-only');
 
- return {passed:true,tests,commit:image.commit,scenario:image.scenario,render:image.render.status,liveFramesPerSecond:liveFrames/liveSeconds,liveFramesMeasured:liveFrames,rawTransferMilliseconds:rawTransferTimes};
+ return {passed:true,tests,commit:image.commit,scenario:image.scenario,render:image.render.status,
+         nativeMetrics:metrics,metalReadback:metal,inputExport:{path:exported.path,sha256:exported.sha256,script:exported.script},verifiedPhases:image.verified_phases,verifiedCheckpoints:image.verified_checkpoints,verifiedSurfaces:image.verified_surfaces};
+
 };
 window.playbackReady=run('open').then(()=>{
  if(!image||image.verified_phases!==257||image.verified_checkpoints!==11){window.signalAppInitializationFailure('Playback worker did not initialize');return;}
@@ -57,21 +73,39 @@ window.playbackReady=run('open').then(()=>{
 
 $('live-open').onclick=async()=>{live=true;playing=false;await run('live-open');};
 $('live-step').onclick=()=>run('live-step');
-$('live-play').onclick=async()=>{playing=!playing;$('live-play').textContent=playing?'Pausar Rust':'Executar Rust';while(playing){if(!await run('live-step'))break;if(!image||image.live_stop){playing=false;break;}await new Promise(r=>setTimeout(r,0));}};
+$('live-play').onclick=async()=>{if(image&&image.native_metal){await run('live-play');return;}playing=!playing;$('live-play').textContent=playing?'Pausar Rust':'Executar Rust';while(playing){if(!await run('live-step'))break;if(!image||image.live_stop){playing=false;break;}await new Promise(r=>setTimeout(r,0));}};
 for(const id of ['phase','previous','next','go-frame','reset'])$(id).addEventListener('click',()=>{live=false;playing=false;});
 const vkeys={Enter:13,Shift:16,Control:17,Alt:18,Escape:27,' ':32,ArrowLeft:37,ArrowUp:38,ArrowRight:39,ArrowDown:40,Delete:46,x:88,X:88};
-function record(event){request('record-event',{event}).then(r=>{$('input-status').textContent='Somente gravação · quadro '+r.frame;}).catch(e=>{$('input-status').textContent=e.message;});}
-for(const surface of [$('render-image'),$('render-canvas')]){
-for(const [type,msg] of [['mousemove',0x200],['mousedown',0x201],['mouseup',0x202]])surface.addEventListener(type,e=>{e.preventDefault();surface.focus();const box=surface.getBoundingClientRect();let m=msg;if(type==='mousedown'&&e.button===0&&e.detail>1&&e.detail%2===0)m=0x203;if(type==='mousedown'&&e.button===2)m=0x204;if(type==='mouseup'&&e.button===2)m=0x205;if(e.button===1&&type!=='mousemove')return;const w=(e.buttons&1?1:0)|(e.buttons&2?2:0)|(e.shiftKey?4:0)|(e.ctrlKey?8:0);record({kind:'mouse',msg:m,x:Math.floor((e.clientX-box.left)*800/box.width),y:Math.floor((e.clientY-box.top)*600/box.height),wParam:w});});
-const heldVkeys=new Set();
-for(const [type,down] of [['keydown',true],['keyup',false]])surface.addEventListener(type,e=>{if(vkeys[e.key]===undefined)return;e.preventDefault();if(down)heldVkeys.add(vkeys[e.key]);else heldVkeys.delete(vkeys[e.key]);record({kind:'key',vkey:vkeys[e.key],down});});
-surface.addEventListener('blur',()=>{for(const vkey of heldVkeys)record({kind:'key',vkey,down:false});heldVkeys.clear();});
-surface.addEventListener('contextmenu',e=>e.preventDefault());
-
+let recording=false,recordToggleBusy=false,recordChain=Promise.resolve(),recordFailure=null,recordEndFrame=null;
+function recordingStatus(detail=''){ $('live-open').disabled=recording;$('record-input').textContent=recording?'Parar gravação':'Nova gravação';$('input-status').textContent=(recording?'● Gravando entrada':'Gravação desativada')+' · ordens ao vivo indisponíveis'+(detail?' · '+detail:''); }
+window.syncRecordingIndicator=()=>window.webkit.messageHandlers.engine.postMessage({action:'recordingIndicator',active:recording});
+function record(event,frame=Math.max(129,(image?.observed?.counter?.value||128)+1)){
+ if(!recording||recordFailure)return;
+ recordChain=recordChain.then(()=>request('record-event',{event,frame})).then(r=>recordingStatus(r.events+' eventos · quadro '+r.frame)).catch(e=>{recordFailure=e;recording=false;window.syncRecordingIndicator();recordingStatus('Gravação interrompida: '+e.message);});
 }
-function download(value,name){return new Promise((resolve,reject)=>{const id=++seq;const timer=setTimeout(()=>{pending.delete(id);reject(Error('Tempo limite na exportação.'));},180000);pending.set(id,{resolve,reject,timer});window.webkit.messageHandlers.engine.postMessage({id,action:'saveInput',content:value,script:name==='monde01-input.json'});});}
-$('export-input').onclick=async()=>{try{const r=await request('export-input');await download(r.script,'monde01-input.json');}catch(e){$('input-status').textContent='Exportação interrompida: '+e.message;}};
-$('export-journal').onclick=async()=>{try{const r=await request('export-journal');await download(r.input_journal,'monde01-macos-journal.json');}catch(e){$('input-status').textContent=e.message;}};
+window.recordNativeInput=entry=>record(entry.event,entry.frame);
+window.toggleRecording=async()=>{
+ if(recordToggleBusy)return;recordToggleBusy=true;
+ if(recording)window.webkit.messageHandlers.engine.postMessage({action:'recordingIndicator',active:false});
+ try{const barrier=await request('record-barrier');await recordChain;
+  if(!recording&&(!image?.native_metal||barrier.frame<129))throw Error('Abra Rust ao vivo e avance até o quadro 128 para gravar.');
+  const r=await request(recording?'record-stop':'record-start');
+  if(recording)recordEndFrame=barrier.frame;else{recordEndFrame=null;recordFailure=null;recordChain=Promise.resolve();}
+  recording=r.recording;recordingStatus();window.syncRecordingIndicator();
+ }catch(e){recording=false;window.syncRecordingIndicator();recordingStatus(e.message);}finally{recordToggleBusy=false;}
+};
+$('record-input').onclick=window.toggleRecording;
+for(const surface of [$('render-image'),$('render-canvas')]){
+ for(const [type,msg] of [['mousemove',0x200],['mousedown',0x201],['mouseup',0x202]])surface.addEventListener(type,e=>{e.preventDefault();surface.focus();const box=surface.getBoundingClientRect();let m=msg;if(type==='mousedown'&&e.button===0&&e.detail>1&&e.detail%2===0)m=0x203;if(type==='mousedown'&&e.button===2)m=0x204;if(type==='mouseup'&&e.button===2)m=0x205;if(e.button===1&&type!=='mousemove')return;const w=(e.shiftKey?4:0)|(e.ctrlKey?8:0);record({kind:'mouse',msg:m,x:Math.max(0,Math.min(799,Math.floor((e.clientX-box.left)*800/box.width))),y:Math.max(0,Math.min(599,Math.floor((e.clientY-box.top)*600/box.height))),wParam:w});});
+ const heldVkeys=new Set();
+ for(const [type,down] of [['keydown',true],['keyup',false]])surface.addEventListener(type,e=>{if(vkeys[e.key]===undefined)return;e.preventDefault();if(down)heldVkeys.add(vkeys[e.key]);else heldVkeys.delete(vkeys[e.key]);record({kind:'key',vkey:vkeys[e.key],down});});
+ surface.addEventListener('blur',()=>{for(const vkey of heldVkeys)record({kind:'key',vkey,down:false});heldVkeys.clear();});
+ surface.addEventListener('contextmenu',e=>e.preventDefault());
+}
+function download(value,name,text){return new Promise((resolve,reject)=>{const id=++seq;const timer=setTimeout(()=>{pending.delete(id);reject(Error('Tempo limite na exportação.'));},180000);pending.set(id,{resolve,reject,timer});window.webkit.messageHandlers.engine.postMessage({id,action:'saveInput',content:value,text,script:name==='monde01-input.json',smokeEvidence:window.nativeSmoke?.enabled===true});});}
+window.exportRecording=async()=>{try{const barrier=await request('record-barrier');await recordChain;if(recordFailure)throw recordFailure;const r=await request('export-input',{stop_frame:recording?barrier.frame:(recordEndFrame||129)});const saved=await download(r.script,'monde01-input.json',r.script_text);window.lastInputExport={...r,...saved};recordingStatus(saved.saved?'Entrada exportada':'Exportação cancelada');return window.lastInputExport;}catch(e){recordingStatus('Exportação interrompida: '+e.message);throw e;}};
+$('export-input').onclick=()=>window.exportRecording().catch(()=>{});
+$('export-journal').onclick=async()=>{try{const barrier=await request('record-barrier');await recordChain;const r=await request('export-journal');await download(r.input_journal,'monde01-macos-journal.json');}catch(e){recordingStatus(e.message);}};
 
 
 const rawCanvas=$('render-canvas'),rawContext=rawCanvas.getContext('2d',{alpha:false});

@@ -1,0 +1,23 @@
+[lease] macos-abi14-prefix waiting
+[lease] macos-abi14-prefix granted slots [5]
+{
+ "schema": "rising-lands/macos-native-render-proof/1",
+ "engine_sha256": "7079b58383dba56bfd885883161a300650c697dd0053e38bb5dbb6c0364d556f",
+ "driver_sha256": "e97c3e8f2bbf362299a9ce1dd371af9dc6e1dc11a651d156fb319619c3d89457",
+ "inputs_manifest_sha256": "6481bda2e6cf16ebd122c9f8c70ff23d88a4ab9272e3eff29e7eb0458459a11a",
+ "frames_requested": 128,
+ "frames_completed": 128,
+ "states_equal": 257,
+ "checkpoints_equal": 11,
+ "surfaces_equal": 128,
+ "python_surfaces_equal": 128,
+ "first_named_stop": null,
+ "observer_failures": [],
+ "horizon_pending": false,
+ "timing": {
+  "logic_seconds": 1.647542,
+  "render_seconds": 0.676409,
+  "proof_seconds": 15.817326,
+  "wall_seconds": 18.144383750000088
+ }
+}
