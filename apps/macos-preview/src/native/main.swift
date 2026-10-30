@@ -224,6 +224,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
                 do {
                     if nativeLive == nil {
                         nativeLive=try NativeLiveWindow(root:resourceRoot,validationMode:smokeOutput != nil)
+                        nativeLive?.benchmarkInput = testBOutput != nil
                         nativeLive?.update={ [weak self] value in self?.nativeReply(nil,value:value) }
                         nativeLive?.recordedEvent={ [weak self] value in
                             if let data=try? JSONSerialization.data(withJSONObject:value),let json=String(data:data,encoding:.utf8){self?.web.evaluateJavaScript("window.recordNativeInput(\(json));",completionHandler:nil)}

@@ -141,6 +141,7 @@ async function runTestBSynthetic(plan){
    }
    if(!await run('live-step')||image.live_stop)throw Error(JSON.stringify(image.live_stop));
   }
+  if(![1,5,4,16,7,17].every(tag=>image.benchmark_order_tags.includes(tag)))throw Error('TestBMissingNativeOrderKinds: '+JSON.stringify(image.benchmark_order_tags));
   await window.toggleRecording();await recordChain;
   const exported=await window.exportRecording();
   const journal=await request('export-journal');
