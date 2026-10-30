@@ -320,6 +320,20 @@ def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None, estrutura
     return Provedores(funcoes)
 
 
+def _convencao_core(regs, entrada, saida):
+    """A result in the shape of Core's providers (``entrada_estruturas.provedor_entrada``): EAX..EBP after the
+    routine (a register its translation does not return keeps its entry value), plus ``_incertos`` = the full mask
+    for each register the caller did not pass (it entered as 0) and that comes back unchanged."""
+    resultado = {k: saida.get(k, entrada[k]) & M32 for k in REG7}
+    incertos = {k: M32 for k in REG7 if k not in regs and resultado[k] == entrada[k]}
+    for k, v in (saida.get('_incertos') or {}).items():
+        if k in REG7:
+            incertos[k] = incertos.get(k, 0) | v
+    if incertos:
+        resultado['_incertos'] = incertos
+    return resultado
+
+
 class DonosM3:
     """The committed M3 owners past frame 220 over one live memory, wired to each other (one instance each):
 
@@ -430,48 +444,41 @@ class DonosM3:
             return self._fadiga(nome, chamada, regs)
         if nome in self.nomes_restauracao:
             return self._restauracao(nome, chamada, regs)
+        entrada = {k: regs.get(k, 0) & M32 for k in REG7}
+        saida = None
         if nome in ('ResetOrdre', 'EnginAsk', 'SetEnginConstruitBatiment'):
             # Core's ``selecao_ordens`` (Economy's ``restauracao`` passes the whole register file).
-            entrada = {k: regs.get(k, 0) & M32 for k in REG7}
-            saida = self.selecao().chamar(nome, entrada)
-            return {k: saida[k] & M32 for k in REG7 if k in saida and (k in regs or saida[k] & M32 != entrada[k])}
-        if nome in self.nomes_ee:
-            # Every register the caller did not pass enters as 0; the result keeps only the passed registers and
-            # those the routine changed (each of these routines rebuilds its result from its entry registers, so an
-            # unchanged register is one it preserves and the caller keeps its own value).
-            entrada = {k: regs.get(k, 0) & M32 for k in REG7}
-            saida = self.ee.chamar(nome, entrada)
-            return {k: saida[k] & M32 for k in REG7 if k in regs or saida[k] & M32 != entrada[k]}
-        if nome == 'SetMiniMap':
+            saida = self.selecao().chamar(nome, dict(entrada))
+        elif nome in self.nomes_ee:
+            # Core's single-record queries; each rebuilds its result from its entry registers.
+            saida = self.ee.chamar(nome, dict(entrada))
+        elif nome == 'SetMiniMap':
             # Core's ``incursao_core.definir_minimapa`` (AL owner, DL mode, BX cell; mode 4 translated, the mode
             # CalculWorkEngin passes at 0x44c437): EAX rows, EBX pixel cursor, EDX; other registers kept.
             import incursao_core
-            saida = incursao_core.definir_minimapa(self.m, regs['EAX'] & M32, regs['EDX'] & M32, regs['EBX'] & M32)
-            return {k: v & M32 for k, v in saida.items() if k in REG7}
-        if nome == 'Random':
+            saida = incursao_core.definir_minimapa(self.m, entrada['EAX'], entrada['EDX'], entrada['EBX'])
+        elif nome == 'Random':
             # Core's Random 0x4704dc (``chamadas_quadro_core.ROTINAS``): the world seed 0x497164 advanced, EAX = it;
-            # no other register changes.
+            # EBX, ECX, EDX pushed and popped, nothing else changes.
             from chamadas_quadro_core import ROTINAS as ROTINAS_QUADRO
-            saida = ROTINAS_QUADRO['Random'][1](self.m, {k: regs.get(k, 0) & M32 for k in REG7}, None, None)
-            return {k: v & M32 for k, v in saida.items() if k in REG7}
-        if nome == 'TerrainEstGc':
+            saida = ROTINAS_QUADRO['Random'][1](self.m, dict(entrada), None, None)
+        elif nome == 'TerrainEstGc':
             import incursao_core
             if not hasattr(incursao_core, 'terreno_esta_gc'):
                 raise DependenciaIA(nome, chamada)
             # Core's TerrainEstGc 0x4762b9: EAX = 0/1 (upper bits 0), EDX pushed and popped, nothing else.
-            return dict(EAX=incursao_core.terreno_esta_gc(self.m, regs['EAX'] & M32)['EAX'] & M32)
-        if nome == 'TerrainGetSacType':
+            saida = incursao_core.terreno_esta_gc(self.m, entrada['EAX'])
+        elif nome == 'TerrainGetSacType':
             # This front's leaf (``entrada_quadro_ia.terrain_get_sac_type``, read-only, every register).
             from entrada_quadro_ia import terrain_get_sac_type
-            entrada = {k: regs.get(k, 0) & M32 for k in REG7}
-            saida = terrain_get_sac_type(self.m, entrada)
-            return {k: saida[k] & M32 for k in REG7 if k in regs or saida[k] & M32 != entrada[k]}
-        if nome == 'TestRessource':
+            saida = terrain_get_sac_type(self.m, dict(entrada))
+        elif nome == 'TestRessource':
             # Economy's ``ordens_economia`` (the single TestRessource): AX food, DX stone, BX parts, one pushed word
-            # (the player). Registers the caller did not pass are kept by the caller (the routine preserves them).
-            entrada = dict({k: regs.get(k, 0) & M32 for k in REG7}, ESP=ESP_CHAMADA)
-            saida = self.ordens().chamar('TestRessource', entrada, list(regs.get('_pilha') or ()))
-            return {k: saida[k] & M32 for k in REG7 if k in regs or saida[k] & M32 != entrada[k]}
+            # (the player).
+            saida = self.ordens().chamar('TestRessource', dict(entrada, ESP=ESP_CHAMADA),
+                                         list(regs.get('_pilha') or ()))
+        if saida is not None:
+            return _convencao_core(regs, entrada, saida)
         if nome == 'BonusGetValEngin' and self.bonus is not None:
             return dict(EAX=self.bonus(regs['EAX'] & 0xff, regs['EBX'] & 0xff, regs['EDX'] & 0xff))
         if nome in ('PlaySnd_PostSound', 'PlaySnd_StopSound') and self.som is not None:
