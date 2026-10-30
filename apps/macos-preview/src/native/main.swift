@@ -267,16 +267,29 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         do {
             func argument(_ key:String,_ fallback:String)->String{if let index=args.firstIndex(of:key),args.count>index+1{return args[index+1]};return fallback}
             let mode=argument("--benchmark-mode","play"),duration=Double(argument("--benchmark-seconds","65")) ?? 0
-            let rate=Double(argument("--game-fps","20")) ?? -1
+            let rate=Double(argument("--game-fps","0")) ?? -1
             guard ["play","test"].contains(mode),duration>=60,duration<=180,rate>=0,rate<=120 else{throw NSError(domain:"InvalidNativeBenchmarkArguments",code:1)}
             let live=try NativeLiveWindow(root:resourceRoot,validationMode:mode=="test");nativeLive=live
             live.gameFPS=rate;live.update={_ in};live.benchmarkInput=args.contains("--benchmark-orders")
             if let index=[15.0,20.0,30.0,60.0,0.0].firstIndex(of:rate){live.rateControl.selectItem(at:index)}
             live.perform("live-reset"){_ in live.perform("live-step"){_ in live.perform("live-play"){_ in
                 if live.benchmarkInput{
-                    DispatchQueue.main.asyncAfter(deadline:.now()+8){live.benchmarkClick(560,528)}
-                    DispatchQueue.main.asyncAfter(deadline:.now()+8.2){live.benchmarkClick(624,432)}
-                    DispatchQueue.main.asyncAfter(deadline:.now()+8.5){live.benchmarkPointer(400,272)}
+                    // Anchor real AppKit gestures to the startup prefix, so uncapped
+                    // play also receives orders before the later dependency horizon.
+                    var gesture=0,lastGestureFrame=128
+                    var inputTimer:Timer?
+                    inputTimer=Timer.scheduledTimer(withTimeInterval:0.01,repeats:true){_ in
+                        live.inputBarrier{frame in
+                            guard gesture<4,frame>=lastGestureFrame+8 else{return}
+                            switch gesture{
+                            case 0:live.benchmarkClick(560,528)
+                            case 1:live.benchmarkClick(624,432)
+                            case 2:live.benchmarkClick(400,272,right:true)
+                            default:live.benchmarkPointer(400,272);inputTimer?.invalidate()
+                            }
+                            gesture+=1;lastGestureFrame=frame
+                        }
+                    }
                 }
                 var lastPulse=ProcessInfo.processInfo.systemUptime,maxPulseGap=0.0,pulses=0
                 let pulse=Timer.scheduledTimer(withTimeInterval:0.05,repeats:true){_ in let now=ProcessInfo.processInfo.systemUptime;maxPulseGap=max(maxPulseGap,now-lastPulse);lastPulse=now;pulses+=1}

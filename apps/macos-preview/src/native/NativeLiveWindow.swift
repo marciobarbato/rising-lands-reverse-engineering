@@ -232,7 +232,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
     let root:URL
     let work=DispatchQueue(label:"risinglands.native.live",qos:.userInitiated)
     var validationMode:Bool
-    var gameFPS=20.0
+    var gameFPS=0.0
     var nextGameTime=0.0
     var runID:UInt64=0
     var presenter:NativePlayPresenter?
@@ -289,16 +289,16 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         }
         modeControl.target=self;modeControl.action=#selector(changeMode);modeControl.selectedSegment=validationMode ? 1:0
         modeControl.frame=NSRect(x:15,y:66,width:190,height:25)
-        rateControl.addItems(withTitles:["15 quadros/s","20 quadros/s (nominal)","30 quadros/s","60 quadros/s","Sem limite"]);rateControl.selectItem(at:1)
+        rateControl.addItems(withTitles:["15 quadros/s","20 quadros/s","30 quadros/s","60 quadros/s","Original (sem limite)"]);rateControl.selectItem(at:4)
         rateControl.target=self;rateControl.action=#selector(changeRate);rateControl.frame=NSRect(x:220,y:66,width:225,height:25)
         rateControl.isEnabled = !validationMode;window.contentView?.addSubview(modeControl);window.contentView?.addSubview(rateControl)
         presenter=try metal.makePlayPresenter()
         window.center();window.makeKeyAndOrderFront(nil)
     }
-    func benchmarkClick(_ x:Double,_ y:Double){
+    func benchmarkClick(_ x:Double,_ y:Double,right:Bool=false){
         window.makeKeyAndOrderFront(nil);window.makeFirstResponder(metal)
         let point=metal.convert(NSPoint(x:metal.bounds.width*x/800,y:metal.bounds.height*(1-y/600)),to:nil)
-        for type in [NSEvent.EventType.leftMouseDown,.leftMouseUp]{if let event=NSEvent.mouseEvent(with:type,location:point,modifierFlags:[],timestamp:ProcessInfo.processInfo.systemUptime,windowNumber:window.windowNumber,context:nil,eventNumber:1,clickCount:1,pressure:1){window.sendEvent(event)}}
+        for type in (right ? [NSEvent.EventType.rightMouseDown,.rightMouseUp]:[NSEvent.EventType.leftMouseDown,.leftMouseUp]){if let event=NSEvent.mouseEvent(with:type,location:point,modifierFlags:[],timestamp:ProcessInfo.processInfo.systemUptime,windowNumber:window.windowNumber,context:nil,eventNumber:1,clickCount:1,pressure:1){window.sendEvent(event)}}
     }
     func benchmarkPointer(_ x:Double,_ y:Double){
         let point=metal.convert(NSPoint(x:metal.bounds.width*x/800,y:metal.bounds.height*(1-y/600)),to:nil)

@@ -10,7 +10,7 @@ def main():
     p.add_argument('--app',required=True,type=Path)
     p.add_argument('--output',required=True,type=Path)
     p.add_argument('--mode',choices=('play','test'),default='play')
-    p.add_argument('--game-fps',type=float,default=20)
+    p.add_argument('--game-fps',type=float,default=0)
     p.add_argument('--orders',action='store_true',help='Dispatch actual AppKit selection and movement clicks')
     p.add_argument('--seconds',type=float,default=65)
     a=p.parse_args()
