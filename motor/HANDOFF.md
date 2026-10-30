@@ -1534,3 +1534,22 @@ published windows above; S1/D1 mission completion is outside this verification.
 Reproductions use the coordinated lease, fresh output paths and the explicit
 release library argument for `player_proof.py`. Every job stayed within its
 1,140-second execution bound after lease grant. No merge into main was performed.
+
+## Chain9 piece1 — current-main K1 reproduction
+
+Main `6cdbc5a` was fast-forwarded into `feat/codex-rust-engine` before this work.
+No native source, ABI1.6, Graphics1.9 contract, mask or prior profile changed.
+[Fresh report](validation/chain9/piece1/summary.json) reproduces K1 frames129–629:
+**501/501** original/pinned-Python indicator/input/order frames, **1,002/1,002**
+paired play/audit phases and **501/501** advancing original/Python surfaces.
+Pixels, raster calls, carried cache/background, effects and exact recorded
+AffText requests all pass. No stop occurs; the old frame141 origin stop is
+already resolved by the committed Graphics1.9 port. This is not whole-state K1
+coverage. The engine gate is queued separately and is not yet claimed here.
+
+The retained S1 baseline passes **2,418 frames129–2546** against the chain8
+Python/original indicators, inputs and orders. In frame2547 the pinned Python
+raises `EnginSetType` at call0x420f69 while Rust continues. Therefore the strict
+same-stop reader reports a dependency-contract difference, not a passing S1
+continuation. The next piece will test all five new Core owner adapters against
+the original capture and use a separate commit-backed continuation profile.
