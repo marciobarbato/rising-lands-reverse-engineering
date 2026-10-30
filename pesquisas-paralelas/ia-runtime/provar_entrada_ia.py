@@ -139,10 +139,14 @@ def main():
     ap.add_argument('--quadros', type=int, help='frames after 128 (default: the probe\'s frames)')
     ap.add_argument('--nucleo-ref', help='directory with Core\'s construcao_core.py (read-only extraction)')
     ap.add_argument('--saida', required=True)
+    ap.add_argument('--progresso', type=int, default=0,
+                    help='emit a progress record to stderr every N completed frames (0 disables)')
     ap.add_argument('--diagnostico-planejamento', action='store_true',
                     help='diagnostic only (never evidence; --saida under .local/): a Graphics display-path stop is '
                          'recorded and the drawing taken as writing no logic byte')
     a = ap.parse_args()
+    if a.progresso < 0:
+        ap.error('--progresso must be nonnegative')
     if a.diagnostico_planejamento and not (ROOT / a.saida).resolve().is_relative_to((ROOT / '.local').resolve()):
         raise SystemExit('A planning diagnostic writes under .local/ only')
     if a.nucleo_ref:
@@ -194,6 +198,9 @@ def main():
                     dif['orders'] = dict(python=ord_py, probe=ord_ref)
                 quadros.append(dict(frame=k, equal=not dif, orders=len(ord_ref),
                                     dgroup_sha256_python=None))
+                if a.progresso and len(quadros) % a.progresso == 0:
+                    print(json.dumps(dict(progress_frame=k, completed_frames=len(quadros),
+                                          equal=not dif)), file=sys.stderr, flush=True)
                 n_py = sum(t['frame'] == k for t in comp.textos)
                 n_ref = quadros_ref[k].get('entries', {}).get('TextGetMessage', 0)
                 if n_py or n_ref:

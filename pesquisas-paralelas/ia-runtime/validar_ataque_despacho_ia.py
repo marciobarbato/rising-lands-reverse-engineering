@@ -29,10 +29,14 @@ def main():
     from unicorn import x86_const as X
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--saida', required=True)
+    ap.add_argument('--captura', default=str(CAPTURE.relative_to(ROOT)))
     args = ap.parse_args()
-    raw = CAPTURE.read_bytes()
+    raw = (ROOT/args.captura).read_bytes()
     cap = json.loads(raw)
+    if cap['original_sha256'] != ORIGINAL_SHA256 or not cap['s1']['code_unchanged']:
+        raise ValueError('Expected an unchanged intact original S1 capture')
     case, = cap['cases']
+    phase = case['phase']
     path = (ROOT/case['local_entry_state']['path']).resolve()
     if not path.is_relative_to((ROOT/'.local').resolve()):
         raise ValueError('Full original entry inputs must remain ignored')
@@ -45,8 +49,8 @@ def main():
     mapa, owner = mundo(blocks)
     m = MemoriaMapaRapida(mapa)
     ctx = ContextoEncadeado(OriginalImage(), 'exibicao', modo='prova')
-    p, _ = provedores(mapa, owner, m, ctx, Registro('frame11663'), JanelasDeclaradas(),
-                       Travessias({}, {}, lambda m: {}), 'frame11663', regs)
+    p, _ = provedores(mapa, owner, m, ctx, Registro(phase), JanelasDeclaradas(),
+                       Travessias({}, {}, lambda m: {}), phase, regs)
     events = []
     for name in ('iagUnitSendMessage', 'EnginNextEtape:state1'):
         if name in p:
@@ -75,10 +79,10 @@ def main():
             ret = int.from_bytes(cpu.mem_read(r['ESP'], 4), 'little')
             native_events.append(dict(routine='iagUnitSendMessage', site=hex(ret-5),
                 arguments=dict(unidade=r['EAX'] & 65535, mensagem=r['EDX'] & 255, alvo=r['EBX'])))
-        else:
+        elif address == 0x456886:
             native_events.append(dict(routine='EnginNextEtape:state1', site=hex(address),
                                       arguments=dict(unidade=r['EDI'] & 65535)))
-    for address in (0x4829c8, 0x456886):
+    for address in (0x4829c8, 0x456886, 0x454587):
         uc.hook_add(unicorn.UC_HOOK_CODE, observe, begin=address, end=address)
     uc.ctl_flush_tb()
     # Preserve the actual original caller/stack, stop at its observed return.
@@ -97,13 +101,16 @@ def main():
                                enumerate(zip(pydata, native)) if a != b][:12]))
     reproduced = sorted(changes, key=lambda x: int(x[0], 16)) == case['changed_bytes'] and all(
         output[k] == int(v, 16) for k, v in case['exit_registers'].items())
-    handoffs = events == native_events and len(events) == 2
-    result = dict(equal=not differences and reproduced and handoffs, memory_differences=differences,
+    handoffs = events == native_events and bool(events)
+    passages_equal = all(passage in native_registers for passage in case.get('passages', []))
+    result = dict(equal=not differences and reproduced and handoffs and passages_equal, memory_differences=differences,
+                  frame=case['frame'], unit=regs['EAX'], passages_equal=passages_equal,
                   native_capture_reproduced=reproduced, handoffs_equal=handoffs, handoffs=events,
                   native_handoff_registers=native_registers,
                   original_changed_bytes=len(changes), game_blocks_compared=len(blocks)-1)
     data = dict(schema='rising-lands/s1-attack-dispatch-differential/1', original_sha256=ORIGINAL_SHA256,
         capture_sha256=hashlib.sha256(raw).hexdigest(), comparisons=1, equal=int(result['equal']), cases=[result],
+        capture=args.captura,
         source_revision=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
         source_sha256={n: hashlib.sha256((Path(__file__).parent/n).read_bytes()).hexdigest() for n in
             ('ataque_despacho_ia.py', 'proxima_etapa_quadro.py', 'composicao_encadeada_ia.py',

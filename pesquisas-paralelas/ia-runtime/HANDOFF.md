@@ -1181,3 +1181,23 @@ type.RECHARGE is20 and modifier3 is0; native stores1 at`0x474a9356`
 bytes), restores all six saved registers, and returns EAX1/ESP+4. Its full
 entry state stays ignored/hash-bound. This capture is committed before the
 reload increment is added; Core already owns the arithmetic.
+
+### Reload binding and fresh parent differentials
+
+After original checkpoint `6985c60`, the prelude calls Core's existing
+`combate.avancar_recarga(atual, recarga_tipo, modificador3)`. It performs the
+signed limit comparison, masks the u16 inputs and advances only below the
+limit. AI/runtime places the word store at`0x454587..0x454591` only when the
+result changes, before the later scan/fatigue/collision/state body. No counter
+clamp, extra store, synthetic bonus or copied arithmetic is introduced.
+
+The generalized leased parent validator freshly reruns both real entries:
+frame11663's detection→attack transition and frame11742's first reload. Each
+reproduces native return registers/changed bytes and compares all25,197 game
+blocks plus ordered semantic handoffs; **2/2 equal, zero mismatches**. The
+reload proof also reproduces every captured instruction-passage register file,
+including the actual limit20/counter0 entry. Reports:
+`validacao/ataque-despacho-native.json` and `validacao/recarga-despacho-native.json`.
+Three focused dispatcher tests pass. Strict/planning and full gate reruns follow.
+The indicator's optional `--progresso N` logs only completed-frame progress to
+stderr, preserving the final JSON and comparison/stopping semantics.

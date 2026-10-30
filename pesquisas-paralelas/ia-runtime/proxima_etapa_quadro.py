@@ -66,8 +66,11 @@ def proxima_etapa_unidade(m, provedores, unidade, tabelas):
     limite = m.u16(0x4965de + 50 * tipo_atual)
     bonus = _chamar(provedores, 'BonusGetValEngin', 0x45456e, jogador=m.u8(rr), tipo=tipo_atual, seletor=3,
                     ecx=rr) & 0xffff
-    if m.u16(rr + 0x102) < limite - bonus:
-        _parar('EnginNextEtape reload advance', 0x454587)
+    from combate import avancar_recarga
+    atual = m.u16(rr + 0x102)
+    seguinte = avancar_recarga(atual, limite, bonus)
+    if seguinte != atual:
+        m.u16(rr + 0x102, seguinte)
     if tipo >= 0x10:
         _parar('EnginNextEtape type >= 0x10 gate', 0x45459a)
     if 0 <= (tipo - 0xb) & 0xff <= 5:

@@ -6,7 +6,7 @@ attack dispatch in `64128b5`. Oracle is intact RISING.EXE SHA-256
 Indicators start after128, consume replay-checked S1 `bab6c7c`, and request
 all 16,922 remaining frames. No first difference has been observed.
 The attack-bound strict/planning indicators and 140-test gate have passed their
-compared prefixes. Native capture of the next reload stop is pending.
+compared prefixes. Reload is now bound/native-proved; the next strict/planning reruns are pending.
 
 | Equal through / stop frame | Routine / call | Owner | Exact contract / status |
 |---|---|---|---|
@@ -16,7 +16,7 @@ compared prefixes. Native capture of the next reload stop is pending.
 | **10800 / between_frames10801, strict** | AffGame `0x417698`, outer CALL `0x475063`, guard `0x41591f` | **Graphics** | Live monster count2; owner guard proves only0/1. Extend native display domain to2. Declared Graphics planning bypass exists; exact native observation below is at11501. |
 | 11662 / frame11663, detection resolved | iabDetection_AjouteEnnemiOuAlerteConflit `0x489b5a`, indirect CALL `0x482e2e` (return `0x482e31`) | AI/runtime binding, Combat synchronous model | Native EAX17, EDX8, EBX17, ECX`0x51ac40`, ESI17, EDI19, EBP`0x2007e18`, ESP`0x2007df8`; group19/battle1 → EAX`0x512380`, EDX1, five preserved. `ad5147a`, 35 fresh native comparisons/0 mismatches; passes latest planning. |
 | 11662 / frame11663, attack binding resolved | EnginNextEtape state1/24 `0x456886`; nested CalculAttaqueEngin `0x451914`, CALL `0x4568a3` | AI/runtime binding, Combat body | DI17, ESI`0x474a9254`; EAX1, EBX=EDX`0x1254`, ECX`0x474a9254`, EBP`0x14`, ESP`0x2007e2c`. Combat void body to`0x454ccd`. Bound in `64128b5`; fresh full native parent differential equals all25,197 game blocks/22 changed bytes, zero mismatches; passes planning through11741. |
-| **11741 / frame11742, planning** | EnginNextEtape reload branch `0x454587` in `0x45442c`, CALL `0x456ead` | **AI/runtime placement, Core arithmetic** | Signed compare of u16 unit+0x102 against type.RECHARGE minus modifier3; native increment branch not yet bound. Original first-taking parent capture queued before translation. |
+| 11741 / frame11742, reload bound; rerun pending | EnginNextEtape reload branch `0x454587` in `0x45442c`, CALL `0x456ead` | AI/runtime placement, Core arithmetic | Native EAX0, EBX0, ECX=ESI`0x474a9254`, EDX3, EDI17, EBP20, ESP`0x2007e2c`: unit17 reload0, limit20, modifier0 → u16`[0x474a9356]`=1. Original243-state capture `6985c60` precedes binding Core `avancar_recarga`. Fresh full parent equals all25,197 game blocks/three changed bytes, zero mismatches; the earlier attack parent is freshly equal too. |
 
 Latest completed strict: **10,672 equal frames, 129–10800**, no difference,
 [s1-ataque-strict.json](validacao/s1-ataque-strict.json).

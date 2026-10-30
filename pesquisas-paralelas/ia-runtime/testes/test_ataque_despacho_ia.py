@@ -40,6 +40,21 @@ class AttackDispatch(unittest.TestCase):
         for name, digest in report['source_sha256'].items():
             self.assertEqual(hashlib.sha256((OWNED/name).read_bytes()).hexdigest(), digest)
 
+    def test_reload_increment_native_parent_equal(self):
+        report = json.loads((OWNED/'validacao/recarga-despacho-native.json').read_text())
+        self.assertEqual((report['comparisons'], report['equal']), (1, 1))
+        c, = report['cases']
+        self.assertEqual((c['frame'], c['unit']), (11742, 17))
+        self.assertTrue(c['native_capture_reproduced'])
+        self.assertTrue(c['passages_equal'])
+        self.assertTrue(c['handoffs_equal'])
+        self.assertEqual(c['memory_differences'], [])
+        self.assertEqual(c['original_changed_bytes'], 3)
+        self.assertEqual(c['game_blocks_compared'], 25197)
+        self.assertEqual(c['native_handoff_registers'][0]['address'], '0x454587')
+        for name, digest in report['source_sha256'].items():
+            self.assertEqual(hashlib.sha256((OWNED/name).read_bytes()).hexdigest(), digest)
+
 
 if __name__ == '__main__':
     unittest.main()
