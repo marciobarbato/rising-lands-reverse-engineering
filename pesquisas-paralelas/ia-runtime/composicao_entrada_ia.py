@@ -90,6 +90,17 @@ class RoteiroEntrada:
                 ultima = self.quadros[q][1][-1]
         return MSG_LACO if ultima is None else (janela, *ultima)
 
+    def palavras_salvas(self, k):
+        """ProgIteration's saved (EDX, ECX, EBX) words when frame k + 1 starts: WndProc leaves EDX = wParam and
+        ECX = lParam of the last message dispatched at a frame <= k, the message loop keeps them through frames
+        without messages, and EBX enters every loop as the saved EBX, 0 since the start ((0, 0, 0) when no message
+        was dispatched)."""
+        ultima = None
+        for q in sorted(self.quadros):
+            if q <= k and self.quadros[q][1]:
+                ultima = self.quadros[q][1][-1]
+        return (0, 0, 0) if ultima is None else (ultima[1] & 0xffffffff, ultima[2] & 0xffffffff, 0)
+
     def iniciar_quadro(self, k):
         if self.fila:
             raise RuntimeError(f'Messages of frame {self.quadro} were not consumed: {self.fila}')
@@ -166,6 +177,9 @@ class ComposicaoEntrada(ComposicaoQuadros):
         super().__init__(estado, captura_quadro, entrada, captura_m1, **kw)
         self.roteiro = roteiro
         self.palavras_msg = MSG_LACO
+        # ProgIteration's saved (EDX, ECX, EBX) words entering the first between_frames phase: (0, 0, 0) at the
+        # file's start; at a checkpoint start, those the loop left (``RoteiroEntrada.palavras_salvas``).
+        self.palavras_inicio = (0, 0, 0)
         self.textos = []              # TextGetMessage boundary events (frame, call site, message number)
         from inventario_ia_runtime import OriginalImage
         self.imagem = OriginalImage()
@@ -301,7 +315,7 @@ class ComposicaoEntrada(ComposicaoQuadros):
 
     def executar(self, n):
         from oraculo_quadro_missao import nomes_fases
-        palavras, entrada_anterior = (0, 0, 0), None
+        palavras, entrada_anterior = tuple(self.palavras_inicio), None
         for k in range(self.inicio + 1, self.inicio + n + 1):
             entre, quadro = nomes_fases(k)
             if entrada_anterior is None:

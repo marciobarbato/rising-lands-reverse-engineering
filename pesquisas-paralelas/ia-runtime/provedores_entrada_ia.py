@@ -177,7 +177,14 @@ def construcao_viva(m, *, som, bonus, provedores_nucleo=None):
                                                     list(r['pilha']))),
     }
 
+    import inspect
+    som_sitio = 'chamada' in inspect.signature(som).parameters
+
     def externo(nome, sitio, regs):
+        if nome == 'PlaySnd_PostSound' and som_sitio:
+            # The boundary with its declared call address (``sitio``) and pushed words.
+            return dict(EAX=som('PlaySnd_PostSound', {k: regs[k] & M32 for k in ('EAX', 'EDX', 'EBX', 'ECX')},
+                                list(regs['pilha']), chamada=sitio))
         f = funcoes.get(nome)
         if f is None:
             raise DependenciaIA(nome, sitio)
@@ -268,6 +275,9 @@ def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None, estrutura
                      'SetEnginSelectRentreBatiment', 'BatimentRetireColon'):
             funcoes[nome] = donos.registros(nome)
         funcoes['EnginSelectPeutEntrer'] = donos.registros('EnginSelectPeutEntrer')
+        # Tag 17 (0x45f1a9): Economy's InitRecruteTroupe (AL unit type, DL player), its callees through DonosM3.
+        funcoes['InitRecruteTroupe'] = lambda regs: {k: v for k, v in donos.caverna.chamar(
+            'InitRecruteTroupe', dict({k: regs.get(k, 0) & M32 for k in REG7}, ESP=0)).items() if k != 'ESP'}
         funcoes['MiniMapSetPos'] = lambda x, y: donos.visao.chamar(
             'MiniMapSetPos', dict(dict.fromkeys(REG7, 0), EAX=x & M32, EDX=y & M32, EBX=0, ECX=1))
     if alocar is not None:

@@ -314,6 +314,7 @@ def comparar_janela(nome, quadros=None, n_parte=0, planejamento=False):
                              roteiro, inicio=inicio, alocacoes=alocacoes, regs_inicio=regs, planejamento=planejamento)
     if inicio != INICIO:
         comp.palavras_msg = roteiro.ultima_mensagem(inicio, MemoriaMapaRapida(comp.mapa).u32(JANELA))
+        comp.palavras_inicio = roteiro.palavras_salvas(inicio)
     contexto = ContextoExibicao(OriginalImage(), politica['display_roots'])
 
     comandos = [json.loads(x) for x in lzma.decompress(arquivo(nome, JANELAS[nome]['comandos']).read_bytes())
@@ -406,7 +407,8 @@ def comparar_janela(nome, quadros=None, n_parte=0, planejamento=False):
                                                 'nothing and keeps the count)'),
                                      declared=None if n_parte == 0 else dict(
                                          entry_registers=regs, msg_words=[hex(x) for x in comp.palavras_msg],
-                                         cursor=list(roteiro.xy), saved_frame_words=[0, 0, 0])),
+                                         cursor=list(roteiro.xy),
+                                         saved_frame_words=[hex(x) for x in comp.palavras_inicio])),
                   full_states=[f for f, v in fases.items() if v.get('reference_integrity', {}).get(
                       'checkpoint_full_state_equal')]),
         mask=dict(path=m['mask']['path'], sha256=m['mask']['sha256'], masked_bytes=mascara.bytes,
