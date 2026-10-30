@@ -1,7 +1,7 @@
 # Graphics handoff
 
-Latest dispatch: render API **1.8**, completed CAVE, lodging, delivery and scrolling, 2026-10-29.
-Published 1.7 is retained. See the final section below and [M3_WINDOWS_API18.md](M3_WINDOWS_API18.md).
+Latest dispatch: render API **1.9**, exact scripted view origins and P4/P5 harvest screens, 2026-10-30.
+Published 1.7/1.8 are retained. See the final section below and [M3_HARVEST_GRAPHICS.md](M3_HARVEST_GRAPHICS.md).
 Delivery is feature-branch push only; the coordinator owns review, main integration and acceptance.
 
 Research round: 2026-10-28. Chat `01a18262-cdd5-7b13-84af-0d6eca1a43eb`.
@@ -859,3 +859,78 @@ The suite replays the new 515 original leaf cases, prior 600-case facade and oth
 representative exact surfaces/arguments, default glyph dependencies, unknown-state guards and current full-report
 source pins. Historical matrices were replayed from committed native evidence rather than recaptured. P4/P5 and
 glyph-enabled native execution were not run; they are explicit scope gaps, not silently skipped test failures.
+
+## Render API 1.9 — exact scroll origins and harvest screens (2026-10-30)
+
+**Original first.** Main `ef52cb027ad202c9d4b9568dd13bbfb15d6c9c63` was fetched and merged before research.
+`5d0e736` declares the case matrix, pins all K1/P4/P5 input/phase records, and adds the original-only recorder.
+`2e24188` records P5 129–728 and the first isolated K1 origin observations; `99c5952` records the complete bounded
+K1 retry; `42aef49` records P4 129–728; `fbf6200`/`8a35073` record P4/P5 through 1328. Each newly translated origin
+or work branch has native evidence committed first. The intact executable is still
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`, native code hash
+`02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4`.
+See [M3_HARVEST_GRAPHICS.md](M3_HARVEST_GRAPHICS.md) for the declared matrix, reproduction and final ledger.
+
+At each first actual native AffGame entry of a new origin, the isolation tool saves CPU context, all state blocks,
+stack, declared host state and DirectDraw pixels; it runs the original to its caller return with no declared writes,
+records the full surface and DGROUP/CRT/heap differences, and restores the exact entry. The ordinary phase then
+reproduces the published whole-state and phase-surface hashes. A checkpoint-serialization error in the first K1
+attempt is preserved with its observations; detaching the capture observer fixes it, and the 61-frame retry passes.
+No reconstructed state creates a view origin. All view changes come from the original arrow/minimap input routines.
+
+**API/domain.** `VERSAO_RENDER_QUADRO = (1,9)` is additive. Arguments, required regions, result fields, indexed/RGBA
+format, cache and callbacks are unchanged. The engine port can consume `camadas_colheita_m3.json` alongside the
+existing 1.8 tables. No sprite asset or historical evidence is replaced.
+
+The display logic-effect provider now distinguishes the two routines: `ORIGENS_PROVADAS` is the 143-origin AffGame
+domain, adding 33 K1 scroll positions, P4 (10,16) and P5 (31,0). `ORIGENS_RESTOREALL_PROVADAS` retains 108 origins.
+The new AffGame calls do not prove RestoreAll; other origins remain `0x415B77`. Existing viewport, structure,
+habitation, monster/projectile and shake guards remain. The isolated effect comparison retains the original
+M2.3 display mask; it separately checks AI's existing `affgame_hud_ia` flag stores at 0x4E05A2 and leftover EAX.
+No additional logic or CRT changes are accepted. Display bank metadata, BLOCS cache payloads and keys retain their
+declared allocation identities. The new origin guard never returns a blanket empty effect for arbitrary map positions.
+
+P5 adds owner/camera 0 builder type 7 state 5 with raw count 8, no effects/oscillation, direction 1..16 and phase 0..7.
+Task 0 uses base 1338/1466 for empty/nonempty bag, fixed stride 8, anchor (26,26), and shadow 10784 at shifted origin+(2,26).
+Selection frame → order markers → shadow/body → existing health/material/experience tail is preserved.
+Tasks 1/2 return before selection/marker/body/information overlays, as the original does while mining and for the
+one-frame mine exit. P5 frame 594 proves approach drawing, 610 proves mining, 760 exit, 761 normal carried-bag drawing.
+Other builder work tasks remain `0x414A8A`; all previous owner/count/health/bag/fatigue guards remain addressed stops.
+P4's farmer work and tooltip layouts use the existing 1.8 data. Rendering performs no task/resource/world updates.
+
+**Text/mutations.** Comparisons use the existing strict recorded AffText boundary: exact bytes/font/rectangle/flags
+and the entire pre-text surface must match before accepting non-execution. It is never a production default.
+Default rendering still reports missing glyph dependencies at `0x459454`. TextGetMessage's declared EAX 0 boundary
+and the unavailable `[0x5099A4]` pointer remain unchanged. Save-background/restore and all exported display effects
+keep their 1.8 order; caller memory is immutable. Full chained validation carries only Python-produced pixels,
+terrain cache and saved background across capture boundaries, without native repairs or masked pixels.
+
+**Final evidence and validation.** `5593df2` records both probes through 1928, `7ecb551` through 2528, and `f5c89bc`
+their final native 601-frame segments through 3129. Together with the preceding evidence, P4/P5 have 6,002 native
+frames; every whole-state and both phase-surface hashes match the published probes. Native loops total 3,195.133s,
+maximum 377.142s before xz packaging; the complete 61-frame K1 retry takes 87.765s. All native runs use the heavy lease
+and remain below 20 minutes; no Mac mini continuation is needed. Final P4 Python replay is paused during macOS's
+exclusive timing lease and resumed under a normal lease.
+
+`validacao/origens-colheita-final.json`: **43 calls / 35 unique origins / 0 mismatches**. Only established display
+allocations change; no CRT or additional logic write is accepted, and the existing AI flag/EAX model matches every
+original return. Provider/data/comparison/recording hashes are pinned. `validacao/colheita-graficos-final.json`
+verifies identical current source pins before combining independent probe chains:
+
+| Probe | Drawn frames | Full surfaces equal / total | First difference / stop |
+|---|---|---:|---|
+| K1 | 129–629 | 501 / 501 | None |
+| P4 | 129–3129 | 3001 / 3001 | None |
+| P5 | 129–3129 | 3001 / 3001 | None |
+
+Total 6,503 phases, 346,644 raster calls, 2,646 attested AffText boundaries; zero pixel/argument/projected-display-effect
+mismatches. Only the same two DD binding-pointer exclusions apply to effects, never pixels. K1/P4/P5 active replay
+wall times excluding capture waits are 66.241/467.933/445.201s. Without a text provider P4 first stops at 484,
+`0x459454`, after 355 complete phases; K1/P5 have no AffText calls in these windows.
+
+Fresh leased `--quadros 128 --hud`: **128/128**, no stop/difference, all prior 1.4/1.5/1.7/1.8 hashes unchanged,
+native-previous pixels and carried caches equal. Lease wall time 525.101s. Final leased domain gate:
+**267 tests, zero skips, PASS**, 143.534s (`validacao/api19-graphics-tests-final.log`). Historical matrices remain
+unchanged and are replayed; glyph-enabled original execution is not run. Documentation links are checked again
+after final report edits. Unproved AffGame origins, new RestoreAll positions, other builder work tasks, glyphs and
+prior unrelated guards remain named stops. This is a feature-branch push, without main integration or acceptance.
