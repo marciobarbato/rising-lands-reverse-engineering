@@ -2,10 +2,11 @@
 
 [S1_COVERAGE](S1_COVERAGE.md) lists 16 Core routines that S1 reaches with no native differential on main. This stage targets 14 of them, original-first, on the S1 trajectory itself.
 
-**Status (stopped mid-stage, 2026-10-30 03:40):**
+**Status (resumed under Codex, 2026-10-30):**
 - Captures `a` and `b` are committed.
 - Capture `c` is NOT RUN.
-- The translations `buscas_bloqueios` and `consultas_luta` are written but NOT natively validated. The one exception is a smoke run: window `a` to frame 2360, ChercheVeget/ChercheGc, 37 comparisons, 0 mismatches (report not committed).
+- Window `a` is natively validated: **638 comparisons, 0 mismatches**, all seven registers, ESP, changed bytes and boundary requests; 951 S1 frame states reproduced, original code unchanged. Report: `relatorios/lacunas-s1-a-emulada.json`.
+- Window `b` comparison is running. `consultas_luta` is still awaiting the original-only `c` capture and its native differential.
 - The next steps are in "Resume".
 
 ## Bench: S1 resumed from its own snapshots
@@ -34,6 +35,19 @@ python3 "…/heavy_lease.py" core -- python3 -B ferramentas/validar_lacunas_s1.p
 ```
 
 ## Translations
+
+### Completed native comparisons
+
+| Window | Routine | Cases | Mismatches |
+|---|---|---:|---:|
+| a | ChercheVeget | 42 | 0 |
+| a | ChercheGc | 32 | 0 |
+| a | ChercheGcLibre | 20 | 0 |
+| a | TypeEnginPeutEcraser | 198 | 0 |
+| a | IsIndirectlyBlocking | 294 | 0 |
+| a | IsDirectlyBlocking | 52 | 0 |
+
+These are fresh native comparisons under `heavy_lease.py`, not historical smoke totals. The committed original-only capture was reproduced exactly in every case. No translation correction was needed for window `a`.
 
 All take `chamar(nome, regs, pilha=())` with EAX..EBP and an optional ESP, and return EAX..EBP and ESP, every register. The full contracts, with addresses, are in the module docstrings.
 
