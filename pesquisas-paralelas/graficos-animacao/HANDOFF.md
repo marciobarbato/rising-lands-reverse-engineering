@@ -1012,3 +1012,10 @@ hashes equal the frozen 1.4/1.5/1.7/1.8/1.9 results. The construction-type15 cyc
 separately from the view-grid translation. The current raw structure report retains the independently identified
 next full-provider stop at P3 frame 309, construction projectile type16; that type is not silently admitted by the
 type15 guard. Its original cycle is captured separately before any further guard change.
+
+`1f05c41` records type16's complete original lifetime at P3 frames309–324, all16 phases, same slot0/state1 domain.
+Both passes reproduce published states/surfaces and write no DGROUP/CRT/arena byte (10.873/13.866s). The additive
+guard now admits both construction types15/16 with the same explicit bounds. The current full-provider input scan
+has no stop in P3 or P6; P7 first stops at frame3217, view origin `(10,15)`, pending the independent origin matrix.
+Seven focused current-provider/native-evidence tests pass, zero skips, 6.336s (`validacao/cave-projeteis-focused.log`).
+The preceding full273-test gate and fresh128/128 HUD regression remain green; no pixel code changes.

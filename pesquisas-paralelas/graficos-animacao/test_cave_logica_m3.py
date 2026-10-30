@@ -70,3 +70,14 @@ class CaveLogicaM3(unittest.TestCase):
                      'verificacao-cadeia-m22-v2-api19-128.json'):
             old=json.loads((AQUI/'evidencias'/name).read_text())
             self.assertEqual(hashes,[r['chained']['sha256'] for r in old['rows']],name)
+
+    def test_original_complete_projectile16_cycle(self):
+        d=json.loads(lzma.decompress((AQUI/'evidencias/projetil16-escritas-ciclo-p3.json.xz').read_bytes()))
+        self.assertTrue(d['passes_equal']);self.assertEqual(d['passes'][0]['checks'],d['passes'][1]['checks'])
+        for p in d['passes']:
+            self.assertEqual(p['observation']['changing_bytes'],{})
+            self.assertEqual(p['observation']['outside_display_readers'],[])
+            self.assertEqual([(r['index'],r['kind'],r['state'],r['phase']) for r in p['observation']['projectile_calls']],
+                [(0,16,1,phase) for phase in range(16)])
+        cap=CapturaLimitada(AQUI/'evidencias/janela-P3-301-1050-api18.json.xz');row=next(r for r in cap.d['rows'] if r['frame']==309)
+        self.assertEqual(desenhar_jogo(EntradaEfeitos(cap,row)).escritas,())

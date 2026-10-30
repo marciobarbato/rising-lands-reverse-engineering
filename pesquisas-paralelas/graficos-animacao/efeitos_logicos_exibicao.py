@@ -107,12 +107,12 @@ def _guardas(memoria, rotina, habitado=None):
     def projetil_provado(i):
         r = pool + 56*i
         if memoria.u8(r) in TIPOS_PROJETIL_PROVADOS:return True
-        # Native P3 frames245..260: all16 phases, active state1, slot0; no DGROUP/CRT/heap writer.
-        return (rotina == 'AffGame' and i == 0 and memoria.u8(r) == 15 and memoria.u8(r+2) == 1
+        # Native P3 frames245..260 / 309..324: types15/16, all16 phases, active state1, slot0; no logic writer.
+        return (rotina == 'AffGame' and i == 0 and memoria.u8(r) in (15,16) and memoria.u8(r+2) == 1
                 and memoria.u8(r+0x18) < 16)
     if len(ativos) > 1 or any(not projetil_provado(i) for i in ativos):
         raise DependenciaExibicao(rotina, 0x46ff70, f'projectile slots {ativos}: captured only one raid effect '
-                                  f'projectile of type {sorted(TIPOS_PROJETIL_PROVADOS)} or the native AffGame type15 cycle')
+                                  f'projectile of type {sorted(TIPOS_PROJETIL_PROVADOS)} or the native AffGame type15/16 cycles')
     return tuple(lidas)
 
 
