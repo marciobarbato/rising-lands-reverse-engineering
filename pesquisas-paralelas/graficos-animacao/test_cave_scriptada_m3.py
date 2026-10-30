@@ -32,7 +32,7 @@ class CaveScriptadaM3(unittest.TestCase):
                     self.assertEqual(raster.calls,row['blits'])
                     self.assertFalse(boundary.pending)
                     if row['text_boundaries']:
-                        strict=cap.render(row,catalog)
+                        strict=cap.render(row,catalog,texto=False)
                         self.assertEqual(strict.parada['endereco'],'0x00459454')
                         self.assertEqual(strict.pixels,cap.blob(row['text_boundaries'][0]['surface_before']))
 

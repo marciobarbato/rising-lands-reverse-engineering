@@ -1439,3 +1439,79 @@ No other owner's files or original inputs were removed. The original new native
 archives and resumable checkpoints remain in ignored `.local/`; the published
 transport set is lossless. Workspace cleanup/offloading beyond Graphics ownership
 remains with maintenance. This did not cause a capture limit or skipped comparison.
+
+## Normal bitmap text, render API 1.11 — 2026-10-30
+
+Merged integrated `origin/main` first (fast-forward to `1531678`). The normal
+renderer now installs the already original-proved bitmap provider when `texto=None`.
+An explicit callback still overrides it; `texto=False` retains the named missing
+provider dependency for diagnostics. This changes no historical native fixture or
+probe boundary and does not install the validation-only no-execution adapter in play.
+
+Inputs/domain: the existing memory reader, prior 480,000 indexed pixels, original
+catalog/palette, live inclusive clip words, language/multibyte words, original literal
+text bytes, signed16 rectangle, font1..6 and flags(colour0,clip0/1). Font metrics,
+signed centering/wrapping, unsupported modes and the callback ABI are detailed in
+[AFFTEXT_RENDER_CONTRACT.md](AFFTEXT_RENDER_CONTRACT.md). Tooltip composition saves
+GetBob background before its frame/shading, draws glyphs before the cursor, restores
+screen dimensions, and exports the original ordered DGROUP/saved-background effects.
+The caller carries background/cache to the following frame; memory never mutates.
+
+Original identity: intact `RISING.EXE` SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`, code
+`02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4`.
+AffText is `0x459454`, glyph copy `0x45b247`, bitmap metrics `0x45add4` via
+`[0x508f6c]`. InitTextLangue `0x479383` and TextGetMessage `0x478a3b` remain
+declared non-executed in this display scenario: **TEXTES.TXT is not loaded**.
+The tooltip's actual literal bytes draw without a resource lookup. This is the
+user-authorized declared-boundary scope, not a claim of a fully text-enabled retail
+mission initialization. Opaque MenuInit pointers retain their separate stop.
+
+Fresh original evidence `evidencias/affgame-glifos-nativos.json.xz` first replays
+each complete recorded AffGame call with historical boundaries and requires its
+full surface/raster sequence to match. It restores the identical actual entry,
+removes only AffText's boundary, and executes the original again. No translated
+renderer is executed by the producer and no expected glyph is injected. The two
+passes cover **536 calls each**, **35 real AffText calls**, and **1,344/1,344**
+loaded bitmap metric entries in **290.730 s**, through the native lease.
+
+The normal public renderer matches **536/536** glyph-enabled native full surfaces,
+all raster calls and every DGROUP effect (only the two previously proved process
+pointer words excluded), with zero stops/mismatches:
+
+| Probe/window | Equal full surfaces | Real AffText calls |
+|---|---:|---:|
+| P4 484–488 | 5/5 | 5 |
+| K1 129–629 | 501/501 | 0 |
+| S1 141–150 | 10/10 | 10 |
+| S1 1985–1989 | 5/5 | 5 |
+| S1 2571–2575 | 5/5 | 5 |
+| S1 3181–3185 | 5/5 | 5 |
+| S1 4001–4005 | 5/5 | 5 |
+
+K1's actual keyboard probe has no AffText call; its 501 surfaces are an explicit
+regression control. P4 frame484 alone adds ten actual glyph blits and 779 pixels
+relative to its historical text-skipped surface. S1 frame141 is the same literal
+tooltip trigger that blocks normal human Test B in the app.
+
+Fresh S1 `evidencias/s1-help-glifos-reproduction.json.xz` preserves the display
+scenario's resource/LoadPie/AffText boundaries and reproduces **20/20 isolated
+native calls, 50/50 complete frame states and 100/100 phase surfaces**. The actual
+AffString `0x4591c8` objectives calls at **17044–17050** draw real loaded line
+bytes and compare **7/7** complete surfaces and glyph sequences. MenuInit remains
+explicitly outside this page renderer's glyph-enabled scope.
+
+Validation reports are `validacao/affgame-glifos-final.json` and
+`validacao/s1-help-glifos-final.json`; strict hashes bind only Graphics files and
+original evidence. The historical 1.10 source proofs are checked against their own
+committed `9b5f449` bytes, rather than rewriting them to claim new default behavior.
+The new live comparison executes the actual normal default. The initial updated
+domain gate passes 298/298 tests; the final gate passes **300/300**, zero failures
+or skips, in **261.094 s**, including the two new native-buffer regressions
+(`validacao/glifos-api111-gate-final.log`).
+
+Consumer dependency: the frame-141 app stop is in the Rust C ABI. The engine front
+must port/adopt the published bitmap contract and rerun normal human Test B; no
+Rust/app files are edited here. Other languages, colour replacement, control bytes,
+opaque message-bank pointers, general menus/LoadPie and unproved late-S1 states
+remain addressed dependencies. No main merge or acceptance is performed.

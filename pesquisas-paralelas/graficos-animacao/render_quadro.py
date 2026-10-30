@@ -22,7 +22,7 @@ from graficos import RAIZ
 import json
 
 # Contract version: major for breaking changes; minor for optional inputs and newly evidenced branches.
-VERSAO_RENDER_QUADRO = (1, 10)
+VERSAO_RENDER_QUADRO = (1, 11)
 LARGURA, ALTURA = 800, 600
 DGROUP, DGROUP_FIM = 0x494000, 0x523000
 ESTRUTURAS, PASSO_ESTRUTURA = 0x49a0c8, 276
@@ -131,7 +131,8 @@ def renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=Non
     original bank payloads); the state after this frame is returned in ``QuadroRenderizado.cache``.
     texto(request, indexed_surface) -> bytes (optional, 1.7): AffText glyph provider. request contains text bytes,
     x/y/right/bottom, font and flags. Called after the tooltip background is saved/framed/shaded, before the cursor.
-    Without it, a tooltip whose timer has expired stops visibly at 0x459454. The probe's declared text boundary is
+    None (1.11) uses the original bitmap fonts with live clipping/language words. False explicitly stops at
+    0x459454 for dependency diagnostics. The probe's declared text boundary is
     available only as a strict fixture adapter in validar_sondas_graficos_m3, never as a normal rendering default.
     GetBob exports a write-only saved_background_pixels effect (old hex empty); carry these bytes for the following
     frame's PasteBob restoration. memoria is never mutated, including by that copy.

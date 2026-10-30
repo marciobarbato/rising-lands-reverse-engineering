@@ -2,7 +2,40 @@
 
 Owner: graphics. Active implementation, synthetic/reference tests, indexed-buffer artifacts, and original-byte extracts live in `pesquisas-paralelas/graficos-animacao/`. Historical frozen releases are immutable records in the workspace archive and in the pre-organization Git history. Never edit a frozen release's text or inputs to modernize it: its manifest hashes identify the exact original record.
 
-## Current state — 2026-10-30 S1 order windows
+## Current state — 2026-10-30 normal bitmap text
+
+**Render API 1.11 draws the original bitmap tooltip by default.** Fresh intact-x86
+AffGame captures and the normal public renderer agree on **536/536 full 800×600
+surfaces**, all raster arguments and DGROUP effects: P4 484–488 **5/5**, K1
+129–629 **501/501**, and five S1 tooltip windows **30/30**, including frame **141**.
+There are **35 actual AffText calls**; K1 is a regression control with zero AffText
+calls under its recorded keyboard input. All 1,344 loaded font metrics match the
+original bitmap catalog. The native two-pass display experiment took **290.730 s**.
+
+A fresh S1 screen run reproduces **20/20 isolated native calls**, **50/50 whole
+states and 100/100 phase surfaces**. Its seven real AffString objectives-page
+draws match the Python page compositor **7/7**, including all glyph calls.
+These use the actual loader's line pointers. TEXTES.TXT lookup remains the explicit
+display-v2 boundary: no message bank or opaque text is fabricated.
+
+`texto=None` selects the original bitmap provider; an explicit callable remains
+supported. `texto=False` requests the named dependency for diagnostics. The actual
+font/flags, live clipping/language words, CMP opacity, palette and ordered
+saved-background effects are preserved. Historical text-skipped captures continue
+to use the strict fixture adapter. Their frozen proofs are retained unchanged.
+
+[Native full-frame comparison](../pesquisas-paralelas/graficos-animacao/validacao/affgame-glifos-final.json),
+[S1 page comparison](../pesquisas-paralelas/graficos-animacao/validacao/s1-help-glifos-final.json),
+[production and Rust-port contract](../pesquisas-paralelas/graficos-animacao/AFFTEXT_RENDER_CONTRACT.md).
+The macOS frame-141 stop is in the Rust C ABI; the engine front must port/adopt this
+committed contract before normal human Test B can be rerun. This executor changes
+only Graphics paths and never merges to main. Late-S1 combat/fire/death coverage is
+the next step; other languages/colours/control bytes and opaque MenuInit text remain
+named dependencies.
+
+The final Graphics gate passes **300/300 tests**, no failures/skips (**261.094 s**).
+
+## Previous state — 2026-10-30 S1 order windows
 
 **Render API 1.10 covers all seven S1 gameplay order windows: 2,792/2,792 complete
 800×600 surfaces, zero stops or pixel/raster/display-effect mismatches**, under the
