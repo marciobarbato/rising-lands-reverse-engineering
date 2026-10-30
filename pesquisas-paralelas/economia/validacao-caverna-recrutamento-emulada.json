@@ -1,8 +1,17 @@
 {
+ "argument_masks": {
+  "EnginSetType": {
+   "EAX": 65535,
+   "EBX": 255,
+   "ECX": 255,
+   "EDX": 65535
+  }
+ },
  "capture": "pesquisas-paralelas/economia/evidencias/caverna-recrutamento/captura-caverna-recrutamento-exibicao.json.xz",
  "capture_raw_sha256": "431171cc0b618b039e0ffb43f40d15a6878c798cb40cccc857e530f88c642443",
  "compared": 342,
- "core_exit_provider": "d47c782fb100e4dc302e35765317fdd47d0986aa21f0b96c7d75628791bbed61",
+ "core_exit_provider": "dcefb04aed8fcc35d1aadaa44dd4b560b246b7238c46a0fb5c6ab9df979fa595",
+ "core_fatigue_provider": "fe7506392fc335ce39aaa97d1cbd2fa2474b9386e49dfcb59d8b82ec7bed531b",
  "counts": {
   "BatimentHabitable": {
    "error": 0,
@@ -1249,6 +1258,23 @@
    "action": null,
    "arg": "0x0",
    "changed_bytes": 133,
+   "conversion_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     },
+     "translation": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     }
+    }
+   ],
    "foreign_calls": 17,
    "frame": 297,
    "outcome": "match",
@@ -1261,6 +1287,23 @@
    "action": null,
    "arg": "0x0",
    "changed_bytes": 133,
+   "conversion_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     },
+     "translation": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     }
+    }
+   ],
    "foreign_calls": 15,
    "frame": 297,
    "outcome": "match",
@@ -2234,6 +2277,23 @@
    "action": null,
    "arg": "0x0",
    "changed_bytes": 133,
+   "conversion_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     },
+     "translation": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     }
+    }
+   ],
    "foreign_calls": 17,
    "frame": 869,
    "outcome": "match",
@@ -2246,6 +2306,23 @@
    "action": null,
    "arg": "0x0",
    "changed_bytes": 133,
+   "conversion_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     },
+     "translation": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     }
+    }
+   ],
    "foreign_calls": 15,
    "frame": 869,
    "outcome": "match",
@@ -3102,6 +3179,23 @@
    "action": null,
    "arg": "0x0",
    "changed_bytes": 133,
+   "conversion_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     },
+     "translation": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     }
+    }
+   ],
    "foreign_calls": 17,
    "frame": 1363,
    "outcome": "match",
@@ -3114,6 +3208,23 @@
    "action": null,
    "arg": "0x0",
    "changed_bytes": 133,
+   "conversion_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     },
+     "translation": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     }
+    }
+   ],
    "foreign_calls": 15,
    "frame": 1363,
    "outcome": "match",
@@ -3212,10 +3323,10 @@
   }
  ],
  "schema": "rising-lands/economy-cave-recruitment-validation/1",
- "seconds": 662.156,
+ "seconds": 598.552,
  "served_by_translation": {
   "CalculPosition": 6,
   "RechercheDecalageSortie": 7
  },
- "translation": "9d735d40292e4bce247fe4dffb46297a7d923c738cdad0b5e1b0aef3ce0145ba"
+ "translation": "6f213415118ca1e4eba21b3dede653fd84bb2b9d27a6bbf6e3b555d6baad5b69"
 }
