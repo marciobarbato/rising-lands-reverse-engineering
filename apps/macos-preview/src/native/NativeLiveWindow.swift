@@ -15,6 +15,8 @@ final class NativePlayPresenter {
     var published=0,dropped=0,submitted=0
     var uploadSeconds=0.0,submitSeconds=0.0,gpuSeconds=0.0,drawableWaitSeconds=0.0
     var presented=[Double]()
+    var presentedCount=0,epoch=0
+    var measurementStart=0.0
     var uniqueGameFrames=0,lastPresentedFrame:UInt64?
     var latestFrame:UInt64=0
     init(layer:CAMetalLayer,device:MTLDevice,commands:MTLCommandQueue,pipeline:MTLRenderPipelineState) throws {
@@ -37,9 +39,9 @@ final class NativePlayPresenter {
         lock.lock();slots[index].readers=0;latest=index;latestFrame=frame;published+=1
         uploadSeconds+=ProcessInfo.processInfo.systemUptime-started;lock.unlock()
     }
-    func start() {
+    func start(at time:Double) {
         stop()
-        lock.lock();presented.removeAll(keepingCapacity:true);uniqueGameFrames=0;lastPresentedFrame=nil
+        lock.lock();epoch &+= 1;measurementStart=time;presentedCount=0;presented.removeAll(keepingCapacity:true);uniqueGameFrames=0;lastPresentedFrame=nil
         published=0;dropped=0;submitted=0;uploadSeconds=0;submitSeconds=0;gpuSeconds=0;drawableWaitSeconds=0;failure=nil;lock.unlock()
         let timer=DispatchSource.makeTimerSource(queue:queue)
         timer.schedule(deadline:.now(),repeating:1.0/120,leeway:.microseconds(100))
@@ -55,7 +57,7 @@ final class NativePlayPresenter {
     func draw() {
         lock.lock()
         guard let index=latest,failure==nil else{lock.unlock();return}
-        slots[index].readers+=1;let slot=slots[index],frame=latestFrame;lock.unlock()
+        slots[index].readers+=1;let slot=slots[index],frame=latestFrame,epoch=self.epoch;lock.unlock()
         let started=ProcessInfo.processInfo.systemUptime
         guard let drawable=layer.nextDrawable(),let command=commands.makeCommandBuffer() else{
             lock.lock();slots[index].readers-=1;failure="MetalDrawableUnavailable";lock.unlock();return
@@ -70,7 +72,8 @@ final class NativePlayPresenter {
         encoder.drawPrimitives(type:.triangle,vertexStart:0,vertexCount:3);encoder.endEncoding()
         drawable.addPresentedHandler{[weak self] drawable in
             guard let self=self else{return};self.lock.lock()
-            self.presented.append(drawable.presentedTime);if self.presented.count>16384{self.presented.removeFirst(8192)};if self.lastPresentedFrame != frame{self.uniqueGameFrames+=1;self.lastPresentedFrame=frame};self.lock.unlock()
+            guard self.epoch==epoch,drawable.presentedTime>=self.measurementStart else{self.lock.unlock();return}
+            self.presentedCount+=1;self.presented.append(drawable.presentedTime);if self.presented.count>16384{self.presented.removeFirst(8192)};if self.lastPresentedFrame != frame{self.uniqueGameFrames+=1;self.lastPresentedFrame=frame};self.lock.unlock()
         }
         command.addCompletedHandler{[weak self] result in
             guard let self=self else{return};self.lock.lock();self.slots[index].readers-=1
@@ -86,8 +89,10 @@ final class NativePlayPresenter {
         lock.lock();defer{lock.unlock()}
         // Actual CAMetalDrawable presentation timestamps, not timer/submit counts.
         let times=presented.filter{$0>=start && $0<=end},seconds=max(0.000001,end-start)
-        let bins=(0..<(detailed ? max(0,Int(seconds)):0)).map{b in times.filter{$0>=start+Double(b) && $0<start+Double(b+1)}.count}
-        return ["presented":times.count,"displayFPS":Double(times.count)/seconds,"minOneSecondFPS":bins.min() ?? 0,"oneSecondPresentations":bins,
+        let firstBin=presentedCount>presented.count ? max(0,Int((presented.first ?? start)-start)+1):0
+        let count=presentedCount-presented.filter{$0>end}.count
+        let bins=(firstBin..<(detailed ? max(firstBin,Int(seconds)):firstBin)).map{b in times.filter{$0>=start+Double(b) && $0<start+Double(b+1)}.count}
+        return ["presented":count,"displayFPS":Double(count)/seconds,"minOneSecondFPS":bins.min() ?? 0,"oneSecondPresentations":bins,"traceFirstSecond":firstBin,
                 "uniqueGameFramesPresented":uniqueGameFrames,"published":published,"publicationDrops":dropped,"submitted":submitted,
                 "uploadSeconds":uploadSeconds,"submitSeconds":submitSeconds,"drawableWaitSeconds":drawableWaitSeconds,"gpuSeconds":gpuSeconds,"displayError":failure as Any? ?? NSNull()]
     }
@@ -377,7 +382,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
                 if self.running{self.running=false;self.playEnded=ProcessInfo.processInfo.systemUptime}
                 else if self.status().stopped==0 && self.stoppedReason==nil{
                     let s=self.status();self.startFrames=s.frames;self.startLogic=s.logic_ns;self.startRender=s.render_ns;self.startProof=s.proof_ns;self.startMetal=self.metalSeconds;self.playStarted=ProcessInfo.processInfo.systemUptime;self.playEnded=self.playStarted;self.running=true
-                    if !self.validationMode{self.presenter?.start();DispatchQueue.main.async{self.metal.isHidden=false}}
+                    if !self.validationMode{self.presenter?.start(at:self.playStarted);DispatchQueue.main.async{self.metal.isHidden=false}}
                     self.runID &+= 1;let run=self.runID;self.nextGameTime=self.playStarted;self.work.async{[weak self] in self?.pump(run)}
                 }
             case "live-pause":self.running=false;self.playEnded=ProcessInfo.processInfo.systemUptime
