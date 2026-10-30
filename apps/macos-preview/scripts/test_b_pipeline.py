@@ -8,6 +8,7 @@ Test A, audited execution policy 2, without rendering after frame 128.
 import argparse
 import ctypes as C
 import json
+import os
 from pathlib import Path
 import runpy
 import signal
@@ -123,7 +124,10 @@ def original(a, script):
         if a.ate: command += ['--ate', str(a.ate)]
         result = subprocess.run(command, timeout=a.minutes*60-10 if a.minutes else None)
         companion.rename(output/'states.jsonl')
+        with (output/'states.jsonl').open('rb') as saved: os.fsync(saved.fileno())
         summary = json.loads((output/'resumo.json').read_text())
+        if summary['original_sha256'] != contract.identity['original_sha256'] or not summary['code_unchanged']:
+            raise ValueError('Original executable identity/code integrity failed')
         manifest.update(status=summary['status'], seconds=time.monotonic()-started,
                         original_summary_sha256=sha(output/'resumo.json'), original_summary=summary,
                         child_exit=result.returncode)

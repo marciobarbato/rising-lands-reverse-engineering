@@ -476,3 +476,24 @@ selected/hovered unit's original-address 276-byte record, SHA256 and fatigue
 fields. Those bytes never become world or renderer inputs. The diagnostic's
 projection cost is outside production play and supplies no throughput result.
 Named stops and partial pixels retain their normal production behavior.
+
+## Recorded-input Test B tooling
+
+`test_b_pipeline.py` accepts recorder exports through the complete unchanged
+Missions validator. Its audited app replay uses the same `MacOSDeclaredInput`
+and C phase entry as Test A, with actual poll requests checked against
+`FrameAnswerMapper`. It runs from S0 through the real 128-frame prefix; the
+recorded-input proof omits later rendering. The separate synthetic UI capture
+runs the real visible AppKit/Metal path with NSEvents and the production
+`MacOSSessionRecorder`/canonical save action. Synthetic evidence is explicitly
+labeled and cannot establish human Test B acceptance.
+
+The original command invokes unchanged Missions `correr` in a child, retaining
+its intact-executable identity, input validator, callbacks, original WndProc
+and durable fast exit. An app-owned read-only `amostra` observer writes a
+companion full mapped-state hash per completed frame. Both sides use the
+published P6 cumulative mask verbatim; its policy integrity and exact identity
+are checked, with no new session exclusions. The comparator refuses differing
+input/mask identities and lists every differing or missing frame. Scope,
+commands, six-order coverage and remaining human/mini execution requirements
+are in [the Test B manual](../../docs/MACOS_PLAYABLE.md#m33-test-b-recording-and-replay-pipeline-2026-10-30).

@@ -862,7 +862,8 @@ Missions policy acceptance.
    (1, 5, 4/type 3, 16, 7/depot argument, 17). Continuous dragging remains outside
    this recorder's supported domain. Keep focus while holding a key; losing
    focus records its release.
-3. Continue at least 3,000 frames beyond frame 128 (stop at 3,129 or later).
+3. Continue at least 3,000 frames after recording starts (if its first frame
+   is R, stop at R+3,000 or later, and never before frame 3,129).
    Pause, choose **Parar gravação**, then **Exportar entrada** and save, for
    example, `.local/test-b/entradas/human.json`. Preserve that file unchanged.
    Reset is disabled while recording. An engine/recorder stop must be reported;
