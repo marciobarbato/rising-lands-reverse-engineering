@@ -1,0 +1,8 @@
+{
+  "command": [
+    "sh",
+    "motor/validate.sh"
+  ],
+  "seconds": 292.231228709,
+  "returncode": 0
+}

@@ -1,0 +1,11 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "motor/testes/player_leaf_proof.py",
+    "--output",
+    ".local/performance-60fps/final2/leaf.json"
+  ],
+  "seconds": 156.817012959,
+  "returncode": 0
+}

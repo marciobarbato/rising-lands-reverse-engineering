@@ -1,6 +1,6 @@
 //! _WinMain message loop, supplied only by a declared-input transaction.
 use crate::{
-    frame::{binding, boundary, stop, FrameEvent, FrameInput},
+    frame::{binding, boundary, stop, EventLog, FrameEvent, FrameInput},
     player::{self, Memory},
     MemoriaJogo, Result,
 };
@@ -38,7 +38,7 @@ pub fn between(
     r.ecx = input.saved[1];
     r.ebx = input.saved[2];
     r.esp = r.esp.wrapping_add(24);
-    let mut events = Vec::new();
+    let mut events = EventLog::new(m.audit);
     let messages = m
         .player
         .as_ref()
@@ -143,5 +143,5 @@ pub fn between(
     r.eax = input.cursor_y as u32;
     r.esp = r.esp.wrapping_sub(4);
     input.registers = r;
-    Ok((input, events, MemoriaJogo::default()))
+    Ok((input, events.into_vec(), MemoriaJogo::default()))
 }

@@ -631,3 +631,80 @@ record exact masks, timings, stops, original evidence pins, skipped work and
 reproduction commands. This remains ABI 1.5 and Graphics 1.7; it does not claim
 later construction/work/combat simulation, initialized audio, glyphs or app
 presentation beyond the declared domain.
+
+## Sustained play execution — ABI 1.6
+
+`rl_execucao_definir(world, RL_EXECUCAO_JOGO)` opts a fully loaded mission into
+persistent execution. Select it once before the app's render/phase-2/phase-3 loop;
+`rl_execucao_modo` queries the policy. The frame, declared-input and renderer
+signatures and layouts are unchanged. Creation accepts ABI 1.0 through 1.6.
+Consumers must accept major 1 and a minor at least their required version; the
+macOS driver's exact ABI 1.4 check needs updating before using this library.
+
+The play path retains the execution projection, journals writes for rollback,
+and refreshes only changed unit/structure records. It reuses runtime scratch and
+render transaction buffers. It removes full-world cloning, typed projection and
+reload from ordinary frames and drawing. Explicit exports still project and
+check that the typed state matches the execution view byte for byte. Rust callers
+read through `state()`; `state_mut()` invalidates persistent execution before
+allowing direct semantic edits. Complete C ABI reloads preserve the policy;
+sparse fixture loads restore the default policy.
+
+Policy 0 remains the default complete audit path. Policy 2 uses the same
+persistent backend with full audit traces for original comparisons. Policy 1
+suppresses frame bindings, freed-byte audit copies, consumed-input polling traces
+and renderer observations, retaining order packets and text/sound requests.
+A failed declared-input attempt still exposes its full diagnostics after rollback;
+its deterministic owned inputs are replayed under audit solely for that stopped
+attempt. Game bytes, registers, generation, cursor hold and clock remain atomic.
+No missing provider, named stop, bounds check, RNG draw or drawing operation is
+removed by choosing play execution.
+
+`motor/testes/play_benchmark.py` measures the release C ABI in app play order with
+HUD and reused caller buffers over at least 9,200 frames. Initialization, state
+exports, audit queries, proof comparisons and macOS presentation are outside its
+timers. `RL_EXECUTION_MODE=2 RL_COMPARE_PLAY=1` enables paired original-state
+proofs: policy 2 is checked against the unchanged evidence contract and policy 1
+is additionally checked against it for every byte, register, clock and retained
+order/request event. Reference revisions and immutable evidence masks are unchanged.
+
+Main's coordinator fix `1c1fade` verifies player-input evidence in the exact
+commit-backed snapshot that the proofs consume. The final merge adopts that
+scheme, retaining every `a7f5d49` evidence digest unchanged. In particular, the
+auxiliary leaf-read footprint remains `6bcc9de7…143fce` although a later campaign
+replaced its working-tree shared base at `7cc733e`. The regression rejects corrupt
+frozen captures and footprints while permitting independent later working-tree
+campaigns. M2 package/capture/policy immutability checks remain unchanged. The
+full phase proofs used the same frozen input bytes before the merge; native
+sources, header and release-library bytes are verified identical afterward.
+
+### Sustained play measured delivery
+
+Over 9,200 chained frames on the MacBook, the release ABI loop improves from
+**74.54 to 1,540.23 frames/s**. Phase 2 falls **4.616 → 0.014 ms**, CalculGame
+**5.007 → 0.246 ms**, and rendering **3.777 → 0.386 ms** per frame. Logic averages
+**0.260 ms**; logic + render averages **0.646 ms**, p99 **0.798 ms**, maximum
+**1.718 ms**. These meet the 4/8 ms targets throughout the measured window.
+Generation queries and caller-buffer copies bring the full ABI loop to **0.649 ms**.
+The scope excludes initialization, proof/export work and macOS presentation.
+The baseline and all optimized runs finish with identical full-state and surface
+hashes, generation and virtual clock. Full-audit policy 2 retains **0.652 ms**
+logic + render; sampling confirms full projection/reload is absent from the hot loop.
+
+Fresh regressions are **257/257 M2.2**, **18,401/18,401 M2.3**, renderer
+**128/128 Python + original** and **9,200/9,200 original**. All M2.3 phases also
+match play/audit modes for every projected byte, frame context and clock.
+P1/P2 retain **501/601 frames, 1,002/1,202 whole-state phases**; P6 retains its
+**183-phase whole-state prefix**. The leaf battery retains **659 completed equal**,
+seven exact stops, two declared skips and zero mismatches. Qualified Graphics 1.7
+probes retain **501/601/172** surfaces equal. All dependency and glyph stops remain.
+
+Implementation `98c40c6`; full proof revision `74a3fbe`; final main `54d148d`
+merged as `4bd1112`. Native source, header, evidence digests and measured release
+bytes are unchanged across that merge. The merged gate passes **30 Rust / 63 Python
+tests**, fmt/strict Clippy, **75/75** pilot differential and C/Swift/Metal checks;
+the common check passes **2,024 tests**, **623 optional skips**. No fresh original-x86
+emulation or later functional port is claimed. The macOS consumer must accept ABI
+1.6 and select `RL_EXECUCAO_JOGO` before its live loop to obtain this play path.
+[The report package](../motor/validation/play60/summary.json) and
+[handoff](../motor/HANDOFF.md) record exact timings, hashes, masks, commands and gaps.

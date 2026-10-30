@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "motor/testes/frame_long_differential.py",
+    "verify",
+    "--output",
+    ".local/performance-60fps/final2/m23-plan.json"
+  ],
+  "seconds": 15.601163499999998,
+  "returncode": 0
+}

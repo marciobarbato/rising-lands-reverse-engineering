@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "motor/testes/render_proof.py",
+    "--frames",
+    "9200",
+    "--no-python",
+    "--library",
+    "motor/target/release/librising_engine.dylib",
+    "--output",
+    ".local/performance-60fps/final2/render9200.json"
+  ],
+  "seconds": 23.590721209,
+  "returncode": 0
+}

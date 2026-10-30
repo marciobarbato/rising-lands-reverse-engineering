@@ -560,3 +560,22 @@ Merged main `8138e6e` (P6 window `d18add9` on main). The report is [M3_1_CADEIA_
 - **Native differentials:** 124/116/0 mismatches, 203/203, 90/85/0 mismatches. Domain gate passes.
 - **P6 whole state (prova):** part 0 equal through frame 220 (184 phases), then Graphics' AffBatiments logic-effects guard at `between_frames221`. Planning diagnostics (never evidence) reach 2400 at indicator level, P3 to 3129, K1 to 629; whole state (planning) equal 129–2177 in all 4,098 phases, then Economy/Core's minimap divergence at 2178.
 - **Stops and owners:** Graphics (AffBatiments for structures other than the Santuario; view origins for K1/P4/P5); Economy/Core (minimap bytes after BatimentHabitable); unassigned (TerrainEstGc object ≥ 0x1d, P7 2801/P4 460); Core (SetMiniMap mode from CalculWorkEngin, P5 760); Combat (turret BatimentPeutAttaquer, BatimentInitAttaqueSelect); Economy (SetDechargeCaveEnginSelect).
+
+## M3.1 — hunger wiring, reach after the minimap fix, S1 by parts (2026-10-30)
+
+Merged main `3e0de77` then `fcc0ba8`. The report is [M3_1_FOME_E_S1.md](M3_1_FOME_E_S1.md). Commit `8b8c984` plus the follow-up.
+
+- **P6 (planning diagnostic, whole state):** 4,544/4,544 phases equal from 129 to 2400; frame 2178 now passes. Chains: `a3f35dfc…`, `5da71fab…`, `c557167f…`. Strict P6/P3/P7 stop at `between_frames221` (Graphics' AffBatiments guard). K1 is equal in strict mode to 629. P4 stops at 460 and P7 (planning) at 2801, both on TerrainEstGc ≥ 0x1d (Core); P5 stops at 760 on SetMiniMap 0x44c437 (Core).
+- **API:**
+  - `construcao_entrada_ia.ESTADO_19` and `EnginNextEtape:state19` (Economy's `alimentacao.estado_fome`);
+  - `instalar_donos` installs `EnginSetFatigue` from `DonosM3.rotina_core`;
+  - `DonosM3.fome` / `.fadiga` / `.ordens()`, `_externo_fome`, `rotina_core(nome) -> f(regs, chamada=0)`;
+  - `entrada_quadro_ia.terrain_get_sac_type(m, regs)`;
+  - `provar_entrada_janelas_ia.py fixar | tudo --partes --diagnostico-planejamento | reproduzir`;
+  - `provar_entrada_ia.py --diagnostico-planejamento`.
+- **S1:** run `fixar S1 --ref origin/feat/re-missions` once the pass-2 capture lands, commit, then `tudo --janelas S1 --lease …`. The expected first stop is EnginRestaureEtat 0x45315f (Economy, at the end of the first meal, about frame 8057), unless Economy lands it first.
+- **Open stops and owners:**
+  - Graphics: the AffBatiments guard;
+  - Core: TerrainEstGc ≥ 0x1d and the SetMiniMap mode at 0x44c437;
+  - Economy: EnginRestaureEtat, BatimentEnleveMatiere and SetDechargeCaveEnginSelect;
+  - Combat: the turret BatimentPeutAttaquer and BatimentInitAttaqueSelect.

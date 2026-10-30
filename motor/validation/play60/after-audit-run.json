@@ -1,0 +1,18 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "motor/testes/play_benchmark.py",
+    "--library",
+    "motor/target/release/librising_engine.dylib",
+    "--frames",
+    "9200",
+    "--output",
+    ".local/performance-60fps/final2/after-audit.json",
+    "--mode",
+    "2"
+  ],
+  "seconds": 9.426450875,
+  "returncode": 0,
+  "lease": "engine-perf-bench-battery exclusive"
+}
