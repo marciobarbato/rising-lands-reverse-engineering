@@ -79,3 +79,12 @@ All of these are pushed. "On main" is as of the end of this session; check `git 
 - AI/runtime was in its integration gate when the MacBook restarted. Graphics, missions and macOS were not yet attempted. Rerun `scripts/workstream.py integrate <front>` for each; a killed run leaves main unchanged.
 - The Rust engine had committed stage 4 locally (`f4e5abe`, "Port declared player input and orders behind additive Rust ABI 1.5") in `/Users/marcio/git/Rising-Lands-Codex-Engine`. It was unpushed and its final validation was still running. Resume the Codex session to finish and push it, then review it.
 - This handover, the PROGRESS M3R1 checkpoint and the ROADMAP note are committed on coordinator/maintenance but not yet integrated. Integrate maintenance last.
+
+## User requirement added at handover (performance)
+
+The final playable edition must have excellent performance: **at least 60 fps** in the real UI, with headroom. This raises the M3.5 target from the plan's proposed 25 fps.
+- **Play mode:** the macOS app runs without the per-frame audit and projection. The audit stays in tests.
+- **Rust logic:** optimise it; 11 ms/frame today, mostly state reload.
+- **Game speed:** configurable and decoupled from display fps.
+
+Assign this to Codex (macOS + engine) after stage 4 is integrated. Update `docs/M3_PLAN.md` M3.5 accordingly.
