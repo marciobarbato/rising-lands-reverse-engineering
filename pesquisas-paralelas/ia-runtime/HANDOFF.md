@@ -721,3 +721,35 @@ Final leased domain gate: 124 tests, 116 successful executions and eight explici
 failures/errors; documentation links and diff whitespace pass. Second-machine P6 reproduction and S1
 pass-2 equality remain outside this delivery. The native prefix also reproduces the committed original
 store sequence and conversion arguments at each bounded stop; it does not execute a missing callback.
+
+
+## S1 recruit continuation — original city-message capture (2026-10-30)
+
+Merged fetched main `6cdbc5a` into the feature branch before research. The new
+`capturar_mensagem_cidade_ia.py` records intact `iagVilleSendMessage 0x484808`
+at SortieTroupe CALL `0x4211e5`, before any city-message translation.
+`evidencias/mensagem-cidade-original.json.xz` has **27 original cases**:
+three complete Economy producer fixtures (297/869/1363), the actual S1 call
+at frame 2547, and 23 declared owner/player-type prefixes from that call.
+Inputs are AX structure, DL message 3, EBX 0, with all seven actual registers
+retained; declared variants poison their unused upper bits. Four AI-owner
+cases stop at `0x48484c` before the unbound message dispatch; the other 23
+return. Captured data includes every non-stack read-before-write byte, all
+seven exits (and native ESP on S1), and effects. Real calls and bounded
+variants make no non-stack stores. No callee is replaced.
+
+The leased original run replays S1 snapshot 2500 through 2547, checks all
+48 states against the committed original trajectory, and leaves original
+code unchanged. Snapshot SHA-256 is
+`95dc80e0443e44537c57f19c3fc30ba12c861f185f16c9d65c878e89f511c3a3`.
+The existing native inputs were copied to ignored `.local/m3/` from Core's
+read-only snapshot inputs and their hash verified; no foreign source was
+imported from another worktree. Oracle remains intact RISING.EXE SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+
+Command (through `/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py`):
+`python3 -B pesquisas-paralelas/ia-runtime/capturar_mensagem_cidade_ia.py`.
+The capture refuses replacement and asserts that no city translation was
+imported. This commit supplies evidence only; the translation and native
+differential follow. Recruitment-provider binding is being validated
+separately; Economy still omits DX at SetSortEngin CALL `0x420f8c`.
