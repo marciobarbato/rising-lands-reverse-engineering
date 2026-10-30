@@ -51,7 +51,7 @@ fn zone(m: &MemoriaJogo) -> Result<u16> {
     }
     Ok(0)
 }
-fn rain(m: &mut MemoriaJogo) -> Result<()> {
+pub(crate) fn rain(m: &mut MemoriaJogo) -> Result<()> {
     let wind = m.u16(0x496d2e)? as i16;
     if wind >= 0 {
         return stop("NextGouttes non-negative wind", 0x45ac56);
@@ -452,7 +452,14 @@ pub fn display_effects(m: &mut MemoriaJogo, flips: u32) -> Result<()> {
         return stop("Display effect viewport", 0x4178f7);
     }
     if !ORIGINS.contains(&(m.u16(0x508720)?, m.u16(0x508722)?)) {
-        return stop("Display effect sampled origin", 0x415b77);
+        return stop(
+            if m.player.is_some() {
+                "AffGame"
+            } else {
+                "Display effect sampled origin"
+            },
+            0x415b77,
+        );
     }
     let mut occupied = 0;
     for i in 0..1000 {
