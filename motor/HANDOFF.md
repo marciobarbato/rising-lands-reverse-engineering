@@ -1311,3 +1311,10 @@ state restoration; Combat turret providers; longer P6 whole-state and P3/P6/P7
 surface windows; S1/D1 endpoints. These are dependencies to port, not successful
 mission-completion claims. The macOS consumer separately updates its explicit
 render-contract acceptance to1.9; ABI1.6 and its copied layouts are unchanged.
+
+Implementation `b9b6a3a` is followed by upstream merge `0fc1960` (main89575fa).
+The merge changes foreign research/docs paths only. All104 native/test/header
+input files and the measured release library are byte-identical before/after
+it; logic/input/chain5/chain6 revision-backed sources and applicable input/window
+pins pass fresh verification. The [identity record](validation/chain6/piece2/post-merge-identity.json)
+retains that check; the full native gate above ran on these same engine bytes.
