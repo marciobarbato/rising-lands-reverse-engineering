@@ -1,7 +1,7 @@
 """Native differential of ``caverna_recrutamento`` against the original cave body, habitation and recruitment calls.
 
-Reruns the committed capture natively (``capturar_caverna_recrutamento.executar``: same declared actions, same
-recorded calls). At every recorded call of a translated routine the translation runs over a copy of the exact
+Reruns the committed capture natively (``capturar_caverna_recrutamento.executar``, or
+``capturar_abandono_santuario.executar`` for the abandonment capture: same declared actions, same recorded calls). At every recorded call of a translated routine the translation runs over a copy of the exact
 entry state (every mapped block) and is compared with what the original did:
 - exit registers EAX..EBP and ESP (bits a provider marks uncertain excluded, listed per call);
 - every byte of every mapped block afterwards (the original's: entry state + its changed bytes);
@@ -185,7 +185,11 @@ def main():
                     help="replay the original's CalculPosition/RechercheDecalageSortie instead of Core's provider")
     a = ap.parse_args()
     captura, sha = carregar(RAIZ / a.captura)
-    import capturar_caverna_recrutamento as ccr
+    # The capture's own scenario module reruns it (the sanctuary abandonment has its own declared actions).
+    if captura['schema'] == 'rising-lands/economy-sanctuary-abandonment-capture/1':
+        import capturar_abandono_santuario as ccr
+    else:
+        import capturar_caverna_recrutamento as ccr
     provedores = None if a.sem_saida_core else provedores_saida()
     relatorio = dict(schema='rising-lands/economy-cave-recruitment-validation/1', capture=a.captura,
                      capture_raw_sha256=sha,
