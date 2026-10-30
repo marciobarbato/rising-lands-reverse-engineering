@@ -1,4 +1,4 @@
-"""App-owned copied-buffer ABI 1.4 binding. Serialized worker use only.
+"""App-owned copied-buffer ABI 1.5 binding. Serialized worker use only.
 
 Layouts follow motor/include/rising_engine.h; no Rust pointers escape.
 """
@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 import sys
 
-VERSION = 0x00010004
+VERSION = 0x00010005
 NAMES = ('eax', 'ebx', 'ecx', 'edx', 'esi', 'edi', 'ebp')
 ROUTINES = {'Random': 1, 'LongRand': 2, 'rand': 3, 'IntToBCD': 4, 'BCDToInt': 5}
 
@@ -104,7 +104,7 @@ class Pilot:
     def free(self, handle):
         self.check(self.lib.rl_liberar_mundo(handle))
 
-FRAME_VERSION = 0x00010004
+FRAME_VERSION = 0x00010005
 REGISTERS = ('eax', 'ebx', 'ecx', 'edx', 'esi', 'edi', 'ebp', 'esp')
 
 

@@ -1,6 +1,119 @@
 # Combat handoff — 2026-10-30
 
-## M3 turret orders and M4 contact audit (current delivery)
+## M4 fight, death, removal and count phases (current delivery)
+
+Branch `feat/re-combat`, fast-forwarded to main `c7f86cd`. Original evidence
+first: `608ac91` (1,089 calls, including 990 sequential corpse steps) and
+`8e34403` (16 civilian/refuge/count cases plus 82 complete count phases).
+Only intact RISING.EXE
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`
+executes. Native game bodies are not replaced; the profile import uses the
+existing explicit Core transport and Missions original-media provider.
+All evidence remains immutable; no normalized PE or predecessor hash changes.
+
+### Published interface and mutation order
+
+`luta_fatal_viva_combate.LutaFatalViva(m, *, perfil, som, externo, etapa)` is the
+live composition. See the [M4 API](../../docs/COMBAT.md#m4-raid-fight-and-death-composition-2026-10-30)
+and [original matrix](FATAL_CAPTURE_MATRIX.md). Bootstrap through
+`ambiente_combate_raid`. Bind the caller's existing buffers; construction
+initializes nothing and allocation bases must remain stable while bound.
+
+`chamar(name, regs, *, pilha=None, chamada=None)` and `provedores()[name]`
+require and return EAX/EBX/ECX/EDX/ESI/EDI/EBP exactly. An omitted register or
+required stack input raises the shared `ArgumentoNaoPassado` before effects.
+No None/unknown register placeholder is published. Stack/control-flow/flags
+are not part of this seven-register protocol.
+
+- Messages: `iagUnitSendMessage` (human prefix and raid behaviour 9 messages
+  0x44/0x48/0x49/0x4a), including group unlink, damage-allocation release, task return
+  and target reacquisition. Unknown behaviour/indirect handlers raise at the
+  actual target. Loaded group/conflict/priority/damage/task tables remain live.
+- Diplomacy/profile: `MAJSympathie`, `PlayerResetAllie`, `PlayerAAttaqueSet`,
+  `MessageBoxSet`, `KERNEL32.GetPrivateProfileStringA` (six stack words).
+  The media-backed `PerfilTextoLuta(entradas_nomeadas)` is explicit; original
+  PT-BR event text and queue writes are preserved byte for byte.
+- Lifecycle: `EnginSetLevelExperience`, `SetDyingEngin`, `RetireEngin`,
+  `EnginNextEtape`/`EnginNextEtape:state4` (full entry restricted to 0/4).
+  `ciclo.corpo_estado4(unit)` is the typed branch after the owning AI prelude,
+  so the prelude need not be repeated at its state 4 dispatch.
+- Damage: `EnginInfligeDegat` and `InfligeDegat` have exact raw mode 1/unit
+  returns in the visible, free-handle, unopened-sound domain. Impact takes
+  `pilha=[flag]`. Other raw domains stop at entry; the prior typed API retains
+  its broader supported modes. Its legacy void attack API is unchanged.
+- `ChercheBatimentProximiteCaveOuSanctuaire` uses actual loaded structure
+  masks/centres: any own CAVE is preferred, otherwise the nearest sanctuary,
+  without a maximum distance. This closes the harvester's refuge reaction.
+- `CalculEnginNextEtape` (entry0x456db5, reset0x456dbd) reuses AI/runtime's
+  live count loop, with real per-unit bodies. Optional `etapa(unit)` supplies
+  the owner's non-dying body. The built-in bounded ordinary prelude supports
+  the captured fight/move/idle/hidden states and reload advance; work,
+  construction, transport and special/starvation bodies remain owner calls.
+
+Death sends message 0x44 and audio requests before state 4/search release, then
+animation/timer, selection and collision cleanup. Core performs physical
+removal/minimap/light effects at corpse expiry. The three actual original
+corpses last 330 unit steps. Neither life 0 nor state 4 subtracts unit counters.
+The live loop counts an active unit before its body; a later-slot kill leaves
+it counted until the next phase. Native phase 40 returns population 16 with the
+victim already state 4; phase 41 returns 15. The type counter changes 3 to 2 then.
+Type 5 is excluded from military count even while alive. Mission-end/latch
+0x4e1d84 remains Missions-owned and is not written by this composition.
+
+### Validation, dependencies and requested real windows
+
+All 1,186 supported original cases compare locally with **0 mismatches**.
+Fresh native differential: **1,186 cases, 0 mismatches** (1,088 primary
+plus 98 civilian/count supplements), all seven registers, every checkpoint
+byte, original native stores and profile answers.
+One negative original hit-message input (FFFF target) faults natively; it is
+outside the protected domain and is never counted as an equal return.
+The Python corpse/count chains retain their own buffers/providers across
+calls; original deltas are not copied back into a translated chain.
+
+
+| Routine | Supported cases | Mismatches |
+|---|---:|---:|
+| iagUnitSendMessage | 12 | 0 |
+| PlayerResetAllie / PlayerAAttaqueSet | 7 / 7 | 0 |
+| MAJSympathie / MessageBoxSet | 29 / 10 | 0 |
+| EnginSetLevelExperience / SetDyingEngin | 12 / 6 | 0 |
+| EnginNextEtape, ordinary corpse | 990 | 0 |
+| CalculEnginNextEtape, complete 800-slot phases | 87 | 0 |
+| EnginInfligeDegat / InfligeDegat | 9 / 15 | 0 |
+| ChercheBatimentProximiteCaveOuSanctuaire | 2 | 0 |
+| **Total** | **1,186** | **0** |
+
+Reports: [primary native](validacao/luta-fatal-native-v1.json),
+[civil local](validacao/luta-civil-local-v1.json),
+[late count-phase local](validacao/luta-fase-contagem-local-v1.json).
+The domain gate passes **291 tests, 155 optional native skips**. The focused
+family passes **7 tests, no skips**, with `RISING_EMULAR=1` under a lease,
+including fresh native reruns of all 98 supplement cases; actual output is in
+`test-luta-fatal-native-v1.log` (129.939 seconds). The unchanged historical
+optional native corpus was not rerun.
+
+Concrete dependencies used here: Core `EntradaEstruturas`, `SelecaoOrdens`,
+live navigation/collision, discovery/light and minimap; Economy loaded
+`BonusUnidades` and idle-unit body; AI/runtime's live count loop and existing
+group unlink; Missions' original-media/profile parser; Audio's admitted
+`SoundRequestProvider`. No owner file is modified. Named remaining domains
+include nonempty Bag `EnginRetire 0x443dfc`, vehicle/special death/corpses,
+active-handle `PlaySnd_PostVolume 0x48aacf`, other AI handlers, and the owning
+non-fight/starvation bodies. War structure adjacency remains an explicit Core
+provider request at 0x42381f when that unvalidated branch is reached.
+
+S1's published `origin/feat/re-missions` artifacts contain summaries and exact
+snapshot digests, not full memory. D1 is still being produced. The
+[exact Mac-mini commands](FATAL_MAC_MINI_RUNS.md) run five separate S1 jobs
+from SHA-verified frame 11000 through 12250, and six D1 jobs over 11000–12000
+and 17000–17500 once its manifest/snapshots exist. Every job is at most 250
+frames with a 1,100-second alarm; hooks only record original phase/leaf
+entry/returns. The original unopened sound bodies execute explicitly.
+No such long real S1/D1 window was run on this MacBook, and no M4/full-frame
+acceptance or main merge/push is part of this delivery.
+
+## M3 turret orders and M4 contact audit (previous delivery)
 
 Branch `feat/re-combat`, fast-forward sync to main `3e0de77`. Evidence first:
 `40e05dc` captures 188 original turret-order leaves plus the partial raid

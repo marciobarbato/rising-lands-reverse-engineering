@@ -1373,3 +1373,151 @@ Graphics 261/0, Missions 154/33, AI/runtime 112/8, Audio 79/4, workflow 9/0 —
 The [delivery manifest](validation/m3-play-delivery.json) pins source, library,
 benchmark and validation artifacts. Only `feat/macos-playable` is pushed without
 force; no main merge or milestone acceptance is performed.
+
+## Stage 4 consumer — ABI 1.5 input and orders
+
+Resumed by fast-forwarding the feature and merging fetched main **2eadf69**.
+Only app-owned sources/manuals change. The consumer accepts ABI1.5 explicitly;
+Python Graphics1.9 acceptance is separately pinned, while Rust retains its own
+Graphics1.7 domain. Original evidence, window policies and engine reference pins
+remain unchanged.
+
+Play now routes native mouse and keyboard events to the worker's bounded,
+frame-addressed mapper and then `rl_passo_quadro_entrada`, after the real 128-frame
+startup prefix. The existing recorder observes those events without applying a
+second order. Input/file replay expands literal per-frame declarations through
+`FrameAnswerMapper.declared_answers`; consumed engine poll sites check those
+answers independently. Validation mode and old no-input tools retain their
+previous hashes/observer/callback ordering. The new native mapper regression
+compares human-event and scripted-descriptor worlds and frame registers after
+every phase, including Ctrl hold/release and k/k+1/k+3 click scheduling.
+
+The Test A state tool starts each world from S0, runs the real prefix and compares
+P1/P2/P6 whole-state phases with the owner's pinned window reader and exact mask.
+All six probes also compare the owner's declared indicator fields/unit-record
+hashes, input answers including WndProc flag bytes, and order packets. It does
+not claim whole-state coverage where no full-state window exists. Simulation
+proof deliberately omits rendering so that an earlier Graphics dependency cannot
+masquerade as the engine's frame-220/frame-141 stop.
+
+Rendering, CAVE body execution, initialized audio and glyph dependencies retain
+explicit named stops; wiring an order does not claim those providers are ported.
+Human Test B and complete-mission playability remain outside this bounded proof.
+Measured results and artifacts are recorded below.
+
+### Integrated player-input build and preserved regressions
+
+Validated executable/build **04dea3927ab4b9846f60a3d9a86c0b72cd2b59a0** uses
+integrated main's ABI1.5 motor, Rust Graphics1.7 and Python Graphics1.9. Only
+owned app paths change. Shared library SHA256:
+`5fa0292dc7485957baf8106be007b6292b9c64578d4b9e574a3357d14911b477`;
+native driver:
+`bff17d09b48dd53437ea9fec5ef70224cac69804f4dc32f2c38f720a9113c9e1`;
+static engine archive:
+`d060b19918747fc1ba874b2de9eb865e9fbed73f817796e89ead25da19a22b6c`.
+No external engine checkout, pin rewrite or later captured-state load is used.
+
+Exact [APP_BUILD](validation/m3-input-app-build.log) passes **112 consumer tests,
+zero skips**, **27 native exercise checks** and **20 inspection/live checks**;
+ARM64, isolated relocated runtime/source/assets, source binding and strict deep
+signing pass. The new tests compare native event mapping against independent
+script mapping after every phase, including context registers, click timing,
+cursor hold and Ctrl release. Digit 0–9 hotkeys produce WndProc messages without
+expanding the twelve polled human key bindings. The native recorder smoke now
+obtains Ctrl from a mouse event's physical modifier flags, without first sending
+a synthetic flags-change event. Losing game focus releases held keys.
+
+Two rejected build attempts remain preserved: an immutable tuple/list expectation
+in the new digit test ([log](validation/m3-input-initial-consumer-failure.log)),
+then a recording-policy label that failed the existing validation-mode UI check
+([log](validation/m3-input-initial-ui-policy-failure.log)). The tuple expectation
+and actual mode-specific label were corrected; no proof/assertion was weakened.
+Initial queued proof invocations refused a stale ABI1.4 bundle before any game
+phase ran. Delivery proofs use the published ABI1.5 bundle under the build lock
+and verify its source revision and mapper/driver bytes before loading a world.
+
+Fresh [answer proof](validation/m3-input-answers.json): **155,597/155,597**, six
+canonical byte round trips, zero first differences. The [128-frame native proof](validation/m3-input-live-prefix.json)
+retains **257/257 states, 11/11 checkpoints, 128/128 original surfaces and 128/128
+Python1.9 oracle surfaces**, including palette/cache/ordered-observation checks.
+The [full no-input chain](validation/m3-input-live-long.json) also retains
+**18,401/18,401 states and 9,200/9,200 original surfaces** with no stop inside that
+window. It takes 347.104 seconds; all per-phase/surface comparisons use the
+production frame driver. No new reference state or exclusion mask is introduced.
+
+[Engine gate](validation/m3-input-engine-gate.log) passes **28 Rust tests,
+63 Python tests plus 10 renderer child tests**, **75 original-x86 comparisons /
+zero mismatches / zero skips**, C layout, Swift ABI1.5 interoperability and
+**128/128** Swift/Metal render surfaces. Its debug timing is not release UI fps.
+[Common checks](validation/m3-input-common.log.gz) pass with
+`/usr/bin/python3 -B scripts/check.py` in this feature worktree and `.local/python`:
+Core576/215 optional skips, Combat279/153, Economy533/209, Graphics267/0,
+Missions154/33, AI/runtime112/8, Audio79/4, workflow9/0 — **2,009 tests,
+622 optional skips, zero failures/errors**. Native/emulated runs use the lease;
+all actual executions stay below 20 minutes. Source/docs links are checked again
+before delivery. No acceptance or main integration is performed.
+
+### Test A state half — reached prefixes
+
+All six [state proofs](validation/m3-input-delivery.json) replay imported/canonical
+files through the mapper into the same native phase entry used by play. Each
+world starts once at S0, executes 128 real prefix frames and carries state/context
+forward without reloading any original checkpoint. Every actual consumed poll
+request is answered by the script mapper and compared to the engine. Completed
+frames also compare the original input stream (including WndProc flag stores),
+order packets and canonical hashes of the owner's exact indicator fields.
+
+| Probe | Complete frame hashes equal / compared | Whole-state phases equal / compared | First engine stop |
+|---|---:|---:|---|
+| [P1](validation/m3-input-state-P1.json) | 501/501 | 1,002/1,002 | None in requested window |
+| [P2](validation/m3-input-state-P2.json) | 601/601 | 1,202/1,202 | None in requested window |
+| [P3](validation/m3-input-state-P3.json) | 91/91 | No published window in this proof | Frame220, phase3, BatimentNextEtape type3 `0x426aff` |
+| [P6](validation/m3-input-state-P6.json) | 91/91 | 183/183 reached, of 4,544 requested | Same frame220/phase3 CAVE body |
+| [P7](validation/m3-input-state-P7.json) | 91/91 | No published window in this proof | Same frame220/phase3 CAVE body |
+| [K1](validation/m3-input-state-K1.json) | 12/12 | No published window in this proof | Frame141, phase2, AffGame view `0x415b77` |
+
+Every first difference is null. P6's 183rd successful phase is
+`between_frames220`; failed phase3 is not counted equal. Frame hashes cover the
+owner's indicator comparator (including unit-record hashes, objective/UI bytes,
+selection and RNGs); they are not whole-memory hashes for P3/P7/K1. Full-state
+checks use the published exact masks/block identities/register policy through
+the unchanged engine-owned reader. The entire requested original window is not
+claimed where the engine stops. No renderer ran after the prefix in these state
+proofs, and no later input/order was injected after a stop.
+
+### Actual UI performance with live orders
+
+The [default-rate 65-second run](validation/m3-input-orders20.json) dispatches
+AppKit mouse events through the actual window/responder path, observes engine
+SetPlayerOrdre tags **1 and 5** and verifies the asynchronous texture readback.
+It sustains **118.752 displayed fps average / 111 minimum one-second fps** while
+the game runs at **20.010 frames/s**, with zero audit work/publication drops and
+1,920,000 pixels checked. The pointer moves to empty ground after the orders;
+this is a declared input gesture, not a glyph/tooltip bypass. Production code has
+no fixture text callback. The displayed actor's moved position and selection/menu
+are present in the committed GPU image.
+
+The [60-game-fps attempt](validation/m3-input-orders60.json) reaches frame2,951,
+then the production renderer stops at frame2,952: **AffInfoSelection 0x410be4**,
+`fatigue words outside captured +4 = +0x76 = 4`. Its `passed` field is false.
+The paused tail's zero-fps bins are retained and are not claimed as sustained
+performance. The actual partial buffer is retained/exported, with the visible
+named stop. No coercion of fatigue words, fallback renderer, skipped draw or
+later captured surface is used. This is an additional engine-renderer dependency
+beyond the requested CAVE/viewport simulation stops and known AffText glyph stop.
+
+The short APP_BUILD validation UI sample is **46.489 displayed / 46.718 game fps**
+over 8.712 seconds, including 257-state startup proofs (minimum full-second27).
+An additional 65-second validation timing repeat was cancelled before execution
+after prolonged shared-lease contention; native validation UI checks and the
+9,200-frame complete equality chain passed. Uncapped orders timing was not run
+because the fatigue domain already prevents a comparable full window. Those are
+explicit skips, not successful measurements.
+
+The [delivery manifest](validation/m3-input-delivery.json) pins source, libraries,
+reports, logs and images. No executable code changes after validated build
+04dea39. Build/recruitment/help dispatch is enabled through the generic engine
+input path; full execution/visual continuation still needs CAVE body, viewport,
+fatigue and glyph ports. The original timing probe, broader workload performance,
+continuous drag and human Test B remain gaps. Only the feature branch is pushed;
+no main merge or milestone acceptance is recorded.

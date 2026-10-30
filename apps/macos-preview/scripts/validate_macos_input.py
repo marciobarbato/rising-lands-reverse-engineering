@@ -36,6 +36,6 @@ def main():
     if a.output.exists():p.error('Refusing to replace proof evidence')
     rows=[compare_probe(a.root,n) for n in PROBES]
     result=dict(schema='rising-lands/macos-test-a-answers/1',owner_contract_sha256=owner_contract(str(a.root.resolve()))[1],rows=rows,equal=all(r['equal'] and r['roundtrip_equal'] for r in rows),
-                scope='Declared answers on native-recorded requests; reference answers and WndProc flag stores never feed the mapper',state_hash_half='Dependency stop: Rust orders are unsupported; WndProc flags and whole-state hashes are not claimed',orders_injected=False)
+                scope='Declared answers on native-recorded requests; reference answers and WndProc flag stores never feed the mapper',state_hash_half='Separate ABI1.5 state proof: validate_macos_player.py; this answer-only tool performs no state comparison',orders_injected=False)
     a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_bytes(canonical(result));print(json.dumps({k:v for k,v in result.items() if k!='rows'},indent=1));print([(r['probe'],r['answers'],r['equal'],r['roundtrip_equal']) for r in rows]);return int(not result['equal'])
 if __name__=='__main__':sys.exit(main())
