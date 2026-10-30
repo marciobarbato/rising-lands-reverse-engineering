@@ -1297,3 +1297,145 @@ instructions, zero glyph/pointer-provider crossings; native loop 178.574 s.
 The fresh report is `validacao/p4-fronteira-provider-verdict.json`.
 The full gate passes **294 tests**, no failures or skips, **184.704 s**
 (`validacao/p4-boundary-domain-gate.log`). No additional provider is required by P4.
+
+
+## S1 order windows and render API 1.10 — 2026-10-30
+
+The input contract remains `renderizar_quadro(memoria, *, superficie_anterior,
+catalogo, paleta, habitado, relogio, cache, hud, texto)`. Minor version 1.10 adds
+originally observed S1 drawing branches; no caller argument is removed or default
+text boundary installed. Memory remains a read-only u8/u16/u32/`ler_mundo` view.
+The renderer returns new indexed bytes/RGBA, ordered drawing calls, display effects
+and the cache. No simulation/recruitment/mission state advances in these providers.
+
+`inventariar_janelas_s1_graficos.py` reads the immutable original S1 capture at
+`82ec5eaa98d4f212b650c2c8ce2b293a30fb50ef`. It unions every gameplay input record
+with 200 following frames, ending before the observed MenuInit(0x13) at 17032.
+The seven windows are 130–403, 1820–2383, 2400–2878, 3110–3508, 3730–4080,
+4170–4623 and 4820–5090: **2,792** required drawing phases. Every window's
+between-frame and frame-end surfaces are equal in the original record. The late
+confirmation at 17040/17041/17043 belongs to the separately captured result/objectives
+screen contract. The metadata tracks units 11..15 only; its unit list is explicitly
+partial. The new native captures retain all 800 unit records and all 1,000 structure
+records and produce the complete per-window census instead.
+
+All **19/19** origins anywhere in S1 are already inside both finite native AffGame
+and RestoreAll domains; no origin fallback or further camera rectangle is added.
+The new visible-state limits found and resolved from original inputs were:
+
+- 2014, `0x4022C8`: selected type-2 sanctuary in mode 4 during troop withdrawal.
+- 2014, `0x401D18`: the active sanctuary recruitment clock.
+- 2549, `0x4135FA`: shifted fatigue icon on newly recruited builder 4, state 2.
+- 2561 and 4788, `0x401A70`: progressively smaller sanctuary contents.
+- 2670, `0x412923`: a builder's selected depot marker, mode 2.
+- 3001/3177 and subsequent phases, `0x414A8A`: builder work tasks 3/4/5.
+- 4100, `0x4135FA`: the same shifted state-2 icon on newly recruited farmer 7.
+
+Selection/gauge drawing supports the observed owner/camera-0, full-health type-2
+sanctuary in modes 4/5, capacity 16, compact troop bags of counts 2..8; type-3 CAVE's
+previous domain stays intact. The old damaged 8-unit sanctuary path remains separate.
+The frame animation precedes the health fill and capacity-slot glyphs; no bag slot is
+invented. Builder state-5 tasks 3/4/5 follow the same original bag-dependent body
+branch as task 0 (`0x4151A0→0x4150AF`), including selection/depot overlays and the
+common tail. Mining tasks 1/2 retain their proved return. Depot mode 2 resolves the
+actual structure index at unit +0x80 and the already proved structure centre, then
+draws the resource and depot markers in original order. State-2 builders/farmers
+use the common fatigue-icon tail's shifted origin minus (8,11), with the actual u16
+words +4/+0x76, u16 +0x74, i8 shifts and original player-coloured bob.
+
+`cronometro_s1_graficos.compor_cronometro_s1` is the bounded AffChrono drawing path.
+It consumes owner/camera 0, structure type 2, mode 4/5; u8 active byte +0x74; u8
+requested unit kind +0x7B (5 or 7); u32 progress +0x8C; and the live unit-type u16
+duration at `0x4965AE + 50*kind`. The read-only Economy contract `CalculStatusRecrute`
+(`0x423F9D`) is floor(progress/duration), without saturation; the proved display
+strip requires percent 0..100. No Economy source or recruitment update is changed,
+and no foreign implementation-file hash is pinned. Zero duration, another target,
+uncaptured percentage, nonzero margin or unknown layout raises a named original
+stop instead of a numeric default. The i8 margin is the captured zero; minimap mode
+is 0/1. With mode 1 the original `0x46A1F8` returns the **minimap origin**, not the
+mouse position: its x selects the left/right screen edge for the clock.
+
+The active-clock callback/drawing order is existing minimap → actual
+`habitado(selected)` query → live progress/duration reads → clipped shadow bob
+`0x1E6C` → clipped clock bob `0x1E4B + floor(percent*32/100)` → existing zone-info
+and tooltip/cursor tail. The existing `habitado` argument and original shadow table
+are forwarded internally to the HUD; they are not substituted with empty callbacks.
+Direct HUD callers missing those active-clock dependencies stop at `0x41A5B8` or
+`0x45B796`. `texto` remains explicit and runs after the saved/framed/shaded tooltip
+background, before the cursor. Only local byte copies/effects are written; no callback
+is installed, no state read is silently defaulted, and no exception is suppressed.
+
+Original executable identity remains `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`,
+code hash `02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4`.
+`evidencias/s1-render-domain-intervals.json` adds intact original bytes for the contents/
+selection routines, AffChrono `0x401CC6..0x402094`, fatigue tail `0x413568..0x413656`,
+worker dispatch, marker switch and read-only percentage/duration queries. Historical
+bytes, releases, predecessor hashes and manifests are unchanged.
+
+Seven fresh leased original-only invocations capture **3,906/3,906** native frame
+instances (overlapping checkpoints are explicit), including complete state and both
+phase surfaces checked against the published S1 records. Every invocation completed
+within 20 minutes; none skipped, hit a budget or changed an original game routine.
+The observer has a 19-minute whole-invocation alarm and an earlier checkpoint budget.
+It resumes immutable native checkpoints, never live code from another worktree;
+opening state hashes are checked. The first three captures preceded the translations
+for their new cases. Later cases were likewise translated only after their native
+records existed. No normalized analysis executable is used.
+
+The original large new capture files/manifests are preserved unchanged in
+`.local/s1-native-archives/`. `empacotar_s1_graficos.py` creates transport parts by
+copying original rows and referenced zlib strings verbatim, verifies every part, and
+records the parent capture/manifest hashes and provenance in `*.partitions.json`.
+It refuses tracked inputs and overwrites. The committed set is enumerated in
+`validacao/s1-render-capture-set.json`. Consecutive transport parts carry Python
+surface, cache and saved-background outputs; overlapping independent captures are
+explicit and equal to the same published phases. Only the two previously proved DD
+pointer words are excluded from DGROUP effects, with no mask expansion.
+
+The source-frozen recovery proof remains at `validacao/cadeia-atual-P3P6P7.json`,
+bound to its own Graphics source revision `0cb6a4a`. The new current-source proof is
+`validacao/s1-regression-P3P6P7.json`; S1's final report is
+`validacao/s1-render-final.json`. Development stop diagnostics are local only and
+are not promoted to evidence. The final source-frozen proof passes **2,792/2,792** required surfaces across all
+seven windows and **3,906/3,906** captured frame instances, with **319,948** raster
+calls and **2,019** strictly checked text boundaries. No renderer/logic stop, pixel,
+argument or display-effect mismatch occurs. The current-source P3/P6/P7 regression
+passes **3,001/3,001**, **2,272/2,272**, **3,572/3,572** (423.400/54.300/170.544 s).
+The final full domain gate passes **298 tests**, zero failures or skips, in
+**192.738 s** (`validacao/s1-render-domain-gate.log`). Documentation links pass. The pass-2 S1 repository package was
+still absent on `origin/feat/re-missions` at the 15:41 BRT fetch; no missing package
+was treated as compared state. This render proof uses original native entry captures
+checked against the existing published S1 records instead.
+
+Review corrections are explicit: the first domain gate ran 297 tests and found one
+stale expected-stop assertion for builder marker mode 2, which is now native-proved.
+That negative case now uses unproved mode 3. Review also registered the clock's seven
+named HUD dependency stops and added missing-query/shadow, target, zero-duration,
+percentage, margin and minimap-layout regressions. The first gate output remains in
+`validacao/s1-render-domain-gate-pre-review.log`; intermediate comparison diagnostics
+remain local. The current-source whole-surface proofs are rerun after the stop-map
+correction rather than rewriting their source hashes. These corrections add no
+state mutation, blank callback or exception suppression.
+
+Scope/gaps: this is render API coverage of the seven M3.2 gameplay order windows,
+under Missions' explicitly recorded AffText/TextGetMessage boundary. It is not a
+whole-state Python simulation, a glyph-enabled retail trajectory, the full S1 raid/
+fire/death path, or mission acceptance. The bounded optional bitmap provider remains
+independently proved. General render modes other than 0x12 still stop at `0x4176A8`;
+the separate result/objectives APIs retain their own proofs. Actual MenuInit/LoadPie
+`0x4799C4` and opaque victory text, other maps/cameras/owners, fire and unproved
+unit/task variants remain addressed dependencies. Engine/macOS owners must consume
+or port the additive **Graphics 1.10** clock, bag/selection, marker and worker/icon
+coverage; this front does not modify their files or record acceptance.
+
+Exact Mac-mini reproduction commands and independent-checkpoint scope are in
+[S1_RENDER_WINDOWS.md](S1_RENDER_WINDOWS.md). Long runs remain the mini's job;
+feature integration remains the coordinator's job. No merge to main is performed.
+
+
+Resource note for the coordinator: this workstation had about 14 GiB free at entry
+and 13 GiB after capture, already below the repository's 20 GiB workspace floor.
+No other owner's files or original inputs were removed. The original new native
+archives and resumable checkpoints remain in ignored `.local/`; the published
+transport set is lossless. Workspace cleanup/offloading beyond Graphics ownership
+remains with maintenance. This did not cause a capture limit or skipped comparison.

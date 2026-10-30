@@ -52,7 +52,8 @@ class EntradaM3(unittest.TestCase):
         cap=CapturaEntradaM3(CAPTURES[0]);case=next(c for c in cap.d['cases'] if c['name']=='selected_unit_12')
         m=cap.memory(case);base=m.u32(0x4e19a0)+12*276;catalog=Catalogo();cache=case['cache']
         cache=EstadoCache(cap.blob(cache['keys']),cap.blob(cache['payloads']),cache['cursor'])
-        cases=((base+0x82,b'\2',0x412923),(base+0xc,b'\2\0',0x410a2c),
+        # Mode2 is now native-proved for builders over S1; mode3 remains outside.
+        cases=((base+0x82,b'\3',0x412923),(base+0xc,b'\2\0',0x410a2c),
                (base+0x9a,b'\x65\0',0x410be4),(base+0x99,b'\1',0x41591f),
                (0x4e2412,b'\3\0',0x417086),(0x4e2412,struct.pack('<HH',2,1000),0x417086),
                (0x4e062c,b'\x11\0',0x417cfc))

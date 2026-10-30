@@ -2,6 +2,50 @@
 
 Owner: graphics. Active implementation, synthetic/reference tests, indexed-buffer artifacts, and original-byte extracts live in `pesquisas-paralelas/graficos-animacao/`. Historical frozen releases are immutable records in the workspace archive and in the pre-organization Git history. Never edit a frozen release's text or inputs to modernize it: its manifest hashes identify the exact original record.
 
+## Current state — 2026-10-30 S1 order windows
+
+**Render API 1.10 covers all seven S1 gameplay order windows: 2,792/2,792 complete
+800×600 surfaces, zero stops or pixel/raster/display-effect mismatches**, under the
+explicitly recorded AffText/TextGetMessage boundary. The bounded bitmap provider is
+also available explicitly (270/270 original AffText calls, 7,620 glyph blits); no text callback is installed
+by default. This is M3.2 render coverage, not a whole-state Python mission acceptance.
+
+| S1 window | Equal full surfaces |
+|---|---:|
+| 130–403 | 274/274 |
+| 1820–2383 | 564/564 |
+| 2400–2878 | 479/479 |
+| 3110–3508 | 399/399 |
+| 3730–4080 | 351/351 |
+| 4170–4623 | 454/454 |
+| 4820–5090 | 271/271 |
+
+Seven fresh leased original-only runs validate **3,906/3,906** native frame instances
+(overlaps explicit), every complete end-frame state and both phase surfaces, with no
+skip or native limit. Maximum invocation: **480.042 s**. The current-source Python
+proof checks **319,948 raster calls** and **2,019 strict text-boundary calls**. The full
+P3/P6/P7 regression also passes **3,001/3,001**, **2,272/2,272**, **3,572/3,572**.
+All **19/19 S1 view origins** were already covered by the finite native matrix.
+
+Newly proved pixel branches are the selected mode-4 sanctuary and compact bags of 2..8 troops,
+its active recruitment clock (live progress and duration; shadow then clock bob),
+builder depot mode2/work tasks3..5, and shifted state-2 builder/farmer fatigue icons.
+The public render arguments are unchanged; actual habitation queries and the original
+shadow table are forwarded internally to the HUD. Unknown clock inputs retain named
+stops. The final domain gate passes **298 tests**, zero failures or skips, in
+**192.738 s**, after the review corrections documented in the [handoff](../pesquisas-paralelas/graficos-animacao/HANDOFF.md#s1-order-windows-and-render-api-110--2026-10-30).
+
+[Full proof](../pesquisas-paralelas/graficos-animacao/validacao/s1-render-final.json),
+[window census and exact Mac-mini commands](../pesquisas-paralelas/graficos-animacao/S1_RENDER_WINDOWS.md).
+Original rows and encoded payloads are preserved in lossless transport parts; no
+historical evidence or foreign implementation-file hash is changed/pinned.
+
+Remaining: general non-gameplay modes `0x4176A8`, actual MenuInit/LoadPie `0x4799C4`
+and opaque victory text, the full late S1 combat/fire/death path, a glyph-enabled
+whole trajectory, and unproved maps/owners/cameras/variants. Engine consumers must
+consume or port the additive 1.10 coverage through their own fronts. No main merge
+or acceptance is performed by this executor. Earlier checkpoints below are historical.
+
 ## Current recovery state — 2026-10-30
 
 The feature branch first fast-forwarded to integrated main `e41cc77`. The parked

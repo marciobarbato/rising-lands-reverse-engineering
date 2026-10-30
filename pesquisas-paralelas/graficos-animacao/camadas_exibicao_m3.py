@@ -70,7 +70,9 @@ def cave(c,r,x,y,cell):
     for layer in plano_cave(c,r,x,y,cell):bob(c,layer['x'],layer['y'],layer['id'],layer['owner'])
 
 def selecao(c,r,cell,index,*,frame,gauge):
-    if r[8] not in (2,3) or r[5]!=5 or r[4]!=0 or c.camera!=0 or c.leitura_entrada is None:
+    # S1 original frame2014: the selected sanctuary continues drawing while
+    # SortieTroupe holds mode4. The caller still excludes mode3 before this tail.
+    if r[8] not in (2,3) or not (r[5]==5 or r[8]==2 and r[5]==4) or r[4]!=0 or c.camera!=0 or c.leitura_entrada is None:
         c.parar(0x4022c8 if frame else 0x4020ec,'structure selection outside captured API-1.8 domain')
     spec=TABLES['selection'][str(r[8])];ox,oy=c.tela.palavras('origem')
     x,y=(cell%256-ox)*32-spec['anchor'][0],(cell//256-oy)*32-spec['anchor'][1]
@@ -81,7 +83,9 @@ def selecao(c,r,cell,index,*,frame,gauge):
             bob(c,px,py,ident,r[4])
     if not gauge:return
     maximum=c.leitura_entrada.u16(0x495d90+52*r[8]);hp,damage=word(r,0xa),word(r,6);capacity,count=word(r,0xe),word(r,0xc)
-    if maximum!=spec['maximum'] or hp!=maximum or damage or capacity!=spec['capacity'] or count not in spec['counts']:
+    # Native S1 pools through5090 include full-health sanctuary bags2..8.
+    counts=spec['counts'] + ([2,3,4,5,6] if r[8]==2 else [])
+    if maximum!=spec['maximum'] or hp!=maximum or damage or capacity!=spec['capacity'] or count not in counts:
         c.parar(0x4020ec,'structure gauge health/capacity outside API-1.8 matrix')
     if r[0x4e:0x4e+capacity]!=bytes([1])*count+bytes(capacity-count):c.parar(0x401a70,'structure bag codes outside captured compact troop slots')
     gx,gy=i16(x-23),i16(y+spec['gauge_y'])

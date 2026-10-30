@@ -1,0 +1,71 @@
+{
+  "schema": "rising-lands/graphics-s1-native-lossless-partition/1",
+  "native_capture_sha256": "f4006ade44878f8883790962c3903b4ff77d65d32acbf5a13a2f6545c13599f2",
+  "native_manifest": {
+    "schema": "rising-lands/m3-probe-render-native/1",
+    "probe": "S1",
+    "probe_ref": "82ec5eaa98d4f212b650c2c8ce2b293a30fb50ef",
+    "frames": [
+      3001,
+      3508
+    ],
+    "requested_stop": 3508,
+    "status": "complete",
+    "original_opening_state_sha256": "694db5596c8ffd5699b377c372eb6b9b9611bb3a6dc702430ddee6cf5103668e",
+    "opening_checkpoint_sha256": "b94ad88f1098b72e63a9204b989bf9f9625bad5c09c2b95fdd16c967bc48270a",
+    "executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+    "code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+    "source_sha256": "13b93b10829de4d36f0b58237cf2a977bc8b1ce241a2a82d836ddbae2e99e0b5",
+    "recording_helper_sha256": "93cc53512affcca833967067b2b94bacd03b9a8d1dccc47aa78e1c229ee51d11",
+    "producing_revision": "589dcacf782f73529bf02869d6411c1003a430fd",
+    "snapshot": {
+      "path": ".local/graficos-api17-start/S1-render-03508.pickle",
+      "sha256": "8478b4e73a13e88d1c748ddcc73de8ff99d9bab9e676c3c5ee8cd49bab9a7410"
+    },
+    "boundary_contract": "Original Missions display-v2: AffText/TextGetMessage declared non-execution; no glyph substitution.",
+    "elapsed_seconds": 288.059,
+    "raw_sha256": "26e0cecd2bef200450d336201b57d403d2319288d21fa6ab840f42a4600e1bbe",
+    "compressed_sha256": "f4006ade44878f8883790962c3903b4ff77d65d32acbf5a13a2f6545c13599f2",
+    "invocation_seconds": 320.378
+  },
+  "parts": [
+    {
+      "path": "s1-render-part-3001-3128.json.xz",
+      "frames": [
+        3001,
+        3128
+      ],
+      "sha256": "324c73ea45f922131acf6a846a52abeefff8dd321bd439899501c1f2f1075569",
+      "bytes": 44177976
+    },
+    {
+      "path": "s1-render-part-3129-3256.json.xz",
+      "frames": [
+        3129,
+        3256
+      ],
+      "sha256": "f9509b8da4371af941851d8d247b9a7f8046054196e460dc2d73a8507e2af3d0",
+      "bytes": 21661312
+    },
+    {
+      "path": "s1-render-part-3257-3384.json.xz",
+      "frames": [
+        3257,
+        3384
+      ],
+      "sha256": "be5b398d6db73c265fdc35c5dd552b2ba61f05e4eeec396aafbd6aa93fe4981f",
+      "bytes": 24959664
+    },
+    {
+      "path": "s1-render-part-3385-3508.json.xz",
+      "frames": [
+        3385,
+        3508
+      ],
+      "sha256": "a45e02cd51ca1b9a5905900b656ea7d17bc7d0bcb36bab7475c7a3cc65c1eac0",
+      "bytes": 43110336
+    }
+  ],
+  "complete_native_rows_equal": true,
+  "encoded_payloads_unchanged": true
+}

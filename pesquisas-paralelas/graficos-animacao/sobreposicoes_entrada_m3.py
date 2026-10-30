@@ -59,7 +59,7 @@ def validar_unidade(c,r):
         from camadas_exibicao_m3 import TABLES
         if [word(r,4),word(r,0x76)] not in TABLES.get('fatigue_pairs',{}).get(str(r[1]),[]):
             c.parar(0x410be4,'fatigue words outside captured unit/material pairs')
-    if r[0xbd] and r[0x82]>1 and not (r[1]==5 and r[0x82]==2):
+    if r[0xbd] and r[0x82]>1 and not (r[1] in (5,7) and r[0x82]==2):
         c.parar(0x412923,'selected unit order marker outside captured modes')
     if r[0xaf]>>5 and r[1]!=7:c.parar(0x413696,'experience icon for a non-builder is not captured')
 
@@ -92,7 +92,7 @@ def info_unidade(c,r,x,y,index):
 
 
 def estrutura(c,r,cell,index,*,frame,gauge):
-    if r[8]==3 or (r[8]==2 and word(r,0xc)==7):
+    if r[8]==3 or (r[8]==2 and (word(r,0xc) in (2,3,4,5,6,7) or r[5]==4)):
         from camadas_exibicao_m3 import selecao
         return selecao(c,r,cell,index,frame=frame,gauge=gauge)
     if r[8]!=2 or r[5]!=5 or r[4]!=0 or c.camera!=0:
