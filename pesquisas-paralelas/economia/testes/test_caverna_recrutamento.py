@@ -90,6 +90,44 @@ class Replay(unittest.TestCase):
         self.assertEqual(falhas, [], json.dumps(falhas[:5], indent=1))
         self.assertGreater(sum(c['match'] for c in contagem.values()), 0)
 
+    def test_core_exit_provider_composes(self):
+        """CalculPosition and RechercheDecalageSortie served by Core's ``provedor_saida`` (its exit registers checked
+        against the original's): every call still matches, and both routines are actually served."""
+        from validar_caverna_recrutamento import provedores_saida
+        servidas = {}
+        contagem, falhas = rp.replay(captura(), provedores=provedores_saida(), servidas=servidas)
+        self.assertEqual(falhas, [], json.dumps(falhas[:5], indent=1))
+        self.assertEqual(sum(c['match'] for c in contagem.values()), 342)
+        self.assertGreater(servidas.get('CalculPosition', 0), 0)
+        self.assertGreater(servidas.get('RechercheDecalageSortie', 0), 0)
+
+    def test_legacy_recruitment_with_core_exit_choice(self):
+        """``visao_grupos.escolher_saida(memoria)`` as ``Recrutamento.iniciar(escolher_saida=...)``: over the bytes
+        each accepted InitRecruteTroupe read, the legacy suffix stores the cell the original stored in +0x7c."""
+        from construcoes import EconomiaConstrucoes
+        from recrutamento import Recrutamento
+        from visao_grupos import escolher_saida
+        aceitos = [r for r in captura()['calls'] if r['routine'] == 'InitRecruteTroupe'
+                   and int(r['exit_registers']['EAX'], 16) & 0xff == 1]
+        self.assertTrue(aceitos)
+        for r in aceitos:
+            m = rp.MemoriaEsparsa(r['read_before_write'])
+            regs = {k: int(v, 16) for k, v in r['entry_registers'].items()}
+            tipo, jogador = regs['EAX'] & 0xff, regs['EDX'] & 0xff
+            s = m.u16(cr.SELECOES_ESTRUTURA + 2 * jogador)
+            e = cr.ESTRUTURAS + cr.PASSO * s
+            lojas = [int(x[4], 16) for x in r['stores'] if int(x[2], 16) == e + 0x7c and x[3] == 2]
+            self.assertTrue(lojas)
+            esperado = lojas[-1] & 0xffff
+            legado = Recrutamento(EconomiaConstrucoes(estruturas=bytes(1000 * 276)))
+            struct.pack_into('<H', legado.selecoes, 2 * jogador, s)
+            legado.mundo.estruturas[276 * s + 8] = m.u8(e + 8)
+            for recurso in (0, 1, 2):
+                legado.mundo.economia.atribuir(jogador, recurso, 1000)
+            self.assertTrue(legado.iniciar(tipo, jogador, escolher_saida=escolher_saida(m)))
+            self.assertEqual(struct.unpack_from('<H', legado.mundo.estruturas, 276 * s + 0x7c)[0], esperado,
+                             (r['frame'], r.get('action')))
+
     def test_mutations_are_detected(self):
         c = captura()
         alvos = {}

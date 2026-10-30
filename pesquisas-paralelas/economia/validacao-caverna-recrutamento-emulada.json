@@ -2,6 +2,7 @@
  "capture": "pesquisas-paralelas/economia/evidencias/caverna-recrutamento/captura-caverna-recrutamento-exibicao.json.xz",
  "capture_raw_sha256": "431171cc0b618b039e0ffb43f40d15a6878c798cb40cccc857e530f88c642443",
  "compared": 342,
+ "core_exit_provider": "d47c782fb100e4dc302e35765317fdd47d0986aa21f0b96c7d75628791bbed61",
  "counts": {
   "BatimentHabitable": {
    "error": 0,
@@ -269,7 +270,14 @@
    "foreign_calls": 1,
    "frame": 30,
    "outcome": "match",
-   "routine": "InitRecruteTroupe"
+   "routine": "InitRecruteTroupe",
+   "served_by_translation": {
+    "RechercheDecalageSortie": 1
+   },
+   "uncertain": {
+    "EAX": "0xffff0000",
+    "EDX": "0xffffffff"
+   }
   },
   {
    "action": null,
@@ -332,7 +340,14 @@
    "foreign_calls": 1,
    "frame": 50,
    "outcome": "match",
-   "routine": "InitRecruteTroupe"
+   "routine": "InitRecruteTroupe",
+   "served_by_translation": {
+    "RechercheDecalageSortie": 1
+   },
+   "uncertain": {
+    "EAX": "0xffff0000",
+    "EDX": "0xffffffff"
+   }
   },
   {
    "action": "tag 17 slot 1: InitRecruteTroupe(type 6, player 0)",
@@ -341,7 +356,14 @@
    "foreign_calls": 1,
    "frame": 50,
    "outcome": "match",
-   "routine": "InitRecruteTroupe"
+   "routine": "InitRecruteTroupe",
+   "served_by_translation": {
+    "RechercheDecalageSortie": 1
+   },
+   "uncertain": {
+    "EAX": "0xffff0000",
+    "EDX": "0xffffffff"
+   }
   },
   {
    "action": "tag 17 slot 2: InitRecruteTroupe(type 7, player 0)",
@@ -350,7 +372,14 @@
    "foreign_calls": 1,
    "frame": 50,
    "outcome": "match",
-   "routine": "InitRecruteTroupe"
+   "routine": "InitRecruteTroupe",
+   "served_by_translation": {
+    "RechercheDecalageSortie": 1
+   },
+   "uncertain": {
+    "EAX": "0xffff0000",
+    "EDX": "0xffffffff"
+   }
   },
   {
    "action": "tag 17 slot 0: InitRecruteTroupe(type 5, player 0)",
@@ -1223,7 +1252,10 @@
    "foreign_calls": 17,
    "frame": 297,
    "outcome": "match",
-   "routine": "CalculTroupe"
+   "routine": "CalculTroupe",
+   "served_by_translation": {
+    "CalculPosition": 1
+   }
   },
   {
    "action": null,
@@ -1232,7 +1264,10 @@
    "foreign_calls": 15,
    "frame": 297,
    "outcome": "match",
-   "routine": "SortieTroupe"
+   "routine": "SortieTroupe",
+   "served_by_translation": {
+    "CalculPosition": 1
+   }
   },
   {
    "action": "tag 17 slot 2: InitRecruteTroupe(type 7, player 0)",
@@ -1241,7 +1276,14 @@
    "foreign_calls": 1,
    "frame": 298,
    "outcome": "match",
-   "routine": "InitRecruteTroupe"
+   "routine": "InitRecruteTroupe",
+   "served_by_translation": {
+    "RechercheDecalageSortie": 1
+   },
+   "uncertain": {
+    "EAX": "0xffff0000",
+    "EDX": "0xffffffff"
+   }
   },
   {
    "action": null,
@@ -2195,7 +2237,10 @@
    "foreign_calls": 17,
    "frame": 869,
    "outcome": "match",
-   "routine": "CalculTroupe"
+   "routine": "CalculTroupe",
+   "served_by_translation": {
+    "CalculPosition": 1
+   }
   },
   {
    "action": null,
@@ -2204,7 +2249,10 @@
    "foreign_calls": 15,
    "frame": 869,
    "outcome": "match",
-   "routine": "SortieTroupe"
+   "routine": "SortieTroupe",
+   "served_by_translation": {
+    "CalculPosition": 1
+   }
   },
   {
    "action": "tag 17 slot 1: InitRecruteTroupe(type 6, player 0)",
@@ -2213,7 +2261,14 @@
    "foreign_calls": 1,
    "frame": 870,
    "outcome": "match",
-   "routine": "InitRecruteTroupe"
+   "routine": "InitRecruteTroupe",
+   "served_by_translation": {
+    "RechercheDecalageSortie": 1
+   },
+   "uncertain": {
+    "EAX": "0xffff0000",
+    "EDX": "0xffffffff"
+   }
   },
   {
    "action": null,
@@ -3050,7 +3105,10 @@
    "foreign_calls": 17,
    "frame": 1363,
    "outcome": "match",
-   "routine": "CalculTroupe"
+   "routine": "CalculTroupe",
+   "served_by_translation": {
+    "CalculPosition": 1
+   }
   },
   {
    "action": null,
@@ -3059,7 +3117,10 @@
    "foreign_calls": 15,
    "frame": 1363,
    "outcome": "match",
-   "routine": "SortieTroupe"
+   "routine": "SortieTroupe",
+   "served_by_translation": {
+    "CalculPosition": 1
+   }
   },
   {
    "action": "tag 17 slot 0: InitRecruteTroupe(type 5, player 0)",
@@ -3068,7 +3129,14 @@
    "foreign_calls": 1,
    "frame": 1364,
    "outcome": "match",
-   "routine": "InitRecruteTroupe"
+   "routine": "InitRecruteTroupe",
+   "served_by_translation": {
+    "RechercheDecalageSortie": 1
+   },
+   "uncertain": {
+    "EAX": "0xffff0000",
+    "EDX": "0xffffffff"
+   }
   },
   {
    "action": null,
@@ -3144,6 +3212,10 @@
   }
  ],
  "schema": "rising-lands/economy-cave-recruitment-validation/1",
- "seconds": 673.483,
+ "seconds": 669.835,
+ "served_by_translation": {
+  "CalculPosition": 6,
+  "RechercheDecalageSortie": 7
+ },
  "translation": "a24ff542ea4bae7f1fd1f0b8ac946961f943805777d6277445fed734d204de89"
 }

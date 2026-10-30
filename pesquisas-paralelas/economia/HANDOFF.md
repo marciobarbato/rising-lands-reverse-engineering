@@ -15,7 +15,7 @@ Branch `feat/re-economy`; not integrated. Full contract: [ECONOMY.md](../../docs
 Resumable next steps:
 1. DONE native rerun after the BatimentGetCase argument change: 342 compared, 0 mismatches, rerun equal.
 2. Send Core the frame-125 minimap difference (DecouvreTerrain's SetMiniMap/DecouvreCase colours over the native state). An earlier wiring bug here (BatimentGetCase's EDX not passed, so DecouvreTerrain got radius 3 and 316 fog bytes differed) is fixed.
-3. Coordinator: Core published `provedor_saida(visao, outros)` (CalculPosition + RechercheDecalageSortie, every register) in feat/re-core `d07ed89`. Once on origin/main, wire it as the `externo` for SortieTroupe's CalculPosition and InitRecruteTroupe's RechercheDecalageSortie (and `escolher_saida(m)` for the legacy `Recrutamento.iniciar`), then rerun replay and the native differential.
+3. DONE: Core's `visao_grupos.provedor_saida` serves CalculPosition and RechercheDecalageSortie (`validar_caverna_recrutamento.provedores_saida`, provider exit registers checked against the original's). CPU-free 342/342 match; native 342 compared, 0 mismatches, rerun equal, 6 + 7 calls served. `escolher_saida(m)` drives the legacy `Recrutamento.iniciar` (test). Work-cycle composition rerun with it: 402 match / 4 uncertain / 1 mismatch (unchanged; frame 125 is Core's minimap).
 4. Open: SortieTroupe's abandonment path (0x42101d..0x42114e), TerrainDeposeMatiere over live memory, BatimentSetTechnologie types 1/5/6/0xd/0xf/0x10/0x12/0x14, balloons (0x12), CalculTroupe types 5/6/8/13+.
 5. ai-runtime must add the `BatimentNextEtape:cave` provider (structure index, return ignored) to pass frame 220 in P3/P6/P7.
 
