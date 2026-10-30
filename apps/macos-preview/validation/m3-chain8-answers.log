@@ -1,0 +1,11 @@
+[lease] macos-chain8-answers waiting
+[lease] macos-chain8-answers granted slots [0]
+{
+ "schema": "rising-lands/macos-test-a-answers/1",
+ "owner_contract_sha256": "340d89c61f80531adac3890f446e88482f4bb5d4966bbad1b13ef5417f02f5e2",
+ "equal": true,
+ "scope": "Declared answers on native-recorded requests; reference answers and WndProc flag stores never feed the mapper",
+ "state_hash_half": "Separate ABI1.5 state proof: validate_macos_player.py; this answer-only tool performs no state comparison",
+ "orders_injected": false
+}
+[('P1', 7522, True, True), ('P2', 9034, True, True), ('P3', 45032, True, True), ('P6', 33873, True, True), ('P7', 53099, True, True), ('K1', 7037, True, True)]

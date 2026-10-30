@@ -271,7 +271,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             };live.benchmarkInput=args.contains("--benchmark-orders")
             if let index=[15.0,20.0,30.0,60.0,0.0].firstIndex(of:rate){live.rateControl.selectItem(at:index)}
             live.perform("live-reset"){_ in live.perform("live-step"){_ in live.perform("live-play"){_ in
-                if live.benchmarkInput{
+                if live.benchmarkInput && args.contains("--benchmark-orders-selected"){
+                    // Exact historical 60-fps fatigue workload: keep the moved actor selected.
+                    // Observe the assigned frame without supplying a wall-clock frame to logic.
+                    for (delay,gesture) in [(8.0,0),(8.2,1),(8.5,2)] {
+                        DispatchQueue.main.asyncAfter(deadline:.now()+delay){
+                            live.inputBarrier{frame in
+                                gestures.append(["gesture":gesture,"observedNextFrame":frame])
+                                switch gesture{
+                                case 0:live.benchmarkClick(560,528)
+                                case 1:live.benchmarkClick(624,432)
+                                default:live.benchmarkPointer(400,272)
+                                }
+                            }
+                        }
+                    }
+                }else if live.benchmarkInput{
                     // Anchor real AppKit gestures to the startup prefix, so uncapped
                     // play also receives orders before the later dependency horizon.
                     var gesture=0,lastGestureFrame=128
@@ -299,6 +314,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
                         result["native_window_visible"]=live.window.isVisible
                         result["requestedSeconds"]=duration
                         result["benchmark_gestures"]=gestures
+                        result["benchmark_workload"]=args.contains("--benchmark-orders-selected") ? "historical-selected-actor":"prefix-anchored-deselect"
                         result["first_stop_snapshot"]=firstStop ?? NSNull() as Any
                         result["screenMaximumFPS"]=live.window.screen?.maximumFramesPerSecond ?? 0
                         result["native_window_unoccluded"]=live.window.occlusionState.contains(.visible)

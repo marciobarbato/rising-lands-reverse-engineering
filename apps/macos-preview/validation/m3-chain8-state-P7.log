@@ -1,0 +1,25 @@
+[lease] macos-chain8-state-P7 waiting
+[lease] macos-chain8-state-P7 granted slots [2]
+{
+ "schema": "rising-lands/macos-test-a-state/1",
+ "probe": "P7",
+ "world_source": "S0 plus original static tables; 128 real no-input frames; no oracle state reload",
+ "driver_sha256": "59b3f37271ce6d0613041cca0d66d62f440d562ee946dacc5b08a11816b38e7e",
+ "library_sha256": "50c87f129c2ae52a7553eb749ae73d5d762b6359eeda6c3638427f3a0ef8139c",
+ "input_sha256": "914758b0446d561ec590bc5ab854adb95692e58626709ed2d56ac6107aa51590",
+ "canonical_roundtrip": true,
+ "reference": {
+  "logic": "a7f5d4939e7826e02a8b348995edb9c793657f4c",
+  "graphics": "ce441852bcada750a8f91da8ed3302f1668c4405",
+  "tree_manifest_sha256": "5942cc4f4c76d7a9311be6f61be5a146819a7a99685a4f6f46011767c7c31276",
+  "source_and_fixtures": "Git objects; no working-tree source hash gate"
+ },
+ "frames_equal": 3572,
+ "frames_compared": 3572,
+ "frames_requested": 3572,
+ "frame_hash_scope": "Exact engine indicator comparator fields, including unit record hashes and objective/UI bytes; DGROUP excluded",
+ "first_difference": null,
+ "first_engine_stop": null,
+ "rendering_executed": false,
+ "seconds": 85.48961637500179
+}

@@ -1,0 +1,174 @@
+{
+ "baseline": "c5f1734f6a0fb517fd997862746c65c99f958f24",
+ "runtime_revision": "afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0",
+ "probes": {
+  "P1": {
+   "prior_frames": 501,
+   "prior_frame_hashes_unchanged": true,
+   "prior_whole_state_phases": 1002,
+   "prior_whole_state_results_unchanged": true
+  },
+  "P2": {
+   "prior_frames": 601,
+   "prior_frame_hashes_unchanged": true,
+   "prior_whole_state_phases": 1202,
+   "prior_whole_state_results_unchanged": true
+  },
+  "P3": {
+   "prior_frames": 91,
+   "prior_frame_hashes_unchanged": true,
+   "prior_whole_state_phases": 0,
+   "prior_whole_state_results_unchanged": null
+  },
+  "P6": {
+   "prior_frames": 91,
+   "prior_frame_hashes_unchanged": true,
+   "prior_whole_state_phases": 183,
+   "prior_whole_state_results_unchanged": true
+  },
+  "P7": {
+   "prior_frames": 91,
+   "prior_frame_hashes_unchanged": true,
+   "prior_whole_state_phases": 0,
+   "prior_whole_state_results_unchanged": null
+  },
+  "K1": {
+   "prior_frames": 12,
+   "prior_frame_hashes_unchanged": true,
+   "prior_whole_state_phases": 0,
+   "prior_whole_state_results_unchanged": null
+  }
+ },
+ "answers_unchanged": true,
+ "prepared_native_inputs": [
+  {
+   "file": "asset0.bin",
+   "bytes": 1426660,
+   "sha256": "318069f1728621d98a4409b5a8809ea410d7b4adc94d6ba421d69b14c98a99db",
+   "unchanged": true
+  },
+  {
+   "file": "asset1.bin",
+   "bytes": 3171280,
+   "sha256": "b9012e0bc6119e1f4745ff6e25bf8ba912423e9c364513118a31b5355c87beac",
+   "unchanged": true
+  },
+  {
+   "file": "asset2.bin",
+   "bytes": 2027609,
+   "sha256": "f7ee4ce0ec957af609f0ae9ab845ac1bc08c2b598c749b9c3b78ec37f45324d8",
+   "unchanged": true
+  },
+  {
+   "file": "asset3.bin",
+   "bytes": 2585477,
+   "sha256": "4a1db7d2a92f421970d35f8a6402eb6489969257c54d07b5590186f011327e1d",
+   "unchanged": true
+  },
+  {
+   "file": "asset4.bin",
+   "bytes": 1272760,
+   "sha256": "af4f94ea996a65d36592bb6cefc407dc628b3d488c9c335b8f6015bbfcb6a3ae",
+   "unchanged": true
+  },
+  {
+   "file": "asset5.bin",
+   "bytes": 2927906,
+   "sha256": "0282fa4bc5241fb6905a0daa0c00f43e63fe63c0f00ff6beda01d3602141fd1d",
+   "unchanged": true
+  },
+  {
+   "file": "asset6.bin",
+   "bytes": 50177,
+   "sha256": "da6a07c93a6a027cd81ce50e4dfc756848223bd951f4a60e70bab1e9bc3c20a7",
+   "unchanged": true
+  },
+  {
+   "file": "asset7.bin",
+   "bytes": 256,
+   "sha256": "52f6d514b6bed2ff3e62c273abf6ccd79082e5205d657fc7d1787f347ee3b5b6",
+   "unchanged": true
+  },
+  {
+   "file": "asset8.bin",
+   "bytes": 256,
+   "sha256": "e3ae0b131cd8dd65192fb53b83fcac0b0ce194cc87b5a894e301996d00cc6938",
+   "unchanged": true
+  },
+  {
+   "file": "cache.bin",
+   "bytes": 270336,
+   "sha256": "97cd986a11696ebbc12d3018c83cb91702293366d67a1c3eeceefffbadd14d7f",
+   "unchanged": true
+  },
+  {
+   "file": "cursor.bin",
+   "bytes": 4,
+   "sha256": "33149ff2dc4209e1a1ef29589fe8a3e5d59cb05f0d75531c5d4e17cf72eb6882",
+   "unchanged": true
+  },
+  {
+   "file": "entries.bin",
+   "bytes": 302412,
+   "sha256": "a644b1cd8e38947ba036553824976b182c1a657f3f9f042f457635a38b81f3f3",
+   "unchanged": true
+  },
+  {
+   "file": "input1.bin",
+   "bytes": 72,
+   "sha256": "52b6cb69d92294d40fd761405898d758b47ea3607385e481684771ba0fbe59bc",
+   "unchanged": true
+  },
+  {
+   "file": "input2.bin",
+   "bytes": 72,
+   "sha256": "2de9506bf00d155a918b95d4952df8b0347464cc4c31bd7a9acc91f10f2b2570",
+   "unchanged": true
+  },
+  {
+   "file": "keys.bin",
+   "bytes": 1024,
+   "sha256": "8f0f4071c9fd6fe6e7d19849dd0a7d973bb08cd911655fa3264a80bfabb9b738",
+   "unchanged": true
+  },
+  {
+   "file": "palette.bin",
+   "bytes": 768,
+   "sha256": "3fa7d79f6e8fd177d20be32903eac7fdccf2942abaf4f2ab5b52216475da70be",
+   "unchanged": true
+  },
+  {
+   "file": "s0.bin",
+   "bytes": 17016770,
+   "sha256": "3d08c380613aff10c765c8a250819d72d8f91ab2e4979ceb9f2c1491c970b0b5",
+   "unchanged": true
+  },
+  {
+   "file": "spans.bin",
+   "bytes": 721680,
+   "sha256": "8500218fc975fe56a6ec404c432179bdaa21b8b50a8be78417154235380785ae",
+   "unchanged": true
+  },
+  {
+   "file": "states.bin",
+   "bytes": 588832,
+   "sha256": "9bb80788ee8d3afd7db3f0ab58ed687be76750f55f9b615ec0ddf63de1fffda0",
+   "unchanged": true
+  },
+  {
+   "file": "surface.bin",
+   "bytes": 480000,
+   "sha256": "e8cb862ddcfb2b3de6845b5838581aea130d743baa0cdffab34439332eb2db76",
+   "unchanged": true
+  },
+  {
+   "file": "surfaces.bin",
+   "bytes": 294400,
+   "sha256": "f4739c9bc4d4d9eaf6a5f6bc7bf715af8d5d1bd8c11e5430a73642fea254218c",
+   "unchanged": true
+  }
+ ],
+ "all_native_inputs_unchanged": true,
+ "prefix_rows_unchanged": true,
+ "long_prefix_rows_unchanged": true
+}
