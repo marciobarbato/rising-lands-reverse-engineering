@@ -1,0 +1,13 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "motor/testes/render_probe_proof.py",
+    "--probe",
+    "P2",
+    "--output",
+    ".local/performance-60fps/final2/render-probe-P2.json"
+  ],
+  "seconds": 85.744638958,
+  "returncode": 0
+}

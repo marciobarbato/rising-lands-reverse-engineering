@@ -1,0 +1,8 @@
+{
+  "command": [
+    "python3",
+    ".local/performance-60fps/bench_battery.py"
+  ],
+  "seconds": 156.935582875,
+  "returncode": 0
+}

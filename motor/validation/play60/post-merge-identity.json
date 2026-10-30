@@ -1,0 +1,8 @@
+{
+  "native_sources_and_header_identical": true,
+  "input_evidence_digests_identical": true,
+  "library_sha256": "5076e85bbc34e755933cbe6b0e856aead3f4f4c482337a29209dc0fd42c0abf0",
+  "merged_main": "54d148d931cc3420fe256e6fec71462087597293",
+  "pinning_fix": "1c1fade05cf7b316f2baaa2f0916d8c0a76911b8",
+  "full_proof_revision": "74a3fbeab35aee4d27ff6b33cbdc64ec5861be51"
+}
