@@ -768,3 +768,51 @@ AI prefixes), all 48 S1 states equal, unchanged original code. Every v2 case
 contains all required owner/player reads, checked independently before this commit.
 No translation has been added yet. The validation mode consumes v2 and will
 reproduce it from the original before comparing Python.
+
+
+## S1 recruit continuation — bound providers and city translation
+
+`DonosM3` now binds Core's five `RecrutamentoCore` entries through
+`provedor_recrutamento`, passing the original partial register file and
+`_incertos` unchanged. All seven outputs and preserved unknown masks reach
+Economy. The existing live bonus callback is used; without one, Core's
+`bonus_recrutamento(memory)` is resolved lazily on the actual query, never
+replaced with zero. The owned bootstrap now exposes `integracao.providers`.
+Core's input domain, mutation and callback order remain those in
+`docs/core/RECRUITMENT_ADAPTERS.md`; no foreign research source was changed.
+
+The current Economy `EnginSetType` forwards actual BL. Native
+`validacao/producao-entrada-recrutamento-native.json`: **6/6 equal prefixes**,
+zero mismatches. Three calls return below threshold. Three match the full
+conversion/healing/fatigue/experience prefix and stop before `SetSortEngin`
+entry `0x445fbc`, CALL `0x420f8c`: **Economy supplies AX but omits required DX**.
+All provided register arguments, every non-stack changed byte and native
+store sequence agree. Add `EDX: 0xffff` to Economy's `ARGUMENTOS['SetSortEngin']`
+and pass the actual `celula` preserved through EnginSetExperimente. AI/runtime
+never reconstructs it from callback history or fabricates it.
+
+After original-only capture commits `14d1cb1` / `018687a`, the city-message
+provider is `mensagem_cidade_ia.mensagem_cidade(memory, regs, chamada)`, called
+directly by `DonosM3.externo('iagVilleSendMessage', ...)`. Inputs, supported
+owner gate, exact seven-register outputs/unknown masks and plain-RET ESP
+semantics are documented in `docs/AI_RUNTIME.md`. The non-AI branch reads
+the structure owner and Economy's live player-type query, returns EAX type
+(or owner >=4), EBX structure and EDX original EBX, preserving the other
+registers. It makes no non-stack stores. AI owners remain a named stop
+at `0x48484c`, with message and argument, before unbound handlers.
+
+Fresh leased native city differential: **27 cases, zero mismatches**;
+**23 exact returns and four bounded AI-prefix dependency stops**. The
+three Economy real calls and actual S1 frame-2547 call reproduce exactly,
+including all native reads; the 48 S1 trajectory states agree and original
+code remains unchanged. `validacao/mensagem-cidade-native.json` records
+source/capture hashes and per-case results; CPU-free replay passes all cases.
+Original entries/identity remain intact RISING.EXE SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`,
+city entry `0x484808`, caller `0x4211e5`, AX structure / DL 3 / EBX 0.
+
+The domain gate before the city addition passed 126 tests with eight explicit
+native skips; five focused recruitment/city tests pass. Full input-order,
+deposit-page and construction/key native regressions plus the final domain
+gate are running next. Strict/planning S1 indicators follow from the committed
+implementation. No main integration, acceptance or complete S1 proof is claimed.

@@ -839,3 +839,64 @@ The state-11 walk, the creation at 220 and the WndProc/key paths are now checked
 The later M3.1 wiring, hunger path, accepted P1/P2 proof and current dependency sequence are recorded in the latest [AI/runtime handoff](../pesquisas-paralelas/ia-runtime/HANDOFF.md). Fresh native regressions on main `e70fda3` compare 417 cases: **405 equal, 12 explicit dependency stops, zero mismatches**. Input orders are 117/124 equal, deposit pages 203/203, and construction/keys 85/90; the reports under `validacao/` retain each stop and current source provenance. All native load/frame/code reproductions pass. The leased AI/runtime gate passes 120 tests with eight explicit native skips.
 
 This continuation changed validation records only; APIs, supported domains and ordered effects were unchanged. At the time Core `5422338` and Graphics' CAVE/construction-projectile guards were not yet on main; both have since landed (main `71335aa`), so only Missions' S1 pass-2 window is still awaited. See "Current state" for the follow-up.
+
+
+## S1 recruit owner binding (2026-10-30)
+
+`DonosM3` constructs Core's `RecrutamentoCore` on its live memory and routes
+`EnginSetType`, `EnginAddVie`, `EnginResetFatigue`, `EnginSetExperimente` and
+`SetSortEngin` through `provedor_recrutamento`. The supplied live bonus callback
+is reused; when absent, `bonus_recrutamento(memory)` is resolved on the first
+query against Economy's live tables. No bonus value is invented. The caller's
+partial register file, `_incertos` and pushed-word metadata reach Core unchanged;
+the adapter returns all seven data registers and explicit preserved unknown bits.
+`ArgumentoNaoPassado` propagates before that callee reads or writes memory,
+retaining all earlier producer effects.
+
+The behavior inputs are AX unit, DX cell, BL direction, CL type for
+`EnginSetType` (CALL `0x420f69`); AX/DX increment for `EnginAddVie` (`0x420f75`);
+AX for fatigue reset (`0x420f7c`); AX/DX preserved exit cell for experience
+(`0x420f85`); AX/DX exit cell for placement (`0x420f8c`). Core's original entries,
+supported domains and exact mutations remain its
+[recruitment adapter contract](core/RECRUITMENT_ADAPTERS.md).
+
+Economy's BL update is consumed directly. Its current `SetSortEngin` callback
+still supplies only AX, so DX is an explicit Economy ABI dependency. AI/runtime
+does not recover it from a previous callback or synthesize it. The S1 indicator
+driver reports the missing register, caller, native entry, owner and required
+masks as a structured stop. The six-case native prefix validator now runs
+through conversion, healing, fatigue and experience, stopping before placement
+if DX is missing; its original store sequence, callback arguments and every
+non-stack changed byte must agree. No recruit-completion claim follows from
+that bounded comparison.
+
+
+`mensagem_cidade_ia.mensagem_cidade(memory, regs, chamada=0x4211e5)` is the
+city-message provider bound directly in `DonosM3.externo`. Required inputs are
+AX structure, DL message and full EBX argument; missing/uncertain consumed
+bits raise `ArgumentoNaoPassado` before memory access. Structure indices are
+protected to 0..999. It reads BatimentGetPlayer's owner byte and, for owners
+0..3, imports Economy's live `quadro_economia.tipo_jogador` query. Owners
+>=4 return their owner byte; player types other than 2 return their type byte.
+EAX is that result, EBX the zero-extended structure, EDX the original full EBX.
+ECX/ESI/EDI/EBP are preserved with their explicit unknown masks; optional
+entry ESP returns ESP+4. There are no non-stack stores or external effects
+on these branches. An AI player raises a named `DependenciaIA` at `0x48484c`,
+before its unbound message dispatch, naming owner/message/argument.
+
+Original-first evidence was committed before translation: the corrected
+`evidencias/mensagem-cidade-original-v2.json.xz` supersedes v1's incomplete
+read hooks; neither evidence file is replaced. Native differential
+`validacao/mensagem-cidade-native.json`: **27 cases, zero mismatches**,
+23 exact returns and four explicit AI-prefix stops. It freshly replays the
+three Economy calls and the S1 frame-2547 call, verifies the 48 native S1
+states, reproduces the capture, compares all seven registers (plus S1 ESP),
+and rejects Python stores. CPU-free tests replay the same native reads and
+verify omitted/uncertain arguments.
+
+Recruitment binding differential `validacao/producao-entrada-recrutamento-native.json`:
+**6/6 equal bounded prefixes**, three returning below threshold and three
+stopping before placement on Economy's missing DX. Every provided owner
+argument, all changed non-stack bytes and the original native store sequence
+agree, including actual BL direction. These checks do not establish a complete
+S1 producer or a whole-state input-chain proof.

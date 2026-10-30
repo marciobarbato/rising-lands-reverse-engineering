@@ -1,0 +1,326 @@
+{
+ "capture_sha256": "55671384ac3e794d83aa38f1d48a9680a7d80defe1fe6ff0d498954aa7c3e779",
+ "cases": [
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": 297,
+   "kind": "economy_fixture",
+   "native_equals_capture": true,
+   "owner": null,
+   "player_type": null,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": 869,
+   "kind": "economy_fixture",
+   "native_equals_capture": true,
+   "owner": null,
+   "player_type": null,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": 1363,
+   "kind": "economy_fixture",
+   "native_equals_capture": true,
+   "owner": null,
+   "player_type": null,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": 2547,
+   "kind": "in_situ",
+   "native_equals_capture": true,
+   "owner": null,
+   "player_type": null,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 0,
+   "player_type": 0,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 0,
+   "player_type": 1,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 0,
+   "player_type": 2,
+   "python_stop": "0x48484c",
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 0,
+   "player_type": 3,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 0,
+   "player_type": 255,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 1,
+   "player_type": 0,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 1,
+   "player_type": 1,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 1,
+   "player_type": 2,
+   "python_stop": "0x48484c",
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 1,
+   "player_type": 3,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 1,
+   "player_type": 255,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 2,
+   "player_type": 0,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 2,
+   "player_type": 1,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 2,
+   "player_type": 2,
+   "python_stop": "0x48484c",
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 2,
+   "player_type": 3,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 2,
+   "player_type": 255,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 3,
+   "player_type": 0,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 3,
+   "player_type": 1,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 3,
+   "player_type": 2,
+   "python_stop": "0x48484c",
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 3,
+   "player_type": 3,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 3,
+   "player_type": 255,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 4,
+   "player_type": null,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 200,
+   "player_type": null,
+   "python_stop": null,
+   "register_differences": {}
+  },
+  {
+   "changed_bytes_equal": true,
+   "equal": true,
+   "frame": null,
+   "kind": "declared_prefix",
+   "native_equals_capture": true,
+   "owner": 255,
+   "player_type": null,
+   "python_stop": null,
+   "register_differences": {}
+  }
+ ],
+ "comparisons": 27,
+ "economy_fixture": "pesquisas-paralelas/economia/evidencias/caverna-recrutamento/captura-caverna-recrutamento-exibicao.json.xz",
+ "economy_fixture_sha256": "4b48d4e3cbf127562f1bd1f622b2253c8dae27309b93f2cd0479c086edc0d21c",
+ "equal": 27,
+ "mismatches": 0,
+ "named_stops": 4,
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "s1": {
+  "code_unchanged": true,
+  "frames_checked": 48,
+  "last_frame": 2547,
+  "snapshot": {
+   "path": ".local/m3/passo2/S1/instantaneo-02500.pickle",
+   "sha256": "95dc80e0443e44537c57f19c3fc30ba12c861f185f16c9d65c878e89f511c3a3"
+  }
+ },
+ "schema": "rising-lands/ai-runtime-city-message-native/1",
+ "seconds": 30.913,
+ "source_revision": "018687af1c7fc979d416b2ac45393a1b022f36f1",
+ "source_sha256": {
+  "pesquisas-paralelas/ia-runtime/capturar_mensagem_cidade_ia.py": "cd97e0a3ca3510907d65a80039ea3b021611db43d6fec167501bdb0f72fa1a5c",
+  "pesquisas-paralelas/ia-runtime/mensagem_cidade_ia.py": "5ba731bf65ebfdf8301a7c29b944295c8fc9bb7cbc68dc4705b23638577ba196",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "03a314d152c6e0673d3aef7d2c6051b9d48ee985f94f70b358a908e8a7d07694"
+ }
+}

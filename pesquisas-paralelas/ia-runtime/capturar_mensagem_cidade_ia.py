@@ -70,6 +70,9 @@ class MemoriaCapturada:
             self.escritos.add(a+i)
         return v
 
+    def ler(self, a, n):
+        return bytes(self.dados[a+i] for i in range(n))
+
     def u8(self, a, v=None):
         return self._acesso(a, 1, v)
 
@@ -81,13 +84,17 @@ class MemoriaCapturada:
 
 
 def comparar(c):
-    from mensagem_cidade_ia import mensagem_cidade
+    from provedores_entrada_ia import DonosM3
     from reinicio_ia import DependenciaIA
     m = MemoriaCapturada(c['read_before_write'])
     regs = {k: int(v, 16) for k, v in c['entry_registers'].items()}
+    if 'esp' in c:
+        regs['ESP'] = int(c['esp'],16)
+    d = DonosM3(m, som=None)
     try:
-        out = mensagem_cidade(m, regs, CALL)
-        dif = {k: [hex(out[k]), c['exit_registers'][k]] for k in REG7
+        out = d.externo('iagVilleSendMessage', CALL, regs)
+        checked = REG7 + (('ESP',) if 'esp' in c else ())
+        dif = {k: [hex(out[k]), c['exit_registers'][k]] for k in checked
                if out[k] != int(c['exit_registers'][k], 16)}
         stop = None
     except DependenciaIA as e:
@@ -95,7 +102,7 @@ def comparar(c):
     changed = [[hex(a), int.from_bytes(bytes([v]), 'little'), m.dados[a]]
                for a, v in sorted({int(a,16)+i:b for a,h in c['read_before_write']
                                    for i,b in enumerate(bytes.fromhex(h))}.items()) if m.dados[a] != v]
-    return dict(equal=not dif and stop == c.get('stop') and changed == c['changed_bytes'],
+    return dict(equal=not dif and stop == c.get('stop') and changed == c['changed_bytes'] and not m.escritos,
                 register_differences=dif, python_stop=stop, changed_bytes_equal=changed == c['changed_bytes'])
 
 
@@ -259,7 +266,11 @@ def main():
         d.update(schema='rising-lands/ai-runtime-city-message-native/1',cases=results,
                  comparisons=len(results), equal=sum(c['equal'] for c in results),
                  named_stops=sum(c['python_stop'] is not None for c in results),
-                 mismatches=sum(not c['equal'] for c in results),capture_sha256=hashlib.sha256(raw).hexdigest())
+                 mismatches=sum(not c['equal'] for c in results),capture_sha256=hashlib.sha256(raw).hexdigest(),
+                 source_sha256={p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in (
+                     'pesquisas-paralelas/ia-runtime/mensagem_cidade_ia.py',
+                     'pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py',
+                     'pesquisas-paralelas/ia-runtime/capturar_mensagem_cidade_ia.py')})
         path = ROOT / (a.saida or 'pesquisas-paralelas/ia-runtime/validacao/mensagem-cidade-native.json')
         path.write_text(json.dumps(d,indent=1,sort_keys=True)+'\n')
     print(json.dumps(dict(output=str(path),cases=len(d['cases']),mismatches=d.get('mismatches'),seconds=d['seconds'])),flush=True)

@@ -123,6 +123,7 @@ def main():
     from composicao_quadros_ia import carregar_cenario_exibicao
     from composicao_encadeada_ia import MemoriaMapaRapida
     from reinicio_ia import DependenciaIA
+    from entrada_estruturas import ArgumentoNaoPassado
     from efeitos_logicos_exibicao import DependenciaExibicao      # Graphics' display-path named stop
     ap = argparse.ArgumentParser()
     ap.add_argument('--sonda', required=True)
@@ -191,11 +192,18 @@ def main():
                 if dif:
                     primeira_diferenca = dict(frame=k, differences=dif)
                     break
-    except (DependenciaIA, DependenciaExibicao) as erro:
+    except (DependenciaIA, DependenciaExibicao, ArgumentoNaoPassado) as erro:
         fase = (f'frame{k}' if r['phase'].startswith('between') else f'between_frames{k + 1}') if k > 128 else \
             'between_frames129'
         parada = dict(frame=k if fase.startswith('frame') else k + 1, phase=fase, dependency=str(erro),
                       owner='graphics' if isinstance(erro, DependenciaExibicao) else None)
+        if isinstance(erro, ArgumentoNaoPassado):
+            from recrutamento_core import ARGUMENTOS, ROTINAS
+            parada.update(routine=erro.rotina, call=hex(erro.chamada),
+                          missing_registers=list(erro.registradores),
+                          owner='economy' if erro.chamada in (0x420f69, 0x420f75, 0x420f7c, 0x420f85, 0x420f8c) else None,
+                          required_register_masks=ARGUMENTOS.get(erro.rotina),
+                          native_entry=hex(ROTINAS[erro.rotina]) if erro.rotina in ROTINAS else None)
         if r['phase'].startswith('between'):           # the stop is inside frame k's CalculGame
             ordens_k = [(o.get('event', 'SetPlayerOrdre'), o['tag'], o.get('word2'), o.get('word4'), o.get('word6'),
                          o.get('word8'), o.get('jump_target')) for o in getattr(comp, 'ordens_fase', [])]
