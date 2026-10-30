@@ -30,7 +30,7 @@ M32 = 0xffffffff
 
 
 def caminho(grupo):
-    return PASTA / f'evidencias/lacunas-s1/captura-{grupo}.json.xz'
+    return PASTA / f'evidencias/lacunas-s1/captura-{grupo}-v2.json.xz'
 
 
 def hash_arquivo(p):
@@ -57,6 +57,19 @@ def finalizar(b, g, hooks):
 
 
 class ObservacaoEconomia(bs.Observacao):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        import unicorn
+        # Arm before the routine's entry TB is compiled. A MEM_READ hook added
+        # at its first instruction can miss reads earlier in that same TB.
+        def ler(cpu, acesso, endereco, tamanho, valor, _):
+            if self.ativo:
+                for c in self.abertos:
+                    if 'recorder' in c:
+                        c['recorder'][0]._ler(cpu, acesso, endereco, tamanho, valor, None)
+        self._ganchos.append(self.b.cpu.hook_add(unicorn.UC_HOOK_MEM_READ, ler))
+        self.b.cpu.ctl_flush_tb()
+
     def _entrada(self, nome):
         n = len(self.abertos)
         super()._entrada(nome)
