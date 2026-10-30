@@ -1,0 +1,138 @@
+{
+ "synthetic": true,
+ "description": "P7-style UI gestures plus sanctuary recruitment; actual AppKit recorder supplies the replay file.",
+ "stop_frame": 3700,
+ "gestures": [
+  {
+   "frame": 130,
+   "x": 560,
+   "y": 528
+  },
+  {
+   "frame": 140,
+   "x": 180,
+   "y": 573
+  },
+  {
+   "frame": 150,
+   "x": 688,
+   "y": 400
+  },
+  {
+   "frame": 2005,
+   "x": 400,
+   "y": 272,
+   "right": true
+  },
+  {
+   "frame": 2015,
+   "x": 528,
+   "y": 400
+  },
+  {
+   "frame": 2030,
+   "x": 528,
+   "y": 400,
+   "double": true
+  },
+  {
+   "frame": 2060,
+   "x": 464,
+   "y": 464
+  },
+  {
+   "frame": 2070,
+   "x": 656,
+   "y": 336
+  },
+  {
+   "frame": 2300,
+   "x": 400,
+   "y": 272,
+   "right": true
+  },
+  {
+   "frame": 2310,
+   "x": 528,
+   "y": 400
+  },
+  {
+   "frame": 2320,
+   "x": 180,
+   "y": 573
+  },
+  {
+   "frame": 2330,
+   "x": 400,
+   "y": 272,
+   "right": true
+  },
+  {
+   "frame": 2410,
+   "x": 464,
+   "y": 528
+  },
+  {
+   "frame": 2420,
+   "x": 53,
+   "y": 64
+  },
+  {
+   "frame": 2750,
+   "x": 400,
+   "y": 272,
+   "right": true
+  },
+  {
+   "frame": 2760,
+   "x": 46,
+   "y": 49
+  },
+  {
+   "frame": 2770,
+   "x": 528,
+   "y": 528
+  },
+  {
+   "frame": 2780,
+   "x": 560,
+   "y": 528
+  },
+  {
+   "frame": 3210,
+   "control": true
+  },
+  {
+   "frame": 3211,
+   "x": 592,
+   "y": 528,
+   "control": true
+  },
+  {
+   "frame": 3216,
+   "keyCode": 126,
+   "down": true,
+   "control": true
+  },
+  {
+   "frame": 3222,
+   "keyCode": 126,
+   "down": false,
+   "control": true
+  },
+  {
+   "frame": 3225,
+   "x": 336,
+   "y": 16,
+   "control": true
+  },
+  {
+   "frame": 3240,
+   "control": false
+  },
+  {
+   "frame": 3240,
+   "control": false
+  }
+ ]
+}

@@ -123,3 +123,32 @@ function drawRawFrame(frame){
  rawContext.putImageData(rawImage,0,0);rawCanvas.hidden=false;rawSequence=frame.generation;
  rawTransferTimes.push(performance.now()-started);if(rawTransferTimes.length>256)rawTransferTimes.shift();
 }
+
+
+// Explicit CLI-only synthetic UI session; every gesture traverses NSWindow and
+// the production view/serial-queue recorder. This is not human Test B evidence.
+async function runTestBSynthetic(plan){
+ const gestures=[];
+ try{
+  await window.playbackReady;live=true;playing=false;
+  if(!await run('live-open'))throw Error('Live window failed');
+  for(let i=0;i<129;i++)if(!await run('live-step')||image.live_stop)throw Error(JSON.stringify(image.live_stop));
+  await window.toggleRecording();if(!recording)throw Error('Recorder did not start');
+  for(let frame=129;frame<=plan.stop_frame;frame++){
+   for(const gesture of plan.gestures.filter(g=>g.frame===frame)){
+    const receipt=await request('test-b-gesture',{gesture});
+    await recordChain;gestures.push({gesture,receipt});
+   }
+   if(!await run('live-step')||image.live_stop)throw Error(JSON.stringify(image.live_stop));
+  }
+  await window.toggleRecording();await recordChain;
+  const exported=await window.exportRecording();
+  const journal=await request('export-journal');
+  await request('test-b-result',{result:{passed:true,synthetic:true,frames:plan.stop_frame-128,gestures,inputExport:exported,journal,...image}});
+ }catch(e){
+  if(recording)await window.toggleRecording();
+  let exported=null;try{exported=await window.exportRecording();}catch(_){}
+  await request('test-b-result',{result:{passed:false,synthetic:true,error:String(e),gestures,inputExport:exported,...image}});
+ }
+}
+if(window.nativeTestB)runTestBSynthetic(window.nativeTestB);
