@@ -1,0 +1,13 @@
+[lease] graphics18-K1 waiting
+[lease] graphics18-K1 granted slots [1]
+K1 150 native surface/state equal
+K1 200 native surface/state equal
+K1 250 native surface/state equal
+K1 300 native surface/state equal
+K1 350 native surface/state equal
+K1 400 native surface/state equal
+K1 450 native surface/state equal
+K1 500 native surface/state equal
+K1 550 native surface/state equal
+K1 600 native surface/state equal
+{"probe": "K1", "frames": [129, 629], "status": "complete", "seconds": 192.038, "drawn": 501, "snapshot": {"path": ".local/graficos-api17-start/K1-00629.pickle", "sha256": "457a702ea616d12bb7596bf6b3b70b80ee19975f58a6e500e92bb4639ffefdf3"}, "text_boundaries": 0, "text_pointer_reads": 501}

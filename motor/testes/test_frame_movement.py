@@ -4,6 +4,9 @@ Frozen call read sets and old changed bytes are overlaid on the committed M1
 state to make standalone fixtures. Extra fields preserve that declared fixture;
 this does not claim the complete original call-entry image was captured.
 """
+from pinned_reference import activate, reference_file, pinned_file
+SOURCE_ROOT = activate()
+
 import base64
 import bisect
 import ctypes as C
@@ -20,7 +23,7 @@ from test_frame_core_economy import Memory
 
 ROOT=Path(__file__).resolve().parents[2]
 for f in ('ferramentas','pesquisas-paralelas/combate','pesquisas-paralelas/economia'):
-    if str(ROOT/f) not in sys.path:sys.path.append(str(ROOT/f))
+    if str(SOURCE_ROOT/f) not in sys.path:sys.path.append(str(SOURCE_ROOT/f))
 import incursao_core
 from compactar_captura_isolada import expandir
 from mundo_vivo import mundo_vivo
@@ -42,7 +45,7 @@ IDS={'GetFreeCell':450,'CreerEngin':451,'EnginSetPlayer':452,'PlaceEngin':453,
 'EnginEstVivant':480,'TerrainEnCollision':481,'ResetCollision':482,'memset':483,
 'GetNumIndiceTypeBatiment':484,'GetCaseIndiceBatiment':485,'PlayerGetColor':486,
 'EnginTypeGetCapacite':487}
-PINS={'pesquisas-paralelas/missoes/evidencias/captura-carga-missao-original-v2.json': 'eb7d2303e13e62d4f5692c9cb6ef302b573d138df6a8b51183a6d9b0bd703afc', 'evidencias/fundacoes-quadro/captura-incursao-core-exibicao.json': 'a76e3fac8c835e46805e594834f10f2bcb39734f944b57bde6a674bf5089f897', 'evidencias/fundacoes-quadro/captura-movimento-incursao-v1.json': '1881f8bfba7806050a7d3200130745cf21429b0479cfdb2d01c8294df91c349d', 'ferramentas/incursao_core.py': '1f5fa0cd43247d83387aa8650de9edf0b8ccd356250df469953469e79ad5873b', 'ferramentas/mundo_vivo.py': 'a4c5c2e5f73d09ce6f7bcbd6a15dbbcc5d264cff1c880bc7602ebf317dc3df5c', 'ferramentas/solucionador_vivo.py': '4a39571f29e5106c1d79411948e001a6972b5013975da6664d01f6f8c3344b73', 'ferramentas/solucionador_python.py': '67bddc7c5cc197ddd8dc1608457b2155f33554999502ddcdacec4add943465eb', 'ferramentas/navegacao_unidades.py': 'bb122c74953d43eb97cde4076fe1f53bd811087f87e575810bce90240930aedf', 'ferramentas/avanco_unidades.py': 'b0592c2101f26f59d927be5dcb64010b7d4849f9502fc130ad85c7e36ecf8276', 'ferramentas/visao_movimento.py': 'cd61354c6afcd0bc26eb9e7a8db93f5a3cf056d95e58606476783d3e4695255c', 'ferramentas/passagem_unidades.py': 'c7e74e05a86fb3789238c5fc89964d095cf90586c1e80ed4cb0b9dd320b13d1a', 'ferramentas/movimento.py': '1b814260ad8ec47a7c53e3e649655789ddb7db6ff704e9f329766a68a6e0cfed', 'ferramentas/caminhos.py': '37756835bc3ea010d2b3771d2d6ea8ebb9f400646becb4c35129b39df5173573', 'ferramentas/preparacao_destino.py': '4a760d637c9e1f0421cba08931c0a416e5e3a01b6e62eb51b9a9d259478fbc80', 'ferramentas/candidatos_rota.py': '35968ce6e78cc2bddca1dbafc4f2ecf38f0ff4e85178f5bfd03ca1ee7e118eec', 'ferramentas/contornos_caminhos.py': 'd671d4ff0347d02485d72362da6725986cbf779185cdc088bd4226e1278ca30b', 'ferramentas/otimizacao_caminhos.py': '1c5d3a83cf8c6f8af8ea7e80fbe5411e28decad5aeb5fab9c90ca21b234b235a', 'ferramentas/estruturas_caminhos.py': '2051800644f6bf9385e0072929897539e14265c86262252f38d6bf7293d8da3d', 'pesquisas-paralelas/combate/inicializacao_ataque.py': '4d1dc28c4b8dbcca1a0ea203d95c89cb3db3e5738eaad3f6b21be9abd7be55fc', 'ferramentas/ordens_unidades.py': '95b282cca6c29ff5fdbb3bb3c9cd25a25bec0202670a6dc78784ea6677cfefaf', 'ferramentas/grade_u16.py': '669d8ac6cb3bb6955aa73d98adda08d63a9675fb31946219b0b2a24c108a7bb4', 'ferramentas/compactar_captura_isolada.py': 'ff17d801df9d4e96f13f59901f5680b2422d719f4be52e3037ca9ee2a01e6f0f'}
+PINS={'pesquisas-paralelas/missoes/evidencias/captura-carga-missao-original-v2.json': 'eb7d2303e13e62d4f5692c9cb6ef302b573d138df6a8b51183a6d9b0bd703afc', 'evidencias/fundacoes-quadro/captura-incursao-core-exibicao.json': 'a76e3fac8c835e46805e594834f10f2bcb39734f944b57bde6a674bf5089f897', 'evidencias/fundacoes-quadro/captura-movimento-incursao-v1.json': '1881f8bfba7806050a7d3200130745cf21429b0479cfdb2d01c8294df91c349d', 'ferramentas/incursao_core.py': '1f5fa0cd43247d83387aa8650de9edf0b8ccd356250df469953469e79ad5873b', 'ferramentas/mundo_vivo.py': 'a4c5c2e5f73d09ce6f7bcbd6a15dbbcc5d264cff1c880bc7602ebf317dc3df5c', 'ferramentas/solucionador_vivo.py': '4a39571f29e5106c1d79411948e001a6972b5013975da6664d01f6f8c3344b73', 'ferramentas/solucionador_python.py': '67bddc7c5cc197ddd8dc1608457b2155f33554999502ddcdacec4add943465eb', 'ferramentas/navegacao_unidades.py': 'bb122c74953d43eb97cde4076fe1f53bd811087f87e575810bce90240930aedf', 'ferramentas/avanco_unidades.py': 'b0592c2101f26f59d927be5dcb64010b7d4849f9502fc130ad85c7e36ecf8276', 'ferramentas/visao_movimento.py': 'cd61354c6afcd0bc26eb9e7a8db93f5a3cf056d95e58606476783d3e4695255c', 'ferramentas/passagem_unidades.py': 'c7e74e05a86fb3789238c5fc89964d095cf90586c1e80ed4cb0b9dd320b13d1a', 'ferramentas/movimento.py': '1b814260ad8ec47a7c53e3e649655789ddb7db6ff704e9f329766a68a6e0cfed', 'ferramentas/caminhos.py': '37756835bc3ea010d2b3771d2d6ea8ebb9f400646becb4c35129b39df5173573', 'ferramentas/preparacao_destino.py': '4a760d637c9e1f0421cba08931c0a416e5e3a01b6e62eb51b9a9d259478fbc80', 'ferramentas/candidatos_rota.py': '35968ce6e78cc2bddca1dbafc4f2ecf38f0ff4e85178f5bfd03ca1ee7e118eec', 'ferramentas/contornos_caminhos.py': 'd671d4ff0347d02485d72362da6725986cbf779185cdc088bd4226e1278ca30b', 'ferramentas/otimizacao_caminhos.py': '1c5d3a83cf8c6f8af8ea7e80fbe5411e28decad5aeb5fab9c90ca21b234b235a', 'ferramentas/estruturas_caminhos.py': 'bf8037fdc1eb7bf529335582070d03796fb02a06ce42ba7355c7c520e25b5355', 'pesquisas-paralelas/combate/inicializacao_ataque.py': '4d1dc28c4b8dbcca1a0ea203d95c89cb3db3e5738eaad3f6b21be9abd7be55fc', 'ferramentas/ordens_unidades.py': '95b282cca6c29ff5fdbb3bb3c9cd25a25bec0202670a6dc78784ea6677cfefaf', 'ferramentas/grade_u16.py': '669d8ac6cb3bb6955aa73d98adda08d63a9675fb31946219b0b2a24c108a7bb4', 'ferramentas/compactar_captura_isolada.py': 'ff17d801df9d4e96f13f59901f5680b2422d719f4be52e3037ca9ee2a01e6f0f'}
 
 
 class FastMemory(Memory):
@@ -83,7 +86,7 @@ class MovementProviders(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         for p,h in PINS.items():
-            if hashlib.sha256((ROOT/p).read_bytes()).hexdigest()!=h:raise AssertionError(f'Reference identity changed: {p}')
+            if hashlib.sha256(pinned_file(ROOT/p).read_bytes()).hexdigest()!=h:raise AssertionError(f'Reference identity changed: {p}')
         cls.abi=Frames();fn=cls.abi.lib.rl_executar_rotina_quadro
         fn.argtypes=[C.c_uint64,C.c_uint32,C.POINTER(C.c_uint32),C.c_uint32,C.POINTER(C.c_uint32)];fn.restype=C.c_int32
         raw=json.loads((ROOT/M1).read_bytes())['oracle']['final_state']['blocks']

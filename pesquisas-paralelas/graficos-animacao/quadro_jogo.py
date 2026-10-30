@@ -270,7 +270,7 @@ class _Composicao:
             frame = dono == indice and r[4] == self.camera
             gauge = r[4] == self.camera and (self.tela.u('selecionada_estrutura_u16') == indice or dono == indice)
             if frame or gauge:
-                if r[8] == 2 and self.mundo.palavra('terreno', celula) != GATILHO_SANTUARIO: return
+                if r[8] in (2,3) and self.mundo.palavra('terreno', celula) != {2:GATILHO_SANTUARIO,3:0x30d}[r[8]]: return
                 entrada_m3.estrutura(self, r, celula, indice, frame=frame, gauge=gauge)
             return
         if r[8] == 0x11 and r[4] == self.camera and self.tela.u('selecionada_estrutura_u16') == indice:
@@ -289,6 +289,10 @@ class _Composicao:
             if estado in (2,7):cave_m3.order_markers(self,r)
         if tipo == 7 and estado in (11,15):
             cave_m3.construction_builder(self,r,x,y,indice);return
+        if estado not in (2,7):
+            from camadas_exibicao_m3 import normal_extension,work
+            if normal_extension(self,r,x,y,indice,overlay):return
+            if work(self,r,x,y,indice,overlay):return
         if tipo in CORPOS_TIPOS1_8:   # render API 1.3: AffDeplaceEngin branches 0x412D4C / 0x412962 (native capture)
             try:
                 self.saida, _ = compor_corpo_tipos1_8(self.catalogo, self.saida, self.largura, self.altura, r, x=x, y=y,
@@ -302,7 +306,7 @@ class _Composicao:
         if tipo not in TIPOS: self.parar(0x41591F, f'AffEngin unit {indice} type {tipo} has no committed body')
         rota = encaminhamento(tipo, estado, auxiliar_8a=r[0x8a])
         if rota['rota'] == 'sem_desenho': return
-        guarda = (rota['rota'] == 'corpo_base' and estado in (2, 7) and r[0] == 0 and self.camera == 0
+        guarda = (rota['rota'] == 'corpo_base' and estado in (2,7) and r[0] == 0 and self.camera == 0
             and (overlay or (r[0xba] == 0 and r[0xbd] == 0
                 and self.tela.u('selecionada_unidade_u16') != indice and self.tela.u('modo_selecao_u8') == 0))
             and 1 <= r[0x91] <= 16 and r[0xa4] <= 7)
@@ -328,11 +332,12 @@ class _Composicao:
         if not (w4 == w76 and vida < 100): return
         if (vida//5) % 2: return
         if r[1] > 25 or not SE_FATIGUE[r[1]]: return
-        if dx or dy: self.parar(0x4135FA, 'tired icon with a nonzero body shift (+0x86/+0x87): origin not verified')
+        if (dx or dy) and not (r[1]==9 and r[2] in (2,7,13)):
+            self.parar(0x4135FA, 'tired icon with a nonzero body shift (+0x86/+0x87): origin not verified')
         self.chamadas.append(['EngineIconeFadiga', indice])
         q = self.catalogo.quadro(localizar(w4+ICONE_FADIGA)['id_motor'])   # drawn at the cell origin - (8, 11): native args of 0x41362E/0x413650
         if r[0] != 0xc8: q = Quadro(q.largura, q.altura, q.pixels.translate(self.tabelas_jogador[r[0]] if r[0] < 5 else self.parar(0x413650, f'owner {r[0]} has no player table')), q.opacidade, 0, b'')
-        self.saida = compor_indices(self.saida, self.largura, self.altura, q, x-8, y-11, self.recorte())
+        self.saida = compor_indices(self.saida, self.largura, self.altura, q, x+dx-8, y+dy-11, self.recorte())
 
     def projetil(self, indice):
         r = self.mundo.projeteis[indice*56:(indice+1)*56]; px, py = struct.unpack_from('<HH', r, 0xc)

@@ -1,7 +1,7 @@
 # Graphics handoff
 
-Latest dispatch: render API **1.7**, scripted CAVE display, 2026-10-29. The explicit 1.7 goal supersedes the dispatch's
-1.6 heading/report label. See the final section below and [M3_CAVE_RENDER.md](M3_CAVE_RENDER.md).
+Latest dispatch: render API **1.8**, completed CAVE, lodging, delivery and scrolling, 2026-10-29.
+Published 1.7 is retained. See the final section below and [M3_WINDOWS_API18.md](M3_WINDOWS_API18.md).
 Delivery is feature-branch push only; the coordinator owns review, main integration and acceptance.
 
 Research round: 2026-10-28. Chat `01a18262-cdd5-7b13-84af-0d6eca1a43eb`.
@@ -775,3 +775,87 @@ After that guard, the final source-pinned probe replay is **286.089 s**, still 1
 argument/effect mismatches. The final leased graphics gate passes **255 tests, zero skips**, in **88.764 s**, including
 the new negative variant test; documentation links pass. The final log/report replace only derived validation output,
 never native evidence. Translation was first pushed as `4cd16b7`; the bounded-domain correction is the following commit.
+
+## Render API 1.8 — completed CAVE, lodging, delivery and scrolling (2026-10-29)
+
+**Original first.** Source main and all four probe directories are pinned to
+`ce441852bcada750a8f91da8ed3302f1668c4405`. The intact executable remains
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`; the observed native code hash remains
+`02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4`.
+Evidence commits precede translation: `38cd3ee` provenance/producer, `111ac04` K1, `6794493`/`fd019f5` P3 construction,
+`cbe2604` inhabited matrix, `7ad141d` P6, `7f157fc` P3 completion, `4befc76` P7 work, `30ce7b7` P3 end,
+`ae13da0` P7 Ctrl/depot, `e3ab05b` P7 delivery/end, and `b9ec299` text return observation.
+Nine native continuations verify 5,030 new complete frame states and phase surfaces. Hooks record original execution;
+shared-prefix checkpoints are checked against the destination probe before its original input is applied.
+The 515 native leaf calls explicitly declare owner/finished/resident/variant/clock writes and query original habitation.
+No historical source/evidence/report bytes are changed.
+
+**API and domain.** `VERSAO_RENDER_QUADRO = (1,8)`; function arguments, result fields, memory regions and callbacks
+are unchanged from 1.7. The caller must supply the actual CAVE habitation result through the existing provider.
+`camadas_m3_api18.json` holds portable bob IDs, operations, anchors, fixed strides, clocks/masks, flags, depot centre,
+selection geometry and observed tooltip bytes. `camadas_exibicao_m3.py` executes the plans; neither imports an
+emulator nor updates simulation state. The engine workstream can port these data and arithmetic alongside the existing Rust ABI 1.3.
+
+New facade domain: inhabited type-3 CAVE, owner/camera 0, mode 5, no fire, player-level 0, bytes +0x74/+0x75 in 0/1,
+and +0x76 in 0..15. Native entry is `0x40958E`; the complete matrix covers every combination and eight clock phases.
+The player base precedes animated facade layers, work layer, technology layer, door variant and optional full layer.
+Construction modes 0/1/2/6/7 and uninhabited modes 3/4/5 retain their 1.7 data and clipping/RNG order, now also proven
+through actual P3 completion: frame 1812 changes logic and between_frames(1813) first draws the finished facade.
+Sanctuary selection supports its compact seven/eight troops in 16 slots; CAVE supports one resident in two slots,
+full health 100, no damage, and seven empty technology marks. Other new gauge values remain `0x4020EC`/`0x401A70`.
+`AffChrono 0x401CC6` preserves its foreign-owner and finished-CAVE non-recruitment exits.
+
+Colonist type 9 adds selected normal states 2/7 and entry state 13, including the shifted tired icon. The original
+hidden-state route after lodging is retained. Farmer/carrier type 5 state 5 adds tasks 0/1/2/3 at raw count 8, using
+fixed strides 8/4/8/8. Its order mode 2 resolves +0xB2 as a cell and +0x80 as the CAVE index/centre; marker drawing
+precedes shadow/body. The selection frame still precedes those markers, and health/material/experience follow the
+body. Material/fatigue pairs 4/4 and 3/4 are supported for farmer and builder; P3 first reaches builder 3/4 at frame 2936.
+Non-builder experience, queued/effect/foreign bodies, unknown work tasks/counts and other depot types remain stops.
+Ctrl/depot cursor modes, scrolling and resource digits use existing verified paths. P7 credits logic at frame 3604,
+flashes the HUD on the next draw, and first displays 21 in the second counter at between_frames(3606).
+
+**Text contract.** The frame 2851 native micro-probe observes `TextGetMessage 0x478A3B` returning EAX 0 to `0x4299F9`,
+with zero body instructions; published whole-state and both phase hashes remain equal. The overlapping native read
+starts at `0x5099A6` from `0x417CE2`, the packed mouse load; there is no pointer load at `0x5099A4`. The renderer never
+reads that unavailable pointer. New tests substitute an unreadable canary and trap accesses. SANTUÁRIO/FAZENDEIRO
+tooltip layout joins CONSTRUTOR/ARMAZÉM. Glyph execution remains unproven: default rendering still stops at `0x459454`.
+Only the validation adapter accepts a recorded AffText non-execution, after checking all arguments and the complete
+partial-surface hash. It is never installed as a production no-op. The checked-in phase-boundary files at this ref
+contain audio/CD rows; separately observed TextGetMessage calls and return evidence are retained rather than invented.
+Save-background → frame → shadow → text callback → cursor and following-frame restore order are unchanged.
+All display writes are exported, including complete saved-background pixels; inputs remain immutable.
+
+**Remaining domain.** No glyph-enabled capture, P4/P5, foreign/other-mode inhabited CAVE, fire, higher player levels,
+other residents/bag capacities/codes, other facade families, combat/death/queued/effect bodies, recruitment/market/
+event/message/alliance/debug paths are claimed. Unknown state raises an addressed stop. Every native invocation
+used the MacBook heavy lease and stayed below 20 minutes; these requested windows need no Mac mini continuation.
+This is a feature-branch delivery only; no integration or acceptance is recorded here.
+
+**Final chained comparison.** `validacao/janelas-api18-final.json` pins the exact current implementation, portable
+JSON and comparator sources. Every drawn phase is equal, including all raster arguments and projected display
+effects (only the two established DirectDraw binding pointers excluded). No pixel is masked or repaired.
+
+| Probe | Drawn frame range | Equal / total | First differing frame / stop |
+|---|---|---:|---|
+| P3 | 129–3129 | 3001 / 3001 | None |
+| P6 | 129–2400 | 2272 / 2272 | None |
+| P7 | 129–3700 | 3572 / 3572 | None |
+| K1 | 129–629 | 501 / 501 | None |
+
+The total is 9,346 expanded phases, comprising 5,202 unique native render entries; verified shared prefixes account
+for the difference. The source-frozen Python replay took 769.391 seconds. Expanded rows contain 1,030,208 drawing
+calls and 7,865 strictly attested AffText boundaries. With no text provider, the default P3/P6/P7 first stop remains
+frame 141, `0x459454`, after 12 complete phases from 129; K1 has no text stop. These qualifications are part of the API.
+`validacao/camadas-api18.json` is 515/515, with zero pixel/argument/full-DGROUP mismatches. The prior 600-case
+construction/uninhabited matrix remains in the graphics suite, alongside the 1.5 native cases and frozen 1.7 evidence.
+
+Fresh leased `capturar_serie_quadros.py --quadros 128 --hud`: **128/128**, no stop or first difference, native-previous
+and chained pixels/cache equal. `evidencias/verificacao-cadeia-m22-v2-api18-128.json` has the same 128 surface hashes
+as 1.4, 1.5 and 1.7, checked directly. The regression log wall interval was approximately 531 seconds including startup.
+
+**Final gate.** Leased `python3 -B scripts/check.py --domain graphics`: **261 tests, zero skips, PASS**, 131.111 seconds.
+The log is `validacao/api18-graphics-tests-final.log`. Documentation links also pass after final handoff edits.
+The suite replays the new 515 original leaf cases, prior 600-case facade and other frozen graphics matrices,
+representative exact surfaces/arguments, default glyph dependencies, unknown-state guards and current full-report
+source pins. Historical matrices were replayed from committed native evidence rather than recaptured. P4/P5 and
+glyph-enabled native execution were not run; they are explicit scope gaps, not silently skipped test failures.

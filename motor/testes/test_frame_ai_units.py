@@ -6,6 +6,9 @@ is present in the committed read-before-write capture. Dispatcher equality is
 covered by the separate whole-phase comparison, where all unchanged stores are
 observable through the complete mission projection.
 """
+from pinned_reference import activate, reference_file, pinned_file
+SOURCE_ROOT = activate()
+
 import ctypes as C
 import hashlib
 import importlib
@@ -24,7 +27,7 @@ PINS = {'pesquisas-paralelas/ia-runtime/evidencias/captura-isolada-ia-quadro1.js
 
 def references():
     for folder in ('ferramentas', 'pesquisas-paralelas/ia-runtime', 'pesquisas-paralelas/combate'):
-        path = str(ROOT / folder)
+        path = str(SOURCE_ROOT / folder)
         if path not in sys.path:
             sys.path.insert(0, path)
     return (importlib.import_module('rotinas_quadro_ia'),
@@ -37,7 +40,7 @@ class FrameAiUnitTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         for path, expected in PINS.items():
-            if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != expected:
+            if hashlib.sha256(pinned_file(ROOT / path).read_bytes()).hexdigest() != expected:
                 raise ValueError('FrameReferenceIdentityMismatch: ' + path)
         cls.pilot = Pilot()
         cls.routines, cls.frame, cls.targets, cls.memory_type = references()

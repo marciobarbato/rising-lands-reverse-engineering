@@ -1,0 +1,29 @@
+{
+ "schema": "rising-lands/text-boundary-native-return/1",
+ "probe_ref": "ce441852bcada750a8f91da8ed3302f1668c4405",
+ "frame": 2851,
+ "executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "source_sha256": "ba1dbc37cb7882009fcabf1a77296f319847dc1530c6c688596e268e5f6fda75",
+ "snapshot_sha256": "e6e1345689ab057b90f7bc12ee0c7e096e31369734fa2b6da78b390ff127ed07",
+ "address": "0x478a3b",
+ "calls": [
+  {
+   "phase": "frame2851",
+   "argument_eax": "0x2c",
+   "caller_return": "0x4299f9",
+   "returned_eax": "0x0"
+  }
+ ],
+ "body_instructions": [],
+ "pointer_overlap_reads": [
+  {
+   "address": "0x5099a6",
+   "size": 4,
+   "eip": "0x417ce2",
+   "phase": "between_frames2851"
+  }
+ ],
+ "native_surface_equal": true,
+ "native_whole_state_equal": true,
+ "code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4"
+}
