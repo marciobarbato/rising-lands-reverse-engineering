@@ -97,8 +97,13 @@ No native state is copied back into the Python corpse/count chains.
 
 Actual S1/D1 phase evidence is a separate request. The
 [Mac-mini commands and exact hooks](../pesquisas-paralelas/combate/FATAL_MAC_MINI_RUNS.md)
-resume the SHA-verified S1 frame 11000 snapshot through 12250, and D1's
-11000–12000/17000–17500 snapshots in separate bounded jobs. They record every
+resume S1 frame 11000 through 12250 and D1 frames 11250–11750/15250–15700
+in separate leased jobs of at most 250 frames. `--intervals` overrides the
+windows (optional D1 12250–13750). Interval starts require both DGROUP and
+whole-state equality with the committed scenario frame record, so a pass-2
+pickle with a different file hash is accepted only for the same state.
+`--manifest` retains alternate-run availability/input metadata; continuation
+snapshots use the preceding job's exact file SHA. They record every
 phase plus sampled original leaf entry/returns, including corpse timers 0/329.
 These windows, full mission-end latch proof and integration into AI/runtime
 or Rust are not claimed by the isolated matrix. No other front is edited.
