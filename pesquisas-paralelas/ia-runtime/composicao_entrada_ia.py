@@ -149,6 +149,8 @@ class ComposicaoEntrada(ComposicaoQuadros):
         self.roteiro = roteiro
         self.palavras_msg = MSG_LACO
         self.textos = []              # TextGetMessage boundary events (frame, call site, message number)
+        from inventario_ia_runtime import OriginalImage
+        self.imagem = OriginalImage()
 
     # ---------------------------------------------------------------- between_frames{k}
     def _entre(self, regs, entradas, registro, fase):
@@ -180,14 +182,15 @@ class ComposicaoEntrada(ComposicaoQuadros):
             if r['EBX'] & 0xff != mm.u8(0x49a059):
                 raise DependenciaIA('_WinMain@16 quit path', 0x460227)
             mensagem = self.roteiro.peek()
+            janela = mm.u32(JANELA)
+            # PeekMessageA (PM_NOREMOVE) fills the MSG with the head message as GetMessageA then does.
+            corpo = None if mensagem is None else struct.pack('<IIIIIii', janela, *mensagem, 0, *self.roteiro.xy)
             registro.vinculo('USER32.PeekMessageA', (msg, r['EBX'], r['EBX'], r['EBX'], r['EBX']), 0x4601d8,
-                             int(mensagem is not None))
+                             int(mensagem is not None), escritas=((msg, corpo),) if corpo else ())
             if mensagem is None:
                 r['EAX'] = 0
                 break
-            janela = mm.u32(JANELA)
             m, wp, lp = self.roteiro.get()
-            corpo = struct.pack('<IIIIIii', janela, m, wp, lp, 0, *self.roteiro.xy)
             registro.vinculo('USER32.GetMessageA', (msg, 0, 0, 0), 0x4601eb, 1, escritas=((msg, corpo),))
             registro.vinculo('USER32.TranslateMessage', (msg,), 0x4601f9, 0)
             self.roteiro._evento('translate_message', 0x4601f9, result=0)
@@ -219,9 +222,19 @@ class ComposicaoEntrada(ComposicaoQuadros):
         p, _ = provedores(self.mapa, self.prov, mm, self.ctx, registro, janelas, self.travessias, fase, regs)
 
         def som(nome, regs_som, pilha):
-            registro.fronteira(nome, 0, None, regs_som, palavras=list(pilha))
+            """The sound-library boundary (PlaySnd_PostSound/StopSound), recorded as the original records it: call
+            site and caller from the provider's declared call address, the pushed words (the stale caller words
+            after them are not modeled), and the callee's ``ret`` cleanup of the pushed words."""
+            chamada = _sitio_chamada()
+            retorno, chamador = 0, None
+            if chamada is not None:
+                retorno = chamada + 5
+                inicio, dono = self.imagem.owner(retorno)
+                chamador = f'{dono}+0x{retorno - inicio:x}'
+            palavras = list(pilha) + [None] * (4 - len(pilha))
+            registro.fronteira(nome, retorno, chamador, regs_som, palavras=palavras, limpeza=4 * len(pilha))
             return regs_som['EAX']
-        vivos = provedores_vivos(mm, janelas=_TeclasSitio(self.roteiro), som=som)
+        vivos = provedores_vivos(mm, janelas=_TeclasSitio(self.roteiro, registro), som=som)
         def texto(n, local):
             """TextGetMessage as Missions' declared display-scenario boundary: EAX 0, no cleanup, logged."""
             registro.fronteira('TextGetMessage', local + 5, f'InputGame+0x{local + 5 - 0x429278:x}', dict(EAX=n),
@@ -286,13 +299,33 @@ class ComposicaoEntrada(ComposicaoQuadros):
                        eventos=self.roteiro.eventos[inicio_eventos:])
 
 
+def _sitio_chamada(profundidade=12):
+    """The original CALL address a provider declared for a boundary it raises: Core's ``SelecaoOrdens._fronteira(
+    nome, endereco, ...)`` passes the boundary to ``som`` without the site, so it is read from that frame's
+    ``endereco`` argument (Core's own declared address, never inferred). None when no such frame is found."""
+    import sys
+    f = sys._getframe(2)
+    for _ in range(profundidade):
+        if f is None:
+            return None
+        if f.f_code.co_name == '_fronteira' and isinstance(f.f_locals.get('endereco'), int):
+            return f.f_locals['endereco']
+        f = f.f_back
+    return None
+
+
 class _TeclasSitio:
-    """``janelas`` for ``provedores_vivos``: keys and cursor from the script, each key logged at its poll."""
-    def __init__(self, roteiro):
-        self.r = roteiro
+    """``janelas`` for ``provedores_vivos``: keys and cursor from the script. Each key poll is logged as an input
+    event and as the ``USER32.GetAsyncKeyState`` binding (argument vk, the poll's return address, EAX = the
+    declared answer & 0xffff), as the original's import binding records it."""
+    def __init__(self, roteiro, registro=None):
+        self.r, self.registro = roteiro, registro
 
     def tecla(self, vk, local):
-        return self.r.tecla(vk, local)
+        valor = self.r.tecla(vk, local)
+        if self.registro is not None:
+            self.registro.vinculo('USER32.GetAsyncKeyState', (vk,), local, valor)
+        return valor
 
     def cursor(self):
         return self.r.xy
