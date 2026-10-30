@@ -1,0 +1,12 @@
+[lease] graphics18-P7-a waiting
+[lease] graphics18-P7-a granted slots [0]
+P7 2450 native surface/state equal
+P7 2500 native surface/state equal
+P7 2550 native surface/state equal
+P7 2600 native surface/state equal
+P7 2650 native surface/state equal
+P7 2700 native surface/state equal
+P7 2750 native surface/state equal
+P7 2800 native surface/state equal
+P7 2850 native surface/state equal
+{"probe": "P7", "frames": [2401, 2850], "status": "complete", "seconds": 238.969, "drawn": 450, "snapshot": {"path": ".local/graficos-api17-start/P7-02850.pickle", "sha256": "e6e1345689ab057b90f7bc12ee0c7e096e31369734fa2b6da78b390ff127ed07"}, "text_boundaries": 81, "text_pointer_reads": 450}

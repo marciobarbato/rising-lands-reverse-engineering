@@ -60,9 +60,11 @@ class Ciclo:
     """The bench. ``ordens(b, k, ler)`` returns the declared actions at frame k's CalculGame entry:
     [dict(kind='call', label, routine, registers) | dict(kind='write', label, address, bytes)].
     ``escolher(nome, regs, ler)`` decides whether a call of ``nome`` is recorded.
-    ``observador(nome, regs, antes, resultado)`` sees every recorded call."""
+    ``observador(nome, regs, antes, resultado)`` sees every recorded call.
+    ``gravar_acoes``: a declared call runs through the isolation-aware runner, so the recorded routines it
+    enters (itself included) are recorded like the frame's own calls, each tagged with the action label."""
 
-    def __init__(self, rotinas, escolher, ordens, observador=None, amostra=None, ticks=60000):
+    def __init__(self, rotinas, escolher, ordens, observador=None, amostra=None, ticks=60000, gravar_acoes=False):
         import percurso_quadro1  # noqa: F401  (puts Missions on sys.path)
         import cenarios_oraculo
         from oraculo_exibicao_missao import BancadaExibicaoOriginal
@@ -78,6 +80,7 @@ class Ciclo:
         self.observador, self.amostra = observador, amostra
         self.registros, self.acoes, self.quadros = [], [], []
         self.reproducao = {}
+        self.gravar_acoes, self.acao_atual = gravar_acoes, None
 
     # ------------------------------------------------------------ memory helpers
     def ler(self, endereco, n):
@@ -137,10 +140,21 @@ class Ciclo:
             b.cpu.reg_write(x86.UC_X86_REG_ESP, esp)
             fase, eventos, fronteiras = b.fase, len(b.vinculos_declarados.eventos), len(b.eventos_fronteira)
             b._retomando = set()
-            saida = BancadaCargaMissaoOriginal._correr(b, 'leaf', b.sym[acao['routine']], {}, (RETORNO,), retomar=True)
+            if self.gravar_acoes:
+                # A stop on the very first instruction leaves EIP unwritten: set it, so the isolation-aware
+                # runner sees the routine's entry and records it.
+                b.cpu.reg_write(x86.UC_X86_REG_EIP, b.sym[acao['routine']])
+                self.acao_atual = acao['label']
+                try:
+                    saida = b._correr('leaf', b.sym[acao['routine']], {}, (RETORNO,), retomar=True)
+                finally:
+                    self.acao_atual = None
+            else:
+                saida = BancadaCargaMissaoOriginal._correr(b, 'leaf', b.sym[acao['routine']], {}, (RETORNO,), retomar=True)
             b.fase = fase
             if saida['EIP'] != RETORNO or saida['ESP'] != esp + 4:
-                raise RuntimeError(f'Declared call {acao["label"]} did not return')
+                raise RuntimeError(f'Declared call {acao["label"]} did not return: EIP {saida["EIP"]:#x} '
+                                   f'({b.nome(saida["EIP"])}), ESP {saida["ESP"]:#x} (expected {esp + 4:#x})')
             if len(b.vinculos_declarados.eventos) != eventos:
                 raise RuntimeError(f'Declared call {acao["label"]} reached a binding')
             registro.update(registers={c: hex(v) for c, v in acao['registers'].items()},
@@ -208,6 +222,8 @@ class Ciclo:
                         boundaries=[dict(routine=e['routine'], caller=e['caller'], registers=e['registers'],
                                          stack_words=e['stack_words'], declared_eax=e['declared_eax'],
                                          stack_cleanup=e['stack_cleanup']) for e in b.eventos_fronteira[fronteiras:]])
+                    if ciclo.acao_atual is not None:
+                        resultado['action'] = ciclo.acao_atual
                     if ciclo.observador is not None:
                         ciclo.observador(nome, regs, blocos, resultado)
                     ciclo.registros.append(resultado)

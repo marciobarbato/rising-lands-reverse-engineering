@@ -1,0 +1,18 @@
+[lease] graphics18-P3-b waiting
+[lease] graphics18-P3-b granted slots [2]
+P3 1100 native surface/state equal
+P3 1150 native surface/state equal
+P3 1200 native surface/state equal
+P3 1250 native surface/state equal
+P3 1300 native surface/state equal
+P3 1350 native surface/state equal
+P3 1400 native surface/state equal
+P3 1450 native surface/state equal
+P3 1500 native surface/state equal
+P3 1550 native surface/state equal
+P3 1600 native surface/state equal
+P3 1650 native surface/state equal
+P3 1700 native surface/state equal
+P3 1750 native surface/state equal
+P3 1800 native surface/state equal
+{"probe": "P3", "frames": [1051, 1800], "status": "complete", "seconds": 430.282, "drawn": 750, "snapshot": {"path": ".local/graficos-api17-start/P3-01800.pickle", "sha256": "b389ba51d7f7ee3428a65cfeac6b2dcfd06b94fccf4bb31c5bb59a96a953d61b"}, "text_boundaries": 0, "text_pointer_reads": 750}

@@ -219,12 +219,12 @@ class Entrada:
         fgets/ftell, not inventoried I/O boundaries), so the table pointer is 0 and the body would read unmapped
         low memory. The frame chain declares TextGetMessage as the same boundary as Missions' display scenario
         (``oraculo_exibicao_missao.FRONTEIRAS_EXIBICAO``: EAX 0, no cleanup, the body never executed): a bound
-        provider ``TextGetMessage(n, sitio) -> EAX`` answers it. Without one (the leaf bench) the pointer-0 read
+        provider ``TextGetMessage(n, local) -> EAX`` (``local``: the call site) answers it. Without one (the leaf bench) the pointer-0 read
         is a named gap, never a guessed 0."""
         tabela = self.m.u32(0x5099a4)
         if tabela == 0:
             if self.p is not None and 'TextGetMessage' in getattr(self.p, 'funcoes', {}):
-                return self.p('TextGetMessage', sitio, n=n & 0xffff, sitio=sitio) & M32
+                return self.p('TextGetMessage', sitio, n=n & 0xffff, local=sitio) & M32
             _parar('TextGetMessage with the text table pointer 0x5099a4 = 0 (texts not loaded)', 0x478a47)
         return self.m.u32(tabela + 4 * (n & 0xffff))
 
@@ -241,22 +241,202 @@ class Entrada:
         return self.m.u16(b), self.m.u16(b + 2), self.m.u16(b + 4)
 
     def _pode_atacar(self, jogador, modo, alvo):         # EnginSelectPeutAttaquer 0x472355
-        if modo == 1:
-            if self._tipo(alvo) == 0x11:
-                return 0
-        elif modo == 5:
-            return 1
-        for u in self._selecao(jogador):
-            if not self._vivo(u):
-                continue
-            if not self._armee(self._tipo(u)):
-                return 0
-            _parar('EnginSelectPeutAttaquer with an army type selected (TypeEnginPeutAttaquer)', 0x4723e2)
-        return 1
+        return self.engin_select_peut_attaquer(dict(EAX=jogador & 0xff, EDX=modo & 0xff, EBX=alvo & 0xffff,
+                                                    ECX=0, ESI=0, EDI=0, EBP=0))['EAX'] & 0xff
 
     @staticmethod
     def _armee(t):                                       # TypeEnginEstArmee 0x44230c
-        return t <= 3 or t == 8 or 0xb <= t <= 0xc or t == 0xf or 0x10 <= t <= 0x11 or 0x14 <= t <= 0x19
+        t &= 0xff
+        return t <= 3 or t == 8 or 0xb <= t <= 0xc or 0xf <= t <= 0x10 or 0x12 <= t <= 0x19
+
+    @staticmethod
+    def _peut_attaquer_type(atacante, alvo):             # TypeEnginPeutAttaquer 0x453d7d (AL, DL)
+        if alvo in (0x11, 0xa):
+            return 0
+        if alvo == 0x10 and atacante not in (2, 8):
+            return 0
+        return 1
+
+    @staticmethod
+    def _largue_bombe(t):                                # TypeEnginLargueBombe 0x4422eb
+        return t in (0xe, 0x10)
+
+    @staticmethod
+    def _est_troupe(t):                                  # TypeEnginEstTroupe 0x442347
+        return t not in (3, 0xb, 0xc, 0xd, 0xe, 0xf, 0x10, 0x11, 0x19)
+
+    # ------------------------------------------------------------ selection and structure leaves (round 3)
+    # Each takes the entry registers EAX..EBP and returns them as the original leaves them.
+    def engin_select_peut_attaquer(self, r):
+        """EnginSelectPeutAttaquer 0x472355 (AL player, DL mode, BX target; ECX/ESI saved, EBX/EDX not):
+        mode 5: 1; mode 1: 0 for a type-0x11 target; then every live selected unit must be an army type
+        (TypeEnginEstArmee), for mode 1 able to attack the target's type (TypeEnginPeutAttaquer), and a bomber
+        type (TypeEnginLargueBombe) must hold a bomb (+0xda)."""
+        m, j, modo = self.m, r['EAX'] & 0xff, r['EDX'] & 0xff
+        eax, ebx, edx = r['EAX'], r['EBX'], r['EDX']
+        alvo_tipo = None
+        if modo == 1:
+            alvo_tipo = self._tipo(r['EBX'] & 0xffff)
+            if alvo_tipo == 0x11:
+                return dict(r, EAX=0)
+            eax = alvo_tipo
+        elif modo == 5:
+            return dict(r, EAX=(eax & 0xffffff00) | 1)
+        for u in self._selecao(j):
+            eax = int(self._vivo(u))
+            if not eax:
+                continue
+            t = self._tipo(u)
+            ebx = t
+            if not self._armee(t):
+                return dict(r, EAX=0, EBX=ebx, EDX=edx)
+            if modo == 1:
+                edx = alvo_tipo
+                if not self._peut_attaquer_type(t, alvo_tipo):
+                    return dict(r, EAX=0, EBX=ebx, EDX=edx)
+            if not self._largue_bombe(t):
+                eax = 0
+                continue
+            eax = m.u8(self._rec(u) + 0xda)
+            if not eax:
+                return dict(r, EAX=0, EBX=ebx, EDX=edx)
+        return dict(r, EAX=(eax & 0xffffff00) | 1, EBX=j << 9, EDX=edx)
+
+    def _laco_selecao(self, r, teste):
+        """The shared loop of EnginSelectEstTroupe/EstEngin 0x4729b4/0x472a0c (AL player): a live unit whose
+        type fails ``teste`` returns 0 at once; AL = 1 when a live unit passed (EAX upper bits: the last call's)."""
+        eax, achou = r['EAX'], 0
+        for u in self._selecao(r['EAX']):
+            eax = int(self._vivo(u))
+            if not eax:
+                continue
+            eax = teste(self._tipo(u))
+            if not eax:
+                return dict(r, EAX=0)
+            achou = 1
+        return dict(r, EAX=(eax & 0xffffff00) | achou)
+
+    def engin_select_est_troupe(self, r):
+        """EnginSelectEstTroupe 0x4729b4: TypeEnginEstTroupe returns 0x101 (true) or 0."""
+        return self._laco_selecao(r, lambda t: 0x101 if self._est_troupe(t) else 0)
+
+    def engin_select_est_engin(self, r):
+        """EnginSelectEstEngin 0x472a0c: TypeEnginEstEngin 0x442434 (types 0xb..0x11) returns 1 or 0."""
+        return self._laco_selecao(r, lambda t: int(0xb <= t <= 0x11))
+
+    def engin_select_contient_miroir(self, r):
+        """EnginSelectContientMiroir 0x472a64: AL = 1 at the first live mirror unit (EnginEstMiroir), else 0."""
+        eax = r['EAX']
+        for u in self._selecao(r['EAX']):
+            eax = int(self._vivo(u))
+            if eax:
+                eax = self._miroir(u)
+                if eax:
+                    return dict(r, EAX=1)
+        return dict(r, EAX=eax & 0xffffff00)
+
+    def engin_select_peuvent_transporter(self, r):
+        """EnginSelectPeuventTransporter 0x472ab2: 0 when a live selected unit's type is not 5, 6, 7 or 0xd."""
+        eax = r['EAX']
+        for u in self._selecao(r['EAX']):
+            eax = int(self._vivo(u))
+            if eax and self._tipo(u) not in (5, 7, 6, 0xd):
+                return dict(r, EAX=0)
+        return dict(r, EAX=(eax & 0xffffff00) | 1)
+
+    def engin_select_est_blesse(self, r):
+        """EnginSelectEstBlesse 0x4721f9: AL = (live selected units with hit points +0x9a != the type's
+        maximum (u16 0x4965b6 + 50 * type) >= 1); EAX bits 8..15 = the count's."""
+        n = 0
+        for u in self._selecao(r['EAX']):
+            if self._vivo(u) and self.m.u16(self._rec(u) + 0x9a) != self.m.u16(0x4965b6 + 50 * self._tipo(u)):
+                n += 1
+        n &= 0xffff
+        return dict(r, EAX=(n & 0xff00) | int(n >= 1))
+
+    def engin_select_peut_deposer(self, r):
+        """EnginSelectPeutDeposer 0x4722a5 (AL player, DX structure; EBX/ECX saved, EDX is the loop index): a
+        live selected unit makes it 0 unless the structure type is 3 (unit types 5, 6, 7, 0xd) or 4 (type 5);
+        AL = 1 when one live unit qualified."""
+        j, tipo = r['EAX'] & 0xff, self._tipo_estrutura(r['EDX'])
+        lista = self._selecao(j)
+        achou = 0
+        for i, u in enumerate(lista):
+            if not self._vivo(u):
+                continue
+            t = self._tipo(u)
+            if tipo < 3 or tipo > 4 or (tipo == 3 and t not in (7, 5, 0xd, 6)) or (tipo == 4 and t != 5):
+                return dict(r, EAX=0, EDX=i)
+            achou = 1
+        return dict(r, EAX=((j << 9) & 0xffffff00) | achou, EDX=len(lista))
+
+    def batiment_est_depot(self, r):
+        """BatimentEstDepot 0x4191c9 (AX): EAX = 1 for structure types 3 and 4, else 0."""
+        return dict(r, EAX=int(self._tipo_estrutura(r['EAX']) in (3, 4)))
+
+    def batiment_est_neutre(self, r):
+        """BatimentEstNeutre 0x41d02b (AX): EAX = (owner == 0xc8)."""
+        return dict(r, EAX=int(self._dono_estrutura(r['EAX']) == 0xc8))
+
+    def player_est_allie(self, r):
+        """PlayerEstAllie 0x46d838 (AL, DL): 1 for the same player; 0 when either is above 4; else bit DL of the
+        byte [0x5080a8] + 20 * AL + 6 (DL becomes 1 << DL)."""
+        a, b = r['EAX'] & 0xff, r['EDX'] & 0xff
+        if a == b:
+            return dict(r, EAX=(r['EAX'] & 0xffffff00) | 1)
+        if a > 4 or b > 4:
+            return dict(r, EAX=0)
+        bit = 1 << b
+        edx = (r['EDX'] & 0xffffff00) | bit
+        aliados = self.m.u8(self.m.u32(0x5080a8) + 20 * a + 6)
+        return dict(r, EAX=int(bool(aliados & bit)), EDX=edx)
+
+    def batiment_est_ennemi(self, r):
+        """BatimentEstEnnemi 0x41a61c (AX structure, DL player; EBX saved, EDX not): 0 for a 0xc8 owner (EDX =
+        the structure), else not PlayerEstAllie(owner, player)."""
+        s, j = r['EAX'] & 0xffff, r['EDX'] & 0xff
+        dono = self._dono_estrutura(s)
+        if dono == 0xc8:
+            return dict(r, EAX=0, EDX=s)
+        a = self.player_est_allie(dict(r, EAX=dono, EDX=j))
+        return dict(r, EAX=0 if a['EAX'] & 0xff else 1, EDX=a['EDX'])
+
+    def batiment_peut_se_vendre(self, r):
+        """BatimentPeutSeVendre 0x4233d8 (AX): 0 for type 0x11 (EAX upper bits = 276 * structure) or a nonzero
+        byte +0x74, else 1."""
+        s = r['EAX'] & 0xffff
+        if self._tipo_estrutura(s) == 0x11:
+            return dict(r, EAX=(s * PASSO) & 0xffffff00)
+        return dict(r, EAX=0 if self.m.u8(0x49a0c8 + s * PASSO + 0x74) else 1)
+
+    def cherche_indice_batiment(self, r):
+        """ChercheIndiceBatiment 0x41b54a (AX cell): the structure index of the cell's grid word [0x4e0f38]
+        (bit 15 set, bits 5..14), else 0xffff."""
+        return dict(r, EAX=self._estrutura_na_celula(r['EAX']))
+
+    def _estrutura_na_celula(self, celula):
+        w = self.m.u16(self.m.u32(0x4e0f38) + 2 * (celula & 0xffff))
+        return (w & 0x7fe0) >> 5 if w & 0x8000 else 0xffff
+
+    def _construida(self, s):                            # BatimentConstruit 0x41c652
+        b = 0x49a0c8 + (s & 0xffff) * PASSO
+        return self.m.u16(b + 0xa) == self.m.u16(0x495d90 + 52 * self.m.u8(b + 8))
+
+    def _dano(self, s):                                  # BatimentGetDegatEffectif 0x41a976
+        return self.m.u16(0x49a0c8 + (s & 0xffff) * PASSO + 6)
+
+    FOLHAS = {'EnginSelectPeutAttaquer': 'engin_select_peut_attaquer', 'EnginSelectEstTroupe': 'engin_select_est_troupe',
+              'EnginSelectEstEngin': 'engin_select_est_engin',
+              'EnginSelectContientMiroir': 'engin_select_contient_miroir',
+              'EnginSelectPeuventTransporter': 'engin_select_peuvent_transporter',
+              'EnginSelectEstBlesse': 'engin_select_est_blesse', 'EnginSelectPeutDeposer': 'engin_select_peut_deposer',
+              'BatimentEstDepot': 'batiment_est_depot', 'BatimentEstNeutre': 'batiment_est_neutre',
+              'BatimentEstEnnemi': 'batiment_est_ennemi', 'PlayerEstAllie': 'player_est_allie',
+              'BatimentPeutSeVendre': 'batiment_peut_se_vendre', 'ChercheIndiceBatiment': 'cherche_indice_batiment'}
+
+    def chamar_folha(self, nome, regs):
+        """Run the round-3 leaf ``nome`` with entry registers ``regs`` (EAX..EBP)."""
+        return getattr(self, self.FOLHAS[nome])({k: regs[k] & M32 for k in REG7})
 
     def _pode_entrar(self, jogador, modo, alvo):         # EnginSelectPeutEntrer 0x472b6c
         for u in self._selecao(jogador):
@@ -793,8 +973,13 @@ class Entrada:
             m.u8(MODO_ACAO, 0xff)
             m.u8(ARRASTO, 0)
             m.u8(0x496d48, 1)
-        if self._tecla(0x11, 0x4295fc) < 0:
-            _parar('InputGame Ctrl held (deposit mode 8/9)', 0x429601)
+        if self._tecla(0x11, 0x4295fc) < 0:                # 0x429601: the deposit mode
+            transporte = self._tropas(p) and self.engin_select_peuvent_transporter(dict(EAX=p))['EAX'] & 0xff
+            if m.u16(PAGINA) != 9:
+                if transporte:
+                    m.u16(PAGINA, 8)
+            elif not transporte:
+                m.u16(PAGINA, 0)
         elif m.u16(PAGINA) in (8, 9):
             m.u16(PAGINA, 0)
         if self._tecla(0x2e, 0x42967e) < 0:
@@ -988,32 +1173,37 @@ class Entrada:
         elif self._armadilha(si, p):
             loc['info'] = self._texto(0x33, 0x429a46)
             loc['info2'], loc['flag'] = 0xffff, 0
-        tipo_sob = 5
+        tipo_sob, objeto = 5, si                     # [ebp-0xc] and ECX's low word from 0x429a6c on
         if self._iluminada(si, p):
-            w = m.u16(m.u32(0x4e0f38) + 2 * si)
-            s = (w & 0x7fe0) >> 5 if w & 0x8000 else 0xffff
+            s = self._estrutura_na_celula(si)
             m.u16(ESTRUTURA_SOB, s)
             if s != 0xffff:
-                tipo_sob = 3
+                tipo_sob, objeto = 3, s
                 loc['info'] = self._nome_estrutura(self._tipo_estrutura(s))
                 loc['info2'] = 0xffff
             u = self._chercher_unite(si)
             m.u16(UNIDADE_SOB, u)
             if u != 0xffff:
-                tipo_sob = 1
+                tipo_sob, objeto = 1, u
                 loc['info'] = self._nome_unidade(self._tipo(u))
                 loc['info2'] = 0xffff
                 if self._est_selectionne(m.u8(0x508041), u) and m.u8(B0):
                     self.p('PlaySnd_StopSound', 0x429b6a,
                            regs=dict(EAX=self._rec(u) + 0x104, EDX=2, EBX=u * PASSO, ECX=u))
                     self._core('EnginAsk', 0x429b79, EAX=u, EDX=2, EBX=0, ECX=u)
-        self.tipo_sob = tipo_sob
+        self.tipo_sob, self.objeto_sob = tipo_sob, objeto
         if pagina == 9:
-            _parar('InputGame help page 9 (deposit target)', 0x429b90)
-        if pagina in (0xc, 0xb, 0xd, 5, 0xa, 2, 7):
-            _parar(f'InputGame help page 0x{pagina:x}', {0xc: 0x429daa, 0xb: 0x429e31, 0xd: 0x42a080,
-                                                          5: 0x42a110, 0xa: 0x42a373, 2: 0x42a4a2,
-                                                          7: 0x42a600}[pagina])
+            return self._pagina_deposito(p, si)
+        if pagina == 0xc:
+            return self._pagina_grupo(p)
+        if pagina == 0xb:
+            return self._pagina_engenheiro(p)
+        if pagina == 2:
+            return self._pagina_ataque(p, tipo_sob, objeto)
+        if pagina == 7:
+            return self._pagina_venda(p, si)
+        if pagina in (0xd, 5, 0xa):
+            _parar(f'InputGame help page 0x{pagina:x}', {0xd: 0x42a080, 5: 0x42a110, 0xa: 0x42a373}[pagina])
         if pagina == 3:
             return self._pagina_construcao(p, si)
         if pagina == 1:
@@ -1024,6 +1214,116 @@ class Entrada:
                 m.u16(PAGINA, 0)
             return
         self._pagina_geral(p, si, x, y)
+
+    def _cursor(self, ident, anim):
+        self.m.u16(CURSOR_ID, ident)
+        self.m.u32(CURSOR_ANIM, anim)
+
+    def _clique(self):
+        return self.m.u8(AE) and self.m.u8(AF)
+
+    def _apontar(self, si):
+        """0x42af9b: the pointer target word 0x496204 and the cursor-after-order word 0x4e05ac."""
+        self.m.u16(0x496204, si)
+        self.m.u16(0x4e05ac, 0x1e03)
+
+    def _pagina_deposito(self, p, si):
+        """Help page 9 0x429b90 (deposit target): a depot structure (types 3/4) the selection may use and the player
+        owns, or no structure; the click sends tag 6/7/8/0x13 by table 0x42923c[u16 0x4e05b0] (BX = u16 0x4e05b2,
+        CX = 2 with the structure as word 6, else 1 with the cell; word 8 = byte 0x4e05b4)."""
+        m = self.m
+        s = m.u16(ESTRUTURA_SOB)
+        if s != 0xffff and not (self.batiment_est_depot(dict(EAX=s))['EAX'] and
+                                self.engin_select_peut_deposer(dict(EAX=p, EDX=s))['EAX'] & 0xff and
+                                self._dono_estrutura(s) == p):
+            return self._cursor(0x1e0e, 0)
+        self._cursor(0x1e40, self._contador(3, endereco=0x508f84))
+        if not self._clique():
+            return
+        modo = m.u16(0x4e05b0)
+        if modo <= 3:
+            etiqueta = (6, 7, 8, 0x13)[modo]
+            if s != 0xffff:
+                self._ordre(p, etiqueta, m.u16(0x4e05b2), 2, s, m.u8(0x4e05b4), sitio=0x429c88)
+            else:
+                self._ordre(p, etiqueta, m.u16(0x4e05b2), 1, si, m.u8(0x4e05b4), sitio=0x429c88)
+        m.u16(PAGINA, 0)
+        self._apontar(si)
+
+    def _pagina_grupo(self, p):
+        """Help page 0xc 0x429daa (Shift): a selectable unit under the cursor; the button release (AF alone)
+        sends tag 0x24 (add it to the group)."""
+        u = self.m.u16(UNIDADE_SOB)
+        if u == 0xffff or not self._core('EnginSelectionnable', 0x429dc5, EAX=u)['EAX'] & 0xff:
+            return
+        self._cursor(0x1df0, self._contador(5))
+        if self.m.u8(AF):
+            self._ordre(p, 0x24, u, 0, sitio=0x42aecf)
+
+    def _pagina_engenheiro(self, p):
+        """Help page 0xb 0x429e31 (the engineer's structure target, mode byte 0x496209): with a type-8 selection,
+        a type-3 structure for a mode other than 3 or a type-7 structure for mode 3; the click sends tag 0x22."""
+        m = self.m
+        m.u16(0x4e0628, self._primeira(p))
+        if m.u16(0x4e0628) == 0xffff or not self._tipo_selecionado(p, 8):
+            m.u8(ARRASTO, 0)
+            m.u8(MODO_ACAO, 0xff)
+            m.u16(PAGINA, 0)
+            m.u8(0x496d48, 1)
+            return
+        self._cursor(0x1e0e, 0)
+        s = m.u16(ESTRUTURA_SOB)
+        if s == 0xffff:
+            _parar('InputGame page 0xb with no structure under the cursor (BatimentGetType(0xffff) reads '
+                   '0x15d9fbc, outside the structure pool)', 0x429ea2)
+        t, modo = self._tipo_estrutura(s), m.u8(MODO_9)
+        if not ((t == 3 and modo != 3) or (t == 7 and modo == 3)):
+            return
+        self._cursor(0x1ea9, self._contador(3))
+        if self._clique():
+            self._ordre(p, 0x22, 3, s, modo, 0, sitio=0x42aecf)
+
+    def _pagina_ataque(self, p, tipo_sob, objeto):
+        """Help page 2 0x42a4a2 (Alt: forced attack on the object under the cursor, mode [ebp-0xc] = 1 unit,
+        3 structure, 5 cell; ECX = the object). A selected structure asks Combat's BatimentPeutAttaquer; troops
+        ask EnginSelectPeutAttaquer, or target a type-10 unit regardless. The click sends tag 0xe."""
+        m = self.m
+        sel = self._sel_estrutura(p)
+        m.u16(0x4e0628, self._primeira(p))
+        if sel != 0xffff:
+            ok = self.p('BatimentPeutAttaquer', 0x42a4dc,
+                        regs=dict(EAX=sel, EDX=tipo_sob, EBX=objeto, ECX=objeto, ESI=tipo_sob, EDI=p, EBP=0))
+            if not ok['EAX'] & 0xff:
+                return self._cursor(0x1e0e, 0)
+            self._cursor(0x1dfd, self._contador(6))
+            if self._clique():
+                self._ordre(p, 0xe, tipo_sob, objeto, sitio=0x42a52c)
+                m.u16(PAGINA, 0)
+            return
+        if m.u16(0x4e0628) == 0xffff:
+            return
+        if not self._pode_atacar(p, tipo_sob, objeto) and self._tipo(objeto) != 0xa:
+            return self._cursor(0x1e0e, 0)
+        self._cursor(0x1dfd, self._contador(6))
+        if self._clique():
+            self._ordre(p, 0xe, tipo_sob, objeto, sitio=0x42a5e6)
+            m.u16(PAGINA, 0)
+
+    def _pagina_venda(self, p, si):
+        """Help page 7 0x42a600 (Delete: sell): ChercheIndiceBatiment replaces the structure under the cursor; an
+        own structure that BatimentPeutSeVendre allows takes the click: tag 0xa, then BatimentDeselectionner."""
+        m = self.m
+        s = self._estrutura_na_celula(si)
+        m.u16(ESTRUTURA_SOB, s)
+        self._cursor(0x1e0e, 0)
+        if s == 0xffff:
+            return
+        if self._dono_estrutura(s) != p or not self.batiment_peut_se_vendre(dict(EAX=s))['EAX'] & 0xff:
+            return self._cursor(0x1e0e, 0)
+        self._cursor(0x1e1c, self._contador(6))
+        if self._clique():
+            self._ordre(p, 0xa, s, 0, sitio=0x42a6a3)
+            self._core('BatimentDeselectionner', 0x42a6aa, EAX=p)
 
     def _pagina_construcao(self, p, si):
         m = self.m
@@ -1068,22 +1368,113 @@ class Entrada:
         self._terreno(p, si)
 
     def _sobre_estrutura(self, p, s, x, y, si):
-        """0x42ac1f with no troops selected: the selected structure's double click (tag 0x21), else an own
-        structure's cursor and drag start (0x42b1ab)."""
+        """0x42ac1f: troops selected -> ``_estrutura_tropas`` (0x42ac32); otherwise the selected structure's double
+        click (tag 0x21), a selected structure's attack on a foreign structure (Combat's BatimentPeutAttaquer,
+        tag 0xe), else an own structure's cursor and drag start (0x42b1ab)."""
         m = self.m
         if self._tropas(p):
-            _parar('InputGame structure under the cursor with troops selected', 0x42ac32)
+            return self._estrutura_tropas(p, s, x, y, si)
         if self._sel_estrutura(p) == s and m.u8(B0):
             self._ordre(p, 0x21, s, 0, sitio=0x42aecf)
             return
-        if self._sel_estrutura(p) != 0xffff:
-            _parar('InputGame structure under the cursor with a structure selected (BatimentPeutAttaquer)', 0x42b289)
+        sel = self._sel_estrutura(p)
+        if sel != 0xffff:
+            ok = self.p('BatimentPeutAttaquer', 0x42b2a3, regs=dict(EAX=sel, EDX=3, EBX=s, ECX=s, ESI=si, EDI=p,
+                                                                     EBP=0))['EAX'] & 0xff
+            dono = self._dono_estrutura(s)
+            if ok and dono != p and dono != 0xc8:
+                self._cursor(0x1dfd, self._contador(6))
+                if self._clique():
+                    self._ordre(p, 0xe, 3, s, sitio=0x42aecf)
+                return
+        self._estrutura_propria(p, s, x, y, si)
+
+    def _estrutura_propria(self, p, s, x, y, si):
+        """0x42b1ab: an own structure's cursor and, with the left button down, the drag start."""
         if self._dono_estrutura(s) != p:
             return
-        m.u16(CURSOR_ID, 0x1df0)
-        m.u32(CURSOR_ANIM, self._contador(5))
-        if m.u8(AE):
+        self._cursor(0x1df0, self._contador(5))
+        if self.m.u8(AE):
             self._arrasto(x, y, si)
+
+    def _estrutura_tropas(self, p, s, x, y, si):
+        """0x42ac32: troops selected, structure ``s`` under the cursor.
+        - Page 8 (Ctrl deposit mode): an own cave with carriers (types 5/7/6) selected arms page 9 (0x4e05b0 = 3,
+          0x4e05b2 = the structure, 0x4e05b4 = 2 for builders, 1 for colonists, else 0); otherwise a move (tag 5).
+        - A foreign, not neutral structure: type 0x10 or 2 with type-10 units selected, tag 0x10 (BX 3); else
+          tag 0xe (BX 3) when EnginSelectPeutAttaquer(mode 3) allows it.
+        - Otherwise: the builder first selected on an unbuilt or damaged structure, tag 0x14 (BX 3); wounded
+          troops at an own built type-0x13 (troops) or type-0xe (engins) structure without mirrors, tag 0x15;
+          EnginSelectPeutEntrer(mode 3) without mirrors: a built structure, tag 0x10 (BX 3), an unbuilt one,
+          tag 5; else the own-structure drag start."""
+        m = self.m
+        if m.u16(PAGINA) == 8:
+            if self._dono_estrutura(s) == p and self._tipo_estrutura(s) == 3 and (
+                    self._tipo_selecionado(p, 5) or self._tipo_selecionado(p, 7) or self._tipo_selecionado(p, 6)):
+                self._cursor(0x1e3d, self._contador(3, endereco=0x508f84))
+                if self._clique():
+                    m.u16(0x4e05b0, 3)
+                    m.u16(0x4e05b2, s)
+                    m.u16(PAGINA, 9)
+                    m.u8(0x4e05b4, 2 if self._tipo_selecionado(p, 7) else 1 if self._tipo_selecionado(p, 5) else 0)
+                return
+            self._cursor(0x1e0e, 0)
+            if self._clique():
+                self._ordre(p, 5, si, 0, sitio=0x42ad8e)
+                self._apontar(si)
+            return
+        if self.batiment_est_ennemi(dict(EAX=s, EDX=p))['EAX'] & 0xff and \
+                not self.batiment_est_neutre(dict(EAX=s))['EAX'] & 0xff:
+            t = self._tipo_estrutura(s)
+            if t in (0x10, 2) and self._tipo_selecionado(p, 0xa):
+                self._cursor(0x1e6f, self._contador(mascara=1))
+                if self._clique():
+                    self._ordre(p, 0x10, 3, s, sitio=0x42aecf)
+                return
+            if not self._pode_atacar(p, 3, s):
+                return
+            self._cursor(0x1dfd, self._contador(6))
+            if self._clique():
+                self._ordre(p, 0xe, 3, s, sitio=0x42aecf)
+            return
+        self._cursor(0x1df0, self._contador(5))
+        if self._tipo(self._primeira(p)) == 7 and (not self._construida(s) or self._dano(s)):
+            self._cursor(0x1e10, self._contador(6))
+            if self._clique():
+                self._ordre(p, 0x14, 3, s, sitio=0x42af96)
+                self._apontar(si)
+            return
+        if self.engin_select_est_blesse(dict(EAX=p))['EAX'] & 0xff and self._dono_estrutura(s) == p:
+            t = self._tipo_estrutura(s)
+            alvo = (self.engin_select_est_troupe(dict(EAX=p))['EAX'] & 0xff and t == 0x13) or (
+                self.engin_select_est_engin(dict(EAX=p))['EAX'] & 0xff and t == 0xe)
+            if alvo and not self.engin_select_contient_miroir(dict(EAX=p))['EAX'] & 0xff:
+                if not self._construida(s):
+                    return
+                self._cursor(0x1e3b, self._contador(mascara=1))
+                if self._clique():
+                    self._ordre(p, 0x15, s, 0, sitio=0x42aecf)
+                return
+        if self._pode_entrar_estrutura(p, s) and not self.engin_select_contient_miroir(dict(EAX=p))['EAX'] & 0xff:
+            if self._construida(s):
+                self._cursor(0x1e16, self._contador(6))
+                if self._tipo_estrutura(s) == 0x15:
+                    self._cursor(0x1eac, self._contador(9))
+                if self._clique():
+                    self._ordre(p, 0x10, 3, s, sitio=0x42aecf)
+                return
+            self._cursor(0x1e0e, 0)
+            if self._clique():
+                self._ordre(p, 5, si, 0, sitio=0x42af96)
+                self._apontar(si)
+            return
+        self._estrutura_propria(p, s, x, y, si)
+
+    def _pode_entrar_estrutura(self, p, s):
+        """EnginSelectPeutEntrer 0x472b6c mode 3 (AL player, DL 3, BX structure): Core's ``entrada_estruturas``
+        through the provider of the same name (a named dependency without it)."""
+        return self.p('EnginSelectPeutEntrer', 0x42b0ae, regs=dict(EAX=p, EDX=3, EBX=s, ECX=0, ESI=0, EDI=p,
+                                                                     EBP=0))['EAX'] & 0xff
 
     def _sobre_unidade(self, p, u, x, y, si):
         m = self.m
@@ -1123,10 +1514,11 @@ class Entrada:
         m = self.m
         if not self._tropas(p):
             return
-        if self._gc(si) or self._tipo_sac(si) == 1:
+        caverna = m.u16(ESTRUTURA_SOB) != 0xffff and self._tipo_estrutura(m.u16(ESTRUTURA_SOB)) == 3
+        if self._gc(si) or self._tipo_sac(si) == 1 or caverna:
             if self._travail(p, 1):
-                if m.u16(PAGINA) == 8:
-                    _parar('InputGame deposit page 8 over a field', 0x42b393)
+                if m.u16(PAGINA) == 8:                          # 0x42b393: arm the deposit target page
+                    return self._armar_deposito(si, 1 if self._gc(si) else 3 if caverna else 2, 1)
                 m.u16(CURSOR_ID, 0x1e10)
                 m.u32(CURSOR_ANIM, self._contador(6))
                 if m.u8(AE) and m.u8(AF):
@@ -1134,10 +1526,10 @@ class Entrada:
                     m.u16(0x496204, si)
                     m.u16(0x4e05ac, 0x1e03)
                 return
-        if self._mina(si) or self._tipo_sac(si) == 2:
+        if self._mina(si) or self._tipo_sac(si) == 2 or caverna:
             if self._travail(p, 2):
-                if m.u16(PAGINA) == 8:
-                    _parar('InputGame deposit page 8 over a mine', 0x42b525)
+                if m.u16(PAGINA) == 8:                          # 0x42b525
+                    return self._armar_deposito(si, 0 if self._mina(si) else 3 if caverna else 2, 2)
                 m.u16(CURSOR_ID, 0x1e10)
                 m.u32(CURSOR_ANIM, self._contador(6))
                 if m.u8(AE) and m.u8(AF):
@@ -1166,6 +1558,18 @@ class Entrada:
             self._ordre(p, 5, si, 0, sitio=0x42b82a)
             m.u16(0x496204, si)
             m.u16(0x4e05ac, 0x1e03)
+
+    def _armar_deposito(self, si, modo, carga):
+        """Page 8 over a field (0x42b393) or a mine (0x42b525): the click sets page 9 with the deposit table index
+        0x4e05b0, the first target cell 0x4e05b2 and the cargo byte 0x4e05b4."""
+        m = self.m
+        self._cursor(0x1e3d, self._contador(3, endereco=0x508f84))
+        if not self._clique():
+            return
+        m.u16(PAGINA, 9)
+        m.u16(0x4e05b0, modo)
+        m.u16(0x4e05b2, si)
+        m.u8(0x4e05b4, carga)
 
     def _travail(self, p, tipo):
         return self.p('EnginTravailSelectionne', 0x42b375,
