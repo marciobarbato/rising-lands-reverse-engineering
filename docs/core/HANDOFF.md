@@ -700,3 +700,20 @@ Contract and counts: [HUNGER_SEARCH_LIGHT](HUNGER_SEARCH_LIGHT.md).
 - **Next (coordinator):**
   - AI/runtime's stops: SetMiniMap from CalculWorkEngin `0x44c437` (P5 760) and TerrainEstGc for objects ≥ 0x1d (P7 2801, P4 460);
   - the call address passed to `som`.
+
+### AI/runtime's CalculWorkEngin stops: TerrainEstGc and SetMiniMap at 0x44c437; `som` call address on `feat/re-core`
+
+Contract and counts: [WORK_CYCLE_QUERIES](WORK_CYCLE_QUERIES.md).
+- **Captured first** on Economy's work-cycle scenario (frame 600), original only:
+  - TerrainEstGc in situ at `0x44d8cd` (frames 261/293, objects ≥ 0x1d → 1);
+  - SetMiniMap at `0x44c437` (frame 572: the builder leaves the mine; mode 4, owner 0);
+  - AvanceEngin's mode 4;
+  - declared variants.
+- **Translated:** `incursao_core.terreno_esta_gc`, with `traducao_core` and `provedores_core['TerrainEstGc'] (keywords sitio, caso)`. SetMiniMap mode 4 is the existing `definir_minimapa`, unchanged, and already in `provedores_core`.
+- **Native:** 32 comparisons, 0 mismatches.
+- **`som`:** `selecao_ordens.chamar_som` passes `chamada` = the original call address to providers that declare it. It is used by `selecao_ordens`, `visao_grupos` and `fadiga_vegetacao`.
+- **Reruns:** the native differentials bound to the changed files were rerun (selection orders, vision groups, hunger fome/abandono, queries). Results are in the commit message.
+- **For AI/runtime:**
+  - route CalculWorkEngin's TerrainEstGc to `provedores_core['TerrainEstGc']`;
+  - route its SetMiniMap to `provedores_core['SetMiniMap']` with DL = 4 (`0x44c427`);
+  - a `som` with a `chamada` parameter receives the call address.

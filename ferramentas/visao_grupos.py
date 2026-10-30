@@ -425,8 +425,9 @@ class VisaoGrupos:
                 parada = dict(regs, EAX=(rec + 0x104) & M32, EDX=0x16, EBX=0, ECX=u)
                 if self.som is None:
                     raise DependenciaRamoCore('PlaySnd_StopSound', 0x4728e4, 'Audio sound-library provider required')
-                parada['EAX'] = self.som('PlaySnd_StopSound', {k: parada[k] for k in ('EAX', 'EDX', 'EBX', 'ECX')},
-                                         []) & M32
+                from selecao_ordens import chamar_som
+                parada['EAX'] = chamar_som(self.som, 'PlaySnd_StopSound',
+                                           {k: parada[k] for k in ('EAX', 'EDX', 'EBX', 'ECX')}, [], 0x4728e4) & M32
                 regs = dict(parada, EAX=u)
             s = sel.engin_ask(regs)
             eax, edx = s['EAX'], s['EDX']

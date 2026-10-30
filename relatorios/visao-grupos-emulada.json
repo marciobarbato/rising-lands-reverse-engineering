@@ -98,14 +98,14 @@
   "som": "returns the received EAX (the frame bench declaration for PlaySnd_*), compared"
  },
  "schema": "rising-lands/monde01-vision-groups-differential/1",
- "seconds": 186.308,
+ "seconds": 204.766,
  "source_sha256": {
   "ferramentas/bancada_entrada_estruturas.py": "660cf29cd538cb5ebf81ff35b7b9cf0c9d34aabc97a83d3b4740c71930cf7078",
   "ferramentas/capturar_visao_grupos.py": "861f84233c9f31278830c10bc167f16d626ccc635b063b5fc9c9ff5c37d2d746",
   "ferramentas/casos_visao_grupos.py": "8351c03dfdad565a51715aeffff0fec99a6cc98e659522785518bb9fecc05e4e",
-  "ferramentas/selecao_ordens.py": "e8eb78134dd44adbbef88354ea3219c6513f2a2173cc68227fa9fecaf47ab67c",
+  "ferramentas/selecao_ordens.py": "acf5ebde927f1c5a0275ddffa191d03bdb78a810dd5179cb1f7088b46eba17e8",
   "ferramentas/validar_visao_grupos.py": "31ac034e5e1f24b4bd2f3089c9f1e9be9c12a8476f9ad40a46ba6482b6f688ed",
-  "ferramentas/visao_grupos.py": "d47c782fb100e4dc302e35765317fdd47d0986aa21f0b96c7d75628791bbed61"
+  "ferramentas/visao_grupos.py": "dcefb04aed8fcc35d1aadaa44dd4b560b246b7238c46a0fb5c6ab9df979fa595"
  },
  "uncertain": [
   {
