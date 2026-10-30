@@ -1,0 +1,21 @@
+{
+ "schema": "rising-lands/macos-native-render-proof/1",
+ "engine_sha256": "792edc2e0812b6a2636e1033f2235c5f89ce8b7336ccb825a1c45902d48fa6a1",
+ "driver_sha256": "8d0ed16d5424ed587762e34e5e5430e48a6b4b66cd6e1526a8fe379a0475c799",
+ "inputs_manifest_sha256": "79bc859503732a0613e4f990b41501ba7fb8167410cbc7f75d17450f65b0957f",
+ "frames_requested": 128,
+ "frames_completed": 128,
+ "states_equal": 257,
+ "checkpoints_equal": 11,
+ "surfaces_equal": 128,
+ "python_surfaces_equal": 128,
+ "first_named_stop": null,
+ "observer_failures": [],
+ "horizon_pending": false,
+ "timing": {
+  "logic_seconds": 1.475462,
+  "render_seconds": 0.590743,
+  "proof_seconds": 13.897192,
+  "wall_seconds": 15.966831417000321
+ }
+}
