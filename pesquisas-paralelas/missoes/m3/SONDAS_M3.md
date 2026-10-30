@@ -201,8 +201,9 @@ S1-a therefore crosses the raids at 9000 and 10800. Combat and AI raid behaviour
 | P1, 129–629 | 1,002 | 3,278 | 707 | 2,527 | 0 | 1 (8.9 MB) |
 | P2, 129–729 | 1,202 | 8,587 | 881 | 7,661 | 0 | 1 (9.2 MB) |
 | P6, 129–2400 | 4,544 | 22,478 | 2,445 | 19,986 | 0 | 3 (28.9 MB) |
+| S1, 129–17050 | 33,844 | 920,200 | 654,586 | 112,562 | 0 | 17 (246 MB) |
 
-All three policies pass:
+All four policies pass:
 - every phase state is reproduced in pass 2;
 - every changed byte has an observed writer;
 - no surface access happens in logic context.
@@ -210,6 +211,13 @@ All three policies pass:
 The window mask (`sondas/<P>/mascara-janela.json`) is the published M2.3 mask, plus the display-only bytes the window proves, minus any byte the window classifies as game logic (none). P6 contains P3's window, because their inputs are equal through frame 2004.
 
 Pass 2 ran at about 2–3 s/frame per job on the Mac mini.
+
+**S1 window** [B]. Records 128–17050 in one sequential run (9,223 s, snapshots every 250 frames); pass 1 (33,844 phases, 920,200 changed bytes); 69 pass-2 segments of 250 frames (17000–17050 last). 57 ran on the Mac mini (30–73 min each, average 63 min at 5–6 concurrent) and 12 (9750–12500) on the MacBook from the same inputs (`main` 54d148d, whose pass-2 sources equal this branch's). Policy: every one of the 33,844 phase states is reproduced, every changed byte has an observed writer, and there is no logic-context surface access.
+- **Logic bytes.** 654,586 in all. 639,447 first change at or after frame 17043, when `MissionNext`'s path loads the next screen's banks (`LoadBank` and `CRT.fread` into 146 fresh `GlobalAlloc` blocks). 11,568 first change by frame 9200, and 3,571 between 9201 and 17042; their main writers are SetMiniMap, EteintCase/IllumineCase, Chemin_ModifieZone, DecouvreCase and the projectile routines.
+- **Files.** `sondas/S1/captura-janela.parte00..16.json.xz` with `captura-janela.manifest.json` (re-read check: equal), `mascara-janela.json`, and the window policy as `politica-janela.json.xz` (431 KB; the raw 168 MB JSON is the file whose SHA-256 the mask records).
+- **Tool fixes found by this window**, neither of which changes an earlier result:
+  - `relatorio_longo` and `comparar_politica` collected segments with `politica-0*.pickle`, which skips segments starting at frame 10000 or later. M2.3 and P1/P2/P6 never reach 10000.
+  - The policy now credits `KERNEL32.GlobalAlloc`'s declared fill (`allocation_fill`, or zero for GMEM_ZEROINIT) to that binding. Before, two fill bytes left in an 8-byte `LoadBank` block at 17043 had no writer. `GlobalAlloc` runs in no other phase of the S1 window, nor in P1/P2/P6.
 
 ## S1 script and final runs
 
@@ -247,7 +255,8 @@ Pass 2 ran at about 2–3 s/frame per job on the Mac mini.
 
 1. Done: AL = 1 at 16933, `MenuInit(0x13)` at 17032, confirmation click → `MissionNext` at 17043 (stage 7, stop 17050).
 2. Done: the two final runs from F0, equal (above).
-3. Pass 2 of the S1 window with `passo2_sondas.py` (records from F0, then segments every 250 frames).
+3. Done: pass 2 of the S1 window (above).
+4. Pending, not run: Combat's fatal-window captures (`pesquisas-paralelas/combate/executar_janelas_fatais_combate.py S1 --intervals 11000-12250`, and `D1 --intervals 11250-11750 15250-15700`) were cancelled on 2026-10-30 before starting. S1 can start from `.local/m3/passo2/S1/instantaneo-11000.pickle` (same DGROUP and state as the record at 11000); D1 from the 250-frame snapshots of the published D1 run (`.local/m3/d1final/D1-b`).
 
 ## D1: defeat (M4.2)
 

@@ -338,7 +338,7 @@ def comparar_politica(a):
     pasta = ROOT/a.dir
     p1 = pickle.loads((pasta/'politica-passo1.pickle').read_bytes())
     acessos, superficie, resumos2, partes = {}, {}, {}, []
-    for p in sorted(pasta.glob('politica-0*.pickle')):
+    for p in sorted(pasta.glob('politica-[0-9]*.pickle')):
         parte = pickle.loads(p.read_bytes())
         partes.append(p.name)
         for endereco, chaves in parte['acessos'].items():
@@ -430,7 +430,7 @@ def relatorio_longo(a):
     pasta = ROOT/a.dir
     p1 = pickle.loads((pasta/'politica-passo1-longo.pickle').read_bytes())
     acessos, superficie, resumos2, partes = {}, {}, {}, []
-    for p in sorted(pasta.glob('politica-0*.pickle')):
+    for p in sorted(pasta.glob('politica-[0-9]*.pickle')):
         parte = pickle.loads(p.read_bytes())
         partes.append(p.name)
         for endereco, chaves in parte['acessos'].items():

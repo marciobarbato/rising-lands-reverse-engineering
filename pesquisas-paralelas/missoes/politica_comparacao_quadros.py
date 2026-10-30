@@ -78,6 +78,10 @@ def passo1(n):
     return fases, alterados, resumos, liberados
 
 
+def _inteiro(v):
+    return int(v, 16) if isinstance(v, str) else int(v)
+
+
 def ganchos(b, alvos, chave_fase=None):
     """Pass-2 hooks on ``b``: (accesses, surface accesses, collect(phase) for the phase's binding writes).
 
@@ -134,7 +138,12 @@ def ganchos(b, alvos, chave_fase=None):
     def coletar(fase):
         for ev in b.vinculos_declarados.eventos[visto[0]:]:
             ctx = 'backend' if ev['kind'] == 'backend' or ev['name'].startswith('DDRAW.') else 'logic'
-            for w in ev['memory_writes']:
+            escritas = list(ev['memory_writes'])
+            if ev['name'] == 'KERNEL32.GlobalAlloc' and ev.get('status') == 'returned' and _inteiro(ev['results']['EAX']):
+                # The binding fills the new block with the declared allocation_fill byte (zero for GMEM_ZEROINIT)
+                # without listing it as a memory write; bytes nobody overwrites keep that fill.
+                escritas.append(dict(address=hex(_inteiro(ev['results']['EAX'])), size=_inteiro(ev['arguments'][1])))
+            for w in escritas:
                 a0 = int(w['address'], 16)
                 for k in range(w['size']):
                     if a0+k in alvos:
