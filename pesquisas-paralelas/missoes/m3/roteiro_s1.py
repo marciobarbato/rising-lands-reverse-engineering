@@ -73,6 +73,11 @@ def etapa5():
 def etapa6():
     return [clique(4820,*C,'right'), clique(4830,144,144), rota_campo(4840,(368,528))]
 
+def etapa7():
+    # Result screen (MenuInit 0x13 at 17032): any left click with both flags set confirms (CalculGame 0x42ca46);
+    # Enter is never used, because 0x42ca60 spins on GetAsyncKeyState(0x0d) while it is held.
+    return [clique(17040, 400, 272)]
+
 def escrever(nome, etapas, ate):
     def planos(x):
         if isinstance(x, dict):
