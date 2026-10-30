@@ -1,0 +1,89 @@
+{
+ "schema": "rising-lands/compressed-evidence-manifest/2",
+ "probe": "P6",
+ "capture": "M3 probe P6: frames 129-2400 from the M2.2 frame-128 state, scripted input, complete deltas",
+ "encoding": {
+  "format": "xz",
+  "check": "crc64",
+  "filter": "lzma2",
+  "preset": "9e"
+ },
+ "parts": [
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte00.json.xz",
+   "compressed_sha256": "0d630ac6c154f98b853691e13c1b8974a1bdef7e63097c387b5949c6c49369bf",
+   "compressed_bytes": 10046864,
+   "raw_sha256": "129302bc0ba9c88f0ef258a20d89865cdccb45ff8327ac40d879429c5b8f2480",
+   "raw_bytes": 182331841,
+   "part": 0,
+   "frames": [
+    129,
+    1128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte01.json.xz",
+   "compressed_sha256": "03976fb9ce9c539d1231fa130c0b8c875dceb26284e9e0eec5c8e1b05a7bb17c",
+   "compressed_bytes": 10073372,
+   "raw_sha256": "832bb4d18331ee666a79438177b36251b483a055631ff2eaaaba93a9d8ea9a15",
+   "raw_bytes": 182342273,
+   "part": 1,
+   "frames": [
+    1129,
+    2128
+   ],
+   "phases": 2000
+  },
+  {
+   "artifact": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte02.json.xz",
+   "compressed_sha256": "ee60b91ceae622134e5342f5311b67600490647664864adafed2df4d260288e6",
+   "compressed_bytes": 8798652,
+   "raw_sha256": "c587fa29136e7bb9ecc05f9e64f2317786efa7825ba45ef2a4596266fba517c6",
+   "raw_bytes": 70231708,
+   "part": 2,
+   "frames": [
+    2129,
+    2400
+   ],
+   "phases": 544
+  }
+ ],
+ "mask": {
+  "path": "pesquisas-paralelas/missoes/m3/sondas/P6/mascara-janela.json",
+  "sha256": "56cf9039a04d32bfbea4a4098a1111f4d7f59669028d633fadb41e06e3c05dbb"
+ },
+ "opening": {
+  "blocks": 25197,
+  "bytes": 16175335,
+  "sha256": "eb714f7d5a694ad91bab9b41c37a28860006c89be03f9170e3b312064a4b04b2"
+ },
+ "definitions": {
+  "mask": "policy cumulative.exclusion_mask: sorted address ranges [start, end)",
+  "compared_summary": "resumo_imagem of the state (native_stack excluded) with every masked byte set to 0: blocks sorted by name, each hashed as struct.pack(\"<II\", base, size) + bytes",
+  "masked_sha256": "SHA-256 over, for each block sorted by name and each mask range intersecting it in address order, struct.pack(\"<II\", start, length) + the bytes of that intersection",
+  "summary": "resumo_imagem of the full state (native_stack excluded)",
+  "state_delta": "complete delta (display bytes included): released, then allocated, then ranges (delta_estado_missao)"
+ },
+ "replay_check": {
+  "result": "equal",
+  "parts": [
+   {
+    "part": 0,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 1,
+    "phases": 2000,
+    "full_states_checked": 5
+   },
+   {
+    "part": 2,
+    "phases": 544,
+    "full_states_checked": 3
+   }
+  ],
+  "chain": "part 0 opens with the frame-128 state; every later opening state is the previous replayed end"
+ }
+}
