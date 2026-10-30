@@ -45,7 +45,7 @@ FONTES = ('pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py', 'pesquisas-para
 def executar_traducao(m, caso, entrada, cursor, comandos):
     """Run the translation of ``caso`` over memory ``m``; returns (exit registers, sound requests, keys)."""
     from entrada_ordens_ia import Entrada
-    from provedores_entrada_ia import provedores_vivos
+    from provedores_entrada_ia import DonosM3, provedores_vivos
     from validar_entrada_ordens_ia import Janelas
     pedidos = []
 
@@ -53,7 +53,8 @@ def executar_traducao(m, caso, entrada, cursor, comandos):
         pedidos.append(dict(routine=nome, registers={k: hex(v) for k, v in regs.items()}, stack=[hex(v) for v in pilha]))
         return regs['EAX']
     janelas = Janelas(caso.get('keys', ()), cursor)
-    vivos = provedores_vivos(m, janelas=janelas, som=som)
+    donos = DonosM3(m, som=som)
+    vivos = provedores_vivos(m, janelas=janelas, som=som, estruturas=donos.ee, donos=donos)
 
     def texto(n, local):
         """TextGetMessage as the bench's display boundary (Missions' ``FRONTEIRAS_EXIBICAO``: EAX 0, body never

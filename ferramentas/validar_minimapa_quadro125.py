@@ -55,10 +55,17 @@ CASOS = {
     'modify_map_dl0_before_light': ('BatimentModifyMap', 'DecouvreTerrain', {'EAX': 1, 'EDX': 0}),
     'decouvre_terrain_radius3': ('DecouvreTerrain', 'DecouvreTerrain', {'EDX': 3}),
 }
+# Core's own files: a report is bound to their exact bytes. Economy's bench files are foreign: a report records the
+# hash of the file it actually ran (``FONTES_ECONOMIA``), and the CPU-free test accepts any committed report whose
+# recorded foreign hashes equal the current files (``RELATORIOS_VERIFICADOS``), so Economy can change its bench
+# without deadlocking the two fronts, as long as a native rerun with that bench is committed here.
 FONTES = ('ferramentas/validar_minimapa_quadro125.py', 'ferramentas/entrada_estruturas.py',
-          'ferramentas/visao_movimento.py', 'ferramentas/minimapa_estruturas.py', 'ferramentas/mundo_vivo.py',
-          'pesquisas-paralelas/economia/capturar_ciclo_trabalho.py',
-          'pesquisas-paralelas/economia/bancada_ciclo_trabalho.py')
+          'ferramentas/visao_movimento.py', 'ferramentas/minimapa_estruturas.py', 'ferramentas/mundo_vivo.py')
+FONTES_ECONOMIA = {'pesquisas-paralelas/economia/capturar_ciclo_trabalho.py': 'capturar_ciclo_trabalho',
+                   'pesquisas-paralelas/economia/bancada_ciclo_trabalho.py': 'bancada_ciclo_trabalho'}
+# The committed native differentials, one per verified Economy bench version.
+RELATORIOS_VERIFICADOS = ('relatorios/minimapa-quadro125-emulada.json',
+                          'relatorios/minimapa-quadro125-emulada-bancada-economia-7139f3e2.json')
 MINIMAPAS = (0x507d5c, 0x507d60, 0x507d64)   # pointers: view, unit layer, structure layer (128 x 128 each)
 
 
@@ -210,6 +217,15 @@ def diferenca(a, b):
                   key=lambda k: int(k, 16))
 
 
+def fontes_economia_usadas():
+    """{repository path: sha256 of the module file actually imported for it} (an override bench counts as its path)."""
+    saida = {}
+    for caminho, modulo in FONTES_ECONOMIA.items():
+        arquivo = Path(sys.modules[modulo].__file__) if modulo in sys.modules else RAIZ / caminho
+        saida[caminho] = hashlib.sha256(arquivo.read_bytes()).hexdigest()
+    return saida
+
+
 def capturar(saida):
     from emulador import HASH_ORIGINAL
     from encerramento_captura import encerrar_captura
@@ -222,7 +238,7 @@ def capturar(saida):
     revisao = subprocess.run(['git', '-C', str(RAIZ), 'rev-parse', 'HEAD'], capture_output=True, text=True).stdout.strip()
     dados = dict(
         schema='rising-lands/core-minimap-frame125-capture/1', original_sha256=HASH_ORIGINAL, translation_executed=False,
-        source_revision=revisao, source_sha256={p: hashlib.sha256((RAIZ / p).read_bytes()).hexdigest() for p in FONTES[5:]},
+        source_revision=revisao, source_sha256=fontes_economia_usadas(),
         frame=QUADRO, routine=ROTINA, path_reproduction=reproducao, seconds=segundos,
         economy_record=comparar_economia(registro), minimap_buffers={k: [hex(i), hex(f)] for k, (i, f) in regioes.items()},
         snapshot_registers={n: {k: hex(v) for k, v in snapshots[n][0].items()} for n in SNAPSHOTS},
@@ -253,9 +269,10 @@ def validar(saida):
     economia = comparar_economia(registro)
     dl0 = diferenca(casos['modify_map_dl0_composition_input'], casos['modify_map_in_situ'])
     relatorio = dict(
-        schema='rising-lands/core-minimap-frame125-differential/1', original_sha256=HASH_ORIGINAL,
+        schema='rising-lands/core-minimap-frame125-differential/2', original_sha256=HASH_ORIGINAL,
         capture=dict(path=str(CAPTURA.relative_to(RAIZ)), sha256=hashlib.sha256(CAPTURA.read_bytes()).hexdigest()),
         source_sha256={p: hashlib.sha256((RAIZ / p).read_bytes()).hexdigest() for p in FONTES},
+        economy_source_sha256=fontes_economia_usadas(),
         frame=QUADRO, routine=ROTINA, path_reproduction=reproducao, economy_record=economia,
         comparisons=len(registros), mismatches=[r for r in registros if not r['ok']], cases=registros,
         changed_bytes_compared=sum(r.get('native_changed', 0) for r in registros),
@@ -279,7 +296,17 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--capturar', help='write the original-only capture here (relative to the repository)')
     ap.add_argument('--saida', default=str(RELATORIO.relative_to(RAIZ)))
+    ap.add_argument('--bancada-economia', help='run with this copy of Economy\'s bancada_ciclo_trabalho.py (e.g. a '
+                    'sibling branch\'s version extracted with git show); its hash is recorded')
     a = ap.parse_args()
+    if a.bancada_economia:
+        arquivo = Path(a.bancada_economia).resolve()
+        if arquivo.name != 'bancada_ciclo_trabalho.py':
+            raise SystemExit('--bancada-economia must name a file called bancada_ciclo_trabalho.py')
+        sys.path.insert(0, str(arquivo.parent))
+        import bancada_ciclo_trabalho
+        if Path(bancada_ciclo_trabalho.__file__).resolve() != arquivo:
+            raise SystemExit(f'imported {bancada_ciclo_trabalho.__file__}, not {arquivo}')
     if a.capturar:
         capturar(RAIZ / a.capturar)
     else:

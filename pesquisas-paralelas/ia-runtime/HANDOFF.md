@@ -541,3 +541,22 @@ Branch `feat/re-ai-runtime`, pushed at `9409355`. Not integrated. Details are in
 - Validated against the original: the leaf differential (0 mismatches).
 - Integrated: no.
 - Tested in a real mission: no.
+
+## M3.1 — P1/P2 whole-state proof (2026-10-29)
+
+Merged main `ef52cb0`. The report is [M3_1_PROVA_P1_P2.md](M3_1_PROVA_P1_P2.md); the data is in `validacao/m3-1-prova-p1-p2.json` (Python only, clean revision `21bbb37`, one command under the heavy lease).
+
+- **Result:** P1 1,002/1,002 and P2 1,202/1,202 phases equal under each window's cumulative mask, zero crossings, by the M2.3 method, plus the consumed scripted inputs, WndProc flag bytes, SetPlayerOrdre/ProcessInputGame records and the M3.1 fields (packets `[0x4e2458+4p]`, selection areas `0x508728+512p`, unit order fields of all 800 slots; none masked).
+- **Tool:** `provar_entrada_janelas_ia.py` — `janela <P>`, `agregar --janelas ...`, `tudo --janelas ... --lease <heavy_lease.py>`.
+- **Chain fixes** (`21bbb37`): GetAsyncKeyState binding, the PeekMessageA MSG write, the PlaySnd boundary's call site and pushed words.
+- **Requested:** Core — pass the call address to `som` (today read from `_fronteira`'s `endereco` argument). Missions — the window harness records `top_callee = null` on every boundary (not compared; counted).
+
+## M3.1 — chain past frame 220, P6 window (2026-10-30)
+
+Merged main `8138e6e` (P6 window `d18add9` on main). The report is [M3_1_CADEIA_ALEM_220.md](M3_1_CADEIA_ALEM_220.md). Commits `656ac96`, `17bb6e9`, `7cc733e`.
+
+- **API:** `provedores_entrada_ia.DonosM3(m, *, som, bonus=None, mensagem_unidade=None)` — one instance each of Core `entrada_estruturas`/`visao_grupos` and Economy `caverna_recrutamento`/`ciclo_trabalho` over one memory, `externo(nome, chamada, regs)` routing every named dependency to its owner (all of EAX..EBP passed), `registros(nome)`; `provedores_vivos(..., donos=)` binds group selection, MiniMapSetPos, tag 0x10 sub 3, tag 0x21, tag 17, EnginSelectPeutEntrer; `construcao_entrada_ia.instalar_donos(m, p, donos, tabelas)` installs the cave body (0x426aff), BatimentIllumine/Decouvre and unit states 5/13; `estado_trabalho` (state 5, 0x456600); `composicao_entrada_ia.mensagem_unidade` (iagUnitSendMessage, non-AI owner).
+- **Translated:** CalculIconeAction with a structure selected, IconeFillContenu code 6, the unit hover with a structure selected, BatimentPeutAttaquer's type prefix, unit state 5's dispatch.
+- **Native differentials:** 124/116/0 mismatches, 203/203, 90/85/0 mismatches. Domain gate passes.
+- **P6 whole state (prova):** part 0 equal through frame 220 (184 phases), then Graphics' AffBatiments logic-effects guard at `between_frames221`. Planning diagnostics (never evidence) reach 2400 at indicator level, P3 to 3129, K1 to 629; whole state (planning) equal 129–2177 in all 4,098 phases, then Economy/Core's minimap divergence at 2178.
+- **Stops and owners:** Graphics (AffBatiments for structures other than the Santuario; view origins for K1/P4/P5); Economy/Core (minimap bytes after BatimentHabitable); unassigned (TerrainEstGc object ≥ 0x1d, P7 2801/P4 460); Core (SetMiniMap mode from CalculWorkEngin, P5 760); Combat (turret BatimentPeutAttaquer, BatimentInitAttaqueSelect); Economy (SetDechargeCaveEnginSelect).
