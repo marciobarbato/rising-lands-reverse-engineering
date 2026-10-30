@@ -24,7 +24,8 @@ of ChercheVegetLibre (the unit; RET 4). Registers the original leaves to uniniti
 
 Dependencies (never defaulted): ``externo(nome, chamada, registradores) -> registradores`` for Economy's
 TestRessource 0x4676e5 (registers EAX/EDX/EBX/ECX and ``_pilha`` = [player]; RET 4); ``som(nome, registradores,
-pilha) -> EAX`` for Audio's PlaySnd_PostSound 0x48aa79 (the shape of ``selecao_ordens``). Core callees are
+pilha) -> EAX`` for Audio's PlaySnd_PostSound 0x48aa79 (the shape of ``selecao_ordens``; a provider declaring
+``chamada`` also receives the call address 0x44b33d). Core callees are
 existing translations: BatimentGetCase (``chamadas_quadro_core.caso_estrutura``), TerrainEstDecouvert
 (``terreno_esta_descoberto``), EnginGetVolume (``selecao_ordens``), the live world's ``apagar_area``.
 
@@ -509,8 +510,9 @@ class FadigaVegetacao:
             return dict(saida, EAX=volume)
         if self.som is None:
             raise DependenciaFadiga('PlaySnd_PostSound', 0x44b33d, 'Audio sound-library provider required')
-        eax = self.som('PlaySnd_PostSound', dict(EAX=0x50, EDX=(m.u8(rec + 1) << 16) | 0xc00,
-                                                 EBX=(rec + 0x104) & M32, ECX=0), [volume]) & M32
+        from selecao_ordens import chamar_som
+        eax = chamar_som(self.som, 'PlaySnd_PostSound', dict(EAX=0x50, EDX=(m.u8(rec + 1) << 16) | 0xc00,
+                                                             EBX=(rec + 0x104) & M32, ECX=0), [volume], 0x44b33d) & M32
         return dict(saida, EAX=eax)
 
     def _liberar_busca(self, u):
