@@ -1568,3 +1568,38 @@ Git-object sources and refuses output replacement. This evidence contains
 hashes and arguments only; it is not an advancing Rust or Python comparison.
 The original checkpoint remains solely an oracle opening, never a Rust reset.
 Earlier segments and the Rust comparison are still pending at this commit.
+
+## Chain9 piece2 — exact recruitment owner returns
+
+[Contract](research/CHAIN9_CONTRACT.md) and [measured package](validation/chain9/piece2/summary.json)
+add the five Core recruitment entries to the Rust fixture transport and reuse
+those same healing/fatigue/experience/placement bodies in production. Actual
+BL direction and DX exit cell are retained. Register outputs include all seven
+data GPRs and ESP; no C function, ABI identifier or copied layout changes.
+
+Fresh intact-x86 reexecution reproduces all **277/277** committed original
+cases; native Rust matches every mapped byte and all eight returned GPRs, with
+**zero masks, differences, skips or dependency stops**. Counts: conversion57,
+healing83, fatigue11, experience103, placement23. The fixture binary is debug;
+the release library is separately rebuilt from the identical source. Runtime
+fixtures include the actual S1 frame2547 calls and declared variants, not an
+advancing whole-state S1 proof. The named placement vision-sum limit is11,
+stopping at0x446146 after collision/visibility and before discovery.
+
+The fresh full gate passes fmt, strict Clippy, **30 Rust /63 Python tests**,
+**666/666** input leaves, **75/75** pilot original comparisons and C/Swift/Metal.
+No source edits followed that passing gate. Additive reference profile `chain9`
+pins logic6cdbc5a and Graphics92fab50; every earlier profile/mask stays unchanged.
+
+The retained advancing release S1 diagnostic independently agrees with original
+indicators, input answers and orders for **2,707 frames129–2835**. Frame2836
+first differs in unit12's record hash, with its published state/cell/order fields
+still equal and no provider stop. This is an unresolved diagnostic, not a
+passing extension or a concealed dependency. The older pinned Python still
+stops before conversion at2547; AI/runtime's committed continuation is pending.
+The next piece investigates that byte difference and runs the carried S1 surfaces.
+
+Additional original-only render attestations now cover frames129–750 and
+1501–2250 (622/622 and750/750 native whole-state/both-phase surface checks).
+Their compact immutable artifacts live beside the earlier2251–3000 segment.
+Frames751–1500 and the complete Rust surface comparison remain pending.

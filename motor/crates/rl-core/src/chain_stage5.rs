@@ -2,6 +2,11 @@
 use crate::{EngineError, FrameRegisters, MemoriaJogo, Result};
 pub fn entry(m: &mut MemoriaJogo, name: &str, r: FrameRegisters) -> Result<FrameRegisters> {
     match name {
+        "EnginSetType"
+        | "EnginAddVie"
+        | "EnginResetFatigue"
+        | "EnginSetExperimente"
+        | "SetSortEngin" => crate::chain_recruit::entry(m, name, r),
         "EnginSelectPeutEntrer:AL" => {
             let ok = crate::chain_entry::can_enter(m, r.eax & 255, r.edx & 255, r.ebx & 65535)?;
             Ok(FrameRegisters {
