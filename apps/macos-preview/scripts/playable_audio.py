@@ -72,9 +72,3 @@ def prepare_audio(source, workspace, output):
     (output / 'manifest.json').write_text(json.dumps({'files': files, 'audio': report}, indent=1) + '\n')
     return report
 
-
-def verify_audio(directory):
-    manifest = json.loads((Path(directory) / 'manifest.json').read_bytes())
-    for name, digest in manifest['files'].items():
-        assert _sha(Path(directory) / name) == digest, name
-    return manifest['audio']

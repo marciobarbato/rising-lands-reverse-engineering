@@ -8,6 +8,139 @@ evidence inspector and the older synthetic **Treino livre** exercise (described
 in the historical sections below) remain available. It is a bounded
 reconstruction, not a complete original mission or campaign.
 
+## Play-mode sound effects (2026-10-30)
+
+**Jogar** now plays the original sound effects exactly when the engine requests
+them. **Validar** is unchanged: it never enables the transport, so no audio
+call touches game state, audits or proofs.
+
+**How requests reach the app (no ABI change).** ABI 1.6 already copies every
+`PlaySnd_PostSound`/`PlaySnd_StopSound` call as `RlPlayerInputEvent` kind 10
+(`post, EAX, EDX, EBX, ECX, has_volume, volume`), and keeps those events in
+play policy 1. After each successful play phase the C driver
+(`macos_live_driver.c`, `macos_live_sound_capture/_events`) copies them, in
+order, into a 4,096-entry transport. The WinMain loop calls `PlaySnd_Manage`
+before every `PeekMessage`, so the driver adds one Manage tick at the start of
+phase 2 and, when phase 2 dispatched requests, the loop's final tick after
+them. `rl_eventos_entrada` is a pure query, so state is unchanged.
+
+**What plays.** The engine's game state is the original's *unopened* sound
+library (Audio's validated domain): caller handles stay -1 and nothing is
+played. `macos_audio_mapper.c` is a line-by-line C port of Audio's validated
+initialized queue (`fila_audio.AudioQueue` plus `carregar_info_som`), running
+over its own private image at the original addresses (globals `0x498f14`,
+BSS `0x521358`, the HED bodies, and a shadow map of caller handle words).
+It never reads or writes game memory. It keeps:
+
+- the 20 playing records and the waiting records 20..70;
+- ten physical and ten logical (`DuplicateSoundBuffer`) slots;
+- the entry-word-256 dictator, a single voice channel that keeps later voices
+  waiting;
+- the `GetDataHeader` variant cursor;
+- repost semantics: the same ID on a busy handle only updates its volume, and
+  volume 0 cancels;
+- the original volume lookup
+  `((volume*byte13|256)*game_volume)>>20` into the initialized table at `0x498f14`
+  (-10000..0 hundredths of dB);
+- looping when the flags byte (ECX low byte) is 1.
+
+There is no pan: the original issues no `SetPan`, and every sample is mono.
+
+`NativeAudio.swift` runs the mapper's commands (create, duplicate, play,
+volume, stop, release) on its own queue, using an AVAudioEngine pool of player
+nodes. The only device answer fed back is "buffer stopped" (DSB_IsStopped),
+taken from the player's played-back completion. Samples are the pinned asset
+release's decoded WAVs (`rising-lands-assets` v1-4eb88f2): PCM16, mono,
+22,050 Hz, played without resampling or normalization. Playback gain is
+`10^(dB/2000)`.
+
+**Build.** `playable_audio.py` copies the original `A/B/P.HED` from the CD,
+hash-checked against Audio's catalogue, into `Resources/preview/audio`. When
+`<inputs-root>/rising-lands-assets` (or `RISING_ASSETS_ROOT`) exists, the build
+also copies all 551 WAVs (48,945,219 sample bytes, about 49 MB). That checkout
+must be exactly the ORIGIN release commit, clean, with the manifest hash
+matching, and every WAV must match its manifest hash. Any mismatch stops the
+build. A missing checkout produces an explicit soundless bundle (`som: ausente`
+in the window caption and `audio.status=absent` in the build manifest); no
+replacement audio is ever used. The bundle verifier re-hashes every audio file.
+
+**Tests** (`testes/test_macos_audio.py`, no sound card needed):
+
+- The complete original S1 MONDE01 boundary log (177 PostSound, 3 StopSound,
+  17,167 Manage calls) and P6 (59 PostSound) are replayed in order through
+  the C mapper and through Audio's own `fila_audio.AudioQueue`. Both use the
+  same private image and device model. Two device models are run: samples end
+  after their catalogued length at 60 frames/s, or never end, which exercises
+  saturation.
+- Every request and every ordered device command must be equal between the
+  two: S1 schedules 138 plays (finishing model) or 57 (holding model); P6
+  schedules 56 or 7. The run must have zero domain faults, unknown IDs or
+  overflows.
+- Every created sample must be a catalogued, `GetDataHeader`-reachable
+  original variant of an ID the log posted at or before that frame. The test
+  also checks the original volume table bytes.
+- A transport test runs the real engine through the production C phase entry
+  on P2's scripted input. Its copied requests equal P2's original
+  PostSound log (frames 133, 133, 143: registers, volume, return site) and
+  carry one Manage tick per frame.
+- S1's single `PlaySnd_StopAllSound` at victory is not translated by Audio
+  and is excluded explicitly.
+
+**Known limits (named requests).**
+
+- *Audio:* translate `PlaySnd_StopAllSound` (0x48aac5), `PostVolume`
+  (0x48aacf) and `SetGameVolume`.
+- *Engine/Audio:* the engine models the unopened library. An initialized
+  original would store the returned queue index in caller handles (unit
+  `+0x104`), so busy handles would take `PostVolume` and the `+0xf9` branch
+  instead of `PostSound`. Exact busy-handle audio therefore needs an
+  initialized-audio engine domain validated original-first. Until then the
+  mapper's shadow handles reproduce queue behavior for the requests the engine
+  actually makes.
+- Waiting index 70's aliasing of `0x521f84` and volume lookups
+  outside 0..16 are counted as `audioDomainFaults` rather than raised. The
+  replayed logs reach neither.
+- P/0221-v00's one-byte incomplete PCM tail (FORMAT.md) is not played.
+
+**CD music: not played yet; extraction plan.** `RISING_LANDS_BR_.CUE`
+describes track 01 (MODE2/2352 data) plus two CD-DA tracks in the BIN (raw
+2,352-byte sectors, 44.1 kHz, 16-bit little-endian stereo):
+
+| Track | BIN sectors (index 01 → next index 01 / end) | Bytes | Length | SHA-256 |
+|---|---|---:|---:|---|
+| 02 | 227,283 → 269,653 | 99,654,240 | 564.93 s | `b6bb0739cc569e28347145699724b541ad64d7419447b55cbe99a493ff690710` |
+| 03 | 269,653 → 299,923 | 71,195,040 | 403.60 s | `1005fda1b49a8174e8032734ed022effe214e3e79c6aabab5d898ba6e2f02b45` |
+
+The track-02 pregap (227,133..227,283) is digital silence. Static reading of the
+intact MCICD routines:
+
+- `MCICD_Init` 0x467af6 opens `"%c: type cdaudio alias cdrud"`, sets byte
+  `0x4e2f29`=1 and `0x4e2f28`=0.
+- `MCICD_Play(track, loop)` 0x467a8c sets the stop time to `timeGetTime()` plus
+  `status cdrud length track N`, sends `play cdrud from N`, and stores
+  `0x496fdc`=track, `0x4e2f2a`=loop and `0x4e2f28`=1.
+- `MCICD_Manage` stops at the stop time (`stop cdrud wait`, `0x4e2f28`=0) and
+  replays only when the loop flag is set.
+- CalculGame (0x42d2f0) calls `MCICD_Play(2 + perm[cursor] % 2, 0)` whenever
+  `0x4e2f28`=0. In-mission music is therefore tracks 2/3, chosen per track
+  from the shared permutation table, played once each.
+
+Extraction is straightforward. The proposed assets release adds
+`data/music/TRACK02.cdda.part-0000..0002.bin` and `TRACK03.cdda.part-0000..0002.bin`:
+byte-exact BIN slices of at most 32 MiB, raw CD-DA without a header, with BIN
+offset, length and SHA-256 in the manifest and the BIN identity recorded as the
+source. That release needs the maintenance-owned extractor, a new tag and an
+ORIGIN repin. The app would stream the parts through an `AVAudioPlayerNode`.
+
+The blocker is game state, not extraction. In the accepted domain no CD is
+initialized, so every frame draws one permutation-cursor byte (`0x4e1d18`),
+which NextAnim* and rendering also consume. A playing CD skips that draw, so
+"the original's" track choice changes the world. Exact music needs an engine
+"CD present" declared domain. MCICD_Play/Manage would become declared boundary
+answers (track started, track ended from the app clock), validated against
+original captures with `0x4e2f28`=1 (Audio with Missions). Until that domain
+exists, music stays off rather than diverging from the validated state.
+
 ## Current state — main 6cdbc5a rerun (2026-10-30)
 
 This feature delivery consumes the new engine from main **6cdbc5a** and updates
