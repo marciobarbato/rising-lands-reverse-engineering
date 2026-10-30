@@ -2,6 +2,15 @@
 
 Chat: `01a18262-c6d5-7cd3-80fa-8431bf5f2657` (Economy and Production). Worktree: `/Users/marcio/git/Rising Lands/worktrees/re-economy`. Branch: `feat/re-economy`. Organization base: `6634be3af2d255846a847d8aa21ad4edf1cdb589`. Implementation commit: `f5a5e9b` (`Reconstruct troop completion preparation and cargo credits`); the following handoff commit and serialized integration result are identified in the completion chat. Only economy-owned paths changed.
 
+## Hunger state 19 and the S1 coverage check (2026-10-29)
+
+Branch `feat/re-economy`. Full contract: [ECONOMY.md](../../docs/ECONOMY.md#hunger-state-unit-state-19-m3-s1).
+
+- **S1 needs state 19, not 18/20.** The Mac mini's S1 development run (5300–18000, `.local/m3/s1dev/e6b`, `e7` resumos) never enters CalculTransporteEngin, CalculDechargeCaveEngin, TerrainDeposeSac or SetRamasseEngin; nor do P6/P7. It enters EnginSetFatigue → ChercheVegetLibre at 7958 and the state-19 body's TerrainRetireMatiere/EnginRestaureEtat at 8057. CalculTroupe for the recruited types 5/7 is the sanctuary's (type 2), already covered.
+- **Capture `44eeab9`** (source `9654850`): declared hunger for units 12/14 in the work-cycle scenario; both eat a food sack and resume work natively. 231 state-19 bodies.
+- **Translation** `alimentacao.Alimentacao` (state-19 body + TerrainRetireMatiere): CPU-free 231/231; native 231 compared, 0 mismatches, rerun equal (`validacao-alimentacao-emulada.json`).
+- **Next:** EnginRestaureEtat 0x45315f (Economy; saved state 5 at least, the S1 path), BatimentEnleveMatiere 0x4235bd; the cave-meal branch needs a capture with no sack within 20 cells.
+
 ## Cave body, habitation and recruitment (M3 S1, 2026-10-29; paused by the user)
 
 Branch `feat/re-economy`; not integrated. Full contract: [ECONOMY.md](../../docs/ECONOMY.md#cave-body-habitation-and-sanctuary-recruitment-m3-s1).
