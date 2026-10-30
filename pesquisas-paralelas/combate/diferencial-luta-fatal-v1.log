@@ -1,0 +1,3 @@
+[lease] combat-fatal-native-differential waiting
+[lease] combat-fatal-native-differential granted slots [4]
+{"cases": 1088, "mismatches": 0, "routines": {"iagUnitSendMessage": 12, "PlayerResetAllie": 7, "PlayerAAttaqueSet": 7, "MAJSympathie": 29, "MessageBoxSet": 10, "EnginSetLevelExperience": 12, "SetDyingEngin": 6, "EnginNextEtape": 990, "CalculEnginNextEtape": 3, "EnginInfligeDegat": 9, "InfligeDegat": 3}, "outside_protected_domain": 1}

@@ -1,0 +1,300 @@
+Running combat
+test_arma_e_inicio_nao_equivalem_a_dano (test_alvos_alcance.Contratos) ... ok
+test_filtro_e_donos_especiais (test_alvos_alcance.Contratos) ... ok
+test_grade_nao_repete_estado_e_inverte_alianca (test_alvos_alcance.Contratos) ... ok
+test_limites_de_alcance_e_contato (test_alvos_alcance.Contratos) ... ok
+test_linha_montanha_no_alvo_e_isencoes (test_alvos_alcance.Contratos) ... ok
+test_ordem_e_manutencao (test_alvos_alcance.Contratos) ... ok
+test_scan_primeiro_grade_mais_proximo_e_empate (test_alvos_alcance.Contratos) ... ok
+test_validade_ordem_nao_repete_filtro_de_selecao (test_alvos_alcance.Contratos) ... ok
+test_alcance_construcao_com_geometria_sintetica (test_alvos_alcance.Diferencial) ... skipped 'Opcional: RISING_EMULAR=1'
+test_alcance_modos1_5_e_excecoes (test_alvos_alcance.Diferencial) ... skipped 'Opcional: RISING_EMULAR=1'
+test_filtro_26_por_26_e_inimizade_direcional (test_alvos_alcance.Diferencial) ... skipped 'Opcional: RISING_EMULAR=1'
+test_linha_original_montanhas_e_todos_os_tipos (test_alvos_alcance.Diferencial) ... skipped 'Opcional: RISING_EMULAR=1'
+test_manutencao_fragmentos_com_consultas_resolvidas (test_alvos_alcance.Diferencial) ... skipped 'Opcional: RISING_EMULAR=1'
+test_ocupacao_e_adjacencia_tipos_bordas_e_camadas (test_alvos_alcance.Diferencial) ... skipped 'Opcional: RISING_EMULAR=1'
+test_ordem_efeitos_locais_apos_reset (test_alvos_alcance.Diferencial) ... skipped 'Opcional: RISING_EMULAR=1'
+test_portoes_de_busca_automatica_e_reacao (test_alvos_alcance.Diferencial) ... skipped 'Opcional: RISING_EMULAR=1'
+test_preparacao_inicio_alcance_e_linha_originais (test_alvos_alcance.Diferencial) ... skipped 'Opcional: RISING_EMULAR=1'
+test_recarga_e_inicio_ciclo (test_alvos_alcance.Diferencial) ... skipped 'Opcional: RISING_EMULAR=1'
+test_scan_e_grade_diferencas_e_desempate (test_alvos_alcance.Diferencial) ... skipped 'Opcional: RISING_EMULAR=1'
+test_selecao_scan_grade_entradas_sinteticas (test_alvos_alcance.Diferencial) ... skipped 'Opcional: RISING_EMULAR=1'
+test_truncamento_distancia_grade_trecho (test_alvos_alcance.Diferencial) ... skipped 'Opcional: RISING_EMULAR=1'
+test_validade_alvo_antes_de_calcular_ataque (test_alvos_alcance.Diferencial) ... skipped 'Opcional: RISING_EMULAR=1'
+test_last_ground_first_elevated_and_exclusion (test_alvos_impacto.ContratosAlvosImpacto) ... ok
+test_widths_missing_provider_and_inactive_unknown_types (test_alvos_impacto.ContratosAlvosImpacto) ... ok
+test_original_state_enable_and_random_mixed_tables (test_alvos_impacto.DiferencialAlvosImpacto) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_types_cells_strata_and_exclusion (test_alvos_impacto.DiferencialAlvosImpacto) ... skipped 'Optional: RISING_EMULAR=1'
+test_real_lookup_in_connected_projectile_damage (test_alvos_impacto.DiferencialAlvosImpacto) ... skipped 'Optional: RISING_EMULAR=1'
+test_disparo_especial_duplo_e_flag_do_alvo (test_animacao_disparo.ContratosAnimacao) ... ok
+test_incremento_overflow_igualdade_e_divisor (test_animacao_disparo.ContratosAnimacao) ... ok
+test_quadros_estaticos_e_attaque_termine (test_animacao_disparo.ContratosAnimacao) ... ok
+test_som_e_efeito_externo_obrigatorio (test_animacao_disparo.ContratosAnimacao) ... ok
+test_subestado2_underflow_e_subestado3_sem_reiniciar_fase (test_animacao_disparo.ContratosAnimacao) ... ok
+test_animacao_26_tipos_subestados_overflow_e_quadro255 (test_animacao_disparo.DiferencialAnimacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_ciclo_continuo_60_atualizacoes (test_animacao_disparo.DiferencialAnimacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_disparo_indice7 (test_animacao_disparo.DiferencialAnimacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_emissao_com_slot_livre_executa_projectile_set_original (test_animacao_disparo.DiferencialAnimacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_fronteiras_balao_e_som_nao_sao_mocks (test_animacao_disparo.DiferencialAnimacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_giro_corpo_e_torre (test_animacao_disparo.DiferencialAnimacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_magia_invalida_seguida_reset_original (test_animacao_disparo.DiferencialAnimacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_saidas_e_deslocamentos_do_corpo_tipos_orientacoes (test_animacao_disparo.DiferencialAnimacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_subestado0_preparacao_giro_recarga_e_navegacao_delegada (test_animacao_disparo.DiferencialAnimacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_subestado1_disparo_e_retorno_de_quadros_todos_tipos (test_animacao_disparo.DiferencialAnimacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_subestado1_melee_sem_duplicar_dano (test_animacao_disparo.DiferencialAnimacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_subestado2_contador_animacao16_e_limpeza (test_animacao_disparo.DiferencialAnimacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_subestado3_e_invalido_todos_tipos_sem_rng (test_animacao_disparo.DiferencialAnimacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_subestados_construcoes_com_consultas_originais (test_animacao_disparo.DiferencialAnimacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_invalid_target_paths_and_order (test_ataque_vivo.ContratosAtaqueVivo) ... ok
+test_missing_providers_are_named (test_ataque_vivo.ContratosAtaqueVivo) ... ok
+test_mode3_queries_and_untranslated_modes (test_ataque_vivo.ContratosAtaqueVivo) ... ok
+test_original_only_captures_reproduced (test_ataque_vivo.ContratosAtaqueVivo)
+Python reproduces every captured segment: same stops and whole-area digests. ... ok
+test_player_type_and_structure_getters (test_ataque_vivo.ContratosAtaqueVivo) ... ok
+test_set_attack_resets_before_refusal_and_keeps_same_order (test_ataque_vivo.ContratosAtaqueVivo) ... ok
+test_branch_and_set_attack_entries (test_ataque_vivo.DiferencialAtaqueVivo) ... skipped 'Optional: RISING_EMULAR=1'
+test_melee_monster_chain_to_physical_death (test_ataque_vivo.DiferencialAtaqueVivo) ... skipped 'Optional: RISING_EMULAR=1'
+test_named_stops_in_the_chain (test_ataque_vivo.DiferencialAtaqueVivo) ... skipped 'Optional: RISING_EMULAR=1'
+test_ranged_monster_chain_to_physical_death (test_ataque_vivo.DiferencialAtaqueVivo) ... skipped 'Optional: RISING_EMULAR=1'
+test_aquecimento_animacao_e_tipo_pendente (test_avanco_projeteis.ContratosAvanco) ... ok
+test_area_ordem_flags_e_modo29 (test_avanco_projeteis.ContratosAvanco) ... ok
+test_backend_obrigatorio_preserva_escritas_anteriores (test_avanco_projeteis.ContratosAvanco) ... ok
+test_deriva_dos_efeitos_e_area_de_dano_distintas (test_avanco_projeteis.ContratosAvanco) ... ok
+test_filho_perdido_sem_repeticao_e_rng_mesmo_sem_espaco (test_avanco_projeteis.ContratosAvanco) ... ok
+test_ultimo_passo_nao_produz_dano_ate_proximo_despacho (test_avanco_projeteis.ContratosAvanco) ... ok
+test_alias_registro_inativo_reusado_como_filho (test_avanco_projeteis.DiferencialAvanco) ... skipped 'Opcional: RISING_EMULAR=1'
+test_animacao_todos_bytes_tipos_quadros_incrementos (test_avanco_projeteis.DiferencialAvanco) ... skipped 'Opcional: RISING_EMULAR=1'
+test_avanco_memoria_bruta_filhos_contadores_e_wrap (test_avanco_projeteis.DiferencialAvanco) ... skipped 'Opcional: RISING_EMULAR=1'
+test_chegada_area_bordas_deriva_e_pool_saturado (test_avanco_projeteis.DiferencialAvanco) ... skipped 'Opcional: RISING_EMULAR=1'
+test_dano_todos_tipos_bordas_e_dimensoes_ignoradas (test_avanco_projeteis.DiferencialAvanco) ... skipped 'Opcional: RISING_EMULAR=1'
+test_sequencias_desde_set_ate_chegada (test_avanco_projeteis.DiferencialAvanco) ... skipped 'Opcional: RISING_EMULAR=1'
+test_no_guessed_provider_or_undefined_selector (test_bonus_combate.ContratosBonusCombate) ... ok
+test_provider_widths_and_argument_permutation (test_bonus_combate.ContratosBonusCombate) ... ok
+test_all_loaded_owners_and_types (test_bonus_combate.DiferencialBonusCombate) ... skipped 'Optional: RISING_EMULAR=1'
+test_all_low_bytes_with_nonzero_high_bytes (test_bonus_combate.DiferencialBonusCombate) ... skipped 'Optional: RISING_EMULAR=1'
+test_selector5_word_and_selector6_byte_boundaries (test_bonus_combate.DiferencialBonusCombate) ... skipped 'Optional: RISING_EMULAR=1'
+test_decremento_por_apresentacao_e_paridade (test_cadencia_projeteis.ContratosCadenciaProjeteis) ... ok
+test_geometria_preserva_byte_alto_assinado (test_cadencia_projeteis.ContratosCadenciaProjeteis) ... ok
+test_impacto_zero_nao_consulta_tabela (test_cadencia_projeteis.ContratosCadenciaProjeteis) ... ok
+test_modulo_usa_valor_anterior_ao_decremento (test_cadencia_projeteis.ContratosCadenciaProjeteis) ... ok
+test_portoes_sao_locais_e_releem_estado (test_cadencia_projeteis.ContratosCadenciaProjeteis) ... ok
+test_apresentacao_modulo_e_indice_todos_bytes (test_cadencia_projeteis.DiferencialCadenciaProjeteis) ... skipped 'Opcional: RISING_EMULAR=1'
+test_apresentacoes_encadeadas_paridade_e_divisor (test_cadencia_projeteis.DiferencialCadenciaProjeteis) ... skipped 'Opcional: RISING_EMULAR=1'
+test_contador_global_alimenta_calcul_antes_unidades (test_cadencia_projeteis.DiferencialCadenciaProjeteis) ... skipped 'Opcional: RISING_EMULAR=1'
+test_impacto30_ate_preparacao_apresentacao (test_cadencia_projeteis.DiferencialCadenciaProjeteis) ... skipped 'Opcional: RISING_EMULAR=1'
+test_portoes_bytes_e_estado_salvo (test_cadencia_projeteis.DiferencialCadenciaProjeteis) ... skipped 'Opcional: RISING_EMULAR=1'
+test_retangulo_leitura_desalinhada_e_extremos (test_cadencia_projeteis.DiferencialCadenciaProjeteis) ... skipped 'Opcional: RISING_EMULAR=1'
+test_constructor_preserves_all_inherited_bytes (test_combate_raid_vivo.RealRaidMemory) ... ok
+test_core_lifecycle_is_a_named_provider (test_combate_raid_vivo.RealRaidMemory) ... ok
+test_core_three_argument_order_callback (test_combate_raid_vivo.RealRaidMemory) ... ok
+test_local_sanctuary_sound_stops_after_accumulator_store (test_combate_raid_vivo.RealRaidMemory) ... ok
+test_original_evidence_integrity (test_combate_raid_vivo.RealRaidMemory) ... ok
+test_original_returned_entries_over_whole_checkpoint (test_combate_raid_vivo.RealRaidMemory) ... ok
+test_full_checkpoint_and_consumed_register_differential (test_combate_raid_vivo.RealRaidNative) ... skipped 'RISING_EMULAR=1 runs the real-raid original leaves'
+test_solid_footprint_with_original_read_only_guards_and_audio (test_combate_raid_vivo.RealRaidNative) ... skipped 'RISING_EMULAR=1 runs the real-raid original leaves'
+test_audio_dependency_occurs_after_f9_write_before_life (test_consumo_dano.ContratosConsumoDano) ... ok
+test_callback_rereads_and_protected_zero_heals (test_consumo_dano.ContratosConsumoDano) ... ok
+test_death_preserves_life_and_prior_effects (test_consumo_dano.ContratosConsumoDano) ... ok
+test_mode_width_and_nonlethal_consumer (test_consumo_dano.ContratosConsumoDano) ... ok
+test_unsupported_and_missing_callbacks_fail_without_fabricated_damage (test_consumo_dano.ContratosConsumoDano) ... ok
+test_original_consumer_boundaries_and_all_valid_types (test_consumo_dano.DiferencialConsumoDano) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_id_edges_and_aliased_source (test_consumo_dano.DiferencialConsumoDano) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_projectile_to_occupied_consumer_checkpoint (test_consumo_dano.DiferencialConsumoDano) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_reads_after_synthetic_message_callback_mutation (test_consumo_dano.DiferencialConsumoDano) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_visible_existing_handle_and_audio_stops (test_consumo_dano.DiferencialConsumoDano) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_zero_protection_and_life_edges (test_consumo_dano.DiferencialConsumoDano) ... skipped 'Optional: RISING_EMULAR=1'
+test_invalid_backing_pool_fails_before_callbacks (test_consumo_fisico.ContratosConsumoFisico) ... ok
+test_missing_level_still_precedes_life_and_physical_death (test_consumo_fisico.ContratosConsumoFisico) ... ok
+test_physical_exception_identity_and_prior_child_are_retained (test_consumo_fisico.ContratosConsumoFisico) ... ok
+test_shared_records_see_both_world_and_combat_writes (test_consumo_fisico.ContratosConsumoFisico) ... ok
+test_original_child_pool_saturation_and_id_edges (test_consumo_fisico.DiferencialConsumoFisico) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_inactive_guard_preserves_physical_state (test_consumo_fisico.DiferencialConsumoFisico) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_ordinary_targets_and_current_reserved_cells (test_consumo_fisico.DiferencialConsumoFisico) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_physical_partial_failures_retain_prior_combat_effects (test_consumo_fisico.DiferencialConsumoFisico) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_projectile_consumer_and_physical_death_return (test_consumo_fisico.DiferencialConsumoFisico) ... skipped 'Optional: RISING_EMULAR=1'
+test_live_source_pool_rows_and_explicit_other_queries (test_dano_modo3.ContratosDanoModo3) ... ok
+test_mode3_death_does_not_use_mode1_award_handler (test_dano_modo3.ContratosDanoModo3) ... ok
+test_prefix_owner_and_unit_source_modifier_remain_distinct (test_dano_modo3.ContratosDanoModo3) ... ok
+test_original_all_building_and_victim_types (test_dano_modo3.DiferencialDanoModo3) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_getter_calls_and_selector1_rows (test_dano_modo3.DiferencialDanoModo3) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_id_overlap_and_audio_handles (test_dano_modo3.DiferencialDanoModo3) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_reduction_life_and_protection_edges (test_dano_modo3.DiferencialDanoModo3) ... skipped 'Optional: RISING_EMULAR=1'
+test_loaded_direction_selection_and_signed_quarter (test_dano_modo4.ContratosDanoModo4) ... ok
+test_missing_values_and_uninitialized_directions_fail_early (test_dano_modo4.ContratosDanoModo4) ... ok
+test_mode4_does_not_call_mode1_lethal_handler (test_dano_modo4.ContratosDanoModo4) ... ok
+test_original_all_types_and_both_loaded_bytes (test_dano_modo4.DiferencialDanoModo4) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_every_raw_byte_in_both_classes (test_dano_modo4.DiferencialDanoModo4) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_id_aliases_and_audio_handles (test_dano_modo4.DiferencialDanoModo4) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_reduction_protection_and_life_edges (test_dano_modo4.DiferencialDanoModo4) ... skipped 'Optional: RISING_EMULAR=1'
+test_missing_row_and_unsupported_modes_fail_before_callbacks (test_dano_modo8.ContratosDanoModo8) ... ok
+test_mode8_never_uses_mode1_lethal_handler (test_dano_modo8.ContratosDanoModo8) ... ok
+test_special_row_has_no_mode1_bonus_or_message_prefix (test_dano_modo8.ContratosDanoModo8) ... ok
+test_original_every_source_victim_type_and_loaded_bonus (test_dano_modo8.DiferencialDanoModo8) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_fixed_width_life_protection_and_reduction_edges (test_dano_modo8.DiferencialDanoModo8) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_id_edges_and_source_victim_alias (test_dano_modo8.DiferencialDanoModo8) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_visible_audio_and_existing_handles (test_dano_modo8.DiferencialDanoModo8) ... skipped 'Optional: RISING_EMULAR=1'
+test_life_half_is_truncated_before_zero_to_one (test_dano_modo9.ContratosDanoModo9) ... ok
+test_mode1_lethal_handler_is_not_called_for_mode9 (test_dano_modo9.ContratosDanoModo9) ... ok
+test_original_all_raw_damage_bytes_at_multiple_life_bands (test_dano_modo9.DiferencialDanoModo9) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_reduction_protection_and_life_edges (test_dano_modo9.DiferencialDanoModo9) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_sources_targets_and_aliased_ids (test_dano_modo9.DiferencialDanoModo9) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_visible_audio_and_existing_handles (test_dano_modo9.DiferencialDanoModo9) ... skipped 'Optional: RISING_EMULAR=1'
+test_existing_combat_matches_real_contact_before_ai_message (test_fronteira_contato_combate.RaidContactBoundary) ... ok
+test_adapter_forwards_exact_other_queries_and_errors (test_grade_impacto.ContratosGradeImpacto) ... ok
+test_tag_widths_no_allocation_clamp_and_live_readonly_view (test_grade_impacto.ContratosGradeImpacto) ... ok
+test_computed_both_lookups_in_complete_projectile_returns (test_grade_impacto.DiferencialGradeImpacto) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_building_priority_stops_before_unit_consumer (test_grade_impacto.DiferencialGradeImpacto) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_every_ten_bit_id_and_low_subcell_bits (test_grade_impacto.DiferencialGradeImpacto) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_nonbuilding_tags_and_cell_width_edges (test_grade_impacto.DiferencialGradeImpacto) ... skipped 'Optional: RISING_EMULAR=1'
+test_building_owner_diplomacy_has_no_unit_alert (test_impacto_modo3.ContratosImpactoModo3) ... ok
+test_missing_building_cell_is_distinct_from_unit_step (test_impacto_modo3.ContratosImpactoModo3) ... ok
+test_original_building_priority_and_default_death_stop (test_impacto_modo3.DiferencialImpactoModo3) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_neutral_types_flags_and_building_sources (test_impacto_modo3.DiferencialImpactoModo3) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_source_cell_and_refuge_stops (test_impacto_modo3.DiferencialImpactoModo3) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_complete_mode3_cell_impacts (test_impacto_modo3.DiferencialPipelineModo3) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_prepared_type1_arrivals_and_full_pool (test_impacto_modo3.DiferencialPipelineModo3) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_source_cell_refuge_and_synthetic_owner_reread (test_impacto_modo3.DiferencialPipelineModo3) ... skipped 'Optional: RISING_EMULAR=1'
+test_mode4_directions_are_explicit_before_queries (test_impacto_modo4.ContratosImpactoModo4) ... ok
+test_neutral_victim_forwards_mode4_without_retaliation (test_impacto_modo4.ContratosImpactoModo4) ... ok
+test_original_building_priority_and_default_death_stop (test_impacto_modo4.DiferencialImpactoModo4) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_neutral_types_flags_and_directions (test_impacto_modo4.DiferencialImpactoModo4) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_zero_origin_evasion_and_refuge_stops (test_impacto_modo4.DiferencialImpactoModo4) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_complete_mode4_cell_impacts (test_impacto_modo4.DiferencialPipelineModo4) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_later_building_and_navigation_stops_keep_prior_state (test_impacto_modo4.DiferencialPipelineModo4) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_prepared_type29_arrivals_and_full_pool (test_impacto_modo4.DiferencialPipelineModo4) ... skipped 'Optional: RISING_EMULAR=1'
+test_building_and_unsupported_mode_boundaries (test_impacto_unidades.ContratosImpactoUnidades) ... ok
+test_empty_lookup_and_flag_width (test_impacto_unidades.ContratosImpactoUnidades) ... ok
+test_missing_query_does_not_retire_parent (test_impacto_unidades.ContratosImpactoUnidades) ... ok
+test_ai_and_neutral_prefix_consumer_boundary (test_impacto_unidades.DiferencialImpactoUnidades) ... skipped 'Optional: RISING_EMULAR=1'
+test_all_unit_types_flags_hit_pool_and_rng (test_impacto_unidades.DiferencialImpactoUnidades) ... skipped 'Optional: RISING_EMULAR=1'
+test_ally_effect_order_and_alert_counter_edges (test_impacto_unidades.DiferencialImpactoUnidades) ... skipped 'Optional: RISING_EMULAR=1'
+test_lookup_empty_filters_and_building_priority (test_impacto_unidades.DiferencialImpactoUnidades) ... skipped 'Optional: RISING_EMULAR=1'
+test_pool_saturation_still_consumes_hit_rng (test_impacto_unidades.DiferencialImpactoUnidades) ... skipped 'Optional: RISING_EMULAR=1'
+test_projectile_finishes_occupied_impact_and_parent_retirement (test_impacto_unidades.DiferencialImpactoUnidades) ... skipped 'Optional: RISING_EMULAR=1'
+test_refuge_evasion_and_special_attacker_stops (test_impacto_unidades.DiferencialImpactoUnidades) ... skipped 'Optional: RISING_EMULAR=1'
+test_retaliation_tick_boundaries_and_provider_stops (test_impacto_unidades.DiferencialImpactoUnidades) ... skipped 'Optional: RISING_EMULAR=1'
+test_forced_capture_is_complete (test_incursao_m2_3.IncursaoM23) ... ok
+test_monster_tables_before_raid (test_incursao_m2_3.IncursaoM23) ... ok
+test_projectile_calcul_after_spawn (test_incursao_m2_3.IncursaoM23) ... ok
+test_spawn_effect_projectile_init (test_incursao_m2_3.IncursaoM23) ... ok
+test_carga_missao_sobrescreve_mago_e_recarga_game_preserva (test_inicializacao_ataque.ContratosInicializacao) ... ok
+test_mago_modificador_e_wrap (test_inicializacao_ataque.ContratosInicializacao) ... ok
+test_ordem_de_tipo_reseta_espera_preserva_fase (test_inicializacao_ataque.ContratosInicializacao) ... ok
+test_pedido_salvo_inclui_campos_sem_normalizar (test_inicializacao_ataque.ContratosInicializacao) ... ok
+test_preserva_campos_ausentes_e_subestado (test_inicializacao_ataque.ContratosInicializacao) ... ok
+test_caracteristicas_todos_tipos_preservacao_e_escritas (test_inicializacao_ataque.DiferencialInicializacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_caracterizar_sequencias_de_trocas_preservam_valores (test_inicializacao_ataque.DiferencialInicializacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_definir_tipo_registro_inteiro_busca_e_callbacks (test_inicializacao_ataque.DiferencialInicializacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_inicializacao_seguida_de_disparo_original (test_inicializacao_ataque.DiferencialInicializacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_mago_todos_modificadores_e_donos (test_inicializacao_ataque.DiferencialInicializacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_ordem_de_ataque_original_preserva_espera (test_inicializacao_ataque.DiferencialInicializacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_pedido_de_load_por_id_sem_filtro_de_subestado (test_inicializacao_ataque.DiferencialInicializacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_pedido_leitura_game_tamanho_do_cabecalho (test_inicializacao_ataque.DiferencialInicializacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_pos_carga_game_preserva_campos_e_nao_recaracteriza (test_inicializacao_ataque.DiferencialInicializacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_pos_carga_missao_fases_2_3_preservadas (test_inicializacao_ataque.DiferencialInicializacao) ... skipped 'Opcional: RISING_EMULAR=1'
+test_civilian_refuge_and_late_count_phase (test_luta_fatal_combate.FatalFightMemory) ... ok
+test_complete_original_matrix_and_persistent_corpse_chains (test_luta_fatal_combate.FatalFightMemory) ... ok
+test_constructor_and_every_missing_register_leave_memory_intact (test_luta_fatal_combate.FatalFightMemory) ... ok
+test_profile_import_full_registers_against_recorded_external_answer (test_luta_fatal_combate.FatalFightMemory) ... ok
+test_required_stack_arguments_are_explicit (test_luta_fatal_combate.FatalFightMemory) ... ok
+test_unknown_handler_and_raw_scope_stop_before_effects (test_luta_fatal_combate.FatalFightMemory) ... ok
+test_native_civilian_and_count_phase_supplements (test_luta_fatal_combate.FatalFightNative) ... skipped 'RISING_EMULAR=1 runs the original civil/count supplements'
+test_calcul_30_passagens_portao_e_inativos (test_maquina_projeteis.ContratosMaquina) ... ok
+test_circulo30_sem_dano_central_duplicado (test_maquina_projeteis.ContratosMaquina) ... ok
+test_falta_rng_preserva_desativacao_anterior (test_maquina_projeteis.ContratosMaquina) ... ok
+test_temporarios_ordem_desativacao_e_igualdade (test_maquina_projeteis.ContratosMaquina) ... ok
+test_tipo28_tempo_word_e_atacante_byte (test_maquina_projeteis.ContratosMaquina) ... ok
+test_tipo33_filho_destino_antigo_dano_destino_novo (test_maquina_projeteis.ContratosMaquina) ... ok
+test_calcul_misto_com_area_sorteio_luz_e_expiracao (test_maquina_projeteis.DiferencialMaquina) ... skipped 'Opcional: RISING_EMULAR=1'
+test_calcul_pool_inativo_e_criacoes_antes_depois_do_pai (test_maquina_projeteis.DiferencialMaquina) ... skipped 'Opcional: RISING_EMULAR=1'
+test_despacho_todos_bytes_tipo_e_quadros (test_maquina_projeteis.DiferencialMaquina) ... skipped 'Opcional: RISING_EMULAR=1'
+test_tipo28_tempo_16bits_e_extincao_sem_celulas (test_maquina_projeteis.DiferencialMaquina) ... skipped 'Opcional: RISING_EMULAR=1'
+test_tipo30_circulo_cantos_recorte_e_pool_cheio (test_maquina_projeteis.DiferencialMaquina) ... skipped 'Opcional: RISING_EMULAR=1'
+test_tipo33_sorteio_destino_e_saturacao (test_maquina_projeteis.DiferencialMaquina) ... skipped 'Opcional: RISING_EMULAR=1'
+test_corpo_torre_rotacao_tipo3_e_celulas_distintas (test_mira_angular.ContratosMira) ... ok
+test_dominios_e_callbacks_necessarios (test_mira_angular.ContratosMira) ... ok
+test_eixos_coincidencia_e_limites_angulares (test_mira_angular.ContratosMira) ... ok
+test_ordem_das_consultas_de_construcao (test_mira_angular.ContratosMira) ... ok
+test_angulo_todas_65536_inclinacoes_u8_duas_resolucoes (test_mira_angular.DiferencialMira) ... skipped 'Opcional: RISING_EMULAR=1'
+test_manutencao_executa_alcance_e_mira_sem_substituicoes (test_mira_angular.DiferencialMira) ... skipped 'Opcional: RISING_EMULAR=1'
+test_mira_completa_todos_tipos_modos1_5_e_orientacoes (test_mira_angular.DiferencialMira) ... skipped 'Opcional: RISING_EMULAR=1'
+test_mira_construcao_adjacencia_fallback_e_segunda_resolucao_torre (test_mira_angular.DiferencialMira) ... skipped 'Opcional: RISING_EMULAR=1'
+test_modos_outros_corpo_sentinela_e_torre_depende_edi (test_mira_angular.DiferencialMira) ... skipped 'Opcional: RISING_EMULAR=1'
+test_quadrantes_bordas_e_translacoes_aleatorias (test_mira_angular.DiferencialMira) ... skipped 'Opcional: RISING_EMULAR=1'
+test_registradores_memoria_e_controle_x87_preservados (test_mira_angular.DiferencialMira) ... skipped 'Opcional: RISING_EMULAR=1'
+test_default_death_boundary_is_preserved (test_morte_dano.ContratosMorteDano) ... ok
+test_missing_level_provider_preserves_life_after_experience_clear (test_morte_dano.ContratosMorteDano) ... ok
+test_original_dying_boundary_child_pool_and_saved_entry_cell (test_morte_dano.DiferencialMorteDano) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_post_dying_sympathy_fragment (test_morte_dano.DiferencialMorteDano) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_projectile_reaches_physical_dying_request (test_morte_dano.DiferencialMorteDano) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_source_types_and_all_experience_bytes (test_morte_dano.DiferencialMorteDano) ... skipped 'Optional: RISING_EMULAR=1'
+test_factory_preserves_mode3_mode4_stop_without_new_opt_in (test_morte_sem_experiencia.ContratosMorteSemExperiencia) ... ok
+test_undefined_owner_modes8_mode9_remain_stops_with_opt_in (test_morte_sem_experiencia.ContratosMorteSemExperiencia) ... ok
+test_original_child_pool_saturation_and_id_edges (test_morte_sem_experiencia.DiferencialMorteSemExperiencia) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_inactive_physical_guards_without_experience (test_morte_sem_experiencia.DiferencialMorteSemExperiencia) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_ordinary_modes3_mode4_current_reserved_cells (test_morte_sem_experiencia.DiferencialMorteSemExperiencia) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_physical_partial_failures_keep_life_child_and_cleanup (test_morte_sem_experiencia.DiferencialMorteSemExperiencia) ... skipped 'Optional: RISING_EMULAR=1'
+test_callback_return_then_frame_then_amount (test_ordem_tipo4.ContratosOrdemTipo4) ... ok
+test_query_sees_inherited_frame_and_common_amount (test_ordem_tipo4.ContratosOrdemTipo4) ... ok
+test_original_characterization_dependency_boundary (test_ordem_tipo4.DiferencialOrdemTipo4) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_mission_postload_dependency_boundary (test_ordem_tipo4.DiferencialOrdemTipo4) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_success_and_special_owner_bypass (test_ordem_tipo4.DiferencialOrdemTipo4) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_type_conversion_dependency_boundary (test_ordem_tipo4.DiferencialOrdemTipo4) ... skipped 'Optional: RISING_EMULAR=1'
+test_every_original_case_whole_state_and_all_registers (test_ordens_torres_combate.TurretInputMatrix) ... ok
+test_live_selection_and_reference_before_mode_store (test_ordens_torres_combate.TurretInputMatrix) ... ok
+test_protected_uninitialized_mode_never_manufactures_a_target (test_ordens_torres_combate.TurretInputMatrix) ... ok
+test_all_native_returns_registers_stores_and_whole_state (test_ordens_torres_combate.TurretInputNative) ... skipped 'RISING_EMULAR=1 runs the original turret leaves'
+test_capture_is_complete (test_percurso_incursao_m2_3.PercursoIncursaoM23) ... ok
+test_no_attack_damage_or_death (test_percurso_incursao_m2_3.PercursoIncursaoM23) ... ok
+test_raid_units_end_idle_at_their_destinations (test_percurso_incursao_m2_3.PercursoIncursaoM23) ... ok
+test_two_spawns_with_effects_and_orders (test_percurso_incursao_m2_3.PercursoIncursaoM23) ... ok
+test_capture_is_the_raid_spawn (test_projectile_set_m2_3.ProjectileSetIncursao) ... ok
+test_definir_matches_both_spawn_types (test_projectile_set_m2_3.ProjectileSetIncursao) ... ok
+test_efeitos_exigem_backend_e_preservam_ordem (test_projeteis.ContratosProjeteis) ... ok
+test_passo_independe_de_atividade_e_campo04 (test_projeteis.ContratosProjeteis) ... ok
+test_pool_cheio_reset_e_reuso (test_projeteis.ContratosProjeteis) ... ok
+test_zero_distancia_e_limites_da_api (test_projeteis.ContratosProjeteis) ... ok
+test_cadeia_ataque_emissao_pool_e_ultimo_slot (test_projeteis.DiferencialProjeteis) ... skipped 'Opcional: RISING_EMULAR=1'
+test_incremento_bruto_wrap_e_sinal_erro (test_projeteis.DiferencialProjeteis) ... skipped 'Opcional: RISING_EMULAR=1'
+test_init_todos_tipos_posicoes_e_pool_cheio (test_projeteis.DiferencialProjeteis) ... skipped 'Opcional: RISING_EMULAR=1'
+test_linha_limites_assinados_e_aleatorios (test_projeteis.DiferencialProjeteis) ... skipped 'Opcional: RISING_EMULAR=1'
+test_reset_existe_livre_todas_posicoes (test_projeteis.DiferencialProjeteis) ... skipped 'Opcional: RISING_EMULAR=1'
+test_set_todos_tipos_flags_offsets_registro_inteiro (test_projeteis.DiferencialProjeteis) ... skipped 'Opcional: RISING_EMULAR=1'
+test_trajetos_completos_quadrantes_diagonal_e_empate (test_projeteis.DiferencialProjeteis) ... skipped 'Opcional: RISING_EMULAR=1'
+test_domain_and_explicit_delegation_failures (test_proximidade_ataque.ContratosProximidadeAtaque) ... ok
+test_exact_owner_without_type_or_activity_filter (test_proximidade_ataque.ContratosProximidadeAtaque) ... ok
+test_original_edge_clipping_and_circle_boundary (test_proximidade_ataque.DiferencialProximidadeAtaque) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_grid_tags_indices_owners_and_unused_type (test_proximidade_ataque.DiferencialProximidadeAtaque) ... skipped 'Optional: RISING_EMULAR=1'
+test_original_mixed_square_records (test_proximidade_ataque.DiferencialProximidadeAtaque) ... skipped 'Optional: RISING_EMULAR=1'
+test_real_proximity_and_bonus_in_complete_damage_consumers (test_proximidade_ataque.DiferencialProximidadeAtaque) ... skipped 'Optional: RISING_EMULAR=1'
+test_register_contract (test_quadro1_combate.PlayerEstAllieNativo) ... skipped 'RISING_EMULAR=1 runs PlayerEstAllie natively'
+test_capture_reproduces_the_committed_frame_path (test_quadro1_combate.Quadro1Combate) ... ok
+test_engin_trouve_cible_at_frame0_input (test_quadro1_combate.Quadro1Combate) ... ok
+test_non_combat_frame_calls (test_quadro1_combate.Quadro1Combate) ... ok
+test_player_est_allie_at_frame0_inputs (test_quadro1_combate.Quadro1Combate) ... ok
+test_projectile_calcul_at_exact_inputs (test_quadro1_combate.Quadro1Combate) ... ok
+test_native_rerun_equals_fixture (test_quadro_m1.QuadroM1Nativo) ... skipped 'RISING_EMULAR=1 reruns the original capture'
+test_fixture_is_the_m1_input (test_quadro_m1.QuadroM1Projeteis) ... ok
+test_non_combat_frame_calls_are_classified (test_quadro_m1.QuadroM1Projeteis) ... ok
+test_projectile_calcul_matches_original (test_quadro_m1.QuadroM1Projeteis) ... ok
+test_call_sites_and_entry (test_reinicio_projeteis.ContratosReinicioProjeteis) ... ok
+test_clears_only_active_bytes_in_index_order (test_reinicio_projeteis.ContratosReinicioProjeteis) ... ok
+test_idempotent_and_zero_pool (test_reinicio_projeteis.ContratosReinicioProjeteis) ... ok
+test_live_views_inside_a_larger_arena (test_reinicio_projeteis.ContratosReinicioProjeteis) ... ok
+test_original_only_captures_reproduced (test_reinicio_projeteis.ContratosReinicioProjeteis)
+Committed native captures: Python reproduces every region digest from the same seeds. ... ok
+test_pool_object_delegates_to_entry (test_reinicio_projeteis.ContratosReinicioProjeteis) ... ok
+test_rejects_before_any_store (test_reinicio_projeteis.ContratosReinicioProjeteis) ... ok
+test_captured_cases_whole_state (test_reinicio_projeteis.DiferencialReinicioProjeteis) ... skipped 'Optional: RISING_EMULAR=1'
+test_fresh_dirty_states_and_callers (test_reinicio_projeteis.DiferencialReinicioProjeteis) ... skipped 'Optional: RISING_EMULAR=1'
+test_capture_is_complete (test_vida_incursao_m2_3.VidaIncursaoM23) ... ok
+test_engin_trouve_cible_calls (test_vida_incursao_m2_3.VidaIncursaoM23) ... ok
+test_player_est_allie_register_contract (test_vida_incursao_m2_3.VidaIncursaoM23) ... ok
+test_projectile_calcul_every_frame (test_vida_incursao_m2_3.VidaIncursaoM23) ... ok
+test_reset_and_sympathy_store_nothing (test_vida_incursao_m2_3.VidaIncursaoM23) ... ok
+
+----------------------------------------------------------------------
+Ran 291 tests in 146.036s
+
+OK (skipped=155)
+Documentation links and requested research suites passed.

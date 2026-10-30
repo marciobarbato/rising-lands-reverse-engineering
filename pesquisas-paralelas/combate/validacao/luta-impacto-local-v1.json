@@ -1,0 +1,125 @@
+{
+ "schema": "rising-lands/combat-fatal-differential/1",
+ "native": false,
+ "capture_sha256": "bf65cb31312fea7d4a19030bffd8feb54818420d330dfb3e99768e37ea24c9a6",
+ "summary": {
+  "cases": 12,
+  "mismatches": 0,
+  "routines": {
+   "EnginInfligeDegat": 9,
+   "InfligeDegat": 3
+  },
+  "outside_protected_domain": 0
+ },
+ "outside_protected_domain": [],
+ "cases": [
+  {
+   "case": "unit-damage-0-16-life100",
+   "routine": "EnginInfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "unit-damage-0-16-life1",
+   "routine": "EnginInfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "unit-damage-0-16-life0",
+   "routine": "EnginInfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "unit-damage-16-0-life100",
+   "routine": "EnginInfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "unit-damage-16-0-life1",
+   "routine": "EnginInfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "unit-damage-16-0-life0",
+   "routine": "EnginInfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "unit-damage-13-16-life100",
+   "routine": "EnginInfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "unit-damage-13-16-life1",
+   "routine": "EnginInfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "unit-damage-13-16-life0",
+   "routine": "EnginInfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "impact-contact-life100",
+   "routine": "InfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "impact-contact-life1",
+   "routine": "InfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "impact-contact-life0",
+   "routine": "InfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  }
+ ]
+}
