@@ -4,6 +4,8 @@ Status: plan published 2026-10-29, with the user's architecture decisions at the
 
 ## Status (2026-10-30 07:00)
 
+**Update 2026-10-30 20:10:** the S1 pass-2 whole-state capture (33,844 phases, policy passed) is on main at `7454d08`; Graphics API 1.12 (late-S1 combat/fire/death/raids, native `AffText` glyphs) at `f397b4f`; the Rust engine reaches S1 frame 10,800 in state and 2,013 in surfaces (integrated through maintenance after a MacBook reproduction). Next for M3.1: AI/runtime's formal S1 proof (`provar_entrada_janelas_ia.py fixar S1`, `tudo --janelas S1`) on both machines. The strict S1 chain stops at 10,801 until it is rerun over Graphics 1.12.
+
 Main `3874fcc`. M2 is accepted (`ea62eb4`), so the "M2.3 still running" note in §0 is historical. The probes' native facts that replaced the §2 uncertainties (CAVE cost 10 food / 6 stone, only a colonist lodges in the cave, only `BatimentAjouteMatiere` credits `0x4e2ea8`, victory does not fit before the frame-9000 raid) are in [SONDAS_M3](../pesquisas-paralelas/missoes/m3/SONDAS_M3.md) and [HANDOVER_CLAUDE_20261030](HANDOVER_CLAUDE_20261030.md).
 
 | Criterion | State | Evidence and what remains |

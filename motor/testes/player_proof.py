@@ -34,7 +34,7 @@ class Memory:
 def canonical_orders(rows):
  return [(o.get('event','SetPlayerOrdre'),o['player'],o['tag'],o.get('word2'),o.get('word4'),o.get('word6'),o.get('word8'),o.get('packet'),o.get('jump_target')) for o in rows]
 
-def proof(probe,library=None,frames=None,python=False,whole=False):
+def proof(probe,library=None,frames=None,python=False,whole=False,reference_continuation=False):
  t=time.monotonic();base=SOURCE/'pesquisas-paralelas/missoes/m3';raw=(base/'entradas'/f'{probe}.json').read_bytes();data=json.loads(raw)
  files={n:(base/'sondas'/probe/n).read_bytes() for n in ('quadros.jsonl.xz','entradas.jsonl.xz','comandos.jsonl.xz','replay.json')}
  if not json.loads(files['replay.json'])['equal']:raise ValueError('Native probe replay not equal')
@@ -54,9 +54,10 @@ def proof(probe,library=None,frames=None,python=False,whole=False):
   mirror=rust.create();rust.load(mirror,sorted([(a,b)for name,(a,b)in state.items()if name!='native_stack']+list(static.items())));rust.execution(mirror,1);rust.check(rust.lib.rl_avancar_ticks(mirror,129))
  _,_,entry,m1=carregar_cenario_exibicao();comp=None;iterator=None
  if python:
-  script=RoteiroEntrada(data);comp=ComposicaoEntrada(state,cap,entry,m1,script,inicio=128,alocacoes=cap['allocations'],regs_inicio=regs);iterator=iter(comp.executar(frames or max(native)-128))
+  script=RoteiroEntrada(data);comp=ComposicaoEntrada(state,cap,entry,m1,script,inicio=128,alocacoes=cap['allocations'],regs_inicio=regs);iterator=iter(comp.executar((frames or max(native)-128)+(1 if reference_continuation else 0)))
  inp=FrameInput(0,0,0,FrameRegisters.from_values({k:int(v,16) for k,v in regs.items()}),(C.c_uint32*3)(0,0,0),(C.c_uint32*4)(*MSG_LACO))
  mirror_inp=FrameInput.from_buffer_copy(bytes(inp))
+ continuation=None
  schedule={q['frame']:q for q in data['frames']};results=[];stop=None;difference=None;native_events=[];native_orders=[];runtime=0.0
  try:
   for k in range(129,129+(frames or max(native)-128)):
@@ -108,11 +109,19 @@ def proof(probe,library=None,frames=None,python=False,whole=False):
    native_events+=in_ev;native_orders+=ord_ev;results.append(dict(frame=k,equal=not dif,indicators=actual))
    if k%250==0:print(probe,k,"equal"if not dif else "different",flush=True)
    if dif:difference=dict(frame=k,differences=dif);break
+  if reference_continuation:
+   if iterator is None or stop or difference:raise ValueError('Reference continuation requires a completed Python comparison window')
+   for phase in (2,3):
+    try:next(iterator)
+    except Exception as e:
+     continuation=dict(frame=129+len(results),phase=phase,type=type(e).__name__,dependency=str(e),callee=getattr(e,'rotina',None)or getattr(e,'nome',None),address=getattr(e,'sitio',None)or getattr(e,'endereco',None)or getattr(e,'chamada',None),scope='Python-only continuation; no Rust equality claimed for this incomplete frame')
+     break
+   if continuation is None:continuation=dict(frame=129+len(results),completed=True,scope='Python-only continuation; no Rust comparison')
  finally:
   final_clock=rust.clock(h);rust.free(h)
   if mirror is not None:rust.free(mirror)
- return dict(schema='rising-lands/rust-player-input-proof/1',execution_mode=int(os.environ.get('RL_EXECUTION_MODE','0')),probe=probe,play_comparison=dict(phases=len(play_checks),equal=sum(c['equal']for c in play_checks),checks=play_checks) if mirror is not None else None,provenance=finish(identity,rust.path),whole_state=full.report() if full is not None else None,reference=provenance(),input_sha256=hashlib.sha256(raw).hexdigest(),probe_files_sha256={n:hashlib.sha256(v).hexdigest() for n,v in files.items()},library_sha256=hashlib.sha256(rust.path.read_bytes()).hexdigest(),source_revision=subprocess.check_output(['git','-C',str(REPO),'rev-parse','HEAD'],text=True).strip(),source_dirty=bool(subprocess.check_output(['git','-C',str(REPO),'status','--porcelain'],text=True)),frames_equal=sum(r['equal'] for r in results),frames_compared=len(results),python_compared=python,first_difference=difference,stop=stop,results=results,orders=native_orders,input_events=len(native_events),native_seconds=runtime,virtual_clock=dict(start_tick=129,end_tick=final_clock[0],milliseconds=final_clock[1],rate=20),seconds=time.monotonic()-t)
+ return dict(schema='rising-lands/rust-player-input-proof/1',execution_mode=int(os.environ.get('RL_EXECUTION_MODE','0')),probe=probe,play_comparison=dict(phases=len(play_checks),equal=sum(c['equal']for c in play_checks),checks=play_checks) if mirror is not None else None,provenance=finish(identity,rust.path),whole_state=full.report() if full is not None else None,reference=provenance(),input_sha256=hashlib.sha256(raw).hexdigest(),probe_files_sha256={n:hashlib.sha256(v).hexdigest() for n,v in files.items()},library_sha256=hashlib.sha256(rust.path.read_bytes()).hexdigest(),source_revision=subprocess.check_output(['git','-C',str(REPO),'rev-parse','HEAD'],text=True).strip(),source_dirty=bool(subprocess.check_output(['git','-C',str(REPO),'status','--porcelain'],text=True)),frames_equal=sum(r['equal'] for r in results),frames_compared=len(results),python_compared=python,reference_continuation=continuation,first_difference=difference,stop=stop,results=results,orders=native_orders,input_events=len(native_events),native_seconds=runtime,virtual_clock=dict(start_tick=129,end_tick=final_clock[0],milliseconds=final_clock[1],rate=20),seconds=time.monotonic()-t)
 
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--probe',required=True);ap.add_argument('--frames',type=int);ap.add_argument('--library');ap.add_argument('--python',action='store_true');ap.add_argument('--whole-state',action='store_true');ap.add_argument('--output',required=True);a=ap.parse_args();signal.alarm(1140);r=proof(a.probe,a.library,a.frames,a.python,a.whole_state);p=Path(a.output);p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(r,indent=1,sort_keys=True)+'\n');print(json.dumps({k:r[k] for k in ('probe','frames_equal','python_compared','first_difference','stop','seconds')},indent=1));return int(r['first_difference'] is not None)
+ ap=argparse.ArgumentParser();ap.add_argument('--probe',required=True);ap.add_argument('--frames',type=int);ap.add_argument('--library');ap.add_argument('--python',action='store_true');ap.add_argument('--reference-continuation',action='store_true');ap.add_argument('--whole-state',action='store_true');ap.add_argument('--output',required=True);a=ap.parse_args();signal.alarm(1140);r=proof(a.probe,a.library,a.frames,a.python,a.whole_state,a.reference_continuation);p=Path(a.output);p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(r,indent=1,sort_keys=True)+'\n');print(json.dumps({k:r[k] for k in ('probe','frames_equal','python_compared','first_difference','stop','seconds')},indent=1));return int(r['first_difference'] is not None)
 if __name__=='__main__':raise SystemExit(main())

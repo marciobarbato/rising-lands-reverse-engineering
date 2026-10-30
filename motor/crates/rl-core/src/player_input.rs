@@ -571,7 +571,7 @@ impl Input {
         }
         if sack(m, c)? {
             self.info = player::text(m, sack_kind(m, c)? + 0x28, 0x4299d0)?;
-            return stop("SacGetCapacite", 0x4299da);
+            self.info2 = crate::chain_queries::sack(m, c)?;
         } else if field(m, c)? {
             self.info = player::text(m, 0x2c, 0x4299f4)?
         } else if mine(m, c)? {
