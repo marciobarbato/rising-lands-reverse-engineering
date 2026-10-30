@@ -631,3 +631,39 @@ record exact masks, timings, stops, original evidence pins, skipped work and
 reproduction commands. This remains ABI 1.5 and Graphics 1.7; it does not claim
 later construction/work/combat simulation, initialized audio, glyphs or app
 presentation beyond the declared domain.
+
+## Sustained play execution — ABI 1.6
+
+`rl_execucao_definir(world, RL_EXECUCAO_JOGO)` opts a fully loaded mission into
+persistent execution. Select it once before the app's render/phase-2/phase-3 loop;
+`rl_execucao_modo` queries the policy. The frame, declared-input and renderer
+signatures and layouts are unchanged. Creation accepts ABI 1.0 through 1.6.
+Consumers must accept major 1 and a minor at least their required version; the
+macOS driver's exact ABI 1.4 check needs updating before using this library.
+
+The play path retains the execution projection, journals writes for rollback,
+and refreshes only changed unit/structure records. It reuses runtime scratch and
+render transaction buffers. It removes full-world cloning, typed projection and
+reload from ordinary frames and drawing. Explicit exports still project and
+check that the typed state matches the execution view byte for byte. Rust callers
+read through `state()`; `state_mut()` invalidates persistent execution before
+allowing direct semantic edits. Complete C ABI reloads preserve the policy;
+sparse fixture loads restore the default policy.
+
+Policy 0 remains the default complete audit path. Policy 2 uses the same
+persistent backend with full audit traces for original comparisons. Policy 1
+suppresses frame bindings, freed-byte audit copies, consumed-input polling traces
+and renderer observations, retaining order packets and text/sound requests.
+A failed declared-input attempt still exposes its full diagnostics after rollback;
+its deterministic owned inputs are replayed under audit solely for that stopped
+attempt. Game bytes, registers, generation, cursor hold and clock remain atomic.
+No missing provider, named stop, bounds check, RNG draw or drawing operation is
+removed by choosing play execution.
+
+`motor/testes/play_benchmark.py` measures the release C ABI in app play order with
+HUD and reused caller buffers over at least 9,200 frames. Initialization, state
+exports, audit queries, proof comparisons and macOS presentation are outside its
+timers. `RL_EXECUTION_MODE=2 RL_COMPARE_PLAY=1` enables paired original-state
+proofs: policy 2 is checked against the unchanged evidence contract and policy 1
+is additionally checked against it for every byte, register, clock and retained
+order/request event. Reference revisions and immutable evidence masks are unchanged.

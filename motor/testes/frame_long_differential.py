@@ -46,7 +46,7 @@ def source_hashes():
 
 def metadata():
     from pinned_reference import provenance
-    return dict(reference_snapshot=provenance(),source_revision=subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], text=True).strip(),
+    return dict(execution_mode=int(os.environ.get('RL_EXECUTION_MODE','0')),reference_snapshot=provenance(),source_revision=subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], text=True).strip(),
                 source_dirty_paths=subprocess.check_output(['git', '-C', str(ROOT), 'status', '--porcelain'], text=True).splitlines())
 
 
@@ -160,10 +160,20 @@ def run_part(number, library=None, executable=None, start_frame=None, max_phases
     handle = rust.create()
     results, runtime = [], 0.0
     checks = {}
+    mirror = None
+    paired = bool(int(os.environ.get("RL_COMPARE_PLAY", "0")))
+    if paired and int(os.environ.get("RL_EXECUTION_MODE", "0")) != 2:
+        raise ValueError("Paired play proof requires audited persistent mode 2")
     try:
         rust.load(handle, sorted(list(state.values()) + list(static.items())))
         if start_tick:
             rust.check(rust.lib.rl_avancar_ticks(handle, start_tick))
+        if paired:
+            mirror = rust.create()
+            rust.load(mirror, sorted(list(state.values()) + list(static.items())))
+            rust.execution(mirror, 1)
+            if start_tick: rust.check(rust.lib.rl_avancar_ticks(mirror, start_tick))
+            mirror_inp = FrameInput.from_buffer_copy(bytes(inp))
         raw = rust.snapshot(handle)
         initial = named_snapshot({a: b for a, b in raw.items() if a not in static}, names)
         if initial != state or any(raw.get(a) != b for a, b in static.items()):
@@ -180,6 +190,8 @@ def run_part(number, library=None, executable=None, start_frame=None, max_phases
             phase_id = 1 if name == 'load_tail' else 2 if name.startswith('between_frames') else 3
             if number == 0 and name == 'between_frames' and not start_frame:
                 inp.registers = FrameRegisters.from_values({k: int(ph['entry']['registers'][k], 16) for k in regs})
+            if mirror is not None and number == 0 and name == 'between_frames' and not start_frame:
+                mirror_inp.registers = FrameRegisters.from_values(inp.registers.values())
             carried = None
             if phase_id == 2 and (index > 0 or serial and number > 0):
                 carried = {k: dict(rust=hex(v), reference=ph['entry']['registers'][k], equal=hex(v) == ph['entry']['registers'][k])
@@ -194,6 +206,13 @@ def run_part(number, library=None, executable=None, start_frame=None, max_phases
                 break
             runtime += time.perf_counter() - t_step
             raw = rust.snapshot(handle)
+            play = None
+            if mirror is not None:
+                rust.frame(mirror, phase_id, mirror_inp)
+                play = dict(state_equal=raw == rust.snapshot(mirror),
+                            registers_equal=bytes(inp) == bytes(mirror_inp),
+                            clock_equal=rust.clock(handle) == rust.clock(mirror),
+                            audit_events_empty=not rust.events(mirror))
             immutable = all(raw.get(a) == b for a, b in static.items())
             actual = named_snapshot({a: b for a, b in raw.items() if a not in static}, names)
             comparison = comparar_estado(mask, actual, expected)
@@ -222,6 +241,9 @@ def run_part(number, library=None, executable=None, start_frame=None, max_phases
             booleans = [immutable, comparison['equal'], comparison['compared_summary_equal']]
             booleans += [result[k]['equal'] for k in ('rng','bindings','boundaries','clock','allocation_count')]
             booleans += [v['equal'] for section in ('registers','carried_entry_registers') for v in result.get(section, {}).values()]
+            if play is not None:
+                result['play_comparison'] = play
+                booleans += list(play.values())
             result['equal'] = all(booleans)
             results.append(result)
             if not result['equal'] or index % 100 == 0 or index + 1 == len(selected):
@@ -239,6 +261,7 @@ def run_part(number, library=None, executable=None, start_frame=None, max_phases
                 raise ValueError('Only a complete equal serial part may write a continuation checkpoint')
             output_checkpoint = checkpoint(checkpoint_out, rust, handle, inp, names, static, records, number, lib)
     finally:
+        if mirror is not None: rust.free(mirror)
         rust.free(handle)
     frames = sum(r.get('result') == 'returned' and r['phase'].startswith('frame') for r in results)
     return dict(schema='rising-lands/rust-engine-long-part-proof/1', library=lib,
@@ -247,6 +270,7 @@ def run_part(number, library=None, executable=None, start_frame=None, max_phases
                           frames=part['frames'], first_phase=selected[0]['phase'], last_phase=selected[-1]['phase'],
                           expected_phases=len(part['phases']), opening={k:part['opening_state'][k] for k in HASH_FIELDS},
                           ending={k:part['phases'][-1]['state_after'][k] for k in HASH_FIELDS}),
+                paired_play_proof=paired,
                 scope='serial_from_S0' if serial else 'declared_opening_checkpoint',
                 diagnostic=dict(start_frame=start_frame, max_phases=max_phases),
                 checkpoint_input=resume_identity, checkpoint_output=output_checkpoint,
@@ -303,6 +327,7 @@ def aggregate(paths, plan, serial=False):
         previous = r
     passed = all(row['equal'] for row in rows) and total == equal == 18401 and frames == 9200
     return dict(schema='rising-lands/rust-engine-long-aggregate-proof/1', manifest=plan['manifest'], policy=manifest['policy'],
+                paired_play_proof=paired,
                 scope='serial_from_S0' if serial else 'ten_declared_opening_checkpoints', parts=rows, library_sha256=identity,
                 input_reports=[dict(path=str(Path(p).resolve()),sha256=sha(Path(p))) for p in paths],
                 timing=dict(rust_phase_seconds=seconds, frames_completed=frames, frames_per_second=frames/seconds if seconds else None),

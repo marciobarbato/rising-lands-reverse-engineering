@@ -61,6 +61,9 @@ impl Memory for MemoriaJogo {
     }
 }
 pub fn event(m: &mut MemoriaJogo, kind: u32, site: u32, values: &[u32]) {
+    if !m.audit && kind < 7 {
+        return;
+    }
     if let Some(r) = m.player.as_mut() {
         let mut e = PlayerEvent {
             kind,
