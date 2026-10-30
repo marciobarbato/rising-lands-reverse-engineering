@@ -1154,3 +1154,14 @@ The exclusive 9,200-frame release timing is queued separately. No later stage or
 fresh M2.3 rerun is claimed in this first piece; earlier pinned proofs remain
 historical and unchanged. Later continuation must extend a separately pinned
 Graphics contract before crossing this display stop.
+
+First-piece native implementation `88e3f0f` is pushed. The subsequent
+[9,200-frame release play run](validation/chain5/piece1/timing-shared.json) uses
+its frozen dylib `35cf64afc360590abaac66774b7afaac400a7c5080d6497b00aa962048c79185`.
+Under a **shared** heavy lease, logic averages **0.3046ms/frame** (phase2 0.0170,
+CalculGame0.2876), rendering0.4538 and logic+render0.7585; full ABI loop0.7624.
+Initialization, snapshots/proof/hash work and presentation are excluded. This
+is the M2 9,200-frame play window, not a claim about later work/hunger frames.
+The exclusive measurement reservation was queued, never granted, and cancelled;
+these numbers are not an exclusive-baseline speed comparison. The full raw
+percentile/max distributions and terminal hashes remain in the linked report.

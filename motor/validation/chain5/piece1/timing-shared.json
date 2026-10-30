@@ -1,0 +1,94 @@
+{
+  "abi": 65542,
+  "final_clock": [
+    9201,
+    460050
+  ],
+  "final_counter": 9200,
+  "final_generation": 18402,
+  "final_phase": 3,
+  "final_state_sha256": "4ef7471043dd66011d9ad68873ae1c27f8c84f32063bd359c9a23e4cb48dfd36",
+  "final_surface_sha256": "8ce7ad456a1d94cefb7f880c94553a3d7ea7ffca8c4aaa303894f511116f10e3",
+  "fps": {
+    "logic": 3282.6540455488876,
+    "logic_render": 1318.4336768995386,
+    "loop": 1311.6661913563655,
+    "render": 2203.399227673313
+  },
+  "frames": 9200,
+  "frozen_library_sha256_verified_against_piece1": true,
+  "initialization_seconds": 2.6958498749999995,
+  "library_sha256": "35cf64afc360590abaac66774b7afaac400a7c5080d6497b00aa962048c79185",
+  "measurement_environment": "shared heavy lease; exclusive lease was queued, never granted, and cancelled",
+  "mode": 1,
+  "native_implementation": "88e3f0f1506785a41cc1de41bdbfa9ba6c8a7db7",
+  "phases": {
+    "CalculGame": {
+      "count": 9200,
+      "max_ms": 1.4056249999985226,
+      "mean_ms": 0.28758752152173117,
+      "p50_ms": 0.2736670000000885,
+      "p95_ms": 0.36045900000036823,
+      "p99_ms": 0.6224590000005747,
+      "seconds": 2.645805197999927
+    },
+    "between_frames": {
+      "count": 9200,
+      "max_ms": 0.1546250000004079,
+      "mean_ms": 0.017044031521742675,
+      "p50_ms": 0.015416000000101349,
+      "p95_ms": 0.02433299999982097,
+      "p99_ms": 0.06104100000037249,
+      "seconds": 0.15680509000003262
+    },
+    "generation": {
+      "count": 9200,
+      "max_ms": 0.06220799999923088,
+      "mean_ms": 0.0031663146739291867,
+      "p50_ms": 0.0024999999999053557,
+      "p95_ms": 0.005666999999043298,
+      "p99_ms": 0.017582999999987692,
+      "seconds": 0.029130095000148515
+    },
+    "logic": {
+      "count": 9200,
+      "max_ms": 1.420374999998586,
+      "mean_ms": 0.30463155304347384,
+      "p50_ms": 0.2895430000000587,
+      "p95_ms": 0.38654100000012903,
+      "p99_ms": 0.6506249999995717,
+      "seconds": 2.8026102879999595
+    },
+    "logic_render": {
+      "count": 9200,
+      "max_ms": 1.8403339999988333,
+      "mean_ms": 0.7584757713043442,
+      "p50_ms": 0.7263340000007723,
+      "p95_ms": 0.9966659999989247,
+      "p99_ms": 1.2627089999996954,
+      "seconds": 6.977977095999966
+    },
+    "loop": {
+      "count": 9200,
+      "max_ms": 1.8437079999991113,
+      "mean_ms": 0.7623890945652275,
+      "p50_ms": 0.7293750000005872,
+      "p95_ms": 1.0047499999998877,
+      "p99_ms": 1.271499999999648,
+      "seconds": 7.013979670000094
+    },
+    "render": {
+      "count": 9200,
+      "max_ms": 1.2634169999996558,
+      "mean_ms": 0.45384421826087035,
+      "p50_ms": 0.4337500000008987,
+      "p95_ms": 0.6003749999994312,
+      "p99_ms": 0.8397089999991891,
+      "seconds": 4.175366808000007
+    }
+  },
+  "sample": null,
+  "schema": "rising-lands/native-abi-play-benchmark/1",
+  "scope": "Release C ABI in app play order, reused caller buffers, hud=True; excludes initialization, audit/export/hash work and presentation. Phase timers include ctypes call overhead. Optional sampling overhead is included.",
+  "source_revision": "88e3f0f1506785a41cc1de41bdbfa9ba6c8a7db7"
+}
