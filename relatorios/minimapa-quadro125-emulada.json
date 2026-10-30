@@ -113,6 +113,10 @@
   ],
   "equal": true
  },
+ "economy_source_sha256": {
+  "pesquisas-paralelas/economia/bancada_ciclo_trabalho.py": "d3340e20b395bbbd30541f244e3254719c47bda29bb186245c05d09948cd0348",
+  "pesquisas-paralelas/economia/capturar_ciclo_trabalho.py": "4a3ffccf1b7ed1d23fe903b22e16b560335e8caf20efb4f86eeefa3a3e8dc1f7"
+ },
  "frame": 125,
  "mismatches": [],
  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
@@ -134,16 +138,14 @@
   }
  ],
  "routine": "BatimentLogeEngin",
- "schema": "rising-lands/core-minimap-frame125-differential/1",
- "seconds": 143.197,
+ "schema": "rising-lands/core-minimap-frame125-differential/2",
+ "seconds": 123.81,
  "source_sha256": {
   "ferramentas/entrada_estruturas.py": "c673d9b066b873e1a172be9d30432c5ba3824e47ccff715217a8fd2d17fa48b5",
   "ferramentas/minimapa_estruturas.py": "9907d894d5bd4e9ce22d41b8f72aa9dc7ca54fbcc606c504a4f4fb763a6c6adc",
   "ferramentas/mundo_vivo.py": "a4c5c2e5f73d09ce6f7bcbd6a15dbbcc5d264cff1c880bc7602ebf317dc3df5c",
-  "ferramentas/validar_minimapa_quadro125.py": "b707d3dd6761bd6486d03f757e0d20f80c7426f52afd6a6ce6d4001759ce2666",
-  "ferramentas/visao_movimento.py": "cd61354c6afcd0bc26eb9e7a8db93f5a3cf056d95e58606476783d3e4695255c",
-  "pesquisas-paralelas/economia/bancada_ciclo_trabalho.py": "d3340e20b395bbbd30541f244e3254719c47bda29bb186245c05d09948cd0348",
-  "pesquisas-paralelas/economia/capturar_ciclo_trabalho.py": "4a3ffccf1b7ed1d23fe903b22e16b560335e8caf20efb4f86eeefa3a3e8dc1f7"
+  "ferramentas/validar_minimapa_quadro125.py": "0d747cbf2d9678d2be86e11bfd0efa815c1b1c6aaab52371c28c909b40e77ad3",
+  "ferramentas/visao_movimento.py": "cd61354c6afcd0bc26eb9e7a8db93f5a3cf056d95e58606476783d3e4695255c"
  },
  "summary": {
   "decouvre_terrain_in_situ": {
