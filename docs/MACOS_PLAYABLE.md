@@ -86,6 +86,27 @@ replacement audio is ever used. The bundle verifier re-hashes every audio file.
 - S1's single `PlaySnd_StopAllSound` at victory is not translated by Audio
   and is excluded explicitly.
 
+**Gates and speed (build `5e182f4`).** APP_BUILD passes: **122 consumer
+tests, zero skips**, including the five audio tests with the engine transport,
+plus both native smokes. The build manifest records `audio.status=bundled`
+(551 samples). `sh motor/validate.sh` passes unchanged: 75 original-x86
+comparisons, 0 mismatches; 63 Python tests and 10 renderer children. A
+75-second real-window run at the 60 cap, with the selected-actor order
+workload (`--orders-selected`), gives:
+
+- **60.009 game frames/s** and **59.943 displayed fps**, minimum full second
+  **57**. The no-audio baseline was 60.009 / 59.942 / 58.
+- audits off and no stop.
+- 4,376 transported requests: 3 PostSound and 4,373 Manage ticks.
+- 2 sounds actually started on the output device, 0 missing samples and 0
+  domain faults.
+
+Evidence: [benchmark](../apps/macos-preview/validation/m3-audio-play60-selected.json),
+[consumer tests](../apps/macos-preview/validation/m3-audio-consumer-tests.log),
+[engine gate](../apps/macos-preview/validation/m3-audio-engine-validate.log.gz).
+The app's Python inspection gate now consumes main's additive Graphics render
+API **1.10**. The Rust renderer contract stays 1.9.
+
 **Known limits (named requests).**
 
 - *Audio:* translate `PlaySnd_StopAllSound` (0x48aac5), `PostVolume`
