@@ -1,68 +1,66 @@
 # S1 next stops — 2026-10-30
 
-Baseline: merged `origin/main` `9ae3e4d`, including Economy `dfb87bd`.
-Only AI/runtime-owned changes and feature pushes are authorized. Original
-oracle: intact RISING.EXE SHA-256
+Merged main `3e2ed77`; bound Economy in `377c625`, detection in `ad5147a`,
+attack dispatch in `64128b5`, reload in `1ce1d6c`. Oracle is intact RISING.EXE SHA-256
 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+Indicators start after128, consume replay-checked S1 `bab6c7c`, and request
+all 16,922 remaining frames. No first difference has been observed.
+On `1ce1d6c`, strict/planning have no first difference. The domain gate passes
+141 tests, eight explicit skips. No sound stop is bypassed.
 
-| Equal through / stop frame | Stop | Owner | Contract / status |
+| Equal through / stop frame | Routine / call | Owner | Exact contract / status |
 |---|---|---|---|
-| 2546 / 2547 (previous run) | SetSortEngin `0x445fbc`, CALL `0x420f8c` | Economy | AX unit, DX exit cell; native S1 AX=4, DX=`0x0e0f`. Forwarding supplied by `dfb87bd`; fresh strict run now passes this frame. |
-| 3276 / 3277 (baseline strict/planning) | MineGetCapacite `0x475541`, CALL `0x44ca17` in CalculWorkEngin | AI/runtime binding; Economy query | AX=u16 mine index; native S1 AX=0, EAX out=`0x31` (49), other six data registers preserved. Fixed in `8b6f1c9`: 101 native comparisons, zero mismatches; both chain reruns pass this frame. |
-| 3850 / 3851 (current strict/planning) | SacGetCapacite `0x475736`, InputGame CALL `0x4299da` | Economy | AX=u16 cell; native AX=`0x1f18` (7960), object=`0x43`, quantity=4, EAX out=`0x47860004`. Other six data registers preserved. Exact contract below; no declared planning bypass, chain stopped. |
+| 2546 / 2547, resolved | SetSortEngin `0x445fbc`, CALL `0x420f8c` | Economy | AX=unit, DX=exit cell; native 4 / `0x0e0f`. Economy `dfb87bd` resolves; passes later runs. |
+| 3276 / 3277, resolved | MineGetCapacite `0x475541`, CALL `0x44ca17` | AI/runtime binding, Economy query | AX=mine index; native 0 → EAX=49. `8b6f1c9`, 101 native comparisons/0 mismatches; passes later runs. |
+| 3850 / 3851, resolved | SacGetCapacite `0x475736`, CALL `0x4299da` | AI/runtime binding, Economy query | Native AX=`0x1f18`, object=`0x43`, quantity4 → EAX=`0x47860004`, six other registers preserved. `377c625`, 274 native comparisons/0 mismatches; passes later runs. |
+| **10800 / between_frames10801, strict** | AffGame `0x417698`, outer CALL `0x475063`, guard `0x41591f` | **Graphics** | Live monster count2; owner guard proves only0/1. Extend native display domain to2. Declared Graphics planning bypass exists; exact native observation below is at11501. |
+| 11662 / frame11663, detection resolved | iabDetection_AjouteEnnemiOuAlerteConflit `0x489b5a`, indirect CALL `0x482e2e` (return `0x482e31`) | AI/runtime binding, Combat synchronous model | Native EAX17, EDX8, EBX17, ECX`0x51ac40`, ESI17, EDI19, EBP`0x2007e18`, ESP`0x2007df8`; group19/battle1 → EAX`0x512380`, EDX1, five preserved. `ad5147a`, 35 fresh native comparisons/0 mismatches; passes latest planning. |
+| 11662 / frame11663, attack binding resolved | EnginNextEtape state1/24 `0x456886`; nested CalculAttaqueEngin `0x451914`, CALL `0x4568a3` | AI/runtime binding, Combat body | DI17, ESI`0x474a9254`; EAX1, EBX=EDX`0x1254`, ECX`0x474a9254`, EBP`0x14`, ESP`0x2007e2c`. Combat void body to`0x454ccd`. Bound in `64128b5`; fresh full native parent differential equals all25,197 game blocks/22 changed bytes, zero mismatches; passes planning through11741. |
+| 11741 / frame11742, reload resolved | EnginNextEtape reload branch `0x454587` in `0x45442c`, CALL `0x456ead` | AI/runtime placement, Core arithmetic | Native EAX0, EBX0, ECX=ESI`0x474a9254`, EDX3, EDI17, EBP20, ESP`0x2007e2c`: unit17 reload0, limit20, modifier0 → u16`[0x474a9356]`=1. Original243-state capture `6985c60` precedes binding Core `avancar_recarga`. Fresh full parent equals all25,197 game blocks/three changed bytes, zero mismatches; the earlier attack parent is freshly equal too. Passes planning through11752. |
+| **11752 / frame11753, planning** | PlaySnd_PostSound `0x48aa79`, CALL `0x4525a1`, return `0x4525a6` (`CalculAttaqueEngin+0xc92`) | **Combat emitter metadata; Audio M3 boundary** | Original pre-CALL EAX`0x50`, EDX`0x2300`, EBX`0x474a9358`, ECX0, ESI`0x474a9254`, EDI=EBP17, ESP`0x2007dbc`; pushed volume90. Forward the original CALL site with four request registers/volume to the existing scenario boundary. Public `CombateRaidVivo.som` omits that site. No declared planning bypass exists; stop here. |
 
-Strict and `--diagnostico-planejamento` indicator checks use replay-checked
-Missions S1 `bab6c7c`, starting after frame 128 and requesting 16,922 frames.
-Baseline strict and planning: 3,148 equal frames, 129–3276, no first difference;
-stop in frame 3277. Report: [s1-next-strict.json](validacao/s1-next-strict.json).
-Current source `8b6f1c9`: **3,722 equal frames, 129–3850**, no first difference;
-stop in frame 3851. Report: [s1-mine-strict.json](validacao/s1-mine-strict.json).
-Planning: `.local/m3-1/s1-mine-planejamento.json`, zero Graphics bypasses.
-Planning output stays under `.local/`; its only declared bypass facility is
-Graphics' display-path stops. It cannot bypass a missing logic provider.
+Latest completed strict: **10,672 equal frames, 129–10800**, no difference,
+[s1-recarga-strict.json](validacao/s1-recarga-strict.json).
+Latest completed planning: **11,624 equal frames, 129–11752**, no difference,
+then the sound emitter at11753; 953 declared Graphics bypasses. Report remains ignored:
+`.local/m3-1/s1-recarga-planejamento.json`. Planning is diagnostic, never acceptance.
 
-S1 pass-2 manifest is absent from latest fetched main `84e4fe7` and Missions
-`7eeb395`; no S1 pin, part chains or whole-state proof is claimed.
+Graphics exact observed contract: [native entry](evidencias/s1-guarda-monstros-original.json)
+is at **between_frames11501**, the first available native snapshot after the
+strict stop. Entry`0x417698`, CALL`0x475063`: EAX=ESI=EDI=EBP=0, EBX3,
+ECX`0xc01d0001`, EDX`0x2007fe8`, ESP`0x2007fe4`; u8/u32`[0x50b178]`=2,
+mode`0x12`, view(10,10). Both native states11500/11501 match S1 and code is
+unchanged. The display provider consumes live memory, no explicit game-register
+arguments. Snapshot11500 was copied/hash-checked from Core's read-only input:
+`db59fb6c15913a5ffa8474e54267e3d4b7ef0e7332b87502e73011c7baf58c94`.
 
-Original-only mine capture: [consulta-mina-original.json.xz](evidencias/consulta-mina-original.json.xz),
-101 returns (real S1 call plus 20 indices × five reserve values); no non-stack
-stores or boundaries. The real entry is EAX=0, EBX=`0x101`, ECX=1,
-EDX=`0xc16`, ESI=`0x474a8cf0`, EDI=EBP=12, ESP=`0x2007db4`;
-return ESP=`0x2007db8`. The only native read is u16 `[0x509956]`=`0x31`.
-Snapshot 3250 was copied to ignored `.local/m3/` from Core's read-only native
-inputs and hash-checked: `169488a6e34ce20586a087bf846682cdcba8cc2905efbc27f12f43125ae4a884`.
-All 28 states, 3250–3277, equal the committed original trajectory; code unchanged.
+The [sound parent observation](evidencias/s1-som-ataque-pai-original.json)
+checks all four states11750–11753, unchanged code. Sound-library bodies remain
+Missions' explicit unopened-scenario boundaries: unchanged EAX, cleanup4,
+no modeled library effects. This is not Audio's real returning-EAX0 provider.
+The generic routine-entry observer cannot see a boundary intercepted by the
+oracle; that failed attempt is retained in the journal. The successful parent
+observation hooks the real CALL before interception, recording all seven data
+registers and ESP. The live M3 emitter callback needs original CALL provenance;
+AI/runtime supplies the phase. Do not substitute site0 or infer it from the
+request after the fact. Combat's subsequent sound requests in that same native
+parent are CALL`0x45063f` (EnginInfligeDegat+0x354 return): EAX`0x50`, EDX`0x50100`,
+EBX`0x474a89a4`, ECX0, volume180; and CALL`0x4510b1` (InfligeDegat+0x842 return):
+EAX`0x50`, EDX`0x50700`, EBX`0x496ac8`, ECX0, volume256. Those later calls and
+damage/diplomacy effects have not been consumed by the Python chain. No
+undeclared game/sound boundary is suppressed. Snapshot11750 was copied and
+hash-checked from Core's read-only native input:
+`0399b6dcef842a37ed3a383615a75ed923d6ba7c2b5a5fe5e88000bec1d2eb54`.
 
-Binding: `provedores_entrada_ia.consulta_capacidade_mina(m, regs, chamada)`
-routes through `DonosM3.externo`, requires known AX in 0..19, returns exact
-seven data registers and optional ESP+4, preserves explicit unknown bits and
-rejects pushed words. It reads Economy's `RecursosTerreno.capacidade_mina`
-on the live 80-byte table; no synthetic constructor or table copy. No mutations
-or callbacks; earlier caller effects remain. Evidence was committed at `bb99dac`
-before binding. [Native differential](validacao/consulta-mina-native.json)
-freshly reproduces all 101 original cases and compares complete and partial
-register routes; the real S1 ESP also agrees. Three focused tests pass.
+New Economy routes: [native differential](validacao/donos-economia-s1-native.json),
+**1,058/1,058 equal** (274 sack +273 pipe +511 technology). All seven registers,
+ESP, ordered stores, live getter input registers/order/sites and x87 metadata
+compare. Raw routes require all seven known registers. The scalar sack projection
+marks opaque preserved carriers unknown; no carrier selects behavior/supplies
+consumed EAX. Technology uses live owner getters. Detection and attack evidence
+are committed before their adapters; no battle/attack algorithm is copied.
+Latest completed domain gate: **141 tests, eight explicit skips, zero failures**.
 
-Economy request: provide live-memory **SacGetCapacite**, known AX cell, no
-pushed arguments or callbacks. Object `[u32[0x507d74]+cell]` outside `0x42..0x44`
-returns EAX=0; inside returns `(u32[0x507dac] & 0xffff0000) | quantity_byte`.
-All other data registers are preserved, plain RET advances ESP by four, and
-no non-stack byte is written. InputGame's consumer API is
-the `SacGetCapacite(celula=u16) -> EAX` callback in `Provedores`; it stores AX to
-`0x49620c` at its information-panel tail. Preserve the raw register contract
-in the owner provider even though this consumer uses the low word.
-
-[Actual native S1 call](evidencias/s1-parada-saco-original.json): entry
-EAX=EBX=ESI=`0x1f18`, ECX=`0x1f00`, EDX=`0x47891000`, EDI=0,
-EBP=`0x2007ea4`, ESP=`0x2007e68`; exit EAX=`0x47860004`, ESP=`0x2007e6c`,
-all six other data registers unchanged. Type/quantity pointers are
-`0x47820000` / `0x47860000`; observed bytes are `[0x47821f18]=0x43` and
-`[0x47861f18]=4`. No stores/boundaries. The leased bounded replay checks all
-**602 states, 3250–3851**, against the committed native trajectory, code
-unchanged (390.908 seconds). This native observation is not a Python
-whole-state proof; Python remains stopped inside frame3851.
-
-Validation: [run record](validacao/s1-next-stops-validation.json), **132 tests,
-eight explicit skips, zero failures/errors**. Reproduce the contract through
-the shared heavy lease with `capturar_parada_s1_ia.py --rotina SacGetCapacite
---chamada 0x4299da --de 3250 --ate 3851 --saida <new-owned-or-local-path>`.
+S1 pass-2 manifest is absent on latest fetched main `1531678` and Missions
+`7eeb395`. `fixar S1` / strict `tudo --janelas S1` have not run; no whole-state
+S1 proof or part chains are claimed. Feature pushes only; no main integration.

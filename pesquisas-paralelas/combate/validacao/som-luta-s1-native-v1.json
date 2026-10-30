@@ -1,0 +1,157 @@
+{
+ "schema": "rising-lands/combat-s1-sound-differential/1",
+ "native": true,
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "source_sha256": {
+  "combate_raid_vivo.py": "07991c38291d66763c44f71748c5fbaa1bed2b3c1e6a403a2d0d8b8f31d7d6c8",
+  "luta_fatal_viva_combate.py": "47efd45f9f9d7acb759f906ae17b3c0b26f46d55e7f1d2d9e16404fd540deed7",
+  "ciclo_morte_luta_combate.py": "4bf4f7cd83c1a2112d56a23951dff1b6631a8dcb7540b977a1bab9bc7e76226f",
+  "validar_som_luta_s1_combate.py": "b5af19b6b1342638a45a07170c2883f35411c3092727e68e281475a0250f11b4"
+ },
+ "capture_sha256": "a444e762b24a5ffe11b294783012cc64524ce287411a1369d409739ef356ba48",
+ "summary": {
+  "cases": 13,
+  "requests": 25,
+  "real_window_requests": 11,
+  "mismatches": 0,
+  "routines": {
+   "EnginInfligeDegat": 3,
+   "InfligeDegat": 4,
+   "CalculAttaqueEngin": 4,
+   "SetDyingEngin": 1,
+   "ProjectileCalcul": 1
+  }
+ },
+ "cases": [
+  {
+   "case": 0,
+   "frame": 11753,
+   "routine": "EnginInfligeDegat",
+   "state_equal": true,
+   "requests_equal": true,
+   "native_state_equal": true,
+   "native_requests_equal": true,
+   "requests": 1
+  },
+  {
+   "case": 1,
+   "frame": 11753,
+   "routine": "InfligeDegat",
+   "state_equal": true,
+   "requests_equal": true,
+   "native_state_equal": true,
+   "native_requests_equal": true,
+   "requests": 2
+  },
+  {
+   "case": 2,
+   "frame": 11753,
+   "routine": "CalculAttaqueEngin",
+   "state_equal": true,
+   "requests_equal": true,
+   "native_state_equal": true,
+   "native_requests_equal": true,
+   "requests": 3
+  },
+  {
+   "case": 3,
+   "frame": 11802,
+   "routine": "InfligeDegat",
+   "state_equal": true,
+   "requests_equal": true,
+   "native_state_equal": true,
+   "native_requests_equal": true,
+   "requests": 1
+  },
+  {
+   "case": 4,
+   "frame": 11802,
+   "routine": "CalculAttaqueEngin",
+   "state_equal": true,
+   "requests_equal": true,
+   "native_state_equal": true,
+   "native_requests_equal": true,
+   "requests": 2
+  },
+  {
+   "case": 5,
+   "frame": 11857,
+   "routine": "SetDyingEngin",
+   "state_equal": true,
+   "requests_equal": true,
+   "native_state_equal": true,
+   "native_requests_equal": true,
+   "requests": 2
+  },
+  {
+   "case": 6,
+   "frame": 11857,
+   "routine": "EnginInfligeDegat",
+   "state_equal": true,
+   "requests_equal": true,
+   "native_state_equal": true,
+   "native_requests_equal": true,
+   "requests": 3
+  },
+  {
+   "case": 7,
+   "frame": 11857,
+   "routine": "InfligeDegat",
+   "state_equal": true,
+   "requests_equal": true,
+   "native_state_equal": true,
+   "native_requests_equal": true,
+   "requests": 3
+  },
+  {
+   "case": 8,
+   "frame": 11857,
+   "routine": "CalculAttaqueEngin",
+   "state_equal": true,
+   "requests_equal": true,
+   "native_state_equal": true,
+   "native_requests_equal": true,
+   "requests": 4
+  },
+  {
+   "case": 9,
+   "frame": 11968,
+   "routine": "CalculAttaqueEngin",
+   "state_equal": true,
+   "requests_equal": true,
+   "native_state_equal": true,
+   "native_requests_equal": true,
+   "requests": 1
+  },
+  {
+   "case": 10,
+   "frame": 11975,
+   "routine": "EnginInfligeDegat",
+   "state_equal": true,
+   "requests_equal": true,
+   "native_state_equal": true,
+   "native_requests_equal": true,
+   "requests": 1
+  },
+  {
+   "case": 11,
+   "frame": 11975,
+   "routine": "InfligeDegat",
+   "state_equal": true,
+   "requests_equal": true,
+   "native_state_equal": true,
+   "native_requests_equal": true,
+   "requests": 1
+  },
+  {
+   "case": 12,
+   "frame": 11975,
+   "routine": "ProjectileCalcul",
+   "state_equal": true,
+   "requests_equal": true,
+   "native_state_equal": true,
+   "native_requests_equal": true,
+   "requests": 1
+  }
+ ]
+}

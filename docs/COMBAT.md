@@ -2,6 +2,81 @@
 
 Owner: combat. Source and tests live in `pesquisas-paralelas/combate/`. Shared damage, reload, movement, and task primitives remain in `ferramentas/`; changes there belong to core and require a contract handoff.
 
+## S1 fight sound call sites (2026-10-30)
+
+`CombateRaidVivo.som` and `LutaFatalViva` now preserve the original CALL
+instruction address as `chamada=site` when the callback declares `chamada`
+or `**kwargs`. Existing three-argument callbacks still receive the same
+inputs. This uses Core's committed `selecao_ordens.chamar_som`; no foreign
+source file is pinned or changed. The implementation binds the origin at
+each emitter, including nested projectile impacts and death effects.
+
+| Emitter | Request | CALL / return |
+|---|---|---|
+| `CalculAttaqueEngin` firing | PostSound | `0x4525a1` / `0x4525a6` |
+| `EnginInfligeDegat` hit | PostSound | `0x45063f` / `0x450644` |
+| `InfligeDegat` local alert | PostSound | `0x4510b1` / `0x4510b6` |
+| `BatimentInfligeDegat` structure hit | PostSound | `0x41a331` / `0x41a336` |
+| Ordinary `SetDyingEngin` | StopSound | `0x4449c3` / `0x4449c8` |
+| Ordinary `SetDyingEngin` death voice | PostSound | `0x444a1b` / `0x444a20` |
+
+PostSound receives the four u32 request registers `EAX, EDX, EBX, ECX` and
+one pushed u32 volume in `[volume]`. StopSound consumes only `EAX` (the
+handle address) and `[]`, as Audio's public request protocol specifies.
+Unit `+0x104`, structure `+0x100` and alert `0x496ac8` references remain real
+live addresses. The `LutaFatalViva._som` wrapper forwards the site through
+Core-originated effects too. No queue, sound return, callback order or
+mutation order is substituted. In particular, firing/damage clear `+0xf9`
+before posting, and death sends message 0x44 before stop/post and state 4.
+Callback exceptions propagate once, retaining earlier effects.
+
+**Original-first evidence.** Evidence commit `426bc53` precedes the routing
+change. The [first window](../pesquisas-paralelas/combate/evidencias/som-luta-s1-original-v2.json.xz)
+resumes frame 11750 through 12000; the
+[later window](../pesquisas-paralelas/combate/evidencias/som-morte-s1-original-v2.json.xz)
+resumes 12000 through 12250. Passive hooks record actual pre-CALL registers,
+volume and site while the inherited S1 sound boundary stays installed.
+All 500 resumed frames match the committed S1 trajectory (502 checks including
+both opening checkpoints); executable code is unchanged. Oracle: intact EXE
+SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+At frame 11753 the capture confirms EAX=`0x50`, EDX=`0x2300`,
+EBX=`0x474a9358`, ECX=0, ESI=`0x474a9254`, EDI=EBP=17,
+pre-CALL ESP=`0x2007dbc`, volume 90, return `0x4525a6`.
+The raw recordings remain unchanged under ignored `.local/`; the published
+artifacts losslessly encode one complete state anchor plus exact parent-entry
+deltas, checking every reconstructed byte and retaining raw-capture provenance.
+
+**Audit.** The executable-wide direct-call scan and original instruction
+contexts are included in both captures. Projectile code
+`[0x46dfa0,0x46fc8b)` has no direct PostSound/StopSound call; its impacts route
+through the hit, alert and death sites above. Core's existing `VoixOffAsk`
+stop/post sites `0x41a1d3`/`0x41a221` are also observed and compared through
+the wrapper. Economy's `0x455660`/`0x45582d` calls occur in the later window
+and remain owned by Economy. Other audited sites are structure/turret/entry
+`0x41e17f`, `0x4272a3`, `0x42799e`; separate alert helper `0x440b59`;
+Core retirement `0x443c89`; and unit prelude `0x4545ee`, `0x45467b`.
+The special death StopSound at `0x444c84` remains behind the existing explicit
+spell/special dependency; active-handle preludes likewise retain their named
+PostVolume stop. These unsupported bodies are not claimed as newly completed.
+
+**Differential.** Fresh leased original executions reproduce **23 parent
+cases / 43 nested sound requests, 0 mismatches**, comparing every non-stack
+checkpoint byte and ordered consumed request registers, volumes and sites.
+The original leaves execute actual unopened sound bodies. Python uses the
+inherited scenario boundary's explicit unchanged-memory/EAX answer. Reports:
+[first 13 cases](../pesquisas-paralelas/combate/validacao/som-luta-s1-native-v1.json),
+[later 10 cases](../pesquisas-paralelas/combate/validacao/som-morte-s1-native-v1.json).
+There are **28 actual calls** in the original windows; parent cases overlap,
+so 43 is the nested comparison count. No raw parent return-register/flag or
+Python whole-frame/mission-completion claim is added.
+The comparison harness explicitly composes committed Core geometry/voice and
+AI city-message providers for structure-hit parents. It consumes only the
+known low word from Core's partial adjacent-cell result; unknown upper bits
+are not treated as known. Production foreign-provider contracts remain explicit.
+Final `python3 -B scripts/check.py --domain combat`: **308 tests / 156
+optional native skips / 0 failures or errors**, documentation links valid
+([gate log](../pesquisas-paralelas/combate/validacao/som-sites-domain-gate.log)).
+
 ## Current state (2026-10-30 07:15)
 
 All Combat deliveries below are on `main` (the last Combat merge is

@@ -32,6 +32,9 @@ struct MacOSLiveDriver {
  uint8_t pixels[480000],palette[768];
  uint8_t *bulk,*surface_hashes,*state_hashes; uint32_t bulk_capacity,surface_count,state_count,audit_limit;
  Entry *entries; Span *spans; uint32_t entry_count,span_count;
+ /* Play-mode sound request transport (kind10 copies plus Manage ticks). */
+ int sound_capture; RlPlayerInputEvent *events; uint32_t event_capacity,sound_count; uint64_t sound_dropped,sound_errors;
+ MacOSSoundEvent sounds[4096];
 };
 uint32_t macos_live_abi_version(void){return 1;}
 uint32_t macos_live_engine_binding(void){
@@ -114,6 +117,27 @@ int32_t macos_live_validation(MacOSLiveDriver*d,uint32_t enabled){
  if(c)return fail(d,c,"execution mode");
  d->validation=(int)enabled;return 0;
 }
+static void sound_push(MacOSLiveDriver*d,MacOSSoundEvent e){if(d->sound_count==4096){d->sound_dropped++;return;}d->sounds[d->sound_count++]=e;}
+/* Copies the engine's ordered kind-10 requests after each play phase. The WinMain
+ * loop calls PlaySnd_Manage before every PeekMessage: one tick opens phase 2 and,
+ * when phase 2 dispatched requests, the loop's final tick follows them. Queries
+ * never consume or modify engine state; failures only count, never stop play. */
+static void sound_collect(MacOSLiveDriver*d,uint32_t phase){
+ uint32_t n=0;int c=d->rl_eventos_entrada(d->world,d->events,d->event_capacity,&n);
+ if(c==6&&n>d->event_capacity&&n<=65536){RlPlayerInputEvent*grown=realloc(d->events,(size_t)n*sizeof(*grown));if(grown){d->events=grown;d->event_capacity=n;c=d->rl_eventos_entrada(d->world,d->events,d->event_capacity,&n);}}
+ if(c){d->sound_errors++;return;}
+ uint32_t frame=(uint32_t)(d->status.frames+1),requests=0;
+ if(phase==2)sound_push(d,(MacOSSoundEvent){0,frame,2,0x460220,0,0,0,0,0,0});
+ for(uint32_t i=0;i<n;i++){RlPlayerInputEvent*e=&d->events[i];if(e->kind!=10)continue;
+  sound_push(d,(MacOSSoundEvent){e->values[0]?1:2,e->frame,e->phase,e->site,e->values[1],e->values[2],e->values[3],e->values[4],e->values[6],e->values[5]});requests++;}
+ if(phase==2&&requests)sound_push(d,(MacOSSoundEvent){0,frame,2,0x460220,0,0,0,0,0,0});
+}
+int32_t macos_live_sound_capture(MacOSLiveDriver*d,uint32_t enabled){if(!d||enabled>1)return 1;d->sound_capture=(int)enabled;d->sound_count=0;return 0;}
+uint32_t macos_live_sound_events(MacOSLiveDriver*d,MacOSSoundEvent*out,uint32_t capacity){
+ if(!d||!out)return 0;uint32_t n=d->sound_count<capacity?d->sound_count:capacity;
+ memcpy(out,d->sounds,n*sizeof(*out));memmove(d->sounds,d->sounds+n,(d->sound_count-n)*sizeof(*out));d->sound_count-=n;return n;
+}
+uint64_t macos_live_sound_dropped(MacOSLiveDriver*d){return d?d->sound_dropped+d->sound_errors:0;}
 static int input_error(MacOSLiveDriver*d,const char*name){d->status.stopped=1;snprintf(d->status.message,sizeof(d->status.message),"%s",name);return 1;}
 int32_t macos_live_event(MacOSLiveDriver*d,uint32_t kind,uint32_t msg,int32_t x,int32_t y,uint32_t wp,uint32_t vk,uint32_t down){
  if(!d||d->validation||d->status.stopped)return 1;
@@ -155,6 +179,7 @@ int32_t macos_live_input_phase(MacOSLiveDriver*d,uint32_t phase,const MacOSDecla
  if(c)return fail(d,c,phase==2?"entrada entre quadros":"entrada CalculGame");
  d->status.phase_index=(uint32_t)(2*d->status.frames+(phase==2?1:2));
  d->input_next_phase=phase==2?3:2;
+ if(d->sound_capture)sound_collect(d,phase);
  if(phase==3){d->status.frames++;d->declared_frames++;uint64_t g=0;uint32_t p=0,counter=0;c=d->rl_render_geracao(d->world,&g,&p,&counter);if(c)return fail(d,c,"generation after input");d->status.counter=counter;}
  return 0;
 }
@@ -199,4 +224,4 @@ int32_t macos_live_read(MacOSLiveDriver*d,uint32_t address,uint32_t size,uint8_t
  if(!d||!out||!size||!d->validation)return 1;uint32_t n=0;int c=d->rl_projetar_tudo(d->world,d->bulk,d->bulk_capacity,&n);if(c)return c;
  uint32_t off=4;for(uint32_t i=0;i<le(d->bulk)&&off+8<=n;i++){uint32_t base=le(d->bulk+off),len=le(d->bulk+off+4);off+=8;if((uint64_t)off+len>n)return 3;if(address>=base&&(uint64_t)address+size<=(uint64_t)base+len){memcpy(out,d->bulk+off+address-base,size);return 0;}off+=len;}return 3;
 }
-void macos_live_free(MacOSLiveDriver*d){if(!d)return;if(d->renderer&&d->rl_render_liberar)d->rl_render_liberar(d->renderer);if(d->world&&d->rl_liberar_mundo)d->rl_liberar_mundo(d->world);if(d->library)dlclose(d->library);free(d->bulk);free(d->surface_hashes);free(d->state_hashes);free(d->entries);free(d->spans);free(d);}
+void macos_live_free(MacOSLiveDriver*d){if(!d)return;if(d->renderer&&d->rl_render_liberar)d->rl_render_liberar(d->renderer);if(d->world&&d->rl_liberar_mundo)d->rl_liberar_mundo(d->world);if(d->library)dlclose(d->library);free(d->bulk);free(d->surface_hashes);free(d->state_hashes);free(d->entries);free(d->spans);free(d->events);free(d);}

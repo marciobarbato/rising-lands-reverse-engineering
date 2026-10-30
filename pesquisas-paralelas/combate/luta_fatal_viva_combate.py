@@ -10,6 +10,7 @@ from recontagem_luta_combate import recontar_registradores
 from etapa_viva_luta_combate import etapa_viva_luta
 from refugio_luta_combate import buscar_refugio, refugio_registradores
 from chamadas_quadro_core import terreno_esta_descoberto
+from selecao_ordens import chamar_som
 
 
 class LutaFatalViva:
@@ -21,8 +22,8 @@ class LutaFatalViva:
         self.mensagens=MensagensLuta(memoria,self.combate)
         self.ciclo=CicloMorteLuta(memoria,self.combate,self.mensagens,som=self._som if som is not None else None)
 
-    def _som(self,nome,regs,pilha):
-        result=self.som(nome,regs,pilha)
+    def _som(self,nome,regs,pilha,*,chamada=None):
+        result=chamar_som(self.som,nome,regs,pilha,chamada)
         # Original unopened-library prefix: PostSound dispatches through the
         # fixed private object, returns0, and leaves EBX=object, ECX=flags,
         # EDX=0. Audio's provider checks that exact inherited private image.

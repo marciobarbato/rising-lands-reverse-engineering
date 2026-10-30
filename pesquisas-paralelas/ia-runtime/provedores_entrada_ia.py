@@ -329,6 +329,10 @@ def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None, estrutura
                        BatimentInitAttaqueSelect=combate('BatimentInitAttaqueSelect'))
     funcoes['GetStatusRecrute'] = lambda tipo, jogador: recrutamento().status(tipo, jogador)
     if donos is not None:
+        # InputGame consumes only EAX from this read-only AX query. The other
+        # six registers are explicitly unknown preserved carriers, never inputs
+        # selecting behavior; the exact seven-register route remains available.
+        funcoes['SacGetCapacite'] = donos.capacidade_saco
         # The M3 owners (``DonosM3``): group selection and view (tags 0xb/0xc, the group key), the minimap
         # press, entry into a structure (tag 0x10 sub 3) and the colonist release (tag 0x21).
         for nome in ('SauveSelectionGroupe', 'RestaureSelectionGroupe', 'EnginGetCentreGroupe',
@@ -429,6 +433,19 @@ class DonosM3:
         self.nomes_core = frozenset(ROTINAS_ECONOMIA)
         self.nomes_caverna = frozenset(caverna_recrutamento.ROTINAS)
         self.nomes_ciclo = frozenset(ciclo_trabalho.ROTINAS)
+        lacunas = _modulo_economia('lacunas_economia_s1')
+        tuyau = _modulo_economia('tuyau_economia_s1')
+        tecnologia = _modulo_economia('tecnologia_economia_s1')
+        self._economia_s1 = {
+            **{n: lacunas.provedor_lacunas_economia_s1(lacunas.LacunasEconomiaS1(m))
+               for n in lacunas.ROTINAS},
+            **{n: tuyau.provedor_tuyau_economia_s1(tuyau.TuyauEconomiaS1(m))
+               for n in tuyau.ROTINAS},
+        }
+        self.tecnologia_s1 = tecnologia.TecnologiaEconomiaS1(m, externo=self._externo_tecnologia_s1)
+        provedor_tecnologia = tecnologia.provedor_tecnologia_economia_s1(self.tecnologia_s1)
+        self._economia_s1.update({n: provedor_tecnologia for n in tecnologia.ROTINAS})
+        self.nomes_tecnologia_s1 = frozenset(tecnologia.ROTINAS)
         # Core's single-record queries that ``provedor_entrada`` does not export (BatimentGetType, BatimentGetPlayer,
         # BatimentEnDestruction, ...): ``EntradaEstruturas.chamar`` runs them; each says which registers it changes.
         import entrada_estruturas as _ee
@@ -476,6 +493,8 @@ class DonosM3:
     def externo(self, nome, chamada, regs):
         from reinicio_ia import DependenciaIA
         self.chamadas.append((nome, chamada))
+        if nome in self._economia_s1:
+            return self._chamar_economia_s1(nome, chamada, regs)
         if nome == 'MineGetCapacite':
             return consulta_capacidade_mina(self.m, regs, chamada)
         if nome in self.nomes_recrutamento:
@@ -551,6 +570,67 @@ class DonosM3:
         if nome == 'iagUnitSendMessage' and self.mensagem_unidade is not None:
             return self.mensagem_unidade(regs, chamada)
         raise DependenciaIA(nome, chamada)
+
+    def _chamar_economia_s1(self, nome, chamada, regs):
+        """Forward every supplied register and metadata; preserve query unknowns.
+
+        The strict owner rejects omitted registers. Only SacGetCapacite and
+        TuyauEstSortie permit unknown preserved bits: known AX selects behavior.
+        Technology requires a complete known register file and keeps _x87_push.
+        """
+        from entrada_estruturas import ArgumentoNaoPassado
+        from reinicio_ia import DependenciaIA
+        from tecnologia_economia_s1 import DependenciaTecnologiaS1, ForaDoDominioTecnologiaS1
+        masks = dict(regs.get('_incertos') or {})
+        missing = [k for k in REG7 if k not in regs or masks.get(k, 0) &
+                   (M32 if nome in self.nomes_tecnologia_s1 else (0xffff if k == 'EAX' else 0))]
+        if missing:
+            raise ArgumentoNaoPassado(nome, chamada, missing)
+        try:
+            out = self._economia_s1[nome](nome, chamada, regs)
+        except (DependenciaTecnologiaS1, ForaDoDominioTecnologiaS1) as erro:
+            raise DependenciaIA(f'{nome} (Economy): {erro}',
+                                getattr(erro, 'chamada', getattr(erro, 'endereco', chamada))) from erro
+        if nome not in self.nomes_tecnologia_s1:
+            unknown = {k: v for k, v in masks.items() if k != 'EAX' and v}
+            if unknown:
+                out['_incertos'] = unknown
+        return out
+
+    def capacidade_saco(self, celula):
+        """Scalar InputGame projection of the exact read-only AX query.
+
+        Non-argument registers have opaque sentinel values and full unknown
+        masks. They are preserved by all native object/quantity branches and
+        discarded here. No sentinel may become a behavior input or result.
+        """
+        regs = {k: (0xa5a50000 + i*0x1111) & M32 for i, k in enumerate(REG7)}
+        regs['EAX'] = celula & 0xffff
+        regs['_incertos'] = {k: M32 for k in REG7 if k != 'EAX'}
+        out = self.externo('SacGetCapacite', 0x4299da, regs)
+        if (out.get('_incertos') or {}).get('EAX'):
+            raise ValueError('Unknown SacGetCapacite result cannot reach InputGame')
+        return out['EAX']
+
+    def _externo_tecnologia_s1(self, nome, chamada, regs):
+        """Live owner getters, exact ABI, all seven registers retained."""
+        from entrada_estruturas import ArgumentoNaoPassado
+        from reinicio_ia import DependenciaIA
+        missing = [k for k in REG7 if k not in regs or (regs.get('_incertos') or {}).get(k)]
+        if missing:
+            raise ArgumentoNaoPassado(nome, chamada, missing)
+        out = {k: regs[k] & M32 for k in REG7}
+        if nome == 'MissionGetNum':
+            from chamadas_quadro_core import numero_missao
+            out.update(numero_missao(self.m, regs['EAX']))
+        elif nome == 'PlayerGetType':
+            jogador = regs['EAX'] & 255
+            valor = _modulo_economia('quadro_economia').tipo_jogador(self.m, jogador)
+            out['EAX'] = ((regs['EAX'] & 0xffffff00) | valor) if jogador >= 4 else valor
+        else:
+            raise DependenciaIA(nome, chamada)
+        self.chamadas.append((nome, chamada))
+        return out
 
     def _nova_rotina_core(self, nome, chamada, regs):
         """Keep Core's partial-search and strict-query protocols, without inventing preserved registers or ESP.

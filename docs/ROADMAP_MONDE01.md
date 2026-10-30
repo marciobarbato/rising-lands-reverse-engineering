@@ -194,3 +194,9 @@ When a wave-1 front closes its mandate, the coordinator reallocates it rather th
 ## Model difficulty monitoring
 
 The coordinator reports a persistent observable difficulty only with evidence: repeated substantive errors, unresolved divergences despite available inputs, or inability to bound a stage after relevant attempts. Harness host errors (adapter types, sandbox SIGILL, lock waits) and read-only evidence gaps do not qualify. The human decides on model changes; nobody switches models automatically.
+
+## After MONDE01 (user decisions, 2026-10-30)
+
+- **Validation rigor for missions 2+.** MONDE01 keeps the full original-first rigor (Python reference chain, whole-state proofs on two machines). After it, every mission — including the content-rich ones from the [campaign inventory](../pesquisas-paralelas/inventario-campanha/README.md) (MONDE23, MONDE17A) — goes **Rust-direct with automatic validation only**: per-routine native differentials with generated inputs, Rust-vs-original comparisons at checkpoints (after load, every ~500–1,000 frames, at objective/raid/end events) with automatic bisection on mismatch, and outcome checks (load equality, objectives reachable, victory/defeat triggers). Long automatic runs on MONDE23 and 2–3 other large missions. No hand-written victory scripts, no frame-by-frame replay. If a divergence or doubt appears, that mission/content goes back to full rigor.
+- **Release items (human version only).** The 1x/2x/4x game-speed selector and the app opening directly into the game are built only when the game is complete. Until then the app keeps its research UI (game: Missão 1 → "Inspeção M2.2 · evidência aceita" → "Abrir Rust ao vivo" → Jogar).
+- **Music.** CD-DA tracks 02/03 need a "CD present" engine domain validated against new original captures before music can play exactly (see docs/MACOS_PLAYABLE.md, "Play-mode sound effects").

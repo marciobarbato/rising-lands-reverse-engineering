@@ -1,0 +1,204 @@
+{
+ "call": "0x456ead",
+ "caller_return": "0x456eb2",
+ "cases": [
+  {
+   "boundaries": [],
+   "caller": "CalculEnginNextEtape+0xfd",
+   "caller_return": "0x456eb2",
+   "changed_bytes": [
+    [
+     "0x474a92c8",
+     126,
+     127
+    ],
+    [
+     "0x474a92fd",
+     0,
+     1
+    ],
+    [
+     "0x474a9356",
+     0,
+     1
+    ]
+   ],
+   "entry_registers": {
+    "EAX": "0x11",
+    "EBP": "0x0",
+    "EBX": "0x11",
+    "ECX": "0x400",
+    "EDI": "0x0",
+    "EDX": "0x4",
+    "ESI": "0x0"
+   },
+   "esp": "0x2007ea8",
+   "exit_registers": {
+    "EAX": "0x1",
+    "EBP": "0x0",
+    "EBX": "0x11",
+    "ECX": "0x400",
+    "EDI": "0x0",
+    "EDX": "0x4",
+    "ESI": "0x0",
+    "ESP": "0x2007eac"
+   },
+   "frame": 11742,
+   "kind": "in_situ",
+   "local_entry_state": {
+    "blocks": 25198,
+    "path": ".local/m3-1/s1-reload-parent-entry.pickle",
+    "sha256": "b3c3c8bc0e536bf593ff02a2762d30d2e65498558cbec45fd6f34a90d7329b60"
+   },
+   "passages": [
+    {
+     "address": "0x454587",
+     "registers": {
+      "EAX": "0x0",
+      "EBP": "0x14",
+      "EBX": "0x0",
+      "ECX": "0x474a9254",
+      "EDI": "0x11",
+      "EDX": "0x3",
+      "ESI": "0x474a9254",
+      "ESP": "0x2007e2c"
+     }
+    }
+   ],
+   "phase": "frame11742",
+   "read_before_write": [
+    [
+     "0x43e130",
+     "eee14300"
+    ],
+    [
+     "0x442c4c",
+     "f42c4400"
+    ],
+    [
+     "0x4479b8",
+     "607a4400"
+    ],
+    [
+     "0x451908",
+     "dc234500"
+    ],
+    [
+     "0x454344",
+     "51484500"
+    ],
+    [
+     "0x4543cc",
+     "86684500"
+    ],
+    [
+     "0x4962c8",
+     "01"
+    ],
+    [
+     "0x4965dc",
+     "b80b1400"
+    ],
+    [
+     "0x4e0f38",
+     "00f09347"
+    ],
+    [
+     "0x4e19a0",
+     "00804a47"
+    ],
+    [
+     "0x507da8",
+     "00008547"
+    ],
+    [
+     "0x508f7c",
+     "de2d0000"
+    ],
+    [
+     "0x474a88a0",
+     "00"
+    ],
+    [
+     "0x474a88a2",
+     "05"
+    ],
+    [
+     "0x474a8912",
+     "01"
+    ],
+    [
+     "0x474a9254",
+     "040001"
+    ],
+    [
+     "0x474a9258",
+     "0400"
+    ],
+    [
+     "0x474a925c",
+     "1222"
+    ],
+    [
+     "0x474a92c6",
+     "01"
+    ],
+    [
+     "0x474a92c8",
+     "7e06"
+    ],
+    [
+     "0x474a92de",
+     "01"
+    ],
+    [
+     "0x474a92fc",
+     "0200"
+    ],
+    [
+     "0x474a930b",
+     "010800"
+    ],
+    [
+     "0x474a9330",
+     "00"
+    ],
+    [
+     "0x474a934c",
+     "00"
+    ],
+    [
+     "0x474a9356",
+     "0000ffffffff"
+    ],
+    [
+     "0x47852212",
+     "01"
+    ],
+    [
+     "0x47943424",
+     "8840"
+    ]
+   ],
+   "routine": "EnginNextEtape",
+   "stack_args": []
+  }
+ ],
+ "entry": "0x45442c",
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "recorder_sha256": "e1dc7231822b89574dad8e3b9ed786598213b41f6168ec1dc3b2ebdb897c3af4",
+ "routine": "EnginNextEtape",
+ "s1": {
+  "code_unchanged": true,
+  "frames_checked": 243,
+  "last_frame": 11742,
+  "snapshot": {
+   "path": ".local/m3/passo2/S1/instantaneo-11500.pickle",
+   "sha256": "db59fb6c15913a5ffa8474e54267e3d4b7ef0e7332b87502e73011c7baf58c94"
+  }
+ },
+ "schema": "rising-lands/ai-runtime-s1-next-stop-original/1",
+ "seconds": 167.316,
+ "source_revision": "d8ec4776b604ca93cd7a1e6f2a585f20430b69d5",
+ "translation_executed": false
+}
