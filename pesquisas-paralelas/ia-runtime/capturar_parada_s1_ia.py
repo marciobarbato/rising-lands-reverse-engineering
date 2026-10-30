@@ -26,6 +26,8 @@ def main():
     ap.add_argument('--saida', required=True)
     ap.add_argument('--unidade', type=int, help='select the actual zero-extended EAX unit at entry')
     ap.add_argument('--estado-local', help='save full original entry blocks under ignored .local only')
+    ap.add_argument('--passagem', type=lambda v: int(v, 0),
+                    help='keep only the first selected parent that actually reaches this original instruction')
     ap.add_argument('--entrada-deteccao', action='store_true',
                     help='also capture complete live records needed by Combat\'s public message adapter')
     args = ap.parse_args()
@@ -48,6 +50,16 @@ def main():
     reads = Leituras(s1.b.cpu)
     cases = []
     stores = []
+    hits = []
+    if args.passagem:
+        import unicorn
+        from unicorn import x86_const as X
+        def passage(cpu, address, size, extra):
+            if reads.ativo:
+                hits.append(dict(address=hex(address), registers={k: hex(cpu.reg_read(getattr(X, 'UC_X86_REG_'+k)))
+                    for k in bs.REGISTROS+('ESP',)}))
+        s1.b.cpu.hook_add(unicorn.UC_HOOK_CODE, passage, begin=args.passagem, end=args.passagem)
+        s1.b.cpu.ctl_flush_tb()
     if args.entrada_deteccao:
         import unicorn
         from unicorn import x86_const as X
@@ -60,14 +72,20 @@ def main():
 
     def choose(name, regs, ret, observer):
         if (observer.quadro == args.ate and ret == caller_return
-                and (args.unidade is None or regs['EAX'] == args.unidade)):
+                and (args.unidade is None or regs['EAX'] == args.unidade)
+                and not (args.passagem and cases)):
             stores.clear()
+            hits.clear()
             reads.iniciar()
             return True
         return False
 
     def close(case, blocks):
         case['read_before_write'] = reads.finalizar()
+        if args.passagem:
+            if not hits:
+                return
+            case['passages'] = list(hits)
         if state_path:
             import pickle
             state_path.parent.mkdir(parents=True, exist_ok=True)

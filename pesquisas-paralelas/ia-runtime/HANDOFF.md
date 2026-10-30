@@ -1167,3 +1167,17 @@ eight explicit skips, zero failures/errors**, 134.761 seconds, docs links pass.
 The reload observer is queued under the shared heavy lease, selecting the first
 actual native parent reaching that instruction; no increment binding exists
 at this checkpoint. Exact observed registers will be added after capture.
+
+### Original-first reload checkpoint
+
+`evidencias/s1-recarga-proxima-etapa-original.json` captures the first actual
+frame11742 parent reaching `0x454587`. All **243 native states11500–11742**
+equal S1, executable unchanged, no boundaries, 167.316 seconds. Parent unit17,
+CALL`0x456ead`, return`0x456eb2`, has the same entry registers as the earlier
+attack-transition parent. At the increment: EAX0, EBX0, ECX=ESI`0x474a9254`,
+EDX3, EDI17, EBP`0x14`, ESP`0x2007e2c`. The real reload counter is0,
+type.RECHARGE is20 and modifier3 is0; native stores1 at`0x474a9356`
+(unit17+0x102). The parent changes only three bytes (also the normal animation
+bytes), restores all six saved registers, and returns EAX1/ESP+4. Its full
+entry state stays ignored/hash-bound. This capture is committed before the
+reload increment is added; Core already owns the arithmetic.
