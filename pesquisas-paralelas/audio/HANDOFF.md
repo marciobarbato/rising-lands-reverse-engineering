@@ -737,3 +737,29 @@ exact tested commit, results and bytes/hashes. The prior delivery manifest is a
 historical snapshot of commit383b143; the refresh report describes the current
 payload. No milestone status, main push, device behavior or Rust implementation
 changes are included.
+
+
+## State at 2026-10-30 07:15
+
+Docs-only refresh; no research, capture or code change. `feat/re-audio` merged
+main `3874fcc` (it was 341 commits behind). The last Audio delivery,
+`d634edd` (M3 provider and stream), is on main via `cebd3da`; everything in the
+M3 section at the top of this file is integrated, not pending. No Audio WIP
+branch exists, and no Audio Codex session ran overnight.
+
+- Consumers on main: the Rust engine's `rl-core/src/player_audio.rs`
+  (unopened-display domain, ABI 1.5/1.6), Combat's fatal-fight/impact facade
+  (`domain='unopened-display'`), and Core's S1 query tools, which keep complete
+  sound-call registers (`a34f425`). AI/runtime has not yet cross-checked the
+  provider against its own `som` boundary. The macOS app plays no audio.
+- S1 coverage survey (`docs/core/S1_COVERAGE.md`): 6 Audio routines, all
+  boundary, 0 gaps; S1's boundary log has 177 PostSound requests.
+- Gate at this merge: `python3 -B scripts/check.py --domain audio` → 79 tests,
+  75 passed, 4 optional native skips, 0 failures (12.6 s). Native suites were
+  not rerun (MacBook resting).
+- Open, in order: S1 stream equality once pass-2 S1 lands (needs emitter phase
+  and caller return address from Core); PostVolume busy-handle branch; real
+  library/device initialization; StopAllSound and `MCICD_*` music at the result
+  screen (with Missions); app playback (macOS).
+
+`docs/AUDIO.md` now opens with a "Current state — 2026-10-30" summary.
