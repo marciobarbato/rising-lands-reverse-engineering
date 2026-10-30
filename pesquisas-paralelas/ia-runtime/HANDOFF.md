@@ -1123,3 +1123,33 @@ The post-detection strict indicator on `ad5147a` again equals 10,672 frames,
 at between_frames10801. Report: `validacao/s1-deteccao-strict.json`.
 The fresh domain gate passes 138 tests, eight skips, no failures/errors,
 140.392 seconds. Planning is still running at this capture checkpoint.
+
+### State-1/24 owner binding
+
+Planning on the detection implementation passes that handler and stops at
+`EnginNextEtape state1 0x456886`, frame11663, still 11,534 completed equal
+frames and no first difference (567.382 seconds). Native table entries1 and24
+share that target. `ataque_despacho_ia.AtaqueDespacho.ramo(sitio, unidade)`
+now lazily binds Combat's committed `CombateRaidVivo.ramo` over the same memory
+and Core world. It takes the actual u16 unit (native DI, ESI its record), calls
+one void owner body and returns to the parent's `0x454ccd` exit. No attack
+algorithm is copied; missing foreign effects become named stops and retain
+all prior effects. No sound/message/default callback is fabricated.
+
+Fresh leased `validar_ataque_despacho_ia.py` runs the intact parent and every
+callee from the hash-bound real frame11663 entry. The native return and all
+22 changed bytes reproduce the original capture. All 25,197 game blocks equal
+the composed Python parent, with zero differences; the ordered detection and
+attack-branch handoffs, actual call site and native register files compare.
+The semantic parent/Combat APIs discard exit registers; native register
+reproduction is checked against the original capture, not claimed as a new
+Python register API. Report: `validacao/ataque-despacho-native.json`. Two focused
+tests pass, including both original state-table entries and strict owned-source
+hash binding. Full indicator/gate reruns follow this passing checkpoint.
+
+The indicator now indexes immutable input/order reference records by frame,
+keeping every event and its within-frame order instead of scanning 245,482
+input events every frame. Flattening the index reproduces all original events;
+13 representative/edge frames normalize identically to the previous lookup.
+No normalization, compared field, model, native input or stopping rule changed.
+The indicator also reports hashes of the new owned detection/attack adapters.

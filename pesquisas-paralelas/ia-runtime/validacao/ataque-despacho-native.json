@@ -1,0 +1,70 @@
+{
+ "capture_sha256": "81fb3c132c31aef4ae8eef5cce1a2cd54440b7f5276e3d5842b3506f96a3ebf7",
+ "cases": [
+  {
+   "equal": true,
+   "game_blocks_compared": 25197,
+   "handoffs": [
+    {
+     "arguments": {
+      "alvo": 8,
+      "mensagem": 73,
+      "unidade": 17
+     },
+     "routine": "iagUnitSendMessage",
+     "site": "0x4547bf"
+    },
+    {
+     "arguments": {
+      "unidade": 17
+     },
+     "routine": "EnginNextEtape:state1",
+     "site": "0x456886"
+    }
+   ],
+   "handoffs_equal": true,
+   "memory_differences": [],
+   "native_capture_reproduced": true,
+   "native_handoff_registers": [
+    {
+     "address": "0x4829c8",
+     "registers": {
+      "EAX": "0x11",
+      "EBP": "0x14",
+      "EBX": "0x8",
+      "ECX": "0x11",
+      "EDI": "0x11",
+      "EDX": "0x49",
+      "ESI": "0x474a9254",
+      "ESP": "0x2007e28"
+     }
+    },
+    {
+     "address": "0x456886",
+     "registers": {
+      "EAX": "0x1",
+      "EBP": "0x14",
+      "EBX": "0x1254",
+      "ECX": "0x474a9254",
+      "EDI": "0x11",
+      "EDX": "0x1254",
+      "ESI": "0x474a9254",
+      "ESP": "0x2007e2c"
+     }
+    }
+   ],
+   "original_changed_bytes": 22
+  }
+ ],
+ "comparisons": 1,
+ "equal": 1,
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "schema": "rising-lands/s1-attack-dispatch-differential/1",
+ "source_revision": "9ce27f69dcf0c02758e1e481fc91fa081fee5fdd",
+ "source_sha256": {
+  "ataque_despacho_ia.py": "62e89b5db446a9502ba1ddc5c669aab698868c426a57bfa522358ae43106fc17",
+  "composicao_encadeada_ia.py": "957ccf27d0e13b29153c332d897f35f49bb7b9542174aef3772faa233be82cb0",
+  "proxima_etapa_quadro.py": "bf817a65b1ec5d07e811eade999421b729dd236871178e497e05577fc95a85cb",
+  "validar_ataque_despacho_ia.py": "602a322d9c9eea8013ee4cd18178e4cba69f033459d2e9efe54059448d50a61a"
+ }
+}

@@ -286,6 +286,8 @@ def _parar_pilha_nativa(sitio):
 def provedores(mapa, prov, mm, ctx, registro, janelas, travessias, fase, regs):
     """Original-name providers for every routine the three phases reach."""
     p = {}
+    from ataque_despacho_ia import AtaqueDespacho
+    p['EnginNextEtape:state1'] = AtaqueDespacho(mm, prov.mundo).ramo
     from deteccao_conflito_ia import detectar_alvo
     p['iabDetection_AjouteEnnemiOuAlerteConflit'] = lambda sitio, unidade, alvo: detectar_alvo(
         mm, unidade, alvo)['EAX']

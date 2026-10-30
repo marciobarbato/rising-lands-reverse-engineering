@@ -43,7 +43,7 @@ UNIDADES = (11, 12, 13, 14, 15)
 FONTES = tuple(f'pesquisas-paralelas/ia-runtime/{n}' for n in (
     'provar_entrada_ia.py', 'composicao_entrada_ia.py', 'entrada_ordens_ia.py', 'provedores_entrada_ia.py',
     'composicao_quadros_ia.py', 'composicao_encadeada_ia.py', 'affgame_hud_ia.py', 'proxima_etapa_quadro.py',
-    'construcao_entrada_ia.py'))
+    'construcao_entrada_ia.py', 'deteccao_conflito_ia.py', 'ataque_despacho_ia.py'))
 
 
 def git_show(ref, caminho):
@@ -108,6 +108,14 @@ def eventos_referencia(entradas, k):
         'peek_message', 'get_message', 'translate_message', 'dispatch_message', 'cursor', 'key')])
 
 
+def indexar_por_quadro(eventos):
+    """Stable reference-only index; keep every event and its within-frame order."""
+    indexed = {}
+    for event in eventos:
+        indexed.setdefault(event['frame'], []).append(event)
+    return indexed
+
+
 def normalizar_eventos(eventos):
     saida = []
     for e in eventos:
@@ -151,6 +159,8 @@ def main():
     quadros_ref = {q['frame']: q for q in jsonl(arquivos['quadros.jsonl.xz'])}
     entradas_ref = jsonl(arquivos['entradas.jsonl.xz'])
     comandos_ref = jsonl(arquivos['comandos.jsonl.xz'])
+    entradas_por_quadro = indexar_por_quadro(entradas_ref)
+    comandos_por_quadro = indexar_por_quadro(comandos_ref)
     t0 = time.monotonic()
     cap, estado, regs = estado_quadro128()
     _, _, entrada, m1 = carregar_cenario_exibicao()
@@ -169,13 +179,13 @@ def main():
             if r['phase'].startswith('frame'):
                 eventos = normalizar_eventos(roteiro.eventos)
                 roteiro.eventos.clear()
-                ref_ev = eventos_referencia(entradas_ref, k)
+                ref_ev = eventos_referencia(entradas_por_quadro.get(k, ()), k)
                 py = indicadores(MemoriaMapaRapida(comp.mapa))
                 dif = comparar_quadro(k, py, quadros_ref[k])
                 if eventos != ref_ev:
                     dif['inputs'] = dict(python=eventos[:12], probe=ref_ev[:12])
                 ordens_k = [o for o in ordens_py if o['frame'] == k]
-                ref_k = [c for c in comandos_ref if c['frame'] == k]
+                ref_k = comandos_por_quadro.get(k, [])
                 ord_py = [(o.get('event', 'SetPlayerOrdre'), o['tag'], o.get('word2'), o.get('word4'), o.get('word6'),
                            o.get('word8'), o.get('jump_target')) for o in ordens_k]
                 ord_ref = [(c['event'], c['tag'], c.get('word2'), c.get('word4'), c.get('word6'), c.get('word8'),

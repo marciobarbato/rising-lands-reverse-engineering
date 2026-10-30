@@ -30,6 +30,7 @@ FADIGA, SAIDA = 0x454851, 0x454ccd
 TIPOS_VARREDURA = frozenset({0, 1, 2, 3, 8, 0xb, 0xc, 0xf, 0x10, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19})
 ESTADO_PARADO, RAMO_PRODUCAO = 0x456966, 0x426918
 ESTADO_MOVENDO = 0x4563da          # state 2 (moving), the raid unit from counter 9000
+ESTADO_ATAQUE = 0x456886           # states 1/24; Combat's published void body
 
 
 def _parar(descricao, endereco):
@@ -136,6 +137,9 @@ def _trocar_estado(m, provedores, unidade, r, tabelas):
         return SAIDA
     if alvo == ESTADO_PARADO:
         _chamar(provedores, 'EnginNextEtape:state7', ESTADO_PARADO, unidade=unidade)
+        return SAIDA
+    if alvo == ESTADO_ATAQUE:
+        _chamar(provedores, 'EnginNextEtape:state1', ESTADO_ATAQUE, unidade=unidade)
         return SAIDA
     if alvo == ESTADO_MOVENDO:
         # 0x4563da: still short of the target cell +0x7e -> 0x4555a7 DeplaceEngin(AX = unit), exit.
