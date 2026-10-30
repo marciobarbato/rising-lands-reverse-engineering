@@ -207,11 +207,11 @@
  },
  "providers": "provedores_entrada_ia.provedores_vivos and construcao_viva (committed Core/Economy/Combat owners); EnginNextEtape: Core provedores_core + Economy BonusUnidades; sound requests return the EAX they receive (the frame bench declaration for PlaySnd_*)",
  "schema": "rising-lands/monde01-construction-keys-differential/1",
- "seconds": 151.402,
+ "seconds": 129.491,
  "source_sha256": {
-  "ferramentas/chamadas_quadro_core.py": "d8b3568c3346422744868a2b7900e4afdbf84c85e840450f9da5ec863bbb626a",
+  "ferramentas/chamadas_quadro_core.py": "67de7367d75a5e50176c43fe2c01cd48e281e56cd0d9eae22b22f74a44b70428",
   "ferramentas/minimapa_estruturas.py": "9907d894d5bd4e9ce22d41b8f72aa9dc7ca54fbcc606c504a4f4fb763a6c6adc",
-  "ferramentas/selecao_ordens.py": "e8eb78134dd44adbbef88354ea3219c6513f2a2173cc68227fa9fecaf47ab67c",
+  "ferramentas/selecao_ordens.py": "acf5ebde927f1c5a0275ddffa191d03bdb78a810dd5179cb1f7088b46eba17e8",
   "pesquisas-paralelas/combate/projeteis.py": "a25e6f4c386410e09b96d3b94d5e787f0ed44984264312af350ccb5f44f3ce89",
   "pesquisas-paralelas/economia/bonus_unidades.py": "b871634a6616fbbb4e1dce4587f588a29cbbe98f5677c0d0f8b332537dc9841c",
   "pesquisas-paralelas/economia/ordens_economia.py": "48c8fd6d63b7acdf7883e1a6a5b913435c3e35ab8e5eae2925f9f4ee84d46e69",
@@ -219,7 +219,7 @@
   "pesquisas-paralelas/ia-runtime/casos_construcao_teclas_ia.py": "19214b2dd35c969c8e5c4b093686035d0dded76f1113965287c7d912d0c33edb",
   "pesquisas-paralelas/ia-runtime/construcao_entrada_ia.py": "14d8519f20e7fc4c6e0fefaef3258e5745a79af33aebcf443c10904efedfba08",
   "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "0d3c50f9c07dcd4badb4d37217e3d6e8407c9146de968258addff2a2de982928",
-  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "457415a632d998584866b65f18d52995d22255076a596dfc0aac25cbe8ba0d00",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "03a314d152c6e0673d3aef7d2c6051b9d48ee985f94f70b358a908e8a7d07694",
   "pesquisas-paralelas/ia-runtime/proxima_etapa_quadro.py": "d9a3c39db33703c43d0cc16de2446b6cf860f894aa2d875a1828bbfda3f11f80",
   "pesquisas-paralelas/ia-runtime/validar_construcao_teclas_ia.py": "84ee8b219e3e7b0a604afd2398cf9347cf42c421b9d5f8bdc39867485d3db5e6"
  }

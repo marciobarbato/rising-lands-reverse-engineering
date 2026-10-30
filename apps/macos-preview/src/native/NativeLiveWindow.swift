@@ -355,7 +355,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
                 "checkpoint_verified":false,"verified_phases":s.phases_equal,"verified_checkpoints":s.checkpoints_equal,"verified_surfaces":s.surfaces_equal,
                 "observed":["counter":["address":"0x508f7c","bytes":4,"value":s.counter]],"blocks":0,"bytes":0,"memory":[],"input_policy":validationMode ? "record-only":"live-orders","live_stop":stop,
                 "benchmark_order_tags":benchmarkOrderTags,"execution_mode":validationMode ? "test":"play","native_metal":true,"native_engine_binding":macos_live_engine_binding()==1 ? "static-abi16":"dynamic-abi16","native_running":running,"native_metrics":timing,
-                "render":["status":s.disposition==2 ? "partial":s.frames==0 ? "undrawn":"full","hud":true,"version":[1,7],"backend":"Rust ABI 1.6 + Metal","equals_native_phase_end":equal,"native_phase_end_sha256":NSNull()]]
+                "render":["status":s.disposition==2 ? "partial":s.frames==0 ? "undrawn":"full","hud":true,"version":[1,9],"backend":"Rust ABI 1.6 + Metal","equals_native_phase_end":equal,"native_phase_end_sha256":NSNull()]]
     }
     func deliver(_ completion:(([String:Any])->Void)?=nil){
         let value=snapshot(),s=status(),isRunning=running

@@ -1,0 +1,1415 @@
+{
+ "schema": "rising-lands/macos-chain8-delivery/1",
+ "runtime_revision": "afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0",
+ "main_base": "6cdbc5a",
+ "engine_tree": "49a05a03ff273b66344d9618f0b78f87fc070a6a",
+ "production_sources_unchanged_after_build": true,
+ "app_build": {
+  "command": [
+   "python3",
+   "-B",
+   "compilar-jog\u00e1vel",
+   "--development-ref",
+   "HEAD",
+   "--inputs-root",
+   "/Users/marcio/git/Rising Lands",
+   "--data-root",
+   "/Users/marcio/git/Rising Lands/local-data/macos-playable"
+  ],
+  "RISING_PYTHON_RUNTIME": "/Users/marcio/git/Rising Lands/local-data/macos-preview/dependencies/python",
+  "passed": true,
+  "consumer_tests": 112,
+  "skips": 0,
+  "exercise_checks": 27,
+  "inspection_live_checks": 21
+ },
+ "engine_gate": {
+  "command": [
+   "sh",
+   "motor/validate.sh"
+  ],
+  "passed": true,
+  "rust_tests": 30,
+  "python_tests": 63,
+  "renderer_children": 10,
+  "original_x86_comparisons": 75,
+  "original_x86_mismatches": 0,
+  "original_x86_skips": 0,
+  "input_leaf_state_cases_equal": 666,
+  "input_leaf_adapter_skips": [
+   "KeyTestRelease changing key stream",
+   "InitInputPlayer allocator setup"
+  ],
+  "swift_metal_surfaces_equal": 128
+ },
+ "common_gate": {
+  "command": [
+   "python3",
+   "-B",
+   "scripts/check.py"
+  ],
+  "passed": true,
+  "tests": 2108,
+  "optional_skips": 624,
+  "domain_selector_note": "--domain macos is unsupported; usage error preserved, complete supported suite passed"
+ },
+ "test_a": {
+  "P1": {
+   "frames_equal": 501,
+   "frames_compared": 501,
+   "frames_requested": 501,
+   "first_difference": null,
+   "first_engine_stop": null,
+   "seconds": 113.02682250000362,
+   "whole_state": {
+    "allocation_domain": "No allocation/free or binding changes in the published windows; all block identities and byte lengths compared.",
+    "compared_bytes_per_phase": [
+     16019748
+    ],
+    "evidence_revision": "a7f5d4939e7826e02a8b348995edb9c793657f4c",
+    "mask_bytes": 155587,
+    "part_compressed_sha256": "83dba2ce27feecbdd4983716f583c7e530c57d1cb6f70793e37d3ccfdcf5d75b",
+    "part_raw_sha256": "dd82202e1f0338b9ddcad0a8a7f41de756ae91e98b0fad16f626f9bd27699e7f",
+    "parts": [
+     {
+      "artifact": "pesquisas-paralelas/missoes/m3/sondas/P1/captura-janela.parte00.json.xz",
+      "compressed_sha256": "83dba2ce27feecbdd4983716f583c7e530c57d1cb6f70793e37d3ccfdcf5d75b",
+      "phases": 1002,
+      "raw_integrity_verified": true,
+      "raw_sha256": "dd82202e1f0338b9ddcad0a8a7f41de756ae91e98b0fad16f626f9bd27699e7f"
+     }
+    ],
+    "phases_compared": 1002,
+    "phases_equal": 1002,
+    "phases_requested": 1002,
+    "schema": "rising-lands/rust-m3-whole-state-proof/1"
+   }
+  },
+  "P2": {
+   "frames_equal": 601,
+   "frames_compared": 601,
+   "frames_requested": 601,
+   "first_difference": null,
+   "first_engine_stop": null,
+   "seconds": 130.6631747499996,
+   "whole_state": {
+    "allocation_domain": "No allocation/free or binding changes in the published windows; all block identities and byte lengths compared.",
+    "compared_bytes_per_phase": [
+     16014614
+    ],
+    "evidence_revision": "a7f5d4939e7826e02a8b348995edb9c793657f4c",
+    "mask_bytes": 160721,
+    "part_compressed_sha256": "f6ec02882d359ef6f8deddd261d3622ce671d06cfc11a20db9a3ea55f3d64ea1",
+    "part_raw_sha256": "74218a46fbee02677eb75f2f7bd41c845bd9a510211b6ccac913a1268d3c0f76",
+    "parts": [
+     {
+      "artifact": "pesquisas-paralelas/missoes/m3/sondas/P2/captura-janela.parte00.json.xz",
+      "compressed_sha256": "f6ec02882d359ef6f8deddd261d3622ce671d06cfc11a20db9a3ea55f3d64ea1",
+      "phases": 1202,
+      "raw_integrity_verified": true,
+      "raw_sha256": "74218a46fbee02677eb75f2f7bd41c845bd9a510211b6ccac913a1268d3c0f76"
+     }
+    ],
+    "phases_compared": 1202,
+    "phases_equal": 1202,
+    "phases_requested": 1202,
+    "schema": "rising-lands/rust-m3-whole-state-proof/1"
+   }
+  },
+  "P3": {
+   "frames_equal": 3001,
+   "frames_compared": 3001,
+   "frames_requested": 3001,
+   "first_difference": null,
+   "first_engine_stop": null,
+   "seconds": 65.35917154200433,
+   "whole_state": null
+  },
+  "P6": {
+   "frames_equal": 2272,
+   "frames_compared": 2272,
+   "frames_requested": 2272,
+   "first_difference": null,
+   "first_engine_stop": null,
+   "seconds": 520.5407367500011,
+   "whole_state": {
+    "allocation_domain": "No allocation/free or binding changes in the published windows; all block identities and byte lengths compared.",
+    "compared_bytes_per_phase": [
+     16002289
+    ],
+    "evidence_revision": "16b63ac39b377cf4e86a5728475634e8f2e9f33e",
+    "mask_bytes": 173046,
+    "part_compressed_sha256": "0d630ac6c154f98b853691e13c1b8974a1bdef7e63097c387b5949c6c49369bf",
+    "part_raw_sha256": "129302bc0ba9c88f0ef258a20d89865cdccb45ff8327ac40d879429c5b8f2480",
+    "parts": [
+     {
+      "artifact": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte00.json.xz",
+      "compressed_sha256": "0d630ac6c154f98b853691e13c1b8974a1bdef7e63097c387b5949c6c49369bf",
+      "phases": 2000,
+      "raw_integrity_verified": true,
+      "raw_sha256": "129302bc0ba9c88f0ef258a20d89865cdccb45ff8327ac40d879429c5b8f2480"
+     },
+     {
+      "artifact": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte01.json.xz",
+      "compressed_sha256": "03976fb9ce9c539d1231fa130c0b8c875dceb26284e9e0eec5c8e1b05a7bb17c",
+      "phases": 2000,
+      "raw_integrity_verified": true,
+      "raw_sha256": "832bb4d18331ee666a79438177b36251b483a055631ff2eaaaba93a9d8ea9a15"
+     },
+     {
+      "artifact": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte02.json.xz",
+      "compressed_sha256": "ee60b91ceae622134e5342f5311b67600490647664864adafed2df4d260288e6",
+      "phases": 544,
+      "raw_integrity_verified": true,
+      "raw_sha256": "c587fa29136e7bb9ecc05f9e64f2317786efa7825ba45ef2a4596266fba517c6"
+     }
+    ],
+    "phases_compared": 4544,
+    "phases_equal": 4544,
+    "phases_requested": 4544,
+    "schema": "rising-lands/rust-m3-whole-state-proof/1"
+   }
+  },
+  "P7": {
+   "frames_equal": 3572,
+   "frames_compared": 3572,
+   "frames_requested": 3572,
+   "first_difference": null,
+   "first_engine_stop": null,
+   "seconds": 85.48961637500179,
+   "whole_state": null
+  },
+  "K1": {
+   "frames_equal": 501,
+   "frames_compared": 501,
+   "frames_requested": 501,
+   "first_difference": null,
+   "first_engine_stop": null,
+   "seconds": 11.054814082999656,
+   "whole_state": null
+  }
+ },
+ "answer_count": 155597,
+ "canonical_roundtrips": 6,
+ "all_prior_equalities_preserved": true,
+ "prefix": {
+  "states_equal": 257,
+  "checkpoints_equal": 11,
+  "surfaces_equal": 128,
+  "python_surfaces_equal": 128,
+  "first_named_stop": null
+ },
+ "long": {
+  "states_equal": 18401,
+  "surfaces_equal": 9200,
+  "first_named_stop": null
+ },
+ "frame2952": {
+  "resolved_for_workload": true,
+  "diagnostic": "m3-chain8-fatigue-diagnostic.json",
+  "selected_unit": 12,
+  "type": 7,
+  "owner": 0,
+  "state": 7,
+  "record_address": "0x474a8cf0",
+  "word04": 3,
+  "word76": 4,
+  "published_domain": "Graphics 1.9 selected type 5/7 fatigue pair 3/4; other unsupported pairs retain named stops",
+  "app_workaround": false
+ },
+ "play_measurements": {
+  "selected60": {
+   "report": "m3-chain8-selected60.json",
+   "workload": "Historical selected actor: two left-click gestures, pointer to empty ground, no deselection",
+   "game_fps": 60.008835204398956,
+   "display_fps": 59.942173534542924,
+   "minimum_full_second_display_fps": 58,
+   "display_hz": 60,
+   "frames": 4501,
+   "seconds": 75.00562183333386,
+   "first_stop": null,
+   "audit_seconds": 0,
+   "publication_drops": 0,
+   "rgba_bytes_checked": 1920000
+  },
+  "play60": {
+   "report": "m3-chain8-play60.json",
+   "workload": "No orders",
+   "game_fps": 60.01253682815995,
+   "display_fps": 59.935617401310225,
+   "minimum_full_second_display_fps": 57,
+   "display_hz": 60,
+   "frames": 3901,
+   "seconds": 65.00308445833798,
+   "first_stop": null,
+   "audit_seconds": 0,
+   "publication_drops": 0,
+   "rgba_bytes_checked": 1920000
+  }
+ },
+ "runtime_files": {
+  "Contents/Resources/preview/librising_engine.dylib": "50c87f129c2ae52a7553eb749ae73d5d762b6359eeda6c3638427f3a0ef8139c",
+  "Contents/Resources/preview/librising_macos_live.dylib": "59b3f37271ce6d0613041cca0d66d62f440d562ee946dacc5b08a11816b38e7e",
+  "Contents/Resources/preview/librising_macos_projection.dylib": "0c27545a41db3c5792c2bca6fed5f79f17b982db864661474a29b4fb587b078e",
+  "Contents/Resources/preview/snapshot.json": "6bb1bb1c56ea80a4a28c16a4a1d19eca92cc324568f585a4380dbba7e1f806f2",
+  "Contents/Resources/preview/native-inputs/manifest.json": "80b84b89c9f7ac060092bc118aac1e78dc9bfdd3567fbe08aaa929060be0e8d6",
+  "Contents/MacOS/RisingLands-ptbr": "5bab930c107ce0e022d9e15a164abfea31f366eb83467c30ab9dac8f6356fed7"
+ },
+ "diagnostic_tool_sha256": "3d0c0acd3307eefa2b67214fc686a93e9abc7445500a5c52254f51a060646716",
+ "no_main_merge_or_acceptance": true,
+ "launch_note": "Initial proof staging paths disappeared when APP_BUILD moved the bundle. Failed launches and cancelled waits executed no state comparison; retries use the delivered app. Timing wrappers cancelled before grant were requeued unchanged.",
+ "lease_events": [
+  {
+   "owner": "macos-chain8-build",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "python3",
+    "-B",
+    "compilar-jog\u00e1vel",
+    "--development-ref",
+    "HEAD",
+    "--inputs-root",
+    "/Users/marcio/git/Rising Lands",
+    "--data-root",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:13:10.681148+00:00"
+  },
+  {
+   "owner": "macos-chain8-build",
+   "event": "grant",
+   "slots": [
+    2
+   ],
+   "at": "2026-10-30T16:13:10.681668+00:00"
+  },
+  {
+   "owner": "macos-chain8-engine",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "sh",
+    "motor/validate.sh"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:13:17.050921+00:00"
+  },
+  {
+   "owner": "macos-chain8-common",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "python3",
+    "-B",
+    "scripts/check.py"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:14:03.313207+00:00"
+  },
+  {
+   "owner": "macos-chain8-engine",
+   "event": "grant",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T16:16:03.405275+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P1",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--probe",
+    "P1",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-state-P1.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:16:17.571801+00:00"
+  },
+  {
+   "owner": "macos-chain8-prefix",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_native_macos.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/sources/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--codec",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_projection.dylib",
+    "--graphics-sources",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/graphics-inputs",
+    "--frames",
+    "128",
+    "--python-oracle",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-prefix.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:16:18.717627+00:00"
+  },
+  {
+   "owner": "macos-chain8-build",
+   "event": "release",
+   "slots": [
+    2
+   ],
+   "at": "2026-10-30T16:16:24.968752+00:00"
+  },
+  {
+   "owner": "macos-chain8-build",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T16:16:24.968925+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P1",
+   "event": "grant",
+   "slots": [
+    1
+   ],
+   "at": "2026-10-30T16:16:29.600442+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P1",
+   "event": "release",
+   "slots": [
+    1
+   ],
+   "at": "2026-10-30T16:16:29.602022+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P2",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--probe",
+    "P2",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-state-P2.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:16:29.636625+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P2",
+   "event": "grant",
+   "slots": [
+    1
+   ],
+   "at": "2026-10-30T16:16:29.637118+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P2",
+   "event": "release",
+   "slots": [
+    1
+   ],
+   "at": "2026-10-30T16:16:29.638710+00:00"
+  },
+  {
+   "owner": "macos-chain8-common",
+   "event": "grant",
+   "slots": [
+    1
+   ],
+   "at": "2026-10-30T16:16:29.667130+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P3",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--probe",
+    "P3",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-state-P3.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:16:29.673018+00:00"
+  },
+  {
+   "owner": "macos-chain8-selected60",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "python3",
+    "-B",
+    "apps/macos-preview/scripts/benchmark_native_macos.py",
+    "--app",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-selected60.json",
+    "--game-fps",
+    "60",
+    "--seconds",
+    "75",
+    "--orders-selected"
+   ],
+   "exclusive": true,
+   "at": "2026-10-30T16:16:56.197915+00:00"
+  },
+  {
+   "owner": "macos-chain8-long",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_native_macos.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/sources/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--codec",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_projection.dylib",
+    "--graphics-sources",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/graphics-inputs",
+    "--frames",
+    "9200",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-long.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:17:34.283201+00:00"
+  },
+  {
+   "owner": "macos-chain8-prefix",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_native_macos.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/sources/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--codec",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_projection.dylib",
+    "--graphics-sources",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0/RisingLands-ptbr.app/Contents/Resources/preview/graphics-inputs",
+    "--frames",
+    "128",
+    "--python-oracle",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-prefix.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:17:34.347673+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P1",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--probe",
+    "P1",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-state-P1.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:17:48.828862+00:00"
+  },
+  {
+   "owner": "macos-chain8-prefix",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_native_macos.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/sources/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--codec",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_projection.dylib",
+    "--graphics-sources",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/graphics-inputs",
+    "--frames",
+    "128",
+    "--python-oracle",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-prefix.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:17:49.925928+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P1",
+   "event": "grant",
+   "slots": [
+    2
+   ],
+   "at": "2026-10-30T16:18:40.960244+00:00"
+  },
+  {
+   "owner": "macos-chain8-fatigue-diagnostic",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "python3",
+    "-B",
+    "apps/macos-preview/scripts/diagnose_selected_fatigue.py",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--output",
+    "apps/macos-preview/validation/m3-chain8-fatigue-diagnostic.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:18:59.853361+00:00"
+  },
+  {
+   "owner": "macos-chain8-play60",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "python3",
+    "-B",
+    "apps/macos-preview/scripts/benchmark_native_macos.py",
+    "--app",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-play60.json",
+    "--game-fps",
+    "60",
+    "--seconds",
+    "65"
+   ],
+   "exclusive": true,
+   "at": "2026-10-30T16:20:07.318627+00:00"
+  },
+  {
+   "owner": "macos-chain8-engine",
+   "event": "release",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T16:20:23.781966+00:00"
+  },
+  {
+   "owner": "macos-chain8-engine",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T16:20:23.782136+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P1",
+   "event": "release",
+   "slots": [
+    2
+   ],
+   "at": "2026-10-30T16:20:36.986955+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P1",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T16:20:36.987830+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P2",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--probe",
+    "P2",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-state-P2.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:20:37.030001+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P2",
+   "event": "grant",
+   "slots": [
+    2
+   ],
+   "at": "2026-10-30T16:20:37.030398+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P2",
+   "event": "release",
+   "slots": [
+    2
+   ],
+   "at": "2026-10-30T16:22:50.743629+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P2",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T16:22:50.744114+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P3",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--probe",
+    "P3",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-state-P3.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:22:50.788096+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P3",
+   "event": "grant",
+   "slots": [
+    2
+   ],
+   "at": "2026-10-30T16:22:50.788854+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P3",
+   "event": "release",
+   "slots": [
+    2
+   ],
+   "at": "2026-10-30T16:23:58.372627+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P3",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T16:23:58.372785+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P6",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--probe",
+    "P6",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-state-P6.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:23:58.407153+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P6",
+   "event": "grant",
+   "slots": [
+    2
+   ],
+   "at": "2026-10-30T16:23:58.407604+00:00"
+  },
+  {
+   "owner": "macos-chain8-common",
+   "event": "release",
+   "slots": [
+    1
+   ],
+   "at": "2026-10-30T16:25:52.302126+00:00"
+  },
+  {
+   "owner": "macos-chain8-common",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T16:25:52.302331+00:00"
+  },
+  {
+   "owner": "macos-chain8-fatigue-diagnostic",
+   "event": "grant",
+   "slots": [
+    1
+   ],
+   "at": "2026-10-30T16:25:52.910506+00:00"
+  },
+  {
+   "owner": "macos-chain8-fatigue-diagnostic",
+   "event": "release",
+   "slots": [
+    1
+   ],
+   "at": "2026-10-30T16:25:56.187477+00:00"
+  },
+  {
+   "owner": "macos-chain8-fatigue-diagnostic",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T16:25:56.187636+00:00"
+  },
+  {
+   "owner": "macos-chain8-prefix",
+   "event": "grant",
+   "slots": [
+    1
+   ],
+   "at": "2026-10-30T16:25:57.127567+00:00"
+  },
+  {
+   "owner": "macos-chain8-prefix",
+   "event": "release",
+   "slots": [
+    1
+   ],
+   "at": "2026-10-30T16:26:10.731238+00:00"
+  },
+  {
+   "owner": "macos-chain8-prefix",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T16:26:10.731413+00:00"
+  },
+  {
+   "owner": "macos-chain8-long",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_native_macos.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/sources/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--codec",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_projection.dylib",
+    "--graphics-sources",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/graphics-inputs",
+    "--frames",
+    "9200",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-long.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:26:10.768194+00:00"
+  },
+  {
+   "owner": "macos-chain8-long",
+   "event": "grant",
+   "slots": [
+    1
+   ],
+   "at": "2026-10-30T16:26:10.768644+00:00"
+  },
+  {
+   "owner": "macos-chain8-selected60",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "python3",
+    "-B",
+    "apps/macos-preview/scripts/benchmark_native_macos.py",
+    "--app",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-selected60.json",
+    "--game-fps",
+    "60",
+    "--seconds",
+    "75",
+    "--orders-selected"
+   ],
+   "exclusive": true,
+   "at": "2026-10-30T16:28:29.677388+00:00"
+  },
+  {
+   "owner": "macos-chain8-play60",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "python3",
+    "-B",
+    "apps/macos-preview/scripts/benchmark_native_macos.py",
+    "--app",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-play60.json",
+    "--game-fps",
+    "60",
+    "--seconds",
+    "65"
+   ],
+   "exclusive": true,
+   "at": "2026-10-30T16:28:30.764106+00:00"
+  },
+  {
+   "owner": "macos-chain8-long",
+   "event": "release",
+   "slots": [
+    1
+   ],
+   "at": "2026-10-30T16:31:27.048424+00:00"
+  },
+  {
+   "owner": "macos-chain8-long",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T16:31:27.048619+00:00"
+  },
+  {
+   "owner": "macos-chain8-answers",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_input.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-answers.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:31:27.086527+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P6",
+   "event": "release",
+   "slots": [
+    2
+   ],
+   "at": "2026-10-30T16:32:42.368859+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P6",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T16:32:42.369081+00:00"
+  },
+  {
+   "owner": "macos-chain8-selected60",
+   "event": "grant",
+   "slots": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "at": "2026-10-30T16:32:42.369593+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P7",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--probe",
+    "P7",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-state-P7.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:32:42.403455+00:00"
+  },
+  {
+   "owner": "macos-chain8-selected60",
+   "event": "release",
+   "slots": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "at": "2026-10-30T16:33:58.905123+00:00"
+  },
+  {
+   "owner": "macos-chain8-selected60",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T16:33:58.905298+00:00"
+  },
+  {
+   "owner": "macos-chain8-play60",
+   "event": "grant",
+   "slots": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "at": "2026-10-30T16:33:58.906058+00:00"
+  },
+  {
+   "owner": "macos-chain8-play60",
+   "event": "release",
+   "slots": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "at": "2026-10-30T16:35:05.431636+00:00"
+  },
+  {
+   "owner": "macos-chain8-play60",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T16:35:05.432068+00:00"
+  },
+  {
+   "owner": "macos-chain8-answers",
+   "event": "grant",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T16:35:05.491752+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P7",
+   "event": "grant",
+   "slots": [
+    2
+   ],
+   "at": "2026-10-30T16:35:06.663274+00:00"
+  },
+  {
+   "owner": "macos-chain8-answers",
+   "event": "release",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T16:35:07.261240+00:00"
+  },
+  {
+   "owner": "macos-chain8-answers",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T16:35:07.261374+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P7",
+   "event": "release",
+   "slots": [
+    2
+   ],
+   "at": "2026-10-30T16:36:34.379276+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-P7",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T16:36:34.379713+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-K1",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--probe",
+    "K1",
+    "--output",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-state-K1.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T16:36:34.420152+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-K1",
+   "event": "grant",
+   "slots": [
+    2
+   ],
+   "at": "2026-10-30T16:36:34.420615+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-K1",
+   "event": "release",
+   "slots": [
+    2
+   ],
+   "at": "2026-10-30T16:36:47.663416+00:00"
+  },
+  {
+   "owner": "macos-chain8-state-K1",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T16:36:47.663605+00:00"
+  }
+ ],
+ "artifacts": [
+  {
+   "path": "m3-chain8-answers.json",
+   "bytes": 13989,
+   "sha256": "1441af88cedfcabc90778dbaab931e22f8a192dacc9b52bcc27d3ca3e28a596b"
+  },
+  {
+   "path": "m3-chain8-answers.log",
+   "bytes": 686,
+   "sha256": "2937a41a660e969066d6a17a0153eda9b0d8cc470efcc1f78233a63f0e7e7226"
+  },
+  {
+   "path": "m3-chain8-app-build.log",
+   "bytes": 7687,
+   "sha256": "30fec2a1706e4cf034e4b5cef62c7c59d6b04f6e8a13be5ebb4b3b768db271d4"
+  },
+  {
+   "path": "m3-chain8-common.log.gz",
+   "bytes": 45257,
+   "sha256": "dc417e6ab9c9c46b67c1a843ab06eb5dc9c255eaa103f2c3c4ed7c2bb4bcafed"
+  },
+  {
+   "path": "m3-chain8-compression.json",
+   "bytes": 1402,
+   "sha256": "e7654a365fdee6db7fbdacfd0b2cbc1916d1d76dd24f8c48b264e7ab587dd70e"
+  },
+  {
+   "path": "m3-chain8-consumer-tests.log",
+   "bytes": 17265,
+   "sha256": "9c10d29fbc3788de794db05c2e21bb0b76b698ac86cab2d320cb60e7d99ddcd7"
+  },
+  {
+   "path": "m3-chain8-correctness.json",
+   "bytes": 6635,
+   "sha256": "e25ca1451429208bec40d6b0b891abd1c8734adca93f2dc15fa21f62595cd9f9"
+  },
+  {
+   "path": "m3-chain8-domain-check.log",
+   "bytes": 254,
+   "sha256": "d5d9b32873a3ccd4ecd7c5de5bc3477997a8d4e26e71081201b03989ffd95691"
+  },
+  {
+   "path": "m3-chain8-engine-gate.log.gz",
+   "bytes": 4783,
+   "sha256": "8b8cc9c5527982b8560779bd37613200ae1106929a67d419e2351a9f35474e93"
+  },
+  {
+   "path": "m3-chain8-equalities-commands.json",
+   "bytes": 3442,
+   "sha256": "1277f9b65b205b335bd325a86a3830430813d111edc6d3da2cf374c67baec19c"
+  },
+  {
+   "path": "m3-chain8-fatigue-diagnostic.json",
+   "bytes": 3678,
+   "sha256": "b3c592d235217a30a5339f1b547d0795b420690ec5a8a4c7838d53e24bee6ebf"
+  },
+  {
+   "path": "m3-chain8-fatigue-diagnostic.log",
+   "bytes": 817,
+   "sha256": "61c69ce91144e772c3ec9009f869594bb44bd25c0fe9be11a82b941b4c12788f"
+  },
+  {
+   "path": "m3-chain8-launch-path-failures/m3-chain8-equalities-commands.json",
+   "bytes": 1723,
+   "sha256": "0cba62023034e2fde53c7eaf49c83770c76c1b67c926d0962dc60b8347d69935"
+  },
+  {
+   "path": "m3-chain8-launch-path-failures/m3-chain8-prefix.log",
+   "bytes": 36,
+   "sha256": "fb8699e0f25f58a460df68d57fe7382337b692a7c983d75ecacfb7a8f5f1df9d"
+  },
+  {
+   "path": "m3-chain8-launch-path-failures/m3-chain8-state-P1.log",
+   "bytes": 1265,
+   "sha256": "5eb75a3f9dbd68791a480255af63705b766e3a7e0fb29e3ffe40f16ba6a116b1"
+  },
+  {
+   "path": "m3-chain8-launch-path-failures/m3-chain8-state-P2.log",
+   "bytes": 1265,
+   "sha256": "895c938de07ebceab84be12414c63dfca686e30eb8432ed3bb4cd1c76d3504f8"
+  },
+  {
+   "path": "m3-chain8-launch-path-failures/m3-chain8-state-P3.log",
+   "bytes": 38,
+   "sha256": "a5d932f4fec999365f817f20768e3693a94742cecff117e65a9ef6214ea03e5b"
+  },
+  {
+   "path": "m3-chain8-launch-path-failures/m3-chain8-states-commands.json",
+   "bytes": 2443,
+   "sha256": "6c3a5b53de70efb7e31602b0dc10ffe49014a514813fc5d6fff633569ea23c27"
+  },
+  {
+   "path": "m3-chain8-long.json",
+   "bytes": 56133,
+   "sha256": "2a0bb457333515f81b4155683d1187de4f548b313c21189d51d2e8540906bce7"
+  },
+  {
+   "path": "m3-chain8-long.log",
+   "bytes": 957,
+   "sha256": "c42b4bc23a83fe89dee0054afa52bfd2b1ed769ba95b1723ff5bfe4ab7265b3b"
+  },
+  {
+   "path": "m3-chain8-native-inspection-smoke.input.json",
+   "bytes": 814,
+   "sha256": "cb86333d3e4da3ac32c6f738c37503d1525c306095ea8ebb07ac2db5100437e5"
+  },
+  {
+   "path": "m3-chain8-native-inspection-smoke.json",
+   "bytes": 4797,
+   "sha256": "05d6f3827b87c6030558e8acefb4518ac86213884b8d8499b6cfb30a54651476"
+  },
+  {
+   "path": "m3-chain8-native-smoke.json",
+   "bytes": 7548,
+   "sha256": "9fb67b86edb9b719231f113cc9856ba8263127a17f7f8bfd41c18a6b92d87c56"
+  },
+  {
+   "path": "m3-chain8-play60.json",
+   "bytes": 3160,
+   "sha256": "f9519f34811b352bf34f67cb63faff44cd17db21b1d206b1ab44183244ebd2ad"
+  },
+  {
+   "path": "m3-chain8-play60.launch.log",
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": "m3-chain8-play60.log",
+   "bytes": 3088,
+   "sha256": "57533b9b46d6cc2e4b572f51fde1f18f65c9390cd631fbc53ceb478d62c20d6c"
+  },
+  {
+   "path": "m3-chain8-play60.png",
+   "bytes": 505381,
+   "sha256": "80272ecbed2cabbfbd5fd47998562aa17e8bafc2533992fb795edcdcef908e4f"
+  },
+  {
+   "path": "m3-chain8-play60.queue.log",
+   "bytes": 36,
+   "sha256": "226e5904df824878ba9f72f6233ed344443d29e1fc68ad5a2c4994e6b72ed7f9"
+  },
+  {
+   "path": "m3-chain8-prefix.json",
+   "bytes": 56127,
+   "sha256": "854201d0c792f90049775623b4edba8d3e201df6922a3e64fc34d918c5786239"
+  },
+  {
+   "path": "m3-chain8-prefix.log",
+   "bytes": 784,
+   "sha256": "f38adca7e88bdc5629b389d97c3d14685823ac004a31127445509e8d60968d31"
+  },
+  {
+   "path": "m3-chain8-regression.json",
+   "bytes": 4534,
+   "sha256": "ed1f7715a8aecde7b7032b233b0957a84c7eecb628936d4aae9e53abb651d053"
+  },
+  {
+   "path": "m3-chain8-selected60.json",
+   "bytes": 3474,
+   "sha256": "bb4e2fd5fae7c2a8da54e21a5cc6c0b771e10b8ad0caeb2caa74bac1c1617fa7"
+  },
+  {
+   "path": "m3-chain8-selected60.launch.log",
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": "m3-chain8-selected60.log",
+   "bytes": 3412,
+   "sha256": "b8c95ab81eccbd9673ae030ae6334bdb508310158449d84235b7ccd6058f86ae"
+  },
+  {
+   "path": "m3-chain8-selected60.png",
+   "bytes": 509500,
+   "sha256": "1086a9c08ebf54d04ea6bf2960ea818cca4847997ab34f13c773ddbe9b5fc637"
+  },
+  {
+   "path": "m3-chain8-selected60.queue.log",
+   "bytes": 40,
+   "sha256": "b75ac655339928c7fcdee5cf8e2a04eaccd722ca24442d49f93d000a4c9f3ecc"
+  },
+  {
+   "path": "m3-chain8-state-K1.json.xz",
+   "bytes": 19416,
+   "sha256": "e78267a80dff62e0ee8cd5ad652e032d0b96397347a5eb91322c9cf40c2c58e1"
+  },
+  {
+   "path": "m3-chain8-state-K1.log",
+   "bytes": 1167,
+   "sha256": "ec74b2132b003f9cedbc4ea6812f1eab1cd73f5b4a63c95c34bec8d313847d3e"
+  },
+  {
+   "path": "m3-chain8-state-P1.json.xz",
+   "bytes": 21008,
+   "sha256": "62febfe3d079ed91e8874b537edbeef884a20312360cb784a2499eee3d4229e7"
+  },
+  {
+   "path": "m3-chain8-state-P1.log",
+   "bytes": 1190,
+   "sha256": "c3b09ab74c3b05cf33d77da9488fe21286f13da6723734309b40467178fa7184"
+  },
+  {
+   "path": "m3-chain8-state-P2.json.xz",
+   "bytes": 24832,
+   "sha256": "77f7375eb302d518e362ce7dbfd669e2abe54489261917bdc584dc81a0508b3c"
+  },
+  {
+   "path": "m3-chain8-state-P2.log",
+   "bytes": 1189,
+   "sha256": "c5197cae8570555af800490ae39439315daf394000e89e3652c5a44bcb46bf11"
+  },
+  {
+   "path": "m3-chain8-state-P3.json.xz",
+   "bytes": 109544,
+   "sha256": "2d7a9cd253fbce20ba3ed1262ddcafaca6aaadec9430a61bb9ad29a3027b2bd3"
+  },
+  {
+   "path": "m3-chain8-state-P3.log",
+   "bytes": 1169,
+   "sha256": "10063c4a30b550cafa5575f9ff044f2478079b51134f13b323d5c11dd048afa8"
+  },
+  {
+   "path": "m3-chain8-state-P6.json.xz",
+   "bytes": 89728,
+   "sha256": "167ba44fe2c273c1c75fbc566cb5f4ed10cf2ca229ddd05e2e88acf5e2346396"
+  },
+  {
+   "path": "m3-chain8-state-P6.log",
+   "bytes": 1192,
+   "sha256": "ae88c3d853ca8a6535a7d2e319a2d2002f7919ee1f7056f06435dfaf5150b408"
+  },
+  {
+   "path": "m3-chain8-state-P7.json.xz",
+   "bytes": 130120,
+   "sha256": "d04197021255a1718565f890941c99c634e885a200aadf45277c8cf548fb07a0"
+  },
+  {
+   "path": "m3-chain8-state-P7.log",
+   "bytes": 1169,
+   "sha256": "ee409a6e30c0f8f81f4754a9105b844718a99725d4417a1eaab70642e8b7a01b"
+  },
+  {
+   "path": "m3-chain8-states-commands.json",
+   "bytes": 6315,
+   "sha256": "730a46b33cb4b91f66967308223d708fd61334fba8a59694efd0e4c79b59bba1"
+  },
+  {
+   "path": "m3-chain8-timing-queue-restart.json",
+   "bytes": 1660,
+   "sha256": "0e0072abe7392a51a3bbffa1343cd6d31cae698fbf382960abb06f5fa08b2023"
+  }
+ ]
+}

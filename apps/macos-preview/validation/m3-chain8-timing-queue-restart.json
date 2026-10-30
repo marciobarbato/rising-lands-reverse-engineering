@@ -1,0 +1,60 @@
+{
+ "reason": "Requeue exclusive timings after correctness; avoid holding free slots while waiting for the P6 whole-state proof",
+ "runs": [
+  {
+   "owner": "macos-chain8-selected60",
+   "stopped_before_grant": true,
+   "pids": [
+    26333
+   ],
+   "wait": {
+    "owner": "macos-chain8-selected60",
+    "event": "wait",
+    "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "command": [
+     "python3",
+     "-B",
+     "apps/macos-preview/scripts/benchmark_native_macos.py",
+     "--app",
+     "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app",
+     "--output",
+     "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-selected60.json",
+     "--game-fps",
+     "60",
+     "--seconds",
+     "75",
+     "--orders-selected"
+    ],
+    "exclusive": true,
+    "at": "2026-10-30T16:16:56.197915+00:00"
+   }
+  },
+  {
+   "owner": "macos-chain8-play60",
+   "stopped_before_grant": true,
+   "pids": [
+    27245
+   ],
+   "wait": {
+    "owner": "macos-chain8-play60",
+    "event": "wait",
+    "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "command": [
+     "python3",
+     "-B",
+     "apps/macos-preview/scripts/benchmark_native_macos.py",
+     "--app",
+     "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app",
+     "--output",
+     "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-chain8-play60.json",
+     "--game-fps",
+     "60",
+     "--seconds",
+     "65"
+    ],
+    "exclusive": true,
+    "at": "2026-10-30T16:20:07.318627+00:00"
+   }
+  }
+ ]
+}

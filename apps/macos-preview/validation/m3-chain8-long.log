@@ -1,0 +1,32 @@
+[lease] macos-chain8-long waiting
+[lease] macos-chain8-long granted slots [1]
+Native frames 1000
+Native frames 2000
+Native frames 3000
+Native frames 4000
+Native frames 5000
+Native frames 6000
+Native frames 7000
+Native frames 8000
+Native frames 9000
+{
+ "schema": "rising-lands/macos-native-render-proof/1",
+ "engine_sha256": "50c87f129c2ae52a7553eb749ae73d5d762b6359eeda6c3638427f3a0ef8139c",
+ "driver_sha256": "59b3f37271ce6d0613041cca0d66d62f440d562ee946dacc5b08a11816b38e7e",
+ "inputs_manifest_sha256": "80b84b89c9f7ac060092bc118aac1e78dc9bfdd3567fbe08aaa929060be0e8d6",
+ "frames_requested": 9200,
+ "frames_completed": 9200,
+ "states_equal": 18401,
+ "checkpoints_equal": 11,
+ "surfaces_equal": 9200,
+ "python_surfaces_equal": 0,
+ "first_named_stop": null,
+ "observer_failures": [],
+ "horizon_pending": false,
+ "timing": {
+  "logic_seconds": 64.347886,
+  "render_seconds": 34.852079,
+  "proof_seconds": 216.652767,
+  "wall_seconds": 316.0549327080007
+ }
+}

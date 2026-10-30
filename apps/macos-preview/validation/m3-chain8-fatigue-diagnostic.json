@@ -1,0 +1,113 @@
+{
+ "schema": "rising-lands/macos-selected-fatigue-diagnostic/1",
+ "original_executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "world_source": "S0 and four original immutable tables; real prefix and advancing play world",
+ "scope": "Declared-frame reproduction, not a replay of the historical UI arrival times; no original equality claim",
+ "engine_sha256": "50c87f129c2ae52a7553eb749ae73d5d762b6359eeda6c3638427f3a0ef8139c",
+ "driver_sha256": "59b3f37271ce6d0613041cca0d66d62f440d562ee946dacc5b08a11816b38e7e",
+ "events": {
+  "481": [
+   {
+    "kind": "mouse",
+    "msg": 513,
+    "x": 560,
+    "y": 528
+   },
+   {
+    "kind": "mouse",
+    "msg": 514,
+    "x": 560,
+    "y": 528
+   }
+  ],
+  "493": [
+   {
+    "kind": "mouse",
+    "msg": 513,
+    "x": 624,
+    "y": 432
+   },
+   {
+    "kind": "mouse",
+    "msg": 514,
+    "x": 624,
+    "y": 432
+   }
+  ],
+  "511": [
+   {
+    "kind": "mouse",
+    "msg": 512,
+    "x": 400,
+    "y": 272
+   }
+  ]
+ },
+ "requested_frames": 4500,
+ "completed_frames": 4500,
+ "boundaries": [
+  {
+   "attempted_render_frame": 2952,
+   "position": "before-render",
+   "state": {
+    "completed_frames": 2951,
+    "counter": 2951,
+    "selected_unit": 65535,
+    "selection_mode": 0,
+    "overlay_units": [
+     {
+      "index": 12,
+      "address": "0x474a8cf0",
+      "owner": 0,
+      "type": 7,
+      "state": 7,
+      "material_word4": 3,
+      "fatigue_life74": 0,
+      "fatigue_word76": 4,
+      "indicator_ba": 0,
+      "selection_bd": 1,
+      "cell": 3347,
+      "record_sha256": "f427b51f271a9e1a5861b7b1bc52ca95eb08d1ebcdefde5d821c761e85c8fa42",
+      "record_hex": "0007070003000400130d000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000040000000000130d130d000000000000000000000000000000000f0f0001010000000200640063ff0000000000000308080204010000030300000100ffff00000000ffff0005ff01ff00ffff000000000000000000000000000000000000000000000000010800000000000000000000000000000000000000000000000000000000000001000000000000006400ffffffff00000700fffffffff0010000"
+     }
+    ],
+    "surface_sha256": "6e0d580abd30d60e3b13a730c5a9c5ab63360886e022b7d3b796ae3801563502"
+   }
+  },
+  {
+   "attempted_render_frame": 2952,
+   "position": "after-complete-frame",
+   "state": {
+    "completed_frames": 2952,
+    "counter": 2952,
+    "selected_unit": 65535,
+    "selection_mode": 0,
+    "overlay_units": [
+     {
+      "index": 12,
+      "address": "0x474a8cf0",
+      "owner": 0,
+      "type": 7,
+      "state": 7,
+      "material_word4": 3,
+      "fatigue_life74": 1,
+      "fatigue_word76": 4,
+      "indicator_ba": 0,
+      "selection_bd": 1,
+      "cell": 3347,
+      "record_sha256": "c1d513480f0461fe2b0f676965d285b71ed92af3d994e14690054354eaca926c",
+      "record_hex": "0007070003000400130d000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000100040000000000130d130d000000000000000000000000000000000f0f0001010000000200640063ff0000000000000308080204010000030300000100ffff00000000ffff0005ff01ff00ffff000000000000000000000000000000000000000000000000010800000000000000000000000000000000000000000000000000000000000001000000000000006400ffffffff00000700fffffffff0010000"
+     }
+    ],
+    "surface_sha256": "1b0b83defa9973b5aeae4a0c55c401ab265d9ca8637724e2994b1bee96c3712e"
+   }
+  }
+ ],
+ "first_stop": null,
+ "audits": {
+  "phases": 0,
+  "surfaces": 0,
+  "checkpoints": 0,
+  "proof_ns": 0
+ }
+}

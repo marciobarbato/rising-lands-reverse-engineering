@@ -380,6 +380,7 @@ class DonosM3:
     def __init__(self, m, *, som, bonus=None, mensagem_unidade=None):
         from entrada_estruturas import EntradaEstruturas, ROTINAS_ECONOMIA, provedor_entrada
         from visao_grupos import VisaoGrupos, provedor_saida
+        from recrutamento_core import RecrutamentoCore, bonus_recrutamento, provedor_recrutamento, ROTINAS as RECRUTAMENTO
         caverna_recrutamento = _modulo_economia('caverna_recrutamento')
         ciclo_trabalho = _modulo_economia('ciclo_trabalho')
         self.m, self.bonus, self.mensagem_unidade, self.som = m, bonus, mensagem_unidade, som
@@ -388,6 +389,10 @@ class DonosM3:
         self.visao = VisaoGrupos(m, som=som)
         self.caverna = caverna_recrutamento.CavernaRecrutamento(m, externo=self.externo)
         self.ciclo = ciclo_trabalho.CicloTrabalho(m, externo=self.externo)
+        self.recrutamento = RecrutamentoCore(m, bonus=bonus if bonus is not None else
+                                            lambda j, t, s: bonus_recrutamento(m)(j, t, s))
+        self._recrutamento = provedor_recrutamento(self.recrutamento)
+        self.nomes_recrutamento = frozenset(RECRUTAMENTO)
         self._core = provedor_entrada(self.ee)
         self._saida = provedor_saida(self.visao)
         self._caverna = caverna_recrutamento.provedor_caverna(self.caverna)
@@ -441,6 +446,10 @@ class DonosM3:
     def externo(self, nome, chamada, regs):
         from reinicio_ia import DependenciaIA
         self.chamadas.append((nome, chamada))
+        if nome in self.nomes_recrutamento:
+            # Preserve the caller's actual partial register file and unknown masks.
+            # Core rejects missing behaviour inputs before touching memory.
+            return self._recrutamento(nome, chamada, regs)
         if nome in self.nomes_buscas or nome in self.nomes_estado or nome in self.nomes_lacunas:
             return self._nova_rotina_core(nome, chamada, regs)
         if nome in self.nomes_core:
@@ -504,6 +513,9 @@ class DonosM3:
             argumentos = {'chamada': chamada} if 'chamada' in inspect.signature(self.som).parameters else {}
             return dict(EAX=self.som(nome, {k: regs.get(k, 0) & M32 for k in ('EAX', 'EDX', 'EBX', 'ECX')}, pilha,
                                      **argumentos) & M32)
+        if nome == 'iagVilleSendMessage':
+            from mensagem_cidade_ia import mensagem_cidade
+            return mensagem_cidade(self.m, regs, chamada)
         if nome == 'iagUnitSendMessage' and self.mensagem_unidade is not None:
             return self.mensagem_unidade(regs, chamada)
         raise DependenciaIA(nome, chamada)

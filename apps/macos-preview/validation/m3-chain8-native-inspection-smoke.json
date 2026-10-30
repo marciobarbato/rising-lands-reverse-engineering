@@ -1,0 +1,167 @@
+{
+  "bundlePath" : "\/Users\/marcio\/git\/Rising Lands\/local-data\/macos-playable\/dist\/development\/RisingLands-ptbr.app",
+  "commit" : "afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0",
+  "diagnosticReadyDelayMs" : 0,
+  "inputExport" : {
+    "path" : "\/Users\/marcio\/git\/Rising Lands\/local-data\/macos-playable\/build\/development\/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0\/build\/logs\/native-inspection-smoke.input.json",
+    "script" : {
+      "frames" : [
+        {
+          "cursor" : [
+            400,
+            272
+          ],
+          "frame" : 443,
+          "keys" : {
+            "0x11" : -32768
+          },
+          "messages" : [
+            [
+              256,
+              17,
+              1900545
+            ],
+            [
+              512,
+              8,
+              17826192
+            ]
+          ]
+        },
+        {
+          "frame" : 444,
+          "keys" : {
+            "0x11" : -32768
+          },
+          "messages" : [
+            [
+              513,
+              9,
+              17826192
+            ]
+          ]
+        },
+        {
+          "frame" : 445,
+          "keys" : {
+            "0x11" : -32768
+          }
+        },
+        {
+          "frame" : 446,
+          "keys" : {
+            "0x11" : -32768
+          },
+          "messages" : [
+            [
+              514,
+              8,
+              17826192
+            ]
+          ]
+        },
+        {
+          "frame" : 447,
+          "messages" : [
+            [
+              257,
+              17,
+              3223126017
+            ]
+          ]
+        }
+      ],
+      "name" : "macOS recording",
+      "schema" : "rising-lands\/monde01-scripted-input\/1",
+      "start" : {
+        "checkpoint" : "M2.2 frame128",
+        "frame" : 128
+      },
+      "stop_frame" : 447
+    },
+    "sha256" : "cb86333d3e4da3ac32c6f738c37503d1525c306095ea8ebb07ac2db5100437e5"
+  },
+  "metalReadback" : {
+    "commit" : "afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0",
+    "path" : "\/Users\/marcio\/git\/Rising Lands\/local-data\/macos-playable\/build\/development\/afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0\/build\/logs\/native-inspection-smoke.metal.png",
+    "pixelsChecked" : 1920000,
+    "sha256" : "550cbfaa52195dd0e60a358237067403317e3c11e16c6b3f46c6fe515681ed76",
+    "transport" : "validation-texture"
+  },
+  "nativeMetrics" : {
+    "declaredFrames" : 0,
+    "displayFPS" : 0,
+    "executionMode" : "test",
+    "fps" : 55.125452775224936,
+    "frames" : 441,
+    "gameFPS" : 0,
+    "humanEvents" : 0,
+    "metalSeconds" : 0.32174850002047606,
+    "minOneSecondFPS" : 0,
+    "oneSecondPresentations" : [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "presented" : 0,
+    "proofSeconds" : 3.159621,
+    "renderSeconds" : 1.5827310000000001,
+    "rustSeconds" : 2.924077,
+    "seconds" : 7.9999342916635214
+  },
+  "nativeWindowVisible" : true,
+  "passed" : true,
+  "pythonStderr" : "",
+  "readiness" : {
+    "appReady" : true,
+    "checksBudgetSeconds" : 45,
+    "checksSeconds" : 23.009233958335244,
+    "documentLoaded" : true,
+    "elapsedSeconds" : 30.533141208332381,
+    "initializationBudgetSeconds" : 90,
+    "initializationSeconds" : 7.5239072499971371,
+    "phase" : "checks",
+    "windowBudgetSeconds" : 45,
+    "windowVisibleSignal" : true
+  },
+  "readySignal" : {
+    "action" : "appReady",
+    "assets" : true,
+    "commit" : "afbc0f075a3d57cc04a1a3bbfe6d32e939cd3fe0",
+    "mode" : "inspection",
+    "protocol" : 1,
+    "worker" : true
+  },
+  "render" : "full",
+  "scenario" : "MONDE01 · validação sem entrada",
+  "tests" : [
+    "257 summaries and 11 checkpoints shown",
+    "captured blocks listed",
+    "DOM next phase reaches frame1",
+    "DOM memory read returns captured counter",
+    "DOM frame selection reaches frame12",
+    "Graphics full image with HUD and cursor shown",
+    "undrawn frame preserves the full native phase-end surface",
+    "DOM block filter",
+    "DOM reset preserves initial state identity",
+    "DOM opens real Rust S0 with record-only inputs",
+    "Rust native frame1 state and full native surface equal",
+    "Rust ABI 1.6 native Metal window shown",
+    "native live prefix proves 257 states and 11 checkpoints",
+    "native Metal live rate is at least 25 fps",
+    "actual Metal GPU readback matches indexed palette",
+    "native current memory read matches the live counter",
+    "visible recording indicator and disabled order policy",
+    "native input dispatched to active app and key Metal responder",
+    "actual NSEvent path and native recording indicator",
+    "native save action exports Missions schema and k\/k+1\/k+3 click",
+    "recorded Ctrl stays held through click and never enters engine"
+  ],
+  "verifiedCheckpoints" : 11,
+  "verifiedPhases" : 257,
+  "verifiedSurfaces" : 446
+}
