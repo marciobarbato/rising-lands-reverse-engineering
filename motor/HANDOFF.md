@@ -1643,3 +1643,49 @@ hashes are in research/evidence; no later checkpoint becomes a Rust input.
 The earlier carried Rust surface prefix passes622/622 through750. Final S1
 surfaces through3850, prior-window regressions and exclusive timing are queued
 and remain the next verification piece; their results are not assumed here.
+
+## Chain10 piece4 — final-source regression and S1 render boundary
+
+Implementation **a410074** remains unchanged throughout
+[the final regression package](validation/chain10/piece4/summary.json).
+Every state/surface report has the same engine/harness/header input hashes and
+release-library identity. The source checks also match the committed files.
+
+| Probe | Original state/input/order frames | Own-world original/Python surfaces | Stop |
+| --- | --- | --- | --- |
+| K1 |501/501,129–629 (also pinned Python) |501/501 |None |
+| P3 |3,001/3,001,129–3129 |3,001/3,001 |None |
+| P6 |2,272/2,272,129–2400 |2,272/2,272 |None |
+| P7 |3,572/3,572,129–3700 |3,572/3,572 |None |
+
+P6 additionally reproduces **4,544/4,544 whole-state phases** under the unchanged
+published173,046-byte mask (16,002,289 compared bytes/phase), with **4,544/4,544**
+paired play/audit phases. Clock, block identity/lengths, original registers,
+static inputs and checkpoint integrity remain exact. This run takes933.822s;
+the advancing P3/P6/P7 surfaces take741.188/602.655/923.018s. These are proof
+wall times, not game-loop timings. All executed jobs stay below1,140s after
+lease grant. K1 again pairs all1,002 phases exactly. Fresh final-source
+GetCaseCentrale entries pass **12/12** with full registers and supplied bytes.
+
+S1's carried surface proof completes **1,885/1,885 full surfaces129–2013**,
+including original/Python pixels, original/Python raster order, carried cache/
+background and Python effects. At **frame2014**, both Rust and pinned Graphics1.9
+stop at **0x4022c8**, `structure selection outside captured API-1.8 domain`.
+Their partial pixels, cache, raster calls and effects match each other. The
+original completed the routine, so its complete frame2014 surface/raster tail
+is not claimed equal to this partial result. The strict full-window reader's
+stopped row and exit1 are retained, rather than changing its comparison masks
+or pretending that the remaining original drawing ran. No S1 whole-state or
+production-glyph claim is added. The prior qualified AffText contract remains.
+
+Thus the independent S1 logic prefix remains3,722 exact indicator/input/order
+frames through3850, with SacGetCapacite0x4299da stopping phase3 of3851; its
+render prefix ends2013. The pinned Python logic prefix ends2546, then requires
+Economy's actual DX forwarding at SetSortEngin0x420f8c. These are three separate
+limits, with their real outputs recorded. The remaining S1 selection contract
+belongs to Graphics; no unsupported mode was silently admitted in Rust.
+
+The final native gate already passes on these identical source bytes (piece3).
+Exclusive play timing and prior terminal state/surface hash checks are the last
+verification piece and remain pending here. No main merge or project acceptance
+is performed or claimed.
