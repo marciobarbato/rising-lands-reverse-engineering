@@ -1095,3 +1095,37 @@ of uncaptured map/camera/mode and origins40/48. The regenerated current structur
 P3 **3001/3001**, P6 **2272/2272**, P7 **3572/3572**, with **no full logic-provider stop** in those captures.
 This scan is not a completed pixel-chain proof; the fresh chained pixel replay and full domain gate
 remain queued under the lease at this checkpoint. Render API and gameplay pixels remain1.9.
+
+## S1 objectives and native font1 glyphs outside AffText
+
+`telas_objetivos_s1.compor_objetivos_s1(memoria, superficie, *, catalogo)` composes original
+`AffObjectif 0x47C6D3`, using the already committed real S1 frame17044–17050 calls (`24f0ec8`).
+It returns `pixels`, ordered raster `chamadas`, and ordered `(name,address,old_hex,new_hex)` clip
+`efeitos`; it never mutates input memory, pixels or the catalog. Memory provides u8/u16/u32 over
+DGROUP and the actual terminated strings addressed by the objectives pointer table. The loader
+and mission advancement remain Missions-owned. No text callback, lookup default or emulator is used.
+
+Supported page:800×600, camera-independent direct AffObjectif call, offset word0, last-line index36,
+language/multibyte words0/0, line-height word15, nonzero draw flag. A zero draw flag returns before
+all other reads, as in the original. Unknown pages/geometry/languages raise `DependenciaTextoBitmap`
+at0x47C6D3/0x4591C8; missing declared memory propagates its read error. In particular, an unreadable
+string pointer never becomes empty text. Inputs use original PT-BR bytes; the native next page is
+headed `- Missão 2 -`, preserved unchanged.
+
+Order: save four clip words → set inclusive(55,212,310,486) → fill palette42 → query/render18 lines
+→ restore the incoming clip. Width uses original font1 glyph dimensions and the lower-case-l
+advance for spaces. Horizontal centring is the original signed truncation and zero clamp. Each
+line uses `AffString 0x4591C8`, base bob0x23D5, with clipped glyph copies; NUL/newline terminates.
+`texto_bitmap_nativo` exposes the line compositor and width query independently, requiring explicit
+font/language/multibyte/clip inputs, bounded127-byte printable lines and signed16-bit positions.
+Other fonts, multibyte/control paths and AffText alignment remain dependencies in this first slice.
+
+Full current comparison: **7/7** complete800×600 objectives surfaces, **1519/1519** raster calls
+(1512 actual bitmap-glyph calls plus7 fills), and **7/7** full DGROUP projections equal the native
+captures. Inputs remain unchanged. Two regression tests pass2/2, including unknown-page/font and
+unreadable-pointer rejection. `validacao/s1-objetivos-provider-final.json` pins only owned sources
+and evidence. Original bytes/hashes are in `evidencias/s1-telas-intervalos.json`; the executable is
+the unchanged6c556520…8543fb oracle. This is an isolated screen compositor, not the full menu-mode
+dispatcher: MenuInit/LoadPie/AffText result/transition dependencies remain explicit, and gameplay
+render API remains1.9. Fresh native dependency observations and the domain gate are still leased
+queue items; the seven comparisons above replay immutable committed native captures.

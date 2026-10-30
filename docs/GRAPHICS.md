@@ -1072,3 +1072,19 @@ checks. The P3/P6/P7 current-provider input scan has no remaining logic-effect s
 windows; this is guard coverage rather than a new pixel-chain claim. See the
 [handoff](../pesquisas-paralelas/graficos-animacao/HANDOFF.md#finite-affgame-and-restoreall-view-domain)
 for input widths, verification order, reports and pending leased checks. Render version remains1.9.
+
+### S1 objectives glyph composition outside AffText
+
+[telas_objetivos_s1.py](../pesquisas-paralelas/graficos-animacao/telas_objetivos_s1.py) reconstructs the real
+S1 next-objectives page through AffObjectif0x47C6D3. All **7/7** complete surfaces, **1519/1519** raster calls
+and full DGROUP effects match the committed native frame17044–17050 captures. The1512 native glyph copies
+execute AffString0x4591C8; they are independent of the deliberately skipped AffText boundary.
+
+The pure API consumes read-only memory, an800×600 indexed surface and a catalog; it returns pixels, raster
+calls and ordered clip effects. It preserves the actual PT-BR bytes. Supported inputs are the captured first
+page(offset0,last-line36), font1, language/multibyte0/0 and original15-pixel line spacing. Clip save → temporary
+rectangle/fill →18 measured glyph lines → clip restore preserves original order. Unknown font/page/language
+and unreadable text remain dependencies. The
+[handoff](../pesquisas-paralelas/graficos-animacao/HANDOFF.md#s1-objectives-and-native-font1-glyphs-outside-afftext)
+records the exact input contract and original hashes. Full MenuInit/result transitions and integration in the
+gameplay frame API remain separate; its version is still1.9.
