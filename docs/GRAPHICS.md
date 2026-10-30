@@ -1056,3 +1056,19 @@ Its origin and projectile restrictions remain independent. AffGame's owned-empty
 broaden sanctuary modes beyond4/5 in a pair. The executable identity remains `6c556520…8543fb`; original entries
 are AffGame0x417698, RestoreAll0x474B08, AffBatiments0x407DD3 and projectile guard0x46FF70. Gameplay pixels and
 render version1.9 are unchanged. Glyph0x459454, unproved origins and menu0x4176A8 remain explicit dependencies.
+
+### Complete finite view-effect matrix (1.9 follow-up)
+
+The [recovery ledger](../pesquisas-paralelas/graficos-animacao/RECOVERY_GRAPHICS_20261030.md) records all
+**3840/3840** original calls before translation: AffGame and RestoreAll at each of1920 exact origins
+(x0..39,y0..47), map64×64, viewport25×17, camera0, mode0x12. Both origin sets now enumerate that finite
+domain through `origens_efeitos_monde01.json`. New origins require the captured map/camera/mode; existing
+origin contracts retain their previous conditions. Other origins still stop at0x415B77. Structure,
+habitation, projectile and shake guards are unchanged, and no map-bounds fallback is added.
+
+The current provider matches all3840 calls with no additional logic/CRT write or RNG writer hit. Seven
+actual P7 origin calls pass7/7 with exact ordinary phase/state/surface hashes and separate AI flag/EAX
+checks. The P3/P6/P7 current-provider input scan has no remaining logic-effect stop in its captured
+windows; this is guard coverage rather than a new pixel-chain claim. See the
+[handoff](../pesquisas-paralelas/graficos-animacao/HANDOFF.md#finite-affgame-and-restoreall-view-domain)
+for input widths, verification order, reports and pending leased checks. Render version remains1.9.

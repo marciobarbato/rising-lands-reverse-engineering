@@ -1070,3 +1070,28 @@ Merged `origin/main` at `ad0a4a9` first. The recovered CAVE provider and its cur
 the newly requested domain gate and separate 24-call RestoreAll native rerun are queued behind the heavy
 lease and are not reported as completed here. No pixel implementation or callback signature changed.
 The completed native view inventory is documented in [the recovery ledger](RECOVERY_GRAPHICS_20261030.md).
+
+## Finite AffGame and RestoreAll view domain
+
+Original-only evidence `b1f07bf` precedes this translation. `origens_efeitos_monde01.json` enumerates exactly
+1920 captured origins for each routine: x0..39, y0..47. `ORIGENS_PROVADAS` and
+`ORIGENS_RESTOREALL_PROVADAS` now contain these finite sets. For an origin newly admitted by the matrix,
+the provider additionally requires native map words `(64,64)` at `0x497168/+2`, camera0 at `0x508041`,
+and mode0x12 at `0x4E2F78`. The previous 143/108 origin contracts retain their existing guards. There is
+no map-bounds fallback, clamping or default state. Outside the sets or these added bounds, the first
+stop remains `0x415B77`. Structure, habitation, monster/projectile and shake domains remain independent.
+
+Inputs are still immutable `u8/u16/u32` memory reads. Verification order remains shake → viewport →
+origin → (new origins only: map, camera, mode) → structures/habitation → monsters → projectiles;
+the existing flip/shake arithmetic follows. No callback or return-field change occurs. The unchanged
+original executable/code hashes and the exact two routines are recorded in the recovery ledger.
+
+Current-provider comparison: **3840/3840** native calls, zero logic/CRT/cursor-writer differences,
+`validacao/grade-vistas19-provider-final.json`. The seven actual P7 isolated origins also pass **7/7**,
+including `(10,15)`, with original whole-phase/state/surface equality, AI flag stores and leftover EAX
+checked separately against the unchanged display mask (`validacao/origens-p7-provider-final.json`).
+No other front's source hashes are pinned. Three new focused tests pass **3/3**, including rejection
+of uncaptured map/camera/mode and origins40/48. The regenerated current structure-domain scan retains
+P3 **3001/3001**, P6 **2272/2272**, P7 **3572/3572**, with **no full logic-provider stop** in those captures.
+This scan is not a completed pixel-chain proof; the fresh chained pixel replay and full domain gate
+remain queued under the lease at this checkpoint. Render API and gameplay pixels remain1.9.
