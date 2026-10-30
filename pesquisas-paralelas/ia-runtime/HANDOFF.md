@@ -665,3 +665,28 @@ Leased `python3 -B scripts/check.py --domain ai-runtime`: 124 tests, 116 execute
 explicit native skips, no failures/errors; documentation links pass. Strict P6 and the S1 frame-2547
 investigation follow after this refresh is committed and pushed. No main integration or acceptance is
 performed here.
+
+## Strict P6 proof (2026-10-30, source `01c4319`)
+
+Fresh clean-tree strict run (no planning flag), all three parts: **4,544/4,544 phases equal**, frames
+129–2400, zero crossings/provider stops, no differences and no aggregation problems. Checkpoint continuity,
+scripted answers, order fields, original reference integrity, registers, both RNGs and all state under the
+published cumulative mask pass. `validacao/m3-1-prova-p6.json` records source, hashes and reproduction commands.
+No implementation, API, mutation order, original identity or supported domain changed for this stage.
+
+| Part | Frames | Equal phases | Phase chain SHA-256 |
+|---|---|---:|---|
+| 0 | [129, 1128] | 2000 | `a3f35dfc7701065f135f5b50046f1ce9d416f7190d2a0d1e65186cda3086df98` |
+| 1 | [1129, 2128] | 2000 | `5da71fab9ac33cb3ed067a9c962bea9e6612a7a57ee1fdfe01b99b34122924f6` |
+| 2 | [2129, 2400] | 544 | `c557167f801fbdc01f4b733880f016cf65d42e59df5b66c5fc58d2abe2c10f0c` |
+
+Reproduce from source `01c4319` (or a descendant with the same implementation):
+
+```sh
+python3 -B pesquisas-paralelas/ia-runtime/provar_entrada_janelas_ia.py tudo --janelas P6 --lease '/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py' --saida pesquisas-paralelas/ia-runtime/validacao/m3-1-prova-p6.json
+```
+
+The proof writer refuses an existing output; use a fresh output path for reruns. Second-machine reproduction:
+`provar_entrada_janelas_ia.py reproduzir pesquisas-paralelas/ia-runtime/validacao/m3-1-prova-p6.json --janela P6 --lease <heavy_lease.py>`.
+That reproduction and coordinator acceptance remain pending. The preceding domain gate passed 124 tests
+with eight explicit skips. The next and only remaining assigned task is the S1 frame-2547 investigation.
