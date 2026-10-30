@@ -280,10 +280,19 @@ def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None, estrutura
         # (its constructor reads the bonus table).
         torres = {}
 
+        class BonusTardio:
+            """Economy's live ``BonusUnidades`` (Combat's default), read at the first bonus query: a non-turret
+            source returns before any, and reads no bonus byte."""
+            def consultar(self, *args, **kwargs):
+                if 'b' not in torres:
+                    from bonus_unidades import BonusUnidades
+                    torres['b'] = BonusUnidades.da_memoria(m)
+                return torres['b'].consultar(*args, **kwargs)
+
         def combate(nome):
             def chamar(regs):
                 if 'o' not in torres:
-                    torres['o'] = OrdensTorresCombate(m)
+                    torres['o'] = OrdensTorresCombate(m, bonus=BonusTardio())
                 return torres['o'].provedores()[nome](regs)
             return chamar
         funcoes.update(BatimentPeutAttaquer=combate('BatimentPeutAttaquer'),
