@@ -71,6 +71,7 @@ mod play;
 mod chain_bags;
 mod chain_display_origins;
 mod chain_fatigue;
+mod chain_queries;
 mod chain_recruit;
 mod chain_restore;
 mod chain_s1;

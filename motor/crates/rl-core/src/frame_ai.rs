@@ -45,17 +45,7 @@ pub fn call(m: &mut MemoriaJogo, name: &str, args: &[u32]) -> Result<u32> {
             update_player(m, args[0] as u8, args[1] as u8)?;
             Ok(1)
         }
-        "iagVilleSendMessage" => {
-            let owner = m.u8(0x49a0c8 + 276 * (args[0] & 65535) + 4)?;
-            if owner >= 4 {
-                return Ok(u32::from(owner));
-            }
-            let kind = crate::frame_economy::call(m, "PlayerGetType", &[u32::from(owner)])? & 255;
-            if kind != 2 {
-                return Ok(kind);
-            }
-            Err(stop("iagVilleSendMessage AI city handler", 0x48484c))
-        }
+        "iagVilleSendMessage" => crate::chain_queries::city(m, args[0]),
         "iagUnitSendMessage" => send_message(m, args[0] as u16, args[1] as u8),
         "iagUnitNoyau" => Err(stop("iagUnitNoyau", 0x482936)),
         "iagVilleNoyau" => Err(stop("iagVilleNoyau", 0x48453c)),

@@ -1749,3 +1749,37 @@ python3 "$lease" --exclusive engine-m2-play -- env RL_REFERENCE_PROFILE=logic \
   python3 -B motor/testes/play_benchmark.py --frames 9200 --mode 1 \
   --library motor/target/release/librising_engine.dylib --output .local/m2-play-new.json
 ```
+
+## S1 queries — chain11
+
+Merged origin/main at `3e2ed771b78dd3e130ae86e08e081045bc3dc242` on
+`feat/codex-rust-engine`. New `RL_REFERENCE_PROFILE=chain11` pins that logic
+revision and the unchanged Graphics1.9 revision `92fab50`; earlier profiles
+and their evidence remain immutable. C ABI1.6 and Graphics1.9 are unchanged.
+
+The live query entries are SacGetCapacite0x475736 (AX cell, object types
+0x42..0x44, quantity-pointer upper half retained), TuyauEstSortie0x420c7c
+(AX structure0..999, lazy +0x76==15 then +0x75!=0), and MineGetCapacite0x475541
+(AX mine index0..19). They preserve the six other data GPRs, make no writes
+or callbacks and return ESP+4. InputGame now consumes the sack result at
+CALL0x4299da; work and input share the same live mine query. The renderer's
+existing pipe predicate is already identical; its domain is unchanged.
+
+iagVilleSendMessage0x484808 takes AX structure, DL message and EBX argument.
+Its non-AI prefix reads the live owner and PlayerGetType, returns owner>=4
+or the non-AI player type, sets EBX=structure and EDX=incoming EBX, preserves
+ECX/ESI/EDI/EBP and returns ESP+4. Owner type2 retains the addressed dependency
+at0x48484c, with no stores. No foreign message body is synthesized.
+
+The original executable identity is unchanged:
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+The new query proof compares all captured GPRs and supplied bytes: 274 sack,
+273 pipe,101 mine and27 city cases, **675/675 exact**, including four expected
+AI-city stops. City captures omit ESP, so no city stack-control equality is
+claimed. The other648 cases compare captured ESP exactly. Evidence and exact
+source/binary identities are in `validation/chain11/piece1/`.
+
+`sh motor/validate.sh` passes on this query piece: formatting, strict Clippy,
+30 Rust tests,63 Python tests,666 input leaves,75 pilot records and the C,
+Swift ABI1.6 and Metal render smoke checks. Longer S1/regression/timing results
+follow in the next piece; this leaf proof does not claim a new frame reach.
