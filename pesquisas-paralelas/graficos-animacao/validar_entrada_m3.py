@@ -23,7 +23,7 @@ class ArgumentosRasterM3:
     def __init__(self,catalog):self.catalog,self.calls=catalog,[]
     def __enter__(self):
         import composicao, construcoes, corpo_tipos1_8, hud_quadro, objetos, projeteis_graficos, quadro_jogo, sobreposicoes_entrada_m3
-        import cave_scriptada_m3, hud_scriptado_m3
+        import cave_scriptada_m3, hud_scriptado_m3, texto_afftext_bitmap
         self.stack=ExitStack()
         def wrap(fn,shadow):
             def call(*args,**kwargs):
@@ -31,6 +31,7 @@ class ArgumentosRasterM3:
                 name,local=caller.f_code.co_name,caller.f_locals
                 routine,owner='PasteOmbreCmp' if shadow else 'PasteBobCmp',None
                 clip=1
+                if name=='compor_texto_afftext':clip=local['clip']
                 if not shadow and name=='compor_fachada' and local['camada']['operacao']=='jogador':
                     routine,owner='PastePlayerCmp',local['camada']['jogador']
                 elif not shadow and name=='_icone_fadiga':routine,owner='PastePlayerCmp',local['r'][0]
@@ -44,7 +45,7 @@ class ArgumentosRasterM3:
                 self.calls.append([routine,i16(x),i16(y),self.catalog.ultimo_id,clip]+([] if owner is None else [owner]))
                 return fn(*args,**kwargs)
             return call
-        for module in (composicao,construcoes,corpo_tipos1_8,hud_quadro,objetos,projeteis_graficos,quadro_jogo,sobreposicoes_entrada_m3,cave_scriptada_m3):
+        for module in (composicao,construcoes,corpo_tipos1_8,hud_quadro,objetos,projeteis_graficos,quadro_jogo,sobreposicoes_entrada_m3,cave_scriptada_m3,texto_afftext_bitmap):
             for attr,shadow in (('compor_indices',False),('compor_sombra',True)):
                 if hasattr(module,attr):self.stack.enter_context(patch.object(module,attr,wrap(getattr(module,attr),shadow)))
         original_box=hud_quadro._Hud.caixa

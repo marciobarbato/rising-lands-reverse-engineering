@@ -1,0 +1,92 @@
+{
+  "schema": "rising-lands/graphics-late-s1-review-diagnostics/1",
+  "scope": "Resolved pre-validation diagnostics; never passing acceptance evidence",
+  "resolved": [
+    {
+      "frame": 11751,
+      "address": "0x40958e",
+      "reason": "CAVE level3, later4, exceeded prior level0 domain"
+    },
+    {
+      "frame": 11754,
+      "address": "0x469c5f",
+      "reason": "Message queue and type14 projectile were outside the old domain"
+    },
+    {
+      "frame": 11807,
+      "address": "0x410be4",
+      "reason": "Farmer material/fatigue pair(1,4)"
+    },
+    {
+      "frame": 11843,
+      "address": "0x411147",
+      "reason": "Owner4 body requires two identical coloured blits; pixels alone hid the missing call"
+    },
+    {
+      "frame": 12024,
+      "address": "0x4135fa",
+      "reason": "Shifted military fatigue icon"
+    },
+    {
+      "frame": 12095,
+      "address": "0x4135fa",
+      "reason": "Shifted thief attack fatigue icon"
+    },
+    {
+      "frame": 12460,
+      "address": "0x407dd3",
+      "reason": "New corpse precedes monster recount by one phase"
+    },
+    {
+      "frame": 11754,
+      "address": "0x471830",
+      "reason": "Three real input-zone stores require logical outputs; no mask widening"
+    },
+    {
+      "frame": 11286,
+      "address": "0x41591f",
+      "reason": "Full-pool census includes farmer hunger state19; native prepared visible counterpart proves the same body branch"
+    },
+    {
+      "test": "test_owned_empty_cave_native_matrix",
+      "address": "0x41591f",
+      "reason": "Raid census is now lazy; old DGROUP/projectile-only inputs retain their proved contract and new domains name the required full pool"
+    },
+    {
+      "frame": 12475,
+      "address": "0x46ff70",
+      "reason": "A single type14 effect remains in slot6 after recount; lazy raid proof also covers this extended single-slot domain"
+    },
+    {
+      "tests": [
+        "test_out_of_domain_branches_stop",
+        "test_uncaptured_cave_flags_and_worker_tasks_stay_stops"
+      ],
+      "reason": "Prior negatives now fall inside native-proved one-line alerts and CAVE levels0..7; test queue index256 and CAVE level8 instead"
+    }
+  ],
+  "native_failures": [
+    {
+      "task": "First multi-text observer",
+      "status": "failed before publication",
+      "reason": "Earlier real glyphs change later incoming surfaces; retain exact requests and actual full output instead"
+    },
+    {
+      "task": "750 isolated glyph calls",
+      "status": "failed; no partial evidence used",
+      "reason": "Existing cumulative600-second bench wall budget; replaced by three complete250-call native runs"
+    }
+  ],
+  "intermediate_reports_archived_locally": [
+    "s1-late-attack-first.json",
+    "s1-late-before.json",
+    "s1-late-fire-first.json",
+    "s1-late-level3.json",
+    "late-s1-render-11751-11900.json",
+    "late-s1-render-11901-12000.json",
+    "late-s1-render-12001-12220.json",
+    "late-s1-render-12221-12500.json",
+    "s1-alerta-zonas-glifos-first.json",
+    "s1-tardio-glifos-first.json"
+  ]
+}

@@ -57,7 +57,8 @@ def validar_unidade(c,r):
     if r[0xa5] != (10 if r[1] == 8 else 8):c.parar(0x41591f,'input-overlay body count differs from the initialized count')
     if word(r,4)!=4 or word(r,0x76)!=4:
         from camadas_exibicao_m3 import TABLES
-        if [word(r,4),word(r,0x76)] not in TABLES.get('fatigue_pairs',{}).get(str(r[1]),[]):
+        if ([word(r,4),word(r,0x76)] not in TABLES.get('fatigue_pairs',{}).get(str(r[1]),[])
+                and not (r[1]==5 and (word(r,4),word(r,0x76))==(1,4))):
             c.parar(0x410be4,'fatigue words outside captured unit/material pairs')
     if r[0xbd] and r[0x82]>1 and not (r[1] in (5,7) and r[0x82]==2):
         c.parar(0x412923,'selected unit order marker outside captured modes')

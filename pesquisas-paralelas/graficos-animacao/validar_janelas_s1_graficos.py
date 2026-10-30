@@ -68,9 +68,9 @@ def comparar(path, refs, initial=None, capture=None):
         if background is not None and 'saved_background' in row['entry']:
             assert sha(background[1]) == row['entry']['saved_background'][1]
             m = MemoriaEntradaM3([background] + m.blocks)
-        logic_stop = None
+        logic_stop = None;logic_effects=()
         try:
-            desenhar_jogo(m, habitado=lambda i: habitado(m, i))
+            logic_effects=desenhar_jogo(m, habitado=lambda i: habitado(m, i)).escritas
         except DependenciaExibicao as error:
             logic_stop = dict(address=hex(error.sitio), reason=error.motivo)
         adapter = FronteiraTextoGravada(cap, row)
@@ -82,6 +82,8 @@ def comparar(path, refs, initial=None, capture=None):
         pixels = sum(a != b for a, b in zip(result.pixels, expected))
         arguments = sum(a != b for a, b in zip(raster.calls, row['blits'])) + abs(len(raster.calls) - len(row['blits']))
         native_dg = cap.blob(row['exit_dgroup'])
+        input_writes=[(a,n,v) for a,n,v in logic_effects if 0x5099b4<=a<a+n<=0x50a9ba]
+        logic_writes_bad=[hex(a) for a,n,v in input_writes if native_dg[a-0x494000:a-0x494000+n]!=v.to_bytes(n,'little')]
         projected = bytearray(cap.memory(row).ler_mundo(0x494000, len(native_dg)))
         for name, address, old, new in result.efeitos:
             data = bytes.fromhex(new)
@@ -93,10 +95,11 @@ def comparar(path, refs, initial=None, capture=None):
         ignored = {a + i for a in (0x508f70, 0x4e17a4) for i in range(4)}
         effects = [] if result.parada else [hex(0x494000 + i) for i, (a, b) in enumerate(zip(projected, native_dg))
                                                 if a != b and 0x494000 + i not in ignored]
-        equal = not (result.parada or logic_stop or pixels or arguments or effects or adapter.pending)
+        equal = not (result.parada or logic_stop or pixels or arguments or effects or adapter.pending or logic_writes_bad)
         item = dict(frame=frame, equal=equal, stop=result.parada, logic_stop=logic_stop,
             pixel_mismatches=pixels, argument_mismatches=arguments, effect_mismatches=effects,
             text_boundaries=adapter.checked, drawing_calls=len(raster.calls),
+            logic_input_writes=input_writes,logic_write_mismatches=logic_writes_bad,
             sha256=sha(result.pixels), native_sha256=row['after'])
         if arguments:
             item['argument_details'] = [dict(index=i, python=a, native=b) for i, (a, b) in enumerate(zip(raster.calls, row['blits'])) if a != b][:5]

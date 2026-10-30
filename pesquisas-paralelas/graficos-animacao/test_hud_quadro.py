@@ -151,7 +151,7 @@ class TestHudQuadro(unittest.TestCase):
         linha = self.cap.d['rows'][0]
         mascara = self.cap.blob(linha['touched']['mask'])
         sup = bytes(len(mascara))
-        casos = ((0x496204, b'\x01\x00', 0x417ba2), (0x4e2e7c, b'\x01', 0x4667a7), (0x507d56, b'\x01\x00', 0x469c5f),
+        casos = ((0x496204, b'\x01\x00', 0x417ba2), (0x4e2e7c, b'\x01', 0x4667a7), (0x507d54, b'\x00\x01', 0x469c5f),
                  (0x4e060c, b'\x01\x00\x00\x00', 0x40f8c0), (0x4e0618, b'\x10\x27', 0x40f77b), (0x496ac4, b'\x00\x00', 0x401d18))
         for endereco, valor, parada in casos:
             with self.subTest(address=hex(endereco)):

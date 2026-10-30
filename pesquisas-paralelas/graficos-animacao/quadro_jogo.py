@@ -278,6 +278,8 @@ class _Composicao:
 
     def engin(self, x, y, indice):
         r = self.mundo.unidades[indice*276:(indice+1)*276]; tipo, estado = r[1], r[2]
+        from corpos_s1_tardios_graficos import body
+        if body(self,r,x,y,indice):return
         if tipo in TIPOS and encaminhamento(tipo, estado, auxiliar_8a=r[0x8a])['rota'] == 'sem_desenho': return
         if tipo==7 and estado==5:
             from colheita_exibicao_m3 import builder_work
@@ -337,7 +339,7 @@ class _Composicao:
         if r[1] > 25 or not SE_FATIGUE[r[1]]: return
         # S1 native2549/4100: newly recruited builder/farmer, state2.
         # The common 0x4135FA tail uses the shifted cell origin for both.
-        if (dx or dy) and not (r[1]==9 and r[2] in (2,7,13) or r[1] in (5,7) and r[2]==2):
+        if (dx or dy) and not (r[1]==9 and r[2] in (2,7,13) or r[1] in (5,7) and r[2]==2 or r[1] in (0,1,8) and r[2] in (2,7) or r[1]==8 and r[2]==1):
             self.parar(0x4135FA, 'tired icon with a nonzero body shift (+0x86/+0x87): origin not verified')
         self.chamadas.append(['EngineIconeFadiga', indice])
         q = self.catalogo.quadro(localizar(w4+ICONE_FADIGA)['id_motor'])   # shifted cell origin - (8, 11): 0x41362E/0x413650

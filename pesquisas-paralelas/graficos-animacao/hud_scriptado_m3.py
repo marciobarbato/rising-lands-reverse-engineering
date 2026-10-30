@@ -1,7 +1,7 @@
 """Native placement grid, tooltip frame and saved-background copy (evidence 9a1f846).
 
-AffText is an explicit external dependency. A supplied text renderer receives bytes, rectangle and font arguments;
-without it, rendering stops at 0x459454 after producing the native tooltip background.
+AffText uses the original bitmap provider by default. An explicit callback can
+replace it; texto=False retains an addressed dependency for boundary diagnostics.
 """
 import struct
 from quadro_jogo import DependenciaQuadro
@@ -88,11 +88,26 @@ def tooltip(h):
     h.caixa(x,y,x+width-1,y+height-1,1,False)
     shaded_box(h,x+1,y+1,x+width-2,y+height-2,shadow=True,clipped=False)
     request=dict(text=bytes(text),x=x+3,y=y+1,right=x+width-2,bottom=y+height-2,font=1,flags=(0,0))
-    h.chamadas.append(['AffText',request['x'],request['y'],request['right'],request['bottom'],bytes(text).hex(),1,0,0])
-    if h.texto is None:
+    afftext(h,request)
+    write(h,'largura_tela_u16',0x49a018,old_width);write(h,'altura_tela_u16',0x49a01a,old_height)
+
+def afftext(h,request):
+    """One real AffText call, preserving its position in the full display sequence."""
+    m=h.m
+    h.chamadas.append(['AffText',request['x'],request['y'],request['right'],request['bottom'],request['text'].hex(),request['font'],*request['flags']])
+    if h.texto is False:
         raise DependenciaQuadro(0x459454,'AffText glyph renderer is not supplied (probes declare this boundary non-executed)',
             superficie=bytes(h.saida),chamadas=h.chamadas,efeitos=h.efeitos)
-    rendered=h.texto(request,bytes(h.saida))
+    provider=h.texto
+    if provider is None:
+        from texto_afftext_bitmap import TextoAffTextBitmap
+        provider=TextoAffTextBitmap(h.catalogo,
+            recorte=tuple(m.u16(a) for a in (0x49a020,0x49a01c,0x49a022,0x49a01e)),
+            idioma_u32=m.u32(0x4e1d94),multibyte_u32=m.u32(0x4e1d98))
+    from texto_bitmap_nativo import DependenciaTextoBitmap
+    try:rendered=provider(request,bytes(h.saida))
+    except DependenciaTextoBitmap as error:
+        raise DependenciaQuadro(error.endereco,str(error),superficie=bytes(h.saida),
+            chamadas=h.chamadas,efeitos=h.efeitos) from error
     if not isinstance(rendered,bytes) or len(rendered)!=len(h.saida):raise ValueError('Text renderer must return the complete indexed surface')
     h.saida[:]=rendered
-    write(h,'largura_tela_u16',0x49a018,old_width);write(h,'altura_tela_u16',0x49a01a,old_height)

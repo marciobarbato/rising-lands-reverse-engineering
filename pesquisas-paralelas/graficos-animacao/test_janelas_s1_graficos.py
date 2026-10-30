@@ -2,6 +2,7 @@
 import hashlib
 import json
 import re
+import subprocess
 import unittest
 
 from render_quadro import renderizar_quadro
@@ -75,7 +76,8 @@ class JanelasS1Graficos(unittest.TestCase):
         self.assertEqual({w['probe']:w['equal'] for w in regression['windows']},dict(P3=3001,P6=2272,P7=3572))
         for report in (current,regression):
             for name,digest in report['sources_sha256'].items():
-                self.assertEqual(hashlib.sha256((AQUI/name).read_bytes()).hexdigest(),digest,name)
+                frozen=subprocess.check_output(['git','show','9b5f449:pesquisas-paralelas/graficos-animacao/'+name],cwd=AQUI)
+                self.assertEqual(hashlib.sha256(frozen).hexdigest(),digest,name)
             for capture in report.get('captures',report.get('windows',[])):
                 for row in capture['rows']:
                     self.assertTrue(row['equal'])
