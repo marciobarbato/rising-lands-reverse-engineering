@@ -10,6 +10,7 @@ from pathlib import Path
 import capturar_telas_finais_s1 as native
 
 LEAVES={0x4799c4:'LoadPie',0x4591c8:'AffString',0x458f5c:'TextGetLargeur',
+        0x47150f:'RechercheCalculNew',
         0x4717c2:'RechercheGetNiveau',0x4717a2:'RechercheGetEtat',0x4717b1:'RechercheGetBranche',
         0x470c3d:'InventionGetCout',0x46003b:'PlayerGetColor'}
 
