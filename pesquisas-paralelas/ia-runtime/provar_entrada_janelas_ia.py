@@ -70,6 +70,14 @@ JANELAS = {
                comandos=f'{SONDAS}/P2/comandos.jsonl.xz',
                sha_comandos='21e4cad942ff36d7895587e862555801f64e010e4a0cf326b08e08a0e8a182ac',
                entradas=f'{SONDAS}/P2/entradas.jsonl.xz', sha_entradas='d6f7b81f11f15bf0d8fe1e7e90a3afc4c317e013c282385179dcd11023dd0d61'),
+    # P6 (P3 through cave lodging, frames 129-2400, 3 parts): Missions' d18add9, not yet on main. Until it is,
+    # the pinned files are read from that commit (``git show``) into .local/m3-1/ref/P6 and hash-checked.
+    'P6': dict(manifesto=f'{SONDAS}/P6/captura-janela.manifest.json',
+               sha='9e66bb4fd23dae0777a983820b54952bedb11f3b4ab0b84a6481340945de754f',
+               comandos=f'{SONDAS}/P6/comandos.jsonl.xz',
+               sha_comandos='88e4fe171e9563189aa95b44c5e59abb460125a28085ba332fa8c0e98f278ed3',
+               entradas=f'{SONDAS}/P6/entradas.jsonl.xz', sha_entradas='a9de5b5771a869d404ae25b51e6784dc146345f4cc6ba8e08226efe7ef268e0b',
+               ref='d18add9e'),
 }
 INICIO = 128
 JOGADORES = 4                      # packet pointers and selection areas compared (players 0..3)
@@ -100,18 +108,41 @@ def pasta_relatorios(rev=None):
     return f'.local/m3-1/prova-{(rev or revisao())[:12]}'
 
 
+def arquivo(nome, caminho):
+    """The file at repository path ``caminho`` of window ``nome``: the checkout's, or, for a window pinned to a
+    Missions commit not yet merged (``ref``), that commit's blob read once into .local/m3-1/ref/<window>/. Every
+    caller checks the pinned hash."""
+    local = ROOT / caminho
+    ref = JANELAS[nome].get('ref')
+    if local.exists() or not ref:
+        return local
+    copia = ROOT / '.local/m3-1/ref' / nome / Path(caminho).name
+    if not copia.exists():
+        copia.parent.mkdir(parents=True, exist_ok=True)
+        dados = subprocess.run(['git', '-C', str(ROOT), 'show', f'{ref}:{caminho}'], capture_output=True,
+                               check=True).stdout
+        copia.write_bytes(dados)
+    return copia
+
+
 def manifesto(nome):
     j = JANELAS[nome]
-    if sha(ROOT / j['manifesto']) != j['sha']:
+    if sha(arquivo(nome, j['manifesto'])) != j['sha']:
         raise SystemExit(f'{nome}: the window manifest is not the pinned one')
-    m = json.loads((ROOT / j['manifesto']).read_bytes())
-    if len(m['parts']) != 1:
-        raise SystemExit(f'{nome}: expected a single-part window')
-    if sha(ROOT / m['mask']['path']) != m['mask']['sha256']:
+    m = json.loads(arquivo(nome, j['manifesto']).read_bytes())
+    if [p['part'] for p in m['parts']] != list(range(len(m['parts']))):
+        raise SystemExit(f'{nome}: the manifest parts are not 0..n-1')
+    if sha(arquivo(nome, m['mask']['path'])) != m['mask']['sha256']:
         raise SystemExit(f'{nome}: the mask file differs from the manifest')
-    if sha(ROOT / j['comandos']) != j['sha_comandos'] or sha(ROOT / j['entradas']) != j['sha_entradas']:
+    if sha(arquivo(nome, j['comandos'])) != j['sha_comandos'] or \
+            sha(arquivo(nome, j['entradas'])) != j['sha_entradas']:
         raise SystemExit(f'{nome}: comandos.jsonl or entradas.jsonl differs from the pinned file')
     return m
+
+
+def nome_relatorio(nome, parte, partes, quadros=None):
+    base = nome if partes == 1 else f'{nome}-parte{parte:02d}'
+    return f'{base}.json' if not quadros else f'{base}-{quadros}q.json'
 
 
 class Leitor:
@@ -217,33 +248,37 @@ def codigo_importado():
     return dict(sorted(saida.items()))
 
 
-def comparar_janela(nome, quadros=None):
+def comparar_janela(nome, quadros=None, n_parte=0, planejamento=False):
     """The window's comparison body (see the module docstring)."""
     from comparar_quadros_ia import (MascaraEnderecos, _dados, carregar_captura, comparar_sequencia,
                                      fases_referencia, resumo_estado, resumos_mascarados, travessias_medidas)
-    from composicao_entrada_ia import ComposicaoEntrada, RoteiroEntrada
+    from composicao_entrada_ia import JANELA, ComposicaoEntrada, RoteiroEntrada
+    from composicao_encadeada_ia import MemoriaMapaRapida
     from composicao_quadros_ia import REGISTRADORES, carregar_cenario_exibicao, fases_quadros
     from contexto_exibicao_ia import ContextoExibicao
     from inventario_ia_runtime import OriginalImage
     m = manifesto(nome)
-    entrada_m = m['parts'][0]
-    artefato = ROOT / entrada_m['artifact']
+    entrada_m = m['parts'][n_parte]
+    artefato = arquivo(nome, entrada_m['artifact'])
     if sha(artefato) != entrada_m['compressed_sha256']:
         raise SystemExit(f'{nome}: the xz part differs from the manifest')
     parte, sha_bruto = carregar_captura(artefato, entrada_m['raw_sha256'])
-    if parte['mask'] != m['mask'] or parte['probe'] != nome:
-        raise SystemExit(f'{nome}: the part names another mask or probe')
-    mascara_doc = json.loads((ROOT / m['mask']['path']).read_bytes())
+    if parte['mask'] != m['mask'] or parte['probe'] != nome or parte['part'] != n_parte:
+        raise SystemExit(f'{nome}: the part names another mask, probe or part number')
+    anterior = m['parts'][n_parte - 1]['raw_sha256'] if n_parte else None
+    if parte.get('previous_part_raw_sha256') != anterior:
+        raise SystemExit(f'{nome}: part {n_parte} does not chain to the previous manifest part')
+    mascara_doc = json.loads(arquivo(nome, m['mask']['path']).read_bytes())
     pol = mascara_doc['window_policy']
-    if sha(ROOT / pol['path']) != pol['sha256'] or not pol['passed']:
+    if sha(arquivo(nome, pol['path'])) != pol['sha256'] or not pol['passed']:
         raise SystemExit(f'{nome}: the window policy differs from the mask file or did not pass')
-    politica = json.loads((ROOT / pol['path']).read_bytes())
+    politica = json.loads(arquivo(nome, pol['path']).read_bytes())
     mascara = MascaraEnderecos(mascara_doc['cumulative']['exclusion_mask'])
     if mascara.bytes != mascara_doc['cumulative']['bytes']:
         raise SystemExit(f'{nome}: mask byte count differs from the mask file')
-    if sha(ROOT / parte['input']['path']) != parte['input']['sha256']:
+    if sha(arquivo(nome, parte['input']['path'])) != parte['input']['sha256']:
         raise SystemExit(f'{nome}: the scripted-input file differs from the part')
-    dados_entrada = json.loads((ROOT / parte['input']['path']).read_bytes())
+    dados_entrada = json.loads(arquivo(nome, parte['input']['path']).read_bytes())
 
     aberto = parte['opening_state']
     s0 = {n: (int(b['base'], 16), _dados(b)) for n, b in aberto['full_state'].items()}
@@ -252,15 +287,18 @@ def comparar_janela(nome, quadros=None):
                     compared_summary_equal=comparado == aberto['compared_summary'],
                     masked_sha256_equal=mascarado == aberto['masked_sha256'])
     cap128, estado128 = carregar_m22()
-    abertura['equals_m22_frame128_full_state'] = s0 == {n: v for n, v in estado128.items() if n != 'native_stack'}
+    if n_parte == 0:
+        abertura['equals_m22_frame128_full_state'] = s0 == {n: v for n, v in estado128.items()
+                                                            if n != 'native_stack'}
     if not all(abertura.values()):
         raise SystemExit(f'{nome}: opening state check failed: {abertura}')
 
     nomes = [f['phase'] for f in parte['phases']]
     total = len(nomes) // 2
     n = min(quadros, total) if quadros else total
-    if nomes != fases_quadros(total, INICIO):
-        raise SystemExit(f'{nome}: part phases are not whole frames after frame {INICIO}')
+    inicio = int(nomes[0][len('between_frames'):]) - 1
+    if (n_parte == 0) != (inicio == INICIO) or nomes != fases_quadros(total, inicio):
+        raise SystemExit(f'{nome}: part phases are not whole frames after frame {inicio}')
     nomes = nomes[:2 * n]
     _, cap_v2, entrada, m1 = carregar_cenario_exibicao()
     alocacoes = cap128['allocations']
@@ -271,14 +309,17 @@ def comparar_janela(nome, quadros=None):
         raise SystemExit(f'{nome}: the window changes the allocation records; the frame-128 records do not apply')
     regs = {k: v for k, v in parte['phases'][0]['entry']['registers'].items() if k in REGISTRADORES}
     roteiro = RoteiroEntrada(dados_entrada, inicio=INICIO)
+    roteiro.posicionar(inicio)
     comp = ComposicaoEntrada(s0, dict(named_inputs=cap_v2['named_inputs'], phases=parte['phases']), entrada, m1,
-                             roteiro, inicio=INICIO, alocacoes=alocacoes, regs_inicio=regs)
+                             roteiro, inicio=inicio, alocacoes=alocacoes, regs_inicio=regs, planejamento=planejamento)
+    if inicio != INICIO:
+        comp.palavras_msg = roteiro.ultima_mensagem(inicio, MemoriaMapaRapida(comp.mapa).u32(JANELA))
     contexto = ContextoExibicao(OriginalImage(), politica['display_roots'])
 
-    comandos = [json.loads(x) for x in lzma.decompress((ROOT / JANELAS[nome]['comandos']).read_bytes()).decode()
-                .splitlines() if x.strip()]
-    entradas_p1 = [json.loads(x) for x in lzma.decompress((ROOT / JANELAS[nome]['entradas']).read_bytes()).decode()
-                   .splitlines() if x.strip()]
+    comandos = [json.loads(x) for x in lzma.decompress(arquivo(nome, JANELAS[nome]['comandos']).read_bytes())
+                .decode().splitlines() if x.strip()]
+    entradas_p1 = [json.loads(x) for x in lzma.decompress(arquivo(nome, JANELAS[nome]['entradas']).read_bytes())
+                   .decode().splitlines() if x.strip()]
     lado_py, lado_ref = [], []
     # The window harness (entrada_roteirizada) records top_callee = null on every boundary, where the M2.3 oracle
     # recorded the issuing top-level callee. When the whole window carries null, the field is not compared: Python's
@@ -354,11 +395,18 @@ def comparar_janela(nome, quadros=None):
         window=nome, manifest=dict(path=JANELAS[nome]['manifesto'], sha256=JANELAS[nome]['sha']),
         part=dict(path=entrada_m['artifact'], sha256=entrada_m['compressed_sha256'], raw_json_sha256=sha_bruto,
                   frames=parte['frames'], first_phase=nomes[0], last_phase=nomes[-1], phases=len(parte['phases']),
-                  phases_requested=len(nomes), opening_state=dict(abertura, start_frame=INICIO,
-                                                                  allocation_records=dict(
-                                                                      count=len(alocacoes),
-                                                                      source=f'{M22} allocations (frame 128; the '
-                                                                             'window allocates/releases nothing)')),
+                  phases_requested=len(nomes), number=n_parte, parts=len(m['parts']),
+                  previous_part_raw_sha256=parte.get('previous_part_raw_sha256'),
+                  opening_summary=aberto['summary'],
+                  final_reference_summary=parte['phases'][2 * n - 1]['state_after']['summary'],
+                  opening_state=dict(abertura, start_frame=inicio,
+                                     allocation_records=dict(
+                                         count=len(alocacoes),
+                                         source=f'{M22} allocations (frame 128; the window allocates/releases '
+                                                'nothing and keeps the count)'),
+                                     declared=None if n_parte == 0 else dict(
+                                         entry_registers=regs, msg_words=[hex(x) for x in comp.palavras_msg],
+                                         cursor=list(roteiro.xy), saved_frame_words=[0, 0, 0])),
                   full_states=[f for f, v in fases.items() if v.get('reference_integrity', {}).get(
                       'checkpoint_full_state_equal')]),
         mask=dict(path=m['mask']['path'], sha256=m['mask']['sha256'], masked_bytes=mascara.bytes,
@@ -374,6 +422,7 @@ def comparar_janela(nome, quadros=None):
         boundary_top_callee=dict(
             compared=not topo_nulo, reference='null on every boundary of the window' if topo_nulo else 'recorded',
             python_values_not_compared=topos_python),
+        graphics_planning_stops=comp.ctx.paradas_planejamento if planejamento else None,
         crossings=travessias_medidas(comp, mascara), hud_flag=hud, phases=fases, orders_python=ordens_py,
         text_boundary=comp.textos,
         summary=dict(result=resultado, phases_compared=len(fases),
@@ -383,17 +432,22 @@ def comparar_janela(nome, quadros=None):
                      scripted_inputs_equal=sum(1 for v in fases.values() if v.get('scripted_inputs', {}).get('equal'))))
 
 
-def rodar_janela(nome, relatorios, quadros=None):
+def rodar_janela(nome, relatorios, quadros=None, n_parte=0, planejamento=False):
     from provar_quadros_9200_ia import cadeia_fases
-    saida = ROOT / relatorios / (f'{nome}.json' if not quadros else f'{nome}-{quadros}q.json')
+    partes = len(manifesto(nome)['parts'])
+    saida = ROOT / relatorios / (('diagnostico-planejamento-' if planejamento else '') +
+                                 nome_relatorio(nome, n_parte, partes, quadros))
+    if planejamento and not saida.resolve().is_relative_to((ROOT / '.local').resolve()):
+        raise SystemExit('A planning diagnostic writes under .local/ only')
     if saida.exists():
         raise SystemExit(f'Refusing to overwrite {saida}')
     rev, sujo = revisao(), sujos()
     t0 = time.monotonic()
-    corpo = comparar_janela(nome, quadros)
+    corpo = comparar_janela(nome, quadros, n_parte, planejamento)
     segundos = round(time.monotonic() - t0, 1)
     pico = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     rel = dict(schema='rising-lands/ai-runtime-m3.1-window-comparison/1', source_revision=rev,
+               diagnostic_graphics_planning=planejamento,
                source_dirty_paths=sujo, seconds=segundos,
                peak_rss_bytes=pico if sys.platform == 'darwin' else pico * 1024,
                machine=dict(system=platform.system(), release=platform.release(), machine=platform.machine(),
@@ -420,27 +474,63 @@ def agregar(relatorios, janelas):
     rev, sujo = revisao(), sujos()
     saida_janelas, problemas, codigo = [], [], {}
     for nome in janelas:
-        caminho = ROOT / relatorios / f'{nome}.json'
-        rel = json.loads(caminho.read_bytes())
         m = manifesto(nome)
-        erros = []
-        if rel['part']['raw_json_sha256'] != m['parts'][0]['raw_sha256']:
-            erros.append('report is not for the manifest part')
-        if rel['summary']['result'] != 'equal' or rel['summary']['phases_equal'] != m['parts'][0]['phases']:
-            erros.append(f"result {rel['summary']['result']} ({rel['summary']['phases_equal']}/"
-                         f"{m['parts'][0]['phases']})")
-        if rel['source_revision'] != rev or rel['source_dirty_paths']:
-            erros.append(f"report from revision {rel['source_revision'][:12]} (dirty: {bool(rel['source_dirty_paths'])})")
-        if rel['crossings']['count'] or rel['crossings']['writing_compared_bytes']:
-            erros.append(f"crossings {rel['crossings']}")
-        if rel['m31_fields_hidden_by_mask']:
-            erros.append(f"{rel['m31_fields_hidden_by_mask']} M3.1 field bytes are masked")
-        conflitos = sorted(f for f, h in rel['code_sha256'].items() if codigo.get(f, h) != h)
-        if conflitos:
-            erros.append(f'imported code differs from an earlier window: {conflitos}')
-        codigo.update(rel['code_sha256'])
+        erros, partes_rel, caminhos = [], [], []
+        for mp in m['parts']:
+            caminho = ROOT / relatorios / nome_relatorio(nome, mp['part'], len(m['parts']))
+            r = json.loads(caminho.read_bytes())
+            caminhos.append(caminho)
+            partes_rel.append(r)
+            rotulo = f"part {mp['part']}: "
+            if r['part']['raw_json_sha256'] != mp['raw_sha256']:
+                erros.append(rotulo + 'report is not for the manifest part')
+            if r['summary']['result'] != 'equal' or r['summary']['phases_equal'] != mp['phases']:
+                erros.append(rotulo + f"result {r['summary']['result']} ({r['summary']['phases_equal']}/{mp['phases']})")
+            if r['source_revision'] != rev or r['source_dirty_paths']:
+                erros.append(rotulo + f"report from revision {r['source_revision'][:12]} "
+                             f"(dirty: {bool(r['source_dirty_paths'])})")
+            if r['crossings']['count'] or r['crossings']['writing_compared_bytes']:
+                erros.append(rotulo + f"crossings {r['crossings']}")
+            if r['m31_fields_hidden_by_mask']:
+                erros.append(rotulo + f"{r['m31_fields_hidden_by_mask']} M3.1 field bytes are masked")
+            if mp['part'] and r['part'].get('opening_summary') != partes_rel[-2]['part'].get('final_reference_summary'):
+                erros.append(rotulo + 'opening state is not the previous part\'s final reference state')
+            conflitos = sorted(f for f, h in r['code_sha256'].items() if codigo.get(f, h) != h)
+            if conflitos:
+                erros.append(rotulo + f'imported code differs from an earlier report: {conflitos}')
+            codigo.update(r['code_sha256'])
         if erros:
             problemas.append(dict(window=nome, problems=erros))
+        rel = dict(partes_rel[0])
+        if len(partes_rel) > 1:
+            rel.update(
+                phases={f: v for r in partes_rel for f, v in r['phases'].items()},
+                hud_flag=[h for r in partes_rel for h in r['hud_flag']],
+                orders_python=[o for r in partes_rel for o in r['orders_python']],
+                text_boundary=[t for r in partes_rel for t in r['text_boundary']],
+                m31_fields_hidden_by_mask=max(r['m31_fields_hidden_by_mask'] or 0 for r in partes_rel),
+                crossings={k: sum(r['crossings'][k] for r in partes_rel)
+                           for k in ('count', 'writing_compared_bytes', 'core_provider_stops')},
+                seconds=round(sum(r['seconds'] for r in partes_rel), 1),
+                peak_rss_bytes=max(r['peak_rss_bytes'] for r in partes_rel),
+                summary=dict(result='equal' if all(r['summary']['result'] == 'equal' for r in partes_rel) else
+                             next(r['summary']['result'] for r in partes_rel if r['summary']['result'] != 'equal'),
+                             **{k: sum(r['summary'][k] for r in partes_rel)
+                                for k in ('phases_compared', 'phases_equal', 'phases_total', 'orders_equal',
+                                          'm31_fields_equal', 'scripted_inputs_equal')}),
+                phase_chain_sha256=hashlib.sha256(''.join(r['phase_chain_sha256'] for r in partes_rel)
+                                                  .encode()).hexdigest())
+            rel['part'] = dict(rel['part'], frames=m['parts'][0]['frames'][:1] + m['parts'][-1]['frames'][1:],
+                               last_phase=partes_rel[-1]['part']['last_phase'],
+                               full_states=[f for r in partes_rel for f in r['part']['full_states']])
+        caminho = caminhos[0]
+        partes_resumo = [dict(part=r['part']['number'] if 'number' in r['part'] else 0, frames=r['part']['frames'],
+                              first_phase=r['part']['first_phase'], last_phase=r['part']['last_phase'],
+                              result=r['summary']['result'], phases_equal=r['summary']['phases_equal'],
+                              phases=r['summary']['phases_compared'], crossings=r['crossings'],
+                              phase_chain_sha256=r['phase_chain_sha256'], seconds=r['seconds'],
+                              opening_state=r['part']['opening_state'], report_sha256=sha(c))
+                         for r, c in zip(partes_rel, caminhos)]
         fases = rel['phases']
         huds = {h['phase']: h['equal'] for h in rel['hud_flag']}
         frames_ordem = sorted({int(f[len('frame'):]) for f, r in fases.items()
@@ -490,6 +580,7 @@ def agregar(relatorios, janelas):
             orders=rel['orders_python'], text_boundary=dict(events=len(rel['text_boundary']),
                                                             frames=sorted({t['frame'] for t in rel['text_boundary']})),
             crossings=rel['crossings'], phase_chain_sha256=rel['phase_chain_sha256'], seconds=rel['seconds'],
+            parts=partes_resumo,
             peak_rss_mb=round(rel['peak_rss_bytes'] / 2**20), machine=rel['machine'],
             report_sha256=sha(caminho),
             final_indicators=dict(phase=list(fases)[-1], rng=fases[list(fases)[-1]].get('rng'),
@@ -560,7 +651,7 @@ def escrever_prova(relatorios, janelas, saida_nome):
     return 0 if ok else 2
 
 
-def tudo(janelas, lease, relatorios, saida):
+def tudo(janelas, lease, relatorios, saida, paralelo=None):
     if sujos():
         raise SystemExit('The one-command proof runs on a clean tree only')
     for j in janelas:
@@ -569,17 +660,23 @@ def tudo(janelas, lease, relatorios, saida):
     logs = ROOT / relatorios
     logs.mkdir(parents=True, exist_ok=True)
 
-    def uma(nome):
-        cmd = [sys.executable, '-B', str(ROOT / SCRIPT), 'janela', nome, '--relatorios', relatorios]
-        if lease:
-            cmd = [sys.executable, lease, f'ai-m31-{nome}', '--'] + cmd
-        inicio = time.monotonic()
-        with open(logs / f'{nome}.log', 'x') as log:
-            codigo = subprocess.run(cmd, cwd=ROOT, stdout=log, stderr=subprocess.STDOUT).returncode
-        return nome, codigo, round(time.monotonic() - inicio, 1)
+    tarefas = [(nome, mp['part'], len(manifesto(nome)['parts'])) for nome in janelas
+               for mp in manifesto(nome)['parts']]
 
-    with ThreadPoolExecutor(max_workers=len(janelas)) as ex:
-        resultados = list(ex.map(uma, janelas))
+    def uma(tarefa):
+        nome, n_parte, partes = tarefa
+        rotulo = nome_relatorio(nome, n_parte, partes)[:-len('.json')]
+        cmd = [sys.executable, '-B', str(ROOT / SCRIPT), 'janela', nome, '--parte', str(n_parte),
+               '--relatorios', relatorios]
+        if lease:
+            cmd = [sys.executable, lease, f'ai-m31-{rotulo}', '--'] + cmd
+        inicio = time.monotonic()
+        with open(logs / f'{rotulo}.log', 'x') as log:
+            codigo = subprocess.run(cmd, cwd=ROOT, stdout=log, stderr=subprocess.STDOUT).returncode
+        return rotulo, codigo, round(time.monotonic() - inicio, 1)
+
+    with ThreadPoolExecutor(max_workers=paralelo or len(tarefas)) as ex:
+        resultados = list(ex.map(uma, tarefas))
     for nome, codigo, segundos in resultados:
         print(f'{nome}: exit {codigo}, {segundos} s wall', flush=True)
     with open(logs / 'tempo.json', 'x') as f:
@@ -596,6 +693,10 @@ def main():
     p.add_argument('nome', choices=sorted(JANELAS))
     p.add_argument('--relatorios', help='repo-relative report folder (default .local/m3-1/prova-<revision>)')
     p.add_argument('--quadros', type=int, help='diagnostic only: the first N frames (report named <P>-<N>q.json)')
+    p.add_argument('--parte', type=int, default=0, help='part of a multi-part window (default 0)')
+    p.add_argument('--diagnostico-planejamento', action='store_true',
+                   help='diagnostic only (never evidence; report named diagnostico-planejamento-*): a Graphics '
+                        'display-path stop is recorded and the drawing taken as writing no logic byte')
     g = sub.add_parser('agregar', help='the proof from the window reports')
     g.add_argument('--janelas', nargs='+', choices=sorted(JANELAS), required=True)
     g.add_argument('--relatorios')
@@ -604,14 +705,15 @@ def main():
     t.add_argument('--janelas', nargs='+', choices=sorted(JANELAS), required=True)
     t.add_argument('--lease', help="path of the machine's heavy_lease.py (each window takes one slot)")
     t.add_argument('--relatorios')
+    t.add_argument('--paralelo', type=int, help='parts run at a time (default: all)')
     t.add_argument('--saida', required=True)
     a = ap.parse_args()
     relatorios = a.relatorios or pasta_relatorios()
     if a.comando == 'janela':
-        return rodar_janela(a.nome, relatorios, a.quadros)
+        return rodar_janela(a.nome, relatorios, a.quadros, a.parte, a.diagnostico_planejamento)
     if a.comando == 'agregar':
         return escrever_prova(relatorios, a.janelas, a.saida)
-    return tudo(a.janelas, os.path.abspath(a.lease) if a.lease else None, relatorios, a.saida)
+    return tudo(a.janelas, os.path.abspath(a.lease) if a.lease else None, relatorios, a.saida, a.paralelo)
 
 
 if __name__ == '__main__':

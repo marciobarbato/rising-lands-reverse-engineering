@@ -109,6 +109,18 @@ class Provedores:
         return f(**argumentos)
 
 
+def batiment_peut_attaquer_prefixo(m, regs):
+    """BatimentPeutAttaquer 0x42436c, its type prefix only (0x42436c..0x4243b9, from the intact bytes): AX the
+    attacking structure; byte +8 of its record not 0xa or 0xb (not a turret) -> AL = 0 at 0x4243b0 with
+    EAX = 0, EBX = the record address, EDX = the u16 index, ECX/ESI/EDI/EBP restored. A turret (types 0xa/0xb)
+    continues into the target checks 0x42443f, which are Combat's (``DependenciaIA`` there, nothing stored)."""
+    s = regs['EAX'] & 0xffff
+    rec = (0x49a0c8 + 276 * s) & M32
+    if m.u8(rec + 8) in (0xa, 0xb):
+        _parar("BatimentPeutAttaquer turret target checks (Combat)", 0x42443f)
+    return dict(regs, EAX=0, EBX=rec, EDX=s)
+
+
 class Entrada:
     """The input-path routines over one live memory ``m`` with providers ``p`` (``Provedores``)."""
 
@@ -722,6 +734,11 @@ class Entrada:
         r = self._rec(u)
         return (self.m.u32(self.m.u32(0x4e19b8) + 4 * self.m.u8(r)) + 104 * self.m.u8(r + 1)) & M32
 
+    @staticmethod
+    def bag_ordre_estrutura(tipo, jogador):
+        """BatimentGetBagOrdre 0x41c734 (AL structure type, DL player): the player's order Bag of that type."""
+        return (0x4dd6e8 + 0x8f0 * (jogador & 0xff) + 104 * (tipo & 0xff)) & M32
+
     def _bag_code(self, bag, i):                         # BagGetCode 0x4472d3
         return self.m.u8(bag + 0x42 + (i & 0xffff))
 
@@ -761,14 +778,41 @@ class Entrada:
                 ok = self.p('TestRessource', 0x45df93, regs=dict(EAX=comida, EDX=pedra, EBX=0, ECX=0),
                             pilha=[jogador])['EAX'] & 0xff
                 self._icone(slot, 0x29b9 + tipo, 1 if ok else 0, 0)
-            elif codigo in (4, 6, 7):
-                _parar(f'IconeFillContenu Bag code {codigo}', {4: 0x45e40c, 6: 0x45e430, 7: 0x45e696}[codigo])
+            elif codigo == 6:
+                self._icone_recrutamento(slot, tipo)
+            elif codigo in (4, 7):
+                _parar(f'IconeFillContenu Bag code {codigo}', {4: 0x45e40c, 7: 0x45e696}[codigo])
             slot += 1                                   # 0x45ddf7: codes 1, 5 and > 7 use a slot unwritten
             if slot == 4:
                 return
             k += 1
         for s in range(slot, 4):
             self._icone(s, 0x29b1, 1, 0)
+
+    def _icone_recrutamento(self, slot, tipo):
+        """IconeFillContenu's code 6 (a recruitable unit type; 0x45e430..0x45e691), local player j, icon
+        0x29cf + type (type 0x19 shows 0x12):
+        - EnginEnRecrutement(AL type, DL j) (Economy) nonzero: (icon, 0, GetStatusRecrute(AL type, DL j) & 0xffff);
+        - else BatimentEstOccupe(DL j) (0x422fa5: the selected structure's u32 +0x8c nonzero) : (icon, 0, 0);
+        - else EnginGetRessource(AL type) (food +2, stone +6, parts +4 of the 50-byte record 0x4965ae + 50 type,
+          into the caller's frame) and TestRessource(AX food, DX stone, BX parts, CX 0, pushed j) (Economy):
+          (icon, 1, 0) when accepted, else (icon, 0, 0).
+        Each store sets byte 0x4e05a2 when the triple changes (``_icone``)."""
+        m = self.m
+        j = m.u8(0x508041)
+        icone = 0x29cf + (0x12 if tipo == 0x19 else tipo)
+        if self.p('EnginEnRecrutement', 0x45e447, tipo=tipo, jogador=j) & 0xff:
+            self._icone(slot, icone, 0, self.p('GetStatusRecrute', 0x45e480, tipo=tipo, jogador=j) & 0xffff)
+            return
+        selecionada = m.u16(SEL_ESTRUTURA + 2 * j)                       # BatimentEstOccupe 0x422fa5
+        if selecionada != 0xffff and m.u32(0x49a0c8 + 276 * selecionada + 0x8c):
+            self._icone(slot, icone, 0, 0)
+            return
+        r = 0x4965ae + 50 * tipo                                         # EnginGetRessource 0x4410d2
+        comida, pecas, pedra = m.u16(r + 2), m.u16(r + 4), m.u16(r + 6)
+        ok = self.p('TestRessource', 0x45e5c1, regs=dict(EAX=comida, EDX=pedra, EBX=pecas, ECX=0),
+                    pilha=[j])['EAX'] & 0xff
+        self._icone(slot, icone, 1 if ok else 0, 0)
 
     def calcul_icone_action(self, regs):
         """CalculIconeAction 0x45e944 (exit registers restored except EAX)."""
@@ -779,8 +823,15 @@ class Entrada:
             u = self._primeira(local)
             self.icone_fill_contenu(self.bag_ordre(u), 1, u)
             return dict(regs, EAX=None)             # IconeFillContenu's leftover EAX; CalculGame discards it
-        if self._sel_estrutura(local) != 0xffff:
-            _parar('CalculIconeAction structure selected', 0x45e9bf)
+        estrutura = self._sel_estrutura(local)
+        if estrutura != 0xffff:
+            # 0x45e9bf: BatimentGetType(AX = the selected structure) reads byte +8 unfiltered; BatimentGetBagOrdre
+            # 0x41c734 (AL type, DL player) = 0x4dd6e8 + 0x8f0 * player + 104 * type, EBX = 0xffff kept;
+            # IconeFillContenu(EAX Bag, DL 3, BX 0xffff); byte 0x496d48 = 1.
+            tipo = m.u8(0x49a0c8 + 276 * estrutura + 8)
+            self.icone_fill_contenu(self.bag_ordre_estrutura(tipo, local), 3, 0xffff)
+            m.u8(0x496d48, 1)
+            return dict(regs, EAX=None)             # IconeFillContenu's leftover EAX; CalculGame discards it
         for i in range(10):
             self._icone(i, 0x29b1, 1, 0)
         m.u8(0x496d48, 0xff)
@@ -1491,8 +1542,14 @@ class Entrada:
             return
         if self._tropas(p) and self._pode_entrar(p, 1, u) and not self._miroir(u):
             _parar('InputGame enter-vehicle hover', 0x42a8ce)
-        if self._sel_estrutura(p) != 0xffff:
-            _parar('InputGame unit hover with a structure selected (BatimentPeutAttaquer)', 0x42a9d3)
+        sel = self._sel_estrutura(p)
+        if sel != 0xffff:
+            # 0x42a9d3: BatimentPeutAttaquer(AX the selected structure, DL 1, BX the unit under the cursor, EDI the
+            # player; ECX/ESI/EBP are not determined here and enter as 0) (Combat). AL = 0 continues at 0x42aa4d.
+            ok = self.p('BatimentPeutAttaquer', 0x42a9ed, regs=dict(EAX=sel, EDX=1, EBX=m.u16(UNIDADE_SOB), ECX=0,
+                                                                   ESI=0, EDI=p, EBP=0))
+            if ok['EAX'] & 0xff:
+                _parar('InputGame unit hover: the selected structure can attack the unit', 0x42a9f6)
         if m.u8(B0) and self._primeira(p) == u and not self._miroir(u):
             t = self._tipo(u)                           # 0x42aa87: tag 9 (cx, word 6) by the unit's type
             if t == 0xd:

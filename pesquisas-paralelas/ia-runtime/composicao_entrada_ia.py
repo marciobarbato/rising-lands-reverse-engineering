@@ -34,13 +34,14 @@ import struct
 from composicao_encadeada_ia import (JanelasDeclaradas, MemoriaMapaRapida, Registro, provedores)
 from composicao_quadros_ia import ComposicaoQuadros, PRESERVADOS_CALCUL_GAME, MSG_LACO
 from construcao_entrada_ia import proxima_etapa_entrada
-from entrada_ordens_ia import Entrada, LIMPAR, PACOTES, Provedores
-from provedores_entrada_ia import construcao_viva, provedores_vivos
+from entrada_ordens_ia import Entrada, LIMPAR, PACOTES, Provedores, REG7
+from provedores_entrada_ia import DonosM3, construcao_viva, provedores_vivos
 from quadro_calcul_game import calcular_quadro
 from reinicio_ia import DependenciaIA
 
 ESQUEMA = 'rising-lands/monde01-scripted-input/1'
 MENSAGENS = (0x100, 0x101, 0x200, 0x201, 0x202, 0x203, 0x204, 0x205)
+CORPO_CAVERNA = 0x426aff               # BatimentNextEtape's type-3 switch target (Economy's corpo_caverna)
 JANELA = 0x4e27e8                     # HWND word of the MSG (declared by the harness; read from memory)
 
 
@@ -71,6 +72,24 @@ class RoteiroEntrada:
             teclas = {_inteiro(vk): _inteiro(v) for vk, v in (q.get('keys') or {}).items()}
             self.quadros[k] = (cursor, mensagens, teclas)
         self.quadro, self.fase, self.xy, self.fila, self.teclas, self.eventos = inicio, None, (0, 0), [], {}, []
+
+    def posicionar(self, k):
+        """Start after frame ``k`` instead of the file's start (a checkpoint start): the cursor answer is the last
+        one declared at a frame <= k (frames before k have no other carried input state)."""
+        self.quadro = k
+        for q in sorted(self.quadros):
+            if q <= k and self.quadros[q][0] is not None:
+                self.xy = self.quadros[q][0]
+
+    def ultima_mensagem(self, k, janela):
+        """The MSG words (hwnd, message, wParam, lParam) of the last message dispatched at a frame <= k: what the
+        loop's MSG buffer holds when frame k + 1 starts (``MSG_LACO`` when none was)."""
+        from composicao_quadros_ia import MSG_LACO
+        ultima = None
+        for q in sorted(self.quadros):
+            if q <= k and self.quadros[q][1]:
+                ultima = self.quadros[q][1][-1]
+        return MSG_LACO if ultima is None else (janela, *ultima)
 
     def iniciar_quadro(self, k):
         if self.fila:
@@ -221,11 +240,11 @@ class ComposicaoEntrada(ComposicaoQuadros):
         janelas = JanelasRoteiro(self.roteiro)
         p, _ = provedores(self.mapa, self.prov, mm, self.ctx, registro, janelas, self.travessias, fase, regs)
 
-        def som(nome, regs_som, pilha):
+        def som(nome, regs_som, pilha, chamada=None):
             """The sound-library boundary (PlaySnd_PostSound/StopSound), recorded as the original records it: call
             site and caller from the provider's declared call address, the pushed words (the stale caller words
             after them are not modeled), and the callee's ``ret`` cleanup of the pushed words."""
-            chamada = _sitio_chamada()
+            chamada = _sitio_chamada() if chamada is None else chamada
             retorno, chamador = 0, None
             if chamada is not None:
                 retorno = chamada + 5
@@ -234,7 +253,12 @@ class ComposicaoEntrada(ComposicaoQuadros):
             palavras = list(pilha) + [None] * (4 - len(pilha))
             registro.fronteira(nome, retorno, chamador, regs_som, palavras=palavras, limpeza=4 * len(pilha))
             return regs_som['EAX']
-        vivos = provedores_vivos(mm, janelas=_TeclasSitio(self.roteiro, registro), som=som)
+        donos = DonosM3(mm, som=som, bonus=lambda j, t, s: p['BonusGetValEngin'](sitio=0, jogador=j, tipo=t,
+                                                                                  seletor=s, ecx=0),
+                        mensagem_unidade=lambda regs, chamada: mensagem_unidade(mm, p, regs, chamada))
+        self.donos = donos
+        vivos = provedores_vivos(mm, janelas=_TeclasSitio(self.roteiro, registro), som=som, estruturas=donos.ee,
+                                 donos=donos)
         def texto(n, local):
             """TextGetMessage as Missions' declared display-scenario boundary: EAX 0, no cleanup, logged."""
             registro.fronteira('TextGetMessage', local + 5, f'InputGame+0x{local + 5 - 0x429278:x}', dict(EAX=n),
@@ -259,6 +283,7 @@ class ComposicaoEntrada(ComposicaoQuadros):
         etapa_pinada = p['EnginNextEtape']
         p['EnginNextEtape'] = lambda sitio, unidade: proxima_etapa_entrada(
             mm, p, unidade, self.ctx.tabelas, construcao, etapa=lambda: etapa_pinada(sitio=sitio, unidade=unidade))
+        self._donos_quadro(mm, p, donos)
         p['InputGame'] = lambda sitio, jogador: e.input_game(jogador)
         p['ProcessInputGame'] = process
         p['CalculIconeAction'] = lambda sitio: e.calcul_icone_action(dict(EAX=0, EBX=0, ECX=0, EDX=0, ESI=0, EDI=0,
@@ -269,6 +294,45 @@ class ComposicaoEntrada(ComposicaoQuadros):
         if estado != 0x12:
             raise DependenciaIA(f'CalculGame state 0x{estado:x}', self.ctx.estados[estado] if estado <= 0x18 else 0x42d4e2)
         return calcular_quadro(mm, p)
+
+    def _donos_quadro(self, mm, p, donos):
+        """The frame phase's providers past frame 220 (``DonosM3``): BatimentNextEtape's type-3 body (Economy's
+        ``corpo_caverna``, at the switch target 0x426aff), the structure loop's BatimentIllumine/BatimentDecouvre
+        (Core's ``visao_grupos``), unit state 13 (Core's ``estado_entrada``: ESI = the record, EDI = the unit) and
+        unit state 5 (``construcao_entrada_ia.estado_trabalho`` with Economy's CalculWorkEngin). The pinned
+        switches stop at a target before the first store of its body, so each dispatch continues exactly there."""
+        from construcao_entrada_ia import estado_trabalho
+        tabelas = self.ctx.tabelas
+        estrutura_pinada = p['BatimentNextEtape']
+
+        def batiment_next_etape(sitio, estrutura):
+            try:
+                return estrutura_pinada(sitio=sitio, estrutura=estrutura)
+            except DependenciaIA as erro:
+                if erro.rotina == 'BatimentNextEtape type 3' and erro.sitio == CORPO_CAVERNA == \
+                        tabelas['tipos_estrutura'][2]:
+                    p['BatimentNextEtape:cave'](sitio=CORPO_CAVERNA, estrutura=estrutura & 0xffff)
+                    return None
+                raise
+        p['BatimentNextEtape'] = batiment_next_etape
+        p['BatimentNextEtape:cave'] = lambda sitio, estrutura: donos.caverna.corpo_caverna(estrutura)
+        zero = dict.fromkeys(REG7, 0)
+        for nome, regs in (('BatimentIllumine', ('EAX', 'EDX', 'EBX')), ('BatimentDecouvre', ('EAX', 'EDX'))):
+            if nome in p:
+                raise RuntimeError(f'{nome} already has a chain provider')
+        p['BatimentIllumine'] = lambda sitio, estrutura, jogador, ebx: donos.visao.chamar(
+            'BatimentIllumine', dict(zero, EAX=estrutura, EDX=jogador, EBX=ebx))
+        p['BatimentDecouvre'] = lambda sitio, estrutura, jogador: donos.visao.chamar(
+            'BatimentDecouvre', dict(zero, EAX=estrutura, EDX=jogador))
+        p['EnginNextEtape:state13'] = lambda sitio, unidade: donos.ee.chamar('EnginNextEtape:state13', dict(
+            zero, ESI=(mm.u32(0x4e19a0) + unidade * 276) & 0xffffffff, EDI=unidade))
+
+        def chamar(nome, chamada, **r):
+            regs = dict(zero, **r)
+            if nome == 'CalculWorkEngin':
+                return donos.ciclo.calcul_work_engin(dict(regs, ESP=0))
+            return donos.ee.chamar(nome, regs)
+        p['EnginNextEtape:state5'] = lambda sitio, unidade: estado_trabalho(mm, chamar, unidade)
 
     def executar(self, n):
         from oraculo_quadro_missao import nomes_fases
@@ -297,6 +361,22 @@ class ComposicaoEntrada(ComposicaoQuadros):
             self._quadro(dict(saida), registro, quadro, ordens)
             yield dict(phase=quadro, registro=registro, entry=dict(saida), exit=None, ordens=ordens,
                        eventos=self.roteiro.eventos[inicio_eventos:])
+
+
+def mensagem_unidade(mm, p, regs, chamada):
+    """iagUnitSendMessage 0x4829c8 (AX unit, DL message, EBX argument) for a unit whose owner is not an AI player:
+    PlayerGetType(AL = the owner byte +0) at 0x482a01 (Economy) returns AL != 2, and the routine leaves through
+    0x482eb5 with EAX = that type (``and eax, 0xff``), EBX = the u16 unit, EDX = the entry EBX, ECX/ESI/EDI/EBP
+    restored; nothing is stored. An AI owner (type 2) enters the message handlers (``incursao_ia`` translates 0x49
+    only): ``DependenciaIA`` at 0x482a14."""
+    u = regs['EAX'] & 0xffff
+    rec = (mm.u32(0x4e19a0) + 276 * u) & 0xffffffff
+    tipo = p['PlayerGetType'](sitio=0x482a01, jogador=mm.u8(rec)) & 0xff
+    if tipo == 2:
+        raise DependenciaIA(f"iagUnitSendMessage 0x{regs['EDX'] & 0xff:x} for an AI player's unit", 0x482a14)
+    saida = {k: regs[k] for k in ('ECX', 'ESI', 'EDI', 'EBP') if k in regs}
+    saida.update(EAX=tipo, EBX=u, EDX=regs.get('EBX', 0) & 0xffffffff)
+    return saida
 
 
 def _sitio_chamada(profundidade=12):

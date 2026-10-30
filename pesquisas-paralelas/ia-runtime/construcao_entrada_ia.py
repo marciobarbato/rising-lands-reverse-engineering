@@ -48,6 +48,7 @@ TIPOS_ESTRUTURA = 0x495d8c                 # stride 52; u16 +4 = construction li
 LOCAL = 0x508041
 BUSCA_UNIDADE, BUSCA_OCUPADA, BUSCA_SUCESSO, BUSCA_ROTA = 0x496304, 0x4e0f36, 0x4e0f37, 0x4e0f3c
 ESTADO_11, ESTADO_13, SAIDA = 0x4564ef, 0x4558e4, 0x454ccd
+ESTADO_5 = 0x456600                     # EnginNextEtape's switch target for state 5 (work)
 PROGRESSO = 0x44b1c1
 
 
@@ -303,4 +304,32 @@ def proxima_etapa_entrada(m, p, unidade, tabelas, construcao, etapa=None):
                 and 'EnginNextEtape:state13' in p:
             p['EnginNextEtape:state13'](sitio=ESTADO_13, unidade=unidade & 0xffff)
             return SAIDA
+        if erro.rotina == 'EnginNextEtape state 5' and erro.sitio == ESTADO_5 == tabelas['estados'][5] \
+                and 'EnginNextEtape:state5' in p:
+            p['EnginNextEtape:state5'](sitio=ESTADO_5, unidade=unidade & 0xffff)
+            return SAIDA
         raise
+
+
+def estado_trabalho(m, chamar, unidade):
+    """EnginNextEtape's state-5 body 0x456600..0x456736 (ESI = the record, DI = the unit), from the intact bytes:
+
+    - u8 +0x82 == 2 (the unit's work target is a structure, +0x80): BatimentEnDestruction(AX = +0x80) at
+      0x45661a; when it returns 0, BatimentGetPlayer(AX = +0x80) at 0x45662c compared with the unit's owner
+      byte +0. A destroyed or foreign structure takes the release branch 0x456639 (SetEnginCollision, discovery,
+      0x4550a2), outside this translation: ``DependenciaIA`` at 0x456639 before any store.
+    - otherwise (or an intact own structure): CalculWorkEngin(AX = unit, zero-extended) at 0x456731, then the
+      exit 0x454ccd.
+
+    ``chamar(nome, chamada, **regs) -> regs`` runs the owners' routines (Core's BatimentEnDestruction and
+    BatimentGetPlayer, Economy's CalculWorkEngin); registers not given enter as 0 (none of them reads another)."""
+    from entrada_ordens_ia import M32, PASSO, POOL
+    unidade &= 0xffff
+    rec = (m.u32(POOL) + unidade * PASSO) & M32
+    if m.u8(rec + 0x82) == 2:
+        s = m.u16(rec + 0x80)
+        if chamar('BatimentEnDestruction', 0x45661a, EAX=s)['EAX'] & 0xff or \
+                chamar('BatimentGetPlayer', 0x45662c, EAX=s)['EAX'] & 0xff != m.u8(rec):
+            raise DependenciaIA('EnginNextEtape state 5: work structure destroyed or foreign (0x456639)', 0x456639)
+    chamar('CalculWorkEngin', 0x456731, EAX=unidade)
+    return SAIDA
