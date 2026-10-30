@@ -1,6 +1,6 @@
 {
  "synthetic": true,
- "description": "P7-style UI gestures plus sanctuary recruitment; actual AppKit recorder supplies the replay file.",
+ "description": "P7-style UI gestures, then recenter and issue sanctuary recruitment as the final order; production completion is outside this bounded recording. Actual AppKit recorder supplies the replay file.",
  "stop_frame": 3700,
  "gestures": [
   {
@@ -44,28 +44,6 @@
    "frame": 2070,
    "x": 656,
    "y": 336
-  },
-  {
-   "frame": 2300,
-   "x": 400,
-   "y": 272,
-   "right": true
-  },
-  {
-   "frame": 2310,
-   "x": 528,
-   "y": 400
-  },
-  {
-   "frame": 2320,
-   "x": 180,
-   "y": 573
-  },
-  {
-   "frame": 2330,
-   "x": 400,
-   "y": 272,
-   "right": true
   },
   {
    "frame": 2410,
@@ -133,6 +111,27 @@
   {
    "frame": 3240,
    "control": false
+  },
+  {
+   "frame": 3500,
+   "x": 400,
+   "y": 272,
+   "right": true
+  },
+  {
+   "frame": 3510,
+   "x": 16,
+   "y": 16
+  },
+  {
+   "frame": 3520,
+   "x": 528,
+   "y": 400
+  },
+  {
+   "frame": 3697,
+   "x": 180,
+   "y": 573
   }
  ]
 }
