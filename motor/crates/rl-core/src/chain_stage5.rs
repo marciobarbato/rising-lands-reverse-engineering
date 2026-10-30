@@ -2,6 +2,123 @@
 use crate::{EngineError, FrameRegisters, MemoriaJogo, Result};
 pub fn entry(m: &mut MemoriaJogo, name: &str, r: FrameRegisters) -> Result<FrameRegisters> {
     match name {
+        "EnginSelectPeutEntrer:AL" => {
+            let ok = crate::chain_entry::can_enter(m, r.eax & 255, r.edx & 255, r.ebx & 65535)?;
+            Ok(FrameRegisters {
+                eax: u32::from(ok),
+                esp: r.esp.wrapping_add(4),
+                ..r
+            })
+        }
+        "BatimentAjouteMatiere:effects" => {
+            crate::chain_entry::credit(m, r.eax as u8, r.edx as u16, r.ebx as u8, r.ecx as u16)?;
+            Ok(FrameRegisters {
+                esp: r.esp.wrapping_add(4),
+                ..r
+            })
+        }
+        "SetMiniMap:effects" => {
+            crate::player_sight::minimap(m, r.eax as u8, r.ebx as u16, r.edx as u8)?;
+            Ok(FrameRegisters {
+                esp: r.esp.wrapping_add(4),
+                ..r
+            })
+        }
+        "CalculTroupe:effects" => {
+            crate::frame_economy::production(m, r.eax & 65535, false, true)?;
+            Ok(FrameRegisters {
+                esp: r.esp.wrapping_add(4),
+                ..r
+            })
+        }
+        "TerrainEstGc"
+        | "ChercheVeget"
+        | "ChercheGc"
+        | "ChercheGcLibre"
+        | "TypeEnginPeutEcraser"
+        | "IsDirectlyBlocking"
+        | "IsIndirectlyBlocking" => {
+            let mut q = crate::chain_search::entry(m, name, r)?;
+            q.esp = q.esp.wrapping_add(4);
+            Ok(q)
+        }
+        "BatimentPeutAttaquer" | "BatimentInitAttaqueSelect" => {
+            let mut q = crate::chain_turret::entry(m, name, r)?;
+            q.esp = q.esp.wrapping_add(4);
+            Ok(q)
+        }
+        "ChercheBatimentProximiteCaveOuSanctuaire"
+        | "TerrainEstMontagne"
+        | "EnginEstVivant"
+        | "BatimentGetDecalageConstruction"
+        | "GetCaseIndiceBatiment"
+        | "ChercheCaseBatiment"
+        | "BatimentGetCaseAdjacent"
+        | "listDeleteElem"
+        | "listUnlinkElem"
+        | "iaProbReturnTo"
+        | "VoixOffAsk" => {
+            let mut q = crate::chain_s1::entry(m, name, r)?;
+            q.esp = q.esp.wrapping_add(4);
+            Ok(q)
+        }
+        "MineGetIndice" | "MineEstSurTerrain" | "MineSetWork" | "MineEndWork" | "MineRecolte"
+        | "TerrainRecolte" | "AjouteMatiere" => {
+            let mut q = crate::chain_work::leaf(m, name, r)?;
+            q.esp = q.esp.wrapping_add(4);
+            Ok(q)
+        }
+        "CalculWorkEngin:effects"
+        | "EnginRestaureEtat:effects"
+        | "BatimentEnleveMatiere:effects"
+        | "SetDechargeCaveEngin:effects"
+        | "SetDechargeCaveEnginSelect:effects"
+        | "EnginSetFatigue:effects"
+        | "InitRecruteTroupe:effects"
+        | "SortieTroupe:effects"
+        | "BatimentRetireColon:effects" => {
+            match name {
+                "CalculWorkEngin:effects" => {
+                    crate::chain_work::work(m, r.eax & 65535)?;
+                }
+                "EnginRestaureEtat:effects" => crate::chain_restore::restore(m, r.eax & 65535)?,
+                "BatimentEnleveMatiere:effects" => {
+                    crate::chain_restore::debit(m, r.eax as u8, r.edx as u16, r.ebx as u8)?
+                }
+                "SetDechargeCaveEngin:effects" => {
+                    crate::chain_restore::unload(m, r.eax & 65535, r.edx & 65535)?
+                }
+                "SetDechargeCaveEnginSelect:effects" => {
+                    crate::chain_restore::select_unload(m, r.eax & 255, r.edx & 65535)?
+                }
+                "EnginSetFatigue:effects" => crate::chain_fatigue::set(m, r.eax & 65535)?,
+                "InitRecruteTroupe:effects" => {
+                    crate::chain_recruit::init(m, r.eax & 255, r.edx & 255)?;
+                }
+                "SortieTroupe:effects" => {
+                    crate::chain_recruit::sortie(m, r.eax & 65535, r.edx & 255)?
+                }
+                _ => {
+                    crate::chain_recruit::retire_colonist(m, r.eax & 65535)?;
+                }
+            }
+            Ok(FrameRegisters {
+                esp: r.esp.wrapping_add(4),
+                ..r
+            })
+        }
+        "TerrainRetireMatiere" => {
+            let eax = crate::chain_restore::retire_food(m, r.eax & 65535)?;
+            Ok(FrameRegisters {
+                eax,
+                esp: r.esp.wrapping_add(4),
+                ..r
+            })
+        }
+        "EnginNextEtape:19:effects" => {
+            crate::chain_restore::hunger(m, r.edi & 65535)?;
+            Ok(r)
+        }
         "BatimentNextEtape:cave" | "BatimentNextEtape" => crate::player_cave::entry(m, r),
         "BatimentIllumine" | "BatimentDecouvre" | "IllumineCase" | "EteintCase"
         | "DecouvreCase" => {

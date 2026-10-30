@@ -21,6 +21,7 @@ REPO = Path(__file__).resolve().parents[2]
 LOGIC_REVISION = '7ceeff909b52b7d4f59723f35dfe43a9deda41ff'
 INPUT_REVISION = 'a7f5d4939e7826e02a8b348995edb9c793657f4c'
 CHAIN_REVISION = '54d148d931cc3420fe256e6fec71462087597293'
+CHAIN8_REVISION = '92fab50ccfa14271f6657fc0f6032b6b4b68dd4b'
 CHAIN7_REVISION = '89575fad00ad3ee506879b275bdceb8f63423baf'
 CHAIN6_GRAPHICS_REVISION = '24f0ec85714dbbfa4645212ca81f8f4145a76143'
 GRAPHICS_REVISION = 'ce441852bcada750a8f91da8ed3302f1668c4405'
@@ -76,9 +77,9 @@ def link_missing(path, target):
 @functools.lru_cache(maxsize=1)
 def source_root():
     profile = os.environ.get("RL_REFERENCE_PROFILE", "logic")
-    if profile not in ("logic", "input", "chain5", "chain6", "chain7"): raise ValueError("Unknown engine reference profile")
-    logic_revision = CHAIN7_REVISION if profile == "chain7" else CHAIN_REVISION if profile in ("chain5", "chain6") else INPUT_REVISION if profile == "input" else LOGIC_REVISION
-    graphics_revision = CHAIN6_GRAPHICS_REVISION if profile in ("chain6", "chain7") else CHAIN_REVISION if profile == "chain5" else GRAPHICS_REVISION
+    if profile not in ("logic", "input", "chain5", "chain6", "chain7", "chain8"): raise ValueError("Unknown engine reference profile")
+    logic_revision = CHAIN8_REVISION if profile=="chain8" else CHAIN7_REVISION if profile == "chain7" else CHAIN_REVISION if profile in ("chain5", "chain6") else INPUT_REVISION if profile == "input" else LOGIC_REVISION
+    graphics_revision = CHAIN8_REVISION if profile=="chain8" else CHAIN6_GRAPHICS_REVISION if profile in ("chain6", "chain7", "chain8") else CHAIN_REVISION if profile == "chain5" else GRAPHICS_REVISION
     for revision in (logic_revision, graphics_revision):
         try:
             git('cat-file', '-e', revision + '^{commit}')

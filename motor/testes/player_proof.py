@@ -106,6 +106,7 @@ def proof(probe,library=None,frames=None,python=False,whole=False):
     if in_ev!=normalizar_eventos(py_events):dif['python_inputs']=dict(rust=in_ev,python=normalizar_eventos(py_events))
     if canonical_orders(ord_ev)!=canonical_orders([dict(o,frame=k) for o in py_orders]):dif['python_orders']=dict(rust=ord_ev,python=py_orders)
    native_events+=in_ev;native_orders+=ord_ev;results.append(dict(frame=k,equal=not dif,indicators=actual))
+   if k%250==0:print(probe,k,"equal"if not dif else "different",flush=True)
    if dif:difference=dict(frame=k,differences=dif);break
  finally:
   final_clock=rust.clock(h);rust.free(h)

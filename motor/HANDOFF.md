@@ -1353,3 +1353,64 @@ corrected source, with both binary/source identities retained in the reports.
 `sh motor/validate.sh`: fmt, strict Clippy,30 Rust/63 Python tests,75/75 pilot
 captures, C layout and actual Swift/Metal smoke pass. No fresh x86 run, later
 Economy continuation or new throughput measurement is claimed for this piece.
+
+## Fourth continuation piece — later-chain providers
+
+The [native contract](research/CHAIN8_CONTRACT.md) specifies API inputs,
+supported types/states, memory/register widths, mutation/callback order, original
+hash/addresses and named gaps. All new references use additive profile `chain8`
+at immutable `92fab50ccfa14271f6657fc0f6032b6b4b68dd4b`; earlier profiles/pins
+are unchanged. ABI1.6 and render contract1.9 are unchanged. No main integration
+is authorized or performed for this task.
+
+Native work/state5, fatigue/vegetation, hunger/state19 and saved-state restoration,
+recruitment/SortieTroupe/abandonment/tag33, debit/tag19, turret/tag14 and S1 query
+providers now consume the actual advancing world. Selected-structure icons and
+hover predicates use the same concrete providers. Display origins are an explicit
+finite pinned list, limited to the original player/map/camera/mode context.
+AI city handling keeps its original-proved non-AI prefix and a named real-AI stop.
+
+[Piece4 report](validation/chain8/piece4/summary.json) retains the individual
+source/binary identities: final-build **209/209** production/recruitment (6 sound
+skips), **87/87** restoration/debit/unload (5 sound skips), **306/306** fresh
+original fatigue/terrain/minimap variants and **60/60** full-world hunger
+meal/restoration variants. The latter declare arrival, sack, saved states2/5/17,
+discovery0/1/16/31 and an existing sound handle; every game byte and ESP match.
+Their before-fix **45/60** report exposed the wrong0x10 discovery predicate; the
+corrected code uses TerrainEstDecouvert0x1f and branch-specific sound sites.
+
+Additional original reports: **188/188** full-state/eight-register turret calls,
+S1 fresh snapshot variants **484/484**, **120/120**, **121/121** (10 voice skips).
+These reports precede the final sound correction, with their precise source hashes
+retained; final-source reruns belong to the following verification piece. S1c's
+initial14 EDX mismatches exposed BatimentGetCaseAdjacent's collision scratch
+result, now corrected. S1 snapshots are replay-checked openings plus explicit
+register/input variants, not historical in-situ replay claims.
+
+Sparse work remains **80/405** equal with325 extra-input errors; sparse hunger
+**12/229** equal with217 extra-input errors and2 sound skips. Both failed attempts
+are retained. Their old movement facade demands additional actual world bytes;
+no synthetic padding, default bytes or relaxed comparison makes them pass.
+Fresh whole-world comparisons cover the stated variants only. Unsupported
+validity/abort, terrain-deposit, vehicle and AI paths remain addressed stops.
+
+The final gate (`gate3`) passes fmt, strict Clippy, **30 Rust/63 Python tests**,
+**666/666** original input cases (2 declared skips), **75/75** pilot comparisons,
+C layout and actual Swift/Metal smoke. Six old dependency stops now complete with
+every original byte/text request/typed return exact; the gate permits only their
+six explicit address contracts. The late-stop rollback test now deliberately
+selects an unsupported structure Bag code3 after the supported icon prefix.
+`gate1` retains an in-run source-identity rejection and obsolete stop expectation;
+`gate2` retains the six exact completions before the expectation update.
+
+Exclusive coordinated-lease release play timing, both logic calls plus ctypes
+input packing, excluding initialization/render/audit/export/hash/presentation:
+P3 **0.2864ms/frame**, P6 **0.2856**, P7 **0.2839** (respective p99s0.3171/0.3225/
+0.3540, maxima0.4675/0.5215/0.5254). All full scripted windows complete without
+stops. The9,200-frame M2 regression is **0.2585ms/frame logic**,0.6366 logic+render;
+terminal full-state/surface hashes, generation and clock exactly match piece2.
+
+This commit delivers the bounded native providers and regression evidence.
+Final-source advancing P3/P6/P7 state/surface windows and P6 whole-state4544-phase
+proof are the following verification piece of this same task. No S1/D1 mission
+completion or coverage beyond those published windows is claimed.

@@ -11,6 +11,13 @@ from player_provenance import begin,finish
 REGS=('EAX','EBX','ECX','EDX','ESI','EDI','EBP','ESP')
 # Widths of the typed APIs tested here, not guesses for x86 scratch registers.
 TYPED={'BatimentAdjacent':(':AL',{'EAX':255,'EDX':0}),'BatimentLogeEngin':(':AL',{'EAX':255,'EDX':0}),'SetEnginRentreBatiment':(':effects',{'EAX':0,'EDX':0}),'SetEnginSelectRentreBatiment':(':effects',{'EAX':0,'EDX':0}),'CalculEntreBatiment':(':effects',{'EAX':0}),'RetireEngin':(':effects',{'EAX':0}),'EnginResetType':(':effects',{'EAX':0}),'EnginNextEtape:state13':(':effects',{'EAX':0,'EDX':0})}
+for n in ('CalculWorkEngin','EnginRestaureEtat','EnginSetFatigue','SortieTroupe','InitRecruteTroupe','BatimentRetireColon'):
+ TYPED[n]=(':effects',{'EAX':0,'EDX':0} if n in ('SortieTroupe','InitRecruteTroupe') else {'EAX':0})
+for n in ('BatimentEnleveMatiere','SetDechargeCaveEngin','SetDechargeCaveEnginSelect'):
+ TYPED[n]=(':effects',{'EAX':0,'EBX':0,'EDX':0})
+TYPED['EnginNextEtape:19']=(':effects',{k:0 for k in REGS if k!='ESP'})
+TYPED['EnginSelectPeutEntrer']=(':AL',{'EAX':255,'EBX':0,'EDX':0})
+for n in ('BatimentAjouteMatiere','SetMiniMap','CalculTroupe'):TYPED[n]=(':effects',{'EAX':0,'EBX':0,'EDX':0})
 def word(n):return struct.pack('<I',n&0xffffffff)
 def blob(b):return word(len(b))+b
 def readword(f):return struct.unpack('<I',f.read(4))[0]
@@ -64,7 +71,7 @@ def prove(binary,routines,capture=None,skip_boundaries=False,expected_stops=()):
   masks.update(TYPED.get(c['routine'],('',{}))[1])
   rd={k:[hex(regs[k]),c['exit_registers'][k]]for k in REGS if (regs[k]^int(c['exit_registers'][k],16))&masks[k]}
   bd=[hex(a)for a in actual.keys()|expected.keys()if actual.get(a)!=expected.get(a)]
-  rows.append(dict(routine=c['routine'],frame=c.get('frame'),case=c.get('case'),counter=c.get('counter'),equal=None if code and error in expected_stops else not(code or rd or bd),declared_dependency=bool(code and error in expected_stops),error=error,compared_register_masks={k:hex(v)for k,v in masks.items()},register_differences=rd,byte_differences=bd[:20],bytes_compared=len(expected)))
+  rows.append(dict(routine=c['routine'],frame=c.get('frame'),case=c.get('case'),action=c.get('action'),counter=c.get('counter'),equal=None if code and error in expected_stops else not(code or rd or bd),declared_dependency=bool(code and error in expected_stops),error=error,compared_register_masks={k:hex(v)for k,v in masks.items()},register_differences=rd,byte_differences=bd[:20],bytes_compared=len(expected)))
  if f.read():raise ValueError('Trailing fixture output')
  return dict(schema='rising-lands/native-chain-owner-leaf-proof/1',reference=provenance(),pins=PINS,provenance=finish(identity,binary),capture=name,capture_sha256=hashlib.sha256(raw).hexdigest(),cases=len(rows),skipped=skipped,equal=sum(c['equal']is True for c in rows),stopped=[c for c in rows if c['declared_dependency']],first_difference=next((c for c in rows if c['equal']is False),None),results=rows,seconds=time.monotonic()-start)
 def main():

@@ -71,18 +71,24 @@ class InputContracts(unittest.TestCase):
        else:self.assertTrue(all(e.kind>=7 for e in events))
     finally:self.native.free(other)
  def test_late_input_stop_rolls_back_every_write_and_retains_diagnostics_in_play(self):
+  # Select structure0, then declare an unsupported Bag code3 entry. The
+  # supported selected-structure path now writes its icon prefix first.
+  initial=Memory({a:b for name,(a,b)in self.state.items()if name!='native_stack'})
+  bag=0x4dd6e8+104*initial.u8(0x49a0c8+8)
+  writes={0x495be0:b'\0\0',bag:b'\x01\0',bag+2:b'\x01\0',bag+4:b'\0\0',bag+0x42:b'\x03'}
   blocks=[]
   for name,(base,data)in self.state.items():
    if name=='native_stack':continue
    data=bytearray(data)
-   if base<=0x495be0<base+len(data):data[0x495be0-base:0x495be2-base]=bytes(2)
+   for address,value in writes.items():
+    if base<=address and address+len(value)<=base+len(data):data[address-base:address-base+len(value)]=value
    blocks.append((base,bytes(data)))
   for mode in (0,1,2):
    with self.subTest(mode=mode):
     self.native.load(self.h,sorted(blocks+list(self.static.items())));self.native.execution(self.h,mode)
     before=self.native.snapshot(self.h);clock=self.native.clock(self.h);raw=bytes(self.inp)
     code=self.native.input(self.h,3,self.inp);error=self.native.error()
-    self.assertEqual(code,5,error);self.assertIn('CalculIconeAction structure selected',error)
+    self.assertEqual(code,5,error);self.assertIn('IconeFillContenu structure Bag of a selected structure at 0x0045dec6',error)
     self.assertEqual(self.native.snapshot(self.h),before);self.assertEqual(self.native.clock(self.h),clock);self.assertEqual(bytes(self.inp),raw)
     self.assertTrue(inputs(self.native.consumed(self.h)))
  def test_isolated_rng_and_complete_reload_preserve_execution_policy(self):

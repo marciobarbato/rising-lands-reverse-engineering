@@ -155,8 +155,15 @@ def proof(binary):
   stop_equal=(status!=0 and error==expected_stop) if expected_stop else status==0
   text_equal=texts==c.get('expected_texts',[])
   resolved_dependency=None
-  if status==0 and expected_stop=='MiniMapSetPos at 0x0042bb5d':
-   # The older Python profile's missing provider is now implemented. Require
+  if status==0 and expected_stop in {
+   'MiniMapSetPos at 0x0042bb5d',
+   'BatimentInitAttaqueSelect at 0x0045f13f',
+   'InitRecruteTroupe at 0x0045f1a9',
+   'SetDechargeCaveEnginSelect at 0x0045f085',
+   'CalculIconeAction structure selected at 0x0045e9bf',
+   'BatimentPeutAttaquer at 0x0042b2a3',
+   'BatimentPeutAttaquer at 0x0042a4dc'}:
+   # These exact older-profile missing providers are implemented. Require
    # the complete immutable original state/text result, never a stop bypass.
    stop_equal=not diff and text_equal;resolved_dependency=expected_stop
   if not text_equal:diff.append(('text requests',c.get('expected_texts',[]),texts))

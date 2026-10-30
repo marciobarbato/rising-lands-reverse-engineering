@@ -468,3 +468,67 @@ pub fn select_enter(m: &mut MemoriaJogo, p: u8, s: u16) -> Result<()> {
     }
     Ok(())
 }
+
+/// EnginSelectPeutEntrer's semantic AL, original0x472b6c.
+pub fn can_enter(m: &MemoriaJogo, p: u32, mode: u32, target: u32) -> Result<bool> {
+    let base = 0x508728 + (p << 9);
+    let mut kinds = Vec::new();
+    let mut records = Vec::new();
+    for i in 0..m.w(base)? {
+        let u = m.w(base + 2 + 2 * i)?;
+        if !alive(m, u)? {
+            continue;
+        }
+        let a = unit(m, u)?;
+        if m.b(a + 0xdc)? & 4 != 0 {
+            return Ok(false);
+        }
+        kinds.push(m.b(a + 1)?);
+        records.push(a);
+    }
+    let all = |test: fn(u32) -> bool| !kinds.is_empty() && kinds.iter().copied().all(test);
+    let troop = |t| !matches!(t, 3 | 11..=17 | 25);
+    let engine = |t| matches!(t, 3 | 11..=17);
+    if mode == 1 {
+        let t = m.b(unit(m, target)? + 1)?;
+        return Ok(t != 16 && engine(t) && all(troop) && (t != 17 || !kinds.contains(&8)));
+    }
+    if mode != 3 {
+        return Ok(false);
+    }
+    let s = structure(target);
+    let t = m.b(s + 8)?;
+    let owner = m.b(s + 4)?;
+    if (owner == p || owner == 200) && all(|t| t == 9) && t != 9 {
+        return Ok(true);
+    }
+    if owner != p {
+        return Ok(t == 16 && all(|t| t == 10));
+    }
+    if t == 21 && kinds.iter().all(|v| !matches!(v, 3 | 11..=17)) {
+        return Ok(true);
+    }
+    let mut injured = false;
+    for a in &records {
+        if m.w(*a + 0x9a)? != m.w(0x4965b6 + 50 * m.b(*a + 1)?)? {
+            injured = true;
+        }
+    }
+    if all(troop) && (t == 2 || (t == 19 && injured)) {
+        return Ok(true);
+    }
+    if t == 14 && all(engine) {
+        if injured {
+            return Ok(true);
+        }
+        for a in &records {
+            if m.b(*a + 0xda)? != 5 {
+                return Ok(true);
+            }
+        }
+    }
+    if t == 18 && all(|t| t == 16) {
+        return Ok(true);
+    }
+    Ok(t == 8)
+}

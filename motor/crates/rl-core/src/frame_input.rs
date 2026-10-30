@@ -492,7 +492,18 @@ fn display_effects_for(m: &mut MemoriaJogo, flips: u32, affgame: bool) -> Result
         return stop("Display effect viewport", 0x4178f7);
     }
     let origin = (m.u16(0x508720)?, m.u16(0x508722)?);
-    if !(ORIGINS.contains(&origin) || affgame && AFFGAME_ORIGINS.contains(&origin)) {
+    let prior = ORIGINS.contains(&origin) || affgame && AFFGAME_ORIGINS.contains(&origin);
+    let extended = m.player.is_some()
+        && (if affgame {
+            crate::chain_display_origins::AFFGAME
+        } else {
+            crate::chain_display_origins::RESTOREALL
+        })
+        .contains(&origin)
+        && (m.u16(0x497168)?, m.u16(0x49716a)?) == (64, 64)
+        && m.u8(0x508041)? == 0
+        && m.u8(0x4e2f78)? == 18;
+    if !(prior || extended) {
         return stop(
             if m.player.is_some() {
                 "AffGame"
@@ -522,7 +533,7 @@ fn display_effects_for(m: &mut MemoriaJogo, flips: u32, affgame: bool) -> Result
         }
     }
     let cave = 0x49a0c8 + 276;
-    let pair = affgame
+    let pair = (affgame || m.player.is_some())
         && occupied == 2
         && pair_indices
         && m.u8(0x508041)? == 0

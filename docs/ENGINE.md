@@ -7,9 +7,13 @@ accepted M2 window (frames 0–9,200, ABI 1.1–1.2), stage 3 the native rendere
 ([ABI 1.5](#stage-4--declared-input-abi-15)) and the persistent play execution
 ([ABI 1.6](#sustained-play-execution--abi-16)). In play mode, logic averages
 **0.26 ms/frame** and logic plus render **0.65 ms/frame** over 9,200 frames, with
-terminal hashes unchanged. Simulation coverage under input currently ends at the
-named original-address stops recorded in the stage sections (for example the
-CAVE body at frame 220 in the cave probes). Swift owns the macOS shell, C only
+terminal hashes unchanged. On feature `feat/codex-rust-engine`, later-chain providers now advance beyond
+frame220: structure entry/cave habitation and recruitment, work state5, hunger
+state19/restoration, vision/groups/minimap/search and turret orders. The
+[continuation contract](../motor/research/CHAIN8_CONTRACT.md) records the exact
+inputs, original addresses, mutation order and remaining addressed stops.
+Bounded state/surface proof results and release timings are in the handoff;
+these are probe-window claims, not S1/D1 mission-completion claims. Swift owns the macOS shell, C only
 small tooling, and Python remains the original-validated reference and test
 harness. Rust is validated against the original evidence and the Python
 reference; `sh motor/validate.sh` runs on every integration. The workstream owns

@@ -248,7 +248,7 @@ fn next_unit(m: &mut MemoriaJogo, unit: u16) -> Result<u32> {
                 if economy(m, "PlayerGetType", &[u32::from(owner)])? as u8 == 2 {
                     crate::frame_ai::call(m, "iagUnitSendMessage", &[n, 0x4b, 0])?;
                 } else {
-                    return Err(stop("EnginSetFatigue", 0x45498f));
+                    crate::chain_fatigue::set(m, n)?;
                 }
             }
         }
@@ -281,6 +281,23 @@ fn switch_state(m: &mut MemoriaJogo, unit: u16, r: u32) -> Result<u32> {
         0x454ccd => Ok(0x454ccd),
         0x456966 => {
             economy(m, "EnginNextEtape:state7", &[u32::from(unit)])?;
+            Ok(0x454ccd)
+        }
+        0x456600 if m.player.is_some() => {
+            if m.u8(r + 0x82)? == 2 {
+                let a = 0x49a0c8 + 276 * u32::from(m.u16(r + 0x80)?);
+                if m.u8(a + 5)? == 3 || m.u8(a + 4)? != m.u8(r)? {
+                    return Err(stop(
+                        "EnginNextEtape state 5: work structure destroyed or foreign (0x456639)",
+                        0x456639,
+                    ));
+                }
+            }
+            crate::chain_work::work(m, u32::from(unit))?;
+            Ok(0x454ccd)
+        }
+        0x4554db if m.player.is_some() => {
+            crate::chain_restore::hunger(m, u32::from(unit))?;
             Ok(0x454ccd)
         }
         0x4558e4 if m.player.is_some() => {
