@@ -1153,3 +1153,17 @@ input events every frame. Flattening the index reproduces all original events;
 13 representative/edge frames normalize identically to the previous lookup.
 No normalization, compared field, model, native input or stopping rule changed.
 The indicator also reports hashes of the new owned detection/attack adapters.
+
+### Attack-bound indicator checkpoint
+
+On clean source `64128b5`, strict equals **10,672 frames129–10800**, then the
+unchanged Graphics guard at between_frames10801; no first difference,
+276.760 seconds. `validacao/s1-ataque-strict.json`. Planning equals **11,613
+frames129–11741**, then this front's reload increment `0x454587` inside
+EnginNextEtape at frame11742; no first difference, 304.586 seconds, 942 declared
+Graphics bypasses. Diagnostic stays `.local/m3-1/s1-ataque-planejamento.json`.
+No unresolved game-logic stop was bypassed. The leased gate passes **140 tests,
+eight explicit skips, zero failures/errors**, 134.761 seconds, docs links pass.
+The reload observer is queued under the shared heavy lease, selecting the first
+actual native parent reaching that instruction; no increment binding exists
+at this checkpoint. Exact observed registers will be added after capture.
