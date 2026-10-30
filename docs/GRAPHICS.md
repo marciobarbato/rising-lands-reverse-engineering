@@ -1042,3 +1042,17 @@ The declared probe boundary therefore needs no glyph provider. The strict record
 checks arguments and the complete incoming surface. Glyph-enabled execution remains unsupported; default rendering
 still reports `0x459454`. No blanket text bypass is added. [S1 end-screen capture preparation](../pesquisas-paralelas/graficos-animacao/S1_SCREEN_CAPTURE.md)
 requires a real late native checkpoint and has not yet produced result/objectives screen evidence.
+
+### Interrupted-session recovery: published logic guards
+
+The current `efeitos_logicos_exibicao.py` retains AffGame's exact sanctuary/CAVE pair, construction projectile
+types15/16 at slot0/state1/phases0..15, and the pre-existing at-most-one raid-effect type31/32 domain. Native P6
+entries at between_frames221,245,1141 are checked directly against the current provider; the latter two use P6's
+verified native P3 prefix. The declared memory input, empty logic-write output and callback order are unchanged.
+
+RestoreAll now accepts the same sanctuary/CAVE pair, backed by the separately committed24-call original matrix
+(`cave-restoreall-pares-matriz.json.xz`):24/24 returns, no DGROUP/CRT/allocation change, no AffBatiments call.
+Its origin and projectile restrictions remain independent. AffGame's owned-empty CAVE matrix is8/8; this does not
+broaden sanctuary modes beyond4/5 in a pair. The executable identity remains `6c556520…8543fb`; original entries
+are AffGame0x417698, RestoreAll0x474B08, AffBatiments0x407DD3 and projectile guard0x46FF70. Gameplay pixels and
+render version1.9 are unchanged. Glyph0x459454, unproved origins and menu0x4176A8 remain explicit dependencies.
