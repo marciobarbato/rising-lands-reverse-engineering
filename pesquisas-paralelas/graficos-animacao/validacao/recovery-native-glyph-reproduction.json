@@ -1,0 +1,15 @@
+{
+  "schema": "rising-lands/graphics-native-glyph-reproduction/1",
+  "cases": 270,
+  "equal": 270,
+  "mismatches": 0,
+  "elapsed_seconds": 54.870364417000005,
+  "executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+  "captures": {
+    "evidencias/glifos-afftext-nativos.json.xz": "376f74a9a8e125abdecaa4bbf4b16f27bedd574e3b854053e9d968fc0b2e108c",
+    "evidencias/glifos-afftext-recovery-20261030.json.xz": "6c39f23f7ff6340d7c78d60d3c4b8348db244494862ad902f959400b034e6c6c"
+  },
+  "all_native_rows_byte_identical": true,
+  "scope": "Fresh original-only 270-call matrix; every surface, raster argument, return, stack and game-memory observation equals its pre-translation capture. Only elapsed time differs."
+}

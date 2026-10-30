@@ -1,0 +1,37 @@
+{
+ "schema": "rising-lands/s1-menuinit-pixel-comparison/1",
+ "cases": 2,
+ "equal": 2,
+ "mismatches": 0,
+ "boundary_contract": "strict recorded LoadPie and AffText non-execution; opaque text remains an explicit pointer token",
+ "prepared_queries": "actual native research levels/colour and percentage text; next-mission number and message token; no query body translated",
+ "capture_sha256": "d726864e27b9ebc51873bdfc5220a76d4ec9dda84ee054885d3fdacef3c30445",
+ "sources_sha256": {
+  "telas_inicializacao_s1.py": "6384014c84f1a4625ce2988c560f01969fda7bd9c7b615e397b5499ee9f32625",
+  "validar_inicializacao_telas_s1.py": "0aeedef736d847f789cc98df586ea05c151e946aa4cb5a316fe52e1f5e879987"
+ },
+ "rows": [
+  {
+   "frame": 17032,
+   "target_mode": "0x13",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 0,
+   "pie_boundaries": 1,
+   "text_boundaries": 1,
+   "sha256": "948f8689816f10ac3cf21ccf76c7884df7631d8257df2b4dbb1473496e9136a8"
+  },
+  {
+   "frame": 17043,
+   "target_mode": "0x11",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 8,
+   "pie_boundaries": 1,
+   "text_boundaries": 1,
+   "sha256": "028281d1d4af35692ee25b0234d0ff8ecf537d5f1c102e1afa26819984a12c92"
+  }
+ ]
+}

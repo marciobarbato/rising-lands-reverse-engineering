@@ -1203,3 +1203,71 @@ summary tables (API, coverage, stops with owners) are in [GRAPHICS.md, "Current 
   committed captures only; no native run. The log was not committed.
 - **Next:** coordinator integration of the nine commits, then the AffText provider and S1 MenuInit screens from the
   committed captures, the chained replay, and a 1.9 hand-off to the Rust engine (which still renders Graphics 1.7).
+
+
+## Parked WIP recovery — 2026-10-30
+
+Recovery starts from integrated main `e41cc77`, without merging either WIP branch. Compared
+`e76b5f1` (`origin/wip/re-graphics-codex-0700`) and `0c007c2`
+(`origin/wip/re-graphics-0715`) against their base `bae1b18` and current main.
+The latter adds three test modules and an unfinished one-line gate log to the former.
+The glyph capture producer, CAVE domain/test corrections, finite origin matrix and P7
+origin evidence are already integrated and are retained byte-for-byte.
+
+Recovered `texto_afftext_bitmap.py` and its comparison/tests: explicit byte text,
+signed i16 rectangle coordinates, fonts 1..6, unsigned language/multibyte words 0/0,
+colour 0, clip flag 0/1, first NUL/newline-terminated printable line of at most 127 bytes.
+`planejar_texto_afftext` returns ordered original glyph calls and metrics;
+`compor_texto_afftext` returns new indexed 800×600 bytes and the plan;
+`TextoAffTextBitmap` implements the existing explicit `texto(request, surface)` callback.
+The caller supplies the actual inclusive unsigned-u16 clip words. Font pairs share the
+odd font's metrics; spaces advance by its `l` width; centring truncates signed halves
+toward zero. Glyph copies run in byte order, then the caller resumes drawing.
+There are no world writes, host fonts, hidden callbacks or text lookup defaults.
+Unknown modes, colour, controls, cursor overflow and unsafe unclipped writes stop at
+the addressed original dependency. An opaque message pointer is never empty text.
+
+Recovered `telas_inicializacao_s1.py` is a separate prepared drawing API for the two
+captured MenuInit transitions (owner/camera 0, 800×600, modes 0x12→0x13 and 0x13→0x11).
+Inputs explicitly include actual mission/message/research/colour query results;
+LoadPie executes first, research rectangles follow for mode 0x11, then AffText.
+Both callbacks must return a full surface and remain required. The validation adapters
+attest the recorded deliberate LoadPie/AffText non-execution against every argument
+and incoming surface. This is a drawing comparison, not a translated MenuInit or a
+text/background-enabled transition. Missing dependencies preserve an exact partial
+surface in `DependenciaInicializacaoS1`; mission/research mutation remains external.
+
+Native oracle identity remains `RISING.EXE`
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`, code
+`02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4`.
+AffText bytes/tables `0x4593DC..0x4598AF`, width query `0x458F2C..0x459143`,
+and dimensions `0x45ADD4..0x45ADF3` are preserved in the pre-translation
+`evidencias/glifos-afftext-nativos.json.xz`. No original evidence is overwritten.
+
+Discarded from recovery: both WIP gate logs (one incomplete), their stale documentation
+state/coverage claims, and their unverified comparison outputs as validation authority.
+The chain report is replayed afresh before delivery; glyph/MenuInit comparison reports
+are regenerated from the committed original captures. The WIP branches stay parked as
+historical sources and are never merged. No foreign implementation-file hash is pinned.
+
+
+Completed recovery validation: native glyph reproduction is **270/270** byte-identical
+rows in **54.870 s**, including full surfaces, every raster argument, stack balance,
+returns and unchanged game-memory observations. `recovery-native-glyph-reproduction.json`
+records both distinct capture hashes. Regenerated glyph/MenuInit comparisons are
+**270/270** + **2/2** (zero mismatches); all six focused recovered tests pass.
+The fresh current-source P3/P6/P7 chain is **3,001/3,001**, **2,272/2,272**,
+**3,572/3,572** complete surfaces, with matching raster arguments and display effects,
+no render/logic stop, and the strict recorded AffText boundary. This is a replay of
+committed native inputs, not a new original trajectory. Times are 415.497/56.144/172.872 s.
+Fresh S1 dependency reproduction is **20/20** identical isolated rows and **100/100**
+phase surfaces over **50/50** whole states (72.724 s native loop). Every phase and blob
+is identical to the pre-translation capture. The saved checks were additionally
+compared with the published S1 record after capture; all match. The two MenuInit
+surfaces also compare **2/2** on this fresh capture. See
+`validacao/recovery-native-s1-reproduction.json` and
+`validacao/recovery-native-menuinit-comparison.json`. No skip or native limit occurred.
+The full domain gate passes **293 tests**, no failures or skips, in **177.008 s**;
+documentation links pass. Log: `validacao/recovery-domain-gate.log`.
+This step is delivered on `feat/re-graphics` only; integration/acceptance remains with
+the coordinator.

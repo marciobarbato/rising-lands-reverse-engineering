@@ -2,6 +2,28 @@
 
 Owner: graphics. Active implementation, synthetic/reference tests, indexed-buffer artifacts, and original-byte extracts live in `pesquisas-paralelas/graficos-animacao/`. Historical frozen releases are immutable records in the workspace archive and in the pre-organization Git history. Never edit a frozen release's text or inputs to modernize it: its manifest hashes identify the exact original record.
 
+## Current recovery state — 2026-10-30
+
+The feature branch first fast-forwarded to integrated main `e41cc77`. The parked
+`e76b5f1`/`0c007c2` changes are reviewed individually, never merged. The native glyph
+producer, CAVE guards/tests and 1,920-origin domain are already on main.
+
+The recovered explicit AffText bitmap callback and prepared S1 MenuInit drawing plans
+replay the committed native captures at **270/270 surfaces, 7,620/7,620 glyph calls**
+and **2/2 transition surfaces**. The MenuInit comparison keeps its recorded LoadPie
+and opaque AffText boundaries explicit; it does not provide those dependencies.
+The production renderer remains API 1.9 and installs no default text callback.
+The fresh glyph matrix is **270/270 byte-identical native rows** (54.9 s). The fresh
+P3/P6/P7 source replay is **3,001/3,001**, **2,272/2,272**, **3,572/3,572**
+full surfaces, raster arguments and display effects, with no renderer or logic stop.
+The fresh S1 dependency reproduction is **20/20 calls, 50/50 whole states and
+100/100 phase surfaces**, with **2/2** prepared MenuInit surfaces equal. The domain
+gate passes **293 tests**, no failures or skips (177.008 s). Recovery is committed
+on the feature branch for coordinator review; no merge to main is performed. See the [recovery contract](../pesquisas-paralelas/graficos-animacao/HANDOFF.md#parked-wip-recovery--2026-10-30).
+
+The following 07:15 checkpoint is historical; its unvalidated WIP claims are not
+promoted by this progress note.
+
 ## Current state — 2026-10-30 07:15
 
 This section is the summary; the sections after it are the cumulative contract history, kept as written.
