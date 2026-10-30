@@ -1,0 +1,27 @@
+[
+  {
+    "tag": "P6-whole",
+    "returncode": 0,
+    "seconds_including_lease_wait": 77.108481333
+  },
+  {
+    "tag": "P1-reader",
+    "returncode": 0,
+    "seconds_including_lease_wait": 235.60155879099997
+  },
+  {
+    "tag": "P2-reader",
+    "returncode": 0,
+    "seconds_including_lease_wait": 241.65608366600003
+  },
+  {
+    "tag": "gate-final",
+    "returncode": 0,
+    "seconds_including_lease_wait": 1571.459503083
+  },
+  {
+    "tag": "common-final",
+    "returncode": 0,
+    "seconds_including_lease_wait": 1708.229146084
+  }
+]

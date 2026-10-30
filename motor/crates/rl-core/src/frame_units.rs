@@ -283,6 +283,7 @@ fn switch_state(m: &mut MemoriaJogo, unit: u16, r: u32) -> Result<u32> {
             economy(m, "EnginNextEtape:state7", &[u32::from(unit)])?;
             Ok(0x454ccd)
         }
+        0x4564ef if m.player.is_some() => crate::player_build::builder(m, u32::from(unit)),
         0x4563da => {
             if m.u16(r + 0x7e)? != m.u16(r + 8)? {
                 core(m, "DeplaceEngin", &[u32::from(unit)])?;
@@ -302,7 +303,41 @@ fn switch_state(m: &mut MemoriaJogo, unit: u16, r: u32) -> Result<u32> {
             }
             Ok(0x454ccd)
         }
-        _ => Err(stop("EnginNextEtape state switch", target)),
+        _ => Err(stop(
+            if m.player.is_some() {
+                const NAMES: [&str; 25] = [
+                    "EnginNextEtape state 0",
+                    "EnginNextEtape state 1",
+                    "EnginNextEtape state 2",
+                    "EnginNextEtape state 3",
+                    "EnginNextEtape state 4",
+                    "EnginNextEtape state 5",
+                    "EnginNextEtape state 6",
+                    "EnginNextEtape state 7",
+                    "EnginNextEtape state 8",
+                    "EnginNextEtape state 9",
+                    "EnginNextEtape state 10",
+                    "EnginNextEtape state 11",
+                    "EnginNextEtape state 12",
+                    "EnginNextEtape state 13",
+                    "EnginNextEtape state 14",
+                    "EnginNextEtape state 15",
+                    "EnginNextEtape state 16",
+                    "EnginNextEtape state 17",
+                    "EnginNextEtape state 18",
+                    "EnginNextEtape state 19",
+                    "EnginNextEtape state 20",
+                    "EnginNextEtape state 21",
+                    "EnginNextEtape state 22",
+                    "EnginNextEtape state 23",
+                    "EnginNextEtape state 24",
+                ];
+                NAMES[usize::from(state)]
+            } else {
+                "EnginNextEtape state switch"
+            },
+            target,
+        )),
     }
 }
 fn next_structure(m: &mut MemoriaJogo, structure: u16) -> Result<u32> {
@@ -313,7 +348,14 @@ fn next_structure(m: &mut MemoriaJogo, structure: u16) -> Result<u32> {
     }
     let target = m.u32(0x426880 + 4 * u32::from(index))?;
     if target != 0x426918 {
-        return Err(stop("BatimentNextEtape type switch", target));
+        return Err(stop(
+            if kind == 3 {
+                "BatimentNextEtape type 3"
+            } else {
+                "BatimentNextEtape type switch"
+            },
+            target,
+        ));
     }
     economy(m, "BatimentNextEtape:production", &[u32::from(structure)])?;
     Ok(0)
