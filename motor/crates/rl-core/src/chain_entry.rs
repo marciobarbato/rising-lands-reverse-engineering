@@ -5,6 +5,21 @@ use crate::{
     player::{self, alive, structure, unit, Memory},
     FrameRegisters as R, MemoriaJogo, Result,
 };
+/// GetCaseCentrale0x423b27 uses the geometric type rectangle, independently
+/// of BatimentGetCase's collision-mask centre. Game consumers use only AX.
+pub fn central_offset(m: &MemoriaJogo, s: u32) -> Result<u32> {
+    let s = s & 65535;
+    if s >= 1000 {
+        return stop("GetCaseCentrale structure index", 0x423b27);
+    }
+    let a = structure(s);
+    let t = m.b(a + 8)?;
+    if t >= 22 {
+        return stop("GetCaseCentrale structure type", 0x423b27);
+    }
+    let (w, h) = (m.w(0x495d8c + 52 * t)?, m.w(0x495d8e + 52 * t)?);
+    Ok(m.w(a + 2)?.wrapping_add((h >> 1) << 8).wrapping_add(w >> 1))
+}
 pub fn adjacent(m: &mut MemoriaJogo, s: u16, c: u16) -> Result<bool> {
     let a = structure(u32::from(s));
     let (x, y) = (i32::from(c & 255), i32::from(c >> 8));

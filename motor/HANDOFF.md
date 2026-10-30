@@ -1603,3 +1603,43 @@ Additional original-only render attestations now cover frames129–750 and
 1501–2250 (622/622 and750/750 native whole-state/both-phase surface checks).
 Their compact immutable artifacts live beside the earlier2251–3000 segment.
 Frames751–1500 and the complete Rust surface comparison remain pending.
+
+## Chain10 piece3 — S1 through3850 and geometric work destinations
+
+[Contract](research/CHAIN9_CONTRACT.md#geometric-depot-centre-correction) and
+[report package](validation/chain10/piece3/summary.json) resolve the frame2836
+unit12 difference: only destination+7e differed (original0x0c15, Rust0x0a14).
+A replay-checked original2750 opening agrees through2836; every byte of unit12
+matches at2835. Its actual work call0x44c49e requires geometric
+GetCaseCentrale0x423b27, not collision-centre BatimentGetCase0x41aee2.
+
+The first shared-helper correction regressed farmer unit13 at2352. That failed
+report is retained. Routing is now exact per caller: GetCaseCentrale at44da02,
+44bf6a and44c49e; BatimentGetCase remains at44dc4b,44df64 and44c6b8.
+The isolated geometric query passes12/12 original full-register/memory cases;
+its body is unchanged by the narrower routing. A final-source repeat is queued.
+The complete corrected gate passes30 Rust/63 Python,666 input leaves,75 pilot
+captures and C/Swift/Metal. The earlier partial gate was canceled before the
+caller correction and is not counted as complete. ABI1.6/Graphics1.9 remain.
+
+Final-source release S1 agrees with original indicators, consumed inputs and
+orders over **3,722 frames129–3850**, with **zero differences**. The first
+actual Rust stop is **frame3851, phase3, SacGetCapacite at0x4299da**.
+This remains the published indicator domain, not a whole-state S1 claim.
+
+Additive profile `chain10` pins AI/runtime `bf8ec61` and Graphics92fab50.
+The pinned Python agrees over **2,418 completed frames129–2546**. It raises
+`ArgumentoNaoPassado` for actual EDX omitted at SetSortEngin call0x420f8c in
+frame2547. Rust completes that call. The strict same-stop reader therefore
+retains an explicit dependency-contract difference; preceding inputs/orders
+match, and no completed Python phase2547 equality is invented. All **4,838/4,838**
+paired Rust play/audit phases remain exact. Economy must forward the actual
+exit-cell DX; no foreign provider or reference callback is patched here.
+
+The mini's compact original attestations now cover **3,723/3,723 frames129–3851**,
+without gaps or duplicate frames. Every committed original whole-state hash and
+both phase surface hashes reproduce. The six bounded segments and observer
+hashes are in research/evidence; no later checkpoint becomes a Rust input.
+The earlier carried Rust surface prefix passes622/622 through750. Final S1
+surfaces through3850, prior-window regressions and exclusive timing are queued
+and remain the next verification piece; their results are not assumed here.

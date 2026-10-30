@@ -81,3 +81,22 @@ Measured reports, first stops, timings and prior exact regression scopes are
 recorded in `motor/HANDOFF.md` as each bounded piece finishes. Neither this
 contract nor a successful prefix establishes S1 victory, Test B, integration
 acceptance, or a main merge. Those remain coordinator-owned decisions.
+
+## Geometric depot centre correction
+
+The S1 frame2836 diagnostic changes only unit12's destination word+7e:
+original0x0c15, prior Rust0x0a14; the complete record matches at2835. Original
+replay from checkpoint2750 verifies all87 trajectory states through2836.
+`chain_work::centre` incorrectly reused BatimentGetCase0x41aee2's collision-mask
+centre. The actual work calls (including0x44c49e) select GetCaseCentrale0x423b27:
+origin + ((height>>1)<<8) + (width>>1), from the u16 dimensions with stride52.
+The native query is now separate; production work consumes AX only, while the
+fixture preserves caller EDI's high word in full EAX and all other data GPRs.
+It has no memory writes or callbacks. The twelve committed Core original cases
+compare all supplied bytes/eight exit GPRs exactly, without masks or skips.
+The previous diagnostic and its two actual original record images are retained.
+
+New additive profile `chain10` pins AI/runtime's recruitment/city wiring at
+`bf8ec61` and keeps Graphics92fab50. Profiles throughchain9 remain unchanged.
+The pinned Python continuation explicitly requires Economy to forward DX at
+SetSortEngin0x420f8c; Rust does not fabricate a reference callback to bypass it.

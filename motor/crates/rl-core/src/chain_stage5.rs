@@ -2,6 +2,11 @@
 use crate::{EngineError, FrameRegisters, MemoriaJogo, Result};
 pub fn entry(m: &mut MemoriaJogo, name: &str, r: FrameRegisters) -> Result<FrameRegisters> {
     match name {
+        "GetCaseCentrale" => Ok(FrameRegisters {
+            eax: (r.edi & 0xffff0000).wrapping_add(crate::chain_entry::central_offset(m, r.eax)?),
+            esp: r.esp.wrapping_add(4),
+            ..r
+        }),
         "EnginSetType"
         | "EnginAddVie"
         | "EnginResetFatigue"
