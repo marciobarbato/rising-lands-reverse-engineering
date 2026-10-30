@@ -82,12 +82,12 @@ class Replay:
             if c[1] != nome:
                 self.erros.append(f'call {self.i}: translation {nome} at {chamada:#x}, original {c[1]} from {c[3]}')
                 raise self.erro(nome, chamada, 'differs from the original call sequence')
-            for k, v in regs.items():
-                if k.startswith('_'):
-                    continue
-                largura = self.argumentos[nome][k]
-                if (int(c[2][k], 16) & largura) != v:
-                    self.erros.append(f'{nome} at {chamada:#x}: {k} {v:#x} != original {int(c[2][k], 16) & largura:#x}')
+            # The argument bits the callee reads (``argumentos``) are compared; a caller passing the whole register
+            # file (every register, Core's provider contract) is compared on those bits only.
+            for k, largura in self.argumentos[nome].items():
+                if k in regs and (int(c[2][k], 16) & largura) != (regs[k] & largura):
+                    self.erros.append(f'{nome} at {chamada:#x}: {k} {regs[k] & largura:#x} != original '
+                                      f'{int(c[2][k], 16) & largura:#x}')
             original = {k: int(c[5][k], 16) for k in REG7}
             if nome in self.provedores:
                 # A real translation (Core's ``provedor_saida``): its registers are what the caller receives,
@@ -119,6 +119,17 @@ def provedores_saida():
     def fabrica(m):
         return provedor_saida(VisaoGrupos(m))
     return {'CalculPosition': fabrica, 'RechercheDecalageSortie': fabrica}
+
+
+def provedores_core():
+    """``provedores_saida`` plus Core's ``fadiga_vegetacao.provedor_fadiga`` for EteintTerrain (SortieTroupe's
+    abandonment, 0x421116). Native differential only: the provider binds Core's live world, which reads bytes no
+    recorded call reads, so a CPU-free replay over the read-before-write bytes cannot host it."""
+    from fadiga_vegetacao import FadigaVegetacao, provedor_fadiga
+
+    def fadiga(m):
+        return provedor_fadiga(FadigaVegetacao(m))
+    return dict(provedores_saida(), EteintTerrain=fadiga)
 
 
 def proprias():
@@ -182,7 +193,7 @@ def main():
     ap.add_argument('--captura', required=True)
     ap.add_argument('--saida', required=True)
     ap.add_argument('--sem-saida-core', action='store_true',
-                    help="replay the original's CalculPosition/RechercheDecalageSortie instead of Core's provider")
+                    help="replay the original's CalculPosition/RechercheDecalageSortie/EteintTerrain instead of Core's providers")
     a = ap.parse_args()
     captura, sha = carregar(RAIZ / a.captura)
     # The capture's own scenario module reruns it (the sanctuary abandonment has its own declared actions).
@@ -190,12 +201,14 @@ def main():
         import capturar_abandono_santuario as ccr
     else:
         import capturar_caverna_recrutamento as ccr
-    provedores = None if a.sem_saida_core else provedores_saida()
+    provedores = None if a.sem_saida_core else provedores_core()
     relatorio = dict(schema='rising-lands/economy-cave-recruitment-validation/1', capture=a.captura,
                      capture_raw_sha256=sha,
                      translation=hashlib.sha256((PASTA / 'caverna_recrutamento.py').read_bytes()).hexdigest(),
                      core_exit_provider=None if provedores is None else hashlib.sha256(
                          (RAIZ / 'ferramentas/visao_grupos.py').read_bytes()).hexdigest(),
+                     core_fatigue_provider=None if provedores is None else hashlib.sha256(
+                         (RAIZ / 'ferramentas/fadiga_vegetacao.py').read_bytes()).hexdigest(),
                      results=[], counts={}, served_by_translation={})
     gravadas = []
 
