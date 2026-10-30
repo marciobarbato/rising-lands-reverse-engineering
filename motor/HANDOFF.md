@@ -1,5 +1,12 @@
 # Rust engine pilot handoff
 
+> **Current state (2026-10-30).** Stages 2–4 and the ABI 1.6 play execution are
+> on main; the macOS app runs this engine live. Latest deliveries:
+> [Stage 4 delivery](#stage-4-delivery--2026-10-30) (declared input and orders,
+> ABI 1.5) and [Sustained play delivery](#sustained-play-delivery) (ABI 1.6:
+> logic 0.26 ms/frame, logic plus render 0.65 ms). Overview in
+> [ENGINE](../docs/ENGINE.md). The pilot text that follows is historical.
+
 Workstream D owns motor/ and docs/ENGINE.md on feat/codex-rust-engine in the
 independent Rising-Lands-Codex-Engine clone. No other front was edited; no
 merge into or push to main is performed. This is a pilot, not a frame engine or milestone.

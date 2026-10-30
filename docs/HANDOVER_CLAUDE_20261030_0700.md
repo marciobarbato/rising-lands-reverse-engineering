@@ -35,7 +35,7 @@ The user paused development on the MacBook at 07:00 on 2026-10-30. The Mac mini 
   - `... D1 --intervals 11250-11750 15250-15700`
   - push to `runs/combat/fatal-{s1,d1}`.
 
-**Codex** sessions still running at 06:15. They are stopped at the pause, and their unpushed work stays in their worktrees:
+**Codex** sessions still running at 06:15. They are stopped at the pause; their unvalidated work is now parked on `wip/*` branches (see [Preserved WIP branches](#preserved-wip-branches-unvalidated)):
 - `rust-engine-chain`: port of the chain past frame 220 to Rust (Rising-Lands-Codex-Engine).
 - `economy-transport`: states 18/20 capture and translation (re-economy).
 - `macos-abi16`: ABI 1.6 play mode and the original's game speed (macos-playable).
@@ -44,9 +44,28 @@ The user paused development on the MacBook at 07:00 on 2026-10-30. The Mac mini 
 
 Codex quota: 65% of the weekly window at 03:45; it resets 2026-11-04 05:10. Many runs failed overnight with "Selected model is at capacity"; resuming the same session later usually worked. Very long threads also failed during compaction. Start a fresh session with a handover brief instead.
 
+## Preserved WIP branches (unvalidated)
+
+The user stopped every Codex session at about 07:15; none was resumed to finish. Their work is parked on `origin/wip/*` branches, none of it reviewed, validated or integrated. The feature worktrees are clean at their pushed heads. The Mac mini keeps running pass-2 S1 and the D1 packaging.
+
+| Branch | Front | Content |
+|---|---|---|
+| `wip/re-graphics-codex-0430` | graphics | Cut off by service errors at 04:36: glyph capture, CAVE domain, P7 view origins |
+| `wip/re-graphics-codex-0700` | graphics | Stopped at the 07:00 pause |
+| `wip/re-graphics-0715` | graphics | Stopped at ~07:15 |
+| `wip/re-economy-transporte` | economy | 03:54, no capture yet: states 18/20 translation, state-19 checks, capture script |
+| `wip/re-economy-transporte-0700` | economy | Stopped at the 07:00 pause |
+| `wip/re-economy-0715` | economy | Stopped at ~07:15 |
+| `wip/codex-rust-engine-chain-0700` | Rust engine (`motor/`) | Chain past frame 220, stopped at the 07:00 pause |
+| `wip/codex-rust-engine-0715` | Rust engine (`motor/`) | Stopped at ~07:15 |
+| `wip/macos-abi16-0700` | macOS | ABI 1.6 play mode and game speed, stopped at the 07:00 pause |
+| `wip/macos-playable-0715` | macOS | Stopped at ~07:15 |
+
+The branches of one front are not a linear history, except macOS (`wip/macos-abi16-0700` is an ancestor of `wip/macos-playable-0715`). Diff them against each other and against main before resuming. To continue one, start a fresh Codex session on the clean feature worktree with a brief that names the branch, have it review and finish the work, and integrate only after review and the front's gates. Never integrate a `wip/*` branch directly.
+
 ## Next steps (in order)
 
-1. Check each Codex worktree for unpushed work. Integrate what passes, and park the rest on `wip/*` branches.
+1. ~~Check each Codex worktree for unpushed work~~ (done: all parked on `wip/*`, worktrees clean). Resume the `wip/*` work in fresh sessions, review it and integrate what passes.
 2. When pass-2 S1 lands:
    - AI/runtime runs `fixar S1` and `tudo --janelas S1` (strict and planning);
    - reproduce on both machines;
