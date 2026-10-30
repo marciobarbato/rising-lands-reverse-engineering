@@ -1,0 +1,531 @@
+{
+  "bin": {
+    "filename": "RISING_LANDS_BR_.BIN",
+    "sha256": "c2c09e87927cf5ebbe5d17ea17bffb53c82c2e68385e9259ad0453cc15ea616f",
+    "size": 705418896
+  },
+  "cue": {
+    "filename": "RISING_LANDS_BR_.CUE",
+    "sha256": "766fbc02932e3f0454d411211991016142fd361930fc51528fe858fcbf738873"
+  },
+  "files": [
+    {
+      "bin_equals_extracted": true,
+      "path": "INSTALHD/EVENTS.INI",
+      "sector": 184589,
+      "sha256": "d31f2859a2445e0f9a0ba299369c4b556eee1ee07b7b8265b9d49b60a1b8496a",
+      "size": 7066
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "INSTALHD/MONSTRE.INI",
+      "sector": 192180,
+      "sha256": "6be59feea11e20eda101ee1e528b3306be447da9e9c3a3807bc2c1bf9e071046",
+      "size": 233
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "INSTALHD/RISING.EXE",
+      "sector": 192798,
+      "sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+      "size": 665600
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "INSTALHD/RISING.INI",
+      "sector": 193123,
+      "sha256": "e4762aae51d8aa7bd56280af43a7408a19571ab6dbfcd170fb59cffbcdc8338b",
+      "size": 21759
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "INSTALHD/RISING.SBL",
+      "sector": 193147,
+      "sha256": "c3a5411255847d36161aea1aeef06ab280265c55fa5a6626cfeb7bab523cc627",
+      "size": 51451
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "INSTALHD/WORLD/NET/ALIBABA.NET",
+      "sector": 199499,
+      "sha256": "77ba207d1c723314ea048892f9b39d11f866b0f9dbc7c6fb4a90caa7e56ac882",
+      "size": 1276246
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "INSTALHD/WORLD/NET/CHAMPS.NET",
+      "sector": 200123,
+      "sha256": "adfe9cde029427f324705644876f7b5729cea8e3df84d0d5b5b66d6f1de265e0",
+      "size": 1270072
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "INSTALHD/WORLD/NET/CIRQUE.NET",
+      "sector": 200744,
+      "sha256": "b298e9cfb232e5a761e49dbec8ee593632e5f3940d45b289994320978770bbe7",
+      "size": 1270184
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "INSTALHD/WORLD/NET/CRANE.NET",
+      "sector": 201365,
+      "sha256": "0d2e30b059b7c58936669f147fc8ce07e22388d8733baddc4ad0a3d730e3d1a5",
+      "size": 1266944
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "INSTALHD/WORLD/NET/MASSIF.NET",
+      "sector": 201984,
+      "sha256": "72c94dce9f80899ed5a034160acd1d8e0d8e156f15f1c26270a42a47629e810d",
+      "size": 1281390
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE01.ETA",
+      "sector": 202610,
+      "sha256": "19237b8c3f3c0c76022276da229bec727b17603440823c43561aba159dd47015",
+      "size": 1259976
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE01.TXT",
+      "sector": 203226,
+      "sha256": "8df9ece7af27efd64357d52ef783a8ed40b6d36f428895a35358b1a3efdef712",
+      "size": 1220
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE02.ETA",
+      "sector": 203227,
+      "sha256": "291566a7486cb15616c4778d36d6b0ad4f717c65de745b941e640f7f835ad2ba",
+      "size": 1259762
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE02.TXT",
+      "sector": 203843,
+      "sha256": "049f9d7bdca15df7f075ad2232612ac40a695468949b7b1a10412b20b8bba397",
+      "size": 660
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE03.ETA",
+      "sector": 203844,
+      "sha256": "11e4fc67e687736267699b075ce1a0c6b289fb8180707e37de27649e15810ea6",
+      "size": 1257620
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE03.TXT",
+      "sector": 204459,
+      "sha256": "769c02b53cb215420b6fa23bcb246a7445bbacfe62a70a4693a2be7a1ab0c544",
+      "size": 654
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE04.ETA",
+      "sector": 204460,
+      "sha256": "c4940953c4ce8d256039347cc9d0b4516c98ff3a82a439a0babbdd4c6965ddc4",
+      "size": 1282104
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE04.TXT",
+      "sector": 205087,
+      "sha256": "2ba70231b51a2749431892ecb1123c200bdc4d052bb4b6db247c6d0e91318eb3",
+      "size": 745
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE05.ETA",
+      "sector": 205088,
+      "sha256": "817f5db77b907dfa69ab8ceb71981e2055dede3fd0e4cd208c8efce33a0c6fc6",
+      "size": 1295828
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE05.TXT",
+      "sector": 205721,
+      "sha256": "73c5d03fc6b5e7e7c2a8851647d93923a7a89f742d2b18c2184df8193e820705",
+      "size": 429
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE06.ETA",
+      "sector": 205722,
+      "sha256": "c80feed76c2db702a4ed2ff6b3c6e1fe84eabe68138f6660367c14e98a3c10c9",
+      "size": 1256118
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE06.TXT",
+      "sector": 206336,
+      "sha256": "27ac23692a0ec2bd1093b26bd4fe7775119d2ae487a0a7ee4dc2e6b24230b98a",
+      "size": 747
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE07.ETA",
+      "sector": 206337,
+      "sha256": "6d574c7428127c966b04f22353dc8a711d4b5897853a61dd579b921e36e0afb1",
+      "size": 1260608
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE07.TXT",
+      "sector": 206953,
+      "sha256": "d161b91384380008bed46ff82e5a5a70eeb7541f982b73077fdf2c81e88cedb8",
+      "size": 495
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE08.ETA",
+      "sector": 206954,
+      "sha256": "a8a5156251a2937c49f7331a9f8890ec3d857ae420fd6dbe6eb465cae2965e9c",
+      "size": 1259500
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE08.TXT",
+      "sector": 207569,
+      "sha256": "2c0d9ac4f08f92005a4a3e867b5ba0aec2e51bb89f67dfe3942b77d138418997",
+      "size": 565
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE09.ETA",
+      "sector": 207570,
+      "sha256": "3b626f3fe831844f4e6f0b7d343c5c8e316dc56ee03447fd028ad8b0beb88eb9",
+      "size": 1289828
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE09.TXT",
+      "sector": 208200,
+      "sha256": "e4090c5abf8bab8325cd74fbcc076402f6a7be8951ad901a917ba6c608a8d608",
+      "size": 789
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE09A.ETA",
+      "sector": 208201,
+      "sha256": "4a49802ea11b7c1029cee2c84002c80d80ea7033ccb282e065c9a9f701b7eec4",
+      "size": 1295330
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE09B.ETA",
+      "sector": 208834,
+      "sha256": "7e47f32f08a1467f2b7a7fe0916b61c4421a60672b79d93d0d02354f349e18fd",
+      "size": 1299880
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE09C.ETA",
+      "sector": 209469,
+      "sha256": "dc40f8b68a59fb91cd2b33b9624ffe49294df9419042e4847402be135535ce7a",
+      "size": 1300006
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE09D.ETA",
+      "sector": 210104,
+      "sha256": "f69e52f7a56e837945ec0beb9787be93c611c33b09fe1c0f6b9b1dfc12e1ec69",
+      "size": 1301302
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE10.ETA",
+      "sector": 210740,
+      "sha256": "827f832bbc33635e2111bab0f58a218b9efbe319705ac66032ad13b8ffbc3a37",
+      "size": 1297018
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE10.TXT",
+      "sector": 211374,
+      "sha256": "7446ee85ea83d91ca6446bf1626fa87bdb93b1ae866ba72ac23c4fb515e4aedb",
+      "size": 436
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE10A.ETA",
+      "sector": 211375,
+      "sha256": "5d809594106280f178ceaaa5c5fa49fa33a506a6ae420c31f7f16323bfd33452",
+      "size": 1298590
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE10B.ETA",
+      "sector": 212010,
+      "sha256": "3840989e98f0ea8183eb5fe4ae9f68a37f24952f58a8a34fa5caf734f20ddbf0",
+      "size": 1299666
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE10C.ETA",
+      "sector": 212645,
+      "sha256": "86b85d1e7c6ada741d3644a442f364d97c8493ba092086d10541e9664a812bbe",
+      "size": 1298510
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE11.ETA",
+      "sector": 213280,
+      "sha256": "5c66041c076747afbf29b0a8e1c6a2ff3222e9b1a60a0cde18abb666a9ea2840",
+      "size": 1295612
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE11.TXT",
+      "sector": 213913,
+      "sha256": "97bb6c3e147723404c3f488be5ccb79af154c546cb68dc6bb0bb2cd6197675f0",
+      "size": 887
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE12.ETA",
+      "sector": 213914,
+      "sha256": "6abdcec07fb8afd82fe3697dde2ac6fed8911f613ea840541d23b6451cf7998d",
+      "size": 1346978
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE12.TXT",
+      "sector": 214572,
+      "sha256": "3155819fae7ff403566d14f967daef40b3ba8ee8c47f00bfea5ae72e7a2aa521",
+      "size": 344
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE12A.ETA",
+      "sector": 214573,
+      "sha256": "90860a9e7d5ec934f8d345ac15f849f8637db4ca574dac1e6f609a630aaa33c4",
+      "size": 1362530
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE12B.ETA",
+      "sector": 215239,
+      "sha256": "69fb5140fd0636ac9e0f5f63323e8f3c2013aaf3e117603785079b007363c50a",
+      "size": 1370480
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE12C.ETA",
+      "sector": 215909,
+      "sha256": "f09c5165f88ca7f1575e87cbf7a420a7588d5d3b150e41a5623ebf1e4225ed48",
+      "size": 1362610
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE13.ETA",
+      "sector": 216575,
+      "sha256": "b1dd08943dee2afc32ca3d35ffd30d0229c87078c6b99362fc0a437639044bc2",
+      "size": 1262988
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE13.TXT",
+      "sector": 217192,
+      "sha256": "a61235ed9e7175eff92e60fe8623f3d9ed03d2d9f1ab4378a728dec73bcf8524",
+      "size": 520
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE14.ETA",
+      "sector": 217193,
+      "sha256": "75370d077e6c0e0fe4f3b5d16c4bb5e2d564d19989394966d81910b8dec57fe1",
+      "size": 1260982
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE14.TXT",
+      "sector": 217809,
+      "sha256": "5c4ae9e243f37335d11cb8543eb9ee47d874fe0e7bd5ff967abb2f2bed26544e",
+      "size": 617
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE15.ETA",
+      "sector": 217810,
+      "sha256": "89ff2906dfddf1a4665b07e14251f60eba899d3e61123b2d9ba483762add9df7",
+      "size": 1302136
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE15.TXT",
+      "sector": 218446,
+      "sha256": "6b21988636b8eeef5a45a31c6a6204b2cf2750304d31a39517f2a1d304d7883c",
+      "size": 448
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE16.ETA",
+      "sector": 218447,
+      "sha256": "3be9f1479506b112edc266315b6e3bfee74f786bf7fc0edea9973b46ca327f77",
+      "size": 1299996
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE16.TXT",
+      "sector": 219082,
+      "sha256": "b7457228eee60abf32762fe957aa579879a1ce43f75816eb2cb1ba73adfa60dd",
+      "size": 481
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE17.ETA",
+      "sector": 219083,
+      "sha256": "f176fb3d72437709de034b1b5c60359ae41518a70ff678715c6bc2500160cbe7",
+      "size": 1413350
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE17.TXT",
+      "sector": 219774,
+      "sha256": "7b511457e0af0f36270c4ab6ab278538ddf5e5a16f4f86a5006b9f014e218f75",
+      "size": 634
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE17A.ETA",
+      "sector": 219775,
+      "sha256": "f176fb3d72437709de034b1b5c60359ae41518a70ff678715c6bc2500160cbe7",
+      "size": 1413350
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE17B.ETA",
+      "sector": 220466,
+      "sha256": "c27ee407371f9a0d9d2b032123d03a5a57228ace8b3c99e2c4979873d5476771",
+      "size": 1413762
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE17C.ETA",
+      "sector": 221157,
+      "sha256": "3cff0609b10bbe3c439c068d42850b8cac9e6895fefae282b457224f66eb3836",
+      "size": 1416494
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE18.ETA",
+      "sector": 221849,
+      "sha256": "e5d4ead32b9422160a3334a0735400cd702179dbc29f471c373657883b65dadc",
+      "size": 1299928
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE18.TXT",
+      "sector": 222484,
+      "sha256": "a4d3a3cfe7139abd9025f6f36582d97604bbf6cffbeba8c0e34c9fb2487523da",
+      "size": 501
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE19.ETA",
+      "sector": 222485,
+      "sha256": "95a1bd20475db7f39f7ff2c10a9ba904f1246145ba73006d40a8a0521501d213",
+      "size": 1296792
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE19.TXT",
+      "sector": 223119,
+      "sha256": "2cd52018a606266128e95949437521241c890408019bb78a6d308ca5cc214458",
+      "size": 664
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE20.ETA",
+      "sector": 223120,
+      "sha256": "585b2b087368b56aae56cd08833078a7d257d717c49873d5effb51bf78457c68",
+      "size": 1278064
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE20.TXT",
+      "sector": 223745,
+      "sha256": "987e21f5b3629b730a2ae6f4a9a8727a20f5f6f171851301dd0c8da11ec3b01c",
+      "size": 375
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE21.ETA",
+      "sector": 223746,
+      "sha256": "b7de440f4761476b86ebe33924471fecf99c051b4db07dac7edb88699a4e5875",
+      "size": 1298498
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE21.TXT",
+      "sector": 224381,
+      "sha256": "f3731ce0e40fae8b15399d016567a3c92a229aace40c8af16aa211a218f1e4ab",
+      "size": 399
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE22.ETA",
+      "sector": 224382,
+      "sha256": "b6bce6b3df38e3f497224598175e653859f26554ed0982bcd799139acc23d018",
+      "size": 1295668
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE22.TXT",
+      "sector": 225015,
+      "sha256": "d66b4bb205c9cc2cba6b2f3b9aff2705ba4546f4985a86f1570c48dea2799ab0",
+      "size": 499
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE23.ETA",
+      "sector": 225016,
+      "sha256": "c83bfdfa6236b9c1000b3715340296479cfcc02e867275ef9f03437cf1b61630",
+      "size": 1418088
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE23.TXT",
+      "sector": 225709,
+      "sha256": "7364f164b0df34eeb67b50adac58646e9cbb14ebd95f2ac47605b99a8890fc3c",
+      "size": 457
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE24.ETA",
+      "sector": 225710,
+      "sha256": "7f09a9d659978e2b095baa986fc3435336222acd6fc92818a9833c5ddb6420bd",
+      "size": 1300522
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE24.TXT",
+      "sector": 226346,
+      "sha256": "a6868025a4683781357377f91bcd4c6aa88d322994c67f099e882974a32ea83c",
+      "size": 413
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE25.ETA",
+      "sector": 226347,
+      "sha256": "d134d11c1227a6441b3dce7b452f06a649f953ce69fe74de367973b4620df70e",
+      "size": 1298052
+    },
+    {
+      "bin_equals_extracted": true,
+      "path": "WORLD/MONDE25.TXT",
+      "sector": 226981,
+      "sha256": "93468d378f67bb1faa6f11dac68cd290c9093daf220cc1fa7432582f0fb43d6b",
+      "size": 338
+    }
+  ],
+  "reader": {
+    "entrypoint": "CDROM.walk/read",
+    "sha256": "5552e24853cb6608cc7a7cf90a0f006edf6d42fb75a05215f18b4e06628ad6d0",
+    "workspace_relative_path": "legacy-prototype/tools/cdrom.py"
+  },
+  "schema": "rising-lands/campaign-original-sector-proof/1",
+  "verified_input_count": 73
+}
