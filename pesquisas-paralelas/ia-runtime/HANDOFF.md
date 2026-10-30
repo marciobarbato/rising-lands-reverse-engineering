@@ -917,3 +917,53 @@ the 101 native cases are counted once. All 28 S1 original states and unchanged
 code reproduce again. Report: `validacao/consulta-mina-native.json`. Three
 focused tests pass (native replay, missing/uncertain/invalid AX, live-table
 mutation between queries and preserved uncertainty). Chain rerun follows.
+
+### S1 reach after the binding
+
+Source `8b6f1c9` (pushed): strict and planning indicators both match **3,722
+frames, 129–3850**, with no first difference. Both stop inside **frame3851**
+on **Economy** SacGetCapacite entry `0x475736`, InputGame CALL `0x4299da`.
+Orders before the stop match; planning records zero Graphics bypasses.
+Strict: `validacao/s1-mine-strict.json`. Planning remains ignored/local:
+`.local/m3-1/s1-mine-planejamento.json`, SHA-256
+`92befa5f61e74140e868d8de6da6ffb5955dbafa5db33769657d2560e4d8dca5`.
+
+The mine route passes frame3277 in both modes. Recruitment/frame2547 also
+passes with main's Economy register forwarding. This establishes indicator
+reach only, not per-phase whole-state equality or completed frame3851.
+No planning facility bypasses the missing sack logic provider, so the chain
+stops there. Its native S1 register contract is recorded with the bounded
+original observer; the exact request stays in `S1_NEXT_STOPS.md`.
+
+Fresh leased `python3 -B scripts/check.py --domain ai-runtime`: **132 tests,
+124 executed successfully, eight explicit native skips**, no failures/errors,
+136.861 seconds; documentation links pass. The 101 mine differentials actually
+ran natively, separately from those skips. Baseline gate: 129 tests, eight
+skips, no failures/errors, 132.656 seconds. All new source/evidence is owned;
+no foreign source hash pins, original replacements or main acceptance.
+
+### Exact Economy stop contract and final boundary
+
+Leased `capturar_parada_s1_ia.py --rotina SacGetCapacite --chamada 0x4299da
+--de 3250 --ate 3851 --saida pesquisas-paralelas/ia-runtime/evidencias/s1-parada-saco-original.json`
+checks **602 original states, 3250–3851**, all equal to the committed native
+S1 trajectory, unchanged original code, 390.908 seconds. It observes the
+real frame3851 call/return without replacing or translating any game callee.
+No stores or boundaries occur inside this query.
+
+Native entry: EAX=EBX=ESI=`0x1f18` (cell 7960), ECX=`0x1f00`,
+EDX=`0x47891000`, EDI=0, EBP=`0x2007ea4`, ESP=`0x2007e68`.
+Object byte `0x43`, quantity 4. Exit: EAX=`0x47860004`, ESP=`0x2007e6c`;
+all six other data registers preserved. **Economy** must supply the live
+SacGetCapacite `0x475736` provider, AX=u16 cell, plain RET, with the exact
+upper-word residue from the quantity-grid pointer on the sack branch.
+Outside object range `0x42..0x44`, EAX=0. InputGame consumes the low word at
+its panel tail. Full read addresses and requested consumer API are in the
+short [stops table](S1_NEXT_STOPS.md); no artificial default was installed.
+
+The latest fetch sees main `84e4fe7` and Missions `7eeb395`, neither with the
+S1 pass-2 manifest. Therefore `fixar S1` and strict `tudo --janelas S1` were
+**not run**; there are no S1 part reaches/chains or whole-state proof results
+to report. The unrelated newer main engine changes were inspected, not merged
+into this measured source. No further chain bypass or other task was started.
+Feature commits only; the coordinator owns review/integration/acceptance.
