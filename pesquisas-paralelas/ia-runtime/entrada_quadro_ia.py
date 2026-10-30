@@ -199,6 +199,16 @@ def terreno_gc(m, celula):
     return 0
 
 
+def terrain_get_sac_type(m, regs):
+    """TerrainGetSacType 0x476038..0x47605d (13 instructions, read-only), every register: AX = the cell. EAX =
+    [0x507d74] + cell (zero-extended) with AL = object byte - 0x42 for the sack objects 0x42..0x44 (1 food, 2 stone,
+    0 the third), else 0xff. EDX is pushed and popped; no other register changes (flags not modeled)."""
+    ponteiro = (m.u32(0x507d74) + (regs['EAX'] & 0xffff)) & 0xffffffff
+    objeto = m.u8(ponteiro)
+    al = (objeto - 0x42) & 0xff if 0x42 <= objeto <= 0x44 else 0xff
+    return dict(regs, EAX=(ponteiro & 0xffffff00) | al)
+
+
 def terreno_mina(m, celula):
     """TerrainEstMine 0x476263: tiles outside 0x251..0x252 and 0x255..0x256 return 0."""
     tile = m.u16(m.u32(0x507d70) + 2 * (celula & 0xffff))

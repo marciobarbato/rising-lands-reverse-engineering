@@ -1,0 +1,612 @@
+{
+ "schema": "rising-lands/combat-fatal-differential/1",
+ "native": false,
+ "capture_sha256": "bf65cb31312fea7d4a19030bffd8feb54818420d330dfb3e99768e37ea24c9a6",
+ "summary": {
+  "cases": 65,
+  "mismatches": 0,
+  "routines": {
+   "iagUnitSendMessage": 12,
+   "PlayerResetAllie": 7,
+   "PlayerAAttaqueSet": 7,
+   "MAJSympathie": 29,
+   "MessageBoxSet": 10
+  },
+  "outside_protected_domain": 1
+ },
+ "outside_protected_domain": [
+  {
+   "case": "message48-raider-target-65535",
+   "fault": "UcError: Invalid memory read (UC_ERR_READ_UNMAPPED)",
+   "limit": false,
+   "stop": null
+  }
+ ],
+ "cases": [
+  {
+   "case": "message-u0-48",
+   "routine": "iagUnitSendMessage",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-u0-44",
+   "routine": "iagUnitSendMessage",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-u0-4a",
+   "routine": "iagUnitSendMessage",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-u13-48",
+   "routine": "iagUnitSendMessage",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-u13-44",
+   "routine": "iagUnitSendMessage",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-u13-4a",
+   "routine": "iagUnitSendMessage",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-u16-48",
+   "routine": "iagUnitSendMessage",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-u16-44",
+   "routine": "iagUnitSendMessage",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-u16-4a",
+   "routine": "iagUnitSendMessage",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message48-raider-target-0",
+   "routine": "iagUnitSendMessage",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message48-raider-target-1",
+   "routine": "iagUnitSendMessage",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message48-raider-target-13",
+   "routine": "iagUnitSendMessage",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "break-alliance-0-0",
+   "routine": "PlayerResetAllie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "attacked-0-0",
+   "routine": "PlayerAAttaqueSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "break-alliance-0-1",
+   "routine": "PlayerResetAllie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "attacked-0-1",
+   "routine": "PlayerAAttaqueSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "break-alliance-1-0",
+   "routine": "PlayerResetAllie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "attacked-1-0",
+   "routine": "PlayerAAttaqueSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "break-alliance-0-4",
+   "routine": "PlayerResetAllie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "attacked-0-4",
+   "routine": "PlayerAAttaqueSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "break-alliance-4-0",
+   "routine": "PlayerResetAllie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "attacked-4-0",
+   "routine": "PlayerAAttaqueSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "break-alliance-4-4",
+   "routine": "PlayerResetAllie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "attacked-4-4",
+   "routine": "PlayerAAttaqueSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "break-alliance-200-0",
+   "routine": "PlayerResetAllie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "attacked-200-0",
+   "routine": "PlayerAAttaqueSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-actual-0",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-0-0-100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-0-0--100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-0-1-100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-0-1--100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-actual-1",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-1-0-100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-1-0--100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-1-1-100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-1-1--100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-actual-6",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-6-0-100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-6-0--100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-6-1-100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-6-1--100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-actual-8",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-8-0-100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-8-0--100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-8-1-100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-8-1--100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-actual-10",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-10-0-100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-10-0--100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-10-1-100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-trigger-10-1--100",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-guard-0-0",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-guard-0-4",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-guard-4-0",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "sympathy-guard-200-0",
+   "routine": "MAJSympathie",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-box-0",
+   "routine": "MessageBoxSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-box-99",
+   "routine": "MessageBoxSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-box-100",
+   "routine": "MessageBoxSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-box-406",
+   "routine": "MessageBoxSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-box-502",
+   "routine": "MessageBoxSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-box-999",
+   "routine": "MessageBoxSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-box-1000",
+   "routine": "MessageBoxSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-box-65535",
+   "routine": "MessageBoxSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-box-full",
+   "routine": "MessageBoxSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "message-box-wrap-full",
+   "routine": "MessageBoxSet",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  }
+ ]
+}
