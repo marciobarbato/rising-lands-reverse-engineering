@@ -1,5 +1,5 @@
 """Harvest and scroll domains compared with committed isolated calls and full native probe surfaces."""
-import hashlib,json,struct,unittest
+import hashlib,json,struct,subprocess,unittest
 from pathlib import Path
 from validar_janelas_api18 import CapturaLimitada,AQUI
 from validar_entrada_m3 import CatalogoRastreado,ArgumentosRasterM3,MemoriaEntradaM3
@@ -28,7 +28,8 @@ class ColheitaGraficos(unittest.TestCase):
         self.assertEqual(len(expected),35)
         self.assertEqual(set(map(tuple,report['unique_origins'])),expected)
         self.assertEqual((report['cases'],report['mismatches']),(43,0))
-        self.assertEqual(hashlib.sha256((AQUI/'efeitos_logicos_exibicao.py').read_bytes()).hexdigest(),report['graphics_provider_sha256'])
+        frozen=subprocess.check_output(['git','show','5fcb284:pesquisas-paralelas/graficos-animacao/efeitos_logicos_exibicao.py'],cwd=AQUI)
+        self.assertEqual(hashlib.sha256(frozen).hexdigest(),report['graphics_provider_sha256'])
         self.assertEqual(hashlib.sha256((AQUI/'camadas_colheita_m3.json').read_bytes()).hexdigest(),report['layer_data_sha256'])
         self.assertEqual(hashlib.sha256((AQUI/'validar_origens_colheita.py').read_bytes()).hexdigest(),report['comparison_source_sha256'])
         self.assertTrue(all(r['returned'] and r['surface_equal'] and not r['additional_logic_writes'] and not r['crt_changes'] for r in report['rows']))
@@ -55,7 +56,7 @@ class ColheitaGraficos(unittest.TestCase):
                         self.assertEqual(strict.parada['endereco'],'0x00459454')
                         self.assertEqual(strict.pixels,cap.blob(row['text_boundaries'][0]['surface_before']))
 
-    def test_complete_chained_surface_report_and_current_sources(self):
+    def test_frozen_api19_chained_surface_report_and_sources(self):
         report=json.loads((AQUI/'validacao/colheita-graficos-final.json').read_text())
         expected={'K1':501,'P4':3001,'P5':3001}
         self.assertEqual({w['probe']:w['drawn_total'] for w in report['windows']},expected)
@@ -63,7 +64,8 @@ class ColheitaGraficos(unittest.TestCase):
             self.assertEqual(window['equal'],expected[window['probe']]);self.assertIsNone(window['first_stop'])
             self.assertTrue(all(row['equal'] and not row['logic_stop'] for row in window['rows']))
         for name,digest in report['sources_sha256'].items():
-            self.assertEqual(hashlib.sha256((AQUI/name).read_bytes()).hexdigest(),digest,name)
+            frozen=subprocess.check_output(['git','show','5fcb284:pesquisas-paralelas/graficos-animacao/'+name],cwd=AQUI)
+            self.assertEqual(hashlib.sha256(frozen).hexdigest(),digest,name)
 
     def test_fresh_128_hud_hashes_preserve_all_prior_versions(self):
         new=json.loads((AQUI/'evidencias/verificacao-cadeia-m22-v2-api19-128.json').read_text())

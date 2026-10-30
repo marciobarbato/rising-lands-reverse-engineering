@@ -1013,3 +1013,20 @@ is 128/128, with unchanged 1.4/1.5/1.7/1.8 hashes. Final leased graphics gate: *
 143.534s ([log](../pesquisas-paralelas/graficos-animacao/validacao/api19-graphics-tests-final.log)).
 Glyph-enabled execution, unproved origins and all prior unknown states remain addressed stops; RestoreAll has not
 been broadened by these AffGame captures. Evidence precedes translation; no main integration or acceptance is recorded.
+
+### CAVE logic-byte effects for the strict chain (1.9 follow-up)
+
+The [CAVE writer/reader follow-up](../pesquisas-paralelas/graficos-animacao/HANDOFF.md#cave-logic-effect-guard-follow-up-render-contract-remains-19)
+proves AffBatiments effects from actual P3/P6/P7 and S1-prefix scripted states. Corrected native evidence precedes
+translation (`1924497`): only six clipping bytes change, with no outside-display readers and no CRT/RNG/unit/structure
+writes. A separate 24-call declared native pair matrix checks sanctuary modes 0..7.
+
+The public AffGame logic-effect guard admits the actual sanctuary/CAVE pair at indices 0/1: sanctuary owner 0,
+modes 4/5, health 600, damage 0; CAVE mode 2 / owner `0xC8` / health <=100, or mode 5 / owner 0 or `0xC8` / health 100,
+damage 0; camera 0. Existing callbacks and effects order are unchanged. RestoreAll retains its previous structure
+domain. Other structure states and owners still raise. S1's late victory/result/objectives states are not proved here.
+
+Structure-domain comparison passes P3 **3001/3001**, P6 **2272/2272**, P7 **3572/3572**, with zero mismatches. This is
+not a new full-chain equality claim: the next independent logic-effect stop is projectile type 15 at P3 frame 245.
+The reported origin guards K1 141 `(1,0)`, P4 422 `(10,16)`, P5 572 `(31,0)` already pass in 1.9. Pixel results and
+`VERSAO_RENDER_QUADRO = (1,9)` are unchanged.

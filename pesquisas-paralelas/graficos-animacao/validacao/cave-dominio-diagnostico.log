@@ -1,0 +1,13 @@
+[lease] graphics-cave-domain-diagnosis waiting
+[lease] graphics-cave-domain-diagnosis granted slots [5]
+FIRST STOP P3 245 projectiles [(0, 15, 1)]
+Traceback (most recent call last):
+  File "/Users/marcio/git/Rising Lands/worktrees/re-graphics/pesquisas-paralelas/graficos-animacao/validar_efeitos_cave_sondas.py", line 53, in <module>
+    result=validar();(AQUI/'validacao/cave-dominio-atual.json').write_text(json.dumps(result,indent=1)+'\n');print(result['probes'],result['mismatches'],flush=True)
+  File "/Users/marcio/git/Rising Lands/worktrees/re-graphics/pesquisas-paralelas/graficos-animacao/validar_efeitos_cave_sondas.py", line 30, in validar
+    try:result=desenhar_jogo(memory,habitado=lambda i:True)
+  File "/Users/marcio/git/Rising Lands/worktrees/re-graphics/pesquisas-paralelas/graficos-animacao/efeitos_logicos_exibicao.py", line 137, in desenhar_jogo
+    guardas = _guardas(memoria, 'AffGame', habitado)
+  File "/Users/marcio/git/Rising Lands/worktrees/re-graphics/pesquisas-paralelas/graficos-animacao/efeitos_logicos_exibicao.py", line 104, in _guardas
+    raise DependenciaExibicao(rotina, 0x46ff70, f'projectile slots {ativos}: captured only one raid effect '
+efeitos_logicos_exibicao.DependenciaExibicao: AffGame @0x46ff70: projectile slots [0]: captured only one raid effect projectile of type [31, 32]
