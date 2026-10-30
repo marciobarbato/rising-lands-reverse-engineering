@@ -38,6 +38,11 @@ ORIGENS_RESTOREALL_PROVADAS = ORIGENS_PROVADAS
 # Exact native probe states; these additions prove AffGame only, not RestoreAll.
 ORIGENS_PROVADAS |= frozenset(tuple(v) for v in json.loads(
     Path(__file__).with_name('camadas_colheita_m3.json').read_text())['AffGame_origins'])
+ORIGENS_ANTERIORES = {'AffGame': ORIGENS_PROVADAS, 'RestoreAll': ORIGENS_RESTOREALL_PROVADAS}
+# Finite, original-only 3840-call matrix, committed and audited before this extension.
+GRADE_VISTAS = json.loads(Path(__file__).with_name('origens_efeitos_monde01.json').read_text())
+ORIGENS_PROVADAS |= frozenset(map(tuple, GRADE_VISTAS['origins_by_routine']['AffGame']))
+ORIGENS_RESTOREALL_PROVADAS |= frozenset(map(tuple, GRADE_VISTAS['origins_by_routine']['RestoreAll']))
 VIEWPORT, TELA = (25, 17), (800, 600)               # DDInit hi-res values (0x508724/26, 0x49a018/1a)
 CURSOR_RNG_SITIOS = (0x407dd3, 0x411147, 0x412392, 0x415b77, 0x415c19, 0x43f191)   # display-side 0x4e1d18 writers
 
@@ -65,7 +70,7 @@ def _guardas_estruturas(memoria, rotina, lidas, habitado=None):
     simples = estados <= ESTADOS_ESTRUTURA_PROVADOS and len(ocupadas) <= 1 and all(
         memoria.u8(ESTRUTURAS + i*ESTRUTURA_PASSO + 8) == TIPO_ESTRUTURA_PROVADO for i in ocupadas)
     par_cave = False
-    if rotina == 'AffGame' and ocupadas == [0, 1]:
+    if rotina in ('AffGame','RestoreAll') and ocupadas == [0, 1]:
         r0, r1 = ESTRUTURAS, ESTRUTURAS+ESTRUTURA_PASSO
         modo = memoria.u8(r1+5);dono = memoria.u8(r1+4);vida = memoria.u16(r1+0xa);dano = memoria.u16(r1+6)
         par_cave = (memoria.u8(0x508041) == 0 and memoria.u8(r0+8) == 2 and memoria.u8(r0+5) in (4,5) and memoria.u8(r0+4) == 0
@@ -97,6 +102,13 @@ def _guardas(memoria, rotina, habitado=None):
     if origem not in origens:
         raise DependenciaExibicao(rotina, CURSOR_RNG_SITIOS[3], f'view origin {origem}: vegetation/terrain handlers '
                                   '(0x411147, 0x412392, 0x415b77/0x415c19) only proved native on the sampled origins')
+    if origem not in ORIGENS_ANTERIORES[rotina]:
+        mapa = (ler('[0x497168]', memoria.u16(0x497168)), ler('[0x49716a]', memoria.u16(0x49716a)))
+        camera = ler('[0x508041]', memoria.u8(0x508041))
+        modo = ler('[0x4e2f78]', memoria.u8(0x4e2f78))
+        if mapa != tuple(GRADE_VISTAS['map']) or camera != GRADE_VISTAS['camera'] or modo != GRADE_VISTAS['mode']:
+            raise DependenciaExibicao(rotina, CURSOR_RNG_SITIOS[3],
+                f'finite native view matrix requires map64x64, camera0 and mode0x12; got {mapa}, {camera}, {modo:#x}')
     _guardas_estruturas(memoria, rotina, lidas, habitado)
     monstros = memoria.u8(MONSTROS)
     if monstros > 1:

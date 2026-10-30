@@ -1,0 +1,13 @@
+{
+ "schema": "rising-lands/restoreall-recovery-reproduction/1",
+ "cases": 24,
+ "equal": 24,
+ "mismatches": 0,
+ "elapsed_seconds": 28.003326041999998,
+ "original_capture_sha256": "64a91ce4c5eb78d038c4b7e1a320c21cb17acf62af533194cf453b4c8000894c",
+ "fresh_capture_sha256": "db6c783732fba0ad23d3324c4f4fe4a545018eba123dece49565fb0341a49b73",
+ "executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+ "producer_sha256": "957b848683c8c24e3d33632ffd6483dd259c6599d4de8fc9ba0e2f5ea94d8fb2",
+ "fresh_capture_file": "evidencias/cave-restoreall-recovery.json.xz"
+}
