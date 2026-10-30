@@ -1,0 +1,70 @@
+{
+  "schema": "rising-lands/economy-transport-malformed-bag-probe/1",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "translation_executed": false,
+  "completed_capture": false,
+  "context_revision": "41ab53969b85af4fd230bc5d51e1e9a0a0bda883",
+  "capture_script": {
+    "path": "pesquisas-paralelas/economia/capturar_transporte.py",
+    "source_commit": "cc439b7b6cabf3cede7c2b09b6d33b998f41fbe7",
+    "sha256": "61e0666ce740d07ace12a14fa32b559df0165475a764dd3fa3d26699f1ae4e9d"
+  },
+  "command": [
+    "python3",
+    "-B",
+    "pesquisas-paralelas/economia/capturar_transporte.py",
+    "--ate",
+    "1010",
+    "--saida",
+    ".local/economy-stage28/smoke-1010.json.xz"
+  ],
+  "observed_progress": [
+    "frame 100 131s",
+    "frame 200 162s",
+    "frame 300 203s",
+    "frame 400 330s"
+  ],
+  "outcome": "wall_budget_exhausted",
+  "native_stop": {
+    "seconds": 300,
+    "stack_scan": [
+      "+7c:CreerSac+0x84",
+      "+8c:EnginRetireType+0x4c3",
+      "+c0:EnginCalculTransporte+0x68f",
+      "+f0:CalculTransporteEngin+0x68",
+      "+170:__STOSB+0x1c",
+      "+178:memset+0x15",
+      "+184:Box+0x185",
+      "+1f4:AffGame+0x827",
+      "+210:ProgIteration+0x3d",
+      "+214:ProgIteration+0x55",
+      "+22c:_WinMain@16+0xa2"
+    ],
+    "eip": "0x47592b",
+    "routine": "SacCherchePlace+0x17c",
+    "stack_return": "0xffff",
+    "stack_return_routine": "0xffff",
+    "registers": {
+      "EAX": "0x0",
+      "EBX": "0x443",
+      "ECX": "0x4",
+      "EDX": "0xfffffffc",
+      "ESI": "0xfb",
+      "EDI": "0xfbfb",
+      "EBP": "0xfffffffc",
+      "ESP": "0x2007dd0",
+      "EIP": "0x47592b",
+      "EFLAGS": "0x83"
+    },
+    "phase": "between_frames"
+  },
+  "final_code_integrity_check": "not reached",
+  "diagnostic_repeat": {
+    "log": ".local/economy-stage28/smoke-diagnostic.log",
+    "last_case_started": "case 115 frame 404: CalculTransporteEngin unit 13, type 0x5, phase 3, timer 1, empty, the sack is the depot cell",
+    "outcome": "intentionally terminated with SIGTERM before a second wall-budget stop"
+  },
+  "fixture_issue": "bolsa_vazia set count 0 and capacity 1 without clearing the capacity-slot resource tag/value. BagContient scans capacity; BagRetire cannot remove a slot beyond count. EnginRetireType can therefore loop, filling sacks and reaching SacCherchePlace.",
+  "correction": "Declare zero values/tags for both slots used by the matrix; declare one real food entry for the full Bag. Original instructions, budgets and callbacks are unchanged.",
+  "scope": "Diagnostic failed probe only, not a successful original-only capture or translation comparison. Coherent transport inputs must still pass the full smoke, committed capture and native differential."
+}

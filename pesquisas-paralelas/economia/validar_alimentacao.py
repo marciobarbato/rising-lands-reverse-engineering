@@ -155,8 +155,8 @@ def main():
     provedores = None if a.sem_core else provedores_fadiga()
     relatorio = dict(schema='rising-lands/economy-hunger-validation/1', capture=a.captura, capture_raw_sha256=sha,
                      translation=hashlib.sha256((PASTA / 'alimentacao.py').read_bytes()).hexdigest(),
-                     core_fatigue_provider=None if provedores is None else hashlib.sha256(
-                         (RAIZ / 'ferramentas/fadiga_vegetacao.py').read_bytes()).hexdigest(),
+                     core_fatigue_provider=None if provedores is None else
+                         'fadiga_vegetacao.provedor_fadiga',
                      results=[], counts={}, served_by_translation={})
     gravadas = []
 
