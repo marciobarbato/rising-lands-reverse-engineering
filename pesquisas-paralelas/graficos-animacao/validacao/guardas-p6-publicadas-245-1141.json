@@ -1,0 +1,40 @@
+{
+ "schema": "rising-lands/published-p6-display-guard-check/1",
+ "provider_revision": "3a22f70",
+ "provider_sha256": "1a99b2620bb161af04d1a4b024ae3235c81c6d004becdcd1cf0948ec715eaa80",
+ "method": "P6 shares the published native P3 prefix through2000; checks use the exact AffGame-entry images, not end-frame guesses.",
+ "capture_pins": {
+  "sonda-render-P3-api17.json.xz": "5f303d91ad089d48e60e8f3ca794f79f1f3b80cd69cf8e6024281eec9ca86a53",
+  "janela-P3-1051-1800-api18.json.xz": "79b62f203cc2a72fafe463c95f1abda3ea5683f8a0d25ad43a0f61d3524e3dc3"
+ },
+ "cases": 2,
+ "mismatches": 0,
+ "rows": [
+  {
+   "phase": "between_frames245",
+   "projectiles": [
+    [
+     0,
+     15,
+     1,
+     0
+    ]
+   ],
+   "passed": true,
+   "logic_writes": []
+  },
+  {
+   "phase": "between_frames1141",
+   "projectiles": [
+    [
+     0,
+     16,
+     1,
+     0
+    ]
+   ],
+   "passed": true,
+   "logic_writes": []
+  }
+ ]
+}

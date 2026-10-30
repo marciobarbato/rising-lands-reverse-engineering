@@ -1,0 +1,148 @@
+{
+ "schema": "rising-lands/s1-native-structure-ledger-inventory/1",
+ "method": "Read immutable original-only S1 probe metadata; no execution or translation.",
+ "source_ref": "54d148d931cc3420fe256e6fec71462087597293",
+ "source_path": "pesquisas-paralelas/missoes/m3/sondas/S1/quadros.jsonl.xz",
+ "source_sha256": "248091794a0e4aec176e02591a676d97d36d58f0928cc12574769a8d9a64e96b",
+ "frames": 16922,
+ "structures": [
+  {
+   "index": 0,
+   "kind": 2,
+   "state": 4,
+   "owner": 0,
+   "first_frame": 2013,
+   "last_frame": 4786,
+   "frames": 2110,
+   "origins": [
+    2828
+   ]
+  },
+  {
+   "index": 0,
+   "kind": 2,
+   "state": 5,
+   "owner": 0,
+   "first_frame": 129,
+   "last_frame": 17050,
+   "frames": 14812,
+   "origins": [
+    2828
+   ]
+  },
+  {
+   "index": 1,
+   "kind": 3,
+   "state": 2,
+   "owner": 200,
+   "first_frame": 220,
+   "last_frame": 1811,
+   "frames": 1592,
+   "origins": [
+    2579
+   ]
+  },
+  {
+   "index": 1,
+   "kind": 3,
+   "state": 5,
+   "owner": 0,
+   "first_frame": 1976,
+   "last_frame": 17050,
+   "frames": 15075,
+   "origins": [
+    2579
+   ]
+  },
+  {
+   "index": 1,
+   "kind": 3,
+   "state": 5,
+   "owner": 200,
+   "first_frame": 1812,
+   "last_frame": 1975,
+   "frames": 164,
+   "origins": [
+    2579
+   ]
+  }
+ ],
+ "view_origins": [
+  [
+   0,
+   0
+  ],
+  [
+   10,
+   10
+  ],
+  [
+   10,
+   11
+  ],
+  [
+   10,
+   12
+  ],
+  [
+   10,
+   13
+  ],
+  [
+   10,
+   14
+  ],
+  [
+   10,
+   15
+  ],
+  [
+   10,
+   16
+  ],
+  [
+   10,
+   17
+  ],
+  [
+   11,
+   9
+  ],
+  [
+   12,
+   8
+  ],
+  [
+   13,
+   7
+  ],
+  [
+   14,
+   6
+  ],
+  [
+   15,
+   5
+  ],
+  [
+   16,
+   4
+  ],
+  [
+   17,
+   3
+  ],
+  [
+   18,
+   2
+  ],
+  [
+   19,
+   0
+  ],
+  [
+   19,
+   1
+  ]
+ ]
+}

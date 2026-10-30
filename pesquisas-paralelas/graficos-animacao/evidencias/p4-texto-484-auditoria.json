@@ -1,0 +1,1826 @@
+{
+ "schema": "rising-lands/p4-afftext-boundary-audit/1",
+ "probe_ref": "fd56f69",
+ "frame": 484,
+ "executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "source_sha256": "d09948338db83826b431bc8b501d4d429c8b3bb103f4c55e48939efcf83fa7cf",
+ "snapshot_sha256": "2dc8b7f2ecc50708f71e5d627c94d5254a5ed18280a7d88093ad72a2f05257eb",
+ "input_sha256": "779b00c1918d38c2018402bd398b995a970369326ede48fb2907553f12315157",
+ "code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+ "calls": [
+  {
+   "routine": "AffText",
+   "phase": "between_frames484",
+   "entry_eax": "0x24b",
+   "entry_esp": "0x2007f24",
+   "return_address": "0x45a469",
+   "surface_before": "d1e1a410f188ee67e834ed6c91d8b90a40f6718dc34d259724534b42cd93bc0d",
+   "return_eax": "0x24b",
+   "return_esp": "0x2007f38",
+   "surface_after": "d1e1a410f188ee67e834ed6c91d8b90a40f6718dc34d259724534b42cd93bc0d"
+  },
+  {
+   "routine": "TextGetMessage",
+   "phase": "frame484",
+   "entry_eax": "0x2c",
+   "entry_esp": "0x2007e68",
+   "return_address": "0x4299f9",
+   "surface_before": "ee3d66bfb491b22852663d51be6580b8b2f1339e89f8a4cc8f0596b45eef2d34",
+   "return_eax": "0x0",
+   "return_esp": "0x2007e6c",
+   "surface_after": "ee3d66bfb491b22852663d51be6580b8b2f1339e89f8a4cc8f0596b45eef2d34"
+  }
+ ],
+ "body_instructions": [],
+ "pointer_overlap_reads": [
+  {
+   "address": "0x5099a6",
+   "size": 4,
+   "eip": "0x417ce2",
+   "phase": "between_frames484"
+  }
+ ],
+ "checks": [
+  {
+   "frame": 129,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 130,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 131,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 132,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 133,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 134,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 135,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 136,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 137,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 138,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 139,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 140,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 141,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 142,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 143,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 144,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 145,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 146,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 147,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 148,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 149,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 150,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 151,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 152,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 153,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 154,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 155,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 156,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 157,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 158,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 159,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 160,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 161,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 162,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 163,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 164,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 165,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 166,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 167,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 168,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 169,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 170,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 171,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 172,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 173,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 174,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 175,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 176,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 177,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 178,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 179,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 180,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 181,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 182,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 183,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 184,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 185,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 186,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 187,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 188,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 189,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 190,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 191,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 192,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 193,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 194,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 195,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 196,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 197,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 198,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 199,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 200,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 201,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 202,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 203,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 204,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 205,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 206,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 207,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 208,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 209,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 210,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 211,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 212,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 213,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 214,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 215,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 216,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 217,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 218,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 219,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 220,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 221,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 222,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 223,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 224,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 225,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 226,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 227,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 228,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 229,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 230,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 231,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 232,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 233,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 234,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 235,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 236,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 237,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 238,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 239,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 240,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 241,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 242,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 243,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 244,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 245,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 246,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 247,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 248,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 249,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 250,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 251,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 252,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 253,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 254,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 255,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 256,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 257,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 258,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 259,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 260,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 261,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 262,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 263,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 264,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 265,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 266,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 267,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 268,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 269,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 270,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 271,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 272,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 273,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 274,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 275,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 276,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 277,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 278,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 279,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 280,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 281,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 282,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 283,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 284,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 285,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 286,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 287,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 288,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 289,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 290,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 291,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 292,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 293,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 294,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 295,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 296,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 297,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 298,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 299,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 300,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 301,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 302,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 303,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 304,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 305,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 306,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 307,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 308,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 309,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 310,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 311,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 312,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 313,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 314,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 315,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 316,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 317,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 318,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 319,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 320,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 321,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 322,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 323,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 324,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 325,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 326,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 327,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 328,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 329,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 330,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 331,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 332,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 333,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 334,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 335,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 336,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 337,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 338,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 339,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 340,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 341,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 342,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 343,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 344,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 345,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 346,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 347,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 348,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 349,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 350,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 351,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 352,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 353,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 354,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 355,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 356,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 357,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 358,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 359,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 360,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 361,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 362,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 363,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 364,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 365,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 366,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 367,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 368,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 369,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 370,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 371,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 372,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 373,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 374,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 375,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 376,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 377,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 378,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 379,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 380,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 381,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 382,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 383,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 384,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 385,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 386,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 387,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 388,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 389,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 390,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 391,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 392,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 393,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 394,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 395,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 396,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 397,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 398,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 399,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 400,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 401,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 402,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 403,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 404,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 405,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 406,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 407,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 408,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 409,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 410,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 411,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 412,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 413,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 414,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 415,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 416,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 417,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 418,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 419,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 420,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 421,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 422,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 423,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 424,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 425,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 426,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 427,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 428,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 429,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 430,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 431,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 432,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 433,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 434,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 435,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 436,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 437,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 438,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 439,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 440,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 441,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 442,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 443,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 444,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 445,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 446,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 447,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 448,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 449,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 450,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 451,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 452,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 453,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 454,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 455,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 456,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 457,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 458,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 459,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 460,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 461,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 462,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 463,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 464,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 465,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 466,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 467,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 468,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 469,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 470,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 471,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 472,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 473,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 474,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 475,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 476,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 477,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 478,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 479,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 480,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 481,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 482,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 483,
+   "surface_equal": true,
+   "state_equal": true
+  },
+  {
+   "frame": 484,
+   "surface_equal": true,
+   "state_equal": true
+  }
+ ],
+ "elapsed_seconds": 170.394642833
+}
