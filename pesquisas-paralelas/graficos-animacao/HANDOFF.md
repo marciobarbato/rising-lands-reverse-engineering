@@ -1159,3 +1159,9 @@ Original AffGame/SetBank/query intervals are appended in `evidencias/s1-fluxo-in
 declared absent LoadPie background; it is not a text/background-enabled retail screenshot. Mode0x13's
 initial MenuInit still needs LoadPie0x4799C4 and explicit handling of its opaque AffText pointer0.
 Full menu transitions, other branches/animation phases, and insertion into gameplay ABI1.9 remain open.
+
+The [AffText capture contract](GLYPH_PROVIDER_CAPTURE.md) declares the pending270-call prepared matrix and
+S1 dependency observer. Their syntax/import/CLI checks pass, but native calls have not yet acquired the
+lease at this source checkpoint. The source commit intentionally precedes these new evidence files.
+`validar_cadeia_exibicao_atual.py` also remains queued for a current-source P3/P6/P7 replay. Historical
+waiting-only logs are retained separately; they are not counted as completed validation.
