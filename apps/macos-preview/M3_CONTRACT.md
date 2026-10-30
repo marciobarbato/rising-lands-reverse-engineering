@@ -385,3 +385,15 @@ commit-pinned logic and Graphics reference trees via `pinned_reference.py`;
 neither those pins nor their original evidence are edited by this consumer.
 Test A's answer-only API and canonical files are unchanged. Order injection,
 WndProc game-output flags, the state-hash half and Test B remain deferred.
+
+## Native execution modes
+
+`macos_live_validation(driver, enabled)` selects play (0) or validation (1) only
+before load_tail; invalid values and changes after phase1 are rejected. Existing
+C/ctypes proof consumers default to validation and retain their observer order,
+projection/mask policy, 257-state prefix and surface proofs. Play uses the same
+phase and render sequence and retains every named capability stop, but never
+calls an observer, projects memory, computes hashes or increments equality counts.
+The status layout and engine ABI are unchanged. `macos_live_read` refuses play.
+The native UI changes modes by recreating S0. Its default is play; native smoke
+and horizon tools explicitly request validation. Input stays record-only in both.
