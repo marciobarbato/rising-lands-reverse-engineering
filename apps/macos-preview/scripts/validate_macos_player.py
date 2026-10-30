@@ -4,7 +4,7 @@ Simulation proof deliberately omits rendering; UI render stops are separate.
 World starts at S0 and is never replaced with frame128 or any later oracle state.
 """
 from pathlib import Path
-import argparse,ctypes as C,hashlib,json,lzma,os,sys,time
+import argparse,ctypes as C,hashlib,json,lzma,os,sys,time,signal
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'src'))
 from macos_native_driver import NativeDriver
 from macos_scripted_input import ScriptedInput,FrameAnswerMapper,canonical
@@ -65,6 +65,7 @@ def proof(a):
 
 
 def main():
+    signal.alarm(1140)  # Every native proof is bounded below the 20-minute lease.
     p=argparse.ArgumentParser(description=__doc__)
     for n in ('root','driver','library','inputs','output'):p.add_argument('--'+n,type=Path,required=True)
     p.add_argument('--probe',choices=('P1','P2','P3','P6','P7','K1'),required=True);a=p.parse_args()
