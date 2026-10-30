@@ -50,6 +50,7 @@ window.runSmokeTests=async()=>{
  $('record-input').click();await until(()=>recording&&!recordToggleBusy,'recording enabled');
  check('visible recording indicator and disabled order policy',$('input-status').textContent.includes('Gravando entrada')&&$('input-status').textContent.includes('indisponíveis'));
  const nativeInput=await request('record-native-smoke',{stage:'press'});await recordChain;
+ check('native input dispatched to active app and key Metal responder',nativeInput.inputFocus.appActive&&nativeInput.inputFocus.windowKey&&nativeInput.inputFocus.gameFirstResponder);
  check('actual NSEvent path and native recording indicator',nativeInput.recordingIndicator.includes('Gravando entrada'));
  for(let i=0;i<4;i++)await run('live-step');
  await request('record-native-smoke',{stage:'release'});await recordChain;

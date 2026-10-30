@@ -235,13 +235,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
                 else{nativeReply(body["id"],value:["frame":129])};return
             }
             if operation == "record-native-smoke",smokeOutput != nil,let live=nativeLive {
-                let down=body["stage"] as? String == "press"
-                if !down,let event=NSEvent.keyEvent(with:.flagsChanged,location:.zero,modifierFlags:[],timestamp:0,windowNumber:live.window.windowNumber,context:nil,characters:"",charactersIgnoringModifiers:"",isARepeat:false,keyCode:59){live.window.sendEvent(event)}
-                if down {
-                    let p=live.metal.convert(NSPoint(x:live.metal.bounds.width/2,y:live.metal.bounds.height*(1-272.0/600.0)),to:nil)
-                    for type in [NSEvent.EventType.leftMouseDown,.leftMouseUp]{if let event=NSEvent.mouseEvent(with:type,location:p,modifierFlags:.control,timestamp:0,windowNumber:live.window.windowNumber,context:nil,eventNumber:1,clickCount:1,pressure:1){live.window.sendEvent(event)}}
-                }
-                live.inputBarrier{[weak self] frame in self?.nativeReply(body["id"],value:["frame":frame,"recordingIndicator":live.recordButton.title])};return
+                recordNativeSmoke(body,live:live,deadline:ProcessInfo.processInfo.systemUptime+2);return
             }
             if operation == "native-capture",let live=nativeLive,let shot=screenshotOutput {
                 live.capture(shot.deletingPathExtension().appendingPathExtension("metal.png")){[weak self] value in self?.nativeReply(body["id"],value:value)}
@@ -357,6 +351,31 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             if let data=try? JSONSerialization.data(withJSONObject:result,options:[.prettyPrinted,.sortedKeys]){try? data.write(to:path,options:.atomic)}
             NSApp.terminate(nil)
         }
+    }
+    // A visible window is not necessarily key while the user works in another
+    // app. AppKit can discard synthetic clicks sent to an inactive application.
+    // Wait for activation before dispatch; retain the existing smoke budget.
+    func recordNativeSmoke(_ body:[String:Any],live:NativeLiveWindow,deadline:Double) {
+        NSApp.activate(ignoringOtherApps:true)
+        live.window.makeKeyAndOrderFront(nil)
+        guard NSApp.isActive && live.window.isKeyWindow else {
+            guard ProcessInfo.processInfo.systemUptime<deadline else {
+                nativeReply(body["id"],error:"A janela Metal não obteve foco para validar a entrada.");return
+            }
+            DispatchQueue.main.asyncAfter(deadline:.now()+0.01){[weak self] in self?.recordNativeSmoke(body,live:live,deadline:deadline)}
+            return
+        }
+        guard live.window.makeFirstResponder(live.metal),live.window.firstResponder === live.metal else {
+            nativeReply(body["id"],error:"A superfície Metal não recebeu foco para validar a entrada.");return
+        }
+        let focus:[String:Any]=["appActive":NSApp.isActive,"windowKey":live.window.isKeyWindow,"gameFirstResponder":live.window.firstResponder === live.metal]
+        let down=body["stage"] as? String == "press"
+        if !down,let event=NSEvent.keyEvent(with:.flagsChanged,location:.zero,modifierFlags:[],timestamp:0,windowNumber:live.window.windowNumber,context:nil,characters:"",charactersIgnoringModifiers:"",isARepeat:false,keyCode:59){live.window.sendEvent(event)}
+        if down {
+            let p=live.metal.convert(NSPoint(x:live.metal.bounds.width/2,y:live.metal.bounds.height*(1-272.0/600.0)),to:nil)
+            for type in [NSEvent.EventType.leftMouseDown,.leftMouseUp]{if let event=NSEvent.mouseEvent(with:type,location:p,modifierFlags:.control,timestamp:0,windowNumber:live.window.windowNumber,context:nil,eventNumber:1,clickCount:1,pressure:1){live.window.sendEvent(event)}}
+        }
+        live.inputBarrier{[weak self] frame in self?.nativeReply(body["id"],value:["frame":frame,"recordingIndicator":live.recordButton.title,"inputFocus":focus])}
     }
     func nativeReply(_ id:Any?,value:[String:Any]=[:],error:String?=nil) {
         var value=value;value["commit"]=Bundle.main.object(forInfoDictionaryKey:"RisingLandsSourceCommit") as? String
