@@ -1019,3 +1019,44 @@ guard now admits both construction types15/16 with the same explicit bounds. The
 has no stop in P3 or P6; P7 first stops at frame3217, view origin `(10,15)`, pending the independent origin matrix.
 Seven focused current-provider/native-evidence tests pass, zero skips, 6.336s (`validacao/cave-projeteis-focused.log`).
 The preceding full273-test gate and fresh128/128 HUD regression remain green; no pixel code changes.
+
+## Real S1 end-screen native preparation
+
+The initial late-checkpoint gap is resolved. A read-only local copy of Missions' native S1 frame17000 checkpoint
+was found in `worktrees/p2-s1-macbook`; its sequential input hash matches `fd56f69`, and its complete opening state
+matches the immutable S1 ledger at `54d148d`. `24f0ec8` commits the resulting original-only evidence before screen
+translation. See [S1_SCREEN_CAPTURE.md](S1_SCREEN_CAPTURE.md) for source identities, required inputs and reproduction.
+
+The original runs frames17001–17050 under the lease: **100/100 phase surfaces and50/50 whole states equal** the
+published S1 run. At actual entries, isolated native MenuInit/PartieGetResultat/AffObjectif calls then match their
+ordinary execution in full surface, whole state, raster arguments and text arguments: result12/12, objectives8/8,
+zero mismatches,71.216s. CPU/stack/native memory, DirectDraw pixels and declared host state are restored between the
+isolated and ordinary calls; no game-state write creates a victory, menu or cursor. Original executable/code hashes
+are unchanged. Text uses the existing declared non-execution boundary; opaque text pointers remain explicit stops.
+Only bounded render-state buffers and surfaces are exported, with full allocation metadata/hashes; complete native
+asset banks stay on original media. The optional full CRT-page input is explicitly unavailable, not defaulted.
+
+The full16922-frame S1 structure inventory contains only `(slot0,type2,mode4/5,owner0)` and
+`(slot1,type3,mode2,owner0xC8)` / `(slot1,type3,mode5,owner0/0xC8)`. No additional structure type/state is inferred.
+There are19 native S1 view origins. The gameplay renderer and pixel API remain1.9; menu0x13/0x11 composition stays
+`0x4176A8`. These native captures prepare a subsequent menu renderer and are not represented as Python screen proofs.
+
+## Interrupted-session recovery: CAVE and projectile dispatch
+
+The current feature branch retains the AffGame0x417698 CAVE guard, the native construction projectile15/16
+cycles (slot0/state1/phases0..15), and the existing at-most-one raid-effect31/32 guard at0x46FF70. Direct current
+provider checks pass for P6 between_frames221/245/1141, using its verified native shared prefix. No pixel code,
+input signature, callback order or contract1.9 version changed. The provider reads DGROUP and the declared
+projectile pool and returns no logic writes in this domain; unsupported state still raises the original address.
+
+The interrupted RestoreAll extension is grounded in the committed original24/24 pair matrix, with no DGROUP,
+CRT or allocation change and no AffBatiments call. Its view and projectile domains remain independent. The
+owned-empty AffGame CAVE matrix is8/8; the pair guard retains sanctuary modes4/5. Original executable identity
+remains6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb. The display-root return audit checks
+all four real root exits and agrees with the corrected writer/reader capture.
+
+Recovery initially found a stale source hash in `cave-dominio-atual.json` after the pending provider edit; the
+regenerated current report retains P3 3001/3001, P6 2272/2272, P7 3572/3572 structure-domain checks. These counts
+are guard coverage, not a new glyph-enabled full-chain proof. Focused current/native-evidence tests pass10/10.
+The initial full-suite failure and focused log are preserved. Glyph0x459454, unproved origins and S1 menu0x4176A8
+remain addressed stops. Delivery is feature-branch push only, with main integration reserved to the coordinator.

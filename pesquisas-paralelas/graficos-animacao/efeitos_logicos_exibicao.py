@@ -65,7 +65,7 @@ def _guardas_estruturas(memoria, rotina, lidas, habitado=None):
     simples = estados <= ESTADOS_ESTRUTURA_PROVADOS and len(ocupadas) <= 1 and all(
         memoria.u8(ESTRUTURAS + i*ESTRUTURA_PASSO + 8) == TIPO_ESTRUTURA_PROVADO for i in ocupadas)
     par_cave = False
-    if rotina == 'AffGame' and ocupadas == [0, 1]:
+    if rotina in ('AffGame','RestoreAll') and ocupadas == [0, 1]:
         r0, r1 = ESTRUTURAS, ESTRUTURAS+ESTRUTURA_PASSO
         modo = memoria.u8(r1+5);dono = memoria.u8(r1+4);vida = memoria.u16(r1+0xa);dano = memoria.u16(r1+6)
         par_cave = (memoria.u8(0x508041) == 0 and memoria.u8(r0+8) == 2 and memoria.u8(r0+5) in (4,5) and memoria.u8(r0+4) == 0
