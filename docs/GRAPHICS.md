@@ -21,6 +21,13 @@ The fresh S1 dependency reproduction is **20/20 calls, 50/50 whole states and
 gate passes **293 tests**, no failures or skips (177.008 s). Recovery is committed
 on the feature branch for coordinator review; no merge to main is performed. See the [recovery contract](../pesquisas-paralelas/graficos-animacao/HANDOFF.md#parked-wip-recovery--2026-10-30).
 
+P4's boundary classification is re-proved on a fresh original 129–484 replay:
+**356/356** frames match; neither AffText nor TextGetMessage executes its body.
+Default rendering keeps `0x459454`; the explicit recorded boundary matches frame 484
+**1/1**. P4 needs no glyph provider under that declared contract. The updated gate
+passes **294 tests**, no failures or skips (184.704 s). See the
+[verdict](../pesquisas-paralelas/graficos-animacao/validacao/p4-fronteira-provider-verdict.json).
+
 The following 07:15 checkpoint is historical; its unvalidated WIP claims are not
 promoted by this progress note.
 

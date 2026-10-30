@@ -1271,3 +1271,29 @@ The full domain gate passes **293 tests**, no failures or skips, in **177.008 s*
 documentation links pass. Log: `validacao/recovery-domain-gate.log`.
 This step is delivered on `feat/re-graphics` only; integration/acceptance remains with
 the coordinator.
+
+
+## P4 frame 484: explicit boundary classification — 2026-10-30
+
+`validar_fronteira_p4_graficos.py` classifies the existing native audit and executes
+both rendering contracts on the same native frame-484 entry surface/cache/state.
+Without `texto`, API 1.9 returns its exact `0x459454` partial-surface stop. With
+`FronteiraTextoGravada`, every text argument and the entire pre-text surface must
+match the captured native boundary before it returns the surface. The resulting
+800×600 pixels and all raster calls match frame 484 exactly (1/1).
+
+The native P4 oracle deliberately executes no body instruction in AffText or
+TextGetMessage: AffText retains EAX, TextGetMessage returns zero, and neither
+changes pixels. The overlapping read at `0x5099A6` is the mouse-position copy at
+`0x417CE2`; there is no read starting at `0x5099A4`. Thus P4 remains inside its
+declared boundary and needs no glyph provider. Enabling `TextoAffTextBitmap` is a
+separate explicitly requested rendering contract, proved by the 270-call original
+matrix; it is not silently substituted into a non-executed probe boundary.
+No world mutation, callback order, public API default or render version changes.
+The fresh native audit (`evidencias/p4-texto-484-recovery-20261030.json`) matches
+all historical observations byte-for-byte, excluding elapsed time: **356/356** frames
+with both phase surfaces and whole states equal, two boundary calls, zero body
+instructions, zero glyph/pointer-provider crossings; native loop 178.574 s.
+The fresh report is `validacao/p4-fronteira-provider-verdict.json`.
+The full gate passes **294 tests**, no failures or skips, **184.704 s**
+(`validacao/p4-boundary-domain-gate.log`). No additional provider is required by P4.
