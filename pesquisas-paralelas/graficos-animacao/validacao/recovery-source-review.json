@@ -1,0 +1,60 @@
+{
+  "schema": "rising-lands/graphics-wip-recovery-review/1",
+  "integrated_base": "e41cc77",
+  "parked_refs": [
+    "e76b5f1",
+    "0c007c2"
+  ],
+  "original_intervals": [
+    {
+      "start": "0x458f2c",
+      "end": "0x459143",
+      "sha256": "0b995bdcaea86454d8167eb932d19edc436744bd95f707ce756e655769ebd769",
+      "intact_executable_bytes_equal": true
+    },
+    {
+      "start": "0x4593dc",
+      "end": "0x4598af",
+      "sha256": "64dd985f33a284f33c5575019c31a136e58826333e50e5a156b9f71ad3226ad4",
+      "intact_executable_bytes_equal": true
+    },
+    {
+      "start": "0x45add4",
+      "end": "0x45adf3",
+      "sha256": "7571564df3b54b64d6bbabd440885d59fa3bfafa558b7d28946b0c2839111922",
+      "intact_executable_bytes_equal": true
+    }
+  ],
+  "comparisons": {
+    "glifos-afftext-provider-final.json": {
+      "cases": 270,
+      "equal": 270,
+      "mismatches": 0,
+      "sources_sha256": {
+        "texto_afftext_bitmap.py": "7b6a5e3bd914bd6ecc0a50587c9d76d528651c85246be73b8fe13f22dfa9c184",
+        "validar_glifos_afftext.py": "c0dbc14dd4479038783de9072fc219279f491b7bc8847b265d0825a973942dc2"
+      }
+    },
+    "s1-inicializacao-provider-final.json": {
+      "cases": 2,
+      "equal": 2,
+      "mismatches": 0,
+      "sources_sha256": {
+        "telas_inicializacao_s1.py": "6384014c84f1a4625ce2988c560f01969fda7bd9c7b615e397b5499ee9f32625",
+        "validar_inicializacao_telas_s1.py": "0aeedef736d847f789cc98df586ea05c151e946aa4cb5a316fe52e1f5e879987"
+      }
+    }
+  },
+  "already_integrated": {
+    "capturar_glifos_afftext.py": "56eef3f3c57c0729630d5c0d1e2dc90d7b29dbb1cb3b96e4dd3d6ae43e23d590",
+    "efeitos_logicos_exibicao.py": "2006e1fba23d01ca77c21200edb0179813c5c10a1570b0162dd66e8709d31573",
+    "test_efeitos_logicos_exibicao.py": "0fa642320954aea625efc0048c9741994e6283a458ba5517ed21e08c5f02d1dd",
+    "origens_efeitos_monde01.json": "50908a5a8d7def1f1b6541b59d9cf35eb6afbdd6559f6838270e506159e14baa",
+    "capturar_sondas_p7_origens19.py": "fc8cebf1a9c61a17644ae399ab2a70a0be94efd2f416618d06ab468d4dd7d837"
+  },
+  "discarded": [
+    "unfinished/stale WIP gate logs",
+    "stale WIP documentation claims",
+    "unverified WIP comparison outputs as authority"
+  ]
+}

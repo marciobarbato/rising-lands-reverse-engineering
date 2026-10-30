@@ -74,7 +74,7 @@ def construction_builder(c,r,x,y,index):
 
 def order_markers(c,r):
     if not r[0xbd] or not r[0x82] or r[2]==17:return
-    if r[0x82] not in (1,2) or r[0x82]==2 and r[1]!=5:c.parar(0x412923,'selected order marker outside captured cell/depot modes')
+    if r[0x82] not in (1,2) or r[0x82]==2 and r[1] not in (5,7):c.parar(0x412923,'selected order marker outside captured cell/depot modes')
     ox,oy=c.tela.palavras('origem');w,h=c.tela.palavras('janela');phase=(c.tela.u('quadro_u32')//5)&1
     second=word(r,0x80)
     if r[0x82]==2:

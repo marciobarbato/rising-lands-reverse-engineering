@@ -33,6 +33,13 @@ ENDERECOS_PARADA = {
     0x4667a7: 'AffMarche: market state 1..4 for the camera player (InitGameZone, market icons)',
     0x46a70c: 'AffMiniMap outside the captured geometry',
     0x401d18: 'AffChrono: a selected structure (recruitment/time gauge)',
+    0x41a5b8: 'AffChrono: actual BatimentEstHabiter dependency is missing',
+    0x423f9d: 'AffChrono: recruitment target outside captured unit types',
+    0x423ec8: 'AffChrono: zero recruitment duration',
+    0x401ef1: 'AffChrono: percentage outside captured clock strip',
+    0x401e56: 'AffChrono: margin outside captured zero',
+    0x401e11: 'AffChrono: minimap layout outside captured 0/1',
+    0x45b796: 'AffChrono: original shadow table dependency is missing',
     0x40f77b: 'AffZoneInfo: cost counter exceeds 9999',
     0x40f8c0: 'AffInfoAide: tooltip text pointer 0x4E060C set (AffTextEncadre)',
     0x417c7f: 'AffDebug enabled (0x4E17AC)',
@@ -62,7 +69,7 @@ class LeituraHud:
 
 
 class _Hud:
-    def __init__(self, leitura, superficie, catalogo, evento, texto=None):
+    def __init__(self, leitura, superficie, catalogo, evento, texto=None, tabela_sombra=None, habitado=None):
         self.m, self.catalogo, self.evento = leitura, catalogo, evento
         self.largura, self.altura = leitura.u32(0x4e17a0), 600     # pitch as the blitters read it
         if self.largura != LARGURA_FIXA_MINIMAPA or len(superficie) != self.largura*self.altura:
@@ -71,6 +78,8 @@ class _Hud:
         self.chamadas, self.efeitos = [], []
         self.camera = leitura.u8(0x508041)
         self.texto = texto
+        self.tabela_sombra = tabela_sombra
+        self.habitado = habitado
 
     def parar(self, endereco, extra=''):
         raise DependenciaQuadro(endereco, ENDERECOS_PARADA[endereco] + (f': {extra}' if extra else ''),
@@ -234,6 +243,11 @@ class _Hud:
         if self.m.u8(record+8)==3 and self.m.u8(record+5)==5:return
         if (self.m.u8(record+4) == self.camera == 0 and self.m.u8(record+8) == 2
                 and self.m.u8(record+5) == 5 and self.m.u16(record+0x74) == 0): return
+        if self.camera == 0 and self.m.u8(record+8) == 2 and self.m.u8(record+5) in (4,5):
+            if not callable(self.habitado): self.parar(0x41a5b8,'active recruitment clock requires BatimentEstHabiter')
+            if not self.habitado(selected): return
+            from cronometro_s1_graficos import compor_cronometro_s1
+            return compor_cronometro_s1(self,record)
         self.parar(0x401d18)
 
     def zona_info(self):
@@ -304,13 +318,13 @@ class _Hud:
         return bytes(self.saida)
 
 
-def compor_hud(leitura, superficie, *, catalogo, evento, texto=None):
+def compor_hud(leitura, superficie, *, catalogo, evento, texto=None, tabela_sombra=None, habitado=None):
     """Compose AffGame's tail 0x417B1C..0x417D30 over ``superficie`` (the surface at the checkpoint).
 
     leitura: LeituraHud over the live memory with the AffGame prefix's writes overlaid. evento: EvenementEnCours as
     read by the prefix (AffGame's local [ebp-4]). Returns dict(superficie, chamadas, efeitos); raises
     DependenciaQuadro (partial surface, calls and effects) at the first branch outside the captured domain.
     """
-    h = _Hud(leitura, superficie, catalogo, evento, texto)
+    h = _Hud(leitura, superficie, catalogo, evento, texto, tabela_sombra, habitado)
     pixels = h.compor()
     return dict(superficie=pixels, chamadas=h.chamadas, efeitos=h.efeitos)
