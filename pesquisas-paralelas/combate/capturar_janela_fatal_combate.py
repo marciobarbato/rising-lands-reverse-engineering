@@ -32,6 +32,49 @@ HOOKS = {'InfligeDegat': (0x450874, 4), 'EnginInfligeDegat': (0x4502f0, 0),
 REGS = ('EAX','EBX','ECX','EDX','ESI','EDI','EBP','ESP','EIP','EFLAGS')
 
 
+def identidade_registrada(path, frame):
+    """Read the unique published end-of-frame identity, never a pickle digest."""
+    raw = path.read_bytes()
+    opener = lzma.open if path.suffix == '.xz' else open
+    matches = []
+    with opener(path, 'rt') as stream:
+        for line in stream:
+            if line.strip():
+                row = json.loads(line)
+                if row['frame'] == frame:
+                    matches.append(row)
+    if len(matches) != 1:
+        raise RuntimeError(f'Require one published record at frame {frame}, found {len(matches)}')
+    row = matches[0]
+    expected = {k: row[k] for k in ('dgroup_sha256', 'state_sha256')}
+    if any(len(v) != 64 or any(c not in '0123456789abcdef' for c in v) for v in expected.values()):
+        raise RuntimeError('Invalid published state identity')
+    return dict(path=str(path), sha256=hashlib.sha256(raw).hexdigest(), frame=frame, **expected)
+
+
+def abrir_snapshot(inicio, candidates, frame, *, digest=None, identity=None):
+    """Restore trusted project files; verify before any native phase or sound change."""
+    mismatches = []
+    for path in candidates:
+        if not path.is_file():
+            continue
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if digest is not None and actual != digest:
+            continue
+        b, _, restored = er.abrir(inicio, path)
+        if restored != frame:
+            mismatches.append(f'{path}: frame {restored} differs from {frame}')
+            continue
+        if identity is not None:
+            observed = er.amostra(b)
+            different = [k for k in ('dgroup_sha256', 'state_sha256') if observed[k] != identity[k]]
+            if different:
+                mismatches.append(f'{path}: mismatched {", ".join(different)}')
+                continue
+        return b, path, actual
+    raise RuntimeError('No verified snapshot found; no execution started. ' + '; '.join(mismatches))
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--inicio', type=Path, default=ROOT/'.local/m3/quadro128')
@@ -39,7 +82,10 @@ def main():
     p.add_argument('--snapshot-root', type=Path, default=ROOT/'.local')
     p.add_argument('--snapshot-frame', type=int, required=True)
     p.add_argument('--snapshot-sha256')
-    p.add_argument('--snapshot-manifest', type=Path, help='Missions resumo.json supplying snapshots[frame].sha256')
+    p.add_argument('--snapshot-manifest', type=Path,
+                   help='Missions resumo.json; pins pickle SHA only when --snapshot-records is absent')
+    p.add_argument('--snapshot-records', type=Path,
+                   help='Published quadros.jsonl[.xz]; require restored DGROUP AND whole-state identity')
     p.add_argument('--entrada', type=Path, required=True)
     p.add_argument('--ate', type=int, required=True)
     p.add_argument('--saida', type=Path, required=True)
@@ -54,18 +100,21 @@ def main():
     if a.snapshot_manifest:
         manifest_raw=a.snapshot_manifest.read_bytes();manifest=json.loads(manifest_raw)
         expected=manifest['snapshots'][str(a.snapshot_frame)]['sha256']
-        if a.snapshot_sha256 is not None and a.snapshot_sha256!=expected:
+        if not a.snapshot_records and a.snapshot_sha256 is not None and a.snapshot_sha256!=expected:
             p.error('Explicit snapshot SHA differs from the Missions manifest')
-        a.snapshot_sha256=expected
+        if not a.snapshot_records:
+            a.snapshot_sha256=expected
         manifest_pin=dict(path=str(a.snapshot_manifest),sha256=hashlib.sha256(manifest_raw).hexdigest())
-    if a.snapshot_sha256 is None:p.error('Supply --snapshot-sha256 or --snapshot-manifest')
+        if hashlib.sha256(a.entrada.read_bytes()).hexdigest()!=manifest['input_sha256']:
+            p.error('Scenario input hash differs from the Missions manifest')
+    identity = identidade_registrada(a.snapshot_records, a.snapshot_frame) if a.snapshot_records else None
+    if a.snapshot_sha256 is None and identity is None:
+        p.error('Supply --snapshot-records, --snapshot-sha256 or --snapshot-manifest')
     candidates = [a.snapshot] if a.snapshot else sorted(a.snapshot_root.rglob(f'instantaneo-{a.snapshot_frame:05d}.pickle'))
-    matching = [f for f in candidates if f.is_file() and hashlib.sha256(f.read_bytes()).hexdigest()==a.snapshot_sha256]
-    if not matching: raise RuntimeError('No exact snapshot SHA found; no execution started')
-    snapshot = matching[0]
     # Trusted project snapshots only. Restore after the scripted bindings exist.
-    b, _, frame = er.abrir(a.inicio, snapshot)
-    if frame != a.snapshot_frame: raise RuntimeError('Snapshot frame mismatch')
+    b, snapshot, snapshot_sha = abrir_snapshot(a.inicio, candidates, a.snapshot_frame,
+                                              digest=a.snapshot_sha256, identity=identity)
+    frame = a.snapshot_frame
     raw = a.entrada.read_bytes()
     declared, stop_frame = er.carregar_entrada(json.loads(raw))
     if a.ate > stop_frame: raise RuntimeError('Requested end exceeds the input stop frame')
@@ -156,7 +205,9 @@ def main():
         report=dict(schema='rising-lands/combat-scripted-fatal-window/1',translation_executed=False,
                     original_sha256='6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb',
                     source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-                    snapshot=dict(path=str(snapshot),sha256=a.snapshot_sha256,frame=a.snapshot_frame),
+                    snapshot=dict(path=str(snapshot),sha256=snapshot_sha,frame=a.snapshot_frame,
+                                  verification='published-state' if identity else 'pickle-sha256'),
+                    snapshot_identity=identity,
                     snapshot_manifest=manifest_pin,original_sound_bodies=executed_sounds,
                     input=dict(path=str(a.entrada),sha256=hashlib.sha256(raw).hexdigest()),
                     completed_frame=completed,requested_end=a.ate,failures=failures,counts=counts,

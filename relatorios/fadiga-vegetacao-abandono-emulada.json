@@ -596,7 +596,7 @@
  "economy_sources": {
   "bancada_ciclo_trabalho": {
    "path": "pesquisas-paralelas/economia/bancada_ciclo_trabalho.py",
-   "sha256": "d3340e20b395bbbd30541f244e3254719c47bda29bb186245c05d09948cd0348"
+   "sha256": "7139f3e24ec1b7c4da8c6d0e67bcc7707a36811f57e90ecadd4adb939af937d8"
   },
   "capturar_abandono_santuario": {
    "path": "pesquisas-paralelas/economia/capturar_abandono_santuario.py (override /private/tmp/claude-501/-Users-marcio-git-Rising-Lands/ca35964d-dc11-4d2d-8647-b69dcce52543/scratchpad/economia-bfef1ce/capturar_abandono_santuario.py)",
@@ -631,13 +631,13 @@
  },
  "scenario": "abandono",
  "schema": "rising-lands/core-hunger-search-light-differential/1",
- "seconds": 222.77,
+ "seconds": 248.36,
  "source_sha256": {
-  "ferramentas/chamadas_quadro_core.py": "d8b3568c3346422744868a2b7900e4afdbf84c85e840450f9da5ec863bbb626a",
+  "ferramentas/chamadas_quadro_core.py": "67de7367d75a5e50176c43fe2c01cd48e281e56cd0d9eae22b22f74a44b70428",
   "ferramentas/construcao_core.py": "7ccf640c5adda6e1a2c0e81bcce0307c0117eca862699af5fc7d34d5fe35a5fa",
-  "ferramentas/fadiga_vegetacao.py": "2596912bcf92d72cf9cbe02bb5d948a9a00f713ea3c64822d9521578a1d2be0d",
+  "ferramentas/fadiga_vegetacao.py": "fe7506392fc335ce39aaa97d1cbd2fa2474b9386e49dfcb59d8b82ec7bed531b",
   "ferramentas/mundo_vivo.py": "a4c5c2e5f73d09ce6f7bcbd6a15dbbcc5d264cff1c880bc7602ebf317dc3df5c",
-  "ferramentas/selecao_ordens.py": "e8eb78134dd44adbbef88354ea3219c6513f2a2173cc68227fa9fecaf47ab67c",
+  "ferramentas/selecao_ordens.py": "acf5ebde927f1c5a0275ddffa191d03bdb78a810dd5179cb1f7088b46eba17e8",
   "ferramentas/validar_fadiga_vegetacao.py": "f6b72aea7f5f6d81517472290e6f2c65257b16bada263fb6c085046d809a3556",
   "ferramentas/visao_movimento.py": "cd61354c6afcd0bc26eb9e7a8db93f5a3cf056d95e58606476783d3e4695255c"
  }

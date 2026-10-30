@@ -291,6 +291,13 @@ def terreno_em_colisao(m, eax, edx):
     return dict(EAX=int(bool(m.u8((m.u32(GRADE_ATRIBUTOS) + (eax & 0xffff)) & M32) & (edx & 0xff))))
 
 
+def terreno_esta_gc(m, eax):
+    """TerrainEstGc 0x4762b9: EAX = 1 when the object byte [[0x507d74] + AX] is in 0x1d..0x34, else 0 (the byte is
+    zero-extended into EAX before AL is set, so the upper bits are 0); EDX kept (pushed); nothing else touched."""
+    objeto = m.u8((m.u32(GRADE_OBJETOS) + (eax & 0xffff)) & M32)
+    return dict(EAX=int(0x1d <= objeto < 0x35))
+
+
 def remover_colisao(m, eax, edx):
     """ResetCollision 0x47623e: attribute[AX] &= ~DL; EAX = AX, DL = ~DL."""
     endereco = (m.u32(GRADE_ATRIBUTOS) + (eax & 0xffff)) & M32
@@ -584,6 +591,7 @@ ROTINAS = {
     'GetRandCaseTypeBatPlayer': (0x489300, lambda m, r, p, b: caso_estrutura_tipo_jogador(m, r['EAX'], r['EDX'])),
     'Chemin_Accessible': (0x42d4f8, lambda m, r, p, b: acessivel(m, r['EAX'], r['EDX'])),
     'TerrainEnCollision': (0x4761d4, lambda m, r, p, b: terreno_em_colisao(m, r['EAX'], r['EDX'])),
+    'TerrainEstGc': (0x4762b9, lambda m, r, p, b: terreno_esta_gc(m, r['EAX'])),
     'ResetCollision': (0x47623e, lambda m, r, p, b: remover_colisao(m, r['EAX'], r['EDX'])),
     'memset': (0x48c3b0, lambda m, r, p, b: memset_crt(m, r['EAX'], r['EDX'], r['EBX'])),
     'listNewElem': (0x47d012, lambda m, r, p, b: lista_novo_elemento(m, r['EAX'])),

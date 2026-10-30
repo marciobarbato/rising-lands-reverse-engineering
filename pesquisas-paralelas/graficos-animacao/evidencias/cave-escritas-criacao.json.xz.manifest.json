@@ -1,0 +1,14 @@
+{
+ "raw_sha256": "435cd90069cfc2e5e01282d1613f2e7564d4546182584888feabda667774a634",
+ "compressed_sha256": "cf15002ef7d61b8d438d6b7bca02899dee360dad0b39c38bcf5b93b9aa45e347",
+ "probe": "P3",
+ "observed_frames": [
+  221,
+  222
+ ],
+ "passes_equal": true,
+ "elapsed_seconds": [
+  0.832,
+  1.304
+ ]
+}

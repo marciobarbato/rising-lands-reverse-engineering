@@ -1,0 +1,14 @@
+{
+ "raw_sha256": "99b790f6b3b28cb9fadcf75859211e780a19293a93a0ffab161ca717889fc4d8",
+ "compressed_sha256": "3b74b9fd23d9f1338d8a062f087e59eadf41af3accbbe7b3e7526d14f07d0c2b",
+ "probe": "P7",
+ "observed_frames": [
+  3276,
+  3277
+ ],
+ "passes_equal": true,
+ "elapsed_seconds": [
+  0.877,
+  1.18
+ ]
+}
