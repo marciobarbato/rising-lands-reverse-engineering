@@ -275,7 +275,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             live.perform("live-reset"){_ in live.perform("live-step"){_ in live.perform("live-play"){_ in
                 if live.benchmarkInput{
                     DispatchQueue.main.asyncAfter(deadline:.now()+8){live.benchmarkClick(560,528)}
-                    DispatchQueue.main.asyncAfter(deadline:.now()+9){live.benchmarkClick(624,432)}
+                    DispatchQueue.main.asyncAfter(deadline:.now()+8.2){live.benchmarkClick(624,432)}
+                    DispatchQueue.main.asyncAfter(deadline:.now()+8.5){live.benchmarkPointer(400,272)}
                 }
                 var lastPulse=ProcessInfo.processInfo.systemUptime,maxPulseGap=0.0,pulses=0
                 let pulse=Timer.scheduledTimer(withTimeInterval:0.05,repeats:true){_ in let now=ProcessInfo.processInfo.systemUptime;maxPulseGap=max(maxPulseGap,now-lastPulse);lastPulse=now;pulses+=1}

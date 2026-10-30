@@ -262,7 +262,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         self.validationMode=validationMode;self.root=root;metal=try NativeMetalGameView(nativeFrame:NSRect(x:0,y:105,width:800,height:600))
         window=NSWindow(contentRect:NSRect(x:0,y:0,width:800,height:705),styleMask:[.titled,.closable,.miniaturizable,.resizable],backing:.buffered,defer:false)
         super.init()
-        window.title="MONDE01 · Rust e Metal";window.minSize=NSSize(width:640,height:550);window.contentView=NativeGameLayout(metal);window.delegate=self
+        window.acceptsMouseMovedEvents=true;window.title="MONDE01 · Rust e Metal";window.minSize=NSSize(width:640,height:550);window.contentView=NativeGameLayout(metal);window.delegate=self
         button.target=self;button.action=#selector(toggle);button.frame=NSRect(x:15,y:36,width:100,height:27)
         let stepButton=NSButton(title:"Avançar quadro",target:self,action:#selector(step));stepButton.frame=NSRect(x:125,y:36,width:140,height:27)
         resetButton.target=self;resetButton.action=#selector(reset);resetButton.frame=NSRect(x:275,y:36,width:100,height:27)
@@ -297,6 +297,10 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         window.makeKeyAndOrderFront(nil);window.makeFirstResponder(metal)
         let point=metal.convert(NSPoint(x:metal.bounds.width*x/800,y:metal.bounds.height*(1-y/600)),to:nil)
         for type in [NSEvent.EventType.leftMouseDown,.leftMouseUp]{if let event=NSEvent.mouseEvent(with:type,location:point,modifierFlags:[],timestamp:ProcessInfo.processInfo.systemUptime,windowNumber:window.windowNumber,context:nil,eventNumber:1,clickCount:1,pressure:1){window.sendEvent(event)}}
+    }
+    func benchmarkPointer(_ x:Double,_ y:Double){
+        let point=metal.convert(NSPoint(x:metal.bounds.width*x/800,y:metal.bounds.height*(1-y/600)),to:nil)
+        if let event=NSEvent.mouseEvent(with:.mouseMoved,location:point,modifierFlags:[],timestamp:ProcessInfo.processInfo.systemUptime,windowNumber:window.windowNumber,context:nil,eventNumber:3,clickCount:0,pressure:0){window.sendEvent(event)}
     }
     @objc func changeMode(){let selected=modeControl.selectedSegment==1;rateControl.isEnabled = !selected;work.async{[weak self] in guard let self=self else{return};self.running=false;self.presenter?.stop();self.validationMode=selected;self.perform("live-reset",completion:nil)}}
     @objc func changeRate(){let rate=[15.0,20.0,30.0,60.0,0.0][rateControl.indexOfSelectedItem];work.async{[weak self] in self?.gameFPS=rate;self?.nextGameTime=ProcessInfo.processInfo.systemUptime}}
