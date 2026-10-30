@@ -327,7 +327,7 @@ def aggregate(paths, plan, serial=False):
         previous = r
     passed = all(row['equal'] for row in rows) and total == equal == 18401 and frames == 9200
     return dict(schema='rising-lands/rust-engine-long-aggregate-proof/1', manifest=plan['manifest'], policy=manifest['policy'],
-                paired_play_proof=paired,
+                paired_play_proof=all(r.get('paired_play_proof',False) for r in reports),
                 scope='serial_from_S0' if serial else 'ten_declared_opening_checkpoints', parts=rows, library_sha256=identity,
                 input_reports=[dict(path=str(Path(p).resolve()),sha256=sha(Path(p))) for p in paths],
                 timing=dict(rust_phase_seconds=seconds, frames_completed=frames, frames_per_second=frames/seconds if seconds else None),

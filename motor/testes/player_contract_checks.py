@@ -103,6 +103,17 @@ class InputContracts(unittest.TestCase):
   before=self.native.snapshot(self.h);clock=self.native.clock(self.h)
   self.assertEqual(self.native.lib.rl_execucao_definir(self.h,3),1)
   self.assertEqual(self.native.snapshot(self.h),before);self.assertEqual(self.native.clock(self.h),clock)
+ def test_revision_backed_read_footprint_is_exact_and_independent_of_live_replacement(self):
+  from pathlib import Path
+  from unittest.mock import patch
+  from player_pins import verify
+  from pinned_reference import REPO,source_root
+  name='pesquisas-paralelas/ia-runtime/evidencias/leituras-entrada-ordens-ia.json.xz'
+  read=Path.read_bytes
+  with patch.object(Path,'read_bytes',lambda path:b'replaced live footprint' if path==REPO/name else read(path)):
+   verify()
+  with patch.object(Path,'read_bytes',lambda path:b'corrupt frozen footprint' if path==source_root()/name else read(path)),self.assertRaises(ValueError):
+   verify()
  def test_all_previous_creation_versions_remain_supported(self):
   for v in range(0x10000,0x10007):
    h=C.c_uint64();self.native.check(self.native.lib.rl_criar_mundo(v,20,0,C.byref(h)));self.native.free(h.value)
