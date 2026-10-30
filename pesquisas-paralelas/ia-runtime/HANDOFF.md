@@ -627,3 +627,16 @@ Merged main `71335aa` at `337740f`, consuming only committed main providers. The
 Original identity is unchanged: intact executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`. Consumed addresses/domains and Core's 1,956 native comparisons are published in `docs/core/S1_GAPS.md` and `docs/core/STATE_QUERIES.md`; no Core body or foreign hash-pin test was copied. Four focused consumer tests pass: carried state-query registers and no writes, missing-register rejection before reads, argument-only search uncertainty, and refusal of missing/nominal strict-query ESP.
 
 This is a clean-source checkpoint for fresh P6 strict, P3/P7 strict and S1/P4 indicator runs plus all three native leaf regressions. Those fresh results are pending at this checkpoint; no new whole-state acceptance is claimed. S1 pass 2 remains unpinned and pending Missions' publication.
+
+## State at 2026-10-30 07:15 (MacBook paused)
+
+Documentation-only checkpoint; no code or native run in this entry. `feat/re-ai-runtime` = main `3874fcc` plus `946685b` and `d2777b1` (awaiting integration). The Codex session `ai-runtime-s1-proof` stopped at the pause with a clean worktree and nothing unpushed; there is no AI/runtime `wip/*` branch.
+
+- **Upstream:** Core `5422338`/`c162e68` and Graphics' guards (`fabbabf`, `9f9ee84`, `3a22f70`, `ff5cf34`) are now ancestors of main. Missions is still at `bab6c7c` with no S1 pass-2 manifest; pass 2 is being captured on the Mac mini.
+- **Uncommitted local results at `d2777b1`** (logs in `.local/m3-1-*-d2777b1.log` and `.local/m3-1/core-s1-d2777b1/`; not evidence until rerun from a clean committed tree and recorded):
+  - leaf differentials: input orders 118/124, deposit pages 203/203, construction/keys 85/90, all 0 mismatches;
+  - strict P3 and P4 complete through 3129; strict P7 through 3216 and strict S1 (pass-1 indicators) through 2057, both stopping on Graphics' AffGame view origin (10, 15) at `0x415b77`;
+  - S1 planning through 2546, first difference at 2547 in `objective.structures` (owner to be assigned after pass 2);
+  - strict P6 parts 1 and 2 equal (2,000 and 544 phases; chains `5da71fab…`, `c557167f…`, same as the planning chains); part 0 was interrupted at frame ~1014 by the pause (an earlier strict part 0 at `ad0a4a9` was equal in all 2,000 phases, chain `a3f35dfc…`).
+- **Next:** integrate the two branch commits; rerun P6 part 0 at the integrated source, `agregar`, write `validacao/m3-1-prova-p6.json` if equal, and reproduce on the mini; `fixar S1` and run S1 strict/planning when pass 2 lands; refresh leaf differentials and P7/S1 indicators after Graphics' finite view-origin validation (on `feat/re-graphics`) reaches main.
+- **Light gate at this merge (no native):** `scripts/check.py --domain ai-runtime` runs 124 tests, 8 native skips, documentation links pass, and **1 failure**: `test_entrada_ordens_ia.ReplayCasos` case `process_tag19_unload` no longer raises `DependenciaIA`, because Economy's tag 19 provider is now on main (the case is the 118th equal in the local rerun). The committed `validacao/entrada-ordens-native.json` (117/124) and the replay expectation need refreshing from a native rerun; not changed here.
