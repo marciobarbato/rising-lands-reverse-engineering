@@ -25,10 +25,10 @@ from validar_alimentacao import CAPTURA, Replay, TRADUZIDAS, comparar_saida, pro
 from validar_ciclo_trabalho import carregar  # noqa: E402
 
 
-def replay_chamada(r, cls=al.Alimentacao):
-    """(outcome, detail) of one recorded call."""
+def replay_chamada(r, cls=al.Alimentacao, provedores=None):
+    """(outcome, detail) of one recorded call (``provedores``: callee name -> Core provider factory)."""
     m = MemoriaEsparsa(r['read_before_write'])
-    rp = Replay(r, proprias())
+    rp = Replay(r, proprias(), provedores)
     fome = cls(m, externo=rp(m))
     regs = {k: int(v, 16) for k, v in r['entry_registers'].items()}
     d = dict(routine=r['routine'], frame=r['frame'], unit=hex(regs['EDI'] & 0xffff))
@@ -55,13 +55,13 @@ def replay_chamada(r, cls=al.Alimentacao):
     return 'match', d
 
 
-def replay(captura=None, cls=al.Alimentacao):
+def replay(captura=None, cls=al.Alimentacao, provedores=None):
     captura = captura or carregar(CAPTURA)[0]
     contagem, falhas = {}, []
     for r in captura['calls']:
         if r['routine'] not in TRADUZIDAS:
             continue
-        resultado, d = replay_chamada(r, cls)
+        resultado, d = replay_chamada(r, cls, provedores)
         c = contagem.setdefault(r['routine'], dict(match=0, mismatch=0, outside_domain=0, error=0))
         c[resultado] += 1
         if resultado != 'match':
@@ -70,7 +70,8 @@ def replay(captura=None, cls=al.Alimentacao):
 
 
 if __name__ == '__main__':
-    contagem, falhas = replay()
+    from validar_alimentacao import provedores_fadiga
+    contagem, falhas = replay(provedores=None if '--sem-core' in sys.argv else provedores_fadiga())
     print(json.dumps(contagem, indent=1))
     for f in falhas[:30]:
         print(json.dumps(f))

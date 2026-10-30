@@ -1,0 +1,967 @@
+{
+ "capture": "pesquisas-paralelas/economia/evidencias/restauracao/captura-restauracao-rotinas.json.xz",
+ "capture_raw_sha256": "b6c3288e864f0ef8d9b0466785a2e7173a0bbff2c25088f45bcfd0ede19356b4",
+ "compared": 92,
+ "core_fatigue_provider": "2596912bcf92d72cf9cbe02bb5d948a9a00f713ea3c64822d9521578a1d2be0d",
+ "counts": {
+  "BatimentEnleveMatiere": {
+   "error": 0,
+   "match": 27,
+   "mismatch": 0,
+   "outside_domain": 0
+  },
+  "EnginRestaureEtat": {
+   "error": 0,
+   "match": 58,
+   "mismatch": 0,
+   "outside_domain": 0
+  },
+  "SetDechargeCaveEnginSelect": {
+   "error": 0,
+   "match": 7,
+   "mismatch": 0,
+   "outside_domain": 0
+  }
+ },
+ "errors": 0,
+ "mismatches": 0,
+ "mode": "rotinas",
+ "outside_domain": 0,
+ "recorded_calls": 92,
+ "reproduction": {
+  "between_frames": true,
+  "code_unchanged": true,
+  "frame1": true,
+  "load_tail": true
+ },
+ "rerun_equals_capture": true,
+ "results": [
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 3,
+   "eax": "0xe",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 3,
+   "eax": "0xe",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 0,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 3,
+   "eax": "0xe",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 0,
+   "eax": "0xe",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 0,
+   "eax": "0xe",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 2,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 2,
+   "eax": "0xe",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 1,
+   "eax": "0xe",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 3,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 0,
+   "eax": "0xe",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 3,
+   "eax": "0xe",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 5,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(12)",
+   "changed_bytes": 0,
+   "eax": "0xc",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 0,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(12)",
+   "changed_bytes": 6,
+   "eax": "0xc",
+   "foreign_calls": 2,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(12)",
+   "changed_bytes": 6,
+   "eax": "0xc",
+   "foreign_calls": 2,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(12)",
+   "changed_bytes": 4,
+   "eax": "0xc",
+   "foreign_calls": 2,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(12)",
+   "changed_bytes": 4,
+   "eax": "0xc",
+   "foreign_calls": 2,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 6,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 5,
+   "eax": "0xe",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 2,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 4,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 3,
+   "eax": "0xe",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 7,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 5,
+   "eax": "0xe",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 8,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 2,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginRestaureEtat(14)",
+   "changed_bytes": 8,
+   "eax": "0xe",
+   "foreign_calls": 2,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "BatimentEnleveMatiere",
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": "BatimentEnleveMatiere",
+   "changed_bytes": 2,
+   "eax": "0x2",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": "BatimentEnleveMatiere",
+   "changed_bytes": 0,
+   "eax": "0x0",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": "BatimentEnleveMatiere",
+   "changed_bytes": 0,
+   "eax": "0x3",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": "BatimentEnleveMatiere",
+   "changed_bytes": 0,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": "BatimentEnleveMatiere",
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": "BatimentEnleveMatiere",
+   "changed_bytes": 2,
+   "eax": "0x2",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": "BatimentEnleveMatiere",
+   "changed_bytes": 0,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": "BatimentEnleveMatiere",
+   "changed_bytes": 0,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": "BatimentEnleveMatiere",
+   "changed_bytes": 0,
+   "eax": "0x2",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": "BatimentEnleveMatiere",
+   "changed_bytes": 2,
+   "eax": "0xabcd0101",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": "SetDechargeCaveEnginSelect(0, cave 1)",
+   "changed_bytes": 7,
+   "eax": "0x0",
+   "foreign_calls": 3,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "SetDechargeCaveEnginSelect",
+   "unit": null
+  },
+  {
+   "action": "SetDechargeCaveEnginSelect(0, cave 1)",
+   "changed_bytes": 14,
+   "eax": "0x0",
+   "foreign_calls": 5,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "SetDechargeCaveEnginSelect",
+   "unit": null
+  },
+  {
+   "action": "SetDechargeCaveEnginSelect(0, cave 1)",
+   "changed_bytes": 14,
+   "eax": "0x0",
+   "foreign_calls": 5,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "SetDechargeCaveEnginSelect",
+   "unit": null
+  },
+  {
+   "action": "SetDechargeCaveEnginSelect(0, cave 1)",
+   "changed_bytes": 7,
+   "eax": "0x0",
+   "foreign_calls": 4,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "SetDechargeCaveEnginSelect",
+   "unit": null
+  },
+  {
+   "action": "SetDechargeCaveEnginSelect(0, cave 1)",
+   "changed_bytes": 0,
+   "eax": "0x0",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "SetDechargeCaveEnginSelect",
+   "unit": null
+  },
+  {
+   "action": "SetDechargeCaveEnginSelect(1, cave 1)",
+   "changed_bytes": 0,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 30,
+   "outcome": "match",
+   "routine": "SetDechargeCaveEnginSelect",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 4,
+   "eax": "0xc",
+   "foreign_calls": 1,
+   "frame": 1281,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginNextEtape(14)",
+   "changed_bytes": 4,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 1422,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 1422,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 4,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 1422,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "EnginNextEtape(12)",
+   "changed_bytes": 5,
+   "eax": "0xc",
+   "foreign_calls": 1,
+   "frame": 1483,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 1483,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 5,
+   "eax": "0xc",
+   "foreign_calls": 1,
+   "frame": 1483,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": "tag 19: SetDechargeCaveEnginSelect(0, cave)",
+   "changed_bytes": 6,
+   "eax": "0x0",
+   "foreign_calls": 3,
+   "frame": 1500,
+   "outcome": "match",
+   "routine": "SetDechargeCaveEnginSelect",
+   "unit": null
+  },
+  {
+   "action": "EnginNextEtape(14)",
+   "changed_bytes": 1,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 1591,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 1591,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 1,
+   "eax": "0xe",
+   "foreign_calls": 1,
+   "frame": 1591,
+   "outcome": "match",
+   "routine": "EnginRestaureEtat",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 1602,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 1635,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 1668,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 1701,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 1734,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 1767,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 1800,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 1833,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 1866,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 1899,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 1932,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 1965,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  },
+  {
+   "action": null,
+   "changed_bytes": 2,
+   "eax": "0x1",
+   "foreign_calls": 0,
+   "frame": 1998,
+   "outcome": "match",
+   "routine": "BatimentEnleveMatiere",
+   "unit": null
+  }
+ ],
+ "schema": "rising-lands/economy-restore-validation/1",
+ "seconds": 740.095,
+ "served_by_translation": {},
+ "translation": {
+  "alimentacao.py": "41ab57eae996921d41b4dca3ef0a0b1ed0bf71b6a0de854be4b560110d378923",
+  "restauracao.py": "e9184179281c77c05d6b267d8c837be29ef2398b461c442f6f0e9d4d2386cc65"
+ }
+}
