@@ -54,7 +54,7 @@ def main():
     ap.add_argument('--inicio', type=Path, required=True)
     ap.add_argument('--de', type=int, default=11750)
     ap.add_argument('--ate', type=int, default=12000)
-    ap.add_argument('--saida', type=Path, default=HERE/'evidencias/som-luta-s1-original-v1.json.xz')
+    ap.add_argument('--saida', type=Path, default=ROOT/'.local/som-luta-s1-raw-original-v1.json.xz')
     a = ap.parse_args()
     if a.saida.exists(): raise SystemExit('Refusing to overwrite original evidence')
     if not 1 <= a.ate-a.de <= 250: raise SystemExit('Require 1..250 frames')
