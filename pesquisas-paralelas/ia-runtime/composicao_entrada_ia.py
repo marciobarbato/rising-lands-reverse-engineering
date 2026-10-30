@@ -41,7 +41,6 @@ from reinicio_ia import DependenciaIA
 
 ESQUEMA = 'rising-lands/monde01-scripted-input/1'
 MENSAGENS = (0x100, 0x101, 0x200, 0x201, 0x202, 0x203, 0x204, 0x205)
-CORPO_CAVERNA = 0x426aff               # BatimentNextEtape's type-3 switch target (Economy's corpo_caverna)
 JANELA = 0x4e27e8                     # HWND word of the MSG (declared by the harness; read from memory)
 
 
@@ -296,43 +295,9 @@ class ComposicaoEntrada(ComposicaoQuadros):
         return calcular_quadro(mm, p)
 
     def _donos_quadro(self, mm, p, donos):
-        """The frame phase's providers past frame 220 (``DonosM3``): BatimentNextEtape's type-3 body (Economy's
-        ``corpo_caverna``, at the switch target 0x426aff), the structure loop's BatimentIllumine/BatimentDecouvre
-        (Core's ``visao_grupos``), unit state 13 (Core's ``estado_entrada``: ESI = the record, EDI = the unit) and
-        unit state 5 (``construcao_entrada_ia.estado_trabalho`` with Economy's CalculWorkEngin). The pinned
-        switches stop at a target before the first store of its body, so each dispatch continues exactly there."""
-        from construcao_entrada_ia import estado_trabalho
-        tabelas = self.ctx.tabelas
-        estrutura_pinada = p['BatimentNextEtape']
-
-        def batiment_next_etape(sitio, estrutura):
-            try:
-                return estrutura_pinada(sitio=sitio, estrutura=estrutura)
-            except DependenciaIA as erro:
-                if erro.rotina == 'BatimentNextEtape type 3' and erro.sitio == CORPO_CAVERNA == \
-                        tabelas['tipos_estrutura'][2]:
-                    p['BatimentNextEtape:cave'](sitio=CORPO_CAVERNA, estrutura=estrutura & 0xffff)
-                    return None
-                raise
-        p['BatimentNextEtape'] = batiment_next_etape
-        p['BatimentNextEtape:cave'] = lambda sitio, estrutura: donos.caverna.corpo_caverna(estrutura)
-        zero = dict.fromkeys(REG7, 0)
-        for nome, regs in (('BatimentIllumine', ('EAX', 'EDX', 'EBX')), ('BatimentDecouvre', ('EAX', 'EDX'))):
-            if nome in p:
-                raise RuntimeError(f'{nome} already has a chain provider')
-        p['BatimentIllumine'] = lambda sitio, estrutura, jogador, ebx: donos.visao.chamar(
-            'BatimentIllumine', dict(zero, EAX=estrutura, EDX=jogador, EBX=ebx))
-        p['BatimentDecouvre'] = lambda sitio, estrutura, jogador: donos.visao.chamar(
-            'BatimentDecouvre', dict(zero, EAX=estrutura, EDX=jogador))
-        p['EnginNextEtape:state13'] = lambda sitio, unidade: donos.ee.chamar('EnginNextEtape:state13', dict(
-            zero, ESI=(mm.u32(0x4e19a0) + unidade * 276) & 0xffffffff, EDI=unidade))
-
-        def chamar(nome, chamada, **r):
-            regs = dict(zero, **r)
-            if nome == 'CalculWorkEngin':
-                return donos.ciclo.calcul_work_engin(dict(regs, ESP=0))
-            return donos.ee.chamar(nome, regs)
-        p['EnginNextEtape:state5'] = lambda sitio, unidade: estado_trabalho(mm, chamar, unidade)
+        """The frame phase's providers past frame 220 (``construcao_entrada_ia.instalar_donos``)."""
+        from construcao_entrada_ia import instalar_donos
+        instalar_donos(mm, p, donos, self.ctx.tabelas)
 
     def executar(self, n):
         from oraculo_quadro_missao import nomes_fases

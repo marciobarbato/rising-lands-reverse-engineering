@@ -112,7 +112,7 @@ def comandos_imagem():
 def executar_traducao(m, caso, entrada, cursor, alocacoes, comandos):
     """Run the translation of ``caso`` over memory ``m``; returns (exit registers, sound requests, keys)."""
     from entrada_ordens_ia import Entrada
-    from provedores_entrada_ia import provedores_vivos
+    from provedores_entrada_ia import DonosM3, provedores_vivos
     pedidos = []
 
     def som(nome, regs, pilha):
@@ -120,7 +120,9 @@ def executar_traducao(m, caso, entrada, cursor, alocacoes, comandos):
         return regs['EAX']
     janelas = Janelas(caso.get('keys', ()), cursor)
     fila = list(alocacoes)
-    e = Entrada(m, provedores_vivos(m, janelas=janelas, som=som, alocar=lambda flags, tamanho: fila.pop(0)))
+    donos = DonosM3(m, som=som)
+    e = Entrada(m, provedores_vivos(m, janelas=janelas, som=som, alocar=lambda flags, tamanho: fila.pop(0),
+                                    estruturas=donos.ee, donos=donos))
     e.comandos = comandos
     r = dict(entrada)
     nome = caso['routine']

@@ -333,3 +333,50 @@ def estado_trabalho(m, chamar, unidade):
             raise DependenciaIA('EnginNextEtape state 5: work structure destroyed or foreign (0x456639)', 0x456639)
     chamar('CalculWorkEngin', 0x456731, EAX=unidade)
     return SAIDA
+
+
+CORPO_CAVERNA = 0x426aff               # BatimentNextEtape's type-3 switch target (Economy's corpo_caverna)
+
+
+def instalar_donos(m, p, donos, tabelas):
+    """Install in the keyword provider dict ``p`` the providers past frame 220 from ``donos``
+    (``provedores_entrada_ia.DonosM3``):
+    - ``BatimentNextEtape`` wraps ``p``'s pinned one: its type-3 target 0x426aff (the pinned switch stops there
+      before any store) runs ``BatimentNextEtape:cave`` = Economy's ``corpo_caverna(structure)``;
+    - ``BatimentIllumine(sitio, estrutura, jogador, ebx)`` and ``BatimentDecouvre(sitio, estrutura, jogador)``:
+      Core's ``visao_grupos`` (EAX structure, EDX player, EBX light flag; other registers 0, which they do not read);
+    - ``EnginNextEtape:state13``: Core's ``estado_entrada`` with ESI = the unit record, EDI = the unit;
+    - ``EnginNextEtape:state5``: ``estado_trabalho`` with Core's BatimentEnDestruction/BatimentGetPlayer and
+      Economy's CalculWorkEngin.
+    ``proxima_etapa_entrada`` dispatches states 5/13 to the last two."""
+    from reinicio_ia import DependenciaIA
+    estrutura_pinada = p['BatimentNextEtape']
+
+    def batiment_next_etape(sitio, estrutura):
+        try:
+            return estrutura_pinada(sitio=sitio, estrutura=estrutura)
+        except DependenciaIA as erro:
+            if erro.rotina == 'BatimentNextEtape type 3' and erro.sitio == CORPO_CAVERNA == \
+                    tabelas['tipos_estrutura'][2]:
+                p['BatimentNextEtape:cave'](sitio=CORPO_CAVERNA, estrutura=estrutura & 0xffff)
+                return None
+            raise
+    zero = dict.fromkeys(('EAX', 'EBX', 'ECX', 'EDX', 'ESI', 'EDI', 'EBP'), 0)
+    for nome in ('BatimentIllumine', 'BatimentDecouvre'):
+        if nome in p:
+            raise RuntimeError(f'{nome} already has a provider')
+    p['BatimentNextEtape'] = batiment_next_etape
+    p['BatimentNextEtape:cave'] = lambda sitio, estrutura: donos.caverna.corpo_caverna(estrutura)
+    p['BatimentIllumine'] = lambda sitio, estrutura, jogador, ebx: donos.visao.chamar(
+        'BatimentIllumine', dict(zero, EAX=estrutura, EDX=jogador, EBX=ebx))
+    p['BatimentDecouvre'] = lambda sitio, estrutura, jogador: donos.visao.chamar(
+        'BatimentDecouvre', dict(zero, EAX=estrutura, EDX=jogador))
+    p['EnginNextEtape:state13'] = lambda sitio, unidade: donos.ee.chamar('EnginNextEtape:state13', dict(
+        zero, ESI=(m.u32(0x4e19a0) + unidade * 276) & 0xffffffff, EDI=unidade))
+
+    def chamar(nome, chamada, **r):
+        regs = dict(zero, **r)
+        if nome == 'CalculWorkEngin':
+            return donos.ciclo.calcul_work_engin(dict(regs, ESP=0))
+        return donos.ee.chamar(nome, regs)
+    p['EnginNextEtape:state5'] = lambda sitio, unidade: estado_trabalho(m, chamar, unidade)

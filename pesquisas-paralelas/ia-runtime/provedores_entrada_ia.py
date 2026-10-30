@@ -260,7 +260,6 @@ def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None, estrutura
     from entrada_ordens_ia import batiment_peut_attaquer_prefixo
     funcoes['BatimentPeutAttaquer'] = lambda regs: batiment_peut_attaquer_prefixo(
         m, {k: regs.get(k, 0) & M32 for k in REG7})
-    funcoes['EnginEnRecrutement'] = lambda tipo, jogador: int(recrutamento().unidade_em_recrutamento(tipo, jogador))
     funcoes['GetStatusRecrute'] = lambda tipo, jogador: recrutamento().status(tipo, jogador)
     if donos is not None:
         # The M3 owners (``DonosM3``): group selection and view (tags 0xb/0xc, the group key), the minimap
@@ -294,13 +293,14 @@ class DonosM3:
     chamada) -> regs`` (this front's iagUnitSendMessage) when given; any other name raises
     ``DependenciaIA`` at its original call (never defaulted)."""
 
-    def __init__(self, m, *, som, bonus, mensagem_unidade=None):
+    def __init__(self, m, *, som, bonus=None, mensagem_unidade=None):
         from entrada_estruturas import EntradaEstruturas, ROTINAS_ECONOMIA, provedor_entrada
         from visao_grupos import VisaoGrupos, provedor_saida
         caverna_recrutamento = _modulo_economia('caverna_recrutamento')
         ciclo_trabalho = _modulo_economia('ciclo_trabalho')
         self.m, self.bonus, self.mensagem_unidade, self.som = m, bonus, mensagem_unidade, som
         self.ee = EntradaEstruturas(m, externo=self.externo, som=som, bonus=bonus)
+        # (bonus None: BonusGetValEngin stays a named dependency)
         self.visao = VisaoGrupos(m, som=som)
         self.caverna = caverna_recrutamento.CavernaRecrutamento(m, externo=self.externo)
         self.ciclo = ciclo_trabalho.CicloTrabalho(m, externo=self.externo)
@@ -326,13 +326,15 @@ class DonosM3:
             entrada['ESP'] = 0
             saida = getattr(self.ciclo, '_' + nome)(entrada)
             return {k: v for k, v in saida.items() if k != 'ESP'}
-        if nome == 'BonusGetValEngin':
+        if nome == 'BonusGetValEngin' and self.bonus is not None:
             return dict(EAX=self.bonus(regs['EAX'] & 0xff, regs['EBX'] & 0xff, regs['EDX'] & 0xff))
         if nome in ('PlaySnd_PostSound', 'PlaySnd_StopSound') and self.som is not None:
             # The sound-library boundary, with the caller's declared call address and pushed words.
             pilha = list(regs.get('_pilha') or ())
+            import inspect
+            argumentos = {'chamada': chamada} if 'chamada' in inspect.signature(self.som).parameters else {}
             return dict(EAX=self.som(nome, {k: regs.get(k, 0) & M32 for k in ('EAX', 'EDX', 'EBX', 'ECX')}, pilha,
-                                     chamada=chamada) & M32)
+                                     **argumentos) & M32)
         if nome == 'iagUnitSendMessage' and self.mensagem_unidade is not None:
             return self.mensagem_unidade(regs, chamada)
         raise DependenciaIA(nome, chamada)

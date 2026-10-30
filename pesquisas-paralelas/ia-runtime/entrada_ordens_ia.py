@@ -792,7 +792,8 @@ class Entrada:
     def _icone_recrutamento(self, slot, tipo):
         """IconeFillContenu's code 6 (a recruitable unit type; 0x45e430..0x45e691), local player j, icon
         0x29cf + type (type 0x19 shows 0x12):
-        - EnginEnRecrutement(AL type, DL j) (Economy) nonzero: (icon, 0, GetStatusRecrute(AL type, DL j) & 0xffff);
+        - EnginEnRecrutement(AL type, DL j) (0x420bdf: the selected structure's +0x7b is the type) nonzero:
+          (icon, 0, GetStatusRecrute(AL type, DL j) & 0xffff) (Economy's ``recrutamento``);
         - else BatimentEstOccupe(DL j) (0x422fa5: the selected structure's u32 +0x8c nonzero) : (icon, 0, 0);
         - else EnginGetRessource(AL type) (food +2, stone +6, parts +4 of the 50-byte record 0x4965ae + 50 type,
           into the caller's frame) and TestRessource(AX food, DX stone, BX parts, CX 0, pushed j) (Economy):
@@ -801,11 +802,12 @@ class Entrada:
         m = self.m
         j = m.u8(0x508041)
         icone = 0x29cf + (0x12 if tipo == 0x19 else tipo)
-        if self.p('EnginEnRecrutement', 0x45e447, tipo=tipo, jogador=j) & 0xff:
+        selecionada = m.u16(SEL_ESTRUTURA + 2 * j)
+        # EnginEnRecrutement 0x420bdf (AL type, DL j): the selected structure's byte +0x7b == type (0xffff: 0).
+        if selecionada != 0xffff and m.u8(0x49a0c8 + 276 * selecionada + 0x7b) == tipo:
             self._icone(slot, icone, 0, self.p('GetStatusRecrute', 0x45e480, tipo=tipo, jogador=j) & 0xffff)
             return
-        selecionada = m.u16(SEL_ESTRUTURA + 2 * j)                       # BatimentEstOccupe 0x422fa5
-        if selecionada != 0xffff and m.u32(0x49a0c8 + 276 * selecionada + 0x8c):
+        if selecionada != 0xffff and m.u32(0x49a0c8 + 276 * selecionada + 0x8c):   # BatimentEstOccupe 0x422fa5
             self._icone(slot, icone, 0, 0)
             return
         r = 0x4965ae + 50 * tipo                                         # EnginGetRessource 0x4410d2
