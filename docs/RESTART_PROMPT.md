@@ -1,8 +1,27 @@
-# Restart prompt for the seven-front round
+# Restart prompt
 
-Paste the coordinator prompt into a new coordinator chat once this organization change is on `origin/main`. It requests exactly seven execution chats, authorizes coordination messages, and authorizes each completed stage to commit, push and integrate through the locked helper. The human keeps a Portuguese copy of the same authorizations; this English file is the maintained reference. This file is a prompt; the organization change itself does not launch the chats.
+The working mode changed on 2026-10-29: one Claude coordinator, Codex as its subordinate executor, the Mac mini for long native runs (see [parallel work](PARALLEL_WORK.md#working-mode-since-2026-10-29-current-at-2026-10-30)). Use the current prompt below to resume. The seven-chat prompt that follows it is kept as the historical reference for the 2026-10-28 organization; its front list, ownership and integration authorizations still hold, but not its "exactly seven chats, no subagents" mode.
 
-## Coordinator prompt
+## Current coordinator prompt (2026-10-30)
+
+```text
+Resume the reverse engineering of the Brazilian edition of Rising Lands as the project coordinator.
+
+Workspace: /Users/marcio/git/Rising Lands
+Canonical repository: /Users/marcio/git/Rising Lands/engenharia-reversa
+Coordinator worktree: /Users/marcio/git/Rising Lands/worktrees/maintenance (coordinator/maintenance)
+Remote: https://github.com/marciobarbato/rising-lands-reverse-engineering.git
+
+Read, in order: the latest docs/HANDOVER_CLAUDE_*.md, the top of docs/PROGRESS.md, docs/STATUS.md, docs/M3_PLAN.md (status section), docs/PARALLEL_WORK.md (working mode and rules learned), AGENTS.md. Fetch origin, check `python3 scripts/workstream.py fronts`, every feature worktree's status against its pushed head, and the origin/wip/* branches the handover lists. Preserve every commit, worktree, branch and piece of evidence.
+
+Working mode: you coordinate, review and integrate; you prefer fresh subagents with concise briefs. Codex is your subordinate executor, dispatched through local-data/coordination/codex-bridge/codex_task.py (check `quota` first; one executor per front at a time; Codex never merges or records acceptance). Long native runs go to the Mac mini (the Claude session there writes feat/re-missions and runs/<front>/<tag>; fetch over HTTPS on it). Integrate each reviewed stage with `python3 scripts/workstream.py integrate <front>` from a clean feature worktree; park unvalidated work on origin/wip/* first. Record acceptances only after a committed-main reproduction on both machines, in integracao/validacao/.
+
+Original-first rules are unchanged: capture on the intact RISING.EXE before translation, whole-state comparison under published masks, no artificial defaults, no foreign-file byte pins in tests. Documentation and commits in English; player-facing content and audio in PT-BR. The playable engine is Rust (motor/), Swift for the app, C only for small tooling, Python as the validated reference. The final edition must sustain at least 60 fps in play mode, with audits only in tests.
+
+Continue from the handover's ordered next steps.
+```
+
+## Historical seven-chat coordinator prompt (2026-10-28)
 
 ```text
 Resume the reverse engineering of the Brazilian edition of Rising Lands as the project coordinator.

@@ -1,6 +1,27 @@
-# Seven-front research workflow
+# Parallel research workflow
 
-The current round uses seven research owners plus the coordinator's maintenance front. Each starts from the organized `origin/main` in its own worktree and branch. The canonical checkout remains a stable entry point; simultaneous chats never share a mutable index, branch checkout, or report output directory. The target of the round is [a running original mission](ROADMAP_MONDE01.md).
+The fronts below are the write owners; the coordinator's maintenance front owns every other path. Each front works from `origin/main` in its own worktree and branch. The canonical checkout remains a stable entry point; simultaneous executors never share a mutable index, branch checkout, or report output directory. The target is [a running original mission](ROADMAP_MONDE01.md); the current plan is [M3/M4](M3_PLAN.md). `python3 scripts/workstream.py fronts` prints the authoritative ownership table.
+
+## Working mode (since 2026-10-29, current at 2026-10-30)
+
+- **Coordinator: Claude**, in one chat on the MacBook. It dispatches work, reviews every delivery, integrates through `scripts/workstream.py`, records acceptances in `integracao/validacao/` and maintains the shared documents. It prefers fresh subagents with concise briefs over long-lived sessions.
+- **Codex is a subordinate executor.** The coordinator dispatches it directly with `local-data/coordination/codex-bridge/codex_task.py` (`run --name --cd --brief [--full-access]`, `resume`, `list`, `quota`); briefs are files under `codex-bridge/briefs/`. One executor per front or worktree at a time, never Codex and a Claude agent on the same one. Codex never merges to main or records acceptance; the coordinator reviews its diff and integrates it. Fronts are split so that both weekly quotas are used.
+- **Mac mini for long native runs** (multi-frame original captures, pass-2 segments, replay checks, second-machine reproductions). A Claude session there is the sole writer of `feat/re-missions` and pushes `runs/<front>/<tag>` branches for other fronts; the coordinator drives it without asking the user. The MacBook keeps translations, short native comparisons, chain proofs and integration.
+- **Rust engine and macOS app** are Codex workstreams: `motor/` (integrated through maintenance) and `feat/macos-playable`.
+- **Unvalidated work is parked, not merged.** When an executor stops mid-stage, its diff is committed to an `origin/wip/<front>-<time>` branch and the feature worktree is left clean at its pushed head.
+
+### Rules learned
+
+- **No foreign-file byte pins in tests.** A test that pins the exact bytes of another front's file deadlocks integrations (Core↔Economy twice, once in the engine's player pins). Bind the front's own files strictly; accept any foreign version that has a committed native run, otherwise skip with the rerun named.
+- **Clean tree before `integrate`.** The helper merges main into the feature worktree, so it needs a clean tree. Never integrate while an executor is editing that worktree; park leftover WIP on a `wip/*` branch first.
+- **Integrations serialize on their own.** `integrate` holds a blocking `flock`; launch integrations directly and let the lock order them. No `pgrep` wait loops: their own command lines match and they deadlock.
+- **Rust gate pins by commit.** `sh motor/validate.sh` runs on every integration and reads its Python/Graphics references from fixed commits. If it fails, rerun it in the preserved candidate, then fix the pin in `motor/` through maintenance.
+- **Mini fetch over HTTPS.** Over plain SSH, `git fetch` of the `git@github` remote hangs; fetch the public repository by its HTTPS URL. Symlink `.local/python` into new worktrees on both machines.
+- **Cross-machine pass-2 segments work.** Rsync the snapshots and the pass-1 set to the MacBook, run `passo2_sondas.py politica --de --ate` for a frame range, and rsync each pickle back without `--delete`.
+- **Prefer fresh Codex sessions over very long threads.** Long threads failed during compaction; start a new session with a handover brief. "Selected model is at capacity" failures usually clear when the same session is resumed later.
+- **Disk.** Keep at least 20 GB free on both machines.
+
+## Fronts
 
 | Front | Branch | Worktree under workspace | Write ownership | Wave-1 mandate |
 |---|---|---|---|---|
@@ -10,9 +31,11 @@ The current round uses seven research owners plus the coordinator's maintenance 
 | Economy and Production | `feat/re-economy` | `worktrees/re-economy` | `pesquisas-paralelas/economia/`, `docs/ECONOMY.md` | Load-tail providers, natural production start, transport/work cycle to store bags in the cave |
 | Combat and Projectiles | `feat/re-combat` | `worktrees/re-combat` | `pesquisas-paralelas/combate/`, `docs/COMBAT.md` | Projectile reset, live attack state machine through the dispatcher into impact/damage/death, building-target branch |
 | Graphics and Animation | `feat/re-graphics` | `worktrees/re-graphics` | `pesquisas-paralelas/graficos-animacao/`, `docs/GRAPHICS.md` | Cache initialization and complete `AffGame` frames over the real loaded state |
-| Audio (second wave; run by the macOS chat until its M1 trigger) | `feat/re-audio` | `worktrees/re-audio` | `pesquisas-paralelas/audio/`, `docs/AUDIO.md` | Sound banks, sample decoding and the request queue reached by `PlaySnd_PostSound`/`PlaySnd_Manage` |
+| Audio (second wave) | `feat/re-audio` | `worktrees/re-audio` | `pesquisas-paralelas/audio/`, `docs/AUDIO.md` | Sound banks, sample decoding and the request queue reached by `PlaySnd_PostSound`/`PlaySnd_Manage` |
 | macOS Playable Build and Validation | `feat/macos-playable` | `worktrees/macos-playable` | `apps/macos-preview/`, `compilar-jogável`, `docs/MACOS_PLAYABLE.md` | Milestone-triggered consumer builds and divergence records |
-| Coordinator maintenance | `coordinator/maintenance` | `worktrees/maintenance` | Every shared path | Infrastructure, shared manuals, estimate and inventory |
+| Coordinator maintenance | `coordinator/maintenance` | `worktrees/maintenance` | Every path not owned above, including `motor/`, `integracao/`, `scripts/`, shared manuals | Infrastructure, shared manuals, acceptance records, estimate and inventory; integrates the Rust engine (`motor/`, Codex) |
+
+The wave-1 mandates in the last column are historical; current assignments come from the coordinator's briefs and the latest handover.
 
 ## Starting
 
