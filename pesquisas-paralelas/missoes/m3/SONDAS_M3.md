@@ -248,3 +248,37 @@ Pass 2 ran at about 2–3 s/frame per job on the Mac mini.
 1. Done: AL = 1 at 16933, `MenuInit(0x13)` at 17032, confirmation click → `MissionNext` at 17043 (stage 7, stop 17050).
 2. Done: the two final runs from F0, equal (above).
 3. Pass 2 of the S1 window with `passo2_sondas.py` (records from F0, then segments every 250 frames).
+
+## D1: defeat (M4.2)
+
+**Trigger, from the original's code** [B, static]:
+- `TestFinDeMission 0x458735` is the only code that stores AL = 1 with the result latch 0x4e1d84 = 0. It does so when the player unit count 0x4e1a3a is 0.
+- `CalculEnginNextEtape` (0x456e1e–0x456efd) recounts 0x4e1a3a every frame over pool slots whose state byte +2 is neither 0 nor 4 (type 0x11 excluded). State 4 is a dead unit.
+- The only other store of 0 to the latch is `MenuInit 0x4684d4` (menus 0x11 and 0x17), which resets it after the result screen.
+- Units lose life only through `InfligeDegat 0x450874`: from `CalculAttaqueEngin`, the projectile routines, and `AvanceEngin 0x448a3a` on a 0x46 trap cell. MONDE01 has no trap cell, so a defeat means losing every unit to the raiders.
+
+**Behaviour found while writing the input** [B, development runs in `.local/m3/d1`]:
+- No input: the units stay in the base, never die, and food and stone stay at 30 (run D1-a, dropped at 13,700).
+- D1-b grouped all 16 units at (3,46), on the raid path. They killed raider 17 at about 11500 (state 4), and idle units fled (state 19); none died.
+- D1-c sent the same group toward the raid spawn corner (63,63). It marched into the two raiders and lost: the count fell from 16 to 2 between 11429 and 13687.
+- In S1, the one loss was a lone harvester.
+
+**Input** [roteiro_d1.py](roteiro_d1.py) → [entradas/D1.json](entradas/D1.json), stop 15700:
+
+| Stage | Frames | Orders (native) |
+|---|---|---|
+| 1 | 140–473 | sanctuary select; 8 double clicks → 8 × tag 33 (160–370); right click; view down to (0,5); box select of the 16 units (tag 1 at 456); minimap press (7,92) → tag 5 to 11779 = (3,46) |
+| 2 | 11010–11013 | minimap press (127,126) with the group selected → move toward (63,63) |
+| 3 | 15010–15013 | minimap press (45,72) with the two survivors (units 0 and 9) selected → tag 5 to 9238 = (22,36), onto the resting raiders |
+
+**Native defeat timeline** [B, development chain D1-b → D1-c → D1-d, each resumed from the previous run's snapshot]:
+- Unit count 16 → 2 between 11429 and 13687 (14 deaths); 2 → 1 at 15344; **0 at 15555**: `TestFinDeMission` stores AL = 1 with latch 0, and 0x4e061c counts one per frame.
+- **Frame 15654** (counter 100): `PlaySnd_StopAllSound`, `MenuInit(0x13)`.
+- **Frame 15655**: `PartieGetResultat` returns the latch, 0 (AL = 0 at 0x42c9d1). CalculGame takes the failure branch at 0x42c9d5: it builds a file path and calls `FileOpen` (0x42ca26). The file opens, so it continues through 0x42c919/0x42c925 to `MenuInit(2)` (EDX = 2 at entry), with `PlayVideo`, `InitPlayer`, `RechercheReset`, `BonusReset`, `Engin_ResetExperience`, `LoadPie`/`LoadBank` and `mpCloseSession`. `MissionNext` and `MissionReStart` are never entered.
+- These sites were checked by code hooks on a rerun of frames 15655–15658 from the D1-d snapshot at 15654.
+- From 15656 the menu loop runs (`MenuDisplay`, `AffText`) to frame 17500. The latch stays 0 and AL stays 1 in every snapshot.
+
+**Final runs** [B, replay-checked]. Two independent runs of [entradas/D1.json](entradas/D1.json) from F0 on the Mac mini, through frames 129–15700 (15,572 frames each; 8,901 s and 9,840 s), give equal record files: quadros, entradas (217,801 lines), comandos (38) and fronteiras (46,959). The capture is [sondas/D1](sondas/D1).
+- The timeline is identical to the development chain: the count falls at 11429, 11561, 12456–13687 (12 deaths), 15344 and **15555 (0, AL = 1)**; `MenuInit` is first entered at 15654 and `PartieGetResultat` at 15655; `MissionNext` and `MissionReStart` are never entered.
+- 19 SetPlayerOrdre orders (the group march at 11011–11013 is tag 5 to 16191 = (63,63)); 160 routines first entered beyond the no-input run to frame 9,200.
+- The published `resumo.json` is the second run's, which saved a snapshot every 250 frames (83 snapshots, kept locally in `.local/m3/d1final/D1-b`). Combat's fatal windows restore from these (11250–11750 and 15250–15700); the first run saved one every 2,500 frames.

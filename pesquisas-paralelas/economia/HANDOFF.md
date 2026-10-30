@@ -2,6 +2,13 @@
 
 Chat: `01a18262-c6d5-7cd3-80fa-8431bf5f2657` (Economy and Production). Worktree: `/Users/marcio/git/Rising Lands/worktrees/re-economy`. Branch: `feat/re-economy`. Organization base: `6634be3af2d255846a847d8aa21ad4edf1cdb589`. Implementation commit: `f5a5e9b` (`Reconstruct troop completion preparation and cargo credits`); the following handoff commit and serialized integration result are identified in the completion chat. Only economy-owned paths changed.
 
+## State at 2026-10-30 07:15 (MacBook paused)
+
+- **On main:** Stages 27 and earlier (order setters, work cycle, cave/recruitment, sanctuary abandonment, hunger state 19, EnginRestaureEtat/BatimentEnleveMatiere/tag 19) and the order-setter report rebind `57099c0` (121 compared, 0 mismatches, rerun in Core's tree). Last Economy merge `41ab539`; `feat/re-economy` carries no unmerged Economy work. Summary table: [ECONOMY.md, Current state](../../docs/ECONOMY.md#current-state-2026-10-30-0715).
+- **Consumers:** AI/runtime wires `ordens_economia`, `ciclo_trabalho`, `caverna_recrutamento` (tag 17, cave body), `alimentacao.provedor_fome` (state 19) and `provedor_restauracao` (tag 19). Combat reads `BonusUnidades` for its turret providers. Core's S1 gap list defers EnginRestaureEtat to `provedor_restauracao`.
+- **Stage 28 (transport states 18/20) is not delivered.** No transport capture is committed. Parked, unvalidated, not on main: `origin/wip/re-economy-transporte` (`cc439b7`, Claude draft), `origin/wip/re-economy-transporte-0700` (`746e497`, Codex, adds static evidence and the Stage 28 note), `origin/wip/re-economy-0715` (`d41a17e`, Codex, adds the case-173 sentinel probe; its capture batch was stopped mid-run). Resume from the 0715 branch: rerun the smoke and capture batch under the heavy lease, commit the capture, then replay and rerun natively, and refresh the hunger/restore native reports for the changed `alimentacao.py`.
+- **Gate:** `scripts/check.py --domain economy` on the merged branch: 543 tests, 209 optional skips, 0 failures, docs OK (no native runs).
+
 ## Stage 27 (M3 S1): EnginRestaureEtat, BatimentEnleveMatiere, the cave meal and tag 19 (2026-10-30)
 
 Branch `feat/re-economy` (main `fcc0ba8` merged: Core's `fadiga_vegetacao`). Full contract: [ECONOMY.md](../../docs/ECONOMY.md#restoring-the-saved-state-the-cave-meal-and-the-tag-19-unload-m3-s1).

@@ -1,5 +1,35 @@
 # Combat handoff — 2026-10-30
 
+## State at 2026-10-30 07:15 (documentation only)
+
+The MacBook paused at 07:00. `feat/re-combat` was fast-forwarded and merged
+with main `3874fcc`; this entry changes only documentation. Every Combat
+delivery below is on main: turret providers `1be4209`, raid contact
+`aa82d33`, fight/death/recount `072481d` with evidence `608ac91`/`8e34403`,
+and the runner follow-up `1430883`. No Combat code is waiting to be
+integrated, and Combat has no parked `wip/*` branch.
+
+- **Coverage:** 1,186 fight/death/recount cases, 188 turret leaves and two
+  contact entries, all native, all with 0 mismatches. AI/runtime's
+  input-order differential with these providers (`3347a50`) has 124
+  compared, 117 equal and 0 mismatches; tag 14 is now equal.
+- **Consumers on main:** AI/runtime builds `OrdensTorresCombate` at first use
+  (`e4e9487`, `014452c`). Core reuses `LutaFatalViva`'s refuge provider for its
+  S1 gap and does not copy it.
+- **Original runs:** S1 wins (`82ec5ea`) and D1 loses (`bab6c7c`). D1's
+  player count `0x4e1a3a` reaches 0 at 15,555 through combat deaths only.
+  That matches this front's recount rule: no subtraction at death, the
+  count drops at the next phase.
+- **Open stops:** the mini runs the fatal windows after pass-2 S1 and the D1
+  packaging: S1 `--intervals 11000-12250` and D1 `--intervals 11250-11750
+  15250-15700`, pushed to `runs/combat/fatal-{s1,d1}`. The S1 first-fight
+  routines that still lack a live-state comparison are listed in
+  [COMBAT.md, Current state](../../docs/COMBAT.md#current-state-2026-10-30-0715).
+  The scope stops stay as listed in the M4 section below.
+- **Next:** compare the fatal windows against `LutaFatalViva` and the typed
+  fight APIs, translate the first divergence (original evidence first), then
+  serve AI/runtime's M3.1 S1 windows and M4.2 groundwork.
+
 ## M4 fight, death, removal and count phases (current delivery)
 
 Branch `feat/re-combat`, fast-forwarded to main `c7f86cd`. Original evidence
