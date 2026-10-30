@@ -1,6 +1,94 @@
 # Audio contract
 
-## M3 request provider and stream (2026-10-29)
+## Current state — 2026-10-30
+
+This section is the authoritative summary; the sections below keep their
+historical scope. Audio's last own delivery is `d634edd` (2026-10-29), on main
+since merge `cebd3da`. No Audio research ran overnight and no Audio WIP branch
+exists.
+
+**API on main.**
+
+- Stage 1 (bank readers and IMA ADPCM decoding): `bancos_som`, `adpcm_som`,
+  `criar_superficie_som` and `catalogo-amostras.json` (551 sounds, hashes only).
+- Stage 2 queue reference (Python, declared platform): waiting-slot indices,
+  request records, the declared-platform PCM slice, buffer reuse/promotion,
+  concurrent requests, resident/compressed sample bridge and the entry-word256
+  dictator lifecycle ([DICTATOR_CONTRACT](../pesquisas-paralelas/audio/DICTATOR_CONTRACT.md),
+  [QUEUE_COM_CONTRACT](../pesquisas-paralelas/audio/QUEUE_COM_CONTRACT.md),
+  [QUEUE_CONTINUATION](../pesquisas-paralelas/audio/QUEUE_CONTINUATION.md)).
+- M3 provider: `provedor_pedidos_m3_audio.SoundRequestProvider(memory, *, domain,
+  stream=None, capture=None)` is Core's callable `som(nome, registradores, pilha)
+  -> EAX` for PostSound `0x48aa79`, StopSound `0x48aac0` and Manage `0x48aaca`;
+  `LiveAudioMemory` adapts Core's live memory without copying
+  ([M3_REQUEST_CONTRACT](../pesquisas-paralelas/audio/M3_REQUEST_CONTRACT.md)).
+  Domains: `unopened-display` (the accepted private image, free caller handles)
+  and the initialized domain (exact committed queue fixture plus explicit
+  ordered platform answers). Everything else raises.
+- Stream: `fluxo_pedidos_audio`, schema `rising-lands/audio-request-stream/1`,
+  with an exact ordered comparator (no masks, sorting or deduplication).
+
+**Consumers on main** (owned by those fronts, not edited here):
+
+- Rust engine: `motor/crates/rl-core/src/player_audio.rs` ports the
+  unopened-display domain (Manage returns 1 and clears `0x498f5c`;
+  PostSound/StopSound return 0 after the free-handle check) behind ABI 1.5/1.6.
+  The engine's "normal sound" path uses it; initialized audio stops.
+- Combat: the raw fatal-fight/impact facade passes
+  `SoundRequestProvider(LiveAudioMemory(m), domain='unopened-display')` as `som`.
+- Core/AI-runtime: S1 Core-gap translations and the input chain record sound call
+  sites; Core's `consultas_luta` keeps complete sound-call registers (`a34f425`).
+  AI/runtime lists the provider as wired but not yet cross-checked against its
+  own `som` boundary (its HANDOFF, item 6).
+- macOS app: no playback. The app installs no audio substitute; sound remains a
+  declared non-execution boundary.
+
+**Validated coverage (all zero mismatches).**
+
+| Corpus | Cases |
+|---|---|
+| Stage-1 decoder (fresh native vs Python vs capture) | 551 bank sounds |
+| M3 display requests (original `37ad346`) | 58 calls (56 PostSound, 2 StopSound), all EAX 0 |
+| M3 replay v4 | 58 display + 111 initialized calls / 99 scenarios |
+| Queue continuation three-way | 139 entries / 132 scenarios |
+| Dictator three-way | 140 entries / 35 scenarios, one expected NULL-allocation/MessageBox stop |
+| Stream transport | M2.2 128 events / 257 phases; M2.3 9,200 events / 18,401 phases |
+| Raid reader audit (`2c8a0b9`) | 420/420 phase summaries and boundary logs, 0 private-library readers |
+
+Gate: `python3 -B scripts/check.py --domain audio` → 79 tests, 75 passed, 4
+optional native skips (rerun 2026-10-30 after merging main `3874fcc`). With
+`RISING_EMULAR=1` the full suite last passed 79/79 (2026-10-29).
+
+**S1 / M3.1 position.** The S1 coverage survey
+([S1_COVERAGE](core/S1_COVERAGE.md)) lists 6 Audio routines, all `boundary`, no
+gaps; S1's boundary log holds 177 PostSound requests. M3.1 does not need Audio
+beyond the declared boundary. M3_PLAN's Audio row (S1 request-log equality,
+app playback) is still open.
+
+**Open stops (owner).**
+
+1. S1 emitter equality: compare the ordered PostSound/StopSound/Manage stream
+   emitted by the reference/engine against S1's original boundary log (Audio,
+   after pass-2 S1 lands on `feat/re-missions`; emitters supply phase and
+   caller return address, today missing from Core's callback — Core).
+2. `PlaySnd_PostVolume` for busy caller handles (unit `+0x104` != -1) — Audio;
+   the adapter raises there.
+3. Real library initialization (`PlaySnd_InitSoundLib 0x48a89f`, DirectSound,
+   MessageBoxA `0x48c227`), wrapped/short Lock, asynchronous lifetime,
+   saturation/fault/stereo composition — Audio.
+4. Victory `PlaySnd_StopAllSound` and result-screen `MCICD_*` music (M3.2/M4) —
+   Audio with Missions.
+5. Playback in the macOS app from the decoded catalogue — macOS, consuming
+   committed Audio APIs only.
+
+**Next steps.** (1) When the pass-2 S1 package is on main, export S1's
+original boundary log in the stream schema and compare it with the engine's
+emitted stream. (2) Capture and translate PostVolume's busy-handle branch
+original-first. (3) Define the app playback contract (decoded region at the
+header rate/channels, no replacement audio, PT-BR voices byte-exact) with the
+macOS front.
+
+## M3 request provider and stream (delivered 2026-10-29, on main)
 
 The current Core-facing API is documented in
 [`M3_REQUEST_CONTRACT.md`](../pesquisas-paralelas/audio/M3_REQUEST_CONTRACT.md).
@@ -40,11 +128,11 @@ and is not exclusively audio. Native suite: 79 passed / zero skips; initialized
 three-way refreshes: 139 and 140 entries / zero mismatches, with one expected
 NULL-allocation/UI stop in the latter. No integration or acceptance is claimed.
 
-Owner: the Audio front (`feat/re-audio`, `worktrees/re-audio`). Owned paths are `pesquisas-paralelas/audio/` and this manual. Audio is a second-wave domain of the [MONDE01 roadmap](ROADMAP_MONDE01.md#second-wave). On 2026-10-28 the human approved anticipating it in the macOS chat while that chat waits for its M1 trigger. No eighth executor was created. When the coordinator triggers M1, the chat returns to the `macos` front and audio pauses at its last integrated stage.
+Owner: the Audio front (`feat/re-audio`, `worktrees/re-audio`). Owned paths are `pesquisas-paralelas/audio/` and this manual. Audio is a second-wave domain of the [MONDE01 roadmap](ROADMAP_MONDE01.md#second-wave), run by Codex sessions off the M3 critical path ([M3_PLAN](M3_PLAN.md)). (Historical: on 2026-10-28 the human approved anticipating it in the macOS chat before the M1 trigger.)
 
 Addresses apply to executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`. The normalized analysis PE (`26c4534b…64d0`) is analysis-only. The original sound banks are `INSTALHD/SOUND/{A,B,P}.HED` and `.SND` on the read-only CD copy (`../source/cd`); `TICKONE.WAV` sits at the CD root and is not part of the banks. `relatorios/fontes.json` does not list the sound files, so their sizes and SHA-256 are recorded in [`ambiente_audio.py`](../pesquisas-paralelas/audio/ambiente_audio.py) and the [audio manifest](../pesquisas-paralelas/audio/evidencias/som-manifesto.json). PT-BR voices and music are preserved byte-exactly. They are never re-recorded, translated or normalized, and no decoded audio is committed.
 
-Stage 1 is the integrated baseline. The independent 2026-10-29 continuation adds the bounded M2.2 audit, queue helpers and the declared-platform request/PCM slice below. Full stages 2 and 3 remain incomplete. Historical inventory and handoff sections retain their original scope; the current API is defined in the final section.
+Stage 1 is the integrated baseline. The 2026-10-29 continuations added the bounded M2.2 audit, queue helpers, the declared-platform request/PCM slice, reuse/concurrency, the dictator lifecycle and the M3 provider; all are on main. Full stages 2 and 3 remain incomplete. The current API is summarized in [Current state](#current-state--2026-10-30).
 
 ## Original subsystem inventory (symbols from the original SBL)
 
@@ -153,15 +241,15 @@ python3 -B pesquisas-paralelas/audio/catalogo_som.py
 
 ### Remaining gaps
 
-- **Queue and lifecycle not reconstructed.** `PlaySnd_InitSoundLib` beyond the path/open order, `PlaySnd_PostSound` dispatch into `HandlSnd_Insert`, all queue tables, `BanqSon_Close`/`Free*` and `DSB_Destroy`.
+- **Queue and lifecycle (superseded in part).** PostSound dispatch into `HandlSnd_Insert`, the waiting/LSB/PSB tables, reuse/promotion and the dictator lifecycle were later reconstructed for their declared domains (sections below). Still open: `PlaySnd_InitSoundLib` beyond the path/open order, `BanqSon_Close`/`Free*` and `DSB_Destroy`.
 - **DirectSound is modeled only as fixture semantics.** The fixture treats the lock pointer as direct buffer memory and fills new buffers with `0xcd`. Real buffer content after creation, hardware-buffer lock copies and playback are not reconstructed. The decoder's writes past the locked length depend on that lock-pointer behavior.
 - **Pending binding migration.** The bindings live in `bancada_som.py` and will migrate to core's generic binding facility when Stage 15 commits it.
 
 ## Stages
 
 1. **Bank format and sample decoding.** Complete; see above.
-2. **Request queue state.** Original-first inventory is in progress; see the [stage-2 plan](#stage-2-requestqueue-original-first-inventory). `PlaySnd_PostSound`/`PlaySnd_Manage` with the `HandlSnd_*`, `LSB_*`, `PSB_*` and `WaitSnd_*` tables must be compared natively as whole-table state. DirectSound buffer creation, playback and position queries remain explicit boundaries. Afterwards, the emitting owners can consume it in place of their pending descriptors.
-3. **Game-side emitters** (`TryLanceAttaqueSound`, `VoixOffAsk`) and the volume/visibility rules, coordinated with combat and economy.
+2. **Request queue state.** Reconstructed for declared domains and on main: waiting indices, request records, reuse/promotion, concurrency, the dictator lifecycle and the M3 provider (unopened-display and initialized fixture domains). Combat and the Rust engine consume the provider. Open: PostVolume, real device initialization, asynchronous lifetime and saturation/fault paths; DirectSound creation, playback and position queries stay explicit boundaries.
+3. **Game-side emitters** (`TryLanceAttaqueSound`, `VoixOffAsk`) and the volume/visibility rules, coordinated with combat and economy. Next: S1 stream equality against the original boundary log (177 PostSound requests).
 
 ## Validation
 
@@ -480,7 +568,7 @@ is played and no M2.3/M3 milestone status changes. Exact gates and the required
 native application build outcome are recorded in the handoff.
 
 
-Latest exact build at `f328a5f` over main `a7427fd` ran80 consumer tests:
+Historical (superseded; main now pins Graphics 1.9 and the app builds and plays under ABI 1.6): latest exact build at `f328a5f` over main `a7427fd` ran80 consumer tests:
 78 passed and2 failed with the explicit Graphics1.2/1.3 mismatch, before
 compilation or AppKit. First logs are preserved; no app change/retry occurred.
 Audio gate remains69 discovered/66 passed/3 optional baseline skips/0 failures;
