@@ -50,6 +50,8 @@ Every probe below was run twice from the same input file, and both runs gave equ
 | `fronteiras.jsonl` | the `PlaySnd_*`/`MCICD_*` calls |
 | `.local` snapshots | taken at input-listed frames, at order frames, at the first CreerBatiment/AL = 1/`MenuInit(0x13)`, every 1,000 frames and at the end |
 
+**Snapshot size.** `correr` drops the binding-event log (`delta_estado_missao.compactar_eventos`) and the boundary log after writing each frame's records. A snapshot is about 26 MB at any frame. Before this change the binding log grew by about 34 MB per 500 frames, so S1 snapshots reached about 0.8 GB by frame 11,500. With the change, a P1 rerun gives records equal to the committed P1 capture, and a run resumed from its frame-250 snapshot reproduces frames 251–629.
+
 **Run time.** About 0.5 s/frame per job on the Mac mini with 4–5 jobs. P4 and P5 ran beside 6–8 other jobs at about 0.55 s/frame.
 
 ## Probes
