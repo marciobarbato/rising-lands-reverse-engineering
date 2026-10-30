@@ -1,0 +1,16 @@
+[lease] graphics-harvest-P5-d waiting
+[lease] graphics-harvest-P5-d granted slots [4]
+P5 1929 isolated original origin (31, 0) returned
+P5 1950 native surface/state equal
+P5 2000 native surface/state equal
+P5 2050 native surface/state equal
+P5 2100 native surface/state equal
+P5 2150 native surface/state equal
+P5 2200 native surface/state equal
+P5 2250 native surface/state equal
+P5 2300 native surface/state equal
+P5 2350 native surface/state equal
+P5 2400 native surface/state equal
+P5 2450 native surface/state equal
+P5 2500 native surface/state equal
+{"probe": "P5", "frames": [1929, 2528], "status": "complete", "seconds": 317.009, "drawn": 600, "snapshot": {"path": ".local/graficos-api17-start/P5-02528.pickle", "sha256": "ff0a304d674e4f302a7285f8bea099c7f083d0d620aef1cbab638220dba8ac3a"}, "text_boundaries": 600, "text_pointer_reads": 600}
