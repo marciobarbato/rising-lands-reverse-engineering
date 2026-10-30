@@ -19,8 +19,11 @@ copied or edited), over the same memory object ``m`` (``u8/u16/u32`` and ``vista
 - the caller's declared input answers (``janelas``): GetAsyncKeyState, GetCursorPos; its allocator
   (``alocar``) for MemAlloc's GlobalAlloc/GlobalLock; and the sound-library boundary (``som``) for PlaySnd_PostSound/PlaySnd_StopSound.
 
+Combat ``ordens_torres_combate.OrdensTorresCombate`` (when importable): BatimentPeutAttaquer (else this front's
+type prefix, turrets a named stop) and BatimentInitAttaqueSelect.
+
 Not provided (named dependencies, raised at their original call): SetDechargeCaveEnginSelect,
-InitRecruteTroupe, BatimentInitAttaqueSelect, BatimentPeutAttaquer (Combat), SacGetCapacite, MiniMapSetPos
+InitRecruteTroupe, SacGetCapacite, MiniMapSetPos
 (MiniMapRecentre), and BatimentPosable/EnginSelectPeutEntrer while Core's ``construcao_core``/``entrada_estruturas``
 are not importable.
 """
@@ -267,6 +270,14 @@ def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None, estrutura
     from entrada_ordens_ia import batiment_peut_attaquer_prefixo
     funcoes['BatimentPeutAttaquer'] = lambda regs: batiment_peut_attaquer_prefixo(
         m, {k: regs.get(k, 0) & M32 for k in REG7})
+    try:
+        from ordens_torres_combate import OrdensTorresCombate
+    except ImportError:
+        pass
+    else:
+        # Combat's turret providers (BatimentPeutAttaquer, the whole routine, and BatimentInitAttaqueSelect for
+        # tag 14), over the live memory with Economy's live BonusUnidades (Combat's default).
+        funcoes.update(OrdensTorresCombate(m).provedores())
     funcoes['GetStatusRecrute'] = lambda tipo, jogador: recrutamento().status(tipo, jogador)
     if donos is not None:
         # The M3 owners (``DonosM3``): group selection and view (tags 0xb/0xc, the group key), the minimap
@@ -304,6 +315,8 @@ class DonosM3:
       (named stops at their call): BatimentEnleveMatiere, EnginRestaureEtat (Economy); TerrainGetSacType is this
       front's leaf ``entrada_quadro_ia.terrain_get_sac_type`` (checked against the original bytes under Unicorn
       over every object byte, ``testes/test_despacho_donos_ia``);
+    - Core ``incursao_core``: SetMiniMap (``definir_minimapa``; CalculWorkEngin's mode 4 at 0x44c437) and, once
+      published, TerrainEstGc (``terreno_esta_gc``, CalculWorkEngin 0x44d8cd);
     - Core ``fadiga_vegetacao.FadigaVegetacao`` (``fadiga``, when importable): EnginSetFatigue, ChercheVegetLibre,
       ChercheTypeBatimentProximite, EteintTerrain (Economy's SortieTroupe abandonment), TestRessource through
       ``externo``.
@@ -381,6 +394,18 @@ class DonosM3:
             entrada = {k: regs.get(k, 0) & M32 for k in REG7}
             saida = self.ee.chamar(nome, entrada)
             return {k: saida[k] & M32 for k in REG7 if k in regs or saida[k] & M32 != entrada[k]}
+        if nome == 'SetMiniMap':
+            # Core's ``incursao_core.definir_minimapa`` (AL owner, DL mode, BX cell; mode 4 translated, the mode
+            # CalculWorkEngin passes at 0x44c437): EAX rows, EBX pixel cursor, EDX; other registers kept.
+            import incursao_core
+            saida = incursao_core.definir_minimapa(self.m, regs['EAX'] & M32, regs['EDX'] & M32, regs['EBX'] & M32)
+            return {k: v & M32 for k, v in saida.items() if k in REG7}
+        if nome == 'TerrainEstGc':
+            import incursao_core
+            if not hasattr(incursao_core, 'terreno_esta_gc'):
+                raise DependenciaIA(nome, chamada)
+            # Core's TerrainEstGc 0x4762b9: EAX = 0/1 (upper bits 0), EDX pushed and popped, nothing else.
+            return dict(EAX=incursao_core.terreno_esta_gc(self.m, regs['EAX'] & M32)['EAX'] & M32)
         if nome == 'TerrainGetSacType':
             # This front's leaf (``entrada_quadro_ia.terrain_get_sac_type``, read-only, every register).
             from entrada_quadro_ia import terrain_get_sac_type
