@@ -264,7 +264,7 @@ class DominioIsoladoTest(unittest.TestCase):
                     elif c['case'].startswith('visible') and c['case'].endswith('_state_5'):
                         p = c['case'].split('_')
                         vistos.add((int(p[1]), int(p[2])))
-        self.assertEqual(vistos | {(4, 6)}, set(e.ORIGENS_RESTOREALL_PROVADAS))
+        self.assertEqual(vistos | {(4, 6)}, set(e.ORIGENS_ANTERIORES['RestoreAll']))
         base=Path(__file__).resolve().parent/'evidencias'
         for name in ('sonda-origens-K1-129-189.json.xz.origins.json',
                      'sonda-colheita-P4-129-728.json.xz.origins.json',
@@ -273,7 +273,11 @@ class DominioIsoladoTest(unittest.TestCase):
                 self.assertTrue(case['returned']);self.assertEqual(case['declared_writes'],[])
                 self.assertEqual(case['surface_sha256'],case['published_phase_sha256'])
                 vistos.add(tuple(case['origin']))
-        self.assertEqual(vistos | {(4, 6)}, set(e.ORIGENS_PROVADAS))
+        self.assertEqual(vistos | {(4, 6)}, set(e.ORIGENS_ANTERIORES['AffGame']))
+        # The additive exact grid has its own native capture ledger and current-provider comparison.
+        grid=json.loads((base.parent/'validacao/grade-vistas19-provider-final.json').read_text())
+        for name,domain in (('AffGame',e.ORIGENS_PROVADAS),('RestoreAll',e.ORIGENS_RESTOREALL_PROVADAS)):
+            self.assertEqual(set(map(tuple,grid['origins_by_routine'][name])),set(domain))
 
     def test_m22_origins_accepted(self):
         for o in ((3, 5), (2, 4), (1, 3), (0, 2), (0, 1)):

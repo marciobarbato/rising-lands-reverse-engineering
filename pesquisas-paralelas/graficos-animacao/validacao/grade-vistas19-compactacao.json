@@ -1,0 +1,20 @@
+{
+ "schema": "rising-lands/native-view-observer-compaction-check/1",
+ "cases": 2,
+ "equal": 2,
+ "mismatches": 0,
+ "opening_inputs_equal": true,
+ "captures_sha256": {
+  "grade-vistas19-0000.json.xz": "88770a67b23c2e0ef28a20b5d07651e8f6ef2f6b7748a96f8cd1438231735643",
+  "grade-vistas19-compactacao-prova.json.xz": "d3baf38b830b6df2bdfce1890be1828c9917ff3bf8f2f4a8337624359416c4a7"
+ },
+ "producer_sha256": "f5ec2bab3f81578c4b7978b28560fe7f4139163491780cc38a47c123880b6f17",
+ "native_state_sha256": "eb714f7d5a694ad91bab9b41c37a28860006c89be03f9170e3b312064a4b04b2",
+ "host_observer_compaction": {
+  "discarded_events": 106458,
+  "logical_event_count": 106471,
+  "pickle_bytes_before": 45589347,
+  "pickle_bytes_after": 15259965,
+  "native_state_sha256": "eb714f7d5a694ad91bab9b41c37a28860006c89be03f9170e3b312064a4b04b2"
+ }
+}

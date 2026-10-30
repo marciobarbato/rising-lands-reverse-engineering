@@ -1,0 +1,14 @@
+[lease] graphics-cave-projectile-focused waiting
+[lease] graphics-cave-projectile-focused granted slots [1]
+test_corrected_native_writer_reader_passes (test_cave_logica_m3.CaveLogicaM3) ... ok
+test_current_structure_domain_report_and_origins (test_cave_logica_m3.CaveLogicaM3) ... ok
+test_fresh_native_128_hud_retains_every_prior_hash (test_cave_logica_m3.CaveLogicaM3) ... ok
+test_original_complete_projectile15_cycle_and_guard (test_cave_logica_m3.CaveLogicaM3) ... ok
+test_original_complete_projectile16_cycle (test_cave_logica_m3.CaveLogicaM3) ... ok
+test_p4_484_original_text_boundary_has_no_glyph_execution (test_cave_logica_m3.CaveLogicaM3) ... ok
+test_unproved_cave_domain_stays_stopped (test_cave_logica_m3.CaveLogicaM3) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 6.336s
+
+OK

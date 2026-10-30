@@ -4,7 +4,41 @@ Owner: the AI and Runtime front (`feat/re-ai-runtime`, `worktrees/re-ai-runtime`
 
 Every address applies to the intact executable SHA-256 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`, the only execution oracle. The normalized analysis PE `26c4534b08b7fdda30c4f5c4b0d665c3f57cd24db3ab3737dd1e0e9c625464d0` is a different identity and was not read for any interval below. Routine names are the original SBL names decoded by core's `simbolos_ia`.
 
-**Current scope:** Stage 1 established the original-byte contract. Stage 2 recovers the `IaReset`, `IaAlloc` and uncalled `IAResetAttaque` table providers, with the bounded evidence described below. M2 adds the frame inventory at the M1 post-load state, 46 native captures at that input, the CalculGame frame-body skeleton, and the two dispatcher loops with IATestUtilite (sections at the end). EnginNextEtape/BatimentNextEtape bodies, AI kernels (AvanceMonstre first) and world operations are not implemented yet.
+**Current scope:** Stage 1 established the original-byte contract and Stage 2 the AI table providers (`IaReset`, `IaAlloc`, `IAResetAttaque`). M2 composed the whole frame (CalculGame, both dispatchers, the AI kernels reached by MONDE01) and proved it whole-state against the original through the first raid (M2.2, M2.3). M3.1 adds the input path (InputGame → SetPlayerOrdre → ProcessInputGame → setters) and the per-window input chain; its P1/P2 part is accepted. The current state, API and open stops are summarized in the next section; the later sections are the historical record, stage by stage.
+
+## Current state (2026-10-30, resumed front)
+
+**Milestones.** M2.2 (257/257 phases) and M2.3 (18,401/18,401 phases, frames 0–9,200 through the first raid) are accepted. **M3.1 P1/P2 is accepted at main `c9c85eb`**: P1 1,002/1,002 and P2 1,202/1,202 phases whole-state, zero crossings, reproduced on the MacBook and the Mac mini with identical chain hashes ([M3_1_PROVA_P1_P2.md](../pesquisas-paralelas/ia-runtime/M3_1_PROVA_P1_P2.md), `validacao/m3-1-prova-p1-p2.json`). The strict P6 proof is now recorded (4,544/4,544 phases, zero crossings, clean source `01c4319`); second-machine reproduction and coordinator acceptance remain pending. S1 windows are open.
+
+**Resumed delivery.** Starting source `f8bb719` includes current main `00afd4b`; the native tag-19 replay refresh is pushed at `01c4319`, and the strict P6 proof at `5568c00`. The S1 frame-2547 finding and bounded production-route fix are described below. Codex pushes only the feature branch; main integration and acceptance remain coordinator-owned.
+
+**API (input chain).**
+- `provedores_entrada_ia.DonosM3(m, *, som, bonus=None, mensagem_unidade=None)`: one instance of each owner provider over one live memory (Core `entrada_estruturas`, `visao_grupos`, `buscas_bloqueios.provedor_buscas`, `consultas_estado_core.provedor_consultas_estado`, `provedores_lacunas_core.provedor_lacunas_s1`; Economy `caverna_recrutamento`, `ciclo_trabalho`, `alimentacao.estado_fome`, the restoration provider; Combat's turret providers and `refugio_registradores`). `externo(nome, chamada, regs)` routes every named dependency to its owner with the full register file; `rotina_core(nome)`, `.fome`, `.fadiga`, `.ordens()`, `registros(nome)`. Core's `_incertos` registers are carried, never invented; strict calls refuse an absent or nominal ESP.
+- `provedores_entrada_ia.provedores_vivos(m, *, janelas, som, ..., donos=)` and `construcao_viva(...)` bind the live providers for the validators and the window proofs; `construcao_entrada_ia.instalar_donos(m, p, donos, tabelas)` installs the cave body, BatimentIllumine/Decouvre, unit states 5/13/19 and EnginSetFatigue.
+- `composicao_entrada_ia.ComposicaoEntrada` runs a window's scripted inputs over the M2 frame composition; `mensagem_unidade` is iagUnitSendMessage.
+- `provar_entrada_janelas_ia.py janela | agregar | tudo [--partes] [--diagnostico-planejamento] --lease <heavy_lease.py> | fixar <W> --ref <missions ref> | reproduzir`. Planning mode lets Graphics planning stops through; its output stays under `.local/` and is never acceptance evidence.
+
+**Validated coverage (native, 0 mismatches).**
+
+| Check | Cases / phases | Equal | Named stops | Mismatches |
+|---|---:|---:|---:|---:|
+| Input orders (`validar_entrada_ordens_ia.py`) | 124 | 118 | 6 | 0 |
+| Deposit pages (`validar_paginas_deposito_ia.py`) | 203 | 203 | 0 | 0 |
+| Construction/keys (`validar_construcao_teclas_ia.py`) | 90 | 85 | 5 | 0 |
+| M3.1 P1 / P2 whole state | 1,002 / 1,202 phases | all | 0 | 0 |
+
+Input orders were freshly rerun on `f8bb719` (containing main `00afd4b`): tag 19 now completes through Economy's restoration provider, with full original equality; all native load/frame/code reproductions pass. The other leaf counts remain the committed reports at `946685b`. Remaining leaf stops: six unloaded-text cases (`0x478a47`), `BatimentHabitable` (`0x41d000`), `SetMurAllentour` (`0x41d012`), `SetEnginSelectRentreEngin` (`0x45f17a`), `iagUnitSendMessage` (`0x41da48`) and VK_SUBTRACT/MiniMapRecentre (`0x41843e`).
+
+**Window reach (indicators unless stated).** P6 planning whole-state 4,544/4,544 phases through frame 2400 (diagnostic). K1 strict complete through 629, P5 strict complete through 3129, P3 planning 3,001/3,001 through 3129. Uncommitted local runs at `d2777b1` (logs under `.local/`, not evidence) show P3 and P4 strict complete through 3129; P7 strict through 3216 and S1 strict (pass-1 indicators) through 2057, both stopping on Graphics' AffGame view origin at `0x415b77`; S1 planning through 2546 with a first difference at 2547 in `objective.structures`; strict P6 parts 1 and 2 equal (2,000 and 544 phases, chains `5da71fab…` and `c557167f…`) while part 0 was cut off at the pause.
+
+**Open stops and owners.**
+- P6 reproduction (Mac mini/coordinator): strict proof [m3-1-prova-p6.json](../pesquisas-paralelas/ia-runtime/validacao/m3-1-prova-p6.json) is equal in all three parts (2,000 + 2,000 + 544 phases, frames 129–2400), with zero crossings and matching checkpoints; reproduce its three part chains on the mini before acceptance.
+- S1 windows (Missions → AI/runtime): wait for the pass-2 S1 capture from the Mac mini, then `fixar S1 --ref origin/feat/re-missions`, commit the pin, and run `tudo --janelas S1` in strict and planning modes.
+- Graphics: AffGame vegetation/terrain handlers proved only on sampled view origins (`0x415b77`); `feat/re-graphics` carries the finite-origin validation not yet on main.
+- S1 frame 2547: [production finding](../pesquisas-paralelas/ia-runtime/S1_2547_PRODUCTION.md). AI/runtime silently discarded a recruit-preparation handoff; the input composition now calls Economy's full type-1/2 producer. Planning indicators remain equal through 2546, then stop before Core's unbound `EnginSetType` at CALL `0x420f69`. Economy must also carry the missing BL direction in that callback. Six bounded native prefixes match; this is not completed S1 recruitment or pass-2 equality.
+- Core/Economy/Combat leaf stops listed above.
+
+**Next dependencies.** Coordinator review/integration and second-machine P6 reproduction; Economy's BL callback fix, Core's production callbacks and AI/runtime's city-message provider as documented in the finding. S1 whole-state validation still needs the pass-2 capture. No later task was started in this delivery.
 
 ## Evidence
 
@@ -409,7 +443,7 @@ The preserved WIP capture has 19 cases: 11 complete IaReset entries, three IaAll
 
 APIs are published only after original comparison. They follow the repository conventions: explicit inherited buffers with exact widths, read-only query callbacks, effect callbacks named after original routines, named dependency exceptions carrying the original call address, partial effects retained.
 
-| Entry (Stage 2 delivered; others planned) | Original | Inputs | Result |
+| Entry (Stage 2 delivered; others planned at the time — the current input-chain API is under "Current state") | Original | Inputs | Result |
 |---|---|---|---|
 | `iniciar_ia_programa(memoria, provedores)` | `IaAlloc 0x47fb15` | RNG clock binding, rule-file provider | Original EAX; ordered constant stores and RNG seed |
 | `reiniciar_ia(memoria, provedores)` | `IaReset 0x47f36e` | Player table, Recherche, unit, structure and resource queries, mission number | Original EAX; ordered stores into inherited regions |
@@ -799,3 +833,9 @@ The state-11 walk, the creation at 220 and the WndProc/key paths are now checked
 - The round-1 and round-2 differentials were rerun after these changes: 0 mismatches.
 
 **Next:** the whole-state proof over the P1/P2 pass-2 windows, then P6, and the Core vision/groups and structure-entry wiring (see the HANDOFF).
+
+## M3.1 continuation — integrated baseline and provider regressions (2026-10-30)
+
+The later M3.1 wiring, hunger path, accepted P1/P2 proof and current dependency sequence are recorded in the latest [AI/runtime handoff](../pesquisas-paralelas/ia-runtime/HANDOFF.md). Fresh native regressions on main `e70fda3` compare 417 cases: **405 equal, 12 explicit dependency stops, zero mismatches**. Input orders are 117/124 equal, deposit pages 203/203, and construction/keys 85/90; the reports under `validacao/` retain each stop and current source provenance. All native load/frame/code reproductions pass. The leased AI/runtime gate passes 120 tests with eight explicit native skips.
+
+This continuation changed validation records only; APIs, supported domains and ordered effects were unchanged. At the time Core `5422338` and Graphics' CAVE/construction-projectile guards were not yet on main; both have since landed (main `71335aa`), so only Missions' S1 pass-2 window is still awaited. See "Current state" for the follow-up.

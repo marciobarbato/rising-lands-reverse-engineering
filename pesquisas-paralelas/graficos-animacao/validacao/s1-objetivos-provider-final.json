@@ -1,0 +1,78 @@
+{
+ "schema": "rising-lands/s1-objectives-comparison/1",
+ "cases": 7,
+ "equal": 7,
+ "mismatches": 0,
+ "boundary_contract": "AffObjectif executes real font1 glyphs; no AffText, LoadPie or text callback in these calls",
+ "capture_sha256": "167239f1d663db48d000bc4e5048e42b68e3da64294f8d4d61a9196f0a742de3",
+ "sources_sha256": {
+  "texto_bitmap_nativo.py": "a87ade72ad9affa5f26d81467d0097117dee2d44e0b20af631f538f073819121",
+  "telas_objetivos_s1.py": "f8911a2339d9407ed2a0dcdded1b7b04c6fcd22253a41de41aab5d91cb43f9f5",
+  "validar_objetivos_s1.py": "efb189a38ad19edf2f578265206c111398262575631f01feeae5d1f20cbc6456"
+ },
+ "rows": [
+  {
+   "frame": 17044,
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "dgroup_mismatches": [],
+   "drawing_calls": 217,
+   "sha256": "43ab5b4c468ac36b4c1027d4542b880593ce813fb3008395e947b095297e78cf"
+  },
+  {
+   "frame": 17045,
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "dgroup_mismatches": [],
+   "drawing_calls": 217,
+   "sha256": "43ab5b4c468ac36b4c1027d4542b880593ce813fb3008395e947b095297e78cf"
+  },
+  {
+   "frame": 17046,
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "dgroup_mismatches": [],
+   "drawing_calls": 217,
+   "sha256": "43ab5b4c468ac36b4c1027d4542b880593ce813fb3008395e947b095297e78cf"
+  },
+  {
+   "frame": 17047,
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "dgroup_mismatches": [],
+   "drawing_calls": 217,
+   "sha256": "34de5ac4c016c61b8a8ab972878f199c1bd9e7b81b6d70d7d8cbde98730d897d"
+  },
+  {
+   "frame": 17048,
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "dgroup_mismatches": [],
+   "drawing_calls": 217,
+   "sha256": "34de5ac4c016c61b8a8ab972878f199c1bd9e7b81b6d70d7d8cbde98730d897d"
+  },
+  {
+   "frame": 17049,
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "dgroup_mismatches": [],
+   "drawing_calls": 217,
+   "sha256": "34de5ac4c016c61b8a8ab972878f199c1bd9e7b81b6d70d7d8cbde98730d897d"
+  },
+  {
+   "frame": 17050,
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "dgroup_mismatches": [],
+   "drawing_calls": 217,
+   "sha256": "2f919941a33b4494f61f1950583b9c447a140a8f56e74903a7dfb8c10e3b0510"
+  }
+ ]
+}

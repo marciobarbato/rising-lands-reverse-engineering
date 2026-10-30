@@ -1,6 +1,6 @@
 # Consolidated progress — MONDE01
 
-Round: **CXR-20261030-M3R2 (M3 round 2 — M3.1 P1/P2 part ACCEPTED at `c9c85eb`; S1 wins MONDE01 on the original)**. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)); M2.1 at `32bb391`; M2.2 at `b9f4b5d`; **M2.3 and M2 at `ea62eb4`** ([record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json)); **M3.1 P1/P2 part at `c9c85eb`** ([record](../integracao/validacao/cxr-20261030-m3r1-m3-1-p1-p2-acceptance.json)). Handover: [HANDOVER_CLAUDE_20261030](HANDOVER_CLAUDE_20261030.md). [Roadmap](ROADMAP_MONDE01.md), [M3 plan](M3_PLAN.md), [snapshots](progress/README.md).
+Round: **CXR-20261030-M3R2 (M3 round 2 — M3.1 P1/P2 part ACCEPTED at `c9c85eb`; S1 wins MONDE01 on the original)**. M1 accepted at `927c7e5` ([record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json)); M2.1 at `32bb391`; M2.2 at `b9f4b5d`; **M2.3 and M2 at `ea62eb4`** ([record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json)); **M3.1 P1/P2 part at `c9c85eb`** ([record](../integracao/validacao/cxr-20261030-m3r1-m3-1-p1-p2-acceptance.json)). Handover: [HANDOVER_CLAUDE_20261030_0700](HANDOVER_CLAUDE_20261030_0700.md). [Roadmap](ROADMAP_MONDE01.md), [M3 plan](M3_PLAN.md), [snapshots](progress/README.md).
 
 ## Resumo executivo
 
@@ -11,6 +11,8 @@ Round: **CXR-20261030-M3R2 (M3 round 2 — M3.1 P1/P2 part ACCEPTED at `c9c85eb`
 - **App macOS (main `2e6bb27`):** ABI 1.4 e modo jogo sem auditoria: 60 quadros de jogo/s pedidos e mantidos, tela a ~120 fps; sem limite, 69 quadros/s. O gargalo é a lógica Rust (10,3 ms/quadro), em otimização.
 - **Também na `main`:** Gráficos 1.9 (K1 501/501, P4 e P5 3.001/3.001 telas iguais); Core (minimapa do quadro 125 explicado — era um registrador EDX não passado por Economia —, fadiga, busca de vegetação, apagar luz); Economia (saída de tropas, fome/estado 19, abandono do santuário, ciclo de trabalho 403 iguais / 0 divergências).
 - **Derrota (M4.2):** o gatilho está identificado no código (contagem de unidades do jogador em `0x4e1a3a` chega a 0; só a morte em combate reduz). Um grupo do jogador vence a incursão; a captura D1 com unidades espalhadas está em busca no mini.
+
+- **Também durante a madrugada:** derrota D1 no original (contagem de unidades 0 no quadro 15.555, resultado 0 e ramo de falha no 15.655); motor Rust com modo jogo ABI 1.6 (lógica 0,26 ms/quadro, lógica+tela 0,65 ms, conferido pelo coordenador); app macOS com ordens do jogador e Teste A (metade de estado) igual até as paradas do motor; Core fechou as 16 lacunas do S1 (1.956 casos nativos); Combate traduziu a luta até a morte. Desenvolvimento na MacBook pausado às 7h de 30/10; o Mac mini segue com o passo 2 do S1 e o replay do D1.
 
 **M3 em andamento (rodada M3R1, 29/10 à noite).** Nenhum critério do M3 foi aceito ainda, mas todas as peças avançaram com validação contra o original:
 - **Capturas com entrada no original (Mac mini):** sondas P1 (seleção), P2 (movimento), P3 (ordem e construção da caverna, pronta no quadro 1812), P6 (colono entra na caverna no quadro 2178: dono 0xc8 → 0 e 1º objetivo marcado), P7 (entrega com Ctrl, 1º crédito no quadro 3604) e K1 (teclas), cada uma idêntica em duas execuções; capturas de estado completo (passo 2) de P1, P2 e P6. A vitória não cabe antes da incursão do quadro 9000; o roteiro S1-b (recrutar 2 construtores e 4 trabalhadores) está em execução, com vitória estimada perto do quadro 13–14 mil.
@@ -41,19 +43,20 @@ Nesta rodada a referência original foi integrada (`14c0122`) e a composição P
 
 **Próximo resultado concreto (M2):** um oracle de quadros a partir do estado M1 aceito. São N quadros de `CalculGame 0x42c868` sem entrada humana, com comparação de estado completo por quadro. A mesma técnica do oracle de M1 deve servir aqui.
 
-## M3 status (live, checkpoint 2026-10-29 night)
+## M3 status (live, 2026-10-30 07:00)
 
-No M3 criterion is accepted. Evidence and deliverables by criterion (docs/M3_PLAN.md §1):
+**M3.1 P1/P2 part accepted** at `c9c85eb` ([record](../integracao/validacao/cxr-20261030-m3r1-m3-1-p1-p2-acceptance.json)); every other M3/M4 criterion is open. Per-criterion detail: [M3 plan status](M3_PLAN.md#status-2026-10-30-0700).
 
-| Criterion | Original capture | Implementation | Proof state |
-|---|---|---|---|
-| M3.1 input path | Probes P1, P2, P3, P6, P7, K1 (Missions `pesquisas-paralelas/missoes/m3/sondas/`), each replay-equal on two native runs; pass-2 whole-state windows P1 (129–629), P2 (129–729), P6 (129–2400) with published policies | AI/runtime `entrada_ordens_ia.py`, `construcao_entrada_ia.py`, `composicao_entrada_ia.py` (417 native leaf cases, 0 mismatches); Core selection/orders, construction, structure entry, vision/groups (1,117 cases, 0 mismatches); Economy setters, work cycle, cave body and recruitment (870 calls, 0 mismatches) | Indicator-level chain: P1 501/501, P2 601/601, P3/P6/P7 to frame 219, P4 to 421, P5 to 571, K1 to 140. Whole-state proof of P1/P2 is the next deliverable |
-| M3.2 live frames | Probe phase-end surfaces | Graphics render API 1.8 | Full surfaces equal: P1 501/501, P2 601/601, P3 3001/3001, P6 2272/2272, P7 3572/3572, K1 501/501 (AffText boundary); P4/P5 not run |
-| M3.3 app equivalence | — | macOS app on the Rust engine and renderer; event mapper and recorder | Test A answer-stream half 155,597/155,597; state-hash half waits for engine orders; Test B not run |
-| M3.4 end detection | P6 marks `0x4e1d88`=1 at frame 2178 | `fim_missao.py` | Not yet chained past frame 220 |
-| M3.5 rate | — | App 40.9 fps real UI (Rust logic 11 ms, render 4.5 ms) | Above the proposed 25 fps |
+| Criterion | Original capture | Proof state |
+|---|---|---|
+| M3.1 input path | Probes P1–P7, K1, each replay-equal on two runs; pass-2 P1/P2/P6; S1 victory (`82ec5ea`), pass 2 in progress on the Mac mini | P1 1,002/1,002 and P2 1,202/1,202 phases (accepted). P6 strict proof stopped at `between_frames221` (Graphics guard, fixes now on main); P6 planning diagnostic 4,544/4,544. S1 windows wait for pass 2 |
+| M3.2 live frames | Probe phase-end surfaces; S1 end screens (20 calls, 100 surfaces) | Render 1.9 equal on P1–P7 and K1 (P4/P5 3,001/3,001), text as declared boundary; not yet over S1 |
+| M3.3 app equivalence | — | Test A answers 155,597/155,597; state half P1 501/501, P2 601/601, P3/P6/P7 91/91, K1 12/12 up to the Rust engine's stops; Test B not run |
+| M3.4 end detection | P6 sets `0x4e1d88` at 2178; S1 marks to victory | Planning diagnostic equal through 2178; strict proof waits for P6/S1 |
+| M3.5 rate (≥ 60 fps) | — | Met in play mode on current coverage: Rust logic 0.26 ms, logic+render 0.65 ms; app 60 game frames/s, display ~120 fps |
+| M4.1 / M4.2 | S1 victory on main; D1 defeat on `feat/re-missions` (`bab6c7c`), replay check on the mini | Chain proofs follow M3.1 |
 
-Main-blocking divergence: Economy's work-cycle composition with Core's providers leaves 196 minimap bytes different at frame 125 (DecouvreTerrain → SetMiniMap); owner Core.
+Unvalidated Codex work stopped at the pause is parked on `origin/wip/*` ([list](HANDOVER_CLAUDE_20261030_0700.md#preserved-wip-branches-unvalidated)).
 
 ## M2 status (live)
 

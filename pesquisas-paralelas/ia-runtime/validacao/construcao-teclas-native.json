@@ -207,7 +207,7 @@
  },
  "providers": "provedores_entrada_ia.provedores_vivos and construcao_viva (committed Core/Economy/Combat owners); EnginNextEtape: Core provedores_core + Economy BonusUnidades; sound requests return the EAX they receive (the frame bench declaration for PlaySnd_*)",
  "schema": "rising-lands/monde01-construction-keys-differential/1",
- "seconds": 137.452,
+ "seconds": 151.402,
  "source_sha256": {
   "ferramentas/chamadas_quadro_core.py": "d8b3568c3346422744868a2b7900e4afdbf84c85e840450f9da5ec863bbb626a",
   "ferramentas/minimapa_estruturas.py": "9907d894d5bd4e9ce22d41b8f72aa9dc7ca54fbcc606c504a4f4fb763a6c6adc",
@@ -217,9 +217,9 @@
   "pesquisas-paralelas/economia/ordens_economia.py": "48c8fd6d63b7acdf7883e1a6a5b913435c3e35ab8e5eae2925f9f4ee84d46e69",
   "pesquisas-paralelas/ia-runtime/capturar_construcao_teclas_ia.py": "2959d1a8e60f7446631238954d42c73d0f4c84af9d697dc0dc3f05f81d7c8a7f",
   "pesquisas-paralelas/ia-runtime/casos_construcao_teclas_ia.py": "19214b2dd35c969c8e5c4b093686035d0dded76f1113965287c7d912d0c33edb",
-  "pesquisas-paralelas/ia-runtime/construcao_entrada_ia.py": "b755643d67295e61e44485c6c26bb92eed43419d830bdaf6f1774140c779c388",
-  "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "ec5e1dbea911ab260c2f9441aee35d1cabdd11dcddd86e47c507ec2612a87798",
-  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "4ded79cded5227e461cc1ce6eac092ddc91a82d202a2cb5c3aeab8ab62d35110",
+  "pesquisas-paralelas/ia-runtime/construcao_entrada_ia.py": "14d8519f20e7fc4c6e0fefaef3258e5745a79af33aebcf443c10904efedfba08",
+  "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "0d3c50f9c07dcd4badb4d37217e3d6e8407c9146de968258addff2a2de982928",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "457415a632d998584866b65f18d52995d22255076a596dfc0aac25cbe8ba0d00",
   "pesquisas-paralelas/ia-runtime/proxima_etapa_quadro.py": "d9a3c39db33703c43d0cc16de2446b6cf860f894aa2d875a1828bbfda3f11f80",
   "pesquisas-paralelas/ia-runtime/validar_construcao_teclas_ia.py": "84ee8b219e3e7b0a604afd2398cf9347cf42c421b9d5f8bdc39867485d3db5e6"
  }

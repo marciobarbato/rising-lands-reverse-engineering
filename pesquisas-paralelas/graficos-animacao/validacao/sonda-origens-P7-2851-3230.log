@@ -1,0 +1,17 @@
+[lease] graphics-native-p7-real-origins waiting
+[lease] graphics-native-p7-real-origins granted slots [0]
+P7 2851 isolated original origin (10, 16) returned
+P7 2900 native surface/state equal
+P7 2950 native surface/state equal
+P7 3000 native surface/state equal
+P7 3050 native surface/state equal
+P7 3100 native surface/state equal
+P7 3150 native surface/state equal
+P7 3200 native surface/state equal
+P7 3217 isolated original origin (10, 15) returned
+P7 3218 isolated original origin (10, 14) returned
+P7 3219 isolated original origin (10, 13) returned
+P7 3220 isolated original origin (10, 12) returned
+P7 3221 isolated original origin (10, 11) returned
+P7 3222 isolated original origin (10, 10) returned
+{"probe": "P7", "frames": [2851, 3230], "status": "complete", "seconds": 215.898, "drawn": 380, "snapshot": {"path": ".local/graficos-api17-start/P7-03230.pickle", "sha256": "c5deeef57fa52a3e4cbf4e2e3e986ac46a9a5b0f1ea546a0364394247a941417"}, "text_boundaries": 206, "text_pointer_reads": 380}
