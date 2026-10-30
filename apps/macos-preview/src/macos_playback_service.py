@@ -15,8 +15,9 @@ class PlaybackInspectionService:
         self.playback = MacOSM22Playback.open(root)
         self.render_playback = self.playback.fork()
         self.live = None
-        from macos_input_recorder import MacOSInputRecorder
-        self.recorder = MacOSInputRecorder()
+        from macos_scripted_input import MacOSSessionRecorder
+        self.recorder = MacOSSessionRecorder(root)
+        self.recording = False
 
     def _render_to(self, index):
         if index < self.renderer.index:
@@ -31,26 +32,27 @@ class PlaybackInspectionService:
         operation = request.get('operation', 'open')
         if operation == 'read' and self.live is not None:
             return dict(read_hex=self.live.read(int(request['address'],0),int(request['size'])).hex())
+        if operation in ('record-start','record-stop','record-status'):
+            if operation == 'record-start':
+                from macos_scripted_input import MacOSSessionRecorder
+                self.recorder=MacOSSessionRecorder(self.playback.root)
+            if operation != 'record-status': self.recording = operation == 'record-start'
+            return dict(recording=self.recording,events=len(self.recorder.events),policy='record-only')
         if operation == 'record-event':
-            frame = max(129, (self.live.index+3)//2 if self.live else 129)
+            if not self.recording: raise ValueError('Gravação de entrada desativada')
+            frame = request['frame']
             self.recorder.event(frame,request['event'])
-            return dict(recorded=True,frame=frame,policy='record-only')
+            return dict(recorded=True,recording=True,frame=frame,events=len(self.recorder.events),policy='record-only')
         if operation == 'export-input':
-            return dict(input_journal=self.recorder.journal(),script=self.recorder.export_script(self.playback.root))
+            script=self.recorder.export_script()
+            if request.get('stop_frame') is not None:
+                if type(request['stop_frame']) is not int: raise ValueError('Export frame must be an integer')
+                script=self.recorder.export_script(stop_frame=max(script.stop_frame,request['stop_frame']))
+            return dict(input_journal=self.recorder.journal(),script=script.export(),script_text=script.export_bytes().decode('utf-8'))
         if operation == 'export-journal':
             return dict(input_journal=self.recorder.journal())
-        if operation in ('live-open','live-reset','live-step'):
-            if self.live is None:
-                from macos_live_session import MacOSLiveSession
-                payload = Path(__file__).resolve().parent
-                self.live = MacOSLiveSession(self.playback.root,payload/'librising_engine.dylib',
-                                            payload/'engine-inputs/RISING.EXE',self.renderer,self.playback.fork())
-            if operation in ('live-open','live-reset'): self.live.reset()
-            else:
-                # First load tail, then one pair per UI frame request.
-                count = 1 if self.live.index < 0 else 2
-                for _ in range(count): self.live.apply_frame()
-            return self.live.inspect()
+        if operation in ('live-open','live-reset','live-step','live-play'):
+            raise RuntimeError('NativeLivePathRequired: ABI 1.4 live control belongs to Swift/Metal')
         if self.live is not None:
             self.live.close(); self.live = None
             self.renderer.reset(); self.render_playback.reset()
