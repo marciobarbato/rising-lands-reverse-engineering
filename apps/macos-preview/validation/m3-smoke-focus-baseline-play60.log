@@ -1,0 +1,8 @@
+[lease] macos-smoke-prefixed-play60 waiting
+[lease] macos-smoke-prefixed-play60 granted slots [0, 1, 2, 3, 4, 5]
+Traceback (most recent call last):
+  File "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/benchmark_native_macos.py", line 44, in <module>
+    if __name__=='__main__':main()
+  File "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/benchmark_native_macos.py", line 26, in main
+    if result.returncode or not a.output.exists():raise RuntimeError('NativeBenchmarkLaunchFailed: '+str(result.returncode))
+RuntimeError: NativeBenchmarkLaunchFailed: 1

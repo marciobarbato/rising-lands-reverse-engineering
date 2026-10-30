@@ -13,6 +13,26 @@ reconstruction, not a complete original mission or campaign.
 This summary supersedes older "pending" or "not implemented" remarks in the
 chronological sections below, which are kept as the validation record.
 
+**Native smoke repair validated on this branch (2026-10-30; runtime `c5f1734`):**
+The inspection smoke previously dispatched clicks while the visible app was
+inactive, yielding an empty export and `down.frame` TypeError. It now waits for
+actual application/key-window/Metal-responder focus before dispatch. The original
+checks and budgets remain; a new focus assertion raises inspection checks to
+**21**. Exact APP_BUILD passes **112 consumer tests / zero skips**, **27 exercise
+checks**, and **21 inspection/live checks**; `sh motor/validate.sh` also passes.
+Fresh proofs retain **155,597/155,597 answers**, all six state-probe results below,
+**257/257 states**, **128/128 original and Python surfaces**, and **18,401/18,401
+states / 9,200/9,200 original surfaces**, with every prior hash unchanged.
+
+A fresh 65-second no-order play run at the 60 cap gives **60.013 game
+frames/s**, audits off. The current monitor reports **60 Hz**: displayed rate is
+**59.751 fps**, minimum full second **56**; an unchanged pre-fix bundle gives
+**60.013 game / 59.936 displayed fps**, minimum **57**, and the same final
+GPU image. These are current 60 Hz measurements, separate from the historical
+120 Hz results below. The three 75-second ordered ABI 1.6 runs remain pending.
+See the [repair handoff](../apps/macos-preview/HANDOFF.md#native-recording-smoke-focus-regression-2026-10-30)
+and [fresh delivery evidence](../apps/macos-preview/validation/m3-smoke-focus-delivery.json).
+
 **On main** (app last integrated at `51715e2`; validated executable `04dea39`):
 
 - Consumer of engine **ABI 1.5** (`rl_passo_quadro_entrada`) with Rust Graphics
@@ -57,7 +77,7 @@ chronological sections below, which are kept as the validation record.
   byte-identical to ABI 1.5; common checks 2,039 tests, 624 optional skips,
   0 failures.
 - Not yet done: the three 75-second ordered UI runs under ABI 1.6. No ABI 1.6
-  sustained UI result is claimed.
+  sustained ordered UI result is claimed.
 
 **Parked, unvalidated WIP** (not integrated, not reviewed):
 
