@@ -1,0 +1,145 @@
+{
+ "app_build": "python3 -B compilar-jog\u00e1vel --development-ref HEAD --inputs-root \"/Users/marcio/git/Rising Lands\" --data-root \"/Users/marcio/git/Rising Lands/local-data/macos-playable\"",
+ "app_build_matches": "scripts/workstream.py APP_BUILD",
+ "artifacts": [
+  {
+   "bytes": 7693,
+   "path": "apps/macos-preview/validation/m3-abi14-app-build.log",
+   "sha256": "4092549296a3c77b78ebda75bc68294e98938ebead41994fcc8c5c0e3e720877"
+  },
+  {
+   "bytes": 962,
+   "path": "apps/macos-preview/validation/m3-abi14-architecture.log",
+   "sha256": "9155289442eac7a3ffbc7130581e65c8ba335d9079d6b3d13bfacb8683d9e05f"
+  },
+  {
+   "bytes": 327,
+   "path": "apps/macos-preview/validation/m3-abi14-codesign-verify.log",
+   "sha256": "975e5607211069794acf7bd5ffeb959e87289fa2c879e4da3f32565cde3c396e"
+  },
+  {
+   "bytes": 42227,
+   "path": "apps/macos-preview/validation/m3-abi14-common.log.gz",
+   "sha256": "142e162607305fa9079aba839f49b19e6f44616ffee13d322051af47ba45b8e8"
+  },
+  {
+   "bytes": 16695,
+   "path": "apps/macos-preview/validation/m3-abi14-consumer-tests.log",
+   "sha256": "0b90b4619d15be64abc7f928e63dd9016885e48f2f4b308fe692789090c2ae75"
+  },
+  {
+   "bytes": 15270,
+   "path": "apps/macos-preview/validation/m3-abi14-engine-validate.log",
+   "sha256": "c00aad0cae0fa8d45281857ceaa4c4176db2930a4d54455b21ce0e83df9e942e"
+  },
+  {
+   "bytes": 56128,
+   "path": "apps/macos-preview/validation/m3-abi14-live-prefix.json",
+   "sha256": "e290337e3a8ad70c78aecba717e67527bc6ee3385fdd1480e2eb03b35c22770d"
+  },
+  {
+   "bytes": 4430,
+   "path": "apps/macos-preview/validation/m3-abi14-native-inspection-smoke.json",
+   "sha256": "7ad3368d8cfb45afde1323168aab00905a8ce6481d951c4a9f460a8762969173"
+  },
+  {
+   "bytes": 7543,
+   "path": "apps/macos-preview/validation/m3-abi14-native-smoke.json",
+   "sha256": "29f8f7e95fc455422da981a0233460a2dfdeb98edcb845c9129b504031f0f8ee"
+  },
+  {
+   "bytes": 783,
+   "path": "apps/macos-preview/validation/m3-abi14-prefix.log",
+   "sha256": "7d97e9e00f28ba2cddf823095915b877ef040ac64589eb57e4407e790490a25d"
+  },
+  {
+   "bytes": 13982,
+   "path": "apps/macos-preview/validation/m3-abi14-test-a-answers.json",
+   "sha256": "e5c40655c9d34e1fc2573879e0de24f200137d9147aa07e9498f7a6e54f189eb"
+  },
+  {
+   "bytes": 675,
+   "path": "apps/macos-preview/validation/m3-abi14-test-a.log",
+   "sha256": "fedd7966531eecca61bf3845d160e19cf8ee427996a1fb3ab448f2d64014c70d"
+  }
+ ],
+ "branch": "feat/macos-playable",
+ "common_command": "/usr/bin/python3 -B scripts/check.py",
+ "common_cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+ "engine_abi": "1.4",
+ "engine_reference_pins": {
+  "GRAPHICS_REVISION": "ce441852bcada750a8f91da8ed3302f1668c4405",
+  "LOGIC_REVISION": "7ceeff909b52b7d4f59723f35dfe43a9deda41ff"
+ },
+ "engine_shared_library_sha256": "7079b58383dba56bfd885883161a300650c697dd0053e38bb5dbb6c0364d556f",
+ "engine_source": "Integrated motor from the identical app Git archive; no external override",
+ "engine_source_revision": "e760756c44f79950cedc146ac17654b19c2d18c0",
+ "engine_static_archive_sha256": "8827032dfe15a6df294884ad2b63f8e4317db7818630237ed80ebff9f288a4a0",
+ "engine_validate_command": "sh motor/validate.sh",
+ "graphics18_report_sha256": "613ec2348b7fe0d597690ca4601af7f825c0d227133cdddc6b10e822e8eee845",
+ "inputs_manifest_sha256": "6481bda2e6cf16ebd122c9f8c70ff23d88a4ab9272e3eff29e7eb0458459a11a",
+ "live_proof": {
+  "checkpoints_equal": 11,
+  "observer_failures": [],
+  "python_surfaces_equal": 128,
+  "states_equal": 257,
+  "surfaces_equal": 128
+ },
+ "merged_main": "ef52cb0",
+ "metal_readback": {
+  "commit": "e760756c44f79950cedc146ac17654b19c2d18c0",
+  "path": "/Users/marcio/git/Rising Lands/local-data/macos-playable/build/development/e760756c44f79950cedc146ac17654b19c2d18c0/build/logs/native-inspection-smoke.metal.png",
+  "pixelsChecked": 1920000,
+  "sha256": "8b513e81d8d7a93666fe9f419a8bc5ebefafb800573b26f2cb869b0f2fb38f91"
+ },
+ "native_driver_sha256": "e97c3e8f2bbf362299a9ce1dd371af9dc6e1dc11a651d156fb319619c3d89457",
+ "orders_injected": false,
+ "python_graphics_api": "1.8",
+ "real_ui_metrics": {
+  "fps": 41.38595953714877,
+  "frames": 401,
+  "metalSeconds": 0.2995382083323648,
+  "proofSeconds": 3.306233,
+  "renderSeconds": 1.754335,
+  "rustSeconds": 4.31913,
+  "seconds": 9.689276374999963
+ },
+ "remaining": [
+  "Test A game-state/WndProc-effect half and Test B require order support",
+  "Human continuous drag capture and glyph rendering remain unsupported",
+  "Rust is Graphics1.7; Python1.8 adoption does not port its added families to Rust",
+  "9200-frame horizon was not rerun on ABI1.4; current live proof is 128 frames, with UI surfaces verified through406"
+ ],
+ "rust_render_contract": "1.7",
+ "schema": "rising-lands/macos-abi14-delivery/1",
+ "signing": "Static Rust/C driver in hardened Swift executable; existing signing retained",
+ "source_edits": "Owned app paths only; motor/reference pins and original evidence unchanged",
+ "test_a": {
+  "all_roundtrips_equal": true,
+  "answers": 155597,
+  "equal": true,
+  "first_differences": [
+   null,
+   null,
+   null,
+   null,
+   null,
+   null
+  ]
+ },
+ "tests": {
+  "common": 1976,
+  "common_optional_skips": 620,
+  "consumer": 109,
+  "consumer_skips": 0,
+  "engine_python": 61,
+  "engine_renderer_child": 10,
+  "engine_rust": 28,
+  "engine_swift_interop": true,
+  "engine_swift_render_surfaces": 128,
+  "engine_x86_comparisons": 75,
+  "native_exercise": 27,
+  "native_inspection": 20
+ },
+ "validated_build_commit": "e760756c44f79950cedc146ac17654b19c2d18c0"
+}
