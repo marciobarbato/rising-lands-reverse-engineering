@@ -2,6 +2,45 @@
 
 Chat: `01a18262-c6d5-7cd3-80fa-8431bf5f2657` (Economy and Production). Worktree: `/Users/marcio/git/Rising Lands/worktrees/re-economy`. Branch: `feat/re-economy`. Organization base: `6634be3af2d255846a847d8aa21ad4edf1cdb589`. Implementation commit: `f5a5e9b` (`Reconstruct troop completion preparation and cargo credits`); the following handoff commit and serialized integration result are identified in the completion chat. Only economy-owned paths changed.
 
+## Recruitment direction ABI delivery (2026-10-30)
+
+Base: `origin/main` `92fab50` merged into `feat/re-economy`. Only Economy-owned paths changed;
+transport WIP stays parked. This delivery is for coordinator review; no main merge or acceptance is recorded.
+
+**Contract.** `CavernaRecrutamento._SortieTroupe` CALL `0x420f69` → EnginSetType `0x457b87` now passes
+AX existing unit, DX exit cell, **BL from CalculPosition's returned EBX**, CL requested type reloaded from
+structure `+0x7b` after that callback. `ARGUMENTOS['EnginSetType']['EBX'] = 0xff`; the actual `c['EBX']`
+from CALL `0x420f5a` → CalculPosition `0x420698` is forwarded, without a direction default. Supported
+structure/recruitment domains and mutation order are unchanged: remove colonist, credit carried stone then
+food, position, conversion, recovery, placement/movement, cleanup/abandonment, messages. Missing callbacks
+still stop at their real call with earlier stores retained. Core/AI runtime adapters remain separate owner
+dependencies as described in [S1's exact remaining contracts](../ia-runtime/S1_2547_PRODUCTION.md#exact-remaining-owner-contracts).
+
+**Original evidence.** The intact executable SHA-256 is
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+The existing original-only cave/recruitment and sanctuary-abandonment captures are unchanged. The former
+records BL = 4 at all three conversion frames (297, 869, 1363), each compared through both CalculTroupe and
+SortieTroupe. The shared CPU-free/native Replay rejects missing argument registers as well as differing
+argument bits; native reports now expose conversion arguments and the masks including BL. Regression checks
+detect missing/wrong BL at all three completions and a separate synthetic protocol probe verifies forwarding
+when returned BL differs from incoming DL. No foreign-file hash pin was added.
+
+**Validation.** CPU-free cave/recruitment: 342/342, 0 mismatches, with Core's exit-position provider;
+abandonment: 81/81, with and without it. Fresh native reruns through
+`/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py`, using
+`validar_caverna_recrutamento.py --captura <existing capture> --saida <report>`:
+
+- [Cave/recruitment](validacao-caverna-recrutamento-emulada.json): **342 compared, 0 mismatches, 0 errors,
+  0 outside-domain cases**, rerun equal (343 recorded calls, 598.552 s). Six conversion argument comparisons
+  include BL = 4; CalculPosition ×6 and RechercheDecalageSortie ×7 are served by Core's translation.
+- [Abandonment](validacao-abandono-santuario-emulada.json): **81 compared, 0 mismatches, 0 errors,
+  0 outside-domain cases**, rerun equal (278.694 s). Two conversion argument comparisons include BL = 4;
+  CalculPosition ×2, RechercheDecalageSortie ×1 and EteintTerrain ×2 are served by Core's translation.
+
+Final domain gate: `python3 -B scripts/check.py --domain economy` passed **545 tests, 209 optional skips,
+0 failures**, documentation links OK (51.375 s). The two requested native differentials above ran separately
+under the heavy lease; the gate did not opt into unrelated native suites.
+
 ## State at 2026-10-30 07:15 (MacBook paused)
 
 - **On main:** Stages 27 and earlier (order setters, work cycle, cave/recruitment, sanctuary abandonment, hunger state 19, EnginRestaureEtat/BatimentEnleveMatiere/tag 19) and the order-setter report rebind `57099c0` (121 compared, 0 mismatches, rerun in Core's tree). Last Economy merge `41ab539`; `feat/re-economy` carries no unmerged Economy work. Summary table: [ECONOMY.md, Current state](../../docs/ECONOMY.md#current-state-2026-10-30-0715).

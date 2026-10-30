@@ -50,6 +50,34 @@ The frame-125 minimap divergence in that composition was Economy's: BatimentModi
 2. Refresh the native hunger and restore reports after the changed `alimentacao.py`, then run the domain gate and push `feat/re-economy`.
 3. Support AI/runtime's strict S1 proof and Missions' S1 windows with any Economy stop they report; then the research/technology routines at the S1 result screen.
 
+## Recruitment direction ABI correction (2026-10-30, feature delivery)
+
+After merging `origin/main` `92fab50`, `caverna_recrutamento.ARGUMENTOS['EnginSetType']` includes `EBX: 0xff`.
+At CALL `0x420f69` → `EnginSetType 0x457b87`, the callback receives **AX = existing unit, DX = exit cell,
+BL = direction returned by CalculPosition, CL = requested type**. `_SortieTroupe` forwards `c['EBX']`
+from CalculPosition (`0x420f5a` → `0x420698`); the argument mask exposes its low byte. It does not reconstruct
+BL from the incoming direction or supply a default. The requested type is still reloaded from structure
+`+0x7b` after CalculPosition. Bag removal, stone then food credits, conversion, healing/fatigue/experience,
+placement, movement, request cleanup and messages retain their existing order and supported domain.
+Missing providers retain their named stop after earlier mutations.
+
+The shared CPU-free/native argument comparison now rejects omitted argument registers as well as wrong
+values. Native reports record the EnginSetType masks and both original and translated conversion arguments.
+The committed original-only capture observes BL = 4 at each of frames 297, 869 and 1363; both the outer
+CalculTroupe and nested SortieTroupe comparisons cover these conversions. Regression probes catch an omitted
+or altered BL at all three completions; a separate synthetic protocol probe checks forwarding of a returned
+BL different from incoming DL. Original evidence and hashes remain unchanged (intact executable SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`).
+
+CPU-free recruitment replay: **342/342, 0 mismatches**, including Core's exit-position provider;
+abandonment: **81/81**, with and without that provider. Fresh leased native differentials: **342 recruitment
+and 81 abandonment cases, 0 mismatches/errors, both reruns equal to the committed captures**; all six plus
+two conversion argument comparisons include BL. The domain gate is recorded in the handoff.
+This delivers Economy's ABI prerequisite from AI/runtime's
+[exact owner contracts](../pesquisas-paralelas/ia-runtime/S1_2547_PRODUCTION.md#exact-remaining-owner-contracts).
+Core's live conversion/recovery adapters and AI/runtime's city-message provider remain their owners' work;
+this is not a completed S1 frame-2547 proof. Transport WIP remains parked.
+
 ## Resource layout and arithmetic
 
 `LoadGameRessource` (`0x46AB21`) and `SauveRessource` (`0x46AB33`) read/write the same 128 bytes without conversion. Base address is `0x4E2EA8`, with four players, four resource records per player, and eight bytes per record:
