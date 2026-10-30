@@ -1,10 +1,22 @@
 # Native Rust engine
 
-The pilot foundations and bounded frame-logic port are documented below.
-This is not a playable engine, M2.3 work or M3 acceptance. The game engine and
-rendering will be Rust; Swift owns the macOS shell, C only small tooling, and Python remains the original-validated reference
-and test harness. This work owns only `motor/` and this document. The existing
-app, references, captures and other fronts are unchanged.
+**Current state (2026-10-30).** The Rust engine in `motor/` is the playable
+engine; the macOS app consumes it live. On main: stage 2 frame logic over the
+accepted M2 window (frames 0–9,200, ABI 1.1–1.2), stage 3 the native renderer
+(ABI 1.3–1.4), stage 4 declared player input and orders
+([ABI 1.5](#stage-4--declared-input-abi-15)) and the persistent play execution
+([ABI 1.6](#sustained-play-execution--abi-16)). In play mode, logic averages
+**0.26 ms/frame** and logic plus render **0.65 ms/frame** over 9,200 frames, with
+terminal hashes unchanged. Simulation coverage under input currently ends at the
+named original-address stops recorded in the stage sections (for example the
+CAVE body at frame 220 in the cave probes). Swift owns the macOS shell, C only
+small tooling, and Python remains the original-validated reference and test
+harness. Rust is validated against the original evidence and the Python
+reference; `sh motor/validate.sh` runs on every integration. The workstream owns
+`motor/` and this document; the detailed delivery log is the
+[engine handoff](../motor/HANDOFF.md).
+
+The sections below record each stage in order, starting from the pilot.
 
 ## Reproduce
 
@@ -639,7 +651,8 @@ persistent execution. Select it once before the app's render/phase-2/phase-3 loo
 `rl_execucao_modo` queries the policy. The frame, declared-input and renderer
 signatures and layouts are unchanged. Creation accepts ABI 1.0 through 1.6.
 Consumers must accept major 1 and a minor at least their required version; the
-macOS driver's exact ABI 1.4 check needs updating before using this library.
+macOS driver's exact ABI 1.4 check needs updating before using this library
+(pending: the app's ABI 1.6 adoption is unvalidated WIP as of 2026-10-30).
 
 The play path retains the execution projection, journals writes for rollback,
 and refreshes only changed unit/structure records. It reuses runtime scratch and

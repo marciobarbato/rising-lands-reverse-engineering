@@ -1,0 +1,23 @@
+{
+ "schema": "rising-lands/graphics-recovery-native-evidence/1",
+ "rows": [
+  {
+   "file": "evidencias/glifos-afftext-nativos.json.xz",
+   "sha256": "376f74a9a8e125abdecaa4bbf4b16f27bedd574e3b854053e9d968fc0b2e108c",
+   "cases": 270,
+   "executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+   "code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+   "elapsed_seconds": 54.024988666000006,
+   "producer_sha256": "56eef3f3c57c0729630d5c0d1e2dc90d7b29dbb1cb3b96e4dd3d6ae43e23d590"
+  },
+  {
+   "file": "evidencias/s1-dependencias-nativas.json.xz",
+   "sha256": "e058d22320e8eed870683ebeafd4c8d6834704a287d5b7751321c8e8daa70880",
+   "cases": 20,
+   "executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+   "code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4",
+   "elapsed_seconds": 69.727797458,
+   "producer_sha256": "50c7dc7f2ed2f5ec0a4d5eb3e171d41369126a4b8c5be6ea6c230faa87e8139d"
+  }
+ ]
+}

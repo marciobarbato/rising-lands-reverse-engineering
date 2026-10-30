@@ -1,28 +1,36 @@
 # Rising Lands reverse engineering — Brazilian edition
 
-Evidence-based reconstruction of the Brazilian PC release of Rising Lands. The project includes file readers, Python reconstructions, bounded comparisons against original x86 instructions, and a native macOS research preview. The complete game and campaign are still under reconstruction.
+Evidence-based reconstruction of the Brazilian PC release of Rising Lands. The project includes file readers, a Python reconstruction validated phase by phase against the original `RISING.EXE` under emulation, a native Rust engine validated against that reference, and a macOS app that runs the Rust engine. The complete game and campaign are still under reconstruction.
+
+**Status (2026-10-30 07:00).** M1 (MONDE01 load) and M2 (frames 0–9,200 without input, first raid) are accepted. The **M3.1 P1/P2 part** (scripted selection and move windows, whole state per phase) is accepted at `c9c85eb`; the rest of M3 and M4 are open. On the original executable, the scripted session S1 **wins MONDE01** (replay-checked from F0) and a separate session D1 reaches the **defeat** branch. The macOS app plays MONDE01 live on the Rust engine and accepts player orders; play mode sustains 60 game frames/s with the display near 120 fps, up to the engine's and renderer's named coverage limits. Acceptance records are in [`integracao/validacao/`](integracao/validacao/); the latest coordinator handover is [HANDOVER_CLAUDE_20261030_0700](docs/HANDOVER_CLAUDE_20261030_0700.md).
 
 **Documentation is English. All player-facing text, mission stories, objectives, unit names, and audio stay Brazilian Portuguese (PT-BR).** Original French SBL symbols and established Python identifiers remain unchanged so evidence and APIs stay traceable.
 
-Start with [consolidated progress](docs/PROGRESS.md), [the documentation index](docs/README.md), [current research status](docs/STATUS.md), [the roadmap to a running original mission](docs/ROADMAP_MONDE01.md), and [the seven-front workflow](docs/PARALLEL_WORK.md). The [restart prompt](docs/RESTART_PROMPT.md) defines the seven fronts and their merge procedure.
+Start with [consolidated progress](docs/PROGRESS.md), [the documentation index](docs/README.md), [current status](docs/STATUS.md), [the roadmap to a running original mission](docs/ROADMAP_MONDE01.md), [the M3/M4 plan](docs/M3_PLAN.md), and [the parallel workflow](docs/PARALLEL_WORK.md). The [restart prompt](docs/RESTART_PROMPT.md) describes the coordinator's working mode and the front assignments.
 
 ## Repository map
 
 | Path | Purpose |
 |---|---|
-| `docs/` | Current English manuals, contracts, ownership, and restart instructions |
+| `docs/` | Current English manuals, contracts, ownership, handovers, and restart instructions |
 | `ferramentas/` | Shared readers, simulation primitives, and x86 harnesses; stable API paths |
 | `testes/` | Core unit, corpus, and differential tests |
 | `evidencias/` | Original-byte assembly, decompiler exports, and provenance manifests |
-| `relatorios/` | Versioned extracted data and validation results |
+| `relatorios/` | Versioned extracted data and validation results (for example the S1 coverage survey) |
 | `pesquisas-paralelas/combate/` | Combat research and its own tests/evidence |
 | `pesquisas-paralelas/economia/` | Economy research and its own tests/evidence |
-| `pesquisas-paralelas/graficos-animacao/` | Graphics research, artifacts, and its own tests/evidence |
-| `pesquisas-paralelas/missoes/` | Mission loading/orchestration research and its own tests/evidence |
-| `pesquisas-paralelas/ia-runtime/` | AI kernels, dispatchers and VM operations research and its own tests/evidence |
+| `pesquisas-paralelas/graficos-animacao/` | Graphics research, the render API, and its own tests/evidence |
+| `pesquisas-paralelas/missoes/` | Mission loading, frame oracles, and the scripted-input captures on the original (probes P1–P7/K1, S1 victory, D1 defeat in `m3/`) |
+| `pesquisas-paralelas/ia-runtime/` | Frame/unit/structure dispatchers, AI kernels, the input path, and the chain proofs (M2, M3.1) |
+| `pesquisas-paralelas/audio/` | Sound banks, ADPCM decoding, the sound-request queue and provider |
+| `pesquisas-paralelas/mapa-acoes-jogador/` | Static player-action map (input, command dispatch, effect entry points) used to plan M3 |
+| `pesquisas-paralelas/dificuldade/` | Static check for hidden difficulty parameters |
+| `motor/` | Native Rust engine (cargo workspace, C ABI for Swift and Python); validated by `motor/validate.sh` on every integration; see [ENGINE](docs/ENGINE.md) |
 | `integracao/` | Coordinator-owned provider loaders for same-process consumers |
-| `apps/macos-preview/` | Versioned macOS preview source; generated payloads stay local |
-| `scripts/` | Worktree preparation, checks, and serialized integration |
+| `integracao/validacao/` | Coordinator acceptance records and main reproductions per milestone (M1, M2.1–M2.3, M3.1 P1/P2) |
+| `apps/macos-preview/` | macOS app source (Swift shell on the Rust engine and renderer; live play with orders); generated payloads stay local; see [macOS playable](docs/MACOS_PLAYABLE.md) |
+| `compilar-jogável` | Builds `RisingLands-ptbr.app` from one committed revision |
+| `scripts/` | Worktree preparation, checks, and serialized integration (`workstream.py`) |
 | `ghidra/` | Reproducible analysis scripts and manifests; projects remain local |
 | `.local/` | Ignored local dependencies, toolchains, and scratch data |
 
@@ -42,10 +50,11 @@ To prepare an isolated worktree:
 
 ```sh
 python3 scripts/workstream.py start core
-# Other fronts: missions, ai-runtime, economy, combat, graphics, macos, maintenance
+# Other fronts: missions, ai-runtime, economy, combat, graphics, audio, macos, maintenance
+python3 scripts/workstream.py fronts   # ownership table
 ```
 
-To open the existing local preview, run `apps/macos-preview/abrir.command`. To rebuild it from committed research, follow [the preview manual](docs/MACOS_PREVIEW.md). Its UI remains PT-BR.
+To build the playable app from a committed revision, run `./compilar-jogável` as described in [macOS playable](docs/MACOS_PLAYABLE.md); its UI remains PT-BR. The older research preview is documented in [the preview manual](docs/MACOS_PREVIEW.md). The Rust engine is checked with `sh motor/validate.sh`.
 
 ## Evidence identity
 

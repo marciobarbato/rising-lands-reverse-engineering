@@ -1,0 +1,199 @@
+{
+ "schema": "rising-lands/s1-affgame-screen-comparison/1",
+ "cases": 18,
+ "equal": 18,
+ "mismatches": 0,
+ "counts": {
+  "result": 11,
+  "objectives": 7
+ },
+ "boundary_contract": "native INVENTE.CMP menu bank and STRAT glyph bank; no MenuInit or background claim",
+ "menu_asset_matches": {
+  "2": {
+   "payload_sha256": "ec00aea7e19cf5cab7a84e95e73e0dba072f202b5eec81a22cf3b438e3ffb869",
+   "native_allocation": "alloc25487",
+   "bytes": 9666
+  },
+  "3": {
+   "payload_sha256": "af3f8bee925d4c5e5602e721c57146a4efb36e87b69ae55b39677fa567f8ac2f",
+   "native_allocation": "alloc25489",
+   "bytes": 9664
+  },
+  "4": {
+   "payload_sha256": "42e91ae2f6040e46e3a4e7e96c5fb677f266e6898e459e544c1bf7c21544bb66",
+   "native_allocation": "alloc25491",
+   "bytes": 9666
+  }
+ },
+ "capture_sha256": "167239f1d663db48d000bc4e5048e42b68e3da64294f8d4d61a9196f0a742de3",
+ "sources_sha256": {
+  "telas_fluxo_s1.py": "14ad15a18d92a99eda98c430afab38f625fb68fcb9a21884b972f6f120757d4b",
+  "texto_bitmap_nativo.py": "a87ade72ad9affa5f26d81467d0097117dee2d44e0b20af631f538f073819121",
+  "telas_objetivos_s1.py": "f8911a2339d9407ed2a0dcdded1b7b04c6fcd22253a41de41aab5d91cb43f9f5",
+  "validar_fluxo_telas_s1.py": "3650bb7cdd12899bb67b92e8b6817cfe8ff7329fb58415d44cc880a8cdf3b9a7"
+ },
+ "rows": [
+  {
+   "frame": 17033,
+   "screen": "result",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 0,
+   "sha256": "948f8689816f10ac3cf21ccf76c7884df7631d8257df2b4dbb1473496e9136a8"
+  },
+  {
+   "frame": 17034,
+   "screen": "result",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 0,
+   "sha256": "948f8689816f10ac3cf21ccf76c7884df7631d8257df2b4dbb1473496e9136a8"
+  },
+  {
+   "frame": 17035,
+   "screen": "result",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 0,
+   "sha256": "948f8689816f10ac3cf21ccf76c7884df7631d8257df2b4dbb1473496e9136a8"
+  },
+  {
+   "frame": 17036,
+   "screen": "result",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 0,
+   "sha256": "948f8689816f10ac3cf21ccf76c7884df7631d8257df2b4dbb1473496e9136a8"
+  },
+  {
+   "frame": 17037,
+   "screen": "result",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 0,
+   "sha256": "948f8689816f10ac3cf21ccf76c7884df7631d8257df2b4dbb1473496e9136a8"
+  },
+  {
+   "frame": 17038,
+   "screen": "result",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 0,
+   "sha256": "948f8689816f10ac3cf21ccf76c7884df7631d8257df2b4dbb1473496e9136a8"
+  },
+  {
+   "frame": 17039,
+   "screen": "result",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 0,
+   "sha256": "948f8689816f10ac3cf21ccf76c7884df7631d8257df2b4dbb1473496e9136a8"
+  },
+  {
+   "frame": 17040,
+   "screen": "result",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 0,
+   "sha256": "948f8689816f10ac3cf21ccf76c7884df7631d8257df2b4dbb1473496e9136a8"
+  },
+  {
+   "frame": 17041,
+   "screen": "result",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 0,
+   "sha256": "948f8689816f10ac3cf21ccf76c7884df7631d8257df2b4dbb1473496e9136a8"
+  },
+  {
+   "frame": 17042,
+   "screen": "result",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 0,
+   "sha256": "948f8689816f10ac3cf21ccf76c7884df7631d8257df2b4dbb1473496e9136a8"
+  },
+  {
+   "frame": 17043,
+   "screen": "result",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 0,
+   "sha256": "948f8689816f10ac3cf21ccf76c7884df7631d8257df2b4dbb1473496e9136a8"
+  },
+  {
+   "frame": 17044,
+   "screen": "objectives",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 218,
+   "sha256": "43ab5b4c468ac36b4c1027d4542b880593ce813fb3008395e947b095297e78cf"
+  },
+  {
+   "frame": 17045,
+   "screen": "objectives",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 218,
+   "sha256": "43ab5b4c468ac36b4c1027d4542b880593ce813fb3008395e947b095297e78cf"
+  },
+  {
+   "frame": 17046,
+   "screen": "objectives",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 218,
+   "sha256": "43ab5b4c468ac36b4c1027d4542b880593ce813fb3008395e947b095297e78cf"
+  },
+  {
+   "frame": 17047,
+   "screen": "objectives",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 218,
+   "sha256": "34de5ac4c016c61b8a8ab972878f199c1bd9e7b81b6d70d7d8cbde98730d897d"
+  },
+  {
+   "frame": 17048,
+   "screen": "objectives",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 218,
+   "sha256": "34de5ac4c016c61b8a8ab972878f199c1bd9e7b81b6d70d7d8cbde98730d897d"
+  },
+  {
+   "frame": 17049,
+   "screen": "objectives",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 218,
+   "sha256": "34de5ac4c016c61b8a8ab972878f199c1bd9e7b81b6d70d7d8cbde98730d897d"
+  },
+  {
+   "frame": 17050,
+   "screen": "objectives",
+   "equal": true,
+   "pixel_mismatches": 0,
+   "argument_mismatches": 0,
+   "drawing_calls": 218,
+   "sha256": "2f919941a33b4494f61f1950583b9c447a140a8f56e74903a7dfb8c10e3b0510"
+  }
+ ]
+}

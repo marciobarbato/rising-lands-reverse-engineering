@@ -34,4 +34,8 @@ The live consolidated report is [docs/PROGRESS.md](../PROGRESS.md). It separates
 
 - [Closed M2 round 7 CXR-20261029-M2R7](2026-10-29-M2R7-closed.md): **M2.3 and M2 accepted** at `ea62eb4` (frames 0–9,200 with the first raid, 18,401/18,401 phases, reproduced on MacBook and Mac mini); M3 under way.
 
+- [M3 round 1 checkpoint CXR-20261029-M3R1](2026-10-29-M3R1-checkpoint.md): M2 accepted at `ea62eb4`; M3 probes, pass-2 windows and the input-path translations on main; no M3 criterion accepted. Added on 2026-10-30 from the report as committed at `ac2a1e4`.
+
+- [M3 round 2 checkpoint CXR-20261030-M3R2](2026-10-30-M3R2-checkpoint.md): **M3.1 P1/P2 part accepted** at `c9c85eb`; S1 wins MONDE01 and D1 reaches defeat on the original; Rust play mode (ABI 1.6) and the app at 60 game frames/s; round paused at the 07:00 MacBook pause with main `3874fcc`, unvalidated Codex work on `wip/*`.
+
 At each actual execution-round closure, append a new `YYYY-MM-DD-CXR-NN-closed.md` snapshot copied from the verified live report and add it here. Keep a failed/pending round too, with its unchanged main SHA and reason. Never edit a prior snapshot to reflect later success. A repeated heartbeat without a changed round disposition does not require a duplicate snapshot.
