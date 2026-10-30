@@ -409,7 +409,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
                 if self.running{self.running=false;self.playEnded=ProcessInfo.processInfo.systemUptime}
                 else if self.status().stopped==0 && self.stoppedReason==nil{
                     let s=self.status();self.startFrames=s.frames;self.startLogic=s.logic_ns;self.startRender=s.render_ns;self.startProof=s.proof_ns;self.startMetal=self.metalSeconds;self.playStarted=ProcessInfo.processInfo.systemUptime;self.playEnded=self.playStarted;self.running=true
-                    if !self.validationMode{self.presenter?.start(at:self.playStarted);DispatchQueue.main.async{self.metal.isHidden=false}}
+                    if !self.validationMode{self.presenter?.start(at:self.playStarted);DispatchQueue.main.async{self.metal.isHidden=false;self.window.makeFirstResponder(self.metal)}}
                     self.runID &+= 1;let run=self.runID;self.nextGameTime=self.playStarted;self.work.async{[weak self] in self?.pump(run)}
                 }
             case "live-pause":self.running=false;self.playEnded=ProcessInfo.processInfo.systemUptime
