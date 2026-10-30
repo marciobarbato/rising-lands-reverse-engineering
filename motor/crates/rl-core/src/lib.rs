@@ -76,6 +76,7 @@ mod chain_recruit;
 mod chain_restore;
 mod chain_s1;
 mod chain_search;
+pub mod chain_technology;
 mod chain_turret;
 mod chain_work;
 

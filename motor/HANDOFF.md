@@ -1783,3 +1783,61 @@ source/binary identities are in `validation/chain11/piece1/`.
 30 Rust tests,63 Python tests,666 input leaves,75 pilot records and the C,
 Swift ABI1.6 and Metal render smoke checks. Longer S1/regression/timing results
 follow in the next piece; this leaf proof does not claim a new frame reach.
+
+## S1 technology owners — chain11
+
+The Rust-only `chain_technology::Technology::entry(memory,name,FrameRegisters)`
+accepts all seven data GPRs and explicit ESP; successful entries return exact
+GPRs/ESP+4 and optional x87-push metadata. This is additive Rust validation
+transport, not a new C ABI entry or a complete x87 machine. The production
+frame's research-completion path now invokes the same live invention effects.
+No Python, captured return, or later checkpoint supplies a gameplay result.
+
+The seventeen entries and original addresses are:
+RechercheGetEtat0x4717a2, RechercheGetBranche0x4717b1,
+RechercheGetNiveau0x4717c2, RechercheGetNbInvention0x470554,
+InventionGetCout0x470c3d, SetBatimentRecrutable0x418ad3,
+SetTroupeRecrutable0x44244d, TypeBatimentEstRealisable0x418a93,
+TypeEnginEstRealisable0x44228e, SortilegeResetTechnologie0x4749f2,
+TechnologieReset0x46b517, BonusReset0x428e71,
+BatimentInitTechnologie0x41cde0, EnginSetTechnologie0x4411e1,
+InventionSetEffet0x470f98, RechercheCalculNew0x47150f,
+and IaRechercheAjuste0x47fa88. The intact executable hash is the same as above.
+
+Supported technology effects are kind0 troop/building unlocks for four players,
+with the validated ordinary target domain and active structure types2/3. Resets
+retain the original selective byte/word store order; spell columns interleave,
+bonus record holes stay intact, and Bag reset/take order preserves +0x60..+0x65.
+Building unlocks set the flag before rebuilding unit technology Bags; troop
+unlocks set their flag before scanning/rebuilding structures. Research rebuild
+resets technology and bonuses, restores four saved research records, applies
+stored unlocks, clears invention counts, then checks mission gates and advances
+levels in the original player/branch/item order. MissionGetNum and PlayerGetType
+execute their real live-memory Rust queries with the original register effects.
+
+Finite binary64 research values convert to the explicit x87 significand and
+sign/exponent by integer operations, including signed zero and subnormals.
+Nonfinite values stop at0x4717aa. Notification0x471017, non-unlock0x471054,
+unsupported subtype0x471232, special building/troop recruitment0x471126/0x471188,
+AI catch-up0x47fad9, excessive level0x4715a7 and unterminated branch0x471632
+remain named stops; no unknown effect becomes an empty callback. The existing
+BatimentSetTechnologie owner retains its addressed unsupported-type stop.
+
+The fixture binary is built separately with `--features validation-trace
+--target-dir motor/target/technology-trace`. The feature records successful
+ordered stores, including writes of unchanged values, and foreign query calls.
+It is compiled out of production; normal play has no per-frame audit added.
+The default and feature builds pass strict Clippy. The original-first corpus
+passes **520/520**:511 complete register/byte/store/call cases over all17 entries
+and9 additional exact x87-push cases. No GPR/byte mask, replayed foreign return,
+or native case skip is used. FP proof compares the newly pushed value and
+captured TOP transition, not all FPU state or flags. The production build also
+has an integer-conversion edge test for negative zero, the smallest subnormal,
+one and the addressed nonfinite stop. Frozen reference bytes remain unchanged.
+
+`sh motor/validate.sh` passes for the technology implementation:31 Rust tests,
+63 Python tests,666 input leaves,75 pilot entries, C layout, Swift ABI1.6 and
+Metal render smoke. The feature build separately passes strict Clippy and its
+Rust tests. The owner corpus, feature-build log and full native gate are in
+`validation/chain11/piece2/`. Frame continuation and final performance/regression
+reports are recorded separately below, after the bounded runs finish.
