@@ -845,3 +845,19 @@ whose captures declare the same boundary. Every remaining leaf stop must match
 the pinned Python report by name and original address; unknown stops fail the
 proof. Production ABI text/sound flags remain explicit. No original x86 run,
 reference edit, glyph reconstruction or Graphics 1.8 renderer port is implied.
+
+### Published segmented P6 state evidence
+
+Main `16b63ac` publishes P6's three-part, 4,544-phase window. The input source
+profile stays at `a7f5d49`; `player-window-pins.json` independently pins the
+immutable P6 artifacts at `16b63ac`. The reader verifies the Git blob, checkout
+and cache identities, compressed parts, decoded openings and deltas. A later
+original opening must equal the preceding replayed end before comparison can
+continue. The native world is never reloaded at a segment boundary. Reports
+identify which raw parts were actually verified; the frame-220 composition stop
+prevents a claim for the entire window.
+
+This reader extension changes no Rust code, ABI, compiled library, no-input
+comparer or renderer. The full post-restart runtime regressions were run from
+clean implementation `e41d755`; final reader/probe and integration checks use
+the subsequent reader commit, with the identical release library SHA-256.

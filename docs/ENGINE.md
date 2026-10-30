@@ -590,3 +590,9 @@ army-type correction. Its thirteen predicates and all declared text requests
 are checked against the 203 new original captures. Remaining stops are matched
 by name/address. The renderer keeps its independently pinned Graphics 1.7
 contract while the merged tree contains Graphics 1.8.
+
+The branch also merges Missions main `16b63ac`. P6 whole-state evidence is pinned
+independently at that revision, retaining the input source revision `a7f5d49`.
+The segmented reader validates original opening/end continuity without reloading
+the native world and reports the compared prefix separately from the full
+4,544-phase window. This evidence-reader addition changes no native code.
