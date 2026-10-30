@@ -1165,3 +1165,14 @@ S1 dependency observer. Their syntax/import/CLI checks pass, but native calls ha
 lease at this source checkpoint. The source commit intentionally precedes these new evidence files.
 `validar_cadeia_exibicao_atual.py` also remains queued for a current-source P3/P6/P7 replay. Historical
 waiting-only logs are retained separately; they are not counted as completed validation.
+
+## Fresh leased RestoreAll reproduction
+
+The new original-x86 rerun passes **24/24** prepared sanctuary/CAVE pairs in **28.003s**.
+Every native row is identical to the immutable predecessor capture, including return value, surface,
+DGROUP, CRT, allocation changes and structure-call observations. No exception, skip or limit occurs.
+Fresh evidence is `evidencias/cave-restoreall-recovery.json.xz`; the byte-for-byte row comparison and
+both capture hashes are in `validacao/recovery-restoreall-reproduction.json`, with the complete lease
+log in `validacao/recovery-restoreall-native.log`. The original source and executable/code identities
+also match the predecessor. No frozen evidence is overwritten. The domain gate and P3/P6/P7 chain
+are now running under their own leases; AffText remains queued at this checkpoint.
