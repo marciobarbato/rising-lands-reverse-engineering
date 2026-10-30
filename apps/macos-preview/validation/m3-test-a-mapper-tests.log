@@ -1,0 +1,14 @@
+[lease] macos-m33-input-unit-final waiting
+[lease] macos-m33-input-unit-final granted slots [4]
+test_all_mac_keys_and_buttons_have_declared_messages_and_rejected_events_are_atomic (test_macos_scripted_input.ScriptedInputTests) ... ok
+test_all_native_probe_answer_requests_and_canonical_roundtrips (test_macos_scripted_input.ScriptedInputTests) ... ok
+test_cursor_holds_keys_reset_and_literal_key_answer_repeats (test_macos_scripted_input.ScriptedInputTests) ... ok
+test_full_missions_harness_module_accepts_human_export_unchanged (test_macos_scripted_input.ScriptedInputTests) ... ok
+test_human_click_cadence_cursor_hold_ctrl_and_canonical_export (test_macos_scripted_input.ScriptedInputTests) ... ok
+test_message_peek_get_translate_dispatch_and_unconsumed_rejection (test_macos_scripted_input.ScriptedInputTests) ... ok
+test_owner_rejects_bad_interchange_and_import_is_independent (test_macos_scripted_input.ScriptedInputTests) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 2.635s
+
+OK

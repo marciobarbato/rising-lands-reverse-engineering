@@ -972,3 +972,404 @@ semantics and a 40-ms total budget. Input/order support is unchanged by this
 performance follow-up. Final evidence/docs commits change no executable app
 code after the validated 604046b build. Only the feature branch is pushed;
 main integration and acceptance remain with the coordinator.
+
+## Rust renderer integration — ABI 1.3
+
+This stage replaces live Python drawing and per-frame JSON pixels with an
+app-owned native frame driver and a Swift/Metal game window. The same C driver
+is called by the production window and by the proof harness. It owns the Rust
+world and renderer, copies accepted S0 plus the four original jump tables once,
+and invokes phase 1, then render at the exact entry generation, phase 2 and
+phase 3. Rendering never applies display effects; phase 2 remains their sole
+owner. Initial surface/cache and nine assets are explicit, hash-verified inputs.
+Caller-owned indexed/palette buffers and Metal textures persist across frames.
+No captured state after S0 is ever loaded into the world.
+
+The driver audits all 257 M2.2 states and 11 checkpoints on live startup and
+all reached surfaces through frame 9200. Full M2.3 state auditing is a proof
+mode over the identical stepping/render calls, without a different simulation
+path. It exports the actual engine world/renderer handles only to proof tools;
+Python rendering, cache and observation comparisons are test oracles, never
+part of live drawing. ABI/status/generation and host buffer layouts are gated
+explicitly. Missing ABI 1.3 or Metal produces a named visible error. Reset
+creates a new valid world/renderer before replacing the old one. Errors latch
+the first named stop; the app never fills unknown state or synthesizes frames.
+
+Development is explicitly authorized against read-only engine revision
+`363faa9c252ffb00d62c81db0da2ee5d4a3d7615`. Its release library was built into
+this front's ignored target directory, not the engine worktree. Tested library
+SHA-256: `fe1aa558cbb1d597a8ba79cce40ee1cbb576a3b6b40139076e1b5b79a8b1c5e1`.
+The [development serial proof](validation/m3-abi13-development-proof.json)
+passes **18,401/18,401 masked states, 11/11 M2.2 checkpoints, 9,200/9,200
+surfaces and 128/128 Python surfaces**. It carries one actual world from S0
+through frame 10,800. Its first stop is phase 2 of frame **10,801**:
+`ABI 5: Display monster count at 0x0041591f`. Total leased execution is 406.969 s,
+including full-state exports/comparison. No state reset or package opening is
+used during that run. The native UI displays the same latched driver error.
+
+Main's concurrent Graphics integration is **API 1.7**, not 1.6. Its reviewed
+additive contract changes optional text and construction/tooltip branches;
+normal rendering retains named glyph stops without installing the probe-only
+text adapter. The evidence inspector/oracle now explicitly accepts 1.7 and
+pins its native 128-frame report SHA
+`4448aeb44920d89b271e9af276477ee545fe797164b5b654e26c18a545d1a16c`.
+A regression compares all 1.7/1.5 no-input chained/full-surface hashes. New
+required gray/tooltip/background regions are preflighted through the published
+API. This **does not expand Rust's Graphics 1.5 domain** or claim CAVE/glyph
+support in the native renderer. No Graphics owner file is edited.
+
+The builder defaults to integrated `motor/`. While ABI 1.3 is pending main,
+`RISING_MACOS_ENGINE_SOURCE` may explicitly select the approved engine repository
+for a development build only. The builder archives the immutable 363faa9 Git
+object into its own build directory; the external checkout may advance without
+changing that input. Native binaries and all
+prepared inputs remain inside the declared ignored data root. No implicit
+library fallback or uncommitted source snapshot is accepted. Final integrated
+builds, GPU readbacks, real-window throughput and common gates follow below.
+
+### Final native validation and delivery
+
+Exact coordinator development build **869ffaa22db49105c39c31444790b4648551a886**
+passes with the explicitly approved engine-source override. Both the builder
+and all native/proof runs use the shared heavy lease; each execution is below
+20 minutes. The builder archives 363faa9 from the external engine repository
+read-only. The external checkout and both `motor/` trees are unmodified.
+The linked Rust static archive SHA-256 is
+`8b089afc9d1a92330c376dbdd62f155a6603377f01b796a11a56e393858faf7d`;
+the signed bundled shared library used by proof tools is
+`3b98ff15054128b2ced4dee51ed3fb60402ae5affeb289b4d618146e286de713`.
+The [structured delivery](validation/m3-abi13-delivery.json) also pins the live
+Swift executable, native driver, input manifest, build manifest and logs.
+
+The [final bundled Python comparison](validation/m3-abi13-final-prefix.json)
+passes **257/257 states, 11/11 checkpoints and 128/128 full surfaces**, plus
+128 Python surface/palette/cache/ordered-effect comparisons. Python is only
+the test oracle. The [final actual native-window horizon](validation/m3-abi13-native-horizon.json)
+passes **18,401/18,401 states and 9,200/9,200 surfaces** using the same statically
+linked production driver and visible Metal view. It completes frame **10,800**,
+then displays the first named stop at frame **10,801**:
+`between_frames · quadro 10801 · ABI 5: Display monster count at 0x0041591f`.
+No reset, evidence-state loading or surface substitution occurs in that chain.
+The entire full-state audit takes **420.244 s, 25.699 fps**; the preceding
+1486c82 run also passes in 409.110 s at 26.399 fps. Both final GPU readbacks
+check every one of 1,920,000 displayed pixels; the horizon PNG SHA-256 is
+`62de37f3e04ed53174dc64f6ae6fe65cb1dc82e95a1bb4a1f1d9cb6bdf7f860c`.
+
+The [normal native live smoke](validation/m3-abi13-native-inspection-smoke.json)
+measures **40.914 fps**, 406 frames / 9.923 s, including the required startup
+proofs and all reached surface comparisons. Per frame: Rust logic **11.042 ms**,
+Rust renderer/generation **4.451 ms**, proof export/hash **8.000 ms**, Metal
+upload/presentation/GPU completion **0.921 ms**, other loop/notification work
+**0.027 ms**, total **24.441 ms**. Host projection belongs only to proof/debug;
+native rendering has no Python pixels, per-frame JSON/PNG or Python IPC. The
+previous real Python/raw-canvas UI measured 8.470 fps; its 9.898-fps worker
+measurement excluded IPC/native presentation. Frame counts differ and the
+machine is shared. GPU PNG evidence is exported after pausing, outside timing.
+
+The [build](validation/m3-abi13-build.log) passes **102 consumer tests, zero
+skips**, **27 native exercise checks** and **16 inspection/live checks**.
+Source/asset binding, portable isolated Python imports, relocated runtime,
+ARM64 architecture and strict deep signing pass. Existing 90-second readiness
+and 45-second check budgets remain unchanged. The initial dynamic-link build
+passed signing verification but failed LaunchServices startup because hardened
+DYLD library validation rejected the ad-hoc dylib's Team ID. Its
+[failed log](validation/m3-abi13-initial-dynamic-build.log) is preserved. Static
+linkage fixes that failure while retaining hardened signing and adding no
+library-validation exception. Another failed source-revision guard is recorded
+in the delivery; immutable Git-object extraction fixes the advancing-checkout
+race without editing or resetting the engine repository.
+
+[Common checks](validation/m3-abi13-common-maintenance.log.gz) pass with
+`/usr/bin/python3 -B scripts/check.py`, read-only in the maintenance worktree,
+using its `.local/python`; observed revision
+`b896665b39696bf3bc5ff90b3c6bf6446d06581c`. Core 545/211 optional skips,
+Combat 279/153, Economy 513/208, Graphics 255/0, Missions 154/33, AI/runtime
+109/7, Audio 79/4 and workflow 9/0: **1,943 tests, 616 optional skips, zero
+failures/errors**. Owned commit paths/trailers, documentation links and
+`git diff --check` also pass. No new original-x86 capture is claimed: these
+app proofs compare unchanged original evidence and the Python oracle.
+
+Final fetch still exposes main **c5988c4** with **ABI 1.2**. Consequently a
+default integrated-main ABI 1.3 build remains **pending**, not passed. The
+builder defaults to archived integrated `motor/`, with the visible named
+`RustRendererABI1.3NotIntegrated` guard until its renderer lands; the temporary
+external override is development-only and never an implicit fallback. Native
+input/orders and M3.3 Test A remain unsupported; the prior inspection recorder
+remains separate and injects no orders. Rust's Graphics 1.5 domain, later text/
+input branches, Cyclage and the frame-10801 engine branch remain explicit gaps.
+Only the feature branch is pushed; main integration and acceptance are left
+to the coordinator. Final evidence/documentation commits change no executable
+code after the validated 869ffaa build.
+
+## M3.3 Test A — answer-stream half and native input recording
+
+Implementation **96303fc**, focus/responder correction **ebacca2** (full validated
+build `ebacca229f5fa72cdb3ab26d368e434c9c8e5979`), based on approved **1d29d81**.
+No merge was performed for this task. The [input API contract](M3_CONTRACT.md#m33-test-a--frame-input-interchange-and-answer-stream)
+specifies inputs, normalization, mutation/order and explicit failures.
+
+`ScriptedInput(root, dict_or_json)` imports the actual Missions schema through
+its unchanged pure validator and exports canonical JSON bytes.
+`FrameAnswerMapper(script, hwnd=...)` takes explicit frame/phase/poll-site
+requests and returns the declared cursor/key/message/translate/dispatch rows.
+`MacOSSessionRecorder(root).event(frame, event)` records monotonic game-frame
+mouse/key events; `export_script(stop_frame=...)` returns that validated script.
+No wall-clock timestamps, Rust input calls, game-memory writes or WndProc flag
+patches occur. Messages dispatch in order; cursor holds; keys reset per frame
+and repeat their literal signed answer at every poll. Human key transitions
+export held `-32768` values throughout Control/depot holds. Imported key/message
+values remain literal, including K1's digit-1 WndProc message and the native
+unlisted-vkey-0x45 zero polls. Legacy per-poll journals remain distinct.
+
+The [six-probe proof](validation/m3-test-a-answers.json) uses the unchanged
+original references for intact `RISING.EXE` SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+It records every source input/log hash and the owner module SHA-256
+`57cb30f1fd6f947107de38ccc2de09874bdd94c4b465af7ea84b2704dbddf609`.
+All 19 schema/input/summary/log Git blobs used here equal fetched main's blobs.
+
+| Probe | Frames after 128 | Declared answers | First difference | Canonical byte round trip |
+| --- | ---: | ---: | --- | --- |
+| P1 | 501 | 7,522 / 7,522 | none | equal |
+| P2 | 601 | 9,034 / 9,034 | none | equal |
+| P3 | 3,001 | 45,032 / 45,032 | none | equal |
+| P6 | 2,272 | 33,873 / 33,873 | none | equal |
+| P7 | 3,572 | 53,099 / 53,099 | none | equal |
+| K1 | 501 | 7,037 / 7,037 | none | equal |
+
+All **155,597** answers match per frame, phase and original poll return site.
+Native logs supply only requests, never expected answer bytes. HWND=0 is an
+explicit scenario declaration, checked against all native dispatch records.
+The sole omitted field is `wndproc_flags_after` (102 original-game outputs),
+which belongs to Test A's deferred state half. No game-state equivalence under
+orders is claimed. Each canonical export/import/export is byte-identical;
+original files are read-only. The CLI `scripts/validate_macos_input.py` refuses
+to overwrite its report and lists the first difference if any.
+
+Native NSEvents are stamped on the engine's serial queue for its next frame.
+Recording begins only after frame128. Starting recording focuses the Metal
+view, observes initially held modifiers and records focus-loss releases.
+**● Gravando entrada**, **Parar gravação** and **Exportar entrada** are visible
+in PT-BR. Reset is disabled during capture. Stop/export drains native work and
+the isolated worker chain. Errors latch visibly and prohibit successful export
+of incomplete data. **Ordens ao vivo indisponíveis** stays visible; host events
+never alter the no-input Rust structure. Fixed clicks use k/k+1/k+3, with cursor
+holding and deferred subsequent moves; continuous human drags remain outside
+this recorder's supported domain and are labeled unavailable.
+
+The [exact coordinator build](validation/m3-test-a-build.log), using the allowed
+read-only **363faa9 ABI 1.3** source override, passes **109 consumer tests, zero
+skips**, **27 native exercise checks** and **20 inspection/live checks**.
+Signatures, ARM64 architecture, asset/source binding, isolated portable runtime
+and relocation pass. The native smoke now sends constructed NSEvents through
+the actual AppKit window/responder chain, rather than calling view handlers
+directly. It proves the visible native indicator, key focus, Ctrl hold, click
+cadence and native atomic export. Rust remains on its no-input chain with
+257 states, 11 checkpoints and all 410 reached surfaces equal. Real UI rate
+is **39.097 fps**; no 9,200-frame engine rerun was needed for this input-only
+change. The prior full-window result above remains historical evidence.
+
+The [actual saved-file proof](validation/m3-test-a-native-export.json) imports
+the complete actual Missions harness and accepts the exported bytes unchanged.
+Move=407, down=408, up=410, Ctrl release=411; cursor=(400,272). SHA-256:
+`39e9e1cce2c0455d12a0c637f24ff77053f4967ecf64ded9e2ab072c3bef4820`.
+Its canonical byte round trip and all 283 input-schedule frames equal Missions'
+own scheduler. These are **input schedules**, not game-state hashes. Production
+uses NSSavePanel; automated smoke selects the explicit CLI evidence destination
+and tests the same atomic save action. Human destination selection is not
+automated. The earlier pre-focus build's passing artifacts are preserved.
+
+[Common checks](validation/m3-test-a-common-maintenance.log.gz) pass read-only
+from maintenance with `/usr/bin/python3 -B scripts/check.py` and its
+`.local/python`; observed revision `c203400a833f44593a66d5fd5546532e746a19c7`.
+Core 546/212 optional skips, Combat 279/153, Economy 513/208, Graphics 255/0,
+Missions 154/33, AI/runtime 109/7, Audio 79/4, workflow 9/0: **1,944 tests,
+617 optional skips, zero failures/errors**. An initial targeted worker test
+failed before asset loading because RISING_INPUTS_ROOT was unset; the declared-
+input rerun and both complete builds pass. The failed setup log is preserved.
+
+The [delivery manifest](validation/m3-test-a-delivery.json) pins library,
+artifact and source hashes. Main advanced to **d1ff3e0 / ABI 1.4** while this
+task ran; this delivery deliberately keeps testing the explicitly authorized
+363faa9 library, with no new ABI acceptance or main merge. Adopting ABI 1.4
+remains separate. Test A's WndProc effects/whole-state half requires engine
+order support; no orders were injected. Test B's 3,000-frame human original
+replay and new original-x86 captures were not run. No M3 acceptance is recorded.
+Final evidence/documentation commits change no executable code after ebacca2;
+only `feat/macos-playable` is pushed non-forcibly.
+
+## Integrated ABI 1.4 and Graphics 1.8 adoption
+
+Merged fetched main **ef52cb0** into the front at **091aee2**. Implementation
+and validated APP_BUILD commit: **e760756c44f79950cedc146ac17654b19c2d18c0**.
+Only owned app sources/manuals are changed; `motor/`, pinned references,
+provider implementations and original evidence are unmodified. The standard
+workstream preparation helper creates only ignored read-only input links.
+Build/test caches remain ignored. No main integration or acceptance occurs.
+
+Both ctypes and native consumers now require **ABI 1.4 / 0x00010004**. Native
+creation also checks `rl_render_contrato()==0x00010007`, the Rust Graphics 1.7
+domain. The checked C layouts and caller-buffer lifetimes are unchanged;
+generation query → read-only render → phase2 → phase3 ordering is preserved.
+Phase2 alone owns game display effects. The Swift binary statically links the
+same reviewed ABI and app driver, keeping hardened signing. The temporary
+363faa9 override is retired explicitly; APP_BUILD uses integrated `motor/`
+from the identical immutable source archive as the app, not another checkout.
+ABI/capability errors and render stops remain visible and named.
+
+The isolated Python inspector/oracle explicitly accepts **Graphics 1.8** and
+pins its 128-frame HUD report SHA-256
+`613ec2348b7fe0d597690ca4601af7f825c0d227133cdddc6b10e822e8eee845`.
+The consumer regression checks all 128 chained/full-surface hashes against
+1.7. The owner declares no new callback or heap region; the existing actual
+Economy habitation reader covers CAVE bags. Native labels/metadata accurately
+retain Rust Graphics 1.7 rather than claiming the Python 1.8 extensions.
+No glyph/text substitute, default habitation answer or order injection is added.
+The [current contract](M3_CONTRACT.md#current-integrated-backend--abi-14--python-graphics-18)
+supersedes the earlier development-backend notes.
+
+The exact [APP_BUILD](validation/m3-abi14-app-build.log) command is unchanged:
+`python3 -B compilar-jogável --development-ref HEAD --inputs-root
+"/Users/marcio/git/Rising Lands" --data-root
+"/Users/marcio/git/Rising Lands/local-data/macos-playable"`, with the existing
+relocatable Python runtime declared and no external-engine override. It passes
+**109 consumer tests, zero skips**, **27 native exercise checks** and **20
+inspection/live checks**. Source/assets, isolated relocated runtime, ARM64 and
+strict deep signing pass. Existing readiness/check budgets are unchanged.
+
+The [fresh bundled live proof](validation/m3-abi14-live-prefix.json) passes
+**257/257 masked states, 11/11 checkpoints, 128/128 original full surfaces and
+128/128 Python 1.8 surfaces**, with palette/cache/ordered-effect comparisons
+and zero observer failures. The production frame driver is the one under test.
+The [fresh Test A proof](validation/m3-abi14-test-a-answers.json) retains all
+**155,597/155,597 answers**, no first difference, and six byte-identical canonical
+round trips: P1 7,522; P2 9,034; P3 45,032; P6 33,873; P7 53,099; K1 7,037.
+Native poll logs supply requests only; WndProc output flags/state remain outside
+the answer half. Original input/evidence bytes and masks are unchanged.
+
+The [real native UI smoke](validation/m3-abi14-native-inspection-smoke.json)
+measures **41.386 fps** (401 frames, 9.689 s), with a visible Metal window,
+required startup proofs and actual presentation. GPU readback matches all
+1,920,000 displayed pixels. All 406 reached original surfaces are equal. The
+input recorder still receives constructed NSEvents through the AppKit responder
+chain, exports the literal frame file, and injects nothing into Rust.
+
+[`sh motor/validate.sh`](validation/m3-abi14-engine-validate.log) passes:
+fmt, clippy, **28 Rust tests**, **61 Python tests** plus **10 renderer child
+tests**, **75 original-x86 differential comparisons / zero mismatches / zero
+skips**, C header checks, Swift ABI interoperability and **128/128** Swift render
+surfaces. The engine gate's library is debug; the measured application is
+release. Its unchanged `pinned_reference.py` uses logic revision
+`7ceeff909b52b7d4f59723f35dfe43a9deda41ff` and Graphics revision
+`ce441852bcada750a8f91da8ed3302f1668c4405`, materialized/checked from Git objects.
+Current Graphics 1.8 source never replaces that engine reference tree.
+
+[Common checks](validation/m3-abi14-common.log.gz) also pass in this prepared
+feature worktree using `/usr/bin/python3 -B scripts/check.py` and `.local/python`:
+Core 561/213 optional skips, Combat 279/153, Economy 521/209, Graphics 261/0,
+Missions 154/33, AI/runtime 112/8, Audio 79/4, workflow 9/0 — **1,976 tests,
+620 optional skips, zero failures/errors**. All native/heavy runs used the
+coordination lease and stayed below 20 minutes. No new original capture is
+created or altered. The [delivery manifest](validation/m3-abi14-delivery.json)
+pins libraries, inputs and result artifacts, including tested shared library
+SHA-256 `7079b58383dba56bfd885883161a300650c697dd0053e38bb5dbb6c0364d556f`.
+
+Remaining scope: Test A game-state/WndProc-effect half, Test B and order support;
+continuous human drag capture; glyphs; Rust ports of the added Python 1.8
+families. The 9,200-frame/first-stop horizon was **not rerun on ABI 1.4**; prior
+ABI 1.3 results remain historical. Requested APP_BUILD, engine gate and bounded
+live/Test A proofs pass. Final evidence/docs commits change no executable code
+after e760756. Only the feature branch is pushed without force.
+
+## Play mode and independent display scheduling
+
+Work resumed after fast-forwarding the front and merging fetched main 8138e6e.
+The integrated ABI1.4 / Rust Graphics1.7 / Python Graphics1.8 pins are unchanged.
+Only macOS-owned paths are changed; no engine optimization is included.
+
+The native driver defaults to validation for existing proof consumers. New
+`macos_live_validation(driver,0)` must be selected before phase1, and removes
+projection/hash/equality/observer work while retaining the real phase ordering,
+caller buffers, renderer metadata checks and named stops. Input files, masks,
+original hashes/addresses and evidence are unchanged. A new actual-driver
+regression compares all 128 play-mode output surfaces/palettes and the final
+whole projection to validation mode, while asserting zero callbacks/proof time
+and rejecting mode changes after phase1.
+
+The UI's Jogar mode uses a fixed host game cadence (20 Hz nominal default,
+configurable independently) and asynchronous Metal presentation of the latest
+complete frame. See the [manual](../../docs/MACOS_PLAYABLE.md#native-play-mode-and-independent-clocks)
+for buffer ownership, scheduling and the original-rate dependency. A three-slot
+pool releases textures only after GPU completion. Main thread handles AppKit
+and resizing; engine initialization, frame work and display acquisition run on
+background queues. Validar and APP_BUILD's validation smoke keep their audits.
+Sustained real-UI measurements and gate outputs will be appended after validation.
+
+### Validated results for play mode
+
+The final executable source/build is **55cddc571ec75bf6b305aabd75c33d5697fa7471**;
+subsequent evidence/docs commits do not change executable behavior. Exact
+[APP_BUILD](validation/m3-play-app-build.log) passes **110 consumer tests / zero
+skips**, **27 native exercise checks** and **20 inspection/live checks**. ARM64,
+isolated relocated runtime/source/assets, static ABI1.4 binding and strict deep
+signing pass. The app still uses integrated main's motor from its immutable Git
+archive. Shared library SHA256:
+`792edc2e0812b6a2636e1033f2235c5f89ce8b7336ccb825a1c45902d48fa6a1`;
+static engine archive:
+`8827032dfe15a6df294884ad2b63f8e4317db7818630237ed80ebff9f288a4a0`.
+No other engine checkout or override is used.
+
+Fresh [prefix proof](validation/m3-play-live-prefix.json) retains **257 states,
+11 checkpoints, 128 original surfaces and 128 Python Graphics1.8 surfaces**, with
+palette/cache/ordered-observation checks and zero observer failures. The new
+consumer regression also checks 128 play-mode pixels/palettes and the final whole
+projection against validation, while confirming zero proof work/callbacks. Fresh
+[Test A](validation/m3-play-test-a-answers.json) retains **155,597/155,597** declared
+answers: P1 7,522; P2 9,034; P3 45,032; P6 33,873; P7 53,099; K1 7,037. All six
+canonical byte round trips match; no first difference and no orders injected.
+An initial proof command used the builder's staging bundle path, which is moved
+at delivery; its [setup failure](validation/m3-play-prefix-staging-path.log) is
+preserved. The corrected proof uses the actual delivered bundle under the shared
+build lock and checks its source commit before loading any library.
+
+The [four 65-second UI runs](validation/m3-play-timing.log) use the actual
+unoccluded native window and CAMetalDrawable presentation timestamps. Jogar gives
+**119.920 fps average / 117 minimum one-second fps** at nominal 20 game frames/s;
+**119.878 / 117** at 60.001 game frames/s; **119.919 / 117** at unlimited
+**69.226 game frames/s**. No warmup bin is discarded, no proof work or publication
+drop occurs, and final readback through the asynchronous texture pool verifies
+all 1,920,000 pixels. Maximum excess main-thread timer delay is below 2 ms in
+all play runs. No interpolation or synthetic game frame is generated.
+
+Validar gives **63.210 displayed fps average / 25 minimum**, with the retained
+startup prefix, 257 states, 11 checkpoints and **4,117/4,117 reached surfaces**.
+Its first five full-second bins are 25,27,25,26,26; later bins 63–70. The short
+APP_BUILD audit run is 44.252 displayed / 44.362 game fps; historical 41.386 fps
+was also a short startup-audited sample. The manual separates those scopes.
+
+Uncapped per game frame: Rust logic **10.313 ms**, Rust render **4.059 ms**, app
+upload **0.059 ms**. Per display: CPU encoding **0.030 ms**, GPU **0.141 ms**.
+Drawable wait is separate; asynchronous stages overlap. The app removes proof
+and synchronous presentation costs. The engine remains the throughput limit;
+state-reload cost is an engine-owner profiling candidate, not individually timed
+here. The default is the documented 20 Hz nominal TickClock rate; the original's
+actual timing remains unmeasured. Current no-input performance does not establish
+raid/order or full-mission headroom, Test A state-half fidelity, or Test B.
+
+[Engine gate](validation/m3-play-engine-validate.log) passes **28 Rust tests,
+61 Python tests plus 10 renderer child tests, 75 original-x86 comparisons / zero
+mismatches / zero skips**, C layouts, Swift ABI1.4 interoperability and **128/128**
+Swift render surfaces with Metal. Its library is debug, so its throughput is not
+an application release measurement. Logic/Graphics reference commits and original
+hashes/masks are unchanged. All heavy runs use the lease; build+four timing runs
+use an exclusive lease. Feature push only; no main integration or acceptance.
+
+[Common checks](validation/m3-play-common.log.gz) pass from this prepared feature
+worktree using `/usr/bin/python3 -B scripts/check.py` and its read-only linked
+`.local/python`: Core 561/213 optional skips, Combat 279/153, Economy 521/209,
+Graphics 261/0, Missions 154/33, AI/runtime 112/8, Audio 79/4, workflow 9/0 —
+**1,976 tests, 620 optional skips, zero failures/errors**. Documentation links and
+`git diff --check` pass. Every actual leased execution stays below 20 minutes.
+The [delivery manifest](validation/m3-play-delivery.json) pins source, library,
+benchmark and validation artifacts. Only `feat/macos-playable` is pushed without
+force; no main merge or milestone acceptance is performed.

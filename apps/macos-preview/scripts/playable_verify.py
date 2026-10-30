@@ -28,10 +28,13 @@ def verify(app):
     environment = {k: v for k, v in os.environ.items() if k not in ('RISING_APP_ROOT', 'PYTHONHOME', 'PYTHONPATH')}
     code = """import sys,json,pathlib
 root=pathlib.Path(sys.argv[1]);sys.path.insert(0,str(root))
-import engine,research_adapter,navegacao_unidades,economia,alvos_alcance,macos_state_consumer,macos_rust_abi,macos_projection_codec
+import engine,research_adapter,navegacao_unidades,economia,alvos_alcance,macos_state_consumer,macos_rust_abi,macos_projection_codec,macos_native_driver
 codec=macos_projection_codec.ProjectionCodec(root/"librising_macos_projection.dylib")
 abi=macos_rust_abi.Frames(root/"librising_engine.dylib")
 h=abi.create();abi.free(h)
+native=macos_native_driver.NativeDriver(root/"librising_macos_live.dylib",root/"librising_engine.dylib",root/"native-inputs")
+native.advance();native.advance();assert native.status().phases_equal==3 and native.status().surfaces_equal==1
+native.close()
 assert macos_state_consumer._sha((root/"engine-inputs/RISING.EXE").read_bytes())==macos_state_consumer.EXECUTABLE_SHA256
 image=macos_state_consumer.load_accepted_m1()
 assert len(image.blocks)==881 and image.inspect()["bytes"]==2659375
@@ -39,7 +42,7 @@ p=engine.Preview();p.reset('jogavel');p.order(0,9,4)
 for i in range(4):p.step(200)
 assert p.state()['units'][0]['pos']==[9,4]
 print(json.dumps({'prefix':sys.prefix,'commit':engine.MANIFEST['commit'],
-'modules':[m.__file__ for m in (engine,research_adapter,navegacao_unidades,economia,alvos_alcance,macos_state_consumer,macos_rust_abi,macos_projection_codec)]}))
+'modules':[m.__file__ for m in (engine,research_adapter,navegacao_unidades,economia,alvos_alcance,macos_state_consumer,macos_rust_abi,macos_projection_codec,macos_native_driver)]}))
 """
     result = subprocess.run([str(runtime), '-I', '-B', '-c', code, str(payload)],
                             env=environment, capture_output=True, text=True, timeout=30)
