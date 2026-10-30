@@ -1,4 +1,27 @@
 {
+ "final_owned_source_sha256": {
+  "pesquisas-paralelas/ia-runtime/affgame_hud_ia.py": "afdb24dacf4c58646b81e16e6826a106065a2e8b200e3013ed3f89bdb9332708",
+  "pesquisas-paralelas/ia-runtime/capturar_construcao_teclas_ia.py": "2959d1a8e60f7446631238954d42c73d0f4c84af9d697dc0dc3f05f81d7c8a7f",
+  "pesquisas-paralelas/ia-runtime/capturar_entrada_ordens_ia.py": "79c33f81f219c99562e788e85b4ef1f4d990fba6c346e260e65d5a5263a6e36c",
+  "pesquisas-paralelas/ia-runtime/capturar_mensagem_cidade_ia.py": "cd97e0a3ca3510907d65a80039ea3b021611db43d6fec167501bdb0f72fa1a5c",
+  "pesquisas-paralelas/ia-runtime/capturar_paginas_deposito_ia.py": "60c7361f97fca3154d848e8c613d42132531c7b8e42cda29aa6cd9fd518de970",
+  "pesquisas-paralelas/ia-runtime/casos_construcao_teclas_ia.py": "19214b2dd35c969c8e5c4b093686035d0dded76f1113965287c7d912d0c33edb",
+  "pesquisas-paralelas/ia-runtime/casos_entrada_ordens_ia.py": "026041d6ff4129fa4668e89d41291b89b5b9da8dccf7b9d97308a997298524cb",
+  "pesquisas-paralelas/ia-runtime/casos_paginas_deposito_ia.py": "32b4a7d94dc847310c8642ca02a6b6bc076c9adb4e156544285ba90520ae5875",
+  "pesquisas-paralelas/ia-runtime/composicao_encadeada_ia.py": "4d4f45ce5fc2c2599884d876f7c189554c61b71852115a83d4c96a6f4efc873b",
+  "pesquisas-paralelas/ia-runtime/composicao_entrada_ia.py": "4dff2595d83ba90bfa88a2710fc009bd9a78657177ba09129f644d661f90e754",
+  "pesquisas-paralelas/ia-runtime/composicao_quadros_ia.py": "afdc8a396b254f5e65167b215c9a785d18cba530169c683ad5c35d63ed786e43",
+  "pesquisas-paralelas/ia-runtime/construcao_entrada_ia.py": "14d8519f20e7fc4c6e0fefaef3258e5745a79af33aebcf443c10904efedfba08",
+  "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "0d3c50f9c07dcd4badb4d37217e3d6e8407c9146de968258addff2a2de982928",
+  "pesquisas-paralelas/ia-runtime/mensagem_cidade_ia.py": "5ba731bf65ebfdf8301a7c29b944295c8fc9bb7cbc68dc4705b23638577ba196",
+  "pesquisas-paralelas/ia-runtime/provar_entrada_ia.py": "95a48267e6c089cc6822fed55a240cd711c3f95031352eccb2481bc9500c3a29",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "03a314d152c6e0673d3aef7d2c6051b9d48ee985f94f70b358a908e8a7d07694",
+  "pesquisas-paralelas/ia-runtime/proxima_etapa_quadro.py": "d9a3c39db33703c43d0cc16de2446b6cf860f894aa2d875a1828bbfda3f11f80",
+  "pesquisas-paralelas/ia-runtime/validar_construcao_teclas_ia.py": "84ee8b219e3e7b0a604afd2398cf9347cf42c421b9d5f8bdc39867485d3db5e6",
+  "pesquisas-paralelas/ia-runtime/validar_entrada_ordens_ia.py": "9e6d51fe3732f9e95bb54840ba494f5c682bdfa35140046c82b2a7f47835fc1d",
+  "pesquisas-paralelas/ia-runtime/validar_paginas_deposito_ia.py": "4d2a1fa4a86b1aaf03acf8c13b43d06ea7fe1d1c5759d649af6bcfb27d61c6bf",
+  "pesquisas-paralelas/ia-runtime/validar_producao_entrada_ia.py": "6214f411b1e87addc419c2a26732ae3c579ca48879bd3265aa35f88351844e7a"
+ },
  "logs": [
   {
    "path": ".local/recruit-binding.log",
@@ -44,6 +67,16 @@
    "path": ".local/s1-recrutamento-planejamento.log",
    "sha256": "d22a8720b591e2988d6d67e95445a0fde0fb3ec1b55d91ebfd62fb17b731bc08",
    "status": "diagnostic indicator prefix: planning frames 129..2546; missing DX at frame2547"
+  },
+  {
+   "path": ".local/recruit-binding-final-source.log",
+   "sha256": "694ba3ff6b820bef92016b22e5a72e3dfb078320f3d515815a44a6bcf7f6690e",
+   "status": "passed: final-source native recruit replay, 6/6 equal"
+  },
+  {
+   "path": ".local/s1-recruit-regressions.log",
+   "sha256": "0c9a95dd52acdbf0368f942c5d21bf0b0f346253acab2016296f91d37727e4ba",
+   "status": "passed: 417 native regressions / 0 mismatches, then domain gate 129 tests / 8 explicit skips"
   }
  ],
  "schema": "rising-lands/ai-runtime-s1-recruit-attempt-journal/1",

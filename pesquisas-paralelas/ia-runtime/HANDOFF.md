@@ -816,3 +816,63 @@ native skips; five focused recruitment/city tests pass. Full input-order,
 deposit-page and construction/key native regressions plus the final domain
 gate are running next. Strict/planning S1 indicators follow from the committed
 implementation. No main integration, acceptance or complete S1 proof is claimed.
+
+
+## S1 continuation — final indicator reach and regressions
+
+Implementation `bf8ec61` is pushed to `feat/re-ai-runtime`; indicator and native
+regression reports are pushed at `491553f`. Fresh strict and planning runs on
+that implementation use replay-checked S1 `bab6c7c` and request the whole
+16,922-frame post-128 probe. Both compare **2,418 frames equal, 129–2546**;
+first difference is null. Both stop in **frame2547** on Economy's missing
+**DX at SetSortEngin CALL `0x420f8c`, entry `0x445fbc`**. The planning run
+records zero Graphics bypasses and remains local/diagnostic. Strict report:
+`validacao/s1-recrutamento-strict.json`. Full report and exact contract:
+[S1_RECRUIT_CONTINUATION.md](S1_RECRUIT_CONTINUATION.md).
+
+**Next owner request: Economy.** `caverna_recrutamento.ARGUMENTOS['SetSortEngin']`
+needs `EDX: 0xffff`; `_SortieTroupe` must pass the actual exit `celula` alongside
+`EAX=unidade`. AX/DX are u16 unit/exit cell; the existing native S1 owner capture
+observes AX=4, DX=`0x0e0f` (3599) at frame 2547. Those values are observations,
+not defaults to inject. Core's adapter is bound, returns all seven registers
+and rejects the omitted DX before placement touches memory. Bag retirement,
+conversion, healing, fatigue reset and experience retain their earlier effects;
+there is no retry or rollback. The city provider is independently validated
+and installed, but the current Python S1 stops earlier. After Economy forwards
+DX, rerun the same S1 indicator before assigning any later stop. AI-owner city
+message bodies remain this front's named dependency at `0x48484c`.
+
+All three native leaf regressions rerun through the shared heavy lease:
+
+| Differential | Cases | Complete | Named stops | Mismatches | Seconds |
+|---|---:|---:|---:|---:|---:|
+| Input orders | 124 | 118 | 6 | 0 | 130.523 |
+| Deposit pages | 203 | 203 | 0 | 0 | 148.354 |
+| Construction/keys | 90 | 85 | 5 | 0 | 129.491 |
+
+Every load-tail/between-frames/frame-1/pause/code reproduction passes. Along
+with six recruitment prefixes (three below-threshold returns, three DX stops)
+and 27 city cases (23 returns, four AI-prefix stops), this is **450 differential
+cases, 432 complete returns/comparisons, 18 named boundaries, zero mismatches**.
+The bounded prefixes and complete returns retain their distinct scopes; no
+CPU-free replay or repeated adapter route inflates the native case count.
+Original identity/addresses, callback order, unknown-register and failure
+semantics remain those stated above and in the linked report.
+
+Final leased `python3 -B scripts/check.py --domain ai-runtime`: **129 tests,
+121 successful executions, eight explicit native skips**, no failures/errors,
+138.912 seconds; documentation links pass. The native differentials above
+actually ran; they are not skipped. `git diff --check` passes. The attempt
+journal `validacao/s1-recrutamento-attempts.json` preserves actual setup-error
+logs and the superseded v1 read-capture correction separately from passing
+runs. No foreign source/evidence, mask, pinned snapshot or historical hash
+was modified. No main integration/acceptance or other task was started.
+S1 whole-state pass-2 proof and a completed frame2547 remain unclaimed.
+
+
+Final provenance check refreshed the six recruitment prefixes once more on
+committed source `491553f` (same implementation as `bf8ec61`): **6/6 equal**,
+three missing-DX boundaries, no mismatches. This replaces the mutable validation
+report taken before the final city route was added; original captures remain
+unchanged. All six reports' recorded owned source hashes now match the final
+implementation exactly. The final documentation-link-only rerun also passes.

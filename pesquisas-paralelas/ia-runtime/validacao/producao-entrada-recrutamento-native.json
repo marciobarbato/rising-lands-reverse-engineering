@@ -362,10 +362,10 @@
  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
  "schema": "rising-lands/ai-runtime-recruit-production-prefix/2",
  "scope": "Native CalculTroupe through return or before SetSortEngin; missing Economy DX retained as ABI stop",
- "source_revision": "018687af1c7fc979d416b2ac45393a1b022f36f1",
+ "source_revision": "491553f383705b0521f99e6f5f50b30263339617",
  "source_sha256": {
   "pesquisas-paralelas/ia-runtime/composicao_entrada_ia.py": "4dff2595d83ba90bfa88a2710fc009bd9a78657177ba09129f644d661f90e754",
-  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "3de1e1c1b79bd8382fb679bc3bbeedf58e2926494d96114a4245421b2d79f3b7",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "03a314d152c6e0673d3aef7d2c6051b9d48ee985f94f70b358a908e8a7d07694",
   "pesquisas-paralelas/ia-runtime/validar_producao_entrada_ia.py": "6214f411b1e87addc419c2a26732ae3c579ca48879bd3265aa35f88351844e7a"
  }
 }

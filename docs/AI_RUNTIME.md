@@ -903,3 +903,14 @@ stopping before placement on Economy's missing DX. Every provided owner
 argument, all changed non-stack bytes and the original native store sequence
 agree, including actual BL direction. These checks do not establish a complete
 S1 producer or a whole-state input-chain proof.
+
+
+Final S1 continuation validation: strict and planning indicators both compare
+2,418 equal frames (129–2546), then report Economy's missing DX at SetSortEngin
+in frame 2547; planning bypass count is zero. The three native regressions
+compare 417 cases (406 complete, 11 named stops), zero mismatches. Combined
+with six recruitment prefixes and 27 city cases, the bounded differentials
+have 450 cases, 18 named boundaries and zero mismatches. Final leased domain
+gate: 129 tests, eight explicit native skips, zero failures/errors, documentation
+links passed. See [the continuation report](../pesquisas-paralelas/ia-runtime/S1_RECRUIT_CONTINUATION.md)
+for the exact Economy request and reproduction commands.

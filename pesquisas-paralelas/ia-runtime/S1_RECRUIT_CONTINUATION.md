@@ -120,6 +120,13 @@ suppressed to increase the passing count. The full differential set is 450 cases
 recruit/city prefixes), with zero mismatches. This total excludes duplicate
 full/partial adapter checks and CPU-free replays of the same native cases.
 
+Final leased `python3 -B scripts/check.py --domain ai-runtime`: **129 tests,
+121 successful executions, eight explicit native skips, no failures/errors**,
+138.912 seconds; documentation links pass. The three differentials above actually
+ran natively before the gate; their execution is not represented by its skips.
+The [attempt journal](validacao/s1-recrutamento-attempts.json) records setup
+failures, superseded v1 and fresh passing logs by hash. `git diff --check` passes.
+
 ## Reproduction
 
 All native runs and gates use
@@ -138,3 +145,9 @@ harness setup attempts exposed a missing repository bootstrap, write-only native
 fixture pages and absent local snapshot inputs; each was corrected and rerun.
 The incomplete v1 read-hook capture is preserved, marked superseded, and not
 used by the translation or tests. No failed setup attempt is counted as a pass.
+
+
+The final production-prefix replay was refreshed on `491553f`, after the city
+route was committed: again 6/6 equal. All six reports' owned source hashes
+match the final implementation; final documentation links pass. No behavior
+changed after the passing 129-test gate.
