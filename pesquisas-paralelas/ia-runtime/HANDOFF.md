@@ -1241,3 +1241,13 @@ Full entry blocks remain ignored and hash-bound. No original evidence, foreign
 source, main branch or acceptance record is modified. Latest fetched main
 `1531678` and Missions`7eeb395` still lack S1 pass-2; no S1 whole-state proof,
 per-part reach or part chain is claimed.
+
+Final leased gate on `49eaa48`: **141 tests, eight explicit skips, zero
+failures/errors**,138.289 seconds; documentation links pass. Every owned source
+hash in all four bounded native reports matches the final implementation.
+`validacao/s1-providers-attempts.json` records31 completed attempt logs by hash,
+including setup/method failures, all four ignored planning report hashes,
+the final gate and the last fetched refs. No runtime code changed after the
+passing reruns; this final checkpoint adds only the validation journal/handoff.
+`git diff --check` passes. Only AI/runtime-owned paths changed after main's
+initial fast-forward; the feature is pushed, with no main integration.
