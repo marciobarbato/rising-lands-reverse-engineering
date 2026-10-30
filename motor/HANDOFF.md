@@ -1553,3 +1553,18 @@ raises `EnginSetType` at call0x420f69 while Rust continues. Therefore the strict
 same-stop reader reports a dependency-contract difference, not a passing S1
 continuation. The next piece will test all five new Core owner adapters against
 the original capture and use a separate commit-backed continuation profile.
+
+### Chain9 original-only S1 render evidence
+
+The mini's first completed [compact segment](research/evidence/chain9-s1-render-2250-3000.json.xz)
+replays **750/750 frames2251–3000** from the original frame2250 checkpoint.
+Every whole-state hash and both phase surface hashes exactly reproduce the
+committed Missions S1 trajectory. Raster calls and complete AffText argument/
+pre-text-surface attestations are observed from the unmodified intact x86.
+No translation runs in the capture. It takes321.833s after the shared lease
+grant; the observer/harness and original executable hashes are in the artifact.
+The [bounded recorder](testes/s1_render_capture.py) consumes immutable chain8
+Git-object sources and refuses output replacement. This evidence contains
+hashes and arguments only; it is not an advancing Rust or Python comparison.
+The original checkpoint remains solely an oracle opening, never a Rust reset.
+Earlier segments and the Rust comparison are still pending at this commit.
