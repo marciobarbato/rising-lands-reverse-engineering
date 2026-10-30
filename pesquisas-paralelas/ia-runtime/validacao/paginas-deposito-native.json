@@ -1,0 +1,424 @@
+{
+ "boundary_requests_compared": 7,
+ "by_routine": {
+  "BatimentEstDepot": {
+   "cases": 4,
+   "dependency_stops": 0,
+   "equal": 4,
+   "mismatches": 0
+  },
+  "BatimentEstEnnemi": {
+   "cases": 7,
+   "dependency_stops": 0,
+   "equal": 7,
+   "mismatches": 0
+  },
+  "BatimentEstNeutre": {
+   "cases": 2,
+   "dependency_stops": 0,
+   "equal": 2,
+   "mismatches": 0
+  },
+  "BatimentPeutSeVendre": {
+   "cases": 3,
+   "dependency_stops": 0,
+   "equal": 3,
+   "mismatches": 0
+  },
+  "ChercheIndiceBatiment": {
+   "cases": 3,
+   "dependency_stops": 0,
+   "equal": 3,
+   "mismatches": 0
+  },
+  "EnginSelectContientMiroir": {
+   "cases": 11,
+   "dependency_stops": 0,
+   "equal": 11,
+   "mismatches": 0
+  },
+  "EnginSelectEstBlesse": {
+   "cases": 12,
+   "dependency_stops": 0,
+   "equal": 12,
+   "mismatches": 0
+  },
+  "EnginSelectEstEngin": {
+   "cases": 9,
+   "dependency_stops": 0,
+   "equal": 9,
+   "mismatches": 0
+  },
+  "EnginSelectEstTroupe": {
+   "cases": 9,
+   "dependency_stops": 0,
+   "equal": 9,
+   "mismatches": 0
+  },
+  "EnginSelectPeutAttaquer": {
+   "cases": 22,
+   "dependency_stops": 0,
+   "equal": 22,
+   "mismatches": 0
+  },
+  "EnginSelectPeutDeposer": {
+   "cases": 12,
+   "dependency_stops": 0,
+   "equal": 12,
+   "mismatches": 0
+  },
+  "EnginSelectPeuventTransporter": {
+   "cases": 12,
+   "dependency_stops": 0,
+   "equal": 12,
+   "mismatches": 0
+  },
+  "InputGame": {
+   "cases": 92,
+   "dependency_stops": 2,
+   "equal": 90,
+   "mismatches": 0
+  },
+  "PlayerEstAllie": {
+   "cases": 5,
+   "dependency_stops": 0,
+   "equal": 5,
+   "mismatches": 0
+  }
+ },
+ "capture": {
+  "path": "pesquisas-paralelas/ia-runtime/evidencias/captura-paginas-deposito-ia.json",
+  "sha256": "de83e57388b93a187bf6d5e5468a7f72a456a5f0b2759d38a9385ae4a91bab96"
+ },
+ "changed_bytes_compared": 34904,
+ "comparisons": 203,
+ "core_structure_entry_reference": {
+  "entrada_estruturas_sha256": "5221608b3ddee3cebf884762f514c86aecd575ecda190675fef1cc0b3a37327c",
+  "path": ".local/entrada/nucleo-ref-r3"
+ },
+ "dependency_stops": [
+  {
+   "case": "structure_selected_other_structure",
+   "dependency": "BatimentPeutAttaquer required at 0x0042b2a3; earlier stores retained"
+  },
+  {
+   "case": "page2_structure_selected",
+   "dependency": "BatimentPeutAttaquer required at 0x0042a4dc; earlier stores retained"
+  }
+ ],
+ "equal": 201,
+ "excluded_registers": {
+  "ctrl_carrier_terrain": [
+   "EAX"
+  ],
+  "ctrl_mixed_terrain": [
+   "EAX"
+  ],
+  "ctrl_nothing_terrain": [
+   "EAX"
+  ],
+  "ctrl_page9_kept": [
+   "EAX"
+  ],
+  "ctrl_page9_nothing_cleared": [
+   "EAX"
+  ],
+  "ctrl_page9_soldier_cleared": [
+   "EAX"
+  ],
+  "ctrl_soldier_terrain": [
+   "EAX"
+  ],
+  "noctrl_page8_cleared": [
+   "EAX"
+  ],
+  "noctrl_page9_cleared": [
+   "EAX"
+  ],
+  "page2_colonist_type10_release": [
+   "EAX"
+  ],
+  "page2_colonist_unit0_hover": [
+   "EAX"
+  ],
+  "page2_nothing_terrain": [
+   "EAX"
+  ],
+  "page2_soldier_sanctuary_release": [
+   "EAX"
+  ],
+  "page2_soldier_terrain_hover": [
+   "EAX"
+  ],
+  "page2_soldier_terrain_release": [
+   "EAX"
+  ],
+  "page2_soldier_type17_hover": [
+   "EAX"
+  ],
+  "page2_soldier_unit13_release": [
+   "EAX"
+  ],
+  "page7_enemy_release": [
+   "EAX"
+  ],
+  "page7_flag74_release": [
+   "EAX"
+  ],
+  "page7_sanctuary_hover": [
+   "EAX"
+  ],
+  "page7_sanctuary_release": [
+   "EAX"
+  ],
+  "page7_sanctuary_release_selected": [
+   "EAX"
+  ],
+  "page7_terrain": [
+   "EAX"
+  ],
+  "page7_type17_release": [
+   "EAX"
+  ],
+  "page8_cave_hover_u13": [
+   "EAX"
+  ],
+  "page8_cave_release_type6": [
+   "EAX"
+  ],
+  "page8_cave_release_u12": [
+   "EAX"
+  ],
+  "page8_cave_release_u13": [
+   "EAX"
+  ],
+  "page8_enemy_cave_release_u13": [
+   "EAX"
+  ],
+  "page8_field_hover_u13": [
+   "EAX"
+  ],
+  "page8_field_press_u13": [
+   "EAX"
+  ],
+  "page8_field_release_u12": [
+   "EAX"
+  ],
+  "page8_field_release_u13": [
+   "EAX"
+  ],
+  "page8_mine_hover_u12": [
+   "EAX"
+  ],
+  "page8_mine_release_u12": [
+   "EAX"
+  ],
+  "page8_mine_release_u13": [
+   "EAX"
+  ],
+  "page8_sanctuary_hover_u13": [
+   "EAX"
+  ],
+  "page8_sanctuary_release_u13": [
+   "EAX"
+  ],
+  "page9_cave_hover": [
+   "EAX"
+  ],
+  "page9_cave_release_mode0_u12": [
+   "EAX"
+  ],
+  "page9_cave_release_mode1": [
+   "EAX"
+  ],
+  "page9_cave_release_mode3": [
+   "EAX"
+  ],
+  "page9_enemy_cave_release": [
+   "EAX"
+  ],
+  "page9_sanctuary_release": [
+   "EAX"
+  ],
+  "page9_terrain_af_only": [
+   "EAX"
+  ],
+  "page9_terrain_hover": [
+   "EAX"
+  ],
+  "page9_terrain_press": [
+   "EAX"
+  ],
+  "page9_terrain_release_mode0": [
+   "EAX"
+  ],
+  "page9_terrain_release_mode1": [
+   "EAX"
+  ],
+  "page9_terrain_release_mode2": [
+   "EAX"
+  ],
+  "page9_terrain_release_mode3": [
+   "EAX"
+  ],
+  "page9_terrain_release_mode4": [
+   "EAX"
+  ],
+  "page9_type4_release_u12": [
+   "EAX"
+  ],
+  "page9_type4_release_u13": [
+   "EAX"
+  ],
+  "pageb_cave_hover": [
+   "EAX"
+  ],
+  "pageb_cave_release_mode1": [
+   "EAX"
+  ],
+  "pageb_cave_release_mode3": [
+   "EAX"
+  ],
+  "pageb_colonist_selected": [
+   "EAX"
+  ],
+  "pageb_nothing_selected": [
+   "EAX"
+  ],
+  "pageb_sanctuary_release": [
+   "EAX"
+  ],
+  "pageb_type7_release_mode1": [
+   "EAX"
+  ],
+  "pageb_type7_release_mode3": [
+   "EAX"
+  ],
+  "pagec_af_only_unit13": [
+   "EAX"
+  ],
+  "pagec_hover_unit13": [
+   "EAX"
+  ],
+  "pagec_release_terrain": [
+   "EAX"
+  ],
+  "pagec_release_unit13": [
+   "EAX"
+  ],
+  "pagec_release_unit13_invisible": [
+   "EAX"
+  ],
+  "troops_allied_cave_soldier": [
+   "EAX"
+  ],
+  "troops_builder_built_release": [
+   "EAX"
+  ],
+  "troops_builder_damaged_hover": [
+   "EAX"
+  ],
+  "troops_builder_damaged_release": [
+   "EAX"
+  ],
+  "troops_builder_unbuilt_release": [
+   "EAX"
+  ],
+  "troops_enemy_cave_bomber_empty": [
+   "EAX"
+  ],
+  "troops_enemy_cave_bomber_loaded": [
+   "EAX"
+  ],
+  "troops_enemy_cave_colonist": [
+   "EAX"
+  ],
+  "troops_enemy_cave_soldier_hover": [
+   "EAX"
+  ],
+  "troops_enemy_cave_soldier_release": [
+   "EAX"
+  ],
+  "troops_enemy_sanctuary_soldier": [
+   "EAX"
+  ],
+  "troops_enemy_sanctuary_type10": [
+   "EAX"
+  ],
+  "troops_enemy_type16_type10_hover": [
+   "EAX"
+  ],
+  "troops_neutral_cave_u13": [
+   "EAX"
+  ],
+  "troops_own_cave_hover_u13": [
+   "EAX"
+  ],
+  "troops_own_cave_release_u13": [
+   "EAX"
+  ],
+  "troops_own_cave_unbuilt_release_u13": [
+   "EAX"
+  ],
+  "troops_sanctuary_release_u13": [
+   "EAX"
+  ],
+  "troops_wounded_engin_garage": [
+   "EAX"
+  ],
+  "troops_wounded_hospital_mirror": [
+   "EAX"
+  ],
+  "troops_wounded_hospital_release": [
+   "EAX"
+  ],
+  "troops_wounded_hospital_unbuilt": [
+   "EAX"
+  ],
+  "troops_wounded_soldier_cave": [
+   "EAX"
+  ]
+ },
+ "mismatches": [],
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "path_reproduction": {
+  "between_frames": true,
+  "code_unchanged": true,
+  "frame1": true,
+  "load_tail": true,
+  "paused": true
+ },
+ "pause": {
+  "caller": "CalculGame+0xb4d",
+  "caller_return": "0x42d3b5",
+  "registers": {
+   "EAX": "0x0",
+   "EBP": "0x0",
+   "EBX": "0x0",
+   "ECX": "0x5",
+   "EDI": "0x0",
+   "EDX": "0x1a1a000e",
+   "EIP": "0x45edc0",
+   "ESI": "0x0",
+   "ESP": "0x2007ebc"
+  },
+  "routine": "ProcessInputGame",
+  "state_sha256": {
+   "blocks": 25198,
+   "bytes": 16240871,
+   "sha256": "6e8620b99ac650d032d575570da2a28bbab6cf700b09d6ed1efae5bb085724ed"
+  }
+ },
+ "providers": "provedores_entrada_ia.provedores_vivos (committed Core/Economy/Combat owners; Core entrada_estruturas for EnginSelectPeutEntrer from --nucleo-ref); sound requests return the EAX they receive (the frame bench declaration for PlaySnd_*)",
+ "schema": "rising-lands/monde01-input-pages-deposit-differential/1",
+ "seconds": 154.772,
+ "source_sha256": {
+  "ferramentas/selecao_ordens.py": "e8eb78134dd44adbbef88354ea3219c6513f2a2173cc68227fa9fecaf47ab67c",
+  "pesquisas-paralelas/economia/ordens_economia.py": "48c8fd6d63b7acdf7883e1a6a5b913435c3e35ab8e5eae2925f9f4ee84d46e69",
+  "pesquisas-paralelas/ia-runtime/capturar_paginas_deposito_ia.py": "60c7361f97fca3154d848e8c613d42132531c7b8e42cda29aa6cd9fd518de970",
+  "pesquisas-paralelas/ia-runtime/casos_paginas_deposito_ia.py": "32b4a7d94dc847310c8642ca02a6b6bc076c9adb4e156544285ba90520ae5875",
+  "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "4f8bc333485662076c4dfb119743f162c819bbc133f7790171387292067e7d8e",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "ab6021866dfe15839344b4882c79218e8c372a19288330dc1947091fc1eda470",
+  "pesquisas-paralelas/ia-runtime/validar_paginas_deposito_ia.py": "ccb63ac2362f96fdfd683665117b77b7ee83e67a574471a53c72440efac1fecc"
+ }
+}

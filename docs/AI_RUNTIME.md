@@ -762,3 +762,40 @@ Probes at `origin/feat/re-missions` `b1cd5bd` (P7 from `01fa7d8`). The TextGetMe
 
 The state-11 walk, the creation at 220 and the WndProc/key paths are now checked at indicator level against the probes. The construction-progress branch, the completion and the state-13/tag-16/tag-33 dispatches are checked by the native leaf differential only, because every probe stops at frame 220.
 
+
+## M3.1 round 3 — Ctrl deposit mode, help pages 9/0xc/0xb/2/7, structure under the cursor with troops
+
+**Original first.** `capturar_paginas_deposito_ia.py` → `evidencias/captura-paginas-deposito-ia.json` (commit `c4ff87d`, before any translation). It holds 203 native leaf calls at the frame-1 ProcessInputGame pause (`casos_paginas_deposito_ia`), all returned, with the path and code reproduced. Declared structure 1 is placed under the cursor at cell (19, 14) through its record and its structure-grid word `[0x4e0f38]`. The type limits, grid pointers and player table `[0x5080a8]` are read at the pause.
+
+**Translation** (`entrada_ordens_ia.py`):
+- **Ctrl `0x429601`.** Page 8 is set when every live selected unit can carry (EnginSelectPeuventTransporter: types 5/6/7/0xd). Page 9 is kept only while that holds.
+- **Page 9 `0x429b90`.** The target is a depot (types 3/4) the selection may use (EnginSelectPeutDeposer) and the player owns, or no structure.
+  - The click sends table `0x42923c[u16 0x4e05b0]` → tags 6/7/8/0x13. BX = u16 `0x4e05b2`. With a structure, CX = 2 and the structure is word 6; without one, CX = 1 and the cell is word 6. Word 8 = byte `0x4e05b4`.
+  - The click then sets page 0, `0x496204` and `0x4e05ac`.
+- **Page 0xc `0x429daa`** (Shift): a selectable unit (Core's EnginSelectionnable); AF sends tag 0x24.
+- **Page 0xb `0x429e31`.** A type-8 selection; a type-3 structure for mode ≠ 3, or a type-7 structure for mode 3 (byte `0x496209`); tag 0x22. A cell with no structure is a named stop at `0x429ea2`: BatimentGetType(0xffff) reads outside the pool, and the native run faults there.
+- **Page 2 `0x42a4a2`** (Alt). The object under the cursor is [ebp-0xc] = 1/3/5 with ECX = the unit, the structure or the cell.
+  - A selected structure asks Combat's BatimentPeutAttaquer (named dependency).
+  - Troops ask EnginSelectPeutAttaquer, or target a type-10 unit regardless.
+  - The click sends tag 0xe and page 0.
+- **Page 7 `0x42a600`** (Delete): ChercheIndiceBatiment; an own structure that BatimentPeutSeVendre allows; tag 0xa, then BatimentDeselectionner.
+- **Page 8 over a field or mine** (`0x42b393`/`0x42b525`): the click sets page 9 with index 1/2 (field) or 0/2 (mine), the cell and cargo 1/2.
+- **`0x42ac32`** (troops selected, structure under the cursor):
+  - Page 8 over an own cave with carriers: deposit index 3, cargo 2 (builders) / 1 (colonists) / 0. Otherwise a move (tag 5).
+  - A foreign structure that is not neutral: type 0x10/2 with type-10 units → tag 0x10 (BX 3); otherwise EnginSelectPeutAttaquer(mode 3) → tag 0xe.
+  - The first selected unit is a builder on an unbuilt or damaged structure → tag 0x14.
+  - Wounded troops at a built type-0x13 structure, or wounded engins at a type-0xe one, without mirrors → tag 0x15.
+  - Core's EnginSelectPeutEntrer(mode 3) without mirrors: built → tag 0x10 (BX 3), unbuilt → tag 5. Otherwise the own-structure drag start.
+- **Leaves:**
+  - EnginSelectPeutAttaquer `0x472355`, complete: TypeEnginEstArmee, TypeEnginPeutAttaquer, TypeEnginLargueBombe/EnginGetNbBombe. TypeEnginEstArmee is corrected for types 0x11 (false) and 0x12/0x13 (true).
+  - EnginSelectEstTroupe, EstEngin, ContientMiroir, PeuventTransporter, EstBlesse and PeutDeposer.
+  - BatimentEstDepot, EstNeutre, EstEnnemi and PeutSeVendre; PlayerEstAllie; ChercheIndiceBatiment.
+  - Every leaf returns EAX..EBP as the original leaves them (e.g. BatimentEstEnnemi's EDX, EnginSelectPeutAttaquer's EBX/EDX).
+
+**Native differential:** `validar_paginas_deposito_ia.py --nucleo-ref <dir with Core's entrada_estruturas.py from feat/re-core 90fd831>` → [validacao/paginas-deposito-native.json](../pesquisas-paralelas/ia-runtime/validacao/paginas-deposito-native.json).
+- Result: 203 cases, 201 equal, **0 mismatches**, 2 named stops (Combat's BatimentPeutAttaquer).
+- TextGetMessage is the bench's display boundary (EAX 0, never executed). The differential binds it as the chain does and compares its message number.
+- CPU-free replay: `testes/test_paginas_deposito_ia.py`.
+- The round-1 and round-2 differentials were rerun after these changes: 0 mismatches.
+
+**Next:** the whole-state proof over the P1/P2 pass-2 windows, then P6, and the Core vision/groups and structure-entry wiring (see the HANDOFF).
