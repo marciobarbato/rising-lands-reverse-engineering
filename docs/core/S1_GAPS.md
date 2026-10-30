@@ -52,6 +52,12 @@ python3 "…/heavy_lease.py" core -- python3 -B ferramentas/validar_lacunas_s1.p
 
 These are fresh native comparisons under `heavy_lease.py`, not historical smoke totals. The committed original-only captures were reproduced exactly in every case. No translation correction was needed for windows `a` or `b`.
 
+### Window c capture preparation
+
+A predecessor's local capture attempt faulted at frame 11860 in GetCaseIndiceBatiment `0x41aac4` on the declared index `0x1234`. The structure pool has 1,000 records. The corrected c variants retain indexes 0/1/2/5/999 and exclude that unsupported read; the original code and existing evidence are unchanged. This is a case-table correction, not an emulated successful return for the faulting input.
+
+Report tests distinguish current executed translation dependencies from versioned validation-driver provenance. Driver/bench hashes and the unused opposite-window module are checked against the report's immutable Core `source_revision`; executed translation sources must still match current bytes. Thus a c-only case-table correction does not invalidate unchanged a/b implementations or rewrite their reports. No foreign-front source hash is pinned.
+
 All take `chamar(nome, regs, pilha=())` with EAX..EBP and an optional ESP, and return EAX..EBP and ESP, every register. The full contracts, with addresses, are in the module docstrings.
 
 **`buscas_bloqueios.BuscasBloqueios`** (provider: `provedor_buscas`):

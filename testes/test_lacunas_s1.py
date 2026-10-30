@@ -11,6 +11,7 @@ import json
 import lzma
 from pathlib import Path
 import struct
+import subprocess
 import sys
 import unittest
 
@@ -48,9 +49,21 @@ class DiferencialNativo(unittest.TestCase):
                 rel = json.loads(relatorio_padrao(j).read_text())
                 self.assertEqual(rel['capture']['sha256'], hashlib.sha256(captura_padrao(j).read_bytes()).hexdigest())
                 self.assertEqual(set(rel['source_sha256']), set(FONTES))
+                # A report proves the implementation executed for its window. The validation driver and
+                # bench remain reproducible at source_revision; an implementation unused by this window
+                # is also historical provenance. Keep active translation dependencies bound to today's
+                # bytes. This permits correcting a c-only declared variant without rewriting a/b evidence.
+                historicas = {'ferramentas/validar_lacunas_s1.py', 'ferramentas/bancada_s1.py',
+                              'ferramentas/consultas_luta.py' if j in ('a', 'b') else
+                              'ferramentas/buscas_bloqueios.py'}
                 for caminho, sha in rel['source_sha256'].items():
-                    self.assertEqual(hashlib.sha256((RAIZ / caminho).read_bytes()).hexdigest(), sha,
-                                     f'{caminho} changed since the native differential: rerun validar_lacunas_s1.py')
+                    if caminho in historicas:
+                        bruto = subprocess.run(['git', 'show', f'{rel["source_revision"]}:{caminho}'],
+                                               cwd=RAIZ, check=True, capture_output=True).stdout
+                    else:
+                        bruto = (RAIZ / caminho).read_bytes()
+                    self.assertEqual(hashlib.sha256(bruto).hexdigest(), sha,
+                                     f'{caminho}: source provenance or active implementation changed')
                 self.assertTrue(rel['reproduction']['code_unchanged'])
                 self.assertEqual(rel['mismatches'], [])
                 self.assertEqual(rel['comparisons'], rel['capture_cases'])

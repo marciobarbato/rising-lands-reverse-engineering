@@ -138,7 +138,9 @@ class Execucao:
         if rotina == 'BatimentGetCaseAdjacent':
             casos += [(f'structure {i}', dict(EAX=i)) for i in (0, 1, 2, 3)]
         if rotina == 'GetCaseIndiceBatiment':
-            casos += [(f'structure {i}', dict(EAX=i)) for i in (0, 1, 2, 5, 999, 0x1234)]
+            # The pool has 1,000 records. The predecessor's 0x1234 variant faults in the original at
+            # 0x41aac4 (outside mapped structure memory); it is not a supported query input.
+            casos += [(f'structure {i}', dict(EAX=i)) for i in (0, 1, 2, 5, 999)]
         if rotina == 'VoixOffAsk':
             casos += [(f'DX = {k}', dict(EDX=(r0['EDX'] & 0xffff0000) | k)) for k in range(9)]
             casos.append(('BL and upper bits', dict(EBX=0x5a5a5a07, ECX=0x12345678)))
