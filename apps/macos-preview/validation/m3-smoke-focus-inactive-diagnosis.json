@@ -1,0 +1,45 @@
+{
+  "bundlePath" : "\/Users\/marcio\/git\/Rising Lands\/local-data\/macos-playable\/Diagnostic.app",
+  "diagnosticReadyDelayMs" : 0,
+  "diagnostics" : {
+
+  },
+  "error" : "TypeError: undefined is not an object (evaluating 'down.frame')",
+  "lastProgress" : {
+    "active" : false,
+    "bounds" : "{{0, 0}, {800, 600}}",
+    "heldKeys" : [
+
+    ],
+    "hidden" : false,
+    "key" : false,
+    "lastLocalPoint" : "{0, 0}",
+    "lastWindowPoint" : "{0, 0}",
+    "mouseCalls" : 0,
+    "recording" : true
+  },
+  "nativeWindowVisible" : true,
+  "passed" : false,
+  "pythonStderr" : "",
+  "readiness" : {
+    "appReady" : true,
+    "checksBudgetSeconds" : 45,
+    "checksSeconds" : 20.502049999995506,
+    "documentLoaded" : true,
+    "elapsedSeconds" : 27.2627781666597,
+    "initializationBudgetSeconds" : 90,
+    "initializationSeconds" : 6.7607281666641939,
+    "phase" : "checks",
+    "windowBudgetSeconds" : 45,
+    "windowVisibleSignal" : true
+  },
+  "readySignal" : {
+    "action" : "appReady",
+    "assets" : true,
+    "commit" : "8808d541804d1b5dccb02383e278f03802ddaafe",
+    "mode" : "inspection",
+    "protocol" : 1,
+    "worker" : true
+  },
+  "stack" : "@file:\/\/\/Users\/marcio\/git\/Rising%20Lands\/local-data\/macos-playable\/Diagnostic.app\/Contents\/Resources\/preview\/ui\/playback.js:62:143"
+}

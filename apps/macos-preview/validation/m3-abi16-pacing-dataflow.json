@@ -1,0 +1,65 @@
+{
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "method": "Read-only PE executable-section Capstone detail scan for direct memory references to 0x4e17ae, 0x4e17b0, 0x4e17b4",
+  "capstone": "5.0.7",
+  "references": [
+    {
+      "address": "0x43f713",
+      "bytes": "66ff05ae174e00",
+      "instruction": "inc word ptr [0x4e17ae]",
+      "global_address": "0x4e17ae",
+      "access": 3
+    },
+    {
+      "address": "0x43f721",
+      "bytes": "8b1db0174e00",
+      "instruction": "mov ebx, dword ptr [0x4e17b0]",
+      "global_address": "0x4e17b0",
+      "access": 1
+    },
+    {
+      "address": "0x43f72b",
+      "bytes": "a3b4174e00",
+      "instruction": "mov dword ptr [0x4e17b4], eax",
+      "global_address": "0x4e17b4",
+      "access": 2
+    },
+    {
+      "address": "0x43f738",
+      "bytes": "a3b0174e00",
+      "instruction": "mov dword ptr [0x4e17b0], eax",
+      "global_address": "0x4e17b0",
+      "access": 2
+    },
+    {
+      "address": "0x43f73f",
+      "bytes": "66a1ae174e00",
+      "instruction": "mov ax, word ptr [0x4e17ae]",
+      "global_address": "0x4e17ae",
+      "access": 1
+    },
+    {
+      "address": "0x43f74a",
+      "bytes": "66c705ae174e006300",
+      "instruction": "mov word ptr [0x4e17ae], 0x63",
+      "global_address": "0x4e17ae",
+      "access": 2
+    },
+    {
+      "address": "0x43f755",
+      "bytes": "668b1dae174e00",
+      "instruction": "mov bx, word ptr [0x4e17ae]",
+      "global_address": "0x4e17ae",
+      "access": 1
+    },
+    {
+      "address": "0x43f78e",
+      "bytes": "66890dae174e00",
+      "instruction": "mov word ptr [0x4e17ae], cx",
+      "global_address": "0x4e17ae",
+      "access": 2
+    }
+  ],
+  "finding": "All eight decoded references are inside CalculFrame; the last-tick store 0x4e17b4 has no decoded reader. No simulation pacing consumer found.",
+  "limitations": "Direct decoded references only; no claim about aliasing or external driver latency."
+}

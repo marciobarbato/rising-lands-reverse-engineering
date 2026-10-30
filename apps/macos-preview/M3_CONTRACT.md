@@ -1,11 +1,14 @@
 # macOS accepted-state consumption contract v6
 
-Identifier: `rising-lands/macos-state-consumer/6`. The current consumer explicitly
-accepts Python Graphics **1.8**, enables HUD/cursor composition and checks the
-original full 800×600 phase-end surface with read-only playback/cache chaining.
-Native live execution requires **ABI 1.4 / Rust Graphics 1.7**. The current
-integrated-backend section below supersedes the preserved earlier-stage notes.
-Orders remain record-only; no milestone acceptance is added.
+Identifier: `rising-lands/macos-state-consumer/6`. The evidence consumer enables
+HUD/cursor composition and checks the original full 800×600 phase-end surface
+with read-only playback/cache chaining; Python inspection and proofs now accept
+Graphics **1.9**. Native live execution on main requires engine **ABI 1.5**
+(player input and orders) with Rust Graphics **1.7**; `feat/macos-playable`
+carries the [ABI 1.6 persistent-execution consumer](#current-consumer--abi-16-persistent-execution)
+awaiting integration. Sections are chronological: each later section supersedes
+the earlier-stage notes it names (ABI 1.1, 1.3, 1.4/Graphics 1.8 and the
+record-only input stage are historical). No milestone acceptance is added.
 
 ## Evidence and memory
 
@@ -396,7 +399,8 @@ phase and render sequence and retains every named capability stop, but never
 calls an observer, projects memory, computes hashes or increments equality counts.
 The status layout and engine ABI are unchanged. `macos_live_read` refuses play.
 The native UI changes modes by recreating S0. Its default is play; native smoke
-and horizon tools explicitly request validation. Input stays record-only in both.
+and horizon tools explicitly request validation. At this stage input stayed
+record-only in both; ABI 1.5 below applies it in play.
 
 ## ABI 1.5 player input
 
@@ -429,3 +433,19 @@ boundaries, matching its probes. This does not establish glyph rendering or audi
 playback. Engine failures retain atomic world/context semantics and publish the
 named stop. Rust renderer partial results also stop the UI with their actual
 surface; neither a skipped draw nor substitute pixels hide a dependency.
+
+## Current consumer — ABI 1.6 persistent execution
+
+The ABI 1.5 input descriptors and Graphics 1.7 renderer contracts above remain
+unchanged. Native execution now requires major 1/minor >=6. Complete S0 loads
+before the caller chooses play policy 1 through `macos_live_validation(driver,0)`;
+this selection occurs before phase 1 and propagates any ABI failure. Default
+proof drivers/Validar retain policy 0. The Test A state proof explicitly chooses
+policy 2, which runs the same persistent backend while retaining consumed input
+observations. Production play uses policy 1, without input/frame/render audit
+records; real orders/text/sound events and named stops remain available.
+
+Host pacing defaults to the intact original's uncapped active idle-loop policy,
+with optional fixed host caps. The virtual engine clock remains 20. The original
+pacing evidence and historical elapsed-time calibration boundary are documented
+in the [manual](../../docs/MACOS_PLAYABLE.md#abi-16-and-original-pacing).

@@ -1,0 +1,30 @@
+--- a/apps/macos-preview/src/native/NativeLiveWindow.swift
++++ b/apps/macos-preview/src/native/NativeLiveWindow.swift
+@@ -111,6 +111,7 @@
+     var lastTexture: MTLTexture?
+     var inputEvent: (([String:Any])->Void)?
+     var tracking: NSTrackingArea?
++    var mouseCalls=0;var lastLocalPoint=NSPoint.zero;var lastWindowPoint=NSPoint.zero
+     var heldKeys=Set<Int>()
+     override var acceptsFirstResponder: Bool { true }
+     override func updateTrackingAreas() {
+@@ -119,7 +120,8 @@
+         tracking=area;addTrackingArea(area)
+     }
+     func mouse(_ event:NSEvent,_ message:Int) {
+-        let p=convert(event.locationInWindow,from:nil)
++        mouseCalls+=1
++        let p=convert(event.locationInWindow,from:nil);lastLocalPoint=p;lastWindowPoint=event.locationInWindow
+         guard bounds.contains(p),bounds.width>0,bounds.height>0 else{return}
+         synchronizeModifiers(event.modifierFlags)
+         if message != 0x200{window?.makeFirstResponder(self)}
+--- a/apps/macos-preview/src/native/main.swift
++++ b/apps/macos-preview/src/native/main.swift
+@@ -241,6 +241,7 @@
+                     let p=live.metal.convert(NSPoint(x:live.metal.bounds.width/2,y:live.metal.bounds.height*(1-272.0/600.0)),to:nil)
+                     for type in [NSEvent.EventType.leftMouseDown,.leftMouseUp]{if let event=NSEvent.mouseEvent(with:type,location:p,modifierFlags:.control,timestamp:0,windowNumber:live.window.windowNumber,context:nil,eventNumber:1,clickCount:1,pressure:1){live.window.sendEvent(event)}}
+                 }
++                self.smokeProgress=["mouseCalls":live.metal.mouseCalls,"lastLocalPoint":NSStringFromPoint(live.metal.lastLocalPoint),"lastWindowPoint":NSStringFromPoint(live.metal.lastWindowPoint),"bounds":NSStringFromRect(live.metal.bounds),"key":live.window.isKeyWindow,"active":NSApp.isActive,"hidden":live.metal.isHidden,"recording":live.recording,"heldKeys":live.metal.heldKeys.sorted()]
+                 live.inputBarrier{[weak self] frame in self?.nativeReply(body["id"],value:["frame":frame,"recordingIndicator":live.recordButton.title])};return
+             }
+             if operation == "native-capture",let live=nativeLive,let shot=screenshotOutput {

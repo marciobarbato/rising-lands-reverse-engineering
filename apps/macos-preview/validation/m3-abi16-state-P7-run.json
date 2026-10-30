@@ -1,0 +1,23 @@
+{
+ "command": [
+  "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+  "-B",
+  "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+  "--root",
+  "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+  "--library",
+  "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+  "--driver",
+  "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+  "--inputs",
+  "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+  "--probe",
+  "P7",
+  "--output",
+  "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-abi16-state-P7.json"
+ ],
+ "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+ "seconds": 4.983635250000001,
+ "exit_code": 0,
+ "source": "b44fe804a696413f79904b9d36b01f30138cfac5"
+}

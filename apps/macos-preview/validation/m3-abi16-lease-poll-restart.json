@@ -1,0 +1,19 @@
+{
+  "restarts": [
+    {
+      "owner": "macos-abi16-common",
+      "pid": 72157,
+      "disposition": "Cancelled before grant; no child/execution; restart uses same shared lease with 50ms polling"
+    },
+    {
+      "owner": "macos-abi16-equality-proofs",
+      "pid": 73881,
+      "disposition": "Cancelled before grant; no child/execution; restart uses same shared lease with 50ms polling"
+    }
+  ],
+  "shared_helper_path": "/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py",
+  "shared_helper_sha256": "935c67be548f8dcfbdcb88133f88a6aacef4d9676ebef084a168f05929b63439",
+  "shared_helper_modified": false,
+  "wrapper_source": "\"\"\"Use the unchanged shared lease/limits; poll released slots every 50 ms.\"\"\"\nimport importlib.util,sys,time,types\nfrom pathlib import Path\np=Path('/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py')\ns=importlib.util.spec_from_file_location('macos_shared_heavy_lease',p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m)\nm.time=types.SimpleNamespace(sleep=lambda delay:time.sleep(min(delay,0.05)))\nraise SystemExit(m.main(sys.argv[1:]))\n",
+  "scope": "Only own correctness jobs requeued before grant, same shared lease locks/slot limits. UI timing uses unmodified heavy_lease.py --exclusive."
+}

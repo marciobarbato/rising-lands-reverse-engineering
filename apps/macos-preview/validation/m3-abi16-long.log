@@ -1,0 +1,30 @@
+Native frames 1000
+Native frames 2000
+Native frames 3000
+Native frames 4000
+Native frames 5000
+Native frames 6000
+Native frames 7000
+Native frames 8000
+Native frames 9000
+{
+ "schema": "rising-lands/macos-native-render-proof/1",
+ "engine_sha256": "6be8315542f8f3577ff14203b9bed9305c8d9fe33b7f1571ef30176a7890f0b6",
+ "driver_sha256": "9553fbdd52ecf471129a7b6b05d0688bfa0238939c92ed31c2000ea0e65a59db",
+ "inputs_manifest_sha256": "a050f6865387db1b2f5441dcfeab619d87cb80926646ef34d6633b2eb46b5716",
+ "frames_requested": 9200,
+ "frames_completed": 9200,
+ "states_equal": 18401,
+ "checkpoints_equal": 11,
+ "surfaces_equal": 9200,
+ "python_surfaces_equal": 128,
+ "first_named_stop": null,
+ "observer_failures": [],
+ "horizon_pending": false,
+ "timing": {
+  "logic_seconds": 63.931007,
+  "render_seconds": 34.360246,
+  "proof_seconds": 224.223057,
+  "wall_seconds": 322.66103154099983
+ }
+}

@@ -52,7 +52,7 @@ class PlaybackInspectionService:
         if operation == 'export-journal':
             return dict(input_journal=self.recorder.journal())
         if operation in ('live-open','live-reset','live-step','live-play'):
-            raise RuntimeError('NativeLivePathRequired: ABI 1.5 live control belongs to Swift/Metal')
+            raise RuntimeError('NativeLivePathRequired: ABI 1.6 live control belongs to Swift/Metal')
         if self.live is not None:
             self.live.close(); self.live = None
             self.renderer.reset(); self.render_playback.reset()

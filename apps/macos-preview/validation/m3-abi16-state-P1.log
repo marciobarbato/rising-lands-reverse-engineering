@@ -1,0 +1,24 @@
+{
+ "schema": "rising-lands/macos-test-a-state/1",
+ "probe": "P1",
+ "world_source": "S0 plus original static tables; 128 real no-input frames; no oracle state reload",
+ "driver_sha256": "9553fbdd52ecf471129a7b6b05d0688bfa0238939c92ed31c2000ea0e65a59db",
+ "library_sha256": "6be8315542f8f3577ff14203b9bed9305c8d9fe33b7f1571ef30176a7890f0b6",
+ "input_sha256": "28f71d2cf55a9715214da06e42212d3e04bdb1919cd003754c1a290e26d1a20a",
+ "canonical_roundtrip": true,
+ "reference": {
+  "logic": "a7f5d4939e7826e02a8b348995edb9c793657f4c",
+  "graphics": "ce441852bcada750a8f91da8ed3302f1668c4405",
+  "tree_manifest_sha256": "5942cc4f4c76d7a9311be6f61be5a146819a7a99685a4f6f46011767c7c31276",
+  "source_and_fixtures": "Git objects; no working-tree source hash gate"
+ },
+ "frames_equal": 501,
+ "frames_compared": 501,
+ "frames_requested": 501,
+ "frame_hash_scope": "Exact engine indicator comparator fields, including unit record hashes and objective/UI bytes; DGROUP excluded",
+ "first_difference": null,
+ "first_engine_stop": null,
+ "rendering_executed": false,
+ "seconds": 150.107205167
+}
+Whole phases 1002 1002

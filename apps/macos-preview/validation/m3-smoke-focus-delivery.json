@@ -1,0 +1,1236 @@
+{
+ "schema": "rising-lands/macos-smoke-focus-repair/1",
+ "runtime_revision": "c5f1734f6a0fb517fd997862746c65c99f958f24",
+ "feature_base": "e553010",
+ "main_base": "00afd4b",
+ "scope": "Smoke-only activation/key-window/Metal responder readiness; original event dispatch, assertions, 45-second checks budget and all engine inputs unchanged.",
+ "diagnostic_base_revision": "8808d541804d1b5dccb02383e278f03802ddaafe",
+ "diagnostic_patch": "m3-smoke-focus-diagnostic.patch",
+ "app_build": {
+  "command": [
+   "python3",
+   "-B",
+   "compilar-jog\u00e1vel",
+   "--development-ref",
+   "HEAD",
+   "--inputs-root",
+   "/Users/marcio/git/Rising Lands",
+   "--data-root",
+   "/Users/marcio/git/Rising Lands/local-data/macos-playable"
+  ],
+  "RISING_PYTHON_RUNTIME": "/Users/marcio/git/Rising Lands/local-data/macos-preview/dependencies/python",
+  "passed": true,
+  "consumer_tests": 112,
+  "skips": 0,
+  "native_exercise_checks": 27,
+  "inspection_checks": 21
+ },
+ "engine_gate": {
+  "command": [
+   "sh",
+   "motor/validate.sh"
+  ],
+  "source_tree": "835d527e765fc0ebe6515016e1d7318bbebeff36",
+  "passed": true,
+  "rust_tests": 30,
+  "python_tests": 63,
+  "renderer_children": 10,
+  "original_x86_comparisons": 75,
+  "mismatches": 0,
+  "skips": 0,
+  "swift_metal_surfaces_equal": 128
+ },
+ "answers_equal": 155597,
+ "canonical_roundtrips_equal": 6,
+ "answers_unchanged": true,
+ "prefix_states_equal": 257,
+ "prefix_checkpoints_equal": 11,
+ "prefix_original_surfaces_equal": 128,
+ "prefix_python_surfaces_equal": 128,
+ "long_states_equal": 18401,
+ "long_original_surfaces_equal": 9200,
+ "state_probes": {
+  "P1": {
+   "frames_equal": 501,
+   "frames_compared": 501,
+   "whole_state": {
+    "allocation_domain": "No allocation/free or binding changes in the published windows; all block identities and byte lengths compared.",
+    "compared_bytes_per_phase": [
+     16019748
+    ],
+    "evidence_revision": "a7f5d4939e7826e02a8b348995edb9c793657f4c",
+    "mask_bytes": 155587,
+    "part_compressed_sha256": "83dba2ce27feecbdd4983716f583c7e530c57d1cb6f70793e37d3ccfdcf5d75b",
+    "part_raw_sha256": "dd82202e1f0338b9ddcad0a8a7f41de756ae91e98b0fad16f626f9bd27699e7f",
+    "parts": [
+     {
+      "artifact": "pesquisas-paralelas/missoes/m3/sondas/P1/captura-janela.parte00.json.xz",
+      "compressed_sha256": "83dba2ce27feecbdd4983716f583c7e530c57d1cb6f70793e37d3ccfdcf5d75b",
+      "phases": 1002,
+      "raw_integrity_verified": true,
+      "raw_sha256": "dd82202e1f0338b9ddcad0a8a7f41de756ae91e98b0fad16f626f9bd27699e7f"
+     }
+    ],
+    "phases_compared": 1002,
+    "phases_equal": 1002,
+    "phases_requested": 1002,
+    "schema": "rising-lands/rust-m3-whole-state-proof/1"
+   },
+   "first_difference": null,
+   "first_engine_stop": null,
+   "report": "m3-smoke-focus-state-P1.json"
+  },
+  "P2": {
+   "frames_equal": 601,
+   "frames_compared": 601,
+   "whole_state": {
+    "allocation_domain": "No allocation/free or binding changes in the published windows; all block identities and byte lengths compared.",
+    "compared_bytes_per_phase": [
+     16014614
+    ],
+    "evidence_revision": "a7f5d4939e7826e02a8b348995edb9c793657f4c",
+    "mask_bytes": 160721,
+    "part_compressed_sha256": "f6ec02882d359ef6f8deddd261d3622ce671d06cfc11a20db9a3ea55f3d64ea1",
+    "part_raw_sha256": "74218a46fbee02677eb75f2f7bd41c845bd9a510211b6ccac913a1268d3c0f76",
+    "parts": [
+     {
+      "artifact": "pesquisas-paralelas/missoes/m3/sondas/P2/captura-janela.parte00.json.xz",
+      "compressed_sha256": "f6ec02882d359ef6f8deddd261d3622ce671d06cfc11a20db9a3ea55f3d64ea1",
+      "phases": 1202,
+      "raw_integrity_verified": true,
+      "raw_sha256": "74218a46fbee02677eb75f2f7bd41c845bd9a510211b6ccac913a1268d3c0f76"
+     }
+    ],
+    "phases_compared": 1202,
+    "phases_equal": 1202,
+    "phases_requested": 1202,
+    "schema": "rising-lands/rust-m3-whole-state-proof/1"
+   },
+   "first_difference": null,
+   "first_engine_stop": null,
+   "report": "m3-smoke-focus-state-P2.json"
+  },
+  "P3": {
+   "frames_equal": 91,
+   "frames_compared": 91,
+   "whole_state": null,
+   "first_difference": null,
+   "first_engine_stop": {
+    "code": 5,
+    "detail": "entrada CalculGame \u00b7 quadro 220 \u00b7 ABI 5: BatimentNextEtape type 3 at 0x00426aff",
+    "frame": 220,
+    "inputs_before_stop": [
+     {
+      "frame": 220,
+      "kind": "peek_message",
+      "message": null,
+      "site": "0x4601d8"
+     },
+     {
+      "frame": 220,
+      "kind": "cursor",
+      "site": "0x47504b",
+      "x": 688,
+      "y": 400
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x429300",
+      "value": 0,
+      "vk": 27
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x429556",
+      "value": 0,
+      "vk": 16
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x4295fc",
+      "value": 0,
+      "vk": 17
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x42967e",
+      "value": 0,
+      "vk": 46
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x4296ad",
+      "value": 0,
+      "vk": 18
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x4296dc",
+      "value": 0,
+      "vk": 32
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x4296f1",
+      "value": 0,
+      "vk": 38
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x42970b",
+      "value": 0,
+      "vk": 40
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x429732",
+      "value": 0,
+      "vk": 39
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x42974c",
+      "value": 0,
+      "vk": 37
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x429773",
+      "value": 0,
+      "vk": 13
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x429781",
+      "value": 0,
+      "vk": 88
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x42a76b",
+      "value": 0,
+      "vk": 69
+     }
+    ],
+    "orders_before_stop": [],
+    "phase": 3
+   },
+   "report": "m3-smoke-focus-state-P3.json"
+  },
+  "P6": {
+   "frames_equal": 91,
+   "frames_compared": 91,
+   "whole_state": {
+    "allocation_domain": "No allocation/free or binding changes in the published windows; all block identities and byte lengths compared.",
+    "compared_bytes_per_phase": [
+     16002289
+    ],
+    "evidence_revision": "16b63ac39b377cf4e86a5728475634e8f2e9f33e",
+    "mask_bytes": 173046,
+    "part_compressed_sha256": "0d630ac6c154f98b853691e13c1b8974a1bdef7e63097c387b5949c6c49369bf",
+    "part_raw_sha256": "129302bc0ba9c88f0ef258a20d89865cdccb45ff8327ac40d879429c5b8f2480",
+    "parts": [
+     {
+      "artifact": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte00.json.xz",
+      "compressed_sha256": "0d630ac6c154f98b853691e13c1b8974a1bdef7e63097c387b5949c6c49369bf",
+      "phases": 2000,
+      "raw_integrity_verified": true,
+      "raw_sha256": "129302bc0ba9c88f0ef258a20d89865cdccb45ff8327ac40d879429c5b8f2480"
+     },
+     {
+      "artifact": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte01.json.xz",
+      "compressed_sha256": "03976fb9ce9c539d1231fa130c0b8c875dceb26284e9e0eec5c8e1b05a7bb17c",
+      "phases": 2000,
+      "raw_integrity_verified": false,
+      "raw_sha256": "832bb4d18331ee666a79438177b36251b483a055631ff2eaaaba93a9d8ea9a15"
+     },
+     {
+      "artifact": "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte02.json.xz",
+      "compressed_sha256": "ee60b91ceae622134e5342f5311b67600490647664864adafed2df4d260288e6",
+      "phases": 544,
+      "raw_integrity_verified": false,
+      "raw_sha256": "c587fa29136e7bb9ecc05f9e64f2317786efa7825ba45ef2a4596266fba517c6"
+     }
+    ],
+    "phases_compared": 183,
+    "phases_equal": 183,
+    "phases_requested": 4544,
+    "schema": "rising-lands/rust-m3-whole-state-proof/1"
+   },
+   "first_difference": null,
+   "first_engine_stop": {
+    "code": 5,
+    "detail": "entrada CalculGame \u00b7 quadro 220 \u00b7 ABI 5: BatimentNextEtape type 3 at 0x00426aff",
+    "frame": 220,
+    "inputs_before_stop": [
+     {
+      "frame": 220,
+      "kind": "peek_message",
+      "message": null,
+      "site": "0x4601d8"
+     },
+     {
+      "frame": 220,
+      "kind": "cursor",
+      "site": "0x47504b",
+      "x": 688,
+      "y": 400
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x429300",
+      "value": 0,
+      "vk": 27
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x429556",
+      "value": 0,
+      "vk": 16
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x4295fc",
+      "value": 0,
+      "vk": 17
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x42967e",
+      "value": 0,
+      "vk": 46
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x4296ad",
+      "value": 0,
+      "vk": 18
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x4296dc",
+      "value": 0,
+      "vk": 32
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x4296f1",
+      "value": 0,
+      "vk": 38
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x42970b",
+      "value": 0,
+      "vk": 40
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x429732",
+      "value": 0,
+      "vk": 39
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x42974c",
+      "value": 0,
+      "vk": 37
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x429773",
+      "value": 0,
+      "vk": 13
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x429781",
+      "value": 0,
+      "vk": 88
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x42a76b",
+      "value": 0,
+      "vk": 69
+     }
+    ],
+    "orders_before_stop": [],
+    "phase": 3
+   },
+   "report": "m3-smoke-focus-state-P6.json"
+  },
+  "P7": {
+   "frames_equal": 91,
+   "frames_compared": 91,
+   "whole_state": null,
+   "first_difference": null,
+   "first_engine_stop": {
+    "code": 5,
+    "detail": "entrada CalculGame \u00b7 quadro 220 \u00b7 ABI 5: BatimentNextEtape type 3 at 0x00426aff",
+    "frame": 220,
+    "inputs_before_stop": [
+     {
+      "frame": 220,
+      "kind": "peek_message",
+      "message": null,
+      "site": "0x4601d8"
+     },
+     {
+      "frame": 220,
+      "kind": "cursor",
+      "site": "0x47504b",
+      "x": 688,
+      "y": 400
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x429300",
+      "value": 0,
+      "vk": 27
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x429556",
+      "value": 0,
+      "vk": 16
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x4295fc",
+      "value": 0,
+      "vk": 17
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x42967e",
+      "value": 0,
+      "vk": 46
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x4296ad",
+      "value": 0,
+      "vk": 18
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x4296dc",
+      "value": 0,
+      "vk": 32
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x4296f1",
+      "value": 0,
+      "vk": 38
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x42970b",
+      "value": 0,
+      "vk": 40
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x429732",
+      "value": 0,
+      "vk": 39
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x42974c",
+      "value": 0,
+      "vk": 37
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x429773",
+      "value": 0,
+      "vk": 13
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x429781",
+      "value": 0,
+      "vk": 88
+     },
+     {
+      "frame": 220,
+      "kind": "key",
+      "site": "0x42a76b",
+      "value": 0,
+      "vk": 69
+     }
+    ],
+    "orders_before_stop": [],
+    "phase": 3
+   },
+   "report": "m3-smoke-focus-state-P7.json"
+  },
+  "K1": {
+   "frames_equal": 12,
+   "frames_compared": 12,
+   "whole_state": null,
+   "first_difference": null,
+   "first_engine_stop": {
+    "code": 5,
+    "detail": "entrada entre quadros \u00b7 quadro 141 \u00b7 ABI 5: AffGame at 0x00415b77",
+    "frame": 141,
+    "inputs_before_stop": [],
+    "orders_before_stop": [],
+    "phase": 2
+   },
+   "report": "m3-smoke-focus-state-K1.json"
+  }
+ },
+ "play_measurement": {
+  "workload": "65 seconds, no human orders, 60 game-fps host cap, real native UI, exclusive lease; audit counters/time zero",
+  "game_fps": 60.012575872955054,
+  "display_fps": 59.751049651514336,
+  "min_one_second_display_fps": 56,
+  "display_maximum_hz": 60,
+  "seconds": 65.003042166667,
+  "gpu_pixels_checked": 1920000,
+  "baseline_revision": "8808d541804d1b5dccb02383e278f03802ddaafe",
+  "baseline_game_fps": 60.012612071174225,
+  "baseline_display_fps": 59.93569254788382,
+  "baseline_min_one_second_display_fps": 57,
+  "final_gpu_image_identical": true,
+  "note": "Current display reports 60 Hz, unlike the historical 120 Hz runs. Raw display rates and all bins retained; no 120 Hz claim. LaunchServices rejected the archived directory without an .app suffix before execution; an unchanged copy with .app suffix passed strict deep codesign verification and ran."
+ },
+ "runtime_files": {
+  "librising_engine.dylib": "513e134e99c7ce52cb69418ee3f5c2659029426f08b8340214a5f471a57c661d",
+  "librising_macos_live.dylib": "9553fbdd52ecf471129a7b6b05d0688bfa0238939c92ed31c2000ea0e65a59db",
+  "librising_macos_projection.dylib": "4a16fd6762fee713fa0dd737e8712856575962db6c32d95e39fc832e4d0b73e5",
+  "snapshot.json": "f11f6107fbd9e916f98079a572f448dda9193747bd0b9e1236f4aaf015214d33",
+  "native-inputs/manifest.json": "ed0ee1f54b57064ad6573c99cf901192ce69378f65e9aa1944c97250c074317e"
+ },
+ "lease_events": [
+  {
+   "owner": "macos-smoke-engine-gate",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "sh",
+    "motor/validate.sh"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T12:07:17.071136+00:00"
+  },
+  {
+   "owner": "macos-smoke-engine-gate",
+   "event": "grant",
+   "slots": [
+    1
+   ],
+   "at": "2026-10-30T12:07:17.071802+00:00"
+  },
+  {
+   "owner": "macos-smoke-engine-gate",
+   "event": "release",
+   "slots": [
+    1
+   ],
+   "at": "2026-10-30T12:11:28.822727+00:00"
+  },
+  {
+   "owner": "macos-smoke-engine-gate",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T12:11:28.823026+00:00"
+  },
+  {
+   "owner": "macos-smoke-fixed-app-build",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "python3",
+    "-B",
+    "compilar-jog\u00e1vel",
+    "--development-ref",
+    "HEAD",
+    "--inputs-root",
+    "/Users/marcio/git/Rising Lands",
+    "--data-root",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T12:16:42.432576+00:00"
+  },
+  {
+   "owner": "macos-smoke-fixed-app-build",
+   "event": "grant",
+   "slots": [
+    2
+   ],
+   "at": "2026-10-30T12:16:42.433484+00:00"
+  },
+  {
+   "owner": "macos-smoke-prefix",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_native_macos.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/sources/c5f1734f6a0fb517fd997862746c65c99f958f24",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--codec",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_projection.dylib",
+    "--graphics-sources",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/graphics-inputs",
+    "--frames",
+    "128",
+    "--python-oracle",
+    "--output",
+    "/private/tmp/rl-smoke-diagnosis/prefix.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T12:19:42.592145+00:00"
+  },
+  {
+   "owner": "macos-smoke-prefix",
+   "event": "grant",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T12:19:42.592751+00:00"
+  },
+  {
+   "owner": "macos-smoke-fixed-app-build",
+   "event": "release",
+   "slots": [
+    2
+   ],
+   "at": "2026-10-30T12:19:42.614127+00:00"
+  },
+  {
+   "owner": "macos-smoke-fixed-app-build",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T12:19:42.614333+00:00"
+  },
+  {
+   "owner": "macos-smoke-prefix",
+   "event": "release",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T12:19:55.956010+00:00"
+  },
+  {
+   "owner": "macos-smoke-prefix",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T12:19:55.956172+00:00"
+  },
+  {
+   "owner": "macos-smoke-long",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_native_macos.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/sources/c5f1734f6a0fb517fd997862746c65c99f958f24",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--codec",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_projection.dylib",
+    "--graphics-sources",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/graphics-inputs",
+    "--frames",
+    "9200",
+    "--output",
+    "/private/tmp/rl-smoke-diagnosis/long.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T12:19:55.989174+00:00"
+  },
+  {
+   "owner": "macos-smoke-long",
+   "event": "grant",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T12:19:55.989633+00:00"
+  },
+  {
+   "owner": "macos-smoke-long",
+   "event": "release",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T12:24:57.096409+00:00"
+  },
+  {
+   "owner": "macos-smoke-long",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T12:24:57.096557+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P1",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--probe",
+    "P1",
+    "--output",
+    "/private/tmp/rl-smoke-diagnosis/state-P1.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T12:24:57.131731+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P1",
+   "event": "grant",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T12:24:57.132137+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P1",
+   "event": "release",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T12:26:51.875476+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P1",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T12:26:51.876474+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P2",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--probe",
+    "P2",
+    "--output",
+    "/private/tmp/rl-smoke-diagnosis/state-P2.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T12:26:51.921023+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P2",
+   "event": "grant",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T12:26:51.921476+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P2",
+   "event": "release",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T12:29:08.792359+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P2",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T12:29:08.793269+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P3",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--probe",
+    "P3",
+    "--output",
+    "/private/tmp/rl-smoke-diagnosis/state-P3.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T12:29:08.834181+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P3",
+   "event": "grant",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T12:29:08.834627+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P3",
+   "event": "release",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T12:29:13.078414+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P3",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T12:29:13.078578+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P6",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--probe",
+    "P6",
+    "--output",
+    "/private/tmp/rl-smoke-diagnosis/state-P6.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T12:29:13.111272+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P6",
+   "event": "grant",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T12:29:13.111700+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P6",
+   "event": "release",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T12:29:36.193692+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P6",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T12:29:36.194586+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P7",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--probe",
+    "P7",
+    "--output",
+    "/private/tmp/rl-smoke-diagnosis/state-P7.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T12:29:36.235284+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P7",
+   "event": "grant",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T12:29:36.235668+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P7",
+   "event": "release",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T12:29:40.403104+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-P7",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T12:29:40.403261+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-K1",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/validate_macos_player.py",
+    "--root",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+    "--driver",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_macos_live.dylib",
+    "--library",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/librising_engine.dylib",
+    "--inputs",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/preview/native-inputs",
+    "--probe",
+    "K1",
+    "--output",
+    "/private/tmp/rl-smoke-diagnosis/state-K1.json"
+   ],
+   "exclusive": false,
+   "at": "2026-10-30T12:29:40.435394+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-K1",
+   "event": "grant",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T12:29:40.435788+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-K1",
+   "event": "release",
+   "slots": [
+    0
+   ],
+   "at": "2026-10-30T12:29:42.394609+00:00"
+  },
+  {
+   "owner": "macos-smoke-state-K1",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T12:29:42.394748+00:00"
+  },
+  {
+   "owner": "macos-smoke-play60",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app/Contents/Resources/Python/bin/python3",
+    "-B",
+    "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/benchmark_native_macos.py",
+    "--app",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app",
+    "--output",
+    "/private/tmp/rl-smoke-diagnosis/play60.json",
+    "--game-fps",
+    "60",
+    "--seconds",
+    "65"
+   ],
+   "exclusive": true,
+   "at": "2026-10-30T12:29:42.426810+00:00"
+  },
+  {
+   "owner": "macos-smoke-play60",
+   "event": "grant",
+   "slots": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "at": "2026-10-30T12:29:48.037658+00:00"
+  },
+  {
+   "owner": "macos-smoke-play60",
+   "event": "release",
+   "slots": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "at": "2026-10-30T12:30:54.644689+00:00"
+  },
+  {
+   "owner": "macos-smoke-play60",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T12:30:54.644882+00:00"
+  },
+  {
+   "owner": "macos-smoke-baseline-app-play60",
+   "event": "wait",
+   "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+   "command": [
+    "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+    "-B",
+    "apps/macos-preview/scripts/benchmark_native_macos.py",
+    "--app",
+    "/Users/marcio/git/Rising Lands/local-data/macos-playable/Baseline.app",
+    "--output",
+    "/private/tmp/rl-smoke-diagnosis/baseline-app-play60.json",
+    "--game-fps",
+    "60",
+    "--seconds",
+    "65"
+   ],
+   "exclusive": true,
+   "at": "2026-10-30T12:32:49.842190+00:00"
+  },
+  {
+   "owner": "macos-smoke-baseline-app-play60",
+   "event": "grant",
+   "slots": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "at": "2026-10-30T12:32:49.842780+00:00"
+  },
+  {
+   "owner": "macos-smoke-baseline-app-play60",
+   "event": "release",
+   "slots": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "at": "2026-10-30T12:33:58.265016+00:00"
+  },
+  {
+   "owner": "macos-smoke-baseline-app-play60",
+   "event": "exit",
+   "code": 0,
+   "at": "2026-10-30T12:33:58.265464+00:00"
+  }
+ ],
+ "no_main_merge_or_acceptance": true,
+ "artifacts": [
+  {
+   "path": "m3-smoke-focus-answers.json",
+   "sha256": "1441af88cedfcabc90778dbaab931e22f8a192dacc9b52bcc27d3ca3e28a596b",
+   "bytes": 13989
+  },
+  {
+   "path": "m3-smoke-focus-app-build.log",
+   "sha256": "da858df86a659872a92b0c9618c10d086e1f55e0f03845ac9a70f1c41a765e95",
+   "bytes": 7705
+  },
+  {
+   "path": "m3-smoke-focus-baseline-app-play60.json",
+   "sha256": "50137a1645e1888551cb0c29c1676df79a11ff6c81383a651796448ed7e5a0ab",
+   "bytes": 3051
+  },
+  {
+   "path": "m3-smoke-focus-baseline-app-play60.log",
+   "sha256": "f62ef95ee1e40d76655db8aae1da9f294c27fd996a47f16974cec92a9c28ce35",
+   "bytes": 3006
+  },
+  {
+   "path": "m3-smoke-focus-baseline-failure.json",
+   "sha256": "cbf018ceed7302f2407e639f306d239a9c0b8c1f932a5cdcb0478a6374eb028d",
+   "bytes": 1093
+  },
+  {
+   "path": "m3-smoke-focus-baseline-play60.launch.log",
+   "sha256": "d726c3311d2e373e1baa6d0a756d91030e07c29b1a6af46ab003705491372d12",
+   "bytes": 330
+  },
+  {
+   "path": "m3-smoke-focus-baseline-play60.log",
+   "sha256": "4ec0afd9607cd557370fc1f2f720a47240c5f29937ca8d2ee1c3b9d36c4cf5c5",
+   "bytes": 629
+  },
+  {
+   "path": "m3-smoke-focus-consumer-tests.log",
+   "sha256": "4468750ed28b917b6b1285b225af73d0f3d4c7cb35e9e19b41ab144f502b89ea",
+   "bytes": 17265
+  },
+  {
+   "path": "m3-smoke-focus-diagnostic.patch",
+   "sha256": "b3c4d8877afbcdd7477bc8c5bb8a59e86baae9d5a9d40b1a0be350bf96ea52b4",
+   "bytes": 2189
+  },
+  {
+   "path": "m3-smoke-focus-engine-gate.log.gz",
+   "sha256": "b90960cdcf12a092745eb41e548f6f4e9075a7f9b0821361eee85a97bca6974d",
+   "bytes": 4709
+  },
+  {
+   "path": "m3-smoke-focus-inactive-diagnosis.json",
+   "sha256": "998b18f20e88ddf4fd1fee5c998b1e80e8f0855a60037da4e39914ef0dcb5921",
+   "bytes": 1308
+  },
+  {
+   "path": "m3-smoke-focus-input-regression.json",
+   "sha256": "c299a17daef83f13cc5d52d56f6c00275e88cca139bd438cd48537145d9103b8",
+   "bytes": 3596
+  },
+  {
+   "path": "m3-smoke-focus-long.json",
+   "sha256": "462a2e5755e159c3d7ee6ed4497ea6f1013c3d8517d5cab71cf319a6af7b84e0",
+   "bytes": 56133
+  },
+  {
+   "path": "m3-smoke-focus-native-inspection-smoke.input.json",
+   "sha256": "c110989bdf99b13f9a0f2b299d371e9fba080c686adc014787a4f141a966fe70",
+   "bytes": 814
+  },
+  {
+   "path": "m3-smoke-focus-native-inspection-smoke.json",
+   "sha256": "67ee35a5bd2e2d1e826835fa2f47e6ea8a5e60f1c47c959b0a9c1622b0321efe",
+   "bytes": 4852
+  },
+  {
+   "path": "m3-smoke-focus-native-smoke.json",
+   "sha256": "43e0e253c024bc2dd5e01fdc762f4a38d48bd49e54c0f1abbfbd857419524955",
+   "bytes": 7544
+  },
+  {
+   "path": "m3-smoke-focus-play60.json",
+   "sha256": "191b14bc0f42a509420e7f4d3e413a3ea561c25b251e5952723933ddc4ee58cd",
+   "bytes": 3036
+  },
+  {
+   "path": "m3-smoke-focus-play60.log",
+   "sha256": "692566c4a8168ba3a1b758296edb9963ca0c9a7d5fe339b8fbcd45b72e79ba93",
+   "bytes": 2969
+  },
+  {
+   "path": "m3-smoke-focus-play60.png",
+   "sha256": "80272ecbed2cabbfbd5fd47998562aa17e8bafc2533992fb795edcdcef908e4f",
+   "bytes": 505381
+  },
+  {
+   "path": "m3-smoke-focus-prefix.json",
+   "sha256": "2de5fcbe4636aa84e44b4ecc42919d75fd172c7d58b7726f9318fcff6687dd12",
+   "bytes": 56128
+  },
+  {
+   "path": "m3-smoke-focus-state-K1.json",
+   "sha256": "40c7980feca5bc4167185c54b9390796c8a7e6d46a958b0c0e3321842f07bd4f",
+   "bytes": 3951
+  },
+  {
+   "path": "m3-smoke-focus-state-P1.json",
+   "sha256": "bf4ff447aa08cb0fa591472c33475dab186414ea7222ce73a94f8e74a048ed53",
+   "bytes": 560329
+  },
+  {
+   "path": "m3-smoke-focus-state-P2.json",
+   "sha256": "79acd877f717c222f0b8b3402283bfc2b2e73cf15f04b7320f57d66ec47a99f9",
+   "bytes": 671728
+  },
+  {
+   "path": "m3-smoke-focus-state-P3.json",
+   "sha256": "db772bb049e6549baf72a1a26b922d2101b98007aedbbaddd9cd0b4816148dbf",
+   "bytes": 22942
+  },
+  {
+   "path": "m3-smoke-focus-state-P6.json",
+   "sha256": "1f635af5f01f8350e5ce6778b3b04a6f34016d241868d122edd43cbc0b8a86d3",
+   "bytes": 106289
+  },
+  {
+   "path": "m3-smoke-focus-state-P7.json",
+   "sha256": "4a539f2d26c3734c9b009fe16951981036f4c4e7f34fb244dfe869f995e03916",
+   "bytes": 22943
+  }
+ ]
+}
