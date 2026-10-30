@@ -1893,3 +1893,42 @@ full original whole-state observations and source/binary identities are in
 `validation/chain11/piece4/`. Exclusive play timing is recorded separately after
 the coordinated measurement completes; this functional piece adds no new
 performance claim. The existing exact-source native gate remains passing.
+
+## Final play timing and terminal equality — chain11
+
+No native or harness source changed after the functional delivery. Exclusive
+standard play measurements include both logic calls and Python ctypes input
+packing, excluding initialization, snapshots, hashing, rendering and presentation.
+K1/P3/P6/P7 prior windows average0.279/0.301/0.304/0.300ms, with maxima
+0.521/0.477/0.588/0.555ms. The3,722-frame S1 prior prefix averages0.304ms,
+maximum0.672ms. The supported **10,672-frame S1 window through10800** in the
+unchanged benchmark CLI averages **0.331037ms/frame**, p99 **0.573666ms**,
+maximum **1.349958ms**. Every frame in these standard CLI runs is below4ms.
+
+M2's explicit `--mode 1`9,200-frame measurement averages **0.275572ms** logic,
+maximum **1.308875ms**; logic plus render averages0.667488ms, maximum1.691ms.
+All previous K1/P3/P6/P7/S1-prefix terminal full-projection hashes, clocks, input
+identities and frame counts remain exact. All M2 terminal state/surface hashes,
+generation, clock and frame count remain exact. The expanded S1 play run's
+terminal indicators match the original/audit endpoint, and all three extended
+measurements have the same terminal full-projection hash.
+
+One initial extended wrapper retained the entire offline10,672-frame proof
+JSON during sampling and observed mean0.336313ms, maximum **4.116166ms**.
+That overrun is retained as a failed sample, not discarded or called passing.
+An exclusive diagnostic recorded each wall/thread-CPU pair and Python GC events;
+its maximum was1.345208ms at10800, with no GC event overlapping that maximum.
+The unchanged standard CLI in a fresh process with normal GC then produced the
+1.349958ms maximum above. Neither follow-up reproduced the initial spike.
+**Its cause remains unproven**; no GC or scheduling attribution is asserted,
+and no native optimization or threshold relaxation was used to obtain the result.
+The budget statement applies to the documented standard CLI sample, not every
+wall-clock observation including the failed wrapper sample.
+
+The final [verification and timing receipt](validation/chain11/piece5/summary.json)
+contains all standard measurements, the initial overrun, the full diagnostic,
+helper scripts and own lease records. Queue duration is separate from measured
+execution. The verifier checks every prior exact prefix, unchanged P6 mask and
+byte count, supported S1 limits, terminal projections and official play budgets.
+`validate.sh` remains passing on the exact frozen sources. Only engine-owned
+paths and docs/ENGINE.md changed; no main merge, push or acceptance was performed.

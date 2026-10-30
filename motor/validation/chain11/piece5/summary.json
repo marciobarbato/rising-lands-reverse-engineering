@@ -1,0 +1,161 @@
+{
+  "all_bounded_checks_passed": true,
+  "diagnostic_followup": {
+    "max_ms": 1.3452080000000421,
+    "mean_ms": 0.32749444012368967,
+    "terminal_indicators_equal": true,
+    "terminal_projection_equal": true
+  },
+  "graphics_reference": "92fab50ccfa14271f6657fc0f6032b6b4b68dd4b",
+  "initial_extended_wrapper": {
+    "budget_passed": false,
+    "cause": "Unattributed. The wrapper retained the complete offline proof; neither follow-up reproduced the spike. No GC or scheduler cause is proven.",
+    "max_ms": 4.116165999999755,
+    "mean_ms": 0.3363130186469214,
+    "retained": true
+  },
+  "m2_play_logic_timing": {
+    "count": 9200,
+    "max_ms": 1.308874999999432,
+    "mean_ms": 0.275572437173907,
+    "p50_ms": 0.2727509999993494,
+    "p95_ms": 0.3020830000002306,
+    "p99_ms": 0.3288740000000345,
+    "seconds": 2.5352664219999443
+  },
+  "measurement_driver": "Existing probe_benchmark.py CLI in a fresh process, standard GC, no full offline proof retained; same engine binary and ctypes input packing",
+  "native_implementation": "7448d14",
+  "reference_logic": "3e2ed771b78dd3e130ae86e08e081045bc3dc242",
+  "release_sha256": "0783fa8d399351b5c2e05a5a23cdb2481b9c6d774e8644d984f8f0abbb1d97d5",
+  "reports_sha256": {
+    "check-final.py": "c6c302952f7492590ed280778f4d9299024292fe3a7cc1f7caaaa9998f50f960",
+    "diagnose-timing.py": "b3ac860e8e61ebf77a2b6f10af76860acfabfcd6e758d7989bd567a288b92331",
+    "diagnose-timing.sh": "14fd6f7e66549ffb703577c8eb5d317a5d51cebcb3a03e2ef3a818a810dc1a81",
+    "final-verification.json.xz": "4cf95b9e88acce548598e429ce28e4ebe9af957e9228309ee5a0c1dc21924683",
+    "lease-journal.json": "69b1232720e33411ffe6f802b0c10e8af17d50b763cb6f6abf9d491054fed1f1",
+    "timing-K1.json.xz": "02d6747f408b3c9bdf0d5e263dcfa80f5846d7468ab7ab36e1df1612cfefa91b",
+    "timing-M2.json.xz": "aebe3fe63eda7d7d96ca5bb043dac41af8d1bda5bbc798f82d73a580d6217a12",
+    "timing-P3.json.xz": "ab8c45f8aef72da1721858bda57dfb86e1579f46d5a00ae7bd592898aede3338",
+    "timing-P6.json.xz": "e67f3fe4e91ac236f27b80609c5ac80dbe2f61e534d184a4acd7d5185c018376",
+    "timing-P7.json.xz": "881e4cf04897ef51aaa860767026803e356a6cb1c8c0b44f95defbdf65946d53",
+    "timing-S1-clean.json.xz": "7d11889d855d6be85115f649317b0ba92b6d3df9ebf859b70a857510eb007f24",
+    "timing-S1-diagnostic.json.xz": "b87ec85577303aca5bea90431bdead4497559ad8a231966059133db4a01cd383",
+    "timing-S1-extended.json.xz": "be4303505a1af39f8cd7f0d1e7299fadff3f4d2d168a5772de23501a2134adef",
+    "timing-S1.json.xz": "536c47f06745d28fec425c63aaa22c8df57b00677049dd00723564dc6412a41e",
+    "timing-diagnostic.json.xz": "e89ab7ac309f3de00b9026782129b7ff627159ab8d9b33bf32c36ab198dcafa2",
+    "timing-diagnostic.log.xz": "7a4b293e8ad36dc65454ab803781052f093531fa8df5f0cdc413d33687ae4792",
+    "timing.log.xz": "0166acb7782887e8990f36af3fec4d735e772d38fc70433ceb782c01f9cee5c6",
+    "timing.sh": "6f92bfae38e30a746cd107ef6963bdaae9366ba8adc54036a9e76c1866e7b373"
+  },
+  "results": {
+    "K1": {
+      "frames_equal": 501,
+      "paired_phases_equal": 1002,
+      "surfaces_equal": 501
+    },
+    "P3": {
+      "frames_equal": 3001,
+      "paired_phases_equal": 6002,
+      "surfaces_equal": 3001
+    },
+    "P6": {
+      "frames_equal": 2272,
+      "paired_phases_equal": 4544,
+      "surfaces_equal": 2272,
+      "whole_state_phases_equal": 4544
+    },
+    "P7": {
+      "frames_equal": 3572,
+      "paired_phases_equal": 7144,
+      "surfaces_equal": 3572
+    },
+    "S1": {
+      "original_indicator_frames_equal": 10672,
+      "original_indicator_through": 10800,
+      "python_indicator_frames_equal": 3722,
+      "python_stop": {
+        "address": 4364762,
+        "callee": "SacGetCapacite",
+        "dependency": "SacGetCapacite required at 0x004299da; earlier stores retained",
+        "frame": 3851,
+        "phase": 3,
+        "scope": "Python-only continuation; no Rust equality claimed for this incomplete frame",
+        "type": "DependenciaIA"
+      },
+      "python_through": 3850,
+      "render_stop": {
+        "address": "0x4022c8",
+        "frame": 2014,
+        "rust_python_partial_equal": true
+      },
+      "rust_stop": {
+        "equal": null,
+        "frame": 10801,
+        "inputs_before_stop": [],
+        "orders_before_stop": [],
+        "phase": 2,
+        "python": null,
+        "rust": "Display monster count at 0x0041591f"
+      },
+      "surfaces_equal": 1885,
+      "surfaces_through": 2013
+    },
+    "queries-final": {
+      "cases": 675,
+      "equal": 675
+    },
+    "technology-final": {
+      "cases": 520,
+      "equal": 520
+    }
+  },
+  "s1_play_timing": {
+    "frames": 10672,
+    "logic_mean_ms": 0.3310374463080981,
+    "max_ms": 1.3499579999995959,
+    "p99_ms": 0.5736659999993066
+  },
+  "schema": "rising-lands/chain11-final-play-delivery/1",
+  "terminal_regression_checks": {
+    "K1": {
+      "clock": true,
+      "frames": true,
+      "input_sha256": true,
+      "terminal_projection_sha256": true
+    },
+    "M2": {
+      "final_clock": true,
+      "final_counter": true,
+      "final_generation": true,
+      "final_phase": true,
+      "final_state_sha256": true,
+      "final_surface_sha256": true,
+      "frames": true
+    },
+    "P3": {
+      "clock": true,
+      "frames": true,
+      "input_sha256": true,
+      "terminal_projection_sha256": true
+    },
+    "P6": {
+      "clock": true,
+      "frames": true,
+      "input_sha256": true,
+      "terminal_projection_sha256": true
+    },
+    "P7": {
+      "clock": true,
+      "frames": true,
+      "input_sha256": true,
+      "terminal_projection_sha256": true
+    },
+    "S1": {
+      "clock": true,
+      "frames": true,
+      "input_sha256": true,
+      "terminal_projection_sha256": true
+    }
+  },
+  "validate": "passed: fmt, strict Clippy,31 Rust tests,63 Python tests,666 input leaves,75 pilot,C/Swift/Metal"
+}

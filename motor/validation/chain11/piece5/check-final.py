@@ -1,0 +1,27 @@
+import hashlib,json,lzma,sys
+from pathlib import Path
+root=Path.cwd();base=root/'.local/chain11';sys.path.insert(0,str(root/'motor/testes'))
+from player_provenance import sources
+read=lambda name:json.loads((base/(name+'.json')).read_bytes())
+identity=read('final-inputs');assert sources()==identity['source_sha256']
+assert hashlib.sha256((root/'motor/target/release/librising_engine.dylib').read_bytes()).hexdigest()==identity['release_sha256']
+reports={};checks={}
+for name,count in [('queries-final',675),('technology-final',520)]:
+ r=read(name);assert r['equal']==r['cases']==count and r['first_difference']is None;assert r['provenance']['source_sha256']==identity['source_sha256'];assert r['provenance']['binary_sha256']==identity['technology_fixture_sha256'if name=='technology-final'else'fixture_sha256'];reports[name]=dict(cases=count,equal=count)
+for probe,count in [('K1',501),('P3',3001),('P6',2272),('P7',3572)]:
+ name=probe+'-whole'if probe=='P6'else probe+'-state';r=read(name);assert r['frames_equal']==r['frames_compared']==count and r['first_difference']is None and r['stop']is None;assert r['provenance']['source_sha256']==identity['source_sha256'];assert r['play_comparison']['equal']==r['play_comparison']['phases']==count*2
+ s=read(probe+'-surface');assert s['equal']==s['frames']==count and s['first_difference']is None and s['engine_stop']is None;assert s['provenance']['source_sha256']==identity['source_sha256'];assert s['renderer_binary_sha256']==identity['renderer_sha256'];reports[probe]=dict(frames_equal=count,surfaces_equal=count,paired_phases_equal=count*2)
+p=read('P6-whole');w=p['whole_state'];assert w['phases_equal']==w['phases_compared']==4544;assert w['mask_bytes']==173046;assert w['compared_bytes_per_phase']==[16002289]or w['compared_bytes_per_phase']==16002289
+reports['P6']['whole_state_phases_equal']=4544
+s=read('S1-surface');assert s['frames']==1886 and s['equal']==1885 and s['engine_stop']is None
+stop=s['first_difference'];assert stop['frame']==2014 and stop['stop']==0x4022c8 and stop['python_stop']['endereco']=='0x004022c8';assert all(stop[k]for k in ('python_equal','cache_equal','calls_equal','effects_equal'));assert all(row['equal']for row in s['rows'][:-1]);assert s['provenance']['source_sha256']==identity['source_sha256']
+py=read('S1-python-v2');assert py['frames_equal']==py['frames_compared']==3722 and py['first_difference']is None and py['stop']is None
+continuation=py['reference_continuation'];assert continuation['frame']==3851 and continuation['phase']==3 and continuation['type']!='StopIteration' and 'SacGetCapacite'in continuation['dependency'];assert py['provenance']['source_sha256']==identity['source_sha256']
+native=read('S1-native');assert native['frames_equal']==native['frames_compared']>=3722 and native['first_difference']is None;assert native['provenance']['source_sha256']==identity['source_sha256']
+reports['S1']=dict(original_indicator_frames_equal=native['frames_equal'],original_indicator_through=native['results'][-1]['frame'],rust_stop=native['stop'],python_indicator_frames_equal=3722,python_through=3850,python_stop=continuation,surfaces_equal=1885,surfaces_through=2013,render_stop=dict(frame=2014,address='0x4022c8',rust_python_partial_equal=True))
+for probe in ('K1','P3','P6','P7','S1'):
+ old=json.loads(lzma.decompress((root/f'motor/validation/chain10/piece5/timing-{probe}-final.json.xz').read_bytes()));new=read('timing-'+probe);checks[probe]={k:new[k]==old[k]for k in ('terminal_projection_sha256','clock','frames','input_sha256')};assert all(checks[probe].values());assert new['stop']is None and new['logic_mean_ms']<=4 and new['max_ms']<=4
+old=json.loads(lzma.decompress((root/'motor/validation/chain8/piece6/benchmark-M2.json.xz').read_bytes()));new=read('timing-M2');checks['M2']={k:new[k]==old[k]for k in old if k.startswith('final_')or k=='frames'};assert all(checks['M2'].values());assert new['phases']['logic']['mean_ms']<=4 and new['phases']['logic']['max_ms']<=4
+extended=read('timing-S1-clean');raw_extended=read('timing-S1-extended');diagnostic=read('timing-S1-diagnostic');assert extended['terminal_projection_sha256']==raw_extended['terminal_projection_sha256']==diagnostic['terminal_projection_sha256'];assert extended['frames']==native['frames_equal']and extended['stop']is None and extended['max_ms']<=4
+out=dict(schema='rising-lands/rust-chain11-final-verification/1',all_bounded_checks_passed=True,results=reports,terminal_regression_checks=checks,release_sha256=identity['release_sha256'],source_sha256=identity['source_sha256'],s1_play_timing={k:extended[k]for k in ('frames','logic_mean_ms','p99_ms','max_ms')},m2_play_logic_timing=new['phases']['logic'],initial_extended_wrapper=dict(max_ms=raw_extended['max_ms'],mean_ms=raw_extended['logic_mean_ms'],budget_passed=False,retained=True,cause='Unattributed. The wrapper retained the complete offline proof; neither follow-up reproduced the spike. No GC or scheduler cause is proven.'),diagnostic_followup=dict(max_ms=diagnostic['max_ms'],mean_ms=diagnostic['logic_mean_ms'],terminal_projection_equal=True,terminal_indicators_equal=True),measurement_driver='Existing probe_benchmark.py CLI in a fresh process, standard GC, no full offline proof retained; same engine binary and ctypes input packing')
+(base/'final-verification.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\n');print('All declared prefixes, stops, prior terminal projections and play timing pass')

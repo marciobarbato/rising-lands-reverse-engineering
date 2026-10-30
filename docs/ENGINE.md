@@ -834,3 +834,14 @@ again on the same implementation: K1/P3/P6/P7 indicators and surfaces remain
 501/3,001/2,272/3,572 exact frames, with all paired play/audit phases equal.
 P6 retains4,544/4,544 whole-state phases under the unchanged published mask.
 Fresh query and technology leaf runs retain675/675 and520/520 exact cases.
+
+[Exclusive play measurements and terminal checks](../motor/validation/chain11/piece5/summary.json)
+retain all prior terminal projection/state/surface hashes, clocks, generations
+and counts. The standard S1 CLI run over10,672 supported frames averages
+**0.331ms/frame**, maximum **1.350ms**; M2 play logic averages0.276ms,
+maximum1.309ms, over9,200 frames. All standard sampled logic frames stay below4ms.
+The first extended wrapper had an unattributed4.116ms outlier, retained with
+per-frame wall/CPU/GC diagnostic evidence. Neither the diagnostic nor the fresh
+unchanged CLI reproduced it; no native source or budget threshold was changed.
+The [handoff](../motor/HANDOFF.md#final-play-timing-and-terminal-equality--chain11)
+records this qualification, exact metrics, scopes and reproduction helpers.
