@@ -1,0 +1,207 @@
+{
+ "bounded_native_comparisons": {
+  "all_own_source_hashes_match": true,
+  "detection": 35,
+  "economy": 1058,
+  "full_parents": 2,
+  "mismatches": 0
+ },
+ "evidence_revision": "49eaa4833f3001684fa5702ec4b61a76a9f9ab06",
+ "final_gate": {
+  "errors": 0,
+  "failures": 0,
+  "seconds": 138.289,
+  "skips": 8,
+  "source_revision": "49eaa4833f3001684fa5702ec4b61a76a9f9ab06",
+  "tests": 141
+ },
+ "implementation_revision": "1ce1d6c94d01e6feb490adc0a821f9f41884f1e1",
+ "last_remote_check": {
+  "main": "1531678188f5b33c6f0718c21c306fac13eccfc9",
+  "missions": "7eeb395232b35dcf62be9451078f5d61a86dd130",
+  "s1_manifest_present": false
+ },
+ "logs": [
+  {
+   "path": ".local/m3-1/donos-economia-s1-native.log",
+   "sha256": "1336b8503b547d8304b1c612654a6961bd328ae575d8b9e78ed33433207f0017",
+   "status": "harness error: technology callback site was an integer, not a hexadecimal string; no complete pass claimed"
+  },
+  {
+   "path": ".local/m3-1/donos-economia-s1-native-v2.log",
+   "sha256": "afa44c672c15b905af4d5dd49c5ede927e0a5798f3fe00c518ba5531de4608ec",
+   "status": "passed: 1058 fresh native comparisons, zero mismatches"
+  },
+  {
+   "path": ".local/m3-1/donos-economia-s1-focused.log",
+   "sha256": "119c679cb63e15b0fe45d516eb6ed5061abc0666b4805c1fe9c18cb65d2ac5c5",
+   "status": "passed: three consumer tests"
+  },
+  {
+   "path": ".local/m3-1/s1-economia-gate.log",
+   "sha256": "a2f8cc013314708fc9d1f296cef4003d0edebbefe1fb9f15685a4b3a849d288a",
+   "status": "passed: 135 tests, eight skips, zero failures/errors"
+  },
+  {
+   "path": ".local/m3-1/s1-economia-strict.log",
+   "sha256": "88eb58f19cba4d378757192556237f9f15aedd1b282681acf429b8c54ca43ee3",
+   "status": "indicator: 10672 equal frames through10800; Graphics stop at10801; no difference"
+  },
+  {
+   "path": ".local/m3-1/s1-economia-plan.log",
+   "sha256": "2bea7db0eed0257911fc4a4289bc5baf6529fc4bf1c436f6a089cbffde520bcd",
+   "status": "diagnostic only: 11534 equal frames through11662; detection-handler stop at11663; no difference"
+  },
+  {
+   "path": ".local/m3-1/s1-guarda-monstros-original.log",
+   "sha256": "c491b825320d1a86aa40611223e50cdc9e4e6a66ef95b48a0be650fbffe63d39",
+   "status": "original observation: states11500/11501 equal, unchanged code"
+  },
+  {
+   "path": ".local/m3-1/s1-deteccao-original.log",
+   "sha256": "42ded2fad01c2b8e3291857f59fcab5c510d40e2d758fda9222986a0a59e0397",
+   "status": "original v1: 164 states11500..11663 equal, unchanged code; committed before adapter"
+  },
+  {
+   "path": ".local/m3-1/s1-deteccao-original-v2.log",
+   "sha256": "17926e115aed9e31ba08bdda79ee2c1cab313c9a105ca05d93708c549a2373e1",
+   "status": "additive original v2: 164 states equal, full adapter input spans and native stores, unchanged code"
+  },
+  {
+   "path": ".local/m3-1/s1-deteccao-native.log",
+   "sha256": "511a459e8c9a019ce6dd8a185f251cd411ce50656e22ce7d9e41732cae0669a7",
+   "status": "setup error: scalar record proxy lacked the buffer protocol required by the public owner"
+  },
+  {
+   "path": ".local/m3-1/s1-deteccao-native-v2.log",
+   "sha256": "42351481e6ca4d4be16424dd3b9d3bd684387ee148c49030784a56b967ad685a",
+   "status": "setup error: constructing the full Core world exceeded sparse captured views"
+  },
+  {
+   "path": ".local/m3-1/s1-deteccao-native-v3.log",
+   "sha256": "499c55d58503890de158eaca740e3e68446ace8ee0f753fdf8ccb3edaea1bf32",
+   "status": "fixture error: duplicate post-state lacked unchanged native stores; no complete pass claimed"
+  },
+  {
+   "path": ".local/m3-1/s1-deteccao-native-v4.log",
+   "sha256": "4d0125513edafb5ebb08c6712730795b5b1a976d1b2360fb96883af615116a7e",
+   "status": "passed: 35 fresh native comparisons, zero mismatches"
+  },
+  {
+   "path": ".local/m3-1/s1-deteccao-gate.log",
+   "sha256": "92e0e791bb04eee01861dc1f078bae93eba99294504ba5f519b214fec5d8922a",
+   "status": "passed: 138 tests, eight skips, zero failures/errors"
+  },
+  {
+   "path": ".local/m3-1/s1-deteccao-strict.log",
+   "sha256": "e864d9f27a014514a73c2bd951cc3468a71f8d1e56205e17dfc5cd31b9d5e772",
+   "status": "indicator: 10672 equal frames through10800; unchanged Graphics stop; no difference"
+  },
+  {
+   "path": ".local/m3-1/s1-deteccao-plan.log",
+   "sha256": "315b594fed22c1224cdb13e4494a70f57d93b343942cd176d123805054f44f62",
+   "status": "diagnostic only: handler passes, attack state1 stop at11663; 11534 equal frames; no difference"
+  },
+  {
+   "path": ".local/m3-1/s1-ataque-original.log",
+   "sha256": "485f91ab6c9a6e1d358785ec50ec6543b3d4fbee53b280614062e4da2e8854d4",
+   "status": "original parent: 164 states equal, unchanged code; committed before dispatcher binding"
+  },
+  {
+   "path": ".local/m3-1/s1-ataque-native.log",
+   "sha256": "73b3d932ffddb7b6ae09edf679b122d5850a0e87fd86196f6b41d33275df341f",
+   "status": "passed: one fresh native full parent, all25197 game blocks and ordered handoffs equal"
+  },
+  {
+   "path": ".local/m3-1/s1-ataque-focused.log",
+   "sha256": "e96c1f79675e796123453926942d49ed31a46e973ac0c0c341a099f2ec9f74b1",
+   "status": "passed: two consumer tests"
+  },
+  {
+   "path": ".local/m3-1/s1-ataque-gate.log",
+   "sha256": "1f7633748964d81e839b8bac1850d32a0b2568c7c9afd89d90200b4f53e270d5",
+   "status": "passed: 140 tests, eight skips, zero failures/errors"
+  },
+  {
+   "path": ".local/m3-1/s1-ataque-strict.log",
+   "sha256": "f6e3151f54d09caa59b1dfdba85ab8dd725653156a6ab2ce9117e302b4fb66cc",
+   "status": "indicator: 10672 equal frames through10800, Graphics stop; no difference"
+  },
+  {
+   "path": ".local/m3-1/s1-ataque-plan.log",
+   "sha256": "fe9de6c4356b34d6785c385bc2faf1750b632ab830dfb7be9ca57a4b796631eb",
+   "status": "diagnostic only: 11613 equal frames through11741, reload stop at11742; no difference; 942 Graphics bypasses"
+  },
+  {
+   "path": ".local/m3-1/s1-recarga-original.log",
+   "sha256": "9c9b63438895745111d09fac1a32e3b61525ff5bd2d977b4e51e6b420d3acb6f",
+   "status": "original: first reload parent, 243 states11500..11742 equal, unchanged code, no boundaries"
+  },
+  {
+   "path": ".local/m3-1/s1-recarga-native.log",
+   "sha256": "3774b66a93ea905b74992bc13fcdc17222216865fc960d523484cbaae92ceeb8",
+   "status": "passed: fresh real transition and reload parents, two comparisons/all25197 game blocks each equal"
+  },
+  {
+   "path": ".local/m3-1/s1-recarga-focused.log",
+   "sha256": "703b99d9161b29bd7d60908c527dee9e5660257ad2b5168bbab9479863ca7302",
+   "status": "passed: three dispatcher consumer tests"
+  },
+  {
+   "path": ".local/m3-1/s1-recarga-strict.log",
+   "sha256": "2aa42ef61752987ea7bc615fd856ce5c0c70c53d0eff64fc9f8ab06017359a1f",
+   "status": "indicator: 10672 equal frames through10800, unchanged Graphics stop; no difference"
+  },
+  {
+   "path": ".local/m3-1/s1-recarga-plan.log",
+   "sha256": "98434814c476e9524a51e2b4efdcf7214d33c7567c72b3b1f37a30331da6ecf1",
+   "status": "diagnostic only: 11624 equal frames through11752, sound metadata stop at11753; no difference; 953 Graphics bypasses"
+  },
+  {
+   "path": ".local/m3-1/s1-recarga-gate.log",
+   "sha256": "50eae13c7715ecb78c29c4904a475d853fe4c549dd715996409b0725d7f4ed83",
+   "status": "passed: 141 tests, eight explicit skips, zero failures/errors"
+  },
+  {
+   "path": ".local/m3-1/s1-som-ataque-original.log",
+   "sha256": "1ee55054b46257fb2e7bb4eac0491f5838b7bc9cdebd1c9d2c63b3b3e8e15f2d",
+   "status": "observer-method failure: direct entry cannot observe the oracle-intercepted declared sound boundary; no evidence/pass created"
+  },
+  {
+   "path": ".local/m3-1/s1-som-ataque-pai-original.log",
+   "sha256": "e49d4b6a38a1261a7b662fef4eb5a78e14ffb18b662b3d60118caaef4b798f9f",
+   "status": "original: real CALL/passive parent capture, four states11750..11753 equal, unchanged code; three declared sound boundaries, no sound body proof"
+  },
+  {
+   "path": ".local/m3-1/s1-providers-final-gate.log",
+   "sha256": "0f6d418cd69cb24421ac1f20d940f9a43c1b1fae60e2dd72b23f5363e1315ff5",
+   "status": "passed on49eaa48: 141 tests, eight explicit skips, zero failures/errors, 138.289s; documentation links pass"
+  }
+ ],
+ "merged_main": "3e2ed771b78dd3e130ae86e08e081045bc3dc242",
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "owned_source_sha256": {
+  "pesquisas-paralelas/ia-runtime/ataque_despacho_ia.py": "62e89b5db446a9502ba1ddc5c669aab698868c426a57bfa522358ae43106fc17",
+  "pesquisas-paralelas/ia-runtime/capturar_guarda_monstros_s1_ia.py": "b45aac9a193caf5061ac5798e2729421adfc6fc266d51ee1184fe371b2d73d45",
+  "pesquisas-paralelas/ia-runtime/capturar_parada_s1_ia.py": "04c971e10f6ccebd319230357b7a34a943752f8d316721e717631ab7ec247997",
+  "pesquisas-paralelas/ia-runtime/composicao_encadeada_ia.py": "957ccf27d0e13b29153c332d897f35f49bb7b9542174aef3772faa233be82cb0",
+  "pesquisas-paralelas/ia-runtime/deteccao_conflito_ia.py": "57e5595e4ee4dcedd377f7b931b3df77eb75c3cabfcbb3b27cfc9acf951d88a5",
+  "pesquisas-paralelas/ia-runtime/provar_entrada_ia.py": "7a801bab5d37fa3b5c860a6b70588227fa3dcd904df6f6b436951abdd7116eb6",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "a579f0f8834a1adb8cec0374245f347606c62d58868480b7fe008817ed1b8f8c",
+  "pesquisas-paralelas/ia-runtime/proxima_etapa_quadro.py": "ef606fca77ad06a0afb75fe32cd7fc68e36f280d3d451017b84f4ea3a9f8b970",
+  "pesquisas-paralelas/ia-runtime/testes/test_ataque_despacho_ia.py": "c3053256f68ddfc1c73247a0ae408616ab6be4dd1306f698794014a46d3db394",
+  "pesquisas-paralelas/ia-runtime/testes/test_deteccao_conflito_ia.py": "3dd1692c356bff5fac44063c1194c516d1a14428518b3b2c3a327fa19f7c866d",
+  "pesquisas-paralelas/ia-runtime/testes/test_donos_economia_s1_ia.py": "bc5e2f433c5448d90e14855ec109df7452d9a8d21668ff43c65f2ef121af2f6e",
+  "pesquisas-paralelas/ia-runtime/validar_ataque_despacho_ia.py": "4344371d1ecfeaf7cea1095b9c4f3c94c1ec272dad7a7a8176205ce1d122b7b8",
+  "pesquisas-paralelas/ia-runtime/validar_deteccao_conflito_ia.py": "9e8fe7299e20f20badd626b1e76bb7c01b18f44319a54c516fed29ef7113a30b",
+  "pesquisas-paralelas/ia-runtime/validar_donos_economia_s1_ia.py": "99dc7ad98022e570f6e6d0e244b6fdb5cafb0e9230871c0ade758ba1972deba9"
+ },
+ "planning_diagnostics_sha256": {
+  ".local/m3-1/s1-ataque-planejamento.json": "decde6a77ea46854d85e2d2575b9198788ce618ed605ed8a3e9736bd97182ba5",
+  ".local/m3-1/s1-deteccao-planejamento.json": "e319645ea9fd3a2baf195216004ea5098eaa171e130043b2700f62e4af9f38e4",
+  ".local/m3-1/s1-economia-planejamento.json": "55b70ddb5eae29d0b3cac83ed7ab4728934473d8da441704e8f0ac6df5c92367",
+  ".local/m3-1/s1-recarga-planejamento.json": "8356abb06973aeb16aa8b6c31fa5ffdbe97da9c91512426fbb3aad4c79af9b07"
+ },
+ "schema": "rising-lands/s1-provider-continuation-attempts/1",
+ "scope": "Bounded native owner integration and indicator equality; planning never acceptance. Strict through10800, planning through11752, no difference. Graphics count2 and Combat emitter metadata stops retained. S1 pass-2 absent; no whole-state proof/part chains."
+}

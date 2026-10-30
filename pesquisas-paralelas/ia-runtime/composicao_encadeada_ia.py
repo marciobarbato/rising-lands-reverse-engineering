@@ -286,6 +286,11 @@ def _parar_pilha_nativa(sitio):
 def provedores(mapa, prov, mm, ctx, registro, janelas, travessias, fase, regs):
     """Original-name providers for every routine the three phases reach."""
     p = {}
+    from ataque_despacho_ia import AtaqueDespacho
+    p['EnginNextEtape:state1'] = AtaqueDespacho(mm, prov.mundo).ramo
+    from deteccao_conflito_ia import detectar_alvo
+    p['iabDetection_AjouteEnnemiOuAlerteConflit'] = lambda sitio, unidade, alvo: detectar_alvo(
+        mm, unidade, alvo)['EAX']
     bonus = lambda jogador, tipo, seletor: prov.bonus.consultar(jogador, tipo, seletor)  # noqa: E731
     p.update(core.provedores_core(mm, bonus))
     maquina = MaquinaTarefasViva(ctx.programa, mm.vista(0x512320, 0x25e8), operacoes=operacoes_regras(mm, p),
