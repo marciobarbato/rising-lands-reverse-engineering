@@ -303,7 +303,9 @@ class _Hud:
         self.info_ajuda()
         if self.m.u8(0x4e17ac): self.parar(0x417c7f)
         if self.evento: self.parar(0x417c8a)
-        if self.m.u16(0x507d56) != self.m.u16(0x507d54): self.parar(0x469c5f)
+        if self.m.u16(0x507d56) != self.m.u16(0x507d54):
+            from alertas_s1_graficos import message_box
+            message_box(self)
         self.drapeau_alliance()
         mx, my = self.m.u16(0x5099a8), self.m.u16(0x5099aa)
         for nome, endereco, valor in (('mouse_x_copia_u16', 0x49a042, mx), ('mouse_y_copia_u16', 0x49a044, my)):

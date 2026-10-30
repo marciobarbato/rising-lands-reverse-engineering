@@ -45,11 +45,11 @@ def normal_extension(c,r,x,y,index,overlay_active):
 
 def plano_cave(c,r,x,y,cell):
     spec=TABLES['cave'];m=c.leitura_entrada
-    if r[4]!=spec['owner'] or c.camera!=0 or r[5]!=spec['mode'] or word(r,6):
+    if r[4]!=spec['owner'] or c.camera!=0 or r[5]!=spec['mode'] or word(r,6)>100:
         c.parar(0x40958e,'inhabited CAVE outside captured owner-0 mode-5 no-fire domain')
     if m is None or c.relogios_extra is None:c.parar(0x40958e,'inhabited CAVE requires live table reads and clocks')
     level=m.u8(0x4dfb30+6*r[4])
-    if level!=0 or r[0x74] not in (0,1) or r[0x75] not in (0,1) or r[0x76]>15:
+    if level>7 or r[0x74] not in (0,1) or r[0x75] not in (0,1) or r[0x76]>15:
         c.parar(0x40958e,'CAVE flags/player level outside the native matrix')
     x,y=i16(x-spec['anchor'][0]),i16(y-spec['anchor'][1]);clocks=(c.tela.u('quadro_u32'),*c.relogios_extra)
     layers=[]
@@ -68,6 +68,18 @@ def plano_cave(c,r,x,y,cell):
 
 def cave(c,r,x,y,cell):
     for layer in plano_cave(c,r,x,y,cell):bob(c,layer['x'],layer['y'],layer['id'],layer['owner'])
+    if word(r,6):
+        # AffFlamme type3, 0x4045B9: damage percentage is 200*damage/max.
+        maximum=c.leitura_entrada.u16(0x495d90+52*3)
+        if maximum!=100:c.parar(0x41a940,'CAVE flame denominator outside native max100')
+        percent=200*word(r,6)//maximum;clock=c.relogios_extra[0]
+        flames=((15,38,64,0x1ff5),(30,65,10,0x1ff5),(45,43,60,0x1ff5),
+            (60,60,7,0x2015),(75,46,53,0x2015),(90,38,17,0x2035),
+            (105,16,23,0x1ff5),(120,22,20,0x2015),(135,17,-22,0x2035),
+            (150,13,66,0x1ff5),(165,12,57,0x2015),(175,36,-10,0x2055),
+            (175,10,26,0x1ff5),(185,64,33,0x1ff5),(185,7,-1,0x1ff5))
+        for threshold,dx,dy,base in flames:
+            if percent>threshold:bob(c,x-57+dx,y-47+dy,base+((clock+cell+dx)&31))
 
 def selecao(c,r,cell,index,*,frame,gauge):
     # S1 original frame2014: the selected sanctuary continues drawing while
@@ -85,15 +97,18 @@ def selecao(c,r,cell,index,*,frame,gauge):
     maximum=c.leitura_entrada.u16(0x495d90+52*r[8]);hp,damage=word(r,0xa),word(r,6);capacity,count=word(r,0xe),word(r,0xc)
     # Native S1 pools through5090 include full-health sanctuary bags2..8.
     counts=spec['counts'] + ([2,3,4,5,6] if r[8]==2 else [])
-    if maximum!=spec['maximum'] or hp!=maximum or damage or capacity!=spec['capacity'] or count not in counts:
+    if maximum!=spec['maximum'] or hp!=maximum or (damage and not (r[8]==3 and damage<=100)) or capacity!=spec['capacity'] or count not in counts:
         c.parar(0x4020ec,'structure gauge health/capacity outside API-1.8 matrix')
     if r[0x4e:0x4e+capacity]!=bytes([1])*count+bytes(capacity-count):c.parar(0x401a70,'structure bag codes outside captured compact troop slots')
     gx,gy=i16(x-23),i16(y+spec['gauge_y'])
     if ox==0 and gx<0:gx=0
-    bob(c,gx+9,gy,0x2a7b);overlay.filled(c,gx+10,gy+1,gx+14,gy+60,48)
+    bob(c,gx+9,gy,0x2a7b)
+    height=((hp*200//maximum)-(damage*200//maximum))*60//200
+    overlay.filled(c,gx+10,gy+61-height,gx+14,gy+60,145 if height<=20 else 180 if height<=40 else 48)
     for i in range(capacity):
         px,py=gx-(9 if i>=8 else 0),gy+8*(i%8)
         bob(c,px,py,0x2a3c if r[0x4e+i]==1 else 0x2a3b,r[4] if r[0x4e+i]==1 else None)
     if r[8]==3:
-        if c.leitura_entrada.u8(0x4dfb30+6*r[4])!=0:c.parar(0x401a70,'CAVE technology markers above captured level zero')
-        for i in range(7):bob(c,gx+63+8*i,gy+48,0x2a3b)
+        level=c.leitura_entrada.u8(0x4dfb30+6*r[4])
+        if level>7:c.parar(0x401a70,'CAVE technology markers outside native levels 0..7')
+        for i in range(7):bob(c,gx+63+8*i,gy+48,0x2a3d if i<level else 0x2a3b,r[4] if i<level else None)

@@ -1,0 +1,39 @@
+{
+ "schema": "rising-lands/affgame-glyphs-comparison/1",
+ "capture_sha256": "ff312d87a2c1031e13d22abe33df1bdb25394ed0feb4108fba5ba38859f82558",
+ "capture_file": "s1-fome-fazendeiro-preparado.json.xz",
+ "native_parent": null,
+ "sources_sha256": {
+  "render_quadro.py": "09b8c559fd4db2de03dc95630282e1348de99c0a4169199034dc2e30e8a25520",
+  "hud_scriptado_m3.py": "49e59f8a03bd40e026c7c3b39bf50b5aee558289a3151d8b0ca85bf36329cd82",
+  "texto_afftext_bitmap.py": "7b6a5e3bd914bd6ecc0a50587c9d76d528651c85246be73b8fe13f22dfa9c184",
+  "validar_entrada_m3.py": "7956ad517a02d370a657cc7665a346a6284bf5bde294935899b83822b0908d3f",
+  "validar_affgame_glifos.py": "e4d350ca0a9531e28f9bffe1acf41285afbfe07401469933f4845ac949cb5a65",
+  "quadro_jogo.py": "8f740a75bfe330ad5cee96ec3d96240d85f98471484915fc71410a41c1262d31",
+  "hud_quadro.py": "4ac3857a60580fb1ed5587169bb7c2bf38a4652e2022b2efa92bde986067840b",
+  "camadas_exibicao_m3.py": "3b249a4b8ec5b6d0d9803543e0c454f397373b172ed0433390e14a3b4e4260f5",
+  "cave_scriptada_m3.py": "1867c746ab8756dac4fd43b9035212b799fee0685b32a040f393fb1715104e08",
+  "sobreposicoes_entrada_m3.py": "3b3c072f1812d805e6dd0873367636b3154c9ecf5e2a518fc69fa497fd1d6d40",
+  "alertas_s1_graficos.py": "e0ea910fe7639efd9700118908fb801bea4b3b0207dd93d8557f3ae207ae28e8",
+  "corpos_s1_tardios_graficos.py": "3d26b1094301e7739942999666d15419139a44f9636343b1f2b338023a55a43e",
+  "ambiente_graficos_core.py": "ce54ae8744b0de7b96113309ec7c22a372f09e3dcffb1b4ca866b9e77d120259",
+  "efeitos_logicos_exibicao.py": "088d35b331db879b782efb9a01d35fe1c2d6ecc907d28eaf41b37248ce90f6fc"
+ },
+ "expected": 1,
+ "equal": 1,
+ "rows": [
+  {
+   "source": "s1-render-12001-12220.json.xz",
+   "frame": 12001,
+   "stop": null,
+   "text_calls": 2,
+   "pixel_mismatches": 0,
+   "effect_mismatches": [],
+   "raster_equal": true,
+   "sha256": "de03b622cf383a7970d8bbe93b46daaad13ee51513dd2201d317c1eb60617b2e",
+   "native_sha256": "de03b622cf383a7970d8bbe93b46daaad13ee51513dd2201d317c1eb60617b2e",
+   "case": "prepared-farmer-hunger19",
+   "equal": true
+  }
+ ]
+}

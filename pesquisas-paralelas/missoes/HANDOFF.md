@@ -757,3 +757,47 @@ The 1,560 logic bytes are the 999 of M2.2 (the same addresses) plus 561 that fir
 - **Python per-frame comparison over 9,200 frames:** AI/runtime runs it against these parts.
 - **Native pass-2 hooks** (Core `5580c2d`, about 6.45× faster): not used for M2.3. Before any later long policy run (M3), check on the mini that they reproduce the M2.2 128-frame policy.
 - **v3 (text/LoadPie):** still waits for Core's `ftell`.
+
+## Stage22 (M3): scripted-input harness, probes, S1 victory, D1 defeat, window captures (Claude, Mac mini, 2026-10-29/30)
+
+Executed on the Mac mini, original only (no translation imported). Full details, rules and timelines: [m3/SONDAS_M3.md](m3/SONDAS_M3.md).
+
+### Commits
+
+| Commit | Content |
+|---|---|
+| `d79f68a`, `e17dbf0` | Step 0 static targets ([m3/M3_ALVOS.md](m3/M3_ALVOS.md)) and their tests in the missions suite |
+| `3befc83` | scripted-input harness ([m3/entrada_roteirizada.py](m3/entrada_roteirizada.py), schema `rising-lands/monde01-scripted-input/1`), frame-128 checkpoint, inputs P1–P3 |
+| `f058844`, `55db1d5`, `085fe35`, `01fa7d8` | probes P1–P7 and K1, each replay-checked on two runs ([m3/sondas/](m3/sondas/)) |
+| `01745da`, `d18add9`, `5f6f155` | pass-2 whole-state captures of the P1, P2 and P6 windows |
+| `1191e4c`, `fef8e02` | S1 input builder; snapshots kept at state size |
+| `0ebfe70`, `82ec5ea` | S1 reaches victory; replay-checked capture `m3/sondas/S1` |
+| `bab6c7c`, `93f3b61` | D1 defeat input and its replay-checked capture `m3/sondas/D1` |
+| `8c7a2a0` | pass-2 whole-state capture of the S1 window, plus two pass-2 tool fixes |
+
+### Captures (API inputs for AI/runtime)
+
+| Capture | Frames | Result | Files |
+|---|---|---|---|
+| S1 (victory) | 129–17050 | AL = 1 at 16933; `MenuInit(0x13)` 17032; confirmation click → `MissionNext` 17043 | `m3/entradas/S1.json`, `m3/sondas/S1/{replay,relatorio,resumo}.json`, `*.jsonl.xz` |
+| D1 (defeat) | 129–15700 | unit count 0 at 15555 (AL = 1, latch 0); `MenuInit(0x13)` 15654; `PartieGetResultat` 0 and failure branch 0x42c9d5 at 15655 | `m3/entradas/D1.json`, `m3/sondas/D1/...` |
+| S1 window, pass 2 | 129–17050 | policy passed: 33,844/33,844 phases, 920,200 changed bytes, 654,586 logic bytes, 0 without writer | `m3/sondas/S1/captura-janela.parte00..16.json.xz` + manifest, `mascara-janela.json`, `politica-janela.json.xz` |
+| P1, P2, P6 windows, pass 2 | to 629, 729, 2400 | policies passed | `m3/sondas/{P1,P2,P6}/captura-janela.*` |
+
+The two S1 and the two D1 runs from F0 give equal record files (quadros, entradas, comandos, fronteiras). D1's published `resumo.json` lists a snapshot every 250 frames.
+
+### Defeat trigger [B]
+
+`TestFinDeMission 0x458735` is the only store of AL = 1 with latch 0x4e1d84 = 0, when the player unit count 0x4e1a3a is 0 (`CalculEnginNextEtape` counts pool slots whose state is neither 0 nor 4). `MenuInit 0x4684d4` (menus 0x11 and 0x17) only resets the latch. MONDE01 has no trap cells, so every unit must fall to the raiders.
+
+### Pass-2 tool fixes (`8c7a2a0`)
+
+- `relatorio_longo`/`comparar_politica` globbed `politica-0*.pickle`, which skips segments from frame 10000. M2.3 and P1/P2/P6 never reach 10000.
+- The policy credits `KERNEL32.GlobalAlloc`'s declared fill to that binding. It runs only at frame 17043 in the S1 window, and in none of P1/P2/P6.
+
+### Not run / pending
+
+- **Combat's fatal-window captures**: requested and then cancelled on 2026-10-30 before starting (rest day; nothing new to start).
+  - Commands: `pesquisas-paralelas/combate/executar_janelas_fatais_combate.py S1 --intervals 11000-12250` and `D1 --intervals 11250-11750 15250-15700`, from a checkout of `main` ≥ `89575fa`.
+  - Start snapshots, kept on the Mac mini: S1 from `.local/m3/passo2/S1/instantaneo-11000.pickle` (DGROUP equal to the S1 record at 11000; Combat's tool checks the whole state); D1 from `.local/m3/d1final/D1-b/instantaneo-*.pickle`.
+- **Python comparison** of the S1 and D1 windows: AI/runtime runs it against these captures.

@@ -797,3 +797,17 @@ M2.3 extends the frozen `-v2` display reference to frame 9,200, original only, w
   - The first 128 frames equal the M2.2 capture.
 
 Details: [missions handoff](../pesquisas-paralelas/missoes/HANDOFF.md), Stage21.
+
+## Stage22 (M3): scripted-input harness, S1 victory, D1 defeat and window captures
+
+M3 drives the intact executable with a scripted input file from the M2.2 frame-128 state, original only.
+
+- **Harness:** [entrada_roteirizada.py](../pesquisas-paralelas/missoes/m3/entrada_roteirizada.py) answers `GetCursorPos`, `PeekMessageA` and `GetAsyncKeyState` per frame from the input file and dispatches messages to WndProc 0x4181a1 natively.
+- **Probes:** P1–P7 and K1 settle selection, moves, the CAVE build, food and stone orders, cave lodging, the depot route and the keys. Each is replay-checked on two runs.
+- **S1, victory:** frames 129–17050. AL = 1 at 16933. The result screen opens at 17032, and a click confirms it into `MissionNext` at 17043.
+- **D1, defeat:** frames 129–15700. The unit count reaches 0 at 15555. `PartieGetResultat` returns 0 at 15655 and the failure branch runs. The only defeat trigger is `TestFinDeMission` with unit count 0.
+- **Window captures:** pass-2 whole-state captures with comparison policies for P1, P2, P6 and the whole S1 window. All four pass; S1 has 33,844 phases and 654,586 logic bytes, most of them from the next screen's bank load at 17043.
+- **Checks:** two independent runs from F0 give equal records for every probe, for S1 and for D1. Each window's written parts replay to every phase state.
+- **Pending:** Combat's fatal-window captures over S1 and D1 (cancelled before starting).
+
+Details: [SONDAS_M3.md](../pesquisas-paralelas/missoes/m3/SONDAS_M3.md) and the [missions handoff](../pesquisas-paralelas/missoes/HANDOFF.md), Stage22.

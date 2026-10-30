@@ -30,7 +30,7 @@ def validar(auditoria):
     cap = CapturaLimitada(AQUI / 'evidencias/sonda-colheita-P4-129-728.json.xz')
     row = next(r for r in cap.d['rows'] if r['frame'] == 484)
     catalog = CatalogoRastreado()
-    stopped = cap.render(row, catalog)
+    stopped = cap.render(row, catalog, texto=False)
     assert int(stopped.parada['endereco'], 16) == 0x459454
     boundary = FronteiraTextoGravada(cap, row)
     with ArgumentosRasterM3(catalog) as raster:
