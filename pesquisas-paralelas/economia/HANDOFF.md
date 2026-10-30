@@ -2,6 +2,37 @@
 
 Chat: `01a18262-c6d5-7cd3-80fa-8431bf5f2657` (Economy and Production). Worktree: `/Users/marcio/git/Rising Lands/worktrees/re-economy`. Branch: `feat/re-economy`. Organization base: `6634be3af2d255846a847d8aa21ad4edf1cdb589`. Implementation commit: `f5a5e9b` (`Reconstruct troop completion preparation and cargo credits`); the following handoff commit and serialized integration result are identified in the completion chat. Only economy-owned paths changed.
 
+## Stage 27 (M3 S1): EnginRestaureEtat, BatimentEnleveMatiere, the cave meal and tag 19 (2026-10-30)
+
+Branch `feat/re-economy` (main `fcc0ba8` merged: Core's `fadiga_vegetacao`). Full contract: [ECONOMY.md](../../docs/ECONOMY.md#restoring-the-saved-state-the-cave-meal-and-the-tag-19-unload-m3-s1).
+
+**Original first.** Capture source `capturar_restauracao.py` (`baca0c1`, case-table fix `f115e40`), captures committed before any translation ran: `rotinas` `4b3fb35` (raw `b6c3288e…56b4`) and `corpo` `2524050` (raw `c4bc4ac0…cfbf`). Same declared actions in both: the hunger scenario, every food sack removed at frame 1150, restored cases at frame 30 and at the cave, tag 19 at 1500, hunger in state 20 at 1520. Frames 0/1 reproduced, code unchanged.
+
+**Answer** (native MONDE01):
+- EnginRestaureEtat `0x45315f`: saved state 5 = ResetOrdre then the work order again with the depot tuple put back (the S1 path, frame 8057). Every switch target is translated (2/3/7, 1, 0xb/0xf by type, 0xd, 0x10, 0x11, 0x12, 0x14, 0x18, default SetDeplaceEngin). Real call sites `0x45566a`: saved state 5 ×6 (frames 1281, 1422, 1483) and 0x14 (1591).
+- Eating at the cave costs one food (frames 1422 and 1483: food 22 → 20) through BatimentEnleveMatiere(1, 1, owner) `0x4556d7`, which also recomputes the stock level byte.
+- "Nothing found": unit 12 reaches its removed sack (1281); with food 0 at the cave (declared cases) TestRessource fails. Both run ChercheVegetLibre, the hungry voice, EnginRestaureEtat.
+- Tag 19 → SetDechargeCaveEnginSelect `0x473194` → SetDechargeCaveEngin `0x444dee` (state 0x14). State 20 then takes food **out of** the cave: BatimentEnleveMatiere every 33 frames from `0x44e565` (food RMI 17 → 4 over 1602–1998). S1 does not use tag 19.
+
+**API.** `restauracao.Restauracao(memoria, *, externo)`, `chamar(nome, regs)` with EAX..EBP + ESP, exit registers as the original leaves them. `provedor_restauracao(restauracao, outros)` serves EnginRestaureEtat, BatimentEnleveMatiere, SetDechargeCaveEnginSelect, SetDechargeCaveEngin and raises `ArgumentoNaoPassado` for omitted argument registers. Every foreign callee receives the whole register file and its entry ESP (Core: ResetOrdre, BatimentGetCase, SetDeplaceEngin, SetEnginRentreBatiment, SetEnginConstruitBatiment, BatimentGetDecalageConstruction, EnginEstVivant, EnginAsk; Combat: SetAttaqueEngin).
+
+**Mutation order** (EnginRestaureEtat saved state 5): the tuple +0x80/+0x82/+0x84 is read, then ResetOrdre runs, then +0x7e, the path-search release (`0x4e0f36/37`, `0x4e0f3c`, `0x496304`), +0x88, +0x89, +2 = 5, +0x82 = 0, +0xb2, then +0x80, +0x82 and +0x84 (word) are stored.
+
+**Coordinator fixes.**
+1. `alimentacao` now passes the whole register file to every callee, with ChercheVegetLibre's ECX = 0x43 in `ARGUMENTOS`. Saved state 0x14's validity check `0x454db5` is translated, and `provedor_fome` follows Core's provider shape.
+2. EteintTerrain in `_abandonar` is served by `provedor_fadiga` in the native differential (`validar_caverna_recrutamento.provedores_core`). The CPU-free replay cannot host it: Core's live world reads bytes no recorded call reads. ChercheVegetLibre in the bodies is served by `provedor_fadiga` too (`validar_alimentacao.provedores_fadiga`).
+
+**Validation:**
+- CPU-free: rotinas 58 EnginRestaureEtat + 27 BatimentEnleveMatiere + 7 SetDechargeCaveEnginSelect, all match. Corpo: the same plus **712/712 state-19 bodies**, run with the body composed with `provedor_restauracao` and Core's ChercheVegetLibre. Every foreign call's EAX..EDX is compared in full. Three mutations caught; ArgumentoNaoPassado tested.
+- Native, under the lease: `validar_restauracao` rotinas **92 compared (58 + 27 + 7), 0 mismatches**, rerun equal (740 s) corpo **804 compared (712 bodies + 58 + 27 + 7), 0 mismatches**, rerun equal, ChercheVegetLibre ×4 by `provedor_fadiga` (1,038 s). Hunger rerun: 231 compared, 0 mismatches, rerun equal (726 s). Abandonment rerun: 81 compared, 0 mismatches, rerun equal, EteintTerrain ×2 by `provedor_fadiga` (319 s).
+- Gate: `scripts/check.py --domain economy` 543 tests, 209 optional skips, 0 failures, docs OK.
+
+**Remaining (owners):**
+- Economy: CalculDechargeCaveEngin (state 20) and CalculTransporteEngin (state 18), both off the S1 path. The state-19 validity checks of saved states 1, 0xb, 0xd, 0xf, 0x12, 0x15, 0x17, 0x18 and the aborts `0x455107`/`0x454ddd`/`0x454ef8` stay outside the domain; S1 takes saved state 5 with a standing depot.
+- ai-runtime: wire tag 19 to `provedor_restauracao` (`SetDechargeCaveEnginSelect`; EAX = player, EDX = packet word 2, EBX = player << 2 at `0x45f085`). Wire the state-19 body through `alimentacao.provedor_fome` with `provedor_restauracao` as its `externo` for EnginRestaureEtat/BatimentEnleveMatiere.
+- Rust engine: port `restauracao` (it is validated over the same register contract).
+- Core/Combat: the callees above stay theirs; nothing new is owed.
+
 ## Hunger state 19 and the S1 coverage check (2026-10-29)
 
 Branch `feat/re-economy`. Full contract: [ECONOMY.md](../../docs/ECONOMY.md#hunger-state-unit-state-19-m3-s1).
