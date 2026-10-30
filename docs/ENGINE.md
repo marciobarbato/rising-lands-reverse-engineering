@@ -12,8 +12,14 @@ frame220: structure entry/cave habitation and recruitment, work state5, hunger
 state19/restoration, vision/groups/minimap/search and turret orders. The
 [continuation contract](../motor/research/CHAIN8_CONTRACT.md) records the exact
 inputs, original addresses, mutation order and remaining addressed stops.
-Bounded state/surface proof results and release timings are in the handoff;
-these are probe-window claims, not S1/D1 mission-completion claims. Swift owns the macOS shell, C only
+The [final continuation report](../motor/validation/chain8/piece7/summary.json)
+proves P3 through3129, P6 through2400 and P7 through3700, with all3,001/2,272/3,572
+advancing surfaces exact against original and pinned Python. P3/P7 state checks
+cover published indicators, inputs and orders; P6 also passes4,544/4,544 whole-state
+phases under the unchanged published mask and4,544 paired play/audit phases.
+No stop occurs inside these windows. Exclusive play logic averages0.283–0.285ms/frame
+(maximum0.518ms), with the earlier9,200-frame terminal state/surface hashes exact.
+The handoff records remaining S1/D1 boundaries and the qualified text contract. Swift owns the macOS shell, C only
 small tooling, and Python remains the original-validated reference and test
 harness. Rust is validated against the original evidence and the Python
 reference; `sh motor/validate.sh` runs on every integration. The workstream owns

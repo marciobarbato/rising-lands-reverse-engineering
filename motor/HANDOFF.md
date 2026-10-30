@@ -1467,3 +1467,70 @@ unchanged173,046-byte cumulative mask) and **4,544/4,544** paired play/audit pha
 Zero differences or stops. Its report predates only this HUD correction, with
 that exact source/library identity preserved. Final-source advancing state and
 surface runs form the last verification piece of this same task. No main merge.
+
+## Seventh continuation piece — complete final probe verification
+
+Implementation **3180b7541d17d64da099fd2271efec1f6a2e4a7f** is frozen throughout
+[the final report package](validation/chain8/piece7/summary.json). All22 raw
+reports/logs retain compressed and decompressed hashes. Probe, S1 and input
+proofs have identical full engine/harness/header source maps; M2 independently
+checks its recorded source set. Each binary stays stable, and all runs begin
+on this committed implementation. This final
+verification commit changes documentation and evidence only. ABI1.6/render1.9
+and every earlier reference profile and comparison mask remain unchanged.
+
+| Probe | Original state/input/order frames | Own-world original/Python surfaces | Stop |
+| --- | --- | --- | --- |
+| P3 | 3,001/3,001,129–3129 | 3,001/3,001 | None |
+| P6 | 2,272/2,272,129–2400 | 2,272/2,272 | None |
+| P7 | 3,572/3,572,129–3700 | 3,572/3,572 | None |
+
+P3/P7 state scope is the published indicators, consumed inputs and orders.
+P6 additionally proves **4,544/4,544 whole-state phases**, comparing16,002,289
+bytes per phase under the unchanged173,046-byte cumulative display mask, and
+**4,544/4,544 paired play/audit phases**. Block identities/lengths, immutable
+inputs, modeled registers, original checkpoint integrity and virtual clock
+contracts pass. Whole-state wall time876.474s includes replay, export, hashing
+and comparison; it is separate from gameplay timing.
+
+Each surface run carries Rust's own world, native renderer pixels/cache and
+saved backgrounds from the initial frame128 state. One attested between-frame
+surface per counter matches original pixels/raster calls and the pinned Python
+pixels/cache/effects; original shared prefixes, entry cache/background and text
+requests are checked. Original AffText nonexecution remains strictly attested,
+as in the published graphics proof. No later oracle state repairs the Rust world.
+Surface runs: P3 702.010s,P6 548.048s,P7 848.875s. The prior2032/2071 failures are
+retained in pieces5/6; both addressed renderer corrections now pass advancing replay.
+
+Final release **666/666** input leaves complete with exact captured state, typed
+returns and text requests (2 previously declared skips,0 stops). The fresh M2
+regression passes **257/257 phases**, including original events/registers,
+allocations and immutable tables. Fresh intact-x86 S1 snapshot variants pass
+**484/484 +120/120 +121/121**, with10 explicitly skipped voice fixtures. These
+remain declared snapshot variants, not historical in-situ replay claims. The
+current-source native gate in piece6 passes30 Rust/63 Python tests,75 pilot
+comparisons,C layout and actual Swift/Metal smoke; its source bytes equal this
+implementation. No additional engine edits followed that gate.
+
+Exclusive coordinated-lease play-mode logic (both calls and ctypes input packing,
+excluding initialization/render/audit/export/hash/presentation):
+
+| Probe | Mean ms/frame | p99 ms | Maximum ms |
+| --- | --- | --- | --- |
+| P3 | 0.2845 | 0.3180 | 0.4138 |
+| P6 | 0.2833 | 0.3176 | 0.5175 |
+| P7 | 0.2841 | 0.3520 | 0.5107 |
+
+All measured scripted frames stay below4ms. The9,200-frame M2 run averages
+0.2529ms logic (maximum1.3239), with terminal state/surface hashes, generation
+and clock exactly equal to the previous passing releases. The three probe
+terminal projection hashes also remain exact across the renderer corrections.
+Timing records are in piece6; proof wall times are not throughput measurements.
+
+The [native contract](research/CHAIN8_CONTRACT.md) and piece4 retain the explicit
+unsupported saved-state/abort, depot-mode, vehicle/AI and initialized-sound
+boundaries, plus the failed sparse movement-facade attempts. Coverage ends at the
+published windows above; S1/D1 mission completion is outside this verification.
+Reproductions use the coordinated lease, fresh output paths and the explicit
+release library argument for `player_proof.py`. Every job stayed within its
+1,140-second execution bound after lease grant. No merge into main was performed.
