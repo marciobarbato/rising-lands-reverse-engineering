@@ -1887,3 +1887,120 @@ the validated build afbc0f0. Only `feat/macos-playable` is committed/pushed.
 No merge to main, acceptance, Test B or unrelated work is performed. Remaining
 dependencies include the broader renderer domain and human Test B replay on
 the original; full mission/campaign/audio are not claimed.
+
+## Recorded-session Test B pipeline (2026-10-30)
+
+The new `scripts/test_b_pipeline.py` accepts arbitrary actual
+`MacOSSessionRecorder` exports, validates them through the complete unchanged
+Missions validator, runs the production app C phase entry with audited policy
+2, wraps the unchanged Missions original runner with a read-only state observer,
+and reports every frame hash difference/missing frame. Input is Missions schema
+v1, start frame128, held signed key answers, ordered u32 message triples and
+800×600 cursor coordinates. App initialization remains S0 plus the original four
+static tables, then the actual 128-frame prefix; no later oracle-state reload.
+Mutation order is unchanged: render/prefix; phase2 declared messages/cursor/keys;
+phase3 same keys without messages; read-only state/order observations after each
+successful phase/frame. The input mapper independently checks actual consumed
+poll requests; WndProc flag stores remain engine/original outputs.
+
+Intact original SHA256 remains
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`;
+WndProc `0x4181a1`, SetPlayerOrdre `0x45ecd4`, ProcessInputGame `0x45edc0` and
+Missions' original input bindings are unchanged. The full-memory hash uses the
+published P6 cumulative exclusion mask verbatim; its source policy/hash and the
+indicator reader identity are carried in both manifests. Unknown allocations,
+changed layouts, unmasked display effects and engine stops are exposed, not
+replaced with defaults or newly excluded bytes. App recorded-input validation
+omits post-prefix rendering, as Test A does; the actual synthetic UI capture
+renders normally and keeps named renderer stops.
+
+The explicit CLI-only synthetic automation sends NSEvents through NSWindow to
+the real Metal view and uses the production WebView recorder/save path. It is
+never human acceptance evidence. Right-button handlers now use the AppKit
+right-event type rather than `buttonNumber`, which constructed NSEvents may
+report as zero. Other input semantics and click scheduling are unchanged.
+Three comparison tests check successful prefixes, all changed/missing frames,
+and refusal of mismatched identities/duplicate frames. Native build, synthetic
+UI, app replay and bounded original-prefix results follow after execution.
+
+The human recording procedure, feature/mini commands, hash scope and remaining
+acceptance requirements are in `docs/MACOS_PLAYABLE.md` under Test B. Only the
+macOS-owned paths change. No main merge or acceptance is performed.
+
+### Normal UI glyph stop and explicit diagnostic domain
+
+Fresh normal UI runtime `600c41a` reaches 140 completed frames and stops on
+attempted frame 141 at **AffText `0x459454`** after the pointer reaches the CAVE
+icon. Its exported recording/stop are retained. This does not originate in the
+recorder: the production Rust C ABI explicitly refuses glyph rendering. Fetched
+`origin/main` `65d9d50` has the same boundary. No engine/Graphics-owned source is
+changed and no partial production draw is treated as a full frame.
+
+The explicit `record --record-only` switch (`--test-b-record-only` on the app)
+selects the **existing Validar UI**, with real rendered no-input validation
+frames, actual NSEvents, serial recorder receipt, canonical export and native
+atomic save. Capture reports `capture_policy: record-only` and
+`orders_applied_in_capture: false`; no game state is coerced to match the gesture
+plan. The separate app replay must emit the six actual orders with the required
+CAVE/depot arguments through the production C phase entry. This is a synthetic
+plumbing diagnostic, not human-play acceptance. Normal `record` keeps its real
+play path, actual order-tag check, and the named renderer stop.
+
+**Cross-front contract request (engine/Graphics):** publish a committed render
+contract that renders the actual AffText request at `0x459454` in normal play,
+including the original font/flags, clipping, palette and saved-background
+semantics. Probe-only non-execution attestations cannot supply production
+glyphs. The app can then adopt that contract and rerun the normal capture and
+human procedure. Until then normal human Test B is blocked at frame 141.
+
+The original runner now imports the unchanged Missions module under its normal
+`entrada_roteirizada` identity, so its checkpoint scheduler class remains
+pickle-resolvable. The first `runpy` wrapper attempt stopped at frame133 during
+checkpoint serialization (five reached hashes equal); the corrected run
+completes 129..134 with **6/6 full masked state hashes and indicator hashes equal**.
+The failed setup/build attempt omitted `RISING_PYTHON_RUNTIME` and ran no build;
+the explicit-runtime reruns pass. These are setup/wrapper failures, not hidden
+logic comparisons or modified original evidence.
+
+### Fresh delivery evidence
+
+Runtime/build **c9bc5d79b048f579a2ee9323db955e7a3cf05086**; source base
+`40ecde4`. The [delivery package](validation/test-b/delivery.json) records actual
+commands, original identity, library/input/mask/source hashes, lease events,
+normal-UI failure, Validar capture and every prefix comparison.
+
+- APP_BUILD: **116 tests / zero skips**, **27 exercise** and **21 inspection/live**
+  checks pass, including architecture/signing/relocation/source binding.
+- Unchanged engine tree: `sh motor/validate.sh` passes; **75 fresh original-x86
+  comparisons, zero mismatches/skips**, plus the Swift C ABI/128 Metal surfaces.
+- Actual Validar UI: **3,572 captured frames after 128**, end frame3700, 80.6 s;
+  3,700 accepted surfaces, 257 prefix states and 11 checkpoints equal. Capture
+  is explicitly record-only. The canonical export's next-frame stop is 3701;
+  that additional quiet frame is validated by the app replay, not counted as
+  captured; the original prefix stops at350.
+- Export SHA256 **394364c4e57737cf35abd858aebc85809e125a6622661d944b7e2406c6636fe0**;
+  complete unchanged Missions validator and canonical round trip pass.
+- App validation replay: **3,573 frames, 129..3701, no stop**, 254.1 s after
+  initialization. Actual orders: select at 133; CAVE tag4/type3 at 153; lodge tag16
+  at 2073; move tag5 at 2421/2422/2423; Ctrl depot tag7/word4=2 at 3228; recruit
+  tag17 at 3700. All six coverage checks pass. No post-prefix rendering or later
+  oracle-state reload occurs in this explicit replay tool.
+- Original prefix: **129..350, 222/222 full mapped-state hashes under the
+  unchanged P6 cumulative mask equal**, also 222/222 indicator hashes equal;
+  divergence list **[]**. **171.5 seconds**, code unchanged, actual intact PE,
+  actual Missions checkpoints and standard outputs. It ran inside a normal
+  heavy lease with a 19-minute alarm. App and original both contain 25,197 game
+  blocks / 16,175,335 bytes per frame; excluded display bytes follow the published
+  policy, without new exclusions.
+- Corrected six-frame preflight: **6/6 equal**, original status completed. The
+  old wrapper's checkpoint PicklingError at 133 and missing-runtime setup stop
+  are preserved; neither is passed off as a state mismatch or successful run.
+
+Full original command/ETA and human steps are in `docs/MACOS_PLAYABLE.md`.
+Measured 0.773 s/frame projects **46 minutes** for one full original run; budget
+**45–60 minutes**, plus an optional fresh checkpoint (**196 s observed**).
+Full original frames 351..3701, actual human capture, and human Test B acceptance
+remain unrun. Normal Jogar still stops at frame 141 on the owned glyph dependency;
+this synthetic diagnostic is not a replacement for that missing production
+provider. No main merge or milestone acceptance is performed. Only the feature
+branch is pushed for coordinator review.

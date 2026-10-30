@@ -1,0 +1,1566 @@
+{
+ "child_exit": 0,
+ "hash_contract": {
+  "indicator_reader_sha256": "2d391d854b0497bc6d7fc8418a3547d90e8f93b9be54b7e9ebf29b533a1a67ad",
+  "mask_path": "pesquisas-paralelas/missoes/m3/sondas/P6/mascara-janela.json",
+  "mask_sha256": "56cf9039a04d32bfbea4a4098a1111f4d7f59669028d633fadb41e06e3c05dbb",
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "scope": "All mapped game blocks, names/base/length preserved; published P6 cumulative exclusion mask, zeroed verbatim. Static executable tables and native stack excluded as in Test A. No session-specific mask additions."
+ },
+ "input_sha256": "394364c4e57737cf35abd858aebc85809e125a6622661d944b7e2406c6636fe0",
+ "mode": "intact executable; unchanged Missions correr",
+ "original_summary": {
+  "code_unchanged": true,
+  "evidence": false,
+  "frames_run": 222,
+  "input_file": ".local/test-b/validation-ui.input.json",
+  "input_name": "macOS recording",
+  "input_sha256": "394364c4e57737cf35abd858aebc85809e125a6622661d944b7e2406c6636fe0",
+  "last_frame": 350,
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "outputs": [
+   "quadros.jsonl",
+   "entradas.jsonl",
+   "comandos.jsonl",
+   "fronteiras.jsonl"
+  ],
+  "routines_first_entered": {
+   "AffBatimentOmbre": {
+    "caller": null,
+    "caller_return": null,
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffBatiments": {
+    "caller": "AffSprite+0x35e",
+    "caller_return": "0x416bc2",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffBloc": {
+    "caller": "AffTerrain+0x111",
+    "caller_return": "0x41079f",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffChrono": {
+    "caller": "AffGame+0x5c3",
+    "caller_return": "0x417c5b",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffCompteurCoutMatiere": {
+    "caller": "AffZoneInfo+0xb5",
+    "caller_return": "0x40f80d",
+    "first_frame": 141,
+    "phase": "between_frames141"
+   },
+   "AffCompteurMatiere": {
+    "caller": "AffGame+0x4b3",
+    "caller_return": "0x417b4b",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffConstruireBatiment": {
+    "caller": "AffEngin+0xbf",
+    "caller_return": "0x4159de",
+    "first_frame": 154,
+    "phase": "between_frames154"
+   },
+   "AffContenanceEngin": {
+    "caller": "AffInfoSelection+0x304",
+    "caller_return": "0x410ee8",
+    "first_frame": 131,
+    "phase": "between_frames131"
+   },
+   "AffCorpsEngin": {
+    "caller": "AffDeplaceEngin+0x95b",
+    "caller_return": "0x412ceb",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffCorpsEnginDecalage": {
+    "caller": "AffDeplaceEngin+0x67",
+    "caller_return": "0x4123f7",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffDeplaceEngin": {
+    "caller": "AffEngin+0x5e",
+    "caller_return": "0x41597d",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffDrapeauAlliance": {
+    "caller": "AffGame+0x608",
+    "caller_return": "0x417ca0",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffEngin": {
+    "caller": "AffSprite+0x3fe",
+    "caller_return": "0x416c62",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffGame": {
+    "caller": "ProgIteration+0x5a",
+    "caller_return": "0x475068",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffInfoAide": {
+    "caller": "AffGame+0x5de",
+    "caller_return": "0x417c76",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffInfoSelection": {
+    "caller": "AffDeplaceEngin+0x70a",
+    "caller_return": "0x412a9a",
+    "first_frame": 131,
+    "phase": "between_frames131"
+   },
+   "AffJaugeVie": {
+    "caller": "AffInfoSelection+0x88",
+    "caller_return": "0x410c6c",
+    "first_frame": 131,
+    "phase": "between_frames131"
+   },
+   "AffMarche": {
+    "caller": "AffGame+0x5b0",
+    "caller_return": "0x417c48",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffMiniMap": {
+    "caller": "AffGame+0x5be",
+    "caller_return": "0x417c56",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffProjectile": {
+    "caller": "AffSprite+0x53b",
+    "caller_return": "0x416d9f",
+    "first_frame": 245,
+    "phase": "between_frames245"
+   },
+   "AffSprite": {
+    "caller": "AffGame+0x427",
+    "caller_return": "0x417abf",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffTerrain": {
+    "caller": "AffGame+0x411",
+    "caller_return": "0x417aa9",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffText": {
+    "caller": "AffTextEncadre+0x251",
+    "caller_return": "0x45a469",
+    "first_frame": 141,
+    "phase": "between_frames141"
+   },
+   "AffTextEncadre": {
+    "caller": "AffInfoAide+0x158",
+    "caller_return": "0x40fa02",
+    "first_frame": 141,
+    "phase": "between_frames141"
+   },
+   "AffTrame": {
+    "caller": "AffGame+0x4f7",
+    "caller_return": "0x417b8f",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffVeget": {
+    "caller": "AffSprite+0x32b",
+    "caller_return": "0x416b8f",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffVegetTerrain": {
+    "caller": "AffTerrain+0x127",
+    "caller_return": "0x4107b5",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffVehiculeAtelier": {
+    "caller": "AffBatiments+0x7592",
+    "caller_return": "0x40f365",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffZoneIconeAction": {
+    "caller": "AffGame+0x4f0",
+    "caller_return": "0x417b88",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AffZoneInfo": {
+    "caller": "AffGame+0x5c8",
+    "caller_return": "0x417c60",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "AnimConstruireBatiment": {
+    "caller": "CalculConstruireBatiment+0x682",
+    "caller_return": "0x44b1e2",
+    "first_frame": 225,
+    "phase": "frame225"
+   },
+   "AvanceEngin": {
+    "caller": "CalculNextCase+0x221",
+    "caller_return": "0x449171",
+    "first_frame": 156,
+    "phase": "frame156"
+   },
+   "AvanceMonstre": {
+    "caller": "iaCalculPlayer+0x17",
+    "caller_return": "0x47f93e",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "BCDToInt": {
+    "caller": "CalculMatiere+0x3c",
+    "caller_return": "0x467754",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "BagContient": {
+    "caller": "BatimentNextEtape+0x2be",
+    "caller_return": "0x426b92",
+    "first_frame": 220,
+    "phase": "frame220"
+   },
+   "BagContientTroupe": {
+    "caller": "BatimentEstHabiter+0x44",
+    "caller_return": "0x41a5fc",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "BagGetCode": {
+    "caller": "InputGame+0x2ff8",
+    "caller_return": "0x42c270",
+    "first_frame": 140,
+    "phase": "frame140"
+   },
+   "BagGetType": {
+    "caller": "InputGame+0x2ebb",
+    "caller_return": "0x42c133",
+    "first_frame": 140,
+    "phase": "frame140"
+   },
+   "BagInit": {
+    "caller": "CreerBatiment+0x419",
+    "caller_return": "0x4202bb",
+    "first_frame": 220,
+    "phase": "frame220"
+   },
+   "BagReset": {
+    "caller": "CreerBatiment+0x3df",
+    "caller_return": "0x420281",
+    "first_frame": 220,
+    "phase": "frame220"
+   },
+   "BagVide": {
+    "caller": "AffDeplaceEngin+0x7f7",
+    "caller_return": "0x412b87",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "BatimentCollision": {
+    "caller": "BatimentGetCase+0x9b",
+    "caller_return": "0x41af7d",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "BatimentConstructible": {
+    "caller": "CalculConstruireBatiment+0x204",
+    "caller_return": "0x44ad64",
+    "first_frame": 220,
+    "phase": "frame220"
+   },
+   "BatimentConstruction": {
+    "caller": "CalculConstruireBatiment+0x763",
+    "caller_return": "0x44b2c3",
+    "first_frame": 244,
+    "phase": "frame244"
+   },
+   "BatimentConstruit": {
+    "caller": "CalculConstruireBatiment+0x690",
+    "caller_return": "0x44b1f0",
+    "first_frame": 225,
+    "phase": "frame225"
+   },
+   "BatimentContourEstIllumine": {
+    "caller": "CalculBatimentNextEtape+0x1ea",
+    "caller_return": "0x4283b1",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "BatimentDeselectionner": {
+    "caller": "InputGame+0x2790",
+    "caller_return": "0x42ba08",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "BatimentEnDestruction": {
+    "caller": "EnginNextEtape+0x20dd",
+    "caller_return": "0x456509",
+    "first_frame": 221,
+    "phase": "frame221"
+   },
+   "BatimentEstDecouvert": {
+    "caller": "CalculBatimentNextEtape+0x176",
+    "caller_return": "0x42833d",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "BatimentEstHabiter": {
+    "caller": "AffBatiments+0x9dc",
+    "caller_return": "0x4087af",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "BatimentExiste": {
+    "caller": "TestFinDeMission+0x1fd",
+    "caller_return": "0x458803",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "BatimentGetCase": {
+    "caller": "CalculBatimentNextEtape+0x11f",
+    "caller_return": "0x4282e6",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "BatimentGetDecalageConstruction": {
+    "caller": "SetEnginConstruitBatiment+0xe3",
+    "caller_return": "0x4455b1",
+    "first_frame": 153,
+    "phase": "frame153"
+   },
+   "BatimentGetDegatEffectif": {
+    "caller": "CalculConstruireBatiment+0x740",
+    "caller_return": "0x44b2a0",
+    "first_frame": 244,
+    "phase": "frame244"
+   },
+   "BatimentGetEtat": {
+    "caller": "AffBatiments+0x811",
+    "caller_return": "0x4085e4",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "BatimentGetModeEtat": {
+    "caller": "AffBatiments+0x50",
+    "caller_return": "0x407e23",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "BatimentGetPlayer": {
+    "caller": "AffBatiments+0x61",
+    "caller_return": "0x407e34",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "BatimentGetRessource": {
+    "caller": "IconeFillContenu+0x3a9",
+    "caller_return": "0x45df79",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "BatimentGetSelection": {
+    "caller": "CalculIconeAction+0x6f",
+    "caller_return": "0x45e9b3",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "BatimentGetType": {
+    "caller": "TestFinDeMission+0x22b",
+    "caller_return": "0x458831",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "BatimentGetTypeName": {
+    "caller": "InputGame+0x2ece",
+    "caller_return": "0x42c146",
+    "first_frame": 140,
+    "phase": "frame140"
+   },
+   "BatimentIllumine": {
+    "caller": "CalculBatimentNextEtape+0x205",
+    "caller_return": "0x4283cc",
+    "first_frame": 220,
+    "phase": "frame220"
+   },
+   "BatimentModifyTerrain": {
+    "caller": "PlaceBatiment+0xf0",
+    "caller_return": "0x41c59c",
+    "first_frame": 220,
+    "phase": "frame220"
+   },
+   "BatimentNextEtape": {
+    "caller": "CalculBatimentNextEtape+0x118",
+    "caller_return": "0x4282df",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "BatimentPosable": {
+    "caller": "InputGame+0xd8f",
+    "caller_return": "0x42a007",
+    "first_frame": 150,
+    "phase": "frame150"
+   },
+   "BatimentTailleGet": {
+    "caller": "AffTrame+0x93",
+    "caller_return": "0x4172b2",
+    "first_frame": 151,
+    "phase": "between_frames151"
+   },
+   "BobGetTaille": {
+    "caller": "TextGetLargeur+0x18e",
+    "caller_return": "0x4590ea",
+    "first_frame": 141,
+    "phase": "between_frames141"
+   },
+   "BonusGetValEngin": {
+    "caller": "EnginNextEtape+0x147",
+    "caller_return": "0x454573",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "Box": {
+    "caller": "AffMiniMap+0x8c",
+    "caller_return": "0x46a798",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "CalculBatimentNextEtape": {
+    "caller": "CalculGame+0xb97",
+    "caller_return": "0x42d3ff",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "CalculCompteurMarche": {
+    "caller": "CalculGame+0xbbc",
+    "caller_return": "0x42d424",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "CalculCompteurProposition": {
+    "caller": "CalculGame+0xbca",
+    "caller_return": "0x42d432",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "CalculConstruireBatiment": {
+    "caller": "EnginNextEtape+0x20ef",
+    "caller_return": "0x45651b",
+    "first_frame": 153,
+    "phase": "frame153"
+   },
+   "CalculDirCase": {
+    "caller": "EnginNextCase+0x66",
+    "caller_return": "0x448d6e",
+    "first_frame": 153,
+    "phase": "frame153"
+   },
+   "CalculDirection": {
+    "caller": "EnginNextCase+0x36",
+    "caller_return": "0x448d3e",
+    "first_frame": 153,
+    "phase": "frame153"
+   },
+   "CalculEnginNextEtape": {
+    "caller": "CalculGame+0xb92",
+    "caller_return": "0x42d3fa",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "CalculFatigue": {
+    "caller": "EnginNextEtape+0x485",
+    "caller_return": "0x4548b1",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "CalculFrame": {
+    "caller": "AffGame+0x264",
+    "caller_return": "0x4178fc",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "CalculGame": {
+    "caller": "ProgIteration+0x55",
+    "caller_return": "0x475063",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "CalculIconeAction": {
+    "caller": "CalculGame+0xb88",
+    "caller_return": "0x42d3f0",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "CalculMatiere": {
+    "caller": "CalculGame+0xbb0",
+    "caller_return": "0x42d418",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "CalculNextCase": {
+    "caller": "DeplaceEngin+0xc7",
+    "caller_return": "0x4493d3",
+    "first_frame": 153,
+    "phase": "frame153"
+   },
+   "CalculNextReflect": {
+    "caller": "CalculGame+0xafa",
+    "caller_return": "0x42d362",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "CalculTroupe": {
+    "caller": "BatimentNextEtape+0xb4",
+    "caller_return": "0x426988",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "CaseEstDecouverte": {
+    "caller": "GetNumBob+0x1f",
+    "caller_return": "0x40fdb4",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "CaseEstIlluminee": {
+    "caller": "GetNumBob+0x4a",
+    "caller_return": "0x40fddf",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "Chemin_ModifieZone": {
+    "caller": "SetEnginCollision+0x6b",
+    "caller_return": "0x442d1f",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "ChercheIndiceEngin": {
+    "caller": "InputGame+0x870",
+    "caller_return": "0x429ae8",
+    "first_frame": 130,
+    "phase": "frame130"
+   },
+   "CopyBitmap32x32": {
+    "caller": "GetNumBob+0x2b9",
+    "caller_return": "0x41004e",
+    "first_frame": 188,
+    "phase": "between_frames188"
+   },
+   "CreerBatiment": {
+    "caller": "CalculConstruireBatiment+0x22e",
+    "caller_return": "0x44ad8e",
+    "first_frame": 220,
+    "phase": "frame220"
+   },
+   "Cyclage": {
+    "caller": "AffGame+0x81c",
+    "caller_return": "0x417eb4",
+    "first_frame": 131,
+    "phase": "between_frames131"
+   },
+   "DDFlipPage": {
+    "caller": "AffGame+0x6ba",
+    "caller_return": "0x417d52",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "DDLockSurface": {
+    "caller": "AffGame+0x336",
+    "caller_return": "0x4179ce",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "DDSetPalette": {
+    "caller": "Cyclage+0xc1",
+    "caller_return": "0x45f6d9",
+    "first_frame": 131,
+    "phase": "between_frames131"
+   },
+   "DDUnlockSurface": {
+    "caller": "AffGame+0x6a2",
+    "caller_return": "0x417d3a",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "DeSelectionGroupe": {
+    "caller": "InputGame+0x26c2",
+    "caller_return": "0x42b93a",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "DecouvreCase": {
+    "caller": "DecouvreTerrain+0xe0",
+    "caller_return": "0x476931",
+    "first_frame": 171,
+    "phase": "frame171"
+   },
+   "DecouvreTerrain": {
+    "caller": "AvanceEngin+0x289",
+    "caller_return": "0x44898d",
+    "first_frame": 171,
+    "phase": "frame171"
+   },
+   "DeplaceEngin": {
+    "caller": "CalculConstruireBatiment+0x170",
+    "caller_return": "0x44acd0",
+    "first_frame": 153,
+    "phase": "frame153"
+   },
+   "DesTroupesSelectionnes": {
+    "caller": "InputGame+0x145a",
+    "caller_return": "0x42a6d2",
+    "first_frame": 130,
+    "phase": "frame130"
+   },
+   "Distance": {
+    "caller": "EteintTerrain+0xd8",
+    "caller_return": "0x476f5a",
+    "first_frame": 171,
+    "phase": "frame171"
+   },
+   "Distance2d": {
+    "caller": "EnginGetVolume+0x9d",
+    "caller_return": "0x440cfa",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "EnginAsk": {
+    "caller": "SelectionEngin+0x2b2",
+    "caller_return": "0x47458e",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "EnginEstArmure": {
+    "caller": "AffCorpsEngin+0x128",
+    "caller_return": "0x41126f",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "EnginEstMiroir": {
+    "caller": "AffCorpsEngin+0x1e4",
+    "caller_return": "0x41132b",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "EnginEstSelectionne": {
+    "caller": "InputGame+0x8bd",
+    "caller_return": "0x429b35",
+    "first_frame": 130,
+    "phase": "frame130"
+   },
+   "EnginEstTerreur": {
+    "caller": "AffCorpsEngin+0x1ef",
+    "caller_return": "0x411336",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "EnginEstVivant": {
+    "caller": "DeSelectionGroupe+0x26",
+    "caller_return": "0x4726b1",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "EnginGetBag": {
+    "caller": "AffContenanceEngin+0x18",
+    "caller_return": "0x410a44",
+    "first_frame": 131,
+    "phase": "between_frames131"
+   },
+   "EnginGetBagOrdre": {
+    "caller": "CalculIconeAction+0x59",
+    "caller_return": "0x45e99d",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "EnginGetEtat": {
+    "caller": "SelectionEngin+0x268",
+    "caller_return": "0x474544",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "EnginGetLevelExperience": {
+    "caller": "AffInfoSelection+0x2b1",
+    "caller_return": "0x410e95",
+    "first_frame": 131,
+    "phase": "between_frames131"
+   },
+   "EnginGetNbSelection": {
+    "caller": "CalculIconeAction+0x14",
+    "caller_return": "0x45e958",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "EnginGetPlayer": {
+    "caller": "AffCorpsEngin+0x26",
+    "caller_return": "0x41116d",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "EnginGetSelection": {
+    "caller": "CalculIconeAction+0x4a",
+    "caller_return": "0x45e98e",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "EnginGetTaille": {
+    "caller": "AffDeplaceEngin+0x150",
+    "caller_return": "0x4124e0",
+    "first_frame": 134,
+    "phase": "between_frames134"
+   },
+   "EnginGetType": {
+    "caller": "AffCorpsEngin+0x26a",
+    "caller_return": "0x4113b1",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "EnginGetTypeName": {
+    "caller": "InputGame+0x8a2",
+    "caller_return": "0x429b1a",
+    "first_frame": 130,
+    "phase": "frame130"
+   },
+   "EnginGetVieMax": {
+    "caller": "AffInfoSelection+0x68",
+    "caller_return": "0x410c4c",
+    "first_frame": 131,
+    "phase": "between_frames131"
+   },
+   "EnginGetVolume": {
+    "caller": "EnginAsk+0x46",
+    "caller_return": "0x440da4",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "EnginInZone": {
+    "caller": "SelectionEngin+0xff",
+    "caller_return": "0x4743db",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "EnginNextCase": {
+    "caller": "CalculNextCase+0x4c",
+    "caller_return": "0x448f9c",
+    "first_frame": 153,
+    "phase": "frame153"
+   },
+   "EnginNextEtape": {
+    "caller": "CalculEnginNextEtape+0xfd",
+    "caller_return": "0x456eb2",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "EnginOccupeCase": {
+    "caller": "ChercheIndiceEngin+0x85",
+    "caller_return": "0x446718",
+    "first_frame": 130,
+    "phase": "frame130"
+   },
+   "EnginPeutPasser": {
+    "caller": "EnginNextCase+0xa7",
+    "caller_return": "0x448daf",
+    "first_frame": 153,
+    "phase": "frame153"
+   },
+   "EnginSelectPeutAttaquer": {
+    "caller": "InputGame+0x1583",
+    "caller_return": "0x42a7fb",
+    "first_frame": 134,
+    "phase": "frame134"
+   },
+   "EnginSelectPeutEntrer": {
+    "caller": "InputGame+0x1639",
+    "caller_return": "0x42a8b1",
+    "first_frame": 134,
+    "phase": "frame134"
+   },
+   "EnginTrouveCible": {
+    "caller": "EnginNextEtape+0x376",
+    "caller_return": "0x4547a2",
+    "first_frame": 145,
+    "phase": "frame145"
+   },
+   "EnginTrouveCibleScan": {
+    "caller": "EnginTrouveCible+0x4e",
+    "caller_return": "0x453fc2",
+    "first_frame": 145,
+    "phase": "frame145"
+   },
+   "EnginVisible": {
+    "caller": "SelectionEngin+0x30f",
+    "caller_return": "0x4745eb",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "EnleveMatiere": {
+    "caller": "CreerBatiment+0xd5",
+    "caller_return": "0x41ff77",
+    "first_frame": 220,
+    "phase": "frame220"
+   },
+   "EstConstructionTerrain": {
+    "caller": "AffTerrain+0x16b",
+    "caller_return": "0x4107f9",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "EteintCase": {
+    "caller": "EteintTerrain+0x108",
+    "caller_return": "0x476f8a",
+    "first_frame": 171,
+    "phase": "frame171"
+   },
+   "EteintTerrain": {
+    "caller": "AvanceEngin+0x21f",
+    "caller_return": "0x448923",
+    "first_frame": 171,
+    "phase": "frame171"
+   },
+   "EvenementEnCours": {
+    "caller": "AffGame+0x269",
+    "caller_return": "0x417901",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "ExisteEngin": {
+    "caller": "AffSprite+0x32",
+    "caller_return": "0x416896",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "FilledBox": {
+    "caller": "AffJaugeVie+0x8c",
+    "caller_return": "0x41090a",
+    "first_frame": 131,
+    "phase": "between_frames131"
+   },
+   "FilledBoxGris": {
+    "caller": "AffTrame+0x167",
+    "caller_return": "0x417386",
+    "first_frame": 151,
+    "phase": "between_frames151"
+   },
+   "FilledBoxOmbre": {
+    "caller": "AffTextEncadre+0x218",
+    "caller_return": "0x45a430",
+    "first_frame": 141,
+    "phase": "between_frames141"
+   },
+   "GameNextFrame": {
+    "caller": "CalculGame+0xb83",
+    "caller_return": "0x42d3eb",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "GetBit": {
+    "caller": "EnginEstMiroir+0x2e",
+    "caller_return": "0x45002c",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "GetBob": {
+    "caller": "AffTextEncadre+0x1c2",
+    "caller_return": "0x45a3da",
+    "first_frame": 141,
+    "phase": "between_frames141"
+   },
+   "GetNumBob": {
+    "caller": "AffTerrain+0x1d6",
+    "caller_return": "0x410864",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "IATestUtilite": {
+    "caller": "CalculEnginNextEtape+0xb5",
+    "caller_return": "0x456e6a",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "IconeFillContenu": {
+    "caller": "CalculIconeAction+0x5e",
+    "caller_return": "0x45e9a2",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "IconeGetZone": {
+    "caller": "InputGame+0x2a77",
+    "caller_return": "0x42bcef",
+    "first_frame": 140,
+    "phase": "frame140"
+   },
+   "IllumineCase": {
+    "caller": "IllumineTerrain+0x100",
+    "caller_return": "0x476db3",
+    "first_frame": 171,
+    "phase": "frame171"
+   },
+   "IllumineTerrain": {
+    "caller": "AvanceEngin+0x2af",
+    "caller_return": "0x4489b3",
+    "first_frame": 171,
+    "phase": "frame171"
+   },
+   "InputGame": {
+    "caller": "CalculGame+0xad8",
+    "caller_return": "0x42d340",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "InputSend": {
+    "caller": "CalculGame+0xadf",
+    "caller_return": "0x42d347",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "IntToBCD": {
+    "caller": "AffCompteurMatiere+0x3b",
+    "caller_return": "0x417f73",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "LongRand": {
+    "caller": "NextAnimTerrain+0x133",
+    "caller_return": "0x477833",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "MCICD_Manage": {
+    "caller": "_WinMain@16+0xb5",
+    "caller_return": "0x460225",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "MCICD_Play": {
+    "caller": "CalculGame+0xac5",
+    "caller_return": "0x42d32d",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "MemGrisCopy": {
+    "caller": "FilledBoxGris+0x136",
+    "caller_return": "0x45cec7",
+    "first_frame": 151,
+    "phase": "between_frames151"
+   },
+   "MemNoirBlancCopy": {
+    "caller": "PasteNoirBlancCmp+0x21e",
+    "caller_return": "0x45c15b",
+    "first_frame": 134,
+    "phase": "between_frames134"
+   },
+   "MemOmbreCopy": {
+    "caller": "PasteOmbreCmp+0x220",
+    "caller_return": "0x45b9b6",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "MemPlayerCopy": {
+    "caller": "PastePlayerCmp+0x246",
+    "caller_return": "0x45c69b",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "MessageBoxAffiche": {
+    "caller": "AffGame+0x5fc",
+    "caller_return": "0x417c94",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "MessageBoxCalcul": {
+    "caller": "CalculGame+0xb7e",
+    "caller_return": "0x42d3e6",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "MissionGetNum": {
+    "caller": "CalculGame+0xaf1",
+    "caller_return": "0x42d359",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "MouseZone": {
+    "caller": "InputGame+0x153",
+    "caller_return": "0x4293cb",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "MurAjoute": {
+    "caller": "Chemin_ModifieZone+0x15f",
+    "caller_return": "0x43e297",
+    "first_frame": 220,
+    "phase": "frame220"
+   },
+   "NextAnimTerrain": {
+    "caller": "CalculGame+0xbde",
+    "caller_return": "0x42d446",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "NextAnimVeget": {
+    "caller": "CalculGame+0xc04",
+    "caller_return": "0x42d46c",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "NextGouttes": {
+    "caller": "InputGame+0x309a",
+    "caller_return": "0x42c312",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "OmbreBitmap32x32": {
+    "caller": "GetNumBob+0x2cd",
+    "caller_return": "0x410062",
+    "first_frame": 188,
+    "phase": "between_frames188"
+   },
+   "PasteBobCmp": {
+    "caller": "AffVegetTerrain+0xeb",
+    "caller_return": "0x410170",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "PasteNoirBlancCmp": {
+    "caller": "AffZoneIconeAction+0x15b",
+    "caller_return": "0x417084",
+    "first_frame": 134,
+    "phase": "between_frames134"
+   },
+   "PasteOmbreCmp": {
+    "caller": "AffVeget+0x9dd",
+    "caller_return": "0x4164ac",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "PastePlayerCmp": {
+    "caller": "AffBatiments+0xa07",
+    "caller_return": "0x4087da",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "PlaceBatiment": {
+    "caller": "CreerBatiment+0x3d7",
+    "caller_return": "0x420279",
+    "first_frame": 220,
+    "phase": "frame220"
+   },
+   "PlaySnd_Manage": {
+    "caller": "_WinMain@16+0xb0",
+    "caller_return": "0x460220",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "PlaySnd_PostSound": {
+    "caller": "EnginAsk+0x8e",
+    "caller_return": "0x440dec",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "PlayerAttaqueCalculSympa": {
+    "caller": "CalculGame+0xc09",
+    "caller_return": "0x42d471",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "PlayerAttaqueReset": {
+    "caller": "CalculGame+0xa7b",
+    "caller_return": "0x42d2e3",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "PlayerEstAllie": {
+    "caller": "AffDrapeauAlliance+0x60",
+    "caller_return": "0x4175e1",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "PlayerEstContacterPourAlliance": {
+    "caller": "AffDrapeauAlliance+0x6d",
+    "caller_return": "0x4175ee",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "PlayerGetColor": {
+    "caller": "SetMiniMap+0x1e4",
+    "caller_return": "0x46a56c",
+    "first_frame": 171,
+    "phase": "frame171"
+   },
+   "PlayerGetType": {
+    "caller": "CalculGame+0xb16",
+    "caller_return": "0x42d37e",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "PlayerInitAllianceCompteur": {
+    "caller": "CalculGame+0xba1",
+    "caller_return": "0x42d409",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "ProcessInputGame": {
+    "caller": "CalculGame+0xb4d",
+    "caller_return": "0x42d3b5",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "ProgIteration": {
+    "caller": "_WinMain@16+0xa2",
+    "caller_return": "0x460212",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "ProjectileAnim": {
+    "caller": "ProjectileCalcul+0xc",
+    "caller_return": "0x46fc1b",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "ProjectileAvance": {
+    "caller": "ProjectileCalcul+0x55",
+    "caller_return": "0x46fc64",
+    "first_frame": 245,
+    "phase": "frame245"
+   },
+   "ProjectileCalcul": {
+    "caller": "CalculGame+0xb8d",
+    "caller_return": "0x42d3f5",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "ProjectileGetCase": {
+    "caller": "AffSprite+0x526",
+    "caller_return": "0x416d8a",
+    "first_frame": 245,
+    "phase": "between_frames245"
+   },
+   "ProjectileInit": {
+    "caller": "CalculConstruireBatiment+0x732",
+    "caller_return": "0x44b292",
+    "first_frame": 244,
+    "phase": "frame244"
+   },
+   "ProjectileSet": {
+    "caller": "ProjectileInit+0x76",
+    "caller_return": "0x46e4c2",
+    "first_frame": 244,
+    "phase": "frame244"
+   },
+   "ProjectileTrierAffichage": {
+    "caller": "AffSprite+0x21b",
+    "caller_return": "0x416a7f",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "Random": {
+    "caller": "EnginNextEtape+0x2596",
+    "caller_return": "0x4569c2",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "RechercheCalcul": {
+    "caller": "CalculGame+0xb9c",
+    "caller_return": "0x42d404",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "Remplit": {
+    "caller": "MurAjoute+0x14f",
+    "caller_return": "0x43e765",
+    "first_frame": 220,
+    "phase": "frame220"
+   },
+   "ReseauActif": {
+    "caller": "InputSend+0x9",
+    "caller_return": "0x45eca8",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "ResetCollision": {
+    "caller": "ResetEnginCollision+0x5a",
+    "caller_return": "0x442f06",
+    "first_frame": 153,
+    "phase": "frame153"
+   },
+   "ResetEnginCollision": {
+    "caller": "EnginNextCase+0x10b",
+    "caller_return": "0x448e13",
+    "first_frame": 153,
+    "phase": "frame153"
+   },
+   "ResetOrdre": {
+    "caller": "SetEnginConstruitBatiment+0x97",
+    "caller_return": "0x445565",
+    "first_frame": 153,
+    "phase": "frame153"
+   },
+   "ResetTableauHangar": {
+    "caller": "CalculBatimentNextEtape+0xe",
+    "caller_return": "0x4281d5",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "RestaureClipping": {
+    "caller": "AffBatiments+0x7597",
+    "caller_return": "0x40f36a",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "RetireSelectionEngin": {
+    "caller": "DeSelectionGroupe+0x6a",
+    "caller_return": "0x4726f5",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "RotateEngin": {
+    "caller": "CalculNextCase+0x110",
+    "caller_return": "0x449060",
+    "first_frame": 153,
+    "phase": "frame153"
+   },
+   "SaveCurrentClipping": {
+    "caller": "AffBatiments+0xb7",
+    "caller_return": "0x407e8a",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "ScanNouvellePatate": {
+    "caller": "UpdateChamp+0x110",
+    "caller_return": "0x478916",
+    "first_frame": 291,
+    "phase": "frame291"
+   },
+   "ScrollTerrain": {
+    "caller": "InputGame+0x285a",
+    "caller_return": "0x42bad2",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "SelectionEngin": {
+    "caller": "InputGame+0x26d7",
+    "caller_return": "0x42b94f",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "SetBit": {
+    "caller": "CalculMatiere+0xfa",
+    "caller_return": "0x467812",
+    "first_frame": 220,
+    "phase": "frame220"
+   },
+   "SetClipping": {
+    "caller": "AffBatiments+0x1c66",
+    "caller_return": "0x409a39",
+    "first_frame": 221,
+    "phase": "between_frames221"
+   },
+   "SetCollision": {
+    "caller": "SetEnginCollision+0x58",
+    "caller_return": "0x442d0c",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "SetConstruitBatimentSelect": {
+    "caller": "ProcessInputGame+0x1e0",
+    "caller_return": "0x45efa0",
+    "first_frame": 153,
+    "phase": "frame153"
+   },
+   "SetDebug": {
+    "caller": "InputGame+0x27c2",
+    "caller_return": "0x42ba3a",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "SetEnginCollision": {
+    "caller": "EnginNextEtape+0x746",
+    "caller_return": "0x454b72",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "SetEnginConstruitBatiment": {
+    "caller": "SetConstruitBatimentSelect+0x82",
+    "caller_return": "0x473a89",
+    "first_frame": 153,
+    "phase": "frame153"
+   },
+   "SetMiniMap": {
+    "caller": "AvanceEngin+0x1ec",
+    "caller_return": "0x4488f0",
+    "first_frame": 171,
+    "phase": "frame171"
+   },
+   "SetPlayerOrdre": {
+    "caller": "InputGame+0x27ad",
+    "caller_return": "0x42ba25",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "SetTerrain": {
+    "caller": "BatimentModifyTerrain+0xd9",
+    "caller_return": "0x41bb22",
+    "first_frame": 220,
+    "phase": "frame220"
+   },
+   "SetUpdateChamp": {
+    "caller": "CalculGame+0xba6",
+    "caller_return": "0x42d40e",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "TerrainEnCollision": {
+    "caller": "BatimentPosable+0x1a8",
+    "caller_return": "0x41fde8",
+    "first_frame": 150,
+    "phase": "frame150"
+   },
+   "TerrainEstDecouvert": {
+    "caller": "AffVegetTerrain+0x29",
+    "caller_return": "0x4100ae",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "TerrainEstGc": {
+    "caller": "InputGame+0x773",
+    "caller_return": "0x4299eb",
+    "first_frame": 130,
+    "phase": "frame130"
+   },
+   "TerrainEstHerbe": {
+    "caller": "BatimentPosable+0x17e",
+    "caller_return": "0x41fdbe",
+    "first_frame": 150,
+    "phase": "frame150"
+   },
+   "TerrainEstIllumine": {
+    "caller": "GetNumBob+0x5f",
+    "caller_return": "0x40fdf4",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "TerrainEstMine": {
+    "caller": "InputGame+0x78d",
+    "caller_return": "0x429a05",
+    "first_frame": 130,
+    "phase": "frame130"
+   },
+   "TerrainEstPiege": {
+    "caller": "InputGame+0x7c5",
+    "caller_return": "0x429a3d",
+    "first_frame": 130,
+    "phase": "frame130"
+   },
+   "TerrainEstSac": {
+    "caller": "InputGame+0x741",
+    "caller_return": "0x4299b9",
+    "first_frame": 130,
+    "phase": "frame130"
+   },
+   "TerrainGetColor": {
+    "caller": "SetMiniMap+0x26a",
+    "caller_return": "0x46a5f2",
+    "first_frame": 171,
+    "phase": "frame171"
+   },
+   "TerrainGetSacType": {
+    "caller": "InputGame+0x20c2",
+    "caller_return": "0x42b33a",
+    "first_frame": 154,
+    "phase": "frame154"
+   },
+   "TestFinDeMission": {
+    "caller": "CalculGame+0xc1e",
+    "caller_return": "0x42d486",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "TestRessource": {
+    "caller": "TestFinDeMission+0x5c",
+    "caller_return": "0x458662",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "TextGetLargeur": {
+    "caller": "AffTextEncadre+0x29",
+    "caller_return": "0x45a241",
+    "first_frame": 141,
+    "phase": "between_frames141"
+   },
+   "TextGetTaille": {
+    "caller": "AffInfoAide+0x40",
+    "caller_return": "0x40f8ea",
+    "first_frame": 141,
+    "phase": "between_frames141"
+   },
+   "TypeEnginEstArmee": {
+    "caller": "EnginSelectPeutAttaquer+0x89",
+    "caller_return": "0x4723de",
+    "first_frame": 134,
+    "phase": "frame134"
+   },
+   "TypeEnginEstEnLoop": {
+    "caller": "SelectionEngin+0x244",
+    "caller_return": "0x474520",
+    "first_frame": 133,
+    "phase": "frame133"
+   },
+   "TypeEnginEstEngin": {
+    "caller": "EnginSelectPeutEntrer+0x448",
+    "caller_return": "0x472fb4",
+    "first_frame": 134,
+    "phase": "frame134"
+   },
+   "TypeEnginGagneXP": {
+    "caller": "AffInfoSelection+0x2bd",
+    "caller_return": "0x410ea1",
+    "first_frame": 131,
+    "phase": "between_frames131"
+   },
+   "TypeEnginSeFatigue": {
+    "caller": "AffInfoSelection+0x19c",
+    "caller_return": "0x410d80",
+    "first_frame": 131,
+    "phase": "between_frames131"
+   },
+   "UpdateChamp": {
+    "caller": "CalculGame+0xbab",
+    "caller_return": "0x42d413",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "WndProc": {
+    "caller": "_WinMain@16+0x93",
+    "caller_return": "0x460203",
+    "first_frame": 130,
+    "phase": "between_frames130"
+   },
+   "__STOSB": {
+    "caller": "memset+0x15",
+    "caller_return": "0x48c3c5",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "__STOSD": {
+    "caller": "__STOSB+0x1c",
+    "caller_return": "0x48d8ac",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "iaCalculPlayer": {
+    "caller": "CalculNextReflect+0x10",
+    "caller_return": "0x47fbfa",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "iaSolver": {
+    "caller": "iaCalculPlayer+0x23",
+    "caller_return": "0x47f94a",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "iabTestEngin": {
+    "caller": "CalculEnginNextEtape+0xb5",
+    "caller_return": "0x456e6a",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "iagMessTestSendMessageEngin": {
+    "caller": "IATestUtilite+0x17",
+    "caller_return": "0x47fc14",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "itoa": {
+    "caller": "CalculFrame+0x9b",
+    "caller_return": "0x43f7ab",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "memset": {
+    "caller": "DDLockSurface+0x41",
+    "caller_return": "0x43f3f5",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   },
+   "rand": {
+    "caller": "NextAnimTerrain+0x133",
+    "caller_return": "0x477833",
+    "first_frame": 129,
+    "phase": "frame129"
+   },
+   "utoa": {
+    "caller": "itoa+0x17",
+    "caller_return": "0x48c3a2",
+    "first_frame": 129,
+    "phase": "between_frames129"
+   }
+  },
+  "schema": "rising-lands/m3-scripted-input-run/1",
+  "seconds": 171.4,
+  "snapshots": {
+   "133": {
+    "reasons": [
+     "order"
+    ],
+    "sha256": "f87e9dfd59c8c513346a38c4286997dae6d6f9100fa509e3723c951e2b72ee71"
+   },
+   "153": {
+    "reasons": [
+     "order"
+    ],
+    "sha256": "b6f5574ee50ec504792c029d84afb9a5805b9ec35f7ca2d96300222e5815d689"
+   },
+   "220": {
+    "reasons": [
+     "first_CreerBatiment"
+    ],
+    "sha256": "2c393e2f9295aaf9de796db5e42698e1bac4c9edf8c911bf321bd127ca93b63d"
+   },
+   "350": {
+    "reasons": [
+     "end"
+    ],
+    "sha256": "552177d2da3326993a828e2fd767a84305f61b210236ff37bfd99675c2161b3a"
+   }
+  },
+  "source_revision": "c9bc5d79b048f579a2ee9323db955e7a3cf05086",
+  "source_sha256": {
+   "pesquisas-paralelas/missoes/m3/entrada_roteirizada.py": "340d89c61f80531adac3890f446e88482f4bb5d4966bbad1b13ef5417f02f5e2",
+   "pesquisas-paralelas/missoes/oraculo_exibicao_missao.py": "628082173d6acf9e9846f0a71863ab9db593a62f6595a219d6f0738055b0fa99",
+   "pesquisas-paralelas/missoes/oraculo_quadro_missao.py": "3d60ae363ebf6b9ba3a966d2da5683da61626dfa1129f484fd1d56328fd4ae88",
+   "pesquisas-paralelas/missoes/segmentos_quadros_missao.py": "5a8f8ebe97097a8ad68aada166b97efaf92c48de64dfd4bed8c33bd4934e0aac"
+  },
+  "start": {
+   "frame": 128,
+   "frame128_summary": {
+    "blocks": 25197,
+    "bytes": 16175335,
+    "sha256": "eb714f7d5a694ad91bab9b41c37a28860006c89be03f9170e3b312064a4b04b2"
+   },
+   "resumed_from": null,
+   "snapshot_sha256": "c284439c2cf62368a99ff014c450ab5dd8741e12e233698774f82e32d372813e"
+  },
+  "status": "completed",
+  "stop_frame": 350,
+  "translation_executed": false
+ },
+ "original_summary_sha256": "11a292458f9aa5811602e8dbd8f05add87e1aa0cd7b98c40e21adafc63695685",
+ "owner_source_sha256": "340d89c61f80531adac3890f446e88482f4bb5d4966bbad1b13ef5417f02f5e2",
+ "schema": "rising-lands/macos-test-b-replay/1",
+ "seconds": 171.537649208,
+ "status": "completed",
+ "stop_frame": 350
+}
