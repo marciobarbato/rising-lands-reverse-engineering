@@ -12,8 +12,11 @@ class PlayerChecks(unittest.TestCase):
    output=Path(tmp)/'proof.json'
    p=subprocess.run([sys.executable,'-B',str(Path(__file__).with_name('player_leaf_proof.py')),'--binary',str(root/'motor/target/debug/player_fixtures'),'--output',str(output)],env=dict(os.environ,RL_REFERENCE_PROFILE='input'),capture_output=True,text=True,timeout=1140)
    self.assertEqual(p.returncode,0,p.stdout+p.stderr)
-   r=json.loads(output.read_bytes());self.assertEqual((r['cases'],r['completed'],r['completed_state_equal'],r['mismatches']),(666,659,659,[]))
-   self.assertEqual(len(r['stops']),7);self.assertEqual(len(r['skips']),2)
+   r=json.loads(output.read_bytes());self.assertEqual((r['cases'],r['completed'],r['completed_state_equal'],r['mismatches']),(666,666,666,[]))
+   self.assertEqual(len(r['stops']),0);self.assertEqual(len(r['skips']),2)
+   resolved=[row for row in r['results']if row.get('resolved_dependency')]
+   self.assertEqual({row['case']for row in resolved},{'p2_minimap_right_held','process_tag14_structure_selected','process_tag17_recruit','process_tag19_unload','icon_action_structure','structure_selected_other_structure','page2_structure_selected'})
+   self.assertTrue(all(row['completed']and row['state_equal']for row in resolved))
    for row in r['results']:
     self.assertTrue(row['stop_equal'],row)
     self.assertTrue(row['text_requests_equal'],row)

@@ -1,0 +1,37 @@
+{
+  "baseline": "92fab50",
+  "files": {
+    "chain7-P6-2.json.xz": "7b5cc7fce7a21b3ebd1cb10d514c7f01a164c475a7b91863466e4bd6fa979721",
+    "chain7-build.log.xz": "481a36854e44e74ed0e1a324ce52ab27a39dcf129bcedfff73df2364ebf78835",
+    "chain7-gate1.log.xz": "389bbe4aa02b8c597c93d74d54f5ccaad734cc7e5402be2fb99da56c42fd2a79",
+    "chain7-gate2.log.xz": "e43e0ac940dee9e1364c7e7f28a716c0caa485942961d8335e4f72b00d1d2953",
+    "chain7-habitation2.json.xz": "51058065885ba8db56364088c1f3fe075b1653f70c75f58700eb0883a2c67e7d",
+    "chain7-leaf2.json.xz": "a507f6c0b1a77e80ec16e69d8e9a062dbe98a23be73ac6530b98817d9b47b4f0",
+    "chain7-leaves-1.json.xz": "1e4bda64ca0625ffb6e9b33a7b100a36110de1f6e37e3cfa6bc65148ebffa96c",
+    "chain7-release-check.log.xz": "42904285ee32ac49960a5ee8d66b135ccbeef9846213d0a5006554124058e323",
+    "chain7-surface1.json.xz": "574cea2a6fea7b54f99a0ce673a61df9abcca06b581f653ed4919500966479d2"
+  },
+  "limitations": [
+    "129 state13 sparse fixtures: 11 equal, 118 undeclared-input errors; not claimed as passing",
+    "No later work/hunger/recruitment completion in this piece",
+    "State proof precedes precedence-only parentheses correction; full gate and surfaces follow correction"
+  ],
+  "schema": "rising-lands/rust-chain-piece3/1",
+  "scope": "Recovered entry and habitation; no ABI change",
+  "validation": {
+    "P6_frames": [
+      129,
+      428
+    ],
+    "engine_gate": {
+      "pilot": 75,
+      "python": 63,
+      "rust": 30
+    },
+    "original_leaf_equal": 163,
+    "paired_phases": 600,
+    "sound_fixture_skips": 12,
+    "surfaces": 300,
+    "whole_state_phases": 600
+  }
+}

@@ -1,6 +1,6 @@
 //! Core VisaoMovimento: light reference counts, borders and minimap layers.
 use crate::{frame::stop, player::Memory, MemoriaJogo, Result};
-fn borders(m: &mut MemoriaJogo, grid: u32, c: u32, erase: bool) -> Result<()> {
+pub(crate) fn borders(m: &mut MemoriaJogo, grid: u32, c: u32, erase: bool) -> Result<()> {
     let (x, y) = (c & 255, c >> 8);
     let (w, h) = (m.w(0x497168)?, m.w(0x49716a)?);
     for (p, bit) in [
@@ -20,6 +20,22 @@ fn borders(m: &mut MemoriaJogo, grid: u32, c: u32, erase: bool) -> Result<()> {
     }
     Ok(())
 }
+fn visible(m: &MemoriaJogo, c: u32, lit: bool) -> Result<bool> {
+    let local = m.b(0x508041)?;
+    Ok(m.b(m.d((if lit { 0x507d88 } else { 0x507d78 }) + 4 * local)? + c)? & 31 == 0)
+}
+fn terrain_color(m: &MemoriaJogo, c: u32) -> Result<u32> {
+    let object = m.b(m.d(0x507d74)? + c)?;
+    if (0x1d..0x35).contains(&object) {
+        return Ok(30);
+    }
+    let tile = m.w(m.d(0x507d70)? + 2 * c)?;
+    if tile >= 702 {
+        Ok(30)
+    } else {
+        m.b(0x509694 + tile)
+    }
+}
 pub fn minimap(m: &mut MemoriaJogo, owner: u8, cell: u16, mode: u8) -> Result<u32> {
     let (w, h, mw, mh) = (
         m.w(0x497168)?,
@@ -33,100 +49,60 @@ pub fn minimap(m: &mut MemoriaJogo, owner: u8, cell: u16, mode: u8) -> Result<u3
     let (sx, sy) = ((mw / w).max(1), (mh / h).max(1));
     let c = u32::from(cell);
     let start = (((c >> 8) * mh / h) * mh + (c & 255) * mw / w) & 65535;
-    let local = m.b(0x508041)?;
-    let lit = m.b(m.d(0x507d88 + 4 * local)? + c)? & 31 == 0;
-    let seen = m.b(m.d(0x507d78 + 4 * local)? + c)? & 31 == 0;
-    let o = m.b(m.d(0x507d74)? + c)?;
-    let t = m.w(m.d(0x507d70)? + 2 * c)?;
-    let terrain = if (0x1d..0x35).contains(&o) || t >= 702 {
-        30
-    } else {
-        m.b(0x509694 + t)?
-    };
     for y in 0..sy {
         for x in 0..sx {
             let p = (start + y * 128 + x) & 65535;
-            let f = m.d(0x507d5c)? + p;
-            let u = m.d(0x507d60)? + p;
-            let s = m.d(0x507d64)? + p;
             match mode {
-                1 | 3 if u32::from(owner) == local => {
-                    let color = m.b(m.d(0x4e24b4)? + terrain)?;
-                    m.sb(f, color)?
+                1 | 3 if u32::from(owner) == m.b(0x508041)? => {
+                    let color = m.b(m.d(0x4e24b4)? + terrain_color(m, c)?)?;
+                    m.sb(m.d(0x507d5c)? + p, color)?;
                 }
-                2 if u32::from(owner) == local => {
-                    let a = m.b(u)?;
-                    let b = m.b(s)?;
-                    m.sb(
-                        f,
-                        if a != 0 {
-                            a
-                        } else if b != 0 {
+                2 if u32::from(owner) == m.b(0x508041)? => {
+                    let a = m.b(m.d(0x507d60)? + p)?;
+                    let color = if a != 0 {
+                        a
+                    } else {
+                        let b = m.b(m.d(0x507d64)? + p)?;
+                        if b != 0 {
                             b
                         } else {
-                            terrain
-                        },
-                    )?
+                            terrain_color(m, c)?
+                        }
+                    };
+                    m.sb(m.d(0x507d5c)? + p, color)?;
                 }
                 1..=3 => {}
-                4 => {
-                    let color = if owner == 200 {
-                        30
-                    } else {
-                        m.b(0x4e24dc + u32::from(owner))?
-                    };
-                    m.sb(u, color)?;
-                    if lit {
-                        m.sb(f, color)?
-                    }
-                }
-                5 => {
-                    m.sb(u, 0)?;
-                    if seen {
-                        let b = m.b(s)?;
-                        m.sb(
-                            f,
-                            if lit {
-                                if b != 0 {
-                                    b
-                                } else {
-                                    terrain
-                                }
-                            } else {
-                                m.b(m.d(0x4e24b4)? + terrain)?
-                            },
-                        )?
-                    }
-                }
-                6 => {
+                4 | 6 => {
                     let color = (if owner == 200 {
                         30
                     } else {
                         m.b(0x4e24dc + u32::from(owner))?
-                    } + 2)
+                    } + if mode == 6 { 2 } else { 0 })
                         & 255;
-                    m.sb(s, color)?;
-                    if lit {
-                        let a = m.b(u)?;
-                        m.sb(f, if a != 0 { a } else { color })?
+                    m.sb(m.d(if mode == 4 { 0x507d60 } else { 0x507d64 })? + p, color)?;
+                    if visible(m, c, true)? {
+                        let a = if mode == 6 {
+                            m.b(m.d(0x507d60)? + p)?
+                        } else {
+                            0
+                        };
+                        m.sb(m.d(0x507d5c)? + p, if a != 0 { a } else { color })?;
                     }
                 }
-                7 => {
-                    m.sb(s, 0)?;
-                    if seen {
-                        let a = m.b(u)?;
-                        m.sb(
-                            f,
-                            if lit {
-                                if a != 0 {
-                                    a
-                                } else {
-                                    terrain
-                                }
+                5 | 7 => {
+                    m.sb(m.d(if mode == 5 { 0x507d60 } else { 0x507d64 })? + p, 0)?;
+                    if visible(m, c, false)? {
+                        let color = if visible(m, c, true)? {
+                            let a = m.b(m.d(if mode == 5 { 0x507d64 } else { 0x507d60 })? + p)?;
+                            if a != 0 {
+                                a
                             } else {
-                                m.b(m.d(0x4e24b4)? + terrain)?
-                            },
-                        )?
+                                terrain_color(m, c)?
+                            }
+                        } else {
+                            m.b(m.d(0x4e24b4)? + terrain_color(m, c)?)?
+                        };
+                        m.sb(m.d(0x507d5c)? + p, color)?;
                     }
                 }
                 _ => return stop("SetMiniMap mode", 0x46a388),

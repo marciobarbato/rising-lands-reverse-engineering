@@ -50,6 +50,9 @@ impl Context<'_> {
             return self.stop(0x4085cb, "structure damage/fire (+0x06 nonzero)");
         }
         if self.inhabited(index)? {
+            if kind == 3 {
+                return self.inhabited_cave(r, x, y, cell);
+            }
             return self.stop(
                 if kind == 3 { 0x40958e } else { 0x408ac8 },
                 "facade outside captured uninhabited domain",
@@ -143,7 +146,7 @@ impl Context<'_> {
         if r[0xbd] == 0 || r[0x82] == 0 || r[2] == 17 {
             return Ok(());
         }
-        if r[0x82] != 1 {
+        if r[0x82] != 1 && !(r[0x82] == 2 && r[1] == 5) {
             return self.stop(
                 0x412923,
                 "selected order marker outside captured cell-target mode 1",
@@ -154,8 +157,15 @@ impl Context<'_> {
         let width = self.u16(0x508724)?;
         let height = self.u16(0x508726)?;
         let phase = (self.u32(0x508f7c)? / 5) & 1;
-        for (offset, base) in [(0xb2, 0x1e43), (0x80, 0x1e45)] {
-            let cell = w(r, offset);
+        let mut second = w(r, 0x80);
+        if r[0x82] == 2 {
+            let depot = self.read(0x49a0c8 + 276 * second, 276)?;
+            if depot[8] != 3 {
+                return self.stop(0x412637, "depot marker structure type is not captured");
+            }
+            second = (w(&depot, 2) + 1) & 65535;
+        }
+        for (cell, base) in [(w(r, 0xb2), 0x1e43), (second, 0x1e45)] {
             let (cx, cy) = (cell % 256, cell / 256);
             if cx >= ox && cx < ox + width && cy >= oy && cy < oy + height {
                 self.bob(
@@ -351,7 +361,10 @@ impl Context<'_> {
         if text.len() == 128 {
             return self.stop(0x40f8c0, "tooltip string exceeds captured bounded length");
         }
-        if (text != b"CONSTRUTOR" && text != b"ARMAZ\xc9M")
+        if (text != b"CONSTRUTOR"
+            && text != b"ARMAZ\xc9M"
+            && text != b"SANTU\xc1RIO"
+            && text != b"FAZENDEIRO")
             || self.u16(0x49620c)? != 65535
             || self.u32(0x4e1d94)? != 0
             || self.u32(0x4e1d98)? != 0

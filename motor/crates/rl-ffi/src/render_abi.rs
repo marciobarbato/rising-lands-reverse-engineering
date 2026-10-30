@@ -425,7 +425,7 @@ pub unsafe extern "C" fn rl_render_cache(
 /// Graphics render contract, independent of the additive host ABI minor version.
 #[no_mangle]
 pub extern "C" fn rl_render_contrato() -> u32 {
-    0x00010007
+    0x00010009
 }
 /// # Safety
 /// Copied last saved-background bytes. Metadata outputs must be aligned/writable
@@ -545,7 +545,7 @@ mod tests {
             );
             assert_eq!(bytes, [0, 5, 255, 7]);
         }
-        assert_eq!(rl_render_contrato(), 0x00010007);
+        assert_eq!(rl_render_contrato(), 0x00010009);
         assert_eq!(rl_render_liberar(handle), 0);
         assert_eq!(rl_liberar_mundo(world), 0);
     }

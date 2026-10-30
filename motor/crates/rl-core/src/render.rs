@@ -66,6 +66,8 @@ pub struct Outcome {
 pub struct Renderer {
     pub audit: bool,
     pub saved_background: Option<SavedBackground>,
+    // Display-owned tooltip state travels with its saved pixels, not the logic world.
+    display_state: BTreeMap<u32, u8>,
     pub recorded_text_boundaries: Option<std::collections::VecDeque<RecordedTextBoundary>>,
     pub tick: Option<u32>,
     pub assets: Arc<Assets>,
@@ -83,6 +85,7 @@ impl Renderer {
         Ok(Self {
             audit: true,
             saved_background: None,
+            display_state: BTreeMap::new(),
             recorded_text_boundaries: None,
             tick: None,
             assets,
@@ -96,6 +99,7 @@ impl Renderer {
     /// copied because skipped drawing and unexpected errors must preserve them.
     pub fn prepare_from(&mut self, previous: &Self) {
         self.audit = previous.audit;
+        self.display_state.clone_from(&previous.display_state);
         self.surface.clone_from(&previous.surface);
         self.cache.keys.clone_from(&previous.cache.keys);
         self.cache.raw.clone_from(&previous.cache.raw);
@@ -124,6 +128,7 @@ impl Renderer {
         self.cache_generation = self.cache_generation.wrapping_add(1);
         self.last = None;
         self.saved_background = None;
+        self.display_state.clear();
         self.recorded_text_boundaries = None;
         Ok(())
     }
@@ -180,7 +185,7 @@ impl Renderer {
             text_checked: 0,
             tick: self.tick,
             m,
-            overrides: BTreeMap::new(),
+            overrides: self.display_state.clone(),
             surface: &mut self.surface,
             cache: &mut self.cache,
             assets: &assets,
@@ -200,6 +205,11 @@ impl Renderer {
             Err(Error::Stop(a, s)) => (2, Some((a, s))),
             Err(e) => return Err(e),
         };
+        for (&address, &value) in &c.overrides {
+            if address == 0x49a041 || (0x49a046..0x49a04e).contains(&address) {
+                self.display_state.insert(address, value);
+            }
+        }
         if disposition != 1 {
             self.cache_generation = self.cache_generation.wrapping_add(1);
         }

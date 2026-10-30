@@ -1,0 +1,13 @@
+{
+  "command": [
+    "cargo",
+    "build",
+    "--manifest-path",
+    "motor/Cargo.toml",
+    "--workspace",
+    "--locked",
+    "--release"
+  ],
+  "seconds": 4.144691375,
+  "returncode": 0
+}

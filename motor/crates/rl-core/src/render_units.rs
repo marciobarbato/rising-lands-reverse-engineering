@@ -5,6 +5,12 @@ impl Context<'_> {
         let kind = r[1];
         let state = r[2];
         let base_type = matches!(kind, 0 | 5 | 6 | 7 | 9);
+        if kind == 9 && state == 13 && (r[0x99] != 0 || r[0xdc] != 0 || r[0xa5] != 8) {
+            return self.stop(
+                0x41591f,
+                "normal state extension outside captured count/effects",
+            );
+        }
         let route = match state {
             1 | 22 | 24 => {
                 if r[0x8a] == 0 {
@@ -22,16 +28,22 @@ impl Context<'_> {
         if base_type && route == 0 {
             return Ok(());
         }
+        if kind == 7 && state == 5 && matches!(r[0x89], 1 | 2) {
+            return self.work_body(r, x, y, index, false);
+        }
         let overlay =
             r[0xba] != 0 || r[0xbd] != 0 || self.u16(0x496ac2)? == index || self.u8(0x508f8f)? != 0;
         let dx = r[0x86] as i8 as i32;
         let dy = r[0x87] as i8 as i32;
         let (px, py) = (x + dx, y + dy);
         if overlay {
-            if !matches!(kind, 0 | 1 | 5 | 7 | 8)
+            if !matches!(kind, 0 | 1 | 5 | 7 | 8 | 9)
                 || r[0] != 0
                 || self.camera != 0
-                || !(matches!(state, 2 | 7) || kind == 7 && matches!(state, 11 | 15))
+                || !(matches!(state, 2 | 7)
+                    || kind == 7 && matches!(state, 5 | 11 | 15)
+                    || kind == 5 && state == 5
+                    || kind == 9 && state == 13)
                 || r[0x99] != 0
                 || r[0xdc] != 0
             {
@@ -46,10 +58,12 @@ impl Context<'_> {
                     "input-overlay body count differs from initialized count",
                 );
             }
-            if w(r, 4) != 4 || w(r, 0x76) != 4 {
+            if (w(r, 4) != 4 || w(r, 0x76) != 4)
+                && !(matches!(kind, 5 | 7) && w(r, 4) == 3 && w(r, 0x76) == 4)
+            {
                 return self.stop(0x410be4, "fatigue words outside captured +4 = +0x76 = 4");
             }
-            if r[0xbd] != 0 && r[0x82] > 1 {
+            if r[0xbd] != 0 && r[0x82] > 1 && !(kind == 5 && r[0x82] == 2) {
                 return self.stop(
                     0x412923,
                     "selected unit order marker outside captured cell-target mode 1",
@@ -67,6 +81,9 @@ impl Context<'_> {
             if matches!(state, 2 | 7) {
                 self.order_markers(r)?;
             }
+        }
+        if matches!(kind, 5 | 7) && state == 5 {
+            return self.work_body(r, x, y, index, overlay);
         }
         if kind == 7 && matches!(state, 11 | 15) {
             return self.construction_builder(r, x, y, index);
@@ -105,7 +122,7 @@ impl Context<'_> {
                 );
             }
             if route != 1
-                || !matches!(state, 2 | 7)
+                || !(matches!(state, 2 | 7) || kind == 9 && state == 13)
                 || r[0] != 0
                 || self.camera != 0
                 || !(1..=16).contains(&r[0x91])
@@ -155,7 +172,7 @@ impl Context<'_> {
             let life = w(r, 0x74);
             let tired = w(r, 4) == w(r, 0x76) && life < 100;
             if tired && (life / 5).is_multiple_of(2) && (kind <= 10 || kind == 25) {
-                if dx != 0 || dy != 0 {
+                if (dx != 0 || dy != 0) && !(kind == 9 && matches!(r[2], 2 | 7 | 13)) {
                     return self.stop(
                         0x4135fa,
                         "tired icon with nonzero body shift: origin not verified",
@@ -168,7 +185,7 @@ impl Context<'_> {
                 } else {
                     return self.stop(0x413650, "owner has no player table");
                 };
-                self.bob(x - 8, y - 11, w(r, 4) + 0x1e2b, true, owner)?;
+                self.bob(px - 8, py - 11, w(r, 4) + 0x1e2b, true, owner)?;
             }
             if overlay {
                 self.experience(r, px, py - 9, false)?;
@@ -233,6 +250,9 @@ impl Context<'_> {
         frame: bool,
         gauge: bool,
     ) -> Result<()> {
+        if r[8] == 3 || r[8] == 2 && w(r, 12) == 7 {
+            return self.structure_overlay18(r, cell, frame, gauge);
+        }
         if r[8] != 2 || r[5] != 5 || r[4] != 0 || self.camera != 0 {
             return self.stop(
                 if frame { 0x4022c8 } else { 0x4020ec },

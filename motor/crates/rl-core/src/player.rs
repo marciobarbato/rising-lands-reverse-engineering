@@ -272,7 +272,7 @@ pub fn fixture(
         }
         "CalculIconeAction" => {
             let v = crate::player_input::icons(m)?;
-            if count(m, m.b(0x508041)?)? == 1 {
+            if count(m, m.b(0x508041)?)? == 1 || selected_structure(m, m.b(0x508041)?)? != 65535 {
                 None
             } else {
                 Some(v)

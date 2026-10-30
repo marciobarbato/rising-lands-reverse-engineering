@@ -63,7 +63,7 @@ class RenderTests(unittest.TestCase):
     def test_copied_buffers_generation_query_reset_and_lifetimes(self):
         f,world,inp=live();r=Render(f);surface,cache=initial();h=r.create(world,surface,cache)
         try:
-            self.assertEqual(r.lib.rl_render_contrato(),0x00010007)
+            self.assertEqual(r.lib.rl_render_contrato(),0x00010009)
             self.assertEqual(r.saved(h)[:2],(0,b''))
             generation,phase,counter=r.generation(world);self.assertEqual((phase,counter),(1,0))
             result=Result();r.pixels[0]=222;r.palette[0]=111

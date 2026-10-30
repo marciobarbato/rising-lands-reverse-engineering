@@ -1,0 +1,101 @@
+{
+  "artifacts": {
+    "P6-surface-before.json": {
+      "compressed_sha256": "57f5d42e6866b94212c78076dd53404e07397d0a2f25b65751090e84858ba261",
+      "path": "P6-surface-before.json.xz",
+      "raw_sha256": "07a09c92d234b0028f34134f08b1490c50407f96ddd5c0f9390aabe57e5bd9d4"
+    },
+    "P6-surface-before.log": {
+      "compressed_sha256": "1058970dfd55a612161c7704f863ccb33111736cd57ac629f2b15d469512fcbc",
+      "path": "P6-surface-before.log.xz",
+      "raw_sha256": "3979edad8a0dd5578c8ea07441f942c3ecae17dae802e7ccf6ada5f5ec26e3fc"
+    },
+    "P6-whole-before.json": {
+      "compressed_sha256": "8191a8e1e14205f744fb4cb2e1115289c72296cf93054c395dbd2bef4e868d10",
+      "path": "P6-whole-before.json.xz",
+      "raw_sha256": "f2ed1678802dd616c865e410008b22f20bd05570d3281faa0c9e8a2d89bc9429"
+    },
+    "P6-whole-before.log": {
+      "compressed_sha256": "7bd592746c35e03201d3dddda8768b46a8ac773d5f3c70e12b1eb58231a9476e",
+      "path": "P6-whole-before.log.xz",
+      "raw_sha256": "e75e354de492a1486eb1a3d6b3de6c37c8d5ea3308bf45b3b4cf23aa786e8d24"
+    },
+    "P7-surface-before.json": {
+      "compressed_sha256": "7b11af4586a9048c4ff53c4b212ea2541f417662f79ed1883f44379fd25801fe",
+      "path": "P7-surface-before.json.xz",
+      "raw_sha256": "bf3531215a853c8b78b9e24df8949b38fb6c7cd8a0db9b723eab97ec058a5c6a"
+    },
+    "P7-surface-before.log": {
+      "compressed_sha256": "04b7596d5b88a9d246b5ac4b443b19351bfb281220a50c35946574ba360be6f9",
+      "path": "P7-surface-before.log.xz",
+      "raw_sha256": "3b2b5fda2881c401c582f642f1d4b0ec08cc30c655cd5eef27dd1c7e53c99378"
+    },
+    "benchmark-M2.json": {
+      "compressed_sha256": "c469a083143eb939db0d3ce0b145b9eed74aa52d7e22bd1828d1463d9dce7513",
+      "path": "benchmark-M2.json.xz",
+      "raw_sha256": "acb74bc94e4ff437b393321504496e3f3531e87411292c77c4f49d5b71ab464d"
+    },
+    "benchmark-P3.json": {
+      "compressed_sha256": "bdec5b2661dcfd1bd098f582fb18279ce40a955a411883d5da9f5d7a7d38073a",
+      "path": "benchmark-P3.json.xz",
+      "raw_sha256": "01c90ddffb0c8cb26fb21f2fb04209b9d4fddd9cfd7ed01d1edeca7c107bd02f"
+    },
+    "benchmark-P6.json": {
+      "compressed_sha256": "c82cd080e75da6cbdbc389bd0faf393325c0ebf63d1172610e57f6e91878f066",
+      "path": "benchmark-P6.json.xz",
+      "raw_sha256": "b657b573cd07284f03496beb524132fc084480012f00ea44f9b0728a62fc53b8"
+    },
+    "benchmark-P7.json": {
+      "compressed_sha256": "042a2825ea963768036b8ddc9e773500e02ecd0a16d52356875f62400e1f4475",
+      "path": "benchmark-P7.json.xz",
+      "raw_sha256": "c23bcb759be39676272cab8c3c61830b8c0ae229098986b91520cf4936223f6b"
+    },
+    "gate.log": {
+      "compressed_sha256": "259a995346e751951b0ecc7b0337d38f2253aad4be7ec24816fa037fbac4edba",
+      "path": "gate.log.xz",
+      "raw_sha256": "a8245ef94d466867bdab7016ad3173ea61a3c46899580cfc639f21566b945074"
+    },
+    "late-snapshots.json": {
+      "compressed_sha256": "91929d3bb1804acd90895a32d89b3cce9eabe52b55a638d1474202d39a2e2536",
+      "path": "late-snapshots.json.xz",
+      "raw_sha256": "6a1a8ebdedae0893afe1aee2274fc52f48454f970fec187a7ac3badb8f6c54f6"
+    },
+    "late-snapshots.log": {
+      "compressed_sha256": "3fef8197daeb7d660391f80cc7288caaf32b7532baa9cd27d2fe7ed2865cbe13",
+      "path": "late-snapshots.log.xz",
+      "raw_sha256": "ed3ee65e582368295017bdc10943e75f90e2c6ee8fbb2db8a1262c6e8fecd6ed"
+    },
+    "timing.log": {
+      "compressed_sha256": "ea865283cd7d9ddba3441447dd52cfb89fa35f643f88c2261edfef917451d6bd",
+      "path": "timing.log.xz",
+      "raw_sha256": "26259c91f84e98012fb42266d5a2d6e54b48170f64d359bdec28ccf5f5169b32"
+    }
+  },
+  "before": "Both advancing surfaces equal1942/1943 attempts, first stop2071 at0x401d18. No simulation stop. Simulation source unchanged by this renderer-only correction.",
+  "correction": "Match pinned AffChrono0x401cc6: foreign-owner selection returns without a gauge; own active CAVE returns independently of its timer word; captured owner0 sanctuary requires no recruitment. Unsupported clock branches retain0x401d18.",
+  "gate": "Full validate.sh passed30 Rust/63 Python tests,666/666 input,75/75 pilot,C/Swift/Metal.",
+  "logic_mean_ms": {
+    "P3": 0.28450733322225713,
+    "P6": 0.2833266892605667,
+    "P7": 0.2841498001119794
+  },
+  "m2_terminal_unchanged": {
+    "final_clock": [
+      9201,
+      460050
+    ],
+    "final_counter": 9200,
+    "final_generation": 18402,
+    "final_phase": 3,
+    "final_state_sha256": "4ef7471043dd66011d9ad68873ae1c27f8c84f32063bd359c9a23e4cb48dfd36",
+    "final_surface_sha256": "8ce7ad456a1d94cefb7f880c94553a3d7ea7ffca8c4aaa303894f511116f10e3"
+  },
+  "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+  "original_snapshot_scope": "1700/1700 original P6/P7 render-entry snapshots2001\u20133700: exact pixels,raster calls,cache cursor,text-boundary consumption. Each loads its own original surface/cache;not advancing-world proof.",
+  "probe_terminal_state_unchanged": true,
+  "reference_revision": "92fab50ccfa14271f6657fc0f6032b6b4b68dd4b",
+  "schema": "rising-lands/rust-chain8-clock-correction/1",
+  "scope": "No ABI or render-contract version change;preserves unsupported branches and all prior comparison masks. Native snapshot checks expose all remaining late-window guards before expensive advancing replay.",
+  "timing": "Exclusive coordinated lease,full scripted windows;includes ctypes input packing,excludes initialization/render/proof/audit/export/hash/presentation.",
+  "whole_state_before": "Committed84bdc9f simulation completes2272 frames129\u20132400,4544/4544 whole-state phases and4544/4544 paired play/audit phases;zero stops/differences. Final-source advancing reruns follow this passing component piece."
+}
