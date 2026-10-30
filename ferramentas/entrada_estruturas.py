@@ -1271,13 +1271,33 @@ class EntradaEstruturas:
         return dict(r, EAX=edi)
 
 
+# Argument registers a provided routine's behaviour depends on (the bits it reads): AX cell / DX radius / BL player
+# for the discovery and light discs, AX structure / DL on-off (SetMiniMap mode 6 or 7) for BatimentModifyMap, AX cell
+# / DL player for TerrainEstDecouvert. ``provedor_entrada`` refuses a call that omits one instead of entering 0.
+ARGUMENTOS_EXIGIDOS = {
+    'DecouvreTerrain': ('EAX', 'EDX', 'EBX'), 'IllumineTerrain': ('EAX', 'EDX', 'EBX'),
+    'BatimentModifyMap': ('EAX', 'EDX'), 'TerrainEstDecouvert': ('EAX', 'EDX'),
+}
+
+
+class ArgumentoNaoPassado(ValueError):
+    """A caller of ``provedor_entrada`` omitted an argument register the routine's behaviour depends on."""
+    def __init__(self, rotina, chamada, registradores):
+        self.rotina, self.chamada, self.registradores = rotina, chamada, tuple(registradores)
+        super().__init__(f'{rotina} called at 0x{chamada:x} without its argument register(s) '
+                         f'{", ".join(registradores)}; pass them (the original passes them), nothing was run')
+
+
 def provedor_entrada(entrada, outros=None):
     """Economy's ``externo(nome, chamada, registradores) -> registradores`` for the Core routines its work cycle
     and lodging credit call (``ROTINAS_ECONOMIA``), run by ``entrada`` (an ``EntradaEstruturas`` over the same
     memory). Same shape as ``construcao_core.provedor_construcao``.
 
     Input: the argument registers (Economy passes only those, at their ``ARGUMENTOS`` widths) or all of EAX..EBP,
-    optionally ``_incertos``. A missing register enters as 0 with a full uncertain mask. Output: EAX..EBP as the
+    optionally ``_incertos``. A missing register enters as 0 with a full uncertain mask, except a register the
+    routine's behaviour depends on (``ARGUMENTOS_EXIGIDOS``): missing, it raises ``ArgumentoNaoPassado`` before
+    any store (BatimentModifyMap without DL would silently pick mode 7, the frame-125 divergence of Economy's
+    work-cycle composition; see docs/core/MINIMAP_FRAME125.md). Output: EAX..EBP as the
     callee leaves them, after its stores; ``_incertos`` marks the bits not reconstructed (see the module
     docstring) and carries input masks for registers the callee leaves unchanged. Any other name goes to
     ``outros`` (same signature) or raises ``DependenciaRamoCore`` at its call."""
@@ -1286,6 +1306,9 @@ def provedor_entrada(entrada, outros=None):
             if outros is None:
                 raise DependenciaRamoCore(nome, chamada, 'no provider for this routine')
             return outros(nome, chamada, regs)
+        faltando = [k for k in ARGUMENTOS_EXIGIDOS.get(nome, ()) if k not in regs]
+        if faltando:
+            raise ArgumentoNaoPassado(nome, chamada, faltando)
         entrada_regs = {k: regs.get(k, 0) & M32 for k in REG7}
         incertos_in = dict(regs.get('_incertos') or {})
         for k in REG7:
