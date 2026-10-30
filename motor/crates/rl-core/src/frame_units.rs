@@ -283,6 +283,10 @@ fn switch_state(m: &mut MemoriaJogo, unit: u16, r: u32) -> Result<u32> {
             economy(m, "EnginNextEtape:state7", &[u32::from(unit)])?;
             Ok(0x454ccd)
         }
+        0x4558e4 if m.player.is_some() => {
+            crate::chain_entry::state13(m,unit,r)?;
+            Ok(0x454ccd)
+        }
         0x4564ef if m.player.is_some() => crate::player_build::builder(m, u32::from(unit)),
         0x4563da => {
             if m.u16(r + 0x7e)? != m.u16(r + 8)? {
