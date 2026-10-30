@@ -967,3 +967,54 @@ S1 pass-2 manifest. Therefore `fixar S1` and strict `tudo --janelas S1` were
 to report. The unrelated newer main engine changes were inspected, not merged
 into this measured source. No further chain bypass or other task was started.
 Feature commits only; the coordinator owns review/integration/acceptance.
+
+## S1 Economy provider continuation (2026-10-30)
+
+Merged main `3e2ed77`, including Economy's sack, exit-pipe and seventeen
+research/technology providers. `DonosM3.externo` routes their strict adapters
+over the same live memory, forwarding all seven registers, optional ESP and
+metadata unchanged. Missing registers stop before reads; unknown behavior
+inputs are rejected. The query adapters retain explicit unknown preserved
+bits; technology requires a complete known register file and retains the
+owner's `_x87_push` without replacing it with a host float.
+
+InputGame still has a scalar `SacGetCapacite(celula) -> EAX` contract. Its
+projection supplies six opaque preserved carriers with full `_incertos`
+masks; no carrier selects behavior or reaches the consumed EAX result.
+The strict full-register path is independently exercised with the actual
+S1 entry and every original object/quantity variant. The provider reads the
+live grids, makes no stores/callbacks and preserves the native EAX pointer
+residue. This does not reconstruct InputGame's discarded scratch registers.
+TuyauEstSortie is available on the strict route; Graphics owns its render
+callers and is not edited here. The existing recruitment routes remain bound;
+Economy's `lacunas_economia_s1.ROTINAS` currently exports only SacGetCapacite.
+
+Technology's foreign getter callbacks now use live owner queries:
+MissionGetNum through Core's established exact-register wrapper of Missions'
+byte getter (upper EAX retained), PlayerGetType through Economy's live query
+with its original EAX residue. They forward/preserve every register; no
+recorded callback return or nominal stack address supplies game behavior.
+Mutation/callback order, supported technology domain and partial effects
+remain Economy's contract in `docs/ECONOMY.md`. Named Economy technology
+limits become named `DependenciaIA` stops; unrelated exceptions propagate.
+
+Fresh leased `validar_donos_economia_s1_ia.py --native`: **1,058/1,058 equal,
+zero mismatches**, 2.580 seconds: sack 274, pipe 273, technology 511. Each
+native game callee executes intact from the original-first committed fixture;
+there are no substituted native game callbacks. Compare every result register,
+native ESP, every ordered stored value, all seven live getter-call inputs and
+their order/sites, the scalar sack projection, and the exact native x87 push.
+Report: `validacao/donos-economia-s1-native.json`. Oracle remains intact
+RISING.EXE SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+Three focused consumer tests pass (all-register guards before access, actual
+S1 sack/projection, unknown inputs and negative-zero push metadata). The first
+validator attempt stopped on a harness parser error (the native call list's
+first field is depth, not a return address); corrected using its recorded
+caller label and exact native full-register hooks. That setup attempt is not
+a comparison result; `.local/m3-1/donos-economia-s1-native.log` is retained.
+
+Strict/planning S1 indicators and the owning domain gate follow this committed
+binding. S1 pass-2 is still absent from fetched Missions `7eeb395` and main
+`3e2ed77`; no new whole-state S1 proof is claimed. No foreign files/hash pins,
+original evidence, masks or snapshots were changed; feature pushes only.

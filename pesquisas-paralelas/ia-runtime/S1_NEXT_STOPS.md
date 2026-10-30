@@ -1,6 +1,9 @@
 # S1 next stops — 2026-10-30
 
 Baseline: merged `origin/main` `9ae3e4d`, including Economy `dfb87bd`.
+Continuation baseline: main `3e2ed77` supplies the new Economy S1 providers;
+AI/runtime binding passes 1,058 native comparisons, zero mismatches. New chain
+reruns are pending; earlier reach below remains historical until they finish.
 Only AI/runtime-owned changes and feature pushes are authorized. Original
 oracle: intact RISING.EXE SHA-256
 `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
@@ -9,7 +12,7 @@ oracle: intact RISING.EXE SHA-256
 |---|---|---|---|
 | 2546 / 2547 (previous run) | SetSortEngin `0x445fbc`, CALL `0x420f8c` | Economy | AX unit, DX exit cell; native S1 AX=4, DX=`0x0e0f`. Forwarding supplied by `dfb87bd`; fresh strict run now passes this frame. |
 | 3276 / 3277 (baseline strict/planning) | MineGetCapacite `0x475541`, CALL `0x44ca17` in CalculWorkEngin | AI/runtime binding; Economy query | AX=u16 mine index; native S1 AX=0, EAX out=`0x31` (49), other six data registers preserved. Fixed in `8b6f1c9`: 101 native comparisons, zero mismatches; both chain reruns pass this frame. |
-| 3850 / 3851 (current strict/planning) | SacGetCapacite `0x475736`, InputGame CALL `0x4299da` | Economy | AX=u16 cell; native AX=`0x1f18` (7960), object=`0x43`, quantity=4, EAX out=`0x47860004`. Other six data registers preserved. Exact contract below; no declared planning bypass, chain stopped. |
+| 3850 / 3851 (previous strict/planning) | SacGetCapacite `0x475736`, InputGame CALL `0x4299da` | Economy provider / AI-runtime binding | AX=u16 cell; native AX=`0x1f18` (7960), object=`0x43`, quantity=4, EAX out=`0x47860004`. Owner now on main `3e2ed77`; strict binding and scalar projection pass 274 native cases. Chain rerun pending. |
 
 Strict and `--diagnostico-planejamento` indicator checks use replay-checked
 Missions S1 `bab6c7c`, starting after frame 128 and requesting 16,922 frames.
