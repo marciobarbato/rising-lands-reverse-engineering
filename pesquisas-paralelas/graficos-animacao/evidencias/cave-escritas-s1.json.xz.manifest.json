@@ -1,0 +1,19 @@
+{
+ "raw_sha256": "85b10b6807dccec9989adcb983c73deffe89c54330d6f3956f94799b795e3afb",
+ "compressed_sha256": "c665483603e927d3abcb4ad3b1eee6532680f2b44d6b0caf9877fa814fe1cc15",
+ "probe": "S1",
+ "observed_frames": [
+  1813,
+  1846,
+  1976,
+  2004,
+  2014,
+  2015,
+  2020
+ ],
+ "passes_equal": true,
+ "elapsed_seconds": [
+  114.124,
+  115.62
+ ]
+}

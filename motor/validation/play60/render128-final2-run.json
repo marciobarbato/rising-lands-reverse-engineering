@@ -1,0 +1,15 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "motor/testes/render_proof.py",
+    "--frames",
+    "128",
+    "--library",
+    "motor/target/release/librising_engine.dylib",
+    "--output",
+    ".local/performance-60fps/final2/render128.json"
+  ],
+  "seconds": 30.753573499999998,
+  "returncode": 0
+}

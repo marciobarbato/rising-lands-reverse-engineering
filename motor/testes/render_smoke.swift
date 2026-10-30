@@ -113,7 +113,7 @@ for index in 0..<hashes.count {
         for p in 0..<480000 { let i=Int(pixels[p])*3; precondition(readback[p*4] == palette[i] && readback[p*4+1] == palette[i+1] && readback[p*4+2] == palette[i+2] && readback[p*4+3] == 255) }
     }
 }
-// The typed ABI1.5 input entry stops on Escape without publishing game state.
+// The typed ABI1.6 input entry stops on Escape without publishing game state.
 var inputTick: UInt64 = 0, inputMilliseconds: UInt32 = 0
 check(rl_relogio(world, &inputTick, &inputMilliseconds))
 check(rl_render_geracao(world, &generation, &phase, &counter))
@@ -136,6 +136,6 @@ precondition(inputRequired == 1)
 var inputEvents = [RlPlayerInputEvent](repeating: RlPlayerInputEvent(), count: Int(inputRequired))
 inputEvents.withUnsafeMutableBufferPointer { check(rl_eventos_entrada(world, $0.baseAddress, UInt32($0.count), &inputRequired)) }
 precondition(inputEvents[0].kind == 6 && inputEvents[0].site == 0x429300)
-let report: [String:Any] = ["abi":"1.5","frames_equal":hashes.count,"render_seconds":renderElapsed,"logic_seconds":logicElapsed,"metal_upload_conversion_seconds":transferElapsed,"pipeline_seconds":elapsed,"render_fps":Double(hashes.count)/renderElapsed,"engine_render_metal_fps":Double(hashes.count)/elapsed,"metal_device":device.name,"scope":"Swift C ABI engine+render+generation+reused output buffers+Metal upload and RGBA conversion; excludes proof hashing/readback, initialization and app display pacing"]
+let report: [String:Any] = ["abi":"1.6","frames_equal":hashes.count,"render_seconds":renderElapsed,"logic_seconds":logicElapsed,"metal_upload_conversion_seconds":transferElapsed,"pipeline_seconds":elapsed,"render_fps":Double(hashes.count)/renderElapsed,"engine_render_metal_fps":Double(hashes.count)/elapsed,"metal_device":device.name,"scope":"Swift C ABI engine+render+generation+reused output buffers+Metal upload and RGBA conversion; excludes proof hashing/readback, initialization and app display pacing"]
 let json = try JSONSerialization.data(withJSONObject:report,options:[.prettyPrinted,.sortedKeys])
 print(String(data:json,encoding:.utf8)!)

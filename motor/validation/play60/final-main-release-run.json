@@ -1,0 +1,14 @@
+{
+  "command": [
+    "cargo",
+    "build",
+    "--manifest-path",
+    "motor/Cargo.toml",
+    "--workspace",
+    "--release",
+    "--locked"
+  ],
+  "seconds": 0.1241040840000096,
+  "returncode": 0,
+  "lease": "engine-perf-final-main-gates"
+}

@@ -103,15 +103,50 @@ active-handle `PlaySnd_PostVolume 0x48aacf`, other AI handlers, and the owning
 non-fight/starvation bodies. War structure adjacency remains an explicit Core
 provider request at 0x42381f when that unvalidated branch is reached.
 
-S1's published `origin/feat/re-missions` artifacts contain summaries and exact
-snapshot digests, not full memory. D1 is still being produced. The
-[exact Mac-mini commands](FATAL_MAC_MINI_RUNS.md) run five separate S1 jobs
-from SHA-verified frame 11000 through 12250, and six D1 jobs over 11000–12000
-and 17000–17500 once its manifest/snapshots exist. Every job is at most 250
-frames with a 1,100-second alarm; hooks only record original phase/leaf
-entry/returns. The original unopened sound bodies execute explicitly.
-No such long real S1/D1 window was run on this MacBook, and no M4/full-frame
-acceptance or main merge/push is part of this delivery.
+### Mac-mini runner follow-up (2026-10-30)
+
+Synced `origin/main` at `a174a78` before this runner-only change. The
+[mini runbook](FATAL_MAC_MINI_RUNS.md) replaces the obsolete D1 windows with
+11250–11750 and 15250–15700 (optional 12250–13750); D1 stops at 15700.
+The raider-17 kill previously cited belongs to a development chain, not
+D1.json. Actual D1 landmarks reported by the mini are documented there.
+
+Runner inputs are scenario S1/D1, optional alternate `--manifest`, trusted
+`--snapshot-root`, ordered nonoverlapping `--intervals START-END ...`, base
+frame-128 directory, output root and heavy-lease path. Every requested start
+must have a listed snapshot and a committed `quadros.jsonl.xz` record; every
+end must be within `last_frame`. The whole plan is checked before launching.
+Each separate lease captures at most 250 frames with the existing 1100s alarm.
+
+First snapshots are restored through Missions' existing native bench and
+accepted only when frame, DGROUP SHA and whole-state SHA equal the committed
+scenario record. This admits the mini's S1 pass-2 records serialization at
+11000 (`6570ff47…`) without requiring S1-a's pickle SHA (`42d60722…`).
+An alternate manifest cannot change that committed identity anchor. Actual
+pickle, record-file, manifest and input hashes are recorded; restored input
+prefix equality is still required. Later jobs use the preceding capture's
+exact end-file SHA. Sound-boundary changes and observational hooks occur only
+after opening verification; native entry/return callback and mutation order
+are unchanged. Missing records, hash/frame differences, restore failures,
+short segments and incomplete leaves stop explicitly. Original executable
+hash `6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`
+and all routine addresses/evidence above remain unchanged.
+
+Validation: `python3 -B scripts/check.py --domain combat` passed **301 tests,
+155 optional native skips** in 156.208s (including the initial 10 runner
+checks), plus documentation links. The final focused suite passed **11 tests,
+0 skips** in 0.931s after adding the committed S1 identity check and streaming
+the record scan. It covers alternate file serializations, both hash/frame
+rejections, restore failures, missing/duplicate/malformed records, exact
+continuation SHA rejection, default/override splits, whole-plan preflight and
+incomplete-leaf chain stops. Logs are local
+`.local/check-fatal-runner-followup.log` and
+`.local/test-fatal-runner-followup.log`; both CLI help commands and
+`git diff --check` passed. No reconstructed game behavior changed;
+no fresh original-x86 S1/D1 window was run here (local frame-128 and scenario
+snapshots are absent). Long-window reproduction remains the mini's requested
+work, not M4 acceptance. Only the feature branch is to be pushed; no main
+integration is authorized for this follow-up.
 
 ## M3 turret orders and M4 contact audit (previous delivery)
 

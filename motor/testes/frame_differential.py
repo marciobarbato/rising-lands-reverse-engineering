@@ -392,6 +392,8 @@ def main():
     report['engine_sources_unchanged_during_run'] = before == after
     if before != after:
         report['summary'].update(result='source_changed_during_run', complete_proof=False)
+    import os
+    report['execution_mode'] = int(os.environ.get('RL_EXECUTION_MODE','0'))
     report['source_revision'] = subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], text=True).strip()
     report['source_dirty_paths'] = subprocess.check_output(['git', '-C', str(ROOT), 'status', '--porcelain'], text=True).splitlines()
     report['wall_seconds'] = time.monotonic() - t0

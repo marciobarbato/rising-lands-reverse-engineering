@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "motor/testes/player_proof.py",
+    "--probe",
+    "P3",
+    "--python",
+    "--library",
+    "motor/target/release/librising_engine.dylib",
+    "--output",
+    ".local/performance-60fps/final2/P3.json"
+  ],
+  "seconds": 40.847648125,
+  "returncode": 0
+}

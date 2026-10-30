@@ -4,7 +4,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* ABI1.5. Frame logic and native indexed rendering are additive.
+/* ABI1.6. Frame logic and native indexed rendering are additive.
  * Addresses are original u32 values, NOT host pointers. Handles are opaque
  * integer tokens, never dereferenceable; zero/stale/double-free are rejected.
  * Calls are serialized inside the library. Caller must synchronize handle use
@@ -16,7 +16,7 @@ extern "C" {
  * Load replaces ALL blocks atomically, preserving the explicit virtual clock.
  * Count<=65536 and total<=64MiB. Empty load is allowed; empty regions are not.
  */
-#define RL_ABI_VERSION 0x00010005u
+#define RL_ABI_VERSION 0x00010006u
 enum { RL_OK=0, RL_INVALID_ARGUMENT=1, RL_INVALID_HANDLE=2, RL_MEMORY_ERROR=3,
  RL_UNKNOWN_ROUTINE=4, RL_UNSUPPORTED_PATH=5, RL_BUFFER_TOO_SMALL=6,
  RL_PANIC=7, RL_POISONED=8, RL_RESOURCE_LIMIT=9, RL_VERSION_MISMATCH=10, RL_STALE_GENERATION=11 };
@@ -178,6 +178,22 @@ typedef struct { uint32_t kind,phase,site,frame,values[12]; } RlPlayerInputEvent
 enum { RL_INPUT_CURSOR=1, RL_INPUT_DISPLAY_TEXT_BOUNDARY=2, RL_INPUT_DISPLAY_SOUND_BOUNDARY=4 };
 int32_t rl_passo_quadro_entrada(RlMundo world,uint32_t phase,RlFrameInput *input,const RlDeclaredInput *declared);
 int32_t rl_eventos_entrada(RlMundo world,RlPlayerInputEvent *buffer,uint32_t capacity,uint32_t *required);
+/* ABI1.6: opt-in persistent execution after loading a complete mission.
+ * 0 (default): audit execution, complete frame/input/render observations.
+ * 1: play execution, no frame/input/render audit records. Order/text/sound
+ * events remain available; failed input attempts retain full diagnostics.
+ * 2: the same persistent execution with complete audit records for validation.
+ * All modes preserve exact game state, RNGs, clock, registers, pixels, cache,
+ * named stops and atomic errors. Mode changes do not advance generation/ticks.
+ * Sparse fixture loads return to mode0. Complete reloads preserve the mode.
+ * Exports remain supported in play mode; only explicitly requested exports
+ * perform projection/copies. Select mode1 before the first live frame.
+ * Old signatures/layouts/creation versions remain valid. Consumers should
+ * accept major1, minor>=their required minor instead of exact version equality.
+ */
+enum { RL_EXECUCAO_AUDITORIA=0, RL_EXECUCAO_JOGO=1, RL_EXECUCAO_JOGO_AUDITADO=2 };
+int32_t rl_execucao_definir(RlMundo world,uint32_t mode);
+int32_t rl_execucao_modo(RlMundo world,uint32_t *mode);
 #ifdef __cplusplus
 }
 #endif

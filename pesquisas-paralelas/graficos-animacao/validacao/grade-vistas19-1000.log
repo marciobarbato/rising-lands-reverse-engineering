@@ -1,0 +1,15 @@
+[lease] graphics-native-view-grid-1000 waiting
+[lease] graphics-native-view-grid-1000 granted slots [0]
+native calls 40 last origin (19, 25)
+native calls 80 last origin (39, 25)
+native calls 120 last origin (19, 26)
+native calls 160 last origin (39, 26)
+native calls 200 last origin (19, 27)
+native calls 240 last origin (39, 27)
+native calls 280 last origin (19, 28)
+native calls 320 last origin (39, 28)
+native calls 360 last origin (19, 29)
+native calls 400 last origin (39, 29)
+native calls 440 last origin (19, 30)
+native calls 480 last origin (39, 30)
+completed 480

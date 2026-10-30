@@ -5,6 +5,7 @@ use std::sync::Arc;
 pub(super) struct BoundRenderer {
     world: u64,
     renderer: Renderer,
+    spare: Option<Renderer>,
 }
 #[repr(C)]
 pub struct RlRenderBytes {
@@ -160,8 +161,14 @@ pub unsafe extern "C" fn rl_render_criar(
             }
             let handle = r.next;
             r.next = r.next.checked_add(1).ok_or(AbiError::ResourceLimit)?;
-            r.renderers
-                .insert(handle, BoundRenderer { world, renderer });
+            r.renderers.insert(
+                handle,
+                BoundRenderer {
+                    world,
+                    renderer,
+                    spare: None,
+                },
+            );
             Ok(handle)
         })?;
         unsafe { output.write(handle) };
@@ -185,7 +192,7 @@ pub unsafe extern "C" fn rl_render_geracao(
             Ok((
                 w.generation,
                 w.frame_phase,
-                w.state
+                w.state()
                     .frame
                     .as_ref()
                     .ok_or(AbiError::InvalidArgument)?
@@ -233,7 +240,7 @@ pub unsafe extern "C" fn rl_render_quadro(
                 return Err(AbiError::InvalidArgument);
             }
             let frame = world
-                .state
+                .state()
                 .frame
                 .as_ref()
                 .ok_or(AbiError::InvalidArgument)?
@@ -248,7 +255,18 @@ pub unsafe extern "C" fn rl_render_quadro(
             if pixels.is_null() || palette.is_null() {
                 return Err(AbiError::InvalidArgument);
             }
-            let mut next = bound.renderer.clone();
+            let persistent = world.execution_mode() != 0;
+            let mut next = if persistent {
+                if let Some(mut spare) = bound.spare.take() {
+                    spare.prepare_from(&bound.renderer);
+                    spare
+                } else {
+                    bound.renderer.clone()
+                }
+            } else {
+                bound.renderer.clone()
+            };
+            next.audit = world.execution_mode() != 1;
             let outcome = if let Some((generation, flags, outcome)) = &next.last {
                 if *generation == expected_generation {
                     if *flags != hud_flags {
@@ -256,11 +274,11 @@ pub unsafe extern "C" fn rl_render_quadro(
                     }
                     outcome.clone()
                 } else {
-                    next.render(&world.project()?, hud_flags == 1)
+                    next.render(world.render_memory()?.as_ref(), hud_flags == 1)
                         .map_err(render_error)?
                 }
             } else {
-                next.render(&world.project()?, hud_flags == 1)
+                next.render(world.render_memory()?.as_ref(), hud_flags == 1)
                     .map_err(render_error)?
             };
             report.disposition = outcome.disposition;
@@ -276,7 +294,10 @@ pub unsafe extern "C" fn rl_render_quadro(
                 ptr::copy_nonoverlapping(next.assets.palette.as_ptr(), palette, 768);
                 output.write(report);
             }
-            bound.renderer = next;
+            let previous = std::mem::replace(&mut bound.renderer, next);
+            if persistent {
+                bound.spare = Some(previous);
+            }
             Ok(())
         })
     })
@@ -484,8 +505,14 @@ mod tests {
             let handle = world + 1;
             r.next += 2;
             r.worlds.insert(world, World::new(20, 0)?);
-            r.renderers
-                .insert(handle, BoundRenderer { world, renderer });
+            r.renderers.insert(
+                handle,
+                BoundRenderer {
+                    world,
+                    renderer,
+                    spare: None,
+                },
+            );
             Ok((world, handle))
         })
         .unwrap();

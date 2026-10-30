@@ -48,10 +48,15 @@ def proof(probe,library=None,frames=None,python=False,whole=False):
   from player_state_evidence import WholeState
   full=WholeState(probe,state)
  rust.check(rust.lib.rl_avancar_ticks(h,129))
+ mirror=None;play_checks=[]
+ if int(os.environ.get('RL_COMPARE_PLAY','0')):
+  if int(os.environ.get('RL_EXECUTION_MODE','0'))!=2:raise ValueError('Paired play proof requires mode 2')
+  mirror=rust.create();rust.load(mirror,sorted([(a,b)for name,(a,b)in state.items()if name!='native_stack']+list(static.items())));rust.execution(mirror,1);rust.check(rust.lib.rl_avancar_ticks(mirror,129))
  _,_,entry,m1=carregar_cenario_exibicao();comp=None;iterator=None
  if python:
   script=RoteiroEntrada(data);comp=ComposicaoEntrada(state,cap,entry,m1,script,inicio=128,alocacoes=cap['allocations'],regs_inicio=regs);iterator=iter(comp.executar(frames or max(native)-128))
  inp=FrameInput(0,0,0,FrameRegisters.from_values({k:int(v,16) for k,v in regs.items()}),(C.c_uint32*3)(0,0,0),(C.c_uint32*4)(*MSG_LACO))
+ mirror_inp=FrameInput.from_buffer_copy(bytes(inp))
  schedule={q['frame']:q for q in data['frames']};results=[];stop=None;difference=None;native_events=[];native_orders=[];runtime=0.0
  try:
   for k in range(129,129+(frames or max(native)-128)):
@@ -60,6 +65,14 @@ def proof(probe,library=None,frames=None,python=False,whole=False):
     before=time.perf_counter();code=rust.input(h,phase,inp,cursor=q.get('cursor') if phase==2 else None,messages=q.get('messages',()) if phase==2 else (),keys=keys);runtime+=time.perf_counter()-before
     native_error=rust.error() if code else None
     consumed=rust.consumed(h);events+=consumed
+    if mirror is not None:
+     mirror_code=rust.input(mirror,phase,mirror_inp,cursor=q.get('cursor') if phase==2 else None,messages=q.get('messages',()) if phase==2 else (),keys=keys)
+     mirror_error=rust.error() if mirror_code else None
+     mirror_events=rust.consumed(mirror)
+     left=consumed if code else [e for e in consumed if e.kind>=7]
+     check=dict(frame=k,phase=phase,state_equal=rust.snapshot(h)==rust.snapshot(mirror),registers_equal=bytes(inp)==bytes(mirror_inp),clock_equal=rust.clock(h)==rust.clock(mirror),stop_equal=(code,native_error)==(mirror_code,mirror_error),events_equal=[bytes(e)for e in left]==[bytes(e)for e in mirror_events])
+     check['equal']=all(v for key,v in check.items() if key.endswith('_equal'));play_checks.append(check)
+     if not check['equal']:difference=dict(frame=k,differences=dict(play_mode=check));break
     py_stop=None
     if iterator is not None:
      py_event_start=len(script.eventos)
@@ -96,7 +109,8 @@ def proof(probe,library=None,frames=None,python=False,whole=False):
    if dif:difference=dict(frame=k,differences=dif);break
  finally:
   final_clock=rust.clock(h);rust.free(h)
- return dict(schema='rising-lands/rust-player-input-proof/1',probe=probe,provenance=finish(identity,rust.path),whole_state=full.report() if full is not None else None,reference=provenance(),input_sha256=hashlib.sha256(raw).hexdigest(),probe_files_sha256={n:hashlib.sha256(v).hexdigest() for n,v in files.items()},library_sha256=hashlib.sha256(rust.path.read_bytes()).hexdigest(),source_revision=subprocess.check_output(['git','-C',str(REPO),'rev-parse','HEAD'],text=True).strip(),source_dirty=bool(subprocess.check_output(['git','-C',str(REPO),'status','--porcelain'],text=True)),frames_equal=sum(r['equal'] for r in results),frames_compared=len(results),python_compared=python,first_difference=difference,stop=stop,results=results,orders=native_orders,input_events=len(native_events),native_seconds=runtime,virtual_clock=dict(start_tick=129,end_tick=final_clock[0],milliseconds=final_clock[1],rate=20),seconds=time.monotonic()-t)
+  if mirror is not None:rust.free(mirror)
+ return dict(schema='rising-lands/rust-player-input-proof/1',execution_mode=int(os.environ.get('RL_EXECUTION_MODE','0')),probe=probe,play_comparison=dict(phases=len(play_checks),equal=sum(c['equal']for c in play_checks),checks=play_checks) if mirror is not None else None,provenance=finish(identity,rust.path),whole_state=full.report() if full is not None else None,reference=provenance(),input_sha256=hashlib.sha256(raw).hexdigest(),probe_files_sha256={n:hashlib.sha256(v).hexdigest() for n,v in files.items()},library_sha256=hashlib.sha256(rust.path.read_bytes()).hexdigest(),source_revision=subprocess.check_output(['git','-C',str(REPO),'rev-parse','HEAD'],text=True).strip(),source_dirty=bool(subprocess.check_output(['git','-C',str(REPO),'status','--porcelain'],text=True)),frames_equal=sum(r['equal'] for r in results),frames_compared=len(results),python_compared=python,first_difference=difference,stop=stop,results=results,orders=native_orders,input_events=len(native_events),native_seconds=runtime,virtual_clock=dict(start_tick=129,end_tick=final_clock[0],milliseconds=final_clock[1],rate=20),seconds=time.monotonic()-t)
 
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--probe',required=True);ap.add_argument('--frames',type=int);ap.add_argument('--library');ap.add_argument('--python',action='store_true');ap.add_argument('--whole-state',action='store_true');ap.add_argument('--output',required=True);a=ap.parse_args();signal.alarm(1140);r=proof(a.probe,a.library,a.frames,a.python,a.whole_state);p=Path(a.output);p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(r,indent=1,sort_keys=True)+'\n');print(json.dumps({k:r[k] for k in ('probe','frames_equal','python_compared','first_difference','stop','seconds')},indent=1));return int(r['first_difference'] is not None)
