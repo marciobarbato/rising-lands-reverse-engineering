@@ -3,6 +3,7 @@
  "capture_raw_sha256": "a9d0b8c75e43373f86dabe864e3dcf9fea836ad5e189a48ef57fcd614f3884d8",
  "compared": 81,
  "core_exit_provider": "d47c782fb100e4dc302e35765317fdd47d0986aa21f0b96c7d75628791bbed61",
+ "core_fatigue_provider": "2596912bcf92d72cf9cbe02bb5d948a9a00f713ea3c64822d9521578a1d2be0d",
  "counts": {
   "CalculTroupe": {
    "error": 0,
@@ -762,7 +763,8 @@
    "outcome": "match",
    "routine": "CalculTroupe",
    "served_by_translation": {
-    "CalculPosition": 1
+    "CalculPosition": 1,
+    "EteintTerrain": 1
    }
   },
   {
@@ -774,14 +776,16 @@
    "outcome": "match",
    "routine": "SortieTroupe",
    "served_by_translation": {
-    "CalculPosition": 1
+    "CalculPosition": 1,
+    "EteintTerrain": 1
    }
   }
  ],
  "schema": "rising-lands/economy-cave-recruitment-validation/1",
- "seconds": 342.748,
+ "seconds": 318.941,
  "served_by_translation": {
   "CalculPosition": 2,
+  "EteintTerrain": 2,
   "RechercheDecalageSortie": 1
  },
  "translation": "9d735d40292e4bce247fe4dffb46297a7d923c738cdad0b5e1b0aef3ce0145ba"
