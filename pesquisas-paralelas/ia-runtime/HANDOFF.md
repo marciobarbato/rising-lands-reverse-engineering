@@ -1047,3 +1047,13 @@ links pass. The 1,058 native leaf comparisons ran separately from the gate's
 skips. Latest fetch: main `1531678` (new Graphics order-window surfaces,
 multi-monster guard unchanged), Missions `7eeb395`; S1 pass-2 remains absent.
 No main merge/acceptance and no whole-state S1 proof is claimed.
+
+### Original-first detection-handler checkpoint
+
+The leased original observer now records the real handler at frame11663,
+entry `0x489b5a`, indirect CALL `0x482e2e`, return `0x482e31` (the original
+instruction is three bytes). All **164 native states, 11500–11663**, match
+the committed S1 trajectory; code unchanged, 110.527 seconds. Evidence:
+`evidencias/s1-deteccao-conflito-original.json`. The observer decodes the
+CALL length and installs the explicit indirect return hook. No handler
+translation has been added at this checkpoint; capture is committed first.

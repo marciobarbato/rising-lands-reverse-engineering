@@ -31,13 +31,18 @@ def main():
     if args.ate <= args.de:
         raise SystemExit('--ate must be after --de')
     import bancada_s1 as bs
+    from inventario_ia_runtime import OriginalImage
+    instruction = OriginalImage().instruction(args.chamada)
+    if instruction.mnemonic != 'call':
+        raise ValueError('--chamada must identify an original CALL instruction')
+    caller_return = args.chamada + instruction.size
     started = time.monotonic()
     s1 = bs.BancadaS1(args.de)
     reads = Leituras(s1.b.cpu)
     cases = []
 
     def choose(name, regs, ret, observer):
-        if observer.quadro == args.ate and ret == args.chamada+5:
+        if observer.quadro == args.ate and ret == caller_return:
             reads.iniciar()
             return True
         return False
@@ -47,7 +52,8 @@ def main():
         cases.append(case)
 
     # This caller contract takes no pushed words (plain RET).
-    obs = bs.Observacao(s1.b, {args.rotina: 0}, escolher=choose, ao_fechar=close)
+    obs = bs.Observacao(s1.b, {args.rotina: 0}, escolher=choose, ao_fechar=close,
+                        retornos_extra={args.rotina: [caller_return]})
     while s1.k < args.ate:
         s1.avancar(obs)
     obs.remover()
@@ -61,6 +67,7 @@ def main():
     data = dict(schema='rising-lands/ai-runtime-s1-next-stop-original/1',
                 original_sha256=ORIGINAL_SHA256, routine=args.rotina,
                 entry=hex(s1.b.sym[args.rotina]), call=hex(args.chamada),
+                caller_return=hex(caller_return),
                 translation_executed=False, s1=reproduction, cases=cases,
                 source_revision=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
                 recorder_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
