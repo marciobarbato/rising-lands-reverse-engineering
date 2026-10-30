@@ -11,6 +11,7 @@ from chamadas_quadro_core import terreno_esta_descoberto
 from entrada_estruturas import EntradaEstruturas
 from experiencia_unidades import TIPOS_F7
 from incursao_core import definir_minimapa
+from selecao_ordens import chamar_som
 
 ADDRESSES={'SetDyingEngin':0x444938,'EnginSetLevelExperience':0x44fb20,
            'EnginNextEtape:state4':0x45442c,'RetireEngin':0x457058}
@@ -36,7 +37,7 @@ class CicloMorteLuta:
 
     def _audio_stop(self, reference):
         if self.som is None: raise DependenciaLutaFatal('PlaySnd_StopSound',0x48aac0,(reference,))
-        self.som('PlaySnd_StopSound',dict(EAX=reference),[])
+        chamar_som(self.som,'PlaySnd_StopSound',dict(EAX=reference),[],0x4449c3)
 
     def dying(self, unit):
         m=self.m;unit&=65535;r=unidade(m,unit)
@@ -49,7 +50,7 @@ class CicloMorteLuta:
             volume=self.combate._query('EnginGetVolume',(unit,))
             m.u8(r+0xf9,0)
             if m.u32(r+0x104)==M32:
-                self.combate._efeito('PlaySnd_PostSound',(0x50,(m.u8(r+1)<<16)|0x500,0,volume,r+0x104))
+                self.combate._efeito('PlaySnd_PostSound',(0x50,(m.u8(r+1)<<16)|0x500,0,volume,r+0x104),chamada=0x444a1b)
         if m.u8(r+2) not in (0,4):
             m.u8(r+2,4);self._release(unit)
         if m.u16(r+10): raise DependenciaLutaFatal('EnginRetire',0x443dfc,(unit,0))

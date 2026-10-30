@@ -1,5 +1,115 @@
 # Combat handoff — 2026-10-30
 
+## S1 PostSound/StopSound forwarding (2026-10-30, current delivery)
+
+Task baseline: fast-forwarded `feat/re-combat` to fetched main `1531678`.
+Only Combat-owned paths are changed. This task authorizes a feature push;
+**no merge to main or acceptance record is performed**. The fetched
+`S1_NEXT_STOPS.md` still names older stops; the dispatched frame-11753
+register contract is independently confirmed by the new native capture.
+
+### API and sequencing
+
+The existing `CombateRaidVivo(..., som=callback)` and
+`LutaFatalViva(..., som=callback)` constructors initialize no game bytes.
+Sound callbacks now receive `chamada=original_CALL` if their signature
+accepts it (explicit parameter or `**kwargs`); three-argument callbacks keep
+working. Core's existing `selecao_ordens.chamar_som` handles dispatch without
+catching/retrying provider-body exceptions. Each emitter binds its own site;
+nested hit/death effects do not inherit their parent's site.
+
+- PostSound `0x48aa79`: exact u32 `EAX, EDX, EBX, ECX`, `[volume]`.
+- StopSound `0x48aac0`: its sole consumed register `EAX`, no pushed words.
+- Sites forwarded: `0x4525a1` (attack), `0x45063f` (unit hit), `0x4510b1`
+  (impact alert), `0x41a331` (structure hit), `0x4449c3` (ordinary death stop),
+  `0x444a1b` (ordinary death post).
+- `LutaFatalViva._som` preserves the site through the wrapper, including Core
+  providers already emitting at `0x41a1d3`/`0x41a221`.
+- Handle/reference addresses, volume calculation, sound admission return,
+  queue writes and callback order remain delegated as before. Prior `+0xf9`
+  stores survive a sound exception. Death still sends message 0x44, then
+  StopSound/PostSound, then writes state 4 and performs cleanup.
+
+Detailed domain, exact return sites and complete audit are in
+[COMBAT.md](../../docs/COMBAT.md#s1-fight-sound-call-sites-2026-10-30).
+Original EXE SHA-256:
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+No normalized analysis PE or immutable predecessor evidence is changed.
+
+### Original-first capture and reproduction
+
+The first capture/recorder/encoder commit is `426bc53`, before the routing
+change. [Fight evidence](evidencias/som-luta-s1-original-v2.json.xz) and
+[later evidence](evidencias/som-morte-s1-original-v2.json.xz) cover native S1
+11751–12250, restored from read-only original snapshots 11750 and 12000.
+Every resumed frame matches Missions' replay-checked record; 502 checks
+include the two opening checkpoints. No game byte, register or CALL is patched
+by the recorder, and no Combat translation is imported. The inherited scenario
+sound boundary stays in place; both runs report unchanged executable code.
+
+The real frame-11753 CALL `0x4525a1` / return `0x4525a6` has exactly the
+dispatched EAX=`0x50`, EDX=`0x2300`, EBX=`0x474a9358`, ECX=0,
+ESI=`0x474a9254`, EDI=EBP=17, pre-CALL ESP=`0x2007dbc`, pushed volume 90.
+The two windows record 11 + 17 actual requests. The first includes unit death
+and projectile impacts; the second includes structure damage and Core voice.
+
+Reproduce each bounded original capture through the shared lease:
+
+```sh
+python3 "/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py" combat-s1-sound -- python3 -B pesquisas-paralelas/combate/capturar_som_luta_s1_combate.py --snapshot-root "$PWD/.local/m3/passo2/S1" --inicio "$PWD/.local/m3/quadro128" --de 11750 --ate 12000 --saida .local/new-som-luta-raw.json.xz
+python3 -B pesquisas-paralelas/combate/evidencia_som_luta_combate.py .local/new-som-luta-raw.json.xz .local/new-som-luta-packed.json.xz
+```
+
+For the later window use snapshot 12000, `--de 12000 --ate 12250`, and new
+output paths. Snapshots must already exist under the supplied local directory;
+opening DGROUP and whole-state identity are checked against the committed
+S1 records, so a foreign snapshot filename/hash is not a source-file pin.
+Raw captures are retained unchanged in ignored `.local/`. The new published
+encoding replaces repeated states with one exact anchor plus lossless deltas;
+the encoder verifies byte equality before writing and records raw SHA-256.
+No original bytes are translated or regenerated.
+
+### Validation and remaining contracts
+
+Fresh native differentials:
+
+- [Fight](validacao/som-luta-s1-native-v1.json): **13 parent cases / 25 nested
+  requests / 0 mismatches**.
+- [Later fight](validacao/som-morte-s1-native-v1.json): **10 parent cases /
+  18 nested requests / 0 mismatches**.
+- Total **23 native parents / 43 nested request comparisons**, every
+  non-stack checkpoint byte and ordered sound inputs/sites equal; no faults,
+  limits or writes outside modeled memory. Parent overlap explains why the
+  original windows contain 28 actual calls rather than 43.
+
+`validar_som_luta_s1_combate.py --emular [--capture <owned capture>]`
+reexecutes intact original parents with actual unopened sound bodies, while
+the Python callback models only the explicit inherited S1 scenario boundary.
+The harness uses committed Core geometry/VoixOffAsk and AI city-message
+providers for structure-hit cases; it consumes only known AX from Core's
+partial adjacent-cell result and claims no raw saved-register output there.
+No foreign source file hash is pinned. Reports bind only the changed Combat
+runtime sources and comparator.
+
+The audit proves no direct sound call in projectile code; impact/death
+composition reaches the six sites above. Other owners retain turret, food,
+prelude and retirement sites. Special death `0x444c84`, active-handle
+PostVolume and existing unsupported bodies remain explicit dependencies.
+This delivery does not claim a Python S1 frame-chain rerun or integration;
+AI/runtime should resume its strict S1 proof with the same sound callback.
+
+Two preliminary later-window comparison attempts stopped on unsupplied Core
+voice/adjacent-cell providers in the test composition; the final harness uses
+the committed owner implementations above. These incomplete attempts are not
+included in the 23-case result. The first domain gate failed two legacy-callback
+subtests because the test incorrectly assigned the attack site to nested hit
+and alert requests. The corrected test compares legacy arguments without site
+metadata; the focused suite then passed 6 tests with one optional native skip.
+Final leased `python3 -B scripts/check.py --domain combat` passed **308 tests,
+156 optional native skips, zero failures/errors**, with valid documentation
+links: [complete gate log](validacao/som-sites-domain-gate.log). The new native
+23-case differential ran separately under the lease and skipped no case.
+
 ## State at 2026-10-30 07:15 (documentation only)
 
 The MacBook paused at 07:00. `feat/re-combat` was fast-forwarded and merged
