@@ -2,6 +2,23 @@
 
 Chat: `01a18262-c6d5-7cd3-80fa-8431bf5f2657` (Economy and Production). Worktree: `/Users/marcio/git/Rising Lands/worktrees/re-economy`. Branch: `feat/re-economy`. Organization base: `6634be3af2d255846a847d8aa21ad4edf1cdb589`. Implementation commit: `f5a5e9b` (`Reconstruct troop completion preparation and cargo credits`); the following handoff commit and serialized integration result are identified in the completion chat. Only economy-owned paths changed.
 
+## Cave body, habitation and recruitment (M3 S1, 2026-10-29; paused by the user)
+
+Branch `feat/re-economy`; not integrated. Full contract: [ECONOMY.md](../../docs/ECONOMY.md#cave-body-habitation-and-sanctuary-recruitment-m3-s1).
+
+- **Original first.** Capture source `d216753` (`capturar_caverna_recrutamento.py`, `gravar_acoes` in `bancada_ciclo_trabalho.py`), capture `9e16e26`: 1,400 frames, 343 recorded calls, 34 actions, frames 0/1 reproduced, code unchanged. Recruits leave at 297 (type 5), 869 (type 7), 1363 (type 6).
+- **Answer.** The cave body 0x426aff is BagContient(Bag, 1, 9) then the smoke counter +0x76 (up to 15 while +0x75 is set, else down to 0; skipped when bit 0 of 0x508f80 is set). With S1's units +0x75 stays 0. Uninhabited (0xc8, P3 frame 220): BagContient only, nothing written.
+- **Translation** `caverna_recrutamento.CavernaRecrutamento`: cave body (`corpo_caverna`, suggested ai-runtime provider `BatimentNextEtape:cave`), BatimentNextEtape type 3, BatimentHabitable, BatimentSetTechnologie (types 2/3), InitBatimentPlayer, InitBatimentNeutre, InitRecruteTroupe, CalculTroupe (types 1/2), SortieTroupe (while a colonist remains), plus leaves. `provedor_caverna` serves them to `ciclo_trabalho` and Core.
+- **Validation.** CPU-free replay 342/342 match, 4 mutations caught. Native differential: 342 compared, 0 mismatches, rerun equal to the capture (see `validacao-caverna-recrutamento-emulada.json`; rerun after the BatimentGetCase argument change, result recorded below).
+- **Composition** of `ciclo_trabalho` with Core's `provedor_entrada` (main `90fd831`), the live `BonusUnidades` and `provedor_caverna`, over the committed work-cycle capture (407 calls): **402 match, 4 uncertain EAX, 1 mismatch**, identical CPU-free (`compor_ciclo_trabalho.py --base .local/caverna/imagem-base-ciclo-quadro2.bin.xz`, base image from `imagem_base_ciclo.py`, not committed: 16 MB) and native (`compor_ciclo_trabalho_nativo.py` → `composicao-ciclo-trabalho-nativa.json`). 1,079 foreign calls served by translations (349 DeplaceEngin), 17 still the original's (terrain search, Random, SetMiniMap, PlaySnd, MineGetCapacite). The 4 uncertain are CalculWorkEngin returning DeplaceEngin's EAX, which Core declares unreconstructed. The mismatch: frame 125, BatimentLogeEngin → BatimentHabitable → Core's DecouvreTerrain(0xa14, 11, 0): 196 minimap bytes (0x47933a26.., SetMiniMap inside DecouvreCase, original 32 → 162) differ; a Core question (minimap update in `descobrir_area`).
+
+Resumable next steps:
+1. DONE native rerun after the BatimentGetCase argument change: 342 compared, 0 mismatches, rerun equal.
+2. Send Core the frame-125 minimap difference (DecouvreTerrain's SetMiniMap/DecouvreCase colours over the native state). An earlier wiring bug here (BatimentGetCase's EDX not passed, so DecouvreTerrain got radius 3 and 316 fog bytes differed) is fixed.
+3. Coordinator: Core published `provedor_saida(visao, outros)` (CalculPosition + RechercheDecalageSortie, every register) in feat/re-core `d07ed89`. Once on origin/main, wire it as the `externo` for SortieTroupe's CalculPosition and InitRecruteTroupe's RechercheDecalageSortie (and `escolher_saida(m)` for the legacy `Recrutamento.iniciar`), then rerun replay and the native differential.
+4. Open: SortieTroupe's abandonment path (0x42101d..0x42114e), TerrainDeposeMatiere over live memory, BatimentSetTechnologie types 1/5/6/0xd/0xf/0x10/0x12/0x14, balloons (0x12), CalculTroupe types 5/6/8/13+.
+5. ai-runtime must add the `BatimentNextEtape:cave` provider (structure index, return ignored) to pass frame 220 in P3/P6/P7.
+
 ## Work cycle, deposit and lodging credit (2026-10-29)
 
 Branch `feat/re-economy`; not integrated. Full contract: [ECONOMY.md](../../docs/ECONOMY.md#work-cycle-deposit-and-lodging-credit-m3m4).

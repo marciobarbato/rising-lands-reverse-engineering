@@ -1171,3 +1171,71 @@ python3 -B pesquisas-paralelas/economia/replay_ciclo_trabalho.py                
 - Paths the run did not reach: the voice, ChercheGcLibre, depleted mines, excess sacks.
 
 **Mac mini / scripted input.** P3 should send the colonist into the completed cave: release it with a double-click on the selected sanctuary, select it, then click the cave. Only then can P4/P5 deliveries count.
+
+## Cave body, habitation and sanctuary recruitment (M3, S1)
+
+First execution evidence of the cave's per-frame body, the 0xc8 hand-over's callees and the sanctuary's recruitment in MONDE01. Addresses apply only to the intact `RISING.EXE` (SHA-256 `6c556520…8543fb`).
+
+### Answer (native, MONDE01)
+
+**The cave body `0x426aff..0x426c10`** (BatimentNextEtape type 3, the stop of every probe chain at frame 220) is small:
+- `BagContient(Bag +0xc, DL 1, BX 9)` (Core). With no colonist (the 0xc8 cave under construction, as at P3's frame 220, or completed but empty), it exits: EAX = BagContient's with AL 0, nothing written.
+- With a colonist (owner 0 after the lodging): unless bit 0 of u32 `0x508f80` (an animation counter) is set, the smoke counter +0x76 rises by one up to 15 while +0x75 is nonzero, and otherwise falls by one down to 0.
+- +0x75 is written only by `BatimentTuyauCave 0x41a65c` / `BatimentPorteCave`, from ResetOrdre, CalculEntreBatiment's vehicle branch, CalculWorkEngin's types 6/13 and CalculTransporteEngin. With the S1 units (types 5, 7, 9) it stays 0, so the inhabited cave's body only lowers +0x76 to 0 and then does nothing.
+- Every register but EAX is restored by the tail `0x41db1d`; the caller ignores EAX.
+
+**The hand-over** (`BatimentLogeEngin` on a 0xc8 structure, frame 125 here, P6's 2178):
+- `BatimentHabitable 0x41cc70`: `BatimentSetTechnologie(owner, type)` (a cave: BagInit of the owner's type-3 pending Bag `0x4dd6e8 + 0x8f0 p + 104·3`, capacity 3; a sanctuary: capacity 4 and BagPrend of unit types 5/6/7 that `TypeEnginEstRealisable` allows); the cave's stock level when the cave count is already nonzero; `BatimentGetCase`, `DecouvreTerrain(cell, R + 3, owner)`, `IllumineTerrain(cell, R, owner)` with R from table `0x41cc18` (cave 8, sanctuary 10); u16 +0x84 = 0xc8.
+- `InitBatimentPlayer 0x41be88`: the cave count u16 `0x4dfb2c + 6p` += 1 (0 → 1 at frame 125), then the stock level byte +4 = ((food + stone stock) low word // count) · 7 // the per-cave word (MONDE01 leaves it 0).
+- `InitBatimentNeutre 0x41c017` (a double click on the owned cave: its colonist leaves, the cave is abandoned): the count −= 1, then unless state +5 is 3 `TerrainDeposeMatiere(depositor 0x4dfab8, cave, origin + 0x202, CL 0 food / 1 stone)`.
+
+**Recruitment** (tag 17; the selected structure is u16 `0x495be0 + 2p`, set by `BatimentSelection 0x41b673`):
+- `InitRecruteTroupe 0x4283e2(AL type, DL player)`: costs from the unit-type record `0x4965ae + 50t` (food +2, parts +4, stone +6): type 5 = 4 food, types 6 and 7 = 6 food. Refused (AL 0, nothing written) when `TestRessource` fails, the structure type is not 1/2/5/13/15/16/18/20, or a request is pending (+0x74): a second press while pending charges nothing (frame 40).
+- Accepted: the three debits (each followed by the stock-level recalculation once a cave is counted), +0x74 = 1, +5 = 4, u32 +0x8c = 1, +0x7b = type, +0x7a = 0, +0x7e/+0x80/+0x82 = 0, u16 +0x7c = `RechercheDecalageSortie(structure)` (Core), AL 1.
+- Each frame, BatimentNextEtape type 2 → `CalculTroupe 0x4259e6`: while u32 +0x8c < time · 100 (`EnginGetTimeRecrute`: type 5 → 500, type 7 → 1,000), +0x8c += 100 + trunc(colonists / capacity · 100.0) (x87 at precision 53; the sanctuary's capacity is 8: 7 colonists give 187 per frame, 6 give 175); then `SortieTroupe(structure, DL 4)` every frame.
+- `SortieTroupe 0x420e4c` below the threshold returns (EAX = time, EDX = time·100). At it: `BagRetire(Bag, 1, 9)` takes the first colonist, its carried stone then food are credited, `CalculPosition`, `EnginSetType(unit, cell, CL = +0x7b)`, `EnginAddVie(1000)`, `EnginResetFatigue`, `EnginSetExperimente`, `SetSortEngin`, `SetDeplaceEngin(unit, +0x7c)`, `EnginAsk(unit, 6, 0)` for the local player; while the sanctuary still holds a colonist the request is cleared (+0x7b = 0xff, +0x74 = 0, +0x8c = 0, +5 = 5, …) and `iagUnitSendMessage(unit, 0x46)`, `iagVilleSendMessage(structure, 3)` follow.
+
+| Frame | Event (capture) | Food | Sanctuary colonists |
+|---|---|---|---|
+| 2 | cave created (owner 0xc8, +5 = 2); colonist 3 released | 20 | 7 |
+| 12 | cave completed (+5 = 5) | 20 | 7 |
+| 30 | slot 0: type 5 accepted (+0x7c = 3600) | 16 | 7 |
+| 125 | colonist lodges: cave owner 0, count 1 | 16 | 7 |
+| 297 | unit 4 leaves as type 5 (267 frames) | 16 | 6 |
+| 298 | slot 2: type 7 accepted | 10 | 6 |
+| 869 | unit 5 leaves as type 7 (571 frames) | 10 | 5 |
+| 870 | slot 1: type 6 accepted | 4 | 5 |
+| 1363 | unit 6 leaves as type 6 (493 frames) | 4 | 4 |
+| 1364 | slot 0: type 5 accepted | 0 | 4 |
+
+For S1-b: a builder takes about 570 frames and a worker about 270 with 6–7 colonists, and each recruit removes a colonist, which slows the next one (colonists / 8 of the bonus).
+
+### Method (original first)
+
+- **Bench**: the work-cycle bench ([`bancada_ciclo_trabalho.py`](../pesquisas-paralelas/economia/bancada_ciclo_trabalho.py)) with `gravar_acoes`: a declared call runs through the isolation-aware runner, so the recorded routines it enters, itself included, are recorded and tagged with the action label (EIP is set to the entry first: a stop on the very first instruction leaves it unwritten).
+- **Declared actions** ([`capturar_caverna_recrutamento.py`](../pesquisas-paralelas/economia/capturar_caverna_recrutamento.py), committed `d216753` before any run): the cave at frame 2 (completed at 12), BatimentRetireColon(sanctuary), the colonist sent into the cave, BatimentSelection(sanctuary) and the tag-17 requests at frames 30/40 and after each completion (types 5, 7, 6, 5), and 22 restored cases (the cave body with +0x75/+0x76/bit-0 variants, the double click on the owned cave, BatimentHabitable/InitBatimentPlayer/InitBatimentNeutre on both structure types, requests while idle, short of food and from the cave).
+- **Capture** (`9e16e26`, before the translation): 1,400 frames, 343 recorded calls, 34 actions; frames 0/1 reproduced, code unchanged; raw SHA-256 `431171cc…c642443`, 616 s. [`extrair_caverna_recrutamento.py`](../pesquisas-paralelas/economia/extrair_caverna_recrutamento.py) exports 21 original intervals and 4 jump tables.
+- **Translation** ([`caverna_recrutamento.py`](../pesquisas-paralelas/economia/caverna_recrutamento.py), class `CavernaRecrutamento`) over live flat memory.
+- **Validation.**
+  - CPU-free replay ([`replay_caverna_recrutamento.py`](../pesquisas-paralelas/economia/replay_caverna_recrutamento.py), [test](../pesquisas-paralelas/economia/testes/test_caverna_recrutamento.py)): **342 calls, 0 mismatches** — 117 BatimentNextEtape, 103 CalculTroupe, 102 SortieTroupe, 10 InitRecruteTroupe, 3 InitBatimentPlayer, 3 InitBatimentNeutre, 2 BatimentHabitable, 2 BatimentSetTechnologie. Memory holds only the bytes the original read before writing; compared are the exit registers, every changed byte, every byte written (against the original's last store there) and each call into another front (name, argument bits). Four deliberate mutations are caught.
+  - Native differential ([`validar_caverna_recrutamento.py`](../pesquisas-paralelas/economia/validar_caverna_recrutamento.py) → [report](../pesquisas-paralelas/economia/validacao-caverna-recrutamento-emulada.json)): **342 compared, 0 mismatches**, the rerun equal to the capture (618 s).
+
+### API
+
+`CavernaRecrutamento(memoria, *, externo=None, proprias=None)`; `chamar(nome, regs)` takes EAX..EBP (ESP optional) and returns EAX..EBP and ESP after RET, with `_incertos` when a provider's uncertain bits reach an exit register. `corpo_caverna(estrutura)` is the type-3 body alone, returning EAX, for ai-runtime's structure switch (suggested provider name `BatimentNextEtape:cave`, called with the structure index at `0x426aff`, return ignored). `provedor_caverna(caverna, outros)` serves these routines to other modules (`ciclo_trabalho`'s BatimentHabitable/InitBatimentPlayer, Core's InitBatimentNeutre at `0x41e0d7`).
+
+**Named dependencies** (`externo(nome, chamada, regs)`, argument widths in `ARGUMENTOS`; never defaulted):
+- Core: BagContient, BagContientTroupe, BagRetire, BagPrend, EnginGetBag, BatimentGetCase, BatimentGetType, DecouvreTerrain, IllumineTerrain, **CalculPosition** (`0x420f5a`: AX structure, BL direction; `posicao_saida`), **RechercheDecalageSortie** (`0x42863b`: AX structure → AX cell; Core has it inside `EntradaEstruturas._recherche_decalage_sortie`, not yet exported), EnginSetType, EnginAddVie, EnginResetFatigue, EnginSetExperimente, SetSortEngin, SetDeplaceEngin, EnginAsk.
+- Economy: BatimentAjouteMatiere (`ciclo_trabalho`), TerrainDeposeMatiere `0x41bb8a` (not translated over live memory).
+- ai-runtime: iagUnitSendMessage, iagVilleSendMessage.
+
+**Outside the domain** (`ForaDoDominioCaverna`, before the branch's stores): BatimentNextEtape of other structure types; BatimentSetTechnologie types 1, 5, 6, 0xd, 0xf, 0x10, 0x12, 0x14; InitBatimentPlayer/InitBatimentNeutre type 0x12 (balloons); BatimentHabitable types above 0x15; CalculTroupe types other than 0–4; SortieTroupe leaving the structure without a colonist (the abandonment `0x42101d..0x42114e`).
+
+### Composition of the work cycle with Core's providers
+
+[`compor_ciclo_trabalho.py`](../pesquisas-paralelas/economia/compor_ciclo_trabalho.py) replays the committed work-cycle capture without a CPU through the real providers: Core's `provedor_entrada` (main `90fd831`, with `construcao_core`'s DeplaceEngin and the live world), the live `BonusUnidades` and `provedor_caverna`. Terrain search, Random, SetMiniMap, PlaySnd_PostSound, MineGetCapacite and TerrainDeposeSac stay the original's nested call replayed (counted). Core's live world binds every grid and pointer table when built, which no single recorded call reads, so unrecorded bytes come from the whole mapped state at frame 2's CalculGame entry ([`imagem_base_ciclo.py`](../pesquisas-paralelas/economia/imagem_base_ciclo.py), native, kept in `.local/`); a written byte the original did not change must equal its last store there. [`compor_ciclo_trabalho_nativo.py`](../pesquisas-paralelas/economia/compor_ciclo_trabalho_nativo.py) runs the same wiring over each call's whole native entry state ([report](../pesquisas-paralelas/economia/composicao-ciclo-trabalho-nativa.json)).
+
+Result, identical in both runs, over 407 recorded calls: **402 match, 4 uncertain, 1 mismatch.**
+- 1,079 foreign calls were served by translations (349 DeplaceEngin); 17 stayed the original's.
+- The 4 uncertain are CalculWorkEngin returning DeplaceEngin's EAX, which Core declares unreconstructed.
+- The mismatch is frame 125's lodging: inside BatimentHabitable, Core's `DecouvreTerrain(0xa14, 11, 0)` leaves 196 minimap bytes (`0x47933a26..`, written by SetMiniMap under DecouvreCase: 32 → 162) different. It is reported to Core.
