@@ -66,7 +66,7 @@ GRADE_OBJETOS, GRADE_QUANTIDADES = 0x507d74, 0x507dac
 BUSCA_UNIDADE = 0x496304
 SACO_COMIDA = 0x43
 QUADRO_LIMPEZA = 1150
-QUADRO_CASOS = 1420
+QUADRO_CASOS = 30
 QUADRO_DESCARGA = 1500
 ATRASO_FOME = 20
 CASOS_CAVE = 6
@@ -124,7 +124,7 @@ def casos_restauracao(c, cave):
     for v, extra in ((2, {}), (5, {}), (0x10, {}), (0x12, {}), (0x14, {0xc0: (2, cave)}),
                      (0xd, {0xc0: (2, 0xffff), 0xb8: (2, u12)}), (0xf, {1: (1, 6), 0xc0: (2, u12)}),
                      (5, {1: (1, 7)}), (0xb, {1: (1, 7), 0xc0: (2, cave)})):
-        s.append((f'saved state {v:#x} {sorted(extra)} owning the path search', u14, dict({0xa0: (2, v)}, **extra), busca))
+        s.append((f'saved state {v:#x} {sorted(extra)} owning the path search', u14, {0xa0: (2, v), **extra}, busca))
     return s
 
 
