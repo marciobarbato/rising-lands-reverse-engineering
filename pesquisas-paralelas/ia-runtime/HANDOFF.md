@@ -1065,3 +1065,42 @@ additional reads attributed to the original handler. The fresh original run
 again checks all 164 states and unchanged code (121.665 seconds). V1 remains
 unchanged. The adapter is being prepared against this evidence; it has not
 executed during either capture. No battle algorithm is forked from Combat.
+
+### Detection-handler adapter and native differential
+
+`deteccao_conflito_ia.detectar_alvo(m, unidade, alvo)` binds the resolved
+`0x489b5a` handler at CALL `0x482e2e` in the frame providers. It consumes
+Combat's committed public `MensagensLuta.mensagem` synchronous behaviour9
+model over live unit views, live bonus queries and Core's `ResetOrdre` body.
+No attack, battle insertion/assignment or task-return algorithm is copied.
+The extra outer-dispatch reads are supported by the explicit native v2 entry
+spans. Core's minimal reset view binds only actual unit/structure memory and
+`BuscaViva`; it never initializes a world or invents missing fields. No solver
+or frame is advanced by the adapter. Existing owner domain errors/partial
+effects remain; the AI wrapper currently supports monster owner4.
+
+`detectar_registradores(m, regs)` requires all seven known data registers,
+returns the original handler's EAX/EDX and preserved other five, plus optional
+ESP+4. At S1: unit17, target8, group19, battle1; native EAX=`0x512380`, EDX=1.
+The enemy list gains target8/weight1/assigned damage40, unit17 gets the attack
+order, and waiting task1 resumes with result `0xffffffff`. Original mutation
+order is the existing owner model's; failures are not retried or rolled back.
+
+Fresh leased `validar_deteccao_conflito_ia.py`: **35/35 equal, zero mismatches**.
+One real S1 entry, 32 preserved-register sentinel cases, a duplicate call from
+the captured original post-state and a declared no-battle variant. Original
+native code and all native callees execute unchanged. Compare all seven
+registers/ESP, every final input/written byte, exact base-capture reproduction,
+and ordered non-unit byte stores. Combat's aliased unit-record API does not
+expose individual store hooks, so its in-record store order stays within
+Combat's existing native proof, not a new ordered-store claim here. The full
+native parent/adapter effects still compare byte for byte. Report:
+`validacao/deteccao-conflito-native.json`; own source hashes only are bound by
+the new test. Three focused tests pass. Setup failures (buffer protocol,
+overbroad Core world construction, incomplete post-state fixture) remain in
+the ignored attempt logs and are not counted as differential cases.
+
+Original v1 capture `a0fedec` precedes the adapter; additive v2 inputs/stores
+are committed at `efb98b1`. Strict/planning indicators and the complete domain
+gate follow this passing implementation checkpoint. Graphics' strict guard
+remains a separate dependency; no main merge/acceptance or pass-2 proof.

@@ -11,7 +11,7 @@ request all 16,922 remaining frames. Neither has a first difference.
 | 3276 / 3277 (historical) | MineGetCapacite `0x475541`, CALL `0x44ca17` | AI/runtime binding, Economy query | AX=mine index; native 0 → EAX=49. Fixed in `8b6f1c9`, 101 native comparisons/0 mismatches; passes current runs. |
 | 3850 / 3851 (historical) | SacGetCapacite `0x475736`, CALL `0x4299da` | Economy / AI-runtime binding | Native AX=`0x1f18`, object=`0x43`, quantity=4 → EAX=`0x47860004`, six other registers preserved. Bound in `377c625`, 274 fresh native comparisons/0 mismatches; passes current runs. |
 | **10800 / between_frames10801 (strict)** | AffGame `0x417698`, outer CALL `0x475063`, guard `0x41591f` | **Graphics** | Two-monster display domain; current guard supports 0/1. Extend native proof/guard for count=2; no logic difference before stop. Declared planning display bypass exists. |
-| **11662 / frame11663 (planning)** | iabDetection_AjouteEnnemiOuAlerteConflit `0x489b5a`, indirect CALL `0x482e2e` | **AI/runtime** | EAX=unit, EDX=target; group index at unit+0x10c, battle at group+0xc. Original in-situ capture queued before translation. |
+| **11662 / frame11663 (planning, rerun pending)** | iabDetection_AjouteEnnemiOuAlerteConflit `0x489b5a`, indirect CALL `0x482e2e` | **AI/runtime** | Native EAX=17, EDX=8, group19/battle1 → EAX=`0x512380`, EDX=1. Original capture `a0fedec`; existing Combat synchronous model now bound, 35 fresh native comparisons/0 mismatches. |
 
 Strict: **10,672 equal frames, 129–10800**,
 [s1-economia-strict.json](validacao/s1-economia-strict.json).
