@@ -1,0 +1,380 @@
+{
+  "abi": "1.5",
+  "abi_additions": [
+    "rl_passo_quadro_entrada",
+    "rl_eventos_entrada"
+  ],
+  "branch": "feat/codex-rust-engine",
+  "execution_note": "The initial M22 runner used its one-frame default. The257-phase claim uses the separately rerun --frames128 --m22 proof, not that smoke result.",
+  "gaps": [
+    "P3/P6/P7 stop at frame220, BatimentNextEtape type3, 0x426aff. P6 whole-state claim is only the183-phase reachable prefix of4544.",
+    "K1 stops at frame141, AffGame0x415b77, unsampled view origin.",
+    "Seven exact leaf dependencies remain; two out-of-frame leaf cases are explicitly skipped.",
+    "State13 execution, remaining provider/work-cycle/recruitment/combat wiring and initialized audio remain outside the pinned input composition domain.",
+    "Production glyph rendering stops at AffText0x459454; qualified probe pixel proofs use their explicit recorded non-execution contract. Graphics1.8+ is not ported.",
+    "No fresh original-x86 emulation; common optional emulation tests remain skipped.",
+    "9200-frame rendering was compared directly with original surfaces; Python comparison rerun on128 frames and the qualified probe windows.",
+    "Timings are on the shared MacBook. Release engine+render timing excludes initialization, proof work and app presentation; debug Metal smoke timing is correctness-only."
+  ],
+  "leaf": {
+    "cases": 666,
+    "completed": 659,
+    "completed_equal": 659,
+    "mismatches": 0,
+    "named_stops": 7,
+    "seconds": 159.64434333399998,
+    "skips": [
+      {
+        "case": "key_test_release",
+        "corpus": "pesquisas-paralelas/ia-runtime/evidencias/captura-entrada-ordens-ia.json",
+        "reason": "leaf polls a changing key stream; per-frame schema supplies a fixed key table",
+        "routine": "KeyTestRelease"
+      },
+      {
+        "case": "init_input_player",
+        "corpus": "pesquisas-paralelas/ia-runtime/evidencias/captura-entrada-ordens-ia.json",
+        "reason": "outside this input routine adapter",
+        "routine": "InitInputPlayer"
+      }
+    ],
+    "stops": [
+      {
+        "case": "process_tag14_structure_selected",
+        "routine": "ProcessInputGame",
+        "stop": "BatimentInitAttaqueSelect at 0x0045f13f",
+        "stop_equal": true
+      },
+      {
+        "case": "process_tag17_recruit",
+        "routine": "ProcessInputGame",
+        "stop": "InitRecruteTroupe at 0x0045f1a9",
+        "stop_equal": true
+      },
+      {
+        "case": "process_tag19_unload",
+        "routine": "ProcessInputGame",
+        "stop": "SetDechargeCaveEnginSelect at 0x0045f085",
+        "stop_equal": true
+      },
+      {
+        "case": "icon_action_structure",
+        "routine": "CalculIconeAction",
+        "stop": "CalculIconeAction structure selected at 0x0045e9bf",
+        "stop_equal": true
+      },
+      {
+        "case": "p2_minimap_right_held",
+        "routine": "InputGame",
+        "stop": "MiniMapSetPos at 0x0042bb5d",
+        "stop_equal": true
+      },
+      {
+        "case": "structure_selected_other_structure",
+        "routine": "InputGame",
+        "stop": "BatimentPeutAttaquer at 0x0042b2a3",
+        "stop_equal": true
+      },
+      {
+        "case": "page2_structure_selected",
+        "routine": "InputGame",
+        "stop": "BatimentPeutAttaquer at 0x0042a4dc",
+        "stop_equal": true
+      }
+    ],
+    "text_requests_compared": 13
+  },
+  "library_sha256": "7070b80561c84bc36cb3b4543f2a25d2e20bc8c6dc4318b754f1a73e159c38b2",
+  "merged_main_revision": "13dd53453ec604c5734434ce729b4ea73bc3d6b7",
+  "native_implementation_revision": "e41d7555b003a712777ee57f191377cb1320ef7d",
+  "no_input": {
+    "M22": {
+      "compared_bytes_per_phase": [
+        16022275
+      ],
+      "proof_seconds": 39.179764917,
+      "report": "m22-257.json.xz",
+      "summary": {
+        "complete_proof": true,
+        "phases_compared": 257,
+        "phases_equal": 257,
+        "phases_requested": 257,
+        "result": "equal"
+      },
+      "timing": {
+        "frames_completed": 128,
+        "frames_per_second": 96.78492318644024,
+        "rust_phase_seconds": 1.3225200349999664,
+        "scope": "C ABI phase execution only; excludes corpus replay, projection and comparison"
+      }
+    },
+    "M23": {
+      "report": "m23.json",
+      "scope": "ten_declared_opening_checkpoints",
+      "summary": {
+        "complete_proof": true,
+        "phases": 18401,
+        "phases_equal": 18401,
+        "result": "equal"
+      },
+      "timing": {
+        "frames_completed": 9200,
+        "frames_per_second": 83.21970499812542,
+        "rust_phase_seconds": 110.55074035899594
+      }
+    }
+  },
+  "probes": {
+    "K1": {
+      "frames_compared": 12,
+      "frames_equal": 12,
+      "native_phase_seconds": 0.14161145500001027,
+      "proof_seconds": 26.941092541,
+      "python_compared": true,
+      "report": "input-K1.json.xz",
+      "stop": {
+        "equal": true,
+        "frame": 141,
+        "inputs_equal": true,
+        "orders_equal": true,
+        "phase": 2,
+        "rust": "AffGame at 0x00415b77"
+      },
+      "whole_state": null
+    },
+    "P1": {
+      "frames_compared": 501,
+      "frames_equal": 501,
+      "native_phase_seconds": 6.408942034000006,
+      "proof_seconds": 233.43463570799997,
+      "python_compared": true,
+      "report": "input-P1.json.xz",
+      "stop": null,
+      "whole_state": {
+        "compared_bytes_per_phase": [
+          16019748
+        ],
+        "mask_bytes": 155587,
+        "phases_compared": 1002,
+        "phases_equal": 1002,
+        "phases_requested": 1002
+      }
+    },
+    "P2": {
+      "frames_compared": 601,
+      "frames_equal": 601,
+      "native_phase_seconds": 6.791956377999888,
+      "proof_seconds": 239.676777791,
+      "python_compared": true,
+      "report": "input-P2.json.xz",
+      "stop": null,
+      "whole_state": {
+        "compared_bytes_per_phase": [
+          16014614
+        ],
+        "mask_bytes": 160721,
+        "phases_compared": 1202,
+        "phases_equal": 1202,
+        "phases_requested": 1202
+      }
+    },
+    "P3": {
+      "frames_compared": 91,
+      "frames_equal": 91,
+      "native_phase_seconds": 1.536890492000019,
+      "proof_seconds": 37.018873875000004,
+      "python_compared": true,
+      "report": "input-P3.json.xz",
+      "stop": {
+        "equal": true,
+        "frame": 220,
+        "inputs_equal": true,
+        "orders_equal": true,
+        "phase": 3,
+        "rust": "BatimentNextEtape type 3 at 0x00426aff"
+      },
+      "whole_state": null
+    },
+    "P6": {
+      "frames_compared": 91,
+      "frames_equal": 91,
+      "native_phase_seconds": 1.3016166230000792,
+      "proof_seconds": 74.60526837500001,
+      "python_compared": true,
+      "report": "input-P6.json.xz",
+      "stop": {
+        "equal": true,
+        "frame": 220,
+        "inputs_equal": true,
+        "orders_equal": true,
+        "phase": 3,
+        "rust": "BatimentNextEtape type 3 at 0x00426aff"
+      },
+      "whole_state": {
+        "compared_bytes_per_phase": [
+          16002289
+        ],
+        "mask_bytes": 173046,
+        "phases_compared": 183,
+        "phases_equal": 183,
+        "phases_requested": 4544
+      }
+    },
+    "P7": {
+      "frames_compared": 91,
+      "frames_equal": 91,
+      "native_phase_seconds": 1.1940774159999563,
+      "proof_seconds": 39.852350875,
+      "python_compared": true,
+      "report": "input-P7.json.xz",
+      "stop": {
+        "equal": true,
+        "frame": 220,
+        "inputs_equal": true,
+        "orders_equal": true,
+        "phase": 3,
+        "rust": "BatimentNextEtape type 3 at 0x00426aff"
+      },
+      "whole_state": null
+    }
+  },
+  "reader_revision": "8d60b00a95206e5cd184b1444309df1f837cf1dc",
+  "reference_revisions": {
+    "P6_evidence": "16b63ac39b377cf4e86a5728475634e8f2e9f33e",
+    "graphics": "ce441852bcada750a8f91da8ed3302f1668c4405",
+    "input": "a7f5d4939e7826e02a8b348995edb9c793657f4c",
+    "logic": "7ceeff909b52b7d4f59723f35dfe43a9deda41ff"
+  },
+  "renderer": {
+    "contract": "Graphics 1.7",
+    "proofs": {
+      "128": {
+        "full_frames": 128,
+        "original_equal": 128,
+        "python_equal": 128,
+        "report": "render/128.json.xz",
+        "timing": {
+          "end_to_end_fps": 62.94162245652814,
+          "engine_seconds": 1.4429537910000034,
+          "render_fps": 216.70062300531623,
+          "render_seconds": 0.5906766590000059,
+          "scope": "C ABI engine phases + world generation + render + caller buffer copies; timing excludes proof snapshots/Python/exports/presentation; initialization excluded"
+        }
+      },
+      "9200": {
+        "full_frames": 9200,
+        "original_equal": 9200,
+        "python_equal": 0,
+        "report": "render/9200.json.xz",
+        "timing": {
+          "end_to_end_fps": 56.43680421211332,
+          "engine_seconds": 116.0284129739993,
+          "render_fps": 195.80392879526826,
+          "render_seconds": 46.98577835799955,
+          "scope": "C ABI engine phases + world generation + render + caller buffer copies; timing excludes proof snapshots/Python/exports/presentation; initialization excluded"
+        }
+      },
+      "P1": {
+        "full_equal": 501,
+        "proof_seconds": 67.316272083,
+        "report": "render/P1.json.xz",
+        "scope": "published exact recorded AffText non-execution contract; not glyph reconstruction"
+      },
+      "P2": {
+        "full_equal": 601,
+        "proof_seconds": 82.811677083,
+        "report": "render/P2.json.xz",
+        "scope": "published exact recorded AffText non-execution contract; not glyph reconstruction"
+      },
+      "P3": {
+        "full_equal": 172,
+        "proof_seconds": 23.347682209,
+        "report": "render/P3.json.xz",
+        "scope": "published exact recorded AffText non-execution contract; not glyph reconstruction"
+      }
+    }
+  },
+  "round3": {
+    "cases": 203,
+    "completed_equal": 201,
+    "mismatches": 0,
+    "named_stops": 2
+  },
+  "schema": "rising-lands/rust-engine-stage4-delivery/1",
+  "validated_merge_revision": "7b3f58dc52975b2514f3adac92bb8291c21dc985",
+  "validation": {
+    "common": {
+      "lease": {
+        "events": [
+          {
+            "at": "2026-10-30T02:59:43.015699+00:00",
+            "event": "wait"
+          },
+          {
+            "at": "2026-10-30T02:59:43.016042+00:00",
+            "event": "grant",
+            "slots": [
+              1
+            ]
+          },
+          {
+            "at": "2026-10-30T03:06:37.876101+00:00",
+            "event": "release",
+            "slots": [
+              1
+            ]
+          },
+          {
+            "at": "2026-10-30T03:06:37.877115+00:00",
+            "code": 0,
+            "event": "exit"
+          }
+        ],
+        "execution_seconds": 414.860059,
+        "queue_seconds": 0.000343
+      },
+      "optional_skips": 621,
+      "passed": true,
+      "tests": 1982
+    },
+    "engine_gate": {
+      "c_layout": true,
+      "input_contract_checks": 5,
+      "isolated_renderer_checks": 10,
+      "lease": {
+        "events": [
+          {
+            "at": "2026-10-30T02:59:43.015163+00:00",
+            "event": "wait"
+          },
+          {
+            "at": "2026-10-30T02:59:43.015637+00:00",
+            "event": "grant",
+            "slots": [
+              0
+            ]
+          },
+          {
+            "at": "2026-10-30T03:04:32.946762+00:00",
+            "event": "release",
+            "slots": [
+              0
+            ]
+          },
+          {
+            "at": "2026-10-30T03:04:32.947166+00:00",
+            "code": 0,
+            "event": "exit"
+          }
+        ],
+        "execution_seconds": 289.931125,
+        "queue_seconds": 0.000474
+      },
+      "metal_128_surfaces": true,
+      "passed": true,
+      "pilot_records_equal": 75,
+      "python_discovered_tests": 63,
+      "rust_tests": 28,
+      "swift_abi": true
+    }
+  }
+}

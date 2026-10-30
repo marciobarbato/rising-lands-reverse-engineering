@@ -1,0 +1,40 @@
+{
+  "commands": [
+    [
+      "sh",
+      "motor/validate.sh"
+    ],
+    [
+      "python3",
+      "-B",
+      "scripts/check.py"
+    ],
+    [
+      "python3",
+      "-B",
+      "motor/testes/player_leaf_proof.py",
+      "--binary",
+      "motor/target/release/player_fixtures",
+      "--output",
+      ".local/recheck-leaf.json"
+    ],
+    [
+      "python3",
+      "-B",
+      "motor/testes/frame_differential.py",
+      "--frames",
+      "128",
+      "--m22",
+      "--library",
+      "motor/target/release/librising_engine.dylib",
+      "--output",
+      ".local/recheck-m22.json"
+    ]
+  ],
+  "input_proofs": "P1/P2/P6: player_proof.py --probe NAME --python --whole-state --library ... --output fresh.json; P3/P7/K1 omit --whole-state.",
+  "lease_wrapper": "/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py",
+  "long_proof": "Run verify, each part0..9 as an individually leased job, then aggregate; see m23-plan.json and initial-battery-commands.json.",
+  "per_job_timeout_seconds": 1140,
+  "renderer_proofs": "Commands are in initial-battery-commands.json; every native job is separately leased.",
+  "source_revision": "7b3f58dc52975b2514f3adac92bb8291c21dc985"
+}

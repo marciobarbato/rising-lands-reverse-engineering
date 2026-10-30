@@ -262,7 +262,11 @@ fn body(
         match call(m, "PlayerGetType", &[player])? as u8 {
             1 => {
                 if player == u32::from(local) {
-                    frame_input::input(m, local, events)?;
+                    if m.player.is_some() {
+                        crate::player_input::input(m, u32::from(local))?;
+                    } else {
+                        frame_input::input(m, local, events)?;
+                    }
                     call(m, "InputSend", &[player])?;
                 } else {
                     return stop("InputReceive", 0x45ed03);
@@ -272,7 +276,11 @@ fn body(
                 let mission = call(m, "MissionGetNum", &[])?;
                 call(m, "CalculNextReflect", &[player, mission])?;
                 if player == u32::from(local) {
-                    frame_input::input(m, local, events)?;
+                    if m.player.is_some() {
+                        crate::player_input::input(m, u32::from(local))?;
+                    } else {
+                        frame_input::input(m, local, events)?;
+                    }
                 }
             }
             _ => {}
@@ -280,7 +288,11 @@ fn body(
     }
     m.set_u8(0x4e2480, local)?;
     for player in 0..4 {
-        call(m, "ProcessInputGame", &[player])?;
+        if m.player.is_some() {
+            crate::player_orders::process(m, player)?;
+        } else {
+            call(m, "ProcessInputGame", &[player])?;
+        }
     }
     let state = m.u8(0x4e2f78)?;
     if state == 0x12 || (state == 0x10 && m.u8(0x4e0730)? != 0) {
@@ -297,7 +309,11 @@ fn body(
             "UpdateChamp",
             "CalculMatiere",
         ] {
-            call(m, name, &[])?;
+            if name == "CalculIconeAction" && m.player.is_some() {
+                crate::player_input::icons(m)?;
+            } else {
+                call(m, name, &[])?;
+            }
         }
         let p = u32::from(m.u8(0x508041)?);
         call(m, "CalculCompteurMarche", &[p])?;
@@ -354,6 +370,9 @@ pub fn phase(
             body(m, &input, &mut events, ebx)?;
         }
         2 => {
+            if m.player.is_some() {
+                return crate::player_loop::between(m, input);
+            }
             let eax = frame_input::affgame(m)?;
             if m.u8(0x5099af)? != 0 {
                 m.set_u8(0x5099af, 0)?;
