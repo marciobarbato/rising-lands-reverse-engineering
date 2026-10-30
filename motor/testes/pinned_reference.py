@@ -19,6 +19,7 @@ import tarfile
 
 REPO = Path(__file__).resolve().parents[2]
 LOGIC_REVISION = '7ceeff909b52b7d4f59723f35dfe43a9deda41ff'
+INPUT_REVISION = 'a7f5d4939e7826e02a8b348995edb9c793657f4c'
 GRAPHICS_REVISION = 'ce441852bcada750a8f91da8ed3302f1668c4405'
 ROOTS = ('ferramentas', 'integracao', 'pesquisas-paralelas', 'evidencias', 'relatorios')
 GRAPHICS = 'pesquisas-paralelas/graficos-animacao'
@@ -71,12 +72,15 @@ def link_missing(path, target):
 
 @functools.lru_cache(maxsize=1)
 def source_root():
-    for revision in (LOGIC_REVISION, GRAPHICS_REVISION):
+    profile = os.environ.get("RL_REFERENCE_PROFILE", "logic")
+    if profile not in ("logic", "input"): raise ValueError("Unknown engine reference profile")
+    logic_revision = INPUT_REVISION if profile == "input" else LOGIC_REVISION
+    for revision in (logic_revision, GRAPHICS_REVISION):
         try:
             git('cat-file', '-e', revision + '^{commit}')
         except subprocess.CalledProcessError as error:
             raise RuntimeError('Pinned reference commit unavailable; fetch ' + revision) from error
-    expected = entries(LOGIC_REVISION, ROOTS)
+    expected = entries(logic_revision, ROOTS)
     expected = {p: v for p, v in expected.items() if not p.startswith(GRAPHICS + '/')}
     expected.update(entries(GRAPHICS_REVISION, (GRAPHICS,)))
     identity = hashlib.sha256(json.dumps(expected, sort_keys=True).encode()).hexdigest()
@@ -89,11 +93,11 @@ def source_root():
         if not ready.exists():
             if target.exists(): shutil.rmtree(target)
             target.mkdir()
-            archive(LOGIC_REVISION, ROOTS, target)
+            archive(logic_revision, ROOTS, target)
             shutil.rmtree(target / GRAPHICS)
             archive(GRAPHICS_REVISION, (GRAPHICS,), target)
-            ready.write_text(json.dumps(dict(logic=LOGIC_REVISION, graphics=GRAPHICS_REVISION, tree_manifest_sha256=identity)) + '\n')
-        if json.loads(ready.read_text()) != dict(logic=LOGIC_REVISION, graphics=GRAPHICS_REVISION, tree_manifest_sha256=identity):
+            ready.write_text(json.dumps(dict(logic=logic_revision, graphics=GRAPHICS_REVISION, tree_manifest_sha256=identity)) + '\n')
+        if json.loads(ready.read_text()) != dict(logic=logic_revision, graphics=GRAPHICS_REVISION, tree_manifest_sha256=identity):
             raise ValueError('Pinned reference cache identity changed')
         # Validate actual cached bytes against the immutable Git tree, including
         # transitive modules and fixtures. A corrupt cache is a hard error.

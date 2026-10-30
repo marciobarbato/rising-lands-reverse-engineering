@@ -1,0 +1,69 @@
+{
+  "revision": "8d60b00a95206e5cd184b1444309df1f837cf1dc",
+  "library_sha256": "7070b80561c84bc36cb3b4543f2a25d2e20bc8c6dc4318b754f1a73e159c38b2",
+  "jobs": [
+    {
+      "tag": "common-final",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "scripts/check.py"
+      ]
+    },
+    {
+      "tag": "gate-final",
+      "command": [
+        "sh",
+        "motor/validate.sh"
+      ]
+    },
+    {
+      "tag": "P6-whole",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/player_proof.py",
+        "--probe",
+        "P6",
+        "--python",
+        "--whole-state",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/P6-whole.json"
+      ]
+    },
+    {
+      "tag": "P1-reader",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/player_proof.py",
+        "--probe",
+        "P1",
+        "--python",
+        "--whole-state",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/P1-reader.json"
+      ]
+    },
+    {
+      "tag": "P2-reader",
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-B",
+        "motor/testes/player_proof.py",
+        "--probe",
+        "P2",
+        "--python",
+        "--whole-state",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/stage4-restart/P2-reader.json"
+      ]
+    }
+  ]
+}

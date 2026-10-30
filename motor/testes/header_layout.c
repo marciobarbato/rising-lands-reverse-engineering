@@ -19,3 +19,8 @@ _Static_assert(sizeof(RlRenderResult)==304, "render result");
 _Static_assert(offsetof(RlRenderResult,generation)==8, "render generation alignment");
 _Static_assert(offsetof(RlRenderResult,stop_address)==56, "render stop address");
 _Static_assert(sizeof(RlRenderObservation)==108, "render observation");
+
+_Static_assert(sizeof(RlDeclaredInput)==48, "declared input layout");
+_Static_assert(sizeof(RlPlayerInputEvent)==64, "input event layout");
+_Static_assert(sizeof(RlInputMessage)==12, "message layout");
+_Static_assert(sizeof(RlInputKey)==8, "key layout");

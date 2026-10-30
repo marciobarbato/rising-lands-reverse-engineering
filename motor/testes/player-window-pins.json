@@ -1,0 +1,12 @@
+{
+  "evidence_sha256": {
+    "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.manifest.json": "9e66bb4fd23dae0777a983820b54952bedb11f3b4ab0b84a6481340945de754f",
+    "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte00.json.xz": "0d630ac6c154f98b853691e13c1b8974a1bdef7e63097c387b5949c6c49369bf",
+    "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte01.json.xz": "03976fb9ce9c539d1231fa130c0b8c875dceb26284e9e0eec5c8e1b05a7bb17c",
+    "pesquisas-paralelas/missoes/m3/sondas/P6/captura-janela.parte02.json.xz": "ee60b91ceae622134e5342f5311b67600490647664864adafed2df4d260288e6",
+    "pesquisas-paralelas/missoes/m3/sondas/P6/mascara-janela.json": "56cf9039a04d32bfbea4a4098a1111f4d7f59669028d633fadb41e06e3c05dbb",
+    "pesquisas-paralelas/missoes/m3/sondas/P6/politica-janela.json": "55e0906fccb4f41340b8bee780c56ed0d4ee72cb3a47bf5c2a55553c5c5f0275"
+  },
+  "revision": "16b63ac39b377cf4e86a5728475634e8f2e9f33e",
+  "schema": "rising-lands/rust-player-window-pins/1"
+}

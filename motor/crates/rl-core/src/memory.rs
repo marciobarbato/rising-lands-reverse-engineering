@@ -5,6 +5,8 @@ use std::collections::BTreeMap;
 #[derive(Debug, Clone, Default, PartialEq, Eq)]
 pub struct MemoriaJogo {
     blocks: BTreeMap<u32, Vec<u8>>,
+    /// Transaction-local declared input, never part of projected game bytes.
+    pub(crate) player: Option<crate::player::Runtime>,
 }
 impl MemoriaJogo {
     pub fn from_blocks(blocks: impl IntoIterator<Item = (u32, Vec<u8>)>) -> Result<Self> {

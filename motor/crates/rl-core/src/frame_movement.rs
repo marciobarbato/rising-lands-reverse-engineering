@@ -299,9 +299,20 @@ pub fn advance(m: &mut MemoriaJogo, i: u32, discount: u8) -> Result<u32> {
         occupy(m, i, dest, true)?;
         frame_spawn::minimap(m, owner, current, 5)?;
         if !matches!(owner, 4 | 200) {
-            return Err(stop("AvanceEngin EteintTerrain", 0x476e82));
+            crate::player_sight::area(
+                m,
+                current,
+                u32::from(m.u8(u + 0xbb)?) + u32::from(m.u8(u + 0xf5)?),
+                owner,
+                2,
+            )?;
         }
         m.set_u16(u + 8, dest)?;
+        if !matches!(owner, 4 | 200) {
+            let radius = u32::from(m.u8(u + 0xbb)?) + u32::from(m.u8(u + 0xf5)?);
+            crate::player_sight::area(m, dest, radius + 2, owner, 0)?;
+            crate::player_sight::area(m, dest, radius, owner, 1)?;
+        }
         frame_spawn::minimap(m, owner, dest, 4)?;
         let route = frame_path::route(m, i)?;
         let n = m.u16(route)?;
