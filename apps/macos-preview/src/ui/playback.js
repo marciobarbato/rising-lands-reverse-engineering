@@ -53,6 +53,8 @@ window.runSmokeTests=async()=>{
  check('actual NSEvent path and native recording indicator',nativeInput.recordingIndicator.includes('Gravando entrada'));
  for(let i=0;i<4;i++)await run('live-step');
  await request('record-native-smoke',{stage:'release'});await recordChain;
+ await request('record-native-smoke',{stage:'right'});await recordChain;
+ for(let i=0;i<4;i++)await run('live-step');
  $('record-input').click();await until(()=>!recording&&!recordToggleBusy,'recording stopped');
  $('export-input').click();await until(()=>window.lastInputExport?.saved===true,'scripted input exported');
  const exported=window.lastInputExport,rows=exported.script.frames;
@@ -60,6 +62,7 @@ window.runSmokeTests=async()=>{
  const moved=rows.find(r=>r.messages?.some(m=>m[0]===0x200));
  const up=rows.find(r=>r.messages?.some(m=>m[0]===0x202));
  check('native save action exports Missions schema and k/k+1/k+3 click',exported.script.schema==='rising-lands/monde01-scripted-input/1'&&down.frame===moved.frame+1&&up.frame===moved.frame+3&&!!exported.sha256);
+ check('right NSEvents remain right-button messages',rows.some(r=>r.messages?.some(m=>m[0]===0x204))&&rows.some(r=>r.messages?.some(m=>m[0]===0x205)));
  check('recorded Ctrl stays held through click and never enters engine',rows.filter(r=>r.frame>=moved.frame&&r.frame<=up.frame).every(r=>r.keys?.['0x11']===-32768)&&!image.live_stop&&image.input_policy==='record-only');
 
  return {passed:true,tests,commit:image.commit,scenario:image.scenario,render:image.render.status,

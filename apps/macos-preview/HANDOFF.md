@@ -1621,3 +1621,16 @@ No original capture, pin or mask is changed. No main merge/push or acceptance.
 The three 75-second ordered UI runs are still queued for the unmodified exclusive
 heavy lease. This duration allows >=65 seconds with input enabled after the real
 128-frame prefix at nominal 20 Hz. No sustained UI result is claimed yet.
+
+
+The initial B44 ordered UI attempts are preserved in `m3-abi16-orders*.json` and
+PNGs. All three fail at AffText `0x459454` (frame 386 at caps; frame 395 uncapped).
+The real diagnostics contain order tags 1,5,5: the intended right click was
+misclassified as another left-click move. NSEvent.mouseEvent can construct a
+right event with buttonNumber 0. Native right responders now identify the
+message from event.type, retaining Control-left events as left. The new UI
+recording check asserts actual 0x204/0x205 responder output as well as the old
+Ctrl-left stream; the native mapper regression now compares right-click phases
+and verifies the real selection count reaches zero. The failed artifacts and
+paused tails are unchanged. This corrects the benchmark input gesture, not the
+renderer: AffText and selected-unit fatigue remain explicit dependencies.

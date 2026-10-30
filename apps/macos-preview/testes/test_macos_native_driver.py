@@ -80,12 +80,14 @@ class NativeDriverTests(unittest.TestCase):
         events=[(130,dict(kind='mouse',msg=0x201,x=560,y=528,wParam=0)),
                 (131,dict(kind='mouse',msg=0x202,x=560,y=528,wParam=0)),
                 (134,dict(kind='mouse',msg=0x200,x=400,y=272,wParam=0)),
-                (136,dict(kind='key',vkey=17,down=True)),(138,dict(kind='key',vkey=17,down=False))]
+                (136,dict(kind='key',vkey=17,down=True)),(138,dict(kind='key',vkey=17,down=False)),
+                (139,dict(kind='mouse',msg=0x204,x=400,y=272,wParam=0)),
+                (140,dict(kind='mouse',msg=0x205,x=400,y=272,wParam=0))]
         recorder=MacOSSessionRecorder(ROOT)
         for frame,event in events:recorder.event(frame,event)
-        mapper=FrameAnswerMapper(recorder.export_script(stop_frame=140),hwnd=0)
+        mapper=FrameAnswerMapper(recorder.export_script(stop_frame=148),hwnd=0)
         f=Frames(e)
-        for frame in range(129,141):
+        for frame in range(129,149):
             for stamp,event in events:
                 if stamp==frame:self.assertEqual(human.event(event),0)
             # This independent mapper supplies exactly the recorded descriptor.
@@ -97,5 +99,9 @@ class NativeDriverTests(unittest.TestCase):
                 self.assertEqual(f.snapshot(human.status().world),f.snapshot(scripted.status().world))
                 self.assertEqual(bytes(human.context()),bytes(scripted.context()))
             mapper.queue.clear()  # This test compares complete states; Test A compares actual polls.
-        self.assertEqual(human.status().frames,140)
+        self.assertEqual(human.status().frames,148)
+        import struct
+        blocks=f.snapshot(human.status().world)
+        base,data=next((b,v) for b,v in blocks.items() if b<=0x508728< b+len(v))
+        self.assertEqual(struct.unpack_from('<H',data,0x508728-base)[0],0)
         self.assertEqual(human.status().proof_ns,0)

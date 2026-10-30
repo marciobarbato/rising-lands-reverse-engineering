@@ -1,0 +1,22 @@
+{
+ "command": [
+  "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+  "-B",
+  "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/scripts/benchmark_native_macos.py",
+  "--app",
+  "/Users/marcio/git/Rising Lands/local-data/macos-playable/dist/development/RisingLands-ptbr.app",
+  "--output",
+  "/Users/marcio/git/Rising Lands/worktrees/macos-playable/apps/macos-preview/validation/m3-abi16-orders20.json",
+  "--mode",
+  "play",
+  "--game-fps",
+  "20",
+  "--seconds",
+  "75",
+  "--orders"
+ ],
+ "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable",
+ "seconds": 77.925980334,
+ "exit_code": 1,
+ "source": "b44fe804a696413f79904b9d36b01f30138cfac5"
+}

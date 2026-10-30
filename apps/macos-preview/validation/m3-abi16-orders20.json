@@ -1,0 +1,291 @@
+{
+  "benchmark_gestures" : [
+    {
+      "gesture" : 0,
+      "observedNextFrame" : 136
+    },
+    {
+      "gesture" : 1,
+      "observedNextFrame" : 144
+    },
+    {
+      "gesture" : 2,
+      "observedNextFrame" : 152
+    },
+    {
+      "gesture" : 3,
+      "observedNextFrame" : 160
+    }
+  ],
+  "benchmark_order_tags" : [
+    1,
+    5,
+    5
+  ],
+  "blocks" : 0,
+  "bytes" : 0,
+  "checkpoint_verified" : false,
+  "commit" : "b44fe804a696413f79904b9d36b01f30138cfac5",
+  "execution_mode" : "play",
+  "first_stop_snapshot" : {
+    "benchmark_order_tags" : [
+      1,
+      5,
+      5
+    ],
+    "blocks" : 0,
+    "bytes" : 0,
+    "checkpoint_verified" : false,
+    "execution_mode" : "play",
+    "input_policy" : "live-orders",
+    "live_stop" : {
+      "detail" : "AffText at 0x00459454: AffText glyph renderer is not supplied; published probes declare non-execution",
+      "phase" : "frame386",
+      "type" : "NativeStop"
+    },
+    "memory" : [
+
+    ],
+    "mode" : "live-rust-no-input",
+    "native_engine_binding" : "static-abi16",
+    "native_metal" : true,
+    "native_metrics" : {
+      "declaredFrames" : 257,
+      "displayError" : null,
+      "displayFPS" : 118.26940155610667,
+      "drawableWaitSeconds" : 15.201957083267189,
+      "executionMode" : "play",
+      "fps" : 19.997241809003544,
+      "frames" : 385,
+      "gameFPS" : 20,
+      "gpuSeconds" : 0.32404024996503722,
+      "humanEvents" : 7,
+      "metalSeconds" : 0,
+      "minOneSecondFPS" : 115,
+      "oneSecondPresentations" : [
+        116,
+        119,
+        120,
+        119,
+        119,
+        117,
+        118,
+        118,
+        119,
+        120,
+        118,
+        118,
+        119,
+        119,
+        120,
+        120,
+        115,
+        115,
+        118
+      ],
+      "presented" : 2277,
+      "proofSeconds" : 0,
+      "publicationDrops" : 0,
+      "published" : 386,
+      "renderSeconds" : 0.66984299999999997,
+      "rustSeconds" : 0.43830200000000002,
+      "seconds" : 19.252655125001183,
+      "submitSeconds" : 0.23407604176463792,
+      "submitted" : 2282,
+      "traceFirstSecond" : 0,
+      "uniqueGameFramesPresented" : 385,
+      "uploadSeconds" : 0.075862375022552442
+    },
+    "native_running" : false,
+    "native_window_visible" : true,
+    "observed" : {
+      "counter" : {
+        "address" : "0x508f7c",
+        "bytes" : 4,
+        "value" : 385
+      }
+    },
+    "phase" : "frame385",
+    "phase_index" : 770,
+    "phases" : [
+      "frame385"
+    ],
+    "render" : {
+      "backend" : "Rust ABI 1.6 + Metal",
+      "equals_native_phase_end" : null,
+      "hud" : true,
+      "native_phase_end_sha256" : null,
+      "status" : "partial",
+      "version" : [
+        1,
+        7
+      ]
+    },
+    "scenario" : "MONDE01 · ordens ao vivo",
+    "summary_sha256" : "",
+    "summary_verified" : false,
+    "verified_checkpoints" : 0,
+    "verified_phases" : 0,
+    "verified_surfaces" : 0
+  },
+  "input_policy" : "live-orders",
+  "live_stop" : {
+    "detail" : "AffText at 0x00459454: AffText glyph renderer is not supplied; published probes declare non-execution",
+    "phase" : "frame386",
+    "type" : "NativeStop"
+  },
+  "mainTimerMaxDelayMS" : 2.0232499984558645,
+  "mainTimerMaxGapMS" : 52.023249998455867,
+  "mainTimerPulses" : 1527,
+  "memory" : [
+
+  ],
+  "metal_readback" : {
+    "path" : "\/Users\/marcio\/git\/Rising Lands\/worktrees\/macos-playable\/apps\/macos-preview\/validation\/m3-abi16-orders20.png",
+    "pixelsChecked" : 1920000,
+    "sha256" : "2196a5b5f36f3abcff0848afe3c8b69655da6ba48b416ae43e2486195c667e3d",
+    "transport" : "async-slot-texture"
+  },
+  "mode" : "live-rust-no-input",
+  "native_engine_binding" : "static-abi16",
+  "native_metal" : true,
+  "native_metrics" : {
+    "declaredFrames" : 257,
+    "displayError" : null,
+    "displayFPS" : 29.860777349288956,
+    "drawableWaitSeconds" : 15.201957083267189,
+    "executionMode" : "play",
+    "fps" : 5.0400698287927437,
+    "frames" : 385,
+    "gameFPS" : 20,
+    "gpuSeconds" : 0.32404024996503722,
+    "humanEvents" : 7,
+    "metalSeconds" : 0,
+    "minOneSecondFPS" : 0,
+    "oneSecondPresentations" : [
+      116,
+      119,
+      120,
+      119,
+      119,
+      117,
+      118,
+      118,
+      119,
+      120,
+      118,
+      118,
+      119,
+      119,
+      120,
+      120,
+      115,
+      115,
+      118,
+      34,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "presented" : 2281,
+    "proofSeconds" : 0,
+    "publicationDrops" : 0,
+    "published" : 386,
+    "renderSeconds" : 0.66984299999999997,
+    "rustSeconds" : 0.43830200000000002,
+    "seconds" : 76.387830541669246,
+    "submitSeconds" : 0.23407604176463792,
+    "submitted" : 2282,
+    "traceFirstSecond" : 0,
+    "uniqueGameFramesPresented" : 385,
+    "uploadSeconds" : 0.075862375022552442
+  },
+  "native_running" : false,
+  "native_window_unoccluded" : true,
+  "native_window_visible" : true,
+  "observed" : {
+    "counter" : {
+      "address" : "0x508f7c",
+      "bytes" : 4,
+      "value" : 385
+    }
+  },
+  "passed" : false,
+  "phase" : "frame385",
+  "phase_index" : 770,
+  "phases" : [
+    "frame385"
+  ],
+  "render" : {
+    "backend" : "Rust ABI 1.6 + Metal",
+    "equals_native_phase_end" : null,
+    "hud" : true,
+    "native_phase_end_sha256" : null,
+    "status" : "partial",
+    "version" : [
+      1,
+      7
+    ]
+  },
+  "requestedSeconds" : 75,
+  "scenario" : "MONDE01 · ordens ao vivo",
+  "screenMaximumFPS" : 120,
+  "summary_sha256" : "",
+  "summary_verified" : false,
+  "verified_checkpoints" : 0,
+  "verified_phases" : 0,
+  "verified_surfaces" : 0
+}

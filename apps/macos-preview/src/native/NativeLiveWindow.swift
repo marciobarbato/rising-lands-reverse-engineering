@@ -131,8 +131,8 @@ final class NativeMetalGameView: NSView {
     override func rightMouseDragged(with event:NSEvent){mouse(event,0x200)}
     override func mouseDown(with event:NSEvent){mouse(event,event.clickCount>1 && event.clickCount%2==0 ? 0x203:0x201)}
     override func mouseUp(with event:NSEvent){mouse(event,0x202)}
-    override func rightMouseDown(with event:NSEvent){mouse(event,event.buttonNumber==0 ? 0x201:0x204)}
-    override func rightMouseUp(with event:NSEvent){mouse(event,event.buttonNumber==0 ? 0x202:0x205)}
+    override func rightMouseDown(with event:NSEvent){mouse(event,event.type == .rightMouseDown ? 0x204:0x201)}
+    override func rightMouseUp(with event:NSEvent){mouse(event,event.type == .rightMouseUp ? 0x205:0x202)}
     func key(_ key:Int,_ down:Bool){if down{heldKeys.insert(key)}else{heldKeys.remove(key)};inputEvent?(["kind":"key","vkey":key,"down":down])}
     override func keyDown(with event:NSEvent){synchronizeModifiers(event.modifierFlags);if let k=[36:13,76:13,53:27,49:32,123:37,126:38,124:39,125:40,117:46,7:88,29:48,18:49,19:50,20:51,21:52,23:53,22:54,26:55,28:56,25:57][Int(event.keyCode)]{key(k,true)}}
     override func keyUp(with event:NSEvent){synchronizeModifiers(event.modifierFlags);if let k=[36:13,76:13,53:27,49:32,123:37,126:38,124:39,125:40,117:46,7:88,29:48,18:49,19:50,20:51,21:52,23:53,22:54,26:55,28:56,25:57][Int(event.keyCode)]{key(k,false)}}
