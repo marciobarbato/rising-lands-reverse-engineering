@@ -1,0 +1,16 @@
+[lease] graphics-harvest-P4-e waiting
+[lease] graphics-harvest-P4-e granted slots [1]
+P4 2529 isolated original origin (10, 16) returned
+P4 2550 native surface/state equal
+P4 2600 native surface/state equal
+P4 2650 native surface/state equal
+P4 2700 native surface/state equal
+P4 2750 native surface/state equal
+P4 2800 native surface/state equal
+P4 2850 native surface/state equal
+P4 2900 native surface/state equal
+P4 2950 native surface/state equal
+P4 3000 native surface/state equal
+P4 3050 native surface/state equal
+P4 3100 native surface/state equal
+{"probe": "P4", "frames": [2529, 3129], "status": "complete", "seconds": 307.639, "drawn": 601, "snapshot": {"path": ".local/graficos-api17-start/P4-03129.pickle", "sha256": "bbfabc71b76596216923ac599f1103350f81e9e5c2b51997bd33a8dad3f2657b"}, "text_boundaries": 0, "text_pointer_reads": 601}
