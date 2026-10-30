@@ -1,0 +1,102 @@
+{
+ "milestone": "M3.1 (partial) — scripted-input window P6 (CAVE order, construction, colonist lodging in the cave, work cycle; frames 129-2400) of MONDE01: the Python chain equals the original whole-state in every phase",
+ "decision": "ACCEPTED (P6 part)",
+ "m3_1_decision": "OPEN: P1/P2 (accepted at c9c85eb) and P6 (this record) are accepted; the S1 order-issue windows remain (pass-2 S1 capture landing on feat/re-missions; chain stop at frame 2547 resolved by Core 8b7f160 and Economy 394712e, AI/runtime wiring pending)",
+ "decided_at": "2026-10-30 12:55 BRT",
+ "decided_by": "coordinator (Claude) on committed-main reproduction on two machines (MacBook and Mac mini)",
+ "main": "92fab50ccfa14271f6657fc0f6032b6b4b68dd4b (merge of feat/re-ai-runtime with the strict P6 proof)",
+ "scope": "Display scenario -v2, MONDE01 new campaign, declared Windows inputs, Missions probe P6 scripted input (pass-2 whole-state capture), 4,544 phases in three parts; same comparison method as M2.3/M3.1 P1/P2: whole state under the window's cumulative display-only mask with writer/reader proof, RNGs, bindings and boundaries outside display, allocation count, registers, HUD flag, consumed inputs, WndProc flags, order records and the M3.1 order fields of all 800 unit slots unmasked. Includes CreerBatiment at 220, the CAVE body to completion at 1812, the colonist lodging at 2178 (owner 0xc8 -> 0, cave count 1, objective mark 0x4e1d88 = 1) and the work cycle to 2400.",
+ "proof": {
+  "path": "pesquisas-paralelas/ia-runtime/validacao/m3-1-prova-p6.json",
+  "sha256": "f26c9b3081413621a3eb1b75e70611d004fa90d9acd3e00bffbd5598f4614eb4",
+  "summary": {
+   "crossings": 0,
+   "phases": 4544,
+   "phases_equal": 4544,
+   "reach": {
+    "P6": {
+     "equal_parts": [
+      0,
+      1,
+      2
+     ],
+     "equal_parts_from_start": 3,
+     "equal_through_frame": 2400,
+     "first_stop": null,
+     "parts": 3
+    }
+   },
+   "result": "equal",
+   "windows": {
+    "P6": "4544/4544"
+   }
+  },
+  "part_chains": {
+   "0": "a3f35dfc7701065f135f5b50046f1ce9d416f7190d2a0d1e65186cda3086df98",
+   "1": "5da71fab9ac33cb3ed067a9c962bea9e6612a7a57ee1fdfe01b99b34122924f6",
+   "2": "c557167f801fbdc01f4b733880f016cf65d42e59df5b66c5fc58d2abe2c10f0c"
+  },
+  "window_chain": "cc1307d9de6494d28cb82d7afc4f759a1b229d76203d9835023942131f618213",
+  "reproduce": "python3 -B pesquisas-paralelas/ia-runtime/provar_entrada_janelas_ia.py tudo --janelas P6 --lease <heavy_lease.py> --relatorios <dir> --saida <proof.json>"
+ },
+ "reproductions": {
+  "macbook": {
+   "path": "integracao/validacao/cxr-20261030-m3r2-m3-1-p6-proof-main-92fab50-macbook.json",
+   "summary": {
+    "crossings": 0,
+    "phases": 4544,
+    "phases_equal": 4544,
+    "reach": {
+     "P6": {
+      "equal_parts": [
+       0,
+       1,
+       2
+      ],
+      "equal_parts_from_start": 3,
+      "equal_through_frame": 2400,
+      "first_stop": null,
+      "parts": 3
+     }
+    },
+    "result": "equal",
+    "windows": {
+     "P6": "4544/4544"
+    }
+   },
+   "seconds": {
+    "P6": 1173.1
+   }
+  },
+  "mac_mini": {
+   "path": "integracao/validacao/cxr-20261030-m3r2-m3-1-p6-proof-main-92fab50-mac-mini.json",
+   "summary": {
+    "crossings": 0,
+    "phases": 4544,
+    "phases_equal": 4544,
+    "reach": {
+     "P6": {
+      "equal_parts": [
+       0,
+       1,
+       2
+      ],
+      "equal_parts_from_start": 3,
+      "equal_through_frame": 2400,
+      "first_stop": null,
+      "parts": 3
+     }
+    },
+    "result": "equal",
+    "windows": {
+     "P6": "4544/4544"
+    }
+   },
+   "seconds": {
+    "P6": 1181.8
+   }
+  }
+ },
+ "chain_hashes_identical_on_both_machines": true,
+ "also": "The Rust engine (feat/codex-rust-engine ad0dc60, profile chain8 pinned to 92fab50) independently reproduces P6 whole-state 4,544/4,544 phases and 2,272/2,272 frames; the coordinator re-ran it on the MacBook (718 s)."
+}

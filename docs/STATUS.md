@@ -9,7 +9,8 @@ Development on the MacBook paused at 07:00 on 2026-10-30; the user stopped every
 | M1 MONDE01 loaded | **accepted** at `927c7e5` | [M1 record](../integracao/validacao/cxr-20261028-08-m1-acceptance.json) |
 | M2 frames 0–9,200 without input, first raid | **accepted**: M2.1 `32bb391`, M2.2 `b9f4b5d`, M2.3 and M2 `ea62eb4` (18,401/18,401 phases) | [M2.3 record](../integracao/validacao/cxr-20261029-m2r7-m2-3-acceptance.json) |
 | M3.1 input path, P1/P2 part | **accepted** at `c9c85eb`: P1 1,002/1,002, P2 1,202/1,202 phases, 0 crossings, reproduced on both machines | [M3.1 P1/P2 record](../integracao/validacao/cxr-20261030-m3r1-m3-1-p1-p2-acceptance.json) |
-| M3.1 rest (P6, S1 order windows), M3.2–M3.5 | open | [M3 plan status](M3_PLAN.md#status-2026-10-30-0700) |
+| M3.1 input path, P6 part | **accepted** at `92fab50`: strict whole-state P6 (129–2400) 4,544/4,544 phases, 0 crossings, reproduced on both machines; the Rust engine reproduces it too | [M3.1 P6 record](../integracao/validacao/cxr-20261030-m3r2-m3-1-p6-acceptance.json) |
+| M3.1 rest (S1 order windows), M3.2–M3.5 | open | [M3 plan status](M3_PLAN.md#status-2026-10-30-0700) |
 | M4.1 victory, M4.2 defeat, M4.3 app | open; original captures of S1 (victory) and D1 (defeat) exist | [M3 plan status](M3_PLAN.md#status-2026-10-30-0700) |
 
 ## Original captures (Mac mini)
@@ -26,7 +27,7 @@ Development on the MacBook paused at 07:00 on 2026-10-30; the user stopped every
 | Economy | Exit position, hunger (state 19), sanctuary abandonment, `EnginRestaureEtat`, `BatimentEnleveMatiere`, cave meal and tag 19, all 0 mismatches | Transport states 18/20 (unvalidated WIP on `wip/*`) |
 | Combat | Turret `BatimentPeutAttaquer`, tag 14, fatal raid path through death and recount (1,186 cases, 0 mismatches); fatal-window runner | Fatal windows for S1/D1 on the mini |
 | Graphics | Render API 1.9 (K1 501/501, P4/P5 3,001/3,001), S1 end screens, P6 guard fixes | Glyphs, view origins (unvalidated WIP on `wip/*`) |
-| AI/runtime | M3.1 P1/P2 proof; hunger, restoration, turret and Core providers wired; P6 planning diagnostic 4,544/4,544 phases; S1 proof driver ready | Strict P6 proof; S1 windows once pass 2 lands |
+| AI/runtime | M3.1 P1/P2 proof; hunger, restoration, turret and Core providers wired; P6 planning diagnostic 4,544/4,544 phases; S1 proof driver ready | S1 windows once pass 2 lands (frame-2547 dependencies now on main: Core `provedor_recrutamento`, Economy BL) |
 | Missions | S1 victory capture, probes, pass-2 windows | Pass-2 S1, D1 packaging (mini) |
 | Audio | Sound-request provider and request log | — |
 | Rust engine (`motor/`) | Stage 4 orders (ABI 1.5) and play mode (ABI 1.6): logic 0.26 ms/frame, logic plus render 0.65 ms | Chain past frame 220 (unvalidated WIP on `wip/*`) |
