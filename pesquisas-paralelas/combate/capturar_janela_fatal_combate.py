@@ -27,7 +27,8 @@ HOOKS = {'InfligeDegat': (0x450874, 4), 'EnginInfligeDegat': (0x4502f0, 0),
          'iagUnitSendMessage': (0x4829c8, 0), 'MAJSympathie': (0x475118, 0),
          'PlayerResetAllie': (0x46d8cb, 0), 'MessageBoxSet': (0x46994b, 0),
          'EnginSetLevelExperience': (0x44fb20, 0), 'SetDyingEngin': (0x444938, 0),
-         'RetireEngin': (0x457058, 0), 'CalculEnginNextEtape': (0x456db5, 0)}
+         'RetireEngin': (0x457058, 0), 'CalculEnginNextEtape': (0x456db5, 0),
+         'EnginNextEtape': (0x45442c, 0)}
 REGS = ('EAX','EBX','ECX','EDX','ESI','EDI','EBP','ESP','EIP','EFLAGS')
 
 
@@ -37,15 +38,27 @@ def main():
     p.add_argument('--snapshot', type=Path)
     p.add_argument('--snapshot-root', type=Path, default=ROOT/'.local')
     p.add_argument('--snapshot-frame', type=int, required=True)
-    p.add_argument('--snapshot-sha256', required=True)
+    p.add_argument('--snapshot-sha256')
+    p.add_argument('--snapshot-manifest', type=Path, help='Missions resumo.json supplying snapshots[frame].sha256')
     p.add_argument('--entrada', type=Path, required=True)
     p.add_argument('--ate', type=int, required=True)
     p.add_argument('--saida', type=Path, required=True)
     p.add_argument('--leaf-limit', type=int, default=24)
+    p.add_argument('--execute-sound-bodies', action='store_true',
+                   help='Execute original unopened sound-library bodies instead of inherited display boundaries')
     a = p.parse_args()
     if not 1 <= a.ate-a.snapshot_frame <= 250 or not 1 <= a.leaf_limit <= 64:
         p.error('Require 1..250 frames and 1..64 isolated leaf records')
     if a.saida.exists(): p.error('Output directory already exists')
+    manifest_pin=None
+    if a.snapshot_manifest:
+        manifest_raw=a.snapshot_manifest.read_bytes();manifest=json.loads(manifest_raw)
+        expected=manifest['snapshots'][str(a.snapshot_frame)]['sha256']
+        if a.snapshot_sha256 is not None and a.snapshot_sha256!=expected:
+            p.error('Explicit snapshot SHA differs from the Missions manifest')
+        a.snapshot_sha256=expected
+        manifest_pin=dict(path=str(a.snapshot_manifest),sha256=hashlib.sha256(manifest_raw).hexdigest())
+    if a.snapshot_sha256 is None:p.error('Supply --snapshot-sha256 or --snapshot-manifest')
     candidates = [a.snapshot] if a.snapshot else sorted(a.snapshot_root.rglob(f'instantaneo-{a.snapshot_frame:05d}.pickle'))
     matching = [f for f in candidates if f.is_file() and hashlib.sha256(f.read_bytes()).hexdigest()==a.snapshot_sha256]
     if not matching: raise RuntimeError('No exact snapshot SHA found; no execution started')
@@ -59,6 +72,13 @@ def main():
     if {k:v for k,v in b.roteiro.quadros.items() if k<=frame} != {k:v for k,v in declared.items() if k<=frame}:
         raise RuntimeError('Input prefix differs from the restored original run')
     b.roteiro.quadros = declared
+    executed_sounds=[]
+    if a.execute_sound_bodies:
+        for name in ('PlaySnd_Manage','PlaySnd_PostSound','PlaySnd_StopSound','PlaySnd_StopAllSound',
+                     'PlaySnd_PostVolume','PlaySnd_SetGameVolume'):
+            address=b.sym[name]
+            for attr in ('fronteiras','pulos'):getattr(b,attr).pop(address,None)
+            executed_sounds.append(name)
     a.saida.mkdir(parents=True)
     opened = b.imagem()
     opening = dict(summary=resumo(opened), full_state=estado_completo(opened))
@@ -78,12 +98,20 @@ def main():
             pending.remove(item)
     def on_entry(cpu,address,size,_):
         name,cleanup=by_address[address]; counts[name]+=1
+        corpse_timer=None
+        if name=='EnginNextEtape':
+            u=b.cpu.reg_read(x86.UC_X86_REG_EAX)&65535
+            if u>=800:return
+            rec=word(0x4e19a0)+276*u
+            if bytes(b.cpu.mem_read(rec+2,1))!=b'\4':return
+            corpse_timer=struct.unpack('<H',b.cpu.mem_read(rec+0xc2,2))[0]
+            if corpse_timer not in (0,329):return
         r=regs()
         # Each routine/AX/DL pair is sampled once; all calls remain counted.
         # Recount is captured only after a death/removal has actually occurred.
         if name=='CalculEnginNextEtape' and not any(c['routine']=='SetDyingEngin' for c in cases): return
-        key=(name,r['EAX']&65535,r['EDX']&255) if name!='CalculEnginNextEtape' else (name,0,0)
-        priority=name in ('SetDyingEngin','RetireEngin','CalculEnginNextEtape')
+        key=(name,r['EAX']&65535,corpse_timer if corpse_timer is not None else r['EDX']&255) if name!='CalculEnginNextEtape' else (name,0,0)
+        priority=name in ('SetDyingEngin','RetireEngin','CalculEnginNextEtape','EnginNextEtape')
         if key in sampled or len(cases)>=a.leaf_limit and not priority: return
         if len(cases)>=a.leaf_limit+32: raise RuntimeError('Fatal leaf capture reserve exhausted')
         sampled.add(key); before=b.imagem(); ret=word(r['ESP'])
@@ -92,6 +120,7 @@ def main():
                     stack_words=[word(r['ESP']+4)] if cleanup else [],
                     state_before=resumo(before),entry_delta=delta(baseline,before),
                     reached_return=False,return_address=hex(ret))
+        if corpse_timer is not None:record['corpse_timer_before']=corpse_timer
         cases.append(record)
         pending.append(dict(record=record,before=before,return_address=ret,return_esp=r['ESP']+4+cleanup))
         if ret not in return_hooks:
@@ -125,8 +154,10 @@ def main():
             path=a.saida/f'instantaneo-{completed:05d}.pickle'
             snapshot_out=dict(path=str(path),sha256=seg.salvar(b,path,completed))
         report=dict(schema='rising-lands/combat-scripted-fatal-window/1',translation_executed=False,
+                    original_sha256='6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb',
                     source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                     snapshot=dict(path=str(snapshot),sha256=a.snapshot_sha256,frame=a.snapshot_frame),
+                    snapshot_manifest=manifest_pin,original_sound_bodies=executed_sounds,
                     input=dict(path=str(a.entrada),sha256=hashlib.sha256(raw).hexdigest()),
                     completed_frame=completed,requested_end=a.ate,failures=failures,counts=counts,
                     leaf_cases=len(cases),incomplete_leaves=len(pending),end_snapshot=snapshot_out,

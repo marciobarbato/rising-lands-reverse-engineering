@@ -1,0 +1,162 @@
+{
+ "schema": "rising-lands/combat-fatal-differential/1",
+ "native": false,
+ "capture_sha256": "cc6c8c9b803bb9ea0b037fd721fb8cdd46f18da7bc88d1f5beb747a2332e84df",
+ "summary": {
+  "cases": 16,
+  "mismatches": 0,
+  "routines": {
+   "InfligeDegat": 12,
+   "ChercheBatimentProximiteCaveOuSanctuaire": 2,
+   "CalculEnginNextEtape": 2
+  },
+  "outside_protected_domain": 0
+ },
+ "outside_protected_domain": [],
+ "cases": [
+  {
+   "case": "civil-t0-s5-life100",
+   "routine": "InfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "civil-t0-s5-life1",
+   "routine": "InfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "civil-t0-s7-life100",
+   "routine": "InfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "civil-t0-s7-life1",
+   "routine": "InfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "civil-t0-s18-life100",
+   "routine": "InfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "civil-t0-s18-life1",
+   "routine": "InfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "civil-t5-s5-life100",
+   "routine": "InfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "civil-t5-s5-life1",
+   "routine": "InfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "civil-t5-s7-life100",
+   "routine": "InfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "civil-t5-s7-life1",
+   "routine": "InfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "civil-t5-s18-life100",
+   "routine": "InfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "civil-t5-s18-life1",
+   "routine": "InfligeDegat",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "refuge-u0",
+   "routine": "ChercheBatimentProximiteCaveOuSanctuaire",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "refuge-u13",
+   "routine": "ChercheBatimentProximiteCaveOuSanctuaire",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "recount-all-inactive",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  },
+  {
+   "case": "recount-corpse-only",
+   "routine": "CalculEnginNextEtape",
+   "register_differences": {},
+   "whole_state_equal": true,
+   "profile_calls_equal": true,
+   "python_chain": false,
+   "native_errors": []
+  }
+ ]
+}

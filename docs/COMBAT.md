@@ -2,6 +2,107 @@
 
 Owner: combat. Source and tests live in `pesquisas-paralelas/combate/`. Shared damage, reload, movement, and task primitives remain in `ferramentas/`; changes there belong to core and require a contract handoff.
 
+## M4 raid fight and death composition (2026-10-30)
+
+`luta_fatal_viva_combate.LutaFatalViva(memoria, *, perfil=None, som=None,
+externo=None, etapa=None)` composes the existing live Combat algorithms with
+the remaining synchronous raid effects. Construction writes no game bytes.
+Bootstrap through `ambiente_combate_raid`; pass the caller's live
+`MemoriaQuadro` buffers and keep their allocation bases stable while bound.
+
+`chamar(name, regs, *, pilha=None, chamada=None)` and `provedores()[name]`
+return **all seven** EAX/EBX/ECX/EDX/ESI/EDI/EBP registers, with no unknown
+placeholders. Every input register is required, including saved registers
+needed to return them exactly. Omission raises Core's `ArgumentoNaoPassado`
+before any game effect. Missing impact/import stack arguments raise the same
+exception. These register APIs model the seven-register Core protocol;
+ESP/EIP/flags remain the caller's control-flow responsibility.
+
+| Register provider | Original entry / behavior inputs |
+|---|---|
+| `iagUnitSendMessage` | `0x4829c8`: AX unit, DL message, EBX argument; human prefix and grouped raid behaviour 9 messages 0x44/0x48/0x49/0x4a |
+| `MAJSympathie` | `0x475118`: full EAX/EDX owners, EBX action; loaded action counters, thresholds, pair/global updates and signed clamps |
+| `PlayerResetAllie` | `0x46d8cb`: AL/DL owners 0..4; directional mask, local profile warning |
+| `PlayerAAttaqueSet` | `0x46d600`: AL/DL; native owner guards and wrapped statistic increment |
+| `MessageBoxSet` | `0x46994b`: AL category, DX message; original profile strings and queue/full/wrap/highlight fields |
+| `KERNEL32.GetPrivateProfileStringA` | IAT `0x5231b0`; six explicit stdcall words; media-backed external answer, EAX length, other general registers preserved |
+| `EnginSetLevelExperience` | `0x44fb20`: AX unit, DL level; encoded level, fatigue/armour/vision effects and Core physical/light composition |
+| `SetDyingEngin` | `0x444938`: AX unit; ordinary death sequencing, group message 0x44, audio, state 4, selection/collision cleanup |
+| `EnginNextEtape` / `EnginNextEtape:state4` | `0x45442c`: AX unit; full entry restricted to state 0/4, ordinary corpse animation and removal |
+| `RetireEngin` | `0x457058`: AX unit; strict seven-register facade over Core's existing provider |
+| `CalculEnginNextEtape` | entry `0x456db5`, first count reset `0x456dbd`; rebuild counts while dispatching real unit bodies |
+| `EnginInfligeDegat` | `0x4502f0`: AX victim, DL mode 1, BX source, CL direction; full raw return for the visible/unopened domain |
+| `InfligeDegat` | `0x450874`: AX cell, DL mode 1, BX source, CL direction, `pilha=[flag]`; unit-target raw return |
+| `ChercheBatimentProximiteCaveOuSanctuaire` | `0x4539f3`: AX cell, DL player; nearest own CAVE preferred, otherwise sanctuary, with no maximum distance |
+
+`perfil` is an explicit `(section, key, default, size, filename) -> bytes`
+provider. `diplomacia_luta_combate.PerfilTextoLuta(entradas_nomeadas)` uses
+Missions' original-media resolver and profile parser with its established
+quote/truncation/default semantics; it also implements the raw import facade.
+No Windows implementation is substituted into the game. Native captures bind
+only that external import through Core's declared-stdcall transport and record
+every actual text answer. PT-BR text stays in its original bytes.
+
+`som` is Audio's `SoundRequestProvider(LiveAudioMemory(m),
+domain='unopened-display')` for the captured inherited image. The raw unit
+damage/impact facade explicitly requires a discovered victim cell, a free
+handle and this unopened domain at entry. Broader hidden/initialized-library
+raw returns are named scope stops before effects; the existing typed Combat
+APIs remain available under their own documented domains. No arbitrary
+sound return is used. Optional foreign effects use `externo(name, args)` or
+raise `DependenciaLutaFatal` with the original address and retained prior
+effects. Raw impact currently protects mode 1/unit targets; old typed APIs
+retain their broader mode 1/3/4 contracts.
+
+The AI message composition retains live group, conflict, target-priority,
+damage-allocation and task tables. It removes a dead member, releases assigned
+target damage, posts native task returns and reacquires targets in original
+order, using the existing attack/range/movement code. Unknown indirect handler
+pointers stop at that pointer; no other AI behaviour is silently treated as 9.
+
+Death does **not** decrement population counters. It sends message 0x44, stops
+sound, requests discovered-cell death audio, writes state 4/releases search,
+then clears animation/timer, selection and collision. Discovery/minimap
+removal occurs through Core at corpse expiry. Ordinary corpses advance their
+loaded animation and u16 timer; at 330 steps they call Core RetireEngin, zero
+life and write state 0. Nonempty Bag, vehicle and spell/special tails remain
+named dependencies. `fight.ciclo.corpo_estado4(unit)` is the typed
+`0x456ae5` body when AI/runtime has already executed the entry prelude;
+it does not repeat that prelude or claim a raw whole-entry register result.
+
+Recount reuses AI/runtime's established live loop. Each active non-state 4
+unit is counted **before** its body. A victim killed by a later slot therefore
+remains counted until the following phase. Type 5 remains excluded from the
+military counter while included in local population/type counters. Never
+subtract counters at the life/state store. `etapa(unit)` supplies the owning
+front's real non-dying unit body over the same buffers; state 0/4 is handled by
+this composition. Without it, the bounded ordinary fight/move/idle/hidden
+prelude composes Core fatigue/movement and Combat states 1/24. Work, transport,
+construction, hunger and special branches are explicit owner dependencies.
+
+Evidence was committed first as `608ac91` and `8e34403`, restored from the
+preserved real raid-contact state, with every variation declared. The
+[case matrix](../pesquisas-paralelas/combate/FATAL_CAPTURE_MATRIX.md) has 1,187
+original cases: 1,186 returns and one protected-domain negative (FFFF hit-message
+target faults natively). Local comparisons cover 1,186 cases with 0 mismatches,
+including 990 persistent-buffer corpse steps, civilian refuge, lethal/overkill
+damage and 82 consecutive complete count phases. Fresh native differential
+is **1,186 cases, 0 mismatches**: the
+[primary report](../pesquisas-paralelas/combate/validacao/luta-fatal-native-v1.json)
+covers 1,088, and the focused `RISING_EMULAR=1` suite reruns all 98 supplements
+(7 tests passed, no skips). Comparisons cover all seven registers, the whole
+checkpoint and profile answers. The Combat gate passes 291 tests with 155
+optional native skips; unchanged historical native tests were not rerun.
+No native state is copied back into the Python corpse/count chains.
+
+Actual S1/D1 phase evidence is a separate request. The
+[Mac-mini commands and exact hooks](../pesquisas-paralelas/combate/FATAL_MAC_MINI_RUNS.md)
+resume the SHA-verified S1 frame 11000 snapshot through 12250, and D1's
+11000–12000/17000–17500 snapshots in separate bounded jobs. They record every
+phase plus sampled original leaf entry/returns, including corpse timers 0/329.
+These windows, full mission-end latch proof and integration into AI/runtime
+or Rust are not claimed by the isolated matrix. No other front is edited.
+
 ## M3 turret input providers (2026-10-30)
 
 `ordens_torres_combate.OrdensTorresCombate(memoria, *, bonus=None)` binds live

@@ -1,0 +1,14 @@
+[lease] combat-fatal-supplement-tests waiting
+[lease] combat-fatal-supplement-tests granted slots [0]
+test_civilian_refuge_and_late_count_phase (test_luta_fatal_combate.FatalFightMemory) ... ok
+test_complete_original_matrix_and_persistent_corpse_chains (test_luta_fatal_combate.FatalFightMemory) ... ok
+test_constructor_and_every_missing_register_leave_memory_intact (test_luta_fatal_combate.FatalFightMemory) ... ok
+test_profile_import_full_registers_against_recorded_external_answer (test_luta_fatal_combate.FatalFightMemory) ... ok
+test_required_stack_arguments_are_explicit (test_luta_fatal_combate.FatalFightMemory) ... ok
+test_unknown_handler_and_raw_scope_stop_before_effects (test_luta_fatal_combate.FatalFightMemory) ... ok
+test_native_civilian_and_count_phase_supplements (test_luta_fatal_combate.FatalFightNative) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 129.939s
+
+OK
