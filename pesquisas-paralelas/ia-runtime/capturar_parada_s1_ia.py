@@ -21,6 +21,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--rotina', required=True)
     ap.add_argument('--chamada', type=lambda v: int(v, 0), required=True)
+    ap.add_argument('--limpeza', type=int, default=0, help='actual RET immediate / declared boundary cleanup in bytes')
     ap.add_argument('--de', type=int, required=True)
     ap.add_argument('--ate', type=int, required=True)
     ap.add_argument('--saida', required=True)
@@ -114,8 +115,7 @@ def main():
             case['stores'] = list(stores)
         cases.append(case)
 
-    # This caller contract takes no pushed words (plain RET).
-    obs = bs.Observacao(s1.b, {args.rotina: 0}, escolher=choose, ao_fechar=close,
+    obs = bs.Observacao(s1.b, {args.rotina: args.limpeza}, escolher=choose, ao_fechar=close,
                         retornos_extra={args.rotina: [caller_return]})
     while s1.k < args.ate:
         s1.avancar(obs)

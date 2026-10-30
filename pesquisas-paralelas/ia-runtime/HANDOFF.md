@@ -1201,3 +1201,43 @@ including the actual limit20/counter0 entry. Reports:
 Three focused dispatcher tests pass. Strict/planning and full gate reruns follow.
 The indicator's optional `--progresso N` logs only completed-frame progress to
 stderr, preserving the final JSON and comparison/stopping semantics.
+
+### Final measured S1 boundary — sound emitter metadata
+
+On `1ce1d6c`, strict equals **10,672 frames129–10800**, no difference, then
+Graphics' existing two-monster guard (286.021s). Planning passes the reload and
+equals **11,624 frames129–11752**, no difference, then PlaySnd_PostSound at
+frame11753 (311.489s), with953 declared Graphics bypasses. No sound or game
+logic stop was bypassed. Reports: `validacao/s1-recarga-strict.json` and ignored
+`.local/m3-1/s1-recarga-planejamento.json`. Gate passes141 tests, eight explicit
+skips, zero failures/errors,133.227s, docs links pass.
+
+The additive sound-parent evidence follows the real native CALL`0x4525a1`
+inside CalculAttaqueEngin, before Missions' existing sound-library boundary
+intercepts it. All four native states11750–11753 match S1, executable unchanged
+(3.795s). `evidencias/s1-som-ataque-pai-original.json`. The original sound bodies
+are not executed by that accepted scenario; unchanged EAX/cleanup4 is the
+scenario declaration, not Audio's actual return0 API. A direct routine-entry
+observation attempt failed because the oracle intercepts the boundary first;
+no evidence file/pass was created by that attempt. The parent observer captures
+the actual original CALL registers, volume and ordered boundary requests.
+
+Next owner is **Combat emitter metadata**, consumed by AI/runtime's M3 boundary
+transport (Audio owns the request API). The public `som(name, regs, words)`
+callback omits the original CALL site. The existing Core/AI boundary transport
+needs it to record source/return/phase faithfully; site0, a guessed site and a
+new silent drawing/sound skip are not substitutes. Supply original CALL-site
+metadata for every emitter in this live attack/damage path. First native CALL:
+EAX`0x50`, EDX`0x2300`, EBX`0x474a9358`, ECX0, ESI`0x474a9254`, EDI=EBP17,
+ESP`0x2007dbc`, volume90. Later original requests are CALL`0x45063f`, EDX`0x50100`,
+EBX`0x474a89a4`, volume180; CALL`0x4510b1`, EDX`0x50700`, EBX`0x496ac8`, volume256;
+both EAX`0x50`/ECX0. Those later requests and damage/diplomacy effects have not
+run in the Python chain. There is no sound-specific declared planning bypass,
+so work stops at the foreign contract. See S1_NEXT_STOPS.md for the full table.
+
+Snapshot11750 is copied/hash-checked from Core's read-only native input to
+ignored `.local/`: `0399b6dcef842a37ed3a383615a75ed923d6ba7c2b5a5fe5e88000bec1d2eb54`.
+Full entry blocks remain ignored and hash-bound. No original evidence, foreign
+source, main branch or acceptance record is modified. Latest fetched main
+`1531678` and Missions`7eeb395` still lack S1 pass-2; no S1 whole-state proof,
+per-part reach or part chain is claimed.
