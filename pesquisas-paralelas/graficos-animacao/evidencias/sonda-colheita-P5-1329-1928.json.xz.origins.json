@@ -1,0 +1,70 @@
+{
+ "schema": "rising-lands/probe-origin-isolation/1",
+ "method": "Original AffGame leaf calls at the first actual probe entry of each previously unproved view origin.\n\nNo writes are applied. Save CPU/state/stack, declared host state and DirectDraw surfaces, execute the intact call\nto its native caller return, record every DGROUP/CRT/heap difference, then restore the exact entry before replay.\nThe normal phase must still reproduce the published whole-state and full-surface hashes.\n",
+ "probe": "P5",
+ "probe_ref": "ef52cb0",
+ "executable_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "source_sha256": "01bd4d1329d77f1aacf9b8de3431f9c08e66a19c79164d6b8947695a3710d9c2",
+ "baseline_provider_sha256": "ba95194a67c700528e27ad87640cf5c95de92e9c9d9e8feb054002edf71d2f93",
+ "targets": [
+  [
+   31,
+   0
+  ]
+ ],
+ "records": [
+  {
+   "probe": "P5",
+   "frame": 1329,
+   "origin": [
+    31,
+    0
+   ],
+   "routine": "AffGame",
+   "entry": "0x417698",
+   "caller_return": "0x475068",
+   "entry_registers": {
+    "EAX": "0x0",
+    "EBX": "0x3",
+    "ECX": "0x1100190",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fe4",
+    "EIP": "0x417698"
+   },
+   "exit_registers": {
+    "EAX": "0x100",
+    "EBX": "0x3",
+    "ECX": "0x1100190",
+    "EDX": "0x2007fe8",
+    "ESI": "0x0",
+    "EDI": "0x0",
+    "EBP": "0x0",
+    "ESP": "0x2007fe8",
+    "EIP": "0x475068"
+   },
+   "declared_writes": [],
+   "returned": true,
+   "changed": {
+    "dgroup": [
+     [
+      "0x4e17ae",
+      2,
+      3
+     ],
+     [
+      "0x4e17b4",
+      214,
+      254
+     ]
+    ]
+   },
+   "entry_state_sha256": "04fdb05f91c831fa0ef540eb3baab6f4f24c3f216f225cfbc052f128b64f913a",
+   "surface_sha256": "77603cff8a467cc9ce49203a5cfdfef80e2f9a65690b4e0cae2dba5049757147",
+   "published_phase_sha256": "77603cff8a467cc9ce49203a5cfdfef80e2f9a65690b4e0cae2dba5049757147",
+   "original_code_sha256": "02985de5c6218c3968a45fa5b5cdc4bf4be850a8d87d92520c6e184098518af4"
+  }
+ ]
+}

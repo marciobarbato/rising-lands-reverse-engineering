@@ -279,6 +279,9 @@ class _Composicao:
     def engin(self, x, y, indice):
         r = self.mundo.unidades[indice*276:(indice+1)*276]; tipo, estado = r[1], r[2]
         if tipo in TIPOS and encaminhamento(tipo, estado, auxiliar_8a=r[0x8a])['rota'] == 'sem_desenho': return
+        if tipo==7 and estado==5:
+            from colheita_exibicao_m3 import builder_work
+            if builder_work(self,r,x,y,indice):return
         overlay = bool(r[0xba] or r[0xbd] or self.tela.u('selecionada_unidade_u16') == indice or self.tela.u('modo_selecao_u8'))
         i8 = lambda v: v-256 if v > 127 else v
         px, py = x+i8(r[0x86]), y+i8(r[0x87])

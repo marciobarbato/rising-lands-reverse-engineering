@@ -1,5 +1,5 @@
 {
- "boundary_requests_compared": 9,
+ "boundary_requests_compared": 10,
  "by_routine": {
   "AnimConstruireBatiment": {
    "cases": 8,
@@ -33,8 +33,8 @@
   },
   "BatimentNextEtape": {
    "cases": 1,
-   "dependency_stops": 1,
-   "equal": 0,
+   "dependency_stops": 0,
+   "equal": 1,
    "mismatches": 0
   },
   "BatimentRepare": {
@@ -51,8 +51,8 @@
   },
   "EnginNextEtape": {
    "cases": 6,
-   "dependency_stops": 1,
-   "equal": 5,
+   "dependency_stops": 0,
+   "equal": 6,
    "mismatches": 0
   },
   "GoLastAttaque": {
@@ -63,14 +63,14 @@
   },
   "InputGame": {
    "cases": 9,
-   "dependency_stops": 1,
-   "equal": 8,
+   "dependency_stops": 0,
+   "equal": 9,
    "mismatches": 0
   },
   "ProcessInputGame": {
    "cases": 6,
-   "dependency_stops": 5,
-   "equal": 1,
+   "dependency_stops": 2,
+   "equal": 4,
    "mismatches": 0
   },
   "ReseauActif": {
@@ -90,12 +90,9 @@
   "path": "pesquisas-paralelas/ia-runtime/evidencias/captura-construcao-teclas-ia.json",
   "sha256": "ab65de2c18602bb1d80ff29dc6910c77c7f63a5e22717e3cf149249f2f3edc0b"
  },
- "changed_bytes_compared": 4102,
+ "changed_bytes_compared": 4508,
  "comparisons": 90,
- "core_construction_reference": {
-  "construcao_core_sha256": "7ccf640c5adda6e1a2c0e81bcce0307c0117eca862699af5fc7d34d5fe35a5fa",
-  "path": ".local/entrada/nucleo-ref"
- },
+ "core_construction_reference": null,
  "dependency_stops": [
   {
    "case": "construction_complete_type17",
@@ -106,43 +103,19 @@
    "dependency": "SetMurAllentour required at 0x0041d012; earlier stores retained"
   },
   {
-   "case": "etape13_dispatch",
-   "dependency": "EnginNextEtape state 13 required at 0x004558e4; earlier stores retained"
-  },
-  {
-   "case": "structure_type3_cave",
-   "dependency": "BatimentNextEtape type 3 required at 0x00426aff; earlier stores retained"
-  },
-  {
-   "case": "process_tag11_store_group",
-   "dependency": "SauveSelectionGroupe required at 0x0045eef8; earlier stores retained"
-  },
-  {
-   "case": "process_tag12_restore_group",
-   "dependency": "RestaureSelectionGroupe required at 0x0045ef2c; earlier stores retained"
-  },
-  {
-   "case": "process_tag16_enter_structure",
-   "dependency": "SetEnginSelectRentreBatiment required at 0x0045f195; earlier stores retained"
-  },
-  {
    "case": "process_tag16_enter_unit",
    "dependency": "SetEnginSelectRentreEngin required at 0x0045f17a; earlier stores retained"
   },
   {
    "case": "process_tag33_release_colonist",
-   "dependency": "BatimentRetireColon required at 0x0045f22a; earlier stores retained"
+   "dependency": "iagUnitSendMessage required at 0x0041da48; earlier stores retained"
   },
   {
    "case": "wndproc_keydown_subtract",
    "dependency": "WndProc VK_SUBTRACT zoom (MiniMapRecentre) required at 0x0041843e; earlier stores retained"
-  },
-  {
-   "case": "input_group2_shift_centre",
-   "dependency": "EnginGetCentreGroupe required at 0x0042943e; earlier stores retained"
   }
  ],
- "equal": 79,
+ "equal": 85,
  "excluded_registers": {
   "ccb_progress_rotate": [
    "EAX"
@@ -168,6 +141,9 @@
   "etape11_walk": [
    "EAX"
   ],
+  "etape13_dispatch": [
+   "EAX"
+  ],
   "input_golast_enter_recent": [
    "EAX"
   ],
@@ -189,7 +165,13 @@
   "input_group1_restore": [
    "EAX"
   ],
+  "input_group2_shift_centre": [
+   "EAX"
+  ],
   "input_group3_store_ctrl": [
+   "EAX"
+  ],
+  "structure_type3_cave": [
    "EAX"
   ]
  },
@@ -225,7 +207,7 @@
  },
  "providers": "provedores_entrada_ia.provedores_vivos and construcao_viva (committed Core/Economy/Combat owners); EnginNextEtape: Core provedores_core + Economy BonusUnidades; sound requests return the EAX they receive (the frame bench declaration for PlaySnd_*)",
  "schema": "rising-lands/monde01-construction-keys-differential/1",
- "seconds": 119.358,
+ "seconds": 137.452,
  "source_sha256": {
   "ferramentas/chamadas_quadro_core.py": "d8b3568c3346422744868a2b7900e4afdbf84c85e840450f9da5ec863bbb626a",
   "ferramentas/minimapa_estruturas.py": "9907d894d5bd4e9ce22d41b8f72aa9dc7ca54fbcc606c504a4f4fb763a6c6adc",
@@ -235,10 +217,10 @@
   "pesquisas-paralelas/economia/ordens_economia.py": "48c8fd6d63b7acdf7883e1a6a5b913435c3e35ab8e5eae2925f9f4ee84d46e69",
   "pesquisas-paralelas/ia-runtime/capturar_construcao_teclas_ia.py": "2959d1a8e60f7446631238954d42c73d0f4c84af9d697dc0dc3f05f81d7c8a7f",
   "pesquisas-paralelas/ia-runtime/casos_construcao_teclas_ia.py": "19214b2dd35c969c8e5c4b093686035d0dded76f1113965287c7d912d0c33edb",
-  "pesquisas-paralelas/ia-runtime/construcao_entrada_ia.py": "0d70bed2600a4970109f86440d498d46c158c2c339d0fa09f2c8ecbddcbd581c",
-  "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "186a61d6153f8e6b0e3cd7a78dcddd4ffa417fc62af50b2fac7d068405875937",
-  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "9bb28f2c40a5855f012033c4076874c187e9ad84866a7170173fbd393584ff7f",
+  "pesquisas-paralelas/ia-runtime/construcao_entrada_ia.py": "b755643d67295e61e44485c6c26bb92eed43419d830bdaf6f1774140c779c388",
+  "pesquisas-paralelas/ia-runtime/entrada_ordens_ia.py": "ec5e1dbea911ab260c2f9441aee35d1cabdd11dcddd86e47c507ec2612a87798",
+  "pesquisas-paralelas/ia-runtime/provedores_entrada_ia.py": "4ded79cded5227e461cc1ce6eac092ddc91a82d202a2cb5c3aeab8ab62d35110",
   "pesquisas-paralelas/ia-runtime/proxima_etapa_quadro.py": "d9a3c39db33703c43d0cc16de2446b6cf860f894aa2d875a1828bbfda3f11f80",
-  "pesquisas-paralelas/ia-runtime/validar_construcao_teclas_ia.py": "eaa4af55520283671a623dd3a8d68fe620de721a958a891b0870ad24ed23f62a"
+  "pesquisas-paralelas/ia-runtime/validar_construcao_teclas_ia.py": "84ee8b219e3e7b0a604afd2398cf9347cf42c421b9d5f8bdc39867485d3db5e6"
  }
 }

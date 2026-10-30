@@ -1,0 +1,44 @@
+[lease] graphics-origins-K1 waiting
+[lease] graphics-origins-K1 granted slots [3]
+K1 141 isolated original origin (1, 0) returned
+K1 142 isolated original origin (2, 0) returned
+K1 143 isolated original origin (3, 0) returned
+K1 144 isolated original origin (4, 0) returned
+K1 145 isolated original origin (5, 0) returned
+K1 147 isolated original origin (7, 0) returned
+K1 149 isolated original origin (9, 0) returned
+K1 150 isolated original origin (10, 0) returned
+K1 150 native surface/state equal
+K1 151 isolated original origin (11, 0) returned
+K1 153 isolated original origin (13, 0) returned
+K1 154 isolated original origin (14, 0) returned
+K1 155 isolated original origin (15, 0) returned
+K1 157 isolated original origin (17, 0) returned
+K1 159 isolated original origin (19, 0) returned
+K1 171 isolated original origin (19, 1) returned
+K1 172 isolated original origin (19, 2) returned
+K1 173 isolated original origin (19, 3) returned
+K1 174 isolated original origin (19, 4) returned
+K1 175 isolated original origin (19, 5) returned
+K1 176 isolated original origin (19, 6) returned
+K1 177 isolated original origin (19, 7) returned
+K1 178 isolated original origin (19, 8) returned
+K1 179 isolated original origin (19, 9) returned
+K1 180 isolated original origin (19, 10) returned
+K1 181 isolated original origin (19, 11) returned
+K1 182 isolated original origin (19, 12) returned
+K1 183 isolated original origin (19, 13) returned
+K1 184 isolated original origin (19, 14) returned
+K1 185 isolated original origin (19, 15) returned
+K1 186 isolated original origin (19, 16) returned
+K1 187 isolated original origin (19, 17) returned
+K1 188 isolated original origin (19, 18) returned
+K1 189 isolated original origin (19, 19) returned
+Traceback (most recent call last):
+  File "/Users/marcio/git/Rising Lands/worktrees/re-graphics/pesquisas-paralelas/graficos-animacao/capturar_sondas_colheita_graficos.py", line 88, in <module>
+    if __name__=='__main__':
+  File "/Users/marcio/git/Rising Lands/worktrees/re-graphics/pesquisas-paralelas/graficos-animacao/capturar_sondas_colheita_graficos.py", line 72, in main
+    for hook in hooks:b.cpu.hook_del(hook)
+  File "/Users/marcio/git/Rising Lands/worktrees/re-graphics/pesquisas-paralelas/missoes/segmentos_quadros_missao.py", line 82, in salvar
+    python=pickle.dumps(_python(b), protocol=4),
+ValueError: ctypes objects containing pointers cannot be pickled

@@ -10,6 +10,8 @@ or stack byte is produced (display output).
 The providers take ``memoria`` with ``u8/u16/u32(address)`` reads (``MemoriaDeclarada`` fits) and never write.
 """
 from dataclasses import dataclass
+import json
+from pathlib import Path
 
 ROTINAS = {'RestoreAll': 0x474b08, 'AffGame': 0x417698, 'DDInit': 0x43f50b}
 ESTRUTURAS, ESTRUTURA_PASSO, ESTRUTURA_ESTADO = 0x49a0c8, 276, 5
@@ -32,6 +34,10 @@ ORIGENS_PROVADAS = frozenset({
     (36, 7), (36, 14), (36, 21), (36, 28), (36, 35), (36, 42), (39, 0), (39, 6),
     (39, 12), (39, 18), (39, 24), (39, 30), (39, 36), (39, 42), (39, 47),
 })
+ORIGENS_RESTOREALL_PROVADAS = ORIGENS_PROVADAS
+# Exact native probe states; these additions prove AffGame only, not RestoreAll.
+ORIGENS_PROVADAS |= frozenset(tuple(v) for v in json.loads(
+    Path(__file__).with_name('camadas_colheita_m3.json').read_text())['AffGame_origins'])
 VIEWPORT, TELA = (25, 17), (800, 600)               # DDInit hi-res values (0x508724/26, 0x49a018/1a)
 CURSOR_RNG_SITIOS = (0x407dd3, 0x411147, 0x412392, 0x415b77, 0x415c19, 0x43f191)   # display-side 0x4e1d18 writers
 
@@ -62,7 +68,8 @@ def _guardas(memoria, rotina, habitado=None):
     if viewport != VIEWPORT:
         raise DependenciaExibicao(rotina, 0x4178f7, f'viewport {viewport} is not the captured {VIEWPORT}')
     origem = (ler('[0x508720]', memoria.u16(0x508720)), ler('[0x508722]', memoria.u16(0x508722)))
-    if origem not in ORIGENS_PROVADAS:
+    origens = ORIGENS_RESTOREALL_PROVADAS if rotina == 'RestoreAll' else ORIGENS_PROVADAS
+    if origem not in origens:
         raise DependenciaExibicao(rotina, CURSOR_RNG_SITIOS[3], f'view origin {origem}: vegetation/terrain handlers '
                                   '(0x411147, 0x412392, 0x415b77/0x415c19) only proved native on the sampled origins')
     estados = {memoria.u8(ESTRUTURAS + i*ESTRUTURA_PASSO + ESTRUTURA_ESTADO) for i in range(1000)}

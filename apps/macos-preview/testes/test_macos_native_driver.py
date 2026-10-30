@@ -39,3 +39,27 @@ class NativeDriverTests(unittest.TestCase):
         d,e,i=self.paths()
         with tempfile.TemporaryDirectory() as empty:
             with self.assertRaisesRegex(RuntimeError,'Missing S0'):NativeDriver(d,e,empty)
+
+    def test_play_mode_has_identical_state_and_pixels_without_proof_or_observers(self):
+        import hashlib
+        from macos_rust_abi import Frames
+        d,e,i=self.paths()
+        play=NativeDriver(d,e,i);proof=NativeDriver(d,e,i)
+        self.addCleanup(play.close);self.addCleanup(proof.close)
+        self.assertEqual(play.lib.macos_live_validation(play.handle,0),0)
+        calls=[]
+        for _ in range(129):
+            self.assertEqual(play.advance(lambda *args:(calls.append(args) or 1)),0)
+            self.assertEqual(proof.advance(),0)
+            self.assertEqual(play.pixels(),proof.pixels())
+            self.assertEqual(play.palette(),proof.palette())
+        s=play.status();self.assertEqual((s.frames,s.phases_equal,s.surfaces_equal,s.checkpoints_equal,s.proof_ns),(128,0,0,0,0))
+        self.assertEqual(calls,[])
+        self.assertNotEqual(play.lib.macos_live_validation(play.handle,1),0)
+        f=Frames(e)
+        def projection(world):
+            n=C.c_uint32();f.lib.rl_projetar_tudo(world,None,0,C.byref(n))
+            out=(C.c_uint8*n.value)()
+            self.assertEqual(f.lib.rl_projetar_tudo(world,out,n.value,C.byref(n)),0)
+            return hashlib.sha256(bytes(out)).hexdigest()
+        self.assertEqual(projection(s.world),projection(proof.status().world))

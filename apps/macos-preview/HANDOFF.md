@@ -1280,3 +1280,96 @@ families. The 9,200-frame/first-stop horizon was **not rerun on ABI 1.4**; prior
 ABI 1.3 results remain historical. Requested APP_BUILD, engine gate and bounded
 live/Test A proofs pass. Final evidence/docs commits change no executable code
 after e760756. Only the feature branch is pushed without force.
+
+## Play mode and independent display scheduling
+
+Work resumed after fast-forwarding the front and merging fetched main 8138e6e.
+The integrated ABI1.4 / Rust Graphics1.7 / Python Graphics1.8 pins are unchanged.
+Only macOS-owned paths are changed; no engine optimization is included.
+
+The native driver defaults to validation for existing proof consumers. New
+`macos_live_validation(driver,0)` must be selected before phase1, and removes
+projection/hash/equality/observer work while retaining the real phase ordering,
+caller buffers, renderer metadata checks and named stops. Input files, masks,
+original hashes/addresses and evidence are unchanged. A new actual-driver
+regression compares all 128 play-mode output surfaces/palettes and the final
+whole projection to validation mode, while asserting zero callbacks/proof time
+and rejecting mode changes after phase1.
+
+The UI's Jogar mode uses a fixed host game cadence (20 Hz nominal default,
+configurable independently) and asynchronous Metal presentation of the latest
+complete frame. See the [manual](../../docs/MACOS_PLAYABLE.md#native-play-mode-and-independent-clocks)
+for buffer ownership, scheduling and the original-rate dependency. A three-slot
+pool releases textures only after GPU completion. Main thread handles AppKit
+and resizing; engine initialization, frame work and display acquisition run on
+background queues. Validar and APP_BUILD's validation smoke keep their audits.
+Sustained real-UI measurements and gate outputs will be appended after validation.
+
+### Validated results for play mode
+
+The final executable source/build is **55cddc571ec75bf6b305aabd75c33d5697fa7471**;
+subsequent evidence/docs commits do not change executable behavior. Exact
+[APP_BUILD](validation/m3-play-app-build.log) passes **110 consumer tests / zero
+skips**, **27 native exercise checks** and **20 inspection/live checks**. ARM64,
+isolated relocated runtime/source/assets, static ABI1.4 binding and strict deep
+signing pass. The app still uses integrated main's motor from its immutable Git
+archive. Shared library SHA256:
+`792edc2e0812b6a2636e1033f2235c5f89ce8b7336ccb825a1c45902d48fa6a1`;
+static engine archive:
+`8827032dfe15a6df294884ad2b63f8e4317db7818630237ed80ebff9f288a4a0`.
+No other engine checkout or override is used.
+
+Fresh [prefix proof](validation/m3-play-live-prefix.json) retains **257 states,
+11 checkpoints, 128 original surfaces and 128 Python Graphics1.8 surfaces**, with
+palette/cache/ordered-observation checks and zero observer failures. The new
+consumer regression also checks 128 play-mode pixels/palettes and the final whole
+projection against validation, while confirming zero proof work/callbacks. Fresh
+[Test A](validation/m3-play-test-a-answers.json) retains **155,597/155,597** declared
+answers: P1 7,522; P2 9,034; P3 45,032; P6 33,873; P7 53,099; K1 7,037. All six
+canonical byte round trips match; no first difference and no orders injected.
+An initial proof command used the builder's staging bundle path, which is moved
+at delivery; its [setup failure](validation/m3-play-prefix-staging-path.log) is
+preserved. The corrected proof uses the actual delivered bundle under the shared
+build lock and checks its source commit before loading any library.
+
+The [four 65-second UI runs](validation/m3-play-timing.log) use the actual
+unoccluded native window and CAMetalDrawable presentation timestamps. Jogar gives
+**119.920 fps average / 117 minimum one-second fps** at nominal 20 game frames/s;
+**119.878 / 117** at 60.001 game frames/s; **119.919 / 117** at unlimited
+**69.226 game frames/s**. No warmup bin is discarded, no proof work or publication
+drop occurs, and final readback through the asynchronous texture pool verifies
+all 1,920,000 pixels. Maximum excess main-thread timer delay is below 2 ms in
+all play runs. No interpolation or synthetic game frame is generated.
+
+Validar gives **63.210 displayed fps average / 25 minimum**, with the retained
+startup prefix, 257 states, 11 checkpoints and **4,117/4,117 reached surfaces**.
+Its first five full-second bins are 25,27,25,26,26; later bins 63–70. The short
+APP_BUILD audit run is 44.252 displayed / 44.362 game fps; historical 41.386 fps
+was also a short startup-audited sample. The manual separates those scopes.
+
+Uncapped per game frame: Rust logic **10.313 ms**, Rust render **4.059 ms**, app
+upload **0.059 ms**. Per display: CPU encoding **0.030 ms**, GPU **0.141 ms**.
+Drawable wait is separate; asynchronous stages overlap. The app removes proof
+and synchronous presentation costs. The engine remains the throughput limit;
+state-reload cost is an engine-owner profiling candidate, not individually timed
+here. The default is the documented 20 Hz nominal TickClock rate; the original's
+actual timing remains unmeasured. Current no-input performance does not establish
+raid/order or full-mission headroom, Test A state-half fidelity, or Test B.
+
+[Engine gate](validation/m3-play-engine-validate.log) passes **28 Rust tests,
+61 Python tests plus 10 renderer child tests, 75 original-x86 comparisons / zero
+mismatches / zero skips**, C layouts, Swift ABI1.4 interoperability and **128/128**
+Swift render surfaces with Metal. Its library is debug, so its throughput is not
+an application release measurement. Logic/Graphics reference commits and original
+hashes/masks are unchanged. All heavy runs use the lease; build+four timing runs
+use an exclusive lease. Feature push only; no main integration or acceptance.
+
+[Common checks](validation/m3-play-common.log.gz) pass from this prepared feature
+worktree using `/usr/bin/python3 -B scripts/check.py` and its read-only linked
+`.local/python`: Core 561/213 optional skips, Combat 279/153, Economy 521/209,
+Graphics 261/0, Missions 154/33, AI/runtime 112/8, Audio 79/4, workflow 9/0 —
+**1,976 tests, 620 optional skips, zero failures/errors**. Documentation links and
+`git diff --check` pass. Every actual leased execution stays below 20 minutes.
+The [delivery manifest](validation/m3-play-delivery.json) pins source, library,
+benchmark and validation artifacts. Only `feat/macos-playable` is pushed without
+force; no main merge or milestone acceptance is performed.
