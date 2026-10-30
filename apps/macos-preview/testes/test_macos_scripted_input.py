@@ -79,6 +79,6 @@ class ScriptedInputTests(unittest.TestCase):
 
     def test_digit_hotkey_is_wndproc_only_and_does_not_expand_async_key_domain(self):
         r=MacOSSessionRecorder(ROOT);r.event(129,dict(kind='key',vkey=49,down=True));r.event(132,dict(kind='key',vkey=49,down=False))
-        s=r.export_script();self.assertEqual(s.frames[129][1][0],[0x100,49,1|(2<<16)])
-        self.assertEqual(s.frames[132][1][0],[0x101,49,1|(2<<16)|(1<<30)|(1<<31)])
+        s=r.export_script();self.assertEqual(s.frames[129][1][0],(0x100,49,1|(2<<16)))
+        self.assertEqual(s.frames[132][1][0],(0x101,49,1|(2<<16)|(1<<30)|(1<<31)))
         self.assertTrue(all(49 not in keys for _,_,keys in s.frames.values()))
