@@ -48,3 +48,17 @@ The refusal is `ArgumentoNaoPassado` (a `ValueError`), raised before anything ru
 ```sh
 python3 "…/heavy_lease.py" core -- python3 -B ferramentas/validar_minimapa_quadro125.py   # ~3 min
 ```
+
+## Binding to Economy's bench (gate fix)
+
+The report used to pin the bytes of Economy's `bancada_ciclo_trabalho.py` and `capturar_ciclo_trabalho.py`, so Economy's legitimate bench change (pseudo entries for the hunger capture) failed Core's test and blocked both integrations. Now:
+- `source_sha256` holds Core's own files only, and the CPU-free test binds every committed report to them strictly.
+- `economy_source_sha256` records the hash of the Economy files the run actually imported. The test passes when the current Economy files equal those of one committed report in `RELATORIOS_VERIFICADOS`.
+- A new Economy bench version therefore needs a native rerun here, never a re-pin: `validar_minimapa_quadro125.py --bancada-economia <copy of the file> --saida relatorios/minimapa-quadro125-emulada-bancada-economia-<hash8>.json`, then add the report to `RELATORIOS_VERIFICADOS`.
+
+Verified versions (both 7 comparisons, 0 mismatches, paths reproduced, code unchanged, Economy's record equal):
+
+| Economy bench `bancada_ciclo_trabalho.py` | Report |
+|---|---|
+| `d3340e20…` (main) | `relatorios/minimapa-quadro125-emulada.json` (124 s) |
+| `7139f3e2…` (feat/re-economy `bfef1ce`, extracted with `git show`) | `relatorios/minimapa-quadro125-emulada-bancada-economia-7139f3e2.json` (128 s) |
