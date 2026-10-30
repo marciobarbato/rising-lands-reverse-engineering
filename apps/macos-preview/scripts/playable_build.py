@@ -54,9 +54,9 @@ def main():
     engine_source=(args.source/'motor').resolve()
     engine_revision=revision
     if os.environ.get('RISING_MACOS_ENGINE_SOURCE'):
-        raise ValueError('ExternalEngineOverrideRetired: build uses integrated motor ABI1.5')
-    if '#define RL_ABI_VERSION 0x00010005u' not in (engine_source/'include/rising_engine.h').read_text():
-        raise RuntimeError('RustRendererABIVersionMismatch: app requires reviewed ABI1.5')
+        raise ValueError('ExternalEngineOverrideRetired: build uses integrated motor ABI1.6')
+    if '#define RL_ABI_VERSION 0x00010006u' not in (engine_source/'include/rising_engine.h').read_text():
+        raise RuntimeError('RustRendererABIVersionMismatch: app requires reviewed ABI1.6')
     # Build into our ignored target; never mutate either engine source tree.
     legacy.run(['cargo','build','--release','--locked','--manifest-path',engine_source/'Cargo.toml',
                 '--target-dir',base/'build/engine-target'], 'rust-engine-build.log')
@@ -167,7 +167,7 @@ def main():
                 raise SystemExit('Native UI smoke failed: ' + json.dumps(result, ensure_ascii=False))
     report = {'commit': revision, 'mode': mode, 'features': manifest['features'], 'bundle': str(final),
               'uiSmoke': not args.skip_ui_smoke, 'logs': str(base / 'build/logs'),
-              'inputsRoot': str(args.workspace), 'engineSourceRevision':engine_revision, 'engineSourceRoot':str(engine_source), 'engineStaticArchiveSHA256':hashlib.sha256(static_library.read_bytes()).hexdigest(), 'nativeEngineBinding':'static-abi15', 'pythonRuntimeInput': os.environ.get('RISING_PYTHON_RUNTIME'),
+              'inputsRoot': str(args.workspace), 'engineSourceRevision':engine_revision, 'engineSourceRoot':str(engine_source), 'engineStaticArchiveSHA256':hashlib.sha256(static_library.read_bytes()).hexdigest(), 'nativeEngineBinding':'static-abi16', 'pythonRuntimeInput': os.environ.get('RISING_PYTHON_RUNTIME'),
               'inspectionSmoke': not args.skip_ui_smoke,
               'builtAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
               'files': [{'path': str(p.relative_to(final)), 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}

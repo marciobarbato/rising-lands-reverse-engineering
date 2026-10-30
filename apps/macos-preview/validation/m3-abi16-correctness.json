@@ -1,0 +1,159 @@
+{
+  "schema": "rising-lands/macos-abi16-correctness/1",
+  "main_base": "240ea87",
+  "validated_runtime": "b44fe804a696413f79904b9d36b01f30138cfac5",
+  "app_build": {
+    "passed": true,
+    "consumer_tests": 112,
+    "skips": 0,
+    "native_exercise_checks": 27,
+    "native_inspection_checks": 20
+  },
+  "engine_gate": {
+    "passed": true,
+    "rust_tests": 30,
+    "python_tests": 63,
+    "renderer_child_tests": 10,
+    "original_x86_comparisons": 75,
+    "mismatches": 0,
+    "skips": 0,
+    "swift_metal_surfaces": 128
+  },
+  "common": {
+    "passed": true,
+    "command": [
+      "/usr/bin/python3",
+      "-B",
+      "scripts/check.py"
+    ],
+    "domain_note": "check.py has no macos domain selector; APP_BUILD validates the consumer and the complete common suite was run as its supported repository gate.",
+    "tests": 2039,
+    "optional_skips": 624,
+    "failures": 0,
+    "errors": 0,
+    "domains": [
+      {
+        "domain": "core",
+        "tests": 576,
+        "optional_skips": 215,
+        "seconds": 32.476
+      },
+      {
+        "domain": "combat",
+        "tests": 291,
+        "optional_skips": 155,
+        "seconds": 131.835
+      },
+      {
+        "domain": "economy",
+        "tests": 543,
+        "optional_skips": 209,
+        "seconds": 51.145
+      },
+      {
+        "domain": "graphics",
+        "tests": 267,
+        "optional_skips": 0,
+        "seconds": 139.566
+      },
+      {
+        "domain": "missions",
+        "tests": 154,
+        "optional_skips": 33,
+        "seconds": 23.173
+      },
+      {
+        "domain": "ai-runtime",
+        "tests": 120,
+        "optional_skips": 8,
+        "seconds": 135.017
+      },
+      {
+        "domain": "audio",
+        "tests": 79,
+        "optional_skips": 4,
+        "seconds": 12.801
+      },
+      {
+        "domain": "workflow",
+        "tests": 9,
+        "optional_skips": 0,
+        "seconds": 2.265
+      }
+    ]
+  },
+  "answers": 155597,
+  "canonical_roundtrips": 6,
+  "prior_answer_hashes_unchanged": true,
+  "native_input_files_unchanged": 21,
+  "states_128": 257,
+  "surfaces_128": 128,
+  "python_surfaces_128": 128,
+  "states_9200": 18401,
+  "surfaces_9200": 9200,
+  "prior_prefix_hashes_unchanged": true,
+  "state_probes": [
+    {
+      "probe": "P1",
+      "frames_equal": 501,
+      "whole_phases": 1002,
+      "prior_frame_hashes_unchanged": true,
+      "stop": null
+    },
+    {
+      "probe": "P2",
+      "frames_equal": 601,
+      "whole_phases": 1202,
+      "prior_frame_hashes_unchanged": true,
+      "stop": null
+    },
+    {
+      "probe": "P3",
+      "frames_equal": 91,
+      "whole_phases": null,
+      "prior_frame_hashes_unchanged": true,
+      "stop": {
+        "frame": 220,
+        "phase": 3,
+        "code": 5,
+        "detail": "entrada CalculGame \u00b7 quadro 220 \u00b7 ABI 5: BatimentNextEtape type 3 at 0x00426aff"
+      }
+    },
+    {
+      "probe": "P6",
+      "frames_equal": 91,
+      "whole_phases": 183,
+      "prior_frame_hashes_unchanged": true,
+      "stop": {
+        "frame": 220,
+        "phase": 3,
+        "code": 5,
+        "detail": "entrada CalculGame \u00b7 quadro 220 \u00b7 ABI 5: BatimentNextEtape type 3 at 0x00426aff"
+      }
+    },
+    {
+      "probe": "P7",
+      "frames_equal": 91,
+      "whole_phases": null,
+      "prior_frame_hashes_unchanged": true,
+      "stop": {
+        "frame": 220,
+        "phase": 3,
+        "code": 5,
+        "detail": "entrada CalculGame \u00b7 quadro 220 \u00b7 ABI 5: BatimentNextEtape type 3 at 0x00426aff"
+      }
+    },
+    {
+      "probe": "K1",
+      "frames_equal": 12,
+      "whole_phases": null,
+      "prior_frame_hashes_unchanged": true,
+      "stop": {
+        "frame": 141,
+        "phase": 2,
+        "code": 5,
+        "detail": "entrada entre quadros \u00b7 quadro 141 \u00b7 ABI 5: AffGame at 0x00415b77"
+      }
+    }
+  ]
+}

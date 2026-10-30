@@ -28,6 +28,10 @@ def proof(a):
     driver=NativeDriver(a.driver,a.library,a.inputs);engine=Player(a.library);engine_inputs=[];out=[];stop=None;difference=None;started=time.perf_counter()
     try:
         assert driver.lib.macos_live_validation(driver.handle,0)==0
+        # Input proof requires complete consumed-poll observations. The UI itself
+        # uses mode 1; mode 2 is the identical persistent backend with audits.
+        engine.lib.rl_execucao_definir.argtypes=[C.c_uint64,C.c_uint32]
+        assert engine.lib.rl_execucao_definir(driver.status().world,2)==0
         for _ in range(129):
             if driver.advance():raise RuntimeError(bytes(driver.status().message).decode())
         initial=engine.snapshot(driver.status().world)
