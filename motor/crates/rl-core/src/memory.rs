@@ -9,6 +9,8 @@ pub struct MemoriaJogo {
     pub(crate) player: Option<crate::player::Runtime>,
     journal: Journal,
     pub(crate) audit: bool,
+    #[cfg(feature = "validation-trace")]
+    validation_trace: Option<Vec<(u32, Vec<u8>)>>,
 }
 
 #[cfg(test)]
@@ -75,6 +77,8 @@ impl Default for MemoriaJogo {
             player: None,
             journal: Journal::default(),
             audit: true,
+            #[cfg(feature = "validation-trace")]
+            validation_trace: None,
         }
     }
 }
@@ -85,6 +89,14 @@ impl PartialEq for MemoriaJogo {
 }
 impl Eq for MemoriaJogo {}
 impl MemoriaJogo {
+    #[cfg(feature = "validation-trace")]
+    pub fn start_validation_trace(&mut self) {
+        self.validation_trace = Some(Vec::new());
+    }
+    #[cfg(feature = "validation-trace")]
+    pub fn take_validation_trace(&mut self) -> Vec<(u32, Vec<u8>)> {
+        self.validation_trace.take().unwrap_or_default()
+    }
     /// Reused undo storage: game bytes are changed in place, never speculatively published.
     pub(crate) fn begin(&mut self) {
         assert!(!self.journal.active, "nested memory transaction");
@@ -220,6 +232,10 @@ impl MemoriaJogo {
                 size: bytes.len(),
             });
         };
+        #[cfg(feature = "validation-trace")]
+        if let Some(trace) = &mut self.validation_trace {
+            trace.push((address, bytes.to_vec()));
+        }
         if target == bytes {
             return Ok(());
         }

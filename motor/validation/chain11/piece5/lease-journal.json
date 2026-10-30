@@ -1,0 +1,592 @@
+{
+  "events": [
+    {
+      "at": "2026-10-30T19:37:35.541270+00:00",
+      "command": [
+        "env",
+        "RL_REFERENCE_PROFILE=chain11",
+        "RL_EXECUTION_MODE=2",
+        "python3",
+        "-B",
+        "motor/testes/player_proof.py",
+        "--probe",
+        "S1",
+        "--frames",
+        "16922",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/chain11/S1-native.json"
+      ],
+      "cwd": "/Users/marcio/git/Rising-Lands-Codex-Engine",
+      "event": "wait",
+      "exclusive": false,
+      "owner": "engine-chain11-S1-native-v2"
+    },
+    {
+      "at": "2026-10-30T19:37:35.540448+00:00",
+      "command": [
+        "env",
+        "RL_REFERENCE_PROFILE=chain11",
+        "RL_EXECUTION_MODE=2",
+        "python3",
+        "-B",
+        "motor/testes/s1_surface_proof.py",
+        "--frames",
+        "3722",
+        "--capture",
+        "motor/research/evidence/chain9-s1-render-128-750.json.xz",
+        "--capture",
+        "motor/research/evidence/chain9-s1-render-750-1500.json.xz",
+        "--capture",
+        "motor/research/evidence/chain9-s1-render-1500-2250.json.xz",
+        "--capture",
+        "motor/research/evidence/chain9-s1-render-2250-3000.json.xz",
+        "--capture",
+        "motor/research/evidence/chain9-s1-render-3000-3750.json.xz",
+        "--capture",
+        "motor/research/evidence/chain9-s1-render-3750-3851.json.xz",
+        "--output",
+        ".local/chain11/S1-surface.json"
+      ],
+      "cwd": "/Users/marcio/git/Rising-Lands-Codex-Engine",
+      "event": "wait",
+      "exclusive": false,
+      "owner": "engine-chain11-S1-surface-v2"
+    },
+    {
+      "at": "2026-10-30T19:37:35.541961+00:00",
+      "event": "grant",
+      "owner": "engine-chain11-S1-native-v2",
+      "slots": [
+        0
+      ]
+    },
+    {
+      "at": "2026-10-30T19:37:35.541969+00:00",
+      "event": "grant",
+      "owner": "engine-chain11-S1-surface-v2",
+      "slots": [
+        1
+      ]
+    },
+    {
+      "at": "2026-10-30T19:37:35.542838+00:00",
+      "command": [
+        "env",
+        "RL_REFERENCE_PROFILE=chain11",
+        "RL_EXECUTION_MODE=2",
+        "python3",
+        "-B",
+        "motor/testes/chain_surface_proof.py",
+        "--probe",
+        "P7",
+        "--frames",
+        "3572",
+        "--output",
+        ".local/chain11/P7-surface.json"
+      ],
+      "cwd": "/Users/marcio/git/Rising-Lands-Codex-Engine",
+      "event": "wait",
+      "exclusive": false,
+      "owner": "engine-chain11-P7-surface-v2"
+    },
+    {
+      "at": "2026-10-30T19:37:35.543485+00:00",
+      "event": "grant",
+      "owner": "engine-chain11-P7-surface-v2",
+      "slots": [
+        2
+      ]
+    },
+    {
+      "at": "2026-10-30T19:37:35.543860+00:00",
+      "command": [
+        "env",
+        "RL_REFERENCE_PROFILE=chain11",
+        "RL_EXECUTION_MODE=2",
+        "RL_COMPARE_PLAY=1",
+        "python3",
+        "-B",
+        "motor/testes/player_proof.py",
+        "--probe",
+        "P6",
+        "--frames",
+        "2272",
+        "--whole-state",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/chain11/P6-whole.json"
+      ],
+      "cwd": "/Users/marcio/git/Rising-Lands-Codex-Engine",
+      "event": "wait",
+      "exclusive": false,
+      "owner": "engine-chain11-P6-whole-v2"
+    },
+    {
+      "at": "2026-10-30T19:37:35.545497+00:00",
+      "command": [
+        "env",
+        "RL_REFERENCE_PROFILE=chain11",
+        "RL_EXECUTION_MODE=2",
+        "python3",
+        "-B",
+        "motor/testes/chain_surface_proof.py",
+        "--probe",
+        "P3",
+        "--frames",
+        "3001",
+        "--output",
+        ".local/chain11/P3-surface.json"
+      ],
+      "cwd": "/Users/marcio/git/Rising-Lands-Codex-Engine",
+      "event": "wait",
+      "exclusive": false,
+      "owner": "engine-chain11-P3-surface-v2"
+    },
+    {
+      "at": "2026-10-30T19:37:35.545894+00:00",
+      "command": [
+        "env",
+        "RL_REFERENCE_PROFILE=chain11",
+        "RL_EXECUTION_MODE=2",
+        "python3",
+        "-B",
+        "motor/testes/player_proof.py",
+        "--probe",
+        "S1",
+        "--frames",
+        "3722",
+        "--python",
+        "--reference-continuation",
+        "--library",
+        "motor/target/release/librising_engine.dylib",
+        "--output",
+        ".local/chain11/S1-python-v2.json"
+      ],
+      "cwd": "/Users/marcio/git/Rising-Lands-Codex-Engine",
+      "event": "wait",
+      "exclusive": false,
+      "owner": "engine-chain11-S1-python-v2"
+    },
+    {
+      "at": "2026-10-30T19:37:35.546167+00:00",
+      "command": [
+        "env",
+        "RL_REFERENCE_PROFILE=chain11",
+        "RL_EXECUTION_MODE=2",
+        "python3",
+        "-B",
+        "motor/testes/chain_surface_proof.py",
+        "--probe",
+        "K1",
+        "--frames",
+        "501",
+        "--output",
+        ".local/chain11/K1-surface.json"
+      ],
+      "cwd": "/Users/marcio/git/Rising-Lands-Codex-Engine",
+      "event": "wait",
+      "exclusive": false,
+      "owner": "engine-chain11-K1-surface-v2"
+    },
+    {
+      "at": "2026-10-30T19:37:35.546746+00:00",
+      "command": [
+        "env",
+        "RL_REFERENCE_PROFILE=chain11",
+        "RL_EXECUTION_MODE=2",
+        "python3",
+        "-B",
+        "motor/testes/chain_surface_proof.py",
+        "--probe",
+        "P6",
+        "--frames",
+        "2272",
+        "--output",
+        ".local/chain11/P6-surface.json"
+      ],
+      "cwd": "/Users/marcio/git/Rising-Lands-Codex-Engine",
+      "event": "wait",
+      "exclusive": false,
+      "owner": "engine-chain11-P6-surface-v2"
+    },
+    {
+      "at": "2026-10-30T19:37:35.547369+00:00",
+      "command": [
+        "sh",
+        ".local/chain11/prior-state.sh"
+      ],
+      "cwd": "/Users/marcio/git/Rising-Lands-Codex-Engine",
+      "event": "wait",
+      "exclusive": false,
+      "owner": "engine-chain11-prior-state-v2"
+    },
+    {
+      "at": "2026-10-30T19:38:01.450674+00:00",
+      "command": [
+        "env",
+        "CARGO_HOME=/Users/marcio/git/Rising-Lands-Codex-Engine/.local/cargo",
+        "RUSTUP_HOME=/Users/marcio/git/Rising-Lands-Codex-Engine/.local/rustup",
+        "PATH=/Users/marcio/git/Rising-Lands-Codex-Engine/.local/cargo/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/Users/marcio/.codex/tmp/arg0-macos/codex-arg0zHJuWc:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/marcio/.cargo/bin:/Users/marcio/.local/bin",
+        "sh",
+        "motor/validate.sh"
+      ],
+      "cwd": "/Users/marcio/git/Rising-Lands-Codex-Engine",
+      "event": "wait",
+      "exclusive": false,
+      "owner": "engine-chain11-final-gate"
+    },
+    {
+      "at": "2026-10-30T19:45:27.583182+00:00",
+      "event": "release",
+      "owner": "engine-chain11-S1-surface-v2",
+      "slots": [
+        1
+      ]
+    },
+    {
+      "at": "2026-10-30T19:45:27.584083+00:00",
+      "code": 1,
+      "event": "exit",
+      "owner": "engine-chain11-S1-surface-v2"
+    },
+    {
+      "at": "2026-10-30T19:46:08.194083+00:00",
+      "event": "release",
+      "owner": "engine-chain11-S1-native-v2",
+      "slots": [
+        0
+      ]
+    },
+    {
+      "at": "2026-10-30T19:46:08.194506+00:00",
+      "code": 0,
+      "event": "exit",
+      "owner": "engine-chain11-S1-native-v2"
+    },
+    {
+      "at": "2026-10-30T19:52:23.822271+00:00",
+      "event": "release",
+      "owner": "engine-chain11-P7-surface-v2",
+      "slots": [
+        2
+      ]
+    },
+    {
+      "at": "2026-10-30T19:52:23.822823+00:00",
+      "code": 0,
+      "event": "exit",
+      "owner": "engine-chain11-P7-surface-v2"
+    },
+    {
+      "at": "2026-10-30T19:52:25.099828+00:00",
+      "event": "grant",
+      "owner": "engine-chain11-final-gate",
+      "slots": [
+        2
+      ]
+    },
+    {
+      "at": "2026-10-30T19:52:27.113279+00:00",
+      "event": "grant",
+      "owner": "engine-chain11-S1-python-v2",
+      "slots": [
+        1
+      ]
+    },
+    {
+      "at": "2026-10-30T19:53:19.255436+00:00",
+      "event": "grant",
+      "owner": "engine-chain11-K1-surface-v2",
+      "slots": [
+        0
+      ]
+    },
+    {
+      "at": "2026-10-30T19:54:51.234384+00:00",
+      "event": "release",
+      "owner": "engine-chain11-K1-surface-v2",
+      "slots": [
+        0
+      ]
+    },
+    {
+      "at": "2026-10-30T19:54:51.234546+00:00",
+      "code": 0,
+      "event": "exit",
+      "owner": "engine-chain11-K1-surface-v2"
+    },
+    {
+      "at": "2026-10-30T19:54:51.465745+00:00",
+      "event": "grant",
+      "owner": "engine-chain11-P6-whole-v2",
+      "slots": [
+        0
+      ]
+    },
+    {
+      "at": "2026-10-30T19:56:35.296215+00:00",
+      "event": "release",
+      "owner": "engine-chain11-final-gate",
+      "slots": [
+        2
+      ]
+    },
+    {
+      "at": "2026-10-30T19:56:35.296701+00:00",
+      "code": 0,
+      "event": "exit",
+      "owner": "engine-chain11-final-gate"
+    },
+    {
+      "at": "2026-10-30T19:56:35.747415+00:00",
+      "event": "grant",
+      "owner": "engine-chain11-P3-surface-v2",
+      "slots": [
+        2
+      ]
+    },
+    {
+      "at": "2026-10-30T19:57:08.269319+00:00",
+      "event": "release",
+      "owner": "engine-chain11-S1-python-v2",
+      "slots": [
+        1
+      ]
+    },
+    {
+      "at": "2026-10-30T19:57:08.270275+00:00",
+      "code": 0,
+      "event": "exit",
+      "owner": "engine-chain11-S1-python-v2"
+    },
+    {
+      "at": "2026-10-30T19:59:12.208746+00:00",
+      "event": "grant",
+      "owner": "engine-chain11-prior-state-v2",
+      "slots": [
+        1
+      ]
+    },
+    {
+      "at": "2026-10-30T20:00:00.485184+00:00",
+      "event": "grant",
+      "owner": "engine-chain11-P6-surface-v2",
+      "slots": [
+        3
+      ]
+    },
+    {
+      "at": "2026-10-30T20:09:50.959041+00:00",
+      "event": "release",
+      "owner": "engine-chain11-P3-surface-v2",
+      "slots": [
+        2
+      ]
+    },
+    {
+      "at": "2026-10-30T20:09:50.959533+00:00",
+      "code": 0,
+      "event": "exit",
+      "owner": "engine-chain11-P3-surface-v2"
+    },
+    {
+      "at": "2026-10-30T20:10:24.395134+00:00",
+      "event": "release",
+      "owner": "engine-chain11-P6-surface-v2",
+      "slots": [
+        3
+      ]
+    },
+    {
+      "at": "2026-10-30T20:10:24.395591+00:00",
+      "code": 0,
+      "event": "exit",
+      "owner": "engine-chain11-P6-surface-v2"
+    },
+    {
+      "at": "2026-10-30T20:10:34.391583+00:00",
+      "event": "release",
+      "owner": "engine-chain11-P6-whole-v2",
+      "slots": [
+        0
+      ]
+    },
+    {
+      "at": "2026-10-30T20:10:34.391826+00:00",
+      "code": 0,
+      "event": "exit",
+      "owner": "engine-chain11-P6-whole-v2"
+    },
+    {
+      "at": "2026-10-30T20:14:12.372467+00:00",
+      "event": "release",
+      "owner": "engine-chain11-prior-state-v2",
+      "slots": [
+        1
+      ]
+    },
+    {
+      "at": "2026-10-30T20:14:12.372837+00:00",
+      "code": 0,
+      "event": "exit",
+      "owner": "engine-chain11-prior-state-v2"
+    },
+    {
+      "at": "2026-10-30T20:14:48.335514+00:00",
+      "command": [
+        "sh",
+        ".local/chain11/timing.sh"
+      ],
+      "cwd": "/Users/marcio/git/Rising-Lands-Codex-Engine",
+      "event": "wait",
+      "exclusive": true,
+      "owner": "engine-chain11-timing-final"
+    },
+    {
+      "at": "2026-10-30T20:17:43.311805+00:00",
+      "command": [
+        "python3",
+        ".local/chain11/package-regressions.py"
+      ],
+      "cwd": "/Users/marcio/git/Rising-Lands-Codex-Engine",
+      "event": "wait",
+      "exclusive": false,
+      "owner": "engine-chain11-regression-package"
+    },
+    {
+      "at": "2026-10-30T20:17:43.312530+00:00",
+      "event": "grant",
+      "owner": "engine-chain11-regression-package",
+      "slots": [
+        3
+      ]
+    },
+    {
+      "at": "2026-10-30T20:17:45.449797+00:00",
+      "event": "release",
+      "owner": "engine-chain11-regression-package",
+      "slots": [
+        3
+      ]
+    },
+    {
+      "at": "2026-10-30T20:17:45.449967+00:00",
+      "code": 0,
+      "event": "exit",
+      "owner": "engine-chain11-regression-package"
+    },
+    {
+      "at": "2026-10-30T20:18:50.982820+00:00",
+      "command": [
+        "sh",
+        ".local/chain11/commit-regressions.sh"
+      ],
+      "cwd": "/Users/marcio/git/Rising-Lands-Codex-Engine",
+      "event": "wait",
+      "exclusive": false,
+      "owner": "engine-chain11-regression-commit"
+    },
+    {
+      "at": "2026-10-30T20:18:50.983323+00:00",
+      "event": "grant",
+      "owner": "engine-chain11-regression-commit",
+      "slots": [
+        5
+      ]
+    },
+    {
+      "at": "2026-10-30T20:18:53.237445+00:00",
+      "event": "release",
+      "owner": "engine-chain11-regression-commit",
+      "slots": [
+        5
+      ]
+    },
+    {
+      "at": "2026-10-30T20:18:53.237687+00:00",
+      "code": 0,
+      "event": "exit",
+      "owner": "engine-chain11-regression-commit"
+    },
+    {
+      "at": "2026-10-30T20:34:53.162720+00:00",
+      "event": "grant",
+      "owner": "engine-chain11-timing-final",
+      "slots": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "at": "2026-10-30T20:35:20.117553+00:00",
+      "event": "release",
+      "owner": "engine-chain11-timing-final",
+      "slots": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "at": "2026-10-30T20:35:20.117870+00:00",
+      "code": 1,
+      "event": "exit",
+      "owner": "engine-chain11-timing-final"
+    },
+    {
+      "at": "2026-10-30T20:36:56.609849+00:00",
+      "command": [
+        "sh",
+        ".local/chain11/diagnose-timing.sh"
+      ],
+      "cwd": "/Users/marcio/git/Rising-Lands-Codex-Engine",
+      "event": "wait",
+      "exclusive": true,
+      "owner": "engine-chain11-timing-diagnostic"
+    },
+    {
+      "at": "2026-10-30T20:48:24.650540+00:00",
+      "event": "grant",
+      "owner": "engine-chain11-timing-diagnostic",
+      "slots": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "at": "2026-10-30T20:48:48.639801+00:00",
+      "event": "release",
+      "owner": "engine-chain11-timing-diagnostic",
+      "slots": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "at": "2026-10-30T20:48:48.639976+00:00",
+      "code": 0,
+      "event": "exit",
+      "owner": "engine-chain11-timing-diagnostic"
+    }
+  ],
+  "schema": "rising-lands/chain11-owned-lease-record/1",
+  "scope": "Own completed v2 proof and final gate/package/timing jobs; wait and grant are separate. Foreign commands and interrupted exploratory jobs omitted."
+}

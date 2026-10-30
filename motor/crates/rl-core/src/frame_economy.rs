@@ -111,7 +111,7 @@ fn research(m: &mut MemoriaJogo) -> Result<()> {
                 continue;
             }
             m.set_u8(0x50871c + p, m.u8(0x50871c + p)?.wrapping_add(1))?;
-            return Err(stop("InventionSetEffet", 0x470f98));
+            crate::chain_technology::apply_invention(m, p, item, branch)?;
         } else if m.u8(reg + 6)? == 255 {
             m.set_u8(base + 4, ((branch + 1) % 4) as u8)?;
             continue;

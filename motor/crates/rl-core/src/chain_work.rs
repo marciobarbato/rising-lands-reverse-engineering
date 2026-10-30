@@ -542,7 +542,7 @@ pub fn work(m: &mut MemoriaJogo, u: u32) -> Result<u32> {
                     m.sw(r + 0xc0, 65535)?;
                     if c != 65535 {
                         let i = mine_index(m, c)?;
-                        let cap = m.w(0x509956 + 4 * i)?;
+                        let cap = crate::chain_queries::mine(m, i)?;
                         if cap != 0 {
                             m.sb(r + 0x89, 0)?;
                             let f = dest(m, u, r, c)?;

@@ -1749,3 +1749,186 @@ python3 "$lease" --exclusive engine-m2-play -- env RL_REFERENCE_PROFILE=logic \
   python3 -B motor/testes/play_benchmark.py --frames 9200 --mode 1 \
   --library motor/target/release/librising_engine.dylib --output .local/m2-play-new.json
 ```
+
+## S1 queries — chain11
+
+Merged origin/main at `3e2ed771b78dd3e130ae86e08e081045bc3dc242` on
+`feat/codex-rust-engine`. New `RL_REFERENCE_PROFILE=chain11` pins that logic
+revision and the unchanged Graphics1.9 revision `92fab50`; earlier profiles
+and their evidence remain immutable. C ABI1.6 and Graphics1.9 are unchanged.
+
+The live query entries are SacGetCapacite0x475736 (AX cell, object types
+0x42..0x44, quantity-pointer upper half retained), TuyauEstSortie0x420c7c
+(AX structure0..999, lazy +0x76==15 then +0x75!=0), and MineGetCapacite0x475541
+(AX mine index0..19). They preserve the six other data GPRs, make no writes
+or callbacks and return ESP+4. InputGame now consumes the sack result at
+CALL0x4299da; work and input share the same live mine query. The renderer's
+existing pipe predicate is already identical; its domain is unchanged.
+
+iagVilleSendMessage0x484808 takes AX structure, DL message and EBX argument.
+Its non-AI prefix reads the live owner and PlayerGetType, returns owner>=4
+or the non-AI player type, sets EBX=structure and EDX=incoming EBX, preserves
+ECX/ESI/EDI/EBP and returns ESP+4. Owner type2 retains the addressed dependency
+at0x48484c, with no stores. No foreign message body is synthesized.
+
+The original executable identity is unchanged:
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+The new query proof compares all captured GPRs and supplied bytes: 274 sack,
+273 pipe,101 mine and27 city cases, **675/675 exact**, including four expected
+AI-city stops. City captures omit ESP, so no city stack-control equality is
+claimed. The other648 cases compare captured ESP exactly. Evidence and exact
+source/binary identities are in `validation/chain11/piece1/`.
+
+`sh motor/validate.sh` passes on this query piece: formatting, strict Clippy,
+30 Rust tests,63 Python tests,666 input leaves,75 pilot records and the C,
+Swift ABI1.6 and Metal render smoke checks. Longer S1/regression/timing results
+follow in the next piece; this leaf proof does not claim a new frame reach.
+
+## S1 technology owners — chain11
+
+The Rust-only `chain_technology::Technology::entry(memory,name,FrameRegisters)`
+accepts all seven data GPRs and explicit ESP; successful entries return exact
+GPRs/ESP+4 and optional x87-push metadata. This is additive Rust validation
+transport, not a new C ABI entry or a complete x87 machine. The production
+frame's research-completion path now invokes the same live invention effects.
+No Python, captured return, or later checkpoint supplies a gameplay result.
+
+The seventeen entries and original addresses are:
+RechercheGetEtat0x4717a2, RechercheGetBranche0x4717b1,
+RechercheGetNiveau0x4717c2, RechercheGetNbInvention0x470554,
+InventionGetCout0x470c3d, SetBatimentRecrutable0x418ad3,
+SetTroupeRecrutable0x44244d, TypeBatimentEstRealisable0x418a93,
+TypeEnginEstRealisable0x44228e, SortilegeResetTechnologie0x4749f2,
+TechnologieReset0x46b517, BonusReset0x428e71,
+BatimentInitTechnologie0x41cde0, EnginSetTechnologie0x4411e1,
+InventionSetEffet0x470f98, RechercheCalculNew0x47150f,
+and IaRechercheAjuste0x47fa88. The intact executable hash is the same as above.
+
+Supported technology effects are kind0 troop/building unlocks for four players,
+with the validated ordinary target domain and active structure types2/3. Resets
+retain the original selective byte/word store order; spell columns interleave,
+bonus record holes stay intact, and Bag reset/take order preserves +0x60..+0x65.
+Building unlocks set the flag before rebuilding unit technology Bags; troop
+unlocks set their flag before scanning/rebuilding structures. Research rebuild
+resets technology and bonuses, restores four saved research records, applies
+stored unlocks, clears invention counts, then checks mission gates and advances
+levels in the original player/branch/item order. MissionGetNum and PlayerGetType
+execute their real live-memory Rust queries with the original register effects.
+
+Finite binary64 research values convert to the explicit x87 significand and
+sign/exponent by integer operations, including signed zero and subnormals.
+Nonfinite values stop at0x4717aa. Notification0x471017, non-unlock0x471054,
+unsupported subtype0x471232, special building/troop recruitment0x471126/0x471188,
+AI catch-up0x47fad9, excessive level0x4715a7 and unterminated branch0x471632
+remain named stops; no unknown effect becomes an empty callback. The existing
+BatimentSetTechnologie owner retains its addressed unsupported-type stop.
+
+The fixture binary is built separately with `--features validation-trace
+--target-dir motor/target/technology-trace`. The feature records successful
+ordered stores, including writes of unchanged values, and foreign query calls.
+It is compiled out of production; normal play has no per-frame audit added.
+The default and feature builds pass strict Clippy. The original-first corpus
+passes **520/520**:511 complete register/byte/store/call cases over all17 entries
+and9 additional exact x87-push cases. No GPR/byte mask, replayed foreign return,
+or native case skip is used. FP proof compares the newly pushed value and
+captured TOP transition, not all FPU state or flags. The production build also
+has an integer-conversion edge test for negative zero, the smallest subnormal,
+one and the addressed nonfinite stop. Frozen reference bytes remain unchanged.
+
+`sh motor/validate.sh` passes for the technology implementation:31 Rust tests,
+63 Python tests,666 input leaves,75 pilot entries, C layout, Swift ABI1.6 and
+Metal render smoke. The feature build separately passes strict Clippy and its
+Rust tests. The owner corpus, feature-build log and full native gate are in
+`validation/chain11/piece2/`. Frame continuation and final performance/regression
+reports are recorded separately below, after the bounded runs finish.
+
+A [static intact-caller review](research/CHAIN11_RESEARCH_CALLER.json) also checks
+RechercheCalcul CALL0x47132c: EAX/EBX/EDX are explicitly zeroed before the player,
+branch and item byte loads, with ECX=1. The effects-only production adapter's
+zero-extended inputs therefore match the caller. Preserved scratch GPRs are
+outside that typed interface; the exact-register owner entry is proved separately.
+
+## S1 advancing continuation — chain11
+
+On the frozen native/harness sources, Rust passes **10,672/10,672** original
+indicator/input/order frames129–10800. First stop: between-frame10801,
+`Display monster count` at0x41591f, the guard for more than one monster. No
+indicator mismatch precedes it. This does not claim whole-state S1 equality.
+The pinned Python consumer passes the complete **3,722/3,722** frame129–3850
+comparison against Rust and the original, then stops in frame3851 phase3 at
+SacGetCapacite CALL0x4299da: the new owner is present but not wired there.
+The optional `--reference-continuation` records that Python-only next-frame
+stop; no Rust equality is asserted for an incomplete Python frame. All original
+exceptions remain explicit, with their callee/address and retained-effect scope.
+
+Advancing Rust S1 surfaces pass **1,885/1,885**, frames129–2013, against both
+original and pinned Graphics1.9. At2014 both renderers stop at0x4022c8,
+structure selection outside the proved domain. Rust/Python partial pixels,
+cache, calls and effects agree; the original completed surface is not equal
+and is not counted. Original-attested AffText non-execution stays qualified.
+
+The first-stop contracts and per-frame results, final source/library hashes,
+and the exact-source `validate.sh` rerun are in `validation/chain11/piece3/`.
+The gate passes31 Rust tests,63 Python tests,666 original input leaves,75 pilot
+entries, C layout, actual Swift ABI1.6 and Metal render smoke. Native and harness
+hashes remain stable throughout every completed run. No foreign source/evidence
+was changed and no main integration or acceptance was performed. Prior-window
+regressions and exclusive play timing follow below after those runs complete.
+
+## Prior equalities preserved — chain11
+
+The exact frozen implementation preserves every prior window: K1 **501/501**
+state indicators and surfaces through629; P3 **3,001/3,001** through3129;
+P6 **2,272/2,272** through2400; P7 **3,572/3,572** through3700. No addressed stop
+or difference occurs inside any window. All four also pass their paired
+play/audit checks:1,002/6,002/4,544/7,144 phases respectively. The advancing
+surfaces retain the previously qualified original AffText non-execution domain.
+
+P6 additionally passes **4,544/4,544 whole-state phases**, comparing16,002,289
+bytes per phase under the unchanged173,046-byte published mask, and the same
+4,544 paired phases. The final query and technology leaf reruns remain675/675
+and520/520 exact. All results share the frozen native/harness source hashes;
+the library and renderer hashes are checked explicitly. Per-frame reports,
+full original whole-state observations and source/binary identities are in
+`validation/chain11/piece4/`. Exclusive play timing is recorded separately after
+the coordinated measurement completes; this functional piece adds no new
+performance claim. The existing exact-source native gate remains passing.
+
+## Final play timing and terminal equality — chain11
+
+No native or harness source changed after the functional delivery. Exclusive
+standard play measurements include both logic calls and Python ctypes input
+packing, excluding initialization, snapshots, hashing, rendering and presentation.
+K1/P3/P6/P7 prior windows average0.279/0.301/0.304/0.300ms, with maxima
+0.521/0.477/0.588/0.555ms. The3,722-frame S1 prior prefix averages0.304ms,
+maximum0.672ms. The supported **10,672-frame S1 window through10800** in the
+unchanged benchmark CLI averages **0.331037ms/frame**, p99 **0.573666ms**,
+maximum **1.349958ms**. Every frame in these standard CLI runs is below4ms.
+
+M2's explicit `--mode 1`9,200-frame measurement averages **0.275572ms** logic,
+maximum **1.308875ms**; logic plus render averages0.667488ms, maximum1.691ms.
+All previous K1/P3/P6/P7/S1-prefix terminal full-projection hashes, clocks, input
+identities and frame counts remain exact. All M2 terminal state/surface hashes,
+generation, clock and frame count remain exact. The expanded S1 play run's
+terminal indicators match the original/audit endpoint, and all three extended
+measurements have the same terminal full-projection hash.
+
+One initial extended wrapper retained the entire offline10,672-frame proof
+JSON during sampling and observed mean0.336313ms, maximum **4.116166ms**.
+That overrun is retained as a failed sample, not discarded or called passing.
+An exclusive diagnostic recorded each wall/thread-CPU pair and Python GC events;
+its maximum was1.345208ms at10800, with no GC event overlapping that maximum.
+The unchanged standard CLI in a fresh process with normal GC then produced the
+1.349958ms maximum above. Neither follow-up reproduced the initial spike.
+**Its cause remains unproven**; no GC or scheduling attribution is asserted,
+and no native optimization or threshold relaxation was used to obtain the result.
+The budget statement applies to the documented standard CLI sample, not every
+wall-clock observation including the failed wrapper sample.
+
+The final [verification and timing receipt](validation/chain11/piece5/summary.json)
+contains all standard measurements, the initial overrun, the full diagnostic,
+helper scripts and own lease records. Queue duration is separate from measured
+execution. The verifier checks every prior exact prefix, unchanged P6 mask and
+byte count, supported S1 limits, terminal projections and official play budgets.
+`validate.sh` remains passing on the exact frozen sources. Only engine-owned
+paths and docs/ENGINE.md changed; no main merge, push or acceptance was performed.

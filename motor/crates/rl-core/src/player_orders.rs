@@ -192,7 +192,7 @@ pub fn mine_capacity(m: &MemoriaJogo, c: u32) -> Result<u32> {
         let r = 0x509954 + 4 * i;
         let origin = m.w(r)?;
         if origin != 0 && [origin, origin + 1, origin + 256, origin + 257].contains(&(c & 65535)) {
-            return m.w(r + 2);
+            return crate::chain_queries::mine(m, i);
         }
     }
     stop("MineGetCapacite invalid index", 0x475541)

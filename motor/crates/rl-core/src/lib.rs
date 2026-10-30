@@ -71,10 +71,12 @@ mod play;
 mod chain_bags;
 mod chain_display_origins;
 mod chain_fatigue;
+mod chain_queries;
 mod chain_recruit;
 mod chain_restore;
 mod chain_s1;
 mod chain_search;
+pub mod chain_technology;
 mod chain_turret;
 mod chain_work;
 
