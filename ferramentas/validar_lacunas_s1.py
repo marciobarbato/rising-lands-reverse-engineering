@@ -186,14 +186,30 @@ class Execucao:
 
 # ------------------------------------------------------------------ translation comparison
 def traduzir(caso, blocos):
-    """``buscas_bloqueios`` (windows a/b) or ``consultas_luta`` (c) over a copy of the case's entry state against the native result."""
-    from buscas_bloqueios import BuscasBloqueios
+    """``buscas_bloqueios`` (windows a/b) or ``consultas_luta`` (c) over a copy of the case's entry state against
+    the native result."""
     from validar_fadiga_vegetacao import memoria_caso, mudancas
     m, copias = memoria_caso(blocos)          # a variant's entry blocks already hold its declared writes
     entrada = {k: int(caso['entry_registers'][k], 16) for k in REGISTROS}
     entrada['ESP'] = int(caso['esp'], 16)
+    sons = []
+
+    def som(nome, regs, pilha):
+        i = len(sons)
+        sons.append(dict(routine=nome, registers={k: hex(regs[k]) for k in ('EAX', 'EDX', 'EBX', 'ECX')},
+                         pushed=[hex(w) for w in pilha]))
+        if i >= len(caso['boundaries']):
+            raise RuntimeError('a sound request the original did not make')
+        declarado = caso['boundaries'][i]['declared_eax']
+        return regs['EAX'] if declarado is None else declarado
     try:
-        saida = BuscasBloqueios(m).chamar(caso['routine'], entrada, [int(w, 16) for w in caso['stack_args']])
+        if caso['routine'] in BUSCAS:
+            from buscas_bloqueios import BuscasBloqueios
+            t = BuscasBloqueios(m)
+        else:
+            from consultas_luta import ConsultasLuta
+            t = ConsultasLuta(m, som=som)
+        saida = t.chamar(caso['routine'], entrada, [int(w, 16) for w in caso['stack_args']])
     except Exception as erro:                 # a mismatch, never ignored
         return dict(ok=False, python_error=f'{type(erro).__name__}: {erro}')
     incertos = saida.get('_incertos') or {}

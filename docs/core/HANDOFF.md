@@ -717,3 +717,15 @@ Contract and counts: [WORK_CYCLE_QUERIES](WORK_CYCLE_QUERIES.md).
   - route CalculWorkEngin's TerrainEstGc to `provedores_core['TerrainEstGc']`;
   - route its SetMiniMap to `provedores_core['SetMiniMap']` with DL = 4 (`0x44c427`);
   - a `som` with a `chamada` parameter receives the call address.
+
+### S1 coverage survey and S1's Core gaps (stopped mid-stage for the Codex handover) on `feat/re-core`
+
+- **Coverage.** [S1_COVERAGE](S1_COVERAGE.md) and `relatorios/cobertura-s1.json` come from `ferramentas/cobertura_s1.py`.
+  - Method: read-only, from Missions' S1 capture at `82ec5ea`, with no native run.
+  - Totals: 495 routines; gaps are Core 16, Economy 28, AI/runtime 22, Combat 20, Missions 14, Graphics 2 (+21 display-only), Audio 0.
+- **Foreign pins removed** (`0d6138a`). Missions' frame-1 capture and Economy's bench version are now skips, never failures.
+- **Gap stage.** See [S1_GAPS](S1_GAPS.md).
+  - Committed: the bench (`bancada_s1`), the validator (`validar_lacunas_s1`), and captures `a` and `b`.
+  - Written but NOT natively validated: `buscas_bloqueios` and `consultas_luta`. The smoke run gave 37/0.
+  - Not run: capture `c`.
+  - Open: EnginRestaureEtat and ChercheBatimentProximiteCaveOuSanctuaire.
