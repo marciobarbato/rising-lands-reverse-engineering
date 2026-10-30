@@ -1,0 +1,208 @@
+{
+ "capture": {
+  "path": "evidencias/minimapa-quadro125/captura-minimapa-quadro125.json.xz",
+  "sha256": "3a9c63f37b3e4a24c1dd5f88bcffb54defbf4dd110d57d55ddc871df4c840772"
+ },
+ "cases": [
+  {
+   "case": "decouvre_terrain_in_situ",
+   "changed_equal": true,
+   "native_changed": 120,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "DecouvreTerrain",
+   "uncertain_bits": {
+    "EBX": "0xffff0000"
+   }
+  },
+  {
+   "case": "illumine_terrain_in_situ",
+   "changed_equal": true,
+   "native_changed": 335,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "IllumineTerrain",
+   "uncertain_bits": {
+    "EBX": "0xffff0000"
+   }
+  },
+  {
+   "case": "modify_map_in_situ",
+   "changed_equal": true,
+   "native_changed": 196,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "BatimentModifyMap",
+   "uncertain_bits": {
+    "EAX": "0xffffffff",
+    "EDX": "0xffffffff"
+   }
+  },
+  {
+   "case": "modify_map_dl0_composition_input",
+   "changed_equal": true,
+   "native_changed": 196,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "BatimentModifyMap",
+   "uncertain_bits": {
+    "EAX": "0xffffffff",
+    "EDX": "0xffffffff"
+   }
+  },
+  {
+   "case": "modify_map_dl1_before_light",
+   "changed_equal": true,
+   "native_changed": 196,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "BatimentModifyMap",
+   "uncertain_bits": {
+    "EAX": "0xffffffff",
+    "EDX": "0xffffffff"
+   }
+  },
+  {
+   "case": "modify_map_dl0_before_light",
+   "changed_equal": true,
+   "native_changed": 196,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "BatimentModifyMap",
+   "uncertain_bits": {
+    "EAX": "0xffffffff",
+    "EDX": "0xffffffff"
+   }
+  },
+  {
+   "case": "decouvre_terrain_radius3",
+   "changed_equal": true,
+   "native_changed": 0,
+   "native_equals_capture": true,
+   "ok": true,
+   "register_differences": {},
+   "routine": "DecouvreTerrain",
+   "uncertain_bits": {
+    "EBX": "0xffff0000"
+   }
+  }
+ ],
+ "changed_bytes_compared": 1239,
+ "comparisons": 7,
+ "dl0_vs_in_situ": {
+  "bytes": 196,
+  "first": [
+   "0x47933a26",
+   "0x47933a27",
+   "0x47933a28",
+   "0x47933a29"
+  ]
+ },
+ "economy_record": {
+  "capture_sha256": "e76917886a72e6e8406f5560d1c43f88dc56ed4360c6998dbb677ef017a11ee1",
+  "compared": [
+   "entry_registers",
+   "exit_registers",
+   "changed_bytes"
+  ],
+  "equal": true
+ },
+ "economy_source_sha256": {
+  "pesquisas-paralelas/economia/bancada_ciclo_trabalho.py": "d3340e20b395bbbd30541f244e3254719c47bda29bb186245c05d09948cd0348",
+  "pesquisas-paralelas/economia/capturar_ciclo_trabalho.py": "4a3ffccf1b7ed1d23fe903b22e16b560335e8caf20efb4f86eeefa3a3e8dc1f7"
+ },
+ "frame": 125,
+ "mismatches": [],
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "path_reproduction": {
+  "between_frames": true,
+  "code_unchanged": true,
+  "frame1": true,
+  "load_tail": true
+ },
+ "provider_shapes": [
+  {
+   "ok": true,
+   "shape": "{'EAX': 1, 'EDX': 1}"
+  },
+  {
+   "ok": true,
+   "raised": "BatimentModifyMap called at 0x41fa88 without its argument register(s) EDX; pass them (the original passes them), nothing was run",
+   "shape": "{'EAX': 1}"
+  }
+ ],
+ "routine": "BatimentLogeEngin",
+ "schema": "rising-lands/core-minimap-frame125-differential/2",
+ "seconds": 123.81,
+ "source_sha256": {
+  "ferramentas/entrada_estruturas.py": "c673d9b066b873e1a172be9d30432c5ba3824e47ccff715217a8fd2d17fa48b5",
+  "ferramentas/minimapa_estruturas.py": "9907d894d5bd4e9ce22d41b8f72aa9dc7ca54fbcc606c504a4f4fb763a6c6adc",
+  "ferramentas/mundo_vivo.py": "a4c5c2e5f73d09ce6f7bcbd6a15dbbcc5d264cff1c880bc7602ebf317dc3df5c",
+  "ferramentas/validar_minimapa_quadro125.py": "0d747cbf2d9678d2be86e11bfd0efa815c1b1c6aaab52371c28c909b40e77ad3",
+  "ferramentas/visao_movimento.py": "cd61354c6afcd0bc26eb9e7a8db93f5a3cf056d95e58606476783d3e4695255c"
+ },
+ "summary": {
+  "decouvre_terrain_in_situ": {
+   "changed": 120,
+   "minimap_changed": {
+    "structures": 0,
+    "units": 0,
+    "view": 72
+   }
+  },
+  "decouvre_terrain_radius3": {
+   "changed": 0,
+   "minimap_changed": {
+    "structures": 0,
+    "units": 0,
+    "view": 0
+   }
+  },
+  "illumine_terrain_in_situ": {
+   "changed": 335,
+   "minimap_changed": {
+    "structures": 0,
+    "units": 0,
+    "view": 76
+   }
+  },
+  "modify_map_dl0_before_light": {
+   "changed": 196,
+   "minimap_changed": {
+    "structures": 100,
+    "units": 0,
+    "view": 96
+   }
+  },
+  "modify_map_dl0_composition_input": {
+   "changed": 196,
+   "minimap_changed": {
+    "structures": 100,
+    "units": 0,
+    "view": 96
+   }
+  },
+  "modify_map_dl1_before_light": {
+   "changed": 196,
+   "minimap_changed": {
+    "structures": 100,
+    "units": 0,
+    "view": 96
+   }
+  },
+  "modify_map_in_situ": {
+   "changed": 196,
+   "minimap_changed": {
+    "structures": 100,
+    "units": 0,
+    "view": 96
+   }
+  }
+ }
+}

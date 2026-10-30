@@ -13,6 +13,7 @@ class NativeDriver:
         signatures={
             'macos_live_abi_version':([],C.c_uint32),'macos_live_status_size':([],C.c_uint32),
             'macos_live_create':([C.c_char_p,C.c_char_p,C.c_char_p,C.c_uint32],C.c_void_p),
+            'macos_live_validation':([C.c_void_p,C.c_uint32],C.c_int32),
             'macos_live_audit_window':([C.c_void_p,C.c_uint32],None),
             'macos_live_advance':([C.c_void_p,OBSERVER,C.c_void_p],C.c_int32),
             'macos_live_status':([C.c_void_p,C.POINTER(NativeStatus)],None),

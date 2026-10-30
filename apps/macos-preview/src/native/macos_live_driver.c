@@ -17,6 +17,7 @@ struct MacOSLiveDriver {
  FN(rl_versao); FN(rl_criar_mundo); FN(rl_carregar_blocos); FN(rl_passo_quadro);
  FN(rl_liberar_mundo); FN(rl_projetar_tudo); FN(rl_erro_mensagem);
  FN(rl_render_contrato); FN(rl_render_criar); FN(rl_render_geracao); FN(rl_render_quadro); FN(rl_render_liberar);
+ int validation;
  RlMundo world; RlRenderer renderer; RlFrameInput input,phase2;
  MacOSLiveStatus status;
  uint8_t pixels[480000],palette[768];
@@ -47,6 +48,7 @@ static int fail(MacOSLiveDriver*d,int code,const char*context){
 }
 static int proof(MacOSLiveDriver*d,uint32_t index,uint32_t phase,MacOSPhaseObserver observer,void*ctx){
  d->status.phase_index=index;d->status.stop_phase=phase;
+ if(!d->validation)return 0;
  uint64_t t=now();
  if(index<d->audit_limit){
   uint32_t n=0;int c=d->rl_projetar_tudo(d->world,d->bulk,d->bulk_capacity,&n);
@@ -67,7 +69,7 @@ static int proof(MacOSLiveDriver*d,uint32_t index,uint32_t phase,MacOSPhaseObser
 #define LOAD(name) do { d->name=(__typeof__(d->name))dlsym(d->library,#name);if(!d->name){snprintf(error,capacity,"Missing ABI symbol %s",#name);goto bad;} } while(0)
 #endif
 MacOSLiveDriver *macos_live_create(const char*library,const char*root,char*error,uint32_t capacity){
- MacOSLiveDriver*d=calloc(1,sizeof(*d));if(!d)return NULL;d->status.phase_index=UINT32_MAX;
+ MacOSLiveDriver*d=calloc(1,sizeof(*d));if(!d)return NULL;d->status.phase_index=UINT32_MAX;d->validation=1;
 #ifndef MACOS_STATIC_ENGINE
  d->library=dlopen(library,RTLD_NOW|RTLD_LOCAL);if(!d->library){snprintf(error,capacity,"%s",dlerror());goto bad;}
 #endif
@@ -97,6 +99,10 @@ MacOSLiveDriver *macos_live_create(const char*library,const char*root,char*error
  return d;
  bad:if(capacity&&error[0]==0)snprintf(error,capacity,"Invalid native initialization inputs");macos_live_free(d);return NULL;
 }
+int32_t macos_live_validation(MacOSLiveDriver*d,uint32_t enabled){
+ if(!d||d->status.phase_index!=UINT32_MAX||enabled>1)return 1;
+ d->validation=(int)enabled;return 0;
+}
 void macos_live_audit_window(MacOSLiveDriver*d,uint32_t phases){if(d)d->audit_limit=phases<d->state_count?phases:d->state_count;}
 int32_t macos_live_advance(MacOSLiveDriver*d,MacOSPhaseObserver observer,void*ctx){
  if(!d||d->status.stopped)return 1;int c;uint64_t t;
@@ -107,21 +113,21 @@ int32_t macos_live_advance(MacOSLiveDriver*d,MacOSPhaseObserver observer,void*ct
  if(out.abi_status||out.generation!=gen||out.width!=800||out.height!=600||out.stride!=800||out.required_pixels!=480000||out.required_palette!=768||out.palette_generation!=1||out.disposition>2){d->status.stopped=1;snprintf(d->status.message,sizeof(d->status.message),"NativeRenderResultContractMismatch");return 5;}
  d->status.generation=gen;d->status.disposition=out.disposition;
  if(out.disposition==2){d->status.stopped=1;snprintf(d->status.message,sizeof(d->status.message),"%s at 0x%08x: %s",out.stop_callee,out.stop_address,out.stop_reason);return 5;}
- t=now();CC_SHA256(d->pixels,sizeof(d->pixels),d->status.surface_sha);
+ if(d->validation){t=now();CC_SHA256(d->pixels,sizeof(d->pixels),d->status.surface_sha);
  if(d->status.frames<d->surface_count){if(memcmp(d->status.surface_sha,d->surface_hashes+32*d->status.frames,32)){d->status.stopped=1;snprintf(d->status.message,sizeof(d->status.message),"SurfaceProofMismatch no quadro %llu",(unsigned long long)(d->status.frames+1));return 5;}d->status.surfaces_equal++;}
- d->status.proof_ns+=now()-t;
+ d->status.proof_ns+=now()-t;}
  t=now();c=d->rl_passo_quadro(d->world,2,&d->input);d->status.logic_ns+=now()-t;if(c)return fail(d,c,"between_frames");
  if((c=proof(d,(uint32_t)(2*d->status.frames+1),2,observer,ctx)))return c;
  t=now();c=d->rl_passo_quadro(d->world,3,&d->input);d->status.logic_ns+=now()-t;if(c)return fail(d,c,"CalculGame");
  if((c=proof(d,(uint32_t)(2*d->status.frames+2),3,observer,ctx)))return c;
  d->status.frames++;c=d->rl_render_geracao(d->world,&gen,&phase,&counter);if(c)return fail(d,c,"generation after frame");d->status.counter=counter;return 0;
 }
-void macos_live_status(MacOSLiveDriver*d,MacOSLiveStatus*out){if(d&&out){*out=d->status;out->world=d->world;uint64_t g=0;uint32_t p=0,c=0;if(d->rl_render_geracao(d->world,&g,&p,&c)==0)out->counter=c;}}
+void macos_live_status(MacOSLiveDriver*d,MacOSLiveStatus*out){if(d&&out){*out=d->status;out->world=d->world;uint64_t g=0;uint32_t p=0,c=0;if(d->validation&&d->rl_render_geracao(d->world,&g,&p,&c)==0)out->counter=c;}}
 uint64_t macos_live_renderer(MacOSLiveDriver*d){return d?d->renderer:0;}
 const uint8_t*macos_live_pixels(MacOSLiveDriver*d){return d?d->pixels:NULL;}
 const uint8_t*macos_live_palette(MacOSLiveDriver*d){return d?d->palette:NULL;}
 int32_t macos_live_read(MacOSLiveDriver*d,uint32_t address,uint32_t size,uint8_t*out){
- if(!d||!out||!size)return 1;uint32_t n=0;int c=d->rl_projetar_tudo(d->world,d->bulk,d->bulk_capacity,&n);if(c)return c;
+ if(!d||!out||!size||!d->validation)return 1;uint32_t n=0;int c=d->rl_projetar_tudo(d->world,d->bulk,d->bulk_capacity,&n);if(c)return c;
  uint32_t off=4;for(uint32_t i=0;i<le(d->bulk)&&off+8<=n;i++){uint32_t base=le(d->bulk+off),len=le(d->bulk+off+4);off+=8;if((uint64_t)off+len>n)return 3;if(address>=base&&(uint64_t)address+size<=(uint64_t)base+len){memcpy(out,d->bulk+off+address-base,size);return 0;}off+=len;}return 3;
 }
 void macos_live_free(MacOSLiveDriver*d){if(!d)return;if(d->renderer&&d->rl_render_liberar)d->rl_render_liberar(d->renderer);if(d->world&&d->rl_liberar_mundo)d->rl_liberar_mundo(d->world);if(d->library)dlclose(d->library);free(d->bulk);free(d->surface_hashes);free(d->state_hashes);free(d->entries);free(d->spans);free(d);}

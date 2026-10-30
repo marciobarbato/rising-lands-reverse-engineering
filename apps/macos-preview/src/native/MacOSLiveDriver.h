@@ -17,6 +17,9 @@ uint32_t macos_live_abi_version(void);
 uint32_t macos_live_engine_binding(void);
 uint32_t macos_live_status_size(void);
 MacOSLiveDriver *macos_live_create(const char *library,const char *inputs,char *error,uint32_t capacity);
+/* Select before load_tail. Validation is the default for proof consumers.
+ * Play mode performs no projection, hash, comparison or observer callback. */
+int32_t macos_live_validation(MacOSLiveDriver *,uint32_t);
 void macos_live_audit_window(MacOSLiveDriver *,uint32_t);
 int32_t macos_live_advance(MacOSLiveDriver *,MacOSPhaseObserver,void *);
 void macos_live_status(MacOSLiveDriver *,MacOSLiveStatus *);
