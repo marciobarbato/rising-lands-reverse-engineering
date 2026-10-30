@@ -1176,3 +1176,30 @@ both capture hashes are in `validacao/recovery-restoreall-reproduction.json`, wi
 log in `validacao/recovery-restoreall-native.log`. The original source and executable/code identities
 also match the predecessor. No frozen evidence is overwritten. The domain gate and P3/P6/P7 chain
 are now running under their own leases; AffText remains queued at this checkpoint.
+
+## State at 2026-10-30 07:15
+
+Documentation-only checkpoint written at the MacBook pause; no code, evidence or native run changed. The
+summary tables (API, coverage, stops with owners) are in [GRAPHICS.md, "Current state"](../../docs/GRAPHICS.md#current-state--2026-10-30-0715).
+
+- **On main** (through `ad0a4a9`): render API 1.9 (K1 501/501, P4/P5 3,001/3,001), the CAVE structure guard,
+  projectile types 15/16, the P4 frame-484 text verdict, the real S1 end-screen native capture (`24f0ec8`: 100/100
+  surfaces, 50/50 states, 12/12 + 8/8 isolated calls) and the P6 guard fixes the AI/runtime strict proof needs.
+- **On `feat/re-graphics`, awaiting integration** (`b1f07bf..bae1b18`, nine pushed commits): the sections above from
+  "Interrupted-session recovery" through "Fresh leased RestoreAll reproduction". Finite view matrix 3,840/3,840, P7
+  origins 7/7, RestoreAll pairs 24/24 (fresh rerun identical), S1 objectives 7/7 with 1,519/1,519 raster calls, S1
+  AffGame flow 11/11 + 7/7, all with 0 mismatches. `bae1b18` then captured the native AffText glyph matrix (270 calls,
+  54.0 s) and 20 isolated S1 dependency calls (69.7 s) under the lease; both are evidence only, not yet translated.
+- **Still open on the branch:** the current-source P3/P6/P7 chained pixel replay (`validar_cadeia_exibicao_atual.py`;
+  its committed log only shows the lease wait) and glyph-enabled AffText `0x459454`. The S1 transition still needs
+  MenuInit/LoadPie `0x4799C4` and opaque victory text; other game modes stay `0x4176A8`.
+- **Parked, unvalidated:** `origin/wip/re-graphics-codex-0430` (`2add6fc`, already recovered into the branch),
+  `origin/wip/re-graphics-codex-0700` (`e76b5f1`) and `origin/wip/re-graphics-0715` (`0c007c2`, a superset with tests),
+  both on `bae1b18`. They carry `texto_afftext_bitmap.py`, `telas_inicializacao_s1.py` and a P3/P6/P7 chain report.
+  Their self-reported 270/270, 2/2 and 3,001/2,272/3,572 results are not accepted: the final gate never completed.
+  Resume by reviewing `0c007c2`, rerunning its validators and the domain gate, then committing on this branch.
+- **Domain gate at this checkpoint:** `python3 -B scripts/check.py --domain graphics` on `bae1b18` merged with main
+  `3874fcc` (local merge `889cd39`): **287 tests, zero failures, PASS**, 165.6 s, documentation links OK. It replays
+  committed captures only; no native run. The log was not committed.
+- **Next:** coordinator integration of the nine commits, then the AffText provider and S1 MenuInit screens from the
+  committed captures, the chained replay, and a 1.9 hand-off to the Rust engine (which still renders Graphics 1.7).
