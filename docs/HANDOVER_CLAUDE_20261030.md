@@ -88,3 +88,13 @@ The final playable edition must have excellent performance: **at least 60 fps** 
 - **Game speed:** configurable and decoupled from display fps.
 
 Assign this to Codex (macOS + engine) after stage 4 is integrated. Update `docs/M3_PLAN.md` M3.5 accordingly.
+
+## Final state before the restart (22:18)
+
+- **Integrated on main** (ef52cb0): Economy (3d73142), AI/runtime (a7f5d49), Graphics 1.8 (ef52cb0).
+- **Not integrated:**
+  - Missions: its gate was interrupted.
+  - macOS: not attempted, and it needs ABI 1.4 adoption.
+  - This maintenance branch: handover + PROGRESS M3R1.
+  - Rust stage 4.
+- **Rust stage 4.** The branch feat/codex-rust-engine is pushed at f0225ff, a merge of main into stage 4 (f4e5abe). Codex was then porting AI/runtime round 3 (Ctrl depot, help pages, `player_pages.rs`) and was stopped. Seven files are uncommitted on disk in `/Users/marcio/git/Rising-Lands-Codex-Engine`. Resume the session: it continues from those files.
