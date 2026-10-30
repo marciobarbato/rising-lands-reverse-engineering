@@ -621,13 +621,13 @@ See `pesquisas-paralelas/graficos-animacao/FRONTEIRAS_EXIBICAO.md`: `fronteiras_
 
 **Historical 1.0 stops (superseded by the contract below).** `0x41591F`: the 16 M1 units have life word `+0x74` = 1 (< 100), which enables the tired/overlay branch of the unit body (`0x414320..0x414409`, `TypeEnginSeFatigue`) that no committed unit module covers; this is the first stop and all later sprite cells are absent. `0x408AC8`: modes 0, 1, 2, 6, 7, for which the original draws one common image different from the facade (identical across those five modes; captured natively, not reconstructed). `0x40892D`: uninhabited facade (gray effect). `0x40863E`: mode 3 uninhabited (advances the RNG cursor). `0x4022C8` / `0x4020EC`: selection frame / gauge of a selected structure. The raid unit (unit 16) on screen and the effect projectiles 31/32 were captured as logic-state-clean (see EFEITOS_LOGICOS_EXIBICAO.md) but their **pixel** composition is not reconstructed; the composition stops at the unit overlay before reaching them.
 
-**Render API, contract version 1.8** ([render_quadro.py](../pesquisas-paralelas/graficos-animacao/render_quadro.py)). This is the contract the macOS integration layer consumes. A change of any input, output field, format or stop semantics bumps `VERSAO_RENDER_QUADRO` (major for breaking changes, minor for additions); the version is returned in every result.
+**Render API, contract version 1.9** ([render_quadro.py](../pesquisas-paralelas/graficos-animacao/render_quadro.py)). This is the contract the macOS integration layer consumes. A change of any input, output field, format or stop semantics bumps `VERSAO_RENDER_QUADRO` (major for breaking changes, minor for additions); the version is returned in every result.
 
-The 1.7 and 1.8 changelogs and scripted-probe boundary qualification are below. The earlier dispatch's heading/report
+The 1.7, 1.8 and 1.9 changelogs and scripted-probe boundary qualification are below. The earlier dispatch's heading/report
 said 1.6; published 1.7 is retained. The macOS consumer must update its explicit pin separately.
 
 ```python
-VERSAO_RENDER_QUADRO = (1, 8)
+VERSAO_RENDER_QUADRO = (1, 9)
 renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=None, habitado=None, relogio=None, cache=None, hud=False, texto=None) -> QuadroRenderizado
 regioes_necessarias(memoria, hud=False) -> [(start, end_exclusive, name)]
 QuadroRenderizado(versao, largura, altura, pixels, rgba, parada, chamadas, efeitos, cache)
@@ -651,7 +651,7 @@ carregar_cache_inicial(caminho, catalogo=None) -> EstadoCache
   With `hud=True`, `[0x4E24B4]` adds the 256-byte tooltip-shadow table. These tables differ from disabled-icon gray.
 
 *Outputs* (`QuadroRenderizado`, frozen).
-- `versao`: `(1, 8)`. `largura`, `altura`: 800, 600.
+- `versao`: `(1, 9)`. `largura`, `altura`: 800, 600.
 - `pixels`: 480,000 bytes, palette indices, row-major, origin top-left, pitch 800. The surface after the composed passes; pixels the composition did not reach keep `superficie_anterior`.
 - `rgba`: 1,920,000 bytes, 4 bytes per pixel (R, G, B, 255), same order as `pixels`; `rgba[4i:4i+3] = palette[3*pixels[i]:3*pixels[i]+3]`.
 - `parada`: `None` for a complete composition, otherwise `{'endereco': '0x........', 'detalhe': str}`: the first original branch the reconstruction does not cover. The frame is then **partial** (everything drawn before the stop is exact, everything after is absent); the consumer must show or log it, never treat it as complete.
@@ -664,7 +664,7 @@ carregar_cache_inicial(caminho, catalogo=None) -> EstadoCache
 
 *Palette.* PLATGAME.PIE: 256 entries × 3 bytes, 8-bit RGB (the 6-bit VGA values expanded ×4, so the maximum component is 252), no gamma. It is the static palette: the live palette cycling (`Cyclage`) and any palette change after load are not applied. Pass `paleta` to override.
 
-*Supported domain.* Mode `[0x4E2F78] = 0x12` (in-game), 800×600 session (`[0x49A018] = 800`, window 25×17 cells), camera 0..3, terrain/vegetation/structure passes as captured. Frame cadence gates (`[0x4E05A2]`, divisor) can return an undrawn frame (`pixels == superficie_anterior`, stop at the cadence return). With `hud=False` the HUD (from `0x417B1C`) is not drawn; with `hud=True` it is drawn within the additive 1.5, 1.7 and 1.8 domains below and stops at its original address outside it. Other game modes and the video-surface clear path remain outside.
+*Supported domain.* Mode `[0x4E2F78] = 0x12` (in-game), 800×600 session (`[0x49A018] = 800`, window 25×17 cells), camera 0..3, terrain/vegetation/structure passes as captured. Frame cadence gates (`[0x4E05A2]`, divisor) can return an undrawn frame (`pixels == superficie_anterior`, stop at the cadence return). With `hud=False` the HUD (from `0x417B1C`) is not drawn; with `hud=True` it is drawn within the additive 1.5, 1.7, 1.8 and 1.9 domains below and stops at its original address outside it. Other game modes and the video-surface clear path remain outside.
 
 *Named stops* (address → meaning). `0x4176A8` mode ≠ 0x12; `0x41794B` video-surface clear; `0x4179D4` lock returned NULL; `0x4179E1` saved-background restore outside the captured 800-pixel mode; `0x41068E`/`0x416864` unsupported viewport; `0x41591F` unit body/owner/effects/count outside the committed domains; `0x412923` selected-unit order mode outside cell mode 1 and farmer depot mode 2; `0x412637` uncaptured depot type; `0x410BE4` unit overlay health/type/fatigue words outside the captured domain (farmer and builder also support 3/4); `0x410A2C` unit bag capacity other than 0/1; `0x413696` non-builder experience icon; `0x4135FA` unselected tired icon with a shift outside the colonist slice; `0x46FF70` unsupported projectile; `0x408AC8` inhabited sanctuary construction modes or missing construction read view; `0x40958E` inhabited CAVE outside owner-0 mode-5 flags/level bounds; `0x414A8A` worker outside captured task/count bounds; `0x4099A6` nonzero CAVE construction variant at progress >=100; `0x4085CB` sanctuary damage/fire input rejected before the facade; `0x4087AA`/`0x40F378` missing habitation provider; `0x4022C8`/`0x4020EC` structure frame/gauge outside captured sanctuary/CAVE bounds; `0x401A70` structure bag/technology marks outside captured capacity/code bounds; `0x407EA7`/`0x407FB8`/`0x40288B`/`0x40F23B` wall/gate/workshop/other facade; prior terrain/vegetation/cache stops remain.
 
@@ -962,3 +962,54 @@ Final leased gate: `python3 -B scripts/check.py --domain graphics`, **261 tests,
 The [gate log](../pesquisas-paralelas/graficos-animacao/validacao/api18-graphics-tests-final.log) includes all prior
 graphics suites and the new native-evidence comparisons; documentation links pass. Historical matrices are consumed
 unchanged. New native captures, their manifests and the complete commit ledger are in the research document above.
+
+### Exact probe origins and harvest screens (contract 1.9, additive)
+
+Source main `ef52cb027ad202c9d4b9568dd13bbfb15d6c9c63` was merged first. The [declared native matrix and ledger](../pesquisas-paralelas/graficos-animacao/M3_HARVEST_GRAPHICS.md)
+pin K1/P4/P5 input and frame records before translation. At each first actual AffGame entry of an unproved origin,
+the intact routine runs in isolation to its caller return without state writes creating the view. CPU, memory,
+declared host state and surfaces are restored exactly, then the ordinary phase must reproduce the published whole
+state and both phase-surface hashes. P4/P5 continuations contain at most 601 frames per invocation and retain an
+18-minute internal budget. Every native invocation uses the heavy lease.
+
+The display logic-effect provider adds 35 exact origins: all 33 previously unproved K1 arrow-scroll positions,
+P4 (10,16), P5 (31,0). `ORIGENS_PROVADAS` contains 143 positions for AffGame, while `ORIGENS_RESTOREALL_PROVADAS`
+retains 108 for RestoreAll. No map-bounds fallback is introduced; other positions still stop at `0x415B77`, and
+the prior structure, habitation, shake and projectile guards remain. `0x4E05A2` remains game logic: the isolated
+comparison checks the existing AI provider's flag stores and leftover EAX separately from the unchanged M2.3
+display mask. It accepts no additional logic/CRT change.
+
+[camadas_colheita_m3.json](../pesquisas-paralelas/graficos-animacao/camadas_colheita_m3.json) supplies the added origin
+set and builder work family. [colheita_exibicao_m3.py](../pesquisas-paralelas/graficos-animacao/colheita_exibicao_m3.py)
+adds selected owner/camera 0 builder type 7 state 5, raw count 8, no effects/oscillation, direction 1..16 and phase 0..7.
+Task 0 draws selection frame → order markers → shadow/body → existing information tail. Body ID uses base 1338/1466
+for empty/nonempty bag + floor((direction+1)/2)*8 + raw phase, with anchor (26,26); shadow 10784 is at shifted origin
++(2,26). Tasks 1/2 return before all selection/marker/body/information drawing, as the original does while mining
+and for its one-frame exit (native frames 610/760). Other work tasks remain `0x414A8A`; existing overlay guards remain.
+P4 farmer work and tooltip layout use the 1.8 data. These are rendering additions, with no resource/task/world update.
+
+`VERSAO_RENDER_QUADRO = (1,9)`; arguments, regions, result/cache formats and callback order are unchanged. The
+consumer updates its explicit version pin separately. The engine workstream can port the new data and arithmetic
+alongside the existing 1.8 plans. Glyph execution remains the recorded AffText boundary, enforced by exact arguments
+and full pre-text hashes in validation; absent production text providers still produce a named `0x459454` stop.
+TextGetMessage's declared zero return and the unavailable `[0x5099A4]` pointer are unchanged.
+
+Final [source-pinned full-surface comparison](../pesquisas-paralelas/graficos-animacao/validacao/colheita-graficos-final.json),
+under the strict recorded AffText boundary:
+
+| Probe | Drawn frames | Equal / total | First difference / stop |
+|---|---|---:|---|
+| K1 | 129–629 | 501 / 501 | None |
+| P4 | 129–3129 | 3001 / 3001 | None |
+| P5 | 129–3129 | 3001 / 3001 | None |
+
+All 6,503 complete 800×600 indexed surfaces, 346,644 raster calls and projected display effects match. P4 has 2,646
+recorded AffText calls; K1/P5 have none. Without a text provider, P4 retains its first `0x459454` stop at 484,
+after 355 complete phases. The [isolated effect comparison](../pesquisas-paralelas/graficos-animacao/validacao/origens-colheita-final.json)
+passes 43/43 calls across 35 unique origins, with zero additional logic/CRT differences and exact AI flag/EAX results.
+Ten bounded native continuations reproduce all 6,002 P4/P5 whole-state and phase hashes; no longer native run needs
+Mac mini routing. The fresh [128-frame HUD regression](../pesquisas-paralelas/graficos-animacao/evidencias/verificacao-cadeia-m22-v2-api19-128.json)
+is 128/128, with unchanged 1.4/1.5/1.7/1.8 hashes. Final leased graphics gate: **267 tests, zero skips, PASS**,
+143.534s ([log](../pesquisas-paralelas/graficos-animacao/validacao/api19-graphics-tests-final.log)).
+Glyph-enabled execution, unproved origins and all prior unknown states remain addressed stops; RestoreAll has not
+been broadened by these AffGame captures. Evidence precedes translation; no main integration or acceptance is recorded.
