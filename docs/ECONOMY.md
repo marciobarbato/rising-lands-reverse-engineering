@@ -50,6 +50,209 @@ The frame-125 minimap divergence in that composition was Economy's: BatimentModi
 2. Refresh the native hunger and restore reports after the changed `alimentacao.py`, then run the domain gate and push `feat/re-economy`.
 3. Support AI/runtime's strict S1 proof and Missions' S1 windows with any Economy stop they report; then the research/technology routines at the S1 result screen.
 
+## S1 sack-capacity query (2026-10-30)
+
+`lacunas_economia_s1.LacunasEconomiaS1` and
+`provedor_lacunas_economia_s1` serve **SacGetCapacite 0x475736**, called by
+InputGame at **0x4299da** (the call address is not the routine entry).
+`chamar(name, regs)` consumes EAX..EBP and optional ESP; the external provider
+requires all seven general registers (`ArgumentoNaoPassado` before any read)
+and returns all seven exact exit registers. AX is the cell index. The object
+and quantity grids are read through their live pointers at 0x507d74 and
+0x507dac. Object types 0x42..0x44 return the quantity byte in AX while keeping
+the quantity pointer's upper EAX half; other object bytes return EAX=0. Every
+other general register is preserved. Optional ESP advances by four. No
+stores, callbacks, flags, or x87 results occur in this routine.
+
+Original first: capture `b00175f` precedes the translation. Its sparse reads
+missed the object-byte load; it is retained as historical evidence and is
+superseded for replay by the additive `captura-sac-v2.json.xz` (`d1f112b`),
+whose memory read hook is armed before native execution. The native outputs
+of both captures agree. The corrected capture has **274 cases**: the actual
+S1 InputGame call at frame **3851**, all 256 object bytes, quantity boundaries
+for all three sack types, cells 0/65535, and register sentinels. Every frame
+3750–3854 equals Missions' replay-checked S1 record, with unchanged code.
+The second S1 call at frame 4210 is outside this bounded capture.
+
+The [native report](../pesquisas-paralelas/economia/validacao-lacunas-s1-sac-emulada.json)
+records **274 fresh comparisons, 0 mismatches** (123.347 s under the lease),
+all equal to the immutable capture and the translation,
+including all seven registers, ESP, unchanged whole memory, sparse-memory
+replay and the external provider. Run under the heavy lease:
+
+```sh
+python3 '/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py' economy-s1-sac -- \
+  python3 -B pesquisas-paralelas/economia/sondar_lacunas_economia_s1.py --grupo sac
+```
+
+Gate: **552 tests, 209 optional skips, 0 failures**, documentation links OK.
+Transport WIP remains parked. The consumer-owned AI/runtime and Rust dispatchers
+must wire this provider; no consumer files are changed by this delivery.
+
+## S1 exit-pipe query (2026-10-30)
+
+`tuyau_economia_s1.TuyauEconomiaS1` and `provedor_tuyau_economia_s1`
+serve **TuyauEstSortie 0x420c7c..0x420cae** over live `u8/u16/u32` memory.
+AX is a protected structure index 0..999. AL is one only when byte +0x76 is
+**exactly 15** and byte +0x75 is nonzero. The upper 24 EAX bits retain the
+structure pointer (`0x49a0c8 + 276*AX`); all six other registers are preserved.
+There are no stores, callbacks, flags or x87 results. Optional ESP advances
+by four; the external provider requires all seven general registers before
+any read and returns all seven exact exit values.
+
+Original-only capture `065b6c0`: **273 cases** (four real S1 calls from
+AffBatiments at frames 1977–1980, every possible +0x76 byte, enable-byte
+boundaries and indices 0/999 with sentinels). Every frame 1750–1980 equals
+the replay-checked S1 record. Native rerun under the heavy lease: **273
+comparisons, 0 mismatches**, equal to the immutable capture (203.662 s),
+including CPU-free sparse replay and the external provider. See the
+[native report](../pesquisas-paralelas/economia/validacao-tuyau-s1-emulada.json).
+
+```sh
+python3 '/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py' economy-s1-tuyau -- \
+  python3 -B pesquisas-paralelas/economia/sondar_tuyau_economia_s1.py
+```
+
+Gate: **557 tests, 209 optional skips, 0 failures**, documentation links OK.
+The query does not advance the pipe animation. Its later S1 calls and a
+consumer-wide chain rerun remain outside this bounded differential.
+
+## S1 research and technology providers (2026-10-30)
+
+`tecnologia_economia_s1.TecnologiaEconomiaS1(m, externo=None)` and
+`provedor_tecnologia_economia_s1(instance, outros=None)` deliver the result-screen
+research/technology bodies in the historical S1 gap survey. Ten bodies are newly
+translated; seven previously validated bodies now also have exact-register
+adapters in this group (BonusReset and the flag/technology/query leaves).
+`ROTINAS` and the additive [listing manifest](../pesquisas-paralelas/economia/evidencias/lacunas-s1/listagens/manifesto.json)
+give all intact-original entry addresses, interval hashes and listings.
+
+The strict adapter takes every EAX..EBP input; omitting any raises
+`ArgumentoNaoPassado` before reads or stores. `chamar` accepts optional ESP and
+advances it by four. Its external adapter returns all seven exit registers.
+Foreign callbacks receive every general register, plus the callee-entry ESP when
+supplied. No behaviour register is defaulted and no exception is suppressed.
+`RechercheGetEtat` additionally returns `_x87_push = (significand64,
+sign_and_exponent16)`: one exact x87 ST0 push, including negative zero, derived
+from the live binary64 at `0x5080fc + 16*AL`. Flags and a complete x87 stack
+machine are outside this provider; nonfinite research values have a named stop.
+
+Original-first capture **`cfff43e`**: 511 calls from the real S1 sites, 510 at
+frame 17043 and one RechercheGetBranche at 17044. Every frame 17000–17044 equals
+the replay-checked S1 record (45 checked states, unchanged code). Fresh leased
+native differential: **511 comparisons, 0 mismatches**, native rerun equal to
+the immutable capture (134.130 s). Compared are all general registers, ESP,
+every changed byte, every stored value, the complete ordered store sequence,
+foreign-call argument order and the strict provider. The foreign read-only
+MissionGetNum and PlayerGetType calls are explicitly the original's recorded
+calls; live consumers must supply their owner providers.
+
+| Routine | Cases | Mismatches |
+|---|---:|---:|
+| TypeBatimentEstRealisable | 352 | 0 |
+| TypeEnginEstRealisable | 48 | 0 |
+| InventionSetEffet | 32 | 0 |
+| BatimentInitTechnologie | 16 | 0 |
+| EnginSetTechnologie | 16 | 0 |
+| SetBatimentRecrutable | 16 | 0 |
+| SetTroupeRecrutable | 16 | 0 |
+| RechercheGetNiveau | 5 | 0 |
+| RechercheGetBranche | 2 | 0 |
+| RechercheCalculNew | 1 | 0 |
+| TechnologieReset | 1 | 0 |
+| BonusReset | 1 | 0 |
+| IaRechercheAjuste | 1 | 0 |
+| InventionGetCout | 1 | 0 |
+| RechercheGetEtat | 1 | 0 |
+| RechercheGetNbInvention | 1 | 0 |
+| SortilegeResetTechnologie | 1 | 0 |
+
+The separate original-first x87 capture **`3273096`** has the real getter and
+eight restored finite-double variants (zero, negative zero, positive/negative,
+fractional and exponent boundaries). Fresh leased native rerun: **9 comparisons,
+0 mismatches**, all native cases equal, including FP-register state, one-push
+depth, exact ST0 value and general registers. See the
+[technology report](../pesquisas-paralelas/economia/validacao-tecnologia-s1-emulada.json)
+and [x87 report](../pesquisas-paralelas/economia/validacao-recherche-get-etat-x87-emulada.json).
+
+**Mutation and callback order.** RechercheCalculNew resets realizability flags
+and spell flags, then selectively resets the bonus table, copies four 16-byte
+stored research records (`0x508134` → `0x5080f4`), replays stored unlocks in
+player/branch/item order, then zeros each player's invention count and checks
+the per-item mission gates. Each new unlock runs InventionSetEffet before the
+level byte advances. A troop unlock writes its realizability byte, then scans
+live structures in index order through BatimentInitTechnologie. A building
+unlock writes its byte, then rebuilds that player's unit-order Bags through
+EnginSetTechnologie. Existing cave/recruitment Bag code is reused; its original
+2/3 structure-type domain is retained. Cave levels use food/stone **stock**
+(total minus RMI, u16 wrapping), the cave count and per-cave capacity before the
+technology Bag is rebuilt. Other bonus bytes and Bag bytes +0x60..+0x65 survive
+the selective resets. A missing foreign provider fails at the actual call after
+all preceding writes; tests verify those partial effects.
+
+**Supported scope and remaining stops.** The native domain is S1's result-screen
+state: all four player loops, finite research getter values, normal troop and
+building unlocks (effect kind 0, subtypes 1/3), and active type-2/type-3 structures.
+This does not claim all technology branches. Named stops remain for bonus-effect
+kinds, spell effects, notification MessageBoxSet, the extra recruitment rebuilds
+for building 13/16/18/20 or troop 11/13/15, research tables beyond 30 entries,
+nonfinite getter values, and IaRechercheAjuste's catch-up from mission 3.
+Consumer-owned dispatch wiring, MissionNext file stores and full-chain S1
+acceptance are outside this delivery. Transport remains parked.
+
+Final domain gate: **565 tests, 209 optional skips, 0 failures**, documentation
+links OK (51.455 s). The four new native differentials ran separately under
+the heavy lease; unrelated native suites were not opted into.
+
+Reproduction (each command is bounded to 19 minutes):
+
+```sh
+python3 '/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py' economy-s1-tech -- \
+  python3 -B pesquisas-paralelas/economia/sondar_tecnologia_economia_s1.py
+python3 '/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py' economy-s1-x87 -- \
+  python3 -B pesquisas-paralelas/economia/sondar_x87_pesquisa_s1.py --validar
+```
+
+For the Mac mini, use its own Economy worktree with the identical committed
+sources, `.local/python`, and snapshot paths `.local/m3/quadro128/` and
+`.local/m3/passo2/S1/instantaneo-17000.pickle`; replace the lease path by
+`/Users/marciobarbato/git/Rising Lands/local-data/coordination/heavy_lease.py`.
+The snapshot SHA and the checked S1 revision are recorded in each capture;
+no tests pin another front's source-file bytes.
+
+## Recruitment placement DX correction (2026-10-30, feature delivery)
+
+Base: `origin/main` `e41cc77`, merged into `feat/re-economy`. At SortieTroupe CALL `0x420f8c`
+→ SetSortEngin `0x445fbc`, the callback now receives **AX = existing unit, DX = computed exit cell**;
+`ARGUMENTOS['SetSortEngin']` includes `EDX: 0xffff`. The cell comes from CalculPosition's returned AX
+at `0x420f5a` (saved by the original in EBP at `0x420f5f`), is reloaded into EDX at `0x420f83`, and
+is preserved by EnginSetExperimente through the placement call. No observed S1 value is injected.
+
+All five calls satisfy Core's [recruitment adapter contract](core/RECRUITMENT_ADAPTERS.md):
+
+| CALL / callee | Forwarded behaviour registers |
+|---|---|
+| `0x420f69` EnginSetType | AX unit, DX computed cell, BL returned direction, CL requested type |
+| `0x420f75` EnginAddVie | AX unit, DX 1000 |
+| `0x420f7c` EnginResetFatigue | AX unit |
+| `0x420f85` EnginSetExperimente | AX unit, DX computed cell |
+| `0x420f8c` SetSortEngin | AX unit, DX computed cell |
+
+The shared replay/native argument comparison checks every required register and the native reports record
+all five calls' original/translated arguments and masks. Focused probes reject missing/wrong inputs at
+each of the three captured completions; a synthetic protocol probe changes the returned position and
+checks its forwarding through conversion, experience and placement. Original captures and their hashes
+are unchanged. Supported domains, removal/credit/conversion/recovery/placement/movement/cleanup/message
+order and named dependency stops are unchanged. AI/runtime owns the subsequent S1 chain rerun; this
+delivery does not establish whole-state equality at frame 2547.
+
+CPU-free recruitment: **342/342**, including Core's exit-position provider; abandonment: **81/81**,
+with and without it. Fresh native runs through the heavy lease: **342 recruitment + 81 abandonment cases,
+0 mismatches/errors/outside-domain cases, both reruns equal to the unchanged captures**. Reports record
+30 recruitment and 10 abandonment callback-argument comparisons, all equal, including DX at placement.
+Domain gate: **547 tests, 209 optional skips, 0 failures**, documentation links OK. The two native
+differentials above ran separately under the lease.
+
 ## Recruitment direction ABI correction (2026-10-30, feature delivery)
 
 After merging `origin/main` `92fab50`, `caverna_recrutamento.ARGUMENTOS['EnginSetType']` includes `EBX: 0xff`.

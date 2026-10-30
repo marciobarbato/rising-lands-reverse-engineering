@@ -63,6 +63,9 @@ fn near(m: &mut MemoriaJogo, r: u32) -> Result<bool> {
 fn centre(m: &MemoriaJogo, s: u32) -> Result<u32> {
     crate::frame_core::building_cell(m, s)
 }
+fn geometric_centre(m: &MemoriaJogo, s: u32) -> Result<u32> {
+    Ok(crate::chain_entry::central_offset(m, s)? & 65535)
+}
 fn walk(m: &mut MemoriaJogo, u: u32) -> Result<u32> {
     crate::frame_movement::displace(m, u)
 }
@@ -300,7 +303,7 @@ pub fn work(m: &mut MemoriaJogo, u: u32) -> Result<u32> {
                 voice(m, u, r)?;
                 let mode = m.b(r + 0x82)?;
                 if mode == 2 {
-                    let c = centre(m, m.w(r + 0x80)?)?;
+                    let c = geometric_centre(m, m.w(r + 0x80)?)?;
                     crate::frame_spawn::order(m, u, c as u16)
                 } else if mode == 1 {
                     crate::frame_spawn::order(m, u, m.w(r + 0x80)? as u16)
@@ -396,7 +399,7 @@ pub fn work(m: &mut MemoriaJogo, u: u32) -> Result<u32> {
                         );
                     }
                     m.sw(r + 0xc0, m.w(r + 0x80)?)?;
-                    let c = centre(m, m.w(r + 0x80)?)?;
+                    let c = geometric_centre(m, m.w(r + 0x80)?)?;
                     if c & 65535 != 65535 {
                         m.sb(r + 0x89, 3)?;
                         let f = dest(m, u, r, c)?;
@@ -475,7 +478,7 @@ pub fn work(m: &mut MemoriaJogo, u: u32) -> Result<u32> {
                     );
                 }
                 m.sw(r + 0xc0, m.w(r + 0x80)?)?;
-                let c = centre(m, m.w(r + 0x80)?)?;
+                let c = geometric_centre(m, m.w(r + 0x80)?)?;
                 if c & 65535 != 65535 {
                     m.sb(r + 0x89, 3)?;
                     let f = dest(m, u, r, c)?;

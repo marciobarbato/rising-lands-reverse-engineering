@@ -721,3 +721,249 @@ Final leased domain gate: 124 tests, 116 successful executions and eight explici
 failures/errors; documentation links and diff whitespace pass. Second-machine P6 reproduction and S1
 pass-2 equality remain outside this delivery. The native prefix also reproduces the committed original
 store sequence and conversion arguments at each bounded stop; it does not execute a missing callback.
+
+
+## S1 recruit continuation — original city-message capture (2026-10-30)
+
+Merged fetched main `6cdbc5a` into the feature branch before research. The new
+`capturar_mensagem_cidade_ia.py` records intact `iagVilleSendMessage 0x484808`
+at SortieTroupe CALL `0x4211e5`, before any city-message translation.
+`evidencias/mensagem-cidade-original.json.xz` has **27 original cases**:
+three complete Economy producer fixtures (297/869/1363), the actual S1 call
+at frame 2547, and 23 declared owner/player-type prefixes from that call.
+Inputs are AX structure, DL message 3, EBX 0, with all seven actual registers
+retained; declared variants poison their unused upper bits. Four AI-owner
+cases stop at `0x48484c` before the unbound message dispatch; the other 23
+return. Captured data includes every non-stack read-before-write byte, all
+seven exits (and native ESP on S1), and effects. Real calls and bounded
+variants make no non-stack stores. No callee is replaced.
+
+The leased original run replays S1 snapshot 2500 through 2547, checks all
+48 states against the committed original trajectory, and leaves original
+code unchanged. Snapshot SHA-256 is
+`95dc80e0443e44537c57f19c3fc30ba12c861f185f16c9d65c878e89f511c3a3`.
+The existing native inputs were copied to ignored `.local/m3/` from Core's
+read-only snapshot inputs and their hash verified; no foreign source was
+imported from another worktree. Oracle remains intact RISING.EXE SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+
+Command (through `/Users/marcio/git/Rising Lands/local-data/coordination/heavy_lease.py`):
+`python3 -B pesquisas-paralelas/ia-runtime/capturar_mensagem_cidade_ia.py`.
+The capture refuses replacement and asserts that no city translation was
+imported. This commit supplies evidence only; the translation and native
+differential follow. Recruitment-provider binding is being validated
+separately; Economy still omits DX at SetSortEngin CALL `0x420f8c`.
+
+
+### Versioned city capture read-coverage correction
+
+`evidencias/mensagem-cidade-original-v2.json.xz` supersedes v1 for the
+read-before-write fixture. Review found that Unicorn's already compiled
+PlayerGetType blocks missed newly installed memory hooks in the three Economy
+cases. Their native outputs were correct, but the read fixtures were incomplete.
+The capture now flushes translation blocks after installing memory hooks and
+requires all owner/player prefix reads. The first evidence file remains unchanged.
+A fresh leased original-only run again records 27 cases (23 returns, four bounded
+AI prefixes), all 48 S1 states equal, unchanged original code. Every v2 case
+contains all required owner/player reads, checked independently before this commit.
+No translation has been added yet. The validation mode consumes v2 and will
+reproduce it from the original before comparing Python.
+
+
+## S1 recruit continuation — bound providers and city translation
+
+`DonosM3` now binds Core's five `RecrutamentoCore` entries through
+`provedor_recrutamento`, passing the original partial register file and
+`_incertos` unchanged. All seven outputs and preserved unknown masks reach
+Economy. The existing live bonus callback is used; without one, Core's
+`bonus_recrutamento(memory)` is resolved lazily on the actual query, never
+replaced with zero. The owned bootstrap now exposes `integracao.providers`.
+Core's input domain, mutation and callback order remain those in
+`docs/core/RECRUITMENT_ADAPTERS.md`; no foreign research source was changed.
+
+The current Economy `EnginSetType` forwards actual BL. Native
+`validacao/producao-entrada-recrutamento-native.json`: **6/6 equal prefixes**,
+zero mismatches. Three calls return below threshold. Three match the full
+conversion/healing/fatigue/experience prefix and stop before `SetSortEngin`
+entry `0x445fbc`, CALL `0x420f8c`: **Economy supplies AX but omits required DX**.
+All provided register arguments, every non-stack changed byte and native
+store sequence agree. Add `EDX: 0xffff` to Economy's `ARGUMENTOS['SetSortEngin']`
+and pass the actual `celula` preserved through EnginSetExperimente. AI/runtime
+never reconstructs it from callback history or fabricates it.
+
+After original-only capture commits `14d1cb1` / `018687a`, the city-message
+provider is `mensagem_cidade_ia.mensagem_cidade(memory, regs, chamada)`, called
+directly by `DonosM3.externo('iagVilleSendMessage', ...)`. Inputs, supported
+owner gate, exact seven-register outputs/unknown masks and plain-RET ESP
+semantics are documented in `docs/AI_RUNTIME.md`. The non-AI branch reads
+the structure owner and Economy's live player-type query, returns EAX type
+(or owner >=4), EBX structure and EDX original EBX, preserving the other
+registers. It makes no non-stack stores. AI owners remain a named stop
+at `0x48484c`, with message and argument, before unbound handlers.
+
+Fresh leased native city differential: **27 cases, zero mismatches**;
+**23 exact returns and four bounded AI-prefix dependency stops**. The
+three Economy real calls and actual S1 frame-2547 call reproduce exactly,
+including all native reads; the 48 S1 trajectory states agree and original
+code remains unchanged. `validacao/mensagem-cidade-native.json` records
+source/capture hashes and per-case results; CPU-free replay passes all cases.
+Original entries/identity remain intact RISING.EXE SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`,
+city entry `0x484808`, caller `0x4211e5`, AX structure / DL 3 / EBX 0.
+
+The domain gate before the city addition passed 126 tests with eight explicit
+native skips; five focused recruitment/city tests pass. Full input-order,
+deposit-page and construction/key native regressions plus the final domain
+gate are running next. Strict/planning S1 indicators follow from the committed
+implementation. No main integration, acceptance or complete S1 proof is claimed.
+
+
+## S1 continuation — final indicator reach and regressions
+
+Implementation `bf8ec61` is pushed to `feat/re-ai-runtime`; indicator and native
+regression reports are pushed at `491553f`. Fresh strict and planning runs on
+that implementation use replay-checked S1 `bab6c7c` and request the whole
+16,922-frame post-128 probe. Both compare **2,418 frames equal, 129–2546**;
+first difference is null. Both stop in **frame2547** on Economy's missing
+**DX at SetSortEngin CALL `0x420f8c`, entry `0x445fbc`**. The planning run
+records zero Graphics bypasses and remains local/diagnostic. Strict report:
+`validacao/s1-recrutamento-strict.json`. Full report and exact contract:
+[S1_RECRUIT_CONTINUATION.md](S1_RECRUIT_CONTINUATION.md).
+
+**Next owner request: Economy.** `caverna_recrutamento.ARGUMENTOS['SetSortEngin']`
+needs `EDX: 0xffff`; `_SortieTroupe` must pass the actual exit `celula` alongside
+`EAX=unidade`. AX/DX are u16 unit/exit cell; the existing native S1 owner capture
+observes AX=4, DX=`0x0e0f` (3599) at frame 2547. Those values are observations,
+not defaults to inject. Core's adapter is bound, returns all seven registers
+and rejects the omitted DX before placement touches memory. Bag retirement,
+conversion, healing, fatigue reset and experience retain their earlier effects;
+there is no retry or rollback. The city provider is independently validated
+and installed, but the current Python S1 stops earlier. After Economy forwards
+DX, rerun the same S1 indicator before assigning any later stop. AI-owner city
+message bodies remain this front's named dependency at `0x48484c`.
+
+All three native leaf regressions rerun through the shared heavy lease:
+
+| Differential | Cases | Complete | Named stops | Mismatches | Seconds |
+|---|---:|---:|---:|---:|---:|
+| Input orders | 124 | 118 | 6 | 0 | 130.523 |
+| Deposit pages | 203 | 203 | 0 | 0 | 148.354 |
+| Construction/keys | 90 | 85 | 5 | 0 | 129.491 |
+
+Every load-tail/between-frames/frame-1/pause/code reproduction passes. Along
+with six recruitment prefixes (three below-threshold returns, three DX stops)
+and 27 city cases (23 returns, four AI-prefix stops), this is **450 differential
+cases, 432 complete returns/comparisons, 18 named boundaries, zero mismatches**.
+The bounded prefixes and complete returns retain their distinct scopes; no
+CPU-free replay or repeated adapter route inflates the native case count.
+Original identity/addresses, callback order, unknown-register and failure
+semantics remain those stated above and in the linked report.
+
+Final leased `python3 -B scripts/check.py --domain ai-runtime`: **129 tests,
+121 successful executions, eight explicit native skips**, no failures/errors,
+138.912 seconds; documentation links pass. The native differentials above
+actually ran; they are not skipped. `git diff --check` passes. The attempt
+journal `validacao/s1-recrutamento-attempts.json` preserves actual setup-error
+logs and the superseded v1 read-capture correction separately from passing
+runs. No foreign source/evidence, mask, pinned snapshot or historical hash
+was modified. No main integration/acceptance or other task was started.
+S1 whole-state pass-2 proof and a completed frame2547 remain unclaimed.
+
+
+Final provenance check refreshed the six recruitment prefixes once more on
+committed source `491553f` (same implementation as `bf8ec61`): **6/6 equal**,
+three missing-DX boundaries, no mismatches. This replaces the mutable validation
+report taken before the final city route was added; original captures remain
+unchanged. All six reports' recorded owned source hashes now match the final
+implementation exactly. The final documentation-link-only rerun also passes.
+
+## S1 next stops — original mine-query capture (2026-10-30)
+
+Merged main `9ae3e4d` (Economy `dfb87bd` register forwarding). Fresh strict and
+planning S1 indicators now match 3,148 frames, 129–3276, and stop in frame
+3277 at MineGetCapacite entry `0x475541`, CalculWorkEngin CALL `0x44ca17`.
+Neither run has a first difference; planning has zero Graphics bypasses.
+See [S1_NEXT_STOPS.md](S1_NEXT_STOPS.md) for the running contract table.
+
+Before binding this missing AI/runtime route, the leased original-only
+`capturar_consulta_mina_ia.py` captured 101 returns: real S1 AX=0 → EAX=49,
+plus all 20 indices × reserve 0/1/32767/32768/65535 with poisoned upper bits.
+Every other data register is preserved; no non-stack stores or callbacks.
+The real native ESP advances by four. All 28 S1 states from snapshot 3250
+through 3277 reproduce the committed trajectory; executable code unchanged.
+Snapshot provenance/hash and the seven real registers are in the linked table.
+Oracle is intact RISING.EXE SHA-256
+`6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb`.
+
+The Economy query already exists; this checkpoint supplies original evidence
+only. Consumer binding and native differential follow. The owning domain gate
+is running. No foreign source, evidence or hash pin is changed; no main merge
+or acceptance. S1 pass-2 is still absent from main and Missions `7eeb395`.
+
+### Mine-query consumer binding
+
+Original evidence is pushed at `bb99dac`, before this route was added.
+`provedores_entrada_ia.consulta_capacidade_mina(m, regs, chamada)` binds
+MineGetCapacite through `DonosM3.externo` to Economy's live
+`RecursosTerreno.capacidade_mina`. Known AX in 0..19 is required before access;
+no pushed arguments. EAX is zero-extended reserve; the six preserved registers
+keep their actual values and unknown masks; optional ESP advances by four.
+No writes or callbacks; no copied table, fabricated inputs or rollback.
+
+Fresh leased `capturar_consulta_mina_ia.py --comparar`: **101/101 equal,
+zero mismatches**, complete original evidence reproduced, all seven registers
+and real S1 ESP equal. Both complete and partial-register routes agree;
+the 101 native cases are counted once. All 28 S1 original states and unchanged
+code reproduce again. Report: `validacao/consulta-mina-native.json`. Three
+focused tests pass (native replay, missing/uncertain/invalid AX, live-table
+mutation between queries and preserved uncertainty). Chain rerun follows.
+
+### S1 reach after the binding
+
+Source `8b6f1c9` (pushed): strict and planning indicators both match **3,722
+frames, 129–3850**, with no first difference. Both stop inside **frame3851**
+on **Economy** SacGetCapacite entry `0x475736`, InputGame CALL `0x4299da`.
+Orders before the stop match; planning records zero Graphics bypasses.
+Strict: `validacao/s1-mine-strict.json`. Planning remains ignored/local:
+`.local/m3-1/s1-mine-planejamento.json`, SHA-256
+`92befa5f61e74140e868d8de6da6ffb5955dbafa5db33769657d2560e4d8dca5`.
+
+The mine route passes frame3277 in both modes. Recruitment/frame2547 also
+passes with main's Economy register forwarding. This establishes indicator
+reach only, not per-phase whole-state equality or completed frame3851.
+No planning facility bypasses the missing sack logic provider, so the chain
+stops there. Its native S1 register contract is recorded with the bounded
+original observer; the exact request stays in `S1_NEXT_STOPS.md`.
+
+Fresh leased `python3 -B scripts/check.py --domain ai-runtime`: **132 tests,
+124 executed successfully, eight explicit native skips**, no failures/errors,
+136.861 seconds; documentation links pass. The 101 mine differentials actually
+ran natively, separately from those skips. Baseline gate: 129 tests, eight
+skips, no failures/errors, 132.656 seconds. All new source/evidence is owned;
+no foreign source hash pins, original replacements or main acceptance.
+
+### Exact Economy stop contract and final boundary
+
+Leased `capturar_parada_s1_ia.py --rotina SacGetCapacite --chamada 0x4299da
+--de 3250 --ate 3851 --saida pesquisas-paralelas/ia-runtime/evidencias/s1-parada-saco-original.json`
+checks **602 original states, 3250–3851**, all equal to the committed native
+S1 trajectory, unchanged original code, 390.908 seconds. It observes the
+real frame3851 call/return without replacing or translating any game callee.
+No stores or boundaries occur inside this query.
+
+Native entry: EAX=EBX=ESI=`0x1f18` (cell 7960), ECX=`0x1f00`,
+EDX=`0x47891000`, EDI=0, EBP=`0x2007ea4`, ESP=`0x2007e68`.
+Object byte `0x43`, quantity 4. Exit: EAX=`0x47860004`, ESP=`0x2007e6c`;
+all six other data registers preserved. **Economy** must supply the live
+SacGetCapacite `0x475736` provider, AX=u16 cell, plain RET, with the exact
+upper-word residue from the quantity-grid pointer on the sack branch.
+Outside object range `0x42..0x44`, EAX=0. InputGame consumes the low word at
+its panel tail. Full read addresses and requested consumer API are in the
+short [stops table](S1_NEXT_STOPS.md); no artificial default was installed.
+
+The latest fetch sees main `84e4fe7` and Missions `7eeb395`, neither with the
+S1 pass-2 manifest. Therefore `fixar S1` and strict `tudo --janelas S1` were
+**not run**; there are no S1 part reaches/chains or whole-state proof results
+to report. The unrelated newer main engine changes were inspected, not merged
+into this measured source. No further chain bypass or other task was started.
+Feature commits only; the coordinator owns review/integration/acceptance.

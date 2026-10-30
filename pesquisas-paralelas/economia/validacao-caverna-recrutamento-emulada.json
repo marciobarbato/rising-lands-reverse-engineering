@@ -1,9 +1,24 @@
 {
  "argument_masks": {
+  "EnginAddVie": {
+   "EAX": 65535,
+   "EDX": 65535
+  },
+  "EnginResetFatigue": {
+   "EAX": 65535
+  },
+  "EnginSetExperimente": {
+   "EAX": 65535,
+   "EDX": 65535
+  },
   "EnginSetType": {
    "EAX": 65535,
    "EBX": 255,
    "ECX": 255,
+   "EDX": 65535
+  },
+  "SetSortEngin": {
+   "EAX": 65535,
    "EDX": 65535
   }
  },
@@ -1278,6 +1293,70 @@
    "foreign_calls": 17,
    "frame": 297,
    "outcome": "match",
+   "recruitment_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType",
+     "translation": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f75",
+     "original": {
+      "EAX": 4,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie",
+     "translation": {
+      "EAX": 4,
+      "EDX": 1000
+     }
+    },
+    {
+     "call": "0x420f7c",
+     "original": {
+      "EAX": 4
+     },
+     "routine": "EnginResetFatigue",
+     "translation": {
+      "EAX": 4
+     }
+    },
+    {
+     "call": "0x420f85",
+     "original": {
+      "EAX": 4,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente",
+     "translation": {
+      "EAX": 4,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f8c",
+     "original": {
+      "EAX": 4,
+      "EDX": 3599
+     },
+     "routine": "SetSortEngin",
+     "translation": {
+      "EAX": 4,
+      "EDX": 3599
+     }
+    }
+   ],
    "routine": "CalculTroupe",
    "served_by_translation": {
     "CalculPosition": 1
@@ -1307,6 +1386,70 @@
    "foreign_calls": 15,
    "frame": 297,
    "outcome": "match",
+   "recruitment_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType",
+     "translation": {
+      "EAX": 4,
+      "EBX": 4,
+      "ECX": 5,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f75",
+     "original": {
+      "EAX": 4,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie",
+     "translation": {
+      "EAX": 4,
+      "EDX": 1000
+     }
+    },
+    {
+     "call": "0x420f7c",
+     "original": {
+      "EAX": 4
+     },
+     "routine": "EnginResetFatigue",
+     "translation": {
+      "EAX": 4
+     }
+    },
+    {
+     "call": "0x420f85",
+     "original": {
+      "EAX": 4,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente",
+     "translation": {
+      "EAX": 4,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f8c",
+     "original": {
+      "EAX": 4,
+      "EDX": 3599
+     },
+     "routine": "SetSortEngin",
+     "translation": {
+      "EAX": 4,
+      "EDX": 3599
+     }
+    }
+   ],
    "routine": "SortieTroupe",
    "served_by_translation": {
     "CalculPosition": 1
@@ -2297,6 +2440,70 @@
    "foreign_calls": 17,
    "frame": 869,
    "outcome": "match",
+   "recruitment_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType",
+     "translation": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f75",
+     "original": {
+      "EAX": 5,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie",
+     "translation": {
+      "EAX": 5,
+      "EDX": 1000
+     }
+    },
+    {
+     "call": "0x420f7c",
+     "original": {
+      "EAX": 5
+     },
+     "routine": "EnginResetFatigue",
+     "translation": {
+      "EAX": 5
+     }
+    },
+    {
+     "call": "0x420f85",
+     "original": {
+      "EAX": 5,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente",
+     "translation": {
+      "EAX": 5,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f8c",
+     "original": {
+      "EAX": 5,
+      "EDX": 3599
+     },
+     "routine": "SetSortEngin",
+     "translation": {
+      "EAX": 5,
+      "EDX": 3599
+     }
+    }
+   ],
    "routine": "CalculTroupe",
    "served_by_translation": {
     "CalculPosition": 1
@@ -2326,6 +2533,70 @@
    "foreign_calls": 15,
    "frame": 869,
    "outcome": "match",
+   "recruitment_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType",
+     "translation": {
+      "EAX": 5,
+      "EBX": 4,
+      "ECX": 7,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f75",
+     "original": {
+      "EAX": 5,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie",
+     "translation": {
+      "EAX": 5,
+      "EDX": 1000
+     }
+    },
+    {
+     "call": "0x420f7c",
+     "original": {
+      "EAX": 5
+     },
+     "routine": "EnginResetFatigue",
+     "translation": {
+      "EAX": 5
+     }
+    },
+    {
+     "call": "0x420f85",
+     "original": {
+      "EAX": 5,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente",
+     "translation": {
+      "EAX": 5,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f8c",
+     "original": {
+      "EAX": 5,
+      "EDX": 3599
+     },
+     "routine": "SetSortEngin",
+     "translation": {
+      "EAX": 5,
+      "EDX": 3599
+     }
+    }
+   ],
    "routine": "SortieTroupe",
    "served_by_translation": {
     "CalculPosition": 1
@@ -3199,6 +3470,70 @@
    "foreign_calls": 17,
    "frame": 1363,
    "outcome": "match",
+   "recruitment_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType",
+     "translation": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f75",
+     "original": {
+      "EAX": 6,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie",
+     "translation": {
+      "EAX": 6,
+      "EDX": 1000
+     }
+    },
+    {
+     "call": "0x420f7c",
+     "original": {
+      "EAX": 6
+     },
+     "routine": "EnginResetFatigue",
+     "translation": {
+      "EAX": 6
+     }
+    },
+    {
+     "call": "0x420f85",
+     "original": {
+      "EAX": 6,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente",
+     "translation": {
+      "EAX": 6,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f8c",
+     "original": {
+      "EAX": 6,
+      "EDX": 3599
+     },
+     "routine": "SetSortEngin",
+     "translation": {
+      "EAX": 6,
+      "EDX": 3599
+     }
+    }
+   ],
    "routine": "CalculTroupe",
    "served_by_translation": {
     "CalculPosition": 1
@@ -3228,6 +3563,70 @@
    "foreign_calls": 15,
    "frame": 1363,
    "outcome": "match",
+   "recruitment_arguments": [
+    {
+     "call": "0x420f69",
+     "original": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     },
+     "routine": "EnginSetType",
+     "translation": {
+      "EAX": 6,
+      "EBX": 4,
+      "ECX": 6,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f75",
+     "original": {
+      "EAX": 6,
+      "EDX": 1000
+     },
+     "routine": "EnginAddVie",
+     "translation": {
+      "EAX": 6,
+      "EDX": 1000
+     }
+    },
+    {
+     "call": "0x420f7c",
+     "original": {
+      "EAX": 6
+     },
+     "routine": "EnginResetFatigue",
+     "translation": {
+      "EAX": 6
+     }
+    },
+    {
+     "call": "0x420f85",
+     "original": {
+      "EAX": 6,
+      "EDX": 3599
+     },
+     "routine": "EnginSetExperimente",
+     "translation": {
+      "EAX": 6,
+      "EDX": 3599
+     }
+    },
+    {
+     "call": "0x420f8c",
+     "original": {
+      "EAX": 6,
+      "EDX": 3599
+     },
+     "routine": "SetSortEngin",
+     "translation": {
+      "EAX": 6,
+      "EDX": 3599
+     }
+    }
+   ],
    "routine": "SortieTroupe",
    "served_by_translation": {
     "CalculPosition": 1
@@ -3323,10 +3722,10 @@
   }
  ],
  "schema": "rising-lands/economy-cave-recruitment-validation/1",
- "seconds": 598.552,
+ "seconds": 596.974,
  "served_by_translation": {
   "CalculPosition": 6,
   "RechercheDecalageSortie": 7
  },
- "translation": "6f213415118ca1e4eba21b3dede653fd84bb2b9d27a6bbf6e3b555d6baad5b69"
+ "translation": "4bd10420c1c02c3e149ba83b8de44daf95cf49b19f4373f96a55b62e487bd246"
 }

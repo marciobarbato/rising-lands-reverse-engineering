@@ -6,6 +6,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
     var window: NSWindow!
     var web: WKWebView!
     var nativeLive: NativeLiveWindow?
+    var testBOutput: URL?
+    var testBRecordOnly=false
     var horizonOutput: URL?
     var horizonFinished=false
     var horizonLastProgress=0.0
@@ -35,12 +37,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
         smokeMode = args.contains("--inspection") ? "inspection" : "exercise"
         if smokeOutput != nil, let i = args.firstIndex(of: "--smoke-ready-delay-ms"), args.count > i+1,
            let delay = Int(args[i+1]), (0...80000).contains(delay) { readyDelayMs = delay }
+        if let i=args.firstIndex(of:"--test-b-session"),args.count>i+1 { testBOutput=URL(fileURLWithPath:args[i+1]) }
         makeMenu()
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .nonPersistent()
         config.userContentController.add(self, name: "engine")
         let smokeConfiguration = "window.nativeSmoke={enabled:\(smokeOutput != nil),readyDelayMs:\(readyDelayMs)};"
         config.userContentController.addUserScript(WKUserScript(source:smokeConfiguration,injectionTime:.atDocumentStart,forMainFrameOnly:true))
+        testBRecordOnly = testBOutput != nil && args.contains("--test-b-record-only")
+        if testBOutput != nil,let i=args.firstIndex(of:"--test-b-plan"),args.count>i+1,
+           let plan=try? String(contentsOfFile:args[i+1],encoding:.utf8) {
+            config.userContentController.addUserScript(WKUserScript(source:"window.nativeTestB=\(plan);",injectionTime:.atDocumentStart,forMainFrameOnly:true))
+        }
         web = WKWebView(frame: .zero, configuration: config)
         web.navigationDelegate = self
         web.setValue(false, forKey: "drawsBackground")
@@ -201,6 +209,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
                 do{try data.write(to:url,options:.atomic);self.nativeReply(requestID,value:["saved":true,"path":url.path,"sha256":SHA256.hash(data:data).map{String(format:"%02x",$0)}.joined()])}
                 catch{self.nativeReply(requestID,error:error.localizedDescription)}
             }
+            if let output=testBOutput {save(output.deletingPathExtension().appendingPathExtension("input.json"));return}
             // Automated smoke uses its explicitly declared evidence directory;
             // production always asks for a destination with NSSavePanel.
             if body["smokeEvidence"] as? Bool == true,let shot=smokeOutput{save(shot.deletingPathExtension().appendingPathExtension("input.json"));return}
@@ -216,7 +225,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             if operation.hasPrefix("live-") {
                 do {
                     if nativeLive == nil {
-                        nativeLive=try NativeLiveWindow(root:resourceRoot,validationMode:smokeOutput != nil)
+                        nativeLive=try NativeLiveWindow(root:resourceRoot,validationMode:smokeOutput != nil || testBRecordOnly)
+                        nativeLive?.benchmarkInput = testBOutput != nil && !testBRecordOnly
                         nativeLive?.update={ [weak self] value in self?.nativeReply(nil,value:value) }
                         nativeLive?.recordedEvent={ [weak self] value in
                             if let data=try? JSONSerialization.data(withJSONObject:value),let json=String(data:data,encoding:.utf8){self?.web.evaluateJavaScript("window.recordNativeInput(\(json));",completionHandler:nil)}
@@ -229,6 +239,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
                     nativeLive?.perform(operation == "live-open" ? "live-reset":operation) { [weak self] value in self?.nativeReply(body["id"],value:value) }
                 } catch { nativeReply(body["id"],error:"Falha nativa: \(error.localizedDescription)") }
                 return
+            }
+            if operation == "test-b-gesture",testBOutput != nil,let live=nativeLive,let gesture=body["gesture"] as? [String:Any] {
+                NSApp.activate(ignoringOtherApps:true);live.window.makeKeyAndOrderFront(nil);live.window.makeFirstResponder(live.metal)
+                guard NSApp.isActive,live.window.isKeyWindow,live.window.firstResponder === live.metal else{nativeReply(body["id"],error:"TestBInputFocusUnavailable");return}
+                let flags:NSEvent.ModifierFlags=(gesture["control"] as? Bool == true) ? [.control]:[]
+                if let x=gesture["x"] as? Double,let y=gesture["y"] as? Double {
+                    live.benchmarkClick(x,y,right:gesture["right"] as? Bool == true,clickCount:gesture["double"] as? Bool == true ? 2:1,flags:flags)
+                }else if let key=gesture["keyCode"] as? Int,let down=gesture["down"] as? Bool {
+                    if let event=NSEvent.keyEvent(with:down ? .keyDown:.keyUp,location:.zero,modifierFlags:flags,timestamp:ProcessInfo.processInfo.systemUptime,windowNumber:live.window.windowNumber,context:nil,characters:"",charactersIgnoringModifiers:"",isARepeat:false,keyCode:UInt16(key)){live.window.sendEvent(event)}
+                }else if let event=NSEvent.keyEvent(with:.flagsChanged,location:.zero,modifierFlags:flags,timestamp:ProcessInfo.processInfo.systemUptime,windowNumber:live.window.windowNumber,context:nil,characters:"",charactersIgnoringModifiers:"",isARepeat:false,keyCode:59){live.window.sendEvent(event)}
+                live.inputBarrier{[weak self] frame in self?.nativeReply(body["id"],value:["frame":frame,"focused":true])};return
+            }
+            if operation == "test-b-result",let output=testBOutput,let value=body["result"] as? [String:Any] {
+                var result=value;result["commit"]=Bundle.main.object(forInfoDictionaryKey:"RisingLandsSourceCommit") ?? NSNull()
+                if let data=try? JSONSerialization.data(withJSONObject:result,options:[.prettyPrinted,.sortedKeys]){try? data.write(to:output,options:.atomic)}
+                engine?.terminate();NSApp.terminate(nil);return
             }
             if operation == "record-barrier" {
                 if let live=nativeLive{live.inputBarrier{[weak self] frame in self?.nativeReply(body["id"],value:["frame":frame])}}
@@ -271,7 +297,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             };live.benchmarkInput=args.contains("--benchmark-orders")
             if let index=[15.0,20.0,30.0,60.0,0.0].firstIndex(of:rate){live.rateControl.selectItem(at:index)}
             live.perform("live-reset"){_ in live.perform("live-step"){_ in live.perform("live-play"){_ in
-                if live.benchmarkInput{
+                if live.benchmarkInput && args.contains("--benchmark-orders-selected"){
+                    // Exact historical 60-fps fatigue workload: keep the moved actor selected.
+                    // Observe the assigned frame without supplying a wall-clock frame to logic.
+                    for (delay,gesture) in [(8.0,0),(8.2,1),(8.5,2)] {
+                        DispatchQueue.main.asyncAfter(deadline:.now()+delay){
+                            live.inputBarrier{frame in
+                                gestures.append(["gesture":gesture,"observedNextFrame":frame])
+                                switch gesture{
+                                case 0:live.benchmarkClick(560,528)
+                                case 1:live.benchmarkClick(624,432)
+                                default:live.benchmarkPointer(400,272)
+                                }
+                            }
+                        }
+                    }
+                }else if live.benchmarkInput{
                     // Anchor real AppKit gestures to the startup prefix, so uncapped
                     // play also receives orders before the later dependency horizon.
                     var gesture=0,lastGestureFrame=128
@@ -299,6 +340,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
                         result["native_window_visible"]=live.window.isVisible
                         result["requestedSeconds"]=duration
                         result["benchmark_gestures"]=gestures
+                        result["benchmark_workload"]=args.contains("--benchmark-orders-selected") ? "historical-selected-actor":"prefix-anchored-deselect"
                         result["first_stop_snapshot"]=firstStop ?? NSNull() as Any
                         result["screenMaximumFPS"]=live.window.screen?.maximumFramesPerSecond ?? 0
                         result["native_window_unoccluded"]=live.window.occlusionState.contains(.visible)

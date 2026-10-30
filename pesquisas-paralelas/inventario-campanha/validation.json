@@ -1,0 +1,26 @@
+{
+  "checks": {
+    "briefing_hashes_against_existing_missions_inventory": 25,
+    "deterministic_inventory_regeneration": "passed",
+    "documentation_check_entrypoint": "scripts/check.py:documentation_links(ROOT)",
+    "documentation_links": "passed",
+    "duplicate_disk_unit_or_structure_indices": 0,
+    "eta_block_boundary_comparisons": 38,
+    "exact_seven_map_cover_and_independent_lower_bound": "passed",
+    "exhaustive_single_pair_triple_search": "passed",
+    "git_diff_cached_check": "passed",
+    "map_hashes_against_existing_missions_inventory": 43,
+    "matrix_and_grouped_count_consistency": "passed",
+    "original_bin_sector_file_comparisons": 73,
+    "research_exclusion_recommendation_check": "passed",
+    "source_proof_check": "passed"
+  },
+  "date": "2026-10-30",
+  "not_run": {
+    "domain_behavior_suite": "No game-logic changes; this delivery uses deterministic regeneration and original-sector equality.",
+    "dynamic_reach": "Requires later original load plus bounded coverage run.",
+    "x86_comparison": "Static reader/statistics task; no reconstructed behavior changed and no game execution requested."
+  },
+  "schema": "rising-lands/static-campaign-validation/1",
+  "scope": "Only new files under pesquisas-paralelas/inventario-campanha/; no original data or existing repository file changed."
+}

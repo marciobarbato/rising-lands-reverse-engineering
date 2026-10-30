@@ -131,8 +131,8 @@ final class NativeMetalGameView: NSView {
     override func rightMouseDragged(with event:NSEvent){mouse(event,0x200)}
     override func mouseDown(with event:NSEvent){mouse(event,event.clickCount>1 && event.clickCount%2==0 ? 0x203:0x201)}
     override func mouseUp(with event:NSEvent){mouse(event,0x202)}
-    override func rightMouseDown(with event:NSEvent){mouse(event,event.buttonNumber==0 ? 0x201:0x204)}
-    override func rightMouseUp(with event:NSEvent){mouse(event,event.buttonNumber==0 ? 0x202:0x205)}
+    override func rightMouseDown(with event:NSEvent){mouse(event,0x204)}
+    override func rightMouseUp(with event:NSEvent){mouse(event,0x205)}
     func key(_ key:Int,_ down:Bool){if down{heldKeys.insert(key)}else{heldKeys.remove(key)};inputEvent?(["kind":"key","vkey":key,"down":down])}
     override func keyDown(with event:NSEvent){synchronizeModifiers(event.modifierFlags);if let k=[36:13,76:13,53:27,49:32,123:37,126:38,124:39,125:40,117:46,7:88,29:48,18:49,19:50,20:51,21:52,23:53,22:54,26:55,28:56,25:57][Int(event.keyCode)]{key(k,true)}}
     override func keyUp(with event:NSEvent){synchronizeModifiers(event.modifierFlags);if let k=[36:13,76:13,53:27,49:32,123:37,126:38,124:39,125:40,117:46,7:88,29:48,18:49,19:50,20:51,21:52,23:53,22:54,26:55,28:56,25:57][Int(event.keyCode)]{key(k,false)}}
@@ -295,10 +295,10 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         presenter=try metal.makePlayPresenter()
         window.center();window.makeKeyAndOrderFront(nil)
     }
-    func benchmarkClick(_ x:Double,_ y:Double,right:Bool=false){
+    func benchmarkClick(_ x:Double,_ y:Double,right:Bool=false,clickCount:Int=1,flags:NSEvent.ModifierFlags=[]){
         window.makeKeyAndOrderFront(nil);window.makeFirstResponder(metal)
         let point=metal.convert(NSPoint(x:metal.bounds.width*x/800,y:metal.bounds.height*(1-y/600)),to:nil)
-        for type in (right ? [NSEvent.EventType.rightMouseDown,.rightMouseUp]:[NSEvent.EventType.leftMouseDown,.leftMouseUp]){if let event=NSEvent.mouseEvent(with:type,location:point,modifierFlags:[],timestamp:ProcessInfo.processInfo.systemUptime,windowNumber:window.windowNumber,context:nil,eventNumber:1,clickCount:1,pressure:1){window.sendEvent(event)}}
+        for type in (right ? [NSEvent.EventType.rightMouseDown,.rightMouseUp]:[NSEvent.EventType.leftMouseDown,.leftMouseUp]){if let event=NSEvent.mouseEvent(with:type,location:point,modifierFlags:flags,timestamp:ProcessInfo.processInfo.systemUptime,windowNumber:window.windowNumber,context:nil,eventNumber:1,clickCount:clickCount,pressure:1){window.sendEvent(event)}}
     }
     func benchmarkPointer(_ x:Double,_ y:Double){
         let point=metal.convert(NSPoint(x:metal.bounds.width*x/800,y:metal.bounds.height*(1-y/600)),to:nil)
@@ -355,7 +355,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
                 "checkpoint_verified":false,"verified_phases":s.phases_equal,"verified_checkpoints":s.checkpoints_equal,"verified_surfaces":s.surfaces_equal,
                 "observed":["counter":["address":"0x508f7c","bytes":4,"value":s.counter]],"blocks":0,"bytes":0,"memory":[],"input_policy":validationMode ? "record-only":"live-orders","live_stop":stop,
                 "benchmark_order_tags":benchmarkOrderTags,"execution_mode":validationMode ? "test":"play","native_metal":true,"native_engine_binding":macos_live_engine_binding()==1 ? "static-abi16":"dynamic-abi16","native_running":running,"native_metrics":timing,
-                "render":["status":s.disposition==2 ? "partial":s.frames==0 ? "undrawn":"full","hud":true,"version":[1,7],"backend":"Rust ABI 1.6 + Metal","equals_native_phase_end":equal,"native_phase_end_sha256":NSNull()]]
+                "render":["status":s.disposition==2 ? "partial":s.frames==0 ? "undrawn":"full","hud":true,"version":[1,9],"backend":"Rust ABI 1.6 + Metal","equals_native_phase_end":equal,"native_phase_end_sha256":NSNull()]]
     }
     func deliver(_ completion:(([String:Any])->Void)?=nil){
         let value=snapshot(),s=status(),isRunning=running

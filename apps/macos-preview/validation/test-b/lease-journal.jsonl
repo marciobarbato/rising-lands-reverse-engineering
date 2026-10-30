@@ -1,0 +1,33 @@
+{"owner": "macos-test-b-build", "event": "wait", "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable", "command": ["python3", "-B", "compilar-jog\u00e1vel", "--development-ref", "HEAD", "--inputs-root", "/Users/marcio/git/Rising Lands", "--data-root", "/Users/marcio/git/Rising Lands/local-data/macos-playable"], "exclusive": false, "at": "2026-10-30T17:03:13.382553+00:00"}
+{"owner": "macos-test-b-checkpoint", "event": "wait", "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable", "command": [".local/python/bin/python3", "-B", "pesquisas-paralelas/missoes/m3/checkpoint_quadro128.py", "--saida", ".local/test-b/quadro128"], "exclusive": false, "at": "2026-10-30T17:03:14.536403+00:00"}
+{"owner": "macos-test-b-checkpoint", "event": "wait", "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable", "command": ["python3", "-B", "pesquisas-paralelas/missoes/m3/checkpoint_quadro128.py", "--saida", ".local/test-b/quadro128"], "exclusive": false, "at": "2026-10-30T17:04:31.183340+00:00"}
+{"owner": "macos-test-b-engine-gate", "event": "wait", "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable", "command": ["sh", "motor/validate.sh"], "exclusive": false, "at": "2026-10-30T17:05:10.738147+00:00"}
+{"owner": "macos-test-b-engine-gate", "event": "grant", "slots": [2], "at": "2026-10-30T17:12:05.622979+00:00"}
+{"owner": "macos-test-b-checkpoint", "event": "grant", "slots": [0], "at": "2026-10-30T17:13:04.212741+00:00"}
+{"owner": "macos-test-b-engine-gate", "event": "release", "slots": [2], "at": "2026-10-30T17:16:17.104361+00:00"}
+{"owner": "macos-test-b-engine-gate", "event": "exit", "code": 0, "at": "2026-10-30T17:16:17.104503+00:00"}
+{"owner": "macos-test-b-checkpoint", "event": "release", "slots": [0], "at": "2026-10-30T17:16:20.644334+00:00"}
+{"owner": "macos-test-b-checkpoint", "event": "exit", "code": 0, "at": "2026-10-30T17:16:20.644490+00:00"}
+{"owner": "macos-test-b-original-preflight", "event": "wait", "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable", "command": ["python3", "-B", "apps/macos-preview/scripts/test_b_pipeline.py", "original", "--input", "pesquisas-paralelas/missoes/m3/entradas/P1.json", "--inicio", ".local/test-b/quadro128", "--ate", "134", "--minutes", "19", "--output", ".local/test-b/preflight-original"], "exclusive": false, "at": "2026-10-30T17:16:49.128474+00:00"}
+{"owner": "macos-test-b-build", "event": "grant", "slots": [2], "at": "2026-10-30T17:40:11.946891+00:00"}
+{"owner": "macos-test-b-build", "event": "release", "slots": [2], "at": "2026-10-30T17:40:11.994266+00:00"}
+{"owner": "macos-test-b-build", "event": "exit", "code": 1, "at": "2026-10-30T17:40:11.994427+00:00"}
+{"owner": "macos-test-b-original-preflight", "event": "grant", "slots": [2], "at": "2026-10-30T17:40:12.344907+00:00"}
+{"owner": "macos-test-b-original-preflight", "event": "release", "slots": [2], "at": "2026-10-30T17:40:17.246345+00:00"}
+{"owner": "macos-test-b-original-preflight", "event": "exit", "code": 1, "at": "2026-10-30T17:40:17.246513+00:00"}
+{"owner": "macos-test-b-build-runtime", "event": "wait", "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable", "command": ["env", "RISING_PYTHON_RUNTIME=/Users/marcio/git/Rising Lands/local-data/macos-preview/dependencies/python", "python3", "-B", "compilar-jog\u00e1vel", "--development-ref", "HEAD", "--inputs-root", "/Users/marcio/git/Rising Lands", "--data-root", "/Users/marcio/git/Rising Lands/local-data/macos-playable"], "exclusive": false, "at": "2026-10-30T17:42:03.232859+00:00"}
+{"owner": "macos-test-b-build-runtime", "event": "grant", "slots": [2], "at": "2026-10-30T17:42:03.233493+00:00"}
+{"owner": "macos-test-b-original-preflight-fixed", "event": "wait", "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable", "command": ["python3", "-B", "apps/macos-preview/scripts/test_b_pipeline.py", "original", "--input", "pesquisas-paralelas/missoes/m3/entradas/P1.json", "--inicio", ".local/test-b/quadro128", "--ate", "134", "--minutes", "19", "--output", ".local/test-b/preflight-original-fixed"], "exclusive": false, "at": "2026-10-30T17:42:24.515326+00:00"}
+{"owner": "macos-test-b-original-preflight-fixed", "event": "grant", "slots": [1], "at": "2026-10-30T17:43:12.649360+00:00"}
+{"owner": "macos-test-b-original-preflight-fixed", "event": "release", "slots": [1], "at": "2026-10-30T17:43:18.505471+00:00"}
+{"owner": "macos-test-b-original-preflight-fixed", "event": "exit", "code": 0, "at": "2026-10-30T17:43:18.505619+00:00"}
+{"owner": "macos-test-b-build-runtime", "event": "release", "slots": [2], "at": "2026-10-30T17:44:59.308976+00:00"}
+{"owner": "macos-test-b-build-runtime", "event": "exit", "code": 0, "at": "2026-10-30T17:44:59.309202+00:00"}
+{"owner": "macos-test-b-final-pipeline", "event": "wait", "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable", "command": ["python3", "-B", ".local/test_b_delivery_run.py"], "exclusive": false, "at": "2026-10-30T17:47:15.951021+00:00"}
+{"owner": "macos-test-b-final-pipeline", "event": "grant", "slots": [0], "at": "2026-10-30T17:51:12.227354+00:00"}
+{"owner": "macos-test-b-final-pipeline", "event": "release", "slots": [0], "at": "2026-10-30T17:54:47.882312+00:00"}
+{"owner": "macos-test-b-final-pipeline", "event": "exit", "code": 1, "at": "2026-10-30T17:54:47.882733+00:00"}
+{"owner": "macos-test-b-validation-pipeline", "event": "wait", "cwd": "/Users/marcio/git/Rising Lands/worktrees/macos-playable", "command": ["python3", "-B", ".local/test_b_delivery_run.py"], "exclusive": false, "at": "2026-10-30T17:59:29.245910+00:00"}
+{"owner": "macos-test-b-validation-pipeline", "event": "grant", "slots": [0], "at": "2026-10-30T17:59:29.246780+00:00"}
+{"owner": "macos-test-b-validation-pipeline", "event": "release", "slots": [0], "at": "2026-10-30T18:10:58.655937+00:00"}
+{"owner": "macos-test-b-validation-pipeline", "event": "exit", "code": 0, "at": "2026-10-30T18:10:58.656230+00:00"}

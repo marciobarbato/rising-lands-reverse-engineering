@@ -68,6 +68,36 @@ def _modulo_economia(nome):
 _ECONOMIA_CARREGADOS = {}
 
 
+def consulta_capacidade_mina(m, regs, chamada):
+    """MineGetCapacite 0x475541: Economy's live reserve, exact register ABI.
+
+    Original-first evidence: consulta-mina-original.json.xz (S1 CALL 0x44ca17).
+    AX is an index in 0..19; EAX is zero-extended, all other data registers
+    preserved with their unknown masks. No stores, callbacks or copied table.
+    """
+    from entrada_estruturas import ArgumentoNaoPassado
+    masks = dict(regs.get('_incertos') or {})
+    if 'EAX' not in regs or masks.get('EAX', 0) & 0xffff:
+        raise ArgumentoNaoPassado('MineGetCapacite', chamada, ['EAX'])
+    if regs.get('_pilha'):
+        raise ValueError('MineGetCapacite takes no pushed arguments')
+    index = regs['EAX'] & 0xffff
+    if index >= 20:
+        raise ValueError('MineGetCapacite requires AX in 0..19')
+    owner = _modulo_economia('extracao').RecursosTerreno.__new__(
+        _modulo_economia('extracao').RecursosTerreno)
+    owner.minas = m.vista(0x509954, 80)
+    out = {k: regs.get(k, 0) & M32 for k in REG7}
+    out['EAX'] = owner.capacidade_mina(index)
+    unknown = {k: (masks.get(k, 0) if k in regs else M32) & M32 for k in REG7 if k != 'EAX'}
+    unknown = {k: v for k, v in unknown.items() if v}
+    if unknown:
+        out['_incertos'] = unknown
+    if 'ESP' in regs:
+        out['ESP'] = (regs['ESP'] + 4) & M32
+    return out
+
+
 def _ataque_combate(m, core):
     """SetAttaqueEngin through Combat's committed translation (Core's validator binding, ``validar_selecao_ordens``)."""
     from alvos_alcance import ordem_ja_definida
@@ -380,6 +410,7 @@ class DonosM3:
     def __init__(self, m, *, som, bonus=None, mensagem_unidade=None):
         from entrada_estruturas import EntradaEstruturas, ROTINAS_ECONOMIA, provedor_entrada
         from visao_grupos import VisaoGrupos, provedor_saida
+        from recrutamento_core import RecrutamentoCore, bonus_recrutamento, provedor_recrutamento, ROTINAS as RECRUTAMENTO
         caverna_recrutamento = _modulo_economia('caverna_recrutamento')
         ciclo_trabalho = _modulo_economia('ciclo_trabalho')
         self.m, self.bonus, self.mensagem_unidade, self.som = m, bonus, mensagem_unidade, som
@@ -388,6 +419,10 @@ class DonosM3:
         self.visao = VisaoGrupos(m, som=som)
         self.caverna = caverna_recrutamento.CavernaRecrutamento(m, externo=self.externo)
         self.ciclo = ciclo_trabalho.CicloTrabalho(m, externo=self.externo)
+        self.recrutamento = RecrutamentoCore(m, bonus=bonus if bonus is not None else
+                                            lambda j, t, s: bonus_recrutamento(m)(j, t, s))
+        self._recrutamento = provedor_recrutamento(self.recrutamento)
+        self.nomes_recrutamento = frozenset(RECRUTAMENTO)
         self._core = provedor_entrada(self.ee)
         self._saida = provedor_saida(self.visao)
         self._caverna = caverna_recrutamento.provedor_caverna(self.caverna)
@@ -441,6 +476,12 @@ class DonosM3:
     def externo(self, nome, chamada, regs):
         from reinicio_ia import DependenciaIA
         self.chamadas.append((nome, chamada))
+        if nome == 'MineGetCapacite':
+            return consulta_capacidade_mina(self.m, regs, chamada)
+        if nome in self.nomes_recrutamento:
+            # Preserve the caller's actual partial register file and unknown masks.
+            # Core rejects missing behaviour inputs before touching memory.
+            return self._recrutamento(nome, chamada, regs)
         if nome in self.nomes_buscas or nome in self.nomes_estado or nome in self.nomes_lacunas:
             return self._nova_rotina_core(nome, chamada, regs)
         if nome in self.nomes_core:
@@ -504,6 +545,9 @@ class DonosM3:
             argumentos = {'chamada': chamada} if 'chamada' in inspect.signature(self.som).parameters else {}
             return dict(EAX=self.som(nome, {k: regs.get(k, 0) & M32 for k in ('EAX', 'EDX', 'EBX', 'ECX')}, pilha,
                                      **argumentos) & M32)
+        if nome == 'iagVilleSendMessage':
+            from mensagem_cidade_ia import mensagem_cidade
+            return mensagem_cidade(self.m, regs, chamada)
         if nome == 'iagUnitSendMessage' and self.mensagem_unidade is not None:
             return self.mensagem_unidade(regs, chamada)
         raise DependenciaIA(nome, chamada)

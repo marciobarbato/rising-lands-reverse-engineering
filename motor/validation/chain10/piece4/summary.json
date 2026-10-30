@@ -1,0 +1,167 @@
+{
+  "artifacts": {
+    "K1-state-final2.json": {
+      "compressed_sha256": "68cdde8972d8f1cb41e200d04901fe009f06e48de884e96c3e382398cae25ea2",
+      "path": "K1-state-final2.json.xz",
+      "raw_bytes": 1122695,
+      "raw_sha256": "f6c4f7eb203d1641335aad05387469bc20606d67ca546712ded5469ec2c55ba5"
+    },
+    "K1-state-final2.log": {
+      "compressed_sha256": "bb1e56abe34b3abcf8c38afc3ff8a1bc36f8ab36b54261238d18b49762b2369d",
+      "path": "K1-state-final2.log.xz",
+      "raw_bytes": 160,
+      "raw_sha256": "65d51414d3de562e817ff5247a20c98d11fbfd4d24c35d307f073cdbe8b15b79"
+    },
+    "K1-surface-final2.json": {
+      "compressed_sha256": "b9935620461e8e08d7f1592d4ebdec1d5e9df4d3e9dd6760c645067feb12a348",
+      "path": "K1-surface-final2.json.xz",
+      "raw_bytes": 335029,
+      "raw_sha256": "dec76787471cddec6f20920286c9c198345a7c333ef055a3f38e4bfdb27aaf58"
+    },
+    "K1-surface-final2.log": {
+      "compressed_sha256": "8a15121fa433c4f9f709f84b413f83b19e330b1f7177e5514e353fbbed062b10",
+      "path": "K1-surface-final2.log.xz",
+      "raw_bytes": 102,
+      "raw_sha256": "d5ac35b3d4b566873948b2bf899f25d66809934a5f6e561e934548d7dd96c353"
+    },
+    "P3-state-final2.json": {
+      "compressed_sha256": "88b625a2b75639ba10c64640c8ab66ce3f15149e8dfa249ea8df240d78045d81",
+      "path": "P3-state-final2.json.xz",
+      "raw_bytes": 5695180,
+      "raw_sha256": "b22d74eb1467e09037a2697182a8c6b1d3cc00875d781892f8764c4391dc36dc"
+    },
+    "P3-state-final2.log": {
+      "compressed_sha256": "0af14b2520daf9b39a1de95d56f1f0e94f2b16d0149cc35b1e243049e18482c3",
+      "path": "P3-state-final2.log.xz",
+      "raw_bytes": 307,
+      "raw_sha256": "35ca1f6f5b9a8ced61c674c3a9ba2c01e4b5fd0c966bb4d41d5d7e999b395b73"
+    },
+    "P3-surface-final2.json": {
+      "compressed_sha256": "4d5e34b46beda16fbc10c80faf42c83a2c531cd61d64281e2e3ac36e55c34e38",
+      "path": "P3-surface-final2.json.xz",
+      "raw_bytes": 1942571,
+      "raw_sha256": "4767558ee1bc284ef6d49a1b2d9e26455f372c6264f4d6fc7ecd8efb78a435c7"
+    },
+    "P3-surface-final2.log": {
+      "compressed_sha256": "72a5f74d2234121519807f7f10758bc4cc5c94f89640150b4e8950d5c1e4094d",
+      "path": "P3-surface-final2.log.xz",
+      "raw_bytes": 105,
+      "raw_sha256": "23dace1b972eaf9e5db3bfa3b69781cce46b6b2c76e586dcb82b1a50e172d44e"
+    },
+    "P6-surface-final2.json": {
+      "compressed_sha256": "3d11169ab32e37e8eab03c82cbb090d044a3e11b2bc297f0a9cf3077c1e44004",
+      "path": "P6-surface-final2.json.xz",
+      "raw_bytes": 1473825,
+      "raw_sha256": "c84850471b5f47c30c808ce5dd6b7b48d6a4a5f0e4a7abcbe7896b26e5a7c3b8"
+    },
+    "P6-surface-final2.log": {
+      "compressed_sha256": "0528382dab6aeb0f3765066b34c7749a5edc93d260b44cd5abe42aae09fe9f95",
+      "path": "P6-surface-final2.log.xz",
+      "raw_bytes": 105,
+      "raw_sha256": "512d23d30f2610b8387abd568b26313e9ac42a7337ee16ebbbee2e2ed6bff83c"
+    },
+    "P6-whole-final2.json": {
+      "compressed_sha256": "be4cba7baf1199f48d8b9256bd10694c9504ced65858ed56aaa0164955d7525b",
+      "path": "P6-whole-final2.json.xz",
+      "raw_bytes": 7222522,
+      "raw_sha256": "20b0bf37e32d3aba42b5aa611bc294655f9c79290f5e26fc5f9572888bb5bd63"
+    },
+    "P6-whole-final2.log": {
+      "compressed_sha256": "c8ac7e2d4dd3e1a2b5ee693a6329be259f8e24297467dce8466d003bb62667ee",
+      "path": "P6-whole-final2.log.xz",
+      "raw_bytes": 258,
+      "raw_sha256": "624339906abd9479860362237fd2ef6be8329716d7fbd460038bbb69b5f6c549"
+    },
+    "P7-state-final2.json": {
+      "compressed_sha256": "eda7f15b8e8328e57b007dbdbfc7cd00ff05714cecf76d9b2891ee8fb69a11f0",
+      "path": "P7-state-final2.json.xz",
+      "raw_bytes": 6779176,
+      "raw_sha256": "b3a813d515bc71334f8d6bca1ba1b803eeb10a2492eb05d5f50e45a8ffd8bac0"
+    },
+    "P7-state-final2.log": {
+      "compressed_sha256": "5db09c192768dabc58513ebf6cbc9c8c60e47240dab5da0f116566f9bbaa09ba",
+      "path": "P7-state-final2.log.xz",
+      "raw_bytes": 336,
+      "raw_sha256": "c61824519263244ce782910102fcbaaec890cf91bdd0ae4d0c1d26012f1489ca"
+    },
+    "P7-surface-final2.json": {
+      "compressed_sha256": "d3a83e1bd82eb15291ab034a21df202b03126c2fe9689664cdc839cc91123be6",
+      "path": "P7-surface-final2.json.xz",
+      "raw_bytes": 2307454,
+      "raw_sha256": "81925dd689c8a5d47cede79061218c005907e0a4d1f354b3f5564ea5f3c1a16f"
+    },
+    "P7-surface-final2.log": {
+      "compressed_sha256": "c85470d690250d1efd7f0e570ce884352aa3ff0d88fbb47b5a6df44ae364b0a7",
+      "path": "P7-surface-final2.log.xz",
+      "raw_bytes": 105,
+      "raw_sha256": "17a1887d5d963b5f587e14398006da2d50a67b61d319ebf7a637224c21084bc1"
+    },
+    "S1-surface-3850.json": {
+      "compressed_sha256": "ad339ce5cd24f4d7d012e7de958892fbf71bca1b59e95be8da3d7df771d82f36",
+      "path": "S1-surface-3850.json.xz",
+      "raw_bytes": 985567,
+      "raw_sha256": "9de70cd473a84225a9dc7a9df743290a06bafcde8add86d046c768a72245c4da"
+    },
+    "S1-surface-3850.log": {
+      "compressed_sha256": "b00d47f68dfe24e68846e66f10f1b41fa0005231611d89058a749493ddd77146",
+      "path": "S1-surface-3850.log.xz",
+      "raw_bytes": 942,
+      "raw_sha256": "2dad897a10e02ab27d27366e98b90250184df8ad774b4764a89a0d4275467025"
+    },
+    "central-complete.json": {
+      "compressed_sha256": "3a793230fc1670d827679b2f4570de2d1cbea61269ce18116aa7e521ce1b14b7",
+      "path": "central-complete.json.xz",
+      "raw_bytes": 33037,
+      "raw_sha256": "fef44640f0e1ebd3995e15de29b07b87d044d77741d61f7184283f24df6417d0"
+    },
+    "central-complete.log": {
+      "compressed_sha256": "b20da9baa149b3ee2015eb28da3ddcbd0bff8e2df4fbe7439231094c196ed327",
+      "path": "central-complete.log.xz",
+      "raw_bytes": 190,
+      "raw_sha256": "1dd9788760f58bc67f148f8c8735e504fe134b84b3e58338dabe5941b1746233"
+    },
+    "regression-verification.json": {
+      "compressed_sha256": "332266a084afd55a67b00ebb8173d44f155d6751b9a524313f5ad239a88708b5",
+      "path": "regression-verification.json.xz",
+      "raw_bytes": 899,
+      "raw_sha256": "3dc888006fb38d5eed5e7c302269a7a9873f55573f89dfa6e7294d137281b40c"
+    }
+  },
+  "central_original_equal": 12,
+  "implementation_revision": "a410074",
+  "p6_paired_equal": 4544,
+  "p6_whole_equal": 4544,
+  "prior_windows": {
+    "K1": {
+      "last_frame": 629,
+      "state_frames_equal": 501,
+      "surface_frames_equal": 501
+    },
+    "P3": {
+      "last_frame": 3129,
+      "state_frames_equal": 3001,
+      "surface_frames_equal": 3001
+    },
+    "P6": {
+      "last_frame": 2400,
+      "state_frames_equal": 2272,
+      "surface_frames_equal": 2272
+    },
+    "P7": {
+      "last_frame": 3700,
+      "state_frames_equal": 3572,
+      "surface_frames_equal": 3572
+    }
+  },
+  "qualification": "S1 frame2014 is a matching Rust/pinned-Python renderer dependency, not a completed original surface. State scopes are published indicators except P6 full whole-state phases. Original AffText nonexecution remains exactly attested.",
+  "release_sha256": "dbe6403a5ce67af0872b521bf31838b956eb0aaa5c47bca0afaeaffd38e4948b",
+  "s1_surface_stop": {
+    "address": "0x4022c8",
+    "frame": 2014,
+    "rust_python_partial_equal": true
+  },
+  "s1_surfaces_equal": 1885,
+  "schema": "rising-lands/rust-chain10-regression-verification/1",
+  "source_identity_unchanged": true,
+  "timing": "Exclusive final-source measurement pending; no new timing claim in this package."
+}
