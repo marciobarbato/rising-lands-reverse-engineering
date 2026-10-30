@@ -7,9 +7,13 @@ victory state or change the menu-mode byte to create a screen.
 
 `capturar_telas_finais_s1.py` is a prepared, syntax-checked native producer; its late-screen execution is not yet
 validated. It restores an actual scripted S1 checkpoint at frame 17000, isolates each real MenuInit(0x13),
-PartieGetResultat and MenuInit(0x11) call, records entry/exit memory, full surfaces and raster/text arguments, restores
+PartieGetResultat, MenuInit(0x11) and AffObjectif call, records entry/exit memory metadata, bounded render inputs,
+full surfaces and raster/text arguments, restores
 the exact entry, then requires the ordinary call's surface to equal the isolated result. Declared writes are empty.
-No glyph provider is substituted. The ordinary native phase's whole-state and surface hashes are also retained.
+No glyph provider is substituted. Every ordinary phase also retains its complete surface, raster arguments and whole-state hash. Complete native
+asset banks are hashed as memory metadata and are not copied into tracked evidence. Text arguments are read through
+the terminator (bounded to65536 bytes); an unreadable argument is an explicit text-read stop, never a fabricated
+empty string or glyph result.
 
 Run on the Mac mini from the Graphics worktree after fetching this feature branch. Substitute the existing native
 S1 snapshot path if the capture directory differs; the checkpoint must be the real scripted frame 17000.

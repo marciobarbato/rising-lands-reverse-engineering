@@ -10,12 +10,45 @@ from pathlib import Path
 from capturar_escritas_cave_m3 import original,REF,sha
 from oraculo_quadro_missao import Isolamento,BancadaCargaMissaoOriginal
 
+class CapturaTextoTela(original.CapturadorSondasGraficos):
+    def text(self,c,address,size,user):
+        if self.current is None:return
+        r=lambda k:c.reg_read(getattr(original.x86,'UC_X86_REG_'+k))&0xffffffff
+        ptr=struct.unpack('<I',self.read(r('ESP')+4,4))[0];data=bytearray();error=None
+        try:
+            for i in range(65536):
+                value=self.read(ptr+i,1)[0]
+                if not value:break
+                data.append(value)
+            else:raise ValueError('No terminator within65536 bytes')
+        except Exception as problem:error=f'{type(problem).__name__}: {problem}'
+        # An opaque argument is retained explicitly; it never becomes an invented empty string or glyph default.
+        self.current['text_boundaries'].append(dict(text_pointer=hex(ptr),text_hex=bytes(data).hex() if error is None else None,
+            text_read_stop=error,registers={k:hex(r(k)) for k in ('EAX','EBX','ECX','EDX','ESI','EDI')},
+            stack=self.read(r('ESP'),24).hex(),surface_before=self.blob(self.b.directdraw.pixels('offscreen')),
+            blits_before=len(self.current['blits']),address=hex(address)))
+
 class TelasS1(Isolamento):
     def __init__(self,b):
-        super().__init__(b,('MenuInit','PartieGetResultat'));self.frame=None;self.pending=[]
-        self.cap=object.__new__(original.CapturadorSondasGraficos);self.cap.b=b;self.cap.blobs={};self.cap.current=None
+        super().__init__(b,('MenuInit','PartieGetResultat','AffObjectif'));self.frame=None;self.pending=[]
+        self.cap=object.__new__(CapturaTextoTela);self.cap.b=b;self.cap.blobs={};self.cap.current=None
         for pc in original.BLITS:b.cpu.hook_add(original.unicorn.UC_HOOK_CODE,self.cap.blit,begin=pc,end=pc)
         b.cpu.hook_add(original.unicorn.UC_HOOK_BLOCK,self.cap.text,begin=b.sym['AffText'],end=b.sym['AffText'])
+
+    def metadata(self,blocks):
+        return {n:dict(base=hex(a),bytes=len(v),sha256=sha(v)) for n,(a,v) in blocks.items()}
+
+    def inputs(self,blocks):
+        """Only bounded render-state regions are exported; complete native asset banks stay on original media."""
+        b=self.b;cap=self.cap;m=b.cpu.mem_read
+        regions=dict(dgroup=(0x494000,0x8f000),crt_thread_data=(0x3400000,4096))
+        regions.update({name:(int.from_bytes(m(slot,4),'little'),size) for name,slot,size in original.BLOCOS})
+        available={};missing=[]
+        for name,(base,size) in regions.items():
+            block=next((v[base-a:base-a+size] for a,v in blocks.values() if a<=base and base+size<=a+len(v)),None)
+            if block is None:missing.append(name)
+            else:available[name]=[hex(base),cap.blob(block)]
+        return dict(regions=available,unavailable_regions=missing)
 
     def executar(self,regs):
         b=self.b;cpu=b.cpu;name=self.entradas[regs['EIP']]
@@ -24,14 +57,15 @@ class TelasS1(Isolamento):
         host=original.seg._python(b);host.pop('isolamento');host=pickle.dumps(host,protocol=4)
         dd=b.directdraw;surfaces=bytes(cpu.mem_read(dd.base_superficies,dd.tamanho_superficies))
         cap=self.cap;row=dict(frame=self.frame,phase=b.fase,routine=name,declared_writes=[],entry_registers=regs,
-            before=cap.blob(dd.pixels('offscreen')),entry_blocks={n:[hex(a),cap.blob(v)] for n,(a,v) in blocks.items()},
+            before=cap.blob(dd.pixels('offscreen')),entry_blocks=self.metadata(blocks),entry_inputs=self.inputs(blocks),
             blits=[],text_boundaries=[])
         self.ativo=False;cap.current=row
         hook=cpu.hook_add(original.unicorn.UC_HOOK_CODE,b._parar_se_pedido,begin=ret,end=ret);cpu.ctl_flush_tb()
         try:
             b._retomando={regs['EIP']};out=BancadaCargaMissaoOriginal._correr(b,'isolated-S1-screen',regs['EIP'],{},(ret,),retomar=True)
+            after=b.imagem()
             row.update(exit_registers=out,returned=out['EIP']==ret,after=cap.blob(dd.pixels('offscreen')),
-                exit_blocks={n:[hex(a),cap.blob(v)] for n,(a,v) in b.imagem().items()})
+                exit_blocks=self.metadata(after),exit_inputs=self.inputs(after))
             assert row['returned'];self.registros.append(row)
         finally:
             cap.current=None;cpu.hook_del(hook);self._restaurar(ctx,blocks);cpu.mem_write(dd.base_superficies,surfaces)
@@ -51,10 +85,25 @@ def main(a):
     original.REF=a.ref;m=original.modulo_entrada();b,_,start=m.abrir(a.start,Path(a.snapshot))
     if not 17000<=start<a.to<=17050:raise ValueError('Requires real S1 checkpoint17000..17049; stop<=17050')
     raw=original.remoto(original.PROBE_ROOT+'entradas/S1.json');b.roteiro.quadros=m.carregar_entrada(json.loads(raw))[0]
-    iso=TelasS1(b);iso.instalar();checks=[];t=time.monotonic()
+    iso=TelasS1(b);iso.instalar();checks=[];phases=[];t=time.monotonic()
+    phasecap=object.__new__(CapturaTextoTela);phasecap.b=b;phasecap.blobs=iso.cap.blobs;phasecap.current=None
+    def blit(c,pc,size,user):
+        if iso.ativo:phasecap.blit(c,pc,size,user)
+    def text(c,pc,size,user):
+        if iso.ativo:phasecap.text(c,pc,size,user)
+    for pc in original.BLITS:b.cpu.hook_add(original.unicorn.UC_HOOK_CODE,blit,begin=pc,end=pc)
+    b.cpu.hook_add(original.unicorn.UC_HOOK_BLOCK,text,begin=b.sym['AffText'],end=b.sym['AffText'])
+    b.cpu.ctl_flush_tb()
     for k in range(start+1,a.to+1):
-        iso.frame=k;b.roteiro.iniciar_quadro(k);b.executar_entre_quadros(300,k)
-        between=sha(b.directdraw.pixels('offscreen'));b.executar_quadro(600,k)
+        iso.frame=k;b.roteiro.iniciar_quadro(k)
+        for label,execute in (('between_frames',b.executar_entre_quadros),('frame',b.executar_quadro)):
+            blocks=b.imagem();phasecap.current=dict(frame=k,phase=label,before=phasecap.blob(b.directdraw.pixels('offscreen')),
+                entry_inputs=iso.inputs(blocks),entry_blocks=iso.metadata(blocks),blits=[],text_boundaries=[])
+            execute(600,k)
+            phasecap.current.update(after=phasecap.blob(b.directdraw.pixels('offscreen')),
+                whole_state_sha256=b.resumo_imagem(b.imagem())['sha256'])
+            phases.append(phasecap.current);phasecap.current=None
+        between=phases[-2]['after']
         checks.append(dict(frame=k,between_surface=between,frame_surface=sha(b.directdraw.pixels('offscreen')),
             whole_state_sha256=b.resumo_imagem(b.imagem())['sha256']))
         b.roteiro.eventos.clear()
@@ -63,7 +112,7 @@ def main(a):
     result=dict(schema='rising-lands/s1-native-isolated-screens/1',method=__doc__,probe_ref=a.ref,frames=[start+1,a.to],
         executable_sha256=__import__('emulador').HASH_ORIGINAL,code_sha256=b.sha256_codigo(),
         source_sha256=sha(Path(__file__).read_bytes()),snapshot_sha256=sha(Path(a.snapshot).read_bytes()),input_sha256=sha(raw),
-        rows=iso.registros,blobs=iso.cap.blobs,checks=checks,elapsed_seconds=time.monotonic()-t)
+        rows=iso.registros,phases=phases,blobs=iso.cap.blobs,checks=checks,elapsed_seconds=time.monotonic()-t)
     Path(a.output).write_bytes(lzma.compress(json.dumps(result).encode()));print('native isolated screens',len(iso.registros),flush=True)
 
 if __name__=='__main__':
