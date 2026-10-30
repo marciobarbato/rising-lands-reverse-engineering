@@ -439,3 +439,120 @@ and prepared `python3 -B scripts/check.py` (1,881 tests, 610 optional skips).
 The previous missing-input common-check stop is resolved. No Mac mini run is
 needed for the completed native evidence proof. Unreached branches retain
 named failures; project acceptance and integration remain with the coordinator.
+
+## Stage 3 — native Graphics 1.5 renderer, ABI 1.3
+
+The renderer binds directly to a Rust world and retains owned, hash-verified
+original CMP banks, the PLATGAME palette and the original shadow/lighting
+tables. Asset bytes come from Graphics' catalog sources; no asset payload is
+committed in motor/. Creation requires the explicit original initial indexed
+surface and complete terrain cache. Terrain cache keys, raw 32×33 payloads and
+replacement cursor carry between draws. Generic CMP drawing preserves opaque
+literal zero, transparent skips, signed clipping, destination remaps and player
+colors. Tables and layer plans keep the bounded renderer extensible without
+adding Graphics 1.6 construction behavior to this port.
+
+The additive C interface is `rl_render_criar`, `rl_render_geracao`,
+`rl_render_quadro`, `rl_render_reset`, `rl_render_liberar`,
+`rl_render_observacoes` and `rl_render_cache`. See the versioned
+[header](../motor/include/rising_engine.h) for field layouts. Creation copies
+all inputs. Rendering copies 480,000 top-down indexed8 pixels (800×600, stride
+800) plus 768 RGB24 palette bytes into caller-owned reusable buffers. Palette
+generation is explicitly 1; Cyclage is outside Graphics 1.5's surface contract.
+No Rust pointer escapes. No filesystem access or Python projection is needed
+per frame. Full projection remains an optional proof/debug interface.
+
+A world generation changes on every successful state load, isolated routine or
+frame phase. The renderer requires the exact AffGame-entry generation after
+phase 1 or phase 3 and rejects phase 2. Repeating the same generation and HUD
+flag returns the same committed result. Capacity queries update only required
+sizes/metadata; neither output buffer nor cache advances. ABI failures publish
+nothing. Full, undrawn and partial are distinct successful outcomes; partial
+publishes only the actual drawn prefix/cache and names the first original
+callee/address. Reset copies explicit surface/cache inputs and clears the
+previous-generation result. Freeing the world invalidates its renderer calls;
+renderer release remains available. All native calls share one registry lock.
+
+Phase 2 remains the sole owner of display-related logic effects. Rendering
+reads the entry world, uses local overrides in original write order, and
+exports ordered changed-byte and raster observations without applying them to
+the world. BatimentEstHabiter reads the actual structure bag and live unit
+kinds internally. The default display tick follows the published Python read
+contract, not a host wall clock. Native renderer validation and throughput
+results are recorded in the stage handoff after the measured runs.
+
+The completed [Stage 3 proof](../motor/validation/stage3/summary.json) establishes
+**128/128** chained own-world surfaces equal to Python and the original full
+surface hashes, with carried cache, palette and effect equality and no world
+mutation. The input-time matrix has **113/113** complete native surfaces equal;
+the damaged-sanctuary case retains its expected **0x4085CB** stop. All 26
+perturbed stop/prefix cases match Python. The uninterrupted M2.3 run renders
+**9,200/9,200** complete surfaces with hashes equal to the original, with no
+stop or first difference. The ABI 1.3 logic regression stays 257/257 equal.
+
+The exclusive release [Swift/Metal client](../motor/validation/stage3/swift-metal.json)
+measures **248.64 render fps** and **61.22 engine+render+Metal fps** (16.33 ms
+per frame), including copied output buffers, GPU upload/conversion and GPU
+completion, excluding initialization, proof work and app UI/display pacing.
+It verifies 128 native indexed hashes and complete first/last RGBA readbacks.
+The supplied native path exceeds the 25 fps target; app UI integration remains
+with the macOS owner. No app source or acceptance record is changed.
+
+Both gates pass: engine fmt/strict Clippy, 27 Rust tests, 57 Python discovery
+tests plus seven isolated renderer checks, C/Swift/Metal interoperability;
+prepared common check 1,881 tests with 610 optional skips. Detailed proof scopes,
+unchanged native source identities, exact commands and remaining 1.5 boundaries
+are in the [handoff](../motor/HANDOFF.md).
+
+## Reference isolation and Graphics 1.7 — ABI 1.4
+
+Engine tests consume exact Git revisions, independently of the integrated
+working-tree Python. `motor/testes/pinned_reference.py` materializes a read-only,
+ignored reference tree from logic revision `7ceeff9` (the version ported) with
+only Graphics overlaid from `ce441852bcada750a8f91da8ed3302f1668c4405` (1.7).
+Both sources and fixtures come from Git objects, including transitive imports;
+every cached tracked file is checked against its immutable Git blob identity.
+The frozen catalog still verifies the linked original asset payloads. Python
+source pins and copied-definition AST tests read this revision tree. Original
+capture/policy pins continue checking the actual immutable checkout evidence.
+A legitimate upstream Python update therefore needs no engine pin refresh.
+Tests demonstrate live-source independence and rejection of evidence/snapshot
+corruption. Missing pinned commits require fetching them; no cache, reference
+payload or commercial media is committed in motor/.
+
+The renderer now ports Graphics 1.7 construction progress/full/gray facades,
+selected builder construction bodies, order markers, CAVE placement shading,
+tooltip measurement/frame/background save and next-frame restoration. ABI 1.4
+keeps all 1.3 signatures and layouts; explicit creation at 1.0–1.3 remains valid.
+`rl_render_contrato()` identifies Graphics 1.7 separately. The additive
+`rl_render_fundo_salvo()` copies actual saved background bytes; observation
+kinds 3/4 describe write-only background output and the exact text request.
+Reset clears carried background; creation/restoration can read an explicitly
+declared original background buffer. Rendering still leaves world state
+unchanged and never applies display effects on top of phase 2.
+
+Graphics 1.7 does not reconstruct glyphs: default rendering retains the named
+`AffText 0x459454` stop after drawing the native tooltip background. The P1/P2/P3
+full-window evidence declares that original routine non-executed. The offline
+Rust fixture runner supports only that explicitly recorded contract, verifying
+every text/font/rectangle/flags argument and the entire pre-text surface hash.
+The production C ABI cannot install this adapter. Qualified full-window results
+and normal production-prefix results are reported separately. Graphics 1.8
+windows and glyph reconstruction remain outside this port.
+
+[Committed Graphics 1.7 results](../motor/validation/graphics17/summary.json):
+**128/128 M2.2** and **9,200/9,200 M2.3** surfaces equal; the latter has no stop
+or difference. Qualified P1/P2/P3 chains equal Python 1.7 and the original in
+**501/501**, **601/601**, **172/172** frames, including drawing order, DGROUP,
+carried cache/background and **1,037** exactly verified non-executed text
+boundaries. The independent construction matrix is **600/600** equal.
+Production glyph stops remain at P1/P2/P3 frames **170/219/141**, respectively,
+with exact native partial pixels. Logic regression remains **257/257** equal.
+
+`sh motor/validate.sh` passes on implementation `53efd9a`, containing merged
+main `ce44185`: **28 Rust tests**, **61 Python tests** with ten isolated renderer
+checks, fmt/strict Clippy, C/Swift ABI 1.4 and actual Metal output checks.
+Prepared common validation passes **1,936 tests**, 614 optional skips. No
+renderer case is skipped. The [handoff](../motor/HANDOFF.md) records precise
+qualification, source/library hashes, reproduction commands and gaps. These
+results neither port Graphics 1.8 nor establish M3 simulation/app acceptance.

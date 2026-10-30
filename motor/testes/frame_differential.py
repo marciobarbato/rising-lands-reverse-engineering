@@ -4,6 +4,9 @@ Run under the shared heavy lease. This script never executes x86 or repairs a
 reference. Each phase advances ONE Rust world; reference deltas only reconstruct
 the expected state, never become Rust inputs after S0. Output refuses overwrite.
 """
+from pinned_reference import activate, reference_file, pinned_file, provenance
+SOURCE_ROOT = activate()
+
 import argparse
 import copy
 import ctypes as C
@@ -19,9 +22,9 @@ import time
 from frame_abi import Frames, FrameInput, FrameRegisters
 
 ROOT = Path(__file__).resolve().parents[2]
-IA = ROOT / 'pesquisas-paralelas/ia-runtime'
+IA = SOURCE_ROOT / 'pesquisas-paralelas/ia-runtime'
 sys.path.insert(0, str(IA))
-sys.path.insert(0, str(ROOT / 'pesquisas-paralelas/missoes'))
+sys.path.insert(0, str(SOURCE_ROOT / 'pesquisas-paralelas/missoes'))
 import ambiente_ia_runtime  # noqa: E402,F401
 from frame_evidence import (VINCULO, FRONTEIRA, MascaraEnderecos, carregar_captura,
                             comparar_estado, comparar_eventos_fase, comparar_alocacoes,
@@ -55,9 +58,7 @@ PINS.update({
     ROOT / 'pesquisas-paralelas/ia-runtime/contexto_exibicao_ia.py': 'e8ba0fbbba0d0b8dd39511b3cca3df0a3a6737411992f488400e3e3b24b70d87',
     ROOT / 'pesquisas-paralelas/missoes/mapa_memoria_m1.py': '7507e065c20ff0c05d6d86972d0a11919cc59e484a6b4f306c122c309a2d74c9',
 })
-# Superseded pins still accepted while the coordinator integrates a reviewed
-# reference change in two steps (the repin lands before the research front).
-PREVIOUS_PINS = {}
+# Python references are loaded and checked at the fixed port revision.
 LONG_RAW_SHA = '1ad031b96300e5c632fd5b6b7857ae30792f78e86531e4f17d1bf7124c6dd930'
 BINDINGS = {1: ('USER32.ShowCursor', 1), 2: ('USER32.GetAsyncKeyState', 1),
             3: ('KERNEL32.GlobalHandle', 1), 4: ('KERNEL32.GlobalUnlock', 1),
@@ -77,7 +78,7 @@ def sha(path):
 
 def assert_pins(paths):
     for path in paths:
-        if sha(path) not in (PINS[path], PREVIOUS_PINS.get(path)):
+        if sha(pinned_file(path)) != PINS[path]:
             raise ValueError('Frozen reference SHA mismatch: ' + str(path.relative_to(ROOT)))
 
 
@@ -347,7 +348,7 @@ def compare(library=None, frames=1, long_policy=False, state_only=False, executa
     frames_completed = sum(1 for r in results if r['result'] == 'returned' and r['phase'].startswith('frame'))
     equal = len(results) == 1 + 2 * frames and all(r['equal'] for r in results)
     equal = equal and (state_only or allocation_result['equal'])
-    return dict(schema='rising-lands/rust-engine-frame-differential/1',
+    return dict(schema='rising-lands/rust-engine-frame-differential/1', reference_snapshot=provenance(),
                 original_sha256=ambiente_ia_runtime.ORIGINAL_SHA256,
                 library=library_identity,
                 original_executable_input=str(original),

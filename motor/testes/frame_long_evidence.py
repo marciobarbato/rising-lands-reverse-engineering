@@ -4,6 +4,7 @@ import hashlib
 import json
 import lzma
 from pathlib import Path
+from pinned_reference import pinned_file
 
 from frame_differential import (ROOT, M1_ENTRY, M1_CAPTURE, FIRST_CAPTURE, PINS as FROZEN_PINS,
                                 sha, normalize_events, named_snapshot, mismatch_bytes,
@@ -43,7 +44,7 @@ HASH_FIELDS = ('summary', 'compared_summary', 'masked_sha256')
 
 def pins():
     for path, expected in {**PINS, **REFERENCE_PINS}.items():
-        if sha(path) != expected:
+        if sha(pinned_file(path)) != expected:
             raise ValueError('ReferenceIdentityMismatch: ' + str(path.relative_to(ROOT)))
 
 

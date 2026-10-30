@@ -1,0 +1,304 @@
+{
+ "by_routine": {
+  "BatimentDecouvre": {
+   "mismatches": 0,
+   "steps": 47
+  },
+  "BatimentDeselectionner": {
+   "mismatches": 0,
+   "steps": 1
+  },
+  "BatimentIllumine": {
+   "mismatches": 0,
+   "steps": 56
+  },
+  "CalculPosition": {
+   "mismatches": 0,
+   "steps": 50
+  },
+  "DeSelectionGroupe": {
+   "mismatches": 0,
+   "steps": 1
+  },
+  "DecouvreCase": {
+   "mismatches": 0,
+   "steps": 17
+  },
+  "EnginGetCentreGroupe": {
+   "mismatches": 0,
+   "steps": 14
+  },
+  "EteintCase": {
+   "mismatches": 0,
+   "steps": 22
+  },
+  "IllumineCase": {
+   "mismatches": 0,
+   "steps": 22
+  },
+  "MiniMapRecentre": {
+   "mismatches": 0,
+   "steps": 19
+  },
+  "MiniMapSetPos": {
+   "mismatches": 0,
+   "steps": 11
+  },
+  "RechercheDecalageSortie": {
+   "mismatches": 0,
+   "steps": 33
+  },
+  "RestaureSelectionGroupe": {
+   "mismatches": 0,
+   "steps": 22
+  },
+  "SauveSelectionGroupe": {
+   "mismatches": 0,
+   "steps": 14
+  }
+ },
+ "capture": {
+  "path": "evidencias/visao-grupos/captura-visao-grupos-exibicao.json.xz",
+  "sha256": "59a8831b12b79207c913462466d5cce314513b87f54535e45fc8a30d0cab10b7"
+ },
+ "changed_bytes_compared": 8433,
+ "comparisons": 329,
+ "declared_domain_stops": [],
+ "mismatches": [],
+ "original_sha256": "6c556520c084b9300d9ac01900d1505126085c5f64b1ac5e5b615ea41c8543fb",
+ "path_reproduction": {
+  "between_frames": true,
+  "code_unchanged": true,
+  "frame1": true,
+  "load_tail": true,
+  "paused": true
+ },
+ "pause": {
+  "caller": "CalculGame+0xb4d",
+  "caller_return": "0x42d3b5",
+  "registers": {
+   "EAX": "0x0",
+   "EBP": "0x0",
+   "EBX": "0x0",
+   "ECX": "0x5",
+   "EDI": "0x0",
+   "EDX": "0x1a1a000e",
+   "EIP": "0x45edc0",
+   "ESI": "0x0",
+   "ESP": "0x2007ebc"
+  },
+  "routine": "ProcessInputGame",
+  "state_sha256": {
+   "blocks": 25198,
+   "bytes": 16240871,
+   "sha256": "6e8620b99ac650d032d575570da2a28bbab6cf700b09d6ed1efae5bb085724ed"
+  }
+ },
+ "providers": {
+  "som": "returns the received EAX (the frame bench declaration for PlaySnd_*), compared"
+ },
+ "schema": "rising-lands/monde01-vision-groups-differential/1",
+ "seconds": 186.308,
+ "source_sha256": {
+  "ferramentas/bancada_entrada_estruturas.py": "660cf29cd538cb5ebf81ff35b7b9cf0c9d34aabc97a83d3b4740c71930cf7078",
+  "ferramentas/capturar_visao_grupos.py": "861f84233c9f31278830c10bc167f16d626ccc635b063b5fc9c9ff5c37d2d746",
+  "ferramentas/casos_visao_grupos.py": "8351c03dfdad565a51715aeffff0fec99a6cc98e659522785518bb9fecc05e4e",
+  "ferramentas/selecao_ordens.py": "e8eb78134dd44adbbef88354ea3219c6513f2a2173cc68227fa9fecaf47ab67c",
+  "ferramentas/validar_visao_grupos.py": "31ac034e5e1f24b4bd2f3089c9f1e9be9c12a8476f9ad40a46ba6482b6f688ed",
+  "ferramentas/visao_grupos.py": "d47c782fb100e4dc302e35765317fdd47d0986aa21f0b96c7d75628791bbed61"
+ },
+ "uncertain": [
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type0"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type1"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type2"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type3"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type4"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type5"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type6"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type7"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type8"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type10"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type11"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type13"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type14"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type15"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type16"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type18"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type19"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type20"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type21"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_sanctuary"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_cave"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_upper_bits"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type5_blocked0"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type5_blocked1"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type5_blocked3"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type5_blocked7"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_type5_other_bits_only"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_corner_0_0"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_row_0"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_column_0"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_column_255"
+  },
+  {
+   "bits": {
+    "EAX": "0xffff0000"
+   },
+   "case": "decalage_row_255"
+  }
+ ]
+}
