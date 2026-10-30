@@ -12,7 +12,8 @@ live to it (``mundo_vivo``), as validated in M2.3.
 
 Named dependencies (never defaulted; a path that reaches one without its provider raises
 ``DependenciaRamoCore`` at the original call, after the stores the original made before it):
-- ``som(nome, registradores, pilha) -> EAX``: the sound-library boundary (Audio).
+- ``som(nome, registradores, pilha) -> EAX``: the sound-library boundary (Audio). A provider that declares a
+  ``chamada`` parameter (or ``**kwargs``) also receives the original call instruction's address (``chamar_som``).
   ``PlaySnd_PostSound 0x48aa79`` receives EAX = request opcode (0x50 unit voice, 0x42
   structure), EDX = sound code, EBX = address of the handle field, ECX = flag and one pushed
   word, the volume (``pilha``). ``PlaySnd_StopSound 0x48aac0`` receives EAX = handle-field
@@ -74,6 +75,20 @@ def _s32(v):
     return v - (1 << 32) if v & 0x80000000 else v
 
 
+def chamar_som(som, nome, registradores, pilha, chamada):
+    """Call Audio's sound-library provider for ``nome`` at the original call instruction ``chamada``. The address is
+    passed as the keyword ``chamada`` when the provider declares that parameter or ``**kwargs`` (AI/runtime's
+    request); a three-argument ``som(nome, registradores, pilha)`` keeps working unchanged."""
+    import inspect
+    try:
+        parametros = inspect.signature(som).parameters.values()
+    except (TypeError, ValueError):
+        parametros = ()
+    if any(p.kind is p.VAR_KEYWORD or p.name == 'chamada' for p in parametros):
+        return som(nome, registradores, pilha, chamada=chamada)
+    return som(nome, registradores, pilha)
+
+
 class SelecaoOrdens:
     """The routines over one live memory; providers are explicit (see the module docstring)."""
 
@@ -98,7 +113,8 @@ class SelecaoOrdens:
     def _fronteira(self, nome, endereco, r, pilha=()):
         if self.som is None:
             raise DependenciaRamoCore(nome, endereco, 'Audio sound-library provider required')
-        r['EAX'] = self.som(nome, {k: r[k] for k in ('EAX', 'EDX', 'EBX', 'ECX')}, list(pilha)) & M32
+        r['EAX'] = chamar_som(self.som, nome, {k: r[k] for k in ('EAX', 'EDX', 'EBX', 'ECX')}, list(pilha),
+                              endereco) & M32
 
     # ------------------------------------------------------------ small callees (exact registers)
     def _vivo(self, r):
