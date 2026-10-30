@@ -59,7 +59,7 @@ ARGUMENTOS = {
     'MineGetCapacite': {'EAX': 0xffff},
     'EnginGetType': {'EAX': 0xffff}, 'EnginGetPlayer': {'EAX': 0xffff}, 'BagContientTroupe': {'EAX': M32},
     'PlaceLibre': {'EAX': 0xffff, 'EDX': 0xffff}, 'EnginGetBag': {'EAX': 0xffff},
-    'BatimentHabitable': {'EAX': 0xffff, 'EDX': 0xff}, 'BatimentModifyMap': {'EAX': 0xffff},
+    'BatimentHabitable': {'EAX': 0xffff, 'EDX': 0xff}, 'BatimentModifyMap': {'EAX': 0xffff, 'EDX': 0xff},
     'InitBatimentPlayer': {'EAX': 0xffff, 'EDX': 0xff}, 'BatimentGetVolume': {'EAX': 0xffff},
     'BagPrend': {'EAX': M32, 'EDX': 0xff, 'EBX': 0xffff},
     'TerrainDeposeSac': {'EAX': 0xffff, 'EDX': 0xff, 'EBX': 0xffff},
@@ -690,7 +690,7 @@ class CicloTrabalho:
         3. A unit that is not a colonist (type 9) unloads: each stone entry (tag 2 value 2) gives
            BatimentAjouteMatiere(2, 1, player, structure) then BagRetire; then each food entry (tag 2 value 1) the
            same with resource 1. The credit is 1 per entry whatever its value.
-        4. A structure owned by 0xc8 becomes the unit's player's: BatimentHabitable(s, 1), BatimentModifyMap(s),
+        4. A structure owned by 0xc8 becomes the unit's player's: BatimentHabitable(s, 1), BatimentModifyMap(s, 1),
            InitBatimentPlayer(s, player) (for a cave: the player's cave count += 1); when it is the local player's
            and its volume handle +0x100 is -1, PlaySnd_PostSound(0x42, type << 16 | 0x2700, s + 0x100, 0, push).
         5. BagPrend(structure Bag, 1, unit). AL = 1."""
@@ -724,7 +724,7 @@ class CicloTrabalho:
             j = self._ext('EnginGetPlayer', 0x41fa72, EAX=u)['EAX'] & 0xff
             self.m.u8(est + 4, j)
             self._ext('BatimentHabitable', 0x41fa81, EAX=s, EDX=1)
-            self._ext('BatimentModifyMap', 0x41fa88, EAX=s)
+            self._ext('BatimentModifyMap', 0x41fa88, EAX=s, EDX=1)   # DL = 1 from 0x41fa7c, kept by BatimentHabitable
             j = self._ext('EnginGetPlayer', 0x41fa91, EAX=u)['EAX'] & 0xff
             self._ext('InitBatimentPlayer', 0x41fa9a, EAX=s, EDX=j)
             if self.m.u8(est + 4) == self.m.u8(JOGADOR_LOCAL):
