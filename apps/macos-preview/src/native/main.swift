@@ -272,9 +272,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKScriptMessageHandler
             let live=try NativeLiveWindow(root:resourceRoot,validationMode:mode=="test");nativeLive=live
             live.gameFPS=rate;live.update={_ in}
             live.perform("live-reset"){_ in live.perform("live-step"){_ in live.perform("live-play"){_ in
+                var lastPulse=ProcessInfo.processInfo.systemUptime,maxPulseGap=0.0,pulses=0
+                let pulse=Timer.scheduledTimer(withTimeInterval:0.05,repeats:true){_ in let now=ProcessInfo.processInfo.systemUptime;maxPulseGap=max(maxPulseGap,now-lastPulse);lastPulse=now;pulses+=1}
                 DispatchQueue.main.asyncAfter(deadline:.now()+duration){
                     live.perform("live-pause"){value in
-                        var result=value;result["commit"]=Bundle.main.object(forInfoDictionaryKey:"RisingLandsSourceCommit") as? String
+                        pulse.invalidate()
+                        var result=value;result["mainTimerMaxGapMS"]=maxPulseGap*1000;result["mainTimerPulses"]=pulses;result["commit"]=Bundle.main.object(forInfoDictionaryKey:"RisingLandsSourceCommit") as? String
                         result["native_window_visible"]=live.window.isVisible
                         result["requestedSeconds"]=duration
                         result["screenMaximumFPS"]=live.window.screen?.maximumFramesPerSecond ?? 0

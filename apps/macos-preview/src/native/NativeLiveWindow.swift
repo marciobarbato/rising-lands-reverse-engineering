@@ -310,7 +310,7 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
         let elapsed=max(0.000001,(running ? ProcessInfo.processInfo.systemUptime:playEnded)-playStarted)
         let frames=s.frames>=startFrames ? s.frames-startFrames:0
         var timing:[String:Any]=["frames":frames,"seconds":elapsed,"fps":playStarted>0 ? Double(frames)/elapsed:0,"rustSeconds":Double(s.logic_ns-startLogic)/1e9,"renderSeconds":Double(s.render_ns-startRender)/1e9,"proofSeconds":Double(s.proof_ns-startProof)/1e9,"metalSeconds":metalSeconds-startMetal]
-        timing["gameFPS"]=gameFPS;timing["executionMode"]=validationMode ? "test":"play"
+        timing["gameFPS"]=validationMode ? 0:gameFPS;timing["executionMode"]=validationMode ? "test":"play"
         let end=running ? ProcessInfo.processInfo.systemUptime:playEnded
         if !validationMode,let presenter=presenter{timing.merge(presenter.metrics(start:playStarted,end:end,detailed:!running)){_,new in new}}
         else{timing.merge(metal.testMetrics(start:playStarted,end:end,detailed:!running)){_,new in new}}
@@ -396,8 +396,22 @@ final class NativeLiveWindow:NSObject,NSWindowDelegate {
     func capture(_ url:URL,completion:@escaping([String:Any])->Void){
         work.async{[weak self] in
             guard let self=self else{return};self.running=false;self.playEnded=ProcessInfo.processInfo.systemUptime;self.presenter?.stop()
+            guard let pixels=macos_live_pixels(self.driver),let palette=macos_live_palette(self.driver) else{DispatchQueue.main.async{completion(["error":"NativePixelsUnavailable"])};return}
+            if !self.validationMode,let presenter=self.presenter{
+                // Capture the actual play texture/upload/shader path. Draining makes a
+                // free slot available even if the last timed publication was dropped.
+                presenter.publish(pixels,palette,frame:self.status().frames)
+                presenter.queue.sync{presenter.draw()};presenter.stop()
+            }
             DispatchQueue.main.sync {
-                do{guard let pixels=macos_live_pixels(self.driver),let palette=macos_live_palette(self.driver) else{throw NSError(domain:"NativePixelsUnavailable",code:1)};if !self.validationMode{try self.metal.present(pixels,palette)};let result=try self.metal.capture(url,pixels:pixels,palette:palette);completion(result)}catch{completion(["error":error.localizedDescription])}
+                do{
+                    if !self.validationMode{
+                        guard let texture=self.presenter?.lastTexture else{throw NSError(domain:"MetalPlayReadbackUnavailable",code:1)}
+                        self.metal.lastTexture=texture
+                    }
+                    var result=try self.metal.capture(url,pixels:pixels,palette:palette)
+                    result["transport"]=self.validationMode ? "validation-texture":"async-slot-texture";completion(result)
+                }catch{completion(["error":error.localizedDescription])}
             }
         }
     }
