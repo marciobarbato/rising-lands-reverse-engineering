@@ -70,7 +70,8 @@ def tooltip(h):
         if not b:break
         text.append(b)
     else:h.parar(0x40f8c0,'tooltip string exceeds captured bounded length')
-    if bytes(text) not in (b'CONSTRUTOR',b'ARMAZ\xc9M') or m.u16(0x49620c)!=0xffff or m.u32(0x4e1d94) or m.u32(0x4e1d98):
+    from camadas_exibicao_m3 import TABLES
+    if bytes(text).hex() not in TABLES['tooltip_hex'] or m.u16(0x49620c)!=0xffff or m.u32(0x4e1d94) or m.u32(0x4e1d98):
         h.parar(0x40f8c0,'tooltip outside captured builder/CAVE strings and single-byte font mode')
     write(h,'restaurar_fundo_u8',0x49a041,1,1)
     width=sum(h.catalogo.quadro(0x23d5+b-32).largura for b in text)+2

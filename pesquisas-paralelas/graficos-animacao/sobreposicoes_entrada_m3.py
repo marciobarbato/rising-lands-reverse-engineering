@@ -8,7 +8,7 @@ from graficos import Quadro, compor_indices
 
 i16=lambda v:(v+32768)%65536-32768
 word=lambda r,o:struct.unpack_from('<H',r,o)[0]
-TIPOS_ENTRADA=(0,1,5,7,8)
+TIPOS_ENTRADA=(0,1,5,7,8,9)
 
 
 def bob(c,x,y,ident,owner=None):
@@ -52,11 +52,15 @@ def drag(c):
 
 
 def validar_unidade(c,r):
-    if r[1] not in TIPOS_ENTRADA or r[0]!=0 or c.camera!=0 or (r[2] not in (2,7) and not (r[1]==7 and r[2] in (11,15))) or r[0x99] or r[0xdc]:
+    if r[1] not in TIPOS_ENTRADA or r[0]!=0 or c.camera!=0 or (r[2] not in (2,7) and not (r[1]==7 and r[2] in (11,15)) and not (r[1]==9 and r[2]==13) and not (r[1]==5 and r[2]==5)) or r[0x99] or r[0xdc]:
         c.parar(0x41591f,'input overlay outside captured owner-0 normal field-unit domain')
     if r[0xa5] != (10 if r[1] == 8 else 8):c.parar(0x41591f,'input-overlay body count differs from the initialized count')
-    if word(r,4)!=4 or word(r,0x76)!=4:c.parar(0x410be4,'fatigue words outside captured +4 = +0x76 = 4')
-    if r[0xbd] and r[0x82]>1:c.parar(0x412923,'selected unit order marker outside captured cell-target mode 1')
+    if word(r,4)!=4 or word(r,0x76)!=4:
+        from camadas_exibicao_m3 import TABLES
+        if [word(r,4),word(r,0x76)] not in TABLES.get('fatigue_pairs',{}).get(str(r[1]),[]):
+            c.parar(0x410be4,'fatigue words outside captured unit/material pairs')
+    if r[0xbd] and r[0x82]>1 and not (r[1]==5 and r[0x82]==2):
+        c.parar(0x412923,'selected unit order marker outside captured modes')
     if r[0xaf]>>5 and r[1]!=7:c.parar(0x413696,'experience icon for a non-builder is not captured')
 
 
@@ -88,6 +92,9 @@ def info_unidade(c,r,x,y,index):
 
 
 def estrutura(c,r,cell,index,*,frame,gauge):
+    if r[8]==3 or (r[8]==2 and word(r,0xc)==7):
+        from camadas_exibicao_m3 import selecao
+        return selecao(c,r,cell,index,frame=frame,gauge=gauge)
     if r[8]!=2 or r[5]!=5 or r[4]!=0 or c.camera!=0:
         c.parar(0x4022c8 if frame else 0x4020ec,'selection overlay outside captured inhabited owner-0 mode-5 sanctuary')
     if c.leitura_entrada is None:c.parar(0x4020ec,'sanctuary gauge requires the live type-table read view')

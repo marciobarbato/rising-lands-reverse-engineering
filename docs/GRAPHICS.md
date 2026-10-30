@@ -621,13 +621,13 @@ See `pesquisas-paralelas/graficos-animacao/FRONTEIRAS_EXIBICAO.md`: `fronteiras_
 
 **Historical 1.0 stops (superseded by the contract below).** `0x41591F`: the 16 M1 units have life word `+0x74` = 1 (< 100), which enables the tired/overlay branch of the unit body (`0x414320..0x414409`, `TypeEnginSeFatigue`) that no committed unit module covers; this is the first stop and all later sprite cells are absent. `0x408AC8`: modes 0, 1, 2, 6, 7, for which the original draws one common image different from the facade (identical across those five modes; captured natively, not reconstructed). `0x40892D`: uninhabited facade (gray effect). `0x40863E`: mode 3 uninhabited (advances the RNG cursor). `0x4022C8` / `0x4020EC`: selection frame / gauge of a selected structure. The raid unit (unit 16) on screen and the effect projectiles 31/32 were captured as logic-state-clean (see EFEITOS_LOGICOS_EXIBICAO.md) but their **pixel** composition is not reconstructed; the composition stops at the unit overlay before reaching them.
 
-**Render API, contract version 1.7** ([render_quadro.py](../pesquisas-paralelas/graficos-animacao/render_quadro.py)). This is the contract the macOS integration layer consumes. A change of any input, output field, format or stop semantics bumps `VERSAO_RENDER_QUADRO` (major for breaking changes, minor for additions); the version is returned in every result.
+**Render API, contract version 1.8** ([render_quadro.py](../pesquisas-paralelas/graficos-animacao/render_quadro.py)). This is the contract the macOS integration layer consumes. A change of any input, output field, format or stop semantics bumps `VERSAO_RENDER_QUADRO` (major for breaking changes, minor for additions); the version is returned in every result.
 
-The 1.7 changelog and scripted-probe boundary qualification are below. The dispatch's heading/report said 1.6; its
-explicit target was 1.7, which is the version delivered. The macOS consumer must update its explicit pin separately.
+The 1.7 and 1.8 changelogs and scripted-probe boundary qualification are below. The earlier dispatch's heading/report
+said 1.6; published 1.7 is retained. The macOS consumer must update its explicit pin separately.
 
 ```python
-VERSAO_RENDER_QUADRO = (1, 7)
+VERSAO_RENDER_QUADRO = (1, 8)
 renderizar_quadro(memoria, *, superficie_anterior, catalogo=None, paleta=None, habitado=None, relogio=None, cache=None, hud=False, texto=None) -> QuadroRenderizado
 regioes_necessarias(memoria, hud=False) -> [(start, end_exclusive, name)]
 QuadroRenderizado(versao, largura, altura, pixels, rgba, parada, chamadas, efeitos, cache)
@@ -651,7 +651,7 @@ carregar_cache_inicial(caminho, catalogo=None) -> EstadoCache
   With `hud=True`, `[0x4E24B4]` adds the 256-byte tooltip-shadow table. These tables differ from disabled-icon gray.
 
 *Outputs* (`QuadroRenderizado`, frozen).
-- `versao`: `(1, 7)`. `largura`, `altura`: 800, 600.
+- `versao`: `(1, 8)`. `largura`, `altura`: 800, 600.
 - `pixels`: 480,000 bytes, palette indices, row-major, origin top-left, pitch 800. The surface after the composed passes; pixels the composition did not reach keep `superficie_anterior`.
 - `rgba`: 1,920,000 bytes, 4 bytes per pixel (R, G, B, 255), same order as `pixels`; `rgba[4i:4i+3] = palette[3*pixels[i]:3*pixels[i]+3]`.
 - `parada`: `None` for a complete composition, otherwise `{'endereco': '0x........', 'detalhe': str}`: the first original branch the reconstruction does not cover. The frame is then **partial** (everything drawn before the stop is exact, everything after is absent); the consumer must show or log it, never treat it as complete.
@@ -664,9 +664,9 @@ carregar_cache_inicial(caminho, catalogo=None) -> EstadoCache
 
 *Palette.* PLATGAME.PIE: 256 entries × 3 bytes, 8-bit RGB (the 6-bit VGA values expanded ×4, so the maximum component is 252), no gamma. It is the static palette: the live palette cycling (`Cyclage`) and any palette change after load are not applied. Pass `paleta` to override.
 
-*Supported domain.* Mode `[0x4E2F78] = 0x12` (in-game), 800×600 session (`[0x49A018] = 800`, window 25×17 cells), camera 0..3, terrain/vegetation/structure passes as captured. Frame cadence gates (`[0x4E05A2]`, divisor) can return an undrawn frame (`pixels == superficie_anterior`, stop at the cadence return). With `hud=False` the HUD (from `0x417B1C`) is not drawn; with `hud=True` it is drawn within the additive 1.5 and 1.7 domains below and stops at its original address outside it. Other game modes and the video-surface clear path remain outside.
+*Supported domain.* Mode `[0x4E2F78] = 0x12` (in-game), 800×600 session (`[0x49A018] = 800`, window 25×17 cells), camera 0..3, terrain/vegetation/structure passes as captured. Frame cadence gates (`[0x4E05A2]`, divisor) can return an undrawn frame (`pixels == superficie_anterior`, stop at the cadence return). With `hud=False` the HUD (from `0x417B1C`) is not drawn; with `hud=True` it is drawn within the additive 1.5, 1.7 and 1.8 domains below and stops at its original address outside it. Other game modes and the video-surface clear path remain outside.
 
-*Named stops* (address → meaning). `0x4176A8` mode ≠ 0x12; `0x41794B` video-surface clear; `0x4179D4` lock returned NULL; `0x4179E1` saved-background restore outside the captured 800-pixel mode; `0x41068E`/`0x416864` unsupported viewport; `0x41591F` unit body/owner/effects/count outside the committed domains; `0x412923` selected-unit order mode `+0x82` above 1; `0x410BE4` unit overlay health/type/fatigue words outside the 1.5 domain; `0x410A2C` unit bag capacity other than 0/1; `0x413696` non-builder experience icon; `0x4135FA` unselected tired icon with a shift; `0x46FF70` unsupported projectile; `0x408AC8` inhabited sanctuary construction modes or missing construction read view; `0x40958E` inhabited CAVE facade; `0x4099A6` nonzero CAVE construction variant at progress >=100; `0x4085CB` sanctuary damage/fire input rejected before the facade; `0x4087AA`/`0x40F378` missing habitation provider; `0x4022C8`/`0x4020EC` structure frame/gauge outside the inhabited owner-0 mode-5 sanctuary domain; `0x401A70` sanctuary bag outside 16 slots with eight troops; `0x407EA7`/`0x407FB8`/`0x40288B`/`0x40F23B` wall/gate/workshop/other facade; prior terrain/vegetation/cache stops remain.
+*Named stops* (address → meaning). `0x4176A8` mode ≠ 0x12; `0x41794B` video-surface clear; `0x4179D4` lock returned NULL; `0x4179E1` saved-background restore outside the captured 800-pixel mode; `0x41068E`/`0x416864` unsupported viewport; `0x41591F` unit body/owner/effects/count outside the committed domains; `0x412923` selected-unit order mode outside cell mode 1 and farmer depot mode 2; `0x412637` uncaptured depot type; `0x410BE4` unit overlay health/type/fatigue words outside the captured domain (farmer and builder also support 3/4); `0x410A2C` unit bag capacity other than 0/1; `0x413696` non-builder experience icon; `0x4135FA` unselected tired icon with a shift outside the colonist slice; `0x46FF70` unsupported projectile; `0x408AC8` inhabited sanctuary construction modes or missing construction read view; `0x40958E` inhabited CAVE outside owner-0 mode-5 flags/level bounds; `0x414A8A` worker outside captured task/count bounds; `0x4099A6` nonzero CAVE construction variant at progress >=100; `0x4085CB` sanctuary damage/fire input rejected before the facade; `0x4087AA`/`0x40F378` missing habitation provider; `0x4022C8`/`0x4020EC` structure frame/gauge outside captured sanctuary/CAVE bounds; `0x401A70` structure bag/technology marks outside captured capacity/code bounds; `0x407EA7`/`0x407FB8`/`0x40288B`/`0x40F23B` wall/gate/workshop/other facade; prior terrain/vegetation/cache stops remain.
 
 With `hud=True`: `0x417F6E` resource value above 9999; `0x417086` action kind/value outside kind 0 with percent 0..100, kind 1, or kind 2 with value 0..999; `0x41729B` placement outside type-3 5×5 CAVE; `0x417BA2` marker animation outside `0x1E03..0x1E09`; `0x4667A7` market states 1–4; `0x46A70C` unsupported minimap geometry; `0x401D18` recruitment/time display beyond the selected sanctuary's zero-recruitment exit; `0x40F77B` cost above 9999; `0x40F8C0` tooltip outside the captured strings/font mode; `0x459454` missing glyph renderer; `0x417C7F` debug; `0x417C8A` event; `0x469C5F` message box; `0x417604`/`0x4175F2` alliance flags; `0x417CFC` second-cursor count above 16. Empty/non-empty scroll buttons no longer stop at `0x416F64`/`0x4171BE`; the captured drag box no longer stops at `0x417AC8`.
 
@@ -878,3 +878,87 @@ Final domain gate: `python3 -B scripts/check.py --domain graphics`, **255 tests,
 the heavy lease. The suite includes the 600-case facade matrix, representative scripted frames/arguments, strict
 glyph stops, recorded-boundary rejection checks, the current-source full-probe report, and every prior graphics test.
 The full current probe replay is 286.089 s, 139,876 drawing calls and 1,037 verified text-boundary calls, zero mismatches.
+
+### Lodging, delivery and scrolling (contract 1.8, additive)
+
+The published 1.7 number is retained; the coordinator confirmed that the earlier 1.6/1.7 dispatch typo needs no
+renumbering. This increment consumes probes integrated at `ce441852bcada750a8f91da8ed3302f1668c4405`.
+[Research and native window manifest](../pesquisas-paralelas/graficos-animacao/M3_WINDOWS_API18.md).
+The public function/result/cache formats are unchanged; `VERSAO_RENDER_QUADRO` is `(1,8)`. No new input callback or
+heap region is required. The existing habitation query must now report the CAVE's native state as well.
+
+**Original evidence.** Nine original-only native continuations reproduce 5,030 new full frame states and both
+published phase surfaces, bounded to 750 frames per invocation. P3's existing 129–300 capture supplies the first
+172 phases. P6 and P7 reuse their verified shared prefixes, never injected Python state: every published whole-state
+and surface hash is checked through frame 2000 (P3/P6/P7) and 2400 (P6/P7). The 515-case inhabited-CAVE matrix restores
+the original frame-220 checkpoint, declares the owner/finished/resident fields, verifies the original habitation
+predicate, and exercises all 16 door variants, busy/full flags and eight clock phases, plus changed sanctuary/CAVE
+selection bags. The intact executable remains the sole oracle, SHA-256 `6c556520…8543fb`.
+
+**Portable layer data.** [camadas_m3_api18.json](../pesquisas-paralelas/graficos-animacao/camadas_m3_api18.json) contains
+the CAVE layers, operation/clock/offset/variant conditions, construction/scaffold definitions, uninhabited gray-layer
+offsets, selection geometry, unit-state extensions, worker task bases/fixed strides, fatigue pairs, depot centre
+offset and observed tooltip strings. [camadas_exibicao_m3.py](../pesquisas-paralelas/graficos-animacao/camadas_exibicao_m3.py)
+consumes it. These are engine bob IDs and original arithmetic; no image-derived lookup or emulator is required by
+the renderer. The Rust ABI 1.3 consumer currently ports 1.5 and can port this table with the plan arithmetic next.
+
+The inhabited owner-0/camera-0 mode-5 CAVE has player-coloured base 7094 and ordered animated layers. Clock index 1 is
+`0x508F80`, with the absolute map-cell index added before the low-three-bit mask. Byte `+0x74` gates one animation;
+`+0x75` and door variant `+0x76` gate the full-state layer. Variants 0..7 use base 7119 at y+41, variants 8..15 use base
+7137 at y+38. Player-level byte `[0x4DFB30+6*owner]` remains restricted to the captured zero. Flags outside 0/1, other
+owners/modes, fire and uncaptured levels stop at `0x40958E`. Uninhabited and construction domains from 1.7 are preserved.
+
+Sanctuary selection now handles compact seven- or eight-troop bags in 16 slots; CAVE selection handles its one-resident
+two-slot bag and seven technology marks at captured level zero. Each uses its own frame extent and gauge anchor.
+Selection is emitted only at the original facade trigger. Other bag codes/capacities, damaged new gauges and higher
+technology marks remain dependencies. AffChrono preserves the native foreign-owner exit and CAVE's non-recruitment exit.
+
+Owner-0 colonists (type 9) now render normal states 2/7 and entry state 13, including selection/information and the
+shifted tired icon. Farmer/carrier type 5 adds state 5, tasks 0/1/2/3, using raw count 8 and the original fixed task
+strides: 8 for walk/carry/unload, 4 for work. The raw phase is never replaced by the count or a synthetic stop phase.
+The native material/fatigue pair 3/4 is supported alongside 4/4 for farmer and builder (P3 first reaches builder 3/4
+at frame 2936). Farmer order mode 2 treats `+0xB2` as a map cell and
+`+0x80` as the depot structure; type-3 centre offset is (1,0). Work and normal-body marker order matches the original.
+Other effects, oscillation, owners, worker tasks/counts and non-builder experience remain addressed stops.
+
+**Text.** TextGetMessage's frame-phase body remains non-executed, with declared EAX 0. The renderer neither looks up
+nor dereferences `[0x5099A4]`; tests replace that pointer with an unreadable canary and trap reads. Native overlap
+observations at `0x5099A6` come from the packed mouse-coordinate load at `0x417CE2`, whose low word is discarded.
+The recorded SANTUÁRIO and FAZENDEIRO tooltip layouts join the two 1.7 strings. AffText glyph pixels are still outside
+the captured execution domain: normal rendering retains `0x459454` without a provider. Comparisons use only the
+strict recorded-boundary adapter, which checks text arguments and the entire pre-text surface before accepting the
+probe's explicit AffText non-execution. Unknown pointer/string/font/suffix paths remain `0x40F8C0`.
+
+All frame(k) surface hashes equal their between_frames(k) hashes in these probes, so each frame contributes one
+drawn phase. Logical release/lodging/completion changes become visible in the following drawing phase. In P7 the
+credit occurs during frame 3604; the HUD flashes on the next draw and the displayed second counter becomes 21 at
+between_frames(3606). The chained comparator carries the Python surface, terrain cache and saved background across
+every part boundary and verifies them against native entry bytes. It retains the same two DD pointer exclusions
+when comparing exported display effects; no pixel is masked.
+
+Final [source-pinned chained comparison](../pesquisas-paralelas/graficos-animacao/validacao/janelas-api18-final.json),
+under the explicit recorded AffText boundary:
+
+| Probe | Drawn frame range | Equal / total | First differing frame / stop |
+|---|---|---:|---|
+| P3 | 129–3129 | 3001 / 3001 | None |
+| P6 | 129–2400 | 2272 / 2272 | None |
+| P7 | 129–3700 | 3572 / 3572 | None |
+| K1 | 129–629 | 501 / 501 | None |
+
+There are 9,346 expanded phases (5,202 unique native render entries), zero pixel/raster-argument/display-effect
+mismatches,1,030,208 drawing calls and 7,865 verified text boundaries. The frozen-source replay took 769.391 seconds.
+Without a text provider, P3/P6/P7 retain their first `0x459454` stop at 141; K1 has none. This qualification prevents
+the probe's deliberately absent glyph execution from becoming a silent production default.
+The inhabited matrix is 515/515 with zero pixel/argument/full-DGROUP mismatches; the prior 600-case facade matrix is
+also retained. The fresh [128-frame HUD regression](../pesquisas-paralelas/graficos-animacao/evidencias/verificacao-cadeia-m22-v2-api18-128.json)
+is 128/128, no stop or first difference, and all 128 hashes equal 1.4,1.5 and 1.7 directly.
+Native acquisition used the MacBook heavy lease throughout, with no invocation near the 20-minute limit; no longer
+run needs Mac mini routing for these windows. P4/P5 and text-enabled glyph capture were not run. Other owners,
+levels/fire, unknown work tasks/counts, nontrivial new bags, other facade/combat/recruitment/event/message/alliance/
+debug domains remain the addressed stops above. No main integration or acceptance is recorded.
+
+Final leased gate: `python3 -B scripts/check.py --domain graphics`, **261 tests, zero skips, PASS**, 131.111 seconds.
+The [gate log](../pesquisas-paralelas/graficos-animacao/validacao/api18-graphics-tests-final.log) includes all prior
+graphics suites and the new native-evidence comparisons; documentation links pass. Historical matrices are consumed
+unchanged. New native captures, their manifests and the complete commit ledger are in the research document above.

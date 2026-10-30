@@ -222,11 +222,11 @@ class ComposicaoEntrada(ComposicaoQuadros):
             registro.fronteira(nome, 0, None, regs_som, palavras=list(pilha))
             return regs_som['EAX']
         vivos = provedores_vivos(mm, janelas=_TeclasSitio(self.roteiro), som=som)
-        def texto(n, sitio):
+        def texto(n, local):
             """TextGetMessage as Missions' declared display-scenario boundary: EAX 0, no cleanup, logged."""
-            registro.fronteira('TextGetMessage', sitio + 5, f'InputGame+0x{sitio + 5 - 0x429278:x}', dict(EAX=n),
+            registro.fronteira('TextGetMessage', local + 5, f'InputGame+0x{local + 5 - 0x429278:x}', dict(EAX=n),
                                declarado=0)
-            self.textos.append(dict(frame=self.roteiro.quadro, site=hex(sitio), message=n))
+            self.textos.append(dict(frame=self.roteiro.quadro, site=hex(local), message=n))
             return 0
         vivos.funcoes['TextGetMessage'] = texto
         e = Entrada(mm, vivos)

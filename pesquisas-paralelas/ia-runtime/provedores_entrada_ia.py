@@ -6,9 +6,10 @@ copied or edited), over the same memory object ``m`` (``u8/u16/u32`` and ``vista
 
 - Core ``selecao_ordens.SelecaoOrdens``: SelectionEngin, DeSelectionGroupe, BatimentDeselectionner,
   BatimentSelection, EnginAddSelection, EnginAsk, SetDeplaceEnginSelect, SetAttaqueEnginSelect,
-  SetConstruitBatimentSelect, SetRecolteEnginSelect, SetTransporteEnginSelect (its SetAttaqueEngin through
+  SetConstruitBatimentSelect, SetRecolteEnginSelect, SetTransporteEnginSelect, EnginSelectionnable (its SetAttaqueEngin through
   Combat's ``ataque_vivo.definir_ataque``, as Core's own validator binds it);
 - Core ``construcao_core.ConstrucaoCore`` (when present on the import path): BatimentPosable;
+- Core ``entrada_estruturas.EntradaEstruturas`` (when present on the import path): EnginSelectPeutEntrer;
 - Core ``chamadas_quadro_core.iniciar_zonas_jogo``: InitGameZone;
 - Economy ``ordens_economia.OrdensEconomia`` (its Core callees through ``provedor_core``):
   EnginTravailSelectionne, TestRessource, SetMineEnginSelect, SetDepotEnginSelect, SetRamasseEnginSelect;
@@ -19,8 +20,9 @@ copied or edited), over the same memory object ``m`` (``u8/u16/u32`` and ``vista
   (``alocar``) for MemAlloc's GlobalAlloc/GlobalLock; and the sound-library boundary (``som``) for PlaySnd_PostSound/PlaySnd_StopSound.
 
 Not provided (named dependencies, raised at their original call): SetDechargeCaveEnginSelect,
-InitRecruteTroupe, BatimentInitAttaqueSelect, SacGetCapacite, MiniMapSetPos (MiniMapRecentre), and
-BatimentPosable while Core's ``construcao_core`` is not importable.
+InitRecruteTroupe, BatimentInitAttaqueSelect, BatimentPeutAttaquer (Combat), SacGetCapacite, MiniMapSetPos
+(MiniMapRecentre), and BatimentPosable/EnginSelectPeutEntrer while Core's ``construcao_core``/``entrada_estruturas``
+are not importable.
 """
 import sys
 
@@ -33,9 +35,34 @@ for _pasta in ('pesquisas-paralelas/economia', 'pesquisas-paralelas/combate'):
 
 CORE = ('SelectionEngin', 'DeSelectionGroupe', 'BatimentDeselectionner', 'BatimentSelection', 'EnginAddSelection',
         'EnginAsk', 'SetDeplaceEnginSelect', 'SetAttaqueEnginSelect', 'SetConstruitBatimentSelect',
-        'SetRecolteEnginSelect', 'SetTransporteEnginSelect')
+        'SetRecolteEnginSelect', 'SetTransporteEnginSelect', 'EnginSelectionnable')
 ECONOMIA = ('EnginTravailSelectionne', 'SetMineEnginSelect', 'SetDepotEnginSelect', 'SetRamasseEnginSelect')
 ESP_CHAMADA = 0x2007e00               # nominal ESP handed to Economy (its Core callees ignore it)
+
+
+def _modulo_economia(nome):
+    """Economy's module ``nome`` imported with Economy's own siblings: ``extracao`` imports ``construcoes`` and
+    ``economia`` by bare name, and Graphics has a different ``construcoes`` that may already be loaded. The
+    sibling entries are swapped in for the import only and the previous ones restored."""
+    import importlib
+    if nome in _ECONOMIA_CARREGADOS:
+        return _ECONOMIA_CARREGADOS[nome]
+    pasta = str(ROOT / 'pesquisas-paralelas/economia')
+    irmaos = ('construcoes', 'economia', nome)
+    anteriores = {k: sys.modules.pop(k) for k in irmaos if k in sys.modules}
+    sys.path.insert(0, pasta)
+    try:
+        modulo = importlib.import_module(nome)
+    finally:
+        sys.path.remove(pasta)
+        for k in irmaos:
+            sys.modules.pop(k, None)
+        sys.modules.update(anteriores)
+    _ECONOMIA_CARREGADOS[nome] = modulo
+    return modulo
+
+
+_ECONOMIA_CARREGADOS = {}
 
 
 def _ataque_combate(m, core):
@@ -53,6 +80,16 @@ def _ataque_combate(m, core):
         definir_ataque(Registros(), unidade, modo, referencia, lambda i: core.reset_ordre(dict(EAX=i)))
         return dict(EAX=1 if mesma else m.u8(rec + 1), EDX=rec)
     return provedor
+
+
+def entrada_estruturas(m, *, som=None, bonus=None, externo=None):
+    """Core's ``entrada_estruturas.EntradaEstruturas`` over ``m``, or None when it is not importable yet (it is on
+    ``feat/re-core``; a run may add a read-only extraction of it to the import path, recorded by the caller)."""
+    try:
+        from entrada_estruturas import EntradaEstruturas
+    except ImportError:
+        return None
+    return EntradaEstruturas(m, externo=externo, som=som, bonus=bonus)
 
 
 def construcao_core(m, bonus=None):
@@ -152,13 +189,14 @@ def construcao_viva(m, *, som, bonus, provedores_nucleo=None):
     return ConstrucaoEntrada(m, externo, calcul)
 
 
-def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None):
+def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None, estruturas=None):
     """``Provedores`` for ``entrada_ordens_ia.Entrada`` over ``m``.
 
     ``janelas.tecla(vk, sitio) -> u16 answer`` (``sitio``: the poll's return address) and ``janelas.cursor() -> (x, y)`` are the declared input answers;
     ``som(nome, registradores, pilha) -> EAX`` is the sound-library boundary (also handed to Core's EnginAsk);
     ``alocar(flags, tamanho) -> pointer`` binds MemAlloc's GlobalAlloc+GlobalLock (InitInputPlayer only); ``construcao`` (default: Core's
-    ``construcao_core`` when importable) provides BatimentPosable."""
+    ``construcao_core`` when importable) provides BatimentPosable; ``estruturas`` (default: Core's
+    ``entrada_estruturas`` when importable) provides EnginSelectPeutEntrer (mode 3)."""
     from chamadas_quadro_core import iniciar_zonas_jogo
     from entrada_quadro_ia import proximas_gotas
     from ordens_economia import OrdensEconomia, provedor_core
@@ -184,7 +222,7 @@ def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None):
                                pilha)
 
     def minas():
-        from extracao import RecursosTerreno
+        RecursosTerreno = _modulo_economia('extracao').RecursosTerreno
         r = RecursosTerreno.__new__(RecursosTerreno)
         r.minas = m.vista(0x509954, 80)
         return r
@@ -207,6 +245,10 @@ def provedores_vivos(m, *, janelas, som, alocar=None, construcao=None):
     if construcao is not None:
         funcoes['BatimentPosable'] = lambda regs: construcao.chamar(
             'BatimentPosable', {k: regs.get(k, 0) & M32 for k in REG7})
+    ee = entrada_estruturas(m, som=som) if estruturas is None else estruturas
+    if ee is not None:
+        funcoes['EnginSelectPeutEntrer'] = lambda regs: ee.chamar(
+            'EnginSelectPeutEntrer', {k: regs.get(k, 0) & M32 for k in REG7})
     if alocar is not None:
         funcoes['GlobalAlloc'] = lambda flags, tamanho: alocar(flags, tamanho)
     return Provedores(funcoes)
