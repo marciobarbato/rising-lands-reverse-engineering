@@ -62,10 +62,13 @@ def main(a):
         if k in a.checkpoint:
             path=Path(a.start)/f'{a.probe}-{k:05d}.pickle'
             if path.exists():raise FileExistsError(path)
-            original.seg.salvar(b,path,k)
+            b.isolamento=None
+            try:original.seg.salvar(b,path,k)
+            finally:b.isolamento=iso
         if time.monotonic()-t>1080:status='budget_stop';end=k;break
     cap.phase_frame=None;cap.detach()
     Path(a.output+'.origins.json').write_text(json.dumps(iso.report(),indent=1)+'\n')
+    b.isolamento=None  # Capturing hooks are not part of a resumable native checkpoint.
     for hook in hooks:b.cpu.hook_del(hook)
     checkpoint=Path(a.start)/f'{a.probe}-{end:05d}.pickle'
     if checkpoint.exists():digest=sha(checkpoint.read_bytes())
